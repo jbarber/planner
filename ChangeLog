@@ -1,3 +1,8 @@
+2004-06-21 Alvaro del Castillo  <acs@barrapunto.com>
+
+	* src/planner-sql-plugin.c: change in planner_application_get_gconf_client
+	that breaks CVS compile, detected by lincoln. Change to use the new API.
+
 2004-06-19  Richard Hult  <richard@imendio.com>
 
 	* libplanner/mrp-resource.c (resource_set_property,

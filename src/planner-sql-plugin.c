@@ -512,7 +512,7 @@ sql_plugin_retrieve_db_values (PlannerPlugin  *plugin,
 
 	application = planner_window_get_application (plugin->main_window);
 	
-	gconf_client = planner_application_get_gconf_client (application);
+	gconf_client = planner_application_get_gconf_client ();
 
 	gui = glade_xml_new (GLADEDIR"/sql.glade", "open_dialog" , NULL);
 	dialog = glade_xml_get_widget (gui, "open_dialog");
