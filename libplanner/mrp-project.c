@@ -1492,7 +1492,7 @@ imrp_project_add_calendar_day (MrpProject *project, MrpDay *day)
 	g_hash_table_insert (priv->day_types,
 			     GINT_TO_POINTER (mrp_day_get_id (day)), 
 			     mrp_day_ref (day));
-	
+
 	g_signal_emit (project,
 		       signals[DAY_ADDED],
 		       0,
@@ -1501,6 +1501,30 @@ imrp_project_add_calendar_day (MrpProject *project, MrpDay *day)
 	imrp_project_set_needs_saving (project, TRUE);
 
 	return TRUE;
+}
+
+/**
+ * mrp_project_get_calendar_day_by_id:
+ * @project: an #MrpProject
+ * 
+ * Semi-private function. You most likely won't need this outside of
+ * Planner. Returns the day type associated with @id.
+ * 
+ * Return value: A day type.
+ **/
+MrpDay *
+mrp_project_get_calendar_day_by_id (MrpProject *project, gint id)
+{
+	MrpProjectPriv *priv;
+	MrpDay         *day;
+	
+	g_return_val_if_fail (MRP_IS_PROJECT (project), NULL);
+
+	priv = project->priv;
+	
+	day = g_hash_table_lookup (priv->day_types, GINT_TO_POINTER (id));
+
+	return day;
 }
 
 static void

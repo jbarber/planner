@@ -72,9 +72,17 @@ typedef struct {
 	PlannerCmd   base;
 
 	MrpProject  *project;
-	
-	gchar       *name;
+	MrpCalendar *calendar;
+
+	gint         weekday;
+
+	/* If work/nonwork/use base, we use the day, otherwise the ID. */
 	MrpDay      *day;
+	gint         day_id;
+
+	/* If work/nonwork/use base, we use the day, otherwise the ID. */
+	MrpDay      *old_day;
+	gint         old_day_id;
 } DefaultWeekCmdEdit;
 
 
@@ -97,6 +105,7 @@ static MrpDay *    default_week_dialog_get_selected_day          (DialogData    
 static void        default_week_dialog_set_selected_day          (DialogData    *data,
 								  MrpDay        *day);
 static PlannerCmd *default_week_cmd_edit                         (DialogData    *data,
+								  gint           weekday,
 								  MrpDay        *day);
 
 
@@ -113,14 +122,12 @@ default_week_dialog_response_cb (GtkWidget  *dialog,
 		weekday = default_week_dialog_get_selected_weekday (data);
 		day = default_week_dialog_get_selected_day (data);
 
-		/* FIXME: implement. */
-		if (0) {
-			default_week_cmd_edit (data, NULL);
-		}
+		default_week_cmd_edit (data, weekday, day);
 		
-		mrp_calendar_set_default_days (data->calendar,
+/*		mrp_calendar_set_default_days (data->calendar,
 					       weekday, day,
-					       -1);		
+					       -1);
+*/
 		break;
 
 	case RESPONSE_CLOSE:
@@ -456,15 +463,48 @@ default_week_dialog_set_selected_day (DialogData *data,
 }
 
 static gboolean
+is_day_builtin (MrpDay *day)
+{
+	if (day == mrp_day_get_work ()) {
+		return TRUE;
+	}
+	else if (day == mrp_day_get_nonwork ()) {
+		return TRUE;
+	}
+	else if (day == mrp_day_get_use_base ()) {
+		return TRUE;
+	} else {
+		return FALSE;
+	}
+}
+
+static gboolean
 default_week_cmd_edit_do (PlannerCmd *cmd_base)
 {
 	DefaultWeekCmdEdit *cmd;
+	MrpDay             *day;
 
 	cmd = (DefaultWeekCmdEdit *) cmd_base;
 
-	mrp_day_remove (cmd->project, cmd->day);
-	cmd->day = NULL;
+	day = mrp_calendar_get_default_day (cmd->calendar, cmd->weekday);
 
+	if (is_day_builtin (day)) {
+		cmd->old_day = day;
+	} else {
+		cmd->old_day = NULL;
+		cmd->old_day_id = mrp_day_get_id (day);
+	}
+
+	if (cmd->day) {
+		day = cmd->day;
+	} else {
+		day = mrp_project_get_calendar_day_by_id (cmd->project, cmd->day_id);
+	}
+	
+	mrp_calendar_set_default_days (cmd->calendar,
+				       cmd->weekday, day,
+				       -1);
+	
 	return TRUE;
 }
 
@@ -472,10 +512,19 @@ static void
 default_week_cmd_edit_undo (PlannerCmd *cmd_base)
 {
 	DefaultWeekCmdEdit *cmd;
+	MrpDay             *day;
 
 	cmd = (DefaultWeekCmdEdit *) cmd_base;
-	
-	cmd->day = mrp_day_add (cmd->project, cmd->name, "");
+
+	if (is_day_builtin (cmd->old_day)) {
+		day = cmd->old_day;
+	} else {
+		day = mrp_project_get_calendar_day_by_id (cmd->project, cmd->old_day_id);
+	}
+
+	mrp_calendar_set_default_days (cmd->calendar,
+				       cmd->weekday, day,
+				       -1);
 }
 
 static void
@@ -484,29 +533,34 @@ default_week_cmd_edit_free (PlannerCmd *cmd_base)
 	DefaultWeekCmdEdit *cmd;
 
 	cmd = (DefaultWeekCmdEdit *) cmd_base;
-
-	g_free (cmd->name);
 }
 
 static PlannerCmd *
 default_week_cmd_edit (DialogData *data,
+		       gint        weekday,
 		       MrpDay     *day)
 {
 	PlannerCmd         *cmd_base;
 	DefaultWeekCmdEdit *cmd;
 
 	cmd_base = planner_cmd_new (DefaultWeekCmdEdit,
-				    _("Edit default week\""),
-				    default_week_cmd_edit_do,
+				    _("Edit default week"),
+ 				    default_week_cmd_edit_do,
 				    default_week_cmd_edit_undo,
 				    default_week_cmd_edit_free);
 
 	cmd = (DefaultWeekCmdEdit *) cmd_base;
 
 	cmd->project = data->project;
-	cmd->day = day;
-	cmd->name = g_strdup (mrp_day_get_name (day));
+	cmd->calendar = data->calendar;
+	cmd->weekday = weekday;
 
+	if (is_day_builtin (day)) {
+		cmd->day = day;
+	} else {
+		cmd->day_id = mrp_day_get_id (day);
+	}
+	
 	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager (data->main_window),
 					   cmd_base);
 	

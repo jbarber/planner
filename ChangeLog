@@ -1,3 +1,14 @@
+2004-05-03  Richard Hult  <richard@imendio.com>
+
+	* libplanner/mrp-project.c: (imrp_project_add_calendar_day),
+	(mrp_project_get_calendar_day_by_id):
+	* libplanner/mrp-project.h:
+	* src/planner-default-week-dialog.c:
+	(default_week_dialog_response_cb), (is_day_builtin),
+	(default_week_cmd_edit_do), (default_week_cmd_edit_undo),
+	(default_week_cmd_edit_free), (default_week_cmd_edit): Add undo
+	support for editing the default week.
+
 2004-05-02  Richard Hult  <richard@imendio.com>
 
 	* src/planner-calendar-dialog.c: (cal_dialog_response_cb),
