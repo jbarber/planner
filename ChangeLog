@@ -1,3 +1,12 @@
+2004-02-02  Alvaro del Castillo  <acs@barrapunto.com>
+
+	* libplanner/mrp-resource.[ch]
+	Added mrp_resource_clone method that returns a new cloned resource object
+	* src/planner-resource-view.c
+	Use mrp_resource_clone to store the object in the undo deletion command
+	New internal function to convert a string into a GValue using resource
+	properties
+
 2004-02-01  Alvaro del Castillo  <acs@barrapunto.com>
 
 	* libplanner/mrp-application.c

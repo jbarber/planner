@@ -76,5 +76,8 @@ MrpCalendar *   mrp_resource_get_calendar       (MrpResource     *resource);
 void            mrp_resource_set_calendar       (MrpResource     *resource,
 						 MrpCalendar     *calendar);
 
+MrpResource *   mrp_resource_clone              (MrpResource *resource);
+
+
 
 #endif /* __MRP_RESOURCE_H__ */

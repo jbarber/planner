@@ -271,14 +271,11 @@ typedef struct {
 
 	MrpProject  *project;
 	guint        project_id;
-	const gchar *name;
 	MrpResource *resource;
 	guint        resource_id;
-	MrpResourceType  type;
-	MrpGroup    *group;
 	guint        group_id;
-	const gchar     *email;
-	/* FIXME: custom properties */
+	
+	MrpResource *clone;
 } ResourceCmdRemove;
 
 typedef struct {
@@ -875,22 +872,22 @@ resource_cmd_remove_do (PlannerCmd *cmd_base)
 {
 	ResourceCmdRemove *cmd;
 	guint              resource_removed_id;
-	MrpGroup          *current_group;
+	MrpGroup          *group;
 
 	cmd = (ResourceCmdRemove*) cmd_base;
 
-	resource_removed_id = mrp_object_get_id (MRP_OBJECT(cmd->resource));
+	resource_removed_id = mrp_object_get_id (MRP_OBJECT (cmd->resource));
 
-	g_message ("Id for the resource to be removed: %d", resource_removed_id); 
-
+	cmd->project_id = mrp_object_get_id (MRP_OBJECT (cmd->project));
 	cmd->resource_id = resource_removed_id;
-	mrp_object_get (cmd->resource, 
-			"name", &cmd->name, 
-			"email", &cmd->email,
-			"type", &cmd->type,
-			"group", &current_group,
-			NULL);
-	cmd->group_id = mrp_object_get_id (MRP_OBJECT (current_group));
+
+	cmd->clone = mrp_resource_clone (cmd->resource);
+
+	mrp_object_get (cmd->clone, "group", &group, NULL);
+
+	if (group != NULL) { 
+		cmd->group_id = mrp_object_get_id (MRP_OBJECT (group));
+	}
 
 	mrp_project_remove_resource (cmd->project, cmd->resource);
 
@@ -901,25 +898,24 @@ static void
 resource_cmd_remove_undo (PlannerCmd *cmd_base)
 {
 	ResourceCmdRemove *cmd;
-	MrpResource       *resource;
+	gpointer          *data;
 	
 	cmd = (ResourceCmdRemove*) cmd_base;
 
-	resource = g_object_new (MRP_TYPE_RESOURCE, NULL);
-	mrp_object_set (resource, "project", 
-			MRP_OBJECT(mrp_application_id_get_data (cmd->project_id)), NULL);
-	mrp_object_set (resource, "name", cmd->name, NULL);
-	mrp_object_set (resource, "type", cmd->type, NULL);
-	mrp_object_set (resource, "email", cmd->email, NULL);
-	mrp_object_set (resource, "group", 
-			MRP_OBJECT(mrp_application_id_get_data (cmd->group_id)), NULL);
-	mrp_object_set_id (MRP_OBJECT (resource), cmd->resource_id);
-	mrp_project_add_resource (cmd->project, resource);
-	cmd->resource = resource;
+	data = mrp_application_id_get_data (cmd->project_id);
+
+	g_assert (MRP_IS_PROJECT (data));
+
+	mrp_object_set (cmd->clone, "project", MRP_OBJECT (data), NULL);
+
+	if (!mrp_object_set_id (MRP_OBJECT (cmd->clone), cmd->resource_id))
+		g_warning ("Could't set the id to the object: %d", cmd->resource_id);
+
+	mrp_project_add_resource (cmd->project, cmd->clone);
+	cmd->resource = cmd->clone;
 }
 
 
-/* FIXME: add all the attributes from a resource to the UNDO system */
 static PlannerCmd *
 resource_cmd_remove (PlannerView *view, MrpResource *resource)
 {
@@ -937,7 +933,6 @@ resource_cmd_remove (PlannerView *view, MrpResource *resource)
 
 	cmd->project = planner_window_get_project (view->main_window);
 	cmd->resource = resource;
-	mrp_object_get (resource, "name", &cmd->name, NULL);
 
 	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager (view->main_window),
 					   cmd_base);
@@ -1241,7 +1236,7 @@ resource_view_setup_tree_view (PlannerView *view)
 			  G_CALLBACK (resource_view_cell_email_edited),
 			  view);
 
-	/* Custom property for cost added by default */
+	/* Custom property for cost added by default to a resource */
 	project = planner_window_get_project (view->main_window);
 	properties = mrp_project_get_properties_from_type (project, 
 							   MRP_TYPE_RESOURCE);
@@ -1584,6 +1579,63 @@ resource_view_cell_group_edited (PlannerCellRendererList *cell,
 	gtk_tree_path_free (path);
 }
 
+static GValue
+resource_view_custom_property_set_value (MrpProperty *property,
+					 gchar       *new_text) 
+{
+	GValue              value = { 0 };
+	MrpPropertyType     type;
+	gfloat              fvalue;
+
+	/* FIXME: implement mrp_object_set_property like
+	 * g_object_set_property that takes a GValue. 
+	 */
+	type = mrp_property_get_property_type (property);
+
+	switch (type) {
+	case MRP_PROPERTY_TYPE_STRING:
+		g_value_init (&value, G_TYPE_STRING);
+		g_value_set_string (&value, new_text);
+
+		break;
+	case MRP_PROPERTY_TYPE_INT:
+		g_value_init (&value, G_TYPE_INT);
+		g_value_set_int (&value, atoi (new_text));
+
+		break;
+	case MRP_PROPERTY_TYPE_FLOAT:
+		fvalue = g_ascii_strtod (new_text, NULL);
+		g_value_init (&value, G_TYPE_FLOAT);
+		g_value_set_float (&value, fvalue);
+
+		break;
+
+	case MRP_PROPERTY_TYPE_DURATION:
+		/* FIXME: support reading units etc... */
+		g_value_init (&value, G_TYPE_INT);
+		g_value_set_int (&value, atoi (new_text) *8*60*60);
+
+		break;
+		
+
+	case MRP_PROPERTY_TYPE_DATE:
+
+		break;
+	case MRP_PROPERTY_TYPE_COST:
+		fvalue = g_ascii_strtod (new_text, NULL);
+		g_value_init (&value, G_TYPE_FLOAT);
+		g_value_set_float (&value, fvalue);
+
+		break;	
+				
+	default:
+		g_assert_not_reached ();
+		break;
+	}
+
+	return value;
+}
+
 static void    
 resource_view_property_value_edited (GtkCellRendererText *cell,
 				     gchar               *path_str,
@@ -1596,10 +1648,8 @@ resource_view_property_value_edited (GtkCellRendererText *cell,
 	GtkTreeIter         iter;
 	GtkTreeModel       *model;
 	MrpProperty        *property;
-	MrpPropertyType     type;
 	MrpResource        *resource;
-	gfloat              fvalue;
-	GValue              value = { 0 };
+	GValue              value;
 
 	view = data->view;
 	model = gtk_tree_view_get_model (view->priv->tree_view);
@@ -1612,90 +1662,12 @@ resource_view_property_value_edited (GtkCellRendererText *cell,
 			    COL_RESOURCE, &resource,
 			    -1);
 
-	/* FIXME: implement mrp_object_set_property like
-	 * g_object_set_property that takes a GValue. 
-	 */
-	type = mrp_property_get_property_type (property);
+	value = resource_view_custom_property_set_value (property, new_text);
 
-	switch (type) {
-	case MRP_PROPERTY_TYPE_STRING:
-		g_value_init (&value, G_TYPE_STRING);
-		g_value_set_string (&value, new_text);
-		cmd = resource_cmd_edit_custom_property (view, resource,
-							 property, 
-							 &value);
-		g_value_unset (&value);
-		/* mrp_object_set (MRP_OBJECT (resource),
-				mrp_property_get_name (property), 
-				new_text,
-				NULL); */
-		break;
-	case MRP_PROPERTY_TYPE_INT:
-		g_value_init (&value, G_TYPE_INT);
-		g_value_set_int (&value, atoi (new_text));
-		cmd = resource_cmd_edit_custom_property (view, resource,
-							 property, 
-							 &value);
-		g_value_unset (&value);
-		/* mrp_object_set (MRP_OBJECT (resource),
-				mrp_property_get_name (property), 
-				atoi (new_text),
-				NULL); */
-		break;
-	case MRP_PROPERTY_TYPE_FLOAT:
-		fvalue = g_ascii_strtod (new_text, NULL);
-		g_value_init (&value, G_TYPE_FLOAT);
-		g_value_set_float (&value, fvalue);
-		cmd = resource_cmd_edit_custom_property (view, resource,
-							 property, 
-							 &value);
-		g_value_unset (&value);
-		/* mrp_object_set (MRP_OBJECT (resource),
-				mrp_property_get_name (property), 
-				fvalue,
-				NULL); */
-		break;
-
-	case MRP_PROPERTY_TYPE_DURATION:
-		/* FIXME: support reading units etc... */
-		g_value_init (&value, G_TYPE_INT);
-		g_value_set_int (&value, atoi (new_text) *8*60*60);
-		cmd = resource_cmd_edit_custom_property (view, resource,
-							 property, 
-							 &value);
-		g_value_unset (&value);
-		/* mrp_object_set (MRP_OBJECT (resource),
-				mrp_property_get_name (property), 
-				atoi (new_text) *8*60*60,
-				NULL); */
-		break;
-		
-
-	case MRP_PROPERTY_TYPE_DATE:
-/* 		date = PLANNER_CELL_RENDERER_DATE (cell); */
-/* 		mrp_object_set (MRP_OBJECT (resource), */
-/* 				mrp_property_get_name (property),  */
-/* 				&(date->time), */
-/* 				NULL); */
-		break;
-	case MRP_PROPERTY_TYPE_COST:
-		fvalue = g_ascii_strtod (new_text, NULL);
-		g_value_init (&value, G_TYPE_FLOAT);
-		g_value_set_float (&value, fvalue);
-		cmd = resource_cmd_edit_custom_property (view, resource,
-							 property, 
-							 &value);
-		g_value_unset (&value);
-		/* mrp_object_set (MRP_OBJECT (resource),
-				mrp_property_get_name (property), 
-				fvalue,
-				NULL); */
-		break;	
-				
-	default:
-		g_assert_not_reached ();
-		break;
-	}
+	cmd = resource_cmd_edit_custom_property (view, resource,
+						 property, 
+						 &value);
+	g_value_unset (&value);
 
 	gtk_tree_path_free (path);
 }
