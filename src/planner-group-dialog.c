@@ -504,9 +504,6 @@ group_cmd_default_free (PlannerCmd *cmd_base)
 
 	g_object_unref (cmd->group);
 	g_object_unref (cmd->old_group);
-	g_free (cmd_base->label);
-
-	g_free (cmd);
 }
 
 static PlannerCmd *

@@ -1,5 +1,19 @@
 2004-10-04  Richard Hult  <richard@imendio.com>
 
+	* src/planner-cmd-manager.c: (cmd_manager_init),
+	(cmd_manager_dump), (state_changed), (cmd_manager_free_func),
+	(transaction_cmd_do), (transaction_cmd_undo),
+	(planner_cmd_manager_begin_transaction),
+	(planner_cmd_manager_end_transaction), (planner_cmd_new_size):
+	* src/planner-cmd-manager.h:
+	* src/planner-group-dialog.c: (group_cmd_default_free):
+	* src/planner-project-properties.c: (property_cmd_edit):
+	* src/planner-resource-view.c: (resource_cmd_remove_free),
+	(resource_cmd_edit_custom_property_free): Fix bug #144734, free
+	the undo data.
+
+2004-10-04  Richard Hult  <richard@imendio.com>
+
 	* src/Makefile.am: Move sql define to the sql plugin flags.
 
 	* src/planner-gantt-row.c: Clean up some indentation, add missing

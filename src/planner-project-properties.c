@@ -361,7 +361,6 @@ property_cmd_edit (DialogData  *data,
 
  no_change:
 	g_free (cmd->str_old);
-	g_free (cmd);
 
 	return NULL;
 }

@@ -57,7 +57,7 @@ typedef enum {
 
 
 struct _PlannerCmd {
-	gchar              *label;
+	gchar              *name;
 	
 	PlannerCmdManager  *manager;
 	
@@ -76,10 +76,10 @@ gboolean           planner_cmd_manager_insert_and_do     (PlannerCmdManager  *ma
 gboolean           planner_cmd_manager_undo              (PlannerCmdManager  *manager);
 gboolean           planner_cmd_manager_redo              (PlannerCmdManager  *manager);
 gboolean           planner_cmd_manager_begin_transaction (PlannerCmdManager  *manager,
-							  const gchar        *label);
+							  const gchar        *name);
 gboolean           planner_cmd_manager_end_transaction   (PlannerCmdManager  *manager);
 PlannerCmd *       planner_cmd_new_size                  (gsize               size,
-							  const gchar        *label,
+							  const gchar        *name,
 							  PlannerCmdDoFunc    do_func,
 							  PlannerCmdUndoFunc  undo_func,
 							  PlannerCmdFreeFunc  free_func);

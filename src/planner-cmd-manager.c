@@ -116,9 +116,7 @@ cmd_manager_init (PlannerCmdManager *manager)
 	priv = g_new0 (PlannerCmdManagerPriv, 1);
 	manager->priv = priv;
 
-	/* FIXME: What default to use? Need some limit, or we'll use a lot of
-	 * memory.
-	 */
+	/* Set a sane default, might need to make it tweakable. */
 	priv->limit = 100;
 }
 
@@ -161,7 +159,7 @@ cmd_manager_dump (PlannerCmdManager *manager)
 
 		cmd = l->data;
 		
-		g_print (" %s\n", cmd->label);
+		g_print (" %s\n", cmd->name);
 	}
 	
 	g_print ("\n");
@@ -218,32 +216,32 @@ get_redo_cmd (PlannerCmdManager *manager, gboolean next)
 static void
 state_changed (PlannerCmdManager *manager)
 {
-	gchar      *label;
+	gchar      *name;
 	PlannerCmd *cmd;
 	
 	/* Undo */
 	cmd = get_undo_cmd (manager, FALSE);
 	if (cmd) {
-		label = g_strdup_printf (_("Undo '%s'"), cmd->label);
+		name = g_strdup_printf (_("Undo '%s'"), cmd->name);
 	} else {
-		label = g_strdup (_("Undo"));
+		name = g_strdup (_("Undo"));
 	}
 	
-	g_signal_emit (manager, signals[UNDO_STATE_CHANGED], 0, cmd != NULL, label);
+	g_signal_emit (manager, signals[UNDO_STATE_CHANGED], 0, cmd != NULL, name);
 
-	g_free (label);
+	g_free (name);
 	
 	/* Redo */
 	cmd = get_redo_cmd (manager, FALSE);
 	if (cmd) {
-		label = g_strdup_printf (_("Redo '%s'"), cmd->label);
+		name = g_strdup_printf (_("Redo '%s'"), cmd->name);
 	} else {
-		label = g_strdup (_("Redo"));
+		name = g_strdup (_("Redo"));
 	}
 	
-	g_signal_emit (manager, signals[REDO_STATE_CHANGED], 0, cmd != NULL, label);
+	g_signal_emit (manager, signals[REDO_STATE_CHANGED], 0, cmd != NULL, name);
 
-	g_free (label);
+	g_free (name);
 }
 
 static void
@@ -254,10 +252,8 @@ cmd_manager_free_func (PlannerCmd *cmd,
 		cmd->free_func (cmd);
 	}
 
-	/* FIXME: Add this when the rest of the code is fixed up. */
-/*	g_free (cmd->label);
+	g_free (cmd->name);
 	g_free (cmd);
-*/
 }
 
 static gboolean
@@ -410,7 +406,7 @@ transaction_cmd_do (PlannerCmd *cmd)
 {
 	PlannerCmd *cmd_sub;
 	
-	g_print ("Transaction do: %s\n", cmd->label);
+	g_print ("Transaction do: %s\n", cmd->name);
 	
 	while (1) {
 		cmd_sub = get_redo_cmd (cmd->manager, TRUE);
@@ -440,7 +436,7 @@ transaction_cmd_undo (PlannerCmd *cmd)
 {
 	PlannerCmd *cmd_sub;
 
-	g_print ("Transaction undo: %s\n", cmd->label);
+	g_print ("Transaction undo: %s\n", cmd->name);
 
 	while (1) {
 		cmd_sub = get_undo_cmd (cmd->manager, TRUE);
@@ -463,7 +459,7 @@ transaction_cmd_undo (PlannerCmd *cmd)
 
 gboolean
 planner_cmd_manager_begin_transaction (PlannerCmdManager *manager,
-				       const gchar       *label)
+				       const gchar       *name)
 {
 	PlannerCmdManagerPriv *priv;
 	PlannerCmd            *cmd;
@@ -485,7 +481,7 @@ planner_cmd_manager_begin_transaction (PlannerCmdManager *manager,
 	cmd->undo_func = transaction_cmd_undo;
 	cmd->free_func = (PlannerCmdFreeFunc) g_free;
 	
-	cmd->label = g_strdup (label);
+	cmd->name = g_strdup (name);
 	cmd->type = PLANNER_CMD_TYPE_BEGIN_TRANSACTION;
 		
 	cmd_manager_insert (manager, cmd, FALSE);
@@ -532,7 +528,7 @@ planner_cmd_manager_end_transaction (PlannerCmdManager *manager)
 	cmd->undo_func = transaction_cmd_undo;
 	cmd->free_func = (PlannerCmdFreeFunc) g_free;
 	
-	cmd->label = g_strdup (begin_cmd->label);
+	cmd->name = g_strdup (begin_cmd->name);
 	cmd->type = PLANNER_CMD_TYPE_END_TRANSACTION;
 	
 	cmd_manager_insert (manager, cmd, FALSE);
@@ -542,7 +538,7 @@ planner_cmd_manager_end_transaction (PlannerCmdManager *manager)
 
 PlannerCmd *
 planner_cmd_new_size (gsize               size,
-		      const gchar        *label,
+		      const gchar        *name,
 		      PlannerCmdDoFunc    do_func,
 		      PlannerCmdUndoFunc  undo_func,
 		      PlannerCmdFreeFunc  free_func)
@@ -551,7 +547,7 @@ planner_cmd_new_size (gsize               size,
 
 	cmd = g_malloc0 (size);
 
-	cmd->label = g_strdup (label);
+	cmd->name = g_strdup (name);
 	cmd->do_func = do_func;
 	cmd->undo_func = undo_func;
 	cmd->free_func = free_func;
