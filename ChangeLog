@@ -1,5 +1,8 @@
 2004-03-15  Richard Hult  <richard@imendio.com>
 
+	* src/planner-gantt-print.c (planner_gantt_print_data_new): Patch
+	from Heath Wilkinson to fix bug #137204.
+
 	* src/Makefile.am:
 	* src/planner-gantt-chart.c: (gantt_chart_insert_task),
 	(planner_gantt_chart_get_view), (planner_gantt_chart_set_view),

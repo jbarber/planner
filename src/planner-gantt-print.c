@@ -54,8 +54,8 @@ typedef struct {
 
 struct _PlannerGanttPrintData {
 	MrpProject        *project;
-	PlannerView            *view;
-	PlannerPrintJob        *job;
+	PlannerView       *view;
+	PlannerPrintJob   *job;
 
 	/* Used to get the visible (expanded) tasks. */
 	GtkTreeView       *tree_view;
@@ -65,11 +65,11 @@ struct _PlannerGanttPrintData {
 
 	gint               level;
 	
-	PlannerScaleUnit        major_unit;
-	PlannerScaleFormat      major_format;
+	PlannerScaleUnit   major_unit;
+	PlannerScaleFormat major_format;
 	
-	PlannerScaleUnit        minor_unit;
-	PlannerScaleFormat      minor_format;
+	PlannerScaleUnit   minor_unit;
+	PlannerScaleFormat minor_format;
 	
 	gdouble            header_height;
 	
@@ -97,7 +97,7 @@ struct _PlannerGanttPrintData {
 	GnomeFont         *font;
 	GnomeFont         *font_bold;
 
-	GList            *tasks;
+	GList             *tasks;
 
 	gdouble            f;
 	
@@ -1350,10 +1350,10 @@ planner_gantt_print_data_new (PlannerView      *view,
 	data->arrow_width    = 0.16 * data->row_height;
 
 	if (num_tasks > 0) {
-		data->tasks_per_page_with_header = data->job->height / data->row_height;
-		data->tasks_per_page_without_header = (data->job->height - data->header_height) /
+		data->tasks_per_page_without_header = data->job->height / data->row_height;
+		data->tasks_per_page_with_header = (data->job->height - data->header_height) /
 			data->row_height;
-
+				
 		data->cols_of_pages = ceil (((data->finish - data->start) /
 					     data->f + data->tree_x2 - data->tree_x1) /
 					    data->job->width);
