@@ -494,7 +494,7 @@ resource_dialog_name_changed_cb (GtkWidget  *w,
 
 	g_signal_handlers_block_by_func (data->resource,
 					 resource_dialog_resource_name_changed_cb,
-					 data);
+					 data->dialog);
 
 	/* FIXME: activate undo support when clear how to group several keystrokes */
 	/* cmd = resource_cmd_edit_property (data->main_window, data->resource, "name", &value); */
@@ -504,7 +504,7 @@ resource_dialog_name_changed_cb (GtkWidget  *w,
 
 	g_signal_handlers_unblock_by_func (data->resource,
 					   resource_dialog_resource_name_changed_cb,
-					   data);
+					   data->dialog);
 
 	g_value_unset (&value);
 }
@@ -519,13 +519,13 @@ resource_dialog_short_name_changed_cb (GtkWidget  *w,
 
 	g_signal_handlers_block_by_func (data->resource,
 					 resource_dialog_resource_short_name_changed_cb, 
-					 data);
+					 data->dialog);
 
 	g_object_set (data->resource, "short_name", short_name, NULL);
 
 	g_signal_handlers_unblock_by_func (data->resource,
 					   resource_dialog_resource_short_name_changed_cb, 
-					   data);
+					   data->dialog);
 }
 
 static void  
@@ -572,7 +572,7 @@ resource_dialog_resource_type_changed_cb (MrpResource *resource,
 
 	g_signal_handlers_block_by_func (data->type_menu, 
 					 resource_dialog_type_changed_cb, 
-					 data);
+					 data->dialog);
 	
 	switch (type) {
 	case MRP_RESOURCE_TYPE_NONE:
@@ -588,7 +588,7 @@ resource_dialog_resource_type_changed_cb (MrpResource *resource,
 
 	g_signal_handlers_unblock_by_func (data->type_menu, 
 					   resource_dialog_type_changed_cb,
-					   data);
+					   data->dialog);
 }
 
 static void
@@ -606,14 +606,14 @@ resource_dialog_type_changed_cb (GtkWidget  *w,
 	
 	g_signal_handlers_block_by_func (data->resource,
 					 resource_dialog_resource_type_changed_cb, 
-					 data);
+					 data->dialog);
 
 	/* g_object_set (data->resource, "type", type, NULL); */
 	cmd = resource_cmd_edit_property (data->main_window, data->resource, "type", &value);
 
 	g_signal_handlers_unblock_by_func (data->resource,
 					   resource_dialog_resource_type_changed_cb, 
-					   data);
+					   data->dialog);
 	g_value_unset (&value);
 }
 
@@ -670,14 +670,14 @@ resource_dialog_group_changed_cb (GtkWidget  *w,
 
 	g_signal_handlers_block_by_func (data->resource,
 					 resource_dialog_resource_group_changed_cb, 
-					 data);
+					 data->dialog);
 
 	cmd = resource_cmd_edit_property (data->main_window, data->resource, "group", &value);
 	/* g_object_set (data->resource, "group", group, NULL); */
 
 	g_signal_handlers_unblock_by_func (data->resource,
 					   resource_dialog_resource_group_changed_cb, 
-					   data);
+					   data->dialog);
 	g_value_unset (&value);
 }
 
@@ -696,7 +696,7 @@ resource_dialog_email_changed_cb (GtkWidget  *w,
 
 	g_signal_handlers_block_by_func (data->resource,
 					 resource_dialog_resource_email_changed_cb, 
-					 data);
+					 data->dialog);
 
 	/* FIXME: activate undo support when clear how to group several keystrokes */
 	/* cmd = resource_cmd_edit_property (data->main_window, data->resource, "email", &value); */
@@ -704,7 +704,7 @@ resource_dialog_email_changed_cb (GtkWidget  *w,
 
 	g_signal_handlers_unblock_by_func (data->resource,
 					   resource_dialog_resource_email_changed_cb, 
-					   data);
+					   data->dialog);
 	g_value_unset (&value);
 }
 
@@ -743,16 +743,21 @@ resource_dialog_cost_changed_cb (GtkWidget  *w,
 	gfloat       fvalue;
 	GValue       value = { 0 };
 	/* PlannerCmd  *cmd; */
+	gchar       *nptr = NULL;
 
 	cost = gtk_entry_get_text (GTK_ENTRY (w));
 
-	fvalue = g_ascii_strtod (cost, NULL);
+	fvalue = g_strtod (cost, &nptr);
+	if (nptr == cost) {
+		return;
+	}
+	
 	g_value_init (&value, G_TYPE_FLOAT);
 	g_value_set_float (&value, fvalue);
 	
 	g_signal_handlers_block_by_func (data->resource,
 					 resource_dialog_resource_cost_changed_cb, 
-					 data);
+					 data->dialog);
 
 	/* FIXME: we need custom properties undo support and group several keystrokes */
 	/* cmd = resource_cmd_edit_property (data->main_window, data->resource, "cost", &value); */
@@ -760,7 +765,7 @@ resource_dialog_cost_changed_cb (GtkWidget  *w,
 
 	g_signal_handlers_unblock_by_func (data->resource,
 					   resource_dialog_resource_cost_changed_cb, 
-					   data);
+					   data->dialog);
 	g_value_unset (&value);
 }
 
