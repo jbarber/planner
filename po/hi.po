@@ -7,13 +7,423 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MrProject\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-12-04 16:40+0100\n"
+"POT-Creation-Date: 2004-02-20 04:27+0100\n"
 "PO-Revision-Date: 2003-11-15 11:04-0530\n"
 "Last-Translator: Sanjay Khatri <sk_ind at vsnl dot net>\n"
 "Language-Team: Gnome Hindi <indlinux-hindi-gnome@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: data/glade/add-predecessor.glade.h:1 data/glade/calendar-dialog.glade.h:4
+#: data/glade/html-output.glade.h:2 data/glade/new-property.glade.h:1
+#: data/glade/project-properties.glade.h:1
+#: data/glade/resource-dialog.glade.h:1
+#: data/glade/resource-input-dialog.glade.h:1 data/glade/sql.glade.h:1
+#: data/glade/task-dialog.glade.h:4 data/glade/task-input-dialog.glade.h:1
+msgid "*"
+msgstr "*"
+
+#: data/glade/add-predecessor.glade.h:2
+#, fuzzy
+msgid "Add Predecessor"
+msgstr "पूर्वाधिकारी"
+
+#: data/glade/add-predecessor.glade.h:3
+#, fuzzy
+msgid "_Lag:"
+msgstr "चरण:"
+
+#: data/glade/add-predecessor.glade.h:4 data/glade/calendar-dialog.glade.h:35
+#: data/glade/new-property.glade.h:5 data/glade/project-properties.glade.h:10
+#: data/glade/resource-dialog.glade.h:11
+#: data/glade/resource-input-dialog.glade.h:6
+#: data/glade/task-dialog.glade.h:14 data/glade/task-input-dialog.glade.h:4
+msgid "_Name:"
+msgstr "नाम:"
+
+#: data/glade/add-predecessor.glade.h:5
+#, fuzzy
+msgid "_Relation type:"
+msgstr "संबंध प्रकार"
+
+#: data/glade/calendar-dialog.glade.h:1
+msgid ""
+"\n"
+"The selected day type has the following working hours:"
+msgstr ""
+"\n"
+"चयनित दिन प्रकार में  निम्न कार्यकारी घंटे हैं:"
+
+#: data/glade/calendar-dialog.glade.h:3 data/glade/html-output.glade.h:1
+#: data/glade/task-dialog.glade.h:1
+msgid "    "
+msgstr "    "
+
+#: data/glade/calendar-dialog.glade.h:5
+msgid "-"
+msgstr "-"
+
+#: data/glade/calendar-dialog.glade.h:6
+msgid "<b>Calendar:</b>"
+msgstr "<b>कैलेण्डर: </b>"
+
+#: data/glade/calendar-dialog.glade.h:7
+msgid "<b>Day types</b>"
+msgstr "<b>दिन प्रकार </b>"
+
+#: data/glade/calendar-dialog.glade.h:8
+msgid "<b>Working hours</b>"
+msgstr "<b>कार्यकारी घंटे</b>"
+
+#: data/glade/calendar-dialog.glade.h:9
+msgid "<b>Working time</b>"
+msgstr "<b>कार्यकारी समय </b>"
+
+#: data/glade/calendar-dialog.glade.h:10
+#, fuzzy
+msgid "Add Day Type"
+msgstr "दिन प्रकार संपादित करें"
+
+#: data/glade/calendar-dialog.glade.h:11
+msgid "Apply"
+msgstr "प्रयोग करें"
+
+#: data/glade/calendar-dialog.glade.h:12
+msgid "C_opy an existing calendar"
+msgstr "एक विद्यमान कैलेंडर की प्रतिलिपि बनाये"
+
+#: data/glade/calendar-dialog.glade.h:13
+msgid "C_reate"
+msgstr "बनायें"
+
+#: data/glade/calendar-dialog.glade.h:14
+msgid "Calendar Editor"
+msgstr "कैलेंडर संशोधक"
+
+#: data/glade/calendar-dialog.glade.h:15
+msgid "Create an _empty calendar"
+msgstr "एक खाली कैलेंडर बनायें"
+
+#: data/glade/calendar-dialog.glade.h:16
+msgid "Custom working time"
+msgstr "उपयोक्तानुरूप कार्यकारी समय "
+
+#: data/glade/calendar-dialog.glade.h:17
+#, fuzzy
+msgid "Day type:"
+msgstr "नया दिन प्रकार"
+
+#: data/glade/calendar-dialog.glade.h:18
+msgid "Default Week"
+msgstr "पूर्वःनिर्धारित सप्ताह"
+
+#: data/glade/calendar-dialog.glade.h:19
+msgid "Default week..."
+msgstr "पूर्वःनिर्धारित सप्ताह..."
+
+#: data/glade/calendar-dialog.glade.h:20
+msgid "Edit Day Types"
+msgstr "दिन प्रकार संपादित करें"
+
+#: data/glade/calendar-dialog.glade.h:21
+msgid "Edit Working Time"
+msgstr "कार्यकारी समय संपादित करें"
+
+#: data/glade/calendar-dialog.glade.h:22
+msgid "From:"
+msgstr "द्वारा:"
+
+#: data/glade/calendar-dialog.glade.h:23
+msgid "New Calendar"
+msgstr "नया कैलेंडर"
+
+#: data/glade/calendar-dialog.glade.h:24
+#, fuzzy
+msgid "Select a Calendar"
+msgstr "कैलेंडर का चयन करें"
+
+#: data/glade/calendar-dialog.glade.h:25
+msgid ""
+"Select a weekday and the day type to use for that day in the default week "
+"for this calendar.\n"
+msgstr "इस कैलेंडर के लिए एक कार्यदिवस और उस दिन का प्रकार चुनें । \n"
+
+#: data/glade/calendar-dialog.glade.h:27
+msgid "Set day type to:"
+msgstr "दिन प्रकार को नियत करें:"
+
+#: data/glade/calendar-dialog.glade.h:28
+msgid "To:"
+msgstr "सेवा में:"
+
+#: data/glade/calendar-dialog.glade.h:29
+msgid "Use working time from derived calendar"
+msgstr "उत्पन्न किये हुए कैलेंडर से कार्यकारी समय का प्रयोग करें"
+
+#: data/glade/calendar-dialog.glade.h:30
+msgid "Week day:"
+msgstr "सप्ताह का दिन"
+
+#: data/glade/calendar-dialog.glade.h:31
+msgid "Working time..."
+msgstr "कार्यकारी समय"
+
+#: data/glade/calendar-dialog.glade.h:32
+#, fuzzy
+msgid "_Derive from a calendar"
+msgstr "एक कैलेंडर से उत्पन्न करें"
+
+#: data/glade/calendar-dialog.glade.h:33
+#, fuzzy
+msgid "_Existing calendars:"
+msgstr "विद्यमान कैलेण्डर: "
+
+#: data/glade/calendar-dialog.glade.h:34
+msgid "_Name of the new calendar:"
+msgstr "नये कैलेंडर का नाम:"
+
+#: data/glade/calendar-dialog.glade.h:36
+msgid "_New..."
+msgstr "नया"
+
+#: data/glade/group-dialog.glade.h:1
+msgid "Group Editor"
+msgstr "समहू संशोधक"
+
+#: data/glade/html-output.glade.h:3
+msgid "<b>Save to</b>"
+msgstr "<b>संचित करें </b>"
+
+#: data/glade/html-output.glade.h:4 data/ui/html-plugin.ui.h:1
+msgid "Export to HTML"
+msgstr "HTML में निर्यात करें"
+
+#: data/glade/html-output.glade.h:5
+#, fuzzy
+msgid "Local file:"
+msgstr "स्थानीय फाइल"
+
+#: data/glade/html-output.glade.h:6
+msgid "Save to HTML File"
+msgstr "HTML फाइल में संग्रहित करें"
+
+#: data/glade/html-output.glade.h:7
+#, fuzzy
+msgid "Web location:"
+msgstr "जाल स्थल"
+
+#: data/glade/new-property.glade.h:2
+#, fuzzy
+msgid "Add Property"
+msgstr "गुण"
+
+#: data/glade/new-property.glade.h:3
+#, fuzzy
+msgid "_Description:"
+msgstr "विवरण:"
+
+#: data/glade/new-property.glade.h:4
+#, fuzzy
+msgid "_Label:"
+msgstr "लेबल:"
+
+#: data/glade/new-property.glade.h:6 data/glade/resource-dialog.glade.h:12
+msgid "_Type:"
+msgstr "प्रकार:"
+
+#: data/glade/project-properties.glade.h:2
+#, fuzzy
+msgid "Custom"
+msgstr "लागत"
+
+#: data/glade/project-properties.glade.h:3
+#, fuzzy
+msgid "Edit Project Phases"
+msgstr "प्रोजेक्ट चरणों को संपादित करें"
+
+#: data/glade/project-properties.glade.h:4
+#: data/glade/resource-dialog.glade.h:5 data/glade/task-dialog.glade.h:6
+msgid "General"
+msgstr "सामान्य"
+
+#: data/glade/project-properties.glade.h:5
+msgid "New Project Phase"
+msgstr "नया प्रोजेक्ट चरण"
+
+#: data/glade/project-properties.glade.h:6
+#, fuzzy
+msgid "Project Properties"
+msgstr "प्रोजेक्ट गुण"
+
+#: data/glade/project-properties.glade.h:7
+msgid "Select..."
+msgstr "चुनें ..."
+
+#: data/glade/project-properties.glade.h:8
+#, fuzzy
+msgid "_Calendar:"
+msgstr "कैलेंडर"
+
+#: data/glade/project-properties.glade.h:9
+msgid "_Manager:"
+msgstr "प्रबन्धक"
+
+#: data/glade/project-properties.glade.h:11
+msgid "_Organization:"
+msgstr "संस्था:"
+
+#: data/glade/project-properties.glade.h:12
+#, fuzzy
+msgid "_Phase:"
+msgstr "चिपकाएं"
+
+#: data/glade/project-properties.glade.h:13
+#, fuzzy
+msgid "_Start:"
+msgstr "प्रारंभ"
+
+#: data/glade/property-dialog.glade.h:1
+msgid "Custom Properties"
+msgstr "उपयोक्तापारिभाषित गुण"
+
+#: data/glade/resource-dialog.glade.h:2
+#, fuzzy
+msgid "C_ost:"
+msgstr "लागत:"
+
+#: data/glade/resource-dialog.glade.h:3
+msgid "Calendar"
+msgstr "कैलेंडर"
+
+#: data/glade/resource-dialog.glade.h:4
+#, fuzzy
+msgid "Edit Calendars..."
+msgstr "कैलेण्डर संपादित करें"
+
+#: data/glade/resource-dialog.glade.h:6 data/glade/task-dialog.glade.h:7
+msgid "Notes"
+msgstr "टिप्पणी"
+
+#: data/glade/resource-dialog.glade.h:7
+msgid ""
+"Select the calendar to use for this resource. If you want to use the default "
+"calendar of the project, select 'None'. "
+msgstr ""
+"इस साधन के लिए कैलेंडर का चयन करें। पूर्वःनिर्धारित कैलेंडर का प्रयोग करने के लिए, 'कुछ नहीं' "
+"चुनें ।"
+
+#: data/glade/resource-dialog.glade.h:8
+#: data/glade/resource-input-dialog.glade.h:3
+msgid "_Email:"
+msgstr "ई-मेल पता:"
+
+#: data/glade/resource-dialog.glade.h:9
+#: data/glade/resource-input-dialog.glade.h:4
+msgid "_Group:"
+msgstr "समूह:"
+
+#: data/glade/resource-dialog.glade.h:10
+#, fuzzy
+msgid "_Insert time stamp"
+msgstr "तिथि/समय प्रविष्ट करें"
+
+#: data/glade/resource-input-dialog.glade.h:2
+#, fuzzy
+msgid "Insert Resource"
+msgstr "साधन प्रविष्ट करें"
+
+#: data/glade/resource-input-dialog.glade.h:5
+#: data/glade/task-input-dialog.glade.h:3
+msgid "_Insert"
+msgstr "भरें"
+
+#: data/glade/sql.glade.h:2
+msgid "Open Database"
+msgstr "आंकड़ासंचय खोलें"
+
+#: data/glade/sql.glade.h:3
+msgid "Select a Project"
+msgstr "एक प्रोजेक्ट चुनें"
+
+#: data/glade/sql.glade.h:4
+msgid "The database contains the following projects. Select a project to open:"
+msgstr "आंकड़ासंचय में निम्न प्रोजेक्ट हैं। खोलनें के लिए एक प्रोजेक्ट का चयन करें:"
+
+#: data/glade/sql.glade.h:5
+#, fuzzy
+msgid "_Database:"
+msgstr "आंकड़ासंचय:"
+
+#: data/glade/sql.glade.h:6
+#, fuzzy
+msgid "_Password:"
+msgstr "कूटशब्द:"
+
+#: data/glade/sql.glade.h:7
+#, fuzzy
+msgid "_Server:"
+msgstr "सर्वर:"
+
+#: data/glade/sql.glade.h:8
+#, fuzzy
+msgid "_Username:"
+msgstr "उपयोक्ता का नाम:"
+
+#: data/glade/task-dialog.glade.h:3
+#, no-c-format
+msgid "%"
+msgstr "%"
+
+#: data/glade/task-dialog.glade.h:5
+#, fuzzy
+msgid "C_omplete:"
+msgstr "पूर्ण:"
+
+#: data/glade/task-dialog.glade.h:8
+msgid "Predecessors"
+msgstr "पूर्वाधिकारी"
+
+#: data/glade/task-dialog.glade.h:9 src/planner-resource-view.c:384
+msgid "Resources"
+msgstr "साधन"
+
+#: data/glade/task-dialog.glade.h:10
+#, fuzzy
+msgid "_Duration:"
+msgstr "समय-सीमा"
+
+#: data/glade/task-dialog.glade.h:11
+msgid "_Fixed duration"
+msgstr "निश्चित समय-सीमा"
+
+#: data/glade/task-dialog.glade.h:12
+#, fuzzy
+msgid "_Insert Time Stamp"
+msgstr "तिथि/समय प्रविष्ट करें"
+
+#: data/glade/task-dialog.glade.h:13
+msgid "_Milestone"
+msgstr "मील का पत्थर"
+
+#: data/glade/task-dialog.glade.h:15
+#, fuzzy
+msgid "_Priority:"
+msgstr "वरीयता:"
+
+#: data/glade/task-dialog.glade.h:16 data/glade/task-input-dialog.glade.h:5
+msgid "_Work:"
+msgstr "कार्य:"
+
+#. day unit variant accepted in input
+#: data/glade/task-dialog.glade.h:17 src/planner-task-tree.c:2479
+msgid "days"
+msgstr "दिन"
+
+#: data/glade/task-input-dialog.glade.h:2
+#, fuzzy
+msgid "Insert Task"
+msgstr "कार्य डालें"
 
 #: data/planner.desktop.in.h:1
 #, fuzzy
@@ -24,9 +434,143 @@ msgstr "प्रोजेक्ट प्रबंधन"
 msgid "Project Management"
 msgstr "प्रोजेक्ट प्रबंधन"
 
-#: libegg/recent-files/egg-recent-vfs-utils.c:90
-msgid " (invalid Unicode)"
-msgstr "(अवैध युनीकोड)"
+#: data/ui/gantt-view.ui.h:1 data/ui/task-view.ui.h:1
+msgid "I_ndent Task"
+msgstr "कार्य हाशिये पर रखें"
+
+#: data/ui/gantt-view.ui.h:2 data/ui/task-view.ui.h:2
+msgid "In_sert Tasks..."
+msgstr "साधन प्रविष्ट करें..."
+
+#: data/ui/gantt-view.ui.h:3 data/ui/task-view.ui.h:3
+#: src/planner-application.c:83
+msgid "Indent"
+msgstr "हाशिया डालें"
+
+#: data/ui/gantt-view.ui.h:4 data/ui/resource-view.ui.h:5
+#: data/ui/task-view.ui.h:4 src/planner-application.c:55
+#: src/planner-application.c:111
+msgid "Insert"
+msgstr "भरें"
+
+#: data/ui/gantt-view.ui.h:5 data/ui/task-view.ui.h:5
+#: src/planner-application.c:76
+#, fuzzy
+msgid "Link"
+msgstr "असंबंध"
+
+#: data/ui/gantt-view.ui.h:6 data/ui/task-view.ui.h:6
+msgid "Move Task Do_wn"
+msgstr "साधन उपर करें"
+
+#: data/ui/gantt-view.ui.h:7 data/ui/task-view.ui.h:7
+msgid "Move Task _Up"
+msgstr "साधन नीचे करें"
+
+#: data/ui/gantt-view.ui.h:8 data/ui/task-view.ui.h:8
+#: src/planner-application.c:104
+msgid "Move down"
+msgstr "नीचें करें"
+
+#: data/ui/gantt-view.ui.h:9 data/ui/task-view.ui.h:9
+#: src/planner-application.c:97
+msgid "Move up"
+msgstr "ऊपर करें "
+
+#: data/ui/gantt-view.ui.h:10 data/ui/resource-view.ui.h:6
+#: data/ui/task-view.ui.h:10 src/planner-application.c:62
+#: src/planner-application.c:118
+msgid "Remove"
+msgstr "हटायें"
+
+#: data/ui/gantt-view.ui.h:11 data/ui/task-view.ui.h:11
+msgid "Reset _All Constraints"
+msgstr "सभी प्रतिबन्ध हटायें"
+
+#: data/ui/gantt-view.ui.h:12 data/ui/task-view.ui.h:12
+msgid "Reset _Constraint"
+msgstr "प्रतिबन्ध हटायें"
+
+#: data/ui/gantt-view.ui.h:13 data/ui/resource-view.ui.h:7
+#: data/ui/task-view.ui.h:13
+msgid "Select _All"
+msgstr "सभी का चयन करें"
+
+#: data/ui/gantt-view.ui.h:14 data/ui/resource-view.ui.h:8
+#: data/ui/task-view.ui.h:14
+msgid "Select all tasks"
+msgstr "सभी कार्यो का चयन करें"
+
+#: data/ui/gantt-view.ui.h:15
+#, fuzzy
+msgid "Test"
+msgstr "जांचे"
+
+#: data/ui/gantt-view.ui.h:16 data/ui/task-view.ui.h:15
+msgid "Unin_dent Task"
+msgstr "कार्य हाशिये से हटायें"
+
+#: data/ui/gantt-view.ui.h:17 data/ui/task-view.ui.h:16
+#: src/planner-application.c:90
+msgid "Unindent"
+msgstr "हाशिया हटायें"
+
+#: data/ui/gantt-view.ui.h:18 data/ui/task-view.ui.h:17
+#: src/planner-application.c:69
+msgid "Unlink"
+msgstr "असंबंध"
+
+#: data/ui/gantt-view.ui.h:19
+msgid "Zoom In"
+msgstr "बड़ा करें"
+
+#: data/ui/gantt-view.ui.h:20
+msgid "Zoom Out"
+msgstr "छोटा करें"
+
+#: data/ui/gantt-view.ui.h:21
+#, fuzzy
+msgid "Zoom To Fit"
+msgstr "पूरा बड़ा करें"
+
+#: data/ui/gantt-view.ui.h:22
+#, fuzzy
+msgid "Zoom To _Fit"
+msgstr "पूरा बड़ा करें"
+
+#: data/ui/gantt-view.ui.h:23
+msgid "Zoom _Out"
+msgstr "छोटा करें"
+
+#: data/ui/gantt-view.ui.h:24 data/ui/task-view.ui.h:19
+msgid "_Edit Task Properties..."
+msgstr "कार्य गुण संपादित करें"
+
+#: data/ui/gantt-view.ui.h:25 data/ui/task-view.ui.h:20
+msgid "_Highlight Critical Tasks"
+msgstr "नाजुक कार्यो को अधिक प्रकाशित करें"
+
+#: data/ui/gantt-view.ui.h:26 data/ui/task-view.ui.h:21
+msgid "_Insert Task"
+msgstr "कार्य डालें"
+
+#: data/ui/gantt-view.ui.h:27 data/ui/task-view.ui.h:22
+#, fuzzy
+msgid "_Link Tasks"
+msgstr "कार्य असंबंधित करें"
+
+#: data/ui/gantt-view.ui.h:28 data/ui/task-view.ui.h:23
+msgid "_Remove Task"
+msgstr "कार्य हटायें"
+
+#: data/ui/gantt-view.ui.h:29 data/ui/task-view.ui.h:24
+#, fuzzy
+msgid "_Unlink Task"
+msgstr "कार्य असंबंधित करें"
+
+#: data/ui/gantt-view.ui.h:30
+msgid "_Zoom In"
+msgstr "बड़ा करें"
 
 #: data/ui/main-window.ui.h:1
 msgid "About this application"
@@ -130,7 +674,8 @@ msgid "Save the current project with a different name"
 msgstr "वर्तमान प्रोजेक्ट को नये नाम से संचित करें"
 
 #: data/ui/main-window.ui.h:26
-msgid "Show the MrProject User Guide"
+#, fuzzy
+msgid "Show the Planner User Guide"
 msgstr "MrProject की उपयोक्ता गाइड दिखाएँ"
 
 #: data/ui/main-window.ui.h:27
@@ -202,15 +747,15 @@ msgstr "प्रोजेक्ट"
 msgid "_Quit"
 msgstr "समाप्त करें"
 
-#: data/ui/main-window.ui.h:44
+#: data/ui/main-window.ui.h:44 src/planner-window.c:1168
 msgid "_Redo"
 msgstr "पुनः करें"
 
-#: data/ui/main-window.ui.h:45 src/planner-main-window.c:1127
+#: data/ui/main-window.ui.h:45 src/planner-window.c:1271
 msgid "_Save"
 msgstr "संचित करें"
 
-#: data/ui/main-window.ui.h:46
+#: data/ui/main-window.ui.h:46 src/planner-window.c:1142
 msgid "_Undo"
 msgstr "अकृत करें (U)"
 
@@ -221,148 +766,6 @@ msgstr "उपयोक्ता गाइड"
 #: data/ui/main-window.ui.h:48
 msgid "_View"
 msgstr "दृश्य"
-
-#: data/ui/gantt-view.ui.h:1 data/ui/task-view.ui.h:1
-msgid "I_ndent Task"
-msgstr "कार्य हाशिये पर रखें"
-
-#: data/ui/gantt-view.ui.h:2 data/ui/task-view.ui.h:2
-msgid "In_sert Tasks..."
-msgstr "साधन प्रविष्ट करें..."
-
-#: data/ui/gantt-view.ui.h:3 data/ui/task-view.ui.h:3
-#: src/planner-application.c:75
-msgid "Indent"
-msgstr "हाशिया डालें"
-
-#: data/ui/gantt-view.ui.h:4 data/ui/task-view.ui.h:4
-#: data/ui/resource-view.ui.h:5 src/planner-application.c:54
-#: src/planner-application.c:103
-msgid "Insert"
-msgstr "भरें"
-
-#: data/ui/gantt-view.ui.h:5 data/ui/task-view.ui.h:5
-msgid "Move Task Do_wn"
-msgstr "साधन उपर करें"
-
-#: data/ui/gantt-view.ui.h:6 data/ui/task-view.ui.h:6
-msgid "Move Task _Up"
-msgstr "साधन नीचे करें"
-
-#: data/ui/gantt-view.ui.h:7 data/ui/task-view.ui.h:7
-#: src/planner-application.c:96
-msgid "Move down"
-msgstr "नीचें करें"
-
-#: data/ui/gantt-view.ui.h:8 data/ui/task-view.ui.h:8
-#: src/planner-application.c:89
-msgid "Move up"
-msgstr "ऊपर करें "
-
-#: data/ui/gantt-view.ui.h:9 data/ui/task-view.ui.h:9
-#: data/ui/resource-view.ui.h:6 src/planner-application.c:61
-#: src/planner-application.c:110
-msgid "Remove"
-msgstr "हटायें"
-
-#: data/ui/gantt-view.ui.h:10 data/ui/task-view.ui.h:10
-msgid "Reset _All Constraints"
-msgstr "सभी प्रतिबन्ध हटायें"
-
-#: data/ui/gantt-view.ui.h:11 data/ui/task-view.ui.h:11
-msgid "Reset _Constraint"
-msgstr "प्रतिबन्ध हटायें"
-
-#: data/ui/gantt-view.ui.h:12 data/ui/task-view.ui.h:12
-#: data/ui/resource-view.ui.h:7
-msgid "Select _All"
-msgstr "सभी का चयन करें"
-
-#: data/ui/gantt-view.ui.h:13 data/ui/task-view.ui.h:13
-#: data/ui/resource-view.ui.h:8
-msgid "Select all tasks"
-msgstr "सभी कार्यो का चयन करें"
-
-#: data/ui/gantt-view.ui.h:14
-#, fuzzy
-msgid "Test"
-msgstr "जांचे"
-
-#: data/ui/gantt-view.ui.h:15 data/ui/task-view.ui.h:14
-msgid "Un_link Task"
-msgstr "कार्य असंबंधित करें"
-
-#: data/ui/gantt-view.ui.h:16 data/ui/task-view.ui.h:15
-msgid "Unin_dent Task"
-msgstr "कार्य हाशिये से हटायें"
-
-#: data/ui/gantt-view.ui.h:17 data/ui/task-view.ui.h:16
-#: src/planner-application.c:82
-msgid "Unindent"
-msgstr "हाशिया हटायें"
-
-#: data/ui/gantt-view.ui.h:18 data/ui/task-view.ui.h:17
-#: src/planner-application.c:68
-msgid "Unlink"
-msgstr "असंबंध"
-
-#: data/ui/gantt-view.ui.h:19
-msgid "Zoom In"
-msgstr "बड़ा करें"
-
-#: data/ui/gantt-view.ui.h:20
-msgid "Zoom Out"
-msgstr "छोटा करें"
-
-#: data/ui/gantt-view.ui.h:21
-#, fuzzy
-msgid "Zoom To Fit"
-msgstr "पूरा बड़ा करें"
-
-#: data/ui/gantt-view.ui.h:22
-#, fuzzy
-msgid "Zoom To _Fit"
-msgstr "पूरा बड़ा करें"
-
-#: data/ui/gantt-view.ui.h:23
-msgid "Zoom _Out"
-msgstr "छोटा करें"
-
-#: data/ui/gantt-view.ui.h:24 data/ui/task-view.ui.h:19
-msgid "_Edit Task Properties..."
-msgstr "कार्य गुण संपादित करें"
-
-#: data/ui/gantt-view.ui.h:25
-msgid "_Highlight Critical Tasks"
-msgstr "नाजुक कार्यो को अधिक प्रकाशित करें"
-
-#: data/ui/gantt-view.ui.h:26 data/ui/task-view.ui.h:20
-msgid "_Insert Task"
-msgstr "कार्य डालें"
-
-#: data/ui/gantt-view.ui.h:27 data/ui/task-view.ui.h:21
-msgid "_Remove Task"
-msgstr "कार्य हटायें"
-
-#: data/ui/gantt-view.ui.h:28
-msgid "_Zoom In"
-msgstr "बड़ा करें"
-
-#: data/ui/task-view.ui.h:18
-msgid "_Edit Custom Properties..."
-msgstr "उपयोक्तानुरूप गुणों का संपादन"
-
-#: data/ui/html-plugin.ui.h:1 data/glade/html-output.glade.h:4
-msgid "Export to HTML"
-msgstr "HTML में निर्यात करें"
-
-#: data/ui/sql-plugin.ui.h:1
-msgid "Open from Database..."
-msgstr "URI से खोलें"
-
-#: data/ui/sql-plugin.ui.h:2
-msgid "Save to Database..."
-msgstr "आंकड़ासंचय में संग्रहित करें ..."
 
 #: data/ui/resource-view.ui.h:1
 msgid "Edit _Custom Properties..."
@@ -392,511 +795,21 @@ msgstr "साधन प्रविष्ट करें"
 msgid "_Remove Resource"
 msgstr "साधन हटायें"
 
-#: data/glade/add-predecessor.glade.h:1 data/glade/calendar-dialog.glade.h:4
-#: data/glade/html-output.glade.h:2 data/glade/new-property.glade.h:1
-#: data/glade/project-properties.glade.h:1
-#: data/glade/resource-dialog.glade.h:1
-#: data/glade/resource-input-dialog.glade.h:1 data/glade/sql.glade.h:2
-#: data/glade/task-dialog.glade.h:4 data/glade/task-input-dialog.glade.h:1
-msgid "*"
-msgstr "*"
-
-#: data/glade/add-predecessor.glade.h:2
-msgid "Lag: "
-msgstr "चरण:"
-
-#: data/glade/add-predecessor.glade.h:3
-msgid "New predecessor"
-msgstr "नया पूर्वाधिकारी"
-
-#: data/glade/add-predecessor.glade.h:4
-msgid "Predecessor: "
-msgstr "पूर्वाधिकारी:"
-
-#: data/glade/add-predecessor.glade.h:5
-msgid "Relation type: "
-msgstr "संबंध प्रकार"
-
-#: data/glade/calendar-dialog.glade.h:1
-msgid ""
-"\n"
-"The selected day type has the following working hours:"
-msgstr ""
-"\n"
-"चयनित दिन प्रकार में  निम्न कार्यकारी घंटे हैं:"
-
-#: data/glade/calendar-dialog.glade.h:3 data/glade/html-output.glade.h:1
-#: data/glade/sql.glade.h:1 data/glade/task-dialog.glade.h:1
-msgid "    "
-msgstr "    "
-
-#: data/glade/calendar-dialog.glade.h:5
-msgid "-"
-msgstr "-"
-
-#: data/glade/calendar-dialog.glade.h:6
-msgid "<b>Calendar:</b>"
-msgstr "<b>कैलेण्डर: </b>"
-
-#: data/glade/calendar-dialog.glade.h:7
-msgid "<b>Day types</b>"
-msgstr "<b>दिन प्रकार </b>"
-
-#: data/glade/calendar-dialog.glade.h:8
-msgid "<b>Working hours</b>"
-msgstr "<b>कार्यकारी घंटे</b>"
-
-#: data/glade/calendar-dialog.glade.h:9
-msgid "<b>Working time</b>"
-msgstr "<b>कार्यकारी समय </b>"
-
-#: data/glade/calendar-dialog.glade.h:10
-msgid "Apply"
-msgstr "प्रयोग करें"
-
-#: data/glade/calendar-dialog.glade.h:11
-msgid "C_opy an existing calendar"
-msgstr "एक विद्यमान कैलेंडर की प्रतिलिपि बनाये"
-
-#: data/glade/calendar-dialog.glade.h:12
-msgid "C_reate"
-msgstr "बनायें"
-
-#: data/glade/calendar-dialog.glade.h:13
-msgid "Calendar Editor"
-msgstr "कैलेंडर संशोधक"
-
-#: data/glade/calendar-dialog.glade.h:14
-msgid "Create an _empty calendar"
-msgstr "एक खाली कैलेंडर बनायें"
-
-#: data/glade/calendar-dialog.glade.h:15
-msgid "Custom working time"
-msgstr "उपयोक्तानुरूप कार्यकारी समय "
-
-#: data/glade/calendar-dialog.glade.h:16
-#, fuzzy
-msgid "Day type:"
-msgstr "नया दिन प्रकार"
-
-#: data/glade/calendar-dialog.glade.h:17
-msgid "Default Week"
-msgstr "पूर्वःनिर्धारित सप्ताह"
-
-#: data/glade/calendar-dialog.glade.h:18
-msgid "Default week..."
-msgstr "पूर्वःनिर्धारित सप्ताह..."
-
-#: data/glade/calendar-dialog.glade.h:19
-msgid "Edit Day Types"
-msgstr "दिन प्रकार संपादित करें"
-
-#: data/glade/calendar-dialog.glade.h:20
-msgid "Edit Working Time"
-msgstr "कार्यकारी समय संपादित करें"
-
-#: data/glade/calendar-dialog.glade.h:21
-msgid "Enter the name of the new day type:"
-msgstr "नये दिन प्रकार प्रविष्टि करें :"
-
-#: data/glade/calendar-dialog.glade.h:22
-msgid "Existing calendars:"
-msgstr "विद्यमान कैलेण्डर: "
-
-#: data/glade/calendar-dialog.glade.h:23
-msgid "From:"
-msgstr "द्वारा:"
-
-#: data/glade/calendar-dialog.glade.h:24
-msgid "MrProject Team"
-msgstr "MrProject टीम"
-
-#: data/glade/calendar-dialog.glade.h:25
-msgid "New Calendar"
-msgstr "नया कैलेंडर"
-
-#: data/glade/calendar-dialog.glade.h:26
-msgid "New Day Type"
-msgstr "नया दिन प्रकार"
-
-#: data/glade/calendar-dialog.glade.h:27
-msgid "Select a calendar"
-msgstr "कैलेंडर का चयन करें"
-
-#: data/glade/calendar-dialog.glade.h:28
-msgid ""
-"Select a weekday and the day type to use for that day in the default week "
-"for this calendar.\n"
-msgstr "इस कैलेंडर के लिए एक कार्यदिवस और उस दिन का प्रकार चुनें । \n"
-
-#: data/glade/calendar-dialog.glade.h:30
-msgid "Set day type to:"
-msgstr "दिन प्रकार को नियत करें:"
-
-#: data/glade/calendar-dialog.glade.h:31
-msgid "To:"
-msgstr "सेवा में:"
-
-#: data/glade/calendar-dialog.glade.h:32
-msgid "Use working time from derived calendar"
-msgstr "उत्पन्न किये हुए कैलेंडर से कार्यकारी समय का प्रयोग करें"
-
-#: data/glade/calendar-dialog.glade.h:33
-msgid "Week day:"
-msgstr "सप्ताह का दिन"
-
-#: data/glade/calendar-dialog.glade.h:34
-msgid "Working time..."
-msgstr "कार्यकारी समय"
-
-#: data/glade/calendar-dialog.glade.h:35
-#, fuzzy
-msgid "_Derive from a calendar"
-msgstr "एक कैलेंडर से उत्पन्न करें"
-
-#: data/glade/calendar-dialog.glade.h:36
-msgid "_Name of the new calendar:"
-msgstr "नये कैलेंडर का नाम:"
-
-#: data/glade/calendar-dialog.glade.h:37
-msgid "_New..."
-msgstr "नया"
-
-#: data/glade/group-dialog.glade.h:1
-msgid "Group Editor"
-msgstr "समहू संशोधक"
-
-#: data/glade/html-output.glade.h:3
-msgid "<b>Save to</b>"
-msgstr "<b>संचित करें </b>"
-
-#: data/glade/html-output.glade.h:5
-msgid "Local file"
-msgstr "स्थानीय फाइल"
-
-#: data/glade/html-output.glade.h:6
-msgid "Save to HTML File"
-msgstr "HTML फाइल में संग्रहित करें"
-
-#: data/glade/html-output.glade.h:7
-msgid "Web location"
-msgstr "जाल स्थल"
-
-#: data/glade/new-property.glade.h:2
-msgid "Description: "
-msgstr "विवरण:"
-
-#: data/glade/new-property.glade.h:3
-msgid "Label: "
-msgstr "लेबल:"
-
-#: data/glade/new-property.glade.h:4
-msgid "Name: "
-msgstr "नाम:"
-
-#: data/glade/new-property.glade.h:5
-msgid "New Property"
-msgstr "नये गुण"
-
-#: data/glade/new-property.glade.h:6
-msgid "Type: "
-msgstr "प्रकार:"
-
-#: data/glade/project-properties.glade.h:2
-msgid "<b>Project phases</b>"
-msgstr "<b>प्रोजेक्ट चरण </b>"
-
-#: data/glade/project-properties.glade.h:3
-msgid "Calendar:"
-msgstr "कैलेंडर"
-
-#: data/glade/project-properties.glade.h:4
-msgid "Custom properties"
-msgstr "उपयोक्तानुरूप गुण"
-
-#: data/glade/project-properties.glade.h:5
-msgid "Edit Project phases"
-msgstr "प्रोजेक्ट चरणों को संपादित करें"
-
-#: data/glade/project-properties.glade.h:6
-msgid "Enter the name of the new project phase:"
-msgstr "नये प्रोजेक्ट चरण का नाम प्रविष्ठ करें"
-
-#: data/glade/project-properties.glade.h:7
-#: data/glade/resource-dialog.glade.h:5 data/glade/task-dialog.glade.h:6
-msgid "General"
-msgstr "सामान्य"
-
-#: data/glade/project-properties.glade.h:8
-msgid "New Project Phase"
-msgstr "नया प्रोजेक्ट चरण"
-
-#: data/glade/project-properties.glade.h:9
-msgid "Project _name:"
-msgstr "प्रोजेक्ट नाम"
-
-#: data/glade/project-properties.glade.h:10
-msgid "Project _start:"
-msgstr "प्रोजेक्ट आरंभ:"
-
-#: data/glade/project-properties.glade.h:11
-msgid "Project phase:"
-msgstr "प्रोजेक्ट चरण:"
-
-#: data/glade/project-properties.glade.h:12
-msgid "Project properties"
-msgstr "प्रोजेक्ट गुण"
-
-#: data/glade/project-properties.glade.h:13
-msgid "Select..."
-msgstr "चुनें ..."
-
-#: data/glade/project-properties.glade.h:14
-msgid "_Manager:"
-msgstr "प्रबन्धक"
-
-#: data/glade/project-properties.glade.h:15
-msgid "_Organization:"
-msgstr "संस्था:"
-
-#: data/glade/property-dialog.glade.h:1
-msgid "Custom Properties"
-msgstr "उपयोक्तापारिभाषित गुण"
-
-#: data/glade/resource-dialog.glade.h:2
-#, fuzzy
-msgid "C_ost:"
-msgstr "लागत:"
-
-#: data/glade/resource-dialog.glade.h:3
-msgid "Calendar"
-msgstr "कैलेंडर"
-
-#: data/glade/resource-dialog.glade.h:4
-msgid "Edit calendars..."
-msgstr "कैलेण्डर संपादित करें"
-
-#: data/glade/resource-dialog.glade.h:6 data/glade/task-dialog.glade.h:7
-msgid "Insert time stamp"
-msgstr "तिथि/समय प्रविष्ट करें"
-
-#: data/glade/resource-dialog.glade.h:7 data/glade/task-dialog.glade.h:9
-msgid "Notes"
-msgstr "टिप्पणी"
-
-#: data/glade/resource-dialog.glade.h:8
-msgid ""
-"Select the calendar to use for this resource. If you want to use the default "
-"calendar of the project, select 'None'. "
-msgstr ""
-"इस साधन के लिए कैलेंडर का चयन करें। पूर्वःनिर्धारित कैलेंडर का प्रयोग करने के लिए, 'कुछ नहीं' "
-"चुनें ।"
-
-#: data/glade/resource-dialog.glade.h:9
-msgid "_Email:"
-msgstr "ई-मेल पता:"
-
-#: data/glade/resource-dialog.glade.h:10
-msgid "_Group:"
-msgstr "समूह:"
-
-#: data/glade/resource-dialog.glade.h:11
-msgid "_Name:"
-msgstr "नाम:"
-
-#: data/glade/resource-dialog.glade.h:12
-msgid "_Type:"
-msgstr "प्रकार:"
-
-#: data/glade/resource-input-dialog.glade.h:2
-msgid "Email:"
-msgstr "ई-मेल पता:"
-
-#: data/glade/resource-input-dialog.glade.h:3
-msgid "Group:"
-msgstr "समूह:"
-
-#: data/glade/resource-input-dialog.glade.h:4
-msgid "Insert resource"
-msgstr "साधन प्रविष्ट करें"
-
-#: data/glade/resource-input-dialog.glade.h:5
-#: data/glade/task-input-dialog.glade.h:3
-msgid "Name:"
-msgstr "नाम:"
-
-#: data/glade/resource-input-dialog.glade.h:6
-#: data/glade/task-input-dialog.glade.h:5
-msgid "_Insert"
-msgstr "भरें"
-
-#: data/glade/sql.glade.h:3
-msgid "<b>Open Database</b>"
-msgstr "<b>आंकड़ासंचय खोलें</b>"
-
-#: data/glade/sql.glade.h:4
-msgid "Database:"
-msgstr "आंकड़ासंचय:"
-
-#: data/glade/sql.glade.h:5
-msgid "Open Database"
-msgstr "आंकड़ासंचय खोलें"
-
-#: data/glade/sql.glade.h:6
-msgid "Password:"
-msgstr "कूटशब्द:"
-
-#: data/glade/sql.glade.h:7
-msgid "Select a Project"
-msgstr "एक प्रोजेक्ट चुनें"
-
-#: data/glade/sql.glade.h:8
-msgid "Server:"
-msgstr "सर्वर:"
-
-#: data/glade/sql.glade.h:9
-msgid "The database contains the following projects. Select a project to open:"
-msgstr "आंकड़ासंचय में निम्न प्रोजेक्ट हैं। खोलनें के लिए एक प्रोजेक्ट का चयन करें:"
-
-#: data/glade/sql.glade.h:10
-msgid "Username:"
-msgstr "उपयोक्ता का नाम:"
-
-#: data/glade/task-dialog.glade.h:3
-#, no-c-format
-msgid "%"
-msgstr "%"
-
-#: data/glade/task-dialog.glade.h:5
-#, fuzzy
-msgid "C_omplete:"
-msgstr "पूर्ण:"
-
-#: data/glade/task-dialog.glade.h:8
-msgid "Na_me:"
-msgstr "नाम:"
-
-#: data/glade/task-dialog.glade.h:10
-msgid "Pr_iority:"
-msgstr "वरीयता:"
-
-#: data/glade/task-dialog.glade.h:11
-msgid "Predecessors"
-msgstr "पूर्वाधिकारी"
-
-#: data/glade/task-dialog.glade.h:12 src/planner-resource-view.c:342
-msgid "Resources"
-msgstr "साधन"
-
-#: data/glade/task-dialog.glade.h:13
-#, fuzzy
-msgid "_Duration:"
-msgstr "समय-सीमा"
-
-#: data/glade/task-dialog.glade.h:14
-msgid "_Fixed duration"
-msgstr "निश्चित समय-सीमा"
-
-#: data/glade/task-dialog.glade.h:15
-msgid "_Milestone"
-msgstr "मील का पत्थर"
-
-#: data/glade/task-dialog.glade.h:16
-msgid "_Work:"
-msgstr "कार्य:"
-
-#. day unit variant accepted in input
-#: data/glade/task-dialog.glade.h:17 src/planner-task-tree.c:2120
-msgid "days"
-msgstr "दिन"
-
-#: data/glade/task-input-dialog.glade.h:2
-msgid "Insert task"
-msgstr "कार्य प्रविष्ट करें"
-
-#: data/glade/task-input-dialog.glade.h:4
-msgid "Work:"
-msgstr "कार्य:"
-
-#: libplanner/mrp-project.c:441 src/planner-group-dialog.c:411
-msgid "Default"
-msgstr "पूर्वःनिर्धारित"
-
-#: libplanner/mrp-project.c:749
-#, c-format
-msgid "Couldn't find a suitable file module for loading '%s'"
-msgstr "'%s' भारण के लिए उपयुक्त फाइल मॉड्यूल नहीं मिला"
-
-#: libplanner/mrp-project.c:770 libplanner/mrp-project.c:1034
-msgid "No support for SQL storage built into this version of MrProject."
-msgstr "MrProject  के इस संस्करण में SQL भंड़ारण की सुविधा नहीं हैं।"
-
-#: libplanner/mrp-project.c:807
-#, fuzzy
-msgid "Invalid URI."
-msgstr "अवैध यूनीकोड"
-
-#: libplanner/mrp-project.c:928
-#, c-format
-msgid "Unable to find file writer identified by '%s'"
-msgstr "'%s' द्वारा परिचित फाइल लेखक नहीं मिला "
-
-#: libplanner/mrp-project.c:991
-msgid "Couldn't find a suitable file module for loading project"
-msgstr "प्रोजेक्ट भारण के लिए उपयुक्त फाइल मॉड्यूल नहीं मिला"
-
-#: libplanner/mrp-property.c:365
-#, fuzzy
-msgid "Text"
-msgstr "जांचे"
-
-#: libplanner/mrp-property.c:367
-msgid "String list"
-msgstr "रज्जुओ की सूची"
-
-#: libplanner/mrp-property.c:369
-#, fuzzy
-msgid "Integer number"
-msgstr "प्रबंधक का नाम"
-
-#: libplanner/mrp-property.c:371
-msgid "Floating-point number"
-msgstr "चल बिन्दु संख्या"
-
-#: libplanner/mrp-property.c:373
-#, fuzzy
-msgid "Date"
-msgstr "दिन प्रकार:"
-
-#: libplanner/mrp-property.c:375
-#, fuzzy
-msgid "Duration"
-msgstr "समय-सीमा"
-
-#: libplanner/mrp-property.c:377 src/planner-task-view.c:232
-msgid "Cost"
-msgstr "लागत"
-
-#: libplanner/mrp-property.c:380 src/planner-project-properties.c:505
-msgid "None"
-msgstr "कुछ नहीं"
-
-#: libplanner/mrp-task-manager.c:1769
-msgid "Can not add a predecessor relation between a task and its ancestor."
-msgstr "एक कार्य और उसके उत्तराधिकारी के बीच पूर्वाधिकार संबंध नहीं बना सके।"
-
-#: libplanner/mrp-task-manager.c:1778 libplanner/mrp-task-manager.c:1786
-msgid "Can not add a predecessor, because it would result in a loop."
-msgstr "पूर्वाधिकारी नहीं जोड़  सकते क्योकि इससे पाश बन जाएगा ।"
-
-#: libplanner/mrp-task-manager.c:1821
-msgid "Can not move the task, since it would result in a loop."
-msgstr "कार्य स्थानांतरित नहीं  सकते क्योकि इससे पाश बन जाएगा ।"
-
-#: libplanner/mrp-task.c:1016
-msgid ""
-"Could not add a predecessor relation, because the tasks are already related."
-msgstr "पूर्वाधिकार संबंध नहीं बना सके, क्योकि कार्यों में संबंध पहले से हैं।"
+#: data/ui/sql-plugin.ui.h:1
+msgid "Open from Database..."
+msgstr "URI से खोलें"
+
+#: data/ui/sql-plugin.ui.h:2
+msgid "Save to Database..."
+msgstr "आंकड़ासंचय में संग्रहित करें ..."
+
+#: data/ui/task-view.ui.h:18
+msgid "_Edit Custom Properties..."
+msgstr "उपयोक्तानुरूप गुणों का संपादन"
+
+#: libegg/recent-files/egg-recent-vfs-utils.c:90
+msgid " (invalid Unicode)"
+msgstr "(अवैध युनीकोड)"
 
 #: libplanner/mrp-day.c:54
 #, fuzzy
@@ -935,21 +848,83 @@ msgstr "गुण संवादक(dialog) बनाने में असम
 msgid "Could not write XML file"
 msgstr "प्लगिन फाइल '%s' नहीं खोल सकें \n"
 
+#: libplanner/mrp-project.c:440 src/planner-group-dialog.c:829
+msgid "Default"
+msgstr "पूर्वःनिर्धारित"
+
+#: libplanner/mrp-project.c:748
+#, c-format
+msgid "Couldn't find a suitable file module for loading '%s'"
+msgstr "'%s' भारण के लिए उपयुक्त फाइल मॉड्यूल नहीं मिला"
+
+#: libplanner/mrp-project.c:769 libplanner/mrp-project.c:1033
+#, fuzzy
+msgid "No support for SQL storage built into this version of Planner."
+msgstr "MrProject  के इस संस्करण में SQL भंड़ारण की सुविधा नहीं हैं।"
+
+#: libplanner/mrp-project.c:806
+#, fuzzy
+msgid "Invalid URI."
+msgstr "अवैध यूनीकोड"
+
+#: libplanner/mrp-project.c:927
+#, c-format
+msgid "Unable to find file writer identified by '%s'"
+msgstr "'%s' द्वारा परिचित फाइल लेखक नहीं मिला "
+
+#: libplanner/mrp-project.c:990
+msgid "Couldn't find a suitable file module for loading project"
+msgstr "प्रोजेक्ट भारण के लिए उपयुक्त फाइल मॉड्यूल नहीं मिला"
+
+#: libplanner/mrp-property.c:365
+#, fuzzy
+msgid "Text"
+msgstr "जांचे"
+
+#: libplanner/mrp-property.c:367
+msgid "String list"
+msgstr "रज्जुओ की सूची"
+
+#: libplanner/mrp-property.c:369
+#, fuzzy
+msgid "Integer number"
+msgstr "प्रबंधक का नाम"
+
+#: libplanner/mrp-property.c:371
+msgid "Floating-point number"
+msgstr "चल बिन्दु संख्या"
+
+#: libplanner/mrp-property.c:373
+#, fuzzy
+msgid "Date"
+msgstr "दिन प्रकार:"
+
+#: libplanner/mrp-property.c:375
+#, fuzzy
+msgid "Duration"
+msgstr "समय-सीमा"
+
+#: libplanner/mrp-property.c:377 src/planner-task-view.c:270
+msgid "Cost"
+msgstr "लागत"
+
+#: libplanner/mrp-property.c:380 src/planner-project-properties.c:655
+msgid "None"
+msgstr "कुछ नहीं"
+
 #. Give up.
-#: libplanner/mrp-sql.c:229 src/planner-sql-plugin.c:127
+#: libplanner/mrp-sql.c:345 src/planner-sql-plugin.c:171
 msgid "Invalid Unicode"
 msgstr "अवैध यूनीकोड"
 
-#: libplanner/mrp-sql.c:2205
-#, c-format
-msgid ""
-"The project '%s' has been changed by the user '%s' since you opened it. Do "
-"you want to save anyway?"
+#: libplanner/mrp-sql.c:2201
+#, fuzzy, c-format
+msgid "Connection to database '%s' failed.\n"
 msgstr ""
-"आप से पहले प्रोजेक्ट '%s' को '%s' ने परिवर्तित किया हैं । क्या आप फिर भी संग्रहित करना "
-"चाहते हैं ?"
+"आंकड़ासंचय '%s' से संयोजन में असफल: \n"
+"%s"
 
-#: libplanner/mrp-sql.c:3443
+#: libplanner/mrp-sql.c:2206 libplanner/mrp-sql.c:3643
 #, fuzzy, c-format
 msgid ""
 "Connection to database '%s' failed.\n"
@@ -957,6 +932,20 @@ msgid ""
 msgstr ""
 "आंकड़ासंचय '%s' से संयोजन में असफल: \n"
 "%s"
+
+#: libplanner/mrp-sql.c:2214
+#, c-format
+msgid "BEGIN command failed %s."
+msgstr ""
+
+#: libplanner/mrp-sql.c:2380
+#, c-format
+msgid ""
+"The project '%s' has been changed by the user '%s' since you opened it. Do "
+"you want to save anyway?"
+msgstr ""
+"आप से पहले प्रोजेक्ट '%s' को '%s' ने परिवर्तित किया हैं । क्या आप फिर भी संग्रहित करना "
+"चाहते हैं ?"
 
 #: libplanner/mrp-storage-sql.c:205
 msgid "Invalid SQL URI (must start with 'sql://' and contain '#')."
@@ -970,126 +959,30 @@ msgstr "अवैध SQL URI (अवैध प्रोजेक्ट आईड
 msgid "Invalid SQL URI (no database name specified)."
 msgstr "अवैध SQL URI (आंकड़ासंचय का नाम नहीं दिया गया)"
 
-#: src/planner-application.c:117
+#: libplanner/mrp-task.c:1016
+msgid ""
+"Could not add a predecessor relation, because the tasks are already related."
+msgstr "पूर्वाधिकार संबंध नहीं बना सके, क्योकि कार्यों में संबंध पहले से हैं।"
+
+#: libplanner/mrp-task-manager.c:1769
+msgid "Can not add a predecessor relation between a task and its ancestor."
+msgstr "एक कार्य और उसके उत्तराधिकारी के बीच पूर्वाधिकार संबंध नहीं बना सके।"
+
+#: libplanner/mrp-task-manager.c:1778 libplanner/mrp-task-manager.c:1786
+msgid "Can not add a predecessor, because it would result in a loop."
+msgstr "पूर्वाधिकारी नहीं जोड़  सकते क्योकि इससे पाश बन जाएगा ।"
+
+#: libplanner/mrp-task-manager.c:1821
+msgid "Can not move the task, since it would result in a loop."
+msgstr "कार्य स्थानांतरित नहीं  सकते क्योकि इससे पाश बन जाएगा ।"
+
+#: libplanner/mrp-xsl.c:96
+msgid "HTML export failed"
+msgstr ""
+
+#: src/planner-application.c:125
 msgid "Edit"
 msgstr "संपादन"
-
-#: src/planner-main-window.c:584
-msgid "Open a file"
-msgstr "एक फाइल खोलें"
-
-#. I18n: Translators, list your names here, newline separated if there
-#. * are more than one, to appear in the about box.
-#.
-#: src/planner-main-window.c:993 src/planner-main-window.c:1000
-msgid "translator_credits"
-msgstr "अनुवादक  : संजय खत्री (Sanjay Khatri)"
-
-#. "Copyright \xc2\xa9 2001-2002 CodeFactory AB",
-#: src/planner-main-window.c:997
-msgid "A Project Management application for the GNOME desktop"
-msgstr "ग्नोम डेस्कटॉप के लिए एक प्रोजेक्ट प्रबंधन अनुप्रयोग"
-
-#: src/planner-main-window.c:1007
-#, fuzzy
-msgid "The Planner Homepage"
-msgstr "MrProject का जालस्थल"
-
-#: src/planner-main-window.c:1083
-msgid "If you don't save, changes made the last minute will be discarded."
-msgstr "अगर आप संचित नहीं करेंगे तो आखरी समय में कियें गयें परिवर्तन छूट जाएँगें"
-
-#: src/planner-main-window.c:1088
-#, c-format
-msgid "If you don't save, changes made the last %d minutes will be discarded."
-msgstr "अगर आप संचित नहीं करेंगे तो आखरी %d मिनट में कियें गयें परिवर्तन छूट जाएँगें"
-
-#: src/planner-main-window.c:1093
-msgid "If you don't save, changes made the last hour will be discarded."
-msgstr "अगर आप संचित नहीं करेंगे तो आखरी घंटे में कियें गयें परिवर्तन छूट जाएँगें"
-
-#: src/planner-main-window.c:1098
-#, c-format
-msgid "If you don't save, changes made the last %d hours will be discarded."
-msgstr "अगर आप संचित नहीं करेंगे तो आखरी %d घंटे में कियें गयें परिवर्तन छूट जाएँगें"
-
-#: src/planner-main-window.c:1105
-#, c-format
-msgid "Save changes to document '%s' before closing?"
-msgstr "क्या दस्तावेज %s को बन्द करने से पहलें संचित कर लें ?"
-
-#: src/planner-main-window.c:1123
-msgid "C_lose without saving"
-msgstr "बिना संचय बन्द करें"
-
-#: src/planner-main-window.c:1125
-msgid "_Cancel"
-msgstr "निरस्त करें"
-
-#: src/planner-main-window.c:1232
-msgid "Save a file"
-msgstr "फाइल संचित करें"
-
-#: src/planner-main-window.c:1264 src/planner-html-plugin.c:146
-#, c-format
-msgid "File \"%s\" exists, do you want to overwrite it?"
-msgstr "फ़ाइल \"%s\" पहले से मौजूद है कया आप इस के ऊपर लिखना चाह्ते है"
-
-#: src/planner-main-window.c:1452
-#, fuzzy
-msgid ""
-"You have opened a file that was saved with an old version of Planner.\n"
-"\n"
-"When loading old files, all tasks will use the constraint 'Must Start On', "
-"since the old version did not fully support automatic rescheduling. To take "
-"advantage of this new feature, you should add predecessor relations between "
-"tasks that are dependant on each other.\n"
-"\n"
-"You can add a predecessor relation by clicking on the predecessor and "
-"dragging to the successor.\n"
-"\n"
-"After doing this, you can remove all constraints by selecting the menu item "
-"'Remove all constraints' in the 'Edit' menu."
-msgstr ""
-"खोली गई फाइल MrProject के पुराने संस्करण में सुरक्षित की गई हैं । \n"
-"\n"
-"पुराने संस्करण का फाइल लोड़ करते समय, सभी कार्य 'अवश्य आरंभ करें' प्रतिबंध का प्रयोग करेंगे, "
-"क्योकि पुराने संस्करण में पुनःयोजनालेख(rescheduling) ठीक से स्वचालित नहीं है। स्वचालित "
-"पुनःयोजनालेख का लाभ उठाने के लिए, आप को परस्पर आश्रित कार्यो का पूर्वाधिकार संबध "
-"निश्चित करें।\n"
-"\n"
-"पूर्वाधिकार संबंध स्थापित करने के लिए, पूर्वाधिकारी पर क्लिक करके उत्तराधिकारी तक खिचें। \n"
-"\n"
-"इसके बाद, आप सभी प्रतिबंधों को, 'संपादन' मेनु से 'सभी प्रतिबंध हटायें' का चुनाव करके, हटा "
-"सकतें हैं।"
-
-#: src/planner-main-window.c:1489 src/planner-gantt-row.c:656
-#: src/planner-gantt-row.c:658 src/planner-gantt-print.c:513
-#: src/planner-gantt-print.c:515
-msgid "Unnamed"
-msgstr "बेनाम"
-
-#: src/planner-main.c:61
-msgid "Create the initial window with the given geometry."
-msgstr "दी हुई ज्यामिति  से आरंभिक वातायन (window) बनायें।"
-
-#: src/planner-main.c:61
-msgid "GEOMETRY"
-msgstr "ज्यामिति"
-
-#: src/planner-main.c:98
-msgid "mrproject: --geometry cannot be used with more than one file."
-msgstr "mrproject :- ज्यामिति को को एक से अधिक फाइलों में प्रयोग नहीं कर सकतें।"
-
-#: src/planner-plugin-loader.c:40
-#, fuzzy, c-format
-msgid "Could not open plugin file '%s'\n"
-msgstr "दृश्य प्लगिन फाइल '%s' नहीं खोल सकें \n"
-
-#: src/planner-view-loader.c:40
-#, c-format
-msgid "Could not open view plugin file '%s'\n"
-msgstr "दृश्य प्लगिन फाइल '%s' नहीं खोल सकें \n"
 
 #: src/planner-cell-renderer-date.c:147
 msgid "Constraint type"
@@ -1122,6 +1015,26 @@ msgstr "निरस्त"
 #: src/planner-cell-renderer-date.c:187
 msgid "OK"
 msgstr "ओके"
+
+#: src/planner-cmd-manager.c:226
+#, c-format
+msgid "Undo '%s'"
+msgstr ""
+
+#: src/planner-cmd-manager.c:228
+#, fuzzy
+msgid "Undo"
+msgstr "अकृत करें (U)"
+
+#: src/planner-cmd-manager.c:238
+#, c-format
+msgid "Redo '%s'"
+msgstr ""
+
+#: src/planner-cmd-manager.c:240
+#, fuzzy
+msgid "Redo"
+msgstr "पुनः करें"
 
 #: src/planner-default-week-dialog.c:40
 msgid "Monday"
@@ -1159,194 +1072,6 @@ msgstr "उपयोक्तानुरूप कार्यकारी स�
 #: src/planner-default-week-dialog.c:277 src/planner-default-week-dialog.c:281
 msgid "%H:%M"
 msgstr "%H:%M"
-
-#: src/planner-group-dialog.c:387 src/planner-property-dialog.c:378
-#: src/planner-task-dialog.c:1311 src/planner-task-dialog.c:1397
-#: src/planner-task-view.c:227 src/planner-gantt-print.c:190
-#: src/planner-resource-view.c:966
-msgid "Name"
-msgstr "नाम"
-
-#: src/planner-group-dialog.c:393
-#, fuzzy
-msgid "Manager name"
-msgstr "प्रबंधक का फोन "
-
-#: src/planner-group-dialog.c:399
-msgid "Manager phone"
-msgstr "प्रबंधक का फोन "
-
-#: src/planner-group-dialog.c:405
-msgid "Manager email"
-msgstr "प्रबंधक का ई-मेल पता"
-
-#: src/planner-project-properties.c:146
-msgid "Select a calendar to use for this project:"
-msgstr "इस प्रोजेक्ट के लिए एक कैलेंडर का चयन करें:"
-
-#: src/planner-project-properties.c:606
-msgid "Property"
-msgstr "गुण"
-
-#: src/planner-project-properties.c:617 src/planner-property-dialog.c:431
-msgid "Value"
-msgstr "मान"
-
-#: src/planner-project-properties.c:993 src/planner-property-dialog.c:229
-msgid "The name of the custom property needs to start with a letter."
-msgstr "उपयोक्तानुरूप गुणों का नाम एक अक्षर से शुरू होना चाहिए।"
-
-#: src/planner-project-properties.c:1065 src/planner-property-dialog.c:300
-#, c-format
-msgid "Do you really want to remove the property '%s' from the project?"
-msgstr "क्या इस प्रोजेक्ट से गुण '%s' को वास्तव में हटाना चाहते हैं?"
-
-#: src/planner-project-properties.c:1194
-#, fuzzy
-msgid "Could not create properties dialog."
-msgstr "गुण संवादक(dialog) बनाने में असमर्थ"
-
-#: src/planner-property-dialog.c:397
-msgid "Label"
-msgstr "लेबल"
-
-#: src/planner-property-dialog.c:411 src/planner-task-dialog.c:1429
-#: src/planner-resource-view.c:987
-msgid "Type"
-msgstr "प्रकार"
-
-#: src/planner-print-dialog.c:49
-msgid "Print Project"
-msgstr "प्रोजेक्ट को छापें"
-
-#: src/planner-print-dialog.c:56
-msgid "Select views"
-msgstr "दृश्य का चयन करें"
-
-#: src/planner-print-dialog.c:74
-msgid "Select the views to print:"
-msgstr "छापने के लिए दृश्य चयन करें"
-
-#. Put "no group" at the top.
-#: src/planner-resource-dialog.c:248 src/planner-resource-input-dialog.c:96
-#: src/planner-resource-view.c:1375
-msgid "(None)"
-msgstr "(कुछ नहीं)"
-
-#: src/planner-resource-dialog.c:258 src/planner-resource-input-dialog.c:106
-#: src/planner-task-dialog.c:249
-msgid "(No name)"
-msgstr "(कोई नाम नहीं)"
-
-#. i18n: time stamp format for notes in task dialog, see strftime(3) for
-#. * a detailed description.
-#: src/planner-resource-dialog.c:728 src/planner-task-dialog.c:679
-msgid "%a %d %b %Y, %H:%M\n"
-msgstr "%a %d %b %Y, %H:%M\n"
-
-#: src/planner-resource-dialog.c:826
-msgid "None (use project default)"
-msgstr "कुछ नहीं (पूर्वःनिर्धारित प्रोजेक्ट का प्रयोग करें)"
-
-#: src/planner-resource-dialog.c:953 src/planner-resource-dialog.c:955
-msgid "Edit resource properties"
-msgstr "संसाधन गुण संपादित करें"
-
-#: src/planner-resource-dialog.c:1101 src/planner-task-view.c:230
-#: src/planner-gantt-print.c:198 src/planner-resource-view.c:629
-#: src/planner-resource-view.c:645 src/planner-resource-view.c:1187
-#, fuzzy
-msgid "Work"
-msgstr ""
-"\n"
-"कार्य"
-
-#: src/planner-resource-dialog.c:1102 src/planner-resource-view.c:632
-#: src/planner-resource-view.c:646 src/planner-resource-view.c:1188
-msgid "Material"
-msgstr "सामग्री"
-
-#: src/planner-predecessor-model.c:191 src/planner-task-dialog.c:1039
-msgid "FS"
-msgstr "सआ(FS)"
-
-#: src/planner-predecessor-model.c:194 src/planner-task-dialog.c:1040
-msgid "FF"
-msgstr "सस(FF)"
-
-#: src/planner-predecessor-model.c:197 src/planner-task-dialog.c:1041
-msgid "SS"
-msgstr "आआ(SS)"
-
-#: src/planner-predecessor-model.c:200 src/planner-task-dialog.c:1042
-msgid "SF"
-msgstr "आस(SF)"
-
-#: src/planner-task-dialog.c:745
-msgid "Finish to start (FS)"
-msgstr "समापन से आरंभ(सआ)"
-
-#: src/planner-task-dialog.c:746
-msgid "Finish to finish (FF)"
-msgstr "समापन से समापन(सस)"
-
-#: src/planner-task-dialog.c:747
-msgid "Start to start (SS)"
-msgstr "आरंभ से आरंभ(आआ)"
-
-#: src/planner-task-dialog.c:748
-msgid "Start to finish (SF)"
-msgstr "आरंभ से समापन(आस)"
-
-#: src/planner-task-dialog.c:798
-msgid "Can't add new predecessor. No task selected!"
-msgstr "पूर्वाधिकारी नहीं जोड़  सकते, कोई कार्य चयनित नहीं हैं!"
-
-#: src/planner-task-dialog.c:1330
-msgid "Assigned"
-msgstr "नियुक्त किया"
-
-#: src/planner-task-dialog.c:1347
-msgid "Units"
-msgstr "इकाईयां"
-
-#: src/planner-task-dialog.c:1451
-msgid "Lag"
-msgstr "चरण"
-
-#: src/planner-task-dialog.c:1584 src/planner-task-dialog.c:1586
-msgid "Edit task properties"
-msgstr "कार्य गुण संपादित करें"
-
-#: src/planner-html-plugin.c:133
-#, c-format
-msgid ""
-"\"%s\" is a directory.\n"
-"Enter a filename and try again."
-msgstr ""
-"\"%s\"' एक निर्देशिका हैं । \n"
-"एक फाइल नाम प्रविष्टि करके दुवारा कोशिश करें।"
-
-#: src/planner-sql-plugin.c:269
-#, fuzzy, c-format
-msgid ""
-"Connection to database '%s' failed:\n"
-"%s"
-msgstr ""
-"आंकड़ासंचय '%s' से संयोजन में असफल: \n"
-"%s"
-
-#: src/planner-sql-plugin.c:318
-msgid "Project"
-msgstr "प्रोजेक्ट"
-
-#: src/planner-sql-plugin.c:466
-msgid "Open from Database"
-msgstr "आंकड़ासंचय से खोलें"
-
-#: src/planner-sql-plugin.c:573
-msgid "Save to Database"
-msgstr "आंकड़ासंचय में संग्रहित करें"
 
 #: src/planner-format.c:141
 #, c-format
@@ -1395,6 +1120,28 @@ msgstr "%Y %b %d"
 msgid "Project start"
 msgstr "प्रोजेक्ट आरंभ"
 
+#: src/planner-gantt-print.c:190 src/planner-group-dialog.c:805
+#: src/planner-property-dialog.c:378 src/planner-resource-view.c:1159
+#: src/planner-task-dialog.c:1311 src/planner-task-dialog.c:1397
+#: src/planner-task-view.c:265
+msgid "Name"
+msgstr "नाम"
+
+#: src/planner-gantt-print.c:198 src/planner-resource-dialog.c:1101
+#: src/planner-resource-view.c:682 src/planner-resource-view.c:698
+#: src/planner-resource-view.c:1528 src/planner-task-view.c:268
+#, fuzzy
+msgid "Work"
+msgstr ""
+"\n"
+"कार्य"
+
+#: src/planner-gantt-print.c:513 src/planner-gantt-print.c:515
+#: src/planner-gantt-row.c:656 src/planner-gantt-row.c:658
+#: src/planner-window.c:1648
+msgid "Unnamed"
+msgstr "बेनाम"
+
 #: src/planner-gantt-row.c:1841 src/planner-gantt-row.c:1844
 msgid "No name"
 msgstr "कोई नाम नहीं"
@@ -1409,15 +1156,15 @@ msgstr "कार्य '%s' को '%s' का पूर्वाधिका�
 msgid "Change work to %s"
 msgstr "कार्य को '%s' में बदलें"
 
-#: src/planner-gantt-view.c:273
+#: src/planner-gantt-view.c:288
 msgid "Gantt Chart"
 msgstr "गैंट चार्ट"
 
-#: src/planner-gantt-view.c:281
+#: src/planner-gantt-view.c:296
 msgid "_Gantt Chart"
 msgstr "गैंट चार्ट"
 
-#: src/planner-gantt-view.c:470
+#: src/planner-gantt-view.c:493
 msgid ""
 "\n"
 "Name"
@@ -1426,13 +1173,243 @@ msgstr ""
 "नाम"
 
 #. COL_START,    _("\nStart"),
-#: src/planner-gantt-view.c:472
+#: src/planner-gantt-view.c:495
 msgid ""
 "\n"
 "Work"
 msgstr ""
 "\n"
 "कार्य"
+
+#: src/planner-group-dialog.c:302
+#, fuzzy
+msgid "Insert group"
+msgstr "साधन प्रविष्ट करें"
+
+#: src/planner-group-dialog.c:425
+#, fuzzy
+msgid "Remove group"
+msgstr "/साधन हटायें"
+
+#: src/planner-group-dialog.c:517
+#, fuzzy
+msgid "Default group"
+msgstr "पूर्वःनिर्धारित"
+
+#: src/planner-group-dialog.c:633
+#, fuzzy
+msgid "Edit group property"
+msgstr "संसाधन गुण संपादित करें"
+
+#: src/planner-group-dialog.c:811
+#, fuzzy
+msgid "Manager name"
+msgstr "प्रबंधक का फोन "
+
+#: src/planner-group-dialog.c:817
+msgid "Manager phone"
+msgstr "प्रबंधक का फोन "
+
+#: src/planner-group-dialog.c:823
+msgid "Manager email"
+msgstr "प्रबंधक का ई-मेल पता"
+
+#: src/planner-html-plugin.c:138
+#, c-format
+msgid ""
+"\"%s\" is a directory.\n"
+"Enter a filename and try again."
+msgstr ""
+"\"%s\"' एक निर्देशिका हैं । \n"
+"एक फाइल नाम प्रविष्टि करके दुवारा कोशिश करें।"
+
+#: src/planner-html-plugin.c:148 src/planner-window.c:1416
+#, c-format
+msgid "File \"%s\" exists, do you want to overwrite it?"
+msgstr "फ़ाइल \"%s\" पहले से मौजूद है कया आप इस के ऊपर लिखना चाह्ते है"
+
+#: src/planner-main.c:50
+msgid "Create the initial window with the given geometry."
+msgstr "दी हुई ज्यामिति  से आरंभिक वातायन (window) बनायें।"
+
+#: src/planner-main.c:50
+msgid "GEOMETRY"
+msgstr "ज्यामिति"
+
+#: src/planner-main.c:76
+#, fuzzy
+msgid "planner: --geometry cannot be used with more than one file."
+msgstr "mrproject :- ज्यामिति को को एक से अधिक फाइलों में प्रयोग नहीं कर सकतें।"
+
+#: src/planner-plugin-loader.c:40
+#, fuzzy, c-format
+msgid "Could not open plugin file '%s'\n"
+msgstr "दृश्य प्लगिन फाइल '%s' नहीं खोल सकें \n"
+
+#: src/planner-predecessor-model.c:191 src/planner-task-dialog.c:1039
+msgid "FS"
+msgstr "सआ(FS)"
+
+#: src/planner-predecessor-model.c:194 src/planner-task-dialog.c:1040
+msgid "FF"
+msgstr "सस(FF)"
+
+#: src/planner-predecessor-model.c:197 src/planner-task-dialog.c:1041
+msgid "SS"
+msgstr "आआ(SS)"
+
+#: src/planner-predecessor-model.c:200 src/planner-task-dialog.c:1042
+msgid "SF"
+msgstr "आस(SF)"
+
+#: src/planner-print-dialog.c:112
+msgid "Print Project"
+msgstr "प्रोजेक्ट को छापें"
+
+#: src/planner-print-dialog.c:119
+msgid "Select views"
+msgstr "दृश्य का चयन करें"
+
+#: src/planner-print-dialog.c:143
+msgid "Select the views to print:"
+msgstr "छापने के लिए दृश्य चयन करें"
+
+#: src/planner-project-properties.c:308
+msgid "Select a calendar to use for this project:"
+msgstr "इस प्रोजेक्ट के लिए एक कैलेंडर का चयन करें:"
+
+#: src/planner-project-properties.c:403
+#, fuzzy
+msgid "Edit Project Name"
+msgstr "प्रोजेक्ट चरणों को संपादित करें"
+
+#: src/planner-project-properties.c:439
+#, fuzzy
+msgid "Edit Organization"
+msgstr "संस्था:"
+
+#: src/planner-project-properties.c:475
+#, fuzzy
+msgid "Edit Manager"
+msgstr "प्रबन्धक"
+
+#: src/planner-project-properties.c:546
+#, fuzzy
+msgid "Edit Project Start"
+msgstr "प्रोजेक्ट आरंभ"
+
+#: src/planner-project-properties.c:615
+#, fuzzy
+msgid "Edit Project Phase"
+msgstr "प्रोजेक्ट चरणों को संपादित करें"
+
+#: src/planner-project-properties.c:748
+msgid "Property"
+msgstr "गुण"
+
+#: src/planner-project-properties.c:759 src/planner-property-dialog.c:431
+msgid "Value"
+msgstr "मान"
+
+#: src/planner-project-properties.c:1130 src/planner-property-dialog.c:229
+msgid "The name of the custom property needs to start with a letter."
+msgstr "उपयोक्तानुरूप गुणों का नाम एक अक्षर से शुरू होना चाहिए।"
+
+#: src/planner-project-properties.c:1202 src/planner-property-dialog.c:300
+#, c-format
+msgid "Do you really want to remove the property '%s' from the project?"
+msgstr "क्या इस प्रोजेक्ट से गुण '%s' को वास्तव में हटाना चाहते हैं?"
+
+#: src/planner-project-properties.c:1344
+#, fuzzy
+msgid "Could not create properties dialog."
+msgstr "गुण संवादक(dialog) बनाने में असमर्थ"
+
+#: src/planner-property-dialog.c:397
+msgid "Label"
+msgstr "लेबल"
+
+#: src/planner-property-dialog.c:411 src/planner-resource-view.c:1180
+#: src/planner-task-dialog.c:1429
+msgid "Type"
+msgstr "प्रकार"
+
+#. Put "no group" at the top.
+#: src/planner-resource-dialog.c:248 src/planner-resource-input-dialog.c:96
+#: src/planner-resource-view.c:1739
+msgid "(None)"
+msgstr "(कुछ नहीं)"
+
+#: src/planner-resource-dialog.c:258 src/planner-resource-input-dialog.c:106
+#: src/planner-task-dialog.c:249
+msgid "(No name)"
+msgstr "(कोई नाम नहीं)"
+
+#. i18n: time stamp format for notes in task dialog, see strftime(3) for
+#. * a detailed description.
+#: src/planner-resource-dialog.c:728 src/planner-task-dialog.c:679
+msgid "%a %d %b %Y, %H:%M\n"
+msgstr "%a %d %b %Y, %H:%M\n"
+
+#: src/planner-resource-dialog.c:826
+msgid "None (use project default)"
+msgstr "कुछ नहीं (पूर्वःनिर्धारित प्रोजेक्ट का प्रयोग करें)"
+
+#: src/planner-resource-dialog.c:953 src/planner-resource-dialog.c:955
+msgid "Edit resource properties"
+msgstr "संसाधन गुण संपादित करें"
+
+#: src/planner-resource-dialog.c:1102 src/planner-resource-view.c:685
+#: src/planner-resource-view.c:699 src/planner-resource-view.c:1529
+msgid "Material"
+msgstr "सामग्री"
+
+#: src/planner-resource-view.c:251
+msgid "/_Insert resource"
+msgstr "/साधन प्रविष्ट करें"
+
+#: src/planner-resource-view.c:252
+msgid "/_Remove resource"
+msgstr "/साधन हटायें"
+
+#: src/planner-resource-view.c:253
+msgid "/_Edit resource..."
+msgstr "/साधन संपादित करें"
+
+#: src/planner-resource-view.c:392
+msgid "_Resources"
+msgstr "साधन"
+
+#: src/planner-resource-view.c:789
+msgid "Insert resource"
+msgstr "साधन प्रविष्ट करें"
+
+#: src/planner-resource-view.c:941
+#, fuzzy
+msgid "Remove resource"
+msgstr "/साधन हटायें"
+
+#: src/planner-resource-view.c:1042
+msgid "Edit custom resource properties"
+msgstr "उपयोक्तानुरूप साधन गुणों का संपादन"
+
+#: src/planner-resource-view.c:1204
+msgid "Group"
+msgstr "समूह"
+
+#: src/planner-resource-view.c:1233
+msgid "Email"
+msgstr "ई-मेल पता"
+
+#: src/planner-resource-view.c:1298
+#, fuzzy
+msgid "Edit resource property"
+msgstr "संसाधन गुण संपादित करें"
+
+#: src/planner-resource-view.c:1360
+#, fuzzy
+msgid "Edit resource custom property"
+msgstr "संसाधन गुण संपादित करें"
 
 #. i18n: Short "Week", preferably 2 letters.
 #: src/planner-scale-utils.c:325
@@ -1481,149 +1458,261 @@ msgstr "H%d"
 msgid "%04d, H%d"
 msgstr "%04d, H%d"
 
-#: src/planner-task-tree.c:184
+#: src/planner-sql-plugin.c:367
+msgid "Project"
+msgstr "प्रोजेक्ट"
+
+#: src/planner-sql-plugin.c:537
+msgid "Open from Database"
+msgstr "आंकड़ासंचय से खोलें"
+
+#: src/planner-sql-plugin.c:644
+msgid "Save to Database"
+msgstr "आंकड़ासंचय में संग्रहित करें"
+
+#: src/planner-task-dialog.c:745
+msgid "Finish to start (FS)"
+msgstr "समापन से आरंभ(सआ)"
+
+#: src/planner-task-dialog.c:746
+msgid "Finish to finish (FF)"
+msgstr "समापन से समापन(सस)"
+
+#: src/planner-task-dialog.c:747
+msgid "Start to start (SS)"
+msgstr "आरंभ से आरंभ(आआ)"
+
+#: src/planner-task-dialog.c:748
+msgid "Start to finish (SF)"
+msgstr "आरंभ से समापन(आस)"
+
+#: src/planner-task-dialog.c:798
+msgid "Can't add new predecessor. No task selected!"
+msgstr "पूर्वाधिकारी नहीं जोड़  सकते, कोई कार्य चयनित नहीं हैं!"
+
+#: src/planner-task-dialog.c:1330
+msgid "Assigned"
+msgstr "नियुक्त किया"
+
+#: src/planner-task-dialog.c:1347
+msgid "Units"
+msgstr "इकाईयां"
+
+#: src/planner-task-dialog.c:1451
+msgid "Lag"
+msgstr "चरण"
+
+#: src/planner-task-dialog.c:1584 src/planner-task-dialog.c:1586
+msgid "Edit task properties"
+msgstr "कार्य गुण संपादित करें"
+
+#: src/planner-task-tree.c:189
 msgid "/_Insert task"
 msgstr "/कार्य प्रविष्ट करें"
 
-#: src/planner-task-tree.c:185
+#: src/planner-task-tree.c:192
 msgid "/_Insert subtask"
 msgstr "/उपकार्य प्रविष्ट करें"
 
-#: src/planner-task-tree.c:186
+#: src/planner-task-tree.c:195
 msgid "/_Remove task"
 msgstr "कार्य हटायें"
 
-#: src/planner-task-tree.c:188
+#: src/planner-task-tree.c:200
 msgid "/_Unlink task"
 msgstr "/असंबंधित कार्य"
 
-#: src/planner-task-tree.c:190
+#: src/planner-task-tree.c:206
 msgid "/_Edit task..."
 msgstr "कार्य संपादित करें"
 
-#: src/planner-task-tree.c:2112
+#: src/planner-task-tree.c:297
+msgid "Insert task"
+msgstr "कार्य प्रविष्ट करें"
+
+#: src/planner-task-tree.c:373
+#, fuzzy
+msgid "Edit task property"
+msgstr "कार्य गुण संपादित करें"
+
+#: src/planner-task-tree.c:2471
 msgid "mon"
 msgstr "महीना"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:2113
+#: src/planner-task-tree.c:2472
 msgid "month"
 msgstr "महीना"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:2114
+#: src/planner-task-tree.c:2473
 msgid "months"
 msgstr "महीनें"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:2115
+#: src/planner-task-tree.c:2474
 msgid "w"
 msgstr "हफ्ते"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:2116
+#: src/planner-task-tree.c:2475
 msgid "week"
 msgstr "हफ्ता"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:2117
+#: src/planner-task-tree.c:2476
 msgid "weeks"
 msgstr "हफ्ते"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:2118
+#: src/planner-task-tree.c:2477
 msgid "d"
 msgstr "दिन"
 
 #. day unit variant accepted in input
-#: src/planner-task-tree.c:2119
+#: src/planner-task-tree.c:2478
 msgid "day"
 msgstr "दिन"
 
 #. day unit variant accepted in input
-#: src/planner-task-tree.c:2121
+#: src/planner-task-tree.c:2480
 msgid "h"
 msgstr "घंटे"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:2122
+#: src/planner-task-tree.c:2481
 msgid "hour"
 msgstr "घंटा"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:2123
+#: src/planner-task-tree.c:2482
 msgid "hours"
 msgstr "घंटे"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:2124
+#: src/planner-task-tree.c:2483
 msgid "min"
 msgstr "मिनट"
 
 #. minute unit variant accepted in input
-#: src/planner-task-tree.c:2125
+#: src/planner-task-tree.c:2484
 msgid "minute"
 msgstr "मिनट"
 
 #. minute unit variant accepted in input
-#: src/planner-task-tree.c:2126
+#: src/planner-task-tree.c:2485
 msgid "minutes"
 msgstr "मिनट"
 
-#: src/planner-task-view.c:173
+#: src/planner-task-view.c:203
 msgid "Tasks"
 msgstr "कार्य"
 
-#: src/planner-task-view.c:181
+#: src/planner-task-view.c:211
 msgid "_Tasks"
 msgstr "कार्य"
 
-#: src/planner-task-view.c:228
+#: src/planner-task-view.c:266
 msgid "Start"
 msgstr "प्रारंभ"
 
-#: src/planner-task-view.c:229
+#: src/planner-task-view.c:267
 msgid "Finish"
 msgstr "समापन"
 
-#: src/planner-task-view.c:231
+#: src/planner-task-view.c:269
 msgid "Slack"
 msgstr "मंदा"
 
-#: src/planner-task-view.c:438
+#: src/planner-task-view.c:488
 msgid "Edit custom task properties"
 msgstr "उपयोक्तानुरूप कार्य गुणों का संपादन"
 
-#: src/planner-resource-view.c:248
-msgid "/_Insert resource"
-msgstr "/साधन प्रविष्ट करें"
+#: src/planner-view-loader.c:41
+#, c-format
+msgid "Could not open view plugin file '%s'\n"
+msgstr "दृश्य प्लगिन फाइल '%s' नहीं खोल सकें \n"
 
-#: src/planner-resource-view.c:249
-msgid "/_Remove resource"
-msgstr "/साधन हटायें"
+#: src/planner-window.c:639
+msgid "Open a file"
+msgstr "एक फाइल खोलें"
 
-#: src/planner-resource-view.c:250
-msgid "/_Edit resource..."
-msgstr "/साधन संपादित करें"
+#. I18n: Translators, list your names here, newline separated if there
+#. * are more than one, to appear in the about box.
+#.
+#: src/planner-window.c:1085 src/planner-window.c:1092
+msgid "translator_credits"
+msgstr "अनुवादक  : संजय खत्री (Sanjay Khatri)"
 
-#: src/planner-resource-view.c:350
-msgid "_Resources"
-msgstr "साधन"
+#. "Copyright \xc2\xa9"
+#: src/planner-window.c:1089
+msgid "A Project Management application for the GNOME desktop"
+msgstr "ग्नोम डेस्कटॉप के लिए एक प्रोजेक्ट प्रबंधन अनुप्रयोग"
 
-#: src/planner-resource-view.c:849
-msgid "Edit custom resource properties"
-msgstr "उपयोक्तानुरूप साधन गुणों का संपादन"
+#: src/planner-window.c:1099
+#, fuzzy
+msgid "The Planner Homepage"
+msgstr "MrProject का जालस्थल"
 
-#: src/planner-resource-view.c:1011
-msgid "Group"
-msgstr "समूह"
+#: src/planner-window.c:1227
+msgid "If you don't save, changes made the last minute will be discarded."
+msgstr "अगर आप संचित नहीं करेंगे तो आखरी समय में कियें गयें परिवर्तन छूट जाएँगें"
 
-#: src/planner-resource-view.c:1040
-msgid "Email"
-msgstr "ई-मेल पता"
+#: src/planner-window.c:1232
+#, c-format
+msgid "If you don't save, changes made the last %d minutes will be discarded."
+msgstr "अगर आप संचित नहीं करेंगे तो आखरी %d मिनट में कियें गयें परिवर्तन छूट जाएँगें"
 
-#~ msgid "Contribute to MrProject"
-#~ msgstr "MrProject में योगदान दें"
+#: src/planner-window.c:1237
+msgid "If you don't save, changes made the last hour will be discarded."
+msgstr "अगर आप संचित नहीं करेंगे तो आखरी घंटे में कियें गयें परिवर्तन छूट जाएँगें"
 
-#~ msgid "MrProject Project Management Tool"
-#~ msgstr "MrProject प्रोजेक्ट प्रबधंन उपकरण"
+#: src/planner-window.c:1242
+#, c-format
+msgid "If you don't save, changes made the last %d hours will be discarded."
+msgstr "अगर आप संचित नहीं करेंगे तो आखरी %d घंटे में कियें गयें परिवर्तन छूट जाएँगें"
+
+#: src/planner-window.c:1249
+#, c-format
+msgid "Save changes to document '%s' before closing?"
+msgstr "क्या दस्तावेज %s को बन्द करने से पहलें संचित कर लें ?"
+
+#: src/planner-window.c:1267
+msgid "C_lose without saving"
+msgstr "बिना संचय बन्द करें"
+
+#: src/planner-window.c:1269
+msgid "_Cancel"
+msgstr "निरस्त करें"
+
+#: src/planner-window.c:1380
+msgid "Save a file"
+msgstr "फाइल संचित करें"
+
+#: src/planner-window.c:1611
+#, fuzzy
+msgid ""
+"You have opened a file that was saved with an old version of Planner.\n"
+"\n"
+"When loading old files, all tasks will use the constraint 'Must Start On', "
+"since the old version did not fully support automatic rescheduling. To take "
+"advantage of this new feature, you should add predecessor relations between "
+"tasks that are dependant on each other.\n"
+"\n"
+"You can add a predecessor relation by clicking on the predecessor and "
+"dragging to the successor.\n"
+"\n"
+"After doing this, you can remove all constraints by selecting the menu item "
+"'Remove all constraints' in the 'Edit' menu."
+msgstr ""
+"खोली गई फाइल MrProject के पुराने संस्करण में सुरक्षित की गई हैं । \n"
+"\n"
+"पुराने संस्करण का फाइल लोड़ करते समय, सभी कार्य 'अवश्य आरंभ करें' प्रतिबंध का प्रयोग करेंगे, "
+"क्योकि पुराने संस्करण में पुनःयोजनालेख(rescheduling) ठीक से स्वचालित नहीं है। स्वचालित "
+"पुनःयोजनालेख का लाभ उठाने के लिए, आप को परस्पर आश्रित कार्यो का पूर्वाधिकार संबध "
+"निश्चित करें।\n"
+"\n"
+"पूर्वाधिकार संबंध स्थापित करने के लिए, पूर्वाधिकारी पर क्लिक करके उत्तराधिकारी तक खिचें। \n"
+"\n"
+"इसके बाद, आप सभी प्रतिबंधों को, 'संपादन' मेनु से 'सभी प्रतिबंध हटायें' का चुनाव करके, हटा "
+"सकतें हैं।"
