@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: planner\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-10-05 20:19+0200\n"
+"POT-Creation-Date: 2004-10-14 14:32+0200\n"
 "PO-Revision-Date: 2004-07-04 16:55+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -20,8 +20,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8-bit\n"
 
 #: data/glade/add-predecessor.glade.h:1 data/glade/calendar-dialog.glade.h:4
-#: data/glade/eds.glade.h:1 data/glade/html-output.glade.h:2
-#: data/glade/new-property.glade.h:1 data/glade/project-properties.glade.h:1
+#: data/glade/eds.glade.h:1 data/glade/new-property.glade.h:1
+#: data/glade/project-properties.glade.h:1
 #: data/glade/resource-dialog.glade.h:1
 #: data/glade/resource-input-dialog.glade.h:1 data/glade/sql.glade.h:1
 #: data/glade/task-dialog.glade.h:4 data/glade/task-input-dialog.glade.h:1
@@ -213,23 +213,23 @@ msgstr "dialog1"
 msgid "Group Editor"
 msgstr "Gruppredigerare"
 
-#: data/glade/html-output.glade.h:3
+#: data/glade/html-output.glade.h:2
 msgid "<b>Save to file</b>"
 msgstr "<b>Spara till fil</b>"
 
-#: data/glade/html-output.glade.h:4
+#: data/glade/html-output.glade.h:3
 msgid "Export to HTML"
 msgstr "Exportera till HTML"
 
-#: data/glade/html-output.glade.h:5
+#: data/glade/html-output.glade.h:4
 msgid "Local file:"
 msgstr "Lokal fil:"
 
-#: data/glade/html-output.glade.h:6
+#: data/glade/html-output.glade.h:5
 msgid "Save to HTML File"
 msgstr "Spara till HTML-fil"
 
-#: data/glade/html-output.glade.h:7
+#: data/glade/html-output.glade.h:6
 msgid "Web location:"
 msgstr "Webbplats:"
 
@@ -400,7 +400,7 @@ msgstr "_Utförd:"
 msgid "Predecessors"
 msgstr "Föregångare"
 
-#: data/glade/task-dialog.glade.h:9 src/planner-resource-view.c:429
+#: data/glade/task-dialog.glade.h:9 src/planner-resource-view.c:431
 msgid "Resources"
 msgstr "Resurser"
 
@@ -429,7 +429,7 @@ msgid "_Work:"
 msgstr "_Arbete:"
 
 #. day unit variant accepted in input
-#: data/glade/task-dialog.glade.h:17 src/planner-task-tree.c:3327
+#: data/glade/task-dialog.glade.h:17 src/planner-task-tree.c:3328
 msgid "days"
 msgstr "dagar"
 
@@ -486,8 +486,8 @@ msgid "Use day from base calendar"
 msgstr "Använd dag från baskalender"
 
 #: libplanner/mrp-file-module.c:115
-msgid "This format is does support reading"
-msgstr "Detta format stödjer bara läsning"
+msgid "This format does not support reading"
+msgstr "Detta format stödjer inte läsning"
 
 #: libplanner/mrp-parser.c:1062 libplanner/mrp-parser.c:1157
 msgid "Could not create XML tree"
@@ -552,8 +552,8 @@ msgstr "Datum"
 msgid "Duration"
 msgstr "Varaktighet"
 
-#: libplanner/mrp-property.c:377 src/planner-resource-view.c:1285
-#: src/planner-task-view.c:280
+#: libplanner/mrp-property.c:377 src/planner-resource-view.c:1287
+#: src/planner-task-view.c:283
 msgid "Cost"
 msgstr "Kostnad"
 
@@ -594,7 +594,7 @@ msgstr ""
 "Projektet \"%s\" har ändrats av användaren \"%s\" sedan du öppnade det. Vill "
 "du spara ändå?"
 
-#: libplanner/mrp-sql.c:3622 src/planner-sql-plugin.c:664
+#: libplanner/mrp-sql.c:3622 src/planner-sql-plugin.c:663
 #, c-format
 msgid "Connection to database '%s' failed."
 msgstr "Anslutning till databasen \"%s\" misslyckades."
@@ -629,11 +629,11 @@ msgid "Cannot move the task, because it would result in a loop."
 msgstr ""
 "Kan inte flytta aktiviteten, eftersom det skulle resultera i en slinga."
 
-#: libplanner/mrp-xsl.c:103
+#: libplanner/mrp-xsl.c:106
 msgid "Export to HTML failed"
 msgstr "Export till HTML misslyckades"
 
-#: libplanner/mrp-xsl.c:167
+#: libplanner/mrp-xsl.c:172
 msgid "Export to Planner pre-0.12 format failed"
 msgstr "Export till Planner-format tidigare än 0.12 misslyckades"
 
@@ -796,13 +796,13 @@ msgstr "Importera resurser från Evolution dataserver"
 
 #: src/planner-eds-plugin.c:388 src/planner-gantt-print.c:190
 #: src/planner-group-dialog.c:813 src/planner-property-dialog.c:481
-#: src/planner-resource-view.c:1168 src/planner-task-dialog.c:2536
-#: src/planner-task-dialog.c:2625 src/planner-task-view.c:275
+#: src/planner-resource-view.c:1170 src/planner-task-dialog.c:2536
+#: src/planner-task-dialog.c:2625 src/planner-task-view.c:278
 #: src/planner-ttable-print.c:108
 msgid "Name"
 msgstr "Namn"
 
-#: src/planner-eds-plugin.c:408 src/planner-resource-view.c:1263
+#: src/planner-eds-plugin.c:408 src/planner-resource-view.c:1265
 msgid "Email"
 msgstr "E-post"
 
@@ -882,13 +882,14 @@ msgid "Project start"
 msgstr "Projektstart"
 
 #: src/planner-gantt-print.c:198 src/planner-resource-dialog.c:1869
-#: src/planner-resource-view.c:757 src/planner-resource-view.c:773
-#: src/planner-resource-view.c:1696 src/planner-task-view.c:278
+#: src/planner-resource-view.c:759 src/planner-resource-view.c:775
+#: src/planner-resource-view.c:1698 src/planner-task-view.c:281
 msgid "Work"
 msgstr "Arbete"
 
 #: src/planner-gantt-print.c:542 src/planner-gantt-row.c:690
-#: src/planner-task-tree.c:1514 src/planner-window.c:1660
+#: src/planner-html-plugin.c:130 src/planner-task-tree.c:1512
+#: src/planner-window.c:1660
 msgid "Unnamed"
 msgstr "Namnlös"
 
@@ -907,7 +908,7 @@ msgid "Change work to %s"
 msgstr "Ändra arbete till %s"
 
 #: src/planner-gantt-row.c:2392 src/planner-task-dialog.c:449
-#: src/planner-task-tree.c:257 src/planner-task-tree.c:936
+#: src/planner-task-tree.c:257 src/planner-task-tree.c:934
 msgid "Edit task property"
 msgstr "Redigera aktivitetsegenskap"
 
@@ -1036,11 +1037,11 @@ msgstr "Test"
 msgid "_Highlight Critical Tasks"
 msgstr "_Visa kritiska aktiviteter"
 
-#: src/planner-gantt-view.c:294
+#: src/planner-gantt-view.c:298
 msgid "Gantt Chart"
 msgstr "Ganttschema"
 
-#: src/planner-gantt-view.c:302
+#: src/planner-gantt-view.c:306
 msgid "_Gantt Chart"
 msgstr "_Ganttschema"
 
@@ -1048,7 +1049,7 @@ msgstr "_Ganttschema"
 #. * project management term. You might want to leave it
 #. * untranslated unless there is a localized term for it.
 #.
-#: src/planner-gantt-view.c:503
+#: src/planner-gantt-view.c:507
 msgid ""
 "\n"
 "WBS"
@@ -1056,7 +1057,7 @@ msgstr ""
 "\n"
 "WBS"
 
-#: src/planner-gantt-view.c:504 src/planner-ttable-tree.c:343
+#: src/planner-gantt-view.c:508 src/planner-ttable-tree.c:343
 msgid ""
 "\n"
 "Name"
@@ -1065,7 +1066,7 @@ msgstr ""
 "Namn"
 
 #. COL_START,    _("\nStart"),
-#: src/planner-gantt-view.c:506
+#: src/planner-gantt-view.c:510
 msgid ""
 "\n"
 "Work"
@@ -1101,15 +1102,15 @@ msgstr "Ledares tel"
 msgid "Manager email"
 msgstr "Ledares e-post"
 
-#: src/planner-html-plugin.c:67
+#: src/planner-html-plugin.c:69
 msgid "HTML"
 msgstr "HTML"
 
-#: src/planner-html-plugin.c:68
+#: src/planner-html-plugin.c:70
 msgid "Export project to HTML"
 msgstr "Exportera projektet till HTML"
 
-#: src/planner-html-plugin.c:138
+#: src/planner-html-plugin.c:178
 #, c-format
 msgid ""
 "\"%s\" is a directory.\n"
@@ -1118,7 +1119,7 @@ msgstr ""
 "\"%s\" är en katalog.\n"
 "Ange ett filnamn och försök igen."
 
-#: src/planner-html-plugin.c:148 src/planner-window.c:1417
+#: src/planner-html-plugin.c:188 src/planner-window.c:1417
 #: src/planner-xml-planner-plugin.c:125
 #, c-format
 msgid "File \"%s\" exists, do you want to overwrite it?"
@@ -1239,7 +1240,7 @@ msgstr "Redigera projektegenskapsvärde"
 msgid "Label"
 msgstr "Etikett"
 
-#: src/planner-property-dialog.c:510 src/planner-resource-view.c:1210
+#: src/planner-property-dialog.c:510 src/planner-resource-view.c:1212
 #: src/planner-task-dialog.c:2657
 msgid "Type"
 msgstr "Typ"
@@ -1262,7 +1263,7 @@ msgstr "Infoga resurs"
 
 #. Put "no group" at the top.
 #: src/planner-resource-dialog.c:325 src/planner-resource-input-dialog.c:99
-#: src/planner-resource-view.c:1907
+#: src/planner-resource-view.c:1909
 msgid "(None)"
 msgstr "(Ingen)"
 
@@ -1284,7 +1285,7 @@ msgid "Edit resource cost"
 msgstr "Redigera resurskostnad"
 
 #: src/planner-resource-dialog.c:731 src/planner-resource-dialog.c:772
-#: src/planner-resource-view.c:1367 src/planner-resource-view.c:1448
+#: src/planner-resource-view.c:1369 src/planner-resource-view.c:1450
 msgid "Edit resource property"
 msgstr "Redigera resursegenskap"
 
@@ -1302,8 +1303,8 @@ msgstr "Ingen (använd projektstandard)"
 msgid "Edit resource properties"
 msgstr "Redigera resursegenskaper"
 
-#: src/planner-resource-dialog.c:1870 src/planner-resource-view.c:760
-#: src/planner-resource-view.c:774 src/planner-resource-view.c:1697
+#: src/planner-resource-dialog.c:1870 src/planner-resource-view.c:762
+#: src/planner-resource-view.c:776 src/planner-resource-view.c:1699
 msgid "Material"
 msgstr "Material"
 
@@ -1355,23 +1356,23 @@ msgstr "/_Ta bort resurs"
 msgid "/_Edit resource..."
 msgstr "/_Redigera resurs..."
 
-#: src/planner-resource-view.c:437
+#: src/planner-resource-view.c:439
 msgid "_Resources"
 msgstr "_Resurser"
 
-#: src/planner-resource-view.c:950
+#: src/planner-resource-view.c:952
 msgid "Remove resource"
 msgstr "Ta bort resurs"
 
-#: src/planner-resource-view.c:1050
+#: src/planner-resource-view.c:1052
 msgid "Edit custom resource properties"
 msgstr "Redigera egenskaper för egen resurs"
 
-#: src/planner-resource-view.c:1189
+#: src/planner-resource-view.c:1191
 msgid "Short name"
 msgstr "Kort namn"
 
-#: src/planner-resource-view.c:1234
+#: src/planner-resource-view.c:1236
 msgid "Group"
 msgstr "Grupp"
 
@@ -1392,31 +1393,31 @@ msgstr "Vecka %d"
 msgid "Week %d, %d"
 msgstr "Vecka %d, %d"
 
-#. i18n: Short "Quarter", preferrably 1 letter.
+#. i18n: Short "Quarter", preferably 1 letter.
 #: src/planner-scale-utils.c:365
 #, c-format
 msgid "Q%d"
 msgstr "K%d"
 
-#. i18n: Short "Quarter", preferrably 2-3 letters.
+#. i18n: Short "Quarter", preferably 2-3 letters.
 #: src/planner-scale-utils.c:369
 #, c-format
 msgid "Qtr %d"
 msgstr "Kv %d"
 
-#. i18n: Year, short "Quarter", preferrably 2-3 letters.
+#. i18n: Year, short "Quarter", preferably 2-3 letters.
 #: src/planner-scale-utils.c:373
 #, c-format
 msgid "%d, Qtr %d"
 msgstr "%d, kv %d"
 
-#. i18n: Short "Half year", prefferably 1 letter.
+#. i18n: Short "Half year", preferably 1 letter.
 #: src/planner-scale-utils.c:386
 #, c-format
 msgid "H%d"
 msgstr "H%d"
 
-#. i18n: Year, short "Half year", prefferably 1 letter.
+#. i18n: Year, short "Half year", preferably 1 letter.
 #: src/planner-scale-utils.c:391
 #, c-format
 msgid "%04d, H%d"
@@ -1430,7 +1431,7 @@ msgstr "Öppna från databas..."
 msgid "Open a project from a database"
 msgstr "Öppna ett projekt från en databas"
 
-#: src/planner-sql-plugin.c:97 src/planner-sql-plugin.c:1100
+#: src/planner-sql-plugin.c:97 src/planner-sql-plugin.c:1099
 msgid "Save to Database"
 msgstr "Spara till databas"
 
@@ -1442,7 +1443,7 @@ msgstr "Spara det aktuella projektet till en databas"
 msgid "No errors reported."
 msgstr "Inga fel rapporterade."
 
-#: src/planner-sql-plugin.c:495
+#: src/planner-sql-plugin.c:494
 #, c-format
 msgid ""
 "Database %s needs to be upgraded from version %s to version %s.\n"
@@ -1451,11 +1452,11 @@ msgstr ""
 "Databasen %s behöver uppgraderas från version %s till version %s.\n"
 "Tag en säkerhetskopia på databasen innan uppgraderingen görs."
 
-#: src/planner-sql-plugin.c:502
+#: src/planner-sql-plugin.c:501
 msgid "Upgrade"
 msgstr "Uppgradera"
 
-#: src/planner-sql-plugin.c:516
+#: src/planner-sql-plugin.c:515
 #, c-format
 msgid ""
 "Could not upgrade database %s.\n"
@@ -1470,38 +1471,38 @@ msgstr ""
 "Databassfel: \n"
 "%s"
 
-#: src/planner-sql-plugin.c:557
+#: src/planner-sql-plugin.c:556
 #, c-format
 msgid "Can't create tables in database %s"
 msgstr "Kan inte skapa tabeller i databasen %s"
 
-#: src/planner-sql-plugin.c:618
+#: src/planner-sql-plugin.c:617
 #, c-format
 msgid "Database %s is not setup for Planner. Do you want to do that?"
 msgstr "Databasen %s är inte förberedd för Planner. Vill du göra det?"
 
-#: src/planner-sql-plugin.c:675
+#: src/planner-sql-plugin.c:674
 #, c-format
 msgid "Test to tables in database '%s' failed."
 msgstr "Anslutning till databasen \"%s\" misslyckades."
 
-#: src/planner-sql-plugin.c:768
+#: src/planner-sql-plugin.c:767
 msgid "ID"
 msgstr "ID"
 
-#: src/planner-sql-plugin.c:776
+#: src/planner-sql-plugin.c:775
 msgid "Project"
 msgstr "Projekt"
 
-#: src/planner-sql-plugin.c:784
+#: src/planner-sql-plugin.c:783
 msgid "Phase"
 msgstr "Fas"
 
-#: src/planner-sql-plugin.c:792
+#: src/planner-sql-plugin.c:791
 msgid "Revision"
 msgstr "Revision"
 
-#: src/planner-sql-plugin.c:988
+#: src/planner-sql-plugin.c:987
 msgid "Open from Database"
 msgstr "Öppna från databas"
 
@@ -1616,11 +1617,11 @@ msgstr "Sätt restriktion på aktivitet"
 msgid "Reset task constraint"
 msgstr "Återställ aktivitetsrestriktion"
 
-#: src/planner-task-tree.c:823
+#: src/planner-task-tree.c:821
 msgid "Move task"
 msgstr "Flytta aktivitet"
 
-#: src/planner-task-tree.c:2708
+#: src/planner-task-tree.c:2709
 #, c-format
 msgid ""
 "You are about to open an edit dialog each for %i tasks. Are you sure that "
@@ -1629,72 +1630,72 @@ msgstr ""
 "En dialog kommer att öppnas för var och en av %d aktiviteter. Är du säger på "
 "att du vill det?"
 
-#: src/planner-task-tree.c:3319
+#: src/planner-task-tree.c:3320
 msgid "mon"
 msgstr "mån"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:3320
+#: src/planner-task-tree.c:3321
 msgid "month"
 msgstr "månad"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:3321
+#: src/planner-task-tree.c:3322
 msgid "months"
 msgstr "månader"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:3322
+#: src/planner-task-tree.c:3323
 msgid "w"
 msgstr "v"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:3323
+#: src/planner-task-tree.c:3324
 msgid "week"
 msgstr "vecka"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:3324
+#: src/planner-task-tree.c:3325
 msgid "weeks"
 msgstr "veckor"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:3325
+#: src/planner-task-tree.c:3326
 msgid "d"
 msgstr "d"
 
 #. day unit variant accepted in input
-#: src/planner-task-tree.c:3326
+#: src/planner-task-tree.c:3327
 msgid "day"
 msgstr "dag"
 
 #. day unit variant accepted in input
-#: src/planner-task-tree.c:3328
+#: src/planner-task-tree.c:3329
 msgid "h"
 msgstr "t"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:3329
+#: src/planner-task-tree.c:3330
 msgid "hour"
 msgstr "timme"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:3330
+#: src/planner-task-tree.c:3331
 msgid "hours"
 msgstr "timmar"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:3331
+#: src/planner-task-tree.c:3332
 msgid "min"
 msgstr "min"
 
 #. minute unit variant accepted in input
-#: src/planner-task-tree.c:3332
+#: src/planner-task-tree.c:3333
 msgid "minute"
 msgstr "minut"
 
 #. minute unit variant accepted in input
-#: src/planner-task-tree.c:3333
+#: src/planner-task-tree.c:3334
 msgid "minutes"
 msgstr "minuter"
 
@@ -1706,11 +1707,11 @@ msgstr "_Redigera aktivitet"
 msgid "_Edit Custom Properties..."
 msgstr "_Redigera egna egenskaper..."
 
-#: src/planner-task-view.c:208
+#: src/planner-task-view.c:211
 msgid "Tasks"
 msgstr "Aktiviteter"
 
-#: src/planner-task-view.c:216
+#: src/planner-task-view.c:219
 msgid "_Tasks"
 msgstr "_Aktiviteter"
 
@@ -1718,30 +1719,30 @@ msgstr "_Aktiviteter"
 #. * project management term. You might want to leave it
 #. * untranslated unless there is a localized term for it.
 #.
-#: src/planner-task-view.c:274
+#: src/planner-task-view.c:277
 msgid "WBS"
 msgstr "WBS"
 
-#: src/planner-task-view.c:276
+#: src/planner-task-view.c:279
 msgid "Start"
 msgstr "Start"
 
-#: src/planner-task-view.c:277
+#: src/planner-task-view.c:280
 msgid "Finish"
 msgstr "Slut"
 
 # Slack brukar kallas slack på svenska inom projekthantering (av det jag
 # sett i litteratur iaf). Glapp kallas ibland det som vi kallar
 # fördröjning (lag).
-#: src/planner-task-view.c:279
+#: src/planner-task-view.c:282
 msgid "Slack"
 msgstr "Slack"
 
-#: src/planner-task-view.c:281
+#: src/planner-task-view.c:284
 msgid "Assigned to"
 msgstr "Tilldelad till"
 
-#: src/planner-task-view.c:477
+#: src/planner-task-view.c:480
 msgid "Edit custom task properties"
 msgstr "Redigera egenskaper för egen aktivitet"
 
@@ -1781,11 +1782,11 @@ msgstr ""
 msgid "Zoom to fit"
 msgstr "Zooma hela"
 
-#: src/planner-ttable-view.c:157
+#: src/planner-ttable-view.c:159
 msgid "Resource Usage"
 msgstr "Resursutnyttjande"
 
-#: src/planner-ttable-view.c:164
+#: src/planner-ttable-view.c:166
 msgid "Resource _Usage"
 msgstr "Resurs_utnyttjande"
 

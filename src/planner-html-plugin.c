@@ -81,6 +81,10 @@ html_plugin_export (GtkAction *action,
 	GladeXML          *glade;
 	GtkWidget         *ok_button;
 	GtkWidget         *cancel_button;
+	MrpProject        *project;
+	gchar             *filename, *tmp;
+	gchar             *basename;
+	const gchar       *uri;
 
 	glade = glade_xml_new (GLADEDIR"/html-output.glade",
 			       NULL, NULL);
@@ -118,6 +122,33 @@ html_plugin_export (GtkAction *action,
 			  "activate",
 			  G_CALLBACK (html_plugin_activated),
 			  ok_button);
+
+	project = planner_window_get_project (priv->main_window);
+	uri = mrp_project_get_uri (project);
+
+	if (!uri) {
+		uri = _("Unnamed");
+	}
+
+	basename = g_path_get_basename (uri);
+	
+	if (g_str_has_suffix (basename, ".planner")) {
+		tmp = g_strndup (basename,  strlen (basename) - strlen (".planner"));
+	}
+	else if (g_str_has_suffix (basename, ".mrproject")) {
+		tmp = g_strndup (basename,  strlen (basename) - strlen (".mrproject"));
+	} else {
+		tmp = g_strdup (basename);
+	}
+
+	filename = g_strdup_printf ("%s.html", tmp);
+	
+	gnome_file_entry_set_filename (GNOME_FILE_ENTRY (priv->local_fileentry),
+				       filename);
+
+	g_free (tmp);
+	g_free (basename);
+	g_free (filename);
 
 	gtk_widget_show (priv->dialog);
 
