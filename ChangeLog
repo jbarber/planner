@@ -1,5 +1,12 @@
 2004-06-17  Richard Hult  <richard@imendio.com>
 
+	* src/planner-gantt-print.c: (planner_gantt_print_do): Handle
+	cases where page start equals task finish, can happen with
+	milestone tasks for example. Also add a workaround to fix a crash
+	(bug #135473) when the scheduler has screwed up, for 0.12.
+
+2004-06-17  Richard Hult  <richard@imendio.com>
+
 	* src/planner-application.c:
 	* src/planner-gantt-chart.c:
 	* src/planner-gantt-view.c:

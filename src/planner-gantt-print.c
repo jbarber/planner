@@ -35,7 +35,7 @@
 #include "planner-gantt-print.h"
 #include "planner-scale-utils.h"
 
-#define d(x) 
+#define d(x)
 #define GET_PAGE(d,r,c) (&d->pages[r*d->cols_of_pages+c])
 #define INDENT_FACTOR 4
 
@@ -638,7 +638,7 @@ planner_gantt_print_do (PlannerGanttPrintData *data)
 			y2 = y1 + 0.75 * data->row_height;
 
 			/* Loop through the columns that this task covers. */
-			while (t1 < finish) {
+			while (t1 <= finish) {
 				if (col == 0) {
 					/* Left-most column has the task tree. */
 					x0 = data->tree_x2;
@@ -722,6 +722,7 @@ planner_gantt_print_do (PlannerGanttPrintData *data)
 					element->x1 = x0;
 					element->x2 = data->job->width;
 				} else {
+					d(g_print ("nothing"));
 					g_free (element);
 					element = NULL;
 				}
@@ -784,6 +785,15 @@ planner_gantt_print_do (PlannerGanttPrintData *data)
 				task_coord = g_hash_table_lookup (data->task_finish_coords,
 								  ptask->task);
 
+				/* FIXME: Remove this check when the scheduler
+				 * is fixed. We get a crash here if tasks get
+				 * really odd start/finish values. This
+				 * sometimes happens for complex projects now.
+				 */
+				if (!task_coord) {
+					goto fail;
+				}
+
 				element = g_new0 (Element, 1);
 				element->type = RESOURCES;
 
@@ -795,6 +805,8 @@ planner_gantt_print_do (PlannerGanttPrintData *data)
 				page = GET_PAGE (data, row, col - 1);
 				page->elements = g_list_prepend (page->elements, element);
 			}
+
+		fail:
 			
 			l = l->next;
 			if (!l) {
