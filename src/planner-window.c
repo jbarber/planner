@@ -217,6 +217,7 @@ static GtkActionEntry entries[] = {
 	{ "Import",
 	  NULL,                    N_("_Import"),                  NULL,                NULL,
 	  NULL },
+
 	{ "FileSave",
 	  GTK_STOCK_SAVE,          N_("_Save"),                    "<Control>s",        N_("Save the current project"),
 	  G_CALLBACK (window_save_cb) },
@@ -1069,20 +1070,20 @@ window_about_cb (GtkAction *action,
 	/* I18n: Translators, list your names here, newline separated if there
 	 * are more than one, to appear in the about box.
 	 */
-	const gchar *translator_credits = N_("translator_credits");
+	const gchar *translator_credits = N_("translator-credits");
 	
 	about = gnome_about_new ("Imendio Planner", VERSION,
 				 "", /*"Copyright \xc2\xa9"*/
 				 _("A Project Management application for the GNOME desktop"),
 				 authors,
 				 documenters,
-				 strcmp (translator_credits, _("translator_credits")) != 0 ? _(translator_credits) : NULL,
+				 strcmp (translator_credits, _("translator-credits")) != 0 ? _(translator_credits) : NULL,
 				 NULL);
 	
 	hbox = gtk_hbox_new (FALSE, 0);
 	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (about)->vbox), hbox, FALSE, FALSE, 0);
 	
-	href = gnome_href_new ("http://planner.imendio.org/",
+	href = gnome_href_new ("http://www.imendio.com/projects/planner/",
 			       _("The Planner Homepage"));
 	gtk_box_pack_start (GTK_BOX (hbox), href, TRUE, FALSE, 0);
 

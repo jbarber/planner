@@ -1,3 +1,9 @@
+2004-08-11  Richard Hult  <richard@imendio.com>
+
+	* src/planner-window.c (window_about_cb): Change
+	translator_credits to translator-credits on request from the i18n
+	guys. Update the planner link.
+
 2004-08-12  Alvaro del Castillo  <acs@barrapunto.com>
 	
 	* libplanner-1.pc.in: removed hard coded Postgres flags
@@ -21,7 +27,7 @@
 
 2004-08-10  Alvaro del Castillo  <acs@barrapunto.com>
 
-	* configure.in
+	* configure.in:
 	* src/Makefile.am:
 	Added support for enable evolution data server (eds) plugin
 	* data/glade/Makefile.am:
