@@ -1,18 +1,29 @@
+2004-10-02  Richard Hult  <richard@imendio.com>
+
+	* data/ui/main-window.ui:
+	* libegg/recent-files/*: Update from latest libegg CVS and add ui
+	manager view from file-roller.
+	
+	* src/planner-window.c: (planner_window_open_recent_cb),
+	(window_populate), (window_print_cb),
+	(window_recent_tooltip_func): Hook up recent files again.
+
 2004-10-02  Alvaro del Castillo <acs@barrapunto.com>  
 
-	* configure.in: Added support for Evolution Data Server (e-d-s) module
+	* configure.in: Added support for Evolution Data Server (e-d-s)
+	module
 
-	* Makefile.am: Added support for Evolution Data Server (e-d-s) module
+	* Makefile.am: Added support for Evolution Data Server (e-d-s)
+	module
 
 	* eds-backend: new directory with all the e-d-s code
 
-	* eds-backend/utils: code to create the sources in Evolution
-	for Planner data sources.
+	* eds-backend/utils: code to create the sources in Evolution for
+	Planner data sources.
 
 	* eds-backend/docs: several docs about how the backend has been
 	done before reaching CVS. Also testing plans and the Changelog
 	before the code hit CVS.
-	
 
 2004-10-01  Alvaro del Castillo <acs@barrapunto.com>  
 

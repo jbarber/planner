@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: planner\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-08-14 22:06+0200\n"
+"POT-Creation-Date: 2004-10-02 23:43+0200\n"
 "PO-Revision-Date: 2004-07-04 16:55+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -20,8 +20,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8-bit\n"
 
 #: data/glade/add-predecessor.glade.h:1 data/glade/calendar-dialog.glade.h:4
-#: data/glade/html-output.glade.h:2 data/glade/new-property.glade.h:1
-#: data/glade/project-properties.glade.h:1
+#: data/glade/eds.glade.h:1 data/glade/html-output.glade.h:2
+#: data/glade/new-property.glade.h:1 data/glade/project-properties.glade.h:1
 #: data/glade/resource-dialog.glade.h:1
 #: data/glade/resource-input-dialog.glade.h:1 data/glade/sql.glade.h:1
 #: data/glade/task-dialog.glade.h:4 data/glade/task-input-dialog.glade.h:1
@@ -184,6 +184,30 @@ msgstr "_Namn på ny kalender:"
 #: data/glade/calendar-dialog.glade.h:36
 msgid "_New..."
 msgstr "_Ny..."
+
+#: data/glade/eds.glade.h:2
+msgid "Loading resource data"
+msgstr "Laddar resursdata"
+
+#: data/glade/eds.glade.h:3
+msgid "Search"
+msgstr "Sök"
+
+#: data/glade/eds.glade.h:4
+msgid "Select All"
+msgstr "Markera alla"
+
+#: data/glade/eds.glade.h:5
+msgid "Select group"
+msgstr "Välj grupp"
+
+#: data/glade/eds.glade.h:6
+msgid "Unselect All"
+msgstr "Avmarkera alla"
+
+#: data/glade/eds.glade.h:7
+msgid "dialog1"
+msgstr "dialog1"
 
 #: data/glade/group-dialog.glade.h:1
 msgid "Group Editor"
@@ -455,7 +479,7 @@ msgstr "Använd dag från baskalender"
 
 #: libplanner/mrp-file-module.c:115
 msgid "This format is does support reading"
-msgstr ""
+msgstr "Detta format stödjer bara läsning"
 
 #: libplanner/mrp-parser.c:1062 libplanner/mrp-parser.c:1157
 msgid "Could not create XML tree"
@@ -754,6 +778,54 @@ msgstr "%H.%M"
 msgid "Edit default week"
 msgstr "Redigera standardvecka"
 
+#: src/planner-eds-plugin.c:166
+msgid "EDS"
+msgstr "EDS"
+
+#: src/planner-eds-plugin.c:167
+msgid "Import resources from Evolution Data Server"
+msgstr "Importera resurser från Evolution dataserver"
+
+#: src/planner-eds-plugin.c:388 src/planner-gantt-print.c:190
+#: src/planner-group-dialog.c:816 src/planner-property-dialog.c:481
+#: src/planner-resource-view.c:1171 src/planner-task-dialog.c:2536
+#: src/planner-task-dialog.c:2625 src/planner-task-view.c:275
+#: src/planner-ttable-print.c:108
+msgid "Name"
+msgstr "Namn"
+
+#: src/planner-eds-plugin.c:408 src/planner-resource-view.c:1266
+msgid "Email"
+msgstr "E-post"
+
+#: src/planner-eds-plugin.c:429
+msgid "Import"
+msgstr "Importera"
+
+#: src/planner-eds-plugin.c:439
+msgid "Photo"
+msgstr "Foto"
+
+#: src/planner-eds-plugin.c:655
+msgid "Imported from Evolution Data Server"
+msgstr "Importerad från Evolution dataserver"
+
+#: src/planner-eds-plugin.c:656
+msgid "Updated from Evolution Data Server"
+msgstr "Uppdaterad från Evolution dataserver"
+
+#: src/planner-eds-plugin.c:841
+msgid "Query cancelled."
+msgstr "Förfrågan avbruten."
+
+#: src/planner-eds-plugin.c:902
+msgid "Evolution Data Server UID"
+msgstr "Evolution dataserver UID"
+
+#: src/planner-eds-plugin.c:903
+msgid "Identifier used by Evolution Data Server for resources"
+msgstr "Identifierare använd av Evolution dataserver för resurser"
+
 #: src/planner-format.c:141
 #, c-format
 msgid "%dd %dh"
@@ -801,21 +873,14 @@ msgstr "%d %b %Y"
 msgid "Project start"
 msgstr "Projektstart"
 
-#: src/planner-gantt-print.c:189 src/planner-group-dialog.c:816
-#: src/planner-property-dialog.c:481 src/planner-resource-view.c:1171
-#: src/planner-task-dialog.c:2536 src/planner-task-dialog.c:2625
-#: src/planner-task-view.c:275 src/planner-ttable-print.c:108
-msgid "Name"
-msgstr "Namn"
-
-#: src/planner-gantt-print.c:197 src/planner-resource-dialog.c:1869
+#: src/planner-gantt-print.c:198 src/planner-resource-dialog.c:1869
 #: src/planner-resource-view.c:757 src/planner-resource-view.c:773
 #: src/planner-resource-view.c:1702 src/planner-task-view.c:278
 msgid "Work"
 msgstr "Arbete"
 
-#: src/planner-gantt-print.c:541 src/planner-gantt-row.c:685
-#: src/planner-task-tree.c:1583 src/planner-window.c:1624
+#: src/planner-gantt-print.c:542 src/planner-gantt-row.c:685
+#: src/planner-task-tree.c:1583 src/planner-window.c:1648
 msgid "Unnamed"
 msgstr "Namnlös"
 
@@ -1040,8 +1105,8 @@ msgstr ""
 "\"%s\" är en katalog.\n"
 "Ange ett filnamn och försök igen."
 
-#: src/planner-html-plugin.c:148 src/planner-window.c:1381
-#: src/planner-xml-planner-plugin.c:130
+#: src/planner-html-plugin.c:148 src/planner-window.c:1405
+#: src/planner-xml-planner-plugin.c:125
 #, c-format
 msgid "File \"%s\" exists, do you want to overwrite it?"
 msgstr "Filen \"%s\" finns redan, vill du skriva över den?"
@@ -1088,15 +1153,15 @@ msgstr "SS"
 msgid "SF"
 msgstr "SF"
 
-#: src/planner-print-dialog.c:113
+#: src/planner-print-dialog.c:154
 msgid "Print Project"
 msgstr "Skriv ut projekt"
 
-#: src/planner-print-dialog.c:120
+#: src/planner-print-dialog.c:161
 msgid "Select views"
 msgstr "Välj vyer"
 
-#: src/planner-print-dialog.c:143
+#: src/planner-print-dialog.c:184
 msgid "Select the views to print:"
 msgstr "Välj de vyer som ska skrivas ut:"
 
@@ -1297,10 +1362,6 @@ msgstr "Kort namn"
 msgid "Group"
 msgstr "Grupp"
 
-#: src/planner-resource-view.c:1266
-msgid "Email"
-msgstr "E-post"
-
 #. i18n: Short "Week", preferably 2 letters.
 #: src/planner-scale-utils.c:325
 #, c-format
@@ -1407,7 +1468,7 @@ msgid "Database %s is not setup for Planner. Do you want to do that?"
 msgstr "Databasen %s är inte förberedd för Planner. Vill du göra det?"
 
 #: src/planner-sql-plugin.c:675
-#, fuzzy, c-format
+#, c-format
 msgid "Test to tables in database '%s' failed."
 msgstr "Anslutning till databasen \"%s\" misslyckades."
 
@@ -1725,168 +1786,168 @@ msgstr "Resurs_utnyttjande"
 msgid "Could not open view plugin file '%s'\n"
 msgstr "Kunde inte öppna vyinsticksfilen \"%s\"\n"
 
-#: src/planner-window.c:207
+#: src/planner-window.c:197
 msgid "_File"
 msgstr "_Arkiv"
 
-#: src/planner-window.c:211
+#: src/planner-window.c:201
 msgid "_New Project"
 msgstr "_Nytt projekt"
 
-#: src/planner-window.c:211
+#: src/planner-window.c:201
 msgid "Create a new project"
 msgstr "Skapa ett nytt projekt"
 
-#: src/planner-window.c:215
+#: src/planner-window.c:205
 msgid "_Open..."
 msgstr "_Öppna..."
 
-#: src/planner-window.c:215
+#: src/planner-window.c:205
 msgid "Open a project"
 msgstr "Öppna ett projekt"
 
-#: src/planner-window.c:218
+#: src/planner-window.c:208
 msgid "_Import"
 msgstr "_Importera"
 
-#: src/planner-window.c:222 src/planner-window.c:1252
+#: src/planner-window.c:212 src/planner-window.c:1276
 msgid "_Save"
 msgstr "_Spara"
 
-#: src/planner-window.c:222
+#: src/planner-window.c:212
 msgid "Save the current project"
 msgstr "Spara det aktuella projekt"
 
-#: src/planner-window.c:225
+#: src/planner-window.c:215
 msgid "_Export"
 msgstr "_Exportera"
 
-#: src/planner-window.c:228
+#: src/planner-window.c:218
 msgid "Save _As..."
 msgstr "Spara s_om..."
 
-#: src/planner-window.c:228
+#: src/planner-window.c:218
 msgid "Save the current project with a different name"
 msgstr "Spara det aktuella projektet med ett annat namn"
 
-#: src/planner-window.c:231
+#: src/planner-window.c:221
 msgid "_Print..."
 msgstr "S_kriv ut..."
 
-#: src/planner-window.c:231
+#: src/planner-window.c:221
 msgid "Print the current project"
 msgstr "Skriv ut aktuellt projekt"
 
-#: src/planner-window.c:234
+#: src/planner-window.c:224
 msgid "Print Pre_view"
 msgstr "_Förhandsgranskning"
 
-#: src/planner-window.c:234
+#: src/planner-window.c:224
 msgid "Print preview of the current project"
 msgstr "Förhandsgranska aktuellt projekt"
 
-#: src/planner-window.c:237
+#: src/planner-window.c:227
 msgid "_Close"
 msgstr "S_täng"
 
-#: src/planner-window.c:237
+#: src/planner-window.c:227
 msgid "Close the current file"
 msgstr "Stäng aktuell fil"
 
-#: src/planner-window.c:240
+#: src/planner-window.c:230
 msgid "_Quit"
 msgstr "_Avsluta"
 
-#: src/planner-window.c:240
+#: src/planner-window.c:230
 msgid "Exit the program"
 msgstr "Avsluta programmet"
 
-#: src/planner-window.c:244
+#: src/planner-window.c:234
 msgid "_Edit"
 msgstr "_Redigera"
 
-#: src/planner-window.c:247
+#: src/planner-window.c:237
 msgid "_Undo"
 msgstr "_Ångra"
 
-#: src/planner-window.c:247
+#: src/planner-window.c:237
 msgid "Undo the last action"
 msgstr "Ångra den senaste åtgärden"
 
-#: src/planner-window.c:250
+#: src/planner-window.c:240
 msgid "_Redo"
 msgstr "_Gör om"
 
-#: src/planner-window.c:250
+#: src/planner-window.c:240
 msgid "Redo the undone action"
 msgstr "Gör om den ångrade åtgärden"
 
-#: src/planner-window.c:254
+#: src/planner-window.c:244
 msgid "_View"
 msgstr "_Visa"
 
-#: src/planner-window.c:258
+#: src/planner-window.c:248
 msgid "_Actions"
 msgstr "_Åtgärder"
 
-#: src/planner-window.c:262
+#: src/planner-window.c:252
 msgid "_Project"
 msgstr "_Projekt"
 
-#: src/planner-window.c:265
+#: src/planner-window.c:255
 msgid "_Manage Calendars"
 msgstr "_Hantera kalendrar"
 
-#: src/planner-window.c:268
+#: src/planner-window.c:258
 msgid "Edit Day _Types"
 msgstr "Redigera dag_typer"
 
-#: src/planner-window.c:271
+#: src/planner-window.c:261
 msgid "Edit Project _Phases"
 msgstr "Redigera projekt_faser"
 
-#: src/planner-window.c:274
+#: src/planner-window.c:264
 msgid "_Edit Project Properties"
 msgstr "_Redigera projektegenskaper"
 
-#: src/planner-window.c:274
+#: src/planner-window.c:264
 msgid "Edit the project properties"
 msgstr "Redigera projektegenskaperna"
 
-#: src/planner-window.c:282
+#: src/planner-window.c:272
 msgid "_Help"
 msgstr "_Hjälp"
 
-#: src/planner-window.c:285
+#: src/planner-window.c:275
 msgid "_User Guide"
 msgstr "_Användarmanual"
 
-#: src/planner-window.c:285
+#: src/planner-window.c:275
 msgid "Show the Planner User Guide"
 msgstr "Visa Planner användarmanual"
 
-#: src/planner-window.c:288
+#: src/planner-window.c:278
 msgid "_About"
 msgstr "_Om"
 
-#: src/planner-window.c:288
+#: src/planner-window.c:278
 msgid "About this application"
 msgstr "Om detta program"
 
 #. Note: these strings are leaked.
-#: src/planner-window.c:562
+#: src/planner-window.c:542
 #, c-format
 msgid "Switch to the view \"%s\""
 msgstr "Växla till vyn \"%s\""
 
-#: src/planner-window.c:707
+#: src/planner-window.c:687
 msgid "Open a file"
 msgstr "Öppna en fil"
 
 #. I18n: Translators, list your names here, newline separated if there
 #. * are more than one, to appear in the about box.
 #.
-#: src/planner-window.c:1073 src/planner-window.c:1080
+#: src/planner-window.c:1097 src/planner-window.c:1104
 msgid "translator-credits"
 msgstr ""
 "Christian Rose\n"
@@ -1894,58 +1955,58 @@ msgstr ""
 "Skicka synpunkter på översättningen till sv@li.org"
 
 #. "Copyright \xc2\xa9"
-#: src/planner-window.c:1077
+#: src/planner-window.c:1101
 msgid "A Project Management application for the GNOME desktop"
 msgstr "Ett projekthanteringsprogram för GNOME-skrivbordet"
 
-#: src/planner-window.c:1087
+#: src/planner-window.c:1111
 msgid "The Planner Homepage"
 msgstr "Planners hemsida"
 
-#: src/planner-window.c:1193
+#: src/planner-window.c:1217
 msgid "If you don't save, changes made the last minute will be discarded."
 msgstr ""
 "Om du inte sparar kommer ändringarna gjorda den senaste minuten att gå "
 "förlorade."
 
-#: src/planner-window.c:1198
+#: src/planner-window.c:1222
 #, c-format
 msgid "If you don't save, changes made the last %d minutes will be discarded."
 msgstr ""
 "Om du inte sparar kommer ändringarna gjorda de senaste %d minuterna att gå "
 "förlorade."
 
-#: src/planner-window.c:1203
+#: src/planner-window.c:1227
 msgid "If you don't save, changes made the last hour will be discarded."
 msgstr ""
 "Om du inte sparar kommer ändringarna gjorda den senaste timmen att gå "
 "förlorade."
 
-#: src/planner-window.c:1208
+#: src/planner-window.c:1232
 #, c-format
 msgid "If you don't save, changes made the last %d hours will be discarded."
 msgstr ""
 "Om du inte sparar kommer ändringarna gjorda de senaste %d timmarna att gå "
 "förlorade."
 
-#: src/planner-window.c:1215
+#: src/planner-window.c:1239
 #, c-format
 msgid "Save changes to document '%s' before closing?"
 msgstr "Spara ändringarna i dokumentet \"%s\" innan det stängs?"
 
-#: src/planner-window.c:1239
+#: src/planner-window.c:1263
 msgid "C_lose without saving"
 msgstr "S_täng utan att spara"
 
-#: src/planner-window.c:1245
+#: src/planner-window.c:1269
 msgid "_Cancel"
 msgstr "_Avbryt"
 
-#: src/planner-window.c:1344
+#: src/planner-window.c:1368
 msgid "Save a file"
 msgstr "Spara en fil"
 
-#: src/planner-window.c:1581
+#: src/planner-window.c:1605
 msgid ""
 "You have opened a file that was saved with an old version of Planner.\n"
 "\n"
@@ -1974,23 +2035,28 @@ msgstr ""
 "\"Återställ alla restriktioner\" i \"Redigera\"-menyn."
 
 #. Hack.
-#: src/planner-window.c:1616
+#: src/planner-window.c:1640
 msgid "Unnamed database project"
 msgstr "Namnlöst databasprojekt"
+
+#: src/planner-window.c:1754
+#, c-format
+msgid "Open '%s'"
+msgstr "Öppna \"%s\""
 
 #: src/planner-working-time-dialog.c:144
 msgid "Edit working time"
 msgstr "Redigera arbetstid"
 
-#: src/planner-xml-planner-plugin.c:55
+#: src/planner-xml-planner-plugin.c:53
 msgid "Planner 0.11 Format"
 msgstr "Planner 0.11-format"
 
-#: src/planner-xml-planner-plugin.c:56
+#: src/planner-xml-planner-plugin.c:54
 msgid "Export project to a file suitable for Planner 0.11"
-msgstr ""
+msgstr "Exportera projekt till en fil som passar Planner 0.11"
 
-#: src/planner-xml-planner-plugin.c:99
+#: src/planner-xml-planner-plugin.c:91
 msgid "Export"
 msgstr "Exportera"
 

@@ -40,6 +40,8 @@
 #include <libplanner/mrp-error.h>
 #include <libplanner/mrp-project.h>
 #include <libegg/recent-files/egg-recent-view.h>
+#include <libegg/recent-files/egg-recent-view-uimanager.h>
+#include <libegg/recent-files/egg-recent-util.h>
 #include "planner-marshal.h"
 #include "planner-conf.h"
 #include "planner-sidebar.h"
@@ -82,9 +84,7 @@ struct _PlannerWindowPriv {
 	GList               *plugins;
 	GTimer              *last_saved;
 
-	/* FIXME: remove that
-	   EggRecentViewBonobo *view;
-	*/
+	EggRecentViewUIManager *recent_view;
 };
 
 /* Signals */
@@ -161,10 +161,8 @@ static gchar *    window_get_name                        (PlannerWindow         
 static void       window_update_title                    (PlannerWindow                *window);
 static GtkWidget *window_create_dialog_button            (const gchar                  *icon_name,
 							  const gchar                  *text);
-#ifdef FIXME
 static gchar *    window_recent_tooltip_func             (EggRecentItem                *item,
 							  gpointer                      user_data);
-#endif
 static void       window_save_state                      (PlannerWindow *window);
 static void       window_restore_state                   (PlannerWindow *window);
 
@@ -378,40 +376,33 @@ window_finalize (GObject *object)
 	}
 }
 
-
-#ifdef FIXME
 static void
-planner_window_open_recent (GtkWidget           *widget,
-			    const EggRecentItem *item,
-			    PlannerWindow        *window)
+planner_window_open_recent_cb (GtkAction     *action,
+			       PlannerWindow *window)
 {
-	gchar     *uri, *filename;
-	GtkWidget *new_window;
-	
-	uri = egg_recent_item_get_uri (item);
+	const EggRecentItem *item;
+	const gchar         *uri;
+	gchar               *filename;
+	GtkWidget           *new_window;
 
-	/* FIXME: Is this necessary? */
+	item = egg_recent_view_uimanager_get_item (window->priv->recent_view, action);
+	uri = egg_recent_item_peek_uri (item);
 	filename = g_filename_from_uri (uri, NULL, NULL);
-	g_free (uri);
 
 	if (mrp_project_is_empty (window->priv->project)) {
 		planner_window_open (window, filename);
 	} else {
-		new_window = 
-			planner_application_new_window (window->priv->application);
-		if (planner_window_open (PLANNER_WINDOW (new_window),
-					 filename)) {
+		new_window = planner_application_new_window (window->priv->application);
+		if (planner_window_open (PLANNER_WINDOW (new_window), filename)) {
 			gtk_widget_show_all (new_window);
 		} else {
 			g_signal_emit (new_window, signals[CLOSED], 0, NULL);
-			
 			gtk_widget_destroy (new_window);
 		}
 	}
 	
 	g_free (filename);
 }
-#endif
 
 static void
 window_add_widget (GtkUIManager  *merge, 
@@ -449,21 +440,6 @@ window_populate (PlannerWindow *window)
 		"</ui>";
 
 	priv = window->priv;
-
-
-	/* Handle recent file stuff */
-	/* FIXME: update the bonobo recent files
-	priv->view = egg_recent_view_bonobo_new (priv->ui_component,
-						 "/menu/File/EggRecentDocuments/");
-	egg_recent_view_set_model (EGG_RECENT_VIEW (priv->view),
-				   planner_application_get_recent_model (priv->application));
-	egg_recent_view_bonobo_set_tooltip_func (priv->view,
-						 window_recent_tooltip_func,
-						 NULL);
-
-	g_signal_connect (priv->view, "activate",
-			  G_CALLBACK (planner_window_open_recent), window);
-	*/
 
 	priv->ui_box = gtk_vbox_new (FALSE, 0);
 	gtk_container_add (GTK_CONTAINER (window), priv->ui_box);
@@ -508,6 +484,18 @@ window_populate (PlannerWindow *window)
 	g_object_set (gtk_action_group_get_action (priv->actions, "FileSave"),
 		      "sensitive", FALSE, 
 		      NULL);
+
+	/* Handle recent file stuff. */
+	priv->recent_view = egg_recent_view_uimanager_new (priv->ui_manager,
+							   "/MenuBar/File/OpenRecent",
+							   G_CALLBACK (planner_window_open_recent_cb),
+							   window);
+
+	egg_recent_view_set_model (EGG_RECENT_VIEW (priv->recent_view),
+				   planner_application_get_recent_model (priv->application));
+	egg_recent_view_uimanager_set_tooltip_func (priv->recent_view,
+						    window_recent_tooltip_func,
+						    NULL);
 
 	hbox = gtk_hbox_new (FALSE, 0);
 
@@ -885,7 +873,7 @@ window_print_cb (GtkAction *action,
 		return;
 	}
 	
-	/* Save printer settings */
+	/* Save printer settings. */
 	planner_print_dialog_save_config (config);
 
 	views = planner_print_dialog_get_print_selection (GTK_DIALOG (dialog), &summary);
@@ -1752,14 +1740,24 @@ planner_window_show_calendar_dialog (PlannerWindow *window)
 	}
 }
 
-#ifdef FIXME
 static gchar *
 window_recent_tooltip_func (EggRecentItem *item,
 			    gpointer user_data)
 {
-	return egg_recent_item_get_uri_for_display (item);
+	gchar *uri;
+	gchar *escaped;
+	gchar *tooltip;
+
+	uri = egg_recent_item_get_uri_for_display (item);
+
+	escaped = egg_recent_util_escape_underlines (uri);
+	tooltip = g_strdup_printf (_("Open '%s'"), escaped);
+
+	g_free (uri);
+	g_free (escaped);
+
+	return tooltip;
 }
-#endif
 
 PlannerCmdManager *
 planner_window_get_cmd_manager (PlannerWindow *window)
