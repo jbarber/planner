@@ -6,6 +6,11 @@ if HAVE_PYTHON
 python_DIR = python
 endif
 
+if HAVE_EDS_BACKEND
+eds_backend_DIR = eds-backend
+endif
+
+
 SUBDIRS = \
 	po 				\
 	libplanner			\
@@ -16,7 +21,8 @@ SUBDIRS = \
 	examples			\
 	tests				\
 	$(python_DIR)			\
-	$(dotnet_DIR)
+	$(dotnet_DIR)			\
+	$(eds_backend_DIR)
 
 EXTRA_DIST = \
 	libplanner-1.pc			\

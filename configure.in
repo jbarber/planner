@@ -241,8 +241,11 @@ AC_ARG_ENABLE(eds, [  --enable-eds           build evolution-data-server support
 
 if test "x$enable_eds" = "xyes" ; then
     EDS_REQUIRED=0.0.95
-    PKG_CHECK_MODULES(EDS, libecal-1.0 >= $EDS_REQUIRED)
-    PKG_CHECK_MODULES(EDS, libebook-1.0 >= $EDS_REQUIRED)
+    PKG_CHECK_MODULES(EDS, 
+    [
+		libecal-1.0 >= $EDS_REQUIRED
+    		libebook-1.0 >= $EDS_REQUIRED
+    ])
     use_eds=yes
 else
     use_eds=no
@@ -251,6 +254,32 @@ fi
 AC_SUBST(EDS_LIBS)
 AC_SUBST(EDS_CFLAGS)
 AM_CONDITIONAL(HAVE_EDS_PLUGIN, test x$use_eds = xyes)
+
+dnl  -------------------------------------
+dnl | Evolution Data Server Backend check |--------------------------------------
+dnl  -------------------------------------
+AC_ARG_ENABLE(eds_backend, [  --enable-eds-backend       build evolution-data-server backend support [default=no]], enable_eds_backend="$enableval", enable_eds_backend=no)
+
+if test "x$enable_eds_backend" = "xyes" ; then
+    EDS_REQUIRED=1.1.0 
+    EDS_PACKAGE=1.2
+    PKG_CHECK_MODULES(EDS_BACKEND, 
+    [
+		libecal-$EDS_PACKAGE >= $EDS_REQUIRED
+    		libedata-cal-$EDS_PACKAGE >= $EDS_REQUIRED
+    		libedataserver-$EDS_PACKAGE >= $EDS_REQUIRED
+    ])
+    extensiondir=`$PKG_CONFIG --variable=extensiondir evolution-data-server-$EDS_PACKAGE`
+    AC_SUBST(extensiondir)
+    use_eds_backend=yes
+else
+    use_eds_backend=no
+fi
+
+AC_SUBST(EDS_BACKEND_LIBS)
+AC_SUBST(EDS_BACKEND_CFLAGS)
+AM_CONDITIONAL(HAVE_EDS_BACKEND, test x$use_eds_backend = xyes)
+
 dnl -----------------------------------------------------------
 
 dnl This will cause the automake generated makefiles to pass the
@@ -285,6 +314,8 @@ python/Makefile
 dotnet/Makefile
 dotnet/libplanner/Makefile
 dotnet/samples/Makefile
+eds-backend/Makefile
+eds-backend/utils/Makefile
 planner.spec
 libplanner-1.pc
 ])
@@ -299,7 +330,11 @@ echo "Python bindings               : $have_python"
 echo "Python plugin                 : $enable_python_plugin"
 echo "Dotnet bindings               : $have_dotnet"
 echo "Database/GDA support          : $use_gda"
-echo "Evolution Data Server support : $use_eds"
+echo "Evolution Data Server import  : $use_eds"
+echo "Evolution Data Server backend : $use_eds_backend"
 echo
 
+if test "x$enable_eds_backend" = "xyes" ; then
+	echo "*** WARNING: Evolution backend is experimental. Don't use it in production systems ***"
+fi
 

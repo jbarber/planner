@@ -1,0 +1,75 @@
+Short time:
+
+* Complete the Planner Task to ECalComponent conversion
+* Playing with UI to see how a user will add a planner source. Think
+about how database planner projects works.
+* Make the backend writeable
+
+Medium time:
+
+* Create a Contact backend also to work also with resources
+* Complete the backend: check all methods we need to implement
+* Check timezones logic
+* Put the backend in Planner CVS or in e-d-s CVS
+
+Long time:
+
+* Think about adding directly a source for a planner project that is
+attached to an email.
+
+
+1. Planner Task to ECal:
+
+From evolution calendar you can see for a task:
+
+1.1 Task
+
+-- Basics --
+Summary: Name in Planner
+
+Classification (Public, Private and Confidential): Not this kind in Planner 
+(Milestone and Fixed duration in Planner)
+
+Group: Evolution group
+
+Categories (gal categories): not in Planner
+
+Description: Notes in Planner
+
+-- Date and Time --
+
+Due Date and Time with timezone: also in Planner
+
+Start Date and Time with timezone: also in Planner
+
+
+1.2 Status
+
+Status (Not started, In progress, Completed, Cancelled): Cancell isn't in Planner
+Percent complete: also in Planner
+Priority: also in Planner
+Date and Time completed: also in Planner
+Webpage: not in Planner 
+
+
+1.3 Assignment
+
+This is mainly for add contacts to a meeting for the task,
+not to assign resources to the task. This is my first impression
+but after thinking in it a little more.
+
+A resource can have:
+
+Attendee: name of the resource in Planner
+Type (Individual, Group, Resource, Room, Unknown): also in planner but different types
+	We can map planner types work to Individual and material to Resource.
+Role: Not in planner. I think Planner needs it.
+RSVP: Not in planner.
+Status: Not in planner.
+
+
+
+
+
+
+

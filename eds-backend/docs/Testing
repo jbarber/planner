@@ -1,0 +1,67 @@
+Test plan for Planner Evolution backend
+
+1. Loading a Planner project
+
+	1.1 Create a Planner project file and create a
+	source in Evolution to use it
+
+	1.2 Create a Planner project database and create a
+	source in Evolution to use it
+
+2. Adding tasks
+
+	2.1. Create with Planner an empty file and open with Evo
+
+	2.2. Create with Planner a file with 1 task empty T1
+
+	2.3. Add a new T2 Task from Evolution
+
+3. Modifying tasks
+
+	3.1 Modify T1 summary from Evolution and check changes with Planner
+
+	3.2 Modify T1 Planner Task note and check changes from Evolution
+
+	3.3 Modify step by step all the fields in Evolution task properties
+	and check them in Planner fields.
+
+	3.4 Modify step by step all the fields in Planner Task properties
+	and check them in Evolution fields.
+
+4. Removing tasks
+
+	4.1. Remove T2 Task from Evolution
+
+	4.2 Remove T2 Task from Planner
+
+5. Working with substasks
+
+6. Working with resources
+
+	6.1 Assign a resource R1 from Planner and check it in Evolution
+
+	6.2 Assign a contact C1 from Evolution and check it in Planner
+
+7. Scalability
+
+	7.1 Create a Planner Project with 100 and 1000 tasks and try to use it
+	from the Evolution backend
+
+	7.2 Create a Planner task with 100 resources assigned an try to use
+	it from Evolution
+
+8. Two ways testing:
+
+	When Planner task importer for Evolution is done, try to create a 
+Planner Project P1 and save it to a file F1.
+
+	Then from Planner import all the task from Evolution that the backend
+see for the Project P1 and save them to a file F2.
+
+	Compare F1 and F2.
+
+9. Backend developming environment:
+
+	9.1 Create in Planner CVS the environment to compile the backend
+
+	9.2. Convert to e-d-s plugin the backend when it is possible

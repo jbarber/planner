@@ -1,0 +1,79 @@
+Work in 1 and 9 for alpha8 release (next will be a beta release)
+
+1. Loading a Planner project
+
+	1.1 Create a Planner project file and create a
+	source in Evolution to use it:
+
+	We need to correct the fact that e-d-s could only has
+	one MrpApplication. If we need to manage several Planner
+	Projects file, we need to see how we do it in Planner with
+	several windows.
+
+	The key is that we only need one MrpApplication for all the
+	backends objects we can need to manage several Planner data
+	sources. We have put this common MrpApplication as a class
+	variable so it is shared between all the backends. Great, it
+	now works nicely working with several planner files at the same
+	time.
+
+	Now we need to take the URL for the backend and load the file
+	that the backend has associated with it and not a fixed file. Done.
+
+	It only point to be solved here is that for the moment, we need to
+	add sources using "http://<planer_file>". Then the "http://" is	
+	translated to "planner://" when Project calendar category is selected.
+
+	OK!
+
+	1.2 Create a Planner project database and create a
+	source in Evolution to use it
+
+	We are going to use this point to test also the actual CVS planner
+	database system in order to publish planner 0.13. First thing is
+	to install postgres and configure it so we can use it from 
+	Planner, mainly the access to the database server.
+
+	In Planner you need only a database user that can create databases
+	in order to save the data in Postgresql. The best way is to change
+	to "postgres" user once you have installed postgres and execute:
+
+	echo 'CREATE USER acs CREATEDB;' | psql -e template1	
+
+	Databases are stored in UNICODE so we don't have probs with UTF8.
+
+	Once you have created the user the it is time to create a little
+	plan y Planner and try to save it to database. 
+
+	The URI that Planner needs is:
+
+	sql://acs@localhost#db=plannerdb&id=1
+
+	Using it we can now open with no probs Planner database projects 
+	from Evolution and modify them.
+
+	OK for now!
+	
+
+9. Backend developing environment:
+
+	9.1 Create in Planner CVS the environment to compile the backend
+
+	Now that we are using plugings it seems it is going to be easier
+	to do it.
+
+	Working on it right now.
+
+	9.2. Convert to e-d-s plugin the backend when it is possible
+
+	In e-d-s 1.0 in order to add other backend you need to modify
+	the actual e-d-s server code (src/server.c) or you need to create a complete
+	new server with support for your backend.
+
+	In e-d-s 1.2, in October first week it will hit the CVS, you
+	could create a plugin for your backend that will be loaded from
+	the main e-d-s server.
+
+	As expected the new plugin system for loading e-d-s backend modules
+	is in placed and it is used by all the backends in Evolution. The
+	planner backend has being converted to use it. OK!

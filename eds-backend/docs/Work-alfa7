@@ -1,0 +1,128 @@
+Work in 3.3 and 3.4 for the alpha7 release
+
+3. Modifying tasks
+
+	3.3 Modify step by step all the fields in Evolution task properties
+	and check them in Planner fields:
+
+	We create a new task from Evolution and test how it is saved to Planner
+	all the Evolution fields:
+
+	* Task summary "evo1": OK, task name in Planner
+	* Check box completed for "evo1": OK
+	
+	Time to see not direct fields for task. I have tried to add columns to
+	the view so I can see fields in the task view but evolution has crashed.
+	Need to check it with the evo 2.0 packages.
+
+	Next fields don't have a direct translation to Planner task. We can create
+	custom properties in Planner in order to support them. If not, we will loose
+	this information when we exit from Evo and the data is saved in a Planner file.
+	* Classification: public/private/confidential
+	* Group: something related to the source of data. No need to save it.
+	* Categories: a String with category fields for Planner.
+	Birthday, Business, Competition
+
+	* Description "test evo1 task": KO, need to fix it, comp2task. 
+	It works from planner to Evolution.
+
+	Next fields are about timing. In Planner normally, tasks don't have a concrete
+	start time and end time because we use the work or duration to fix the end date
+	and the start day normally is as soon as possible. We can use the "Must start on"
+	restriction to tasks so they start when evolution task say. In Evolution
+	we can put the dates to "None" but this is an important data for the user. I
+	think the best plan is to let planner manage dates freely and then, take the
+	dates from Planner and show them in Evolution.
+
+	* Due date (task tab)
+	* Start date (task tab)
+	* Date completed (status tab): doesn't have time zone selection.
+
+	Finally:
+
+	* Status: are translated to percent complete, so if this field is
+	saved correctly in Planner, it is ok. The status cancelled can't be
+	shown in planner for now.
+	* Percent complete "95": OK
+	* Priority: High, Normal, Low, Undefined are translated over numbers
+	from 0 to 9.  If we use Normal in Planner we get "5". OK.
+	* Web page: we need to add a custom property in Planner so we store
+	the task URL. KO
+
+	About the resources (Attendees):
+
+	We will translate Evolution attendees in Planner resources.
+
+	* Organizer: we will need a custom property for resources in Planner if
+	we want to save this info.
+
+	About each resource we need:
+      
+	* Atendee "a1": Resource name in Planner. KO 
+	* Type: Individual, Group, Room, Resource, Unknown. In Planner we have
+	right now Work and Material that could be mapped to Individual and
+	Resource. But we will lost other categories and we can't do nothing about
+	it. In any case, we don't save it right now. KO
+	* Rol: We need a custom property in Planner if we plan to save it. KO
+	* RSVP: We need a custom property in Planner if we plan to save it. KO
+	* Status: We need a custom property in Planner if we plan to save it. KO
+
+	We can derive a clear plan to work in this points. For the moment, in
+	we need to add custom properties to Planner Resources (atendees), we won't
+	do it for the 0.1 release. 
+
+	The Task custom properties will be added:
+	Classification and Categories. About the dates, Planner will manage them
+	and evolution will only show them. ¿Could we make this field read only
+	in evolution in some way? We will add also Web page.
+
+	So the plan for next days is:
+
+	- Add custom properties Classification, Categories and Web page to
+	Planner task, and fill the fields with Evolution data.
+
+	DONE, we need to hide these properties in the Task view in Planner.
+       	planner-task-tree.c (2120)
+
+	- All dates in Evolution (start, end and due) will be managed from
+	Planner. We need to check if we can make this fields in Evolution
+	read only. We need to think about other ways to manage dates, for 
+	example, let the user force a start date and due date.
+
+	DONE. Dates come from planner and changes in Evolution are ignored.
+	Ideally, the fields must be read only.
+
+	- Implement the save of fields in Planner data: task description, 
+	all the custom properties and the resources.
+
+	DONE.
+
+	3.4 Modify step by step all the fields in Planner Task properties
+	and check them in Evolution fields
+
+	A Planner task has the next fields:
+	
+	* WBS: unique in a project and automatic identifier for a task
+	Evolution UID could be the more similar concept to that. For the
+	moment we don't touch it from Evolution.
+
+	* Name: Evo summanry. OK
+	* Work: Not in Evo. OK
+	* Type: Milestone, Fixed Duration.
+	This concepts aren't in Evo. Maybe the fixed duration task could be
+	the default in Evo. Need to think more about it.
+	* Duration: Not in Evo. OK
+	* Complete: Complete in Evo. OK
+	* Priority: Evo priority only 0-9. OK if we use the correct values in Planner.
+	
+	Task assigned resources are translated to attendee in Evolution. 
+	We loose some resources information from Planner because 
+	ECalComponentAttendee has fewer data than MrpResource.
+
+	* Resources: OK
+
+	
+	* Predecessors: Not in Evo. OK
+	* Notes: Evo task description. OK.
+
+	From Evolution we don't have the relations between tasks.

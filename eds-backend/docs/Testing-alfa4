@@ -1,0 +1,75 @@
+Backend alpha4 testing:
+
+
+1. Loading a Planner project
+
+	1.1 Create a Planner project file and create a
+	source in Evolution to use it: KO
+
+	It seems will be easy adding a new List of tasks to
+	Evolution for the Type planner, but currently, the Add
+	button is disabled if you select this type.
+
+	Very interesting that can change the refresh time for the
+	tasks list. 
+
+	1.2 Create a Planner project database and create a
+	source in Evolution to use it: KO
+
+	It could be so easy because in Planner knows the storage
+	type from the URL.
+
+2. Adding tasks
+
+	2.1. Create with Planner an empty file and open with Evo: OK
+
+	2.2. Create with Planner a file with 1 task empty T1: OK
+
+	2.3. Add a new T2 Task from Evolution: OK
+
+	Need to reopen the file in Planner
+	
+3. Modifying tasks
+
+	3.1 Modify T1 summary from Evolution and check changes with Planner: OK
+
+	Need to uncheck the calendar in Evolution and check it another time
+	to see only one task in Evolution.
+
+	3.2 Modify T1 Planner Task note and check changes from Evolution: OK
+
+	Need to save file from Planner
+	Need to stop evolution and evolution-data-sever and start them
+
+	3.3 Modify step by step all the fields in Evolution task properties
+	and check them in Planner fields: TODO
+
+	3.4 Modify step by step all the fields in Planner Task properties
+	and check them in Evolution fields: TODO
+
+
+4. Removing tasks
+
+	4.1 Remove T2 Task from Evolution: OK
+
+	Need to reopen the file in Planner
+
+	Need to uncheck the calendar in Evolution and check it another time
+	to see only one task in Evolution.
+
+	4.2 Remove T2 Task from Planner: OK
+
+	Need to stop evolution and evolution-data-sever and start them
+
+	
+5. Working with substasks: KO
+
+6. Working with resources
+
+	6.1 Assign a resource R1 from Planner and check it in Evolution: OK
+
+	Need to stop evolution and evolution-data-sever and start them
+
+	6.2 Assign a contact C1 from Evolution and check it in Planner: KO
+
+7. Scalability: KO

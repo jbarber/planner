@@ -1,0 +1,57 @@
+2004-10-02  Alvaro del Castillo  <acs@barrapunto.com>
+	* Backend migrated to the new e-d-s modules system
+
+	* Backend now compiles inside Planner CVS module
+
+	* Support for multiple projects open working
+
+	* We start to use the main Changelog so this Changelog won't be
+	updated.
+
+2004-09-22  Alvaro del Castillo  <acs@barrapunto.com>
+	* Solved problems when editing the details for a Task. I was
+	freeing the component in e_cal_backend_planner_get_object.
+	I want to understand better the searching component code.
+
+	* Time to review all the Testing to close the TODO for modifying.
+	It is important to check for dates (start, end, due ...) and also
+	to check the work Planner concept in Evolution.
+
+2004-09-21  Alvaro del Castillo  <acs@barrapunto.com>
+	* Solved the duplication task when modifying a task. It was
+	because we don't return correctly the old_object.
+
+	* The main bug right now is lookup_component (cbplanner, comp_uid)
+	doesn't return a good ECalComponent when editing the details for
+	a task. We need also to check how the search of a object is done
+	in order to optimize it.
+
+2004-09-16  Alvaro del Castillo  <acs@barrapunto.com>
+	* A testing session
+
+2004-09-15  Alvaro del Castillo  <acs@barrapunto.com>
+	* More robust code in cal_component_to_task
+	* Removing tasks now works
+
+2004-09-15  Alvaro del Castillo  <acs@barrapunto.com>
+	* Really Bad guy, I wasn't updating the ChangeLog ;-)
+	* Can modify tasks from evolution
+	* More complete MrpTask<->ECalComponent conversion
+	* Next targets: add and remove tasks
+	* Problems: fails adding task. The UI shows to task when 
+	modifying a task
+
+2004-09-07  Alvaro del Castillo  <acs@barrapunto.com>
+	* Bad guy, I wasn't updating the ChangeLog ;-)
+	* Solve problems opening a Planner project more that one time
+	* Planner tasks dates are shown now in Evolution
+	* Added a TODO file
+	
+2004-08-14  Alvaro del Castillo  <acs@barrapunto.com>
+	* First complete implementation for the backend. Time
+	to start hacking in creating source for the backend and test
+	it with evolution.
+	
+2004-08-12  Alvaro del Castillo  <acs@barrapunto.com>
+
+	* Started planner calendar backend from http backend
