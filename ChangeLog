@@ -1,3 +1,13 @@
+2004-06-07 Alvaro del Castillo  <acs@barrapunto.com>
+
+	* src/planner-task-dialog.c: implemented undo for resource
+	assignment to task (assign resource, remove resource, change
+	units assigned). 
+
+	Use planned_cmd_new API in all the undo code.
+
+	Changes in undo functions in order to be more understable.
+	
 2004-06-06 Alvaro del Castillo  <acs@barrapunto.com>
 
 	* src/planner-task-dialog.c: implemented undo milestone and 

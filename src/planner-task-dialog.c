@@ -210,6 +210,16 @@ typedef struct {
 	MrpTaskSched old_sched;
 } TaskCmdEditSchedule;
 
+typedef struct {
+	PlannerCmd base;
+
+	MrpTask       *task;
+	MrpResource   *resource;
+	MrpAssignment *assignment;
+	guint          units;
+	guint          old_units;
+} TaskCmdEditAssignment;
+
 
 static void
 task_dialog_setup_option_menu (GtkWidget     *option_menu,
@@ -387,14 +397,13 @@ task_cmd_edit_property_focus (PlannerWindow *main_window,
 	PlannerCmd          *cmd_base;
 	TaskCmdEditProperty *cmd;
 
-	cmd = g_new0 (TaskCmdEditProperty, 1);
+	cmd_base = planner_cmd_new (TaskCmdEditProperty,
+				    _("Edit task property from dialog"),
+				    task_cmd_edit_property_do,
+				    task_cmd_edit_property_undo,
+				    task_cmd_edit_property_free);
 
-	cmd_base = (PlannerCmd*) cmd;
-
-	cmd_base->label = g_strdup (_("Edit task property from dialog"));
-	cmd_base->do_func = task_cmd_edit_property_do;
-	cmd_base->undo_func = task_cmd_edit_property_undo;
-	cmd_base->free_func = task_cmd_edit_property_free;
+	cmd = (TaskCmdEditProperty *) cmd_base;
 
 	cmd->property = g_strdup (property);
 	cmd->task = g_object_ref (task);
@@ -416,7 +425,7 @@ task_cmd_edit_property_focus (PlannerWindow *main_window,
 }
 
 static gboolean
-task_cmd_type_do (PlannerCmd *cmd_base)
+task_cmd_edit_type_do (PlannerCmd *cmd_base)
 {
 	TaskCmdEditType *cmd;
 
@@ -428,7 +437,7 @@ task_cmd_type_do (PlannerCmd *cmd_base)
 }
 
 static void
-task_cmd_type_undo (PlannerCmd *cmd_base)
+task_cmd_edit_type_undo (PlannerCmd *cmd_base)
 {
 	TaskCmdEditType *cmd;
 
@@ -438,7 +447,7 @@ task_cmd_type_undo (PlannerCmd *cmd_base)
 }
 
 static void
-task_cmd_type_free (PlannerCmd *cmd_base)
+task_cmd_edit_type_free (PlannerCmd *cmd_base)
 {
 	TaskCmdEditType *cmd;
 
@@ -462,15 +471,15 @@ task_cmd_edit_type (PlannerWindow *main_window,
 		return NULL;
 	}
 
-	cmd = g_new0 (TaskCmdEditType, 1);
+	cmd_base = planner_cmd_new (TaskCmdEditType,
+				    _("Edit task type from dialog"),
+				    task_cmd_edit_type_do,
+				    task_cmd_edit_type_undo,
+				    task_cmd_edit_type_free);
 
-	cmd_base = (PlannerCmd*) cmd;
-
-	cmd_base->label = g_strdup (_("Edit type task from dialog"));
-	cmd_base->do_func = task_cmd_type_do;
-	cmd_base->undo_func = task_cmd_type_undo;
-	cmd_base->free_func = task_cmd_type_free;
-
+	
+	cmd = (TaskCmdEditType *) cmd_base;
+	
 	cmd->task = g_object_ref (task);
 
 	cmd->old_type = old_type;
@@ -483,7 +492,7 @@ task_cmd_edit_type (PlannerWindow *main_window,
 }
 
 static gboolean
-task_cmd_sched_do (PlannerCmd *cmd_base)
+task_cmd_edit_sched_do (PlannerCmd *cmd_base)
 {
 	TaskCmdEditSchedule *cmd;
 
@@ -495,7 +504,7 @@ task_cmd_sched_do (PlannerCmd *cmd_base)
 }
 
 static void
-task_cmd_sched_undo (PlannerCmd *cmd_base)
+task_cmd_edit_sched_undo (PlannerCmd *cmd_base)
 {
 	TaskCmdEditSchedule *cmd;
 
@@ -505,7 +514,7 @@ task_cmd_sched_undo (PlannerCmd *cmd_base)
 }
 
 static void
-task_cmd_sched_free (PlannerCmd *cmd_base)
+task_cmd_edit_sched_free (PlannerCmd *cmd_base)
 {
 	TaskCmdEditSchedule *cmd;
 
@@ -529,20 +538,216 @@ task_cmd_edit_sched (PlannerWindow *main_window,
 		return NULL;
 	}
 
-	cmd = g_new0 (TaskCmdEditSchedule, 1);
+	cmd_base = planner_cmd_new (TaskCmdEditSchedule,
+				    _("Edit task schedule from dialog"),
+				    task_cmd_edit_sched_do,
+				    task_cmd_edit_sched_undo,
+				    task_cmd_edit_sched_free);
 
-	cmd_base = (PlannerCmd*) cmd;
-
-	cmd_base->label = g_strdup (_("Edit task schedule from dialog"));
-	cmd_base->do_func = task_cmd_sched_do;
-	cmd_base->undo_func = task_cmd_sched_undo;
-	cmd_base->free_func = task_cmd_sched_free;
+	cmd = (TaskCmdEditSchedule *) cmd_base;
 
 	cmd->task = g_object_ref (task);
 
 	cmd->old_sched = old_sched;
 	cmd->sched = sched;
 
+	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager (main_window),
+					   cmd_base);
+
+	return cmd_base;
+}
+
+static gboolean
+task_cmd_assign_add_do (PlannerCmd *cmd_base)
+{
+	TaskCmdEditAssignment *cmd;
+
+	cmd = (TaskCmdEditAssignment* ) cmd_base;
+
+	/* FIXME: better than returning void it could return the assignment */
+	mrp_resource_assign (cmd->resource, cmd->task, cmd->units);
+
+	return TRUE;
+}
+
+static void
+task_cmd_assign_add_undo (PlannerCmd *cmd_base)
+{
+	TaskCmdEditAssignment *cmd;
+	MrpAssignment         *assignment;
+
+	cmd = (TaskCmdEditAssignment* ) cmd_base;
+
+	assignment = mrp_task_get_assignment (cmd->task, cmd->resource);
+
+	mrp_object_removed (MRP_OBJECT (assignment));
+}
+
+static void
+task_cmd_assign_add_free (PlannerCmd *cmd_base)
+{
+	TaskCmdEditAssignment *cmd;
+
+	cmd = (TaskCmdEditAssignment* ) cmd_base;
+
+	g_object_unref (cmd->task);
+	g_object_unref (cmd->resource);
+}
+
+static PlannerCmd *
+task_cmd_assign_add (PlannerWindow *main_window,
+		     MrpTask       *task,
+		     MrpResource   *resource,
+		     guint          units)
+{
+	PlannerCmd             *cmd_base;
+	TaskCmdEditAssignment  *cmd;
+	MrpAssignment          *assignment;
+	guint                   old_units;
+
+	assignment = mrp_task_get_assignment (task, resource);
+	if (assignment) {
+		old_units = mrp_assignment_get_units (assignment);
+
+		if (old_units == units) {
+			return NULL;
+		}
+	} else {
+		old_units = 0;
+	}
+
+	cmd_base = planner_cmd_new (TaskCmdEditAssignment,
+				    _("Add a resource for a task from dialog"),
+				    task_cmd_assign_add_do,
+				    task_cmd_assign_add_undo,
+				    task_cmd_assign_add_free);
+	
+	cmd = (TaskCmdEditAssignment *) cmd_base;
+	cmd->task = g_object_ref (task);
+	cmd->resource = g_object_ref (resource);
+	cmd->old_units = old_units;
+	cmd->units = units;
+		
+	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager (main_window),
+					   cmd_base);
+
+	return cmd_base;
+}
+
+static gboolean
+task_cmd_assign_remove_do (PlannerCmd *cmd_base)
+{
+	TaskCmdEditAssignment *cmd;
+	MrpAssignment         *assignment;
+
+	cmd = (TaskCmdEditAssignment* ) cmd_base;
+
+	assignment = mrp_task_get_assignment (cmd->task, cmd->resource);
+	mrp_object_removed (MRP_OBJECT (assignment));
+
+	return TRUE;
+}
+
+static void
+task_cmd_assign_remove_undo (PlannerCmd *cmd_base)
+{
+	TaskCmdEditAssignment *cmd;
+
+	cmd = (TaskCmdEditAssignment* ) cmd_base;
+
+	mrp_resource_assign (cmd->resource, cmd->task, cmd->units);
+}
+
+static void
+task_cmd_assign_remove_free (PlannerCmd *cmd_base)
+{
+	TaskCmdEditAssignment *cmd;
+
+	cmd = (TaskCmdEditAssignment* ) cmd_base;
+
+	g_object_unref (cmd->task);
+	g_object_unref (cmd->resource);
+}
+
+static PlannerCmd *
+task_cmd_assign_remove (PlannerWindow *main_window,
+			MrpAssignment *assignment)
+{
+	PlannerCmd             *cmd_base;
+	TaskCmdEditAssignment  *cmd;
+
+	cmd_base = planner_cmd_new (TaskCmdEditAssignment,
+				    _("Remove a resource from a task from dialog"),
+				    task_cmd_assign_remove_do,
+				    task_cmd_assign_remove_undo,
+				    task_cmd_assign_remove_free);
+	
+	cmd = (TaskCmdEditAssignment *) cmd_base;
+	cmd->task = g_object_ref (mrp_assignment_get_task (assignment));
+	cmd->resource = g_object_ref (mrp_assignment_get_resource (assignment));
+	cmd->units = mrp_assignment_get_units (assignment);
+		
+	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager (main_window),
+					   cmd_base);
+
+	return cmd_base;
+}
+
+static gboolean
+task_cmd_assign_units_do (PlannerCmd *cmd_base)
+{
+	TaskCmdEditAssignment *cmd;
+
+	cmd = (TaskCmdEditAssignment* ) cmd_base;
+
+	g_object_set (cmd->assignment, "units", cmd->units, NULL);
+
+	return TRUE;
+}
+
+static void
+task_cmd_assign_units_undo (PlannerCmd *cmd_base)
+{
+	TaskCmdEditAssignment *cmd;
+
+	cmd = (TaskCmdEditAssignment* ) cmd_base;
+
+	g_object_set (cmd->assignment, "units", cmd->old_units, NULL);
+	
+}
+
+static void
+task_cmd_assign_units_free (PlannerCmd *cmd_base)
+{
+	TaskCmdEditAssignment *cmd;
+
+	cmd = (TaskCmdEditAssignment* ) cmd_base;
+
+	g_object_unref (cmd->task);
+	g_object_unref (cmd->resource);
+}
+
+static PlannerCmd *
+task_cmd_assign_units (PlannerWindow *main_window,
+		       MrpAssignment *assignment,
+		       guint          units)
+{
+	PlannerCmd             *cmd_base;
+	TaskCmdEditAssignment  *cmd;
+
+	cmd_base = planner_cmd_new (TaskCmdEditAssignment,
+				    _("Change resource units for a task from dialog"),
+				    task_cmd_assign_units_do,
+				    task_cmd_assign_units_undo,
+				    task_cmd_assign_units_free);
+	
+	cmd = (TaskCmdEditAssignment *) cmd_base;
+	cmd->task = g_object_ref (mrp_assignment_get_task (assignment));
+	cmd->resource = g_object_ref (mrp_assignment_get_resource (assignment));
+	cmd->assignment = assignment;
+	cmd->units = units;
+	cmd->old_units = mrp_assignment_get_units (assignment);
+		
 	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager (main_window),
 					   cmd_base);
 
@@ -716,8 +921,6 @@ task_dialog_task_sched_changed_cb (MrpTask *task, GParamSpec *pspec, GtkWidget *
 
 	g_object_get (task, "sched", &sched, NULL);
 
-	/* FIXME: this doesn't do anything right now. */
-	
 	g_signal_handlers_block_by_func (data->fixed_checkbutton,
 					 task_dialog_fixed_toggled_cb,
 					 dialog);
@@ -1490,9 +1693,10 @@ task_dialog_resource_units_cell_edited (GtkCellRendererText *cell,
 		
 	assignment = mrp_task_get_assignment (data->task, resource);
 	if (assignment) {
-		g_object_set (assignment,
+		task_cmd_assign_units (data->main_window, assignment, atoi (new_text));
+		/* g_object_set (assignment,
 			      "units", atoi (new_text),
-			      NULL);
+			      NULL);*/
 	}
 }
 
@@ -1947,14 +2151,18 @@ task_dialog_assignment_toggled_cb (GtkCellRendererText *cell,
 	resource = ((GList *)iter.user_data)->data;
 
  	if (!active) {
-		mrp_resource_assign (resource, data->task, 100);
+		task_cmd_assign_add (data->main_window, data->task, resource, 100);
+		/* mrp_resource_assign (resource, data->task, 100); */
 	} else {
 		MrpAssignment *assignment;
 		
+		/* FIXME: UNDO */
 		assignment = mrp_task_get_assignment (data->task, resource);
 
 		if (assignment) {
-			mrp_object_removed (MRP_OBJECT (assignment));
+			task_cmd_assign_remove (data->main_window, assignment);
+			/* mrp_object_removed (MRP_OBJECT (assignment));
+			   g_object_unref (assignment); */
 		} 
 	}
 }
@@ -2264,7 +2472,7 @@ task_dialog_update_sensitivity (DialogData *data)
 	gtk_widget_set_sensitive (data->milestone_checkbutton, leaf);
 	gtk_widget_set_sensitive (data->fixed_checkbutton, leaf);
 	
-	gtk_widget_set_sensitive (data->work_spinbutton, sensitive);
+	gtk_widget_set_sensitive (data->work_spinbutton, sensitive && !fixed);
 	gtk_widget_set_sensitive (data->duration_spinbutton, sensitive && fixed);
 	gtk_widget_set_sensitive (data->complete_spinbutton, sensitive);
 	gtk_widget_set_sensitive (data->priority_spinbutton, sensitive);
