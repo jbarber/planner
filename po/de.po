@@ -3,14 +3,16 @@
 # Jochen Hein <jochen@jochen.org>, 2001.
 # Christian Meyer <chrisime@gnome.org>, 2002.
 # Christian Neumair <chris@gnome-de.org>, 2002, 2003.
-#
+# Christian Neumair <chris@gnome-de.org>, 2004.
+# 
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: MrProject HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-11-03 23:13+0100\n"
-"PO-Revision-Date: 2004-11-04 00:09+0100\n"
-"Last-Translator: Christian Neumair <chris@gnome-de.org>\n"
+"POT-Creation-Date: 2004-11-09 16:03+0100\n"
+"PO-Revision-Date: 2004-11-09 16:04+0100\n"
+"Last-Translator: Hendrik Brandt <eru@gmx.li>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -520,8 +522,8 @@ msgstr "Es konnte kein passendes Dateimodul zum Laden von »%s« gefunden werden
 #: libplanner/mrp-project.c:776 libplanner/mrp-project.c:1060
 msgid "No support for SQL storage built into this version of Planner."
 msgstr ""
-"In diese Planner-Version wurde keine Unterstützung für das Speichern per "
-"SQL einkompiliert."
+"In diese Planner-Version wurde keine Unterstützung für das Speichern per SQL "
+"einkompiliert."
 
 #: libplanner/mrp-project.c:813
 msgid "Invalid URI."
@@ -604,11 +606,10 @@ msgstr ""
 "Das Projekt »%s« wurde vom Benutzer »%s« geändert, während Sie darauf "
 "zugegriffen haben. Wollen Sie dennoch abspeichern?"
 
-#: libplanner/mrp-sql.c:3622 src/planner-sql-plugin.c:663
+#: libplanner/mrp-sql.c:3624 src/planner-sql-plugin.c:657
 #, c-format
 msgid "Connection to database '%s' failed."
-msgstr ""
-"Verbindung mit Datenbank »%s« ist fehlgeschlagen."
+msgstr "Verbindung mit Datenbank »%s« ist fehlgeschlagen."
 
 #: libplanner/mrp-storage-sql.c:205
 msgid "Invalid SQL URI (must start with 'sql://' and contain '#')."
@@ -632,12 +633,14 @@ msgstr ""
 #: libplanner/mrp-task-manager.c:2050
 msgid "Cannot add a predecessor, because it would result in a loop."
 msgstr ""
-"Es konnte kein Vorgänger hinzugefügt werden, da dies zu einer Endlosschleife führen würde."
+"Es konnte kein Vorgänger hinzugefügt werden, da dies zu einer Endlosschleife "
+"führen würde."
 
 #: libplanner/mrp-task-manager.c:2096
 msgid "Cannot move the task, because it would result in a loop."
 msgstr ""
-"Die Aufgabe konnte nicht verschoben werden, da dies zu einer Endlosschleife führen würde."
+"Die Aufgabe konnte nicht verschoben werden, da dies zu einer Endlosschleife "
+"führen würde."
 
 #: libplanner/mrp-xsl.c:106
 msgid "Export to HTML failed"
@@ -645,7 +648,8 @@ msgstr "Export nach HTML ist fehlgeschlagen"
 
 #: libplanner/mrp-xsl.c:172
 msgid "Export to Planner pre-0.12 format failed"
-msgstr "Exportieren in das Planner-Dateiformat vor Version 0.12 ist fehlgeschlagen"
+msgstr ""
+"Exportieren in das Planner-Dateiformat vor Version 0.12 ist fehlgeschlagen"
 
 #: src/planner-application.c:55 src/planner-application.c:111
 msgid "Insert"
@@ -842,7 +846,9 @@ msgstr "Evolution Data Server UID"
 
 #: src/planner-eds-plugin.c:903
 msgid "Identifier used by Evolution Data Server for resources"
-msgstr "Identifikator welcher vom Evolution Data Server für einzelne Ressourcen benutzt wird"
+msgstr ""
+"Identifikator welcher vom Evolution Data Server für einzelne Ressourcen "
+"benutzt wird"
 
 #: src/planner-format.c:141
 #, c-format
@@ -1458,7 +1464,7 @@ msgstr "Aus Datenbank öffnen..."
 msgid "Open a project from a database"
 msgstr "Projekt aus einer Datenbank öffnen"
 
-#: src/planner-sql-plugin.c:97 src/planner-sql-plugin.c:1099
+#: src/planner-sql-plugin.c:97 src/planner-sql-plugin.c:1093
 msgid "Save to Database"
 msgstr "In Datenbank speichern"
 
@@ -1475,7 +1481,8 @@ msgstr "Keine Fehler berichtet."
 msgid ""
 "Database %s needs to be upgraded from version %s to version %s.\n"
 "Please backup database before the upgrade."
-msgstr "Die Datenbank %s muss von Version %s auf Version %s aktualisiert werden.\n"
+msgstr ""
+"Die Datenbank %s muss von Version %s auf Version %s aktualisiert werden.\n"
 "Bitte erstellen Sie vor der Aktualisierung eine Sicherungskopie Ihrer Daten."
 
 #: src/planner-sql-plugin.c:501
@@ -1490,7 +1497,8 @@ msgid ""
 "\n"
 "Database error: \n"
 "%s"
-msgstr "Die Datenbank %s konnte nicht aktualisiert werden.\n"
+msgstr ""
+"Die Datenbank %s konnte nicht aktualisiert werden.\n"
 "Die verwendete Aktualisierungsdatei war: %s.\n"
 "\n"
 "Datenbankfehler:\n"
@@ -1504,31 +1512,32 @@ msgstr "In der Datenbank %s konnten keine Tabellen angelegt werden."
 #: src/planner-sql-plugin.c:617
 #, c-format
 msgid "Database %s is not setup for Planner. Do you want to do that?"
-msgstr "Die Datenbank %s ist nicht für Planner vorbereitet. Möchten Sie dies jetzt vornehmen?"
+msgstr ""
+"Die Datenbank %s ist nicht für Planner vorbereitet. Möchten Sie dies jetzt "
+"vornehmen?"
 
-#: src/planner-sql-plugin.c:674
+#: src/planner-sql-plugin.c:668
 #, c-format
 msgid "Test to tables in database '%s' failed."
 msgstr "Test auf Tabellen in Datenbank »%s« ist fehlgeschlagen."
-""
 
-#: src/planner-sql-plugin.c:767
+#: src/planner-sql-plugin.c:761
 msgid "ID"
 msgstr "ID"
 
-#: src/planner-sql-plugin.c:775
+#: src/planner-sql-plugin.c:769
 msgid "Project"
 msgstr "Projekt"
 
-#: src/planner-sql-plugin.c:783
+#: src/planner-sql-plugin.c:777
 msgid "Phase"
 msgstr "Phase"
 
-#: src/planner-sql-plugin.c:791
+#: src/planner-sql-plugin.c:785
 msgid "Revision"
 msgstr "Revision"
 
-#: src/planner-sql-plugin.c:987
+#: src/planner-sql-plugin.c:981
 msgid "Open from Database"
 msgstr "Aus Datenbank öffnen"
 
@@ -1653,8 +1662,9 @@ msgstr "Aufgabe verschieben"
 msgid ""
 "You are about to open an edit dialog each for %i tasks. Are you sure that "
 "you want to do that?"
-msgstr "Sie beabsichtigen für %i Aufgaben jeweils einen Dialog zum Bearbeiten zu öffnen. "
-"Sind Sie sicher, dass Sie fortfahren möchten?"
+msgstr ""
+"Sie beabsichtigen für %i Aufgaben jeweils einen Dialog zum Bearbeiten zu "
+"öffnen. Sind Sie sicher, dass Sie fortfahren möchten?"
 
 #: src/planner-task-tree.c:3320
 msgid "mon"
@@ -2099,7 +2109,8 @@ msgstr "Planner-0.11-Format"
 
 #: src/planner-xml-planner-plugin.c:54
 msgid "Export project to a file suitable for Planner 0.11"
-msgstr "Projekt in ein für Planner in Version 0.11 geeignetes Dateiformat exportieren"
+msgstr ""
+"Projekt in ein für Planner in Version 0.11 geeignetes Dateiformat exportieren"
 
 #: src/planner-xml-planner-plugin.c:91
 msgid "Export"
