@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: planner HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-05-03 21:39-0400\n"
-"PO-Revision-Date: 2004-05-03 21:40-0400\n"
+"POT-Creation-Date: 2004-05-18 22:49-0400\n"
+"PO-Revision-Date: 2004-05-18 22:50-0400\n"
 "Last-Translator: David Lodge <dave@cirt.net>\n"
 "Language-Team: English (British) <en_gb@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -404,7 +404,7 @@ msgid "_Work:"
 msgstr "_Work:"
 
 #. day unit variant accepted in input
-#: data/glade/task-dialog.glade.h:17 src/planner-task-tree.c:3219
+#: data/glade/task-dialog.glade.h:17 src/planner-task-tree.c:3534
 msgid "days"
 msgstr "days"
 
@@ -497,12 +497,12 @@ msgid "Reset _Constraint"
 msgstr "Reset _Constraint"
 
 #: data/ui/gantt-view.ui.h:18 data/ui/resource-view.ui.h:10
-#: data/ui/task-view.ui.h:18
+#: data/ui/task-view.ui.h:18 data/ui/time-table-view.ui.h:1
 msgid "Select _All"
 msgstr "Select _All"
 
 #: data/ui/gantt-view.ui.h:19 data/ui/resource-view.ui.h:11
-#: data/ui/task-view.ui.h:19
+#: data/ui/task-view.ui.h:19 data/ui/time-table-view.ui.h:2
 msgid "Select all tasks"
 msgstr "Select all tasks"
 
@@ -552,15 +552,15 @@ msgstr "Zoom To _Fit"
 msgid "Zoom _Out"
 msgstr "Zoom _Out"
 
-#: data/ui/gantt-view.ui.h:31 data/ui/time-table-view.ui.h:1
+#: data/ui/gantt-view.ui.h:31 data/ui/time-table-view.ui.h:3
 msgid "Zoom in"
 msgstr "Zoom in"
 
-#: data/ui/gantt-view.ui.h:32 data/ui/time-table-view.ui.h:2
+#: data/ui/gantt-view.ui.h:32 data/ui/time-table-view.ui.h:4
 msgid "Zoom out"
 msgstr "Zoom out"
 
-#: data/ui/gantt-view.ui.h:33 data/ui/time-table-view.ui.h:4
+#: data/ui/gantt-view.ui.h:33 data/ui/time-table-view.ui.h:6
 msgid "Zoom to fit the entire project"
 msgstr "Zoom to fit the entire project"
 
@@ -852,7 +852,7 @@ msgstr "_Edit Custom Properties..."
 msgid "_Edit Task"
 msgstr "_Edit Task"
 
-#: data/ui/time-table-view.ui.h:3
+#: data/ui/time-table-view.ui.h:5
 msgid "Zoom to fit"
 msgstr "Zoom to fit"
 
@@ -1177,21 +1177,21 @@ msgstr "Name"
 msgid "Work"
 msgstr "Work"
 
-#: src/planner-gantt-print.c:523 src/planner-gantt-row.c:671
+#: src/planner-gantt-print.c:523 src/planner-gantt-row.c:670
 #: src/planner-window.c:1663
 msgid "Unnamed"
 msgstr "Unnamed"
 
-#: src/planner-gantt-row.c:1921 src/planner-gantt-row.c:1924
+#: src/planner-gantt-row.c:1920 src/planner-gantt-row.c:1923
 msgid "No name"
 msgstr "No name"
 
-#: src/planner-gantt-row.c:1927
+#: src/planner-gantt-row.c:1926
 #, c-format
 msgid "Make task '%s' a predecessor of '%s'"
 msgstr "Make task '%s' a predecessor of '%s'"
 
-#: src/planner-gantt-row.c:1985
+#: src/planner-gantt-row.c:1984
 #, c-format
 msgid "Change work to %s"
 msgstr "Change work to %s"
@@ -1287,6 +1287,14 @@ msgstr "GEOMETRY"
 msgid "planner: --geometry cannot be used with more than one file."
 msgstr "planner: --geometry cannot be used with more than one file."
 
+#: src/planner-phase-dialog.c:535
+msgid "Insert phase"
+msgstr "Insert phase"
+
+#: src/planner-phase-dialog.c:635
+msgid "Remove phase"
+msgstr "Remove phase"
+
 #: src/planner-plugin-loader.c:40
 #, c-format
 msgid "Could not open plugin file '%s'\n"
@@ -1374,7 +1382,7 @@ msgstr "Label"
 msgid "Type"
 msgstr "Type"
 
-#: src/planner-python-plugin.c:121 src/planner-window.c:639
+#: src/planner-python-plugin.c:164 src/planner-window.c:639
 msgid "Open a file"
 msgstr "Open a file"
 
@@ -1603,27 +1611,43 @@ msgstr "/Assign _resources..."
 msgid "/_Edit task..."
 msgstr "/_Edit task..."
 
-#: src/planner-task-tree.c:263
+#: src/planner-task-tree.c:259
 msgid "Insert task"
 msgstr "Insert task"
 
-#: src/planner-task-tree.c:356
+#: src/planner-task-tree.c:348
 msgid "Edit task property"
 msgstr "Edit task property"
 
-#: src/planner-task-tree.c:720
+#: src/planner-task-tree.c:719
 msgid "Remove task"
 msgstr "Remove task"
 
-#: src/planner-task-tree.c:801
+#: src/planner-task-tree.c:798
 msgid "Constraint task"
 msgstr "Constraint task"
 
-#: src/planner-task-tree.c:957
+#: src/planner-task-tree.c:861
+msgid "Constraint task reset"
+msgstr "Constraint task reset"
+
+#: src/planner-task-tree.c:995
 msgid "Move task"
 msgstr "Move task"
 
-#: src/planner-task-tree.c:2581
+#: src/planner-task-tree.c:1114
+msgid "Link task"
+msgstr "Link task"
+
+#: src/planner-task-tree.c:1182
+msgid "Unlink task"
+msgstr "Unlink task"
+
+#: src/planner-task-tree.c:1263
+msgid "Edit task custom property"
+msgstr "Edit task custom property"
+
+#: src/planner-task-tree.c:2895
 #, c-format
 msgid ""
 "You are about to open an edit dialog each for %i tasks. Are you sure that "
@@ -1632,72 +1656,72 @@ msgstr ""
 "You are about to open %i edit dialogues, one for each task. Are you sure "
 "that you want to do that?"
 
-#: src/planner-task-tree.c:3211
+#: src/planner-task-tree.c:3526
 msgid "mon"
 msgstr "mon"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:3212
+#: src/planner-task-tree.c:3527
 msgid "month"
 msgstr "month"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:3213
+#: src/planner-task-tree.c:3528
 msgid "months"
 msgstr "months"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:3214
+#: src/planner-task-tree.c:3529
 msgid "w"
 msgstr "w"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:3215
+#: src/planner-task-tree.c:3530
 msgid "week"
 msgstr "week"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:3216
+#: src/planner-task-tree.c:3531
 msgid "weeks"
 msgstr "weeks"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:3217
+#: src/planner-task-tree.c:3532
 msgid "d"
 msgstr "d"
 
 #. day unit variant accepted in input
-#: src/planner-task-tree.c:3218
+#: src/planner-task-tree.c:3533
 msgid "day"
 msgstr "day"
 
 #. day unit variant accepted in input
-#: src/planner-task-tree.c:3220
+#: src/planner-task-tree.c:3535
 msgid "h"
 msgstr "h"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:3221
+#: src/planner-task-tree.c:3536
 msgid "hour"
 msgstr "hour"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:3222
+#: src/planner-task-tree.c:3537
 msgid "hours"
 msgstr "hours"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:3223
+#: src/planner-task-tree.c:3538
 msgid "min"
 msgstr "min"
 
 #. minute unit variant accepted in input
-#: src/planner-task-tree.c:3224
+#: src/planner-task-tree.c:3539
 msgid "minute"
 msgstr "minute"
 
 #. minute unit variant accepted in input
-#: src/planner-task-tree.c:3225
+#: src/planner-task-tree.c:3540
 msgid "minutes"
 msgstr "minutes"
 
@@ -1763,11 +1787,11 @@ msgstr ""
 "\n"
 "Task"
 
-#: src/planner-ttable-view.c:141
+#: src/planner-ttable-view.c:144
 msgid "Resource Usage"
 msgstr "Resource Usage"
 
-#: src/planner-ttable-view.c:148
+#: src/planner-ttable-view.c:151
 msgid "Resource _Usage"
 msgstr "Resource _Usage"
 
