@@ -65,7 +65,7 @@ enum {
 };
 
 
-GType           planner_group_model_get_type        (void);
+GType           planner_group_model_get_type        (void) G_GNUC_CONST;
 PlannerGroupModel *  planner_group_model_new             (MrpProject      *project);
 
 #endif /* __PLANNER_GROUP_MODEL_H__ */

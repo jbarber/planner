@@ -56,7 +56,7 @@ enum {
         NUMBER_OF_PREDECESSOR_COLS
 };
 
-GType         planner_predecessor_model_get_type (void);
+GType         planner_predecessor_model_get_type (void) G_GNUC_CONST;
 GtkTreeModel *planner_predecessor_model_new      (MrpTask    *task);
 
 #endif /* __PLANNER_PREDECESSOR_MODEL_H__ */

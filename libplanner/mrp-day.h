@@ -39,7 +39,7 @@ enum {
 	MRP_DAY_NEXT = 3
 };
 
-GType          mrp_day_get_type           (void);
+GType          mrp_day_get_type           (void) G_GNUC_CONST;
 MrpDay *       mrp_day_add                (MrpProject  *project,
 					   const gchar *name,
 					   const gchar *description);

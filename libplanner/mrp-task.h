@@ -54,9 +54,9 @@ struct _MrpTaskClass
 	MrpObjectClass parent_class;
 };
 
-GType            mrp_task_get_type                  (void);
-GType            mrp_constraint_get_type            (void);
-GType            mrp_relation_get_type              (void);
+GType            mrp_task_get_type                  (void) G_GNUC_CONST;
+GType            mrp_constraint_get_type            (void) G_GNUC_CONST;
+GType            mrp_relation_get_type              (void) G_GNUC_CONST;
 MrpTask         *mrp_task_new                       (void);
 const gchar     *mrp_task_get_name                  (MrpTask          *task);
 void             mrp_task_set_name                  (MrpTask          *task,

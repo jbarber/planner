@@ -48,7 +48,7 @@ typedef struct {
 } MrpTaskManagerClass;
 
 
-GType           mrp_task_manager_get_type             (void);
+GType           mrp_task_manager_get_type             (void) G_GNUC_CONST;
 MrpTaskManager *mrp_task_manager_new                  (MrpProject           *project);
 GList          *mrp_task_manager_get_all_tasks        (MrpTaskManager       *manager);
 void            mrp_task_manager_insert_task          (MrpTaskManager       *manager,

@@ -42,7 +42,7 @@ typedef enum {
 	MRP_PROPERTY_TYPE_COST
 } MrpPropertyType;
 
-GType           mrp_property_get_type          (void);
+GType           mrp_property_get_type          (void) G_GNUC_CONST;
 
 MrpProperty *   mrp_property_new               (const gchar     *name,
 						MrpPropertyType  type,

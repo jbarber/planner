@@ -62,7 +62,7 @@ enum {
 	NUM_COLS
 };
 
-GType              planner_gantt_model_get_type               (void);
+GType              planner_gantt_model_get_type               (void) G_GNUC_CONST;
 PlannerGanttModel *planner_gantt_model_new                    (MrpProject        *project);
 GtkTreePath  *     planner_gantt_model_get_path_from_task     (PlannerGanttModel *model,
 							       MrpTask           *task);

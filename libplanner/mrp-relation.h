@@ -47,7 +47,7 @@ typedef struct {
 } MrpRelationClass;
 
 
-GType            mrp_relation_get_type             (void);
+GType            mrp_relation_get_type             (void) G_GNUC_CONST;
 
 MrpTask         *mrp_relation_get_predecessor      (MrpRelation     *relation);
 

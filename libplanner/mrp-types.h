@@ -69,13 +69,13 @@ typedef struct _MrpGroup      MrpGroup;
 typedef struct _MrpAssignment MrpAssignment;
 typedef struct _MrpConstraint MrpConstraint;
 
-GType   mrp_relation_type_get_type (void);
+GType   mrp_relation_type_get_type (void) G_GNUC_CONST;
 
-GType   mrp_task_type_get_type     (void);
+GType   mrp_task_type_get_type     (void) G_GNUC_CONST;
 
-GType   mrp_task_sched_get_type    (void);
+GType   mrp_task_sched_get_type    (void) G_GNUC_CONST;
 
-GType   mrp_property_type_get_type (void);
+GType   mrp_property_type_get_type (void) G_GNUC_CONST;
 
 GList * mrp_string_list_copy       (const GList *list);
 

@@ -52,7 +52,7 @@ struct _PlannerPopupEntryClass
 	GtkEventBoxClass parent_class;
 };
 
-GtkType      planner_popup_entry_get_type   (void);
+GtkType      planner_popup_entry_get_type   (void) G_GNUC_CONST;
 
 GtkWidget   *planner_popup_entry_new        (void);
 

@@ -60,7 +60,7 @@ enum {
         NUMBER_OF_RESOURCE_ASSIGNMENT_COLS
 };
 
-GType              planner_assignment_model_get_type     (void);
+GType              planner_assignment_model_get_type     (void) G_GNUC_CONST;
 PlannerAssignmentModel *planner_assignment_model_new          (MrpTask    *task);
 
 #endif /* __PLANNER_ASSIGNMENT_MODEL_H__ */

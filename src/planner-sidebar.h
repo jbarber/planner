@@ -48,7 +48,7 @@ struct _PlannerSidebarClass
 };
 
 
-GtkType    planner_sidebar_get_type     (void);
+GtkType    planner_sidebar_get_type     (void) G_GNUC_CONST;
 
 GtkWidget *planner_sidebar_new          (void);
 

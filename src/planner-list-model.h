@@ -60,7 +60,7 @@ struct _PlannerListModelClass
 				  GValue       *value);
 };
 
-GType            planner_list_model_get_type      (void);
+GType            planner_list_model_get_type      (void) G_GNUC_CONST;
 void             planner_list_model_append        (PlannerListModel      *model, 
 					      MrpObject        *object);
 void             planner_list_model_remove        (PlannerListModel      *model, 

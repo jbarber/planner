@@ -47,7 +47,7 @@ typedef struct
 	GnomeCanvasItemClass parent_class;
 } EelCanvasRectClass;
 
-GType      eel_canvas_rect_get_type (void);
+GType      eel_canvas_rect_get_type (void) G_GNUC_CONST;
 
 G_END_DECLS
 

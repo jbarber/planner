@@ -48,7 +48,7 @@ struct _PlannerCellRendererPopupClass
 	void   (* hide_popup) (PlannerCellRendererPopup *cell);
 };
 
-GtkType          planner_cell_renderer_popup_get_type (void);
+GtkType          planner_cell_renderer_popup_get_type (void) G_GNUC_CONST;
 
 GtkCellRenderer *planner_cell_renderer_popup_new      (void);
 

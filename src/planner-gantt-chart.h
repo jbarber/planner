@@ -56,7 +56,7 @@ struct _PlannerGanttChartClass
 };
 
 
-GType            planner_gantt_chart_get_type         (void);
+GType            planner_gantt_chart_get_type         (void) G_GNUC_CONST;
 
 GtkWidget       *planner_gantt_chart_new              (void);
 

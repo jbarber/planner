@@ -52,7 +52,7 @@ struct _PlannerGanttHeaderClass
 };
 
 
-GtkType                planner_gantt_header_get_type        (void);
+GtkType                planner_gantt_header_get_type        (void) G_GNUC_CONST;
 GtkWidget             *planner_gantt_header_new             (void);
 
 

@@ -73,7 +73,7 @@ struct _PlannerViewClass {
 	GObjectClass parent_class;
 };
 
-GType        planner_view_get_type          (void);
+GType        planner_view_get_type          (void) G_GNUC_CONST;
 const gchar *planner_view_get_label         (PlannerView     *view);
 const gchar *planner_view_get_menu_label    (PlannerView     *view);
 const gchar *planner_view_get_icon          (PlannerView     *view);

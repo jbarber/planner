@@ -117,7 +117,7 @@ GList *      mrp_calendar_get_overridden_days      (MrpCalendar *calendar);
 GList *      mrp_calendar_get_all_overridden_dates (MrpCalendar *calendar);
 
 /* Interval */
-GType        mrp_interval_get_type                 (void);
+GType        mrp_interval_get_type                 (void) G_GNUC_CONST;
 MrpInterval *mrp_interval_new                      (mrptime      start,
 						    mrptime      end);
 MrpInterval *mrp_interval_copy                     (MrpInterval *interval);

@@ -56,7 +56,7 @@ struct _PlannerPluginClass {
 	GObjectClass parent_class;
 };
 
-GType        planner_plugin_get_type          (void);
+GType        planner_plugin_get_type          (void) G_GNUC_CONST;
 void         planner_plugin_init              (PlannerPlugin     *plugin,
 					  PlannerWindow *main_window);
 void         planner_plugin_exit              (PlannerPlugin     *plugin);

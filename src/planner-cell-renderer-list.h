@@ -52,7 +52,7 @@ struct _PlannerCellRendererListClass
 	PlannerCellRendererPopupClass parent_class;
 };
 
-GType            planner_cell_renderer_list_get_type (void);
+GType            planner_cell_renderer_list_get_type (void) G_GNUC_CONST;
 GtkCellRenderer *planner_cell_renderer_list_new      (void);
 
 

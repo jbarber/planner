@@ -53,7 +53,7 @@ typedef struct {
 	MrpObjectClass  parent_class;
 } MrpProjectClass;
 
-GType            mrp_project_get_type                 (void);
+GType            mrp_project_get_type                 (void) G_GNUC_CONST;
 MrpProject      *mrp_project_new                      (MrpApplication       *app);
 gboolean         mrp_project_is_empty                 (MrpProject           *project);
 gboolean         mrp_project_needs_saving             (MrpProject           *project);

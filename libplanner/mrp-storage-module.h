@@ -84,7 +84,7 @@ typedef enum {
 					   MRP_STORAGE_SUPPORTS_PRIMARY)
 } MrpStorageModuleFlags;
 
-GType    mrp_storage_module_get_type (void);
+GType    mrp_storage_module_get_type (void) G_GNUC_CONST;
 gboolean mrp_storage_module_load     (MrpStorageModule  *module,
 				      const gchar       *uri,
 				      GError           **error);

@@ -58,7 +58,7 @@ struct _MrpStorageModuleFactoryClass
 	GTypeModuleClass parent_class;
 };
 
-GType                    mrp_storage_module_factory_get_type	  (void);
+GType                    mrp_storage_module_factory_get_type	  (void) G_GNUC_CONST;
 
 MrpStorageModuleFactory *mrp_storage_module_factory_get	          (const gchar	    	   *name);
 
