@@ -4,6 +4,7 @@
  
 <xsl:template match="@priority"/>
 <xsl:template match="@short-name"/>
+<xsl:template match="@work-start"/>
 
 <xsl:template match="@*|node()">
   <xsl:copy >

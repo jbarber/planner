@@ -162,7 +162,6 @@ init (MrpFileModule *module, MrpApplication *application)
         reader->module = module;
         reader->priv   = NULL;
 	
-        //reader->read        = xml_read;
 	reader->read_string = xml_read_string;
 
         imrp_application_register_reader (application, reader);

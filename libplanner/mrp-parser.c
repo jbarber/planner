@@ -479,7 +479,7 @@ mpp_write_task_cb (MrpTask *task, MrpParser *parser)
 	xmlNodePtr     node, parent_node;
 	gchar         *name;
 	gchar         *note;
-	mrptime        start, finish;
+	mrptime        start, finish, work_start;
 	MrpConstraint *constraint;
 	gint           duration;
 	gint           work;
@@ -518,6 +518,8 @@ mpp_write_task_cb (MrpTask *task, MrpParser *parser)
 		      "sched", &sched,
 		      NULL);
 
+	work_start = mrp_task_get_work_start (task);
+
 	if (type == MRP_TASK_TYPE_MILESTONE) {
 		finish = start;
 		work = 0;
@@ -535,13 +537,12 @@ mpp_write_task_cb (MrpTask *task, MrpParser *parser)
 	
 	mpp_xml_set_date (node, "start", start);
 	mpp_xml_set_date (node, "end", finish);
+	mpp_xml_set_date (node, "work-start", work_start);
 
 	mpp_xml_set_int (node, "percent-complete", complete);
-
 	mpp_xml_set_int (node, "priority", priority);
 
 	mpp_xml_set_task_type (node, "type", type);
-
 	mpp_xml_set_task_sched (node, "scheduling", sched);
 
 	mpp_write_custom_properties (parser, node, MRP_OBJECT (task));

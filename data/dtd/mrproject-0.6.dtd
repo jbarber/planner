@@ -56,6 +56,7 @@ Note: A mistake in the format design led to this suboptimality. A
                effort               CDATA #IMPLIED
                start                CDATA #REQUIRED
                end                  CDATA #REQUIRED
+	       work-start           CDATA #IMPLIED
                duration             CDATA #IMPLIED
                work                 CDATA #IMPLIED
                percent-complete     CDATA #IMPLIED

@@ -123,7 +123,7 @@
       
 	  <xsl:variable name="start">
         <xsl:call-template name="mrproj-parse-date">
-          <xsl:with-param name="thedate" select="@start"/>
+          <xsl:with-param name="thedate" select="@work-start"/>
         </xsl:call-template>
       </xsl:variable>
 

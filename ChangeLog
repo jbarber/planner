@@ -1,5 +1,17 @@
 2005-02-18  Richard Hult  <richard@imendio.com>
 
+	* data/dtd/mrproject-0.6.dtd:
+	* data/stylesheets/html1_gantt.xsl:
+	* data/stylesheets/planner2plannerv011.xsl:
+	* libplanner/mrp-parser.c: (mpp_write_task_cb): Save "work start"
+	and use it to generate more accurate html reports. Update the DTD
+	and add the new property to the export filter for planner 0.11
+	files. Fixes bug #151483.
+
+2005-02-18  Richard Hult  <richard@imendio.com>
+
+	* libplanner/mrp-xml.c (init): Remove C++ comment.
+
 	* src/planner-ttable-tree.c (ttable_tree_init): Disable search.
 
 	* src/planner-resource-view.c: (resource_view_button_press_event),
