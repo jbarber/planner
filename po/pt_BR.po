@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: planner.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-05-04 12:21-0400\n"
-"PO-Revision-Date: 2004-05-04 03:16-0300\n"
+"POT-Creation-Date: 2004-05-11 12:55-0400\n"
+"PO-Revision-Date: 2004-05-11 11:35-0300\n"
 "Last-Translator: Afonso Celso Medina <medina@maua.br>\n"
 "Language-Team: Portuguese/Brazil <gnome-l10n-br@listas.cipsga.org.br>\n"
 "MIME-Version: 1.0\n"
@@ -408,7 +408,7 @@ msgid "_Work:"
 msgstr "_Trabalho:"
 
 #. day unit variant accepted in input
-#: data/glade/task-dialog.glade.h:17 src/planner-task-tree.c:3219
+#: data/glade/task-dialog.glade.h:17 src/planner-task-tree.c:3364
 msgid "days"
 msgstr "dias"
 
@@ -501,12 +501,12 @@ msgid "Reset _Constraint"
 msgstr "Reinicializar a _Restrição"
 
 #: data/ui/gantt-view.ui.h:18 data/ui/resource-view.ui.h:10
-#: data/ui/task-view.ui.h:18
+#: data/ui/task-view.ui.h:18 data/ui/time-table-view.ui.h:1
 msgid "Select _All"
 msgstr "Selecionar _Tudo"
 
 #: data/ui/gantt-view.ui.h:19 data/ui/resource-view.ui.h:11
-#: data/ui/task-view.ui.h:19
+#: data/ui/task-view.ui.h:19 data/ui/time-table-view.ui.h:2
 msgid "Select all tasks"
 msgstr "Seleciona todas as tarefas"
 
@@ -556,15 +556,15 @@ msgstr "A_justar"
 msgid "Zoom _Out"
 msgstr "A_fastar"
 
-#: data/ui/gantt-view.ui.h:31 data/ui/time-table-view.ui.h:1
+#: data/ui/gantt-view.ui.h:31 data/ui/time-table-view.ui.h:3
 msgid "Zoom in"
 msgstr "Aproximar"
 
-#: data/ui/gantt-view.ui.h:32 data/ui/time-table-view.ui.h:2
+#: data/ui/gantt-view.ui.h:32 data/ui/time-table-view.ui.h:4
 msgid "Zoom out"
 msgstr "Afastar"
 
-#: data/ui/gantt-view.ui.h:33 data/ui/time-table-view.ui.h:4
+#: data/ui/gantt-view.ui.h:33 data/ui/time-table-view.ui.h:6
 msgid "Zoom to fit the entire project"
 msgstr "Zoom para ajustar todo o projeto"
 
@@ -856,7 +856,7 @@ msgstr "_Editar Propriedades Customizadas..."
 msgid "_Edit Task"
 msgstr "_Editar tarefa"
 
-#: data/ui/time-table-view.ui.h:3
+#: data/ui/time-table-view.ui.h:5
 msgid "Zoom to fit"
 msgstr "Ajustar"
 
@@ -1187,21 +1187,21 @@ msgstr "Nome"
 msgid "Work"
 msgstr "Trabalho"
 
-#: src/planner-gantt-print.c:523 src/planner-gantt-row.c:671
+#: src/planner-gantt-print.c:523 src/planner-gantt-row.c:670
 #: src/planner-window.c:1663
 msgid "Unnamed"
 msgstr "Sem Nome"
 
-#: src/planner-gantt-row.c:1921 src/planner-gantt-row.c:1924
+#: src/planner-gantt-row.c:1920 src/planner-gantt-row.c:1923
 msgid "No name"
 msgstr "Sem nome"
 
-#: src/planner-gantt-row.c:1927
+#: src/planner-gantt-row.c:1926
 #, c-format
 msgid "Make task '%s' a predecessor of '%s'"
 msgstr "Tornar a tarefa '%s' uma predecessora de '%s'"
 
-#: src/planner-gantt-row.c:1985
+#: src/planner-gantt-row.c:1984
 #, c-format
 msgid "Change work to %s"
 msgstr "Alterar trabalho para %s"
@@ -1297,6 +1297,14 @@ msgstr "GEOMETRIA"
 msgid "planner: --geometry cannot be used with more than one file."
 msgstr ""
 "planner: --a geometria não pode ser utilizada com mais do que um arquivo."
+
+#: src/planner-phase-dialog.c:535
+msgid "Insert phase"
+msgstr "Insere uma fase"
+
+#: src/planner-phase-dialog.c:635
+msgid "Remove phase"
+msgstr "Remove a fase"
 
 #: src/planner-plugin-loader.c:40
 #, c-format
@@ -1615,27 +1623,35 @@ msgstr "/Atribuir _recursos..."
 msgid "/_Edit task..."
 msgstr "/_Editar tarefa..."
 
-#: src/planner-task-tree.c:263
+#: src/planner-task-tree.c:259
 msgid "Insert task"
 msgstr "Inserir tarefa"
 
-#: src/planner-task-tree.c:356
+#: src/planner-task-tree.c:348
 msgid "Edit task property"
 msgstr "Editar as propriedades da tarefa"
 
-#: src/planner-task-tree.c:720
+#: src/planner-task-tree.c:709
 msgid "Remove task"
 msgstr "Remover tarefa"
 
-#: src/planner-task-tree.c:801
+#: src/planner-task-tree.c:788
 msgid "Constraint task"
 msgstr "Restrição da tarefa"
 
-#: src/planner-task-tree.c:957
+#: src/planner-task-tree.c:926
 msgid "Move task"
 msgstr "Move tarefa"
 
-#: src/planner-task-tree.c:2581
+#: src/planner-task-tree.c:1045
+msgid "Link task"
+msgstr "Vincula a tarefa"
+
+#: src/planner-task-tree.c:1113
+msgid "Unlink task"
+msgstr "Desvincula a tarefa"
+
+#: src/planner-task-tree.c:2722
 #, c-format
 msgid ""
 "You are about to open an edit dialog each for %i tasks. Are you sure that "
@@ -1644,72 +1660,72 @@ msgstr ""
 "Você está prestes a abrir um diálogo de edição para %i tarefas. Tem·certeza "
 "de que deseja fazer isso?"
 
-#: src/planner-task-tree.c:3211
+#: src/planner-task-tree.c:3356
 msgid "mon"
 msgstr "mês"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:3212
+#: src/planner-task-tree.c:3357
 msgid "month"
 msgstr "mês"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:3213
+#: src/planner-task-tree.c:3358
 msgid "months"
 msgstr "meses"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:3214
+#: src/planner-task-tree.c:3359
 msgid "w"
 msgstr "s"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:3215
+#: src/planner-task-tree.c:3360
 msgid "week"
 msgstr "semana"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:3216
+#: src/planner-task-tree.c:3361
 msgid "weeks"
 msgstr "semanas"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:3217
+#: src/planner-task-tree.c:3362
 msgid "d"
 msgstr "d"
 
 #. day unit variant accepted in input
-#: src/planner-task-tree.c:3218
+#: src/planner-task-tree.c:3363
 msgid "day"
 msgstr "dia"
 
 #. day unit variant accepted in input
-#: src/planner-task-tree.c:3220
+#: src/planner-task-tree.c:3365
 msgid "h"
 msgstr "h"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:3221
+#: src/planner-task-tree.c:3366
 msgid "hour"
 msgstr "hora"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:3222
+#: src/planner-task-tree.c:3367
 msgid "hours"
 msgstr "horas"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:3223
+#: src/planner-task-tree.c:3368
 msgid "min"
 msgstr "min"
 
 #. minute unit variant accepted in input
-#: src/planner-task-tree.c:3224
+#: src/planner-task-tree.c:3369
 msgid "minute"
 msgstr "minuto"
 
 #. minute unit variant accepted in input
-#: src/planner-task-tree.c:3225
+#: src/planner-task-tree.c:3370
 msgid "minutes"
 msgstr "minutos"
 
@@ -1775,11 +1791,11 @@ msgstr ""
 "\n"
 "Tarefa"
 
-#: src/planner-ttable-view.c:141
+#: src/planner-ttable-view.c:144
 msgid "Resource Usage"
 msgstr "Utilização do Recurso"
 
-#: src/planner-ttable-view.c:148
+#: src/planner-ttable-view.c:151
 msgid "Resource _Usage"
 msgstr "_Utilização do Recurso"
 
