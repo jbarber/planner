@@ -274,8 +274,11 @@ typedef struct {
 	const gchar *name;
 	MrpResource *resource;
 	guint        resource_id;
+	MrpResourceType  type;
 	MrpGroup    *group;
 	guint        group_id;
+	const gchar     *email;
+	/* FIXME: custom properties */
 } ResourceCmdRemove;
 
 typedef struct {
@@ -872,12 +875,22 @@ resource_cmd_remove_do (PlannerCmd *cmd_base)
 {
 	ResourceCmdRemove *cmd;
 	guint              resource_removed_id;
+	MrpGroup          *current_group;
 
 	cmd = (ResourceCmdRemove*) cmd_base;
 
 	resource_removed_id = mrp_object_get_id (MRP_OBJECT(cmd->resource));
 
+	g_message ("Id for the resource to be removed: %d", resource_removed_id); 
+
 	cmd->resource_id = resource_removed_id;
+	mrp_object_get (cmd->resource, 
+			"name", &cmd->name, 
+			"email", &cmd->email,
+			"type", &cmd->type,
+			"group", &current_group,
+			NULL);
+	cmd->group_id = mrp_object_get_id (MRP_OBJECT (current_group));
 
 	mrp_project_remove_resource (cmd->project, cmd->resource);
 
@@ -893,13 +906,15 @@ resource_cmd_remove_undo (PlannerCmd *cmd_base)
 	cmd = (ResourceCmdRemove*) cmd_base;
 
 	resource = g_object_new (MRP_TYPE_RESOURCE, NULL);
-
+	mrp_object_set (resource, "project", 
+			MRP_OBJECT(mrp_application_id_get_data (cmd->project_id)), NULL);
 	mrp_object_set (resource, "name", cmd->name, NULL);
-
+	mrp_object_set (resource, "type", cmd->type, NULL);
+	mrp_object_set (resource, "email", cmd->email, NULL);
+	mrp_object_set (resource, "group", 
+			MRP_OBJECT(mrp_application_id_get_data (cmd->group_id)), NULL);
 	mrp_object_set_id (MRP_OBJECT (resource), cmd->resource_id);
-
 	mrp_project_add_resource (cmd->project, resource);
-
 	cmd->resource = resource;
 }
 
@@ -1387,7 +1402,6 @@ resource_view_cell_name_edited (GtkCellRendererText *cell,
 
 	gtk_tree_model_get (model, &iter, COL_RESOURCE, &resource, -1);
 	
-	// mrp_object_set (resource, "name", new_text, NULL);
 	g_value_init (&value, G_TYPE_STRING);
 	g_value_set_string (&value, new_text);
 	cmd = resource_cmd_edit_property (view, resource, "name", &value);
@@ -1424,7 +1438,6 @@ resource_view_cell_email_edited (GtkCellRendererText *cell,
 
 	gtk_tree_model_get (model, &iter, COL_RESOURCE, &resource, -1);
 	
-	// mrp_object_set (resource, "email", new_text, NULL);
 	g_value_init (&value, G_TYPE_STRING);
 	g_value_set_string (&value, new_text);
 	cmd = resource_cmd_edit_property (view, resource, "email", &value);
@@ -1468,7 +1481,6 @@ resource_view_cell_type_edited (PlannerCellRendererList *cell,
 		type = MRP_RESOURCE_TYPE_MATERIAL;
 	}		
 
-	// mrp_object_set (resource, "type", type, NULL);
 	g_value_init (&value, G_TYPE_INT);
 	g_value_set_int (&value, type);
 	cmd = resource_cmd_edit_property (view, resource, "type", &value);
@@ -1562,8 +1574,6 @@ resource_view_cell_group_edited (PlannerCellRendererList *cell,
 	}
 	
 	group = list->data; 
-
-	// mrp_object_set (resource, "group", group, NULL);
 
 	g_value_init (&value, MRP_TYPE_GROUP);
 	g_value_set_object (&value, group);

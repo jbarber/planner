@@ -1237,6 +1237,8 @@ mrp_project_remove_resource (MrpProject *project, MrpResource *resource)
 
 	priv->resources = g_list_remove (priv->resources, resource);
 
+	imrp_application_id_remove_data (mrp_object_get_id (resource));
+
 	g_signal_emit (project, signals[RESOURCE_REMOVED], 0, resource);
 
 	imrp_project_set_needs_saving (project, TRUE);

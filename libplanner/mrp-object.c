@@ -4,6 +4,7 @@
  * Copyright (C) 2001-2003 CodeFactory AB
  * Copyright (C) 2001-2003 Richard Hult <richard@imendio.com>
  * Copyright (C) 2001-2002 Mikael Hallendal <micke@imendio.com>
+ * Copyright (C) 2004      Alvaro del Castillo <acs@barrapunto.com>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -151,6 +152,7 @@ object_init (MrpObject *object)
         object->priv = priv;
 
 	priv->id = mrp_application_get_unique_id ();
+	imrp_application_id_set_data (object, priv->id);
 
         priv->property_hash = g_hash_table_new (NULL, NULL);
 }
@@ -607,6 +609,14 @@ mrp_object_get_properties (MrpObject *object)
 						     G_OBJECT_TYPE (object));
 }
 
+/**
+ * mrp_object_get_id:
+ * @object: an #MrpObject
+ * 
+ * Retrieves the unique object id in the application
+ * 
+ * Return value: 0 if fails, object id if everything is ok.
+ **/
 guint
 mrp_object_get_id (MrpObject *object)
 {
@@ -619,6 +629,16 @@ mrp_object_get_id (MrpObject *object)
 	return priv->id;
 }
 
+
+/**
+ * mrp_object_set_id:
+ * @object: an #MrpObject
+ * 
+ * Change the unique object id in the application.
+ * This function must be called only from Undo/Redo operations. 
+ * 
+ * Return value: FALSE if fails, TRUE is everything is ok.
+ **/
 gboolean
 mrp_object_set_id (MrpObject *object,
 		   guint      id)
@@ -627,11 +647,10 @@ mrp_object_set_id (MrpObject *object,
 
 	g_return_val_if_fail (MRP_IS_OBJECT (object), FALSE);
 
-	priv = object->priv;
-	
-	/* FIXME: check if it's available. */
-
-	priv->id = id;
-
-	return TRUE;
+	if (imrp_application_id_set_data (object, id)) {		
+		priv->id = id;
+		return TRUE;
+	} else {
+		return FALSE;
+	}
 }

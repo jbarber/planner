@@ -3,6 +3,7 @@
  * Copyright (C) 2002 CodeFactory AB
  * Copyright (C) 2002 Richard Hult <richard@imendio.com>
  * Copyright (C) 2002 Mikael Hallendal <micke@imendio.com>
+ * Copyright (C) 2004 Alvaro del Castillo <acs@barrapunto.com>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -42,7 +43,8 @@ static void application_init_gettext      (void);
 static void application_init_file_modules (MrpApplication         *app);
 
 static GObjectClass *parent_class;
-static gulong        last_used_id = 0;
+static guint         last_used_id;
+static GHashTable   *data_hash;
 
 GType
 mrp_application_get_type (void)
@@ -78,6 +80,11 @@ application_class_init (MrpApplicationClass *klass)
 	parent_class = G_OBJECT_CLASS (g_type_class_peek_parent (klass));
 	
 	object_class->finalize = application_finalize;
+
+	data_hash = g_hash_table_new (NULL, NULL);
+
+	last_used_id = 0;
+	
 }
 
 static void
@@ -198,8 +205,56 @@ mrp_application_new (void)
  * 
  * Return value: the unique id
  **/
-gulong 
+guint 
 mrp_application_get_unique_id (void)
 {
 	return ++last_used_id;
+}
+
+/**
+ * imrp_application_id_set_data:
+ * 
+ * Set the data unique identifier for a data
+ * 
+ * Return value: TRUE if the change has been done
+ **/
+gboolean
+imrp_application_id_set_data (gpointer  *data,
+			      guint      data_id)
+{
+	g_assert (g_hash_table_lookup (data_hash, GUINT_TO_POINTER (data_id)) == NULL);
+
+	g_hash_table_insert (data_hash, GUINT_TO_POINTER (data_id), data);
+
+	return TRUE;
+}
+
+
+
+/**
+ * mrp_application_id_get_data:
+ * 
+ * Get the object reference in the list of MrpObjects
+ * using the object_id as locator
+ * 
+ * Return value: a pointer to the data
+ **/
+gpointer *  
+mrp_application_id_get_data (guint object_id)
+{
+	return g_hash_table_lookup (data_hash, GUINT_TO_POINTER (object_id));
+}
+
+/**
+ * mrp_application_id_get_data:
+ * 
+ * Get the object reference in the list of MrpObjects
+ * using the object_id as locator
+ * 
+ * Return value: a pointer to the data
+ **/
+gboolean  
+imrp_application_id_remove_data (guint object_id)
+{
+	return g_hash_table_remove (data_hash, GUINT_TO_POINTER (object_id));
 }
