@@ -1,5 +1,8 @@
 2004-07-31  Richard Hult  <richard@imendio.com>
 
+	* src/Makefile.am: Put scale utils in the executable, split out
+	shared gantt header code.
+
 	* src/planner-gantt-row.c (gantt_row_event): Move declaration to
 	the top.
 
