@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
- * Copyright (C) 2003      Imendio HB
+ * Copyright (C) 2003-2004 Imendio HB
  * Copyright (C) 2001-2003 CodeFactory AB
  * Copyright (C) 2001-2003 Richard Hult <richard@imendio.com>
  * Copyright (C) 2001-2002 Mikael Hallendal <micke@imendio.com>
@@ -1888,7 +1888,7 @@ mrp_project_reschedule (MrpProject *project)
 {
 	g_return_if_fail (MRP_IS_PROJECT (project));
 
-	mrp_task_manager_recalc (project->priv->task_manager, FALSE);
+	mrp_task_manager_recalc (project->priv->task_manager, TRUE);
 }
 
 /**

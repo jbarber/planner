@@ -1,5 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
+ * Copyright (C) 2004 Imendio HB
  * Copyright (C) 2002-2003 CodeFactory AB
  * Copyright (C) 2002-2003 Richard Hult <richard@imendio.com>
  * Copyright (C) 2002 Mikael Hallendal <micke@imendio.com>
@@ -66,23 +67,24 @@ enum {
 };
 
 
-static void resource_class_init            (MrpResourceClass   *klass);
-static void resource_init                  (MrpResource        *resource);
-static void resource_finalize              (GObject            *object);
-static void resource_set_property          (GObject            *object,
-					    guint               prop_id,
-					    const GValue       *value,
-					    GParamSpec         *pspec);
-static void resource_get_property          (GObject            *object,
-					    guint               prop_id,
-					    GValue             *value,
-					    GParamSpec         *pspec);
-static void resource_removed               (MrpObject          *object);
-static void resource_assignment_removed_cb (MrpAssignment      *assignment,
-					    MrpResource        *resource);
-static void resource_group_removed_cb      (MrpGroup           *group,
-					    MrpResource        *resource);
-
+static void resource_class_init            (MrpResourceClass *klass);
+static void resource_init                  (MrpResource      *resource);
+static void resource_finalize              (GObject          *object);
+static void resource_set_property          (GObject          *object,
+					    guint             prop_id,
+					    const GValue     *value,
+					    GParamSpec       *pspec);
+static void resource_get_property          (GObject          *object,
+					    guint             prop_id,
+					    GValue           *value,
+					    GParamSpec       *pspec);
+static void resource_calendar_changed      (MrpCalendar      *calendar,
+					    MrpResource      *resource);
+static void resource_removed               (MrpObject        *object);
+static void resource_assignment_removed_cb (MrpAssignment    *assignment,
+					    MrpResource      *resource);
+static void resource_group_removed_cb      (MrpGroup         *group,
+					    MrpResource      *resource);
 
 
 static MrpObjectClass *parent_class;
@@ -271,6 +273,7 @@ resource_set_property (GObject      *object,
 	gint             i_val;
 	MrpGroup        *group;
 	MrpCalendar     *calendar;
+	MrpProject      *project;
 	
 	resource = MRP_RESOURCE (object);
 	priv     = resource->priv;
@@ -359,16 +362,33 @@ resource_set_property (GObject      *object,
 		} else {
 			break;
 		}
-
+		
 		if (priv->calendar != NULL) {
+			g_signal_handlers_disconnect_by_func (priv->calendar,
+							      resource_calendar_changed,
+							      resource);
 			g_object_unref (priv->calendar);
 		}
 		
 		if (calendar != NULL) {
 			g_object_ref (calendar);
+			
+			g_signal_connect_object (calendar,
+						 "calendar_changed",
+						 G_CALLBACK (resource_calendar_changed),
+						 resource,
+						 0);
 		}
 
 		priv->calendar = calendar;
+
+		/* Make sure the project is rescheduled if necessary. */
+		if (priv->assignments) {
+			project = mrp_object_get_project (MRP_OBJECT (resource));
+			if (project) {
+				mrp_project_reschedule (project);
+			}
+		}
 		break;
 
 	default:
@@ -421,6 +441,21 @@ resource_get_property (GObject    *object,
 		G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
 		break;
 	}
+}
+
+static void
+resource_calendar_changed (MrpCalendar *calendar,
+			   MrpResource *resource)
+{
+	MrpProject *project;
+
+	project = mrp_object_get_project (MRP_OBJECT (resource));
+
+	if (!project) {
+		return;
+	}
+			
+	mrp_project_reschedule (project);
 }
 
 static void

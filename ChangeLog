@@ -1,5 +1,13 @@
 2004-06-19  Richard Hult  <richard@imendio.com>
 
+	* libplanner/mrp-resource.c (resource_set_property,
+	resource_set_property): Reschedule when the resource calendar is
+	modified and the resource has assignments. Also reschedule when
+	the calendar is changed. Fixes bug #138159.
+
+	* libplanner/mrp-project.c (mrp_project_reschedule): Force recalc,
+	otherwise this won't do anything.
+
 	* src/planner-resource-view.c: (resource_view_resource_notify_cb),
 	(resource_view_resource_prop_changed_cb),
 	(resource_view_resource_added_cb),
