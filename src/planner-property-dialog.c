@@ -5,7 +5,7 @@
  * Copyright (C) 2002 Mikael Hallendal <micke@imendio.com>
  * Copyright (C) 2002 Alvaro del Castillo <acs@barrapunto.com>
  * Copyright (C) 2004 Lincoln Phipps <lincoln.phipps@openmutual.net>
- * Copyright (C) 2004 Imendio HB
+ * Copyright (C) 2004 Imendio AB
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as

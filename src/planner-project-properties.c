@@ -1,10 +1,10 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
+ * Copyright (C) 2003-2004 Imendio AB
  * Copyright (C) 2001-2002 CodeFactory AB
  * Copyright (C) 2001-2002 Richard Hult <richard@imendio.com>
  * Copyright (C) 2001-2002 Mikael Hallendal <micke@imendio.com>
  * Copyright (C) 2001-2002 Alvaro del Castillo <acs@barrapunto.com>
- * Copyright (C) 2003-2004 Imendio HB
  * Copyright (C) 2004      Lincoln Phipps <lincoln.phipps@openmutual.net>
  *
  * This program is free software; you can redistribute it and/or

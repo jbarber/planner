@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: nill; c-basic-offset: 8 -*- */
 /*
- * Copyright (C) 2003-2004 Imendio HB
+ * Copyright (C) 2003-2004 Imendio AB
  * Copyright (C) 2002      CodeFactory AB
  * Copyright (C) 2002      Richard Hult <richard@imendio.com>
  * Copyright (C) 2002      Mikael Hallendal <micke@imendio.com>

@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
- * Copyright (C) 2003      Imendio HB
+ * Copyright (C) 2003-2004 Imendio AB
  * Copyright (C) 2002-2003 CodeFactory AB
  * Copyright (C) 2002-2003 Richard Hult <richard@imendio.com>
  * Copyright (C) 2002-2003 Mikael Hallendal <micke@imendio.com>
@@ -1679,7 +1679,7 @@ window_update_title (PlannerWindow *window)
 
 	name = window_get_name (window);
 
-	title = g_strconcat (name, " - Imendio Planner", NULL);
+	title = g_strconcat (name, " - Planner", NULL);
 
 	gtk_window_set_title (GTK_WINDOW (window), title);
 
