@@ -1623,6 +1623,18 @@ sql_read_resources (SQLData *data)
 			}
 			else if (is_field (res, j, "short_name")) {
 				short_name = get_string (res, i, j);
+				
+				/* FIXME: The next section detects the case if
+				 * short_name is NULL. If a string field is null
+				 * then get_string() seems to actually return
+				 * the word "NULL". The fix is to correct the
+				 * contents of the database at upgrade times so
+				 * the following is a workaround until we have a
+				 * database upgrade process that fixes NULLs.
+				 */
+				if (strcmp (short_name, "NULL") == 0) {  
+					short_name = g_strdup ("");
+				}
 			}
 			else if (is_field (res, j, "group_id")) {
 				group_id = get_id (res, i, j);

@@ -1,7 +1,25 @@
+2004-04-17  Richard Hult  <richard@imendio.com>
+
+	* src/planner-window.c (window_get_name): Don't show database
+	details such as password.
+	(window_confirm_exit_run): Hack for now that removes the save
+	button for database projects.
+
+	* data/glade/sql.glade:
+	* libplanner/mrp-sql.c: (sql_read_resources):
+	* src/planner-sql-plugin.c: (sql_plugin_retrieve_project_id): Fix
+	bug #136507, based on patch from Lincoln with further work from
+	me.
+
+2004-04-17  Setul Patel   <setulkumarpatel@yahoo.com>
+
+	* data/ui/main-window.ui:
+	* src/planner-window.c: Fix bug #134357.
+
 2004-04-17  Alvaro del Castillo  <acs@barrapunto.com>
 
-	* src/planner-gantt-row.c: undo code for task
-	constraints, task movement and task indentation.
+	* src/planner-gantt-row.c: Undo code for task constraints, task
+	movement and task indentation.
 
 2004-04-16  Richard Hult  <richard@imendio.com>
 

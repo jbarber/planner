@@ -76,7 +76,7 @@
     </submenu>
 
     <submenu       name="Help" _label="_Help">
-      <menuitem    name="HelpHelp"         verb="" />
+      <menuitem    name="HelpHelp"         verb=""  accel="F1" />
       <menuitem    name="HelpAbout"        verb="" />
     </submenu>
   </menu>
@@ -88,8 +88,8 @@
     <separator/>
     <toolitem      name="FilePrint"        verb=""    _label="Print"/>
     <separator/> 
-    <toolitem      name="EditUndo"        verb=""    />
-    <toolitem      name="EditRedo"        verb=""    />
+    <toolitem      name="EditUndo"         verb=""    _label="Undo"/>
+    <toolitem      name="EditRedo"         verb=""    _label="Redo"/>
   </dockitem>
 
   <status>

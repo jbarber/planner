@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: planner\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-04-16 00:22+0200\n"
+"POT-Creation-Date: 2004-04-17 16:59+0200\n"
 "PO-Revision-Date: 2004-04-08 23:50+0200\n"
 "Last-Translator: Richard Hult <richard@imendio.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -404,7 +404,7 @@ msgid "_Work:"
 msgstr "_Arbete:"
 
 #. day unit variant accepted in input
-#: data/glade/task-dialog.glade.h:17 src/planner-task-tree.c:2904
+#: data/glade/task-dialog.glade.h:17 src/planner-task-tree.c:3159
 msgid "days"
 msgstr "dagar"
 
@@ -677,115 +677,123 @@ msgstr "Förhandsgranska aktuellt projekt"
 msgid "Print the current project"
 msgstr "Skriv ut aktuellt projekt"
 
-#: data/ui/main-window.ui.h:21
+#: data/ui/main-window.ui.h:21 src/planner-cmd-manager.c:240
+msgid "Redo"
+msgstr "Gör om"
+
+#: data/ui/main-window.ui.h:22
 msgid "Redo the undone action"
 msgstr "Gör om den ångrade åtgärden"
 
-#: data/ui/main-window.ui.h:22
+#: data/ui/main-window.ui.h:23
 msgid "Save"
 msgstr "Spara"
 
-#: data/ui/main-window.ui.h:23
+#: data/ui/main-window.ui.h:24
 msgid "Save _As..."
 msgstr "Spara s_om..."
 
-#: data/ui/main-window.ui.h:24
+#: data/ui/main-window.ui.h:25
 msgid "Save the current project"
 msgstr "Spara det aktuella projekt"
 
-#: data/ui/main-window.ui.h:25
+#: data/ui/main-window.ui.h:26
 msgid "Save the current project with a different name"
 msgstr "Spara det aktuella projektet med ett annat namn"
 
-#: data/ui/main-window.ui.h:26
+#: data/ui/main-window.ui.h:27
 msgid "Show the Planner User Guide"
 msgstr "Visa Planner användarmanual"
 
-#: data/ui/main-window.ui.h:27
+#: data/ui/main-window.ui.h:28 src/planner-cmd-manager.c:228
+msgid "Undo"
+msgstr "Ångra"
+
+#: data/ui/main-window.ui.h:29
 msgid "Undo the last action"
 msgstr "Ångra den senaste åtgärden"
 
-#: data/ui/main-window.ui.h:28
+#: data/ui/main-window.ui.h:30
 msgid "_About"
 msgstr "_Om"
 
-#: data/ui/main-window.ui.h:29
+#: data/ui/main-window.ui.h:31
 msgid "_Actions"
 msgstr "_Åtgärder"
 
-#: data/ui/main-window.ui.h:30
+#: data/ui/main-window.ui.h:32
 msgid "_Close"
 msgstr "S_täng"
 
-#: data/ui/main-window.ui.h:31
+#: data/ui/main-window.ui.h:33
 msgid "_Copy"
 msgstr "_Kopiera"
 
-#: data/ui/main-window.ui.h:32
+#: data/ui/main-window.ui.h:34
 msgid "_Edit"
 msgstr "_Redigera"
 
-#: data/ui/main-window.ui.h:33
+#: data/ui/main-window.ui.h:35
 msgid "_Edit Project Properties"
 msgstr "_Redigera projektegenskaper"
 
-#: data/ui/main-window.ui.h:34
+#: data/ui/main-window.ui.h:36
 msgid "_File"
 msgstr "_Arkiv"
 
-#: data/ui/main-window.ui.h:35
+#: data/ui/main-window.ui.h:37
 msgid "_Help"
 msgstr "_Hjälp"
 
-#: data/ui/main-window.ui.h:36
+#: data/ui/main-window.ui.h:38
 msgid "_Manage Calendars"
 msgstr "_Hantera kalendrar"
 
-#: data/ui/main-window.ui.h:37
+#: data/ui/main-window.ui.h:39
 msgid "_New Project"
 msgstr "_Nytt projekt"
 
-#: data/ui/main-window.ui.h:38
+#: data/ui/main-window.ui.h:40
 msgid "_Open..."
 msgstr "_Öppna..."
 
-#: data/ui/main-window.ui.h:39
+#: data/ui/main-window.ui.h:41
 msgid "_Paste"
 msgstr "K_listra in"
 
-#: data/ui/main-window.ui.h:40
+#: data/ui/main-window.ui.h:42
 msgid "_Print Preview"
 msgstr "_Förhandsgranskning"
 
-#: data/ui/main-window.ui.h:41
+#: data/ui/main-window.ui.h:43
 msgid "_Print..."
 msgstr "S_kriv ut..."
 
-#: data/ui/main-window.ui.h:42
+#: data/ui/main-window.ui.h:44
 msgid "_Project"
 msgstr "_Projekt"
 
-#: data/ui/main-window.ui.h:43
+#: data/ui/main-window.ui.h:45
 msgid "_Quit"
 msgstr "_Avsluta"
 
-#: data/ui/main-window.ui.h:44 src/planner-window.c:1168
+#: data/ui/main-window.ui.h:46
 msgid "_Redo"
 msgstr "_Gör om"
 
-#: data/ui/main-window.ui.h:45 src/planner-window.c:1271
+#: data/ui/main-window.ui.h:47 src/planner-window.c:1286
 msgid "_Save"
 msgstr "_Spara"
 
-#: data/ui/main-window.ui.h:46 src/planner-window.c:1142
+#: data/ui/main-window.ui.h:48
 msgid "_Undo"
 msgstr "_Ångra"
 
-#: data/ui/main-window.ui.h:47
+#: data/ui/main-window.ui.h:49
 msgid "_User Guide"
 msgstr "_Användarmanual"
 
-#: data/ui/main-window.ui.h:48
+#: data/ui/main-window.ui.h:50
 msgid "_View"
 msgstr "_Visa"
 
@@ -931,7 +939,7 @@ msgstr "Datum"
 msgid "Duration"
 msgstr "Varaktighet"
 
-#: libplanner/mrp-property.c:377 src/planner-task-view.c:271
+#: libplanner/mrp-property.c:377 src/planner-task-view.c:275
 msgid "Cost"
 msgstr "Kostnad"
 
@@ -940,16 +948,16 @@ msgid "None"
 msgstr "Ingen"
 
 #. Give up.
-#: libplanner/mrp-sql.c:345 src/planner-sql-plugin.c:171
+#: libplanner/mrp-sql.c:345 src/planner-sql-plugin.c:173
 msgid "Invalid Unicode"
 msgstr "Ogiltig Unicode"
 
-#: libplanner/mrp-sql.c:2216
+#: libplanner/mrp-sql.c:2228
 #, c-format
 msgid "Connection to database '%s' failed.\n"
 msgstr "Anslutning till databas \"%s\" misslyckades.\n"
 
-#: libplanner/mrp-sql.c:2221 libplanner/mrp-sql.c:3663
+#: libplanner/mrp-sql.c:2233 libplanner/mrp-sql.c:3675
 #, c-format
 msgid ""
 "Connection to database '%s' failed.\n"
@@ -958,12 +966,12 @@ msgstr ""
 "Anslutning till databas \"%s\" misslyckades.\n"
 "%s"
 
-#: libplanner/mrp-sql.c:2229
+#: libplanner/mrp-sql.c:2241
 #, c-format
 msgid "BEGIN command failed %s."
 msgstr "BEGIN-kommando misslyckades %s."
 
-#: libplanner/mrp-sql.c:2395
+#: libplanner/mrp-sql.c:2407
 #, c-format
 msgid ""
 "The project '%s' has been changed by the user '%s' since you opened it. Do "
@@ -1051,18 +1059,10 @@ msgstr "OK"
 msgid "Undo '%s'"
 msgstr "Ångra \"%s\""
 
-#: src/planner-cmd-manager.c:228
-msgid "Undo"
-msgstr "Ångra"
-
 #: src/planner-cmd-manager.c:238
 #, c-format
 msgid "Redo '%s'"
 msgstr "Gör om \"%s\""
-
-#: src/planner-cmd-manager.c:240
-msgid "Redo"
-msgstr "Gör om"
 
 #: src/planner-default-week-dialog.c:40
 msgid "Monday"
@@ -1150,31 +1150,31 @@ msgstr "Projektstart"
 #: src/planner-gantt-print.c:191 src/planner-group-dialog.c:806
 #: src/planner-property-dialog.c:378 src/planner-resource-view.c:1172
 #: src/planner-task-dialog.c:1410 src/planner-task-dialog.c:1496
-#: src/planner-task-view.c:266 src/planner-ttable-print.c:97
+#: src/planner-task-view.c:270 src/planner-ttable-print.c:97
 msgid "Name"
 msgstr "Namn"
 
 #: src/planner-gantt-print.c:199 src/planner-resource-dialog.c:1303
 #: src/planner-resource-view.c:691 src/planner-resource-view.c:707
-#: src/planner-resource-view.c:1599 src/planner-task-view.c:269
+#: src/planner-resource-view.c:1599 src/planner-task-view.c:273
 msgid "Work"
 msgstr "Arbete"
 
-#: src/planner-gantt-print.c:523 src/planner-gantt-row.c:668
-#: src/planner-window.c:1653
+#: src/planner-gantt-print.c:523 src/planner-gantt-row.c:671
+#: src/planner-window.c:1663
 msgid "Unnamed"
 msgstr "Namnlös"
 
-#: src/planner-gantt-row.c:1916 src/planner-gantt-row.c:1919
+#: src/planner-gantt-row.c:1921 src/planner-gantt-row.c:1924
 msgid "No name"
 msgstr "Inget namn"
 
-#: src/planner-gantt-row.c:1922
+#: src/planner-gantt-row.c:1927
 #, c-format
 msgid "Make task '%s' a predecessor of '%s'"
 msgstr "Gör aktivitet \"%s\" till föregångare till \"%s\""
 
-#: src/planner-gantt-row.c:1980
+#: src/planner-gantt-row.c:1985
 #, c-format
 msgid "Change work to %s"
 msgstr "Ändra arbete till %s"
@@ -1187,7 +1187,11 @@ msgstr "Ganttschema"
 msgid "_Gantt Chart"
 msgstr "_Ganttschema"
 
-#: src/planner-gantt-view.c:492
+#. i18n: WBS is sort for work breakdown structure, and is a
+#. * project management term. You might want to leave it
+#. * untranslated unless there is a localized term for it.
+#.
+#: src/planner-gantt-view.c:496
 msgid ""
 "\n"
 "WBS"
@@ -1195,7 +1199,7 @@ msgstr ""
 "\n"
 "WBS"
 
-#: src/planner-gantt-view.c:493 src/planner-ttable-tree.c:332
+#: src/planner-gantt-view.c:497 src/planner-ttable-tree.c:332
 msgid ""
 "\n"
 "Name"
@@ -1204,7 +1208,7 @@ msgstr ""
 "Namn"
 
 #. COL_START,    _("\nStart"),
-#: src/planner-gantt-view.c:495
+#: src/planner-gantt-view.c:499
 msgid ""
 "\n"
 "Work"
@@ -1249,7 +1253,7 @@ msgstr ""
 "\"%s\" är en katalog.\n"
 "Ange ett filnamn och försök igen."
 
-#: src/planner-html-plugin.c:148 src/planner-window.c:1415
+#: src/planner-html-plugin.c:148 src/planner-window.c:1419
 #, c-format
 msgid "File \"%s\" exists, do you want to overwrite it?"
 msgstr "Filen \"%s\" finns redan, vill du skriva över den?"
@@ -1502,15 +1506,27 @@ msgstr "H%d"
 msgid "%04d, H%d"
 msgstr "%04d, H%d"
 
-#: src/planner-sql-plugin.c:368
+#: src/planner-sql-plugin.c:380
+msgid "ID"
+msgstr "ID"
+
+#: src/planner-sql-plugin.c:388
 msgid "Project"
 msgstr "Projekt"
 
-#: src/planner-sql-plugin.c:544
+#: src/planner-sql-plugin.c:396
+msgid "Phase"
+msgstr "Fas"
+
+#: src/planner-sql-plugin.c:404
+msgid "Revision"
+msgstr "Revision"
+
+#: src/planner-sql-plugin.c:603
 msgid "Open from Database"
 msgstr "Öppna från databas"
 
-#: src/planner-sql-plugin.c:651
+#: src/planner-sql-plugin.c:710
 msgid "Save to Database"
 msgstr "Spara till databas"
 
@@ -1562,72 +1578,80 @@ msgstr "Redigera aktivitetsegenskap"
 msgid "Remove task"
 msgstr "Ta bort aktivitet"
 
-#: src/planner-task-tree.c:2896
+#: src/planner-task-tree.c:776
+msgid "Constraint task"
+msgstr "Sätt restriktion på aktivitet"
+
+#: src/planner-task-tree.c:940
+msgid "Move task"
+msgstr "Flytta aktivitet"
+
+#: src/planner-task-tree.c:3151
 msgid "mon"
 msgstr "mån"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:2897
+#: src/planner-task-tree.c:3152
 msgid "month"
 msgstr "månad"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:2898
+#: src/planner-task-tree.c:3153
 msgid "months"
 msgstr "månader"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:2899
+#: src/planner-task-tree.c:3154
 msgid "w"
 msgstr "v"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:2900
+#: src/planner-task-tree.c:3155
 msgid "week"
 msgstr "vecka"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:2901
+#: src/planner-task-tree.c:3156
 msgid "weeks"
 msgstr "veckor"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:2902
+#: src/planner-task-tree.c:3157
 msgid "d"
 msgstr "d"
 
 #. day unit variant accepted in input
-#: src/planner-task-tree.c:2903
+#: src/planner-task-tree.c:3158
 msgid "day"
 msgstr "dag"
 
 #. day unit variant accepted in input
-#: src/planner-task-tree.c:2905
+#: src/planner-task-tree.c:3160
 msgid "h"
 msgstr "t"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:2906
+#: src/planner-task-tree.c:3161
 msgid "hour"
 msgstr "timme"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:2907
+#: src/planner-task-tree.c:3162
 msgid "hours"
 msgstr "timmar"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:2908
+#: src/planner-task-tree.c:3163
 msgid "min"
 msgstr "min"
 
 #. minute unit variant accepted in input
-#: src/planner-task-tree.c:2909
+#: src/planner-task-tree.c:3164
 msgid "minute"
 msgstr "minut"
 
 #. minute unit variant accepted in input
-#: src/planner-task-tree.c:2910
+#: src/planner-task-tree.c:3165
 msgid "minutes"
 msgstr "minuter"
 
@@ -1639,26 +1663,30 @@ msgstr "Aktiviteter"
 msgid "_Tasks"
 msgstr "_Aktiviteter"
 
-#: src/planner-task-view.c:265
+#. i18n: WBS is sort for work breakdown structure, and is a
+#. * project management term. You might want to leave it
+#. * untranslated unless there is a localized term for it.
+#.
+#: src/planner-task-view.c:269
 msgid "WBS"
 msgstr "WBS"
 
-#: src/planner-task-view.c:267
+#: src/planner-task-view.c:271
 msgid "Start"
 msgstr "Start"
 
-#: src/planner-task-view.c:268
+#: src/planner-task-view.c:272
 msgid "Finish"
 msgstr "Slut"
 
 # Slack brukar kallas slack på svenska inom projekthantering (av det jag
 # sett i litteratur iaf). Glapp kallas ibland det som vi kallar
 # fördröjning (lag).
-#: src/planner-task-view.c:270
+#: src/planner-task-view.c:274
 msgid "Slack"
 msgstr "Slack"
 
-#: src/planner-task-view.c:489
+#: src/planner-task-view.c:493
 msgid "Edit custom task properties"
 msgstr "Redigera egenskaper för egen aktivitet"
 
@@ -1760,19 +1788,19 @@ msgstr ""
 msgid "Save changes to document '%s' before closing?"
 msgstr "Spara ändringarna i dokumentet \"%s\" innan det stängs?"
 
-#: src/planner-window.c:1267
+#: src/planner-window.c:1273
 msgid "C_lose without saving"
 msgstr "S_täng utan att spara"
 
-#: src/planner-window.c:1269
+#: src/planner-window.c:1279
 msgid "_Cancel"
 msgstr "_Avbryt"
 
-#: src/planner-window.c:1379
+#: src/planner-window.c:1383
 msgid "Save a file"
 msgstr "Spara en fil"
 
-#: src/planner-window.c:1616
+#: src/planner-window.c:1620
 msgid ""
 "You have opened a file that was saved with an old version of Planner.\n"
 "\n"
@@ -1799,6 +1827,11 @@ msgstr ""
 "\n"
 "När du gjort det, kan du ta bort alla restriktioner genom att välja "
 "\"Återställ alla restriktioner\" i \"Redigera\"-menyn."
+
+#. Hack.
+#: src/planner-window.c:1655
+msgid "Unnamed database project"
+msgstr "Namnlöst databasprojekt"
 
 #~ msgid "Remove the selected task"
 #~ msgstr "Ta bort den markerade aktiviteten"

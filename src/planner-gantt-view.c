@@ -487,14 +487,18 @@ gantt_view_create_widget (PlannerView *view)
 	model = GTK_TREE_MODEL (planner_gantt_model_new (project));
 
 	tree = planner_task_tree_new (view->main_window,
-				 PLANNER_GANTT_MODEL (model),
-				 FALSE,
-				 COL_WBS,        _("\nWBS"),
-				 COL_NAME,       _("\nName"),
-				 /*COL_START,    _("\nStart"),*/
-				 COL_WORK,       _("\nWork"), 
-				 /*COL_DURATION, _("\nDuration"),*/
-				 -1);
+				      PLANNER_GANTT_MODEL (model),
+				      FALSE,
+				      /* i18n: WBS is sort for work breakdown structure, and is a
+				       * project management term. You might want to leave it
+				       * untranslated unless there is a localized term for it.
+				       */
+				      COL_WBS,        _("\nWBS"),
+				      COL_NAME,       _("\nName"),
+				      /*COL_START,    _("\nStart"),*/
+				      COL_WORK,       _("\nWork"), 
+				      /*COL_DURATION, _("\nDuration"),*/
+				      -1);
 	
 	priv->tree = tree;
 	priv->gantt = planner_gantt_chart_new_with_model (model);

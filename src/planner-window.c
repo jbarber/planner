@@ -1136,10 +1136,9 @@ window_undo_state_changed_cb (PlannerCmdManager *manager,
 				      "tip", label,
 				      NULL);
 
-	/* FIXME: See bug #134357. */
 	bonobo_ui_component_set_prop (priv->ui_component, 
 				      "/commands/EditUndo",
-				      "label", _("_Undo"),
+				      "label", label,
 				      NULL);
 }
 
@@ -1162,10 +1161,9 @@ window_redo_state_changed_cb (PlannerCmdManager *manager,
 				      "tip", label,
 				      NULL);	
 
-	/* FIXME: See bug #134357. */
 	bonobo_ui_component_set_prop (priv->ui_component, 
 				      "/commands/EditRedo",
-				      "label", _("_Redo"),
+				      "label", label,
 				      NULL);	
 }
 
@@ -1214,6 +1212,8 @@ window_confirm_exit_run (PlannerWindow *window)
 	gint              hours;
 	gchar            *name;
 	gchar            *tmp;
+	const gchar      *uri;
+	gboolean          is_sql = FALSE;
 	
 	priv = window->priv;
 
@@ -1245,7 +1245,7 @@ window_confirm_exit_run (PlannerWindow *window)
 	}
 
 	name = window_get_name (window);
-
+	
 	tmp = g_strdup_printf (_("Save changes to document '%s' before closing?"), name);
 	
 	dialog = gtk_message_dialog_new (GTK_WINDOW (window),
@@ -1263,31 +1263,35 @@ window_confirm_exit_run (PlannerWindow *window)
 		      "wrap", FALSE,
 		      NULL);
 
+	uri = mrp_project_get_uri (priv->project);
+	if (uri && strncmp (uri, "sql://", 6) == 0) {
+		/* Hack. */
+		is_sql = TRUE;
+	}
+	
 	quit_button = window_create_dialog_button (GTK_STOCK_QUIT, 
 						   _("C_lose without saving"));
-	cancel_button = window_create_dialog_button (GTK_STOCK_CANCEL,
-						     _("_Cancel"));
-	save_button = window_create_dialog_button (GTK_STOCK_SAVE,
-						   _("_Save"));
-
 	gtk_dialog_add_action_widget (GTK_DIALOG (dialog),
 				      quit_button,
 				      GTK_RESPONSE_NO);
 
+	cancel_button = window_create_dialog_button (GTK_STOCK_CANCEL,
+						     _("_Cancel"));
 	gtk_dialog_add_action_widget (GTK_DIALOG (dialog),
 				      cancel_button,
 				      GTK_RESPONSE_CANCEL);
 
-	gtk_dialog_add_action_widget (GTK_DIALOG (dialog),
-				      save_button,
-				      GTK_RESPONSE_YES);
-
-	gtk_widget_grab_focus (save_button);
-
-	gtk_widget_show_all (dialog);
+	if (!is_sql) {
+		save_button = window_create_dialog_button (GTK_STOCK_SAVE,
+							   _("_Save"));
+		gtk_dialog_add_action_widget (GTK_DIALOG (dialog),
+					      save_button,
+					      GTK_RESPONSE_YES);
+		gtk_widget_grab_focus (save_button);
+	}
 	
+	gtk_widget_show_all (dialog);
 	ret = gtk_dialog_run (GTK_DIALOG (dialog));
-
         gtk_widget_destroy (dialog);
         
 	switch (ret) {
@@ -1639,22 +1643,29 @@ static gchar *
 window_get_name (PlannerWindow *window)
 {
 	PlannerWindowPriv *priv;
-	gchar            *name;
-	gchar            *uri;
+	gchar             *name, *tmp;
+	const gchar       *uri;
 
 	priv = window->priv;
+
+	uri = mrp_project_get_uri (priv->project);
+
+	if (uri && strncmp (uri, "sql://", 6) == 0) {
+		/* Hack. */
+		uri = _("Unnamed database project");
+	}
 	
 	g_object_get (priv->project, "name", &name, NULL);
-
 	if (name == NULL || name[0] == 0) {
-		uri = (gchar *) mrp_project_get_uri (priv->project);
-
+		g_free (name);
+		
 		if (uri == NULL || uri[0] == 0) {
-			uri = _("Unnamed");
+			name = g_strdup (_("Unnamed"));
+		} else {
+			tmp = g_path_get_basename (uri);
+			name = g_markup_escape_text (tmp, -1);
+			g_free (tmp);
 		}
-
-		/* Remove leading path. */
-		name = g_path_get_basename (uri);
 	}
 
 	return name;

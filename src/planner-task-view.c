@@ -262,6 +262,10 @@ get_widget (PlannerView *view)
 		priv->tree = planner_task_tree_new (view->main_window,
 						    model,
 						    TRUE,
+						    /* i18n: WBS is sort for work breakdown structure, and is a
+						     * project management term. You might want to leave it
+						     * untranslated unless there is a localized term for it.
+						     */
 						    COL_WBS,    _("WBS"),
 						    COL_NAME,   _("Name"), 
 						    COL_START,  _("Start"), 

@@ -85,7 +85,9 @@ void            plugin_exit                    (void);
 
 enum {
 	COL_ID,
-	COL_NAME
+	COL_NAME,
+	COL_PHASE,
+	COL_REVISION
 };
 
 static BonoboUIVerb verbs[] = {
@@ -278,6 +280,15 @@ selection_changed_cb (GtkTreeSelection *selection, GtkWidget *ok_button)
 	gtk_widget_set_sensitive (ok_button, sensitive);
 }
 
+static void
+row_activated_cb (GtkWidget         *tree_view,
+		  GtkTreePath       *path,
+		  GtkTreeViewColumn *column,
+		  GtkWidget         *ok_button)
+{
+	gtk_widget_activate (ok_button);
+}
+
 /**
  * Display a list with projects and let the user select one. Returns the project
  * id of the selected one.
@@ -338,7 +349,8 @@ sql_plugin_retrieve_project_id (PlannerPlugin *plugin,
 	res = NULL;
 
 	res = sql_execute_query (conn,
-		      "DECLARE mycursor CURSOR FOR SELECT proj_id, name FROM project");
+				 "DECLARE mycursor CURSOR FOR SELECT proj_id, name,"
+				 "phase, revision FROM project ORDER by proj_id ASC");
 
 	if (res == NULL) {
 		g_warning ("DECLARE CURSOR command failed (project).");
@@ -361,37 +373,84 @@ sql_plugin_retrieve_project_id (PlannerPlugin *plugin,
 
 	g_object_unref (gui);
 	
-	liststore = gtk_list_store_new (2, G_TYPE_INT, G_TYPE_STRING);
+	liststore = gtk_list_store_new (4, G_TYPE_INT, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_INT);
 	gtk_tree_view_set_model (GTK_TREE_VIEW (treeview), GTK_TREE_MODEL (liststore));
 
+	cell = gtk_cell_renderer_text_new ();
+	col = gtk_tree_view_column_new_with_attributes (_("ID"),
+							cell,
+							"text", COL_ID,
+							NULL);
+	gtk_tree_view_column_set_resizable (col, TRUE);
+	gtk_tree_view_append_column (GTK_TREE_VIEW (treeview), col);
+	
 	cell = gtk_cell_renderer_text_new ();
 	col = gtk_tree_view_column_new_with_attributes (_("Project"),
 							cell,
 							"text", COL_NAME,
 							NULL);
+	gtk_tree_view_column_set_resizable (col, TRUE);
 	gtk_tree_view_append_column (GTK_TREE_VIEW (treeview), col);
+	
+	cell = gtk_cell_renderer_text_new ();
+	col = gtk_tree_view_column_new_with_attributes (_("Phase"),
+							cell,
+							"text", COL_PHASE,
+							NULL);
+	gtk_tree_view_column_set_resizable (col, TRUE);
+	gtk_tree_view_append_column (GTK_TREE_VIEW (treeview), col);
+	
+	cell = gtk_cell_renderer_text_new ();
+	col = gtk_tree_view_column_new_with_attributes (_("Revision"),
+							cell,
+							"text", COL_REVISION,
+							NULL);
+	gtk_tree_view_column_set_resizable (col, TRUE);
+	gtk_tree_view_append_column (GTK_TREE_VIEW (treeview), col);
+	
+	gtk_tree_view_columns_autosize (GTK_TREE_VIEW (treeview));
+	
 	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
 	gtk_tree_selection_set_mode (selection, GTK_SELECTION_SINGLE); 
 	
-	g_signal_connect (selection, "changed",
+	g_signal_connect (selection,
+			  "changed",
 			  G_CALLBACK (selection_changed_cb),
+			  ok_button);
+
+	g_signal_connect (treeview,
+			  "row_activated",
+			  G_CALLBACK (row_activated_cb),
 			  ok_button);
 	
 	for (i = 0; i < gda_data_model_get_n_rows (res); i++) {
 		gint   id;
 		gchar *name;
+		gchar *phase;
+		gint   revision;
 		
 		id = get_int (res, i, 0);
 		name = get_string (res, i, 1);
+		phase = get_string (res, i, 2);
+		revision = get_int (res, i, 3);
 
+		/* FIXME: needs fixing in the database backend. */
+		if (strcmp (phase, "NULL") == 0) {
+			g_free (phase);
+			phase = g_strdup ("");
+		}
+		
 		gtk_list_store_append (GTK_LIST_STORE (liststore), &iter);
 		gtk_list_store_set (GTK_LIST_STORE (liststore), 
 				    &iter,
 				    COL_ID, id,
 				    COL_NAME, name,
+				    COL_PHASE, phase,
+			            COL_REVISION, revision,
 				    -1);
 
 		g_free (name);
+		g_free (phase);
 	}
 
 	if (gda_data_model_get_n_columns (res) == 0) {
