@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: planner 2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-01-11 17:04+0100\n"
-"PO-Revision-Date: 2004-01-11 17:13+0100\n"
+"POT-Creation-Date: 2004-01-26 09:13+0100\n"
+"PO-Revision-Date: 2004-01-26 09:15+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian/Bokmaal <i18n-nb@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
@@ -358,7 +358,7 @@ msgstr "_Fullført:"
 msgid "Predecessors"
 msgstr "Forgjengere"
 
-#: data/glade/task-dialog.glade.h:9 src/planner-resource-view.c:344
+#: data/glade/task-dialog.glade.h:9 src/planner-resource-view.c:365
 msgid "Resources"
 msgstr "Ressurser"
 
@@ -698,15 +698,15 @@ msgstr "_Prosject"
 msgid "_Quit"
 msgstr "A_vslutt"
 
-#: data/ui/main-window.ui.h:44 src/planner-cmd-manager.c:240
+#: data/ui/main-window.ui.h:44
 msgid "_Redo"
 msgstr "Gjenopp_rett"
 
-#: data/ui/main-window.ui.h:45 src/planner-window.c:1259
+#: data/ui/main-window.ui.h:45 src/planner-window.c:1267
 msgid "_Save"
 msgstr "_Lagre"
 
-#: data/ui/main-window.ui.h:46 src/planner-cmd-manager.c:228
+#: data/ui/main-window.ui.h:46
 msgid "_Undo"
 msgstr "_Angre"
 
@@ -853,20 +853,16 @@ msgid "None"
 msgstr "Ingen"
 
 #. Give up.
-#: libplanner/mrp-sql.c:229 src/planner-sql-plugin.c:131
+#: libplanner/mrp-sql.c:345 src/planner-sql-plugin.c:171
 msgid "Invalid Unicode"
 msgstr "Ugyldig Unicode"
 
-#: libplanner/mrp-sql.c:2205
+#: libplanner/mrp-sql.c:2201
 #, c-format
-msgid ""
-"The project '%s' has been changed by the user '%s' since you opened it. Do "
-"you want to save anyway?"
-msgstr ""
-"Prosjekt «%s» har vært endret av bruker «%s» siden du åpnet det sist. Vil du "
-"lagre det likevel?"
+msgid "Connection to database '%s' failed.\n"
+msgstr "Tilkobling til database «%s» feilet.\n"
 
-#: libplanner/mrp-sql.c:3443
+#: libplanner/mrp-sql.c:2206 libplanner/mrp-sql.c:3643
 #, c-format
 msgid ""
 "Connection to database '%s' failed.\n"
@@ -874,6 +870,20 @@ msgid ""
 msgstr ""
 "Tilkobling til database «%s» feilet.\n"
 "%s"
+
+#: libplanner/mrp-sql.c:2214
+#, c-format
+msgid "BEGIN command failed %s."
+msgstr "BEGIN-kommando feilet %s."
+
+#: libplanner/mrp-sql.c:2380
+#, c-format
+msgid ""
+"The project '%s' has been changed by the user '%s' since you opened it. Do "
+"you want to save anyway?"
+msgstr ""
+"Prosjekt «%s» har vært endret av bruker «%s» siden du åpnet det sist. Vil du "
+"lagre det likevel?"
 
 #: libplanner/mrp-storage-sql.c:205
 msgid "Invalid SQL URI (must start with 'sql://' and contain '#')."
@@ -949,13 +959,21 @@ msgstr "OK"
 
 #: src/planner-cmd-manager.c:226
 #, c-format
-msgid "_Undo '%s'"
-msgstr "_Angre «%s»"
+msgid "Undo '%s'"
+msgstr "Angre «%s»"
+
+#: src/planner-cmd-manager.c:228
+msgid "Undo"
+msgstr "Angre"
 
 #: src/planner-cmd-manager.c:238
 #, c-format
-msgid "_Redo '%s'"
-msgstr "Gjenopp_rett «%s»"
+msgid "Redo '%s'"
+msgstr "Gjenopprett «%s»"
+
+#: src/planner-cmd-manager.c:240
+msgid "Redo"
+msgstr "Gjenopprett"
 
 #: src/planner-default-week-dialog.c:40
 msgid "Monday"
@@ -1041,21 +1059,21 @@ msgid "Project start"
 msgstr "Prosjektstart"
 
 #: src/planner-gantt-print.c:190 src/planner-group-dialog.c:387
-#: src/planner-property-dialog.c:378 src/planner-resource-view.c:976
+#: src/planner-property-dialog.c:378 src/planner-resource-view.c:1047
 #: src/planner-task-dialog.c:1311 src/planner-task-dialog.c:1397
 #: src/planner-task-view.c:261
 msgid "Name"
 msgstr "Navn"
 
 #: src/planner-gantt-print.c:198 src/planner-resource-dialog.c:1101
-#: src/planner-resource-view.c:639 src/planner-resource-view.c:655
-#: src/planner-resource-view.c:1197 src/planner-task-view.c:264
+#: src/planner-resource-view.c:660 src/planner-resource-view.c:676
+#: src/planner-resource-view.c:1337 src/planner-task-view.c:264
 msgid "Work"
 msgstr "Arbeid"
 
 #: src/planner-gantt-print.c:513 src/planner-gantt-print.c:515
 #: src/planner-gantt-row.c:656 src/planner-gantt-row.c:658
-#: src/planner-window.c:1636
+#: src/planner-window.c:1644
 msgid "Unnamed"
 msgstr "Uten navn"
 
@@ -1119,7 +1137,7 @@ msgstr ""
 "«%s» er en katalog.\n"
 "Oppgi et filnavn og prøv på nytt."
 
-#: src/planner-html-plugin.c:148 src/planner-window.c:1404
+#: src/planner-html-plugin.c:148 src/planner-window.c:1412
 #, c-format
 msgid "File \"%s\" exists, do you want to overwrite it?"
 msgstr "Filen «%s» eksisterer. Vil du overskrive den?"
@@ -1218,14 +1236,14 @@ msgstr "Kunne ikke opprette egenskaper-dialog."
 msgid "Label"
 msgstr "Etikett"
 
-#: src/planner-property-dialog.c:411 src/planner-resource-view.c:997
+#: src/planner-property-dialog.c:411 src/planner-resource-view.c:1068
 #: src/planner-task-dialog.c:1429
 msgid "Type"
 msgstr "Type"
 
 #. Put "no group" at the top.
 #: src/planner-resource-dialog.c:248 src/planner-resource-input-dialog.c:96
-#: src/planner-resource-view.c:1385
+#: src/planner-resource-view.c:1525
 msgid "(None)"
 msgstr "(Ingen)"
 
@@ -1248,8 +1266,8 @@ msgstr "Ingen (bruk forvalg for prosjektet)"
 msgid "Edit resource properties"
 msgstr "Rediger egenskaper for ressurs"
 
-#: src/planner-resource-dialog.c:1102 src/planner-resource-view.c:642
-#: src/planner-resource-view.c:656 src/planner-resource-view.c:1198
+#: src/planner-resource-dialog.c:1102 src/planner-resource-view.c:663
+#: src/planner-resource-view.c:677 src/planner-resource-view.c:1338
 msgid "Material"
 msgstr "Materiale"
 
@@ -1265,21 +1283,29 @@ msgstr "/Fje_rn ressurs"
 msgid "/_Edit resource..."
 msgstr "/R_ediger ressurs..."
 
-#: src/planner-resource-view.c:352
+#: src/planner-resource-view.c:373
 msgid "_Resources"
 msgstr "_Ressurser"
 
-#: src/planner-resource-view.c:859
+#: src/planner-resource-view.c:763
+msgid "Insert resource"
+msgstr "Sett inn ressurs"
+
+#: src/planner-resource-view.c:930
 msgid "Edit custom resource properties"
 msgstr "Rediger egendefinerte egenskaper for ressurs"
 
-#: src/planner-resource-view.c:1021
+#: src/planner-resource-view.c:1092
 msgid "Group"
 msgstr "Gruppe"
 
-#: src/planner-resource-view.c:1050
+#: src/planner-resource-view.c:1121
 msgid "Email"
 msgstr "E-post"
+
+#: src/planner-resource-view.c:1186
+msgid "Edit resource property"
+msgstr "Rediger egenskap for ressurs"
 
 #. i18n: Short "Week", preferably 2 letters.
 #: src/planner-scale-utils.c:325
@@ -1328,24 +1354,15 @@ msgstr "H%d"
 msgid "%04d, H%d"
 msgstr "%04d, H%d"
 
-#: src/planner-sql-plugin.c:273
-#, c-format
-msgid ""
-"Connection to database '%s' failed:\n"
-"%s"
-msgstr ""
-"Tilkobling til database «%s» feilet:\n"
-"%s"
-
-#: src/planner-sql-plugin.c:322
+#: src/planner-sql-plugin.c:367
 msgid "Project"
 msgstr "Prosject"
 
-#: src/planner-sql-plugin.c:494
+#: src/planner-sql-plugin.c:537
 msgid "Open from Database"
 msgstr "Åpne fra database"
 
-#: src/planner-sql-plugin.c:601
+#: src/planner-sql-plugin.c:644
 msgid "Save to Database"
 msgstr "Lagre til database"
 
@@ -1531,43 +1548,43 @@ msgstr "En prosjektstyringsapplikasjon for GNOME skrivebordsmiljøet"
 msgid "The Planner Homepage"
 msgstr "Planner nettside"
 
-#: src/planner-window.c:1215
+#: src/planner-window.c:1223
 msgid "If you don't save, changes made the last minute will be discarded."
 msgstr "Hvis du ikke lagrer vil endringer gjort det siste minuttet forkastes."
 
-#: src/planner-window.c:1220
+#: src/planner-window.c:1228
 #, c-format
 msgid "If you don't save, changes made the last %d minutes will be discarded."
 msgstr ""
 "Hvis du ikke lagrer vil endringer gjort de siste %d minutter forkastes."
 
-#: src/planner-window.c:1225
+#: src/planner-window.c:1233
 msgid "If you don't save, changes made the last hour will be discarded."
 msgstr "Hvis du ikke lagrer vil endringer gjort den siste timen forkastes."
 
-#: src/planner-window.c:1230
+#: src/planner-window.c:1238
 #, c-format
 msgid "If you don't save, changes made the last %d hours will be discarded."
 msgstr "Hvis du ikke lagrer vil endringer gjort de siste %d timene forkastes."
 
-#: src/planner-window.c:1237
+#: src/planner-window.c:1245
 #, c-format
 msgid "Save changes to document '%s' before closing?"
 msgstr "Lagre endringer i dokument «%s» før du avslutter?"
 
-#: src/planner-window.c:1255
+#: src/planner-window.c:1263
 msgid "C_lose without saving"
 msgstr "_Lukk uten å lagre"
 
-#: src/planner-window.c:1257
+#: src/planner-window.c:1265
 msgid "_Cancel"
 msgstr "_Avbryt"
 
-#: src/planner-window.c:1368
+#: src/planner-window.c:1376
 msgid "Save a file"
 msgstr "Lagre en fil"
 
-#: src/planner-window.c:1599
+#: src/planner-window.c:1607
 msgid ""
 "You have opened a file that was saved with an old version of Planner.\n"
 "\n"
@@ -1584,8 +1601,13 @@ msgid ""
 msgstr ""
 "Du har åpnet en fil som ble lagret med en gammel versjon av Planner.\n"
 "\n"
-"Når du laster gamle filer vil alle oppgaver bruke begrensningen «Må starte på», siden den gamle versjonen ikke støttet automatisk omplassering fullt ut. For å gjøre seg nytte av denne nye funksjonen bør du legge til forgjengerrelasjoner melom oppgaver som er avhengige av hverandre.\n"
+"Når du laster gamle filer vil alle oppgaver bruke begrensningen «Må starte "
+"på», siden den gamle versjonen ikke støttet automatisk omplassering fullt "
+"ut. For å gjøre seg nytte av denne nye funksjonen bør du legge til "
+"forgjengerrelasjoner melom oppgaver som er avhengige av hverandre.\n"
 "\n"
-"Du kan legge til en forgjengerrelasjon ved å klikke på forgjengeren og fra til etterfølgeren.\n"
+"Du kan legge til en forgjengerrelasjon ved å klikke på forgjengeren og fra "
+"til etterfølgeren.\n"
 "\n"
-"Etter å ha gjort dette kan du fjerne alle begresninger ved å velge menyoppføringen «Fjern alle begrensninger» i «Rediger»-menyen."
+"Etter å ha gjort dette kan du fjerne alle begresninger ved å velge "
+"menyoppføringen «Fjern alle begrensninger» i «Rediger»-menyen."
