@@ -36,6 +36,8 @@
 #include "planner-canvas-line.h"
 #include "eel-canvas-rect.h"
 #include "planner-scale-utils.h"
+#include "planner-task-tree.h"
+#include "planner-task-popup.h"
 
 /* The padding between the gantt bar and the text. */
 #define TEXT_PADDING 10.0
@@ -116,6 +118,8 @@ struct _PlannerGanttRowPriv {
 
 	/* Cached positions of each assigned resource. */
 	GArray      *resource_widths;
+	
+	GtkItemFactory *popup_factory;
 };
 
 static void      gantt_row_class_init               (PlannerGanttRowClass      *class);
@@ -1597,7 +1601,7 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 	gboolean                  summary;
 	MrpTaskType               type;
 	gchar                    *message;
-			
+	
 	row = PLANNER_GANTT_ROW (item);
 	priv = row->priv;
 	canvas_widget = GTK_WIDGET (item->canvas);
@@ -1609,12 +1613,32 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 	case GDK_BUTTON_PRESS:
 		switch (event->button.button) {
 		case 3:
-			if (IN_DRAG_RELATION_SPOT (event->button.x,
-						   event->button.y,
-						   priv->x + priv->width,
-						   priv->y,
-						   priv->height)) {
-				/*print ("popup\n");*/
+			if (IN_DRAG_RELATION_SPOT (event->button.x, event->button.y,
+                priv->x + priv->width, priv->y, priv->height)) {
+				
+				/* Select the clicked task in the PlannerTaskTree */
+				PlannerGanttChart *chart = g_object_get_data (
+                    G_OBJECT (item->canvas), "chart");
+			    PlannerTaskTree *tree = planner_gantt_chart_get_view (chart);
+	
+				GtkTreePath *path = planner_gantt_model_get_path_from_task (
+                    PLANNER_GANTT_MODEL (planner_gantt_chart_get_model (chart)),
+                    priv->task);
+							   
+				GtkTreeSelection *selection = gtk_tree_view_get_selection (
+                    GTK_TREE_VIEW (tree));
+				
+                gtk_tree_selection_unselect_all (selection);
+			    gtk_tree_selection_select_path (selection, path);
+							   
+				/* Traslate the event coordinates to window coordinates */
+			    gint x, y;
+				gdk_window_get_origin (event->button.window, &x, &y);
+				
+				/* Show the menu */
+				gtk_item_factory_popup (priv->popup_factory,
+                    event->button.x_root - wx1, event->button.y_root - wy1,
+                    0, gtk_get_current_event_time ());
 			}
 			break;
 			
@@ -2118,3 +2142,13 @@ gantt_row_get_resource_by_index (PlannerGanttRow *row,
 	return TRUE;
 }
 
+void
+planner_gantt_row_init_menu (PlannerGanttRow *row)
+{
+	PlannerGanttChart *chart = g_object_get_data (
+        G_OBJECT (GNOME_CANVAS_ITEM(row)->canvas), "chart");
+    
+	PlannerTaskTree *tree = planner_gantt_chart_get_view (chart);
+	
+	row->priv->popup_factory = task_popup_new (tree);
+}

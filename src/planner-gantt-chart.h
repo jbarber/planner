@@ -27,6 +27,7 @@
 #include <gtk/gtkvbox.h>
 #include <gtk/gtktreemodel.h>
 #include <libgnomecanvas/gnome-canvas.h>
+#include "planner-task-tree.h"
 
 #define PLANNER_TYPE_GANTT_CHART		(planner_gantt_chart_get_type ())
 #define PLANNER_GANTT_CHART(obj)		(GTK_CHECK_CAST ((obj), PLANNER_TYPE_GANTT_CHART, PlannerGanttChart))
@@ -60,6 +61,11 @@ GType            planner_gantt_chart_get_type         (void);
 GtkWidget       *planner_gantt_chart_new              (void);
 
 GtkWidget       *planner_gantt_chart_new_with_model   (GtkTreeModel  *model);
+
+PlannerTaskTree *planner_gantt_chart_get_view (PlannerGanttChart *chart);
+
+void planner_gantt_chart_set_view (PlannerGanttChart *chart,
+    PlannerTaskTree *view);
 
 GtkTreeModel    *planner_gantt_chart_get_model        (PlannerGanttChart  *tree_view);
 
@@ -102,4 +108,3 @@ planner_gantt_chart_get_highlight_critical_tasks      (PlannerGanttChart  *chart
 
 
 #endif /* __PLANNER_GANTT_CHART_H__ */
-

@@ -76,7 +76,8 @@ struct _PlannerGanttChartPriv {
 	
 	GtkTreeModel    *model;
 	TreeNode        *tree;
-
+	PlannerTaskTree *view;
+	
 	GHashTable      *relation_hash;
 	
 	GnomeCanvasItem *background;
@@ -1009,7 +1010,8 @@ gantt_chart_insert_task (PlannerGanttChart *chart,
 				      "scale", SCALE (priv->zoom),
 				      "zoom", priv->zoom,
 				      NULL);
-
+	planner_gantt_row_init_menu (PLANNER_GANTT_ROW (item));
+	
 	tree_node = gantt_chart_tree_node_new ();
 	tree_node->item = item;
 	tree_node->task = task;
@@ -1300,6 +1302,22 @@ gantt_chart_disconnect_signals (PlannerGanttChart *chart)
 
 	g_list_free (chart->priv->signal_ids);
 	chart->priv->signal_ids = NULL;
+}
+
+PlannerTaskTree *
+planner_gantt_chart_get_view (PlannerGanttChart *chart)
+{
+	g_return_val_if_fail (PLANNER_IS_GANTT_CHART (chart), NULL);
+	
+	return chart->priv->view;
+}
+
+void
+planner_gantt_chart_set_view (PlannerGanttChart *chart, PlannerTaskTree *view)
+{
+	g_return_if_fail (PLANNER_IS_TASK_TREE (view));
+	
+	chart->priv->view = view;
 }
 
 GtkTreeModel *
@@ -1859,5 +1877,3 @@ planner_gantt_chart_get_highlight_critical_tasks (PlannerGanttChart *chart)
 
 	return chart->priv->highlight_critical;
 }
-
-

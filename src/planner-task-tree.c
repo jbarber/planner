@@ -44,6 +44,7 @@
 #include "planner-property-dialog.h"
 #include "planner-task-tree.h"
 #include "planner-gantt-model.h"
+#include "planner-task-popup.h"
 
 enum {
 	SELECTION_CHANGED,
@@ -96,8 +97,6 @@ static void        task_tree_setup_tree_view           (GtkTreeView          *tr
 static void        task_tree_add_column                (GtkTreeView          *tree,
 							gint                  column,
 							const gchar          *title);
-static char    *   task_tree_item_factory_trans        (const char           *path,
-							gpointer              data);
 static void        task_tree_name_data_func            (GtkTreeViewColumn    *tree_column,
 							GtkCellRenderer      *cell,
 							GtkTreeModel         *tree_model,
@@ -128,21 +127,6 @@ static void        task_tree_work_data_func            (GtkTreeViewColumn    *tr
 							GtkTreeModel         *tree_model,
 							GtkTreeIter          *iter,
 							gpointer              data);
-static void        task_tree_popup_insert_task_cb      (gpointer              callback_data,
-							guint                 action,
-							GtkWidget            *widget);
-static void        task_tree_popup_insert_subtask_cb   (gpointer              callback_data,
-							guint                 action,
-							GtkWidget            *widget);
-static void        task_tree_popup_remove_task_cb      (gpointer              callback_data,
-							guint                 action,
-							GtkWidget            *widget);
-static void        task_tree_popup_edit_task_cb        (gpointer              callback_data,
-							guint                 action,
-							GtkWidget            *widget);
-static void        task_tree_popup_unlink_task_cb      (gpointer              callback_data,
-							guint                 action,
-							GtkWidget            *widget);
 static void        task_tree_block_selection_changed   (PlannerTaskTree      *tree);
 static void        task_tree_unblock_selection_changed (PlannerTaskTree      *tree);
 static void        task_tree_selection_changed_cb      (GtkTreeSelection     *selection,
@@ -172,42 +156,6 @@ static MrpTask *   task_tree_get_task_from_path        (PlannerTaskTree      *tr
 
 static GtkTreeViewClass *parent_class = NULL;
 static guint signals[LAST_SIGNAL];
-
-enum {
-	POPUP_NONE,
-	POPUP_INSERT,
-	POPUP_SUBTASK,
-	POPUP_REMOVE,
-	POPUP_UNLINK,
-	POPUP_EDIT
-};
-
-
-#define GIF_CB(x) ((GtkItemFactoryCallback)(x))
-
-static GtkItemFactoryEntry popup_menu_items[] = {
-	{ N_("/_Insert task"),       NULL, GIF_CB (task_tree_popup_insert_task_cb),
-	  POPUP_INSERT,  "<Item>",   NULL
-	},
-	{ N_("/_Insert subtask"),    NULL, GIF_CB (task_tree_popup_insert_subtask_cb),
-	  POPUP_SUBTASK, "<Item>",   NULL
-	},
-	{ N_("/_Remove task"),       NULL, GIF_CB (task_tree_popup_remove_task_cb),
-	  POPUP_REMOVE,  "<StockItem>", GTK_STOCK_DELETE
-	},
-	{ "/sep1",                   NULL, 0,
-	  POPUP_NONE,    "<Separator>" },
-	{ N_("/_Unlink task"),       NULL, GIF_CB (task_tree_popup_unlink_task_cb),
-	  POPUP_UNLINK,  "<Item>",   NULL
-	},
-	{ "/sep2",                   NULL, 0,
-	  POPUP_NONE,    "<Separator>"
-	},
-	{ N_("/_Edit task..."),      NULL, GIF_CB (task_tree_popup_edit_task_cb),
-	  POPUP_EDIT,    "<Item>",   NULL
-	}
-};
-
 
 /*
  * Commands
@@ -470,87 +418,13 @@ static void
 task_tree_init (PlannerTaskTree *tree)
 {
 	PlannerTaskTreePriv *priv;
-	GtkIconFactory      *icon_factory;
-	GtkIconSet          *icon_set;
-	GdkPixbuf           *pixbuf;
 	
 	priv = g_new0 (PlannerTaskTreePriv, 1);
 	tree->priv = priv;
 
 	priv->property_to_column = g_hash_table_new (NULL, NULL);
 	
-	priv->popup_factory = gtk_item_factory_new (GTK_TYPE_MENU,
-						    "<main>",
-						    NULL);
-	gtk_item_factory_set_translate_func (priv->popup_factory,
-					     task_tree_item_factory_trans,
-					     NULL,
-					     NULL);
-	
-	gtk_item_factory_create_items (priv->popup_factory,
-				       G_N_ELEMENTS (popup_menu_items),
-				       popup_menu_items,
-				       tree);
-
-	/* Add stock icons. */
-	icon_factory = gtk_icon_factory_new ();
-	gtk_icon_factory_add_default (icon_factory);
-
-	pixbuf = gdk_pixbuf_new_from_file (IMAGEDIR "/24_insert_task.png", NULL);
-	icon_set = gtk_icon_set_new_from_pixbuf (pixbuf);
-	g_object_unref (pixbuf);
-	gtk_icon_factory_add (icon_factory,
-			      "planner-stock-insert-task",
-			      icon_set);
-	
-	pixbuf = gdk_pixbuf_new_from_file (IMAGEDIR "/24_remove_task.png", NULL);
-	icon_set = gtk_icon_set_new_from_pixbuf (pixbuf);
-	g_object_unref (pixbuf);
-	gtk_icon_factory_add (icon_factory,
-			      "planner-stock-remove-task",
-			      icon_set);
-
-	pixbuf = gdk_pixbuf_new_from_file (IMAGEDIR "/24_unlink_task.png", NULL);
-	icon_set = gtk_icon_set_new_from_pixbuf (pixbuf);
-	g_object_unref (pixbuf);
-	gtk_icon_factory_add (icon_factory,
-			      "planner-stock-unlink-task",
-			      icon_set);
-
-	pixbuf = gdk_pixbuf_new_from_file (IMAGEDIR "/24_link_task.png", NULL);
-	icon_set = gtk_icon_set_new_from_pixbuf (pixbuf);
-	g_object_unref (pixbuf);
-	gtk_icon_factory_add (icon_factory,
-			      "planner-stock-link-task",
-			      icon_set);
-
-	pixbuf = gdk_pixbuf_new_from_file (IMAGEDIR "/24_indent_task.png", NULL);
-	icon_set = gtk_icon_set_new_from_pixbuf (pixbuf);
-	g_object_unref (pixbuf);
-	gtk_icon_factory_add (icon_factory,
-			      "planner-stock-indent-task",
-			      icon_set);
-
-	pixbuf = gdk_pixbuf_new_from_file (IMAGEDIR "/24_unindent_task.png", NULL);
-	icon_set = gtk_icon_set_new_from_pixbuf (pixbuf);
-	g_object_unref (pixbuf);
-	gtk_icon_factory_add (icon_factory,
-			      "planner-stock-unindent-task",
-			      icon_set);
-
-	pixbuf = gdk_pixbuf_new_from_file (IMAGEDIR "/24_task_up.png", NULL);
-	icon_set = gtk_icon_set_new_from_pixbuf (pixbuf);
-	g_object_unref (pixbuf);
-	gtk_icon_factory_add (icon_factory,
-			      "planner-stock-move-task-up",
-			      icon_set);
-
-	pixbuf = gdk_pixbuf_new_from_file (IMAGEDIR "/24_task_down.png", NULL);
-	icon_set = gtk_icon_set_new_from_pixbuf (pixbuf);
-	g_object_unref (pixbuf);
-	gtk_icon_factory_add (icon_factory,
-			      "planner-stock-move-task-down",
-			      icon_set);
+	priv->popup_factory = task_popup_new (tree);
 }
 
 static void
@@ -569,46 +443,6 @@ task_tree_finalize (GObject *object)
 	if (G_OBJECT_CLASS (parent_class)->finalize) {
 		(* G_OBJECT_CLASS (parent_class)->finalize) (object);
 	}
-}
-
-static void
-task_tree_popup_insert_task_cb (gpointer   callback_data,
-				guint      action,
-				GtkWidget *widget)
-{
-	planner_task_tree_insert_task (callback_data);
-}
-
-static void
-task_tree_popup_insert_subtask_cb (gpointer   callback_data,
-				   guint      action,
-				   GtkWidget *widget)
-{
-	planner_task_tree_insert_subtask (callback_data);
-}
-
-static void
-task_tree_popup_remove_task_cb (gpointer   callback_data,
-				guint      action,
-				GtkWidget *widget)
-{
-	planner_task_tree_remove_task (callback_data);
-}
-
-static void
-task_tree_popup_edit_task_cb (gpointer   callback_data,
-			      guint      action,
-			      GtkWidget *widget)
-{
-	planner_task_tree_edit_task (callback_data);
-}
-
-static void
-task_tree_popup_unlink_task_cb (gpointer   callback_data,
-				guint      action,
-				GtkWidget *widget)
-{
-	planner_task_tree_unlink_task (callback_data);
 }
 
 static void
@@ -719,7 +553,6 @@ task_tree_tree_view_popup_menu (GtkWidget  *widget,
 {
 	gint x, y;
 
-	/* FIXME: We should position the popup at the selected cell. */
 	gdk_window_get_pointer (widget->window, &x, &y, NULL);
 
 	gtk_item_factory_popup (tree->priv->popup_factory,
@@ -1765,12 +1598,6 @@ task_tree_add_column (GtkTreeView *tree,
 	default:
 		g_assert_not_reached ();
 	}
-}
-
-static char *
-task_tree_item_factory_trans (const char *path, gpointer data)
-{
-	return _((gchar*)path);
 }
 
 GtkWidget *

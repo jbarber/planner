@@ -53,7 +53,6 @@
 #include "planner-gantt-chart.h"
 #include "planner-gantt-print.h"
 
-
 struct _PlannerViewPriv {
 	GtkWidget             *paned;
 	GtkWidget             *tree;
@@ -498,7 +497,9 @@ gantt_view_create_widget (PlannerView *view)
 	
 	priv->tree = tree;
 	priv->gantt = planner_gantt_chart_new_with_model (model);
-
+	planner_gantt_chart_set_view (PLANNER_GANTT_CHART (priv->gantt),
+        PLANNER_TASK_TREE (tree));
+	
 	g_object_unref (model);
 
 	g_signal_connect (priv->gantt,
@@ -1057,7 +1058,3 @@ gantt_view_update_zoom_sensitivity (PlannerView *view)
 	
 	bonobo_ui_component_thaw (view->ui_component, NULL);
 }
-
-
-
-

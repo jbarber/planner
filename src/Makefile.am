@@ -138,7 +138,9 @@ libgantt_view_la_SOURCES = \
 	planner-scale-utils.c		\
 	planner-scale-utils.h		\
 	planner-task-tree.c		\
-	planner-task-tree.h			
+	planner-task-tree.h		\
+    planner-task-popup.c \
+    planner-task-popup.h
 
 libgantt_view_la_LDFLAGS = -avoid-version -module
 libgantt_view_la_LIBADD = libutil.la
@@ -148,7 +150,10 @@ libtask_view_la_SOURCES = \
 	planner-gantt-model.c		\
 	planner-gantt-model.h		\
 	planner-task-tree.c		\
-	planner-task-tree.h			
+	planner-task-tree.h		\
+	planner-task-popup.c \
+	planner-task-popup.h
+
 
 libtask_view_la_LDFLAGS = -avoid-version -module
 libtask_view_la_LIBADD = libutil.la

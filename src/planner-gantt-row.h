@@ -58,6 +58,6 @@ void  planner_gantt_row_get_geometry (PlannerGanttRow *row,
 void  planner_gantt_row_set_visible  (PlannerGanttRow *row,
 				 gboolean    is_visible);
 
+void planner_gantt_row_init_menu (PlannerGanttRow *row);
 
 #endif /* __PLANNER_GANTT_ROW_H__ */
-
