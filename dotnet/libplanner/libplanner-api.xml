@@ -1,0 +1,1003 @@
+<?xml version="1.0"?>
+<api><!--
+
+        This file was automatically generated.
+        Please DO NOT MODIFY THIS FILE, modify .metadata files instead.
+
+-->
+  <namespace library="libplanner-1" name="Planner">
+    <enum name="ConstraintType" cname="MrpConstraintType" type="enum">
+      <member cname="MRP_CONSTRAINT_ASAP" name="Asap" />
+      <member cname="MRP_CONSTRAINT_ALAP" name="Alap" />
+      <member cname="MRP_CONSTRAINT_SNET" name="Snet" />
+      <member cname="MRP_CONSTRAINT_FNLT" name="Fnlt" />
+      <member cname="MRP_CONSTRAINT_MSO" name="Mso" />
+    </enum>
+    <enum name="Error" cname="MrpError" type="enum">
+      <member cname="MRP_ERROR_TASK_RELATION_FAILED" name="TaskRelationFailed" />
+      <member cname="MRP_ERROR_TASK_MOVE_FAILED" name="TaskMoveFailed" />
+      <member cname="MRP_ERROR_LOAD_FILE_DONT_EXIST" name="LoadFileDontExist" />
+      <member cname="MRP_ERROR_LOAD_FILE_INVALID" name="LoadFileInvalid" />
+      <member cname="MRP_ERROR_SAVE_FILE_EXIST" name="SaveFileExist" />
+      <member cname="MRP_ERROR_SAVE_FILE_CHANGED" name="SaveFileChanged" />
+      <member cname="MRP_ERROR_EXPORT_UNSUPPORTED" name="ExportUnsupported" />
+      <member cname="MRP_ERROR_EXPORT_FAILED" name="ExportFailed" />
+      <member cname="MRP_ERROR_NO_FILE_MODULE" name="NoFileModule" />
+      <member cname="MRP_ERROR_SAVE_WRITE_FAILED" name="SaveWriteFailed" />
+      <member cname="MRP_ERROR_INVALID_URI" name="InvalidUri" />
+      <member cname="MRP_ERROR_FAILED" name="Failed" />
+    </enum>
+    <enum name="PropertyType" cname="MrpPropertyType" type="enum">
+      <member cname="MRP_PROPERTY_TYPE_NONE" name="None" />
+      <member cname="MRP_PROPERTY_TYPE_INT" name="Int" />
+      <member cname="MRP_PROPERTY_TYPE_FLOAT" name="Float" />
+      <member cname="MRP_PROPERTY_TYPE_STRING" name="String" />
+      <member cname="MRP_PROPERTY_TYPE_STRING_LIST" name="StringList" />
+      <member cname="MRP_PROPERTY_TYPE_DATE" name="Date" />
+      <member cname="MRP_PROPERTY_TYPE_DURATION" name="Duration" />
+      <member cname="MRP_PROPERTY_TYPE_COST" name="Cost" />
+    </enum>
+    <enum name="RelationType" cname="MrpRelationType" type="enum">
+      <member cname="MRP_RELATION_NONE" name="None" />
+      <member cname="MRP_RELATION_FS" name="Fs" />
+      <member cname="MRP_RELATION_FF" name="Ff" />
+      <member cname="MRP_RELATION_SS" name="Ss" />
+      <member cname="MRP_RELATION_SF" name="Sf" />
+    </enum>
+    <enum name="ResourceType" cname="MrpResourceType" type="enum">
+      <member cname="MRP_RESOURCE_TYPE_NONE" name="None" />
+      <member cname="MRP_RESOURCE_TYPE_WORK" name="Work" />
+      <member cname="MRP_RESOURCE_TYPE_MATERIAL" name="Material" />
+    </enum>
+    <enum name="TaskSched" cname="MrpTaskSched" type="enum">
+      <member cname="MRP_TASK_SCHED_FIXED_WORK" name="Work" />
+      <member cname="MRP_TASK_SCHED_FIXED_DURATION" name="Duration" />
+    </enum>
+    <enum name="TaskType" cname="MrpTaskType" type="enum">
+      <member cname="MRP_TASK_TYPE_NORMAL" name="Normal" />
+      <member cname="MRP_TASK_TYPE_MILESTONE" name="Milestone" />
+    </enum>
+    <callback name="TaskTraverseFunc" cname="MrpTaskTraverseFunc">
+      <return-type type="gboolean" />
+      <parameters>
+        <parameter type="MrpTask*" name="arg1" />
+        <parameter type="gpointer" name="arg2" />
+      </parameters>
+    </callback>
+    <object name="Application" cname="MrpApplication" parent="GObject">
+      <field cname="priv" type="MrpApplicationPriv*" />
+      <method name="GetType" cname="mrp_application_get_type" shared="true">
+        <return-type type="GType" />
+      </method>
+      <constructor cname="mrp_application_new" />
+    </object>
+    <object name="Assignment" cname="MrpAssignment" parent="MrpObject">
+      <field cname="priv" type="MrpAssignmentPriv*" />
+      <method name="GetResource" cname="mrp_assignment_get_resource">
+        <return-type type="MrpResource*" />
+      </method>
+      <method name="GetTask" cname="mrp_assignment_get_task">
+        <return-type type="MrpTask*" />
+      </method>
+      <method name="GetType" cname="mrp_assignment_get_type" shared="true">
+        <return-type type="GType" />
+      </method>
+      <method name="GetUnits" cname="mrp_assignment_get_units">
+        <return-type type="gint" />
+      </method>
+      <constructor cname="mrp_assignment_new" />
+    </object>
+    <object name="Calendar" cname="MrpCalendar" parent="MrpObject">
+      <field cname="priv" type="MrpCalendarPriv*" />
+      <method name="Copy" cname="mrp_calendar_copy" shared="true">
+        <return-type type="MrpCalendar*" />
+        <parameters>
+          <parameter type="const-gchar*" name="name" />
+          <parameter type="MrpCalendar*" name="calendar" />
+        </parameters>
+      </method>
+      <method name="DayGetIntervals" cname="mrp_calendar_day_get_intervals">
+        <return-type type="GList*" />
+        <parameters>
+          <parameter type="MrpDay*" name="day" />
+          <parameter type="gboolean" name="check_ancestors" />
+        </parameters>
+      </method>
+      <method name="DayGetTotalWork" cname="mrp_calendar_day_get_total_work">
+        <return-type type="gint" />
+        <parameters>
+          <parameter type="MrpDay*" name="day" />
+        </parameters>
+      </method>
+      <method name="DaySetIntervals" cname="mrp_calendar_day_set_intervals">
+        <return-type type="void" />
+        <parameters>
+          <parameter type="MrpDay*" name="day" />
+          <parameter type="GList*" name="intervals" />
+        </parameters>
+      </method>
+      <method name="Derive" cname="mrp_calendar_derive" shared="true">
+        <return-type type="MrpCalendar*" />
+        <parameters>
+          <parameter type="const-gchar*" name="name" />
+          <parameter type="MrpCalendar*" name="parent" />
+        </parameters>
+      </method>
+      <method name="GetAllOverriddenDates" cname="mrp_calendar_get_all_overridden_dates">
+        <return-type type="GList*" />
+      </method>
+      <method name="GetChildren" cname="mrp_calendar_get_children">
+        <return-type type="GList*" />
+      </method>
+      <method name="GetDay" cname="mrp_calendar_get_day">
+        <return-type type="MrpDay*" />
+        <parameters>
+          <parameter type="mrptime" name="date" />
+          <parameter type="gboolean" name="check_ancestors" />
+        </parameters>
+      </method>
+      <method name="GetDefaultDay" cname="mrp_calendar_get_default_day">
+        <return-type type="MrpDay*" />
+        <parameters>
+          <parameter type="gint" name="week_day" />
+        </parameters>
+      </method>
+      <method name="GetName" cname="mrp_calendar_get_name">
+        <return-type type="const-gchar*" />
+      </method>
+      <method name="GetOverriddenDays" cname="mrp_calendar_get_overridden_days">
+        <return-type type="GList*" />
+      </method>
+      <method name="GetParent" cname="mrp_calendar_get_parent">
+        <return-type type="MrpCalendar*" />
+      </method>
+      <method name="GetType" cname="mrp_calendar_get_type" shared="true">
+        <return-type type="GType" />
+      </method>
+      <constructor cname="mrp_calendar_new">
+        <parameters>
+          <parameter type="const-gchar*" name="name" />
+          <parameter type="MrpProject*" name="project" />
+        </parameters>
+      </constructor>
+      <method name="Remove" cname="mrp_calendar_remove">
+        <return-type type="void" />
+      </method>
+      <method name="Reparent" cname="mrp_calendar_reparent">
+        <return-type type="void" />
+        <parameters>
+          <parameter type="MrpCalendar*" name="child" />
+        </parameters>
+      </method>
+      <method name="SetDays" cname="mrp_calendar_set_days">
+        <return-type type="void" />
+        <parameters>
+          <parameter type="mrptime" name="date" />
+          <parameter ellipsis="true" />
+        </parameters>
+      </method>
+      <method name="SetDefaultDays" cname="mrp_calendar_set_default_days">
+        <return-type type="void" />
+        <parameters>
+          <parameter type="gint" name="week_day" />
+          <parameter ellipsis="true" />
+        </parameters>
+      </method>
+      <method name="SetName" cname="mrp_calendar_set_name">
+        <return-type type="void" />
+        <parameters>
+          <parameter type="const-gchar*" name="name" />
+        </parameters>
+      </method>
+    </object>
+    <object name="Group" cname="MrpGroup" parent="MrpObject">
+      <field cname="priv" type="MrpGroupPriv*" />
+      <method name="GetName" cname="mrp_group_get_name">
+        <return-type type="const-gchar*" />
+      </method>
+      <method name="GetType" cname="mrp_group_get_type" shared="true">
+        <return-type type="GType" />
+      </method>
+      <constructor cname="mrp_group_new" />
+      <method name="SetName" cname="mrp_group_set_name">
+        <return-type type="void" />
+        <parameters>
+          <parameter type="const-gchar*" name="name" />
+        </parameters>
+      </method>
+    </object>
+    <object name="Object" cname="MrpObject" parent="GObject">
+      <field cname="priv" type="MrpObjectPriv*" />
+      <method name="Changed" cname="mrp_object_changed">
+        <return-type type="void" />
+      </method>
+      <method name="Get" cname="mrp_object_get" shared="true">
+        <return-type type="void" />
+        <parameters>
+          <parameter type="gpointer" name="object" />
+          <parameter type="const-gchar*" name="first_property_name" />
+          <parameter ellipsis="true" />
+        </parameters>
+      </method>
+      <method name="GetId" cname="mrp_object_get_id">
+        <return-type type="guint" />
+      </method>
+      <method name="GetProperties" cname="mrp_object_get_properties">
+        <return-type type="GList*" />
+      </method>
+      <method name="GetProperty" cname="mrp_object_get_property">
+        <return-type type="void" />
+        <parameters>
+          <parameter type="MrpProperty*" name="property" />
+          <parameter type="GValue*" name="value" />
+        </parameters>
+      </method>
+      <method name="GetType" cname="mrp_object_get_type" shared="true">
+        <return-type type="GType" />
+      </method>
+      <method name="GetValist" cname="mrp_object_get_valist">
+        <return-type type="void" />
+        <parameters>
+          <parameter type="const-gchar*" name="first_property_name" />
+          <parameter type="va_list" name="var_args" />
+        </parameters>
+      </method>
+      <method name="Removed" cname="mrp_object_removed">
+        <return-type type="void" />
+      </method>
+      <method name="Set" cname="mrp_object_set" shared="true">
+        <return-type type="void" />
+        <parameters>
+          <parameter type="gpointer" name="object" />
+          <parameter type="const-gchar*" name="first_property_name" />
+          <parameter ellipsis="true" />
+        </parameters>
+      </method>
+      <method name="SetId" cname="mrp_object_set_id">
+        <return-type type="gboolean" />
+        <parameters>
+          <parameter type="guint" name="id" />
+        </parameters>
+      </method>
+      <method name="SetProperty" cname="mrp_object_set_property">
+        <return-type type="void" />
+        <parameters>
+          <parameter type="MrpProperty*" name="property" />
+          <parameter type="GValue*" name="value" />
+        </parameters>
+      </method>
+      <method name="SetValist" cname="mrp_object_set_valist">
+        <return-type type="void" />
+        <parameters>
+          <parameter type="const-gchar*" name="first_property_name" />
+          <parameter type="va_list" name="var_args" />
+        </parameters>
+      </method>
+    </object>
+    <object name="Project" cname="MrpProject" parent="MrpObject">
+      <field cname="priv" type="MrpProjectPriv*" />
+      <method name="AddGroup" cname="mrp_project_add_group">
+        <return-type type="void" />
+        <parameters>
+          <parameter type="MrpGroup*" name="group" />
+        </parameters>
+      </method>
+      <method name="AddProperty" cname="mrp_project_add_property">
+        <return-type type="void" />
+        <parameters>
+          <parameter type="GType" name="object_type" />
+          <parameter type="MrpProperty*" name="property" />
+          <parameter type="gboolean" name="user_defined" />
+        </parameters>
+      </method>
+      <method name="AddResource" cname="mrp_project_add_resource">
+        <return-type type="void" />
+        <parameters>
+          <parameter type="MrpResource*" name="resource" />
+        </parameters>
+      </method>
+      <method name="CalculateTaskWork" cname="mrp_project_calculate_task_work">
+        <return-type type="gint" />
+        <parameters>
+          <parameter type="MrpTask*" name="task" />
+          <parameter type="mrptime" name="start" />
+          <parameter type="mrptime" name="finish" />
+        </parameters>
+      </method>
+      <method name="Close" cname="mrp_project_close">
+        <return-type type="void" />
+      </method>
+      <method name="Export" cname="mrp_project_export">
+        <return-type type="gboolean" />
+        <parameters>
+          <parameter type="const-gchar*" name="uri" />
+          <parameter type="const-gchar*" name="identifier" />
+          <parameter type="gboolean" name="force" />
+          <parameter type="GError**" name="error" />
+        </parameters>
+      </method>
+      <method name="GetAllTasks" cname="mrp_project_get_all_tasks">
+        <return-type type="GList*" />
+      </method>
+      <method name="GetCalendar" cname="mrp_project_get_calendar">
+        <return-type type="MrpCalendar*" />
+      </method>
+      <method name="GetGroupByName" cname="mrp_project_get_group_by_name">
+        <return-type type="MrpGroup*" />
+        <parameters>
+          <parameter type="const-gchar*" name="name" />
+        </parameters>
+      </method>
+      <method name="GetGroups" cname="mrp_project_get_groups">
+        <return-type type="GList*" />
+      </method>
+      <method name="GetProjectStart" cname="mrp_project_get_project_start">
+        <return-type type="mrptime" />
+      </method>
+      <method name="GetProperty" cname="mrp_project_get_property">
+        <return-type type="MrpProperty*" />
+        <parameters>
+          <parameter type="const-gchar*" name="name" />
+          <parameter type="GType" name="object_type" />
+        </parameters>
+      </method>
+      <method name="GetResources" cname="mrp_project_get_resources">
+        <return-type type="GList*" />
+      </method>
+      <method name="GetRootCalendar" cname="mrp_project_get_root_calendar">
+        <return-type type="MrpCalendar*" />
+      </method>
+      <method name="GetRootTask" cname="mrp_project_get_root_task">
+        <return-type type="MrpTask*" />
+      </method>
+      <method name="GetTaskByName" cname="mrp_project_get_task_by_name">
+        <return-type type="MrpTask*" />
+        <parameters>
+          <parameter type="const-gchar*" name="name" />
+        </parameters>
+      </method>
+      <method name="GetType" cname="mrp_project_get_type" shared="true">
+        <return-type type="GType" />
+      </method>
+      <method name="GetUri" cname="mrp_project_get_uri">
+        <return-type type="const-gchar*" />
+      </method>
+      <method name="HasProperty" cname="mrp_project_has_property">
+        <return-type type="gboolean" />
+        <parameters>
+          <parameter type="GType" name="owner_type" />
+          <parameter type="const-gchar*" name="name" />
+        </parameters>
+      </method>
+      <method name="InsertTask" cname="mrp_project_insert_task">
+        <return-type type="void" />
+        <parameters>
+          <parameter type="MrpTask*" name="parent" />
+          <parameter type="gint" name="position" />
+          <parameter type="MrpTask*" name="task" />
+        </parameters>
+      </method>
+      <method name="IsEmpty" cname="mrp_project_is_empty">
+        <return-type type="gboolean" />
+      </method>
+      <method name="Load" cname="mrp_project_load">
+        <return-type type="gboolean" />
+        <parameters>
+          <parameter type="const-gchar*" name="uri" />
+          <parameter type="GError**" name="error" />
+        </parameters>
+      </method>
+      <method name="LoadFromXml" cname="mrp_project_load_from_xml">
+        <return-type type="gboolean" />
+        <parameters>
+          <parameter type="const-gchar*" name="str" />
+          <parameter type="GError**" name="error" />
+        </parameters>
+      </method>
+      <method name="MoveTask" cname="mrp_project_move_task">
+        <return-type type="gboolean" />
+        <parameters>
+          <parameter type="MrpTask*" name="task" />
+          <parameter type="MrpTask*" name="sibling" />
+          <parameter type="MrpTask*" name="parent" />
+          <parameter type="gboolean" name="before" />
+          <parameter type="GError**" name="error" />
+        </parameters>
+      </method>
+      <method name="NeedsSaving" cname="mrp_project_needs_saving">
+        <return-type type="gboolean" />
+      </method>
+      <constructor cname="mrp_project_new">
+        <parameters>
+          <parameter type="MrpApplication*" name="app" />
+        </parameters>
+      </constructor>
+      <method name="RemoveGroup" cname="mrp_project_remove_group">
+        <return-type type="void" />
+        <parameters>
+          <parameter type="MrpGroup*" name="group" />
+        </parameters>
+      </method>
+      <method name="RemoveProperty" cname="mrp_project_remove_property">
+        <return-type type="void" />
+        <parameters>
+          <parameter type="GType" name="object_type" />
+          <parameter type="const-gchar*" name="name" />
+        </parameters>
+      </method>
+      <method name="RemoveResource" cname="mrp_project_remove_resource">
+        <return-type type="void" />
+        <parameters>
+          <parameter type="MrpResource*" name="resource" />
+        </parameters>
+      </method>
+      <method name="RemoveTask" cname="mrp_project_remove_task">
+        <return-type type="void" />
+        <parameters>
+          <parameter type="MrpTask*" name="task" />
+        </parameters>
+      </method>
+      <method name="Reschedule" cname="mrp_project_reschedule">
+        <return-type type="void" />
+      </method>
+      <method name="Save" cname="mrp_project_save">
+        <return-type type="gboolean" />
+        <parameters>
+          <parameter type="gboolean" name="force" />
+          <parameter type="GError**" name="error" />
+        </parameters>
+      </method>
+      <method name="SaveAs" cname="mrp_project_save_as">
+        <return-type type="gboolean" />
+        <parameters>
+          <parameter type="const-gchar*" name="uri" />
+          <parameter type="gboolean" name="force" />
+          <parameter type="GError**" name="error" />
+        </parameters>
+      </method>
+      <method name="SaveToXml" cname="mrp_project_save_to_xml">
+        <return-type type="gboolean" />
+        <parameters>
+          <parameter type="gchar**" name="str" />
+          <parameter type="GError**" name="error" />
+        </parameters>
+      </method>
+      <method name="SetProjectStart" cname="mrp_project_set_project_start">
+        <return-type type="void" />
+        <parameters>
+          <parameter type="mrptime" name="start" />
+        </parameters>
+      </method>
+      <method name="TaskTraverse" cname="mrp_project_task_traverse">
+        <return-type type="void" />
+        <parameters>
+          <parameter type="MrpTask*" name="root" />
+          <parameter type="MrpTaskTraverseFunc" name="func" />
+          <parameter type="gpointer" name="user_data" />
+        </parameters>
+      </method>
+    </object>
+    <object name="Relation" cname="MrpRelation" parent="MrpObject">
+      <field cname="priv" type="MrpRelationPriv*" />
+      <method name="GetLag" cname="mrp_relation_get_lag">
+        <return-type type="gint" />
+      </method>
+      <method name="GetPredecessor" cname="mrp_relation_get_predecessor">
+        <return-type type="MrpTask*" />
+      </method>
+      <method name="GetRelationType" cname="mrp_relation_get_relation_type">
+        <return-type type="MrpRelationType" />
+      </method>
+      <method name="GetSuccessor" cname="mrp_relation_get_successor">
+        <return-type type="MrpTask*" />
+      </method>
+      <method name="GetType" cname="mrp_relation_get_type" shared="true">
+        <return-type type="GType" />
+      </method>
+    </object>
+    <object name="Resource" cname="MrpResource" parent="MrpObject">
+      <field cname="priv" type="MrpResourcePriv*" />
+      <method name="Assign" cname="mrp_resource_assign">
+        <return-type type="void" />
+        <parameters>
+          <parameter type="MrpTask*" name="task" />
+          <parameter type="gint" name="units" />
+        </parameters>
+      </method>
+      <method name="Compare" cname="mrp_resource_compare" shared="true">
+        <return-type type="gint" />
+        <parameters>
+          <parameter type="gconstpointer" name="a" />
+          <parameter type="gconstpointer" name="b" />
+        </parameters>
+      </method>
+      <method name="GetAssignedTasks" cname="mrp_resource_get_assigned_tasks">
+        <return-type type="GList*" />
+      </method>
+      <method name="GetAssignments" cname="mrp_resource_get_assignments">
+        <return-type type="GList*" />
+      </method>
+      <method name="GetCalendar" cname="mrp_resource_get_calendar">
+        <return-type type="MrpCalendar*" />
+      </method>
+      <method name="GetName" cname="mrp_resource_get_name">
+        <return-type type="const-gchar*" />
+      </method>
+      <method name="GetType" cname="mrp_resource_get_type" shared="true">
+        <return-type type="GType" />
+      </method>
+      <constructor cname="mrp_resource_new" />
+      <method name="SetCalendar" cname="mrp_resource_set_calendar">
+        <return-type type="void" />
+        <parameters>
+          <parameter type="MrpCalendar*" name="calendar" />
+        </parameters>
+      </method>
+      <method name="SetName" cname="mrp_resource_set_name">
+        <return-type type="void" />
+        <parameters>
+          <parameter type="const-gchar*" name="name" />
+        </parameters>
+      </method>
+    </object>
+    <object name="Task" cname="MrpTask" parent="MrpObject">
+      <field cname="priv" type="MrpTaskPriv*" />
+      <method name="AddPredecessor" cname="mrp_task_add_predecessor">
+        <return-type type="MrpRelation*" />
+        <parameters>
+          <parameter type="MrpTask*" name="predecessor" />
+          <parameter type="MrpRelationType" name="type" />
+          <parameter type="glong" name="lag" />
+          <parameter type="GError**" name="error" />
+        </parameters>
+      </method>
+      <method name="Compare" cname="mrp_task_compare" shared="true">
+        <return-type type="gint" />
+        <parameters>
+          <parameter type="gconstpointer" name="a" />
+          <parameter type="gconstpointer" name="b" />
+        </parameters>
+      </method>
+      <method name="GetAssignedResources" cname="mrp_task_get_assigned_resources">
+        <return-type type="GList*" />
+      </method>
+      <method name="GetAssignment" cname="mrp_task_get_assignment">
+        <return-type type="MrpAssignment*" />
+        <parameters>
+          <parameter type="MrpResource*" name="resource" />
+        </parameters>
+      </method>
+      <method name="GetAssignments" cname="mrp_task_get_assignments">
+        <return-type type="GList*" />
+      </method>
+      <method name="GetCost" cname="mrp_task_get_cost">
+        <return-type type="gfloat" />
+      </method>
+      <method name="GetDuration" cname="mrp_task_get_duration">
+        <return-type type="gint" />
+      </method>
+      <method name="GetFinish" cname="mrp_task_get_finish">
+        <return-type type="mrptime" />
+      </method>
+      <method name="GetFirstChild" cname="mrp_task_get_first_child">
+        <return-type type="MrpTask*" />
+      </method>
+      <method name="GetLatestFinish" cname="mrp_task_get_latest_finish">
+        <return-type type="mrptime" />
+      </method>
+      <method name="GetLatestStart" cname="mrp_task_get_latest_start">
+        <return-type type="mrptime" />
+      </method>
+      <method name="GetNChildren" cname="mrp_task_get_n_children">
+        <return-type type="guint" />
+      </method>
+      <method name="GetName" cname="mrp_task_get_name">
+        <return-type type="const-gchar*" />
+      </method>
+      <method name="GetNextSibling" cname="mrp_task_get_next_sibling">
+        <return-type type="MrpTask*" />
+      </method>
+      <method name="GetNthChild" cname="mrp_task_get_nth_child">
+        <return-type type="MrpTask*" />
+        <parameters>
+          <parameter type="guint" name="n" />
+        </parameters>
+      </method>
+      <method name="GetParent" cname="mrp_task_get_parent">
+        <return-type type="MrpTask*" />
+      </method>
+      <method name="GetPosition" cname="mrp_task_get_position">
+        <return-type type="gint" />
+      </method>
+      <method name="GetPredecessorRelation" cname="mrp_task_get_predecessor_relation">
+        <return-type type="MrpRelation*" />
+        <parameters>
+          <parameter type="MrpTask*" name="predecessor" />
+        </parameters>
+      </method>
+      <method name="GetPredecessorRelations" cname="mrp_task_get_predecessor_relations">
+        <return-type type="GList*" />
+      </method>
+      <method name="GetRelation" cname="mrp_task_get_relation">
+        <return-type type="MrpRelation*" />
+        <parameters>
+          <parameter type="MrpTask*" name="task_b" />
+        </parameters>
+      </method>
+      <method name="GetStart" cname="mrp_task_get_start">
+        <return-type type="mrptime" />
+      </method>
+      <method name="GetSuccessorRelation" cname="mrp_task_get_successor_relation">
+        <return-type type="MrpRelation*" />
+        <parameters>
+          <parameter type="MrpTask*" name="successor" />
+        </parameters>
+      </method>
+      <method name="GetSuccessorRelations" cname="mrp_task_get_successor_relations">
+        <return-type type="GList*" />
+      </method>
+      <method name="GetType" cname="mrp_task_get_type" shared="true">
+        <return-type type="GType" />
+      </method>
+      <method name="GetWork" cname="mrp_task_get_work">
+        <return-type type="gint" />
+      </method>
+      <method name="GetWorkStart" cname="mrp_task_get_work_start">
+        <return-type type="mrptime" />
+      </method>
+      <method name="HasRelation" cname="mrp_task_has_relation">
+        <return-type type="gboolean" />
+      </method>
+      <method name="HasRelationTo" cname="mrp_task_has_relation_to">
+        <return-type type="gboolean" />
+        <parameters>
+          <parameter type="MrpTask*" name="task_b" />
+        </parameters>
+      </method>
+      <constructor cname="mrp_task_new" />
+      <method name="RemovePredecessor" cname="mrp_task_remove_predecessor">
+        <return-type type="void" />
+        <parameters>
+          <parameter type="MrpTask*" name="predecessor" />
+        </parameters>
+      </method>
+      <method name="ResetConstraint" cname="mrp_task_reset_constraint">
+        <return-type type="void" />
+      </method>
+      <method name="SetName" cname="mrp_task_set_name">
+        <return-type type="void" />
+        <parameters>
+          <parameter type="const-gchar*" name="name" />
+        </parameters>
+      </method>
+    </object>
+    <struct name="ApplicationPriv" cname="MrpApplicationPriv" opaque="true" hidden="1" />
+    <struct name="AssignmentPriv" cname="MrpAssignmentPriv" opaque="true" hidden="1" />
+    <struct name="CalendarPriv" cname="MrpCalendarPriv" opaque="true" hidden="1" />
+    <struct name="Constraint" cname="MrpConstraint">
+      <field cname="type" type="MrpConstraintType" />
+      <field cname="time" type="mrptime" />
+      <method name="GetType" cname="mrp_constraint_get_type" shared="true">
+        <return-type type="GType" />
+      </method>
+    </struct>
+    <struct name="DateWithDay" cname="MrpDateWithDay">
+      <field cname="date" type="mrptime" />
+      <field cname="day" type="MrpDay*" />
+    </struct>
+    <struct name="Day" cname="MrpDay" opaque="true">
+      <method name="Add" cname="mrp_day_add" shared="true">
+        <return-type type="MrpDay*" />
+        <parameters>
+          <parameter type="MrpProject*" name="project" />
+          <parameter type="const-gchar*" name="name" />
+          <parameter type="const-gchar*" name="description" />
+        </parameters>
+      </method>
+      <method name="GetAll" cname="mrp_day_get_all" shared="true">
+        <return-type type="GList*" />
+        <parameters>
+          <parameter type="MrpProject*" name="project" />
+        </parameters>
+      </method>
+      <method name="GetDescription" cname="mrp_day_get_description">
+        <return-type type="const-gchar*" />
+      </method>
+      <method name="GetId" cname="mrp_day_get_id">
+        <return-type type="gint" />
+      </method>
+      <method name="GetName" cname="mrp_day_get_name">
+        <return-type type="const-gchar*" />
+      </method>
+      <method name="GetNonwork" cname="mrp_day_get_nonwork" shared="true">
+        <return-type type="MrpDay*" />
+      </method>
+      <method name="GetType" cname="mrp_day_get_type" shared="true">
+        <return-type type="GType" />
+      </method>
+      <method name="GetUseBase" cname="mrp_day_get_use_base" shared="true">
+        <return-type type="MrpDay*" />
+      </method>
+      <method name="GetWork" cname="mrp_day_get_work" shared="true">
+        <return-type type="MrpDay*" />
+      </method>
+      <method name="Ref" cname="mrp_day_ref">
+        <return-type type="MrpDay*" />
+      </method>
+      <method name="Remove" cname="mrp_day_remove" shared="true">
+        <return-type type="void" />
+        <parameters>
+          <parameter type="MrpProject*" name="project" />
+          <parameter type="MrpDay*" name="day" />
+        </parameters>
+      </method>
+      <method name="SetDescription" cname="mrp_day_set_description">
+        <return-type type="void" />
+        <parameters>
+          <parameter type="const-gchar*" name="description" />
+        </parameters>
+      </method>
+      <method name="SetName" cname="mrp_day_set_name">
+        <return-type type="void" />
+        <parameters>
+          <parameter type="const-gchar*" name="name" />
+        </parameters>
+      </method>
+      <method name="Unref" cname="mrp_day_unref">
+        <return-type type="void" />
+      </method>
+    </struct>
+    <struct name="DayWithIntervals" cname="MrpDayWithIntervals">
+      <field cname="day" type="MrpDay*" />
+      <field cname="intervals" type="GList*" />
+    </struct>
+    <struct name="GroupPriv" cname="MrpGroupPriv" opaque="true" hidden="1" />
+    <struct name="Interval" cname="MrpInterval" opaque="true">
+      <method name="Copy" cname="mrp_interval_copy">
+        <return-type type="MrpInterval*" />
+      </method>
+      <method name="GetAbsolute" cname="mrp_interval_get_absolute">
+        <return-type type="void" />
+        <parameters>
+          <parameter type="mrptime" name="offset" />
+          <parameter type="mrptime*" name="start" />
+          <parameter type="mrptime*" name="end" />
+        </parameters>
+      </method>
+      <method name="GetType" cname="mrp_interval_get_type" shared="true">
+        <return-type type="GType" />
+      </method>
+      <constructor cname="mrp_interval_new">
+        <parameters>
+          <parameter type="mrptime" name="start" />
+          <parameter type="mrptime" name="end" />
+        </parameters>
+      </constructor>
+      <method name="Ref" cname="mrp_interval_ref">
+        <return-type type="MrpInterval*" />
+      </method>
+      <method name="Unref" cname="mrp_interval_unref">
+        <return-type type="void" />
+      </method>
+    </struct>
+    <struct name="ObjectPriv" cname="MrpObjectPriv" opaque="true" hidden="1" />
+    <struct name="ProjectPriv" cname="MrpProjectPriv" opaque="true" hidden="1" />
+    <alias name="Property" cname="MrpProperty" type="GParamSpec" />
+    <struct name="RelationPriv" cname="MrpRelationPriv" opaque="true" hidden="1" />
+    <struct name="ResourcePriv" cname="MrpResourcePriv" opaque="true" hidden="1" />
+    <struct name="TaskPriv" cname="MrpTaskPriv" opaque="true" hidden="1" />
+    <alias name="Mrptime" cname="mrptime" type="long" />
+    <class name="Global" cname="MrpGlobal">
+      <method name="ErrorQuark" cname="mrp_error_quark" shared="true">
+        <return-type type="GQuark" />
+      </method>
+      <method name="ParamSpecTime" cname="mrp_param_spec_time" shared="true">
+        <return-type type="GParamSpec*" />
+        <parameters>
+          <parameter type="const-gchar*" name="name" />
+          <parameter type="const-gchar*" name="nick" />
+          <parameter type="const-gchar*" name="blurb" />
+          <parameter type="GParamFlags" name="flags" />
+        </parameters>
+      </method>
+      <method name="StringListCopy" cname="mrp_string_list_copy" shared="true">
+        <return-type type="GList*" />
+        <parameters>
+          <parameter type="const-GList*" name="list" />
+        </parameters>
+      </method>
+      <method name="StringListFree" cname="mrp_string_list_free" shared="true">
+        <return-type type="void" />
+        <parameters>
+          <parameter type="GList*" name="list" />
+        </parameters>
+      </method>
+    </class>
+    <class name="Property" cname="MrpProperty_">
+      <method name="GetDescription" cname="mrp_property_get_description" shared="true">
+        <return-type type="const-gchar*" />
+        <parameters>
+          <parameter type="MrpProperty*" name="property" />
+        </parameters>
+      </method>
+      <method name="GetLabel" cname="mrp_property_get_label" shared="true">
+        <return-type type="const-gchar*" />
+        <parameters>
+          <parameter type="MrpProperty*" name="property" />
+        </parameters>
+      </method>
+      <method name="GetName" cname="mrp_property_get_name" shared="true">
+        <return-type type="const-gchar*" />
+        <parameters>
+          <parameter type="MrpProperty*" name="property" />
+        </parameters>
+      </method>
+      <method name="GetPropertyType" cname="mrp_property_get_property_type" shared="true">
+        <return-type type="MrpPropertyType" />
+        <parameters>
+          <parameter type="MrpProperty*" name="property" />
+        </parameters>
+      </method>
+      <method name="GetType" cname="mrp_property_get_type" shared="true">
+        <return-type type="GType" />
+      </method>
+      <method name="GetUserDefined" cname="mrp_property_get_user_defined" shared="true">
+        <return-type type="gboolean" />
+        <parameters>
+          <parameter type="MrpProperty*" name="property" />
+        </parameters>
+      </method>
+      <method name="New" cname="mrp_property_new" shared="true">
+        <return-type type="MrpProperty*" />
+        <parameters>
+          <parameter type="const-gchar*" name="name" />
+          <parameter type="MrpPropertyType" name="type" />
+          <parameter type="const-gchar*" name="label" />
+          <parameter type="const-gchar*" name="description" />
+          <parameter type="gboolean" name="user_defined" />
+        </parameters>
+      </method>
+      <method name="Ref" cname="mrp_property_ref" shared="true">
+        <return-type type="MrpProperty*" />
+        <parameters>
+          <parameter type="MrpProperty*" name="property" />
+        </parameters>
+      </method>
+      <method name="SetDescription" cname="mrp_property_set_description" shared="true">
+        <return-type type="void" />
+        <parameters>
+          <parameter type="MrpProperty*" name="property" />
+          <parameter type="const-gchar*" name="description" />
+        </parameters>
+      </method>
+      <method name="SetLabel" cname="mrp_property_set_label" shared="true">
+        <return-type type="void" />
+        <parameters>
+          <parameter type="MrpProperty*" name="property" />
+          <parameter type="const-gchar*" name="label" />
+        </parameters>
+      </method>
+      <method name="SetUserDefined" cname="mrp_property_set_user_defined" shared="true">
+        <return-type type="void" />
+        <parameters>
+          <parameter type="MrpProperty*" name="property" />
+          <parameter type="gboolean" name="user_defined" />
+        </parameters>
+      </method>
+      <method name="TypeAsString" cname="mrp_property_type_as_string" shared="true">
+        <return-type type="const-gchar*" />
+        <parameters>
+          <parameter type="MrpPropertyType" name="type" />
+        </parameters>
+      </method>
+      <method name="Unref" cname="mrp_property_unref" shared="true">
+        <return-type type="void" />
+        <parameters>
+          <parameter type="MrpProperty*" name="property" />
+        </parameters>
+      </method>
+    </class>
+    <class name="Time" cname="MrpTime_">
+      <method name="AlignDay" cname="mrp_time_align_day" shared="true">
+        <return-type type="mrptime" />
+        <parameters>
+          <parameter type="mrptime" name="t" />
+        </parameters>
+      </method>
+      <method name="Compose" cname="mrp_time_compose" shared="true">
+        <return-type type="mrptime" />
+        <parameters>
+          <parameter type="gint" name="year" />
+          <parameter type="gint" name="month" />
+          <parameter type="gint" name="day" />
+          <parameter type="gint" name="hour" />
+          <parameter type="gint" name="minute" />
+          <parameter type="gint" name="second" />
+        </parameters>
+      </method>
+      <method name="CurrentTime" cname="mrp_time_current_time" shared="true">
+        <return-type type="mrptime" />
+      </method>
+      <method name="DayName" cname="mrp_time_day_name" shared="true">
+        <return-type type="const-gchar*" />
+        <parameters>
+          <parameter type="mrptime" name="t" />
+        </parameters>
+      </method>
+      <method name="DayOfWeek" cname="mrp_time_day_of_week" shared="true">
+        <return-type type="gint" />
+        <parameters>
+          <parameter type="mrptime" name="t" />
+        </parameters>
+      </method>
+      <method name="DebugPrint" cname="mrp_time_debug_print" shared="true">
+        <return-type type="void" />
+        <parameters>
+          <parameter type="mrptime" name="t" />
+        </parameters>
+      </method>
+      <method name="Decompose" cname="mrp_time_decompose" shared="true">
+        <return-type type="gboolean" />
+        <parameters>
+          <parameter type="mrptime" name="t" />
+          <parameter type="gint*" name="year" />
+          <parameter type="gint*" name="month" />
+          <parameter type="gint*" name="day" />
+          <parameter type="gint*" name="hour" />
+          <parameter type="gint*" name="minute" />
+          <parameter type="gint*" name="second" />
+        </parameters>
+      </method>
+      <method name="Format" cname="mrp_time_format" shared="true">
+        <return-type type="gchar*" />
+        <parameters>
+          <parameter type="const-gchar*" name="format" />
+          <parameter type="mrptime" name="t" />
+        </parameters>
+      </method>
+      <method name="FromMsdateString" cname="mrp_time_from_msdate_string" shared="true">
+        <return-type type="mrptime" />
+        <parameters>
+          <parameter type="const-gchar*" name="str" />
+        </parameters>
+      </method>
+      <method name="FromString" cname="mrp_time_from_string" shared="true">
+        <return-type type="mrptime" />
+        <parameters>
+          <parameter type="const-gchar*" name="str" />
+          <parameter type="GError**" name="err" />
+        </parameters>
+      </method>
+      <method name="FromTm" cname="mrp_time_from_tm" shared="true">
+        <return-type type="mrptime" />
+        <parameters>
+          <parameter type="tm*" name="tm" />
+        </parameters>
+      </method>
+      <method name="MonthName" cname="mrp_time_month_name" shared="true">
+        <return-type type="const-gchar*" />
+        <parameters>
+          <parameter type="mrptime" name="t" />
+        </parameters>
+      </method>
+      <method name="MonthNameInitial" cname="mrp_time_month_name_initial" shared="true">
+        <return-type type="const-gchar*" />
+        <parameters>
+          <parameter type="mrptime" name="t" />
+        </parameters>
+      </method>
+      <method name="ToString" cname="mrp_time_to_string" shared="true">
+        <return-type type="gchar*" />
+        <parameters>
+          <parameter type="mrptime" name="t" />
+        </parameters>
+      </method>
+      <method name="WeekNumber" cname="mrp_time_week_number" shared="true">
+        <return-type type="gint" />
+        <parameters>
+          <parameter type="mrptime" name="t" />
+        </parameters>
+      </method>
+    </class>
+  </namespace>
+</api>
