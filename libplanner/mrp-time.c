@@ -291,15 +291,19 @@ mrp_time_from_string (const gchar  *str,
 	}
 	
 	if (is_date) {
-		sscanf (str, "%04d%02d%02d", &year, &month, &day);
+		if (sscanf (str, "%04d%02d%02d", &year, &month, &day) != 3) {
+			return 0;
+		}
 	} else {
 		gchar tsep;
 		
-		sscanf (str,"%04d%02d%02d%c%02d%02d%02d",
-			&year, &month, &day,
-			&tsep,
-			&hour, &minute, &second);
-		
+		if (sscanf (str,"%04d%02d%02d%c%02d%02d%02d",
+			    &year, &month, &day,
+			    &tsep,
+			    &hour, &minute, &second) != 7) {
+			return 0;
+		}
+		    
 		if (tsep != 'T') {
 			/*g_set_error (err,
 			  GQuark domain,

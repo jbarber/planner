@@ -1,5 +1,8 @@
 2005-02-19  Richard Hult  <richard@imendio.com>
 
+	* libplanner/mrp-time.c (mrp_time_from_string): Check the return
+	value from sscanf, fixes bug #167895.
+
 	* configure.in:
 	* data/Makefile.am:
 	* data/planner.schemas.in: Add schemas.
