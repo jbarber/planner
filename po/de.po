@@ -11,13 +11,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MrProject HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-02-20 13:27+0100\n"
-"PO-Revision-Date: 2005-02-20 13:34+0100\n"
+"POT-Creation-Date: 2005-02-21 12:18+0100\n"
+"PO-Revision-Date: 2005-02-21 12:14+0100\n"
 "Last-Translator: Hendrik Richter <hendrik@gnome-de.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit"
+"Content-Transfer-Encoding: 8bit\n"
 
 #: data/glade/add-predecessor.glade.h:1
 msgid "Add Predecessor"
@@ -31,7 +31,7 @@ msgstr "_Verzögerung:"
 #: data/glade/new-property.glade.h:5 data/glade/project-properties.glade.h:9
 #: data/glade/resource-dialog.glade.h:12
 #: data/glade/resource-input-dialog.glade.h:7
-#: data/glade/task-dialog.glade.h:13 data/glade/task-input-dialog.glade.h:4
+#: data/glade/task-dialog.glade.h:15 data/glade/task-input-dialog.glade.h:4
 msgid "_Name:"
 msgstr "_Name:"
 
@@ -48,7 +48,7 @@ msgstr ""
 "Am ausgewählten Tagestyp herrschen folgende Arbeitszeiten:"
 
 #: data/glade/calendar-dialog.glade.h:3 data/glade/html-output.glade.h:1
-#: data/glade/task-dialog.glade.h:1
+#: data/glade/task-dialog.glade.h:2
 msgid "    "
 msgstr "    "
 
@@ -260,7 +260,7 @@ msgid "Edit Project Phases"
 msgstr "Projektphasen bearbeiten"
 
 #: data/glade/project-properties.glade.h:3
-#: data/glade/resource-dialog.glade.h:5 data/glade/task-dialog.glade.h:5
+#: data/glade/resource-dialog.glade.h:5 data/glade/task-dialog.glade.h:6
 msgid "General"
 msgstr "Allgemein"
 
@@ -312,7 +312,7 @@ msgstr "Kalender"
 msgid "Edit Calendars..."
 msgstr "Kalender bearbeiten..."
 
-#: data/glade/resource-dialog.glade.h:6 data/glade/task-dialog.glade.h:6
+#: data/glade/resource-dialog.glade.h:6 data/glade/task-dialog.glade.h:7
 msgid "Notes"
 msgstr "Notizen"
 
@@ -390,47 +390,85 @@ msgstr "_Server:"
 msgid "_Username:"
 msgstr "Ben_utzername:"
 
-#: data/glade/task-dialog.glade.h:3
+#: data/glade/task-date-widget.glade.h:1
+msgid ""
+"As soon as possible\n"
+"No earlier than\n"
+"On fixed date"
+msgstr ""
+"So bald wie möglich\n"
+"Nicht früher als\n"
+"An festgesetztem Datum"
+
+#: data/glade/task-date-widget.glade.h:4 src/planner-cell-renderer-date.c:182
+#: src/planner-project-properties.c:746
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#. I18n: the verb "schedule" here.
+#: data/glade/task-date-widget.glade.h:5 data/glade/task-dialog.glade.h:10
+#: src/planner-cell-renderer-date.c:154
+msgid "Schedule:"
+msgstr "Planen:"
+
+#: data/glade/task-date-widget.glade.h:6 src/planner-cell-renderer-date.c:189
+msgid "Select"
+msgstr "Auswählen"
+
+#: data/glade/task-date-widget.glade.h:7 src/planner-cell-renderer-date.c:176
+#: src/planner-project-properties.c:739
+msgid "Today"
+msgstr "Heute"
+
+#: data/glade/task-date-widget.glade.h:8
+msgid "window"
+msgstr "Fenster"
+
+#: data/glade/task-dialog.glade.h:1
+msgid "  "
+msgstr "  "
+
+#: data/glade/task-dialog.glade.h:4
 #, no-c-format
 msgid "%"
 msgstr "%"
 
 # missing accelerator
-#: data/glade/task-dialog.glade.h:4
+#: data/glade/task-dialog.glade.h:5
 msgid "C_omplete:"
 msgstr "_Abgeschlossen:"
 
-#: data/glade/task-dialog.glade.h:7
+#: data/glade/task-dialog.glade.h:8
 msgid "Predecessors"
 msgstr "Vorgänger"
 
 # Better translation for resource
-#: data/glade/task-dialog.glade.h:8 src/planner-resource-view.c:419
+#: data/glade/task-dialog.glade.h:9 src/planner-resource-view.c:419
 msgid "Resources"
 msgstr "Ressourcen"
 
-#: data/glade/task-dialog.glade.h:9
+#: data/glade/task-dialog.glade.h:11
 msgid "_Duration:"
 msgstr "_Dauer:"
 
-#: data/glade/task-dialog.glade.h:10
+#: data/glade/task-dialog.glade.h:12
 msgid "_Fixed duration"
 msgstr "_Feste Dauer"
 
-#: data/glade/task-dialog.glade.h:11
+#: data/glade/task-dialog.glade.h:13
 msgid "_Insert Time Stamp"
 msgstr "Zeitstempel e_infügen"
 
 # CHECK
-#: data/glade/task-dialog.glade.h:12
+#: data/glade/task-dialog.glade.h:14
 msgid "_Milestone"
 msgstr "_Meilenstein"
 
-#: data/glade/task-dialog.glade.h:14
+#: data/glade/task-dialog.glade.h:16
 msgid "_Priority:"
 msgstr "_Priorität:"
 
-#: data/glade/task-dialog.glade.h:15 data/glade/task-input-dialog.glade.h:5
+#: data/glade/task-dialog.glade.h:17 data/glade/task-input-dialog.glade.h:5
 msgid "_Work:"
 msgstr "_Dauer:"
 
@@ -497,12 +535,16 @@ msgstr "Legt fest, ob das Drucken der Aufgabenansicht aktiviert ist."
 #: data/planner.schemas.in.h:10
 msgid ""
 "Whether to highlight the tasks along the cricital path in the Gantt view."
-msgstr "Legt fest, ob Aufgaben entlang des kritischen Pfades in der Gantt-Ansicht hervorgehoben werden."
+msgstr ""
+"Legt fest, ob Aufgaben entlang des kritischen Pfades in der Gantt-Ansicht "
+"hervorgehoben werden."
 
 #: data/planner.schemas.in.h:11
 msgid ""
 "Whether to highlight the tasks along the cricital path in the Task view."
-msgstr "Legt fest, ob Aufgaben entlang des kritischen Pfades in der Aufgabenansicht hervorgehoben werden."
+msgstr ""
+"Legt fest, ob Aufgaben entlang des kritischen Pfades in der Aufgabenansicht "
+"hervorgehoben werden."
 
 #: data/planner.schemas.in.h:12
 msgid "Which view to display in the user interface."
@@ -613,7 +655,7 @@ msgstr "Dauer"
 msgid "Cost"
 msgstr "Kosten"
 
-#: libplanner/mrp-property.c:380 src/planner-project-properties.c:993
+#: libplanner/mrp-property.c:380 src/planner-project-properties.c:881
 msgid "None"
 msgstr "Keine"
 
@@ -743,37 +785,17 @@ msgstr "Kalender löschen"
 msgid "Add new calendar"
 msgstr "Neuen Kalender hinzufügen"
 
-#: src/planner-cell-renderer-date.c:147
-msgid "Constraint type"
-msgstr "Einschränkungstyp"
-
-#: src/planner-cell-renderer-date.c:154
+#: src/planner-cell-renderer-date.c:161 src/planner-task-dialog.c:1490
 msgid "As soon as possible"
 msgstr "So bald wie möglich"
 
-#: src/planner-cell-renderer-date.c:155
-msgid "Start no earlier than"
-msgstr "Nicht früher beginnen als"
+#: src/planner-cell-renderer-date.c:162
+msgid "No earlier than"
+msgstr "Nicht früher als"
 
-#: src/planner-cell-renderer-date.c:156
-msgid "Must start on"
-msgstr "Muss beginnen am"
-
-#: src/planner-cell-renderer-date.c:171 src/planner-project-properties.c:850
-msgid "Today"
-msgstr "Heute"
-
-#. gtk_signal_connect (GTK_OBJECT (button), "clicked",
-#. GTK_SIGNAL_FUNC (m_cell_date_today_clicked),
-#. date);
-#.
-#: src/planner-cell-renderer-date.c:179 src/planner-project-properties.c:857
-msgid "Cancel"
-msgstr "Abbrechen"
-
-#: src/planner-cell-renderer-date.c:187 src/planner-project-properties.c:864
-msgid "OK"
-msgstr "OK"
+#: src/planner-cell-renderer-date.c:163
+msgid "On fixed date"
+msgstr "An festgesetztem Datum"
 
 #: src/planner-cmd-manager.c:225
 #, c-format
@@ -854,8 +876,8 @@ msgstr "Ressourcen aus dem Evolution Data Server importieren"
 
 #: src/planner-eds-plugin.c:393 src/planner-gantt-print.c:190
 #: src/planner-group-dialog.c:819 src/planner-property-dialog.c:481
-#: src/planner-resource-view.c:1156 src/planner-task-dialog.c:2422
-#: src/planner-task-dialog.c:2511 src/planner-task-view.c:279
+#: src/planner-resource-view.c:1156 src/planner-task-dialog.c:2532
+#: src/planner-task-dialog.c:2606 src/planner-task-view.c:279
 #: src/planner-ttable-print.c:108
 msgid "Name"
 msgstr "Name"
@@ -1027,7 +1049,7 @@ msgstr "Aufgabe »%s« zum Vorgänger von »%s« machen"
 msgid "Change work to %s"
 msgstr "Dauer ändern auf %s"
 
-#: src/planner-gantt-row.c:2391 src/planner-task-dialog.c:446
+#: src/planner-gantt-row.c:2391 src/planner-task-dialog.c:453
 #: src/planner-task-tree.c:254 src/planner-task-tree.c:939
 msgid "Edit task property"
 msgstr "Aufgabeneigenschaften bearbeiten"
@@ -1290,7 +1312,7 @@ msgstr "Phase löschen"
 msgid "Could not open plugin file '%s'\n"
 msgstr "Plugin-Datei »%s« konnte nicht geöffnet werden\n"
 
-#: src/planner-predecessor-model.c:191 src/planner-task-dialog.c:2093
+#: src/planner-predecessor-model.c:191 src/planner-task-dialog.c:2172
 msgid "FS"
 msgstr "FB"
 
@@ -1299,7 +1321,7 @@ msgid "FF"
 msgstr "FF"
 
 #. list = g_list_append (list, g_strdup (_("FF")));
-#: src/planner-predecessor-model.c:197 src/planner-task-dialog.c:2095
+#: src/planner-predecessor-model.c:197 src/planner-task-dialog.c:2174
 msgid "SS"
 msgstr "BB"
 
@@ -1307,74 +1329,82 @@ msgstr "BB"
 msgid "SF"
 msgstr "BF"
 
-#: src/planner-print-dialog.c:157
+#: src/planner-print-dialog.c:163
 msgid "Print Project"
 msgstr "Projekt drucken"
 
-#: src/planner-print-dialog.c:164
+#: src/planner-print-dialog.c:170
 msgid "Select views"
 msgstr "Ansichten wählen"
 
-#: src/planner-print-dialog.c:187
+#: src/planner-print-dialog.c:193
 msgid "Select the views to print:"
 msgstr "Wählen Sie die zu druckenden Ansichten:"
 
-#: src/planner-project-properties.c:385
+#: src/planner-project-properties.c:386
 msgid "Select a calendar to use for this project:"
 msgstr "Wählen Sie den für dieses Projekt zu verwendenden Kalender aus:"
 
-#: src/planner-project-properties.c:485
+#: src/planner-project-properties.c:486
 msgid "Edit Project Name"
 msgstr "Projektname bearbeiten"
 
-#: src/planner-project-properties.c:521
+#: src/planner-project-properties.c:522
 msgid "Edit Organization"
 msgstr "Organisation bearbeiten"
 
-#: src/planner-project-properties.c:557
+#: src/planner-project-properties.c:558
 msgid "Edit Manager"
 msgstr "Koordinator bearbeiten"
 
-#: src/planner-project-properties.c:631 src/planner-project-properties.c:683
+#: src/planner-project-properties.c:630 src/planner-project-properties.c:664
 msgid "Edit Project Start"
 msgstr "Projektbeginn bearbeiten"
 
-#: src/planner-project-properties.c:953
+#: src/planner-project-properties.c:753
+msgid "OK"
+msgstr "OK"
+
+#: src/planner-project-properties.c:841
 msgid "Edit Project Phase"
 msgstr "Projektphase bearbeiten"
 
-#: src/planner-project-properties.c:1086
+#: src/planner-project-properties.c:974
 msgid "Property"
 msgstr "Eigenschaft"
 
-#: src/planner-project-properties.c:1097
+#: src/planner-project-properties.c:985
 msgid "Value"
 msgstr "Wert"
 
-#: src/planner-project-properties.c:1498 src/planner-property-dialog.c:329
+#: src/planner-project-properties.c:1386 src/planner-property-dialog.c:329
 msgid "The name of the custom property needs to start with a letter."
 msgstr ""
 "Der Name der benutzerdefinierten Eigenschaft muss mit einem Buchstaben "
 "beginnen. "
 
-#: src/planner-project-properties.c:1569 src/planner-property-dialog.c:399
+#: src/planner-project-properties.c:1457 src/planner-property-dialog.c:399
 #, c-format
 msgid "Do you really want to remove the property '%s' from the project?"
 msgstr "Soll die Eigenschaft »%s« wirklich vom Projekt entfernt werden?"
 
-#: src/planner-project-properties.c:1659
+#: src/planner-project-properties.c:1548
 msgid "Could not create properties dialog."
 msgstr "Eigenschaftendialog konnte nicht erstellt werden."
 
-#: src/planner-project-properties.c:2027
+#: src/planner-project-properties.c:1582
+msgid "Date..."
+msgstr "Datum..."
+
+#: src/planner-project-properties.c:1925
 msgid "Add project property"
 msgstr "Projekteigenschaft hinzufügen"
 
-#: src/planner-project-properties.c:2137
+#: src/planner-project-properties.c:2035
 msgid "Remove project property"
 msgstr "Projekteigenschaft löschen"
 
-#: src/planner-project-properties.c:2230
+#: src/planner-project-properties.c:2128
 msgid "Edit project property value"
 msgstr "Wert der Projekteigenschaft bearbeiten"
 
@@ -1383,7 +1413,7 @@ msgid "Label"
 msgstr "Beschriftung"
 
 #: src/planner-property-dialog.c:510 src/planner-resource-view.c:1200
-#: src/planner-task-dialog.c:2543
+#: src/planner-task-dialog.c:2638
 msgid "Type"
 msgstr "Typ"
 
@@ -1411,7 +1441,7 @@ msgid "(None)"
 msgstr "(Keine)"
 
 #: src/planner-resource-dialog.c:321 src/planner-resource-input-dialog.c:109
-#: src/planner-task-dialog.c:372
+#: src/planner-task-dialog.c:379
 msgid "(No name)"
 msgstr "(Namenlos)"
 
@@ -1434,7 +1464,7 @@ msgstr "Ressourceneigenschaft bearbeiten"
 
 #. i18n: time stamp format for notes in task dialog, see strftime(3) for
 #. * a detailed description.
-#: src/planner-resource-dialog.c:1403 src/planner-task-dialog.c:1683
+#: src/planner-resource-dialog.c:1403 src/planner-task-dialog.c:1804
 msgid "%a %d %b %Y, %H:%M\n"
 msgstr "%A, %d.%m.%Y, %H:%M\n"
 
@@ -1674,65 +1704,83 @@ msgstr "Aufgabenbindung lösen"
 msgid "Insert task"
 msgstr "Aufgabe einfügen"
 
-#: src/planner-task-dialog.c:520
+#: src/planner-task-dialog.c:527
 msgid "Edit task type"
 msgstr "Aufgabentyp bearbeiten"
 
-#: src/planner-task-dialog.c:587
+#: src/planner-task-dialog.c:594
 msgid "Toggle fixed duration"
 msgstr "Feste Dauer ändern"
 
-#: src/planner-task-dialog.c:665
+#: src/planner-task-dialog.c:661
+msgid "Edit task scheduling"
+msgstr "Aufgabenplanung bearbeiten"
+
+#: src/planner-task-dialog.c:741
 msgid "Assign resource to task"
 msgstr "Ressource zur Aufgabe zuordnen"
 
-#: src/planner-task-dialog.c:725
+#: src/planner-task-dialog.c:801
 msgid "Unassign resource from task"
 msgstr "Ressource von Aufgabe entfernen"
 
-#: src/planner-task-dialog.c:784
+#: src/planner-task-dialog.c:860
 msgid "Change resource units in task"
 msgstr "Ressourceneinheiten in Aufgabe ändern"
 
-#: src/planner-task-dialog.c:872
+#: src/planner-task-dialog.c:948
 msgid "Edit task predecessor"
 msgstr "Aufgabenvorgänger bearbeiten"
 
-#: src/planner-task-dialog.c:943
+#: src/planner-task-dialog.c:1019
 msgid "Edit lag predecessor"
 msgstr "Verzögerungsvorgänger bearbeiten"
 
-#: src/planner-task-dialog.c:1009
+#: src/planner-task-dialog.c:1085
 msgid "Edit task note"
 msgstr "Aufgabennotiz bearbeiten"
 
-#: src/planner-task-dialog.c:1755
+#: src/planner-task-dialog.c:1493
+#, c-format
+msgid "No earlier than %s"
+msgstr "Nicht früher als %s"
+
+#: src/planner-task-dialog.c:1496
+#, c-format
+msgid "On fixed date %s"
+msgstr "An festgesetztem Datum %s"
+
+#: src/planner-task-dialog.c:1876
 msgid "Finish to start (FS)"
 msgstr "Fertigstellung zum Beginn (FB)"
 
 #. _("Finish to finish (FF)"), MRP_RELATION_FF,
-#: src/planner-task-dialog.c:1757
+#: src/planner-task-dialog.c:1878
 msgid "Start to start (SS)"
 msgstr "Beginn zum Beginn (BB)"
 
-#: src/planner-task-dialog.c:1813
+#: src/planner-task-dialog.c:1934
 msgid "Can't add new predecessor. No task selected!"
 msgstr ""
 "Es kann kein neuer Vorgänger hinzugefügt werden. Keine Aufgabe markiert!"
 
-#: src/planner-task-dialog.c:2443
+#: src/planner-task-dialog.c:2379
+msgid "Change..."
+msgstr "Ändern..."
+
+#: src/planner-task-dialog.c:2553
 msgid "Assigned"
 msgstr "Zugewiesen"
 
-#: src/planner-task-dialog.c:2460
+#: src/planner-task-dialog.c:2570
 msgid "Units"
 msgstr "Einheiten"
 
-#: src/planner-task-dialog.c:2565
+#: src/planner-task-dialog.c:2660
 msgid "Lag"
 msgstr "Verzögerung"
 
-#: src/planner-task-dialog.c:2701 src/planner-task-dialog.c:2703
+#: src/planner-task-dialog.c:2834 src/planner-task-dialog.c:2836
 msgid "Edit task properties"
 msgstr "Aufgaben-Eigenschaften bearbeiten"
 
@@ -1839,12 +1887,12 @@ msgstr "Benutzerdefinierte Aufgaben-Eigenschaften bearbeiten"
 msgid "Task"
 msgstr "Aufgabe"
 
-#: src/planner-ttable-row.c:2011
+#: src/planner-ttable-row.c:1964
 #, c-format
 msgid "Make task '%s' start on %s"
 msgstr "Aufgabe »%s« am %s starten"
 
-#: src/planner-ttable-row.c:2076
+#: src/planner-ttable-row.c:2029
 #, c-format
 msgid "Change task '%s' work to %s, duration to %s (%d)"
 msgstr "Aufgabe »%s« als Arbeit zu %s ändern, Dauer zu %s (%d)"
@@ -2054,7 +2102,10 @@ msgstr "Planner-Dateien"
 #.
 #: src/planner-window.c:1152 src/planner-window.c:1164
 msgid "translator-credits"
-msgstr "Christian Neumair <chris@gnome-de.org>Hendrik Brandt <eru@gmx.li>"
+msgstr ""
+"Christian Neumair <chris@gnome-de.org>\n"
+"Hendrik Brandt <eru@gmx.li>\n"
+"Hendrik Richter <hendrik@gnome-de.org>"
 
 #. "Copyright \xc2\xa9"
 #: src/planner-window.c:1161
@@ -2167,3 +2218,8 @@ msgstr ""
 msgid "Export"
 msgstr "Export"
 
+#~ msgid "Constraint type"
+#~ msgstr "Einschränkungstyp"
+
+#~ msgid "Must start on"
+#~ msgstr "Muss beginnen am"
