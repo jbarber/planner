@@ -1032,9 +1032,9 @@ window_about_cb (BonoboUIComponent *component,
 		 gpointer           data,
 		 const char        *cname)
 {
-	GtkWidget   *about;
-	GtkWidget   *hbox;
-	GtkWidget   *href;
+	GtkWidget *about;
+	GtkWidget *hbox;
+	GtkWidget *href;
 
 	const gchar *authors[] = {
 		"Richard Hult <richard@imendio.com>",
@@ -1055,7 +1055,7 @@ window_about_cb (BonoboUIComponent *component,
 	 */
 	const gchar *translator_credits = N_("translator_credits");
 	
-	about = gnome_about_new ("Planner", VERSION,
+	about = gnome_about_new ("Imendio Planner", VERSION,
 				 "", /*"Copyright \xc2\xa9"*/
 				 _("A Project Management application for the GNOME desktop"),
 				 authors,
@@ -1075,7 +1075,7 @@ window_about_cb (BonoboUIComponent *component,
 
 static gboolean
 window_delete_event_cb (PlannerWindow *window,
-			gpointer      user_data)
+			gpointer       user_data)
 {
 	planner_window_close (window);
 	return TRUE;
