@@ -24,11 +24,9 @@
 #ifndef __PLANNER_APPLICATION_H__
 #define __PLANNER_APPLICATION_H__
 
-#include <gconf/gconf-client.h>
 #include <libplanner/mrp-application.h>
 #include <libplanner/mrp-project.h>
 #include <libegg/recent-files/egg-recent-model.h>
-
 
 #define PLANNER_TYPE_APPLICATION                (planner_application_get_type ())
 #define PLANNER_APPLICATION(obj)                (G_TYPE_CHECK_INSTANCE_CAST ((obj), PLANNER_TYPE_APPLICATION, PlannerApplication))
@@ -57,7 +55,5 @@ PlannerApplication   *planner_application_new              (void);
 GtkWidget       *     planner_application_new_window       (PlannerApplication *app);
 void                  planner_application_exit             (PlannerApplication *app);
 EggRecentModel  *     planner_application_get_recent_model (PlannerApplication *app);
-GConfClient     *     planner_application_get_gconf_client (void);
-
 
 #endif /* __PLANNER_APPLICATION_H__ */

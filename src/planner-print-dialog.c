@@ -36,6 +36,7 @@
 #include <libgnomeprintui/gnome-print-paper-selector.h>
 #include <libgnomeprintui/gnome-print-dialog.h>
 #include "planner-view.h"
+#include "planner-conf.h"
 #include "planner-print-dialog.h"
 
 #define PLANNER_PRINT_CONFIG_FILE "planner-print-config"
@@ -135,7 +136,6 @@ print_dialog_create_page (PlannerWindow *window,
 	GList       *buttons = NULL;
 	gchar       *str;
 	gboolean     state;
-	GConfClient *gconf_client;
 	
 	outer_vbox = gtk_vbox_new (FALSE, 4);
 	gtk_container_set_border_width (GTK_CONTAINER (outer_vbox), 8);
@@ -162,16 +162,14 @@ print_dialog_create_page (PlannerWindow *window,
 	g_object_set_data (G_OBJECT (dialog), "summary-button", w);
 */
 	
-	gconf_client = planner_application_get_gconf_client ();
-
 	for (l = views; l; l = l->next) {
 		w = gtk_check_button_new_with_label (planner_view_get_label (l->data));
 		gtk_box_pack_start (GTK_BOX (vbox), w, FALSE, FALSE, 0);
 		g_object_set_data (G_OBJECT (w), "view", l->data);
 
-		str = g_strdup_printf ("/apps/planner/views/%s/print_enabled", 
+		str = g_strdup_printf ("/views/%s/print_enabled", 
 				       planner_view_get_name (l->data));
-		state = gconf_client_get_bool (gconf_client, str, NULL);
+		state = planner_conf_get_bool (str, NULL);
 		g_free (str);
 
 		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (w), state);
@@ -195,7 +193,6 @@ planner_print_dialog_get_print_selection (GtkDialog *dialog,
 	GList           *buttons, *l;
 	GList           *views = NULL;
 	PlannerView     *view;
-	GConfClient     *gconf_client;
 	gchar           *str;
 	PlannerWindow   *window;
 
@@ -209,8 +206,6 @@ planner_print_dialog_get_print_selection (GtkDialog *dialog,
 
 	window = g_object_get_data (G_OBJECT (dialog), "window");
 	
-	gconf_client = planner_application_get_gconf_client ();
-	
 	buttons = g_object_get_data (G_OBJECT (dialog), "buttons");
 	for (l = buttons; l; l = l->next) {
 		button = l->data;
@@ -221,10 +216,9 @@ planner_print_dialog_get_print_selection (GtkDialog *dialog,
 			views = g_list_prepend (views, view);
 		}
 
-		str = g_strdup_printf ("/apps/planner/views/%s/print_enabled", 
+		str = g_strdup_printf ("/views/%s/print_enabled", 
 				       planner_view_get_name (view));
-		gconf_client_set_bool (gconf_client,
-				       str,
+		planner_conf_set_bool (str, 
 				       gtk_toggle_button_get_active (button),
 				       NULL);
 		g_free (str);

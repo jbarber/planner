@@ -38,7 +38,6 @@
 #include <gtk/gtklabel.h>
 #include <gtk/gtkfilechooserdialog.h>
 #include <glade/glade.h>
-#include <gconf/gconf-client.h>
 #include <libgnome/gnome-help.h>
 #include <libgnome/gnome-i18n.h>
 #include <libgnomeui/gnome-about.h>
@@ -50,6 +49,7 @@
 #include <libplanner/mrp-project.h>
 #include <libegg/recent-files/egg-recent-view.h>
 #include "planner-marshal.h"
+#include "planner-conf.h"
 #include "planner-sidebar.h"
 #include "planner-window.h"
 #include "planner-view-loader.h"
@@ -187,13 +187,13 @@ static void window_connect_proxy_cb (GtkUIManager  *manager,
 				     PlannerWindow *window);
 
 
-#define GCONF_PATH                  "/apps/planner"
-#define GCONF_MAIN_WINDOW_DIR       "/apps/planner/ui"
-#define GCONF_MAIN_WINDOW_MAXIMIZED "/apps/planner/ui/main_window_maximized"
-#define GCONF_MAIN_WINDOW_WIDTH     "/apps/planner/ui/main_window_width"
-#define GCONF_MAIN_WINDOW_HEIGHT    "/apps/planner/ui/main_window_height"
-#define GCONF_MAIN_WINDOW_POS_X     "/apps/planner/ui/main_window_position_x"
-#define GCONF_MAIN_WINDOW_POS_Y     "/apps/planner/ui/main_window_position_y"
+#define CONF_MAIN_WINDOW_DIR       "/ui"
+#define CONF_MAIN_WINDOW_MAXIMIZED "/ui/main_window_maximized"
+#define CONF_MAIN_WINDOW_WIDTH     "/ui/main_window_width"
+#define CONF_MAIN_WINDOW_HEIGHT    "/ui/main_window_height"
+#define CONF_MAIN_WINDOW_POS_X     "/ui/main_window_position_x"
+#define CONF_MAIN_WINDOW_POS_Y     "/ui/main_window_position_y"
+#define CONF_MAIN_LAST_DIR         "/general/last_dir"
 
 #define VIEW_PATH "/menu/View/Views placeholder"
 #define VIEW_GROUP "view group"
@@ -672,16 +672,11 @@ static gchar *
 get_last_dir (PlannerWindow *window)
 {
 	PlannerWindowPriv *priv;
-	GConfClient       *gconf_client;
 	gchar             *last_dir;
 	
 	priv = window->priv;
 	
-	gconf_client = planner_application_get_gconf_client ();
-	
-	last_dir = gconf_client_get_string (gconf_client,
-					    GCONF_PATH "/general/last_dir",
-					    NULL);
+	last_dir = planner_conf_get_string (CONF_MAIN_LAST_DIR, NULL);
 	
 	if (last_dir == NULL) {
 		last_dir = g_strdup (g_get_home_dir ());
@@ -701,12 +696,9 @@ window_open_cb (GtkAction *action,
 	gchar             *filename = NULL;
 	gchar             *last_dir;
 	GtkWidget         *new_window;
-	GConfClient       *gconf_client;
 
 	window = PLANNER_WINDOW (data);
 	priv = window->priv;
-
-	gconf_client = planner_application_get_gconf_client ();
 
 	file_chooser = gtk_file_chooser_dialog_new (_("Open a file"),
 						    GTK_WINDOW (window),
@@ -750,11 +742,9 @@ window_open_cb (GtkAction *action,
 		}
 		
 		last_dir = g_path_get_dirname (filename);
-		gconf_client_set_string (gconf_client,
-					 GCONF_PATH "/general/last_dir",
-					 last_dir,
-					 NULL);
+		planner_conf_set_string (CONF_MAIN_LAST_DIR, last_dir, NULL);
 		g_free (last_dir);
+
 		g_free (filename);		
 	}
 }
@@ -1343,12 +1333,9 @@ window_do_save_as (PlannerWindow *window)
 	gint              response;
 	gchar            *filename = NULL;
 	gchar            *last_dir;
-	GConfClient      *gconf_client;
 	EggRecentItem    *item;
 
 	priv = window->priv;
-
-	gconf_client = planner_application_get_gconf_client ();
 
 	file_chooser = gtk_file_chooser_dialog_new (_("Save a file"),
 						    GTK_WINDOW (window),
@@ -1429,11 +1416,9 @@ window_do_save_as (PlannerWindow *window)
 		}
 
 		last_dir = g_path_get_dirname (filename);
-		gconf_client_set_string (gconf_client,
-					 GCONF_PATH "/general/last_dir",
-					 last_dir,
-					 NULL);
+		planner_conf_set_string (CONF_MAIN_LAST_DIR, last_dir, NULL);
 		g_free (last_dir);
+
 		g_free (filename);
 		
 		return TRUE;
@@ -1747,14 +1732,11 @@ planner_window_get_cmd_manager (PlannerWindow *window)
 static void
 window_save_state (PlannerWindow *window)
 {
-	GConfClient       *gconf_client;
 	PlannerWindowPriv *priv;
 	GdkWindowState     state;
 	gboolean           maximized;
 
 	priv = window->priv;
-
-	gconf_client = planner_application_get_gconf_client ();
 
 	state = gdk_window_get_state (GTK_WIDGET (window)->window);
 	if (state & GDK_WINDOW_STATE_MAXIMIZED) {
@@ -1763,9 +1745,7 @@ window_save_state (PlannerWindow *window)
 		maximized = FALSE;
 	}
 
-	gconf_client_set_bool (gconf_client,
-			       GCONF_MAIN_WINDOW_MAXIMIZED,
-			       maximized, NULL);
+	planner_conf_set_bool (CONF_MAIN_WINDOW_MAXIMIZED, maximized, NULL);
 
 	/* If maximized don't save the size and position */
 	if (!maximized) {
@@ -1773,27 +1753,18 @@ window_save_state (PlannerWindow *window)
 		int x, y;
 
 		gtk_window_get_size (GTK_WINDOW (window), &width, &height);
-		gconf_client_set_int (gconf_client,
-				      GCONF_MAIN_WINDOW_WIDTH,
-				      width, NULL);
-		gconf_client_set_int (gconf_client,
-				      GCONF_MAIN_WINDOW_HEIGHT,
-				      height, NULL);
+		planner_conf_set_int (CONF_MAIN_WINDOW_WIDTH, width, NULL);
+		planner_conf_set_int (CONF_MAIN_WINDOW_HEIGHT, height, NULL);
 
 		gtk_window_get_position (GTK_WINDOW (window), &x, &y);
-		gconf_client_set_int (gconf_client,
-				      GCONF_MAIN_WINDOW_POS_X,
-				      x, NULL);
-		gconf_client_set_int (gconf_client,
-				      GCONF_MAIN_WINDOW_POS_Y,
-				      y, NULL);
+		planner_conf_set_int (CONF_MAIN_WINDOW_POS_X, x, NULL);
+		planner_conf_set_int (CONF_MAIN_WINDOW_POS_Y, y, NULL);
 	}
 }
 
 static void
 window_restore_state (PlannerWindow *window)
 {
-	GConfClient *gconf_client;
 	PlannerWindowPriv *priv;
 	gboolean exists;
 	gboolean maximized;
@@ -1801,36 +1772,28 @@ window_restore_state (PlannerWindow *window)
 	int      x, y;
 
 	priv = window->priv;
-	gconf_client = planner_application_get_gconf_client ();
 
-	exists = gconf_client_dir_exists (gconf_client,
-					  GCONF_MAIN_WINDOW_DIR,
-					  NULL);
+	exists = planner_conf_dir_exists (CONF_MAIN_WINDOW_DIR, NULL);
 	
 	if (exists) {	
-		maximized = gconf_client_get_bool (gconf_client,
-						   GCONF_MAIN_WINDOW_MAXIMIZED,
+		maximized = planner_conf_get_bool (CONF_MAIN_WINDOW_MAXIMIZED,
 						   NULL);
 	
 		if (maximized) {
 			gtk_window_maximize (GTK_WINDOW (window));
 		} else {
-			width = gconf_client_get_int (gconf_client,
-						      GCONF_MAIN_WINDOW_WIDTH,
+			width = planner_conf_get_int (CONF_MAIN_WINDOW_WIDTH,
 						      NULL);
 		
-			height = gconf_client_get_int (gconf_client,
-						       GCONF_MAIN_WINDOW_HEIGHT,
+			height = planner_conf_get_int (CONF_MAIN_WINDOW_HEIGHT,
 						       NULL);
 		
 			gtk_window_set_default_size (GTK_WINDOW (window), 
 						     width, height);
 
-			x = gconf_client_get_int (gconf_client,
-						  GCONF_MAIN_WINDOW_POS_X,
+			x = planner_conf_get_int (CONF_MAIN_WINDOW_POS_X,
 						  NULL);
-			y = gconf_client_get_int (gconf_client,
-						  GCONF_MAIN_WINDOW_POS_Y,
+			y = planner_conf_get_int (CONF_MAIN_WINDOW_POS_Y,
 						  NULL);
 
 			gtk_window_move (GTK_WINDOW (window), x, y);

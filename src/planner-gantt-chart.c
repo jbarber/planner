@@ -31,6 +31,7 @@
 #include <libgnome/gnome-i18n.h>
 #include <libplanner/mrp-task.h>
 #include "planner-marshal.h"
+#include "planner-conf.h"
 #include "planner-gantt-chart.h"
 #include "planner-gantt-header.h"
 #include "planner-gantt-background.h"
@@ -52,7 +53,7 @@
 /* Font width factor. */
 static gdouble f = 1.0;
 
-#define CRITICAL_PATH_KEY "/apps/planner/views/gantt_view/highlight_critical_path"
+#define CRITICAL_PATH_KEY "/views/gantt_view/highlight_critical_path"
 
 
 typedef struct _TreeNode TreeNode; 
@@ -320,7 +321,6 @@ static void
 gantt_chart_init (PlannerGanttChart *chart)
 {
 	PlannerGanttChartPriv *priv;
-	GConfClient           *gconf_client;
 	
 	gtk_widget_set_redraw_on_allocate (GTK_WIDGET (chart), FALSE);
 
@@ -374,9 +374,8 @@ gantt_chart_init (PlannerGanttChart *chart)
 
 	priv->relation_hash = g_hash_table_new (NULL, NULL);
 
-	gconf_client = planner_application_get_gconf_client ();
-	priv->highlight_critical = gconf_client_get_bool (
-		gconf_client, CRITICAL_PATH_KEY, NULL);
+	priv->highlight_critical = planner_conf_get_bool (CRITICAL_PATH_KEY,
+							  NULL);
 }
 
 static void
@@ -1879,7 +1878,6 @@ planner_gantt_chart_set_highlight_critical_tasks (PlannerGanttChart *chart,
 						  gboolean           state)
 {
 	PlannerGanttChartPriv *priv;
-	GConfClient           *gconf_client;
 	
 	g_return_if_fail (PLANNER_IS_GANTT_CHART (chart));
 
@@ -1893,11 +1891,7 @@ planner_gantt_chart_set_highlight_critical_tasks (PlannerGanttChart *chart,
 	
 	gtk_widget_queue_draw (GTK_WIDGET (priv->canvas));
 
-	gconf_client = planner_application_get_gconf_client ();
-	gconf_client_set_bool (gconf_client,
-			       CRITICAL_PATH_KEY,
-			       state,
-			       NULL);
+	planner_conf_set_bool (CRITICAL_PATH_KEY, state, NULL);
 }
 
 gboolean

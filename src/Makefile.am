@@ -28,6 +28,8 @@ planner_SOURCES = \
 	planner-application.h		\
 	planner-assignment-model.c	\
 	planner-assignment-model.h	\
+	planner-conf.h                  \
+	planner-conf-gconf.c            \
 	planner-calendar.c		\
 	planner-calendar-dialog.c	\
 	planner-calendar-dialog.h	\

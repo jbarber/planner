@@ -290,15 +290,3 @@ planner_application_get_recent_model (PlannerApplication *app)
 	return app->priv->recent_model;
 }
 
-GConfClient *
-planner_application_get_gconf_client (void)
-{
-	static GConfClient *client;
-	
-	if (!client) {
-		client = gconf_client_get_default ();
-	}
-
-	return client;
-}
-

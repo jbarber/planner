@@ -42,6 +42,7 @@
 #include <libgnome/gnome-i18n.h>
 #include <libplanner/mrp-task.h>
 #include "planner-view.h"
+#include "planner-conf.h"
 #include "planner-cell-renderer-date.h"
 #include "planner-task-dialog.h"
 #include "planner-property-dialog.h"
@@ -138,14 +139,13 @@ static guint n_entries        = G_N_ELEMENTS (entries);
 static guint n_toggle_entries = G_N_ELEMENTS (toggle_entries);
 
 
-#define CRITICAL_PATH_KEY "/apps/planner/views/task_view/highlight_critical_path"
+#define CRITICAL_PATH_KEY "/views/task_view/highlight_critical_path"
 
 G_MODULE_EXPORT void
 activate (PlannerView *view)
 {
 	PlannerViewPriv *priv;
 	gboolean         show_critical;
-	GConfClient     *gconf_client;
 	GError          *error = NULL;
 
 	priv = view->priv;
@@ -169,10 +169,7 @@ activate (PlannerView *view)
 
 	/* Set the initial UI state. */
 
-	gconf_client = planner_application_get_gconf_client ();
-	show_critical = gconf_client_get_bool (gconf_client,
-					       CRITICAL_PATH_KEY,
-					       NULL);
+	show_critical = planner_conf_get_bool (CRITICAL_PATH_KEY, NULL);
 
 	planner_task_tree_set_highlight_critical (PLANNER_TASK_TREE (priv->tree),
 						  show_critical);
@@ -489,7 +486,6 @@ task_view_highlight_critical_cb (GtkAction *action,
 {
 	PlannerViewPriv *priv;
 	gboolean         state;
-	GConfClient     *gconf_client;
 	
 	priv = PLANNER_VIEW (data)->priv;
 
@@ -499,11 +495,7 @@ task_view_highlight_critical_cb (GtkAction *action,
 		PLANNER_TASK_TREE (priv->tree),
 		state);
 
-	gconf_client = planner_application_get_gconf_client ();
-	gconf_client_set_bool (gconf_client,
-			       CRITICAL_PATH_KEY,
-			       state,
-			       NULL);
+	planner_conf_set_bool (CRITICAL_PATH_KEY, state, NULL);
 }
 
 static void 

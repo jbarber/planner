@@ -1,3 +1,18 @@
+2004-08-09  Mikael Hallendal  <micke@imendio.com>
+
+	* src/Makefile.am: Added planner-conf.h and planner-conf-gconf.c
+	* src/planner-conf-gconf.c: Added
+	* src/planner-conf.h: Added
+	* src/planner-application.[ch]:
+	* src/planner-gantt-chart.c:
+	* src/planner-print-dialog.c:
+	* src/planner-sql-plugin.c:
+	* src/planner-task-view.c: 
+	* src/planner-window.c: 
+	* src/planner-xml-planner-plugin.c:
+	- Added GConf abstraction layer.
+	- Updated all places to use the GConf abstraction layer
+
 2004-08-06  Richard Hult  <richard@imendio.com>
 
 	* src/planner-window.c: Break some really long lines.

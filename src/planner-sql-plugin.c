@@ -30,7 +30,6 @@
 #include <libgnomeui/gnome-entry.h>
 #include <glade/glade.h>
 #include <gtk/gtk.h>
-#include <gconf/gconf-client.h>
 #include <libgda/libgda.h>
 #include "planner-window.h"
 #include "planner-application.h"

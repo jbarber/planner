@@ -28,6 +28,7 @@
 #include <glade/glade.h>
 #include <gtk/gtk.h>
 #include <libgnome/gnome-i18n.h>
+#include "planner-conf.h"
 #include "planner-window.h"
 #include "planner-plugin.h"
 
@@ -62,14 +63,9 @@ static guint n_action_entries = G_N_ELEMENTS (action_entries);
 static gchar *
 get_last_dir (void)
 {
-	GConfClient *gconf_client;
 	gchar       *last_dir;
 	
-	gconf_client = planner_application_get_gconf_client ();
-	
-	last_dir = gconf_client_get_string (gconf_client,
-					    GCONF_PATH "/general/last_dir",
-					    NULL);
+	last_dir = planner_conf_get_string ("/general/last_dir", NULL);
 	
 	if (last_dir == NULL) {
 		last_dir = g_strdup (g_get_home_dir ());
@@ -99,7 +95,6 @@ xml_planner_plugin_export (GtkAction         *action,
 	const gchar       *filename = NULL;
 	gchar             *real_filename;
 	gchar             *last_dir;
-	GConfClient       *gconf_client; 
 
 	file_sel = gtk_file_selection_new (_("Export"));
 
@@ -161,14 +156,10 @@ xml_planner_plugin_export (GtkAction         *action,
 		g_warning ("Error while export to Planner XML: %s", error->message);
 	}
 
-	gconf_client = planner_application_get_gconf_client ();
-	
 	last_dir = g_path_get_dirname (real_filename);
-	gconf_client_set_string (gconf_client,
-				 GCONF_PATH "/general/last_dir",
-				 last_dir,
-				 NULL);
+	planner_conf_set_string ("/general/last_dir", last_dir, NULL);
 	g_free (last_dir);
+
 	g_free (real_filename);
 
 	gtk_widget_destroy (file_sel);
