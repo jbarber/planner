@@ -2,7 +2,7 @@
 #include <locale.h>
 #include <string.h>
 #include <stdlib.h>
-#include "../mrproject/mrp-project.h"
+#include "libplanner/mrp-project.h"
 #include "self-check.h"
 
 #define DAY (60*60*8)

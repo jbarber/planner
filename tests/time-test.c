@@ -2,7 +2,7 @@
 #include <locale.h>
 #include <string.h>
 #include <stdlib.h>
-#include "../mrproject/mrp-time.h"
+#include "libplanner/mrp-time.h"
 #include "self-check.h"
 
 /* Helper function to make the output look nicer */

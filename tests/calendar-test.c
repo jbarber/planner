@@ -2,21 +2,24 @@
 #include <locale.h>
 #include <string.h>
 #include <stdlib.h>
-#include "../mrproject/mrp-project.h"
-#include "../mrproject/mrp-calendar.h"
+#include "libplanner/mrp-project.h"
+#include "libplanner/mrp-calendar.h"
 #include "self-check.h"
 
 gint
 main (gint argc, gchar **argv)
 {
-	MrpProject  *project;
-        MrpCalendar *base, *derive, *copy;
-        MrpInterval *interval;
-        mrptime      time_tue, time_sat, time_sun, time_27nov, time_28nov;
-        MrpDay      *day_a, *day_b, *day_c, *def_1_id;
-        GList       *l = NULL;
+	MrpApplication *app;
+	MrpProject     *project;
+        MrpCalendar    *base, *derive, *copy;
+        MrpInterval    *interval;
+        mrptime         time_tue, time_sat, time_sun, time_27nov, time_28nov;
+        MrpDay         *day_a, *day_b, *day_c, *def_1_id;
+        GList          *l = NULL;
         
         g_type_init ();
+
+	app = mrp_application_new ();
 
 	project = mrp_project_new (NULL);
 	

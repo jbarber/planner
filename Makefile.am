@@ -14,6 +14,7 @@ SUBDIRS = \
 	data				\
 	docs				\
 	examples			\
+	tests				\
 	$(python_DIR)			\
 	$(dotnet_DIR)
 

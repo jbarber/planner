@@ -11,8 +11,7 @@ INCLUDES = \
 	-DIMAGEDIR=\""$(datadir)/pixmaps/planner"\"		\
 	-DGLADEDIR=\""$(datadir)/planner/glade"\"		\
 	-DMRP_VIEWDIR=\""$(libdir)/planner/views"\"		\
-	-DMRP_PLUGINDIR=\""$(libdir)/planner/plugins"\"		\
-	$(GNOMEUI_UNSTABLE)
+	-DMRP_PLUGINDIR=\""$(libdir)/planner/plugins"\"
 
 if HAVE_PYTHON_PLUGIN
 INCLUDES += $(PYTHON_INCLUDES)

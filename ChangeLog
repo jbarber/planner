@@ -1,3 +1,17 @@
+2004-08-01  Richard Hult  <richard@imendio.com>
+
+	* src/Makefile.am: Clean up.
+
+	* Makefile.am:
+	* configure.in: 
+	* tests/: Add back the tests and add a new test for the
+	scheduler.
+
+2004-08-01  Richard Hult  <richard@imendio.com>
+
+	* src/planner-window.c (window_do_save_as): Use the right
+	response, fixes saving.
+
 2004-07-31  Richard Hult  <richard@imendio.com>
 
 	* src/Makefile.am: Put scale utils in the executable, split out

@@ -1325,7 +1325,7 @@ window_do_save_as (PlannerWindow *window)
 						    GTK_WINDOW (window),
 						    GTK_FILE_CHOOSER_ACTION_SAVE,
 						    GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-						    GTK_STOCK_SAVE, GTK_RESPONSE_ACCEPT,
+						    GTK_STOCK_SAVE, GTK_RESPONSE_OK,
 						    NULL);
 	gtk_window_set_modal (GTK_WINDOW (file_chooser), TRUE);
 
