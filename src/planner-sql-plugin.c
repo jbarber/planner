@@ -66,12 +66,10 @@ static gboolean sql_plugin_retrieve_db_values  (PlannerPlugin      *plugin,
 						gchar             **db,
 						gchar             **user,
 						gchar             **password);
-static void     sql_plugin_open                (BonoboUIComponent  *component,
-						gpointer            user_data,
-						const gchar        *cname);
-static void     sql_plugin_save                (BonoboUIComponent  *component,
-						gpointer            user_data,
-						const gchar        *cname);
+static void     sql_plugin_open                (GtkAction          *action,
+						gpointer            user_data);
+static void     sql_plugin_save                (GtkAction          *action,
+						gpointer            user_data);
 static GdaDataModel * 
                 sql_execute_query              (GdaConnection      *con, 
 					        gchar              *query);
@@ -93,8 +91,8 @@ enum {
 };
 
 static GtkActionEntry entries[] = {
-	{ "Open",  NULL,  N_("_Open"), NULL, N_("Open from database"),  G_CLLBACK(sql_plugin_open) },
-	{ "Save",  NULL,  N_("_Save"), NULL, N_("Save to database"),    G_CLLBACK(sql_plugin_save) },
+	{ "Open",  NULL,  N_("_Open DB"), NULL, N_("Open from database"),  G_CALLBACK(sql_plugin_open) },
+	{ "Save",  NULL,  N_("_Save DB"), NULL, N_("Save to database"),    G_CALLBACK(sql_plugin_save) },
 };
 
 static guint n_entries        = G_N_ELEMENTS (entries);
@@ -968,9 +966,8 @@ sql_plugin_retrieve_db_values (PlannerPlugin  *plugin,
 }
 
 static void
-sql_plugin_open (BonoboUIComponent *component,
-		 gpointer           user_data,
-		 const gchar       *cname)
+sql_plugin_open (GtkAction *action,
+		 gpointer   user_data)
 {
 	PlannerPlugin      *plugin = user_data;
 	PlannerApplication *application;
@@ -1075,9 +1072,8 @@ sql_plugin_open (BonoboUIComponent *component,
 }
 
 static void
-sql_plugin_save (BonoboUIComponent *component,
-		 gpointer           user_data,
-		 const gchar       *cname)
+sql_plugin_save (GtkAction *action,
+		 gpointer   user_data)
 {
 	GdaClient     *client;
 	GdaConnection *conn;
@@ -1186,10 +1182,11 @@ G_MODULE_EXPORT void
 plugin_init (PlannerPlugin *plugin,
 	     PlannerWindow *main_window)
 {
-	BonoboUIContainer *ui_container;
-	BonoboUIComponent *ui_component;
+	GtkActionGroup    *actions;
+	GtkUIManager      *ui;
 	SQLPluginPriv     *priv;
 	gint               i = -1;
+	GError            *error = NULL;
 	
 	priv = g_new0 (SQLPluginPriv, 1);
 
@@ -1203,23 +1200,21 @@ plugin_init (PlannerPlugin *plugin,
 	g_object_set_data (G_OBJECT (main_window), 
 			   "sql-plugin",
 			   plugin);
-	
-	ui_container = planner_window_get_ui_container (main_window);
-	ui_component = bonobo_ui_component_new_default ();
-	
-	bonobo_ui_component_set_container (ui_component, 
-					   BONOBO_OBJREF (ui_container),
-					   NULL);
-	bonobo_ui_component_freeze (ui_component, NULL);
-	bonobo_ui_component_add_verb_list_with_data (ui_component, 
-						     verbs,
-						     plugin);
-	bonobo_ui_util_set_ui (ui_component,
-			       DATADIR,
-			       "/planner/ui/sql-plugin.ui",
-			       "sqlplugin",
-			       NULL);
-	
-	bonobo_ui_component_thaw (ui_component, NULL);
+
+	/* Create the actions, get the ui manager and merge the whole */
+	actions = gtk_action_group_new ("SQL plugin actions");
+	gtk_action_group_set_translation_domain (actions, GETTEXT_PACKAGE);
+
+	gtk_action_group_add_actions (actions, entries, n_entries, plugin);
+
+	ui = planner_window_get_ui_manager (main_window);
+	gtk_ui_manager_insert_action_group (ui, actions, 0);
+
+	if (!gtk_ui_manager_add_ui_from_file (ui, DATADIR"/planner/ui/sql-plugin.ui", &error)) {
+		g_message ("Building menu failed: %s", error->message);
+		g_message ("Couldn't load: %s",DATADIR"/planner/ui/sql-plugin.ui");
+		g_error_free (error);
+	}
+	gtk_ui_manager_ensure_update(ui);
 }
 
