@@ -10,22 +10,20 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: MrProject\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-12-04 16:40+0100\n"
+"POT-Creation-Date: 2003-12-08 12:32+0100\n"
 "PO-Revision-Date: 2003-02-07 12:32+0100\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8-bit\n"
+"Report-Msgid-Bugs-To: \n"
 
 #: data/planner.desktop.in.h:1
-#, fuzzy
 msgid "Planner Project Management"
-msgstr "Projekthantering"
+msgstr "Planner projekthantering"
 
 #: data/planner.desktop.in.h:2
-#, fuzzy
 msgid "Project Management"
 msgstr "Projekthantering"
 
@@ -58,9 +56,8 @@ msgid "Copy the selection"
 msgstr "Kopiera markeringen"
 
 #: data/ui/main-window.ui.h:7
-#, fuzzy
 msgid "Create a new project"
-msgstr "Öppna ett projekt"
+msgstr "Skapa ett nytt projekt"
 
 #: data/ui/main-window.ui.h:8
 msgid "Cut the selection"
@@ -274,9 +271,8 @@ msgid "Reset _All Constraints"
 msgstr "Återställ _alla restriktioner"
 
 #: data/ui/gantt-view.ui.h:11 data/ui/task-view.ui.h:11
-#, fuzzy
 msgid "Reset _Constraint"
-msgstr "Återställ _alla restriktioner"
+msgstr "Återställ _restriktion"
 
 #: data/ui/gantt-view.ui.h:12 data/ui/task-view.ui.h:12
 #: data/ui/resource-view.ui.h:7
@@ -289,7 +285,6 @@ msgid "Select all tasks"
 msgstr "Markera alla aktiviteter"
 
 #: data/ui/gantt-view.ui.h:14
-#, fuzzy
 msgid "Test"
 msgstr "Test"
 
@@ -454,7 +449,6 @@ msgid "<b>Working time</b>"
 msgstr "<b>Arbetstid</b>"
 
 #: data/glade/calendar-dialog.glade.h:10
-#, fuzzy
 msgid "Apply"
 msgstr "Verkställ"
 
@@ -555,7 +549,6 @@ msgid "Working time..."
 msgstr "Arbetstid..."
 
 #: data/glade/calendar-dialog.glade.h:35
-#, fuzzy
 msgid "_Derive from a calendar"
 msgstr "Derivera från en kalender"
 
@@ -600,9 +593,8 @@ msgid "Name: "
 msgstr "Namn: "
 
 #: data/glade/new-property.glade.h:5
-#, fuzzy
 msgid "New Property"
-msgstr "Egenskap"
+msgstr "Ny egenskap"
 
 #: data/glade/new-property.glade.h:6
 msgid "Type: "
@@ -638,7 +630,6 @@ msgid "New Project Phase"
 msgstr "Ny projektfas"
 
 #: data/glade/project-properties.glade.h:9
-#, fuzzy
 msgid "Project _name:"
 msgstr "Projekt_namn:"
 
@@ -663,7 +654,6 @@ msgid "_Manager:"
 msgstr "_Ledare:"
 
 #: data/glade/project-properties.glade.h:15
-#, fuzzy
 msgid "_Organization:"
 msgstr "_Organisation:"
 
@@ -770,7 +760,7 @@ msgid "Username:"
 msgstr "Användarnamn:"
 
 #: data/glade/task-dialog.glade.h:3
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "%"
 msgstr "%"
 
@@ -791,9 +781,8 @@ msgid "Predecessors"
 msgstr "Föregångare"
 
 #: data/glade/task-dialog.glade.h:12 src/planner-resource-view.c:342
-#, fuzzy
 msgid "Resources"
-msgstr "_Resurser"
+msgstr "Resurser"
 
 #: data/glade/task-dialog.glade.h:13
 msgid "_Duration:"
@@ -838,9 +827,8 @@ msgid "No support for SQL storage built into this version of MrProject."
 msgstr "Inget stöd för SQL-lager är inbyggt i denna version av MrProject."
 
 #: libplanner/mrp-project.c:807
-#, fuzzy
 msgid "Invalid URI."
-msgstr "Ogiltig Unicode"
+msgstr "Ogiltig URI."
 
 #: libplanner/mrp-project.c:928
 #, c-format
@@ -852,27 +840,24 @@ msgid "Couldn't find a suitable file module for loading project"
 msgstr "Kunde inte hitta en lämplig filmodul för inläsning av projekt"
 
 #: libplanner/mrp-property.c:365
-#, fuzzy
 msgid "Text"
-msgstr "Test"
+msgstr "Text"
 
 #: libplanner/mrp-property.c:367
 msgid "String list"
 msgstr "Stränglista"
 
 #: libplanner/mrp-property.c:369
-#, fuzzy
 msgid "Integer number"
-msgstr "Ledares namn"
+msgstr "Heltal"
 
 #: libplanner/mrp-property.c:371
 msgid "Floating-point number"
 msgstr "Flyttal"
 
 #: libplanner/mrp-property.c:373
-#, fuzzy
 msgid "Date"
-msgstr "Hastighet"
+msgstr "Datum"
 
 #: libplanner/mrp-property.c:375
 msgid "Duration"
@@ -909,7 +894,6 @@ msgstr ""
 "släkt."
 
 #: libplanner/mrp-day.c:54
-#, fuzzy
 msgid "Working"
 msgstr "Arbete"
 
@@ -918,33 +902,28 @@ msgid "A default working day"
 msgstr "En standardarbetsdag"
 
 #: libplanner/mrp-day.c:57
-#, fuzzy
 msgid "Nonworking"
-msgstr "Ingen arbetstid"
+msgstr "Ledigt"
 
 #: libplanner/mrp-day.c:58
 msgid "A default non working day"
 msgstr "En ledig standarddag"
 
 #: libplanner/mrp-day.c:60
-#, fuzzy
 msgid "Use base"
-msgstr "Använd kalender"
+msgstr "Använd bas"
 
 #: libplanner/mrp-day.c:61
-#, fuzzy
 msgid "Use day from base calendar"
-msgstr "Derivera från en kalender"
+msgstr "Använd dag från baskalender"
 
 #: libplanner/mrp-parser.c:1043 libplanner/mrp-parser.c:1138
-#, fuzzy
 msgid "Could not create XML tree"
-msgstr "Kunde inte skapa resursdialog."
+msgstr "Kunde inte skapa XML-träd"
 
 #: libplanner/mrp-parser.c:1104
-#, fuzzy
 msgid "Could not write XML file"
-msgstr "Kunde inte öppna insticksmodulfilen \"%s\"\n"
+msgstr "Kunde inte skriva XML-fil"
 
 #. Give up.
 #: libplanner/mrp-sql.c:229 src/planner-sql-plugin.c:127
@@ -961,12 +940,11 @@ msgstr ""
 "du spara ändå?"
 
 #: libplanner/mrp-sql.c:3443
-#, fuzzy, c-format
 msgid ""
 "Connection to database '%s' failed.\n"
 "%s"
 msgstr ""
-"Anslutning till databas \"%s\" misslyckades:\n"
+"Anslutning till databas \"%s\" misslyckades.\n"
 "%s"
 
 #: libplanner/mrp-storage-sql.c:205
@@ -1005,9 +983,8 @@ msgid "A Project Management application for the GNOME desktop"
 msgstr "Ett projekthanteringsprogram för GNOME-skrivbordet"
 
 #: src/planner-main-window.c:1007
-#, fuzzy
 msgid "The Planner Homepage"
-msgstr "MrProjects hemsida"
+msgstr "Planners hemsida"
 
 #: src/planner-main-window.c:1083
 msgid "If you don't save, changes made the last minute will be discarded."
@@ -1058,7 +1035,6 @@ msgid "File \"%s\" exists, do you want to overwrite it?"
 msgstr "Filen \"%s\" finns redan, vill du skriva över den?"
 
 #: src/planner-main-window.c:1452
-#, fuzzy
 msgid ""
 "You have opened a file that was saved with an old version of Planner.\n"
 "\n"
@@ -1073,7 +1049,7 @@ msgid ""
 "After doing this, you can remove all constraints by selecting the menu item "
 "'Remove all constraints' in the 'Edit' menu."
 msgstr ""
-"Du har öppnat en fil som sparades med en gammal version av MrProject.\n"
+"Du har öppnat en fil som sparades med en gammal version av Planner.\n"
 "\n"
 "När gamla projekt läses in, sätts restriktionen \"Måste starta\", eftersom "
 "den gamla versionen inte fullt ut stödde automatiskt schemaläggning. För att "
@@ -1105,9 +1081,8 @@ msgid "mrproject: --geometry cannot be used with more than one file."
 msgstr "mrproject: --geometry kan bara användas med en fil."
 
 #: src/planner-plugin-loader.c:40
-#, fuzzy, c-format
 msgid "Could not open plugin file '%s'\n"
-msgstr "Kunde inte öppna vyinsticksfilen \"%s\"\n"
+msgstr "Kunde inte öppna insticksfilen \"%s\"\n"
 
 #: src/planner-view-loader.c:40
 #, c-format
@@ -1175,9 +1150,8 @@ msgid "Sunday"
 msgstr "Söndag"
 
 #: src/planner-default-week-dialog.c:266
-#, fuzzy
 msgid "No working time"
-msgstr "Anpassad arbetstid"
+msgstr "Ingen arbetstid"
 
 #: src/planner-default-week-dialog.c:277 src/planner-default-week-dialog.c:281
 msgid "%H:%M"
@@ -1191,22 +1165,18 @@ msgid "Name"
 msgstr "Namn"
 
 #: src/planner-group-dialog.c:393
-#, fuzzy
 msgid "Manager name"
 msgstr "Ledares namn"
 
 #: src/planner-group-dialog.c:399
-#, fuzzy
 msgid "Manager phone"
 msgstr "Ledares tel"
 
 #: src/planner-group-dialog.c:405
-#, fuzzy
 msgid "Manager email"
 msgstr "Ledares e-post"
 
 #: src/planner-project-properties.c:146
-#, fuzzy
 msgid "Select a calendar to use for this project:"
 msgstr "Välj en kalender att använda för projektet:"
 
@@ -1280,11 +1250,8 @@ msgstr "Redigera resursegenskaper"
 #: src/planner-resource-dialog.c:1101 src/planner-task-view.c:230
 #: src/planner-gantt-print.c:198 src/planner-resource-view.c:629
 #: src/planner-resource-view.c:645 src/planner-resource-view.c:1187
-#, fuzzy
 msgid "Work"
-msgstr ""
-"\n"
-"Arbete"
+msgstr "Arbete"
 
 #: src/planner-resource-dialog.c:1102 src/planner-resource-view.c:632
 #: src/planner-resource-view.c:646 src/planner-resource-view.c:1188
@@ -1353,7 +1320,7 @@ msgstr ""
 "Ange ett filnamn och försök igen."
 
 #: src/planner-sql-plugin.c:269
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Connection to database '%s' failed:\n"
 "%s"
@@ -1421,9 +1388,8 @@ msgid "Project start"
 msgstr "Projektstart"
 
 #: src/planner-gantt-row.c:1841 src/planner-gantt-row.c:1844
-#, fuzzy
 msgid "No name"
-msgstr "(Inget namn)"
+msgstr "Inget namn"
 
 #: src/planner-gantt-row.c:1847
 #, c-format
@@ -1467,9 +1433,9 @@ msgid "Wk %d"
 msgstr "V %d"
 
 #: src/planner-scale-utils.c:329
-#, fuzzy, c-format
+#, c-format
 msgid "Week %d"
-msgstr "V %d"
+msgstr "Vecka %d"
 
 #. i18n: Week, year.
 #: src/planner-scale-utils.c:334
@@ -1528,9 +1494,8 @@ msgid "/_Edit task..."
 msgstr "/_Redigera aktivitet..."
 
 #: src/planner-task-tree.c:2112
-#, fuzzy
 msgid "mon"
-msgstr "månad"
+msgstr "mån"
 
 #. month unit variant accepted in input
 #: src/planner-task-tree.c:2113
@@ -1564,9 +1529,8 @@ msgstr "d"
 
 #. day unit variant accepted in input
 #: src/planner-task-tree.c:2119
-#, fuzzy
 msgid "day"
-msgstr "dagar"
+msgstr "dag"
 
 #. day unit variant accepted in input
 #: src/planner-task-tree.c:2121
@@ -1607,7 +1571,6 @@ msgid "_Tasks"
 msgstr "_Aktiviteter"
 
 #: src/planner-task-view.c:228
-#, fuzzy
 msgid "Start"
 msgstr "Start"
 
@@ -1644,9 +1607,8 @@ msgid "Edit custom resource properties"
 msgstr "Redigera egenskaper för egen resurs"
 
 #: src/planner-resource-view.c:1011
-#, fuzzy
 msgid "Group"
-msgstr "Grupp:"
+msgstr "Grupp"
 
 #: src/planner-resource-view.c:1040
 msgid "Email"

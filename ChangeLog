@@ -1,3 +1,9 @@
+2003-12-08  Richard Hult  <richard@imendio.com>
+
+	* configure.in: Remove --with-html-dir, since gtk-doc.makefile
+	handles that. Gets rid of duplicate --with-html-dir options.
+	Add commented python checks, need to add this back.	
+
 2003-12-04  Christian Neumair  <chris@gnome-de.org>
 
 	* Makefile.am, po-libplanner/*:
