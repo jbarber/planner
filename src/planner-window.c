@@ -1134,10 +1134,12 @@ window_undo_state_changed_cb (PlannerCmdManager *manager,
 	bonobo_ui_component_set_prop (priv->ui_component, 
 				      "/commands/EditUndo",
 				      "tip", label,
-				      NULL);	
+				      NULL);
+
+	/* FIXME: See bug #134357. */
 	bonobo_ui_component_set_prop (priv->ui_component, 
 				      "/commands/EditUndo",
-				      "label", label,
+				      "label", _("_Undo"),
 				      NULL);
 }
 
@@ -1159,9 +1161,11 @@ window_redo_state_changed_cb (PlannerCmdManager *manager,
 				      "/commands/EditRedo",
 				      "tip", label,
 				      NULL);	
+
+	/* FIXME: See bug #134357. */
 	bonobo_ui_component_set_prop (priv->ui_component, 
 				      "/commands/EditRedo",
-				      "label", label,
+				      "label", _("_Redo"),
 				      NULL);	
 }
 

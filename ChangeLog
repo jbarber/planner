@@ -1,3 +1,11 @@
+2004-02-14  Richard Hult  <richard@imendio.com>
+
+	* src/planner-window.c: (window_undo_state_changed_cb),
+	(window_redo_state_changed_cb): Work around a bug, needs to be
+	fixed later, see bug #134357.
+
+	* autogen.sh: Check for gtkdocize and run it.
+
 2004-02-10  Alvaro del Castillo  <acs@barrapunto.com>
 
 	* libplanner/mrp-group.c 
