@@ -601,7 +601,7 @@ gantt_background_draw (GnomeCanvasItem *item,
 		wx1 = priv->timeline * hscale;
 		gnome_canvas_w2c (item->canvas, wx1, 0, &cx1, NULL);
 
-		snap = cy1 - floor (cy1 / (double)DASH_LENGTH + 0.5) * DASH_LENGTH;
+		snap = cy1 - floor (cy1 / (double) DASH_LENGTH + 0.5) * DASH_LENGTH;
 
 		gdk_draw_line (drawable,
 			       priv->timeline_gc,

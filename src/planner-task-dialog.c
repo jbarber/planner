@@ -1483,25 +1483,26 @@ task_dialog_update_schedule_label (DialogData *data)
 
 	g_object_get (data->task, "constraint", &constraint, NULL);
 
-	time_str = mrp_time_format_locale (constraint->time);
-	
 	switch (constraint->type) {
 	case MRP_CONSTRAINT_ASAP:
+		time_str = NULL;
 		str = g_strdup (_("As soon as possible"));
 		break;
 	case MRP_CONSTRAINT_SNET:
+		time_str = mrp_time_format_locale (constraint->time);
 		str = g_strdup_printf (_("No earlier than %s"), time_str);
 		break;
 	case MRP_CONSTRAINT_MSO:
+		time_str = mrp_time_format_locale (constraint->time);
 		str = g_strdup_printf (_("On fixed date %s"), time_str);
 		break;
 	default:
 		str = NULL;
 		g_assert_not_reached ();
 	}
-		
-	gtk_label_set_text (GTK_LABEL (data->schedule_label), str);
 
+	gtk_label_set_text (GTK_LABEL (data->schedule_label), str);
+	
 	g_free (str);
 	g_free (time_str);
 
@@ -2767,37 +2768,6 @@ task_dialog_calendar_changed_cb (MrpCalendar *calendar,
 					      NULL,
 					      dialog);
 }
-
-#if 0
-static void
-task_dialog_update_schedule (DialogData *data)
-{
-	MrpConstraint *constraint;
-	mrptime        start;
-	gchar         *str;
-
-	g_object_get (data->task, "constraint", &constraint, NULL);
-	start = mrp_task_get_work_start (data->task);
-
-	if (constraint->type == MRP_CONSTRAINT_ASAP) {
-		gtk_combo_box_set_active (GTK_COMBO_BOX (data->schedule_combo), 0);
-	}
-	else if (constraint->type == MRP_CONSTRAINT_SNET) {
-		gtk_combo_box_set_active (GTK_COMBO_BOX (data->schedule_combo), 1);
-	}
-	else if (constraint->type == MRP_CONSTRAINT_MSO) {
-		gtk_combo_box_set_active (GTK_COMBO_BOX (data->schedule_combo), 2);
-	} else {
-		g_assert_not_reached ();
-	}
-
-	g_free (constraint);
-
-	str = mrp_time_format_locale (start);
-	gtk_entry_set_text (GTK_ENTRY (data->schedule_entry), str);
-	g_free (str);
-}
-#endif
 
 static void
 task_dialog_update_sensitivity (DialogData *data)

@@ -32,12 +32,24 @@
 #include <glib/gi18n.h>
 #include "mrp-private.h"
 
+struct _MrpTime {
+	GDate date;
+	gint  hour;
+	gint  min;
+	gint  sec;
+};
+
 static const gchar *short_month_names[12];
 static const gchar *month_names[12];
 
 static const gchar *month_names_initial[12];
 static const gchar *short_day_names[7];
 static const gchar *day_names[7];
+
+static struct tm *mrp_time_to_tm   (mrptime    t);
+static mrptime    mrp_time_from_tm (struct tm *tm);
+
+
 
 /**
  * mrp_time_compose:
@@ -60,19 +72,12 @@ mrp_time_compose (gint year,
 		  gint minute,
 		  gint second)
 {
-	struct tm tm;
-	
-	memset (&tm, 0, sizeof (struct tm));
-	
-	tm.tm_year  = year - 1900;
-	tm.tm_mon   = month - 1;
-	tm.tm_mday  = day;
-	tm.tm_hour  = hour;
-	tm.tm_min   = minute;
-	tm.tm_sec   = second;
-	tm.tm_isdst = -1;
+	MrpTime t;
 
-	return mrp_time_from_tm (&tm);
+	mrp_time2_set_date (&t, year, month, day);
+	mrp_time2_set_time (&t, hour, minute, second);
+
+	return mrp_time2_get_epoch (&t);
 }
 
 /**
@@ -98,34 +103,32 @@ mrp_time_decompose (mrptime  t,
 		    gint    *minute,
 		    gint    *second)
 {
-	struct tm *tm;
-	time_t     tt;
+	MrpTime t2;
+	gint    tmp;
 
-	tt = t;
-	tm = gmtime (&tt);
+	mrp_time2_set_epoch (&t2, t);
 
-	if (tm == NULL) {
-		return FALSE;
+	if (!year) {
+		year = &tmp;
 	}
-	
-	if (year) {
-		*year = tm->tm_year + 1900;
+	if (!month) {
+		month = &tmp;
 	}
-	if (month) {
-		*month = tm->tm_mon + 1;
+	if (!day) {
+		day = &tmp;
 	}
-	if (day) {
-		*day = tm->tm_mday;
+	if (!hour) {
+		hour = &tmp;
 	}
-	if (hour) {
-		*hour = tm->tm_hour;
+	if (!minute) {
+		minute = &tmp;
 	}
-	if (minute) {
-		*minute = tm->tm_min;
+	if (!second) {
+		second = &tmp;
 	}
-	if (second) {
-		*second = tm->tm_sec;
-	}
+
+	mrp_time2_get_date (&t2, year, month, day);
+	mrp_time2_get_time (&t2, hour, minute, second);
 
 	return TRUE;
 }	    
@@ -139,26 +142,11 @@ mrp_time_decompose (mrptime  t,
 void
 mrp_time_debug_print (mrptime t)
 {
-	struct tm *tm;
-	time_t     tt;
+	MrpTime t2;
 
-	tt = t;
+	mrp_time2_set_epoch (&t2, t);
 
-	tm = gmtime (&tt);
-
-	if (tm == NULL) {
-		g_print ("<Invalid time>\n");
-		return;
-	}
-
-	g_print ("%04d-%02d-%02d %s %02d:%02d:%02d\n",
-		 tm->tm_year + 1900,
-		 tm->tm_mon + 1,
-		 tm->tm_mday,
-		 short_day_names[tm->tm_wday],
-		 tm->tm_hour,
-		 tm->tm_min,
-		 tm->tm_sec);
+	mrp_time2_debug_print (&t2);
 }
 
 /**
@@ -169,7 +157,7 @@ mrp_time_debug_print (mrptime t)
  * 
  * Return value: #mrptime value.
  **/
-mrptime
+static mrptime
 mrp_time_from_tm (struct tm *tm)
 {
 	gchar   *old_tz;
@@ -206,15 +194,12 @@ mrp_time_from_tm (struct tm *tm)
 mrptime
 mrp_time_current_time (void)
 {
-	mrptime    t;
-	time_t     tt;
+	time_t     t;
 	struct tm *tm;
 
-	tt = time (NULL);
-	tm = localtime (&tt);
-	t = mrp_time_from_tm (tm);
-
-	return t;
+	t = time (NULL);
+	tm = localtime (&t);
+	return mrp_time_from_tm (tm);
 }
 
 /**
@@ -226,7 +211,7 @@ mrp_time_current_time (void)
  * Return value: struct tm time, which is static data and should not be
  * modified or freed.
  **/
-struct tm *
+static struct tm *
 mrp_time_to_tm (mrptime t)
 {
 	time_t tt;
@@ -339,17 +324,11 @@ mrp_time_from_string (const gchar  *str,
 gchar *
 mrp_time_to_string (mrptime t)
 {
-	struct tm *tm;
+	MrpTime t2;
 
-	tm = mrp_time_to_tm (t);
-	
-	return g_strdup_printf ("%04d%02d%02dT%02d%02d%02dZ",
-				tm->tm_year + 1900,
-				tm->tm_mon + 1,
-				tm->tm_mday,
-				tm->tm_hour,
-				tm->tm_min,
-				tm->tm_sec);
+	mrp_time2_set_epoch (&t2, t);
+
+	return mrp_time2_to_string (&t2);
 }
 
 /**
@@ -363,14 +342,34 @@ mrp_time_to_string (mrptime t)
 mrptime
 mrp_time_align_day (mrptime t)
 {
-	struct tm *tm;
+	MrpTime t2;
 
-	tm = mrp_time_to_tm (t);
-	tm->tm_hour = 0;
-	tm->tm_min = 0;
-	tm->tm_sec = 0;
+	mrp_time2_set_epoch (&t2, t);
+	mrp_time2_align_prev (&t2, MRP_TIME_UNIT_DAY);
 
-	return mrp_time_from_tm (tm);
+	return mrp_time2_get_epoch (&t2);
+}
+
+mrptime
+mrp_time_align_prev (mrptime t, MrpTimeUnit unit)
+{
+	MrpTime t2;
+
+	mrp_time2_set_epoch (&t2, t);
+	mrp_time2_align_prev (&t2, unit);
+
+	return mrp_time2_get_epoch (&t2);
+}
+
+mrptime
+mrp_time_align_next (mrptime t, MrpTimeUnit unit)
+{
+	MrpTime t2;
+
+	mrp_time2_set_epoch (&t2, t);
+	mrp_time2_align_next (&t2, unit);
+
+	return mrp_time2_get_epoch (&t2);
 }
 
 /**
@@ -379,16 +378,22 @@ mrp_time_align_day (mrptime t)
  * 
  * Retrieves the day of week of the specified time.
  * 
- * Return value: The day of week, in the range 0 to6, where Sunday is 0.
+ * Return value: The day of week, in the range 0 to 6, where Sunday is 0.
  **/
 gint
 mrp_time_day_of_week (mrptime t)
 {
-	struct tm *tm;
+	MrpTime t2;
+	gint    weekday;
 
-	tm = mrp_time_to_tm (t);
+	mrp_time2_set_epoch (&t2, t);
+
+	weekday = g_date_get_weekday (&t2.date);
+	if (weekday == 7) {
+		weekday = 0;
+	}
 	
-	return tm->tm_wday;
+	return weekday;
 }
 
 /**
@@ -402,14 +407,11 @@ mrp_time_day_of_week (mrptime t)
 gint
 mrp_time_week_number (mrptime t)
 {
-	struct tm *tm;
-	gchar      str[5];
+	MrpTime t2;
 	
-	tm = mrp_time_to_tm (t);
-
-	strftime (str, sizeof (str), "%V", tm);
-
-	return atoi (str);
+	mrp_time2_set_epoch (&t2, t);
+	
+	return mrp_time2_get_week_number (&t2);
 }
 
 /**
@@ -436,217 +438,6 @@ mrp_param_spec_time (const gchar *name,
 				  flags);
 }
 
-
-/*
- * Pass in 4/16/97 and get 19970416 out.
- * Lets hope the ms dates are y2k compliant.
- */
-static char *
-time_convert_slashed_us_date_to_iso (const char *date)
-{
-	char  scratch[9]; /* yyyymmdd */
-	int   i;
-
-	i = 0; 
-
-	g_assert (date [i] != '\0');
-	g_assert (date [i + 1] != '\0');
-
-	/* Month */
-	if (date [i + 1] == '/') {
-		scratch [4] = '0';
-		scratch [5] = date [i];
-		i+=2;
-	} else {
-		g_assert (date [i + 2] == '/');
-		scratch [4] = date [i];
-		scratch [5] = date [i + 1];
-		i+=3;
-	}
-
-	g_assert (date [i] != '\0');
-	g_assert (date [i + 1] != '\0');
-
-	/* Day */
-	if (date [i + 1] == '/') {
-		scratch [6] = '0';
-		scratch [7] = date [i];
-		i+=2;
-	} else {
-		g_assert (date [i + 2] == '/');
-		scratch [6] = date [i];
-		scratch [7] = date [i + 1];
-		i+=3;
-	}
-
-	g_assert (date [i] != '\0');
-	g_assert (date [i + 1] != '\0');
-
-	/* Year */
-	if (date [i + 2] == '\0') {
-		/* And here we have the ugly [ like my butt ] Y2K hack
-		   God bless all those who live to see 2090 */
-		if (date [i] >= '9') {
-			scratch [0] = '1';
-			scratch [1] = '9';
-		} else {
-			scratch [0] = '2';
-			scratch [1] = '0';
-		}
-		scratch [2] = date [i];
-		scratch [3] = date [i + 1];
-	} else { /* assume 4 digit */
-		g_assert (date [i + 3] != '\0');
-		scratch [0] = date [i];
-		scratch [1] = date [i + 1];
-		scratch [2] = date [i + 2];
-		scratch [3] = date [i + 3];
-	}
-
-	scratch [8] = '\0';
-
-	return g_strdup (scratch);
-}
-
-static const gchar *ms_day_names[] = {
-	"Mon",
-	"Tue",
-	"Wed",
-	"Thu",
-	"Fri",
-	"Sat",
-	"Sun"
-};
-
-static const gchar *ms_month_names[] = {
-	"Jan",
-	"Feb",
-	"Mar",
-	"Apr",
-	"May",
-	"Jun",
-	"Jul",
-	"Aug",
-	"Sep",
-	"Oct",
-	"Nov",
-	"Dec"
-};
-
-/**
- * mrp_time_from_msdate_string:
- * @str: Date/time string formatted as in MS Project
- * 
- * Converts an MS date string to an #mrptime value.
- * 
- * Return value: Converted time value.
- **/
-mrptime
-mrp_time_from_msdate_string (const gchar *str)
-{
-	/* FIXME: horrible hacks lurk here */
-	mrptime  ret;	
-	gboolean contains_slash;
-	gboolean has_day_prefix;
-	gint     i;
-
-	has_day_prefix = FALSE;
-	for (i = 0; i < 7; i++) {
-		if (!strncmp (str, ms_day_names[i], 3)) {
-			has_day_prefix = TRUE;
-			break;
-		}
-	}
-       
-	contains_slash = (strstr (str, "/") != NULL);
-
-	if (contains_slash && has_day_prefix) {
-		gchar *date;
-
-		g_assert (str[3] == ' ');
-
-		date = time_convert_slashed_us_date_to_iso (&str[4]);
-
-		ret = mrp_time_from_string (date, NULL);
-
-		g_free (date);
-
-		return ret;
-	} else {
-		gboolean has_month_prefix = FALSE;
-		char scratch[9]; /* yyyymmdd */
-		const char *ptr = str;
-		
-		/* Try format of type "Nov 15 '97" */
-		for (i = 0; i < 12; i++) {
-			if (!strncmp (str, ms_month_names[i], 3)) {
-				has_month_prefix = TRUE;
-				i++; /* Vector starts from 0, month numbers don't */
-				break;
-			}
-		}
-
-		if (has_month_prefix) {
-			scratch[8] = '\0';
-			scratch[4] = i > 9 ? '1' : '0';
-			scratch[5] = (i % 10) + '0';
-
-			/* Take care of the month */
-			ptr += 3;
-			
-			while (ptr[0] == ' ') 
-				ptr++;
-
-			
-			/* Now for the day */
-			if ((ptr[0] >= '0' && ptr[0] <= '9')) {
-				if ((ptr[1] >= '0' && ptr[1] <= '9')) {
-					/* We have a two-number day */
-					scratch[6] = ptr[0];
-					scratch[7] = ptr[1];
-					ptr += 2;
-				} else {
-					scratch[6] = '0';
-					scratch[7] = ptr[0];
-					ptr += 1;
-				}
-			}
-
-			/* And now the year */
-			
-			while (ptr[0] == ' ') 
-				ptr++;
-
-			if (ptr[0] == '\'') {
-				ptr++;
-
-				/* Y2K hack */
-				if (ptr[0] >= '9') {
-					scratch [0] = '1';
-					scratch [1] = '9';
-				} else {
-					scratch [0] = '2';
-					scratch [1] = '0';
-				}
-			} else {
-				scratch[0] = ptr[0];
-				scratch[1] = ptr[1];
-				ptr += 2;
-			}
-
-			scratch[2] = ptr[0];
-			scratch[3] = ptr[1];
-			
-			ret = mrp_time_from_string (scratch, NULL);
-
-			return ret;
-		}
-	}
-
-	g_warning ("Unknown MS date format '%s'", str);
-	return MRP_TIME_INVALID;
-}
-
 /**
  * mrp_time_day_name:
  * @t: an #mrptime value
@@ -662,6 +453,8 @@ mrp_time_day_name (mrptime t)
 
 	g_return_val_if_fail (t > 0, NULL);
 
+	g_warning ("day name");
+	
 	dow = mrp_time_day_of_week (t);
 	
 	return short_day_names[dow];
@@ -678,13 +471,13 @@ mrp_time_day_name (mrptime t)
 const gchar *
 mrp_time_month_name (mrptime t)
 {
-	struct tm *tm;
+	MrpTime t2;
 
 	g_return_val_if_fail (t > 0, NULL);
 
-	tm = mrp_time_to_tm (t);
-	
-	return short_month_names[tm->tm_mon];
+	mrp_time2_set_epoch (&t2, t);
+
+	return short_month_names[g_date_get_month (&t2.date)-1];
 }
 
 /**
@@ -698,13 +491,13 @@ mrp_time_month_name (mrptime t)
 const gchar *
 mrp_time_month_name_initial (mrptime t)
 {
-	struct tm *tm;
+	MrpTime t2;
 
 	g_return_val_if_fail (t > 0, NULL);
 
-	tm = mrp_time_to_tm (t);
-	
-	return month_names_initial[tm->tm_mon];
+	mrp_time2_set_epoch (&t2, t);
+
+	return month_names_initial[g_date_get_month (&t2.date)-1];
 }
 
 /**
@@ -745,16 +538,32 @@ imrp_time_init (void)
 
 static gint
 time_format_helper (const gchar *format,
-		    struct tm   *tm,
+		    MrpTime     *t,
 		    gchar       *buffer)
 {
 	gint  len = 0;
 	gchar str[5];
-  
+	gint  year, month, day;
+	gint  hour, min, sec;
+	gint  weekday;
+	
 	if (!format) {
 		return 1;
 	}
-  
+
+	year = g_date_get_year (&t->date);
+	month = g_date_get_month (&t->date);
+	day = g_date_get_day (&t->date);
+
+	hour = t->hour;
+	min = t->min;
+	sec = t->sec;
+	
+	weekday = g_date_get_weekday (&t->date);
+	if (weekday == 7) {
+		weekday = 0;
+	}
+	
 	while (*format) {
 		register gchar c = *format++;
 		register gint tmp;
@@ -773,71 +582,63 @@ time_format_helper (const gchar *format,
 		case 'a':
 			/* The abbreviated weekday name (Mon, Tue, ...). */
 			if (buffer) {
-				strcpy (buffer + len, short_day_names[tm->tm_wday]);
+				strcpy (buffer + len, short_day_names[weekday]);
 			}
-			len += strlen (short_day_names[tm->tm_wday]);
+			len += strlen (short_day_names[weekday]);
 			break;
 		case 'A':
 			/* The full weekday name (Monday, Tuesday, ...). */
-			tmp = tm->tm_wday;
 			if (buffer) {
-				strcpy (buffer + len, day_names[tmp]);
+				strcpy (buffer + len, day_names[weekday]);
 			}
-			len += strlen (day_names[tmp]);
+			len += strlen (day_names[weekday]);
 			break;
 		case 'b':
 			/* The abbreviated month name (Jan, Feb, ...). */
-			tmp = tm->tm_mon;
 			if (buffer) {
-				strcpy (buffer + len, short_month_names[tmp]);
+				strcpy (buffer + len, short_month_names[month-1]);
 			}
-			len += strlen (short_month_names[tmp]);
+			len += strlen (short_month_names[month-1]);
 			break;
 		case 'B':
 			/* The full month name (January, February, ...). */
-			tmp = tm->tm_mon;
 			if (buffer) {
-				strcpy (buffer + len, month_names[tmp]);
+				strcpy (buffer + len, month_names[month-1]);
 			}
-			len += strlen (month_names[tmp]);
+			len += strlen (month_names[month-1]);
 			break;
 		case 'd':
 			/* The day of the month (01 - 31). */
 			if (buffer) {
-				tmp = tm->tm_mday;
-
-				buffer[len] = tmp / 10 + '0';
-				buffer[len+1] = tmp - 10 * (tmp / 10) + '0';
+				buffer[len] = day / 10 + '0';
+				buffer[len+1] = day - 10 * (day / 10) + '0';
 			}
 			len += 2;
 			break;
 		case 'e':
 			/* The day of the month (1 - 31). */
-			tmp = tm->tm_mday;
 			if (buffer) {
-				if (tmp > 9) {
-					buffer[len] = tmp / 10 + '0';
-					buffer[len+1] = tmp - 10 * (tmp / 10) + '0';
+				if (day > 9) {
+					buffer[len] = day / 10 + '0';
+					buffer[len+1] = day - 10 * (day / 10) + '0';
 				} else {
-					buffer[len] = tmp + '0';
+					buffer[len] = day + '0';
 				}
 			}
-			len += tmp > 9 ? 2 : 1;
+			len += day > 9 ? 2 : 1;
 			break;
 		case 'H':
 			/* The hour using a 24-hour clock (00 - 23). */
 			if (buffer) {
-				tmp = tm->tm_hour;
-				
-				buffer[len] = tmp / 10 + '0';
-				buffer[len+1] = tmp - 10 * (tmp / 10) + '0';
+				buffer[len] = hour / 10 + '0';
+				buffer[len+1] = hour - 10 * (hour / 10) + '0';
 			}
 			len += 2;			
 			break;
 		case 'I':
 			/* The hour using a 12-hour clock (01 - 12). */
 			if (buffer) {
-				tmp = tm->tm_hour % 12;
+				tmp = hour % 12;
 
 				if (tmp == 0) {
 					tmp = 12;
@@ -860,20 +661,19 @@ time_format_helper (const gchar *format,
 			break;
 		case 'k':
 			/* The hour using a 24-hour clock (0 to 23). */
-			tmp = tm->tm_hour;
 			if (buffer) {
-				if (tmp > 9) {
-					buffer[len] = tmp / 10 + '0';
-					buffer[len+1] = tmp - 10 * (tmp / 10) + '0';
+				if (hour > 9) {
+					buffer[len] = hour / 10 + '0';
+					buffer[len+1] = hour - 10 * (hour / 10) + '0';
 				} else {
-					buffer[len] = tmp + '0';
+					buffer[len] = hour + '0';
 				}
 			}
-			len += tmp > 9 ? 2 : 1;
+			len += hour > 9 ? 2 : 1;
 			break;
 		case 'l':
 			/* The hour using a 12-hour clock (1 - 12). */
-			tmp = tm->tm_hour % 12;
+			tmp = hour % 12;
 			if (tmp == 0) {
 				tmp = 12;
 			}
@@ -891,20 +691,16 @@ time_format_helper (const gchar *format,
 		case 'm':
 			/* The month number (01 to 12). */
 			if (buffer) {
-				tmp = tm->tm_mon + 1;
-
-				buffer[len] = tmp / 10 + '0';
-				buffer[len+1] = tmp - 10 * (tmp / 10) + '0';
+				buffer[len] = month / 10 + '0';
+				buffer[len+1] = month - 10 * (month / 10) + '0';
 			}
 			len += 2;	
 			break;
 		case 'M':
 			/* The minute (00 - 59). */
 			if (buffer) {
-				tmp = tm->tm_min;
-				
-				buffer[len] = tmp / 10 + '0';
-				buffer[len+1] = tmp - 10 * (tmp / 10) + '0';
+				buffer[len] = min / 10 + '0';
+				buffer[len+1] = min - 10 * (min / 10) + '0';
 			}
 			len += 2;	
 			break;
@@ -929,10 +725,8 @@ time_format_helper (const gchar *format,
 		case 'R':
 			/* The time in 24 hour notation (%H:%M). FIXME: use locale. */
 			if (buffer) {
-				tmp = tm->tm_hour;
-				
-				buffer[len] = tmp / 10 + '0';
-				buffer[len+1] = tmp - 10 * (tmp / 10) + '0';
+				buffer[len] = hour / 10 + '0';
+				buffer[len+1] = hour - 10 * (hour / 10) + '0';
 			}
 			len += 2;
 
@@ -942,20 +736,16 @@ time_format_helper (const gchar *format,
 			len++;
 			
 			if (buffer) {
-				tmp = tm->tm_min;
-				
-				buffer[len] = tmp / 10 + '0';
-				buffer[len+1] = tmp - 10 * (tmp / 10) + '0';
+				buffer[len] = min / 10 + '0';
+				buffer[len+1] = min - 10 * (min / 10) + '0';
 			}
 			len += 2;
 			break;
 		case 'S':
 			/* The second (00 - 61). */
 			if (buffer) {
-				tmp = tm->tm_sec;
-				
-				buffer[len] = tmp / 10 + '0';
-				buffer[len+1] = tmp - 10 * (tmp / 10) + '0';
+				buffer[len] = sec / 10 + '0';
+				buffer[len+1] = sec - 10 * (sec / 10) + '0';
 			}
 			len += 2;
 			break;
@@ -963,17 +753,13 @@ time_format_helper (const gchar *format,
 			/* The week number, (1 - 53), starting with the first
 			 * Sunday as the first day of week 1.
 			 */
-			strftime (str, sizeof (str), "%U", tm);
-			if (buffer) {
-				strcpy (buffer + len, str);
-			}
-			len += strlen (str);
+			g_warning ("%%W not implemented");
 			break;
 		case 'W':
 			/* The week number, (1 - 53), starting with the first
 			 *  Monday as the first day of week 1.
 			 */
-			strftime (str, sizeof (str), "%W", tm);
+			snprintf (str, sizeof (str), "%d", mrp_time2_get_week_number (t));
 			if (buffer) {
 				strcpy (buffer + len, str);
 			}
@@ -982,7 +768,7 @@ time_format_helper (const gchar *format,
 		case 'y':
 			/* The year without a century (range 00 to 99). */
 			if (buffer) {
-				tmp = tm->tm_year % 100;
+				tmp = year % 100;
 				buffer[len] = tmp / 10 + '0';
 				tmp -= 10 * (tmp / 10);
 				buffer[len+1] = tmp + '0';
@@ -992,8 +778,7 @@ time_format_helper (const gchar *format,
 		case 'Y':
 			/* The year including the century. */
 			if (buffer) {
-				tmp = tm->tm_year + 1900;
-				
+				tmp = year;
 				buffer[len] = tmp / 1000 + '0';
 				tmp -= 1000 * (tmp / 1000);
 				buffer[len+1] = tmp / 100 + '0';
@@ -1053,17 +838,15 @@ time_format_helper (const gchar *format,
 gchar *
 mrp_time_format (const gchar *format, mrptime t)
 {
-	struct tm *tm;
-	gint       len;
-	gchar     *buffer;
+	MrpTime  t2;
+	gint     len;
+	gchar   *buffer;
 
-	tm = mrp_time_to_tm (t);
+	mrp_time2_set_epoch (&t2, t);
 
-	len = time_format_helper (format, tm, NULL);
-
+	len = time_format_helper (format, &t2, NULL);
 	buffer = g_malloc (len);
-
-	time_format_helper (format, tm, buffer);
+	time_format_helper (format, &t2, buffer);
 
 	return buffer;
 }
@@ -1083,7 +866,7 @@ mrp_time_format_locale (mrptime t)
 	struct tm   *tm;
 	gchar        buffer[256];
 	const gchar *format = "%x"; /* Keep in variable get rid of warning. */
-	
+
 	tm = mrp_time_to_tm (t);
 
 	if (!strftime (buffer, sizeof (buffer), format, tm)) {
@@ -1093,5 +876,650 @@ mrp_time_format_locale (mrptime t)
 	return g_strdup (buffer);
 }
 
+
+/*
+ * New API, the long-term plan is to move completely to this.
+ */
+
+#define SECS_IN_MIN  60
+#define SECS_IN_HOUR (60*60)
+#define SECS_IN_DAY  (60*60*24)
+
+MrpTime *
+mrp_time2_new (void)
+{
+	MrpTime *t;
+
+	t = g_new0 (MrpTime, 1);
+
+	g_date_clear (&t->date, 1);
+	
+	return t;
+}
+
+void
+mrp_time2_free (MrpTime *t)
+{
+	g_free (t);
+}
+
+void
+mrp_time2_set_date (MrpTime *t,
+		    gint     year,
+		    gint     month,
+		    gint     day)
+{
+	g_return_if_fail (t != NULL);
+	g_return_if_fail (year >= 1 && year <= 9999);
+	g_return_if_fail (month >= 1 && month <= 12);
+	g_return_if_fail (day >= 1 && day < 31);
+	
+	g_date_set_dmy (&t->date, day, month, year);
+}
+
+void
+mrp_time2_set_time (MrpTime *t,
+		    gint     hour,
+		    gint     min,
+		    gint     sec)
+{
+	g_return_if_fail (t != NULL);
+	g_return_if_fail (hour >= 0 && hour < 24);
+	g_return_if_fail (min >= 0 && min < 60);
+	g_return_if_fail (sec >= 0 && sec < 60);
+	
+	t->hour = hour;
+	t->min = min;
+	t->sec = sec;
+}
+
+void
+mrp_time2_get_date (MrpTime *t,
+		    gint    *year,
+		    gint    *month,
+		    gint    *day)
+{
+	g_return_if_fail (t != NULL);
+	g_return_if_fail (year != NULL);
+	g_return_if_fail (month != NULL);
+	g_return_if_fail (day != NULL);
+	
+	*year = g_date_get_year (&t->date);
+	*month = g_date_get_month (&t->date);
+	*day = g_date_get_day (&t->date);
+}
+
+void
+mrp_time2_get_time (MrpTime *t,
+		    gint    *hour,
+		    gint    *min,
+		    gint    *sec)
+{
+	g_return_if_fail (t != NULL);
+	g_return_if_fail (hour != NULL);
+	g_return_if_fail (min != NULL);
+	g_return_if_fail (sec != NULL);
+	
+	*hour = t->hour;
+	*min = t->min;
+	*sec = t->sec;
+}
+
+void
+mrp_time2_add_years (MrpTime *t, gint years)
+{
+	g_return_if_fail (t != NULL);
+	g_return_if_fail (years >= 0);
+
+	g_date_add_years (&t->date, years);
+}
+
+void
+mrp_time2_add_months (MrpTime *t, gint months)
+{
+	g_return_if_fail (t != NULL);
+	g_return_if_fail (months >= 0);
+
+	g_date_add_months (&t->date, months);
+}
+
+void
+mrp_time2_add_days (MrpTime *t, gint days)
+{
+	g_return_if_fail (t != NULL);
+	g_return_if_fail (days >= 0);
+
+	g_date_add_days (&t->date, days);
+}
+
+void
+mrp_time2_add_seconds (MrpTime *t, gint64 secs)
+{
+	gint days;
+	
+	g_return_if_fail (t != NULL);
+	g_return_if_fail (secs >= 0);
+
+	secs += t->sec + SECS_IN_MIN * t->min + SECS_IN_HOUR * t->hour;
+	
+	/* Add whole days first. */
+	days = secs / SECS_IN_DAY;
+	secs = secs % SECS_IN_DAY;
+
+	g_date_add_days (&t->date, days);
+
+	/* Handle hours/minutes/seconds. */
+	t->hour = secs / SECS_IN_HOUR;
+	secs = secs % SECS_IN_HOUR;
+
+	t->min = secs / SECS_IN_MIN;
+	t->sec = secs % SECS_IN_MIN;
+}
+
+void
+mrp_time2_add_minutes (MrpTime *t, gint64 mins)
+{
+	g_return_if_fail (t != NULL);
+	g_return_if_fail (mins >= 0);
+
+	mrp_time2_add_seconds (t, mins * SECS_IN_MIN);
+}
+
+void
+mrp_time2_add_hours (MrpTime *t, gint64 hours)
+{
+	g_return_if_fail (t != NULL);
+	g_return_if_fail (hours >= 0);
+
+	mrp_time2_add_seconds (t, hours * SECS_IN_HOUR);
+}
+
+void
+mrp_time2_subtract_seconds (MrpTime *t, gint64 secs)
+{
+	gint days;
+	
+	g_return_if_fail (t != NULL);
+	g_return_if_fail (secs >= 0);
+
+	/* Remove whole days first. */
+	days = secs / SECS_IN_DAY;
+	secs = secs % SECS_IN_DAY;
+	g_date_subtract_days (&t->date, days);
+
+	secs = t->sec + SECS_IN_MIN * t->min + SECS_IN_HOUR * t->hour - secs;
+
+	t->hour = secs / SECS_IN_HOUR;
+	secs = secs % SECS_IN_HOUR;
+
+	t->min = secs / SECS_IN_MIN;
+	t->sec = secs % SECS_IN_MIN;
+}
+
+void
+mrp_time2_subtract_minutes (MrpTime *t, gint64 mins)
+{
+	g_return_if_fail (t != NULL);
+	g_return_if_fail (mins >= 0);
+
+	mrp_time2_subtract_seconds (t, mins * SECS_IN_MIN);
+}
+
+void
+mrp_time2_subtract_hours (MrpTime *t, gint64 hours)
+{
+	g_return_if_fail (t != NULL);
+	g_return_if_fail (hours >= 0);
+
+	mrp_time2_subtract_seconds (t, hours * SECS_IN_HOUR);
+}
+
+void
+mrp_time2_subtract_days (MrpTime *t, gint days)
+{
+	g_return_if_fail (t != NULL);
+	g_return_if_fail (days >= 0);
+
+	g_date_subtract_days (&t->date, days);
+}
+
+void
+mrp_time2_subtract_months (MrpTime *t, gint months)
+{
+	g_return_if_fail (t != NULL);
+	g_return_if_fail (months >= 0);
+
+	g_date_subtract_months (&t->date, months);
+}
+
+void
+mrp_time2_subtract_years (MrpTime *t, gint years)
+{
+	g_return_if_fail (t != NULL);
+	g_return_if_fail (years >= 0);
+
+	g_date_subtract_years (&t->date, years);
+}
+
+void
+mrp_time2_debug_print (MrpTime *t)
+{
+	gchar str[128];
+
+	g_date_strftime (str, 128, "%04Y-%02m-%02d",
+			 &t->date);
+
+	g_print ("%s %02d:%02d:%02d\n", str, 
+		 t->hour,
+		 t->min,
+		 t->sec);
+}
+
+gboolean
+mrp_time2_set_from_string (MrpTime      *t,
+			   const gchar  *str)
+{
+	gint     len;
+	gboolean is_utc;
+	gboolean is_date;
+	gint     year;
+	gint     month;
+	gint     day;
+	gint     hour = 0;
+	gint     minute = 0;
+	gint     second = 0;
+
+	len = strlen (str);
+
+	if (len == 15) { /* floating time */
+		is_utc = FALSE;
+		is_date = FALSE;
+	} else if (len == 16) { /* UTC time, ends in 'Z' */
+		is_utc = TRUE;
+		is_date = FALSE;
+		
+		if (str[15] != 'Z') {
+			return FALSE;
+		}
+	}
+	else if (len == 8) { /* A date. */
+		is_utc = TRUE;
+		is_date = TRUE;
+	} else {
+		return FALSE;
+	}
+	
+	if (is_date) {
+		if (sscanf (str, "%04d%02d%02d", &year, &month, &day) != 3) {
+			return FALSE;
+		}
+	} else {
+		gchar tsep;
+		
+		if (sscanf (str,"%04d%02d%02d%c%02d%02d%02d",
+			    &year, &month, &day,
+			    &tsep,
+			    &hour, &minute, &second) != 7) {
+			return 0;
+		}
+		    
+		if (tsep != 'T') {
+			return FALSE;
+		}
+		
+	}
+
+	mrp_time2_set_date (t, year, month, day);
+	if (!is_date) {
+		mrp_time2_set_time (t, hour, minute, second);
+	}
+	
+	return TRUE;
+}
+
+gchar *
+mrp_time2_to_string (MrpTime *t)
+{
+	gint year, month, day;
+
+	day = g_date_get_day (&t->date);
+	month = g_date_get_month (&t->date);
+	year = g_date_get_year (&t->date);
+	
+	return g_strdup_printf ("%04d%02d%02dT%02d%02d%02dZ",
+				year, month, day,
+				t->hour, t->min, t->sec);
+}
+
+void
+mrp_time2_set_epoch (MrpTime *t, time_t epoch)
+{
+	memset (t, 0, sizeof (MrpTime));
+
+	mrp_time2_set_date (t, 1970, 1, 1);
+	mrp_time2_add_seconds (t, epoch);
+}
+
+time_t
+mrp_time2_get_epoch (MrpTime *t)
+{
+	GDate  date;
+	time_t epoch;
+
+	g_date_set_dmy (&date, 1, 1, 1970);
+	
+	epoch = SECS_IN_DAY * g_date_days_between (&date, &t->date);
+
+	epoch += t->hour * SECS_IN_HOUR + t->min * SECS_IN_MIN + t->sec;
+
+	return epoch;
+}
+
+const gchar *
+mrp_time2_get_day_name (MrpTime *t)
+{
+	GDateWeekday day;
+	
+	g_return_val_if_fail (t != NULL, NULL);
+
+	day = g_date_get_weekday (&t->date);
+
+	/* Weekday is mon-sun 1-7, while the array is sun-sat 0-6. */
+	if (day == 7) {
+		day = 0;
+	}	
+	
+	return short_day_names[day];
+}
+
+const gchar *
+mrp_time2_get_month_name (MrpTime *t)
+{
+	g_return_val_if_fail (t != NULL, NULL);
+
+	return short_month_names[g_date_get_month (&t->date)-1];
+}
+
+const gchar *
+mrp_time2_get_month_initial (MrpTime *t)
+{
+	g_return_val_if_fail (t != NULL, NULL);
+
+	return month_names_initial[g_date_get_month (&t->date)-1];
+}
+
+/* From GLlib 2.6. */
+static guint
+stolen_g_date_get_iso8601_week_of_year (const GDate *d)
+{
+  guint j, d4, L, d1, w;
+
+  /* Formula taken from the Calendar FAQ; the formula was for the
+   * Julian Period which starts on 1 January 4713 BC, so we add
+   * 1,721,425 to the number of days before doing the formula. 
+   */
+  j  = g_date_get_julian (d) + 1721425;
+  d4 = (j + 31741 - (j % 7)) % 146097 % 36524 % 1461;
+  L  = d4 / 1460;
+  d1 = ((d4 - L) % 365) + L;
+  w  = d1 / 7 + 1;
+
+  return w;
+}
+
+gint
+mrp_time2_get_week_number (MrpTime *t)
+{
+	g_return_val_if_fail (t != NULL, 0);
+
+	return stolen_g_date_get_iso8601_week_of_year (&t->date);
+}
+
+void
+mrp_time2_align_prev (MrpTime *t, MrpTimeUnit unit)
+{
+	GDateWeekday weekday;
+	GDateMonth   month;
+	
+	g_return_if_fail (t != NULL);
+	
+	switch (unit) {
+	case MRP_TIME_UNIT_HOUR:
+		t->min = 0;
+		t->sec = 0;
+		break;
+
+	case MRP_TIME_UNIT_TWO_HOURS:
+		t->min = 0;
+		t->sec = 0;
+		if (t->hour >= 2) {
+			mrp_time2_subtract_hours (t, 2 - t->hour % 2);
+		} else {
+			t->hour = 0;
+		}
+		break;
+		
+	case MRP_TIME_UNIT_HALFDAY:
+		if (t->hour < 12) {
+			t->hour = 0;
+		} else {
+			t->hour = 12;
+		}
+		t->min = 0;
+		t->sec = 0;
+		break;
+		
+	case MRP_TIME_UNIT_DAY:
+		t->hour = 0;
+		t->min = 0;
+		t->sec = 0;
+		break;
+
+	case MRP_TIME_UNIT_WEEK:
+		/* FIXME: We currently hardcode monday as week start .*/
+		weekday = g_date_get_weekday (&t->date);
+		g_date_subtract_days (&t->date, weekday - 1);
+		t->hour = 0;
+		t->min = 0;
+		t->sec = 0;
+		break;
+
+	case MRP_TIME_UNIT_MONTH:
+		g_date_set_day (&t->date, 1);
+		t->hour = 0;
+		t->min = 0;
+		t->sec = 0;
+		break;
+
+	case MRP_TIME_UNIT_QUARTER:
+		g_date_set_day (&t->date, 1);
+		t->hour = 0;
+		t->min = 0;
+		t->sec = 0;
+		month = g_date_get_month (&t->date);
+		if (month > 1 && month <= 3) {
+			g_date_set_month (&t->date, 1);
+		}
+		else if (month > 4 && month <= 6) {
+			g_date_set_month (&t->date, 4);
+		}
+		else if (month > 7 && month <= 9) {
+			g_date_set_month (&t->date, 7);
+		}
+		else if (month > 10 && month <= 12) {
+			g_date_set_month (&t->date, 10);
+		}
+		break;
+		
+	case MRP_TIME_UNIT_HALFYEAR:
+		g_date_set_day (&t->date, 1);
+		t->hour = 0;
+		t->min = 0;
+		t->sec = 0;
+		month = g_date_get_month (&t->date);
+		if (month > 1 && month <= 6) {
+			g_date_set_month (&t->date, 1);
+		} else if (month > 7 && month <= 12) {
+			g_date_set_month (&t->date, 7);
+		}
+		break;
+
+	case MRP_TIME_UNIT_YEAR:
+		g_date_set_month (&t->date, 1);
+		g_date_set_day (&t->date, 1);
+		t->hour = 0;
+		t->min = 0;
+		t->sec = 0;
+		break;
+
+	case MRP_TIME_UNIT_NONE:
+		g_assert_not_reached ();
+	}
+}
+
+void
+mrp_time2_align_next (MrpTime *t, MrpTimeUnit unit)
+{
+	GDateWeekday weekday;
+	GDateMonth   month;
+	
+	g_return_if_fail (t != NULL);
+
+	switch (unit) {
+	case MRP_TIME_UNIT_HOUR:
+		t->min = 0;
+		t->sec = 0;
+		mrp_time2_add_hours (t, 1);
+		break;
+
+	case MRP_TIME_UNIT_TWO_HOURS:
+		t->min = 0;
+		t->sec = 0;
+		mrp_time2_add_hours (t, 2 - t->hour % 2);
+		break;
+
+	case MRP_TIME_UNIT_HALFDAY:
+		t->min = 0;
+		t->sec = 0;
+		if (t->hour < 12) {
+			t->hour = 12;
+		} else {
+			t->hour = 0;
+			mrp_time2_add_days (t, 1);
+		}
+		break;
+		
+	case MRP_TIME_UNIT_DAY:
+		t->hour = 0;
+		t->min = 0;
+		t->sec = 0;
+		mrp_time2_add_days (t, 1);
+		break;
+		
+	case MRP_TIME_UNIT_WEEK:
+		/* FIXME: We currently hardcode monday as week start .*/
+		weekday = g_date_get_weekday (&t->date);
+		t->hour = 0;
+		t->min = 0;
+		t->sec = 0;
+		mrp_time2_add_days (t, 8 - weekday);
+		break;
+
+	case MRP_TIME_UNIT_MONTH:
+		t->hour = 0;
+		t->min = 0;
+		t->sec = 0;
+		g_date_set_day (&t->date, 1);
+		g_date_add_months (&t->date, 1);
+		break;
+
+	case MRP_TIME_UNIT_QUARTER:
+		t->hour = 0;
+		t->min = 0;
+		t->sec = 0;
+		g_date_set_day (&t->date, 1);
+		month = g_date_get_month (&t->date);
+		if (month > 1 && month <= 3) {
+			g_date_set_month (&t->date, 4);
+		}
+		else if (month > 4 && month <= 6) {
+			g_date_set_month (&t->date, 7);
+		}
+		else if (month > 7 && month <= 9) {
+			g_date_set_month (&t->date, 10);
+		}
+		else if (month > 10 && month <= 12) {
+			g_date_set_month (&t->date, 1);
+			g_date_add_years (&t->date, 1);
+		}
+		break;
+		
+	case MRP_TIME_UNIT_HALFYEAR:
+		g_date_set_day (&t->date, 1);
+		t->hour = 0;
+		t->min = 0;
+		t->sec = 0;
+		month = g_date_get_month (&t->date);
+		if (month > 1 && month <= 6) {
+			g_date_set_month (&t->date, 7);
+		} else if (month > 7 && month <= 12) {
+			g_date_set_month (&t->date, 1);
+			g_date_add_years (&t->date, 1);
+		}
+		break;
+		
+	case MRP_TIME_UNIT_YEAR:
+		t->hour = 0;
+		t->min = 0;
+		t->sec = 0;
+		g_date_set_day (&t->date, 1);
+		g_date_set_month (&t->date, 1);
+		g_date_add_years (&t->date, 1);
+		break;
+
+	case MRP_TIME_UNIT_NONE:
+	default:
+		g_assert_not_reached ();
+	}
+}
+
+void
+mrp_time2_copy (MrpTime *dst, MrpTime *src)
+{
+	g_return_if_fail (dst != NULL);
+	g_return_if_fail (src != NULL);
+
+	memcpy (src, dst, sizeof (MrpTime));
+}
+
+void
+mrp_time2_clear (MrpTime *t)
+{
+	memset (t, 0, sizeof (MrpTime));
+}
+
+gint
+mrp_time2_compare (MrpTime *t1, MrpTime *t2)
+{
+	gint ret;
+	gint s1, s2;
+
+	ret = g_date_compare (&t1->date, &t2->date);
+	if (ret != 0) {
+		return ret;
+	}
+
+	s1 = t1->hour * SECS_IN_HOUR + t1->min * SECS_IN_MIN + t1->sec;
+	s2 = t2->hour * SECS_IN_HOUR + t2->min * SECS_IN_MIN + t2->sec;
+
+	if (s1 < s2) {
+		return -1;
+	}
+	else if (s1 > s2) {
+		return 1;
+	}
+
+	return 0;
+}
 
 

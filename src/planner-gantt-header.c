@@ -40,10 +40,10 @@ struct _PlannerGanttHeaderPriv {
 
 	PangoLayout        *layout;
 
-	PlannerScaleUnit    major_unit;
+	MrpTimeUnit    major_unit;
 	PlannerScaleFormat  major_format;
 
-	PlannerScaleUnit    minor_unit;
+	MrpTimeUnit    minor_unit;
 	PlannerScaleFormat  minor_format;
 	
 	gdouble             hscale;
@@ -255,8 +255,8 @@ gantt_header_init (PlannerGanttHeader *header)
 	priv->height = -1;
 	priv->width = -1;
 
-	priv->major_unit = PLANNER_SCALE_UNIT_MONTH;
-	priv->minor_unit = PLANNER_SCALE_UNIT_WEEK;
+	priv->major_unit = MRP_TIME_UNIT_MONTH;
+	priv->minor_unit = MRP_TIME_UNIT_WEEK;
 
 	priv->layout = gtk_widget_create_pango_layout (GTK_WIDGET (header),
 						       NULL);
@@ -561,11 +561,11 @@ gantt_header_expose_event (GtkWidget      *widget,
 	/* Get the widths of major/minor ticks so that we know how wide to make
 	 * the clip region.
 	 */
-	major_width = hscale * (planner_scale_time_next (t0, priv->major_unit) -
-				planner_scale_time_prev (t0, priv->major_unit));
+	major_width = hscale * (mrp_time_align_next (t0, priv->major_unit) -
+				mrp_time_align_prev (t0, priv->major_unit));
 
-	minor_width = hscale * (planner_scale_time_next (t0, priv->minor_unit) -
-				planner_scale_time_prev (t0, priv->minor_unit));
+	minor_width = hscale * (mrp_time_align_next (t0, priv->minor_unit) -
+				mrp_time_align_prev (t0, priv->minor_unit));
 
 	gc = gdk_gc_new (widget->window);
 	gdk_gc_copy (gc, widget->style->text_gc[GTK_STATE_NORMAL]);
@@ -574,12 +574,12 @@ gantt_header_expose_event (GtkWidget      *widget,
 	rect.height = height;
 
 	/* Draw the major scale. */
-	if (major_width < 2 || priv->major_unit == PLANNER_SCALE_UNIT_NONE) {
+	if (major_width < 2 || priv->major_unit == MRP_TIME_UNIT_NONE) {
 		/* Unless it's too thin to make sense. */
 		goto minor_ticks;
 	}
 	
-	t = planner_scale_time_prev (t0, priv->major_unit);
+	t = mrp_time_align_prev (t0, priv->major_unit);
 	
 	while (t <= t1) {
 		x = floor (t * hscale - priv->x1 + 0.5);
@@ -607,18 +607,18 @@ gantt_header_expose_event (GtkWidget      *widget,
 				 2,
 				 priv->layout);
 		
-		t = planner_scale_time_next (t, priv->major_unit);
+		t = mrp_time_align_next (t, priv->major_unit);
 	}
 
  minor_ticks:
 
 	/* Draw the minor scale. */
-	if (minor_width < 2 || priv->major_unit == PLANNER_SCALE_UNIT_NONE) {
+	if (minor_width < 2 || priv->major_unit == MRP_TIME_UNIT_NONE) {
 		/* Unless it's too thin to make sense. */
 		goto done;
 	}
 	
-	t = planner_scale_time_prev (t0, priv->minor_unit);
+	t = mrp_time_align_prev (t0, priv->minor_unit);
 
 	while (t <= t1) {
 		x = floor (t * hscale - priv->x1 + 0.5);
@@ -646,7 +646,7 @@ gantt_header_expose_event (GtkWidget      *widget,
 				 height / 2 + 2,
 				 priv->layout);
 
-		t = planner_scale_time_next (t, priv->minor_unit);
+		t = mrp_time_align_next (t, priv->minor_unit);
 	}
 
  done:
@@ -662,19 +662,13 @@ gantt_header_motion_notify_event (GtkWidget	 *widget,
 	PlannerGanttHeader     *header;
 	PlannerGanttHeaderPriv *priv;
 	mrptime                 t;
-	struct tm              *tm;
 	char                   *str;
 			
 	header = PLANNER_GANTT_HEADER (widget);
 	priv = header->priv;
 
 	t = floor ((priv->x1 + event->x) / priv->hscale + 0.5);
-	tm = mrp_time_to_tm (t);
-
-	str = g_strdup_printf ("%d %s %d",
-			       tm->tm_mday,
-			       mrp_time_month_name (t),
-			       tm->tm_year + 1900);
+	str = mrp_time_format (_("%e %b %Y"), t);
 
 	if (!priv->date_hint || strcmp (str, priv->date_hint) != 0) {
 		g_signal_emit (widget, signals[DATE_HINT_CHANGED], 0, str);

@@ -1,5 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
+ * Copyright (C) 2005 Imendio AB
  * Copyright (C) 2002 CodeFactory AB
  * Copyright (C) 2002 Richard Hult <richard@imendio.com>
  * Copyright (C) 2002 Mikael Hallendal <micke@imendio.com>
@@ -25,30 +26,19 @@
 
 #include <libplanner/mrp-time.h>
 
-/* Hardcode Monday (1, Sunday is 0) for now. */
-#define START_OF_WEEK 1
+#if 0
 
-typedef enum {
-	PLANNER_SCALE_UNIT_NONE,
-	
-	PLANNER_SCALE_UNIT_YEAR,     /* Short: N/A     Medium: 2002      Long: N/A         */
+YEAR,     /* Short: N/A     Medium: 2002      Long: N/A         */
+HALFYEAR, /* Short: N/A     Medium: H1        Long: 2002, H1    */
+QUARTER,  /* Short: Q1      Medium: N/A       Long: 2002, Qtr 1 */
+MONTH,    /* Short: J       Medium: Jan       Long: Jan '02     */
+WEEK,     /* Short: Wk 19   Medium: Week 19   Long: Week 19 '02 */
+DAY,      /* Short: 1       Medium: Mon 1     Long: Mon, Apr 1  */
+HALFDAY,  /* Short: 1       Medium: 1         Long: 1           */
+TWO_HOURS,/* Short: 1       Medium: 1         Long: 1           */
+HOUR      /* Short: 1       Medium: 1         Long: 1           */
 
-	PLANNER_SCALE_UNIT_HALFYEAR, /* Short: N/A     Medium: H1        Long: 2002, H1    */
-
-	PLANNER_SCALE_UNIT_QUARTER,  /* Short: Q1      Medium: N/A       Long: 2002, Qtr 1 */
-
-	PLANNER_SCALE_UNIT_MONTH,    /* Short: J       Medium: Jan       Long: Jan '02     */
-
-	PLANNER_SCALE_UNIT_WEEK,     /* Short: Wk 19   Medium: Week 19   Long: Week 19 '02 */
-
-	PLANNER_SCALE_UNIT_DAY,      /* Short: 1       Medium: Mon 1     Long: Mon, Apr 1  */
-
-	PLANNER_SCALE_UNIT_HALFDAY,  /* Short: 1       Medium: 1         Long: 1           */
-
-	PLANNER_SCALE_UNIT_TWO_HOURS,/* Short: 1       Medium: 1         Long: 1           */
-
-	PLANNER_SCALE_UNIT_HOUR      /* Short: 1       Medium: 1         Long: 1           */
-} PlannerScaleUnit;
+#endif
 
 typedef enum {
 	PLANNER_SCALE_FORMAT_SHORT,
@@ -57,24 +47,20 @@ typedef enum {
 } PlannerScaleFormat;
 
 typedef struct {
-	PlannerScaleUnit   major_unit;
+	MrpTimeUnit        major_unit;
 	PlannerScaleFormat major_format;
 	
-	PlannerScaleUnit   minor_unit;
+	MrpTimeUnit        minor_unit;
 	PlannerScaleFormat minor_format;
 
 	/* Nonworking intervals shorter than this is not drawn (seconds). */
-	gint          nonworking_limit;
+	gint               nonworking_limit;
 } PlannerScaleConf;
 
 extern const PlannerScaleConf *planner_scale_conf;
 
-mrptime planner_scale_time_prev   (mrptime            t,
-				   PlannerScaleUnit   unit);
-mrptime planner_scale_time_next   (mrptime            t,
-				   PlannerScaleUnit   unit);
 gchar * planner_scale_format_time (mrptime            t,
-				   PlannerScaleUnit   unit,
+				   MrpTimeUnit   unit,
 				   PlannerScaleFormat format);
 gint    planner_scale_clamp_zoom  (gdouble            zoom);
 

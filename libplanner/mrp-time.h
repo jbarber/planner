@@ -35,9 +35,20 @@ typedef long mrptime;
 #define MRP_TIME_MIN 0
 #define MRP_TIME_MAX 2147483647
 
+typedef enum {
+	MRP_TIME_UNIT_NONE,
+	MRP_TIME_UNIT_YEAR,
+	MRP_TIME_UNIT_HALFYEAR,
+	MRP_TIME_UNIT_QUARTER,
+	MRP_TIME_UNIT_MONTH,
+	MRP_TIME_UNIT_WEEK,
+	MRP_TIME_UNIT_DAY,
+	MRP_TIME_UNIT_HALFDAY,
+	MRP_TIME_UNIT_TWO_HOURS,
+	MRP_TIME_UNIT_HOUR
+} MrpTimeUnit;
+
 mrptime      mrp_time_current_time       (void);
-struct tm *  mrp_time_to_tm              (mrptime       t);
-mrptime      mrp_time_from_tm            (struct tm    *tm);
 mrptime      mrp_time_compose            (gint          year,
 					  gint          month,
 					  gint          day,
@@ -56,6 +67,10 @@ mrptime      mrp_time_from_string        (const gchar  *str,
 gchar *      mrp_time_to_string          (mrptime       t);
 mrptime      mrp_time_from_msdate_string (const gchar  *str);
 mrptime      mrp_time_align_day          (mrptime       t);
+mrptime      mrp_time_align_prev         (mrptime       t,
+					  MrpTimeUnit   unit);
+mrptime      mrp_time_align_next         (mrptime       t,
+					  MrpTimeUnit   unit);
 gint         mrp_time_day_of_week        (mrptime       t);
 gint         mrp_time_week_number        (mrptime       t);
 const gchar *mrp_time_day_name           (mrptime       t);
@@ -69,5 +84,76 @@ GParamSpec * mrp_param_spec_time         (const gchar  *name,
 					  const gchar  *nick,
 					  const gchar  *blurb,
 					  GParamFlags   flags);
+
+
+/*
+ * New API here.
+ */
+
+typedef struct _MrpTime MrpTime;
+
+
+MrpTime *    mrp_time2_new               (void);
+void         mrp_time2_free              (MrpTime     *t);
+void         mrp_time2_set_date          (MrpTime     *t,
+					  gint         year,
+					  gint         month,
+					  gint         day);
+void         mrp_time2_set_time          (MrpTime     *t,
+					  gint         hour,
+					  gint         min,
+					  gint         sec);
+void         mrp_time2_get_date          (MrpTime     *t,
+					  gint        *year,
+					  gint        *month,
+					  gint        *day);
+void         mrp_time2_get_time          (MrpTime     *t,
+					  gint        *hour,
+					  gint        *min,
+					  gint        *sec);
+void         mrp_time2_add_years         (MrpTime     *t,
+					  gint         years);
+void         mrp_time2_add_months        (MrpTime     *t,
+					  gint         months);
+void         mrp_time2_add_days          (MrpTime     *t,
+					  gint         days);
+void         mrp_time2_add_seconds       (MrpTime     *t,
+					  gint64       secs);
+void         mrp_time2_add_minutes       (MrpTime     *t,
+					  gint64       mins);
+void         mrp_time2_add_hours         (MrpTime     *t,
+					  gint64       hours);
+void         mrp_time2_subtract_years    (MrpTime     *t,
+					  gint         years);
+void         mrp_time2_subtract_months   (MrpTime     *t,
+					  gint         months);
+void         mrp_time2_subtract_days     (MrpTime     *t,
+					  gint         days);
+void         mrp_time2_subtract_hours    (MrpTime     *t,
+					  gint64       hours);
+void         mrp_time2_subtract_minutes  (MrpTime     *t,
+					  gint64       mins);
+void         mrp_time2_subtract_seconds  (MrpTime     *t,
+					  gint64       secs);
+void         mrp_time2_debug_print       (MrpTime     *t);
+gboolean     mrp_time2_set_from_string   (MrpTime     *t,
+					  const gchar *str);
+gchar *      mrp_time2_to_string         (MrpTime     *t);
+void         mrp_time2_set_epoch         (MrpTime     *t,
+					  time_t       epoch);
+time_t       mrp_time2_get_epoch         (MrpTime     *t);
+const gchar *mrp_time2_get_day_name      (MrpTime     *t);
+const gchar *mrp_time2_get_month_name    (MrpTime     *t);
+const gchar *mrp_time2_get_month_initial (MrpTime     *t);
+gint         mrp_time2_get_week_number   (MrpTime     *t);
+void         mrp_time2_align_prev        (MrpTime     *t,
+					  MrpTimeUnit  unit);
+void         mrp_time2_align_next        (MrpTime     *t,
+					  MrpTimeUnit  unit);
+void         mrp_time2_copy              (MrpTime     *dst,
+					  MrpTime     *src);
+void         mrp_time2_clear             (MrpTime     *t);
+gint         mrp_time2_compare           (MrpTime     *t1,
+					  MrpTime     *t2);
 
 #endif /* __MRP_TIME_H__ */

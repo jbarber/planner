@@ -63,10 +63,10 @@ struct _PlannerGanttPrintData {
 
 	gint               level;
 	
-	PlannerScaleUnit   major_unit;
+	MrpTimeUnit        major_unit;
 	PlannerScaleFormat major_format;
 	
-	PlannerScaleUnit   minor_unit;
+	MrpTimeUnit        minor_unit;
 	PlannerScaleFormat minor_format;
 	
 	gdouble            header_height;
@@ -310,8 +310,8 @@ print_time_header (PlannerGanttPrintData *data,
 	x = x1;
 	y = data->row_height;
 	
-	t = planner_scale_time_prev (start, data->major_unit);
-	width = (planner_scale_time_next (t, data->major_unit) - t) / data->f - data->job->x_pad / 2;
+	t = mrp_time_align_prev (start, data->major_unit);
+	width = (mrp_time_align_next (t, data->major_unit) - t) / data->f - data->job->x_pad / 2;
 	
 	while (t <= finish) {
 		x = x1 + (t - start) / data->f;
@@ -334,15 +334,15 @@ print_time_header (PlannerGanttPrintData *data,
 			g_free (str);
 		}
 		
-		t = planner_scale_time_next (t, data->major_unit);
+		t = mrp_time_align_next (t, data->major_unit);
 	}
 
 	/* Minor scale. */
 	x = x1;	
 	y = 2 * data->row_height;
 
-	t = planner_scale_time_prev (start, data->minor_unit);
-	width = (planner_scale_time_next (t, data->minor_unit) - t) / data->f - data->job->x_pad / 2;
+	t = mrp_time_align_prev (start, data->minor_unit);
+	width = (mrp_time_align_next (t, data->minor_unit) - t) / data->f - data->job->x_pad / 2;
 
 	while (t <= finish) {
 		x = x1 + (t - start) / data->f;
@@ -365,7 +365,7 @@ print_time_header (PlannerGanttPrintData *data,
 			g_free (str);
 		}
 		
-		t = planner_scale_time_next (t, data->minor_unit);
+		t = mrp_time_align_next (t, data->minor_unit);
 	}
 }
 

@@ -1,3 +1,22 @@
+2005-03-15  Richard Hult  <richard@imendio.com>
+
+	Fix bug #157254.
+	
+	* libplanner/mrp-time.c: Add new (temporary) API and use it to
+	improve performance a lot with large projects. Long term we should
+	either switch to it completely or rename it.
+
+	* src/planner-gantt-background.c: (gantt_background_draw):
+	* src/planner-gantt-header.c: (gantt_header_init),
+	(gantt_header_expose_event), (gantt_header_motion_notify_event):
+	* src/planner-gantt-print.c: (print_time_header):
+	* src/planner-scale-utils.c: (planner_scale_format_time):
+	* src/planner-scale-utils.h:
+	* src/planner-task-dialog.c: (task_dialog_update_schedule_label),
+	(task_dialog_calendar_changed_cb): Use the new API.
+
+	* tests/time-test.c: Remove obsolete test.
+
 2005-03-13  Richard Hult  <richard@imendio.com>
 
 	* Release 0.13.
