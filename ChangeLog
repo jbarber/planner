@@ -1,3 +1,15 @@
+2005-03-09  Richard Hult  <richard@imendio.com>
+
+	* Makefile.am: Remove unmaintained spec file.
+
+	* configure.in: Add --disable-update-mimedb for packagers.
+	* data/mime/Makefile.am: Use it here.
+
+	* src/planner-cmd-manager.c (cmd_manager_insert)
+	(cmd_manager_ensure_limit, planner_cmd_manager_end_transaction):
+	Don't cut off in the middle of transactions when limiting the undo
+	history.
+
 2005-03-03  Richard Hult  <richard@imendio.com>
 
 	* Release 0.12.94.

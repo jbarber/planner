@@ -116,7 +116,9 @@ cmd_manager_init (PlannerCmdManager *manager)
 	priv = g_new0 (PlannerCmdManagerPriv, 1);
 	manager->priv = priv;
 
-	/* Set a sane default, might need to make it tweakable. */
+	/* Set a sane default, might need to make it tweakable. NOTE: Must be >
+	 * 1.
+	 */
 	priv->limit = 100;
 }
 
@@ -256,6 +258,61 @@ cmd_manager_free_func (PlannerCmd *cmd,
 	g_free (cmd);
 }
 
+static void
+cmd_manager_ensure_limit (PlannerCmdManager *manager)
+{
+	PlannerCmdManagerPriv *priv;
+	GList                 *l;
+	PlannerCmd            *cmd;
+	gboolean               inside_transaction;
+	gint                   num;
+
+	priv = manager->priv;
+
+	g_return_if_fail (priv->limit > 1);
+	
+	/* Don't try to cut when inside a transaction to make this a bit
+	 * simpler.
+	 */
+	if (priv->inside_transaction) {
+		return;
+	}
+
+	inside_transaction = FALSE;
+	num = 0;
+
+	/* Get the number of operations, counting whole transactions as one
+	 * operation.
+	 */
+	for (l = priv->list; l; l = l->next) {
+		cmd = l->data;
+
+		if (cmd->type == PLANNER_CMD_TYPE_END_TRANSACTION) {
+			inside_transaction = TRUE; 
+		}
+		else if (cmd->type == PLANNER_CMD_TYPE_BEGIN_TRANSACTION) {
+			inside_transaction = FALSE; 
+			num++;
+		}
+		else if (!inside_transaction) {
+			num++;
+		}
+		
+		if (cmd->type != PLANNER_CMD_TYPE_BEGIN_TRANSACTION && num > priv->limit) {
+			break;
+		}
+	}
+
+	if (l != NULL) {
+		/* Trim the undo history. */
+		l->prev->next = NULL;
+		l->prev = NULL;
+
+		g_list_foreach (l, (GFunc) cmd_manager_free_func, NULL);
+		g_list_free (l);
+	}
+}
+
 static gboolean
 cmd_manager_insert (PlannerCmdManager *manager,
 		    PlannerCmd        *cmd,
@@ -285,26 +342,7 @@ cmd_manager_insert (PlannerCmdManager *manager,
 		priv->list = current;
 	}
 
-	/* Trim the history if necessary. */
-	if (g_list_length (priv->list) >= priv->limit) {
-		GList *l;
-
-		l = g_list_nth (priv->list, priv->limit - 1);
-		
-		/* Don't crash in case we should have a limit of 1 :) */
-		if (l->prev) {
-			l->prev->next = NULL;
-			l->prev = NULL;
-		}
-
-		g_list_foreach (l, (GFunc) cmd_manager_free_func, NULL);
-		g_list_free (l);
-
-		/* Limit of 1 again... */
-		if (l == priv->list) {
-			priv->list = NULL;
-		}
-	}
+	cmd_manager_ensure_limit (manager);
 	
 	priv->list = g_list_prepend (priv->list, cmd);
 	priv->current = priv->list;
@@ -470,7 +508,7 @@ planner_cmd_manager_begin_transaction (PlannerCmdManager *manager,
 	}
 
 	priv->inside_transaction = TRUE;
-	
+
 	cmd = planner_cmd_new (PlannerCmd,
 			       name,
 			       transaction_cmd_do,
@@ -500,8 +538,6 @@ planner_cmd_manager_end_transaction (PlannerCmdManager *manager)
 		return FALSE;
 	}
 
-	priv->inside_transaction = FALSE;
-
 	for (l = priv->current; l; l = l->next) {
 		begin_cmd = l->data;
 
@@ -526,6 +562,8 @@ planner_cmd_manager_end_transaction (PlannerCmdManager *manager)
 	cmd->type = PLANNER_CMD_TYPE_END_TRANSACTION;
 	
 	cmd_manager_insert (manager, cmd, FALSE);
+
+	priv->inside_transaction = FALSE;
 
 	return TRUE;
 }

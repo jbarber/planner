@@ -1,6 +1,6 @@
-if HAVE_DOTNET
-dotnet_DIR = dotnet
-endif
+#if HAVE_DOTNET
+#dotnet_DIR = dotnet
+#endif
 
 if HAVE_PYTHON
 python_DIR = python
@@ -30,9 +30,7 @@ EXTRA_DIST = \
 	intltool-merge.in		\
 	intltool-update.in		\
 	xmldocs.make			\
-	omf.make			\
-	planner.spec.in			\
-	planner.spec
+	omf.make
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = libplanner-1.pc
