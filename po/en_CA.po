@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: planner\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-02-26 12:21-0500\n"
-"PO-Revision-Date: 2005-02-26 19:47-0400\n"
+"POT-Creation-Date: 2005-02-28 02:34-0500\n"
+"PO-Revision-Date: 2005-02-28 19:47-0400\n"
 "Last-Translator: Adam Weinberger <adamw@gnome.org>\n"
 "Language-Team: English/Canada <adamw@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -647,17 +647,21 @@ msgstr "Cost"
 msgid "None"
 msgstr "None"
 
+#: libplanner/mrp-sql.c:206
+msgid "Can't connect to database server"
+msgstr "Cannot connect to database server"
+
 #. Give up.
-#: libplanner/mrp-sql.c:294 src/planner-sql-plugin.c:198
+#: libplanner/mrp-sql.c:297 src/planner-sql-plugin.c:198
 msgid "Invalid Unicode"
 msgstr "Invalid Unicode"
 
-#: libplanner/mrp-sql.c:2177
+#: libplanner/mrp-sql.c:2180
 #, c-format
 msgid "Connection to database '%s' failed.\n"
 msgstr "Connection to database '%s' failed.\n"
 
-#: libplanner/mrp-sql.c:2182
+#: libplanner/mrp-sql.c:2185
 #, c-format
 msgid ""
 "Connection to database '%s' failed.\n"
@@ -666,12 +670,12 @@ msgstr ""
 "Connection to database '%s' failed.\n"
 "%s"
 
-#: libplanner/mrp-sql.c:2190
+#: libplanner/mrp-sql.c:2193
 #, c-format
 msgid "BEGIN command failed %s."
 msgstr "BEGIN command failed %s."
 
-#: libplanner/mrp-sql.c:2356
+#: libplanner/mrp-sql.c:2361
 #, c-format
 msgid ""
 "The project '%s' has been changed by the user '%s' since you opened it. Do "
@@ -680,7 +684,7 @@ msgstr ""
 "The project '%s' has been changed by the user '%s' since you opened it. Do "
 "you want to save anyway?"
 
-#: libplanner/mrp-sql.c:3624 src/planner-sql-plugin.c:657
+#: libplanner/mrp-sql.c:3630
 #, c-format
 msgid "Connection to database '%s' failed."
 msgstr "Connection to database '%s' failed."
@@ -1577,7 +1581,7 @@ msgstr "Open from Database..."
 msgid "Open a project from a database"
 msgstr "Open a project from a database"
 
-#: src/planner-sql-plugin.c:97 src/planner-sql-plugin.c:1093
+#: src/planner-sql-plugin.c:97 src/planner-sql-plugin.c:1096
 msgid "Save to Database"
 msgstr "Save to Database"
 
@@ -1622,33 +1626,38 @@ msgstr ""
 msgid "Can't create tables in database %s"
 msgstr "Cannot create tables in database %s"
 
-#: src/planner-sql-plugin.c:617
+#: src/planner-sql-plugin.c:618
 #, c-format
 msgid "Database %s is not setup for Planner. Do you want to do that?"
 msgstr "Database %s is not set up for Planner. Do you want to do that?"
 
-#: src/planner-sql-plugin.c:668
+#: src/planner-sql-plugin.c:659
+#, c-format
+msgid "Connection to database '%s@%s' failed."
+msgstr "Connection to database '%s@%s' failed."
+
+#: src/planner-sql-plugin.c:670
 #, c-format
 msgid "Test to tables in database '%s' failed."
 msgstr "Test to tables in database '%s' failed."
 
-#: src/planner-sql-plugin.c:761
+#: src/planner-sql-plugin.c:764
 msgid "ID"
 msgstr "ID"
 
-#: src/planner-sql-plugin.c:769
+#: src/planner-sql-plugin.c:772
 msgid "Project"
 msgstr "Project"
 
-#: src/planner-sql-plugin.c:777
+#: src/planner-sql-plugin.c:780
 msgid "Phase"
 msgstr "Phase"
 
-#: src/planner-sql-plugin.c:785
+#: src/planner-sql-plugin.c:788
 msgid "Revision"
 msgstr "Revision"
 
-#: src/planner-sql-plugin.c:981
+#: src/planner-sql-plugin.c:984
 msgid "Open from Database"
 msgstr "Open from Database"
 
