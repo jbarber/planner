@@ -25,13 +25,13 @@
 #include <glib/gi18n.h>
 #include "planner-scale-utils.h"
 
-#define WEEK (60*60*24*7)
-#define DAY (60*60*24)
+#define WEEK    (60*60*24*7)
+#define DAY     (60*60*24)
 #define HALFDAY (60*60*4)
-#define HOUR (60*60)
+#define HOUR    (60*60)
 
 static const PlannerScaleConf scale_conf[] = {
-	/* Major unit             Major format              Minor unit                Minor format */
+	/* Major unit                  Major format                   Minor unit                     Minor format */
 
 	{ PLANNER_SCALE_UNIT_YEAR,     PLANNER_SCALE_FORMAT_MEDIUM,   PLANNER_SCALE_UNIT_HALFYEAR,   PLANNER_SCALE_FORMAT_SHORT,  WEEK },
 
@@ -60,8 +60,8 @@ static const PlannerScaleConf scale_conf[] = {
 const PlannerScaleConf *planner_scale_conf = scale_conf;
 
 mrptime
-planner_scale_time_prev (mrptime     t,
-		    PlannerScaleUnit unit)
+planner_scale_time_prev (mrptime          t,
+			 PlannerScaleUnit unit)
 {
 	struct tm *tm;
 
@@ -159,8 +159,8 @@ planner_scale_time_prev (mrptime     t,
 }
 
 mrptime
-planner_scale_time_next (mrptime     t,
-		    PlannerScaleUnit unit)
+planner_scale_time_next (mrptime          t,
+			 PlannerScaleUnit unit)
 {
 	struct tm *tm;
 	
@@ -264,9 +264,9 @@ planner_scale_time_next (mrptime     t,
 }
 
 gchar *
-planner_scale_format_time (mrptime       t,
-		      PlannerScaleUnit   unit,
-		      PlannerScaleFormat format)
+planner_scale_format_time (mrptime            t,
+			   PlannerScaleUnit   unit,
+			   PlannerScaleFormat format)
 {
 	struct tm *tm;
 	gchar     *str = NULL;
@@ -361,15 +361,15 @@ planner_scale_format_time (mrptime       t,
 		
 		switch (format) {
 		case PLANNER_SCALE_FORMAT_SHORT:
-			/* i18n: Short "Quarter", preferrably 1 letter. */
+			/* i18n: Short "Quarter", preferably 1 letter. */
 			str = g_strdup_printf (_("Q%d"), num);
 			break;
 		case PLANNER_SCALE_FORMAT_MEDIUM:
-			/* i18n: Short "Quarter", preferrably 2-3 letters. */
+			/* i18n: Short "Quarter", preferably 2-3 letters. */
 			str = g_strdup_printf (_("Qtr %d"), num);
 			break; 
 		case PLANNER_SCALE_FORMAT_LONG:
-			/* i18n: Year, short "Quarter", preferrably 2-3 letters. */
+			/* i18n: Year, short "Quarter", preferably 2-3 letters. */
 			str = g_strdup_printf (_("%d, Qtr %d"),
 					       tm->tm_year + 1900,
 					       num);
@@ -382,12 +382,12 @@ planner_scale_format_time (mrptime       t,
 
 		switch (format) {
 		case PLANNER_SCALE_FORMAT_SHORT:
-			/* i18n: Short "Half year", prefferably 1 letter. */
+			/* i18n: Short "Half year", preferably 1 letter. */
 			str = g_strdup_printf (_("H%d"), num);
 			break;
-		case PLANNER_SCALE_FORMAT_LONG:
 		case PLANNER_SCALE_FORMAT_MEDIUM:
-			/* i18n: Year, short "Half year", prefferably 1 letter. */
+		case PLANNER_SCALE_FORMAT_LONG:
+			/* i18n: Year, short "Half year", preferably 1 letter. */
 			str = g_strdup_printf (_("%04d, H%d"),
 					       tm->tm_year + 1900,
 					       num);

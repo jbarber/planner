@@ -192,6 +192,9 @@ static void        gantt_chart_set_zoom                 (PlannerGanttChart  *cha
 static gint        gantt_chart_get_width                (PlannerGanttChart  *chart);
 static PlannerGanttRow *gantt_chart_get_row_from_task   (PlannerGanttChart  *chart,
 							 MrpTask            *task);
+static void        gantt_chart_header_date_hint_changed_cb (GtkWidget         *header,
+							    const gchar       *hint,
+							    PlannerGanttChart *chart);
 static TreeNode *  gantt_chart_tree_node_new            (void);
 static void        gantt_chart_tree_node_insert_path    (TreeNode           *node,
 							 GtkTreePath        *path,
@@ -341,6 +344,11 @@ gantt_chart_init (PlannerGanttChart *chart)
 				     "scale", SCALE (priv->zoom),
 				     "zoom", priv->zoom,
 				     NULL);
+
+	g_signal_connect (priv->header,
+			  "date_hint_changed",
+			  G_CALLBACK (gantt_chart_header_date_hint_changed_cb),
+			  chart);
 	
 	gtk_box_pack_start (GTK_BOX (chart),
 			    GTK_WIDGET (priv->header),
@@ -1679,6 +1687,14 @@ gantt_chart_get_row_from_task (PlannerGanttChart *chart,
 	gtk_tree_path_free (path);
 
 	return PLANNER_GANTT_ROW (node->item);
+}
+
+static void
+gantt_chart_header_date_hint_changed_cb (GtkWidget         *header,
+					 const gchar       *hint,
+					 PlannerGanttChart *chart)
+{
+	planner_gantt_chart_status_updated (chart, hint);
 }
 
 static void

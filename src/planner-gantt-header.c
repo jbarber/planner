@@ -26,7 +26,6 @@
 #include <math.h>
 #include <glib/gi18n.h>
 #include <gtk/gtkcontainer.h>
-#include <gtk/gtktreemodel.h>
 #include <libplanner/mrp-time.h>
 #include "planner-marshal.h"
 #include "planner-gantt-header.h"
@@ -35,11 +34,11 @@
 
 
 struct _PlannerGanttHeaderPriv {
-	GdkWindow     *bin_window;
+	GdkWindow          *bin_window;
 	
-	GtkAdjustment *hadjustment;
+	GtkAdjustment      *hadjustment;
 
-	PangoLayout   *layout;
+	PangoLayout        *layout;
 
 	PlannerScaleUnit    major_unit;
 	PlannerScaleFormat  major_format;
@@ -47,13 +46,15 @@ struct _PlannerGanttHeaderPriv {
 	PlannerScaleUnit    minor_unit;
 	PlannerScaleFormat  minor_format;
 	
-	gdouble        hscale;
+	gdouble             hscale;
 	
-	gint           width;
-	gint           height;
+	gint                width;
+	gint                height;
 
-	gdouble        x1;
-	gdouble        x2;
+	gdouble             x1;
+	gdouble             x2;
+
+	gchar              *date_hint;
 };
 
 /* Properties */
@@ -63,36 +64,47 @@ enum {
 	PROP_X1,
 	PROP_X2,
 	PROP_SCALE,
-	PROP_ZOOM,
+	PROP_ZOOM
 };
 
-static void     gantt_header_class_init           (PlannerGanttHeaderClass *klass);
-static void     gantt_header_init                 (PlannerGanttHeader      *header);
-static void     gantt_header_finalize             (GObject            *object);
-static void     gantt_header_set_property         (GObject            *object,
-						   guint               prop_id,
-						   const GValue       *value,
-						   GParamSpec         *pspec);
-static void     gantt_header_get_property         (GObject            *object,
-						   guint               prop_id,
-						   GValue             *value,
-						   GParamSpec         *pspec);
-static void     gantt_header_destroy              (GtkObject          *object);
-static void     gantt_header_map                  (GtkWidget          *widget);
-static void     gantt_header_realize              (GtkWidget          *widget);
-static void     gantt_header_unrealize            (GtkWidget          *widget);
-static void     gantt_header_size_allocate        (GtkWidget          *widget,
-						   GtkAllocation      *allocation);
-static gboolean gantt_header_expose_event         (GtkWidget          *widget,
-						   GdkEventExpose     *event);
-static void     gantt_header_set_adjustments      (PlannerGanttHeader      *header,
-						   GtkAdjustment      *hadj,
-						   GtkAdjustment      *vadj);
-static void     gantt_header_adjustment_changed   (GtkAdjustment      *adjustment,
-						   PlannerGanttHeader      *header);
+enum {
+	DATE_HINT_CHANGED,
+	LAST_SIGNAL
+};
+
+static void     gantt_header_class_init          (PlannerGanttHeaderClass *klass);
+static void     gantt_header_init                (PlannerGanttHeader      *header);
+static void     gantt_header_finalize            (GObject                 *object);
+static void     gantt_header_set_property        (GObject                 *object,
+						  guint                    prop_id,
+						  const GValue            *value,
+						  GParamSpec              *pspec);
+static void     gantt_header_get_property        (GObject                 *object,
+						  guint                    prop_id,
+						  GValue                  *value,
+						  GParamSpec              *pspec);
+static void     gantt_header_destroy             (GtkObject               *object);
+static void     gantt_header_map                 (GtkWidget               *widget);
+static void     gantt_header_realize             (GtkWidget               *widget);
+static void     gantt_header_unrealize           (GtkWidget               *widget);
+static void     gantt_header_size_allocate       (GtkWidget               *widget,
+						  GtkAllocation           *allocation);
+static gboolean gantt_header_expose_event        (GtkWidget               *widget,
+						  GdkEventExpose          *event);
+static gboolean gantt_header_motion_notify_event (GtkWidget               *widget,
+						  GdkEventMotion          *event);
+static gboolean gantt_header_leave_notify_event  (GtkWidget	          *widget,
+						  GdkEventCrossing        *event);
+static void     gantt_header_set_adjustments     (PlannerGanttHeader      *header,
+						  GtkAdjustment           *hadj,
+						  GtkAdjustment           *vadj);
+static void     gantt_header_adjustment_changed  (GtkAdjustment           *adjustment,
+						  PlannerGanttHeader      *header);
+
 
 
 static GtkWidgetClass *parent_class = NULL;
+static guint           signals[LAST_SIGNAL];
 
 
 GtkType
@@ -152,7 +164,10 @@ gantt_header_class_init (PlannerGanttHeaderClass *class)
 	widget_class->unrealize = gantt_header_unrealize;
 	widget_class->size_allocate = gantt_header_size_allocate;
 	widget_class->expose_event = gantt_header_expose_event;
+	widget_class->leave_notify_event = gantt_header_leave_notify_event;
 
+	widget_class->motion_notify_event = gantt_header_motion_notify_event;
+	
 	class->set_scroll_adjustments = gantt_header_set_adjustments;
 		
 	widget_class->set_scroll_adjustments_signal =
@@ -210,6 +225,16 @@ gantt_header_class_init (PlannerGanttHeaderClass *class)
 				     NULL,
 				     -G_MAXDOUBLE, G_MAXDOUBLE, 7,
 				     G_PARAM_WRITABLE));
+
+	signals[DATE_HINT_CHANGED] =
+		g_signal_new ("date-hint-changed",
+			      G_TYPE_FROM_CLASS (class),
+			      G_SIGNAL_RUN_LAST,
+			      0,
+			      NULL, NULL,
+			      planner_marshal_VOID__STRING,
+			      G_TYPE_NONE, 1,
+			      G_TYPE_STRING);
 }
 
 static void
@@ -241,7 +266,7 @@ static void
 gantt_header_set_zoom (PlannerGanttHeader *header, gdouble zoom)
 {
 	PlannerGanttHeaderPriv *priv;
-	gint               level;
+	gint                   level;
 
 	priv = header->priv;
 
@@ -262,12 +287,12 @@ gantt_header_set_property (GObject      *object,
 {
 	PlannerGanttHeader     *header;
 	PlannerGanttHeaderPriv *priv;
-	gdouble            tmp;
-	gint               width;
-	gdouble            tmp_scale;
-	gboolean           change_width = FALSE;
-	gboolean           change_height = FALSE;
-	gboolean           change_scale = FALSE;
+	gdouble                 tmp;
+	gint                    width;
+	gdouble                 tmp_scale;
+	gboolean                change_width = FALSE;
+	gboolean                change_height = FALSE;
+	gboolean                change_scale = FALSE;
 
 	header = PLANNER_GANTT_HEADER (object);
 	priv = header->priv;
@@ -354,6 +379,10 @@ gantt_header_finalize (GObject *object)
 {
 	PlannerGanttHeader *header = PLANNER_GANTT_HEADER (object);
 
+	g_object_unref (header->priv->layout);
+
+	g_free (header->priv->date_hint);
+
 	g_free (header->priv);
 
 	if (G_OBJECT_CLASS (parent_class)->finalize) {
@@ -366,8 +395,6 @@ gantt_header_destroy (GtkObject *object)
 {
 	/*PlannerGanttHeader *header = PLANNER_GANTT_HEADER (object);*/
 
-	/* FIXME: free stuff. */
-
 	if (GTK_OBJECT_CLASS (parent_class)->destroy) {
 		(* GTK_OBJECT_CLASS (parent_class)->destroy) (object);
 	}
@@ -378,14 +405,11 @@ gantt_header_map (GtkWidget *widget)
 {
 	PlannerGanttHeader *header;
 
-	g_return_if_fail (PLANNER_IS_GANTT_HEADER (widget));
-	
 	header = PLANNER_GANTT_HEADER (widget);
 	
 	GTK_WIDGET_SET_FLAGS (widget, GTK_MAPPED);
 
 	gdk_window_show (header->priv->bin_window);
-
 	gdk_window_show (widget->window);
 }
 
@@ -393,12 +417,10 @@ static void
 gantt_header_realize (GtkWidget *widget)
 {
 	PlannerGanttHeader *header;
-	GdkWindowAttr  attributes;
-	GdkGCValues    values;
-	gint           attributes_mask;
+	GdkWindowAttr       attributes;
+	GdkGCValues         values;
+	gint                attributes_mask;
   
-	g_return_if_fail (PLANNER_IS_GANTT_HEADER (widget));
-	
 	header = PLANNER_GANTT_HEADER (widget);
 	
 	GTK_WIDGET_SET_FLAGS (widget, GTK_REALIZED);
@@ -456,8 +478,6 @@ gantt_header_unrealize (GtkWidget *widget)
 {
 	PlannerGanttHeader *header;
 
-	g_return_if_fail (PLANNER_IS_GANTT_HEADER (widget));
-
 	header = PLANNER_GANTT_HEADER (widget);
 
 	gdk_window_set_user_data (header->priv->bin_window, NULL);
@@ -474,8 +494,6 @@ gantt_header_size_allocate (GtkWidget     *widget,
 			    GtkAllocation *allocation)
 {
 	PlannerGanttHeader *header;
-
-	g_return_if_fail (PLANNER_IS_GANTT_HEADER (widget));
 
 	header = PLANNER_GANTT_HEADER (widget);
 
@@ -497,17 +515,17 @@ gantt_header_expose_event (GtkWidget      *widget,
 {
 	PlannerGanttHeader     *header;
 	PlannerGanttHeaderPriv *priv;
-	gint               width, height;
-	gdouble            hscale;
-	gint               x;
-	mrptime            t0;
-	mrptime            t1;
-	mrptime            t;
-	gchar             *str;
-	gint               minor_width;
-	gint               major_width;
-	GdkGC             *gc;
-	GdkRectangle       rect;
+	gint                    width, height;
+	gdouble                 hscale;
+	gint                    x;
+	mrptime                 t0;
+	mrptime                 t1;
+	mrptime                 t;
+	gchar                  *str;
+	gint                    minor_width;
+	gint                    major_width;
+	GdkGC                  *gc;
+	GdkRectangle            rect;
 	
 	header = PLANNER_GANTT_HEADER (widget);
 	priv = header->priv;
@@ -637,15 +655,65 @@ gantt_header_expose_event (GtkWidget      *widget,
 	return TRUE;
 }
 
+static gboolean
+gantt_header_motion_notify_event (GtkWidget	 *widget,
+				  GdkEventMotion *event)
+{
+	PlannerGanttHeader     *header;
+	PlannerGanttHeaderPriv *priv;
+	mrptime                 t;
+	struct tm              *tm;
+	char                   *str;
+			
+	header = PLANNER_GANTT_HEADER (widget);
+	priv = header->priv;
+
+	t = floor ((priv->x1 + event->x) / priv->hscale + 0.5);
+	tm = mrp_time_to_tm (t);
+
+	str = g_strdup_printf ("%d %s %d",
+			       tm->tm_mday,
+			       mrp_time_month_name (t),
+			       tm->tm_year + 1900);
+
+	if (!priv->date_hint || strcmp (str, priv->date_hint) != 0) {
+		g_signal_emit (widget, signals[DATE_HINT_CHANGED], 0, str);
+
+		g_free (priv->date_hint);
+		priv->date_hint = str;
+	} else {
+		g_free (str);
+	}
+	
+	return FALSE;
+}
+
+static gboolean
+gantt_header_leave_notify_event (GtkWidget	  *widget,
+				 GdkEventCrossing *event)
+{
+	PlannerGanttHeader     *header;
+	PlannerGanttHeaderPriv *priv;
+
+	header = PLANNER_GANTT_HEADER (widget);
+	priv = header->priv;
+
+	if (priv->date_hint) {
+		g_signal_emit (widget, signals[DATE_HINT_CHANGED], 0, NULL);
+
+		g_free (priv->date_hint);
+		priv->date_hint = NULL;
+	}
+	
+	return FALSE;
+}
+
 /* Callbacks */
 static void
 gantt_header_set_adjustments (PlannerGanttHeader *header,
-			      GtkAdjustment *hadj,
-			      GtkAdjustment *vadj)
+			      GtkAdjustment      *hadj,
+			      GtkAdjustment      *vadj)
 {
-	g_return_if_fail (hadj == NULL || GTK_IS_ADJUSTMENT (hadj));
-	g_return_if_fail (vadj == NULL || GTK_IS_ADJUSTMENT (vadj));
-
 	if (hadj == NULL) {
 		hadj = GTK_ADJUSTMENT (gtk_adjustment_new (0.0, 0.0, 0.0, 0.0, 0.0, 0.0));
 	}
@@ -676,7 +744,7 @@ gantt_header_adjustment_changed (GtkAdjustment *adjustment,
 {
 	if (GTK_WIDGET_REALIZED (header)) {
 		gdk_window_move (header->priv->bin_window,
-				 - header->priv->hadjustment->value,
+				 -header->priv->hadjustment->value,
 				 0);
 	}
 }
@@ -684,7 +752,6 @@ gantt_header_adjustment_changed (GtkAdjustment *adjustment,
 GtkWidget *
 planner_gantt_header_new (void)
 {
-
 	return g_object_new (PLANNER_TYPE_GANTT_HEADER, NULL);
 }
 

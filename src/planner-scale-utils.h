@@ -69,17 +69,14 @@ typedef struct {
 
 extern const PlannerScaleConf *planner_scale_conf;
 
-mrptime planner_scale_time_prev   (mrptime        t,
-			      PlannerScaleUnit    unit);
-
-mrptime planner_scale_time_next   (mrptime        t,
-			      PlannerScaleUnit    unit);
-
-gchar * planner_scale_format_time (mrptime        t,
-			      PlannerScaleUnit    unit,
-			      PlannerScaleFormat  format);
-
-gint    planner_scale_clamp_zoom  (gdouble        zoom);
+mrptime planner_scale_time_prev   (mrptime            t,
+				   PlannerScaleUnit   unit);
+mrptime planner_scale_time_next   (mrptime            t,
+				   PlannerScaleUnit   unit);
+gchar * planner_scale_format_time (mrptime            t,
+				   PlannerScaleUnit   unit,
+				   PlannerScaleFormat format);
+gint    planner_scale_clamp_zoom  (gdouble            zoom);
 
 
 #endif /* __PLANNER_SCALE_UTILS_H__ */

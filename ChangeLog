@@ -1,3 +1,17 @@
+2004-10-08  Richard Hult  <richard@imendio.com>
+
+	* libplanner/mrp-time.c (mrp_time_debug_print): Fix typo.
+
+2004-10-08  Richard Hult  <richard@imendio.com>
+
+	* src/planner-gantt-header.c (gantt_header_leave_notify_event)
+	(gantt_header_motion_notify_event, gantt_header_class_init): Add
+	date-hint signal and emit it when the mouse moves over a new date.
+
+	* src/planner-gantt-chart.c (gantt_chart_init):
+	(gantt_chart_header_date_hint_changed_cb): Put the date hint on
+	the status bar.
+
 2004-10-06  Richard Hult  <richard@imendio.com>
 
 	* src/planner-task-tree.c (planner_task_tree_insert_task): Select

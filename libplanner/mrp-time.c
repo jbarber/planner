@@ -143,7 +143,7 @@ mrp_time_debug_print (mrptime t)
 
 	tt = t;
 
-	tm = gmtime (&t);
+	tm = gmtime (&tt);
 
 	if (tm == NULL) {
 		g_print ("<Invalid time>\n");
@@ -223,7 +223,7 @@ mrp_time_current_time (void)
  * Converts @t to a struct tm value.
  * 
  * Return value: struct tm time, which is static data and should not be
- * modified or freed..
+ * modified or freed.
  **/
 struct tm *
 mrp_time_to_tm (mrptime t)
