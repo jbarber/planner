@@ -3,7 +3,7 @@
  * Copyright (C) 2001-2002 CodeFactory AB
  * Copyright (C) 2001-2002 Richard Hult <richard@imendio.com>
  * Copyright (C) 2001-2002 Mikael Hallendal <micke@imendio.com>
- * Copyright (C) 2001-2002 Alvaro del Castillo <acs@barrapunto.com>
+ * Copyright (C) 2001-2004 Alvaro del Castillo <acs@barrapunto.com>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -86,11 +86,23 @@ static void  resource_dialog_name_changed_cb                (GtkWidget    *w,
 static void  resource_dialog_resource_name_changed_cb       (MrpResource  *resource,  
 							     GParamSpec   *pspec, 
 							     GtkWidget    *dialog);
+static void  resource_dialog_name_focus_in_cb               (GtkWidget     *w,
+							     GdkEventFocus *event,
+							     DialogData    *data);
+static void  resource_dialog_name_focus_out_cb              (GtkWidget     *w,
+							     GdkEventFocus *event,
+							     DialogData    *data);
 static void  resource_dialog_short_name_changed_cb          (GtkWidget    *w,
 							     DialogData   *data);
 static void  resource_dialog_resource_short_name_changed_cb (MrpResource  *resource,  
 							     GParamSpec   *pspec, 
 							     GtkWidget    *dialog);
+static void  resource_dialog_short_name_focus_in_cb         (GtkWidget     *w,
+							     GdkEventFocus *event,
+							     DialogData    *data);
+static void  resource_dialog_short_name_focus_out_cb        (GtkWidget     *w,
+							     GdkEventFocus *event,
+							     DialogData    *data);
 static void  resource_dialog_type_changed_cb                (GtkWidget    *w,
 							     DialogData   *data);
 static void  resource_dialog_resource_type_changed_cb       (MrpResource  *resource,  
@@ -106,6 +118,12 @@ static void  resource_dialog_email_changed_cb               (GtkWidget    *w,
 static void  resource_dialog_resource_email_changed_cb      (MrpResource  *resource,  
 							     GParamSpec   *pspec, 
 							     GtkWidget    *dialog);
+static void  resource_dialog_email_focus_in_cb              (GtkWidget     *w,
+							     GdkEventFocus *event,
+							     DialogData    *data);
+static void  resource_dialog_email_focus_out_cb             (GtkWidget     *w,
+							     GdkEventFocus *event,
+							     DialogData    *data);
 static void  resource_dialog_resource_cost_changed_cb       (MrpResource  *resource,  
 							     MrpProperty  *property,
 							     GValue       *value,
@@ -149,7 +167,7 @@ typedef struct {
 	PlannerCmd   base;
 
 	MrpResource *resource;
-	const gchar *property;  
+	gchar       *property;  
 	GValue      *value;
 	GValue      *old_value;
 } ResourceCmdEditProperty;
@@ -410,6 +428,24 @@ resource_cmd_edit_property_undo (PlannerCmd *cmd_base)
 			       cmd->old_value);
 }
 
+static void
+resource_cmd_edit_property_free (PlannerCmd *cmd_base)
+{
+	ResourceCmdEditProperty *cmd;
+
+	cmd = (ResourceCmdEditProperty*) cmd_base;
+
+	g_free (cmd_base->label);
+
+	g_value_unset (cmd->value);
+	g_value_unset (cmd->old_value);
+
+	g_free (cmd->property);
+	g_object_unref (cmd->resource);
+
+	g_free (cmd);
+}
+
 static PlannerCmd *
 resource_cmd_edit_property (PlannerWindow *main_window,
 			    MrpResource   *resource,
@@ -426,10 +462,10 @@ resource_cmd_edit_property (PlannerWindow *main_window,
 	cmd_base->label = g_strdup (_("Edit resource property from dialog"));
 	cmd_base->do_func = resource_cmd_edit_property_do;
 	cmd_base->undo_func = resource_cmd_edit_property_undo;
-	cmd_base->free_func = NULL; /* FIXME */
+	cmd_base->free_func = resource_cmd_edit_property_free;
 
-	cmd->property = property;
-	cmd->resource = resource;
+	cmd->property = g_strdup (property);
+	cmd->resource = g_object_ref (resource);
 
 	cmd->value = g_new0 (GValue, 1);
 	g_value_init (cmd->value, G_VALUE_TYPE (value));
@@ -448,7 +484,46 @@ resource_cmd_edit_property (PlannerWindow *main_window,
 	return cmd_base;
 }
 
+/* 
+   In text entries we return to the value that exists when focus in.
+   The new value is already stored in the object
+*/
+static PlannerCmd *
+resource_cmd_edit_property_focus (PlannerWindow *main_window,
+				  MrpResource   *resource,
+				  const gchar   *property,
+				  const GValue  *focus_in_value)
+{
+	PlannerCmd              *cmd_base;
+	ResourceCmdEditProperty *cmd;
 
+	cmd = g_new0 (ResourceCmdEditProperty, 1);
+
+	cmd_base = (PlannerCmd*) cmd;
+
+	cmd_base->label = g_strdup (_("Edit resource property from dialog"));
+	cmd_base->do_func = resource_cmd_edit_property_do;
+	cmd_base->undo_func = resource_cmd_edit_property_undo;
+	cmd_base->free_func = resource_cmd_edit_property_free;
+
+	cmd->property = g_strdup (property);
+	cmd->resource = g_object_ref (resource);
+
+	cmd->value = g_new0 (GValue, 1);
+	g_value_init (cmd->value, G_VALUE_TYPE (focus_in_value));
+	g_object_get_property (G_OBJECT (cmd->resource),
+			       cmd->property,
+			       cmd->value);
+
+	cmd->old_value = g_new0 (GValue, 1);
+	g_value_init (cmd->old_value, G_VALUE_TYPE (focus_in_value));
+	g_value_copy (focus_in_value, cmd->old_value);
+
+	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager (main_window),
+					   cmd_base);
+
+	return cmd_base;
+}
 
 static void  
 resource_dialog_resource_name_changed_cb (MrpResource *resource,  
@@ -484,20 +559,15 @@ resource_dialog_name_changed_cb (GtkWidget  *w,
 				 DialogData *data)
 {
 	const gchar  *name;
-	GValue        value = { 0 };
-	/* PlannerCmd   *cmd; */
+
+	g_assert (MRP_IS_RESOURCE (data->resource));
 
 	name = gtk_entry_get_text (GTK_ENTRY (w));
-
-	g_value_init (&value, G_TYPE_STRING);
-	g_value_set_string (&value, name);
 
 	g_signal_handlers_block_by_func (data->resource,
 					 resource_dialog_resource_name_changed_cb,
 					 data->dialog);
 
-	/* FIXME: activate undo support when clear how to group several keystrokes */
-	/* cmd = resource_cmd_edit_property (data->main_window, data->resource, "name", &value); */
 	g_object_set (data->resource, "name", name, NULL);
 
 	resource_dialog_update_title (data);
@@ -505,8 +575,41 @@ resource_dialog_name_changed_cb (GtkWidget  *w,
 	g_signal_handlers_unblock_by_func (data->resource,
 					   resource_dialog_resource_name_changed_cb,
 					   data->dialog);
+}
 
-	g_value_unset (&value);
+static void
+resource_dialog_name_focus_out_cb (GtkWidget     *w,
+				   GdkEventFocus *event,
+				   DialogData    *data)
+{
+	gchar        *focus_in_name;
+	GValue        value = { 0 };
+	PlannerCmd   *cmd;
+
+	g_assert (MRP_IS_RESOURCE (data->resource));
+
+	focus_in_name = g_object_get_data (G_OBJECT (data->resource),"focus_in_name");
+	
+	g_value_init (&value, G_TYPE_STRING);
+	g_value_set_string (&value, focus_in_name);
+
+	cmd = resource_cmd_edit_property_focus (data->main_window, 
+						data->resource, "name", &value);
+
+	g_free (focus_in_name);
+}
+
+static void
+resource_dialog_name_focus_in_cb (GtkWidget     *w,
+				  GdkEventFocus *event,
+				  DialogData    *data)
+{
+	gchar  *name;
+	   
+	name = g_strdup (gtk_entry_get_text (GTK_ENTRY (w)));
+	
+	g_object_set_data (G_OBJECT (data->resource), 
+			   "focus_in_name", (gpointer) name);
 }
 
 static void  
@@ -553,6 +656,42 @@ resource_dialog_resource_short_name_changed_cb (MrpResource *resource,
 					   dialog);
 
 	g_free (short_name);
+}
+
+static void  
+resource_dialog_short_name_focus_out_cb (GtkWidget     *w,
+					 GdkEventFocus *event,
+					 DialogData    *data)
+{
+	gchar        *focus_in_short_name;
+	GValue        value = { 0 };
+	PlannerCmd   *cmd;
+
+	g_assert (MRP_IS_RESOURCE (data->resource));
+
+	focus_in_short_name = g_object_get_data (G_OBJECT (data->resource),
+						 "focus_in_short_name");
+	
+	g_value_init (&value, G_TYPE_STRING);
+	g_value_set_string (&value, focus_in_short_name);
+
+	cmd = resource_cmd_edit_property_focus (data->main_window, 
+						data->resource, "short_name", &value);
+
+	g_free (focus_in_short_name);
+}
+
+static void
+resource_dialog_short_name_focus_in_cb (GtkWidget     *w,
+					GdkEventFocus *event,
+					DialogData    *data)
+{
+	gchar  *name;
+	   
+	name = g_strdup (gtk_entry_get_text (GTK_ENTRY (w)));
+	
+	g_object_set_data (G_OBJECT (data->resource), 
+			   "focus_in_short_name", (gpointer) name);
 }
 
 static void  
@@ -608,7 +747,6 @@ resource_dialog_type_changed_cb (GtkWidget  *w,
 					 resource_dialog_resource_type_changed_cb, 
 					 data->dialog);
 
-	/* g_object_set (data->resource, "type", type, NULL); */
 	cmd = resource_cmd_edit_property (data->main_window, data->resource, "type", &value);
 
 	g_signal_handlers_unblock_by_func (data->resource,
@@ -709,6 +847,41 @@ resource_dialog_email_changed_cb (GtkWidget  *w,
 }
 
 static void  
+resource_dialog_email_focus_out_cb (GtkWidget     *w,
+				    GdkEventFocus *event,
+				    DialogData    *data)
+{
+	gchar        *focus_in_email;
+	GValue        value = { 0 };
+	PlannerCmd   *cmd;
+
+	g_assert (MRP_IS_RESOURCE (data->resource));
+
+	focus_in_email = g_object_get_data (G_OBJECT (data->resource),"focus_in_email");
+	
+	g_value_init (&value, G_TYPE_STRING);
+	g_value_set_string (&value, focus_in_email);
+
+	cmd = resource_cmd_edit_property_focus (data->main_window, 
+						data->resource, "email", &value);
+
+	g_free (focus_in_email);
+}
+
+static void
+resource_dialog_email_focus_in_cb (GtkWidget     *w,
+				   GdkEventFocus *event,
+				   DialogData    *data)
+{
+	gchar  *email;
+	   
+	email = g_strdup (gtk_entry_get_text (GTK_ENTRY (w)));
+	
+	g_object_set_data (G_OBJECT (data->resource), 
+			   "focus_in_email", (gpointer) email);
+}
+
+static void  
 resource_dialog_resource_email_changed_cb (MrpResource *resource,  
 					   GParamSpec  *pspec, 
 					   GtkWidget   *dialog)
@@ -735,6 +908,9 @@ resource_dialog_resource_email_changed_cb (MrpResource *resource,
 	g_free (email);
 }
 
+
+/* FIXME: we need generic methods to handle custom properties
+   as we do in resource view */
 static void  
 resource_dialog_cost_changed_cb (GtkWidget  *w,
 				 DialogData *data) 
@@ -1290,11 +1466,31 @@ planner_resource_dialog_new (PlannerWindow *window,
 			  G_CALLBACK (resource_dialog_name_changed_cb),
 			  data);
 
+	g_signal_connect (data->name_entry,
+			  "focus_out_event",
+			  G_CALLBACK (resource_dialog_name_focus_out_cb),
+			  data);
+
+	g_signal_connect (data->name_entry,
+			  "focus_in_event",
+			  G_CALLBACK (resource_dialog_name_focus_in_cb),
+			  data);
+
 	gtk_entry_set_text (GTK_ENTRY (data->short_name_entry), short_name);
 
 	g_signal_connect (data->short_name_entry,
 			  "changed",
 			  G_CALLBACK (resource_dialog_short_name_changed_cb),
+			  data);
+			  
+	g_signal_connect (data->short_name_entry,
+			  "focus_out_event",
+			  G_CALLBACK (resource_dialog_short_name_focus_out_cb),
+			  data);
+
+	g_signal_connect (data->short_name_entry,
+			  "focus_in_event",
+			  G_CALLBACK (resource_dialog_short_name_focus_in_cb),
 			  data);
 			  
 	resource_dialog_setup_option_menu (data->type_menu,
@@ -1347,7 +1543,18 @@ planner_resource_dialog_new (PlannerWindow *window,
 			  G_CALLBACK (resource_dialog_email_changed_cb),
 			  data);
 
-	gtk_entry_set_text (GTK_ENTRY (data->cost_entry), planner_format_float (cost, 2, FALSE)); 
+	g_signal_connect (data->email_entry,
+			  "focus_out_event",
+			  G_CALLBACK (resource_dialog_email_focus_out_cb),
+			  data);
+
+	g_signal_connect (data->email_entry,
+			  "focus_in_event",
+			  G_CALLBACK (resource_dialog_email_focus_in_cb),
+			  data);
+
+	gtk_entry_set_text (GTK_ENTRY (data->cost_entry), 
+			    planner_format_float (cost, 2, FALSE)); 
 
 	g_signal_connect (data->cost_entry,
 			  "changed",

@@ -1,3 +1,13 @@
+2004-04-17  Alvaro del Castillo  <acs@barrapunto.com>
+
+	* src/planner-group-dialog.c: better memory handling.
+	* src/planner-resource-dialog.c: undo using focus in/focus out.
+	Maybe we use the focus out to change values in planner so this
+	could change in the future.
+	Implemented "_free" functions for undo system.
+	* src/planner-resource-view.c: better memory handling.
+	Implemented "_free" functions for undo system.
+	
 2004-04-17  Richard Hult  <richard@imendio.com>
 
 	* libplanner/mrp-sql.c: (mrp_sql_save_project):
@@ -27,7 +37,7 @@
 
 2004-04-17  Alvaro del Castillo  <acs@barrapunto.com>
 
-	* src/planner-gantt-row.c: Undo code for task constraints, task
+	* src/planner-task-tree.c: Undo code for task constraints, task
 	movement and task indentation.
 
 2004-04-16  Richard Hult  <richard@imendio.com>

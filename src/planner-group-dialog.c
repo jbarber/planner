@@ -3,7 +3,7 @@
  * Copyright (C) 2002 CodeFactory AB
  * Copyright (C) 2002 Richard Hult <richard@imendio.com>
  * Copyright (C) 2002 Mikael Hallendal <micke@imendio.com>
- * Copyright (C) 2002 Alvaro del Castillo <acs@barrapunto.com>
+ * Copyright (C) 2002-2004 Alvaro del Castillo <acs@barrapunto.com>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -479,7 +479,6 @@ group_cmd_default_do (PlannerCmd *cmd_base)
 
 	cmd = (GroupCmdDefault*) cmd_base;
 
-	mrp_object_get (cmd->project, "default-group", &cmd->old_group, NULL);
 	mrp_object_set (cmd->project, "default-group", cmd->group, NULL);
 }
 
@@ -498,10 +497,12 @@ group_cmd_default_free (PlannerCmd *cmd_base)
 	GroupCmdDefault *cmd;
 	
 	cmd = (GroupCmdDefault*) cmd_base;
-	/* We haven't ref this objects ... we must? */
-	cmd->project = NULL;
-	cmd->group = NULL;
-	cmd->old_group = NULL;
+
+	g_object_unref (cmd->group);
+	g_object_unref (cmd->old_group);
+	g_free (cmd_base->label);
+
+	g_free (cmd);
 }
 
 static PlannerCmd *
@@ -522,7 +523,8 @@ group_cmd_default (PlannerView *view,
 
 	cmd->project = planner_window_get_project (view->main_window);
 
-	cmd->group = group;	
+	cmd->group = g_object_ref (group);
+	mrp_object_get (cmd->project, "default-group", &cmd->old_group, NULL);
 
 	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager (view->main_window),
 					   cmd_base);
@@ -649,6 +651,10 @@ group_cmd_edit_property (PlannerView  *view,
 	g_object_get_property (G_OBJECT (cmd->group),
 			       cmd->property,
 			       cmd->old_value);
+
+	/* FIXME: if old and new value are the same, do nothing 
+	   How we can compare values?
+	 */
 
 	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager (view->main_window),
 					   cmd_base);

@@ -287,7 +287,7 @@ typedef struct {
 	PlannerCmd   base;
 
 	MrpResource *resource;
-	const gchar *property;  
+	gchar       *property;  
 	GValue      *value;
 	GValue      *old_value;
 } ResourceCmdEditProperty;
@@ -757,7 +757,7 @@ resource_cmd_insert_do (PlannerCmd *cmd_base)
 	ResourceCmdInsert *cmd;
 
 	cmd = (ResourceCmdInsert*) cmd_base;
-	g_assert (MRP_IS_RESOURCE (cmd->resource));
+
 	mrp_project_add_resource (cmd->project, cmd->resource);
 }
 
@@ -770,9 +770,6 @@ resource_cmd_insert_undo (PlannerCmd *cmd_base)
 
 	mrp_project_remove_resource (cmd->project,
 				     cmd->resource);
-	
-	/* Don't clean the resource before the cmd free */
-	/* cmd->resource = NULL; */
 }
 
 static void
@@ -889,8 +886,10 @@ resource_cmd_remove_do (PlannerCmd *cmd_base)
 	assignments = mrp_resource_get_assignments (cmd->resource);
 
 	for (l = assignments; l; l = l->next) {
-		cmd->assignments = g_list_prepend (cmd->assignments, l->data);
+		cmd->assignments = g_list_append (cmd->assignments, 
+						  g_object_ref (l->data));
 	}
+
 
 	mrp_project_remove_resource (cmd->project, cmd->resource);
 }
@@ -902,8 +901,6 @@ resource_cmd_remove_undo (PlannerCmd *cmd_base)
 	GList             *l;
 	
 	cmd = (ResourceCmdRemove*) cmd_base;
-
-	g_assert (MRP_IS_RESOURCE (cmd->resource));
 
 	mrp_project_add_resource (cmd->project, cmd->resource);
 
@@ -917,6 +914,7 @@ resource_cmd_remove_undo (PlannerCmd *cmd_base)
 		mrp_resource_assign (cmd->resource, task, units);
 	}
 
+	g_list_foreach (cmd->assignments, (GFunc) g_object_unref, NULL);
 	g_list_free (cmd->assignments);
 	cmd->assignments = NULL;
 }
@@ -931,9 +929,8 @@ resource_cmd_remove_free (PlannerCmd *cmd_base)
 
 	g_object_unref (cmd->resource);
 
-	cmd->assignments = NULL;
-	cmd->resource    = NULL;
-	cmd->project     = NULL;
+	g_free (cmd_base->label);
+	g_free (cmd);
 }
 
 static PlannerCmd *
@@ -1316,6 +1313,23 @@ resource_cmd_edit_property_undo (PlannerCmd *cmd_base)
 			       cmd->old_value);
 }
 
+static void
+resource_cmd_edit_property_free (PlannerCmd *cmd_base)
+{
+	ResourceCmdEditProperty *cmd;
+
+	cmd = (ResourceCmdEditProperty*) cmd_base;
+
+	g_value_unset (cmd->value);
+	g_value_unset (cmd->old_value);
+
+	g_object_unref (cmd->resource);
+	g_free (cmd->property);
+
+	g_free (cmd_base->label);
+	g_free (cmd);
+}
+
 static PlannerCmd *
 resource_cmd_edit_property (PlannerView  *view,
 			    MrpResource  *resource,
@@ -1332,10 +1346,10 @@ resource_cmd_edit_property (PlannerView  *view,
 	cmd_base->label = g_strdup (_("Edit resource property"));
 	cmd_base->do_func = resource_cmd_edit_property_do;
 	cmd_base->undo_func = resource_cmd_edit_property_undo;
-	cmd_base->free_func = NULL; /* FIXME */
+	cmd_base->free_func = resource_cmd_edit_property_free;
 
-	cmd->property = property;
-	cmd->resource = resource;
+	cmd->property = g_strdup (property);
+	cmd->resource = g_object_ref (resource);
 
 	cmd->value = g_new0 (GValue, 1);
 	g_value_init (cmd->value, G_VALUE_TYPE (value));
@@ -1347,6 +1361,10 @@ resource_cmd_edit_property (PlannerView  *view,
 	g_object_get_property (G_OBJECT (cmd->resource),
 			       cmd->property,
 			       cmd->old_value);
+
+	/* FIXME: if old and new value are the same, do nothing 
+	   How we can compare values?
+	*/
 
 	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager (view->main_window),
 					   cmd_base);
@@ -1372,10 +1390,27 @@ resource_cmd_edit_custom_property_undo (PlannerCmd *cmd_base)
 
 	cmd = (ResourceCmdEditCustomProperty*) cmd_base;
 
+	/* FIXME: delay in the UI when setting the property */
 	mrp_object_set_property (MRP_OBJECT (cmd->resource),
 				 cmd->property,
 				 cmd->old_value);
 
+}
+
+static void
+resource_cmd_edit_custom_property_free (PlannerCmd *cmd_base)
+{
+	ResourceCmdEditCustomProperty *cmd;
+
+	cmd = (ResourceCmdEditCustomProperty*) cmd_base;
+
+	g_free (cmd_base->label);
+
+	g_value_unset (cmd->value);
+	g_value_unset (cmd->old_value);
+
+	g_object_unref (cmd->resource);
+	g_free (cmd);
 }
 
 static PlannerCmd *
@@ -1394,10 +1429,10 @@ resource_cmd_edit_custom_property (PlannerView  *view,
 	cmd_base->label = g_strdup (_("Edit resource custom property"));
 	cmd_base->do_func = resource_cmd_edit_custom_property_do;
 	cmd_base->undo_func = resource_cmd_edit_custom_property_undo;
-	cmd_base->free_func = NULL; /* FIXME */
+	cmd_base->free_func = resource_cmd_edit_custom_property_free;
 
 	cmd->property = property;
-	cmd->resource = resource;
+	cmd->resource = g_object_ref (resource);
 
 	cmd->value = g_new0 (GValue, 1);
 	g_value_init (cmd->value, G_VALUE_TYPE (value));
@@ -1409,6 +1444,10 @@ resource_cmd_edit_custom_property (PlannerView  *view,
 	mrp_object_get_property (MRP_OBJECT (cmd->resource),
 				 cmd->property,
 				 cmd->old_value);
+
+	/* FIXME: if old and new value are the same, do nothing 
+	   How we can compare values?
+	*/
 
 	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager (view->main_window),
 					   cmd_base);

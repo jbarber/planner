@@ -318,6 +318,22 @@ task_cmd_edit_property_undo (PlannerCmd *cmd_base)
 			       cmd->old_value);
 }
 
+static void
+task_cmd_edit_property_free (PlannerCmd *cmd_base)
+{
+	TaskCmdEditProperty *cmd;
+	
+	cmd = (TaskCmdEditProperty*) cmd_base;
+
+	g_free (cmd_base->label);
+	g_free (cmd->property);
+	g_value_unset (cmd->value);
+	g_value_unset (cmd->old_value);
+	g_free (cmd);
+
+	
+}
+
 static PlannerCmd *
 task_cmd_edit_property (PlannerTaskTree *tree,
 			MrpTask         *task,
@@ -337,7 +353,7 @@ task_cmd_edit_property (PlannerTaskTree *tree,
 
 	cmd_base->do_func = task_cmd_edit_property_do;
 	cmd_base->undo_func = task_cmd_edit_property_undo;
-	cmd_base->free_func = NULL; /* FIXME: task_cmd_edit_free */
+	cmd_base->free_func = task_cmd_edit_property_free;
 
 	cmd->tree = tree;
 	cmd->project = task_tree_get_project (tree);
@@ -803,7 +819,7 @@ typedef struct {
 	MrpTask    *sibling;
 	gboolean    before;
 	gboolean    before_old;
-	gboolean    first_time;
+	gboolean    success;
 } TaskCmdTaskMove;
 
 static void
@@ -811,7 +827,6 @@ task_cmd_task_move_do (PlannerCmd *cmd_base)
 {
 	TaskCmdTaskMove *cmd;
 	GError          *error;
-	gboolean         success;
 
 	cmd = (TaskCmdTaskMove*) cmd_base;
 
@@ -829,22 +844,12 @@ task_cmd_task_move_do (PlannerCmd *cmd_base)
 		}
 	}
 
-	/* Already done the move */
-	if (cmd->first_time) {
-		cmd->first_time = FALSE;
-		return;
-	}
-
-	success = mrp_project_move_task (cmd->project,
+	cmd->success = mrp_project_move_task (cmd->project,
 					 cmd->task,
 					 cmd->sibling,
 					 cmd->parent,
 					 cmd->before,
 					 &error);
-
-	if (g_getenv ("PLANNER_DEBUG_UNDO_TASK")) {
-		g_assert (success);
-	}
 }
 
 static void
@@ -852,9 +857,13 @@ task_cmd_task_move_undo (PlannerCmd *cmd_base)
 {
 	TaskCmdTaskMove *cmd;
 	GError          *error;
-	gboolean         success;
 
 	cmd = (TaskCmdTaskMove*) cmd_base;
+
+	if (!cmd->success) {
+		return;
+	}
+	
 
 	if (g_getenv ("PLANNER_DEBUG_UNDO_TASK")) {
 		if (cmd->before_old) {
@@ -870,16 +879,14 @@ task_cmd_task_move_undo (PlannerCmd *cmd_base)
 		}
 	}
 
-	success = mrp_project_move_task (cmd->project,
+	cmd->success = mrp_project_move_task (cmd->project,
 					 cmd->task,
 					 cmd->sibling,
 					 cmd->parent_old,
 					 cmd->before_old,
 					 &error);
 
-	if (g_getenv ("PLANNER_DEBUG_UNDO_TASK")) {
-		g_assert (success);
-	}		
+	g_assert (cmd->success);
 }
 
 static void
@@ -936,7 +943,6 @@ task_cmd_task_move (PlannerTaskTree *tree,
 	cmd = g_new0 (TaskCmdTaskMove, 1);
 
 	cmd_base = (PlannerCmd*) cmd;
-	cmd->first_time = TRUE;
 	cmd_base->label = g_strdup (_("Move task"));
 	cmd_base->do_func = task_cmd_task_move_do;
 	cmd_base->undo_func = task_cmd_task_move_undo;
