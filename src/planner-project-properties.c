@@ -30,7 +30,6 @@
 #include <glade/glade.h>
 #include <gtk/gtk.h>
 #include <libgnome/gnome-i18n.h>
-#include <libgnomeui/gnome-dateedit.h>
 #include <libplanner/mrp-project.h>
 #include <libplanner/mrp-time.h>
 #include "planner-calendar-selector.h"
@@ -44,7 +43,7 @@ typedef struct {
 	GtkWidget     *name_entry;
 	GtkWidget     *org_entry;
 	GtkWidget     *manager_entry;
-	GtkWidget     *start_date;
+	GtkWidget     *start_entry;
 	GtkWidget     *phase_option_menu;
 	GtkWidget     *calendar_label;
 
@@ -55,72 +54,80 @@ typedef struct {
 
 #define DIALOG_GET_DATA(d) g_object_get_data ((GObject*)d, "data")
 
-static void mpp_select_calendar_clicked_cb        (GtkWidget           *button,
-						   GtkWidget           *dialog);
-static void mpp_start_changed_cb                  (GtkWidget           *w,
-						   GtkWidget           *dialog);
-static void mpp_project_start_notify_cb           (MrpProject          *project,
-						   GParamSpec          *pspec,
-						   GtkWidget           *dialog);
-static void mpp_project_calendar_notify_cb        (MrpProject          *project,
-						   GParamSpec          *pspec,
-						   GtkWidget           *dialog);
-static void mpp_manager_changed_cb                (GtkWidget           *w,
-						   GtkWidget           *dialog);
-static void mpp_project_manager_notify_cb         (MrpProject          *project,
-						   GParamSpec          *pspec,
-						   GtkWidget           *dialog);
-static void mpp_organization_changed_cb           (GtkWidget           *w,
-						   GtkWidget           *dialog);
-static void mpp_project_organization_notify_cb    (MrpProject          *project,
-						   GParamSpec          *pspec,
-						   GtkWidget           *dialog);
-static void mpp_name_changed_cb                   (GtkWidget           *w,
-						   GtkWidget           *dialog);
-static void mpp_project_name_notify_cb            (MrpProject          *project,
-						   GParamSpec          *pspec,
-						   GtkWidget           *dialog);
-static void mpp_project_calendar_notify_cb        (MrpProject          *project,
-						   GParamSpec          *pspec,
-						   GtkWidget           *dialog);
-static void mpp_phase_option_menu_changed_cb      (GtkOptionMenu       *option_menu,
-						   GtkWidget           *dialog);
-static void mpp_project_phase_changed_cb          (MrpProject          *project,
-						   MrpProperty         *property,
-						   GValue              *value,
-						   GtkWidget           *dialog);
-static void mpp_project_phases_notify_cb          (MrpProject          *project,
-						   GParamSpec          *pspec,
-						   GtkWidget           *dialog);
-static void mpp_setup_phases                      (DialogData          *data);
-static void mpp_set_phase                         (DialogData          *data,
-						   const gchar         *phase);
-static void mpp_setup_properties_list             (GtkWidget           *dialog);
-static void mpp_property_name_data_func           (GtkTreeViewColumn   *tree_column,
-						   GtkCellRenderer     *cell,
-						   GtkTreeModel        *tree_model,
-						   GtkTreeIter         *iter,
-						   GtkWidget           *dialog);
-static void mpp_property_value_data_func          (GtkTreeViewColumn   *tree_column,
-						   GtkCellRenderer     *cell,
-						   GtkTreeModel        *tree_model,
-						   GtkTreeIter         *iter,
-						   GtkWidget           *dialog);
-static void mpp_property_added                    (MrpProject          *project,
-						   GType                object_type,
-						   MrpProperty         *property,
-						   GtkWidget           *dialog);
-static void mpp_property_removed                  (MrpProject          *project,
-						   MrpProperty         *property,
-						   GtkWidget           *dialog);
-static void mpp_add_property_button_clicked_cb    (GtkButton           *button,
-						   GtkWidget           *dialog);
-static void mpp_remove_property_button_clicked_cb (GtkButton           *button,
-						   GtkWidget           *dialog);
-static void mpp_property_value_edited             (GtkCellRendererText *cell,
-						   gchar               *path_string,
-						   gchar               *new_text,
-						   GtkWidget           *dialog);
+static void     mpp_select_calendar_clicked_cb        (GtkWidget           *button,
+						       GtkWidget           *dialog);
+static void     mpp_name_set_from_widget              (GtkWidget           *dialog);
+static gboolean mpp_name_focus_out_event_cb           (GtkWidget           *widget,
+						       GdkEvent            *event,
+						       GtkWidget           *dialog);
+static void     mpp_project_name_notify_cb            (MrpProject          *project,
+						       GParamSpec          *pspec,
+						       GtkWidget           *dialog);
+static void     mpp_org_set_from_widget               (GtkWidget           *dialog);
+static gboolean mpp_org_focus_out_event_cb            (GtkWidget           *widget,
+						       GdkEvent            *event,
+						       GtkWidget           *dialog);
+static void     mpp_project_org_notify_cb             (MrpProject          *project,
+						       GParamSpec          *pspec,
+						       GtkWidget           *dialog);
+static void     mpp_project_manager_notify_cb         (MrpProject          *project,
+						       GParamSpec          *pspec,
+						       GtkWidget           *dialog);
+static void     mpp_manager_set_from_widget           (GtkWidget           *dialog);
+static gboolean mpp_manager_focus_out_event_cb        (GtkWidget           *widget,
+						       GdkEvent            *event,
+						       GtkWidget           *dialog);
+static void     mpp_project_start_notify_cb           (MrpProject          *project,
+						       GParamSpec          *pspec,
+						       GtkWidget           *dialog);
+static void     mpp_start_set_from_widget             (GtkWidget           *dialog);
+static gboolean mpp_start_focus_out_event_cb          (GtkWidget           *widget,
+						       GdkEvent            *event,
+						       GtkWidget           *dialog);
+static void     mpp_project_calendar_notify_cb        (MrpProject          *project,
+						       GParamSpec          *pspec,
+						       GtkWidget           *dialog);
+static void     mpp_project_calendar_notify_cb        (MrpProject          *project,
+						       GParamSpec          *pspec,
+						       GtkWidget           *dialog);
+static void     mpp_phase_option_menu_changed_cb      (GtkOptionMenu       *option_menu,
+						       GtkWidget           *dialog);
+static void     mpp_project_phase_changed_cb          (MrpProject          *project,
+						       MrpProperty         *property,
+						       GValue              *value,
+						       GtkWidget           *dialog);
+static void     mpp_project_phases_notify_cb          (MrpProject          *project,
+						       GParamSpec          *pspec,
+						       GtkWidget           *dialog);
+static void     mpp_setup_phases                      (DialogData          *data);
+static void     mpp_set_phase                         (DialogData          *data,
+						       const gchar         *phase);
+static void     mpp_setup_properties_list             (GtkWidget           *dialog);
+static void     mpp_property_name_data_func           (GtkTreeViewColumn   *tree_column,
+						       GtkCellRenderer     *cell,
+						       GtkTreeModel        *tree_model,
+						       GtkTreeIter         *iter,
+						       GtkWidget           *dialog);
+static void     mpp_property_value_data_func          (GtkTreeViewColumn   *tree_column,
+						       GtkCellRenderer     *cell,
+						       GtkTreeModel        *tree_model,
+						       GtkTreeIter         *iter,
+						       GtkWidget           *dialog);
+static void     mpp_property_added                    (MrpProject          *project,
+						       GType                object_type,
+						       MrpProperty         *property,
+						       GtkWidget           *dialog);
+static void     mpp_property_removed                  (MrpProject          *project,
+						       MrpProperty         *property,
+						       GtkWidget           *dialog);
+static void     mpp_add_property_button_clicked_cb    (GtkButton           *button,
+						       GtkWidget           *dialog);
+static void     mpp_remove_property_button_clicked_cb (GtkButton           *button,
+						       GtkWidget           *dialog);
+static void     mpp_property_value_edited             (GtkCellRendererText *cell,
+						       gchar               *path_string,
+						       gchar               *new_text,
+						       GtkWidget           *dialog);
 
 
 
@@ -128,6 +135,155 @@ enum {
 	COL_PROPERTY,
 	NUM_OF_COLS
 };
+
+
+/*
+ * Commands
+ */
+
+typedef enum {
+	PROP_STRING,
+	PROP_DATE,
+	PROP_CALENDAR
+} PropType;
+
+typedef struct {
+	PlannerCmd   base;
+
+	MrpProject  *project;
+
+	PropType     type;
+	gchar       *property;  
+	
+	/* String */
+	gchar       *str;
+	gchar       *str_old;
+
+	/* Date */
+	mrptime      t;
+	mrptime      t_old;
+	
+	/* This won't work... the calendar might be removed and re-added... so
+	 * the pointer will not be the same.
+	 */ 
+	MrpCalendar *calendar;
+	MrpCalendar *calendar_old;
+} PropertyCmdEdit;
+
+static void
+property_cmd_edit_do (PlannerCmd *cmd_base)
+{
+	PropertyCmdEdit *cmd;
+
+	cmd = (PropertyCmdEdit*) cmd_base;
+
+	switch (cmd->type) {
+	case PROP_STRING:
+		g_object_set (cmd->project, cmd->property,
+			      cmd->str, NULL);
+		break;
+		
+	case PROP_DATE:
+		g_object_set (cmd->project, cmd->property,
+			      cmd->t, NULL);
+		break;
+		
+	case PROP_CALENDAR:
+		g_object_set (cmd->project, cmd->property,
+			      cmd->calendar, NULL);
+		break;
+	}
+}
+
+static void
+property_cmd_edit_undo (PlannerCmd *cmd_base)
+{
+	PropertyCmdEdit *cmd;
+
+	cmd = (PropertyCmdEdit*) cmd_base;
+
+	switch (cmd->type) {
+	case PROP_STRING:
+		g_object_set (cmd->project, cmd->property,
+			      cmd->str_old, NULL);
+		break;
+		
+	case PROP_DATE:
+		g_object_set (cmd->project, cmd->property,
+			      cmd->t_old, NULL);
+		break;
+		
+	case PROP_CALENDAR:
+		g_object_set (cmd->project, cmd->property,
+			      cmd->calendar_old, NULL);
+		break;
+	}
+}
+
+static PlannerCmd *
+property_cmd_edit (DialogData  *data,
+		   const gchar *label,
+		   PropType     type,
+		   const gchar *property,
+		   const gchar *str_value,
+		   time_t       time_value,
+		   MrpCalendar *calendar_value)
+{
+	PlannerCmd      *cmd_base;
+	PropertyCmdEdit *cmd;
+
+	cmd = g_new0 (PropertyCmdEdit, 1);
+
+	switch (type) {
+	case PROP_STRING:
+		g_object_get (data->project, property, &cmd->str_old, NULL);
+		if (strcmp (str_value, cmd->str_old) == 0) {
+			goto no_change;
+		}
+
+		cmd->str = g_strdup (str_value);
+		break;
+		
+	case PROP_DATE:
+		g_object_get (data->project, property, &cmd->t_old, NULL);
+		if (time_value == cmd->t_old) {
+			goto no_change;
+		}
+		
+		cmd->t = time_value;
+		break;
+		
+	case PROP_CALENDAR:
+		g_object_get (data->project, property, &cmd->calendar_old, NULL);
+		if (calendar_value == cmd->calendar_old) {
+			goto no_change;
+		}
+
+		cmd->calendar = calendar_value;
+		break;
+	}
+	
+	cmd_base = (PlannerCmd*) cmd;
+
+	cmd_base->label = g_strdup (label);
+	cmd_base->do_func = property_cmd_edit_do;
+	cmd_base->undo_func = property_cmd_edit_undo;
+	cmd_base->free_func = NULL; /* FIXME */
+
+	cmd->project = data->project;
+	cmd->type = type;
+	cmd->property = g_strdup (property);
+
+	planner_window_cmd_manager_insert_and_do (data->main_window, cmd_base);
+
+	return cmd_base;
+
+ no_change:
+	g_free (cmd->str_old);
+	g_free (cmd);
+
+	return NULL;
+}
 
 static void
 mpp_select_calendar_clicked_cb (GtkWidget *button,
@@ -176,7 +332,7 @@ mpp_connect_to_project (MrpProject *project, GtkWidget *dialog)
 				 0);
 
 	g_signal_connect_object (project, "notify::organization",
-				 G_CALLBACK (mpp_project_organization_notify_cb),
+				 G_CALLBACK (mpp_project_org_notify_cb),
 				 dialog,
 				 0);
 
@@ -215,94 +371,74 @@ mpp_connect_to_project (MrpProject *project, GtkWidget *dialog)
 static void  
 mpp_project_name_notify_cb  (MrpProject *project,  
 			     GParamSpec *pspec, 
-			     GtkWidget *dialog)
+			     GtkWidget  *dialog)
 {
-	
 	DialogData *data;
 	gchar      *name;
 
-	g_return_if_fail (MRP_IS_PROJECT (project));
-	g_return_if_fail (GTK_IS_DIALOG (dialog));
+	data = DIALOG_GET_DATA (dialog);
 
 	g_object_get (project, "name", &name, NULL);
-	data = DIALOG_GET_DATA (dialog);
-	
-	g_signal_handlers_block_by_func (data->name_entry,
-					 mpp_name_changed_cb, 
-					 project);
-
 	gtk_entry_set_text (GTK_ENTRY (data->name_entry), name);
-
-	g_signal_handlers_unblock_by_func (data->name_entry, 
-					   mpp_name_changed_cb,
-					   project);
-
 	g_free (name);
 }
 
 static void
-mpp_name_changed_cb (GtkWidget *w, GtkWidget *dialog) {
+mpp_name_set_from_widget (GtkWidget *dialog)
+{
+	DialogData  *data;
+	const gchar *str;
 
-	MrpProject  *project;
-	const gchar *name;
-
-	name = gtk_entry_get_text (GTK_ENTRY (w));
-
-	project = g_object_get_data (G_OBJECT (dialog), "project");
+	data = DIALOG_GET_DATA (dialog);
+	str = gtk_entry_get_text (GTK_ENTRY (data->name_entry));
 	
-	g_signal_handlers_block_by_func (project,
-					 mpp_project_name_notify_cb, dialog);
+	property_cmd_edit (data, _("Edit Project Name"), PROP_STRING, "name", str, 0, NULL);
+}
 
-	g_object_set (project, "name", name, NULL);
-
-	g_signal_handlers_unblock_by_func (project,
-					 mpp_project_name_notify_cb, dialog);
+static gboolean
+mpp_name_focus_out_event_cb (GtkWidget *widget,
+			     GdkEvent  *event,
+			     GtkWidget *dialog)
+{
+	mpp_name_set_from_widget (dialog);
+	
+	return FALSE;
 }
 
 static void  
-mpp_project_organization_notify_cb (MrpProject *project,  
+mpp_project_org_notify_cb (MrpProject *project,  
 				    GParamSpec *pspec, 
 				    GtkWidget *dialog)
 {
 	DialogData *data;
-	gchar      *organization;
+	gchar      *org;
 
-	g_return_if_fail (MRP_IS_PROJECT (project));
-	g_return_if_fail (GTK_IS_DIALOG (dialog));
-
-	g_object_get (project, "organization", &organization, NULL);
+	g_object_get (project, "organization", &org, NULL);
 	data = DIALOG_GET_DATA (dialog);
-	
-	g_signal_handlers_block_by_func (data->org_entry, mpp_organization_changed_cb, 
-					 project);
-
-	gtk_entry_set_text (GTK_ENTRY (data->org_entry), organization);
-
-	g_signal_handlers_unblock_by_func (data->org_entry, 
-					   mpp_organization_changed_cb, project);
-
-	g_free (organization);	
+	gtk_entry_set_text (GTK_ENTRY (data->org_entry), org);
+	g_free (org);	
 }
 
 static void
-mpp_organization_changed_cb (GtkWidget *w, GtkWidget *dialog)
+mpp_org_set_from_widget (GtkWidget *dialog)
 {
-
-	MrpProject  *project;
-	const gchar *organization;
-
-	organization = gtk_entry_get_text (GTK_ENTRY (w));
-
-	project = g_object_get_data (G_OBJECT (dialog), "project");
+	DialogData  *data;
+	const gchar *str;
 	
-	g_signal_handlers_block_by_func (project,
-					 mpp_project_organization_notify_cb, dialog);
+	data = DIALOG_GET_DATA (dialog);
+	str = gtk_entry_get_text (GTK_ENTRY (data->org_entry));
+	
+	property_cmd_edit (data, _("Edit Organization"), PROP_STRING, "organization", str, 0, NULL);
+}
 
-	g_object_set (project, "organization", organization, NULL);
-
-	g_signal_handlers_unblock_by_func (project,
-					 mpp_project_organization_notify_cb, dialog);
-
+static gboolean
+mpp_org_focus_out_event_cb (GtkWidget *widget,
+			    GdkEvent  *event,
+			    GtkWidget *dialog)
+{
+	mpp_org_set_from_widget (dialog);
+	
+	return FALSE;
 }
 
 static void  
@@ -313,42 +449,51 @@ mpp_project_manager_notify_cb (MrpProject *project,
 	DialogData *data;
 	gchar      *manager;
 
-	g_return_if_fail (MRP_IS_PROJECT (project));
-	g_return_if_fail (GTK_IS_DIALOG (dialog));
-
 	g_object_get (project, "manager", &manager, NULL);
 	data = DIALOG_GET_DATA (dialog);
-	
-	g_signal_handlers_block_by_func (data->manager_entry, mpp_manager_changed_cb, 
-					 project);
-
 	gtk_entry_set_text (GTK_ENTRY (data->manager_entry), manager);
-
-	g_signal_handlers_unblock_by_func (data->manager_entry, 
-					   mpp_manager_changed_cb, project);
-
 	g_free (manager);
 }
 
 static void
-mpp_manager_changed_cb (GtkWidget *w, GtkWidget *dialog)
+mpp_manager_set_from_widget (GtkWidget *dialog)
 {
-	MrpProject  *project;
-	const gchar *manager;
-
-	manager = gtk_entry_get_text (GTK_ENTRY (w));
-
-	project = g_object_get_data (G_OBJECT (dialog), "project");
+	DialogData  *data;
+	const gchar *str;
 	
-	g_signal_handlers_block_by_func (project,
-					 mpp_project_manager_notify_cb, dialog);
-
-	g_object_set (project, "manager", manager, NULL);
-
-	g_signal_handlers_unblock_by_func (project,
-					 mpp_project_manager_notify_cb, dialog);
+	data = DIALOG_GET_DATA (dialog);
+	str = gtk_entry_get_text (GTK_ENTRY (data->manager_entry));
 	
+	property_cmd_edit (data, _("Edit Manager"), PROP_STRING, "manager", str, 0, NULL);
+}
+
+static gboolean
+mpp_manager_focus_out_event_cb (GtkWidget *widget,
+				GdkEvent  *event,
+				GtkWidget *dialog)
+{
+	mpp_manager_set_from_widget (dialog);
 	
+	return FALSE;
+}
+
+static void
+mpp_set_start (GtkWidget *dialog, mrptime start)
+{
+	DialogData  *data;
+	gchar        buffer[256];
+	struct tm   *tm;
+	const gchar *format = "%x"; /* keep in variable get rid of warning */
+
+	data = DIALOG_GET_DATA (dialog);
+
+	tm = localtime (&start);
+
+	if (!strftime (buffer, sizeof (buffer), format, tm)) {
+		strcpy (buffer, "???");
+	}
+
+	gtk_entry_set_text (GTK_ENTRY (data->start_entry), buffer);	
 }
 
 static void
@@ -359,48 +504,48 @@ mpp_project_start_notify_cb (MrpProject *project,
 	DialogData *data;
 	mrptime     start;
 
-	g_return_if_fail (MRP_IS_PROJECT (project));
-	g_return_if_fail (GTK_IS_DIALOG (dialog));
-
 	data = DIALOG_GET_DATA (dialog);
 
-	start = mrp_project_get_project_start (project);
-
-	g_signal_handlers_block_by_func (data->start_date,
-					 mpp_start_changed_cb, project);
-
-	
-	gnome_date_edit_set_time (GNOME_DATE_EDIT (data->start_date), start);
-
-	g_signal_handlers_unblock_by_func (data->start_date,
-					   mpp_start_changed_cb, project);
+	start = mrp_project_get_project_start (data->project);
+	mpp_set_start (dialog, start);
 }
 
 static void
-mpp_start_changed_cb (GtkWidget *w, GtkWidget *dialog)
+mpp_start_set_from_widget (GtkWidget *dialog)
 {
-	mrptime     start;
-	time_t      t;
-	struct tm  *tm;
-	MrpProject *project;
+	DialogData  *data;
+	const gchar *str;
+	mrptime      start;
+	GDate       *date;
+	struct tm    tm;
 
-	project = g_object_get_data (G_OBJECT (dialog), "project");
+	data = DIALOG_GET_DATA (dialog);
 
-	t = gnome_date_edit_get_time (GNOME_DATE_EDIT (w));
+	str = gtk_entry_get_text (GTK_ENTRY (data->start_entry));
 
-	/* We need to do this to get the time as UTC. */
-	tm = localtime (&t);
-	start = mrp_time_from_tm (tm);
+	date = g_date_new ();
+	g_date_set_parse (date, str);
+
+	if (!g_date_valid (date)) {
+		return;
+	}
+
+	g_date_to_struct_tm (date, &tm);
+	g_date_free (date);
 	
-	g_signal_handlers_block_by_func (project,
-					 mpp_project_start_notify_cb,
-					 dialog);
-	
-	g_object_set (project, "project-start", start, NULL);
+	start = mrp_time_from_tm (&tm);
 
-	g_signal_handlers_unblock_by_func (project,
-					   mpp_project_start_notify_cb,
-					   dialog);
+	property_cmd_edit (data, _("Edit Project Start"), PROP_DATE, "project-start", NULL, start, NULL);
+}
+
+static gboolean
+mpp_start_focus_out_event_cb (GtkWidget *widget,
+			      GdkEvent  *event,
+			      GtkWidget *dialog)
+{
+	mpp_start_set_from_widget (dialog);
+	
+	return FALSE;
 }
 
 static void  
@@ -410,9 +555,6 @@ mpp_project_calendar_notify_cb (MrpProject *project,
 {	
 	DialogData  *data;
 	MrpCalendar *calendar;
-
-	g_return_if_fail (MRP_IS_PROJECT (project));
-	g_return_if_fail (GTK_IS_DIALOG (dialog));
 
 	data = DIALOG_GET_DATA (dialog);
 
@@ -790,8 +932,6 @@ mpp_property_removed (MrpProject  *project,
 	GtkTreeModel     *model;
 	PropertyFindData *find_data;
 	
-	g_return_if_fail (GTK_IS_DIALOG (dialog));
-	
 	model = gtk_tree_view_get_model (data->properties_tree);
 	
 	find_data = g_new0 (PropertyFindData, 1);
@@ -896,7 +1036,7 @@ mpp_property_dialog_get_selected (GtkWidget *option_menu)
 }	
 
 static void
-mpp_property_dialog_type_selected_cb (GtkWidget *widget,GtkWidget *dialog)
+mpp_property_dialog_type_selected_cb (GtkWidget *widget, GtkWidget *dialog)
 {
 	gint type;
 	
@@ -1145,7 +1285,7 @@ mpp_property_value_edited (GtkCellRendererText *cell,
 				NULL);
 		break;
 	case MRP_PROPERTY_TYPE_STRING_LIST:
-		/* FIXME: SHould string-list still be around? */
+		/* FIXME: Should string-list still be around? */
 		break;
 	default:
 		g_assert_not_reached ();
@@ -1162,6 +1302,18 @@ mpp_parent_destroy_cb (GtkWidget *parent,
 	gtk_widget_destroy (dialog);
 }
 
+static void
+mpp_dialog_destroy_cb (GtkWidget *dialog,
+		       gpointer   user_data)
+{
+	mpp_name_set_from_widget (dialog);
+	mpp_org_set_from_widget (dialog);
+	mpp_manager_set_from_widget (dialog);
+	mpp_start_set_from_widget (dialog);
+
+	/* FIXME: more... */
+}
+	
 GtkWidget *
 planner_project_properties_new (PlannerWindow *window)
 {
@@ -1202,11 +1354,16 @@ planner_project_properties_new (PlannerWindow *window)
 				 G_CALLBACK (mpp_parent_destroy_cb),
 				 dialog,
 				 0);
+
+	g_signal_connect (dialog,
+			  "destroy",
+			  G_CALLBACK (mpp_dialog_destroy_cb),
+			  NULL);
 	
 	data->name_entry = glade_xml_get_widget (glade, "entry_name");
 	data->org_entry = glade_xml_get_widget (glade, "entry_org");
 	data->manager_entry = glade_xml_get_widget (glade, "entry_manager");
-	data->start_date = glade_xml_get_widget (glade, "dateedit_start");
+	data->start_entry = glade_xml_get_widget (glade, "entry_start");
 	data->phase_option_menu = glade_xml_get_widget (glade, "optionmenu_phase");
 	data->calendar_label = glade_xml_get_widget (glade, "label_calendar");
 	data->properties_tree = GTK_TREE_VIEW (
@@ -1217,9 +1374,6 @@ planner_project_properties_new (PlannerWindow *window)
 	data->remove_property_button = glade_xml_get_widget (glade,
 							     "remove_property_button");
 
-	w = glade_xml_get_widget (glade, "label_start");
-	gtk_label_set_mnemonic_widget (GTK_LABEL (w), data->start_date);
-	
 	start = mrp_project_get_project_start (data->project);
 
 	g_object_set_data_full (G_OBJECT (dialog), "data", data, g_free);
@@ -1231,28 +1385,28 @@ planner_project_properties_new (PlannerWindow *window)
 		      "manager", &manager,
 		      NULL);
 
-	gnome_date_edit_set_time (GNOME_DATE_EDIT (data->start_date), start);
-	g_signal_connect (data->start_date,
-			  "date_changed",
-			  G_CALLBACK (mpp_start_changed_cb),
+	mpp_set_start (dialog, start);
+	g_signal_connect (data->start_entry,
+			  "focus_out_event",
+			  G_CALLBACK (mpp_start_focus_out_event_cb),
 			  dialog);
 	
 	gtk_entry_set_text (GTK_ENTRY (data->name_entry), name);
 	g_signal_connect (data->name_entry,
-			  "changed",
-			  G_CALLBACK (mpp_name_changed_cb),
+			  "focus_out_event",
+			  G_CALLBACK (mpp_name_focus_out_event_cb),
 			  dialog);
 
 	gtk_entry_set_text (GTK_ENTRY (data->org_entry), org);
 	g_signal_connect (data->org_entry,
-			  "changed",
-			  G_CALLBACK (mpp_organization_changed_cb),
+			  "focus_out_event",
+			  G_CALLBACK (mpp_org_focus_out_event_cb),
 			  dialog);
 	
 	gtk_entry_set_text (GTK_ENTRY (data->manager_entry), manager);
 	g_signal_connect (data->manager_entry,
-			  "changed",
-			  G_CALLBACK (mpp_manager_changed_cb),
+			  "focus_out_event",
+			  G_CALLBACK (mpp_manager_focus_out_event_cb),
 			  dialog);
 
 	/* Project phase. */
@@ -1295,3 +1449,4 @@ planner_project_properties_new (PlannerWindow *window)
 
 	return dialog;
 }
+

@@ -1,5 +1,10 @@
 2003-12-12  Richard Hult  <richard@imendio.com>
 
+	* data/glade/project-properties.glade:
+	* src/planner-project-properties.c: Undo for most of the stuff,
+	and get rid of the sucky gnome-date-edit widget. Don't perform
+	changes on "changed", do it on focus out instead.
+
 	* libplanner/mrp-property.c: Fix comment.
 
 	* data/glade/project-properties.glade:
