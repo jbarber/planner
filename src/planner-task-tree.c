@@ -1041,166 +1041,6 @@ task_cmd_move (PlannerTaskTree *tree,
 }
 
 typedef struct {
-	PlannerCmd        base;
-
-	MrpProject       *project;
-	MrpTask          *before;
-	MrpTask          *after;
-	MrpRelationType   relationship;
-	glong             lag;
-	GError           *error;
-} TaskCmdLink;
-
-static gboolean
-task_cmd_link_do (PlannerCmd *cmd_base)
-{
-	TaskCmdLink *cmd;
-	GError      *error = NULL;
-	MrpRelation *relation;
-	gboolean     retval;
-
-	cmd = (TaskCmdLink *) cmd_base;
-
-	relation = mrp_task_add_predecessor (cmd->after,
-					     cmd->before,
-					     cmd->relationship,
-					     cmd->lag,
-					     &error);
-	if (!error) {
-		retval = TRUE;
-	} else {
-		cmd->error = error;
-		retval = FALSE;		
-	} 
-
-	return retval;
-}
-
-static void
-task_cmd_link_undo (PlannerCmd *cmd_base)
-{
-	TaskCmdLink *cmd;
-	
-	cmd = (TaskCmdLink*) cmd_base;
-	
-	mrp_task_remove_predecessor (cmd->after, cmd->before);
-}
-
-static void
-task_cmd_link_free (PlannerCmd *cmd_base)
-{
-	TaskCmdLink *cmd;
-
-	cmd = (TaskCmdLink *) cmd_base;
-
-	g_object_unref (cmd->project);
-	g_object_unref (cmd->before);
-	g_object_unref (cmd->after);
-}
-
-
-PlannerCmd *
-planner_task_tree_task_cmd_link (PlannerTaskTree *tree,
-				 MrpTask         *before,
-				 MrpTask         *after,
-				 MrpRelationType  relationship,
-				 glong            lag,
-				 GError         **error)
-{
-	PlannerTaskTreePriv *priv = tree->priv;
-	PlannerCmd          *cmd_base;
-	TaskCmdLink         *cmd;
-
-	cmd = g_new0 (TaskCmdLink, 1);
-
-	cmd_base = (PlannerCmd*) cmd;
-	cmd_base->label = g_strdup (_("Link task"));
-	cmd_base->do_func = task_cmd_link_do;
-	cmd_base->undo_func = task_cmd_link_undo;
-	cmd_base->free_func = task_cmd_link_free;
-
-	cmd->project = g_object_ref (tree->priv->project);
-
-	cmd->before = g_object_ref (before);
-	cmd->after = g_object_ref (after);
-	cmd->relationship = relationship;
-	cmd->lag = lag;
-			
-	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager 
-					   (priv->main_window),
-					   cmd_base);
-
-	if (cmd->error) {
-		g_propagate_error (error, cmd->error);
-		return NULL;
-	}
-
-	return cmd_base;	
-}
-
-static gboolean
-task_cmd_unlink_do (PlannerCmd *cmd_base)
-{
-	TaskCmdLink *cmd;
-	
-	cmd = (TaskCmdLink*) cmd_base;
-
-	if (g_getenv ("PLANNER_DEBUG_UNDO_TASK")) {
-		g_message ("Removing the link ...");
-	}
-	
-	mrp_task_remove_predecessor (cmd->after, cmd->before);
-
-	return TRUE;
-}
-
-static void
-task_cmd_unlink_undo (PlannerCmd *cmd_base)
-{
-	TaskCmdLink *cmd;
-	GError      *error;
-	MrpRelation *relation;
-
-	cmd = (TaskCmdLink *) cmd_base;
-
-	relation = mrp_task_add_predecessor (cmd->after,
-					     cmd->before,
-					     cmd->relationship,
-					     cmd->lag,
-					     &error);
-	g_assert (relation);
-}
-
-static PlannerCmd *
-task_cmd_unlink (PlannerTaskTree *tree,
-		 MrpRelation     *relation)
-{
-	PlannerTaskTreePriv *priv = tree->priv;
-	PlannerCmd          *cmd_base;
-	TaskCmdLink         *cmd;
-
-	cmd = g_new0 (TaskCmdLink, 1);
-
-	cmd_base = (PlannerCmd*) cmd;
-	cmd_base->label = g_strdup (_("Unlink task"));
-	cmd_base->do_func = task_cmd_unlink_do;
-	cmd_base->undo_func = task_cmd_unlink_undo;
-	cmd_base->free_func = task_cmd_link_free;
-	
-	cmd->project = g_object_ref (tree->priv->project);
-
-	cmd->before = g_object_ref (mrp_relation_get_predecessor (relation));
-	cmd->after = g_object_ref (mrp_relation_get_successor (relation));
-	cmd->relationship = mrp_relation_get_relation_type (relation);
-	cmd->lag = mrp_relation_get_lag (relation);
-			
-	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager 
-					   (priv->main_window),
-					   cmd_base);
-	return cmd_base;
-}
-
-typedef struct {
 	PlannerCmd   base;
 
 	MrpTask      *task;
@@ -3018,7 +2858,7 @@ planner_task_tree_unlink_task (PlannerTaskTree *tree)
 			/* mrp_task_remove_predecessor (
 			   task, mrp_relation_get_predecessor (relation)); */
 
-			task_cmd_unlink (tree, relation); 
+			planner_task_cmd_unlink (tree->priv->main_window, relation); 
 		}
 
 		g_list_free (relations);
@@ -3030,7 +2870,7 @@ planner_task_tree_unlink_task (PlannerTaskTree *tree)
 			/* mrp_task_remove_predecessor (
 			   mrp_relation_get_successor (relation), task); */
 
-			task_cmd_unlink (tree, relation);
+			planner_task_cmd_unlink (tree->priv->main_window, relation);
 		}
 
 		g_list_free (relations);
@@ -3057,13 +2897,13 @@ planner_task_tree_link_tasks (PlannerTaskTree *tree,
 	
 	target_task = list->data;
 	for (l = list->next; l; l = l->next) {
-		PlannerCmd  *cmd;
-		GError      *error = NULL;
+		PlannerCmd          *cmd;
+		GError              *error = NULL;
 
 		task = l->data;
 
-		cmd = planner_task_tree_task_cmd_link (tree, task, target_task, 
-						       relationship, 0, &error);
+		cmd = planner_task_cmd_link (tree->priv->main_window, task, target_task, 
+					     relationship, 0, &error);
 
 		/* cmd = mrp_task_add_predecessor (target_task,
 						task,
