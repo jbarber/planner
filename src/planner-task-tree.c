@@ -48,6 +48,7 @@
 #include "planner-task-popup.h"
 #include "planner-task-cmd.h"
 
+
 #define WARN_TASK_DIALOGS 10
 #define MAX_TASK_DIALOGS 25
 
@@ -124,6 +125,11 @@ static void        task_tree_duration_data_func        (GtkTreeViewColumn    *tr
 							GtkTreeIter          *iter,
 							gpointer              data);
 static void        task_tree_cost_data_func            (GtkTreeViewColumn    *tree_column,
+							GtkCellRenderer      *cell,
+							GtkTreeModel         *tree_model,
+							GtkTreeIter          *iter,
+							gpointer              data);
+static void        task_tree_assigned_to_data_func     (GtkTreeViewColumn    *tree_column,
 							GtkCellRenderer      *cell,
 							GtkTreeModel         *tree_model,
 							GtkTreeIter          *iter,
@@ -1523,6 +1529,63 @@ task_tree_cost_data_func (GtkTreeViewColumn *tree_column,
 }
 
 static void
+task_tree_assigned_to_data_func (GtkTreeViewColumn *tree_column,
+			  GtkCellRenderer   *cell,
+			  GtkTreeModel      *tree_model,
+			  GtkTreeIter       *iter,
+			  gpointer           data)
+{
+	gchar          *assigned_to;
+	GList          *resources;
+	GList          *l;
+	MrpAssignment  *assignment;
+	MrpResource    *resource;
+	MrpTask        *task;
+	const gchar    *name;
+
+	gtk_tree_model_get (tree_model, iter, 
+			    COL_TASK, &task,
+			    -1);
+
+	assigned_to = 0;
+	resources = mrp_task_get_assigned_resources(task);
+
+	for (l = resources; l; l = l->next) {
+		resource = l->data;
+
+		assignment = mrp_task_get_assignment (task, resource);
+
+		/* Try short name first. */
+		name = mrp_resource_get_short_name (resource);
+
+		if (!name || name[0] == 0) {
+			name = mrp_resource_get_name (resource);
+		}
+
+		if (!name || name[0] == 0) {
+			name = _("Unnamed");
+		}
+
+		/* separate names with commas */
+		if(assigned_to)	{
+			char *newstr;
+			newstr = g_strdup_printf ("%s, %s", assigned_to, name);
+			g_free (assigned_to);
+			assigned_to = newstr;
+		} else { /* g_strconcat() can't take a NULL string so we do special stuff when assigned_to is null */
+			assigned_to = g_strdup (name);
+		}
+	}
+	g_list_free (resources);
+
+	g_object_set (cell,
+		      "text", assigned_to,
+		      NULL);
+
+	g_free (assigned_to);
+}
+
+static void
 task_tree_work_data_func (GtkTreeViewColumn *tree_column,
 			  GtkCellRenderer   *cell,
 			  GtkTreeModel      *tree_model,
@@ -2395,6 +2458,25 @@ task_tree_add_column (GtkTreeView *tree,
 							 NULL);
 		g_object_set_data (G_OBJECT (col),
 				   "data-func", task_tree_cost_data_func);
+		g_object_set_data (G_OBJECT (col),
+				   "user-data", tree);
+
+		gtk_tree_view_append_column (tree, col);
+		break;
+
+	case COL_ASSIGNED_TO:
+		cell = gtk_cell_renderer_text_new ();
+		col = gtk_tree_view_column_new_with_attributes (title,
+								cell,
+								NULL);
+		gtk_tree_view_column_set_resizable (col, TRUE);
+		gtk_tree_view_column_set_cell_data_func (col,
+							 cell,
+							 task_tree_assigned_to_data_func,
+							 tree,
+							 NULL);
+		g_object_set_data (G_OBJECT (col),
+				   "data-func", task_tree_assigned_to_data_func);
 		g_object_set_data (G_OBJECT (col),
 				   "user-data", tree);
 

@@ -1,3 +1,12 @@
+2004-08-02  Richard Hult  <richard@imendio.com>
+
+	* src/planner-gantt-model.h:
+	* src/planner-task-tree.c: (task_tree_assigned_to_data_func),
+	(task_tree_add_column):
+	* src/planner-task-view.c: (get_widget): Add patch from Chris
+	Morgan <cmorgan@alum.wpi.edu> to add a column with the assigned
+	resources.
+
 2004-08-01  Richard Hult  <richard@imendio.com>
 	
 	* libplanner/mrp-task-manager.c:

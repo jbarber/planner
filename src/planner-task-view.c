@@ -277,6 +277,7 @@ get_widget (PlannerView *view)
 						    COL_WORK,   _("Work"),
 						    COL_SLACK,  _("Slack"),
 						    COL_COST,   _("Cost"),
+						    COL_ASSIGNED_TO, _("Assigned to"),
 						    -1);
 
 		g_object_unref (model);
