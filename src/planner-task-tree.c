@@ -809,19 +809,22 @@ task_cmd_move_free (PlannerCmd *cmd_base)
 
 static PlannerCmd *
 task_cmd_move (PlannerTaskTree  *tree,
+	       const gchar      *name,
 	       MrpTask          *task,
 	       MrpTask          *sibling,
 	       MrpTask          *parent,
 	       gboolean          before,
 	       GError          **error)
 {
-	PlannerTaskTreePriv *priv = tree->priv;
+	PlannerTaskTreePriv *priv;
 	PlannerCmd          *cmd_base;
 	TaskCmdMove         *cmd;
 	MrpTask             *parent_old;
 
+	priv = tree->priv;
+	
 	cmd_base = planner_cmd_new (TaskCmdMove,
-				    _("Move task"),
+				    name,
 				    task_cmd_move_do,
 				    task_cmd_move_undo,
 				    task_cmd_move_free);
@@ -2702,7 +2705,7 @@ planner_task_tree_remove_task (PlannerTaskTree *tree)
 	if (many) {
 		planner_cmd_manager_begin_transaction (
 			planner_window_get_cmd_manager (priv->main_window),
-			_("Remove Tasks"));
+			_("Remove tasks"));
 	}
 	
 	for (l = list; l; l = l->next) {
@@ -2843,16 +2846,32 @@ planner_task_tree_select_all (PlannerTaskTree *tree)
 void
 planner_task_tree_unlink_task (PlannerTaskTree *tree)
 {
-	MrpTask     *task;
-	GList       *list, *l;
-	GList       *relations, *r;
-	MrpRelation *relation;
+	PlannerTaskTreePriv *priv;
+	MrpTask             *task;
+	GList               *list, *l;
+	GList               *relations, *r;
+	MrpRelation         *relation;
+	gboolean             many;
+
+	priv = tree->priv;
 
 	list = planner_task_tree_get_selected_tasks (tree);
 	if (list == NULL) {
 		return;
 	}
 
+	if (list->next) {
+		many = TRUE;
+	} else {
+		many = FALSE;
+	}
+	
+	if (many) {
+		planner_cmd_manager_begin_transaction (
+			planner_window_get_cmd_manager (priv->main_window),
+			_("Unlink tasks"));
+	}
+	
 	for (l = list; l; l = l->next) {
 		task = l->data;
 
@@ -2860,9 +2879,6 @@ planner_task_tree_unlink_task (PlannerTaskTree *tree)
 		for (r = relations; r; r = r->next) {
 			relation = r->data;
 			
-			/* mrp_task_remove_predecessor (
-			   task, mrp_relation_get_predecessor (relation)); */
-
 			planner_task_cmd_unlink (tree->priv->main_window, relation); 
 		}
 
@@ -2872,13 +2888,15 @@ planner_task_tree_unlink_task (PlannerTaskTree *tree)
 		for (r = relations; r; r = r->next) {
 			relation = r->data;
 
-			/* mrp_task_remove_predecessor (
-			   mrp_relation_get_successor (relation), task); */
-
 			planner_task_cmd_unlink (tree->priv->main_window, relation);
 		}
 
 		g_list_free (relations);
+	}
+	
+	if (many) {
+		planner_cmd_manager_end_transaction (
+			planner_window_get_cmd_manager (priv->main_window));
 	}
 	
 	g_list_free (list);
@@ -2888,33 +2906,35 @@ void
 planner_task_tree_link_tasks (PlannerTaskTree *tree,
 			      MrpRelationType  relationship)
 {
-	MrpTask   *task;
-	MrpTask   *target_task;
-	GList     *list, *l;
-	GtkWidget *dialog;
+	PlannerTaskTreePriv *priv;
+	MrpTask             *task;
+	MrpTask             *target_task;
+	GList               *list, *l;
+	GtkWidget           *dialog;
 
+	priv = tree->priv;
+	
 	list = planner_task_tree_get_selected_tasks (tree);
 	if (list == NULL) {
 		return;
 	}
 
+	planner_cmd_manager_begin_transaction (
+		planner_window_get_cmd_manager (priv->main_window),
+		_("Link tasks"));
+	
 	list = g_list_reverse (list);
 	
 	target_task = list->data;
 	for (l = list->next; l; l = l->next) {
-		PlannerCmd          *cmd;
-		GError              *error = NULL;
+		PlannerCmd *cmd;
+		GError     *error = NULL;
 
 		task = l->data;
 
 		cmd = planner_task_cmd_link (tree->priv->main_window, task, target_task, 
 					     relationship, 0, &error);
 
-		/* cmd = mrp_task_add_predecessor (target_task,
-						task,
-						relationship,
-						0,
-						&error)); */
 		if (!cmd) {
 			dialog = gtk_message_dialog_new (NULL,
 							 GTK_DIALOG_DESTROY_WITH_PARENT,
@@ -2928,6 +2948,9 @@ planner_task_tree_link_tasks (PlannerTaskTree *tree,
 		
 		target_task = task;
 	}
+
+	planner_cmd_manager_end_transaction (
+		planner_window_get_cmd_manager (priv->main_window));
 	
 	g_list_free (list);
 }
@@ -2935,18 +2958,21 @@ planner_task_tree_link_tasks (PlannerTaskTree *tree,
 void
 planner_task_tree_indent_task (PlannerTaskTree *tree)
 {
-	PlannerGanttModel *model;
-	MrpTask           *task;
-	MrpTask           *new_parent;
-	MrpTask           *first_task_parent;
-	MrpProject        *project;
-	GList             *list, *l;
-	GList             *indent_tasks = NULL;
-	GtkTreePath       *path;
-	GtkWidget         *dialog;
-	GtkTreeSelection  *selection;
+	PlannerTaskTreePriv *priv;
+	PlannerGanttModel   *model;
+	MrpTask             *task;
+	MrpTask             *new_parent;
+	MrpTask             *first_task_parent;
+	MrpProject          *project;
+	GList               *list, *l;
+	GList               *indent_tasks = NULL;
+	GtkTreePath         *path;
+	GtkWidget           *dialog;
+	GtkTreeSelection    *selection;
+	gboolean             many;
 
-	project = tree->priv->project;
+	priv = tree->priv;
+	project = priv->project;
 
 	model = PLANNER_GANTT_MODEL (gtk_tree_view_get_model (GTK_TREE_VIEW (tree)));
 	
@@ -2977,15 +3003,29 @@ planner_task_tree_indent_task (PlannerTaskTree *tree)
 
 	indent_tasks = g_list_reverse (indent_tasks);
 
+	if (indent_tasks->next) {
+		many = TRUE;
+	} else {
+		many = FALSE;
+	}
+	
+	if (many) {
+		planner_cmd_manager_begin_transaction (
+			planner_window_get_cmd_manager (priv->main_window),
+			_("Indent tasks"));
+	}
+		
 	for (l = indent_tasks; l; l = l->next) {
 		TaskCmdMove *cmd;
 		GError      *error = NULL;
 		
 		task = l->data;
 
-		cmd = (TaskCmdMove *) task_cmd_move (tree, task, NULL, new_parent, FALSE, &error); 
+		cmd = (TaskCmdMove *) task_cmd_move (tree, _("Indent task"),
+						     task, NULL, new_parent,
+						     FALSE, &error); 
 		if (!cmd) {
-			dialog = gtk_message_dialog_new (GTK_WINDOW (tree->priv->main_window),
+			dialog = gtk_message_dialog_new (GTK_WINDOW (priv->main_window),
 							 GTK_DIALOG_DESTROY_WITH_PARENT,
 							 GTK_MESSAGE_ERROR,
 							 GTK_BUTTONS_OK,
@@ -3008,23 +3048,31 @@ planner_task_tree_indent_task (PlannerTaskTree *tree)
 
 	gtk_tree_path_free (path);
 
+	if (many) {
+		planner_cmd_manager_end_transaction (
+			planner_window_get_cmd_manager (priv->main_window));
+	}
+	
 	g_list_free (indent_tasks);
 }
 
 void
 planner_task_tree_unindent_task (PlannerTaskTree *tree)
 {
-	PlannerGanttModel *model;
-	MrpTask           *task;
-	MrpTask           *new_parent;
-	MrpTask           *first_task_parent;
-	MrpProject        *project;
-	GList             *list, *l;
-	GList             *unindent_tasks = NULL;
-	GtkTreePath       *path;
-	GtkTreeSelection  *selection;
+	PlannerTaskTreePriv *priv;
+	PlannerGanttModel   *model;
+	MrpTask             *task;
+	MrpTask             *new_parent;
+	MrpTask             *first_task_parent;
+	MrpProject          *project;
+	GList               *list, *l;
+	GList               *unindent_tasks = NULL;
+	GtkTreePath         *path;
+	GtkTreeSelection    *selection;
+	gboolean             many;
 
-	project = tree->priv->project;
+	priv = tree->priv;
+	project = priv->project;
 
 	model = PLANNER_GANTT_MODEL (gtk_tree_view_get_model (GTK_TREE_VIEW (tree)));
 	
@@ -3057,6 +3105,18 @@ planner_task_tree_unindent_task (PlannerTaskTree *tree)
 	}
 	g_list_free (list);
 
+	if (unindent_tasks->next) {
+		many = TRUE;
+	} else {
+		many = FALSE;
+	}
+	
+	if (many) {
+		planner_cmd_manager_begin_transaction (
+			planner_window_get_cmd_manager (priv->main_window),
+			_("Unindent tasks"));
+	}
+	
 	for (l = unindent_tasks; l; l = l->next) {
 		MrpTask  *sibling;
 		gboolean  before;
@@ -3070,7 +3130,8 @@ planner_task_tree_unindent_task (PlannerTaskTree *tree)
 			before = FALSE;
 		}
 		
-		task_cmd_move (tree, task, sibling,
+		task_cmd_move (tree, _("Unindent task"),
+			       task, sibling,
 			       new_parent,
 			       before,
 			       NULL);
@@ -3086,24 +3147,32 @@ planner_task_tree_unindent_task (PlannerTaskTree *tree)
 
 	gtk_tree_path_free (path);
 
+	if (many) {
+		planner_cmd_manager_end_transaction (
+			planner_window_get_cmd_manager (priv->main_window));
+	}
+	
 	g_list_free (unindent_tasks);
 }
 
 void 
 planner_task_tree_move_task_up (PlannerTaskTree *tree)
 {
-	GtkTreeSelection  *selection;
-	PlannerGanttModel *model;
-	GtkTreePath	  *path;
-	MrpProject  	  *project;
-	MrpTask	    	  *task, *parent, *sibling;
-	GList	    	  *list, *l, *m;
-	guint	    	   position;
-	gboolean	   proceed, skip;
-	gint		   count;
-	MrpTask           *anchor_task;
+	PlannerTaskTreePriv *priv;
+	GtkTreeSelection    *selection;
+	PlannerGanttModel   *model;
+	GtkTreePath	    *path;
+	MrpProject  	    *project;
+	MrpTask	    	    *task, *parent, *sibling;
+	GList	    	    *list, *l, *m;
+	guint	    	     position;
+	gboolean	     proceed, skip;
+	gint		     count;
+	MrpTask             *anchor_task;
+	gboolean             many;
 
-	project = tree->priv->project;
+	priv = tree->priv;
+	project = priv->project;
 
 	list = planner_task_tree_get_selected_tasks (tree);
 	if (list == NULL) {
@@ -3124,7 +3193,23 @@ planner_task_tree_move_task_up (PlannerTaskTree *tree)
 
  	proceed = TRUE;
  	count = 0 ;
- 
+
+	/* Note: This will not be 100% accurate since even if we select 10
+	 * tasks, only one of them may end up moved. It's not a big deal
+	 * though.
+	 */
+	if (list->next) {
+		many = TRUE;
+	} else {
+		many = FALSE;
+	}
+	
+	if (many) {
+		planner_cmd_manager_begin_transaction (
+			planner_window_get_cmd_manager (priv->main_window),
+			_("Move tasks up"));
+	}
+	
 	for (l = list; l; l = l->next) {
  		count++;
 
@@ -3160,7 +3245,9 @@ planner_task_tree_move_task_up (PlannerTaskTree *tree)
  		if (!skip && position != 0 && proceed) {
 			/* Move task from position to position - 1. */
  			sibling = mrp_task_get_nth_child (parent, position - 1);
-			task_cmd_move (tree, task, sibling, parent, TRUE, NULL);
+			task_cmd_move (tree, _("Move task up"),
+				       task, sibling, parent,
+				       TRUE, NULL);
  		}
 	}
 
@@ -3179,6 +3266,11 @@ planner_task_tree_move_task_up (PlannerTaskTree *tree)
 		path = planner_gantt_model_get_path_from_task (model, anchor_task);
 		planner_task_tree_set_anchor (tree, path);
 	}
+
+	if (many) {
+		planner_cmd_manager_end_transaction (
+			planner_window_get_cmd_manager (priv->main_window));
+	}
 	
 	g_list_free (list);
 
@@ -3188,19 +3280,22 @@ planner_task_tree_move_task_up (PlannerTaskTree *tree)
 void 
 planner_task_tree_move_task_down (PlannerTaskTree *tree)
 {
-	GtkTreeSelection  *selection;
-	PlannerGanttModel *model;
-	GtkTreePath	  *path;
-	MrpProject 	  *project;
-	MrpTask	   	  *task, *parent, *sibling;
-	GList		  *list, *l, *m;
-	guint		   position;
-	gboolean	   proceed, skip;
-	gint		   count;
-	MrpTask           *anchor_task;
-	MrpTask           *root;
+	PlannerTaskTreePriv *priv;
+	GtkTreeSelection    *selection;
+	PlannerGanttModel   *model;
+	GtkTreePath	    *path;
+	MrpProject 	    *project;
+	MrpTask	   	    *task, *parent, *sibling;
+	GList		    *list, *l, *m;
+	guint		     position;
+	gboolean	     proceed, skip;
+	gint		     count;
+	MrpTask             *anchor_task;
+	MrpTask             *root;
+	gboolean             many;
 
-	project = tree->priv->project;
+	priv = tree->priv;
+	project = priv->project;
 
 	list = planner_task_tree_get_selected_tasks (tree);
 	if (list == NULL) {
@@ -3224,8 +3319,24 @@ planner_task_tree_move_task_down (PlannerTaskTree *tree)
 	list = g_list_reverse (list);
 
 	proceed = TRUE;
-	count = 0 ;
+	count = 0;
 
+	/* Note: This will not be 100% accurate since even if we select 10
+	 * tasks, only one of them may end up moved. It's not a big deal
+	 * though.
+	 */
+	if (list->next) {
+		many = TRUE;
+	} else {
+		many = FALSE;
+	}
+	
+	if (many) {
+		planner_cmd_manager_begin_transaction (
+			planner_window_get_cmd_manager (priv->main_window),
+			_("Move tasks down"));
+	}
+	
 	for (l = list; l; l = l->next) {
 		count++;
 
@@ -3269,7 +3380,10 @@ planner_task_tree_move_task_down (PlannerTaskTree *tree)
 			sibling = mrp_task_get_nth_child (parent, position + 1);
 
 			/* Moving task from 'position' to 'position + 1' */
-			task_cmd_move (tree, task, sibling, parent, FALSE, NULL);
+			task_cmd_move (tree, _("Move task down"),
+				       task, sibling,
+				       parent,
+				       FALSE, NULL);
 		}
 	}
 
@@ -3288,6 +3402,11 @@ planner_task_tree_move_task_down (PlannerTaskTree *tree)
 		path = planner_gantt_model_get_path_from_task (model, anchor_task);
 		planner_task_tree_set_anchor (tree, path);
 	}
+
+	if (many) {
+		planner_cmd_manager_end_transaction (
+			planner_window_get_cmd_manager (priv->main_window));
+	}
 	
 	task_tree_unblock_selection_changed (tree);
 	g_list_free (list);
@@ -3296,36 +3415,68 @@ planner_task_tree_move_task_down (PlannerTaskTree *tree)
 void
 planner_task_tree_reset_constraint (PlannerTaskTree *tree)
 {
-	MrpTask *task;
-	GList   *list, *l;
-
+	PlannerTaskTreePriv *priv;
+	MrpTask             *task;
+	GList               *list, *l;
+	gboolean             many;
+	
+	priv = tree->priv;
+	
 	list = planner_task_tree_get_selected_tasks (tree);
-
-	for (l = list; l; l = l->next) {
-		task = l->data;
-		/* mrp_task_reset_constraint (task); */
-		task_cmd_reset_constraint (tree, task);
-		
+	if (!list) {
+		return;
 	}
 	
+	if (list->next) {
+		many = TRUE;
+	} else {
+		many = FALSE;
+	}
+	
+	if (many) {
+		planner_cmd_manager_begin_transaction (
+			planner_window_get_cmd_manager (priv->main_window),
+			_("Reset task constraints"));
+	}
+	
+	for (l = list; l; l = l->next) {
+		task = l->data;
+		task_cmd_reset_constraint (tree, task);
+	}
+	
+	if (many) {
+		planner_cmd_manager_end_transaction (
+			planner_window_get_cmd_manager (priv->main_window));
+	}
+
 	g_list_free (list);
 }
 
 void
 planner_task_tree_reset_all_constraints (PlannerTaskTree *tree)
 {
-	MrpProject *project;
-	MrpTask    *task;
-	GList      *list, *l;
+	PlannerTaskTreePriv *priv;
+	MrpTask             *task;
+	GList               *list, *l;
+	
+	priv = tree->priv;
 
-	project = tree->priv->project;
-		
-	list = mrp_project_get_all_tasks (project);
+	list = mrp_project_get_all_tasks (priv->project);
+	if (!list) {
+		return;
+	}
+	
+	planner_cmd_manager_begin_transaction (
+		planner_window_get_cmd_manager (priv->main_window),
+		_("Reset all task constraints"));
+	
 	for (l = list; l; l = l->next) {
 		task = l->data;
-		/* mrp_task_reset_constraint (task); */
 		task_cmd_reset_constraint (tree, task);
 	}
+
+	planner_cmd_manager_end_transaction (
+		planner_window_get_cmd_manager (priv->main_window));
 	
 	g_list_free (list);
 }

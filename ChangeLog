@@ -1,5 +1,17 @@
 2005-03-03  Richard Hult  <richard@imendio.com>
 
+	* src/planner-task-tree.c: (task_cmd_move),
+	(planner_task_tree_remove_task), (planner_task_tree_unlink_task),
+	(planner_task_tree_link_tasks), (planner_task_tree_indent_task),
+	(planner_task_tree_unindent_task),
+	(planner_task_tree_move_task_up),
+	(planner_task_tree_move_task_down),
+	(planner_task_tree_reset_constraint),
+	(planner_task_tree_reset_all_constraints): Use transactions for
+	all task commands. Fixes bug #144732.
+
+2005-03-03  Richard Hult  <richard@imendio.com>
+
 	* src/planner-cmd-manager.c: (transaction_cmd_do),
 	(transaction_cmd_undo), (planner_cmd_manager_begin_transaction),
 	(planner_cmd_manager_end_transaction):
