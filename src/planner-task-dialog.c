@@ -130,6 +130,12 @@ static void  task_dialog_task_note_changed_cb       (MrpTask             *task,
 						     GtkWidget           *dialog);
 static void  task_dialog_note_changed_cb            (GtkWidget           *w,
 						     DialogData          *data);
+static gboolean task_dialog_note_focus_in_cb        (GtkWidget           *w,
+						     GdkEventFocus       *event,
+						     DialogData          *data);
+static gboolean task_dialog_note_focus_out_cb       (GtkWidget           *w,
+						     GdkEventFocus       *event,
+						     DialogData          *data);
 static void  task_dialog_note_stamp_cb              (GtkWidget           *w,
 						     DialogData          *data);
 static void
@@ -252,6 +258,15 @@ typedef struct {
 	guint         lag;
 	guint         old_lag;
 } TaskCmdEditLag;
+
+typedef struct {
+	PlannerCmd   base;
+
+	MrpTask  *task;
+	gchar    *property;
+	gchar    *note;
+	gchar    *old_note;
+} TaskCmdEditNote;
 
 static void
 task_dialog_setup_option_menu (GtkWidget     *option_menu,
@@ -1117,6 +1132,73 @@ task_cmd_edit_lag (PlannerWindow *main_window,
 	return cmd_base;
 }
 
+static gboolean
+task_cmd_edit_note_do (PlannerCmd *cmd_base)
+{
+	TaskCmdEditNote *cmd = (TaskCmdEditNote*) cmd_base;
+
+	g_object_set (cmd->task, "note", cmd->note, NULL);
+
+	return TRUE;
+}
+
+static void
+task_cmd_edit_note_undo (PlannerCmd *cmd_base)
+{
+	
+	TaskCmdEditNote *cmd = (TaskCmdEditNote*) cmd_base;
+
+	g_object_set (cmd->task, "note", cmd->old_note, NULL);
+}
+
+static void
+task_cmd_edit_note_free (PlannerCmd *cmd_base)
+{
+	TaskCmdEditNote *cmd = (TaskCmdEditNote*) cmd_base;
+
+	g_free (cmd->note);
+	g_free (cmd->old_note);
+	g_free (cmd->property);
+
+	g_object_unref (cmd->task);
+}
+
+static PlannerCmd *
+task_cmd_edit_note (DialogData  *data,
+		    const gchar *focus_in_note)
+{
+	PlannerCmd      *cmd_base;
+	TaskCmdEditNote *cmd;
+	gchar           *note;
+
+	g_object_get (data->task, "note", &note, NULL);
+
+	if (strcmp (note, focus_in_note) == 0) {
+		g_free (note);
+		return NULL;
+	}
+
+	cmd_base = planner_cmd_new (TaskCmdEditNote,
+				    _("Edit task note from dialog"),
+				    task_cmd_edit_note_do,
+				    task_cmd_edit_note_undo,
+				    task_cmd_edit_note_free);
+
+	cmd = (TaskCmdEditNote *) cmd_base;
+
+	cmd->property = g_strdup ("note");
+	cmd->task = g_object_ref (data->task);
+
+	cmd->old_note = g_strdup (focus_in_note);
+	cmd->note = note;
+
+	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager (data->main_window),
+					   cmd_base);
+
+	return cmd_base;
+}
+
+
 static void
 task_dialog_close_clicked_cb (GtkWidget *w, DialogData *data)
 {
@@ -1792,13 +1874,13 @@ task_dialog_task_note_changed_cb (MrpTask    *task,
 
 	g_signal_handlers_block_by_func (data->note_buffer,
 					 task_dialog_note_changed_cb,
-					 dialog);
+					 data);
 	
 	gtk_text_buffer_set_text (data->note_buffer, note, -1);
 
 	g_signal_handlers_unblock_by_func (data->note_buffer,
 					   task_dialog_note_changed_cb,
-					   dialog);
+					   data);
 	
 	g_free (note);
 }
@@ -1826,6 +1908,52 @@ task_dialog_note_changed_cb (GtkWidget  *w,
 	g_signal_handlers_unblock_by_func (data->task,
 					   task_dialog_task_note_changed_cb,
 					   data->dialog);
+}
+
+static gboolean
+task_dialog_note_focus_out_cb (GtkWidget     *w,
+			       GdkEventFocus *event,
+			       DialogData    *data)
+{
+	gchar        *focus_in_note;
+	PlannerCmd   *cmd;
+
+	focus_in_note = g_object_get_data (G_OBJECT (data->task),"focus_in_note");
+
+	cmd = task_cmd_edit_note (data, focus_in_note);
+	
+	if (g_getenv ("PLANNER_DEBUG_UNDO_TASK")) {
+		gchar *note;
+
+		g_object_get (data->task, "note", &note, NULL);
+		g_message ("Note focus out value: %s", note);
+		g_free (note);
+	}
+
+	g_free (focus_in_note);
+
+	return FALSE;
+}
+
+static gboolean
+task_dialog_note_focus_in_cb (GtkWidget     *w,
+			      GdkEventFocus *event,
+			      DialogData    *data)
+{
+	gchar *note;
+
+	g_object_get (data->task, "note", &note, NULL);
+
+	if (g_getenv ("PLANNER_DEBUG_UNDO_RESOURCE")) {
+		g_message ("Note focus in value: %s", note);
+	}
+
+	gtk_text_buffer_set_text (data->note_buffer, note, -1);	
+
+	g_object_set_data (G_OBJECT (data->task), 
+			   "focus_in_note", (gpointer) note);
+
+	return FALSE;
 }
 
 static void
@@ -2506,6 +2634,15 @@ task_dialog_setup_widgets (DialogData *data,
 	g_signal_connect (data->note_buffer,
 			  "changed",
 			  G_CALLBACK (task_dialog_note_changed_cb),
+			  data);
+	g_signal_connect (data->note_textview,
+			  "focus_out_event",
+			  G_CALLBACK (task_dialog_note_focus_out_cb),
+			  data);
+
+	g_signal_connect (data->note_textview,
+			  "focus_in_event",
+			  G_CALLBACK (task_dialog_note_focus_in_cb),
 			  data);
 
 	w = glade_xml_get_widget (glade, "stamp_button");

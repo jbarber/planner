@@ -1,3 +1,11 @@
+2004-06-13 Alvaro del Castillo  <acs@barrapunto.com>
+
+	* src/planner-task-dialog.c: implemented undo for note
+	task dialog editor
+
+	* libplanner/mrp-task.c: init task note with a "" string like
+	we do for a resource.
+
 2004-06-12 Alvaro del Castillo  <acs@barrapunto.com>
 
 	* src/planner-task-tree.[ch]: added new function to get the 

@@ -187,6 +187,7 @@ task_init (MrpTask *task)
 	priv->sorted_node = g_node_new (task);
 	priv->assignments = NULL;
 	priv->constraint.type = MRP_CONSTRAINT_ASAP;
+	priv->note = g_strdup ("");
 }
 
 static void
