@@ -3,6 +3,7 @@
  * Copyright (C) 2003 CodeFactory AB
  * Copyright (C) 2003 Richard Hult <richard@imendio.com>
  * Copyright (C) 2003 Mikael Hallendal <micke@imendio.com>
+ * Copyright (C) 2004 Alvaro del Castillo <acs@barrapunto.com> 
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -24,7 +25,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <glib.h>
-#include <libpq-fe.h>
+#include <libgda/libgda.h>
 #include <libplanner/planner.h>
 #include <libplanner/mrp-intl.h>
 #include <libplanner/mrp-private.h>
@@ -69,22 +70,22 @@ typedef struct {
 } OverriddenDayTypeData;
 
 typedef struct {
-	PGconn     *conn;
+	GdaConnection *con;
 
-	MrpProject *project;
-	gint        project_id;
+	MrpProject    *project;
+	gint           project_id;
 
-	gint        calendar_id;
-	gint        default_group_id;
-	gint        phase_id;
+	gint           calendar_id;
+	gint           default_group_id;
+	gint           phase_id;
 	
-	GList      *calendars;
-	GList      *tasks;
+	GList         *calendars;
+	GList         *tasks;
 
-	gint        revision;
-	gchar      *last_user;
+	gint           revision;
+	gchar         *last_user;
 
-	MrpTask    *root_task;
+	MrpTask       *root_task;
 	
 	/* Maps from database id to project objects. */
 	GHashTable *calendar_id_hash;
@@ -103,22 +104,22 @@ typedef struct {
 	GHashTable *property_type_hash;
 } SQLData; 
 
-static gint     get_int                       (PGresult             *res,
+static gint     get_int                       (GdaDataModel         *res,
 					       gint                  i,
 					       gint                  j);
-static gint     get_id                        (PGresult             *res,
+static gint     get_id                        (GdaDataModel         *res,
 					       gint                  i,
 					       gint                  j);
-static gchar *  get_string                    (PGresult             *res,
+static gchar *  get_string                    (GdaDataModel         *res,
 					       gint                  i,
 					       gint                  j);
-static gboolean get_boolean                   (PGresult             *res,
+static gboolean get_boolean                   (GdaDataModel         *res,
 					       gint                  i,
 					       gint                  j);
-static gfloat   get_float                     (PGresult             *res,
+static gfloat   get_float                     (GdaDataModel         *res,
 					       gint                  i,
 					       gint                  j);
-static gboolean is_field                      (PGresult             *res,
+static gboolean is_field                      (GdaDataModel         *res,
 					       gint                  j,
 					       const gchar          *name);
 static gint     get_inserted_id               (SQLData              *data,
@@ -176,24 +177,130 @@ static gboolean sql_write_default_group_id    (SQLData              *data);
 static gboolean sql_write_resources           (SQLData              *data);
 static gboolean sql_write_tasks               (SQLData              *data);
 
+static GdaDataModel * 
+                sql_execute_query             (GdaConnection        *con, 
+					       gchar                *query);
+static char *   sql_get_errors                (GdaConnection        *connection);
+static void     sql_show_result               (GdaDataModel         *res);
+
+#define STOP_ON_ERR     GDA_COMMAND_OPTION_STOP_ON_ERRORS
+
+static GdaDataModel *
+sql_execute_query (GdaConnection *con, gchar *query)
+{
+	GdaCommand   *cmd;
+	GdaDataModel *res;
+
+	cmd = gda_command_new (query, GDA_COMMAND_TYPE_SQL, STOP_ON_ERR);
+	res = gda_connection_execute_single_command  (con, cmd, NULL);
+	gda_command_free (cmd);
+	return res;
+}
+
+static gchar *
+sql_get_errors (GdaConnection *connection)
+{
+        GList    *list;
+        GList    *node;
+        GdaError *error;
+	gchar    *error_txt;
+      
+        list = (GList *) gda_connection_get_errors (connection);
+      
+        for (node = g_list_first (list); node != NULL; node = g_list_next (node)) {
+		error = (GdaError *) node->data;
+		g_print ("Error no: %d\t", gda_error_get_number (error));
+		g_print ("desc: %s\t", gda_error_get_description (error));
+		g_print ("source: %s\t", gda_error_get_source (error));
+		g_print ("sqlstate: %s\n", gda_error_get_sqlstate (error));
+		error_txt = g_strdup_printf ("Desc. error: %s", gda_error_get_description (error));
+	}
+	return error_txt;
+}
+
+static const gchar *
+sql_get_last_error (GdaConnection *connection)
+{
+	GList       *list;
+	GList       *node;
+	GdaError    *error;
+	const gchar *error_txt;
+
+	g_return_val_if_fail (connection != NULL, "");
+      
+	list = (GList *) gda_connection_get_errors (connection);
+
+	error = (GdaError *) g_list_last (list)->data;
+      
+	/* Poor user, she won't get localized messages */
+	error_txt = gda_error_get_description (error);
+
+	return error_txt;
+}
+
+void
+sql_show_result (GdaDataModel * dm)
+{
+	gint      row_id;
+	gint      column_id;
+	GdaValue *value;
+	gchar    *string;
+	
+	for (column_id = 0; column_id < gda_data_model_get_n_columns (dm);
+	     column_id++) {
+		g_print ("%s\t", gda_data_model_get_column_title (dm, column_id));
+	}
+	g_print ("\n");
+	
+	for (row_id = 0; row_id < gda_data_model_get_n_rows (dm); row_id++) {
+		for (column_id = 0; column_id < gda_data_model_get_n_columns (dm);
+		     column_id++) {
+			value = (GdaValue *) 
+				gda_data_model_get_value_at (dm, column_id, row_id);
+			string = gda_value_stringify (value);
+			g_print ("%s\t", string);
+			g_free (string);
+		}
+		g_print ("\n");
+	}
+}
+
 
 
 static gint
-get_int (PGresult *res, gint i, gint j)
+get_int (GdaDataModel *res, gint row, gint column)
 {
-	const gchar *str;
+	const gchar    *str;
+	const GdaValue *value;
 	
-	str = PQgetvalue (res, i, j);
+	g_return_if_fail (GDA_IS_DATA_MODEL (res));
+	
+	value = (GdaValue *) gda_data_model_get_value_at (res, column, row);
+	if (value == NULL) {
+		g_warning ("Failed to get a value: (%d,%d)", column, row);
+		d(sql_show_result (res));
+		return INT_MAX;
+	}
+	str = gda_value_stringify (value);
 	return strtol (str, NULL, 10);
 }
 
 static gint
-get_id (PGresult *res, gint i, gint j)
+get_id (GdaDataModel *res, gint row, gint column)
 {
-	const gchar *str;
+	const gchar    *str;
+	const GdaValue *value;
 	
-	str = PQgetvalue (res, i, j);
+	g_return_if_fail (GDA_IS_DATA_MODEL (res));
 
+	value = (GdaValue *) gda_data_model_get_value_at (res, column, row);
+	if (value == NULL) {
+		g_warning ("Failed to get a value: (%d,%d)", column, row);
+		d(sql_show_result (res));
+		return INT_MAX;
+	}
+
+	str = gda_value_stringify (value);
 	if (!str || !str[0]) {
 		return -1;
 	}
@@ -202,14 +309,23 @@ get_id (PGresult *res, gint i, gint j)
 }
 
 static gchar *
-get_string (PGresult *res, gint i, gint j)
+get_string (GdaDataModel *res, gint row, gint column)
 {
-	const gchar *str;
-	gchar *ret;
-	gsize len;
+	const gchar    *str;
+	gchar          *ret;
+	gsize           len;
+	const GdaValue *value;
 	
-	str = PQgetvalue (res, i, j);
+	g_return_if_fail (GDA_IS_DATA_MODEL (res));
 
+	value = (GdaValue *) gda_data_model_get_value_at (res, column, row);
+	if (value == NULL) {
+		g_warning ("Failed to get a value: (%d,%d)", column, row);
+		d(sql_show_result (res));
+		return "";
+	}
+	
+	str = gda_value_stringify (value);
 	len = strlen (str);
 	
 	if (g_utf8_validate (str, len, NULL)) {
@@ -233,29 +349,49 @@ get_string (PGresult *res, gint i, gint j)
 }
 
 static gboolean
-get_boolean (PGresult *res, gint i, gint j)
+get_boolean (GdaDataModel *res, gint row, gint column)
 {
-	const gchar *str;
+	const GdaValue *value;
+	gboolean       *boolean;
 	
-	str = PQgetvalue (res, i, j);
-	return str && str[0] == 't';
+	g_return_if_fail (GDA_IS_DATA_MODEL (res));
+
+	value = (GdaValue *) gda_data_model_get_value_at (res, column, row);
+	if (value == NULL) {
+		g_warning ("Failed to get a value: (%d,%d)", column, row);
+		d(sql_show_result (res));
+		return -1;
+	}
+	
+	return gda_value_get_boolean (value);
 }
 
 static gfloat
-get_float (PGresult *res, gint i, gint j)
+get_float (GdaDataModel *res, gint row, gint column)
 {
-	const gchar *str;
+	const gchar    *str;
+	const GdaValue *value;
 	
-	str = PQgetvalue (res, i, j);
+	g_return_if_fail (GDA_IS_DATA_MODEL (res));
+
+	value = (GdaValue *) gda_data_model_get_value_at (res, column, row);
+
+	if (value == NULL) {
+		g_warning ("Failed to get a value: (%d,%d)", column, row);
+		d(sql_show_result (res));
+		return -1;
+	}
+	
+	str = gda_value_stringify (value);
 	return g_ascii_strtod (str, NULL);
 }
 
 static gboolean
-is_field (PGresult *res, gint j, const gchar *name)
+is_field (GdaDataModel *res, gint j, const gchar *name)
 {
 	const gchar *str;
 
-	str = PQfname (res, j);
+	str = gda_data_model_get_column_title (res, j);
 	
 	return str && (strcmp (str, name) == 0);
 }
@@ -264,40 +400,47 @@ static gint
 get_inserted_id (SQLData     *data,
 		 const gchar *id_name)
 {
-	PGresult *res;
-	gchar    *query;
-	gint      id = -1;
+	GdaDataModel *res;
+	gchar        *query;
+	gint          id = -1;
 
 	/* Check which id the field id_name got assigned. */
 	query = g_strdup_printf ("DECLARE idcursor CURSOR FOR SELECT "
 				 "currval('%s')", id_name);
-	res = PQexec (data->conn, query);
+	res = sql_execute_query (data->con, query);
 	g_free (query);
-	if (!res || PQresultStatus (res) != PGRES_COMMAND_OK) {
-		g_warning ("Couldn't get cursor (get_inserted_id).");
+
+	if (res == NULL) {
+		g_warning ("Couldn't get cursor (get_inserted_id) %s.", 
+				sql_get_last_error (data->con));
 		goto out;
 	}
-	PQclear (res);
+	g_object_unref (res);
 
-	res = PQexec (data->conn, "FETCH ALL in idcursor");
-	if (!res || PQresultStatus (res) != PGRES_TUPLES_OK) {
-		g_warning ("FETCH ALL failed (%s).", id_name);
+	res = sql_execute_query (data->con, "FETCH ALL in idcursor");
+
+	if (res == NULL) {
+		g_warning ("FETCH ALL failed (%s) %s.", id_name, 
+				sql_get_last_error (data->con));
 		goto out;
 	}
 	
-	if (PQntuples (res) > 0) {
+	if (gda_data_model_get_n_rows (res) > 0) {
 		id = get_int (res, 0, 0);
 	}
-	PQclear (res);
 
-	res = PQexec (data->conn, "CLOSE idcursor");
-	PQclear (res);
+	g_object_unref (res);
+
+	res = sql_execute_query (data->con,"CLOSE idcursor");
+	
+	g_object_unref (res);
+	
 	
 	return id;
 
  out:
 	if (res) {
-		PQclear (res);
+		g_object_unref (res);
 	}
 
 	return -1;
@@ -320,92 +463,48 @@ enum {
 	COL_NAME
 };
 
-#if 0
-static gint
-sql_retrieve_project_id (SQLData *data)
-{
-	PGresult *res;
-	gint      i;
-	//gint      project_id;
-
-	res = PQexec (data->conn,
-		      "DECLARE mycursor CURSOR FOR SELECT proj_id, name FROM project"); 
-	if (!res || PQresultStatus (res) != PGRES_COMMAND_OK) {
-		g_warning ("DECLARE CURSOR command failed (all_projects).");
-
-		if (res) {
-			PQclear (res);
-		}
-		return -1;
-	}
-
-	res = PQexec (data->conn, "FETCH ALL in mycursor");
-	if (!res || PQresultStatus (res) != PGRES_TUPLES_OK) {
-		g_warning ("FETCH ALL failed.");
-		
-		if (res) {
-			PQclear (res);
-		}
-		return -1;
-	}
-	
-	for (i = 0; i < PQntuples (res); i++) {
-		gint   id;
-		gchar *name;
-		
-		id = get_int (res, i, 0);
-		name = get_string (res, i, 1);
-
-		/* FIXME: return a list of there, or something... */
-		g_free (name);
-	}
-	
-	PQclear (res);
-	
-	res = PQexec (data->conn, "CLOSE mycursor");
-	PQclear (res);
-	
-	return -1; /*project_id;*/
-}
-#endif
-
 static gboolean
 sql_read_project (SQLData *data, gint proj_id)
 {
-	gint      n;
-	gint      j;
-	PGresult *res;
-	gchar    *query;
-	gchar    *name = NULL;
-	gchar    *manager = NULL;
-	gchar    *company = NULL;
-	gchar    *phase = NULL;
-	mrptime   project_start = -1;
+	gint          n;
+	gint          j;
+	GdaDataModel *res;
+	gchar        *query;
+	
+	gchar        *name = NULL;
+	gchar        *manager = NULL;
+	gchar        *company = NULL;
+	gchar        *phase = NULL;
+	mrptime       project_start = -1;
 
 	/* Find the project to open. */
 	query = g_strdup_printf ("DECLARE mycursor CURSOR FOR SELECT "
 				 "extract (epoch from proj_start) as proj_start_seconds, "
 				 " * FROM project WHERE proj_id=%d", proj_id);
-	res = PQexec (data->conn, query);
+	res = sql_execute_query (data->con, query);
 	g_free (query);
-	if (!res || PQresultStatus (res) != PGRES_COMMAND_OK) {
-		g_warning ("Couldn't get cursor for project.");
+	
+	if (res == NULL) {
+		g_warning ("Couldn't get cursor for project %s.", 
+				sql_get_last_error (data->con));
 		goto out;
 	}
-	PQclear (res);
+	g_object_unref (res);
 
-	res = PQexec (data->conn, "FETCH ALL in mycursor");
-	if (!res || PQresultStatus (res) != PGRES_TUPLES_OK) {
-		g_warning ("FETCH ALL failed.");
+	res = sql_execute_query (data->con, "FETCH ALL in mycursor");
+
+	if (res == NULL) {
+		g_warning ("FETCH ALL failed %s.", sql_get_last_error (data->con));
 		goto out;
 	}
+	
 
-	if (PQntuples (res) == 0) {
+	if (gda_data_model_get_n_rows (res) == 0) {
 		g_warning ("There is no project with the id '%d'.", proj_id);
 		goto out;
 	}
 	
-	n = PQnfields (res);
+	n = gda_data_model_get_n_columns (res);
 	for (j = 0; j < n; j++) {
 		if (is_field (res, j, "proj_id")) {
 			data->project_id = get_int (res, 0, j);
@@ -438,7 +537,7 @@ sql_read_project (SQLData *data, gint proj_id)
 			data->last_user = get_string (res, 0, j);
 		}
 	}
-	PQclear (res);
+	g_object_unref (res);
 
 	g_object_set (data->project,
 		      "name", name,
@@ -453,14 +552,15 @@ sql_read_project (SQLData *data, gint proj_id)
 	g_free (company);
 	g_free (phase);
 	
-	res = PQexec (data->conn, "CLOSE mycursor");
-	PQclear (res);
+	res = sql_execute_query (data->con, "CLOSE mycursor");
+	g_object_unref (res);
+	
 
 	return TRUE;
 
  out:
 	if (res) {
-		PQclear (res);
+		g_object_unref (res);
 	}
 	return FALSE;
 }
@@ -468,32 +568,38 @@ sql_read_project (SQLData *data, gint proj_id)
 static gboolean
 sql_read_phases (SQLData *data)
 {
-	gint      n, i, j;
-	PGresult *res;
-	gchar    *query;
-	gchar    *name;
-	GList    *phases = NULL;
+	gint          n, i, j;
+	GdaDataModel *res;
+	gchar        *query;
+	
+	gchar        *name;
+	GList        *phases = NULL;
 		
 	/* Get phases. */
 	query = g_strdup_printf ("DECLARE mycursor CURSOR FOR SELECT * FROM phase WHERE proj_id=%d",
 				 data->project_id);
-	res = PQexec (data->conn, query);
+	
+	res = sql_execute_query (data->con, query);
 	g_free (query);
+	
 
-	if (!res || PQresultStatus (res) != PGRES_COMMAND_OK) {
-		g_warning ("DECLARE CURSOR command failed (phase).");
+	if (res == NULL) {
+		g_warning ("DECLARE CURSOR command failed (phase) %s.", 
+				sql_get_last_error (data->con));
 		goto out;
 	}
-	PQclear (res);
+	g_object_unref (res);
 
-	res = PQexec (data->conn, "FETCH ALL in mycursor");
-	if (!res || PQresultStatus (res) != PGRES_TUPLES_OK) {
-		g_warning ("FETCH ALL failed for phase.");
+	res = sql_execute_query (data->con, "FETCH ALL in mycursor");
+	if (res == NULL) {
+		g_warning ("FETCH ALL failed for phase %s.", 
+				sql_get_last_error (data->con));
 		goto out;
 	}
 	
-	n = PQnfields (res);
-	for (i = 0; i < PQntuples (res); i++) {
+	
+	n = gda_data_model_get_n_columns (res);
+	for (i = 0; i < gda_data_model_get_n_rows (res); i++) {
 		name = NULL;
 		
 		for (j = 0; j < n; j++) {
@@ -507,10 +613,12 @@ sql_read_phases (SQLData *data)
 		}
 	}
 
-	PQclear (res);
+	g_object_unref (res);
 
-	res = PQexec (data->conn, "CLOSE mycursor");
-	PQclear (res);
+	
+	res = sql_execute_query (data->con, "CLOSE mycursor");
+	g_object_unref (res);
+	
 
 	phases = g_list_reverse (phases);
 	g_object_set (data->project, "phases", phases, NULL);
@@ -520,7 +628,7 @@ sql_read_phases (SQLData *data)
 
  out:
 	if (res) {
-		PQclear (res);
+		g_object_unref (res);
 	}
 
 	return FALSE;
@@ -530,8 +638,9 @@ static gboolean
 sql_read_property_specs (SQLData *data)
 {
 	gint             n, i, j;
-	PGresult        *res;
+	GdaDataModel        *res;
 	gchar           *query;
+	
 	gint             property_type_id;
 	gchar           *name;
 	gchar           *label;
@@ -539,28 +648,33 @@ sql_read_property_specs (SQLData *data)
 	MrpPropertyType  type;
 	MrpProperty     *property;
 	GType            owner;
-	gchar           *tmp;
+	const gchar     *tmp;
 	
 	/* Get property types/specs. */
 	query = g_strdup_printf ("DECLARE mycursor CURSOR FOR SELECT * FROM property_type WHERE proj_id=%d",
 				 data->project_id);
-	res = PQexec (data->conn, query);
+	
+	res = sql_execute_query (data->con, query);
 	g_free (query);
+	
 
-	if (!res || PQresultStatus (res) != PGRES_COMMAND_OK) {
-		g_warning ("DECLARE CURSOR command failed (propecty_specs).");
+	if (res == NULL) {
+		g_warning ("DECLARE CURSOR command failed (propecty_specs) %s.",
+				sql_get_last_error (data->con));
 		goto out;
 	}
-	PQclear (res);
+	g_object_unref (res);
 
-	res = PQexec (data->conn, "FETCH ALL in mycursor");
-	if (!res || PQresultStatus (res) != PGRES_TUPLES_OK) {
-		g_warning ("FETCH ALL failed for property_specs.");
+	res = sql_execute_query (data->con, "FETCH ALL in mycursor");
+	if (res == NULL) {
+		g_warning ("FETCH ALL failed for property_specs %s.", 
+				sql_get_last_error (data->con));
 		goto out;
 	}
 	
-	n = PQnfields (res);
-	for (i = 0; i < PQntuples (res); i++) {
+	
+	n = gda_data_model_get_n_columns (res);
+	for (i = 0; i < gda_data_model_get_n_rows (res); i++) {
 		name = NULL;
 		label = NULL;
 		description = NULL;
@@ -579,7 +693,7 @@ sql_read_property_specs (SQLData *data)
 				description = get_string (res, i, j);
 			}
 			else if (is_field (res, j, "owner")) {
-				tmp = PQgetvalue (res, i, j);
+				tmp = get_string (res, i, j);
 
 				if (!strcmp (tmp, "task")) {
 					owner = MRP_TYPE_TASK;
@@ -592,7 +706,7 @@ sql_read_property_specs (SQLData *data)
 				}
 			}
 			else if (is_field (res, j, "type")) {
-				tmp = PQgetvalue (res, i, j);
+				tmp = get_string (res, i, j); 
 
 				if (!strcmp (tmp, "date")) {
 					type = MRP_PROPERTY_TYPE_DATE;
@@ -647,16 +761,17 @@ sql_read_property_specs (SQLData *data)
 		g_free (label);
 		g_free (description);
 	}
-	PQclear (res);
+	g_object_unref (res);
 
-	res = PQexec (data->conn, "CLOSE mycursor");
-	PQclear (res);
+	res = sql_execute_query (data->con, "CLOSE mycursor");
+	g_object_unref (res);
+	
 
 	return TRUE;
 
  out:
 	if (res) {
-		PQclear (res);
+		g_object_unref (res);
 	}
 
 	return FALSE;
@@ -717,8 +832,9 @@ sql_read_property_values (SQLData   *data,
 				 MrpObject *object)
 {
 	gint         n, i, j;
-	PGresult    *res;
+	GdaDataModel    *res;
 	gchar       *query;
+	
 	const gchar *table;
 	const gchar *object_id_name;
 	gint         object_id;
@@ -754,23 +870,28 @@ sql_read_property_values (SQLData   *data,
 	query = g_strdup_printf ("DECLARE propcursor CURSOR FOR SELECT * "
 				 "FROM %s WHERE %s=%d",
 				 table, object_id_name, object_id);
-	res = PQexec (data->conn, query);
+	
+	res = sql_execute_query (data->con, query);
 	g_free (query);
+	
 
-	if (!res || PQresultStatus (res) != PGRES_COMMAND_OK) {
-		g_warning ("DECLARE CURSOR command failed (*_to_property).");
+	if (res == NULL) {
+		g_warning ("DECLARE CURSOR command failed (*_to_property) %s.",
+				sql_get_last_error (data->con));
 		goto out;
 	}
-	PQclear (res);
+	g_object_unref (res);
 
-	res = PQexec (data->conn, "FETCH ALL in propcursor");
-	if (!res || PQresultStatus (res) != PGRES_TUPLES_OK) {
-		g_warning ("FETCH ALL failed for *_to_property.");
+	res = sql_execute_query (data->con,"FETCH ALL in propcursor");
+	if (res == NULL) {
+		g_warning ("FETCH ALL failed for *_to_property %s.", 
+				sql_get_last_error (data->con));
 		goto out;
 	}
 	
-	n = PQnfields (res);
-	for (i = 0; i < PQntuples (res); i++) {
+	
+	n = gda_data_model_get_n_columns (res);
+	for (i = 0; i < gda_data_model_get_n_rows (res); i++) {
 		prop_id = -1;
 
 		for (j = 0; j < n; j++) {
@@ -781,10 +902,11 @@ sql_read_property_values (SQLData   *data,
 
 		prop_ids = g_list_prepend (prop_ids, GINT_TO_POINTER (prop_id));
 	}
-	PQclear (res);
+	g_object_unref (res);
 
-	res = PQexec (data->conn, "CLOSE propcursor");
-	PQclear (res);
+	res = sql_execute_query (data->con, "CLOSE propcursor");
+	g_object_unref (res);
+	
 
 	/* Get the actual values. */
 	for (l = prop_ids; l; l = l->next) {
@@ -793,23 +915,28 @@ sql_read_property_values (SQLData   *data,
 		query = g_strdup_printf ("DECLARE propcursor CURSOR FOR SELECT * "
 					 "FROM property WHERE prop_id=%d",
 					 prop_id);
-		res = PQexec (data->conn, query);
+		
+		res = sql_execute_query (data->con, query);
 		g_free (query);
 		
-		if (!res || PQresultStatus (res) != PGRES_COMMAND_OK) {
-			g_warning ("DECLARE CURSOR command failed (property).");
+		
+		if (res == NULL) {
+			g_warning ("DECLARE CURSOR command failed (property) %s.",
+					sql_get_last_error (data->con));
 			goto out;
 		}
-		PQclear (res);
+		g_object_unref (res);
 		
-		res = PQexec (data->conn, "FETCH ALL in propcursor");
-		if (!res || PQresultStatus (res) != PGRES_TUPLES_OK) {
-			g_warning ("FETCH ALL failed for property.");
+		res = sql_execute_query (data->con,"FETCH ALL in propcursor");
+		if (res == NULL) {
+			g_warning ("FETCH ALL failed for property %s.",
+					sql_get_last_error (data->con));
 			goto out;
 		}
 		
-		n = PQnfields (res);
-		for (i = 0; i < PQntuples (res); i++) {
+		
+		n = gda_data_model_get_n_columns (res);
+		for (i = 0; i < gda_data_model_get_n_rows (res); i++) {
 			prop_type_id = -1;
 			value = NULL;
 			
@@ -827,10 +954,11 @@ sql_read_property_values (SQLData   *data,
 			sql_set_property_value (data, object, property, value);
 			g_free (value);
 		}
-		PQclear (res);
+		g_object_unref (res);
 		
-		res = PQexec (data->conn, "CLOSE propcursor");
-		PQclear (res);
+		res = sql_execute_query (data->con, "CLOSE propcursor");
+		g_object_unref (res);
+		
 		
 	}
 
@@ -840,7 +968,7 @@ sql_read_property_values (SQLData   *data,
 
  out:
 	if (res) {
-		PQclear (res);
+		g_object_unref (res);
 	}
 
 	return FALSE;
@@ -865,8 +993,9 @@ static gboolean
 sql_read_overriden_day_types (SQLData *data, gint calendar_id)
 {
 	gint                   n, i, j;
-	PGresult              *res;
+	GdaDataModel              *res;
 	gchar                 *query;
+	
 	gint                   day_type_id;
 	mrptime                start, end;
 	MrpInterval           *interval;
@@ -881,25 +1010,29 @@ sql_read_overriden_day_types (SQLData *data, gint calendar_id)
 				 "extract (epoch from end_time) as end_seconds, "
 				 "* FROM day_interval WHERE cal_id=%d",
 				 calendar_id);
-	res = PQexec (data->conn, query);
+	
+	res = sql_execute_query (data->con, query);
 	g_free (query);
+	
 
-	if (!res || PQresultStatus (res) != PGRES_COMMAND_OK) {
-		g_warning ("DECLARE CURSOR command failed (day_interval).");
+	if (res == NULL) {
+		g_warning ("DECLARE CURSOR command failed (day_interval) %s.",
+				sql_get_last_error (data->con));
 		goto out;
 	}
-	PQclear (res);
+	g_object_unref (res);
 
-	res = PQexec (data->conn, "FETCH ALL in daycursor");
-	if (!res || PQresultStatus (res) != PGRES_TUPLES_OK) {
-		g_warning ("FETCH ALL failed for day_interval.");
+	res = sql_execute_query (data->con, "FETCH ALL in daycursor");
+	if (res == NULL) {
+		g_warning ("FETCH ALL failed for day_interval %s.",
+				sql_get_last_error (data->con));
 		goto out;
 	}
-
+	
 	hash = g_hash_table_new (NULL, NULL);
 	
-	n = PQnfields (res);
-	for (i = 0; i < PQntuples (res); i++) {
+	n = gda_data_model_get_n_columns (res);
+	for (i = 0; i < gda_data_model_get_n_rows (res); i++) {
 		day_type_id = -1;
 		start = -1;
 		end = -1;
@@ -935,10 +1068,11 @@ sql_read_overriden_day_types (SQLData *data, gint calendar_id)
 
 		interval = mrp_interval_new (start, end);
 	}
-	PQclear (res);
+	g_object_unref (res);
 
-	res = PQexec (data->conn, "CLOSE daycursor");
-	PQclear (res);
+	res = sql_execute_query (data->con,"CLOSE daycursor");
+	g_object_unref (res);
+	
 	
 	/* Set the intervals for the day types. */
 	calendar = g_hash_table_lookup (data->calendar_id_hash, GINT_TO_POINTER (calendar_id));
@@ -949,7 +1083,7 @@ sql_read_overriden_day_types (SQLData *data, gint calendar_id)
 
  out:
 	if (res) {
-		PQclear (res);
+		g_object_unref (res);
 	}
 
 	return FALSE;
@@ -960,34 +1094,40 @@ sql_read_overriden_day_types (SQLData *data, gint calendar_id)
 static gboolean
 sql_read_overriden_days (SQLData *data, gint calendar_id)
 {
-	gint      n, i, j;
-	PGresult *res;
-	gchar    *query;
-	gint      day_type_id;
-	mrptime   date;
+	gint          n, i, j;
+	GdaDataModel *res;
+	gchar        *query;
+	
+	gint          day_type_id;
+	mrptime       date;
 
 	/* Get overridden days for the given calendar. */
 	query = g_strdup_printf ("DECLARE daycursor CURSOR FOR SELECT "
 				 "extract (epoch from date) as date_seconds, "
 				 "* FROM day WHERE cal_id=%d",
 				 calendar_id);
-	res = PQexec (data->conn, query);
+	
+	res = sql_execute_query (data->con, query);
 	g_free (query);
+	
 
-	if (!res || PQresultStatus (res) != PGRES_COMMAND_OK) {
-		g_warning ("DECLARE CURSOR command failed (day).");
+	if (res == NULL) {
+		g_warning ("DECLARE CURSOR command failed (day) %s.",
+				sql_get_last_error (data->con));
 		goto out;
 	}
-	PQclear (res);
+	g_object_unref (res);
 	
-	res = PQexec (data->conn, "FETCH ALL in daycursor");
-	if (!res || PQresultStatus (res) != PGRES_TUPLES_OK) {
-		g_warning ("FETCH ALL failed for day.");
+	res = sql_execute_query (data->con, "FETCH ALL in daycursor");
+	if (res == NULL) {
+		g_warning ("FETCH ALL failed for day %s.",
+				sql_get_last_error (data->con));
 		goto out;
 	}
 	
-	n = PQnfields (res);
-	for (i = 0; i < PQntuples (res); i++) {
+	
+	n = gda_data_model_get_n_columns (res);
+	for (i = 0; i < gda_data_model_get_n_rows (res); i++) {
 		day_type_id = -1;
 		date = -1;
 		
@@ -1004,16 +1144,17 @@ sql_read_overriden_days (SQLData *data, gint calendar_id)
 
 		/*data->days = g_list_prepend (data->days, day);*/
 	}
-	PQclear (res);
+	g_object_unref (res);
 
-	res = PQexec (data->conn, "CLOSE daycursor");
-	PQclear (res);
+	res = sql_execute_query (data->con,"CLOSE daycursor");
+	g_object_unref (res);
+	
 
 	return TRUE;
 
  out:
 	if (res) {
-		PQclear (res);
+		g_object_unref (res);
 	}
 
 	return FALSE;
@@ -1022,35 +1163,39 @@ sql_read_overriden_days (SQLData *data, gint calendar_id)
 static gboolean
 sql_read_day_types (SQLData *data)
 {
-	gint      n, i, j;
-	PGresult *res;
-	gchar    *query;
-	gint      day_type_id;
-	gchar    *name;
-	gchar    *description;
-	MrpDay   *day;
-	gboolean  is_work, is_nonwork;
+	gint          n, i, j;
+	GdaDataModel *res;
+	gchar        *query;
+	
+	gint          day_type_id;
+	gchar        *name;
+	gchar        *description;
+	MrpDay       *day;
+	gboolean      is_work, is_nonwork;
 	
 	/* Get day types. */
 	query = g_strdup_printf ("DECLARE mycursor CURSOR FOR SELECT * FROM daytype WHERE proj_id=%d",
 				 data->project_id);
-	res = PQexec (data->conn, query);
+	
+	res = sql_execute_query (data->con, query);
 	g_free (query);
 
-	if (!res || PQresultStatus (res) != PGRES_COMMAND_OK) {
-		g_warning ("DECLARE CURSOR command failed (daytype).");
+	if (res == NULL) {
+		g_warning ("DECLARE CURSOR command failed (daytype) %s.",
+				sql_get_last_error (data->con));
 		goto out;
 	}
-	PQclear (res);
+	g_object_unref (res);
 
-	res = PQexec (data->conn, "FETCH ALL in mycursor");
-	if (!res || PQresultStatus (res) != PGRES_TUPLES_OK) {
-		g_warning ("FETCH ALL failed for daytype.");
+	res = sql_execute_query (data->con, "FETCH ALL in mycursor");
+	if (res == NULL) {
+		g_warning ("FETCH ALL failed for daytype %s.",
+				sql_get_last_error (data->con));
 		goto out;
 	}
 	
-	n = PQnfields (res);
-	for (i = 0; i < PQntuples (res); i++) {
+	n = gda_data_model_get_n_columns (res);
+	for (i = 0; i < gda_data_model_get_n_rows (res); i++) {
 		name = NULL;
 		description = NULL;
 		day_type_id = -1;
@@ -1091,16 +1236,16 @@ sql_read_day_types (SQLData *data)
 		
 		g_hash_table_insert (data->day_id_hash, GINT_TO_POINTER (day_type_id), day);
 	}
-	PQclear (res);
+	g_object_unref (res);
 
-	res = PQexec (data->conn, "CLOSE mycursor");
-	PQclear (res);
+	res = sql_execute_query (data->con, "CLOSE mycursor");
+	g_object_unref (res);
 
 	return TRUE;
 
  out:
 	if (res) {
-		PQclear (res);
+		g_object_unref (res);
 	}
 
 	return FALSE;
@@ -1207,8 +1352,9 @@ static gboolean
 sql_read_calendars (SQLData *data)
 {
 	gint          n, i, j;
-	PGresult     *res;
+	GdaDataModel *res;
 	gchar        *query;
+	
 	CalendarData *calendar_data;
 	GNode        *tree;
 	GNode        *node;
@@ -1219,26 +1365,28 @@ sql_read_calendars (SQLData *data)
 	/* Get calendars. */
 	query = g_strdup_printf ("DECLARE mycursor CURSOR FOR SELECT * FROM calendar WHERE proj_id=%d",
 				 data->project_id);
-	res = PQexec (data->conn, query);
+	res = sql_execute_query (data->con, query);
 	g_free (query);
 
-	if (!res || PQresultStatus (res) != PGRES_COMMAND_OK) {
-		g_warning ("DECLARE CURSOR command failed (calendar).");
+	if (res == NULL) {
+		g_warning ("DECLARE CURSOR command failed (calendar) %s.",
+				sql_get_last_error (data->con));
 		goto out;
 	}
-	PQclear (res);
+	g_object_unref (res);
 
-	res = PQexec (data->conn, "FETCH ALL in mycursor");
-	if (!res || PQresultStatus (res) != PGRES_TUPLES_OK) {
-		g_warning ("FETCH ALL failed for calendar.");
+	res = sql_execute_query (data->con, "FETCH ALL in mycursor");
+	if (res == NULL) {
+		g_warning ("FETCH ALL failed for calendar %s.",
+				sql_get_last_error (data->con));
 		goto out;
 	}
 
 	tree = g_node_new (NULL);
 	hash = g_hash_table_new (NULL, NULL);
 	
-	n = PQnfields (res);
-	for (i = 0; i < PQntuples (res); i++) {
+	n = gda_data_model_get_n_columns (res);
+	for (i = 0; i < gda_data_model_get_n_rows (res); i++) {
 		calendar_data = g_new0 (CalendarData, 1);
 		node = g_node_new (calendar_data);
 		
@@ -1290,10 +1438,10 @@ sql_read_calendars (SQLData *data)
 		calendars = g_list_prepend (calendars, node);
 		g_hash_table_insert (hash, GINT_TO_POINTER (calendar_data->id), node);
 	}
-	PQclear (res);
+	g_object_unref (res);
 
-	res = PQexec (data->conn, "CLOSE mycursor");
-	PQclear (res);
+	res = sql_execute_query (data->con, "CLOSE mycursor");
+	g_object_unref (res);
 
 	/* Build a GNode tree with all the calendars. */
 	for (l = calendars; l; l = l->next) {
@@ -1327,7 +1475,7 @@ sql_read_calendars (SQLData *data)
 
  out:
 	if (res) {
-		PQclear (res);
+		g_object_unref (res);
 	}
 
 	return FALSE;
@@ -1336,36 +1484,39 @@ sql_read_calendars (SQLData *data)
 static gboolean
 sql_read_groups (SQLData *data)
 {
-	gint      n, i, j;
-	PGresult *res;
-	gchar    *query;
-	MrpGroup *group;
-	gint      group_id;
-	gchar    *name;
-	gchar    *admin_name;
-	gchar    *admin_phone;
-	gchar    *admin_email;
+	gint          n, i, j;
+	GdaDataModel *res;
+	gchar        *query;
+	
+	MrpGroup     *group;
+	gint          group_id;
+	gchar        *name;
+	gchar        *admin_name;
+	gchar        *admin_phone;
+	gchar        *admin_email;
 		
 	/* Get resource groups. */
 	query = g_strdup_printf ("DECLARE mycursor CURSOR FOR SELECT * FROM resource_group WHERE proj_id=%d",
 				 data->project_id);
-	res = PQexec (data->conn, query);
+	res = sql_execute_query (data->con, query);
 	g_free (query);
 
-	if (!res || PQresultStatus (res) != PGRES_COMMAND_OK) {
-		g_warning ("DECLARE CURSOR command failed (resource_group).");
+	if (res == NULL) {
+		g_warning ("DECLARE CURSOR command failed (resource_group) %s.",
+				sql_get_last_error (data->con));
 		goto out;
 	}
-	PQclear (res);
+	g_object_unref (res);
 
-	res = PQexec (data->conn, "FETCH ALL in mycursor");
-	if (!res || PQresultStatus (res) != PGRES_TUPLES_OK) {
-		g_warning ("FETCH ALL failed for resource_group.");
+	res = sql_execute_query (data->con, "FETCH ALL in mycursor");
+	if (res == NULL) {
+		g_warning ("FETCH ALL failed for resource_group %s.",
+				sql_get_last_error (data->con));
 		goto out;
 	}
 	
-	n = PQnfields (res);
-	for (i = 0; i < PQntuples (res); i++) {
+	n = gda_data_model_get_n_columns (res);
+	for (i = 0; i < gda_data_model_get_n_rows (res); i++) {
 		group_id = -1;
 		name = NULL;
 		admin_name = NULL;
@@ -1407,16 +1558,16 @@ sql_read_groups (SQLData *data)
 
 		g_hash_table_insert (data->group_id_hash, GINT_TO_POINTER (group_id), group);
 	}
-	PQclear (res);
+	g_object_unref (res);
 
-	res = PQexec (data->conn, "CLOSE mycursor");
-	PQclear (res);
+	res = sql_execute_query (data->con, "CLOSE mycursor");
+	g_object_unref (res);
 
 	return TRUE;
 
  out:
 	if (res) {
-		PQclear (res);
+		g_object_unref (res);
 	}
 
 	return FALSE;
@@ -1425,39 +1576,42 @@ sql_read_groups (SQLData *data)
 static gboolean
 sql_read_resources (SQLData *data)
 {
-	gint         n, i, j;
-	PGresult    *res;
-	gchar       *query;
-	gint         resource_id;
-	gint         group_id;
-	gint         calendar_id;
-	gchar       *name;
-	gchar       *email;
-	gchar       *note;
-	MrpGroup    *group;
-	MrpCalendar *calendar;
-	MrpResource *resource;
+	gint          n, i, j;
+	GdaDataModel *res;
+	gchar        *query;
+	
+	gint          resource_id;
+	gint          group_id;
+	gint          calendar_id;
+	gchar        *name;
+	gchar        *email;
+	gchar        *note;
+	MrpGroup     *group;
+	MrpCalendar  *calendar;
+	MrpResource  *resource;
 
 	/* Get resources. */
 	query = g_strdup_printf ("DECLARE mycursor CURSOR FOR SELECT * FROM resource WHERE proj_id=%d",
 				 data->project_id);
-	res = PQexec (data->conn, query);
+	res = sql_execute_query (data->con, query);
 	g_free (query);
 
-	if (!res || PQresultStatus (res) != PGRES_COMMAND_OK) {
-		g_warning ("DECLARE CURSOR command failed (resource).");
+	if (res == NULL) {
+		g_warning ("DECLARE CURSOR command failed (resource) %s.",
+				sql_get_last_error (data->con));
 		goto out;
 	}
-	PQclear (res);
+	g_object_unref (res);
 
-	res = PQexec (data->conn, "FETCH ALL in mycursor");
-	if (!res || PQresultStatus (res) != PGRES_TUPLES_OK) {
-		g_warning ("FETCH ALL failed for resource.");
+	res = sql_execute_query (data->con, "FETCH ALL in mycursor");
+	if (res == NULL) {
+		g_warning ("FETCH ALL failed for resource %s.",
+				sql_get_last_error (data->con));
 		goto out;
 	}
 	
-	n = PQnfields (res);
-	for (i = 0; i < PQntuples (res); i++) {
+	n = gda_data_model_get_n_columns (res);
+	for (i = 0; i < gda_data_model_get_n_rows (res); i++) {
 		resource_id = -1;
 		group_id = -1;
 		calendar_id = -1;
@@ -1481,7 +1635,7 @@ sql_read_resources (SQLData *data)
 			else if (is_field (res, j, "note")) {
 				note = get_string (res, i, j);
 			}
-			else if (strcmp (PQfname (res, j), "cal_id") == 0) {
+			else if (strcmp (gda_data_model_get_column_title (res, j), "cal_id") == 0) {
 				calendar_id = get_id (res, i, j);
 			}
 		}
@@ -1512,16 +1666,16 @@ sql_read_resources (SQLData *data)
 		}
 	}
 	
-	PQclear (res);
+	g_object_unref (res);
 	
-	res = PQexec (data->conn, "CLOSE mycursor");
-	PQclear (res);
+	res = sql_execute_query (data->con, "CLOSE mycursor");
+	g_object_unref (res);
 
 	return TRUE;
 	
  out:
 	if (res) {
-		PQclear (res);
+		g_object_unref (res);
 	}
 	
 	return FALSE;
@@ -1531,35 +1685,38 @@ static gboolean
 sql_read_assignments (SQLData *data,
 			    gint     task_id)
 {
-	gint         n, i, j;
-	PGresult    *res;
-	gchar       *query;
-	gint         units;
-	gint         resource_id;
-	MrpTask     *task;
-	MrpResource *resource;
+	gint          n, i, j;
+	GdaDataModel *res;
+	gchar        *query;
+	
+	gint          units;
+	gint          resource_id;
+	MrpTask      *task;
+	MrpResource  *resource;
 
 	/* Get assignments. */
 	query = g_strdup_printf ("DECLARE alloccursor CURSOR FOR SELECT "
 				 "* FROM allocation WHERE task_id=%d",
 				 task_id);
-	res = PQexec (data->conn, query);
+	res = sql_execute_query (data->con, query);
 	g_free (query);
 
-	if (!res || PQresultStatus (res) != PGRES_COMMAND_OK) {
-		g_warning ("DECLARE CURSOR command failed (allocation).");
+	if (res == NULL) {
+		g_warning ("DECLARE CURSOR command failed (allocation) %s.",
+				sql_get_last_error (data->con));
 		goto out;
 	}
-	PQclear (res);
+	g_object_unref (res);
 
-	res = PQexec (data->conn, "FETCH ALL in alloccursor");
-	if (!res || PQresultStatus (res) != PGRES_TUPLES_OK) {
-		g_warning ("FETCH ALL failed for allocation.");
+	res = sql_execute_query (data->con, "FETCH ALL in alloccursor");
+	if (res == NULL) {
+		g_warning ("FETCH ALL failed for allocation %s.",
+				sql_get_last_error (data->con));
 		goto out;
 	}
 
-	n = PQnfields (res);
-	for (i = 0; i < PQntuples (res); i++) {
+	n = gda_data_model_get_n_columns (res);
+	for (i = 0; i < gda_data_model_get_n_rows (res); i++) {
 		resource_id = -1;
 		units = -1;
 		
@@ -1577,16 +1734,16 @@ sql_read_assignments (SQLData *data,
 
 		mrp_resource_assign (resource, task, units);
 	}
-	PQclear (res);
+	g_object_unref (res);
 
-	res = PQexec (data->conn, "CLOSE alloccursor");
-	PQclear (res);
+	res = sql_execute_query (data->con, "CLOSE alloccursor");
+	g_object_unref (res);
 
 	return TRUE;
 	
  out:
 	if (res) {
-		PQclear (res);
+		g_object_unref (res);
 	}
 	
 	return FALSE;
@@ -1595,35 +1752,38 @@ sql_read_assignments (SQLData *data,
 static gboolean
 sql_read_relations (SQLData *data, gint task_id)
 {
-	gint      n, i, j;
-	PGresult *res;
-	gchar    *query;
-	gint      predecessor_id;
-	gint      lag;
-	MrpTask  *task;
-	MrpTask  *predecessor;
+	gint          n, i, j;
+	GdaDataModel *res;
+	gchar        *query;
+	
+	gint          predecessor_id;
+	gint          lag;
+	MrpTask      *task;
+	MrpTask      *predecessor;
 
 	/* Get relations. */
 	query = g_strdup_printf ("DECLARE predcursor CURSOR FOR SELECT "
 				 "* FROM predecessor WHERE task_id=%d",
 				 task_id);
-	res = PQexec (data->conn, query);
+	res = sql_execute_query (data->con, query);
 	g_free (query);
 
-	if (!res || PQresultStatus (res) != PGRES_COMMAND_OK) {
-		g_warning ("DECLARE CURSOR command failed (predecessor).");
+	if (res == NULL) {
+		g_warning ("DECLARE CURSOR command failed (predecessor) %s.",
+				sql_get_last_error (data->con));
 		goto out;
 	}
-	PQclear (res);
+	g_object_unref (res);
 
-	res = PQexec (data->conn, "FETCH ALL in predcursor");
-	if (!res || PQresultStatus (res) != PGRES_TUPLES_OK) {
-		g_warning ("FETCH ALL failed for predecessor.");
+	res = sql_execute_query (data->con, "FETCH ALL in predcursor");
+	if (res == NULL) {
+		g_warning ("FETCH ALL failed for predecessor %s.",
+				sql_get_last_error (data->con));
 		goto out;
 	}
 
-	n = PQnfields (res);
-	for (i = 0; i < PQntuples (res); i++) {
+	n = gda_data_model_get_n_columns (res);
+	for (i = 0; i < gda_data_model_get_n_rows (res); i++) {
 		predecessor_id = -1;
 		lag = 0;
 		
@@ -1645,16 +1805,16 @@ sql_read_relations (SQLData *data, gint task_id)
 					  lag,
 					  NULL);
 	}
-	PQclear (res);
+	g_object_unref (res);
 
-	res = PQexec (data->conn, "CLOSE predcursor");
-	PQclear (res);
+	res = sql_execute_query (data->con, "CLOSE predcursor");
+	g_object_unref (res);
 
 	return TRUE;
 	
  out:
 	if (res) {
-		PQclear (res);
+		g_object_unref (res);
 	}
 	
 	return FALSE;
@@ -1771,8 +1931,9 @@ static gboolean
 sql_read_tasks (SQLData *data)
 {
 	gint               n, i, j;
-	PGresult          *res;
+	GdaDataModel      *res;
 	gchar             *query;
+	
 	gint               task_id;
 	gint               parent_id;
 	gchar             *name;
@@ -1798,25 +1959,27 @@ sql_read_tasks (SQLData *data)
 				 "extract (epoch from constraint_time) as constraint_time_seconds, "
 				 "* FROM task WHERE proj_id=%d",
 				 data->project_id);
-	res = PQexec (data->conn, query);
+	res = sql_execute_query (data->con, query);
 	g_free (query);
 
-	if (!res || PQresultStatus (res) != PGRES_COMMAND_OK) {
-		g_warning ("DECLARE CURSOR command failed (task).");
+	if (res == NULL) {
+		g_warning ("DECLARE CURSOR command failed (task) %s.",
+				sql_get_last_error (data->con));
 		goto out;
 	}
-	PQclear (res);
+	g_object_unref (res);
 
-	res = PQexec (data->conn, "FETCH ALL in mycursor");
-	if (!res || PQresultStatus (res) != PGRES_TUPLES_OK) {
-		g_warning ("FETCH ALL failed for task.");
+	res = sql_execute_query (data->con, "FETCH ALL in mycursor");
+	if (res == NULL) {
+		g_warning ("FETCH ALL failed for task %s.",
+				sql_get_last_error (data->con));
 		goto out;
 	}
 
 	hash = g_hash_table_new (NULL, NULL);
 
-	n = PQnfields (res);
-	for (i = 0; i < PQntuples (res); i++) {
+	n = gda_data_model_get_n_columns (res);
+	for (i = 0; i < gda_data_model_get_n_rows (res); i++) {
 		task_id = -1;
 		parent_id = -1;
 		name = NULL;
@@ -1858,7 +2021,8 @@ sql_read_tasks (SQLData *data)
 				note = get_string (res, i, j);
 			}
 			else if (is_field (res, j, "constraint_type")) {
-				constraint_type = constraint_string_to_type (PQgetvalue (res, i, j));
+				constraint_type = constraint_string_to_type 
+					(get_string (res, i, j));
 			}
 			else if (is_field (res, j, "constraint_time_seconds")) {
 				constraint_time = get_int (res, i, j);
@@ -1909,10 +2073,10 @@ sql_read_tasks (SQLData *data)
 		g_hash_table_insert (data->task_id_hash, GINT_TO_POINTER (task_id), task);
 		g_hash_table_insert (data->task_hash, task, GINT_TO_POINTER (task_id));
 	}
-	PQclear (res);
+	g_object_unref (res);
 
-	res = PQexec (data->conn, "CLOSE mycursor");
-	PQclear (res);
+	res = sql_execute_query (data->con, "CLOSE mycursor");
+	g_object_unref (res);
 
 	/* Build a GNode tree with all the tasks. */
 	tree = g_node_new (NULL);
@@ -1977,7 +2141,7 @@ sql_read_tasks (SQLData *data)
 	
  out:
 	if (res) {
-		PQclear (res);
+		g_object_unref (res);
 	}
 	
 	return FALSE;
@@ -1990,13 +2154,17 @@ mrp_sql_load_project (MrpStorageSQL *storage,
 		      const gchar   *database,
 		      const gchar   *login,
 		      const gchar   *password,
-		      gint           project_id)
+		      gint           project_id,
+		      GError       **error)
 {
 	SQLData        *data;
 	gchar          *pgoptions = NULL;
 	gchar          *pgtty = NULL;
-	PGresult       *res = NULL;
+	GdaDataModel   *res = NULL;
+	GdaClient      *client;
 	gchar          *str;
+	gchar          *dsn_name;
+	gchar          *db_txt;
 	MrpCalendar    *calendar;
 	MrpGroup       *group;
 	MrpTaskManager *task_manager;
@@ -2018,27 +2186,36 @@ mrp_sql_load_project (MrpStorageSQL *storage,
 
 	data->root_task = mrp_task_new ();
 
-	data->conn = PQsetdbLogin (server,
-				   port,
-				   pgoptions,
-				   pgtty,
-				   database,
-				   login,
-				   password);
-	
- 	if (PQstatus (data->conn) == CONNECTION_BAD) {
-		str = g_strdup_printf ("Connection to database '%s' failed.", database);
-		g_warning (str);//sql_show_error_dialog (storage, str);
-		g_free (str);
-		goto out;
-	}
+	db_txt = g_strdup_printf ("DATABASE=%s",database);
+	gda_config_save_data_source (dsn_name, 
+                                     "PostgreSQL", 
+                                     db_txt,
+                                     "planner test", login, password);
+	g_free (db_txt);
 
-	res = PQexec (data->conn, "BEGIN");
-	if (!res || PQresultStatus (res) != PGRES_COMMAND_OK) {
-		g_warning ("BEGIN command failed.");
+	client = gda_client_new ();
+
+	data->con = gda_client_open_connection (client, dsn_name, NULL, NULL, 0);
+
+	if (!GDA_IS_CONNECTION (data->con)) {
+		g_warning (_("Connection to database '%s' failed.\n"), database);
+		/* This g_set_error isn't shown - don't know why exactly */
+		g_set_error (error,
+			MRP_ERROR,
+			MRP_ERROR_SAVE_WRITE_FAILED,
+			_("Connection to database '%s' failed.\n%s"),
+			database,
+			sql_get_last_error (data->con));
 		goto out;
 	}
-	PQclear (res);
+	
+	res = sql_execute_query (data->con, "BEGIN");
+	if (res == NULL) {
+		g_warning (_("BEGIN command failed %s."),
+				sql_get_last_error (data->con));
+		goto out;
+	}
+	g_object_unref (res);
 	res = NULL;
 
 	/* Get project. */
@@ -2096,10 +2273,10 @@ mrp_sql_load_project (MrpStorageSQL *storage,
 		mrp_task_manager_set_root (task_manager, data->root_task);
 	}
 
-	res = PQexec (data->conn, "COMMIT");
-	PQclear (res);
+	res = sql_execute_query (data->con, "COMMIT");
+	g_object_unref (res);
 
-	PQfinish (data->conn);
+	g_object_unref (data->con);
 
 	d(g_print ("Read project, set rev to %d\n", data->revision));
 	
@@ -2111,10 +2288,10 @@ mrp_sql_load_project (MrpStorageSQL *storage,
 	
  out:
 	if (res) {
-		PQclear (res);
+		g_object_unref (res);
 	}
 	
-	PQfinish (data->conn);
+	g_object_unref (data->con);
 	return FALSE;
 
 	/* FIXME: free data */
@@ -2122,7 +2299,7 @@ mrp_sql_load_project (MrpStorageSQL *storage,
 
 #define WRITE_ERROR(e,c) \
 G_STMT_START \
-g_set_error(e,MRP_ERROR,MRP_ERROR_SAVE_WRITE_FAILED,PQerrorMessage (c)) \
+g_set_error(e,MRP_ERROR,MRP_ERROR_SAVE_WRITE_FAILED, sql_get_last_error (c)) \
 G_STMT_END
 
 
@@ -2135,15 +2312,16 @@ sql_write_project (MrpStorageSQL  *storage,
 		   gboolean        force,
 		   GError        **error)
 {
-	PGresult *res;
-	gchar    *query;
-	gint      project_id;
-	gint      revision;
-	gchar    *last_user;
-	gchar    *name;
-	mrptime   project_start;
-	gchar    *manager, *company;
-	gchar    *str;
+	GdaDataModel *res;
+	gchar        *query;
+	
+	gint          project_id;
+	gint          revision;
+	gchar        *last_user;
+	gchar        *name;
+	mrptime       project_start;
+	gchar        *manager, *company;
+	gchar        *str;
 
 	project_id = data->project_id;
 
@@ -2156,46 +2334,43 @@ sql_write_project (MrpStorageSQL  *storage,
 		query = g_strdup_printf ("DECLARE mycursor CURSOR FOR SELECT "
 					 "name, revision, last_user FROM project WHERE proj_id=%d",
 					 project_id);
-		res = PQexec (data->conn, query);
+		res = sql_execute_query (data->con, query);
 		
 		g_free (query);
-		if (!res || PQresultStatus (res) != PGRES_COMMAND_OK) {
-			WRITE_ERROR (error, data->conn);
-			PQclear (res);
+		if (res == NULL) {
+			WRITE_ERROR (error, data->con);
 			return FALSE;
 		}
-		PQclear (res);
+		g_object_unref (res);
 		
-		res = PQexec (data->conn, "FETCH ALL in mycursor");
-		if (!res || PQresultStatus (res) != PGRES_TUPLES_OK) {
-			WRITE_ERROR (error, data->conn);
-			PQclear (res);
+		res = sql_execute_query (data->con, "FETCH ALL in mycursor");
+		if (res == NULL) {
+			WRITE_ERROR (error, data->con);
 			return FALSE;
 		}
 
-		if (PQntuples (res) > 0) {
+		if (gda_data_model_get_n_rows (res) > 0) {
 			name = get_string (res, 0, 0);
 			revision = get_int (res, 0, 1);
 			last_user = get_string (res, 0, 2);
 			
-			PQclear (res);
+			g_object_unref (res);
 			
-			res = PQexec (data->conn, "CLOSE mycursor");
-			PQclear (res);
+			res = sql_execute_query (data->con, "CLOSE mycursor");
+			g_object_unref (res);
 			
 			/* Remove the old project. */
 			d(g_print ("Got old project with id %d (rev %d), remove.\n", project_id, revision));
 		
 			query = g_strdup_printf ("DELETE FROM project WHERE proj_id=%d", project_id);
-			res = PQexec (data->conn, query);
+			res = sql_execute_query (data->con, query);
 			g_free (query);
 			
-			if (!res || PQresultStatus (res) != PGRES_COMMAND_OK) {
-				WRITE_ERROR (error, data->conn);
-				PQclear (res);
+			if (res == NULL) {
+				WRITE_ERROR (error, data->con);
 				return FALSE;
 			}
-			PQclear (res);
+			g_object_unref (res);
 		
 			d(g_print ("*** revision: %d, old revision: %d\n", revision, data->revision));
 			
@@ -2217,7 +2392,7 @@ sql_write_project (MrpStorageSQL  *storage,
 			
 			data->revision = revision + 1;
 		} else {
-			PQclear (res);
+			g_object_unref (res);
 			
 			data->revision = 1;
 		}
@@ -2248,16 +2423,16 @@ sql_write_project (MrpStorageSQL  *storage,
 					 name, company, manager, str, data->revision);
 	}
 
-	res = PQexec (data->conn, query); 
+	res = sql_execute_query (data->con, query); 
 	g_free (query);
 	g_free (str);
 	
-	if (!res || PQresultStatus (res) != PGRES_COMMAND_OK) {
-		WRITE_ERROR (error, data->conn);
-		PQclear (res);
+	if (res == NULL) {
+		WRITE_ERROR (error, data->con);
 		return FALSE;
 	}
-	PQclear (res);
+	g_object_unref (res);
+
 
 	if (project_id == -1) {
 		/* Get the assigned id. */
@@ -2274,10 +2449,11 @@ sql_write_project (MrpStorageSQL  *storage,
 static gboolean
 sql_write_phases (SQLData *data)
 {
-	PGresult *res;
-	gchar    *query;
-	GList    *phases, *l;
-	gchar    *name;
+	GdaDataModel *res;
+	gchar        *query;
+	
+	GList        *phases, *l;
+	gchar        *name;
 
 	g_object_get (data->project,
 		      "phases", &phases,
@@ -2289,12 +2465,12 @@ sql_write_phases (SQLData *data)
 					 "VALUES(%d, '%s')",
 					 data->project_id, name);
 
-		res = PQexec (data->conn, query); 
+		res = sql_execute_query (data->con, query); 
 		g_free (query);
 
-		if (!res || PQresultStatus (res) != PGRES_COMMAND_OK) {
-			g_warning ("INSERT command failed (phase).");
-			fprintf (stderr, "%s", PQerrorMessage (data->conn));
+		if (res == NULL) {
+			g_warning ("INSERT command failed (phase) %s.",
+					sql_get_last_error (data->con));
 			goto out;
 		}
 	}
@@ -2305,7 +2481,7 @@ sql_write_phases (SQLData *data)
 	
  out:
 	if (res) {
-		PQclear (res);
+		g_object_unref (res);
 	}
 	
 	return FALSE;
@@ -2314,9 +2490,10 @@ sql_write_phases (SQLData *data)
 static gboolean
 sql_write_phase (SQLData *data)
 {
-	PGresult *res;
-	gchar    *query;
-	gchar    *phase;
+	GdaDataModel *res;
+	gchar        *query;
+	
+	gchar        *phase;
 	
 	g_object_get (data->project,
 		      "phase", &phase,
@@ -2330,12 +2507,12 @@ sql_write_phase (SQLData *data)
 					 data->project_id);
 	}
 	
-	res = PQexec (data->conn, query); 
+	res = sql_execute_query (data->con, query); 
 	g_free (query);
 	
-	if (!res || PQresultStatus (res) != PGRES_COMMAND_OK) {
-		g_warning ("UPDATE command failed (phase).");
-		fprintf (stderr, "%s", PQerrorMessage (data->conn));
+	if (res == NULL) {
+		g_warning ("UPDATE command failed (phase) %s.",
+				sql_get_last_error (data->con));
 		goto out;
 	}
 	
@@ -2343,7 +2520,7 @@ sql_write_phase (SQLData *data)
 	
  out:
 	if (res) {
-		PQclear (res);
+		g_object_unref (res);
 	}
 	
 	return FALSE;
@@ -2425,12 +2602,13 @@ property_to_string (MrpObject   *object,
 static gboolean
 sql_write_property_specs (SQLData *data)
 {
-	PGresult    *res;
-	gchar       *query;
-	GList       *properties, *l;
-	const gchar *name, *label, *description, *type;
-	MrpProperty *property;
-	gint         id;
+	GdaDataModel *res;
+	gchar        *query;
+	
+	GList        *properties, *l;
+	const gchar  *name, *label, *description, *type;
+	MrpProperty  *property;
+	gint          id;
 
 	/* Project custom properties. */
 	properties = mrp_project_get_properties_from_type (data->project, MRP_TYPE_PROJECT);
@@ -2446,12 +2624,12 @@ sql_write_property_specs (SQLData *data)
 					 "VALUES(%d, '%s', '%s', '%s', 'project', '%s')",
 					 data->project_id,
 					 name, label, type, description);
-		res = PQexec (data->conn, query); 
+		res = sql_execute_query (data->con, query); 
 		g_free (query);
 
-		if (!res || PQresultStatus (res) != PGRES_COMMAND_OK) {
-			g_warning ("INSERT command failed (property_type).");
-			fprintf (stderr, "%s", PQerrorMessage (data->conn));
+		if (res == NULL) {
+			g_warning ("INSERT command failed (property_type) %s.",
+					sql_get_last_error (data->con));
 			goto out;
 		}
 
@@ -2476,12 +2654,12 @@ sql_write_property_specs (SQLData *data)
 					 "VALUES(%d, '%s', '%s', '%s', 'task', '%s')",
 					 data->project_id,
 					 name, label, type, description);
-		res = PQexec (data->conn, query); 
+		res = sql_execute_query (data->con, query); 
 		g_free (query);
 
-		if (!res || PQresultStatus (res) != PGRES_COMMAND_OK) {
-			g_warning ("INSERT command failed (property_type).");
-			fprintf (stderr, "%s", PQerrorMessage (data->conn));
+		if (res == NULL) {
+			g_warning ("INSERT command failed (property_type) %s.",
+					sql_get_last_error (data->con));
 			goto out;
 		}
 
@@ -2506,12 +2684,12 @@ sql_write_property_specs (SQLData *data)
 					 "VALUES(%d, '%s', '%s', '%s', 'resource', '%s')",
 					 data->project_id,
 					 name, label, type, description);
-		res = PQexec (data->conn, query); 
+		res = sql_execute_query (data->con, query); 
 		g_free (query);
 
-		if (!res || PQresultStatus (res) != PGRES_COMMAND_OK) {
-			g_warning ("INSERT command failed (property_type).");
-			fprintf (stderr, "%s", PQerrorMessage (data->conn));
+		if (res == NULL) {
+			g_warning ("INSERT command failed (property_type) %s.",
+					sql_get_last_error (data->con));
 			goto out;
 		}
 
@@ -2525,7 +2703,7 @@ sql_write_property_specs (SQLData *data)
 	
  out:
 	if (res) {
-		PQclear (res);
+		g_object_unref (res);
 	}
 	
 	return FALSE;
@@ -2535,17 +2713,18 @@ static gboolean
 sql_write_property_values (SQLData   *data,
 				  MrpObject *object)
 {
-	PGresult    *res;
-	gchar       *query;
-	GType        object_type;
-	GList       *properties, *l;
-	const gchar *name, *label, *description, *type;
-	const gchar *str;
-	gchar       *value;
-	MrpProperty *property;
-	gint         property_type_id;
-	gint         id;
-	gint         object_id;
+	GdaDataModel *res;
+	gchar        *query;
+	
+	GType         object_type;
+	GList        *properties, *l;
+	const gchar  *name, *label, *description, *type;
+	const gchar  *str;
+	gchar        *value;
+	MrpProperty  *property;
+	gint          property_type_id;
+	gint          id;
+	gint          object_id;
 
 	object_type = G_OBJECT_TYPE (object);
 
@@ -2576,13 +2755,13 @@ sql_write_property_values (SQLData   *data,
 						 "VALUES(%d, NULL)", property_type_id);
 		}
 		
-		res = PQexec (data->conn, query); 
+		res = sql_execute_query (data->con, query); 
 		g_free (query);
 		g_free (value);
 
-		if (!res || PQresultStatus (res) != PGRES_COMMAND_OK) {
-			g_warning ("INSERT command failed (property).");
-			fprintf (stderr, "%s", PQerrorMessage (data->conn));
+		if (res == NULL) {
+			g_warning ("INSERT command failed (property) %s.",
+					sql_get_last_error (data->con));
 			goto out;
 		}
 
@@ -2610,12 +2789,12 @@ sql_write_property_values (SQLData   *data,
 					 "VALUES(%d, %d)",
 					 str,
 					 object_id, id);
-		res = PQexec (data->conn, query); 
+		res = sql_execute_query (data->con, query); 
 		g_free (query);
 
-		if (!res || PQresultStatus (res) != PGRES_COMMAND_OK) {
-			g_warning ("INSERT command failed (*_to_property).");
-			fprintf (stderr, "%s", PQerrorMessage (data->conn));
+		if (res == NULL) {
+			g_warning ("INSERT command failed (*_to_property) %s.",
+					sql_get_last_error (data->con));
 			goto out;
 		}
 	}
@@ -2624,7 +2803,7 @@ sql_write_property_values (SQLData   *data,
 	
  out:
 	if (res) {
-		PQclear (res);
+		g_object_unref (res);
 	}
 
 	return FALSE;
@@ -2633,13 +2812,14 @@ sql_write_property_values (SQLData   *data,
 static gboolean
 sql_write_day_types (SQLData *data)
 {
-	PGresult    *res;
-	gchar       *query;
-	GList       *days, *l;
-	MrpDay      *day;
-	gint         id;
-	const gchar *is_work;
-	const gchar *is_nonwork;
+	GdaDataModel *res;	
+	gchar        *query;
+	
+	GList        *days, *l;
+	MrpDay       *day;
+	gint          id;
+	const gchar  *is_work;
+	const gchar  *is_nonwork;
 
 	days = g_list_copy (mrp_day_get_all (data->project));
 	days = g_list_prepend (days, mrp_day_get_work ());
@@ -2668,12 +2848,12 @@ sql_write_day_types (SQLData *data)
 					 mrp_day_get_name (day),
 					 mrp_day_get_description (day),
 					 is_work, is_nonwork);
-		res = PQexec (data->conn, query); 
+		res = sql_execute_query (data->con, query); 
 		g_free (query);
 
-		if (!res || PQresultStatus (res) != PGRES_COMMAND_OK) {
-			g_warning ("INSERT command failed (resource_group).");
-			fprintf (stderr, "%s", PQerrorMessage (data->conn));
+		if (res == NULL) {
+			g_warning ("INSERT command failed (resource_group) %s.",
+					sql_get_last_error (data->con));
 			goto out;
 		}
 
@@ -2689,7 +2869,7 @@ sql_write_day_types (SQLData *data)
 	
  out:
 	if (res) {
-		PQclear (res);
+		g_object_unref (res);
 	}
 	
 	return FALSE;
@@ -2716,14 +2896,15 @@ sql_write_overridden_day_type (SQLData             *data,
 				      MrpCalendar         *calendar,
 				      MrpDayWithIntervals *day_ivals)
 {
-	PGresult    *res;
-	gchar       *query;
-	GList       *l;
-	gint         calendar_id;
-	gint         day_type_id;
-	MrpInterval *ival;
-	mrptime      start, end;
-	gchar       *start_string, *end_string;
+	GdaDataModel *res;
+	gchar        *query;
+	
+	GList        *l;
+	gint          calendar_id;
+	gint          day_type_id;
+	MrpInterval  *ival;
+	mrptime       start, end;
+	gchar        *start_string, *end_string;
 
 	calendar_id = get_hash_data_as_id (data->calendar_hash, calendar);
 	day_type_id = get_hash_data_as_id (data->day_hash, day_ivals->day);
@@ -2740,14 +2921,14 @@ sql_write_overridden_day_type (SQLData             *data,
 					 "VALUES(%d, %d, '%s', '%s')",
 					 calendar_id, day_type_id,
 					 start_string, end_string);
-		res = PQexec (data->conn, query); 
+		res = sql_execute_query (data->con, query); 
 		g_free (query);
 		g_free (start_string);
 		g_free (end_string);
 
-		if (!res || PQresultStatus (res) != PGRES_COMMAND_OK) {
-			g_warning ("INSERT command failed (day_interval).");
-			fprintf (stderr, "%s", PQerrorMessage (data->conn));
+		if (res == NULL) {
+			g_warning ("INSERT command failed (day_interval) %s.",
+					sql_get_last_error (data->con));
 			goto out;
 		}
 	}
@@ -2756,7 +2937,7 @@ sql_write_overridden_day_type (SQLData             *data,
 	
  out:
 	if (res) {
-		PQclear (res);
+		g_object_unref (res);
 	}
 	
 	return FALSE;
@@ -2767,11 +2948,12 @@ sql_write_overridden_dates (SQLData        *data,
 				   MrpCalendar    *calendar,
 				   MrpDateWithDay *date_day)
 {
-	PGresult *res;
-	gchar    *query;
-	gint      calendar_id;
-	gint      day_type_id;
-	gchar    *date_string;
+	GdaDataModel *res;
+	gchar        *query;
+	
+	gint          calendar_id;
+	gint          day_type_id;
+	gchar        *date_string;
 
 	calendar_id = get_hash_data_as_id (data->calendar_hash, calendar);
 	day_type_id = get_hash_data_as_id (data->day_hash, date_day->day);
@@ -2781,13 +2963,13 @@ sql_write_overridden_dates (SQLData        *data,
 	query = g_strdup_printf ("INSERT INTO day(cal_id, dtype_id, date) "
 				 "VALUES(%d, %d, '%s')",
 				 calendar_id, day_type_id, date_string);
-	res = PQexec (data->conn, query); 
+	res = sql_execute_query (data->con, query); 
 	g_free (query);
 	g_free (date_string);
 
-	if (!res || PQresultStatus (res) != PGRES_COMMAND_OK) {
-		g_warning ("INSERT command failed (day).");
-		fprintf (stderr, "%s", PQerrorMessage (data->conn));
+	if (res == NULL) {
+		g_warning ("INSERT command failed (day) %s.",
+				sql_get_last_error (data->con));
 		goto out;
 	}
 
@@ -2795,7 +2977,7 @@ sql_write_overridden_dates (SQLData        *data,
 	
  out:
 	if (res) {
-		PQclear (res);
+		g_object_unref (res);
 	}
 	
 	return FALSE;
@@ -2806,13 +2988,14 @@ sql_write_calendars_recurse (SQLData     *data,
 				    MrpCalendar *parent,
 				    MrpCalendar *calendar)
 {
-	PGresult *res;
-	gchar    *query;
-	GList    *list, *l;
-	gint      id;
-	gint      parent_id;
-	gchar    *parent_id_string;
-	gchar    *mon, *tue, *wed, *thu, *fri, *sat, *sun;
+	GdaDataModel *res;
+	gchar        *query;
+	
+	GList        *list, *l;
+	gint          id;
+	gint          parent_id;
+	gchar        *parent_id_string;
+	gchar        *mon, *tue, *wed, *thu, *fri, *sat, *sun;
 
 	/* Write the calendar. */
 
@@ -2838,7 +3021,7 @@ sql_write_calendars_recurse (SQLData     *data,
 				 "%s, %s, %s, %s, %s, %s, %s)",
 				 data->project_id, parent_id_string, mrp_calendar_get_name (calendar),
 				 mon, tue, wed, thu, fri, sat, sun);
-	res = PQexec (data->conn, query); 
+	res = sql_execute_query (data->con, query); 
 	g_free (query);
 	g_free (mon);
 	g_free (tue);
@@ -2848,9 +3031,9 @@ sql_write_calendars_recurse (SQLData     *data,
 	g_free (sat);
 	g_free (sun);
 	
-	if (!res || PQresultStatus (res) != PGRES_COMMAND_OK) {
-		g_warning ("INSERT command failed (calendar).");
-		fprintf (stderr, "%s", PQerrorMessage (data->conn));
+	if (res == NULL) {
+		g_warning ("INSERT command failed (calendar) %s.",
+				sql_get_last_error (data->con));
 		goto out;
 	}
 	
@@ -2861,8 +3044,7 @@ sql_write_calendars_recurse (SQLData     *data,
 	
 	g_free (parent_id_string);
 
-	PQclear (res);
-	res = NULL;
+	g_object_unref (res);
 
 	/* Write overridden day types. */
 	list = mrp_calendar_get_overridden_days (calendar);
@@ -2892,7 +3074,7 @@ sql_write_calendars_recurse (SQLData     *data,
 	
  out:
 	if (res) {
-		PQclear (res);
+		g_object_unref (res);
 	}
 	
 	return FALSE;
@@ -2918,10 +3100,11 @@ sql_write_calendars (SQLData *data)
 static gboolean
 sql_write_calendar_id (SQLData *data)
 {
-	PGresult    *res;
-	gchar       *query;
-	MrpCalendar *calendar;
-	gint         id;
+	GdaDataModel *res;
+	gchar        *query;
+	
+	MrpCalendar  *calendar;
+	gint          id;
 
 	g_object_get (data->project,
 		      "calendar", &calendar,
@@ -2937,12 +3120,12 @@ sql_write_calendar_id (SQLData *data)
 					 data->project_id);
 	}
 	
-	res = PQexec (data->conn, query); 
+	res = sql_execute_query (data->con, query); 
 	g_free (query);
 	
-	if (!res || PQresultStatus (res) != PGRES_COMMAND_OK) {
-		g_warning ("UPDATE command failed (cal_id).");
-		fprintf (stderr, "%s", PQerrorMessage (data->conn));
+	if (res == NULL) {
+		g_warning ("UPDATE command failed (cal_id) %s.",
+				sql_get_last_error (data->con));
 		goto out;
 	}
 	
@@ -2950,7 +3133,7 @@ sql_write_calendar_id (SQLData *data)
 	
  out:
 	if (res) {
-		PQclear (res);
+		g_object_unref (res);
 	}
 	
 	return FALSE;
@@ -2959,12 +3142,13 @@ sql_write_calendar_id (SQLData *data)
 static gboolean
 sql_write_groups (SQLData *data)
 {
-	PGresult *res;
-	gchar    *query;
-	GList    *groups, *l;
-	gchar    *name, *manager_name, *manager_phone, *manager_email;	       
-	MrpGroup *group;
-	gint      id;
+	GdaDataModel *res;
+	gchar        *query;
+	
+	GList        *groups, *l;
+	gchar        *name, *manager_name, *manager_phone, *manager_email;	       
+	MrpGroup     *group;
+	gint          id;
 
 	groups = mrp_project_get_groups (data->project);
 	for (l = groups; l; l = l->next) {
@@ -2982,12 +3166,12 @@ sql_write_groups (SQLData *data)
 					 data->project_id,
 					 name,
 					 manager_name, manager_phone, manager_email);
-		res = PQexec (data->conn, query); 
+		res = sql_execute_query (data->con, query); 
 		g_free (query);
 
-		if (!res || PQresultStatus (res) != PGRES_COMMAND_OK) {
-			g_warning ("INSERT command failed (resource_group).");
-			fprintf (stderr, "%s", PQerrorMessage (data->conn));
+		if (res == NULL) {
+			g_warning ("INSERT command failed (resource_group) %s.",
+					sql_get_last_error (data->con));
 			goto out;
 		}
 
@@ -3006,7 +3190,7 @@ sql_write_groups (SQLData *data)
 	
  out:
 	if (res) {
-		PQclear (res);
+		g_object_unref (res);
 	}
 	
 	return FALSE;
@@ -3015,10 +3199,11 @@ sql_write_groups (SQLData *data)
 static gboolean
 sql_write_default_group_id (SQLData *data)
 {
-	PGresult *res;
-	gchar    *query;
-	MrpGroup *group;
-	gint      id;
+	GdaDataModel *res;
+	gchar        *query;
+	
+	MrpGroup     *group;
+	gint          id;
 
 	g_object_get (data->project,
 		      "default_group", &group,
@@ -3034,12 +3219,12 @@ sql_write_default_group_id (SQLData *data)
 					 data->project_id);
 	}
 	
-	res = PQexec (data->conn, query); 
+	res = sql_execute_query (data->con, query); 
 	g_free (query);
 	
-	if (!res || PQresultStatus (res) != PGRES_COMMAND_OK) {
-		g_warning ("UPDATE command failed (default_group_id).");
-		fprintf (stderr, "%s", PQerrorMessage (data->conn));
+	if (res == NULL) {
+		g_warning ("UPDATE command failed (default_group_id) %s.",
+				sql_get_last_error (data->con));
 		goto out;
 	}
 
@@ -3047,7 +3232,7 @@ sql_write_default_group_id (SQLData *data)
 
  out:
 	if (res) {
-		PQclear (res);
+		g_object_unref (res);
 	}
 	
 	return FALSE;
@@ -3056,8 +3241,9 @@ sql_write_default_group_id (SQLData *data)
 static gboolean
 sql_write_resources (SQLData *data)
 {
-	PGresult        *res;
+	GdaDataModel    *res;
 	gchar           *query;
+	
 	GList           *resources, *l;
 	gchar           *name, *email, *note;	       
 	MrpResource     *resource;
@@ -3110,16 +3296,16 @@ sql_write_resources (SQLData *data)
 					 data->project_id, group_id_string, name,
 					 email, note, is_worker, (double) units,
 					 cal_id_string);
-		res = PQexec (data->conn, query); 
+		res = sql_execute_query (data->con, query); 
 		g_free (query);
 		g_free (cal_id_string);
 		g_free (group_id_string);
 		g_free (note);
 		g_free (email);
 
-		if (!res || PQresultStatus (res) != PGRES_COMMAND_OK) {
-			g_warning ("INSERT command failed (resource).");
-			fprintf (stderr, "%s", PQerrorMessage (data->conn));
+		if (res == NULL) {
+			g_warning ("INSERT command failed (resource) %s.",
+					sql_get_last_error (data->con));
 			goto out;
 		}
 
@@ -3144,7 +3330,7 @@ sql_write_resources (SQLData *data)
 	
  out:
 	if (res) {
-		PQclear (res);
+		g_object_unref (res);
 	}
 	
 	return FALSE;
@@ -3153,8 +3339,8 @@ sql_write_resources (SQLData *data)
 static gboolean
 sql_write_tasks (SQLData *data)
 {
-	PGresult        *res;
-	gchar           *query;
+	GdaDataModel    *res;
+	gchar           *query;	
 	GList           *tasks, *l;
 	gchar           *name, *note;	       
 	MrpTask         *task;
@@ -3273,7 +3459,7 @@ sql_write_tasks (SQLData *data)
 					 percent_complete, is_milestone, is_fixed_work,
 					 constraint_type, constraint_time);
 
-		res = PQexec (data->conn, query); 
+		res = sql_execute_query (data->con, query); 
 		g_free (query);
 		g_free (start_string);
 		g_free (finish_string);
@@ -3282,9 +3468,9 @@ sql_write_tasks (SQLData *data)
 		g_free (constraint_time);
 		g_free (constraint);
 
-		if (!res || PQresultStatus (res) != PGRES_COMMAND_OK) {
-			g_warning ("INSERT command failed (task).");
-			fprintf (stderr, "%s", PQerrorMessage (data->conn));
+		if (res == NULL) {
+			g_warning ("INSERT command failed (task) %s.",
+					sql_get_last_error (data->con));
 			goto out;
 		}
 
@@ -3334,12 +3520,12 @@ sql_write_tasks (SQLData *data)
 						 "type, lag) "
 						 "VALUES(%d, %d, '%s', %d)",
 						 id, pred_id, relation_type, lag);
-			res = PQexec (data->conn, query); 
+			res = sql_execute_query (data->con, query); 
 			g_free (query);
 			
-			if (!res || PQresultStatus (res) != PGRES_COMMAND_OK) {
-				g_warning ("INSERT command failed (predecessor).");
-				fprintf (stderr, "%s", PQerrorMessage (data->conn));
+			if (res == NULL) {
+				g_warning ("INSERT command failed (predecessor) %s.",
+						sql_get_last_error (data->con));
 				goto out;
 			}
 		}
@@ -3376,12 +3562,13 @@ sql_write_tasks (SQLData *data)
 			query = g_strdup_printf ("INSERT INTO allocation(task_id, res_id, units) "
 						 "VALUES(%d, %d, %s)",
 						 id, resource_id, tmp);
-			res = PQexec (data->conn, query); 
+			
+			res = sql_execute_query (data->con, query); 
 			g_free (query);
 			
-			if (!res || PQresultStatus (res) != PGRES_COMMAND_OK) {
-				g_warning ("INSERT command failed (allocation).");
-				fprintf (stderr, "%s", PQerrorMessage (data->conn));
+			if (res == NULL) {
+				g_warning ("INSERT command failed (allocation) %s.",
+						sql_get_last_error (data->con));
 				goto out;
 			}
 		}
@@ -3393,7 +3580,7 @@ sql_write_tasks (SQLData *data)
 	
  out:
 	if (res) {
-		PQclear (res);
+		g_object_unref (res);
 	}
 	
 	return FALSE;
@@ -3410,11 +3597,14 @@ mrp_sql_save_project (MrpStorageSQL  *storage,
 		      gint           *project_id,
 		      GError        **error)
 {
-	SQLData  *data;
-	gchar    *pgoptions = NULL;
-	gchar    *pgtty = NULL;
-	PGresult *res = NULL;
-	gboolean  ret = FALSE;
+	SQLData      *data;
+	gchar        *pgoptions = NULL;
+	gchar        *pgtty = NULL;
+	gchar        *db_txt = NULL;
+	gchar        *dsn_name = "planner-auto";
+	GdaDataModel *res = NULL;
+	GdaClient    *client;
+	gboolean      ret = FALSE;
 
 	data = g_new0 (SQLData, 1);
 	data->project_id = *project_id;
@@ -3432,29 +3622,37 @@ mrp_sql_save_project (MrpStorageSQL  *storage,
 	data->property_type_hash = g_hash_table_new (NULL, NULL);
 	
 	data->project = storage->project;
-	data->conn = PQsetdbLogin (server, port, pgoptions, pgtty, db, user, password);
+
+	db_txt = g_strdup_printf ("DATABASE=%s",db);
+	gda_config_save_data_source (dsn_name, 
+                                     "PostgreSQL",
+				     db_txt,
+                                     "planner test", user, password);
+	g_free (db_txt);
+
+	client = gda_client_new ();
+
+	data->con = gda_client_open_connection (client, dsn_name, NULL, NULL, 0);
 	
 	data->revision = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (data->project), REVISION));
-	
- 	if (PQstatus (data->conn) == CONNECTION_BAD) {
+
+	if (!GDA_IS_CONNECTION (data->con)) {
 		g_set_error (error,
 			     MRP_ERROR,
 			     MRP_ERROR_SAVE_WRITE_FAILED,
 			     _("Connection to database '%s' failed.\n%s"),
 			     db,
-			     PQerrorMessage (data->conn));
+			     sql_get_last_error (data->con));
 		goto out;
 	}
 
-	res = PQexec (data->conn, "BEGIN");
-	if (!res || PQresultStatus (res) != PGRES_COMMAND_OK) {
-		g_set_error (error,
-			     MRP_ERROR,
-			     MRP_ERROR_SAVE_WRITE_FAILED,
-			     PQerrorMessage (data->conn));
+	res = sql_execute_query (data->con, "BEGIN");
+
+	if (res == NULL) {
+		WRITE_ERROR (error, data->con);
 		goto out;
 	}
-	PQclear (res);
+	g_object_unref (res);
 	res = NULL;
 
 	/* Write project. */
@@ -3517,8 +3715,8 @@ mrp_sql_save_project (MrpStorageSQL  *storage,
 		g_warning ("Couldn't write tasks.");
 	}
 
-	res = PQexec (data->conn, "COMMIT");
-	PQclear (res);
+	res = sql_execute_query (data->con, "COMMIT");
+	g_object_unref (res);
 	res = NULL;
 
 	d(g_print ("Write project, set rev to %d\n", data->revision));
@@ -3531,10 +3729,10 @@ mrp_sql_save_project (MrpStorageSQL  *storage,
 	
  out:
 	if (res) {
-		PQclear (res);
+		g_object_unref (res);
 	}
 	
-	PQfinish (data->conn);
+	g_object_unref (data->con);
 	
 	/* FIXME: free more data */
 

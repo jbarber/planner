@@ -16,9 +16,9 @@ A very brief getting started howto (change username etc to use...):
 
   echo 'CREATE USER rhult CREATEDB;' | psql -e
 
-* Create database:
+* Create a UNICODE database:
 
-  createdb -U rhult plannerdb
+  createdb -E UNICODE -U rhult plannerdb
 
 * Create database group:
 

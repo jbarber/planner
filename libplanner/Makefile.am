@@ -62,7 +62,7 @@ libplannerincludedir = $(includedir)/planner-1.0/libplanner
 
 storagemoduledir = $(libdir)/planner/storage-modules
 
-if HAVE_POSTGRES
+if HAVE_GDA
 sql_library = libstorage-sql.la
 endif
 
@@ -78,7 +78,7 @@ libstorage_mrproject_1_la_SOURCES = \
 
 libstorage_mrproject_1_la_LDFLAGS =  -avoid-version -module
 
-if HAVE_POSTGRES
+if HAVE_GDA
 libstorage_sql_la_SOURCES = \
 	mrp-storage-sql.c				\
 	mrp-storage-sql.h				\
@@ -86,8 +86,8 @@ libstorage_sql_la_SOURCES = \
 	mrp-sql.h
 
 libstorage_sql_la_LDFLAGS =  -avoid-version -module
-libstorage_sql_la_LIBADD =  $(PG_LIBS)
-libstorage_sql_la_CFLAGS = $(PG_CFLAGS) 
+libstorage_sql_la_LIBADD =  $(GDA_LIBS)
+libstorage_sql_la_CFLAGS = $(GDA_CFLAGS) 
 endif
 
 #

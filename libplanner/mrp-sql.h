@@ -31,7 +31,8 @@ gboolean mrp_sql_load_project (MrpStorageSQL  *storage,
 			       const gchar    *database,
 			       const gchar    *login,
 			       const gchar    *password,
-			       gint            project_id);
+			       gint            project_id,
+			       GError        **error);
 
 gboolean mrp_sql_save_project (MrpStorageSQL  *storage,
 			       gboolean        force,

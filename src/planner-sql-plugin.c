@@ -4,6 +4,7 @@
  * Copyright (C) 2003 CodeFactory AB
  * Copyright (C) 2003 Richard Hult <richard@imendio.com>
  * Copyright (C) 2003 Mikael Hallendal <micke@imendio.com>
+ * Copyright (C) 2003 Alvaro del Castillo <acs@barrapunto.com>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -32,7 +33,7 @@
 #include <glade/glade.h>
 #include <gtk/gtk.h>
 #include <gconf/gconf-client.h>
-#include <libpq-fe.h>
+#include <libgda/libgda.h>
 #include "planner-window.h"
 #include "planner-application.h"
 #include "planner-plugin.h"
@@ -48,17 +49,19 @@
 
 #define GCONF_PATH "/apps/planner/plugins/sql"
 
+#define STOP_ON_ERR GDA_COMMAND_OPTION_STOP_ON_ERRORS
+
 typedef struct {
 	GtkWidget *open_dialog;
 } SQLPluginPriv; 
 
-static gint     sql_plugin_retrieve_project_id (PlannerPlugin           *plugin,
+static gint     sql_plugin_retrieve_project_id (PlannerPlugin      *plugin,
 						gchar              *server,
 						gchar              *port,
 						gchar              *database,
 						gchar              *login,
 						gchar              *password);
-static gboolean sql_plugin_retrieve_db_values  (PlannerPlugin           *plugin,
+static gboolean sql_plugin_retrieve_db_values  (PlannerPlugin      *plugin,
 						const gchar        *title,
 						gchar             **server,
 						gchar             **port,
@@ -71,8 +74,11 @@ static void     sql_plugin_open                (BonoboUIComponent  *component,
 static void     sql_plugin_save                (BonoboUIComponent  *component,
 						gpointer            user_data,
 						const gchar        *cname);
-void            plugin_init                    (PlannerPlugin           *plugin,
-						PlannerWindow       *main_window);
+static GdaDataModel * 
+                sql_execute_query              (GdaConnection      *con, 
+					        gchar              *query);
+void            plugin_init                    (PlannerPlugin      *plugin,
+						PlannerWindow      *main_window);
 void            plugin_exit                    (void);
 
 
@@ -88,15 +94,41 @@ static BonoboUIVerb verbs[] = {
 	BONOBO_UI_VERB_END
 };
 
+
+/**
+ * Helper to execute a SQL query using GDA
+ */
+static GdaDataModel *
+sql_execute_query (GdaConnection *con, gchar *query)
+{
+	GdaCommand   *cmd;
+	GdaDataModel *res;
+
+	cmd = gda_command_new (query, GDA_COMMAND_TYPE_SQL, STOP_ON_ERR);
+	res = gda_connection_execute_single_command  (con, cmd, NULL);
+	gda_command_free (cmd);
+	return res;
+}
+
+
 /**
  * Helper to get an int.
  */
 static gint
-get_int (PGresult *res, gint i, gint j)
+get_int (GdaDataModel *res, gint row, gint column)
 {
-	const gchar *str;
+	const gchar    *str;
+	const GdaValue *value;
+
+	g_return_val_if_fail (GDA_IS_DATA_MODEL (res), INT_MAX);
 	
-	str = PQgetvalue (res, i, j);
+	value = (GdaValue *) gda_data_model_get_value_at (res, column, row);
+	if (value == NULL) {
+		g_warning ("Failed to get a value: (%d,%d)", column, row);
+		return INT_MAX;
+	}
+	
+	str = gda_value_stringify (value);
 	return strtol (str, NULL, 10);
 }
 
@@ -104,14 +136,22 @@ get_int (PGresult *res, gint i, gint j)
  * Helper to get an UTF-8 string.
  */
 static gchar *
-get_string (PGresult *res, gint i, gint j)
+get_string (GdaDataModel *res, gint row, gint column)
 {
-	const gchar *str;
-	gchar *ret;
-	gsize len;
+	const gchar    *str;
+	gchar          *ret;
+	gsize           len;
+	const GdaValue *value;
 	
-	str = PQgetvalue (res, i, j);
+	g_return_val_if_fail (GDA_IS_DATA_MODEL (res), NULL);
 
+	value = (GdaValue *) gda_data_model_get_value_at (res, column, row);
+	if (value == NULL) {
+		g_warning ("Failed to get a value: (%d,%d)", column, row);
+		return "";
+	}
+	
+	str = gda_value_stringify (value);
 	len = strlen (str);
 	
 	if (g_utf8_validate (str, len, NULL)) {
@@ -250,10 +290,9 @@ sql_plugin_retrieve_project_id (PlannerPlugin *plugin,
 				gchar         *login,
 				gchar         *password)
 {
-	PGconn            *conn;
- 	gchar             *pgoptions = NULL;
-	gchar             *pgtty = NULL;
-	PGresult          *res;
+	GdaConnection     *conn;
+	GdaDataModel      *res;
+	GdaClient         *client;
 	gchar             *str;
 	GladeXML          *gui;
 	GtkWidget         *dialog;
@@ -267,44 +306,50 @@ sql_plugin_retrieve_project_id (PlannerPlugin *plugin,
 	gint               project_id;
 	GtkTreeSelection  *selection;
 	GtkTreeIter        iter;
+	gchar             *db_txt;
+	gchar             *dsn_name = "planner_project";
 
-	conn = PQsetdbLogin (server, port, pgoptions, pgtty, database, login, password);
- 	if (PQstatus (conn) == CONNECTION_BAD) {
-		str = g_strdup_printf (_("Connection to database '%s' failed:\n%s"),
-				       database,
-				       PQerrorMessage(conn));
-		show_error_dialog (plugin, str);
-		g_free (str);		
+	db_txt = g_strdup_printf ("DATABASE=%s",database);
+	gda_config_save_data_source (dsn_name, 
+                                     "PostgreSQL", 
+                                     db_txt,
+                                     "planner", login, password);
+	g_free (db_txt);
 
+	client = gda_client_new ();
+	conn = gda_client_open_connection (client, dsn_name, NULL, NULL, 0);
+	
+
+	if (!GDA_IS_CONNECTION (conn)) {
+		str = g_strdup_printf ("Connection to database '%s' failed.", database);
+		g_warning (str); /* sql_show_error_dialog (storage, str); */
+		g_free (str);
 		return -1;
 	}
+	
 
-	res = PQexec (conn, "BEGIN");
-	if (!res || PQresultStatus (res) != PGRES_COMMAND_OK) {
+	res = sql_execute_query (conn, "BEGIN");
+	if (res == NULL) {
 		g_warning ("BEGIN command failed.");
-
-		PQclear (res);
-		PQfinish (conn);
 		return -1;
 	}
-	PQclear (res);
+	g_object_unref (res);
+	res = NULL;
 
-	res = PQexec (conn,
-		      "DECLARE mycursor CURSOR FOR SELECT proj_id, name FROM project"); 
-	if (!res || PQresultStatus (res) != PGRES_COMMAND_OK) {
+	res = sql_execute_query (conn,
+		      "DECLARE mycursor CURSOR FOR SELECT proj_id, name FROM project");
+
+	if (res == NULL) {
 		g_warning ("DECLARE CURSOR command failed (project).");
-
-		PQclear (res);
-		PQfinish (conn);
 		return -1;
 	}
+	g_object_unref (res);
+	
 
-	res = PQexec (conn, "FETCH ALL in mycursor");
-	if (!res || PQresultStatus (res) != PGRES_TUPLES_OK) {
+	res = sql_execute_query (conn, "FETCH ALL in mycursor");
+
+	if (res == NULL) {
 		g_warning ("FETCH ALL failed.");
-		
-		PQclear (res);
-		PQfinish (conn);
 		return -1;
 	}
 
@@ -331,7 +376,7 @@ sql_plugin_retrieve_project_id (PlannerPlugin *plugin,
 			  G_CALLBACK (selection_changed_cb),
 			  ok_button);
 	
-	for (i = 0; i < PQntuples (res); i++) {
+	for (i = 0; i < gda_data_model_get_n_rows (res); i++) {
 		gint   id;
 		gchar *name;
 		
@@ -348,17 +393,15 @@ sql_plugin_retrieve_project_id (PlannerPlugin *plugin,
 		g_free (name);
 	}
 
-	if (PQntuples (res) == 0) {
+	if (gda_data_model_get_n_columns (res) == 0) {
 		gtk_widget_set_sensitive (ok_button, FALSE);
 	}
 	
-	PQclear (res);
+	g_object_unref (res);
+
+	res = sql_execute_query (conn,"CLOSE idcursor");
 	
-	res = PQexec (conn, "CLOSE mycursor");
-	PQclear (res);
-
-	PQfinish (conn);
-
+	g_object_unref (res);
 	
 	gtk_widget_show_all (dialog);
 	response = gtk_dialog_run (GTK_DIALOG (dialog));

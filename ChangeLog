@@ -1,3 +1,15 @@
+2004-01-15  Alvaro del Castillo  <acs@barrapunto.com>
+
+	* Big changes for the migration to libgda in the SQL backend 
+	* configure.in: Added libgda test. In the next revision
+	we have to clean the libpq test cause we won't use it.
+	* docs/sql/README: we need a UNICODE database in Postgres
+	* libplanner/mrp-sql.[ch]: migration from libpq to libgda
+	* libplanner/Makefile.am: use libgda libraries 
+	* libplanner/mrp-storage-sql.c: propagate GError also in project loading
+	* src/Makefile.am: migration from libpq to libgda
+	* src/planner-sql-plugin.c: migration from libpq to libgda
+
 2004-01-14  Anders Carlsson  <andersca@gnome.org>
 
 	* dotnet/libplanner/libplanner.metadata: Add some return list types.

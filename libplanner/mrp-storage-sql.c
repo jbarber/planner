@@ -358,7 +358,7 @@ storage_sql_load (MrpStorageModule *module, const gchar *uri, GError **error)
 		return FALSE;
 	}
 	
-	mrp_sql_load_project (sql, server, port, database, login, password, project_id);
+	mrp_sql_load_project (sql, server, port, database, login, password, project_id, error);
 	
 	return TRUE;
 }
