@@ -1,3 +1,10 @@
+2004-02-08  Alvaro del Castillo  <acs@barrapunto.com>
+
+	* libplanner/mrp-resource.c
+	When a group is deleted the resource removes it if it is its group
+	* src/planner-group-dialog.[ch]
+	undo/redo work for adding, modifying and removing groups
+
 2004-02-02  Alvaro del Castillo  <acs@barrapunto.com>
 
 	* libplanner/mrp-resource.[ch]

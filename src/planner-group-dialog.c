@@ -37,7 +37,32 @@ enum {
 };
 
 typedef struct {
+	PlannerCmd   base;
+
 	MrpProject  *project;
+	MrpGroup    *group;
+} GroupCmdInsert;
+
+typedef struct {
+	PlannerCmd   base;
+
+	MrpProject  *project;
+	MrpGroup    *group;
+	GList       *group_resources;
+} GroupCmdRemove;
+
+typedef struct {
+	PlannerCmd   base;
+
+	MrpGroup    *group;
+	const gchar *property;  
+	GValue      *value;
+	GValue      *old_value;
+} GroupCmdEditProperty;
+
+typedef struct {
+	MrpProject  *project;
+	PlannerView *view;
 	GtkTreeView *tree_view;
 	GtkWidget   *remove_button;
 } DialogData;
@@ -103,7 +128,7 @@ group_dialog_find_group (GtkTreeView *tree_view, MrpGroup *group)
 
 
 static GtkWidget * 
-group_dialog_create                       (MrpProject           *project);
+group_dialog_create                       (PlannerView          *view);
 
 static void  group_dialog_setup_tree_view (GtkWidget            *dialog);
 
@@ -140,14 +165,19 @@ static GList *
 group_dialog_selection_get_list           (GtkWidget            *dialog);
 
 static GtkWidget *
-group_dialog_create (MrpProject *project)
+group_dialog_create (PlannerView *view)
 {
 	DialogData *data;
 	GladeXML   *gui;
 	GtkWidget  *dialog;
 	GtkWidget  *button;
+	MrpProject *project;
 
 	data = g_new0 (DialogData, 1);
+
+	data->view = g_object_ref (view);
+	project = planner_window_get_project (data->view->main_window);
+	
 	data->project = g_object_ref (project);
 	
 	gui = glade_xml_new (
@@ -214,27 +244,82 @@ group_dialog_setup_tree_view (GtkWidget *dialog)
 }
 
 static void
+group_cmd_insert_do (PlannerCmd *cmd_base)
+{
+	GroupCmdInsert *cmd;
+
+	cmd = (GroupCmdInsert*) cmd_base;
+
+	g_assert (MRP_IS_GROUP (cmd->group));
+		
+	/* cmd->group = g_object_new (MRP_TYPE_GROUP, NULL); */
+
+	mrp_project_add_group (cmd->project, cmd->group);
+}
+
+static void
+group_cmd_insert_undo (PlannerCmd *cmd_base)
+{
+	GroupCmdInsert *cmd;
+	
+	cmd = (GroupCmdInsert*) cmd_base;
+
+	mrp_project_remove_group (cmd->project,
+				  cmd->group);
+	
+	/* If we want to remove the object from memory ... but we don't */
+	/* g_object_unref (cmd->group); */
+}
+
+static PlannerCmd *
+group_cmd_insert (PlannerView *view)
+{
+	PlannerCmd      *cmd_base;
+	GroupCmdInsert  *cmd;
+
+	cmd = g_new0 (GroupCmdInsert, 1);
+
+	cmd_base = (PlannerCmd*) cmd;
+
+	cmd_base->label = g_strdup (_("Insert group"));
+	cmd_base->do_func = group_cmd_insert_do;
+	cmd_base->undo_func = group_cmd_insert_undo;
+	cmd_base->free_func = NULL; /* FIXME */
+
+	cmd->project = planner_window_get_project (view->main_window);
+
+	cmd->group = g_object_new (MRP_TYPE_GROUP, NULL);	
+
+	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager (view->main_window),
+					   cmd_base);
+
+	return cmd_base;
+}
+
+static void
 group_dialog_insert_group_cb (GtkWidget *button, GtkWidget *dialog)
 {
 	DialogData     *data;
-	MrpGroup       *group;
 	FindGroupData  *find_data;
 	GtkTreeModel   *model;
 	GtkTreePath    *path;
+	GroupCmdInsert *cmd;
 	
 	g_return_if_fail (GTK_IS_DIALOG (dialog));
 
 	data = g_object_get_data (G_OBJECT (dialog), "data");
 	
-	group = mrp_group_new ();
+	cmd = (GroupCmdInsert*) group_cmd_insert (data->view);
 
-	mrp_project_add_group (data->project, group);
+	/* group = mrp_group_new ();
+
+	mrp_project_add_group (data->project, group); */
 
 	if (!GTK_WIDGET_HAS_FOCUS (data->tree_view)) {
 		gtk_widget_grab_focus (GTK_WIDGET (data->tree_view));
 	}
 
-	find_data = group_dialog_find_group (data->tree_view, group);
+	find_data = group_dialog_find_group (data->tree_view, cmd->group);
 	if (find_data) {
 		model = gtk_tree_view_get_model (data->tree_view);
 		path = gtk_tree_model_get_path (model, find_data->found_iter);
@@ -250,10 +335,86 @@ group_dialog_insert_group_cb (GtkWidget *button, GtkWidget *dialog)
 }
 
 static void
+group_cmd_remove_do (PlannerCmd *cmd_base)
+{
+	GroupCmdRemove *cmd;
+	GList          *resources, *l;
+
+	cmd = (GroupCmdRemove*) cmd_base;
+
+	/* FIXME: Maybe it is better to implement mrp_group_add_resource */ 
+	/* We need to store the users in the group */
+	resources = mrp_project_get_resources (cmd->project);
+
+	for (l = resources; l; l = l->next) {
+		MrpGroup *group;
+		
+		mrp_object_get (MRP_OBJECT (l->data), "group", &group, NULL);
+
+		if (cmd->group == group)
+			cmd->group_resources = g_list_prepend (cmd->group_resources, l->data);
+	}
+	
+
+	mrp_project_remove_group (cmd->project, cmd->group);
+
+	/* We don't want to really remove the group for undo reasons*/
+	/* cmd->group = NULL; */
+}
+
+static void
+group_cmd_remove_undo (PlannerCmd *cmd_base)
+{
+	GroupCmdRemove *cmd;
+	GList          *l;
+	
+	cmd = (GroupCmdRemove*) cmd_base;
+
+	/* We need to recover the group deleted */
+	g_assert (MRP_IS_GROUP (cmd->group));
+		
+	/* cmd->group = g_object_new (MRP_TYPE_GROUP, NULL); */
+
+	mrp_project_add_group (cmd->project, cmd->group);
+
+	/* Now we need to recover all the links of the project
+	   with the group: resources link */
+
+	for (l = cmd->group_resources; l; l = l->next) {
+		mrp_object_set (MRP_OBJECT (l->data), "group", cmd->group, NULL);
+	}
+}
+
+static PlannerCmd *
+group_cmd_remove (PlannerView *view, MrpGroup *group)
+{
+	PlannerCmd      *cmd_base;
+	GroupCmdRemove  *cmd;
+
+	cmd = g_new0 (GroupCmdRemove, 1);
+
+	cmd_base = (PlannerCmd*) cmd;
+
+	cmd_base->label = g_strdup (_("Remove group"));
+	cmd_base->do_func = group_cmd_remove_do;
+	cmd_base->undo_func = group_cmd_remove_undo;
+	cmd_base->free_func = NULL; /* FIXME */
+
+	cmd->project = planner_window_get_project (view->main_window);
+	cmd->group = group;
+
+	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager (view->main_window),
+					   cmd_base);
+
+	return cmd_base;
+}
+
+static void
 group_dialog_remove_group_cb (GtkWidget *widget, GtkWidget *dialog)
 {
 	DialogData *data;
 	GList             *list, *node;
+	GroupCmdRemove *cmd;
 	
 	g_return_if_fail (GTK_IS_DIALOG (dialog));
 
@@ -262,8 +423,9 @@ group_dialog_remove_group_cb (GtkWidget *widget, GtkWidget *dialog)
 	list = group_dialog_selection_get_list (dialog);
 
 	for (node = list; node; node = node->next) {
-		mrp_project_remove_group (data->project, 
-					  MRP_GROUP (node->data));
+		/* mrp_project_remove_group (data->project, 
+		   MRP_GROUP (node->data)); */
+		cmd = (GroupCmdRemove*) group_cmd_remove (data->view, MRP_GROUP (node->data));
 	}
 	
 	g_list_free (list);
@@ -337,6 +499,69 @@ group_dialog_cell_toggled (GtkCellRendererText *cell,
 	gtk_tree_path_free (path);		
 }
 
+
+static void
+group_cmd_edit_property_do (PlannerCmd *cmd_base)
+{
+	GroupCmdEditProperty *cmd;
+
+	cmd = (GroupCmdEditProperty *) cmd_base;
+	
+	g_object_set_property (G_OBJECT (cmd->group),
+			       cmd->property,
+			       cmd->value);
+}
+
+static void
+group_cmd_edit_property_undo (PlannerCmd *cmd_base)
+{
+	GroupCmdEditProperty *cmd;
+	
+	cmd = (GroupCmdEditProperty *) cmd_base;
+
+	g_object_set_property (G_OBJECT (cmd->group),
+			       cmd->property,
+			       cmd->old_value);
+}
+
+static PlannerCmd *
+group_cmd_edit_property (PlannerView  *view, 
+			 MrpGroup     *group,
+			 const gchar  *property,
+			 GValue       *value)
+{
+	PlannerCmd            *cmd_base;
+	GroupCmdEditProperty  *cmd;
+
+	cmd = g_new0 (GroupCmdEditProperty, 1);
+
+	cmd_base = (PlannerCmd*) cmd;
+
+	cmd_base->label = g_strdup (_("Edit group property"));
+	cmd_base->do_func = group_cmd_edit_property_do;
+	cmd_base->undo_func = group_cmd_edit_property_undo;
+	cmd_base->free_func = NULL; /* FIXME */
+
+	cmd->property = property;
+	cmd->group = group;
+
+	cmd->value = g_new0 (GValue, 1);
+	g_value_init (cmd->value, G_VALUE_TYPE (value));
+	g_value_copy (value, cmd->value);
+
+	cmd->old_value = g_new0 (GValue, 1);
+	g_value_init (cmd->old_value, G_VALUE_TYPE (value));
+
+	g_object_get_property (G_OBJECT (cmd->group),
+			       cmd->property,
+			       cmd->old_value);
+
+	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager (view->main_window),
+					   cmd_base);
+
+	return cmd_base;
+}
+
 static void
 group_dialog_cell_edited (GtkCellRendererText *cell, 
 			  gchar               *path_str,
@@ -349,8 +574,11 @@ group_dialog_cell_edited (GtkCellRendererText *cell,
 	GtkTreeIter       iter;
 	GtkTreeModelSort *sorted_model;
 	GtkTreeIter       sorted_iter;
+	GValue                value = { 0 };
 	gint              column;
 	MrpGroup         *group;
+	PlannerCmd           *cmd;
+	gchar                *property = "";
 
 	data  = g_object_get_data (G_OBJECT (dialog), "data");
 
@@ -373,20 +601,37 @@ group_dialog_cell_edited (GtkCellRendererText *cell,
 	
 	switch (column) {
 	case GROUP_COL_NAME:
-		mrp_object_set (group, "name", new_text, NULL);
+		property = "name";
+		g_value_init (&value, G_TYPE_STRING);
+		g_value_set_string (&value, new_text);
+		// mrp_object_set (group, "name", new_text, NULL);
 		break;
 	case GROUP_COL_MANAGER_NAME:
-		mrp_object_set (group, "manager_name", new_text, NULL);
+		property = "manager_name";
+		g_value_init (&value, G_TYPE_STRING);
+		g_value_set_string (&value, new_text);
+		// mrp_object_set (group, "manager_name", new_text, NULL);
 		break;
 	case GROUP_COL_MANAGER_PHONE:
-		mrp_object_set (group, "manager_phone", new_text, NULL);
+		property = "manager_phone";
+		g_value_init (&value, G_TYPE_STRING);
+		g_value_set_string (&value, new_text);
+		// mrp_object_set (group, "manager_phone", new_text, NULL);
 		break;
 	case GROUP_COL_MANAGER_EMAIL:
-		mrp_object_set (group, "manager_email", new_text, NULL);
+		property = "manager_email";
+		g_value_init (&value, G_TYPE_STRING);
+		g_value_set_string (&value, new_text);
+		// mrp_object_set (group, "manager_email", new_text, NULL);
 		break;
 	default:
 		g_assert_not_reached ();
 	}
+
+	cmd = group_cmd_edit_property (data->view,
+				       group, 
+				       property,
+				       &value);
 
 	gtk_tree_path_free (path);
 }
@@ -564,13 +809,13 @@ group_dialog_selection_get_list (GtkWidget *dialog)
 }
 
 GtkWidget *
-planner_group_dialog_new (MrpProject *project)
+planner_group_dialog_new (PlannerView *view)
 {
 	GtkWidget *dialog;
 	
-	g_return_val_if_fail (MRP_IS_PROJECT (project), NULL);
+	g_return_val_if_fail (PLANNER_IS_VIEW (view), NULL);
 
-	dialog = group_dialog_create (project);
+	dialog = group_dialog_create (view);
 	
         return dialog;
 }

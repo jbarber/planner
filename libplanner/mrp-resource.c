@@ -78,6 +78,8 @@ static void resource_get_property          (GObject            *object,
 static void resource_removed               (MrpObject          *object);
 static void resource_assignment_removed_cb (MrpAssignment      *assignment,
 					    MrpResource        *resource);
+static void resource_group_removed_cb      (MrpGroup           *group,
+					    MrpResource        *resource);
 
 
 
@@ -284,11 +286,20 @@ resource_set_property (GObject      *object,
 	case PROP_GROUP:
 		if (priv->group != NULL) {
 			g_object_unref (priv->group);
+			g_signal_handlers_disconnect_by_func 
+				(priv->group,
+				 resource_group_removed_cb,
+				 resource);
+			
 		}
 
 		group = g_value_get_object (value);
 		if (group != NULL) {
 			g_object_ref (group);
+			g_signal_connect (G_OBJECT (group),
+					  "removed",
+					  G_CALLBACK (resource_group_removed_cb),
+					  resource);
 		}
 		if (group != priv->group) {
 			changed = TRUE;
@@ -431,7 +442,18 @@ resource_removed (MrpObject *object)
 }
 
 static void
-resource_assignment_removed_cb (MrpAssignment *assignment, MrpResource *resource)
+resource_group_removed_cb (MrpGroup     *group,
+			   MrpResource  *resource)
+{
+	g_return_if_fail (MRP_IS_RESOURCE (resource));
+	g_return_if_fail (MRP_IS_GROUP (group));
+
+	mrp_object_set (MRP_OBJECT (resource), "group", NULL, NULL);
+}
+
+static void
+resource_assignment_removed_cb (MrpAssignment *assignment, 
+				MrpResource *resource)
 {
 	MrpResourcePriv *priv;
 	MrpTask         *task;

@@ -1770,7 +1770,7 @@ resource_view_edit_groups_cb (BonoboUIComponent *component,
 
 	/* FIXME: we have to destroy group_dialog correctly */
 	if (view->priv->group_dialog == NULL) {
-		view->priv->group_dialog = planner_group_dialog_new (project);
+		view->priv->group_dialog = planner_group_dialog_new (view);
 		
 		g_signal_connect (view->priv->group_dialog, 
 				  "destroy",

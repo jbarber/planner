@@ -25,9 +25,9 @@
 #define __PLANNER_RESOURCES_GROUP_DIALOG_H__
 
 #include <gtk/gtkwindow.h>
-#include <libplanner/mrp-project.h>
+#include "planner-view.h"
 
-GtkWidget *     planner_group_dialog_new               (MrpProject       *project);
+GtkWidget *     planner_group_dialog_new               (PlannerView  *view);
 
 #endif /* __GROUP_DIALOG_H__ */
 
