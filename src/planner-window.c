@@ -1386,6 +1386,8 @@ window_do_save_as (PlannerWindow *window)
 						    NULL);
 	gtk_window_set_modal (GTK_WINDOW (file_chooser), TRUE);
 
+	gtk_dialog_set_default_response (GTK_DIALOG (file_chooser), GTK_RESPONSE_OK);
+
 	last_dir = get_last_dir (window);
 	gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (file_chooser), last_dir);
 	g_free (last_dir);

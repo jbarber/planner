@@ -1,5 +1,7 @@
 2005-02-13  Richard Hult  <richard@imendio.com>
 
+	* src/planner-window.c (window_do_save_as): Set default response.
+
 	* src/planner-task-tree.c (task_tree_work_data_func)
 	(task_tree_duration_data_func): Set cell content to "N/A" for
 	milestones.
