@@ -1462,8 +1462,6 @@ task_dialog_duration_focus_out_cb (GtkWidget     *w,
 
 	focus_in_duration = g_object_get_data (G_OBJECT (data->task), "focus_in_duration");
 
-	/* FIXME: Why spin button isn't updated when is modified with direct entry
-	 from keyboard with correct values? */
 	gtk_spin_button_update (GTK_SPIN_BUTTON (w));
 	current_duration = gtk_spin_button_get_value (GTK_SPIN_BUTTON (w)) * work_per_day;
 	duration = (*focus_in_duration) * work_per_day;

@@ -19,6 +19,7 @@
  * Boston, MA 02111-1307, USA.
  */
 
+/* FIXME: This code needs a SERIOUS clean-up. */
 
 #include <config.h>
 #include <math.h>

@@ -19,6 +19,8 @@
  * Boston, MA 02111-1307, USA.
  */
 
+/* FIXME: This code needs a SERIOUS clean-up. */
+
 #include <config.h>
 #include <math.h>
 #include <stdlib.h>
@@ -58,28 +60,33 @@ struct _PlannerTtableTreePriv {
 	GtkItemFactory	*popup_factory;
 };
 
-static void	 ttable_tree_class_init				(PlannerTtableTreeClass	*klass);
-static void	 ttable_tree_init				(PlannerTtableTree		*tree);
-static void	 ttable_tree_finalize				(GObject		*object);
-static void	 ttable_tree_popup_edit_resource_cb		(gpointer		 callback_data,
-								 guint			 action,
-								 GtkWidget		*widget);
-static void	 ttable_tree_popup_edit_task_cb			(gpointer		 callback_data,
-								 guint			 action,
-								 GtkWidget		*widget);
-static void	 ttable_tree_popup_expand_all_cb		(gpointer		 callback_data,
-								 guint			 action,
-								 GtkWidget		*widget);
-static void	 ttable_tree_popup_collapse_all_cb		(gpointer		 callback_data,
-								 guint			 action,
-								 GtkWidget		*widget);
-static char	*ttable_tree_item_factory_trans			(const char		*path,
-								 gpointer		 data);
-static void	ttable_tree_tree_view_popup_menu		(GtkWidget		*widget,
-								 PlannerTtableTree		*tree);
-static gboolean	ttable_tree_tree_view_button_press_event	(GtkTreeView		*tree_view,
-								 GdkEventButton		*event,
-								 PlannerTtableTree		*tree);
+static void     ttable_tree_class_init                   (PlannerTtableTreeClass *klass);
+static void     ttable_tree_init                         (PlannerTtableTree      *tree);
+static void     ttable_tree_finalize                     (GObject                *object);
+static void     ttable_tree_popup_edit_resource_cb       (gpointer                callback_data,
+							  guint                   action,
+							  GtkWidget              *widget);
+static void     ttable_tree_popup_edit_task_cb           (gpointer                callback_data,
+							  guint                   action,
+							  GtkWidget              *widget);
+static void     ttable_tree_popup_expand_all_cb          (gpointer                callback_data,
+							  guint                   action,
+							  GtkWidget              *widget);
+static void     ttable_tree_popup_collapse_all_cb        (gpointer                callback_data,
+							  guint                   action,
+							  GtkWidget              *widget);
+static char *   ttable_tree_item_factory_trans           (const char             *path,
+							  gpointer                data);
+static void     ttable_tree_tree_view_popup_menu         (GtkWidget              *widget,
+							  PlannerTtableTree      *tree);
+static gboolean ttable_tree_tree_view_button_press_event (GtkTreeView            *tree_view,
+							  GdkEventButton         *event,
+							  PlannerTtableTree      *tree);
+static void     ttable_tree_row_inserted                 (GtkTreeModel           *model,
+							  GtkTreePath            *path,
+							  GtkTreeIter            *iter,
+							  GtkTreeView            *tree);
+
 
 static GtkTreeViewClass *parent_class = NULL;
 static guint signals[LAST_SIGNAL];
@@ -202,11 +209,16 @@ ttable_tree_finalize (GObject *object)
 
 void
 planner_ttable_tree_set_model (PlannerTtableTree  *tree,
-		          PlannerTtableModel *model)
+			       PlannerTtableModel *model)
 {
 	gtk_tree_view_set_model (GTK_TREE_VIEW (tree),
 				 GTK_TREE_MODEL (model));
 	gtk_tree_view_expand_all (GTK_TREE_VIEW (tree));
+
+	g_signal_connect (model,
+			  "row-inserted",
+			  G_CALLBACK (ttable_tree_row_inserted),
+			  tree);
 }
 
 static void
@@ -556,4 +568,23 @@ static char *
 ttable_tree_item_factory_trans	(const char *path, gpointer data)
 {
 	return _((gchar*)path);
+}
+
+static void
+ttable_tree_row_inserted (GtkTreeModel *model,
+			  GtkTreePath  *path,
+			  GtkTreeIter  *iter,
+			  GtkTreeView  *tree)
+{
+	GtkTreePath *parent;
+
+	parent = gtk_tree_path_copy (path);
+	
+	gtk_tree_path_up (parent);
+
+	gtk_tree_view_expand_row (tree,
+				  parent,
+				  FALSE);
+
+	gtk_tree_path_free (parent);
 }

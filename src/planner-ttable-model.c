@@ -19,6 +19,8 @@
  * Boston, MA 02111-1307, USA.
  */
 
+/* FIXME: This code needs a SERIOUS clean-up. */
+
 #include <config.h>
 #include <string.h>
 #include <time.h>
@@ -902,3 +904,5 @@ ttable_model_assignment_removed_cb		(MrpAssignment	*assign,
         g_message("Removing an assignment");
 }
 */
+
+
