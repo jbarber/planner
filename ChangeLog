@@ -1,3 +1,11 @@
+2004-04-06  Richard Hult  <richard@imendio.com>
+
+	* src/planner-gantt-row.c:
+	* src/planner-task-tree.c:
+	* src/planner-task-tree.h: Fix bug #132910, open task properties
+	by double-clicking gantt bar and bug #132916, select task by
+	clicking gantt bar. Patch from Chris Ladd.
+	
 2004-04-04 Alvaro del Castillo  <acs@barrapunto.com>
 
 	* src/planner-task-tree.c: implemented task remove undo

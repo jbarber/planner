@@ -26,6 +26,7 @@
 #include <math.h>
 #include <stdlib.h>
 #include <string.h>
+#include <gdk/gdkkeysyms.h>
 #include <gtk/gtktreeview.h>
 #include <gtk/gtktreeselection.h>
 #include <gtk/gtkcellrenderertext.h>
@@ -67,6 +68,7 @@ struct _PlannerTaskTreePriv {
 	 * opened twice for the same task.
 	 */
 	GHashTable     *task_dialogs;
+	GtkTreePath    *anchor;
 };
 
 typedef struct {
@@ -789,6 +791,8 @@ task_tree_init (PlannerTaskTree *tree)
 	priv->property_to_column = g_hash_table_new (NULL, NULL);
 	
 	priv->popup_factory = task_popup_new (tree);
+	
+	priv->anchor = NULL;
 }
 
 static void
@@ -807,6 +811,8 @@ task_tree_finalize (GObject *object)
 	if (G_OBJECT_CLASS (parent_class)->finalize) {
 		(* G_OBJECT_CLASS (parent_class)->finalize) (object);
 	}
+	
+	planner_task_tree_set_anchor (tree, NULL);
 }
 
 static void
@@ -926,15 +932,16 @@ task_tree_tree_view_popup_menu (GtkWidget  *widget,
 }
 
 static gboolean
-task_tree_tree_view_button_press_event (GtkTreeView    *tree_view,
-					GdkEventButton *event,
-					PlannerTaskTree     *tree)
+task_tree_tree_view_button_press_event (GtkTreeView     *tree_view,
+					GdkEventButton  *event,
+					PlannerTaskTree *tree)
 {
 	GtkTreePath         *path;
 	GtkTreeView         *tv;
 	PlannerTaskTreePriv *priv;
 	GtkItemFactory      *factory;
-
+	GtkTreeIter          iter;
+	
 	tv = GTK_TREE_VIEW (tree);
 	priv = tree->priv;
 	factory = priv->popup_factory;
@@ -942,12 +949,14 @@ task_tree_tree_view_button_press_event (GtkTreeView    *tree_view,
 	if (event->button == 3) {
 		gtk_widget_grab_focus (GTK_WIDGET (tree));
 
-		/* Select our row */
+		/* Select our row. */
 		if (gtk_tree_view_get_path_at_pos (tv, event->x, event->y, &path, NULL, NULL, NULL)) {
-			gtk_tree_selection_unselect_all (gtk_tree_view_get_selection (tv));
-
-			gtk_tree_selection_select_path (gtk_tree_view_get_selection (tv), path);
-
+			gtk_tree_model_get_iter (gtk_tree_view_get_model (tree_view), &iter, path);
+			if (!gtk_tree_selection_iter_is_selected (gtk_tree_view_get_selection (tree_view), &iter)) {
+				gtk_tree_selection_unselect_all (gtk_tree_view_get_selection (tv));
+				gtk_tree_selection_select_path (gtk_tree_view_get_selection (tv), path);
+			}
+			
 			gtk_widget_set_sensitive (
 				gtk_item_factory_get_widget_by_action (factory, POPUP_SUBTASK), TRUE);
 			gtk_widget_set_sensitive (
@@ -957,7 +966,8 @@ task_tree_tree_view_button_press_event (GtkTreeView    *tree_view,
 			gtk_widget_set_sensitive (
 				gtk_item_factory_get_widget_by_action (factory, POPUP_EDIT), TRUE);
 			
-			gtk_tree_path_free (path);
+			planner_task_tree_set_anchor (tree, path);
+			
 		} else {
 			gtk_tree_selection_unselect_all (gtk_tree_view_get_selection (tv));
 
@@ -969,13 +979,52 @@ task_tree_tree_view_button_press_event (GtkTreeView    *tree_view,
 				gtk_item_factory_get_widget_by_action (factory, POPUP_UNLINK), FALSE);
 			gtk_widget_set_sensitive (
 				gtk_item_factory_get_widget_by_action (factory, POPUP_EDIT), FALSE);
+			
+			planner_task_tree_set_anchor (tree, NULL);
 		}
 		
 		gtk_item_factory_popup (factory, event->x_root, event->y_root,
 					event->button, event->time);
 		return TRUE;
 	}
+	else if (event->button == 1) {
+		if (!(event->state & GDK_SHIFT_MASK)) {
+			if (gtk_tree_view_get_path_at_pos (tv, event->x, event->y, &path, NULL, NULL, NULL)) {
+				planner_task_tree_set_anchor (tree, path);
+			}
+		}
+		return FALSE;
+	}
+	
+	return FALSE;
+}
 
+/* Note: we must make sure that this matches the treeview behavior. It's a bit
+ * hackish but seems to be the only way to match the selection behavior of the
+ * gantt chart with the treeview.
+ */
+static gboolean
+task_tree_tree_view_key_release_event (GtkTreeView *tree_view,
+					GdkEventKey *event,
+					PlannerTaskTree *tree)
+{
+	if (!(event->state & (GDK_SHIFT_MASK | GDK_CONTROL_MASK))) {
+		if (event->keyval & (GDK_Up | GDK_Page_Up | GDK_KP_Up |
+			GDK_KP_Page_Up | GDK_Pointer_Up | GDK_ISO_Move_Line_Up |
+			GDK_Down | GDK_Page_Down | GDK_KP_Down | GDK_KP_Page_Down |
+			GDK_Pointer_Down | GDK_ISO_Move_Line_Down)) {
+			
+			GtkTreeSelection *selection = gtk_tree_view_get_selection (tree_view);
+			GList *list = gtk_tree_selection_get_selected_rows (selection, NULL);
+			
+			if (g_list_length (list) == 1) {
+				planner_task_tree_set_anchor (tree, list->data);
+			}
+						
+			g_list_free (list);
+		}
+	}
+	
 	return FALSE;
 }
 
@@ -1788,6 +1837,11 @@ task_tree_setup_tree_view (GtkTreeView  *tree,
 			  G_CALLBACK (task_tree_tree_view_button_press_event),
 			  tree);
 
+	g_signal_connect (tree,
+			  "key_release_event",
+			  G_CALLBACK (task_tree_tree_view_key_release_event),
+			  tree);
+
 	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (tree));
 	gtk_tree_selection_set_mode (selection, GTK_SELECTION_MULTIPLE);
 	g_signal_connect (selection, "changed",
@@ -2108,8 +2162,8 @@ planner_task_tree_insert_subtask (PlannerTaskTree *tree)
 				  gtk_tree_view_get_column (tree_view, 0),
 				  TRUE);
 	
-	gtk_tree_path_free (path);
-
+	planner_task_tree_set_anchor (tree, path);
+	
 	g_list_free (list);
 }
 
@@ -2175,8 +2229,8 @@ planner_task_tree_insert_task (PlannerTaskTree *tree)
 				  gtk_tree_view_get_column (tree_view, 0),
 				  TRUE);
 
-	gtk_tree_path_free (path);
-
+	planner_task_tree_set_anchor (tree, path);
+	
 	g_list_free (list);
 }
 
@@ -2208,6 +2262,8 @@ planner_task_tree_remove_task (PlannerTaskTree *tree)
 	}
 	
 	g_list_free (list);
+	
+	planner_task_tree_set_anchor (tree, NULL);
 }
 
 void
@@ -2573,6 +2629,7 @@ planner_task_tree_move_task_up (PlannerTaskTree *tree)
 		path = planner_gantt_model_get_path_from_task (
 			PLANNER_GANTT_MODEL (model), task);
 		gtk_tree_selection_select_path (selection, path);
+		planner_task_tree_set_anchor (tree, path);
 	}
 
 	task_tree_unblock_selection_changed (tree);
@@ -2617,6 +2674,7 @@ planner_task_tree_move_task_down (PlannerTaskTree *tree)
 
 			path = planner_gantt_model_get_path_from_task (PLANNER_GANTT_MODEL (model), task);
 			gtk_tree_selection_select_path (selection, path);
+			planner_task_tree_set_anchor (tree, path);
 		}
 	}
 
@@ -2936,4 +2994,24 @@ planner_task_tree_get_highlight_critical (PlannerTaskTree *tree)
 	g_return_val_if_fail (PLANNER_IS_TASK_TREE (tree), FALSE);
 
 	return tree->priv->highlight_critical;
+}
+
+void
+planner_task_tree_set_anchor (PlannerTaskTree *tree, GtkTreePath* anchor)
+{
+	g_return_if_fail (PLANNER_IS_TASK_TREE (tree));
+	
+	if (tree->priv->anchor) {
+		gtk_tree_path_free (tree->priv->anchor);
+	}
+	
+	tree->priv->anchor = anchor;
+}
+
+GtkTreePath* 
+planner_task_tree_get_anchor (PlannerTaskTree *tree)
+{
+	g_return_val_if_fail (PLANNER_IS_TASK_TREE (tree), FALSE);
+
+	return tree->priv->anchor;
 }

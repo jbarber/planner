@@ -1659,24 +1659,36 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 				PlannerTaskTree   *tree;
 				GtkTreePath       *path;
 				GtkTreeSelection  *selection;
+				GtkTreeView       *tree_view;
+				GtkTreeIter        iter;
 				
 				chart = g_object_get_data (G_OBJECT (item->canvas), "chart");
 				tree = planner_gantt_chart_get_view (chart);
-				
+				gtk_widget_grab_focus (GTK_WIDGET (tree));
+		
 				path = planner_gantt_model_get_path_from_task (
 					PLANNER_GANTT_MODEL (planner_gantt_chart_get_model (chart)),
 					priv->task);
+
+				tree_view = GTK_TREE_VIEW (tree);
 				
-				selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (tree));
-				
-				gtk_tree_selection_unselect_all (selection);
-				gtk_tree_selection_select_path (selection, path);
+				selection = gtk_tree_view_get_selection (tree_view);
+
+				gtk_tree_model_get_iter (gtk_tree_view_get_model (tree_view), &iter, path);
+				if (!gtk_tree_selection_iter_is_selected (selection, &iter)) {
+					
+					gtk_tree_selection_unselect_all (selection);
+					gtk_tree_selection_select_path (selection, path);
+					planner_task_tree_set_anchor (tree, path);
+				}
 				
 				gtk_item_factory_popup (priv->popup_factory,
 							event->button.x_root,
 							event->button.y_root,
 							0,
 							gtk_get_current_event_time ());
+				
+				return TRUE;
 			}
 			break;
 			
@@ -1782,6 +1794,7 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 			gnome_canvas_item_grab (item,
 						GDK_POINTER_MOTION_MASK |
 						GDK_POINTER_MOTION_HINT_MASK |
+						GDK_BUTTON_PRESS_MASK |
 						GDK_BUTTON_RELEASE_MASK,
 						NULL,
 						event->button.time);
@@ -1924,11 +1937,11 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 			old_target_item = target_item;
 		}
 		else if (priv->state == STATE_DRAG_DURATION) {
-			gint            duration;
-			gint            work;
-			MrpProject     *project;
-			MrpCalendar    *calendar;
-			gint            hours_per_day;
+			gint         duration;
+			gint         work;
+			MrpProject  *project;
+			MrpCalendar *calendar;
+			gint         hours_per_day;
 
 			g_object_get (priv->task, "project", &project, NULL);
 			calendar = mrp_project_get_calendar (project);
@@ -2067,11 +2080,83 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 		gdk_window_set_cursor (canvas_widget->window, NULL);
 			
 		gnome_canvas_item_ungrab (item, event->button.time);
-			
+		
+		/* Select the clicked on task in the treeview */
+		PlannerTaskTree   *tree;
+		GtkTreePath       *path;
+		GtkTreeSelection  *selection;
+		
+		chart = g_object_get_data (G_OBJECT (item->canvas), "chart");
+		tree = planner_gantt_chart_get_view (chart);
+		gtk_widget_grab_focus (GTK_WIDGET (tree));
+		
+		path = planner_gantt_model_get_path_from_task (
+			PLANNER_GANTT_MODEL (planner_gantt_chart_get_model (chart)),
+			priv->task);
+				
+		selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (tree));
+				
+		if (!(event->button.state & (GDK_CONTROL_MASK | GDK_SHIFT_MASK))) {
+			gtk_tree_selection_unselect_all (selection);
+			gtk_tree_selection_select_path (selection, path);
+			planner_task_tree_set_anchor (tree, path);
+		}
+		else if (event->button.state & GDK_CONTROL_MASK) {
+			if (gtk_tree_selection_path_is_selected (selection, path)) {
+				gtk_tree_selection_unselect_path (selection, path);
+			}
+			else {
+				gtk_tree_selection_select_path (selection, path);
+			}
+			planner_task_tree_set_anchor (tree, path);
+		}
+		else if (event->button.state & GDK_SHIFT_MASK) {
+			GtkTreePath* anchor = planner_task_tree_get_anchor (tree);
+			if (anchor) {
+				gtk_tree_selection_unselect_all (selection);
+				gtk_tree_selection_select_range(selection, anchor, path);
+				gtk_tree_path_free(path);
+			}
+			else {
+				gtk_tree_selection_unselect_all (selection);
+				gtk_tree_selection_select_path (selection, path);
+				planner_task_tree_set_anchor(tree, path);
+			}
+		}
+		
 		priv->state = STATE_NONE;
-
+	
 		return TRUE;
-
+		
+	case GDK_2BUTTON_PRESS:
+		if (event->button.button == 1) {
+			if (IN_DRAG_RELATION_SPOT (event->button.x, event->button.y,
+						   priv->x + priv->width, priv->y, priv->height)) {
+	
+				PlannerTaskTree   *tree;
+				GtkTreePath       *path;
+				GtkTreeSelection  *selection;
+				
+				chart = g_object_get_data (G_OBJECT (item->canvas), "chart");
+				tree = planner_gantt_chart_get_view (chart);
+				gtk_widget_grab_focus (GTK_WIDGET (tree));
+		
+				path = planner_gantt_model_get_path_from_task (
+					PLANNER_GANTT_MODEL (planner_gantt_chart_get_model (chart)),
+					priv->task);
+				
+				selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (tree));
+				
+				gtk_tree_selection_unselect_all (selection);
+				gtk_tree_selection_select_path (selection, path);
+				planner_task_tree_set_anchor(tree, path);
+							   
+				planner_task_tree_edit_task (tree);
+							   
+				return TRUE;
+			}
+		}
+	
 	default:
 		break;
 	}
@@ -2183,10 +2268,11 @@ gantt_row_get_resource_by_index (PlannerGanttRow *row,
 void
 planner_gantt_row_init_menu (PlannerGanttRow *row)
 {
-	PlannerGanttChart *chart = g_object_get_data (
-        G_OBJECT (GNOME_CANVAS_ITEM(row)->canvas), "chart");
-    
-	PlannerTaskTree *tree = planner_gantt_chart_get_view (chart);
+	PlannerGanttChart *chart;
+	PlannerTaskTree   *tree;
+
+	chart = g_object_get_data (G_OBJECT (GNOME_CANVAS_ITEM (row)->canvas), "chart");
+    	tree = planner_gantt_chart_get_view (chart);
 	
 	row->priv->popup_factory = task_popup_new (tree);
 }
