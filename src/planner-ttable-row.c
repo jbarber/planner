@@ -2056,6 +2056,7 @@ ttable_row_event (GnomeCanvasItem *item, GdkEvent *event)
 		return TRUE;
 	
 	case GDK_MOTION_NOTIFY:
+		return FALSE; /* FIXME: Release hook for readonly view */
 		if (event->motion.is_hint) {
 			gint x, y;
 

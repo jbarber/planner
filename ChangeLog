@@ -1,3 +1,8 @@
+2004-04-15  Xavier Ordoquy  <xordoquy@wanadoo.fr>
+
+	* src/planner-ttable-row.c: (ttable_row_event): Removed the
+	MOTION_NOTIFY event for read-only view.
+
 2004-04-15  Richard Hult  <richard@imendio.com>
 
 	* src/planner-task-dialog.c: (task_dialog_task_removed_cb),
