@@ -1,5 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
+ * Copyright (C) 2004 Imendio HB
  * Copyright (C) 2002-2003 CodeFactory AB
  * Copyright (C) 2002-2003 Richard Hult <richard@imendio.com>
  * Copyright (C) 2002 Mikael Hallendal <micke@imendio.com>
@@ -57,133 +58,134 @@ typedef struct {
 } DialogData;
 
 
-static void  task_dialog_close_clicked_cb           (GtkWidget           *w, 
-						     DialogData          *data);
-static void  task_dialog_task_removed_cb            (MrpObject           *object,
-						     GtkWidget           *dialog);
-static void  task_dialog_task_name_changed_cb       (MrpTask             *task, 
-						     GParamSpec          *pspec, 
-						     GtkWidget           *dialog);
-static void  task_dialog_name_changed_cb            (GtkWidget           *w, 
-						     DialogData          *data);
-static gboolean task_dialog_name_focus_in_cb        (GtkWidget           *w,
-						     GdkEventFocus       *event,
-						     DialogData          *data);
-static gboolean task_dialog_name_focus_out_cb       (GtkWidget           *w,
-						     GdkEventFocus       *event,
-						     DialogData          *data);
-static void  task_dialog_task_type_changed_cb       (MrpTask             *task,
-						     GParamSpec          *pspec,
-						     GtkWidget           *dialog);
-static void  task_dialog_type_toggled_cb            (GtkWidget           *w,
-						     DialogData          *data);
-static void  task_dialog_task_sched_changed_cb      (MrpTask             *task,
-						     GParamSpec          *pspec,
-						     GtkWidget           *dialog);
-static void  task_dialog_fixed_toggled_cb           (GtkWidget           *w,
-						     DialogData          *data);
-static void  task_dialog_task_work_changed_cb       (MrpTask             *task,
-						     GParamSpec          *pspec,
-						     GtkWidget           *dialog);
-static void  task_dialog_work_changed_cb            (GtkWidget           *w, 
-						     DialogData          *data);
-static gboolean task_dialog_work_focus_in_cb        (GtkWidget           *w,
-						     GdkEventFocus       *event,
-						     DialogData          *data);
-static gboolean task_dialog_work_focus_out_cb       (GtkWidget           *w,
-						     GdkEventFocus       *event,
-						     DialogData          *data);
-static void  task_dialog_task_duration_changed_cb   (MrpTask             *task,
-						     GParamSpec          *pspec,
-						     GtkWidget           *dialog);
-static void  task_dialog_duration_changed_cb        (GtkWidget           *w, 
-						     DialogData          *data);
-static gboolean task_dialog_duration_focus_in_cb    (GtkWidget           *w,
-						     GdkEventFocus       *event,
-						     DialogData          *data);
-static gboolean task_dialog_duration_focus_out_cb   (GtkWidget           *w,
-						     GdkEventFocus       *event,
-						     DialogData          *data);
-static void  task_dialog_task_complete_changed_cb   (MrpTask             *task, 
-						     GParamSpec          *pspec,
-						     GtkWidget           *dialog);
-static void  task_dialog_complete_changed_cb        (GtkWidget           *w, 
-						     DialogData          *data);
-static gboolean task_dialog_complete_focus_in_cb    (GtkWidget           *w,
-						     GdkEventFocus       *event,
-						     DialogData          *data);
-static gboolean task_dialog_complete_focus_out_cb   (GtkWidget           *w,
-						     GdkEventFocus       *event,
-						     DialogData          *data);
-static void  task_dialog_task_priority_changed_cb   (MrpTask             *task, 
-						     GParamSpec          *pspec,
-						     GtkWidget           *dialog);
-static void  task_dialog_priority_changed_cb        (GtkWidget           *w, 
-						     DialogData          *data);
-static gboolean task_dialog_priority_focus_in_cb    (GtkWidget           *w,
-						     GdkEventFocus       *event,
-						     DialogData          *data);
-static gboolean task_dialog_priority_focus_out_cb   (GtkWidget           *w,
-						     GdkEventFocus       *event,
-						     DialogData          *data);
-static void  task_dialog_task_note_changed_cb       (MrpTask             *task, 
-						     GParamSpec          *pspec, 
-						     GtkWidget           *dialog);
-static void  task_dialog_note_changed_cb            (GtkWidget           *w,
-						     DialogData          *data);
-static gboolean task_dialog_note_focus_in_cb        (GtkWidget           *w,
-						     GdkEventFocus       *event,
-						     DialogData          *data);
-static gboolean task_dialog_note_focus_out_cb       (GtkWidget           *w,
-						     GdkEventFocus       *event,
-						     DialogData          *data);
-static void  task_dialog_note_stamp_cb              (GtkWidget           *w,
-						     DialogData          *data);
-static void
-task_dialog_task_child_added_or_removed_cb          (MrpTask             *task,
-						     GtkWidget           *dialog);
-static void  task_dialog_setup_widgets              (DialogData          *data,
-						     GladeXML            *glade);
-static void  task_dialog_assignment_toggled_cb      (GtkCellRendererText *cell,
-						     gchar               *path_str,
-						     DialogData          *data);
-static void  task_dialog_setup_resource_list        (DialogData          *data); 
-static void  task_dialog_connect_to_task            (DialogData          *data);
-static void  task_dialog_resource_units_cell_edited (GtkCellRendererText *cell, 
-						     gchar               *path_str,
-						     gchar               *new_text, 
-						     DialogData          *data);
-static void  task_dialog_pred_cell_edited           (GtkCellRendererText  *cell,
-						     gchar                *path_str,
-						     gchar                *new_text,
-						     DialogData           *data);
-static MrpRelationType cell_index_to_relation_type  (gint                  i);
-static void  task_dialog_cell_type_show_popup       (PlannerCellRendererList   *cell,
-						     const gchar          *path_string,
-						     gint                  x1,
-						     gint                  y1,
-						     gint                  x2,
-						     gint                  y2,
-						     DialogData           *data);
-static void  task_dialog_cell_name_show_popup       (PlannerCellRendererList   *cell,
-						     const gchar          *path_string,
-						     gint                  x1,
-						     gint                  y1,
-						     gint                  x2,
-						     gint                  y2,
-						     DialogData           *data);
-static void  task_dialog_cell_hide_popup            (PlannerCellRendererList   *cell,
-						     GtkWidget            *view);
-static void  task_dialog_add_predecessor_cb         (GtkWidget            *widget,
-						     DialogData           *data);
-static void  task_dialog_remove_predecessor_cb      (GtkWidget            *widget,
-						     DialogData           *data);
-static void  task_dialog_new_pred_ok_clicked_cb     (GtkWidget            *w, 
-						     GtkWidget            *dialog);
-static void  task_dialog_new_pred_cancel_clicked_cb (GtkWidget            *w, 
-						     GtkWidget            *dialog); 
-static void  task_dialog_update_sensitivity         (DialogData           *data);
-static void  task_dialog_update_title               (DialogData           *data);
+static void            task_dialog_close_clicked_cb               (GtkWidget               *w,
+								   DialogData              *data);
+static void            task_dialog_task_removed_cb                (MrpObject               *object,
+								   GtkWidget               *dialog);
+static void            task_dialog_task_name_changed_cb           (MrpTask                 *task,
+								   GParamSpec              *pspec,
+								   GtkWidget               *dialog);
+static void            task_dialog_name_changed_cb                (GtkWidget               *w,
+								   DialogData              *data);
+static gboolean        task_dialog_name_focus_in_cb               (GtkWidget               *w,
+								   GdkEventFocus           *event,
+								   DialogData              *data);
+static gboolean        task_dialog_name_focus_out_cb              (GtkWidget               *w,
+								   GdkEventFocus           *event,
+								   DialogData              *data);
+static void            task_dialog_task_type_changed_cb           (MrpTask                 *task,
+								   GParamSpec              *pspec,
+								   GtkWidget               *dialog);
+static void            task_dialog_type_toggled_cb                (GtkWidget               *w,
+								   DialogData              *data);
+static void            task_dialog_task_sched_changed_cb          (MrpTask                 *task,
+								   GParamSpec              *pspec,
+								   GtkWidget               *dialog);
+static void            task_dialog_fixed_toggled_cb               (GtkWidget               *w,
+								   DialogData              *data);
+static void            task_dialog_task_work_changed_cb           (MrpTask                 *task,
+								   GParamSpec              *pspec,
+								   GtkWidget               *dialog);
+static void            task_dialog_work_changed_cb                (GtkWidget               *w,
+								   DialogData              *data);
+static gboolean        task_dialog_work_focus_in_cb               (GtkWidget               *w,
+								   GdkEventFocus           *event,
+								   DialogData              *data);
+static gboolean        task_dialog_work_focus_out_cb              (GtkWidget               *w,
+								   GdkEventFocus           *event,
+								   DialogData              *data);
+static void            task_dialog_task_duration_changed_cb       (MrpTask                 *task,
+								   GParamSpec              *pspec,
+								   GtkWidget               *dialog);
+static void            task_dialog_duration_changed_cb            (GtkWidget               *w,
+								   DialogData              *data);
+static gboolean        task_dialog_duration_focus_in_cb           (GtkWidget               *w,
+								   GdkEventFocus           *event,
+								   DialogData              *data);
+static gboolean        task_dialog_duration_focus_out_cb          (GtkWidget               *w,
+								   GdkEventFocus           *event,
+								   DialogData              *data);
+static void            task_dialog_task_complete_changed_cb       (MrpTask                 *task,
+								   GParamSpec              *pspec,
+								   GtkWidget               *dialog);
+static void            task_dialog_complete_changed_cb            (GtkWidget               *w,
+								   DialogData              *data);
+static gboolean        task_dialog_complete_focus_in_cb           (GtkWidget               *w,
+								   GdkEventFocus           *event,
+								   DialogData              *data);
+static gboolean        task_dialog_complete_focus_out_cb          (GtkWidget               *w,
+								   GdkEventFocus           *event,
+								   DialogData              *data);
+static void            task_dialog_task_priority_changed_cb       (MrpTask                 *task,
+								   GParamSpec              *pspec,
+								   GtkWidget               *dialog);
+static void            task_dialog_priority_changed_cb            (GtkWidget               *w,
+								   DialogData              *data);
+static gboolean        task_dialog_priority_focus_in_cb           (GtkWidget               *w,
+								   GdkEventFocus           *event,
+								   DialogData              *data);
+static gboolean        task_dialog_priority_focus_out_cb          (GtkWidget               *w,
+								   GdkEventFocus           *event,
+								   DialogData              *data);
+static void            task_dialog_task_note_changed_cb           (MrpTask                 *task,
+								   GParamSpec              *pspec,
+								   GtkWidget               *dialog);
+static void            task_dialog_note_changed_cb                (GtkWidget               *w,
+								   DialogData              *data);
+static gboolean        task_dialog_note_focus_in_cb               (GtkWidget               *w,
+								   GdkEventFocus           *event,
+								   DialogData              *data);
+static gboolean        task_dialog_note_focus_out_cb              (GtkWidget               *w,
+								   GdkEventFocus           *event,
+								   DialogData              *data);
+static void            task_dialog_note_stamp_cb                  (GtkWidget               *w,
+								   DialogData              *data);
+static void            task_dialog_task_child_added_or_removed_cb (MrpTask                 *task,
+								   GtkWidget               *dialog);
+static void            task_dialog_setup_widgets                  (DialogData              *data,
+								   GladeXML                *glade);
+static void            task_dialog_assignment_toggled_cb          (GtkCellRendererText     *cell,
+								   gchar                   *path_str,
+								   DialogData              *data);
+static void            task_dialog_setup_resource_list            (DialogData              *data);
+static void            task_dialog_connect_to_task                (DialogData              *data);
+static void            task_dialog_resource_units_cell_edited     (GtkCellRendererText     *cell,
+								   gchar                   *path_str,
+								   gchar                   *new_text,
+								   DialogData              *data);
+static void            task_dialog_pred_cell_edited               (GtkCellRendererText     *cell,
+								   gchar                   *path_str,
+								   gchar                   *new_text,
+								   DialogData              *data);
+static MrpRelationType cell_index_to_relation_type                (gint                     i);
+static void            task_dialog_cell_type_show_popup           (PlannerCellRendererList *cell,
+								   const gchar             *path_string,
+								   gint                     x1,
+								   gint                     y1,
+								   gint                     x2,
+								   gint                     y2,
+								   DialogData              *data);
+static void            task_dialog_cell_name_show_popup           (PlannerCellRendererList *cell,
+								   const gchar             *path_string,
+								   gint                     x1,
+								   gint                     y1,
+								   gint                     x2,
+								   gint                     y2,
+								   DialogData              *data);
+static void            task_dialog_cell_hide_popup                (PlannerCellRendererList *cell,
+								   GtkWidget               *view);
+static void            task_dialog_add_predecessor_cb             (GtkWidget               *widget,
+								   DialogData              *data);
+static void            task_dialog_remove_predecessor_cb          (GtkWidget               *widget,
+								   DialogData              *data);
+static void            task_dialog_new_pred_ok_clicked_cb         (GtkWidget               *w,
+								   GtkWidget               *dialog);
+static void            task_dialog_new_pred_cancel_clicked_cb     (GtkWidget               *w,
+								   GtkWidget               *dialog);
+static void            task_dialog_update_sensitivity             (DialogData              *data);
+static void            task_dialog_update_title                   (DialogData              *data);
+
+
 
 
 /* Keep the dialogs here so that we can just raise the dialog if it's

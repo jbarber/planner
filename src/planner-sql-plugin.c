@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
- * Copyright (C) 2003 Imendio HB
+ * Copyright (C) 2003-2004 Imendio HB
  * Copyright (C) 2003 CodeFactory AB
  * Copyright (C) 2003 Richard Hult <richard@imendio.com>
  * Copyright (C) 2003 Mikael Hallendal <micke@imendio.com>
@@ -119,11 +119,10 @@ sql_execute_query (GdaConnection *con, gchar *query)
 static gint
 get_int (GdaDataModel *res, gint row, gint column)
 {
-	const gchar    *str;
-	const GdaValue *value;
+	gchar    *str;
+	GdaValue *value;
+	gint      i;
 
-	g_return_val_if_fail (GDA_IS_DATA_MODEL (res), INT_MAX);
-	
 	value = (GdaValue *) gda_data_model_get_value_at (res, column, row);
 	if (value == NULL) {
 		g_warning ("Failed to get a value: (%d,%d)", column, row);
@@ -131,7 +130,10 @@ get_int (GdaDataModel *res, gint row, gint column)
 	}
 	
 	str = gda_value_stringify (value);
-	return strtol (str, NULL, 10);
+	i = strtol (str, NULL, 10);
+	g_free (str);
+
+	return i;
 }
 
 /**
@@ -140,13 +142,11 @@ get_int (GdaDataModel *res, gint row, gint column)
 static gchar *
 get_string (GdaDataModel *res, gint row, gint column)
 {
-	const gchar    *str;
-	gchar          *ret;
-	gsize           len;
-	const GdaValue *value;
+	gchar    *str;
+	gchar    *ret;
+	gsize     len;
+	GdaValue *value;
 	
-	g_return_val_if_fail (GDA_IS_DATA_MODEL (res), NULL);
-
 	value = (GdaValue *) gda_data_model_get_value_at (res, column, row);
 	if (value == NULL) {
 		g_warning ("Failed to get a value: (%d,%d)", column, row);
@@ -157,7 +157,7 @@ get_string (GdaDataModel *res, gint row, gint column)
 	len = strlen (str);
 	
 	if (g_utf8_validate (str, len, NULL)) {
-		return g_strdup (str);
+		return str;
 	}
 
 	/* First, try to convert to UTF-8 from the current locale. */
@@ -172,6 +172,8 @@ get_string (GdaDataModel *res, gint row, gint column)
 		/* Give up. */
 		ret = g_strdup (_("Invalid Unicode"));
 	}
+
+	g_free (str);
 	
 	return ret;
 }

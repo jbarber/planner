@@ -10,11 +10,12 @@ Group: 		Applications/Productivity
 Url:		http://planner.imendio.org/
 Source: 	%{name}-%{ver}.tar.gz
 BuildRoot:	%{_tmppath}/%{name}-%{ver}-root
+Obsoletes:	mrproject libmrproject
+
 Requires:	gtk2 >= @GTK_REQUIRED@
 Requires:       libgnomeui >= @LIBGNOMEUI_REQUIRED@
 Requires:	popt >= 1.5
 Requires:	libglade2 >= @LIBGLADE_REQUIRED@
-Requires:       libplanner = %{ver}
 Requires:       gnome-vfs2 >= 2.0.2
 Requires:       libgnomeprintui22 >= 2.2.0
 Requires:       libxslt >= 1.0
@@ -23,12 +24,13 @@ PreReq:         scrollkeeper >= 0.3.10
 BuildRequires:	gtk2-devel >= @GTK_REQUIRED@
 BuildRequires:	libgnomeui-devel >= @LIBGNOMEUI_REQUIRED@
 BuildRequires:	libglade2-devel >= @LIBGLADE_REQUIRED@
-BuildRequires:	libplanner-devel = %{ver}
 BuildRequires:  gnome-vfs2-devel >= 2.0.2
 BuildRequires:  libgnomeprintui22-devel >= 2.2.0
 BuildRequires:  libxml-devel >= @LIBXML_REQUIRED@
 BuildRequires:  libxslt-devel >= @LIBXSLT_REQUIRED@
-BuildRequires:	intltool
+BuildRequires:	intltool autoconf automake17
+
+BuildRequires:	libgda-devel
 
 %description
 Planner is a visual project management application which allows users to
@@ -38,80 +40,102 @@ Gantt charts.
 You should install Planner if you wish to manage schedules, allocate
 resources, and track the progress of your projects.
 
-%package sql
-Summary:	Planner SQL plugin
-Group:          Applications/Productivity
-Requires:       %name = %{PACKAGE_VERSION}
-Requires:       libgda
-BuildRequires:  libgda-devel
-
-%description sql
-SQL plugin for Planner, this plugin can be used to store projects in a PostgreSQL database.
-
 %prep
 %setup -q
 
 %build
 
-intltoolize
-%configure --enable-gda
+intltoolize --force
+libtoolize --force
+aclocal-1.7
+automake-1.7
+autoconf
+%configure --enable-gda --enable-python --enable-gtk-doc --disable-dotnet
 
 make
 
 %install
-[ -n "$RPM_BUILD_ROOT" -a "$RPM_BUILD_ROOT" != / ] && rm -rf $RPM_BUILD_ROOT
+rm -rf "%{buildroot}"
 
-%makeinstall MRP_PLUGINDIR=$RPM_BUILD_ROOT/%{_libdir}/planner/plugins MRP_VIEWDIR=$RPM_BUILD_ROOT/%{_libdir}/planner/views
+%makeinstall
 
-rm -rf $RPM_BUILD_ROOT/var/scrollkeeper
-rm -f $RPM_BUILD_ROOT%{_libdir}/planner/*/*la
-rm -f $RPM_BUILD_ROOT%{_libdir}/planner/*la
+/bin/rm -rf %{buildroot}/var/scrollkeeper
+/bin/rm %{buildroot}/%{_libdir}/*.la
+/bin/rm %{buildroot}/%{_libdir}/planner/file-modules/*.la
+/bin/rm %{buildroot}/%{_libdir}/planner/storage-modules/*.la
+/bin/rm %{buildroot}/%{_libdir}/planner/plugins/*.la
+/bin/rm %{buildroot}/%{_libdir}/planner/views/*.la
+/bin/rm %{buildroot}/%{_libdir}/python*/site-packages/gtk-2.0/*.la
 
-desktop-file-install --vendor imendio --delete-original     \
-  --dir $RPM_BUILD_ROOT%{_datadir}/applications             \
-  --add-category X-Red-Hat-Base                             \
-  $RPM_BUILD_ROOT%{_datadir}/applications/planner.desktop
-
+/bin/rm %{buildroot}/%{_datadir}/mime/XMLnamespaces
+/bin/rm %{buildroot}/%{_datadir}/mime/globs
+/bin/rm %{buildroot}/%{_datadir}/mime/magic
+/bin/rm %{buildroot}/%{_datadir}/mime/application/*
 
 %find_lang %name
 
-
 %clean
-[ -n "$RPM_BUILD_ROOT" -a "$RPM_BUILD_ROOT" != / ] && rm -rf $RPM_BUILD_ROOT
+rm -rf "%{buildroot}"
 
 %post
-/sbin/ldconfig
 scrollkeeper-update
+if test x$UPDATE_MIME_DATABASE != xno ; then
+  $(UPDATE_MIME_DATABASE) "%{_datadir}/mime"
+endif
 
 %postun
-/sbin/ldconfig
 scrollkeeper-update
+if test x$UPDATE_MIME_DATABASE != xno ; then
+  $(UPDATE_MIME_DATABASE) "%{_datadir}/mime"
+endif
 
-%files -f %{name}.lang
-%defattr(-, root, root)
+%files
+%defattr(-,root,root)
 %doc ChangeLog NEWS README COPYING
 %{_bindir}/planner
 %{_libdir}/planner
+%{_libdir}/libplanner-1*
+%{_libdir}/pkgconfig/*
+%{_libdir}/python*/site-packages/gtk-2.0/*
 %{_datadir}/planner
-%{_datadir}/gnome-2.0/ui/*.ui
 %{_datadir}/application-registry/*
 %{_datadir}/mime-info/*
+%{_datadir}/mime/packages/*
 %{_datadir}/pixmaps/*
 %{_datadir}/applications/*
+%{_datadir}/gtk-doc/html/libplanner
 %{_datadir}/gnome/help/planner/*
-%{_datadir}/omf/planner/*
+%{_datadir}/omf/planner/planner-C.omf
+%{_datadir}/locale/*/LC_MESSAGES/*
+%{_includedir}/planner-1.0
 
-%exclude %{_libdir}/planner/plugins/libproject-sql*
-%exclude %{_datadir}/planner/glade/mg-sql.glade
-%exclude %{_datadir}/gnome-2.0/ui/sql-plugin.ui
+%exclude %{_libdir}/planner/file-modules/libmrp-xsl*
+%exclude %{_libdir}/planner/plugins/libsql-plugin*
+%exclude %{_datadir}/planner/glade/sql.glade
+%exclude %{_datadir}/planner/ui/sql-plugin.ui
 
-%files sql
+# Database (GDA) package
+%package database
+Summary:	Planner database support
+Group:          Applications/Productivity
+Requires:       %name = %{PACKAGE_VERSION}
+Requires:       libgda
+BuildRequires:  libgda-devel
+
+%description database
+Database support for Planner, this plugin can be used to store projects in a PostgreSQL database.
+
+%files database
 %defattr(-,root,root)
-%{_libdir}/planner/plugins/libproject-sql*
-%{_datadir}/planner/glade/mg-sql.glade
-%{_datadir}/gnome-2.0/ui/sql-plugin.ui
+%{_libdir}/planner/file-modules/libmrp-xsl*
+%{_libdir}/planner/plugins/libsql-plugin*
+%{_datadir}/planner/glade/sql.glade
+%{_datadir}/planner/ui/sql-plugin.ui
 
 
 %changelog
+* Thu Jun 24 2004 Richard Hult <richard@imendio.com>
+- Fix up to actually work.
+
 * Mon Dec 1 2003 Richard Hult <richard@imendio.com>
 - Start over with a new spec file, needs a lot more work.

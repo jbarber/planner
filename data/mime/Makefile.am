@@ -25,11 +25,11 @@ CLEANFILES = $(keys_files) $(xml_files)
 
 install-data-hook:
 if HAVE_NEW_MIME
-	$(UPDATE_MIME_DATABASE) "$(datadir)/mime"
+	$(UPDATE_MIME_DATABASE) "$(DESTDIR)$(datadir)/mime"
 endif
 
 uninstall-hook:
 if HAVE_NEW_MIME
-	$(UPDATE_MIME_DATABASE) "$(datadir)/mime"
+	$(UPDATE_MIME_DATABASE) "$(DESTDIR)$(datadir)/mime"
 endif
 

@@ -202,8 +202,6 @@ sql_get_last_error (GdaConnection *connection)
 	GdaError    *error;
 	const gchar *error_txt;
 
-	g_return_val_if_fail (connection != NULL, "");
-      
 	list = (GList *) gda_connection_get_errors (connection);
 
 	error = (GdaError *) g_list_last (list)->data;
@@ -217,8 +215,9 @@ sql_get_last_error (GdaConnection *connection)
 static gint
 get_int (GdaDataModel *res, gint row, gint column)
 {
-	const gchar    *str;
-	const GdaValue *value;
+	GdaValue *value;
+	gchar    *str;
+	gint      i;
 	
 	value = (GdaValue *) gda_data_model_get_value_at (res, column, row);
 	if (value == NULL) {
@@ -226,15 +225,20 @@ get_int (GdaDataModel *res, gint row, gint column)
 		d(sql_show_result (res));
 		return INT_MAX;
 	}
+
 	str = gda_value_stringify (value);
-	return strtol (str, NULL, 10);
+	i = strtol (str, NULL, 10);
+	g_free (str);
+
+	return i;
 }
 
 static gint
 get_id (GdaDataModel *res, gint row, gint column)
 {
-	const gchar    *str;
-	const GdaValue *value;
+	GdaValue *value;
+	gchar    *str;
+	gint      i;
 	
 	value = (GdaValue *) gda_data_model_get_value_at (res, column, row);
 	if (value == NULL) {
@@ -245,19 +249,23 @@ get_id (GdaDataModel *res, gint row, gint column)
 
 	str = gda_value_stringify (value);
 	if (!str || !str[0]) {
+		g_free (str);
 		return -1;
 	}
 
-	return strtol (str, NULL, 10);
+	i = strtol (str, NULL, 10);
+	g_free (str);
+
+	return i;
 }
 
 static gchar *
 get_string (GdaDataModel *res, gint row, gint column)
 {
-	const gchar    *str;
-	gchar          *ret;
-	gsize           len;
-	const GdaValue *value;
+	GdaValue *value;
+	gsize     len;
+	gchar    *ret;
+	gchar    *str;
 	
 	value = (GdaValue *) gda_data_model_get_value_at (res, column, row);
 	if (value == NULL) {
@@ -270,7 +278,7 @@ get_string (GdaDataModel *res, gint row, gint column)
 	len = strlen (str);
 	
 	if (g_utf8_validate (str, len, NULL)) {
-		return g_strdup (str);
+		return str;
 	}
 
 	/* First, try to convert to UTF-8 from the current locale. */
@@ -285,6 +293,8 @@ get_string (GdaDataModel *res, gint row, gint column)
 		/* Give up. */
 		ret = g_strdup (_("Invalid Unicode"));
 	}
+
+	g_free (str);
 	
 	return ret;
 }
@@ -292,7 +302,7 @@ get_string (GdaDataModel *res, gint row, gint column)
 static gboolean
 get_boolean (GdaDataModel *res, gint row, gint column)
 {
-	const GdaValue *value;
+	GdaValue *value;
 	
 	value = (GdaValue *) gda_data_model_get_value_at (res, column, row);
 	if (value == NULL) {
@@ -307,8 +317,9 @@ get_boolean (GdaDataModel *res, gint row, gint column)
 static gfloat
 get_float (GdaDataModel *res, gint row, gint column)
 {
-	const gchar    *str;
-	const GdaValue *value;
+	GdaValue *value;
+	gchar    *str;
+	gdouble   d;
 	
 	value = (GdaValue *) gda_data_model_get_value_at (res, column, row);
 
@@ -319,7 +330,10 @@ get_float (GdaDataModel *res, gint row, gint column)
 	}
 	
 	str = gda_value_stringify (value);
-	return g_ascii_strtod (str, NULL);
+	d = g_ascii_strtod (str, NULL);
+	g_free (str);
+
+	return d;
 }
 
 static gboolean

@@ -1,3 +1,19 @@
+2004-06-25  Richard Hult  <richard@imendio.com>
+
+	* Makefile.am:
+	* data/mime/Makefile.am:
+	* data/mime/planner.keys.in:
+	* dotnet/libplanner/Makefile.am:
+	* dotnet/libplanner/libplanner-api.xml:
+	* dotnet/samples/Example01.cs:
+	* dotnet/samples/Example10.cs:
+	* dotnet/samples/Makefile.am: Fix distcheck.
+
+	* libplanner/mrp-sql.c: (sql_get_last_error), (get_int), (get_id),
+	(get_string), (get_boolean), (get_float):
+	* src/planner-sql-plugin.c: (get_int), (get_string):
+	* src/planner-task-dialog.c: Fix leaks and warnings.
+
 2004-06-23 Alvaro del Castillo  <acs@barrapunto.com>
 	
 	* src/planner-calendar-dialog.c
