@@ -183,12 +183,20 @@ typedef struct {
 typedef struct {
 	PlannerCmd   base;
 
-	DialogData  *data;
 	MrpResource *resource;
 	gchar       *property;  
 	gchar       *note;
 	gchar       *old_note;
 } ResourceCmdEditNote;
+
+typedef struct {
+	PlannerCmd   base;
+
+	MrpResource *resource;
+	MrpCalendar *calendar;
+	MrpCalendar *old_calendar;
+} ResourceCmdCalendar;
+
 
 static gboolean
 foreach_find_calendar (GtkTreeModel *model,
@@ -430,15 +438,90 @@ resource_dialog_resource_removed_cb (GtkWidget  *w,
 }
 
 static void
+resource_cmd_calendar_do (PlannerCmd *cmd_base)
+{
+	ResourceCmdCalendar *cmd;
+
+	cmd = (ResourceCmdCalendar*) cmd_base;	
+
+	mrp_resource_set_calendar (cmd->resource, cmd->calendar);
+}
+
+static void
+resource_cmd_calendar_undo (PlannerCmd *cmd_base)
+{
+	ResourceCmdCalendar *cmd;
+
+	cmd = (ResourceCmdCalendar*) cmd_base;	
+
+	mrp_resource_set_calendar (cmd->resource, cmd->old_calendar);
+
+}
+
+static void
+resource_cmd_calendar_free (PlannerCmd *cmd_base)
+{
+	ResourceCmdCalendar *cmd;
+
+	cmd = (ResourceCmdCalendar *) cmd_base;
+
+	g_object_unref (cmd->resource);
+
+	if (cmd->old_calendar) {
+		g_object_unref (cmd->calendar);
+	}
+	if (cmd->old_calendar) {
+		g_object_unref (cmd->old_calendar);
+	}
+
+	g_free (cmd);
+}
+
+static PlannerCmd *
+resource_cmd_edit_calendar (DialogData  *data,
+			    MrpCalendar *calendar)
+{
+	PlannerCmd          *cmd_base;
+	ResourceCmdCalendar *cmd;
+	MrpCalendar         *current_calendar;
+
+	cmd = g_new0 (ResourceCmdCalendar, 1);
+
+	cmd_base = (PlannerCmd*) cmd;
+
+	cmd_base->label = g_strdup (_("Edit resource calendar from dialog"));
+	cmd_base->do_func = resource_cmd_calendar_do;
+	cmd_base->undo_func = resource_cmd_calendar_undo;
+	cmd_base->free_func = resource_cmd_calendar_free;
+
+	cmd->resource = g_object_ref (data->resource);
+
+	current_calendar = mrp_resource_get_calendar (data->resource);
+
+	if (current_calendar) {
+		cmd->old_calendar = g_object_ref (current_calendar);
+	} else {
+		cmd->old_calendar = NULL;	
+	}
+
+	if (calendar) {
+		cmd->calendar = g_object_ref (calendar);
+	} else {
+		cmd->calendar = NULL;
+	}
+
+	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager (data->main_window),
+					   cmd_base);
+
+	return cmd_base;
+}
+
+static void
 resource_cmd_note_do (PlannerCmd *cmd_base)
 {
 	ResourceCmdEditNote *cmd;
 
 	cmd = (ResourceCmdEditNote*) cmd_base;
-
-	g_signal_handlers_block_by_func (cmd->resource,
-					 resource_dialog_resource_note_changed_cb,
-					 cmd->resource);
 
 	if (g_getenv ("PLANNER_DEBUG_UNDO_RESOURCE")) {
 		g_message ("Doing the note change ... focus out: %s, focus in: %s", 
@@ -446,10 +529,6 @@ resource_cmd_note_do (PlannerCmd *cmd_base)
 	}
 
 	g_object_set (cmd->resource, "note", cmd->note, NULL);
-
-	g_signal_handlers_unblock_by_func (cmd->resource,
-					   resource_dialog_resource_note_changed_cb,
-					   cmd->resource);
 }
 
 static void
@@ -459,20 +538,12 @@ resource_cmd_note_undo (PlannerCmd *cmd_base)
 
 	cmd = (ResourceCmdEditNote*) cmd_base;
 
-	g_signal_handlers_block_by_func (cmd->data->note_buffer,
-					 resource_dialog_note_changed_cb,
-					 cmd->data->dialog);
-
 	if (g_getenv ("PLANNER_DEBUG_UNDO_RESOURCE")) {
 		g_message ("Undoing the note change to \"%s\" from the new \"%s\"", 
 			   cmd->old_note, cmd->note);
 	}
 
 	g_object_set (cmd->resource, "note", cmd->old_note, NULL);
-
-	g_signal_handlers_unblock_by_func (cmd->data->note_buffer,
-					   resource_dialog_note_changed_cb,
-					   cmd->data->dialog);
 }
 
 static void
@@ -482,7 +553,6 @@ resource_cmd_note_free (PlannerCmd *cmd_base)
 
 	cmd = (ResourceCmdEditNote*) cmd_base;
 
-	g_free (cmd_base->label);
 	g_free (cmd->note);
 	g_free (cmd->old_note);
 	g_free (cmd->property);
@@ -517,7 +587,6 @@ resource_cmd_edit_note (DialogData  *data,
 	cmd_base->undo_func = resource_cmd_note_undo;
 	cmd_base->free_func = resource_cmd_note_free;
 
-	cmd->data = data;
 	cmd->property = g_strdup (property);
 	cmd->resource = g_object_ref (data->resource);
 
@@ -560,8 +629,6 @@ resource_cmd_edit_property_free (PlannerCmd *cmd_base)
 	ResourceCmdEditProperty *cmd;
 
 	cmd = (ResourceCmdEditProperty*) cmd_base;
-
-	g_free (cmd_base->label);
 
 	g_value_unset (cmd->value);
 	g_value_unset (cmd->old_value);
@@ -1329,6 +1396,12 @@ resource_dialog_calendar_toggled_cb (GtkCellRendererToggle *cell,
 	GtkTreeIter   iter;
 	gboolean      selected;
 	MrpCalendar  *calendar;
+	PlannerCmd   *cmd;
+
+	if (g_getenv ("PLANNER_DEBUG_UNDO_RESOURCE")) {
+		g_message ("Changing the calendar for the resource %s", 
+			   mrp_resource_get_name (data->resource));
+	}
 	
 	path = gtk_tree_path_new_from_string (path_str);
 
@@ -1343,7 +1416,7 @@ resource_dialog_calendar_toggled_cb (GtkCellRendererToggle *cell,
 			    -1);
 
 	if (!selected) {
-		mrp_resource_set_calendar (data->resource, calendar);
+		cmd = resource_cmd_edit_calendar (data, calendar);
 	}
 	
 	gtk_tree_path_free (path);
