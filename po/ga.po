@@ -1,14 +1,15 @@
-# .Irish translations for mrproject
+# .Irish translations for planner
 # Copyright (C) 2001 Free Software Foundation, Inc.
-# Alastair McKinstry <mckinstry@computer.org>, 2001.#
+# Alastair McKinstry <mckinstry@computer.org>, 2001.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: mrproject 0.3.0\n"
+"Project-Id-Version: planner HEAD\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2003-12-17 04:27+0100\n"
-"PO-Revision-Date: 2001-06-23 10:00+CEST\n"
+"PO-Revision-Date: 2004-01-21 08:10+0000\n"
 "Last-Translator: Alastair McKinstry <mckinstry@computer.org>\n"
-"Language-Team: Irish <ga@li.org>\n"
+"Language-Team: Irish <gaeilge-gnulinux@list.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8-bit\n"
@@ -131,7 +132,7 @@ msgstr "Feilire Nua"
 
 #: data/glade/calendar-dialog.glade.h:24
 msgid "Select a Calendar"
-msgstr "Tóg Feilire"
+msgstr "Roghnaigh Feilire"
 
 #: data/glade/calendar-dialog.glade.h:25
 msgid ""
@@ -238,7 +239,7 @@ msgstr ""
 
 #: data/glade/project-properties.glade.h:7
 msgid "Select..."
-msgstr "Tóg..."
+msgstr "Roghnaigh..."
 
 #: data/glade/project-properties.glade.h:8
 msgid "_Calendar:"
@@ -315,7 +316,7 @@ msgstr ""
 
 #: data/glade/sql.glade.h:3
 msgid "Select a Project"
-msgstr "Tóg Tionscail"
+msgstr "Roghnaigh Tionscadal"
 
 #: data/glade/sql.glade.h:4
 msgid "The database contains the following projects. Select a project to open:"
@@ -449,7 +450,7 @@ msgstr ""
 #: data/ui/gantt-view.ui.h:12 data/ui/resource-view.ui.h:7
 #: data/ui/task-view.ui.h:12
 msgid "Select _All"
-msgstr "Tóg _gach rud"
+msgstr "Roghnaigh _gach rud"
 
 #: data/ui/gantt-view.ui.h:13 data/ui/resource-view.ui.h:8
 #: data/ui/task-view.ui.h:13
@@ -480,11 +481,11 @@ msgstr ""
 
 #: data/ui/gantt-view.ui.h:19
 msgid "Zoom In"
-msgstr ""
+msgstr "Súmáil Isteach"
 
 #: data/ui/gantt-view.ui.h:20
 msgid "Zoom Out"
-msgstr ""
+msgstr "Súmáil Amach"
 
 #: data/ui/gantt-view.ui.h:21
 msgid "Zoom To Fit"
@@ -496,7 +497,7 @@ msgstr ""
 
 #: data/ui/gantt-view.ui.h:23
 msgid "Zoom _Out"
-msgstr ""
+msgstr "Súmáil _Amach"
 
 #: data/ui/gantt-view.ui.h:24 data/ui/task-view.ui.h:19
 msgid "_Edit Task Properties..."
@@ -516,7 +517,7 @@ msgstr ""
 
 #: data/ui/gantt-view.ui.h:28
 msgid "_Zoom In"
-msgstr ""
+msgstr "_Súmáil Isteach"
 
 #: data/ui/main-window.ui.h:1
 msgid "About this application"
@@ -528,7 +529,7 @@ msgstr "_Gearr"
 
 #: data/ui/main-window.ui.h:3
 msgid "Clear"
-msgstr "G_lan"
+msgstr "Bánaigh"
 
 #: data/ui/main-window.ui.h:4
 msgid "Clear the selection"
@@ -656,7 +657,7 @@ msgstr "_Comhad"
 
 #: data/ui/main-window.ui.h:35
 msgid "_Help"
-msgstr "C_úidiú"
+msgstr "C_uidiú"
 
 #: data/ui/main-window.ui.h:36
 msgid "_Manage Calendars"
@@ -664,7 +665,7 @@ msgstr ""
 
 #: data/ui/main-window.ui.h:37
 msgid "_New Project"
-msgstr "Tioscail _Nua"
+msgstr "Tioscadal _Nua"
 
 #: data/ui/main-window.ui.h:38
 msgid "_Open..."
@@ -684,7 +685,7 @@ msgstr "_Priontáil..."
 
 #: data/ui/main-window.ui.h:42
 msgid "_Project"
-msgstr "_Tionscáil"
+msgstr "_Tionscadal"
 
 #: data/ui/main-window.ui.h:43
 msgid "_Quit"
@@ -708,7 +709,7 @@ msgstr ""
 
 #: data/ui/main-window.ui.h:48
 msgid "_View"
-msgstr ""
+msgstr "_Amharc"
 
 #: data/ui/resource-view.ui.h:1
 msgid "Edit _Custom Properties..."
@@ -716,7 +717,7 @@ msgstr ""
 
 #: data/ui/resource-view.ui.h:2
 msgid "Edit _Groups"
-msgstr ""
+msgstr "Eagar _Grupaí"
 
 #: data/ui/resource-view.ui.h:3
 msgid "Groups"
@@ -1013,40 +1014,40 @@ msgstr ""
 #.
 #: src/planner-format.c:197
 msgid "%b %e"
-msgstr ""
+msgstr "%b %e"
 
 #. i18n: project start, the date format is described in
 #. * libmrproject/docs/DateFormat.
 #: src/planner-gantt-background.c:579
 msgid "%Y %b %d"
-msgstr ""
+msgstr "%Y %b %d"
 
 #: src/planner-gantt-background.c:581
 msgid "Project start"
-msgstr ""
+msgstr "Tionscadal tosnú"
 
 #: src/planner-gantt-print.c:190 src/planner-group-dialog.c:387
 #: src/planner-property-dialog.c:378 src/planner-resource-view.c:976
 #: src/planner-task-dialog.c:1311 src/planner-task-dialog.c:1397
 #: src/planner-task-view.c:261
 msgid "Name"
-msgstr ""
+msgstr "Ainm"
 
 #: src/planner-gantt-print.c:198 src/planner-resource-dialog.c:1101
 #: src/planner-resource-view.c:639 src/planner-resource-view.c:655
 #: src/planner-resource-view.c:1197 src/planner-task-view.c:264
 msgid "Work"
-msgstr ""
+msgstr "Obair"
 
 #: src/planner-gantt-print.c:513 src/planner-gantt-print.c:515
 #: src/planner-gantt-row.c:656 src/planner-gantt-row.c:658
 #: src/planner-window.c:1636
 msgid "Unnamed"
-msgstr ""
+msgstr "Gan ainm"
 
 #: src/planner-gantt-row.c:1841 src/planner-gantt-row.c:1844
 msgid "No name"
-msgstr ""
+msgstr "Gan Ainm"
 
 #: src/planner-gantt-row.c:1847
 #, c-format
@@ -1071,6 +1072,8 @@ msgid ""
 "\n"
 "Name"
 msgstr ""
+"\n"
+"Ainm"
 
 #. COL_START,    _("\nStart"),
 #: src/planner-gantt-view.c:484
@@ -1078,6 +1081,8 @@ msgid ""
 "\n"
 "Work"
 msgstr ""
+"\n"
+"Obair"
 
 #: src/planner-group-dialog.c:393
 msgid "Manager name"
@@ -1178,7 +1183,7 @@ msgstr ""
 
 #: src/planner-project-properties.c:759 src/planner-property-dialog.c:431
 msgid "Value"
-msgstr ""
+msgstr "Luach"
 
 #: src/planner-project-properties.c:1130 src/planner-property-dialog.c:229
 msgid "The name of the custom property needs to start with a letter."
@@ -1316,7 +1321,7 @@ msgstr ""
 
 #: src/planner-sql-plugin.c:322
 msgid "Project"
-msgstr "Tionscail"
+msgstr "Tionscadal"
 
 #: src/planner-sql-plugin.c:494
 msgid "Open from Database"
@@ -1372,7 +1377,7 @@ msgstr ""
 
 #: src/planner-task-tree.c:195
 msgid "/_Remove task"
-msgstr ""
+msgstr "/_Scríos tasc"
 
 #: src/planner-task-tree.c:200
 msgid "/_Unlink task"
@@ -1380,7 +1385,7 @@ msgstr ""
 
 #: src/planner-task-tree.c:206
 msgid "/_Edit task..."
-msgstr ""
+msgstr "/_Eagar tasc..."
 
 #: src/planner-task-tree.c:297
 msgid "Insert task"
@@ -1392,12 +1397,12 @@ msgstr ""
 
 #: src/planner-task-tree.c:2421
 msgid "mon"
-msgstr ""
+msgstr "mí"
 
 #. month unit variant accepted in input
 #: src/planner-task-tree.c:2422
 msgid "month"
-msgstr ""
+msgstr "mí"
 
 #. month unit variant accepted in input
 #: src/planner-task-tree.c:2423
@@ -1407,7 +1412,7 @@ msgstr ""
 #. month unit variant accepted in input
 #: src/planner-task-tree.c:2424
 msgid "w"
-msgstr ""
+msgstr "s"
 
 #. week unit variant accepted in input
 #: src/planner-task-tree.c:2425
@@ -1461,11 +1466,11 @@ msgstr "noimeáid"
 
 #: src/planner-task-view.c:199
 msgid "Tasks"
-msgstr "Teascanna"
+msgstr "Tascanna"
 
 #: src/planner-task-view.c:207
 msgid "_Tasks"
-msgstr "_teascanna"
+msgstr "_tascanna"
 
 #: src/planner-task-view.c:262
 msgid "Start"
@@ -1497,7 +1502,7 @@ msgstr "Oscáil comhad"
 #.
 #: src/planner-window.c:1085 src/planner-window.c:1092
 msgid "translator_credits"
-msgstr ""
+msgstr "Alastair McKinstry <mckinstry@computer.org>"
 
 #. "Copyright \xc2\xa9"
 #: src/planner-window.c:1089
