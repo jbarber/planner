@@ -1053,9 +1053,6 @@ task_dialog_task_name_changed_cb (MrpTask *task, GParamSpec *pspec, GtkWidget *d
 	DialogData *data;
 	gchar      *name;
 		
-	g_return_if_fail (MRP_IS_TASK (task));
-	g_return_if_fail (GTK_IS_DIALOG (dialog));
-
 	data = DIALOG_GET_DATA (dialog);
 	
 	g_object_get (task, "name", &name, NULL);
@@ -1140,9 +1137,6 @@ task_dialog_task_type_changed_cb (MrpTask *task, GParamSpec *pspec, GtkWidget *d
 	DialogData  *data;
 	MrpTaskType  type;
 		
-	g_return_if_fail (MRP_IS_TASK (task));
-	g_return_if_fail (GTK_IS_DIALOG (dialog));
-
 	data = DIALOG_GET_DATA (dialog);
 
 	g_object_get (task, "type", &type, NULL);
@@ -1195,9 +1189,6 @@ task_dialog_task_sched_changed_cb (MrpTask *task, GParamSpec *pspec, GtkWidget *
 	DialogData   *data;
 	MrpTaskSched  sched;
 		
-	g_return_if_fail (MRP_IS_TASK (task));
-	g_return_if_fail (GTK_IS_DIALOG (dialog));
-
 	data = DIALOG_GET_DATA (dialog);
 
 	g_object_get (task, "sched", &sched, NULL);
@@ -1510,9 +1501,6 @@ task_dialog_task_complete_changed_cb (MrpTask    *task,
 	DialogData *data;
 	gshort      complete;
 	
-	g_return_if_fail (MRP_IS_TASK (task));
-	g_return_if_fail (GTK_IS_WIDGET (dialog));
-
 	data = DIALOG_GET_DATA (dialog);
 	
 	complete = mrp_task_get_percent_complete (task);
@@ -1604,9 +1592,6 @@ task_dialog_task_priority_changed_cb (MrpTask    *task,
 	DialogData *data;
 	gint       priority;
 	
-	g_return_if_fail (MRP_IS_TASK (task));
-	g_return_if_fail (GTK_IS_WIDGET (dialog));
-
 	data = DIALOG_GET_DATA (dialog);
 	
 	g_object_get (task, "priority", &priority, NULL);
@@ -1698,9 +1683,6 @@ task_dialog_task_note_changed_cb (MrpTask    *task,
 	DialogData *data;
 	gchar      *note;
 	
-	g_return_if_fail (MRP_IS_TASK (task));
-	g_return_if_fail (GTK_IS_DIALOG (dialog));
-
 	data = DIALOG_GET_DATA (dialog);
 	
 	g_object_get (task, "note", &note, NULL);
@@ -2202,8 +2184,6 @@ task_dialog_cell_type_show_popup (PlannerCellRendererList *cell,
 	MrpRelation       *relation;
 	GList             *list;
 
-	g_return_if_fail (PLANNER_IS_CELL_RENDERER_LIST (cell));
-
 	tree = GTK_TREE_VIEW (data->predecessor_list);
 	model = gtk_tree_view_get_model (tree);
 	list_model = PLANNER_LIST_MODEL (model);
@@ -2264,8 +2244,6 @@ task_dialog_cell_name_show_popup (PlannerCellRendererList *cell,
 	MrpTask      *task_pred;
 	MrpProject   *project;
 	GList        *list, *tasks, *l;
-
-	g_return_if_fail (PLANNER_IS_CELL_RENDERER_LIST (cell));
 
 	tree = GTK_TREE_VIEW (data->predecessor_list);
 	model = gtk_tree_view_get_model (tree);	
@@ -2827,7 +2805,6 @@ task_dialog_update_sensitivity (DialogData *data)
 	gtk_widget_set_sensitive (data->milestone_checkbutton, leaf);
 	gtk_widget_set_sensitive (data->fixed_checkbutton, leaf);
 	
-	gtk_widget_set_sensitive (data->work_spinbutton, sensitive && !fixed);
 	gtk_widget_set_sensitive (data->duration_spinbutton, sensitive && fixed);
 	gtk_widget_set_sensitive (data->complete_spinbutton, sensitive);
 	gtk_widget_set_sensitive (data->priority_spinbutton, sensitive);
