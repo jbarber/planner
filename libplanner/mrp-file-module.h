@@ -1,5 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
+ * Copyright (C) 2004 Imendio HB
  * Copyright (C) 2002 CodeFactory AB
  * Copyright (C) 2002 Richard Hult <richard@imendio.com>
  * Copyright (C) 2002 Mikael Hallendal <micke@imendio.com>
@@ -24,8 +25,6 @@
 #define __MRP_FILE_MODULE_H__
 
 #include <gmodule.h>
-#include <gsf/gsf.h>
-
 #include "mrp-application.h"
 #include "mrp-project.h"
 
@@ -50,11 +49,6 @@ struct _MrpFileReader {
 	MrpFileModule     *module;
 	
 	MrpFileReaderPriv *priv;
-	
-	gboolean (*read)        (MrpFileReader   *reader,
-				 GsfInput        *input,
-				 MrpProject      *project,
-				 GError         **error);
 	
 	gboolean (*read_string) (MrpFileReader   *reader,
 				 const gchar     *str,
@@ -87,13 +81,7 @@ MrpFileModule * mrp_file_module_new       (void);
 void            mrp_file_module_init      (MrpFileModule     *module,
 					   MrpApplication    *app);
 
-
 /* File Reader */
-gboolean        mrp_file_reader_read          (MrpFileReader     *reader,
-					       GsfInput          *input,
-					       MrpProject        *project,
-					       GError           **error);
-
 gboolean        mrp_file_reader_read_string   (MrpFileReader     *reader,
 					       const gchar       *str,
 					       MrpProject        *project,

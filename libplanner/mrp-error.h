@@ -23,6 +23,8 @@
 #ifndef __MRP_ERROR_H__
 #define __MRP_ERROR_H__
 
+#include <glib.h>
+
 #define MRP_ERROR mrp_error_quark ()
 
 typedef enum {

@@ -22,9 +22,6 @@
 
 #include <config.h>
 #include <gmodule.h>
-#include <gsf/gsf.h>
-#include <gsf/gsf-input.h>
-#include <gsf/gsf-libxml.h>
 #include <libxml/parser.h>
 #include <string.h>
 
@@ -43,10 +40,6 @@ typedef enum {
 void            init             (MrpFileModule   *module,
 				  MrpApplication  *application);
 static gboolean xml_read_context (xmlParserCtxt   *ctxt,
-				  MrpProject      *project,
-				  GError         **error);
-static gboolean xml_read         (MrpFileReader   *reader,
-				  GsfInput        *input,
 				  MrpProject      *project,
 				  GError         **error);
 static gboolean xml_read_string  (MrpFileReader   *reader,
@@ -97,29 +90,6 @@ xml_read_context (xmlParserCtxt  *ctxt,
 	
 	xmlFreeDoc (doc);
 	
-	return ret_val;
-}
-
-static gboolean 
-xml_read (MrpFileReader  *reader, 
-	  GsfInput       *input, 
-	  MrpProject     *project,
-	  GError        **error)
-{
-	xmlParserCtxt *ctxt;
-	gboolean       ret_val;
-
-	g_return_val_if_fail (GSF_IS_INPUT (input), FALSE);
-
-	ctxt = gsf_xml_parser_context (input);
-	if (!ctxt) {
-		return FALSE;
-	}
-
-	ret_val = xml_read_context (ctxt, project, error);
-
- 	xmlFreeParserCtxt (ctxt);
-
 	return ret_val;
 }
 
@@ -191,7 +161,7 @@ init (MrpFileModule *module, MrpApplication *application)
         reader->module = module;
         reader->priv   = NULL;
 	
-        reader->read        = xml_read;
+        //reader->read        = xml_read;
 	reader->read_string = xml_read_string;
 
         imrp_application_register_reader (application, reader);

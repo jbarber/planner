@@ -1,5 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
+ * Copyright (C) 2004 Imendio HB
  * Copyright (C) 2002 CodeFactory AB
  * Copyright (C) 2002 Richard Hult <richard@imendio.com>
  * Copyright (C) 2002 Mikael Hallendal <micke@imendio.com>
@@ -21,10 +22,7 @@
  */
 
 #include <config.h>
-
 #include <string.h>
-#include <gsf/gsf-input.h>
-
 #include "mrp-intl.h"
 #include "mrp-file-module.h"
 
@@ -52,9 +50,9 @@ file_module_load (const gchar *file)
 void
 mrp_file_module_load_all (MrpApplication *app)
 {
-	GDir*           dir;
-	const gchar    *name;
-	MrpFileModule  *module;
+	GDir*          dir;
+	const gchar   *name;
+	MrpFileModule *module;
 
 	dir = g_dir_open (MRP_FILE_MODULES_DIR, 0, NULL);
 
@@ -102,20 +100,6 @@ mrp_file_module_init (MrpFileModule *plugin, MrpApplication *app)
 }
 
 gboolean
-mrp_file_reader_read (MrpFileReader  *reader,
-		      GsfInput       *input,
-		      MrpProject     *project,
-		      GError        **error)
-{
-	if (reader->read) {
-		return reader->read (reader, input, project, error);
-	}
-	
-	/* FIXME: Set error */
-	return FALSE;
-}
-
-gboolean
 mrp_file_reader_read_string (MrpFileReader  *reader,
 			     const gchar    *str,
 			     MrpProject     *project,
@@ -125,7 +109,11 @@ mrp_file_reader_read_string (MrpFileReader  *reader,
 		return reader->read_string (reader, str, project, error);
 	}
 	
-	/* FIXME: Set error */
+	g_set_error (error, 
+		     MRP_ERROR,
+		     MRP_ERROR_FAILED,
+		     _("This format is does support reading"));
+	
 	return FALSE;
 }
 

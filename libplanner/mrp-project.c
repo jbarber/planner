@@ -24,8 +24,6 @@
 
 #include <config.h>
 #include <string.h>
-#include <gsf/gsf-input-memory.h>
-#include <gsf/gsf-input-stdio.h>
 #include "mrp-error.h"
 #include "mrp-intl.h"
 #include "mrp-marshal.h"
@@ -681,9 +679,10 @@ gboolean
 mrp_project_load (MrpProject *project, const gchar *uri, GError **error)
 {
 	MrpProjectPriv *priv;
-	GsfInput       *input;
 	GList          *l;
 	MrpCalendar    *old_default_calendar;
+	gchar          *file_str;
+	size_t          len;
 	
 	g_return_val_if_fail (MRP_IS_PROJECT (project), FALSE);
 	g_return_val_if_fail (uri != NULL, FALSE);
@@ -700,25 +699,38 @@ mrp_project_load (MrpProject *project, const gchar *uri, GError **error)
 	 */
 	old_default_calendar = priv->calendar;
 
- 	input = GSF_INPUT (gsf_input_mmap_new (uri, NULL));
-	
- 	if (!input) {
-		input = GSF_INPUT (gsf_input_stdio_new (uri, error));
-	}
 
-	if (!input) {
+	len = strlen (uri);
+
+	/* Get a local file from the uri. */
+	if (len > 3 && !strstr (uri, ":/")) {
+		/* No protocol. */
+	} else {
+		if (len > 7 && !strncmp (uri, "file:/", 6)) {
+			/* Naively strip method. */
+			uri = uri + 7;
+		} else {
+			g_set_error (error, 
+				     MRP_ERROR,
+				     MRP_ERROR_INVALID_URI,
+				     _("Invalid URI: '%s'"),
+				     uri);
+			
+			return FALSE;
+		}
+	}
+	
+	if (!g_file_get_contents (uri, &file_str, NULL, error)) {
 		return FALSE;
 	}
-
+	
 	mrp_task_manager_set_block_scheduling (priv->task_manager, TRUE);
 	
 	l = imrp_application_get_all_file_readers (priv->app);
 	for (; l; l = l->next) {
 		MrpFileReader *reader = l->data;
 
-		if (mrp_file_reader_read (reader, input, project, error)) {
-			g_object_unref (input);
-			
+		if (mrp_file_reader_read_string (reader, file_str, project, error)) {
 			g_signal_emit (project, signals[LOADED], 0, NULL);
 			imrp_project_set_needs_saving (project, FALSE);
 
@@ -729,8 +741,6 @@ mrp_project_load (MrpProject *project, const gchar *uri, GError **error)
 			mrp_calendar_remove (old_default_calendar);
 
 			mrp_task_manager_set_block_scheduling (priv->task_manager, FALSE);
-
-			/* FIXME: See bug #416. */
 			imrp_project_set_needs_saving (project, FALSE);
 			
 			return TRUE;
@@ -738,8 +748,6 @@ mrp_project_load (MrpProject *project, const gchar *uri, GError **error)
 	}
 
 	mrp_task_manager_set_block_scheduling (priv->task_manager, FALSE);
-
-	g_object_unref (input);
 
 	g_set_error (error, 
 		     MRP_ERROR,

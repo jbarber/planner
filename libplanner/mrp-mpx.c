@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: nill; c-basic-offset: 8 -*- */
 /*
- * Copyright (C) 2003 Imendio HB
+ * Copyright (C) 2003-2004 Imendio HB
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -21,30 +21,12 @@
 #include <config.h>
 #include <string.h>
 #include <gmodule.h>
-#include <gsf/gsf.h>
-#include <gsf/gsf-input.h>
 #include "mrp-file-module.h"
 #include "mrp-private.h"
 
-void            init             (MrpFileModule   *module,
-				  MrpApplication  *application);
+void init (MrpFileModule  *module,
+	   MrpApplication *application);
 
-static gboolean 
-mpx_read (MrpFileReader  *reader, 
-	  GsfInput       *input, 
-	  MrpProject     *project,
-	  GError        **error)
-{
-	gboolean ret;
-
-	g_return_val_if_fail (GSF_IS_INPUT (input), FALSE);
-
-	/*something = gsf_someting_parser_context (input); */
-
-	ret = TRUE;
-
-	return ret;
-}
 
 static gboolean 
 mpx_read_string (MrpFileReader  *reader, 
@@ -70,7 +52,6 @@ init (MrpFileModule *module, MrpApplication *application)
         reader->module = module;
         reader->priv   = NULL;
 	
-        reader->read        = mpx_read;
 	reader->read_string = mpx_read_string;
 
         imrp_application_register_reader (application, reader);

@@ -1,3 +1,17 @@
+2004-08-09  Richard Hult  <richard@imendio.com>
+
+	* configure.in:
+	* libplanner/mrp-file-module.c: (mrp_file_module_load_all),
+	(mrp_file_reader_read_string):
+	* libplanner/mrp-file-module.h:
+	* libplanner/mrp-mpx.c: (init):
+	* libplanner/mrp-project.c: (mrp_project_load):
+	* libplanner/mrp-xml.c: (init): Remove gsf usage since we didn't
+	really use it for anything but opening an XML file and returning a
+	doc pointer.
+
+	* libplanner/mrp-error.h: Include glib.h.
+
 2004-08-09  Mikael Hallendal  <micke@imendio.com>
 
 	* src/planner-sql-plugin.c: Update to new PlannerConf api.
