@@ -1436,6 +1436,21 @@ mrp_project_get_uri (MrpProject *project)
 }
 
 /**
+ * mrp_project_set_uri:
+ * @project: an #MrpProject
+ * 
+ * Sets the URI on @project.
+ **/
+void    
+mrp_project_set_uri (MrpProject *project, const gchar *uri)
+{
+	g_return_if_fail (MRP_IS_PROJECT (project));
+
+	g_free (project->priv->uri);
+	project->priv->uri = g_strdup (uri);
+}
+
+/**
  * mrp_project_get_project_start:
  * @project: an #MrpProject
  * 

@@ -7,11 +7,12 @@ INCLUDES = \
 	-DSYSCONFDIR=\""$(sysconfdir)"\"			\
 	-DLIBDIR=\""$(libdir)"\"				\
 	-DDATADIR=\""$(datadir)"\"				\
-	-DGNOMELOCALEDIR=\""$(datadir)/locale"\"		\
 	-DIMAGEDIR=\""$(datadir)/pixmaps/planner"\"		\
 	-DGLADEDIR=\""$(datadir)/planner/glade"\"		\
 	-DVIEWDIR=\""$(libdir)/planner/views"\"			\
-	-DPLUGINDIR=\""$(libdir)/planner/plugins"\"
+	-DPLUGINDIR=\""$(libdir)/planner/plugins"\"		\
+	-DSTYLESHEETDIR=\""$(datadir)/planner/stylesheets"\"	\
+	-DDTDDIR=\""$(datadir)/planner/dtd"\"
 
 if HAVE_PYTHON_PLUGIN
 INCLUDES += $(PYTHON_INCLUDES)
@@ -221,6 +222,7 @@ endif
 plugin_LTLIBRARIES = \
 	libhtml-plugin.la		\
 	libxmlplanner-plugin.la		\
+	libmsp-plugin.la		\
 	$(sql_plugin)			\
 	$(python_plugin)		\
 	$(eds_plugin)
@@ -230,6 +232,9 @@ libhtml_plugin_la_LDFLAGS = -avoid-version -module
 
 libxmlplanner_plugin_la_SOURCES = planner-xml-planner-plugin.c
 libxmlplanner_plugin_la_LDFLAGS = -avoid-version -module
+
+libmsp_plugin_la_SOURCES = planner-msp-plugin.c
+libmsp_plugin_la_LDFLAGS = -avoid-version -module
 
 planner-marshal.h: Makefile.am planner-marshal.list
 	(cd $(srcdir) && \

@@ -1721,19 +1721,25 @@ planner_project_properties_new (PlannerWindow *window)
 			  G_CALLBACK (mpp_start_focus_out_event_cb),
 			  dialog);
 	
-	gtk_entry_set_text (GTK_ENTRY (data->name_entry), name);
+	if (name) {
+		gtk_entry_set_text (GTK_ENTRY (data->name_entry), name);
+	}
 	g_signal_connect (data->name_entry,
 			  "focus_out_event",
 			  G_CALLBACK (mpp_name_focus_out_event_cb),
 			  dialog);
 
-	gtk_entry_set_text (GTK_ENTRY (data->org_entry), org);
+	if (org) {
+		gtk_entry_set_text (GTK_ENTRY (data->org_entry), org);
+	}
 	g_signal_connect (data->org_entry,
 			  "focus_out_event",
 			  G_CALLBACK (mpp_org_focus_out_event_cb),
 			  dialog);
-	
-	gtk_entry_set_text (GTK_ENTRY (data->manager_entry), manager);
+
+	if (manager) {
+		gtk_entry_set_text (GTK_ENTRY (data->manager_entry), manager);
+	}
 	g_signal_connect (data->manager_entry,
 			  "focus_out_event",
 			  G_CALLBACK (mpp_manager_focus_out_event_cb),

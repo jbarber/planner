@@ -1058,12 +1058,13 @@ old_xml_read_project (MrpParser *parser)
 		for (groups = child->children; groups; groups = groups->next) {
 			old_xml_read_group (parser, groups); 
 		}
+
+		/* Gah, why underscore?! */
+		gid = old_xml_get_int (child, "default_group");
+		parser->default_group = g_hash_table_lookup (parser->group_hash,
+							     GINT_TO_POINTER (gid));
 	}
 	
-	gid = old_xml_get_int (child, "default_group");
-        parser->default_group = g_hash_table_lookup (parser->group_hash,
-						     GINT_TO_POINTER (gid));
-
 	/* Load resources. */
  	child = old_xml_search_child (parser->doc->children, "resources"); 
 	if (child != NULL) {

@@ -1,11 +1,12 @@
 stylesheetdir = $(datadir)/planner/stylesheets
 
 stylesheet_DATA = \
-	planner2html.xsl			\
-	html1_css.xsl				\
-        html1_gantt.xsl				\
-        html1_resources.xsl			\
-        html1_tasks.xsl				\
-	planner2plannerv011.xsl
+	planner2html.xsl		\
+	html1_css.xsl			\
+        html1_gantt.xsl			\
+        html1_resources.xsl		\
+        html1_tasks.xsl			\
+	planner2plannerv011.xsl		\
+	msp2planner.xsl
 
 EXTRA_DIST = $(stylesheet_DATA)

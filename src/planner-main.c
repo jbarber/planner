@@ -95,13 +95,15 @@ main (int argc, char **argv)
 		i = 0;
 		while (args[i]) {
 			if (g_str_has_prefix (args[i], "file:")) {
-				planner_window_open_in_existing_or_new (PLANNER_WINDOW (main_window), args[i]);
+				planner_window_open_in_existing_or_new (
+					PLANNER_WINDOW (main_window), args[i], FALSE);
 			} else {
 				gchar *uri;
 
 				uri = g_filename_to_uri (args[i], NULL, NULL);
 				if (uri) {
-					planner_window_open_in_existing_or_new (PLANNER_WINDOW (main_window), uri);
+					planner_window_open_in_existing_or_new (
+						PLANNER_WINDOW (main_window), uri, FALSE);
 					g_free (uri);
 				}
 			}

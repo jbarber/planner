@@ -428,7 +428,7 @@ planner_window_open_recent_cb (GtkAction     *action,
 	item = egg_recent_view_uimanager_get_item (window->priv->recent_view, action);
 	uri = egg_recent_item_peek_uri (item);
 
-	planner_window_open_in_existing_or_new (window, uri);
+	planner_window_open_in_existing_or_new (window, uri, FALSE);
 }
 
 static void
@@ -454,7 +454,6 @@ window_populate (PlannerWindow *window)
 	gint                  view_num;
 	GtkRadioActionEntry  *r_entries;
 	gchar                *xml_string_tmp, *xml_string;
-	GError               *error = NULL;
 	gchar                *str;
 	const gchar          *xml_string_full =
 		"<ui>"
@@ -495,13 +494,9 @@ window_populate (PlannerWindow *window)
 	gtk_window_add_accel_group (GTK_WINDOW (window),
 				    gtk_ui_manager_get_accel_group (priv->ui_manager));
 
-	if (!gtk_ui_manager_add_ui_from_file (priv->ui_manager,
-					      DATADIR "/planner/ui/main-window.ui",
-					      &error)) {
-		g_message ("Building menus failed: %s", error->message);
-		g_message ("Couldn't load: %s",DATADIR"/planner/ui/main-window.ui");
-		g_error_free (error);
-	}
+	gtk_ui_manager_add_ui_from_file (priv->ui_manager,
+					 DATADIR "/planner/ui/main-window.ui",
+					 NULL);
 
 	g_object_set (gtk_action_group_get_action (priv->actions, "EditUndo"),
 		      "sensitive", FALSE, 
@@ -588,11 +583,9 @@ window_populate (PlannerWindow *window)
 					    window);
 
 	xml_string_tmp = g_strdup_printf (xml_string_full, xml_string);
-	if (!gtk_ui_manager_add_ui_from_string (priv->ui_manager, xml_string_tmp, -1, &error)) {
-		g_error_free (error);
-	}
-	g_free(xml_string);
-	g_free(xml_string_tmp);
+	gtk_ui_manager_add_ui_from_string (priv->ui_manager, xml_string_tmp, -1, NULL);
+	g_free (xml_string);
+	g_free (xml_string_tmp);
 	
 	gtk_ui_manager_ensure_update (priv->ui_manager);
 
@@ -785,7 +778,7 @@ window_open_cb (GtkAction *action,
 		}
 		
 		for (l = uris; l; l = l->next) {
-			planner_window_open_in_existing_or_new (window, l->data);
+			planner_window_open_in_existing_or_new (window, l->data, FALSE);
 		}
 
 		g_slist_foreach (uris, (GFunc) g_free, NULL);
@@ -1284,7 +1277,7 @@ window_drag_data_received_cb (GtkWidget        *widget,
 
 	i = 0;
 	while (uris[i]) {
-		planner_window_open_in_existing_or_new (window, uris[i]);
+		planner_window_open_in_existing_or_new (window, uris[i], FALSE);
 		i++;
 	}
 	
@@ -1699,7 +1692,9 @@ planner_window_new (PlannerApplication *application)
 }
 
 gboolean
-planner_window_open (PlannerWindow *window, const gchar *uri)
+planner_window_open (PlannerWindow *window,
+		     const gchar   *uri,
+		     gboolean       internal)
 {
 	PlannerWindowPriv *priv;
 	GError           *error = NULL;
@@ -1726,19 +1721,23 @@ planner_window_open (PlannerWindow *window, const gchar *uri)
 
 	planner_window_check_version (window);
 
-	/* Add the file to the recent list */
-	item = egg_recent_item_new_from_uri (uri);
-	egg_recent_item_set_mime_type (item, "application/x-planner");
-	egg_recent_model_add_full (planner_application_get_recent_model (priv->application), item);
-	egg_recent_item_unref (item);
-
-	window_update_title (window);
+	if (!internal) {
+		/* Add the file to the recent list */
+		item = egg_recent_item_new_from_uri (uri);
+		egg_recent_item_set_mime_type (item, "application/x-planner");
+		egg_recent_model_add_full (planner_application_get_recent_model (priv->application), item);
+		egg_recent_item_unref (item);
+		
+		window_update_title (window);
+	}
 	
 	return TRUE;
 }
 
 gboolean
-planner_window_open_in_existing_or_new (PlannerWindow *window, const gchar *uri)
+planner_window_open_in_existing_or_new (PlannerWindow *window,
+					const gchar   *uri,
+					gboolean       internal)
 {
 	PlannerWindowPriv *priv;
 	GtkWidget         *new_window;
@@ -1753,12 +1752,12 @@ planner_window_open_in_existing_or_new (PlannerWindow *window, const gchar *uri)
 	}
 	
 	if (mrp_project_is_empty (priv->project)) {
-		ret = planner_window_open (window, filename);
+		ret = planner_window_open (window, filename, internal);
 		g_free (filename);
 		return ret;
 	} else {
 		new_window = planner_application_new_window (priv->application);
-		if (planner_window_open (PLANNER_WINDOW (new_window), filename)) {
+		if (planner_window_open (PLANNER_WINDOW (new_window), filename, internal)) {
 			g_free (filename);
 			gtk_widget_show_all (new_window);
 			return TRUE;

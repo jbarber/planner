@@ -57,9 +57,11 @@ struct _PlannerWindowClass
 GType                   planner_window_get_type                (void) G_GNUC_CONST;
 GtkWidget *             planner_window_new                     (PlannerApplication *app);
 gboolean                planner_window_open                    (PlannerWindow      *window,
-								const gchar        *uri);
+								const gchar        *uri,
+								gboolean            internal);
 gboolean                planner_window_open_in_existing_or_new (PlannerWindow      *window,
-								const gchar        *uri);
+								const gchar        *uri,
+								gboolean            internal);
 GtkUIManager *          planner_window_get_ui_manager          (PlannerWindow      *window);
 MrpProject *            planner_window_get_project             (PlannerWindow      *window);
 PlannerApplication *    planner_window_get_application         (PlannerWindow      *window);

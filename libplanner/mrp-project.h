@@ -84,6 +84,8 @@ gboolean         mrp_project_load_from_xml            (MrpProject           *pro
 						       GError              **error);
 void             mrp_project_close                    (MrpProject           *project);
 const gchar     *mrp_project_get_uri                  (MrpProject           *project);
+void             mrp_project_set_uri                  (MrpProject           *project,
+						       const gchar          *uri);
 MrpResource *    mrp_project_get_resource_by_name     (MrpProject           *project,
 						       const gchar          *name);
 GList           *mrp_project_get_resources            (MrpProject           *project);
