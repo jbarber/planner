@@ -35,12 +35,12 @@
       <placeholder name="View specific actions placeholder">
         <menuitem name="InsertTask"          verb=""   accel="*Control*i" />
         <menuitem name="InsertTasks"         verb=""/>
-	<menuitem name="RemoveTask"          verb=""/>
+	<menuitem name="RemoveTask"          verb=""   accel="*Control*d" />
 	<menuitem name="LinkTasks"          verb=""/>
         <menuitem name="UnlinkTask"          verb=""/>
         <separator/>
-        <menuitem name="IndentTask"          verb=""/>
-        <menuitem name="UnindentTask"        verb=""/>
+        <menuitem name="IndentTask"          verb=""   accel="*Shift**Control*i" />
+        <menuitem name="UnindentTask"        verb=""   accel="*Shift**Control*u" />
         <separator/>
 	<menuitem name="MoveTaskUp"          verb=""/>
 	<menuitem name="MoveTaskDown"        verb=""/>
