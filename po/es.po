@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-02-01 14:50+0100\n"
-"PO-Revision-Date: 2004-02-01 14:51+0100\n"
+"POT-Creation-Date: 2004-02-08 23:26+0100\n"
+"PO-Revision-Date: 2004-02-08 23:27+0100\n"
 "Last-Translator: Francisco Javier F. Serrador <serrador@cvs.gnome.org>\n"
 "Language-Team: Spanish <traductores@es.gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -363,7 +363,7 @@ msgstr "_Terminado:"
 msgid "Predecessors"
 msgstr "Predecesores"
 
-#: data/glade/task-dialog.glade.h:9 src/planner-resource-view.c:391
+#: data/glade/task-dialog.glade.h:9 src/planner-resource-view.c:388
 msgid "Resources"
 msgstr "Recursos"
 
@@ -799,7 +799,7 @@ msgstr "No se pudo crear el árbol XML"
 msgid "Could not write XML file"
 msgstr "No se pudo escribir el archivo XML"
 
-#: libplanner/mrp-project.c:440 src/planner-group-dialog.c:491
+#: libplanner/mrp-project.c:440 src/planner-group-dialog.c:736
 msgid "Default"
 msgstr "Predeterminado"
 
@@ -810,7 +810,8 @@ msgstr "No se pudo encontrar un módulo para cargar «%s»"
 
 #: libplanner/mrp-project.c:769 libplanner/mrp-project.c:1033
 msgid "No support for SQL storage built into this version of Planner."
-msgstr "No hay soporte para almacenes SQL compilado en esta versión de Planner."
+msgstr ""
+"No hay soporte para almacenes SQL compilado en esta versión de Planner."
 
 #: libplanner/mrp-project.c:806
 msgid "Invalid URI."
@@ -823,7 +824,8 @@ msgstr "No es posible encontrar el escritor de archivos identificado por «%s»"
 
 #: libplanner/mrp-project.c:990
 msgid "Couldn't find a suitable file module for loading project"
-msgstr "No se pudo encontrar un módulo de archivo adecuado para cargar el proyecto"
+msgstr ""
+"No se pudo encontrar un módulo de archivo adecuado para cargar el proyecto"
 
 #: libplanner/mrp-property.c:365
 msgid "Text"
@@ -903,14 +905,16 @@ msgid "Invalid SQL URI (no database name specified)."
 msgstr "URI SQL inválida (no hay especificado un nombre de base de datos)."
 
 #: libplanner/mrp-task.c:1016
-msgid "Could not add a predecessor relation, because the tasks are already related."
+msgid ""
+"Could not add a predecessor relation, because the tasks are already related."
 msgstr ""
 "No se puede añadir una relación predecesora, debido a que las tareas ya se "
 "encuentran relacionadas."
 
 #: libplanner/mrp-task-manager.c:1769
 msgid "Can not add a predecessor relation between a task and its ancestor."
-msgstr "No se puede añadir una relación predecesora entre una tarea y sus ancestros."
+msgstr ""
+"No se puede añadir una relación predecesora entre una tarea y sus ancestros."
 
 #: libplanner/mrp-task-manager.c:1778 libplanner/mrp-task-manager.c:1786
 msgid "Can not add a predecessor, because it would result in a loop."
@@ -1061,16 +1065,16 @@ msgstr "%Y %b %d"
 msgid "Project start"
 msgstr "Comienzo del proyecto:"
 
-#: src/planner-gantt-print.c:190 src/planner-group-dialog.c:467
-#: src/planner-property-dialog.c:378 src/planner-resource-view.c:1152
+#: src/planner-gantt-print.c:190 src/planner-group-dialog.c:712
+#: src/planner-property-dialog.c:378 src/planner-resource-view.c:1147
 #: src/planner-task-dialog.c:1311 src/planner-task-dialog.c:1397
 #: src/planner-task-view.c:261
 msgid "Name"
 msgstr "Nombre"
 
 #: src/planner-gantt-print.c:198 src/planner-resource-dialog.c:1101
-#: src/planner-resource-view.c:689 src/planner-resource-view.c:705
-#: src/planner-resource-view.c:1521 src/planner-task-view.c:264
+#: src/planner-resource-view.c:686 src/planner-resource-view.c:702
+#: src/planner-resource-view.c:1516 src/planner-task-view.c:264
 msgid "Work"
 msgstr "Obra"
 
@@ -1115,21 +1119,31 @@ msgstr ""
 msgid ""
 "\n"
 "Work"
-msgstr ""
-"\n"
-"Obra"
+msgstr "\nTrabajo"
 
-#: src/planner-group-dialog.c:473
+#: src/planner-group-dialog.c:284
+msgid "Insert group"
+msgstr "Insertar grupo"
+
+#: src/planner-group-dialog.c:398
+msgid "Remove group"
+msgstr "Eliminar grupo"
+
+#: src/planner-group-dialog.c:540
+msgid "Edit group property"
+msgstr "Editar propiedad del grupo"
+
+#: src/planner-group-dialog.c:718
 msgid "Manager name"
 msgstr "Nombre del jefe"
 
-#: src/planner-group-dialog.c:479
+#: src/planner-group-dialog.c:724
 msgid "Manager phone"
-msgstr "Teléfono del encargado"
+msgstr "Teléfono del jefe"
 
-#: src/planner-group-dialog.c:485
+#: src/planner-group-dialog.c:730
 msgid "Manager email"
-msgstr "Email del encargado"
+msgstr "Email del jefe"
 
 #: src/planner-html-plugin.c:138
 #, c-format
@@ -1239,14 +1253,14 @@ msgstr "No se pudo crear el diálogo de propiedades."
 msgid "Label"
 msgstr "Etiqueta"
 
-#: src/planner-property-dialog.c:411 src/planner-resource-view.c:1173
+#: src/planner-property-dialog.c:411 src/planner-resource-view.c:1168
 #: src/planner-task-dialog.c:1429
 msgid "Type"
 msgstr "Tipo"
 
 #. Put "no group" at the top.
 #: src/planner-resource-dialog.c:248 src/planner-resource-input-dialog.c:96
-#: src/planner-resource-view.c:1755
+#: src/planner-resource-view.c:1727
 msgid "(None)"
 msgstr "(Nada)"
 
@@ -1269,8 +1283,8 @@ msgstr "Ninguno (usar los predeterminados del proyecto)"
 msgid "Edit resource properties"
 msgstr "Editar propiedades del recurso"
 
-#: src/planner-resource-dialog.c:1102 src/planner-resource-view.c:692
-#: src/planner-resource-view.c:706 src/planner-resource-view.c:1522
+#: src/planner-resource-dialog.c:1102 src/planner-resource-view.c:689
+#: src/planner-resource-view.c:703 src/planner-resource-view.c:1517
 msgid "Material"
 msgstr "Material"
 
@@ -1286,35 +1300,35 @@ msgstr "/_Eliminar recurso"
 msgid "/_Edit resource..."
 msgstr "/_Editar recurso..."
 
-#: src/planner-resource-view.c:399
+#: src/planner-resource-view.c:396
 msgid "_Resources"
 msgstr "_Recursos"
 
-#: src/planner-resource-view.c:792
+#: src/planner-resource-view.c:789
 msgid "Insert resource"
 msgstr "Introducir recurso"
 
-#: src/planner-resource-view.c:933
+#: src/planner-resource-view.c:929
 msgid "Remove resource"
 msgstr "Eliminar recurso"
 
-#: src/planner-resource-view.c:1035
+#: src/planner-resource-view.c:1030
 msgid "Edit custom resource properties"
 msgstr "Editar propiedades personalizadas del recurso"
 
-#: src/planner-resource-view.c:1197
+#: src/planner-resource-view.c:1192
 msgid "Group"
 msgstr "Grupo"
 
-#: src/planner-resource-view.c:1226
+#: src/planner-resource-view.c:1221
 msgid "Email"
 msgstr "Correo electrónico"
 
-#: src/planner-resource-view.c:1291
+#: src/planner-resource-view.c:1286
 msgid "Edit resource property"
 msgstr "Editar propiedad del recurso"
 
-#: src/planner-resource-view.c:1353
+#: src/planner-resource-view.c:1348
 msgid "Edit resource custom property"
 msgstr "Editar propiedad personalizada del recurso"
 
@@ -1395,7 +1409,8 @@ msgstr "Empezar para finalizar (EF)"
 
 #: src/planner-task-dialog.c:798
 msgid "Can't add new predecessor. No task selected!"
-msgstr "No se puede añadir un predecesor nuevo. No ha seleccionado ninguna tarea."
+msgstr ""
+"No se puede añadir un predecesor nuevo. No ha seleccionado ninguna tarea."
 
 #: src/planner-task-dialog.c:1330
 msgid "Assigned"
@@ -1561,12 +1576,14 @@ msgstr "La página web de Planner"
 
 #: src/planner-window.c:1223
 msgid "If you don't save, changes made the last minute will be discarded."
-msgstr "Si no guarda, los cambios hechos en el último minuto serán descartados."
+msgstr ""
+"Si no guarda, los cambios hechos en el último minuto serán descartados."
 
 #: src/planner-window.c:1228
 #, c-format
 msgid "If you don't save, changes made the last %d minutes will be discarded."
-msgstr "Si no guarda, los cambios hechos en los últimos %d minutos serán descartados."
+msgstr ""
+"Si no guarda, los cambios hechos en los últimos %d minutos serán descartados."
 
 #: src/planner-window.c:1233
 msgid "If you don't save, changes made the last hour will be discarded."
@@ -1575,7 +1592,8 @@ msgstr "Si no guarda, los cambios hechos en la última hora serán descartados."
 #: src/planner-window.c:1238
 #, c-format
 msgid "If you don't save, changes made the last %d hours will be discarded."
-msgstr "Si no guarda, los cambios hechos en las últimas %d horas serán descartados."
+msgstr ""
+"Si no guarda, los cambios hechos en las últimas %d horas serán descartados."
 
 #: src/planner-window.c:1245
 #, c-format
@@ -1865,4 +1883,3 @@ msgstr ""
 
 #~ msgid "Up"
 #~ msgstr "Arriba"
-
