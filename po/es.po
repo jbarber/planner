@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-07-05 22:48+0200\n"
-"PO-Revision-Date: 2004-07-05 22:54+0200\n"
+"POT-Creation-Date: 2004-07-13 21:40+0200\n"
+"PO-Revision-Date: 2004-07-13 21:42+0200\n"
 "Last-Translator: Francisco Javier F. Serrador <serrador@cvs.gnome.org>\n"
 "Language-Team: Spanish <traductores@es.gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -795,7 +795,7 @@ msgstr "_Salir"
 msgid "_Redo"
 msgstr "_Rehacer"
 
-#: data/ui/main-window.ui.h:49 src/planner-window.c:1247
+#: data/ui/main-window.ui.h:49 src/planner-window.c:1237
 msgid "_Save"
 msgstr "_Guardar"
 
@@ -1047,7 +1047,7 @@ msgstr "Ha fallado la exportación a HTML"
 
 #: libplanner/mrp-xsl.c:166
 msgid "Export to Planner pre-0.12 format failed"
-msgstr "Ha fallado la exportacion al formato Planner pre-0.12"
+msgstr "Ha fallado la exportación al formato Planner pre-0.12"
 
 #: src/planner-application.c:125
 msgid "Edit"
@@ -1218,7 +1218,7 @@ msgid "Work"
 msgstr "Obra"
 
 #: src/planner-gantt-print.c:541 src/planner-gantt-row.c:685
-#: src/planner-window.c:1622
+#: src/planner-window.c:1614
 msgid "Unnamed"
 msgstr "Sin nombre"
 
@@ -1299,7 +1299,7 @@ msgstr "Teléfono del encargado"
 
 #: src/planner-group-dialog.c:834
 msgid "Manager email"
-msgstr "Email del encargado"
+msgstr "Correo-e del encargado"
 
 #: src/planner-html-plugin.c:138
 #, c-format
@@ -1310,7 +1310,7 @@ msgstr ""
 "«%s» es un directorio.\n"
 "Introduzca un nombre de archivo e intente de nuevo."
 
-#: src/planner-html-plugin.c:148 src/planner-window.c:1378
+#: src/planner-html-plugin.c:148 src/planner-window.c:1369
 #: src/planner-xml-planner-plugin.c:133
 #, c-format
 msgid "File \"%s\" exists, do you want to overwrite it?"
@@ -1448,7 +1448,7 @@ msgstr "Quitar propiedad"
 msgid "Edit property label"
 msgstr "Editar etiqueta de propiedad"
 
-#: src/planner-python-plugin.c:164 src/planner-window.c:639
+#: src/planner-python-plugin.c:164 src/planner-window.c:627
 msgid "Open a file"
 msgstr "Abrir un archivo"
 
@@ -1880,55 +1880,55 @@ msgstr "No se pudo abrir la vista del archivo la vista del complemento «%s»\n"
 #. I18n: Translators, list your names here, newline separated if there
 #. * are more than one, to appear in the about box.
 #.
-#: src/planner-window.c:1056 src/planner-window.c:1063
+#: src/planner-window.c:1046 src/planner-window.c:1053
 msgid "translator_credits"
-msgstr "Francisco J. Fernandez "
+msgstr "Francisco J. Fernández "
 
 #. "Copyright \xc2\xa9"
-#: src/planner-window.c:1060
+#: src/planner-window.c:1050
 msgid "A Project Management application for the GNOME desktop"
 msgstr "Una aplicación de gestión de proyectos para el escritorio GNOME"
 
-#: src/planner-window.c:1070
+#: src/planner-window.c:1060
 msgid "The Planner Homepage"
 msgstr "La página web de Planner"
 
-#: src/planner-window.c:1188
+#: src/planner-window.c:1178
 msgid "If you don't save, changes made the last minute will be discarded."
 msgstr "Si no guarda, los cambios hechos en el último minuto serán descartados."
 
-#: src/planner-window.c:1193
+#: src/planner-window.c:1183
 #, c-format
 msgid "If you don't save, changes made the last %d minutes will be discarded."
 msgstr "Si no guarda, los cambios hechos en los últimos %d minutos serán descartados."
 
-#: src/planner-window.c:1198
+#: src/planner-window.c:1188
 msgid "If you don't save, changes made the last hour will be discarded."
 msgstr "Si no guarda, los cambios hechos en la última hora serán descartados."
 
-#: src/planner-window.c:1203
+#: src/planner-window.c:1193
 #, c-format
 msgid "If you don't save, changes made the last %d hours will be discarded."
 msgstr "Si no guarda, los cambios hechos en las últimas %d horas serán descartados."
 
-#: src/planner-window.c:1210
+#: src/planner-window.c:1200
 #, c-format
 msgid "Save changes to document '%s' before closing?"
 msgstr "¿Desea guardar los cambios del documento «%s» antes de cerrar?"
 
-#: src/planner-window.c:1234
+#: src/planner-window.c:1224
 msgid "C_lose without saving"
 msgstr "C_errar sin guardar"
 
-#: src/planner-window.c:1240
+#: src/planner-window.c:1230
 msgid "_Cancel"
 msgstr "_Cancelar"
 
-#: src/planner-window.c:1342
+#: src/planner-window.c:1332
 msgid "Save a file"
 msgstr "Guardar un archivo"
 
-#: src/planner-window.c:1579
+#: src/planner-window.c:1571
 msgid ""
 "You have opened a file that was saved with an old version of Planner.\n"
 "\n"
@@ -1948,7 +1948,7 @@ msgstr ""
 "Cuando cargue archivos antiguos, todas las tareas usarán el impedimento "
 "«Debe empezar en», debido a que la versión antigua no soportaba "
 "completamente la re-planificación automática. Para aprovechar las ventajas "
-"de esta característica nueva debería añadir relaciones de predecesión entre "
+"de esta característica nueva debería añadir relaciones de precedencia entre "
 "tareas que sean dependientes de otras.\n"
 "\n"
 "Puede añadir una relación de predecesión pulsando en el predecesor y "
@@ -1958,7 +1958,7 @@ msgstr ""
 "el elemento del menú «Eliminar todos los impedimentos» en el menú «Editar»."
 
 #. Hack.
-#: src/planner-window.c:1614
+#: src/planner-window.c:1606
 msgid "Unnamed database project"
 msgstr "Base de datos del proyecto sin nombre"
 
