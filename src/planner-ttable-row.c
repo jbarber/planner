@@ -2424,14 +2424,3 @@ gantt_row_get_resource_by_index (PlannerGanttRow *row,
 	return TRUE;
 }
 */
-
-
-
-
-
-
-
-
-
-
-
