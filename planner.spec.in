@@ -80,13 +80,13 @@ rm -rf "%{buildroot}"
 %post
 scrollkeeper-update
 if (update-mime-database -v &> /dev/null); then
-  update-mime-database "%{_datadir}/mime"
+  update-mime-database "%{_datadir}/mime" > /dev/null
 fi
 
 %postun
 scrollkeeper-update
 if (update-mime-database -v &> /dev/null); then
-  update-mime-database "%{_datadir}/mime"
+  update-mime-database "%{_datadir}/mime" > /dev/null
 fi
 
 %files
@@ -111,6 +111,7 @@ fi
 %{_includedir}/planner-1.0
 
 %exclude %{_libdir}/planner/file-modules/libmrp-xsl*
+%exclude %{_libdir}/planner/storage-modules/libstorage-sql*
 %exclude %{_libdir}/planner/plugins/libsql-plugin*
 %exclude %{_datadir}/planner/glade/sql.glade
 %exclude %{_datadir}/planner/ui/sql-plugin.ui
@@ -131,6 +132,7 @@ Database support for Planner, this plugin can be used to store projects in a Pos
 %files database
 %defattr(-,root,root)
 %{_libdir}/planner/file-modules/libmrp-xsl*
+%{_libdir}/planner/storage-modules/libstorage-sql*
 %{_libdir}/planner/plugins/libsql-plugin*
 %{_datadir}/planner/glade/sql.glade
 %{_datadir}/planner/ui/sql-plugin.ui
