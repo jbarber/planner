@@ -1389,9 +1389,7 @@ task_tree_name_data_func (GtkTreeViewColumn *tree_column,
 			    -1);
 
 	if (tree->priv->highlight_critical) {
-		g_object_get (task,
-			      "critical", &critical,
-			      NULL);
+		critical = mrp_task_get_critical (task);
 	} else {
 		critical = FALSE;
 	}
@@ -1562,7 +1560,7 @@ task_tree_work_data_func (GtkTreeViewColumn *tree_column,
 			    COL_EDITABLE, &editable,
 			    -1);
 
-	g_object_get (task, "type", &type, NULL);
+	type = mrp_task_get_task_type (task);
 
 	g_object_set (cell, 
 		      "weight", weight,
@@ -1726,10 +1724,7 @@ task_tree_start_show_popup (PlannerCellRendererDate *cell,
 	cell->type = constraint->type;
 	
 	if (cell->type == MRP_CONSTRAINT_ASAP) {
-		g_object_get (task,
-			      "start", &start,
-			      NULL);
-		
+		start = mrp_task_get_start (task);
 		cell->time = start;
 	} else {
 		cell->time = constraint->time;

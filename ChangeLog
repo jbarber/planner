@@ -1,3 +1,19 @@
+2004-06-17  Richard Hult,,,  <richard@imendio.com>
+
+	* src/planner-gantt-model.c: (gantt_model_task_inserted_cb),
+	(traverse_remove_subtree), (gantt_model_remove_subtree),
+	(gantt_model_task_removed_cb), (gantt_model_reattach_subtasks),
+	(gantt_model_task_moved_cb), (gantt_model_task_notify_cb),
+	(traverse_insert_task_into_hash), (planner_gantt_model_new),
+	(gantt_model_get_iter), (gantt_model_get_value), (dump_children),
+	(value_cache_get_wbs), (value_cache_free), (value_cache_get),
+	(value_cache_clear), (value_cache_set_wbs):
+	* src/planner-task-tree.c: (task_tree_name_data_func),
+	(task_tree_work_data_func), (task_tree_start_show_popup): Use
+	accessors in even more places. Add a caching scheme and use it to
+	cache the WBS string instead of generating it lots and lots of
+	times.
+
 2004-06-16  Richard Hult  <richard@imendio.com>
 
 	* src/planner-gantt-row.c: Cache the frame gc and colors.

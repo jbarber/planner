@@ -44,23 +44,33 @@ struct _PlannerGanttModelPriv {
 	GNode      *tree;
 };
 
-static void      gantt_model_init             (PlannerGanttModel           *model);
-static void      gantt_model_class_init       (PlannerGanttModelClass      *class);
+typedef struct {
+	gchar *wbs;
+	gchar *start;
+	gchar *finish;
+	gchar *duration;
+	gchar *work;
+	gchar *cost;
+} ValueCache;
+
+static void      gantt_model_init             (PlannerGanttModel      *model);
+static void      gantt_model_class_init       (PlannerGanttModelClass *class);
 static void      gantt_model_tree_model_init  (GtkTreeModelIface      *iface);
-#ifdef DND
-static void      gantt_model_drag_source_init (GtkTreeDragSourceIface *iface);
-static void      gantt_model_drag_dest_init   (GtkTreeDragDestIface   *iface);
-#endif
 static gboolean  gantt_model_get_iter         (GtkTreeModel           *model,
 					       GtkTreeIter            *iter,
 					       GtkTreePath            *path);
 static void      gantt_model_task_notify_cb   (MrpTask                *task,
 					       GParamSpec             *pspec,
-					       PlannerGanttModel           *model);
-static GtkTreePath *
-gantt_model_get_path_from_node                (PlannerGanttModel           *model,
-					       GNode                  *node);
+					       PlannerGanttModel      *model);
+static GtkTreePath *gantt_model_get_path_from_node (PlannerGanttModel *model,
+						    GNode             *node);
 static void      dump_tree                    (GNode                  *node);
+
+static const gchar *value_cache_get_wbs (MrpTask *task);
+static ValueCache * value_cache_get     (MrpTask *task);
+static void         value_cache_clear   (MrpTask *task);
+static void         value_cache_set_wbs (MrpTask *task,
+					 gchar   *str);
 
 
 static GObjectClass *parent_class;
@@ -136,8 +146,8 @@ gantt_model_connect_to_task_signals (PlannerGanttModel *model, MrpTask *task)
 }
 
 static void
-gantt_model_task_inserted_cb (MrpProject   *project,
-			      MrpTask      *task,
+gantt_model_task_inserted_cb (MrpProject        *project,
+			      MrpTask           *task,
 			      PlannerGanttModel *model)
 {
 	GtkTreePath *path;
@@ -189,7 +199,7 @@ gantt_model_task_inserted_cb (MrpProject   *project,
 }
 
 static gboolean
-traverse_remove_subtree (GNode        *node,
+traverse_remove_subtree (GNode             *node,
 			 PlannerGanttModel *model)
 {
 	g_signal_handlers_disconnect_by_func (node->data,
@@ -203,7 +213,7 @@ traverse_remove_subtree (GNode        *node,
 
 static void
 gantt_model_remove_subtree (PlannerGanttModel *model,
-			    GNode        *node)
+			    GNode             *node)
 {	
 	g_node_unlink (node);
 
@@ -218,8 +228,8 @@ gantt_model_remove_subtree (PlannerGanttModel *model,
 }
 
 static void
-gantt_model_task_removed_cb (MrpProject   *project,
-			     MrpTask      *task,
+gantt_model_task_removed_cb (MrpProject        *project,
+			     MrpTask           *task,
 			     PlannerGanttModel *model)
 {
 	GNode       *node;
@@ -279,12 +289,12 @@ gantt_model_reattach_subtasks (GtkTreeModel *tree_model,
 {
 	PlannerGanttModel     *model;
 	PlannerGanttModelPriv *priv;
-	MrpTask          *child;
-	GNode            *node;
-	GNode            *parent_node;
-	GtkTreePath      *path;
-	GtkTreeIter       iter;
-	gint              pos;
+	MrpTask               *child;
+	GNode                 *node;
+	GNode                 *parent_node;
+	GtkTreePath           *path;
+	GtkTreeIter            iter;
+	gint                   pos;
 
 	model = PLANNER_GANTT_MODEL (tree_model);
 	priv = model->priv;
@@ -353,8 +363,8 @@ gantt_model_unlink_subtree_recursively (GNode *node)
 }
 
 static void
-gantt_model_task_moved_cb (MrpProject   *project,
-			   MrpTask      *task,
+gantt_model_task_moved_cb (MrpProject        *project,
+			   MrpTask           *task,
 			   PlannerGanttModel *model)
 {
 	MrpTask     *parent;
@@ -424,8 +434,8 @@ gantt_model_task_moved_cb (MrpProject   *project,
 }
 
 static void
-gantt_model_task_notify_cb (MrpTask      *task,
-			    GParamSpec   *pspec,
+gantt_model_task_notify_cb (MrpTask           *task,
+			    GParamSpec        *pspec,
 			    PlannerGanttModel *model)
 {
 	GtkTreeModel *tree_model;
@@ -433,6 +443,8 @@ gantt_model_task_notify_cb (MrpTask      *task,
 	GtkTreeIter   iter;
 
 	tree_model = GTK_TREE_MODEL (model);
+
+	value_cache_clear (task);
 	
 	path = planner_gantt_model_get_path_from_task (model, task);
 	gtk_tree_model_get_iter (tree_model, &iter, path);
@@ -442,7 +454,7 @@ gantt_model_task_notify_cb (MrpTask      *task,
 }
 
 static gboolean
-traverse_insert_task_into_hash (GNode        *node,
+traverse_insert_task_into_hash (GNode             *node,
 				PlannerGanttModel *model)
 {
 	g_hash_table_insert (model->priv->task2node_hash,
@@ -489,7 +501,7 @@ planner_gantt_model_new (MrpProject *project)
 {
 	PlannerGanttModel     *model;
 	PlannerGanttModelPriv *priv;
-	GList            *tasks, *l;
+	GList                 *tasks, *l;
 	
 	model = PLANNER_GANTT_MODEL (g_object_new (PLANNER_TYPE_GANTT_MODEL, NULL));
 	priv = model->priv;
@@ -623,9 +635,9 @@ gantt_model_get_iter (GtkTreeModel *tree_model,
 		      GtkTreePath  *path)
 {
 	PlannerGanttModel *gantt_model;
-	GtkTreeIter   parent;
-	gint         *indices;
-	gint          depth, i;
+	GtkTreeIter        parent;
+	gint              *indices;
+	gint               depth, i;
 	
 	gantt_model = PLANNER_GANTT_MODEL (tree_model);
 	
@@ -747,7 +759,7 @@ gantt_model_get_value (GtkTreeModel *tree_model,
 		       GValue       *value)
 {
 	GNode       *node;
-	MrpTask     *task;
+	MrpTask     *task, *tmp_task;
 	MrpProject  *project;
 	gchar       *str;
 	mrptime      t1, t2;
@@ -757,41 +769,50 @@ gantt_model_get_value (GtkTreeModel *tree_model,
 	GString     *string;
 	const gchar *name;
 
+
+	ValueCache  *cache;
+	const gchar *cached_str;
+	
 	g_return_if_fail (iter != NULL);
 
 	node = iter->user_data;
 	task = node->data;
 
+	cache = g_object_get_data (G_OBJECT (task), "gantt-model-cache");
+	
 	switch (column) {
 	case COL_WBS:
-		/* FIXME: We really need to cache this, it's too expensive to do
-		 * in get_value.
-		 */
-		string = g_string_sized_new (24);
+		cached_str = value_cache_get_wbs (task);
+		if (!cached_str) {
+			string = g_string_sized_new (24);
 
-		pos = -1;
-		while (task) {
-			if (pos != -1) {
-				g_string_prepend_c (string, '.');
+			pos = -1;
+			tmp_task = task;
+			while (tmp_task) {
+				if (pos != -1) {
+					g_string_prepend_c (string, '.');
+				}
+				
+				pos = mrp_task_get_position (tmp_task) + 1;
+				
+				str = g_strdup_printf ("%d", pos);
+				g_string_prepend (string, str);
+				g_free (str);
+				
+				tmp_task = mrp_task_get_parent (tmp_task);
+				
+				/* Skip the root. */
+				if (mrp_task_get_parent (tmp_task) == NULL)
+					break;
 			}
 
-			pos = mrp_task_get_position (task) + 1;
-
-			str = g_strdup_printf ("%d", pos);
-			g_string_prepend (string, str);
-			g_free (str);
-			
-			task = mrp_task_get_parent (task);
-
-			/* Skip the root. */
-			if (mrp_task_get_parent (task) == NULL)
-				break;
+			str = g_string_free (string, FALSE);
+			value_cache_set_wbs (task, str);
+			cached_str = str;
 		}
 		
 		g_value_init (value, G_TYPE_STRING);
-		g_value_set_string (value, string->str);
-
-		g_string_free (string, TRUE);
+		g_value_set_string (value, cached_str);
 		break;
 
 	case COL_NAME:
@@ -851,7 +872,7 @@ gantt_model_get_value (GtkTreeModel *tree_model,
 		break;
 
 	case COL_EDITABLE:
-		g_object_get (task, "type", &type, NULL);
+		type = mrp_task_get_task_type (task);
 		
 		g_value_init (value, G_TYPE_BOOLEAN);
 		if (g_node_n_children (node) > 0) {
@@ -1365,17 +1386,18 @@ get_n_chars (gint n, gchar c)
 static void
 dump_children (GNode *node, gint depth)
 {
-	GNode   *child;
-	gchar   *padding = get_n_chars (2 * depth, ' ');
-	MrpTask *task;
-	gchar   *name;
+	GNode       *child;
+	gchar       *padding;
+	MrpTask     *task;
+	const gchar *name;
 
+	padding = get_n_chars (2 * depth, ' ');
+	
 	for (child = g_node_first_child (node); child; child = g_node_next_sibling (child)) {
 		task = (MrpTask *) child->data;
 
-		g_object_get (task, "name", &name, NULL);
+		name = mrp_task_get_name (task);
 		g_print ("%sName: %s\n", padding, name);
-		g_free (name);
 		
 		dump_children (child, depth + 1);
 	}
@@ -1401,4 +1423,163 @@ dump_tree (GNode *node)
 		dump_tree (NULL);
 	}
 }
+
+static const gchar *
+value_cache_get_wbs (MrpTask *task)
+{
+	ValueCache *cache;
+	
+	cache = g_object_get_data (G_OBJECT (task), "gantt-model-cache");
+	if (!cache) {
+		return NULL;
+	}
+
+	return cache->wbs;
+}
+/*
+static const gchar *
+value_cache_get_start (MrpTask *task)
+{
+	ValueCache *cache;
+	
+	cache = g_object_get_data (G_OBJECT (task), "gantt-model-cache");
+	if (!cache) {
+		return NULL;
+	}
+
+	return cache->start;
+}
+
+static const gchar *
+value_cache_get_finish (MrpTask *task)
+{
+	ValueCache *cache;
+	
+	cache = g_object_get_data (G_OBJECT (task), "gantt-model-cache");
+	if (!cache) {
+		return NULL;
+	}
+
+	return cache->finish;
+}
+
+static const gchar *
+value_cache_get_duration (MrpTask *task)
+{
+	ValueCache *cache;
+	
+	cache = g_object_get_data (G_OBJECT (task), "gantt-model-cache");
+	if (!cache) {
+		return NULL;
+	}
+
+	return cache->duration;
+}
+
+static const gchar *
+value_cache_get_work (MrpTask *task)
+{
+	ValueCache *cache;
+	
+	cache = g_object_get_data (G_OBJECT (task), "gantt-model-cache");
+	if (!cache) {
+		return NULL;
+	}
+
+	return cache->work;
+}
+*/
+static void
+value_cache_free (gpointer data)
+{
+	ValueCache *cache = data;
+
+	g_free (cache->wbs);
+	g_free (cache->start);
+	g_free (cache->finish);
+	g_free (cache->duration);
+	g_free (cache->work);
+
+	g_free (cache);
+}
+
+static ValueCache *
+value_cache_get (MrpTask *task)
+{
+	ValueCache *cache;
+	
+	cache = g_object_get_data (G_OBJECT (task), "gantt-model-cache");
+	if (!cache) {
+		cache = g_new0 (ValueCache, 1);
+		g_object_set_data_full (G_OBJECT (task),
+					"gantt-model-cache", cache,
+					value_cache_free);
+	}	
+
+	return cache;
+}
+
+static void
+value_cache_clear (MrpTask *task)
+{
+	g_object_set_data_full (G_OBJECT (task),
+				"gantt-model-cache", NULL, NULL);
+}
+
+static void
+value_cache_set_wbs (MrpTask *task, gchar *str)
+{
+	ValueCache *cache;
+	
+	cache = value_cache_get (task);
+
+	g_free (cache->wbs);	
+	cache->wbs = str;
+}
+/*
+static void
+value_cache_set_start (MrpTask *task, gchar *str)
+{
+	ValueCache *cache;
+	
+	cache = value_cache_get (task);
+
+	g_free (cache->start);	
+	cache->start = str;
+}
+
+static void
+value_cache_set_finish (MrpTask *task, gchar *str)
+{
+	ValueCache *cache;
+	
+	cache = value_cache_get (task);
+
+	g_free (cache->finish);	
+	cache->finish = str;
+}
+
+static void
+value_cache_set_duration (MrpTask *task, gchar *str)
+{
+	ValueCache *cache;
+	
+	cache = value_cache_get (task);
+
+	g_free (cache->duration);	
+	cache->duration = str;
+}
+
+static void
+value_cache_set_work (MrpTask *task, gchar *str)
+{
+	ValueCache *cache;
+	
+	cache = value_cache_get (task);
+
+	g_free (cache->work);	
+	cache->work = str;
+}
+*/
+
 
