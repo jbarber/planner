@@ -195,7 +195,6 @@ static TreeNode *  gantt_chart_tree_node_new            (void);
 static void        gantt_chart_tree_node_insert_path    (TreeNode           *node,
 							 GtkTreePath        *path,
 							 TreeNode           *new_node);
-static void        gantt_chart_tree_node_dump           (TreeNode           *node);
 static TreeNode *  gantt_chart_tree_node_at_path        (TreeNode           *root,
 							 GtkTreePath        *path);
 static void        gantt_chart_tree_node_remove         (PlannerGanttChart  *chart,
@@ -497,11 +496,9 @@ gantt_chart_realize (GtkWidget *widget)
 {
 	PlannerGanttChart     *chart;
 	PlannerGanttChartPriv *priv;
-	GdkColormap      *colormap;
-	GtkStyle         *style;
-	GtkWidget        *canvas;
-
-	g_return_if_fail (PLANNER_IS_GANTT_CHART (widget));
+	GdkColormap           *colormap;
+	GtkStyle              *style;
+	GtkWidget             *canvas;
 
 	chart = PLANNER_GANTT_CHART (widget);
 	priv = chart->priv;
@@ -527,8 +524,6 @@ gantt_chart_unrealize (GtkWidget *widget)
 {
 	PlannerGanttChart *chart;
 
-	g_return_if_fail (PLANNER_IS_GANTT_CHART (widget));
-
 	chart = PLANNER_GANTT_CHART (widget);
 
 	if (GTK_WIDGET_CLASS (parent_class)->unrealize) {
@@ -543,8 +538,6 @@ static void
 gantt_chart_map (GtkWidget *widget)
 {
 	PlannerGanttChart *chart;
-
-	g_return_if_fail (PLANNER_IS_GANTT_CHART (widget));
 
 	chart = PLANNER_GANTT_CHART (widget);
 
@@ -561,9 +554,7 @@ gantt_chart_size_allocate (GtkWidget     *widget,
 			   GtkAllocation *allocation)
 {
 	PlannerGanttChart *chart;
-	gboolean      height_changed;
-
-	g_return_if_fail (PLANNER_IS_GANTT_CHART (widget));
+	gboolean           height_changed;
 
 	height_changed = widget->allocation.height != allocation->height;
 	
@@ -580,12 +571,12 @@ gantt_chart_size_allocate (GtkWidget     *widget,
 }
 
 static void
-gantt_chart_set_adjustments (PlannerGanttChart  *chart,
-			     GtkAdjustment *hadj,
-			     GtkAdjustment *vadj)
+gantt_chart_set_adjustments (PlannerGanttChart *chart,
+			     GtkAdjustment     *hadj,
+			     GtkAdjustment     *vadj)
 {
 	PlannerGanttChartPriv *priv;
-	gboolean          need_adjust = FALSE;
+	gboolean               need_adjust = FALSE;
 
 	g_return_if_fail (hadj == NULL || GTK_IS_ADJUSTMENT (hadj));
 	g_return_if_fail (vadj == NULL || GTK_IS_ADJUSTMENT (vadj));
@@ -667,13 +658,13 @@ gantt_chart_row_inserted (GtkTreeModel *model,
 {
 	PlannerGanttChart     *chart;
 	PlannerGanttChartPriv *priv;
-	gboolean          free_path = FALSE;
-	MrpTask          *task;
-	TreeNode         *node;
+	gboolean               free_path = FALSE;
+	MrpTask               *task;
+	TreeNode              *node;
 
 	chart = data;
 	priv = chart->priv;
-	
+
 	g_return_if_fail (path != NULL || iter != NULL);
 
 	if (path == NULL) {
@@ -690,8 +681,6 @@ gantt_chart_row_inserted (GtkTreeModel *model,
 	
 	gantt_chart_reflow (chart, TRUE);
 
-	/*gantt_chart_tree_node_dump (priv->tree);*/
-
 	if (free_path) {
 		gtk_tree_path_free (path);
 	}
@@ -699,7 +688,7 @@ gantt_chart_row_inserted (GtkTreeModel *model,
 
 static void
 gantt_chart_remove_children (PlannerGanttChart *chart,
-			     TreeNode     *node)
+			     TreeNode          *node)
 {
 	gint i;
 	
@@ -722,7 +711,7 @@ gantt_chart_row_deleted (GtkTreeModel *model,
 			 gpointer      data)
 {
 	PlannerGanttChart *chart = data;
-	TreeNode     *node;
+	TreeNode          *node;
 	
 	g_return_if_fail (path != NULL);
 
@@ -730,8 +719,6 @@ gantt_chart_row_deleted (GtkTreeModel *model,
 
 	gantt_chart_tree_node_remove (chart, node);
 	gantt_chart_remove_children (chart, node);
-
-	gantt_chart_tree_node_dump (chart->priv->tree);
 
 	gantt_chart_reflow (chart, TRUE);
 }
@@ -758,14 +745,14 @@ gantt_chart_rows_reordered (GtkTreeModel *model,
 
 static void
 gantt_chart_build_tree_do (PlannerGanttChart *chart,
-			   GtkTreeIter  *iter,
-			   GHashTable   *hash)
+			   GtkTreeIter       *iter,
+			   GHashTable        *hash)
 {
 	PlannerGanttChartPriv *priv;
-	GtkTreeIter       child;
-	GtkTreePath      *path;
-	MrpTask          *task;
-	TreeNode         *node;
+	GtkTreeIter            child;
+	GtkTreePath           *path;
+	MrpTask               *task;
+	TreeNode              *node;
 
 	priv = chart->priv;
 	
@@ -804,8 +791,8 @@ gantt_chart_build_relations (PlannerGanttChart *chart,
 	priv = chart->priv;
 
 	do {
-		task = planner_gantt_model_get_task (PLANNER_GANTT_MODEL (priv->model),
-						     iter);
+		task = planner_gantt_model_get_task (
+			PLANNER_GANTT_MODEL (priv->model), iter);
 		
 		relations = mrp_task_get_predecessor_relations (task);
 
@@ -990,8 +977,6 @@ gantt_chart_reflow_now (PlannerGanttChart *chart)
 		return;
 	}
 
-	/*g_print ("reflow now\n");*/
-	
 	gantt_chart_reflow_idle (chart);
 }
 
@@ -1002,8 +987,6 @@ gantt_chart_reflow (PlannerGanttChart *chart, gboolean height_changed)
 		return;
 	}
 
-	/*g_print ("reflow\n");*/
-	
 	chart->priv->height_changed |= height_changed;
 
 	if (chart->priv->reflow_idle_id != 0) {
@@ -1400,7 +1383,7 @@ planner_gantt_chart_set_model (PlannerGanttChart *chart,
 	g_return_if_fail (PLANNER_IS_GANTT_CHART (chart));
 
 	priv = chart->priv;
-	
+
 	if (model == priv->model) {
 		return;
 	}
@@ -1475,11 +1458,8 @@ planner_gantt_chart_set_model (PlannerGanttChart *chart,
 			      "project-start", t,
 			      NULL);
 	
-		g_object_get (root,
-			      "finish", &t,
-			      NULL);
-		priv->last_time = t;
-
+		priv->last_time = mrp_task_get_finish (root);
+		
 		/* Force a reflow initially to avoid visible reflow on
 		 * start-up .
 		 */
@@ -1590,54 +1570,6 @@ gantt_chart_tree_node_at_path (TreeNode *node, GtkTreePath *path)
 	return node;
 }
 
-static void
-gantt_chart_tree_node_dump_do (TreeNode *node, gint depth)
-{
-	gint     i;
-	MrpTask *task;
-	gchar   *name;
-
-	if (node == NULL) {
-		return;
-	}
-	
-	for (i = 0; i < depth; i++) {
-		g_print (" ");
-	}
-
-	if (node->item != NULL) {
-		if (G_IS_OBJECT (node->item)) {
-			g_object_get (node->item, "task", &task, NULL);
-			g_object_get (task, "name", &name, NULL);
-		} else {
-			name = g_strdup ("<corrupt tree>");
-		}
-	} else {
-		name = g_strdup ("Root");
-	}
-
-	if (!name || !name[0]) {
-		name = g_strdup ("No name");
-	}
-	
-	g_print ("%s\t\t%c\n", name, node->expanded ? 'E' : 'C');
-	
-	g_free (name);
-	
-	for (i = 0; i < node->num_children; i++) {
-		gantt_chart_tree_node_dump_do (node->children[i], depth + 1);
-	}
-}
-
-static void
-gantt_chart_tree_node_dump (TreeNode *node)
-{
-	return;
-	
-	g_print ("-------------------------------------------\n");
-	gantt_chart_tree_node_dump_do (node, 0);
-}
-
 void
 planner_gantt_chart_scroll_to (PlannerGanttChart *chart, time_t t)
 {
@@ -1651,8 +1583,6 @@ planner_gantt_chart_scroll_to (PlannerGanttChart *chart, time_t t)
 #if 0
 	x1 = chart->priv->project_start * chart->priv->hscale;
 	x2 = t * chart->priv->hscale;
-
-	g_print ("offset: %d\n", x2 - x1);
 
 	gnome_canvas_scroll_to (chart->priv->canvas, x2 - x1, 0);
 #endif	

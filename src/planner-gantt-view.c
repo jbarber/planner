@@ -80,8 +80,8 @@ static void       gantt_view_unlink_task_cb               (BonoboUIComponent    
 							   gpointer                      data,
 							   const char                   *cname);
 static void       gantt_view_link_tasks_cb               (BonoboUIComponent            *component,
-							   gpointer                      data,
-							   const char                   *cname);
+							  gpointer                      data,
+							  const char                   *cname);
 static void       gantt_view_indent_task_cb               (BonoboUIComponent            *component,
 							   gpointer                      data,
 							   const char                   *cname);
@@ -329,8 +329,8 @@ print_init (PlannerView     *view,
 	    PlannerPrintJob *job)
 {
 	PlannerViewPriv *priv;
-	gdouble     zoom;
-	gboolean    show_critical;
+	gdouble          zoom;
+	gboolean         show_critical;
 	
 	g_return_if_fail (PLANNER_IS_VIEW (view));
 	g_return_if_fail (PLANNER_IS_PRINT_JOB (job));
@@ -345,8 +345,8 @@ print_init (PlannerView     *view,
 		PLANNER_GANTT_CHART (view->priv->gantt));
 	
 	priv->print_data = planner_gantt_print_data_new (view, job,
-						    GTK_TREE_VIEW (priv->tree),
-						    zoom, show_critical);
+							 GTK_TREE_VIEW (priv->tree),
+							 zoom, show_critical);
 }
 
 G_MODULE_EXPORT void
@@ -405,18 +405,18 @@ gantt_view_row_collapsed (GtkTreeView *tree_view,
 }
 
 static void
-gantt_view_project_loaded_cb (MrpProject *project,
-			      PlannerView     *view)
+gantt_view_project_loaded_cb (MrpProject  *project,
+			      PlannerView *view)
 {
 	GtkTreeModel *model;
 
 	model = GTK_TREE_MODEL (planner_gantt_model_new (project));
 
 	planner_task_tree_set_model (PLANNER_TASK_TREE (view->priv->tree),
-				PLANNER_GANTT_MODEL (model));
-
+				     PLANNER_GANTT_MODEL (model));
+	
 	planner_gantt_chart_set_model (PLANNER_GANTT_CHART (view->priv->gantt),
-				  model);
+				       model);
 	
 	g_object_unref (model);
 }
@@ -460,7 +460,7 @@ gantt_view_tree_view_scroll_event_cb (GtkWidget      *widget,
 static GtkWidget *
 gantt_view_create_widget (PlannerView *view)
 {
-	PlannerViewPriv       *priv;
+	PlannerViewPriv  *priv;
 	GtkWidget        *tree;
 	GtkWidget        *sw;
 	GtkWidget        *frame;
@@ -485,7 +485,7 @@ gantt_view_create_widget (PlannerView *view)
 	tree = planner_task_tree_new (view->main_window,
 				      PLANNER_GANTT_MODEL (model),
 				      FALSE,
-				      /* i18n: WBS is sort for work breakdown structure, and is a
+				      /* i18n: WBS is short for work breakdown structure, and is a
 				       * project management term. You might want to leave it
 				       * untranslated unless there is a localized term for it.
 				       */
@@ -499,7 +499,7 @@ gantt_view_create_widget (PlannerView *view)
 	priv->tree = tree;
 	priv->gantt = planner_gantt_chart_new_with_model (model);
 	planner_gantt_chart_set_view (PLANNER_GANTT_CHART (priv->gantt),
-        PLANNER_TASK_TREE (tree));
+				      PLANNER_TASK_TREE (tree));
 	
 	g_object_unref (model);
 
@@ -579,12 +579,12 @@ gantt_view_create_widget (PlannerView *view)
 
 	gtk_paned_set_position (GTK_PANED (hpaned), 250);
 		
-	g_signal_connect (G_OBJECT (tree),
+	g_signal_connect (tree,
 			  "row_expanded",
 			  G_CALLBACK (gantt_view_row_expanded),
 			  priv->gantt);
 	
-	g_signal_connect (G_OBJECT (tree),
+	g_signal_connect (tree,
 			  "row_collapsed",
 			  G_CALLBACK (gantt_view_row_collapsed),
 			  priv->gantt);
@@ -669,8 +669,8 @@ gantt_view_unlink_task_cb (BonoboUIComponent *component,
 
 static void
 gantt_view_link_tasks_cb (BonoboUIComponent *component,
-			   gpointer           data,
-			   const char        *cname)
+			  gpointer           data,
+			  const char        *cname)
 {
 	PlannerView *view;
 
@@ -793,10 +793,10 @@ gantt_view_ui_component_event (BonoboUIComponent            *comp,
 			       const gchar                  *path,
 			       Bonobo_UIComponent_EventType  type,
 			       const gchar                  *state_string,
-			       PlannerView                       *view)
+			       PlannerView                  *view)
 {
 	PlannerViewPriv *priv;
-	gboolean    state;
+	gboolean         state;
 	
 	priv = view->priv;
 
@@ -909,7 +909,7 @@ gantt_view_selection_changed_cb (PlannerTaskTree *tree, PlannerView *view)
 
 static void
 gantt_view_gantt_status_updated_cb (PlannerGanttChart *gantt,
-				    const gchar  *message,
+				    const gchar       *message,
 				    PlannerView       *view)
 {
 	bonobo_ui_component_set_status (view->ui_component,
@@ -919,7 +919,7 @@ gantt_view_gantt_status_updated_cb (PlannerGanttChart *gantt,
 
 static void
 gantt_view_gantt_resource_clicked_cb (PlannerGanttChart *chart,
-				      MrpResource  *resource,
+				      MrpResource       *resource,
 				      PlannerView       *view)
 {
 	GtkWidget *dialog;
@@ -929,10 +929,10 @@ gantt_view_gantt_resource_clicked_cb (PlannerGanttChart *chart,
 }
 	
 static void
-gantt_view_relations_changed_cb (PlannerTaskTree  *tree,
-				 MrpTask     *task,
-				 MrpRelation *relation,
-				 PlannerView      *view)
+gantt_view_relations_changed_cb (PlannerTaskTree *tree,
+				 MrpTask         *task,
+				 MrpRelation     *relation,
+				 PlannerView     *view)
 {
 	gantt_view_update_ui (view);
 }
@@ -941,11 +941,11 @@ static void
 gantt_view_update_ui (PlannerView *view)
 {
 	PlannerViewPriv *priv;
-	GList      *list, *l;
-	gchar      *value;
-	gchar      *rel_value = "0";
-	gchar      *link_value = "0";
-	gint        count_value = 0;
+	GList           *list, *l;
+	gchar           *value;
+	gchar           *rel_value = "0";
+	gchar           *link_value = "0";
+	gint             count_value = 0;
 
 	if (!view->activated) {
 		return;
@@ -1026,8 +1026,8 @@ gantt_view_update_zoom_sensitivity (PlannerView *view)
 	gboolean in, out;
 
 	planner_gantt_chart_can_zoom (PLANNER_GANTT_CHART (view->priv->gantt),
-				 &in,
-				 &out);
+				      &in,
+				      &out);
 
 	bonobo_ui_component_freeze (view->ui_component, NULL);
 	

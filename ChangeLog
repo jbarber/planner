@@ -1,3 +1,13 @@
+2004-07-01  Richard Hult  <richard@imendio.com>
+
+	* src/planner-gantt-*.c: Clean up a bit.
+
+2004-07-01  Richard Hult  <richard@imendio.com>
+
+	* src/planner-resource-view.c (resource_view_insert_resource_cb):
+	Don't enter editable mode for inserted rows, we need undo
+	transactions first.
+
 2004-06-30  Richard Hult  <richard@imendio.com>
 
 	* Makefile.am:
