@@ -280,7 +280,8 @@ property_cmd_edit (DialogData  *data,
 	cmd->type = type;
 	cmd->property = g_strdup (property);
 
-	planner_window_cmd_manager_insert_and_do (data->main_window, cmd_base);
+	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager (data->main_window),
+					   cmd_base);
 
 	return cmd_base;
 

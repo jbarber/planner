@@ -53,19 +53,19 @@ struct _PlannerWindowClass
         BonoboWindowClass  parent_class;
 };
 
-GType                   planner_window_get_type               (void) G_GNUC_CONST;
-GtkWidget         *     planner_window_new                       (PlannerApplication *app);
-gboolean                planner_window_open                      (PlannerWindow      *window,
-								  const gchar        *uri);
-BonoboUIContainer *     planner_window_get_ui_container          (PlannerWindow      *window);
-MrpProject        *     planner_window_get_project               (PlannerWindow      *window);
-PlannerApplication     *planner_window_get_application           (PlannerWindow      *window);
-void                    planner_window_check_version             (PlannerWindow      *window);
-void                    planner_window_close                     (PlannerWindow      *window);
-void                    planner_window_show_day_type_dialog      (PlannerWindow      *window);
-void                    planner_window_show_calendar_dialog      (PlannerWindow      *window);
-PlannerCmdManager *     planner_window_get_cmd_manager           (PlannerWindow      *window);
-void                    planner_window_cmd_manager_insert_and_do (PlannerWindow      *window,
-								  PlannerCmd         *cmd);
+GType                   planner_window_get_type             (void) G_GNUC_CONST;
+GtkWidget         *     planner_window_new                  (PlannerApplication *app);
+gboolean                planner_window_open                 (PlannerWindow      *window,
+							     const gchar        *uri);
+BonoboUIContainer *     planner_window_get_ui_container     (PlannerWindow      *window);
+MrpProject        *     planner_window_get_project          (PlannerWindow      *window);
+PlannerApplication     *planner_window_get_application      (PlannerWindow      *window);
+void                    planner_window_check_version        (PlannerWindow      *window);
+void                    planner_window_close                (PlannerWindow      *window);
+void                    planner_window_show_day_type_dialog (PlannerWindow      *window);
+void                    planner_window_show_calendar_dialog (PlannerWindow      *window);
+PlannerCmdManager *     planner_window_get_cmd_manager      (PlannerWindow      *window);
+
+
 
 #endif /* __PLANNER_WINDOW_H__ */

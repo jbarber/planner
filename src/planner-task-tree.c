@@ -59,6 +59,8 @@ struct _PlannerTaskTreePriv {
 	GHashTable     *property_to_column;
 
 	PlannerWindow   *main_window;
+
+	gboolean         highlight_critical;
 	
 	/* Keep the dialogs here so that we can just raise the dialog if it's
 	 * opened twice for the same task.
@@ -185,24 +187,24 @@ enum {
 
 static GtkItemFactoryEntry popup_menu_items[] = {
 	{ N_("/_Insert task"),       NULL, GIF_CB (task_tree_popup_insert_task_cb),
-	  POPUP_INSERT,  "<Item>",       NULL
+	  POPUP_INSERT,  "<Item>",   NULL
 	},
 	{ N_("/_Insert subtask"),    NULL, GIF_CB (task_tree_popup_insert_subtask_cb),
-	  POPUP_SUBTASK, "<Item>",       NULL
+	  POPUP_SUBTASK, "<Item>",   NULL
 	},
 	{ N_("/_Remove task"),       NULL, GIF_CB (task_tree_popup_remove_task_cb),
-	  POPUP_REMOVE,  "<StockItem>",  GTK_STOCK_DELETE
+	  POPUP_REMOVE,  "<StockItem>", GTK_STOCK_DELETE
 	},
 	{ "/sep1",                   NULL, 0,
 	  POPUP_NONE,    "<Separator>" },
 	{ N_("/_Unlink task"),       NULL, GIF_CB (task_tree_popup_unlink_task_cb),
-	  POPUP_UNLINK,  "<Item>",       NULL
+	  POPUP_UNLINK,  "<Item>",   NULL
 	},
 	{ "/sep2",                   NULL, 0,
 	  POPUP_NONE,    "<Separator>"
 	},
 	{ N_("/_Edit task..."),      NULL, GIF_CB (task_tree_popup_edit_task_cb),
-	  POPUP_EDIT,    "<Item>",       NULL
+	  POPUP_EDIT,    "<Item>",   NULL
 	}
 };
 
@@ -304,7 +306,8 @@ task_cmd_insert (PlannerTaskTree *tree,
 	cmd->work = work;
 	cmd->duration = duration;
 	
-	planner_window_cmd_manager_insert_and_do (priv->main_window, cmd_base);
+	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager (priv->main_window),
+					   cmd_base);
 
 	return cmd_base;
 }
@@ -356,7 +359,7 @@ static PlannerCmd *
 task_cmd_edit_property (PlannerTaskTree *tree,
 			MrpTask         *task,
 			const gchar     *property,
-			GValue          *value)
+			const GValue    *value)
 {
 	PlannerTaskTreePriv *priv = tree->priv;
 	PlannerCmd          *cmd_base;
@@ -393,12 +396,11 @@ task_cmd_edit_property (PlannerTaskTree *tree,
 			       cmd->property,
 			       cmd->old_value);
 
-	planner_window_cmd_manager_insert_and_do (priv->main_window, cmd_base);
+	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager (priv->main_window),
+					   cmd_base);
 	
 	return cmd_base;
 }
-
-
 
 GType
 planner_task_tree_get_type (void)
@@ -780,20 +782,32 @@ task_tree_name_data_func (GtkTreeViewColumn *tree_column,
 			  GtkTreeIter       *iter,
 			  gpointer           data)
 {
-	gchar *name;
-	gint   weight;
+	PlannerTaskTree *tree;
+	MrpTask         *task;
+	gint             weight;
+	gboolean         critical;
+
+	tree = PLANNER_TASK_TREE (data);
 	
 	gtk_tree_model_get (tree_model,
 			    iter,
-			    COL_NAME, &name,
+			    COL_TASK, &task,
 			    COL_WEIGHT, &weight,
 			    -1);
-	
+
+	if (tree->priv->highlight_critical) {
+		g_object_get (task,
+			      "critical", &critical,
+			      NULL);
+	} else {
+		critical = FALSE;
+	}
+
 	g_object_set (cell,
-		      "text", name, 
+		      "text", mrp_task_get_name (task), 
 		      "weight", weight,
+		      "foreground", critical ? "indian red" : NULL,
 		      NULL);
-	g_free (name);
 }
 
 static void
@@ -1013,13 +1027,18 @@ task_tree_name_edited (GtkCellRendererText *cell,
 		       gchar               *new_text,
 		       gpointer             data)
 {
-	GtkTreeView  *view;
-	GtkTreeModel *model;
-	GtkTreePath  *path;
-	GtkTreeIter   iter;
-	MrpTask      *task;
-	GValue        value = { 0 };
+	PlannerTaskTree     *task_tree;
+	PlannerTaskTreePriv *priv;
+	GtkTreeView         *view;
+	GtkTreeModel        *model;
+	GtkTreePath         *path;
+	GtkTreeIter          iter;
+	MrpTask             *task;
+	GValue               value = { 0 };
 
+	task_tree = PLANNER_TASK_TREE (data);
+	priv = task_tree->priv;
+	
 	view = GTK_TREE_VIEW (data);
 	model = gtk_tree_view_get_model (view);
 
@@ -1029,15 +1048,21 @@ task_tree_name_edited (GtkCellRendererText *cell,
 	gtk_tree_model_get (model, &iter, 
 			    COL_TASK, &task,
 			    -1);
+
+	if (strcmp (mrp_task_get_name (task), new_text) != 0) {
+		g_value_init (&value, G_TYPE_STRING);
+		g_value_set_string (&value, new_text);
+		
+		task_cmd_edit_property (task_tree,
+					task,
+					"name",
+					&value);
+
+		g_value_unset (&value);
+	}
 	
-	g_value_init (&value, G_TYPE_STRING);
-	g_value_set_string (&value, new_text);
-	
-	task_cmd_edit_property (PLANNER_TASK_TREE (view),
-				task,
-				"name",
-				&value);
-	
+	/*planner_cmd_manager_end_transaction (planner_window_get_cmd_manager (priv->main_window));*/
+		
 	gtk_tree_path_free (path);
 }
 
@@ -1055,6 +1080,8 @@ task_tree_start_edited (GtkCellRendererText *cell,
 	MrpTask            *task;
 	MrpConstraint       constraint;
 
+	/* FIXME: undo */
+	
 	view = GTK_TREE_VIEW (data);
 	model = gtk_tree_view_get_model (view);
 	date = PLANNER_CELL_RENDERER_DATE (cell);
@@ -1564,6 +1591,7 @@ task_tree_add_column (GtkTreeView *tree,
 	case COL_NAME:
 		cell = gtk_cell_renderer_text_new ();
 		g_object_set (cell, "editable", TRUE, NULL);
+
 		g_signal_connect (cell,
 				  "edited",
 				  G_CALLBACK (task_tree_name_edited),
@@ -1575,7 +1603,7 @@ task_tree_add_column (GtkTreeView *tree,
 		gtk_tree_view_column_set_cell_data_func (col,
 							 cell,
 							 task_tree_name_data_func,
-							 NULL, NULL);
+							 tree, NULL);
 		g_object_set_data (G_OBJECT (col),
 				   "data-func", task_tree_name_data_func);
 		
@@ -1603,7 +1631,7 @@ task_tree_add_column (GtkTreeView *tree,
 		gtk_tree_view_column_set_cell_data_func (col,
 							 cell,
 							 task_tree_start_data_func,
-							 NULL, NULL);
+							 tree, NULL);
 		g_object_set_data (G_OBJECT (col),
 				   "data-func", task_tree_start_data_func);
 		
@@ -1619,7 +1647,7 @@ task_tree_add_column (GtkTreeView *tree,
 		gtk_tree_view_column_set_cell_data_func (col,
 							 cell,
 							 task_tree_duration_data_func,
-							 NULL,
+							 tree,
 							 NULL);
 		g_object_set_data (G_OBJECT (col),
 				   "data-func", task_tree_duration_data_func);
@@ -1693,7 +1721,7 @@ task_tree_add_column (GtkTreeView *tree,
 		gtk_tree_view_column_set_cell_data_func (col,
 							 cell,
 							 task_tree_finish_data_func,
-							 NULL, NULL);
+							 tree, NULL);
 		g_object_set_data (G_OBJECT (col),
 				   "data-func", task_tree_finish_data_func);
 		gtk_tree_view_append_column (tree, col);
@@ -1708,7 +1736,7 @@ task_tree_add_column (GtkTreeView *tree,
 		gtk_tree_view_column_set_cell_data_func (col,
 							 cell,
 							 task_tree_cost_data_func,
-							 NULL,
+							 tree,
 							 NULL);
 		g_object_set_data (G_OBJECT (col),
 				   "data-func", task_tree_cost_data_func);
@@ -1831,15 +1859,18 @@ planner_task_tree_insert_subtask (PlannerTaskTree *tree)
 void
 planner_task_tree_insert_task (PlannerTaskTree *tree)
 {
-	GtkTreeView       *tree_view;
-	PlannerGanttModel *model;
-	GtkTreePath       *path;
-	MrpTask           *parent;
-	GList             *list;
-	gint               work;
-	gint               position;
-	TaskCmdInsert     *cmd;
+	PlannerTaskTreePriv *priv;
+	GtkTreeView         *tree_view;
+	PlannerGanttModel   *model;
+	GtkTreePath         *path;
+	MrpTask             *parent;
+	GList               *list;
+	gint                 work;
+	gint                 position;
+	TaskCmdInsert       *cmd;
 
+	priv = tree->priv;
+	
 	list = planner_task_tree_get_selected_tasks (tree);
 	if (list == NULL) {
 		parent = NULL;
@@ -1867,8 +1898,11 @@ planner_task_tree_insert_task (PlannerTaskTree *tree)
 		}
 	}
 
+	/*planner_cmd_manager_begin_transaction (planner_window_get_cmd_manager (priv->main_window),
+	  _("Insert Task"));*/
+		
 	work = mrp_calendar_day_get_total_work (
-		mrp_project_get_calendar (tree->priv->project),
+		mrp_project_get_calendar (priv->project),
 		mrp_day_get_work ());
 	
 	cmd = (TaskCmdInsert*) task_cmd_insert (tree, path, work, work);
@@ -2566,4 +2600,27 @@ task_tree_get_task_from_path (PlannerTaskTree *tree,
 	task = planner_gantt_model_get_task_from_path (model, path);
 
 	return task;
+}
+
+void
+planner_task_tree_set_highlight_critical (PlannerTaskTree *tree,
+					  gboolean         highlight)
+{
+	g_return_if_fail (PLANNER_IS_TASK_TREE (tree));
+
+	if (tree->priv->highlight_critical == highlight) {
+		return;
+	}
+	
+	tree->priv->highlight_critical = highlight;
+
+	gtk_widget_queue_draw (GTK_WIDGET (tree));
+}
+
+gboolean
+planner_task_tree_get_highlight_critical (PlannerTaskTree *tree)
+{
+	g_return_val_if_fail (PLANNER_IS_TASK_TREE (tree), FALSE);
+
+	return tree->priv->highlight_critical;
 }

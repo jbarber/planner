@@ -1,5 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
+ * Copyright (C) 2003 Imendio HB
  * Copyright (C) 2002 CodeFactory AB
  * Copyright (C) 2002 Richard Hult <richard@imendio.com>
  * Copyright (C) 2002 Mikael Hallendal <micke@imendio.com>
@@ -54,99 +55,97 @@
 
 
 struct _PlannerViewPriv {
-	GtkWidget        *paned;
-	GtkWidget        *tree;
-	GtkWidget        *gantt;
-
+	GtkWidget             *paned;
+	GtkWidget             *tree;
+	GtkWidget             *gantt;
 	PlannerGanttPrintData *print_data;
 };
 
-static GtkWidget *
-gantt_view_create_widget                           (PlannerView            *view);
-static void   gantt_view_insert_task_cb            (BonoboUIComponent *component,
-						    gpointer           data, 
-						    const char        *cname);
-static void   gantt_view_insert_tasks_cb           (BonoboUIComponent *component,
-						    gpointer           data, 
-						    const char        *cname);
-static void   gantt_view_remove_task_cb            (BonoboUIComponent *component,
-						    gpointer           data,
-						    const char        *cname);
-static void   gantt_view_edit_task_cb              (BonoboUIComponent *component,
-						    gpointer           data, 
-						    const char        *cname);
-static void   gantt_view_select_all_cb             (BonoboUIComponent *component,
-						    gpointer           data, 
-						    const char        *cname);
-static void   gantt_view_unlink_task_cb            (BonoboUIComponent *component,
-						    gpointer           data, 
-						    const char        *cname);
-static void   gantt_view_indent_task_cb            (BonoboUIComponent *component,
-						    gpointer           data, 
-						    const char        *cname);
-static void   gantt_view_unindent_task_cb          (BonoboUIComponent *component,
-						    gpointer           data, 
-						    const char        *cname);
-static void   gantt_view_move_task_up_cb           (BonoboUIComponent *component,
-						    gpointer           data, 
-						    const char        *cname);
-static void   gantt_view_move_task_down_cb         (BonoboUIComponent *component,
-						    gpointer           data, 
-						    const char        *cname);
-static void   gantt_view_reset_constraint_cb       (BonoboUIComponent *component,
-						    gpointer           data, 
-						    const char        *cname);
-static void   gantt_view_reset_all_constraints_cb  (BonoboUIComponent *component,
-						    gpointer           data, 
-						    const char        *cname);
-static void   gantt_view_zoom_to_fit_cb            (BonoboUIComponent *component,
-						    gpointer           data, 
-						    const char        *cname);
-static void   gantt_view_zoom_in_cb                (BonoboUIComponent *component,
-						    gpointer           data, 
-						    const char        *cname);
-static void   gantt_view_zoom_out_cb               (BonoboUIComponent *component,
-						    gpointer           data, 
-						    const char        *cname);
-static void   gantt_view_test_cb                   (BonoboUIComponent *component,
-						    gpointer           data, 
-						    const char        *cname);
-static void   gantt_view_update_row_and_header_height (PlannerView         *view);
-static void   gantt_view_tree_style_set_cb         (GtkWidget         *tree,
-						    GtkStyle          *prev_style,
-						    PlannerView            *view);
-static void   gantt_view_selection_changed_cb      (PlannerTaskTree        *tree,
-						    PlannerView            *view);
-static void   gantt_view_ui_component_event        (BonoboUIComponent *comp,
-						    const gchar       *path,
-						    Bonobo_UIComponent_EventType  type,
-						    const gchar       *state_string,
-						    PlannerView            *view);
-static void   gantt_view_update_zoom_sensitivity   (PlannerView            *view);
-static void   gantt_view_gantt_status_updated_cb   (PlannerGanttChart      *gantt,
-						    const gchar       *message,
-						    PlannerView            *view);
-static void   gantt_view_relations_changed_cb      (PlannerTaskTree        *tree,
-						    MrpTask           *task,
-						    MrpRelation       *relation,
-						    PlannerView            *view);
-static void   gantt_view_gantt_resource_clicked_cb (PlannerGanttChart      *chart,
-						    MrpResource       *resource,
-						    PlannerView            *view);
-static void   gantt_view_update_ui                 (PlannerView            *view);
-void          activate                             (PlannerView            *view);
-void          deactivate                           (PlannerView            *view);
-void          init                                 (PlannerView            *view,
-						    PlannerWindow      *main_window);
-gchar        *get_label                            (PlannerView            *view);
-gchar        *get_menu_label                       (PlannerView            *view);
-gchar        *get_icon                             (PlannerView            *view);
-GtkWidget    *get_widget                           (PlannerView            *view);
-void          print_init                           (PlannerView            *view,
-						    PlannerPrintJob        *job);
-void          print                                (PlannerView            *view);
-gint          print_get_n_pages                    (PlannerView            *view);
-void          print_cleanup                        (PlannerView            *view);
+static GtkWidget *gantt_view_create_widget                (PlannerView                  *view);
+static void       gantt_view_insert_task_cb               (BonoboUIComponent            *component,
+							   gpointer                      data,
+							   const char                   *cname);
+static void       gantt_view_insert_tasks_cb              (BonoboUIComponent            *component,
+							   gpointer                      data,
+							   const char                   *cname);
+static void       gantt_view_remove_task_cb               (BonoboUIComponent            *component,
+							   gpointer                      data,
+							   const char                   *cname);
+static void       gantt_view_edit_task_cb                 (BonoboUIComponent            *component,
+							   gpointer                      data,
+							   const char                   *cname);
+static void       gantt_view_select_all_cb                (BonoboUIComponent            *component,
+							   gpointer                      data,
+							   const char                   *cname);
+static void       gantt_view_unlink_task_cb               (BonoboUIComponent            *component,
+							   gpointer                      data,
+							   const char                   *cname);
+static void       gantt_view_indent_task_cb               (BonoboUIComponent            *component,
+							   gpointer                      data,
+							   const char                   *cname);
+static void       gantt_view_unindent_task_cb             (BonoboUIComponent            *component,
+							   gpointer                      data,
+							   const char                   *cname);
+static void       gantt_view_move_task_up_cb              (BonoboUIComponent            *component,
+							   gpointer                      data,
+							   const char                   *cname);
+static void       gantt_view_move_task_down_cb            (BonoboUIComponent            *component,
+							   gpointer                      data,
+							   const char                   *cname);
+static void       gantt_view_reset_constraint_cb          (BonoboUIComponent            *component,
+							   gpointer                      data,
+							   const char                   *cname);
+static void       gantt_view_reset_all_constraints_cb     (BonoboUIComponent            *component,
+							   gpointer                      data,
+							   const char                   *cname);
+static void       gantt_view_zoom_to_fit_cb               (BonoboUIComponent            *component,
+							   gpointer                      data,
+							   const char                   *cname);
+static void       gantt_view_zoom_in_cb                   (BonoboUIComponent            *component,
+							   gpointer                      data,
+							   const char                   *cname);
+static void       gantt_view_zoom_out_cb                  (BonoboUIComponent            *component,
+							   gpointer                      data,
+							   const char                   *cname);
+static void       gantt_view_test_cb                      (BonoboUIComponent            *component,
+							   gpointer                      data,
+							   const char                   *cname);
+static void       gantt_view_update_row_and_header_height (PlannerView                  *view);
+static void       gantt_view_tree_style_set_cb            (GtkWidget                    *tree,
+							   GtkStyle                     *prev_style,
+							   PlannerView                  *view);
+static void       gantt_view_selection_changed_cb         (PlannerTaskTree              *tree,
+							   PlannerView                  *view);
+static void       gantt_view_ui_component_event           (BonoboUIComponent            *comp,
+							   const gchar                  *path,
+							   Bonobo_UIComponent_EventType  type,
+							   const gchar                  *state_string,
+							   PlannerView                  *view);
+static void       gantt_view_update_zoom_sensitivity      (PlannerView                  *view);
+static void       gantt_view_gantt_status_updated_cb      (PlannerGanttChart            *gantt,
+							   const gchar                  *message,
+							   PlannerView                  *view);
+static void       gantt_view_relations_changed_cb         (PlannerTaskTree              *tree,
+							   MrpTask                      *task,
+							   MrpRelation                  *relation,
+							   PlannerView                  *view);
+static void       gantt_view_gantt_resource_clicked_cb    (PlannerGanttChart            *chart,
+							   MrpResource                  *resource,
+							   PlannerView                  *view);
+static void       gantt_view_update_ui                    (PlannerView                  *view);
+void              activate                                (PlannerView                  *view);
+void              deactivate                              (PlannerView                  *view);
+void              init                                    (PlannerView                  *view,
+							   PlannerWindow                *main_window);
+gchar        *    get_label                               (PlannerView                  *view);
+gchar        *    get_menu_label                          (PlannerView                  *view);
+gchar        *    get_icon                                (PlannerView                  *view);
+GtkWidget    *    get_widget                              (PlannerView                  *view);
+void              print_init                              (PlannerView                  *view,
+							   PlannerPrintJob              *job);
+void              print                                   (PlannerView                  *view);
+gint              print_get_n_pages                       (PlannerView                  *view);
+void              print_cleanup                           (PlannerView                  *view);
 
 
 static BonoboUIVerb verbs[] = {
@@ -185,9 +184,13 @@ activate (PlannerView *view)
 				      verbs);
 	
 	/* Set the initial UI state. */
+
 	show_critical = planner_gantt_chart_get_highlight_critical_tasks (
 		PLANNER_GANTT_CHART (priv->gantt));
-
+	
+	planner_task_tree_set_highlight_critical (PLANNER_TASK_TREE (priv->tree),
+						  show_critical);
+	
 	bonobo_ui_component_set_prop (view->ui_component, 
 				      "/commands/HighlightCriticalTasks",
 				      "state", show_critical ? "1" : "0",
@@ -260,7 +263,7 @@ init (PlannerView *view, PlannerWindow *main_window)
 			      icon_set);
 
 	g_signal_connect (view->ui_component,
-			  "ui-event",
+			  "ui_event",
 			  G_CALLBACK (gantt_view_ui_component_event),
 			  view);
 }
@@ -779,6 +782,9 @@ gantt_view_ui_component_event (BonoboUIComponent            *comp,
 		planner_gantt_chart_set_highlight_critical_tasks (
 			PLANNER_GANTT_CHART (priv->gantt),
 			state);
+
+		planner_task_tree_set_highlight_critical (PLANNER_TASK_TREE (priv->tree),
+							  state);
 	}
 }
 	

@@ -1740,11 +1740,3 @@ planner_window_get_cmd_manager (PlannerWindow *window)
 	return window->priv->cmd_manager;
 }
 
-void
-planner_window_cmd_manager_insert_and_do (PlannerWindow *window,
-					  PlannerCmd   *cmd)
-{
-	g_return_if_fail (PLANNER_IS_MAIN_WINDOW (window));
-	
-	planner_cmd_manager_insert_and_do (window->priv->cmd_manager, cmd);
-}

@@ -1,4 +1,19 @@
+2003-12-16  Richard Hult  <richard@imendio.com>
+
+	* src/planner-window.c: 
+	* src/planner-project-properties.c:
+	* src/planner-task-tree.c:
+	* src/planner-cmd-manager.c: More undo work.
+	
+	* data/ui/task-view.ui:
+	* src/planner-task-view.c:
+	* src/planner-gantt-view.c: Add critical task highlighting for the
+	task view.
+
 2003-12-15  Richard Hult  <richard@imendio.com>
+
+	* src/planner-cmd-manager.c (planner_cmd_manager_insert_and_do):
+	Trim the history if it's too long.
 
 	* src/planner-html-plugin.c (html_plugin_ok_button_clicked): Fix
 	bug #129375.

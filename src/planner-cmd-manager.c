@@ -30,10 +30,10 @@ struct _PlannerCmdManagerPriv {
 	GList *list;
 	GList *current;
 
-	/* FIXME: add transactions */
+	gboolean  inside_transaction;
 };
 
-/* Signals */
+
 enum {
 	UNDO_STATE_CHANGED,
 	REDO_STATE_CHANGED,
@@ -115,7 +115,9 @@ cmd_manager_init (PlannerCmdManager *manager)
 	priv = g_new0 (PlannerCmdManagerPriv, 1);
 	manager->priv = priv;
 
-	/* FIXME: What default to use? */
+	/* FIXME: What default to use? Need some limit, or we'll use a lot of
+	 * memory.
+	 */
 	priv->limit = 100;
 }
 
@@ -252,14 +254,13 @@ cmd_manager_free_func (PlannerCmd *cmd,
 	}
 }
 
-void
-planner_cmd_manager_insert_and_do (PlannerCmdManager *manager, PlannerCmd *cmd)
+static void
+cmd_manager_insert (PlannerCmdManager *manager,
+		    PlannerCmd        *cmd,
+		    gboolean           run_do)
 {
 	PlannerCmdManagerPriv *priv;
 	GList                 *current;
-
-	g_return_if_fail (PLANNER_IS_CMD_MANAGER (manager));
-	g_return_if_fail (cmd != NULL);
 
 	priv = manager->priv;
 
@@ -280,15 +281,49 @@ planner_cmd_manager_insert_and_do (PlannerCmdManager *manager, PlannerCmd *cmd)
 
 		priv->list = current;
 	}
+
+	/* Trim the history if necessary. */
+	if (g_list_length (priv->list) >= priv->limit) {
+		GList *l;
+
+		l = g_list_nth (priv->list, priv->limit - 1);
+		
+		/* Don't crash in case we should have a limit of 1 :) */
+		if (l->prev) {
+			l->prev->next = NULL;
+			l->prev = NULL;
+		}
+
+		g_list_foreach (l, (GFunc) cmd_manager_free_func, NULL);
+		g_list_free (l);
+
+		/* Limit of 1 again... */
+		if (l == priv->list) {
+			priv->list = NULL;
+		}
+	}
 	
 	priv->list = g_list_prepend (priv->list, cmd);
 	priv->current = priv->list;
 
-	cmd->do_func (cmd);
-
+	cmd->manager = manager;
+	
+	if (run_do && cmd->do_func) {
+		cmd->do_func (cmd);
+	}
+	
 	cmd_manager_dump (manager);
 
 	state_changed (manager);
+}
+
+void
+planner_cmd_manager_insert_and_do (PlannerCmdManager *manager, PlannerCmd *cmd)
+{
+	g_return_if_fail (PLANNER_IS_CMD_MANAGER (manager));
+	g_return_if_fail (cmd != NULL);
+
+	cmd_manager_insert (manager, cmd, TRUE);
 }
 
 gboolean
@@ -307,8 +342,10 @@ planner_cmd_manager_undo (PlannerCmdManager *manager)
 		return FALSE;
 	}
 
-	cmd->undo_func (cmd);
-
+	if (cmd->undo_func) {
+		cmd->undo_func (cmd);
+	}
+	
 	cmd_manager_dump (manager);
 
 	state_changed (manager);
@@ -331,8 +368,10 @@ planner_cmd_manager_redo (PlannerCmdManager *manager)
 		return FALSE;
 	}
 
-	cmd->do_func (cmd);
-
+	if (cmd->do_func) {
+		cmd->do_func (cmd);
+	}
+	
 	cmd_manager_dump (manager);
 
 	state_changed (manager);
@@ -348,5 +387,141 @@ planner_cmd_manager_new (void)
 	manager = g_object_new (PLANNER_TYPE_CMD_MANAGER, NULL);
 	
 	return manager;
+}
+
+
+/*
+ * Transaction commands
+ */
+
+static void
+transaction_cmd_do (PlannerCmd *cmd)
+{
+	PlannerCmd *cmd_sub;
+	
+	g_print ("Transaction do: %s\n", cmd->label);
+	
+	while (1) {
+		cmd_sub = get_redo_cmd (cmd->manager, TRUE);
+
+		if (!cmd_sub) {
+			break;
+		}
+		
+		if (cmd_sub->do_func) {
+			cmd_sub->do_func (cmd_sub);
+		}
+		
+		if (cmd_sub->type == PLANNER_CMD_TYPE_END_TRANSACTION) {
+			break;
+		}
+
+		g_assert (cmd_sub->type == PLANNER_CMD_TYPE_NORMAL);
+	}
+}
+
+static void
+transaction_cmd_undo (PlannerCmd *cmd)
+{
+	PlannerCmd *cmd_sub;
+
+	g_print ("Transaction undo: %s\n", cmd->label);
+
+	while (1) {
+		cmd_sub = get_undo_cmd (cmd->manager, TRUE);
+
+		if (!cmd_sub) {
+			break;
+		}
+		
+		if (cmd_sub->undo_func) {
+			cmd_sub->undo_func (cmd_sub);
+		}
+		
+		if (cmd_sub->type == PLANNER_CMD_TYPE_BEGIN_TRANSACTION) {
+			break;
+		}
+
+		g_assert (cmd_sub->type == PLANNER_CMD_TYPE_NORMAL);
+	}
+}
+
+gboolean
+planner_cmd_manager_begin_transaction (PlannerCmdManager *manager,
+				       const gchar       *label)
+{
+	PlannerCmdManagerPriv *priv;
+	PlannerCmd            *cmd;
+	
+	g_return_val_if_fail (PLANNER_IS_CMD_MANAGER (manager), FALSE);
+
+	priv = manager->priv;
+	
+	if (priv->inside_transaction) {
+		g_warning ("Already inside transaction.");
+		return FALSE;
+	}
+
+	priv->inside_transaction = TRUE;
+
+	cmd = g_new0 (PlannerCmd, 1);
+
+	cmd->do_func = transaction_cmd_do;
+	cmd->undo_func = transaction_cmd_undo;
+	cmd->free_func = (PlannerCmdFreeFunc) g_free;
+	
+	cmd->label = g_strdup (label);
+	cmd->type = PLANNER_CMD_TYPE_BEGIN_TRANSACTION;
+		
+	cmd_manager_insert (manager, cmd, FALSE);
+	
+	return TRUE;
+}
+
+gboolean
+planner_cmd_manager_end_transaction (PlannerCmdManager *manager)
+{
+	PlannerCmdManagerPriv *priv;
+	PlannerCmd            *cmd, *begin_cmd = NULL;
+	GList                 *l;
+
+	g_return_val_if_fail (PLANNER_IS_CMD_MANAGER (manager), FALSE);
+
+	priv = manager->priv;
+	
+	if (!priv->inside_transaction) {
+		g_warning ("Don't have transaction to end.");
+		return FALSE;
+	}
+
+	priv->inside_transaction = FALSE;
+
+	for (l = priv->current; l; l = l->next) {
+		begin_cmd = l->data;
+
+		if (begin_cmd->type == PLANNER_CMD_TYPE_BEGIN_TRANSACTION) {
+			break;
+		}
+
+		begin_cmd = NULL;
+	}
+
+	if (!begin_cmd) {
+		g_warning ("Can't find beginning of transaction.");
+		return FALSE;
+	}
+	
+	cmd = g_new0 (PlannerCmd, 1);
+		
+	cmd->do_func = transaction_cmd_do;
+	cmd->undo_func = transaction_cmd_undo;
+	cmd->free_func = (PlannerCmdFreeFunc) g_free;
+	
+	cmd->label = g_strdup (begin_cmd->label);
+	cmd->type = PLANNER_CMD_TYPE_END_TRANSACTION;
+	
+	cmd_manager_insert (manager, cmd, FALSE);
+
+	return TRUE;
 }
 

@@ -51,45 +51,32 @@ struct _PlannerTaskTreeClass
 };
 
 
-GType      planner_task_tree_get_type              (void);
+GType      planner_task_tree_get_type               (void) G_GNUC_CONST;
+GtkWidget *planner_task_tree_new                    (PlannerWindow     *window,
+						     PlannerGanttModel *model,
+						     gboolean           custom_properties,
+						     gpointer           first_column,
+						     ...);
+void       planner_task_tree_set_model              (PlannerTaskTree   *tree,
+						     PlannerGanttModel *model);
+void       planner_task_tree_insert_subtask         (PlannerTaskTree   *tree);
+void       planner_task_tree_insert_task            (PlannerTaskTree   *tree);
+void       planner_task_tree_remove_task            (PlannerTaskTree   *tree);
+void       planner_task_tree_edit_task              (PlannerTaskTree   *tree);
+void       planner_task_tree_insert_tasks           (PlannerTaskTree   *tree);
+void       planner_task_tree_select_all             (PlannerTaskTree   *tree);
+void       planner_task_tree_unlink_task            (PlannerTaskTree   *tree);
+void       planner_task_tree_indent_task            (PlannerTaskTree   *tree);
+void       planner_task_tree_unindent_task          (PlannerTaskTree   *tree);
+void       planner_task_tree_reset_constraint       (PlannerTaskTree   *tree);
+void       planner_task_tree_reset_all_constraints  (PlannerTaskTree   *tree);
+void       planner_task_tree_move_task_up           (PlannerTaskTree   *tree);
+void       planner_task_tree_move_task_down         (PlannerTaskTree   *tree);
+GList *    planner_task_tree_get_selected_tasks     (PlannerTaskTree   *tree);
+gboolean   planner_task_tree_has_relation           (GList             *list);
+void       planner_task_tree_set_highlight_critical (PlannerTaskTree   *tree,
+						     gboolean           highlight);
+gboolean   planner_task_tree_get_highlight_critical (PlannerTaskTree   *tree);
 
-GtkWidget *planner_task_tree_new                   (PlannerWindow *main_window,
-					       PlannerGanttModel *model,
-					       gboolean      custom_properties,
-					       gpointer      first_column,
-					       ...);
-
-void       planner_task_tree_set_model             (PlannerTaskTree   *tree,
-					       PlannerGanttModel *model);
-
-void       planner_task_tree_insert_subtask        (PlannerTaskTree   *tree);
-
-void       planner_task_tree_insert_task           (PlannerTaskTree   *tree);
-
-void       planner_task_tree_remove_task           (PlannerTaskTree   *tree);
-
-void       planner_task_tree_edit_task             (PlannerTaskTree   *tree);
-
-void       planner_task_tree_insert_tasks          (PlannerTaskTree   *tree);
-
-void       planner_task_tree_select_all            (PlannerTaskTree   *tree);
-
-void       planner_task_tree_unlink_task           (PlannerTaskTree   *tree);
-
-void       planner_task_tree_indent_task           (PlannerTaskTree   *tree);
-
-void       planner_task_tree_unindent_task         (PlannerTaskTree   *tree);
-
-void       planner_task_tree_reset_constraint      (PlannerTaskTree   *tree);
-
-void       planner_task_tree_reset_all_constraints (PlannerTaskTree   *tree);
-
-void       planner_task_tree_move_task_up          (PlannerTaskTree   *tree);
-
-void       planner_task_tree_move_task_down        (PlannerTaskTree   *tree);
-
-GList *    planner_task_tree_get_selected_tasks    (PlannerTaskTree   *tree);
-
-gboolean   planner_task_tree_has_relation          (GList        *list);
 
 #endif /* __PLANNER_TASK_TREE_H__ */

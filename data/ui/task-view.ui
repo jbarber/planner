@@ -13,6 +13,7 @@
     <cmd name="MoveTaskUp"	    _label="Move Task _Up"              pixtype="stock" pixname="planner-stock-move-task-up"   sensitive="0"/>
     <cmd name="MoveTaskDown"	    _label="Move Task Do_wn"            pixtype="stock" pixname="planner-stock-move-task-down" sensitive="0"/>
     <cmd name="EditCustomProps"     _label="_Edit Custom Properties..." pixtype="stock" pixname="gtk-properties"/>
+    <cmd name="HighlightCriticalTasks"   _label="_Highlight Critical Tasks"/>
   </commands>
 
   <menu>
@@ -23,6 +24,13 @@
       <placeholder name="View specific placeholder">
       </placeholder>
     </submenu>
+
+    <submenu    name="View">
+      <placeholder name="View specific placeholder">
+        <menuitem name="HighlightCriticalTasks"   verb="" type="toggle"/>
+      </placeholder>
+    </submenu>
+
     <submenu    name="Actions">
       <placeholder name="View specific actions placeholder">
         <menuitem name="InsertTask"          verb=""   accel="*Control*i" />

@@ -51,73 +51,78 @@
 
 
 struct _PlannerViewPriv {
-	GtkWidget         *tree;
-	GtkWidget         *frame;
-	
+	GtkWidget              *tree;
+	GtkWidget              *frame;
 	PlannerTablePrintSheet *print_sheet;
 };
 
-void          activate                           (PlannerView            *view);
-void          deactivate                         (PlannerView            *view);
-void          init                               (PlannerView            *view,
-						  PlannerWindow      *main_window);
-gchar        *get_label                          (PlannerView            *view);
-gchar        *get_menu_label                     (PlannerView            *view);
-gchar        *get_icon                           (PlannerView            *view);
-GtkWidget    *get_widget                         (PlannerView            *view);
-static void   task_view_project_loaded_cb        (MrpProject        *project,
-						  PlannerView            *view);
-static void   task_view_insert_task_cb           (BonoboUIComponent *component,
-						  gpointer           data, 
-						  const char        *cname);
-static void   task_view_insert_tasks_cb          (BonoboUIComponent *component,
-						  gpointer           data, 
-						  const char        *cname);
-static void   task_view_remove_task_cb           (BonoboUIComponent *component,
-						  gpointer           data, 
-						  const char        *cname);
-static void   task_view_edit_task_cb             (BonoboUIComponent *component,
-						  gpointer           data, 
-						  const char        *cname);
-static void   task_view_select_all_cb            (BonoboUIComponent *component,
-						  gpointer           data, 
-						  const char        *cname);
-static void   task_view_unlink_task_cb           (BonoboUIComponent *component,
-						  gpointer           data, 
-						  const char        *cname);
-static void   task_view_indent_task_cb           (BonoboUIComponent *component,
-						  gpointer           data, 
-						  const char        *cname);
-static void   task_view_move_task_up_cb          (BonoboUIComponent *component,
-						  gpointer	     data,
-						  const char	    *cname);
-static void   task_view_move_task_down_cb        (BonoboUIComponent *component,
-						  gpointer	     data,
-						  const char	    *cname);
-static void   task_view_unindent_task_cb         (BonoboUIComponent *component,
-						  gpointer           data, 
-						  const char        *cname);
-static void   task_view_reset_constraint_cb      (BonoboUIComponent *component,
-						  gpointer           data, 
-						  const char        *cname);
-static void   task_view_reset_all_constraints_cb (BonoboUIComponent *component,
-						  gpointer           data, 
-						  const char        *cname);
-static void   task_view_edit_custom_props_cb     (BonoboUIComponent *component,
-						  gpointer           data, 
-						  const char        *cname);
-static void   task_view_selection_changed_cb     (PlannerTaskTree        *tree,
-						  PlannerView            *view);
-static void   task_view_relations_changed_cb     (PlannerTaskTree        *tree,
-						  MrpTask           *task,
-						  MrpRelation       *relation,
-						  PlannerView            *view);
-static void   task_view_update_ui                (PlannerView            *view);
-void          print_init                           (PlannerView            *view,
-						    PlannerPrintJob        *job);
-void          print                                (PlannerView            *view);
-gint          print_get_n_pages                    (PlannerView            *view);
-void          print_cleanup                        (PlannerView            *view);
+void          activate                           (PlannerView                  *view);
+void          deactivate                         (PlannerView                  *view);
+void          init                               (PlannerView                  *view,
+						  PlannerWindow                *main_window);
+gchar        *get_label                          (PlannerView                  *view);
+gchar        *get_menu_label                     (PlannerView                  *view);
+gchar        *get_icon                           (PlannerView                  *view);
+GtkWidget    *get_widget                         (PlannerView                  *view);
+static void   task_view_project_loaded_cb        (MrpProject                   *project,
+						  PlannerView                  *view);
+static void   task_view_insert_task_cb           (BonoboUIComponent            *component,
+						  gpointer                      data,
+						  const char                   *cname);
+static void   task_view_insert_tasks_cb          (BonoboUIComponent            *component,
+						  gpointer                      data,
+						  const char                   *cname);
+static void   task_view_remove_task_cb           (BonoboUIComponent            *component,
+						  gpointer                      data,
+						  const char                   *cname);
+static void   task_view_edit_task_cb             (BonoboUIComponent            *component,
+						  gpointer                      data,
+						  const char                   *cname);
+static void   task_view_select_all_cb            (BonoboUIComponent            *component,
+						  gpointer                      data,
+						  const char                   *cname);
+static void   task_view_unlink_task_cb           (BonoboUIComponent            *component,
+						  gpointer                      data,
+						  const char                   *cname);
+static void   task_view_indent_task_cb           (BonoboUIComponent            *component,
+						  gpointer                      data,
+						  const char                   *cname);
+static void   task_view_move_task_up_cb          (BonoboUIComponent            *component,
+						  gpointer                      data,
+						  const char                   *cname);
+static void   task_view_move_task_down_cb        (BonoboUIComponent            *component,
+						  gpointer                      data,
+						  const char                   *cname);
+static void   task_view_unindent_task_cb         (BonoboUIComponent            *component,
+						  gpointer                      data,
+						  const char                   *cname);
+static void   task_view_reset_constraint_cb      (BonoboUIComponent            *component,
+						  gpointer                      data,
+						  const char                   *cname);
+static void   task_view_reset_all_constraints_cb (BonoboUIComponent            *component,
+						  gpointer                      data,
+						  const char                   *cname);
+static void   task_view_edit_custom_props_cb     (BonoboUIComponent            *component,
+						  gpointer                      data,
+						  const char                   *cname);
+static void   task_view_selection_changed_cb     (PlannerTaskTree              *tree,
+						  PlannerView                  *view);
+static void   task_view_relations_changed_cb     (PlannerTaskTree              *tree,
+						  MrpTask                      *task,
+						  MrpRelation                  *relation,
+						  PlannerView                  *view);
+static void   task_view_ui_component_event       (BonoboUIComponent            *comp,
+						  const gchar                  *path,
+						  Bonobo_UIComponent_EventType  type,
+						  const gchar                  *state_string,
+						  PlannerView                  *view);
+static void   task_view_update_ui                (PlannerView                  *view);
+void          print_init                         (PlannerView                  *view,
+						  PlannerPrintJob              *job);
+void          print                              (PlannerView                  *view);
+gint          print_get_n_pages                  (PlannerView                  *view);
+void          print_cleanup                      (PlannerView                  *view);
+
 
 static BonoboUIVerb verbs[] = {
 	BONOBO_UI_VERB ("InsertTask",		task_view_insert_task_cb),
@@ -140,13 +145,27 @@ static BonoboUIVerb verbs[] = {
 G_MODULE_EXPORT void
 activate (PlannerView *view)
 {
+	PlannerViewPriv *priv;
+	gboolean         show_critical;
+
 	planner_view_activate_helper (view,
-				 DATADIR
-				 "/planner/ui/task-view.ui",
-				 "taskview",
-				 verbs);
+				      DATADIR
+				      "/planner/ui/task-view.ui",
+				      "taskview",
+				      verbs);
 	
-	/* Set the initial sensitivity state. */
+	priv = view->priv;
+	
+	/* Set the initial UI state. */
+
+	show_critical = planner_task_tree_get_highlight_critical (
+		PLANNER_TASK_TREE (priv->tree));
+	
+	bonobo_ui_component_set_prop (view->ui_component, 
+				      "/commands/HighlightCriticalTasks",
+				      "state", show_critical ? "1" : "0",
+				      NULL);
+	
 	task_view_selection_changed_cb (PLANNER_TASK_TREE (view->priv->tree), view);
 }
 
@@ -159,10 +178,15 @@ deactivate (PlannerView *view)
 G_MODULE_EXPORT void
 init (PlannerView *view, PlannerWindow *main_window)
 {
-	PlannerViewPriv     *priv;
+	PlannerViewPriv *priv;
 	
 	priv = g_new0 (PlannerViewPriv, 1);
 	view->priv = priv;
+
+	g_signal_connect (view->ui_component,
+			  "ui_event",
+			  G_CALLBACK (task_view_ui_component_event),
+			  view);
 }
 
 G_MODULE_EXPORT gchar *
@@ -460,6 +484,26 @@ task_view_relations_changed_cb (PlannerTaskTree  *tree,
 	task_view_update_ui (view);
 }
 
+static void
+task_view_ui_component_event (BonoboUIComponent            *comp,
+			      const gchar                  *path,
+			      Bonobo_UIComponent_EventType  type,
+			      const gchar                  *state_string,
+			      PlannerView                  *view)
+{
+	PlannerViewPriv *priv;
+	gboolean         state;
+	
+	priv = view->priv;
+
+	if (!strcmp (path, "HighlightCriticalTasks")) {
+		state = !strcmp (state_string, "1");
+
+		planner_task_tree_set_highlight_critical (PLANNER_TASK_TREE (priv->tree),
+							  state);
+	}
+}
+	
 G_MODULE_EXPORT void
 print_init (PlannerView     *view,
 	    PlannerPrintJob *job)
