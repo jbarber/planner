@@ -221,12 +221,15 @@ void           print_init                            (PlannerView          *view
 void           print                                 (PlannerView          *view);
 gint           print_get_n_pages                     (PlannerView          *view);
 void           print_cleanup                         (PlannerView          *view);
-
 static void
 resource_view_resource_notify_cb                     (MrpResource          *resource,
 						      GParamSpec           *pspec,
 						      PlannerView          *view);
-
+static void
+resource_view_resource_prop_changed_cb               (MrpResource          *resource,
+						      MrpProperty          *propert,
+						      GValue               *value,
+						      PlannerView          *view);
 static void
 resource_view_resource_added_cb                      (MrpProject           *project, 
 						      MrpResource          *resource,
@@ -616,14 +619,33 @@ resource_view_find_resource (PlannerView *view, MrpResource *resource)
 static void
 resource_view_resource_notify_cb (MrpResource *resource,
 				  GParamSpec  *pspec,
-				  PlannerView      *view)
+				  PlannerView *view)
 {
 	GtkTreeModel     *model;
  	FindResourceData *data;
 
-	g_return_if_fail (MRP_IS_RESOURCE (resource));
-	g_return_if_fail (PLANNER_IS_VIEW (view));
+	model = gtk_tree_view_get_model (view->priv->tree_view);
+
+	data = resource_view_find_resource (view, resource);
 	
+	if (data) {
+		gtk_tree_model_row_changed (GTK_TREE_MODEL (model), 
+					    data->found_path, 
+					    data->found_iter);
+
+		resource_view_free_find_resource_data (data);
+	}
+}
+
+static void
+resource_view_resource_prop_changed_cb (MrpResource *resource,
+					MrpProperty *propert,
+					GValue      *value,
+					PlannerView *view)
+{
+	GtkTreeModel     *model;
+ 	FindResourceData *data;
+
 	model = gtk_tree_view_get_model (view->priv->tree_view);
 
 	data = resource_view_find_resource (view, resource);
@@ -640,7 +662,7 @@ resource_view_resource_notify_cb (MrpResource *resource,
 static void
 resource_view_resource_added_cb (MrpProject  *project, 
 				 MrpResource *resource,
-				 PlannerView      *view)
+				 PlannerView *view)
 {
 	GtkTreeModel *model;
 	GtkTreeIter   iter;
@@ -659,6 +681,9 @@ resource_view_resource_added_cb (MrpProject  *project,
 	g_signal_connect (resource, "notify",
 			  G_CALLBACK (resource_view_resource_notify_cb),
 			  view);
+	g_signal_connect (resource, "prop_changed",
+			  G_CALLBACK (resource_view_resource_prop_changed_cb),
+			  view);
 }
 
 static void
@@ -675,6 +700,9 @@ resource_view_resource_removed_cb (MrpProject  *project,
 
 	g_signal_handlers_disconnect_by_func (resource, 
 					      resource_view_resource_notify_cb,
+					      view);
+	g_signal_handlers_disconnect_by_func (resource, 
+					      resource_view_resource_prop_changed_cb,
 					      view);
 
 	model = gtk_tree_view_get_model (view->priv->tree_view);

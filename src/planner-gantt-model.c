@@ -57,25 +57,30 @@ typedef struct {
 	gchar *work;
 } ValueCache;
 
-static void         gantt_model_init               (PlannerGanttModel      *model);
-static void         gantt_model_class_init         (PlannerGanttModelClass *class);
-static void         gantt_model_tree_model_init    (GtkTreeModelIface      *iface);
-static gboolean     gantt_model_get_iter           (GtkTreeModel           *model,
-						    GtkTreeIter            *iter,
-						    GtkTreePath            *path);
-static void         gantt_model_task_notify_cb     (MrpTask                *task,
-						    GParamSpec             *pspec,
-						    PlannerGanttModel      *model);
-static GtkTreePath *gantt_model_get_path_from_node (PlannerGanttModel      *model,
-						    GNode                  *node);
-static const gchar *value_cache_get_wbs            (PlannerGanttModel      *model,
-						    MrpTask                *task);
-static ValueCache * value_cache_get                (PlannerGanttModel      *model,
-						    MrpTask                *task);
-static void         value_cache_clear              (PlannerGanttModel      *model,
-						    MrpTask                *task);
-static void         value_cache_clear_cache_wbs    (PlannerGanttModel      *model);
-static void         value_cache_free               (ValueCache             *cache);
+
+static void         gantt_model_init                 (PlannerGanttModel      *model);
+static void         gantt_model_class_init           (PlannerGanttModelClass *class);
+static void         gantt_model_tree_model_init      (GtkTreeModelIface      *iface);
+static gboolean     gantt_model_get_iter             (GtkTreeModel           *model,
+						      GtkTreeIter            *iter,
+						      GtkTreePath            *path);
+static void         gantt_model_task_notify_cb       (MrpTask                *task,
+						      GParamSpec             *pspec,
+						      PlannerGanttModel      *model);
+static void         gantt_model_task_prop_changed_cb (MrpTask                *task,
+						      MrpProperty            *property,
+						      GValue                 *value,
+						      PlannerGanttModel      *model);
+static GtkTreePath *gantt_model_get_path_from_node   (PlannerGanttModel      *model,
+						      GNode                  *node);
+static const gchar *value_cache_get_wbs              (PlannerGanttModel      *model,
+						      MrpTask                *task);
+static ValueCache * value_cache_get                  (PlannerGanttModel      *model,
+						      MrpTask                *task);
+static void         value_cache_clear                (PlannerGanttModel      *model,
+						      MrpTask                *task);
+static void         value_cache_clear_cache_wbs      (PlannerGanttModel      *model);
+static void         value_cache_free                 (ValueCache             *cache);
 
 
 static GObjectClass *parent_class;
@@ -123,6 +128,12 @@ gantt_model_connect_to_task_signals (PlannerGanttModel *model, MrpTask *task)
 	g_signal_connect_object (task,
 				 "notify",
 				 G_CALLBACK (gantt_model_task_notify_cb),
+				 model,
+				 0);
+
+	g_signal_connect_object (task,
+				 "prop_changed",
+				 G_CALLBACK (gantt_model_task_prop_changed_cb),
 				 model,
 				 0);
 }
@@ -191,6 +202,9 @@ traverse_remove_subtree (GNode             *node,
 	g_signal_handlers_disconnect_by_func (node->data,
 					      gantt_model_task_notify_cb,
 					      model);
+	g_signal_handlers_disconnect_by_func (node->data,
+					      gantt_model_task_prop_changed_cb,
+					      model);
 	
 	g_hash_table_remove (model->priv->task2node, node->data);
 
@@ -236,9 +250,12 @@ gantt_model_task_removed_cb (MrpProject        *project,
 	}
 
 	value_cache_clear_cache_wbs (model);
-	
+
 	g_signal_handlers_disconnect_by_func (task,
 					      gantt_model_task_notify_cb,
+					      model);
+	g_signal_handlers_disconnect_by_func (task,
+					      gantt_model_task_prop_changed_cb,
 					      model);
 	
 	parent_node = node->parent;
@@ -437,6 +454,25 @@ gantt_model_task_notify_cb (MrpTask           *task,
 		value_cache_clear (model, task);
 	}
 	
+	path = planner_gantt_model_get_path_from_task (model, task);
+	gtk_tree_model_get_iter (tree_model, &iter, path);
+	gtk_tree_model_row_changed (tree_model, path, &iter);
+
+	gtk_tree_path_free (path);
+}
+
+static void
+gantt_model_task_prop_changed_cb (MrpTask           *task,
+				  MrpProperty       *property,
+				  GValue            *value,
+				  PlannerGanttModel *model)
+{
+	GtkTreeModel *tree_model;
+	GtkTreePath  *path;
+	GtkTreeIter   iter;
+
+	tree_model = GTK_TREE_MODEL (model);
+
 	path = planner_gantt_model_get_path_from_task (model, task);
 	gtk_tree_model_get_iter (tree_model, &iter, path);
 	gtk_tree_model_row_changed (tree_model, path, &iter);

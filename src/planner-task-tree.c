@@ -2110,13 +2110,15 @@ task_tree_property_removed (MrpProject       *project,
 }
 
 static void
-task_tree_property_changed (MrpProject  *project,
-			    MrpProperty *property,
-			    PlannerTaskTree  *task_tree)
+task_tree_property_changed (MrpProject      *project,
+			    MrpProperty     *property,
+			    PlannerTaskTree *task_tree)
 {
 	PlannerTaskTreePriv *priv;
 	GtkTreeViewColumn   *col;
 
+	g_print ("koko\n");
+	
 	priv = task_tree->priv;
 	
 	col = g_hash_table_lookup (priv->property_to_column, property);

@@ -1,5 +1,17 @@
 2004-06-19  Richard Hult  <richard@imendio.com>
 
+	* src/planner-resource-view.c: (resource_view_resource_notify_cb),
+	(resource_view_resource_prop_changed_cb),
+	(resource_view_resource_added_cb),
+	(resource_view_resource_removed_cb):
+	* src/planner-gantt-model.c: (gantt_model_connect_to_task_signals),
+	(traverse_remove_subtree), (gantt_model_task_removed_cb),
+	(gantt_model_task_notify_cb), (gantt_model_task_prop_changed_cb):
+	* src/planner-task-tree.c: (task_tree_property_changed): Fix bug
+	#142121, custom properties don't update correctly on undo/redo.
+
+2004-06-19  Richard Hult  <richard@imendio.com>
+
 	* src/planner-ttable-tree.c (planner_ttable_tree_set_model)
 	(ttable_tree_row_inserted): Fix bug #141117, tree and chart
 	expansion gets out of sync.
