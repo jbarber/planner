@@ -1,3 +1,11 @@
+2004-11-04  Richard Hult  <richard@imendio.com>
+
+	* gtk-doc.make: Update.
+
+	* libplanner/mrp-sql.c: (sql_write_resources): Fix build.
+ 	* src/planner-sql-plugin.c: (check_database_tables): Change
+	warning to message.
+
 2004-10-14  Richard Hult  <richard@imendio.com>
 
 	* src/planner-html-plugin.c: (html_plugin_export): Fill in a

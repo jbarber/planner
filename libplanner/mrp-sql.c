@@ -3233,6 +3233,8 @@ sql_write_resources (SQLData *data)
 	const gchar     *is_worker;
 	gchar           *cal_id_string;
 	gchar           *group_id_string;
+
+	res = NULL;
 	
 	resources = mrp_project_get_resources (data->project);
 	for (l = resources; l; l = l->next) {

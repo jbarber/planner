@@ -454,7 +454,7 @@ check_database_tables (GdaConnection *conn,
 			if (!database_file) {
 				database_file = g_strdup (sql_file);
 			}
-			g_warning ("File with no version: %s", sql_file);
+			g_message ("File with no version: %s", sql_file);
 			can_create_tables = TRUE;
 		}
 		if (versionv) {
