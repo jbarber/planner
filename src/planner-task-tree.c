@@ -2117,8 +2117,6 @@ task_tree_property_changed (MrpProject      *project,
 	PlannerTaskTreePriv *priv;
 	GtkTreeViewColumn   *col;
 
-	g_print ("koko\n");
-	
 	priv = task_tree->priv;
 	
 	col = g_hash_table_lookup (priv->property_to_column, property);

@@ -19,21 +19,21 @@
  * Boston, MA 02111-1307, USA.
  */
 
-#ifndef __PLANNER_CUSTOM_PROPERTIES_DIALOG_H__
-#define __PLANNER_CUSTOM_PROPERTIES_DIALOG_H__
+#ifndef __PLANNER_PROPERTY_DIALOG_H__
+#define __PLANNER_PROPERTY_DIALOG_H__
 
 #include <gtk/gtkwidget.h>
 #include <libplanner/mrp-project.h>
 #include <planner-window.h>
 
-GtkWidget *planner_property_dialog_new      (PlannerWindow     *main_window,
-					    MrpProject         *project,
-					     GType               owner_type,
-					     const gchar        *title);
+GtkWidget *planner_property_dialog_new          (PlannerWindow       *main_window,
+						 MrpProject          *project,
+						 GType                owner_type,
+						 const gchar         *title);
+void       planner_property_dialog_value_edited (GtkCellRendererText *cell,
+						 gchar               *path_str,
+						 gchar               *new_text,
+						 gpointer             data);
 
-void       planner_property_dialog_value_edited (GtkCellRendererText *cell, 
-					    gchar               *path_str,
-					    gchar               *new_text, 
-					    gpointer             data);
 
-#endif /* __PLANNER_CUSTOM_PROPERTIES_DIALOG_H__ */
+#endif /* __PLANNER_PROPERTY_DIALOG_H__ */

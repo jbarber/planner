@@ -117,7 +117,7 @@ get_last_dir (PlannerWindow *window)
 	
 	priv = window->priv;
 	
-	gconf_client = planner_application_get_gconf_client (priv->application);
+	gconf_client = planner_application_get_gconf_client ();
 	
 	last_dir = gconf_client_get_string (gconf_client,
 					    GCONF_PATH "/general/last_dir",

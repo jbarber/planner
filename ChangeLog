@@ -1,3 +1,13 @@
+2004-06-21  Richard Hult  <richard@imendio.com>
+
+	* src/planner-property-dialog.c:
+	* src/planner-property-dialog.h:
+	* src/planner-property-model.h: Fix indentation and remove the
+	possibility to select which columns to use (unsed and didn't
+	work). Also apply patch from Lincoln to fix bug #141967.
+
+	* src/planner-task-tree.c: Remove debug output.
+
 2004-06-21 Alvaro del Castillo  <acs@barrapunto.com>
 
 	* src/planner-sql-plugin.c: change in planner_application_get_gconf_client

@@ -33,19 +33,15 @@ enum {
 	COL_PROPERTY
 };
 
-/* This was added because we were incorrectly adding properties to
-*  a store when we got a property-added message. stores are not typed
-*  per se and we can't extend them so created a 'shop' (i.e. a 
-*  type of store :) with an owner
-*/
 typedef struct {
-	GType		owner_type;
+	GType		 owner_type;
 	GtkListStore 	*store;
 } MrpPropertyStore;
 
-GtkTreeModel *planner_property_model_new (MrpProject *project,
-				     	GType       	owner_type,
-				     	MrpPropertyStore *shop);
+GtkTreeModel *planner_property_model_new (MrpProject       *project,
+					  GType             owner_type,
+					  MrpPropertyStore *shop);
+
 
 #endif /* __PLANNER_PROPERTY_MODEL_H__ */
 
