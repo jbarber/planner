@@ -2628,7 +2628,13 @@ planner_task_tree_insert_task (PlannerTaskTree *tree)
 		if (position != -1) {
 			gtk_tree_path_append_index (path, position);
 		} else {
-			gtk_tree_path_append_index (path, 0);
+			MrpTask *root;
+
+			/* Put the new task at the end of end of the list. */
+			root = mrp_project_get_root_task (priv->project);
+			position = mrp_task_get_n_children (root);
+			
+			gtk_tree_path_append_index (path, position);
 		}
 	}
 

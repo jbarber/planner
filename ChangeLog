@@ -1,5 +1,10 @@
 2005-02-13  Richard Hult  <richard@imendio.com>
 
+	* src/planner-task-tree.c (planner_task_tree_insert_task): Put new
+	tasks at the bottom if there is no parent. Fixes bug #156616.
+
+2005-02-13  Richard Hult  <richard@imendio.com>
+
 	* src/planner-project-properties.c (mpp_calendar_popdown)
 	(mpp_calendar_cancel_clicked_cb, mpp_calendar_save_date)
 	(mpp_calendar_ok_clicked_cb, mpp_calendar_set_date)
