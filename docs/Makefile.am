@@ -1,1 +1,1 @@
-SUBDIRS = libplanner user-guide
+SUBDIRS = libplanner user-guide sql
