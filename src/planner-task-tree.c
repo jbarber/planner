@@ -328,6 +328,9 @@ task_cmd_edit_property_free (PlannerCmd *cmd_base)
 	g_free (cmd->property);
 	g_value_unset (cmd->value);
 	g_value_unset (cmd->old_value);
+
+	g_free (cmd->value);
+	g_free (cmd->old_value);
 }
 
 static PlannerCmd *
@@ -1242,6 +1245,8 @@ task_cmd_edit_custom_property_free (PlannerCmd *cmd_base)
 
 	g_value_unset (cmd->value);
 	g_value_unset (cmd->old_value);
+	g_free (cmd->value);
+	g_free (cmd->old_value);
 
 	g_object_unref (cmd->task);
 }

@@ -1,9 +1,9 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+ /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
  * Copyright (C) 2002-2003 CodeFactory AB
  * Copyright (C) 2002-2003 Richard Hult <richard@imendio.com>
  * Copyright (C) 2002 Mikael Hallendal <micke@imendio.com>
- * Copyright (C) 2002 Alvaro del Castillo <acs@barrapunto.com>
+ * Copyright (C) 2002-2004 Alvaro del Castillo <acs@barrapunto.com>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -65,6 +65,12 @@ static void  task_dialog_task_name_changed_cb       (MrpTask             *task,
 						     GtkWidget           *dialog);
 static void  task_dialog_name_changed_cb            (GtkWidget           *w, 
 						     DialogData          *data);
+static gboolean task_dialog_name_focus_in_cb        (GtkWidget           *w,
+						     GdkEventFocus       *event,
+						     DialogData          *data);
+static gboolean task_dialog_name_focus_out_cb       (GtkWidget           *w,
+						     GdkEventFocus       *event,
+						     DialogData          *data);
 static void  task_dialog_task_type_changed_cb       (MrpTask             *task,
 						     GParamSpec          *pspec,
 						     GtkWidget           *dialog);
@@ -80,20 +86,44 @@ static void  task_dialog_task_work_changed_cb       (MrpTask             *task,
 						     GtkWidget           *dialog);
 static void  task_dialog_work_changed_cb            (GtkWidget           *w, 
 						     DialogData          *data);
+static gboolean task_dialog_work_focus_in_cb        (GtkWidget           *w,
+						     GdkEventFocus       *event,
+						     DialogData          *data);
+static gboolean task_dialog_work_focus_out_cb       (GtkWidget           *w,
+						     GdkEventFocus       *event,
+						     DialogData          *data);
 static void  task_dialog_task_duration_changed_cb   (MrpTask             *task,
 						     GParamSpec          *pspec,
 						     GtkWidget           *dialog);
 static void  task_dialog_duration_changed_cb        (GtkWidget           *w, 
+						     DialogData          *data);
+static gboolean task_dialog_duration_focus_in_cb    (GtkWidget           *w,
+						     GdkEventFocus       *event,
+						     DialogData          *data);
+static gboolean task_dialog_duration_focus_out_cb   (GtkWidget           *w,
+						     GdkEventFocus       *event,
 						     DialogData          *data);
 static void  task_dialog_task_complete_changed_cb   (MrpTask             *task, 
 						     GParamSpec          *pspec,
 						     GtkWidget           *dialog);
 static void  task_dialog_complete_changed_cb        (GtkWidget           *w, 
 						     DialogData          *data);
+static gboolean task_dialog_complete_focus_in_cb    (GtkWidget           *w,
+						     GdkEventFocus       *event,
+						     DialogData          *data);
+static gboolean task_dialog_complete_focus_out_cb   (GtkWidget           *w,
+						     GdkEventFocus       *event,
+						     DialogData          *data);
 static void  task_dialog_task_priority_changed_cb   (MrpTask             *task, 
 						     GParamSpec          *pspec,
 						     GtkWidget           *dialog);
 static void  task_dialog_priority_changed_cb        (GtkWidget           *w, 
+						     DialogData          *data);
+static gboolean task_dialog_priority_focus_in_cb    (GtkWidget           *w,
+						     GdkEventFocus       *event,
+						     DialogData          *data);
+static gboolean task_dialog_priority_focus_out_cb   (GtkWidget           *w,
+						     GdkEventFocus       *event,
 						     DialogData          *data);
 static void  task_dialog_task_note_changed_cb       (MrpTask             *task, 
 						     GParamSpec          *pspec, 
@@ -154,6 +184,15 @@ static void  task_dialog_update_title               (DialogData           *data)
 static GHashTable *dialogs = NULL;
 
 #define DIALOG_GET_DATA(d) g_object_get_data ((GObject*)d, "data")
+
+typedef struct {
+	PlannerCmd base;
+
+	MrpTask *task;
+	gchar   *property;  
+	GValue  *value;
+	GValue  *old_value;
+} TaskCmdEditProperty;
 
 static void
 task_dialog_setup_option_menu (GtkWidget     *option_menu,
@@ -282,6 +321,83 @@ task_dialog_setup_task_combo (GtkCombo *combo,
 			  combo);
 }
 
+static gboolean
+task_cmd_edit_property_do (PlannerCmd *cmd_base)
+{
+	TaskCmdEditProperty *cmd;
+
+	cmd = (TaskCmdEditProperty*) cmd_base;
+
+	g_object_set_property (G_OBJECT (cmd->task),
+			       cmd->property,
+			       cmd->value);
+
+	return TRUE;
+}
+
+static void
+task_cmd_edit_property_undo (PlannerCmd *cmd_base)
+{
+	TaskCmdEditProperty *cmd;
+
+	cmd = (TaskCmdEditProperty*) cmd_base;
+
+	g_object_set_property (G_OBJECT (cmd->task),
+			       cmd->property,
+			       cmd->old_value);
+}
+
+static void
+task_cmd_edit_property_free (PlannerCmd *cmd_base)
+{
+	TaskCmdEditProperty *cmd;
+
+	cmd = (TaskCmdEditProperty*) cmd_base;
+
+	g_value_unset (cmd->value);
+	g_value_unset (cmd->old_value);
+
+	g_free (cmd->property);
+	g_object_unref (cmd->task);
+}
+
+static PlannerCmd *
+task_cmd_edit_property_focus (PlannerWindow *main_window,
+			      MrpTask       *task,
+			      const gchar   *property,
+			      const GValue  *focus_in_value)
+{
+	PlannerCmd          *cmd_base;
+	TaskCmdEditProperty *cmd;
+
+	cmd = g_new0 (TaskCmdEditProperty, 1);
+
+	cmd_base = (PlannerCmd*) cmd;
+
+	cmd_base->label = g_strdup (_("Edit task property from dialog"));
+	cmd_base->do_func = task_cmd_edit_property_do;
+	cmd_base->undo_func = task_cmd_edit_property_undo;
+	cmd_base->free_func = task_cmd_edit_property_free;
+
+	cmd->property = g_strdup (property);
+	cmd->task = g_object_ref (task);
+
+	cmd->value = g_new0 (GValue, 1);
+	g_value_init (cmd->value, G_VALUE_TYPE (focus_in_value));
+	g_object_get_property (G_OBJECT (cmd->task),
+			       cmd->property,
+			       cmd->value);
+
+	cmd->old_value = g_new0 (GValue, 1);
+	g_value_init (cmd->old_value, G_VALUE_TYPE (focus_in_value));
+	g_value_copy (focus_in_value, cmd->old_value);
+
+	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager (main_window),
+					   cmd_base);
+
+	return cmd_base;
+}
+
 static void
 task_dialog_close_clicked_cb (GtkWidget *w, DialogData *data)
 {
@@ -340,6 +456,45 @@ task_dialog_name_changed_cb (GtkWidget *w, DialogData *data)
 	g_signal_handlers_unblock_by_func (data->task, 
 					   task_dialog_task_name_changed_cb,
 					   data->dialog);
+}
+
+static gboolean
+task_dialog_name_focus_out_cb (GtkWidget     *w,
+			       GdkEventFocus *event,
+			       DialogData    *data)
+{
+	gchar        *focus_in_name;
+	GValue        value = { 0 };
+	PlannerCmd   *cmd;
+
+	g_assert (MRP_IS_TASK (data->task));
+
+	focus_in_name = g_object_get_data (G_OBJECT (data->task),"focus_in_name");
+	
+	g_value_init (&value, G_TYPE_STRING);
+	g_value_set_string (&value, focus_in_name);
+
+	cmd = task_cmd_edit_property_focus (data->main_window, 
+					    data->task, "name", &value);
+
+	g_free (focus_in_name);
+
+	return FALSE;
+}
+
+static gboolean
+task_dialog_name_focus_in_cb (GtkWidget     *w,
+			      GdkEventFocus *event,
+			      DialogData    *data)
+{
+	gchar  *name;
+	   
+	name = g_strdup (gtk_entry_get_text (GTK_ENTRY (w)));
+	
+	g_object_set_data (G_OBJECT (data->task), 
+			   "focus_in_name", (gpointer) name);
+
+	return FALSE;
 }
 
 static void
@@ -510,6 +665,68 @@ task_dialog_work_changed_cb (GtkWidget  *w,
 					   data->dialog);
 }
 
+static gboolean
+task_dialog_work_focus_out_cb (GtkWidget     *w,
+			       GdkEventFocus *event,
+			       DialogData    *data)
+{
+	MrpProject   *project;
+	MrpCalendar  *calendar;
+	gint          work;
+	gint          current_work;
+	gint          work_per_day;
+	gdouble      *focus_in_work;
+	GValue        value = { 0 };
+	PlannerCmd   *cmd;
+
+	g_assert (MRP_IS_TASK (data->task));
+
+	g_object_get (data->task, "project", &project, NULL);
+	calendar = mrp_project_get_calendar (project);
+	work_per_day = mrp_calendar_day_get_total_work (calendar,
+							mrp_day_get_work ());
+
+	focus_in_work = g_object_get_data (G_OBJECT (data->task), "focus_in_work");
+
+	gtk_spin_button_update (GTK_SPIN_BUTTON (w));
+	current_work = gtk_spin_button_get_value (GTK_SPIN_BUTTON (w)) * work_per_day;
+	work = (*focus_in_work) * work_per_day;
+
+	if (work == current_work) {
+		g_free (focus_in_work);
+		return FALSE;
+	}
+
+	g_object_set (data->task, "work", current_work, NULL);
+
+	g_value_init (&value, G_TYPE_INT);
+	g_value_set_int (&value, work);
+
+	cmd = task_cmd_edit_property_focus (data->main_window, 
+					    data->task, "work", &value);
+
+	g_free (focus_in_work);
+
+	return FALSE;
+}
+
+static gboolean
+task_dialog_work_focus_in_cb (GtkWidget     *w,
+			      GdkEventFocus *event,
+			      DialogData    *data)
+{
+	gdouble *work;
+
+	work = g_new0 (gdouble, 1);
+	   
+	*work = gtk_spin_button_get_value (GTK_SPIN_BUTTON (w));
+	
+	g_object_set_data (G_OBJECT (data->task), 
+			   "focus_in_work", (gpointer) work);
+
+	return FALSE;
+}
+
 static void
 task_dialog_task_duration_changed_cb (MrpTask    *task, 
 				      GParamSpec *pspec,
@@ -574,13 +791,82 @@ task_dialog_duration_changed_cb (GtkWidget  *w,
 					   data->dialog);
 }
 
+
+/* FIXME: try to unify duration and work focus functions? */
+
+static gboolean
+task_dialog_duration_focus_out_cb (GtkWidget     *w,
+				   GdkEventFocus *event,
+				   DialogData    *data)
+{
+	MrpProject   *project;
+	MrpCalendar  *calendar;
+	gint          duration;
+	gint          current_duration;
+	gint          work_per_day;
+	gdouble      *focus_in_duration;
+	GValue        value = { 0 };
+	PlannerCmd   *cmd;
+
+	g_assert (MRP_IS_TASK (data->task));
+
+	g_object_get (data->task, "project", &project, NULL);
+	calendar = mrp_project_get_calendar (project);
+	work_per_day = mrp_calendar_day_get_total_work (calendar,
+							mrp_day_get_work ());
+
+	focus_in_duration = g_object_get_data (G_OBJECT (data->task), "focus_in_duration");
+
+	/* FIXME: Why spin button isn't updated when is modified with direct entry
+	 from keyboard with correct values? */
+	gtk_spin_button_update (GTK_SPIN_BUTTON (w));
+	current_duration = gtk_spin_button_get_value (GTK_SPIN_BUTTON (w)) * work_per_day;
+	duration = (*focus_in_duration) * work_per_day;
+
+	if (duration == current_duration) {
+		g_free (focus_in_duration);
+		return FALSE;
+	}
+
+	g_object_set (data->task, "duration", current_duration, NULL);
+	g_message ("Old duration %d, New duration %d", duration, current_duration);
+
+	g_value_init (&value, G_TYPE_INT);
+	g_value_set_int (&value, duration);
+
+	cmd = task_cmd_edit_property_focus (data->main_window, 
+					    data->task, "duration", &value);
+
+	g_free (focus_in_duration);
+
+	return FALSE;
+}
+
+static gboolean
+task_dialog_duration_focus_in_cb (GtkWidget     *w,
+				  GdkEventFocus *event,
+				  DialogData    *data)
+{
+	gdouble *duration;
+
+	duration = g_new0 (gdouble, 1);
+	   
+	*duration = gtk_spin_button_get_value (GTK_SPIN_BUTTON (w));
+	
+	g_object_set_data (G_OBJECT (data->task), 
+			   "focus_in_duration", (gpointer) duration);
+
+	return FALSE;
+}
+
+
 static void
 task_dialog_task_complete_changed_cb (MrpTask    *task, 
 				      GParamSpec *pspec,
 				      GtkWidget  *dialog)
 {
 	DialogData *data;
-	guint       complete;
+	gint       complete;
 	
 	g_return_if_fail (MRP_IS_TASK (task));
 	g_return_if_fail (GTK_IS_WIDGET (dialog));
@@ -618,6 +904,58 @@ task_dialog_complete_changed_cb (GtkWidget  *w,
 	g_signal_handlers_unblock_by_func (data->task, 
 					   task_dialog_task_complete_changed_cb,
 					   data->dialog);
+}
+
+static gboolean
+task_dialog_complete_focus_out_cb (GtkWidget     *w,
+				   GdkEventFocus *event,
+				   DialogData    *data)
+{
+	guint         current_complete;
+	/* guint        *focus_in_complete;*/
+	guint         focus_in_complete;
+	GValue        value = { 0 };
+	PlannerCmd   *cmd;
+
+	g_assert (MRP_IS_TASK (data->task));
+
+	focus_in_complete = GPOINTER_TO_INT (g_object_get_data 
+					     (G_OBJECT (data->task), "focus_in_complete"));
+
+	gtk_spin_button_update (GTK_SPIN_BUTTON (w));
+	current_complete = gtk_spin_button_get_value (GTK_SPIN_BUTTON (w));
+
+	if (focus_in_complete == current_complete) {
+		/* g_free (focus_in_complete); */
+		return FALSE;
+	}
+
+	g_object_set (data->task, "percent_complete", current_complete, NULL);
+
+	g_value_init (&value, G_TYPE_UINT);
+	g_value_set_uint (&value, focus_in_complete);
+
+	cmd = task_cmd_edit_property_focus (data->main_window, 
+					    data->task, "percent_complete", &value);
+
+	/* g_free (focus_in_complete); */
+
+	return FALSE;
+}
+
+static gboolean
+task_dialog_complete_focus_in_cb (GtkWidget     *w,
+				  GdkEventFocus *event,
+				  DialogData    *data)
+{
+	guint complete;
+
+	complete = gtk_spin_button_get_value (GTK_SPIN_BUTTON (w));
+	
+	g_object_set_data (G_OBJECT (data->task), 
+			   "focus_in_complete", GINT_TO_POINTER (complete));
+
+	return FALSE;
 }
 
 static void
@@ -664,6 +1002,54 @@ task_dialog_priority_changed_cb (GtkWidget  *w,
 	g_signal_handlers_unblock_by_func (data->task, 
 					   task_dialog_task_priority_changed_cb,
 					   data->dialog);
+}
+
+static gboolean
+task_dialog_priority_focus_out_cb (GtkWidget     *w,
+				   GdkEventFocus *event,
+				   DialogData    *data)
+{
+	gint          current_priority;
+	gint          focus_in_priority;
+	GValue        value = { 0 };
+	PlannerCmd   *cmd;
+
+	g_assert (MRP_IS_TASK (data->task));
+
+	focus_in_priority = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (data->task), 
+								"focus_in_priority"));
+
+	gtk_spin_button_update (GTK_SPIN_BUTTON (w));
+	current_priority = gtk_spin_button_get_value (GTK_SPIN_BUTTON (w));
+
+	if (focus_in_priority == current_priority) {
+		return FALSE;
+	}
+
+	g_object_set (data->task, "priority", current_priority, NULL);
+
+	g_value_init (&value, G_TYPE_INT);
+	g_value_set_int (&value, focus_in_priority);
+
+	cmd = task_cmd_edit_property_focus (data->main_window, 
+					    data->task, "priority", &value);
+
+	return FALSE;
+}
+
+static gboolean
+task_dialog_priority_focus_in_cb (GtkWidget     *w,
+				  GdkEventFocus *event,
+				  DialogData    *data)
+{
+	gint priority;
+
+	priority = gtk_spin_button_get_value (GTK_SPIN_BUTTON (w));
+	
+	g_object_set_data (G_OBJECT (data->task), 
+			   "focus_in_priority", GINT_TO_POINTER (priority));
+
+	return FALSE;
 }
 
 static void
@@ -1252,6 +1638,16 @@ task_dialog_setup_widgets (DialogData *data,
 			  G_CALLBACK (task_dialog_name_changed_cb),
 			  data);
 
+	g_signal_connect (data->name_entry,
+			  "focus_in_event",
+			  G_CALLBACK (task_dialog_name_focus_in_cb),
+			  data);
+
+	g_signal_connect (data->name_entry,
+			  "focus_out_event",
+			  G_CALLBACK (task_dialog_name_focus_out_cb),
+			  data);
+
 	data->milestone_checkbutton = glade_xml_get_widget (glade, "milestone_checkbutton");
 	g_object_get (data->task, "type", &type, NULL);
 	if (type == MRP_TASK_TYPE_MILESTONE) {
@@ -1280,6 +1676,15 @@ task_dialog_setup_widgets (DialogData *data,
 			  "value_changed",
 			  G_CALLBACK (task_dialog_work_changed_cb),
 			  data);
+	g_signal_connect (data->work_spinbutton,
+			  "focus_in_event",
+			  G_CALLBACK (task_dialog_work_focus_in_cb),
+			  data);
+	g_signal_connect (data->work_spinbutton,
+			  "focus_out_event",
+			  G_CALLBACK (task_dialog_work_focus_out_cb),
+			  data);
+	
 
 	data->duration_spinbutton = glade_xml_get_widget (glade, "duration_spinbutton");
 	g_object_get (data->task, "duration", &int_value, NULL);
@@ -1288,6 +1693,14 @@ task_dialog_setup_widgets (DialogData *data,
 	g_signal_connect (data->duration_spinbutton,
 			  "value_changed",
 			  G_CALLBACK (task_dialog_duration_changed_cb),
+			  data);
+	g_signal_connect (data->duration_spinbutton,
+			  "focus_in_event",
+			  G_CALLBACK (task_dialog_duration_focus_in_cb),
+			  data);
+	g_signal_connect (data->duration_spinbutton,
+			  "focus_out_event",
+			  G_CALLBACK (task_dialog_duration_focus_out_cb),
 			  data);
 
 	data->complete_spinbutton = glade_xml_get_widget (glade, "complete_spinbutton");
@@ -1301,6 +1714,15 @@ task_dialog_setup_widgets (DialogData *data,
 			  G_CALLBACK (task_dialog_complete_changed_cb),
 			  data);
 	
+	g_signal_connect (data->complete_spinbutton,
+			  "focus_in_event",
+			  G_CALLBACK (task_dialog_complete_focus_in_cb),
+			  data);
+	g_signal_connect (data->complete_spinbutton,
+			  "focus_out_event",
+			  G_CALLBACK (task_dialog_complete_focus_out_cb),
+			  data);
+	
 	data->priority_spinbutton = glade_xml_get_widget (glade, "priority_spinbutton");
 	g_object_get (data->task, "priority", &int_value, NULL);	
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON (data->priority_spinbutton), int_value);
@@ -1308,6 +1730,16 @@ task_dialog_setup_widgets (DialogData *data,
 			  "value_changed",
 			  G_CALLBACK (task_dialog_priority_changed_cb),
 			  data);	
+
+	g_signal_connect (data->priority_spinbutton,
+			  "focus_in_event",
+			  G_CALLBACK (task_dialog_priority_focus_in_cb),
+			  data);
+
+	g_signal_connect (data->priority_spinbutton,
+			  "focus_out_event",
+			  G_CALLBACK (task_dialog_priority_focus_out_cb),
+			  data);
 
 	data->note_textview = glade_xml_get_widget (glade, "note_textview");
 

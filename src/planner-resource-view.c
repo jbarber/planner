@@ -1337,12 +1337,12 @@ resource_cmd_edit_property_free (PlannerCmd *cmd_base)
 
 	g_value_unset (cmd->value);
 	g_value_unset (cmd->old_value);
+	g_free (cmd->value);
+	g_free (cmd->old_value);
 
 	g_object_unref (cmd->resource);
 	g_free (cmd->property);
 
-	g_free (cmd_base->label);
-	g_free (cmd);
 }
 
 static PlannerCmd *

@@ -1,3 +1,13 @@
+2004-06-04 Alvaro del Castillo  <acs@barrapunto.com>
+
+	* src/planner-task-dialog.c: implemented undo for all the fields
+	in the first page of the task dialog editor notebook.
+
+	* src/planner-resource-view.c: fixed memory leaks using GValues.
+
+	* src/planner-task-tree.c: fixed memory leaks using GValues.
+	
+
 2004-06-03  Setul Patel  <setulkumarpatel@yahoo.com>
 
 	* data/ui/main-window.ui: Fix bug #143662.
