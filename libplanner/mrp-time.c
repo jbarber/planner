@@ -1,5 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
+ * Copyright (C) 2005 Imendio AB
  * Copyright (C) 2002-2003 CodeFactory AB
  * Copyright (C) 2002-2003 Richard Hult <richard@imendio.com>
  * Copyright (C) 2002 Mikael Hallendal <micke@imendio.com>
@@ -1067,31 +1068,30 @@ mrp_time_format (const gchar *format, mrptime t)
 	return buffer;
 }
 
-/*
-       %a     The abbreviated weekday name (Mon, Tue, ...)
-       %A     The full weekday name (Monday, Tuesday, ...)
-       %b     The abbreviated month name (Jan, Feb, ...)
-       %B     The full month name (January, February, ...)
-       %d     The day of the month (01 - 31).
-       %e     The day of the month (1 - 31).
-       %H     The hour using a 24-hour clock (00 - 23).
-       %I     The hour using a 12-hour clock (01 - 12).
-       %j     The day of the year (001 - 366).
-       %k     The hour using a 24-hour clock (0 to 23).
-       %l     The hour using a 12-hour clock (1 - 12).
-       %m     The month number (01 to 12).
-       %M     The minute (00 - 59).
-       %p     Either 'AM' or 'PM' according  to the given time value.
-       %P     Like %p but in lowercase.
-       %R     The time in 24 hour notation (%H:%M).
-       %S     The second (00 - 61).
-       %U     The week number, (1 - 53), starting with the first
-              Sunday as the first day of week 1.
-       %W     The week number, (1 - 53), starting with the first
-              Monday as the first day of week 1.
-       %y     The year without a century (range 00 to 99).
-       %Y     The year including the century.
+/**
+ * mrp_time_format_locale:
+ * @t: an #mrptime value
+ * 
+ * Formats a string with time values. For format is the preferred for the
+ * current locale.
+ *
+ * Return value: Newly created string that needs to be freed.
+ **/
+gchar *
+mrp_time_format_locale (mrptime t)
+{
+	struct tm   *tm;
+	gchar        buffer[256];
+	const gchar *format = "%x"; /* Keep in variable get rid of warning. */
+	
+	tm = mrp_time_to_tm (t);
 
-*/
+	if (!strftime (buffer, sizeof (buffer), format, tm)) {
+		return g_strup ("");
+	}
+
+	return g_strdup (buffer);
+}
+
 
 

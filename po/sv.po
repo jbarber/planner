@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: planner\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-02-20 01:18+0100\n"
+"POT-Creation-Date: 2005-02-20 18:55+0100\n"
 "PO-Revision-Date: 2004-07-04 16:55+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -33,7 +33,7 @@ msgstr "_Fördröjning:"
 #: ../data/glade/project-properties.glade.h:9
 #: ../data/glade/resource-dialog.glade.h:12
 #: ../data/glade/resource-input-dialog.glade.h:7
-#: ../data/glade/task-dialog.glade.h:13
+#: ../data/glade/task-dialog.glade.h:16
 #: ../data/glade/task-input-dialog.glade.h:4
 msgid "_Name:"
 msgstr "_Namn:"
@@ -51,7 +51,7 @@ msgstr ""
 "Den valda dagtypen har följande arbetstid:"
 
 #: ../data/glade/calendar-dialog.glade.h:3 ../data/glade/html-output.glade.h:1
-#: ../data/glade/task-dialog.glade.h:1
+#: ../data/glade/task-dialog.glade.h:2
 msgid "    "
 msgstr "    "
 
@@ -261,7 +261,7 @@ msgid "Edit Project Phases"
 msgstr "Redigera projektfaser"
 
 #: ../data/glade/project-properties.glade.h:3
-#: ../data/glade/resource-dialog.glade.h:5 ../data/glade/task-dialog.glade.h:5
+#: ../data/glade/resource-dialog.glade.h:5 ../data/glade/task-dialog.glade.h:6
 msgid "General"
 msgstr "Allmänt"
 
@@ -314,7 +314,7 @@ msgid "Edit Calendars..."
 msgstr "Redigera kalendrar..."
 
 # "Notes" är översatt med "anteckningar" på andra ställen. /menthos
-#: ../data/glade/resource-dialog.glade.h:6 ../data/glade/task-dialog.glade.h:6
+#: ../data/glade/resource-dialog.glade.h:6 ../data/glade/task-dialog.glade.h:7
 msgid "Notes"
 msgstr "Anteckningar"
 
@@ -390,44 +390,87 @@ msgstr "_Server:"
 msgid "_Username:"
 msgstr "_Användarnamn:"
 
-#: ../data/glade/task-dialog.glade.h:3
+#: ../data/glade/task-date-widget.glade.h:1
+msgid ""
+"As soon as possible\n"
+"No earlier than\n"
+"On fixed date"
+msgstr ""
+"Så tidigt som möjligt\n"
+"Inte tidigare än\n"
+"På fast datum"
+
+#: ../data/glade/task-date-widget.glade.h:4
+#: ../src/planner-cell-renderer-date.c:182
+#: ../src/planner-project-properties.c:742
+msgid "Cancel"
+msgstr "Avbryt"
+
+#. The verb "schedule".
+#. This is the verb "schedule"
+#. I18n: the verb "schedule" here.
+#: ../data/glade/task-date-widget.glade.h:6
+#: ../data/glade/task-dialog.glade.h:11
+#: ../src/planner-cell-renderer-date.c:154
+msgid "Schedule:"
+msgstr "Schemalägg:"
+
+#: ../data/glade/task-date-widget.glade.h:7
+msgid "Select"
+msgstr "Välj"
+
+#: ../data/glade/task-date-widget.glade.h:8
+#: ../src/planner-cell-renderer-date.c:176
+#: ../src/planner-project-properties.c:735
+msgid "Today"
+msgstr "Idag"
+
+#: ../data/glade/task-date-widget.glade.h:9
+msgid "window"
+msgstr "window"
+
+#: ../data/glade/task-dialog.glade.h:1
+msgid "  "
+msgstr "  "
+
+#: ../data/glade/task-dialog.glade.h:4
 #, no-c-format
 msgid "%"
 msgstr "%"
 
-#: ../data/glade/task-dialog.glade.h:4
+#: ../data/glade/task-dialog.glade.h:5
 msgid "C_omplete:"
 msgstr "_Utförd:"
 
-#: ../data/glade/task-dialog.glade.h:7
+#: ../data/glade/task-dialog.glade.h:8
 msgid "Predecessors"
 msgstr "Föregångare"
 
-#: ../data/glade/task-dialog.glade.h:8 ../src/planner-resource-view.c:419
+#: ../data/glade/task-dialog.glade.h:9 ../src/planner-resource-view.c:419
 msgid "Resources"
 msgstr "Resurser"
 
-#: ../data/glade/task-dialog.glade.h:9
+#: ../data/glade/task-dialog.glade.h:12
 msgid "_Duration:"
 msgstr "_Varaktighet:"
 
-#: ../data/glade/task-dialog.glade.h:10
+#: ../data/glade/task-dialog.glade.h:13
 msgid "_Fixed duration"
 msgstr "_Fast varaktighet"
 
-#: ../data/glade/task-dialog.glade.h:11
+#: ../data/glade/task-dialog.glade.h:14
 msgid "_Insert Time Stamp"
 msgstr "_Infoga tidsstämpel"
 
-#: ../data/glade/task-dialog.glade.h:12
+#: ../data/glade/task-dialog.glade.h:15
 msgid "_Milestone"
 msgstr "_Milstolpe"
 
-#: ../data/glade/task-dialog.glade.h:14
+#: ../data/glade/task-dialog.glade.h:17
 msgid "_Priority:"
 msgstr "Pr_ioritet:"
 
-#: ../data/glade/task-dialog.glade.h:15
+#: ../data/glade/task-dialog.glade.h:18
 #: ../data/glade/task-input-dialog.glade.h:5
 msgid "_Work:"
 msgstr "_Arbete:"
@@ -607,7 +650,7 @@ msgstr "Varaktighet"
 msgid "Cost"
 msgstr "Kostnad"
 
-#: ../libplanner/mrp-property.c:380 ../src/planner-project-properties.c:993
+#: ../libplanner/mrp-property.c:380 ../src/planner-project-properties.c:877
 msgid "None"
 msgstr "Ingen"
 
@@ -736,38 +779,20 @@ msgstr "Ta bort kalender"
 msgid "Add new calendar"
 msgstr "Skapa ny kalender"
 
-#: ../src/planner-cell-renderer-date.c:147
-msgid "Constraint type"
-msgstr "Restriktionstyp"
-
-#: ../src/planner-cell-renderer-date.c:154
+#: ../src/planner-cell-renderer-date.c:161 ../src/planner-task-dialog.c:1418
 msgid "As soon as possible"
 msgstr "Så tidigt som möjligt"
 
-#: ../src/planner-cell-renderer-date.c:155
-msgid "Start no earlier than"
-msgstr "Starta inte tidigare än"
+#: ../src/planner-cell-renderer-date.c:162
+msgid "No earlier than"
+msgstr "Inte tidigare än"
 
-#: ../src/planner-cell-renderer-date.c:156
-msgid "Must start on"
-msgstr "Måste starta"
+#: ../src/planner-cell-renderer-date.c:163
+msgid "On fixed date"
+msgstr "På fast datum"
 
-#: ../src/planner-cell-renderer-date.c:171
-#: ../src/planner-project-properties.c:850
-msgid "Today"
-msgstr "Idag"
-
-#. gtk_signal_connect (GTK_OBJECT (button), "clicked",
-#. GTK_SIGNAL_FUNC (m_cell_date_today_clicked),
-#. date);
-#.
-#: ../src/planner-cell-renderer-date.c:179
-#: ../src/planner-project-properties.c:857
-msgid "Cancel"
-msgstr "Avbryt"
-
-#: ../src/planner-cell-renderer-date.c:187
-#: ../src/planner-project-properties.c:864
+#: ../src/planner-cell-renderer-date.c:189
+#: ../src/planner-project-properties.c:749
 msgid "OK"
 msgstr "OK"
 
@@ -850,8 +875,8 @@ msgstr "Importera resurser från Evolution dataserver"
 
 #: ../src/planner-eds-plugin.c:393 ../src/planner-gantt-print.c:190
 #: ../src/planner-group-dialog.c:819 ../src/planner-property-dialog.c:481
-#: ../src/planner-resource-view.c:1156 ../src/planner-task-dialog.c:2422
-#: ../src/planner-task-dialog.c:2511 ../src/planner-task-view.c:279
+#: ../src/planner-resource-view.c:1156 ../src/planner-task-dialog.c:2552
+#: ../src/planner-task-dialog.c:2641 ../src/planner-task-view.c:279
 #: ../src/planner-ttable-print.c:108
 msgid "Name"
 msgstr "Namn"
@@ -1021,7 +1046,7 @@ msgstr "Gör aktivitet \"%s\" till föregångare till \"%s\""
 msgid "Change work to %s"
 msgstr "Ändra arbete till %s"
 
-#: ../src/planner-gantt-row.c:2391 ../src/planner-task-dialog.c:446
+#: ../src/planner-gantt-row.c:2391 ../src/planner-task-dialog.c:450
 #: ../src/planner-task-tree.c:254 ../src/planner-task-tree.c:939
 msgid "Edit task property"
 msgstr "Redigera aktivitetsegenskap"
@@ -1281,7 +1306,7 @@ msgstr "Ta bort fas"
 msgid "Could not open plugin file '%s'\n"
 msgstr "Kunde inte öppna insticksfilen \"%s\"\n"
 
-#: ../src/planner-predecessor-model.c:191 ../src/planner-task-dialog.c:2093
+#: ../src/planner-predecessor-model.c:191 ../src/planner-task-dialog.c:2142
 msgid "FS"
 msgstr "FS"
 
@@ -1290,7 +1315,7 @@ msgid "FF"
 msgstr "FF"
 
 #. list = g_list_append (list, g_strdup (_("FF")));
-#: ../src/planner-predecessor-model.c:197 ../src/planner-task-dialog.c:2095
+#: ../src/planner-predecessor-model.c:197 ../src/planner-task-dialog.c:2144
 msgid "SS"
 msgstr "SS"
 
@@ -1310,63 +1335,67 @@ msgstr "Välj vyer"
 msgid "Select the views to print:"
 msgstr "Välj de vyer som ska skrivas ut:"
 
-#: ../src/planner-project-properties.c:385
+#: ../src/planner-project-properties.c:386
 msgid "Select a calendar to use for this project:"
 msgstr "Välj en kalender att använda för projektet:"
 
-#: ../src/planner-project-properties.c:485
+#: ../src/planner-project-properties.c:486
 msgid "Edit Project Name"
 msgstr "Redigera projektnamn"
 
-#: ../src/planner-project-properties.c:521
+#: ../src/planner-project-properties.c:522
 msgid "Edit Organization"
 msgstr "Redigera organisation"
 
-#: ../src/planner-project-properties.c:557
+#: ../src/planner-project-properties.c:558
 msgid "Edit Manager"
 msgstr "Redigera ledare"
 
-#: ../src/planner-project-properties.c:631
-#: ../src/planner-project-properties.c:683
+#: ../src/planner-project-properties.c:626
+#: ../src/planner-project-properties.c:660
 msgid "Edit Project Start"
 msgstr "Redigera projektstart"
 
-#: ../src/planner-project-properties.c:953
+#: ../src/planner-project-properties.c:837
 msgid "Edit Project Phase"
 msgstr "Redigera projektfas"
 
-#: ../src/planner-project-properties.c:1086
+#: ../src/planner-project-properties.c:970
 msgid "Property"
 msgstr "Egenskap"
 
-#: ../src/planner-project-properties.c:1097
+#: ../src/planner-project-properties.c:981
 msgid "Value"
 msgstr "Värde"
 
-#: ../src/planner-project-properties.c:1498
+#: ../src/planner-project-properties.c:1382
 #: ../src/planner-property-dialog.c:329
 msgid "The name of the custom property needs to start with a letter."
 msgstr "Egenskapsnamnet måste börja med en bokstav."
 
-#: ../src/planner-project-properties.c:1569
+#: ../src/planner-project-properties.c:1453
 #: ../src/planner-property-dialog.c:399
 #, c-format
 msgid "Do you really want to remove the property '%s' from the project?"
 msgstr "Vill du verkligen ta bort egenskaper \"%s\" från projektet?"
 
-#: ../src/planner-project-properties.c:1659
+#: ../src/planner-project-properties.c:1544
 msgid "Could not create properties dialog."
 msgstr "Kunde inte skapa egenskapsdialog."
 
-#: ../src/planner-project-properties.c:2027
+#: ../src/planner-project-properties.c:1578
+msgid "Date..."
+msgstr "Datum..."
+
+#: ../src/planner-project-properties.c:1921
 msgid "Add project property"
 msgstr "Lägg till projektegenskap"
 
-#: ../src/planner-project-properties.c:2137
+#: ../src/planner-project-properties.c:2031
 msgid "Remove project property"
 msgstr "Ta bort projektegenskap"
 
-#: ../src/planner-project-properties.c:2230
+#: ../src/planner-project-properties.c:2124
 msgid "Edit project property value"
 msgstr "Redigera projektegenskapsvärde"
 
@@ -1375,7 +1404,7 @@ msgid "Label"
 msgstr "Etikett"
 
 #: ../src/planner-property-dialog.c:510 ../src/planner-resource-view.c:1200
-#: ../src/planner-task-dialog.c:2543
+#: ../src/planner-task-dialog.c:2673
 msgid "Type"
 msgstr "Typ"
 
@@ -1403,7 +1432,7 @@ msgid "(None)"
 msgstr "(Ingen)"
 
 #: ../src/planner-resource-dialog.c:321
-#: ../src/planner-resource-input-dialog.c:109 ../src/planner-task-dialog.c:372
+#: ../src/planner-resource-input-dialog.c:109 ../src/planner-task-dialog.c:376
 msgid "(No name)"
 msgstr "(Inget namn)"
 
@@ -1426,7 +1455,7 @@ msgstr "Redigera resursegenskap"
 
 #. i18n: time stamp format for notes in task dialog, see strftime(3) for
 #. * a detailed description.
-#: ../src/planner-resource-dialog.c:1403 ../src/planner-task-dialog.c:1683
+#: ../src/planner-resource-dialog.c:1403 ../src/planner-task-dialog.c:1732
 msgid "%a %d %b %Y, %H:%M\n"
 msgstr "%a %d %b %Y, %H.%M\n"
 
@@ -1653,66 +1682,80 @@ msgstr "Avlänka aktivitet"
 msgid "Insert task"
 msgstr "Infoga aktivitet"
 
-#: ../src/planner-task-dialog.c:520
+#: ../src/planner-task-dialog.c:524
 msgid "Edit task type"
 msgstr "Redigera aktivitetstyp"
 
-#: ../src/planner-task-dialog.c:587
+#: ../src/planner-task-dialog.c:591
 msgid "Toggle fixed duration"
 msgstr "Växla fast varaktighet"
 
-#: ../src/planner-task-dialog.c:665
+#: ../src/planner-task-dialog.c:669
 msgid "Assign resource to task"
 msgstr "Tilldela resurs till aktivitet"
 
-#: ../src/planner-task-dialog.c:725
+#: ../src/planner-task-dialog.c:729
 msgid "Unassign resource from task"
 msgstr "Ta bort resurs från aktivitet"
 
-#: ../src/planner-task-dialog.c:784
+#: ../src/planner-task-dialog.c:788
 msgid "Change resource units in task"
 msgstr "Ändra resursenheter i aktivitet"
 
 # Stämmer /richard :) (lite dum originalsträng kanske)
-#: ../src/planner-task-dialog.c:872
+#: ../src/planner-task-dialog.c:876
 msgid "Edit task predecessor"
 msgstr "Redigera aktivitetsföregångare"
 
 # Osäker. /Christian
-#: ../src/planner-task-dialog.c:943
+#: ../src/planner-task-dialog.c:947
 msgid "Edit lag predecessor"
 msgstr "Redigera fördröjningsföregångare"
 
-#: ../src/planner-task-dialog.c:1009
+#: ../src/planner-task-dialog.c:1013
 msgid "Edit task note"
 msgstr "Redigera aktivitetsanteckning"
 
-#: ../src/planner-task-dialog.c:1755
+#: ../src/planner-task-dialog.c:1421
+#, c-format
+msgid "No earlier than %s"
+msgstr "Inte tidigare än %s"
+
+#: ../src/planner-task-dialog.c:1424
+#, c-format
+msgid "On fixed date %s"
+msgstr "På fast datum %s"
+
+#: ../src/planner-task-dialog.c:1804
 msgid "Finish to start (FS)"
 msgstr "Slut till start (FS)"
 
 #. _("Finish to finish (FF)"), MRP_RELATION_FF,
-#: ../src/planner-task-dialog.c:1757
+#: ../src/planner-task-dialog.c:1806
 msgid "Start to start (SS)"
 msgstr "Start till start (SS)"
 
-#: ../src/planner-task-dialog.c:1813
+#: ../src/planner-task-dialog.c:1862
 msgid "Can't add new predecessor. No task selected!"
 msgstr "Kan inte lägga till föregångare, ingen aktivitet markerad."
 
-#: ../src/planner-task-dialog.c:2443
+#: ../src/planner-task-dialog.c:2399
+msgid "Change..."
+msgstr "Ändra..."
+
+#: ../src/planner-task-dialog.c:2573
 msgid "Assigned"
 msgstr "Tilldelad"
 
-#: ../src/planner-task-dialog.c:2460
+#: ../src/planner-task-dialog.c:2590
 msgid "Units"
 msgstr "Enheter"
 
-#: ../src/planner-task-dialog.c:2565
+#: ../src/planner-task-dialog.c:2695
 msgid "Lag"
 msgstr "Fördröjning"
 
-#: ../src/planner-task-dialog.c:2701 ../src/planner-task-dialog.c:2703
+#: ../src/planner-task-dialog.c:2869 ../src/planner-task-dialog.c:2871
 msgid "Edit task properties"
 msgstr "Redigera aktivitetsegenskaper"
 
@@ -2143,6 +2186,12 @@ msgstr "Exportera projekt till en fil som passar Planner 0.11"
 msgid "Export"
 msgstr "Exportera"
 
+#~ msgid "Constraint type"
+#~ msgstr "Restriktionstyp"
+
+#~ msgid "Must start on"
+#~ msgstr "Måste starta"
+
 #~ msgid "%s days"
 #~ msgstr "%s dagar"
 
@@ -2539,9 +2588,6 @@ msgstr "Exportera"
 
 #~ msgid "Preview the print"
 #~ msgstr "Förhandsgranska utskrift"
-
-#~ msgid "Day types..."
-#~ msgstr "Dagtyper..."
 
 #~ msgid "<i>No working time</i>"
 #~ msgstr "<i>Ingen arbetstid</i>"

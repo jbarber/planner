@@ -38,8 +38,6 @@
 #include "planner-format.h"
 #include "planner-task-dialog.h"
 
-/* FIXME: This should be read from the option menu when that works */
-#define WORK_MULTIPLIER (60*60*8.0)
 
 typedef struct {
 	PlannerWindow *main_window;
@@ -52,6 +50,8 @@ typedef struct {
 	GtkWidget     *fixed_checkbutton;
 	GtkWidget     *work_entry;
 	GtkWidget     *duration_entry;
+	GtkWidget     *schedule_label;
+	GtkWidget     *schedule_button;
 	GtkWidget     *complete_spinbutton;
 	GtkWidget     *priority_spinbutton;
 	GtkWidget     *note_textview;
@@ -102,6 +102,11 @@ static gboolean        task_dialog_duration_focus_in_cb           (GtkWidget    
 static gboolean        task_dialog_duration_focus_out_cb          (GtkWidget               *w,
 								   GdkEventFocus           *event,
 								   DialogData              *data);
+static void            task_dialog_update_schedule_label          (DialogData              *data);
+static void            task_dialog_task_constraint_changed_cb     (MrpTask                 *task,
+								   GParamSpec              *pspec,
+								   GtkWidget               *dialog);
+
 static void            task_dialog_task_complete_changed_cb       (MrpTask                 *task,
 								   GParamSpec              *pspec,
 								   GtkWidget               *dialog);
@@ -184,7 +189,6 @@ static void            task_dialog_update_title                   (DialogData   
 
 
 
-
 /* Keep the dialogs here so that we can just raise the dialog if it's
  * opened twice for the same task.
  */
@@ -193,16 +197,16 @@ static GHashTable *dialogs = NULL;
 #define DIALOG_GET_DATA(d) g_object_get_data ((GObject*)d, "data")
 
 typedef struct {
-	PlannerCmd base;
+	PlannerCmd  base;
 
-	MrpTask *task;
-	gchar   *property;  
-	GValue  *value;
-	GValue  *old_value;
+	MrpTask    *task;
+	gchar      *property;  
+	GValue     *value;
+	GValue     *old_value;
 } TaskCmdEditProperty;
 
 typedef struct {
-	PlannerCmd base;
+	PlannerCmd   base;
 
 	MrpTask     *task;
 	MrpTaskType  type;
@@ -210,12 +214,20 @@ typedef struct {
 } TaskCmdEditType;
 
 typedef struct {
-	PlannerCmd base;
+	PlannerCmd   base;
 
 	MrpTask     *task;
 	MrpTaskSched sched;
 	MrpTaskSched old_sched;
 } TaskCmdEditSchedule;
+
+typedef struct {
+	PlannerCmd     base;
+
+	MrpTask       *task;
+	MrpConstraint  constraint;
+	MrpConstraint  old_constraint;
+} TaskCmdEditConstraint;
 
 typedef struct {
 	PlannerCmd base;
@@ -474,7 +486,7 @@ task_cmd_edit_type_do (PlannerCmd *cmd_base)
 {
 	TaskCmdEditType *cmd;
 
-	cmd = (TaskCmdEditType* ) cmd_base;
+	cmd = (TaskCmdEditType *) cmd_base;
 
 	mrp_object_set (cmd->task, "type", cmd->type, NULL);
 
@@ -486,7 +498,7 @@ task_cmd_edit_type_undo (PlannerCmd *cmd_base)
 {
 	TaskCmdEditType *cmd;
 
-	cmd = (TaskCmdEditType* ) cmd_base;
+	cmd = (TaskCmdEditType *) cmd_base;
 
 	mrp_object_set (cmd->task, "type", cmd->old_type, NULL);
 }
@@ -496,7 +508,7 @@ task_cmd_edit_type_free (PlannerCmd *cmd_base)
 {
 	TaskCmdEditType *cmd;
 
-	cmd = (TaskCmdEditType* ) cmd_base;
+	cmd = (TaskCmdEditType *) cmd_base;
 
 	g_object_unref (cmd->task);
 }
@@ -541,7 +553,7 @@ task_cmd_edit_sched_do (PlannerCmd *cmd_base)
 {
 	TaskCmdEditSchedule *cmd;
 
-	cmd = (TaskCmdEditSchedule* ) cmd_base;
+	cmd = (TaskCmdEditSchedule *) cmd_base;
 
 	mrp_object_set (cmd->task, "sched", cmd->sched, NULL);
 
@@ -553,7 +565,7 @@ task_cmd_edit_sched_undo (PlannerCmd *cmd_base)
 {
 	TaskCmdEditSchedule *cmd;
 
-	cmd = (TaskCmdEditSchedule* ) cmd_base;
+	cmd = (TaskCmdEditSchedule *) cmd_base;
 
 	mrp_object_set (cmd->task, "sched", cmd->old_sched, NULL);
 }
@@ -563,7 +575,7 @@ task_cmd_edit_sched_free (PlannerCmd *cmd_base)
 {
 	TaskCmdEditSchedule *cmd;
 
-	cmd = (TaskCmdEditSchedule* ) cmd_base;
+	cmd = (TaskCmdEditSchedule *) cmd_base;
 
 	g_object_unref (cmd->task);
 }
@@ -603,11 +615,80 @@ task_cmd_edit_sched (PlannerWindow *main_window,
 }
 
 static gboolean
+task_cmd_edit_constraint_do (PlannerCmd *cmd_base)
+{
+	TaskCmdEditConstraint *cmd;
+
+	cmd = (TaskCmdEditConstraint *) cmd_base;
+
+	mrp_object_set (cmd->task, "constraint", &cmd->constraint, NULL);
+
+	return TRUE;
+}
+
+static void
+task_cmd_edit_constraint_undo (PlannerCmd *cmd_base)
+{
+	TaskCmdEditConstraint *cmd;
+
+	cmd = (TaskCmdEditConstraint *) cmd_base;
+
+	mrp_object_set (cmd->task, "constraint", &cmd->old_constraint, NULL);
+}
+
+static void
+task_cmd_edit_constraint_free (PlannerCmd *cmd_base)
+{
+	TaskCmdEditConstraint *cmd;
+
+	cmd = (TaskCmdEditConstraint *) cmd_base;
+
+	g_object_unref (cmd->task);
+}
+
+static PlannerCmd *
+task_cmd_edit_constraint (PlannerWindow *main_window,
+			  MrpTask       *task,
+			  MrpConstraint *constraint)
+{
+	PlannerCmd            *cmd_base;
+	TaskCmdEditConstraint *cmd;
+	MrpConstraint         *old_constraint;
+
+	g_object_get (task, "constraint", &old_constraint, NULL);
+
+	if (old_constraint->type == constraint->type &&
+	    old_constraint->time == constraint->time) {
+		return NULL;
+	}
+	
+	cmd_base = planner_cmd_new (TaskCmdEditConstraint,
+				    _("Edit task scheduling"),
+				    task_cmd_edit_constraint_do,
+				    task_cmd_edit_constraint_undo,
+				    task_cmd_edit_constraint_free);
+
+	cmd = (TaskCmdEditConstraint *) cmd_base;
+
+	cmd->task = g_object_ref (task);
+
+	cmd->old_constraint = *old_constraint;
+	cmd->constraint = *constraint;
+
+	g_free (old_constraint);
+	
+	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager (main_window),
+					   cmd_base);
+
+	return cmd_base;
+}
+
+static gboolean
 task_cmd_assign_add_do (PlannerCmd *cmd_base)
 {
 	TaskCmdEditAssignment *cmd;
 
-	cmd = (TaskCmdEditAssignment* ) cmd_base;
+	cmd = (TaskCmdEditAssignment *) cmd_base;
 
 	/* FIXME: better than returning void it could return the assignment */
 	mrp_resource_assign (cmd->resource, cmd->task, cmd->units);
@@ -621,7 +702,7 @@ task_cmd_assign_add_undo (PlannerCmd *cmd_base)
 	TaskCmdEditAssignment *cmd;
 	MrpAssignment         *assignment;
 
-	cmd = (TaskCmdEditAssignment* ) cmd_base;
+	cmd = (TaskCmdEditAssignment *) cmd_base;
 
 	assignment = mrp_task_get_assignment (cmd->task, cmd->resource);
 
@@ -633,7 +714,7 @@ task_cmd_assign_add_free (PlannerCmd *cmd_base)
 {
 	TaskCmdEditAssignment *cmd;
 
-	cmd = (TaskCmdEditAssignment* ) cmd_base;
+	cmd = (TaskCmdEditAssignment *) cmd_base;
 
 	g_object_unref (cmd->task);
 	g_object_unref (cmd->resource);
@@ -685,7 +766,7 @@ task_cmd_assign_remove_do (PlannerCmd *cmd_base)
 	TaskCmdEditAssignment *cmd;
 	MrpAssignment         *assignment;
 
-	cmd = (TaskCmdEditAssignment* ) cmd_base;
+	cmd = (TaskCmdEditAssignment *) cmd_base;
 
 	assignment = mrp_task_get_assignment (cmd->task, cmd->resource);
 	mrp_object_removed (MRP_OBJECT (assignment));
@@ -698,7 +779,7 @@ task_cmd_assign_remove_undo (PlannerCmd *cmd_base)
 {
 	TaskCmdEditAssignment *cmd;
 
-	cmd = (TaskCmdEditAssignment* ) cmd_base;
+	cmd = (TaskCmdEditAssignment *) cmd_base;
 
 	mrp_resource_assign (cmd->resource, cmd->task, cmd->units);
 }
@@ -708,7 +789,7 @@ task_cmd_assign_remove_free (PlannerCmd *cmd_base)
 {
 	TaskCmdEditAssignment *cmd;
 
-	cmd = (TaskCmdEditAssignment* ) cmd_base;
+	cmd = (TaskCmdEditAssignment *) cmd_base;
 
 	g_object_unref (cmd->task);
 	g_object_unref (cmd->resource);
@@ -743,7 +824,7 @@ task_cmd_assign_units_do (PlannerCmd *cmd_base)
 {
 	TaskCmdEditAssignment *cmd;
 
-	cmd = (TaskCmdEditAssignment* ) cmd_base;
+	cmd = (TaskCmdEditAssignment *) cmd_base;
 
 	g_object_set (cmd->assignment, "units", cmd->units, NULL);
 
@@ -755,7 +836,7 @@ task_cmd_assign_units_undo (PlannerCmd *cmd_base)
 {
 	TaskCmdEditAssignment *cmd;
 
-	cmd = (TaskCmdEditAssignment* ) cmd_base;
+	cmd = (TaskCmdEditAssignment *) cmd_base;
 
 	g_object_set (cmd->assignment, "units", cmd->old_units, NULL);
 	
@@ -766,7 +847,7 @@ task_cmd_assign_units_free (PlannerCmd *cmd_base)
 {
 	TaskCmdEditAssignment *cmd;
 
-	cmd = (TaskCmdEditAssignment* ) cmd_base;
+	cmd = (TaskCmdEditAssignment *) cmd_base;
 
 	g_object_unref (cmd->task);
 	g_object_unref (cmd->resource);
@@ -901,7 +982,7 @@ planner_task_cmd_edit_predecessor (PlannerWindow   *main_window,
 static gboolean
 task_cmd_edit_lag_do (PlannerCmd *cmd_base)
 {
-	TaskCmdEditLag *cmd = (TaskCmdEditLag* ) cmd_base;
+	TaskCmdEditLag *cmd = (TaskCmdEditLag *) cmd_base;
 
 	mrp_object_set (cmd->relation, "lag", cmd->lag, NULL);
 
@@ -911,7 +992,7 @@ task_cmd_edit_lag_do (PlannerCmd *cmd_base)
 static void
 task_cmd_edit_lag_undo (PlannerCmd *cmd_base)
 {
-	TaskCmdEditLag *cmd = (TaskCmdEditLag* ) cmd_base;
+	TaskCmdEditLag *cmd = (TaskCmdEditLag *) cmd_base;
 
 	mrp_object_set (cmd->relation, "lag", cmd->old_lag, NULL);
 }
@@ -919,7 +1000,7 @@ task_cmd_edit_lag_undo (PlannerCmd *cmd_base)
 static void
 task_cmd_edit_lag_free (PlannerCmd *cmd_base)
 {
-	TaskCmdEditLag *cmd = (TaskCmdEditLag* ) cmd_base;
+	TaskCmdEditLag *cmd = (TaskCmdEditLag *) cmd_base;
 
 	g_object_unref (cmd->relation);
 }
@@ -1385,6 +1466,51 @@ task_dialog_duration_focus_in_cb (GtkWidget     *w,
 	
 	return FALSE;
 }
+
+static void
+task_dialog_task_constraint_changed_cb (MrpTask    *task,
+					GParamSpec *pspec,
+					GtkWidget  *dialog)
+{
+	DialogData *data;
+
+	data = DIALOG_GET_DATA (dialog);
+
+	task_dialog_update_schedule_label (data);
+}	
+
+static void
+task_dialog_update_schedule_label (DialogData *data)
+{
+	MrpConstraint     *constraint;
+	gchar             *time_str;
+	gchar             *str;
+
+	g_object_get (data->task, "constraint", &constraint, NULL);
+
+	time_str = mrp_time_format_locale (constraint->time);
+	
+	switch (constraint->type) {
+	case MRP_CONSTRAINT_ASAP:
+		str = g_strdup (_("As soon as possible"));
+		break;
+	case MRP_CONSTRAINT_SNET:
+		str = g_strdup_printf (_("No earlier than %s"), time_str);
+		break;
+	case MRP_CONSTRAINT_MSO:
+		str = g_strdup_printf (_("On fixed date %s"), time_str);
+		break;
+	default:
+		g_assert_not_reached ();
+	}
+		
+	gtk_label_set_text (GTK_LABEL (data->schedule_label), str);
+
+	g_free (str);
+	g_free (time_str);
+
+	g_free (constraint);
+}	
 
 static void
 task_dialog_task_complete_changed_cb (MrpTask    *task, 
@@ -2184,6 +2310,75 @@ task_dialog_cell_hide_popup (PlannerCellRendererList *cell,
 	/* cell->user_data = NULL; */
 }
 
+#include "planner-popup-button.h"
+#include "planner-task-date-widget.h"
+
+static void
+task_dialog_schedule_date_selected_cb (GtkWidget          *button,
+				       PlannerPopupButton *popup_button)
+{
+	planner_popup_button_popdown (popup_button, TRUE);
+}
+
+static void
+task_dialog_schedule_cancelled_cb (GtkWidget          *button,
+				   PlannerPopupButton *popup_button)
+{
+	planner_popup_button_popdown (popup_button, FALSE);
+}
+
+static GtkWidget *
+task_dialog_schedule_popup_cb (PlannerPopupButton *popup_button,
+			       DialogData         *data)
+{
+	GtkWidget     *widget;
+	MrpConstraint *constraint;
+
+	widget = planner_task_date_widget_new ();
+
+	g_object_get (data->task, "constraint", &constraint, NULL);
+	
+	planner_task_date_widget_set_constraint_type (PLANNER_TASK_DATE_WIDGET (widget),
+						      constraint->type);
+
+	if (constraint->type != MRP_CONSTRAINT_ASAP) {
+		planner_task_date_widget_set_date (PLANNER_TASK_DATE_WIDGET (widget),
+						   constraint->time);
+	}
+
+	g_free (constraint);
+	
+	g_signal_connect (widget,
+			  "date_selected",
+			  G_CALLBACK (task_dialog_schedule_date_selected_cb),
+			  popup_button);
+	g_signal_connect (widget,
+			  "cancelled",
+			  G_CALLBACK (task_dialog_schedule_cancelled_cb),
+			  popup_button);
+	
+	return widget;
+}	      
+
+static void
+task_dialog_schedule_popdown_cb (PlannerPopupButton *popup_button,
+				 GtkWidget          *widget,
+				 gboolean            ok,
+				 DialogData         *data)
+{
+	MrpConstraint constraint;
+	
+	if (ok) {
+		constraint.time = planner_task_date_widget_get_date (PLANNER_TASK_DATE_WIDGET (widget));
+		constraint.type = planner_task_date_widget_get_constraint_type (PLANNER_TASK_DATE_WIDGET (widget));
+		
+		task_cmd_edit_constraint (data->main_window,
+					  data->task,
+					  &constraint);
+	}
+	
+	gtk_widget_destroy (widget);
+}
 
 static void
 task_dialog_setup_widgets (DialogData *data,
@@ -2196,6 +2391,7 @@ task_dialog_setup_widgets (DialogData *data,
 	gchar        *note;      
 	gint          int_value;
 	gchar        *str;
+	GtkWidget    *hbox;
 
 	w = glade_xml_get_widget (glade, "close_button");
 	g_signal_connect (w,
@@ -2274,17 +2470,32 @@ task_dialog_setup_widgets (DialogData *data,
 			  G_CALLBACK (task_dialog_duration_focus_out_cb),
 			  data);
 
+	/* Schedule. */
+	data->schedule_label = glade_xml_get_widget (glade, "schedule_label");
+	task_dialog_update_schedule_label (data);
+
+	hbox = glade_xml_get_widget (glade, "schedule_hbox");
+	data->schedule_button = planner_popup_button_new (_("Change..."));
+	gtk_widget_show (data->schedule_button);
+	gtk_box_pack_start (GTK_BOX (hbox), data->schedule_button, FALSE, FALSE, 0);
+
+	g_signal_connect (data->schedule_button,
+			  "popup",
+			  G_CALLBACK (task_dialog_schedule_popup_cb),
+			  data);
+
+	g_signal_connect (data->schedule_button,
+			  "popdown",
+			  G_CALLBACK (task_dialog_schedule_popdown_cb),
+			  data);
+
 	data->complete_spinbutton = glade_xml_get_widget (glade, "complete_spinbutton");
-
 	g_object_get (data->task, "percent_complete", &int_value, NULL);
-
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON (data->complete_spinbutton), int_value);
-
 	g_signal_connect (data->complete_spinbutton,
 			  "value_changed",
 			  G_CALLBACK (task_dialog_complete_changed_cb),
 			  data);
-	
 	g_signal_connect (data->complete_spinbutton,
 			  "focus_in_event",
 			  G_CALLBACK (task_dialog_complete_focus_in_cb),
@@ -2301,12 +2512,10 @@ task_dialog_setup_widgets (DialogData *data,
 			  "value_changed",
 			  G_CALLBACK (task_dialog_priority_changed_cb),
 			  data);	
-
 	g_signal_connect (data->priority_spinbutton,
 			  "focus_in_event",
 			  G_CALLBACK (task_dialog_priority_focus_in_cb),
 			  data);
-
 	g_signal_connect (data->priority_spinbutton,
 			  "focus_out_event",
 			  G_CALLBACK (task_dialog_priority_focus_out_cb),
@@ -2632,6 +2841,12 @@ task_dialog_connect_to_task (DialogData *data)
 				 G_CALLBACK (task_dialog_task_priority_changed_cb),
 				 data->dialog,
 				 0);
+
+	g_signal_connect_object (data->task,
+				 "notify::constraint",
+				 G_CALLBACK (task_dialog_task_constraint_changed_cb),
+				 data->dialog,
+				 0);
 				 
 	g_signal_connect_object (data->task,
 				 "child_added",
@@ -2666,6 +2881,37 @@ task_dialog_calendar_changed_cb (MrpCalendar *calendar,
 					      dialog);
 }
 
+#if 0
+static void
+task_dialog_update_schedule (DialogData *data)
+{
+	MrpConstraint *constraint;
+	mrptime        start;
+	gchar         *str;
+
+	g_object_get (data->task, "constraint", &constraint, NULL);
+	start = mrp_task_get_work_start (data->task);
+
+	if (constraint->type == MRP_CONSTRAINT_ASAP) {
+		gtk_combo_box_set_active (GTK_COMBO_BOX (data->schedule_combo), 0);
+	}
+	else if (constraint->type == MRP_CONSTRAINT_SNET) {
+		gtk_combo_box_set_active (GTK_COMBO_BOX (data->schedule_combo), 1);
+	}
+	else if (constraint->type == MRP_CONSTRAINT_MSO) {
+		gtk_combo_box_set_active (GTK_COMBO_BOX (data->schedule_combo), 2);
+	} else {
+		g_assert_not_reached ();
+	}
+
+	g_free (constraint);
+
+	str = mrp_time_format_locale (start);
+	gtk_entry_set_text (GTK_ENTRY (data->schedule_entry), str);
+	g_free (str);
+}
+#endif
+
 static void
 task_dialog_update_sensitivity (DialogData *data)
 {
@@ -2682,6 +2928,7 @@ task_dialog_update_sensitivity (DialogData *data)
 	fixed = (sched == MRP_TASK_SCHED_FIXED_DURATION);
 
 	gtk_widget_set_sensitive (data->milestone_checkbutton, leaf);
+	gtk_widget_set_sensitive (data->schedule_button, leaf);
 
 	gtk_widget_set_sensitive (data->fixed_checkbutton, leaf && !milestone);
 	

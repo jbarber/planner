@@ -13,6 +13,7 @@ glade_DATA = \
 	sql.glade			\
 	task-dialog.glade		\
 	task-input-dialog.glade		\
+	task-date-widget.glade		\
 	eds.glade
 
 EXTRA_DIST = $(glade_DATA)

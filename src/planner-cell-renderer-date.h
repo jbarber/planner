@@ -1,5 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
+ * Copyright (C) 2005 Imendio AB
  * Copyright (C) 2001-2002 CodeFactory AB
  * Copyright (C) 2001-2002 Richard Hult <richard@imendio.com>
  * Copyright (C) 2001-2002 Mikael Hallendal <micke@imendio.com>
@@ -42,13 +43,14 @@ typedef struct _PlannerCellRendererDateClass PlannerCellRendererDateClass;
 struct _PlannerCellRendererDate
 {
 	PlannerCellRendererPopup  parent;
-	GtkWidget           *calendar;
-	GtkWidget           *option_menu;
+	GtkWidget                *calendar;
+	GtkWidget                *option_menu;
+	GtkWidget                *today_button;
 
-	gboolean             use_constraint;
-	GtkWidget           *constraint_vbox;
-	mrptime              time;
-	MrpConstraintType    type;
+	gboolean                  use_constraint;
+	GtkWidget                *constraint_vbox;
+	mrptime                   time;
+	MrpConstraintType         type;
 };
 
 struct _PlannerCellRendererDateClass

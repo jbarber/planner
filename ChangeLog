@@ -1,5 +1,33 @@
 2005-02-20  Richard Hult  <richard@imendio.com>
 
+	* data/glade/Makefile.am:
+	* data/glade/project-properties.glade:
+	* data/glade/task-date-widget.glade:
+	* data/glade/task-dialog.glade: Add new glade file for a task date
+	editor. Change the task and project properties interfaces to use a
+	common popup button.
+	
+	* libplanner/mrp-time.c: (mrp_time_format_locale): Add.
+
+	* src/planner-cell-renderer-date.c (mcrd_today_clicked) 
+	(mcrd_init): Implement "today" button.
+	(mcrd_selected_double_click): Select on double-click.
+
+	* src/planner-marshal.list: Clean up.
+
+ 	* src/planner-popup-button.c: New widget for popping up stuff.
+
+	* src/planner-project-properties.c: Use the popup button to popup
+	the calendar widget.
+
+	* src/planner-task-date-widget.c: New widget for editing the task
+	constraint.
+	
+	* src/planner-task-dialog.c: Add constraint editor, using the
+	popup button and task date widget. Fixes bug #134359.
+
+2005-02-20  Richard Hult  <richard@imendio.com>
+
 	* Release 0.12.92.
 
 	* python/planner.defs (open): Update.

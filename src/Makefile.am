@@ -64,6 +64,8 @@ planner_SOURCES = \
 	planner-plugin.h		\
 	planner-plugin-loader.c		\
 	planner-plugin-loader.h		\
+	planner-popup-button.c		\
+	planner-popup-button.h		\
 	planner-popup-entry.c		\
 	planner-popup-entry.h		\
 	planner-predecessor-model.c	\
@@ -92,6 +94,8 @@ planner_SOURCES = \
 	planner-table-print-sheet.h	\
 	planner-task-cmd.c		\
 	planner-task-cmd.h		\
+	planner-task-date-widget.c	\
+	planner-task-date-widget.h	\
 	planner-task-dialog.c		\
 	planner-task-dialog.h		\
 	planner-task-input-dialog.c	\

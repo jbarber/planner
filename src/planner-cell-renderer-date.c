@@ -1,5 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
+ * Copyright (C) 2005 Imendio AB
  * Copyright (C) 2001-2002 CodeFactory AB
  * Copyright (C) 2001-2002 Richard Hult <richard@imendio.com>
  * Copyright (C) 2001-2002 Mikael Hallendal <micke@imendio.com>
@@ -60,6 +61,10 @@ static void     mcrd_get_property            (GObject                 *object,
 					      guint                    param_id,
 					      GValue                  *value,
 					      GParamSpec              *pspec);
+static void     mcrd_today_clicked           (GtkWidget               *button,
+					      PlannerCellRendererDate *cell);
+static void     mcrd_selected_double_click   (GtkWidget               *calendar,
+					      PlannerCellRendererDate *cell);
 static void     mcrd_cancel_clicked          (GtkWidget               *popup_window,
 					      PlannerCellRendererDate      *cell);
 static void     mcrd_ok_clicked              (GtkWidget               *popup_window,
@@ -133,58 +138,55 @@ mcrd_init (PlannerCellRendererDate *date)
 	gtk_container_add (GTK_CONTAINER (popup->popup_window), frame);
 	gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_OUT);
 
-	vbox = gtk_vbox_new (FALSE, 0);
+	vbox = gtk_vbox_new (FALSE, 6);
 	gtk_container_add (GTK_CONTAINER (frame), vbox);
-
+	gtk_container_set_border_width (GTK_CONTAINER (vbox), 6);
+	
 	date->calendar = gtk_calendar_new ();
 	popup->focus_window = date->calendar;
 	gtk_box_pack_start (GTK_BOX (vbox), date->calendar, TRUE, TRUE, 0);
 
 	date->constraint_vbox = gtk_vbox_new (FALSE, 0);
-	gtk_box_pack_start (GTK_BOX (vbox), date->constraint_vbox, FALSE, TRUE, 0);
+	gtk_box_pack_start (GTK_BOX (vbox), date->constraint_vbox, FALSE, FALSE, 0);
 	
-	hbox = gtk_hbox_new (FALSE, 0);
-	gtk_box_pack_start (GTK_BOX (hbox), gtk_label_new (_("Constraint type")),
-			    FALSE, TRUE, 4);
+	hbox = gtk_hbox_new (FALSE, 6);
+	/* I18n: the verb "schedule" here. */
+	gtk_box_pack_start (GTK_BOX (hbox), gtk_label_new (_("Schedule:")),
+			    FALSE, FALSE, 0);
 	
 	date->option_menu = gtk_option_menu_new ();
 	mcrd_setup_option_menu (date->option_menu,
 				G_CALLBACK (mcrd_constraint_activated_cb),
 				date,
 				_("As soon as possible"), MRP_CONSTRAINT_ASAP,
-				_("Start no earlier than"), MRP_CONSTRAINT_SNET,
-				_("Must start on"), MRP_CONSTRAINT_MSO,
+				_("No earlier than"), MRP_CONSTRAINT_SNET,
+				_("On fixed date"), MRP_CONSTRAINT_MSO,
 				NULL);
-	gtk_box_pack_end (GTK_BOX (hbox), date->option_menu, TRUE, TRUE, 4);
-	
-	gtk_box_pack_start (GTK_BOX (date->constraint_vbox), hbox, TRUE, TRUE, 4);
+	gtk_box_pack_end (GTK_BOX (hbox), date->option_menu, TRUE, TRUE, 0);
+
+	gtk_box_pack_start (GTK_BOX (date->constraint_vbox), hbox, TRUE, TRUE, 0);
 	
 	hbox = gtk_hbox_new (FALSE, 0);
-	gtk_box_pack_start (GTK_BOX (hbox), gtk_hseparator_new (), TRUE, TRUE, 4);
 	gtk_box_pack_start (GTK_BOX (date->constraint_vbox), hbox, FALSE, FALSE, 0);
 	
 	bbox = gtk_hbutton_box_new ();
-	gtk_container_set_border_width (GTK_CONTAINER (bbox), 4);
-	gtk_box_set_spacing (GTK_BOX (bbox), 2);
+	gtk_box_set_spacing (GTK_BOX (bbox), 6);
 	gtk_box_pack_start (GTK_BOX (vbox), bbox, FALSE, FALSE, 0);
 
-	button = gtk_button_new_with_label (_("Today"));
-	gtk_container_add (GTK_CONTAINER (bbox), button);
-	gtk_widget_set_sensitive (button, FALSE);
-
-/*	gtk_signal_connect (GTK_OBJECT (button), "clicked",
-			    GTK_SIGNAL_FUNC (m_cell_date_today_clicked),
-			    date);
-*/
+	date->today_button = gtk_button_new_with_label (_("Today"));
+	gtk_container_add (GTK_CONTAINER (bbox), date->today_button);
+	g_signal_connect (date->today_button, "clicked",
+			  G_CALLBACK (mcrd_today_clicked),
+			  date);
+	
 	button = gtk_button_new_with_label (_("Cancel"));
 	gtk_container_add (GTK_CONTAINER (bbox), button);
-
 	g_signal_connect (button,
 			  "clicked",
 			  G_CALLBACK (mcrd_cancel_clicked),
 			  date);
 
-	button = gtk_button_new_with_label (_("OK"));
+	button = gtk_button_new_with_label (_("Select"));
 	gtk_container_add (GTK_CONTAINER (bbox), button);
 	g_signal_connect (button, "clicked",
 			  G_CALLBACK (mcrd_ok_clicked),
@@ -193,11 +195,9 @@ mcrd_init (PlannerCellRendererDate *date)
 	g_signal_connect (date->calendar, "day-selected",
 			  G_CALLBACK (mcrd_day_selected),
 			  date);
-
-/*	gtk_signal_connect (GTK_OBJECT (cell->calendar), "day-selected-double-click", 
-			    m_cell_date_double_click, 
-			    date);
-*/
+	g_signal_connect (date->calendar, "day-selected-double-click", 
+			  G_CALLBACK (mcrd_selected_double_click),
+			  date);
 
         gtk_widget_show_all (frame);
 }
@@ -206,8 +206,8 @@ static void
 mcrd_class_init (PlannerCellRendererDateClass *class)
 {
 	PlannerCellRendererPopupClass *popup_class;
-	GtkCellRendererClass     *cell_class;
-	GObjectClass             *gobject_class;
+	GtkCellRendererClass          *cell_class;
+	GObjectClass                  *gobject_class;
 
 	popup_class = PLANNER_CELL_RENDERER_POPUP_CLASS (class);
 	cell_class = GTK_CELL_RENDERER_CLASS (class);	
@@ -251,9 +251,11 @@ mcrd_set_property (GObject      *object,
 			gtk_widget_show (date->constraint_vbox);
 		} else {
 			gtk_widget_hide (date->constraint_vbox);
-			gtk_widget_set_sensitive (date->calendar, TRUE);
 		}
-			
+
+		gtk_widget_set_sensitive (date->calendar, date->use_constraint);
+		gtk_widget_set_sensitive (date->today_button, date->use_constraint);
+
 		break;
 	default:
 		G_OBJECT_WARN_INVALID_PROPERTY_ID (object, param_id, pspec);
@@ -318,18 +320,18 @@ mcrd_hide (PlannerCellRendererPopup *cell)
 
 static void
 mcrd_show (PlannerCellRendererPopup *cell,
-	   const gchar         *path,
-	   gint                 x1,
-	   gint                 y1,
-	   gint                 x2,
-	   gint                 y2)
+	   const gchar              *path,
+	   gint                      x1,
+	   gint                      y1,
+	   gint                      x2,
+	   gint                      y2)
 {
 	PlannerCellRendererDate *date;
-	gint                year;
-	gint                month;
-	gint                day;
-	gint                index;
-	gboolean            sensitive;
+	gint                     year;
+	gint                     month;
+	gint                     day;
+	gint                     index;
+	gboolean                 sensitive;
 
 	if (parent_class->show_popup) {
 		parent_class->show_popup (cell,
@@ -362,8 +364,8 @@ mcrd_show (PlannerCellRendererPopup *cell,
 		     (date->type != MRP_CONSTRAINT_ASAP &&
 		      date->type != MRP_CONSTRAINT_ALAP));
 	
-	gtk_widget_set_sensitive (date->calendar,
-				  sensitive);
+	gtk_widget_set_sensitive (date->calendar, sensitive);
+	gtk_widget_set_sensitive (date->today_button, sensitive);
 	
 	gtk_calendar_clear_marks (GTK_CALENDAR (date->calendar));
 	gtk_calendar_select_month (GTK_CALENDAR (date->calendar),
@@ -388,7 +390,37 @@ planner_cell_renderer_date_new (gboolean use_constraint)
 }
 
 static void
-mcrd_cancel_clicked (GtkWidget          *popup_window,
+mcrd_today_clicked (GtkWidget               *button,
+		    PlannerCellRendererDate *cell)
+{
+	mrptime today;
+	gint    year, month, day;
+	
+	today = mrp_time_current_time ();
+
+	mrp_time_decompose (today, &year, &month, &day,
+			    NULL, NULL, NULL);
+	
+	gtk_calendar_clear_marks (GTK_CALENDAR (cell->calendar));
+	gtk_calendar_select_month (GTK_CALENDAR (cell->calendar),
+				   month - 1, year);
+	gtk_calendar_select_day (GTK_CALENDAR (cell->calendar), day);
+	gtk_calendar_mark_day (GTK_CALENDAR (cell->calendar), day);
+}
+
+static void
+mcrd_selected_double_click (GtkWidget               *calendar,
+			    PlannerCellRendererDate *cell)
+{
+	PlannerCellRendererPopup *popup;
+	
+	popup = PLANNER_CELL_RENDERER_POPUP (cell);
+
+	mcrd_ok_clicked (popup->popup_window, cell);
+}
+
+static void
+mcrd_cancel_clicked (GtkWidget               *popup_window,
 		     PlannerCellRendererDate *cell)
 {
 	PlannerCellRendererPopup *popup;
@@ -400,7 +432,7 @@ mcrd_cancel_clicked (GtkWidget          *popup_window,
 }
 
 static void
-mcrd_ok_clicked (GtkWidget          *popup_window,
+mcrd_ok_clicked (GtkWidget               *popup_window,
 		 PlannerCellRendererDate *cell)
 {
 	PlannerCellRendererPopup *popup;
@@ -414,7 +446,7 @@ mcrd_ok_clicked (GtkWidget          *popup_window,
 }
 
 static void
-mcrd_day_selected (GtkWidget          *popup_window,
+mcrd_day_selected (GtkWidget               *popup_window,
 		   PlannerCellRendererDate *cell)
 {
 	guint    year;
@@ -459,7 +491,7 @@ mcrd_grab_on_window (GdkWindow *window,
 }
 
 static void
-mcrd_constraint_activated_cb (GtkWidget          *widget,
+mcrd_constraint_activated_cb (GtkWidget               *widget,
 			      PlannerCellRendererDate *cell)
 {
 	gpointer data;
@@ -474,6 +506,7 @@ mcrd_constraint_activated_cb (GtkWidget          *widget,
 		      cell->type != MRP_CONSTRAINT_ALAP));
 	
 	gtk_widget_set_sensitive (cell->calendar, sensitive);
+	gtk_widget_set_sensitive (cell->today_button, sensitive);
 	
 	/* A bit hackish. Grab focus on the popup window again when the
 	 * optionmenu is activated, since focus is transferred to the optionmenu
