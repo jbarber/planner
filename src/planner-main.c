@@ -26,11 +26,11 @@
 #include <string.h>
 #include <popt.h>
 #include <gtk/gtkwidget.h>
+#include <gtk/gtkmain.h>
 #include <libgnome/gnome-i18n.h>
 #include <libgnome/gnome-program.h>
 #include <libgnomeui/gnome-ui-init.h>
 #include <libgnomeui/gnome-window-icon.h>
-#include <libbonoboui.h>
 #include "planner-application.h"
 #include "planner-window.h"
 
@@ -74,7 +74,7 @@ main (int argc, char **argv)
 	args = poptGetArgs (popt_context);
 	if (geometry != NULL && args != NULL && args[0] != NULL && args[1] != NULL) {
 		g_warning (_("planner: --geometry cannot be used with more than one file."));
-		exit (1);
+		return (1);
 	}
 
 	if (g_getenv ("MRP_G_FATAL_WARNINGS") != NULL) {
@@ -100,7 +100,7 @@ main (int argc, char **argv)
 		planner_window_open (PLANNER_WINDOW (main_window), args[0]);
 	}
 
-        bonobo_ui_main ();
+        gtk_main ();
 
 	g_object_unref (application);
 	

@@ -1,14 +1,11 @@
-<Root>
-  <commands>	
-    <cmd name="HTML Export" _label="HTML"/>
-  </commands>
-  <menu>
-    <submenu name="File">
-     <submenu name="Export">
-      <placeholder  name="Export placeholder">
-	<menuitem name="HTML Export" verb="" accel=""/>
-      </placeholder>
-    </submenu>
-    </submenu>
-  </menu>
-</Root>
+<ui>
+  <menubar name="MenuBar">
+    <menu action="File">
+      <menu action="Export">
+        <placeholder  name="Export placeholder">
+          <menuitem action="HTML Export"/>
+        </placeholder>
+      </menu>
+    </menu>
+  </menubar>
+</ui>

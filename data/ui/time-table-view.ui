@@ -1,40 +1,32 @@
-<Root>
-  <commands>
-    <cmd name="SelectAll"           _label="Select _All"  _tip="Select all tasks"/>
-    <cmd name="ZoomIn"              _label="Zoom in"               pixtype="stock" pixname="gtk-zoom-in"/>
-    <cmd name="ZoomOut"             _label="Zoom out"              pixtype="stock" pixname="gtk-zoom-out"/>
-    <cmd name="ZoomToFit"           _label="Zoom to fit"           pixtype="stock" pixname="gtk-zoom-fit"/>
-  </commands>
-
-  <menu>
-    <submenu    name="Edit">
+<ui>
+  <menubar name="MenuBar">
+    <menu action="Edit">
       <placeholder name="Selection placeholder">
         <!--menuitem name="SelectAll"         verb=""   accel="*Control*a"/-->
       </placeholder>
       <placeholder name="View specific placeholder">
       </placeholder>
-    </submenu>
+    </menu>
 
-    <submenu    name="View">
+    <menu action="View">
       <placeholder name="View specific placeholder">
-        <menuitem name="ZoomIn"            verb=""/>
-        <menuitem name="ZoomOut"           verb=""/>
-        <menuitem name="ZoomToFit"         verb=""/>
+        <separator/>
+        <menuitem action="ZoomIn"/>
+        <menuitem action="ZoomOut"/>
+        <menuitem action="ZoomToFit"/>
       </placeholder>
-    </submenu>
+    </menu>
 
-    <submenu    name="Actions">
+    <menu action="Actions">
       <placeholder name="View specific actions placeholder">
       </placeholder>
-    </submenu>
+    </menu>
+  </menubar>
 
-  </menu>
-
-  <dockitem name="Toolbar">
-    <toolitem name="ZoomToFit"    verb="" _tip="Zoom to fit the entire project"/>
-    <toolitem name="ZoomIn"       verb="" _tip="Zoom in"/>
-    <toolitem name="ZoomOut"      verb="" _tip="Zoom out"/>
-  </dockitem>
-
-</Root>
+  <toolbar name="ToolBar">
+    <toolitem action="ZoomToFit"/>
+    <toolitem action="ZoomIn"/>
+    <toolitem action="ZoomOut"/>
+  </toolbar>
+</ui>
 

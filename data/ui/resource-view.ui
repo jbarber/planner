@@ -1,41 +1,31 @@
-<Root>
-  <commands>
-    <cmd name="InsertResource"  _label="_Insert Resource"     pixtype="stock" pixname="planner-stock-insert-resource"/>
-    <cmd name="InsertResources" _label="In_sert Resources..." pixtype="stock" pixname="planner-stock-insert-resource"/>
-    <cmd name="RemoveResource"  _label="_Remove Resource"     pixtype="stock" pixname="planner-stock-remove-resource" sensitive="0"/>
-    <cmd name="EditResource"    _label="_Edit Resource Properties..." pixtype="stock" pixname="gtk-properties"   sensitive="0"/> 
-    <cmd name="EditGroups"      _label="Edit _Groups"         pixtype="stock" pixname="planner-stock-edit-groups"/>	
-    <cmd name="SelectAll"       _label="Select _All"   _tip="Select all tasks"/>
-    <cmd name="EditCustomProps" _label="Edit _Custom Properties..." pixtype="stock" pixname="gtk-properties"/>
-  </commands>
-
-  <menu>
-    <submenu    name="Edit">
+<ui>
+  <menubar name="MenuBar">
+    <menu action="Edit">
       <placeholder name="Selection placeholder">
-        <menuitem name="SelectAll"           verb=""   accel="*Control*a"/> 
+        <menuitem action="SelectAll"/> 
       </placeholder>
       <placeholder name="View specific placeholder">
       </placeholder>
-    </submenu>
-    <submenu    name="Actions">
+    </menu>
+    <menu action="Actions">
       <placeholder name="View specific actions placeholder">
-        <menuitem name="InsertResource"      verb=""   accel="*Control*i"/>
-        <menuitem name="InsertResources"     verb=""/>
-	<menuitem name="RemoveResource"      verb=""   accel="*Control*d"/>
+        <menuitem action="InsertResource"/>
+        <menuitem action="InsertResources"/>
+	<menuitem action="RemoveResource"/>
         <separator/>
-        <menuitem name="EditResource"        verb=""   accel="*Shift**Control*e"/>
+        <menuitem action="EditResource"/>
 	<separator/>
-	<menuitem name="EditGroups"          verb=""/>
+	<menuitem action="EditGroups"/>
 	<separator/>
-        <menuitem name="EditCustomProps"     verb=""/>
+        <menuitem action="EditCustomProps"/>
       </placeholder>
-    </submenu>
-  </menu>
+    </menu>
+  </menubar>
 
-  <dockitem name="Toolbar">
-    <toolitem name="InsertResource" verb="" _label="Insert" _tip="Insert a new resource"/>
-    <toolitem name="RemoveResource" verb="" _label="Remove" _tip="Remove the selected resource"/>
-    <toolitem name="EditGroups"     verb="" _label="Groups" _tip="Edit resource groups"/>
-  </dockitem>
-</Root>
+  <toolbar name="ToolBar">
+    <toolitem action="InsertResource"/>
+    <toolitem action="RemoveResource"/>
+    <toolitem action="EditGroups"/>
+  </toolbar>
+</ui>
 

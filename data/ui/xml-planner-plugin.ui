@@ -1,14 +1,11 @@
-<Root>
-  <commands>	
-    <cmd name="XML Planner Export" _label="Planner 0.11 Format"/>
-  </commands>
-  <menu>
-    <submenu name="File">
-     <submenu name="Export">
+<ui>
+  <menubar name="MenuBar">
+    <menu action="File">
+     <menu action="Export">
       <placeholder name="Export placeholder">
-	<menuitem name="XML Planner Export" verb="" accel=""/>
+	<menuitem action="XML Planner Export"/>
       </placeholder>
-     </submenu>
-    </submenu>
-  </menu>
-</Root>
+     </menu>
+    </menu>
+  </menubar>
+</ui>

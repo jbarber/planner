@@ -1,69 +1,51 @@
-<Root>
-  <commands>
-    <cmd name="InsertTask"          _label="_Insert Task"               pixtype="stock" pixname="planner-stock-insert-task"/>
-    <cmd name="InsertTasks"         _label="In_sert Tasks..."           pixtype="stock" pixname="planner-stock-insert-task"/>
-    <cmd name="RemoveTask"          _label="_Remove Task"               pixtype="stock" pixname="planner-stock-remove-task"    sensitive="0"/>
-    <cmd name="EditTask"            _label="_Edit Task" sensitive="0"/>
-    <cmd name="UnlinkTask"          _label="_Unlink Task"               pixtype="stock" pixname="planner-stock-unlink-task"/>
-    <cmd name="LinkTasks"           _label="_Link Tasks"                pixtype="stock" pixname="planner-stock-link-task"/>
-    <cmd name="SelectAll"           _label="Select _All"                 _tip="Select all tasks"/>
-    <cmd name="ResetConstraint"     _label="Reset _Constraint"          pixtype="stock" pixname="planner-stock-reset-constraint"  sensitive="0"/>
-    <cmd name="IndentTask"          _label="I_ndent Task"               pixtype="stock" pixname="planner-stock-indent-task"    sensitive="0"/>
-    <cmd name="UnindentTask"        _label="Unin_dent Task"             pixtype="stock" pixname="planner-stock-unindent-task"  sensitive="0"/>
-    <cmd name="MoveTaskUp"	    _label="Move Task _Up"              pixtype="stock" pixname="planner-stock-move-task-up"   sensitive="0"/>
-    <cmd name="MoveTaskDown"	    _label="Move Task Do_wn"            pixtype="stock" pixname="planner-stock-move-task-down" sensitive="0"/>
-    <cmd name="EditCustomProps"     _label="_Edit Custom Properties..." pixtype="stock" pixname="gtk-properties"/>
-    <cmd name="HighlightCriticalTasks"   _label="_Highlight Critical Tasks"/>
-  </commands>
-
-  <menu>
-    <submenu    name="Edit">
+<ui>
+  <menubar name="MenuBar">
+    <menu  action="Edit">
       <placeholder name="Selection placeholder">
-        <menuitem name="SelectAll"           verb=""   accel="*Control*a" />
+        <menuitem action="SelectAll"/>
       </placeholder>
-      <placeholder name="View specific placeholder">
-      </placeholder>
-    </submenu>
+      <placeholder name="View specific placeholder"/>
+    </menu>
 
-    <submenu    name="View">
+    <menu action="View">
       <placeholder name="View specific placeholder">
-        <menuitem name="HighlightCriticalTasks"   verb="" type="toggle"/>
+        <menuitem action="HighlightCriticalTasks"/>
       </placeholder>
-    </submenu>
+    </menu>
 
-    <submenu    name="Actions">
+    <menu action="Actions">
       <placeholder name="View specific actions placeholder">
-        <menuitem name="InsertTask"          verb=""   accel="*Control*i" />
-        <menuitem name="InsertTasks"         verb=""/>
-	<menuitem name="RemoveTask"          verb=""   accel="*Control*d" />
-	<menuitem name="LinkTasks"          verb=""/>
-        <menuitem name="UnlinkTask"          verb=""/>
+        <menuitem action="InsertTask"/>
+        <menuitem action="InsertTasks"/>
+	<menuitem action="RemoveTask"/>
+	<menuitem action="LinkTasks"/>
+        <menuitem action="UnlinkTask"/>
         <separator/>
-        <menuitem name="IndentTask"          verb=""   accel="*Shift**Control*i" />
-        <menuitem name="UnindentTask"        verb=""   accel="*Shift**Control*u" />
+        <menuitem action="IndentTask"/>
+        <menuitem action="UnindentTask"/>
         <separator/>
-	<menuitem name="MoveTaskUp"          verb=""/>
-	<menuitem name="MoveTaskDown"        verb=""/>
+	<menuitem action="MoveTaskUp"/>
+	<menuitem action="MoveTaskDown"/>
         <separator/>
-        <menuitem name="ResetConstraint"     verb=""/>
+        <menuitem action="ResetConstraint"/>
         <separator/>
-        <menuitem name="EditTask"            verb=""   accel="*Shift**Control*e"/>
+        <menuitem action="EditTask"/>
         <separator/>
-        <menuitem name="EditCustomProps"     verb=""/>
+        <menuitem action="EditCustomProps"/>
       </placeholder>
-    </submenu>
-  </menu>
+    </menu>
+  </menubar>
 
-  <dockitem name="Toolbar">
-    <toolitem name="InsertTask"   verb="" _label="Insert"        _tip="Insert a new task"/>
-    <toolitem name="RemoveTask"   verb="" _label="Remove"        _tip="Remove the selected tasks"/>
-    <toolitem name="LinkTasks"    verb="" _label="Link"          _tip="Link the selected tasks"/>
-    <toolitem name="UnlinkTask"   verb="" _label="Unlink"        _tip="Unlink the selected tasks"/>
-    <toolitem name="IndentTask"   verb="" _label="Indent"        _tip="Indent the selected tasks"/>
-    <toolitem name="UnindentTask" verb="" _label="Unindent"      _tip="Unindent the selected tasks"/>
-    <toolitem name="MoveTaskUp"   verb="" _label="Move up"       _tip="Move the selected tasks upwards"/>
-    <toolitem name="MoveTaskDown" verb="" _label="Move down"     _tip="Move the selected tasks downwards"/>
-  </dockitem>
+  <toolbar name="ToolBar">
+    <toolitem action="InsertTask"/>
+    <toolitem action="RemoveTask"/>
+    <toolitem action="LinkTasks"/>
+    <toolitem action="UnlinkTask"/>
+    <toolitem action="IndentTask"/>
+    <toolitem action="UnindentTask"/>
+    <toolitem action="MoveTaskUp"/>
+    <toolitem action="MoveTaskDown"/>
+  </toolbar>
 
-</Root>
+</ui>
 

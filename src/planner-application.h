@@ -24,8 +24,6 @@
 #ifndef __PLANNER_APPLICATION_H__
 #define __PLANNER_APPLICATION_H__
 
-#include <bonobo/bonobo-window.h>
-#include <bonobo/bonobo-ui-component.h>
 #include <gconf/gconf-client.h>
 #include <libplanner/mrp-application.h>
 #include <libplanner/mrp-project.h>

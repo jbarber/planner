@@ -24,8 +24,6 @@
 #include <config.h>
 #include <glib.h> 
 #include <string.h>
-#include <bonobo/bonobo-ui-component.h>
-#include <bonobo/bonobo-ui-util.h>
 #include <glade/glade.h>
 #include <gtk/gtkradiobutton.h>
 #include <gtk/gtkmessagedialog.h>
@@ -45,9 +43,8 @@ struct _PlannerPluginPriv {
 	GtkWidget     *server_entry;
 };
 
-static void html_plugin_export                (BonoboUIComponent *component,
-					       gpointer           user_data,
-					       const gchar       *cname);
+static void html_plugin_export                (GtkAction         *action,
+					       gpointer           user_data);
 static void html_plugin_ok_button_clicked     (GtkButton         *button,
 					       PlannerPlugin     *plugin);
 static void html_plugin_cancel_button_clicked (GtkButton         *button,
@@ -65,15 +62,18 @@ void        plugin_init                       (PlannerPlugin     *plugin,
 void        plugin_exit                       (PlannerPlugin     *plugin);
 
 
-static BonoboUIVerb verbs[] = {
-	BONOBO_UI_VERB ("HTML Export", html_plugin_export),
-	BONOBO_UI_VERB_END
+static GtkActionEntry action_entries[] = {
+	{ "HTML Export", NULL,
+	  N_("HTML"), NULL,
+	  N_("Exports project to HTML"),
+	  G_CALLBACK(html_plugin_export) },
 };
+static guint n_action_entries = G_N_ELEMENTS (action_entries);
+
 
 static void
-html_plugin_export (BonoboUIComponent *component,
-		    gpointer           user_data,
-		    const gchar       *cname)
+html_plugin_export (GtkAction         *action,
+		    gpointer           user_data)
 {
 	PlannerPluginPriv *priv = PLANNER_PLUGIN (user_data)->priv;
 	GladeXML          *glade;
@@ -235,30 +235,26 @@ G_MODULE_EXPORT void
 plugin_init (PlannerPlugin *plugin, PlannerWindow *main_window)
 {
 	PlannerPluginPriv *priv;
-	BonoboUIContainer *ui_container;
-	BonoboUIComponent *ui_component;
+	GtkUIManager      *ui;
+	GtkActionGroup    *actions;
+	GError            *error = NULL;
 	
 	priv = g_new0 (PlannerPluginPriv, 1);
 	plugin->priv = priv;
 	priv->main_window = main_window;
 	
-	ui_container = planner_window_get_ui_container (main_window);
-	ui_component = bonobo_ui_component_new_default ();
-	
-	bonobo_ui_component_set_container (ui_component, 
-					   BONOBO_OBJREF (ui_container),
-					   NULL);
-	bonobo_ui_component_freeze (ui_component, NULL);
-	bonobo_ui_component_add_verb_list_with_data (ui_component, 
-						     verbs,
-						     plugin);
-	bonobo_ui_util_set_ui (ui_component,
-			       DATADIR,
-			       "/planner/ui/html-plugin.ui",
-			       "htmlplugin",
-			       NULL);
-	
-	bonobo_ui_component_thaw (ui_component, NULL);
+	/* Create the actions, get the ui manager and merge the whole */
+	actions = gtk_action_group_new("HTML plugin actions");
+	gtk_action_group_add_actions (actions, action_entries, n_action_entries, plugin);
+
+	ui = planner_window_get_ui_manager (main_window);
+	gtk_ui_manager_insert_action_group (ui, actions, 0);
+	if (!gtk_ui_manager_add_ui_from_file(ui, DATADIR"/planner/ui/html-plugin.ui", &error)) {
+		g_message("Building menu failed: %s", error->message);
+		g_message ("Couldn't load: %s",DATADIR"/planner/ui/html-plugin.ui");
+		g_error_free(error);
+	}
+	gtk_ui_manager_ensure_update(ui);
 }
 
 G_MODULE_EXPORT void 

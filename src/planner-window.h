@@ -24,9 +24,9 @@
 #ifndef __PLANNER_WINDOW_H__
 #define __PLANNER_WINDOW_H__
 
-#include <bonobo/bonobo-window.h>
-#include <bonobo/bonobo-ui-component.h>
 #include <libplanner/mrp-project.h>
+#include <gtk/gtkuimanager.h>
+#include <gtk/gtkwindow.h>
 #include "planner-application.h"
 #include "planner-cmd-manager.h"
 
@@ -43,14 +43,14 @@ typedef struct _PlannerWindowPriv    PlannerWindowPriv;
 
 struct _PlannerWindow
 {
-        BonoboWindow       parent;
+        GtkWindow           parent;
         
         PlannerWindowPriv  *priv;
 };
 
 struct _PlannerWindowClass
 {
-        BonoboWindowClass  parent_class;
+        GtkWindowClass      parent_class;
 };
 
 
@@ -58,7 +58,7 @@ GType                   planner_window_get_type             (void) G_GNUC_CONST;
 GtkWidget         *     planner_window_new                  (PlannerApplication *app);
 gboolean                planner_window_open                 (PlannerWindow      *window,
 							     const gchar        *uri);
-BonoboUIContainer *     planner_window_get_ui_container     (PlannerWindow      *window);
+GtkUIManager *          planner_window_get_ui_manager       (PlannerWindow      *window);
 MrpProject        *     planner_window_get_project          (PlannerWindow      *window);
 PlannerApplication     *planner_window_get_application      (PlannerWindow      *window);
 void                    planner_window_check_version        (PlannerWindow      *window);

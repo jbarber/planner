@@ -26,8 +26,6 @@
 #include <string.h>
 #include <stdlib.h>
 #include <glib.h>
-#include <bonobo/bonobo-ui-component.h>
-#include <bonobo/bonobo-ui-util.h>
 #include <libgnome/gnome-i18n.h>
 #include <libgnomeui/gnome-entry.h>
 #include <glade/glade.h>
@@ -94,11 +92,12 @@ enum {
 	COL_REVISION
 };
 
-static BonoboUIVerb verbs[] = {
-	BONOBO_UI_VERB ("Open", sql_plugin_open),
-	BONOBO_UI_VERB ("Save", sql_plugin_save),
-	BONOBO_UI_VERB_END
+static GtkActionEntry entries[] = {
+	{ "Open",  NULL,  N_("_Open"), NULL, N_("Open from database"),  G_CLLBACK(sql_plugin_open) },
+	{ "Save",  NULL,  N_("_Save"), NULL, N_("Save to database"),    G_CLLBACK(sql_plugin_save) },
 };
+
+static guint n_entries        = G_N_ELEMENTS (entries);
 
 
 /**

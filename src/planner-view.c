@@ -25,8 +25,6 @@
 #include <string.h>
 #include <time.h>
 #include <glib.h>
-#include <bonobo/bonobo-ui-util.h>
-#include <bonobo/bonobo-ui-util.h>
 #include "planner-view.h"
 
 static void mv_init       (PlannerView      *view);
@@ -152,7 +150,6 @@ planner_view_init (PlannerView   *view,
 	g_return_if_fail (PLANNER_IS_VIEW (view));
 
 	view->main_window = main_window;
-	view->ui_component = bonobo_ui_component_new_default ();
 
 	if (view->init) {
 		view->init (view, main_window);
@@ -226,44 +223,3 @@ planner_view_print_cleanup (PlannerView *view)
 		view->print_cleanup (view);
 	}
 }
-
-void
-planner_view_activate_helper (PlannerView  *view,
-			      const gchar  *ui_filename,
-			      const gchar  *name,
-			      BonoboUIVerb *verbs)
-{
-	BonoboUIContainer *ui_container;
-
-	g_return_if_fail (PLANNER_IS_VIEW (view));
-	
-	ui_container = planner_window_get_ui_container (view->main_window);
-	
-	bonobo_ui_component_set_container (view->ui_component,
-					   BONOBO_OBJREF (ui_container),
-					   NULL);
-	
-	bonobo_ui_component_freeze (view->ui_component, NULL);
-
-	bonobo_ui_component_add_verb_list_with_data (view->ui_component,
-						     verbs,
-						     view);
-	
-	bonobo_ui_util_set_ui (view->ui_component,
- 			       DATADIR,
- 			       ui_filename,
- 			       name,
- 			       NULL);
-
-	bonobo_ui_component_thaw (view->ui_component, NULL);
-}
-
-void
-planner_view_deactivate_helper (PlannerView *view)
-{
-	g_return_if_fail (PLANNER_IS_VIEW (view));
-
-	bonobo_ui_component_rm (view->ui_component, "/", NULL);
- 	bonobo_ui_component_unset_container (view->ui_component, NULL);
-}
-

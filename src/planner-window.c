@@ -26,8 +26,6 @@
 #include <math.h>
 #include <sys/types.h>
 #include <sys/stat.h>
-#include <bonobo/bonobo-ui-component.h>
-#include <bonobo/bonobo-ui-util.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
 #include <gtk/gtkbutton.h>
 #include <gtk/gtkmain.h>
@@ -45,12 +43,12 @@
 #include <libgnome/gnome-i18n.h>
 #include <libgnomeui/gnome-about.h>
 #include <libgnomeui/gnome-href.h>
+#include <libgnomeui/gnome-stock-icons.h>
 #include <libgnomeprintui/gnome-print-dialog.h>
 #include <libgnomeprintui/gnome-print-job-preview.h>
 #include <libplanner/mrp-error.h>
 #include <libplanner/mrp-project.h>
 #include <libegg/recent-files/egg-recent-view.h>
-#include <libegg/recent-files/egg-recent-view-bonobo.h>
 #include "planner-marshal.h"
 #include "planner-sidebar.h"
 #include "planner-window.h"
@@ -69,8 +67,9 @@
 struct _PlannerWindowPriv {
 	PlannerApplication  *application;
 
-	BonoboUIContainer   *ui_container;
-	BonoboUIComponent   *ui_component;
+	GtkUIManager        *ui_manager;
+	GtkActionGroup      *actions;
+	GtkActionGroup      *view_actions;
 
 	PlannerCmdManager   *cmd_manager;
 
@@ -89,7 +88,9 @@ struct _PlannerWindowPriv {
 	GList               *plugins;
 	GTimer              *last_saved;
 
-	EggRecentViewBonobo *view;	
+	/* FIXME: remove that
+	   EggRecentViewBonobo *view;
+	*/
 };
 
 /* Signals */
@@ -107,65 +108,45 @@ static void       window_populate                        (PlannerWindow         
 static void       window_view_selected                   (PlannerSidebar               *sidebar,
 							  gint                          index,
 							  PlannerWindow                *window);
-static void       window_new_cb                          (BonoboUIComponent            *component,
-							  gpointer                      data,
-							  const char                   *cname);
-static void       window_open_cb                         (BonoboUIComponent            *component,
-							  gpointer                      data,
-							  const char                   *cname);
-static void       window_save_as_cb                      (BonoboUIComponent            *component,
-							  gpointer                      data,
-							  const char                   *cname);
-static void       window_save_cb                         (BonoboUIComponent            *component,
-							  gpointer                      data,
-							  const char                   *cname);
-static void       window_print_cb                        (BonoboUIComponent            *component,
-							  gpointer                      data,
-							  const char                   *cname);
-static void       window_print_preview_cb                (BonoboUIComponent            *component,
-							  gpointer                      data,
-							  const char                   *cname);
-static void       window_properties_cb                   (BonoboUIComponent            *component,
-							  gpointer                      data,
-							  const char                   *cname);
-static void       window_close_cb                        (BonoboUIComponent            *component,
-							  gpointer                      data,
-							  const char                   *cname);
-static void       window_exit_cb                         (BonoboUIComponent            *component,
-							  gpointer                      data,
-							  const char                   *cname);
-static void       window_undo_cb                         (BonoboUIComponent            *component,
-							  gpointer                      data,
-							  const char                   *cname);
-static void       window_redo_cb                         (BonoboUIComponent            *component,
-							  gpointer                      data,
-							  const char                   *cname);
-static void       window_project_props_cb                (BonoboUIComponent            *component,
-							  gpointer                      data,
-							  const char                   *cname);
-static void       window_manage_calendars_cb             (BonoboUIComponent            *component,
-							  gpointer                      data,
-							  const char                   *cname);
-static void       window_edit_day_types_cb               (BonoboUIComponent            *component,
-							  gpointer                      data,
-							  const char                   *cname);
-static void       window_edit_phases_cb                  (BonoboUIComponent            *component,
-							  gpointer                      data,
-							  const char                   *cname);
-static void       window_preferences_cb                  (BonoboUIComponent            *component,
-							  gpointer                      data,
-							  const char                   *cname);
-static void       window_ui_component_event_cb           (BonoboUIComponent            *comp,
-							  const gchar                  *path,
-							  Bonobo_UIComponent_EventType  type,
-							  const gchar                  *state_string,
-							  PlannerWindow                *window);
-static void       window_help_cb                         (BonoboUIComponent            *component,
-							  gpointer                      data,
-							  const char                   *cname);
-static void       window_about_cb                        (BonoboUIComponent            *component,
-							  gpointer                      data,
-							  const char                   *cname);
+static void       window_view_cb                         (GtkAction                    *action,
+							  GtkRadioAction               *current,
+							  gpointer                      data);
+static void       window_new_cb                          (GtkAction                    *action,
+							  gpointer                      data);
+static void       window_open_cb                         (GtkAction                    *action,
+							  gpointer                      data);
+static void       window_save_as_cb                      (GtkAction                    *action,
+							  gpointer                      data);
+static void       window_save_cb                         (GtkAction                    *action,
+							  gpointer                      data);
+static void       window_print_cb                        (GtkAction                    *action,
+							  gpointer                      data);
+static void       window_print_preview_cb                (GtkAction                    *action,
+							  gpointer                      data);
+static void       window_properties_cb                   (GtkAction                    *action,
+							  gpointer                      data);
+static void       window_close_cb                        (GtkAction                    *action,
+							  gpointer                      data);
+static void       window_exit_cb                         (GtkAction                    *action,
+							  gpointer                      data);
+static void       window_undo_cb                         (GtkAction                    *action,
+							  gpointer                      data);
+static void       window_redo_cb                         (GtkAction                    *action,
+							  gpointer                      data);
+static void       window_project_props_cb                (GtkAction                    *action,
+							  gpointer                      data);
+static void       window_manage_calendars_cb             (GtkAction                    *action,
+							  gpointer                      data);
+static void       window_edit_day_types_cb               (GtkAction                    *action,
+							  gpointer                      data);
+static void       window_edit_phases_cb                  (GtkAction                    *action,
+							  gpointer                      data);
+static void       window_preferences_cb                  (GtkAction                    *action,
+							  gpointer                      data);
+static void       window_help_cb                         (GtkAction                    *action,
+							  gpointer                      data);
+static void       window_about_cb                        (GtkAction                    *action,
+							  gpointer                      data);
 static gboolean   window_delete_event_cb                 (PlannerWindow                *window,
 							  gpointer                      user_data);
 static void       window_undo_state_changed_cb           (PlannerCmdManager            *manager,
@@ -190,8 +171,10 @@ static gchar *    window_get_name                        (PlannerWindow         
 static void       window_update_title                    (PlannerWindow                *window);
 static GtkWidget *window_create_dialog_button            (const gchar                  *icon_name,
 							  const gchar                  *text);
+#ifdef FIXME
 static gchar *    window_recent_tooltip_func             (EggRecentItem                *item,
 							  gpointer                      user_data);
+#endif
 static void       window_save_state                      (PlannerWindow *window);
 static void       window_restore_state                   (PlannerWindow *window);
 
@@ -206,36 +189,46 @@ static void       window_restore_state                   (PlannerWindow *window)
 #define VIEW_PATH "/menu/View/Views placeholder"
 #define VIEW_GROUP "view group"
 	
-static BonoboWindowClass *parent_class = NULL;
+static GtkWindowClass *parent_class = NULL;
 static guint signals[LAST_SIGNAL];
 
-static BonoboUIVerb verbs[] = {
-	BONOBO_UI_VERB ("FileNew",		window_new_cb),
-	BONOBO_UI_VERB ("FileOpen",		window_open_cb),
-	BONOBO_UI_VERB ("FileSave",		window_save_cb),
-	BONOBO_UI_VERB ("FileSaveAs",		window_save_as_cb),
-	BONOBO_UI_VERB ("FileProperties",	window_properties_cb),
-	BONOBO_UI_VERB ("FilePrint",		window_print_cb),
-	BONOBO_UI_VERB ("FilePrintPreview",	window_print_preview_cb),
-	BONOBO_UI_VERB ("FileClose",		window_close_cb),
-	BONOBO_UI_VERB ("FileExit",		window_exit_cb),
 
-	BONOBO_UI_VERB ("EditUndo",		window_undo_cb),
-	BONOBO_UI_VERB ("EditRedo",		window_redo_cb),
-	BONOBO_UI_VERB ("EditProjectProps",	window_project_props_cb),
-
-	BONOBO_UI_VERB ("ManageCalendars",      window_manage_calendars_cb),
-	BONOBO_UI_VERB ("EditDayTypes",         window_edit_day_types_cb),
-	BONOBO_UI_VERB ("EditPhases",           window_edit_phases_cb),
-
-	BONOBO_UI_VERB ("PreferencesEditPreferences",
-			window_preferences_cb),
-
-	BONOBO_UI_VERB ("HelpHelp",		window_help_cb),
-	BONOBO_UI_VERB ("HelpAbout",		window_about_cb),
-
-	BONOBO_UI_VERB_END
+static GtkActionEntry entries[] = {
+	{ "File",                       NULL,                    N_("_File"),                    NULL,                NULL,                                                 NULL },
+	{ "FileNew",                    GTK_STOCK_NEW,           N_("_New Project"),             "<Control>n",        N_("Create a new project"),                           G_CALLBACK(window_new_cb) },
+	{ "FileOpen",                   GTK_STOCK_OPEN,          N_("_Open..."),                 "F3",                N_("Open a project"),                                 G_CALLBACK(window_open_cb) },
+	{ "FileSave",                   GTK_STOCK_SAVE,          N_("_Save"),                    "<Control>s",        N_("Save the current project"),                       G_CALLBACK(window_save_cb) },
+	{ "Export",                     NULL,                    N_("_Export"),                  NULL,                NULL,                                                 NULL },
+	{ "FileSaveAs",                 GTK_STOCK_SAVE_AS,       N_("Save _As..."),              "<Shift><Control>s", N_("Save the current project with a different name"), G_CALLBACK(window_save_as_cb) },
+	{ "FileProperties",             NULL,                    NULL,                           NULL,                NULL,                                                 G_CALLBACK(window_properties_cb) },
+	{ "FilePrint",                  GTK_STOCK_PRINT,         N_("_Print..."),                "<Control>p",        N_("Print the current project"),                      G_CALLBACK(window_print_cb) },
+	{ "FilePrintPreview",           GTK_STOCK_PRINT_PREVIEW, N_("Print Pre_view"),           "<Shift><Control>p", N_("Print preview of the current project"),           G_CALLBACK(window_print_preview_cb) },
+	{ "FileClose",                  GTK_STOCK_CLOSE,         N_("_Close"),                   "<Control>w",        N_("Close the current file"),                         G_CALLBACK(window_close_cb) },
+	{ "FileExit",                   GTK_STOCK_QUIT,          N_("_Quit"),                    "<Control>q",        N_("Exit the program"),                               G_CALLBACK(window_exit_cb) },
+	
+	{ "Edit",                       NULL,                    N_("_Edit"),                    NULL,                NULL,                                                 NULL },
+	{ "EditUndo",                   GTK_STOCK_UNDO,          N_("_Undo"),                    "<Control>z",        N_("Undo the last action"),                           G_CALLBACK(window_undo_cb) },
+	{ "EditRedo",                   GTK_STOCK_REDO,          N_("_Redo"),                    "<Control>r",        N_("Redo the undone action"),                         G_CALLBACK(window_redo_cb) },
+	
+	{ "View",                       NULL,                    N_("_View"),                    NULL,                NULL,                                                 NULL },
+	
+	{ "Actions",                    NULL,                    N_("_Actions"),                 NULL,                NULL,                                                 NULL },
+	
+	{ "Project",                    NULL,                    N_("_Project"),                 NULL,                NULL,                                                 NULL },
+	{ "ManageCalendars",            NULL,                    N_("_Manage Calendars"),        NULL,                NULL,                                                 G_CALLBACK(window_manage_calendars_cb) },
+	{ "EditDayTypes",               NULL,                    N_("Edit Day _Types"),          NULL,                NULL,                                                 G_CALLBACK(window_edit_day_types_cb) },
+	{ "EditPhases",                 NULL,                    N_("Edit Project _Phases"),     NULL,                NULL,                                                 G_CALLBACK(window_edit_phases_cb) },
+	{ "EditProjectProps",           GTK_STOCK_PROPERTIES,    N_("_Edit Project Properties"), NULL,                N_("Edit the project properties"),                    G_CALLBACK(window_project_props_cb) },
+	
+	{ "PreferencesEditPreferences", NULL,                    NULL,                           NULL,                NULL,                                                 G_CALLBACK(window_preferences_cb) },
+	
+	{ "Help",                       NULL,                    N_("_Help"),                    NULL,                NULL,                                                 NULL },
+	{ "HelpHelp",                   GTK_STOCK_HELP,          N_("_User Guide"),              "F1",                N_("Show the Planner User Guide"),                    G_CALLBACK(window_help_cb) },
+	{ "HelpAbout",                  GNOME_STOCK_ABOUT,       N_("_About"),                   NULL,                N_("About this application"),                         G_CALLBACK(window_about_cb) },
 };
+
+static guint n_entries = G_N_ELEMENTS(entries);
+
 
 GType
 planner_window_get_type (void)
@@ -255,7 +248,7 @@ planner_window_get_type (void)
 			(GInstanceInitFunc) window_init
 		};
 
-		type = g_type_register_static (BONOBO_TYPE_WINDOW,
+		type = g_type_register_static (GTK_TYPE_WINDOW,
 					       "PlannerWindow", &info, 0);
 	}
 	
@@ -304,21 +297,6 @@ window_init (PlannerWindow *window)
 			  "redo_state_changed",
 			  G_CALLBACK (window_redo_state_changed_cb),
 			  window);
-
-	priv->ui_container = 
-		bonobo_window_get_ui_container (BONOBO_WINDOW (window));
-
-	priv->ui_component = bonobo_ui_component_new ("Planner");
-
-	bonobo_ui_component_set_container (priv->ui_component,
-					   BONOBO_OBJREF (priv->ui_container),
-					   NULL);
-
-	g_signal_connect_object (priv->ui_component,
-				 "ui-event",
-				 G_CALLBACK (window_ui_component_event_cb),
-				 window,
-				 0);
 }
 
 static void
@@ -346,39 +324,8 @@ window_finalize (GObject *object)
 	}
 }
 
-static void
-window_add_view_menu_item (BonoboUIComponent *ui,
-			   guint              index,
-			   const gchar       *label)
-{
-	gchar *xml_item, *xml_command; 
-	gchar *command_name;
-	gchar *path;
 
-	command_name = g_strdup_printf ("view %u", index);
-
-	xml_item = g_strdup_printf ("<menuitem name=\"%u\" id=\"%s\" type=\"radio\" group=\"%s\"/>\n", 
-				    index, command_name, VIEW_GROUP);
-
-	bonobo_ui_component_set (ui, VIEW_PATH, xml_item, NULL);
-
-	g_free (xml_item);
-
-	path = g_strdup_printf ("%s/%u", VIEW_PATH, index);
-	bonobo_ui_component_set_prop (ui, path, "label", label, NULL);
-	g_free (path);
-
-	/* Make the command node here too, so callers can immediately set
-	 * properties on it (otherwise it doesn't get created until some
-	 * time later).
-	 */
-	xml_command = g_strdup_printf ("<cmd name=\"view %u\"/>\n", index);
-	bonobo_ui_component_set (ui, "/commands", xml_command, NULL);
-
-	g_free (xml_command);
-	g_free (command_name);
-}
-
+#ifdef FIXME
 static void
 planner_window_open_recent (GtkWidget           *widget,
 			    const EggRecentItem *item,
@@ -410,31 +357,59 @@ planner_window_open_recent (GtkWidget           *widget,
 	
 	g_free (filename);
 }
+#endif
+
+static void
+add_widget (GtkUIManager *merge, 
+	    GtkWidget    *widget, 
+	    GtkBox       *box)
+{
+  GtkWidget *handle_box;
+
+  if (GTK_IS_TOOLBAR (widget))
+    {
+      handle_box = gtk_handle_box_new ();
+      gtk_widget_show (handle_box);
+      gtk_container_add (GTK_CONTAINER (handle_box), widget);
+      gtk_box_pack_start (box, handle_box, FALSE, FALSE, 0);
+      g_signal_connect_swapped (widget, "destroy", 
+				G_CALLBACK (gtk_widget_destroy), handle_box);
+    }
+  else
+    gtk_box_pack_start (box, widget, FALSE, FALSE, 0);
+    
+  gtk_widget_show (widget);
+}
+
 
 static void
 window_populate (PlannerWindow *window)
 {
-	PlannerWindowPriv *priv;
-	GtkWidget        *hbox;
-	GList            *l;
-	GtkWidget        *view_widget;
-	PlannerView           *view;
-	gint              view_num;
+	PlannerWindowPriv    *priv;
+	GtkWidget            *hbox, *vbox;
+	GList                *l;
+	GtkWidget            *view_widget;
+	PlannerView          *view;
+	gint                  view_num;
+	GtkRadioActionEntry  *r_entries;
+	gchar                *xml_string_tmp, *xml_string;
+	GError               *error = NULL;
+	gchar                *xml_string_full =
+		"<ui>"
+		"<menubar name='MenuBar'>"
+		"<menu action='View'>"
+		"<placeholder name='Views placeholder'>"
+		"%s"
+		"</placeholder>"
+		"</menu>"
+		"</menubar>"
+		"</ui>";
 
 	priv = window->priv;
 
-	bonobo_ui_component_freeze (priv->ui_component, NULL);
-
-	bonobo_ui_util_set_ui (priv->ui_component,
- 			       DATADIR,
- 			       "/planner/ui/main-window.ui",
- 			       "planner",
- 			       NULL);
-
-	bonobo_ui_component_add_verb_list_with_data (priv->ui_component,
-						     verbs, window);
 
 	/* Handle recent file stuff */
+	/* FIXME: update the bonobo recent files
 	priv->view = egg_recent_view_bonobo_new (priv->ui_component,
 						 "/menu/File/EggRecentDocuments/");
 	egg_recent_view_set_model (EGG_RECENT_VIEW (priv->view),
@@ -445,6 +420,39 @@ window_populate (PlannerWindow *window)
 
 	g_signal_connect (priv->view, "activate",
 			  G_CALLBACK (planner_window_open_recent), window);
+	*/
+
+	vbox = gtk_vbox_new (FALSE, 0);
+	gtk_container_add (GTK_CONTAINER (window), vbox);
+
+	priv->actions    = gtk_action_group_new ("Planner");
+	gtk_action_group_add_actions (priv->actions, entries, n_entries, window);
+
+	priv->ui_manager = gtk_ui_manager_new ();
+	g_signal_connect (priv->ui_manager, "add_widget",
+			  G_CALLBACK (add_widget), vbox);
+
+	gtk_ui_manager_insert_action_group (priv->ui_manager, priv->actions, 0);
+	gtk_window_add_accel_group (GTK_WINDOW (window),
+				    gtk_ui_manager_get_accel_group (priv->ui_manager));
+
+	if (!gtk_ui_manager_add_ui_from_file (priv->ui_manager,
+					      DATADIR"/planner/ui/main-window.ui",
+					      &error)){
+		g_message ("Building menus failed: %s", error->message);
+		g_message ("Couldn't load: %s",DATADIR"/planner/ui/main-window.ui");
+		g_error_free (error);
+	}
+
+	g_object_set (gtk_action_group_get_action (priv->actions, "EditUndo"),
+		      "sensitive", FALSE, 
+		      NULL);
+	g_object_set (gtk_action_group_get_action (priv->actions, "EditRedo"),
+		      "sensitive", FALSE, 
+		      NULL);
+	g_object_set (gtk_action_group_get_action (priv->actions, "FileSave"),
+		      "sensitive", FALSE, 
+		      NULL);
 
 	hbox = gtk_hbox_new (FALSE, 0);
 
@@ -459,13 +467,17 @@ window_populate (PlannerWindow *window)
 	gtk_notebook_set_show_tabs (GTK_NOTEBOOK (priv->notebook), FALSE);
 	gtk_box_pack_start (GTK_BOX (hbox), priv->notebook, TRUE, TRUE, 0); 
 
-	bonobo_window_set_contents (BONOBO_WINDOW (window), hbox);
+	gtk_box_pack_end (GTK_BOX (vbox), hbox, TRUE, TRUE, 0);
 
 	/* Load views. */
+	priv->view_actions = gtk_action_group_new ("View Actions");
+	gtk_ui_manager_insert_action_group (priv->ui_manager, priv->view_actions, 0);
 	priv->views = planner_view_loader_load (window);
 
 	view_num = 0;
-	for (l = priv->views; l; l = l->next) {
+	xml_string = g_strdup("");
+	r_entries  = g_new0 (GtkRadioActionEntry, g_list_length(priv->views));
+	for (l = priv->views; l; l = l->next, view_num++ ) {
 		view = l->data;
 		
 		view_widget = planner_view_get_widget (view);
@@ -475,35 +487,51 @@ window_populate (PlannerWindow *window)
 					planner_view_get_icon (view),
 					planner_view_get_label (view));
 
-		window_add_view_menu_item (priv->ui_component,
-					   view_num++,
-					   planner_view_get_menu_label (view));
-		
+		r_entries[view_num].name  = planner_view_get_name (view);
+		r_entries[view_num].label = planner_view_get_menu_label (view);
+		r_entries[view_num].value = view_num;
+
+		xml_string_tmp = xml_string;
+		xml_string = g_strdup_printf ("%s<menuitem action='%s'/>",xml_string,r_entries[view_num].name);
+		g_free(xml_string_tmp);
+
 		gtk_notebook_append_page (
 			GTK_NOTEBOOK (priv->notebook),
 			view_widget,
 			gtk_label_new (planner_view_get_label (view)));
 	}
 
+	gtk_action_group_add_radio_actions (priv->view_actions, r_entries,
+					    g_list_length(priv->views), 0,
+					    G_CALLBACK(window_view_cb), window);
+
+	xml_string_tmp = g_strdup_printf (xml_string_full,xml_string);
+	if (!gtk_ui_manager_add_ui_from_string(priv->ui_manager, xml_string_tmp, -1, &error)) {
+		g_message("Building menu failed: %s", error->message);
+		g_message("Couldn't build the view menu item");
+		g_error_free(error);
+	}
+	g_free(xml_string);
+	g_free(xml_string_tmp);
+	gtk_ui_manager_ensure_update(priv->ui_manager);
+
 	/* Load plugins. */
 	priv->plugins = planner_plugin_loader_load (window);
 
-	bonobo_ui_component_thaw (priv->ui_component, NULL);
-
 	window_view_selected (PLANNER_SIDEBAR (priv->sidebar), 0, window);
+
 }
 
 static void
 window_view_selected (PlannerSidebar    *sidebar,
-		      gint          index,
-		      PlannerWindow *window)
+		      gint               index,
+		      PlannerWindow     *window)
 {
 	PlannerWindowPriv *priv;
-	GList            *list;
-	PlannerView           *view;
-	gchar            *cmd;
-	gchar            *state;
-		
+	GList             *list;
+	PlannerView       *view;
+	GtkAction         *action;
+
 	priv = window->priv;
 	
 	list = g_list_nth (priv->views, index);
@@ -531,38 +559,35 @@ window_view_selected (PlannerSidebar    *sidebar,
 	planner_sidebar_set_active (PLANNER_SIDEBAR (sidebar), index);
 	g_signal_handlers_unblock_by_func (sidebar, window_view_selected, window);
 	
-	priv->current_view = view;
-
-	cmd = g_strdup_printf ("/commands/view %u", index);
-	state = bonobo_ui_component_get_prop (priv->ui_component,
-					      cmd,
-					      "state",
-					      NULL);
-
-	if (state == NULL || !strcmp (state, "0")) {
-		g_signal_handlers_block_by_func (priv->ui_component,
-						 window_ui_component_event_cb,
-						 window);
-		
-		bonobo_ui_component_set_prop (priv->ui_component,
-					      cmd,
-					      "state",
-					      "1",
-					      NULL);
-
-		g_signal_handlers_unblock_by_func (priv->ui_component,
-						   window_ui_component_event_cb,
-						   window);
+	action = gtk_action_group_get_action (priv->view_actions,
+					      planner_view_get_name (view));
+	if ( !gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action)) ) {
+		gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), TRUE);
 	}
 
-	g_free (cmd);
-	g_free (state);
+	priv->current_view = view;
 }
 
 static void
-window_new_cb (BonoboUIComponent *component,
-	       gpointer           data, 
-	       const char        *cname)
+window_view_cb (GtkAction      *action,
+		GtkRadioAction *current,
+		gpointer        data)
+{
+	PlannerWindow     *window;
+	GtkWidget         *sidebar;
+	guint              index;
+
+	window  = PLANNER_WINDOW (data);
+	sidebar = window->priv->sidebar;
+
+	index = gtk_radio_action_get_current_value(current);
+
+	planner_sidebar_set_active (PLANNER_SIDEBAR (sidebar), index);
+}
+
+static void
+window_new_cb (GtkAction *action,
+	       gpointer   data)
 {
 	PlannerWindow     *window;
 	PlannerWindowPriv *priv;
@@ -598,9 +623,8 @@ get_last_dir (PlannerWindow *window)
 }
 
 static void
-window_open_cb (BonoboUIComponent *component,
-		gpointer           data,
-		const char        *cname)
+window_open_cb (GtkAction *action,
+		gpointer   data)
 {
 	PlannerWindow     *window;
 	PlannerWindowPriv *priv;
@@ -668,9 +692,8 @@ window_open_cb (BonoboUIComponent *component,
 }
 
 static void
-window_save_as_cb (BonoboUIComponent *component,
-		   gpointer           data,
-		   const char        *cname)
+window_save_as_cb (GtkAction *action,
+		   gpointer   data)
 {
 	PlannerWindow *window;
 
@@ -680,9 +703,8 @@ window_save_as_cb (BonoboUIComponent *component,
 }
 
 static void
-window_save_cb (BonoboUIComponent *component,
-		gpointer           data,
-		const char        *cname)
+window_save_cb (GtkAction *action,
+		gpointer   data)
 {
 	PlannerWindow     *window;
 
@@ -692,9 +714,8 @@ window_save_cb (BonoboUIComponent *component,
 }
 
 static void
-window_print_preview_cb (BonoboUIComponent *component,
-			 gpointer           data,
-			 const char        *cname)
+window_print_preview_cb (GtkAction *action,
+			 gpointer   data)
 {
 	PlannerWindow     *window;
 	PlannerWindowPriv *priv;
@@ -740,9 +761,8 @@ window_print_preview_cb (BonoboUIComponent *component,
 }
 
 static void
-window_print_cb (BonoboUIComponent *component,
-		 gpointer           data,
-		 const char        *cname)
+window_print_cb (GtkAction *action,
+		 gpointer   data)
 {
 	PlannerWindow     *window;
 	PlannerWindowPriv *priv;
@@ -828,24 +848,21 @@ window_print_cb (BonoboUIComponent *component,
 }
 
 static void
-window_properties_cb (BonoboUIComponent *component,
-		      gpointer           data, 
-		      const char        *cname)
+window_properties_cb (GtkAction *action,
+		      gpointer   data)
 {
 }
 
 static void
-window_close_cb (BonoboUIComponent *component,
-		 gpointer           data,
-		 const char        *cname)
+window_close_cb (GtkAction *action,
+		 gpointer   data)
 {
 	planner_window_close (PLANNER_WINDOW (data));
 }
 
 static void
-window_exit_cb (BonoboUIComponent *component, 
-		gpointer           data, 
-		const char        *cname)
+window_exit_cb (GtkAction *action, 
+		gpointer   data)
 {
 	PlannerWindow     *window;
 	PlannerWindowPriv *priv;
@@ -857,9 +874,8 @@ window_exit_cb (BonoboUIComponent *component,
 }
 
 static void
-window_redo_cb (BonoboUIComponent *component,
-		gpointer           data,
-		const char        *cname)
+window_redo_cb (GtkAction *action,
+		gpointer           data)
 {
 	PlannerWindow     *window;
 	PlannerWindowPriv *priv;
@@ -872,9 +888,8 @@ window_redo_cb (BonoboUIComponent *component,
 }
 
 static void
-window_undo_cb (BonoboUIComponent *component,
-		gpointer           data,
-		const char        *cname)
+window_undo_cb (GtkAction *action,
+		gpointer           data)
 {
 	PlannerWindow     *window;
 	PlannerWindowPriv *priv;
@@ -887,9 +902,8 @@ window_undo_cb (BonoboUIComponent *component,
 }
 
 static void
-window_project_props_cb (BonoboUIComponent *component,
-			 gpointer           data,
-			 const char        *cname)
+window_project_props_cb (GtkAction *action,
+			 gpointer           data)
 {
 	PlannerWindow     *window;
 	PlannerWindowPriv *priv;
@@ -910,9 +924,8 @@ window_project_props_cb (BonoboUIComponent *component,
 }
 
 static void
-window_manage_calendars_cb (BonoboUIComponent *component,
-			    gpointer           data,
-			    const char        *cname)
+window_manage_calendars_cb (GtkAction *action,
+			    gpointer           data)
 {
 	PlannerWindow *window;
 	
@@ -922,9 +935,8 @@ window_manage_calendars_cb (BonoboUIComponent *component,
 }
 
 static void
-window_edit_day_types_cb (BonoboUIComponent *component,
-			  gpointer           data,
-			  const char        *cname)
+window_edit_day_types_cb (GtkAction *action,
+			  gpointer           data)
 {
 	PlannerWindow *window;
 	
@@ -934,9 +946,8 @@ window_edit_day_types_cb (BonoboUIComponent *component,
 }
 
 static void
-window_edit_phases_cb (BonoboUIComponent *component,
-		       gpointer           data,
-		       const char        *cname)
+window_edit_phases_cb (GtkAction *action,
+		       gpointer           data)
 {
 	PlannerWindow     *window;
 	PlannerWindowPriv *priv;
@@ -957,39 +968,14 @@ window_edit_phases_cb (BonoboUIComponent *component,
 }
 
 static void
-window_preferences_cb (BonoboUIComponent *component,
-		       gpointer           data,
-		       const char        *cname)
+window_preferences_cb (GtkAction *action,
+		       gpointer           data)
 {
 }
 
 static void
-window_ui_component_event_cb (BonoboUIComponent            *comp,
-			      const gchar                  *path,
-			      Bonobo_UIComponent_EventType  type,
-			      const gchar                  *state_string,
-			      PlannerWindow                 *window)
-{
-	PlannerWindowPriv *priv;
-	gint              index;
-
-	priv = window->priv;
-	
-	/* View switching. */
-	if (!strcmp (state_string, "1") && 
-	    strlen (path) >= 5 && !strncmp (path, "view ", 5)) {
-		index = atoi (path + 5);
-		
-		window_view_selected (PLANNER_SIDEBAR (priv->sidebar),
-				      index,
-				      window);
-	}
-}
-
-static void
-window_help_cb (BonoboUIComponent *component, 
-		gpointer           data,
-		const char        *cname)
+window_help_cb (GtkAction *action, 
+		gpointer           data)
 {
 	GError    *error = NULL;
 	GtkWidget *dialog;
@@ -1010,9 +996,8 @@ window_help_cb (BonoboUIComponent *component,
 }
 
 static void
-window_about_cb (BonoboUIComponent *component, 
-		 gpointer           data,
-		 const char        *cname)
+window_about_cb (GtkAction *action, 
+		 gpointer   data)
 {
 	GtkWidget *about;
 	GtkWidget *hbox;
@@ -1073,19 +1058,15 @@ window_undo_state_changed_cb (PlannerCmdManager *manager,
 
 	priv = window->priv;
 
-	bonobo_ui_component_set_prop (priv->ui_component, 
-				      "/commands/EditUndo",
-				      "sensitive", state ? "1" : "0",
-				      NULL);
-	bonobo_ui_component_set_prop (priv->ui_component, 
-				      "/commands/EditUndo",
-				      "tip", label,
-				      NULL);
-
-	bonobo_ui_component_set_prop (priv->ui_component, 
-				      "/commands/EditUndo",
-				      "label", label,
-				      NULL);
+	g_object_set (gtk_action_group_get_action (priv->actions, "EditUndo"),
+		      "sensitive", state,
+		      NULL);
+	g_object_set (gtk_action_group_get_action (priv->actions, "EditUndo"),
+		      "tooltip", label,
+		      NULL);
+	g_object_set (gtk_action_group_get_action (priv->actions, "EditUndo"),
+		      "label", label,
+		      NULL);
 }
 
 static void
@@ -1098,19 +1079,15 @@ window_redo_state_changed_cb (PlannerCmdManager *manager,
 	
 	priv = window->priv;
 	
-	bonobo_ui_component_set_prop (priv->ui_component, 
-				      "/commands/EditRedo",
-				      "sensitive", state ? "1" : "0", 
-				      NULL);	
-	bonobo_ui_component_set_prop (priv->ui_component, 
-				      "/commands/EditRedo",
-				      "tip", label,
-				      NULL);	
-
-	bonobo_ui_component_set_prop (priv->ui_component, 
-				      "/commands/EditRedo",
-				      "label", label,
-				      NULL);	
+	g_object_set (gtk_action_group_get_action (priv->actions, "EditRedo"),
+		      "sensitive", state,
+		      NULL);
+	g_object_set (gtk_action_group_get_action (priv->actions, "EditRedo"),
+		      "tooltip", label,
+		      NULL);
+	g_object_set (gtk_action_group_get_action (priv->actions, "EditRedo"),
+		      "label", label,
+		      NULL);
 }
 
 static void
@@ -1119,7 +1096,6 @@ window_project_needs_saving_changed_cb (MrpProject   *project,
 					PlannerWindow *window)
 {
 	PlannerWindowPriv *priv;
-	gchar            *value;
 	
 	priv = window->priv;
 	
@@ -1127,12 +1103,9 @@ window_project_needs_saving_changed_cb (MrpProject   *project,
 		g_timer_reset (priv->last_saved);
 	}
 
-	value = needs_saving ? "1" : "0";
-
-	bonobo_ui_component_set_prop (priv->ui_component, 
-				      "/commands/FileSave",
-				      "sensitive", value, 
-				      NULL);	
+	g_object_set (gtk_action_group_get_action (priv->actions, "FileSave"),
+		      "sensitive", needs_saving, 
+		      NULL);	
 }
 
 static void
@@ -1200,7 +1173,7 @@ window_confirm_exit_run (PlannerWindow *window)
 	g_free (name);
 	g_free (time_str);
 	g_free (tmp);
-					 
+	
 	g_object_set (GTK_MESSAGE_DIALOG (dialog)->label,
 		      "use-markup", TRUE,
 		      "wrap", FALSE,
@@ -1516,12 +1489,12 @@ planner_window_open (PlannerWindow *window, const gchar *uri)
 	return TRUE;
 }
 
-BonoboUIContainer *
-planner_window_get_ui_container (PlannerWindow *window)
+GtkUIManager *
+planner_window_get_ui_manager (PlannerWindow *window)
 {
 	g_return_val_if_fail (PLANNER_IS_MAIN_WINDOW (window), NULL);
 	
-	return window->priv->ui_container;
+	return window->priv->ui_manager;
 }
 
 MrpProject *
@@ -1698,12 +1671,14 @@ planner_window_show_calendar_dialog (PlannerWindow *window)
 	}
 }
 
+#ifdef FIXME
 static gchar *
 window_recent_tooltip_func (EggRecentItem *item,
 			    gpointer user_data)
 {
 	return egg_recent_item_get_uri_for_display (item);
 }
+#endif
 
 PlannerCmdManager *
 planner_window_get_cmd_manager (PlannerWindow *window)

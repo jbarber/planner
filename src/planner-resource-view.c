@@ -29,8 +29,6 @@
 #include <glib.h>
 #include <gobject/gvaluecollector.h>
 #include <gmodule.h>
-#include <bonobo/bonobo-ui-component.h>
-#include <bonobo/bonobo-ui-util.h>
 #include <libgnome/gnome-i18n.h>
 #include <gtk/gtkmain.h>
 #include <gtk/gtktreeview.h>
@@ -43,6 +41,8 @@
 #include <gtk/gtkiconfactory.h>
 #include <gtk/gtkstock.h>
 #include <gtk/gtktreemodelsort.h>
+#include <gtk/gtkmenu.h>
+#include <gtk/gtktoggleaction.h>
 #include <libplanner/mrp-project.h>
 #include "planner-view.h"
 #include "planner-cell-renderer-list.h"
@@ -63,6 +63,10 @@ struct _PlannerViewPriv {
 	GtkWidget              *resource_input_dialog;
 
 	PlannerTablePrintSheet *print_sheet;
+
+	GtkUIManager           *ui_manager;
+	GtkActionGroup         *actions;
+	guint                   merged_id;
 };
 
 typedef struct {
@@ -75,18 +79,14 @@ enum {
 	NUM_OF_COLS
 };
 
-static void    resource_view_insert_resource_cb       (BonoboUIComponent   *component, 
-						       gpointer             data, 
-						       const char          *cname);
-static void    resource_view_insert_resources_cb      (BonoboUIComponent   *component, 
-						       gpointer             data, 
-						       const char          *cname);
-static void    resource_view_remove_resource_cb       (BonoboUIComponent   *component, 
-						       gpointer             data, 
-						       const char          *cname);
-static void    resource_view_edit_resource_cb         (BonoboUIComponent   *component,
-						       gpointer             data, 
-						       const char          *cname);
+static void    resource_view_insert_resource_cb       (GtkAction           *action, 
+						       gpointer             data);
+static void    resource_view_insert_resources_cb      (GtkAction           *action, 
+						       gpointer             data);
+static void    resource_view_remove_resource_cb       (GtkAction           *action, 
+						       gpointer             data);
+static void    resource_view_edit_resource_cb         (GtkAction           *action,
+						       gpointer             data);
 static void    resource_view_popup_insert_resource_cb (gpointer             callback_data,
 						       guint                action,
 						       GtkWidget           *widget);
@@ -96,12 +96,10 @@ static void    resource_view_popup_remove_resource_cb (gpointer             call
 static void    resource_view_popup_edit_resource_cb   (gpointer             callback_data,
 						       guint                action,
 						       GtkWidget           *widget);
-static void    resource_view_select_all_cb            (BonoboUIComponent   *component, 
-						       gpointer             data, 
-						       const char          *cname);
-static void    resource_view_edit_custom_props_cb     (BonoboUIComponent   *component, 
-						       gpointer             data, 
-						       const char          *cname);
+static void    resource_view_select_all_cb            (GtkAction           *action, 
+						       gpointer             data);
+static void    resource_view_edit_custom_props_cb     (GtkAction           *action, 
+						       gpointer             data);
 
 static void    resource_view_selection_changed_cb     (GtkTreeSelection    *selection, 
 						       PlannerView         *view);
@@ -152,9 +150,8 @@ static void    resource_view_cell_group_show_popup   (PlannerCellRendererList  *
 						      PlannerView          *view);
 static void    resource_view_cell_group_hide_popup   (PlannerCellRendererList  *cell,
 						      PlannerView          *view);
-static void    resource_view_edit_groups_cb          (BonoboUIComponent    *component, 
-						      gpointer              data, 
-						      const char           *cname);
+static void    resource_view_edit_groups_cb          (GtkAction            *action, 
+						      gpointer              data);
 static void    resource_view_project_loaded_cb       (MrpProject           *project,
 						      PlannerView          *view);
 
@@ -208,9 +205,8 @@ static void    resource_view_cost_data_func           (GtkTreeViewColumn   *tree
 
 static void    resource_view_popup_menu              (GtkWidget            *widget,
 						      PlannerView          *view);
-static void    resource_view_edit_resource_cb        (BonoboUIComponent    *component, 
-						      gpointer              data, 
-						      const char           *cname);
+static void    resource_view_edit_resource_cb        (GtkAction            *action,
+						      gpointer              data);
 static void    resource_view_property_data_func      (GtkTreeViewColumn    *tree_column,
 						      GtkCellRenderer      *cell,
 						      GtkTreeModel         *tree_model,
@@ -253,16 +249,18 @@ static const gchar * resource_view_get_type_string   (MrpResourceType       type
 static MrpResourceType resource_view_get_type_enum   (const gchar          *type_str);
 #endif
 
-static BonoboUIVerb verbs[] = {
-	BONOBO_UI_VERB ("InsertResource",	resource_view_insert_resource_cb),
-	BONOBO_UI_VERB ("InsertResources",	resource_view_insert_resources_cb),
-	BONOBO_UI_VERB ("RemoveResource",	resource_view_remove_resource_cb),
-	BONOBO_UI_VERB ("EditResource",	        resource_view_edit_resource_cb),
-	BONOBO_UI_VERB ("EditGroups",		resource_view_edit_groups_cb),
-	BONOBO_UI_VERB ("SelectAll",		resource_view_select_all_cb),
-	BONOBO_UI_VERB ("EditCustomProps",      resource_view_edit_custom_props_cb),
-	BONOBO_UI_VERB_END
+static GtkActionEntry entries[] = {
+	{ "InsertResource",   "planner-stock-insert-resource", N_("_Insert Resource"),             "<Control>i",        N_("Insert a new resource"),        G_CALLBACK(resource_view_insert_resource_cb) },
+	{ "InsertResources",  "planner-stock-insert-resource", N_("In_sert Resources..."),         NULL,                NULL,                               G_CALLBACK(resource_view_insert_resources_cb) },
+	{ "RemoveResource",   "planner-stock-remove-resource", N_("_Remove Resource"),             "<Control>d",        N_("Remove the selected resource"), G_CALLBACK(resource_view_remove_resource_cb) },
+	{ "EditResource",     GTK_STOCK_PROPERTIES,            N_("_Edit Resource Properties..."), "<Shift><Control>e", NULL,                               G_CALLBACK(resource_view_edit_resource_cb) },
+	{ "EditGroups",       "planner-stock-edit-groups",     N_("Edit _Groups"),                 NULL,                N_("Edit resource groups"),         G_CALLBACK(resource_view_edit_groups_cb) },
+	{ "SelectAll",        NULL,                            N_("Select _All"),                  "<Control>a",        N_("Select all tasks"),             G_CALLBACK(resource_view_select_all_cb) },
+	{ "EditCustomProps",  GTK_STOCK_PROPERTIES,            N_("Edit _Custom Properties..."),   NULL,                NULL,                               G_CALLBACK(resource_view_edit_custom_props_cb) },
 };
+
+static guint n_entries = G_N_ELEMENTS (entries);
+
 
 enum {
 	POPUP_NONE,
@@ -322,12 +320,27 @@ typedef struct {
 G_MODULE_EXPORT void
 activate (PlannerView *view)
 {
-	planner_view_activate_helper (view,
-				 DATADIR
-				 "/planner/ui/resource-view.ui",
-				 "resourceview",
-				 verbs);
+	PlannerViewPriv *priv;
+	GError          *error = NULL;
 
+	priv = view->priv;
+
+	priv->actions = gtk_action_group_new ("ResourceView");
+
+	gtk_action_group_add_actions (priv->actions, entries, n_entries, view);
+
+	gtk_ui_manager_insert_action_group (priv->ui_manager, priv->actions, 0);
+	priv->merged_id = gtk_ui_manager_add_ui_from_file (priv->ui_manager,
+							   DATADIR"/planner/ui/resource-view.ui",
+							   &error);
+	if (error != NULL) {
+		g_message("Building menu failed: %s", error->message);
+		g_message ("Couldn't load: %s",DATADIR"/planner/ui/resource-view.ui");
+                g_error_free(error);
+	}
+	gtk_ui_manager_ensure_update(priv->ui_manager);
+
+	/* Set the initial UI state. */
 	resource_view_update_ui (view);
 }
 
@@ -340,7 +353,10 @@ resource_view_item_factory_trans (const char *path, gpointer data)
 G_MODULE_EXPORT void
 deactivate (PlannerView *view)
 {
-	planner_view_deactivate_helper (view);
+	PlannerViewPriv *priv;
+
+	priv = view->priv;
+	gtk_ui_manager_remove_ui (priv->ui_manager, priv->merged_id);
 }
 
 G_MODULE_EXPORT void
@@ -400,6 +416,8 @@ init (PlannerView *view, PlannerWindow *main_window)
 	gtk_icon_factory_add (icon_factory,
 			      "planner-stock-edit-groups",
 			      icon_set);	
+
+	priv->ui_manager = planner_window_get_ui_manager(main_window);
 }
 
 G_MODULE_EXPORT const gchar *
@@ -779,7 +797,7 @@ resource_view_popup_insert_resource_cb  (gpointer   callback_data,
 					 guint      action,
 					 GtkWidget *widget)
 {
-	resource_view_insert_resource_cb (NULL, callback_data, NULL);	
+	resource_view_insert_resource_cb (NULL, callback_data);
 }
 
 static void   
@@ -787,7 +805,7 @@ resource_view_popup_remove_resource_cb   (gpointer   callback_data,
 					  guint      action,
 					  GtkWidget *widget)
 {
-	resource_view_remove_resource_cb (NULL, callback_data, NULL);	
+	resource_view_remove_resource_cb (NULL, callback_data);	
 }
 
 static void   
@@ -795,13 +813,12 @@ resource_view_popup_edit_resource_cb     (gpointer   callback_data,
 					  guint      action,
 					  GtkWidget *widget)
 {
-	resource_view_edit_resource_cb (NULL, callback_data, NULL);
+	resource_view_edit_resource_cb (NULL, callback_data);
 }
 
 static void
-resource_view_insert_resource_cb (BonoboUIComponent *component, 
-				  gpointer           data, 
-				  const char        *cname)
+resource_view_insert_resource_cb (GtkAction *action,
+				  gpointer   data)
 {
 	PlannerView       *view;
 	PlannerViewPriv   *priv;
@@ -836,9 +853,8 @@ resource_view_insert_resource_cb (BonoboUIComponent *component,
 }
 
 static void
-resource_view_insert_resources_cb (BonoboUIComponent *component, 
-				   gpointer           data, 
-				   const char        *cname)
+resource_view_insert_resources_cb (GtkAction *action,
+				   gpointer   data)
 {
 	PlannerView     *view;
 	PlannerViewPriv *priv;
@@ -950,9 +966,8 @@ resource_cmd_remove (PlannerView *view,
 }
 
 static void
-resource_view_remove_resource_cb (BonoboUIComponent *component, 
-				  gpointer           data, 
-				  const char        *cname)
+resource_view_remove_resource_cb (GtkAction *action,
+				  gpointer   data)
 {
 	PlannerView       *view;
 	PlannerViewPriv   *priv;
@@ -980,9 +995,8 @@ resource_view_remove_resource_cb (BonoboUIComponent *component,
 
 
 static void
-resource_view_edit_resource_cb (BonoboUIComponent *component, 
-				gpointer           data, 
-				const char        *cname)
+resource_view_edit_resource_cb (GtkAction *action,
+				gpointer   data)
 {
 	PlannerView      *view;
 	PlannerViewPriv  *priv;
@@ -1005,9 +1019,8 @@ resource_view_edit_resource_cb (BonoboUIComponent *component,
 }
 
 static void
-resource_view_select_all_cb (BonoboUIComponent *component, 
-			     gpointer           data, 
-			     const char        *cname)
+resource_view_select_all_cb (GtkAction *action,
+			     gpointer   data)
 {
 	PlannerView           *view;
 	PlannerViewPriv       *priv;
@@ -1022,9 +1035,8 @@ resource_view_select_all_cb (BonoboUIComponent *component,
 }
 
 static void
-resource_view_edit_custom_props_cb (BonoboUIComponent *component, 
-				    gpointer           data, 
-				    const char        *cname)
+resource_view_edit_custom_props_cb (GtkAction *action,
+				    gpointer   data)
 {
 	PlannerView *view;
 	GtkWidget   *dialog;
@@ -1046,29 +1058,26 @@ resource_view_edit_custom_props_cb (BonoboUIComponent *component,
 static void
 resource_view_update_ui (PlannerView *view) 
 {
-	GList *list;
-	gchar *value;
-	
+	GList           *list;
+	gboolean         value;
+	PlannerViewPriv *priv;
+
+	priv = view->priv;
+
 	list = resource_view_selection_get_list (view);	
-	value = (list != NULL) ? "1" : "0";
+	value = (list != NULL);
 	g_list_free (list);
 
 	if (!view->activated) {
 		return;
 	}
 	
-	bonobo_ui_component_freeze (view->ui_component, NULL);
-		
-	bonobo_ui_component_set_prop (view->ui_component, 
-				      "/commands/RemoveResource",
-				      "sensitive", value, 
-				      NULL);
-	bonobo_ui_component_set_prop (view->ui_component, 
-				      "/commands/EditResource",
-				      "sensitive", value, 
-				      NULL);
-
-	bonobo_ui_component_thaw (view->ui_component, NULL);	
+	g_object_set (gtk_action_group_get_action (priv->actions, "RemoveResource"),
+		      "sensitive", value, 
+		      NULL);
+	g_object_set (gtk_action_group_get_action (priv->actions, "EditResource"),
+		      "sensitive", value, 
+		      NULL);
 }
 
 static void 
@@ -1934,9 +1943,8 @@ resource_view_cell_group_hide_popup (PlannerCellRendererList *cell,
 }
 
 static void
-resource_view_edit_groups_cb (BonoboUIComponent *component, 
-			      gpointer           data, 
-			      const char        *cname)
+resource_view_edit_groups_cb (GtkAction *action,
+			      gpointer   data)
 {
 	PlannerView *view;
 

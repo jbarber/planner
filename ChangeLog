@@ -1,3 +1,33 @@
+2004-08-05  Xavier Ordoquy  <xordoquy@linovia.com>
+
+	* data/ui/gantt-view.ui:
+	* data/ui/html-plugin.ui:
+	* data/ui/main-window.ui:
+	* data/ui/resource-view.ui:
+	* data/ui/sql-plugin.ui:
+	* data/ui/task-view.ui:
+	* data/ui/time-table-view.ui:
+	* data/ui/xml-planner-plugin.ui:
+	Change the file to match the GtkUIManager xml.
+
+	* src/planner-application.h:
+	* src/planner-gantt-view.c:
+	* src/planner-html-plugin.c:
+	* src/planner-main.c:
+	* src/planner-python-plugin.c:
+	* src/planner-resource-view.c:
+	* src/planner-sql-plugin.c:
+	* src/planner-task-popup.c:
+	* src/planner-task-view.c:
+	* src/planner-ttable-view.c:
+	* src/planner-view.c:
+	* src/planner-view.h:
+	* src/planner-window.c:
+	* src/planner-window.h:
+	* src/planner-working-time-dialog.c:
+	* src/planner-xml-planner-plugin.c:
+	Now uses the GtkUIManager for the menu/toolbar.
+
 2004-08-03  Richard Hult  <richard@imendio.com>
 
 	* src/planner-task-tree.c: (task_tree_init), (task_tree_finalize),

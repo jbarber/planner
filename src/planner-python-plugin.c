@@ -25,8 +25,6 @@
 #include <string.h>
 #include <sys/types.h>
 #include <sys/stat.h>
-#include <bonobo/bonobo-ui-component.h>
-#include <bonobo/bonobo-ui-util.h>
 #include <glade/glade.h>
 #include <gtk/gtkradiobutton.h>
 #include <gtk/gtkmessagedialog.h>
@@ -111,9 +109,7 @@ python_plugin_execute (const gchar   *filename,
 	pModule = PyRun_String ("import pygtk\n"
 				"pygtk.require('2.0')\n"
 				"import gtk\n"
-				"import gnome\n"
-				"import bonobo\n"
-				"import bonobo.ui\n",
+				"import gnome\n",
 				Py_file_input, env->globals, env->globals);
 	if (pModule == NULL) {
 		PyErr_Print ();

@@ -44,22 +44,18 @@ struct _PlannerViewPriv {
 
         PlannerTtableChart     *chart;
         PlannerTtablePrintData *print_data;
+
+	GtkUIManager           *ui_manager;
+	GtkActionGroup         *actions;
+	guint                   merged_id;
 };
 
-static void       ttable_view_zoom_out_cb             (BonoboUIComponent            *component,
-						       gpointer                      data,
-						       const char                   *cname);
-static void       ttable_view_zoom_in_cb              (BonoboUIComponent            *component,
-						       gpointer                      data,
-						       const char                   *cname);
-static void       ttable_view_zoom_to_fit_cb          (BonoboUIComponent            *component,
-						       gpointer                      data,
-						       const char                   *cname);
-static void       ttable_view_ui_component_event      (BonoboUIComponent            *component,
-						       const gchar                  *path,
-						       Bonobo_UIComponent_EventType  type,
-						       const gchar                  *state_string,
-						       PlannerView                  *view);
+static void       ttable_view_zoom_out_cb             (GtkAction                    *action,
+						       gpointer                      data);
+static void       ttable_view_zoom_in_cb              (GtkAction                    *action,
+						       gpointer                      data);
+static void       ttable_view_zoom_to_fit_cb          (GtkAction                    *action,
+						       gpointer                      data);
 static GtkWidget *ttable_view_create_widget           (PlannerView                  *view);
 static void       ttable_view_project_loaded_cb       (MrpProject                   *project,
 						       PlannerView                  *view);
@@ -90,32 +86,45 @@ gchar *          get_menu_label                      (PlannerView               
 gchar *          get_icon                            (PlannerView                  *view);
 const gchar *    get_name                            (PlannerView                  *view);
 GtkWidget *      get_widget                          (PlannerView                  *view);
-void              print_init                          (PlannerView                  *view,
-						       PlannerPrintJob              *job);
-void              print                               (PlannerView                  *view);
-gint              print_get_n_pages                   (PlannerView                  *view);
-void              print_cleanup                       (PlannerView                  *view);
+void             print_init                          (PlannerView                  *view,
+						      PlannerPrintJob              *job);
+void             print                               (PlannerView                  *view);
+gint             print_get_n_pages                   (PlannerView                  *view);
+void             print_cleanup                       (PlannerView                  *view);
 
 
 
-static BonoboUIVerb verbs[] = {
-        BONOBO_UI_VERB ("ZoomOut", ttable_view_zoom_out_cb),
-        BONOBO_UI_VERB ("ZoomIn", ttable_view_zoom_in_cb),
-        BONOBO_UI_VERB ("ZoomToFit", ttable_view_zoom_to_fit_cb),
-        BONOBO_UI_VERB_END
+static GtkActionEntry entries[] = {
+        { "ZoomOut",   GTK_STOCK_ZOOM_OUT, N_("Zoom out"),    NULL, N_("Zoom out"),                       G_CALLBACK(ttable_view_zoom_out_cb) },
+        { "ZoomIn",    GTK_STOCK_ZOOM_IN,  N_("Zoom in"),     NULL, N_("Zoom in"),                        G_CALLBACK(ttable_view_zoom_in_cb) },
+        { "ZoomToFit", GTK_STOCK_ZOOM_FIT, N_("Zoom to fit"), NULL, N_("Zoom to fit the entire project"), G_CALLBACK(ttable_view_zoom_to_fit_cb) },
 };
+
+static guint n_entries = G_N_ELEMENTS (entries);
 
 
 G_MODULE_EXPORT void
 activate (PlannerView *view)
 {
-        PlannerViewPriv *priv;
+	PlannerViewPriv *priv;
+	GError          *error = NULL;
 
-        priv = view->priv;
-        planner_view_activate_helper (view,
-                                      DATADIR
-                                      "/planner/ui/time-table-view.ui",
-                                      "timetableview", verbs);
+	priv = view->priv;
+
+	priv->actions = gtk_action_group_new ("TimeTableView");
+
+	gtk_action_group_add_actions (priv->actions, entries, n_entries, view);
+
+	gtk_ui_manager_insert_action_group (priv->ui_manager, priv->actions, 0);
+	priv->merged_id = gtk_ui_manager_add_ui_from_file (priv->ui_manager,
+							   DATADIR"/planner/ui/time-table-view.ui",
+							   &error);
+	if (error != NULL) {
+		g_message("Building menu failed: %s", error->message);
+		g_message ("Couldn't load: %s",DATADIR"/planner/ui/time-table-view.ui");
+                g_error_free(error);
+	}
+	gtk_ui_manager_ensure_update(priv->ui_manager);
 
         ttable_view_update_zoom_sensitivity (view);
 }
@@ -123,21 +132,21 @@ activate (PlannerView *view)
 G_MODULE_EXPORT void
 deactivate (PlannerView *view)
 {
-        planner_view_deactivate_helper (view);
+	PlannerViewPriv *priv;
+
+	priv = view->priv;
+	gtk_ui_manager_remove_ui (priv->ui_manager, priv->merged_id);
 }
 
 G_MODULE_EXPORT void
-init (PlannerView *view, PlannerWindow *window)
+init (PlannerView *view, PlannerWindow *main_window)
 {
         PlannerViewPriv *priv;
 
         priv = g_new0 (PlannerViewPriv, 1);
 
         view->priv = priv;
-
-        g_signal_connect (view->ui_component,
-                          "ui-event",
-                          G_CALLBACK (ttable_view_ui_component_event), view);
+	priv->ui_manager = planner_window_get_ui_manager(main_window);
 }
 
 G_MODULE_EXPORT gchar *
@@ -233,9 +242,8 @@ print_cleanup (PlannerView *view)
 }
 
 static void
-ttable_view_zoom_out_cb (BonoboUIComponent *component,
-                         gpointer           data,
-			 const char        *cname)
+ttable_view_zoom_out_cb (GtkAction *action,
+                         gpointer   data)
 {
         PlannerView *view;
 
@@ -246,9 +254,8 @@ ttable_view_zoom_out_cb (BonoboUIComponent *component,
 }
 
 static void
-ttable_view_zoom_in_cb (BonoboUIComponent *component,
-                        gpointer           data,
-			const char        *cname)
+ttable_view_zoom_in_cb (GtkAction *action,
+                        gpointer   data)
 {
         PlannerView *view;
 
@@ -259,9 +266,8 @@ ttable_view_zoom_in_cb (BonoboUIComponent *component,
 }
 
 static void
-ttable_view_zoom_to_fit_cb (BonoboUIComponent *component,
-                            gpointer           data,
-			    const char        *cname)
+ttable_view_zoom_to_fit_cb (GtkAction *action,
+                            gpointer   data)
 {
         PlannerView *view;
 
@@ -269,18 +275,6 @@ ttable_view_zoom_to_fit_cb (BonoboUIComponent *component,
 
         planner_ttable_chart_zoom_to_fit (view->priv->chart);
         ttable_view_update_zoom_sensitivity (view);
-}
-
-static void
-ttable_view_ui_component_event (BonoboUIComponent            *component,
-                                const gchar                  *path,
-                                Bonobo_UIComponent_EventType  type,
-                                const gchar                  *state_string,
-                                PlannerView                  *view)
-{
-        PlannerViewPriv *priv;
-
-        priv = view->priv;
 }
 
 static void
@@ -407,7 +401,7 @@ ttable_view_ttable_status_updated (PlannerTtableChart *chart,
                                    const gchar        *message,
 				   PlannerView        *view)
 {
-        bonobo_ui_component_set_status (view->ui_component, message, NULL);
+	g_message("This message should appear in the status bar:\n%s", message);
 }
 
 static void
@@ -527,17 +521,15 @@ ttable_view_update_zoom_sensitivity (PlannerView *view)
 
         planner_ttable_chart_can_zoom (view->priv->chart, &in, &out);
 
-        bonobo_ui_component_freeze (view->ui_component, NULL);
+	g_object_set (gtk_action_group_get_action (GTK_ACTION_GROUP(view->priv->actions),
+						   "ZoomIn"),
+		      "sensitive", in, 
+		      NULL);
 
-        bonobo_ui_component_set_prop (view->ui_component,
-                                      "/commands/ZoomIn",
-                                      "sensitive", in ? "1" : "0", NULL);
-
-        bonobo_ui_component_set_prop (view->ui_component,
-                                      "/commands/ZoomOut",
-                                      "sensitive", out ? "1" : "0", NULL);
-
-        bonobo_ui_component_thaw (view->ui_component, NULL);
+	g_object_set (gtk_action_group_get_action (GTK_ACTION_GROUP(view->priv->actions),
+						   "ZoomOut"),
+		      "sensitive", out,
+		      NULL);
 }
 
 

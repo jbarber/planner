@@ -1,14 +1,10 @@
-<Root>
-  <commands>	
-    <cmd name="Open" _label="Open from Database..."/>
-    <cmd name="Save" _label="Save to Database..."/>
-  </commands>
-  <menu>
-    <submenu name="File">
+<ui>
+  <menubar name="MenuBar">
+    <menu action="File">
       <placeholder name="Import placeholder">
-    	<menuitem name="Open" verb="" accel=""/>
-    	<menuitem name="Save" verb="" accel=""/>
+    	<menuitem action="Open"/>
+    	<menuitem action="Save"/>
       </placeholder>
-    </submenu>
-  </menu>
-</Root>
+    </menu>
+  </menubar>
+</ui>

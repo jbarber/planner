@@ -25,7 +25,6 @@
 
 #include <gmodule.h>
 #include <gtk/gtkwidget.h>
-#include <bonobo/bonobo-ui-component.h>
 #include "planner-window.h"
 #include "planner-print-job.h"
 
@@ -46,7 +45,7 @@ struct _PlannerView {
 
 	GModule           *handle;
 	PlannerWindow     *main_window;
-	BonoboUIComponent *ui_component;
+	/* BonoboUIComponent *ui_component; */
 
 	PlannerViewPriv   *priv;
 	gboolean           activated;
@@ -83,8 +82,8 @@ void         planner_view_init              (PlannerView     *view,
 					     PlannerWindow   *window);
 void         planner_view_activate_helper   (PlannerView     *view,
 					     const gchar     *ui_filename,
-					     const gchar     *name,
-					     BonoboUIVerb    *verbs);
+					     const gchar     *name
+					     /*BonoboUIVerb    *verbs*/);
 void         planner_view_deactivate_helper (PlannerView     *view);
 void         planner_view_activate          (PlannerView     *view);
 void         planner_view_deactivate        (PlannerView     *view);
