@@ -1,3 +1,8 @@
+2004-04-19  Mikael Hallendal  <micke@imendio.com>
+
+	* src/planner-resource-dialog.c:
+	(resource_dialog_email_changed_cb): fixed mem-leak.
+
 2004-04-17  Alvaro del Castillo  <acs@barrapunto.com>
 
 	* src/planner-group-dialog.c: better memory handling.
