@@ -140,5 +140,5 @@ mvl_load_dir (const gchar *path, PlannerWindow *window)
 GList *
 planner_view_loader_load (PlannerWindow *window)
 {
-	return mvl_load_dir (MRP_VIEWDIR, window);
+	return mvl_load_dir (VIEWDIR, window);
 }

@@ -83,7 +83,10 @@ get_config_filename (void)
 		return NULL;
 	}
 	
-	return g_build_filename (g_get_home_dir (), ".gnome2", "planner", PLANNER_PRINT_CONFIG_FILE, NULL);
+	return g_build_filename (g_get_home_dir (),
+				 ".gnome2", "planner",
+				 PLANNER_PRINT_CONFIG_FILE,
+				 NULL);
 }
 
 /*

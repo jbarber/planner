@@ -88,5 +88,5 @@ mpl_load_dir (const gchar *path, PlannerWindow *window)
 GList *
 planner_plugin_loader_load (PlannerWindow *window)
 {
-	return mpl_load_dir (MRP_PLUGINDIR, window);
+	return mpl_load_dir (PLUGINDIR, window);
 }

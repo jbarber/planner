@@ -10,10 +10,8 @@ INCLUDES = \
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\"		\
 	-DIMAGEDIR=\""$(datadir)/pixmaps/planner"\"		\
 	-DGLADEDIR=\""$(datadir)/planner/glade"\"		\
-	-DMRP_VIEWDIR=\""$(libdir)/planner/views"\"		\
-	-DMRP_PLUGINDIR=\""$(libdir)/planner/plugins"\"		
-
-#	-DVERSION=\""$(VERSION)"\"
+	-DVIEWDIR=\""$(libdir)/planner/views"\"			\
+	-DPLUGINDIR=\""$(libdir)/planner/plugins"\"
 
 if HAVE_PYTHON_PLUGIN
 INCLUDES += $(PYTHON_INCLUDES)
