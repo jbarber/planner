@@ -10,8 +10,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Planner\n"
-"POT-Creation-Date: 2004-03-19 11:01+0100\n"
-"PO-Revision-Date: 2004-03-19 11:02+0100\n"
+"POT-Creation-Date: 2004-04-05 20:51+0200\n"
+"PO-Revision-Date: 2004-04-05 20:51+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -404,7 +404,7 @@ msgid "_Work:"
 msgstr "_Arbete:"
 
 #. day unit variant accepted in input
-#: data/glade/task-dialog.glade.h:17 src/planner-task-tree.c:2308
+#: data/glade/task-dialog.glade.h:17 src/planner-task-tree.c:2730
 msgid "days"
 msgstr "dagar"
 
@@ -821,7 +821,7 @@ msgstr "Kunde inte skapa XML-träd"
 msgid "Could not write XML file"
 msgstr "Kunde inte skriva XML-fil"
 
-#: libplanner/mrp-project.c:440 src/planner-group-dialog.c:829
+#: libplanner/mrp-project.c:440 src/planner-group-dialog.c:830
 msgid "Default"
 msgstr "Standard"
 
@@ -871,7 +871,7 @@ msgstr "Datum"
 msgid "Duration"
 msgstr "Varaktighet"
 
-#: libplanner/mrp-property.c:377 src/planner-task-view.c:270
+#: libplanner/mrp-property.c:377 src/planner-task-view.c:271
 msgid "Cost"
 msgstr "Kostnad"
 
@@ -1087,16 +1087,16 @@ msgstr "%d %b %Y"
 msgid "Project start"
 msgstr "Projektstart"
 
-#: src/planner-gantt-print.c:191 src/planner-group-dialog.c:805
+#: src/planner-gantt-print.c:191 src/planner-group-dialog.c:806
 #: src/planner-property-dialog.c:378 src/planner-resource-view.c:1168
 #: src/planner-task-dialog.c:1319 src/planner-task-dialog.c:1405
-#: src/planner-task-view.c:265
+#: src/planner-task-view.c:266
 msgid "Name"
 msgstr "Namn"
 
 #: src/planner-gantt-print.c:199 src/planner-resource-dialog.c:1298
 #: src/planner-resource-view.c:691 src/planner-resource-view.c:707
-#: src/planner-resource-view.c:1595 src/planner-task-view.c:268
+#: src/planner-resource-view.c:1595 src/planner-task-view.c:269
 msgid "Work"
 msgstr "Arbete"
 
@@ -1105,16 +1105,16 @@ msgstr "Arbete"
 msgid "Unnamed"
 msgstr "Namnlös"
 
-#: src/planner-gantt-row.c:1907 src/planner-gantt-row.c:1910
+#: src/planner-gantt-row.c:1903 src/planner-gantt-row.c:1906
 msgid "No name"
 msgstr "Inget namn"
 
-#: src/planner-gantt-row.c:1913
+#: src/planner-gantt-row.c:1909
 #, c-format
 msgid "Make task '%s' a predecessor of '%s'"
 msgstr "Gör aktivitet \"%s\" till föregångare till \"%s\""
 
-#: src/planner-gantt-row.c:1971
+#: src/planner-gantt-row.c:1967
 #, c-format
 msgid "Change work to %s"
 msgstr "Ändra arbete till %s"
@@ -1130,13 +1130,21 @@ msgstr "_Ganttschema"
 #: src/planner-gantt-view.c:492
 msgid ""
 "\n"
+"WBS"
+msgstr ""
+"\n"
+"WBS"
+
+#: src/planner-gantt-view.c:493
+msgid ""
+"\n"
 "Name"
 msgstr ""
 "\n"
 "Namn"
 
 #. COL_START,    _("\nStart"),
-#: src/planner-gantt-view.c:494
+#: src/planner-gantt-view.c:495
 msgid ""
 "\n"
 "Work"
@@ -1152,23 +1160,23 @@ msgstr "Infoga grupp"
 msgid "Remove group"
 msgstr "Ta bort grupp"
 
-#: src/planner-group-dialog.c:517
+#: src/planner-group-dialog.c:518
 msgid "Default group"
 msgstr "Standardgrupp"
 
-#: src/planner-group-dialog.c:633
+#: src/planner-group-dialog.c:634
 msgid "Edit group property"
 msgstr "Redigera gruppegenskap"
 
-#: src/planner-group-dialog.c:811
+#: src/planner-group-dialog.c:812
 msgid "Manager name"
 msgstr "Ledares namn"
 
-#: src/planner-group-dialog.c:817
+#: src/planner-group-dialog.c:818
 msgid "Manager phone"
 msgstr "Ledares tel"
 
-#: src/planner-group-dialog.c:823
+#: src/planner-group-dialog.c:824
 msgid "Manager email"
 msgstr "Ledares e-post"
 
@@ -1482,80 +1490,84 @@ msgstr "Fördröjning"
 msgid "Edit task properties"
 msgstr "Redigera aktivitetsegenskaper"
 
-#: src/planner-task-tree.c:245
+#: src/planner-task-tree.c:258
 msgid "Insert task"
 msgstr "Infoga aktivitet"
 
-#: src/planner-task-tree.c:321
+#: src/planner-task-tree.c:334
 msgid "Edit task property"
 msgstr "Redigera aktivitetsegenskap"
 
-#: src/planner-task-tree.c:2300
+#: src/planner-task-tree.c:698
+msgid "Remove task"
+msgstr "Ta bort aktivitet"
+
+#: src/planner-task-tree.c:2722
 msgid "mon"
 msgstr "mån"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:2301
+#: src/planner-task-tree.c:2723
 msgid "month"
 msgstr "månad"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:2302
+#: src/planner-task-tree.c:2724
 msgid "months"
 msgstr "månader"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:2303
+#: src/planner-task-tree.c:2725
 msgid "w"
 msgstr "v"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:2304
+#: src/planner-task-tree.c:2726
 msgid "week"
 msgstr "vecka"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:2305
+#: src/planner-task-tree.c:2727
 msgid "weeks"
 msgstr "veckor"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:2306
+#: src/planner-task-tree.c:2728
 msgid "d"
 msgstr "d"
 
 #. day unit variant accepted in input
-#: src/planner-task-tree.c:2307
+#: src/planner-task-tree.c:2729
 msgid "day"
 msgstr "dag"
 
 #. day unit variant accepted in input
-#: src/planner-task-tree.c:2309
+#: src/planner-task-tree.c:2731
 msgid "h"
 msgstr "t"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:2310
+#: src/planner-task-tree.c:2732
 msgid "hour"
 msgstr "timme"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:2311
+#: src/planner-task-tree.c:2733
 msgid "hours"
 msgstr "timmar"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:2312
+#: src/planner-task-tree.c:2734
 msgid "min"
 msgstr "min"
 
 #. minute unit variant accepted in input
-#: src/planner-task-tree.c:2313
+#: src/planner-task-tree.c:2735
 msgid "minute"
 msgstr "minut"
 
 #. minute unit variant accepted in input
-#: src/planner-task-tree.c:2314
+#: src/planner-task-tree.c:2736
 msgid "minutes"
 msgstr "minuter"
 
@@ -1567,19 +1579,23 @@ msgstr "Aktiviteter"
 msgid "_Tasks"
 msgstr "_Aktiviteter"
 
-#: src/planner-task-view.c:266
+#: src/planner-task-view.c:265
+msgid "WBS"
+msgstr "WBS"
+
+#: src/planner-task-view.c:267
 msgid "Start"
 msgstr "Start"
 
-#: src/planner-task-view.c:267
+#: src/planner-task-view.c:268
 msgid "Finish"
 msgstr "Slut"
 
-#: src/planner-task-view.c:269
+#: src/planner-task-view.c:270
 msgid "Slack"
 msgstr "Glapp"
 
-#: src/planner-task-view.c:488
+#: src/planner-task-view.c:489
 msgid "Edit custom task properties"
 msgstr "Redigera egenskaper för egen aktivitet"
 
@@ -1901,9 +1917,6 @@ msgstr ""
 
 #~ msgid "Edit task properties..."
 #~ msgstr "Redigera aktivitetsegenskaper..."
-
-#~ msgid "Remove task"
-#~ msgstr "Ta bort aktivitet"
 
 #~ msgid "Up"
 #~ msgstr "Upp"
