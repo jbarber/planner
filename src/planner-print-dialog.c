@@ -204,6 +204,11 @@ print_dialog_create_page (PlannerWindow *window,
 */
 	
 	for (l = views; l; l = l->next) {
+		/* Hack. */
+		if (strcmp (planner_view_get_name (l->data), "resource_usage_view") == 0) {
+			continue;
+		}
+		
 		w = gtk_check_button_new_with_label (planner_view_get_label (l->data));
 		gtk_box_pack_start (GTK_BOX (vbox), w, FALSE, FALSE, 0);
 		g_object_set_data (G_OBJECT (w), "view", l->data);
@@ -212,7 +217,6 @@ print_dialog_create_page (PlannerWindow *window,
 				       planner_view_get_name (l->data));
 		state = planner_conf_get_bool (str, NULL);
 		g_free (str);
-
 		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (w), state);
 		
 		buttons = g_list_prepend (buttons, w);

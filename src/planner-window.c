@@ -203,6 +203,7 @@ static void window_connect_proxy_cb (GtkUIManager  *manager,
 #define CONF_MAIN_WINDOW_HEIGHT    "/ui/main_window_height"
 #define CONF_MAIN_WINDOW_POS_X     "/ui/main_window_position_x"
 #define CONF_MAIN_WINDOW_POS_Y     "/ui/main_window_position_y"
+#define CONF_ACTIVE_VIEW           "/ui/active_view"
 #define CONF_MAIN_LAST_DIR         "/general/last_dir"
 
 #define VIEW_PATH "/menu/View/Views placeholder"
@@ -454,6 +455,7 @@ window_populate (PlannerWindow *window)
 	GtkRadioActionEntry  *r_entries;
 	gchar                *xml_string_tmp, *xml_string;
 	GError               *error = NULL;
+	gchar                *str;
 	const gchar          *xml_string_full =
 		"<ui>"
 		"<menubar name='MenuBar'>"
@@ -579,15 +581,15 @@ window_populate (PlannerWindow *window)
 			gtk_label_new (planner_view_get_label (view)));
 	}
 
-	gtk_action_group_add_radio_actions (priv->view_actions, r_entries,
+	gtk_action_group_add_radio_actions (priv->view_actions,
+					    r_entries,
 					    g_list_length (priv->views), 0,
-					    G_CALLBACK (window_view_cb), window);
+					    G_CALLBACK (window_view_cb),
+					    window);
 
 	xml_string_tmp = g_strdup_printf (xml_string_full, xml_string);
 	if (!gtk_ui_manager_add_ui_from_string (priv->ui_manager, xml_string_tmp, -1, &error)) {
-		g_message("Building menu failed: %s", error->message);
-		g_message("Couldn't build the view menu item");
-		g_error_free(error);
+		g_error_free (error);
 	}
 	g_free(xml_string);
 	g_free(xml_string_tmp);
@@ -597,7 +599,30 @@ window_populate (PlannerWindow *window)
 	/* Load plugins. */
 	priv->plugins = planner_plugin_loader_load (window);
 
-	window_view_selected (PLANNER_SIDEBAR (priv->sidebar), 0, window);
+	str = planner_conf_get_string (CONF_ACTIVE_VIEW, NULL);
+	if (str) {
+		gboolean found;
+
+		found = FALSE;
+		view_num = 0;
+		for (l = priv->views; l; l = l->next, view_num++ ) {
+			view = l->data;
+			
+			if (strcmp (str, planner_view_get_name (view)) == 0) {
+				found = TRUE;
+				break;
+			}			
+		}
+
+		if (!found) {
+			view_num = 0;
+		}
+		
+		window_view_selected (PLANNER_SIDEBAR (priv->sidebar), view_num, window);
+		g_free (str);
+	} else {	
+		window_view_selected (PLANNER_SIDEBAR (priv->sidebar), 0, window);
+	}
 }
 
 static void
@@ -644,6 +669,8 @@ window_view_selected (PlannerSidebar *sidebar,
 	}
 	
 	priv->current_view = view;
+
+	planner_conf_set_string (CONF_ACTIVE_VIEW, planner_view_get_name (view), NULL);
 }
 
 static void

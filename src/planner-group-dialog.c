@@ -365,13 +365,15 @@ group_cmd_remove_do (PlannerCmd *cmd_base)
 		
 		mrp_object_get (MRP_OBJECT (l->data), "group", &group, NULL);
 
-		if (cmd->group == group)
+		if (cmd->group == group) {
 			cmd->group_resources = g_list_prepend (cmd->group_resources, l->data);
+		}
 	}
 
 	mrp_object_get (cmd->project, "default-group", &default_group, NULL);
-	if (default_group == cmd->group)
+	if (default_group == cmd->group) {
 		cmd->is_default = TRUE;
+	}
 	
 	mrp_project_remove_group (cmd->project, cmd->group);
 
@@ -398,8 +400,9 @@ group_cmd_remove_undo (PlannerCmd *cmd_base)
 		mrp_object_set (MRP_OBJECT (l->data), "group", cmd->group, NULL);
 	}
 
-	if (cmd->is_default) 
+	if (cmd->is_default) {
 		mrp_object_set (cmd->project, "default-group", cmd->group, NULL);
+	}
 }
 
 static void
@@ -503,7 +506,10 @@ group_cmd_default_free (PlannerCmd *cmd_base)
 	cmd = (GroupCmdDefault*) cmd_base;
 
 	g_object_unref (cmd->group);
-	g_object_unref (cmd->old_group);
+
+	if (cmd->old_group) {
+		g_object_unref (cmd->old_group);
+	}
 }
 
 static PlannerCmd *

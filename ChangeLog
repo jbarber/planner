@@ -1,5 +1,20 @@
 2005-02-19  Richard Hult  <richard@imendio.com>
 
+	* configure.in:
+	* data/Makefile.am:
+	* data/planner.schemas.in: Add schemas.
+
+	* src/planner-print-dialog.c: (print_dialog_create_page): Don't
+	add resource usage view to the list of printable views.
+
+	* src/planner-window.c: (window_populate), (window_view_selected):
+	Restore the last active view.
+
+	* src/planner-group-dialog.c (group_cmd_default_free): We don't
+	have an old default group so don't unconditionally unref it.
+
+2005-02-19  Richard Hult  <richard@imendio.com>
+
 	* src/planner-format.c (planner_format_duration_with_day_length):
 	Fix bug.
 	(planner_parse_duration_with_day_length): Add

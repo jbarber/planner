@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<gconfschemafile>
+  <schemalist>
+    <schema>
+      <key>/schemas/apps/planner/views/gantt_view/highlight_critical_path</key>
+      <applyto>/apps/planner/views/gantt_view/highlight_critical_path</applyto>
+      <owner>planner</owner>
+      <type>bool</type>
+      <default>false</default>
+      <locale name="C">
+        <short>Highlight critical path in Gantt view</short>
+        <long>Whether to highlight the tasks along the cricital path in the Gantt view.</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/apps/planner/views/task_view/highlight_critical_path</key>
+      <applyto>/apps/planner/views/task_view/highlight_critical_path</applyto>
+      <owner>planner</owner>
+      <type>bool</type>
+      <default>false</default>
+      <locale name="C">
+        <short>Highlight critical path in Task view</short>
+        <long>Whether to highlight the tasks along the cricital path in the Task view.</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/apps/planner/views/gantt_view/print_enabled</key>
+      <applyto>/apps/planner/views/gantt_view/print_enabled</applyto>
+      <owner>planner</owner>
+      <type>bool</type>
+      <default>true</default>
+      <locale name="C">
+        <short>Print the Gantt view</short>
+        <long>Whether printing of the Gantt view is enabled.</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/apps/planner/views/task_view/print_enabled</key>
+      <applyto>/apps/planner/views/task_view/print_enabled</applyto>
+      <owner>planner</owner>
+      <type>bool</type>
+      <default>true</default>
+      <locale name="C">
+        <short>Print the Task view</short>
+        <long>Whether printing of the Task view is enabled.</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/apps/planner/views/resource_view/print_enabled</key>
+      <applyto>/apps/planner/views/resource_view/print_enabled</applyto>
+      <owner>planner</owner>
+      <type>bool</type>
+      <default>true</default>
+      <locale name="C">
+        <short>Print the Resource view</short>
+        <long>Whether printing of the Resource view is enabled.</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/apps/planner/ui/active_view</key>
+      <applyto>/apps/planner/ui/active_view</applyto>
+      <owner>planner</owner>
+      <type>string</type>
+      <default>gantt_view</default>
+      <locale name="C">
+        <short>The active view</short>
+        <long>Which view to display in the user interface.</long>
+      </locale>
+    </schema>
+
+  </schemalist>
+</gconfschemafile>
+
