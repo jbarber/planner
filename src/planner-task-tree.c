@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
- * Copyright (C) 2003      Imendio HB
+ * Copyright (C) 2003-2004 Imendio HB
  * Copyright (C) 2002-2003 CodeFactory AB
  * Copyright (C) 2002-2003 Richard Hult <richard@imendio.com>
  * Copyright (C) 2002 Mikael Hallendal <micke@imendio.com>
@@ -616,11 +616,11 @@ task_tree_tree_view_button_press_event (GtkTreeView    *tree_view,
 }
 
 static void
-task_tree_id_data_func (GtkTreeViewColumn *tree_column,
-			GtkCellRenderer   *cell,
-			GtkTreeModel      *tree_model,
-			GtkTreeIter       *iter,
-			gpointer           data)
+task_tree_wbs_data_func (GtkTreeViewColumn *tree_column,
+			 GtkCellRenderer   *cell,
+			 GtkTreeModel      *tree_model,
+			 GtkTreeIter       *iter,
+			 gpointer           data)
 {
 	PlannerTaskTree *tree;
 	gchar           *str;
@@ -629,7 +629,7 @@ task_tree_id_data_func (GtkTreeViewColumn *tree_column,
 	
 	gtk_tree_model_get (tree_model,
 			    iter,
-			    COL_ID, &str,
+			    COL_WBS, &str,
 			    -1);
 
 	g_object_set (cell,
@@ -1452,7 +1452,7 @@ task_tree_add_column (GtkTreeView *tree,
 	GtkCellRenderer   *cell;
 
 	switch (column) {
-	case COL_ID:
+	case COL_WBS:
 		cell = gtk_cell_renderer_text_new ();
 
 		col = gtk_tree_view_column_new_with_attributes (title,
@@ -1460,10 +1460,10 @@ task_tree_add_column (GtkTreeView *tree,
 								NULL);
 		gtk_tree_view_column_set_cell_data_func (col,
 							 cell,
-							 task_tree_id_data_func,
+							 task_tree_wbs_data_func,
 							 tree, NULL);
 		g_object_set_data (G_OBJECT (col),
-				   "data-func", task_tree_id_data_func);
+				   "data-func", task_tree_wbs_data_func);
 		g_object_set_data (G_OBJECT (col),
 				   "user-data", tree);
 		

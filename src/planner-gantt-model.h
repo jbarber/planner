@@ -48,7 +48,7 @@ struct _PlannerGanttModelClass {
 };
 
 enum {
-	COL_ID,
+	COL_WBS,
 	COL_NAME,
 	COL_START,
 	COL_FINISH,
@@ -71,7 +71,7 @@ MrpTask      *     planner_gantt_model_get_indent_task_target (PlannerGanttModel
 MrpProject   *     planner_gantt_model_get_project            (PlannerGanttModel *model);
 MrpTask      *     planner_gantt_model_get_task               (PlannerGanttModel *model,
 							       GtkTreeIter       *iter);
-MrpTask *          planner_gantt_model_get_task_from_path     (PlannerGanttModel *model,
+MrpTask           *planner_gantt_model_get_task_from_path     (PlannerGanttModel *model,
 							       GtkTreePath       *path);
 
 

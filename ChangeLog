@@ -1,3 +1,14 @@
+2004-03-29  Richard Hult  <richard@imendio.com>
+
+	* src/planner-gantt-model.c: (gantt_model_get_column_type),
+	(gantt_model_get_value):
+	* src/planner-gantt-model.h:
+	* src/planner-gantt-view.c: (gantt_view_create_widget):
+	* src/planner-task-tree.c: (task_tree_wbs_data_func),
+	(task_tree_add_column):
+	* src/planner-task-view.c: (get_widget): Clean up wbs patch,
+	change id to wbs.
+
 2004-03-27  Alvaro del Castillo  <acs@barrapunto.com>
 
 	* src/planner-group-model.c:

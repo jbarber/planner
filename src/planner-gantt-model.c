@@ -1,5 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
+ * Copyright (C) 2004 Imendio HB
  * Copyright (C) 2001-2003 CodeFactory AB
  * Copyright (C) 2001-2003 Richard Hult <richard@imendio.com>
  * Copyright (C) 2001-2002 Mikael Hallendal <micke@imendio.com>
@@ -589,7 +590,7 @@ gantt_model_get_column_type (GtkTreeModel *tree_model,
 			     gint          column)
 {
 	switch (column) {
-	case COL_ID:
+	case COL_WBS:
 		return G_TYPE_STRING;
 	case COL_NAME:
 		return G_TYPE_STRING;
@@ -760,7 +761,7 @@ gantt_model_get_value (GtkTreeModel *tree_model,
 	task = node->data;
 
 	switch (column) {
-	case COL_ID:
+	case COL_WBS:
 		string = g_string_sized_new (24);
 
 		pos = -1;

@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
- * Copyright (C) 2003 Imendio HB
+ * Copyright (C) 2003-2004 Imendio HB
  * Copyright (C) 2002 CodeFactory AB
  * Copyright (C) 2002 Richard Hult <richard@imendio.com>
  * Copyright (C) 2002 Mikael Hallendal <micke@imendio.com>
@@ -262,7 +262,7 @@ get_widget (PlannerView *view)
 		priv->tree = planner_task_tree_new (view->main_window,
 						    model,
 						    TRUE,
-						    COL_ID,     _("WBS"),
+						    COL_WBS,    _("WBS"),
 						    COL_NAME,   _("Name"), 
 						    COL_START,  _("Start"), 
 						    COL_FINISH, _("Finish"),
