@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: planner VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-03-03 11:36+0100\n"
-"PO-Revision-Date: 2005-03-03 16:28+0100\n"
+"POT-Creation-Date: 2005-03-05 11:56+0100\n"
+"PO-Revision-Date: 2005-03-05 13:33+0100\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -1010,7 +1010,7 @@ msgid "Work"
 msgstr "Práce"
 
 #: src/planner-gantt-print.c:542 src/planner-gantt-row.c:692
-#: src/planner-html-plugin.c:140 src/planner-task-tree.c:1564
+#: src/planner-html-plugin.c:140 src/planner-task-tree.c:1567
 #: src/planner-window.c:1872
 msgid "Unnamed"
 msgstr "Nepojmenovaný"
@@ -1030,7 +1030,7 @@ msgid "Change work to %s"
 msgstr "Změnit práci na %s"
 
 #: src/planner-gantt-row.c:2391 src/planner-task-dialog.c:453
-#: src/planner-task-tree.c:254 src/planner-task-tree.c:939
+#: src/planner-task-tree.c:254 src/planner-task-tree.c:942
 msgid "Edit task property"
 msgstr "Upravit vlastnosti úlohy"
 
@@ -1658,15 +1658,15 @@ msgstr "Verze"
 msgid "Open from Database"
 msgstr "Otevřít z databáze"
 
-#: src/planner-task-cmd.c:98
+#: src/planner-task-cmd.c:97
 msgid "Link task"
 msgstr "Připojit úlohu"
 
-#: src/planner-task-cmd.c:174
+#: src/planner-task-cmd.c:173
 msgid "Unlink task"
 msgstr "Odpojit úlohu"
 
-#: src/planner-task-cmd.c:269
+#: src/planner-task-cmd.c:268
 msgid "Insert task"
 msgstr "Vložit úlohu"
 
@@ -1785,15 +1785,15 @@ msgstr "Přidat omezení úlohy"
 msgid "Reset task constraint"
 msgstr "Odstranit omezení úlohy"
 
-#: src/planner-task-tree.c:824
-msgid "Move task"
-msgstr "Přesunout úlohu"
-
-#: src/planner-task-tree.c:1485 src/planner-task-tree.c:1617
+#: src/planner-task-tree.c:1488 src/planner-task-tree.c:1620
 msgid "N/A"
 msgstr "N/A"
 
-#: src/planner-task-tree.c:2747
+#: src/planner-task-tree.c:2708
+msgid "Remove tasks"
+msgstr "Odstranit úlohy"
+
+#: src/planner-task-tree.c:2770
 #, c-format
 msgid ""
 "You are about to open an edit dialog each for %i tasks. Are you sure that "
@@ -1801,6 +1801,55 @@ msgid ""
 msgstr ""
 "Hodláte otevřít dialog úprav pro každou z %i úloh. Jste si jisti, že to "
 "chcete udělat?"
+
+#: src/planner-task-tree.c:2872
+msgid "Unlink tasks"
+msgstr "Odpojit úlohy"
+
+#: src/planner-task-tree.c:2924
+msgid "Link tasks"
+msgstr "Připojit úlohy"
+
+#: src/planner-task-tree.c:3015
+msgid "Indent tasks"
+msgstr "Odsadit úlohy"
+
+#: src/planner-task-tree.c:3024
+msgid "Indent task"
+msgstr "Odsadit úlohu"
+
+#: src/planner-task-tree.c:3117
+msgid "Unindent tasks"
+msgstr "Zrušit odsazení úloh"
+
+#: src/planner-task-tree.c:3133
+msgid "Unindent task"
+msgstr "Zrušit odsazení úlohy"
+
+#: src/planner-task-tree.c:3210
+msgid "Move tasks up"
+msgstr "Posunout úlohy nahoru"
+
+#: src/planner-task-tree.c:3248
+msgid "Move task up"
+msgstr "Posunout úlohu nahoru"
+
+#: src/planner-task-tree.c:3337
+msgid "Move tasks down"
+msgstr "Posunout úlohy dolů"
+
+#. Moving task from 'position' to 'position + 1'
+#: src/planner-task-tree.c:3383
+msgid "Move task down"
+msgstr "Posunout úlohu dolů"
+
+#: src/planner-task-tree.c:3439
+msgid "Reset task constraints"
+msgstr "Odstranit omezení úlohy"
+
+#: src/planner-task-tree.c:3471
+msgid "Reset all task constraints"
+msgstr "Odstranit omezení všech úloh"
 
 #: src/planner-task-view.c:122
 msgid "_Edit Task"
