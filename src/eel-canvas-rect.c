@@ -29,10 +29,10 @@
 #include <string.h>
 
 #include <glib/gstring.h>
-#include <libgnome/gnome-macros.h>
 #include <libgnomecanvas/gnome-canvas-util.h>
 #include <gdk/gdkx.h>
 
+/* FIXME: check for this in configure and use it. */
 #ifdef HAVE_RENDER
 #include <X11/extensions/Xrender.h>
 #endif
@@ -81,8 +81,8 @@ struct EelCanvasRectDetails {
 #endif
 };
 
-GNOME_CLASS_BOILERPLATE (EelCanvasRect, eel_canvas_rect,
-			 GnomeCanvasItem, GNOME_TYPE_CANVAS_ITEM);
+
+G_DEFINE_TYPE (EelCanvasRect, eel_canvas_rect, GNOME_TYPE_CANVAS_ITEM);
 
 
 static ArtDRect  make_drect (double x0, double y0, double x1, double y1);
@@ -145,7 +145,7 @@ eel_canvas_rect_update_outline_gc (EelCanvasRect *rect,
 
 
 static void
-eel_canvas_rect_instance_init (EelCanvasRect *rect)
+eel_canvas_rect_init (EelCanvasRect *rect)
 {
 	rect->details = g_new0 (EelCanvasRectDetails, 1);
 }
@@ -162,7 +162,7 @@ eel_canvas_rect_finalize (GObject *object)
 
 	g_free (rect->details);
 
-	G_OBJECT_CLASS (parent_class)->finalize (object);
+	G_OBJECT_CLASS (eel_canvas_rect_parent_class)->finalize (object);
 }
 
 static void
@@ -311,8 +311,8 @@ eel_canvas_rect_update (GnomeCanvasItem *item,
 	rect = EEL_CANVAS_RECT (item);
 	details = rect->details;
 
-	if (parent_class->update) {
-		(* parent_class->update) (item, affine, clip_path, flags);
+	if (GNOME_CANVAS_ITEM_CLASS (eel_canvas_rect_parent_class)->update) {
+		GNOME_CANVAS_ITEM_CLASS (eel_canvas_rect_parent_class)->update (item, affine, clip_path, flags);
 	}
 
 	/* Update bounding box: */
@@ -388,8 +388,8 @@ eel_canvas_rect_realize (GnomeCanvasItem *item)
 	}
 #endif
 
-	if (parent_class->realize) {
-		(* parent_class->realize) (item);
+	if (GNOME_CANVAS_ITEM_CLASS (eel_canvas_rect_parent_class)->realize) {
+		GNOME_CANVAS_ITEM_CLASS (eel_canvas_rect_parent_class)->realize (item);
 	}
 }
 
@@ -412,8 +412,8 @@ eel_canvas_rect_unrealize (GnomeCanvasItem *item)
 		details->fill_gc = NULL;
 	}
 
-	if (parent_class->unrealize) {
-		(* parent_class->unrealize) (item);
+	if (GNOME_CANVAS_ITEM_CLASS (eel_canvas_rect_parent_class)->unrealize) {
+		GNOME_CANVAS_ITEM_CLASS (eel_canvas_rect_parent_class)->unrealize (item);
 	}
 }
 

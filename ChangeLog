@@ -1,3 +1,14 @@
+2004-08-15  Richard Hult  <richard@imendio.com>
+
+	* configure.in: Remove unused dependencies.
+
+	* src/planner-eds-plugin.c: Remove libgnome includes.
+
+	* src/eel-canvas-rect.c: (eel_canvas_rect_init),
+	(eel_canvas_rect_finalize), (eel_canvas_rect_update),
+	(eel_canvas_rect_realize), (eel_canvas_rect_unrealize): Get rid of
+	libgnome includes.
+
 2004-08-11  Richard Hult  <richard@imendio.com>
 
 	* src/planner-window.c (window_about_cb): Change

@@ -24,6 +24,7 @@
 
 #include <config.h>
 #include <glib.h> 
+#include <glib/gi18n.h> 
 #include <string.h>
 #include <gdk/gdkevents.h>
 #include <gdk/gdkkeysyms.h>
@@ -41,14 +42,12 @@
 #include <gtk/gtkcellrenderertoggle.h>
 #include <gtk/gtkcellrendererpixbuf.h>
 #include <gtk/gtkcelllayout.h>
-#include <libgnome/gnome-i18n.h>
-#include <libgnomeui/gnome-file-entry.h>
 #include <gconf/gconf-client.h>
+#include <libplanner/mrp-object.h>
+#include <libplanner/mrp-property.h>
 #include "planner-window.h"
 #include "planner-plugin.h"
 #include "planner-resource-cmd.h"
-#include <libplanner/mrp-object.h>
-#include <libplanner/mrp-property.h>
 
 /* Evolution Data Server sources */
 #include <libedataserver/e-source-list.h>
