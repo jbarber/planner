@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mrproject VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-07-01 21:46+0200\n"
-"PO-Revision-Date: 2004-07-02 08:42+0200\n"
+"POT-Creation-Date: 2004-07-06 04:53+0200\n"
+"PO-Revision-Date: 2004-07-06 13:52+0200\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -1200,7 +1200,7 @@ msgstr "Začátek projektu"
 
 #: src/planner-gantt-print.c:189 src/planner-group-dialog.c:816
 #: src/planner-property-dialog.c:481 src/planner-resource-view.c:1152
-#: src/planner-task-dialog.c:2542 src/planner-task-dialog.c:2631
+#: src/planner-task-dialog.c:2534 src/planner-task-dialog.c:2623
 #: src/planner-task-view.c:274 src/planner-ttable-print.c:108
 msgid "Name"
 msgstr "Jméno"
@@ -1335,7 +1335,7 @@ msgstr "Odstranit fázi"
 msgid "Could not open plugin file '%s'\n"
 msgstr "Nemohu otevřít soubor zásuvného modulu '%s'\n"
 
-#: src/planner-predecessor-model.c:191 src/planner-task-dialog.c:2203
+#: src/planner-predecessor-model.c:191 src/planner-task-dialog.c:2195
 msgid "FS"
 msgstr "KZ"
 
@@ -1344,7 +1344,7 @@ msgid "FF"
 msgstr "KK"
 
 #. list = g_list_append (list, g_strdup (_("FF")));
-#: src/planner-predecessor-model.c:197 src/planner-task-dialog.c:2205
+#: src/planner-predecessor-model.c:197 src/planner-task-dialog.c:2197
 msgid "SS"
 msgstr "ZZ"
 
@@ -1426,7 +1426,7 @@ msgid "Label"
 msgstr "Jmenovka"
 
 #: src/planner-property-dialog.c:510 src/planner-resource-view.c:1194
-#: src/planner-task-dialog.c:2663
+#: src/planner-task-dialog.c:2655
 msgid "Type"
 msgstr "Typ"
 
@@ -1470,13 +1470,13 @@ msgid "Edit resource note"
 msgstr "Upravit poznámku o zdroji"
 
 #: src/planner-resource-dialog.c:733 src/planner-resource-dialog.c:774
-#: src/planner-resource-view.c:1328
+#: src/planner-resource-view.c:1328 src/planner-resource-view.c:1412
 msgid "Edit resource property"
 msgstr "Upravit vlastnost zdroje"
 
 #. i18n: time stamp format for notes in task dialog, see strftime(3) for
 #. * a detailed description.
-#: src/planner-resource-dialog.c:1453 src/planner-task-dialog.c:1792
+#: src/planner-resource-dialog.c:1453 src/planner-task-dialog.c:1784
 msgid "%a %d %b %Y, %H:%M\n"
 msgstr "%a %d. %b %Y, %H:%M\n"
 
@@ -1528,10 +1528,6 @@ msgstr "Skupina"
 #: src/planner-resource-view.c:1247
 msgid "Email"
 msgstr "E-mail"
-
-#: src/planner-resource-view.c:1412
-msgid "Edit resource custom property"
-msgstr "Upravit vlastní vlastnost zdroje"
 
 #. i18n: Short "Week", preferably 2 letters.
 #: src/planner-scale-utils.c:325
@@ -1617,6 +1613,7 @@ msgid "Insert task"
 msgstr "Vložit úlohu"
 
 #: src/planner-task-dialog.c:449 src/planner-task-tree.c:241
+#: src/planner-task-tree.c:995
 msgid "Edit task property"
 msgstr "Upravit vlastnosti úlohy"
 
@@ -1625,59 +1622,59 @@ msgid "Edit task type"
 msgstr "Upravit typ úlohy"
 
 #: src/planner-task-dialog.c:590
-msgid "Edit task schedule"
-msgstr "Upravit plánování úlohy"
+msgid "Toggle fixed duration"
+msgstr "Přepnout fixní trvání"
 
 #: src/planner-task-dialog.c:668
-msgid "Add resource to task"
-msgstr "Přidat zdroj pro úlohu"
+msgid "Assign resource to task"
+msgstr "Přiřadit zdroj k úloze"
 
 #: src/planner-task-dialog.c:728
-msgid "Remove resource from task"
-msgstr "Odstranit zdroj z úlohy"
+msgid "Unassign resource from task"
+msgstr "Zrušit přiřazení zdroje k úloze"
 
 #: src/planner-task-dialog.c:787
 msgid "Change resource units in task"
 msgstr "Změnit jednotky zdroje pro úlohu"
 
-#: src/planner-task-dialog.c:883
+#: src/planner-task-dialog.c:875
 msgid "Edit task predecessor"
 msgstr "Upravit předchůdce úlohy"
 
-#: src/planner-task-dialog.c:954
+#: src/planner-task-dialog.c:946
 msgid "Edit lag predecessor"
 msgstr "Upravit předchůdce zpoždění"
 
-#: src/planner-task-dialog.c:1020
+#: src/planner-task-dialog.c:1012
 msgid "Edit task note"
 msgstr "Upravit poznámku o úloze"
 
-#: src/planner-task-dialog.c:1864
+#: src/planner-task-dialog.c:1856
 msgid "Finish to start (FS)"
 msgstr "Konec před začátkem (KZ)"
 
 #. _("Finish to finish (FF)"), MRP_RELATION_FF,
-#: src/planner-task-dialog.c:1866
+#: src/planner-task-dialog.c:1858
 msgid "Start to start (SS)"
 msgstr "Začátek před začátkem (ZZ)"
 
-#: src/planner-task-dialog.c:1921
+#: src/planner-task-dialog.c:1913
 msgid "Can't add new predecessor. No task selected!"
 msgstr "Nemohu přidat nového předchůdce. Nevybrána žádná úloha!"
 
-#: src/planner-task-dialog.c:2563
+#: src/planner-task-dialog.c:2555
 msgid "Assigned"
 msgstr "Přiřazeno"
 
-#: src/planner-task-dialog.c:2580
+#: src/planner-task-dialog.c:2572
 msgid "Units"
 msgstr "Jednotky"
 
-#: src/planner-task-dialog.c:2685
+#: src/planner-task-dialog.c:2677
 msgid "Lag"
 msgstr "Zpoždění"
 
-#: src/planner-task-dialog.c:2823 src/planner-task-dialog.c:2825
+#: src/planner-task-dialog.c:2815 src/planner-task-dialog.c:2817
 msgid "Edit task properties"
 msgstr "Upravit vlastnosti úlohy"
 
@@ -1720,10 +1717,6 @@ msgstr "Odstranit omezení úlohy"
 #: src/planner-task-tree.c:886
 msgid "Move task"
 msgstr "Přesunout úlohu"
-
-#: src/planner-task-tree.c:995
-msgid "Edit task custom property"
-msgstr "Upravit vlastní vlastnost úlohy"
 
 #: src/planner-task-tree.c:2675
 #, c-format
@@ -1839,12 +1832,12 @@ msgstr "Upravit vlastní vlastnosti úlohy"
 msgid "Task"
 msgstr "Úloha"
 
-#: src/planner-ttable-row.c:2016
+#: src/planner-ttable-row.c:2011
 #, c-format
 msgid "Make task '%s' start on %s"
 msgstr "Změnit začátek úlohy '%s' na %s"
 
-#: src/planner-ttable-row.c:2090
+#: src/planner-ttable-row.c:2085
 #, c-format
 msgid "Change task '%s' work to %s, duration to %s (%d)"
 msgstr "Změnit práci úlohy '%s' na %s a trvání na %s (%d)"
@@ -1971,6 +1964,15 @@ msgstr "Upravit pracovní dobu"
 #: src/planner-xml-planner-plugin.c:102
 msgid "Export"
 msgstr "Exportovat"
+
+#~ msgid "Edit resource custom property"
+#~ msgstr "Upravit vlastní vlastnost zdroje"
+
+#~ msgid "Edit task schedule"
+#~ msgstr "Upravit plánování úlohy"
+
+#~ msgid "Edit task custom property"
+#~ msgstr "Upravit vlastní vlastnost úlohy"
 
 #~ msgid "Finish to finish (FF)"
 #~ msgstr "Konec před koncem (KK)"
