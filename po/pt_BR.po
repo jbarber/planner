@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: planner.HEAD.pt_BR\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-03-04 11:58+0100\n"
-"PO-Revision-Date: 2005-03-04 11:18-0300\n"
+"POT-Creation-Date: 2005-03-17 04:19+0100\n"
+"PO-Revision-Date: 2005-03-17 02:45-0300\n"
 "Last-Translator: Afonso Celso Medina <medina@maua.br>\n"
 "Language-Team: Portuguese/Brazil <gnome-l10n-br@listas.cipsga.org.br>\n"
 "MIME-Version: 1.0\n"
@@ -784,7 +784,7 @@ msgstr "Remove o calendário"
 msgid "Add new calendar"
 msgstr "Adiciona um novo calendário"
 
-#: src/planner-cell-renderer-date.c:161 src/planner-task-dialog.c:1490
+#: src/planner-cell-renderer-date.c:161 src/planner-task-dialog.c:1489
 msgid "As soon as possible"
 msgstr "Assim que possível"
 
@@ -796,21 +796,21 @@ msgstr "Não antes de"
 msgid "On fixed date"
 msgstr "Em uma data fixa"
 
-#: src/planner-cmd-manager.c:225
+#: src/planner-cmd-manager.c:227
 #, c-format
 msgid "Undo '%s'"
 msgstr "Desfazer '%s'"
 
-#: src/planner-cmd-manager.c:227
+#: src/planner-cmd-manager.c:229
 msgid "Undo"
 msgstr "Desfazer"
 
-#: src/planner-cmd-manager.c:237
+#: src/planner-cmd-manager.c:239
 #, c-format
 msgid "Redo '%s'"
 msgstr "Refazer '%s'"
 
-#: src/planner-cmd-manager.c:239
+#: src/planner-cmd-manager.c:241
 msgid "Redo"
 msgstr "Refazer"
 
@@ -874,8 +874,8 @@ msgstr "Importa os recursos a partir do Servidor de Dados do Evolution"
 
 #: src/planner-eds-plugin.c:393 src/planner-gantt-print.c:190
 #: src/planner-group-dialog.c:819 src/planner-property-dialog.c:481
-#: src/planner-resource-view.c:1156 src/planner-task-dialog.c:2533
-#: src/planner-task-dialog.c:2607 src/planner-task-view.c:279
+#: src/planner-resource-view.c:1156 src/planner-task-dialog.c:2534
+#: src/planner-task-dialog.c:2608 src/planner-task-view.c:279
 #: src/planner-ttable-print.c:108
 msgid "Name"
 msgstr "Nome"
@@ -1019,6 +1019,10 @@ msgstr "%Y %b %d"
 #: src/planner-gantt-background.c:581
 msgid "Project start"
 msgstr "Início do projeto"
+
+#: src/planner-gantt-header.c:671
+msgid "%e %b %Y"
+msgstr "%e %b %Y"
 
 #: src/planner-gantt-print.c:198 src/planner-resource-dialog.c:1845
 #: src/planner-resource-view.c:747 src/planner-resource-view.c:763
@@ -1307,7 +1311,7 @@ msgstr "Remove a fase"
 msgid "Could not open plugin file '%s'\n"
 msgstr "Impossível abrir arquivo de plugin '%s'\n"
 
-#: src/planner-predecessor-model.c:191 src/planner-task-dialog.c:2173
+#: src/planner-predecessor-model.c:191 src/planner-task-dialog.c:2174
 msgid "FS"
 msgstr "FI"
 
@@ -1316,7 +1320,7 @@ msgid "FF"
 msgstr "FF"
 
 #. list = g_list_append (list, g_strdup (_("FF")));
-#: src/planner-predecessor-model.c:197 src/planner-task-dialog.c:2175
+#: src/planner-predecessor-model.c:197 src/planner-task-dialog.c:2176
 msgid "SS"
 msgstr "II"
 
@@ -1406,7 +1410,7 @@ msgid "Label"
 msgstr "Rótulo"
 
 #: src/planner-property-dialog.c:510 src/planner-resource-view.c:1200
-#: src/planner-task-dialog.c:2639
+#: src/planner-task-dialog.c:2640
 msgid "Type"
 msgstr "Tipo"
 
@@ -1456,7 +1460,7 @@ msgstr "Editar propriedades do recurso"
 
 #. i18n: time stamp format for notes in task dialog, see strftime(3) for
 #. * a detailed description.
-#: src/planner-resource-dialog.c:1403 src/planner-task-dialog.c:1805
+#: src/planner-resource-dialog.c:1403 src/planner-task-dialog.c:1806
 msgid "%a %d %b %Y, %H:%M\n"
 msgstr "%a %d %b %Y, %H:%M\n"
 
@@ -1542,48 +1546,48 @@ msgid "Group"
 msgstr "Grupo"
 
 #. i18n: Short "Week", preferably 2 letters.
-#: src/planner-scale-utils.c:325
+#: src/planner-scale-utils.c:129
 #, c-format
 msgid "Wk %d"
 msgstr "Sm %d"
 
-#: src/planner-scale-utils.c:329
+#: src/planner-scale-utils.c:133
 #, c-format
 msgid "Week %d"
 msgstr "Semana %d"
 
 #. i18n: Week, year.
-#: src/planner-scale-utils.c:334
+#: src/planner-scale-utils.c:138
 #, c-format
 msgid "Week %d, %d"
 msgstr "Semana %d, %d"
 
 #. i18n: Short "Quarter", preferably 1 letter.
-#: src/planner-scale-utils.c:365
+#: src/planner-scale-utils.c:169
 #, c-format
 msgid "Q%d"
 msgstr "T%d"
 
 #. i18n: Short "Quarter", preferably 2-3 letters.
-#: src/planner-scale-utils.c:369
+#: src/planner-scale-utils.c:173
 #, c-format
 msgid "Qtr %d"
 msgstr "Trm %d"
 
 #. i18n: Year, short "Quarter", preferably 2-3 letters.
-#: src/planner-scale-utils.c:373
+#: src/planner-scale-utils.c:177
 #, c-format
 msgid "%d, Qtr %d"
 msgstr "%d, Trm %d"
 
 #. i18n: Short "Half year", preferably 1 letter.
-#: src/planner-scale-utils.c:386
+#: src/planner-scale-utils.c:190
 #, c-format
 msgid "H%d"
 msgstr "S%d"
 
 #. i18n: Year, short "Half year", preferably 1 letter.
-#: src/planner-scale-utils.c:391
+#: src/planner-scale-utils.c:195
 #, c-format
 msgid "%04d, H%d"
 msgstr "%04d, H%d"
@@ -1731,42 +1735,42 @@ msgstr "Editar as anotações da tarefa"
 msgid "No earlier than %s"
 msgstr "Não antes de %s"
 
-#: src/planner-task-dialog.c:1496
+#: src/planner-task-dialog.c:1497
 #, c-format
 msgid "On fixed date %s"
 msgstr "Na data fixada %s"
 
-#: src/planner-task-dialog.c:1877
+#: src/planner-task-dialog.c:1878
 msgid "Finish to start (FS)"
 msgstr "Final para início (FI)"
 
 #. _("Finish to finish (FF)"), MRP_RELATION_FF,
-#: src/planner-task-dialog.c:1879
+#: src/planner-task-dialog.c:1880
 msgid "Start to start (SS)"
 msgstr "Início para início (II)"
 
-#: src/planner-task-dialog.c:1935
+#: src/planner-task-dialog.c:1936
 msgid "Can't add new predecessor. No task selected!"
 msgstr ""
 "Impossível adicionar um novo predecessor. Nenhuma tarefa foi selecionada!"
 
-#: src/planner-task-dialog.c:2380
+#: src/planner-task-dialog.c:2381
 msgid "Change..."
 msgstr "Mudar..."
 
-#: src/planner-task-dialog.c:2554
+#: src/planner-task-dialog.c:2555
 msgid "Assigned"
 msgstr "Atribuído"
 
-#: src/planner-task-dialog.c:2571
+#: src/planner-task-dialog.c:2572
 msgid "Units"
 msgstr "Unidades"
 
-#: src/planner-task-dialog.c:2661
+#: src/planner-task-dialog.c:2662
 msgid "Lag"
 msgstr "Atraso"
 
-#: src/planner-task-dialog.c:2835 src/planner-task-dialog.c:2837
+#: src/planner-task-dialog.c:2805 src/planner-task-dialog.c:2807
 msgid "Edit task properties"
 msgstr "Editar as propriedades da tarefa"
 
