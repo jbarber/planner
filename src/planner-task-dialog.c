@@ -1717,7 +1717,8 @@ task_dialog_destroy_cb (GtkWidget  *parent,
 
 GtkWidget *
 planner_task_dialog_new (PlannerWindow *window,
-			 MrpTask       *task)
+			 MrpTask       *task,
+			 PlannerTaskDialogPage  page)
 {
 	DialogData   *data;
 	GladeXML     *glade;
@@ -1774,6 +1775,10 @@ planner_task_dialog_new (PlannerWindow *window,
 				 dialog,
 				 0);
 
+	w = glade_xml_get_widget (glade, "task_notebook");
+
+	gtk_notebook_set_current_page (GTK_NOTEBOOK (w), page);
+		
 	data->resource_list = glade_xml_get_widget (glade, "resource_list");
 	task_dialog_setup_resource_list (data);
 

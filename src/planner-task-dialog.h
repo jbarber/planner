@@ -26,10 +26,20 @@
 #include <libplanner/mrp-project.h>
 #include "planner-window.h"
 
-GtkWidget * planner_task_dialog_new (PlannerWindow *window,
-				MrpTask      *task);
+typedef enum {
+	PLANNER_TASK_DIALOG_PAGE_GENERAL =      0,
+	PLANNER_TASK_DIALOG_PAGE_RESOURCES =    1,
+	PLANNER_TASK_DIALOG_PAGE_PREDECESSORS = 2,
+	PLANNER_TASK_DIALOG_PAGE_NOTES =        3
+} PlannerTaskDialogPage;
 
-#endif /* __TASK_DIALOG_H__ */
+
+GtkWidget * planner_task_dialog_new (PlannerWindow         *window,
+				     MrpTask               *task,
+				     PlannerTaskDialogPage  page);
+
+
+#endif /* __PLANNER_TASK_DIALOG_H__ */
 
 
 

@@ -53,6 +53,7 @@ struct _PlannerWindowClass
         BonoboWindowClass  parent_class;
 };
 
+
 GType                   planner_window_get_type             (void) G_GNUC_CONST;
 GtkWidget         *     planner_window_new                  (PlannerApplication *app);
 gboolean                planner_window_open                 (PlannerWindow      *window,

@@ -97,9 +97,6 @@ static void       gantt_view_move_task_down_cb            (BonoboUIComponent    
 static void       gantt_view_reset_constraint_cb          (BonoboUIComponent            *component,
 							   gpointer                      data,
 							   const char                   *cname);
-static void       gantt_view_reset_all_constraints_cb     (BonoboUIComponent            *component,
-							   gpointer                      data,
-							   const char                   *cname);
 static void       gantt_view_zoom_to_fit_cb               (BonoboUIComponent            *component,
 							   gpointer                      data,
 							   const char                   *cname);
@@ -155,7 +152,7 @@ static BonoboUIVerb verbs[] = {
 	BONOBO_UI_VERB ("InsertTask",		gantt_view_insert_task_cb),
 	BONOBO_UI_VERB ("InsertTasks",		gantt_view_insert_tasks_cb),
 	BONOBO_UI_VERB ("RemoveTask",		gantt_view_remove_task_cb),
-	BONOBO_UI_VERB ("EditTask",		gantt_view_edit_task_cb),
+	BONOBO_UI_VERB ("EditTask",	        gantt_view_edit_task_cb),
 	BONOBO_UI_VERB ("SelectAll",		gantt_view_select_all_cb),
 	BONOBO_UI_VERB ("UnlinkTask",		gantt_view_unlink_task_cb),
 	BONOBO_UI_VERB ("LinkTasks",		gantt_view_link_tasks_cb),
@@ -164,7 +161,6 @@ static BonoboUIVerb verbs[] = {
 	BONOBO_UI_VERB ("MoveTaskUp",           gantt_view_move_task_up_cb),
 	BONOBO_UI_VERB ("MoveTaskDown",	        gantt_view_move_task_down_cb),
 	BONOBO_UI_VERB ("ResetConstraint",	gantt_view_reset_constraint_cb),
-	BONOBO_UI_VERB ("ResetAllConstraints",	gantt_view_reset_all_constraints_cb),
 	BONOBO_UI_VERB ("ZoomToFit",		gantt_view_zoom_to_fit_cb),
 	BONOBO_UI_VERB ("ZoomIn",		gantt_view_zoom_in_cb),
 	BONOBO_UI_VERB ("ZoomOut",		gantt_view_zoom_out_cb),
@@ -655,7 +651,8 @@ gantt_view_edit_task_cb (BonoboUIComponent *component,
 
 	view = PLANNER_VIEW (data);
 
-	planner_task_tree_edit_task (PLANNER_TASK_TREE (view->priv->tree));
+	planner_task_tree_edit_task (PLANNER_TASK_TREE (view->priv->tree),
+				     PLANNER_TASK_DIALOG_PAGE_GENERAL);
 }
 
 static void
@@ -678,11 +675,9 @@ gantt_view_link_tasks_cb (BonoboUIComponent *component,
 	PlannerView *view;
 
 	view = PLANNER_VIEW (data);
-/* TODO: need to get a way of easily modifying the options to tweak the link relationships between the tasks
-*	from the most common option of FS i.e. finish to start. Maybe project-wide flag, maybe menu option
-*	or maybe click-modifiers i.e. Shift+click or Control+click.
-*/
-	planner_task_tree_link_tasks (PLANNER_TASK_TREE (view->priv->tree), MRP_RELATION_FS);
+
+	planner_task_tree_link_tasks (PLANNER_TASK_TREE (view->priv->tree),
+				      MRP_RELATION_FS);
 }
 
 static void
@@ -743,18 +738,6 @@ gantt_view_reset_constraint_cb (BonoboUIComponent *component,
 	view = PLANNER_VIEW (data);
 
 	planner_task_tree_reset_constraint (PLANNER_TASK_TREE (view->priv->tree));
-}
-
-static void
-gantt_view_reset_all_constraints_cb (BonoboUIComponent *component, 
-				     gpointer           data, 
-				     const char        *cname)
-{
-	PlannerView *view;
-
-	view = PLANNER_VIEW (data);
-
-	planner_task_tree_reset_all_constraints (PLANNER_TASK_TREE (view->priv->tree));
 }
 
 static void
@@ -837,16 +820,16 @@ gantt_view_test_cb (BonoboUIComponent *component,
 	PlannerView       *view;
 	PlannerViewPriv   *priv;
 	PlannerGanttModel *model;
-	MrpTask      *task;
-	MrpProject   *project;
-	GList        *list;
+	MrpTask           *task;
+	MrpProject        *project;
+	GList             *list;
 	
 	view = PLANNER_VIEW (data);
 	priv = view->priv;
 	project = planner_window_get_project (view->main_window);
 
 	model = PLANNER_GANTT_MODEL (gtk_tree_view_get_model (
-					GTK_TREE_VIEW (priv->tree)));
+					     GTK_TREE_VIEW (priv->tree)));
 	
 	list = planner_task_tree_get_selected_tasks (PLANNER_TASK_TREE (priv->tree));
 	if (list == NULL) {

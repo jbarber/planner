@@ -7,7 +7,6 @@
     <cmd name="UnlinkTask"          _label="_Unlink Task"             pixtype="stock" pixname="planner-stock-unlink-task"/>
     <cmd name="LinkTasks"           _label="_Link Tasks"               pixtype="stock" pixname="planner-stock-link-task"/>
     <cmd name="ResetConstraint"     _label="Reset _Constraint" sensitive="0"/>
-    <cmd name="ResetAllConstraints" _label="Reset _All Constraints"/>
     <cmd name="SelectAll"           _label="Select _All"              _tip="Select all tasks"/>
     <cmd name="IndentTask"          _label="I_ndent Task"             pixtype="stock" pixname="planner-stock-indent-task"     sensitive="0"/>
     <cmd name="UnindentTask"        _label="Unin_dent Task"           pixtype="stock" pixname="planner-stock-unindent-task"   sensitive="0"/>
@@ -54,7 +53,6 @@
 	<menuitem name="MoveTaskDown"        verb=""/>
         <separator/>
         <menuitem name="ResetConstraint"     verb=""/>
-        <menuitem name="ResetAllConstraints" verb=""/>
         <separator/>
         <menuitem name="EditTask"            verb=""   accel="*Shift**Control*e"/>
       </placeholder>

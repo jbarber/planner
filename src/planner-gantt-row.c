@@ -2156,7 +2156,7 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 				gtk_tree_selection_select_path (selection, path);
 				planner_task_tree_set_anchor(tree, path);
 							   
-				planner_task_tree_edit_task (tree);
+				planner_task_tree_edit_task (tree, PLANNER_TASK_DIALOG_PAGE_GENERAL);
 							   
 				return TRUE;
 			}
@@ -2279,5 +2279,5 @@ planner_gantt_row_init_menu (PlannerGanttRow *row)
 	chart = g_object_get_data (G_OBJECT (GNOME_CANVAS_ITEM (row)->canvas), "chart");
     	tree = planner_gantt_chart_get_view (chart);
 	
-	row->priv->popup_factory = task_popup_new (tree);
+	row->priv->popup_factory = planner_task_popup_new (tree);
 }

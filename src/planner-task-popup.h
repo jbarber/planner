@@ -22,15 +22,16 @@
 
 #include <gtk/gtkitemfactory.h>
 
-enum {
-	POPUP_NONE,
-	POPUP_INSERT,
-	POPUP_SUBTASK,
-	POPUP_REMOVE,
-	POPUP_UNLINK,
-	POPUP_EDIT
-};
+typedef enum {
+	PLANNER_TASK_POPUP_NONE,
+	PLANNER_TASK_POPUP_INSERT,
+	PLANNER_TASK_POPUP_SUBTASK,
+	PLANNER_TASK_POPUP_REMOVE,
+	PLANNER_TASK_POPUP_UNLINK,
+	PLANNER_TASK_POPUP_EDIT_TASK,
+	PLANNER_TASK_POPUP_EDIT_RESOURCES
+} PlannerTaskPopupItem;
 
-GtkItemFactory *task_popup_new (PlannerTaskTree *tree);
+GtkItemFactory * planner_task_popup_new (PlannerTaskTree *tree);
 
 #endif

@@ -3,12 +3,11 @@
     <cmd name="InsertTask"          _label="_Insert Task"               pixtype="stock" pixname="planner-stock-insert-task"/>
     <cmd name="InsertTasks"         _label="In_sert Tasks..."           pixtype="stock" pixname="planner-stock-insert-task"/>
     <cmd name="RemoveTask"          _label="_Remove Task"               pixtype="stock" pixname="planner-stock-remove-task"    sensitive="0"/>
-    <cmd name="EditTask"            _label="_Edit Task Properties..."                                                     sensitive="0"/>
+    <cmd name="EditTask"            _label="_Edit Task" sensitive="0"/>
     <cmd name="UnlinkTask"          _label="_Unlink Task"               pixtype="stock" pixname="planner-stock-unlink-task"/>
     <cmd name="LinkTasks"           _label="_Link Tasks"                pixtype="stock" pixname="planner-stock-link-task"/>
     <cmd name="SelectAll"           _label="Select _All"                 _tip="Select all tasks"/>
-    <cmd name="ResetConstraint"     _label="Reset _Constraint"                                                            sensitive="0"/>
-    <cmd name="ResetAllConstraints" _label="Reset _All Constraints"/>
+    <cmd name="ResetConstraint"     _label="Reset _Constraint"          pixtype="stock" pixname="planner-stock-reset-constraint"  sensitive="0"/>
     <cmd name="IndentTask"          _label="I_ndent Task"               pixtype="stock" pixname="planner-stock-indent-task"    sensitive="0"/>
     <cmd name="UnindentTask"        _label="Unin_dent Task"             pixtype="stock" pixname="planner-stock-unindent-task"  sensitive="0"/>
     <cmd name="MoveTaskUp"	    _label="Move Task _Up"              pixtype="stock" pixname="planner-stock-move-task-up"   sensitive="0"/>
@@ -47,7 +46,6 @@
 	<menuitem name="MoveTaskDown"        verb=""/>
         <separator/>
         <menuitem name="ResetConstraint"     verb=""/>
-        <menuitem name="ResetAllConstraints" verb=""/>
         <separator/>
         <menuitem name="EditTask"            verb=""   accel="*Shift**Control*e"/>
         <separator/>

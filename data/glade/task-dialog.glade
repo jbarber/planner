@@ -47,7 +47,7 @@
       </child>
 
       <child>
-	<widget class="GtkNotebook" id="notebook1">
+	<widget class="GtkNotebook" id="task_notebook">
 	  <property name="border_width">5</property>
 	  <property name="visible">True</property>
 	  <property name="can_focus">True</property>
@@ -551,7 +551,7 @@
 	  </child>
 
 	  <child>
-	    <widget class="GtkLabel" id="label85">
+	    <widget class="GtkLabel" id="general_page">
 	      <property name="visible">True</property>
 	      <property name="label" translatable="yes">General</property>
 	      <property name="use_underline">False</property>
@@ -597,7 +597,7 @@
 	  </child>
 
 	  <child>
-	    <widget class="GtkLabel" id="label86">
+	    <widget class="GtkLabel" id="resources_page">
 	      <property name="visible">True</property>
 	      <property name="label" translatable="yes">Resources</property>
 	      <property name="use_underline">False</property>
@@ -691,7 +691,7 @@
 	  </child>
 
 	  <child>
-	    <widget class="GtkLabel" id="">
+	    <widget class="GtkLabel" id="predecessors_page">
 	      <property name="visible">True</property>
 	      <property name="label" translatable="yes">Predecessors</property>
 	      <property name="use_underline">False</property>
@@ -835,7 +835,7 @@
 	  </child>
 
 	  <child>
-	    <widget class="GtkLabel" id="label88">
+	    <widget class="GtkLabel" id="notes_page">
 	      <property name="visible">True</property>
 	      <property name="label" translatable="yes">Notes</property>
 	      <property name="use_underline">False</property>

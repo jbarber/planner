@@ -446,9 +446,10 @@ planner_ttable_tree_edit_task	(PlannerTtableTree	*tree)
 		return;
 	task = mrp_assignment_get_task(assignment);
 
-	dialog = planner_task_dialog_new(priv->main_window, task);
-	gtk_widget_show(dialog);
-	g_list_free(list);
+	dialog = planner_task_dialog_new (priv->main_window, task,
+					  PLANNER_TASK_DIALOG_PAGE_GENERAL);
+	gtk_widget_show (dialog);
+	g_list_free (list);
 }
 
 static void

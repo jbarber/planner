@@ -104,9 +104,6 @@ static void   task_view_unindent_task_cb         (BonoboUIComponent            *
 static void   task_view_reset_constraint_cb      (BonoboUIComponent            *component,
 						  gpointer                      data,
 						  const char                   *cname);
-static void   task_view_reset_all_constraints_cb (BonoboUIComponent            *component,
-						  gpointer                      data,
-						  const char                   *cname);
 static void   task_view_edit_custom_props_cb     (BonoboUIComponent            *component,
 						  gpointer                      data,
 						  const char                   *cname);
@@ -133,7 +130,7 @@ static BonoboUIVerb verbs[] = {
 	BONOBO_UI_VERB ("InsertTask",		task_view_insert_task_cb),
 	BONOBO_UI_VERB ("InsertTasks",		task_view_insert_tasks_cb),
 	BONOBO_UI_VERB ("RemoveTask",		task_view_remove_task_cb),
-	BONOBO_UI_VERB ("EditTask",		task_view_edit_task_cb),
+	BONOBO_UI_VERB ("EditTask",   	        task_view_edit_task_cb),
 	BONOBO_UI_VERB ("SelectAll",		task_view_select_all_cb),
 	BONOBO_UI_VERB ("UnlinkTask",		task_view_unlink_task_cb),
 	BONOBO_UI_VERB ("LinkTasks",		task_view_link_tasks_cb),
@@ -142,7 +139,6 @@ static BonoboUIVerb verbs[] = {
 	BONOBO_UI_VERB ("MoveTaskUp",		task_view_move_task_up_cb),
 	BONOBO_UI_VERB ("MoveTaskDown",		task_view_move_task_down_cb),
 	BONOBO_UI_VERB ("ResetConstraint",	task_view_reset_constraint_cb),
-	BONOBO_UI_VERB ("ResetAllConstraints",	task_view_reset_all_constraints_cb),
 	BONOBO_UI_VERB ("EditCustomProps",	task_view_edit_custom_props_cb),
 
 	BONOBO_UI_VERB_END
@@ -364,7 +360,8 @@ task_view_edit_task_cb (BonoboUIComponent *component,
 
 	view = PLANNER_VIEW (data);
 
-	planner_task_tree_edit_task (PLANNER_TASK_TREE (view->priv->tree));
+	planner_task_tree_edit_task (PLANNER_TASK_TREE (view->priv->tree),
+				     PLANNER_TASK_DIALOG_PAGE_GENERAL);
 }
 
 static void
@@ -400,7 +397,8 @@ task_view_link_tasks_cb (BonoboUIComponent *component,
 
 	view = PLANNER_VIEW (data);
 
-	planner_task_tree_link_tasks (PLANNER_TASK_TREE (view->priv->tree), MRP_RELATION_FS);
+	planner_task_tree_link_tasks (PLANNER_TASK_TREE (view->priv->tree),
+				      MRP_RELATION_FS);
 }
 
 static void
@@ -461,18 +459,6 @@ task_view_reset_constraint_cb (BonoboUIComponent *component,
 	view = PLANNER_VIEW (data);
 
 	planner_task_tree_reset_constraint (PLANNER_TASK_TREE (view->priv->tree));
-}
-
-static void
-task_view_reset_all_constraints_cb (BonoboUIComponent *component, 
-				    gpointer           data, 
-				    const char        *cname)
-{
-	PlannerView *view;
-
-	view = PLANNER_VIEW (data);
-
-	planner_task_tree_reset_all_constraints (PLANNER_TASK_TREE (view->priv->tree));
 }
 
 static void

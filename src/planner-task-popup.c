@@ -24,42 +24,51 @@
 #include "planner-task-tree.h"
 #include "planner-task-popup.h"
 
-static void task_popup_insert_task_cb (gpointer callback_data, guint action,
-    GtkWidget *widget);
 
-static void task_popup_insert_subtask_cb (gpointer callback_data, guint action,
-    GtkWidget *widget);
+static void task_popup_insert_task_cb         (gpointer   callback_data,
+					       guint      action,
+					       GtkWidget *widget);
+static void task_popup_insert_subtask_cb      (gpointer   callback_data,
+					       guint      action,
+					       GtkWidget *widget);
+static void task_popup_remove_task_cb         (gpointer   callback_data,
+					       guint      action,
+					       GtkWidget *widget);
+static void task_popup_edit_task_cb           (gpointer   callback_data,
+					       guint      action,
+					       GtkWidget *widget);
+static void task_popup_edit_task_resources_cb (gpointer   callback_data,
+					       guint      action,
+					       GtkWidget *widget);
+static void task_popup_unlink_task_cb         (gpointer   callback_data,
+					       guint      action,
+					       GtkWidget *widget);
 
-static void task_popup_remove_task_cb (gpointer callback_data, guint action,
-    GtkWidget *widget);
-
-static void task_popup_edit_task_cb (gpointer callback_data, guint action,
-    GtkWidget *widget);
-    
-static void task_popup_unlink_task_cb (gpointer callback_data, guint action,
-    GtkWidget *widget);
 
 #define GIF_CB(x) ((GtkItemFactoryCallback)(x))
 
 static GtkItemFactoryEntry popup_menu_items[] = {
 	{ N_("/_Insert task"), NULL, GIF_CB (task_popup_insert_task_cb),
-	  POPUP_INSERT, "<Item>", NULL
+	  PLANNER_TASK_POPUP_INSERT, "<Item>", NULL
 	},
-	{ N_("/_Insert subtask"), NULL, GIF_CB (task_popup_insert_subtask_cb),
-	  POPUP_SUBTASK, "<Item>", NULL
+	{ N_("/Insert _subtask"), NULL, GIF_CB (task_popup_insert_subtask_cb),
+	  PLANNER_TASK_POPUP_SUBTASK, "<Item>", NULL
 	},
 	{ N_("/_Remove task"), NULL, GIF_CB (task_popup_remove_task_cb),
-	  POPUP_REMOVE, "<StockItem>", GTK_STOCK_DELETE
+	  PLANNER_TASK_POPUP_REMOVE, "<StockItem>", GTK_STOCK_DELETE
 	},
-	{ "/sep1", NULL, 0, POPUP_NONE, "<Separator>"
-    },
+	{ "/sep1", NULL, 0, PLANNER_TASK_POPUP_NONE, "<Separator>"
+	},
 	{ N_("/_Unlink task"), NULL, GIF_CB (task_popup_unlink_task_cb),
-	  POPUP_UNLINK, "<Item>", NULL
+	  PLANNER_TASK_POPUP_UNLINK, "<Item>", NULL
 	},
-	{ "/sep2", NULL, 0, POPUP_NONE, "<Separator>"
+	{ "/sep2", NULL, 0, PLANNER_TASK_POPUP_NONE, "<Separator>"
+	},
+	{ N_("/Assign _resources..."), NULL, GIF_CB (task_popup_edit_task_resources_cb),
+	  PLANNER_TASK_POPUP_EDIT_RESOURCES,  "<Item>",   NULL
 	},
 	{ N_("/_Edit task..."), NULL, GIF_CB (task_popup_edit_task_cb),
-	  POPUP_EDIT, "<Item>", NULL
+	  PLANNER_TASK_POPUP_EDIT_TASK, "<Item>", NULL
 	}
 };
 
@@ -70,54 +79,70 @@ task_tree_item_factory_trans (const char *path, gpointer data)
 }
 
 static void
-task_popup_insert_task_cb (gpointer callback_data, guint action,
-    GtkWidget *widget)
+task_popup_insert_task_cb (gpointer   callback_data,
+			   guint      action,
+			   GtkWidget *widget)
 {
 	planner_task_tree_insert_task (callback_data);
 }
 
 static void
-task_popup_insert_subtask_cb (gpointer callback_data, guint action,
-    GtkWidget *widget)
+task_popup_insert_subtask_cb (gpointer   callback_data,
+			      guint      action,
+			      GtkWidget *widget)
 {
 	planner_task_tree_insert_subtask (callback_data);
 }
 
 static void
-task_popup_remove_task_cb (gpointer callback_data, guint action,
-    GtkWidget *widget)
+task_popup_remove_task_cb (gpointer   callback_data,
+			   guint      action,
+			   GtkWidget *widget)
 {
 	planner_task_tree_remove_task (callback_data);
 }
 
 static void
-task_popup_edit_task_cb (gpointer callback_data, guint action,
-    GtkWidget *widget)
+task_popup_edit_task_cb (gpointer   callback_data,
+			 guint      action,
+			 GtkWidget *widget)
 {
-	planner_task_tree_edit_task (callback_data);
+	planner_task_tree_edit_task (callback_data,
+				     PLANNER_TASK_DIALOG_PAGE_GENERAL);
+}
+
+static void
+task_popup_edit_task_resources_cb (gpointer   callback_data,
+				   guint      action,
+				   GtkWidget *widget)
+{
+	planner_task_tree_edit_task (callback_data,
+				     PLANNER_TASK_DIALOG_PAGE_RESOURCES);
 }
 
 static void
 task_popup_unlink_task_cb (gpointer callback_data, guint action,
-    GtkWidget *widget)
+			   GtkWidget *widget)
 {
 	planner_task_tree_unlink_task (callback_data);
 }
 
 GtkItemFactory *
-task_popup_new (PlannerTaskTree *tree)
+planner_task_popup_new (PlannerTaskTree *tree)
 {
-    GtkItemFactory *item_factory;
-    GtkIconFactory *icon_factory;
-	GtkIconSet *icon_set;
-	GdkPixbuf *pixbuf;
+	GtkItemFactory *item_factory;
+	GtkIconFactory *icon_factory;
+	GtkIconSet     *icon_set;
+	GdkPixbuf      *pixbuf;
 	
-    item_factory = gtk_item_factory_new (GTK_TYPE_MENU, "<main>", NULL);
+	item_factory = gtk_item_factory_new (GTK_TYPE_MENU, "<main>", NULL);
 	gtk_item_factory_set_translate_func (item_factory,
-        task_tree_item_factory_trans, NULL, NULL);
+					     task_tree_item_factory_trans,
+					     NULL, NULL);
 	
 	gtk_item_factory_create_items (item_factory, 
-        G_N_ELEMENTS (popup_menu_items), popup_menu_items, tree);
+				       G_N_ELEMENTS (popup_menu_items),
+				       popup_menu_items, tree);
 
 	/* Add stock icons. */
 	icon_factory = gtk_icon_factory_new ();
@@ -152,7 +177,7 @@ task_popup_new (PlannerTaskTree *tree)
 	icon_set = gtk_icon_set_new_from_pixbuf (pixbuf);
 	g_object_unref (pixbuf);
 	gtk_icon_factory_add (icon_factory, "planner-stock-unindent-task",
-        icon_set);
+			      icon_set);
 
 	pixbuf = gdk_pixbuf_new_from_file (IMAGEDIR "/24_task_up.png", NULL);
 	icon_set = gtk_icon_set_new_from_pixbuf (pixbuf);
@@ -163,7 +188,7 @@ task_popup_new (PlannerTaskTree *tree)
 	icon_set = gtk_icon_set_new_from_pixbuf (pixbuf);
 	g_object_unref (pixbuf);
 	gtk_icon_factory_add (icon_factory, "planner-stock-move-task-down",
-        icon_set);
+			      icon_set);
     
-    return item_factory;
+	return item_factory;
 }

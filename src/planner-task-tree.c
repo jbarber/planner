@@ -47,6 +47,9 @@
 #include "planner-gantt-model.h"
 #include "planner-task-popup.h"
 
+#define WARN_TASK_DIALOGS 10
+#define MAX_TASK_DIALOGS 25
+
 enum {
 	SELECTION_CHANGED,
 	RELATION_ADDED,
@@ -1051,7 +1054,7 @@ task_tree_init (PlannerTaskTree *tree)
 
 	priv->property_to_column = g_hash_table_new (NULL, NULL);
 	
-	priv->popup_factory = task_popup_new (tree);
+	priv->popup_factory = planner_task_popup_new (tree);
 	
 	priv->anchor = NULL;
 }
@@ -1219,13 +1222,15 @@ task_tree_tree_view_button_press_event (GtkTreeView     *tree_view,
 			}
 			
 			gtk_widget_set_sensitive (
-				gtk_item_factory_get_widget_by_action (factory, POPUP_SUBTASK), TRUE);
+				gtk_item_factory_get_widget_by_action (factory, PLANNER_TASK_POPUP_SUBTASK), TRUE);
 			gtk_widget_set_sensitive (
-				gtk_item_factory_get_widget_by_action (factory, POPUP_REMOVE), TRUE);
+				gtk_item_factory_get_widget_by_action (factory, PLANNER_TASK_POPUP_REMOVE), TRUE);
 			gtk_widget_set_sensitive (
-				gtk_item_factory_get_widget_by_action (factory, POPUP_UNLINK), TRUE);
+				gtk_item_factory_get_widget_by_action (factory, PLANNER_TASK_POPUP_UNLINK), TRUE);
 			gtk_widget_set_sensitive (
-				gtk_item_factory_get_widget_by_action (factory, POPUP_EDIT), TRUE);
+				gtk_item_factory_get_widget_by_action (factory, PLANNER_TASK_POPUP_EDIT_RESOURCES), TRUE);
+			gtk_widget_set_sensitive (
+				gtk_item_factory_get_widget_by_action (factory, PLANNER_TASK_POPUP_EDIT_TASK), TRUE);
 			
 			planner_task_tree_set_anchor (tree, path);
 			
@@ -1233,13 +1238,15 @@ task_tree_tree_view_button_press_event (GtkTreeView     *tree_view,
 			gtk_tree_selection_unselect_all (gtk_tree_view_get_selection (tv));
 
 			gtk_widget_set_sensitive (
-				gtk_item_factory_get_widget_by_action (factory, POPUP_SUBTASK), FALSE);
+				gtk_item_factory_get_widget_by_action (factory, PLANNER_TASK_POPUP_SUBTASK), FALSE);
 			gtk_widget_set_sensitive (
-				gtk_item_factory_get_widget_by_action (factory, POPUP_REMOVE), FALSE);
+				gtk_item_factory_get_widget_by_action (factory, PLANNER_TASK_POPUP_REMOVE), FALSE);
 			gtk_widget_set_sensitive (
-				gtk_item_factory_get_widget_by_action (factory, POPUP_UNLINK), FALSE);
+				gtk_item_factory_get_widget_by_action (factory, PLANNER_TASK_POPUP_UNLINK), FALSE);
 			gtk_widget_set_sensitive (
-				gtk_item_factory_get_widget_by_action (factory, POPUP_EDIT), FALSE);
+				gtk_item_factory_get_widget_by_action (factory, PLANNER_TASK_POPUP_EDIT_RESOURCES), FALSE);
+			gtk_widget_set_sensitive (
+				gtk_item_factory_get_widget_by_action (factory, PLANNER_TASK_POPUP_EDIT_TASK), FALSE);
 			
 			planner_task_tree_set_anchor (tree, NULL);
 		}
@@ -2528,12 +2535,15 @@ planner_task_tree_remove_task (PlannerTaskTree *tree)
 }
 
 void
-planner_task_tree_edit_task (PlannerTaskTree *tree)
+planner_task_tree_edit_task (PlannerTaskTree *tree, PlannerTaskDialogPage page)
 {
 	PlannerTaskTreePriv *priv;
 	MrpTask             *task;
-	GList               *list;
+	GList               *list, *l;
 	GtkWidget           *dialog;
+	gint                 i;
+	gint                 result;
+	gboolean             proceed;
 
 	g_return_if_fail (PLANNER_IS_TASK_TREE (tree));
 	
@@ -2544,10 +2554,46 @@ planner_task_tree_edit_task (PlannerTaskTree *tree)
 		return;
 	}
 
-	task = list->data;
+	i = g_list_length (list);
 
-	dialog = planner_task_dialog_new (priv->main_window, task);
-	gtk_widget_show (dialog);
+	proceed = TRUE;
+
+	if (i >= WARN_TASK_DIALOGS ) {
+		/* FIXME: Use ngettext when we've left the stone ages
+		 * (i.e. GNOME 2.0). Also this whole thing with several dialogs
+		 * is just a workaround for now, should replace it with a
+		 * multitask editing dialog for setting a property to the same
+		 * value for all selected tasks. We also need to improve the way
+		 * data is input generally in the views.
+		 */
+		dialog = gtk_message_dialog_new (NULL,
+						 GTK_DIALOG_DESTROY_WITH_PARENT,
+						 GTK_MESSAGE_QUESTION,
+						 GTK_BUTTONS_YES_NO,
+						 _("You are about to open an edit dialog each for %i tasks. "
+						   "Are you sure that you want to do that?"),
+						 i);
+		
+		result = gtk_dialog_run (GTK_DIALOG (dialog));
+		gtk_widget_destroy (dialog);
+		
+		switch (result) {
+		case GTK_RESPONSE_YES:
+			proceed= TRUE;
+			break;
+		default:
+			proceed = FALSE;
+			break;
+		}
+	}
+
+	if (proceed) {
+		for (l = list, i = 0; l && i < MAX_TASK_DIALOGS; l = l->next, i++) {
+			task = l->data;
+			dialog = planner_task_dialog_new (priv->main_window, task, page);
+			gtk_widget_show (dialog);
+		}
+	}
 
 	g_list_free (list);
 }
