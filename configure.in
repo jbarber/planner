@@ -320,7 +320,9 @@ libplanner-1.pc
 ])
 
 
-AC_OUTPUT
+AC_OUTPUT([
+data/planner.desktop.in
+])
 
 echo
 echo "Planner prefix                : $prefix"

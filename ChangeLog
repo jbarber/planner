@@ -1,3 +1,13 @@
+2004-11-25  Christoffer Olsen  <co@deworks.net>
+
+	* configure.in: Added data/planner.desktop.in to AC_OUTPUT
+	* data/planner.desktop.in: Moved to data/planner.desktop.in.in
+	* data/planner.desktop.in.in: Added Bugzilla headers
+	* po/POTFILES.in: References data/planner.desktop.in.in instead
+
+	- Added Bug Buddy support, filing Planner bugs should be
+	automagical now.
+
 2004-11-09  Alvaro del Castillo  <acs@barrapunto.com>
 
 	* docs/sql/README.sql: use template1 as connection database.
