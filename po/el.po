@@ -7,14 +7,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: el\n"
-"POT-Creation-Date: 2003-12-01 23:08+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-12-04 16:40+0100\n"
 "PO-Revision-Date: 2003-10-28 18:17+0200\n"
 "Last-Translator: Kostas Papadimas <pkst@gnome.org>\n"
 "Language-Team: Greek <nls@tux.hellug.gr>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Report-Msgid-Bugs-To: \n"
 "X-Generator: KBabel 1.0\n"
 
 #: data/planner.desktop.in.h:1
@@ -284,6 +284,7 @@ msgid "Select all tasks"
 msgstr "Επιλογή όλων των έργων"
 
 #: data/ui/gantt-view.ui.h:14
+#, fuzzy
 msgid "Test"
 msgstr "Δοκιμή"
 
@@ -472,8 +473,9 @@ msgid "Custom working time"
 msgstr "Προσαρμοσμένος εργάσιμος χρόνος"
 
 #: data/glade/calendar-dialog.glade.h:16
+#, fuzzy
 msgid "Day type:"
-msgstr "Τύπος ημέρας:"
+msgstr "Νέος τύπος ημέρας"
 
 #: data/glade/calendar-dialog.glade.h:17
 msgid "Default Week"
@@ -548,6 +550,7 @@ msgid "Working time..."
 msgstr "Εργάσιμος χρόνος..."
 
 #: data/glade/calendar-dialog.glade.h:35
+#, fuzzy
 msgid "_Derive from a calendar"
 msgstr "Π_ροέλευση από ημερολόγιο"
 
@@ -786,6 +789,7 @@ msgid "Resources"
 msgstr "Πόροι"
 
 #: data/glade/task-dialog.glade.h:13
+#, fuzzy
 msgid "_Duration:"
 msgstr "_Διάρκεια:"
 
@@ -813,6 +817,171 @@ msgstr "Εισαγωγή έργου"
 #: data/glade/task-input-dialog.glade.h:4
 msgid "Work:"
 msgstr "Εργασία:"
+
+#: libplanner/mrp-project.c:441 src/planner-group-dialog.c:411
+msgid "Default"
+msgstr "Εξ ορισμού"
+
+#: libplanner/mrp-project.c:749
+#, c-format
+msgid "Couldn't find a suitable file module for loading '%s'"
+msgstr ""
+"Δεν είναι δυνατή η εύρεση κατάλληλης μονάδας αρχείου για την φόρτωση '%s'"
+
+#: libplanner/mrp-project.c:770 libplanner/mrp-project.c:1034
+msgid "No support for SQL storage built into this version of MrProject."
+msgstr ""
+"Δεν έχει γίνει built η υποστήριξη για SQL storage σε αυτή την έκδοση του "
+"MrProject."
+
+#: libplanner/mrp-project.c:807
+#, fuzzy
+msgid "Invalid URI."
+msgstr "Μη έγκυρο Unicode"
+
+#: libplanner/mrp-project.c:928
+#, c-format
+msgid "Unable to find file writer identified by '%s'"
+msgstr "Αδυναμία εύρεσης  file writer identified από '%s'"
+
+#: libplanner/mrp-project.c:991
+msgid "Couldn't find a suitable file module for loading project"
+msgstr ""
+"Δεν είναι δυνατή η εύρεση κατάλληλης μονάδας αρχείου για την φόρτωση της "
+"εργασίας"
+
+#: libplanner/mrp-property.c:365
+#, fuzzy
+msgid "Text"
+msgstr "Δοκιμή"
+
+#: libplanner/mrp-property.c:367
+msgid "String list"
+msgstr "Λίστα αλφαριθμητικού"
+
+#: libplanner/mrp-property.c:369
+#, fuzzy
+msgid "Integer number"
+msgstr "Όνομα διαχειριστή"
+
+#: libplanner/mrp-property.c:371
+msgid "Floating-point number"
+msgstr "Κινητός δεκαδικός αριθμός"
+
+#: libplanner/mrp-property.c:373
+#, fuzzy
+msgid "Date"
+msgstr "Τύπος ημέρας:"
+
+#: libplanner/mrp-property.c:375
+#, fuzzy
+msgid "Duration"
+msgstr "_Διάρκεια:"
+
+#: libplanner/mrp-property.c:377 src/planner-task-view.c:232
+msgid "Cost"
+msgstr "Κόστος"
+
+#: libplanner/mrp-property.c:380 src/planner-project-properties.c:505
+msgid "None"
+msgstr "Κανένα"
+
+#: libplanner/mrp-task-manager.c:1769
+msgid "Can not add a predecessor relation between a task and its ancestor."
+msgstr ""
+"Δεν είναι δυνατή η προσθήκη προγονικής σχέσης μεταξύ μιας εργασίας και του "
+"προγόνου της."
+
+#: libplanner/mrp-task-manager.c:1778 libplanner/mrp-task-manager.c:1786
+msgid "Can not add a predecessor, because it would result in a loop."
+msgstr ""
+"Δεν είναι δυνατή η προσθήκη προγόνου, γιατί θα  έχει αποτέλεσμα βρόγχο "
+"(loop)."
+
+#: libplanner/mrp-task-manager.c:1821
+msgid "Can not move the task, since it would result in a loop."
+msgstr ""
+"Δεν είναι δυνατή η μετακίνηση έργου, μιας και θα έχει σαν αποτέλεσμα ένα "
+"βρόγχο (loop)."
+
+#: libplanner/mrp-task.c:1016
+msgid ""
+"Could not add a predecessor relation, because the tasks are already related."
+msgstr ""
+"Δεν είναι δυνατή η προσθήκη προγονικής σχέσης, επειδή τα έργα σχετίζονται ήδη"
+
+#: libplanner/mrp-day.c:54
+#, fuzzy
+msgid "Working"
+msgstr "Εργασία"
+
+#: libplanner/mrp-day.c:55
+msgid "A default working day"
+msgstr "Μια προκαθορισμένη εργάσιμη μέρα"
+
+#: libplanner/mrp-day.c:57
+#, fuzzy
+msgid "Nonworking"
+msgstr "Όχι εργάσιμος χρόνος"
+
+#: libplanner/mrp-day.c:58
+msgid "A default non working day"
+msgstr "Μια προκαθορισμένη μη εργάσιμη μέρα"
+
+#: libplanner/mrp-day.c:60
+msgid "Use base"
+msgstr "Χρήση βάσης"
+
+#: libplanner/mrp-day.c:61
+#, fuzzy
+msgid "Use day from base calendar"
+msgstr "Π_ροέλευση από ημερολόγιο"
+
+#: libplanner/mrp-parser.c:1043 libplanner/mrp-parser.c:1138
+#, fuzzy
+msgid "Could not create XML tree"
+msgstr "Αδυναμία δημιουργίας διαλόγου ιδιοτήτων."
+
+#: libplanner/mrp-parser.c:1104
+#, fuzzy
+msgid "Could not write XML file"
+msgstr "Αδυναμία ανοίγματος αρχείου πρόσθετων λειτουργιών  '%s'\n"
+
+#. Give up.
+#: libplanner/mrp-sql.c:229 src/planner-sql-plugin.c:127
+msgid "Invalid Unicode"
+msgstr "Μη έγκυρο Unicode"
+
+#: libplanner/mrp-sql.c:2205
+#, c-format
+msgid ""
+"The project '%s' has been changed by the user '%s' since you opened it. Do "
+"you want to save anyway?"
+msgstr ""
+"Η εργασία  '%s' έχει αλλάξει από τον χρήστη  '%s' απλο τότε που την "
+"ανοίξατε. Θέλετε να την αποθηκεύσετε οπωσδήποτε?"
+
+#: libplanner/mrp-sql.c:3443
+#, fuzzy, c-format
+msgid ""
+"Connection to database '%s' failed.\n"
+"%s"
+msgstr ""
+"Η σύνδεση στην βάση δεδομένων '%s' απέτυχε:\n"
+"%s"
+
+#: libplanner/mrp-storage-sql.c:205
+msgid "Invalid SQL URI (must start with 'sql://' and contain '#')."
+msgstr ""
+"Μη έγκυρο SQL URI (θα πρέπει να ξεκινάει με  'sql://' και να περιέχει '#')."
+
+#: libplanner/mrp-storage-sql.c:274
+msgid "Invalid SQL URI (invalid project id)."
+msgstr "Μη έγκυρο SQL URI (μη έγκυρο id εργασίας)."
+
+#: libplanner/mrp-storage-sql.c:282
+msgid "Invalid SQL URI (no database name specified)."
+msgstr "Μη έγκυρο SQL URI (δεν καθορίστηκε όνομα βάσης δεδομένων)"
 
 #: src/planner-application.c:117
 msgid "Edit"
@@ -934,9 +1103,9 @@ msgstr ""
 "αρχεία."
 
 #: src/planner-plugin-loader.c:40
-#, c-format
+#, fuzzy, c-format
 msgid "Could not open plugin file '%s'\n"
-msgstr "Αδυναμία ανοίγματος αρχείου πρόσθετων λειτουργιών  '%s'\n"
+msgstr "Αδυναμία ανοίγματος προβολής αρχείου πρόσθετων λειτουργιών  '%s'\n"
 
 #: src/planner-view-loader.c:40
 #, c-format
@@ -1004,8 +1173,9 @@ msgid "Sunday"
 msgstr "Κυριακή"
 
 #: src/planner-default-week-dialog.c:266
+#, fuzzy
 msgid "No working time"
-msgstr "Όχι εργάσιμος χρόνος"
+msgstr "Προσαρμοσμένος εργάσιμος χρόνος"
 
 #: src/planner-default-week-dialog.c:277 src/planner-default-week-dialog.c:281
 msgid "%H:%M"
@@ -1019,8 +1189,9 @@ msgid "Name"
 msgstr "Όνομα"
 
 #: src/planner-group-dialog.c:393
+#, fuzzy
 msgid "Manager name"
-msgstr "Όνομα διαχειριστή"
+msgstr "Τηλέφωνο διαχειριστή"
 
 #: src/planner-group-dialog.c:399
 msgid "Manager phone"
@@ -1030,17 +1201,9 @@ msgstr "Τηλέφωνο διαχειριστή"
 msgid "Manager email"
 msgstr "email διαχειριστή"
 
-#: src/planner-group-dialog.c:411
-msgid "Default"
-msgstr "Εξ ορισμού"
-
 #: src/planner-project-properties.c:146
 msgid "Select a calendar to use for this project:"
 msgstr "Επιλέξτε ένα ημερολόγιο για χρήση σε αυτή την εργασία:"
-
-#: src/planner-project-properties.c:505
-msgid "None"
-msgstr "Κανένα"
 
 #: src/planner-project-properties.c:606
 msgid "Property"
@@ -1061,6 +1224,7 @@ msgid "Do you really want to remove the property '%s' from the project?"
 msgstr "Θέλετε πραγματικά να αφαιρέσετε την ιδιότητα '%s' από την εργασία?"
 
 #: src/planner-project-properties.c:1194
+#, fuzzy
 msgid "Could not create properties dialog."
 msgstr "Αδυναμία δημιουργίας διαλόγου ιδιοτήτων."
 
@@ -1113,8 +1277,11 @@ msgstr "Επεξεργασία ιδιοτήτων πόρου"
 #: src/planner-resource-dialog.c:1101 src/planner-task-view.c:230
 #: src/planner-gantt-print.c:198 src/planner-resource-view.c:629
 #: src/planner-resource-view.c:645 src/planner-resource-view.c:1187
+#, fuzzy
 msgid "Work"
-msgstr "Εργασία"
+msgstr ""
+"\n"
+"Εργασία"
 
 #: src/planner-resource-dialog.c:1102 src/planner-resource-view.c:632
 #: src/planner-resource-view.c:646 src/planner-resource-view.c:1188
@@ -1182,13 +1349,8 @@ msgstr ""
 "\"%s\" είναι ένας κατάλογος.\n"
 "Εισάγετε ένα όνομα αρχείου και προσπαθήστε ξανά."
 
-#. Give up.
-#: src/planner-sql-plugin.c:127
-msgid "Invalid Unicode"
-msgstr "Μη έγκυρο Unicode"
-
 #: src/planner-sql-plugin.c:269
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Connection to database '%s' failed:\n"
 "%s"
@@ -1449,10 +1611,6 @@ msgstr "Τέλος"
 #: src/planner-task-view.c:231
 msgid "Slack"
 msgstr "Ασυντόνιστο"
-
-#: src/planner-task-view.c:232
-msgid "Cost"
-msgstr "Κόστος"
 
 #: src/planner-task-view.c:438
 msgid "Edit custom task properties"

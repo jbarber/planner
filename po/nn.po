@@ -5,7 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mrproject 0.4.1\n"
-"POT-Creation-Date: 2003-12-01 23:08+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-12-04 16:40+0100\n"
 "PO-Revision-Date: 2001-12-17 06:51+0100\n"
 "Last-Translator: Roy-Magne Mo <rmo@sunnmore.net>\n"
 "Language-Team: Norwegian/Nynorsk <nn@li.org>\n"
@@ -221,8 +222,9 @@ msgid "_Project"
 msgstr "MrProject"
 
 #: data/ui/main-window.ui.h:43
+#, fuzzy
 msgid "_Quit"
-msgstr ""
+msgstr "R_ediger"
 
 #: data/ui/main-window.ui.h:44
 msgid "_Redo"
@@ -240,9 +242,11 @@ msgstr "_Angre"
 msgid "_User Guide"
 msgstr ""
 
+# gnome-terminal/gnome-terminal.c:1586
 #: data/ui/main-window.ui.h:48
+#, fuzzy
 msgid "_View"
-msgstr ""
+msgstr "_Fil"
 
 #: data/ui/gantt-view.ui.h:1 data/ui/task-view.ui.h:1
 #, fuzzy
@@ -397,8 +401,9 @@ msgid "Export to HTML"
 msgstr ""
 
 #: data/ui/sql-plugin.ui.h:1
+#, fuzzy
 msgid "Open from Database..."
-msgstr ""
+msgstr "L_agre som ..."
 
 #: data/ui/sql-plugin.ui.h:2
 #, fuzzy
@@ -481,9 +486,12 @@ msgstr "         "
 msgid "-"
 msgstr ""
 
+# applets/gen_util/mailcheck.c:1522
+# applets/gen_util/mailcheck.c:1522
 #: data/glade/calendar-dialog.glade.h:6
+#, fuzzy
 msgid "<b>Calendar:</b>"
-msgstr ""
+msgstr "Tøm"
 
 #: data/glade/calendar-dialog.glade.h:7
 msgid "<b>Day types</b>"
@@ -501,18 +509,23 @@ msgstr ""
 msgid "Apply"
 msgstr ""
 
+# panel/menu.c:4751 panel/panel_config.c:1566
 #: data/glade/calendar-dialog.glade.h:11
+#, fuzzy
 msgid "C_opy an existing calendar"
-msgstr ""
+msgstr "Kalender"
 
 #: data/glade/calendar-dialog.glade.h:12
 #, fuzzy
 msgid "C_reate"
 msgstr "_Tøm"
 
+# applets/gen_util/mailcheck.c:1522
+# applets/gen_util/mailcheck.c:1522
 #: data/glade/calendar-dialog.glade.h:13
+#, fuzzy
 msgid "Calendar Editor"
-msgstr ""
+msgstr "Tøm"
 
 # panel/menu.c:4751 panel/panel_config.c:1566
 #: data/glade/calendar-dialog.glade.h:14
@@ -527,8 +540,9 @@ msgid "Custom working time"
 msgstr "Eigenskapar for prosjekt"
 
 #: data/glade/calendar-dialog.glade.h:16
+#, fuzzy
 msgid "Day type:"
-msgstr ""
+msgstr "Gå til dato"
 
 #: data/glade/calendar-dialog.glade.h:17
 #, fuzzy
@@ -544,13 +558,16 @@ msgstr "Standard"
 msgid "Edit Day Types"
 msgstr ""
 
+# applets/gen_util/printer.c:308
 #: data/glade/calendar-dialog.glade.h:20
+#, fuzzy
 msgid "Edit Working Time"
-msgstr ""
+msgstr "Eigenskapar for prosjekt"
 
 #: data/glade/calendar-dialog.glade.h:21
+#, fuzzy
 msgid "Enter the name of the new day type:"
-msgstr ""
+msgstr "Gå til byrjinga av prosjektet"
 
 # panel/menu.c:4751 panel/panel_config.c:1566
 #: data/glade/calendar-dialog.glade.h:22
@@ -597,22 +614,28 @@ msgstr ""
 msgid "To:"
 msgstr ""
 
+# panel/menu.c:4751 panel/panel_config.c:1566
 #: data/glade/calendar-dialog.glade.h:32
+#, fuzzy
 msgid "Use working time from derived calendar"
-msgstr ""
+msgstr "Kalender"
 
 #: data/glade/calendar-dialog.glade.h:33
 #, fuzzy
 msgid "Week day:"
 msgstr "Veker"
 
+# applets/gen_util/printer.c:308
 #: data/glade/calendar-dialog.glade.h:34
+#, fuzzy
 msgid "Working time..."
-msgstr ""
+msgstr "Eigenskapar for prosjekt"
 
+# panel/menu.c:4751 panel/panel_config.c:1566
 #: data/glade/calendar-dialog.glade.h:35
+#, fuzzy
 msgid "_Derive from a calendar"
-msgstr ""
+msgstr "Kalender"
 
 #: data/glade/calendar-dialog.glade.h:36
 msgid "_Name of the new calendar:"
@@ -649,8 +672,9 @@ msgid "Description: "
 msgstr ""
 
 #: data/glade/new-property.glade.h:3
+#, fuzzy
 msgid "Label: "
-msgstr ""
+msgstr "Namn:"
 
 #: data/glade/new-property.glade.h:4
 #, fuzzy
@@ -669,8 +693,9 @@ msgid "Type: "
 msgstr "Type"
 
 #: data/glade/project-properties.glade.h:2
+#, fuzzy
 msgid "<b>Project phases</b>"
-msgstr ""
+msgstr "Prosjekt_namn:"
 
 # applets/gen_util/mailcheck.c:1522
 # applets/gen_util/mailcheck.c:1522
@@ -830,12 +855,14 @@ msgid "<b>Open Database</b>"
 msgstr ""
 
 #: data/glade/sql.glade.h:4
+#, fuzzy
 msgid "Database:"
-msgstr ""
+msgstr "Lagre som"
 
 #: data/glade/sql.glade.h:5
+#, fuzzy
 msgid "Open Database"
-msgstr ""
+msgstr "Lagre som"
 
 #: data/glade/sql.glade.h:6
 msgid "Password:"
@@ -844,7 +871,7 @@ msgstr ""
 #: data/glade/sql.glade.h:7
 #, fuzzy
 msgid "Select a Project"
-msgstr "(Tomt prosjekt)"
+msgstr "Lag eit nytt prosjekt"
 
 # gmenu/edit.c:325 gsm/session-properties.c:173 panel/launcher.c:556
 # panel/menu.c:1396 panel/menu.c:1507
@@ -885,10 +912,10 @@ msgstr "_Prioritet:"
 msgid "Predecessors"
 msgstr ""
 
-# applets/tasklist/tasklist_menu.c:258
 #: data/glade/task-dialog.glade.h:12 src/planner-resource-view.c:342
+#, fuzzy
 msgid "Resources"
-msgstr "Ressursar"
+msgstr "_Ressurs"
 
 #: data/glade/task-dialog.glade.h:13
 #, fuzzy
@@ -923,6 +950,157 @@ msgstr "Sett inn deloppgåve"
 #, fuzzy
 msgid "Work:"
 msgstr "Arbeid"
+
+#: libplanner/mrp-project.c:441 src/planner-group-dialog.c:411
+msgid "Default"
+msgstr "Standard"
+
+#: libplanner/mrp-project.c:749
+#, fuzzy, c-format
+msgid "Couldn't find a suitable file module for loading '%s'"
+msgstr "Klarte ikkje å finne ein fil lastar for dette formatet."
+
+#: libplanner/mrp-project.c:770 libplanner/mrp-project.c:1034
+msgid "No support for SQL storage built into this version of MrProject."
+msgstr ""
+
+#: libplanner/mrp-project.c:807
+msgid "Invalid URI."
+msgstr ""
+
+#: libplanner/mrp-project.c:928
+#, c-format
+msgid "Unable to find file writer identified by '%s'"
+msgstr ""
+
+#: libplanner/mrp-project.c:991
+#, fuzzy
+msgid "Couldn't find a suitable file module for loading project"
+msgstr "Klarte ikkje å finne ein fil lastar for dette formatet."
+
+#: libplanner/mrp-property.c:365
+#, fuzzy
+msgid "Text"
+msgstr "Nullstill"
+
+#: libplanner/mrp-property.c:367
+msgid "String list"
+msgstr ""
+
+#: libplanner/mrp-property.c:369
+#, fuzzy
+msgid "Integer number"
+msgstr "Sjef"
+
+#: libplanner/mrp-property.c:371
+msgid "Floating-point number"
+msgstr ""
+
+#: libplanner/mrp-property.c:373
+#, fuzzy
+msgid "Date"
+msgstr "Gå til dato"
+
+#: libplanner/mrp-property.c:375
+#, fuzzy
+msgid "Duration"
+msgstr "Lengd"
+
+#: libplanner/mrp-property.c:377 src/planner-task-view.c:232
+msgid "Cost"
+msgstr ""
+
+#: libplanner/mrp-property.c:380 src/planner-project-properties.c:505
+#, fuzzy
+msgid "None"
+msgstr "Namn"
+
+#: libplanner/mrp-task-manager.c:1769
+msgid "Can not add a predecessor relation between a task and its ancestor."
+msgstr ""
+
+#: libplanner/mrp-task-manager.c:1778 libplanner/mrp-task-manager.c:1786
+msgid "Can not add a predecessor, because it would result in a loop."
+msgstr ""
+
+#: libplanner/mrp-task-manager.c:1821
+msgid "Can not move the task, since it would result in a loop."
+msgstr ""
+
+#: libplanner/mrp-task.c:1016
+msgid ""
+"Could not add a predecessor relation, because the tasks are already related."
+msgstr ""
+
+#: libplanner/mrp-day.c:54
+#, fuzzy
+msgid "Working"
+msgstr "Arbeid"
+
+#: libplanner/mrp-day.c:55
+msgid "A default working day"
+msgstr ""
+
+#: libplanner/mrp-day.c:57
+msgid "Nonworking"
+msgstr ""
+
+#: libplanner/mrp-day.c:58
+msgid "A default non working day"
+msgstr ""
+
+# panel/menu.c:4751 panel/panel_config.c:1566
+#: libplanner/mrp-day.c:60
+#, fuzzy
+msgid "Use base"
+msgstr "Kalender"
+
+# panel/menu.c:4751 panel/panel_config.c:1566
+#: libplanner/mrp-day.c:61
+#, fuzzy
+msgid "Use day from base calendar"
+msgstr "Kalender"
+
+#: libplanner/mrp-parser.c:1043 libplanner/mrp-parser.c:1138
+#, fuzzy
+msgid "Could not create XML tree"
+msgstr "Klarte ikkje å opprette forstørringsdialog."
+
+#: libplanner/mrp-parser.c:1104
+#, fuzzy
+msgid "Could not write XML file"
+msgstr "Klarte ikkje å opne prosjekt."
+
+#. Give up.
+#: libplanner/mrp-sql.c:229 src/planner-sql-plugin.c:127
+msgid "Invalid Unicode"
+msgstr ""
+
+#: libplanner/mrp-sql.c:2205
+#, c-format
+msgid ""
+"The project '%s' has been changed by the user '%s' since you opened it. Do "
+"you want to save anyway?"
+msgstr ""
+
+#: libplanner/mrp-sql.c:3443
+#, c-format
+msgid ""
+"Connection to database '%s' failed.\n"
+"%s"
+msgstr ""
+
+#: libplanner/mrp-storage-sql.c:205
+msgid "Invalid SQL URI (must start with 'sql://' and contain '#')."
+msgstr ""
+
+#: libplanner/mrp-storage-sql.c:274
+msgid "Invalid SQL URI (invalid project id)."
+msgstr ""
+
+#: libplanner/mrp-storage-sql.c:282
+msgid "Invalid SQL URI (no database name specified)."
+msgstr ""
 
 #: src/planner-application.c:117
 #, fuzzy
@@ -1030,7 +1208,7 @@ msgstr ""
 #: src/planner-plugin-loader.c:40
 #, fuzzy, c-format
 msgid "Could not open plugin file '%s'\n"
-msgstr "Klarte ikkje å opne prosjekt."
+msgstr "Klarte ikkje å opprette forstørringsdialog."
 
 #: src/planner-view-loader.c:40
 #, c-format
@@ -1080,8 +1258,9 @@ msgid "Tuesday"
 msgstr "I dag"
 
 #: src/planner-default-week-dialog.c:42
+#, fuzzy
 msgid "Wednesday"
-msgstr ""
+msgstr "Veker"
 
 #: src/planner-default-week-dialog.c:43
 #, fuzzy
@@ -1094,17 +1273,20 @@ msgid "Friday"
 msgstr "dag"
 
 #: src/planner-default-week-dialog.c:45
+#, fuzzy
 msgid "Saturday"
-msgstr ""
+msgstr "dag"
 
 #: src/planner-default-week-dialog.c:46
 #, fuzzy
 msgid "Sunday"
 msgstr "dag"
 
+# applets/gen_util/printer.c:308
 #: src/planner-default-week-dialog.c:266
+#, fuzzy
 msgid "No working time"
-msgstr ""
+msgstr "Eigenskapar for prosjekt"
 
 #: src/planner-default-week-dialog.c:277 src/planner-default-week-dialog.c:281
 msgid "%H:%M"
@@ -1120,7 +1302,7 @@ msgstr "Namn"
 #: src/planner-group-dialog.c:393
 #, fuzzy
 msgid "Manager name"
-msgstr "Sjef"
+msgstr "_Sjef:"
 
 #: src/planner-group-dialog.c:399
 #, fuzzy
@@ -1132,18 +1314,9 @@ msgstr "Sjef"
 msgid "Manager email"
 msgstr "Sjef"
 
-#: src/planner-group-dialog.c:411
-msgid "Default"
-msgstr "Standard"
-
 #: src/planner-project-properties.c:146
 msgid "Select a calendar to use for this project:"
 msgstr ""
-
-#: src/planner-project-properties.c:505
-#, fuzzy
-msgid "None"
-msgstr "Namn"
 
 #: src/planner-project-properties.c:606
 #, fuzzy
@@ -1189,14 +1362,16 @@ msgid "Select views"
 msgstr "Vald oppgåve"
 
 #: src/planner-print-dialog.c:74
+#, fuzzy
 msgid "Select the views to print:"
-msgstr ""
+msgstr "Vald oppgåve"
 
 #. Put "no group" at the top.
 #: src/planner-resource-dialog.c:248 src/planner-resource-input-dialog.c:96
 #: src/planner-resource-view.c:1375
+#, fuzzy
 msgid "(None)"
-msgstr ""
+msgstr "Namn"
 
 #: src/planner-resource-dialog.c:258 src/planner-resource-input-dialog.c:106
 #: src/planner-task-dialog.c:249
@@ -1227,6 +1402,7 @@ msgstr "Endre eigenskapar for prosjektet"
 #: src/planner-resource-dialog.c:1101 src/planner-task-view.c:230
 #: src/planner-gantt-print.c:198 src/planner-resource-view.c:629
 #: src/planner-resource-view.c:645 src/planner-resource-view.c:1187
+#, fuzzy
 msgid "Work"
 msgstr "Arbeid"
 
@@ -1295,11 +1471,6 @@ msgid ""
 "Enter a filename and try again."
 msgstr ""
 
-#. Give up.
-#: src/planner-sql-plugin.c:127
-msgid "Invalid Unicode"
-msgstr ""
-
 #: src/planner-sql-plugin.c:269
 #, c-format
 msgid ""
@@ -1313,8 +1484,9 @@ msgid "Project"
 msgstr "MrProject"
 
 #: src/planner-sql-plugin.c:466
+#, fuzzy
 msgid "Open from Database"
-msgstr ""
+msgstr "Lagre som"
 
 #: src/planner-sql-plugin.c:573
 #, fuzzy
@@ -1332,9 +1504,9 @@ msgid "%dd"
 msgstr "Legg til"
 
 #: src/planner-format.c:147
-#, c-format
+#, fuzzy, c-format
 msgid "%dh"
-msgstr ""
+msgstr "%d %s"
 
 #: src/planner-format.c:171
 #, fuzzy, c-format
@@ -1413,9 +1585,9 @@ msgstr "Arbeid"
 
 #. i18n: Short "Week", preferably 2 letters.
 #: src/planner-scale-utils.c:325
-#, c-format
+#, fuzzy, c-format
 msgid "Wk %d"
-msgstr ""
+msgstr "Veker"
 
 #: src/planner-scale-utils.c:329
 #, fuzzy, c-format
@@ -1424,9 +1596,9 @@ msgstr "Veker"
 
 #. i18n: Week, year.
 #: src/planner-scale-utils.c:334
-#, c-format
+#, fuzzy, c-format
 msgid "Week %d, %d"
-msgstr ""
+msgstr "Veker"
 
 #. i18n: Short "Quarter", preferrably 1 letter.
 #: src/planner-scale-utils.c:365
@@ -1454,9 +1626,9 @@ msgstr ""
 
 #. i18n: Year, short "Half year", prefferably 1 letter.
 #: src/planner-scale-utils.c:391
-#, c-format
+#, fuzzy, c-format
 msgid "%04d, H%d"
-msgstr ""
+msgstr "%d %s"
 
 #: src/planner-task-tree.c:184
 #, fuzzy
@@ -1523,8 +1695,9 @@ msgstr "d"
 
 #. day unit variant accepted in input
 #: src/planner-task-tree.c:2119
+#, fuzzy
 msgid "day"
-msgstr "dag"
+msgstr "dagar"
 
 #. day unit variant accepted in input
 #: src/planner-task-tree.c:2121
@@ -1541,10 +1714,12 @@ msgstr "time"
 msgid "hours"
 msgstr "timar"
 
+# applets/gen_util/mailcheck.c:1217
 #. hour unit variant accepted in input
 #: src/planner-task-tree.c:2124
+#, fuzzy
 msgid "min"
-msgstr ""
+msgstr "minutt"
 
 # applets/gen_util/mailcheck.c:1217
 #. minute unit variant accepted in input
@@ -1570,8 +1745,9 @@ msgid "_Tasks"
 msgstr "_Oppgåve"
 
 #: src/planner-task-view.c:228
+#, fuzzy
 msgid "Start"
-msgstr "Start"
+msgstr "_Start:"
 
 #: src/planner-task-view.c:229
 msgid "Finish"
@@ -1579,10 +1755,6 @@ msgstr ""
 
 #: src/planner-task-view.c:231
 msgid "Slack"
-msgstr ""
-
-#: src/planner-task-view.c:232
-msgid "Cost"
 msgstr ""
 
 #: src/planner-task-view.c:438
@@ -1624,64 +1796,72 @@ msgstr "Gruppe"
 msgid "Email"
 msgstr "E-post"
 
-#~ msgid "Contribute to MrProject"
-#~ msgstr "Medverkande til MrProject:"
+#, fuzzy
+#~ msgid "May"
+#~ msgstr "dag"
 
 #, fuzzy
-#~ msgid "MrProject Project Management Tool"
-#~ msgstr "MrProject prosjektmotor"
+#~ msgid "Mon"
+#~ msgstr "Månad"
 
 #, fuzzy
-#~ msgid "About"
-#~ msgstr "_Om ..."
-
-# applets/gen_util/mailcheck.c:1522
-# applets/gen_util/mailcheck.c:1522
-#, fuzzy
-#~ msgid "Close"
-#~ msgstr "L_ukk"
+#~ msgid "Sat"
+#~ msgstr "Start"
 
 #, fuzzy
-#~ msgid "Edit project phases"
-#~ msgstr "Endre eigenskapar for prosjektet"
-
-#~ msgid "Print the current file"
-#~ msgstr "Skriv ut aktiv fil"
-
-#~ msgid "Redo"
-#~ msgstr "Gjer om"
+#~ msgid "Group Name"
+#~ msgstr "Gruppenamn: "
 
 #, fuzzy
-#~ msgid "Save _As"
-#~ msgstr "Lagre som"
-
-#~ msgid "Undo"
-#~ msgstr "Angre"
-
-# panel/menu.c:4751 panel/panel_config.c:1566
-#, fuzzy
-#~ msgid "Use calendar"
-#~ msgstr "Kalender"
+#~ msgid "Group Manager Name"
+#~ msgstr "Sjef"
 
 #, fuzzy
-#~ msgid "_Open"
-#~ msgstr "Opne"
+#~ msgid "The start date of the project"
+#~ msgstr "H_eile prosjektet"
 
 #, fuzzy
-#~ msgid "(C) 2001 - 2002 CodeFactory AB"
-#~ msgstr "Opphavsrett © 2000-2001 CodeFactory AB"
+#~ msgid "Default Group"
+#~ msgstr "Sett som standardgruppe"
 
-# panel/menu.c:1668
-#, fuzzy
-#~ msgid "Remove task"
-#~ msgstr "Fjern denne oppgåva"
+# gsm/session-properties-capplet.c:226
+#~ msgid "Resource Name"
+#~ msgstr "Ressursnamn"
 
-# panel/menu.c:1668
+# applets/tasklist/tasklist_menu.c:258
 #, fuzzy
-#~ msgid "Remove resource"
-#~ msgstr "Fjern denne ressursen"
+#~ msgid "Resource Group"
+#~ msgstr "Ressursar"
+
+# gsm/session-properties-capplet.c:226
+#, fuzzy
+#~ msgid "Resource Type"
+#~ msgstr "Ressursnamn"
+
+# applets/tasklist/tasklist_menu.c:258
+#, fuzzy
+#~ msgid "Resource Units"
+#~ msgstr "Ressursar"
+
+# gsm/session-properties-capplet.c:226
+#, fuzzy
+#~ msgid "Resource Email"
+#~ msgstr "Ressursnamn"
+
+# gsm/session-properties-capplet.c:226
+#, fuzzy
+#~ msgid "Resource note"
+#~ msgstr "Ressursnamn"
+
+#, fuzzy
+#~ msgid "Allocated resource"
+#~ msgstr "Vald ressurs: %s"
 
 #~ msgid "MrProject project"
+#~ msgstr "MrProject prosjekt"
+
+#, fuzzy
+#~ msgid "MrProject project engine"
 #~ msgstr "MrProject prosjekt"
 
 #~ msgid "MrProject project factory"
@@ -1715,11 +1895,15 @@ msgstr "E-post"
 #~ msgid "File not found."
 #~ msgstr "Fann ikkje fil."
 
-#~ msgid "Could not find a file loader for this format."
-#~ msgstr "Klarte ikkje å finne ein fil lastar for dette formatet."
-
 #~ msgid "Save Project as"
 #~ msgstr "Lagre prosjekt som"
+
+#, fuzzy
+#~ msgid "Copyright (C) 2000-2001 CodeFactory AB"
+#~ msgstr "Opphavsrett © 2000-2001 CodeFactory AB"
+
+#~ msgid "Contribute to MrProject"
+#~ msgstr "Medverkande til MrProject:"
 
 #~ msgid ""
 #~ "You have unsaved information.\n"
@@ -1733,6 +1917,10 @@ msgstr "E-post"
 
 #~ msgid "Don't quit"
 #~ msgstr "Ikkje avslutt"
+
+#, fuzzy
+#~ msgid "(Blank Project)"
+#~ msgstr "(Tomt prosjekt)"
 
 #~ msgid "Choose a template:"
 #~ msgstr "Vel ein mal:"
@@ -1772,6 +1960,14 @@ msgstr "E-post"
 #~ msgid "Delete task"
 #~ msgstr "Slett oppgåve"
 
+#, fuzzy
+#~ msgid "%d %s"
+#~ msgstr "%d. %b"
+
+#, fuzzy
+#~ msgid "1 day"
+#~ msgstr "dag"
+
 #~ msgid "%d tasks selected"
 #~ msgstr "%d oppgåver vald"
 
@@ -1792,6 +1988,10 @@ msgstr "E-post"
 
 #~ msgid "Months"
 #~ msgstr "Månader"
+
+#, fuzzy
+#~ msgid "Weeks"
+#~ msgstr "veker"
 
 #~ msgid "Days"
 #~ msgstr "Dagar"
@@ -1818,6 +2018,10 @@ msgstr "E-post"
 
 #~ msgid "Double click on a date to go there"
 #~ msgstr "Dobbelklikk på ein dato for å gå dit"
+
+#, fuzzy
+#~ msgid "Selected task"
+#~ msgstr "_Valde oppgåver"
 
 #~ msgid "Go to"
 #~ msgstr "Gå til"
@@ -1904,6 +2108,11 @@ msgstr "E-post"
 #~ msgid "Remove some indentation"
 #~ msgstr "Fjern innrykk"
 
+# panel/menu.c:1668
+#, fuzzy
+#~ msgid "Remove this task"
+#~ msgstr "Fjern denne oppgåva"
+
 #~ msgid "Timescale..."
 #~ msgstr "Tidsskala ..."
 
@@ -1915,6 +2124,10 @@ msgstr "E-post"
 
 #~ msgid "_Subtask"
 #~ msgstr "_Deloppgåve"
+
+#, fuzzy
+#~ msgid "_Task"
+#~ msgstr "_Oppgåve"
 
 #~ msgid "End"
 #~ msgstr "Slutt"
@@ -1931,8 +2144,26 @@ msgstr "E-post"
 #~ msgid "One _week"
 #~ msgstr "Ei _veke"
 
+# gmenu/edit.c:325 gsm/session-properties.c:173 panel/launcher.c:556
+# panel/menu.c:1396 panel/menu.c:1507
+#, fuzzy
+#~ msgid "Reset"
+#~ msgstr "_Gå tilbake"
+
 #~ msgid "The _entire project"
 #~ msgstr "H_eile prosjektet"
+
+#, fuzzy
+#~ msgid "Zoom"
+#~ msgstr "Forstørring"
+
+#, fuzzy
+#~ msgid "Zoom to:"
+#~ msgstr "Forstørr til:"
+
+#, fuzzy
+#~ msgid "_Custom:"
+#~ msgstr "Tilpasse"
 
 #~ msgid "_Selected tasks"
 #~ msgstr "_Valde oppgåver"
@@ -1952,11 +2183,20 @@ msgstr "E-post"
 #~ msgid "_Size:"
 #~ msgstr "_Storleik:"
 
+#, fuzzy
+#~ msgid "Insert a new resource on a row"
+#~ msgstr "Set inn ein ny ressurs i ei rad"
+
 #~ msgid "Manage resource groups"
 #~ msgstr "Handsam ressursgrupper"
 
 #~ msgid "Print the resource table"
 #~ msgstr "Skriv ut ressurstabellen"
+
+# panel/menu.c:1668
+#, fuzzy
+#~ msgid "Remove this resource"
+#~ msgstr "Fjern denne ressursen"
 
 #~ msgid "MrProject Resource component factory"
 #~ msgstr "MrProject ressurskomponentfabrikk"
@@ -1979,11 +2219,12 @@ msgstr "E-post"
 #~ msgid "%d resources selected"
 #~ msgstr "%d ressursar vald"
 
-#~ msgid "Selected resource: %s"
-#~ msgstr "Vald ressurs: %s"
-
 #~ msgid "Not initialized"
 #~ msgstr "Ikkje initialisert"
+
+#, fuzzy
+#~ msgid "No group"
+#~ msgstr "Gruppe"
 
 # panel/logout.c:192
 #~ msgid "Print Resource Table"
@@ -1995,21 +2236,11 @@ msgstr "E-post"
 #~ msgid "Ovt. Rate"
 #~ msgstr "Ovt. rate"
 
-# gsm/session-properties-capplet.c:226
-#~ msgid "Resource Name"
-#~ msgstr "Ressursnamn"
-
 #~ msgid "Std. Rate"
 #~ msgstr "Std. rate"
 
-#~ msgid "Group name: "
-#~ msgstr "Gruppenamn: "
-
 #~ msgid "Phone nr:"
 #~ msgstr "Telefonnr:"
-
-#~ msgid "Set default group"
-#~ msgstr "Sett som standardgruppe"
 
 #~ msgid "This group is default"
 #~ msgstr "Dette er standardgruppa"
@@ -2027,8 +2258,9 @@ msgstr "E-post"
 #~ msgid "_End:"
 #~ msgstr "_Slutt:"
 
-#~ msgid "_Start:"
-#~ msgstr "_Start:"
+#, fuzzy
+#~ msgid "Send Project..."
+#~ msgstr "Lagre prosjekt som"
 
 #~ msgid "Send the current project as attachment"
 #~ msgstr "Send dette prosjektet som vedlegg"
@@ -2050,6 +2282,10 @@ msgstr "E-post"
 #~ "Dette prosjektet har ikkje vorte lagra,\n"
 #~ "du må lagre prosjekt før sending.\n"
 #~ "Vil du gjere det?"
+
+#, fuzzy
+#~ msgid "Save as"
+#~ msgstr "Lagre som"
 
 #~ msgid "MrProject Network component factory"
 #~ msgstr "MrProject nettverkskomponentfabrikk"
@@ -2078,11 +2314,12 @@ msgstr "E-post"
 #~ msgid "MrProject calendar component"
 #~ msgstr "MrProject kalendarkomponent"
 
-#~ msgid "Month"
-#~ msgstr "Månad"
-
 #~ msgid "Year"
 #~ msgstr "År"
+
+#, fuzzy
+#~ msgid "%A %d %B"
+#~ msgstr "%d. %b"
 
 #~ msgid "%a %d %b"
 #~ msgstr "%a %d %b"
@@ -2092,6 +2329,12 @@ msgstr "E-post"
 
 #~ msgid "%d %b"
 #~ msgstr "%d. %b"
+
+# applets/gen_util/mailcheck.c:1522
+# applets/gen_util/mailcheck.c:1522
+#, fuzzy
+#~ msgid "C_lear"
+#~ msgstr "Tøm"
 
 #~ msgid "Customi_ze toolbars..."
 #~ msgstr "Set opp _verktøylinjer"
@@ -2114,17 +2357,44 @@ msgstr "E-post"
 #~ msgid "Print S_etup..."
 #~ msgstr "Utskriftso_ppsett"
 
+#~ msgid "Print the current file"
+#~ msgstr "Skriv ut aktiv fil"
+
 #~ msgid "Properties..."
 #~ msgstr "Eigenskapar ..."
 
+#~ msgid "Redo"
+#~ msgstr "Gjer om"
+
+# gmenu/edit.c:325 gsm/session-properties.c:173 panel/launcher.c:556
+# panel/menu.c:1396 panel/menu.c:1507
+#, fuzzy
+#~ msgid "Revert"
+#~ msgstr "_Gå tilbake"
+
 #~ msgid "Revert to a saved version of the file"
 #~ msgstr "Gå tilbake til lagret versjon av filen"
+
+#, fuzzy
+#~ msgid "Save As"
+#~ msgstr "Lagre som"
+
+#, fuzzy
+#~ msgid "Save the current file"
+#~ msgstr "Lukk aktiv fil"
 
 #~ msgid "Setup the page settings for your current printer"
 #~ msgstr "Endre sideoppsett for aktiv skrivar"
 
 #~ msgid "Test stuff"
 #~ msgstr "Prøv ting"
+
+#~ msgid "Undo"
+#~ msgstr "Angre"
+
+#, fuzzy
+#~ msgid "_About..."
+#~ msgstr "_Om ..."
 
 #~ msgid "_Preferences"
 #~ msgstr "_Instillingar"
@@ -2133,3 +2403,25 @@ msgstr "E-post"
 # panel/menu.c:1396 panel/menu.c:1507
 #~ msgid "_Revert"
 #~ msgstr "_Gå tilbake"
+
+#, fuzzy
+#~ msgid "Project Management application"
+#~ msgstr "Prosjektstyringsverkty"
+
+#, fuzzy
+#~ msgid "MrProject Project Management Tool"
+#~ msgstr "MrProject prosjektmotor"
+
+# applets/gen_util/mailcheck.c:1522
+# applets/gen_util/mailcheck.c:1522
+#, fuzzy
+#~ msgid "Close"
+#~ msgstr "L_ukk"
+
+#, fuzzy
+#~ msgid "Edit project phases"
+#~ msgstr "Endre eigenskapar for prosjektet"
+
+#, fuzzy
+#~ msgid "_Open"
+#~ msgstr "Opne"

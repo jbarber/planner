@@ -6,7 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: MrProjecte\n"
-"POT-Creation-Date: 2003-12-01 23:08+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-12-04 16:40+0100\n"
 "PO-Revision-Date: 2002-12-14 05:37+0100\n"
 "Last-Translator: Softcatala <tradgnome@softcatala.org>\n"
 "Language-Team: linux-ca@chanae.alphanet.ch\n"
@@ -306,6 +307,7 @@ msgid "Select all tasks"
 msgstr "Selecciona totes les tasques"
 
 #: data/ui/gantt-view.ui.h:14
+#, fuzzy
 msgid "Test"
 msgstr "Prova"
 
@@ -389,8 +391,9 @@ msgid "Export to HTML"
 msgstr ""
 
 #: data/ui/sql-plugin.ui.h:1
+#, fuzzy
 msgid "Open from Database..."
-msgstr ""
+msgstr "Desa com..."
 
 #: data/ui/sql-plugin.ui.h:2
 #, fuzzy
@@ -472,8 +475,9 @@ msgid "-"
 msgstr ""
 
 #: data/glade/calendar-dialog.glade.h:6
+#, fuzzy
 msgid "<b>Calendar:</b>"
-msgstr ""
+msgstr "Prova el calendari"
 
 #: data/glade/calendar-dialog.glade.h:7
 msgid "<b>Day types</b>"
@@ -492,20 +496,23 @@ msgid "Apply"
 msgstr ""
 
 #: data/glade/calendar-dialog.glade.h:11
+#, fuzzy
 msgid "C_opy an existing calendar"
-msgstr ""
+msgstr "Utilitza el calendari"
 
 #: data/glade/calendar-dialog.glade.h:12
 msgid "C_reate"
 msgstr ""
 
 #: data/glade/calendar-dialog.glade.h:13
+#, fuzzy
 msgid "Calendar Editor"
-msgstr ""
+msgstr "Esborra"
 
 #: data/glade/calendar-dialog.glade.h:14
+#, fuzzy
 msgid "Create an _empty calendar"
-msgstr ""
+msgstr "Utilitza el calendari"
 
 #: data/glade/calendar-dialog.glade.h:15
 #, fuzzy
@@ -513,8 +520,9 @@ msgid "Custom working time"
 msgstr "Propietats personals"
 
 #: data/glade/calendar-dialog.glade.h:16
+#, fuzzy
 msgid "Day type:"
-msgstr ""
+msgstr "Enganxa"
 
 #: data/glade/calendar-dialog.glade.h:17
 #, fuzzy
@@ -531,8 +539,9 @@ msgid "Edit Day Types"
 msgstr ""
 
 #: data/glade/calendar-dialog.glade.h:20
+#, fuzzy
 msgid "Edit Working Time"
-msgstr ""
+msgstr "Propietats personals"
 
 #: data/glade/calendar-dialog.glade.h:21
 msgid "Enter the name of the new day type:"
@@ -581,8 +590,9 @@ msgid "To:"
 msgstr ""
 
 #: data/glade/calendar-dialog.glade.h:32
+#, fuzzy
 msgid "Use working time from derived calendar"
-msgstr ""
+msgstr "Fes servir un dia del calendari base"
 
 #: data/glade/calendar-dialog.glade.h:33
 #, fuzzy
@@ -590,12 +600,14 @@ msgid "Week day:"
 msgstr "Setmana %d"
 
 #: data/glade/calendar-dialog.glade.h:34
+#, fuzzy
 msgid "Working time..."
-msgstr ""
+msgstr "Propietats personals"
 
 #: data/glade/calendar-dialog.glade.h:35
+#, fuzzy
 msgid "_Derive from a calendar"
-msgstr ""
+msgstr "Fes servir un dia del calendari base"
 
 #: data/glade/calendar-dialog.glade.h:36
 msgid "_Name of the new calendar:"
@@ -648,8 +660,9 @@ msgid "Type: "
 msgstr "Tipus: "
 
 #: data/glade/project-properties.glade.h:2
+#, fuzzy
 msgid "<b>Project phases</b>"
-msgstr ""
+msgstr "_Nom del projecte:"
 
 #: data/glade/project-properties.glade.h:3
 #, fuzzy
@@ -786,12 +799,14 @@ msgid "<b>Open Database</b>"
 msgstr ""
 
 #: data/glade/sql.glade.h:4
+#, fuzzy
 msgid "Database:"
-msgstr ""
+msgstr "Enganxa"
 
 #: data/glade/sql.glade.h:5
+#, fuzzy
 msgid "Open Database"
-msgstr ""
+msgstr "Desa com..."
 
 #: data/glade/sql.glade.h:6
 msgid "Password:"
@@ -847,8 +862,9 @@ msgid "_Duration:"
 msgstr "_Organització:"
 
 #: data/glade/task-dialog.glade.h:14
+#, fuzzy
 msgid "_Fixed duration"
-msgstr ""
+msgstr "_Organització:"
 
 #: data/glade/task-dialog.glade.h:15
 msgid "_Milestone"
@@ -870,6 +886,161 @@ msgstr "Insereix una tasca"
 #: data/glade/task-input-dialog.glade.h:4
 msgid "Work:"
 msgstr "Feina:"
+
+#: libplanner/mrp-project.c:441 src/planner-group-dialog.c:411
+msgid "Default"
+msgstr "Per defecte"
+
+#: libplanner/mrp-project.c:749
+#, c-format
+msgid "Couldn't find a suitable file module for loading '%s'"
+msgstr "No s'ha pogut trobar cap mòdul per carregar '%s'"
+
+#: libplanner/mrp-project.c:770 libplanner/mrp-project.c:1034
+msgid "No support for SQL storage built into this version of MrProject."
+msgstr "Aquesta versió del MrProject no implementa emmagatzemament SQL."
+
+#: libplanner/mrp-project.c:807
+msgid "Invalid URI."
+msgstr "URI invàlida."
+
+#: libplanner/mrp-project.c:928
+#, c-format
+msgid "Unable to find file writer identified by '%s'"
+msgstr "No s'ha pogut trobar cap fitxer d'escriptura identificat per '%s'"
+
+#: libplanner/mrp-project.c:991
+msgid "Couldn't find a suitable file module for loading project"
+msgstr "No s'ha pogut trobar cap mòdul per carregar el projecte"
+
+#: libplanner/mrp-property.c:365
+#, fuzzy
+msgid "Text"
+msgstr "Prova"
+
+#: libplanner/mrp-property.c:367
+msgid "String list"
+msgstr "Llista de cadenes"
+
+#: libplanner/mrp-property.c:369
+#, fuzzy
+msgid "Integer number"
+msgstr "Gestor de noms"
+
+#: libplanner/mrp-property.c:371
+msgid "Floating-point number"
+msgstr "Nombre de coma flotant"
+
+#: libplanner/mrp-property.c:373
+#, fuzzy
+msgid "Date"
+msgstr "Enganxa"
+
+#: libplanner/mrp-property.c:375
+#, fuzzy
+msgid "Duration"
+msgstr "_Organització:"
+
+#: libplanner/mrp-property.c:377 src/planner-task-view.c:232
+msgid "Cost"
+msgstr "Cost"
+
+#: libplanner/mrp-property.c:380 src/planner-project-properties.c:505
+#, fuzzy
+msgid "None"
+msgstr "(Cap)"
+
+#: libplanner/mrp-task-manager.c:1769
+msgid "Can not add a predecessor relation between a task and its ancestor."
+msgstr ""
+"No s'ha pogut afegir cap relació predecessora entre la tasca i la seva "
+"antecessora."
+
+#: libplanner/mrp-task-manager.c:1778 libplanner/mrp-task-manager.c:1786
+msgid "Can not add a predecessor, because it would result in a loop."
+msgstr ""
+"No s'ha pogut afegir cap predecessor, ja que resultaria un bucle infinit."
+
+#: libplanner/mrp-task-manager.c:1821
+msgid "Can not move the task, since it would result in a loop."
+msgstr "No s'ha pogu moure la tasca, ja que resultaria en un bucle infinit."
+
+#: libplanner/mrp-task.c:1016
+msgid ""
+"Could not add a predecessor relation, because the tasks are already related."
+msgstr ""
+"No s'ha pogut afegir cap relació predecessora, ja que les tasques ja estan "
+"relacionades."
+
+#: libplanner/mrp-day.c:54
+#, fuzzy
+msgid "Working"
+msgstr "Feina"
+
+#: libplanner/mrp-day.c:55
+msgid "A default working day"
+msgstr "Un dia feiner per defecte"
+
+#: libplanner/mrp-day.c:57
+msgid "Nonworking"
+msgstr "Festiu"
+
+#: libplanner/mrp-day.c:58
+msgid "A default non working day"
+msgstr "Un dia festiu per defecte"
+
+#: libplanner/mrp-day.c:60
+msgid "Use base"
+msgstr "Fes servir la base"
+
+#: libplanner/mrp-day.c:61
+msgid "Use day from base calendar"
+msgstr "Fes servir un dia del calendari base"
+
+#: libplanner/mrp-parser.c:1043 libplanner/mrp-parser.c:1138
+#, fuzzy
+msgid "Could not create XML tree"
+msgstr "No s'ha pogut crear el diàleg de propietats"
+
+#: libplanner/mrp-parser.c:1104
+#, fuzzy
+msgid "Could not write XML file"
+msgstr "No s'ha pogut obrir el fitxer '%s' del connector\n"
+
+#. Give up.
+#: libplanner/mrp-sql.c:229 src/planner-sql-plugin.c:127
+msgid "Invalid Unicode"
+msgstr ""
+
+#: libplanner/mrp-sql.c:2205
+#, c-format
+msgid ""
+"The project '%s' has been changed by the user '%s' since you opened it. Do "
+"you want to save anyway?"
+msgstr ""
+"El projecte '%s' ha estat modificat per l'usuari '%s' des que l'heu obert. "
+"Voleu guardar-lo de totes maneres?"
+
+#: libplanner/mrp-sql.c:3443
+#, c-format
+msgid ""
+"Connection to database '%s' failed.\n"
+"%s"
+msgstr ""
+"La connexió a la base de dades '%s' ha fallat.\n"
+"%s"
+
+#: libplanner/mrp-storage-sql.c:205
+msgid "Invalid SQL URI (must start with 'sql://' and contain '#')."
+msgstr "URI d'SQL invàlida (ha de començar amb 'sql://' i contenir '#')."
+
+#: libplanner/mrp-storage-sql.c:274
+msgid "Invalid SQL URI (invalid project id)."
+msgstr "URI d'SQL invàlida (id del projecte invàlid)"
+
+#: libplanner/mrp-storage-sql.c:282
+msgid "Invalid SQL URI (no database name specified)."
+msgstr "URI d'SQL invàlida (no s'ha especificat cap base de dades)."
 
 #: src/planner-application.c:117
 msgid "Edit"
@@ -986,9 +1157,9 @@ msgid "mrproject: --geometry cannot be used with more than one file."
 msgstr "mrproject: --geometry no es pot utilitzar amb més d'un fitxer."
 
 #: src/planner-plugin-loader.c:40
-#, c-format
+#, fuzzy, c-format
 msgid "Could not open plugin file '%s'\n"
-msgstr "No s'ha pogut obrir el fitxer '%s' del connector\n"
+msgstr "No s'ha pogut obrir el fitxer '%s' del connector de visualització\n"
 
 #: src/planner-view-loader.c:40
 #, c-format
@@ -1038,8 +1209,9 @@ msgid "Tuesday"
 msgstr "Avui"
 
 #: src/planner-default-week-dialog.c:42
+#, fuzzy
 msgid "Wednesday"
-msgstr ""
+msgstr "Setmana %d"
 
 #: src/planner-default-week-dialog.c:43
 #, fuzzy
@@ -1052,8 +1224,9 @@ msgid "Friday"
 msgstr "dia"
 
 #: src/planner-default-week-dialog.c:45
+#, fuzzy
 msgid "Saturday"
-msgstr ""
+msgstr "dia"
 
 #: src/planner-default-week-dialog.c:46
 #, fuzzy
@@ -1061,8 +1234,9 @@ msgid "Sunday"
 msgstr "dia"
 
 #: src/planner-default-week-dialog.c:266
+#, fuzzy
 msgid "No working time"
-msgstr ""
+msgstr "Propietats personals"
 
 #: src/planner-default-week-dialog.c:277 src/planner-default-week-dialog.c:281
 msgid "%H:%M"
@@ -1076,8 +1250,9 @@ msgid "Name"
 msgstr "Nom"
 
 #: src/planner-group-dialog.c:393
+#, fuzzy
 msgid "Manager name"
-msgstr "Gestor de noms"
+msgstr "Gestor de telèfons"
 
 #: src/planner-group-dialog.c:399
 msgid "Manager phone"
@@ -1087,18 +1262,9 @@ msgstr "Gestor de telèfons"
 msgid "Manager email"
 msgstr "Gestor de correu electrònic"
 
-#: src/planner-group-dialog.c:411
-msgid "Default"
-msgstr "Per defecte"
-
 #: src/planner-project-properties.c:146
 msgid "Select a calendar to use for this project:"
 msgstr ""
-
-#: src/planner-project-properties.c:505
-#, fuzzy
-msgid "None"
-msgstr "(Cap)"
 
 #: src/planner-project-properties.c:606
 #, fuzzy
@@ -1120,6 +1286,7 @@ msgid "Do you really want to remove the property '%s' from the project?"
 msgstr "Esteu segur d'esborrar la propietat '%s' del projecte?"
 
 #: src/planner-project-properties.c:1194
+#, fuzzy
 msgid "Could not create properties dialog."
 msgstr "No s'ha pogut crear el diàleg de propietats"
 
@@ -1175,8 +1342,11 @@ msgstr "Edita les propietats del recurs"
 #: src/planner-resource-dialog.c:1101 src/planner-task-view.c:230
 #: src/planner-gantt-print.c:198 src/planner-resource-view.c:629
 #: src/planner-resource-view.c:645 src/planner-resource-view.c:1187
+#, fuzzy
 msgid "Work"
-msgstr "Feina"
+msgstr ""
+"\n"
+"Feina"
 
 #: src/planner-resource-dialog.c:1102 src/planner-resource-view.c:632
 #: src/planner-resource-view.c:646 src/planner-resource-view.c:1188
@@ -1244,17 +1414,14 @@ msgid ""
 "Enter a filename and try again."
 msgstr ""
 
-#. Give up.
-#: src/planner-sql-plugin.c:127
-msgid "Invalid Unicode"
-msgstr ""
-
 #: src/planner-sql-plugin.c:269
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Connection to database '%s' failed:\n"
 "%s"
 msgstr ""
+"La connexió a la base de dades '%s' ha fallat.\n"
+"%s"
 
 #: src/planner-sql-plugin.c:318
 #, fuzzy
@@ -1262,12 +1429,14 @@ msgid "Project"
 msgstr "MrProject"
 
 #: src/planner-sql-plugin.c:466
+#, fuzzy
 msgid "Open from Database"
-msgstr ""
+msgstr "Desa com..."
 
 #: src/planner-sql-plugin.c:573
+#, fuzzy
 msgid "Save to Database"
-msgstr ""
+msgstr "Desa com..."
 
 #: src/planner-format.c:141
 #, c-format
@@ -1514,10 +1683,6 @@ msgstr "Acaba"
 #: src/planner-task-view.c:231
 msgid "Slack"
 msgstr ""
-
-#: src/planner-task-view.c:232
-msgid "Cost"
-msgstr "Cost"
 
 #: src/planner-task-view.c:438
 #, fuzzy

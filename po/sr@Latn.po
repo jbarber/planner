@@ -8,7 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: MrProject 0.9\n"
-"POT-Creation-Date: 2003-12-01 23:08+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-12-04 16:40+0100\n"
 "PO-Revision-Date: 2003-08-23 21:30+0200\n"
 "Last-Translator: Branko Ivanović <popeye@one.ekof.bg.ac.yu>\n"
 "Language-Team: Serbian (sr) <serbiangnome-lista@bogus.example.com>\n"
@@ -285,6 +286,7 @@ msgid "Select all tasks"
 msgstr "Izaberi sve zadatke"
 
 #: data/ui/gantt-view.ui.h:14
+#, fuzzy
 msgid "Test"
 msgstr "Proba"
 
@@ -473,8 +475,9 @@ msgid "Custom working time"
 msgstr "Proizvoljno radno vreme"
 
 #: data/glade/calendar-dialog.glade.h:16
+#, fuzzy
 msgid "Day type:"
-msgstr "Tip dana:"
+msgstr "Novi tip dana"
 
 #: data/glade/calendar-dialog.glade.h:17
 msgid "Default Week"
@@ -549,6 +552,7 @@ msgid "Working time..."
 msgstr "Radno vreme..."
 
 #: data/glade/calendar-dialog.glade.h:35
+#, fuzzy
 msgid "_Derive from a calendar"
 msgstr "Napravi na osnovu kalendara"
 
@@ -785,6 +789,7 @@ msgid "Resources"
 msgstr "Izvori"
 
 #: data/glade/task-dialog.glade.h:13
+#, fuzzy
 msgid "_Duration:"
 msgstr "Trajanje:"
 
@@ -812,6 +817,163 @@ msgstr "Unesi zadatak"
 #: data/glade/task-input-dialog.glade.h:4
 msgid "Work:"
 msgstr "Rad:"
+
+#: libplanner/mrp-project.c:441 src/planner-group-dialog.c:411
+msgid "Default"
+msgstr "Podrazumevano"
+
+#: libplanner/mrp-project.c:749
+#, c-format
+msgid "Couldn't find a suitable file module for loading '%s'"
+msgstr "Nisam mogao da nađem prikladan datotečni modul da bi učitao '%s'"
+
+#: libplanner/mrp-project.c:770 libplanner/mrp-project.c:1034
+msgid "No support for SQL storage built into this version of MrProject."
+msgstr "Nema podrške za SQL smeštaj u ovom izdanju MrProject-a."
+
+#: libplanner/mrp-project.c:807
+#, fuzzy
+msgid "Invalid URI."
+msgstr "Neispravan Unikod"
+
+#: libplanner/mrp-project.c:928
+#, c-format
+msgid "Unable to find file writer identified by '%s'"
+msgstr "Ne može da pronađe pisca datoteke označenog pomoću „%s“"
+
+#: libplanner/mrp-project.c:991
+msgid "Couldn't find a suitable file module for loading project"
+msgstr "Nisam mogao da nađem prikladan datotečni modul da bi učitao projekat"
+
+#: libplanner/mrp-property.c:365
+#, fuzzy
+msgid "Text"
+msgstr "Proba"
+
+#: libplanner/mrp-property.c:367
+msgid "String list"
+msgstr "Lista nizova"
+
+#: libplanner/mrp-property.c:369
+#, fuzzy
+msgid "Integer number"
+msgstr "Ime menadžera"
+
+#: libplanner/mrp-property.c:371
+msgid "Floating-point number"
+msgstr "Decimalni broj"
+
+#: libplanner/mrp-property.c:373
+#, fuzzy
+msgid "Date"
+msgstr "Tip dana:"
+
+#: libplanner/mrp-property.c:375
+#, fuzzy
+msgid "Duration"
+msgstr "Trajanje:"
+
+#: libplanner/mrp-property.c:377 src/planner-task-view.c:232
+msgid "Cost"
+msgstr "Trošak"
+
+#: libplanner/mrp-property.c:380 src/planner-project-properties.c:505
+msgid "None"
+msgstr "Nijedan"
+
+#: libplanner/mrp-task-manager.c:1769
+msgid "Can not add a predecessor relation between a task and its ancestor."
+msgstr "Ne mogu da dodam predhodničku relaciju između zadatka i svog predaka"
+
+#: libplanner/mrp-task-manager.c:1778 libplanner/mrp-task-manager.c:1786
+msgid "Can not add a predecessor, because it would result in a loop."
+msgstr ""
+"Ne mogu da dodam predhodnika, jer bi to rezultovalo beskonačnim ponavljanjem"
+
+#: libplanner/mrp-task-manager.c:1821
+msgid "Can not move the task, since it would result in a loop."
+msgstr ""
+"Nisam mogao da pomerim zadatak, jer bi to rezultovalo beskonačnim "
+"ponavljanjem"
+
+#: libplanner/mrp-task.c:1016
+msgid ""
+"Could not add a predecessor relation, because the tasks are already related."
+msgstr ""
+"Ne mogu da dodam predhodničku relaciju,zato što su zadaci već relativni "
+"(povezani)."
+
+#: libplanner/mrp-day.c:54
+#, fuzzy
+msgid "Working"
+msgstr "Rad"
+
+#: libplanner/mrp-day.c:55
+msgid "A default working day"
+msgstr "Podrazumevan radan dan"
+
+#: libplanner/mrp-day.c:57
+#, fuzzy
+msgid "Nonworking"
+msgstr "Nema radnog vremena"
+
+#: libplanner/mrp-day.c:58
+msgid "A default non working day"
+msgstr "Podrazumevan neradan dan"
+
+#: libplanner/mrp-day.c:60
+msgid "Use base"
+msgstr "Koristi bazu"
+
+#: libplanner/mrp-day.c:61
+#, fuzzy
+msgid "Use day from base calendar"
+msgstr "Napravi na osnovu kalendara"
+
+#: libplanner/mrp-parser.c:1043 libplanner/mrp-parser.c:1138
+#, fuzzy
+msgid "Could not create XML tree"
+msgstr "Ne mogu da napravim prozor za svojstva."
+
+#: libplanner/mrp-parser.c:1104
+#, fuzzy
+msgid "Could not write XML file"
+msgstr "Ne mogu da otvorim datoteku za dodatak „%s“\n"
+
+#. Give up.
+#: libplanner/mrp-sql.c:229 src/planner-sql-plugin.c:127
+msgid "Invalid Unicode"
+msgstr "Neispravan Unikod"
+
+#: libplanner/mrp-sql.c:2205
+#, c-format
+msgid ""
+"The project '%s' has been changed by the user '%s' since you opened it. Do "
+"you want to save anyway?"
+msgstr ""
+"Projekat „%s“ je izmenjen od strane korisnika „%s“ nakon što ste ga vi "
+"otvorili. Želite li ipak da ga sačuvate?"
+
+#: libplanner/mrp-sql.c:3443
+#, fuzzy, c-format
+msgid ""
+"Connection to database '%s' failed.\n"
+"%s"
+msgstr ""
+"Neuspešno povezivanje sa bazom „%s“:\n"
+"%s"
+
+#: libplanner/mrp-storage-sql.c:205
+msgid "Invalid SQL URI (must start with 'sql://' and contain '#')."
+msgstr "Neispravna SQL adresa (mora početi sa „sql://“ i mora sadržati „#“)."
+
+#: libplanner/mrp-storage-sql.c:274
+msgid "Invalid SQL URI (invalid project id)."
+msgstr "Neispravna SQL adresa (neispravan id projekta)."
+
+#: libplanner/mrp-storage-sql.c:282
+msgid "Invalid SQL URI (no database name specified)."
+msgstr "Neispravna SQL adresa (nije navedeno ime baze podataka)."
 
 #: src/planner-application.c:117
 msgid "Edit"
@@ -931,9 +1093,9 @@ msgid "mrproject: --geometry cannot be used with more than one file."
 msgstr "mrproject: --geometry se ne može koristiti za više datoteka."
 
 #: src/planner-plugin-loader.c:40
-#, c-format
+#, fuzzy, c-format
 msgid "Could not open plugin file '%s'\n"
-msgstr "Ne mogu da otvorim datoteku za dodatak „%s“\n"
+msgstr "Ne mogu da otvorim datoteku dodatka za pregled „%s“\n"
 
 #: src/planner-view-loader.c:40
 #, c-format
@@ -1001,8 +1163,9 @@ msgid "Sunday"
 msgstr "Nedelja"
 
 #: src/planner-default-week-dialog.c:266
+#, fuzzy
 msgid "No working time"
-msgstr "Nema radnog vremena"
+msgstr "Proizvoljno radno vreme"
 
 #: src/planner-default-week-dialog.c:277 src/planner-default-week-dialog.c:281
 msgid "%H:%M"
@@ -1016,8 +1179,9 @@ msgid "Name"
 msgstr "Ime"
 
 #: src/planner-group-dialog.c:393
+#, fuzzy
 msgid "Manager name"
-msgstr "Ime menadžera"
+msgstr "Telefon menadžera"
 
 #: src/planner-group-dialog.c:399
 msgid "Manager phone"
@@ -1027,17 +1191,9 @@ msgstr "Telefon menadžera"
 msgid "Manager email"
 msgstr "E-pošta menadžera"
 
-#: src/planner-group-dialog.c:411
-msgid "Default"
-msgstr "Podrazumevano"
-
 #: src/planner-project-properties.c:146
 msgid "Select a calendar to use for this project:"
 msgstr "Izaberi kalendar za upotrebu uz ovaj projekat:"
-
-#: src/planner-project-properties.c:505
-msgid "None"
-msgstr "Nijedan"
 
 #: src/planner-project-properties.c:606
 msgid "Property"
@@ -1057,6 +1213,7 @@ msgid "Do you really want to remove the property '%s' from the project?"
 msgstr "Da li stvarno želite da uklonite svojstvo „%s“ sa ovog projekta?"
 
 #: src/planner-project-properties.c:1194
+#, fuzzy
 msgid "Could not create properties dialog."
 msgstr "Ne mogu da napravim prozor za svojstva."
 
@@ -1109,8 +1266,11 @@ msgstr "Izmeni svojstva resursa"
 #: src/planner-resource-dialog.c:1101 src/planner-task-view.c:230
 #: src/planner-gantt-print.c:198 src/planner-resource-view.c:629
 #: src/planner-resource-view.c:645 src/planner-resource-view.c:1187
+#, fuzzy
 msgid "Work"
-msgstr "Rad"
+msgstr ""
+"\n"
+"Rad"
 
 #: src/planner-resource-dialog.c:1102 src/planner-resource-view.c:632
 #: src/planner-resource-view.c:646 src/planner-resource-view.c:1188
@@ -1178,13 +1338,8 @@ msgstr ""
 "„%s“ je direktorijum.\n"
 "Unesite ime datoteke i pokuštajte ponovo."
 
-#. Give up.
-#: src/planner-sql-plugin.c:127
-msgid "Invalid Unicode"
-msgstr "Neispravan Unikod"
-
 #: src/planner-sql-plugin.c:269
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Connection to database '%s' failed:\n"
 "%s"
@@ -1445,10 +1600,6 @@ msgstr "Kraj"
 #: src/planner-task-view.c:231
 msgid "Slack"
 msgstr "Promenljiv"
-
-#: src/planner-task-view.c:232
-msgid "Cost"
-msgstr "Trošak"
 
 #: src/planner-task-view.c:438
 msgid "Edit custom task properties"

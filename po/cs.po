@@ -5,14 +5,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mrproject VERSION\n"
-"POT-Creation-Date: 2003-12-01 23:08+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-12-04 16:40+0100\n"
 "PO-Revision-Date: 2003-10-17 23:26+0200\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Report-Msgid-Bugs-To: \n"
 
 #: data/planner.desktop.in.h:1
 #, fuzzy
@@ -20,6 +20,7 @@ msgid "Planner Project Management"
 msgstr "Správa projektů"
 
 #: data/planner.desktop.in.h:2
+#, fuzzy
 msgid "Project Management"
 msgstr "Správa projektů"
 
@@ -52,8 +53,9 @@ msgid "Copy the selection"
 msgstr "Kopírovat výběr"
 
 #: data/ui/main-window.ui.h:7
+#, fuzzy
 msgid "Create a new project"
-msgstr "Vytvořit nový projekt"
+msgstr "Otevřít projekt"
 
 #: data/ui/main-window.ui.h:8
 msgid "Cut the selection"
@@ -267,8 +269,9 @@ msgid "Reset _All Constraints"
 msgstr "Odstranit _všechna omezení"
 
 #: data/ui/gantt-view.ui.h:11 data/ui/task-view.ui.h:11
+#, fuzzy
 msgid "Reset _Constraint"
-msgstr "Odstranit _omezení"
+msgstr "Odstranit _všechna omezení"
 
 #: data/ui/gantt-view.ui.h:12 data/ui/task-view.ui.h:12
 #: data/ui/resource-view.ui.h:7
@@ -281,6 +284,7 @@ msgid "Select all tasks"
 msgstr "Vybrat všechny úlohy"
 
 #: data/ui/gantt-view.ui.h:14
+#, fuzzy
 msgid "Test"
 msgstr "Test"
 
@@ -469,8 +473,9 @@ msgid "Custom working time"
 msgstr "Vlastní pracovní doba"
 
 #: data/glade/calendar-dialog.glade.h:16
+#, fuzzy
 msgid "Day type:"
-msgstr "Typ dnů:"
+msgstr "Nový typ dnů"
 
 #: data/glade/calendar-dialog.glade.h:17
 msgid "Default Week"
@@ -545,6 +550,7 @@ msgid "Working time..."
 msgstr "Pracovní doba..."
 
 #: data/glade/calendar-dialog.glade.h:35
+#, fuzzy
 msgid "_Derive from a calendar"
 msgstr "_Odvodit z kalendáře"
 
@@ -626,6 +632,7 @@ msgid "New Project Phase"
 msgstr "Nová fáze projektu"
 
 #: data/glade/project-properties.glade.h:9
+#, fuzzy
 msgid "Project _name:"
 msgstr "_Jméno projektu:"
 
@@ -650,6 +657,7 @@ msgid "_Manager:"
 msgstr "_Manažer:"
 
 #: data/glade/project-properties.glade.h:15
+#, fuzzy
 msgid "_Organization:"
 msgstr "_Organizace:"
 
@@ -662,8 +670,9 @@ msgid "C_ost:"
 msgstr "_Cena:"
 
 #: data/glade/resource-dialog.glade.h:3
+#, fuzzy
 msgid "Calendar"
-msgstr "Kalendář"
+msgstr "Kalendář:"
 
 #: data/glade/resource-dialog.glade.h:4
 msgid "Edit calendars..."
@@ -778,14 +787,17 @@ msgid "Predecessors"
 msgstr "Předchůdci"
 
 #: data/glade/task-dialog.glade.h:12 src/planner-resource-view.c:342
+#, fuzzy
 msgid "Resources"
-msgstr "Zdroje"
+msgstr "_Zdroje"
 
 #: data/glade/task-dialog.glade.h:13
+#, fuzzy
 msgid "_Duration:"
 msgstr "_Trvání:"
 
 #: data/glade/task-dialog.glade.h:14
+#, fuzzy
 msgid "_Fixed duration"
 msgstr "_Fixní trvání"
 
@@ -809,6 +821,160 @@ msgstr "Vložit úlohu"
 #: data/glade/task-input-dialog.glade.h:4
 msgid "Work:"
 msgstr "Práce:"
+
+#: libplanner/mrp-project.c:441 src/planner-group-dialog.c:411
+msgid "Default"
+msgstr "Implicitní"
+
+#: libplanner/mrp-project.c:749
+#, c-format
+msgid "Couldn't find a suitable file module for loading '%s'"
+msgstr "Nemohu najít vhodný modul souboru pro načtení '%s'"
+
+#: libplanner/mrp-project.c:770 libplanner/mrp-project.c:1034
+msgid "No support for SQL storage built into this version of MrProject."
+msgstr "V této verzi MrProject není vestavěna podpora pro ukládání do SQL."
+
+#: libplanner/mrp-project.c:807
+#, fuzzy
+msgid "Invalid URI."
+msgstr "Neplatné Unicode"
+
+#: libplanner/mrp-project.c:928
+#, c-format
+msgid "Unable to find file writer identified by '%s'"
+msgstr "Nemohu najít zapisovač souboru identifikovaný '%s'"
+
+#: libplanner/mrp-project.c:991
+msgid "Couldn't find a suitable file module for loading project"
+msgstr "Nemohu najít vhodný modul souboru pro načtení projektu"
+
+#: libplanner/mrp-property.c:365
+#, fuzzy
+msgid "Text"
+msgstr "Test"
+
+#: libplanner/mrp-property.c:367
+msgid "String list"
+msgstr "Seznam řetězců"
+
+#: libplanner/mrp-property.c:369
+#, fuzzy
+msgid "Integer number"
+msgstr "Jméno manažera"
+
+#: libplanner/mrp-property.c:371
+msgid "Floating-point number"
+msgstr "Číslo s pohyblivou řádovou čárkou"
+
+#: libplanner/mrp-property.c:373
+#, fuzzy
+msgid "Date"
+msgstr "Typ dnů:"
+
+#: libplanner/mrp-property.c:375
+#, fuzzy
+msgid "Duration"
+msgstr "_Trvání:"
+
+#: libplanner/mrp-property.c:377 src/planner-task-view.c:232
+msgid "Cost"
+msgstr "Cena"
+
+#: libplanner/mrp-property.c:380 src/planner-project-properties.c:505
+msgid "None"
+msgstr "Žádný"
+
+#: libplanner/mrp-task-manager.c:1769
+msgid "Can not add a predecessor relation between a task and its ancestor."
+msgstr "Nemohu přidat vztah předchůdce mezi úlohou a jejím předchůdcem."
+
+#: libplanner/mrp-task-manager.c:1778 libplanner/mrp-task-manager.c:1786
+msgid "Can not add a predecessor, because it would result in a loop."
+msgstr "Nemohu přidat předchůdce, protože by tím vznikla smyčka."
+
+#: libplanner/mrp-task-manager.c:1821
+msgid "Can not move the task, since it would result in a loop."
+msgstr "Nemohu přesunout úlohu, protože by tím vznikla smyčka."
+
+#: libplanner/mrp-task.c:1016
+msgid ""
+"Could not add a predecessor relation, because the tasks are already related."
+msgstr ""
+"Nemohu přidat vztah předchůdce, protože mezi úlohami již existuje vztah."
+
+#: libplanner/mrp-day.c:54
+#, fuzzy
+msgid "Working"
+msgstr "Práce"
+
+#: libplanner/mrp-day.c:55
+msgid "A default working day"
+msgstr "Implicitně pracovní den"
+
+#: libplanner/mrp-day.c:57
+#, fuzzy
+msgid "Nonworking"
+msgstr "Žádná pracovní doba"
+
+#: libplanner/mrp-day.c:58
+msgid "A default non working day"
+msgstr "Implicitně nepracovní den"
+
+# ???
+#: libplanner/mrp-day.c:60
+msgid "Use base"
+msgstr "Základ použití"
+
+#: libplanner/mrp-day.c:61
+#, fuzzy
+msgid "Use day from base calendar"
+msgstr "_Odvodit z kalendáře"
+
+#: libplanner/mrp-parser.c:1043 libplanner/mrp-parser.c:1138
+#, fuzzy
+msgid "Could not create XML tree"
+msgstr "Nemohu vytvořit dialog vlastností."
+
+#: libplanner/mrp-parser.c:1104
+#, fuzzy
+msgid "Could not write XML file"
+msgstr "Nemohu otevřít soubor zásuvného modulu '%s'\n"
+
+#. Give up.
+#: libplanner/mrp-sql.c:229 src/planner-sql-plugin.c:127
+msgid "Invalid Unicode"
+msgstr "Neplatné Unicode"
+
+#: libplanner/mrp-sql.c:2205
+#, c-format
+msgid ""
+"The project '%s' has been changed by the user '%s' since you opened it. Do "
+"you want to save anyway?"
+msgstr ""
+"Projekt '%s' byl změněn uživatelem '%s' poté, co jste jej otevřeli. Chcete "
+"jej přesto uložit?"
+
+#: libplanner/mrp-sql.c:3443
+#, fuzzy, c-format
+msgid ""
+"Connection to database '%s' failed.\n"
+"%s"
+msgstr ""
+"Připojení k databázi '%s\" selhalo:\n"
+"%s"
+
+#: libplanner/mrp-storage-sql.c:205
+msgid "Invalid SQL URI (must start with 'sql://' and contain '#')."
+msgstr "Neplatné SQL URI (musí začínat 'sql://' a obsahovat '#')."
+
+#: libplanner/mrp-storage-sql.c:274
+msgid "Invalid SQL URI (invalid project id)."
+msgstr "Neplatné SQL URI (neplatné id projektu)."
+
+#: libplanner/mrp-storage-sql.c:282
+msgid "Invalid SQL URI (no database name specified)."
+msgstr "Neplatné SQL URI (neurčen název databáze)."
 
 #: src/planner-application.c:117
 msgid "Edit"
@@ -925,9 +1091,9 @@ msgid "mrproject: --geometry cannot be used with more than one file."
 msgstr "mrproject: --geometry nemůže být použita s více než jedním souborem."
 
 #: src/planner-plugin-loader.c:40
-#, c-format
+#, fuzzy, c-format
 msgid "Could not open plugin file '%s'\n"
-msgstr "Nemohu otevřít soubor zásuvného modulu '%s'\n"
+msgstr "Nemohu otevřít soubor zásuvného modulu pohledu '%s'\n"
 
 #: src/planner-view-loader.c:40
 #, c-format
@@ -995,8 +1161,9 @@ msgid "Sunday"
 msgstr "Neděle"
 
 #: src/planner-default-week-dialog.c:266
+#, fuzzy
 msgid "No working time"
-msgstr "Žádná pracovní doba"
+msgstr "Vlastní pracovní doba"
 
 #: src/planner-default-week-dialog.c:277 src/planner-default-week-dialog.c:281
 msgid "%H:%M"
@@ -1010,28 +1177,23 @@ msgid "Name"
 msgstr "Jméno"
 
 #: src/planner-group-dialog.c:393
+#, fuzzy
 msgid "Manager name"
 msgstr "Jméno manažera"
 
 #: src/planner-group-dialog.c:399
+#, fuzzy
 msgid "Manager phone"
 msgstr "Telefon manažera"
 
 #: src/planner-group-dialog.c:405
+#, fuzzy
 msgid "Manager email"
 msgstr "E-mail manažera"
-
-#: src/planner-group-dialog.c:411
-msgid "Default"
-msgstr "Implicitní"
 
 #: src/planner-project-properties.c:146
 msgid "Select a calendar to use for this project:"
 msgstr "Vyberte kalendář, který používat pro tento projekt:"
-
-#: src/planner-project-properties.c:505
-msgid "None"
-msgstr "Žádný"
 
 #: src/planner-project-properties.c:606
 msgid "Property"
@@ -1051,6 +1213,7 @@ msgid "Do you really want to remove the property '%s' from the project?"
 msgstr "Opravdu chcete z projektu odstranit vlastnost '%s'?"
 
 #: src/planner-project-properties.c:1194
+#, fuzzy
 msgid "Could not create properties dialog."
 msgstr "Nemohu vytvořit dialog vlastností."
 
@@ -1103,8 +1266,11 @@ msgstr "Upravit vlastnosti zdroje"
 #: src/planner-resource-dialog.c:1101 src/planner-task-view.c:230
 #: src/planner-gantt-print.c:198 src/planner-resource-view.c:629
 #: src/planner-resource-view.c:645 src/planner-resource-view.c:1187
+#, fuzzy
 msgid "Work"
-msgstr "Práce"
+msgstr ""
+"\n"
+"Práce"
 
 #: src/planner-resource-dialog.c:1102 src/planner-resource-view.c:632
 #: src/planner-resource-view.c:646 src/planner-resource-view.c:1188
@@ -1172,13 +1338,8 @@ msgstr ""
 "\"%s\" je adresář.\n"
 "Zadejte název souboru a zkuste to znovu."
 
-#. Give up.
-#: src/planner-sql-plugin.c:127
-msgid "Invalid Unicode"
-msgstr "Neplatné Unicode"
-
 #: src/planner-sql-plugin.c:269
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Connection to database '%s' failed:\n"
 "%s"
@@ -1246,8 +1407,9 @@ msgid "Project start"
 msgstr "Začátek projektu"
 
 #: src/planner-gantt-row.c:1841 src/planner-gantt-row.c:1844
+#, fuzzy
 msgid "No name"
-msgstr "Beze jména"
+msgstr "(beze jména)"
 
 #: src/planner-gantt-row.c:1847
 #, c-format
@@ -1440,10 +1602,6 @@ msgstr "Konec"
 msgid "Slack"
 msgstr "Rezerva"
 
-#: src/planner-task-view.c:232
-msgid "Cost"
-msgstr "Cena"
-
 #: src/planner-task-view.c:438
 msgid "Edit custom task properties"
 msgstr "Upravit vlastní vlastnosti úlohy"
@@ -1453,8 +1611,9 @@ msgid "/_Insert resource"
 msgstr "/_Vložit zdroj"
 
 #: src/planner-resource-view.c:249
+#, fuzzy
 msgid "/_Remove resource"
-msgstr "/_Odstranit zdroj"
+msgstr "_Odstranit zdroj"
 
 #: src/planner-resource-view.c:250
 msgid "/_Edit resource..."
@@ -1469,12 +1628,117 @@ msgid "Edit custom resource properties"
 msgstr "Upravit vlastní vlastnosti zdroje"
 
 #: src/planner-resource-view.c:1011
+#, fuzzy
 msgid "Group"
-msgstr "Skupina"
+msgstr "Skupina:"
 
 #: src/planner-resource-view.c:1040
 msgid "Email"
 msgstr "E-mail"
+
+#~ msgid "No support for SQL storage built in this version of MrProject."
+#~ msgstr ""
+#~ "V této verzi MrProject nebyla přeložena podpora pro ukládání do SQL."
+
+#~ msgid "No MPX header"
+#~ msgstr "Chybí hlavička MPX"
+
+#~ msgid "%s is not valid XML."
+#~ msgstr "%s není platné XML."
+
+#~ msgid "\"%s\" is not a valid MrProject file"
+#~ msgstr "\"%s\" není platný soubor MrProject"
+
+#~ msgid "Task with assignment"
+#~ msgstr "Úloha s přiřazením"
+
+#, fuzzy
+#~ msgid "Allocated resource"
+#~ msgstr "/_Odstranit zdroj"
+
+#~ msgid "Allocated units"
+#~ msgstr "Alokované jednotky"
+
+#~ msgid "The project that this calendar manager is attached to"
+#~ msgstr "Projekt, ke kterému je připojen tento manažer kalendáře"
+
+#, fuzzy
+#~ msgid "Calendar Name"
+#~ msgstr "Kalendář"
+
+#, fuzzy
+#~ msgid "Group Name"
+#~ msgstr "Skupina"
+
+#, fuzzy
+#~ msgid "The start date of the project"
+#~ msgstr "Vytvořit nový projekt"
+
+#, fuzzy
+#~ msgid "Default Group"
+#~ msgstr "Implicitní"
+
+#~ msgid "Default group for new resources"
+#~ msgstr "Implicitní skupina pro nové zdroje"
+
+#, fuzzy
+#~ msgid "Resource Name"
+#~ msgstr "Zdroje"
+
+#, fuzzy
+#~ msgid "Resource Group"
+#~ msgstr "Zdroje"
+
+#, fuzzy
+#~ msgid "Resource Type"
+#~ msgstr "Zdroje"
+
+#, fuzzy
+#~ msgid "Resource Units"
+#~ msgstr "Zdroje"
+
+#, fuzzy
+#~ msgid "Resource Email"
+#~ msgstr "Zdroje"
+
+#, fuzzy
+#~ msgid "Resource note"
+#~ msgstr "Zdroje"
+
+#~ msgid "The project that this task manager is attached to"
+#~ msgstr "Projekt, ke kterému je připojen tento manažer úloh"
+
+#, fuzzy
+#~ msgid "Task name"
+#~ msgstr "Beze jména"
+
+#~ msgid "Task note"
+#~ msgstr "Poznámka o úloze"
+
+#~ msgid "Task start time"
+#~ msgstr "Čas začátku úlohy"
+
+#~ msgid "Task finish time"
+#~ msgstr "Čas dokončení úlohy"
+
+#~ msgid "Latest task start time"
+#~ msgstr "Nejpozdější čas začátku úlohy"
+
+#~ msgid "Latest task finish time"
+#~ msgstr "Nejpozdější čas ukončení úlohy"
+
+#~ msgid "Task work"
+#~ msgstr "Práce úlohy"
+
+#~ msgid "In critical path"
+#~ msgstr "Na kritické cestě"
+
+#, fuzzy
+#~ msgid "Time constraint"
+#~ msgstr "Odstranit _omezení"
+
+#~ msgid "Percent complete"
+#~ msgstr "Hotovo procent"
 
 #~ msgid "Contribute to MrProject"
 #~ msgstr "Přispějte k MrProject"

@@ -6,12 +6,13 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mrproject\n"
-"POT-Creation-Date: 2003-12-01 23:08+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-12-04 16:40+0100\n"
 "PO-Revision-Date: 2003-06-22 18:09--100\n"
 "Last-Translator: Samuel Jon Gunnarsson <sammi@techattack.nu>\n"
 "Language-Team: Icelandic <gnome@techattack.nu>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: data/planner.desktop.in.h:1
@@ -281,6 +282,7 @@ msgid "Select all tasks"
 msgstr "Velja öll verk"
 
 #: data/ui/gantt-view.ui.h:14
+#, fuzzy
 msgid "Test"
 msgstr "Prufa"
 
@@ -469,8 +471,9 @@ msgid "Custom working time"
 msgstr "Sérvalin vinnutími"
 
 #: data/glade/calendar-dialog.glade.h:16
+#, fuzzy
 msgid "Day type:"
-msgstr "Gerð dags:"
+msgstr "Ný gerð dags"
 
 #: data/glade/calendar-dialog.glade.h:17
 msgid "Default Week"
@@ -545,6 +548,7 @@ msgid "Working time..."
 msgstr "Vinnutími..."
 
 #: data/glade/calendar-dialog.glade.h:35
+#, fuzzy
 msgid "_Derive from a calendar"
 msgstr "_Erfa frá dagatali"
 
@@ -589,8 +593,9 @@ msgid "Name: "
 msgstr "Nafn:"
 
 #: data/glade/new-property.glade.h:5
+#, fuzzy
 msgid "New Property"
-msgstr ""
+msgstr "Eigindi"
 
 #: data/glade/new-property.glade.h:6
 msgid "Type: "
@@ -605,8 +610,9 @@ msgid "Calendar:"
 msgstr "Dagatal:"
 
 #: data/glade/project-properties.glade.h:4
+#, fuzzy
 msgid "Custom properties"
-msgstr ""
+msgstr "Sérstakar stillingar"
 
 #: data/glade/project-properties.glade.h:5
 msgid "Edit Project phases"
@@ -783,6 +789,7 @@ msgid "Resources"
 msgstr "Úrræði"
 
 #: data/glade/task-dialog.glade.h:13
+#, fuzzy
 msgid "_Duration:"
 msgstr "Leng_d:"
 
@@ -811,6 +818,164 @@ msgstr "Innsetja verk"
 #: data/glade/task-input-dialog.glade.h:4
 msgid "Work:"
 msgstr "Vinna:"
+
+#: libplanner/mrp-project.c:441 src/planner-group-dialog.c:411
+msgid "Default"
+msgstr "Sjálfgefið"
+
+#: libplanner/mrp-project.c:749
+#, c-format
+msgid "Couldn't find a suitable file module for loading '%s'"
+msgstr "Ekki tókst að finna passandi skráareiningu fyrir hleðslu á '%s'"
+
+#: libplanner/mrp-project.c:770 libplanner/mrp-project.c:1034
+msgid "No support for SQL storage built into this version of MrProject."
+msgstr ""
+"Engin stuðningur fyrir SQL geymslu innbyggt í þessa útgáfu af MrProject."
+
+#: libplanner/mrp-project.c:807
+#, fuzzy
+msgid "Invalid URI."
+msgstr "Ógildur Unikóði"
+
+#: libplanner/mrp-project.c:928
+#, c-format
+msgid "Unable to find file writer identified by '%s'"
+msgstr "Ekki tókst að finna skráarritil auðkendan af '%s'"
+
+#: libplanner/mrp-project.c:991
+msgid "Couldn't find a suitable file module for loading project"
+msgstr ""
+"Ekki tókst að finna passandi skráareiningu fyrir hleðslu á verkstýringu"
+
+#: libplanner/mrp-property.c:365
+#, fuzzy
+msgid "Text"
+msgstr "Prufa"
+
+#: libplanner/mrp-property.c:367
+msgid "String list"
+msgstr "Strengjalisti"
+
+#: libplanner/mrp-property.c:369
+#, fuzzy
+msgid "Integer number"
+msgstr "Nafn stjórnanda"
+
+#: libplanner/mrp-property.c:371
+#, fuzzy
+msgid "Floating-point number"
+msgstr "brotatala"
+
+#: libplanner/mrp-property.c:373
+#, fuzzy
+msgid "Date"
+msgstr "Gerð dags:"
+
+#: libplanner/mrp-property.c:375
+#, fuzzy
+msgid "Duration"
+msgstr "Leng_d:"
+
+#: libplanner/mrp-property.c:377 src/planner-task-view.c:232
+msgid "Cost"
+msgstr "Kostnaður"
+
+#: libplanner/mrp-property.c:380 src/planner-project-properties.c:505
+msgid "None"
+msgstr "Ekkert"
+
+#: libplanner/mrp-task-manager.c:1769
+msgid "Can not add a predecessor relation between a task and its ancestor."
+msgstr "Get ekki bætt við undanfaraskyldleika milli verks og forfeður þess. "
+
+#: libplanner/mrp-task-manager.c:1778 libplanner/mrp-task-manager.c:1786
+msgid "Can not add a predecessor, because it would result in a loop."
+msgstr ""
+"Get ekki bætt við undanfara þar sem það myni leiða af sér hringavilteysu."
+
+#: libplanner/mrp-task-manager.c:1821
+msgid "Can not move the task, since it would result in a loop."
+msgstr ""
+"Ekki tókst að flytja verk þar sem það myndi leiða af sér hringavitleysu."
+
+#: libplanner/mrp-task.c:1016
+msgid ""
+"Could not add a predecessor relation, because the tasks are already related."
+msgstr ""
+"Get ekki bætt við undanfaraskyldleika vegna þess að verkin eru nú þegar "
+"skyld."
+
+#: libplanner/mrp-day.c:54
+#, fuzzy
+msgid "Working"
+msgstr "Vinna"
+
+#: libplanner/mrp-day.c:55
+msgid "A default working day"
+msgstr "Sjálfgefin vinnudagur"
+
+#: libplanner/mrp-day.c:57
+#, fuzzy
+msgid "Nonworking"
+msgstr "Er ekki vinnutími"
+
+#: libplanner/mrp-day.c:58
+msgid "A default non working day"
+msgstr "Sjálfgefin frídagur"
+
+#: libplanner/mrp-day.c:60
+msgid "Use base"
+msgstr "Nota grunn"
+
+#: libplanner/mrp-day.c:61
+#, fuzzy
+msgid "Use day from base calendar"
+msgstr "_Erfa frá dagatali"
+
+#: libplanner/mrp-parser.c:1043 libplanner/mrp-parser.c:1138
+msgid "Could not create XML tree"
+msgstr "Ekki tókst að stofna XML tré"
+
+#: libplanner/mrp-parser.c:1104
+#, fuzzy
+msgid "Could not write XML file"
+msgstr "Ekki tókst að opna viðbót '%s'\n"
+
+#. Give up.
+#: libplanner/mrp-sql.c:229 src/planner-sql-plugin.c:127
+msgid "Invalid Unicode"
+msgstr "Ógildur Unikóði"
+
+#: libplanner/mrp-sql.c:2205
+#, c-format
+msgid ""
+"The project '%s' has been changed by the user '%s' since you opened it. Do "
+"you want to save anyway?"
+msgstr ""
+"Verkstýring '%s' hefur verið breytt af notanda '%s' eftir að þú opnaðir "
+"hana. Vilt þú vista hana hvort eð er?"
+
+#: libplanner/mrp-sql.c:3443
+#, fuzzy, c-format
+msgid ""
+"Connection to database '%s' failed.\n"
+"%s"
+msgstr ""
+"Tenging við gagnagrunn '%s' mistókst:\n"
+"%s"
+
+#: libplanner/mrp-storage-sql.c:205
+msgid "Invalid SQL URI (must start with 'sql://' and contain '#')."
+msgstr "Ógilt SQL URI (verðu að byrja á 'sql://' og innihalda '#')."
+
+#: libplanner/mrp-storage-sql.c:274
+msgid "Invalid SQL URI (invalid project id)."
+msgstr "Ógilt SQL URI (ógilt auðkenni á verkstýringu)."
+
+#: libplanner/mrp-storage-sql.c:282
+msgid "Invalid SQL URI (no database name specified)."
+msgstr "Ógilt SQL URI (ekkert nafn á gagnagrunn var uppgefið)."
 
 #: src/planner-application.c:117
 msgid "Edit"
@@ -928,9 +1093,9 @@ msgid "mrproject: --geometry cannot be used with more than one file."
 msgstr "mrproject: --geometry er ekki hægt að nota á meira en eina skrá."
 
 #: src/planner-plugin-loader.c:40
-#, c-format
+#, fuzzy, c-format
 msgid "Could not open plugin file '%s'\n"
-msgstr "Ekki tókst að opna viðbót '%s'\n"
+msgstr "Ekki tókst að skoða viðbót '%s'\n"
 
 #: src/planner-view-loader.c:40
 #, c-format
@@ -1001,8 +1166,9 @@ msgid "Sunday"
 msgstr "Sunnudagur"
 
 #: src/planner-default-week-dialog.c:266
+#, fuzzy
 msgid "No working time"
-msgstr "Er ekki vinnutími"
+msgstr "Sérvalin vinnutími"
 
 #: src/planner-default-week-dialog.c:277 src/planner-default-week-dialog.c:281
 msgid "%H:%M"
@@ -1016,8 +1182,9 @@ msgid "Name"
 msgstr "Nafn"
 
 #: src/planner-group-dialog.c:393
+#, fuzzy
 msgid "Manager name"
-msgstr "Nafn stjórnanda"
+msgstr "Sími stjórnanda"
 
 #: src/planner-group-dialog.c:399
 msgid "Manager phone"
@@ -1027,17 +1194,9 @@ msgstr "Sími stjórnanda"
 msgid "Manager email"
 msgstr "Netfang stjórnanda"
 
-#: src/planner-group-dialog.c:411
-msgid "Default"
-msgstr "Sjálfgefið"
-
 #: src/planner-project-properties.c:146
 msgid "Select a calendar to use for this project:"
 msgstr "Veldu dagatal til notkunar með verkstýringu:"
-
-#: src/planner-project-properties.c:505
-msgid "None"
-msgstr "Ekkert"
 
 #: src/planner-project-properties.c:606
 msgid "Property"
@@ -1057,8 +1216,9 @@ msgid "Do you really want to remove the property '%s' from the project?"
 msgstr ""
 
 #: src/planner-project-properties.c:1194
+#, fuzzy
 msgid "Could not create properties dialog."
-msgstr ""
+msgstr "Ekki tókst að stofna XML tré"
 
 #: src/planner-property-dialog.c:397
 msgid "Label"
@@ -1109,11 +1269,15 @@ msgstr "Ekkert (nota sjálfgefið f. verkst.)"
 msgid "Edit resource properties"
 msgstr "Breyta stillingum úrræðis"
 
+#  COL_START,    _("\nStart"),
 #: src/planner-resource-dialog.c:1101 src/planner-task-view.c:230
 #: src/planner-gantt-print.c:198 src/planner-resource-view.c:629
 #: src/planner-resource-view.c:645 src/planner-resource-view.c:1187
+#, fuzzy
 msgid "Work"
-msgstr "Vinna"
+msgstr ""
+"\n"
+"Vinna"
 
 #: src/planner-resource-dialog.c:1102 src/planner-resource-view.c:632
 #: src/planner-resource-view.c:646 src/planner-resource-view.c:1188
@@ -1181,13 +1345,8 @@ msgstr ""
 "\"%s\" er mappa.\n"
 "Sláðu inn skráarnafn og prufaðu á ný."
 
-#. Give up.
-#: src/planner-sql-plugin.c:127
-msgid "Invalid Unicode"
-msgstr "Ógildur Unikóði"
-
 #: src/planner-sql-plugin.c:269
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Connection to database '%s' failed:\n"
 "%s"
@@ -1458,10 +1617,6 @@ msgstr "Enda"
 #: src/planner-task-view.c:231
 msgid "Slack"
 msgstr "Slaki"
-
-#: src/planner-task-view.c:232
-msgid "Cost"
-msgstr "Kostnaður"
 
 #: src/planner-task-view.c:438
 msgid "Edit custom task properties"

@@ -26,6 +26,25 @@ data/glade/sql.glade
 data/glade/task-dialog.glade
 data/glade/task-input-dialog.glade
 
+libplanner/mrp-assignment.c
+libplanner/mrp-calendar.c
+libplanner/mrp-error.c
+libplanner/mrp-group.c
+libplanner/mrp-object.c
+libplanner/mrp-project.c
+libplanner/mrp-property.c
+libplanner/mrp-resource.c
+libplanner/mrp-storage-module-factory.c
+libplanner/mrp-storage-module.c
+libplanner/mrp-task-manager.c
+libplanner/mrp-task.c
+libplanner/mrp-time.c
+libplanner/mrp-day.c
+libplanner/mrp-parser.c
+libplanner/mrp-storage-mrproject.c
+libplanner/mrp-sql.c
+libplanner/mrp-storage-sql.c
+
 src/planner-application.c
 src/planner-main-window.c
 src/planner-main.c
@@ -82,6 +101,4 @@ src/planner-gantt-print.c
 src/planner-resource-view.c
 
 src/planner-sidebar.c
-
-
 

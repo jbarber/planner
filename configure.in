@@ -231,10 +231,7 @@ GETTEXT_PACKAGE=planner
 AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE", [The prefix for our gettext translation domains.])
 
-dnl Note to translators: you MUST have .po files in both directories
-dnl po and po-libplanner before adding you language code to
-dnl ALL_LINGUAS
-ALL_LINGUAS="am az be ca cs da de el es fa fr hi hr hu is it ja ko lv ml ms nl nn no pl pt pt_BR ru sk sr sr@Latn sv uk zh_CN"
+ALL_LINGUAS="am az be ca cs da de el es et fa fr hi hr hu is it ja ko lv ml ms nl nn no pl pt pt_BR ru sk sr sr@Latn sv uk zh_CN"
 
 AM_GLIB_GNU_GETTEXT
 
@@ -267,7 +264,6 @@ docs/libplanner/Makefile
 docs/user-guide/Makefile
 docs/user-guide/C/Makefile
 po/Makefile.in
-po-libplanner/Makefile.in
 data/Makefile
 data/images/Makefile
 data/glade/Makefile
@@ -280,9 +276,6 @@ libplanner-1.pc
 ])
 
 dnl python/Makefile
-
-AC_CONFIG_COMMANDS([sed-po-makefiles],
-[sed -e "/POTFILES =/r po-libplanner/POTFILES" po-libplanner/Makefile.in > po-libplanner/Makefile])
 
 AC_OUTPUT
 

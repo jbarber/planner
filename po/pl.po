@@ -9,7 +9,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mrproject\n"
-"POT-Creation-Date: 2003-12-01 23:08+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-12-04 16:40+0100\n"
 "PO-Revision-Date: 2003-06-29 13:27+0200\n"
 "Last-Translator: GNOME PL Team <translators@gnome.pl>\n"
 "Language-Team: Polish <pl@li.org>\n"
@@ -23,6 +24,7 @@ msgid "Planner Project Management"
 msgstr "Zarządzanie projektami"
 
 #: data/planner.desktop.in.h:2
+#, fuzzy
 msgid "Project Management"
 msgstr "Zarządzanie projektami"
 
@@ -55,8 +57,9 @@ msgid "Copy the selection"
 msgstr "Kopiuje zaznaczenie"
 
 #: data/ui/main-window.ui.h:7
+#, fuzzy
 msgid "Create a new project"
-msgstr "Tworzy nowy projekt"
+msgstr "Otwiera projekt"
 
 #: data/ui/main-window.ui.h:8
 msgid "Cut the selection"
@@ -270,8 +273,9 @@ msgid "Reset _All Constraints"
 msgstr "Wyzeruj _wszystkie ograniczenia"
 
 #: data/ui/gantt-view.ui.h:11 data/ui/task-view.ui.h:11
+#, fuzzy
 msgid "Reset _Constraint"
-msgstr "Wyzeruj _ograniczenie"
+msgstr "Wyzeruj _wszystkie ograniczenia"
 
 #: data/ui/gantt-view.ui.h:12 data/ui/task-view.ui.h:12
 #: data/ui/resource-view.ui.h:7
@@ -284,6 +288,7 @@ msgid "Select all tasks"
 msgstr "Wybiera wszystkie zadania"
 
 #: data/ui/gantt-view.ui.h:14
+#, fuzzy
 msgid "Test"
 msgstr "Przetestuj"
 
@@ -448,6 +453,7 @@ msgid "<b>Working time</b>"
 msgstr "<b>Czas pracy</b>"
 
 #: data/glade/calendar-dialog.glade.h:10
+#, fuzzy
 msgid "Apply"
 msgstr "Zastosuj"
 
@@ -472,8 +478,9 @@ msgid "Custom working time"
 msgstr "Dowolny czas pracy"
 
 #: data/glade/calendar-dialog.glade.h:16
+#, fuzzy
 msgid "Day type:"
-msgstr "Typ dnia:"
+msgstr "Nowy typ dnia"
 
 #: data/glade/calendar-dialog.glade.h:17
 msgid "Default Week"
@@ -548,6 +555,7 @@ msgid "Working time..."
 msgstr "Czas pracy..."
 
 #: data/glade/calendar-dialog.glade.h:35
+#, fuzzy
 msgid "_Derive from a calendar"
 msgstr "_Pochodzący od kalendarza"
 
@@ -629,6 +637,7 @@ msgid "New Project Phase"
 msgstr "Nowa faza projektu"
 
 #: data/glade/project-properties.glade.h:9
+#, fuzzy
 msgid "Project _name:"
 msgstr "_Nazwa projektu:"
 
@@ -653,6 +662,7 @@ msgid "_Manager:"
 msgstr "Menedżer:"
 
 #: data/glade/project-properties.glade.h:15
+#, fuzzy
 msgid "_Organization:"
 msgstr "_Organizacja:"
 
@@ -759,7 +769,7 @@ msgid "Username:"
 msgstr "Nazwa użytkownika:"
 
 #: data/glade/task-dialog.glade.h:3
-#, no-c-format
+#, fuzzy, no-c-format
 msgid "%"
 msgstr "%s"
 
@@ -780,10 +790,12 @@ msgid "Predecessors"
 msgstr "Poprzednie zadania"
 
 #: data/glade/task-dialog.glade.h:12 src/planner-resource-view.c:342
+#, fuzzy
 msgid "Resources"
-msgstr "Zasoby"
+msgstr "_Zasoby"
 
 #: data/glade/task-dialog.glade.h:13
+#, fuzzy
 msgid "_Duration:"
 msgstr "_Trwanie:"
 
@@ -811,6 +823,168 @@ msgstr "Wstaw zadanie"
 #: data/glade/task-input-dialog.glade.h:4
 msgid "Work:"
 msgstr "Praca:"
+
+#: libplanner/mrp-project.c:441 src/planner-group-dialog.c:411
+msgid "Default"
+msgstr "Domyślny"
+
+#: libplanner/mrp-project.c:749
+#, c-format
+msgid "Couldn't find a suitable file module for loading '%s'"
+msgstr "Nie można odnaleźć odpowiedniego pliku modułu do odczytu \"%s\""
+
+#: libplanner/mrp-project.c:770 libplanner/mrp-project.c:1034
+msgid "No support for SQL storage built into this version of MrProject."
+msgstr ""
+"Ta wersja programu MrProject nie posiada wsparcia dla przechowywania zapytań "
+"SQL."
+
+#: libplanner/mrp-project.c:807
+#, fuzzy
+msgid "Invalid URI."
+msgstr "Niepoprawny Unicode"
+
+#: libplanner/mrp-project.c:928
+#, c-format
+msgid "Unable to find file writer identified by '%s'"
+msgstr ""
+"Nie można znaleźć programu zapisującego plik identyfikowanego jako \"%s\""
+
+#: libplanner/mrp-project.c:991
+msgid "Couldn't find a suitable file module for loading project"
+msgstr "Nie można odnaleźć odpowiedniego pliku modułu do odczytu projektu"
+
+#: libplanner/mrp-property.c:365
+#, fuzzy
+msgid "Text"
+msgstr "Przetestuj"
+
+#: libplanner/mrp-property.c:367
+msgid "String list"
+msgstr "Lista napisów"
+
+#: libplanner/mrp-property.c:369
+#, fuzzy
+msgid "Integer number"
+msgstr "Nazwa menedżera"
+
+#: libplanner/mrp-property.c:371
+msgid "Floating-point number"
+msgstr "Liczba zmiennoprzecinkowa"
+
+#: libplanner/mrp-property.c:373
+#, fuzzy
+msgid "Date"
+msgstr "Typ dnia:"
+
+#: libplanner/mrp-property.c:375
+#, fuzzy
+msgid "Duration"
+msgstr "_Trwanie:"
+
+#: libplanner/mrp-property.c:377 src/planner-task-view.c:232
+msgid "Cost"
+msgstr "Koszt"
+
+#: libplanner/mrp-property.c:380 src/planner-project-properties.c:505
+msgid "None"
+msgstr "Brak"
+
+#: libplanner/mrp-task-manager.c:1769
+msgid "Can not add a predecessor relation between a task and its ancestor."
+msgstr ""
+"Nie można ustalić relacji poprzedniości pomiędzy następnikiem zadania i nim "
+"samym."
+
+#: libplanner/mrp-task-manager.c:1778 libplanner/mrp-task-manager.c:1786
+msgid "Can not add a predecessor, because it would result in a loop."
+msgstr ""
+"Nie można dodać poprzednika, ponieważ spowodowałoby to powstanie pętli."
+
+#: libplanner/mrp-task-manager.c:1821
+msgid "Can not move the task, since it would result in a loop."
+msgstr ""
+"Nie można przenieść zadania, ponieważ spowodowałoby to powstanie pętli."
+
+#: libplanner/mrp-task.c:1016
+msgid ""
+"Could not add a predecessor relation, because the tasks are already related."
+msgstr ""
+"Nie można ustalić relacji poprzedniości, ponieważ zadania są już powiązane."
+
+#: libplanner/mrp-day.c:54
+#, fuzzy
+msgid "Working"
+msgstr "Praca"
+
+#: libplanner/mrp-day.c:55
+msgid "A default working day"
+msgstr "Domyślny dzień roboczy"
+
+#: libplanner/mrp-day.c:57
+#, fuzzy
+msgid "Nonworking"
+msgstr "Bez czasu pracy"
+
+#: libplanner/mrp-day.c:58
+msgid "A default non working day"
+msgstr "Domyślny dzień wolny"
+
+#: libplanner/mrp-day.c:60
+msgid "Use base"
+msgstr "Użycie podstawy"
+
+#: libplanner/mrp-day.c:61
+#, fuzzy
+msgid "Use day from base calendar"
+msgstr "_Pochodzący od kalendarza"
+
+#: libplanner/mrp-parser.c:1043 libplanner/mrp-parser.c:1138
+#, fuzzy
+msgid "Could not create XML tree"
+msgstr "Nie można utworzyć okna właściwości."
+
+#: libplanner/mrp-parser.c:1104
+#, fuzzy
+msgid "Could not write XML file"
+msgstr "Nie można otworzyć pliku wtyczki \"%s\"\n"
+
+#. Give up.
+#: libplanner/mrp-sql.c:229 src/planner-sql-plugin.c:127
+msgid "Invalid Unicode"
+msgstr "Niepoprawny Unicode"
+
+#: libplanner/mrp-sql.c:2205
+#, c-format
+msgid ""
+"The project '%s' has been changed by the user '%s' since you opened it. Do "
+"you want to save anyway?"
+msgstr ""
+"Projekt \"%s\" został zmieniony przez użytkownika \"%s\" od czasu gdy został "
+"otwarty. Czy chcesz go jednak zapisać?"
+
+#: libplanner/mrp-sql.c:3443
+#, fuzzy, c-format
+msgid ""
+"Connection to database '%s' failed.\n"
+"%s"
+msgstr ""
+"Połączenie z bazą danych \"%s\" zakończone niepowodzeniem:\n"
+"%s"
+
+#: libplanner/mrp-storage-sql.c:205
+msgid "Invalid SQL URI (must start with 'sql://' and contain '#')."
+msgstr ""
+"Niepoprawny URI SQL (musi rozpoczynać się od \"sql://\" i zawierać znak \"#"
+"\")."
+
+#: libplanner/mrp-storage-sql.c:274
+msgid "Invalid SQL URI (invalid project id)."
+msgstr "Niepoprawny URI SQL (niepoprawny identyfikator projektu)."
+
+#: libplanner/mrp-storage-sql.c:282
+msgid "Invalid SQL URI (no database name specified)."
+msgstr "Niepoprawny URI SQL (nie określono nazwy bazy danych)."
 
 #: src/planner-application.c:117
 msgid "Edit"
@@ -936,9 +1110,9 @@ msgstr ""
 "mrproject: opcja --geometry nie może być użyta z więcej niż jednym plikiem."
 
 #: src/planner-plugin-loader.c:40
-#, c-format
+#, fuzzy, c-format
 msgid "Could not open plugin file '%s'\n"
-msgstr "Nie można otworzyć pliku wtyczki \"%s\"\n"
+msgstr "Nie można otworzyć pliku wtyczki widoku \"%s\"\n"
 
 #: src/planner-view-loader.c:40
 #, c-format
@@ -1006,8 +1180,9 @@ msgid "Sunday"
 msgstr "Niedziela"
 
 #: src/planner-default-week-dialog.c:266
+#, fuzzy
 msgid "No working time"
-msgstr "Bez czasu pracy"
+msgstr "Dowolny czas pracy"
 
 #: src/planner-default-week-dialog.c:277 src/planner-default-week-dialog.c:281
 msgid "%H:%M"
@@ -1021,28 +1196,23 @@ msgid "Name"
 msgstr "Nazwa"
 
 #: src/planner-group-dialog.c:393
+#, fuzzy
 msgid "Manager name"
 msgstr "Nazwa menedżera"
 
 #: src/planner-group-dialog.c:399
+#, fuzzy
 msgid "Manager phone"
 msgstr "Telefon menedżera"
 
 #: src/planner-group-dialog.c:405
+#, fuzzy
 msgid "Manager email"
 msgstr "E-mail menedżera"
-
-#: src/planner-group-dialog.c:411
-msgid "Default"
-msgstr "Domyślny"
 
 #: src/planner-project-properties.c:146
 msgid "Select a calendar to use for this project:"
 msgstr "Wybierz kalendarz używany w tym projekcie:"
-
-#: src/planner-project-properties.c:505
-msgid "None"
-msgstr "Brak"
 
 #: src/planner-project-properties.c:606
 msgid "Property"
@@ -1062,6 +1232,7 @@ msgid "Do you really want to remove the property '%s' from the project?"
 msgstr "Czy rzeczywiście chcesz usunąć właściwość \"%s\" z projektu?"
 
 #: src/planner-project-properties.c:1194
+#, fuzzy
 msgid "Could not create properties dialog."
 msgstr "Nie można utworzyć okna właściwości."
 
@@ -1114,8 +1285,11 @@ msgstr "Modyfikacja właściwości zasobu"
 #: src/planner-resource-dialog.c:1101 src/planner-task-view.c:230
 #: src/planner-gantt-print.c:198 src/planner-resource-view.c:629
 #: src/planner-resource-view.c:645 src/planner-resource-view.c:1187
+#, fuzzy
 msgid "Work"
-msgstr "Praca"
+msgstr ""
+"\n"
+"Praca"
 
 #: src/planner-resource-dialog.c:1102 src/planner-resource-view.c:632
 #: src/planner-resource-view.c:646 src/planner-resource-view.c:1188
@@ -1183,13 +1357,8 @@ msgstr ""
 "\"%s\" jest katalogiem.\n"
 "Podaj nazwę pliku i spróbuj ponownie."
 
-#. Give up.
-#: src/planner-sql-plugin.c:127
-msgid "Invalid Unicode"
-msgstr "Niepoprawny Unicode"
-
 #: src/planner-sql-plugin.c:269
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Connection to database '%s' failed:\n"
 "%s"
@@ -1257,8 +1426,9 @@ msgid "Project start"
 msgstr "Początek projektu"
 
 #: src/planner-gantt-row.c:1841 src/planner-gantt-row.c:1844
+#, fuzzy
 msgid "No name"
-msgstr "Bez nazwy"
+msgstr "(Brak nazwy)"
 
 #: src/planner-gantt-row.c:1847
 #, c-format
@@ -1302,9 +1472,9 @@ msgid "Wk %d"
 msgstr "%d. tydz."
 
 #: src/planner-scale-utils.c:329
-#, c-format
+#, fuzzy, c-format
 msgid "Week %d"
-msgstr "%d. tydzień"
+msgstr "%d. tydz."
 
 #. i18n: Week, year.
 #: src/planner-scale-utils.c:334
@@ -1363,8 +1533,9 @@ msgid "/_Edit task..."
 msgstr "/Z_modyfikuj zadanie..."
 
 #: src/planner-task-tree.c:2112
+#, fuzzy
 msgid "mon"
-msgstr "mie"
+msgstr "miesiąc"
 
 #. month unit variant accepted in input
 #: src/planner-task-tree.c:2113
@@ -1398,8 +1569,9 @@ msgstr "d"
 
 #. day unit variant accepted in input
 #: src/planner-task-tree.c:2119
+#, fuzzy
 msgid "day"
-msgstr "dzień"
+msgstr "dni"
 
 #. day unit variant accepted in input
 #: src/planner-task-tree.c:2121
@@ -1440,6 +1612,7 @@ msgid "_Tasks"
 msgstr "_Zadania"
 
 #: src/planner-task-view.c:228
+#, fuzzy
 msgid "Start"
 msgstr "Początek"
 
@@ -1450,10 +1623,6 @@ msgstr "Koniec"
 #: src/planner-task-view.c:231
 msgid "Slack"
 msgstr "Zastój"
-
-#: src/planner-task-view.c:232
-msgid "Cost"
-msgstr "Koszt"
 
 #: src/planner-task-view.c:438
 msgid "Edit custom task properties"
@@ -1480,12 +1649,241 @@ msgid "Edit custom resource properties"
 msgstr "Modyfikuje dowolne właściwości zasobu"
 
 #: src/planner-resource-view.c:1011
+#, fuzzy
 msgid "Group"
-msgstr "Grupa"
+msgstr "Grupa:"
 
 #: src/planner-resource-view.c:1040
 msgid "Email"
 msgstr "E-mail"
+
+#~ msgid ""
+#~ "Could not load file.\n"
+#~ "Error was: \"%s\""
+#~ msgstr ""
+#~ "Nie można odczytać pliku.\n"
+#~ "Wystąpił błąd: \"%s\""
+
+#~ msgid "No MPX header"
+#~ msgstr "Brak nagłówka MPX"
+
+#~ msgid "Not an mpx '%s'"
+#~ msgstr "Oczekiwano tokena \"MPX\", napotkano \"%s\""
+
+#, fuzzy
+#~ msgid "Group Name"
+#~ msgstr "Grupa"
+
+#, fuzzy
+#~ msgid "The start date of the project"
+#~ msgstr "Tworzy nowy projekt"
+
+#~ msgid "Default group for new resources"
+#~ msgstr "Domyślna grupa nowych zasobów"
+
+#, fuzzy
+#~ msgid "Resource Name"
+#~ msgstr "Zasoby"
+
+#, fuzzy
+#~ msgid "Resource Group"
+#~ msgstr "Zasoby"
+
+#, fuzzy
+#~ msgid "Resource Type"
+#~ msgstr "Zasoby"
+
+#, fuzzy
+#~ msgid "Resource Units"
+#~ msgstr "Zasoby"
+
+#, fuzzy
+#~ msgid "Resource Email"
+#~ msgstr "Zasoby"
+
+#, fuzzy
+#~ msgid "Resource note"
+#~ msgstr "Zasoby"
+
+#~ msgid "The project that this task manager is attached to"
+#~ msgstr "Projekt, do którego jest dołączony menedżer zadań"
+
+#, fuzzy
+#~ msgid "Task name"
+#~ msgstr "Bez nazwy"
+
+#~ msgid "Task note"
+#~ msgstr "Uwaga do zadania"
+
+#~ msgid "Task start time"
+#~ msgstr "Czas rozpoczęcia zadania"
+
+#~ msgid "Task finish time"
+#~ msgstr "Czas zakończenie zadania"
+
+#~ msgid "Latest task start time"
+#~ msgstr "Czas rozpoczęcia ostatniego zadania"
+
+#~ msgid "Latest task finish time"
+#~ msgstr "Czas zakończenia ostatniego zadania"
+
+#~ msgid "Task work"
+#~ msgstr "Praca związana z zadaniem"
+
+#~ msgid "In critical path"
+#~ msgstr "Na ścieżce krytycznej"
+
+#, fuzzy
+#~ msgid "Time constraint"
+#~ msgstr "Wyzeruj _ograniczenie"
+
+#~ msgid "Percent complete"
+#~ msgstr "Procent zakończenia"
+
+#~ msgid "Task with assignment"
+#~ msgstr "Zadanie z przypisaniem"
+
+#, fuzzy
+#~ msgid "Allocated resource"
+#~ msgstr "Usuń zasób"
+
+#~ msgid "Allocated units"
+#~ msgstr "Zaalokowane jednostki"
+
+#~ msgid "Jan"
+#~ msgstr "Sty"
+
+#~ msgid "Feb"
+#~ msgstr "Lut"
+
+#~ msgid "Mar"
+#~ msgstr "Mar"
+
+#~ msgid "Apr"
+#~ msgstr "Kwi"
+
+#, fuzzy
+#~ msgid "May"
+#~ msgstr "dzień"
+
+#~ msgid "Jun"
+#~ msgstr "Cze"
+
+#~ msgid "Jul"
+#~ msgstr "Lip"
+
+#~ msgid "Aug"
+#~ msgstr "Sie"
+
+#~ msgid "Sep"
+#~ msgstr "Wrz"
+
+#~ msgid "Oct"
+#~ msgstr "Paź"
+
+#~ msgid "Nov"
+#~ msgstr "Lis"
+
+#~ msgid "Dec"
+#~ msgstr "Gru"
+
+#~ msgid "January"
+#~ msgstr "Styczeń"
+
+#~ msgid "February"
+#~ msgstr "Luty"
+
+#~ msgid "March"
+#~ msgstr "Marzec"
+
+#~ msgid "June"
+#~ msgstr "Czerwiec"
+
+#~ msgid "July"
+#~ msgstr "Lipiec"
+
+#~ msgid "August"
+#~ msgstr "Sierpień"
+
+#~ msgid "September"
+#~ msgstr "Wrzesień"
+
+#~ msgid "October"
+#~ msgstr "Październik"
+
+#~ msgid "November"
+#~ msgstr "Listopad"
+
+#~ msgid "December"
+#~ msgstr "Grudzień"
+
+#~ msgid "J 1"
+#~ msgstr "S 1"
+
+#~ msgid "F 2"
+#~ msgstr "L 2"
+
+#~ msgid "M 3"
+#~ msgstr "M 3"
+
+#~ msgid "A 4"
+#~ msgstr "K 4"
+
+#~ msgid "M 5"
+#~ msgstr "M 5"
+
+#~ msgid "J 6"
+#~ msgstr "C 6"
+
+#~ msgid "J 7"
+#~ msgstr "L 7"
+
+#~ msgid "A 8"
+#~ msgstr "S 8"
+
+#~ msgid "S 9"
+#~ msgstr "W 9"
+
+#~ msgid "O 10"
+#~ msgstr "P 10"
+
+#~ msgid "N 11"
+#~ msgstr "L 11"
+
+#~ msgid "D 12"
+#~ msgstr "G 12"
+
+#, fuzzy
+#~ msgid "Sun"
+#~ msgstr "Niedziela"
+
+#, fuzzy
+#~ msgid "Mon"
+#~ msgstr "mie"
+
+#, fuzzy
+#~ msgid "Tue"
+#~ msgstr "Wtorek"
+
+#, fuzzy
+#~ msgid "Wed"
+#~ msgstr "%d. tydzień"
+
+#~ msgid "Thu"
+#~ msgstr "Czw"
+
+#, fuzzy
+#~ msgid "Fri"
+#~ msgstr "Piątek"
+
+#~ msgid "Failed to load file %s."
+#~ msgstr "Nie można odczytać pliku %s."
+
+#~ msgid "%s is not valid XML."
+#~ msgstr "%s nie jest poprawnym plikiem XML."
+
+#~ msgid "\"%s\" is not a valid MrProject file"
+#~ msgstr "\"%s\" nie jest poprawnym plikiem programu MrProject"
 
 #~ msgid "Contribute to MrProject"
 #~ msgstr "Pomóż tworzyć MrProject"
@@ -1529,9 +1927,6 @@ msgstr "E-mail"
 
 #~ msgid "Up"
 #~ msgstr "W górę"
-
-#~ msgid "Remove resource"
-#~ msgstr "Usuń zasób"
 
 #~ msgid "_Don't save"
 #~ msgstr "_Nie zapisuj"

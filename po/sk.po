@@ -8,14 +8,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mrproject.HEAD.sk\n"
-"POT-Creation-Date: 2003-12-01 23:08+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-12-04 16:40+0100\n"
 "PO-Revision-Date: 2003-09-06 13:00+0100\n"
 "Last-Translator: Zdenko Podobný <zdpo@mailbox.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Report-Msgid-Bugs-To: \n"
 "X-Generator: KBabel 1.2\n"
 
 #: data/planner.desktop.in.h:1
@@ -285,6 +285,7 @@ msgid "Select all tasks"
 msgstr "Zvoliť všetky úlohy"
 
 #: data/ui/gantt-view.ui.h:14
+#, fuzzy
 msgid "Test"
 msgstr "Test"
 
@@ -473,8 +474,9 @@ msgid "Custom working time"
 msgstr "Vlastná pracovná doba"
 
 #: data/glade/calendar-dialog.glade.h:16
+#, fuzzy
 msgid "Day type:"
-msgstr "Typ dní:"
+msgstr "Nový typ dní"
 
 #: data/glade/calendar-dialog.glade.h:17
 msgid "Default Week"
@@ -549,6 +551,7 @@ msgid "Working time..."
 msgstr "Pracovná doba..."
 
 #: data/glade/calendar-dialog.glade.h:35
+#, fuzzy
 msgid "_Derive from a calendar"
 msgstr "_Odvodiť z kalendára"
 
@@ -786,6 +789,7 @@ msgid "Resources"
 msgstr "Zdroje"
 
 #: data/glade/task-dialog.glade.h:13
+#, fuzzy
 msgid "_Duration:"
 msgstr "_Trvanie:"
 
@@ -813,6 +817,161 @@ msgstr "Vložiť úlohu"
 #: data/glade/task-input-dialog.glade.h:4
 msgid "Work:"
 msgstr "Práca:"
+
+#: libplanner/mrp-project.c:441 src/planner-group-dialog.c:411
+msgid "Default"
+msgstr "Štandard"
+
+#: libplanner/mrp-project.c:749
+#, c-format
+msgid "Couldn't find a suitable file module for loading '%s'"
+msgstr "Nie je možné nájsť vhodný modul súborov pre načítanie '%s'"
+
+#: libplanner/mrp-project.c:770 libplanner/mrp-project.c:1034
+msgid "No support for SQL storage built into this version of MrProject."
+msgstr ""
+"V tejto verzií MrProject nie je zabudovaná podpora pre ukladanie do SQL."
+
+#: libplanner/mrp-project.c:807
+#, fuzzy
+msgid "Invalid URI."
+msgstr "Neplatné Unicode"
+
+#: libplanner/mrp-project.c:928
+#, c-format
+msgid "Unable to find file writer identified by '%s'"
+msgstr "Nie je možné nájsť zapisovač súborov identifikovaný '%s'"
+
+#: libplanner/mrp-project.c:991
+msgid "Couldn't find a suitable file module for loading project"
+msgstr "Nie je možné nájsť vhodný modul súborov pre načítanie projektu"
+
+#: libplanner/mrp-property.c:365
+#, fuzzy
+msgid "Text"
+msgstr "Test"
+
+#: libplanner/mrp-property.c:367
+msgid "String list"
+msgstr "Zoznam reťazcov"
+
+#: libplanner/mrp-property.c:369
+#, fuzzy
+msgid "Integer number"
+msgstr "Meno manažéra"
+
+#: libplanner/mrp-property.c:371
+msgid "Floating-point number"
+msgstr "Číslo s pohyblivou desatinnou čiarkou"
+
+#: libplanner/mrp-property.c:373
+#, fuzzy
+msgid "Date"
+msgstr "Typ dní:"
+
+#: libplanner/mrp-property.c:375
+#, fuzzy
+msgid "Duration"
+msgstr "_Trvanie:"
+
+#: libplanner/mrp-property.c:377 src/planner-task-view.c:232
+msgid "Cost"
+msgstr "Náklady"
+
+#: libplanner/mrp-property.c:380 src/planner-project-properties.c:505
+msgid "None"
+msgstr "Žiadne"
+
+#: libplanner/mrp-task-manager.c:1769
+msgid "Can not add a predecessor relation between a task and its ancestor."
+msgstr "Nie je možné pridať predchodcu medzi úlohu a jej predchodcu."
+
+#: libplanner/mrp-task-manager.c:1778 libplanner/mrp-task-manager.c:1786
+msgid "Can not add a predecessor, because it would result in a loop."
+msgstr "Nie je možné pridať predchodcu, pretože by tak vznikla slučka."
+
+#: libplanner/mrp-task-manager.c:1821
+msgid "Can not move the task, since it would result in a loop."
+msgstr "Nie je možné presunúť úlohu, pretože by tak vznikla slučka."
+
+#: libplanner/mrp-task.c:1016
+msgid ""
+"Could not add a predecessor relation, because the tasks are already related."
+msgstr ""
+"Nie je možné pridať vzťah predchodcu, pretože medzi úlohami už existuje "
+"vzťah."
+
+#: libplanner/mrp-day.c:54
+#, fuzzy
+msgid "Working"
+msgstr "Práca"
+
+#: libplanner/mrp-day.c:55
+msgid "A default working day"
+msgstr "Štandardný pracovný deň"
+
+#: libplanner/mrp-day.c:57
+#, fuzzy
+msgid "Nonworking"
+msgstr "Žiadna pracovná doba"
+
+#: libplanner/mrp-day.c:58
+msgid "A default non working day"
+msgstr "Štandardný nepracovný deň"
+
+#: libplanner/mrp-day.c:60
+msgid "Use base"
+msgstr "Použiť základ"
+
+#: libplanner/mrp-day.c:61
+#, fuzzy
+msgid "Use day from base calendar"
+msgstr "_Odvodiť z kalendára"
+
+#: libplanner/mrp-parser.c:1043 libplanner/mrp-parser.c:1138
+#, fuzzy
+msgid "Could not create XML tree"
+msgstr "Nie je možné vytvoriť dialóg vlastností."
+
+#: libplanner/mrp-parser.c:1104
+#, fuzzy
+msgid "Could not write XML file"
+msgstr "Nie je možné otvoriť súbor modulu '%s'\n"
+
+#. Give up.
+#: libplanner/mrp-sql.c:229 src/planner-sql-plugin.c:127
+msgid "Invalid Unicode"
+msgstr "Neplatné Unicode"
+
+#: libplanner/mrp-sql.c:2205
+#, c-format
+msgid ""
+"The project '%s' has been changed by the user '%s' since you opened it. Do "
+"you want to save anyway?"
+msgstr ""
+"Projekt '%s' bol zmenený používateľom '%s' potom, čo ste ho otvorili. Chcete "
+"ho aj tak uložiť?"
+
+#: libplanner/mrp-sql.c:3443
+#, fuzzy, c-format
+msgid ""
+"Connection to database '%s' failed.\n"
+"%s"
+msgstr ""
+"Spojenie s databázou '%s' zlyhalo:\n"
+"%s"
+
+#: libplanner/mrp-storage-sql.c:205
+msgid "Invalid SQL URI (must start with 'sql://' and contain '#')."
+msgstr "Neplatné SQL URI (musí začínať s 'sql://' a obsahovať '#')."
+
+#: libplanner/mrp-storage-sql.c:274
+msgid "Invalid SQL URI (invalid project id)."
+msgstr "Neplatné SQL URI (neplatné id projektu)."
+
+#: libplanner/mrp-storage-sql.c:282
+msgid "Invalid SQL URI (no database name specified)."
+msgstr "Neplatné SQL URI (nebol určený názov databázy)."
 
 #: src/planner-application.c:117
 msgid "Edit"
@@ -929,9 +1088,9 @@ msgid "mrproject: --geometry cannot be used with more than one file."
 msgstr "mrproject: --geometry nemôže byť použité s viac ako jedným súborom"
 
 #: src/planner-plugin-loader.c:40
-#, c-format
+#, fuzzy, c-format
 msgid "Could not open plugin file '%s'\n"
-msgstr "Nie je možné otvoriť súbor modulu '%s'\n"
+msgstr "Nie je možné otvoriť súbor modulu pohľadu '%s'\n"
 
 #: src/planner-view-loader.c:40
 #, c-format
@@ -999,8 +1158,9 @@ msgid "Sunday"
 msgstr "Nedeľa"
 
 #: src/planner-default-week-dialog.c:266
+#, fuzzy
 msgid "No working time"
-msgstr "Žiadna pracovná doba"
+msgstr "Vlastná pracovná doba"
 
 #: src/planner-default-week-dialog.c:277 src/planner-default-week-dialog.c:281
 msgid "%H:%M"
@@ -1014,8 +1174,9 @@ msgid "Name"
 msgstr "Meno"
 
 #: src/planner-group-dialog.c:393
+#, fuzzy
 msgid "Manager name"
-msgstr "Meno manažéra"
+msgstr "Telefón manažéra"
 
 #: src/planner-group-dialog.c:399
 msgid "Manager phone"
@@ -1025,17 +1186,9 @@ msgstr "Telefón manažéra"
 msgid "Manager email"
 msgstr "E-mail manažéra"
 
-#: src/planner-group-dialog.c:411
-msgid "Default"
-msgstr "Štandard"
-
 #: src/planner-project-properties.c:146
 msgid "Select a calendar to use for this project:"
 msgstr "Vyberte kalendár pre tento projekt:"
-
-#: src/planner-project-properties.c:505
-msgid "None"
-msgstr "Žiadne"
 
 #: src/planner-project-properties.c:606
 msgid "Property"
@@ -1055,6 +1208,7 @@ msgid "Do you really want to remove the property '%s' from the project?"
 msgstr "Skutočne chcete odstrániť vlastnosť '%s' z projektu?"
 
 #: src/planner-project-properties.c:1194
+#, fuzzy
 msgid "Could not create properties dialog."
 msgstr "Nie je možné vytvoriť dialóg vlastností."
 
@@ -1107,8 +1261,11 @@ msgstr "Upraviť vlastnosti zdroja"
 #: src/planner-resource-dialog.c:1101 src/planner-task-view.c:230
 #: src/planner-gantt-print.c:198 src/planner-resource-view.c:629
 #: src/planner-resource-view.c:645 src/planner-resource-view.c:1187
+#, fuzzy
 msgid "Work"
-msgstr "Práca"
+msgstr ""
+"\n"
+"Práca"
 
 #: src/planner-resource-dialog.c:1102 src/planner-resource-view.c:632
 #: src/planner-resource-view.c:646 src/planner-resource-view.c:1188
@@ -1176,13 +1333,8 @@ msgstr ""
 "\"%s\" je priečinok.\n"
 "Zadajte názov súboru a skúste to znovu."
 
-#. Give up.
-#: src/planner-sql-plugin.c:127
-msgid "Invalid Unicode"
-msgstr "Neplatné Unicode"
-
 #: src/planner-sql-plugin.c:269
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Connection to database '%s' failed:\n"
 "%s"
@@ -1443,10 +1595,6 @@ msgstr "Koniec"
 #: src/planner-task-view.c:231
 msgid "Slack"
 msgstr "Spomalenie"
-
-#: src/planner-task-view.c:232
-msgid "Cost"
-msgstr "Náklady"
 
 #: src/planner-task-view.c:438
 msgid "Edit custom task properties"

@@ -5,7 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mrproject\n"
-"POT-Creation-Date: 2003-12-01 23:08+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-12-04 16:40+0100\n"
 "PO-Revision-Date: 2003-02-21 17:16+0330\n"
 "Last-Translator: Roozbeh Pournader <roozbeh@sharif.edu>\n"
 "Language-Team: Persian <farsi@lists.sharif.edu>\n"
@@ -31,12 +32,14 @@ msgid "About this application"
 msgstr "درباره‌ی این برنامه"
 
 #: data/ui/main-window.ui.h:2
+#, fuzzy
 msgid "C_ut"
-msgstr ""
+msgstr "خروج"
 
 #: data/ui/main-window.ui.h:3
+#, fuzzy
 msgid "Clear"
-msgstr ""
+msgstr "تقویم"
 
 #: data/ui/main-window.ui.h:4
 msgid "Clear the selection"
@@ -55,8 +58,9 @@ msgid "Create a new project"
 msgstr "ایجاد یک پروژه‌ی جدید"
 
 #: data/ui/main-window.ui.h:8
+#, fuzzy
 msgid "Cut the selection"
-msgstr ""
+msgstr "درباره‌ی این برنامه"
 
 #: data/ui/main-window.ui.h:9
 msgid "Edit Day _Types"
@@ -124,8 +128,9 @@ msgid "Save the current project"
 msgstr "ذخیره کردن پروژه‌ی فعلی"
 
 #: data/ui/main-window.ui.h:25
+#, fuzzy
 msgid "Save the current project with a different name"
-msgstr ""
+msgstr "ذخیره کردن پروژه‌ی فعلی"
 
 #: data/ui/main-window.ui.h:26
 msgid "Show the MrProject User Guide"
@@ -180,8 +185,9 @@ msgid "_Open..."
 msgstr "باز کردن..."
 
 #: data/ui/main-window.ui.h:39
+#, fuzzy
 msgid "_Paste"
-msgstr ""
+msgstr "ایجاد"
 
 #: data/ui/main-window.ui.h:40
 #, fuzzy
@@ -225,13 +231,15 @@ msgid "I_ndent Task"
 msgstr ""
 
 #: data/ui/gantt-view.ui.h:2 data/ui/task-view.ui.h:2
+#, fuzzy
 msgid "In_sert Tasks..."
-msgstr ""
+msgstr "درج منابع..."
 
 #: data/ui/gantt-view.ui.h:3 data/ui/task-view.ui.h:3
 #: src/planner-application.c:75
+#, fuzzy
 msgid "Indent"
-msgstr ""
+msgstr "درچ"
 
 #: data/ui/gantt-view.ui.h:4 data/ui/task-view.ui.h:4
 #: data/ui/resource-view.ui.h:5 src/planner-application.c:54
@@ -240,12 +248,14 @@ msgid "Insert"
 msgstr "درچ"
 
 #: data/ui/gantt-view.ui.h:5 data/ui/task-view.ui.h:5
+#, fuzzy
 msgid "Move Task Do_wn"
-msgstr ""
+msgstr "پایین بردن"
 
 #: data/ui/gantt-view.ui.h:6 data/ui/task-view.ui.h:6
+#, fuzzy
 msgid "Move Task _Up"
-msgstr ""
+msgstr "بالا بردن"
 
 #: data/ui/gantt-view.ui.h:7 data/ui/task-view.ui.h:7
 #: src/planner-application.c:96
@@ -278,10 +288,12 @@ msgstr "انتخاب همه"
 
 #: data/ui/gantt-view.ui.h:13 data/ui/task-view.ui.h:13
 #: data/ui/resource-view.ui.h:8
+#, fuzzy
 msgid "Select all tasks"
-msgstr ""
+msgstr "انتخاب همه"
 
 #: data/ui/gantt-view.ui.h:14
+#, fuzzy
 msgid "Test"
 msgstr "آزمایش"
 
@@ -312,56 +324,64 @@ msgid "Zoom Out"
 msgstr "زوم به خارج"
 
 #: data/ui/gantt-view.ui.h:21
+#, fuzzy
 msgid "Zoom To Fit"
-msgstr ""
+msgstr "زوم به خارج"
 
 #: data/ui/gantt-view.ui.h:22
+#, fuzzy
 msgid "Zoom To _Fit"
-msgstr ""
+msgstr "زوم به خارج"
 
 #: data/ui/gantt-view.ui.h:23
 msgid "Zoom _Out"
 msgstr "زوم به خارج"
 
 #: data/ui/gantt-view.ui.h:24 data/ui/task-view.ui.h:19
+#, fuzzy
 msgid "_Edit Task Properties..."
-msgstr ""
+msgstr "ویرایش مشخصات منبع..."
 
 #: data/ui/gantt-view.ui.h:25
 msgid "_Highlight Critical Tasks"
 msgstr ""
 
 #: data/ui/gantt-view.ui.h:26 data/ui/task-view.ui.h:20
+#, fuzzy
 msgid "_Insert Task"
-msgstr ""
+msgstr "درج"
 
 #: data/ui/gantt-view.ui.h:27 data/ui/task-view.ui.h:21
+#, fuzzy
 msgid "_Remove Task"
-msgstr ""
+msgstr "حذف"
 
 #: data/ui/gantt-view.ui.h:28
 msgid "_Zoom In"
 msgstr "زوم به داخل"
 
 #: data/ui/task-view.ui.h:18
+#, fuzzy
 msgid "_Edit Custom Properties..."
-msgstr ""
+msgstr "ویرایش مشخصات منبع..."
 
 #: data/ui/html-plugin.ui.h:1 data/glade/html-output.glade.h:4
 msgid "Export to HTML"
 msgstr ""
 
 #: data/ui/sql-plugin.ui.h:1
+#, fuzzy
 msgid "Open from Database..."
-msgstr ""
+msgstr "<b>نوع روزها</b>"
 
 #: data/ui/sql-plugin.ui.h:2
 msgid "Save to Database..."
 msgstr ""
 
 #: data/ui/resource-view.ui.h:1
+#, fuzzy
 msgid "Edit _Custom Properties..."
-msgstr ""
+msgstr "ویرایش مشخصات منبع..."
 
 #: data/ui/resource-view.ui.h:2
 msgid "Edit _Groups"
@@ -397,8 +417,9 @@ msgid "*"
 msgstr "*"
 
 #: data/glade/add-predecessor.glade.h:2
+#, fuzzy
 msgid "Lag: "
-msgstr ""
+msgstr "برچسب: "
 
 #: data/glade/add-predecessor.glade.h:3
 msgid "New predecessor"
@@ -448,8 +469,9 @@ msgid "Apply"
 msgstr "اعمال"
 
 #: data/glade/calendar-dialog.glade.h:11
+#, fuzzy
 msgid "C_opy an existing calendar"
-msgstr ""
+msgstr "ایجاد یک تقویم خالی"
 
 #: data/glade/calendar-dialog.glade.h:12
 msgid "C_reate"
@@ -464,12 +486,14 @@ msgid "Create an _empty calendar"
 msgstr "ایجاد یک تقویم خالی"
 
 #: data/glade/calendar-dialog.glade.h:15
+#, fuzzy
 msgid "Custom working time"
-msgstr ""
+msgstr "ویرایش ساعات کاری"
 
 #: data/glade/calendar-dialog.glade.h:16
+#, fuzzy
 msgid "Day type:"
-msgstr "نوع روز:"
+msgstr "<b>نوع روزها</b>"
 
 #: data/glade/calendar-dialog.glade.h:17
 msgid "Default Week"
@@ -492,8 +516,9 @@ msgid "Enter the name of the new day type:"
 msgstr ""
 
 #: data/glade/calendar-dialog.glade.h:22
+#, fuzzy
 msgid "Existing calendars:"
-msgstr ""
+msgstr "ویرایش تقویم‌ها..."
 
 #: data/glade/calendar-dialog.glade.h:23
 msgid "From:"
@@ -508,12 +533,14 @@ msgid "New Calendar"
 msgstr "تقویم جدید"
 
 #: data/glade/calendar-dialog.glade.h:26
+#, fuzzy
 msgid "New Day Type"
-msgstr ""
+msgstr "ویرایش انواع روز"
 
 #: data/glade/calendar-dialog.glade.h:27
+#, fuzzy
 msgid "Select a calendar"
-msgstr ""
+msgstr "تقویم جدید"
 
 #: data/glade/calendar-dialog.glade.h:28
 msgid ""
@@ -603,8 +630,9 @@ msgid "Calendar:"
 msgstr "تقویم:"
 
 #: data/glade/project-properties.glade.h:4
+#, fuzzy
 msgid "Custom properties"
-msgstr ""
+msgstr "مشخصات پروژه"
 
 #: data/glade/project-properties.glade.h:5
 msgid "Edit Project phases"
@@ -652,8 +680,9 @@ msgid "_Organization:"
 msgstr "سازمان:"
 
 #: data/glade/property-dialog.glade.h:1
+#, fuzzy
 msgid "Custom Properties"
-msgstr ""
+msgstr "ویرایش مشخصات پروژه"
 
 #: data/glade/resource-dialog.glade.h:2
 #, fuzzy
@@ -726,12 +755,14 @@ msgid "<b>Open Database</b>"
 msgstr "<b>نوع روزها</b>"
 
 #: data/glade/sql.glade.h:4
+#, fuzzy
 msgid "Database:"
-msgstr ""
+msgstr "نوع روز:"
 
 #: data/glade/sql.glade.h:5
+#, fuzzy
 msgid "Open Database"
-msgstr ""
+msgstr "<b>نوع روزها</b>"
 
 #: data/glade/sql.glade.h:6
 msgid "Password:"
@@ -781,12 +812,14 @@ msgid "Resources"
 msgstr "منابع"
 
 #: data/glade/task-dialog.glade.h:13
+#, fuzzy
 msgid "_Duration:"
 msgstr "مدت:"
 
 #: data/glade/task-dialog.glade.h:14
+#, fuzzy
 msgid "_Fixed duration"
-msgstr ""
+msgstr "مدت:"
 
 #: data/glade/task-dialog.glade.h:15
 msgid "_Milestone"
@@ -802,12 +835,158 @@ msgid "days"
 msgstr "روز"
 
 #: data/glade/task-input-dialog.glade.h:2
+#, fuzzy
 msgid "Insert task"
-msgstr ""
+msgstr "درچ"
 
 #: data/glade/task-input-dialog.glade.h:4
 msgid "Work:"
 msgstr "کار:"
+
+#: libplanner/mrp-project.c:441 src/planner-group-dialog.c:411
+msgid "Default"
+msgstr "پیش‌فرض"
+
+#: libplanner/mrp-project.c:749
+#, c-format
+msgid "Couldn't find a suitable file module for loading '%s'"
+msgstr ""
+
+#: libplanner/mrp-project.c:770 libplanner/mrp-project.c:1034
+msgid "No support for SQL storage built into this version of MrProject."
+msgstr ""
+
+#: libplanner/mrp-project.c:807
+msgid "Invalid URI."
+msgstr ""
+
+#: libplanner/mrp-project.c:928
+#, c-format
+msgid "Unable to find file writer identified by '%s'"
+msgstr ""
+
+#: libplanner/mrp-project.c:991
+msgid "Couldn't find a suitable file module for loading project"
+msgstr ""
+
+#: libplanner/mrp-property.c:365
+#, fuzzy
+msgid "Text"
+msgstr "آزمایش"
+
+#: libplanner/mrp-property.c:367
+msgid "String list"
+msgstr "فهرست رشته"
+
+#: libplanner/mrp-property.c:369
+#, fuzzy
+msgid "Integer number"
+msgstr "نام مدیر"
+
+#: libplanner/mrp-property.c:371
+msgid "Floating-point number"
+msgstr "عدد ممیزشناور"
+
+#: libplanner/mrp-property.c:373
+#, fuzzy
+msgid "Date"
+msgstr "نوع روز:"
+
+#: libplanner/mrp-property.c:375
+#, fuzzy
+msgid "Duration"
+msgstr "مدت:"
+
+#: libplanner/mrp-property.c:377 src/planner-task-view.c:232
+msgid "Cost"
+msgstr "هزینه"
+
+#: libplanner/mrp-property.c:380 src/planner-project-properties.c:505
+msgid "None"
+msgstr ""
+
+#: libplanner/mrp-task-manager.c:1769
+msgid "Can not add a predecessor relation between a task and its ancestor."
+msgstr ""
+
+#: libplanner/mrp-task-manager.c:1778 libplanner/mrp-task-manager.c:1786
+msgid "Can not add a predecessor, because it would result in a loop."
+msgstr ""
+
+#: libplanner/mrp-task-manager.c:1821
+msgid "Can not move the task, since it would result in a loop."
+msgstr ""
+
+#: libplanner/mrp-task.c:1016
+msgid ""
+"Could not add a predecessor relation, because the tasks are already related."
+msgstr ""
+
+#: libplanner/mrp-day.c:54
+#, fuzzy
+msgid "Working"
+msgstr "کار"
+
+#: libplanner/mrp-day.c:55
+msgid "A default working day"
+msgstr "روز کاری پیش‌فرض"
+
+#: libplanner/mrp-day.c:57
+msgid "Nonworking"
+msgstr "غیرکاری"
+
+#: libplanner/mrp-day.c:58
+msgid "A default non working day"
+msgstr "روز غیرکاری پیش‌فرض"
+
+#: libplanner/mrp-day.c:60
+msgid "Use base"
+msgstr ""
+
+#: libplanner/mrp-day.c:61
+msgid "Use day from base calendar"
+msgstr ""
+
+#: libplanner/mrp-parser.c:1043 libplanner/mrp-parser.c:1138
+#, fuzzy
+msgid "Could not create XML tree"
+msgstr "نمی‌توان پرونده‌ی xml را نوشت"
+
+#: libplanner/mrp-parser.c:1104
+#, fuzzy
+msgid "Could not write XML file"
+msgstr "نمی‌توان پرونده‌ی xml را نوشت"
+
+#. Give up.
+#: libplanner/mrp-sql.c:229 src/planner-sql-plugin.c:127
+msgid "Invalid Unicode"
+msgstr ""
+
+#: libplanner/mrp-sql.c:2205
+#, c-format
+msgid ""
+"The project '%s' has been changed by the user '%s' since you opened it. Do "
+"you want to save anyway?"
+msgstr ""
+
+#: libplanner/mrp-sql.c:3443
+#, c-format
+msgid ""
+"Connection to database '%s' failed.\n"
+"%s"
+msgstr ""
+
+#: libplanner/mrp-storage-sql.c:205
+msgid "Invalid SQL URI (must start with 'sql://' and contain '#')."
+msgstr ""
+
+#: libplanner/mrp-storage-sql.c:274
+msgid "Invalid SQL URI (invalid project id)."
+msgstr ""
+
+#: libplanner/mrp-storage-sql.c:282
+msgid "Invalid SQL URI (no database name specified)."
+msgstr ""
 
 #: src/planner-application.c:117
 msgid "Edit"
@@ -865,8 +1044,9 @@ msgid "_Cancel"
 msgstr ""
 
 #: src/planner-main-window.c:1232
+#, fuzzy
 msgid "Save a file"
-msgstr ""
+msgstr "باز کردن یک پرونده"
 
 #: src/planner-main-window.c:1264 src/planner-html-plugin.c:146
 #, c-format
@@ -908,9 +1088,9 @@ msgid "mrproject: --geometry cannot be used with more than one file."
 msgstr ""
 
 #: src/planner-plugin-loader.c:40
-#, c-format
+#, fuzzy, c-format
 msgid "Could not open plugin file '%s'\n"
-msgstr ""
+msgstr "نمی‌توان پرونده‌ی xml را نوشت"
 
 #: src/planner-view-loader.c:40
 #, c-format
@@ -978,8 +1158,9 @@ msgid "Sunday"
 msgstr "یک‌شنبه"
 
 #: src/planner-default-week-dialog.c:266
+#, fuzzy
 msgid "No working time"
-msgstr ""
+msgstr "ساعت کاری..."
 
 #: src/planner-default-week-dialog.c:277 src/planner-default-week-dialog.c:281
 msgid "%H:%M"
@@ -993,8 +1174,9 @@ msgid "Name"
 msgstr "نام"
 
 #: src/planner-group-dialog.c:393
+#, fuzzy
 msgid "Manager name"
-msgstr "نام مدیر"
+msgstr "تلفن مدیر"
 
 #: src/planner-group-dialog.c:399
 msgid "Manager phone"
@@ -1004,21 +1186,14 @@ msgstr "تلفن مدیر"
 msgid "Manager email"
 msgstr "پست الکترونیکی مدیر"
 
-#: src/planner-group-dialog.c:411
-msgid "Default"
-msgstr "پیش‌فرض"
-
 #: src/planner-project-properties.c:146
 msgid "Select a calendar to use for this project:"
 msgstr ""
 
-#: src/planner-project-properties.c:505
-msgid "None"
-msgstr ""
-
 #: src/planner-project-properties.c:606
+#, fuzzy
 msgid "Property"
-msgstr ""
+msgstr "مشخصه‌ی جدید"
 
 #: src/planner-project-properties.c:617 src/planner-property-dialog.c:431
 msgid "Value"
@@ -1034,8 +1209,9 @@ msgid "Do you really want to remove the property '%s' from the project?"
 msgstr ""
 
 #: src/planner-project-properties.c:1194
+#, fuzzy
 msgid "Could not create properties dialog."
-msgstr ""
+msgstr "نمی‌توان پرونده‌ی xml را نوشت"
 
 #: src/planner-property-dialog.c:397
 msgid "Label"
@@ -1051,8 +1227,9 @@ msgid "Print Project"
 msgstr "چاپ پروژه"
 
 #: src/planner-print-dialog.c:56
+#, fuzzy
 msgid "Select views"
-msgstr ""
+msgstr "انتخاب همه"
 
 #: src/planner-print-dialog.c:74
 msgid "Select the views to print:"
@@ -1066,8 +1243,9 @@ msgstr "(هیچ‌کدام)"
 
 #: src/planner-resource-dialog.c:258 src/planner-resource-input-dialog.c:106
 #: src/planner-task-dialog.c:249
+#, fuzzy
 msgid "(No name)"
-msgstr ""
+msgstr "(هیچ‌کدام)"
 
 #. i18n: time stamp format for notes in task dialog, see strftime(3) for
 #. * a detailed description.
@@ -1080,14 +1258,16 @@ msgid "None (use project default)"
 msgstr ""
 
 #: src/planner-resource-dialog.c:953 src/planner-resource-dialog.c:955
+#, fuzzy
 msgid "Edit resource properties"
-msgstr ""
+msgstr "ویرایش مشخصات منبع..."
 
 #: src/planner-resource-dialog.c:1101 src/planner-task-view.c:230
 #: src/planner-gantt-print.c:198 src/planner-resource-view.c:629
 #: src/planner-resource-view.c:645 src/planner-resource-view.c:1187
+#, fuzzy
 msgid "Work"
-msgstr "کار"
+msgstr "کار:"
 
 #: src/planner-resource-dialog.c:1102 src/planner-resource-view.c:632
 #: src/planner-resource-view.c:646 src/planner-resource-view.c:1188
@@ -1143,19 +1323,15 @@ msgid "Lag"
 msgstr ""
 
 #: src/planner-task-dialog.c:1584 src/planner-task-dialog.c:1586
+#, fuzzy
 msgid "Edit task properties"
-msgstr ""
+msgstr "ویرایش مشخصات پروژه"
 
 #: src/planner-html-plugin.c:133
 #, c-format
 msgid ""
 "\"%s\" is a directory.\n"
 "Enter a filename and try again."
-msgstr ""
-
-#. Give up.
-#: src/planner-sql-plugin.c:127
-msgid "Invalid Unicode"
 msgstr ""
 
 #: src/planner-sql-plugin.c:269
@@ -1171,8 +1347,9 @@ msgid "Project"
 msgstr "پروژه"
 
 #: src/planner-sql-plugin.c:466
+#, fuzzy
 msgid "Open from Database"
-msgstr ""
+msgstr "<b>نوع روزها</b>"
 
 #: src/planner-sql-plugin.c:573
 msgid "Save to Database"
@@ -1226,8 +1403,9 @@ msgid "Project start"
 msgstr "آغاز پروژه"
 
 #: src/planner-gantt-row.c:1841 src/planner-gantt-row.c:1844
+#, fuzzy
 msgid "No name"
-msgstr ""
+msgstr "نام"
 
 #: src/planner-gantt-row.c:1847
 #, c-format
@@ -1248,23 +1426,25 @@ msgid "_Gantt Chart"
 msgstr ""
 
 #: src/planner-gantt-view.c:470
+#, fuzzy
 msgid ""
 "\n"
 "Name"
-msgstr ""
+msgstr "نام"
 
 #. COL_START,    _("\nStart"),
 #: src/planner-gantt-view.c:472
+#, fuzzy
 msgid ""
 "\n"
 "Work"
-msgstr ""
+msgstr "کار:"
 
 #. i18n: Short "Week", preferably 2 letters.
 #: src/planner-scale-utils.c:325
-#, c-format
+#, fuzzy, c-format
 msgid "Wk %d"
-msgstr ""
+msgstr "هفته‌ی %d"
 
 #: src/planner-scale-utils.c:329
 #, c-format
@@ -1273,9 +1453,9 @@ msgstr "هفته‌ی %d"
 
 #. i18n: Week, year.
 #: src/planner-scale-utils.c:334
-#, c-format
+#, fuzzy, c-format
 msgid "Week %d, %d"
-msgstr ""
+msgstr "هفته‌ی %d"
 
 #. i18n: Short "Quarter", preferrably 1 letter.
 #: src/planner-scale-utils.c:365
@@ -1308,24 +1488,28 @@ msgid "%04d, H%d"
 msgstr ""
 
 #: src/planner-task-tree.c:184
+#, fuzzy
 msgid "/_Insert task"
-msgstr ""
+msgstr "درج"
 
 #: src/planner-task-tree.c:185
+#, fuzzy
 msgid "/_Insert subtask"
-msgstr ""
+msgstr "درج منبع"
 
 #: src/planner-task-tree.c:186
+#, fuzzy
 msgid "/_Remove task"
-msgstr ""
+msgstr "حذف"
 
 #: src/planner-task-tree.c:188
 msgid "/_Unlink task"
 msgstr ""
 
 #: src/planner-task-tree.c:190
+#, fuzzy
 msgid "/_Edit task..."
-msgstr ""
+msgstr "ویرایش تقویم‌ها..."
 
 #: src/planner-task-tree.c:2112
 msgid "mon"
@@ -1416,33 +1600,34 @@ msgstr "پایان"
 msgid "Slack"
 msgstr ""
 
-#: src/planner-task-view.c:232
-msgid "Cost"
-msgstr "هزینه"
-
 #: src/planner-task-view.c:438
+#, fuzzy
 msgid "Edit custom task properties"
-msgstr ""
+msgstr "ویرایش مشخصات پروژه"
 
 #: src/planner-resource-view.c:248
+#, fuzzy
 msgid "/_Insert resource"
-msgstr ""
+msgstr "درج منبع"
 
 #: src/planner-resource-view.c:249
+#, fuzzy
 msgid "/_Remove resource"
-msgstr ""
+msgstr "حذف منبع"
 
 #: src/planner-resource-view.c:250
+#, fuzzy
 msgid "/_Edit resource..."
-msgstr ""
+msgstr "ویرایش مشخصات منبع..."
 
 #: src/planner-resource-view.c:350
 msgid "_Resources"
 msgstr "منابع"
 
 #: src/planner-resource-view.c:849
+#, fuzzy
 msgid "Edit custom resource properties"
-msgstr ""
+msgstr "ویرایش مشخصات منبع..."
 
 #: src/planner-resource-view.c:1011
 msgid "Group"

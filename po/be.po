@@ -6,7 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mrproject.HEAD.be\n"
-"POT-Creation-Date: 2003-12-01 23:08+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-12-04 16:40+0100\n"
 "PO-Revision-Date: 2003-02-21 21:05GMT+2\n"
 "Last-Translator: Vital Khilko <dojlid@mova.org>\n"
 "Language-Team: belarusian <i18n@mova.org>\n"
@@ -304,6 +305,7 @@ msgid "Select all tasks"
 msgstr "Вылучыць усе задачы"
 
 #: data/ui/gantt-view.ui.h:14
+#, fuzzy
 msgid "Test"
 msgstr "Тэст"
 
@@ -387,8 +389,9 @@ msgid "Export to HTML"
 msgstr ""
 
 #: data/ui/sql-plugin.ui.h:1
+#, fuzzy
 msgid "Open from Database..."
-msgstr ""
+msgstr "Захаваць як..."
 
 #: data/ui/sql-plugin.ui.h:2
 #, fuzzy
@@ -488,6 +491,7 @@ msgid "<b>Working time</b>"
 msgstr "<b>Працоўны час</b>"
 
 #: data/glade/calendar-dialog.glade.h:10
+#, fuzzy
 msgid "Apply"
 msgstr "Ужыць"
 
@@ -512,8 +516,9 @@ msgid "Custom working time"
 msgstr "Працоўны час вызначаны карыстальнікам"
 
 #: data/glade/calendar-dialog.glade.h:16
+#, fuzzy
 msgid "Day type:"
-msgstr "Тып дню:"
+msgstr "Новы тып дню"
 
 #: data/glade/calendar-dialog.glade.h:17
 msgid "Default Week"
@@ -588,6 +593,7 @@ msgid "Working time..."
 msgstr "Працоўны час..."
 
 #: data/glade/calendar-dialog.glade.h:35
+#, fuzzy
 msgid "_Derive from a calendar"
 msgstr "_Вызначыць з каляндара"
 
@@ -775,12 +781,14 @@ msgid "<b>Open Database</b>"
 msgstr "<b>Тыпы дзён</b>"
 
 #: data/glade/sql.glade.h:4
+#, fuzzy
 msgid "Database:"
-msgstr ""
+msgstr "Тып дню:"
 
 #: data/glade/sql.glade.h:5
+#, fuzzy
 msgid "Open Database"
-msgstr ""
+msgstr "<b>Тыпы дзён</b>"
 
 #: data/glade/sql.glade.h:6
 msgid "Password:"
@@ -831,6 +839,7 @@ msgid "Resources"
 msgstr "Рэсурсы"
 
 #: data/glade/task-dialog.glade.h:13
+#, fuzzy
 msgid "_Duration:"
 msgstr "_Працягласьць:"
 
@@ -858,6 +867,157 @@ msgstr "Уставіць задачу"
 #: data/glade/task-input-dialog.glade.h:4
 msgid "Work:"
 msgstr "Праца:"
+
+#: libplanner/mrp-project.c:441 src/planner-group-dialog.c:411
+msgid "Default"
+msgstr "Дапомна"
+
+#: libplanner/mrp-project.c:749
+#, c-format
+msgid "Couldn't find a suitable file module for loading '%s'"
+msgstr "Немагчыма адшукаць файл модуля які атаесамляецца з загрузкай \"%s\""
+
+#: libplanner/mrp-project.c:770 libplanner/mrp-project.c:1034
+msgid "No support for SQL storage built into this version of MrProject."
+msgstr ""
+
+#: libplanner/mrp-project.c:807
+#, fuzzy
+msgid "Invalid URI."
+msgstr " (нерэчаісны Unicode)"
+
+#: libplanner/mrp-project.c:928
+#, c-format
+msgid "Unable to find file writer identified by '%s'"
+msgstr ""
+
+#: libplanner/mrp-project.c:991
+#, fuzzy
+msgid "Couldn't find a suitable file module for loading project"
+msgstr "Немагчыма адшукаць файл модуля які атаесамляецца з загрузкай \"%s\""
+
+#: libplanner/mrp-property.c:365
+#, fuzzy
+msgid "Text"
+msgstr "Тэст"
+
+#: libplanner/mrp-property.c:367
+msgid "String list"
+msgstr "Сьпіс радкоў"
+
+#: libplanner/mrp-property.c:369
+#, fuzzy
+msgid "Integer number"
+msgstr "Імя кіраўніка"
+
+#: libplanner/mrp-property.c:371
+msgid "Floating-point number"
+msgstr "Лік з плаваючым пунктам"
+
+#: libplanner/mrp-property.c:373
+#, fuzzy
+msgid "Date"
+msgstr "Тып дню:"
+
+#: libplanner/mrp-property.c:375
+#, fuzzy
+msgid "Duration"
+msgstr "_Працягласьць:"
+
+#: libplanner/mrp-property.c:377 src/planner-task-view.c:232
+msgid "Cost"
+msgstr "Кошт"
+
+#: libplanner/mrp-property.c:380 src/planner-project-properties.c:505
+msgid "None"
+msgstr "Няма"
+
+#: libplanner/mrp-task-manager.c:1769
+msgid "Can not add a predecessor relation between a task and its ancestor."
+msgstr "Немагчыма дадаць сувязь папярэдніка паміж задачай і продкам."
+
+#: libplanner/mrp-task-manager.c:1778 libplanner/mrp-task-manager.c:1786
+msgid "Can not add a predecessor, because it would result in a loop."
+msgstr "Немагчыма дадаць папярэдніка, таму як вынік закальцаваны."
+
+#: libplanner/mrp-task-manager.c:1821
+msgid "Can not move the task, since it would result in a loop."
+msgstr "Немагчыма перанесьці задачу, таму як вынік закальцаваны."
+
+#: libplanner/mrp-task.c:1016
+msgid ""
+"Could not add a predecessor relation, because the tasks are already related."
+msgstr "Немагчыма дадаць сувяз з папярэднікам, пакуль задачы яшчэ зьвязаныя."
+
+#: libplanner/mrp-day.c:54
+#, fuzzy
+msgid "Working"
+msgstr "Праца"
+
+#: libplanner/mrp-day.c:55
+msgid "A default working day"
+msgstr "Дапомна працоўны дзень"
+
+#: libplanner/mrp-day.c:57
+#, fuzzy
+msgid "Nonworking"
+msgstr "Няма працоўнага часу"
+
+#: libplanner/mrp-day.c:58
+msgid "A default non working day"
+msgstr "Дапомна непрацоўны дзень"
+
+#: libplanner/mrp-day.c:60
+#, fuzzy
+msgid "Use base"
+msgstr "Выкарыстоўваць каляндар"
+
+#: libplanner/mrp-day.c:61
+#, fuzzy
+msgid "Use day from base calendar"
+msgstr "_Вызначыць з каляндара"
+
+#: libplanner/mrp-parser.c:1043 libplanner/mrp-parser.c:1138
+#, fuzzy
+msgid "Could not create XML tree"
+msgstr "Немагчыма стварыць дыялёг уласьцівасьцяў."
+
+#: libplanner/mrp-parser.c:1104
+#, fuzzy
+msgid "Could not write XML file"
+msgstr "Немагчыма адкрыць файл дадатка \"%s\"\n"
+
+#. Give up.
+#: libplanner/mrp-sql.c:229 src/planner-sql-plugin.c:127
+#, fuzzy
+msgid "Invalid Unicode"
+msgstr " (нерэчаісны Unicode)"
+
+#: libplanner/mrp-sql.c:2205
+#, c-format
+msgid ""
+"The project '%s' has been changed by the user '%s' since you opened it. Do "
+"you want to save anyway?"
+msgstr ""
+
+#: libplanner/mrp-sql.c:3443
+#, c-format
+msgid ""
+"Connection to database '%s' failed.\n"
+"%s"
+msgstr ""
+
+#: libplanner/mrp-storage-sql.c:205
+msgid "Invalid SQL URI (must start with 'sql://' and contain '#')."
+msgstr ""
+
+#: libplanner/mrp-storage-sql.c:274
+msgid "Invalid SQL URI (invalid project id)."
+msgstr ""
+
+#: libplanner/mrp-storage-sql.c:282
+msgid "Invalid SQL URI (no database name specified)."
+msgstr ""
 
 #: src/planner-application.c:117
 msgid "Edit"
@@ -980,9 +1140,9 @@ msgstr ""
 "mrproject: --geometry ня можа быць выкарыстаны больш чым з адным файлам."
 
 #: src/planner-plugin-loader.c:40
-#, c-format
+#, fuzzy, c-format
 msgid "Could not open plugin file '%s'\n"
-msgstr "Немагчыма адкрыць файл дадатка \"%s\"\n"
+msgstr "Немагчыма адкрыць прагляд файла дадатка \"%s\"\n"
 
 #: src/planner-view-loader.c:40
 #, c-format
@@ -1050,8 +1210,9 @@ msgid "Sunday"
 msgstr "Нядзеля"
 
 #: src/planner-default-week-dialog.c:266
+#, fuzzy
 msgid "No working time"
-msgstr "Няма працоўнага часу"
+msgstr "Працоўны час вызначаны карыстальнікам"
 
 #: src/planner-default-week-dialog.c:277 src/planner-default-week-dialog.c:281
 msgid "%H:%M"
@@ -1065,8 +1226,9 @@ msgid "Name"
 msgstr "Назва"
 
 #: src/planner-group-dialog.c:393
+#, fuzzy
 msgid "Manager name"
-msgstr "Імя кіраўніка"
+msgstr "Тэлефон кіраўніка"
 
 #: src/planner-group-dialog.c:399
 msgid "Manager phone"
@@ -1076,17 +1238,9 @@ msgstr "Тэлефон кіраўніка"
 msgid "Manager email"
 msgstr "Пошта кіраўніка"
 
-#: src/planner-group-dialog.c:411
-msgid "Default"
-msgstr "Дапомна"
-
 #: src/planner-project-properties.c:146
 msgid "Select a calendar to use for this project:"
 msgstr "Выбярыце каляндар для выкарыстаньня з гэтым праектам:"
-
-#: src/planner-project-properties.c:505
-msgid "None"
-msgstr "Няма"
 
 #: src/planner-project-properties.c:606
 msgid "Property"
@@ -1106,6 +1260,7 @@ msgid "Do you really want to remove the property '%s' from the project?"
 msgstr "Вы жадаеце выдаліць уласьцівасьць \"%s\" з праекта?"
 
 #: src/planner-project-properties.c:1194
+#, fuzzy
 msgid "Could not create properties dialog."
 msgstr "Немагчыма стварыць дыялёг уласьцівасьцяў."
 
@@ -1158,8 +1313,11 @@ msgstr "Рэдагаваньне уласьцівасьцяў рэсурсу"
 #: src/planner-resource-dialog.c:1101 src/planner-task-view.c:230
 #: src/planner-gantt-print.c:198 src/planner-resource-view.c:629
 #: src/planner-resource-view.c:645 src/planner-resource-view.c:1187
+#, fuzzy
 msgid "Work"
-msgstr "Праца"
+msgstr ""
+"\n"
+"Праца"
 
 #: src/planner-resource-dialog.c:1102 src/planner-resource-view.c:632
 #: src/planner-resource-view.c:646 src/planner-resource-view.c:1188
@@ -1225,12 +1383,6 @@ msgid ""
 "Enter a filename and try again."
 msgstr ""
 
-#. Give up.
-#: src/planner-sql-plugin.c:127
-#, fuzzy
-msgid "Invalid Unicode"
-msgstr " (нерэчаісны Unicode)"
-
 #: src/planner-sql-plugin.c:269
 #, c-format
 msgid ""
@@ -1244,12 +1396,14 @@ msgid "Project"
 msgstr "_Праект"
 
 #: src/planner-sql-plugin.c:466
+#, fuzzy
 msgid "Open from Database"
-msgstr ""
+msgstr "<b>Тыпы дзён</b>"
 
 #: src/planner-sql-plugin.c:573
+#, fuzzy
 msgid "Save to Database"
-msgstr ""
+msgstr "Захаваць як..."
 
 #: src/planner-format.c:141
 #, c-format
@@ -1345,9 +1499,9 @@ msgid "Wk %d"
 msgstr "Тдз. %d"
 
 #: src/planner-scale-utils.c:329
-#, c-format
+#, fuzzy, c-format
 msgid "Week %d"
-msgstr "Тыдзень %d"
+msgstr "Тдз. %d"
 
 #. i18n: Week, year.
 #: src/planner-scale-utils.c:334
@@ -1406,8 +1560,9 @@ msgid "/_Edit task..."
 msgstr "/_Рэдагаваць задачу..."
 
 #: src/planner-task-tree.c:2112
+#, fuzzy
 msgid "mon"
-msgstr "пан"
+msgstr "месяц"
 
 #. month unit variant accepted in input
 #: src/planner-task-tree.c:2113
@@ -1441,8 +1596,9 @@ msgstr "д"
 
 #. day unit variant accepted in input
 #: src/planner-task-tree.c:2119
+#, fuzzy
 msgid "day"
-msgstr "дзень"
+msgstr "дзён"
 
 #. day unit variant accepted in input
 #: src/planner-task-tree.c:2121
@@ -1484,6 +1640,7 @@ msgid "_Tasks"
 msgstr "Задачы"
 
 #: src/planner-task-view.c:228
+#, fuzzy
 msgid "Start"
 msgstr "Старт"
 
@@ -1494,10 +1651,6 @@ msgstr "Фініш"
 #: src/planner-task-view.c:231
 msgid "Slack"
 msgstr "Кволы"
-
-#: src/planner-task-view.c:232
-msgid "Cost"
-msgstr "Кошт"
 
 #: src/planner-task-view.c:438
 msgid "Edit custom task properties"
@@ -1531,6 +1684,154 @@ msgstr "Група"
 #: src/planner-resource-view.c:1040
 msgid "Email"
 msgstr "Эл.скрыня"
+
+#~ msgid "Jan"
+#~ msgstr "Стд"
+
+#~ msgid "Feb"
+#~ msgstr "Лют"
+
+#~ msgid "Mar"
+#~ msgstr "Сак"
+
+#~ msgid "Apr"
+#~ msgstr "Крс"
+
+#, fuzzy
+#~ msgid "May"
+#~ msgstr "дзень"
+
+#~ msgid "Jun"
+#~ msgstr "Чэр"
+
+#~ msgid "Jul"
+#~ msgstr "Ліп"
+
+#~ msgid "Aug"
+#~ msgstr "Жнв"
+
+#~ msgid "Sep"
+#~ msgstr "Вер"
+
+#~ msgid "Oct"
+#~ msgstr "Кас"
+
+#~ msgid "Nov"
+#~ msgstr "Ліс"
+
+#~ msgid "Dec"
+#~ msgstr "Сьн"
+
+#~ msgid "January"
+#~ msgstr "Студзень"
+
+#~ msgid "February"
+#~ msgstr "Люты"
+
+#~ msgid "March"
+#~ msgstr "Сакавік"
+
+#~ msgid "June"
+#~ msgstr "Чэрвень"
+
+#~ msgid "July"
+#~ msgstr "Ліпень"
+
+#~ msgid "August"
+#~ msgstr "Жнівень"
+
+#~ msgid "September"
+#~ msgstr "Верасень"
+
+#~ msgid "October"
+#~ msgstr "Кастрычнік"
+
+#~ msgid "November"
+#~ msgstr "Лістапад"
+
+#~ msgid "December"
+#~ msgstr "Сьнежань"
+
+#~ msgid "J 1"
+#~ msgstr "С 1"
+
+#~ msgid "F 2"
+#~ msgstr "Л 2"
+
+#~ msgid "M 3"
+#~ msgstr "С 3"
+
+#~ msgid "A 4"
+#~ msgstr "К 4"
+
+#~ msgid "M 5"
+#~ msgstr "Т 5"
+
+#~ msgid "J 6"
+#~ msgstr "Ч 6"
+
+#~ msgid "J 7"
+#~ msgstr "Л 7"
+
+#~ msgid "A 8"
+#~ msgstr "Ж 8"
+
+#~ msgid "S 9"
+#~ msgstr "В 9"
+
+#~ msgid "O 10"
+#~ msgstr "К 10"
+
+#~ msgid "N 11"
+#~ msgstr "Л 11"
+
+#~ msgid "D 12"
+#~ msgstr "С 12"
+
+#, fuzzy
+#~ msgid "Sun"
+#~ msgstr "Нядзеля"
+
+#, fuzzy
+#~ msgid "Mon"
+#~ msgstr "пан"
+
+#, fuzzy
+#~ msgid "Tue"
+#~ msgstr "Аўторак"
+
+#, fuzzy
+#~ msgid "Wed"
+#~ msgstr "Тыдзень %d"
+
+#~ msgid "Thu"
+#~ msgstr "Чцв"
+
+#, fuzzy
+#~ msgid "Fri"
+#~ msgstr "Пятніца"
+
+#~ msgid ""
+#~ "Could not load file.\n"
+#~ "Error was: \"%s\""
+#~ msgstr ""
+#~ "Немагчыма загрузіць файл.\n"
+#~ "Адбылася памылка: \"%s\""
+
+#~ msgid "No MPX header"
+#~ msgstr "Не загаловак MPX"
+
+#~ msgid "Not an mpx '%s'"
+#~ msgstr "Не ў mpx '%s'"
+
+#~ msgid "Failed to load file %s."
+#~ msgstr "Збой загрузкі файла %s."
+
+#~ msgid "%s is not valid XML."
+#~ msgstr "%s - не рэчаісны XML."
+
+#~ msgid "\"%s\" is not a valid MrProject file"
+#~ msgstr "\"%s\" - не рэчаісны файл MrProject"
 
 #~ msgid "Contribute to MrProject"
 #~ msgstr "Дапамагчы MrProject"
@@ -1576,6 +1877,3 @@ msgstr "Эл.скрыня"
 
 #~ msgid "Enable/disable the 8 hour working day calendar"
 #~ msgstr "Уключыць/выключыць каляндар 8-мі гадзінных працоўных дзён"
-
-#~ msgid "Use calendar"
-#~ msgstr "Выкарыстоўваць каляндар"

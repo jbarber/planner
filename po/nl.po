@@ -6,14 +6,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mrproject cvs\n"
-"POT-Creation-Date: 2003-12-01 23:08+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-12-04 16:40+0100\n"
 "PO-Revision-Date: 2003-02-03 23:06+0100\n"
 "Last-Translator: Jan-Willem Harmanny <jwharmanny@hotmail.com>\n"
 "Language-Team: Dutch <nl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Report-Msgid-Bugs-To: \n"
 
 #: data/planner.desktop.in.h:1
 #, fuzzy
@@ -282,6 +282,7 @@ msgid "Select all tasks"
 msgstr "Alle taken selecteren"
 
 #: data/ui/gantt-view.ui.h:14
+#, fuzzy
 msgid "Test"
 msgstr "Test"
 
@@ -446,6 +447,7 @@ msgid "<b>Working time</b>"
 msgstr "<b>Werktijden</b>"
 
 #: data/glade/calendar-dialog.glade.h:10
+#, fuzzy
 msgid "Apply"
 msgstr "Toepassen"
 
@@ -470,8 +472,9 @@ msgid "Custom working time"
 msgstr "Aangepaste werktijden"
 
 #: data/glade/calendar-dialog.glade.h:16
+#, fuzzy
 msgid "Day type:"
-msgstr "Dagtype:"
+msgstr "Nieuw dagtype"
 
 #: data/glade/calendar-dialog.glade.h:17
 msgid "Default Week"
@@ -546,6 +549,7 @@ msgid "Working time..."
 msgstr "Werktijden..."
 
 #: data/glade/calendar-dialog.glade.h:35
+#, fuzzy
 msgid "_Derive from a calendar"
 msgstr "_Afleiden van een kalender"
 
@@ -783,6 +787,7 @@ msgid "Resources"
 msgstr "Hulpbronnen"
 
 #: data/glade/task-dialog.glade.h:13
+#, fuzzy
 msgid "_Duration:"
 msgstr "_Duur:"
 
@@ -810,6 +815,162 @@ msgstr "Taak invoegen"
 #: data/glade/task-input-dialog.glade.h:4
 msgid "Work:"
 msgstr "Werk:"
+
+#: libplanner/mrp-project.c:441 src/planner-group-dialog.c:411
+msgid "Default"
+msgstr "Standaard"
+
+#: libplanner/mrp-project.c:749
+#, c-format
+msgid "Couldn't find a suitable file module for loading '%s'"
+msgstr "Kan geen passende bestandsmodule vinden voor het laden van '%s'"
+
+#: libplanner/mrp-project.c:770 libplanner/mrp-project.c:1034
+msgid "No support for SQL storage built into this version of MrProject."
+msgstr ""
+"Er is geen ondersteuning voor SQL opslag in deze versie van MrProject "
+"ingebouwd."
+
+#: libplanner/mrp-project.c:807
+#, fuzzy
+msgid "Invalid URI."
+msgstr "Ongeldige Unicode"
+
+#: libplanner/mrp-project.c:928
+#, c-format
+msgid "Unable to find file writer identified by '%s'"
+msgstr "Kan bestandschrijver met de naam '%s' niet vinden"
+
+#: libplanner/mrp-project.c:991
+msgid "Couldn't find a suitable file module for loading project"
+msgstr "Kan geen passende bestandsmodule vinden voor het laden van dit project"
+
+#: libplanner/mrp-property.c:365
+#, fuzzy
+msgid "Text"
+msgstr "Test"
+
+#: libplanner/mrp-property.c:367
+msgid "String list"
+msgstr "String lijst"
+
+#: libplanner/mrp-property.c:369
+#, fuzzy
+msgid "Integer number"
+msgstr "Manager naam"
+
+#: libplanner/mrp-property.c:371
+msgid "Floating-point number"
+msgstr "Drijvende-komma getal"
+
+#: libplanner/mrp-property.c:373
+#, fuzzy
+msgid "Date"
+msgstr "Dagtype:"
+
+#: libplanner/mrp-property.c:375
+#, fuzzy
+msgid "Duration"
+msgstr "_Duur:"
+
+#: libplanner/mrp-property.c:377 src/planner-task-view.c:232
+msgid "Cost"
+msgstr "Kosten"
+
+#: libplanner/mrp-property.c:380 src/planner-project-properties.c:505
+msgid "None"
+msgstr "Geen"
+
+#: libplanner/mrp-task-manager.c:1769
+msgid "Can not add a predecessor relation between a task and its ancestor."
+msgstr ""
+"Kan geen voorganger-relatie toevoegen tussen een taak en zijn voorganger."
+
+#: libplanner/mrp-task-manager.c:1778 libplanner/mrp-task-manager.c:1786
+msgid "Can not add a predecessor, because it would result in a loop."
+msgstr "Kan geen voorganger toevoegen, omdat het een lus veroorzaakt."
+
+#: libplanner/mrp-task-manager.c:1821
+msgid "Can not move the task, since it would result in a loop."
+msgstr "Kan de taak niet verplaatsen, omdat het een lus veroorzaakt."
+
+#: libplanner/mrp-task.c:1016
+msgid ""
+"Could not add a predecessor relation, because the tasks are already related."
+msgstr ""
+"Kan geen voorganger-relatie toevoegen, omdat de taken al relaties hebben."
+
+#: libplanner/mrp-day.c:54
+#, fuzzy
+msgid "Working"
+msgstr "Werk"
+
+#: libplanner/mrp-day.c:55
+msgid "A default working day"
+msgstr "Een normale werkdag"
+
+#: libplanner/mrp-day.c:57
+#, fuzzy
+msgid "Nonworking"
+msgstr "Geen werktijden"
+
+#: libplanner/mrp-day.c:58
+msgid "A default non working day"
+msgstr "Een normale vrije dag"
+
+#: libplanner/mrp-day.c:60
+msgid "Use base"
+msgstr "Gebruiksbasis"
+
+#: libplanner/mrp-day.c:61
+#, fuzzy
+msgid "Use day from base calendar"
+msgstr "_Afleiden van een kalender"
+
+#: libplanner/mrp-parser.c:1043 libplanner/mrp-parser.c:1138
+#, fuzzy
+msgid "Could not create XML tree"
+msgstr "Kan de eigenschap dialoog niet creëren."
+
+#: libplanner/mrp-parser.c:1104
+#, fuzzy
+msgid "Could not write XML file"
+msgstr "Kan pluginbestand '%s' niet openen\n"
+
+#. Give up.
+#: libplanner/mrp-sql.c:229 src/planner-sql-plugin.c:127
+msgid "Invalid Unicode"
+msgstr "Ongeldige Unicode"
+
+#: libplanner/mrp-sql.c:2205
+#, c-format
+msgid ""
+"The project '%s' has been changed by the user '%s' since you opened it. Do "
+"you want to save anyway?"
+msgstr ""
+"Het project '%s' is veranderd door de gebruiker '%s' sinds u het hebt "
+"geopend. Wilt u het toch opslaan?"
+
+#: libplanner/mrp-sql.c:3443
+#, fuzzy, c-format
+msgid ""
+"Connection to database '%s' failed.\n"
+"%s"
+msgstr ""
+"Verbinding met database '%s' mislukt:\n"
+"%s"
+
+#: libplanner/mrp-storage-sql.c:205
+msgid "Invalid SQL URI (must start with 'sql://' and contain '#')."
+msgstr "Ongeldige SQL URI (moet beginnen met 'sql://' en een '#' bevatten)."
+
+#: libplanner/mrp-storage-sql.c:274
+msgid "Invalid SQL URI (invalid project id)."
+msgstr "Ongeldige SQL URI (ongeldig project id)."
+
+#: libplanner/mrp-storage-sql.c:282
+msgid "Invalid SQL URI (no database name specified)."
+msgstr "Ongeldige SQL URI (geen database naam gespecificeerd)."
 
 #: src/planner-application.c:117
 msgid "Edit"
@@ -935,9 +1096,9 @@ msgstr ""
 "mrproject: --geometry kan niet met meer dan één bestand worden gebruikt."
 
 #: src/planner-plugin-loader.c:40
-#, c-format
+#, fuzzy, c-format
 msgid "Could not open plugin file '%s'\n"
-msgstr "Kan pluginbestand '%s' niet openen\n"
+msgstr "Kan weergave pluginbestand '%s' niet openen\n"
 
 #: src/planner-view-loader.c:40
 #, c-format
@@ -1005,8 +1166,9 @@ msgid "Sunday"
 msgstr "Zondag"
 
 #: src/planner-default-week-dialog.c:266
+#, fuzzy
 msgid "No working time"
-msgstr "Geen werktijden"
+msgstr "Aangepaste werktijden"
 
 #: src/planner-default-week-dialog.c:277 src/planner-default-week-dialog.c:281
 msgid "%H:%M"
@@ -1020,8 +1182,9 @@ msgid "Name"
 msgstr "Naam"
 
 #: src/planner-group-dialog.c:393
+#, fuzzy
 msgid "Manager name"
-msgstr "Manager naam"
+msgstr "Manager telefoon"
 
 #: src/planner-group-dialog.c:399
 msgid "Manager phone"
@@ -1031,17 +1194,9 @@ msgstr "Manager telefoon"
 msgid "Manager email"
 msgstr "Manager email"
 
-#: src/planner-group-dialog.c:411
-msgid "Default"
-msgstr "Standaard"
-
 #: src/planner-project-properties.c:146
 msgid "Select a calendar to use for this project:"
 msgstr "Selecteer een kalender om voor dit project te gebruiken:"
-
-#: src/planner-project-properties.c:505
-msgid "None"
-msgstr "Geen"
 
 #: src/planner-project-properties.c:606
 msgid "Property"
@@ -1061,6 +1216,7 @@ msgid "Do you really want to remove the property '%s' from the project?"
 msgstr "Wilt u de eigenschap '%s' echt van het project verwijderen?"
 
 #: src/planner-project-properties.c:1194
+#, fuzzy
 msgid "Could not create properties dialog."
 msgstr "Kan de eigenschap dialoog niet creëren."
 
@@ -1113,8 +1269,11 @@ msgstr "Hulpbron eigenschappen bewerken"
 #: src/planner-resource-dialog.c:1101 src/planner-task-view.c:230
 #: src/planner-gantt-print.c:198 src/planner-resource-view.c:629
 #: src/planner-resource-view.c:645 src/planner-resource-view.c:1187
+#, fuzzy
 msgid "Work"
-msgstr "Werk"
+msgstr ""
+"\n"
+"Werk"
 
 #: src/planner-resource-dialog.c:1102 src/planner-resource-view.c:632
 #: src/planner-resource-view.c:646 src/planner-resource-view.c:1188
@@ -1182,13 +1341,8 @@ msgstr ""
 "\"%s\" is een directory.\n"
 "Geen een bestandsnaam en probeer opnieuw."
 
-#. Give up.
-#: src/planner-sql-plugin.c:127
-msgid "Invalid Unicode"
-msgstr "Ongeldige Unicode"
-
 #: src/planner-sql-plugin.c:269
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Connection to database '%s' failed:\n"
 "%s"
@@ -1301,9 +1455,9 @@ msgid "Wk %d"
 msgstr "Wk %d"
 
 #: src/planner-scale-utils.c:329
-#, c-format
+#, fuzzy, c-format
 msgid "Week %d"
-msgstr "Week %d"
+msgstr "Wk %d"
 
 #. i18n: Week, year.
 #: src/planner-scale-utils.c:334
@@ -1362,8 +1516,9 @@ msgid "/_Edit task..."
 msgstr "/Taak _bewerken..."
 
 #: src/planner-task-tree.c:2112
+#, fuzzy
 msgid "mon"
-msgstr "mnd"
+msgstr "maand"
 
 #. month unit variant accepted in input
 #: src/planner-task-tree.c:2113
@@ -1397,8 +1552,9 @@ msgstr "d"
 
 #. day unit variant accepted in input
 #: src/planner-task-tree.c:2119
+#, fuzzy
 msgid "day"
-msgstr "dag"
+msgstr "dagen"
 
 #. day unit variant accepted in input
 #: src/planner-task-tree.c:2121
@@ -1439,6 +1595,7 @@ msgid "_Tasks"
 msgstr "_Taken"
 
 #: src/planner-task-view.c:228
+#, fuzzy
 msgid "Start"
 msgstr "Start"
 
@@ -1449,10 +1606,6 @@ msgstr "Finish"
 #: src/planner-task-view.c:231
 msgid "Slack"
 msgstr "Laks"
-
-#: src/planner-task-view.c:232
-msgid "Cost"
-msgstr "Kosten"
 
 #: src/planner-task-view.c:438
 msgid "Edit custom task properties"
@@ -1485,6 +1638,145 @@ msgstr "Groep"
 #: src/planner-resource-view.c:1040
 msgid "Email"
 msgstr "Email"
+
+#~ msgid ""
+#~ "Could not load file.\n"
+#~ "Error was: \"%s\""
+#~ msgstr ""
+#~ "Kan bestand niet laden.\n"
+#~ "Fout was: \"%s\""
+
+#~ msgid "No MPX header"
+#~ msgstr "Geen MPX header"
+
+#~ msgid "Not an mpx '%s'"
+#~ msgstr "Niet een mpx '%s'"
+
+#~ msgid "Jan"
+#~ msgstr "Jan"
+
+#~ msgid "Feb"
+#~ msgstr "Feb"
+
+#~ msgid "Mar"
+#~ msgstr "Mrt"
+
+#~ msgid "Apr"
+#~ msgstr "Apr"
+
+#, fuzzy
+#~ msgid "May"
+#~ msgstr "dag"
+
+#~ msgid "Jun"
+#~ msgstr "Jun"
+
+#~ msgid "Jul"
+#~ msgstr "Jul"
+
+#~ msgid "Aug"
+#~ msgstr "Aug"
+
+#~ msgid "Sep"
+#~ msgstr "Sep"
+
+#~ msgid "Oct"
+#~ msgstr "Okt"
+
+#~ msgid "Nov"
+#~ msgstr "Nov"
+
+#~ msgid "Dec"
+#~ msgstr "Dec"
+
+#~ msgid "January"
+#~ msgstr "Januari"
+
+#~ msgid "February"
+#~ msgstr "Februari"
+
+#~ msgid "March"
+#~ msgstr "Maart"
+
+#~ msgid "June"
+#~ msgstr "Juni"
+
+#~ msgid "July"
+#~ msgstr "Juli"
+
+#~ msgid "August"
+#~ msgstr "Augustus"
+
+#~ msgid "September"
+#~ msgstr "September"
+
+#~ msgid "October"
+#~ msgstr "Oktober"
+
+#~ msgid "November"
+#~ msgstr "November"
+
+#~ msgid "December"
+#~ msgstr "December"
+
+#~ msgid "J 1"
+#~ msgstr "J 1"
+
+#~ msgid "F 2"
+#~ msgstr "F 2"
+
+#~ msgid "M 3"
+#~ msgstr "M 3"
+
+#~ msgid "A 4"
+#~ msgstr "A 4"
+
+#~ msgid "M 5"
+#~ msgstr "M 5"
+
+#~ msgid "J 6"
+#~ msgstr "J 6"
+
+#~ msgid "J 7"
+#~ msgstr "J 7"
+
+#~ msgid "A 8"
+#~ msgstr "A 8"
+
+#~ msgid "S 9"
+#~ msgstr "S 9"
+
+#~ msgid "O 10"
+#~ msgstr "O 10"
+
+#~ msgid "N 11"
+#~ msgstr "N 11"
+
+#~ msgid "D 12"
+#~ msgstr "D 12"
+
+#, fuzzy
+#~ msgid "Sun"
+#~ msgstr "Zondag"
+
+#, fuzzy
+#~ msgid "Mon"
+#~ msgstr "mnd"
+
+#, fuzzy
+#~ msgid "Tue"
+#~ msgstr "Dinsdag"
+
+#, fuzzy
+#~ msgid "Wed"
+#~ msgstr "Week %d"
+
+#~ msgid "Thu"
+#~ msgstr "Do"
+
+#, fuzzy
+#~ msgid "Fri"
+#~ msgstr "Vrijdag"
 
 #~ msgid "Contribute to MrProject"
 #~ msgstr "Bijdragen aan MrProject"

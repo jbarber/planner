@@ -3,7 +3,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: planner 0.11\n"
-"POT-Creation-Date: 2003-12-01 23:08+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-12-04 16:40+0100\n"
 "PO-Revision-Date: 2003-11-10 16:54+CET\n"
 "Last-Translator: auto\n"
 "Language-Team: Croatian <lokalizacija@linux.hr>\n"
@@ -177,8 +178,9 @@ msgid "_Open..."
 msgstr ""
 
 #: data/ui/main-window.ui.h:39
+#, fuzzy
 msgid "_Paste"
-msgstr ""
+msgstr "Datum"
 
 #: data/ui/main-window.ui.h:40
 msgid "_Print Preview"
@@ -278,8 +280,9 @@ msgid "Select all tasks"
 msgstr ""
 
 #: data/ui/gantt-view.ui.h:14
+#, fuzzy
 msgid "Test"
-msgstr ""
+msgstr "Tekst"
 
 #: data/ui/gantt-view.ui.h:15 data/ui/task-view.ui.h:14
 msgid "Un_link Task"
@@ -464,8 +467,9 @@ msgid "Custom working time"
 msgstr ""
 
 #: data/glade/calendar-dialog.glade.h:16
+#, fuzzy
 msgid "Day type:"
-msgstr ""
+msgstr "Datum"
 
 #: data/glade/calendar-dialog.glade.h:17
 msgid "Default Week"
@@ -526,20 +530,23 @@ msgid "To:"
 msgstr ""
 
 #: data/glade/calendar-dialog.glade.h:32
+#, fuzzy
 msgid "Use working time from derived calendar"
-msgstr ""
+msgstr "Upotijebi dan iz osnovnog kalendara"
 
 #: data/glade/calendar-dialog.glade.h:33
 msgid "Week day:"
 msgstr ""
 
 #: data/glade/calendar-dialog.glade.h:34
+#, fuzzy
 msgid "Working time..."
-msgstr ""
+msgstr "Radim"
 
 #: data/glade/calendar-dialog.glade.h:35
+#, fuzzy
 msgid "_Derive from a calendar"
-msgstr ""
+msgstr "Upotijebi dan iz osnovnog kalendara"
 
 #: data/glade/calendar-dialog.glade.h:36
 msgid "_Name of the new calendar:"
@@ -719,8 +726,9 @@ msgid "<b>Open Database</b>"
 msgstr ""
 
 #: data/glade/sql.glade.h:4
+#, fuzzy
 msgid "Database:"
-msgstr ""
+msgstr "Datum"
 
 #: data/glade/sql.glade.h:5
 msgid "Open Database"
@@ -772,20 +780,23 @@ msgid "Resources"
 msgstr ""
 
 #: data/glade/task-dialog.glade.h:13
+#, fuzzy
 msgid "_Duration:"
-msgstr ""
+msgstr "Trajanje"
 
 #: data/glade/task-dialog.glade.h:14
+#, fuzzy
 msgid "_Fixed duration"
-msgstr ""
+msgstr "Trajanje"
 
 #: data/glade/task-dialog.glade.h:15
 msgid "_Milestone"
 msgstr ""
 
 #: data/glade/task-dialog.glade.h:16
+#, fuzzy
 msgid "_Work:"
-msgstr ""
+msgstr "Radim"
 
 #. day unit variant accepted in input
 #: data/glade/task-dialog.glade.h:17 src/planner-task-tree.c:2120
@@ -797,8 +808,153 @@ msgid "Insert task"
 msgstr ""
 
 #: data/glade/task-input-dialog.glade.h:4
+#, fuzzy
 msgid "Work:"
+msgstr "Radim"
+
+#: libplanner/mrp-project.c:441 src/planner-group-dialog.c:411
+msgid "Default"
 msgstr ""
+
+#: libplanner/mrp-project.c:749
+#, c-format
+msgid "Couldn't find a suitable file module for loading '%s'"
+msgstr "Ne mogu naći odgovarajući datotečni modul za učitavanje '%s'"
+
+#: libplanner/mrp-project.c:770 libplanner/mrp-project.c:1034
+msgid "No support for SQL storage built into this version of MrProject."
+msgstr "Nema ugrađene podrške za SQL pohranu u ovoj inačici MrProject"
+
+#: libplanner/mrp-project.c:807
+msgid "Invalid URI."
+msgstr "Neispravan URI."
+
+#: libplanner/mrp-project.c:928
+#, c-format
+msgid "Unable to find file writer identified by '%s'"
+msgstr "Ne mogu pronaci zapisnika datoteke identificiranog sa '%s'"
+
+#: libplanner/mrp-project.c:991
+msgid "Couldn't find a suitable file module for loading project"
+msgstr "Ne mogu naći odgovarajući datotečni modul za učitavanje projekta"
+
+#: libplanner/mrp-property.c:365
+msgid "Text"
+msgstr "Tekst"
+
+#: libplanner/mrp-property.c:367
+msgid "String list"
+msgstr "Popis niza podataka"
+
+#: libplanner/mrp-property.c:369
+msgid "Integer number"
+msgstr "Prirodni broj"
+
+#: libplanner/mrp-property.c:371
+msgid "Floating-point number"
+msgstr "Floating-point broj"
+
+#: libplanner/mrp-property.c:373
+msgid "Date"
+msgstr "Datum"
+
+#: libplanner/mrp-property.c:375
+msgid "Duration"
+msgstr "Trajanje"
+
+#: libplanner/mrp-property.c:377 src/planner-task-view.c:232
+msgid "Cost"
+msgstr ""
+
+#: libplanner/mrp-property.c:380 src/planner-project-properties.c:505
+msgid "None"
+msgstr ""
+
+#: libplanner/mrp-task-manager.c:1769
+msgid "Can not add a predecessor relation between a task and its ancestor."
+msgstr ""
+"Ne mogu dodati relaciju predhodnika između zadatka i njegovog nasljednika. "
+
+#: libplanner/mrp-task-manager.c:1778 libplanner/mrp-task-manager.c:1786
+msgid "Can not add a predecessor, because it would result in a loop."
+msgstr "Ne mogu dodati prethodnika, zato što će to rezultirati petljom."
+
+#: libplanner/mrp-task-manager.c:1821
+msgid "Can not move the task, since it would result in a loop."
+msgstr "Ne mogu pomaknuti zadatak, jer bi završio u petlji."
+
+#: libplanner/mrp-task.c:1016
+msgid ""
+"Could not add a predecessor relation, because the tasks are already related."
+msgstr ""
+"Ne mogu dodati relaciju prethodnika, zbog toga jer su zadaci već završeni."
+
+#: libplanner/mrp-day.c:54
+msgid "Working"
+msgstr "Radim"
+
+#: libplanner/mrp-day.c:55
+msgid "A default working day"
+msgstr "Predefinirani radni dan"
+
+#: libplanner/mrp-day.c:57
+msgid "Nonworking"
+msgstr "Neradeći"
+
+#: libplanner/mrp-day.c:58
+msgid "A default non working day"
+msgstr "Predefinirani neradni dan"
+
+#: libplanner/mrp-day.c:60
+msgid "Use base"
+msgstr "Upotrijebi bazu"
+
+#: libplanner/mrp-day.c:61
+msgid "Use day from base calendar"
+msgstr "Upotijebi dan iz osnovnog kalendara"
+
+#: libplanner/mrp-parser.c:1043 libplanner/mrp-parser.c:1138
+msgid "Could not create XML tree"
+msgstr "Ne mogu kreirati XML stablo"
+
+#: libplanner/mrp-parser.c:1104
+msgid "Could not write XML file"
+msgstr "Nisam mogao zapisati XML datoteku"
+
+#. Give up.
+#: libplanner/mrp-sql.c:229 src/planner-sql-plugin.c:127
+msgid "Invalid Unicode"
+msgstr ""
+
+#: libplanner/mrp-sql.c:2205
+#, c-format
+msgid ""
+"The project '%s' has been changed by the user '%s' since you opened it. Do "
+"you want to save anyway?"
+msgstr ""
+"Projekt '%s' promjenjenio je korisnik '%s' od zadnjeg puta kad ste ga "
+"otvorili. Želite li svejedno snimiti?"
+
+#: libplanner/mrp-sql.c:3443
+#, c-format
+msgid ""
+"Connection to database '%s' failed.\n"
+"%s"
+msgstr ""
+"Povezivanje na bazu podataka '%s' nije uspjelo.\n"
+"%s"
+
+#: libplanner/mrp-storage-sql.c:205
+msgid "Invalid SQL URI (must start with 'sql://' and contain '#')."
+msgstr "Neispravan SQL URI (mora počinjati sa 'sql://' i sadržavati '#')."
+
+#: libplanner/mrp-storage-sql.c:274
+msgid "Invalid SQL URI (invalid project id)."
+msgstr "Neispravan SQL URI (neispravna identifikacijska oznaka projekta)"
+
+#: libplanner/mrp-storage-sql.c:282
+msgid "Invalid SQL URI (no database name specified)."
+msgstr "Neispravan SQL URI (nije navedeno ime baze podataka)"
 
 #: src/planner-application.c:117
 msgid "Edit"
@@ -899,9 +1055,9 @@ msgid "mrproject: --geometry cannot be used with more than one file."
 msgstr ""
 
 #: src/planner-plugin-loader.c:40
-#, c-format
+#, fuzzy, c-format
 msgid "Could not open plugin file '%s'\n"
-msgstr ""
+msgstr "Nisam mogao zapisati XML datoteku"
 
 #: src/planner-view-loader.c:40
 #, c-format
@@ -969,8 +1125,9 @@ msgid "Sunday"
 msgstr ""
 
 #: src/planner-default-week-dialog.c:266
+#, fuzzy
 msgid "No working time"
-msgstr ""
+msgstr "Neradeći"
 
 #: src/planner-default-week-dialog.c:277 src/planner-default-week-dialog.c:281
 msgid "%H:%M"
@@ -984,8 +1141,9 @@ msgid "Name"
 msgstr ""
 
 #: src/planner-group-dialog.c:393
+#, fuzzy
 msgid "Manager name"
-msgstr ""
+msgstr "Prirodni broj"
 
 #: src/planner-group-dialog.c:399
 msgid "Manager phone"
@@ -995,16 +1153,8 @@ msgstr ""
 msgid "Manager email"
 msgstr ""
 
-#: src/planner-group-dialog.c:411
-msgid "Default"
-msgstr ""
-
 #: src/planner-project-properties.c:146
 msgid "Select a calendar to use for this project:"
-msgstr ""
-
-#: src/planner-project-properties.c:505
-msgid "None"
 msgstr ""
 
 #: src/planner-project-properties.c:606
@@ -1025,8 +1175,9 @@ msgid "Do you really want to remove the property '%s' from the project?"
 msgstr ""
 
 #: src/planner-project-properties.c:1194
+#, fuzzy
 msgid "Could not create properties dialog."
-msgstr ""
+msgstr "Ne mogu kreirati XML stablo"
 
 #: src/planner-property-dialog.c:397
 msgid "Label"
@@ -1077,8 +1228,9 @@ msgstr ""
 #: src/planner-resource-dialog.c:1101 src/planner-task-view.c:230
 #: src/planner-gantt-print.c:198 src/planner-resource-view.c:629
 #: src/planner-resource-view.c:645 src/planner-resource-view.c:1187
+#, fuzzy
 msgid "Work"
-msgstr ""
+msgstr "Radim"
 
 #: src/planner-resource-dialog.c:1102 src/planner-resource-view.c:632
 #: src/planner-resource-view.c:646 src/planner-resource-view.c:1188
@@ -1144,17 +1296,14 @@ msgid ""
 "Enter a filename and try again."
 msgstr ""
 
-#. Give up.
-#: src/planner-sql-plugin.c:127
-msgid "Invalid Unicode"
-msgstr ""
-
 #: src/planner-sql-plugin.c:269
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Connection to database '%s' failed:\n"
 "%s"
 msgstr ""
+"Povezivanje na bazu podataka '%s' nije uspjelo.\n"
+"%s"
 
 #: src/planner-sql-plugin.c:318
 msgid "Project"
@@ -1245,10 +1394,11 @@ msgstr ""
 
 #. COL_START,    _("\nStart"),
 #: src/planner-gantt-view.c:472
+#, fuzzy
 msgid ""
 "\n"
 "Work"
-msgstr ""
+msgstr "Radim"
 
 #. i18n: Short "Week", preferably 2 letters.
 #: src/planner-scale-utils.c:325
@@ -1404,10 +1554,6 @@ msgstr ""
 
 #: src/planner-task-view.c:231
 msgid "Slack"
-msgstr ""
-
-#: src/planner-task-view.c:232
-msgid "Cost"
 msgstr ""
 
 #: src/planner-task-view.c:438

@@ -5,12 +5,13 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mrproject\n"
-"POT-Creation-Date: 2003-12-01 23:08+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-12-04 16:40+0100\n"
 "PO-Revision-Date: 2003-06-04 17:30+0800\n"
 "Last-Translator: Funda Wang <fundawang@linux.net.cn>\n"
 "Language-Team: zh_CN <i18n-translation@lists.linux.net.cn>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: data/planner.desktop.in.h:1
@@ -280,6 +281,7 @@ msgid "Select all tasks"
 msgstr "选中所有任务"
 
 #: data/ui/gantt-view.ui.h:14
+#, fuzzy
 msgid "Test"
 msgstr "测试"
 
@@ -468,8 +470,9 @@ msgid "Custom working time"
 msgstr "自定义工作时间"
 
 #: data/glade/calendar-dialog.glade.h:16
+#, fuzzy
 msgid "Day type:"
-msgstr "日类型："
+msgstr "新建日类型"
 
 #: data/glade/calendar-dialog.glade.h:17
 msgid "Default Week"
@@ -542,6 +545,7 @@ msgid "Working time..."
 msgstr "工作时间..."
 
 #: data/glade/calendar-dialog.glade.h:35
+#, fuzzy
 msgid "_Derive from a calendar"
 msgstr "从日历衍生(_D)"
 
@@ -776,6 +780,7 @@ msgid "Resources"
 msgstr "资源"
 
 #: data/glade/task-dialog.glade.h:13
+#, fuzzy
 msgid "_Duration:"
 msgstr "持续时间(_D)："
 
@@ -803,6 +808,156 @@ msgstr "插入任务"
 #: data/glade/task-input-dialog.glade.h:4
 msgid "Work:"
 msgstr "工作："
+
+#: libplanner/mrp-project.c:441 src/planner-group-dialog.c:411
+msgid "Default"
+msgstr "默认"
+
+#: libplanner/mrp-project.c:749
+#, c-format
+msgid "Couldn't find a suitable file module for loading '%s'"
+msgstr "找不到可装入“%s”的文件模块"
+
+#: libplanner/mrp-project.c:770 libplanner/mrp-project.c:1034
+msgid "No support for SQL storage built into this version of MrProject."
+msgstr "此版本的 MrProject 不支持内建的 SQL 存储。"
+
+#: libplanner/mrp-project.c:807
+#, fuzzy
+msgid "Invalid URI."
+msgstr "无效的 Unicode"
+
+#: libplanner/mrp-project.c:928
+#, c-format
+msgid "Unable to find file writer identified by '%s'"
+msgstr "找不到由“%s”标识的文件写入程序"
+
+#: libplanner/mrp-project.c:991
+msgid "Couldn't find a suitable file module for loading project"
+msgstr "找不到适合装入项目的文件模块"
+
+#: libplanner/mrp-property.c:365
+#, fuzzy
+msgid "Text"
+msgstr "测试"
+
+#: libplanner/mrp-property.c:367
+msgid "String list"
+msgstr "字符串列表"
+
+#: libplanner/mrp-property.c:369
+#, fuzzy
+msgid "Integer number"
+msgstr "经理姓名"
+
+#: libplanner/mrp-property.c:371
+msgid "Floating-point number"
+msgstr "浮点数"
+
+#: libplanner/mrp-property.c:373
+#, fuzzy
+msgid "Date"
+msgstr "日类型："
+
+#: libplanner/mrp-property.c:375
+#, fuzzy
+msgid "Duration"
+msgstr "持续时间(_D)："
+
+#: libplanner/mrp-property.c:377 src/planner-task-view.c:232
+msgid "Cost"
+msgstr "成本"
+
+#: libplanner/mrp-property.c:380 src/planner-project-properties.c:505
+msgid "None"
+msgstr "无"
+
+#: libplanner/mrp-task-manager.c:1769
+msgid "Can not add a predecessor relation between a task and its ancestor."
+msgstr "无法在任务及其祖先之间添加前趋关系。"
+
+#: libplanner/mrp-task-manager.c:1778 libplanner/mrp-task-manager.c:1786
+msgid "Can not add a predecessor, because it would result in a loop."
+msgstr "无法添加前趋，原因是将导致循环。"
+
+#: libplanner/mrp-task-manager.c:1821
+msgid "Can not move the task, since it would result in a loop."
+msgstr "无法移动任务，原因是将导致循环。"
+
+#: libplanner/mrp-task.c:1016
+msgid ""
+"Could not add a predecessor relation, because the tasks are already related."
+msgstr "无法添加前趋关系，原因是任务已经有关系了。"
+
+#: libplanner/mrp-day.c:54
+#, fuzzy
+msgid "Working"
+msgstr "工作"
+
+#: libplanner/mrp-day.c:55
+msgid "A default working day"
+msgstr "默认工作日"
+
+#: libplanner/mrp-day.c:57
+#, fuzzy
+msgid "Nonworking"
+msgstr "没有工作时间"
+
+#: libplanner/mrp-day.c:58
+msgid "A default non working day"
+msgstr "默认的不工作日"
+
+#: libplanner/mrp-day.c:60
+msgid "Use base"
+msgstr "使用基础"
+
+#: libplanner/mrp-day.c:61
+#, fuzzy
+msgid "Use day from base calendar"
+msgstr "从日历衍生(_D)"
+
+#: libplanner/mrp-parser.c:1043 libplanner/mrp-parser.c:1138
+#, fuzzy
+msgid "Could not create XML tree"
+msgstr "无法创建属性对话框。"
+
+#: libplanner/mrp-parser.c:1104
+#, fuzzy
+msgid "Could not write XML file"
+msgstr "打不开插件文件“%s”\n"
+
+#. Give up.
+#: libplanner/mrp-sql.c:229 src/planner-sql-plugin.c:127
+msgid "Invalid Unicode"
+msgstr "无效的 Unicode"
+
+#: libplanner/mrp-sql.c:2205
+#, c-format
+msgid ""
+"The project '%s' has been changed by the user '%s' since you opened it. Do "
+"you want to save anyway?"
+msgstr "项目“%s”自您打开后已经由用户“%s”进行了更改。您仍然要保存吗？"
+
+#: libplanner/mrp-sql.c:3443
+#, fuzzy, c-format
+msgid ""
+"Connection to database '%s' failed.\n"
+"%s"
+msgstr ""
+"连接到数据库“%s”失败：\n"
+"%s"
+
+#: libplanner/mrp-storage-sql.c:205
+msgid "Invalid SQL URI (must start with 'sql://' and contain '#')."
+msgstr "无效的 SQL URI (必须以“sql://”开始且包含“#”)。"
+
+#: libplanner/mrp-storage-sql.c:274
+msgid "Invalid SQL URI (invalid project id)."
+msgstr "无效的 SQL URI (无效的项目 id)。"
+
+#: libplanner/mrp-storage-sql.c:282
+msgid "Invalid SQL URI (no database name specified)."
+msgstr "无效的 SQL URI (没有指定数据库名)。"
 
 #: src/planner-application.c:117
 msgid "Edit"
@@ -914,9 +1069,9 @@ msgid "mrproject: --geometry cannot be used with more than one file."
 msgstr "mrproject：--geometry 无法用于多个文件。"
 
 #: src/planner-plugin-loader.c:40
-#, c-format
+#, fuzzy, c-format
 msgid "Could not open plugin file '%s'\n"
-msgstr "打不开插件文件“%s”\n"
+msgstr "打不开查看插件文件“%s”\n"
 
 #: src/planner-view-loader.c:40
 #, c-format
@@ -984,8 +1139,9 @@ msgid "Sunday"
 msgstr "周日"
 
 #: src/planner-default-week-dialog.c:266
+#, fuzzy
 msgid "No working time"
-msgstr "没有工作时间"
+msgstr "自定义工作时间"
 
 #: src/planner-default-week-dialog.c:277 src/planner-default-week-dialog.c:281
 msgid "%H:%M"
@@ -999,8 +1155,9 @@ msgid "Name"
 msgstr "名称"
 
 #: src/planner-group-dialog.c:393
+#, fuzzy
 msgid "Manager name"
-msgstr "经理姓名"
+msgstr "经理电话"
 
 #: src/planner-group-dialog.c:399
 msgid "Manager phone"
@@ -1010,17 +1167,9 @@ msgstr "经理电话"
 msgid "Manager email"
 msgstr "经理邮件"
 
-#: src/planner-group-dialog.c:411
-msgid "Default"
-msgstr "默认"
-
 #: src/planner-project-properties.c:146
 msgid "Select a calendar to use for this project:"
 msgstr "选择此项目使用的日历："
-
-#: src/planner-project-properties.c:505
-msgid "None"
-msgstr "无"
 
 #: src/planner-project-properties.c:606
 msgid "Property"
@@ -1040,6 +1189,7 @@ msgid "Do you really want to remove the property '%s' from the project?"
 msgstr "您真的想要从项目中删除属性“%s”吗？"
 
 #: src/planner-project-properties.c:1194
+#, fuzzy
 msgid "Could not create properties dialog."
 msgstr "无法创建属性对话框。"
 
@@ -1092,8 +1242,11 @@ msgstr "编辑资源属性"
 #: src/planner-resource-dialog.c:1101 src/planner-task-view.c:230
 #: src/planner-gantt-print.c:198 src/planner-resource-view.c:629
 #: src/planner-resource-view.c:645 src/planner-resource-view.c:1187
+#, fuzzy
 msgid "Work"
-msgstr "工作"
+msgstr ""
+"\n"
+"工作"
 
 #: src/planner-resource-dialog.c:1102 src/planner-resource-view.c:632
 #: src/planner-resource-view.c:646 src/planner-resource-view.c:1188
@@ -1161,13 +1314,8 @@ msgstr ""
 "“%s”是目录。\n"
 "请输入文件名然后再试一次。"
 
-#. Give up.
-#: src/planner-sql-plugin.c:127
-msgid "Invalid Unicode"
-msgstr "无效的 Unicode"
-
 #: src/planner-sql-plugin.c:269
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Connection to database '%s' failed:\n"
 "%s"
@@ -1310,15 +1458,15 @@ msgstr "%d年，第%d季度"
 
 #. i18n: Short "Half year", prefferably 1 letter.
 #: src/planner-scale-utils.c:386
-#, c-format
+#, fuzzy, c-format
 msgid "H%d"
-msgstr ""
+msgstr "第%d季度"
 
 #. i18n: Year, short "Half year", prefferably 1 letter.
 #: src/planner-scale-utils.c:391
-#, c-format
+#, fuzzy, c-format
 msgid "%04d, H%d"
-msgstr ""
+msgstr "%d年，第%d季度"
 
 #: src/planner-task-tree.c:184
 msgid "/_Insert task"
@@ -1428,10 +1576,6 @@ msgstr "完成"
 #: src/planner-task-view.c:231
 msgid "Slack"
 msgstr "迟缓"
-
-#: src/planner-task-view.c:232
-msgid "Cost"
-msgstr "成本"
 
 #: src/planner-task-view.c:438
 msgid "Edit custom task properties"

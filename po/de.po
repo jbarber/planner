@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MrProject HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-12-03 17:41+0100\n"
+"POT-Creation-Date: 2003-12-04 16:40+0100\n"
 "PO-Revision-Date: 2003-04-17 18:02+0200\n"
 "Last-Translator: Christian Neumair <chris@gnome-de.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
@@ -282,6 +282,7 @@ msgid "Select all tasks"
 msgstr "Alle Aufgaben markieren"
 
 #: data/ui/gantt-view.ui.h:14
+#, fuzzy
 msgid "Test"
 msgstr "Test"
 
@@ -475,8 +476,9 @@ msgid "Custom working time"
 msgstr "Benutzerdefinierte Arbeitszeit"
 
 #: data/glade/calendar-dialog.glade.h:16
+#, fuzzy
 msgid "Day type:"
-msgstr "Tagestyp:"
+msgstr "Neuer Tagestyp"
 
 #: data/glade/calendar-dialog.glade.h:17
 msgid "Default Week"
@@ -553,6 +555,7 @@ msgid "Working time..."
 msgstr "Arbeitszeit..."
 
 #: data/glade/calendar-dialog.glade.h:35
+#, fuzzy
 msgid "_Derive from a calendar"
 msgstr "Von einem Kalender a_bleiten"
 
@@ -793,6 +796,7 @@ msgid "Resources"
 msgstr "Ressourcen"
 
 #: data/glade/task-dialog.glade.h:13
+#, fuzzy
 msgid "_Duration:"
 msgstr "_Dauer:"
 
@@ -821,6 +825,172 @@ msgstr "Aufgabe einfügen"
 #: data/glade/task-input-dialog.glade.h:4
 msgid "Work:"
 msgstr "Dauer:"
+
+#: libplanner/mrp-project.c:441 src/planner-group-dialog.c:411
+msgid "Default"
+msgstr "Vorgabe"
+
+#: libplanner/mrp-project.c:749
+#, c-format
+msgid "Couldn't find a suitable file module for loading '%s'"
+msgstr "Es konnte kein passendes Dateimodul zum Laden von »%s« gefunden werden"
+
+#: libplanner/mrp-project.c:770 libplanner/mrp-project.c:1034
+msgid "No support for SQL storage built into this version of MrProject."
+msgstr ""
+"In diese MrProject-Version wurde keine Unterstützung für das Speichern per "
+"SQL einkompiliert."
+
+#: libplanner/mrp-project.c:807
+#, fuzzy
+msgid "Invalid URI."
+msgstr "Ungültiger Unicode"
+
+# CHECK
+#: libplanner/mrp-project.c:928
+#, c-format
+msgid "Unable to find file writer identified by '%s'"
+msgstr "Der von »%s« identifizierte File-Write konnte nicht gefunden werden"
+
+#: libplanner/mrp-project.c:991
+msgid "Couldn't find a suitable file module for loading project"
+msgstr ""
+"Es konnte kein passendes Dateimodul zum Laden des Projekts gefunden werden"
+
+#: libplanner/mrp-property.c:365
+#, fuzzy
+msgid "Text"
+msgstr "Test"
+
+#: libplanner/mrp-property.c:367
+msgid "String list"
+msgstr "Liste der Zeichenketten"
+
+#: libplanner/mrp-property.c:369
+#, fuzzy
+msgid "Integer number"
+msgstr "Koordinator"
+
+#: libplanner/mrp-property.c:371
+msgid "Floating-point number"
+msgstr "Fließkomma-Zahl"
+
+#: libplanner/mrp-property.c:373
+#, fuzzy
+msgid "Date"
+msgstr "Tagestyp:"
+
+#: libplanner/mrp-property.c:375
+#, fuzzy
+msgid "Duration"
+msgstr "_Dauer:"
+
+#: libplanner/mrp-property.c:377 src/planner-task-view.c:232
+msgid "Cost"
+msgstr "Kosten"
+
+#: libplanner/mrp-property.c:380 src/planner-project-properties.c:505
+msgid "None"
+msgstr "Keine"
+
+# CHECK
+#: libplanner/mrp-task-manager.c:1769
+msgid "Can not add a predecessor relation between a task and its ancestor."
+msgstr ""
+"Es konnte keine Vorgänger-Relation zwischen einer Aufgabe und seinem "
+"Vorfahren hinzugefügt werden."
+
+#: libplanner/mrp-task-manager.c:1778 libplanner/mrp-task-manager.c:1786
+msgid "Can not add a predecessor, because it would result in a loop."
+msgstr ""
+"Es konnte kein Vorgänger hinzugefügt werden, da dies zu einer kreisförmigen "
+"Abhängigkeit führen würde."
+
+#: libplanner/mrp-task-manager.c:1821
+msgid "Can not move the task, since it would result in a loop."
+msgstr ""
+"Die Aufgabe konnte nicht verschoben werden, da dies zu einer kreisförmigen "
+"Abhängigkeit führen würde."
+
+#: libplanner/mrp-task.c:1016
+msgid ""
+"Could not add a predecessor relation, because the tasks are already related."
+msgstr ""
+"Es konnte keine Vorgänger-Relation hinzugefügt werden, da diese Aufgaben "
+"bereits in einer Relation zueinander stehen."
+
+#: libplanner/mrp-day.c:54
+#, fuzzy
+msgid "Working"
+msgstr "Arbeit"
+
+#: libplanner/mrp-day.c:55
+msgid "A default working day"
+msgstr "Ein Vorgabe-Arbeitstag"
+
+# CHECK
+#: libplanner/mrp-day.c:57
+#, fuzzy
+msgid "Nonworking"
+msgstr "Keine Arbeitszeit"
+
+#: libplanner/mrp-day.c:58
+msgid "A default non working day"
+msgstr "Ein Vorgabetag, an dem nicht gearbeitet wird"
+
+#: libplanner/mrp-day.c:60
+msgid "Use base"
+msgstr "Basis verwenden"
+
+#: libplanner/mrp-day.c:61
+#, fuzzy
+msgid "Use day from base calendar"
+msgstr "Von einem Kalender a_bleiten"
+
+#: libplanner/mrp-parser.c:1043 libplanner/mrp-parser.c:1138
+#, fuzzy
+msgid "Could not create XML tree"
+msgstr "Eigenschaftendialog konnte nicht erstellt werden."
+
+#: libplanner/mrp-parser.c:1104
+#, fuzzy
+msgid "Could not write XML file"
+msgstr "Plugin-Datei »%s« konnte nicht geöffnet werden\n"
+
+#. Give up.
+#: libplanner/mrp-sql.c:229 src/planner-sql-plugin.c:127
+msgid "Invalid Unicode"
+msgstr "Ungültiger Unicode"
+
+#: libplanner/mrp-sql.c:2205
+#, c-format
+msgid ""
+"The project '%s' has been changed by the user '%s' since you opened it. Do "
+"you want to save anyway?"
+msgstr ""
+"Das Projekt »%s« wurde vom Benutzer »%s« geändert, während Sie darauf "
+"zugegriffen haben. Wollen Sie dennoch abspeichern?"
+
+#: libplanner/mrp-sql.c:3443
+#, fuzzy, c-format
+msgid ""
+"Connection to database '%s' failed.\n"
+"%s"
+msgstr ""
+"Verbindungsaufnahme mit Datenbank »%s« fehlgeschlagen:\n"
+"%s"
+
+#: libplanner/mrp-storage-sql.c:205
+msgid "Invalid SQL URI (must start with 'sql://' and contain '#')."
+msgstr "Ungültige SQL-Adresse (muss mit »sql://« beginnen und »#« enthalten)."
+
+#: libplanner/mrp-storage-sql.c:274
+msgid "Invalid SQL URI (invalid project id)."
+msgstr "Ungültige SQL-Adresse (ungültige Projektkennung)."
+
+#: libplanner/mrp-storage-sql.c:282
+msgid "Invalid SQL URI (no database name specified)."
+msgstr "Ungültige SQL-Adresse (Kein Datenbankname angegeben)."
 
 #: src/planner-application.c:117
 msgid "Edit"
@@ -946,9 +1116,9 @@ msgstr ""
 "MrProject: »--geometry« kann nicht mit mehr als einer Datei verwendet werden."
 
 #: src/planner-plugin-loader.c:40
-#, c-format
+#, fuzzy, c-format
 msgid "Could not open plugin file '%s'\n"
-msgstr "Plugin-Datei »%s« konnte nicht geöffnet werden\n"
+msgstr "Plugin-Datei »%s« konnte nicht betrachtet werden\n"
 
 #: src/planner-view-loader.c:40
 #, c-format
@@ -1017,8 +1187,9 @@ msgstr "Sonntag"
 
 # CHECK
 #: src/planner-default-week-dialog.c:266
+#, fuzzy
 msgid "No working time"
-msgstr "Keine Arbeitszeit"
+msgstr "Benutzerdefinierte Arbeitszeit"
 
 #: src/planner-default-week-dialog.c:277 src/planner-default-week-dialog.c:281
 msgid "%H:%M"
@@ -1032,8 +1203,9 @@ msgid "Name"
 msgstr "Name"
 
 #: src/planner-group-dialog.c:393
+#, fuzzy
 msgid "Manager name"
-msgstr "Koordinator"
+msgstr "Telefon des Koordinators"
 
 #: src/planner-group-dialog.c:399
 msgid "Manager phone"
@@ -1043,17 +1215,9 @@ msgstr "Telefon des Koordinators"
 msgid "Manager email"
 msgstr "E-Mail des Koordinators"
 
-#: src/planner-group-dialog.c:411
-msgid "Default"
-msgstr "Vorgabe"
-
 #: src/planner-project-properties.c:146
 msgid "Select a calendar to use for this project:"
 msgstr "Wählen Sie den für dieses Projekt zu verwendenden Kalender aus:"
-
-#: src/planner-project-properties.c:505
-msgid "None"
-msgstr "Keine"
 
 #: src/planner-project-properties.c:606
 msgid "Property"
@@ -1075,6 +1239,7 @@ msgid "Do you really want to remove the property '%s' from the project?"
 msgstr "Soll die Eigenschaft »%s« wirklich vom Projekt entfernt werden?"
 
 #: src/planner-project-properties.c:1194
+#, fuzzy
 msgid "Could not create properties dialog."
 msgstr "Eigenschaftendialog konnte nicht erstellt werden."
 
@@ -1127,8 +1292,11 @@ msgstr "Ressourcen-Eigenschaften bearbeiten"
 #: src/planner-resource-dialog.c:1101 src/planner-task-view.c:230
 #: src/planner-gantt-print.c:198 src/planner-resource-view.c:629
 #: src/planner-resource-view.c:645 src/planner-resource-view.c:1187
+#, fuzzy
 msgid "Work"
-msgstr "Arbeit"
+msgstr ""
+"\n"
+"Dauer"
 
 #: src/planner-resource-dialog.c:1102 src/planner-resource-view.c:632
 #: src/planner-resource-view.c:646 src/planner-resource-view.c:1188
@@ -1197,13 +1365,8 @@ msgstr ""
 "»%s« ist ein Verzeichnis.\n"
 "Geben Sie einen Dateinamen ein und versuchen Sie es erneut."
 
-#. Give up.
-#: src/planner-sql-plugin.c:127
-msgid "Invalid Unicode"
-msgstr "Ungültiger Unicode"
-
 #: src/planner-sql-plugin.c:269
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Connection to database '%s' failed:\n"
 "%s"
@@ -1465,10 +1628,6 @@ msgstr "Ende"
 msgid "Slack"
 msgstr ""
 
-#: src/planner-task-view.c:232
-msgid "Cost"
-msgstr "Kosten"
-
 #: src/planner-task-view.c:438
 msgid "Edit custom task properties"
 msgstr "Benutzerdefinierte Aufgaben-Eigenschaften bearbeiten"
@@ -1505,3 +1664,21 @@ msgstr "Gruppe"
 #: src/planner-resource-view.c:1040
 msgid "Email"
 msgstr "E-Mail"
+
+#~ msgid "No support for SQL storage built in this version of MrProject."
+#~ msgstr ""
+#~ "In diese MrProject-Version wurde keine Unterstützung für das Speichern "
+#~ "per SQL einkompiliert."
+
+#~ msgid ""
+#~ "Could not load file.\n"
+#~ "Error was: \"%s\""
+#~ msgstr ""
+#~ "Datei konnte nicht geladen werden.\n"
+#~ "Fehler war: \"%s\""
+
+#~ msgid "No MPX header"
+#~ msgstr "Keine MPX-Kopfzeile"
+
+#~ msgid "Not an mpx '%s'"
+#~ msgstr "Kein MPX »%s«"

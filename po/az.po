@@ -6,14 +6,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mrproject.HEAD\n"
-"POT-Creation-Date: 2003-12-01 23:08+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-12-04 16:40+0100\n"
 "PO-Revision-Date: 2003-08-23 23:23+0300\n"
 "Last-Translator: Mətin Əmirov <metin@karegen.com>\n"
 "Language-Team: Azerbaijani <gnome@azitt.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Report-Msgid-Bugs-To: \n"
 "X-Generator: KBabel 1.0.1\n"
 
 #: data/planner.desktop.in.h:1
@@ -81,16 +81,18 @@ msgid "New"
 msgstr "Yeni"
 
 #: data/ui/main-window.ui.h:14
+#, fuzzy
 msgid "New..."
-msgstr ""
+msgstr "Yeni"
 
 #: data/ui/main-window.ui.h:15
 msgid "Open"
 msgstr "Aç"
 
 #: data/ui/main-window.ui.h:16
+#, fuzzy
 msgid "Open a project"
-msgstr ""
+msgstr "Yeni layihə yarat"
 
 #: data/ui/main-window.ui.h:17
 msgid "Paste the clipboard"
@@ -121,8 +123,9 @@ msgid "Save _As..."
 msgstr "_Fərqli Qeyd Et..."
 
 #: data/ui/main-window.ui.h:24
+#, fuzzy
 msgid "Save the current project"
-msgstr ""
+msgstr "Hazırkı faylı bağla"
 
 #: data/ui/main-window.ui.h:25
 msgid "Save the current project with a different name"
@@ -169,20 +172,23 @@ msgid "_Help"
 msgstr "_Yardım"
 
 #: data/ui/main-window.ui.h:36
+#, fuzzy
 msgid "_Manage Calendars"
-msgstr ""
+msgstr "Təqvim"
 
 #: data/ui/main-window.ui.h:37
+#, fuzzy
 msgid "_New Project"
-msgstr ""
+msgstr "_Layihə"
 
 #: data/ui/main-window.ui.h:38
 msgid "_Open..."
 msgstr "_Aç..."
 
 #: data/ui/main-window.ui.h:39
+#, fuzzy
 msgid "_Paste"
-msgstr "_Yapışdır"
+msgstr "_Yarat"
 
 #: data/ui/main-window.ui.h:40
 msgid "_Print Preview"
@@ -221,8 +227,9 @@ msgid "_View"
 msgstr "_Görünüş"
 
 #: data/ui/gantt-view.ui.h:1 data/ui/task-view.ui.h:1
+#, fuzzy
 msgid "I_ndent Task"
-msgstr ""
+msgstr "Çərtmə"
 
 #: data/ui/gantt-view.ui.h:2 data/ui/task-view.ui.h:2
 msgid "In_sert Tasks..."
@@ -236,16 +243,19 @@ msgstr "Çərtmə"
 #: data/ui/gantt-view.ui.h:4 data/ui/task-view.ui.h:4
 #: data/ui/resource-view.ui.h:5 src/planner-application.c:54
 #: src/planner-application.c:103
+#, fuzzy
 msgid "Insert"
-msgstr ""
+msgstr "_Daxil Et"
 
 #: data/ui/gantt-view.ui.h:5 data/ui/task-view.ui.h:5
+#, fuzzy
 msgid "Move Task Do_wn"
-msgstr ""
+msgstr "Aşağı daşı"
 
 #: data/ui/gantt-view.ui.h:6 data/ui/task-view.ui.h:6
+#, fuzzy
 msgid "Move Task _Up"
-msgstr ""
+msgstr "Üstə daşı"
 
 #: data/ui/gantt-view.ui.h:7 data/ui/task-view.ui.h:7
 #: src/planner-application.c:96
@@ -278,10 +288,12 @@ msgstr "_Hamısını Seç"
 
 #: data/ui/gantt-view.ui.h:13 data/ui/task-view.ui.h:13
 #: data/ui/resource-view.ui.h:8
+#, fuzzy
 msgid "Select all tasks"
-msgstr ""
+msgstr "_Hamısını Seç"
 
 #: data/ui/gantt-view.ui.h:14
+#, fuzzy
 msgid "Test"
 msgstr "Sınaq"
 
@@ -295,8 +307,9 @@ msgstr ""
 
 #: data/ui/gantt-view.ui.h:17 data/ui/task-view.ui.h:16
 #: src/planner-application.c:82
+#, fuzzy
 msgid "Unindent"
-msgstr ""
+msgstr "Çərtmə"
 
 #: data/ui/gantt-view.ui.h:18 data/ui/task-view.ui.h:17
 #: src/planner-application.c:68
@@ -312,12 +325,14 @@ msgid "Zoom Out"
 msgstr "Uzaqlaşdır"
 
 #: data/ui/gantt-view.ui.h:21
+#, fuzzy
 msgid "Zoom To Fit"
-msgstr ""
+msgstr "Uzaqlaşdır"
 
 #: data/ui/gantt-view.ui.h:22
+#, fuzzy
 msgid "Zoom To _Fit"
-msgstr ""
+msgstr "_Uzaqlaşdır"
 
 #: data/ui/gantt-view.ui.h:23
 msgid "Zoom _Out"
@@ -332,12 +347,14 @@ msgid "_Highlight Critical Tasks"
 msgstr ""
 
 #: data/ui/gantt-view.ui.h:26 data/ui/task-view.ui.h:20
+#, fuzzy
 msgid "_Insert Task"
-msgstr ""
+msgstr "_Daxil Et"
 
 #: data/ui/gantt-view.ui.h:27 data/ui/task-view.ui.h:21
+#, fuzzy
 msgid "_Remove Task"
-msgstr ""
+msgstr "Çıxart"
 
 #: data/ui/gantt-view.ui.h:28
 msgid "_Zoom In"
@@ -356,16 +373,18 @@ msgid "Open from Database..."
 msgstr ""
 
 #: data/ui/sql-plugin.ui.h:2
+#, fuzzy
 msgid "Save to Database..."
-msgstr ""
+msgstr "_Fərqli Qeyd Et..."
 
 #: data/ui/resource-view.ui.h:1
 msgid "Edit _Custom Properties..."
 msgstr ""
 
 #: data/ui/resource-view.ui.h:2
+#, fuzzy
 msgid "Edit _Groups"
-msgstr ""
+msgstr "Qruplar"
 
 #: data/ui/resource-view.ui.h:3
 msgid "Groups"
@@ -380,8 +399,9 @@ msgid "_Edit Resource Properties..."
 msgstr ""
 
 #: data/ui/resource-view.ui.h:10
+#, fuzzy
 msgid "_Insert Resource"
-msgstr ""
+msgstr "_Daxil Et"
 
 #: data/ui/resource-view.ui.h:11
 msgid "_Remove Resource"
@@ -428,8 +448,9 @@ msgid "-"
 msgstr "-"
 
 #: data/glade/calendar-dialog.glade.h:6
+#, fuzzy
 msgid "<b>Calendar:</b>"
-msgstr ""
+msgstr "Təqvim"
 
 #: data/glade/calendar-dialog.glade.h:7
 msgid "<b>Day types</b>"
@@ -456,8 +477,9 @@ msgid "C_reate"
 msgstr "_Yarat"
 
 #: data/glade/calendar-dialog.glade.h:13
+#, fuzzy
 msgid "Calendar Editor"
-msgstr ""
+msgstr "Təqvim"
 
 #: data/glade/calendar-dialog.glade.h:14
 msgid "Create an _empty calendar"
@@ -468,16 +490,19 @@ msgid "Custom working time"
 msgstr ""
 
 #: data/glade/calendar-dialog.glade.h:16
+#, fuzzy
 msgid "Day type:"
-msgstr ""
+msgstr "_Yapışdır"
 
 #: data/glade/calendar-dialog.glade.h:17
+#, fuzzy
 msgid "Default Week"
-msgstr ""
+msgstr "Əsas"
 
 #: data/glade/calendar-dialog.glade.h:18
+#, fuzzy
 msgid "Default week..."
-msgstr ""
+msgstr "Əsas"
 
 #: data/glade/calendar-dialog.glade.h:19
 msgid "Edit Day Types"
@@ -500,12 +525,14 @@ msgid "From:"
 msgstr "Mənbə:"
 
 #: data/glade/calendar-dialog.glade.h:24
+#, fuzzy
 msgid "MrProject Team"
-msgstr ""
+msgstr "Layihə"
 
 #: data/glade/calendar-dialog.glade.h:25
+#, fuzzy
 msgid "New Calendar"
-msgstr ""
+msgstr "Təqvim"
 
 #: data/glade/calendar-dialog.glade.h:26
 msgid "New Day Type"
@@ -538,8 +565,9 @@ msgid "Week day:"
 msgstr ""
 
 #: data/glade/calendar-dialog.glade.h:34
+#, fuzzy
 msgid "Working time..."
-msgstr ""
+msgstr "İş"
 
 #: data/glade/calendar-dialog.glade.h:35
 msgid "_Derive from a calendar"
@@ -550,8 +578,9 @@ msgid "_Name of the new calendar:"
 msgstr ""
 
 #: data/glade/calendar-dialog.glade.h:37
+#, fuzzy
 msgid "_New..."
-msgstr ""
+msgstr "_Aç..."
 
 #: data/glade/group-dialog.glade.h:1
 msgid "Group Editor"
@@ -578,28 +607,33 @@ msgid "Description: "
 msgstr ""
 
 #: data/glade/new-property.glade.h:3
+#, fuzzy
 msgid "Label: "
-msgstr ""
+msgstr "Etiket"
 
 #: data/glade/new-property.glade.h:4
+#, fuzzy
 msgid "Name: "
-msgstr ""
+msgstr "Ad:"
 
 #: data/glade/new-property.glade.h:5
+#, fuzzy
 msgid "New Property"
-msgstr ""
+msgstr "Xassə"
 
 #: data/glade/new-property.glade.h:6
+#, fuzzy
 msgid "Type: "
-msgstr ""
+msgstr "_Növ:"
 
 #: data/glade/project-properties.glade.h:2
 msgid "<b>Project phases</b>"
 msgstr ""
 
 #: data/glade/project-properties.glade.h:3
+#, fuzzy
 msgid "Calendar:"
-msgstr ""
+msgstr "Təqvim"
 
 #: data/glade/project-properties.glade.h:4
 msgid "Custom properties"
@@ -623,24 +657,28 @@ msgid "New Project Phase"
 msgstr ""
 
 #: data/glade/project-properties.glade.h:9
+#, fuzzy
 msgid "Project _name:"
-msgstr ""
+msgstr "Layihə"
 
 #: data/glade/project-properties.glade.h:10
+#, fuzzy
 msgid "Project _start:"
-msgstr ""
+msgstr "Layihə"
 
 #: data/glade/project-properties.glade.h:11
+#, fuzzy
 msgid "Project phase:"
-msgstr ""
+msgstr "Layihə"
 
 #: data/glade/project-properties.glade.h:12
 msgid "Project properties"
 msgstr ""
 
 #: data/glade/project-properties.glade.h:13
+#, fuzzy
 msgid "Select..."
-msgstr ""
+msgstr "_Hamısını Seç"
 
 #: data/glade/project-properties.glade.h:14
 msgid "_Manager:"
@@ -655,8 +693,9 @@ msgid "Custom Properties"
 msgstr ""
 
 #: data/glade/resource-dialog.glade.h:2
+#, fuzzy
 msgid "C_ost:"
-msgstr ""
+msgstr "Kə_s"
 
 #: data/glade/resource-dialog.glade.h:3
 msgid "Calendar"
@@ -681,12 +720,14 @@ msgid ""
 msgstr ""
 
 #: data/glade/resource-dialog.glade.h:9
+#, fuzzy
 msgid "_Email:"
-msgstr ""
+msgstr "ePoçt:"
 
 #: data/glade/resource-dialog.glade.h:10
+#, fuzzy
 msgid "_Group:"
-msgstr ""
+msgstr "Qrup:"
 
 #: data/glade/resource-dialog.glade.h:11
 msgid "_Name:"
@@ -723,8 +764,9 @@ msgid "<b>Open Database</b>"
 msgstr ""
 
 #: data/glade/sql.glade.h:4
+#, fuzzy
 msgid "Database:"
-msgstr ""
+msgstr "_Yapışdır"
 
 #: data/glade/sql.glade.h:5
 msgid "Open Database"
@@ -735,8 +777,9 @@ msgid "Password:"
 msgstr "Şifrə:"
 
 #: data/glade/sql.glade.h:7
+#, fuzzy
 msgid "Select a Project"
-msgstr ""
+msgstr "Yeni layihə yarat"
 
 #: data/glade/sql.glade.h:8
 msgid "Server:"
@@ -760,12 +803,14 @@ msgid "C_omplete:"
 msgstr ""
 
 #: data/glade/task-dialog.glade.h:8
+#, fuzzy
 msgid "Na_me:"
-msgstr ""
+msgstr "Ad:"
 
 #: data/glade/task-dialog.glade.h:10
+#, fuzzy
 msgid "Pr_iority:"
-msgstr ""
+msgstr "Xassə"
 
 #: data/glade/task-dialog.glade.h:11
 msgid "Predecessors"
@@ -788,8 +833,9 @@ msgid "_Milestone"
 msgstr ""
 
 #: data/glade/task-dialog.glade.h:16
+#, fuzzy
 msgid "_Work:"
-msgstr ""
+msgstr "İş"
 
 #. day unit variant accepted in input
 #: data/glade/task-dialog.glade.h:17 src/planner-task-tree.c:2120
@@ -797,11 +843,154 @@ msgid "days"
 msgstr ""
 
 #: data/glade/task-input-dialog.glade.h:2
+#, fuzzy
 msgid "Insert task"
-msgstr ""
+msgstr "_Daxil Et"
 
 #: data/glade/task-input-dialog.glade.h:4
+#, fuzzy
 msgid "Work:"
+msgstr "İş"
+
+#: libplanner/mrp-project.c:441 src/planner-group-dialog.c:411
+msgid "Default"
+msgstr "Əsas"
+
+#: libplanner/mrp-project.c:749
+#, c-format
+msgid "Couldn't find a suitable file module for loading '%s'"
+msgstr ""
+
+#: libplanner/mrp-project.c:770 libplanner/mrp-project.c:1034
+msgid "No support for SQL storage built into this version of MrProject."
+msgstr ""
+
+#: libplanner/mrp-project.c:807
+msgid "Invalid URI."
+msgstr ""
+
+#: libplanner/mrp-project.c:928
+#, c-format
+msgid "Unable to find file writer identified by '%s'"
+msgstr ""
+
+#: libplanner/mrp-project.c:991
+msgid "Couldn't find a suitable file module for loading project"
+msgstr ""
+
+#: libplanner/mrp-property.c:365
+#, fuzzy
+msgid "Text"
+msgstr "Sınaq"
+
+#: libplanner/mrp-property.c:367
+msgid "String list"
+msgstr ""
+
+#: libplanner/mrp-property.c:369
+msgid "Integer number"
+msgstr ""
+
+#: libplanner/mrp-property.c:371
+msgid "Floating-point number"
+msgstr ""
+
+#: libplanner/mrp-property.c:373
+#, fuzzy
+msgid "Date"
+msgstr "_Yapışdır"
+
+#: libplanner/mrp-property.c:375
+msgid "Duration"
+msgstr ""
+
+#: libplanner/mrp-property.c:377 src/planner-task-view.c:232
+msgid "Cost"
+msgstr ""
+
+#: libplanner/mrp-property.c:380 src/planner-project-properties.c:505
+msgid "None"
+msgstr "Yoxdur"
+
+#: libplanner/mrp-task-manager.c:1769
+msgid "Can not add a predecessor relation between a task and its ancestor."
+msgstr ""
+
+#: libplanner/mrp-task-manager.c:1778 libplanner/mrp-task-manager.c:1786
+msgid "Can not add a predecessor, because it would result in a loop."
+msgstr ""
+
+#: libplanner/mrp-task-manager.c:1821
+msgid "Can not move the task, since it would result in a loop."
+msgstr ""
+
+#: libplanner/mrp-task.c:1016
+msgid ""
+"Could not add a predecessor relation, because the tasks are already related."
+msgstr ""
+
+#: libplanner/mrp-day.c:54
+#, fuzzy
+msgid "Working"
+msgstr "İş"
+
+#: libplanner/mrp-day.c:55
+msgid "A default working day"
+msgstr ""
+
+#: libplanner/mrp-day.c:57
+msgid "Nonworking"
+msgstr ""
+
+#: libplanner/mrp-day.c:58
+msgid "A default non working day"
+msgstr ""
+
+#: libplanner/mrp-day.c:60
+msgid "Use base"
+msgstr ""
+
+#: libplanner/mrp-day.c:61
+msgid "Use day from base calendar"
+msgstr ""
+
+#: libplanner/mrp-parser.c:1043 libplanner/mrp-parser.c:1138
+msgid "Could not create XML tree"
+msgstr ""
+
+#: libplanner/mrp-parser.c:1104
+msgid "Could not write XML file"
+msgstr ""
+
+#. Give up.
+#: libplanner/mrp-sql.c:229 src/planner-sql-plugin.c:127
+msgid "Invalid Unicode"
+msgstr ""
+
+#: libplanner/mrp-sql.c:2205
+#, c-format
+msgid ""
+"The project '%s' has been changed by the user '%s' since you opened it. Do "
+"you want to save anyway?"
+msgstr ""
+
+#: libplanner/mrp-sql.c:3443
+#, c-format
+msgid ""
+"Connection to database '%s' failed.\n"
+"%s"
+msgstr ""
+
+#: libplanner/mrp-storage-sql.c:205
+msgid "Invalid SQL URI (must start with 'sql://' and contain '#')."
+msgstr ""
+
+#: libplanner/mrp-storage-sql.c:274
+msgid "Invalid SQL URI (invalid project id)."
+msgstr ""
+
+#: libplanner/mrp-storage-sql.c:282
+msgid "Invalid SQL URI (no database name specified)."
 msgstr ""
 
 #: src/planner-application.c:117
@@ -862,8 +1051,9 @@ msgid "_Cancel"
 msgstr "_Ləğv et"
 
 #: src/planner-main-window.c:1232
+#, fuzzy
 msgid "Save a file"
-msgstr ""
+msgstr "Fayl aç"
 
 #: src/planner-main-window.c:1264 src/planner-html-plugin.c:146
 #, c-format
@@ -889,8 +1079,9 @@ msgstr ""
 #: src/planner-main-window.c:1489 src/planner-gantt-row.c:656
 #: src/planner-gantt-row.c:658 src/planner-gantt-print.c:513
 #: src/planner-gantt-print.c:515
+#, fuzzy
 msgid "Unnamed"
-msgstr ""
+msgstr "İstifadəçi Adı:"
 
 #: src/planner-main.c:61
 msgid "Create the initial window with the given geometry."
@@ -959,8 +1150,9 @@ msgid "Wednesday"
 msgstr ""
 
 #: src/planner-default-week-dialog.c:43
+#, fuzzy
 msgid "Thursday"
-msgstr ""
+msgstr "saat"
 
 #: src/planner-default-week-dialog.c:44
 msgid "Friday"
@@ -1001,17 +1193,9 @@ msgstr ""
 msgid "Manager email"
 msgstr ""
 
-#: src/planner-group-dialog.c:411
-msgid "Default"
-msgstr "Əsas"
-
 #: src/planner-project-properties.c:146
 msgid "Select a calendar to use for this project:"
 msgstr ""
-
-#: src/planner-project-properties.c:505
-msgid "None"
-msgstr "Yoxdur"
 
 #: src/planner-project-properties.c:606
 msgid "Property"
@@ -1044,12 +1228,14 @@ msgid "Type"
 msgstr "Növ"
 
 #: src/planner-print-dialog.c:49
+#, fuzzy
 msgid "Print Project"
-msgstr ""
+msgstr "Layihə"
 
 #: src/planner-print-dialog.c:56
+#, fuzzy
 msgid "Select views"
-msgstr ""
+msgstr "_Hamısını Seç"
 
 #: src/planner-print-dialog.c:74
 msgid "Select the views to print:"
@@ -1063,8 +1249,9 @@ msgstr "(Yox)"
 
 #: src/planner-resource-dialog.c:258 src/planner-resource-input-dialog.c:106
 #: src/planner-task-dialog.c:249
+#, fuzzy
 msgid "(No name)"
-msgstr ""
+msgstr "Adsız"
 
 #. i18n: time stamp format for notes in task dialog, see strftime(3) for
 #. * a detailed description.
@@ -1083,6 +1270,7 @@ msgstr ""
 #: src/planner-resource-dialog.c:1101 src/planner-task-view.c:230
 #: src/planner-gantt-print.c:198 src/planner-resource-view.c:629
 #: src/planner-resource-view.c:645 src/planner-resource-view.c:1187
+#, fuzzy
 msgid "Work"
 msgstr "İş"
 
@@ -1150,11 +1338,6 @@ msgid ""
 "Enter a filename and try again."
 msgstr ""
 
-#. Give up.
-#: src/planner-sql-plugin.c:127
-msgid "Invalid Unicode"
-msgstr ""
-
 #: src/planner-sql-plugin.c:269
 #, c-format
 msgid ""
@@ -1218,8 +1401,9 @@ msgid "%Y %b %d"
 msgstr ""
 
 #: src/planner-gantt-background.c:581
+#, fuzzy
 msgid "Project start"
-msgstr ""
+msgstr "Layihə"
 
 #: src/planner-gantt-row.c:1841 src/planner-gantt-row.c:1844
 msgid "No name"
@@ -1244,17 +1428,19 @@ msgid "_Gantt Chart"
 msgstr ""
 
 #: src/planner-gantt-view.c:470
+#, fuzzy
 msgid ""
 "\n"
 "Name"
-msgstr ""
+msgstr "Ad"
 
 #. COL_START,    _("\nStart"),
 #: src/planner-gantt-view.c:472
+#, fuzzy
 msgid ""
 "\n"
 "Work"
-msgstr ""
+msgstr "İş"
 
 #. i18n: Short "Week", preferably 2 letters.
 #: src/planner-scale-utils.c:325
@@ -1304,16 +1490,19 @@ msgid "%04d, H%d"
 msgstr ""
 
 #: src/planner-task-tree.c:184
+#, fuzzy
 msgid "/_Insert task"
-msgstr ""
+msgstr "_Daxil Et"
 
 #: src/planner-task-tree.c:185
+#, fuzzy
 msgid "/_Insert subtask"
-msgstr ""
+msgstr "_Daxil Et"
 
 #: src/planner-task-tree.c:186
+#, fuzzy
 msgid "/_Remove task"
-msgstr ""
+msgstr "Çıxart"
 
 #: src/planner-task-tree.c:188
 msgid "/_Unlink task"
@@ -1334,8 +1523,9 @@ msgstr ""
 
 #. month unit variant accepted in input
 #: src/planner-task-tree.c:2114
+#, fuzzy
 msgid "months"
-msgstr ""
+msgstr "dəqiqə"
 
 #. month unit variant accepted in input
 #: src/planner-task-tree.c:2115
@@ -1379,8 +1569,9 @@ msgstr "saat"
 
 #. hour unit variant accepted in input
 #: src/planner-task-tree.c:2124
+#, fuzzy
 msgid "min"
-msgstr ""
+msgstr "dəqiqə"
 
 #. minute unit variant accepted in input
 #: src/planner-task-tree.c:2125
@@ -1412,10 +1603,6 @@ msgstr "Qurtar"
 msgid "Slack"
 msgstr ""
 
-#: src/planner-task-view.c:232
-msgid "Cost"
-msgstr ""
-
 #: src/planner-task-view.c:438
 msgid "Edit custom task properties"
 msgstr ""
@@ -1445,5 +1632,6 @@ msgid "Group"
 msgstr "Qrup"
 
 #: src/planner-resource-view.c:1040
+#, fuzzy
 msgid "Email"
-msgstr ""
+msgstr "ePoçt:"

@@ -6,12 +6,13 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: planner\n"
-"POT-Creation-Date: 2003-12-01 23:08+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-12-04 16:40+0100\n"
 "PO-Revision-Date: 2003-03-28 03:28--500\n"
 "Last-Translator: Yuriy Syrota <yuri@renome.rovno.ua>\n"
 "Language-Team: Ukrainian <linux@linux.org.ua>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: data/planner.desktop.in.h:1
@@ -82,8 +83,9 @@ msgid "Edit Day _Types"
 msgstr ""
 
 #: data/ui/main-window.ui.h:10
+#, fuzzy
 msgid "Edit Project _Phases"
-msgstr ""
+msgstr "Змінити фази проекту"
 
 # @ mrproject
 #: data/ui/main-window.ui.h:11
@@ -162,8 +164,9 @@ msgid "Save the current project"
 msgstr "Зберегти поточний проект"
 
 #: data/ui/main-window.ui.h:25
+#, fuzzy
 msgid "Save the current project with a different name"
-msgstr ""
+msgstr "Зберегти поточний проект"
 
 #: data/ui/main-window.ui.h:26
 msgid "Show the MrProject User Guide"
@@ -220,9 +223,12 @@ msgstr "_Файл"
 msgid "_Help"
 msgstr "_Довідка"
 
+# @ korganizer
+# * Andriy Rysin <arysin@yahoo.com>
 #: data/ui/main-window.ui.h:36
+#, fuzzy
 msgid "_Manage Calendars"
-msgstr ""
+msgstr "Новий календар"
 
 # @ glade-
 # * Yuriy Syrota <rasta@renome.rovno.ua>
@@ -236,11 +242,12 @@ msgstr "_Новий проект"
 msgid "_Open..."
 msgstr "_Відкрити..."
 
-# @ Galeon- anjuta evolution gEdit galeon gnome-libs gnumeric gtk gtkhtml libgnomeui
+# @ gtk profterm
 # * Yuriy Syrota <rasta@renome.rovno.ua>
 #: data/ui/main-window.ui.h:39
+#, fuzzy
 msgid "_Paste"
-msgstr "В_ставити"
+msgstr "С_творити"
 
 #: data/ui/main-window.ui.h:40
 #, fuzzy
@@ -292,12 +299,14 @@ msgid "_View"
 msgstr "_Відображення"
 
 #: data/ui/gantt-view.ui.h:1 data/ui/task-view.ui.h:1
+#, fuzzy
 msgid "I_ndent Task"
-msgstr ""
+msgstr "За_брати відступ для завдання"
 
 #: data/ui/gantt-view.ui.h:2 data/ui/task-view.ui.h:2
+#, fuzzy
 msgid "In_sert Tasks..."
-msgstr ""
+msgstr "В_нести завдання"
 
 # @ mrproject
 # * Yuriy Syrota <rasta@renome.rovno.ua>
@@ -314,13 +323,17 @@ msgstr "Відступ"
 msgid "Insert"
 msgstr "Внести"
 
+# @ mrproject
+# * Yuriy Syrota <rasta@renome.rovno.ua>
 #: data/ui/gantt-view.ui.h:5 data/ui/task-view.ui.h:5
+#, fuzzy
 msgid "Move Task Do_wn"
-msgstr ""
+msgstr "Перенести вниз"
 
 #: data/ui/gantt-view.ui.h:6 data/ui/task-view.ui.h:6
+#, fuzzy
 msgid "Move Task _Up"
-msgstr ""
+msgstr "Ви_лучити завдання"
 
 # @ mrproject
 # * Yuriy Syrota <rasta@renome.rovno.ua>
@@ -368,12 +381,14 @@ msgstr "Вибрати всі завдання"
 # @ anaconda-7.3.92-4.src.rpm.dir_1_1_anaconda-_po_uk.po caitoo control-center evolution gnumeric kcmiwatcher kcmkamera kdelibs keduca ktalk userdrake xfce
 # * Yuriy Syrota <rasta@renome.rovno.ua>
 #: data/ui/gantt-view.ui.h:14
+#, fuzzy
 msgid "Test"
 msgstr "Тест"
 
 #: data/ui/gantt-view.ui.h:15 data/ui/task-view.ui.h:14
+#, fuzzy
 msgid "Un_link Task"
-msgstr ""
+msgstr "За_брати відступ для завдання"
 
 #: data/ui/gantt-view.ui.h:16 data/ui/task-view.ui.h:15
 msgid "Unin_dent Task"
@@ -386,7 +401,6 @@ msgstr "За_брати відступ для завдання"
 msgid "Unindent"
 msgstr "Забрати відступ"
 
-# @ mrproject
 #: data/ui/gantt-view.ui.h:18 data/ui/task-view.ui.h:17
 #: src/planner-application.c:68
 msgid "Unlink"
@@ -404,13 +418,19 @@ msgstr "Збільшити"
 msgid "Zoom Out"
 msgstr "Зменшити"
 
+# @ GIMP eog kdelibs kivio korganizer kpixmap kuickshow nautilus
+# * Yuriy Syrota <rasta@renome.rovno.ua>
 #: data/ui/gantt-view.ui.h:21
+#, fuzzy
 msgid "Zoom To Fit"
-msgstr ""
+msgstr "Зменшити"
 
+# @ Dia eog ggv gtk nautilus
+# * Yuriy Syrota <rasta@renome.rovno.ua>
 #: data/ui/gantt-view.ui.h:22
+#, fuzzy
 msgid "Zoom To _Fit"
-msgstr ""
+msgstr "З_меншити"
 
 # @ Dia eog ggv gtk nautilus
 # * Yuriy Syrota <rasta@renome.rovno.ua>
@@ -448,9 +468,12 @@ msgstr "_Змінити нетипові властивості..."
 msgid "Export to HTML"
 msgstr ""
 
+# @ mrproject
+# * Yuriy Syrota <rasta@renome.rovno.ua>
 #: data/ui/sql-plugin.ui.h:1
+#, fuzzy
 msgid "Open from Database..."
-msgstr ""
+msgstr "Зберегти _як..."
 
 # @ mrproject
 # * Yuriy Syrota <rasta@renome.rovno.ua>
@@ -536,8 +559,9 @@ msgid "-"
 msgstr "-"
 
 #: data/glade/calendar-dialog.glade.h:6
+#, fuzzy
 msgid "<b>Calendar:</b>"
-msgstr ""
+msgstr "Календар:"
 
 #: data/glade/calendar-dialog.glade.h:7
 msgid "<b>Day types</b>"
@@ -548,8 +572,9 @@ msgid "<b>Working hours</b>"
 msgstr ""
 
 #: data/glade/calendar-dialog.glade.h:9
+#, fuzzy
 msgid "<b>Working time</b>"
-msgstr ""
+msgstr "Робочий час..."
 
 # @ Dia GIMP Scribus ToDoManager WindowMaker authconfig-4.2.9-2.src.rpm.dir_1_1_authconfig-_po_uk.po drakcronat ee gdm gimp-std-plugins- glade- gnome-libs gnome-media gphoto gqview gtk kdelibs ktelnet xchat xfce xmms
 # * Yuriy Syrota <rasta@renome.rovno.ua>
@@ -567,21 +592,28 @@ msgstr ""
 msgid "C_reate"
 msgstr "С_творити"
 
+# @ mrproject
+# * Yuriy Syrota <rasta@renome.rovno.ua>
 #: data/glade/calendar-dialog.glade.h:13
+#, fuzzy
 msgid "Calendar Editor"
-msgstr ""
+msgstr "Календар"
 
 #: data/glade/calendar-dialog.glade.h:14
 msgid "Create an _empty calendar"
 msgstr ""
 
 #: data/glade/calendar-dialog.glade.h:15
+#, fuzzy
 msgid "Custom working time"
-msgstr ""
+msgstr "Нетипові властивості"
 
+# @ Galeon- anjuta evolution gEdit galeon gnome-libs gnumeric gtk gtkhtml libgnomeui
+# * Yuriy Syrota <rasta@renome.rovno.ua>
 #: data/glade/calendar-dialog.glade.h:16
+#, fuzzy
 msgid "Day type:"
-msgstr ""
+msgstr "В_ставити"
 
 #: data/glade/calendar-dialog.glade.h:17
 msgid "Default Week"
@@ -596,12 +628,14 @@ msgid "Edit Day Types"
 msgstr ""
 
 #: data/glade/calendar-dialog.glade.h:20
+#, fuzzy
 msgid "Edit Working Time"
-msgstr ""
+msgstr "Робочий час..."
 
 #: data/glade/calendar-dialog.glade.h:21
+#, fuzzy
 msgid "Enter the name of the new day type:"
-msgstr ""
+msgstr "Введіть назву нової фази проекту:"
 
 #: data/glade/calendar-dialog.glade.h:22
 msgid "Existing calendars:"
@@ -614,8 +648,9 @@ msgid "From:"
 msgstr "Від:"
 
 #: data/glade/calendar-dialog.glade.h:24
+#, fuzzy
 msgid "MrProject Team"
-msgstr ""
+msgstr "_Назва проекту:"
 
 # @ korganizer
 # * Andriy Rysin <arysin@yahoo.com>
@@ -627,9 +662,12 @@ msgstr "Новий календар"
 msgid "New Day Type"
 msgstr ""
 
+# @ korganizer
+# * Andriy Rysin <arysin@yahoo.com>
 #: data/glade/calendar-dialog.glade.h:27
+#, fuzzy
 msgid "Select a calendar"
-msgstr ""
+msgstr "Новий календар"
 
 #: data/glade/calendar-dialog.glade.h:28
 msgid ""
@@ -796,8 +834,9 @@ msgid "Calendar"
 msgstr "Календар"
 
 #: data/glade/resource-dialog.glade.h:4
+#, fuzzy
 msgid "Edit calendars..."
-msgstr ""
+msgstr "/_Змінити завдання..."
 
 # @ mrproject
 #: data/glade/resource-dialog.glade.h:6 data/glade/task-dialog.glade.h:7
@@ -870,13 +909,19 @@ msgstr "В_нести"
 msgid "<b>Open Database</b>"
 msgstr ""
 
+# @ Galeon- anjuta evolution gEdit galeon gnome-libs gnumeric gtk gtkhtml libgnomeui
+# * Yuriy Syrota <rasta@renome.rovno.ua>
 #: data/glade/sql.glade.h:4
+#, fuzzy
 msgid "Database:"
-msgstr ""
+msgstr "В_ставити"
 
+# @ mrproject
+# * Yuriy Syrota <rasta@renome.rovno.ua>
 #: data/glade/sql.glade.h:5
+#, fuzzy
 msgid "Open Database"
-msgstr ""
+msgstr "Зберегти _як..."
 
 #: data/glade/sql.glade.h:6
 msgid "Password:"
@@ -914,9 +959,12 @@ msgstr "%"
 msgid "C_omplete:"
 msgstr "_Завершено:"
 
+# @ Dia GIMP Gabber Galeon- Ximian-setup-tools balsa control-center evolution galeon gimp gimp-std-plugins- glade- gnome-core gnome-libs gnome-pim gnomeicu gphoto graphite guppi kandy kandy.po kateprojectmanager.po kcmemail kcmkio kde-i18n_4:2.2.2-2_kdeprintfax.po kdelibs keduca kmail kmenuedit kmessedwords knode koffice korganizer ksysguard kword lynx pybliographer red-carpet rpmdrake screem userdrake xchat
+# * Yuriy Syrota <rasta@renome.rovno.ua>
 #: data/glade/task-dialog.glade.h:8
+#, fuzzy
 msgid "Na_me:"
-msgstr ""
+msgstr "Назва:"
 
 # @ Gabber
 # * Yuriy Syrota <rasta@renome.rovno.ua>
@@ -935,6 +983,7 @@ msgid "Resources"
 msgstr "Ресурси"
 
 #: data/glade/task-dialog.glade.h:13
+#, fuzzy
 msgid "_Duration:"
 msgstr "_Тривалість:"
 
@@ -960,8 +1009,166 @@ msgid "Insert task"
 msgstr "Внести завдання"
 
 #: data/glade/task-input-dialog.glade.h:4
+#, fuzzy
 msgid "Work:"
 msgstr "Робота:"
+
+# @ GIMP Galeon- Ximian-setup-tools anaconda-7.3.92-4.src.rpm.dir_1_1_anaconda-_po_uk.po apacheconf-0.9.0-2.src.rpm.dir_1_1_apacheconf-_po_uk.po balsa evolution galeon gdm ghex gimp gnome-panel gnome-pim gnome-utils gnomeicu guppi kdelibs nautilus sawfish xfce xmms yank
+# * Volodymyr M. Lisivka <lvm@mystery.lviv.net>
+#: libplanner/mrp-project.c:441 src/planner-group-dialog.c:411
+msgid "Default"
+msgstr ""
+
+#: libplanner/mrp-project.c:749
+#, c-format
+msgid "Couldn't find a suitable file module for loading '%s'"
+msgstr ""
+
+#: libplanner/mrp-project.c:770 libplanner/mrp-project.c:1034
+msgid "No support for SQL storage built into this version of MrProject."
+msgstr ""
+
+# @ gEdit nautilus
+# * Yuriy Syrota <rasta@renome.rovno.ua>
+#: libplanner/mrp-project.c:807
+#, fuzzy
+msgid "Invalid URI."
+msgstr "(неправильний знак Унікоду)"
+
+#: libplanner/mrp-project.c:928
+#, c-format
+msgid "Unable to find file writer identified by '%s'"
+msgstr ""
+
+#: libplanner/mrp-project.c:991
+msgid "Couldn't find a suitable file module for loading project"
+msgstr ""
+
+# @ anaconda-7.3.92-4.src.rpm.dir_1_1_anaconda-_po_uk.po caitoo control-center evolution gnumeric kcmiwatcher kcmkamera kdelibs keduca ktalk userdrake xfce
+# * Yuriy Syrota <rasta@renome.rovno.ua>
+#: libplanner/mrp-property.c:365
+#, fuzzy
+msgid "Text"
+msgstr "Тест"
+
+#: libplanner/mrp-property.c:367
+msgid "String list"
+msgstr ""
+
+#: libplanner/mrp-property.c:369
+msgid "Integer number"
+msgstr ""
+
+#: libplanner/mrp-property.c:371
+msgid "Floating-point number"
+msgstr ""
+
+# @ Galeon- anjuta evolution gEdit galeon gnome-libs gnumeric gtk gtkhtml libgnomeui
+# * Yuriy Syrota <rasta@renome.rovno.ua>
+#: libplanner/mrp-property.c:373
+#, fuzzy
+msgid "Date"
+msgstr "В_ставити"
+
+#: libplanner/mrp-property.c:375
+#, fuzzy
+msgid "Duration"
+msgstr "_Тривалість:"
+
+#: libplanner/mrp-property.c:377 src/planner-task-view.c:232
+msgid "Cost"
+msgstr "Вартість"
+
+# @ Dia GIMP Galeon- Linux-Mandrake Scribus ToDoManager anaconda-7.3.92-4.src.rpm.dir_1_1_anaconda-_po_uk.po anjuta clockapplet control-center csvfilter cupsdconf cupsdconf.po evolution filetypes galeon gdm gimp glade- gnome-games gnome-pilot gnome-pim gnome-utils gnumeric gphoto gqview graphite gtkhtml guppi kchart kcmcrypto kcmdhcpd kcmkeys kcmusb.po kde-i18n_4:2.2.2-2_kcmusb.po kde-i18n_4:2.2.2-2_ksirtet.po kde-i18n_4:2.2.2-2_multiplayers.po kde-i18n_4:2.2.2-2_ppdtranslations.po kdebugdialog kdelibs kdemultimedia kdf khexedit koncd.po kpaint kppp krayon ksirtet.po kspread kword libkonq lynx mc multiplayers.po noatun ppdtranslations.po sawfish sodipodi xmms
+# * Volodymyr M. Lisivka <lvm@mystery.lviv.net>
+#: libplanner/mrp-property.c:380 src/planner-project-properties.c:505
+msgid "None"
+msgstr "Нічого"
+
+#: libplanner/mrp-task-manager.c:1769
+msgid "Can not add a predecessor relation between a task and its ancestor."
+msgstr ""
+
+#: libplanner/mrp-task-manager.c:1778 libplanner/mrp-task-manager.c:1786
+msgid "Can not add a predecessor, because it would result in a loop."
+msgstr ""
+
+#: libplanner/mrp-task-manager.c:1821
+msgid "Can not move the task, since it would result in a loop."
+msgstr ""
+
+#: libplanner/mrp-task.c:1016
+msgid ""
+"Could not add a predecessor relation, because the tasks are already related."
+msgstr ""
+
+#: libplanner/mrp-day.c:54
+#, fuzzy
+msgid "Working"
+msgstr "Робота:"
+
+#: libplanner/mrp-day.c:55
+msgid "A default working day"
+msgstr ""
+
+#: libplanner/mrp-day.c:57
+msgid "Nonworking"
+msgstr ""
+
+#: libplanner/mrp-day.c:58
+msgid "A default non working day"
+msgstr ""
+
+#: libplanner/mrp-day.c:60
+msgid "Use base"
+msgstr ""
+
+#: libplanner/mrp-day.c:61
+msgid "Use day from base calendar"
+msgstr ""
+
+#: libplanner/mrp-parser.c:1043 libplanner/mrp-parser.c:1138
+#, fuzzy
+msgid "Could not create XML tree"
+msgstr "Не вдалось створити діалог властивостей."
+
+#: libplanner/mrp-parser.c:1104
+msgid "Could not write XML file"
+msgstr ""
+
+# @ gEdit nautilus
+# * Yuriy Syrota <rasta@renome.rovno.ua>
+#. Give up.
+#: libplanner/mrp-sql.c:229 src/planner-sql-plugin.c:127
+#, fuzzy
+msgid "Invalid Unicode"
+msgstr "(неправильний знак Унікоду)"
+
+#: libplanner/mrp-sql.c:2205
+#, c-format
+msgid ""
+"The project '%s' has been changed by the user '%s' since you opened it. Do "
+"you want to save anyway?"
+msgstr ""
+
+#: libplanner/mrp-sql.c:3443
+#, c-format
+msgid ""
+"Connection to database '%s' failed.\n"
+"%s"
+msgstr ""
+
+#: libplanner/mrp-storage-sql.c:205
+msgid "Invalid SQL URI (must start with 'sql://' and contain '#')."
+msgstr ""
+
+#: libplanner/mrp-storage-sql.c:274
+msgid "Invalid SQL URI (invalid project id)."
+msgstr ""
+
+#: libplanner/mrp-storage-sql.c:282
+msgid "Invalid SQL URI (no database name specified)."
+msgstr ""
 
 # @ CenterICQ Dia GIMP Galeon- Scribus anaconda-7.3.92-4.src.rpm.dir_1_1_anaconda-_po_uk.po anjuta balsa galeon gimp gimp-perl glade- gnome-libs gnome-media gnome-utils gqview kdelibs mc nautilus pan profterm rpmdrake screem sodipodi userdrake xchat xfce
 # * Volodymyr M. Lisivka <lvm@mystery.lviv.net>
@@ -1168,8 +1375,9 @@ msgid "Sunday"
 msgstr "Неділя"
 
 #: src/planner-default-week-dialog.c:266
+#, fuzzy
 msgid "No working time"
-msgstr ""
+msgstr "Робочий час..."
 
 # @ evolution gnome-applets gnome-core gnome-panel gnome-pim kcron
 # * Yuriy Syrota <rasta@renome.rovno.ua>
@@ -1186,33 +1394,27 @@ msgstr "%H:%M"
 msgid "Name"
 msgstr "Назва"
 
+# @ mrproject
 #: src/planner-group-dialog.c:393
+#, fuzzy
 msgid "Manager name"
-msgstr ""
+msgstr "_Керівник:"
 
+# @ mrproject
 #: src/planner-group-dialog.c:399
+#, fuzzy
 msgid "Manager phone"
-msgstr ""
+msgstr "_Керівник:"
 
+# @ mrproject
 #: src/planner-group-dialog.c:405
+#, fuzzy
 msgid "Manager email"
-msgstr ""
-
-# @ GIMP Galeon- Ximian-setup-tools anaconda-7.3.92-4.src.rpm.dir_1_1_anaconda-_po_uk.po apacheconf-0.9.0-2.src.rpm.dir_1_1_apacheconf-_po_uk.po balsa evolution galeon gdm ghex gimp gnome-panel gnome-pim gnome-utils gnomeicu guppi kdelibs nautilus sawfish xfce xmms yank
-# * Volodymyr M. Lisivka <lvm@mystery.lviv.net>
-#: src/planner-group-dialog.c:411
-msgid "Default"
-msgstr ""
+msgstr "_Керівник:"
 
 #: src/planner-project-properties.c:146
 msgid "Select a calendar to use for this project:"
 msgstr ""
-
-# @ Dia GIMP Galeon- Linux-Mandrake Scribus ToDoManager anaconda-7.3.92-4.src.rpm.dir_1_1_anaconda-_po_uk.po anjuta clockapplet control-center csvfilter cupsdconf cupsdconf.po evolution filetypes galeon gdm gimp glade- gnome-games gnome-pilot gnome-pim gnome-utils gnumeric gphoto gqview graphite gtkhtml guppi kchart kcmcrypto kcmdhcpd kcmkeys kcmusb.po kde-i18n_4:2.2.2-2_kcmusb.po kde-i18n_4:2.2.2-2_ksirtet.po kde-i18n_4:2.2.2-2_multiplayers.po kde-i18n_4:2.2.2-2_ppdtranslations.po kdebugdialog kdelibs kdemultimedia kdf khexedit koncd.po kpaint kppp krayon ksirtet.po kspread kword libkonq lynx mc multiplayers.po noatun ppdtranslations.po sawfish sodipodi xmms
-# * Volodymyr M. Lisivka <lvm@mystery.lviv.net>
-#: src/planner-project-properties.c:505
-msgid "None"
-msgstr "Нічого"
 
 # @ gnome-games kfinger libkdegames.po
 # * Yuriy Syrota <rasta@renome.rovno.ua>
@@ -1236,6 +1438,7 @@ msgid "Do you really want to remove the property '%s' from the project?"
 msgstr ""
 
 #: src/planner-project-properties.c:1194
+#, fuzzy
 msgid "Could not create properties dialog."
 msgstr "Не вдалось створити діалог властивостей."
 
@@ -1256,9 +1459,12 @@ msgstr "Тип"
 msgid "Print Project"
 msgstr "Надрукувати проект"
 
+# @ evolution gEdit gnumeric gtkhtml libgnomeui mc nautilus
+# * Yuriy Syrota <rasta@renome.rovno.ua>
 #: src/planner-print-dialog.c:56
+#, fuzzy
 msgid "Select views"
-msgstr ""
+msgstr "Вибрати вс_е"
 
 #: src/planner-print-dialog.c:74
 msgid "Select the views to print:"
@@ -1296,8 +1502,9 @@ msgstr "Змінити властивості ресурсу"
 #: src/planner-resource-dialog.c:1101 src/planner-task-view.c:230
 #: src/planner-gantt-print.c:198 src/planner-resource-view.c:629
 #: src/planner-resource-view.c:645 src/planner-resource-view.c:1187
+#, fuzzy
 msgid "Work"
-msgstr ""
+msgstr "Робота:"
 
 #: src/planner-resource-dialog.c:1102 src/planner-resource-view.c:632
 #: src/planner-resource-view.c:646 src/planner-resource-view.c:1188
@@ -1366,14 +1573,6 @@ msgid ""
 "Enter a filename and try again."
 msgstr ""
 
-# @ gEdit nautilus
-# * Yuriy Syrota <rasta@renome.rovno.ua>
-#. Give up.
-#: src/planner-sql-plugin.c:127
-#, fuzzy
-msgid "Invalid Unicode"
-msgstr "(неправильний знак Унікоду)"
-
 #: src/planner-sql-plugin.c:269
 #, c-format
 msgid ""
@@ -1388,13 +1587,19 @@ msgstr ""
 msgid "Project"
 msgstr "_Проект"
 
+# @ mrproject
+# * Yuriy Syrota <rasta@renome.rovno.ua>
 #: src/planner-sql-plugin.c:466
+#, fuzzy
 msgid "Open from Database"
-msgstr ""
+msgstr "Зберегти _як..."
 
+# @ mrproject
+# * Yuriy Syrota <rasta@renome.rovno.ua>
 #: src/planner-sql-plugin.c:573
+#, fuzzy
 msgid "Save to Database"
-msgstr ""
+msgstr "Зберегти _як..."
 
 #: src/planner-format.c:141
 #, c-format
@@ -1430,8 +1635,9 @@ msgstr "%s день"
 #. * libmrproject/docs/DateFormat.
 #.
 #: src/planner-format.c:197
+#, fuzzy
 msgid "%b %e"
-msgstr ""
+msgstr "%Y %b %d"
 
 #. i18n: project start, the date format is described in
 #. * libmrproject/docs/DateFormat.
@@ -1469,18 +1675,22 @@ msgstr "Графік Ґантта"
 msgid "_Gantt Chart"
 msgstr "Графік _Ґантта"
 
+# @ mrproject
+# * Yuriy Syrota <rasta@renome.rovno.ua>
 #: src/planner-gantt-view.c:470
+#, fuzzy
 msgid ""
 "\n"
 "Name"
-msgstr ""
+msgstr "Назва"
 
 #. COL_START,    _("\nStart"),
 #: src/planner-gantt-view.c:472
+#, fuzzy
 msgid ""
 "\n"
 "Work"
-msgstr ""
+msgstr "Робота:"
 
 #. i18n: Short "Week", preferably 2 letters.
 #: src/planner-scale-utils.c:325
@@ -1525,9 +1735,9 @@ msgstr ""
 
 #. i18n: Year, short "Half year", prefferably 1 letter.
 #: src/planner-scale-utils.c:391
-#, c-format
+#, fuzzy, c-format
 msgid "%04d, H%d"
-msgstr ""
+msgstr "Тиждень %d, %d"
 
 #: src/planner-task-tree.c:184
 msgid "/_Insert task"
@@ -1542,8 +1752,9 @@ msgid "/_Remove task"
 msgstr "/Ви_лучити завдання"
 
 #: src/planner-task-tree.c:188
+#, fuzzy
 msgid "/_Unlink task"
-msgstr ""
+msgstr "/В_нести завдання"
 
 #: src/planner-task-tree.c:190
 msgid "/_Edit task..."
@@ -1658,10 +1869,6 @@ msgstr "Завершити"
 #: src/planner-task-view.c:231
 msgid "Slack"
 msgstr ""
-
-#: src/planner-task-view.c:232
-msgid "Cost"
-msgstr "Вартість"
 
 #: src/planner-task-view.c:438
 msgid "Edit custom task properties"

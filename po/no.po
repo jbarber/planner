@@ -5,7 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mrproject 0.3\n"
-"POT-Creation-Date: 2003-12-01 23:08+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-12-04 16:40+0100\n"
 "PO-Revision-Date: 2003-06-07 15:07+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian/Bokmaal <no@li.org>\n"
@@ -280,6 +281,7 @@ msgid "Select all tasks"
 msgstr "Velg alle oppgaver"
 
 #: data/ui/gantt-view.ui.h:14
+#, fuzzy
 msgid "Test"
 msgstr "Test"
 
@@ -468,8 +470,9 @@ msgid "Custom working time"
 msgstr "Egendefinert arbeidstid"
 
 #: data/glade/calendar-dialog.glade.h:16
+#, fuzzy
 msgid "Day type:"
-msgstr "Type dag"
+msgstr "Ny dagtype"
 
 #: data/glade/calendar-dialog.glade.h:17
 msgid "Default Week"
@@ -544,6 +547,7 @@ msgid "Working time..."
 msgstr "Arbeidstid..."
 
 #: data/glade/calendar-dialog.glade.h:35
+#, fuzzy
 msgid "_Derive from a calendar"
 msgstr "_Avled fra en kalender"
 
@@ -781,6 +785,7 @@ msgid "Resources"
 msgstr "Ressurser"
 
 #: data/glade/task-dialog.glade.h:13
+#, fuzzy
 msgid "_Duration:"
 msgstr "_Varighet:"
 
@@ -808,6 +813,161 @@ msgstr "Sett inn oppgave"
 #: data/glade/task-input-dialog.glade.h:4
 msgid "Work:"
 msgstr "Arbeid:"
+
+#: libplanner/mrp-project.c:441 src/planner-group-dialog.c:411
+msgid "Default"
+msgstr "Forvalg"
+
+#: libplanner/mrp-project.c:749
+#, c-format
+msgid "Couldn't find a suitable file module for loading '%s'"
+msgstr "Kunne ikke finne en passende filmodul for lasting av «%s»"
+
+#: libplanner/mrp-project.c:770 libplanner/mrp-project.c:1034
+msgid "No support for SQL storage built into this version of MrProject."
+msgstr "Ingen støtte for SQL-lagring i denne versjonen av MrProject."
+
+#: libplanner/mrp-project.c:807
+#, fuzzy
+msgid "Invalid URI."
+msgstr "Ugyldig Unicode"
+
+#: libplanner/mrp-project.c:928
+#, c-format
+msgid "Unable to find file writer identified by '%s'"
+msgstr "Kunne ikke finne filskriver identifisert av «%s»."
+
+#: libplanner/mrp-project.c:991
+msgid "Couldn't find a suitable file module for loading project"
+msgstr "Kunne ikke finne en passende filmodul for lasting av prosjekt"
+
+#: libplanner/mrp-property.c:365
+#, fuzzy
+msgid "Text"
+msgstr "Test"
+
+#: libplanner/mrp-property.c:367
+msgid "String list"
+msgstr "Liste med strenger"
+
+#: libplanner/mrp-property.c:369
+#, fuzzy
+msgid "Integer number"
+msgstr "Leders navn"
+
+#: libplanner/mrp-property.c:371
+msgid "Floating-point number"
+msgstr "Flyttall"
+
+#: libplanner/mrp-property.c:373
+#, fuzzy
+msgid "Date"
+msgstr "Type dag"
+
+#: libplanner/mrp-property.c:375
+#, fuzzy
+msgid "Duration"
+msgstr "_Varighet:"
+
+#: libplanner/mrp-property.c:377 src/planner-task-view.c:232
+msgid "Cost"
+msgstr "Kostnad"
+
+#: libplanner/mrp-property.c:380 src/planner-project-properties.c:505
+msgid "None"
+msgstr "Ingen"
+
+#: libplanner/mrp-task-manager.c:1769
+msgid "Can not add a predecessor relation between a task and its ancestor."
+msgstr ""
+"Kan ikke legge til en forgjenger-relasjon mellom en oppgave og dens opphav."
+
+#: libplanner/mrp-task-manager.c:1778 libplanner/mrp-task-manager.c:1786
+msgid "Can not add a predecessor, because it would result in a loop."
+msgstr "Kan ikke legge til et opphav fordi det ville resultere i en løkke."
+
+#: libplanner/mrp-task-manager.c:1821
+msgid "Can not move the task, since it would result in a loop."
+msgstr "Kan ikke flytte oppgaven fordi det ville resultere i en løkke."
+
+#: libplanner/mrp-task.c:1016
+msgid ""
+"Could not add a predecessor relation, because the tasks are already related."
+msgstr ""
+"Kunne ikke legge til en opphavs-relasjon fordi oppgavene allerede er "
+"relatert."
+
+#: libplanner/mrp-day.c:54
+#, fuzzy
+msgid "Working"
+msgstr "Arbeid"
+
+#: libplanner/mrp-day.c:55
+msgid "A default working day"
+msgstr "En forvalgt arbeidsdag"
+
+#: libplanner/mrp-day.c:57
+#, fuzzy
+msgid "Nonworking"
+msgstr "Ingen arbeidstid"
+
+#: libplanner/mrp-day.c:58
+msgid "A default non working day"
+msgstr "En forvalgt fridag"
+
+#: libplanner/mrp-day.c:60
+msgid "Use base"
+msgstr "Bruk basis"
+
+#: libplanner/mrp-day.c:61
+#, fuzzy
+msgid "Use day from base calendar"
+msgstr "_Avled fra en kalender"
+
+#: libplanner/mrp-parser.c:1043 libplanner/mrp-parser.c:1138
+#, fuzzy
+msgid "Could not create XML tree"
+msgstr "Kunne ikke opprette egenskaper-dialog."
+
+#: libplanner/mrp-parser.c:1104
+#, fuzzy
+msgid "Could not write XML file"
+msgstr "Kunne ikke åpne tilleggsfil «%s»\n"
+
+#. Give up.
+#: libplanner/mrp-sql.c:229 src/planner-sql-plugin.c:127
+msgid "Invalid Unicode"
+msgstr "Ugyldig Unicode"
+
+#: libplanner/mrp-sql.c:2205
+#, c-format
+msgid ""
+"The project '%s' has been changed by the user '%s' since you opened it. Do "
+"you want to save anyway?"
+msgstr ""
+"Prosjekt «%s» har vært endret av bruker «%s» siden du åpnet det sist. Vil du "
+"lagre det likevel?"
+
+#: libplanner/mrp-sql.c:3443
+#, fuzzy, c-format
+msgid ""
+"Connection to database '%s' failed.\n"
+"%s"
+msgstr ""
+"Tilkobling til database «%s» feilet:\n"
+"%s"
+
+#: libplanner/mrp-storage-sql.c:205
+msgid "Invalid SQL URI (must start with 'sql://' and contain '#')."
+msgstr "Ugyldig URI for SQL (må starte med «sql://» og inneholde «#»)."
+
+#: libplanner/mrp-storage-sql.c:274
+msgid "Invalid SQL URI (invalid project id)."
+msgstr "Ugyldig URI for SQL (ugyldig prosjekt-ID)."
+
+#: libplanner/mrp-storage-sql.c:282
+msgid "Invalid SQL URI (no database name specified)."
+msgstr "Ugyldig URI for SQL (ingen databasenavn oppgitt)."
 
 #: src/planner-application.c:117
 msgid "Edit"
@@ -923,9 +1083,9 @@ msgid "mrproject: --geometry cannot be used with more than one file."
 msgstr "mrproject: --geometry kan ikke brukes med mer enn en fil."
 
 #: src/planner-plugin-loader.c:40
-#, c-format
+#, fuzzy, c-format
 msgid "Could not open plugin file '%s'\n"
-msgstr "Kunne ikke åpne tilleggsfil «%s»\n"
+msgstr "Kunne ikke vise tilleggsfil «%s»\n"
 
 #: src/planner-view-loader.c:40
 #, c-format
@@ -993,8 +1153,9 @@ msgid "Sunday"
 msgstr "Søndag"
 
 #: src/planner-default-week-dialog.c:266
+#, fuzzy
 msgid "No working time"
-msgstr "Ingen arbeidstid"
+msgstr "Egendefinert arbeidstid"
 
 #: src/planner-default-week-dialog.c:277 src/planner-default-week-dialog.c:281
 msgid "%H:%M"
@@ -1008,8 +1169,9 @@ msgid "Name"
 msgstr "Navn"
 
 #: src/planner-group-dialog.c:393
+#, fuzzy
 msgid "Manager name"
-msgstr "Leders navn"
+msgstr "Leders telefon"
 
 #: src/planner-group-dialog.c:399
 msgid "Manager phone"
@@ -1019,17 +1181,9 @@ msgstr "Leders telefon"
 msgid "Manager email"
 msgstr "Leders e-post"
 
-#: src/planner-group-dialog.c:411
-msgid "Default"
-msgstr "Forvalg"
-
 #: src/planner-project-properties.c:146
 msgid "Select a calendar to use for this project:"
 msgstr "Velg en kalender som skal brukes for dette prosjektet:"
-
-#: src/planner-project-properties.c:505
-msgid "None"
-msgstr "Ingen"
 
 #: src/planner-project-properties.c:606
 msgid "Property"
@@ -1049,6 +1203,7 @@ msgid "Do you really want to remove the property '%s' from the project?"
 msgstr "Vil du virkelig fjerne egenskap «%s» fra prosjektet?"
 
 #: src/planner-project-properties.c:1194
+#, fuzzy
 msgid "Could not create properties dialog."
 msgstr "Kunne ikke opprette egenskaper-dialog."
 
@@ -1101,8 +1256,11 @@ msgstr "Rediger egenskaper for ressurs"
 #: src/planner-resource-dialog.c:1101 src/planner-task-view.c:230
 #: src/planner-gantt-print.c:198 src/planner-resource-view.c:629
 #: src/planner-resource-view.c:645 src/planner-resource-view.c:1187
+#, fuzzy
 msgid "Work"
-msgstr "Arbeid"
+msgstr ""
+"\n"
+"Arbeid"
 
 #: src/planner-resource-dialog.c:1102 src/planner-resource-view.c:632
 #: src/planner-resource-view.c:646 src/planner-resource-view.c:1188
@@ -1170,13 +1328,8 @@ msgstr ""
 "«%s» er en katalog.\n"
 "Oppgi et filnavn og prøv på nytt."
 
-#. Give up.
-#: src/planner-sql-plugin.c:127
-msgid "Invalid Unicode"
-msgstr "Ugyldig Unicode"
-
 #: src/planner-sql-plugin.c:269
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Connection to database '%s' failed:\n"
 "%s"
@@ -1437,10 +1590,6 @@ msgstr "Slutt"
 #: src/planner-task-view.c:231
 msgid "Slack"
 msgstr "Slakk"
-
-#: src/planner-task-view.c:232
-msgid "Cost"
-msgstr "Kostnad"
 
 #: src/planner-task-view.c:438
 msgid "Edit custom task properties"

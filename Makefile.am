@@ -1,6 +1,5 @@
 SUBDIRS = \
 	po 				\
-	po-libplanner			\
 	libplanner			\
 	libegg				\
 	src				\

@@ -5,7 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: MrProject 0.9.1\n"
-"POT-Creation-Date: 2003-12-01 23:08+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-12-04 16:40+0100\n"
 "PO-Revision-Date: 2003-06-28 16:51+0400\n"
 "Last-Translator: Valek Filippov <frob@df.ru>\n"
 "Language-Team: Russian <gnome-cyr@gnome.org>\n"
@@ -280,6 +281,7 @@ msgid "Select all tasks"
 msgstr "Выбрать все задачи"
 
 #: data/ui/gantt-view.ui.h:14
+#, fuzzy
 msgid "Test"
 msgstr "Проверка"
 
@@ -288,8 +290,9 @@ msgid "Un_link Task"
 msgstr "Отвязать задачу"
 
 #: data/ui/gantt-view.ui.h:16 data/ui/task-view.ui.h:15
+#, fuzzy
 msgid "Unin_dent Task"
-msgstr ""
+msgstr "Вложить задачу"
 
 #: data/ui/gantt-view.ui.h:17 data/ui/task-view.ui.h:16
 #: src/planner-application.c:82
@@ -468,8 +471,9 @@ msgid "Custom working time"
 msgstr "Нестандартное рабочее время"
 
 #: data/glade/calendar-dialog.glade.h:16
+#, fuzzy
 msgid "Day type:"
-msgstr "Вид дня:"
+msgstr "Создать вид дня"
 
 #: data/glade/calendar-dialog.glade.h:17
 msgid "Default Week"
@@ -544,6 +548,7 @@ msgid "Working time..."
 msgstr "Рабочее время..."
 
 #: data/glade/calendar-dialog.glade.h:35
+#, fuzzy
 msgid "_Derive from a calendar"
 msgstr "_Наследовать от календаря"
 
@@ -781,6 +786,7 @@ msgid "Resources"
 msgstr "Ресурсы"
 
 #: data/glade/task-dialog.glade.h:13
+#, fuzzy
 msgid "_Duration:"
 msgstr "_Продолжительность:"
 
@@ -808,6 +814,162 @@ msgstr "Добавить задачу"
 #: data/glade/task-input-dialog.glade.h:4
 msgid "Work:"
 msgstr "Работа:"
+
+#: libplanner/mrp-project.c:441 src/planner-group-dialog.c:411
+msgid "Default"
+msgstr "По умолчанию"
+
+#: libplanner/mrp-project.c:749
+#, c-format
+msgid "Couldn't find a suitable file module for loading '%s'"
+msgstr "Невозможно найти подходящий файл модуля для загрузки '%s'"
+
+#: libplanner/mrp-project.c:770 libplanner/mrp-project.c:1034
+msgid "No support for SQL storage built into this version of MrProject."
+msgstr "В эту версию MrProject поддержка хранилищ SQL не встроена."
+
+#: libplanner/mrp-project.c:807
+#, fuzzy
+msgid "Invalid URI."
+msgstr "Недопустимый Unicode"
+
+#: libplanner/mrp-project.c:928
+#, c-format
+msgid "Unable to find file writer identified by '%s'"
+msgstr "Не удалось найти модуль записи файла идентифицированный по \"%s\""
+
+#: libplanner/mrp-project.c:991
+msgid "Couldn't find a suitable file module for loading project"
+msgstr "Невозможно найти подходящий файл модуля для загрузки проекта"
+
+#: libplanner/mrp-property.c:365
+#, fuzzy
+msgid "Text"
+msgstr "Проверка"
+
+#: libplanner/mrp-property.c:367
+msgid "String list"
+msgstr "Список строк"
+
+#: libplanner/mrp-property.c:369
+#, fuzzy
+msgid "Integer number"
+msgstr "Имя менеджера"
+
+#: libplanner/mrp-property.c:371
+msgid "Floating-point number"
+msgstr "Число с плавающей точкой"
+
+#: libplanner/mrp-property.c:373
+#, fuzzy
+msgid "Date"
+msgstr "Вид дня:"
+
+#: libplanner/mrp-property.c:375
+#, fuzzy
+msgid "Duration"
+msgstr "_Продолжительность:"
+
+#: libplanner/mrp-property.c:377 src/planner-task-view.c:232
+msgid "Cost"
+msgstr "Стоимость"
+
+#: libplanner/mrp-property.c:380 src/planner-project-properties.c:505
+msgid "None"
+msgstr "Ничего"
+
+#: libplanner/mrp-task-manager.c:1769
+msgid "Can not add a predecessor relation between a task and its ancestor."
+msgstr "Невозможно добавить взаимосвязь между задачей и её предком."
+
+#: libplanner/mrp-task-manager.c:1778 libplanner/mrp-task-manager.c:1786
+msgid "Can not add a predecessor, because it would result in a loop."
+msgstr ""
+"Невозможно добавить предшественника, потому что это вызовет зацикливание"
+
+#: libplanner/mrp-task-manager.c:1821
+msgid "Can not move the task, since it would result in a loop."
+msgstr "Невозможно переместить задачу, потому что это вызовет зацикливание"
+
+#: libplanner/mrp-task.c:1016
+msgid ""
+"Could not add a predecessor relation, because the tasks are already related."
+msgstr ""
+"Невозможно добавить взаимосвязь между задачей и её предком, поскольку задачи "
+"уже соотносятся."
+
+#: libplanner/mrp-day.c:54
+#, fuzzy
+msgid "Working"
+msgstr "Длительность"
+
+#: libplanner/mrp-day.c:55
+msgid "A default working day"
+msgstr "Рабочий день по умолчанию"
+
+#: libplanner/mrp-day.c:57
+#, fuzzy
+msgid "Nonworking"
+msgstr "Нет рабочего времени"
+
+#: libplanner/mrp-day.c:58
+msgid "A default non working day"
+msgstr "Не рабочий день по умолчанию"
+
+#: libplanner/mrp-day.c:60
+msgid "Use base"
+msgstr "Использовать базу"
+
+#: libplanner/mrp-day.c:61
+#, fuzzy
+msgid "Use day from base calendar"
+msgstr "_Наследовать от календаря"
+
+#: libplanner/mrp-parser.c:1043 libplanner/mrp-parser.c:1138
+#, fuzzy
+msgid "Could not create XML tree"
+msgstr "Невозможно открыть диалог со свойствами."
+
+#: libplanner/mrp-parser.c:1104
+#, fuzzy
+msgid "Could not write XML file"
+msgstr "Невозможно открыть файл модуля '%s'\n"
+
+#. Give up.
+#: libplanner/mrp-sql.c:229 src/planner-sql-plugin.c:127
+msgid "Invalid Unicode"
+msgstr "Недопустимый Unicode"
+
+#: libplanner/mrp-sql.c:2205
+#, c-format
+msgid ""
+"The project '%s' has been changed by the user '%s' since you opened it. Do "
+"you want to save anyway?"
+msgstr ""
+"Проект \"%s\" был изменён пользователем \"%s\" после того как вы открыли "
+"его. Хотите сохранить?"
+
+#: libplanner/mrp-sql.c:3443
+#, fuzzy, c-format
+msgid ""
+"Connection to database '%s' failed.\n"
+"%s"
+msgstr ""
+"Сбой подключения к базе данных \"%s\":\n"
+"%s"
+
+#: libplanner/mrp-storage-sql.c:205
+msgid "Invalid SQL URI (must start with 'sql://' and contain '#')."
+msgstr ""
+"Недопустимый SQL URI (должен начинаться с \"sql://\" и содержать \"#\")."
+
+#: libplanner/mrp-storage-sql.c:274
+msgid "Invalid SQL URI (invalid project id)."
+msgstr "Недопустмый SQL URI (неправильный идентификатор проекта)."
+
+#: libplanner/mrp-storage-sql.c:282
+msgid "Invalid SQL URI (no database name specified)."
+msgstr "Недопустмый SQL URI (не указано название базы данных)."
 
 #: src/planner-application.c:117
 msgid "Edit"
@@ -932,9 +1094,9 @@ msgstr ""
 "mrproject: --geometry не может быть использован больше чем с одним файлом."
 
 #: src/planner-plugin-loader.c:40
-#, c-format
+#, fuzzy, c-format
 msgid "Could not open plugin file '%s'\n"
-msgstr "Невозможно открыть файл модуля '%s'\n"
+msgstr "Невозможно открыть модуль просмотра '%s'\n"
 
 #: src/planner-view-loader.c:40
 #, c-format
@@ -1002,8 +1164,9 @@ msgid "Sunday"
 msgstr "Воскресенье"
 
 #: src/planner-default-week-dialog.c:266
+#, fuzzy
 msgid "No working time"
-msgstr "Нет рабочего времени"
+msgstr "Нестандартное рабочее время"
 
 #: src/planner-default-week-dialog.c:277 src/planner-default-week-dialog.c:281
 msgid "%H:%M"
@@ -1017,8 +1180,9 @@ msgid "Name"
 msgstr "Название"
 
 #: src/planner-group-dialog.c:393
+#, fuzzy
 msgid "Manager name"
-msgstr "Имя менеджера"
+msgstr "Телефон менеджера"
 
 #: src/planner-group-dialog.c:399
 msgid "Manager phone"
@@ -1028,17 +1192,9 @@ msgstr "Телефон менеджера"
 msgid "Manager email"
 msgstr "Электронный адрес менеджера"
 
-#: src/planner-group-dialog.c:411
-msgid "Default"
-msgstr "По умолчанию"
-
 #: src/planner-project-properties.c:146
 msgid "Select a calendar to use for this project:"
 msgstr "Выбрать календарь для использования для этого проекта:"
-
-#: src/planner-project-properties.c:505
-msgid "None"
-msgstr "Ничего"
 
 #: src/planner-project-properties.c:606
 msgid "Property"
@@ -1059,6 +1215,7 @@ msgid "Do you really want to remove the property '%s' from the project?"
 msgstr "Вы действительно хотите удалить свойство '%s' из проекта?"
 
 #: src/planner-project-properties.c:1194
+#, fuzzy
 msgid "Could not create properties dialog."
 msgstr "Невозможно открыть диалог со свойствами."
 
@@ -1111,8 +1268,11 @@ msgstr "Редактировать свойства ресурса"
 #: src/planner-resource-dialog.c:1101 src/planner-task-view.c:230
 #: src/planner-gantt-print.c:198 src/planner-resource-view.c:629
 #: src/planner-resource-view.c:645 src/planner-resource-view.c:1187
+#, fuzzy
 msgid "Work"
-msgstr "Длительность"
+msgstr ""
+"\n"
+"Длительность"
 
 #: src/planner-resource-dialog.c:1102 src/planner-resource-view.c:632
 #: src/planner-resource-view.c:646 src/planner-resource-view.c:1188
@@ -1180,13 +1340,8 @@ msgstr ""
 "\"%s\" -- это каталог.\n"
 "Введите имя файла и попробуйте ещё раз."
 
-#. Give up.
-#: src/planner-sql-plugin.c:127
-msgid "Invalid Unicode"
-msgstr "Недопустимый Unicode"
-
 #: src/planner-sql-plugin.c:269
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Connection to database '%s' failed:\n"
 "%s"
@@ -1447,10 +1602,6 @@ msgstr "Завершение"
 #: src/planner-task-view.c:231
 msgid "Slack"
 msgstr "Отставание"
-
-#: src/planner-task-view.c:232
-msgid "Cost"
-msgstr "Стоимость"
 
 #: src/planner-task-view.c:438
 msgid "Edit custom task properties"
