@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<e-plugin-list>
+    <e-plugin
+     type="shlib"
+     location="@PLUGINDIR@/liborg-gnome-planner-source.so"
+     id="org.gnome.evolution.plugin.planner-source"
+     name="Planner Sources">
+	<description>Create Planner file sources to access tasks from Evolution</description>
+    	<author name="Alvaro del Castillo" email="acs@barrapunto.com"/>
+        <hook class="org.gnome.evolution.calendar.popup:1.0">
+		<menu id="org.gnome.evolution.tasks.source.popup" target="source">
+                	<item type="item" path="19.planner_source_add" label="_Add new Planner source" icon="stock_presentation-box" activate="org_gnome_planner_source_add"/>
+		</menu>
+        </hook>
+    </e-plugin>
+</e-plugin-list>
