@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: planner\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-03-04 18:28+0100\n"
-"PO-Revision-Date: 2005-03-04 18:31+0100\n"
+"POT-Creation-Date: 2005-03-17 06:04+0100\n"
+"PO-Revision-Date: 2005-03-17 06:06+0100\n"
 "Last-Translator: Marcel Telka <marcel@telka.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
 "MIME-Version: 1.0\n"
@@ -770,7 +770,7 @@ msgstr "Odstrániť kalendár"
 msgid "Add new calendar"
 msgstr "Pridať nový kalendár"
 
-#: src/planner-cell-renderer-date.c:161 src/planner-task-dialog.c:1490
+#: src/planner-cell-renderer-date.c:161 src/planner-task-dialog.c:1489
 msgid "As soon as possible"
 msgstr "Čo najskôr"
 
@@ -782,21 +782,21 @@ msgstr "Nie skôr ako"
 msgid "On fixed date"
 msgstr "V presne stanovený deň"
 
-#: src/planner-cmd-manager.c:225
+#: src/planner-cmd-manager.c:227
 #, c-format
 msgid "Undo '%s'"
 msgstr "Vrátiť späť '%s'"
 
-#: src/planner-cmd-manager.c:227
+#: src/planner-cmd-manager.c:229
 msgid "Undo"
 msgstr "Späť"
 
-#: src/planner-cmd-manager.c:237
+#: src/planner-cmd-manager.c:239
 #, c-format
 msgid "Redo '%s'"
 msgstr "Opakovať '%s'"
 
-#: src/planner-cmd-manager.c:239
+#: src/planner-cmd-manager.c:241
 msgid "Redo"
 msgstr "Opakovať vrátené"
 
@@ -860,8 +860,8 @@ msgstr "Importovať zdroje Dátového servera Evolution"
 
 #: src/planner-eds-plugin.c:393 src/planner-gantt-print.c:190
 #: src/planner-group-dialog.c:819 src/planner-property-dialog.c:481
-#: src/planner-resource-view.c:1156 src/planner-task-dialog.c:2533
-#: src/planner-task-dialog.c:2607 src/planner-task-view.c:279
+#: src/planner-resource-view.c:1156 src/planner-task-dialog.c:2534
+#: src/planner-task-dialog.c:2608 src/planner-task-view.c:279
 #: src/planner-ttable-print.c:108
 msgid "Name"
 msgstr "Meno"
@@ -1004,6 +1004,10 @@ msgstr "%Y %b %d"
 #: src/planner-gantt-background.c:581
 msgid "Project start"
 msgstr "Začiatok projektu"
+
+#: src/planner-gantt-header.c:671
+msgid "%e %b %Y"
+msgstr "%e. %b %Y"
 
 #: src/planner-gantt-print.c:198 src/planner-resource-dialog.c:1845
 #: src/planner-resource-view.c:747 src/planner-resource-view.c:763
@@ -1291,7 +1295,7 @@ msgstr "Odstrániť fázu"
 msgid "Could not open plugin file '%s'\n"
 msgstr "Nie je možné otvoriť súbor modulu '%s'\n"
 
-#: src/planner-predecessor-model.c:191 src/planner-task-dialog.c:2173
+#: src/planner-predecessor-model.c:191 src/planner-task-dialog.c:2174
 msgid "FS"
 msgstr "KZ"
 
@@ -1300,7 +1304,7 @@ msgid "FF"
 msgstr "KK"
 
 #. list = g_list_append (list, g_strdup (_("FF")));
-#: src/planner-predecessor-model.c:197 src/planner-task-dialog.c:2175
+#: src/planner-predecessor-model.c:197 src/planner-task-dialog.c:2176
 msgid "SS"
 msgstr "ZZ"
 
@@ -1390,7 +1394,7 @@ msgid "Label"
 msgstr "Popis"
 
 #: src/planner-property-dialog.c:510 src/planner-resource-view.c:1200
-#: src/planner-task-dialog.c:2639
+#: src/planner-task-dialog.c:2640
 msgid "Type"
 msgstr "Typ"
 
@@ -1440,7 +1444,7 @@ msgstr "Upraviť vlastnosť zdroja"
 
 #. i18n: time stamp format for notes in task dialog, see strftime(3) for
 #. * a detailed description.
-#: src/planner-resource-dialog.c:1403 src/planner-task-dialog.c:1805
+#: src/planner-resource-dialog.c:1403 src/planner-task-dialog.c:1806
 msgid "%a %d %b %Y, %H:%M\n"
 msgstr "%a %d %b %Y, %H:%M\n"
 
@@ -1526,48 +1530,48 @@ msgid "Group"
 msgstr "Skupina"
 
 #. i18n: Short "Week", preferably 2 letters.
-#: src/planner-scale-utils.c:325
+#: src/planner-scale-utils.c:129
 #, c-format
 msgid "Wk %d"
 msgstr "Týž %d"
 
-#: src/planner-scale-utils.c:329
+#: src/planner-scale-utils.c:133
 #, c-format
 msgid "Week %d"
 msgstr "Týždeň %d"
 
 #. i18n: Week, year.
-#: src/planner-scale-utils.c:334
+#: src/planner-scale-utils.c:138
 #, c-format
 msgid "Week %d, %d"
 msgstr "Týždeň %d, %d"
 
 #. i18n: Short "Quarter", preferably 1 letter.
-#: src/planner-scale-utils.c:365
+#: src/planner-scale-utils.c:169
 #, c-format
 msgid "Q%d"
 msgstr "Q%d"
 
 #. i18n: Short "Quarter", preferably 2-3 letters.
-#: src/planner-scale-utils.c:369
+#: src/planner-scale-utils.c:173
 #, c-format
 msgid "Qtr %d"
 msgstr "Kv %d"
 
 #. i18n: Year, short "Quarter", preferably 2-3 letters.
-#: src/planner-scale-utils.c:373
+#: src/planner-scale-utils.c:177
 #, c-format
 msgid "%d, Qtr %d"
 msgstr "%d, Kv %d"
 
 #. i18n: Short "Half year", preferably 1 letter.
-#: src/planner-scale-utils.c:386
+#: src/planner-scale-utils.c:190
 #, c-format
 msgid "H%d"
 msgstr "P%d"
 
 #. i18n: Year, short "Half year", preferably 1 letter.
-#: src/planner-scale-utils.c:391
+#: src/planner-scale-utils.c:195
 #, c-format
 msgid "%04d, H%d"
 msgstr "%04d, P%d"
@@ -1713,41 +1717,41 @@ msgstr "Upraviť poznámku úlohy"
 msgid "No earlier than %s"
 msgstr "Nie skôr ako %s"
 
-#: src/planner-task-dialog.c:1496
+#: src/planner-task-dialog.c:1497
 #, c-format
 msgid "On fixed date %s"
 msgstr "V presne stanovený deň %s"
 
-#: src/planner-task-dialog.c:1877
+#: src/planner-task-dialog.c:1878
 msgid "Finish to start (FS)"
 msgstr "Koniec pred začiatkom (KZ)"
 
 #. _("Finish to finish (FF)"), MRP_RELATION_FF,
-#: src/planner-task-dialog.c:1879
+#: src/planner-task-dialog.c:1880
 msgid "Start to start (SS)"
 msgstr "Začiatok pred začiatkom (ZZ)"
 
-#: src/planner-task-dialog.c:1935
+#: src/planner-task-dialog.c:1936
 msgid "Can't add new predecessor. No task selected!"
 msgstr "Nie je možné pridať nového predchodcu. Nie je vybraná žiadna úloha!"
 
-#: src/planner-task-dialog.c:2380
+#: src/planner-task-dialog.c:2381
 msgid "Change..."
 msgstr "Zmeniť..."
 
-#: src/planner-task-dialog.c:2554
+#: src/planner-task-dialog.c:2555
 msgid "Assigned"
 msgstr "Priradené"
 
-#: src/planner-task-dialog.c:2571
+#: src/planner-task-dialog.c:2572
 msgid "Units"
 msgstr "Jednotky"
 
-#: src/planner-task-dialog.c:2661
+#: src/planner-task-dialog.c:2662
 msgid "Lag"
 msgstr "Oneskorenie"
 
-#: src/planner-task-dialog.c:2835 src/planner-task-dialog.c:2837
+#: src/planner-task-dialog.c:2805 src/planner-task-dialog.c:2807
 msgid "Edit task properties"
 msgstr "Upraviť vlastnosti úlohy"
 
