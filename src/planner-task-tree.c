@@ -27,15 +27,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <gdk/gdkkeysyms.h>
-#include <gtk/gtktreeview.h>
-#include <gtk/gtktreeselection.h>
-#include <gtk/gtkcellrenderertext.h>
-#include <gtk/gtkmenu.h>
-#include <gtk/gtkmain.h>
-#include <gtk/gtkitemfactory.h>
-#include <gtk/gtkiconfactory.h>
-#include <gtk/gtkstock.h>
-#include <gtk/gtkmessagedialog.h>
+#include <gtk/gtk.h>
 #include <glib/gi18n.h>
 #include "planner-format.h"
 #include "planner-marshal.h"
@@ -145,6 +137,11 @@ static void        task_tree_row_activated_cb          (GtkTreeView          *tr
 							GtkTreePath          *path,
 							GtkTreeViewColumn    *col,
 							gpointer              user_data);
+static gboolean    task_tree_drag_drop_cb              (GtkWidget            *widget,
+							GdkDragContext       *context,
+							gint                  x,
+							gint                  y,
+							guint                 time);
 static void        task_tree_block_selection_changed   (PlannerTaskTree      *tree);
 static void        task_tree_unblock_selection_changed (PlannerTaskTree      *tree);
 static void        task_tree_selection_changed_cb      (GtkTreeSelection     *selection,
@@ -1053,6 +1050,11 @@ task_tree_init (PlannerTaskTree *tree)
 			  "row_activated",
 			  G_CALLBACK (task_tree_row_activated_cb),
 			  NULL);
+
+	g_signal_connect (tree,
+			  "drag_drop",
+			  G_CALLBACK (task_tree_drag_drop_cb),
+			  NULL);
 }
 
 static void
@@ -1083,6 +1085,18 @@ task_tree_row_activated_cb (GtkTreeView       *tree,
 {
 	planner_task_tree_edit_task (PLANNER_TASK_TREE (tree),
 				     PLANNER_TASK_DIALOG_PAGE_GENERAL);
+}
+
+static gboolean
+task_tree_drag_drop_cb (GtkWidget      *widget,
+			GdkDragContext *context,
+			gint            x,
+			gint            y,
+			guint           time)
+{
+	g_signal_stop_emission_by_name (widget, "drag_drop");
+
+	return FALSE;
 }
 
 static void

@@ -88,6 +88,11 @@ static void     ttable_tree_row_inserted                 (GtkTreeModel          
 							  GtkTreePath            *path,
 							  GtkTreeIter            *iter,
 							  GtkTreeView            *tree);
+static gboolean ttable_tree_drag_drop_cb                 (GtkWidget              *widget,
+							  GdkDragContext         *context,
+							  gint                    x,
+							  gint                    y,
+							  guint                   time);
 
 
 static GtkTreeViewClass *parent_class = NULL;
@@ -195,6 +200,11 @@ ttable_tree_init (PlannerTtableTree *tree)
         gtk_item_factory_create_items (priv->popup_factory,
                                        G_N_ELEMENTS (popup_menu_items),
                                        popup_menu_items, tree);
+
+	g_signal_connect (tree,
+			  "drag_drop",
+			  G_CALLBACK (ttable_tree_drag_drop_cb),
+			  NULL);
 }
 
 static void
@@ -250,6 +260,18 @@ ttable_tree_setup_tree_view (GtkTreeView        *gtk_tree,
                           (ttable_tree_tree_view_button_press_event),
                           gtk_tree);
 
+}
+
+static gboolean
+ttable_tree_drag_drop_cb (GtkWidget      *widget,
+			  GdkDragContext *context,
+			  gint            x,
+			  gint            y,
+			  guint           time)
+{
+	g_signal_stop_emission_by_name (widget, "drag_drop");
+	
+	return FALSE;
 }
 
 static void

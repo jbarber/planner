@@ -44,7 +44,8 @@ main (int argc, char **argv)
         GnomeProgram       *program;
 	gchar              *geometry;
 	poptContext         popt_context;
-	const char        **args;
+	const gchar       **args;
+	gint                i;
 	struct poptOption   options[] = {
 		{ "geometry", 'g', POPT_ARG_STRING, &geometry, 0,
 		  N_("Create the initial window with the given geometry."), N_("GEOMETRY") },
@@ -84,10 +85,6 @@ main (int argc, char **argv)
 	application = planner_application_new ();
 
 	main_window = planner_application_new_window (application);
-	gtk_window_set_icon_from_file (GTK_WINDOW (main_window),
-				       DATADIR "/pixmaps/gnome-planner.png",
-				       NULL);
-
 	if (geometry != NULL) {
 		gtk_window_parse_geometry (GTK_WINDOW (main_window), geometry);
 	}
@@ -95,7 +92,22 @@ main (int argc, char **argv)
 	gtk_widget_show_all (main_window);
 
 	if (args != NULL) {
-		planner_window_open (PLANNER_WINDOW (main_window), args[0]);
+		i = 0;
+		while (args[i]) {
+			if (g_str_has_prefix (args[i], "file:")) {
+				planner_window_open_in_existing_or_new (PLANNER_WINDOW (main_window), args[i]);
+			} else {
+				gchar *uri;
+
+				uri = g_filename_to_uri (args[i], NULL, NULL);
+				if (uri) {
+					planner_window_open_in_existing_or_new (PLANNER_WINDOW (main_window), uri);
+					g_free (uri);
+				}
+			}
+				
+			i++;
+		}
 	}
 
         gtk_main ();

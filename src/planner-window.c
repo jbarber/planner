@@ -87,6 +87,18 @@ struct _PlannerWindowPriv {
 	EggRecentViewUIManager *recent_view;
 };
 
+/* Drop targets. */
+enum {
+	TARGET_STRING,
+	TARGET_URI_LIST
+};
+
+static const GtkTargetEntry drop_target_types[] = {
+	{ "STRING",     0, TARGET_STRING },
+	{ "text/plain", 0, TARGET_STRING },
+	{ "text/uri-list", 0, TARGET_URI_LIST },
+};
+
 /* Signals */
 enum {
 	CLOSED,
@@ -146,6 +158,14 @@ static void       window_undo_state_changed_cb           (PlannerCmdManager     
 static void       window_redo_state_changed_cb           (PlannerCmdManager            *manager,
 							  gboolean                      state,
 							  const gchar                  *label,
+							  PlannerWindow                *window);
+static void       window_drag_data_received_cb           (GtkWidget                    *widget,
+							  GdkDragContext               *context,
+							  int                           x,
+							  int                           y,
+							  GtkSelectionData             *data,
+							  guint                         info,
+							  guint                         time,
 							  PlannerWindow                *window);
 static void       window_project_needs_saving_changed_cb (MrpProject                   *project,
 							  gboolean                      needs_saving,
@@ -320,14 +340,13 @@ window_class_init (PlannerWindowClass *klass)
 	o_class->finalize = window_finalize;
 
 	/* Signals */
-	signals[CLOSED] = g_signal_new 
-		("closed",
-		 G_TYPE_FROM_CLASS (klass),
-		 G_SIGNAL_RUN_LAST,
-		 0, /*G_STRUCT_OFFSET (PlannerWindowClass, method), */
-		 NULL, NULL,
-		 planner_marshal_VOID__VOID,
-		 G_TYPE_NONE, 0);
+	signals[CLOSED] = g_signal_new ("closed",
+					G_TYPE_FROM_CLASS (klass),
+					G_SIGNAL_RUN_LAST,
+					0, /*G_STRUCT_OFFSET (PlannerWindowClass, method), */
+					NULL, NULL,
+					planner_marshal_VOID__VOID,
+					G_TYPE_NONE, 0);
 }
 
 static void
@@ -338,6 +357,22 @@ window_init (PlannerWindow *window)
 	priv = g_new0 (PlannerWindowPriv, 1);
 	window->priv = priv;
 
+	gtk_window_set_icon_from_file (GTK_WINDOW (window),
+				       DATADIR "/pixmaps/gnome-planner.png",
+				       NULL);
+
+	/* Setup drag-n-drop. */
+	gtk_drag_dest_set (GTK_WIDGET (window),
+			   GTK_DEST_DEFAULT_ALL,
+			   drop_target_types,
+			   G_N_ELEMENTS (drop_target_types),
+			   GDK_ACTION_COPY);
+
+	g_signal_connect (window,
+			  "drag_data_received",
+			  G_CALLBACK (window_drag_data_received_cb),
+			  window);
+	
 	priv->cmd_manager = planner_cmd_manager_new ();
 
 	g_signal_connect (priv->cmd_manager,
@@ -382,26 +417,11 @@ planner_window_open_recent_cb (GtkAction     *action,
 {
 	const EggRecentItem *item;
 	const gchar         *uri;
-	gchar               *filename;
-	GtkWidget           *new_window;
 
 	item = egg_recent_view_uimanager_get_item (window->priv->recent_view, action);
 	uri = egg_recent_item_peek_uri (item);
-	filename = g_filename_from_uri (uri, NULL, NULL);
 
-	if (mrp_project_is_empty (window->priv->project)) {
-		planner_window_open (window, filename);
-	} else {
-		new_window = planner_application_new_window (window->priv->application);
-		if (planner_window_open (PLANNER_WINDOW (new_window), filename)) {
-			gtk_widget_show_all (new_window);
-		} else {
-			g_signal_emit (new_window, signals[CLOSED], 0, NULL);
-			gtk_widget_destroy (new_window);
-		}
-	}
-	
-	g_free (filename);
+	planner_window_open_in_existing_or_new (window, uri);
 }
 
 static void
@@ -678,9 +698,7 @@ window_open_cb (GtkAction *action,
 	GtkWidget         *file_chooser;
 	GtkFileFilter     *filter;
 	gint               response;
-	gchar             *filename = NULL;
 	gchar             *last_dir;
-	GtkWidget         *new_window;
 
 	window = PLANNER_WINDOW (data);
 	priv = window->priv;
@@ -692,6 +710,8 @@ window_open_cb (GtkAction *action,
 						    GTK_STOCK_OPEN, GTK_RESPONSE_OK,
 						    NULL);
 
+	gtk_file_chooser_set_select_multiple (GTK_FILE_CHOOSER (file_chooser), TRUE);
+	
 	filter = gtk_file_filter_new ();
 	gtk_file_filter_set_name (filter, _("Planner Files"));
 	gtk_file_filter_add_pattern (filter, "*.planner");
@@ -712,37 +732,34 @@ window_open_cb (GtkAction *action,
 	gtk_widget_show (file_chooser);
 
 	response = gtk_dialog_run (GTK_DIALOG (file_chooser));
+	gtk_widget_hide (file_chooser);
 
 	if (response == GTK_RESPONSE_OK) {
-		filename = gtk_file_chooser_get_filename (
-			GTK_FILE_CHOOSER (file_chooser));
-	}
-	
-	gtk_widget_destroy (file_chooser);
+		GSList *uris, *l;
 
-	if (filename != NULL) {
-		if (mrp_project_is_empty (priv->project)) {
-			planner_window_open (window, filename);
-		} else {
-			new_window = 
-				planner_application_new_window (priv->application);
-			if (planner_window_open (PLANNER_WINDOW (new_window),
-						 filename)) {
-				gtk_widget_show_all (new_window);
-			} else {
-				g_signal_emit (new_window, signals[CLOSED], 
-					       0, NULL);
-				
-				gtk_widget_destroy (new_window);
+		uris = gtk_file_chooser_get_uris (GTK_FILE_CHOOSER (file_chooser));
+
+		if (uris) {
+			gchar *filename;
+
+			filename = g_filename_from_uri (uris->data, NULL, NULL);
+			if (filename) {
+				last_dir = g_path_get_dirname (filename);
+				g_free (filename);
+				planner_conf_set_string (CONF_MAIN_LAST_DIR, last_dir, NULL);
+				g_free (last_dir);
 			}
 		}
 		
-		last_dir = g_path_get_dirname (filename);
-		planner_conf_set_string (CONF_MAIN_LAST_DIR, last_dir, NULL);
-		g_free (last_dir);
+		for (l = uris; l; l = l->next) {
+			planner_window_open_in_existing_or_new (window, l->data);
+		}
 
-		g_free (filename);		
+		g_slist_foreach (uris, (GFunc) g_free, NULL);
+		g_slist_free (uris);
 	}
+	
+	gtk_widget_destroy (file_chooser);
 }
 
 static void
@@ -1148,6 +1165,101 @@ window_delete_event_cb (PlannerWindow *window,
 	return TRUE;
 }
 
+/* Stolen from GLib 2.6: g_uri_list_extract_uris (const gchar *uri_list) */
+static gchar **
+uri_list_extract_uris (const gchar *uri_list)
+{
+  GSList *uris, *u;
+  const gchar *p, *q;
+  gchar **result;
+  gint n_uris = 0;
+
+  uris = NULL;
+
+  p = uri_list;
+
+  /* We don't actually try to validate the URI according to RFC
+   * 2396, or even check for allowed characters - we just ignore
+   * comments and trim whitespace off the ends.  We also
+   * allow LF delimination as well as the specified CRLF.
+   *
+   * We do allow comments like specified in RFC 2483.
+   */
+  while (p)
+    {
+      if (*p != '#')
+	{
+	  while (g_ascii_isspace (*p))
+	    p++;
+
+	  q = p;
+	  while (*q && (*q != '\n') && (*q != '\r'))
+	    q++;
+
+	  if (q > p)
+	    {
+	      q--;
+	      while (q > p && g_ascii_isspace (*q))
+		q--;
+
+	      if (q > p)
+		{
+		  uris = g_slist_prepend (uris, g_strndup (p, q - p + 1));
+		  n_uris++;
+		}
+	    }
+	}
+      p = strchr (p, '\n');
+      if (p)
+	p++;
+    }
+
+  result = g_new (gchar *, n_uris + 1);
+
+  result[n_uris--] = NULL;
+  for (u = uris; u; u = u->next)
+    result[n_uris--] = u->data;
+
+  g_slist_free (uris);
+
+  return result;
+}
+
+static void
+window_drag_data_received_cb (GtkWidget        *widget,
+			      GdkDragContext   *context,
+			      int               x,
+			      int               y,
+			      GtkSelectionData *data,
+			      guint             info,
+			      guint             time,
+			      PlannerWindow    *window)
+{
+	PlannerWindowPriv  *priv;
+	gchar             **uris;
+	gint                i;
+	
+	priv = window->priv;
+
+	if (data->length < 0 || data->format != 8) {
+		g_message ("Don't know how to handle format %d", data->format);
+		gtk_drag_finish (context, FALSE, FALSE, time);
+		return;
+	}
+	
+	uris = uri_list_extract_uris (data->data);
+
+	i = 0;
+	while (uris[i]) {
+		planner_window_open_in_existing_or_new (window, uris[i]);
+		i++;
+	}
+	
+	g_strfreev (uris);
+
+	gtk_drag_finish (context, TRUE, FALSE, time);
+}
+
 static void
 window_undo_state_changed_cb (PlannerCmdManager *manager,
 			      gboolean           state,
@@ -1525,7 +1637,7 @@ planner_window_new (PlannerApplication *application)
 	
 	window = g_object_new (PLANNER_TYPE_MAIN_WINDOW, NULL);
 	priv = window->priv;
-	
+
 	priv->application = g_object_ref (application);
 	
 	priv->project = mrp_project_new (MRP_APPLICATION (application));
@@ -1587,7 +1699,47 @@ planner_window_open (PlannerWindow *window, const gchar *uri)
 	egg_recent_model_add_full (planner_application_get_recent_model (priv->application), item);
 	egg_recent_item_unref (item);
 
+	window_update_title (window);
+	
 	return TRUE;
+}
+
+gboolean
+planner_window_open_in_existing_or_new (PlannerWindow *window, const gchar *uri)
+{
+	PlannerWindowPriv *priv;
+	GtkWidget         *new_window;
+	gchar             *filename;
+	gboolean           ret;
+
+	priv = window->priv;
+
+	filename = g_filename_from_uri (uri, NULL, NULL);
+	if (!filename) {
+		return FALSE;
+	}
+	
+	if (mrp_project_is_empty (priv->project)) {
+		ret = planner_window_open (window, filename);
+		g_free (filename);
+		return ret;
+	} else {
+		new_window = planner_application_new_window (priv->application);
+		if (planner_window_open (PLANNER_WINDOW (new_window), filename)) {
+			g_free (filename);
+			gtk_widget_show_all (new_window);
+			return TRUE;
+		} else {
+			g_free (filename);
+			g_signal_emit (new_window, signals[CLOSED], 0, NULL);
+			gtk_widget_destroy (new_window);
+			return FALSE;
+		}
+	}
+	
+	g_free (filename);
+
+	return FALSE;
 }
 
 GtkUIManager *
@@ -1671,7 +1823,7 @@ window_get_name (PlannerWindow *window)
 		/* Hack. */
 		uri = _("Unnamed database project");
 	}
-	
+
 	g_object_get (priv->project, "name", &name, NULL);
 	if (name == NULL || name[0] == 0) {
 		g_free (name);

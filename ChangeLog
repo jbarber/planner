@@ -1,3 +1,21 @@
+2005-02-19  Richard Hult  <richard@imendio.com>
+
+	* src/planner-main.c: (main):
+	* src/planner-task-tree.c: Disable dnd to get rid of warning from treeview.
+	* src/planner-ttable-tree.c: Likewise.
+	* src/planner-window.c: (window_class_init), (window_init),
+	(planner_window_open_recent_cb), (window_open_cb),
+	(uri_list_extract_uris), (window_drag_data_received_cb),
+	(planner_window_new), (planner_window_open),
+	(planner_window_open_in_existing_or_new), (window_get_name):
+	* src/planner-window.h: Fix bug #139645, open files by
+	dragndrop. Refactor the opening code so it can be shared, and use
+	it for the added support for opening multiple files from the
+	commandline or filechooser.
+
+	* src/planner-window.c (window_drag_data_received_cb) 
+	(window_init): Setup drop target for planner files.
+
 2005-02-18  Richard Hult  <richard@imendio.com>
 
 	* src/planner-task-tree.c (task_tree_add_column): Set sizing to
