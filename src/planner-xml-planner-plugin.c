@@ -27,7 +27,7 @@
 #include <glib.h>
 #include <glade/glade.h>
 #include <gtk/gtk.h>
-#include <libgnome/gnome-i18n.h>
+#include <glib/gi18n.h>
 #include "planner-conf.h"
 #include "planner-window.h"
 #include "planner-plugin.h"

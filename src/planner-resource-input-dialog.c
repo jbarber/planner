@@ -23,7 +23,7 @@
 #include <config.h>
 #include <glade/glade.h>
 #include <gtk/gtk.h>
-#include <libgnome/gnome-i18n.h>
+#include <glib/gi18n.h>
 #include "planner-marshal.h"
 #include "planner-resource-input-dialog.h"
 #include "planner-resource-cmd.h"

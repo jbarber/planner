@@ -22,7 +22,7 @@
 
 #include <config.h>
 
-#include "mrp-intl.h"
+#include <glib/gi18n.h>
 #include "mrp-task.h"
 #include "mrp-resource.h"
 #include "mrp-marshal.h"

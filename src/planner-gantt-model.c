@@ -27,7 +27,7 @@
 #include <glib.h>
 #include <gtk/gtktreemodel.h>
 #include <gtk/gtktreednd.h>
-#include <libgnome/gnome-i18n.h>
+#include <glib/gi18n.h>
 #include <libplanner/mrp-task.h>
 #include "planner-marshal.h"
 #include "planner-gantt-model.h"

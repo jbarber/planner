@@ -25,9 +25,9 @@
 #include <string.h>
 #include <stdlib.h>
 #include <glib.h>
+#include <glib/gi18n.h>
 #include <libgda/libgda.h>
 #include <libplanner/planner.h>
-#include <libplanner/mrp-intl.h>
 #include <libplanner/mrp-private.h>
 #include "mrp-storage-sql.h"
 #include "mrp-sql.h"

@@ -30,8 +30,7 @@ libplanner_1_la_SOURCES = \
 	mrp-private.h				\
 	mrp-property.c				\
 	mrp-time.c				\
-	mrp-error.c				\
-	mrp-intl.h
+	mrp-error.c
 
 libplannerinclude_HEADERS = \
 	planner.h				\

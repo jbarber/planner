@@ -30,7 +30,7 @@
 #include <time.h>
 #include <glade/glade.h>
 #include <gtk/gtk.h>
-#include <libgnome/gnome-i18n.h>
+#include <glib/gi18n.h>
 #include <libplanner/mrp-project.h>
 #include <libplanner/mrp-time.h>
 #include "planner-calendar-selector.h"

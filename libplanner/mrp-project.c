@@ -25,7 +25,7 @@
 #include <config.h>
 #include <string.h>
 #include "mrp-error.h"
-#include "mrp-intl.h"
+#include <glib/gi18n.h>
 #include "mrp-marshal.h"
 #include "mrp-task-manager.h"
 #include "mrp-storage-module-factory.h"

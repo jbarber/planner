@@ -24,7 +24,7 @@
 #include <config.h>
 #include <gtk/gtkmain.h>
 #include <gtk/gtkstock.h>
-#include <libgnome/gnome-i18n.h>
+#include <glib/gi18n.h>
 #include "planner-window.h"
 #include "planner-application.h"
 

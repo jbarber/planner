@@ -26,7 +26,7 @@
 #include <string.h>
 #include "mrp-private.h"
 #include "mrp-marshal.h"
-#include "mrp-intl.h"
+#include <glib/gi18n.h>
 #include "mrp-assignment.h"
 #include "mrp-group.h"
 #include "mrp-task.h"

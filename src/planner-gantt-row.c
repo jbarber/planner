@@ -28,7 +28,7 @@
 #include <libplanner/mrp-project.h>
 #include <libplanner/mrp-resource.h>
 #include <libplanner/mrp-task.h>
-#include <libgnome/gnome-i18n.h>
+#include <glib/gi18n.h>
 #include <libgnomecanvas/gnome-canvas.h>
 #include "planner-marshal.h"
 #include "planner-format.h"

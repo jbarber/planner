@@ -21,7 +21,7 @@
  */
 
 #include "mrp-private.h"
-#include "mrp-intl.h"
+#include <glib/gi18n.h>
 #include "mrp-day.h"
 
 struct _MrpDay {

@@ -28,7 +28,7 @@
 #include <stdlib.h>
 #include "mrp-private.h"
 #include "mrp-error.h"
-#include "mrp-intl.h"
+#include <glib/gi18n.h>
 #include "mrp-task.h"
 #include "mrp-resource.h"
 #include "mrp-group.h"

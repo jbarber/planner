@@ -28,7 +28,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <libgnome/libgnome.h>
-#include <libgnome/gnome-i18n.h>
+#include <glib/gi18n.h>
 #include <gtk/gtk.h>
 #include <libgnomeprint/gnome-print.h>
 #include <libgnomeprint/gnome-print-job.h>

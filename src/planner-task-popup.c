@@ -21,7 +21,7 @@
 #include <gtk/gtkiconfactory.h>
 #include <gtk/gtkstock.h>
 #include <gtk/gtkmenu.h>
-#include <libgnome/gnome-i18n.h>
+#include <glib/gi18n.h>
 #include "planner-task-tree.h"
 #include "planner-task-popup.h"
 

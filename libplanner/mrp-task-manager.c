@@ -26,7 +26,7 @@
 #include <time.h>
 #include <math.h>
 #include <glib-object.h>
-#include "mrp-intl.h"
+#include <glib/gi18n.h>
 #include "mrp-marshal.h"
 #include "mrp-storage-module.h"
 #include "mrp-task-manager.h"

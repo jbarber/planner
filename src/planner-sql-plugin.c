@@ -26,7 +26,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <glib.h>
-#include <libgnome/gnome-i18n.h>
+#include <glib/gi18n.h>
 #include <libgnomeui/gnome-entry.h>
 #include <glade/glade.h>
 #include <gtk/gtk.h>

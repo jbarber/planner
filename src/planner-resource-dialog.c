@@ -40,7 +40,7 @@
 #include <gtk/gtkcellrenderertoggle.h>
 #include <gtk/gtktextview.h>
 #include <gtk/gtktextbuffer.h>
-#include <libgnome/gnome-i18n.h>
+#include <glib/gi18n.h>
 #include <libplanner/mrp-resource.h>
 #include <libplanner/mrp-calendar.h>
 #include <libplanner/mrp-time.h>

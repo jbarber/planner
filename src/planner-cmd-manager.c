@@ -20,7 +20,7 @@
 
 #include <config.h>
 #include <glib.h>
-#include <libgnome/gnome-i18n.h>
+#include <glib/gi18n.h>
 #include "planner-cmd-manager.h"
 #include "planner-marshal.h"
 

@@ -40,7 +40,7 @@
 #include <gtk/gtkscrolledwindow.h>
 #include <gtk/gtkmessagedialog.h>
 #include <gtk/gtktoggleaction.h>
-#include <libgnome/gnome-i18n.h>
+#include <glib/gi18n.h>
 #include <libplanner/mrp-task.h>
 #include "planner-view.h"
 #include "planner-cell-renderer-date.h"

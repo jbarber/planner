@@ -24,7 +24,7 @@
 #include <config.h>
 #include <string.h>
 #include <glib.h>
-#include <libgnome/gnome-i18n.h>
+#include <glib/gi18n.h>
 #include "planner-view.h"
 #include "planner-view-loader.h"
 

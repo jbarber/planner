@@ -28,7 +28,7 @@
 #include <langinfo.h>
 #include "mrp-time.h"
 #include "mrp-types.h"
-#include "mrp-intl.h"
+#include <glib/gi18n.h>
 #include "mrp-private.h"
 
 static const gchar *short_month_names[12];

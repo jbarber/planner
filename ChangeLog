@@ -1,5 +1,11 @@
 2004-08-09  Richard Hult  <richard@imendio.com>
 
+	* libplanner/Makefile.am: Remove mrp-intl.h
+	* libplanner/*.c: Change mrp-intl.h to glib/gi18n.h.
+	* src/*.c: Change libgnome/gnome-i18n.h to glib/gi18n.h.
+
+2004-08-09  Richard Hult  <richard@imendio.com>
+
 	* configure.in:
 	* libplanner/mrp-file-module.c: (mrp_file_module_load_all),
 	(mrp_file_reader_read_string):

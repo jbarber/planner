@@ -24,7 +24,7 @@
 #include <config.h>
 
 #include "mrp-private.h"
-#include "mrp-intl.h"
+#include <glib/gi18n.h>
 #include "mrp-project.h"
 #include "mrp-property.h"
 

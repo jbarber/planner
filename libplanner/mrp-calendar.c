@@ -25,7 +25,7 @@
 #include <string.h>
 
 #include "mrp-marshal.h"
-#include "mrp-intl.h"
+#include <glib/gi18n.h>
 #include "mrp-private.h"
 #include "mrp-time.h"
 #include "mrp-calendar.h"

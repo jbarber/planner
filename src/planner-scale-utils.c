@@ -22,7 +22,7 @@
 
 #include <config.h>
 #include <math.h>
-#include <libgnome/gnome-i18n.h>
+#include <glib/gi18n.h>
 #include "planner-scale-utils.h"
 
 #define WEEK (60*60*24*7)

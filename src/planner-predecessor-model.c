@@ -23,7 +23,7 @@
 
 #include <config.h>
 #include <gtk/gtktreemodel.h>
-#include <libgnome/gnome-i18n.h>
+#include <glib/gi18n.h>
 #include "planner-predecessor-model.h"
 
 struct _PlannerPredecessorModelPriv {

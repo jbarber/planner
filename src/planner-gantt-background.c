@@ -24,7 +24,7 @@
 #include <math.h>
 #include <time.h>
 #include <string.h>
-#include <libgnome/gnome-i18n.h>
+#include <glib/gi18n.h>
 #include <libplanner/mrp-project.h>
 #include <libplanner/mrp-time.h>
 #include "planner-gantt-background.h"

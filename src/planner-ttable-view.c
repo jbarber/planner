@@ -27,7 +27,7 @@
 #include <gtk/gtk.h>
 #include <gtk/gtkmain.h>
 #include <gtk/gtkhpaned.h>
-#include <libgnome/gnome-i18n.h>
+#include <glib/gi18n.h>
 #include <libplanner/mrp-task.h>
 #include <libplanner/mrp-resource.h>
 #include "planner-view.h"

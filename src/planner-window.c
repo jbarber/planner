@@ -39,7 +39,7 @@
 #include <gtk/gtkfilechooserdialog.h>
 #include <glade/glade.h>
 #include <libgnome/gnome-help.h>
-#include <libgnome/gnome-i18n.h>
+#include <glib/gi18n.h>
 #include <libgnomeui/gnome-about.h>
 #include <libgnomeui/gnome-href.h>
 #include <libgnomeui/gnome-stock-icons.h>

@@ -36,7 +36,7 @@
 #include <gtk/gtkiconfactory.h>
 #include <gtk/gtkstock.h>
 #include <gtk/gtkmessagedialog.h>
-#include <libgnome/gnome-i18n.h>
+#include <glib/gi18n.h>
 #include "planner-format.h"
 #include "planner-marshal.h"
 #include "planner-cell-renderer-date.h"

@@ -22,6 +22,7 @@
 
 #include <config.h>
 #include <glib.h>
+#include <glib/gi18n.h>
 #include <gmodule.h>
 #include <libgnomevfs/gnome-vfs.h>
 #include <libxslt/xslt.h>
@@ -31,21 +32,21 @@
 #include <string.h>
 #include <libplanner/mrp-file-module.h>
 #include <libplanner/mrp-private.h>
-#include <libplanner/mrp-intl.h>
 
-void              init          (MrpFileModule    *module,
-				 MrpApplication   *application);
-static gboolean   html_write    (MrpFileWriter    *writer,
-				 MrpProject       *project,
-				 const gchar      *uri,
-				 gboolean          force,
-				 GError          **error);
 
-static gboolean   xml_planner_pre012_write    (MrpFileWriter    *writer,
-				 MrpProject       *project,
-				 const gchar      *uri,
-				 gboolean          force,
-				 GError          **error);
+void            init                     (MrpFileModule   *module,
+					  MrpApplication  *application);
+static gboolean html_write               (MrpFileWriter   *writer,
+					  MrpProject      *project,
+					  const gchar     *uri,
+					  gboolean         force,
+					  GError         **error);
+static gboolean xml_planner_pre012_write (MrpFileWriter   *writer,
+					  MrpProject      *project,
+					  const gchar     *uri,
+					  gboolean         force,
+					  GError         **error);
+
 				 
 static gboolean
 html_write (MrpFileWriter  *writer,
@@ -67,7 +68,7 @@ html_write (MrpFileWriter  *writer,
 	mrp_project_save_to_xml (project, &xml_project, NULL);
 
         /* libxml housekeeping */
-        xmlSubstituteEntitiesDefault(1);
+        xmlSubstituteEntitiesDefault (1);
         xmlLoadExtDtdDefaultValue = 1;
         exsltRegisterAll ();
 

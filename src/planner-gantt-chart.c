@@ -28,7 +28,7 @@
 #include <math.h>
 #include <gtk/gtk.h>
 #include <gdk/gdkkeysyms.h>
-#include <libgnome/gnome-i18n.h>
+#include <glib/gi18n.h>
 #include <libplanner/mrp-task.h>
 #include "planner-marshal.h"
 #include "planner-conf.h"

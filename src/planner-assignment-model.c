@@ -22,7 +22,7 @@
 
 #include <config.h>
 #include <gtk/gtktreemodel.h>
-#include <libgnome/gnome-i18n.h>
+#include <glib/gi18n.h>
 #include <libplanner/mrp-assignment.h>
 #include <libplanner/mrp-resource.h>
 #include "planner-assignment-model.h"

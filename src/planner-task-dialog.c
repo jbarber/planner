@@ -26,7 +26,7 @@
 #include <time.h>
 #include <string.h>
 #include <stdlib.h> /* for atoi */
-#include <libgnome/gnome-i18n.h>
+#include <glib/gi18n.h>
 #include <glade/glade.h>
 #include <gtk/gtk.h>
 #include <libplanner/mrp-object.h>

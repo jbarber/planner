@@ -25,7 +25,7 @@
 #include <string.h>
 #include <gtk/gtk.h>
 #include <libplanner/planner.h>
-#include <libgnome/gnome-i18n.h>
+#include <glib/gi18n.h>
 #include <libgnomeprint/gnome-print.h>
 #include "planner-print-job.h"
 #include "planner-table-print-sheet.h"

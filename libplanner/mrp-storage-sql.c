@@ -27,7 +27,7 @@
 #include "mrp-error.h"
 #include "mrp-storage-module.h"
 #include "mrp-private.h"
-#include "mrp-intl.h"
+#include <glib/gi18n.h>
 #include "mrp-storage-sql.h"
 #include "mrp-sql.h"
 

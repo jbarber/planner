@@ -29,7 +29,7 @@
 #include <glib.h>
 #include <gobject/gvaluecollector.h>
 #include <gmodule.h>
-#include <libgnome/gnome-i18n.h>
+#include <glib/gi18n.h>
 #include <gtk/gtkmain.h>
 #include <gtk/gtktreeview.h>
 #include <gtk/gtktreeselection.h>

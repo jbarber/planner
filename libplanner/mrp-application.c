@@ -25,7 +25,7 @@
 
 #include <stdlib.h>
 
-#include "mrp-intl.h"
+#include <glib/gi18n.h>
 #include "mrp-file-module.h"
 #include "mrp-private.h"
 #include "mrp-application.h"

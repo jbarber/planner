@@ -27,7 +27,7 @@
 #include <popt.h>
 #include <gtk/gtkwidget.h>
 #include <gtk/gtkmain.h>
-#include <libgnome/gnome-i18n.h>
+#include <glib/gi18n.h>
 #include <libgnome/gnome-program.h>
 #include <libgnomeui/gnome-ui-init.h>
 #include <libgnomeui/gnome-window-icon.h>

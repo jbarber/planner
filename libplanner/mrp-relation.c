@@ -23,7 +23,7 @@
 
 #include <config.h>
 #include <string.h>
-#include "mrp-intl.h"
+#include <glib/gi18n.h>
 #include "mrp-types.h"
 #include "mrp-marshal.h"
 #include "mrp-relation.h"

@@ -32,7 +32,7 @@
 #include <gtk/gtkstock.h>
 #include <gtk/gtkfilesel.h>
 #include <libgnome/libgnome.h>
-#include <libgnome/gnome-i18n.h>
+#include <glib/gi18n.h>
 #include <libgnomeui/gnome-file-entry.h>
 #include "planner-window.h"
 #include "planner-plugin.h"

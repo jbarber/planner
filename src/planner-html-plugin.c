@@ -29,7 +29,7 @@
 #include <gtk/gtkmessagedialog.h>
 #include <gtk/gtkentry.h>
 #include <gtk/gtkstock.h>
-#include <libgnome/gnome-i18n.h>
+#include <glib/gi18n.h>
 #include <libgnomeui/gnome-file-entry.h>
 #include "planner-window.h"
 #include "planner-plugin.h"

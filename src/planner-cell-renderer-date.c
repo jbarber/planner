@@ -39,7 +39,7 @@
 #include <gtk/gtkhbbox.h>
 #include <gtk/gtkstock.h>
 #include <gtk/gtkcalendar.h>
-#include <libgnome/gnome-i18n.h>
+#include <glib/gi18n.h>
 #include "planner-marshal.h"
 #include "planner-format.h"
 #include "planner-cell-renderer-date.h"
