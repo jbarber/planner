@@ -252,6 +252,30 @@ static GtkItemFactoryEntry popup_menu_items[] = {
 	{ N_("/_Edit resource..."),  NULL, GIF_CB (resource_view_popup_edit_resource_cb),    POPUP_EDIT,    "<Item>",       NULL }, 
 };
 
+/*
+ * Commands
+ */
+
+typedef struct {
+	PlannerCmd       base;
+
+	MrpProject      *project;
+	gchar           *name;
+	MrpResource     *resource; /* The inserted resource */
+} ResourceCmdInsert;
+
+typedef struct {
+	PlannerCmd         base;
+
+	MrpProject        *project;
+	
+	GtkTreePath       *path;
+	
+	gchar             *property;  
+	GValue            *value;
+	GValue            *old_value;
+} ResourceCmdEditProperty;
+
 
 G_MODULE_EXPORT void
 activate (PlannerView *view)
@@ -700,32 +724,80 @@ resource_view_popup_edit_resource_cb     (gpointer   callback_data,
 }
 
 static void
+resource_cmd_insert_do (PlannerCmd *cmd_base)
+{
+	ResourceCmdInsert *cmd;
+	MrpResource       *resource;
+
+	cmd = (ResourceCmdInsert*) cmd_base;
+
+	resource = g_object_new (MRP_TYPE_RESOURCE, NULL);
+
+	mrp_project_add_resource (cmd->project, resource);
+
+	cmd->resource = resource;
+}
+
+static void
+resource_cmd_insert_undo (PlannerCmd *cmd_base)
+{
+	ResourceCmdInsert *cmd;
+	
+	cmd = (ResourceCmdInsert*) cmd_base;
+
+	mrp_project_remove_resource (cmd->project,
+				     cmd->resource);
+	
+	cmd->resource = NULL;
+}
+
+
+
+static PlannerCmd *
+resource_cmd_insert (PlannerView *view)
+{
+	PlannerCmd          *cmd_base;
+	ResourceCmdInsert   *cmd;
+
+	cmd = g_new0 (ResourceCmdInsert, 1);
+
+	cmd_base = (PlannerCmd*) cmd;
+
+	cmd_base->label = g_strdup (_("Insert resource"));
+	cmd_base->do_func = resource_cmd_insert_do;
+	cmd_base->undo_func = resource_cmd_insert_undo;
+	cmd_base->free_func = NULL; /* FIXME */
+
+	cmd->project = planner_window_get_project (view->main_window);
+
+	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager (view->main_window),
+					   cmd_base);
+
+	return cmd_base;
+}
+
+static void
 resource_view_insert_resource_cb (BonoboUIComponent *component, 
 				  gpointer           data, 
 				  const char        *cname)
 {
-	PlannerView           *view;
-	PlannerViewPriv       *priv;
-	MrpResource      *resource;
-	MrpProject       *project;
-	GtkTreeModel     *model;
-	FindResourceData *find_data;
-	GtkTreePath      *path;
+	PlannerView       *view;
+	PlannerViewPriv   *priv;
+	GtkTreeModel      *model;
+	FindResourceData  *find_data;
+	GtkTreePath       *path;
+	ResourceCmdInsert *cmd;
 
 	view = PLANNER_VIEW (data);
 	priv = view->priv;
 
-	resource = g_object_new (MRP_TYPE_RESOURCE, NULL);
-	
-	project = planner_window_get_project (view->main_window);
-
-	mrp_project_add_resource (project, resource);
+	cmd = (ResourceCmdInsert*) resource_cmd_insert (view);
 
 	if (!GTK_WIDGET_HAS_FOCUS (priv->tree_view)) {
 		gtk_widget_grab_focus (GTK_WIDGET (priv->tree_view));
 	}
 	
-	find_data = resource_view_find_resource (view, resource);
+	find_data = resource_view_find_resource (view, cmd->resource);
 	if (find_data) {
 		model = gtk_tree_view_get_model (priv->tree_view);
 		path = gtk_tree_model_get_path (model, find_data->found_iter);
@@ -748,7 +820,7 @@ resource_view_insert_resources_cb (BonoboUIComponent *component,
 {
 	PlannerView     *view;
 	PlannerViewPriv *priv;
-	MrpProject *project;
+	MrpProject      *project;
 
 	view = PLANNER_VIEW (data);
 	priv = view->priv;
@@ -779,8 +851,8 @@ resource_view_remove_resource_cb (BonoboUIComponent *component,
 {
 	PlannerView     *view;
 	PlannerViewPriv *priv;
-	MrpProject *project;
-	GList      *list, *node;
+	MrpProject      *project;
+	GList           *list, *node;
 
 	g_return_if_fail (PLANNER_IS_VIEW (data));
 	
@@ -806,9 +878,9 @@ resource_view_edit_resource_cb (BonoboUIComponent *component,
 {
 	PlannerView      *view;
 	PlannerViewPriv  *priv;
-	MrpResource *resource;
-	GtkWidget   *dialog; 
-	GList       *list;
+	MrpResource      *resource;
+	GtkWidget        *dialog; 
+	GList            *list;
 
 	view = PLANNER_VIEW (data);
 	priv = view->priv;       
@@ -831,7 +903,7 @@ resource_view_select_all_cb (BonoboUIComponent *component,
 {
 	PlannerView           *view;
 	PlannerViewPriv       *priv;
-	GtkTreeSelection *selection;
+	GtkTreeSelection      *selection;
 
 	view = PLANNER_VIEW (data);
 	priv = view->priv;
@@ -908,9 +980,9 @@ resource_view_button_press_event (GtkTreeView    *tv,
 				  GdkEventButton *event,
 				  PlannerView         *view)
 {
-	GtkTreePath    *path;
-	PlannerViewPriv     *priv;
-	GtkItemFactory *factory;
+	GtkTreePath     *path;
+	PlannerViewPriv *priv;
+	GtkItemFactory  *factory;
 
 	priv = view->priv;
 	factory = priv->popup_factory;
@@ -1475,7 +1547,7 @@ resource_view_property_added (MrpProject  *project,
 			      MrpProperty *property,
 			      PlannerView      *view)
 {
-	PlannerViewPriv        *priv;
+	PlannerViewPriv   *priv;
 	MrpPropertyType    type;
 	GtkTreeViewColumn *col;	
 	GtkCellRenderer   *cell;
@@ -1535,9 +1607,9 @@ resource_view_property_added (MrpProject  *project,
 static void    
 resource_view_property_removed (MrpProject  *project, 
 				MrpProperty *property,
-				PlannerView      *view)
+				PlannerView *view)
 {
-	PlannerViewPriv        *priv;
+	PlannerViewPriv   *priv;
 	GtkTreeViewColumn *col;
 
 	priv = view->priv;
@@ -1755,7 +1827,7 @@ resource_view_selection_foreach (GtkTreeModel  *model,
 static GList *
 resource_view_selection_get_list (PlannerView *view)
 {
-	PlannerViewPriv       *priv;
+	PlannerViewPriv  *priv;
 	GtkTreeSelection *selection;
 	GList            *ret_list;
 
