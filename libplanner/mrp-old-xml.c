@@ -347,6 +347,7 @@ old_xml_read_resource (MrpParser *parser, xmlNodePtr tree)
 	gint         id;
 	gint         type;
 	gchar       *name, *short_name, *email;
+	gchar       *note;
 	gint         gid;
 	gint         units;
 	gfloat       std_rate; /*, ovt_rate;*/
@@ -370,6 +371,7 @@ old_xml_read_resource (MrpParser *parser, xmlNodePtr tree)
 	/*ovt_rate = old_xml_get_float (tree, "ovt-rate");*/
 	email       = old_xml_get_string (tree, "email");
 	calendar_id = old_xml_get_int (tree, "calendar");
+        note        = old_xml_get_string (tree, "note");
 
 	if (short_name == NULL) {
 		short_name = g_strdup ("");
@@ -377,6 +379,10 @@ old_xml_read_resource (MrpParser *parser, xmlNodePtr tree)
 	
 	if (email == NULL) {
 		email = g_strdup ("");
+	}
+
+	if (note == NULL) {
+		note = g_strdup ("");
 	}
 
 	group = g_hash_table_lookup (parser->group_hash, GINT_TO_POINTER (gid));
@@ -390,6 +396,7 @@ old_xml_read_resource (MrpParser *parser, xmlNodePtr tree)
 				 "units", units,
 				 "email", email,
 				 "calendar", calendar,
+				 "note", note,
 				 NULL);
 
 	/* These are cost custom properties */
@@ -415,6 +422,7 @@ old_xml_read_resource (MrpParser *parser, xmlNodePtr tree)
 	g_free (name);
 	g_free (email);
 	g_free (short_name);
+	g_free (note);
 }
 
 static void

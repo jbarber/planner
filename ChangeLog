@@ -1,5 +1,10 @@
 2004-03-26  Richard Hult  <richard@imendio.com>
 
+	* libplanner/mrp-old-xml.c: (old_xml_read_resource): Fix bug
+	#138145, read resource note, modified patch from Lincoln Phipps.
+
+2004-03-26  Richard Hult  <richard@imendio.com>
+
 	* src/planner-gantt-model.c: (gantt_model_get_column_type),
 	(gantt_model_get_value):
 	* src/planner-gantt-model.h:
