@@ -9,15 +9,11 @@ EXTRA_DIST = 	*.custom *.metadata *.xml
 gtksourceviewsharpdir = $(libdir)
 gtksourceviewsharp_DATA = libplanner.dll
 
-#FIXME
-MCS = mcs
-MONO = mono
-
 all: $(LIBRARY)
 
 generated-stamp: $(APIS) *.custom *.metadata
 	$(GAPI_FIXUP) --api=libplanner-api.xml --metadata=libplanner.metadata && \
-	$(MONO) $(GAPI_CODEGEN) --include $(INCLUDE_APIS) --generate $(APIS) \
+	$(GAPI_CODEGEN) --include $(INCLUDE_APIS) --generate $(APIS) \
 	--outdir=generated --customdir=. --assembly-name=libplanner && touch generated-stamp
 
 $(LIBRARY): generated-stamp

@@ -180,7 +180,6 @@ endif
 
 plugindir = $(libdir)/planner/plugins
 
-# if HAVE_POSTGRES
 if HAVE_GDA
 sql_plugin = libsql-plugin.la
 endif
@@ -192,12 +191,9 @@ plugin_LTLIBRARIES = \
 libhtml_plugin_la_SOURCES = planner-html-plugin.c
 libhtml_plugin_la_LDFLAGS = -avoid-version -module
 
-# if HAVE_POSTGRES
 if HAVE_GDA
 libsql_plugin_la_SOURCES = planner-sql-plugin.c
 libsql_plugin_la_LDFLAGS = -avoid-version -module
-libsql_plugin_la_CFLAGS = $(GDA_CFLAGS)
-libsql_plugin_la_LIBADD = $(GDA_LIBS)
 endif
 
 planner-marshal.h: Makefile.am planner-marshal.list

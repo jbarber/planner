@@ -1,3 +1,17 @@
+2004-01-25  Richard Hult  <richard@imendio.com>
+
+	* src/Makefile.am (sql_plugin): 
+	* configure.in: Fix sql plugin flags.
+
+	* src/planner-window.c (window_undo_state_changed_cb) 
+	(window_redo_state_changed_cb): Set tooltip as well.
+
+2004-01-14  Richard Hult  <richard@imendio.com>
+
+	* Makefile.am: Build dotnet bindings conditionally.
+
+	* configure.in: Simplify and bring back the mono checks.
+
 2004-01-25  Alvaro del Castillo  <acs@barrapunto.com>
 
 	* src/planner-resource-view.c: Added undo for resource insertion.

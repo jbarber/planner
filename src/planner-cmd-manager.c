@@ -223,9 +223,9 @@ state_changed (PlannerCmdManager *manager)
 	/* Undo */
 	cmd = get_undo_cmd (manager, FALSE);
 	if (cmd) {
-		label = g_strdup_printf (_("_Undo '%s'"), cmd->label);
+		label = g_strdup_printf (_("Undo '%s'"), cmd->label);
 	} else {
-		label = g_strdup (_("_Undo"));
+		label = g_strdup (_("Undo"));
 	}
 	
 	g_signal_emit (manager, signals[UNDO_STATE_CHANGED], 0, cmd != NULL, label);
@@ -235,9 +235,9 @@ state_changed (PlannerCmdManager *manager)
 	/* Redo */
 	cmd = get_redo_cmd (manager, FALSE);
 	if (cmd) {
-		label = g_strdup_printf (_("_Redo '%s'"), cmd->label);
+		label = g_strdup_printf (_("Redo '%s'"), cmd->label);
 	} else {
-		label = g_strdup (_("_Redo"));
+		label = g_strdup (_("Redo"));
 	}
 	
 	g_signal_emit (manager, signals[REDO_STATE_CHANGED], 0, cmd != NULL, label);
