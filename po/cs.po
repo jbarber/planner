@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mrproject VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-04-16 15:22+0200\n"
-"PO-Revision-Date: 2004-04-16 17:00+0200\n"
+"POT-Creation-Date: 2004-04-17 15:24+0200\n"
+"PO-Revision-Date: 2004-04-17 17:16+0200\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -553,15 +553,15 @@ msgstr "Zmenšit do _okna"
 msgid "Zoom _Out"
 msgstr "Z_menšit"
 
-#: data/ui/gantt-view.ui.h:32
+#: data/ui/gantt-view.ui.h:32 data/ui/time-table-view.ui.h:1
 msgid "Zoom in"
 msgstr "Zvětšit"
 
-#: data/ui/gantt-view.ui.h:33
+#: data/ui/gantt-view.ui.h:33 data/ui/time-table-view.ui.h:2
 msgid "Zoom out"
 msgstr "Zmenšit"
 
-#: data/ui/gantt-view.ui.h:34
+#: data/ui/gantt-view.ui.h:34 data/ui/time-table-view.ui.h:4
 msgid "Zoom to fit the entire project"
 msgstr "Zmenšit celý projekt do okna"
 
@@ -836,6 +836,10 @@ msgstr "Uložit do databáze..."
 #: data/ui/task-view.ui.h:26
 msgid "_Edit Custom Properties..."
 msgstr "Upravit _vlastní vlastnosti..."
+
+#: data/ui/time-table-view.ui.h:3
+msgid "Zoom to fit"
+msgstr "Přizpůsobit velikosti okna"
 
 #: libegg/recent-files/egg-recent-vfs-utils.c:90
 msgid " (invalid Unicode)"
@@ -1138,7 +1142,7 @@ msgstr "Začátek projektu"
 #: src/planner-gantt-print.c:191 src/planner-group-dialog.c:806
 #: src/planner-property-dialog.c:378 src/planner-resource-view.c:1172
 #: src/planner-task-dialog.c:1410 src/planner-task-dialog.c:1496
-#: src/planner-task-view.c:266
+#: src/planner-task-view.c:266 src/planner-ttable-print.c:97
 msgid "Name"
 msgstr "Jméno"
 
@@ -1148,21 +1152,21 @@ msgstr "Jméno"
 msgid "Work"
 msgstr "Práce"
 
-#: src/planner-gantt-print.c:523 src/planner-gantt-row.c:668
+#: src/planner-gantt-print.c:523 src/planner-gantt-row.c:671
 #: src/planner-window.c:1653
 msgid "Unnamed"
 msgstr "Nepojmenovaný"
 
-#: src/planner-gantt-row.c:1916 src/planner-gantt-row.c:1919
+#: src/planner-gantt-row.c:1921 src/planner-gantt-row.c:1924
 msgid "No name"
 msgstr "Beze jména"
 
-#: src/planner-gantt-row.c:1922
+#: src/planner-gantt-row.c:1927
 #, c-format
 msgid "Make task '%s' a predecessor of '%s'"
 msgstr "Učinit úlohu '%s' předchůdcem '%s'"
 
-#: src/planner-gantt-row.c:1980
+#: src/planner-gantt-row.c:1985
 #, c-format
 msgid "Change work to %s"
 msgstr "Změnit práci na %s"
@@ -1183,7 +1187,7 @@ msgstr ""
 "\n"
 "WBS"
 
-#: src/planner-gantt-view.c:493
+#: src/planner-gantt-view.c:493 src/planner-ttable-tree.c:332
 msgid ""
 "\n"
 "Name"
@@ -1275,7 +1279,7 @@ msgstr "/_Odstranit úlohu"
 msgid "/_Unlink task"
 msgstr "/Od_pojit úlohu"
 
-#: src/planner-task-popup.c:61
+#: src/planner-task-popup.c:61 src/planner-ttable-tree.c:99
 msgid "/_Edit task..."
 msgstr "/_Upravit úlohu..."
 
@@ -1403,7 +1407,7 @@ msgstr "/_Vložit zdroj"
 msgid "/_Remove resource"
 msgstr "/_Odstranit zdroj"
 
-#: src/planner-resource-view.c:262
+#: src/planner-resource-view.c:262 src/planner-ttable-tree.c:98
 msgid "/_Edit resource..."
 msgstr "/_Upravit zdroj..."
 
@@ -1646,6 +1650,42 @@ msgstr "Rezerva"
 #: src/planner-task-view.c:489
 msgid "Edit custom task properties"
 msgstr "Upravit vlastní vlastnosti úlohy"
+
+#: src/planner-ttable-print.c:134
+msgid "Task"
+msgstr "Úloha"
+
+#: src/planner-ttable-row.c:2111
+#, c-format
+msgid "Make task '%s' start on %s"
+msgstr "Změnit začátek úlohy '%s' na %s"
+
+#: src/planner-ttable-row.c:2180
+#, c-format
+msgid "Change task '%s' work to %s, duration to %s (%d)"
+msgstr "Změnit práci úlohy '%s' na %s a trvání na %s (%d)"
+
+#: src/planner-ttable-tree.c:101
+msgid "/_Expand all resources"
+msgstr "/_Rozbalit všechny zdroje"
+
+#: src/planner-ttable-tree.c:102
+msgid "/_Collapse all resources"
+msgstr "/_Sbalit všechny zdroje"
+
+#: src/planner-ttable-tree.c:333
+msgid ""
+"\n"
+"Task"
+msgstr "\nÚloha"
+
+#: src/planner-ttable-view.c:141
+msgid "Resource Usage"
+msgstr "Využití zdroje"
+
+#: src/planner-ttable-view.c:148
+msgid "Resource _Usage"
+msgstr "_Využití zdroje"
 
 #: src/planner-view-loader.c:41
 #, c-format
