@@ -39,7 +39,6 @@
 struct _PlannerViewPriv {
         GtkWidget              *paned;
         GtkWidget              *tree;
-        GtkWidget              *gantt;
         MrpProject             *project;
 
         PlannerTtableChart     *chart;
@@ -59,8 +58,9 @@ static void       ttable_view_zoom_to_fit_cb          (GtkAction                
 static GtkWidget *ttable_view_create_widget           (PlannerView                  *view);
 static void       ttable_view_project_loaded_cb       (MrpProject                   *project,
 						       PlannerView                  *view);
-static void       ttable_view_tree_view_realize_cb    (GtkWidget                    *w,
-						       gpointer                      data);
+static void       ttable_view_tree_style_set_cb       (GtkWidget                    *tree,
+						       GtkStyle                     *prev_style,
+						       PlannerView                  *view);
 static void       ttable_view_row_expanded            (GtkTreeView                  *tree_view,
 						       GtkTreeIter                  *iter,
 						       GtkTreePath                  *path,
@@ -365,29 +365,37 @@ ttable_view_create_widget (PlannerView *view)
         gtk_paned_add1 (GTK_PANED (hpaned), left_frame);
         gtk_paned_add2 (GTK_PANED (hpaned), right_frame);
 
-        g_signal_connect (tree, "realize",
-                          G_CALLBACK (ttable_view_tree_view_realize_cb),
-                          chart);
-        g_signal_connect (tree, "row_expanded",
+        g_signal_connect (tree,
+			  "row_expanded",
                           G_CALLBACK (ttable_view_row_expanded), chart);
-        g_signal_connect (tree, "row_collapsed",
+        g_signal_connect (tree,
+			  "row_collapsed",
                           G_CALLBACK (ttable_view_row_collapsed), chart);
-        g_signal_connect (tree, "expand_all",
+        g_signal_connect (tree,
+			  "expand_all",
                           G_CALLBACK (ttable_view_expand_all), chart);
-        g_signal_connect (tree, "collapse_all",
+        g_signal_connect (tree,
+			  "collapse_all",
                           G_CALLBACK (ttable_view_collapse_all), chart);
-        g_signal_connect (chart, "status_updated",
+        g_signal_connect (chart,
+			  "status_updated",
                           G_CALLBACK (ttable_view_ttable_status_updated),
                           view);
-        g_signal_connect_after (tree, "size_request",
+        g_signal_connect_after (tree,
+				"size_request",
                                 G_CALLBACK
                                 (ttable_view_tree_view_size_request_cb),
                                 NULL);
-        g_signal_connect_after (tree, "scroll_event",
+        g_signal_connect_after (tree,
+				"scroll_event",
                                 G_CALLBACK
                                 (ttable_view_tree_view_scroll_event_cb),
                                 view);
-
+	g_signal_connect (tree,
+			  "style_set",
+			  G_CALLBACK (ttable_view_tree_style_set_cb),
+			  view);
+	
         gtk_tree_view_expand_all (GTK_TREE_VIEW (tree));
 
 	planner_ttable_chart_expand_all (PLANNER_TTABLE_CHART (chart));
@@ -403,6 +411,64 @@ ttable_view_ttable_status_updated (PlannerTtableChart *chart,
 				   PlannerView        *view)
 {
 	planner_window_set_status (view->main_window, message);
+}
+
+static void
+ttable_view_update_row_and_header_height (PlannerView *view)
+{
+	GtkTreeView        *tv = GTK_TREE_VIEW (view->priv->tree);
+	PlannerTtableChart *chart = view->priv->chart;
+	gint                row_height;
+	gint                header_height;
+	gint                height;
+	GList              *cols, *l;
+	GtkTreeViewColumn  *col;
+	GtkRequisition      req;
+
+	/* Get the row and header heights. */
+	cols = gtk_tree_view_get_columns (tv);
+	row_height = 0;
+	header_height = 0;
+
+	for (l = cols; l; l = l->next) {
+		col = l->data;
+
+		gtk_widget_size_request (col->button, &req);
+		header_height = MAX (header_height, req.height);
+
+		gtk_tree_view_column_cell_get_size (col,
+						    NULL,
+						    NULL,
+						    NULL,
+						    NULL,
+						    &height);
+		row_height = MAX (row_height, height);
+	}
+
+	/* Sync with the chart widget. */
+	g_object_set (chart,
+		      "header_height", header_height,
+		      "row_height", row_height,
+		      NULL);
+}
+
+static gboolean
+idle_update_heights (PlannerView *view)
+{
+	ttable_view_update_row_and_header_height (view);
+	return FALSE;
+}
+
+static void
+ttable_view_tree_style_set_cb (GtkWidget   *tree,
+			       GtkStyle    *prev_style,
+			       PlannerView *view)
+{
+	if (prev_style) {
+		g_idle_add ((GSourceFunc) idle_update_heights, view);
+	} else {
+		idle_update_heights (view);
+	}
 }
 
 static void
@@ -435,35 +501,6 @@ ttable_view_project_loaded_cb (MrpProject *project, PlannerView *view)
 
 	gtk_tree_view_expand_all (GTK_TREE_VIEW (view->priv->tree));
         planner_ttable_chart_expand_all (view->priv->chart);
-}
-
-static void
-ttable_view_tree_view_realize_cb (GtkWidget *w, gpointer data)
-{
-        GtkTreeView       *tv = GTK_TREE_VIEW (w);
-        GtkWidget         *chart = data;
-        gint               row_height;
-        gint               header_height;
-        gint               height;
-        GList             *cols, *l;
-        GtkTreeViewColumn *col;
-        GtkRequisition     req;
-
-        cols = gtk_tree_view_get_columns (tv);
-        row_height = 0;
-        header_height = 0;
-        for (l = cols; l; l = l->next) {
-                col = l->data;
-                gtk_widget_size_request (col->button, &req);
-                header_height = MAX (header_height, req.height);
-                gtk_tree_view_column_cell_get_size (col, NULL, NULL, NULL,
-                                                    NULL, &height);
-                row_height = MAX (row_height, height);
-        }
-        g_object_set (chart,
-		      "header_height", header_height,
-		      "row_height", row_height,
-		      NULL);
 }
 
 static void

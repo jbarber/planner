@@ -1,5 +1,13 @@
 2004-10-04  Richard Hult  <richard@imendio.com>
 
+	* src/planner-ttable-view.c: (ttable_view_create_widget),
+	(ttable_view_update_row_and_header_height), (idle_update_heights),
+	(ttable_view_tree_style_set_cb), (ttable_view_project_loaded_cb):
+	Resize header and row heights when the style changes, fixes bug
+	#151602.
+
+2004-10-04  Richard Hult  <richard@imendio.com>
+
 	* src/planner-window.c (window_open_cb): Add file filters, fixes
 	bug #149357.
 
