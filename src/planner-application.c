@@ -189,7 +189,7 @@ application_init (PlannerApplication *app)
 	egg_recent_model_set_filter_uri_schemes (priv->recent_model, "file", NULL);
 
 	g_object_set (priv->recent_model, "limit", 5, NULL);
-	
+
 	app->priv = priv;
 }
 

@@ -32,6 +32,9 @@ typedef enum {
 	PLANNER_TASK_POPUP_EDIT_RESOURCES
 } PlannerTaskPopupItem;
 
-GtkItemFactory * planner_task_popup_new (PlannerTaskTree *tree);
+GtkItemFactory *planner_task_popup_new               (PlannerTaskTree *tree);
+void            planner_task_popup_update_sensitivity (GtkItemFactory  *factory,
+						      GList           *tasks);
+
 
 #endif

@@ -1,5 +1,51 @@
 2005-02-13  Richard Hult  <richard@imendio.com>
 
+	* src/planner-gantt-row.c (gantt_row_event): Update sensitivity
+	for the context menu items.
+	(gantt_row_get_selected_tasks): Add.
+
+	* src/planner-task-tree.c (task_tree_tree_view_popup_menu): Update
+	sensitivity and position the menu better.
+
+	* src/planner-task-popup.c
+	(planner_task_popup_update_sensitivity): Add, use to consistently
+	set sensitivity in the task context menu.
+
+	* src/planner-task-dialog.c (task_dialog_update_sensitivity): Make
+	it possible to set complete and priority always, but not work or
+	duration or fixed duration for milestones.
+	(task_dialog_update_title): Simplify.
+
+	* libplanner/mrp-task-manager.c
+	(task_manager_get_task_units_intervals): Allow this to be called
+	for milestone tasks.
+	(task_manager_calculate_milestone_work_start): Add, gets the work
+	start for milestones.
+	(task_manager_calculate_task_finish): Use the above for milestone
+	tasks.
+
+	* libegg/recent-files/egg-recent-view-uimanager.c
+	(egg_recent_view_uimanager_set_list): Temporary fix for a crash.
+
+	* libplanner/mrp-task-manager.c
+	(task_manager_calculate_task_finish): Add to the comment and
+	special-case milestones so they get the correct start time.
+
+	* src/planner-task-tree.c (task_tree_duration_data_func)
+	(task_tree_work_data_func): Make duration/work not editable for
+	milestones.
+
+	* libplanner/mrp-task-manager.c
+	(mrp_task_manager_get_block_scheduling):
+	* libplanner/mrp-project.c (mrp_project_get_block_scheduling) 
+	(mrp_project_set_block_scheduling): Add.
+
+	* libplanner/mrp-object.c (mrp_object_set): Block scheduling
+	around the setting to avoid multiple rescheduling.
+
+	* src/planner-window.c (window_confirm_exit_run): Make the label
+	not selectable.
+
 	* libplanner/mrp-xsl.c (html_write): Don't crash if the stylesheet
 	is invalid.
 

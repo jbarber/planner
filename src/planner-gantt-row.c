@@ -213,6 +213,8 @@ static PlannerCmd *task_cmd_edit_property (PlannerWindow   *window,
 					   const gchar     *property,
 					   const GValue    *value);
 
+static GList *  gantt_row_get_selected_tasks (GtkTreeSelection *selection);
+
 
 static GnomeCanvasItemClass *parent_class;
 static guint                 signals[LAST_SIGNAL];
@@ -1514,6 +1516,7 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 				GtkTreeSelection  *selection;
 				GtkTreeView       *tree_view;
 				GtkTreeIter        iter;
+				GList             *tasks;
 				
 				chart = g_object_get_data (G_OBJECT (item->canvas), "chart");
 				tree = planner_gantt_chart_get_view (chart);
@@ -1534,6 +1537,10 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 					gtk_tree_selection_select_path (selection, path);
 					planner_task_tree_set_anchor (tree, path);
 				}
+
+				tasks = gantt_row_get_selected_tasks (selection);
+				planner_task_popup_update_sensitivity (priv->popup_factory, tasks);
+				g_list_free (tasks);
 				
 				gtk_item_factory_popup (priv->popup_factory,
 							event->button.x_root,
@@ -1855,8 +1862,6 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 				priv->task,
 				-1,
 				mrp_task_get_start (priv->task) + duration);
-
-			// koko
 
 			chart = g_object_get_data (G_OBJECT (item->canvas), "chart");
 			tree = planner_gantt_chart_get_view (chart);
@@ -2420,4 +2425,36 @@ task_cmd_edit_property (PlannerWindow   *window,
 					   cmd_base);
 	
 	return cmd_base;
+}
+
+static  void
+gantt_row_get_selected_func (GtkTreeModel *model,
+			     GtkTreePath  *path,
+			     GtkTreeIter  *iter,
+			     gpointer      data)
+{
+	GList   **list = data;
+	MrpTask  *task;
+
+	gtk_tree_model_get (model,
+			    iter,
+			    COL_TASK, &task,
+			    -1);
+	
+	*list = g_list_prepend (*list, task);
+}
+
+static GList *
+gantt_row_get_selected_tasks (GtkTreeSelection *selection)
+{
+	GList *list;
+	
+	list = NULL;
+	gtk_tree_selection_selected_foreach (selection,
+					     gantt_row_get_selected_func,
+					     &list);
+	
+	list = g_list_reverse (list);
+	
+	return list;
 }

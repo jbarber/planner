@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
- * Copyright (C) 2004      Imendio AB
+ * Copyright (C) 2004-2005 Imendio AB
  * Copyright (C) 2001-2003 CodeFactory AB
  * Copyright (C) 2001-2003 Richard Hult <richard@imendio.com>
  * Copyright (C) 2001-2002 Mikael Hallendal <micke@imendio.com>
@@ -1304,10 +1304,6 @@ task_manager_get_task_units_intervals (MrpTaskManager *manager,
 	guint               len;
 	gint                i;
 
-	if (mrp_task_get_task_type (task) == MRP_TASK_TYPE_MILESTONE) {
-		return NULL;
-	}
-	
 	priv = manager->priv;
 
 	assignments = mrp_task_get_assignments (task);
@@ -1409,9 +1405,85 @@ task_manager_get_task_units_intervals (MrpTaskManager *manager,
 	return g_list_reverse (unit_ivals);
 }
 
+static void
+task_manager_calculate_milestone_work_start (MrpTaskManager *manager,
+					     MrpTask        *task,
+					     mrptime         start)
+
+{
+	MrpTaskManagerPriv *priv;
+	mrptime             t;
+	mrptime             t1, t2;
+	mrptime             work_start;
+	GList              *unit_ivals, *l;
+	UnitsInterval      *unit_ival;
+	MrpTaskType         type;
+	
+	priv = manager->priv;
+
+	type = mrp_task_get_task_type (task);
+	g_return_if_fail (type == MRP_TASK_TYPE_MILESTONE);
+	
+	work_start = -1;
+	
+	t = mrp_time_align_day (start);
+
+	while (1) {
+		unit_ivals = task_manager_get_task_units_intervals (manager, task, t);
+
+		/* If we don't get anywhere in 100 days, then the calendar must
+		 * be broken, so we abort the scheduling of this task. It's not
+		 * the best solution but fixes the issue for now.
+		 */
+		if (t - start > (60*60*24*100)) {
+			break;
+		}
+
+		if (!unit_ivals) {
+			t += 60*60*24;
+			continue;
+		}
+		
+		for (l = unit_ivals; l; l = l->next) { 
+			unit_ival = l->data;
+
+			t1 = t + unit_ival->start;
+			t2 = t + unit_ival->end;
+			
+			/* Skip any intervals before the task starts. */
+			if (t2 < start) {
+				continue;
+			}
+
+			/* Don't add time before the start of the task. */
+			t1 = MAX (t1, start);
+
+			work_start = t1;
+			break;
+		}
+
+		if (work_start != -1) {
+			break;
+		}
+		
+		t += 60*60*24;
+	}
+
+	if (work_start == -1) {
+		work_start = start;
+	}
+	
+	imrp_task_set_work_start (task, work_start);
+	
+	g_list_foreach (unit_ivals, (GFunc) g_free, NULL);
+	g_list_free (unit_ivals);
+}
+
 /* Calculate the finish time from the work needed for the task, and the effort
  * that the allocated resources add to the task. Uses the project calendar if no
- * resources are allocated.
+ * resources are allocated. This function also sets the work_start property of
+ * the task, which is the first time that actually has work scheduled, this can
+ * differ from the start if start is inside a non-work period.
  */
 static mrptime
 task_manager_calculate_task_finish (MrpTaskManager *manager,
@@ -1439,25 +1511,23 @@ task_manager_calculate_task_finish (MrpTaskManager *manager,
 		return 0;
 	}
 
+	/* Milestone tasks can be special cased, no duration. */
 	type = mrp_task_get_task_type (task);
-
-	/* FIXME: Commented out for now. */
-	if (0 && type == MRP_TASK_TYPE_MILESTONE) {
-		if (duration) {
-			*duration = 0;
-		}
+	if (type == MRP_TASK_TYPE_MILESTONE) {
+		*duration = 0;
+		task_manager_calculate_milestone_work_start (manager, task, start);
 		return start;
 	}
 	
 	work = mrp_task_get_work (task);
-
 	sched = mrp_task_get_sched (task);
+
 	if (sched == MRP_TASK_SCHED_FIXED_WORK) {
 		*duration = 0;
 	} else {
 		*duration = mrp_task_get_duration (task);
 	}
-	
+
 	effort = 0;
 
 	finish = start;
@@ -1544,8 +1614,12 @@ task_manager_calculate_task_finish (MrpTaskManager *manager,
 	}
 
 	if (type == MRP_TASK_TYPE_MILESTONE) {
-		imrp_task_set_work_start (task, start);
+		//g_print ("milestone, start ");
+		//mrp_time_debug_print (start);
+		//imrp_task_set_work_start (task, work_start);
 	} else { 
+		//g_print ("task, start      ");
+		//mrp_time_debug_print (work_start);
 		imrp_task_set_work_start (task, work_start);
 	}
 	
@@ -1812,6 +1886,14 @@ mrp_task_manager_set_block_scheduling (MrpTaskManager *manager, gboolean block)
 	if (!block) {
 		mrp_task_manager_recalc (manager, TRUE);
 	}
+}
+
+gboolean
+mrp_task_manager_get_block_scheduling (MrpTaskManager *manager)
+{
+	g_return_val_if_fail (MRP_IS_TASK_MANAGER (manager), FALSE);
+
+	return manager->priv->block_scheduling;
 }
 
 void

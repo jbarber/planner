@@ -200,7 +200,9 @@ egg_recent_view_uimanager_set_list (EggRecentViewUIManager *view, GList *list)
 			g_free (tooltip);
 		}
 		egg_recent_item_ref (item);
-		g_object_set_data_full (G_OBJECT (action), "egg_recent_uri", item, (GFreeFunc)egg_recent_item_unref);
+
+		/* Comment this out, since it crashes when setting a new model. */
+		/*g_object_set_data_full (G_OBJECT (action), "egg_recent_uri", item, (GFreeFunc)egg_recent_item_unref);*/
 
 		if (view->action_callback != NULL) {
 			GClosure *closure;

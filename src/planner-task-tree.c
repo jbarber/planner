@@ -1180,31 +1180,59 @@ task_tree_task_removed_cb (PlannerGanttModel *model,
 }
 
 static void
-task_tree_tree_view_popup_menu (GtkWidget  *widget,
+task_tree_tree_view_popup_menu (GtkWidget       *widget,
 				PlannerTaskTree *tree)
 {
-	gint x, y;
+	GList             *tasks;
+	GtkTreePath       *path;
+	GtkTreeViewColumn *column;
+	GdkRectangle       rect;
+	gint               x, y;
 
-	gdk_window_get_pointer (widget->window, &x, &y, NULL);
+	tasks = planner_task_tree_get_selected_tasks (tree);
+	planner_task_popup_update_sensitivity (tree->priv->popup_factory, tasks);
+	g_list_free (tasks);
+	
+	gtk_tree_view_get_cursor (GTK_TREE_VIEW (tree), &path, &column);
+	gtk_tree_view_get_cell_area (GTK_TREE_VIEW (tree),
+				     path,
+				     column,
+				     &rect);
 
+	x = rect.x;
+	y = rect.y;
+
+	/* Note: this is not perfect, but good enough for now. */
+	gdk_window_get_root_origin (GTK_WIDGET (tree)->window, &x, &y);
+	rect.x += x;
+	rect.y += y;
+
+	gtk_widget_translate_coordinates (GTK_WIDGET (tree),
+					  gtk_widget_get_toplevel (GTK_WIDGET (tree)),
+					  rect.x, rect.y,
+					  &x, &y);
+
+	/* Offset so it's not overlapping the cell. */
+	rect.x = x + 20;
+	rect.y = y + 20;
+	
 	gtk_item_factory_popup (tree->priv->popup_factory,
-				x, y,
+				rect.x, rect.y,
 				0,
 				gtk_get_current_event_time ());
 }
 
 static gboolean
-task_tree_tree_view_button_press_event (GtkTreeView     *tree_view,
+task_tree_tree_view_button_press_event (GtkTreeView     *tv,
 					GdkEventButton  *event,
 					PlannerTaskTree *tree)
 {
 	GtkTreePath         *path;
-	GtkTreeView         *tv;
 	PlannerTaskTreePriv *priv;
 	GtkItemFactory      *factory;
 	GtkTreeIter          iter;
+	GList               *tasks;
 	
-	tv = GTK_TREE_VIEW (tree);
 	priv = tree->priv;
 	factory = priv->popup_factory;
 
@@ -1213,22 +1241,15 @@ task_tree_tree_view_button_press_event (GtkTreeView     *tree_view,
 
 		/* Select our row. */
 		if (gtk_tree_view_get_path_at_pos (tv, event->x, event->y, &path, NULL, NULL, NULL)) {
-			gtk_tree_model_get_iter (gtk_tree_view_get_model (tree_view), &iter, path);
-			if (!gtk_tree_selection_iter_is_selected (gtk_tree_view_get_selection (tree_view), &iter)) {
+			gtk_tree_model_get_iter (gtk_tree_view_get_model (tv), &iter, path);
+			if (!gtk_tree_selection_iter_is_selected (gtk_tree_view_get_selection (tv), &iter)) {
 				gtk_tree_selection_unselect_all (gtk_tree_view_get_selection (tv));
 				gtk_tree_selection_select_path (gtk_tree_view_get_selection (tv), path);
 			}
-			
-			gtk_widget_set_sensitive (
-				gtk_item_factory_get_widget_by_action (factory, PLANNER_TASK_POPUP_SUBTASK), TRUE);
-			gtk_widget_set_sensitive (
-				gtk_item_factory_get_widget_by_action (factory, PLANNER_TASK_POPUP_REMOVE), TRUE);
-			gtk_widget_set_sensitive (
-				gtk_item_factory_get_widget_by_action (factory, PLANNER_TASK_POPUP_UNLINK), TRUE);
-			gtk_widget_set_sensitive (
-				gtk_item_factory_get_widget_by_action (factory, PLANNER_TASK_POPUP_EDIT_RESOURCES), TRUE);
-			gtk_widget_set_sensitive (
-				gtk_item_factory_get_widget_by_action (factory, PLANNER_TASK_POPUP_EDIT_TASK), TRUE);
+
+			tasks = planner_task_tree_get_selected_tasks (tree);
+			planner_task_popup_update_sensitivity (factory, tasks);
+			g_list_free (tasks);
 			
 			planner_task_tree_set_anchor (tree, path);
 			
@@ -1421,6 +1442,7 @@ task_tree_duration_data_func (GtkTreeViewColumn *tree_column,
 	gchar               *str;
 	gint                 weight;
 	gboolean             editable;
+	MrpTask             *task;
 
 	task_tree = PLANNER_TASK_TREE (data);
 	priv = task_tree->priv;
@@ -1430,15 +1452,21 @@ task_tree_duration_data_func (GtkTreeViewColumn *tree_column,
 			    COL_DURATION, &duration,
 			    COL_WEIGHT, &weight,
 			    COL_EDITABLE, &editable,
+			    COL_TASK, &task,
 			    -1);
 
-	calendar = mrp_project_get_calendar (priv->project);
+	if (mrp_task_get_task_type (task) == MRP_TASK_TYPE_MILESTONE) {
+		editable = FALSE;
+		str = g_strdup ("");
+	} else {
+		calendar = mrp_project_get_calendar (priv->project);
+		
+		hours_per_day = mrp_calendar_day_get_total_work (
+			calendar, mrp_day_get_work ()) / (60*60);
+		
+		str = planner_format_duration (duration, hours_per_day);
+	}
 	
-	hours_per_day = mrp_calendar_day_get_total_work (
-		calendar, mrp_day_get_work ()) / (60*60);
-	
-	str = planner_format_duration (duration, hours_per_day);
-
 	g_object_set (cell, 
 		      "text", str,
 		      "weight", weight,
@@ -1569,16 +1597,21 @@ task_tree_work_data_func (GtkTreeViewColumn *tree_column,
 
 	type = mrp_task_get_task_type (task);
 
-	g_object_set (cell, 
-		      "weight", weight,
-		      "editable", editable,
-		      NULL);
-
 	if (type == MRP_TASK_TYPE_MILESTONE) {
-		g_object_set (cell, "text", "", NULL);
+		g_object_set (cell, 
+			      "weight", weight,
+			      "editable", FALSE,
+			      "text", "",
+			      NULL);
 	} else {
 		gchar *str = planner_format_duration (work, hours_per_day);
-		g_object_set (cell, "text", str, NULL);
+		
+		g_object_set (cell, 
+			      "weight", weight,
+			      "editable", editable,
+			      "text", str,
+			      NULL);
+
 		g_free (str);
 	}
 }

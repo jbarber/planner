@@ -1263,6 +1263,7 @@ window_confirm_exit_run (PlannerWindow *window)
 	g_object_set (GTK_MESSAGE_DIALOG (dialog)->label,
 		      "use-markup", TRUE,
 		      "wrap", FALSE,
+		      "selectable", FALSE,
 		      NULL);
 
 	uri = mrp_project_get_uri (priv->project);

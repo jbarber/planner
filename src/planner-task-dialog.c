@@ -2785,43 +2785,38 @@ task_dialog_update_sensitivity (DialogData *data)
 {
 	MrpTaskType  type;
 	MrpTaskSched sched;
-	gboolean     leaf, milestone, fixed, sensitive;
-	
-	leaf = (mrp_task_get_n_children (data->task) == 0);
+	gboolean     leaf, milestone, fixed;
 
-	g_object_get (data->task, "type", &type, NULL);
+	leaf = (mrp_task_get_n_children (data->task) == 0);
+	
+	type = mrp_task_get_task_type (data->task);
 	milestone = (type == MRP_TASK_TYPE_MILESTONE);
 
-	g_object_get (data->task, "sched", &sched, NULL);
+	sched = mrp_task_get_sched (data->task);
 	fixed = (sched == MRP_TASK_SCHED_FIXED_DURATION);
 
-	sensitive = leaf && (type != MRP_TASK_TYPE_MILESTONE);
-
 	gtk_widget_set_sensitive (data->milestone_checkbutton, leaf);
-	gtk_widget_set_sensitive (data->fixed_checkbutton, leaf);
+
+	gtk_widget_set_sensitive (data->fixed_checkbutton, leaf && !milestone);
 	
-	gtk_widget_set_sensitive (data->duration_spinbutton, sensitive && fixed);
-	gtk_widget_set_sensitive (data->complete_spinbutton, sensitive);
-	gtk_widget_set_sensitive (data->priority_spinbutton, sensitive);
+	gtk_widget_set_sensitive (data->duration_spinbutton, leaf && !milestone && fixed);
+	gtk_widget_set_sensitive (data->work_spinbutton, leaf && !milestone);
 }
 
 static void
 task_dialog_update_title (DialogData *data)
 {
-	gchar *title;
-	gchar *name;
+	const gchar *name;
+	gchar       *title;
 
-	g_object_get (data->task, "name", &name, NULL);
+	name = mrp_task_get_name (data->task);
 
 	if (!name || strlen (name) == 0) {
 		title = g_strdup (_("Edit task properties"));
 	} else {
 		title = g_strconcat (name, " - ", _("Edit task properties"), NULL);
 	}
-
 	gtk_window_set_title (GTK_WINDOW (data->dialog), title);
-
-	g_free (name);
 	g_free (title);
 }	
 

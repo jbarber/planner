@@ -73,6 +73,7 @@ void            mrp_task_manager_traverse             (MrpTaskManager       *man
 						       gpointer              user_data);
 void            mrp_task_manager_set_block_scheduling (MrpTaskManager       *manager,
 						       gboolean              block);
+gboolean        mrp_task_manager_get_block_scheduling (MrpTaskManager       *manager);
 void            mrp_task_manager_rebuild              (MrpTaskManager       *manager);
 void            mrp_task_manager_recalc               (MrpTaskManager       *manager,
 						       gboolean              force);

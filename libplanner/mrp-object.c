@@ -386,12 +386,22 @@ mrp_object_set (gpointer     pobject,
 {  
 	MrpObject *object = MRP_OBJECT (pobject);
 	va_list    var_args;
+	gboolean   blocked = FALSE;
   
 	g_return_if_fail (MRP_IS_OBJECT (object));
-  
+
+	if (object->priv->project) {
+		blocked = mrp_project_get_block_scheduling (object->priv->project);
+		mrp_project_set_block_scheduling (object->priv->project, TRUE);
+	}
+	
 	va_start (var_args, first_property_name);
 	mrp_object_set_valist (object, first_property_name, var_args);
 	va_end (var_args);
+
+	if (object->priv->project) {
+		mrp_project_set_block_scheduling (object->priv->project, blocked);
+	}
 }
 
 /**

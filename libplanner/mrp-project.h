@@ -142,6 +142,9 @@ MrpCalendar *    mrp_project_get_root_calendar        (MrpProject           *pro
 MrpCalendar *    mrp_project_get_calendar             (MrpProject           *project);
 MrpDay *         mrp_project_get_calendar_day_by_id   (MrpProject           *project,
 						       gint                  id);
+void             mrp_project_set_block_scheduling     (MrpProject           *project,
+						       gboolean              block);
+gboolean         mrp_project_get_block_scheduling     (MrpProject           *project);
 
 
 #endif /* __MRP_PROJECT_H__ */

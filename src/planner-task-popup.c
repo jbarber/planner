@@ -193,3 +193,54 @@ planner_task_popup_new (PlannerTaskTree *tree)
     
 	return item_factory;
 }
+
+static void
+task_popup_set_sensitive (GtkItemFactory *factory, gint id, gboolean sensitive)
+{
+	GtkWidget *widget;
+
+	widget = gtk_item_factory_get_widget_by_action (factory, id);
+	gtk_widget_set_sensitive (widget, sensitive);
+}
+
+void
+planner_task_popup_update_sensitivity (GtkItemFactory *factory,
+				       GList          *tasks)
+{
+	gint          length;
+	MrpTask      *task;
+	MrpTaskType   type;
+	gboolean      milestone;
+	
+	length = g_list_length (tasks);
+
+	/* Can always insert task. */
+	task_popup_set_sensitive (factory, PLANNER_TASK_POPUP_INSERT, TRUE);
+	
+	/* Nothing else when nothing is selected. */
+	if (length == 0) {
+		task_popup_set_sensitive (factory, PLANNER_TASK_POPUP_SUBTASK, FALSE);
+		task_popup_set_sensitive (factory, PLANNER_TASK_POPUP_REMOVE, FALSE);
+		task_popup_set_sensitive (factory, PLANNER_TASK_POPUP_UNLINK, FALSE);
+		task_popup_set_sensitive (factory, PLANNER_TASK_POPUP_EDIT_TASK, FALSE);
+		task_popup_set_sensitive (factory, PLANNER_TASK_POPUP_EDIT_RESOURCES, FALSE);
+		return;
+	}
+
+	/* Can only insert subtask when one !milestone is selected. */
+	if (length == 1) {
+		task = tasks->data;
+
+		type = mrp_task_get_task_type (task);
+		milestone = (type == MRP_TASK_TYPE_MILESTONE);
+		task_popup_set_sensitive (factory, PLANNER_TASK_POPUP_SUBTASK, !milestone);
+	} else {
+		task_popup_set_sensitive (factory, PLANNER_TASK_POPUP_SUBTASK, FALSE);
+	}
+
+	/* The rest are always sensitive when one more more tasks are selected. */
+	task_popup_set_sensitive (factory, PLANNER_TASK_POPUP_REMOVE, TRUE);
+	task_popup_set_sensitive (factory, PLANNER_TASK_POPUP_UNLINK, TRUE);
+	task_popup_set_sensitive (factory, PLANNER_TASK_POPUP_EDIT_TASK, TRUE);
+	task_popup_set_sensitive (factory, PLANNER_TASK_POPUP_EDIT_RESOURCES, TRUE);
+}

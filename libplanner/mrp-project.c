@@ -2266,3 +2266,28 @@ project_set_calendar (MrpProject  *project,
 
 	mrp_task_manager_recalc (priv->task_manager, TRUE);
 }
+
+void
+mrp_project_set_block_scheduling (MrpProject *project, gboolean block)
+{
+	MrpProjectPriv *priv;
+
+	g_return_if_fail (MRP_IS_PROJECT (project));
+
+	priv = project->priv;
+
+	mrp_task_manager_set_block_scheduling (priv->task_manager, block);
+}
+
+gboolean
+mrp_project_get_block_scheduling (MrpProject *project)
+{
+	MrpProjectPriv *priv;
+
+	g_return_val_if_fail (MRP_IS_PROJECT (project), FALSE);
+
+	priv = project->priv;
+	
+	return mrp_task_manager_get_block_scheduling (priv->task_manager);
+}
+
