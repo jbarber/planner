@@ -35,7 +35,7 @@ mvl_load (const gchar *file)
 
 	view = g_object_new (PLANNER_TYPE_VIEW, NULL);
 	
-	view->handle = g_module_open (file, G_MODULE_BIND_LAZY);
+	view->handle = g_module_open (file, 0);
 	
 	if (view->handle == NULL) {
 		g_warning (_("Could not open view plugin file '%s'\n"),

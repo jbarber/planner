@@ -34,7 +34,7 @@ mpl_load (const gchar *file)
 
 	plugin = g_object_new (PLANNER_TYPE_PLUGIN, NULL);
 	
-	plugin->handle = g_module_open (file, G_MODULE_BIND_LAZY);
+	plugin->handle = g_module_open (file, 0);
 	
 	if (plugin->handle == NULL) {
 		g_warning (_("Could not open plugin file '%s'\n"),

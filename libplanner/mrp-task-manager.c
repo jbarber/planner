@@ -1584,7 +1584,6 @@ task_manager_calculate_task_finish (MrpTaskManager *manager,
 
 					/* Subtract the spill. */
 					*duration -= floor (0.5 + (effort + delta - work) / unit_ival->units * 100.0);
-
 					goto done;
 				}
 			}
@@ -1613,7 +1612,7 @@ task_manager_calculate_task_finish (MrpTaskManager *manager,
 		work_start = start;
 	}
 	imrp_task_set_work_start (task, work_start);
-	
+
 	g_list_foreach (unit_ivals, (GFunc) g_free, NULL);
 	g_list_free (unit_ivals);
 
@@ -1816,7 +1815,7 @@ task_manager_do_backward_pass (MrpTaskManager *manager)
 			relation = s->data;
 			successor = mrp_relation_get_successor (relation);
 			
-			child = mrp_task_get_first_child(successor);
+			child = mrp_task_get_first_child (successor);
 			if (child) {
 				/* If successor has children go through them
 				 * instead of the successor itself.
@@ -1826,14 +1825,14 @@ task_manager_do_backward_pass (MrpTaskManager *manager)
 					
 					t2 = mrp_task_get_latest_start (successor) -
 						mrp_relation_get_lag (relation);
-			
+
 					t1 = MIN (t1, t2);
 				}
 			} else {
 				/* No children, check the real successor. */
 				t2 = mrp_task_get_latest_start (successor) -
 					mrp_relation_get_lag (relation);
-				
+
 				t1 = MIN (t1, t2);
 			}
 		}
@@ -1846,11 +1845,25 @@ task_manager_do_backward_pass (MrpTaskManager *manager)
 		duration = mrp_task_get_finish (task) - mrp_task_get_start (task);
 		t1 -= duration;
 		imrp_task_set_latest_start (task, t1);
-			
+
 		t2 = mrp_task_get_start (task);
 
 		was_critical = mrp_task_get_critical (task);
 		critical = (t1 == t2);
+
+		/* FIXME: Bug in critical path for A -> B when B is SNET.
+		 *
+		 * The reason is that latest start for B becomes 00:00 instead
+		 * of 17:00 the day before. So the slack becomes 7 hours
+		 * (24-17).
+		 */
+#if 0
+		g_print ("Task %s:\n", mrp_task_get_name (task));
+		g_print ("  latest start   : "); mrp_time_debug_print (mrp_task_get_latest_start (task));
+		g_print ("  latest finish  : "); mrp_time_debug_print (mrp_task_get_latest_finish (task));
+	
+#endif
+		
 		if (was_critical != critical) {
 			g_object_set (task, "critical", critical, NULL);
 		}

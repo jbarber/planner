@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
- * Copyright (C) 2004 Imendio AB
+ * Copyright (C) 2004-2005 Imendio AB
  * Copyright (C) 2001-2003 CodeFactory AB
  * Copyright (C) 2001-2003 Richard Hult <richard@imendio.com>
  * Copyright (C) 2001-2002 Mikael Hallendal <micke@imendio.com>
@@ -53,7 +53,7 @@ struct _MrpCalendarPriv {
 	
 	/* Tree structure */
 	MrpCalendar *parent;
-	GList      *children;
+	GList       *children;
 	
 	/* Working time intervals set for day types in this calendar */
 	GHashTable  *day_intervals;
@@ -71,31 +71,32 @@ struct _MrpInterval
         guint           ref_count;
 };
 
-static void        calendar_class_init           (MrpCalendarClass *class);
-static void        calendar_init                 (MrpCalendar      *module);
-static void        calendar_finalize             (GObject          *object);
-static void        calendar_set_property         (GObject          *object,
-						  guint             prop_id,
-						  const GValue     *value,
-						  GParamSpec       *pspec);
-static void        calendar_get_property         (GObject          *object,
-						  guint             prop_id,
-						  GValue           *value,
-						  GParamSpec       *pspec);
-static MrpDay *    calendar_get_default_day      (MrpCalendar      *calendar, 
-						  mrptime           date,
-						  gboolean          derive);
-static MrpDay *    calendar_get_day              (MrpCalendar      *calendar,
-						  mrptime           date,
-						  gboolean          derive);
-static MrpCalendar *  calendar_new               (const gchar      *name,
-						  MrpCalendar      *parent);
-static void        calendar_add_child            (MrpCalendar      *parent,
-						  MrpCalendar      *child);
-static void        calendar_reparent             (MrpCalendar      *new_parent,
-						  MrpCalendar      *child);
-static void        calendar_emit_changed         (MrpCalendar      *calendar);
-static GList *    calendar_clean_intervals      (GList           *list);
+static void         calendar_class_init      (MrpCalendarClass *class);
+static void         calendar_init            (MrpCalendar      *module);
+static void         calendar_finalize        (GObject          *object);
+static void         calendar_set_property    (GObject          *object,
+					      guint             prop_id,
+					      const GValue     *value,
+					      GParamSpec       *pspec);
+static void         calendar_get_property    (GObject          *object,
+					      guint             prop_id,
+					      GValue           *value,
+					      GParamSpec       *pspec);
+static MrpDay *     calendar_get_default_day (MrpCalendar      *calendar,
+					      mrptime           date,
+					      gboolean          derive);
+static MrpDay *     calendar_get_day         (MrpCalendar      *calendar,
+					      mrptime           date,
+					      gboolean          derive);
+static MrpCalendar *calendar_new             (const gchar      *name,
+					      MrpCalendar      *parent);
+static void         calendar_add_child       (MrpCalendar      *parent,
+					      MrpCalendar      *child);
+static void         calendar_reparent        (MrpCalendar      *new_parent,
+					      MrpCalendar      *child);
+static void         calendar_emit_changed    (MrpCalendar      *calendar);
+static GList *      calendar_clean_intervals (GList            *list);
+
 
 
 static MrpObjectClass *parent_class;
@@ -195,10 +196,15 @@ calendar_finalize (GObject *object)
 	calendar = MRP_CALENDAR (object);
 	priv     = calendar->priv;
 
-	/* FIXME: free the hash tables, etc... */
+	g_hash_table_destroy (priv->days);
+	g_hash_table_destroy (priv->day_intervals);
+	
+	g_list_foreach (priv->children, (GFunc) g_object_unref, NULL);
+	g_list_free (priv->children);
 
-	g_free (calendar->priv);
-	calendar->priv = NULL;
+	g_free (priv->name);
+	
+	g_free (priv);
 
 	if (G_OBJECT_CLASS (parent_class)->finalize) {
 		(* G_OBJECT_CLASS (parent_class)->finalize) (object);
@@ -663,10 +669,10 @@ mrp_calendar_set_name (MrpCalendar *calendar, const gchar *name)
 void
 mrp_calendar_day_set_intervals (MrpCalendar *calendar,
 				MrpDay      *day,
-				GList      *intervals)
+				GList       *intervals)
 {
 	MrpCalendarPriv *priv;
-	GList          *list;
+	GList           *list;
 
 	g_return_if_fail (MRP_IS_CALENDAR (calendar));
 
@@ -945,17 +951,6 @@ mrp_calendar_get_day (MrpCalendar *calendar,
 	return day;
 }
 
-/* Interval */
-static void     interval_free (MrpInterval *interval);
-
-static void
-interval_free (MrpInterval *interval)
-{
-        g_return_if_fail (interval != NULL);
-        
-        g_free (interval);
-}
-
 /**
  * mrp_interval_new:
  * @start: an #mrptime specifying the start of the interval
@@ -1038,8 +1033,8 @@ mrp_interval_unref (MrpInterval *interval)
         interval->ref_count--;
         
         if (interval->ref_count <= 0) {
-                interval_free (interval);
-        }
+		g_free (interval);
+	}
 }
 
 /**

@@ -1,4 +1,17 @@
-2005-02-21  Richard Hult  <richard@imendio.com>
+2005-02-24  Richard Hult  <richard@imendio.com>
+
+	* src/planner-view-loader.c (mvl_load): Don't load lazily.
+	* src/planner-plugin-loader.c (mpl_load): Likewise.
+
+	* src/Makefile.am: Move the gantt background files to the shared
+	gantt/task lib.
+
+	* libplanner/mrp-calendar.c (calendar_finalize): Fix leaks.
+
+	* configure.in: Bump.
+
+	* libplanner/mrp-task-manager.c (task_manager_do_backward_pass):
+	Add comment about a bug.
 
 	* src/planner-task-dialog.c (task_dialog_update_schedule_label):
 	Fix compiler warning.

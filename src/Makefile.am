@@ -132,8 +132,6 @@ view_LTLIBRARIES = libgantt-view.la libtask-view.la libresource-view.la libtimet
 libgantt_view_la_SOURCES = \
 	planner-relation-arrow.c	\
 	planner-relation-arrow.h	\
-	planner-gantt-background.c	\
-	planner-gantt-background.h	\
 	planner-gantt-chart.c		\
 	planner-gantt-chart.h		\
 	planner-gantt-print.c		\
@@ -183,6 +181,8 @@ libgantt_task_la_LIBADD = libutil.la
 libgantt_task_la_LDFLAGS = -avoid-version
 
 libgantt_task_la_SOURCES = \
+	planner-gantt-background.c	\
+	planner-gantt-background.h	\
 	planner-gantt-header.c		\
 	planner-gantt-header.h		\
 	planner-gantt-model.c		\
