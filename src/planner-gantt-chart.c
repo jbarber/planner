@@ -172,7 +172,8 @@ static TreeNode *  gantt_chart_insert_task              (PlannerGanttChart      
 static PlannerRelationArrow *
 gantt_chart_add_relation                                (PlannerGanttChart       *chart,
 							 TreeNode           *task,
-							 TreeNode           *predecessor);
+							 TreeNode           *predecessor,
+							 MrpRelationType    type);
 static void        gantt_chart_set_scroll_region        (PlannerGanttChart       *chart,
 							 gdouble             x1,
 							 gdouble             y1,
@@ -786,6 +787,7 @@ gantt_chart_build_relations (PlannerGanttChart *chart,
 	TreeNode         *predecessor_node;
 	GList            *relations, *l;
 	PlannerRelationArrow  *arrow;
+	MrpRelationType	      rel_type;
 
 	priv = chart->priv;
 	
@@ -802,7 +804,12 @@ gantt_chart_build_relations (PlannerGanttChart *chart,
 			task_node = g_hash_table_lookup (hash, task);
 			predecessor_node = g_hash_table_lookup (hash, predecessor);
 
-			arrow = gantt_chart_add_relation (chart, task_node, predecessor_node);
+			rel_type = mrp_relation_get_relation_type(relation);
+
+			arrow = gantt_chart_add_relation (chart, 
+							  task_node, 
+							  predecessor_node, 
+							  rel_type);
 
 			g_hash_table_insert (priv->relation_hash, relation, arrow);
 		}
@@ -1034,10 +1041,12 @@ gantt_chart_insert_task (PlannerGanttChart *chart,
 static PlannerRelationArrow *
 gantt_chart_add_relation (PlannerGanttChart *chart,
 			  TreeNode     *task,
-			  TreeNode     *predecessor)
+			  TreeNode     		*predecessor,
+			  MrpRelationType 	type)
 {
 	return planner_relation_arrow_new (PLANNER_GANTT_ROW (task->item),
-				      PLANNER_GANTT_ROW (predecessor->item));
+				      PLANNER_GANTT_ROW (predecessor->item),
+				      type);
 }
 
 static void
@@ -1161,6 +1170,7 @@ gantt_chart_relation_added (MrpTask      *task,
 	TreeNode        *predecessor_node;
 	PlannerRelationArrow *arrow;
 	MrpTask         *predecessor;
+	MrpRelationType	 rel_type;
 
 	predecessor = mrp_relation_get_predecessor (relation);
 	
@@ -1180,9 +1190,12 @@ gantt_chart_relation_added (MrpTask      *task,
 	predecessor_node = gantt_chart_tree_node_at_path (chart->priv->tree,
 							  predecessor_path);
 	
+	rel_type = mrp_relation_get_relation_type(relation);
+	
 	arrow = gantt_chart_add_relation (chart,
 					  task_node,
-					  predecessor_node);
+					  predecessor_node,
+					  rel_type);
 
 	g_hash_table_insert (chart->priv->relation_hash, relation, arrow);
 }

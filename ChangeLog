@@ -1,5 +1,14 @@
 2004-04-06  Richard Hult  <richard@imendio.com>
 
+	* libplanner/mrp-task-manager.c:
+	* src/planner-gantt-chart.c:
+	* src/planner-relation-arrow.c:
+	* src/planner-task-dialog.c: (task_dialog_pred_cell_edited): Fix
+	bug #129140, implement remaining task constraint types. Patch from
+	Corey Schuhen.
+
+2004-04-06  Richard Hult  <richard@imendio.com>
+
 	* data/ui/gantt-view.ui:
 	* data/ui/resource-view.ui:
 	* data/ui/task-view.ui:

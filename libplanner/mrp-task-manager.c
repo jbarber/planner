@@ -854,6 +854,39 @@ task_manager_sort_tree (MrpTaskManager *manager)
 	/*dump_task_tree (root);*/
 }
 
+/* Calcluate the earliest start time that a particular predesessor relation
+ * allows given.
+ */
+static mrptime
+task_manager_calc_relation (MrpTask	*task,
+			    MrpRelation	*relation,
+			    MrpTask	*predecessor)
+{
+	switch (mrp_relation_get_relation_type (relation)) {
+	case MRP_RELATION_FF:   /* finish-to-finish */
+		return mrp_task_get_finish (predecessor) +
+			mrp_relation_get_lag (relation) -
+			(mrp_task_get_finish (task) -
+			 mrp_task_get_start (task));
+		
+	case MRP_RELATION_SS:   /* start-to-start */
+		return mrp_task_get_start (predecessor) +
+			mrp_relation_get_lag (relation);
+		
+	case MRP_RELATION_SF:   /* start-to-finish */
+		return mrp_task_get_start (predecessor) +
+			mrp_relation_get_lag (relation) -
+			(mrp_task_get_finish (task) -
+			 mrp_task_get_start (task));
+		
+	case MRP_RELATION_NONE: /* unset */
+	case MRP_RELATION_FS:   /* finish-to-start */
+	default:
+		return mrp_task_get_finish (predecessor) +
+			mrp_relation_get_lag (relation);
+	}
+}
+
 /* Calculate the start time of the task by finding the latest finish of it's
  * predecessors (plus any lag). Also take constraints into consideration.
  */
@@ -868,7 +901,7 @@ task_manager_calculate_task_start (MrpTaskManager *manager,
 	MrpTask            *predecessor;
 	mrptime             project_start;
 	mrptime             start;
-	mrptime             finish;
+	mrptime             dep_start;
 	MrpConstraint       constraint;
 
 	priv = manager->priv;
@@ -883,11 +916,13 @@ task_manager_calculate_task_start (MrpTaskManager *manager,
 			relation = l->data;
 			predecessor = mrp_relation_get_predecessor (relation);
 
-			finish = mrp_task_get_finish (predecessor) +
-				mrp_relation_get_lag (relation);
+			dep_start = task_manager_calc_relation (task,
+								relation,
+								predecessor);
 			
-			start = MAX (start, finish);
+			start = MAX (start, dep_start);
 		}
+
 		tmp_task = mrp_task_get_parent (tmp_task);
 	}
 

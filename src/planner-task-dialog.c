@@ -1039,13 +1039,48 @@ task_dialog_pred_cell_edited (GtkCellRendererText *cell,
 	case PREDECESSOR_COL_TYPE:
 		planner_cell = PLANNER_CELL_RENDERER_LIST (cell);
 
+		{	
+			GError *error = NULL;
+			mrp_task_remove_predecessor (task_main, task_pred);
+
+			if (!mrp_task_add_predecessor (task_main,
+						       task_pred,
+						       planner_cell->selected_index + 1,
+						       lag,
+						       &error)) {
+				GtkWidget *dialog;
+				
+				dialog = gtk_message_dialog_new (
+					NULL,
+					GTK_DIALOG_DESTROY_WITH_PARENT,
+					GTK_MESSAGE_ERROR,
+					GTK_BUTTONS_OK,
+					"%s", error->message);
+
+				gtk_dialog_run (GTK_DIALOG (dialog));
+				gtk_widget_destroy (dialog);
+				
+				g_error_free (error);
+
+				/* Restore the previous state. */
+				mrp_task_add_predecessor (task_main,
+							  task_pred, 
+							  type,
+							  lag,
+							  NULL);
+			}
+		}
 		/* The index + 1 happens to be the same as the enum,
 		 * we should probably do this some other way.
 		 */
+		
+		relation = mrp_task_get_relation (task_main, task_pred);
 		mrp_object_set (relation,
 				"type",
 				planner_cell->selected_index + 1,
 				NULL);
+				
+
 		break;
 
 	case PREDECESSOR_COL_LAG:

@@ -36,6 +36,38 @@
 
 /*
 
+SS:
+
+  1:      A 
+  	 +--XXXXXX
+       B | 
+	 +---XXXXX
+          C
+	  
+FF:
+
+  1:               A 
+  	   XXXXXX----+
+	             | B
+	     XXXXX---+
+		   C
+		   
+SF:
+
+  1:                       A (we have a maximum value for A)
+  	   		 +------XXXXXX
+	               B |
+		     XXXXX
+
+
+  2:	          A (max value)  
+     	         +-XXXXXX
+	       B |        C
+	 	 +---------------+
+	  		         |D
+	 		   XXXXX-+
+          		        E (max value)
+
 FS:
 
   1:               A (we have a minimum value for A)
@@ -53,8 +85,6 @@ FS:
           E (min value)
 
 
-TODO: Implement other types, remove the arguments from the geometry-changed signal.
-	 
 */
 
 
@@ -251,8 +281,10 @@ relation_arrow_update_line_segments (PlannerRelationArrow *arrow)
 	gdouble              px1, py1, px2, py2;
 	gdouble              sx1, sy1, sx2, sy2;
 	gdouble              y;
+	MrpRelationType type;
 
 	priv = arrow->priv;
+	type = priv->type;
 
 	planner_gantt_row_get_geometry (priv->predecessor,
 				   &px1,
@@ -265,7 +297,108 @@ relation_arrow_update_line_segments (PlannerRelationArrow *arrow)
 				   &sy1,
 				   &sx2,
 				   &sy2);
+	if (type == MRP_RELATION_SS) {
+		priv->num_points = 4;
+		priv->arrow_dir = PLANNER_ARROW_RIGHT;
 
+		/* LHS of pred */
+		priv->points[0].x = px1;
+		priv->points[0].y = py1 + (py2 - py1) / 2;
+
+		/* Next two, a bit left of the most left */
+		if (sx1 < px1) {
+			priv->points[1].x = sx1 - MIN_SPACING - ARROW_SIZE;
+			priv->points[1].y = py1 + (py2 - py1) / 2;
+			priv->points[2].x = sx1 - MIN_SPACING - ARROW_SIZE;
+			priv->points[2].y = sy1 + (sy2 - sy1) / 2;
+		} else {
+			priv->points[1].x = px1 - MIN_SPACING - ARROW_SIZE;
+			priv->points[1].y = py1 + (py2 - py1) / 2;
+			priv->points[2].x = px1 - MIN_SPACING - ARROW_SIZE;
+			priv->points[2].y = sy1 + (sy2 - sy1) / 2;
+		}
+		
+		priv->points[3].x = sx1;
+		priv->points[3].y = sy1 + (sy2 - sy1) / 2;
+		
+	}
+	else if (type == MRP_RELATION_FF) {
+		
+		priv->num_points = 4;
+		priv->arrow_dir = PLANNER_ARROW_LEFT;
+
+		/* LHS of pred */
+		priv->points[0].x = px2;
+		priv->points[0].y = py1 + (py2 - py1) / 2;
+
+		/* Next two, a bit left of the most left */
+		if (sx2 > px2) {
+			priv->points[1].x = sx2 + MIN_SPACING + ARROW_SIZE;
+			priv->points[1].y = py1 + (py2 - py1) / 2;
+			priv->points[2].x = sx2 + MIN_SPACING + ARROW_SIZE;
+			priv->points[2].y = sy1 + (sy2 - sy1) / 2;
+		} else {
+			priv->points[1].x = px2 + MIN_SPACING + ARROW_SIZE;
+			priv->points[1].y = py1 + (py2 - py1) / 2;
+			priv->points[2].x = px2 + MIN_SPACING + ARROW_SIZE;
+			priv->points[2].y = sy1 + (sy2 - sy1) / 2;
+		}
+		
+		priv->points[3].x = sx2;
+		priv->points[3].y = sy1 + (sy2 - sy1) / 2;
+	}
+	else if (type == MRP_RELATION_SF) {
+		/* Two cases for SF, as shown at the top of this file. */
+		if (px1 >= sx2) {
+			priv->num_points = 3;
+	
+			priv->points[0].x = px1;
+			priv->points[0].y = py1 + (py2 - py1) / 2;
+
+			priv->points[1].x = MIN (px1 - MIN_SPACING, sx2);
+			priv->points[1].y = py1 + (py2 - py1) / 2;
+	
+			priv->points[2].x = MIN (px1 - MIN_SPACING, sx2);
+			if (sy1 > py1) {
+				priv->points[2].y = sy1;
+				priv->arrow_dir = PLANNER_ARROW_DOWN;
+			} else {
+				priv->points[2].y = sy2;
+				priv->arrow_dir = PLANNER_ARROW_UP;
+			}
+	
+			
+		} else {
+			priv->num_points = 6;
+			priv->arrow_dir = PLANNER_ARROW_LEFT;
+	
+			priv->points[0].x = px1;
+			priv->points[0].y = py1 + (py2 - py1) / 2;
+	
+			priv->points[1].x = px1 - MIN_SPACING;
+			priv->points[1].y = py1 + (py2 - py1) / 2;
+	
+	 		if (sy1 > py1) {
+				y = py2 + (py2 - py1) / 2 - 1;
+			} else {
+				y = py1 - (py2 - py1) / 2 + 2;
+			}
+			
+			priv->points[2].x = px1 - MIN_SPACING;
+			priv->points[2].y = y;
+	
+			priv->points[3].x = sx2 + ARROW_SIZE + MIN_SPACING;
+			priv->points[3].y = y;
+			
+			priv->points[4].x = sx2 + ARROW_SIZE + MIN_SPACING;
+			priv->points[4].y = sy1 + (sy2 - sy1) / 2;
+	
+			priv->points[5].x = sx2;
+			priv->points[5].y = sy1 + (sy2 - sy1) / 2;
+		}
+	
+	
+	} else {
 	/* Two cases for FS, as shown at the top of this file. */
 	if (px2 <= sx1) {
 		priv->num_points = 3;
@@ -284,6 +417,8 @@ relation_arrow_update_line_segments (PlannerRelationArrow *arrow)
 			priv->points[2].y = sy2;
 			priv->arrow_dir = PLANNER_ARROW_UP;
 		}
+	
+			
 	} else {
 		priv->num_points = 6;
 		priv->arrow_dir = PLANNER_ARROW_RIGHT;
@@ -311,6 +446,7 @@ relation_arrow_update_line_segments (PlannerRelationArrow *arrow)
 
 		priv->points[5].x = sx1;
 		priv->points[5].y = sy1 + (sy2 - sy1) / 2;
+	}
 	}
 
 	gnome_canvas_item_request_update (GNOME_CANVAS_ITEM (arrow));
@@ -431,7 +567,7 @@ planner_relation_arrow_set_successor (PlannerRelationArrow *arrow,
 }
 
 PlannerRelationArrow *
-planner_relation_arrow_new (PlannerGanttRow *successor, PlannerGanttRow *predecessor)
+planner_relation_arrow_new (PlannerGanttRow *successor, PlannerGanttRow *predecessor, MrpRelationType type)
 {
 	PlannerRelationArrow   *arrow;
 	GnomeCanvasGroup  *root;
@@ -445,7 +581,7 @@ planner_relation_arrow_new (PlannerGanttRow *successor, PlannerGanttRow *predece
 	
 	planner_relation_arrow_set_successor (arrow, successor);
 	planner_relation_arrow_set_predecessor (arrow, predecessor);
-	
+	arrow->priv->type = type;
 	return arrow;
 }
 
