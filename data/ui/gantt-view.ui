@@ -1,7 +1,7 @@
 <ui>
-  <menubar         name  ="MenuBar">
+  <menubar         name="MenuBar">
     <menu          action="Edit">
-      <placeholder name  ="Selection placeholder"/>
+      <placeholder name="Selection placeholder"/>
       <menuitem    action="SelectAll"/>
     </menu>
     <menu          action="View">
@@ -14,7 +14,7 @@
       <menuitem    action="HighlightCriticalTasks"/>
     </menu>
     <menu          action="Actions">
-      <placeholder name  ="View specific actions placeholder"/>
+      <placeholder name="View specific actions placeholder"/>
       <menuitem    action="InsertTask"/>
       <menuitem    action="InsertTasks"/>
       <menuitem    action="RemoveTask"/>
@@ -32,7 +32,7 @@
       <menuitem    action="EditTask"/>
     </menu>
   </menubar>
-  <toolbar         name  ="ToolBar">
+  <toolbar         name="ToolBar">
     <toolitem      action="InsertTask"/>
     <toolitem      action="RemoveTask"/>
     <toolitem      action="LinkTasks"/>

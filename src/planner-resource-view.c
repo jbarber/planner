@@ -326,6 +326,7 @@ activate (PlannerView *view)
 	priv = view->priv;
 
 	priv->actions = gtk_action_group_new ("ResourceView");
+	gtk_action_group_set_translation_domain (priv->actions, GETTEXT_PACKAGE);
 
 	gtk_action_group_add_actions (priv->actions, entries, n_entries, view);
 

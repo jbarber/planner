@@ -123,8 +123,6 @@ static void       window_print_cb                        (GtkAction             
 							  gpointer                      data);
 static void       window_print_preview_cb                (GtkAction                    *action,
 							  gpointer                      data);
-static void       window_properties_cb                   (GtkAction                    *action,
-							  gpointer                      data);
 static void       window_close_cb                        (GtkAction                    *action,
 							  gpointer                      data);
 static void       window_exit_cb                         (GtkAction                    *action,
@@ -200,7 +198,6 @@ static GtkActionEntry entries[] = {
 	{ "FileSave",                   GTK_STOCK_SAVE,          N_("_Save"),                    "<Control>s",        N_("Save the current project"),                       G_CALLBACK(window_save_cb) },
 	{ "Export",                     NULL,                    N_("_Export"),                  NULL,                NULL,                                                 NULL },
 	{ "FileSaveAs",                 GTK_STOCK_SAVE_AS,       N_("Save _As..."),              "<Shift><Control>s", N_("Save the current project with a different name"), G_CALLBACK(window_save_as_cb) },
-	{ "FileProperties",             NULL,                    NULL,                           NULL,                NULL,                                                 G_CALLBACK(window_properties_cb) },
 	{ "FilePrint",                  GTK_STOCK_PRINT,         N_("_Print..."),                "<Control>p",        N_("Print the current project"),                      G_CALLBACK(window_print_cb) },
 	{ "FilePrintPreview",           GTK_STOCK_PRINT_PREVIEW, N_("Print Pre_view"),           "<Shift><Control>p", N_("Print preview of the current project"),           G_CALLBACK(window_print_preview_cb) },
 	{ "FileClose",                  GTK_STOCK_CLOSE,         N_("_Close"),                   "<Control>w",        N_("Close the current file"),                         G_CALLBACK(window_close_cb) },
@@ -425,7 +422,8 @@ window_populate (PlannerWindow *window)
 	vbox = gtk_vbox_new (FALSE, 0);
 	gtk_container_add (GTK_CONTAINER (window), vbox);
 
-	priv->actions    = gtk_action_group_new ("Planner");
+	priv->actions = gtk_action_group_new ("Planner");
+	gtk_action_group_set_translation_domain (priv->actions, GETTEXT_PACKAGE);
 	gtk_action_group_add_actions (priv->actions, entries, n_entries, window);
 
 	priv->ui_manager = gtk_ui_manager_new ();
@@ -845,12 +843,6 @@ window_print_cb (GtkAction *action,
 
 	g_object_unref (job);
 	g_object_unref (config);
-}
-
-static void
-window_properties_cb (GtkAction *action,
-		      gpointer   data)
-{
 }
 
 static void

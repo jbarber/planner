@@ -1,19 +1,19 @@
 <ui>
-  <menubar           name  ="MenuBar">
+  <menubar           name="MenuBar">
     <menu            action="File">
       <menuitem      action="FileNew"/>
       <menuitem      action="FileOpen"/>
-      <placeholder   name  ="Import placeholder"/>
+      <placeholder   name="Import placeholder"/>
       <separator/>
       <menuitem      action="FileSave"/>
       <menuitem      action="FileSaveAs"/>
       <menu          action="Export">
-        <placeholder name  ="Export placeholder"/>
+        <placeholder name="Export placeholder"/>
       </menu>
       <separator/>
       <menuitem      action="FilePrint"/>
       <menuitem      action="FilePrintPreview"/>
-      <placeholder   name  ="EggRecentDocuments"/>
+      <placeholder   name="EggRecentDocuments"/>
       <separator/>
       <menuitem      action="FileClose"/>
       <menuitem      action="FileExit"/>
@@ -23,18 +23,18 @@
       <menuitem      action="EditUndo"/>
       <menuitem      action="EditRedo"/>
       <separator/>
-      <placeholder   name  ="View specific placeholder"/>
-      <placeholder   name  ="Selection placeholder"/>
+      <placeholder   name="View specific placeholder"/>
+      <placeholder   name="Selection placeholder"/>
     </menu>
 
     <menu            action="View">
-      <placeholder   name  ="Views placeholder"/>
+      <placeholder   name="Views placeholder"/>
       <separator/>
-      <placeholder   name  ="View specific placeholder"/>
+      <placeholder   name="View specific placeholder"/>
     </menu>
 
     <menu            action="Actions">
-      <placeholder   name  ="View specific actions placeholder"/>
+      <placeholder   name="View specific actions placeholder"/>
     </menu>
 
     <menu            action="Project">
@@ -52,7 +52,7 @@
     </menu>
   </menubar>
 
-  <toolbar           name  ="ToolBar">
+  <toolbar           name="ToolBar">
     <toolitem        action="FileNew"/>
     <toolitem        action="FileOpen"/>
     <toolitem        action="FileSave"/>

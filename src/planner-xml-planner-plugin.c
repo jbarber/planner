@@ -188,6 +188,8 @@ plugin_init (PlannerPlugin *plugin, PlannerWindow *main_window)
 
 	/* Create the actions, get the ui manager and merge the whole */
 	actions = gtk_action_group_new ("XML plugin actions");
+	gtk_action_group_set_translation_domain (actions, GETTEXT_PACKAGE);
+
 	gtk_action_group_add_actions (actions, action_entries, n_action_entries, plugin);
 
 	ui = planner_window_get_ui_manager (main_window);

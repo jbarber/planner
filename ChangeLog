@@ -1,3 +1,19 @@
+2004-08-06  Richard Hult  <richard@imendio.com>
+
+	* src/planner-task-cmd.c: Include config.h to fix i18n.
+
+	* src/planner-gantt-view.c: (activate):
+	* src/planner-html-plugin.c: (plugin_init):
+	* src/planner-resource-view.c: (activate):
+	* src/planner-task-view.c: (activate):
+	* src/planner-ttable-view.c: (activate):
+	* src/planner-window.c: (window_populate), (window_print_cb):
+	* src/planner-xml-planner-plugin.c: (plugin_init): Set translation
+	domain to get i18n working.
+
+	* data/ui/gantt-view.ui: 
+	* data/ui/main-window.ui: Remove spaces.
+
 2004-08-05  Xavier Ordoquy  <xordoquy@linovia.com>
 
 	* data/ui/gantt-view.ui:

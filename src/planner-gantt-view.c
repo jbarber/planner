@@ -153,7 +153,7 @@ static GtkActionEntry entries[] = {
 };
 
 static GtkToggleActionEntry toggle_entries[] = {
-	{ "HighlightCriticalTasks", NULL, N_("_HighlightCriticalPath"), NULL, NULL, G_CALLBACK(gantt_view_highlight_critical_cb), FALSE },
+	{ "HighlightCriticalTasks", NULL, N_("_Highlight Critical Tasks"), NULL, NULL, G_CALLBACK(gantt_view_highlight_critical_cb), FALSE },
 };
 
 static guint n_entries        = G_N_ELEMENTS (entries);
@@ -170,6 +170,7 @@ activate (PlannerView *view)
 	priv = view->priv;
 
 	priv->actions = gtk_action_group_new ("GanttView");
+	gtk_action_group_set_translation_domain (priv->actions, GETTEXT_PACKAGE);
 
 	gtk_action_group_add_actions (priv->actions, entries, n_entries, view);
 	gtk_action_group_add_toggle_actions (priv->actions, toggle_entries, n_toggle_entries, view);
