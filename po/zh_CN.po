@@ -1,18 +1,18 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) 2003 Free Software Foundation, Inc.
-# Funda Wang <fundawang@linux.net.cn>, 2003.
+# Funda Wang <fundawang@linux.net.cn>, 2003, 2004.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: mrproject\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-01-24 21:31+0100\n"
-"PO-Revision-Date: 2004-01-25 07:25+0800\n"
+"Project-Id-Version: planner\n"
+"POT-Creation-Date: 2004-02-28 15:33+0100\n"
+"PO-Revision-Date: 2004-02-29 14:45+0800\n"
 "Last-Translator: Funda Wang <fundawang@linux.net.cn>\n"
 "Language-Team: zh_CN <i18n-translation@lists.linux.net.cn>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Report-Msgid-Bugs-To: \n"
 
 #: data/glade/add-predecessor.glade.h:1 data/glade/calendar-dialog.glade.h:4
 #: data/glade/html-output.glade.h:2 data/glade/new-property.glade.h:1
@@ -353,7 +353,7 @@ msgstr "完成(_O)："
 msgid "Predecessors"
 msgstr "前趋"
 
-#: data/glade/task-dialog.glade.h:9 src/planner-resource-view.c:344
+#: data/glade/task-dialog.glade.h:9 src/planner-resource-view.c:384
 msgid "Resources"
 msgstr "资源"
 
@@ -382,7 +382,7 @@ msgid "_Work:"
 msgstr "工作(_W)："
 
 #. day unit variant accepted in input
-#: data/glade/task-dialog.glade.h:17 src/planner-task-tree.c:2429
+#: data/glade/task-dialog.glade.h:17 src/planner-task-tree.c:2479
 msgid "days"
 msgstr "天"
 
@@ -407,72 +407,73 @@ msgid "In_sert Tasks..."
 msgstr "插入任务(_S)..."
 
 #: data/ui/gantt-view.ui.h:3 data/ui/task-view.ui.h:3
-#: src/planner-application.c:76
+#: src/planner-application.c:83
 msgid "Indent"
 msgstr "缩进"
 
 #: data/ui/gantt-view.ui.h:4 data/ui/resource-view.ui.h:5
 #: data/ui/task-view.ui.h:4 src/planner-application.c:55
-#: src/planner-application.c:104
+#: src/planner-application.c:111
 msgid "Insert"
 msgstr "插入"
 
 #: data/ui/gantt-view.ui.h:5 data/ui/task-view.ui.h:5
+#: src/planner-application.c:76
+msgid "Link"
+msgstr "链接"
+
+#: data/ui/gantt-view.ui.h:6 data/ui/task-view.ui.h:6
 msgid "Move Task Do_wn"
 msgstr "任务下移(_W)"
 
-#: data/ui/gantt-view.ui.h:6 data/ui/task-view.ui.h:6
+#: data/ui/gantt-view.ui.h:7 data/ui/task-view.ui.h:7
 msgid "Move Task _Up"
 msgstr "任务上移(_U)"
 
-#: data/ui/gantt-view.ui.h:7 data/ui/task-view.ui.h:7
-#: src/planner-application.c:97
+#: data/ui/gantt-view.ui.h:8 data/ui/task-view.ui.h:8
+#: src/planner-application.c:104
 msgid "Move down"
 msgstr "下移"
 
-#: data/ui/gantt-view.ui.h:8 data/ui/task-view.ui.h:8
-#: src/planner-application.c:90
+#: data/ui/gantt-view.ui.h:9 data/ui/task-view.ui.h:9
+#: src/planner-application.c:97
 msgid "Move up"
 msgstr "上移"
 
-#: data/ui/gantt-view.ui.h:9 data/ui/resource-view.ui.h:6
-#: data/ui/task-view.ui.h:9 src/planner-application.c:62
-#: src/planner-application.c:111
+#: data/ui/gantt-view.ui.h:10 data/ui/resource-view.ui.h:6
+#: data/ui/task-view.ui.h:10 src/planner-application.c:62
+#: src/planner-application.c:118
 msgid "Remove"
 msgstr "删除"
 
-#: data/ui/gantt-view.ui.h:10 data/ui/task-view.ui.h:10
+#: data/ui/gantt-view.ui.h:11 data/ui/task-view.ui.h:11
 msgid "Reset _All Constraints"
 msgstr "重置全部约束条件(_A)"
 
-#: data/ui/gantt-view.ui.h:11 data/ui/task-view.ui.h:11
+#: data/ui/gantt-view.ui.h:12 data/ui/task-view.ui.h:12
 msgid "Reset _Constraint"
 msgstr "重置约束条件(_C)"
 
-#: data/ui/gantt-view.ui.h:12 data/ui/resource-view.ui.h:7
-#: data/ui/task-view.ui.h:12
+#: data/ui/gantt-view.ui.h:13 data/ui/resource-view.ui.h:7
+#: data/ui/task-view.ui.h:13
 msgid "Select _All"
 msgstr "全选(_A)"
 
-#: data/ui/gantt-view.ui.h:13 data/ui/resource-view.ui.h:8
-#: data/ui/task-view.ui.h:13
+#: data/ui/gantt-view.ui.h:14 data/ui/resource-view.ui.h:8
+#: data/ui/task-view.ui.h:14
 msgid "Select all tasks"
 msgstr "选中所有任务"
 
-#: data/ui/gantt-view.ui.h:14
+#: data/ui/gantt-view.ui.h:15
 msgid "Test"
 msgstr "测试"
-
-#: data/ui/gantt-view.ui.h:15 data/ui/task-view.ui.h:14
-msgid "Un_link Task"
-msgstr "取消任务链接(_L)"
 
 #: data/ui/gantt-view.ui.h:16 data/ui/task-view.ui.h:15
 msgid "Unin_dent Task"
 msgstr "取消任务缩进(_D)"
 
 #: data/ui/gantt-view.ui.h:17 data/ui/task-view.ui.h:16
-#: src/planner-application.c:83
+#: src/planner-application.c:90
 msgid "Unindent"
 msgstr "取消缩进"
 
@@ -514,10 +515,18 @@ msgid "_Insert Task"
 msgstr "插入任务(_I)"
 
 #: data/ui/gantt-view.ui.h:27 data/ui/task-view.ui.h:22
+msgid "_Link Tasks"
+msgstr "链接任务(_L)"
+
+#: data/ui/gantt-view.ui.h:28 data/ui/task-view.ui.h:23
 msgid "_Remove Task"
 msgstr "删除任务(_R)"
 
-#: data/ui/gantt-view.ui.h:28
+#: data/ui/gantt-view.ui.h:29 data/ui/task-view.ui.h:24
+msgid "_Unlink Task"
+msgstr "取消任务链接(_U)"
+
+#: data/ui/gantt-view.ui.h:30
 msgid "_Zoom In"
 msgstr "放大(_Z)"
 
@@ -693,15 +702,15 @@ msgstr "项目(_P)"
 msgid "_Quit"
 msgstr "退出(_Q)"
 
-#: data/ui/main-window.ui.h:44 src/planner-cmd-manager.c:240
+#: data/ui/main-window.ui.h:44 src/planner-window.c:1168
 msgid "_Redo"
 msgstr "重做(_R)"
 
-#: data/ui/main-window.ui.h:45 src/planner-window.c:1259
+#: data/ui/main-window.ui.h:45 src/planner-window.c:1271
 msgid "_Save"
 msgstr "保存(_S)"
 
-#: data/ui/main-window.ui.h:46 src/planner-cmd-manager.c:228
+#: data/ui/main-window.ui.h:46 src/planner-window.c:1142
 msgid "_Undo"
 msgstr "撤消(_U)"
 
@@ -789,29 +798,29 @@ msgstr "无法创建 XML 树"
 msgid "Could not write XML file"
 msgstr "无法写入 XML 文件"
 
-#: libplanner/mrp-project.c:442 src/planner-group-dialog.c:411
+#: libplanner/mrp-project.c:440 src/planner-group-dialog.c:829
 msgid "Default"
 msgstr "默认"
 
-#: libplanner/mrp-project.c:750
+#: libplanner/mrp-project.c:748
 #, c-format
 msgid "Couldn't find a suitable file module for loading '%s'"
 msgstr "找不到可装入“%s”的文件模块"
 
-#: libplanner/mrp-project.c:771 libplanner/mrp-project.c:1035
+#: libplanner/mrp-project.c:769 libplanner/mrp-project.c:1033
 msgid "No support for SQL storage built into this version of Planner."
 msgstr "此版本的 Planner 不支持内建的 SQL 存储。"
 
-#: libplanner/mrp-project.c:808
+#: libplanner/mrp-project.c:806
 msgid "Invalid URI."
 msgstr "无效的 URI。"
 
-#: libplanner/mrp-project.c:929
+#: libplanner/mrp-project.c:927
 #, c-format
 msgid "Unable to find file writer identified by '%s'"
 msgstr "找不到由“%s”标识的文件写入程序"
 
-#: libplanner/mrp-project.c:992
+#: libplanner/mrp-project.c:990
 msgid "Couldn't find a suitable file module for loading project"
 msgstr "找不到适合装入项目的文件模块"
 
@@ -839,7 +848,7 @@ msgstr "日期"
 msgid "Duration"
 msgstr "持续时间"
 
-#: libplanner/mrp-property.c:377 src/planner-task-view.c:266
+#: libplanner/mrp-property.c:377 src/planner-task-view.c:270
 msgid "Cost"
 msgstr "成本"
 
@@ -855,8 +864,7 @@ msgstr "无效的 Unicode"
 #: libplanner/mrp-sql.c:2201
 #, c-format
 msgid "Connection to database '%s' failed.\n"
-msgstr ""
-"连接到数据库“%s”失败。\n"
+msgstr "连接到数据库“%s”失败。\n"
 
 #: libplanner/mrp-sql.c:2206 libplanner/mrp-sql.c:3643
 #, c-format
@@ -912,7 +920,7 @@ msgstr "无法移动任务，原因是将导致循环。"
 msgid "HTML export failed"
 msgstr "HTML 导出失败"
 
-#: src/planner-application.c:118
+#: src/planner-application.c:125
 msgid "Edit"
 msgstr "编辑"
 
@@ -950,13 +958,21 @@ msgstr "确定"
 
 #: src/planner-cmd-manager.c:226
 #, c-format
-msgid "_Undo '%s'"
-msgstr "撤消“%s”(_U)"
+msgid "Undo '%s'"
+msgstr "撤消“%s”"
+
+#: src/planner-cmd-manager.c:228
+msgid "Undo"
+msgstr "撤消"
 
 #: src/planner-cmd-manager.c:238
 #, c-format
-msgid "_Redo '%s'"
-msgstr "重做“%s”(_R)"
+msgid "Redo '%s'"
+msgstr "重做“%s”"
+
+#: src/planner-cmd-manager.c:240
+msgid "Redo"
+msgstr "重做"
 
 #: src/planner-default-week-dialog.c:40
 msgid "Monday"
@@ -1041,23 +1057,22 @@ msgstr "%Y年%m月%d日"
 msgid "Project start"
 msgstr "项目启动"
 
-#: src/planner-gantt-print.c:190 src/planner-group-dialog.c:387
-#: src/planner-property-dialog.c:378 src/planner-resource-view.c:976
+#: src/planner-gantt-print.c:190 src/planner-group-dialog.c:805
+#: src/planner-property-dialog.c:378 src/planner-resource-view.c:1159
 #: src/planner-task-dialog.c:1311 src/planner-task-dialog.c:1397
-#: src/planner-task-view.c:261
+#: src/planner-task-view.c:265
 msgid "Name"
 msgstr "名称"
 
 #: src/planner-gantt-print.c:198 src/planner-resource-dialog.c:1101
-#: src/planner-resource-view.c:639 src/planner-resource-view.c:655
-#: src/planner-resource-view.c:1197 src/planner-task-view.c:264
+#: src/planner-resource-view.c:682 src/planner-resource-view.c:698
+#: src/planner-resource-view.c:1528 src/planner-task-view.c:268
 msgid "Work"
-msgstr ""
-"工作"
+msgstr "工作"
 
 #: src/planner-gantt-print.c:513 src/planner-gantt-print.c:515
 #: src/planner-gantt-row.c:656 src/planner-gantt-row.c:658
-#: src/planner-window.c:1636
+#: src/planner-window.c:1648
 msgid "Unnamed"
 msgstr "未命名"
 
@@ -1075,15 +1090,15 @@ msgstr "将任务“%s”作为“%s”的前趋"
 msgid "Change work to %s"
 msgstr "将工作改为 %s"
 
-#: src/planner-gantt-view.c:277
+#: src/planner-gantt-view.c:288
 msgid "Gantt Chart"
 msgstr "甘特图"
 
-#: src/planner-gantt-view.c:285
+#: src/planner-gantt-view.c:296
 msgid "_Gantt Chart"
 msgstr "甘特图(_G)"
 
-#: src/planner-gantt-view.c:482
+#: src/planner-gantt-view.c:493
 msgid ""
 "\n"
 "Name"
@@ -1092,7 +1107,7 @@ msgstr ""
 "名称"
 
 #. COL_START,    _("\nStart"),
-#: src/planner-gantt-view.c:484
+#: src/planner-gantt-view.c:495
 msgid ""
 "\n"
 "Work"
@@ -1100,15 +1115,31 @@ msgstr ""
 "\n"
 "工作"
 
-#: src/planner-group-dialog.c:393
+#: src/planner-group-dialog.c:302
+msgid "Insert group"
+msgstr "插入组"
+
+#: src/planner-group-dialog.c:425
+msgid "Remove group"
+msgstr "删除组"
+
+#: src/planner-group-dialog.c:517
+msgid "Default group"
+msgstr "默认组"
+
+#: src/planner-group-dialog.c:633
+msgid "Edit group property"
+msgstr "编辑组属性"
+
+#: src/planner-group-dialog.c:811
 msgid "Manager name"
 msgstr "经理姓名"
 
-#: src/planner-group-dialog.c:399
+#: src/planner-group-dialog.c:817
 msgid "Manager phone"
 msgstr "经理电话"
 
-#: src/planner-group-dialog.c:405
+#: src/planner-group-dialog.c:823
 msgid "Manager email"
 msgstr "经理邮件"
 
@@ -1121,7 +1152,7 @@ msgstr ""
 "“%s”是目录。\n"
 "请输入文件名然后再试一次。"
 
-#: src/planner-html-plugin.c:148 src/planner-window.c:1404
+#: src/planner-html-plugin.c:148 src/planner-window.c:1416
 #, c-format
 msgid "File \"%s\" exists, do you want to overwrite it?"
 msgstr "文件“%s”已存在，您想要覆盖吗？"
@@ -1220,14 +1251,14 @@ msgstr "无法创建属性对话框。"
 msgid "Label"
 msgstr "标签"
 
-#: src/planner-property-dialog.c:411 src/planner-resource-view.c:997
+#: src/planner-property-dialog.c:411 src/planner-resource-view.c:1180
 #: src/planner-task-dialog.c:1429
 msgid "Type"
 msgstr "类型"
 
 #. Put "no group" at the top.
 #: src/planner-resource-dialog.c:248 src/planner-resource-input-dialog.c:96
-#: src/planner-resource-view.c:1385
+#: src/planner-resource-view.c:1739
 msgid "(None)"
 msgstr "(无)"
 
@@ -1250,38 +1281,54 @@ msgstr "无(使用项目默认值)"
 msgid "Edit resource properties"
 msgstr "编辑资源属性"
 
-#: src/planner-resource-dialog.c:1102 src/planner-resource-view.c:642
-#: src/planner-resource-view.c:656 src/planner-resource-view.c:1198
+#: src/planner-resource-dialog.c:1102 src/planner-resource-view.c:685
+#: src/planner-resource-view.c:699 src/planner-resource-view.c:1529
 msgid "Material"
 msgstr "材料"
 
-#: src/planner-resource-view.c:250
+#: src/planner-resource-view.c:251
 msgid "/_Insert resource"
 msgstr "/插入资源(_I)"
 
-#: src/planner-resource-view.c:251
+#: src/planner-resource-view.c:252
 msgid "/_Remove resource"
 msgstr "/删除资源(_R)"
 
-#: src/planner-resource-view.c:252
+#: src/planner-resource-view.c:253
 msgid "/_Edit resource..."
 msgstr "/编辑资源(_E)..."
 
-#: src/planner-resource-view.c:352
+#: src/planner-resource-view.c:392
 msgid "_Resources"
 msgstr "资源(_R)"
 
-#: src/planner-resource-view.c:859
+#: src/planner-resource-view.c:789
+msgid "Insert resource"
+msgstr "插入资源"
+
+#: src/planner-resource-view.c:941
+msgid "Remove resource"
+msgstr "删除资源"
+
+#: src/planner-resource-view.c:1042
 msgid "Edit custom resource properties"
 msgstr "编辑自定义资源属性"
 
-#: src/planner-resource-view.c:1021
+#: src/planner-resource-view.c:1204
 msgid "Group"
 msgstr "组"
 
-#: src/planner-resource-view.c:1050
+#: src/planner-resource-view.c:1233
 msgid "Email"
 msgstr "电子邮件"
+
+#: src/planner-resource-view.c:1298
+msgid "Edit resource property"
+msgstr "编辑资源属性"
+
+#: src/planner-resource-view.c:1360
+msgid "Edit resource custom property"
+msgstr "编辑资源自定义属性"
 
 #. i18n: Short "Week", preferably 2 letters.
 #: src/planner-scale-utils.c:325
@@ -1320,25 +1367,25 @@ msgstr "%d年，第%d季度"
 
 #. i18n: Short "Half year", prefferably 1 letter.
 #: src/planner-scale-utils.c:386
-#, fuzzy, c-format
+#, c-format
 msgid "H%d"
-msgstr "第%d季度"
+msgstr "H%d"
 
 #. i18n: Year, short "Half year", prefferably 1 letter.
 #: src/planner-scale-utils.c:391
-#, fuzzy, c-format
+#, c-format
 msgid "%04d, H%d"
-msgstr "%d年，第%d季度"
+msgstr "%04d，H%d"
 
 #: src/planner-sql-plugin.c:367
 msgid "Project"
 msgstr "项目"
 
-#: src/planner-sql-plugin.c:537
+#: src/planner-sql-plugin.c:543
 msgid "Open from Database"
 msgstr "从数据库打开"
 
-#: src/planner-sql-plugin.c:644
+#: src/planner-sql-plugin.c:650
 msgid "Save to Database"
 msgstr "保存到数据库"
 
@@ -1406,96 +1453,96 @@ msgstr "插入任务"
 msgid "Edit task property"
 msgstr "编辑任务属性"
 
-#: src/planner-task-tree.c:2421
+#: src/planner-task-tree.c:2471
 msgid "mon"
 msgstr "月"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:2422
+#: src/planner-task-tree.c:2472
 msgid "month"
 msgstr "月"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:2423
+#: src/planner-task-tree.c:2473
 msgid "months"
 msgstr "月"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:2424
+#: src/planner-task-tree.c:2474
 msgid "w"
 msgstr "周"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:2425
+#: src/planner-task-tree.c:2475
 msgid "week"
 msgstr "周"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:2426
+#: src/planner-task-tree.c:2476
 msgid "weeks"
 msgstr "周"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:2427
+#: src/planner-task-tree.c:2477
 msgid "d"
 msgstr "天"
 
 #. day unit variant accepted in input
-#: src/planner-task-tree.c:2428
+#: src/planner-task-tree.c:2478
 msgid "day"
 msgstr "天"
 
 #. day unit variant accepted in input
-#: src/planner-task-tree.c:2430
+#: src/planner-task-tree.c:2480
 msgid "h"
 msgstr "小时"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:2431
+#: src/planner-task-tree.c:2481
 msgid "hour"
 msgstr "小时"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:2432
+#: src/planner-task-tree.c:2482
 msgid "hours"
 msgstr "小时"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:2433
+#: src/planner-task-tree.c:2483
 msgid "min"
 msgstr "分"
 
 #. minute unit variant accepted in input
-#: src/planner-task-tree.c:2434
+#: src/planner-task-tree.c:2484
 msgid "minute"
 msgstr "分"
 
 #. minute unit variant accepted in input
-#: src/planner-task-tree.c:2435
+#: src/planner-task-tree.c:2485
 msgid "minutes"
 msgstr "分"
 
-#: src/planner-task-view.c:199
+#: src/planner-task-view.c:203
 msgid "Tasks"
 msgstr "任务"
 
-#: src/planner-task-view.c:207
+#: src/planner-task-view.c:211
 msgid "_Tasks"
 msgstr "任务(_T)"
 
-#: src/planner-task-view.c:262
+#: src/planner-task-view.c:266
 msgid "Start"
 msgstr "启动"
 
-#: src/planner-task-view.c:263
+#: src/planner-task-view.c:267
 msgid "Finish"
 msgstr "完成"
 
-#: src/planner-task-view.c:265
+#: src/planner-task-view.c:269
 msgid "Slack"
 msgstr "迟缓"
 
-#: src/planner-task-view.c:472
+#: src/planner-task-view.c:488
 msgid "Edit custom task properties"
 msgstr "编辑自定义任务属性"
 
@@ -1513,7 +1560,7 @@ msgstr "打开文件"
 #.
 #: src/planner-window.c:1085 src/planner-window.c:1092
 msgid "translator_credits"
-msgstr "GNOME 简体中文翻译小组"
+msgstr "开源软件简体中文翻译计划之 GNOME"
 
 #. "Copyright \xc2\xa9"
 #: src/planner-window.c:1089
@@ -1524,42 +1571,42 @@ msgstr "GNOME 桌面环境下的项目管理程序"
 msgid "The Planner Homepage"
 msgstr "Planner 主页"
 
-#: src/planner-window.c:1215
+#: src/planner-window.c:1227
 msgid "If you don't save, changes made the last minute will be discarded."
 msgstr "如果您不保存，前一分钟所作的更改都会被丢弃。"
 
-#: src/planner-window.c:1220
+#: src/planner-window.c:1232
 #, c-format
 msgid "If you don't save, changes made the last %d minutes will be discarded."
 msgstr "如果您不保存，前 %d 分钟所作的更改都会被丢弃。"
 
-#: src/planner-window.c:1225
+#: src/planner-window.c:1237
 msgid "If you don't save, changes made the last hour will be discarded."
 msgstr "如果您不保存，前一小时所作的更改都会被丢弃。"
 
-#: src/planner-window.c:1230
+#: src/planner-window.c:1242
 #, c-format
 msgid "If you don't save, changes made the last %d hours will be discarded."
 msgstr "如果您不保存，前 %d 小时所作的更改都会被丢弃。"
 
-#: src/planner-window.c:1237
+#: src/planner-window.c:1249
 #, c-format
 msgid "Save changes to document '%s' before closing?"
 msgstr "在关闭前保存对文档“%s”的更改吗？"
 
-#: src/planner-window.c:1255
+#: src/planner-window.c:1267
 msgid "C_lose without saving"
 msgstr "不保存就关闭(_L)"
 
-#: src/planner-window.c:1257
+#: src/planner-window.c:1269
 msgid "_Cancel"
 msgstr "取消(_C)"
 
-#: src/planner-window.c:1368
+#: src/planner-window.c:1380
 msgid "Save a file"
 msgstr "保存文件"
 
-#: src/planner-window.c:1599
+#: src/planner-window.c:1611
 msgid ""
 "You have opened a file that was saved with an old version of Planner.\n"
 "\n"
@@ -1583,4 +1630,3 @@ msgstr ""
 "如果想要添加前趋关系，只需单击前趋，将其拖曳到后继即可。\n"
 "\n"
 "完成这一操作之后，您就可以从“编辑”菜单中选择“删除全部约束条件”功能了。"
-
