@@ -1,5 +1,11 @@
 2004-04-06  Richard Hult  <richard@imendio.com>
 
+	* libplanner/mrp-task-manager.c: (task_manager_do_backward_pass):
+	Fix bug #137063, higlight critical tasks and sub-tasks. Patch from
+	Doroszlai Attila. This also fixes bug #138437.
+
+2004-04-06  Richard Hult  <richard@imendio.com>
+
 	* src/planner-gantt-row.c:
 	* src/planner-task-tree.c:
 	* src/planner-task-tree.h: Fix bug #132910, open task properties

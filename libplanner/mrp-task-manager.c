@@ -1424,7 +1424,7 @@ task_manager_do_backward_pass (MrpTaskManager *manager)
 	data.root = root->data;
 
 	g_node_traverse (root,
-			 G_PRE_ORDER,
+			 G_POST_ORDER,
 			 G_TRAVERSE_ALL,
 			 -1,
 			 (GNodeTraverseFunc) traverse_get_sorted_tasks,
@@ -1436,8 +1436,13 @@ task_manager_do_backward_pass (MrpTaskManager *manager)
 	
 	for (l = tasks; l; l = l->next) {
 		MrpTask *task = l->data;
+		MrpTask *parent = mrp_task_get_parent (task);
 
-		t1 = project_finish;
+		if ((NULL == parent) || (parent == manager->priv->root)) {
+			t1 = project_finish;
+		} else {
+			t1 = MIN (project_finish, mrp_task_get_latest_finish (parent));
+		}
 
 		successors = imrp_task_peek_successors (task);
 		for (s = successors; s; s = s->next) {
