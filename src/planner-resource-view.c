@@ -654,7 +654,7 @@ resource_view_resource_added_cb (MrpProject  *project,
 static void
 resource_view_resource_removed_cb (MrpProject  *project, 
 				   MrpResource *resource,
-				   PlannerView      *view)
+				   PlannerView *view)
 {
 	GtkTreeModel     *model;
 	FindResourceData *data;
@@ -1047,8 +1047,8 @@ resource_view_edit_custom_props_cb (BonoboUIComponent *component,
 	project = planner_window_get_project (view->main_window);
 	
 	dialog = planner_property_dialog_new (project,
-					 MRP_TYPE_RESOURCE,
-					 _("Edit custom resource properties"));
+					      MRP_TYPE_RESOURCE,
+					      _("Edit custom resource properties"));
 	
 	gtk_window_set_default_size (GTK_WINDOW (dialog), 500, 300);
 	gtk_widget_show (dialog);
