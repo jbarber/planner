@@ -1,3 +1,25 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+/*
+ * Copyright (C) 2003 Benjamin BAYART <benjamin@sitadelle.com>
+ * Copyright (C) 2003 Xavier Ordoquy <xordoquy@wanadoo.fr>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public
+ * License along with this program; if not, write to the
+ * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+ * Boston, MA 02111-1307, USA.
+ */
+
+
 #include <config.h>
 #include <math.h>
 #include <string.h>
@@ -7,13 +29,13 @@
 #include <libplanner/mrp-task.h>
 #include <libgnome/gnome-i18n.h>
 #include <libgnomecanvas/gnome-canvas.h>
-#include "util/planner-marshal.h"
-#include "util/planner-format.h"
+#include "planner-marshal.h"
+#include "planner-format.h"
 #include "planner-ttable-row.h"
 #include "planner-ttable-chart.h"
-#include "../gantt/planner-canvas-line.h"
-#include "../gantt/eel-canvas-rect.h"
-#include "../gantt/planner-scale-utils.h"
+#include "planner-canvas-line.h"
+#include "eel-canvas-rect.h"
+#include "planner-scale-utils.h"
 
 /* The padding between the gantt bar and the text. */
 #define TEXT_PADDING 10.0
@@ -121,11 +143,13 @@ static void	ttable_row_bounds		(GnomeCanvasItem	*item,
 						 double			*y2);
 static gboolean	ttable_row_event		(GnomeCanvasItem	*item,
 						 GdkEvent		*event);
-static void	ttable_row_geometry_changed	(PlannerTtableRow		*row);
-//static gboolean	ttable_row_canvas_scroll	(GtkWidget		*widget,
-//						 gint			 delta_x,
-//						 gint			 delta_y);
-static void	ttable_row_ensure_layout	(PlannerTtableRow		*row);
+static void	ttable_row_geometry_changed	(PlannerTtableRow	*row);
+/*
+static gboolean	ttable_row_canvas_scroll	(GtkWidget		*widget,
+						 gint			 delta_x,
+						 gint			 delta_y);
+*/
+static void	ttable_row_ensure_layout	(PlannerTtableRow	*row);
 static void	ttable_row_resource_notify_cb	(MrpResource		*resource,
 						 GParamSpec		*pspec,
 						 PlannerTtableRow		*row);
@@ -147,13 +171,15 @@ static GdkBitmap		*complete_stipple = NULL;
 static gchar			 complete_stipple_pattern[] = { 0x02, 0x01 };
 static GdkBitmap		*break_stipple = NULL;
 static gchar			 break_stipple_pattern[] = { 0x03 };
-//static GdkColor			 color_normal;
-//static GdkColor			 color_free;
-//static GdkColor			 color_underuse;
-//static GdkColor			 color_overuse;
-//static GdkColor			 color_high;
-//static GdkColor			 color_shadow;
-//static gboolean			 colors_initialised = FALSE;
+/*
+static GdkColor			 color_normal;
+static GdkColor			 color_free;
+static GdkColor			 color_underuse;
+static GdkColor			 color_overuse;
+static GdkColor			 color_high;
+static GdkColor			 color_shadow;
+static gboolean			 colors_initialised = FALSE;
+*/
 
 GType
 planner_ttable_row_get_type(void)
@@ -306,10 +332,12 @@ ttable_row_init (PlannerTtableRow *row)
 	priv->fixed_duration = 0;
 	priv->resource = NULL;
 	priv->state = STATE_NONE;
-//	fprintf(stderr,"Un nouveau PlannerTtableRow en %p\n",priv);
-//	priv->highlight = FALSE;
-//	priv->mouse_over_index = -1;
-//	priv->resource_widths = g_array_new (TRUE, FALSE, sizeof (gint));
+	/*
+	g_message("Timetable: New PlannerTtableRow (%p)",priv);
+	priv->highlight = FALSE;
+	priv->mouse_over_index = -1;
+	priv->resource_widths = g_array_new (TRUE, FALSE, sizeof (gint));
+	*/
 }
 
 static void
@@ -329,7 +357,7 @@ ttable_row_destroy (GtkObject *object)
 			priv->scroll_timeout_id = 0;
 		}
 
-//		g_array_free (priv->resource_widths, FALSE);
+		/* g_array_free (priv->resource_widths, FALSE); */
 		
 		g_free (priv);
 		row->priv = NULL;
@@ -417,8 +445,10 @@ recalc_bounds (PlannerTtableRow *row)
 {
 	PlannerTtableRowPriv *priv;
 	GnomeCanvasItem *item;
-//	gint             width;
-//	mrptime          t;
+	/*
+	gint             width;
+	mrptime          t;
+	*/
 	gdouble		 x_debut=-1.0;
 	gdouble		 x_fin=-1.0;
 	gdouble		 x_debut_reel=-1.0;
@@ -428,23 +458,25 @@ recalc_bounds (PlannerTtableRow *row)
 	priv = row->priv;
 	
 	ttable_row_ensure_layout (row);
-
-//	pango_layout_get_pixel_size (priv->layout,
-//				     &width,
-//				     NULL);
+	/*
+	pango_layout_get_pixel_size (priv->layout,
+				     &width,
+				     NULL);
 		
-//	if (width > 0) {
-//		width += TEXT_PADDING;
-//	}
+	if (width > 0) {
+		width += TEXT_PADDING;
+	}
 
-//	priv->text_width = width;
+	priv->text_width = width;
+	*/
 
 	if (priv->assignment!=NULL) {
 		get_assignment_bounds(priv->assignment,priv->scale,&x_debut,&x_fin,&x_debut_reel);
 	}
 	if (priv->resource!=NULL) {
 		get_resource_bounds(priv->resource,priv->scale,&x_debut,&x_fin,&x_debut_reel);
-/*		GList *assigns,*a;
+		/*
+		GList *assigns,*a;
 		assigns = mrp_resource_get_assignments(priv->resource);
 		for (a=assigns; a; a=a->next) {
 			gdouble		 loc_debut;
@@ -466,7 +498,8 @@ recalc_bounds (PlannerTtableRow *row)
 			if (loc_debut_reel<x_debut_reel || x_debut_reel) {
 				x_debut_reel = loc_debut_reel;
 			}
-		}*/
+		}
+		*/
 	}
 	priv->x = x_debut;
 	priv->width = x_fin - x_debut;
@@ -486,8 +519,6 @@ ttable_row_set_property (GObject      *object,
 	gboolean         changed = FALSE;
 	gfloat           tmp_scale;
 	gdouble          tmp_dbl;
-//	gboolean         tmp_bool;
-//	gint             tmp_int;
 	MrpTask		*task;
 	
 	g_return_if_fail (PLANNER_IS_TTABLE_ROW (object));
@@ -528,7 +559,7 @@ ttable_row_set_property (GObject      *object,
 	case PROP_RESOURCE:
 		g_return_if_fail (priv->assignment==NULL || g_value_get_object(value)==NULL);
 		if (priv->resource != NULL) {
-			//ICI surement des handler a modifier
+		        /* FIXME: check handlers to modify !!! */
 			g_object_unref (priv->resource);
 		}
 		if (g_value_get_object(value)==NULL) {
@@ -564,20 +595,20 @@ ttable_row_set_property (GObject      *object,
 							 row,
 							 0);
 			}
-//			fprintf(stderr,"Je suis %p. On m'a donne une resource %p.\n",priv,priv->resource);
 		}
-		
-//		g_signal_connect_object (priv->resource,
-//					 "assignment-added",
-//					 G_CALLBACK (ttable_row_res_assignment_added),
-//					 row,
-//					 0);
+		/*		
+		g_signal_connect_object (priv->resource,
+					 "assignment-added",
+					 G_CALLBACK (ttable_row_res_assignment_added),
+					 row,
+					 0);
 
-//		g_signal_connect_object (priv->resource,
-//					 "assignment-removed",
-//					 G_CALLBACK (ttable_row_res_assignment_removed),
-//					 row,
-//					 0);
+		g_signal_connect_object (priv->resource,
+					 "assignment-removed",
+					 G_CALLBACK (ttable_row_res_assignment_removed),
+					 row,
+					 0);
+		*/
 		changed=TRUE;
 		break;
 		
@@ -585,7 +616,7 @@ ttable_row_set_property (GObject      *object,
 	case PROP_ASSIGNMENT:
 		g_return_if_fail(priv->resource == NULL || g_value_get_object(value)==NULL);
 		if (priv->assignment != NULL) {
-//			gantt_row_disconnect_all_resources (priv->task, row);
+		        /* gantt_row_disconnect_all_resources (priv->task, row); */
 			g_object_unref (priv->assignment);
 			/* FIXME: Disconnect notify handlers. */
 		}
@@ -601,7 +632,6 @@ ttable_row_set_property (GObject      *object,
 			} else {
 				priv->fixed_duration=0;
 			}
-//			fprintf(stderr,"Je suis %p. On m'a donne un assignment %p.\n",priv,priv->assignment);
 
 			g_signal_connect_object (priv->assignment,
 						 "notify",
@@ -616,26 +646,28 @@ ttable_row_set_property (GObject      *object,
 						 0);
 		}
 		
-//		ttable_row_connect_all_resources (priv->assignment, row);
+		/* ttable_row_connect_all_resources (priv->assignment, row); */
 
 		changed = TRUE;
 		break;
 
-//	case PROP_HIGHLIGHT:
-//		tmp_bool = g_value_get_boolean (value);
-//		if (tmp_bool != priv->highlight) {
-//			priv->highlight = tmp_bool;
-//			changed = TRUE;
-//		}
-//		break;
+		/*
+	case PROP_HIGHLIGHT:
+		tmp_bool = g_value_get_boolean (value);
+		if (tmp_bool != priv->highlight) {
+			priv->highlight = tmp_bool;
+			changed = TRUE;
+		}
+		break;
 
-//	case PROP_MOUSE_OVER_INDEX:
-//		tmp_int = g_value_get_int (value);
-//		if (tmp_int != priv->mouse_over_index) {
-//			priv->mouse_over_index = tmp_int;
-//			changed = TRUE;
-//		}
-//		break;
+	case PROP_MOUSE_OVER_INDEX:
+		tmp_int = g_value_get_int (value);
+		if (tmp_int != priv->mouse_over_index) {
+			priv->mouse_over_index = tmp_int;
+			changed = TRUE;
+		}
+		break;
+		*/
 
 	default:
 		G_OBJECT_WARN_INVALID_PROPERTY_ID (object, param_id, pspec);
@@ -688,9 +720,11 @@ ttable_row_get_property (GObject    *object,
 		g_value_set_object (value, priv->assignment);
 		break;
 
-//	case PROP_HIGHLIGHT:
-//		g_value_set_boolean (value, priv->highlight);
-//		break;
+		/*
+	case PROP_HIGHLIGHT:
+		g_value_set_boolean (value, priv->highlight);
+		break;
+		*/
 
 	default:
 		G_OBJECT_WARN_INVALID_PROPERTY_ID (object, param_id, pspec);
@@ -705,7 +739,7 @@ ttable_row_ensure_layout (PlannerTtableRow *row)
 		row->priv->layout = gtk_widget_create_pango_layout (
 			GTK_WIDGET (GNOME_CANVAS_ITEM (row)->canvas), NULL);
 
-//		ttable_row_update_resources (row);
+		/* ttable_row_update_resources (row); */
 	}
 }
 
@@ -835,7 +869,7 @@ ttable_row_realize (GnomeCanvasItem *item)
 			2);
 		
 		g_object_add_weak_pointer (G_OBJECT (complete_stipple),
-					   (gpointer *) &complete_stipple);
+					   (gpointer *) complete_stipple);
 	} else {
 		g_object_ref (complete_stipple);
 	}
@@ -848,7 +882,7 @@ ttable_row_realize (GnomeCanvasItem *item)
 			1);
 		
 		g_object_add_weak_pointer (G_OBJECT (break_stipple),
-					   (gpointer *) &break_stipple);
+					   (gpointer *) break_stipple);
 	} else {
 		g_object_ref (break_stipple);
 	}
@@ -969,17 +1003,21 @@ ttable_row_draw_resource_ival	(mrptime		 start,
 	GdkColor	 color_high;
 	GdkColor	 color_shadow;
 	GdkGC		*frame_gc;
-	// World coord
+
+	/* World coord */
 	gdouble		 xoffset, yoffset;
 	gdouble		 xstart, ystart, xend, yend;
-	// Canvas coord:
-	// c_XXX: global
-	// cr_XXX: central rectangle
-	// cs_XXX: shadow
+
+	/* Canvas coord */
+	/*
+	 c_XXX: global
+	 cr_XXX: central rectangle
+	 cs_XXX: shadow
+	*/
 	gint		 c_xstart, c_ystart, c_xend, c_yend;
 	gint		 cr_xstart, cr_ystart, cr_xend, cr_yend;
 	gint		 cs_xstart, cs_ystart, cs_xend, cs_yend;
-	// Real coord (in the exposed area)
+	/* Real coord (in the exposed area) */
 	gint		 r_xstart, r_ystart, r_xend, r_yend;
 	gint		 rr_xstart, rr_ystart, rr_xend, rr_yend;
 	gint		 rs_xstart, rs_ystart, rs_xend, rs_yend;
@@ -1006,21 +1044,21 @@ ttable_row_draw_resource_ival	(mrptime		 start,
 	row = PLANNER_TTABLE_ROW(item);
 	priv = row->priv;
 
-	// Graphical Context
+	/* Graphical Context */
 	frame_gc = ttable_row_create_frame_gc (item->canvas);
 
-	// Compute offset in world coord
+	/* Compute offset in world coord */
 	xoffset = 0.0;
 	yoffset = 0.0;
 	gnome_canvas_item_i2w(item, &xoffset, &yoffset);
 	
-	// En coordonnees, heu, world?
+	/* world coordinates */
 	xstart = start * priv->scale;
 	ystart = priv->y + 0.15*priv->height;
 	xend   = end *priv->scale;
 	yend   = priv->y + 0.70*priv->height;
 
-	// Convert to canvas
+	/* Convert to canvas */
 	gnome_canvas_w2c (item->canvas,
 			  xstart + xoffset,
 			  ystart + yoffset,
@@ -1032,25 +1070,29 @@ ttable_row_draw_resource_ival	(mrptime		 start,
 			  &c_xend,
 			  &c_yend);
 	
-	// Shift by (x,y)
+	/* Shift by (x,y) */
 	c_xstart -= x;
 	c_xend -= x;
 	c_ystart -= y;
 	c_yend -= y;
-//	c_xstart -= 2;
-//	c_xend += 2;
-	// Compute shadow coord:
+	/*
+	c_xstart -= 2;
+	c_xend += 2;
+	*/
+
+	/* Compute shadow coord: */
 	cs_xstart = c_xstart+1;
 	cs_ystart = c_ystart+1;
 	cs_xend   = c_xend  -1;
 	cs_yend   = c_yend  -1;
-	// Compute rectangle coord:
+
+	/* Compute rectangle coord: */
 	cr_xstart = c_xstart;
 	cr_ystart = cs_ystart+1;
 	cr_xend   = c_xend  ;
 	cr_yend   = cs_yend  -1;
 
-	// Clip to the expose area
+	/* Clip to the expose area */
 	r_xstart = MAX(c_xstart,0);
 	r_xend   = MIN(c_xend  ,width);
 	r_ystart = MAX(c_ystart,0);
@@ -1066,10 +1108,9 @@ ttable_row_draw_resource_ival	(mrptime		 start,
 	rr_ystart = MAX(cr_ystart,0);
 	rr_yend   = MIN(cr_yend  ,height);
 
-	
 
 	if (r_xend <= r_xstart || r_yend <= r_ystart) {
-		// Nothing to draw
+	        /* Nothing to draw */
 		return;
 	}
 	
@@ -1083,7 +1124,7 @@ ttable_row_draw_resource_ival	(mrptime		 start,
 		gdk_gc_set_foreground (priv->fill_gc, &color_overuse);
 	}
 	
-	// Draw the central part of the chunk
+	/* Draw the central part of the chunk */
 	gdk_draw_rectangle (drawable,
 			    priv->fill_gc,
 			    TRUE,
@@ -1091,44 +1132,44 @@ ttable_row_draw_resource_ival	(mrptime		 start,
 			    rr_xend - rr_xstart +1,
 			    rr_yend - rr_ystart +1);
 
-	// Draw the shadow
-	// Draw the top and left of the shadow
+	/* Draw the shadow */
 	gdk_gc_set_foreground (priv->fill_gc, &color_high);
-	// Draw the top of the shadow, if it can be seen
+	/* Draw the top of the shadow, if it can be seen */
 	if (cs_ystart == rs_ystart) {
 		gdk_draw_line (drawable, priv->fill_gc, r_xstart, rs_ystart, r_xend, rs_ystart);
 	}
-	// Draw the left of the shadow, if it exists and can be seen
+	/* Draw the left of the shadow, if it exists and can be seen */
 	if (chunk == ROW_START && cs_xstart == rs_xstart) {
 		gdk_draw_line (drawable, priv->fill_gc, rs_xstart, rs_ystart, rs_xstart, cs_yend);
 	}
-	// Draw the bottom and right of the shadow
+
 	gdk_gc_set_foreground (priv->fill_gc, &color_shadow);
-	// Draw the bottom of the shadow, if it can be seen
+	/* Draw the bottom of the shadow, if it can be seen */
 	if (cs_yend == rs_yend) {
 		gdk_draw_line (drawable, priv->fill_gc, r_xstart, rs_yend, r_xend, rs_yend);
 	}
-	// Draw the right of the shadow, if it exists and can be seen
+	/* Draw the right of the shadow, if it exists and can be seen */
 	if (chunk == ROW_END && cs_xend == rs_xend) {
 		gdk_draw_line (drawable, priv->fill_gc, rs_xend, rs_ystart, rs_xend, cs_yend);
 	}
 	
-	// Draw the top line, if it can be seen
+	/* Draw the top line, if it can be seen */
 	if (c_ystart == r_ystart)
 		gdk_draw_line (drawable, frame_gc, r_xstart, r_ystart, r_xend, r_ystart);
-	// Draw the bottom line, if it can be seen
+	/* Draw the bottom line, if it can be seen */
 	if (c_yend == r_yend)
 		gdk_draw_line (drawable, frame_gc, r_xstart, r_yend, r_xend, r_yend);
-	// Draw the left line, if it exists and can be seen
+	/* Draw the left line, if it exists and can be seen */
 	if (chunk == ROW_START && c_xstart == r_xstart)
 		gdk_draw_line (drawable, frame_gc, r_xstart, r_ystart, r_xstart, r_yend);
-	// Draw the right line, if it exists and can be seen
+	/* Draw the right line, if it exists and can be seen */
 	if (chunk == ROW_END && c_xend == r_xend)
 		gdk_draw_line (drawable, frame_gc, r_xend, r_ystart, r_xend, r_yend);
 
 	g_object_unref(frame_gc);
-	
-/*	gchar *couleur;
+
+	/*	
+	gchar *couleur;
 	if (units == 0) {
 		couleur = "vert";
 	} else if (units<100) {
@@ -1138,11 +1179,7 @@ ttable_row_draw_resource_ival	(mrptime		 start,
 	} else {
 		couleur = "rouge";
 	}
-	printf("Je dessine un rectangle %s\n",couleur);
-	printf("  de ");
-	mrp_time_debug_print(start);
-	printf("   a ");
-	mrp_time_debug_print(end);*/
+	*/
 }
 
 static void
@@ -1165,14 +1202,14 @@ ttable_row_draw_resource	(PlannerTtableRow		*row,
 	Date		*date, *date0, *date1;
 	mrptime		 work_start, finish, previous_time;
 	gint		 units;
-//	gchar		*name;
 	row_chunk	 chunk;
 
 	resource = row->priv->resource;
-//	g_object_get(G_OBJECT(resource),"name",&name,NULL);
-//	printf("Charge de la resource %s\n",name);
-//	g_free(name);
-	
+#ifdef VERBOSE
+	g_object_get(G_OBJECT(resource),"name",&name,NULL);
+	g_message("Timetable: Resource %s\n",name);
+#endif
+
 	dates = NULL;
 	g_object_get(G_OBJECT(resource),"project",&project,NULL);
 	root = mrp_project_get_root_task(project);
@@ -1204,7 +1241,9 @@ ttable_row_draw_resource	(PlannerTtableRow		*row,
 	previous_time = mrp_project_get_project_start(project);
 	finish = mrp_task_get_finish(root);
 	chunk = ROW_START;
-//	printf("  Au debut, j'ai une charge de %d\n",units);
+#ifdef VERBOSE
+	g_message("Timetable: initial load of %d units\n",units);
+#endif
 	for (d=dates; d; d = d->next) {
 		date = d->data;
 		if (date->time != previous_time) {
@@ -1222,21 +1261,31 @@ ttable_row_draw_resource	(PlannerTtableRow		*row,
 				chunk = ROW_MIDDLE;
 			previous_time = date->time;
 		}
-//		g_object_get(G_OBJECT(date->task),"name",&name,NULL);
+#ifdef VERBOSE
+		g_object_get(G_OBJECT(date->task),"name",&name,NULL);
+#endif
 		if (date->type == START_ASSIGN) {
 			units += date->units;
-//			printf("  Je commence une tache (%s), et passe a %d en ",name,units);
-//			mrp_time_debug_print(date->time);
+#ifdef VERBOSE
+			   g_message ("Timetable: starting task (%s) and now using %d units",name,units);
+			   mrp_time_debug_print(date->time);
+#endif
 		} else {
 			units -= date->units;
-//			printf("  Je termine une tache (%s), et passe a %d en ",name,units);
-//			mrp_time_debug_print(date->time);
+#ifdef VERBOSE
+			   g_message ("Timetable: ending task (%s) and now using %d units",name,units);
+			   mrp_time_debug_print(date->time);
+#endif
 		}
-//		g_free(name);
+#ifdef VERBOSE
+		g_free(name);
+#endif
 		g_free(date);
 	}
 	g_list_free(dates);
-//	printf("  A la fin, j'ai une charge de %d\n",units);
+#ifdef VERBOSE
+	g_message("Timetable: final load of %d units",units);
+#endif
 	if (chunk != ROW_END) {
 		chunk = ROW_END;
 		ttable_row_draw_resource_ival(
@@ -1309,7 +1358,7 @@ ttable_row_draw_assignment	(PlannerTtableRow		*row,
 		return;
 	}
 
-//	summary_y = floor (priv->y + 2 * 0.15 * priv->height + 0.5) - y;
+	/* summary_y = floor (priv->y + 2 * 0.15 * priv->height + 0.5) - y; */
 
 	/* "Clip" the expose area. */
 	rx1 = MAX (cx1, 0);
@@ -1324,13 +1373,11 @@ ttable_row_draw_assignment	(PlannerTtableRow		*row,
 
 	if (!summary) {
 		g_object_get (task,
-		      "percent-complete", &percent_complete,
-//		      "critical", &critical,
-		      NULL);  
+			      "percent-complete", &percent_complete,
+			      /* "critical", &critical, */
+			      NULL);
 		complete_width = floor ((cx2 - cx1) * (percent_complete / 100.0) + 0.5);
 		complete_x2 = MIN (cx1 + complete_width, rx2);
-	} else {
-//		fprintf(stderr,"Y'a une tache recapitulative qu'a une resource...\n");
 	}
 
 	frame_gc = ttable_row_create_frame_gc (item->canvas);
@@ -1457,21 +1504,17 @@ ttable_row_draw (GnomeCanvasItem *item,
 					   x,y,width,height
 					   );
 	} else if (row->priv->resource) {
-/*		GList	*assigns,*a;
-//		gchar	*name=NULL;
-//		fprintf(stderr,"Je dessine la resource");
-//		g_object_get(row->priv->resource,"name",&name,NULL);
-//		fprintf(stderr,"%s\n",name);
-//		g_free(name);
+		/*
+		GList	*assigns,*a;
+	        gchar	*name=NULL;
 		assigns = mrp_resource_get_assignments(row->priv->resource);
 		for (a=assigns; a; a=a->next) {
 			MrpAssignment	*assign;
 			assign = MRP_ASSIGNMENT(a->data);
 			ttable_row_draw_assignment(row,assign,item,drawable,x,y,width,height);
-		}*/
+		}
+		*/
 		ttable_row_draw_resource(row,drawable,item,x,y,width,height);
-		//ICI Il faut dessiner la ligne de la resource, pas
-		//de la tarte...
 	}
 }
 
@@ -1485,23 +1528,24 @@ ttable_row_point (GnomeCanvasItem  *item,
 {
 	PlannerTtableRow     *row;
 	PlannerTtableRowPriv *priv;
-//	gint             text_width;
-	gdouble          x1, y1, x2, y2;
-	gdouble          dx, dy;
+	gdouble               x1, y1, x2, y2;
+	gdouble               dx, dy;
 	
 	row = PLANNER_TTABLE_ROW (item);
 	priv = row->priv;
 	
 	*actual_item = item;
 
-//	text_width = priv->text_width;
-//	if (text_width > 0) {
-//		text_width += TEXT_PADDING;
-//	}
+	/*
+	text_width = priv->text_width;
+	if (text_width > 0) {
+		text_width += TEXT_PADDING;
+	}
+	*/
 
 	x1 = priv->x;
 	y1 = priv->y;
-	x2 = x1 + priv->width;// + text_width;
+	x2 = x1 + priv->width /* + text_width */ ;
 	y2 = y1 + priv->height;
 	
 	if (x > x1 && x < x2 && y > y1 && y < y2) {
@@ -1551,10 +1595,6 @@ ttable_row_bounds (GnomeCanvasItem *item,
 static void
 ttable_row_resource_notify_cb (MrpResource *resource, GParamSpec *pspec, PlannerTtableRow *row)
 {
-	gchar *name=NULL;
-	g_object_get(resource,"name",&name,NULL);
-//	fprintf(stderr,"Notify sur la resource %s\n",name);
-	g_free(name);
 	recalc_bounds (row);
 	ttable_row_geometry_changed (row); 
 	gnome_canvas_item_request_update (GNOME_CANVAS_ITEM (row));
@@ -1606,14 +1646,16 @@ ttable_row_task_notify_cb (MrpTask *task, GParamSpec *pspec, PlannerTtableRow *r
 	gnome_canvas_item_request_update (GNOME_CANVAS_ITEM (row));
 }
 
-//static void
-//gantt_row_update_assignment_string (PlannerGanttRow *row)
-//{
-//	gantt_row_update_resources (row);
-//	
-//	recalc_bounds (row);
-//	gnome_canvas_item_request_update (GNOME_CANVAS_ITEM (row));
-//}
+/*
+static void
+gantt_row_update_assignment_string (PlannerGanttRow *row)
+{
+	gantt_row_update_resources (row);
+	
+	recalc_bounds (row);
+	gnome_canvas_item_request_update (GNOME_CANVAS_ITEM (row));
+}
+*/
 
 /*
 static void 
@@ -1844,32 +1886,28 @@ ttable_row_event (GnomeCanvasItem *item, GdkEvent *event)
 	gdouble                   wx2, wy2;
 	static MrpTask           *task = NULL;
 	static gchar		 *task_name = NULL;
-/*	static GnomeCanvasItem   *target_item;
-	static GnomeCanvasItem   *old_target_item;*/
 	static GnomeCanvasItem   *drag_item = NULL;
-/*	static GnomeCanvasPoints *drag_points = NULL;
-	MrpTask                  *target_task;*/
 	gchar                    *message;
 
 	row = PLANNER_TTABLE_ROW (item);
 	priv = row->priv;
 	canvas_widget = GTK_WIDGET (item->canvas);
 	
-//	summary = (mrp_task_get_n_children (priv->task) > 0);
+	/* summary = (mrp_task_get_n_children (priv->task) > 0); */
 
 	switch (event->type) {
 	case GDK_BUTTON_PRESS:
 		switch (event->button.button) {
-/*		case 3:
+			/*
+		case 3:
 			if (IN_DRAG_RELATION_SPOT (event->button.x,
 						   event->button.y,
 						   priv->x + priv->width,
 						   priv->y,
 						   priv->height)) {
-				//print ("popup\n");
 			}
 			break;
-*/			
+			*/			
 		case 1:
 			if (priv->state != STATE_NONE) {
 				break;
@@ -1894,7 +1932,7 @@ ttable_row_event (GnomeCanvasItem *item, GdkEvent *event)
 				task = mrp_assignment_get_task(priv->assignment);
 				g_object_get(G_OBJECT(task),"name",&task_name,NULL);
 
-				//      red            green          blue          alpha 
+				/*      red            green          blue          alpha */
 				rgba = (0xb7 << 24) | (0xc3 << 16) | (0xc9 << 8) | (127 << 0);
 				
 				if (drag_item == NULL) {
@@ -1928,7 +1966,7 @@ ttable_row_event (GnomeCanvasItem *item, GdkEvent *event)
 				gnome_canvas_item_i2w (item, &wx1, &wy1);
 				gnome_canvas_item_i2w (item, &wx2, &wy2);
 
-				//      red            green          blue          alpha 
+				/*      red            green          blue          alpha */
 				rgba = (0xb7 << 24) | (0xc3 << 16) | (0xc9 << 8) | (127 << 0);
 				
 				drag_item = gnome_canvas_item_new (gnome_canvas_root (item->canvas),
@@ -1943,15 +1981,18 @@ ttable_row_event (GnomeCanvasItem *item, GdkEvent *event)
 				task = mrp_assignment_get_task(priv->assignment);
 				g_object_get(G_OBJECT(task),"name",&task_name,NULL);
 
-				//
-				// Start the autoscroll timeout.
-				//
-//				priv->scroll_timeout_id = gtk_timeout_add (
-//					50,
-//					(GSourceFunc) gantt_row_scroll_timeout_cb,
-//					row);*/
+				/*
+				  Start the autoscroll timeout.
+				*/
+				/*
+				priv->scroll_timeout_id = gtk_timeout_add (
+					50,
+					(GSourceFunc) gantt_row_scroll_timeout_cb,
+					row);
+				*/
 			} else {
-/*				gint         res_index;
+				/*
+				gint         res_index;
 				GList       *resources;
 				MrpResource *resource;
 
@@ -1974,7 +2015,8 @@ ttable_row_event (GnomeCanvasItem *item, GdkEvent *event)
 					return TRUE;
 				} else {
 					return FALSE;
-				}*/
+				}
+				*/
 				return FALSE;
 			}
 			
@@ -1996,19 +2038,20 @@ ttable_row_event (GnomeCanvasItem *item, GdkEvent *event)
 		break;
 
 	case GDK_LEAVE_NOTIFY:
-		// We get a leave notify when pressing button 1 over the
-		// item. We don't want to reset the cursor when that happens.
-		//
+		/*
+		  We get a leave notify when pressing button 1 over the
+		  item. We don't want to reset the cursor when that happens.
+		*/
 		if ((priv->state == STATE_NONE) &&
 		    !(event->crossing.state & GDK_BUTTON1_MASK)) {
 			gdk_window_set_cursor (canvas_widget->window, NULL);
 		}
-
-//		g_object_set (row,
-//			      "mouse-over-index",
-//			      -1,
-//			      NULL);
-//		
+		/*
+		g_object_set (row,
+			      "mouse-over-index",
+			      -1,
+			      NULL);
+		*/		
 		return TRUE;
 	
 	case GDK_MOTION_NOTIFY:
@@ -2045,10 +2088,12 @@ ttable_row_event (GnomeCanvasItem *item, GdkEvent *event)
 		}
 		else if (priv->state == STATE_DRAG_MOVE) {
 			mrptime	new_start;
-//			target_item = gnome_canvas_get_item_at (item->canvas,
-//								event->motion.x,
-//								event->motion.y);
-			
+			/*
+			target_item = gnome_canvas_get_item_at (item->canvas,
+								event->motion.x,
+								event->motion.y);
+			*/
+
 			gnome_canvas_item_raise_to_top (drag_item);
 			gnome_canvas_item_show (drag_item);
 			
@@ -2067,7 +2112,8 @@ ttable_row_event (GnomeCanvasItem *item, GdkEvent *event)
 					);
 			planner_ttable_chart_status_updated (chart, message);
 			g_free (message);
-/*			if (target_item && target_item != item) {
+			/*
+			if (target_item && target_item != item) {
 				message = g_strdup_printf (_("Make task '%s' a predecessor of '%s'"),
 							   task_name,
 							   target_name);
@@ -2077,13 +2123,15 @@ ttable_row_event (GnomeCanvasItem *item, GdkEvent *event)
 				g_free (message);
 				g_free (target_name);
 				g_free (task_name);
-			}*/
-
-/*			if (target_item == NULL) {
+			}
+			*/
+			/*
+			if (target_item == NULL) {
 				planner_gantt_chart_status_updated (chart, NULL);
 			}
 			
-			old_target_item = target_item;*/
+			old_target_item = target_item;
+			*/
 		}
 		else if (priv->state == STATE_DRAG_DURATION) {
 			gint            duration;
@@ -2118,7 +2166,7 @@ ttable_row_event (GnomeCanvasItem *item, GdkEvent *event)
 			start = mrp_task_get_work_start(task);
 			duration = MAX (0, (event->motion.x - priv->x) / priv->scale);
 
-			// Snap to quarters. 
+			/* Snap to quarters. */
 			duration = floor (duration / SNAP + 0.5) * SNAP;
 
 			work = mrp_project_calculate_task_work (
@@ -2155,7 +2203,7 @@ ttable_row_event (GnomeCanvasItem *item, GdkEvent *event)
 			g_object_get (task, "project", &project, NULL);
 			
 			duration = MAX (0, (event->button.x - priv->x_start) / priv->scale);
-			// Snap to quarters. 
+			/* Snap to quarters. */
 			duration = floor (duration / SNAP + 0.5) * SNAP;
 
 			work = mrp_project_calculate_task_work (
@@ -2200,7 +2248,8 @@ ttable_row_event (GnomeCanvasItem *item, GdkEvent *event)
 			task_name = NULL;
 			task = NULL;
 		}
-/*		else if (priv->state == STATE_DRAG_LINK) {
+		/*
+		else if (priv->state == STATE_DRAG_LINK) {
 			if (old_target_item) {
 				g_object_set (old_target_item,
 					      "highlight",
@@ -2252,9 +2301,10 @@ ttable_row_event (GnomeCanvasItem *item, GdkEvent *event)
 						   "chart");
 			
 			planner_gantt_chart_status_updated (chart, NULL);
-		}*/
+		}
+		*/
 
-		// We're done, reset the cursor and state, ungrab pointer. 
+		/* We're done, reset the cursor and state, ungrab pointer. */
 		gdk_window_set_cursor (canvas_widget->window, NULL);
 			
 		gnome_canvas_item_ungrab (item, event->button.time);

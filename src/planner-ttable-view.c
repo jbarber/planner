@@ -1,3 +1,24 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+/*
+ * Copyright (C) 2003 Benjamin BAYART <benjamin@sitadelle.com>
+ * Copyright (C) 2003 Xavier Ordoquy <xordoquy@wanadoo.fr>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public
+ * License along with this program; if not, write to the
+ * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+ * Boston, MA 02111-1307, USA.
+ */
+
 #include <config.h>
 #include <glib.h>
 #include <gmodule.h>
@@ -7,7 +28,7 @@
 #include <libgnome/gnome-i18n.h>
 #include <libplanner/mrp-task.h>
 #include <libplanner/mrp-resource.h>
-#include "app/planner-view.h"
+#include "planner-view.h"
 #include "planner-ttable-print.h"
 #include "planner-ttable-model.h"
 #include "planner-ttable-tree.h"
@@ -23,10 +44,6 @@ struct _PlannerViewPriv {
 	PlannerTtablePrintData *print_data;
 };
 
-/* Les call-backs pour bonobo */
-//static void		ttable_view_test_cb		(BonoboUIComponent	*component,
-//							 gpointer		 data,
-//							 const char		*cname);
 static void		ttable_view_zoom_out_cb		(BonoboUIComponent	*component,
 							 gpointer		 data,
 							 const char		*cname);
@@ -68,11 +85,11 @@ static void		ttable_view_collapse_all		(PlannerTtableTree		*tree,
 static void		ttable_view_ttable_status_updated	(PlannerTtableChart		*chart,
 								 const gchar		*message,
 								 PlannerView			*view);
-/* Fonctions exportees par le module */
+
 void			activate				(PlannerView			*view);
 void			deactivate				(PlannerView			*view);
 void			init					(PlannerView			*view,
-								 PlannerWindow		*main_window);
+								 PlannerMainWindow		*main_window);
 gchar*			get_label				(PlannerView			*view);
 gchar*			get_menu_label				(PlannerView			*view);
 gchar*			get_icon				(PlannerView			*view);
@@ -82,6 +99,8 @@ void			print_init				(PlannerView			*view,
 void			print					(PlannerView			*view);
 gint			print_get_n_pages			(PlannerView			*view);
 void			print_cleanup				(PlannerView			*view);
+
+
 
 G_MODULE_EXPORT void                                
 activate (PlannerView *view)
@@ -194,23 +213,6 @@ print_cleanup (PlannerView *view)
 }
 
 
-/*
-static void
-ttable_view_test_cb	(BonoboUIComponent	*component,
-			 gpointer		 data,
-			 const char		*cname)
-{
-	PlannerView		*view;
-	PlannerViewPriv	*priv;
-	MrpProject	*project;
-
-	view = PLANNER_VIEW(data);
-	priv = view->priv;
-	project = planner_window_get_project(view->main_window);
-//	fprintf(stderr,"Coucou!\n");
-}
-*/
-
 static void
 ttable_view_zoom_out_cb		(BonoboUIComponent	*component,
 				 gpointer		 data,
@@ -249,10 +251,9 @@ ttable_view_ui_component_event	(BonoboUIComponent	*component,
 				 PlannerView			*view)
 {
 	PlannerViewPriv *priv;
-//	gboolean    state;
 
 	priv = view->priv;
-//	fprintf(stderr,"Y'a eu un evenement, et je ne me l'explique pas!\n");
+	g_message("ttable_view_ui_component_event");
 }
 
 static void
@@ -296,7 +297,7 @@ ttable_view_create_widget	(PlannerView			*view)
 	GtkWidget	*left_frame;
 	GtkWidget	*right_frame;
 	PlannerTtableModel   *model;
-//	PlannerTtableTree	*tree;
+
 	GtkWidget	*tree;
 	GtkWidget	*vbox;
 	GtkWidget	*sw;
@@ -304,8 +305,6 @@ ttable_view_create_widget	(PlannerView			*view)
 	GtkWidget	*chart;
 	
 	GtkAdjustment    *hadj, *vadj;
-//	GtkWidget	*vbox;
-//	GtkWidget	*
 
 	project = planner_window_get_project (view->main_window);
 	priv = view->priv;
@@ -331,7 +330,6 @@ ttable_view_create_widget	(PlannerView			*view)
 	hadj = GTK_ADJUSTMENT (gtk_adjustment_new (0, 0, 0, 90, 250, 2000));
 	vadj = gtk_tree_view_get_vadjustment (GTK_TREE_VIEW (tree));
 
-	//ICI
 	chart = planner_ttable_chart_new_with_model(GTK_TREE_MODEL(model));
 	priv->chart = PLANNER_TTABLE_CHART(chart);
 	sw = gtk_scrolled_window_new (hadj, vadj);
@@ -386,7 +384,7 @@ ttable_view_project_loaded_cb	(MrpProject	*project,
 	g_object_unref (model);
 	gtk_tree_view_expand_all (GTK_TREE_VIEW (view->priv->tree));
 	planner_ttable_chart_expand_all (view->priv->chart);
-//	fprintf(stderr,"Le project a ete lu, ce qui me fait une belle jambe\n");
+	g_message("timetable: project loaded");
 }
 
 static void
@@ -422,7 +420,6 @@ ttable_view_row_expanded		(GtkTreeView		*tree_view,
 					 gpointer		 data)
 {
 	PlannerTtableChart *chart = data;
-	fprintf(stderr,"Je transmet l'expand-row au chart\n");
 	planner_ttable_chart_expand_row(chart,path);
 }
 
@@ -433,7 +430,6 @@ ttable_view_row_collapsed		(GtkTreeView		*tree_view,
 					 gpointer		 data)
 {
 	PlannerTtableChart *chart = data;
-	fprintf(stderr,"Je transmet le collapse-row au chart\n");
 	planner_ttable_chart_collapse_row(chart,path);
 }
 
@@ -442,17 +438,16 @@ ttable_view_expand_all		(PlannerTtableTree	*tree,
 				 PlannerTtableChart	*chart)
 {
 	if (!PLANNER_IS_TTABLE_TREE(tree)) {
-		fprintf(stderr,"Expand sur pas un PlannerTtableTree\n");
+		g_warning("TimetableView: type mismatch for PlannerTtableTree.");
 		return;
 	}
 	if (!PLANNER_IS_TTABLE_CHART(chart)) {
-		fprintf(stderr,"J'ai pas recu un PlannerTtableChart\n");
+		g_warning("TimetableView: type mismatch for PlannerTtableChart.");
 		return;
 	}
 	g_signal_handlers_block_by_func(tree,
 					ttable_view_row_expanded,
 					chart);
-	fprintf(stderr,"Je transmet l'expand-all\n");
 	planner_ttable_tree_expand_all(tree);
 	planner_ttable_chart_expand_all(chart);
 	g_signal_handlers_unblock_by_func(tree,
@@ -465,17 +460,16 @@ ttable_view_collapse_all	(PlannerTtableTree	*tree,
 				 PlannerTtableChart	*chart)
 {
 	if (!PLANNER_IS_TTABLE_TREE(tree)) {
-		fprintf(stderr,"Expand sur pas un PlannerTtableTree\n");
+		g_warning("Timetable: type mismatch for PlannerTtableTree.");
 		return;
 	}
 	if (!PLANNER_IS_TTABLE_CHART(chart)) {
-		fprintf(stderr,"J'ai pas recu un PlannerTtableChart\n");
+		g_warning("Timetable: type mismatch for PlannerTtableChart.");
 		return;
 	}
 	g_signal_handlers_block_by_func(tree,
 					ttable_view_row_collapsed,
 					chart);
-	fprintf(stderr,"Je transmet le collapse-all\n");
 	planner_ttable_tree_collapse_all(tree);
 	planner_ttable_chart_collapse_all(chart);
 	g_signal_handlers_unblock_by_func(tree,
@@ -483,11 +477,12 @@ ttable_view_collapse_all	(PlannerTtableTree	*tree,
 					  chart);
 }
 
-//Quid? :
-//planner_ttable_print_data_new
-//planner_ttable_print_do
-//planner_ttable_print_get_n_pages
-
+/*
+TODO:
+planner_ttable_print_data_new
+planner_ttable_print_do
+planner_ttable_print_get_n_pages
+*/
 
 
 

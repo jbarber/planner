@@ -1,3 +1,23 @@
+2003-12-12  Xavier Ordoquy <xordoquy@wanadoo.fr>
+
+	* data/ui/Makefile.am:
+	* src/Makefile.am:
+	Added the files needed by time table when configured with.
+
+	* src/planner-ttable-chart.c:
+	* src/planner-ttable-chart.h:
+	* src/planner-ttable-model.c:
+	* src/planner-ttable-model.h:
+	* src/planner-ttable-print.c:
+	* src/planner-ttable-print.h:
+	* src/planner-ttable-row.c:
+	* src/planner-ttable-row.h:
+	* src/planner-ttable-tree.c:
+	* src/planner-ttable-tree.h:
+	* src/planner-ttable-view.c:
+	Added copyrights, remove C++ comments and debugging output
+	try to start cleaning up the code.
+
 2003-12-12  Richard Hult  <richard@imendio.com>
 
 	* data/glade/project-properties.glade:

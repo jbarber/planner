@@ -1,3 +1,24 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+/*
+ * Copyright (C) 2003 Benjamin BAYART <benjamin@sitadelle.com>
+ * Copyright (C) 2003 Xavier Ordoquy <xordoquy@wanadoo.fr>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public
+ * License along with this program; if not, write to the
+ * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+ * Boston, MA 02111-1307, USA.
+ */
+
 #include <config.h>
 #include <math.h>
 #include <stdlib.h>
@@ -13,13 +34,11 @@
 #include <gtk/gtkmessagedialog.h>
 #include <libgnome/gnome-i18n.h>
 
-#include "util/planner-format.h"
-#include "util/planner-marshal.h"
-#include "cell-renderers/planner-cell-renderer-date.h"
-#include "dialogs/task-dialog/planner-task-dialog.h"
-#include "dialogs/resource-dialog/planner-resource-dialog.h"
-//#include "dialogs/task-input-dialog/planner-task-input-dialog.h"
-//#include "dialogs/property-dialog/planner-property-dialog.h"
+#include "planner-format.h"
+#include "planner-marshal.h"
+#include "planner-cell-renderer-date.h"
+#include "planner-task-dialog.h"
+#include "planner-resource-dialog.h"
 #include "planner-ttable-tree.h"
 #include "planner-ttable-model.h"
 
@@ -196,7 +215,6 @@ ttable_tree_setup_tree_view (GtkTreeView   *gtk_tree,
 			     PlannerTtableModel *model)
 {
 	PlannerTtableTree     *tree;
-//	GtkTreeSelection *selection;
 
 	tree = PLANNER_TTABLE_TREE(gtk_tree);
 
@@ -299,9 +317,6 @@ planner_ttable_tree_new (PlannerWindow  *main_window,
 	MrpProject		*project;
 	PlannerTtableTree		*tree;
 	PlannerTtableTreePriv	*priv;
-//	va_list			 args;
-//	gpointer		 str;
-//	gint			 col;
 
 	tree = g_object_new (PLANNER_TYPE_TTABLE_TREE, NULL);
 
@@ -348,7 +363,6 @@ ttable_tree_popup_expand_all_cb		(gpointer	 callback_data,
 					 GtkWidget	*widget)
 {
 	g_signal_emit(callback_data,signals[EXPAND_ALL],0);
-//	gtk_tree_view_expand_all(callback_data);
 }
 
 void
@@ -371,7 +385,6 @@ ttable_tree_popup_collapse_all_cb	(gpointer	 callback_data,
 					 GtkWidget	*widget)
 {
 	g_signal_emit(callback_data,signals[COLLAPSE_ALL],0);
-//	gtk_tree_view_collapse_all(callback_data);
 }
 
 void
@@ -457,7 +470,7 @@ ttable_tree_get_selected_func	(GtkTreeModel	*model,
 	} else if (resource != NULL) {
 		*list = g_list_prepend(*list,resource);
 	} else {
-		fprintf(stderr,"PlannerTtableTree: Ni resource ni assignment dans la selection, va comprendre\n");
+		g_warning("PlannerTtableTree: no resource nor assignment !!!");
 	}
 }
 

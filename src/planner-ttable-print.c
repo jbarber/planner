@@ -1,3 +1,24 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+/*
+ * Copyright (C) 2003 Benjamin BAYART <benjamin@sitadelle.com>
+ * Copyright (C) 2003 Xavier Ordoquy <xordoquy@wanadoo.fr>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public
+ * License along with this program; if not, write to the
+ * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+ * Boston, MA 02111-1307, USA.
+ */
+
 #include <config.h>
 #include <math.h>
 #include <string.h>
@@ -6,8 +27,8 @@
 #include <libplanner/mrp-resource.h>
 #include <libgnome/gnome-i18n.h>
 #include <libgnomeprint/gnome-print.h>
-#include "src/util/planner-print-job.h"
-#include "src/util/planner-format.h"
+#include "planner-print-job.h"
+#include "planner-format.h"
 #include "planner-ttable-print.h"
 
 typedef struct {
@@ -49,12 +70,11 @@ struct _PlannerTtablePrintData {
 #define TEXT_PAD 15.0
 
 void
-planner_ttable_print_do (PlannerTtablePrintData *data) {
+planner_ttable_print_do (PlannerTtablePrintData *data)
+{
 	int i,j;
 	gdouble cur_x;
-	fprintf(stderr,"Print do\n");
-	// Premiere passe: compter les lignes, et les largeurs utiles
-	
+
 	for (i=0; i<data->n_pages; i++) {
 		Page *page;
 		cur_x=0;
@@ -62,7 +82,6 @@ planner_ttable_print_do (PlannerTtablePrintData *data) {
 		planner_print_job_begin_next_page (data->job);
 		if (page->has_resource) {
 			GList *l;
-			fprintf(stderr,"La page %d affiche la colonne des resources\n",i);
 			planner_print_job_moveto(data->job,0,0);
 			planner_print_job_lineto(data->job,data->res_width+2*TEXT_PAD,0);
 			planner_print_job_lineto(data->job,data->res_width+2*TEXT_PAD,(page->n_lines+2)*data->row_height);
@@ -82,7 +101,6 @@ planner_ttable_print_do (PlannerTtablePrintData *data) {
 				Ligne *line;
 				line = (Ligne*)l->data;
 				j++;
-				fprintf(stderr,"Je trace la %d ieme ligne\n",j);
 				planner_print_job_moveto(data->job,0,j*data->row_height);
 				planner_print_job_lineto(data->job,data->res_width+2*TEXT_PAD,j*data->row_height);
 				gnome_print_stroke(data->job->pc);
@@ -98,12 +116,9 @@ planner_ttable_print_do (PlannerTtablePrintData *data) {
 				}
 			}
 			cur_x+=data->res_width+2*TEXT_PAD;
-		} else {
-			fprintf(stderr,"La page %d n'affiche pas la colonne des resources\n",i);
 		}
 		if (page->has_task) {
 			GList *l;
-			fprintf(stderr,"La page %d affiche la colonne des taches\n",i);
 			planner_print_job_moveto(data->job,cur_x,0);
 			planner_print_job_lineto(data->job,data->task_width+2*TEXT_PAD,0);
 			planner_print_job_lineto(data->job,data->task_width+2*TEXT_PAD,(page->n_lines+2)*data->row_height);
@@ -140,12 +155,11 @@ planner_ttable_print_do (PlannerTtablePrintData *data) {
 				}
 			}
 			cur_x+=data->task_width+2*TEXT_PAD;
-		} else {
-			fprintf(stderr,"La page %d n'affiche pas la colonne des taches\n",i);
 		}
 		planner_print_job_finish_page (data->job, TRUE);
 	}
-/*	planner_print_job_begin_next_page (data->job);
+	/*
+	planner_print_job_begin_next_page (data->job);
 	planner_print_job_moveto(data->job,0,0);
 	planner_print_job_lineto(data->job,data->job->width,0);
 	planner_print_job_lineto(data->job,data->job->width,data->job->height);
@@ -162,7 +176,6 @@ planner_ttable_print_data_new (PlannerView *view,
 {
 	PlannerTtablePrintData	*data;
 
-	fprintf(stderr,"Print data new\n");
 	data = g_new0(PlannerTtablePrintData,1);
 	data->view = view;
 	data->job = job;
@@ -174,7 +187,6 @@ void
 planner_ttable_print_data_free (PlannerTtablePrintData *data)
 {
 	g_return_if_fail (data != NULL);
-	fprintf(stderr,"Print data free\n");
 	g_free (data);
 }
 
@@ -189,8 +201,6 @@ planner_ttable_print_get_n_pages (PlannerTtablePrintData *data)
 	
 	g_return_val_if_fail (data != NULL, 0);
 	
-	fprintf(stderr,"Print get n pages\n");
-	
 	data->lines = 0;
 	font = planner_print_job_get_font(data->job);
 	r=mrp_project_get_resources(data->project);
@@ -201,7 +211,6 @@ planner_ttable_print_get_n_pages (PlannerTtablePrintData *data)
 		g_object_get(res,"name",&name,NULL);
 		width = gnome_font_get_width_utf8(font,name);
 		data->res_width=MAX(data->res_width,width);
-//		fprintf(stderr,"Faut imprimer la resource %s\n",name);
 		g_free(name);
 
 		data->lines++;
@@ -232,7 +241,6 @@ planner_ttable_print_get_n_pages (PlannerTtablePrintData *data)
 	data->free_right_first -= TEXT_PAD;
 	data->free_right_first -= data->res_width;
 	data->free_right_first -= TEXT_PAD;
-//	fprintf(stderr,"Apres les resources, il reste %f sur la page\n",data->free_right_first);
 	if (data->free_right_first > data->task_width + 2*TEXT_PAD) {
 		data->free_right_first -= data->task_width + 2*TEXT_PAD;
 		data->task_on_first = TRUE;
@@ -241,14 +249,8 @@ planner_ttable_print_get_n_pages (PlannerTtablePrintData *data)
 		data->task_on_first = FALSE;
 		data->free_right_first = data->page_width - 2*TEXT_PAD - data->task_width;
 	}
-//	fprintf(stderr,"Apres les taches, il reste %f sur la page\n",data->free_right_first);
 	data->n_pages = data->pages_x * data->pages_y;
 	
-	fprintf(stderr,"Faut imprimer %u lignes, soit une hauteur de %f\n",data->lines,data->row_height*data->lines);
-	fprintf(stderr,"Largeur resource: %f\n",data->res_width);
-	fprintf(stderr,"Largeur taches: %f\n",data->task_width);
-	fprintf(stderr,"Nombre de pages: %d\n",data->pages_x*data->pages_y);
-
 	data->pages = g_new0(Page,data->n_pages);
 	for (i=0; i<data->n_pages; i++) {
 		data->pages[i].has_resource=FALSE;

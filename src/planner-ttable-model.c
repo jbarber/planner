@@ -1,3 +1,24 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+/*
+ * Copyright (C) 2003 Benjamin BAYART <benjamin@sitadelle.com>
+ * Copyright (C) 2003 Xavier Ordoquy <xordoquy@wanadoo.fr>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public
+ * License along with this program; if not, write to the
+ * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+ * Boston, MA 02111-1307, USA.
+ */
+
 #include <config.h>
 #include <string.h>
 #include <time.h>
@@ -7,7 +28,7 @@
 #include <gtk/gtktreednd.h>
 #include <libgnome/gnome-i18n.h>
 #include <libplanner/mrp-task.h>
-#include "util/planner-marshal.h"
+#include "planner-marshal.h"
 #include "planner-ttable-model.h"
 
 enum {
@@ -44,9 +65,11 @@ static void	ttable_model_resource_added_cb			(MrpProject	*project,
 static void	ttable_model_resource_removed_cb		(MrpProject	*project,
 								 MrpResource	*resource,
 								 PlannerTtableModel	*model);
-//static void	ttable_model_assignment_removed_cb		(MrpAssignment	*assign,
-//								 GParamSpec	*spec,
-//								 PlannerTtableModel	*model);
+/*
+static void	ttable_model_assignment_removed_cb		(MrpAssignment	*assign,
+								 GParamSpec	*spec,
+								 PlannerTtableModel	*model);
+*/
 
 static GObjectClass *parent_class;
 static guint signals[LAST_SIGNAL];
@@ -58,11 +81,11 @@ planner_ttable_model_get_type(void)
 	if (!type) {
 		static const GTypeInfo info = {
 			sizeof(PlannerTtableModelClass),
-			NULL, // base init
-			NULL, // base finalize
+			NULL, /* base init */
+			NULL, /* base finalize */
 			(GClassInitFunc) ttable_model_class_init,
-			NULL, // class finalize
-			NULL, // class data
+			NULL, /* class finalize */
+			NULL, /* class data */
 			sizeof(PlannerTtableModel),
 			0,
 			(GInstanceInitFunc) ttable_model_init
@@ -73,16 +96,16 @@ planner_ttable_model_get_type(void)
 			NULL
 		};
 #ifdef DND
-//		static const GInterfaceInfo drag_source_info = {
-//			(GInterfaceInitFunc) gantt_model_drag_source_init,
-//			NULL,
-//			NULL,
-//		};
-//		static const GInterfaceInfo drag_dest_info = {
-//			(GInterfaceInitFunc) gantt_model_drag_dest_init,
-//			NULL,
-//			NULL
-//		};
+		static const GInterfaceInfo drag_source_info = {
+			(GInterfaceInitFunc) gantt_model_drag_source_init,
+			NULL,
+			NULL,
+		};
+		static const GInterfaceInfo drag_dest_info = {
+			(GInterfaceInitFunc) gantt_model_drag_dest_init,
+			NULL,
+			NULL
+		};
 #endif
 		type = g_type_register_static (G_TYPE_OBJECT,
 					       "PlannerTtableModel",
@@ -91,12 +114,12 @@ planner_ttable_model_get_type(void)
 					     GTK_TYPE_TREE_MODEL,
 					     &tree_model_info);
 #ifdef DND
-//		g_type_add_interface_static (type,
-//					     GTK_TYPE_TREE_DRAG_SOURCE,
-//					     &drag_source_info);
-//		g_type_add_interface_static (type,
-//					     GTK_TYPE_TREE_DRAG_DEST,
-//					     &drag_dest_info);
+		g_type_add_interface_static (type,
+					     GTK_TYPE_TREE_DRAG_SOURCE,
+					     &drag_source_info);
+		g_type_add_interface_static (type,
+					     GTK_TYPE_TREE_DRAG_DEST,
+					     &drag_dest_info);
 #endif
 	}
 	return type;
@@ -126,7 +149,6 @@ ttable_model_finalize (GObject *object)
 {
 	PlannerTtableModel *model = PLANNER_TTABLE_MODEL(object);
 
-	fprintf(stderr,"%p est detruit\n",model);
 	g_free(model->priv);
 
 	if (G_OBJECT_CLASS(parent_class)->finalize) {
@@ -345,7 +367,7 @@ ttable_model_get_value (GtkTreeModel *tree_model,
 			resource = NULL;
 			assign = NULL;
 			task = NULL;
-			fprintf(stderr, "%s (%d): pas le bon type\n", __FILE__, __LINE__);
+			g_warning("Type mismatch (%s:%d)", __FILE__, __LINE__);
 		}
 	}
 	g_assert(resource!=NULL);
@@ -365,7 +387,7 @@ ttable_model_get_value (GtkTreeModel *tree_model,
 			if (task) {
 				g_object_get (task, "name", &str, NULL);
 			}
-			if (str == NULL) { // Implicit: || task == NULL
+			if (str == NULL) { /* Implicit: || task == NULL */
 				str = g_strdup("");
 			}
 			g_value_init (value, G_TYPE_STRING);
@@ -527,17 +549,11 @@ planner_ttable_model_new (MrpProject *project)
 	PlannerTtableModelPriv	*priv;
 
 	GList            	*resources, *r;
-//	GList			*tasks, *t;
-//	GNode			*rnode, *tnode;
 	MrpResource		*resource;
-//	MrpAssignment		*assign;
-
-//	gulong			 signal_id;
 
 	model = PLANNER_TTABLE_MODEL (g_object_new (PLANNER_TYPE_TTABLE_MODEL, NULL));
 	priv = model->priv;
 	priv->in_new=TRUE;
-	fprintf(stderr,"%p est en construction\n",model);
 
 	priv->project = project;
 	resources = mrp_project_get_resources(project);
@@ -557,7 +573,6 @@ planner_ttable_model_new (MrpProject *project)
 			model,
 			0);
 	priv->in_new=FALSE;
-	fprintf(stderr,"%p est construit\n",model);
 	return model;
 }
 
@@ -689,11 +704,6 @@ ttable_model_resource_assignment_added_cb	(MrpResource	*res,
 				path,&iter);
 		gtk_tree_path_free(path);
 	}
-	if (priv->in_new) {
-		fprintf(stderr,"On ajoute un assignment %p a une resource en construction de %p\n",assign,model);
-	} else {
-		fprintf(stderr,"On ajoute un assignment %p a une resource en call-back de %p\n",assign,model);
-	}
 }
 
 static void
@@ -725,7 +735,6 @@ ttable_model_resource_assignment_removed_cb	(MrpResource	*res,
 		gtk_tree_model_row_has_child_toggled(GTK_TREE_MODEL(model),path,&iter);
 		gtk_tree_path_free(path);
 	}
-	fprintf(stderr,"On retire un assignment a une resource\n");
 }
 
 static void
@@ -745,11 +754,6 @@ ttable_model_resource_added_cb			(MrpProject	*project,
 	g_return_if_fail(PLANNER_IS_TTABLE_MODEL(model));
 
 	priv = model->priv;
-	if (priv->in_new) {
-		fprintf(stderr,"Resource %p ajoutee en construction de %p\n",resource,model);
-	} else {
-		fprintf(stderr,"Resource %p ajoutee en call-back de %p\n",resource,model);
-	}
 	
 	g_signal_connect_object(resource,
 			     "assignment_added",
@@ -774,12 +778,13 @@ ttable_model_resource_added_cb			(MrpProject	*project,
 	for (t=tasks; t; t=t->next) {
 		assign = MRP_ASSIGNMENT(t->data);
 		ttable_model_resource_assignment_added_cb(resource,assign,model);
-//		tnode = g_node_new(assign);
-//		g_node_append(rnode,tnode);
-//		g_hash_table_insert (priv->assign2node, assign, tnode);
-//
-//		path = ttable_model_get_path
-		// I should also insert the row explicitely... no?
+		/*
+		tnode = g_node_new(assign);
+		g_node_append(rnode,tnode);
+		g_hash_table_insert (priv->assign2node, assign, tnode);
+
+		path = ttable_model_get_path
+		*/
 	}
 }
 
@@ -788,16 +793,17 @@ ttable_model_resource_removed_cb		(MrpProject	*project,
 						 MrpResource	*resource,
 						 PlannerTtableModel	*model)
 {
-	fprintf(stderr,"Resource retiree\n");
 	g_return_if_fail(MRP_IS_PROJECT(project));
 	g_return_if_fail(MRP_IS_RESOURCE(resource));
 	g_return_if_fail(PLANNER_IS_TTABLE_MODEL(model));
 }
 
-//static void
-//ttable_model_assignment_removed_cb		(MrpAssignment	*assign,
-//						 GParamSpec	*spec,
-//						 PlannerTtableModel	*model)
-//{
-//	fprintf(stderr,"On retire un assignment\n");
-//}
+/*
+static void
+ttable_model_assignment_removed_cb		(MrpAssignment	*assign,
+						 GParamSpec	*spec,
+						 PlannerTtableModel	*model)
+{
+        g_message("Removing an assignment");
+}
+*/

@@ -112,8 +112,12 @@ libutil_la_SOURCES = planner-marshal-main.c
 # Views
 #
 
+if BUILD_TIMETABLE
+timetable_view = libtimetable-view.la
+endif
+
 viewdir = $(libdir)/planner/views
-view_LTLIBRARIES = libgantt-view.la libtask-view.la libresource-view.la 
+view_LTLIBRARIES = libgantt-view.la libtask-view.la libresource-view.la  $(timetable_view)
 
 libgantt_view_la_SOURCES = \
 	planner-relation-arrow.c	\
@@ -154,6 +158,21 @@ libresource_view_la_SOURCES = \
 
 libresource_view_la_LDFLAGS = -avoid-version -module
 libresource_view_la_LIBADD = libutil.la
+
+if BUILD_TIMETABLE
+
+libtimetable_view_la_SOURCES = \
+	planner-ttable-chart.c		\
+	planner-ttable-model.c		\
+	planner-ttable-print.c		\
+	planner-ttable-row.c		\
+	planner-ttable-tree.c		\
+	planner-ttable-view.c
+
+libtimetable_view_la_LDFLAGS = -avoid-version -module
+libtimetable_view_la_LIBADD = libutil.la
+
+endif
 
 #
 # Plugins

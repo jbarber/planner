@@ -1,3 +1,24 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+/*
+ * Copyright (C) 2003 Benjamin BAYART <benjamin@sitadelle.com>
+ * Copyright (C) 2003 Xavier Ordoquy <xordoquy@wanadoo.fr>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public
+ * License along with this program; if not, write to the
+ * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+ * Boston, MA 02111-1307, USA.
+ */
+
 #include <config.h>
 #include <stdio.h>
 #include <string.h>
@@ -9,14 +30,13 @@
 #include <libplanner/mrp-task.h>
 #include <libplanner/mrp-resource.h>
 #include <libplanner/mrp-assignment.h>
-#include "util/planner-marshal.h"
+#include "planner-marshal.h"
 #include "planner-ttable-chart.h"
-#include "../gantt/planner-gantt-header.h"//ICI
-#include "../gantt/planner-gantt-background.h"//ICI
+#include "planner-gantt-header.h"
+#include "planner-gantt-background.h"
 #include "planner-ttable-model.h"
 #include "planner-ttable-row.h"
-//#include "planner-relation-arrow.h"
-#include "../gantt/planner-scale-utils.h"
+#include "planner-scale-utils.h"
 
 /* Padding to the left and right of the contents of the gantt chart. */
 #define PADDING 100.0
@@ -173,10 +193,12 @@ static void	ttable_chart_row_inserted		(GtkTreeModel	*model,
 static void	ttable_chart_row_deleted		(GtkTreeModel	*model,
 							 GtkTreePath	*path,
 							 gpointer	 data);
-//static void	ttable_chart_row_reordered		(GtkTreeModel	*model,
-//							 GtkTreePath	*path,
-//							 GtkTreeIter	*iter,
-//							 gpointer	 data);
+/*
+static void	ttable_chart_row_reordered		(GtkTreeModel	*model,
+							 GtkTreePath	*path,
+							 GtkTreeIter	*iter,
+							 gpointer	 data);
+*/
 static guint signals[LAST_SIGNAL];
 static GtkVBoxClass *parent_class = NULL;
 
@@ -895,7 +917,7 @@ planner_ttable_chart_set_model(PlannerTtableChart *chart, GtkTreeModel *model)
 	}
 
 	if (priv->model) {
-		ttable_chart_disconnect_signals(chart);//ICI, a implementer
+		ttable_chart_disconnect_signals(chart);
 		g_object_unref (priv->model);
 	}
 	priv->model = model;
@@ -936,13 +958,13 @@ planner_ttable_chart_set_model(PlannerTtableChart *chart, GtkTreeModel *model)
 					chart);
 		ttable_chart_add_signal (chart, model, signal_id,"row-deleted");
 
-//		signal_id = g_signal_connect(model,
-//					"row-reordered",
-//					G_CALLBACK (ttable_chart_row_reordered),
-//					chart);
-//		ttable_chart_add_signal (chart, model, signal_id,"row-reordered");
-
-		//ICI, ajouter des signaux.
+		/*
+		signal_id = g_signal_connect(model,
+					"row-reordered",
+					G_CALLBACK (ttable_chart_row_reordered),
+					chart);
+		ttable_chart_add_signal (chart, model, signal_id,"row-reordered");
+		*/
 		
 		g_object_get(project,"project-start",&t,NULL);
 		priv->project_start=t;
@@ -950,9 +972,7 @@ planner_ttable_chart_set_model(PlannerTtableChart *chart, GtkTreeModel *model)
 
 		g_object_get(root,"finish",&t,NULL);
 		priv->last_time=t;
-		//ICI, faut=il donner la date de fin au background?
-		//Non.
-		
+
 		priv->height_changed = TRUE;
 		ttable_chart_reflow_now (chart);
 		
@@ -963,7 +983,6 @@ planner_ttable_chart_set_model(PlannerTtableChart *chart, GtkTreeModel *model)
 static void
 ttable_chart_build_tree (PlannerTtableChart *chart)
 {
-	// ICI, tout refaire.
 	GtkTreeIter		 iter;
 	GtkTreePath		*path;
 	PlannerTtableChartPriv	*priv;
@@ -1109,7 +1128,6 @@ ttable_chart_add_signal	(PlannerTtableChart	*chart,
 	data = g_new0(ConnectData,1);
 	data->instance = instance;
 	data->id = sig_id;
-//	fprintf(stderr,"Je recense le signal %s(%lu) de l'instance %p\n",sig_name,data->id,data->instance);
 	chart->priv->signal_ids=g_list_prepend(chart->priv->signal_ids,data);
 }
 
@@ -1120,7 +1138,6 @@ ttable_chart_disconnect_signals	(PlannerTtableChart	*chart)
 	ConnectData	*data;
 	for (l=chart->priv->signal_ids; l; l=l->next) {
 		data = l->data;
-//		fprintf(stderr,"Je deconnecte le signal %lu de l'instance %p\n",data->id,data->instance);
 		g_signal_handler_disconnect(data->instance,data->id);
 		g_free(data);
 	}
@@ -1251,7 +1268,6 @@ static void	ttable_chart_row_inserted		(GtkTreeModel	*model,
 	priv = chart->priv;
 
 	g_return_if_fail (path != NULL || iter != NULL);
-//	fprintf(stderr,"On ajoute une ligne\n");
 
 	if (path == NULL) {
 		path = gtk_tree_model_get_path (model, iter);
@@ -1284,10 +1300,6 @@ static void	ttable_chart_row_deleted		(GtkTreeModel	*model,
 {
 	PlannerTtableChart		*chart;
 	PlannerTtableChartPriv	*priv;
-//	MrpResource		*res;
-//	MrpAssignment		*assign;
-//	gboolean		 free_path;
-//	gboolean		 free_iter;
 	TreeNode		*node;
 
 	chart = PLANNER_TTABLE_CHART(data);
@@ -1296,7 +1308,7 @@ static void	ttable_chart_row_deleted		(GtkTreeModel	*model,
 	node = ttable_chart_tree_node_at_path(priv->tree,path);
 	ttable_chart_tree_node_remove(node);
 	ttable_chart_remove_children(chart,node);
-/*
+	/*
 	g_return_if_fail (path != NULL || iter != NULL);
 	fprintf(stderr,"On degage une ligne\n");
 	if (path == NULL) {
@@ -1314,32 +1326,37 @@ static void	ttable_chart_row_deleted		(GtkTreeModel	*model,
 	}
 	if (assign) {
 		ttable_chart_remove_assignment(chart,path,assign);
-	}*/
+	}
+	*/
 	ttable_chart_reflow(chart,TRUE);
-/*	if (free_path) {
+	/*
+	if (free_path) {
 		gt_tree_path_free(path);
 	}
 	if (free_iter) {
 		g_free(iter);
-	}*/
+	}
+	*/
 }
 
-//static void	ttable_chart_row_reordered		(GtkTreeModel	*model,
-//							 GtkTreePath	*path,
-//							 GtkTreeIter	*iter,
-//							 gpointer	 data)
-//{}
+/*
+static void	ttable_chart_row_reordered		(GtkTreeModel	*model,
+							 GtkTreePath	*path,
+							 GtkTreeIter	*iter,
+							 gpointer	 data)
+{}
 
-//static void
-//ttable_chart_resource_assignment_added			(MrpResource	*res,
-//							 MrpAssignment	*assign,
-//							 PlannerTtableChart	*chart)
-//{
-//	g_return_if_fail(MRP_IS_RESOURCE(res));
-//	g_return_if_fail(MRP_IS_ASSIGNMENT(assign));
-//	g_return_if_fail(PLANNER_IS_TTABLE_CHART(chart));
-//	// So, res is added an assignment...
-//}
+static void
+ttable_chart_resource_assignment_added			(MrpResource	*res,
+							 MrpAssignment	*assign,
+							 PlannerTtableChart	*chart)
+{
+	g_return_if_fail(MRP_IS_RESOURCE(res));
+	g_return_if_fail(MRP_IS_ASSIGNMENT(assign));
+	g_return_if_fail(PLANNER_IS_TTABLE_CHART(chart));
+	// So, res is added an assignment...
+}
+*/
 
 static void
 ttable_chart_tree_node_remove		(TreeNode		*node)
