@@ -594,14 +594,6 @@ get_last_dir (PlannerWindow *window)
 		last_dir = g_strdup (g_get_home_dir ());
 	}
 	
-	if (last_dir[strlen (last_dir)] != G_DIR_SEPARATOR) {
-		gchar *tmp;
-		
-		tmp = g_strconcat (last_dir, G_DIR_SEPARATOR_S, NULL);
-		g_free (last_dir);
-		last_dir = tmp;
-	}
-
 	return last_dir;
 }
 

@@ -1,5 +1,9 @@
 2004-07-30  Richard Hult  <richard@imendio.com>
 
+	* src/planner-window.c: (get_last_dir): Remove trailing slash.
+
+2004-07-30  Richard Hult  <richard@imendio.com>
+
 	* configure.in:
 	* data/ui/Makefile.am:
 	* src/Makefile.am: Don't make resource usage view optional.
