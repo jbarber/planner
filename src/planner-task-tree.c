@@ -997,7 +997,6 @@ task_tree_class_init (PlannerTaskTreeClass *klass)
 	parent_class = g_type_class_peek_parent (klass);
 
 	o_class = (GObjectClass *) klass;
-
 	o_class->finalize = task_tree_finalize;
 
 	signals[SELECTION_CHANGED] =
@@ -1040,6 +1039,8 @@ task_tree_init (PlannerTaskTree *tree)
 	priv->popup_factory = planner_task_popup_new (tree);
 	priv->anchor = NULL;
 
+	gtk_tree_view_set_enable_search (GTK_TREE_VIEW (tree), FALSE);
+	
 	g_signal_connect (tree,
 			  "row_activated",
 			  G_CALLBACK (task_tree_row_activated_cb),

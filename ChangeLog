@@ -1,5 +1,7 @@
 2005-02-12  Richard Hult  <richard@imendio.com>
 
+	* src/planner-task-tree.c (task_tree_init): Disable search.
+
 	* libplanner/mrp-task-manager.c (task_manager_do_backward_pass):
 	Patch from Jani Tiainen to fix bug #140536. Go through children of
 	the successor instead of the successor if there are any.
