@@ -1,5 +1,15 @@
 2005-02-18  Richard Hult  <richard@imendio.com>
 
+	* src/planner-task-tree.c: (task_cmd_move_undo), (task_cmd_move):
+	Restore the task type of the parent on undo.
+	(task_cmd_move): Initialize variable.
+
+	* libplanner/mrp-task.c: (imrp_task_reattach),
+	(imrp_task_insert_child): Make milestone tasks into normal ones
+	when then get child tasks, fixes bug #154253.
+
+2005-02-18  Richard Hult  <richard@imendio.com>
+
 	* src/planner-task-tree.c: (task_tree_duration_data_func): Make
 	the duration column only editable for fixed duration tasks.
 

@@ -826,6 +826,14 @@ imrp_task_reattach (MrpTask  *task,
 
 	/* FIXME: Do some extra checking. */
 
+	if (parent->priv->type == MRP_TASK_TYPE_MILESTONE &&
+	    !parent->priv->node->children) {
+		g_object_set (parent,
+			      "type", MRP_TASK_TYPE_NORMAL,
+			      "sched", MRP_TASK_SCHED_FIXED_WORK,
+			      NULL);
+	}
+	
 	if (sibling == NULL) {
 		if (before) {
 			node = g_node_first_child (parent->priv->node);
@@ -940,6 +948,12 @@ imrp_task_insert_child (MrpTask *parent,
 		       child->priv->node);
 
 	mrp_task_invalidate_cost (parent);
+
+	if (parent->priv->type == MRP_TASK_TYPE_MILESTONE) {
+		g_object_set (parent,
+			      "type", MRP_TASK_TYPE_NORMAL,
+			      NULL);
+	}
 	
 	g_signal_emit (parent, signals[CHILD_ADDED], 0);
 }

@@ -720,20 +720,22 @@ task_cmd_reset_constraint (PlannerTaskTree *tree,
 }
 
 typedef struct {
-	PlannerCmd     base;
+	PlannerCmd   base;
 
-	MrpProject *project;
-	MrpTask    *task;
-	MrpTask    *parent;
-	MrpTask    *parent_old;
-	MrpTask    *sibling;
-	MrpTask    *sibling_old;
-	gboolean    before;
-	gboolean    before_old;
-	GError     *error;
+	MrpProject  *project;
+	MrpTask     *task;
+	MrpTask     *parent;
+	MrpTask     *parent_old;
+	MrpTask     *sibling;
+	MrpTask     *sibling_old;
+	gboolean     before;
+	gboolean     before_old;
+	
+	MrpTaskType  parent_type;
+	gint         parent_work;
+	gint         parent_duration;
 
-	gint        parent_work;
-	gint        parent_duration;
+	GError      *error;
 } TaskCmdMove;
 
 static gboolean
@@ -779,6 +781,7 @@ task_cmd_move_undo (PlannerCmd *cmd_base)
 	g_object_set (cmd->parent,
 		      "work", cmd->parent_work,
 		      "duration", cmd->parent_duration,
+		      "type", cmd->parent_type,
 		      NULL);
 }
 
@@ -842,6 +845,7 @@ task_cmd_move (PlannerTaskTree  *tree,
 
 		cmd->parent_work = mrp_task_get_work (cmd->parent);
 		cmd->parent_duration = mrp_task_get_work (cmd->parent);
+		cmd->parent_type = mrp_task_get_task_type (cmd->parent);
 	}
 
 	if (sibling != NULL) {
@@ -857,6 +861,8 @@ task_cmd_move (PlannerTaskTree  *tree,
 
 	if (!cmd->sibling_old) {
 		cmd->before_old = FALSE;
+	} else {
+		cmd->before_old = TRUE;
 	}
 	
 	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager 
@@ -3051,13 +3057,22 @@ planner_task_tree_unindent_task (PlannerTaskTree *tree)
 	g_list_free (list);
 
 	for (l = unindent_tasks; l; l = l->next) {
-		MrpTask *sibling;
+		MrpTask  *sibling;
+		gboolean  before;
 		
 		task = l->data;
-
+		
 		sibling = mrp_task_get_next_sibling (mrp_task_get_parent (task));
-	
-		task_cmd_move (tree, task, sibling, new_parent, TRUE, NULL);
+		if (sibling) {
+			before = TRUE;
+		} else {
+			before = FALSE;
+		}
+		
+		task_cmd_move (tree, task, sibling,
+			       new_parent,
+			       before,
+			       NULL);
 	}
 
 	path = planner_gantt_model_get_path_from_task (PLANNER_GANTT_MODEL (model), 
