@@ -75,8 +75,8 @@ struct _PlannerTaskTreePriv {
 };
 
 typedef struct {
-	GtkTreeView *tree;
-	MrpProperty *property;
+	PlannerTaskTree *tree;
+	MrpProperty     *property;
 } ColPropertyData;
 
 typedef enum {
@@ -482,6 +482,7 @@ task_cmd_restore_relations (TaskCmdRemove *cmd)
 	GList       *l;
 	MrpRelation *relation;
 	MrpTask     *rel_task;
+	GError      *error;
 		
 
 	for (l = cmd->predecessors; l; l = l->next) {
@@ -492,14 +493,15 @@ task_cmd_restore_relations (TaskCmdRemove *cmd)
 			continue;
 		}
 
-		if (g_getenv ("PLANNER_DEBUG_UNDO_TASK"))
+		if (g_getenv ("PLANNER_DEBUG_UNDO_TASK")) {
 			g_message ("Predecessor recover: %s -> %s",
 				   mrp_task_get_name (mrp_relation_get_predecessor (l->data)),
 				   mrp_task_get_name (mrp_relation_get_successor (l->data)));
+		}
 		
 		mrp_task_add_predecessor (cmd->task, rel_task, 
 					  mrp_relation_get_relation_type (relation),
-					  mrp_relation_get_lag (relation), NULL);
+					  mrp_relation_get_lag (relation), &error);
 	}
 
 	for (l = cmd->successors; l; l = l->next) {
@@ -517,7 +519,15 @@ task_cmd_restore_relations (TaskCmdRemove *cmd)
 		
 		mrp_task_add_predecessor (rel_task, cmd->task,
 					  mrp_relation_get_relation_type (relation),
-					  mrp_relation_get_lag (relation), NULL);
+					  mrp_relation_get_lag (relation), &error);
+		
+		if (g_getenv ("PLANNER_DEBUG_UNDO_TASK")) {
+			if (error) {
+				g_message ("Recover OK");
+			} else {
+				g_message ("Recover KO: %s", error->message);
+			}
+		}
 	}
 }
 
@@ -795,6 +805,65 @@ task_cmd_constraint (PlannerTaskTree *tree,
 	cmd->constraint = g_new0 (MrpConstraint, 1);
 	cmd->constraint->time = constraint.time;
 	cmd->constraint->type = constraint.type;
+
+	g_object_get (task, "constraint", 
+		      &cmd->constraint_old, NULL);
+
+	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager (priv->main_window),
+					   cmd_base);
+
+	return cmd_base;
+}
+
+static gboolean
+task_cmd_constraint_reset_do (PlannerCmd *cmd_base)
+{
+	TaskCmdConstraint *cmd;
+
+	cmd = (TaskCmdConstraint*) cmd_base;
+	mrp_task_reset_constraint (cmd->task);
+	return TRUE;
+}
+
+static void
+task_cmd_constraint_reset_undo (PlannerCmd *cmd_base)
+{
+	TaskCmdConstraint *cmd;
+
+	cmd = (TaskCmdConstraint*) cmd_base;
+
+	g_object_set (cmd->task, "constraint", 
+		      cmd->constraint_old, NULL);
+	
+}
+
+static void
+task_cmd_constraint_reset_free (PlannerCmd *cmd_base)
+{
+	TaskCmdConstraint *cmd;
+
+	cmd = (TaskCmdConstraint*) cmd_base;
+	g_object_unref (cmd->task);
+	g_free (cmd->constraint_old);
+}
+
+static PlannerCmd *
+task_cmd_reset_constraint (PlannerTaskTree *tree,
+			   MrpTask         *task)
+{
+	PlannerTaskTreePriv *priv = tree->priv;
+	PlannerCmd          *cmd_base;
+	TaskCmdConstraint   *cmd;
+
+	cmd = g_new0 (TaskCmdConstraint, 1);
+
+	cmd_base = (PlannerCmd *) cmd;
+	cmd_base->label = g_strdup (_("Constraint task reset"));
+	cmd_base->do_func = task_cmd_constraint_reset_do;
+	cmd_base->undo_func = task_cmd_constraint_reset_undo;
+	cmd_base->free_func = task_cmd_constraint_reset_free;
+	
+	cmd->task = g_object_ref (task);
 
 	g_object_get (task, "constraint", 
 		      &cmd->constraint_old, NULL);
@@ -1125,6 +1194,98 @@ task_cmd_unlink (PlannerTaskTree *tree,
 	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager 
 					   (priv->main_window),
 					   cmd_base);
+	return cmd_base;
+}
+
+typedef struct {
+	PlannerCmd   base;
+
+	MrpTask      *task;
+	MrpProperty  *property;  
+	GValue       *value;
+	GValue       *old_value;
+} TaskCmdEditCustomProperty;
+
+static gboolean
+task_cmd_edit_custom_property_do (PlannerCmd *cmd_base)
+{
+	TaskCmdEditCustomProperty *cmd;
+	cmd = (TaskCmdEditCustomProperty*) cmd_base;
+
+	mrp_object_set_property (MRP_OBJECT (cmd->task),
+				 cmd->property,
+				 cmd->value);
+
+	return TRUE;
+}
+
+static void
+task_cmd_edit_custom_property_undo (PlannerCmd *cmd_base)
+{
+	TaskCmdEditCustomProperty *cmd;
+
+	cmd = (TaskCmdEditCustomProperty*) cmd_base;
+
+	/* FIXME: delay in the UI when setting the property */
+	mrp_object_set_property (MRP_OBJECT (cmd->task),
+				 cmd->property,
+				 cmd->old_value);
+
+}
+
+static void
+task_cmd_edit_custom_property_free (PlannerCmd *cmd_base)
+{
+	TaskCmdEditCustomProperty *cmd;
+
+	cmd = (TaskCmdEditCustomProperty*) cmd_base;
+
+	g_value_unset (cmd->value);
+	g_value_unset (cmd->old_value);
+
+	g_object_unref (cmd->task);
+}
+
+static PlannerCmd *
+task_cmd_edit_custom_property (PlannerTaskTree  *tree,
+			       MrpTask          *task,
+			       MrpProperty      *property,
+			       const GValue     *value)
+{
+	PlannerCmd                *cmd_base;
+	PlannerTaskTreePriv       *priv = tree->priv;
+	TaskCmdEditCustomProperty *cmd;
+
+	cmd = g_new0 (TaskCmdEditCustomProperty, 1);
+
+	cmd_base = (PlannerCmd*) cmd;
+
+	cmd_base->label = g_strdup (_("Edit task custom property"));
+	cmd_base->do_func = task_cmd_edit_custom_property_do;
+	cmd_base->undo_func = task_cmd_edit_custom_property_undo;
+	cmd_base->free_func = task_cmd_edit_custom_property_free;
+
+	cmd->property = property;
+	cmd->task = g_object_ref (task);
+
+	cmd->value = g_new0 (GValue, 1);
+	g_value_init (cmd->value, G_VALUE_TYPE (value));
+	g_value_copy (value, cmd->value);
+
+	cmd->old_value = g_new0 (GValue, 1);
+	g_value_init (cmd->old_value, G_VALUE_TYPE (value));
+
+	mrp_object_get_property (MRP_OBJECT (cmd->task),
+				 cmd->property,
+				 cmd->old_value);
+
+	/* FIXME: if old and new value are the same, do nothing 
+	   How we can compare values?
+	*/
+
+	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager (priv->main_window),
+					   cmd_base);
+
 	return cmd_base;
 }
 
@@ -2028,30 +2189,15 @@ task_tree_property_data_func (GtkTreeViewColumn *tree_column,
 	g_free (svalue);
 }
 
-static void  
-task_tree_property_value_edited (GtkCellRendererText *cell, 
-				 gchar               *path_str,
-				 gchar               *new_text, 
-				 ColPropertyData     *data)
+static GValue
+task_view_custom_property_set_value (MrpProperty         *property,
+				     gchar               *new_text,
+				     GtkCellRendererText *cell) 
 {
-	GtkTreePath             *path;
-	GtkTreeIter              iter;
-	GtkTreeModel            *model;
-	MrpProperty             *property;
+	PlannerCellRendererDate *date;
+	GValue                   value = { 0 };
 	MrpPropertyType          type;
-	MrpTask                 *task;
-	PlannerCellRendererDate *date;	
 	gfloat                   fvalue;
-
-	/* FIXME: undo */
-	
-	model = gtk_tree_view_get_model (data->tree);
-	property = data->property;
-
-	path = gtk_tree_path_new_from_string (path_str);
-	gtk_tree_model_get_iter (model, &iter, path);
-
-	task = planner_gantt_model_get_task (PLANNER_GANTT_MODEL (model), &iter);
 
 	/* FIXME: implement mrp_object_set_property like
 	 * g_object_set_property that takes a GValue. 
@@ -2060,53 +2206,80 @@ task_tree_property_value_edited (GtkCellRendererText *cell,
 
 	switch (type) {
 	case MRP_PROPERTY_TYPE_STRING:
-		mrp_object_set (MRP_OBJECT (task),
-				mrp_property_get_name (property), 
-				new_text,
-				NULL);
+		g_value_init (&value, G_TYPE_STRING);
+		g_value_set_string (&value, new_text);
+
 		break;
 	case MRP_PROPERTY_TYPE_INT:
-		mrp_object_set (MRP_OBJECT (task),
-				mrp_property_get_name (property), 
-				atoi (new_text),
-				NULL);
+		g_value_init (&value, G_TYPE_INT);
+		g_value_set_int (&value, atoi (new_text));
+
 		break;
 	case MRP_PROPERTY_TYPE_FLOAT:
 		fvalue = g_ascii_strtod (new_text, NULL);
-		mrp_object_set (MRP_OBJECT (task),
-				mrp_property_get_name (property), 
-				fvalue,
-				NULL);
+		g_value_init (&value, G_TYPE_FLOAT);
+		g_value_set_float (&value, fvalue);
+
 		break;
 
 	case MRP_PROPERTY_TYPE_DURATION:
 		/* FIXME: support reading units etc... */
-		mrp_object_set (MRP_OBJECT (task),
-				mrp_property_get_name (property), 
-				atoi (new_text) *8*60*60,
-				NULL);
+		g_value_init (&value, G_TYPE_INT);
+		g_value_set_int (&value, atoi (new_text) *8*60*60);
+
 		break;
 		
 
 	case MRP_PROPERTY_TYPE_DATE:
 		date = PLANNER_CELL_RENDERER_DATE (cell);
-		mrp_object_set (MRP_OBJECT (task),
+		/* FIXME: Currently custom properties can't be dates. Why? */
+		/* mrp_object_set (MRP_OBJECT (task),
 				mrp_property_get_name (property), 
 				&(date->time),
-				NULL);
+				NULL);*/
 		break;
 	case MRP_PROPERTY_TYPE_COST:
 		fvalue = g_ascii_strtod (new_text, NULL);
-		mrp_object_set (MRP_OBJECT (task),
-				mrp_property_get_name (property), 
-				fvalue,
-				NULL);
+		g_value_init (&value, G_TYPE_FLOAT);
+		g_value_set_float (&value, fvalue);
+
 		break;	
 				
 	default:
 		g_assert_not_reached ();
 		break;
 	}
+
+	return value;
+}
+
+static void  
+task_tree_property_value_edited (GtkCellRendererText *cell, 
+				 gchar               *path_str,
+				 gchar               *new_text, 
+				 ColPropertyData     *data)
+{
+	PlannerCmd              *cmd;
+	GtkTreePath             *path;
+	GtkTreeIter              iter;
+	GtkTreeModel            *model;
+	MrpProperty             *property;
+	MrpTask                 *task;
+	GValue                   value = { 0 };
+	
+	model = gtk_tree_view_get_model (GTK_TREE_VIEW (data->tree));
+	property = data->property;	
+
+	path = gtk_tree_path_new_from_string (path_str);
+	gtk_tree_model_get_iter (model, &iter, path);
+
+	task = planner_gantt_model_get_task (PLANNER_GANTT_MODEL (model), &iter);
+
+	value = task_view_custom_property_set_value (property, new_text, cell);
+
+	cmd = task_cmd_edit_custom_property (data->tree, task, property, &value);
+
+	g_value_unset (&value);
 
 	gtk_tree_path_free (path);
 }
@@ -2168,7 +2341,7 @@ task_tree_property_added (MrpProject      *project,
 	g_hash_table_insert (priv->property_to_column, property, col);
 	
 	data->property = property;
-	data->tree = tree;
+	data->tree = task_tree;
 
 	gtk_tree_view_column_pack_start (col, cell, TRUE);
 
@@ -2186,8 +2359,8 @@ task_tree_property_added (MrpProject      *project,
 }
 
 static void
-task_tree_property_removed (MrpProject  *project,
-			    MrpProperty *property,
+task_tree_property_removed (MrpProject       *project,
+			    MrpProperty      *property,
 			    PlannerTaskTree  *task_tree)
 {
 	PlannerTaskTreePriv *priv;
@@ -2204,7 +2377,7 @@ task_tree_property_removed (MrpProject  *project,
 }
 
 void
-planner_task_tree_set_model (PlannerTaskTree *tree,
+planner_task_tree_set_model (PlannerTaskTree   *tree,
 			     PlannerGanttModel *model)
 {
 	gtk_tree_view_set_model (GTK_TREE_VIEW (tree),
@@ -2229,8 +2402,8 @@ planner_task_tree_set_model (PlannerTaskTree *tree,
 }
 
 static void
-task_tree_setup_tree_view (GtkTreeView  *tree,
-			   MrpProject   *project,
+task_tree_setup_tree_view (GtkTreeView       *tree,
+			   MrpProject        *project,
 			   PlannerGanttModel *model)
 {
 	PlannerTaskTree  *task_tree;
@@ -3263,14 +3436,13 @@ planner_task_tree_reset_constraint (PlannerTaskTree *tree)
 	MrpTask *task;
 	GList   *list, *l;
 
-	/* FIXME: undo */
-
 	list = planner_task_tree_get_selected_tasks (tree);
 
 	for (l = list; l; l = l->next) {
 		task = l->data;
-
-		mrp_task_reset_constraint (task);
+		/* mrp_task_reset_constraint (task); */
+		task_cmd_reset_constraint (tree, task);
+		
 	}
 	
 	g_list_free (list);
@@ -3283,15 +3455,13 @@ planner_task_tree_reset_all_constraints (PlannerTaskTree *tree)
 	MrpTask    *task;
 	GList      *list, *l;
 
-	/* FIXME: undo */
-
 	project = tree->priv->project;
 		
 	list = mrp_project_get_all_tasks (project);
 	for (l = list; l; l = l->next) {
 		task = l->data;
-
-		mrp_task_reset_constraint (task);
+		/* mrp_task_reset_constraint (task); */
+		task_cmd_reset_constraint (tree, task);
 	}
 	
 	g_list_free (list);
