@@ -1,5 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
+ * Copyright (C) 2003-2004 Imendio HB
  * Copyright (C) 2003 Benjamin BAYART <benjamin@sitadelle.com>
  * Copyright (C) 2003 Xavier Ordoquy <xordoquy@wanadoo.fr>
  *
@@ -33,49 +34,49 @@
 #define PLANNER_IS_TTABLE_MODEL(obj)          (GTK_CHECK_TYPE ((obj), PLANNER_TYPE_TTABLE_MODEL))
 #define PLANNER_IS_TTABLE_MODEL_CLASS(klass)  (GTK_CHECK_CLASS_TYPE ((obj), PLANNER_TYPE_TTABLE_MODEL))
 
-typedef struct _PlannerTtableModel      PlannerTtableModel;
+typedef struct _PlannerTtableModel PlannerTtableModel;
 typedef struct _PlannerTtableModelClass PlannerTtableModelClass;
-typedef struct _PlannerTtableModelPriv  PlannerTtableModelPriv;
+typedef struct _PlannerTtableModelPriv PlannerTtableModelPriv;
 
 struct _PlannerTtableModel {
-	GObject            parent;
-	gint               stamp;
-	PlannerTtableModelPriv *priv;
+        GObject                 parent;
+        gint                    stamp;
+        PlannerTtableModelPriv *priv;
 };
 
 struct _PlannerTtableModelClass {
-	GObjectClass parent_class;
+        GObjectClass parent_class;
 };
 
 enum {
-	COL_RESNAME,
-	COL_TASKNAME,
-	COL_RESOURCE,
-	COL_ASSIGNMENT,
-	NUM_COLS
+        COL_RESNAME,
+        COL_TASKNAME,
+        COL_RESOURCE,
+        COL_ASSIGNMENT,
+        NUM_COLS
 };
 
-GType               planner_ttable_model_get_type               (void);
-PlannerTtableModel *planner_ttable_model_new                    (MrpProject *project);
-
-GtkTreePath        *planner_ttable_model_get_path_from_resource (PlannerTtableModel *model,
+GType               planner_ttable_model_get_type               (void) G_GNUC_CONST;
+PlannerTtableModel *planner_ttable_model_new                    (MrpProject         *project);
+GtkTreePath *       planner_ttable_model_get_path_from_resource (PlannerTtableModel *model,
 								 MrpResource        *resource);
-MrpProject         *planner_ttable_model_get_project            (PlannerTtableModel *model);
-MrpAssignment      *planner_ttable_model_get_assignment         (PlannerTtableModel *model,
+MrpProject *        planner_ttable_model_get_project            (PlannerTtableModel *model);
+MrpAssignment *     planner_ttable_model_get_assignment         (PlannerTtableModel *model,
 								 GtkTreeIter        *iter);
-MrpResource        *planner_ttable_model_get_resource           (PlannerTtableModel *model,
+MrpResource *       planner_ttable_model_get_resource           (PlannerTtableModel *model,
 								 GtkTreeIter        *iter);
 gboolean            planner_ttable_model_is_resource            (PlannerTtableModel *model,
 								 GtkTreeIter        *iter);
 gboolean            planner_ttable_model_is_assignment          (PlannerTtableModel *model,
 								 GtkTreeIter        *iter);
-MrpAssignment      *planner_ttable_model_path_get_assignment    (PlannerTtableModel *model,
+MrpAssignment *     planner_ttable_model_path_get_assignment    (PlannerTtableModel *model,
 								 GtkTreePath        *path);
-MrpResource        *planner_ttable_model_path_get_resource      (PlannerTtableModel *model,
+MrpResource *       planner_ttable_model_path_get_resource      (PlannerTtableModel *model,
 								 GtkTreePath        *path);
 gboolean            planner_ttable_model_path_is_resource       (PlannerTtableModel *model,
 								 GtkTreePath        *path);
 gboolean            planner_ttable_model_path_is_assignment     (PlannerTtableModel *model,
 								 GtkTreePath        *Path);
 
-#endif //__PLANNER_TTABLE_MODEL_H__
+
+#endif /* __PLANNER_TTABLE_MODEL_H__ */

@@ -1,5 +1,7 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+
 /*
+ * Copyright (C) 2003-2004 Imendio HB
  * Copyright (C) 2003 Benjamin BAYART <benjamin@sitadelle.com>
  * Copyright (C) 2003 Xavier Ordoquy <xordoquy@wanadoo.fr>
  *
@@ -34,28 +36,29 @@
 #define PLANNER_IS_TTABLE_TREE_CLASS(klass)    (GTK_CHECK_CLASS_TYPE ((obj), PLANNER_TYPE_TTABLE_TREE))
 #define PLANNER_TTABLE_TREE_GET_CLASS(obj)     (GTK_CHECK_GET_CLASS ((obj), PLANNER_TYPE_TTABLE_TREE, PlannerTtableTreeClass))
 
-typedef struct _PlannerTtableTree           PlannerTtableTree;
-typedef struct _PlannerTtableTreeClass      PlannerTtableTreeClass;
-typedef struct _PlannerTtableTreePriv       PlannerTtableTreePriv;
+typedef struct _PlannerTtableTree PlannerTtableTree;
+typedef struct _PlannerTtableTreeClass PlannerTtableTreeClass;
+typedef struct _PlannerTtableTreePriv PlannerTtableTreePriv;
 
 struct _PlannerTtableTree {
-	GtkTreeView       parent;
-	PlannerTtableTreePriv *priv;
+        GtkTreeView            parent;
+        PlannerTtableTreePriv *priv;
 };
 
 struct _PlannerTtableTreeClass {
-	GtkTreeViewClass  parent_class;
+        GtkTreeViewClass parent_class;
 };
 
-GType		 planner_ttable_tree_get_type           (void);
-GtkWidget	*planner_ttable_tree_new                (PlannerWindow      *main_window,
-		                                	 PlannerTtableModel *model);
-void		 planner_ttable_tree_set_model          (PlannerTtableTree  *tree,
-							 PlannerTtableModel *model);
-void		 planner_ttable_tree_edit_task          (PlannerTtableTree  *tree);
-void		 planner_ttable_tree_edit_resource      (PlannerTtableTree  *tree);
-GList*		 planner_ttable_tree_get_selected_items (PlannerTtableTree  *tree);
-void		 planner_ttable_tree_expand_all         (PlannerTtableTree  *tree);
-void		 planner_ttable_tree_collapse_all       (PlannerTtableTree  *tree);
-	
-#endif
+GType      planner_ttable_tree_get_type           (void) G_GNUC_CONST;
+GtkWidget *planner_ttable_tree_new                (PlannerWindow      *window,
+						   PlannerTtableModel *model);
+void       planner_ttable_tree_set_model          (PlannerTtableTree  *tree,
+						   PlannerTtableModel *model);
+void       planner_ttable_tree_edit_task          (PlannerTtableTree  *tree);
+void       planner_ttable_tree_edit_resource      (PlannerTtableTree  *tree);
+GList *    planner_ttable_tree_get_selected_items (PlannerTtableTree  *tree);
+void       planner_ttable_tree_expand_all         (PlannerTtableTree  *tree);
+void       planner_ttable_tree_collapse_all       (PlannerTtableTree  *tree);
+
+
+#endif /* __PLANNER_TTABLE_TREE__ */

@@ -86,16 +86,19 @@ typedef enum {
 } State;
 
 struct _PlannerGanttRowPriv {
+	/* FIXME: Don't need those per gantt row. */
 	GdkGC       *complete_gc;
 	GdkGC       *break_gc;
 	GdkGC       *fill_gc;
 	GdkGC       *frame_gc;
 
+	/* FIXME: Don't need those per gantt row. */
 	GdkColor     color_normal;
 	GdkColor     color_critical;
 	GdkColor     color_frame_light;
 	GdkColor     color_frame_shadow;
 
+	/* FIXME: Don't need this per gantt row? */
 	PangoLayout *layout;
 
 	MrpTask     *task;

@@ -1,6 +1,7 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 
 /*
+ * Copyright (C) 2003-2004 Imendio HB
  * Copyright (C) 2003 Benjamin BAYART <benjamin@sitadelle.com>
  * Copyright (C) 2003 Xavier Ordoquy <xordoquy@wanadoo.fr>
  *
@@ -36,12 +37,12 @@
 #include "planner-ttable-chart.h"
 
 struct _PlannerViewPriv {
-        GtkWidget *paned;
-        GtkWidget *tree;
-        GtkWidget *gantt;
-        MrpProject *project;
+        GtkWidget              *paned;
+        GtkWidget              *tree;
+        GtkWidget              *gantt;
+        MrpProject             *project;
 
-        PlannerTtableChart *chart;
+        PlannerTtableChart     *chart;
         PlannerTtablePrintData *print_data;
 };
 
@@ -84,11 +85,11 @@ void              activate                            (PlannerView              
 void              deactivate                          (PlannerView                  *view);
 void              init                                (PlannerView                  *view,
 						       PlannerWindow                *window);
-gchar *           get_label                           (PlannerView                  *view);
-gchar *           get_menu_label                      (PlannerView                  *view);
-gchar *           get_icon                            (PlannerView                  *view);
-const gchar *     get_name                            (PlannerView                  *view);
-GtkWidget *       get_widget                          (PlannerView                  *view);
+gchar *          get_label                           (PlannerView                  *view);
+gchar *          get_menu_label                      (PlannerView                  *view);
+gchar *          get_icon                            (PlannerView                  *view);
+const gchar *    get_name                            (PlannerView                  *view);
+GtkWidget *      get_widget                          (PlannerView                  *view);
 void              print_init                          (PlannerView                  *view,
 						       PlannerPrintJob              *job);
 void              print                               (PlannerView                  *view);
@@ -103,7 +104,6 @@ static BonoboUIVerb verbs[] = {
         BONOBO_UI_VERB ("ZoomToFit", ttable_view_zoom_to_fit_cb),
         BONOBO_UI_VERB_END
 };
-
 
 
 G_MODULE_EXPORT void
@@ -133,7 +133,7 @@ init (PlannerView *view, PlannerWindow *window)
 
         priv = g_new0 (PlannerViewPriv, 1);
 
-	view->priv = priv;
+        view->priv = priv;
 
         g_signal_connect (view->ui_component,
                           "ui-event",
@@ -234,7 +234,8 @@ print_cleanup (PlannerView *view)
 
 static void
 ttable_view_zoom_out_cb (BonoboUIComponent *component,
-                         gpointer data, const char *cname)
+                         gpointer           data,
+			 const char        *cname)
 {
         PlannerView *view;
 
@@ -246,7 +247,8 @@ ttable_view_zoom_out_cb (BonoboUIComponent *component,
 
 static void
 ttable_view_zoom_in_cb (BonoboUIComponent *component,
-                        gpointer data, const char *cname)
+                        gpointer           data,
+			const char        *cname)
 {
         PlannerView *view;
 
@@ -258,7 +260,8 @@ ttable_view_zoom_in_cb (BonoboUIComponent *component,
 
 static void
 ttable_view_zoom_to_fit_cb (BonoboUIComponent *component,
-                            gpointer data, const char *cname)
+                            gpointer           data,
+			    const char        *cname)
 {
         PlannerView *view;
 
@@ -269,11 +272,11 @@ ttable_view_zoom_to_fit_cb (BonoboUIComponent *component,
 }
 
 static void
-ttable_view_ui_component_event (BonoboUIComponent *component,
-                                const gchar *path,
-                                Bonobo_UIComponent_EventType type,
-                                const gchar *state_string,
-                                PlannerView *view)
+ttable_view_ui_component_event (BonoboUIComponent            *component,
+                                const gchar                  *path,
+                                Bonobo_UIComponent_EventType  type,
+                                const gchar                  *state_string,
+                                PlannerView                  *view)
 {
         PlannerViewPriv *priv;
 
@@ -281,15 +284,17 @@ ttable_view_ui_component_event (BonoboUIComponent *component,
 }
 
 static void
-ttable_view_tree_view_size_request_cb (GtkWidget *widget,
-                                       GtkRequisition *req, gpointer data)
+ttable_view_tree_view_size_request_cb (GtkWidget      *widget,
+                                       GtkRequisition *req,
+				       gpointer        data)
 {
         req->height = -1;
 }
 
 static gboolean
-ttable_view_tree_view_scroll_event_cb (GtkWidget *widget,
-                                       GdkEventScroll *event, gpointer data)
+ttable_view_tree_view_scroll_event_cb (GtkWidget      *widget,
+                                       GdkEventScroll *event,
+				       gpointer        data)
 {
         GtkAdjustment *adj;
         GtkTreeView *tv = GTK_TREE_VIEW (widget);
@@ -313,21 +318,17 @@ ttable_view_tree_view_scroll_event_cb (GtkWidget *widget,
 static GtkWidget *
 ttable_view_create_widget (PlannerView *view)
 {
-        PlannerViewPriv *priv;
-        MrpProject *project;
-
-        GtkWidget *hpaned;
-        GtkWidget *left_frame;
-        GtkWidget *right_frame;
+        PlannerViewPriv    *priv;
+        MrpProject         *project;
+        GtkWidget          *hpaned;
+        GtkWidget          *left_frame;
+        GtkWidget          *right_frame;
         PlannerTtableModel *model;
-
-        GtkWidget *tree;
-        GtkWidget *vbox;
-        GtkWidget *sw;
-
-        GtkWidget *chart;
-
-        GtkAdjustment *hadj, *vadj;
+        GtkWidget          *tree;
+        GtkWidget          *vbox;
+        GtkWidget          *sw;
+        GtkWidget          *chart;
+	GtkAdjustment      *hadj, *vadj;
 
         project = planner_window_get_project (view->main_window);
         priv = view->priv;
@@ -335,7 +336,8 @@ ttable_view_create_widget (PlannerView *view)
 
         g_signal_connect (project,
                           "loaded",
-                          G_CALLBACK (ttable_view_project_loaded_cb), view);
+                          G_CALLBACK (ttable_view_project_loaded_cb),
+			  view);
 
         model = planner_ttable_model_new (project);
         tree = planner_ttable_tree_new (view->main_window, model);
@@ -390,15 +392,20 @@ ttable_view_create_widget (PlannerView *view)
                                 G_CALLBACK
                                 (ttable_view_tree_view_scroll_event_cb),
                                 view);
+
         gtk_tree_view_expand_all (GTK_TREE_VIEW (tree));
-        planner_ttable_chart_expand_all (PLANNER_TTABLE_CHART (chart));
-        g_object_unref (model);
+
+	planner_ttable_chart_expand_all (PLANNER_TTABLE_CHART (chart));
+
+	g_object_unref (model);
+
         return hpaned;
 }
 
 static void
 ttable_view_ttable_status_updated (PlannerTtableChart *chart,
-                                   const gchar *message, PlannerView *view)
+                                   const gchar        *message,
+				   PlannerView        *view)
 {
         bonobo_ui_component_set_status (view->ui_component, message, NULL);
 }
@@ -407,33 +414,37 @@ static void
 ttable_view_project_loaded_cb (MrpProject *project, PlannerView *view)
 {
         GtkTreeModel *model;
+
         if (project == view->priv->project) {
                 gtk_tree_view_expand_all (GTK_TREE_VIEW (view->priv->tree));
                 planner_ttable_chart_expand_all (view->priv->chart);
                 return;
         }
-        model = GTK_TREE_MODEL (planner_ttable_model_new (project));
-        planner_ttable_tree_set_model (PLANNER_TTABLE_TREE (view->priv->tree),
+
+	model = GTK_TREE_MODEL (planner_ttable_model_new (project));
+
+	planner_ttable_tree_set_model (PLANNER_TTABLE_TREE (view->priv->tree),
                                        PLANNER_TTABLE_MODEL (model));
         planner_ttable_chart_set_model (PLANNER_TTABLE_CHART
                                         (view->priv->chart), model);
-        g_object_unref (model);
-        gtk_tree_view_expand_all (GTK_TREE_VIEW (view->priv->tree));
+
+	g_object_unref (model);
+
+	gtk_tree_view_expand_all (GTK_TREE_VIEW (view->priv->tree));
         planner_ttable_chart_expand_all (view->priv->chart);
-        g_message ("timetable: project loaded");
 }
 
 static void
 ttable_view_tree_view_realize_cb (GtkWidget *w, gpointer data)
 {
-        GtkTreeView *tv = GTK_TREE_VIEW (w);
-        GtkWidget *chart = data;
-        gint row_height;
-        gint header_height;
-        gint height;
-        GList *cols, *l;
+        GtkTreeView       *tv = GTK_TREE_VIEW (w);
+        GtkWidget         *chart = data;
+        gint               row_height;
+        gint               header_height;
+        gint               height;
+        GList             *cols, *l;
         GtkTreeViewColumn *col;
-        GtkRequisition req;
+        GtkRequisition     req;
 
         cols = gtk_tree_view_get_columns (tv);
         row_height = 0;
@@ -446,26 +457,32 @@ ttable_view_tree_view_realize_cb (GtkWidget *w, gpointer data)
                                                     NULL, &height);
                 row_height = MAX (row_height, height);
         }
-        g_object_set (chart, "header_height", header_height, "row_height",
-                      row_height, NULL);
+        g_object_set (chart,
+		      "header_height", header_height,
+		      "row_height", row_height,
+		      NULL);
 }
 
 static void
 ttable_view_row_expanded (GtkTreeView *tree_view,
                           GtkTreeIter *iter,
-                          GtkTreePath *path, gpointer data)
+                          GtkTreePath *path,
+			  gpointer     data)
 {
         PlannerTtableChart *chart = data;
+
         planner_ttable_chart_expand_row (chart, path);
 }
 
 static void
 ttable_view_row_collapsed (GtkTreeView *tree_view,
                            GtkTreeIter *iter,
-                           GtkTreePath *path, gpointer data)
+                           GtkTreePath *path,
+			   gpointer     data)
 {
         PlannerTtableChart *chart = data;
-        planner_ttable_chart_collapse_row (chart, path);
+
+	planner_ttable_chart_collapse_row (chart, path);
 }
 
 static void
@@ -482,7 +499,7 @@ ttable_view_expand_all (PlannerTtableTree *tree, PlannerTtableChart *chart)
 }
 
 static void
-ttable_view_collapse_all (PlannerTtableTree *tree,
+ttable_view_collapse_all (PlannerTtableTree  *tree,
                           PlannerTtableChart *chart)
 {
         g_signal_handlers_block_by_func (tree,

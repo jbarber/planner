@@ -1,4 +1,6 @@
+
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+
 /*
  * Copyright (C) 2003 Benjamin BAYART <benjamin@sitadelle.com>
  * Copyright (C) 2003 Xavier Ordoquy <xordoquy@wanadoo.fr>
@@ -28,10 +30,10 @@
 
 typedef struct _PlannerTtablePrintData PlannerTtablePrintData;
 
-void                    planner_ttable_print_do          (PlannerTtablePrintData *print_data);
-gint                    planner_ttable_print_get_n_pages (PlannerTtablePrintData *print_data);
-PlannerTtablePrintData *planner_ttable_print_data_new    (PlannerView            *view,
-							  PlannerPrintJob        *job);
-void                    planner_ttable_print_data_free   (PlannerTtablePrintData *print_data);
+void planner_ttable_print_do (PlannerTtablePrintData * print_data);
+gint planner_ttable_print_get_n_pages (PlannerTtablePrintData * print_data);
+PlannerTtablePrintData *planner_ttable_print_data_new (PlannerView * view,
+                                                       PlannerPrintJob * job);
+void planner_ttable_print_data_free (PlannerTtablePrintData * print_data);
 
 #endif
