@@ -31,7 +31,7 @@ EXTRA_DIST = \
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = libplanner-1.pc
 
-DISTCHECK_CONFIGURE_FLAGS = --enable-gtk-doc --enable-gda --disable-dotnet --enable-python
+DISTCHECK_CONFIGURE_FLAGS = --enable-gtk-doc --enable-database --disable-dotnet --enable-python
 
 # Workaround broken scrollkeeper that doesn't remove its files on
 # uninstall. Same with the shared mime info, the generated files

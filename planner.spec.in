@@ -50,7 +50,7 @@ libtoolize --force
 aclocal-1.7
 automake-1.7
 autoconf
-%configure --enable-gda --enable-python --enable-gtk-doc --disable-dotnet
+%configure --enable-database --enable-python --enable-gtk-doc --disable-dotnet
 
 make
 
