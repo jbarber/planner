@@ -1,4 +1,4 @@
-SUBDIRS = glade images ui dtd stylesheets mime
+SUBDIRS = glade images ui dtd stylesheets mime sql
 
 desktopdir = $(datadir)/applications/
 desktop_in_files = planner.desktop.in
