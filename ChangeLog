@@ -1,3 +1,11 @@
+2005-03-22  Richard Hult  <richard@imendio.com>
+
+	* libplanner/mrp-time.c (mrp_time2_align_next): Fix for quarter,
+	half year, and year.
+
+	* src/planner-main.c (main): Fix opening relative paths on the
+	command line.
+
 2005-03-20  Richard Hult  <richard@imendio.com>
 
 	* src/planner-gantt-view.c: (get_label):

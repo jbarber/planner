@@ -1439,16 +1439,16 @@ mrp_time2_align_next (MrpTime *t, MrpTimeUnit unit)
 		t->sec = 0;
 		g_date_set_day (&t->date, 1);
 		month = g_date_get_month (&t->date);
-		if (month > 1 && month <= 3) {
+		if (month >= 1 && month <= 3) {
 			g_date_set_month (&t->date, 4);
 		}
-		else if (month > 4 && month <= 6) {
+		else if (month >= 4 && month <= 6) {
 			g_date_set_month (&t->date, 7);
 		}
-		else if (month > 7 && month <= 9) {
+		else if (month >= 7 && month <= 9) {
 			g_date_set_month (&t->date, 10);
 		}
-		else if (month > 10 && month <= 12) {
+		else if (month >= 10 && month <= 12) {
 			g_date_set_month (&t->date, 1);
 			g_date_add_years (&t->date, 1);
 		}
@@ -1460,9 +1460,9 @@ mrp_time2_align_next (MrpTime *t, MrpTimeUnit unit)
 		t->min = 0;
 		t->sec = 0;
 		month = g_date_get_month (&t->date);
-		if (month > 1 && month <= 6) {
+		if (month >= 1 && month <= 6) {
 			g_date_set_month (&t->date, 7);
-		} else if (month > 7 && month <= 12) {
+		} else if (month >= 7 && month <= 12) {
 			g_date_set_month (&t->date, 1);
 			g_date_add_years (&t->date, 1);
 		}

@@ -100,7 +100,19 @@ main (int argc, char **argv)
 			} else {
 				gchar *uri;
 
-				uri = g_filename_to_uri (args[i], NULL, NULL);
+				if (args[i][0] != '/') {
+					/* Relative path. */
+					gchar *cwd, *tmp;
+
+					cwd = g_get_current_dir ();
+					tmp = g_build_filename (cwd, args[i], NULL);
+					uri = g_filename_to_uri (tmp, NULL, NULL);
+					g_free (tmp);
+					g_free (cwd);
+				} else {
+					uri = g_filename_to_uri (args[i], NULL, NULL);
+				}
+				
 				if (uri) {
 					planner_window_open_in_existing_or_new (
 						PLANNER_WINDOW (main_window), uri, FALSE);
