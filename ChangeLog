@@ -1,5 +1,12 @@
 2005-02-19  Richard Hult  <richard@imendio.com>
 
+	* libegg/recent-files/egg-recent-view-uimanager.c:
+	(egg_recent_view_uimanager_set_list): Add comment.
+	* src/planner-window.c: (window_finalize): Free the ui manager and
+	recent files view, fixes leak and crash.
+
+2005-02-19  Richard Hult  <richard@imendio.com>
+
 	* src/planner-main.c: (main):
 	* src/planner-task-tree.c: Disable dnd to get rid of warning from treeview.
 	* src/planner-ttable-tree.c: Likewise.

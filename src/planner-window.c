@@ -392,8 +392,6 @@ window_finalize (GObject *object)
 	PlannerWindow     *window = PLANNER_WINDOW (object);
 	PlannerWindowPriv *priv = window->priv;
 
-	d(g_print ("Window::Finalize\n"));
-
 	if (priv->application) {
 		g_object_unref (priv->application);
 	}
@@ -403,7 +401,15 @@ window_finalize (GObject *object)
 	if (priv->cmd_manager) {
 		g_object_unref (priv->cmd_manager);
 	}
-	
+
+	if (priv->recent_view) {
+		g_object_unref (priv->recent_view);
+	}
+
+	if (priv->ui_manager) {
+		g_object_unref (priv->ui_manager);
+	}
+
 	g_free (window->priv);
 
 	if (G_OBJECT_CLASS (parent_class)->finalize) {

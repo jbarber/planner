@@ -201,7 +201,7 @@ egg_recent_view_uimanager_set_list (EggRecentViewUIManager *view, GList *list)
 		}
 		egg_recent_item_ref (item);
 
-		/* Comment this out, since it crashes when setting a new model. */
+		/* rh: Comment this out, since it crashes when setting a new model. */
 		/*g_object_set_data_full (G_OBJECT (action), "egg_recent_uri", item, (GFreeFunc)egg_recent_item_unref);*/
 
 		if (view->action_callback != NULL) {
