@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mrproject VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-05-11 04:29+0200\n"
-"PO-Revision-Date: 2004-05-11 13:14+0200\n"
+"POT-Creation-Date: 2004-05-19 04:37+0200\n"
+"PO-Revision-Date: 2004-05-19 11:22+0200\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -401,7 +401,7 @@ msgid "_Work:"
 msgstr "_Práce:"
 
 #. day unit variant accepted in input
-#: data/glade/task-dialog.glade.h:17 src/planner-task-tree.c:3364
+#: data/glade/task-dialog.glade.h:17 src/planner-task-tree.c:3534
 msgid "days"
 msgstr "dní"
 
@@ -1380,7 +1380,7 @@ msgstr "Jmenovka"
 msgid "Type"
 msgstr "Typ"
 
-#: src/planner-python-plugin.c:121 src/planner-window.c:639
+#: src/planner-python-plugin.c:164 src/planner-window.c:639
 msgid "Open a file"
 msgstr "Otevřít soubor"
 
@@ -1617,27 +1617,35 @@ msgstr "Vložit úlohu"
 msgid "Edit task property"
 msgstr "Upravit vlastnosti úlohy"
 
-#: src/planner-task-tree.c:709
+#: src/planner-task-tree.c:719
 msgid "Remove task"
 msgstr "Odstranit úlohu"
 
-#: src/planner-task-tree.c:788
+#: src/planner-task-tree.c:798
 msgid "Constraint task"
 msgstr "Omezit úlohu"
 
-#: src/planner-task-tree.c:926
+#: src/planner-task-tree.c:861
+msgid "Constraint task reset"
+msgstr "Zrušit omezení úlohy"
+
+#: src/planner-task-tree.c:995
 msgid "Move task"
 msgstr "Přesunout úlohu"
 
-#: src/planner-task-tree.c:1045
+#: src/planner-task-tree.c:1114
 msgid "Link task"
 msgstr "Připojit úlohu"
 
-#: src/planner-task-tree.c:1113
+#: src/planner-task-tree.c:1182
 msgid "Unlink task"
 msgstr "Odpojit úlohu"
 
-#: src/planner-task-tree.c:2722
+#: src/planner-task-tree.c:1263
+msgid "Edit task custom property"
+msgstr "Upravit vlastní vlastnost úlohy"
+
+#: src/planner-task-tree.c:2895
 #, c-format
 msgid ""
 "You are about to open an edit dialog each for %i tasks. Are you sure that "
@@ -1646,72 +1654,72 @@ msgstr ""
 "Hodláte otevřít dialog úprav pro každou z %i úloh. Jste si jisti, že to "
 "chcete udělat?"
 
-#: src/planner-task-tree.c:3356
+#: src/planner-task-tree.c:3526
 msgid "mon"
 msgstr "měs"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:3357
+#: src/planner-task-tree.c:3527
 msgid "month"
 msgstr "měsíc"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:3358
+#: src/planner-task-tree.c:3528
 msgid "months"
 msgstr "měsíců"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:3359
+#: src/planner-task-tree.c:3529
 msgid "w"
 msgstr "t"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:3360
+#: src/planner-task-tree.c:3530
 msgid "week"
 msgstr "týden"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:3361
+#: src/planner-task-tree.c:3531
 msgid "weeks"
 msgstr "týdnů"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:3362
+#: src/planner-task-tree.c:3532
 msgid "d"
 msgstr "d"
 
 #. day unit variant accepted in input
-#: src/planner-task-tree.c:3363
+#: src/planner-task-tree.c:3533
 msgid "day"
 msgstr "den"
 
 #. day unit variant accepted in input
-#: src/planner-task-tree.c:3365
+#: src/planner-task-tree.c:3535
 msgid "h"
 msgstr "h"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:3366
+#: src/planner-task-tree.c:3536
 msgid "hour"
 msgstr "hodina"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:3367
+#: src/planner-task-tree.c:3537
 msgid "hours"
 msgstr "hodin"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:3368
+#: src/planner-task-tree.c:3538
 msgid "min"
 msgstr "min"
 
 #. minute unit variant accepted in input
-#: src/planner-task-tree.c:3369
+#: src/planner-task-tree.c:3539
 msgid "minute"
 msgstr "minuta"
 
 #. minute unit variant accepted in input
-#: src/planner-task-tree.c:3370
+#: src/planner-task-tree.c:3540
 msgid "minutes"
 msgstr "minut"
 
