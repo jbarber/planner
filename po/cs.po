@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mrproject VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-06-21 21:26+0200\n"
-"PO-Revision-Date: 2004-06-22 15:37+0200\n"
+"POT-Creation-Date: 2004-06-22 21:29+0200\n"
+"PO-Revision-Date: 2004-06-23 11:28+0200\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -189,7 +189,7 @@ msgstr "Editor skupin"
 msgid "<b>Save to file</b>"
 msgstr "<b>Uložit do souboru</b>"
 
-#: data/glade/html-output.glade.h:4 data/ui/html-plugin.ui.h:1
+#: data/glade/html-output.glade.h:4
 msgid "Export to HTML"
 msgstr "Export do HTML"
 
@@ -409,6 +409,10 @@ msgstr "dní"
 msgid "Insert Task"
 msgstr "Vložit úlohu"
 
+#: data/mime/planner.xml.in.h:1
+msgid "Planner project plan"
+msgstr "Plán projektu Planner"
+
 #: data/planner.desktop.in.h:1
 msgid "Planner Project Management"
 msgstr "Správa projektů Planner"
@@ -589,6 +593,10 @@ msgstr "Od_pojit úlohu"
 msgid "_Zoom In"
 msgstr "Z_většit"
 
+#: data/ui/html-plugin.ui.h:1
+msgid "HTML"
+msgstr "HTML"
+
 #: data/ui/main-window.ui.h:1
 msgid "About this application"
 msgstr "O této aplikaci"
@@ -622,174 +630,178 @@ msgid "Cut the selection"
 msgstr "Vyjmout výběr"
 
 #: data/ui/main-window.ui.h:9
+msgid "E_xport To"
+msgstr "_Exportovat do"
+
+#: data/ui/main-window.ui.h:10
 msgid "Edit Day _Types"
 msgstr "Upravit _typy dnů"
 
-#: data/ui/main-window.ui.h:10
+#: data/ui/main-window.ui.h:11
 msgid "Edit Project _Phases"
 msgstr "Upravit _fáze projektu"
 
-#: data/ui/main-window.ui.h:11
+#: data/ui/main-window.ui.h:12
 msgid "Edit the project properties"
 msgstr "Upravit vlastnosti projektu"
 
-#: data/ui/main-window.ui.h:12
+#: data/ui/main-window.ui.h:13
 msgid "Exit the program"
 msgstr "Ukončit program"
 
-#: data/ui/main-window.ui.h:13
+#: data/ui/main-window.ui.h:14
 msgid "New"
 msgstr "Nový"
 
-#: data/ui/main-window.ui.h:14
+#: data/ui/main-window.ui.h:15
 msgid "New..."
 msgstr "Nový..."
 
-#: data/ui/main-window.ui.h:15
+#: data/ui/main-window.ui.h:16
 msgid "Open"
 msgstr "Otevřít"
 
-#: data/ui/main-window.ui.h:16
+#: data/ui/main-window.ui.h:17
 msgid "Open a project"
 msgstr "Otevřít projekt"
 
-#: data/ui/main-window.ui.h:17
+#: data/ui/main-window.ui.h:18
 msgid "Paste the clipboard"
 msgstr "Vložit schránku"
 
-#: data/ui/main-window.ui.h:18
+#: data/ui/main-window.ui.h:19
 msgid "Print"
 msgstr "Tisk"
 
-#: data/ui/main-window.ui.h:19
+#: data/ui/main-window.ui.h:20
 msgid "Print Pre_view"
 msgstr "_Náhled před tiskem"
 
-#: data/ui/main-window.ui.h:20
+#: data/ui/main-window.ui.h:21
 msgid "Print preview"
 msgstr "Náhled před tiskem"
 
-#: data/ui/main-window.ui.h:21
+#: data/ui/main-window.ui.h:22
 msgid "Print preview of the current project"
 msgstr "Náhled aktuálního projektu před tiskem"
 
-#: data/ui/main-window.ui.h:22
+#: data/ui/main-window.ui.h:23
 msgid "Print the current project"
 msgstr "Vytisknout aktuální projekt"
 
-#: data/ui/main-window.ui.h:23 src/planner-cmd-manager.c:241
+#: data/ui/main-window.ui.h:24 src/planner-cmd-manager.c:241
 msgid "Redo"
 msgstr "Znovu"
 
-#: data/ui/main-window.ui.h:24
+#: data/ui/main-window.ui.h:25
 msgid "Redo the undone action"
 msgstr "Zrušit poslední akci zpět"
 
-#: data/ui/main-window.ui.h:25
+#: data/ui/main-window.ui.h:26
 msgid "Save"
 msgstr "Uložit"
 
-#: data/ui/main-window.ui.h:26
+#: data/ui/main-window.ui.h:27
 msgid "Save _As..."
 msgstr "Uložit _jako..."
 
-#: data/ui/main-window.ui.h:27
+#: data/ui/main-window.ui.h:28
 msgid "Save the current project"
 msgstr "Uložit aktuální projekt"
 
-#: data/ui/main-window.ui.h:28
+#: data/ui/main-window.ui.h:29
 msgid "Save the current project with a different name"
 msgstr "Uložit aktuální projekt pod jiným jménem"
 
-#: data/ui/main-window.ui.h:29
+#: data/ui/main-window.ui.h:30
 msgid "Show the Planner User Guide"
 msgstr "Zobrazit příručku uživatele Planneru"
 
-#: data/ui/main-window.ui.h:30 src/planner-cmd-manager.c:229
+#: data/ui/main-window.ui.h:31 src/planner-cmd-manager.c:229
 msgid "Undo"
 msgstr "Zpět"
 
-#: data/ui/main-window.ui.h:31
+#: data/ui/main-window.ui.h:32
 msgid "Undo the last action"
 msgstr "Vrátit poslední akci"
 
-#: data/ui/main-window.ui.h:32
+#: data/ui/main-window.ui.h:33
 msgid "_About"
 msgstr "_O programu"
 
-#: data/ui/main-window.ui.h:33
+#: data/ui/main-window.ui.h:34
 msgid "_Actions"
 msgstr "_Akce"
 
-#: data/ui/main-window.ui.h:34
+#: data/ui/main-window.ui.h:35
 msgid "_Close"
 msgstr "_Zavřít"
 
-#: data/ui/main-window.ui.h:35
+#: data/ui/main-window.ui.h:36
 msgid "_Copy"
 msgstr "_Kopírovat"
 
-#: data/ui/main-window.ui.h:36
+#: data/ui/main-window.ui.h:37
 msgid "_Edit"
 msgstr "_Úpravy"
 
-#: data/ui/main-window.ui.h:37
+#: data/ui/main-window.ui.h:38
 msgid "_Edit Project Properties"
 msgstr "Upravit _vlastnosti projektu"
 
-#: data/ui/main-window.ui.h:38
+#: data/ui/main-window.ui.h:39
 msgid "_File"
 msgstr "_Soubor"
 
-#: data/ui/main-window.ui.h:39
+#: data/ui/main-window.ui.h:40
 msgid "_Help"
 msgstr "_Nápověda"
 
-#: data/ui/main-window.ui.h:40
+#: data/ui/main-window.ui.h:41
 msgid "_Manage Calendars"
 msgstr "_Spravovat kalendáře"
 
-#: data/ui/main-window.ui.h:41
+#: data/ui/main-window.ui.h:42
 msgid "_New Project"
 msgstr "_Nový projekt"
 
-#: data/ui/main-window.ui.h:42
+#: data/ui/main-window.ui.h:43
 msgid "_Open..."
 msgstr "_Otevřít..."
 
-#: data/ui/main-window.ui.h:43
+#: data/ui/main-window.ui.h:44
 msgid "_Paste"
 msgstr "_Vložit"
 
-#: data/ui/main-window.ui.h:44
+#: data/ui/main-window.ui.h:45
 msgid "_Print..."
 msgstr "_Tisk..."
 
-#: data/ui/main-window.ui.h:45
+#: data/ui/main-window.ui.h:46
 msgid "_Project"
 msgstr "_Projekt"
 
-#: data/ui/main-window.ui.h:46
+#: data/ui/main-window.ui.h:47
 msgid "_Quit"
 msgstr "_Konec"
 
-#: data/ui/main-window.ui.h:47
+#: data/ui/main-window.ui.h:48
 msgid "_Redo"
 msgstr "Z_novu"
 
-#: data/ui/main-window.ui.h:48 src/planner-window.c:1286
+#: data/ui/main-window.ui.h:49 src/planner-window.c:1246
 msgid "_Save"
 msgstr "_Uložit"
 
-#: data/ui/main-window.ui.h:49
+#: data/ui/main-window.ui.h:50
 msgid "_Undo"
 msgstr "_Zpět"
 
-#: data/ui/main-window.ui.h:50
+#: data/ui/main-window.ui.h:51
 msgid "_User Guide"
 msgstr "_Příručka uživatele"
 
-#: data/ui/main-window.ui.h:51
+#: data/ui/main-window.ui.h:52
 msgid "_View"
 msgstr "_Zobrazit"
 
@@ -856,6 +868,10 @@ msgstr "_Upravit úlohu"
 #: data/ui/time-table-view.ui.h:5
 msgid "Zoom to fit"
 msgstr "Přizpůsobit velikosti okna"
+
+#: data/ui/xml-planner-plugin.ui.h:1
+msgid "Planner File pre 0.12"
+msgstr "Soubor Planner před 0.12"
 
 #: libegg/recent-files/egg-recent-vfs-utils.c:90
 msgid " (invalid Unicode)"
@@ -1019,13 +1035,29 @@ msgstr "Nemohu přidat předchůdce, protože by tím vznikla smyčka."
 msgid "Can not move the task, since it would result in a loop."
 msgstr "Nemohu přesunout úlohu, protože by tím vznikla smyčka."
 
-#: libplanner/mrp-xsl.c:96
-msgid "HTML export failed"
+#: libplanner/mrp-xsl.c:102
+msgid "Export to HTML failed"
 msgstr "Export do HTML selhal"
+
+#: libplanner/mrp-xsl.c:166
+msgid "Export to Planner pre-0.12 format failed"
+msgstr "Export do formátu Planneru před 0.12 selhal"
 
 #: src/planner-application.c:125
 msgid "Edit"
 msgstr "Upravit"
+
+#: src/planner-calendar-dialog.c:187
+msgid "Change day type"
+msgstr "Změnit typ dne"
+
+#: src/planner-calendar-dialog.c:313
+msgid "Remove calendar"
+msgstr "Odstranit kalendář"
+
+#: src/planner-calendar-dialog.c:408
+msgid "Add new calendar"
+msgstr "Přidat nový kalendář"
 
 #: src/planner-cell-renderer-date.c:147
 msgid "Constraint type"
@@ -1168,7 +1200,7 @@ msgstr "Začátek projektu"
 
 #: src/planner-gantt-print.c:189 src/planner-group-dialog.c:820
 #: src/planner-property-dialog.c:478 src/planner-resource-view.c:1153
-#: src/planner-task-dialog.c:2563 src/planner-task-dialog.c:2652
+#: src/planner-task-dialog.c:2541 src/planner-task-dialog.c:2630
 #: src/planner-task-view.c:274 src/planner-ttable-print.c:97
 msgid "Name"
 msgstr "Jméno"
@@ -1180,7 +1212,7 @@ msgid "Work"
 msgstr "Práce"
 
 #: src/planner-gantt-print.c:541 src/planner-gantt-row.c:682
-#: src/planner-window.c:1663
+#: src/planner-window.c:1621
 msgid "Unnamed"
 msgstr "Nepojmenovaný"
 
@@ -1272,7 +1304,8 @@ msgstr ""
 "\"%s\" je adresář.\n"
 "Zadejte název souboru a zkuste to znovu."
 
-#: src/planner-html-plugin.c:148 src/planner-window.c:1419
+#: src/planner-html-plugin.c:148 src/planner-window.c:1377
+#: src/planner-xml-planner-plugin.c:125
 #, c-format
 msgid "File \"%s\" exists, do you want to overwrite it?"
 msgstr "Soubor \"%s\" existuje, chcete jej přepsat?"
@@ -1302,7 +1335,7 @@ msgstr "Odstranit fázi"
 msgid "Could not open plugin file '%s'\n"
 msgstr "Nemohu otevřít soubor zásuvného modulu '%s'\n"
 
-#: src/planner-predecessor-model.c:191 src/planner-task-dialog.c:2221
+#: src/planner-predecessor-model.c:191 src/planner-task-dialog.c:2201
 msgid "FS"
 msgstr "KZ"
 
@@ -1311,7 +1344,7 @@ msgid "FF"
 msgstr "KK"
 
 #. list = g_list_append (list, g_strdup (_("FF")));
-#: src/planner-predecessor-model.c:197 src/planner-task-dialog.c:2223
+#: src/planner-predecessor-model.c:197 src/planner-task-dialog.c:2203
 msgid "SS"
 msgstr "ZZ"
 
@@ -1393,7 +1426,7 @@ msgid "Label"
 msgstr "Jmenovka"
 
 #: src/planner-property-dialog.c:507 src/planner-resource-view.c:1195
-#: src/planner-task-dialog.c:2684
+#: src/planner-task-dialog.c:2662
 msgid "Type"
 msgstr "Typ"
 
@@ -1409,7 +1442,7 @@ msgstr "Odstranit vlastnost"
 msgid "Edit property label"
 msgstr "Upravit jmenovku vlastnosti"
 
-#: src/planner-python-plugin.c:164 src/planner-window.c:639
+#: src/planner-python-plugin.c:164 src/planner-window.c:633
 msgid "Open a file"
 msgstr "Otevřít soubor"
 
@@ -1446,7 +1479,7 @@ msgstr "Upravit vlastnost zdroje v dialogu"
 
 #. i18n: time stamp format for notes in task dialog, see strftime(3) for
 #. * a detailed description.
-#: src/planner-resource-dialog.c:1458 src/planner-task-dialog.c:1808
+#: src/planner-resource-dialog.c:1458 src/planner-task-dialog.c:1790
 msgid "%a %d %b %Y, %H:%M\n"
 msgstr "%a %d. %b %Y, %H:%M\n"
 
@@ -1626,32 +1659,32 @@ msgstr "Upravit předchůdce zpoždění v dialogu"
 msgid "Edit task note from dialog"
 msgstr "Upravit poznámku úlohy v dialogu"
 
-#: src/planner-task-dialog.c:1880
+#: src/planner-task-dialog.c:1862
 msgid "Finish to start (FS)"
 msgstr "Konec před začátkem (KZ)"
 
 #. _("Finish to finish (FF)"), MRP_RELATION_FF,
-#: src/planner-task-dialog.c:1882
+#: src/planner-task-dialog.c:1864
 msgid "Start to start (SS)"
 msgstr "Začátek před začátkem (ZZ)"
 
-#: src/planner-task-dialog.c:1937
+#: src/planner-task-dialog.c:1919
 msgid "Can't add new predecessor. No task selected!"
 msgstr "Nemohu přidat nového předchůdce. Nevybrána žádná úloha!"
 
-#: src/planner-task-dialog.c:2584
+#: src/planner-task-dialog.c:2562
 msgid "Assigned"
 msgstr "Přiřazeno"
 
-#: src/planner-task-dialog.c:2601
+#: src/planner-task-dialog.c:2579
 msgid "Units"
 msgstr "Jednotky"
 
-#: src/planner-task-dialog.c:2706
+#: src/planner-task-dialog.c:2684
 msgid "Lag"
 msgstr "Zpoždění"
 
-#: src/planner-task-dialog.c:2845 src/planner-task-dialog.c:2847
+#: src/planner-task-dialog.c:2822 src/planner-task-dialog.c:2824
 msgid "Edit task properties"
 msgstr "Upravit vlastnosti úlohy"
 
@@ -1859,57 +1892,57 @@ msgstr "Nemohu otevřít soubor zásuvného modulu pohledu '%s'\n"
 #. I18n: Translators, list your names here, newline separated if there
 #. * are more than one, to appear in the about box.
 #.
-#: src/planner-window.c:1085 src/planner-window.c:1092
+#: src/planner-window.c:1050 src/planner-window.c:1057
 msgid "translator_credits"
 msgstr "Miloslav Trmač <mitr@volny.cz>"
 
 #. "Copyright \xc2\xa9"
-#: src/planner-window.c:1089
+#: src/planner-window.c:1054
 msgid "A Project Management application for the GNOME desktop"
 msgstr "Aplikace pro správu projektů pro prostředí pracovní plochy GNOME"
 
-#: src/planner-window.c:1099
+#: src/planner-window.c:1064
 msgid "The Planner Homepage"
 msgstr "Domácí stránka Planneru"
 
-#: src/planner-window.c:1227
+#: src/planner-window.c:1187
 msgid "If you don't save, changes made the last minute will be discarded."
 msgstr "Pokud je neuložíte, budou změny provedené za poslední minutu ztraceny."
 
-#: src/planner-window.c:1232
+#: src/planner-window.c:1192
 #, c-format
 msgid "If you don't save, changes made the last %d minutes will be discarded."
 msgstr ""
 "Pokud je neuložíte, budou změny provedené za posledních %d minut ztraceny."
 
-#: src/planner-window.c:1237
+#: src/planner-window.c:1197
 msgid "If you don't save, changes made the last hour will be discarded."
 msgstr "Pokud je neuložíte, budou změny provedené za poslední hodinu ztraceny."
 
-#: src/planner-window.c:1242
+#: src/planner-window.c:1202
 #, c-format
 msgid "If you don't save, changes made the last %d hours will be discarded."
 msgstr ""
 "Pokud je neuložíte, budou změny provedené za posledních %d hodin ztraceny."
 
-#: src/planner-window.c:1249
+#: src/planner-window.c:1209
 #, c-format
 msgid "Save changes to document '%s' before closing?"
 msgstr "Uložit před zavřením změny do dokumentu '%s'?"
 
-#: src/planner-window.c:1273
+#: src/planner-window.c:1233
 msgid "C_lose without saving"
 msgstr "Z_avřít bez uložení"
 
-#: src/planner-window.c:1279
+#: src/planner-window.c:1239
 msgid "_Cancel"
 msgstr "_Zrušit"
 
-#: src/planner-window.c:1383
+#: src/planner-window.c:1341
 msgid "Save a file"
 msgstr "Uložit soubor"
 
-#: src/planner-window.c:1620
+#: src/planner-window.c:1578
 msgid ""
 "You have opened a file that was saved with an old version of Planner.\n"
 "\n"
@@ -1938,9 +1971,17 @@ msgstr ""
 "omezení' menu 'Úpravy'."
 
 #. Hack.
-#: src/planner-window.c:1655
+#: src/planner-window.c:1613
 msgid "Unnamed database project"
 msgstr "Nepojmenovaný projekt v databázi"
+
+#: src/planner-working-time-dialog.c:143
+msgid "Edit working time"
+msgstr "Upravit pracovní dobu"
+
+#: src/planner-xml-planner-plugin.c:101
+msgid "Export"
+msgstr "Exportovat"
 
 #~ msgid "Finish to finish (FF)"
 #~ msgstr "Konec před koncem (KK)"
