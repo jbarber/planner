@@ -1,3 +1,14 @@
+2004-05-03  Richard Hult  <richard@imendio.com>
+
+	* configure.in:
+	* libplanner/mrp-sql.c: (sql_get_last_error), (get_int), (get_id),
+	(get_string), (get_boolean), (get_float), (mrp_sql_load_project),
+	(mrp_sql_save_project):
+	* src/Makefile.am:
+	* src/planner-python-plugin.c: (python_plugin_execute): Fix build.
+
+	* data/ui/python-plugin.ui: Fix typo.
+
 2004-05-03 Alvaro del Castillo  <acs@barrapunto.com>
 
         * src/planner-resource-dialog.c: implemented undo for resource cost

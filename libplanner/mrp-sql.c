@@ -180,8 +180,6 @@ static gboolean sql_write_tasks               (SQLData              *data);
 static GdaDataModel * 
                 sql_execute_query             (GdaConnection        *con, 
 					       gchar                *query);
-static char *   sql_get_errors                (GdaConnection        *connection);
-static void     sql_show_result               (GdaDataModel         *res);
 
 #define STOP_ON_ERR     GDA_COMMAND_OPTION_STOP_ON_ERRORS
 
@@ -197,32 +195,10 @@ sql_execute_query (GdaConnection *con, gchar *query)
 	return res;
 }
 
-static gchar *
-sql_get_errors (GdaConnection *connection)
-{
-        GList    *list;
-        GList    *node;
-        GdaError *error;
-	gchar    *error_txt;
-      
-        list = (GList *) gda_connection_get_errors (connection);
-      
-        for (node = g_list_first (list); node != NULL; node = g_list_next (node)) {
-		error = (GdaError *) node->data;
-		g_print ("Error no: %d\t", gda_error_get_number (error));
-		g_print ("desc: %s\t", gda_error_get_description (error));
-		g_print ("source: %s\t", gda_error_get_source (error));
-		g_print ("sqlstate: %s\n", gda_error_get_sqlstate (error));
-		error_txt = g_strdup_printf ("Desc. error: %s", gda_error_get_description (error));
-	}
-	return error_txt;
-}
-
 static const gchar *
 sql_get_last_error (GdaConnection *connection)
 {
 	GList       *list;
-	GList       *node;
 	GdaError    *error;
 	const gchar *error_txt;
 
@@ -238,42 +214,11 @@ sql_get_last_error (GdaConnection *connection)
 	return error_txt;
 }
 
-void
-sql_show_result (GdaDataModel * dm)
-{
-	gint      row_id;
-	gint      column_id;
-	GdaValue *value;
-	gchar    *string;
-	
-	for (column_id = 0; column_id < gda_data_model_get_n_columns (dm);
-	     column_id++) {
-		g_print ("%s\t", gda_data_model_get_column_title (dm, column_id));
-	}
-	g_print ("\n");
-	
-	for (row_id = 0; row_id < gda_data_model_get_n_rows (dm); row_id++) {
-		for (column_id = 0; column_id < gda_data_model_get_n_columns (dm);
-		     column_id++) {
-			value = (GdaValue *) 
-				gda_data_model_get_value_at (dm, column_id, row_id);
-			string = gda_value_stringify (value);
-			g_print ("%s\t", string);
-			g_free (string);
-		}
-		g_print ("\n");
-	}
-}
-
-
-
 static gint
 get_int (GdaDataModel *res, gint row, gint column)
 {
 	const gchar    *str;
 	const GdaValue *value;
-	
-	g_return_if_fail (GDA_IS_DATA_MODEL (res));
 	
 	value = (GdaValue *) gda_data_model_get_value_at (res, column, row);
 	if (value == NULL) {
@@ -291,8 +236,6 @@ get_id (GdaDataModel *res, gint row, gint column)
 	const gchar    *str;
 	const GdaValue *value;
 	
-	g_return_if_fail (GDA_IS_DATA_MODEL (res));
-
 	value = (GdaValue *) gda_data_model_get_value_at (res, column, row);
 	if (value == NULL) {
 		g_warning ("Failed to get a value: (%d,%d)", column, row);
@@ -316,13 +259,11 @@ get_string (GdaDataModel *res, gint row, gint column)
 	gsize           len;
 	const GdaValue *value;
 	
-	g_return_if_fail (GDA_IS_DATA_MODEL (res));
-
 	value = (GdaValue *) gda_data_model_get_value_at (res, column, row);
 	if (value == NULL) {
 		g_warning ("Failed to get a value: (%d,%d)", column, row);
 		d(sql_show_result (res));
-		return "";
+		return g_strdup ("");
 	}
 	
 	str = gda_value_stringify (value);
@@ -352,15 +293,12 @@ static gboolean
 get_boolean (GdaDataModel *res, gint row, gint column)
 {
 	const GdaValue *value;
-	gboolean       *boolean;
 	
-	g_return_if_fail (GDA_IS_DATA_MODEL (res));
-
 	value = (GdaValue *) gda_data_model_get_value_at (res, column, row);
 	if (value == NULL) {
 		g_warning ("Failed to get a value: (%d,%d)", column, row);
 		d(sql_show_result (res));
-		return -1;
+		return FALSE;
 	}
 	
 	return gda_value_get_boolean (value);
@@ -372,8 +310,6 @@ get_float (GdaDataModel *res, gint row, gint column)
 	const gchar    *str;
 	const GdaValue *value;
 	
-	g_return_if_fail (GDA_IS_DATA_MODEL (res));
-
 	value = (GdaValue *) gda_data_model_get_value_at (res, column, row);
 
 	if (value == NULL) {
@@ -2184,11 +2120,8 @@ mrp_sql_load_project (MrpStorageSQL *storage,
 		      GError       **error)
 {
 	SQLData        *data;
-	gchar          *pgoptions = NULL;
-	gchar          *pgtty = NULL;
 	GdaDataModel   *res = NULL;
 	GdaClient      *client;
-	gchar          *str;
 	const gchar    *dsn_name = "planner-auto";
 	gchar          *db_txt;
 	MrpCalendar    *calendar;
@@ -3629,8 +3562,6 @@ mrp_sql_save_project (MrpStorageSQL  *storage,
 		      GError        **error)
 {
 	SQLData      *data;
-	gchar        *pgoptions = NULL;
-	gchar        *pgtty = NULL;
 	gchar        *db_txt = NULL;
 	const gchar  *dsn_name = "planner-auto";
 	GdaDataModel *res = NULL;

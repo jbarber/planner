@@ -14,7 +14,7 @@ INCLUDES = \
 	-DMRP_PLUGINDIR=\""$(libdir)/planner/plugins"\"		\
 	$(GNOMEUI_UNSTABLE)
 
-if HAVE_PYTHON_MOD
+if HAVE_PYTHON_PLUGIN
 INCLUDES += $(PYTHON_INCLUDES)
 endif
 
@@ -196,7 +196,7 @@ libsql_plugin_la_CFLAGS = $(GDA_CFLAGS)
 libsql_plugin_la_LDFLAGS = -avoid-version -module
 endif
 
-if HAVE_PYTHON_MOD
+if HAVE_PYTHON_PLUGIN
 python_plugin = libpython-plugin.la
 libpython_plugin_la_SOURCES = planner-python-plugin.c
 libpython_plugin_la_LDFLAGS = -avoid-version -module

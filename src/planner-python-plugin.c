@@ -59,9 +59,6 @@ static BonoboUIVerb verbs[] = {
 	BONOBO_UI_VERB_END
 };
 
-
-
-
 static gboolean
 window_file_is_dir (const gchar *file)
 {
@@ -113,11 +110,10 @@ python_plugin_execute (BonoboUIComponent *component,
 {
 	PlannerWindow     *window;
 	PlannerPluginPriv *priv;
-
-	GtkWidget        *file_sel;
-	gint              response;
-	const gchar      *filename = NULL;
-	gchar            *last_dir;
+	GtkWidget         *file_sel;
+	gint               response;
+	const gchar       *filename = NULL;
+	gchar             *last_dir;
 
 	priv = PLANNER_PLUGIN (user_data)->priv;
 	window = priv->main_window;
@@ -130,14 +126,13 @@ python_plugin_execute (BonoboUIComponent *component,
 	g_free (last_dir);
 
 	gtk_window_set_modal (GTK_WINDOW (file_sel), TRUE);
-
+	
 	gtk_widget_show (file_sel);
 
 	response = gtk_dialog_run (GTK_DIALOG (file_sel));
 
 	if (response == GTK_RESPONSE_OK) {
-		filename = gtk_file_selection_get_filename (
-			GTK_FILE_SELECTION (file_sel));
+		filename = gtk_file_selection_get_filename (GTK_FILE_SELECTION (file_sel));
 		if (window_file_is_dir (filename)) {
 			filename = NULL;
 		}
@@ -146,22 +141,22 @@ python_plugin_execute (BonoboUIComponent *component,
 	gtk_widget_destroy (file_sel);
 
 	if (filename != NULL) {
-		FILE *fp;
+		FILE     *fp;
 		PyObject *pModule, *pName;
 		/* PyObject *pDict, *pMain; */
 
-		fp = fopen(filename,"r");
-		Py_Initialize();
+		fp = fopen (filename,"r");
+		Py_Initialize ();
 
 		/* Import pygtk */
-		PyRun_SimpleString("import pygtk\n");
-		PyRun_SimpleString("pygtk.require('2.0')\n");
-		PyRun_SimpleString("import gtk\n");
+		PyRun_SimpleString ("import pygtk\n");
+		PyRun_SimpleString ("pygtk.require('2.0')\n");
+		PyRun_SimpleString ("import gtk\n");
 
 		/* Import planner */
-		pName = PyString_FromString("planner");
-		pModule = PyImport_Import(pName);
-		Py_DECREF(pName);
+		pName = PyString_FromString ("planner");
+		pModule = PyImport_Import (pName);
+		Py_DECREF (pName);
 		/*
 		pDict = PyImport_GetModuleDict();
 		pMain = PyDict_GetItemString(pDict,"__main__");
@@ -174,19 +169,19 @@ python_plugin_execute (BonoboUIComponent *component,
 			PyObject   *pDict, *pMain;
 			MrpProject *project;
 
-			pDict = PyImport_GetModuleDict();
-			pMain = PyDict_GetItemString(pDict,"__main__");
-			pDict = PyModule_GetDict(pMain);
+			pDict = PyImport_GetModuleDict ();
+			pMain = PyDict_GetItemString (pDict,"__main__");
+			pDict = PyModule_GetDict (pMain);
 
-			project = planner_window_get_project(window);
-			py_widget = pygobject_new((GObject *)project);
-			PyDict_SetItemString(pDict, "project", py_widget);
-			Py_DECREF(py_widget);
+			project = planner_window_get_project (window);
+			py_widget = pygobject_new (G_OBJECT (project));
+			PyDict_SetItemString (pDict, "project", py_widget);
+			Py_DECREF (py_widget);
 
-			PyRun_SimpleFile(fp,filename);
+			PyRun_SimpleFile (fp, (char *) filename);
 		}
-		Py_Finalize();
-		fclose(fp);
+		Py_Finalize ();
+		fclose (fp);
 	}
 }
 
