@@ -905,7 +905,7 @@ gantt_view_gantt_status_updated_cb (PlannerGanttChart *gantt,
 				    const gchar       *message,
 				    PlannerView       *view)
 {
-	g_message("This message should appear in the status bar:\n%s", message);
+	planner_window_set_status (view->main_window, message);
 }
 
 static void

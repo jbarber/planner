@@ -51,8 +51,8 @@ void        plugin_exit               (PlannerPlugin     *plugin);
 
 static GtkActionEntry action_entries[] = {
 	{ "XML Planner Export", NULL,
-	  N_("XML"), NULL,
-	  N_("Exports project to XML"),
+	  N_("Planner 0.11 Format"), NULL,
+	  N_("Export project to a file suitable for Planner 0.11"),
 	  G_CALLBACK (xml_planner_plugin_export) },
 };
 static guint n_action_entries = G_N_ELEMENTS (action_entries);

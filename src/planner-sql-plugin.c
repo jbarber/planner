@@ -91,11 +91,11 @@ enum {
 };
 
 static GtkActionEntry entries[] = {
-	{ "Open",  NULL,  N_("_Open DB"), NULL, N_("Open from database"),  G_CALLBACK(sql_plugin_open) },
-	{ "Save",  NULL,  N_("_Save DB"), NULL, N_("Save to database"),    G_CALLBACK(sql_plugin_save) },
+	{ "Open",  NULL,  N_("Open from Database..."), NULL, N_("Open a project from a database"), G_CALLBACK (sql_plugin_open) },
+	{ "Save",  NULL,  N_("Save to Database"), NULL, N_("Save the current project to a database"), G_CALLBACK (sql_plugin_save) },
 };
 
-static guint n_entries        = G_N_ELEMENTS (entries);
+static guint n_entries = G_N_ELEMENTS (entries);
 
 
 /**
@@ -110,6 +110,7 @@ sql_execute_query (GdaConnection *con, gchar *query)
 	cmd = gda_command_new (query, GDA_COMMAND_TYPE_SQL, STOP_ON_ERR);
 	res = gda_connection_execute_single_command  (con, cmd, NULL);
 	gda_command_free (cmd);
+	
 	return res;
 }
 
@@ -1182,11 +1183,11 @@ G_MODULE_EXPORT void
 plugin_init (PlannerPlugin *plugin,
 	     PlannerWindow *main_window)
 {
-	GtkActionGroup    *actions;
-	GtkUIManager      *ui;
-	SQLPluginPriv     *priv;
-	gint               i = -1;
-	GError            *error = NULL;
+	SQLPluginPriv  *priv;
+	GtkActionGroup *actions;
+	GtkUIManager   *ui;
+	gint            i = -1;
+	GError         *error = NULL;
 	
 	priv = g_new0 (SQLPluginPriv, 1);
 
@@ -1215,6 +1216,7 @@ plugin_init (PlannerPlugin *plugin,
 		g_message ("Couldn't load: %s",DATADIR"/planner/ui/sql-plugin.ui");
 		g_error_free (error);
 	}
-	gtk_ui_manager_ensure_update(ui);
+	
+	gtk_ui_manager_ensure_update (ui);
 }
 

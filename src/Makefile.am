@@ -110,7 +110,7 @@ planner_LDFLAGS = -export-dynamic
 planner_LDADD =	\
 	$(top_builddir)/libplanner/libplanner-1.la \
 	$(top_builddir)/libegg/recent-files/libeggrecent.la \
-	libutil.la	\
+	libutil.la \
 	$(PLANNER_LIBS)
 
 noinst_LTLIBRARIES = libutil.la
@@ -137,14 +137,14 @@ libgantt_view_la_SOURCES = \
 	planner-gantt-view.c
 
 libgantt_view_la_LDFLAGS = -avoid-version -module
-libgantt_view_la_LIBADD = libutil.la libgantt-task.la
+libgantt_view_la_LIBADD = libgantt-task.la
 
 
 libtask_view_la_SOURCES = \
 	planner-task-view.c
 
 libtask_view_la_LDFLAGS = -avoid-version -module
-libtask_view_la_LIBADD = libutil.la libgantt-task.la
+libtask_view_la_LIBADD = libgantt-task.la
 
 
 libresource_view_la_SOURCES = \
@@ -167,7 +167,7 @@ libtimetable_view_la_SOURCES = \
 	planner-ttable-tree.h
 
 libtimetable_view_la_LDFLAGS = -avoid-version -module
-libtimetable_view_la_LIBADD = libutil.la libgantt-task.la
+libtimetable_view_la_LIBADD = libgantt-task.la
 
 
 # Small shared lib for the task, gantt, and resource usage views
@@ -176,7 +176,7 @@ gantt_task_LTLIBRARIES = libgantt-task.la
 libgantt_task_la_LIBADD = libutil.la
 libgantt_task_la_LDFLAGS = -avoid-version
 
-libgantt_task_la_SOURCES = 		\
+libgantt_task_la_SOURCES = \
 	planner-gantt-header.c		\
 	planner-gantt-header.h		\
 	planner-gantt-model.c		\

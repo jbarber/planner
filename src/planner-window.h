@@ -66,7 +66,8 @@ void                    planner_window_close                (PlannerWindow      
 void                    planner_window_show_day_type_dialog (PlannerWindow      *window);
 void                    planner_window_show_calendar_dialog (PlannerWindow      *window);
 PlannerCmdManager *     planner_window_get_cmd_manager      (PlannerWindow      *window);
-
+void                    planner_window_set_status           (PlannerWindow      *window,
+							     const gchar        *message);
 
 
 #endif /* __PLANNER_WINDOW_H__ */

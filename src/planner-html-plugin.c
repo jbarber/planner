@@ -65,7 +65,7 @@ void        plugin_exit                       (PlannerPlugin     *plugin);
 static GtkActionEntry action_entries[] = {
 	{ "HTML Export", NULL,
 	  N_("HTML"), NULL,
-	  N_("Exports project to HTML"),
+	  N_("Export project to HTML"),
 	  G_CALLBACK (html_plugin_export) },
 };
 static guint n_action_entries = G_N_ELEMENTS (action_entries);

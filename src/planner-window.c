@@ -75,6 +75,8 @@ struct _PlannerWindowPriv {
 
 	MrpProject          *project;
 
+	GtkWidget           *statusbar;
+	GtkWidget           *ui_box;
 	GtkWidget           *sidebar;
 	GtkWidget           *notebook;
 
@@ -139,8 +141,6 @@ static void       window_edit_day_types_cb               (GtkAction             
 							  gpointer                      data);
 static void       window_edit_phases_cb                  (GtkAction                    *action,
 							  gpointer                      data);
-static void       window_preferences_cb                  (GtkAction                    *action,
-							  gpointer                      data);
 static void       window_help_cb                         (GtkAction                    *action,
 							  gpointer                      data);
 static void       window_about_cb                        (GtkAction                    *action,
@@ -175,6 +175,17 @@ static gchar *    window_recent_tooltip_func             (EggRecentItem         
 #endif
 static void       window_save_state                      (PlannerWindow *window);
 static void       window_restore_state                   (PlannerWindow *window);
+
+static void window_disconnect_proxy_cb (GtkUIManager  *manager,
+					GtkAction     *action,
+					GtkWidget     *proxy,
+					PlannerWindow *window);
+
+static void window_connect_proxy_cb (GtkUIManager  *manager,
+				     GtkAction     *action,
+				     GtkWidget     *proxy,
+				     PlannerWindow *window);
+
 
 #define GCONF_PATH                  "/apps/planner"
 #define GCONF_MAIN_WINDOW_DIR       "/apps/planner/ui"
@@ -217,7 +228,7 @@ static GtkActionEntry entries[] = {
 	{ "EditPhases",                 NULL,                    N_("Edit Project _Phases"),     NULL,                NULL,                                                 G_CALLBACK (window_edit_phases_cb) },
 	{ "EditProjectProps",           GTK_STOCK_PROPERTIES,    N_("_Edit Project Properties"), NULL,                N_("Edit the project properties"),                    G_CALLBACK (window_project_props_cb) },
 	
-	{ "PreferencesEditPreferences", NULL,                    NULL,                           NULL,                NULL,                                                 G_CALLBACK (window_preferences_cb) },
+/*	{ "PreferencesEditPreferences", NULL,                    NULL,                           NULL,                NULL,                                                 G_CALLBACK (window_preferences_cb) },*/
 	
 	{ "Help",                       NULL,                    N_("_Help"),                    NULL,                NULL,                                                 NULL },
 	{ "HelpHelp",                   GTK_STOCK_HELP,          N_("_User Guide"),              "F1",                N_("Show the Planner User Guide"),                    G_CALLBACK (window_help_cb) },
@@ -357,33 +368,22 @@ planner_window_open_recent (GtkWidget           *widget,
 #endif
 
 static void
-add_widget (GtkUIManager *merge, 
-	    GtkWidget    *widget, 
-	    GtkBox       *box)
+window_add_widget (GtkUIManager  *merge, 
+		   GtkWidget     *widget, 
+		   PlannerWindow *window)
 {
-  GtkWidget *handle_box;
+	PlannerWindowPriv *priv;
 
-  if (GTK_IS_TOOLBAR (widget))
-    {
-      handle_box = gtk_handle_box_new ();
-      gtk_widget_show (handle_box);
-      gtk_container_add (GTK_CONTAINER (handle_box), widget);
-      gtk_box_pack_start (box, handle_box, FALSE, FALSE, 0);
-      g_signal_connect_swapped (widget, "destroy", 
-				G_CALLBACK (gtk_widget_destroy), handle_box);
-    }
-  else
-    gtk_box_pack_start (box, widget, FALSE, FALSE, 0);
-    
-  gtk_widget_show (widget);
+	priv = window->priv;
+
+	gtk_box_pack_start (GTK_BOX (priv->ui_box), widget, FALSE, FALSE, 0);
 }
-
 
 static void
 window_populate (PlannerWindow *window)
 {
 	PlannerWindowPriv    *priv;
-	GtkWidget            *hbox, *vbox;
+	GtkWidget            *hbox;
 	GList                *l;
 	GtkWidget            *view_widget;
 	PlannerView          *view;
@@ -419,24 +419,35 @@ window_populate (PlannerWindow *window)
 			  G_CALLBACK (planner_window_open_recent), window);
 	*/
 
-	vbox = gtk_vbox_new (FALSE, 0);
-	gtk_container_add (GTK_CONTAINER (window), vbox);
+	priv->ui_box = gtk_vbox_new (FALSE, 0);
+	gtk_container_add (GTK_CONTAINER (window), priv->ui_box);
 
 	priv->actions = gtk_action_group_new ("Planner");
 	gtk_action_group_set_translation_domain (priv->actions, GETTEXT_PACKAGE);
 	gtk_action_group_add_actions (priv->actions, entries, n_entries, window);
 
 	priv->ui_manager = gtk_ui_manager_new ();
-	g_signal_connect (priv->ui_manager, "add_widget",
-			  G_CALLBACK (add_widget), vbox);
 
+	g_signal_connect (priv->ui_manager,
+			  "add_widget",
+			  G_CALLBACK (window_add_widget),
+			  window);
+	g_signal_connect (priv->ui_manager,
+			  "connect_proxy",
+			  G_CALLBACK (window_connect_proxy_cb),
+			  window);
+	g_signal_connect (priv->ui_manager,
+			  "disconnect_proxy",
+			  G_CALLBACK (window_disconnect_proxy_cb),
+			  window);
+	
 	gtk_ui_manager_insert_action_group (priv->ui_manager, priv->actions, 0);
 	gtk_window_add_accel_group (GTK_WINDOW (window),
 				    gtk_ui_manager_get_accel_group (priv->ui_manager));
 
 	if (!gtk_ui_manager_add_ui_from_file (priv->ui_manager,
-					      DATADIR"/planner/ui/main-window.ui",
-					      &error)){
+					      DATADIR "/planner/ui/main-window.ui",
+					      &error)) {
 		g_message ("Building menus failed: %s", error->message);
 		g_message ("Couldn't load: %s",DATADIR"/planner/ui/main-window.ui");
 		g_error_free (error);
@@ -465,7 +476,11 @@ window_populate (PlannerWindow *window)
 	gtk_notebook_set_show_tabs (GTK_NOTEBOOK (priv->notebook), FALSE);
 	gtk_box_pack_start (GTK_BOX (hbox), priv->notebook, TRUE, TRUE, 0); 
 
-	gtk_box_pack_end (GTK_BOX (vbox), hbox, TRUE, TRUE, 0);
+	priv->statusbar = gtk_statusbar_new ();
+	gtk_box_pack_end (GTK_BOX (priv->ui_box), priv->statusbar, FALSE, TRUE, 0);
+	gtk_widget_show (priv->statusbar);
+
+	gtk_box_pack_end (GTK_BOX (priv->ui_box), hbox, TRUE, TRUE, 0);
 
 	/* Load views. */
 	priv->view_actions = gtk_action_group_new ("View Actions");
@@ -473,14 +488,14 @@ window_populate (PlannerWindow *window)
 	priv->views = planner_view_loader_load (window);
 
 	view_num = 0;
-	xml_string = g_strdup("");
-	r_entries  = g_new0 (GtkRadioActionEntry, g_list_length(priv->views));
+	xml_string = g_strdup ("");
+	r_entries  = g_new0 (GtkRadioActionEntry, g_list_length (priv->views));
 	for (l = priv->views; l; l = l->next, view_num++ ) {
 		view = l->data;
 		
 		view_widget = planner_view_get_widget (view);
 		gtk_widget_show (view_widget);
-		
+
 		planner_sidebar_append (PLANNER_SIDEBAR (priv->sidebar),
 					planner_view_get_icon (view),
 					planner_view_get_label (view));
@@ -490,8 +505,9 @@ window_populate (PlannerWindow *window)
 		r_entries[view_num].value = view_num;
 
 		xml_string_tmp = xml_string;
-		xml_string = g_strdup_printf ("%s<menuitem action='%s'/>",xml_string,r_entries[view_num].name);
-		g_free(xml_string_tmp);
+		xml_string = g_strdup_printf ("%s<menuitem action='%s'/>",
+					      xml_string, r_entries[view_num].name);
+		g_free (xml_string_tmp);
 
 		gtk_notebook_append_page (
 			GTK_NOTEBOOK (priv->notebook),
@@ -500,30 +516,30 @@ window_populate (PlannerWindow *window)
 	}
 
 	gtk_action_group_add_radio_actions (priv->view_actions, r_entries,
-					    g_list_length(priv->views), 0,
+					    g_list_length (priv->views), 0,
 					    G_CALLBACK (window_view_cb), window);
 
-	xml_string_tmp = g_strdup_printf (xml_string_full,xml_string);
-	if (!gtk_ui_manager_add_ui_from_string(priv->ui_manager, xml_string_tmp, -1, &error)) {
+	xml_string_tmp = g_strdup_printf (xml_string_full, xml_string);
+	if (!gtk_ui_manager_add_ui_from_string (priv->ui_manager, xml_string_tmp, -1, &error)) {
 		g_message("Building menu failed: %s", error->message);
 		g_message("Couldn't build the view menu item");
 		g_error_free(error);
 	}
 	g_free(xml_string);
 	g_free(xml_string_tmp);
-	gtk_ui_manager_ensure_update(priv->ui_manager);
+	
+	gtk_ui_manager_ensure_update (priv->ui_manager);
 
 	/* Load plugins. */
 	priv->plugins = planner_plugin_loader_load (window);
 
 	window_view_selected (PLANNER_SIDEBAR (priv->sidebar), 0, window);
-
 }
 
 static void
-window_view_selected (PlannerSidebar    *sidebar,
-		      gint               index,
-		      PlannerWindow     *window)
+window_view_selected (PlannerSidebar *sidebar,
+		      gint            index,
+		      PlannerWindow  *window)
 {
 	PlannerWindowPriv *priv;
 	GList             *list;
@@ -559,10 +575,10 @@ window_view_selected (PlannerSidebar    *sidebar,
 	
 	action = gtk_action_group_get_action (priv->view_actions,
 					      planner_view_get_name (view));
-	if ( !gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action)) ) {
+	if (!gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action)) ) {
 		gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), TRUE);
 	}
-
+	
 	priv->current_view = view;
 }
 
@@ -957,12 +973,6 @@ window_edit_phases_cb (GtkAction *action,
 		
 		gtk_widget_show (priv->phase_dialog);
 	}
-}
-
-static void
-window_preferences_cb (GtkAction *action,
-		       gpointer           data)
-{
 }
 
 static void
@@ -1773,5 +1783,77 @@ window_restore_state (PlannerWindow *window)
 		}
 	} else {
 		gtk_window_set_default_size (GTK_WINDOW (window), 800, 600);
+	}
+}
+
+void
+planner_window_set_status (PlannerWindow *window, const gchar *message)
+{
+	PlannerWindowPriv *priv;
+
+	priv = window->priv;
+
+	gtk_statusbar_pop (GTK_STATUSBAR (priv->statusbar), 0);
+	gtk_statusbar_push (GTK_STATUSBAR (priv->statusbar), 0,
+			    message ? message : "");
+}
+
+static void
+window_menu_item_select_cb (GtkMenuItem   *proxy,
+			    PlannerWindow *window)
+{
+	PlannerWindowPriv *priv;
+
+	GtkAction *action;
+	gchar     *message;
+
+	priv = window->priv;
+
+	action = g_object_get_data (G_OBJECT (proxy),  "gtk-action");
+	g_return_if_fail (action != NULL);
+	
+	g_object_get (action, "tooltip", &message, NULL);
+	if (message) {
+		gtk_statusbar_push (GTK_STATUSBAR (priv->statusbar), 0, message);
+		g_free (message);
+	}
+}
+
+static void
+window_menu_item_deselect_cb (GtkMenuItem   *proxy,
+			      PlannerWindow *window)
+{
+	PlannerWindowPriv *priv;
+
+	priv = window->priv;
+
+	gtk_statusbar_pop (GTK_STATUSBAR (priv->statusbar), 0);
+}
+
+static void
+window_disconnect_proxy_cb (GtkUIManager  *manager,
+			    GtkAction     *action,
+			    GtkWidget     *proxy,
+			    PlannerWindow *window)
+{
+	if (GTK_IS_MENU_ITEM (proxy)) {
+		g_signal_handlers_disconnect_by_func (
+			proxy, G_CALLBACK (window_menu_item_select_cb), window);
+		g_signal_handlers_disconnect_by_func
+			(proxy, G_CALLBACK (window_menu_item_deselect_cb), window);
+	}
+}
+
+static void
+window_connect_proxy_cb (GtkUIManager  *manager,
+			 GtkAction     *action,
+			 GtkWidget     *proxy,
+			 PlannerWindow *window)
+{
+	if (GTK_IS_MENU_ITEM (proxy)) {
+		g_signal_connect (proxy, "select",
+				  G_CALLBACK (window_menu_item_select_cb), window);
+		g_signal_connect (proxy, "deselect",
+				  G_CALLBACK (window_menu_item_deselect_cb), window);
 	}
 }

@@ -1,3 +1,30 @@
+2004-08-06  Richard Hult  <richard@imendio.com>
+
+	* src/Makefile.am: Fix libutil linkage.
+
+	* src/planner-gantt-view.c: (gantt_view_gantt_status_updated_cb): 
+	* src/planner-window.c: (window_add_widget), (window_populate),
+	(window_view_selected), (window_restore_state),
+	(planner_window_set_status), (window_menu_item_select_cb),
+	(window_menu_item_deselect_cb), (window_disconnect_proxy_cb),
+	(window_connect_proxy_cb): Add status bar and use it for status
+	messages.
+
+	* src/planner-sql-plugin.c:
+	* src/planner-html-plugin.c:
+	* src/planner-xml-planner-plugin.c: Fix strings that were changed
+	in the ui manager transition.
+
+2004-08-06  Richard Hult  <richard@imendio.com>
+
+	* src/planner-window.c: Comment out unused action to get rid of
+	stock icon warning.
+	(window_populate): Create statusbar.
+
+	* src/planner-view-loader.c (mvl_load_dir): Sort the views.
+
+	* src/planner-window.c (window_add_widget): Remove the handle.
+
 2004-08-06  Xavier Ordoquy  <xordoquy@linovia.com>
 
 	* src/Makefile.am:
