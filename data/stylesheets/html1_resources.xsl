@@ -9,8 +9,9 @@
     *
     * html1_resources.xsl: Display resources in a table
     *
-    * Copyright (c)2003 Daniel Lundin
-    * Copyright (c)2003 CodeFactory AB
+    * Copyright (C) 2004 Imendio AB
+    * Copyright (c) 2003 Daniel Lundin
+    * Copyright (c) 2003 CodeFactory AB
     * Copyright (c) 2004 Chris Ladd (caladd@particlestorm.net)
     *
     *-->
@@ -23,7 +24,7 @@
   
   <h2><a name="resources">Resources</a></h2>
 
-  <table cellspacing="0" cellpadding="0" border="1">
+  <table cellspacing="0" cellpadding="0" border="1" width="100%">
     <tr class="header" align="left">
       <th><span>Name</span></th>
       <th><span>Short name</span></th>

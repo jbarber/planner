@@ -1495,7 +1495,7 @@ planner_gantt_chart_set_model (PlannerGanttChart *chart,
 		g_object_set (priv->background,
 			      "project-start", priv->project_start,
 			      NULL);
-	
+
 		priv->last_time = mrp_task_get_finish (root);
 		
 		/* Force a reflow initially to avoid visible reflow on

@@ -9,8 +9,9 @@
     *
     * html1_tasks.xsl: Display tasks in a table with progress bars
     *
-    * Copyright (c)2003 Daniel Lundin
-    * Copyright (c)2003 CodeFactory AB
+    * Copyright (C) 2004 Imendio AB
+    * Copyright (c) 2003 Daniel Lundin
+    * Copyright (c) 2003 CodeFactory AB
     * Copyright (c) 2004 Chris Ladd (caladd@particlestorm.net)
     *
     *-->
@@ -44,7 +45,7 @@
   <xsl:variable name="hasproperties" select="boolean (count(//task/properties/property[@value!='']))"/>
   <xsl:variable name="hasnotes" select="boolean (count(//task[@note!='']))"/>
   <h2><a name="tasks">Tasks</a></h2>
-  <table cellspacing="0" cellpadding="0" border="1">
+  <table cellspacing="0" cellpadding="0" border="1" width="100%">
     <tr class="header" align="left">
       <th><span>WBS</span></th>
       <th><span>Name</span></th>
@@ -149,9 +150,9 @@
 			  </td>
               <xsl:if test="$hasnotes">
                 <td>
-                  <span>
-				    <xsl:value-of select="@note"/>
-				  </span>
+                  <span class="note">
+                    <xsl:value-of select="@note"/>
+		  </span>
                 </td>
               </xsl:if>
             </tr>
@@ -212,7 +213,7 @@
 			  </td>
               <xsl:if test="$hasnotes">
                 <td>
-                  <span>
+                  <span class="note">
 				    <xsl:value-of select="@note"/>
 				  </span>
                 </td>
@@ -285,7 +286,7 @@
 			  </td>
               <xsl:if test="$hasnotes">
                 <td>
-                  <span>
+                  <span class="note">
 				    <xsl:value-of select="@note"/>
 				  </span>
                 </td>

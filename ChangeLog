@@ -1,3 +1,24 @@
+2004-10-09  Richard Hult  <richard@imendio.com>
+
+	* data/stylesheets/Makefile.am:
+	* data/stylesheets/html1_css.xsl:
+	* data/stylesheets/html1_gantt.xsl:
+	* data/stylesheets/html1_resources.xsl:
+	* data/stylesheets/html1_tasks.xsl:
+	* data/stylesheets/planner2html.xsl:
+	* libplanner/mrp-xsl.c: Clean up the HTML export stylesheet, tweak
+	the style a bit, put the header fields in a table. Make the note
+	text sections wrap and always show at least 30 days in the gantt
+	chart.
+
+2004-10-09  Richard Hult  <richard@imendio.com>
+
+	* data/stylesheets/html1_tasks.xsl: Set note class for notes.
+
+	* data/stylesheets/html1_css.xsl: Add top/bottom margins for the
+	gantt bars. Align table cell contents at the top, wrap long
+	notes. Reduce font size for footer.
+
 2004-10-08  Richard Hult  <richard@imendio.com>
 
 	* libplanner/mrp-time.c (mrp_time_debug_print): Fix typo.

@@ -9,6 +9,7 @@
     *
     * html1_gantt.xsl: Display a simplified (but useful?) gantt chart with CSS
     *
+    * Copyright (c) 2004 Imendio AB
     * Copyright (c) 2003 CodeFactory AB
     * Copyright (c) 2003 Daniel Lundin
     * Copyright (c) 2004 Chris Ladd (caladd@particlestorm.net)
@@ -78,10 +79,21 @@
     <hr/>
   </div>
 
-  <xsl:variable name="days" select="ceiling($projlength div 86400)"/>
-  
-  <div style="overflow:auto">
-  <table cellspacing="0" cellpadding="0" border="1">
+  <xsl:variable name="tmpdays" select="ceiling($projlength div 86400)"/>
+
+  <xsl:variable name="days">
+    <xsl:choose>
+      <xsl:when test="not($tmpdays >= 30)">
+        30
+       </xsl:when>
+      <xsl:otherwise>
+        <xsl:value-of select="$tmpdays"/>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:variable>
+
+  <div style="overflow: auto">
+  <table cellspacing="0" cellpadding="0" border="1" style="margin-bottom: 0">
     <tr class="header" align="left">
       <th rowspan="2"><span>WBS</span></th>
       <th rowspan="2"><span>Name</span></th>

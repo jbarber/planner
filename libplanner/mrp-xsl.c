@@ -1,5 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: nill; c-basic-offset: 8 -*- */
 /*
+ * Copyright (C) 2004 Imendio AB
  * Copyright (C) 2002-2003 CodeFactory AB
  * Copyright (C) 2002-2003 Richard Hult <richard@imendio.com>
  * Copyright (C) 2002 Mikael Hallendal <micke@imendio.com>
@@ -72,7 +73,7 @@ html_write (MrpFileWriter  *writer,
         xmlLoadExtDtdDefaultValue = 1;
         exsltRegisterAll ();
 
-        stylesheet = xsltParseStylesheetFile (STYLESHEETDIR "/mrproject2html.xsl");
+        stylesheet = xsltParseStylesheetFile (STYLESHEETDIR "/planner2html.xsl");
 
         doc = xmlParseMemory (xml_project, strlen (xml_project));
                                                                                 
@@ -114,10 +115,10 @@ html_write (MrpFileWriter  *writer,
 				 
 static gboolean
 xml_planner_pre012_write (MrpFileWriter  *writer,
-	    MrpProject     *project,
-	    const gchar    *uri,
-	    gboolean        force,
-	    GError        **error)
+			  MrpProject     *project,
+			  const gchar    *uri,
+			  gboolean        force,
+			  GError        **error)
 {
         gchar          *xml_project;
         xsltStylesheet *stylesheet;
@@ -175,13 +176,12 @@ xml_planner_pre012_write (MrpFileWriter  *writer,
 	return ret;
 }
 
-
 G_MODULE_EXPORT void
 init (MrpFileModule *module, MrpApplication *application)
 {
         MrpFileWriter *writer;
         
-        writer             = g_new0 (MrpFileWriter, 1);
+        writer = g_new0 (MrpFileWriter, 1);
 	
 	/* The HTML writer registration */
 
@@ -206,6 +206,5 @@ init (MrpFileModule *module, MrpApplication *application)
         writer->write      = xml_planner_pre012_write;
 
         imrp_application_register_writer (application, writer);
-	
 }
 
