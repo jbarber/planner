@@ -1,5 +1,10 @@
 2004-04-16  Richard Hult  <richard@imendio.com>
 
+	* src/planner-gantt-row.c: (gantt_row_get_bounds),
+	(gantt_row_draw), (gantt_row_point): Fix bug #137581.
+
+2004-04-16  Richard Hult  <richard@imendio.com>
+
 	* data/stylesheets/Makefile.am:
 	* data/stylesheets/html1_css.xsl:
 	* data/stylesheets/html1_gantt.xsl:

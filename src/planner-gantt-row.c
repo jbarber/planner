@@ -51,9 +51,10 @@
 #define THICKNESS 2
 #define SLOPE 4
 
-/* Constants for the milestone diamond.*/
 #define MILESTONE_SIZE 5
 
+/* Minimum width for a task to keep it visible. */
+#define MIN_WIDTH 2
 
 enum {
 	PROP_0,
@@ -398,6 +399,8 @@ gantt_row_get_bounds (PlannerGanttRow *row,
 	wx2 = row->priv->x + MAX (row->priv->width, MILESTONE_SIZE) + 1;
 	wy2 = row->priv->y + row->priv->height;
 
+	wx2 = MAX (wx2, wx1 + MIN_WIDTH);
+	
 	gnome_canvas_item_i2w (item, &wx1, &wy1);
 	gnome_canvas_item_i2w (item, &wx2, &wy2);
 	gnome_canvas_w2c (item->canvas, wx1, wy1, &cx1, &cy1);
@@ -893,6 +896,8 @@ gantt_row_draw (GnomeCanvasItem *item,
 	dy1 = priv->y + 0.15 * priv->height;
 	dx2 = priv->x + priv->width;
 	dy2 = priv->y + 0.70 * priv->height;
+
+	dx2 = MAX (dx2, dx1 + MIN_WIDTH);
 	
 	gnome_canvas_w2c (item->canvas,
 			  dx1 + i2w_dx,
@@ -1304,9 +1309,9 @@ gantt_row_point (GnomeCanvasItem  *item,
 {
 	PlannerGanttRow     *row;
 	PlannerGanttRowPriv *priv;
-	gint            text_width;
-	gdouble         x1, y1, x2, y2;
-	gdouble         dx, dy;
+	gint                 text_width;
+	gdouble              x1, y1, x2, y2;
+	gdouble              dx, dy;
 	
 	row = PLANNER_GANTT_ROW (item);
 	priv = row->priv;
