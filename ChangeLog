@@ -1,5 +1,8 @@
 2005-02-18  Richard Hult  <richard@imendio.com>
 
+	* libplanner/mrp-old-xml.c (old_xml_read_task): Silently correct
+	milestone tasks with children to normal tasks. Fixes bug #166424.
+ 
 	* libplanner/mrp-task.c: (mrp_task_get_prev_sibling): Implement.
 
 	* src/planner-task-tree.c: (task_cmd_move_undo),

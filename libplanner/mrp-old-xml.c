@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: nill; c-basic-offset: 8 -*- */
 /*
- * Copyright (C) 2004 Imendio AB
+ * Copyright (C) 2004-2005 Imendio AB
  * Copyright (C) 2002-2003 CodeFactory AB
  * Copyright (C) 2002-2003 Richard Hult <richard@imendio.com>
  * Copyright (C) 2002 Mikael Hallendal <micke@imendio.com>
@@ -232,7 +232,7 @@ old_xml_read_task (MrpParser *parser, xmlNodePtr tree, MrpTask *parent)
 	priority = old_xml_get_int (tree, "priority");
 	type = old_xml_get_task_type (tree, "type");
 	sched = old_xml_get_task_sched (tree, "scheduling");
-	
+
 	if (parser->version == 1) {
 		start = old_xml_get_date (tree, "start");
 		end = old_xml_get_date (tree, "end");
@@ -326,6 +326,14 @@ old_xml_read_task (MrpParser *parser, xmlNodePtr tree, MrpTask *parent)
 	
 	for (tasks = tree->children; tasks; tasks = tasks->next) {
 		if (!strcmp (tasks->name, "task")) {
+			/* Silently correct old milestones with children to
+			 * normal tasks.
+			 */
+			if (type == MRP_TASK_TYPE_MILESTONE) {
+				type = MRP_TASK_TYPE_NORMAL;
+				g_object_set (task, "type", type, NULL);
+			}
+			
 			old_xml_read_task (parser, tasks, task);
 		}
 		else if (!strcmp (tasks->name, "predecessors")) {
