@@ -2,9 +2,9 @@
 <!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
 "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
   <!ENTITY legal SYSTEM "legal.xml">
-  <!ENTITY appversion "0.10.0">
-  <!ENTITY manrevision "1.5.1">
-  <!ENTITY date "29 May 2003">
+  <!ENTITY appversion "0.12">
+  <!ENTITY manrevision "1.6">
+  <!ENTITY date "24 Apr 2004">
   <!ENTITY app "Planner">
   <!-- Information about the entities
        The legal.xml file contains legal information, there is no need to edit the file. 
@@ -31,6 +31,7 @@
     <copyright> 
       <year>2002</year> 
       <year>2003</year> 
+      <year>2004</year> 
       <holder>Kurt Maute, PMP</holder> 
     </copyright> 
     <copyright> 
@@ -120,41 +121,97 @@
 <!-- to V3.0, and so on. -->  
     <revhistory>
       <revision> 
-	<revnumber>&app; User Guide V&manrevision; for &app; V&appversion;</revnumber> 
+	<revnumber>&app; User Guide V1.6 for &app; V0.12
+	</revnumber> 
 	<date>&date;</date> 
 	<authorinitials>kmm</authorinitials>
 	<revdescription> 
 	  <para>
 	    Additions for new features:  
 	    <itemizedlist>
+	      <listitem><para>Undo/Redo</para></listitem>
+	    </itemizedlist>
+	  </para>
+	  <para>Added configuring PostgreSQL for remote connection</para>
+	</revdescription> 
+      </revision> 
+      <revision> 
+	<revnumber>&app; User Guide V1.5.3; for &app; V0.12 development
+	</revnumber> 
+	<date>29 Mar 2004</date> 
+	<authorinitials>kmm</authorinitials>
+	<revdescription> 
+	  <para>
+	    Additions for new features:  
+	    <itemizedlist>
+	      <listitem><para>Resource Usage View</para></listitem>
+	      <listitem><para>Resource Short Name</para></listitem>
+	    </itemizedlist>
+	  </para>
+	  <para>Completed name changes from MrProject to Planner</para>
+	  <para>Changed guimenuitem choices to reflect new Actions menu</para>
+	  <para>Retook all screen shots and reduced size to 60% of original
+	  </para>
+	  <para>Decreased number of screen shots.  Need to manage the number
+	    of screen shots and evaluate their value added as Planner grows.
+	    the following were removed:
+	    <itemizedlist>
+	      <listitem><para><emphasis>group1-subtasks.png</emphasis> - was
+		replaced by task-view.png since that now shows a hierarchy of
+		summary and subtasks.
+		</para>
+	      </listitem>
+	      <listitem><para>group1-task-linked.png</para>
+	      </listitem>
+	      <listitem><para>task-up.png</para>
+	      </listitem>
+	      <listitem><para>project-zoom-up.png</para>
+	      </listitem>
+	      <listitem><para>project-zoom-fit.png</para>
+	      </listitem>
+	      <listitem><para>task-custom-properties-add.png</para>
+	      </listitem>
+	    </itemizedlist>
+	  </para>
+	</revdescription> 
+      </revision> 
+      <revision> 
+	<revnumber>&app; User Guide V1.5.2; for MrProject; V0.10;</revnumber> 
+	<date>13 Nov 2003</date> 
+	<authorinitials>kmm</authorinitials>
+	<revdescription> 
+	  <para>
+	    Additions for new features:  
+	    <itemizedlist>
 	      <listitem><para>Open From/Save to Database</para></listitem>
-	      <listitem><para>Appendix on how to configure the database</para></listitem>
+	      <listitem><para>Appendix on how to configure the database</para>
+	      </listitem>
 	      <listitem><para>Save to HTML</para></listitem>
 	    </itemizedlist>
 	  </para>
 	</revdescription> 
       </revision> 
       <revision> 
-	<revnumber>&app; User Guide V1.4 for &app; V0.9</revnumber> 
+	<revnumber>&app; User Guide V1.4 for MrProject V0.9</revnumber> 
 	<date>23 Feb 2003</date> 
 	<authorinitials>kmm</authorinitials>
 	<revdescription> 
 	  <para>
 	      Additions for new features:
 	        <itemizedlist>
-	          <listitem><para>Custom Properties for Projects, Tasks, &amp; Resources
-		    </para></listitem>
+	          <listitem><para>Custom Properties for Projects, Tasks, &amp; 
+		    Resources</para></listitem>
 	          <listitem><para>Fixed Duration mode for Tasks</para></listitem>
 	          <listitem><para>Milestones</para></listitem>
 	          <listitem><para>Resource allocations by units</para></listitem>
 	          <listitem><para>PRINTING!</para></listitem>
 	        </itemizedlist>
-	      Usage of the 'Quick Add' Dialogues for Tasks &amp; Resources
+	      Usage of the 'Quick Add' Dialogs for Tasks &amp; Resources
 	  </para>
 	</revdescription> 
       </revision> 
       <revision> 
-	<revnumber>&app; User Guide V1.3 for &app; V0.8</revnumber> 
+	<revnumber>&app; User Guide V1.3 for MrProject V0.8</revnumber> 
 	<date>29 Dec 2002</date> 
 	<authorinitials>kmm</authorinitials>
 	<revdescription> 
@@ -174,9 +231,11 @@
     </releaseinfo> 
     <legalnotice> 
       <title>Feedback</title> 
-      <para>To report a bug or make a suggestion regarding the &app; application or
-      this manual, follow the directions in the <ulink url="ghelp:gnome-feedback"
-	  type="help">GNOME Feedback Page</ulink>. 
+      <para>To report a bug or make a suggestion regarding the &app; or 
+	this manual can be submitted to the 
+	<ulink url="http://bugzilla.gnome.org" type="http">GNOME Bugzilla
+	</ulink>, under the &app; product. Please search bugzilla before
+	submitting your bug to ensure that yours hasn't already been reported.
       </para>
 <!-- Translators may also add here feedback address for translations -->
     </legalnotice> 
@@ -196,16 +255,16 @@
   <sect1 id="mrp-introduction"> 
     <title>Introduction</title> 
     <para>&app; is a general purpose project management tool
-    that provides a variety of features, which are available via 3 separate screen layouts 
-    called views.  As you will see, the views are accessed by clicking the icons in the left
-    hand toolbar in the &app; window.</para> 
+    that provides a variety of features, which are available via 4 separate 
+    screen layouts called views.  As you will see, the views are accessed by 
+    clicking the icons in the left hand toolbar in the &app; window.</para> 
     <sect2 id="mrp-task-view">
 	<title>Task View:</title> 
         <para>
 	  Tasks are also shown on the Gantt view, but the Task view shows
 	  more detail for each task.
           <figure id="task-view" float="1">
-            <title>Planner Task View</title>
+            <title>&app; Task View</title>
             <screenshot>
               <graphic fileref="figures/task-view.png" format="PNG"></graphic>
             </screenshot>
@@ -214,20 +273,24 @@
 	<para>Task View is used for the following:</para>
 	<itemizedlist> 
 	<listitem> 
-    	  <para>Task Definition - break down project deliverables into smaller, more 
-		manageable tasks</para> 
+    	  <para><emphasis>Task Definition</emphasis> - break down project 
+		deliverables into smaller, more manageable tasks
+	  </para> 
   	</listitem> 
   	<listitem> 
-    	  <para>Task Sequencing - 
-		identify dependencies between tasks and other constraints</para> 
+    	  <para><emphasis>Task Sequencing</emphasis> - identify dependencies 
+		between tasks and other constraints
+	  </para> 
   	</listitem> 
   	<listitem> 
-    	  <para>Task Duration Estimating - estimate the time it will take to 
-		complete the tasks</para> 
+    	  <para><emphasis>Task Duration Estimating</emphasis> - estimate the 
+		time it will take to complete the tasks
+	  </para> 
   	</listitem> 
   	<listitem> 
-    	  <para>Task Cost Calculation - estimate what it will cost to 
-		complete the tasks</para> 
+    	  <para><emphasis>Task Cost Calculation</emphasis> - estimate what 
+		it will cost to complete the tasks
+	  </para> 
   	</listitem> 
 <!-- 	<listitem> 
     	<para>Scheduling - develop the timeline based on the steps above,
@@ -238,18 +301,18 @@
     </sect2>
     <sect2 id="mrp-gantt-view">
 	<title>Gantt View:</title> 
-	<para>The Gantt View combines the Gantt chart with a shortened version of the
-	  task view.
+	<para>The Gantt View combines the Gantt chart with a shortened version
+	  of the task view.
 	</para>
         <para>
-          A Gantt chart is a graphical display
-          of all the tasks that a project is composed of.  Each bar on the chart 
-          is a graphical representation of the length of time the task is planned to
-          take.  The Gantt Chart doesn't offer any features that are not available in
-	  the other views, but it is a valuable Project Management tool for the way it
+          A Gantt chart is a graphical display of all the tasks that a project
+	  is composed of.  Each bar on the chart is a graphical representation
+	  of the length of time the task is planned to take.  The Gantt Chart 
+	  doesn't offer any features that are not available in the other views,
+	  but it is a valuable Project Management tool for the way it
 	  allows the user to see the project data.
           <figure id="gantt-view" float="1">
-            <title>Planner Gantt View</title>
+            <title>&app; Gantt View</title>
             <screenshot>
               <graphic fileref="figures/gantt-view.png" format="PNG"></graphic>
             </screenshot>
@@ -274,21 +337,63 @@
     <sect2 id="mrp-resource-view">
 	<title>Resource View:</title> 
           <figure id="resource-view" float="1">
-            <title>Planner Resource View</title>
+            <title>&app; Resource View</title>
             <screenshot>
-              <graphic fileref="figures/resource-editor.png" format="PNG" ></graphic>
+              <graphic fileref="figures/resource-editor.png" format="PNG"></graphic>
             </screenshot>
           </figure>        
-	<para>The Resource View gives you access to the following features:</para>
+	<para>The Resource View gives you access to the following features:
+	</para>
 	<itemizedlist> 
 	<listitem> 
-	  <para>Resource list management, including both human resources and materials</para>
+	  <para>Resource list management, including both human resources and
+	     materials</para>
   	</listitem> 
 	<listitem> 
 	  <para>Resource group management</para>
   	</listitem> 
 	<listitem> 
 	  <para>Resource cost management</para>
+  	</listitem> 
+	</itemizedlist> 
+    </sect2>
+    <sect2 id="mrp-resource-usage-view">
+	<title>Resource Usage View:</title> 
+          <figure id="resource-usage-view" float="1">
+            <title>&app; Resource Usage View</title>
+            <screenshot>
+              <graphic fileref="figures/resource-usage-view.png" format="PNG"></graphic>
+            </screenshot>
+          </figure>        
+	<para>The Resource Usage View shows the availability of resources
+	  based upon the tasks they've been assigned to.  They layout is
+	  similar to the Gantt chart, but this one is organized by resource.
+	</para>
+	<para>The summary line shows the availability of the resource.  The
+	  availability for each resource can be rolled up so that only the 
+	  summary line is displayed by clicking on the triangle next to the
+	  resource name.
+	</para>
+	<para>The detail shows each task that the resource is assigned to
+	  and the time that the task is scheduled for is represented by a bar
+	  in the chart.  Overallocations are shown up as red in the summary
+	  bar, and its easy to see where the task allocations line up to 
+	  create the overallocation.
+	</para>
+	<para>Color coding is as follows:
+	</para>
+	<itemizedlist> 
+	<listitem> 
+	  <para><emphasis>Green</emphasis> shows that the resource is not 
+	     allocated to any task at that time</para>
+  	</listitem> 
+	<listitem> 
+	  <para><emphasis>Blue</emphasis> shows that the resource is either
+	    partially or fully allocated to a task</para>
+  	</listitem> 
+	<listitem> 
+	  <para><emphasis>Red</emphasis> shows that the resource is
+	    overallocated</para>
   	</listitem> 
 	</itemizedlist> 
     </sect2>
@@ -307,7 +412,7 @@
     <title>Getting Started</title> 
 
     <sect2 id="mrp-start">
-    <title>To Start &app;</title>
+    <title>Starting &app;</title>
     <para>You can start <application>&app;</application> in the following ways:
     </para> 
     <variablelist>
@@ -317,7 +422,7 @@
     		<para>Choose 
     		<menuchoice>
     		<guisubmenu>Office</guisubmenu>
-    		<guimenuitem>Planner</guimenuitem>
+    		<guimenuitem>&app;</guimenuitem>
     		</menuchoice>. </para>
     		</listitem>
     	</varlistentry>
@@ -327,7 +432,7 @@
     		<para>To start <application>&app;</application> from a command line,
 		 type the following command, then press <keycap>Return</keycap>:</para>
     		<para> 
-			<command>mrproject</command> 
+			<command>&app;</command> 
     		</para> 
     		<para> there are no command line parameters at this time.
     		</para> 
@@ -390,7 +495,7 @@
     <title>Editing Multiple Projects</title>
       <para>
           More than one project may be open at the same time. Each project
-          will have its own Planner window. Try it by pressing "CTRL-N" several
+          will have its own &app; window. Try it by pressing "CTRL-N" several
           times.  You should get something similar to
 	  <xref linkend="several-projects"/>.
        <figure float="1" id="several-projects">
@@ -420,6 +525,10 @@
 	<listitem> 
 	  <para> 
 	    <xref linkend="mrp-open-project"/></para> 
+	</listitem> 
+	<listitem> 
+	  <para> 
+	    <xref linkend="mrp-undo-redo"/></para> 
 	</listitem> 
 	<listitem> 
 	  <para> 
@@ -454,10 +563,10 @@
 	  <guimenu>File</guimenu> 
 	  <guimenuitem>Open</guimenuitem> 
 	</menuchoice>. The 
-	<guilabel>Open File</guilabel> dialog is displayed. Select the Planner file
+	<guilabel>Open File</guilabel> dialog is displayed. Select the &app; file
 	that you want to open, then click 
-	<guibutton>OK</guibutton>. Planner files are stored with the extension 
-	<filename>.mrproject</filename>.
+	<guibutton>OK</guibutton>. &app; files are stored with the extension 
+	<filename>.&app;</filename>.
       </para>
       <para>To save a project, choose
 	<menuchoice> 
@@ -492,12 +601,12 @@
 	<guilabel>Open from Database</guilabel> dialog is displayed. Enter the <guilabel>
 	server,	database name, user,</guilabel> and <guilabel>password</guilabel>, 
 	and then click <guibutton>OK</guibutton>.
-	If the database is on the same machine you're running Planner on, then you
+	If the database is on the same machine you're running &app; on, then you
 	can leave that blank.  You can also leave the password field blank if no
 	password is required for the database user.
       </para>
       <para>
-	After Planner connects to the database, it will open the <guilabel>Select
+	After &app; connects to the database, it will open the <guilabel>Select
 	a Project</guilabel> dialog, which displays a list of projects that are stored
 	in that database.  Select the project plan you want to open, then click
 	<guibutton>OK</guibutton>. 
@@ -510,10 +619,36 @@
 	<guilabel>Save to Database</guilabel> dialog is displayed. Enter the <guilabel>
 	server, database</guilabel> name,<guilabel> user,</guilabel> and <guilabel>
 	password</guilabel>, and then click <guibutton>OK</guibutton>.
-	If the database is on the same machine you're running Planner on, then you
+	If the database is on the same machine you're running &app; on, then you
 	can leave that blank.  You can also leave the password field blank if no
 	password is required for the database user.
       </para>
+    </sect2> 
+    <!-- ================ Usage Subsection ================================ -->
+    <sect2 id="mrp-undo-redo" xreflabel="Undo/Redo"> 
+      <title>Undo/Redo</title> 
+        <para> To undo a mistake, you can either click the <guibutton>Undo
+	  </guibutton> button on the toolbar, or choose
+  	  <menuchoice> 
+	    <guimenu>Edit</guimenu> 
+	    <guimenuitem>Undo</guimenuitem>
+	  </menuchoice>.
+	</para>
+        <para>To redo an action, you can either click the <guibutton>Redo
+	  </guibutton> button on the toolbar, or choose
+  	  <menuchoice> 
+	    <guimenu>Edit</guimenu> 
+	    <guimenuitem>Undo</guimenuitem>
+	  </menuchoice>. 
+	  Redo puts back the change that you reversed by using the Undo option.
+	</para>
+	<caution><title>Caution:</title>
+	  <para>Undo and Redo are new features, and while the implementation is
+	    quite good, there are still some actions that cannot be undone.  Its
+	    always a good idea to save your work before making any modifications
+	    that you're not sure you'll want to keep.
+	  </para>
+	</caution>
     </sect2> 
     <!-- ================ Usage Subsection ================================ -->
     <sect2 id="mrp-properties" xreflabel="Project Properties"> 
@@ -742,21 +877,34 @@
       <title>Working with Tasks</title> 
       <sect3 id="mrp-task-add" xreflabel="Adding Tasks">
 	<title>Adding Tasks</title>
-	<para>To add a task, you can either click on the <guibutton>Insert</guibutton>
-	  button on the toolbar, or you can right click in the task area and choose
-	  <guimenuitem>Insert Task</guimenuitem> from the pop-up option box.  These options
+	<para>To add a task, you can either click on the <guibutton>Insert
+	  </guibutton>button on the toolbar, or you can right click in the 
+	  task area and choose <guimenuitem>Insert Task</guimenuitem> from 
+	  the pop-up option box.  These options
 	  work the same in either the Gantt View or the Task View.
 	</para>
-	<para>To add several tasks quickly, choose <guimenuitem>Edit -> Insert Tasks</guimenuitem>
-	  , which will open the insert task dialog.  This dialog allows quick entry of multiple
-	  tasks.  Simply enter the name of the task and amount of work effort and press <keycap>
-	  Enter</keycap>.  The new task will be added, and the dialog will remain open and ready 
-	  for your next task entry.  Details can be added later.
+	<para>To add several tasks quickly, choose 
+	  <menuchoice>
+	    <guimenu>Actions</guimenu>
+	    <guimenuitem>Insert Tasks</guimenuitem>
+	  </menuchoice>, which will open the insert task dialog.
+	  This dialog allows quick entry of multiple tasks.  Simply enter the
+	  name of the task and amount of work effort and press <keycap>Enter
+	  </keycap>.  The new task will be added, and the dialog will remain 
+	  open and ready for your next task entry.  Details can be added later.
           <figure>
             <title>Insert Task</title>
             <graphic fileref="figures/task-insert.png" format="PNG" ></graphic>
           </figure>
 	</para>
+	<note>
+	  <title>Note</title>
+	  <para>The <guimenu>Actions</guimenu> menu is sensitive to the view
+	    you're currently displaying, so if you want to use the insert task
+	    dialog, you need to be in either the task or Gantt view.  It's not
+	    available from the other views.
+	  </para>
+	</note>
       </sect3>
       <sect3 id="mrp-task-properties">
         <title>Task properties</title>
@@ -779,12 +927,12 @@
           </figure>
 	</para>
 	<para>
-	  To edit all the task properties, press the right mouse button
-	  over a task and select <guimenuitem>Edit Task</guimenuitem> from the dialog
-	  that appears.  Alternatively, you can select the task and use the main 
-	  menu:
+	  To edit all the task properties, right click on a task and select 
+	  <guimenuitem>Edit Task</guimenuitem> from the dialog
+	  that appears.  Alternatively, you can select the task and use the 
+	  main menu:
 	  <menuchoice> 
-	    <guimenu>Edit</guimenu> 
+	    <guimenu>Actions</guimenu> 
 	    <guimenuitem>Edit Task Properties</guimenuitem> 
 	  </menuchoice>.
 	  There are several tabs to modify the properties.
@@ -850,8 +998,10 @@
                   <title>Task resources dialog</title>
                   <graphic fileref="figures/task-edit-resources.png" format="PNG"></graphic>
                 </figure>
-		The Gantt view will list
-                the resources assigned to a task to the right of the bar.
+		The Gantt view will list the resources assigned to a task to 
+		the right of the bar.  If a short name was entered in the 
+		resource view, then the short name will display in the Gantt, 
+		otherwise, the full name will be displayed.
                 <figure>
                   <title>A resource has been assigned to a task</title>
                   <graphic fileref="figures/task-edit-resource-assigned.png" format="PNG"></graphic>
@@ -932,43 +1082,46 @@
 	  Complex tasks can be broken down into subtasks to make them easier to 
 	  Manage.  A task that is
 	  divided in subtasks is called a summary task.  The summary task's 
-	  start date and the duration can't be edited because it is calculated from
-	  the subtasks.
+	  start date and the duration can't be edited because it is calculated
+	  from the subtasks.
 	  <figure>
 	    <title>A Task with subtasks</title>
-	    <graphic fileref="figures/group1-subtasks.png" format="PNG"></graphic>
+	    <graphic fileref="figures/task-view.png" format="PNG"></graphic>
 	  </figure>
 	</para>
       </sect3>
       <sect3 id="mrp-task-deps">
-        <title>Task dependencies</title>
-	<subtitle>Another way of looking at predecessors.</subtitle>
+        <title>Predecessors Revisited</title>
+	<subtitle>Using the Gantt view to create dependencies between tasks
+	</subtitle>
         <para>
-	  To start a task, you often have to finish other tasks first. This can either
-	  be set up by using the <guilabel>Predecessors</guilabel> tab in the task edit
-	  dialog as shown above,
-	  or it can be done graphically by using the Gantt chart.  If you click on the
+	  To start a task, you often have to finish other tasks first. 
+	  Dependencies can either be set up by using the <guilabel>Predecessors
+	  </guilabel> tab in the task edit dialog as shown above, or it can be 
+	  done graphically in the Gantt chart.  If you click on the
 	  bar that represents the predecessor (and hold down the mouse button), 
-	  an arrow appears.  dragging that arrow onto the bar that represents the dependent 
-	  task will create the dependency.  The Gantt chart will immediately reflect the 
-	  new relationship by shifting the dependent task to start when the predecessor is
-	  scheduled to complete.  By creating a dependent relationship this way,
-	  Planner always assumes a Finish Start relationship with zero lag time.  You
-	  can modify this relationship by opening the task edit dialog of the dependent
+	  an arrow appears.  Dragging that arrow onto the bar that represents 
+	  the dependent task will create the dependency.  The Gantt chart will
+	  immediately reflect the new relationship by shifting the dependent 
+	  task to start when the predecessor is scheduled to complete.  By 
+	  creating a dependent relationship this way, &app; always assumes a 
+	  Finish Start relationship with zero lag time.  You can modify this 
+	  relationship by opening the task edit dialog of the dependent
 	  task, and selecting the <guilabel>Predecessors</guilabel> tab.
 	  <figure>
 	    <title>Creating a task dependency</title>
 	    <graphic fileref="figures/group1-task-linking.png" format="PNG"></graphic>
 	  </figure>
 	  If you want to remove the dependency, you can select either
-	  of the two tasks and delete the link by clicking the <guiicon>Unlink</guiicon>
-	  icon on the toolbar,
-	  or by right clicking either task and selecting <guimenuitem>Unlink</guimenuitem>
-	  from the pop up.
+	  of the two tasks and delete the link by clicking the <guiicon>Unlink
+	  </guiicon>icon on the toolbar, or by right clicking either task and 
+	  selecting <guimenuitem>Unlink</guimenuitem> from the pop up.
+<!-- we have too many screen shots - lets see if anyone misses this one...
 	  <figure>
 	    <title>A dependency has been created</title>
 	    <graphic fileref="figures/group1-task-linked.png" format="PNG"></graphic>
 	  </figure>
+-->
 	</para>
       </sect3>
       <sect3 id="mrp-moving-tasks">
@@ -978,65 +1131,70 @@
 	  you can do so by selecting the task you want to move, and utilizing the 
 	  <guiicon>Move Up</guiicon> and <guiicon>Move Down</guiicon> icons on
 	  the toolbar.
+<!-- we have too many screen shots - lets see if anyone misses this one...
           <figure>
 	    <title>Moving task up and down</title>
 	    <graphic fileref="figures/task-up.png" format="PNG"></graphic>
 	  </figure>
+-->
         </para>
       </sect3>
       <sect3 id="mrp-zooming-gantt">
         <title>Zooming in the Gantt View</title>
         <para>
-          The tasks in a project can have very different durations and sometimes you
-          need to have a close view of the time line to see the details of some task
-          dependencies, but other times you need a higher level view of the whole project.
-          To support both needs, Planner has a powerful zoom system that
+          The tasks in a project can have very different durations and 
+	  sometimes you need to have a close view of the time line to see the 
+	  details of some task dependencies, but other times you need a higher
+	  level view of the whole project.
+          To support both needs, &app; has a powerful zoom system that
           lets you zoom to fit the complete project, zoom in the view or
-          zoom out incrementally to whatever size you like (hours being the lower 
-	  limit, and years is the upper limit).
+          zoom out incrementally to whatever size you like (hours being the 
+	  lower limit, and years is the upper limit).
         </para>
         <para>
-          Normally the best way to view a project is with zoom to fit.
+          <guibutton>Zoom to fit</guibutton> shows the entire project duration 
+	  in the Gantt view.
+<!--
           <figure>
 	    <title>Zoom to fit the project</title>
 	    <graphic fileref="figures/project-zoom-fit.png" format="PNG"></graphic>
 	  </figure>
+-->
         </para>
         <para>
-          You can use the <guiicon>Zoom in</guiicon> and 
-	  <guiicon>Zoom out</guiicon> icons to select the length of
-          time line in which you want to work.  Notice that when the view is
+          You can use the <guibutton>Zoom in</guibutton> and 
+	  <guibutton>Zoom out</guibutton> icons to select the length of
+          time line in which you want to work.  When the view is
 	  zoomed to a detailed level, nonworking hours are shown for each day
 	  in addition to weekends.
+<!--
           <figure>
 	    <title>Zoom in a zone of the project</title>
 	    <graphic fileref="figures/project-zoom-up.png" format="PNG"></graphic>
 	  </figure>
+-->
         </para>
       </sect3>
       
       <sect3 id="mrp-task-constraints">
 	<title>Task constraints</title>
 	<para>
-	  All tasks begin on the project start date by default (as shown by the 
-	  constraint type <guimenuitem>As soon as possible</guimenuitem> in 
-	  <xref linkend="constraints"/>).  
-	  One exception is
-	  the case where a dependency is set up.  There are times, however, that
-	  a dependency doesn't exist, but the task must start on, or no earlier than
-	  a specific date.  You can
-	  specify these constraints in the start date dialog editor.
+	  All tasks begin on the project start date by default
+	  One exception is the case where a dependency is set up.  There are 
+	  times, however, when a dependency doesn't exist, but the task must
+	  start on, or no earlier than a specific date.  You can
+	  specify these constraints in the start date dialog.
 	  <figure id="constraints">
 	    <title>Task constraints</title>
 	    <graphic fileref="figures/task-constraints.png" format="PNG"></graphic>
 	  </figure>
 	  You can delete the constraint for the current task using 
 	  <menuchoice> 
-	    <guimenu>Edit</guimenu> 
+	    <guimenu>Actions</guimenu> 
 	    <guimenuitem>Reset constraint</guimenuitem> 
 	  </menuchoice>, or for all the tasks by choosing
 	  <menuchoice> 
-	    <guimenu>Edit</guimenu> 
+	    <guimenu>Actions</guimenu> 
 	    <guimenuitem>Reset all constraints</guimenuitem> 
 	  </menuchoice>.
 	</para>
@@ -1044,8 +1202,11 @@
 
       <sect3 id="mrp-task-custom-properties" xreflabel="Custom Task Properties">
       <title>Custom Task Properties</title>
-	<para>Custom properties can be added in the task view by choosing <guimenuitem>
-	  Edit->Edit Custom Properties</guimenuitem>.  Clicking the <guibutton>Add</guibutton>
+	<para>Custom properties can be added in the task view by choosing 
+	  <menuchoice>
+	    <guimenu>Actions</guimenu>
+	    <guimenuitem>Edit Custom Properties</guimenuitem>
+	  </menuchoice>.  Clicking the <guibutton>Add</guibutton>
 	  button will open the New Property dialog.
 	  <figure id="task-custom-properties">
 	    <title>Task constraints</title>
@@ -1056,10 +1217,12 @@
 	  description, and set the property type to either text, integer number, or floating point
 	  number.  Once you have added your new property, it will show as a new column in the 
 	  Task view.  
+<!--
 	  <figure id="task-custom-properties-add">
 	    <title>Task constraints</title>
 	    <graphic fileref="figures/task-custom-properties-add.png" format="PNG"></graphic>
 	  </figure>
+-->
 	</para>
       </sect3>
     </sect2>
@@ -1069,35 +1232,43 @@
       <sect3 id="mrp-resource-props">
         <title>Resource Properties</title>
         <para>
-          The Resource View in Planner shows the following properties:
+          The Resource View in &app; shows the following properties:
           <itemizedlist>
             <listitem>
-              <para>Name: the resource name
+              <para><emphasis>Name:</emphasis> the resource name
+              </para>
+            </listitem>
+            <listitem>
+              <para><emphasis>Short Name:</emphasis> short name or initials to
+		be displayed in Gantt chart
               </para>
             </listitem>
             <listitem>
               <para><emphasis>Type:</emphasis> Currently available types are 
 		<guimenuitem>Work</guimenuitem>
 		and <guimenuitem>Material</guimenuitem>.
-                Work is for human resources working in the project, and Material 
+                Work is for human resources working in the project, and Material
                 is for non-human resources required to complete the project.
               </para>
             </listitem>
             <listitem>
               <para><emphasis>Group:</emphasis> the group that the resource is 
 		assigned.  This column offers
-		a dropdown list of defined groups.  You must use the Group Editor to
-		define groups before assigning them in the Resource View.
+		a dropdown list of defined groups.  You must use the Group 
+		Editor to define groups before assigning them in the Resource
+		View.
               </para>
             </listitem>
             <listitem>
-              <para><emphasis>Email:</emphasis> the electronic mail to contact this resource.
+              <para><emphasis>Email:</emphasis> the electronic mail to contact
+		the resource.
               </para>
             </listitem>
             <listitem>
-              <para><emphasis>Cost:</emphasis> the cost per hour to use this resource.
-		The cost is not currency specific, so in multinational projects, it is
-		important to decide on a single currency to be used for tracking cost.
+              <para><emphasis>Cost:</emphasis> the cost per hour to use this 
+		resource.  The cost is not currency specific, so in 
+		multinational projects, it is important to decide on a single
+		currency to be used for tracking cost.
               </para>
             </listitem>
           </itemizedlist>
@@ -1107,8 +1278,9 @@
 	    <graphic fileref="figures/resource-editor.png" format="PNG"></graphic>
 	  </figure>
 	</para>
+<!--
 	<para>
-          As with the columns from other Planner views, you can sort the columns by
+          As with the columns from other &app; views, you can sort the columns by
           clicking on the column name. The following figure is an example of the 
           resource view sorted by the name column.
 	  <figure>
@@ -1116,16 +1288,24 @@
 	    <graphic fileref="figures/resource-editor-sorted.png" format="PNG"></graphic>
 	  </figure>
 	</para>
+-->
       </sect3>
 
       <sect3 id="mrp-resource-add">
         <title>Adding Resources</title>
-        <para>Resources can be added by choosing the <guibutton>Insert</guibutton> button, or 
-	  by choosing <guimenuitem>Edit->Insert Resource</guimenuitem>.  To add multiple
-	  resources quickly, choose <guimenuitem>Edit->Insert Resources</guimenuitem>,  which
+        <para>Resources can be added by choosing the <guibutton>Insert
+	  </guibutton> button, or by choosing 
+	  <menuchoice>
+	    <guimenu>Actions</guimenu>
+	    <guimenuitem>Insert Resource</guimenuitem>
+	  </menuchoice>.  To add multiple resources quickly, choose 
+	  <menuchoice>
+	    <guimenu>Actions</guimenu>
+	    <guimenuitem>Insert Resources</guimenuitem>
+	  </menuchoice>,  which
 	  will open the Insert Resource dialog.  In a fashion similar to 
-	  <xref linkend="mrp-task-add"/>, you can quickly enter multiple resources and add detail
-	   at a later time.
+	  <xref linkend="mrp-task-add"/>, you can quickly enter multiple 
+	  resources and add detail at a later time.
 	  <figure>
 	    <title>Insert Resource</title>
 	    <graphic fileref="figures/resource-insert.png" format="PNG"></graphic>
@@ -1136,8 +1316,9 @@
       <sect3 id="mrp-resource-properties-general">
         <title>Resource Properties Dialog</title>
         <para>
-	  To edit resource properties that are not displayed in the resource view,
-	  right click on the resource and choose <guimenuitem>Edit resource</guimenuitem>.
+	  To edit resource properties that are not displayed in the resource 
+	  view, right click on the resource and choose <guimenuitem>Edit 
+	  resource</guimenuitem>.
 	  The General tab shows the same items that are in the resource view.
 	  <figure>
 	    <title>Resource Properties Dialog - General Tab</title>
@@ -1170,10 +1351,14 @@
       <sect3 id="mrp-resource-custom-properties">
       <title>Resource Custom Properties</title>
       <para>
-	Custom Properties are available in the Resource View just as they are in the task
-	view, and the functionality is identical.  To add custom properties to the resources,
-	choose <guimenuitem>Edit->Edit Custom Properties</guimenuitem>.  See the <xref 
- 	linkend="mrp-task-custom-properties"/> section for more information.
+	Custom Properties are available in the Resource View just as they are 
+	in the task view, and the functionality is identical.  To add custom 
+	properties to the resources, choose 
+	<menuchoice>
+	  <guimenu>Actions</guimenu>
+	  <guimenuitem>Edit Custom Properties</guimenuitem>
+	</menuchoice>.  See the <xref linkend="mrp-task-custom-properties"/> 
+	section for more information.
       </para>
       </sect3>
 
@@ -1222,8 +1407,8 @@
 	  </para>
 	</listitem>
 	<listitem>
-	  <para>The Paper tab allows you to specify the size, orientation, and layout of 
-		your paper prior to printing.
+	  <para>The Paper tab allows you to specify the size, orientation, and 
+		layout of your paper prior to printing.
 	    <figure>
 	    <title>Paper Tab</title>
 	    <graphic fileref="figures/print-project-paper.png" format="PNG"></graphic>
@@ -1236,17 +1421,21 @@
 
       <sect3 id="mrp-export-html" xreflabel="Export to HTML">
         <title>Export to HTML</title>
-        <para>The Export to HTML function creates a view of your project in HTML format
-	  that you can publish on a web site, or email to stakeholders who don't have
-	  access to Planner.  Included in the HTML document, is a simplified Gantt chart,
-	  task list (with %complete, start, end, work, and resources columns), and a resource
-	  allocation table. Its an excellent way to give people easy access to 
+        <para>The Export to HTML function creates a view of your project in 
+	  HTML format that you can publish on a web site, or email to 
+	  stakeholders who don't have access to &app;.  Included in the HTML 
+	  document, is a simplified Gantt chart, task list (with %complete, 
+	  start, end, work, and resources columns), and a resource allocation 
+	  table. Its an excellent way to give people easy access to 
 	  project status information.
 	</para>
 	<para>
-	  You can create the HTML page by choosing <guimenuitem>File->Export to HTML
-	  </guimenuitem>.  The <guilabel>Export to HTML</guilabel> dialog will allow you
+	  You can create the HTML page by choosing <guimenuitem>File->Export 
+	  to HTML</guimenuitem>.  
+<!-- web is disabled in v0.12
+	  The <guilabel>Export to HTML</guilabel> dialog will allow you
 	  to send the output either to a file or directly to a web location.
+-->
 	</para>
       </sect3>
     </sect2> 
@@ -1631,22 +1820,22 @@
       section is optional: primary place for this info is "About.." box of
       the program. However, if you do wish to include this info in the
       manual, this is the place to put it. Alternatively, you can put this information in the title page.-->
-  <sect1 id="mrproject-about"> 
+ <sect1 id="&app;-about"> 
     <title>About &app;</title> 
-    <para> &app; was written by CodeFactory AB and GNOME community volunteers.
-      (<email>mrproject-team@codefactory.se</email>). To find more information about
+    <para> &app; is maintained by Imendio and GNOME community volunteers.
+      To find more information about
       &app;, please visit the 
-      <ulink url="http://mrproject.codefactory.se/" type="http">&app; Web
-	page</ulink>. </para>
+      <ulink url="http://planner.imendio.org/" type="http">&app; Web
+      site</ulink>. </para>
     <para>
       To report a bug or make a suggestion regarding this application or
       this manual, you can submit them using 
-      <ulink url="http://bugzilla.codefactory.se"   type="help">bugzilla</ulink>.
+      <ulink url="http://bugzilla.gnome.org"   type="help">bugzilla</ulink>.
     </para>
 
     <para>
-      Another excellent source of information are the Planner
-      <ulink url="http://mrproject.codefactory.se/lists.php"   type="help">mailing lists</ulink>.
+      Another excellent source of information are the &app; 
+      <ulink url="http://planner.imendio.org/contact/" type="http">mailing lists</ulink>.
       There are separate lists for users and developers.  Subscribe to whatever interests you.
     </para>
 
@@ -1658,43 +1847,64 @@
       COPYING included with the source code of this program. </para>
   </sect1> 
 
-  <appendix id="mrp-database-config">
-  <title>Configuring a Planner database</title>
-    <para>Planner can store projects in a PostgreSQL database.  In order to do this, PostgreSQL
-	must be installed and configured to accept the project data.  These instructions are
-	intended to outline the steps you should take to accomplish that.  For more information
-	about PostgreSQL administration and use, please consult the PostgreSQL documentation
-	available at <ulink url="http://www.postgresql.org">The PostgreSQL Web Site</ulink>.
-	The PostgreSQL Documentation includes instructions on installing from source tarballs.
+  <sect1 id="mrp-database-config">
+  <title>Configuring a &app; database</title>
+   <section id="postgresql-database-config">
+   <title>Configuring a Postgresql database for use with &app;</title>
+
+   <caution>
+     <para>
+         The database support is still considered a technology preview,
+         and requires knowledge in Postgresql and database setup. You also
+         need the sources to Planner to access the database scheme file.
+     </para>
+   </caution>
+
+    <para>&app; can store projects in a PostgreSQL database.  In order to do 
+	this, PostgreSQL must be installed and configured to accept the project
+	data.  These instructions are intended to outline the steps you should
+	take to accomplish that.  For more information about PostgreSQL 
+	administration and use, please consult the PostgreSQL documentation
+	available at <ulink url="http://www.postgresql.org">The PostgreSQL Web
+	Site</ulink>.  The PostgreSQL Documentation includes instructions on 
+	installing from source tarballs.
 	RPMs are also available from this site if you prefer that method.
     </para>
-    <para>Start by logging in as root, and copying the database.sql file to the /tmp directory.
-	You'll use this file in the last step of the process, but its better to copy it first
-	rather than go hunting for it later.
-	Assuming the mrproject folder is in the root directory, you would do the following:
+    <para>Start by logging in as root, and copying the database.sql file to 
+	the /tmp directory. You'll use this file in the last step of the 
+	process, but its better to copy it first rather than go hunting for it 
+	later. Assuming the &app; folder is in the root directory, you would 
+	do the following:
       <screen>
-	<prompt>root#</prompt><userinput> cp mrproject/src/plugins/sql/database.sql /tmp </userinput>
+	<prompt>root#</prompt><userinput> cp &app;/docs/sql/database-0.11.sql /tmp</userinput>
       </screen>
     </para>
-    <para>If you're running RedHat and you chose to install the PostgreSQL packages along with
-	the rest of your system, then you already have a database cluster and default user set
-	up.  The database cluster will be /var/lib/pgsql/data, and the default user will be
-	postgres.
+    <para>If you're running Red Hat and you chose to install the PostgreSQL 
+	packages along with the rest of your system, then you already have a 
+	database cluster and default user set up.  The database cluster will 
+	be /var/lib/pgsql/data, and the default user will be postgres.
     </para>
-    <para>If there is no default user set up, then create the user postgres with the home
-	directory /var/lib/pgsql.
+    <para>If there is no default user set up, then create the user postgres 
+	with the home directory /var/lib/pgsql.
     </para>
     <para>
-	Create a database cluster by logging into the postgres account and executing the initdb
-	command:
+	Create a database cluster by logging into the postgres account and 
+	executing the initdb command:
       <screen>
 	<prompt>root#</prompt><userinput> su - postgres</userinput>
 	<prompt>bash$</prompt><userinput> initdb -D data</userinput>
       </screen>
     </para>
     <para>
-	Create a non-default user by logging into the postgres account and executing the 
-	createuser command (use your own user name here - kurt is mine):
+	Then start the database server:
+      <screen>
+	<prompt>bash$</prompt><userinput> pg_ctl -D data -l logfile start</userinput>
+      </screen>
+    </para>
+    <para>
+	Create a non-default user by logging into the postgres account and 
+	executing the createuser command (use your own user name here - kurt 
+	is mine):
       <screen>
 	<prompt>root#</prompt><userinput> su - postgres</userinput>
 	<prompt>bash$</prompt><userinput> createuser</userinput>
@@ -1703,56 +1913,129 @@
 	Shall the new user be allowed to create more new users? (y/n)<userinput> y</userinput>
 	CREATE USER
       </screen>
-	This will allow you to execute commands from your own account rather than use the
-	default account.
+	This will allow you to execute commands from your own account rather 
+	than use the default account.
     </para>
 
     <para>
 	You can now create the database and group from your own account:
       <screen>
-	<prompt>kurt#</prompt><userinput> createdb -U kurt mrprojectdb</userinput>
+	<prompt>kurt#</prompt><userinput> createdb -U kurt plannerdb</userinput>
 	CREATE DATABASE
-	<prompt>kurt#</prompt><userinput> echo 'create group mrproject with user kurt;' | psql -e -U kurt -d mrprojectdb</userinput>
-	create group mrproject with user kurt;
+	<prompt>kurt#</prompt><userinput> echo 'create group &app; with user kurt;' | psql -e -U kurt -d plannerdb</userinput>
+	create group &app; with user kurt;
 	CREATE GROUP
       </screen>
     </para>
 
     <para>
-	This final command will build the tables required to store the project information 
-	in the mrprojectdb database.  The file <filename>database.sql</filename> can be 
-	found in the mrproject
-	distribution subfolder <filename class="directory">src/plugins/sql</filename>.
+	This final command will build the tables required to store the project 
+	information in the plannerdb database.  The file 
+	<filename>database.sql</filename> can be found in the &app;
+	distribution subfolder <filename class="directory">docs/sql</filename>.
       <screen>
-	<prompt>kurt#</prompt><userinput> cat /tmp/database.sql | psql -e -U kurt -d mrprojectdb
+	<prompt>kurt#</prompt><userinput> cat /tmp/database.sql | psql -e -U kurt -d plannerdb
 	</userinput>
       </screen>
-	This line generates a lot of output.  When it's complete, you should go back and review
-	the output, checking for any error messages (look for lines that start with the word
-	ERROR).
+	This line generates a lot of output.  When it's complete, you should go
+	back and review the output, checking for any error messages (look for 
+	lines that start with the word ERROR).  If you don't find any, then 
+	all the tables were created successfully.
     </para>
 
-    <para>That's it.  You should now be able to save and open projects using the PostgreSQL database.
+    <para>That's it.  You should now be able to save and open projects using 
+	the PostgreSQL database.
     </para>
 
     <para>
-	If you have a problem or encounter an error, you can try again removing the group
-	and database and recreating them:
+	If you have a problem or encounter an error, you can try again removing
+	the group and database and recreating them:
       <screen>
-	<prompt>kurt#</prompt><userinput> dropdb mrprojectdb</userinput>
-	<prompt>kurt#</prompt><userinput> echo 'DROP GROUP mrproject;' | psql -e -U kurt -d mrprojectdb</userinput>
+	<prompt>kurt#</prompt><userinput> dropdb plannerdb</userinput>
+	<prompt>kurt#</prompt><userinput> echo 'DROP GROUP &app;;' | psql -e -U kurt -d plannerdb
+	</userinput>
       </screen>
     </para>
+   </section>
+   <section id="postgresql-remote-config">
+   <title>Configuring a Postgresql database for remote connection</title>
+    <para>
+	Now that you've set up your postgresql database, you'll probably want
+	to make it available so that &app; users can access it from their 
+	machines.  This section will show you the basic steps to allow
+	connectivity from other machines in your network in a trusted 
+	environment.  In order to make your connection more secure, you should
+	read the PostgreSQL documentation, available at 
+	<ulink url="http://www.postgresql.org">The PostgreSQL website</ulink>,
+	specifically the chapter entitled "Client Authentication".
+    </para>
+    <para>The first thing you'll want to do is find the configuration files
+	you'll need to modify.  The files are <filename>postgresql.conf
+	</filename> and <filename>pg_hba.conf</filename>, 
+	which according to the PostgreSQL manual should be in <filename
+	class='directory'>/usr/local/pgsql/data/</filename>, but on Red Hat 
+	and Fedora Core distributions they can be found in <filename 
+	class='directory'>/var/lib/pgsql/data/</filename>.  If you have 
+	trouble finding them, use the <command>locate</command> command.
+      <screen>
+	<prompt>root#</prompt><userinput> locate postgresql.conf</userinput>
+	/var/lib/pgsql/data/postgresql.conf
+      </screen>
+    </para>
+    <para>
+	Next, tell PostgreSQL that its ok to accept connections via TCP/IP.  
+	Log in as root, and modify the the <filename>postgresql.conf</filename>
+	file, change the 
+	tcpip_socket value to true, and uncomment the line if necessary.  
+	Then save the file.
+    </para>
+    <para>
+	Then tell PostgreSQL to allow connections from the ip addresses in
+	your local area network by adding a host line to pg_hba.conf:
+      <screen>
+	# TYPE  DATABASE USER   IP-ADDRESS        IP-MASK       METHOD
+	 local    all 	 all    ident                           sameuser
+<userinput>	host    all   all   192.168.1.0  255.255.255.0  trust</userinput>
+      </screen>
+	This line will allow all machines in the IP range of 192.168.1.1 to 
+	192.168.1.254 to access any PostgreSQL database on the server.  You 
+	may need to change the IP address and mask depending on your local
+	network.  Contact your network administrator for help in this area.
+    </para>
+    <para>
+	Finally, restart the PostgreSQL service:
+      <screen>
+	<prompt>bash$</prompt><userinput> pg_ctl -D data -l logfile restart</userinput>
+      </screen>
+    </para>
+    <para>
+	You should now be able to open and save &app; plans from other machines
+	in your local area network by including a host name or IP address in
+	the Server box in the &app; Open from or Save to Database dialog.
+    </para>
+    <warning>
+      <para>
+	Once again, you are strongly advised to PostgreSQL documentation,
+	Client Authentication section to fully understand the levels of 
+	security that can be implemented to suit your needs.  The level of
+	trust that is granted in this example is not suitable for most
+	production environments.
+      </para>
+    </warning>
+   </section>
+  </sect1>
 
-  </appendix>
-
-  <appendix id="mrp-web-resources">
+  <!--sect1 id="mrp-web-resources">
   <title>Project Management Web Resources</title>
+    <para>This list doesn't represent any sort of endorsement or anything.
+	Its just a list of sites that you might find helpful.
+    </para>
     <para>
 	<ulink url="http://www.pmi.org">The PMI Web Site</ulink>
+	<ulink url="http://www.projectconnections.com">Project Connections
+	</ulink>
     </para>
-  </appendix>
-
+  </sect1-->
 
   <bibliography>
   <title>Bibliography</title>
