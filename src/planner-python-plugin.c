@@ -99,7 +99,7 @@ python_plugin_execute (const gchar   *filename,
 		       GHashTable    *scripts)
 {
 	PlannerPythonEnv  *env;
-	MrpProject        *project;
+	/* MrpProject        *project; */
 
 	FILE              *fp;
 	PyObject          *pModule;
@@ -110,7 +110,10 @@ python_plugin_execute (const gchar   *filename,
 	/* Import pygtk */
 	pModule = PyRun_String ("import pygtk\n"
 				"pygtk.require('2.0')\n"
-				"import gtk\n",
+				"import gtk\n"
+				"import gnome\n"
+				"import bonobo\n"
+				"import bonobo.ui\n",
 				Py_file_input, env->globals, env->globals);
 	if (pModule == NULL) {
 		PyErr_Print ();
@@ -127,9 +130,8 @@ python_plugin_execute (const gchar   *filename,
 		return;
 	}
 
-	project = planner_window_get_project (window);
-	py_widget = pygobject_new ((GObject *) project);
-	PyDict_SetItemString (env->globals, "project", py_widget);
+	py_widget = pygobject_new ((GObject *) window);
+	PyDict_SetItemString (env->globals, "window", py_widget);
 	Py_DECREF (py_widget);
 
 	fp = fopen (filename,"r");

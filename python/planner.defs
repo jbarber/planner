@@ -1422,3 +1422,116 @@
 )
 
 
+
+;; From ../src/planner-window.h
+
+(define-function planner_window_get_type
+  (c-name "planner_window_get_type")
+  (return-type "GType")
+)
+
+(define-function planner_window_new
+  (c-name "planner_window_new")
+  (is-constructor-of "PlannerWindow")
+  (return-type "GtkWidget*")
+  (parameters
+    '("PlannerApplication*" "app")
+  )
+)
+
+(define-method open
+  (of-object "PlannerWindow")
+  (c-name "planner_window_open")
+  (return-type "gboolean")
+  (parameters
+    '("const-gchar*" "uri")
+  )
+)
+
+(define-method get_ui_container
+  (of-object "PlannerWindow")
+  (c-name "planner_window_get_ui_container")
+  (return-type "BonoboUIContainer*")
+)
+
+(define-method get_project
+  (of-object "PlannerWindow")
+  (c-name "planner_window_get_project")
+  (return-type "MrpProject*")
+)
+
+(define-method get_application
+  (of-object "PlannerWindow")
+  (c-name "planner_window_get_application")
+  (return-type "PlannerApplication*")
+)
+
+(define-method check_version
+  (of-object "PlannerWindow")
+  (c-name "planner_window_check_version")
+  (return-type "none")
+)
+
+(define-method close
+  (of-object "PlannerWindow")
+  (c-name "planner_window_close")
+  (return-type "none")
+)
+
+(define-method show_day_type_dialog
+  (of-object "PlannerWindow")
+  (c-name "planner_window_show_day_type_dialog")
+  (return-type "none")
+)
+
+(define-method show_calendar_dialog
+  (of-object "PlannerWindow")
+  (c-name "planner_window_show_calendar_dialog")
+  (return-type "none")
+)
+
+(define-method get_cmd_manager
+  (of-object "PlannerWindow")
+  (c-name "planner_window_get_cmd_manager")
+  (return-type "PlannerCmdManager*")
+)
+
+
+
+;; From ../src/planner-application.h
+
+(define-function planner_application_get_type
+  (c-name "planner_application_get_type")
+  (return-type "GType")
+)
+
+(define-function planner_application_new
+  (c-name "planner_application_new")
+  (is-constructor-of "PlannerApplication")
+  (return-type "PlannerApplication*")
+)
+
+(define-method new_window
+  (of-object "PlannerApplication")
+  (c-name "planner_application_new_window")
+  (return-type "GtkWidget*")
+)
+
+(define-method exit
+  (of-object "PlannerApplication")
+  (c-name "planner_application_exit")
+  (return-type "none")
+)
+
+(define-method get_recent_model
+  (of-object "PlannerApplication")
+  (c-name "planner_application_get_recent_model")
+  (return-type "EggRecentModel*")
+)
+
+(define-function planner_application_get_gconf_client
+  (c-name "planner_application_get_gconf_client")
+  (return-type "GConfClient*")
+)
+
+

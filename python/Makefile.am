@@ -1,10 +1,11 @@
 NULL =
 
 INCLUDES = 				\
+	-I../src/			\
 	-I$(top_srcdir)			\
 	$(PYTHON_INCLUDES)		\
 	$(PYGTK_CFLAGS)			\
-	$(LIBPLANNER_CFLAGS)		\
+	$(PLANNER_CFLAGS)		\
 	$(NULL)
 
 pkgpythondir = $(pythondir)/gtk-2.0
@@ -36,4 +37,3 @@ EXTRA_DIST = 				\
 	    --prefix $* $*.defs) > gen-$*.c \
 	&& cp gen-$*.c $*.c \
 	&& rm -f gen-$*.c
-

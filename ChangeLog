@@ -1,5 +1,20 @@
 2004-07-30  Xavier Ordoquy  <xordoquy@linovia.com>
 
+	* python/Makefile.am:
+	We do need to include ../src headers and PLANNER FLAGS
+
+	* python/planner-types.defs:
+	* python/planner.defs:
+	* python/planner.override:
+	Added PlannerApplication and PlannerWindow to binding.
+
+	* src/planner-python-plugin.c:
+	Do more imports as bonobo is required for
+	PlannerWindow.
+	Replaced the project by window.
+
+2004-07-30  Xavier Ordoquy  <xordoquy@linovia.com>
+
 	* data/ui/Makefile.am:
 	* data/ui/python-plugin.ui:
 	* src/planner-python-plugin.c:

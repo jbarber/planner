@@ -7,12 +7,19 @@ headers
 #include <libplanner/planner.h>
 #include <libplanner/mrp-storage-module.h>
 
+#include <bonobo.h>
+#include "planner-application.h"
+#include "planner-window.h"
+
+#define PLANNER_MAIN_WINDOW(obj)                (G_TYPE_CHECK_INSTANCE_CAST ((obj), PLANNER_TYPE_MAIN_WINDOW, PlannerWindow))
+
 %%
 init
 %%
 modulename planner
 %%
 import gobject.GObject as PyGObject_Type
+import bonobo.ui.Window as PyBonoboWindow_Type
 %%
 ignore-glob
   *_get_type
