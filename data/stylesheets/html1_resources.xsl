@@ -11,151 +11,99 @@
     *
     * Copyright (c)2003 Daniel Lundin
     * Copyright (c)2003 CodeFactory AB
+    * Copyright (c) 2004 Chris Ladd (caladd@particlestorm.net)
     *
     *-->
 
 <xsl:template match="resources">
-  <xsl:variable name="gid_default"
-    select="../resource-groups/@default_group"/>
   <xsl:variable name="hasproperties" 
     select="boolean (count(//resource/properties/property[@value!='']))"/>
   <xsl:variable name="hasnotes"
     select="boolean (count(//resource[@note!='']))"/>
-
   
   <h2><a name="resources">Resources</a></h2>
 
-
-  <!-- Resource Groups -->
-  <xsl:variable name="default-gid" select="../resource-groups/@default_group"/>
-
-  <table class="resources" cellspacing="1" cellpadding="2" border="1">
-    <tr class="resources-hdr">
-      <th align="left" class="res-hdr">Name</th>
-      <th align="left" class="res-hdr">Short name</th>
-      <th align="left" class="res-hdr">Type</th>
-      <th align="left" class="res-hdr">Email</th>
-      <th align="left" class="res-hdr">Tasks</th>
-      <xsl:if test="$hasproperties">
-        <th align="left" class="res-hdr">Properties</th>
-      </xsl:if>
+  <table cellspacing="0" cellpadding="0" border="1">
+    <tr class="header" align="left">
+      <th><span>Name</span></th>
+      <th><span>Short name</span></th>
+      <th><span>Type</span></th>
+      <th><span>Group</span></th>
+      <th><span>Email</span></th>
+      <th><span>Cost</span></th>
       <xsl:if test="$hasnotes">
-        <th align="left" class="res-hdr">Note</th>
+        <th><span>Notes</span></th>
       </xsl:if>
     </tr>
 
-    <xsl:choose>
-      <xsl:when test="$default-gid">
-        <xsl:for-each select="../resource-groups/group">
-          <xsl:sort select="@name"/>
-          <xsl:variable name="gid" select="@id"/>
+    <xsl:for-each select="../resources/resource">
+	  <xsl:sort select="@type"/>
+	  <xsl:sort select="@name"/>
           
-          <tr class="resource-group" align="left" valign="top">
-            <td class="res-group-name">
-              <xsl:value-of select="@name"/>
-            </td>
-            <td class="res-group-admin" colspan="3">
-              Admin: <xsl:value-of select="@admin-name"/>
-            <xsl:if test="@admin-email!=''">
-              &lt;<a href="mailto:{@admin-email}">
-              <xsl:value-of select="@admin-email"/></a>&gt;
-            </xsl:if>
-            <xsl:if test="@admin-phone!=''">
-              (<xsl:value-of select="@admin-phone"/>)
-            </xsl:if>
-          </td>
-        </tr>
-        <xsl:for-each select="../../resources/resource[@group=$gid or (@group=''
-                              and $gid=$default-gid)]">
-          <xsl:sort select="@type"/>
-          <xsl:sort select="@name"/>
+      <xsl:call-template name="resource-row">
+        <xsl:with-param name="hasnotes" select="$hasnotes"/>
+	  </xsl:call-template>
           
-          <xsl:call-template name="resource-row">
-            <xsl:with-param name="hasproperties" select="$hasproperties"/>
-            <xsl:with-param name="hasnotes" select="$hasnotes"/>
-          </xsl:call-template>
-          
-        </xsl:for-each>
-      </xsl:for-each>
-    </xsl:when>
-
-    <!-- There are no resource groups -->
-    <xsl:otherwise>
-        <xsl:for-each select="../resources/resource">
-          <xsl:sort select="@type"/>
-          <xsl:sort select="@name"/>
-          
-          <xsl:call-template name="resource-row">
-            <xsl:with-param name="hasproperties" select="$hasproperties"/>
-            <xsl:with-param name="hasnotes" select="$hasnotes"/>
-          </xsl:call-template>
-          
-        </xsl:for-each>
-    </xsl:otherwise>
-  </xsl:choose>
-
+	</xsl:for-each>
   </table>
 </xsl:template>
 
 
 <xsl:template name="resource-row">
-  <xsl:param name="hasproperties"/>
   <xsl:param name="hasnotes"/>
         <xsl:variable name="rid" select="@id"/>
         <xsl:variable name="gid" select="@group"/>
-        <tr class="resource" align="left" valign="top">
-          <td class="res-name">
-            <span class="res-name">
-              <a name="res-{@id}"><xsl:value-of select="@name"/></a>
-            </span>
+        
+		<xsl:variable name="rowclass">
+          <xsl:choose>
+            <xsl:when test="(position() mod 2) = 0">even</xsl:when>
+            <xsl:otherwise>odd</xsl:otherwise>
+          </xsl:choose>
+        </xsl:variable>
+      
+	    <tr class="{$rowclass}">
+          <td>
+            <a name="res-{@id}">
+			  <span>
+			    <xsl:value-of select="@name"/>
+			  </span>
+			</a>
           </td>
-	  <td class="res-short-name">
-            <span class="res-short-name">
-              <xsl:value-of select="@short-name"/>
-            </span>
+	      <td>
+            <span>
+			  <xsl:value-of select="@short-name"/>
+			</span>
           </td>
-          <td class="res-type">
-            <xsl:choose>
-              <xsl:when test="@type = 1">Worker</xsl:when>
-              <xsl:otherwise>Material</xsl:otherwise>
-            </xsl:choose>
+          <td>
+            <span>
+			  <xsl:choose>
+                <xsl:when test="@type = 1">Work</xsl:when>
+                <xsl:otherwise>Material</xsl:otherwise>
+              </xsl:choose>
+			</span> 
           </td>
-          <td class="res-email">
+          <td>
+		    <span>
+			  <xsl:value-of select="../../resource-groups/group[@id=$gid]/@name"/>
+		    </span>
+		  </td>
+		  <td>
             <a href="mailto:{@email}">
-              <xsl:value-of select="@email"/>
+              <span>
+			    <xsl:value-of select="@email"/>
+			  </span>
             </a>
           </td>
-         <td class="res-tasks">
-           <ul>
-             <xsl:for-each select="../../allocations/allocation[@resource-id=$rid]">
-               <xsl:variable name="tid" select="@task-id"/>
-               <xsl:variable name="task" select="../../tasks//task[@id=$tid]"/>
-               <xsl:variable name="tstyle">res-tasks-task<xsl:choose>
-                   <xsl:when 
-                     test="$task/@percent-complete &gt;= 100">-done</xsl:when>
-                   <xsl:when 
-                     test="$task/@percent-complete &gt; 0">-ongoing</xsl:when>
-                 </xsl:choose>
-               </xsl:variable>
-               <li class="{$tstyle}">
-                 <!-- <a href="#task-{$tid}"> -->
-                 <xsl:value-of select="$task/@name"/>
-                 <!-- (<xsl:value-of select="$task/@percent-complete"/>%) -->
-                 <!-- </a> -->
-               </li>
-             </xsl:for-each>
-           </ul>
+         <td align="right">
+           <span>
+		     <xsl:value-of select="@std-rate"/>
+		   </span>
          </td>
-         <xsl:if test="$hasproperties">
-           <td class="res-properties">
-             <xsl:for-each select="properties/property">
-               <xsl:call-template name="property"/>          
-             </xsl:for-each>
-           </td>
-         </xsl:if>
          <xsl:if test="$hasnotes">
-           <td class="res-note">
-             <xsl:value-of select="@note"/>
+           <td>
+             <span>
+			   <xsl:value-of select="@note"/>
+			 </span>
            </td>
          </xsl:if>
        </tr>

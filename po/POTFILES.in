@@ -24,6 +24,7 @@ data/ui/main-window.ui
 data/ui/resource-view.ui
 data/ui/sql-plugin.ui
 data/ui/task-view.ui
+data/ui/time-table-view.ui
 
 libegg/recent-files/egg-recent-vfs-utils.c
 
@@ -86,6 +87,15 @@ src/planner-sql-plugin.c
 src/planner-task-dialog.c
 src/planner-task-tree.c
 src/planner-task-view.c
+src/planner-ttable-print.c
+src/planner-ttable-row.c
+src/planner-ttable-tree.c
+src/planner-ttable-view.c
 src/planner-view.c
 src/planner-view-loader.c
 src/planner-window.c
+
+
+
+
+

@@ -1,5 +1,15 @@
 2004-04-16  Richard Hult  <richard@imendio.com>
 
+	* data/stylesheets/Makefile.am:
+	* data/stylesheets/html1_css.xsl:
+	* data/stylesheets/html1_gantt.xsl:
+	* data/stylesheets/html1_resources.xsl:
+	* data/stylesheets/html1_tasks.xsl:
+	* data/stylesheets/mrproject2html.xsl: Commit patch from Chris
+	Ladd to fix bug #129226, bug #135388 and bug #137243.
+
+2004-04-16  Richard Hult  <richard@imendio.com>
+
 	* src/planner-gantt-view.c: (gantt_view_update_ui): Remove
 	whitespace.
 	
