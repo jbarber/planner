@@ -42,6 +42,7 @@ static void application_init_gettext      (void);
 static void application_init_file_modules (MrpApplication         *app);
 
 static GObjectClass *parent_class;
+static gulong        last_used_id = 0;
 
 GType
 mrp_application_get_type (void)
@@ -190,3 +191,15 @@ mrp_application_new (void)
 	return g_object_new (MRP_TYPE_APPLICATION, NULL);
 }
 
+/**
+ * mrp_application_get_unique_id:
+ * 
+ * Returns a unique identifier in the #MrpApplication namespace.
+ * 
+ * Return value: the unique id
+ **/
+gulong 
+mrp_application_get_unique_id (void)
+{
+	return ++last_used_id;
+}

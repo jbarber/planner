@@ -72,8 +72,6 @@ struct _MrpProjectPriv {
 	/* Project phases */
 	GList            *phases;
 	gchar            *phase;
-
-	guint             last_used_id;
 };
 
 /* Properties */
@@ -2214,16 +2212,4 @@ project_set_calendar (MrpProject  *project,
 	}
 
 	mrp_task_manager_recalc (priv->task_manager, TRUE);
-}
-
-guint
-imrp_task_get_unique_id (MrpProject *project)
-{
-	MrpProjectPriv *priv;
-	
-	g_return_val_if_fail (MRP_IS_PROJECT (project), 0);
-
-	priv = project->priv;
-	
-	return ++priv->last_used_id;
 }

@@ -27,6 +27,7 @@
 
 #include "mrp-marshal.h"
 #include "mrp-project.h"
+#include "mrp-application.h"
 #include "mrp-private.h"
 #include "mrp-object.h"
 
@@ -148,6 +149,8 @@ object_init (MrpObject *object)
         
         priv = g_new0 (MrpObjectPriv, 1);
         object->priv = priv;
+
+	priv->id = mrp_application_get_unique_id ();
 
         priv->property_hash = g_hash_table_new (NULL, NULL);
 }

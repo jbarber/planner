@@ -270,9 +270,12 @@ typedef struct {
 	PlannerCmd   base;
 
 	MrpProject  *project;
+	guint        project_id;
 	const gchar *name;
 	MrpResource *resource;
+	guint        resource_id;
 	MrpGroup    *group;
+	guint        group_id;
 } ResourceCmdRemove;
 
 typedef struct {
@@ -868,8 +871,13 @@ static void
 resource_cmd_remove_do (PlannerCmd *cmd_base)
 {
 	ResourceCmdRemove *cmd;
+	guint              resource_removed_id;
 
 	cmd = (ResourceCmdRemove*) cmd_base;
+
+	resource_removed_id = mrp_object_get_id (MRP_OBJECT(cmd->resource));
+
+	cmd->resource_id = resource_removed_id;
 
 	mrp_project_remove_resource (cmd->project, cmd->resource);
 
@@ -887,6 +895,8 @@ resource_cmd_remove_undo (PlannerCmd *cmd_base)
 	resource = g_object_new (MRP_TYPE_RESOURCE, NULL);
 
 	mrp_object_set (resource, "name", cmd->name, NULL);
+
+	mrp_object_set_id (MRP_OBJECT (resource), cmd->resource_id);
 
 	mrp_project_add_resource (cmd->project, resource);
 

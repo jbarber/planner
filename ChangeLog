@@ -1,7 +1,18 @@
 2004-01-28  Alvaro del Castillo  <acs@barrapunto.com>
 
+	* libplanner/mrp-application.[ch]
+	new method to get the last uid associated with objects
+	* libplanner/mrp-object.c
+	get a new uid for new objects from mrp-application
+	* libplanner/mrp-project.c
+	clean the object uid code that is now in mrp-application
+	* src/planner-resource-view.c
+	first use of the new object id api
+
+2004-01-28  Alvaro del Castillo  <acs@barrapunto.com>
+
 	* src/configure.in
-	lib gda disable by default
+	libgda disabled by default
 
 2004-01-28  Alvaro del Castillo  <acs@barrapunto.com>
 
