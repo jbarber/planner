@@ -46,8 +46,8 @@ typedef struct {
 	gdouble  gantt_x0;
 	gdouble  gantt_y0;
 
-	GList  *elements;
-	GList  *background_elements;
+	GList   *elements;
+	GList   *background_elements;
 } Page;
 
 struct _PlannerGanttPrintData {
@@ -160,6 +160,8 @@ typedef struct {
 	gdouble      x1, y1;
 	gdouble      x2, y2;
 
+	gdouble      x_complete;
+
 	gboolean     is_critical;
 	gchar       *resources;
 } Element;
@@ -201,14 +203,14 @@ print_table_header (PlannerGanttPrintData *data)
 
 static void
 print_table_tasks (PlannerGanttPrintData *data,
-		   gboolean          header,
-		   GList           *tasks,
-		   gint              first)
+		   gboolean               header,
+		   GList                 *tasks,
+		   gint                   first)
 {
 	gchar     *str;
 	gint       work;
 	gdouble    x, y;
-	GList    *l, *to;
+	GList     *l, *to;
 	PrintTask *ptask;
 	gint       last, i;
 
@@ -278,10 +280,10 @@ print_table_tasks (PlannerGanttPrintData *data,
 
 static void
 print_time_header (PlannerGanttPrintData *data,
-		   gdouble           x1,
-		   gdouble           x2,
-		   mrptime           start,
-		   mrptime           finish)
+		   gdouble                x1,
+		   gdouble                x2,
+		   mrptime                start,
+		   mrptime                finish)
 {
 	gdouble  x, y;
 	gdouble  y1, y2, y3;
@@ -368,7 +370,7 @@ print_time_header (PlannerGanttPrintData *data,
 
 typedef struct {
 	GtkTreeView *tree_view;
-	GList      *list;
+	GList       *list;
 } ForeachVisibleData;
 
 static gboolean
@@ -462,26 +464,46 @@ gantt_print_task (PlannerGanttPrintData *data, Element *element)
 	planner_print_job_lineto (data->job, element->x1, element->y2);
 	gnome_print_closepath (data->job->pc);
 	
+	gnome_print_gsave (data->job->pc);
+
 	if (data->show_critical && element->is_critical) {
-		gnome_print_gsave (data->job->pc);
 		gnome_print_setrgbcolor (data->job->pc, 205/255.0, 92/255.0, 92/255.0);
-		gnome_print_fill (data->job->pc);
-		gnome_print_grestore (data->job->pc);
-		gnome_print_stroke (data->job->pc);
 	} else {
-		gnome_print_gsave (data->job->pc);
 		gnome_print_setrgbcolor (data->job->pc, 235/255.0, 235/255.0, 235/255.0);
+	}
+
+	gnome_print_fill (data->job->pc);
+	gnome_print_grestore (data->job->pc);
+
+	gnome_print_stroke (data->job->pc);
+
+	/* Percent complete. */
+	if (element->x_complete > 0) {
+		gdouble pad;
+
+		pad = (element->y2 - element->y1) * 0.25;
+		
+		gnome_print_gsave (data->job->pc);
+
+		gnome_print_newpath (data->job->pc);
+		planner_print_job_moveto (data->job, element->x1, element->y1 + pad);
+		planner_print_job_lineto (data->job, element->x_complete, element->y1 + pad);
+		planner_print_job_lineto (data->job, element->x_complete, element->y2 - pad);
+		planner_print_job_lineto (data->job, element->x1, element->y2 - pad);
+		gnome_print_closepath (data->job->pc);
+		
+		gnome_print_setrgbcolor (data->job->pc, 135/255.0, 135/255.0, 135/255.0);
 		gnome_print_fill (data->job->pc);
+		
 		gnome_print_grestore (data->job->pc);
-		gnome_print_stroke (data->job->pc);
 	}
 }
 
 static gboolean
 gantt_print_get_allocated_resources_string (PlannerGanttPrintData  *data,
-					    MrpTask           *task,
-					    gchar            **str,
-					    gdouble           *width)
+					    MrpTask                *task,
+					    gchar                 **str,
+					    gdouble                *width)
 {
 	GList         *l;
 	GList         *assignments;
@@ -569,6 +591,7 @@ planner_gantt_print_do (PlannerGanttPrintData *data)
 	gint         num_tasks;
 	mrptime      t1, t2, t0;
 	mrptime      start, finish;
+	mrptime      complete;
 	gboolean     is_summary;
 	gboolean     is_critical;
 	gboolean     boundary_overlap = FALSE;
@@ -616,7 +639,9 @@ planner_gantt_print_do (PlannerGanttPrintData *data)
 			
 			start = mrp_task_get_work_start (ptask->task);
 			finish = mrp_task_get_finish (ptask->task);
-			
+			complete = start + (finish - start) *
+				mrp_task_get_percent_complete (ptask->task) / 100.0;
+
 			is_summary = mrp_task_get_n_children (ptask->task) > 0;
 
 			g_object_get (ptask->task,
@@ -637,6 +662,7 @@ planner_gantt_print_do (PlannerGanttPrintData *data)
 			y1 = y0 + data->row_height * (i + 1.5 * 0.25);
 			y2 = y1 + 0.75 * data->row_height;
 
+			
 			/* Loop through the columns that this task covers. */
 			while (t1 <= finish) {
 				if (col == 0) {
@@ -673,6 +699,7 @@ planner_gantt_print_do (PlannerGanttPrintData *data)
 					
 					element->x1 = x0 + (start - t1) / data->f;
 					element->x2 = data->job->width;
+					element->x_complete = x0 + (complete - t1) / data->f;
 				}
 				else if (start < t1 && finish >= t1 && finish <= t2) {
 					/* Right */
@@ -689,6 +716,7 @@ planner_gantt_print_do (PlannerGanttPrintData *data)
 					
 					element->x1 = x0;
 					element->x2 = x0 + (finish - t1) / data->f;
+					element->x_complete = x0 + (complete - t1) / data->f;
 				}
 				else if (start >= t1 && finish <= t2) {
 					/* Whole */
@@ -705,6 +733,7 @@ planner_gantt_print_do (PlannerGanttPrintData *data)
 					
 					element->x1 = x0 + (start - t1) / data->f;
 					element->x2 = x0 + (finish - t1) / data->f;
+					element->x_complete = x0 + (complete - t1) / data->f;
 				}
 				else if (start < t1 && finish > t2) {
 					/* Middle */
@@ -721,6 +750,7 @@ planner_gantt_print_do (PlannerGanttPrintData *data)
 					
 					element->x1 = x0;
 					element->x2 = data->job->width;
+					element->x_complete = data->job->width;
 				} else {
 					d(g_print ("nothing"));
 					g_free (element);

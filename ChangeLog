@@ -1,3 +1,8 @@
+2004-06-18  Richard Hult  <richard@imendio.com>
+
+	* src/planner-gantt-print.c (planner_gantt_print_do)
+	(gantt_print_task): Fix bug #134552, print out percent complete.
+
 2004-06-18 Alvaro del Castillo  <acs@barrapunto.com>
 
 	* src/planner-task-cmd.c: Fixed bad string
