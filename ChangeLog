@@ -1,5 +1,13 @@
 2005-02-20  Richard Hult  <richard@imendio.com>
 
+	* src/planner-ttable-row.c: (recalc_bounds),
+	(ttable_row_ensure_layout), (ttable_row_update_resources),
+	(ttable_row_draw_assignment), (ttable_row_point),
+	(ttable_row_geometry_changed): Patch from caladd@particlestorm.net
+	to fix bug #138549.
+
+2005-02-20  Richard Hult  <richard@imendio.com>
+
 	* src/planner-task-dialog.c: (task_dialog_pred_cell_edited),
 	(task_dialog_cell_type_hide_popup),
 	(task_dialog_setup_predecessor_list): Don't make the name editable

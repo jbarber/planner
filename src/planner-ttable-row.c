@@ -149,6 +149,8 @@ static void     ttable_row_bounds                       (GnomeCanvasItem        
 							 double                 *y2);
 static gboolean ttable_row_event                        (GnomeCanvasItem        *item,
 							 GdkEvent               *event);
+static void     ttable_row_ensure_layout               (PlannerTtableRow       *row);
+static void     ttable_row_update_resources            (PlannerTtableRow       *row);
 static void     ttable_row_geometry_changed             (PlannerTtableRow       *row);
 static void     ttable_row_ensure_layout                (PlannerTtableRow       *row);
 static void     ttable_row_resource_notify_cb           (MrpResource            *resource,
@@ -439,43 +441,50 @@ get_resource_bounds (MrpResource *resource,
 static gboolean
 recalc_bounds (PlannerTtableRow *row)
 {
-        PlannerTtableRowPriv *priv;
-        GnomeCanvasItem      *item;
-        gdouble               x_debut, x_fin, x_debut_real;
+    PlannerTtableRowPriv *priv;
+    GnomeCanvasItem      *item;
+    gint                  width;
+	gdouble               x_debut, x_fin, x_debut_real;
 	gdouble               old_x, old_x_start, old_width;
 	gboolean              changed;
 	
-        item = GNOME_CANVAS_ITEM (row);
+    item = GNOME_CANVAS_ITEM (row);
 
-        priv = row->priv;
+    priv = row->priv;
 
 	old_x = priv->x;
 	old_x_start = priv->x_start;
 	old_width = priv->width;
 
-        ttable_row_ensure_layout (row);
+    ttable_row_ensure_layout (row);
 
-	/* FIXME: Why can there be rows with no assignment AND no resource?
-	 * Sounds like a bug?
-	 */
-	if (!priv->assignment && !priv->resource) {
-		return FALSE;
+    if (priv->layout != NULL) {
+        pango_layout_get_pixel_size (priv->layout,
+				     &width,
+				     NULL);
+    }
+    else {
+        width = 0;
+    }
+		
+	if (width > 0) {
+		width += TEXT_PADDING;
 	}
 
-        if (priv->assignment) {
-                get_assignment_bounds (priv->assignment, priv->scale,
-                                       &x_debut, &x_fin, &x_debut_real);
-        }
-
-	/* FIXME: Can't have both right, so we should have else if? */
-	if (priv->resource) {
-                get_resource_bounds (priv->resource, priv->scale, &x_debut,
-                                     &x_fin, &x_debut_real);
+	priv->text_width = width;
+    
+	if (priv->assignment) {
+        get_assignment_bounds (priv->assignment, priv->scale,
+                               &x_debut, &x_fin, &x_debut_real);
+    }
+	else if (priv->resource) {
+        get_resource_bounds (priv->resource, priv->scale, &x_debut,
+                             &x_fin, &x_debut_real);
 	}
 	
-        priv->x = x_debut;
-        priv->width = x_fin - x_debut;
-        priv->x_start = x_debut_real;
+    priv->x = x_debut;
+    priv->width = x_fin - x_debut;
+    priv->x_start = x_debut_real;
 
 	changed = (old_x != priv->x || old_x_start != priv->x_start ||
 		   old_width != priv->width);
@@ -702,103 +711,31 @@ ttable_row_get_property (GObject    *object,
 }
 
 static void
-ttable_row_ensure_layout (PlannerTtableRow * row)
+ttable_row_ensure_layout (PlannerTtableRow *row)
 {
-        if (row->priv->layout == NULL) {
-                row->priv->layout =
-                        gtk_widget_create_pango_layout (GTK_WIDGET
-                                                        (GNOME_CANVAS_ITEM
-                                                         (row)->canvas),
-                                                        NULL);
+    if (row->priv->assignment != NULL && row->priv->layout == NULL) {
+        row->priv->layout = gtk_widget_create_pango_layout (
+            GTK_WIDGET (GNOME_CANVAS_ITEM (row)->canvas), NULL);
 
-                /* ttable_row_update_resources (row); */
-        }
+        ttable_row_update_resources (row);
+    }
 }
 
-/*
 static void
-gantt_row_update_resources (PlannerGanttRow *row)
+ttable_row_update_resources (PlannerTtableRow *row)
 {
-	PlannerGanttRowPriv *priv;
-	GList          *l;
-	GList          *assignments;
-	MrpAssignment  *assignment;
-	MrpResource    *resource;
-	gchar          *name, *name_unit;
-	gchar          *tmp_str;
-	gchar          *text = NULL;
-	PangoRectangle  rect;
-	gint            spacing, x;
-	gint            units;
-
+	PlannerTtableRowPriv *priv;
+	gint                  units;
+    gchar                *units_string;
+    
 	priv = row->priv;
 	
-	g_array_set_size (priv->resource_widths, 0);
-
-	// Measure the spacing between resource names.
-	pango_layout_set_text (priv->layout, ", ", 2);
-	pango_layout_get_extents (priv->layout, NULL, &rect);
-	spacing = rect.width / PANGO_SCALE;
-	
-	x = 0;
-	assignments = mrp_task_get_assignments (priv->task);
-		
-	for (l = assignments; l; l = l->next) {
-		assignment = l->data;
-
-		resource = mrp_assignment_get_resource (assignment);
-		units = mrp_assignment_get_units (assignment);
-		
-		g_object_get (resource, "name", &name, NULL);
-
-		if (name && name[0] == 0) {
-			g_free (name);
-			name = NULL;
-		}
-		
-		g_array_append_val (priv->resource_widths, x);
-
-		if (units != 100) {
-			name_unit = g_strdup_printf ("%s [%i]", name ? name : _("Unnamed"), units);
-		} else {
-			name_unit = g_strdup_printf ("%s", name ? name : _("Unnamed"));
-		}
-
-		g_free (name);
-
-		pango_layout_set_text (priv->layout, name_unit, -1);
-		pango_layout_get_extents (priv->layout, NULL, &rect);
-		x += rect.width / PANGO_SCALE;
-		g_array_append_val (priv->resource_widths, x);
-
-		x += spacing;
-			
-		if (text == NULL) { // First resource 
-			text = g_strdup_printf ("%s", name_unit);
-			g_free (name_unit);
-			continue;
-		}
-		
-		tmp_str = g_strdup_printf ("%s, %s", text, name_unit);
-		
-		g_free (text);
-		g_free (name_unit);
-		text = tmp_str;
-	}
-
-	if (assignments) {
-		g_list_free (assignments);
-	}
-	
-	if (text == NULL) {
-		pango_layout_set_text (priv->layout, "", 0);
-	} else {
-		pango_layout_set_text (priv->layout, text, -1);
-	}		
-
-	g_free (text);
+	units = mrp_assignment_get_units (priv->assignment);
+    units_string = g_strdup_printf ("%i%%", units);
+    pango_layout_set_text (priv->layout, units_string, -1);
+            
+    g_free (units_string);
 }
-*/
 
 static void
 ttable_row_update (GnomeCanvasItem *item,
@@ -1371,6 +1308,19 @@ ttable_row_draw_assignment (PlannerTtableRow *row,
                                        priv->frame_gc, rx2, cy1, rx2, cy2);
                 }
         }
+        
+        rx1 = MAX (cx2 + TEXT_PADDING, 0);
+        rx2 = MIN (cx2 + TEXT_PADDING + priv->text_width, width);
+
+        if (priv->layout != NULL && rx1 < rx2) {
+            /* FIXME: Center the text vertically? */
+            gdk_draw_layout (drawable,
+				 GTK_WIDGET (item->canvas)->style->text_gc[GTK_STATE_NORMAL],
+				 cx2 + TEXT_PADDING,
+				 cy1,
+				 priv->layout);
+
+        }
 }
 
 static void
@@ -1406,6 +1356,7 @@ ttable_row_point (GnomeCanvasItem  *item,
 {
         PlannerTtableRow     *row;
         PlannerTtableRowPriv *priv;
+        gint                  text_width;
         gdouble               x1, y1, x2, y2;
         gdouble               dx, dy;
 
@@ -1414,16 +1365,14 @@ ttable_row_point (GnomeCanvasItem  *item,
 
         *actual_item = item;
 
-        /*
-         * text_width = priv->text_width;
-         * if (text_width > 0) {
-         * text_width += TEXT_PADDING;
-         * }
-         */
+        text_width = priv->text_width;
+        if (text_width > 0) {
+            text_width += TEXT_PADDING;
+        }
 
         x1 = priv->x;
         y1 = priv->y;
-        x2 = x1 + priv->width /* + text_width */ ;
+        x2 = x1 + priv->width + text_width;
         y2 = y1 + priv->height;
 
         if (x > x1 && x < x2 && y > y1 && y < y2) {
@@ -1672,6 +1621,10 @@ ttable_row_geometry_changed (PlannerTtableRow * row)
 {
         gdouble x1, y1, x2, y2;
 
+        if (row->priv->assignment) {
+            ttable_row_update_resources (row);
+        }
+        
         x1 = row->priv->x;
         y1 = row->priv->y;
         x2 = x1 + row->priv->width;
