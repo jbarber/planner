@@ -1,6 +1,7 @@
 #if HAVE_DOTNET
 #dotnet_DIR = dotnet
 #endif
+dotnet_DIR = 
 
 if HAVE_PYTHON
 python_DIR = python
