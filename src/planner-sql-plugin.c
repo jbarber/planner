@@ -31,6 +31,7 @@
 #include <glade/glade.h>
 #include <gtk/gtk.h>
 #include <libgda/libgda.h>
+#include "planner-conf.h"
 #include "planner-window.h"
 #include "planner-application.h"
 #include "planner-plugin.h"
