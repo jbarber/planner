@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mrproject VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-10-06 11:57+0200\n"
-"PO-Revision-Date: 2004-10-06 17:57+0200\n"
+"POT-Creation-Date: 2004-10-14 12:04+0200\n"
+"PO-Revision-Date: 2004-10-14 14:45+0200\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,8 +16,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: data/glade/add-predecessor.glade.h:1 data/glade/calendar-dialog.glade.h:4
-#: data/glade/eds.glade.h:1 data/glade/html-output.glade.h:2
-#: data/glade/new-property.glade.h:1 data/glade/project-properties.glade.h:1
+#: data/glade/eds.glade.h:1 data/glade/new-property.glade.h:1
+#: data/glade/project-properties.glade.h:1
 #: data/glade/resource-dialog.glade.h:1
 #: data/glade/resource-input-dialog.glade.h:1 data/glade/sql.glade.h:1
 #: data/glade/task-dialog.glade.h:4 data/glade/task-input-dialog.glade.h:1
@@ -209,23 +209,23 @@ msgstr "dialog1"
 msgid "Group Editor"
 msgstr "Editor skupin"
 
-#: data/glade/html-output.glade.h:3
+#: data/glade/html-output.glade.h:2
 msgid "<b>Save to file</b>"
 msgstr "<b>Uložit do souboru</b>"
 
-#: data/glade/html-output.glade.h:4
+#: data/glade/html-output.glade.h:3
 msgid "Export to HTML"
 msgstr "Export do HTML"
 
-#: data/glade/html-output.glade.h:5
+#: data/glade/html-output.glade.h:4
 msgid "Local file:"
 msgstr "Místní soubor:"
 
-#: data/glade/html-output.glade.h:6
+#: data/glade/html-output.glade.h:5
 msgid "Save to HTML File"
 msgstr "Uložit do souboru HTML"
 
-#: data/glade/html-output.glade.h:7
+#: data/glade/html-output.glade.h:6
 msgid "Web location:"
 msgstr "Umístění na WWW:"
 
@@ -396,7 +396,7 @@ msgstr "_Hotovo:"
 msgid "Predecessors"
 msgstr "Předchůdci"
 
-#: data/glade/task-dialog.glade.h:9 src/planner-resource-view.c:429
+#: data/glade/task-dialog.glade.h:9 src/planner-resource-view.c:431
 msgid "Resources"
 msgstr "Zdroje"
 
@@ -425,7 +425,7 @@ msgid "_Work:"
 msgstr "_Práce:"
 
 #. day unit variant accepted in input
-#: data/glade/task-dialog.glade.h:17 src/planner-task-tree.c:3327
+#: data/glade/task-dialog.glade.h:17 src/planner-task-tree.c:3328
 msgid "days"
 msgstr "dní"
 
@@ -482,8 +482,8 @@ msgid "Use day from base calendar"
 msgstr "Použít den ze základního kalendáře"
 
 #: libplanner/mrp-file-module.c:115
-msgid "This format is does support reading"
-msgstr "Tento formát podporuje čtení"
+msgid "This format does not support reading"
+msgstr "Tento formát nepodporuje čtení"
 
 #: libplanner/mrp-parser.c:1062 libplanner/mrp-parser.c:1157
 msgid "Could not create XML tree"
@@ -548,8 +548,8 @@ msgstr "Datum"
 msgid "Duration"
 msgstr "Trvání"
 
-#: libplanner/mrp-property.c:377 src/planner-resource-view.c:1285
-#: src/planner-task-view.c:280
+#: libplanner/mrp-property.c:377 src/planner-resource-view.c:1287
+#: src/planner-task-view.c:283
 msgid "Cost"
 msgstr "Cena"
 
@@ -590,7 +590,7 @@ msgstr ""
 "Projekt '%s' byl změněn uživatelem '%s' poté, co jste jej otevřeli. Chcete "
 "jej přesto uložit?"
 
-#: libplanner/mrp-sql.c:3622 src/planner-sql-plugin.c:664
+#: libplanner/mrp-sql.c:3622 src/planner-sql-plugin.c:663
 #, c-format
 msgid "Connection to database '%s' failed."
 msgstr "Připojení k databázi '%s' selhalo."
@@ -621,11 +621,11 @@ msgstr "Nemohu přidat předchůdce, protože by tím vznikla smyčka."
 msgid "Cannot move the task, because it would result in a loop."
 msgstr "Nemohu přesunout úlohu, protože by tím vznikla smyčka."
 
-#: libplanner/mrp-xsl.c:103
+#: libplanner/mrp-xsl.c:106
 msgid "Export to HTML failed"
 msgstr "Export do HTML selhal"
 
-#: libplanner/mrp-xsl.c:167
+#: libplanner/mrp-xsl.c:172
 msgid "Export to Planner pre-0.12 format failed"
 msgstr "Export do formátu Planneru před 0.12 selhal"
 
@@ -787,13 +787,13 @@ msgstr "Importovat zdroje z Evolution Data Server"
 
 #: src/planner-eds-plugin.c:388 src/planner-gantt-print.c:190
 #: src/planner-group-dialog.c:813 src/planner-property-dialog.c:481
-#: src/planner-resource-view.c:1168 src/planner-task-dialog.c:2536
-#: src/planner-task-dialog.c:2625 src/planner-task-view.c:275
+#: src/planner-resource-view.c:1170 src/planner-task-dialog.c:2536
+#: src/planner-task-dialog.c:2625 src/planner-task-view.c:278
 #: src/planner-ttable-print.c:108
 msgid "Name"
 msgstr "Jméno"
 
-#: src/planner-eds-plugin.c:408 src/planner-resource-view.c:1263
+#: src/planner-eds-plugin.c:408 src/planner-resource-view.c:1265
 msgid "Email"
 msgstr "E-mail"
 
@@ -873,13 +873,13 @@ msgid "Project start"
 msgstr "Začátek projektu"
 
 #: src/planner-gantt-print.c:198 src/planner-resource-dialog.c:1869
-#: src/planner-resource-view.c:757 src/planner-resource-view.c:773
-#: src/planner-resource-view.c:1696 src/planner-task-view.c:278
+#: src/planner-resource-view.c:759 src/planner-resource-view.c:775
+#: src/planner-resource-view.c:1698 src/planner-task-view.c:281
 msgid "Work"
 msgstr "Práce"
 
 #: src/planner-gantt-print.c:542 src/planner-gantt-row.c:690
-#: src/planner-task-tree.c:1514 src/planner-window.c:1660
+#: src/planner-task-tree.c:1512 src/planner-window.c:1660
 msgid "Unnamed"
 msgstr "Nepojmenovaný"
 
@@ -898,7 +898,7 @@ msgid "Change work to %s"
 msgstr "Změnit práci na %s"
 
 #: src/planner-gantt-row.c:2392 src/planner-task-dialog.c:449
-#: src/planner-task-tree.c:257 src/planner-task-tree.c:936
+#: src/planner-task-tree.c:257 src/planner-task-tree.c:934
 msgid "Edit task property"
 msgstr "Upravit vlastnosti úlohy"
 
@@ -1027,11 +1027,11 @@ msgstr "Test"
 msgid "_Highlight Critical Tasks"
 msgstr "_Zvýraznit kritické úlohy"
 
-#: src/planner-gantt-view.c:294
+#: src/planner-gantt-view.c:298
 msgid "Gantt Chart"
 msgstr "Ganttův diagram"
 
-#: src/planner-gantt-view.c:302
+#: src/planner-gantt-view.c:306
 msgid "_Gantt Chart"
 msgstr "_Ganttův diagram"
 
@@ -1039,7 +1039,7 @@ msgstr "_Ganttův diagram"
 #. * project management term. You might want to leave it
 #. * untranslated unless there is a localized term for it.
 #.
-#: src/planner-gantt-view.c:503
+#: src/planner-gantt-view.c:507
 msgid ""
 "\n"
 "WBS"
@@ -1047,7 +1047,7 @@ msgstr ""
 "\n"
 "WBS"
 
-#: src/planner-gantt-view.c:504 src/planner-ttable-tree.c:343
+#: src/planner-gantt-view.c:508 src/planner-ttable-tree.c:343
 msgid ""
 "\n"
 "Name"
@@ -1056,7 +1056,7 @@ msgstr ""
 "Jméno"
 
 #. COL_START,    _("\nStart"),
-#: src/planner-gantt-view.c:506
+#: src/planner-gantt-view.c:510
 msgid ""
 "\n"
 "Work"
@@ -1092,15 +1092,15 @@ msgstr "Telefon manažera"
 msgid "Manager email"
 msgstr "E-mail manažera"
 
-#: src/planner-html-plugin.c:67
+#: src/planner-html-plugin.c:69
 msgid "HTML"
 msgstr "HTML"
 
-#: src/planner-html-plugin.c:68
+#: src/planner-html-plugin.c:70
 msgid "Export project to HTML"
 msgstr "Exportovat projekt do HTML"
 
-#: src/planner-html-plugin.c:138
+#: src/planner-html-plugin.c:147
 #, c-format
 msgid ""
 "\"%s\" is a directory.\n"
@@ -1109,7 +1109,7 @@ msgstr ""
 "\"%s\" je adresář.\n"
 "Zadejte název souboru a zkuste to znovu."
 
-#: src/planner-html-plugin.c:148 src/planner-window.c:1417
+#: src/planner-html-plugin.c:157 src/planner-window.c:1417
 #: src/planner-xml-planner-plugin.c:125
 #, c-format
 msgid "File \"%s\" exists, do you want to overwrite it?"
@@ -1230,7 +1230,7 @@ msgstr "Upravit hodnotu vlastnosti projektu"
 msgid "Label"
 msgstr "Jmenovka"
 
-#: src/planner-property-dialog.c:510 src/planner-resource-view.c:1210
+#: src/planner-property-dialog.c:510 src/planner-resource-view.c:1212
 #: src/planner-task-dialog.c:2657
 msgid "Type"
 msgstr "Typ"
@@ -1253,7 +1253,7 @@ msgstr "Vložit zdroj"
 
 #. Put "no group" at the top.
 #: src/planner-resource-dialog.c:325 src/planner-resource-input-dialog.c:99
-#: src/planner-resource-view.c:1907
+#: src/planner-resource-view.c:1909
 msgid "(None)"
 msgstr "(žádná)"
 
@@ -1275,7 +1275,7 @@ msgid "Edit resource cost"
 msgstr "Upravit cenu zdroje"
 
 #: src/planner-resource-dialog.c:731 src/planner-resource-dialog.c:772
-#: src/planner-resource-view.c:1367 src/planner-resource-view.c:1448
+#: src/planner-resource-view.c:1369 src/planner-resource-view.c:1450
 msgid "Edit resource property"
 msgstr "Upravit vlastnost zdroje"
 
@@ -1293,8 +1293,8 @@ msgstr "Žádný (použít implicitní pro projekt)"
 msgid "Edit resource properties"
 msgstr "Upravit vlastnosti zdroje"
 
-#: src/planner-resource-dialog.c:1870 src/planner-resource-view.c:760
-#: src/planner-resource-view.c:774 src/planner-resource-view.c:1697
+#: src/planner-resource-dialog.c:1870 src/planner-resource-view.c:762
+#: src/planner-resource-view.c:776 src/planner-resource-view.c:1699
 msgid "Material"
 msgstr "Materiál"
 
@@ -1346,23 +1346,23 @@ msgstr "/_Odstranit zdroj"
 msgid "/_Edit resource..."
 msgstr "/_Upravit zdroj..."
 
-#: src/planner-resource-view.c:437
+#: src/planner-resource-view.c:439
 msgid "_Resources"
 msgstr "_Zdroje"
 
-#: src/planner-resource-view.c:950
+#: src/planner-resource-view.c:952
 msgid "Remove resource"
 msgstr "Odstranit zdroj"
 
-#: src/planner-resource-view.c:1050
+#: src/planner-resource-view.c:1052
 msgid "Edit custom resource properties"
 msgstr "Upravit vlastní vlastnosti zdroje"
 
-#: src/planner-resource-view.c:1189
+#: src/planner-resource-view.c:1191
 msgid "Short name"
 msgstr "Krátký název"
 
-#: src/planner-resource-view.c:1234
+#: src/planner-resource-view.c:1236
 msgid "Group"
 msgstr "Skupina"
 
@@ -1383,31 +1383,31 @@ msgstr "Týden %d"
 msgid "Week %d, %d"
 msgstr "Týden %d, %d"
 
-#. i18n: Short "Quarter", preferrably 1 letter.
+#. i18n: Short "Quarter", preferably 1 letter.
 #: src/planner-scale-utils.c:365
 #, c-format
 msgid "Q%d"
 msgstr "Q%d"
 
-#. i18n: Short "Quarter", preferrably 2-3 letters.
+#. i18n: Short "Quarter", preferably 2-3 letters.
 #: src/planner-scale-utils.c:369
 #, c-format
 msgid "Qtr %d"
 msgstr "Kv %d"
 
-#. i18n: Year, short "Quarter", preferrably 2-3 letters.
+#. i18n: Year, short "Quarter", preferably 2-3 letters.
 #: src/planner-scale-utils.c:373
 #, c-format
 msgid "%d, Qtr %d"
 msgstr "%d, Kv %d"
 
-#. i18n: Short "Half year", prefferably 1 letter.
+#. i18n: Short "Half year", preferably 1 letter.
 #: src/planner-scale-utils.c:386
 #, c-format
 msgid "H%d"
 msgstr "P%d"
 
-#. i18n: Year, short "Half year", prefferably 1 letter.
+#. i18n: Year, short "Half year", preferably 1 letter.
 #: src/planner-scale-utils.c:391
 #, c-format
 msgid "%04d, H%d"
@@ -1421,7 +1421,7 @@ msgstr "Otevřít z databáze..."
 msgid "Open a project from a database"
 msgstr "Otevřít projekt z databáze"
 
-#: src/planner-sql-plugin.c:97 src/planner-sql-plugin.c:1100
+#: src/planner-sql-plugin.c:97 src/planner-sql-plugin.c:1099
 msgid "Save to Database"
 msgstr "Uložit do databáze"
 
@@ -1433,7 +1433,7 @@ msgstr "Uložit aktuální projekt do databáze"
 msgid "No errors reported."
 msgstr "Nebyla ohlášena žádná chyba."
 
-#: src/planner-sql-plugin.c:495
+#: src/planner-sql-plugin.c:494
 #, c-format
 msgid ""
 "Database %s needs to be upgraded from version %s to version %s.\n"
@@ -1442,11 +1442,11 @@ msgstr ""
 "Databázi %s je potřeba aktualizovat z verze %s na verzi %s.\n"
 "Před aktualizací prosím databázi zazálohujte."
 
-#: src/planner-sql-plugin.c:502
+#: src/planner-sql-plugin.c:501
 msgid "Upgrade"
 msgstr "Aktualizovat"
 
-#: src/planner-sql-plugin.c:516
+#: src/planner-sql-plugin.c:515
 #, c-format
 msgid ""
 "Could not upgrade database %s.\n"
@@ -1461,38 +1461,38 @@ msgstr ""
 "Chyba databáze: \n"
 "%s"
 
-#: src/planner-sql-plugin.c:557
+#: src/planner-sql-plugin.c:556
 #, c-format
 msgid "Can't create tables in database %s"
 msgstr "Nemohu vytvořit tabulky v databázi %s"
 
-#: src/planner-sql-plugin.c:618
+#: src/planner-sql-plugin.c:617
 #, c-format
 msgid "Database %s is not setup for Planner. Do you want to do that?"
 msgstr "Databáze %s není nastavena pro Planner. Chcete to udělat?"
 
-#: src/planner-sql-plugin.c:675
+#: src/planner-sql-plugin.c:674
 #, c-format
 msgid "Test to tables in database '%s' failed."
 msgstr "Test do tabulek v databázi '%s' selhal."
 
-#: src/planner-sql-plugin.c:768
+#: src/planner-sql-plugin.c:767
 msgid "ID"
 msgstr "ID"
 
-#: src/planner-sql-plugin.c:776
+#: src/planner-sql-plugin.c:775
 msgid "Project"
 msgstr "Projekt"
 
-#: src/planner-sql-plugin.c:784
+#: src/planner-sql-plugin.c:783
 msgid "Phase"
 msgstr "Fáze"
 
-#: src/planner-sql-plugin.c:792
+#: src/planner-sql-plugin.c:791
 msgid "Revision"
 msgstr "Verze"
 
-#: src/planner-sql-plugin.c:988
+#: src/planner-sql-plugin.c:987
 msgid "Open from Database"
 msgstr "Otevřít z databáze"
 
@@ -1605,11 +1605,11 @@ msgstr "Přidat omezení úlohy"
 msgid "Reset task constraint"
 msgstr "Odstranit omezení úlohy"
 
-#: src/planner-task-tree.c:823
+#: src/planner-task-tree.c:821
 msgid "Move task"
 msgstr "Přesunout úlohu"
 
-#: src/planner-task-tree.c:2708
+#: src/planner-task-tree.c:2709
 #, c-format
 msgid ""
 "You are about to open an edit dialog each for %i tasks. Are you sure that "
@@ -1618,72 +1618,72 @@ msgstr ""
 "Hodláte otevřít dialog úprav pro každou z %i úloh. Jste si jisti, že to "
 "chcete udělat?"
 
-#: src/planner-task-tree.c:3319
+#: src/planner-task-tree.c:3320
 msgid "mon"
 msgstr "měs"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:3320
+#: src/planner-task-tree.c:3321
 msgid "month"
 msgstr "měsíc"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:3321
+#: src/planner-task-tree.c:3322
 msgid "months"
 msgstr "měsíců"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:3322
+#: src/planner-task-tree.c:3323
 msgid "w"
 msgstr "t"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:3323
+#: src/planner-task-tree.c:3324
 msgid "week"
 msgstr "týden"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:3324
+#: src/planner-task-tree.c:3325
 msgid "weeks"
 msgstr "týdnů"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:3325
+#: src/planner-task-tree.c:3326
 msgid "d"
 msgstr "d"
 
 #. day unit variant accepted in input
-#: src/planner-task-tree.c:3326
+#: src/planner-task-tree.c:3327
 msgid "day"
 msgstr "den"
 
 #. day unit variant accepted in input
-#: src/planner-task-tree.c:3328
+#: src/planner-task-tree.c:3329
 msgid "h"
 msgstr "h"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:3329
+#: src/planner-task-tree.c:3330
 msgid "hour"
 msgstr "hodina"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:3330
+#: src/planner-task-tree.c:3331
 msgid "hours"
 msgstr "hodin"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:3331
+#: src/planner-task-tree.c:3332
 msgid "min"
 msgstr "min"
 
 #. minute unit variant accepted in input
-#: src/planner-task-tree.c:3332
+#: src/planner-task-tree.c:3333
 msgid "minute"
 msgstr "minuta"
 
 #. minute unit variant accepted in input
-#: src/planner-task-tree.c:3333
+#: src/planner-task-tree.c:3334
 msgid "minutes"
 msgstr "minut"
 
@@ -1695,11 +1695,11 @@ msgstr "_Upravit úlohu"
 msgid "_Edit Custom Properties..."
 msgstr "Upravit _vlastní vlastnosti..."
 
-#: src/planner-task-view.c:208
+#: src/planner-task-view.c:211
 msgid "Tasks"
 msgstr "Úlohy"
 
-#: src/planner-task-view.c:216
+#: src/planner-task-view.c:219
 msgid "_Tasks"
 msgstr "_Úlohy"
 
@@ -1707,27 +1707,27 @@ msgstr "_Úlohy"
 #. * project management term. You might want to leave it
 #. * untranslated unless there is a localized term for it.
 #.
-#: src/planner-task-view.c:274
+#: src/planner-task-view.c:277
 msgid "WBS"
 msgstr "WBS"
 
-#: src/planner-task-view.c:276
+#: src/planner-task-view.c:279
 msgid "Start"
 msgstr "Začátek"
 
-#: src/planner-task-view.c:277
+#: src/planner-task-view.c:280
 msgid "Finish"
 msgstr "Konec"
 
-#: src/planner-task-view.c:279
+#: src/planner-task-view.c:282
 msgid "Slack"
 msgstr "Rezerva"
 
-#: src/planner-task-view.c:281
+#: src/planner-task-view.c:284
 msgid "Assigned to"
 msgstr "Přiřazeno"
 
-#: src/planner-task-view.c:477
+#: src/planner-task-view.c:480
 msgid "Edit custom task properties"
 msgstr "Upravit vlastní vlastnosti úlohy"
 
@@ -1765,11 +1765,11 @@ msgstr ""
 msgid "Zoom to fit"
 msgstr "Přizpůsobit velikosti okna"
 
-#: src/planner-ttable-view.c:157
+#: src/planner-ttable-view.c:159
 msgid "Resource Usage"
 msgstr "Využití zdroje"
 
-#: src/planner-ttable-view.c:164
+#: src/planner-ttable-view.c:166
 msgid "Resource _Usage"
 msgstr "_Využití zdroje"
 
