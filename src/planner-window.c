@@ -1641,7 +1641,7 @@ window_update_title (PlannerWindow *window)
 
 	name = window_get_name (window);
 
-	title = g_strconcat (name, " - Planner", NULL);
+	title = g_strconcat (name, " - Imendio Planner", NULL);
 
 	gtk_window_set_title (GTK_WINDOW (window), title);
 
