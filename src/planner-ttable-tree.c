@@ -1,7 +1,7 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 
 /*
- * Copyright (C) 2003-2004 Imendio AB
+ * Copyright (C) 2003-2005 Imendio AB
  * Copyright (C) 2003 Benjamin BAYART <benjamin@sitadelle.com>
  * Copyright (C) 2003 Xavier Ordoquy <xordoquy@wanadoo.fr>
  *
@@ -184,6 +184,8 @@ ttable_tree_init (PlannerTtableTree *tree)
 
         priv = g_new0 (PlannerTtableTreePriv, 1);
         tree->priv = priv;
+
+	gtk_tree_view_set_enable_search (GTK_TREE_VIEW (tree), FALSE);
 
         priv->popup_factory = gtk_item_factory_new (GTK_TYPE_MENU,
                                                     "<main>", NULL);
@@ -507,12 +509,41 @@ static void
 ttable_tree_tree_view_popup_menu (GtkWidget         *widget,
                                   PlannerTtableTree *tree)
 {
-        gint x, y;
+	GtkTreeView       *tv;
+	GtkTreePath       *path;
+	GtkTreeViewColumn *column;
+	GdkRectangle       rect;
+	gint               x, y;
 
-        gdk_window_get_pointer (widget->window, &x, &y, NULL);
+	tv = GTK_TREE_VIEW (tree);
+	
+	gtk_tree_view_get_cursor (tv, &path, &column);
+	gtk_tree_view_get_cell_area (tv,
+				     path,
+				     column,
+				     &rect);
+	
+	x = rect.x;
+	y = rect.y;
 
-        gtk_item_factory_popup (tree->priv->popup_factory,
-                                x, y, 0, gtk_get_current_event_time ());
+	/* Note: this is not perfect, but good enough for now. */
+	gdk_window_get_root_origin (GTK_WIDGET (tree)->window, &x, &y);
+	rect.x += x;
+	rect.y += y;
+
+	gtk_widget_translate_coordinates (GTK_WIDGET (tree),
+					  gtk_widget_get_toplevel (GTK_WIDGET (tree)),
+					  rect.x, rect.y,
+					  &x, &y);
+
+	/* Offset so it's not overlapping the cell. */
+	rect.x = x + 20;
+	rect.y = y + 20;
+	
+	gtk_item_factory_popup (tree->priv->popup_factory,
+				rect.x, rect.y,
+				0,
+				gtk_get_current_event_time ());
 }
 
 static gboolean

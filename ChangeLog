@@ -1,3 +1,12 @@
+2005-02-18  Richard Hult  <richard@imendio.com>
+
+	* src/planner-ttable-tree.c (ttable_tree_init): Disable search.
+
+	* src/planner-resource-view.c: (resource_view_button_press_event),
+	(resource_view_setup_tree_view), (resource_view_popup_menu): *
+	src/planner-ttable-tree.c: (ttable_tree_tree_view_popup_menu):
+	Position popup menu better. Fixes bug #148736.
+
 2005-02-15  Richard Hult  <richard@imendio.com>
 
 	* data/glade/task-dialog.glade: Disable search.

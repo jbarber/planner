@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: nill; c-basic-offset: 8 -*- */
 /*
- * Copyright (C) 2003-2004 Imendio AB
+ * Copyright (C) 2003-2005 Imendio AB
  * Copyright (C) 2002      CodeFactory AB
  * Copyright (C) 2002      Richard Hult <richard@imendio.com>
  * Copyright (C) 2002      Mikael Hallendal <micke@imendio.com>
@@ -1100,7 +1100,7 @@ resource_view_group_dialog_closed (GtkWidget *widget, gpointer data)
 static gboolean
 resource_view_button_press_event (GtkTreeView    *tv,
 				  GdkEventButton *event,
-				  PlannerView         *view)
+				  PlannerView    *view)
 {
 	GtkTreePath     *path;
 	PlannerViewPriv *priv;
@@ -1143,8 +1143,6 @@ resource_view_button_press_event (GtkTreeView    *tv,
 static void
 resource_view_setup_tree_view (PlannerView *view)
 {
-	/*MrpProject        *project;
-	GList             *l, *properties;*/
 	GtkTreeView       *tree_view;
 	GtkTreeViewColumn *col;
 	GtkCellRenderer   *cell;
@@ -2090,17 +2088,45 @@ resource_view_property_changed (MrpProject  *project,
 
 static void
 resource_view_popup_menu (GtkWidget   *widget,
-			  PlannerView      *view)
-{
-	gint x, y; 
+			  PlannerView *view)
+{ 
+	PlannerViewPriv   *priv;
+	GtkTreeView       *tree;
+	GtkTreePath       *path;
+	GtkTreeViewColumn *column;
+	GdkRectangle       rect;
+	gint               x, y;
+
+	priv = view->priv;
+	tree = GTK_TREE_VIEW (priv->tree_view);
 	
-	/* FIXME: We should position the popup at the selected cell. */
-	gdk_window_get_pointer (widget->window, &x, &y, NULL);
+	gtk_tree_view_get_cursor (tree, &path, &column);
+	gtk_tree_view_get_cell_area (tree,
+				     path,
+				     column,
+				     &rect);
 	
-	gtk_item_factory_popup (view->priv->popup_factory,
-				x, y,
+	x = rect.x;
+	y = rect.y;
+
+	/* Note: this is not perfect, but good enough for now. */
+	gdk_window_get_root_origin (GTK_WIDGET (tree)->window, &x, &y);
+	rect.x += x;
+	rect.y += y;
+
+	gtk_widget_translate_coordinates (GTK_WIDGET (tree),
+					  gtk_widget_get_toplevel (GTK_WIDGET (tree)),
+					  rect.x, rect.y,
+					  &x, &y);
+
+	/* Offset so it's not overlapping the cell. */
+	rect.x = x + 20;
+	rect.y = y + 20;
+	
+	gtk_item_factory_popup (priv->popup_factory,
+				rect.x, rect.y,
 				0,
-				gtk_get_current_event_time ()); 
+				gtk_get_current_event_time ());
 }
 
 static void
