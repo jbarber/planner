@@ -171,6 +171,10 @@ table_print_sheet_print_cell (PlannerTablePrintSheet *sheet,
 		      "text", &str, 
 		      "weight", &weight,
 		      NULL);
+
+	if (!str) {
+		return;
+	}
 	
 	if (weight == PANGO_WEIGHT_BOLD) {
 		planner_print_job_set_font_bold (sheet->job);
@@ -202,15 +206,17 @@ table_print_sheet_print_page (PlannerTablePrintSheet *sheet, PrintPage *page)
 						      PRINT_COL (c->data),
 						      PRINT_ROW (r->data),
 						      x, y);
-			x += PRINT_COL(c->data)->width;
+			x += PRINT_COL (c->data)->width;
 			planner_print_job_moveto (sheet->job, 
 					     x, y); 
 			planner_print_job_lineto (sheet->job, 
 					     x,
-					     y + PRINT_ROW(r->data)->height);
+					     y + PRINT_ROW (r->data)->height);
 			gnome_print_stroke (sheet->job->pc);
 		}
-		y += PRINT_ROW(r->data)->height;
+
+		
+		y += PRINT_ROW (r->data)->height;
 		planner_print_job_moveto (sheet->job, 0, y);
 		planner_print_job_lineto (sheet->job, x, y);
 		gnome_print_stroke (sheet->job->pc);
@@ -291,14 +297,15 @@ table_print_sheet_foreach_row (GtkTreeModel *model,
 			g_object_get (cell,
 				      "text", &str,
 				      NULL);
-			
+
  			if (column->expander_column) {
 				extra += depth * INDENT_FACTOR * sheet->x_pad;
  			}
+
 			
 			column->width = MAX (column->width, 
-					     gnome_font_get_width_utf8 (sheet->font,
-									str) + extra);
+					     (str ? gnome_font_get_width_utf8 (sheet->font, str) : 0)
+					     + extra);
 /* 		d(g_print ("New width: %f\n", column->width)); */
 			
 			g_free (str);

@@ -1,3 +1,15 @@
+2004-08-17  Richard Hult  <richard@imendio.com>
+
+	* src/planner-print-dialog.c: (ensure_dir), (get_config_filename),
+	(planner_print_dialog_load_config),
+	(planner_print_dialog_save_config), (print_dialog_create_page):
+	Fix indentation, factor out printing config file location code,
+	handle not being able to find it. Remove libgnome stuff.
+	
+	* src/planner-table-print-sheet.c: (table_print_sheet_print_cell),
+	(table_print_sheet_print_page), (table_print_sheet_foreach_row):
+	Handle printing empty resource and task names. Fix indentation.
+
 2004-08-15  Richard Hult  <richard@imendio.com>
 
 	* configure.in: Remove unused dependencies.

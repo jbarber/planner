@@ -27,7 +27,6 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <string.h>
-#include <libgnome/libgnome.h>
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
 #include <libgnomeprint/gnome-print.h>
@@ -47,6 +46,46 @@ static GtkWidget *   print_dialog_create_page  (PlannerWindow *window,
 static GtkNotebook * print_dialog_get_notebook (GtkWidget     *dialog);
 
 
+static gboolean
+ensure_dir (void)
+{
+	char *dir;
+	
+	dir = g_build_filename (g_get_home_dir (), ".gnome2", NULL);
+	
+	if (!g_file_test (dir, G_FILE_TEST_EXISTS | G_FILE_TEST_IS_DIR)) {
+		if (mkdir (dir, 0755) != 0) {
+			g_free (dir);
+			return FALSE;
+		}
+	}
+	
+	g_free (dir);
+	
+	dir = g_build_filename (g_get_home_dir (), ".gnome2", "planner", NULL);
+	
+	if (!g_file_test (dir, G_FILE_TEST_EXISTS | G_FILE_TEST_IS_DIR)) {
+		if (mkdir (dir, 0755) != 0) {
+			g_free (dir);
+			return FALSE;
+		}
+	}
+	
+	g_free (dir);
+
+	return TRUE;
+}
+
+static gchar *
+get_config_filename (void)
+{
+	if (!ensure_dir ()) {
+		return NULL;
+	}
+	
+	return g_build_filename (g_get_home_dir (), ".gnome2", "planner", PLANNER_PRINT_CONFIG_FILE, NULL);
+}
+
 /*
  * Load printer configuration from a file.
  * Return a GnomePrintConfig object containing the configuration.
@@ -58,9 +97,8 @@ planner_print_dialog_load_config (void)
 	gboolean          res;
 	gchar            *contents;
 	GnomePrintConfig *config;
-	
-	filename = gnome_util_home_file (PLANNER_PRINT_CONFIG_FILE);
-	
+
+	filename = get_config_filename ();
 	res = g_file_get_contents (filename, &contents, NULL, NULL);
 	g_free (filename);
 	
@@ -87,19 +125,22 @@ planner_print_dialog_save_config (GnomePrintConfig *config)
 	
 	g_return_if_fail (config != NULL);
 	
-	str = gnome_print_config_to_string (config, 0);
+	filename = get_config_filename ();
+	if (filename) {
+		str = gnome_print_config_to_string (config, 0);
 	
- 	filename = gnome_util_home_file (PLANNER_PRINT_CONFIG_FILE);
-	fd = open (filename, O_WRONLY | O_CREAT | O_TRUNC, 0600);
-	g_free (filename);
+		fd = open (filename, O_WRONLY | O_CREAT | O_TRUNC, 0600);
+		g_free (filename);
 	
-	if (fd >= 0) {
-		bytes = strlen (str);
+		if (fd >= 0) {
+			bytes = strlen (str);
+			
+			write (fd, str, bytes);
+			close (fd);
+		}
 		
-		write (fd, str, bytes);
-		close (fd);
+		g_free (str);
 	}
-	g_free (str);
 }
 
 GtkWidget *
@@ -129,13 +170,13 @@ print_dialog_create_page (PlannerWindow *window,
 			  GtkWidget     *dialog,
 			  GList         *views)
 {
-	GtkWidget   *outer_vbox, *vbox;
-	GtkWidget   *hbox;
-	GtkWidget   *w;
-	GList       *l;
-	GList       *buttons = NULL;
-	gchar       *str;
-	gboolean     state;
+	GtkWidget *outer_vbox, *vbox;
+	GtkWidget *hbox;
+	GtkWidget *w;
+	GList     *l;
+	GList     *buttons = NULL;
+	gchar     *str;
+	gboolean   state;
 	
 	outer_vbox = gtk_vbox_new (FALSE, 4);
 	gtk_container_set_border_width (GTK_CONTAINER (outer_vbox), 8);
