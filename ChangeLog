@@ -1,3 +1,9 @@
+2005-02-12  Richard Hult  <richard@imendio.com>
+
+	* libplanner/mrp-task-manager.c (task_manager_do_backward_pass):
+	Patch from Jani Tiainen to fix bug #140536. Go through children of
+	the successor instead of the successor if there are any.
+
 2005-01-30 Alvaro del Castillo  <acs@barrapunto.com>
 
 	* configure.in: support for evolution plugin library.

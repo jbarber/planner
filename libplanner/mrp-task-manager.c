@@ -1746,15 +1746,31 @@ task_manager_do_backward_pass (MrpTaskManager *manager)
 		successors = imrp_task_peek_successors (task);
 		for (s = successors; s; s = s->next) {
 			MrpRelation *relation;
-			MrpTask     *successor;
+			MrpTask     *successor, *child;
 
 			relation = s->data;
 			successor = mrp_relation_get_successor (relation);
 			
-			t2 = mrp_task_get_latest_start (successor) -
-				mrp_relation_get_lag (relation);
+			child = mrp_task_get_first_child(successor);
+			if (child) {
+				/* If successor has children go through them
+				 * instead of the successor itself.
+				 */
+				for (; child; child = mrp_task_get_next_sibling (child)) {
+					successor = child;
+					
+					t2 = mrp_task_get_latest_start (successor) -
+						mrp_relation_get_lag (relation);
 			
-			t1 = MIN (t1, t2);
+					t1 = MIN (t1, t2);
+				}
+			} else {
+				/* No children, check the real successor. */
+				t2 = mrp_task_get_latest_start (successor) -
+					mrp_relation_get_lag (relation);
+				
+				t1 = MIN (t1, t2);
+			}
 		}
 
 		imrp_task_set_latest_finish (task, t1);
