@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mrproject VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-05-03 04:19+0200\n"
-"PO-Revision-Date: 2004-05-03 15:19+0200\n"
+"POT-Creation-Date: 2004-05-04 04:16+0200\n"
+"PO-Revision-Date: 2004-05-04 12:29+0200\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -789,6 +789,10 @@ msgstr "_Příručka uživatele"
 msgid "_View"
 msgstr "_Zobrazit"
 
+#: data/ui/python-plugin.ui.h:1
+msgid "Execute a Python script"
+msgstr "Spustit skript v Pythonu"
+
 #: data/ui/resource-view.ui.h:1
 msgid "Edit _Custom Properties..."
 msgstr "Upravit _vlastní vlastnosti..."
@@ -944,16 +948,16 @@ msgid "None"
 msgstr "Žádný"
 
 #. Give up.
-#: libplanner/mrp-sql.c:345 src/planner-sql-plugin.c:173
+#: libplanner/mrp-sql.c:286 src/planner-sql-plugin.c:173
 msgid "Invalid Unicode"
 msgstr "Neplatné Unicode"
 
-#: libplanner/mrp-sql.c:2228
+#: libplanner/mrp-sql.c:2161
 #, c-format
 msgid "Connection to database '%s' failed.\n"
 msgstr "Připojení k databázi '%s' selhalo.\n"
 
-#: libplanner/mrp-sql.c:2233
+#: libplanner/mrp-sql.c:2166
 #, c-format
 msgid ""
 "Connection to database '%s' failed.\n"
@@ -962,12 +966,12 @@ msgstr ""
 "Připojení k databázi '%s' selhalo.\n"
 "%s"
 
-#: libplanner/mrp-sql.c:2241
+#: libplanner/mrp-sql.c:2174
 #, c-format
 msgid "BEGIN command failed %s."
 msgstr "Příkaz BEGIN selhal %s."
 
-#: libplanner/mrp-sql.c:2407
+#: libplanner/mrp-sql.c:2340
 #, c-format
 msgid ""
 "The project '%s' has been changed by the user '%s' since you opened it. Do "
@@ -976,7 +980,7 @@ msgstr ""
 "Projekt '%s' byl změněn uživatelem '%s' poté, co jste jej otevřeli. Chcete "
 "jej přesto uložit?"
 
-#: libplanner/mrp-sql.c:3675 src/planner-sql-plugin.c:336
+#: libplanner/mrp-sql.c:3606 src/planner-sql-plugin.c:336
 #, c-format
 msgid "Connection to database '%s' failed."
 msgstr "Připojení k databázi '%s' selhalo."
@@ -1060,6 +1064,16 @@ msgstr "Zpět '%s'"
 #, c-format
 msgid "Redo '%s'"
 msgstr "Znovu '%s'"
+
+#: src/planner-day-type-dialog.c:494
+#, c-format
+msgid "Add day type \"%s\""
+msgstr "Přidat typ dnů \"%s\""
+
+#: src/planner-day-type-dialog.c:553
+#, c-format
+msgid "Remove day type \"%s\""
+msgstr "Odstranit typ dnů \"%s\""
 
 #: src/planner-default-week-dialog.c:41
 msgid "Monday"
@@ -1155,7 +1169,7 @@ msgstr "Začátek projektu"
 msgid "Name"
 msgstr "Jméno"
 
-#: src/planner-gantt-print.c:199 src/planner-resource-dialog.c:1795
+#: src/planner-gantt-print.c:199 src/planner-resource-dialog.c:1900
 #: src/planner-resource-view.c:691 src/planner-resource-view.c:707
 #: src/planner-resource-view.c:1645 src/planner-task-view.c:269
 msgid "Work"
@@ -1276,30 +1290,6 @@ msgstr "planner: --geometry nemůže být použita s více než jedním souborem
 msgid "Could not open plugin file '%s'\n"
 msgstr "Nemohu otevřít soubor zásuvného modulu '%s'\n"
 
-#: src/planner-task-popup.c:51
-msgid "/_Insert task"
-msgstr "/_Vložit úlohu"
-
-#: src/planner-task-popup.c:54
-msgid "/Insert _subtask"
-msgstr "/Vložit _podúlohu"
-
-#: src/planner-task-popup.c:57
-msgid "/_Remove task"
-msgstr "/_Odstranit úlohu"
-
-#: src/planner-task-popup.c:62
-msgid "/_Unlink task"
-msgstr "/Od_pojit úlohu"
-
-#: src/planner-task-popup.c:67
-msgid "/Assign _resources..."
-msgstr "/_Přiřadit zdroje..."
-
-#: src/planner-task-popup.c:70 src/planner-ttable-tree.c:99
-msgid "/_Edit task..."
-msgstr "/_Upravit úlohu..."
-
 #: src/planner-predecessor-model.c:191 src/planner-task-dialog.c:1132
 msgid "FS"
 msgstr "KZ"
@@ -1382,44 +1372,52 @@ msgstr "Jmenovka"
 msgid "Type"
 msgstr "Typ"
 
+#: src/planner-python-plugin.c:121 src/planner-window.c:639
+msgid "Open a file"
+msgstr "Otevřít soubor"
+
 #. Put "no group" at the top.
-#: src/planner-resource-dialog.c:311 src/planner-resource-input-dialog.c:97
+#: src/planner-resource-dialog.c:326 src/planner-resource-input-dialog.c:97
 #: src/planner-resource-view.c:1856
 msgid "(None)"
 msgstr "(žádná)"
 
-#: src/planner-resource-dialog.c:321 src/planner-resource-input-dialog.c:107
+#: src/planner-resource-dialog.c:336 src/planner-resource-input-dialog.c:107
 #: src/planner-task-dialog.c:256
 msgid "(No name)"
 msgstr "(beze jména)"
 
-#: src/planner-resource-dialog.c:494
+#: src/planner-resource-dialog.c:513
 msgid "Edit resource calendar from dialog"
 msgstr "Upravit kalendář zdroje v dialogu"
 
-#: src/planner-resource-dialog.c:589
+#: src/planner-resource-dialog.c:595
 msgid "Edit resource note from dialog"
 msgstr "Upravit poznámku o zdroji v dialogu"
 
-#: src/planner-resource-dialog.c:661 src/planner-resource-dialog.c:703
+#: src/planner-resource-dialog.c:669
+msgid "Edit resource cost from dialog"
+msgstr "Upravit cenu zdroje v dialogu"
+
+#: src/planner-resource-dialog.c:739 src/planner-resource-dialog.c:781
 msgid "Edit resource property from dialog"
 msgstr "Upravit vlastnost zdroje v dialogu"
 
 #. i18n: time stamp format for notes in task dialog, see strftime(3) for
 #. * a detailed description.
-#: src/planner-resource-dialog.c:1357 src/planner-task-dialog.c:738
+#: src/planner-resource-dialog.c:1458 src/planner-task-dialog.c:738
 msgid "%a %d %b %Y, %H:%M\n"
 msgstr "%a %d. %b %Y, %H:%M\n"
 
-#: src/planner-resource-dialog.c:1474
+#: src/planner-resource-dialog.c:1575
 msgid "None (use project default)"
 msgstr "Žádný (použít implicitní pro projekt)"
 
-#: src/planner-resource-dialog.c:1601 src/planner-resource-dialog.c:1603
+#: src/planner-resource-dialog.c:1702 src/planner-resource-dialog.c:1704
 msgid "Edit resource properties"
 msgstr "Upravit vlastnosti zdroje"
 
-#: src/planner-resource-dialog.c:1796 src/planner-resource-view.c:694
+#: src/planner-resource-dialog.c:1901 src/planner-resource-view.c:694
 #: src/planner-resource-view.c:708 src/planner-resource-view.c:1646
 msgid "Material"
 msgstr "Materiál"
@@ -1578,6 +1576,30 @@ msgstr "Zpoždění"
 #: src/planner-task-dialog.c:1693 src/planner-task-dialog.c:1695
 msgid "Edit task properties"
 msgstr "Upravit vlastnosti úlohy"
+
+#: src/planner-task-popup.c:51
+msgid "/_Insert task"
+msgstr "/_Vložit úlohu"
+
+#: src/planner-task-popup.c:54
+msgid "/Insert _subtask"
+msgstr "/Vložit _podúlohu"
+
+#: src/planner-task-popup.c:57
+msgid "/_Remove task"
+msgstr "/_Odstranit úlohu"
+
+#: src/planner-task-popup.c:62
+msgid "/_Unlink task"
+msgstr "/Od_pojit úlohu"
+
+#: src/planner-task-popup.c:67
+msgid "/Assign _resources..."
+msgstr "/_Přiřadit zdroje..."
+
+#: src/planner-task-popup.c:70 src/planner-ttable-tree.c:99
+msgid "/_Edit task..."
+msgstr "/_Upravit úlohu..."
 
 #: src/planner-task-tree.c:263
 msgid "Insert task"
@@ -1751,10 +1773,6 @@ msgstr "_Využití zdroje"
 #, c-format
 msgid "Could not open view plugin file '%s'\n"
 msgstr "Nemohu otevřít soubor zásuvného modulu pohledu '%s'\n"
-
-#: src/planner-window.c:639
-msgid "Open a file"
-msgstr "Otevřít soubor"
 
 #. I18n: Translators, list your names here, newline separated if there
 #. * are more than one, to appear in the about box.
