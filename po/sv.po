@@ -10,8 +10,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: planner\n"
-"POT-Creation-Date: 2004-05-03 09:31+0200\n"
-"PO-Revision-Date: 2004-05-03 09:31+0200\n"
+"POT-Creation-Date: 2004-05-11 11:04+0200\n"
+"PO-Revision-Date: 2004-05-11 11:05+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -405,7 +405,7 @@ msgid "_Work:"
 msgstr "_Arbete:"
 
 #. day unit variant accepted in input
-#: data/glade/task-dialog.glade.h:17 src/planner-task-tree.c:3219
+#: data/glade/task-dialog.glade.h:17 src/planner-task-tree.c:3364
 msgid "days"
 msgstr "dagar"
 
@@ -499,12 +499,12 @@ msgid "Reset _Constraint"
 msgstr "Återställ _restriktion"
 
 #: data/ui/gantt-view.ui.h:18 data/ui/resource-view.ui.h:10
-#: data/ui/task-view.ui.h:18
+#: data/ui/task-view.ui.h:18 data/ui/time-table-view.ui.h:1
 msgid "Select _All"
 msgstr "Markera _alla"
 
 #: data/ui/gantt-view.ui.h:19 data/ui/resource-view.ui.h:11
-#: data/ui/task-view.ui.h:19
+#: data/ui/task-view.ui.h:19 data/ui/time-table-view.ui.h:2
 msgid "Select all tasks"
 msgstr "Markera alla aktiviteter"
 
@@ -554,15 +554,15 @@ msgstr "Zooma _hela"
 msgid "Zoom _Out"
 msgstr "Zooma _ut"
 
-#: data/ui/gantt-view.ui.h:31 data/ui/time-table-view.ui.h:1
+#: data/ui/gantt-view.ui.h:31 data/ui/time-table-view.ui.h:3
 msgid "Zoom in"
 msgstr "Zooma in"
 
-#: data/ui/gantt-view.ui.h:32 data/ui/time-table-view.ui.h:2
+#: data/ui/gantt-view.ui.h:32 data/ui/time-table-view.ui.h:4
 msgid "Zoom out"
 msgstr "Zooma ut"
 
-#: data/ui/gantt-view.ui.h:33 data/ui/time-table-view.ui.h:4
+#: data/ui/gantt-view.ui.h:33 data/ui/time-table-view.ui.h:6
 msgid "Zoom to fit the entire project"
 msgstr "Zooma så att hela projektet passar"
 
@@ -795,7 +795,7 @@ msgid "_View"
 msgstr "_Visa"
 
 #: data/ui/python-plugin.ui.h:1
-msgid "Execute a Python scipt"
+msgid "Execute a Python script"
 msgstr "Kör ett Python-skript"
 
 #: data/ui/resource-view.ui.h:1
@@ -854,7 +854,7 @@ msgstr "_Redigera egna egenskaper..."
 msgid "_Edit Task"
 msgstr "_Redigera aktivitet"
 
-#: data/ui/time-table-view.ui.h:3
+#: data/ui/time-table-view.ui.h:5
 msgid "Zoom to fit"
 msgstr "Zooma hela"
 
@@ -953,16 +953,16 @@ msgid "None"
 msgstr "Ingen"
 
 #. Give up.
-#: libplanner/mrp-sql.c:345 src/planner-sql-plugin.c:173
+#: libplanner/mrp-sql.c:286 src/planner-sql-plugin.c:173
 msgid "Invalid Unicode"
 msgstr "Ogiltig Unicode"
 
-#: libplanner/mrp-sql.c:2228
+#: libplanner/mrp-sql.c:2161
 #, c-format
 msgid "Connection to database '%s' failed.\n"
 msgstr "Anslutning till databas \"%s\" misslyckades.\n"
 
-#: libplanner/mrp-sql.c:2233
+#: libplanner/mrp-sql.c:2166
 #, c-format
 msgid ""
 "Connection to database '%s' failed.\n"
@@ -971,12 +971,12 @@ msgstr ""
 "Anslutning till databas \"%s\" misslyckades.\n"
 "%s"
 
-#: libplanner/mrp-sql.c:2241
+#: libplanner/mrp-sql.c:2174
 #, c-format
 msgid "BEGIN command failed %s."
 msgstr "BEGIN-kommando misslyckades %s."
 
-#: libplanner/mrp-sql.c:2407
+#: libplanner/mrp-sql.c:2340
 #, c-format
 msgid ""
 "The project '%s' has been changed by the user '%s' since you opened it. Do "
@@ -985,7 +985,7 @@ msgstr ""
 "Projektet \"%s\" har ändrats av användaren \"%s\" sedan du öppnade det. Vill "
 "du spara ändå?"
 
-#: libplanner/mrp-sql.c:3675 src/planner-sql-plugin.c:336
+#: libplanner/mrp-sql.c:3606 src/planner-sql-plugin.c:336
 #, c-format
 msgid "Connection to database '%s' failed."
 msgstr "Anslutning till databasen \"%s\" misslyckades."
@@ -1002,6 +1002,13 @@ msgstr "Ogiltig SQL-URI (ogiltigt projektid)."
 msgid "Invalid SQL URI (no database name specified)."
 msgstr "Ogiltig SQL-URI (inget databasnamn angivet)."
 
+#: libplanner/mrp-task.c:1042
+msgid ""
+"Could not add a predecessor relation, because the tasks are already related."
+msgstr ""
+"Kan inte lägga till en föregångarrelation, eftersom aktiviteterna redan är "
+"släkt."
+
 #: libplanner/mrp-task-manager.c:1822
 msgid "Can not add a predecessor relation between a task and its ancestor."
 msgstr ""
@@ -1016,13 +1023,6 @@ msgstr ""
 #: libplanner/mrp-task-manager.c:1874
 msgid "Can not move the task, since it would result in a loop."
 msgstr "Kan inte flytta aktiviteten eftersom det skulle resultera i en slinga."
-
-#: libplanner/mrp-task.c:1042
-msgid ""
-"Could not add a predecessor relation, because the tasks are already related."
-msgstr ""
-"Kan inte lägga till en föregångarrelation, eftersom aktiviteterna redan är "
-"släkt."
 
 #: libplanner/mrp-xsl.c:96
 msgid "HTML export failed"
@@ -1184,21 +1184,21 @@ msgstr "Namn"
 msgid "Work"
 msgstr "Arbete"
 
-#: src/planner-gantt-print.c:523 src/planner-gantt-row.c:671
+#: src/planner-gantt-print.c:523 src/planner-gantt-row.c:670
 #: src/planner-window.c:1663
 msgid "Unnamed"
 msgstr "Namnlös"
 
-#: src/planner-gantt-row.c:1921 src/planner-gantt-row.c:1924
+#: src/planner-gantt-row.c:1920 src/planner-gantt-row.c:1923
 msgid "No name"
 msgstr "Inget namn"
 
-#: src/planner-gantt-row.c:1927
+#: src/planner-gantt-row.c:1926
 #, c-format
 msgid "Make task '%s' a predecessor of '%s'"
 msgstr "Gör aktivitet \"%s\" till föregångare till \"%s\""
 
-#: src/planner-gantt-row.c:1985
+#: src/planner-gantt-row.c:1984
 #, c-format
 msgid "Change work to %s"
 msgstr "Ändra arbete till %s"
@@ -1294,6 +1294,14 @@ msgstr "GEOMETRI"
 msgid "planner: --geometry cannot be used with more than one file."
 msgstr "planner: --geometry kan bara användas med en fil."
 
+#: src/planner-phase-dialog.c:535
+msgid "Insert phase"
+msgstr "Infoga fas"
+
+#: src/planner-phase-dialog.c:635
+msgid "Remove phase"
+msgstr "Ta bort fas"
+
 #: src/planner-plugin-loader.c:40
 #, c-format
 msgid "Could not open plugin file '%s'\n"
@@ -1381,7 +1389,7 @@ msgstr "Etikett"
 msgid "Type"
 msgstr "Typ"
 
-#: src/planner-python-plugin.c:125 src/planner-window.c:639
+#: src/planner-python-plugin.c:121 src/planner-window.c:639
 msgid "Open a file"
 msgstr "Öppna en fil"
 
@@ -1610,27 +1618,35 @@ msgstr "/_Tilldela resurser..."
 msgid "/_Edit task..."
 msgstr "/_Redigera aktivitet..."
 
-#: src/planner-task-tree.c:263
+#: src/planner-task-tree.c:259
 msgid "Insert task"
 msgstr "Infoga aktivitet"
 
-#: src/planner-task-tree.c:356
+#: src/planner-task-tree.c:348
 msgid "Edit task property"
 msgstr "Redigera aktivitetsegenskap"
 
-#: src/planner-task-tree.c:720
+#: src/planner-task-tree.c:709
 msgid "Remove task"
 msgstr "Ta bort aktivitet"
 
-#: src/planner-task-tree.c:801
+#: src/planner-task-tree.c:788
 msgid "Constraint task"
 msgstr "Sätt restriktion på aktivitet"
 
-#: src/planner-task-tree.c:957
+#: src/planner-task-tree.c:926
 msgid "Move task"
 msgstr "Flytta aktivitet"
 
-#: src/planner-task-tree.c:2581
+#: src/planner-task-tree.c:1045
+msgid "Link task"
+msgstr "Länka aktivitet"
+
+#: src/planner-task-tree.c:1113
+msgid "Unlink task"
+msgstr "Avlänka aktivitet"
+
+#: src/planner-task-tree.c:2722
 #, c-format
 msgid ""
 "You are about to open an edit dialog each for %i tasks. Are you sure that "
@@ -1639,72 +1655,72 @@ msgstr ""
 "En dialog kommer att öppnas för var och en av %d aktiviteter. Är du säger på "
 "att du vill det?"
 
-#: src/planner-task-tree.c:3211
+#: src/planner-task-tree.c:3356
 msgid "mon"
 msgstr "mån"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:3212
+#: src/planner-task-tree.c:3357
 msgid "month"
 msgstr "månad"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:3213
+#: src/planner-task-tree.c:3358
 msgid "months"
 msgstr "månader"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:3214
+#: src/planner-task-tree.c:3359
 msgid "w"
 msgstr "v"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:3215
+#: src/planner-task-tree.c:3360
 msgid "week"
 msgstr "vecka"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:3216
+#: src/planner-task-tree.c:3361
 msgid "weeks"
 msgstr "veckor"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:3217
+#: src/planner-task-tree.c:3362
 msgid "d"
 msgstr "d"
 
 #. day unit variant accepted in input
-#: src/planner-task-tree.c:3218
+#: src/planner-task-tree.c:3363
 msgid "day"
 msgstr "dag"
 
 #. day unit variant accepted in input
-#: src/planner-task-tree.c:3220
+#: src/planner-task-tree.c:3365
 msgid "h"
 msgstr "t"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:3221
+#: src/planner-task-tree.c:3366
 msgid "hour"
 msgstr "timme"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:3222
+#: src/planner-task-tree.c:3367
 msgid "hours"
 msgstr "timmar"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:3223
+#: src/planner-task-tree.c:3368
 msgid "min"
 msgstr "min"
 
 #. minute unit variant accepted in input
-#: src/planner-task-tree.c:3224
+#: src/planner-task-tree.c:3369
 msgid "minute"
 msgstr "minut"
 
 #. minute unit variant accepted in input
-#: src/planner-task-tree.c:3225
+#: src/planner-task-tree.c:3370
 msgid "minutes"
 msgstr "minuter"
 
@@ -1774,11 +1790,11 @@ msgstr ""
 "\n"
 "Aktivitet"
 
-#: src/planner-ttable-view.c:141
+#: src/planner-ttable-view.c:144
 msgid "Resource Usage"
 msgstr "Resursutnyttjande"
 
-#: src/planner-ttable-view.c:148
+#: src/planner-ttable-view.c:151
 msgid "Resource _Usage"
 msgstr "Resurs_utnyttjande"
 
@@ -1882,7 +1898,10 @@ msgstr ""
 msgid "Unnamed database project"
 msgstr "Namnlöst databasprojekt"
 
-#~ msgid "Execute a Python script"
+#~ msgid "phase"
+#~ msgstr "fas"
+
+#~ msgid "Execute a Python scipt"
 #~ msgstr "Kör ett Python-skript"
 
 #~ msgid "Execute a script"
@@ -1938,9 +1957,6 @@ msgstr "Namnlöst databasprojekt"
 
 #~ msgid "_Link Task"
 #~ msgstr "_Länka aktivitet"
-
-#~ msgid "Link Task"
-#~ msgstr "Länka aktivitet"
 
 #~ msgid ""
 #~ "Connection to database '%s' failed:\n"
