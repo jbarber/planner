@@ -267,7 +267,7 @@ planner_print_dialog_get_print_selection (GtkDialog *dialog,
 
 	return views;
 }
-		
+
 /*
  * Eek! Hack alert! Hopefully we'll get custom pages in libgnomeprintui soon.
  */

@@ -704,6 +704,7 @@ planner_gantt_print_do (PlannerGanttPrintData *data)
 					element->x1 = x0 + (start - t1) / data->f;
 					element->x2 = data->job->width;
 					element->x_complete = x0 + (complete - t1) / data->f;
+					element->x_complete = MIN (element->x_complete, element->x2);
 				}
 				else if (start < t1 && finish >= t1 && finish <= t2) {
 					/* Right */
@@ -721,6 +722,7 @@ planner_gantt_print_do (PlannerGanttPrintData *data)
 					element->x1 = x0;
 					element->x2 = x0 + (finish - t1) / data->f;
 					element->x_complete = x0 + (complete - t1) / data->f;
+					element->x_complete = MIN (element->x_complete, element->x2);
 				}
 				else if (start >= t1 && finish <= t2) {
 					/* Whole */
@@ -738,6 +740,7 @@ planner_gantt_print_do (PlannerGanttPrintData *data)
 					element->x1 = x0 + (start - t1) / data->f;
 					element->x2 = x0 + (finish - t1) / data->f;
 					element->x_complete = x0 + (complete - t1) / data->f;
+					element->x_complete = MIN (element->x_complete, element->x2);
 				}
 				else if (start < t1 && finish > t2) {
 					/* Middle */
@@ -754,7 +757,11 @@ planner_gantt_print_do (PlannerGanttPrintData *data)
 					
 					element->x1 = x0;
 					element->x2 = data->job->width;
-					element->x_complete = data->job->width;
+
+					if (complete > t1 && complete <= t2) {
+						element->x_complete = x0 + (complete - t1) / data->f;
+						element->x_complete = MIN (element->x_complete, element->x2);
+					}
 				} else {
 					d(g_print ("nothing"));
 					g_free (element);

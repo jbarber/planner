@@ -382,9 +382,9 @@ table_print_sheet_create_pages (PlannerTablePrintSheet *sheet)
 
 static GSList *
 table_print_sheet_add_row_of_pages (PlannerTablePrintSheet *sheet,
-				    GSList            *page_row,
-				    GSList            *rows,
-				    gboolean           new_row)
+				    GSList                 *page_row,
+				    GSList                 *rows,
+				    gboolean                new_row)
 {
 	GSList  *l;
 	GSList  *added_rows = NULL;

@@ -1,3 +1,22 @@
+2004-09-11  Richard Hult  <richard@imendio.com>
+
+	* src/planner-print-dialog.c:
+	* src/planner-table-print-sheet.c: Fix some indentation.
+
+	* src/planner-window.c (window_print_preview_cb): Use the print
+	config for the preview.
+	(window_print_preview_cb): Only preview the views that are
+	enabled.
+
+	* src/planner-print-job.c (planner_print_job_new): Let gnome-print
+	handle the orientation for us instead of doing it ourselves.
+	
+	* src/planner-gantt-print.c (planner_gantt_print_do): Fix printing
+	of percent complete for tasks that span several pages.
+
+	* src/planner-window.c (window_print_cb): Add the locale hack for
+	printing, seems like it's still needed for PDF.
+
 2004-09-10  Richard Hult  <richard@imendio.com>
 
 	* src/planner-gantt-print.c: (planner_gantt_print_do): Print the

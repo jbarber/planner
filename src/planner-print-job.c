@@ -23,6 +23,7 @@
 #include <config.h>
 #include <string.h>
 #include <glib-object.h>
+#include <glib/gi18n.h>
 #include <libgnomeprint/gnome-print-config.h>
 #include <libgnomeprint/gnome-print-job.h>
 #include <libart_lgpl/libart.h>
@@ -163,10 +164,10 @@ print_job_update_size (PlannerPrintJob *job)
 PlannerPrintJob *
 planner_print_job_new (GnomePrintJob *gpj)
 {
-        PlannerPrintJob       *job;
-	PlannerPrintJobPriv   *priv;
-	GnomePrintConfig *config;
-	gchar            *orientation;
+        PlannerPrintJob     *job;
+	PlannerPrintJobPriv *priv;
+	GnomePrintConfig    *config;
+	gchar               *orientation;
         
         job = g_object_new (PLANNER_TYPE_PRINT_JOB, NULL);
 	
@@ -177,34 +178,21 @@ planner_print_job_new (GnomePrintJob *gpj)
 
         config = gnome_print_job_get_config (job->pj);
 
-	/* Useful for testing, so we leave if here. */
+	/* Useful for testing, so we leave it here. */
 #if 0
 	if (!gnome_print_config_set (config, "Settings.Transport.Backend", "file")) {
 		g_warning ("Could not set the backend to file.");
 	}
 #endif
-	
-	gnome_print_config_get_length (config, 
-				       GNOME_PRINT_KEY_PAPER_WIDTH,
-				       &priv->paper_width,
-				       NULL);
-	gnome_print_config_get_length (config,
-				       GNOME_PRINT_KEY_PAPER_HEIGHT,
-				       &priv->paper_height,
-				       NULL);
+
+	gnome_print_job_get_page_size_from_config (config,
+						   &priv->paper_width,
+						   &priv->paper_height);
 	
 	orientation= gnome_print_config_get (config,
 					     GNOME_PRINT_KEY_PAGE_ORIENTATION);
 
-	if (!strcmp (orientation, "R90") || !strcmp (orientation, "R270")) {
-		gdouble tmp;
-
-		tmp = priv->paper_width;
-		priv->paper_width = priv->paper_height;
-		priv->paper_height = tmp;
-	}
-
-	if (!strcmp (orientation, "R270") || !strcmp (orientation, "R180")) {
+	if (strcmp (orientation, "R270") == 0 || strcmp (orientation, "R180") == 0) {
 		priv->upside_down = TRUE;
 	}
 	
@@ -302,25 +290,21 @@ planner_print_job_lineto (PlannerPrintJob *job, gdouble x, gdouble y)
 }
 
 void
-planner_print_job_show_clipped (PlannerPrintJob  *job,
-			   gdouble      x,
-			   gdouble      y,
-			   const gchar *str,
-			   gdouble      x1,
-			   gdouble      y1,
-			   gdouble      x2,
-			   gdouble      y2)
+planner_print_job_show_clipped (PlannerPrintJob *job,
+				gdouble          x,
+				gdouble          y,
+				const gchar     *str,
+				gdouble          x1,
+				gdouble          y1,
+				gdouble          x2,
+				gdouble          y2)
 {
 	PlannerPrintJobPriv *priv;
-	gdouble         width;
-	gdouble         ellipsis_width;
-	gchar          *tmp, *ellipsized;
-	gchar          *p;
-	glong           len;
-
-	/* FIXME: The clipping doesn't work in the preview, but works when
-	 * printing for real. Bug in libgnomeprint.
-	 */
+	gdouble              width;
+	gdouble              ellipsis_width;
+	gchar               *tmp, *ellipsized;
+	gchar               *p;
+	glong                len;
 
 	priv = job->priv;
 	
@@ -329,9 +313,7 @@ planner_print_job_show_clipped (PlannerPrintJob  *job,
 	y1 = MAX (y1, 0);
 	y2 = MIN (y2, job->height);
 
-	/* Don't try to print anything if the text starts outside the clip
-	 * rect.
-	 */
+	/* Don't try to print anything if the text starts outside the clip rect. */
 	if (x < x1 || x > x2) {
 		return;
 	}
@@ -340,12 +322,15 @@ planner_print_job_show_clipped (PlannerPrintJob  *job,
 
 	gnome_print_gsave (job->pc);
 
+	gnome_print_setlinewidth (job->pc, 0);
+
         gnome_print_newpath (job->pc);
 	planner_print_job_moveto (job, x1, y1);
 	planner_print_job_lineto (job, x1, y2);
 	planner_print_job_lineto (job, x2, y2);
 	planner_print_job_lineto (job, x2, y1);
 	gnome_print_closepath (job->pc);
+
 	gnome_print_clip (job->pc);
 
 	/* First, see if we can fit the text without ellipsizing. */
@@ -392,7 +377,7 @@ gboolean
 planner_print_job_begin_next_page (PlannerPrintJob *job)
 {
 	PlannerPrintJobPriv *priv;
-	gchar          *job_name;
+	gchar               *job_name;
 	
 	g_return_val_if_fail (PLANNER_IS_PRINT_JOB (job), FALSE);
 	
@@ -427,15 +412,21 @@ planner_print_job_begin_next_page (PlannerPrintJob *job)
 	planner_print_job_set_font_regular (job);
 
 	gnome_print_setlinewidth (job->pc, 0);
-
+	
 	planner_print_job_moveto (job, 0, 0);
 	planner_print_job_lineto (job, job->width, 0);
 	planner_print_job_lineto (job, job->width, job->height);
 	planner_print_job_lineto (job, 0, job->height);
 	gnome_print_closepath (job->pc);
-	gnome_print_clip (job->pc);
 
-	gnome_print_newpath (job->pc);
+#if 0
+	gnome_print_gsave (job->pc);
+	gnome_print_setlinewidth (job->pc, 3);
+	gnome_print_stroke (job->pc);
+	gnome_print_grestore (job->pc);
+#endif
+
+	gnome_print_clip (job->pc);
 
 	return TRUE;
 }

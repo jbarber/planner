@@ -775,28 +775,59 @@ window_save_cb (GtkAction *action,
 	window_do_save (window, FALSE);
 }
 
+static GList *
+window_get_print_selection (PlannerWindow *window)
+{
+	PlannerWindowPriv *priv;
+	GList             *views = NULL, *l;
+	PlannerView       *view;
+	gchar             *str;
+
+	priv = window->priv;
+	
+	for (l = priv->views; l; l = l->next) {
+		view = l->data;
+
+		str = g_strdup_printf ("/views/%s/print_enabled", 
+				       planner_view_get_name (view));
+		if (planner_conf_get_bool (str, NULL)) {
+			views = g_list_append (views, view);
+		}
+		
+		g_free (str);
+	}
+
+	return views;
+}
+
 static void
 window_print_preview_cb (GtkAction *action,
 			 gpointer   data)
 {
 	PlannerWindow     *window;
 	PlannerWindowPriv *priv;
-	GnomePrintJob    *gpj;
-	GtkWidget        *preview;
-	GList            *l;
-	PlannerView           *view;
-	PlannerPrintJob       *job;
-	gint              n_pages;
+	GnomePrintConfig  *config;
+	GnomePrintJob     *gpj;
+	GtkWidget         *preview;
+	GList             *views, *l;
+	PlannerView       *view;
+	PlannerPrintJob   *job;
+	gint               n_pages;
 
 	window = PLANNER_WINDOW (data);
 	priv = window->priv;
 
-	gpj = gnome_print_job_new (NULL);
+	/* Load printer settings */
+	config = planner_print_dialog_load_config ();
+	gpj = gnome_print_job_new (config);
+	gnome_print_config_unref (config);
 	
 	job = planner_print_job_new (gpj);
+
+	views = window_get_print_selection (window);
 	
 	n_pages = 0;
-	for (l = priv->views; l; l = l->next) {
+	for (l = views; l; l = l->next) {
 		view = l->data;
 
 		planner_view_print_init (view, job);
@@ -806,7 +837,7 @@ window_print_preview_cb (GtkAction *action,
 
 	planner_print_job_set_total_pages (job, n_pages);
 	
-	for (l = priv->views; l; l = l->next) {
+	for (l = views; l; l = l->next) {
 		view = l->data;
 		
 		planner_view_print (view);
@@ -818,7 +849,9 @@ window_print_preview_cb (GtkAction *action,
 	
 	preview = gnome_print_job_preview_new (job->pj, "Planner");
 	gtk_widget_show (preview);
-	
+
+	g_list_free (views);
+
 	g_object_unref (job);
 }
 
@@ -864,7 +897,6 @@ window_print_cb (GtkAction *action,
 	planner_print_dialog_save_config (config);
 
 	views = planner_print_dialog_get_print_selection (GTK_DIALOG (dialog), &summary);
-
 	if (summary) {
 		/*g_print ("Print summary\n");*/
 	}
@@ -900,7 +932,19 @@ window_print_cb (GtkAction *action,
 		gtk_widget_show (preview);
 	}
 	else if (response == GNOME_PRINT_DIALOG_RESPONSE_PRINT) {
+		gchar *tmp;
+
+		/* This seems to be needed for now to stop older versions of
+		 * gnome-print from outputting locale dependent floats. Remove
+		 * this later.
+		 */
+		tmp = g_strdup (setlocale (LC_NUMERIC, NULL));
+		setlocale (LC_NUMERIC, "C");
+		
 		gnome_print_job_print (job->pj);
+		
+		setlocale (LC_NUMERIC, tmp);
+		g_free (tmp);
 	}
 	
 	g_list_free (views);
