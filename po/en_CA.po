@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: planner\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-09-25 10:30-0400\n"
-"PO-Revision-Date: 2004-09-25 19:47-0400\n"
+"POT-Creation-Date: 2004-10-03 11:56-0400\n"
+"PO-Revision-Date: 2004-10-03 19:47-0400\n"
 "Last-Translator: Adam Weinberger <adamw@gnome.org>\n"
 "Language-Team: English/Canada <adamw@FreeBSD.org>\n"
 "MIME-Version: 1.0\n"
@@ -808,7 +808,7 @@ msgstr "Updated from Evolution Data Server"
 
 #: src/planner-eds-plugin.c:841
 msgid "Query cancelled."
-msgstr "Query canceled."
+msgstr "Query cancelled."
 
 #: src/planner-eds-plugin.c:902
 msgid "Evolution Data Server UID"
@@ -872,7 +872,7 @@ msgid "Work"
 msgstr "Work"
 
 #: src/planner-gantt-print.c:542 src/planner-gantt-row.c:685
-#: src/planner-task-tree.c:1583 src/planner-window.c:1660
+#: src/planner-task-tree.c:1583 src/planner-window.c:1648
 msgid "Unnamed"
 msgstr "Unnamed"
 
@@ -1097,7 +1097,7 @@ msgstr ""
 "\"%s\" is a directory.\n"
 "Enter a filename and try again."
 
-#: src/planner-html-plugin.c:148 src/planner-window.c:1417
+#: src/planner-html-plugin.c:148 src/planner-window.c:1405
 #: src/planner-xml-planner-plugin.c:125
 #, c-format
 msgid "File \"%s\" exists, do you want to overwrite it?"
@@ -1608,8 +1608,8 @@ msgid ""
 "You are about to open an edit dialog each for %i tasks. Are you sure that "
 "you want to do that?"
 msgstr ""
-"You are about to open an edit dialogue for each of %i tasks. Are you sure that "
-"you want to do that?"
+"You are about to open an edit dialogue for each of %i tasks. Are you sure "
+"that you want to do that?"
 
 #: src/planner-task-tree.c:3405
 msgid "mon"
@@ -1771,218 +1771,218 @@ msgstr "Resource _Usage"
 msgid "Could not open view plugin file '%s'\n"
 msgstr "Could not open view plugin file '%s'\n"
 
-#: src/planner-window.c:199
+#: src/planner-window.c:197
 msgid "_File"
 msgstr "_File"
 
-#: src/planner-window.c:203
+#: src/planner-window.c:201
 msgid "_New Project"
 msgstr "_New Project"
 
-#: src/planner-window.c:203
+#: src/planner-window.c:201
 msgid "Create a new project"
 msgstr "Create a new project"
 
-#: src/planner-window.c:207
+#: src/planner-window.c:205
 msgid "_Open..."
 msgstr "_Open..."
 
-#: src/planner-window.c:207
+#: src/planner-window.c:205
 msgid "Open a project"
 msgstr "Open a project"
 
-#: src/planner-window.c:210
+#: src/planner-window.c:208
 msgid "_Import"
 msgstr "_Import"
 
-#: src/planner-window.c:214 src/planner-window.c:1288
+#: src/planner-window.c:212 src/planner-window.c:1276
 msgid "_Save"
 msgstr "_Save"
 
-#: src/planner-window.c:214
+#: src/planner-window.c:212
 msgid "Save the current project"
 msgstr "Save the current project"
 
-#: src/planner-window.c:217
+#: src/planner-window.c:215
 msgid "_Export"
 msgstr "_Export"
 
-#: src/planner-window.c:220
+#: src/planner-window.c:218
 msgid "Save _As..."
 msgstr "Save _As..."
 
-#: src/planner-window.c:220
+#: src/planner-window.c:218
 msgid "Save the current project with a different name"
 msgstr "Save the current project with a different name"
 
-#: src/planner-window.c:223
+#: src/planner-window.c:221
 msgid "_Print..."
 msgstr "_Print..."
 
-#: src/planner-window.c:223
+#: src/planner-window.c:221
 msgid "Print the current project"
 msgstr "Print the current project"
 
-#: src/planner-window.c:226
+#: src/planner-window.c:224
 msgid "Print Pre_view"
 msgstr "Print Pre_view"
 
-#: src/planner-window.c:226
+#: src/planner-window.c:224
 msgid "Print preview of the current project"
 msgstr "Print preview of the current project"
 
-#: src/planner-window.c:229
+#: src/planner-window.c:227
 msgid "_Close"
 msgstr "_Close"
 
-#: src/planner-window.c:229
+#: src/planner-window.c:227
 msgid "Close the current file"
 msgstr "Close the current file"
 
-#: src/planner-window.c:232
+#: src/planner-window.c:230
 msgid "_Quit"
 msgstr "_Quit"
 
-#: src/planner-window.c:232
+#: src/planner-window.c:230
 msgid "Exit the program"
 msgstr "Exit the program"
 
-#: src/planner-window.c:236
+#: src/planner-window.c:234
 msgid "_Edit"
 msgstr "_Edit"
 
-#: src/planner-window.c:239
+#: src/planner-window.c:237
 msgid "_Undo"
 msgstr "_Undo"
 
-#: src/planner-window.c:239
+#: src/planner-window.c:237
 msgid "Undo the last action"
 msgstr "Undo the last action"
 
-#: src/planner-window.c:242
+#: src/planner-window.c:240
 msgid "_Redo"
 msgstr "_Redo"
 
-#: src/planner-window.c:242
+#: src/planner-window.c:240
 msgid "Redo the undone action"
 msgstr "Redo the undone action"
 
-#: src/planner-window.c:246
+#: src/planner-window.c:244
 msgid "_View"
 msgstr "_View"
 
-#: src/planner-window.c:250
+#: src/planner-window.c:248
 msgid "_Actions"
 msgstr "_Actions"
 
-#: src/planner-window.c:254
+#: src/planner-window.c:252
 msgid "_Project"
 msgstr "_Project"
 
-#: src/planner-window.c:257
+#: src/planner-window.c:255
 msgid "_Manage Calendars"
 msgstr "_Manage Calendars"
 
-#: src/planner-window.c:260
+#: src/planner-window.c:258
 msgid "Edit Day _Types"
 msgstr "Edit Day _Types"
 
-#: src/planner-window.c:263
+#: src/planner-window.c:261
 msgid "Edit Project _Phases"
 msgstr "Edit Project _Phases"
 
-#: src/planner-window.c:266
+#: src/planner-window.c:264
 msgid "_Edit Project Properties"
 msgstr "_Edit Project Properties"
 
-#: src/planner-window.c:266
+#: src/planner-window.c:264
 msgid "Edit the project properties"
 msgstr "Edit the project properties"
 
-#: src/planner-window.c:274
+#: src/planner-window.c:272
 msgid "_Help"
 msgstr "_Help"
 
-#: src/planner-window.c:277
+#: src/planner-window.c:275
 msgid "_User Guide"
 msgstr "_User Guide"
 
-#: src/planner-window.c:277
+#: src/planner-window.c:275
 msgid "Show the Planner User Guide"
 msgstr "Show the Planner User Guide"
 
-#: src/planner-window.c:280
+#: src/planner-window.c:278
 msgid "_About"
 msgstr "_About"
 
-#: src/planner-window.c:280
+#: src/planner-window.c:278
 msgid "About this application"
 msgstr "About this application"
 
 #. Note: these strings are leaked.
-#: src/planner-window.c:554
+#: src/planner-window.c:542
 #, c-format
 msgid "Switch to the view \"%s\""
 msgstr "Switch to the view \"%s\""
 
-#: src/planner-window.c:699
+#: src/planner-window.c:687
 msgid "Open a file"
 msgstr "Open a file"
 
 #. I18n: Translators, list your names here, newline separated if there
 #. * are more than one, to appear in the about box.
 #.
-#: src/planner-window.c:1109 src/planner-window.c:1116
+#: src/planner-window.c:1097 src/planner-window.c:1104
 msgid "translator-credits"
 msgstr ""
 "Maintainer: Adam Weinberger <adamw@gnome.org>\n"
 "Alexander Winston <alexander.winston@comcast.net>"
 
 #. "Copyright \xc2\xa9"
-#: src/planner-window.c:1113
+#: src/planner-window.c:1101
 msgid "A Project Management application for the GNOME desktop"
 msgstr "A Project Management application for the GNOME desktop"
 
-#: src/planner-window.c:1123
+#: src/planner-window.c:1111
 msgid "The Planner Homepage"
 msgstr "The Planner Homepage"
 
-#: src/planner-window.c:1229
+#: src/planner-window.c:1217
 msgid "If you don't save, changes made the last minute will be discarded."
 msgstr "If you don't save, changes made the last minute will be discarded."
 
-#: src/planner-window.c:1234
+#: src/planner-window.c:1222
 #, c-format
 msgid "If you don't save, changes made the last %d minutes will be discarded."
 msgstr "If you don't save, changes made the last %d minutes will be discarded."
 
-#: src/planner-window.c:1239
+#: src/planner-window.c:1227
 msgid "If you don't save, changes made the last hour will be discarded."
 msgstr "If you don't save, changes made the last hour will be discarded."
 
-#: src/planner-window.c:1244
+#: src/planner-window.c:1232
 #, c-format
 msgid "If you don't save, changes made the last %d hours will be discarded."
 msgstr "If you don't save, changes made the last %d hours will be discarded."
 
-#: src/planner-window.c:1251
+#: src/planner-window.c:1239
 #, c-format
 msgid "Save changes to document '%s' before closing?"
 msgstr "Save changes to document '%s' before closing?"
 
-#: src/planner-window.c:1275
+#: src/planner-window.c:1263
 msgid "C_lose without saving"
 msgstr "C_lose without saving"
 
-#: src/planner-window.c:1281
+#: src/planner-window.c:1269
 msgid "_Cancel"
 msgstr "_Cancel"
 
-#: src/planner-window.c:1380
+#: src/planner-window.c:1368
 msgid "Save a file"
 msgstr "Save a file"
 
-#: src/planner-window.c:1617
+#: src/planner-window.c:1605
 msgid ""
 "You have opened a file that was saved with an old version of Planner.\n"
 "\n"
@@ -2011,9 +2011,14 @@ msgstr ""
 "'Remove all constraints' in the 'Edit' menu."
 
 #. Hack.
-#: src/planner-window.c:1652
+#: src/planner-window.c:1640
 msgid "Unnamed database project"
 msgstr "Unnamed database project"
+
+#: src/planner-window.c:1754
+#, c-format
+msgid "Open '%s'"
+msgstr "Open '%s'"
 
 #: src/planner-working-time-dialog.c:144
 msgid "Edit working time"
