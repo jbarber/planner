@@ -1,3 +1,29 @@
+2004-08-03  Richard Hult  <richard@imendio.com>
+
+	* src/planner-resource-dialog.c: Clean up coding style a bit. Use
+	g_strtod instead of g_ascii_strtod. Change cost to a regular
+	property.
+
+	* src/planner-project-properties.c:
+	* src/planner-resource-view.c:
+	* src/planner-task-tree.c: Use g_strtod instead of g_ascii_strtod.
+
+2004-08-03  Richard Hult  <richard@imendio.com>
+
+	* libplanner/mrp-old-xml.c: Handle non-existant properties better.
+	* libplanner/mrp-project.c: Don't add a cost custom property.
+	* libplanner/mrp-resource.c: Add cost property. 
+
+	* libplanner/mrp-task-manager.c (mrp_task_manager_move_task):
+	Invalidate cost cache.
+
+	* libplanner/mrp-task.c (task_remove_subtree_cb): Remove extra
+	mrp_object_removed call.
+	(imrp_task_remove_subtree): Invalidate cost cache.
+	(task_set_property): Likewise.
+
+	Based on patch from Doroszlai Attila to fix bug #138475.
+
 2004-08-02  Alvaro del Castilo  <acs@barrapunto.com>
 	
 	* data/sql/Makefile.am: new files

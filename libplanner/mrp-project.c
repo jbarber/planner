@@ -413,7 +413,6 @@ static void
 project_init (MrpProject *project)
 {
 	MrpProjectPriv *priv;
-	MrpProperty    *property;
 	MrpCalendar    *calendar;
 	
 	project->priv = g_new0 (MrpProjectPriv, 1);
@@ -446,7 +445,7 @@ project_init (MrpProject *project)
 		(GDestroyNotify) mrp_day_unref);
 	
         /* Move these into the cost plugin */
-	property = mrp_property_new ("cost", 
+/*	property = mrp_property_new ("cost", 
 				     MRP_PROPERTY_TYPE_COST,
 				     "Cost",
 				     "standard cost for a resource",
@@ -455,7 +454,7 @@ project_init (MrpProject *project)
 				  MRP_TYPE_RESOURCE,
 				  property,
                                   TRUE);
-
+*/
 	/* FIXME: Add back this when it's used. */
 /*	property = mrp_property_new ("cost_overtime", 
 	MRP_PROPERTY_TYPE_COST,

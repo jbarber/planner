@@ -869,13 +869,24 @@ old_xml_read_property_specs (MrpParser *parser)
 
 		type = old_xml_property_type_from_string (type_str);
 		
-		/* #534 */
 		property = mrp_property_new (name,
 					     type,
 					     label,
 					     description,
 					     TRUE);
 
+		/* If we could't create the property, this means that we are
+		 * trying to use a name that is already taken.
+		 */
+		if (!property) {
+			g_free (name);
+			g_free (type_str);
+			g_free (owner_str);
+			g_free (label);
+			g_free (description);
+			continue;
+		}
+		
 		if (!strcmp (owner_str, "task")) {
 			owner = MRP_TYPE_TASK;
 		}
@@ -1353,14 +1364,21 @@ old_xml_set_property_from_node (MrpProject *project,
 
 	str = old_xml_get_string (node, "value");
 
+	/* Check if we have the property first. This is needed both to be robust
+	 * against broken input.
+	 */
+	if (!mrp_project_has_property (project,
+				       G_OBJECT_TYPE (object),
+				       name)) {
+		g_free (name);
+		g_free (str);
+		return;
+	}
+	
 	property = mrp_project_get_property (project,
 					     name,
 					     G_OBJECT_TYPE (object));
 
-	if (property == NULL) {
-		return;
-	}
-	
 	type = mrp_property_get_property_type (property);
 
 	switch (type) {

@@ -123,6 +123,9 @@ struct _MrpTaskPriv {
 
 	/* List of assignments. */
 	GList            *assignments;
+
+	gfloat            cost;
+	gboolean          cost_cached;
 };
 
 
@@ -140,7 +143,6 @@ static void task_get_property          (GObject            *object,
 static void task_removed               (MrpObject          *object);
 static void task_assignment_removed_cb (MrpAssignment      *assignment,
 					MrpTask            *task);
-
 static void task_remove_assignments    (MrpTask            *task);
 static void task_remove_relations      (MrpTask            *task);
 
@@ -189,6 +191,9 @@ task_init (MrpTask *task)
 	priv->constraint.type = MRP_CONSTRAINT_ASAP;
 	priv->graph_node = g_new0 (MrpTaskGraphNode, 1);
 	priv->note = g_strdup ("");
+
+	priv->cost = 0.0;
+ 	priv->cost_cached = FALSE;
 }
 
 static void
@@ -488,6 +493,8 @@ task_set_property (GObject      *object,
 
 			g_object_notify (object, "work");
 			changed = TRUE;
+
+			mrp_task_invalidate_cost (task);
 		}
 		break;
 		
@@ -504,6 +511,8 @@ task_set_property (GObject      *object,
 
 			g_object_notify (object, "duration");
 			changed = TRUE;
+
+			mrp_task_invalidate_cost (task);
 		}
 		break;
 
@@ -752,9 +761,7 @@ task_remove_subtree_cb (GNode *node, gpointer data)
 	task_remove_assignments (task);
 
 	g_node_unlink (priv->node);
-
-	mrp_object_removed (MRP_OBJECT (task));
-
+	
 	mrp_object_removed (MRP_OBJECT (task));
 
 	g_object_unref (task);
@@ -789,6 +796,7 @@ imrp_task_remove_subtree (MrpTask *task)
 	g_object_unref (task);
 
 	if (parent) {
+		mrp_task_invalidate_cost (parent);
 		g_signal_emit (parent, signals[CHILD_REMOVED], 0);
 	}
 }
@@ -801,12 +809,6 @@ imrp_task_detach (MrpTask *task)
 	/* FIXME: Do some extra checking. */
 
 	g_node_unlink (task->priv->node);
-
-	/* Note: we don't unlink the sorted node, because when moving a task but
-	 * keeping it under the same parent, we don't need to rebuild the
-	 * tree. So when the caller wants that, it has to unlink the tree and
-	 * rebuild it.
-	 */
 }
 
 void
@@ -936,6 +938,8 @@ imrp_task_insert_child (MrpTask *parent,
 		       position,
 		       child->priv->node);
 
+	mrp_task_invalidate_cost (parent);
+	
 	g_signal_emit (parent, signals[CHILD_ADDED], 0);
 }
 
@@ -1582,14 +1586,21 @@ mrp_task_get_cost (MrpTask *task)
 	MrpResource *resource;
 	gfloat       total = 0;
 	gfloat       cost;
+	MrpTask     *child;
 
 	g_return_val_if_fail (MRP_IS_TASK (task), 0);
 
-	/* FIXME: why don't we cache this in priv->cost and recalculate in
-	 * reschedule? This is called a lot from the tree view...
-	 */
-
 	priv = task->priv;
+
+	if (priv->cost_cached) {
+		return priv->cost;
+	}
+
+	child = mrp_task_get_first_child (task);
+	while (child) {
+		total += mrp_task_get_cost (child);
+		child = mrp_task_get_next_sibling (child);
+	}
 
 	assignments = mrp_task_get_assignments (task);
 	for (l = assignments; l; l = l->next) {
@@ -1599,7 +1610,22 @@ mrp_task_get_cost (MrpTask *task)
 		total += mrp_assignment_get_units (l->data) * priv->duration * cost / (3600.0 * 100);
 	}
 
+	priv->cost = total;
+	priv->cost_cached = TRUE;
+
 	return total;
+}
+
+void
+mrp_task_invalidate_cost (MrpTask *task)
+{
+	g_return_if_fail (MRP_IS_TASK (task));
+
+	task->priv->cost_cached = FALSE;
+
+	if (task->priv->node->parent) {
+		mrp_task_invalidate_cost (task->priv->node->parent->data);
+	}
 }
 
 /* Boxed types. */

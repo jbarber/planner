@@ -513,6 +513,9 @@ mrp_task_manager_move_task (MrpTaskManager  *manager,
 	imrp_task_detach (task);
 	imrp_task_reattach (task, sibling, parent, before);
 
+	mrp_task_invalidate_cost (old_parent);
+	mrp_task_invalidate_cost (parent);
+
 	mrp_task_manager_rebuild (manager);
 	
 	imrp_project_task_moved (manager->priv->project, task);
@@ -1903,6 +1906,7 @@ task_manager_assignment_units_notify_cb (MrpAssignment  *assignment,
 					 GParamSpec     *spec,
 					 MrpTaskManager *manager)
 {
+	mrp_task_invalidate_cost (mrp_assignment_get_task (assignment));
 	mrp_task_manager_recalc (manager, TRUE);	
 }
 
@@ -1956,6 +1960,7 @@ task_manager_task_assignment_added_cb (MrpTask        *task,
 				 G_CALLBACK (task_manager_assignment_units_notify_cb),
 				 manager, 0);
 		
+	mrp_task_invalidate_cost (task);
 	manager->priv->needs_rebuild = TRUE;
 	mrp_task_manager_recalc (manager, FALSE);
 }
@@ -1969,6 +1974,7 @@ task_manager_task_assignment_removed_cb (MrpTask        *task,
 					      task_manager_assignment_units_notify_cb,
 					      manager);
 	
+	mrp_task_invalidate_cost (task);
 	manager->priv->needs_rebuild = TRUE;
 	mrp_task_manager_recalc (manager, FALSE);
 }

@@ -44,6 +44,7 @@ struct _MrpResourcePriv {
 	GList           *assignments;
 	
 	MrpCalendar     *calendar;
+	gfloat           cost;
 };
 
 /* Properties */
@@ -56,7 +57,8 @@ enum {
         PROP_UNITS,
         PROP_EMAIL,
         PROP_NOTE,
-	PROP_CALENDAR
+	PROP_CALENDAR,
+	PROP_COST
 };
 
 /* Signals */
@@ -81,6 +83,7 @@ static void resource_get_property          (GObject          *object,
 static void resource_calendar_changed      (MrpCalendar      *calendar,
 					    MrpResource      *resource);
 static void resource_removed               (MrpObject        *object);
+static void resource_invalidate_task_costs (MrpResource      *resource);
 static void resource_assignment_removed_cb (MrpAssignment    *assignment,
 					    MrpResource      *resource);
 static void resource_group_removed_cb      (MrpGroup         *group,
@@ -193,6 +196,15 @@ resource_class_init (MrpResourceClass *klass)
 							       "Calendar",
 							       "The calendar this resource uses",
 							       G_PARAM_READWRITE));
+        g_object_class_install_property (object_class,
+                                         PROP_COST,
+                                         g_param_spec_float ("cost",
+                                                             "Cost",
+                                                             "The standard cost of the resource",
+                                                             0.0,
+							     G_MAXFLOAT,
+                                                             0.0,
+                                                             G_PARAM_READWRITE));
                 
 	/* Signals */
 	signals[ASSIGNMENT_ADDED] = 
@@ -271,6 +283,7 @@ resource_set_property (GObject      *object,
 	gboolean         changed = FALSE;
 	const gchar     *str;
 	gint             i_val;
+	gfloat           f_val;
 	MrpGroup        *group;
 	MrpCalendar     *calendar;
 	MrpProject      *project;
@@ -390,6 +403,15 @@ resource_set_property (GObject      *object,
 			}
 		}
 		break;
+	case PROP_COST:
+		f_val = g_value_get_float (value);
+		
+		if (priv->cost != f_val) {
+			priv->cost = f_val;
+			changed = TRUE;
+			resource_invalidate_task_costs (resource);
+		}
+		break;
 
 	default:
 		break;
@@ -437,6 +459,9 @@ resource_get_property (GObject    *object,
 	case PROP_CALENDAR:
 		g_value_set_pointer (value, priv->calendar);
 		break;
+	case PROP_COST:
+		g_value_set_float (value, priv->cost);
+		break;
 	default:
 		G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
 		break;
@@ -471,6 +496,15 @@ resource_remove_assignment_foreach (MrpAssignment *assignment,
 	g_object_unref (assignment);
 
 	mrp_object_removed (MRP_OBJECT (assignment));
+}
+
+static void
+resource_invalidate_task_cost_foreach (MrpAssignment *assignment, 
+				       MrpResource   *resource)
+{
+	g_return_if_fail (MRP_IS_ASSIGNMENT (assignment));
+
+	mrp_task_invalidate_cost (mrp_assignment_get_task (assignment));
 }
 
 static void
@@ -534,6 +568,14 @@ resource_assignment_removed_cb (MrpAssignment *assignment,
 	g_object_unref (assignment);
 
 	mrp_object_changed (MRP_OBJECT (resource));
+}
+
+static void
+resource_invalidate_task_costs (MrpResource *resource)
+{
+	g_list_foreach (resource->priv->assignments,
+			(GFunc) resource_invalidate_task_cost_foreach,
+			resource);
 }
 
 /**

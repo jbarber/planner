@@ -1643,7 +1643,7 @@ mpp_project_property_set_value_string (MrpProject  *project,
 				NULL);
 		break;
 	case MRP_PROPERTY_TYPE_FLOAT:
-		fvalue = g_ascii_strtod (text, NULL);
+		fvalue = g_strtod (text, NULL);
 		mrp_object_set (MRP_OBJECT (project),
 				mrp_property_get_name (property), 
 				fvalue,
@@ -1666,7 +1666,7 @@ mpp_project_property_set_value_string (MrpProject  *project,
 		/* 				NULL); */
 		break;
 	case MRP_PROPERTY_TYPE_COST:
-		fvalue = g_ascii_strtod (text, NULL);
+		fvalue = g_strtod (text, NULL);
 		mrp_object_set (MRP_OBJECT (project),
 				mrp_property_get_name (property), 
 				fvalue,

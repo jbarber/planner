@@ -128,6 +128,10 @@ static void    resource_view_cell_group_edited        (PlannerCellRendererList  
 						       gchar               *path_string,
 						       gchar               *new_text,
 						       gpointer             user_data);
+static void    resource_view_cell_cost_edited         (GtkCellRendererText *cell,
+						       gchar               *path_string,
+						       gchar               *new_text,
+						       gpointer             user_data);
 static void    resource_view_property_value_edited    (GtkCellRendererText *cell,
 						       gchar               *path_string,
 						       gchar               *new_text,
@@ -192,6 +196,11 @@ static void    resource_view_group_data_func          (GtkTreeViewColumn   *tree
 						      GtkTreeIter          *iter,
 						      gpointer              data);
 static void    resource_view_email_data_func          (GtkTreeViewColumn   *tree_column,
+						      GtkCellRenderer      *cell,
+						      GtkTreeModel         *tree_model,
+						      GtkTreeIter          *iter,
+						      gpointer              data);
+static void    resource_view_cost_data_func           (GtkTreeViewColumn   *tree_column,
 						      GtkCellRenderer      *cell,
 						      GtkTreeModel         *tree_model,
 						      GtkTreeIter          *iter,
@@ -1125,11 +1134,11 @@ resource_view_button_press_event (GtkTreeView    *tv,
 static void
 resource_view_setup_tree_view (PlannerView *view)
 {
-	MrpProject        *project;
+	/*MrpProject        *project;
+	GList             *l, *properties;*/
 	GtkTreeView       *tree_view;
 	GtkTreeViewColumn *col;
 	GtkCellRenderer   *cell;
-	GList             *l, *properties;
 
 	tree_view = GTK_TREE_VIEW (view->priv->tree_view);
 	
@@ -1262,7 +1271,29 @@ resource_view_setup_tree_view (PlannerView *view)
 			  G_CALLBACK (resource_view_cell_email_edited),
 			  view);
 
-	/* Custom property for cost added by default to a resource */
+	/* Cost */
+	cell = gtk_cell_renderer_text_new ();
+	g_object_set (cell, "editable", TRUE, NULL);
+
+	col = gtk_tree_view_column_new_with_attributes (_("Cost"),
+							cell, NULL);
+	gtk_tree_view_column_set_resizable (col, TRUE);
+	/*gtk_tree_view_column_set_min_width (col, 150);*/
+	
+	gtk_tree_view_column_set_cell_data_func (col, cell, 
+						 resource_view_cost_data_func,
+						 NULL, NULL);
+	g_object_set_data (G_OBJECT (col),
+			   "data-func", resource_view_cost_data_func);
+	
+	gtk_tree_view_append_column (tree_view, col);
+	
+	g_signal_connect (cell,
+			  "edited",
+			  G_CALLBACK (resource_view_cell_cost_edited),
+			  view);
+
+	/*
 	project = planner_window_get_project (view->main_window);
 	properties = mrp_project_get_properties_from_type (project, 
 							   MRP_TYPE_RESOURCE);
@@ -1270,6 +1301,7 @@ resource_view_setup_tree_view (PlannerView *view)
 	for (l = properties; l; l = l->next) {	
 		resource_view_property_added (project, MRP_TYPE_RESOURCE, l->data, view);
 	}
+	*/
 }
 
 static gboolean
@@ -1549,6 +1581,43 @@ resource_view_cell_email_edited (GtkCellRendererText *cell,
 }
 
 static void
+resource_view_cell_cost_edited (GtkCellRendererText *cell,
+				gchar               *path_string,
+				gchar               *new_text,
+				gpointer             user_data)
+{
+	PlannerView  *view;
+	PlannerCmd   *cmd;
+	MrpResource  *resource;
+	GtkTreeView  *tree_view;
+	GtkTreeModel *model;
+	GtkTreePath  *path;
+	GtkTreeIter   iter;
+	GValue        value = { 0 };
+	gfloat        fvalue;
+	
+	view = PLANNER_VIEW (user_data);
+	
+	tree_view = view->priv->tree_view;
+	
+	model = gtk_tree_view_get_model (tree_view);
+
+	path = gtk_tree_path_new_from_string (path_string);
+	
+	gtk_tree_model_get_iter (model, &iter, path);
+
+	gtk_tree_model_get (model, &iter, COL_RESOURCE, &resource, -1);
+	
+	fvalue = g_strtod (new_text, NULL);
+	g_value_init (&value, G_TYPE_FLOAT);
+	g_value_set_float (&value, fvalue);
+	cmd = resource_cmd_edit_property (view, resource, "cost", &value);
+	g_value_unset (&value);
+
+	gtk_tree_path_free (path);
+}
+
+static void
 resource_view_cell_type_edited (PlannerCellRendererList *cell,
 				gchar                   *path_string,
 				gchar                   *new_text,
@@ -1711,7 +1780,7 @@ resource_view_custom_property_set_value (MrpProperty *property,
 
 		break;
 	case MRP_PROPERTY_TYPE_FLOAT:
-		fvalue = g_ascii_strtod (new_text, NULL);
+		fvalue = g_strtod (new_text, NULL);
 		g_value_init (&value, G_TYPE_FLOAT);
 		g_value_set_float (&value, fvalue);
 
@@ -1729,7 +1798,7 @@ resource_view_custom_property_set_value (MrpProperty *property,
 
 		break;
 	case MRP_PROPERTY_TYPE_COST:
-		fvalue = g_ascii_strtod (new_text, NULL);
+		fvalue = g_strtod (new_text, NULL);
 		g_value_init (&value, G_TYPE_FLOAT);
 		g_value_set_float (&value, fvalue);
 
@@ -2126,6 +2195,25 @@ resource_view_email_data_func (GtkTreeViewColumn    *tree_column,
 	
 	g_object_set (cell, "text", email, NULL);
 	g_free (email);
+}
+
+static void    
+resource_view_cost_data_func (GtkTreeViewColumn    *tree_column,
+			      GtkCellRenderer      *cell,
+			      GtkTreeModel         *tree_model,
+			      GtkTreeIter          *iter,
+			      gpointer              data)
+{
+	MrpResource *resource;
+	gfloat       cost;
+	gchar       *cost_text;
+	
+	gtk_tree_model_get (tree_model, iter, COL_RESOURCE, &resource, -1);
+
+	g_object_get (resource, "cost", &cost, NULL);
+	cost_text = planner_format_float (cost, 2, FALSE);
+	
+	g_object_set (cell, "text", cost_text, NULL);
 }
 
 static void    

@@ -1835,7 +1835,7 @@ task_tree_duration_edited (GtkCellRendererText *cell,
 		mrp_project_get_calendar (tree->priv->project),
 		mrp_day_get_work ());
 		
-	flt = g_ascii_strtod (new_text, &ptr);
+	flt = g_strtod (new_text, &ptr);
 	if (ptr != NULL) {
 		duration = flt * seconds_per_day;
 		gtk_tree_model_get (model, &iter, 
@@ -2009,7 +2009,7 @@ task_view_custom_property_set_value (MrpProperty         *property,
 
 		break;
 	case MRP_PROPERTY_TYPE_FLOAT:
-		fvalue = g_ascii_strtod (new_text, NULL);
+		fvalue = g_strtod (new_text, NULL);
 		g_value_init (&value, G_TYPE_FLOAT);
 		g_value_set_float (&value, fvalue);
 
@@ -2032,7 +2032,7 @@ task_view_custom_property_set_value (MrpProperty         *property,
 				NULL);*/
 		break;
 	case MRP_PROPERTY_TYPE_COST:
-		fvalue = g_ascii_strtod (new_text, NULL);
+		fvalue = g_strtod (new_text, NULL);
 		g_value_init (&value, G_TYPE_FLOAT);
 		g_value_set_float (&value, fvalue);
 

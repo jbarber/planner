@@ -98,6 +98,7 @@ MrpAssignment   *mrp_task_get_assignment            (MrpTask          *task,
 						     MrpResource      *resource);
 void             mrp_task_reset_constraint          (MrpTask          *task);
 gfloat           mrp_task_get_cost                  (MrpTask          *task);
+void             mrp_task_invalidate_cost           (MrpTask          *task);
 GList           *mrp_task_get_assigned_resources    (MrpTask          *task);
 gint             mrp_task_compare                   (gconstpointer     a,
 						     gconstpointer     b);
