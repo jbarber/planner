@@ -132,7 +132,8 @@ static GtkActionEntry entries[] = {
 };
 
 static GtkToggleActionEntry toggle_entries[] = {
-	{ "HighlightCriticalTasks", NULL, "_HighlightCriticalPath", NULL, NULL, G_CALLBACK (task_view_highlight_critical_cb), FALSE },
+	{ "HighlightCriticalTasks", NULL, "_Highlight Critical Path", NULL, NULL,
+	  G_CALLBACK (task_view_highlight_critical_cb), FALSE },
 };
 
 static guint n_entries        = G_N_ELEMENTS (entries);
@@ -274,13 +275,14 @@ get_widget (PlannerView *view)
 						     * project management term. You might want to leave it
 						     * untranslated unless there is a localized term for it.
 						     */
-						    COL_WBS,    _("WBS"),
-						    COL_NAME,   _("Name"), 
-						    COL_START,  _("Start"), 
+						    COL_WBS, _("WBS"),
+						    COL_NAME, _("Name"), 
+						    COL_START, _("Start"), 
 						    COL_FINISH, _("Finish"),
-						    COL_WORK,   _("Work"),
-						    COL_SLACK,  _("Slack"),
-						    COL_COST,   _("Cost"),
+						    COL_WORK, _("Work"),
+						    COL_DURATION, _("Duration"),
+						    COL_SLACK, _("Slack"),
+						    COL_COST, _("Cost"),
 						    COL_ASSIGNED_TO, _("Assigned to"),
 						    -1);
 

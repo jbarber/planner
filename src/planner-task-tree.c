@@ -1445,6 +1445,8 @@ task_tree_duration_data_func (GtkTreeViewColumn *tree_column,
 	gint                 weight;
 	gboolean             editable;
 	MrpTask             *task;
+	MrpTaskType          type;
+	MrpTaskSched         sched;
 
 	task_tree = PLANNER_TASK_TREE (data);
 	priv = task_tree->priv;
@@ -1457,7 +1459,10 @@ task_tree_duration_data_func (GtkTreeViewColumn *tree_column,
 			    COL_TASK, &task,
 			    -1);
 
-	if (mrp_task_get_task_type (task) == MRP_TASK_TYPE_MILESTONE) {
+	type = mrp_task_get_task_type (task);
+	sched = mrp_task_get_sched (task);
+	
+	if (type == MRP_TASK_TYPE_MILESTONE) {
 		editable = FALSE;
 		str = g_strdup (_("N/A"));
 	} else {
@@ -1467,6 +1472,10 @@ task_tree_duration_data_func (GtkTreeViewColumn *tree_column,
 			calendar, mrp_day_get_work ()) / (60*60);
 		
 		str = planner_format_duration (duration, hours_per_day);
+		
+		if (sched != MRP_TASK_SCHED_FIXED_DURATION) {
+			editable = FALSE;
+		}
 	}
 	
 	g_object_set (cell, 
