@@ -8,10 +8,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: planner\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-02-21 04:23-0500\n"
-"PO-Revision-Date: 2005-02-21 19:47-0400\n"
+"POT-Creation-Date: 2005-02-26 12:21-0500\n"
+"PO-Revision-Date: 2005-02-26 19:47-0400\n"
 "Last-Translator: Adam Weinberger <adamw@gnome.org>\n"
-"Language-Team: English/Canada <adamw@FreeBSD.org>\n"
+"Language-Team: English/Canada <adamw@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -225,6 +225,10 @@ msgid "Save to HTML File"
 msgstr "Save to HTML File"
 
 #: data/glade/html-output.glade.h:6
+msgid "View the result in browser"
+msgstr "View the result in browser"
+
+#: data/glade/html-output.glade.h:7
 msgid "Web location:"
 msgstr "Web location:"
 
@@ -699,11 +703,11 @@ msgid ""
 msgstr ""
 "Could not add a predecessor relation, because the tasks are already related."
 
-#: libplanner/mrp-task-manager.c:2139
+#: libplanner/mrp-task-manager.c:2152
 msgid "Cannot add a predecessor, because it would result in a loop."
 msgstr "Cannot add a predecessor, because it would result in a loop."
 
-#: libplanner/mrp-task-manager.c:2185
+#: libplanner/mrp-task-manager.c:2198
 msgid "Cannot move the task, because it would result in a loop."
 msgstr "Cannot move the task, because it would result in a loop."
 
@@ -853,8 +857,8 @@ msgstr "Import resources from Evolution Data Server"
 
 #: src/planner-eds-plugin.c:393 src/planner-gantt-print.c:190
 #: src/planner-group-dialog.c:819 src/planner-property-dialog.c:481
-#: src/planner-resource-view.c:1156 src/planner-task-dialog.c:2532
-#: src/planner-task-dialog.c:2606 src/planner-task-view.c:279
+#: src/planner-resource-view.c:1156 src/planner-task-dialog.c:2533
+#: src/planner-task-dialog.c:2607 src/planner-task-view.c:279
 #: src/planner-ttable-print.c:108
 msgid "Name"
 msgstr "Name"
@@ -1005,7 +1009,7 @@ msgid "Work"
 msgstr "Work"
 
 #: src/planner-gantt-print.c:542 src/planner-gantt-row.c:692
-#: src/planner-html-plugin.c:130 src/planner-task-tree.c:1564
+#: src/planner-html-plugin.c:140 src/planner-task-tree.c:1564
 #: src/planner-window.c:1864
 msgid "Unnamed"
 msgstr "Unnamed"
@@ -1212,15 +1216,15 @@ msgstr "Manager phone"
 msgid "Manager email"
 msgstr "Manager email"
 
-#: src/planner-html-plugin.c:69
+#: src/planner-html-plugin.c:75
 msgid "HTML"
 msgstr "HTML"
 
-#: src/planner-html-plugin.c:70
+#: src/planner-html-plugin.c:76
 msgid "Export project to HTML"
 msgstr "Export project to HTML"
 
-#: src/planner-html-plugin.c:178
+#: src/planner-html-plugin.c:226
 #, c-format
 msgid ""
 "\"%s\" is a directory.\n"
@@ -1229,7 +1233,7 @@ msgstr ""
 "\"%s\" is a directory.\n"
 "Enter a filename and try again."
 
-#: src/planner-html-plugin.c:188 src/planner-window.c:1572
+#: src/planner-html-plugin.c:236 src/planner-window.c:1572
 #: src/planner-xml-planner-plugin.c:125
 #, c-format
 msgid "File \"%s\" exists, do you want to overwrite it?"
@@ -1284,7 +1288,7 @@ msgstr "Remove phase"
 msgid "Could not open plugin file '%s'\n"
 msgstr "Could not open plugin file '%s'\n"
 
-#: src/planner-predecessor-model.c:191 src/planner-task-dialog.c:2172
+#: src/planner-predecessor-model.c:191 src/planner-task-dialog.c:2173
 msgid "FS"
 msgstr "FS"
 
@@ -1293,7 +1297,7 @@ msgid "FF"
 msgstr "FF"
 
 #. list = g_list_append (list, g_strdup (_("FF")));
-#: src/planner-predecessor-model.c:197 src/planner-task-dialog.c:2174
+#: src/planner-predecessor-model.c:197 src/planner-task-dialog.c:2175
 msgid "SS"
 msgstr "SS"
 
@@ -1383,7 +1387,7 @@ msgid "Label"
 msgstr "Label"
 
 #: src/planner-property-dialog.c:510 src/planner-resource-view.c:1200
-#: src/planner-task-dialog.c:2638
+#: src/planner-task-dialog.c:2639
 msgid "Type"
 msgstr "Type"
 
@@ -1433,7 +1437,7 @@ msgstr "Edit resource property"
 
 #. i18n: time stamp format for notes in task dialog, see strftime(3) for
 #. * a detailed description.
-#: src/planner-resource-dialog.c:1403 src/planner-task-dialog.c:1804
+#: src/planner-resource-dialog.c:1403 src/planner-task-dialog.c:1805
 msgid "%a %d %b %Y, %H:%M\n"
 msgstr "%a %d %b %Y, %H:%M\n"
 
@@ -1706,36 +1710,36 @@ msgstr "No earlier than %s"
 msgid "On fixed date %s"
 msgstr "On fixed date %s"
 
-#: src/planner-task-dialog.c:1876
+#: src/planner-task-dialog.c:1877
 msgid "Finish to start (FS)"
 msgstr "Finish to start (FS)"
 
 #. _("Finish to finish (FF)"), MRP_RELATION_FF,
-#: src/planner-task-dialog.c:1878
+#: src/planner-task-dialog.c:1879
 msgid "Start to start (SS)"
 msgstr "Start to start (SS)"
 
-#: src/planner-task-dialog.c:1934
+#: src/planner-task-dialog.c:1935
 msgid "Can't add new predecessor. No task selected!"
 msgstr "Can't add new predecessor. No task selected!"
 
-#: src/planner-task-dialog.c:2379
+#: src/planner-task-dialog.c:2380
 msgid "Change..."
 msgstr "Change..."
 
-#: src/planner-task-dialog.c:2553
+#: src/planner-task-dialog.c:2554
 msgid "Assigned"
 msgstr "Assigned"
 
-#: src/planner-task-dialog.c:2570
+#: src/planner-task-dialog.c:2571
 msgid "Units"
 msgstr "Units"
 
-#: src/planner-task-dialog.c:2660
+#: src/planner-task-dialog.c:2661
 msgid "Lag"
 msgstr "Lag"
 
-#: src/planner-task-dialog.c:2834 src/planner-task-dialog.c:2836
+#: src/planner-task-dialog.c:2835 src/planner-task-dialog.c:2837
 msgid "Edit task properties"
 msgstr "Edit task properties"
 
