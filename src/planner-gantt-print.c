@@ -151,7 +151,8 @@ typedef enum {
 
 	RESOURCES,
 
-	SHADE
+	SHADE,
+	TIMELINE
 } ElementType;
 
 typedef struct {
@@ -590,6 +591,7 @@ planner_gantt_print_do (PlannerGanttPrintData *data)
 	gdouble      y1, y2;
 	gint         num_tasks;
 	mrptime      t1, t2, t0;
+	mrptime      current_time;
 	mrptime      start, finish;
 	mrptime      complete;
 	gboolean     is_summary;
@@ -613,6 +615,8 @@ planner_gantt_print_do (PlannerGanttPrintData *data)
 	calendar = mrp_project_get_calendar (data->project);
 	
 	num_tasks = g_list_length (data->tasks);
+	
+	current_time = mrp_time_current_time();
 
 	/* Go through all tasks in a first pass and layout them so that we know
 	 * where to draw relation arrows.
@@ -1059,6 +1063,18 @@ planner_gantt_print_do (PlannerGanttPrintData *data)
 				}
 			}
 
+			/* Print the current time. */
+			if (current_time >= t0 && current_time <= t2) {
+				element = g_new0 (Element, 1);
+				element->type = TIMELINE;
+				element->y1 = data->header_height + data->row_height / 4;
+				element->y2 = data->job->height;
+				element->x1 = x0 + (current_time - t0) / data->f; 
+				element->x2 = element->x1;
+				page = GET_PAGE (data, row, col);
+				page->background_elements = g_list_prepend (page->background_elements, element);
+			}
+			
 			t0 = t2;
 		}
 	}
@@ -1103,9 +1119,26 @@ planner_gantt_print_do (PlannerGanttPrintData *data)
 
 			page = GET_PAGE (data, row, col);
 			for (l = page->background_elements; l; l = l->next) {
+				gdouble dashes[] = { 4, 4 };
+				
 				element = l->data;
-
+				
 				switch (element->type) {
+				case TIMELINE:
+                                        gnome_print_newpath (data->job->pc);
+					gnome_print_setrgbcolor (data->job->pc, 150/255.0, 150/255.0, 249/255.0);
+                                        gnome_print_setlinewidth (data->job->pc, 1);
+					
+					gnome_print_setdash (data->job->pc, 2, dashes, 0);
+
+					gnome_print_setlinewidth (data->job->pc, 1);
+                                        planner_print_job_moveto (data->job, element->x1, element->y1);
+                                        planner_print_job_lineto (data->job,element->x1, element->y2);
+                                        gnome_print_stroke (data->job->pc);
+
+					gnome_print_setdash (data->job->pc, 0, NULL, 0);
+
+                                        break;
 				case SHADE:
 					gnome_print_newpath (data->job->pc);
 					planner_print_job_moveto (data->job, element->x1, element->y1);
@@ -1129,7 +1162,7 @@ planner_gantt_print_do (PlannerGanttPrintData *data)
 			}
 
 			gnome_print_setrgbcolor (data->job->pc, 0, 0, 0);
-
+				
 			if (row == 0) {
 				print_time_header (data, x1, x2, t1, t2);
 				if (col == 0) {
