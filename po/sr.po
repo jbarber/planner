@@ -1,5 +1,5 @@
 # Serbian translation of planner
-# Courtesy of Prevod.org team (http://www.prevod.org/) -- 2003.
+# Courtesy of Prevod.org team (http://prevod.org/) -- 2003, 2004.
 #
 # This file is distributed under the same license as the planner package.
 #
@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Planner\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-01-18 13:59+0100\n"
-"PO-Revision-Date: 2004-01-18 14:02+0100\n"
+"POT-Creation-Date: 2004-02-12 05:40+0100\n"
+"PO-Revision-Date: 2004-02-12 05:42+0100\n"
 "Last-Translator: Бранко Ивановић <popeye@one.ekof.bg.ac.yu>\n"
 "Language-Team: Serbian (sr) <serbiangnome-lista@bogus.example.com>\n"
 "MIME-Version: 1.0\n"
@@ -362,7 +362,7 @@ msgstr "_Завршено:"
 msgid "Predecessors"
 msgstr "Претходници"
 
-#: data/glade/task-dialog.glade.h:9 src/planner-resource-view.c:344
+#: data/glade/task-dialog.glade.h:9 src/planner-resource-view.c:388
 msgid "Resources"
 msgstr "Извори"
 
@@ -702,15 +702,15 @@ msgstr "_Пројекат"
 msgid "_Quit"
 msgstr "_Изађи"
 
-#: data/ui/main-window.ui.h:44 src/planner-cmd-manager.c:240
+#: data/ui/main-window.ui.h:44
 msgid "_Redo"
 msgstr "_Понови"
 
-#: data/ui/main-window.ui.h:45 src/planner-window.c:1259
+#: data/ui/main-window.ui.h:45 src/planner-window.c:1267
 msgid "_Save"
 msgstr "_Сачувај"
 
-#: data/ui/main-window.ui.h:46 src/planner-cmd-manager.c:228
+#: data/ui/main-window.ui.h:46
 msgid "_Undo"
 msgstr "Опо_зови"
 
@@ -798,29 +798,29 @@ msgstr "Не могу да сачиним XML стабло"
 msgid "Could not write XML file"
 msgstr "Не могу да упишем XML датотеку"
 
-#: libplanner/mrp-project.c:442 src/planner-group-dialog.c:411
+#: libplanner/mrp-project.c:440 src/planner-group-dialog.c:833
 msgid "Default"
 msgstr "Подразумевано"
 
-#: libplanner/mrp-project.c:750
+#: libplanner/mrp-project.c:748
 #, c-format
 msgid "Couldn't find a suitable file module for loading '%s'"
 msgstr "Нисам могао да нађем прикладан датотечни модул да би учитао '%s'"
 
-#: libplanner/mrp-project.c:771 libplanner/mrp-project.c:1035
+#: libplanner/mrp-project.c:769 libplanner/mrp-project.c:1033
 msgid "No support for SQL storage built into this version of Planner."
 msgstr "Нема подршке за SQL смештај у овом издању Планера."
 
-#: libplanner/mrp-project.c:808
+#: libplanner/mrp-project.c:806
 msgid "Invalid URI."
 msgstr "Неисправна адреса."
 
-#: libplanner/mrp-project.c:929
+#: libplanner/mrp-project.c:927
 #, c-format
 msgid "Unable to find file writer identified by '%s'"
 msgstr "Не може да пронађе писца датотеке означеног помоћу „%s“"
 
-#: libplanner/mrp-project.c:992
+#: libplanner/mrp-project.c:990
 msgid "Couldn't find a suitable file module for loading project"
 msgstr "Нисам могао да нађем прикладан датотечни модул да би учитао пројекат"
 
@@ -964,13 +964,21 @@ msgstr "У реду"
 
 #: src/planner-cmd-manager.c:226
 #, c-format
-msgid "_Undo '%s'"
-msgstr "Опо_зови „%s“"
+msgid "Undo '%s'"
+msgstr "Опозови „%s“"
+
+#: src/planner-cmd-manager.c:228
+msgid "Undo"
+msgstr "Опозови"
 
 #: src/planner-cmd-manager.c:238
 #, c-format
-msgid "_Redo '%s'"
-msgstr "_Понови „%s“"
+msgid "Redo '%s'"
+msgstr "Понови „%s“"
+
+#: src/planner-cmd-manager.c:240
+msgid "Redo"
+msgstr "Понови"
 
 #: src/planner-default-week-dialog.c:40
 msgid "Monday"
@@ -1055,22 +1063,22 @@ msgstr "%Y %b %d"
 msgid "Project start"
 msgstr "Почетак пројекта"
 
-#: src/planner-gantt-print.c:190 src/planner-group-dialog.c:387
-#: src/planner-property-dialog.c:378 src/planner-resource-view.c:976
+#: src/planner-gantt-print.c:190 src/planner-group-dialog.c:809
+#: src/planner-property-dialog.c:378 src/planner-resource-view.c:1147
 #: src/planner-task-dialog.c:1311 src/planner-task-dialog.c:1397
 #: src/planner-task-view.c:261
 msgid "Name"
 msgstr "Име"
 
 #: src/planner-gantt-print.c:198 src/planner-resource-dialog.c:1101
-#: src/planner-resource-view.c:639 src/planner-resource-view.c:655
-#: src/planner-resource-view.c:1197 src/planner-task-view.c:264
+#: src/planner-resource-view.c:686 src/planner-resource-view.c:702
+#: src/planner-resource-view.c:1516 src/planner-task-view.c:264
 msgid "Work"
 msgstr "Рад"
 
 #: src/planner-gantt-print.c:513 src/planner-gantt-print.c:515
 #: src/planner-gantt-row.c:656 src/planner-gantt-row.c:658
-#: src/planner-window.c:1636
+#: src/planner-window.c:1644
 msgid "Unnamed"
 msgstr "Неименовани"
 
@@ -1113,17 +1121,33 @@ msgstr ""
 "\n"
 "Рад"
 
-#: src/planner-group-dialog.c:393
+#: src/planner-group-dialog.c:304
+msgid "Insert group"
+msgstr "Уметни групу"
+
+#: src/planner-group-dialog.c:429
+msgid "Remove group"
+msgstr "Уклони групу"
+
+#: src/planner-group-dialog.c:521
+msgid "Default group"
+msgstr "Подразумевана група"
+
+#: src/planner-group-dialog.c:637
+msgid "Edit group property"
+msgstr "Измени својство групе"
+
+#: src/planner-group-dialog.c:815
 msgid "Manager name"
-msgstr "Име менаџера"
+msgstr "Име управника"
 
-#: src/planner-group-dialog.c:399
+#: src/planner-group-dialog.c:821
 msgid "Manager phone"
-msgstr "Телефон менаџера"
+msgstr "Телефон управника"
 
-#: src/planner-group-dialog.c:405
+#: src/planner-group-dialog.c:827
 msgid "Manager email"
-msgstr "Е-пошта менаџера"
+msgstr "Е-пошта управника"
 
 #: src/planner-html-plugin.c:138
 #, c-format
@@ -1134,7 +1158,7 @@ msgstr ""
 "„%s“ је директоријум.\n"
 "Унесите име датотеке и покуштајте поново."
 
-#: src/planner-html-plugin.c:148 src/planner-window.c:1404
+#: src/planner-html-plugin.c:148 src/planner-window.c:1412
 #, c-format
 msgid "File \"%s\" exists, do you want to overwrite it?"
 msgstr "Датотека „%s“ постоји, хоћете ли да је препишете?"
@@ -1233,14 +1257,14 @@ msgstr "Не могу да направим прозорче за својств
 msgid "Label"
 msgstr "Налепница"
 
-#: src/planner-property-dialog.c:411 src/planner-resource-view.c:997
+#: src/planner-property-dialog.c:411 src/planner-resource-view.c:1168
 #: src/planner-task-dialog.c:1429
 msgid "Type"
 msgstr "Тип"
 
 #. Put "no group" at the top.
 #: src/planner-resource-dialog.c:248 src/planner-resource-input-dialog.c:96
-#: src/planner-resource-view.c:1385
+#: src/planner-resource-view.c:1727
 msgid "(None)"
 msgstr "(Ниједан)"
 
@@ -1263,38 +1287,54 @@ msgstr "Ниједан (користи подразумевано за прој�
 msgid "Edit resource properties"
 msgstr "Измени својства ресурса"
 
-#: src/planner-resource-dialog.c:1102 src/planner-resource-view.c:642
-#: src/planner-resource-view.c:656 src/planner-resource-view.c:1198
+#: src/planner-resource-dialog.c:1102 src/planner-resource-view.c:689
+#: src/planner-resource-view.c:703 src/planner-resource-view.c:1517
 msgid "Material"
 msgstr "Материјал"
 
-#: src/planner-resource-view.c:250
+#: src/planner-resource-view.c:251
 msgid "/_Insert resource"
 msgstr "/_Унеси извор"
 
-#: src/planner-resource-view.c:251
+#: src/planner-resource-view.c:252
 msgid "/_Remove resource"
 msgstr "/_Уклони извор"
 
-#: src/planner-resource-view.c:252
+#: src/planner-resource-view.c:253
 msgid "/_Edit resource..."
 msgstr "/_Измени извор..."
 
-#: src/planner-resource-view.c:352
+#: src/planner-resource-view.c:396
 msgid "_Resources"
 msgstr "_Извори"
 
-#: src/planner-resource-view.c:859
+#: src/planner-resource-view.c:789
+msgid "Insert resource"
+msgstr "Унеси извор"
+
+#: src/planner-resource-view.c:929
+msgid "Remove resource"
+msgstr "Уклони извор"
+
+#: src/planner-resource-view.c:1030
 msgid "Edit custom resource properties"
 msgstr "Измени произвољна својства извора"
 
-#: src/planner-resource-view.c:1021
+#: src/planner-resource-view.c:1192
 msgid "Group"
 msgstr "Група"
 
-#: src/planner-resource-view.c:1050
+#: src/planner-resource-view.c:1221
 msgid "Email"
 msgstr "Е-пошта"
+
+#: src/planner-resource-view.c:1286
+msgid "Edit resource property"
+msgstr "Измени својство извора"
+
+#: src/planner-resource-view.c:1348
+msgid "Edit resource custom property"
+msgstr "Измени произвољно својство извора"
 
 #. i18n: Short "Week", preferably 2 letters.
 #: src/planner-scale-utils.c:325
@@ -1541,43 +1581,43 @@ msgstr "Програм за вођење пројеката под окруже�
 msgid "The Planner Homepage"
 msgstr "Домаћа страница Планера"
 
-#: src/planner-window.c:1215
+#: src/planner-window.c:1223
 msgid "If you don't save, changes made the last minute will be discarded."
 msgstr "Ако не сачувате, промене начињене у задњем минуту ће бити изгубљене."
 
-#: src/planner-window.c:1220
+#: src/planner-window.c:1228
 #, c-format
 msgid "If you don't save, changes made the last %d minutes will be discarded."
 msgstr "Ако не сачувате, изгубићете промене начињене задњих %d минута."
 
-#: src/planner-window.c:1225
+#: src/planner-window.c:1233
 msgid "If you don't save, changes made the last hour will be discarded."
 msgstr ""
 "Ако не сачувати, промене начињене задњих сат времена ће бити изгубљене."
 
-#: src/planner-window.c:1230
+#: src/planner-window.c:1238
 #, c-format
 msgid "If you don't save, changes made the last %d hours will be discarded."
 msgstr "Ако не сачувате, изгубићете промене начињене задњих %d сати."
 
-#: src/planner-window.c:1237
+#: src/planner-window.c:1245
 #, c-format
 msgid "Save changes to document '%s' before closing?"
 msgstr "Сачувати промене начињене у документу „%s“ пре затварања?"
 
-#: src/planner-window.c:1255
+#: src/planner-window.c:1263
 msgid "C_lose without saving"
 msgstr "Затвори без чувања"
 
-#: src/planner-window.c:1257
+#: src/planner-window.c:1265
 msgid "_Cancel"
 msgstr "От_кажи"
 
-#: src/planner-window.c:1368
+#: src/planner-window.c:1376
 msgid "Save a file"
 msgstr "Сачувај датотеку"
 
-#: src/planner-window.c:1599
+#: src/planner-window.c:1607
 msgid ""
 "You have opened a file that was saved with an old version of Planner.\n"
 "\n"
@@ -1659,9 +1699,6 @@ msgstr ""
 
 #~ msgid "Group:"
 #~ msgstr "Група:"
-
-#~ msgid "Insert resource"
-#~ msgstr "Унеси извор"
 
 #~ msgid "Name:"
 #~ msgstr "Име:"
