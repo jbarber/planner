@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mrproject VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-06-20 15:40+0200\n"
-"PO-Revision-Date: 2004-06-20 18:44+0200\n"
+"POT-Creation-Date: 2004-06-21 21:26+0200\n"
+"PO-Revision-Date: 2004-06-22 15:37+0200\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -401,7 +401,7 @@ msgid "_Work:"
 msgstr "_Práce:"
 
 #. day unit variant accepted in input
-#: data/glade/task-dialog.glade.h:17 src/planner-task-tree.c:3319
+#: data/glade/task-dialog.glade.h:17 src/planner-task-tree.c:3317
 msgid "days"
 msgstr "dní"
 
@@ -1167,7 +1167,7 @@ msgid "Project start"
 msgstr "Začátek projektu"
 
 #: src/planner-gantt-print.c:189 src/planner-group-dialog.c:820
-#: src/planner-property-dialog.c:509 src/planner-resource-view.c:1153
+#: src/planner-property-dialog.c:478 src/planner-resource-view.c:1153
 #: src/planner-task-dialog.c:2563 src/planner-task-dialog.c:2652
 #: src/planner-task-view.c:274 src/planner-ttable-print.c:97
 msgid "Name"
@@ -1359,15 +1359,15 @@ msgstr "Upravit fázi projektu"
 msgid "Property"
 msgstr "Vlastnost"
 
-#: src/planner-project-properties.c:839 src/planner-property-dialog.c:562
+#: src/planner-project-properties.c:839
 msgid "Value"
 msgstr "Hodnota"
 
-#: src/planner-project-properties.c:1248 src/planner-property-dialog.c:352
+#: src/planner-project-properties.c:1248 src/planner-property-dialog.c:326
 msgid "The name of the custom property needs to start with a letter."
 msgstr "Název vlastní vlastnosti musí začínat písmenem."
 
-#: src/planner-project-properties.c:1319 src/planner-property-dialog.c:425
+#: src/planner-project-properties.c:1319 src/planner-property-dialog.c:396
 #, c-format
 msgid "Do you really want to remove the property '%s' from the project?"
 msgstr "Opravdu chcete z projektu odstranit vlastnost '%s'?"
@@ -1388,19 +1388,26 @@ msgstr "Odstranit vlastnost projektu"
 msgid "Edit project property value"
 msgstr "Upravit hodnotu vlastnosti projektu"
 
-#: src/planner-property-dialog.c:528
+#: src/planner-property-dialog.c:495
 msgid "Label"
 msgstr "Jmenovka"
 
-#: src/planner-property-dialog.c:542 src/planner-resource-view.c:1195
+#: src/planner-property-dialog.c:507 src/planner-resource-view.c:1195
 #: src/planner-task-dialog.c:2684
 msgid "Type"
 msgstr "Typ"
 
-#: src/planner-property-dialog.c:776 src/planner-property-dialog.c:879
-#: src/planner-property-dialog.c:961
+#: src/planner-property-dialog.c:664
 msgid "Add property"
 msgstr "Přidat vlastnost"
+
+#: src/planner-property-dialog.c:751
+msgid "Remove property"
+msgstr "Odstranit vlastnost"
+
+#: src/planner-property-dialog.c:841
+msgid "Edit property label"
+msgstr "Upravit jmenovku vlastnosti"
 
 #: src/planner-python-plugin.c:164 src/planner-window.c:639
 msgid "Open a file"
@@ -1696,7 +1703,7 @@ msgstr "Přesunout úlohu"
 msgid "Edit task custom property"
 msgstr "Upravit vlastní vlastnost úlohy"
 
-#: src/planner-task-tree.c:2680
+#: src/planner-task-tree.c:2678
 #, c-format
 msgid ""
 "You are about to open an edit dialog each for %i tasks. Are you sure that "
@@ -1705,72 +1712,72 @@ msgstr ""
 "Hodláte otevřít dialog úprav pro každou z %i úloh. Jste si jisti, že to "
 "chcete udělat?"
 
-#: src/planner-task-tree.c:3311
+#: src/planner-task-tree.c:3309
 msgid "mon"
 msgstr "měs"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:3312
+#: src/planner-task-tree.c:3310
 msgid "month"
 msgstr "měsíc"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:3313
+#: src/planner-task-tree.c:3311
 msgid "months"
 msgstr "měsíců"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:3314
+#: src/planner-task-tree.c:3312
 msgid "w"
 msgstr "t"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:3315
+#: src/planner-task-tree.c:3313
 msgid "week"
 msgstr "týden"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:3316
+#: src/planner-task-tree.c:3314
 msgid "weeks"
 msgstr "týdnů"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:3317
+#: src/planner-task-tree.c:3315
 msgid "d"
 msgstr "d"
 
 #. day unit variant accepted in input
-#: src/planner-task-tree.c:3318
+#: src/planner-task-tree.c:3316
 msgid "day"
 msgstr "den"
 
 #. day unit variant accepted in input
-#: src/planner-task-tree.c:3320
+#: src/planner-task-tree.c:3318
 msgid "h"
 msgstr "h"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:3321
+#: src/planner-task-tree.c:3319
 msgid "hour"
 msgstr "hodina"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:3322
+#: src/planner-task-tree.c:3320
 msgid "hours"
 msgstr "hodin"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:3323
+#: src/planner-task-tree.c:3321
 msgid "min"
 msgstr "min"
 
 #. minute unit variant accepted in input
-#: src/planner-task-tree.c:3324
+#: src/planner-task-tree.c:3322
 msgid "minute"
 msgstr "minuta"
 
 #. minute unit variant accepted in input
-#: src/planner-task-tree.c:3325
+#: src/planner-task-tree.c:3323
 msgid "minutes"
 msgstr "minut"
 
