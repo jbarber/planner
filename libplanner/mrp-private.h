@@ -41,6 +41,8 @@ void            imrp_task_add_assignment           (MrpTask           *task,
 void            imrp_resource_add_assignment       (MrpResource       *resource,
 						    MrpAssignment     *assignment);
 
+guint           imrp_task_get_unique_id            (MrpProject        *project);
+
 /* Task functions. */
 gboolean        mrp_task_manager_check_predecessor (MrpTaskManager    *manager,
 						    MrpTask           *task,

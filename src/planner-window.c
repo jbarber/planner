@@ -769,34 +769,43 @@ window_print_cb (BonoboUIComponent *component,
 {
 	PlannerWindow     *window;
 	PlannerWindowPriv *priv;
-	GnomePrintJob    *gpj;
-	GtkWidget        *dialog;
-	gint              response;
-	gboolean          summary;
-	GList            *views, *l;
-	PlannerView           *view;
-	PlannerPrintJob       *job;
-	gint              n_pages;
+	GnomePrintJob     *gpj;
+	GnomePrintConfig  *config;
+	GtkWidget         *dialog;
+	gint               response;
+	gboolean           summary;
+	GList             *views, *l;
+	PlannerView       *view;
+	PlannerPrintJob   *job;
+	gint               n_pages;
 	
 	g_return_if_fail (PLANNER_IS_MAIN_WINDOW (data));
 
 	window = PLANNER_WINDOW (data);
 	priv = window->priv;
 
-	gpj = gnome_print_job_new (NULL);
-	
+	/* Load printer settings */
+	config = planner_print_dialog_load_config ();
+	gpj = gnome_print_job_new (config);
+	gnome_print_config_unref (config);
+
 	dialog = planner_print_dialog_new (data, gpj, priv->views);
 
 	response = gtk_dialog_run (GTK_DIALOG (dialog));
 
 	if (response == GTK_RESPONSE_CANCEL) {
 		gtk_widget_destroy (dialog);
+		g_object_unref (gpj);
 		return;
 	}
 	else if (response == GTK_RESPONSE_DELETE_EVENT) {
+		g_object_unref (gpj);
 		return;
 	}
 	
+	/* Save printer settings */
+	planner_print_dialog_save_config (config);
+
 	views = planner_print_dialog_get_print_selection (GTK_DIALOG (dialog), &summary);
 
 	if (summary) {
@@ -820,7 +829,6 @@ window_print_cb (BonoboUIComponent *component,
 		view = l->data;
 		
 		planner_view_print (view);
-
 		planner_view_print_cleanup (view);
 	}
 
@@ -841,6 +849,7 @@ window_print_cb (BonoboUIComponent *component,
 	g_list_free (views);
 
 	g_object_unref (job);
+	g_object_unref (config);
 }
 
 static void

@@ -1,5 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
+ * Copyright (C) 2003      Imendio HB
  * Copyright (C) 2001-2003 CodeFactory AB
  * Copyright (C) 2001-2003 Richard Hult <richard@imendio.com>
  * Copyright (C) 2001-2002 Mikael Hallendal <micke@imendio.com>
@@ -31,7 +32,7 @@
 
 struct _MrpObjectPriv {
 	MrpProject *project;
-
+	guint        id;
 	GHashTable *property_hash;
 };
 
@@ -146,9 +147,9 @@ object_init (MrpObject *object)
         MrpObjectPriv *priv;
         
         priv = g_new0 (MrpObjectPriv, 1);
-        priv->property_hash = g_hash_table_new (NULL, NULL);
-	
         object->priv = priv;
+
+        priv->property_hash = g_hash_table_new (NULL, NULL);
 }
 
 static void
@@ -601,4 +602,33 @@ mrp_object_get_properties (MrpObject *object)
 	
 	return mrp_project_get_properties_from_type (priv->project, 
 						     G_OBJECT_TYPE (object));
+}
+
+guint
+mrp_object_get_id (MrpObject *object)
+{
+	MrpObjectPriv *priv;
+	
+	g_return_val_if_fail (MRP_IS_OBJECT (object), 0);
+	
+	priv = object->priv;
+
+	return priv->id;
+}
+
+gboolean
+mrp_object_set_id (MrpObject *object,
+		   guint      id)
+{
+	MrpObjectPriv *priv;
+
+	g_return_val_if_fail (MRP_IS_OBJECT (object), FALSE);
+
+	priv = object->priv;
+	
+	/* FIXME: check if it's available. */
+
+	priv->id = id;
+
+	return TRUE;
 }

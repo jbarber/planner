@@ -1,3 +1,17 @@
+2003-12-14  Richard Hult  <richard@imendio.com>
+
+	* libplanner/mrp-object.[ch]
+	* libplanner/mrp-private.h:
+	* libplanner/mrp-project.c: Work in prograss.
+
+2003-12-14  Cédric Delfosse <cdelfosse@free.fr>
+
+	* src/planner-print-dialog.c:
+	(load_planner_print_config_from_file),
+	(save_planner_print_config_to_file):
+	* src/planner-window.c: (window_print_cb): Remember print
+	settings.
+
 2003-12-13  Richard Hult  <richard@imendio.com>
 
 	* .cvsignore:

@@ -78,4 +78,8 @@ void      mrp_object_get_valist         (MrpObject      *object,
 
 GList    *mrp_object_get_properties     (MrpObject      *object);
 
+guint     mrp_object_get_id             (MrpObject      *object);
+gboolean  mrp_object_set_id             (MrpObject      *object,
+					 guint           id);
+
 #endif /* __MRP_OBJECT_H__ */

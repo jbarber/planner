@@ -20,8 +20,13 @@
  * Boston, MA 02111-1307, USA.
  */
 
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <unistd.h>
 #include <config.h>
 #include <string.h>
+#include <libgnome/libgnome.h>
 #include <libgnome/gnome-i18n.h>
 #include <gtk/gtk.h>
 #include <libgnomeprint/gnome-print.h>
@@ -32,16 +37,73 @@
 #include "planner-view.h"
 #include "planner-print-dialog.h"
 
+#define PLANNER_PRINT_CONFIG_FILE "planner-print-config"
+
 static GtkWidget *   print_dialog_create_page  (GtkWidget *dialog,
 						GList     *views);
 
 static GtkNotebook * print_dialog_get_notebook (GtkWidget *dialog);
 
 
+/*
+ * Load printer configuration from a file.
+ * Return a GnomePrintConfig object containing the configuration.
+ */
+GnomePrintConfig *
+planner_print_dialog_load_config (void)
+{
+	gchar            *filename;
+	gboolean          res;
+	gchar            *contents;
+	GnomePrintConfig *config;
+	
+	filename = gnome_util_home_file (PLANNER_PRINT_CONFIG_FILE);
+	
+	res = g_file_get_contents (filename, &contents, NULL, NULL);
+	g_free (filename);
+	
+	if (res) {
+		config = gnome_print_config_from_string (contents, 0);
+		g_free (contents);
+	} else {
+		config = gnome_print_config_default ();
+	}
+	
+	return config;
+}
+
+/*
+ * Save printer configuration into a file in the .gnome2 user directory
+ */
+void
+planner_print_dialog_save_config (GnomePrintConfig *config)
+{
+	gint   fd;
+	gchar *str;
+	gint   bytes;
+	gchar *filename;
+	
+	g_return_if_fail (config != NULL);
+	
+	str = gnome_print_config_to_string (config, 0);
+	
+ 	filename = gnome_util_home_file (PLANNER_PRINT_CONFIG_FILE);
+	fd = open (filename, O_WRONLY | O_CREAT | O_TRUNC, 0600);
+	g_free (filename);
+	
+	if (fd >= 0) {
+		bytes = strlen (str);
+		
+		write (fd, str, bytes);
+		close (fd);
+	}
+	g_free (str);
+}
+
 GtkWidget *
 planner_print_dialog_new (PlannerWindow  *window,
-		     GnomePrintJob *job,
-		     GList         *views)
+			  GnomePrintJob  *job,
+			  GList          *views)
 {
 	GtkWidget *dialog;
 	GtkWidget *page;

@@ -24,11 +24,13 @@
 
 #include "planner-window.h"
 
-GtkWidget * planner_print_dialog_new                 (PlannerWindow  *window,
-						 GnomePrintJob *job,
-						 GList         *views);
-GList *     planner_print_dialog_get_print_selection (GtkDialog     *dialog,
-						 gboolean      *summary);
+GtkWidget *       planner_print_dialog_new                 (PlannerWindow    *window,
+							    GnomePrintJob    *job,
+							    GList            *views);
+GList *           planner_print_dialog_get_print_selection (GtkDialog        *dialog,
+							    gboolean         *summary);
+void              planner_print_dialog_save_config         (GnomePrintConfig *config);
+GnomePrintConfig *planner_print_dialog_load_config         (void);
 
 
 #endif /* __PLANNER_PRINT_DIALOG_H__ */

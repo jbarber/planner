@@ -1,5 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
+ * Copyright (C) 2003      Imendio HB
  * Copyright (C) 2001-2003 CodeFactory AB
  * Copyright (C) 2001-2003 Richard Hult <richard@imendio.com>
  * Copyright (C) 2001-2002 Mikael Hallendal <micke@imendio.com>
@@ -23,10 +24,8 @@
 
 #include <config.h>
 #include <string.h>
-
 #include <gsf/gsf-input-memory.h>
 #include <gsf/gsf-input-stdio.h>
-
 #include "mrp-error.h"
 #include "mrp-intl.h"
 #include "mrp-marshal.h"
@@ -73,6 +72,8 @@ struct _MrpProjectPriv {
 	/* Project phases */
 	GList            *phases;
 	gchar            *phase;
+
+	guint             last_used_id;
 };
 
 /* Properties */
@@ -2215,3 +2216,14 @@ project_set_calendar (MrpProject  *project,
 	mrp_task_manager_recalc (priv->task_manager, TRUE);
 }
 
+guint
+imrp_task_get_unique_id (MrpProject *project)
+{
+	MrpProjectPriv *priv;
+	
+	g_return_val_if_fail (MRP_IS_PROJECT (project), 0);
+
+	priv = project->priv;
+	
+	return ++priv->last_used_id;
+}
