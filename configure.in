@@ -14,8 +14,7 @@ AC_STDC_HEADERS
 AM_DISABLE_STATIC
 AM_PROG_LIBTOOL
 
-AC_PATH_PROG(GLIB_GENMARSHAL, glib-genmarshal)
-AC_PATH_PROG(PG_CONFIG, pg_config)
+AM_PATH_GLIB_2_0
 
 PLANNER_COMPILE_WARNINGS
 
@@ -35,7 +34,7 @@ AM_CONDITIONAL(HAVE_NEWER_MIME, test x$UPDATE_DESKTOP_DATABASE != xno)
 dnl  -------------
 dnl | API docs    |--------------------------------------------
 dnl  -------------
-GTK_DOC_CHECK(1.0)
+GTK_DOC_CHECK([1.0])
 
 dnl NOTE: We need to use a separate automake conditional for this
 dnl       to make this work with the tarballs.

@@ -1135,7 +1135,7 @@ mrp_parser_to_xml (MrpStorageMrproject  *module,
 {
 	xmlDocPtr  doc;
 	xmlChar   *buf;
-	gsize      len;
+	int        len;
 	
 	g_return_val_if_fail (MRP_IS_STORAGE_MRPROJECT (module), FALSE);
 

@@ -129,11 +129,11 @@ DIV.gantt-complete-notdone {
 }
 
 DIV.gantt-empty-end {
-  margin-left: 5px;
+  margin-left: 0px;
 }
 
 SPAN.gantt-milestone {
-  font-size: 11pt;
+  font-size: 9pt;
   color: #000000;
   vertical-align: middle;
   position: relative;
@@ -141,6 +141,9 @@ SPAN.gantt-milestone {
   padding-left: 0px;
 }
 
+SPAN.gantt-resources {
+  margin-left: 4px;
+}
 
 TH.gantt-day-header {
   margin: 0px;

@@ -1,4 +1,16 @@
-2004-10-05	Amanpreet Singh Alam <amanpreetalam@yahoo.com>
+2004-10-06  Richard Hult  <richard@imendio.com>
+
+	* data/stylesheets/html1_css.xsl:
+	* data/stylesheets/html1_gantt.xsl:
+	* data/stylesheets/mrproject2html.xsl: Tweak milestone style
+	slightly and make gantt bars not wrap, fixes bug #154572.
+
+	* libplanner/mrp-parser.c (mrp_parser_to_xml): Fix compilation
+	problem on Darwin.
+
+	* configure.in: Clean up a bit.
+
+2004-10-05  Amanpreet Singh Alam <amanpreetalam@yahoo.com>
 	
 	* configure.in: Add Punjabi(pa) Lang
 

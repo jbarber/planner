@@ -179,7 +179,7 @@
 		  </xsl:choose>
 		</td>
 		<td colspan="{$days}">
-		  <div style="width: {$days * 20}px; white-space: nowrap;">
+		  <div style="width: {$days * 20 + 1}px; white-space: nowrap;">
 		    <xsl:if test="not (task)">
 		      <xsl:if test="$task-start > 0">
 			    <xsl:choose>
@@ -206,6 +206,7 @@
 			  <xsl:choose>
                 <xsl:when test="@type = 'milestone'">
                   <span class="gantt-milestone">&#9670;</span>
+                                  <span class="gantt-resources">
 				  <xsl:variable name="task-id" select="@id"/>
 				  <xsl:for-each select="/project/allocations/allocation[@task-id=$task-id]">
 			        <xsl:sort data-type="number" select="@resource-id" order="descending"/>
@@ -215,9 +216,11 @@
 				      <xsl:text>, </xsl:text>
 				    </xsl:if>
 			      </xsl:for-each>
+                                  </span>
 				</xsl:when>
 				<xsl:otherwise>
 				  <div class="gantt-empty-end"></div>
+                                  <span class="gantt-resources">
 				  <xsl:variable name="task-id" select="@id"/>
 			      <xsl:for-each select="/project/allocations/allocation[@task-id=$task-id]">
 			        <xsl:sort data-type="number" select="@resource-id" order="descending"/>
@@ -227,6 +230,7 @@
 				      <xsl:text>, </xsl:text>
 				    </xsl:if>
 			      </xsl:for-each>
+                                  </span>
 				</xsl:otherwise>
 			  </xsl:choose>
             </xsl:if>
