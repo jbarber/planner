@@ -575,6 +575,7 @@ planner_gantt_print_do (PlannerGanttPrintData *data)
 	mrptime      start, finish;
 	gboolean     is_summary;
 	gboolean     is_critical;
+	gboolean     boundary_overlap = FALSE;
 	MrpTaskType  type;
 	PrintTask   *ptask;
 	TaskCoord   *task_coord;
@@ -918,8 +919,10 @@ planner_gantt_print_do (PlannerGanttPrintData *data)
 	g_list_free (relations);
 
 	/* Third pass, add background shading for non-work intervals. */
-	t0 = mrp_time_align_day (data->start);
 	for (row = 0; row < data->rows_of_pages; row++) {
+
+		t0 = mrp_time_align_day (data->start);
+
 		if (row == 0) {
 			/* Top-most row has the header. */
 			y0 = data->header_height;
@@ -941,6 +944,7 @@ planner_gantt_print_do (PlannerGanttPrintData *data)
 						
 			/* Loop through the days between t0 and t2. */
 			t1 = t0;
+
 			while (t1 <= t2) {
 				day = mrp_calendar_get_day (calendar, t1, TRUE);
 				
@@ -953,18 +957,29 @@ planner_gantt_print_do (PlannerGanttPrintData *data)
 					ival = l->data;
 
 					mrp_interval_get_absolute (ival,
-								   t1,
+								   mrp_time_align_day (t1),
 								   &ival_start,
 								   &ival_end);
 
-					if (planner_scale_conf[data->level].nonworking_limit <= ival_start - ival_prev) {
+					if (planner_scale_conf[data->level].nonworking_limit <= ival_start - ival_prev ||
+					    (boundary_overlap && ival_start >= t1)) {
+
+						boundary_overlap = FALSE;
+
+						/* Check for corner case of non-working interval overlapping page boundary */
+
+						if (ival_start > t2) {
+
+							boundary_overlap = TRUE;
+						}
+
 						element = g_new0 (Element, 1);
 						element->type = SHADE;
 						element->y1 = y0 + data->row_height / 4;
 						element->y2 = data->job->height;
 
-						element->x1 = x0 + (ival_prev - data->start) / data->f;
-						element->x2 = x0 + (ival_start - data->start) / data->f;
+						element->x1 = x0 + (ival_prev - t0) / data->f;
+						element->x2 = x0 + (ival_start - t0) / data->f;
 						
 						page = GET_PAGE (data, row, col);
 						page->background_elements = g_list_prepend (page->background_elements, element);
@@ -974,21 +989,35 @@ planner_gantt_print_do (PlannerGanttPrintData *data)
 				}
 
 				t1 += 60*60*24;
+				t1 =  mrp_time_align_day (t1);
 
 				/* Draw the remaining interval if there is one. */
-				if (ival_prev < t1 && planner_scale_conf[data->level].nonworking_limit <= t1 - ival_prev) {
+				if ((ival_prev < t1 && planner_scale_conf[data->level].nonworking_limit <= t1 - ival_prev) ||
+				    boundary_overlap) {
+
+					boundary_overlap = FALSE;
+
+					/* Check for corner case of non-working interval overlapping page boundary */
+
+					if (t1 > t2) {
+
+						boundary_overlap = TRUE;
+					}
+
 					element = g_new0 (Element, 1);
 					element->type = SHADE;
 					element->y1 = y0 + data->row_height / 4;
 					element->y2 = data->job->height;
 					
-					element->x1 = x0 + (ival_prev - data->start) / data->f;
-					element->x2 = x0 + (t1 - data->start) / data->f;
+					element->x1 = x0 + (ival_prev - t0) / data->f;
+					element->x2 = x0 + (t1 - t0) / data->f;
 					
 					page = GET_PAGE (data, row, col);
 					page->background_elements = g_list_prepend (page->background_elements, element);
 				}
 			}
+
+			t0 = t2;
 		}
 	}
 	
