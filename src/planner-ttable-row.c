@@ -2040,17 +2040,8 @@ ttable_row_event (GnomeCanvasItem * item, GdkEvent * event)
                         gint         work;
                         gint         start;
                         MrpProject  *project;
-                        MrpCalendar *calendar;
-                        gint         hours_per_day;
 
                         g_object_get (task, "project", &project, NULL);
-                        calendar = mrp_project_get_calendar (project);
-
-                        hours_per_day =
-                                mrp_calendar_day_get_total_work (calendar,
-                                                                 mrp_day_get_work
-                                                                 ()) / (60 *
-                                                                        60);
 
                         wx2 = event->motion.x;
                         wy2 = priv->y + 0.70 * priv->height;
@@ -2084,10 +2075,9 @@ ttable_row_event (GnomeCanvasItem * item, GdkEvent * event)
                                 g_strdup_printf (_
                                                  ("Change task '%s' work to %s, duration to %s (%d)"),
                                                  task_name,
-                                                 planner_format_duration
-                                                 (work, hours_per_day),
-                                                 planner_format_duration
-                                                 (duration, 24), duration);
+                                                 planner_format_duration (project, work),
+                                                 planner_format_duration_with_day_length (duration, 24*60*60),
+						 duration);
                         planner_ttable_chart_status_updated (chart, message);
                         g_free (message);
                 }

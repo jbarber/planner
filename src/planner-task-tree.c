@@ -81,6 +81,7 @@ typedef struct {
 	MrpProperty     *property;
 } ColPropertyData;
 
+/*
 typedef enum {
 	UNIT_NONE,
 	UNIT_MONTH,
@@ -94,6 +95,7 @@ typedef struct {
 	gchar *name;
 	Unit   unit;
 } Units;
+*/
 
 static void        task_tree_class_init                (PlannerTaskTreeClass *klass);
 static void        task_tree_init                      (PlannerTaskTree      *tree);
@@ -163,8 +165,6 @@ static void        task_tree_task_added_cb             (PlannerGanttModel    *mo
 static void        task_tree_task_removed_cb           (PlannerGanttModel    *model,
 							MrpTask              *task,
 							PlannerTaskTree      *tree);
-static gint        task_tree_parse_time_string         (PlannerTaskTree      *tree,
-							const gchar          *str);
 static MrpProject *task_tree_get_project               (PlannerTaskTree      *tree);
 static MrpTask *   task_tree_get_task_from_path        (PlannerTaskTree      *tree,
                                                         GtkTreePath          *path);
@@ -1444,8 +1444,6 @@ task_tree_duration_data_func (GtkTreeViewColumn *tree_column,
 {
 	PlannerTaskTree     *task_tree;
 	PlannerTaskTreePriv *priv;
-	MrpCalendar         *calendar;
-	gint                 hours_per_day;
 	gint                 duration;
 	gchar               *str;
 	gint                 weight;
@@ -1472,13 +1470,7 @@ task_tree_duration_data_func (GtkTreeViewColumn *tree_column,
 		editable = FALSE;
 		str = g_strdup (_("N/A"));
 	} else {
-		calendar = mrp_project_get_calendar (priv->project);
-		
-		hours_per_day = mrp_calendar_day_get_total_work (
-			calendar, mrp_day_get_work ()) / (60*60);
-		
-		str = planner_format_duration (duration, hours_per_day);
-		
+		str = planner_format_duration (priv->project, duration);
 		if (sched != MRP_TASK_SCHED_FIXED_DURATION) {
 			editable = FALSE;
 		}
@@ -1586,7 +1578,6 @@ task_tree_work_data_func (GtkTreeViewColumn *tree_column,
 {
 	PlannerTaskTree *tree;
 	gint             work;
-	gint             hours_per_day;
 	MrpTask         *task;
 	MrpTaskType      type;
 	gint             weight;
@@ -1594,15 +1585,6 @@ task_tree_work_data_func (GtkTreeViewColumn *tree_column,
 
 	g_return_if_fail (PLANNER_IS_TASK_TREE (data));
 	tree = PLANNER_TASK_TREE (data);
-
-	hours_per_day = mrp_calendar_day_get_total_work (
-		mrp_project_get_calendar (tree->priv->project),
-		mrp_day_get_work ()) / (60*60);
-
-	/* FIXME */
-	if (hours_per_day == 0) {
-		hours_per_day = 8;
-	}
 
 	gtk_tree_model_get (tree_model,
 			    iter,
@@ -1621,7 +1603,9 @@ task_tree_work_data_func (GtkTreeViewColumn *tree_column,
 			      "text", _("N/A"),
 			      NULL);
 	} else {
-		gchar *str = planner_format_duration (work, hours_per_day);
+		gchar *str;
+
+		str = planner_format_duration (tree->priv->project, work);
 		
 		g_object_set (cell, 
 			      "weight", weight,
@@ -1642,25 +1626,15 @@ task_tree_slack_data_func (GtkTreeViewColumn *tree_column,
 {
 	PlannerTaskTree *tree = data;
 	gint             slack;
-	gint             hours_per_day;
 	gchar           *str;
 	gint             weight;
 
-	hours_per_day = mrp_calendar_day_get_total_work (
-		mrp_project_get_calendar (tree->priv->project),
-		mrp_day_get_work ()) / (60*60);
-
-	/* FIXME */
-	if (hours_per_day == 0) {
-		hours_per_day = 8;
-	}
-	
 	gtk_tree_model_get (tree_model, iter,
 			    COL_SLACK, &slack,
 			    COL_WEIGHT, &weight,
 			    -1);
 	
-	str = planner_format_duration (slack, hours_per_day);
+	str = planner_format_duration (tree->priv->project, slack);
 
 	g_object_set (cell, 
 		      "text", str,
@@ -1873,7 +1847,7 @@ task_tree_work_edited (GtkCellRendererText *cell,
 	path = gtk_tree_path_new_from_string (path_string);	
 	gtk_tree_model_get_iter (model, &iter, path);
 
-	work = task_tree_parse_time_string (PLANNER_TASK_TREE (view), new_text);
+	work = planner_parse_duration (PLANNER_TASK_TREE (view)->priv->project, new_text);
 	
 	gtk_tree_model_get (model, &iter, 
 			    COL_TASK, &task,
@@ -1905,7 +1879,6 @@ task_tree_property_data_func (GtkTreeViewColumn *tree_column,
 	gint             ivalue;
 	gfloat           fvalue;
 	mrptime          tvalue;
-	gint             work;
 
 	gtk_tree_model_get (tree_model,
 			    iter,
@@ -1956,13 +1929,7 @@ task_tree_property_data_func (GtkTreeViewColumn *tree_column,
 				mrp_property_get_name (property), &ivalue,
 				NULL); 
 
-/*		work = mrp_calendar_day_get_total_work (
-		mrp_project_get_calendar (tree->priv->project),
-		mrp_day_get_work ());
-*/
-		work = 8*60*60;
-
-		svalue = planner_format_duration (ivalue, work / (60*60));
+		svalue = planner_format_duration (PLANNER_TASK_TREE (data)->priv->project, ivalue);
 		break;
 		
 	case MRP_PROPERTY_TYPE_COST:
@@ -3380,186 +3347,6 @@ planner_task_tree_has_relation (GList *list)
 	}
 
 	return FALSE;
-}
-
-
-/* The comments here are for i18n, they get extracted to the po files. */
-static Units units[] = {
-	{ N_("mon"),     UNIT_MONTH },  /* month unit variant accepted in input */
-	{ N_("month"),   UNIT_MONTH },  /* month unit variant accepted in input */
-	{ N_("months"),  UNIT_MONTH },  /* month unit variant accepted in input */
-	{ N_("w"),       UNIT_WEEK },   /* week unit variant accepted in input */
-	{ N_("week"),    UNIT_WEEK },   /* week unit variant accepted in input */
-	{ N_("weeks"),   UNIT_WEEK },   /* week unit variant accepted in input */
-	{ N_("d"),       UNIT_DAY },    /* day unit variant accepted in input */
-	{ N_("day"),     UNIT_DAY },    /* day unit variant accepted in input */
-	{ N_("days"),    UNIT_DAY },    /* day unit variant accepted in input */
-	{ N_("h"),       UNIT_HOUR },   /* hour unit variant accepted in input */
-	{ N_("hour"),    UNIT_HOUR },   /* hour unit variant accepted in input */
-	{ N_("hours"),   UNIT_HOUR },   /* hour unit variant accepted in input */
-	{ N_("min"),     UNIT_MINUTE }, /* minute unit variant accepted in input */
-	{ N_("minute"),  UNIT_MINUTE }, /* minute unit variant accepted in input */
-	{ N_("minutes"), UNIT_MINUTE }  /* minute unit variant accepted in input */
-};
-
-static Unit
-task_tree_get_unit_from_string (const gchar *str)
-{
-	static Units    *translated_units;
-	static gboolean  inited = FALSE;
-	Unit             unit = UNIT_NONE;
-	gint             i, len;
-	gchar           *tmp, *tmp2;
-
-	if (!inited) {
-		len = G_N_ELEMENTS (units);
-
-		translated_units = g_new0 (Units, len);
-		
-		for (i = 0; i < len; i++) {
-			tmp = _(units[i].name);
-
-			tmp2 = g_utf8_casefold (tmp, -1);
-			/* Not sure this is necessary... */
-			tmp = g_utf8_normalize (tmp2, -1, G_NORMALIZE_DEFAULT);
-
-			translated_units[i].name = tmp;
-			translated_units[i].unit = units[i].unit;
-		}
-		
-		inited = TRUE;
-	}
-
-	
-	len = G_N_ELEMENTS (units);
-	for (i = 0; i < len; i++) {
-		if (!strncmp (str, translated_units[i].name,
-			      strlen (translated_units[i].name))) {
-			unit = translated_units[i].unit;
-		}
-	}
-
-	if (unit != UNIT_NONE) {
-		return unit;
-	}
-
-	/* Try untranslated names as a fallback. */
-	for (i = 0; i < len; i++) {
-		if (!strncmp (str, units[i].name, strlen (units[i].name))) {
-			unit = units[i].unit;
-		}
-	}
-
-	return unit;
-}
-
-static gint
-task_tree_multiply_with_unit (gdouble value,
-			      Unit    unit,
-			      gint    seconds_per_month,
-			      gint    seconds_per_week,
-			      gint    seconds_per_day)
-{
-	switch (unit) {
-	case UNIT_MONTH:
-		value *= seconds_per_month;
-		break;
-	case UNIT_WEEK:
-		value *= seconds_per_week;
-		break;
-	case UNIT_DAY:
-		value *= seconds_per_day;
-		break;
-	case UNIT_HOUR:
-		value *= 60*60;
-		break;
-	case UNIT_MINUTE:
-		value *= 60;
-		break;
-	case UNIT_NONE:
-		return 0;
-	}	
-	
-	return floor (value + 0.5);
-}
-
-static gint
-task_tree_parse_time_string (PlannerTaskTree  *tree,
-			     const gchar *input)
-{
-	gchar           *tmp;
-	gchar           *str;
-	gchar           *freeme;
-	gchar           *end_ptr;
-	gdouble          dbl;
-	Unit             unit;
-	gint             total;
-	gint             seconds_per_month;
-	gint             seconds_per_week;
-	gint             seconds_per_day;
-
-	seconds_per_day = mrp_calendar_day_get_total_work (
-		mrp_project_get_calendar (tree->priv->project),
-		mrp_day_get_work ());
-
-	/* Hardcode these for now. */
-	seconds_per_week = seconds_per_day * 5;
-	seconds_per_month = seconds_per_day * 30;
-
-	tmp = g_utf8_casefold (input, -1);
-	/* Not sure this is necessary... */
-	str = g_utf8_normalize (tmp, -1, G_NORMALIZE_DEFAULT);
-	g_free (tmp);
-
-	freeme = str;
-
-	if (!str) {
-		return 0;
-	}
-	
-	total = 0;
-	while (*str) {
-		while (*str && g_unichar_isalpha (g_utf8_get_char (str))) {   
-			str = g_utf8_next_char (str);
-		}
-
-		if (*str == 0) {
-			break;
-		}
-
-		dbl = g_strtod (str, &end_ptr);
-
-		if (end_ptr == str) {
-			break;
-		}
-		
-		if (end_ptr) {
-			unit = task_tree_get_unit_from_string (end_ptr);
-
-			/* If no unit was specified and it was the first number
-			 * in the input, treat it as Day.
-			 */
-			if (unit == UNIT_NONE && str == freeme) {
-				unit = UNIT_DAY;
-			}
-
-			total += task_tree_multiply_with_unit (dbl,
-							       unit,
-							       seconds_per_month,
-							       seconds_per_week,
-							       seconds_per_day);
-		}
-
-		if (*end_ptr == 0) {
-			break;
-		}
-		
-		str = end_ptr + 1;
-	}
-
-	g_free (freeme);
-	
-	return total;
 }
 
 static MrpProject *

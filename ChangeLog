@@ -1,5 +1,31 @@
 2005-02-18  Richard Hult  <richard@imendio.com>
 
+	* configure.in: Bump for a pre-release.
+
+	* data/glade/task-dialog.glade: Change the work/duration
+	spinbuttons to entries.
+	
+	* src/planner-format.c: (planner_format_duration_with_day_length),
+	(planner_format_duration): Move here from the task tree and make
+	more general.
+ 
+	* src/planner-gantt-print.c:
+	* src/planner-gantt-row.c:
+	* src/planner-project-properties.c:
+	* src/planner-resource-view.c:
+	* src/planner-task-tree.c:
+	* src/planner-ttable-row.c: Update for the above change.
+
+	* src/planner-task-dialog.c: Change the work/duration spinbuttons
+	to entries and add duration parsing like the tree views has.
+	
+2005-02-18  Richard Hult  <richard@imendio.com>
+
+	* src/planner-sql-plugin.c (check_database_tables): Don't g_free,
+	g_object_unref.
+
+	* configure.in: Bump version for a pre-release.
+
 	* src/planner-task-tree.c: (task_cmd_move_undo), (task_cmd_move):
 	Restore the task type of the parent on undo.
 	(task_cmd_move): Initialize variable.

@@ -258,7 +258,7 @@ print_table_tasks (PlannerGanttPrintData *data,
 		
 		x = data->work_x1 + data->job->x_pad;
 		
-		str = planner_format_duration (work, 8);
+		str = planner_format_duration (data->project, work);
 		planner_print_job_show_clipped (data->job,
 						x, y,
 						str,

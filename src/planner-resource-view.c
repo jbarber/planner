@@ -30,19 +30,7 @@
 #include <gobject/gvaluecollector.h>
 #include <gmodule.h>
 #include <glib/gi18n.h>
-#include <gtk/gtkmain.h>
-#include <gtk/gtktreeview.h>
-#include <gtk/gtktreeselection.h>
-#include <gtk/gtkliststore.h>
-#include <gtk/gtkcellrenderertext.h>
-#include <gtk/gtkscrolledwindow.h>
-#include <gtk/gtkframe.h>
-#include <gtk/gtkitemfactory.h>
-#include <gtk/gtkiconfactory.h>
-#include <gtk/gtkstock.h>
-#include <gtk/gtktreemodelsort.h>
-#include <gtk/gtkmenu.h>
-#include <gtk/gtktoggleaction.h>
+#include <gtk/gtk.h>
 #include <libplanner/mrp-project.h>
 #include "planner-view.h"
 #include "planner-cell-renderer-list.h"
@@ -2248,11 +2236,11 @@ resource_view_cost_data_func (GtkTreeViewColumn    *tree_column,
 }
 
 static void    
-resource_view_property_data_func    (GtkTreeViewColumn *tree_column,
-				     GtkCellRenderer   *cell,
-				     GtkTreeModel      *model,
-				     GtkTreeIter       *iter,
-				     gpointer           data)
+resource_view_property_data_func (GtkTreeViewColumn *tree_column,
+				  GtkCellRenderer   *cell,
+				  GtkTreeModel      *model,
+				  GtkTreeIter       *iter,
+				  gpointer           data)
 {
 	MrpObject       *object;
 	MrpProperty     *property = data;
@@ -2261,7 +2249,7 @@ resource_view_property_data_func    (GtkTreeViewColumn *tree_column,
 	gint             ivalue;
 	gfloat           fvalue;
 	mrptime          tvalue;
-	gint             work;
+	MrpProject      *project;
 
 	gtk_tree_model_get (model, iter,
 			    COL_RESOURCE, &object,
@@ -2308,15 +2296,9 @@ resource_view_property_data_func    (GtkTreeViewColumn *tree_column,
 	case MRP_PROPERTY_TYPE_DURATION:
 		mrp_object_get (object,
 				mrp_property_get_name (property), &ivalue,
-				NULL); 
-
-/*		work = mrp_calendar_day_get_total_work (
-			mrp_project_get_calendar (tree->priv->project),
-			mrp_day_get_work ());
-*/
-		work = 8*60*60;
-
-		svalue = planner_format_duration (ivalue, work / (60*60));
+				NULL);
+		project = planner_window_get_project (PLANNER_VIEW (data)->main_window);
+		svalue = planner_format_duration (project, ivalue);
 		break;
 		
 	case MRP_PROPERTY_TYPE_COST:

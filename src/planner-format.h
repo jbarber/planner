@@ -25,16 +25,21 @@
 #define __PLANNER_FORMAT_H__
 
 #include <glib.h>
-#include <libplanner/mrp-time.h>
+#include <libplanner/mrp-project.h>
 
 gchar *planner_format_int      (gint         number);
-gchar *planner_format_duration (gint         duration,
-				gint         day_length);
+gchar *planner_format_duration (MrpProject  *project,
+				gint         duration);
+gchar *
+planner_format_duration_with_day_length (gint duration,
+					 gint day_length);
 gchar *planner_format_date     (mrptime      date);
 gchar *planner_format_float    (gfloat       number,
 				guint        precision,
 				gboolean     fill_with_zeroes);
 gint   planner_parse_int       (const gchar *str);
 gfloat planner_parse_float     (const gchar *str);
+gint   planner_parse_duration  (MrpProject  *project,
+				const gchar *input);
 
 #endif /* __PLANNER_FORMAT_H__ */

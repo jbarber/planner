@@ -45,7 +45,6 @@ struct _PlannerView {
 
 	GModule           *handle;
 	PlannerWindow     *main_window;
-	/* BonoboUIComponent *ui_component; */
 
 	PlannerViewPriv   *priv;
 	gboolean           activated;

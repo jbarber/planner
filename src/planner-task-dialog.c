@@ -35,6 +35,7 @@
 #include "planner-assignment-model.h"
 #include "planner-predecessor-model.h"
 #include "planner-task-cmd.h"
+#include "planner-format.h"
 #include "planner-task-dialog.h"
 
 /* FIXME: This should be read from the option menu when that works */
@@ -49,8 +50,8 @@ typedef struct {
 	GtkWidget     *name_entry;
 	GtkWidget     *milestone_checkbutton;
 	GtkWidget     *fixed_checkbutton;
-	GtkWidget     *work_spinbutton;
-	GtkWidget     *duration_spinbutton;
+	GtkWidget     *work_entry;
+	GtkWidget     *duration_entry;
 	GtkWidget     *complete_spinbutton;
 	GtkWidget     *priority_spinbutton;
 	GtkWidget     *note_textview;
@@ -86,8 +87,6 @@ static void            task_dialog_fixed_toggled_cb               (GtkWidget    
 static void            task_dialog_task_work_changed_cb           (MrpTask                 *task,
 								   GParamSpec              *pspec,
 								   GtkWidget               *dialog);
-static void            task_dialog_work_changed_cb                (GtkWidget               *w,
-								   DialogData              *data);
 static gboolean        task_dialog_work_focus_in_cb               (GtkWidget               *w,
 								   GdkEventFocus           *event,
 								   DialogData              *data);
@@ -97,8 +96,6 @@ static gboolean        task_dialog_work_focus_out_cb              (GtkWidget    
 static void            task_dialog_task_duration_changed_cb       (MrpTask                 *task,
 								   GParamSpec              *pspec,
 								   GtkWidget               *dialog);
-static void            task_dialog_duration_changed_cb            (GtkWidget               *w,
-								   DialogData              *data);
 static gboolean        task_dialog_duration_focus_in_cb           (GtkWidget               *w,
 								   GdkEventFocus           *event,
 								   DialogData              *data);
@@ -1236,63 +1233,21 @@ task_dialog_task_work_changed_cb (MrpTask    *task,
 				  GParamSpec *pspec,
 				  GtkWidget  *dialog)
 {
-	DialogData  *data;
-	MrpProject  *project;
-	MrpCalendar *calendar;
-	gint         work;
-	gint         work_per_day;	
+	DialogData *data;
+	MrpProject *project;
+	gint        work;
+	gchar      *str;
 
 	data = DIALOG_GET_DATA (dialog);
 
-	g_object_get (task, "project", &project, NULL);
-	calendar = mrp_project_get_calendar (project);
-	work_per_day = mrp_calendar_day_get_total_work (
-		calendar, mrp_day_get_work ());
+	g_object_get (task,
+		      "work", &work,
+		      "project", &project,
+		      NULL);
 
-	/* Prevent div by zero. */
-	if (work_per_day == 0) {
-		work_per_day = 8;
-	}
-	
-	g_object_get (task, "work", &work, NULL);
-
-	g_signal_handlers_block_by_func (data->work_spinbutton,
-					 task_dialog_work_changed_cb,
-					 data);
-	
-	gtk_spin_button_set_value (GTK_SPIN_BUTTON (data->work_spinbutton),
-				   (double) work / (double) work_per_day);
-	
-	g_signal_handlers_unblock_by_func (data->work_spinbutton,
-					   task_dialog_work_changed_cb,
-					   data);
-}
-
-static void
-task_dialog_work_changed_cb (GtkWidget  *w,
-			     DialogData *data)
-{
-	MrpProject  *project;
-	MrpCalendar *calendar;
-	gint         work;
-	gint         work_per_day;	
-
-	g_object_get (data->task, "project", &project, NULL);
-	calendar = mrp_project_get_calendar (project);
-	work_per_day = mrp_calendar_day_get_total_work (calendar,
-							mrp_day_get_work ());
-
-	work = gtk_spin_button_get_value (GTK_SPIN_BUTTON (w)) * work_per_day;
-	
-	g_signal_handlers_block_by_func (data->task,
-					 task_dialog_task_work_changed_cb,
-					 data->dialog);
-	
-	g_object_set (data->task, "work", work, NULL);
-
-	g_signal_handlers_unblock_by_func (data->task,
-					   task_dialog_task_work_changed_cb, 
-					   data->dialog);
+	str = planner_format_duration (project, work);
+	gtk_entry_set_text (GTK_ENTRY (data->work_entry), str);
+	g_free (str);
 }
 
 static gboolean
@@ -1301,41 +1256,31 @@ task_dialog_work_focus_out_cb (GtkWidget     *w,
 			       DialogData    *data)
 {
 	MrpProject   *project;
-	MrpCalendar  *calendar;
-	gint          work;
 	gint          current_work;
-	gint          work_per_day;
-	gdouble      *focus_in_work;
+	gint          focus_in_work;
 	GValue        value = { 0 };
 	PlannerCmd   *cmd;
 
-	g_assert (MRP_IS_TASK (data->task));
-
 	g_object_get (data->task, "project", &project, NULL);
-	calendar = mrp_project_get_calendar (project);
-	work_per_day = mrp_calendar_day_get_total_work (calendar,
-							mrp_day_get_work ());
+	
+	focus_in_work = GPOINTER_TO_INT (
+		g_object_get_data (G_OBJECT (data->task), "focus_in_work"));
 
-	focus_in_work = g_object_get_data (G_OBJECT (data->task), "focus_in_work");
-
-	gtk_spin_button_update (GTK_SPIN_BUTTON (w));
-	current_work = gtk_spin_button_get_value (GTK_SPIN_BUTTON (w)) * work_per_day;
-	work = (*focus_in_work) * work_per_day;
-
-	if (work == current_work) {
-		g_free (focus_in_work);
+	current_work = planner_parse_duration (
+		project, gtk_entry_get_text (GTK_ENTRY (w)));
+	
+	if (focus_in_work == current_work) {
 		return FALSE;
 	}
 
 	g_object_set (data->task, "work", current_work, NULL);
 
 	g_value_init (&value, G_TYPE_INT);
-	g_value_set_int (&value, work);
-
+	g_value_set_int (&value, focus_in_work);
+	
 	cmd = task_cmd_edit_property_focus (data->main_window, 
-					    data->task, "work", &value);
-
-	g_free (focus_in_work);
+					    data->task, "work",
+					    &value);
 
 	return FALSE;
 }
@@ -1345,15 +1290,20 @@ task_dialog_work_focus_in_cb (GtkWidget     *w,
 			      GdkEventFocus *event,
 			      DialogData    *data)
 {
-	gdouble *work;
-
-	work = g_new0 (gdouble, 1);
+	MrpProject  *project;
+	const gchar *str;
+	gint         work;
 	   
-	*work = gtk_spin_button_get_value (GTK_SPIN_BUTTON (w));
+	str = gtk_entry_get_text (GTK_ENTRY (w));
+
+	g_object_get (data->task, "project", &project, NULL);
+	
+	work = planner_parse_duration (project, str);
 	
 	g_object_set_data (G_OBJECT (data->task), 
-			   "focus_in_work", (gpointer) work);
-
+			   "focus_in_work",
+			   GINT_TO_POINTER (work));
+	
 	return FALSE;
 }
 
@@ -1362,67 +1312,22 @@ task_dialog_task_duration_changed_cb (MrpTask    *task,
 				      GParamSpec *pspec,
 				      GtkWidget  *dialog)
 {
-	DialogData  *data;
-	MrpProject  *project;
-	MrpCalendar *calendar;
-	gint         work;
-	gint         work_per_day;	
+	DialogData *data;
+	MrpProject *project;
+	gint        duration;
+	gchar      *str;
 
 	data = DIALOG_GET_DATA (dialog);
 
-	g_object_get (task, "project", &project, NULL);
-	calendar = mrp_project_get_calendar (project);
-	work_per_day = mrp_calendar_day_get_total_work (calendar,
-							mrp_day_get_work ());
+	g_object_get (task,
+		      "duration", &duration,
+		      "project", &project,
+		      NULL);
 
-	/* Prevent div by zero. */
-	if (work_per_day == 0) {
-		work_per_day = 8;
-	}
-	
-	g_object_get (task, "duration", &work, NULL);
-
-	g_signal_handlers_block_by_func (data->duration_spinbutton,
-					 task_dialog_duration_changed_cb,
-					 data);
-	
-	gtk_spin_button_set_value (GTK_SPIN_BUTTON (data->duration_spinbutton),
-				   (double) work / (double) work_per_day);
-	
-	g_signal_handlers_unblock_by_func (data->duration_spinbutton,
-					   task_dialog_duration_changed_cb,
-					   data);
+	str = planner_format_duration (project, duration);
+	gtk_entry_set_text (GTK_ENTRY (data->duration_entry), str);
+	g_free (str);
 }
-
-static void
-task_dialog_duration_changed_cb (GtkWidget  *w,
-				 DialogData *data)
-{
-	MrpProject  *project;
-	MrpCalendar *calendar;
-	gint         duration;
-	gint         work_per_day;	
-
-	g_object_get (data->task, "project", &project, NULL);
-	calendar = mrp_project_get_calendar (project);
-	work_per_day = mrp_calendar_day_get_total_work (calendar,
-							mrp_day_get_work ());
-
-	duration = gtk_spin_button_get_value (GTK_SPIN_BUTTON (w)) * work_per_day;
-	
-	g_signal_handlers_block_by_func (data->task,
-					 task_dialog_task_duration_changed_cb,
-					 data->dialog);
-	
-	g_object_set (data->task, "duration", duration, NULL);
-
-	g_signal_handlers_unblock_by_func (data->task,
-					   task_dialog_task_duration_changed_cb, 
-					   data->dialog);
-}
-
-
-/* FIXME: try to unify duration and work focus functions? */
 
 static gboolean
 task_dialog_duration_focus_out_cb (GtkWidget     *w,
@@ -1430,42 +1335,31 @@ task_dialog_duration_focus_out_cb (GtkWidget     *w,
 				   DialogData    *data)
 {
 	MrpProject   *project;
-	MrpCalendar  *calendar;
-	gint          duration;
 	gint          current_duration;
-	gint          work_per_day;
-	gdouble      *focus_in_duration;
+	gint          focus_in_duration;
 	GValue        value = { 0 };
 	PlannerCmd   *cmd;
 
-	g_assert (MRP_IS_TASK (data->task));
-
 	g_object_get (data->task, "project", &project, NULL);
-	calendar = mrp_project_get_calendar (project);
-	work_per_day = mrp_calendar_day_get_total_work (calendar,
-							mrp_day_get_work ());
+	
+	focus_in_duration = GPOINTER_TO_INT (
+		g_object_get_data (G_OBJECT (data->task), "focus_in_duration"));
 
-	focus_in_duration = g_object_get_data (G_OBJECT (data->task), "focus_in_duration");
-
-	gtk_spin_button_update (GTK_SPIN_BUTTON (w));
-	current_duration = gtk_spin_button_get_value (GTK_SPIN_BUTTON (w)) * work_per_day;
-	duration = (*focus_in_duration) * work_per_day;
-
-	if (duration == current_duration) {
-		g_free (focus_in_duration);
+	current_duration = planner_parse_duration (
+		project, gtk_entry_get_text (GTK_ENTRY (w)));
+	
+	if (focus_in_duration == current_duration) {
 		return FALSE;
 	}
 
 	g_object_set (data->task, "duration", current_duration, NULL);
-	g_message ("Old duration %d, New duration %d", duration, current_duration);
 
 	g_value_init (&value, G_TYPE_INT);
-	g_value_set_int (&value, duration);
-
+	g_value_set_int (&value, focus_in_duration);
+	
 	cmd = task_cmd_edit_property_focus (data->main_window, 
-					    data->task, "duration", &value);
-
-	g_free (focus_in_duration);
+					    data->task, "duration",
+					    &value);
 
 	return FALSE;
 }
@@ -1475,15 +1369,20 @@ task_dialog_duration_focus_in_cb (GtkWidget     *w,
 				  GdkEventFocus *event,
 				  DialogData    *data)
 {
-	gdouble *duration;
+	const gchar *str;
+	gint         duration;
+	MrpProject  *project;	   
 
-	duration = g_new0 (gdouble, 1);
-	   
-	*duration = gtk_spin_button_get_value (GTK_SPIN_BUTTON (w));
+	str = gtk_entry_get_text (GTK_ENTRY (w));
+
+	g_object_get (data->task, "project", &project, NULL);
+	
+	duration = planner_parse_duration (project, str);
 	
 	g_object_set_data (G_OBJECT (data->task), 
-			   "focus_in_duration", (gpointer) duration);
-
+			   "focus_in_duration",
+			   GINT_TO_POINTER (duration));
+	
 	return FALSE;
 }
 
@@ -2299,6 +2198,7 @@ task_dialog_setup_widgets (DialogData *data,
 	MrpTaskSched  sched;
 	gchar        *note;      
 	gint          int_value;
+	gchar        *str;
 
 	w = glade_xml_get_widget (glade, "close_button");
 	g_signal_connect (w,
@@ -2349,37 +2249,30 @@ task_dialog_setup_widgets (DialogData *data,
 			  G_CALLBACK (task_dialog_fixed_toggled_cb),
 			  data);
 
-	data->work_spinbutton = glade_xml_get_widget (glade, "work_spinbutton");
+	data->work_entry = glade_xml_get_widget (glade, "work_entry");
 	g_object_get (data->task, "work", &int_value, NULL);
-	gtk_spin_button_set_value (GTK_SPIN_BUTTON (data->work_spinbutton),
-				   int_value / WORK_MULTIPLIER);
-	g_signal_connect (data->work_spinbutton,
-			  "value_changed",
-			  G_CALLBACK (task_dialog_work_changed_cb),
-			  data);
-	g_signal_connect (data->work_spinbutton,
+	str = planner_format_duration (mrp_object_get_project (MRP_OBJECT (data->task)), int_value);
+	gtk_entry_set_text (GTK_ENTRY (data->work_entry), str);
+	g_free (str);
+	g_signal_connect (data->work_entry,
 			  "focus_in_event",
 			  G_CALLBACK (task_dialog_work_focus_in_cb),
 			  data);
-	g_signal_connect (data->work_spinbutton,
+	g_signal_connect (data->work_entry,
 			  "focus_out_event",
 			  G_CALLBACK (task_dialog_work_focus_out_cb),
 			  data);
 	
-
-	data->duration_spinbutton = glade_xml_get_widget (glade, "duration_spinbutton");
+	data->duration_entry = glade_xml_get_widget (glade, "duration_entry");
 	g_object_get (data->task, "duration", &int_value, NULL);
-	gtk_spin_button_set_value (GTK_SPIN_BUTTON (data->duration_spinbutton),
-				   int_value / WORK_MULTIPLIER);
-	g_signal_connect (data->duration_spinbutton,
-			  "value_changed",
-			  G_CALLBACK (task_dialog_duration_changed_cb),
-			  data);
-	g_signal_connect (data->duration_spinbutton,
+	str = planner_format_duration (mrp_object_get_project (MRP_OBJECT (data->task)), int_value);
+	gtk_entry_set_text (GTK_ENTRY (data->duration_entry), str);
+	g_free (str);
+	g_signal_connect (data->duration_entry,
 			  "focus_in_event",
 			  G_CALLBACK (task_dialog_duration_focus_in_cb),
 			  data);
-	g_signal_connect (data->duration_spinbutton,
+	g_signal_connect (data->duration_entry,
 			  "focus_out_event",
 			  G_CALLBACK (task_dialog_duration_focus_out_cb),
 			  data);
@@ -2799,8 +2692,8 @@ task_dialog_update_sensitivity (DialogData *data)
 
 	gtk_widget_set_sensitive (data->fixed_checkbutton, leaf && !milestone);
 	
-	gtk_widget_set_sensitive (data->duration_spinbutton, leaf && !milestone && fixed);
-	gtk_widget_set_sensitive (data->work_spinbutton, leaf && !milestone);
+	gtk_widget_set_sensitive (data->duration_entry, leaf && !milestone && fixed);
+	gtk_widget_set_sensitive (data->work_entry, leaf && !milestone);
 }
 
 static void
@@ -2923,13 +2816,6 @@ planner_task_dialog_new (PlannerWindow *window,
 
 	w = glade_xml_get_widget (glade, "milestone_pad");
 	gtk_size_group_add_widget (size_group, w);
-
-	/* FIXME: Add those back when we use them. */
-	/*w = glade_xml_get_widget (glade, "work_optionmenu");
-	  gtk_size_group_add_widget (size_group, w);
-
-	w = glade_xml_get_widget (glade, "duration_optionmenu");
-	gtk_size_group_add_widget (size_group, w);*/
 
 	w = glade_xml_get_widget (glade, "complete_pad");
 	gtk_size_group_add_widget (size_group, w);

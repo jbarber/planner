@@ -129,14 +129,16 @@ format_strip_trailing_zeroes (gchar *str)
 }
 
 gchar *
-planner_format_duration (gint duration,
-			 gint day_length)
+planner_format_duration_with_day_length (gint duration,
+					 gint day_length)
 {
-	gint   days;
-	gint   hours;
+	gint days;
+	gint hours;
 
-	days = duration / (60*60*day_length);
-	duration -= days * 60*60*day_length;
+	day_length = day_length / (60*60);
+	
+	days = duration / day_length;
+	duration -= days * day_length;
 	hours = duration / (60*60);
 
 	if (days > 0 && hours > 0) {
@@ -150,6 +152,23 @@ planner_format_duration (gint duration,
 	} else {
 		return g_strdup ("");
 	}
+}
+
+gchar *
+planner_format_duration (MrpProject *project,
+			 gint        duration)
+{
+	MrpCalendar *calendar;
+	gint         day_length;
+
+	calendar = mrp_project_get_calendar (project);
+	day_length = mrp_calendar_day_get_total_work (calendar, mrp_day_get_work ()) * 60*60;
+
+	if (day_length == 0) {
+		day_length = 8*60*60;
+	}
+
+	return planner_format_duration_with_day_length (duration, day_length);
 }
 
 #if 0
@@ -364,3 +383,182 @@ planner_parse_float (const gchar *str)
 	return int_part + dec_part / pow (10, dec_factor);
 }
 
+typedef enum {
+	UNIT_NONE,
+	UNIT_MONTH,
+	UNIT_WEEK,
+	UNIT_DAY,
+	UNIT_HOUR,
+	UNIT_MINUTE
+} Unit;
+
+typedef struct {
+	gchar *name;
+	Unit   unit;
+} Units;
+
+/* The comments here are for i18n, they get extracted to the po files. */
+static Units units[] = {
+	{ N_("mon"),     UNIT_MONTH },  /* month unit variant accepted in input */
+	{ N_("month"),   UNIT_MONTH },  /* month unit variant accepted in input */
+	{ N_("months"),  UNIT_MONTH },  /* month unit variant accepted in input */
+	{ N_("w"),       UNIT_WEEK },   /* week unit variant accepted in input */
+	{ N_("week"),    UNIT_WEEK },   /* week unit variant accepted in input */
+	{ N_("weeks"),   UNIT_WEEK },   /* week unit variant accepted in input */
+	{ N_("d"),       UNIT_DAY },    /* day unit variant accepted in input */
+	{ N_("day"),     UNIT_DAY },    /* day unit variant accepted in input */
+	{ N_("days"),    UNIT_DAY },    /* day unit variant accepted in input */
+	{ N_("h"),       UNIT_HOUR },   /* hour unit variant accepted in input */
+	{ N_("hour"),    UNIT_HOUR },   /* hour unit variant accepted in input */
+	{ N_("hours"),   UNIT_HOUR },   /* hour unit variant accepted in input */
+	{ N_("min"),     UNIT_MINUTE }, /* minute unit variant accepted in input */
+	{ N_("minute"),  UNIT_MINUTE }, /* minute unit variant accepted in input */
+	{ N_("minutes"), UNIT_MINUTE }  /* minute unit variant accepted in input */
+};
+
+static gint num_units = G_N_ELEMENTS (units);
+
+static Unit
+format_get_unit_from_string (const gchar *str)
+{
+	static Units    *translated_units;
+	static gboolean  inited = FALSE;
+	Unit             unit = UNIT_NONE;
+	gint             i;
+	gchar           *tmp;
+
+	if (!inited) {
+		translated_units = g_new0 (Units, num_units);
+		
+		for (i = 0; i < num_units; i++) {
+			tmp = g_utf8_casefold (_(units[i].name), -1);
+			
+			translated_units[i].name = tmp;
+			translated_units[i].unit = units[i].unit;
+		}
+		
+		inited = TRUE;
+	}
+	
+	for (i = 0; i < num_units; i++) {
+		if (!strncmp (str, translated_units[i].name,
+			      strlen (translated_units[i].name))) {
+			unit = translated_units[i].unit;
+		}
+	}
+	
+	if (unit != UNIT_NONE) {
+		return unit;
+	}
+	
+	/* Try untranslated names as a fallback. */
+	for (i = 0; i < num_units; i++) {
+		if (!strncmp (str, units[i].name, strlen (units[i].name))) {
+			unit = units[i].unit;
+		}
+	}
+
+	return unit;
+}
+
+static gint
+format_multiply_with_unit (gdouble value,
+			   Unit    unit,
+			   gint    seconds_per_month,
+			   gint    seconds_per_week,
+			   gint    seconds_per_day)
+{
+	switch (unit) {
+	case UNIT_MONTH:
+		value *= seconds_per_month;
+		break;
+	case UNIT_WEEK:
+		value *= seconds_per_week;
+		break;
+	case UNIT_DAY:
+		value *= seconds_per_day;
+		break;
+	case UNIT_HOUR:
+		value *= 60*60;
+		break;
+	case UNIT_MINUTE:
+		value *= 60;
+		break;
+	case UNIT_NONE:
+		return 0;
+	}	
+	
+	return floor (value + 0.5);
+}
+
+gint
+planner_parse_duration (MrpProject  *project,
+			const gchar *input)
+{
+	gchar   *str;
+	gchar   *p;
+	gchar   *end_ptr;
+	gdouble  dbl;
+	Unit     unit;
+	gint     total;
+	gint     seconds_per_month;
+	gint     seconds_per_week;
+	gint     seconds_per_day;
+
+	seconds_per_day = mrp_calendar_day_get_total_work (
+		mrp_project_get_calendar (project),
+		mrp_day_get_work ());
+
+	/* Hardcode these for now. */
+	seconds_per_week = seconds_per_day * 5;
+	seconds_per_month = seconds_per_day * 30;
+
+	str = g_utf8_casefold (input, -1);
+	if (!str) {
+		return 0;
+	}
+	
+	total = 0;
+	p = str;
+	while (*p) {
+		while (*p && g_unichar_isalpha (g_utf8_get_char (p))) {   
+			p = g_utf8_next_char (p);
+		}
+
+		if (*p == 0) {
+			break;
+		}
+
+		dbl = g_strtod (p, &end_ptr);
+		if (end_ptr == p) {
+			break;
+		}
+		
+		if (end_ptr) {
+			unit = format_get_unit_from_string (end_ptr);
+
+			/* If no unit was specified and it was the first number
+			 * in the input, treat it as "day".
+			 */
+			if (unit == UNIT_NONE && p == str) {
+				unit = UNIT_DAY;
+			}
+
+			total += format_multiply_with_unit (dbl,
+							    unit,
+							    seconds_per_month,
+							    seconds_per_week,
+							    seconds_per_day);
+		}
+
+		if (*end_ptr == 0) {
+			break;
+		}
+		
+		p = end_ptr + 1;
+	}
+
+	g_free (str);
+	
+	return total;
+}

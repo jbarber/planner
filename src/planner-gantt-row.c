@@ -1789,14 +1789,8 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 			gint         duration;
 			gint         work;
 			MrpProject  *project;
-			MrpCalendar *calendar;
-			gint         hours_per_day;
 
 			project = mrp_object_get_project (MRP_OBJECT (priv->task));
-			calendar = mrp_project_get_calendar (project);
-			
-			hours_per_day = mrp_calendar_day_get_total_work (
-				calendar, mrp_day_get_work ()) / (60*60);
 
 			wx2 = event->motion.x;
 			wy2 = priv->y + 0.70 * priv->height;
@@ -1825,7 +1819,7 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 				mrp_task_get_start (priv->task) + duration);
 
 			message = g_strdup_printf (_("Change work to %s"),
-						   planner_format_duration (work, hours_per_day));
+						   planner_format_duration (project, work));
 			planner_gantt_chart_status_updated (chart, message);
 			g_free (message);
 		}

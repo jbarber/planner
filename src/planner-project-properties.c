@@ -1139,7 +1139,6 @@ mpp_property_value_data_func (GtkTreeViewColumn *tree_column,
 	gint             ivalue;
 	gfloat           fvalue;
 /* 	mrptime          tvalue; */
-	gint             work;
 	
 	gtk_tree_model_get (tree_model, iter, COL_PROPERTY, &property, -1);
 
@@ -1185,14 +1184,7 @@ mpp_property_value_data_func (GtkTreeViewColumn *tree_column,
 		mrp_object_get (data->project,
 				mrp_property_get_name (property), &ivalue,
 				NULL); 
-
-/*		work = mrp_calendar_day_get_total_work (
-		mrp_project_get_calendar (tree->priv->project),
-		mrp_day_get_work ());
-*/
-		work = 8*60*60;
-
-		svalue = planner_format_duration (ivalue, work / (60*60));
+		svalue = planner_format_duration (data->project, ivalue);
 		break;
 		
 	case MRP_PROPERTY_TYPE_COST:
@@ -1809,7 +1801,6 @@ mpp_project_property_get_value_string (MrpProject  *project,
 	gchar           *svalue;
 	gint             ivalue;
 	gfloat           fvalue;
-	gint             work;
 	
 	g_return_val_if_fail (MRP_IS_PROJECT (project), NULL);
 	g_return_val_if_fail (property != NULL, NULL);
@@ -1856,14 +1847,7 @@ mpp_project_property_get_value_string (MrpProject  *project,
 		mrp_object_get (project,
 				mrp_property_get_name (property), &ivalue,
 				NULL); 
-
-/*		work = mrp_calendar_day_get_total_work (
-		mrp_project_get_calendar (tree->priv->project),
-		mrp_day_get_work ());
-*/
-		work = 8*60*60;
-
-		svalue = planner_format_duration (ivalue, work / (60*60));
+		svalue = planner_format_duration (project, ivalue);
 		break;
 		
 	case MRP_PROPERTY_TYPE_COST:
