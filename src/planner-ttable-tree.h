@@ -25,7 +25,7 @@
 #include <gtk/gtktreeview.h>
 #include <libplanner/mrp-project.h>
 #include "planner-ttable-model.h"
-#include "planner-main-window.h"
+#include "planner-window.h"
 
 #define PLANNER_TYPE_TTABLE_TREE               (planner_ttable_tree_get_type ())
 #define PLANNER_TTABLE_TREE(obj)               (GTK_CHECK_CAST ((obj), PLANNER_TYPE_TTABLE_TREE, PlannerTtableTree))
@@ -48,7 +48,7 @@ struct _PlannerTtableTreeClass {
 };
 
 GType		 planner_ttable_tree_get_type           (void);
-GtkWidget	*planner_ttable_tree_new                (PlannerMainWindow  *main_window,
+GtkWidget	*planner_ttable_tree_new                (PlannerWindow      *main_window,
 		                                	 PlannerTtableModel *model);
 void		 planner_ttable_tree_set_model          (PlannerTtableTree  *tree,
 							 PlannerTtableModel *model);

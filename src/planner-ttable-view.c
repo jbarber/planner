@@ -89,7 +89,7 @@ static void		ttable_view_ttable_status_updated	(PlannerTtableChart		*chart,
 void			activate				(PlannerView			*view);
 void			deactivate				(PlannerView			*view);
 void			init					(PlannerView			*view,
-								 PlannerMainWindow		*main_window);
+								 PlannerWindow   		*main_window);
 gchar*			get_label				(PlannerView			*view);
 gchar*			get_menu_label				(PlannerView			*view);
 gchar*			get_icon				(PlannerView			*view);

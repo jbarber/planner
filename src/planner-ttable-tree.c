@@ -312,7 +312,7 @@ ttable_tree_add_column(GtkTreeView *tree,
 
 GtkWidget *
 planner_ttable_tree_new (PlannerWindow  *main_window,
-		    PlannerTtableModel *model)
+			 PlannerTtableModel *model)
 {
 	MrpProject		*project;
 	PlannerTtableTree		*tree;
