@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mrproject cvs\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-03-17 20:24+0100\n"
+"POT-Creation-Date: 2004-03-20 04:16+0100\n"
 "PO-Revision-Date: 2003-02-03 23:06+0100\n"
 "Last-Translator: Jan-Willem Harmanny <jwharmanny@hotmail.com>\n"
 "Language-Team: Dutch <nl@li.org>\n"
@@ -1084,12 +1084,12 @@ msgstr "Project start"
 
 #: src/planner-gantt-print.c:191 src/planner-group-dialog.c:805
 #: src/planner-property-dialog.c:378 src/planner-resource-view.c:1168
-#: src/planner-task-dialog.c:1311 src/planner-task-dialog.c:1397
+#: src/planner-task-dialog.c:1319 src/planner-task-dialog.c:1405
 #: src/planner-task-view.c:265
 msgid "Name"
 msgstr "Naam"
 
-#: src/planner-gantt-print.c:199 src/planner-resource-dialog.c:1168
+#: src/planner-gantt-print.c:199 src/planner-resource-dialog.c:1298
 #: src/planner-resource-view.c:691 src/planner-resource-view.c:707
 #: src/planner-resource-view.c:1595 src/planner-task-view.c:268
 msgid "Work"
@@ -1151,7 +1151,7 @@ msgstr "Groep verwijderen"
 msgid "Default group"
 msgstr "Standaard groep"
 
-#: src/planner-group-dialog.c:63
+#: src/planner-group-dialog.c:633
 msgid "Edit group property"
 msgstr "Groep eigenschappen bewerken"
 
@@ -1218,19 +1218,19 @@ msgstr "/Taak _ontkoppelen"
 msgid "/_Edit task..."
 msgstr "/Taak _bewerken..."
 
-#: src/planner-predecessor-model.c:191 src/planner-task-dialog.c:1039
+#: src/planner-predecessor-model.c:191 src/planner-task-dialog.c:1047
 msgid "FS"
 msgstr "FS"
 
-#: src/planner-predecessor-model.c:194 src/planner-task-dialog.c:1040
+#: src/planner-predecessor-model.c:194 src/planner-task-dialog.c:1048
 msgid "FF"
 msgstr "FF"
 
-#: src/planner-predecessor-model.c:197 src/planner-task-dialog.c:1041
+#: src/planner-predecessor-model.c:197 src/planner-task-dialog.c:1049
 msgid "SS"
 msgstr "SS"
 
-#: src/planner-predecessor-model.c:200 src/planner-task-dialog.c:1042
+#: src/planner-predecessor-model.c:200 src/planner-task-dialog.c:1050
 msgid "SF"
 msgstr "SF"
 
@@ -1296,36 +1296,40 @@ msgid "Label"
 msgstr "Label"
 
 #: src/planner-property-dialog.c:411 src/planner-resource-view.c:1210
-#: src/planner-task-dialog.c:1429
+#: src/planner-task-dialog.c:1437
 msgid "Type"
 msgstr "Type"
 
 #. Put "no group" at the top.
-#: src/planner-resource-dialog.c:254 src/planner-resource-input-dialog.c:97
+#: src/planner-resource-dialog.c:267 src/planner-resource-input-dialog.c:97
 #: src/planner-resource-view.c:1806
 msgid "(None)"
 msgstr "(Geen)"
 
-#: src/planner-resource-dialog.c:264 src/planner-resource-input-dialog.c:107
-#: src/planner-task-dialog.c:249
+#: src/planner-resource-dialog.c:277 src/planner-resource-input-dialog.c:107
+#: src/planner-task-dialog.c:251
 msgid "(No name)"
 msgstr "(Geen naam)"
 
+#: src/planner-resource-dialog.c:426
+msgid "Edit resource property from dialog"
+msgstr "Hulpbron eigenschappen bewerken vanuit dialoog"
+
 #. i18n: time stamp format for notes in task dialog, see strftime(3) for
 #. * a detailed description.
-#: src/planner-resource-dialog.c:786 src/planner-task-dialog.c:679
+#: src/planner-resource-dialog.c:910 src/planner-task-dialog.c:687
 msgid "%a %d %b %Y, %H:%M\n"
 msgstr "%a %d %b %Y, %H:%M\n"
 
-#: src/planner-resource-dialog.c:884
+#: src/planner-resource-dialog.c:1008
 msgid "None (use project default)"
 msgstr "Geen (gebruik verstekwaarden van project)"
 
-#: src/planner-resource-dialog.c:1011 src/planner-resource-dialog.c:1013
+#: src/planner-resource-dialog.c:1135 src/planner-resource-dialog.c:1137
 msgid "Edit resource properties"
 msgstr "Hulpbron eigenschappen bewerken"
 
-#: src/planner-resource-dialog.c:1169 src/planner-resource-view.c:694
+#: src/planner-resource-dialog.c:1299 src/planner-resource-view.c:694
 #: src/planner-resource-view.c:708 src/planner-resource-view.c:1596
 msgid "Material"
 msgstr "Materiaal"
@@ -1437,39 +1441,39 @@ msgstr "Openen van database"
 msgid "Save to Database"
 msgstr "Opslaan naar database"
 
-#: src/planner-task-dialog.c:745
+#: src/planner-task-dialog.c:753
 msgid "Finish to start (FS)"
 msgstr "Finish to start (FS)"
 
-#: src/planner-task-dialog.c:746
+#: src/planner-task-dialog.c:754
 msgid "Finish to finish (FF)"
 msgstr "Finish to finish (FF)"
 
-#: src/planner-task-dialog.c:747
+#: src/planner-task-dialog.c:755
 msgid "Start to start (SS)"
 msgstr "Start to start (SS)"
 
-#: src/planner-task-dialog.c:748
+#: src/planner-task-dialog.c:756
 msgid "Start to finish (SF)"
 msgstr "Start to finish (SF)"
 
-#: src/planner-task-dialog.c:798
+#: src/planner-task-dialog.c:806
 msgid "Can't add new predecessor. No task selected!"
 msgstr "Kan geen nieuwe voorganger toevoegen. Geen taak geselecteerd!"
 
-#: src/planner-task-dialog.c:1330
+#: src/planner-task-dialog.c:1338
 msgid "Assigned"
 msgstr "Toegewezen"
 
-#: src/planner-task-dialog.c:1347
+#: src/planner-task-dialog.c:1355
 msgid "Units"
 msgstr "Eenheden"
 
-#: src/planner-task-dialog.c:1451
+#: src/planner-task-dialog.c:1459
 msgid "Lag"
 msgstr "Achterstand"
 
-#: src/planner-task-dialog.c:1584 src/planner-task-dialog.c:1586
+#: src/planner-task-dialog.c:1592 src/planner-task-dialog.c:1594
 msgid "Edit task properties"
 msgstr "Taak eigenschappen bewerken"
 
