@@ -55,7 +55,7 @@
 static gdouble f = 1.0;
 
 typedef struct _TreeNode TreeNode;
-typedef void (*TreeFunc) (TreeNode * node, gpointer data);
+typedef void (*TreeFunc) (TreeNode *node, gpointer data);
 
 struct _TreeNode {
         MrpResource      *resource;
@@ -195,6 +195,8 @@ static void      ttable_chart_row_inserted          (GtkTreeModel            *mo
 static void      ttable_chart_row_deleted           (GtkTreeModel            *model,
 						     GtkTreePath             *path,
 						     gpointer                 data);
+static void      ttable_chart_update_root_task      (PlannerTtableChart      *chart);
+
 
 
 static guint signals[LAST_SIGNAL];
@@ -549,7 +551,13 @@ planner_ttable_chart_get_zoom (PlannerTtableChart *chart)
 static gint
 ttable_chart_get_width (PlannerTtableChart *chart)
 {
-        if (chart->priv->project_start == MRP_TIME_INVALID ||
+	/* FIXME: Evil hack that should be removed when the ttable chart gets
+	 * changes in the root task correctly. There is a problem with the
+	 * notify signal on the root task, triggered when a project is loaded.
+	 */
+	ttable_chart_update_root_task (chart);
+	
+	if (chart->priv->project_start == MRP_TIME_INVALID ||
             chart->priv->last_time == MRP_TIME_INVALID) {
                 return -1;
         }
@@ -1177,12 +1185,8 @@ ttable_chart_root_finish_changed (MrpTask            *root,
                                   GParamSpec         *spec,
                                   PlannerTtableChart *chart)
 {
-        mrptime t;
-
-        g_object_get (root, "finish", &t, NULL);
-
-	chart->priv->last_time = t;
-        ttable_chart_reflow_now (chart);
+	chart->priv->last_time = mrp_task_get_finish (root);
+	ttable_chart_reflow_now (chart);
 }
 
 static void
@@ -1496,3 +1500,23 @@ ttable_chart_remove_children (PlannerTtableChart *chart, TreeNode *node)
 
         g_free (node);
 }
+
+/* FIXME: Remove this when the workaround isn't needed anymore. */
+static void
+ttable_chart_update_root_task (PlannerTtableChart *chart)
+{
+        PlannerTtableChartPriv *priv;
+        MrpProject             *project;
+        MrpTask                *root;
+
+        g_return_if_fail (PLANNER_IS_TTABLE_CHART (chart));
+
+        priv = chart->priv;
+
+	project = planner_ttable_model_get_project (PLANNER_TTABLE_MODEL (priv->model));
+	root = mrp_project_get_root_task (project);
+	
+	priv->project_start = mrp_project_get_project_start (project);
+	priv->last_time = mrp_task_get_finish (root);
+}
+

@@ -47,31 +47,32 @@ struct _PlannerTtableChart {
 struct _PlannerTtableChartClass {
         GtkVBoxClass           parent_class;
 
-        void (*set_scroll_adjustments) (PlannerTtableChart * chart,
-                                        GtkAdjustment * hadj,
-                                        GtkAdjustment * vadj);
+        void (*set_scroll_adjustments) (PlannerTtableChart *chart,
+                                        GtkAdjustment      *hadj,
+                                        GtkAdjustment      *vadj);
 };
 
-GType         planner_ttable_chart_get_type       (void) G_GNUC_CONST;
-GtkWidget *   planner_ttable_chart_new            (void);
-GtkWidget *   planner_ttable_chart_new_with_model (GtkTreeModel       *model);
-GtkTreeModel *planner_ttable_chart_get_model      (PlannerTtableChart *chart);
-void          planner_ttable_chart_set_model      (PlannerTtableChart *chart,
-						   GtkTreeModel       *model);
-void          planner_ttable_chart_expand_row     (PlannerTtableChart *chart,
-						   GtkTreePath        *path);
-void          planner_ttable_chart_collapse_row   (PlannerTtableChart *chart,
-						   GtkTreePath        *path);
-void          planner_ttable_chart_expand_all     (PlannerTtableChart *chart);
-void          planner_ttable_chart_collapse_all   (PlannerTtableChart *chart);
-void          planner_ttable_chart_zoom_in        (PlannerTtableChart *chart);
-void          planner_ttable_chart_zoom_out       (PlannerTtableChart *chart);
-void          planner_ttable_chart_can_zoom       (PlannerTtableChart *chart,
-						   gboolean           *in,
-						   gboolean           *out);
-void          planner_ttable_chart_zoom_to_fit    (PlannerTtableChart *chart);
-gdouble       planner_ttable_chart_get_zoom       (PlannerTtableChart *chart);
-void          planner_ttable_chart_status_updated (PlannerTtableChart *chart,
-						   gchar              *message);
+GType         planner_ttable_chart_get_type         (void) G_GNUC_CONST;
+GtkWidget *   planner_ttable_chart_new              (void);
+GtkWidget *   planner_ttable_chart_new_with_model   (GtkTreeModel       *model);
+GtkTreeModel *planner_ttable_chart_get_model        (PlannerTtableChart *chart);
+void          planner_ttable_chart_set_model        (PlannerTtableChart *chart,
+						     GtkTreeModel       *model);
+void          planner_ttable_chart_expand_row       (PlannerTtableChart *chart,
+						     GtkTreePath        *path);
+void          planner_ttable_chart_collapse_row     (PlannerTtableChart *chart,
+						     GtkTreePath        *path);
+void          planner_ttable_chart_expand_all       (PlannerTtableChart *chart);
+void          planner_ttable_chart_collapse_all     (PlannerTtableChart *chart);
+void          planner_ttable_chart_zoom_in          (PlannerTtableChart *chart);
+void          planner_ttable_chart_zoom_out         (PlannerTtableChart *chart);
+void          planner_ttable_chart_can_zoom         (PlannerTtableChart *chart,
+						     gboolean           *in,
+						     gboolean           *out);
+void          planner_ttable_chart_zoom_to_fit      (PlannerTtableChart *chart);
+gdouble       planner_ttable_chart_get_zoom         (PlannerTtableChart *chart);
+void          planner_ttable_chart_status_updated   (PlannerTtableChart *chart,
+						     gchar              *message);
+
 
 #endif /* __PLANNER_TTABLE_CHART_H__ */

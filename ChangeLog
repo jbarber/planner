@@ -1,5 +1,15 @@
 2004-07-01  Richard Hult  <richard@imendio.com>
 
+	* src/planner-gantt-chart.c: (gantt_chart_row_has_child_toggled),
+	(planner_gantt_chart_set_model): Redraw when parenthood changes.
+
+	* src/planner-ttable-chart.c: Add hack to fix a bug where zoom to
+	fit don't work.
+
+2004-07-01  Richard Hult  <richard@imendio.com>
+
+	* src/planner-gantt-model.c (value_cache_get_wbs): Plug leak.
+
 	* src/planner-gantt-*.c: Clean up a bit.
 
 2004-07-01  Richard Hult  <richard@imendio.com>

@@ -1163,7 +1163,7 @@ value_cache_get_wbs (PlannerGanttModel *model,
 			break;
 	}
 
-	//g_free (cache->wbs);
+	g_free (cache->wbs);
 
 	cache->wbs = g_string_free (string, FALSE);
 	cache->wbs_stamp = model->priv->wbs_stamp;

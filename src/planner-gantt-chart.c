@@ -687,6 +687,35 @@ gantt_chart_row_inserted (GtkTreeModel *model,
 }
 
 static void
+gantt_chart_row_has_child_toggled (GtkTreeModel *model,
+				   GtkTreePath  *path,
+				   GtkTreeIter  *iter,
+				   gpointer      data)
+{
+	PlannerGanttChart     *chart;
+	PlannerGanttChartPriv *priv;
+	gboolean               free_path = FALSE;
+	TreeNode              *node;
+
+	chart = data;
+	priv = chart->priv;
+
+	g_return_if_fail (path != NULL || iter != NULL);
+
+	if (path == NULL) {
+		path = gtk_tree_model_get_path (model, iter);
+		free_path = TRUE;
+	}
+	
+	node = gantt_chart_tree_node_at_path (priv->tree, path);
+	gnome_canvas_item_request_update (node->item);
+	
+	if (free_path) {
+		gtk_tree_path_free (path);
+	}
+}
+
+static void
 gantt_chart_remove_children (PlannerGanttChart *chart,
 			     TreeNode          *node)
 {
@@ -1377,7 +1406,6 @@ planner_gantt_chart_set_model (PlannerGanttChart *chart,
 	PlannerGanttChartPriv *priv;
 	MrpTask               *root;
 	MrpProject            *project;
-	mrptime                t;
 	gulong                 id;
 	
 	g_return_if_fail (PLANNER_IS_GANTT_CHART (chart));
@@ -1449,13 +1477,16 @@ planner_gantt_chart_set_model (PlannerGanttChart *chart,
 				       chart);
 		gantt_chart_add_signal (chart, model, id);
 
-		g_object_get (project,
-			      "project-start", &t,
-			      NULL);
-		priv->project_start = t;
+		id = g_signal_connect (model,
+				       "row-has-child-toggled",
+				       G_CALLBACK (gantt_chart_row_has_child_toggled),
+				       chart);
+		gantt_chart_add_signal (chart, model, id);
+		
+		priv->project_start = mrp_project_get_project_start (project);
 
 		g_object_set (priv->background,
-			      "project-start", t,
+			      "project-start", priv->project_start,
 			      NULL);
 	
 		priv->last_time = mrp_task_get_finish (root);
