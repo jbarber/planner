@@ -6,12 +6,6 @@
 	* src/planner-window.c (window_undo_state_changed_cb) 
 	(window_redo_state_changed_cb): Set tooltip as well.
 
-2004-01-14  Richard Hult  <richard@imendio.com>
-
-	* Makefile.am: Build dotnet bindings conditionally.
-
-	* configure.in: Simplify and bring back the mono checks.
-
 2004-01-25  Alvaro del Castillo  <acs@barrapunto.com>
 
 	* src/planner-resource-view.c: Added undo for resource name property.
@@ -50,6 +44,12 @@
 	* libplanner/mrp-storage-sql.c: propagate GError also in project loading
 	* src/Makefile.am: migration from libpq to libgda
 	* src/planner-sql-plugin.c: migration from libpq to libgda
+
+2004-01-14  Richard Hult  <richard@imendio.com>
+
+	* Makefile.am: Build dotnet bindings conditionally.
+
+	* configure.in: Simplify and bring back the mono checks.
 
 2004-01-14  Anders Carlsson  <andersca@gnome.org>
 
