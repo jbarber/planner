@@ -60,45 +60,45 @@ static BonoboUIVerb verbs[] = {
 	BONOBO_UI_VERB_END
 };
 
-static void		ttable_view_ui_component_event		(BonoboUIComponent	*component,
-								 const gchar		*path,
-								 Bonobo_UIComponent_EventType type,
-								 const gchar		*state_string,
-								 PlannerView			*view);
-static GtkWidget 	*ttable_view_create_widget		(PlannerView			*view);
-static void		ttable_view_project_loaded_cb		(MrpProject		*project,
-								 PlannerView			*view);
-static void		ttable_view_tree_view_realize_cb	(GtkWidget		*w,
-								 gpointer		 data);
-static void		ttable_view_row_expanded		(GtkTreeView		*tree_view,
-								 GtkTreeIter		*iter,
-								 GtkTreePath		*path,
-								 gpointer		 data);
-static void		ttable_view_row_collapsed		(GtkTreeView		*tree_view,
-								 GtkTreeIter		*iter,
-								 GtkTreePath		*path,
-								 gpointer		 data);
-static void		ttable_view_expand_all			(PlannerTtableTree		*tree,
-								 PlannerTtableChart		*chart);
-static void		ttable_view_collapse_all		(PlannerTtableTree		*tree,
-								 PlannerTtableChart		*chart);
-static void		ttable_view_ttable_status_updated	(PlannerTtableChart		*chart,
-								 const gchar		*message,
-								 PlannerView			*view);
-
-void			activate				(PlannerView			*view);
-void			deactivate				(PlannerView			*view);
-void			init					(PlannerView			*view,
-								 PlannerWindow   		*main_window);
-gchar*			get_label				(PlannerView			*view);
-gchar*			get_menu_label				(PlannerView			*view);
-gchar*			get_icon				(PlannerView			*view);
-GtkWidget*		get_widget				(PlannerView			*view);
-void			print_init				(PlannerView			*view,
-								 PlannerPrintJob		*job);
-void			print					(PlannerView			*view);
-gint			print_get_n_pages			(PlannerView			*view);
-void			print_cleanup				(PlannerView			*view);
+static void        ttable_view_ui_component_event    (BonoboUIComponent            *component,
+						      const gchar                  *path,
+						      Bonobo_UIComponent_EventType  type,
+						      const gchar                  *state_string,
+						      PlannerView                  *view);
+static GtkWidget 	*ttable_view_create_widget         (PlannerView                  *view);
+static void        ttable_view_project_loaded_cb     (MrpProject                   *project,
+						      PlannerView                  *view);
+static void        ttable_view_tree_view_realize_cb  (GtkWidget                    *w,
+						      gpointer                      data);
+static void        ttable_view_row_expanded          (GtkTreeView                  *tree_view,
+						      GtkTreeIter                  *iter,
+						      GtkTreePath                  *path,
+						      gpointer                      data);
+static void        ttable_view_row_collapsed         (GtkTreeView                  *tree_view,
+						      GtkTreeIter                  *iter,
+						      GtkTreePath                  *path,
+						      gpointer                      data);
+static void        ttable_view_expand_all            (PlannerTtableTree            *tree,
+						      PlannerTtableChart           *chart);
+static void        ttable_view_collapse_all          (PlannerTtableTree            *tree,
+						      PlannerTtableChart           *chart);
+static void        ttable_view_ttable_status_updated (PlannerTtableChart           *chart,
+						      const gchar                  *message,
+						      PlannerView                  *view);
+void               activate                          (PlannerView                  *view);
+void               deactivate                        (PlannerView                  *view);
+void               init                              (PlannerView                  *view,
+						      PlannerWindow                *main_window);
+gchar*             get_label                         (PlannerView                  *view);
+gchar*             get_menu_label                    (PlannerView                  *view);
+gchar*             get_icon                          (PlannerView                  *view);
+const gchar*       get_name                          (PlannerView                  *view);
+GtkWidget*         get_widget                        (PlannerView                  *view);
+void               print_init                        (PlannerView                  *view,
+						      PlannerPrintJob              *job);
+void               print                             (PlannerView                  *view);
+gint               print_get_n_pages                 (PlannerView                  *view);
+void               print_cleanup                     (PlannerView                  *view);
 
 
 
@@ -155,6 +155,14 @@ get_icon (PlannerView *view)
 	return IMAGEDIR "/resources_usage.png";
 }
 
+G_MODULE_EXPORT const gchar *
+get_name (PlannerView *view)
+{
+	g_return_val_if_fail (PLANNER_IS_VIEW (view), NULL);
+
+	return "resource_usage_view";
+}
+
 G_MODULE_EXPORT GtkWidget *
 get_widget (PlannerView *view)
 {       
@@ -191,7 +199,9 @@ G_MODULE_EXPORT void
 print (PlannerView *view)
 {
 	g_return_if_fail (PLANNER_IS_VIEW (view));
+
 	g_assert (view->priv->print_data);
+
 	planner_ttable_print_do (view->priv->print_data);
 }
 
@@ -199,38 +209,46 @@ G_MODULE_EXPORT gint
 print_get_n_pages (PlannerView *view)
 {
 	g_return_val_if_fail (PLANNER_IS_VIEW (view),0);
+
 	g_assert (view->priv->print_data);
-	return planner_ttable_print_get_n_pages(view->priv->print_data);
+
+	return planner_ttable_print_get_n_pages (view->priv->print_data);
 }
 
 G_MODULE_EXPORT void
 print_cleanup (PlannerView *view)
 {
 	g_return_if_fail (PLANNER_IS_VIEW (view));
+
 	g_assert (view->priv->print_data);
-	planner_ttable_print_data_free(view->priv->print_data);
-	view->priv->print_data=NULL;
-}
 
+	planner_ttable_print_data_free (view->priv->print_data);
 
-static void
-ttable_view_zoom_out_cb		(BonoboUIComponent	*component,
-				 gpointer		 data,
-				 const char		*cname)
-{
-	PlannerView		*view;
-	view = PLANNER_VIEW(data);
-	planner_ttable_chart_zoom_out(view->priv->chart);
+	view->priv->print_data = NULL;
 }
 
 static void
-ttable_view_zoom_in_cb		(BonoboUIComponent	*component,
-				 gpointer		 data,
-				 const char		*cname)
+ttable_view_zoom_out_cb (BonoboUIComponent *component,
+			 gpointer	    data,
+			 const char	   *cname)
 {
-	PlannerView		*view;
-	view = PLANNER_VIEW(data);
-	planner_ttable_chart_zoom_in(view->priv->chart);
+	PlannerView *view;
+
+	view = PLANNER_VIEW (data);
+
+	planner_ttable_chart_zoom_out (view->priv->chart);
+}
+
+static void
+ttable_view_zoom_in_cb (BonoboUIComponent *component,
+			gpointer	   data,
+			const char	  *cname)
+{
+	PlannerView *view;
+
+	view = PLANNER_VIEW (data);
+	
+	planner_ttable_chart_zoom_in (view->priv->chart);
 }
 
 static void

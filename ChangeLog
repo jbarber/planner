@@ -1,3 +1,8 @@
+2004-02-27  Richard Hult  <richard@imendio.com>
+
+	* src/planner-ttable-view.c: (get_name): Implement so we don't get
+	weird errors when trying to print.
+
 2004-02-26  Richard Hult  <richard@imendio.com>
 
 	* libplanner/mrp-application.c: (imrp_application_id_set_data):
