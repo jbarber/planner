@@ -80,6 +80,9 @@ static void       gantt_view_select_all_cb                (BonoboUIComponent    
 static void       gantt_view_unlink_task_cb               (BonoboUIComponent            *component,
 							   gpointer                      data,
 							   const char                   *cname);
+static void       gantt_view_link_tasks_cb               (BonoboUIComponent            *component,
+							   gpointer                      data,
+							   const char                   *cname);
 static void       gantt_view_indent_task_cb               (BonoboUIComponent            *component,
 							   gpointer                      data,
 							   const char                   *cname);
@@ -156,6 +159,7 @@ static BonoboUIVerb verbs[] = {
 	BONOBO_UI_VERB ("EditTask",		gantt_view_edit_task_cb),
 	BONOBO_UI_VERB ("SelectAll",		gantt_view_select_all_cb),
 	BONOBO_UI_VERB ("UnlinkTask",		gantt_view_unlink_task_cb),
+	BONOBO_UI_VERB ("LinkTasks",		gantt_view_link_tasks_cb),
 	BONOBO_UI_VERB ("IndentTask",		gantt_view_indent_task_cb),
 	BONOBO_UI_VERB ("UnindentTask",		gantt_view_unindent_task_cb),
 	BONOBO_UI_VERB ("MoveTaskUp",           gantt_view_move_task_up_cb),
@@ -240,6 +244,13 @@ init (PlannerView *view, PlannerWindow *main_window)
 	g_object_unref (pixbuf);
 	gtk_icon_factory_add (icon_factory,
 			      "planner-stock-unlink-task",
+			      icon_set);
+
+	pixbuf = gdk_pixbuf_new_from_file (IMAGEDIR "/24_link_tasks.png", NULL);
+	icon_set = gtk_icon_set_new_from_pixbuf (pixbuf);
+	g_object_unref (pixbuf);
+	gtk_icon_factory_add (icon_factory,
+			      "planner-stock-link-tasks",
 			      icon_set);
 
 	pixbuf = gdk_pixbuf_new_from_file (IMAGEDIR "/24_indent_task.png", NULL);
@@ -654,6 +665,21 @@ gantt_view_unlink_task_cb (BonoboUIComponent *component,
 }
 
 static void
+gantt_view_link_tasks_cb (BonoboUIComponent *component,
+			   gpointer           data,
+			   const char        *cname)
+{
+	PlannerView *view;
+
+	view = PLANNER_VIEW (data);
+/* TODO: need to get a way of easily modifying the options to tweak the link relationships between the tasks
+*	from the most common option of FS i.e. finish to start. Maybe project-wide flag, maybe menu option
+*	or maybe click-modifiers i.e. Shift+click or Control+click.
+*/
+	planner_task_tree_link_tasks (PLANNER_TASK_TREE (view->priv->tree), MRP_RELATION_FS);
+}
+
+static void
 gantt_view_indent_task_cb (BonoboUIComponent *component, 
 			   gpointer           data, 
 			   const char        *cname)
@@ -929,6 +955,8 @@ gantt_view_update_ui (PlannerView *view)
 	GList      *list, *l;
 	gchar      *value;
 	gchar      *rel_value = "0";
+	gchar      *link_value = "0";
+	gint        count_value = 0;
 
 	g_return_if_fail (PLANNER_IS_VIEW (view));
 	
@@ -947,7 +975,13 @@ gantt_view_update_ui (PlannerView *view)
 		}
 	}
 	
+	
+	for (l = list; l; l = l->next) {
+		count_value++;
+	}
+	
 	value = (list != NULL) ? "1" : "0";
+	link_value = (count_value >= 2) ? "1" : "0";
 
 	bonobo_ui_component_freeze (view->ui_component, NULL);
 
@@ -966,6 +1000,10 @@ gantt_view_update_ui (PlannerView *view)
 				      "sensitive", rel_value,
 				      NULL);
 
+      	bonobo_ui_component_set_prop (view->ui_component, 
+				      "/commands/LinkTasks",
+				      "sensitive", link_value, 
+				      NULL);
 
 	bonobo_ui_component_set_prop (view->ui_component, 
 				      "/commands/IndentTask",

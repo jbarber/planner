@@ -10,6 +10,7 @@ images_DATA = \
 	24_insert_task.png		\
 	24_remove_task.png		\
 	24_unlink_task.png		\
+	24_link_task.png		\
 	24_indent_task.png		\
 	24_unindent_task.png		\
 	24_insert_resource.png		\

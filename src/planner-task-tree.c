@@ -517,6 +517,13 @@ task_tree_init (PlannerTaskTree *tree)
 			      "planner-stock-unlink-task",
 			      icon_set);
 
+	pixbuf = gdk_pixbuf_new_from_file (IMAGEDIR "/24_link_task.png", NULL);
+	icon_set = gtk_icon_set_new_from_pixbuf (pixbuf);
+	g_object_unref (pixbuf);
+	gtk_icon_factory_add (icon_factory,
+			      "planner-stock-link-task",
+			      icon_set);
+
 	pixbuf = gdk_pixbuf_new_from_file (IMAGEDIR "/24_indent_task.png", NULL);
 	icon_set = gtk_icon_set_new_from_pixbuf (pixbuf);
 	g_object_unref (pixbuf);
@@ -2064,6 +2071,49 @@ planner_task_tree_unlink_task (PlannerTaskTree *tree)
 		}
 
 		g_list_free (relations);
+	}
+	
+	g_list_free (list);
+}
+
+void
+planner_task_tree_link_tasks (PlannerTaskTree *tree,
+			      MrpRelationType  relationship)
+{
+	MrpTask   *task;
+	MrpTask   *target_task;
+	GList     *list, *l;
+	GtkWidget *dialog;
+
+	/* FIXME: undo */
+
+	list = planner_task_tree_get_selected_tasks (tree);
+	if (list == NULL) {
+		return;
+	}
+
+	target_task = list->data;
+	for (l = list->next; l; l = l->next) {
+		GError *error = NULL;
+
+		task = l->data;
+
+		if (!mrp_task_add_predecessor (target_task,
+					       task,
+					       relationship,
+					       0,
+					       &error)) {
+			dialog = gtk_message_dialog_new (NULL,
+							 GTK_DIALOG_DESTROY_WITH_PARENT,
+							 GTK_MESSAGE_ERROR,
+							 GTK_BUTTONS_OK,
+							 "%s", error->message);
+			gtk_dialog_run (GTK_DIALOG (dialog));
+			gtk_widget_destroy (dialog);
+			g_error_free (error);
+		}
+		
+		target_task = task;
 	}
 	
 	g_list_free (list);

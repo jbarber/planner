@@ -4,7 +4,8 @@
     <cmd name="RemoveTask"          _label="_Remove Task"             pixtype="stock" pixname="planner-stock-remove-task" sensitive="0"/>
     <cmd name="InsertTasks"         _label="In_sert Tasks..."         pixtype="stock" pixname="planner-stock-insert-task"/>
     <cmd name="EditTask"            _label="_Edit Task Properties..." sensitive="0"/>
-    <cmd name="UnlinkTask"          _label="Un_link Task"              pixtype="stock" pixname="planner-stock-unlink-task"/>
+    <cmd name="UnlinkTask"          _label="_Unlink Task"             pixtype="stock" pixname="planner-stock-unlink-task"/>
+    <cmd name="LinkTasks"           _label="_Link Tasks"               pixtype="stock" pixname="planner-stock-link-task"/>
     <cmd name="ResetConstraint"     _label="Reset _Constraint" sensitive="0"/>
     <cmd name="ResetAllConstraints" _label="Reset _All Constraints"/>
     <cmd name="SelectAll"           _label="Select _All"              _tip="Select all tasks"/>
@@ -43,6 +44,7 @@
         <menuitem name="InsertTask"          verb=""   accel="*Control*i" />
         <menuitem name="InsertTasks"         verb=""/>
 	<menuitem name="RemoveTask"          verb=""/>
+	<menuitem name="LinkTasks"           verb=""/>
         <menuitem name="UnlinkTask"          verb=""/>
         <separator/>
         <menuitem name="IndentTask"          verb=""/>
@@ -62,6 +64,7 @@
   <dockitem name="Toolbar">
     <toolitem name="InsertTask"   verb="" _label="Insert"/>
     <toolitem name="RemoveTask"   verb="" _label="Remove"/>
+    <toolitem name="LinkTasks"    verb="" _label="Link"/>
     <toolitem name="UnlinkTask"   verb="" _label="Unlink"/>
     <toolitem name="IndentTask"   verb="" _label="Indent"/>
     <toolitem name="UnindentTask" verb="" _label="Unindent"/>

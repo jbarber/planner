@@ -1,5 +1,17 @@
 2004-02-14  Richard Hult  <richard@imendio.com>
 
+	* data/images/24_link_task.png:
+	* data/images/Makefile.am:
+	* data/ui/gantt-view.ui:
+	* data/ui/task-view.ui:
+	* src/planner-application.c:
+	* src/planner-gantt-view.c:
+	* src/planner-task-tree.c:
+	* src/planner-task-view.c: Add menu item and toolbar button for
+	Link tasks, patch from Lincoln Phipps.
+
+2004-02-14  Richard Hult  <richard@imendio.com>
+
 	* src/planner-window.c: (window_undo_state_changed_cb),
 	(window_redo_state_changed_cb): Work around a bug, needs to be
 	fixed later, see bug #134357.

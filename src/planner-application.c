@@ -72,6 +72,13 @@ static GtkStockItem stock_items[] = {
 		GETTEXT_PACKAGE
 	},
 	{
+		"planner-stock-link-tasks",
+		N_("Link"),
+		0, /*GdkModifierType*/
+		0, /*keyval*/
+		GETTEXT_PACKAGE
+	},
+	{
 		"planner-stock-indent-task",
 		N_("Indent"),
 		0, /*GdkModifierType*/

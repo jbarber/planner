@@ -66,6 +66,7 @@ void       planner_task_tree_edit_task              (PlannerTaskTree   *tree);
 void       planner_task_tree_insert_tasks           (PlannerTaskTree   *tree);
 void       planner_task_tree_select_all             (PlannerTaskTree   *tree);
 void       planner_task_tree_unlink_task            (PlannerTaskTree   *tree);
+void       planner_task_tree_link_tasks             (PlannerTaskTree   *tree, MrpRelationType relationship);
 void       planner_task_tree_indent_task            (PlannerTaskTree   *tree);
 void       planner_task_tree_unindent_task          (PlannerTaskTree   *tree);
 void       planner_task_tree_reset_constraint       (PlannerTaskTree   *tree);

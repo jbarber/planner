@@ -86,6 +86,9 @@ static void   task_view_select_all_cb            (BonoboUIComponent            *
 static void   task_view_unlink_task_cb           (BonoboUIComponent            *component,
 						  gpointer                      data,
 						  const char                   *cname);
+static void   task_view_link_tasks_cb           (BonoboUIComponent            *component,
+						  gpointer                      data,
+						  const char                   *cname);
 static void   task_view_indent_task_cb           (BonoboUIComponent            *component,
 						  gpointer                      data,
 						  const char                   *cname);
@@ -133,6 +136,7 @@ static BonoboUIVerb verbs[] = {
 	BONOBO_UI_VERB ("EditTask",		task_view_edit_task_cb),
 	BONOBO_UI_VERB ("SelectAll",		task_view_select_all_cb),
 	BONOBO_UI_VERB ("UnlinkTask",		task_view_unlink_task_cb),
+	BONOBO_UI_VERB ("LinkTasks",		task_view_link_tasks_cb),
 	BONOBO_UI_VERB ("IndentTask",		task_view_indent_task_cb),
 	BONOBO_UI_VERB ("UnindentTask",		task_view_unindent_task_cb),
 	BONOBO_UI_VERB ("MoveTaskUp",		task_view_move_task_up_cb),
@@ -383,6 +387,18 @@ task_view_unlink_task_cb (BonoboUIComponent *component,
 }
 
 static void
+task_view_link_tasks_cb (BonoboUIComponent *component,
+			  gpointer           data,
+			  const char        *cname)
+{
+	PlannerView *view;
+
+	view = PLANNER_VIEW (data);
+
+	planner_task_tree_link_tasks (PLANNER_TASK_TREE (view->priv->tree), MRP_RELATION_FS);
+}
+
+static void
 task_view_indent_task_cb (BonoboUIComponent *component, 
 			  gpointer           data, 
 			  const char        *cname)
@@ -571,6 +587,8 @@ task_view_update_ui (PlannerView *view)
 	GList      *list, *l;
 	gchar      *value;
 	gchar      *rel_value = "0";
+	gchar	   *link_value = "0";
+	gint	    count_value = 0;
 	
 	if (!view->activated) {
 		return;
@@ -587,7 +605,12 @@ task_view_update_ui (PlannerView *view)
 		}
 	}
 
+	for (l = list; l; l = l->next) {
+		count_value++;
+	}
+
 	value = (list != NULL) ? "1" : "0";
+	link_value = (count_value >= 2) ? "1" : "0";
 
 	bonobo_ui_component_freeze (view->ui_component, NULL);
 
@@ -604,6 +627,11 @@ task_view_update_ui (PlannerView *view)
 	bonobo_ui_component_set_prop (view->ui_component, 
 				      "/commands/UnlinkTask",
 				      "sensitive", rel_value, 
+				      NULL);
+
+	bonobo_ui_component_set_prop (view->ui_component, 
+				      "/commands/LinkTasks",
+				      "sensitive", link_value, 
 				      NULL);
 
 	bonobo_ui_component_set_prop (view->ui_component, 
