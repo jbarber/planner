@@ -1,5 +1,8 @@
 2004-03-29  Richard Hult  <richard@imendio.com>
 
+	* libplanner/mrp-old-xml.c (old_xml_read_assignment): Be more
+	robust.
+
 	* src/planner-gantt-row.c (gantt_row_event): Patch from Doroszlai
 	Attila to fix popup position.
 

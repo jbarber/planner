@@ -485,11 +485,13 @@ old_xml_read_assignment (MrpParser *parser, xmlNodePtr tree)
 					GINT_TO_POINTER (resource_id));
 	
 	if (!task) {
-		g_print ("NO TASK FROM HASH\n");
+		g_warning ("Corrupt file? Task %d not found in hash.", task_id);
+		goto fail;
 	}
 
 	if (!resource) {
-		g_print ("NO RESOURCE FROM HASH\n");
+		g_warning ("Corrupt file? Resource %d not found in hash.", resource_id);
+		goto fail;
 	}
 
 	assignment = g_object_new (MRP_TYPE_ASSIGNMENT,
@@ -499,6 +501,9 @@ old_xml_read_assignment (MrpParser *parser, xmlNodePtr tree)
 				   NULL);
 
 	parser->assignments = g_list_prepend (parser->assignments, assignment);
+
+ fail:
+	; /* Avoid gcc warning. */
 }
 
 static void
