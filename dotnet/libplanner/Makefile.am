@@ -2,8 +2,7 @@ LIBRARY=	libplanner.dll
 APIS=		libplanner-api.xml
 
 INCLUDE_APIS=	
-ASSEMBLIES=	-r glib-sharp.dll
-
+ASSEMBLIES=	-pkg:gtk-sharp
 EXTRA_DIST = 	*.custom *.metadata *.xml
 
 gtksourceviewsharpdir = $(libdir)
