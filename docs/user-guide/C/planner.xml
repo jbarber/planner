@@ -3,8 +3,8 @@
 "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
   <!ENTITY legal SYSTEM "legal.xml">
   <!ENTITY appversion "0.13">
-  <!ENTITY manrevision "0.13">
-  <!ENTITY date "17 Nov 2004">
+  <!ENTITY manrevision "0.13-1">
+  <!ENTITY date "10 Feb 2005">
   <!ENTITY app "Planner">
   <!ENTITY cmd "planner">
   <!-- Information about the entities
@@ -32,6 +32,7 @@
       <year>2002</year> 
       <year>2003</year> 
       <year>2004</year> 
+      <year>2005</year> 
       <holder>Kurt Maute, PMP</holder> 
     </copyright> 
     <copyright> 
@@ -298,7 +299,9 @@
   	</listitem> 
   	<listitem> 
     	  <para><emphasis>Task Sequencing</emphasis> - identify dependencies 
-		between tasks and other constraints
+		between tasks and other constraints via the task properites
+		dialog, predecessors tab.  Details in 
+		<xref linkend="mrp-task-properties"/>.
 	  </para> 
   	</listitem> 
   	<listitem> 
@@ -402,8 +405,15 @@
 	     allocated to any task at that time</para>
   	</listitem> 
 	<listitem> 
-	  <para><emphasis>Blue</emphasis> shows that the resource is either
-	    partially or fully allocated to a task</para>
+	  <para><emphasis>Blue</emphasis> has a slightly different meaning
+	    depending on its context.  On the task line, it shows that the 
+	    resource is either partially or fully allocated to the task, but on
+	    the resource summary line, it shows that the resource is fully 
+	    allocated at that time.</para>
+  	</listitem> 
+	<listitem> 
+	  <para><emphasis>Grey</emphasis> shows that the resource is
+	    partially allocated at that time</para>
   	</listitem> 
 	<listitem> 
 	  <para><emphasis>Red</emphasis> shows that the resource is
@@ -1133,6 +1143,16 @@
 	  of the two tasks and delete the link by clicking the <guiicon>Unlink
 	  </guiicon>icon on the toolbar, or by right clicking either task and 
 	  selecting <guimenuitem>Unlink</guimenuitem> from the pop up.
+	</para>
+      </sect3>
+      <sect3 id="mrp-critical-path">
+        <title>Highlighting the Critical Path</title>
+        <para>To show the tasks along the critical path of the project, choose
+	  <menuchoice>
+	    <guimenu>View</guimenu>
+	     <guimenuitem>Highlight Critical Tasks</guimenuitem>
+	  </menuchoice>.  The names of the tasks along the critical path will 
+	  be shown in red, and in the Gantt view, the task bar will also be red.
 	</para>
       </sect3>
       <sect3 id="mrp-moving-tasks">
