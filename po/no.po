@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: planner 2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-03-09 17:46+0100\n"
-"PO-Revision-Date: 2004-03-09 17:47+0100\n"
+"POT-Creation-Date: 2004-03-16 21:02+0100\n"
+"PO-Revision-Date: 2004-03-16 21:03+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian/Bokmaal <i18n-nb@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
@@ -33,8 +33,8 @@ msgstr "_Pause:"
 
 #: data/glade/add-predecessor.glade.h:4 data/glade/calendar-dialog.glade.h:35
 #: data/glade/new-property.glade.h:5 data/glade/project-properties.glade.h:10
-#: data/glade/resource-dialog.glade.h:11
-#: data/glade/resource-input-dialog.glade.h:6
+#: data/glade/resource-dialog.glade.h:12
+#: data/glade/resource-input-dialog.glade.h:7
 #: data/glade/task-dialog.glade.h:14 data/glade/task-input-dialog.glade.h:4
 msgid "_Name:"
 msgstr "_Navn:"
@@ -216,7 +216,7 @@ msgstr "_Beskrivelse:"
 msgid "_Label:"
 msgstr "_Etikett:"
 
-#: data/glade/new-property.glade.h:6 data/glade/resource-dialog.glade.h:12
+#: data/glade/new-property.glade.h:6 data/glade/resource-dialog.glade.h:14
 msgid "_Type:"
 msgstr "_Type:"
 
@@ -286,6 +286,10 @@ msgid "Notes"
 msgstr "Merknader"
 
 #: data/glade/resource-dialog.glade.h:7
+msgid "Optional - overrides resource name in Gantt view."
+msgstr "Valgfri - overstyrer ressursnavn i Gantt-visningen."
+
+#: data/glade/resource-dialog.glade.h:8
 msgid ""
 "Select the calendar to use for this resource. If you want to use the default "
 "calendar of the project, select 'None'. "
@@ -293,25 +297,34 @@ msgstr ""
 "Velg kalender som skal brukes for denne ressursen. Hvis du vil bruke "
 "forvalgt kalender for prosjekget velger du «Ingen». "
 
-#: data/glade/resource-dialog.glade.h:8
-#: data/glade/resource-input-dialog.glade.h:3
+#: data/glade/resource-dialog.glade.h:9
+#: data/glade/resource-input-dialog.glade.h:4
 msgid "_Email:"
 msgstr "_E-post:"
 
-#: data/glade/resource-dialog.glade.h:9
-#: data/glade/resource-input-dialog.glade.h:4
+#: data/glade/resource-dialog.glade.h:10
+#: data/glade/resource-input-dialog.glade.h:5
 msgid "_Group:"
 msgstr "_Gruppe:"
 
-#: data/glade/resource-dialog.glade.h:10
+#: data/glade/resource-dialog.glade.h:11
 msgid "_Insert time stamp"
 msgstr "Sett _inn tidsstempel"
+
+#: data/glade/resource-dialog.glade.h:13
+#: data/glade/resource-input-dialog.glade.h:8
+msgid "_Short name:"
+msgstr "_Kort navn:"
 
 #: data/glade/resource-input-dialog.glade.h:2
 msgid "Insert Resource"
 msgstr "Sett inn ressurs"
 
-#: data/glade/resource-input-dialog.glade.h:5
+#: data/glade/resource-input-dialog.glade.h:3
+msgid "Optional - overrides resource name in gantt view."
+msgstr "Valgfri - overstyrer ressursnavnet i gantt-visningen."
+
+#: data/glade/resource-input-dialog.glade.h:6
 #: data/glade/task-input-dialog.glade.h:3
 msgid "_Insert"
 msgstr "Sett _inn"
@@ -358,7 +371,7 @@ msgstr "_Fullført:"
 msgid "Predecessors"
 msgstr "Forgjengere"
 
-#: data/glade/task-dialog.glade.h:9 src/planner-resource-view.c:384
+#: data/glade/task-dialog.glade.h:9 src/planner-resource-view.c:393
 msgid "Resources"
 msgstr "Ressurser"
 
@@ -387,7 +400,7 @@ msgid "_Work:"
 msgstr "_Arbeid:"
 
 #. day unit variant accepted in input
-#: data/glade/task-dialog.glade.h:17 src/planner-task-tree.c:2479
+#: data/glade/task-dialog.glade.h:17 src/planner-task-tree.c:2308
 msgid "days"
 msgstr "dager"
 
@@ -795,11 +808,11 @@ msgstr "Bruk basis"
 msgid "Use day from base calendar"
 msgstr "Bruk dag fra grunnkalender"
 
-#: libplanner/mrp-parser.c:1043 libplanner/mrp-parser.c:1138
+#: libplanner/mrp-parser.c:1058 libplanner/mrp-parser.c:1153
 msgid "Could not create XML tree"
 msgstr "Kunne ikke opprette XML-tre"
 
-#: libplanner/mrp-parser.c:1104
+#: libplanner/mrp-parser.c:1119
 msgid "Could not write XML file"
 msgstr "Kunne ikke skrive XML-fil"
 
@@ -866,12 +879,12 @@ msgstr "Ingen"
 msgid "Invalid Unicode"
 msgstr "Ugyldig Unicode"
 
-#: libplanner/mrp-sql.c:2201
+#: libplanner/mrp-sql.c:2215
 #, c-format
 msgid "Connection to database '%s' failed.\n"
 msgstr "Tilkobling til database «%s» feilet.\n"
 
-#: libplanner/mrp-sql.c:2206 libplanner/mrp-sql.c:3643
+#: libplanner/mrp-sql.c:2220 libplanner/mrp-sql.c:3660
 #, c-format
 msgid ""
 "Connection to database '%s' failed.\n"
@@ -880,12 +893,12 @@ msgstr ""
 "Tilkobling til database «%s» feilet.\n"
 "%s"
 
-#: libplanner/mrp-sql.c:2214
+#: libplanner/mrp-sql.c:2228
 #, c-format
 msgid "BEGIN command failed %s."
 msgstr "BEGIN-kommando feilet %s."
 
-#: libplanner/mrp-sql.c:2380
+#: libplanner/mrp-sql.c:2394
 #, c-format
 msgid ""
 "The project '%s' has been changed by the user '%s' since you opened it. Do "
@@ -1067,48 +1080,47 @@ msgstr "%d %b %Y"
 msgid "Project start"
 msgstr "Prosjektstart"
 
-#: src/planner-gantt-print.c:190 src/planner-group-dialog.c:805
-#: src/planner-property-dialog.c:378 src/planner-resource-view.c:1159
+#: src/planner-gantt-print.c:191 src/planner-group-dialog.c:805
+#: src/planner-property-dialog.c:378 src/planner-resource-view.c:1168
 #: src/planner-task-dialog.c:1311 src/planner-task-dialog.c:1397
 #: src/planner-task-view.c:265
 msgid "Name"
 msgstr "Navn"
 
-#: src/planner-gantt-print.c:198 src/planner-resource-dialog.c:1101
-#: src/planner-resource-view.c:682 src/planner-resource-view.c:698
-#: src/planner-resource-view.c:1528 src/planner-task-view.c:268
+#: src/planner-gantt-print.c:199 src/planner-resource-dialog.c:1168
+#: src/planner-resource-view.c:691 src/planner-resource-view.c:707
+#: src/planner-resource-view.c:1595 src/planner-task-view.c:268
 msgid "Work"
 msgstr "Arbeid"
 
-#: src/planner-gantt-print.c:513 src/planner-gantt-print.c:515
-#: src/planner-gantt-row.c:656 src/planner-gantt-row.c:658
+#: src/planner-gantt-print.c:523 src/planner-gantt-row.c:668
 #: src/planner-window.c:1648
 msgid "Unnamed"
 msgstr "Uten navn"
 
-#: src/planner-gantt-row.c:1841 src/planner-gantt-row.c:1844
+#: src/planner-gantt-row.c:1908 src/planner-gantt-row.c:1911
 msgid "No name"
 msgstr "Uten navn"
 
-#: src/planner-gantt-row.c:1847
+#: src/planner-gantt-row.c:1914
 #, c-format
 msgid "Make task '%s' a predecessor of '%s'"
 msgstr "Gjør oppgave «%s» til en forgjenger av «%s»"
 
-#: src/planner-gantt-row.c:1905
+#: src/planner-gantt-row.c:1972
 #, c-format
 msgid "Change work to %s"
 msgstr "Endre arbeid til %s"
 
-#: src/planner-gantt-view.c:288
+#: src/planner-gantt-view.c:287
 msgid "Gantt Chart"
 msgstr "Gantt-plott"
 
-#: src/planner-gantt-view.c:296
+#: src/planner-gantt-view.c:295
 msgid "_Gantt Chart"
 msgstr "_Gantt-plott"
 
-#: src/planner-gantt-view.c:493
+#: src/planner-gantt-view.c:492
 msgid ""
 "\n"
 "Name"
@@ -1117,7 +1129,7 @@ msgstr ""
 "Navn"
 
 #. COL_START,    _("\nStart"),
-#: src/planner-gantt-view.c:495
+#: src/planner-gantt-view.c:494
 msgid ""
 "\n"
 "Work"
@@ -1183,6 +1195,26 @@ msgstr "planner: --geometry kan ikke brukes med mer enn en fil."
 #, c-format
 msgid "Could not open plugin file '%s'\n"
 msgstr "Kunne ikke åpne tilleggsfil «%s»\n"
+
+#: src/planner-task-popup.c:45
+msgid "/_Insert task"
+msgstr "/Sett _inn oppgave"
+
+#: src/planner-task-popup.c:48
+msgid "/_Insert subtask"
+msgstr "/Sett _inn underoppgave"
+
+#: src/planner-task-popup.c:51
+msgid "/_Remove task"
+msgstr "/Fje_rn oppgave"
+
+#: src/planner-task-popup.c:56
+msgid "/_Unlink task"
+msgstr "/_Fjern lenke til oppgave"
+
+#: src/planner-task-popup.c:61
+msgid "/_Edit task..."
+msgstr "/R_ediger oppgave..."
 
 #: src/planner-predecessor-model.c:191 src/planner-task-dialog.c:1039
 msgid "FS"
@@ -1261,82 +1293,86 @@ msgstr "Kunne ikke opprette egenskaper-dialog."
 msgid "Label"
 msgstr "Etikett"
 
-#: src/planner-property-dialog.c:411 src/planner-resource-view.c:1180
+#: src/planner-property-dialog.c:411 src/planner-resource-view.c:1210
 #: src/planner-task-dialog.c:1429
 msgid "Type"
 msgstr "Type"
 
 #. Put "no group" at the top.
-#: src/planner-resource-dialog.c:248 src/planner-resource-input-dialog.c:96
-#: src/planner-resource-view.c:1739
+#: src/planner-resource-dialog.c:254 src/planner-resource-input-dialog.c:97
+#: src/planner-resource-view.c:1806
 msgid "(None)"
 msgstr "(Ingen)"
 
-#: src/planner-resource-dialog.c:258 src/planner-resource-input-dialog.c:106
+#: src/planner-resource-dialog.c:264 src/planner-resource-input-dialog.c:107
 #: src/planner-task-dialog.c:249
 msgid "(No name)"
 msgstr "(Uten navn)"
 
 #. i18n: time stamp format for notes in task dialog, see strftime(3) for
 #. * a detailed description.
-#: src/planner-resource-dialog.c:728 src/planner-task-dialog.c:679
+#: src/planner-resource-dialog.c:786 src/planner-task-dialog.c:679
 msgid "%a %d %b %Y, %H:%M\n"
 msgstr "%a %d %b %Y, %H.%M\n"
 
-#: src/planner-resource-dialog.c:826
+#: src/planner-resource-dialog.c:884
 msgid "None (use project default)"
 msgstr "Ingen (bruk forvalg for prosjektet)"
 
-#: src/planner-resource-dialog.c:953 src/planner-resource-dialog.c:955
+#: src/planner-resource-dialog.c:1011 src/planner-resource-dialog.c:1013
 msgid "Edit resource properties"
 msgstr "Rediger egenskaper for ressurs"
 
-#: src/planner-resource-dialog.c:1102 src/planner-resource-view.c:685
-#: src/planner-resource-view.c:699 src/planner-resource-view.c:1529
+#: src/planner-resource-dialog.c:1169 src/planner-resource-view.c:694
+#: src/planner-resource-view.c:708 src/planner-resource-view.c:1596
 msgid "Material"
 msgstr "Materiale"
 
-#: src/planner-resource-view.c:251
+#: src/planner-resource-view.c:260
 msgid "/_Insert resource"
 msgstr "/Sett _inn ressurs"
 
-#: src/planner-resource-view.c:252
+#: src/planner-resource-view.c:261
 msgid "/_Remove resource"
 msgstr "/Fje_rn ressurs"
 
-#: src/planner-resource-view.c:253
+#: src/planner-resource-view.c:262
 msgid "/_Edit resource..."
 msgstr "/R_ediger ressurs..."
 
-#: src/planner-resource-view.c:392
+#: src/planner-resource-view.c:401
 msgid "_Resources"
 msgstr "_Ressurser"
 
-#: src/planner-resource-view.c:789
+#: src/planner-resource-view.c:798
 msgid "Insert resource"
 msgstr "Sett inn ressurs"
 
-#: src/planner-resource-view.c:941
+#: src/planner-resource-view.c:950
 msgid "Remove resource"
 msgstr "Fjern ressurs"
 
-#: src/planner-resource-view.c:1042
+#: src/planner-resource-view.c:1051
 msgid "Edit custom resource properties"
 msgstr "Rediger egendefinerte egenskaper for ressurs"
 
-#: src/planner-resource-view.c:1204
+#: src/planner-resource-view.c:1189
+msgid "Short name"
+msgstr "Kort navn"
+
+#: src/planner-resource-view.c:1234
 msgid "Group"
 msgstr "Gruppe"
 
-#: src/planner-resource-view.c:1233
+#: src/planner-resource-view.c:1263
 msgid "Email"
 msgstr "E-post"
 
-#: src/planner-resource-view.c:1298
+#: src/planner-resource-view.c:1328
 msgid "Edit resource property"
 msgstr "Rediger egenskap for ressurs"
 
-#: src/planner-resource-view.c:1360
+#: src/planner-resource-view.c:1390
 msgid "Edit resource custom property"
 msgstr "Rediger egendefinert egenskap for ressurs"
 
@@ -1387,15 +1423,15 @@ msgstr "H%d"
 msgid "%04d, H%d"
 msgstr "%04d, H%d"
 
-#: src/planner-sql-plugin.c:367
+#: src/planner-sql-plugin.c:368
 msgid "Project"
 msgstr "Prosject"
 
-#: src/planner-sql-plugin.c:543
+#: src/planner-sql-plugin.c:544
 msgid "Open from Database"
 msgstr "Åpne fra database"
 
-#: src/planner-sql-plugin.c:650
+#: src/planner-sql-plugin.c:651
 msgid "Save to Database"
 msgstr "Lagre til database"
 
@@ -1435,100 +1471,80 @@ msgstr "Pause"
 msgid "Edit task properties"
 msgstr "Rediger egenskaper for oppgave"
 
-#: src/planner-task-tree.c:189
-msgid "/_Insert task"
-msgstr "/Sett _inn oppgave"
-
-#: src/planner-task-tree.c:192
-msgid "/_Insert subtask"
-msgstr "/Sett _inn underoppgave"
-
-#: src/planner-task-tree.c:195
-msgid "/_Remove task"
-msgstr "/Fje_rn oppgave"
-
-#: src/planner-task-tree.c:200
-msgid "/_Unlink task"
-msgstr "/_Fjern lenke til oppgave"
-
-#: src/planner-task-tree.c:206
-msgid "/_Edit task..."
-msgstr "/R_ediger oppgave..."
-
-#: src/planner-task-tree.c:297
+#: src/planner-task-tree.c:245
 msgid "Insert task"
 msgstr "Sett inn oppgave"
 
-#: src/planner-task-tree.c:373
+#: src/planner-task-tree.c:321
 msgid "Edit task property"
 msgstr "Rediger egenskap for oppgave"
 
-#: src/planner-task-tree.c:2471
+#: src/planner-task-tree.c:2300
 msgid "mon"
 msgstr "måned"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:2472
+#: src/planner-task-tree.c:2301
 msgid "month"
 msgstr "måned"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:2473
+#: src/planner-task-tree.c:2302
 msgid "months"
 msgstr "måneder"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:2474
+#: src/planner-task-tree.c:2303
 msgid "w"
 msgstr "u"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:2475
+#: src/planner-task-tree.c:2304
 msgid "week"
 msgstr "uke"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:2476
+#: src/planner-task-tree.c:2305
 msgid "weeks"
 msgstr "uker"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:2477
+#: src/planner-task-tree.c:2306
 msgid "d"
 msgstr "d"
 
 #. day unit variant accepted in input
-#: src/planner-task-tree.c:2478
+#: src/planner-task-tree.c:2307
 msgid "day"
 msgstr "dag"
 
 #. day unit variant accepted in input
-#: src/planner-task-tree.c:2480
+#: src/planner-task-tree.c:2309
 msgid "h"
 msgstr "t"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:2481
+#: src/planner-task-tree.c:2310
 msgid "hour"
 msgstr "time"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:2482
+#: src/planner-task-tree.c:2311
 msgid "hours"
 msgstr "timer"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:2483
+#: src/planner-task-tree.c:2312
 msgid "min"
 msgstr "min"
 
 #. minute unit variant accepted in input
-#: src/planner-task-tree.c:2484
+#: src/planner-task-tree.c:2313
 msgid "minute"
 msgstr "minutt"
 
 #. minute unit variant accepted in input
-#: src/planner-task-tree.c:2485
+#: src/planner-task-tree.c:2314
 msgid "minutes"
 msgstr "minutter"
 
