@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Planner\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-03-26 16:38+0100\n"
-"PO-Revision-Date: 2004-03-26 16:44+0100\n"
+"POT-Creation-Date: 2004-04-13 06:26+0200\n"
+"PO-Revision-Date: 2004-04-13 06:28+0200\n"
 "Last-Translator: Бранко Ивановић <popeye@one.ekof.bg.ac.yu>\n"
 "Language-Team: Serbian (sr) <gnom@prevod.org>\n"
 "MIME-Version: 1.0\n"
@@ -403,7 +403,7 @@ msgid "_Work:"
 msgstr "_Рад:"
 
 #. day unit variant accepted in input
-#: data/glade/task-dialog.glade.h:17 src/planner-task-tree.c:2355
+#: data/glade/task-dialog.glade.h:17 src/planner-task-tree.c:2899
 msgid "days"
 msgstr "дана"
 
@@ -432,122 +432,166 @@ msgstr "Унеси задатке..."
 msgid "Indent"
 msgstr "Увуци"
 
-#: data/ui/gantt-view.ui.h:4 data/ui/resource-view.ui.h:5
-#: data/ui/task-view.ui.h:4 src/planner-application.c:55
+#: data/ui/gantt-view.ui.h:4 data/ui/task-view.ui.h:4
+msgid "Indent the selected tasks"
+msgstr "Увуци изабране задатке"
+
+#: data/ui/gantt-view.ui.h:5 data/ui/resource-view.ui.h:6
+#: data/ui/task-view.ui.h:5 src/planner-application.c:55
 #: src/planner-application.c:111
 msgid "Insert"
 msgstr "Унеси"
 
-#: data/ui/gantt-view.ui.h:5 data/ui/task-view.ui.h:5
+#: data/ui/gantt-view.ui.h:6 data/ui/task-view.ui.h:6
+msgid "Insert a new task"
+msgstr "Уметни нови задатак"
+
+#: data/ui/gantt-view.ui.h:7 data/ui/task-view.ui.h:7
 #: src/planner-application.c:76
 msgid "Link"
 msgstr "Вежи"
 
-#: data/ui/gantt-view.ui.h:6 data/ui/task-view.ui.h:6
+#: data/ui/gantt-view.ui.h:8 data/ui/task-view.ui.h:8
+msgid "Link the selected tasks"
+msgstr "Вежи изабране задатке"
+
+#: data/ui/gantt-view.ui.h:9 data/ui/task-view.ui.h:9
 msgid "Move Task Do_wn"
 msgstr "Помери задатак наниже"
 
-#: data/ui/gantt-view.ui.h:7 data/ui/task-view.ui.h:7
+#: data/ui/gantt-view.ui.h:10 data/ui/task-view.ui.h:10
 msgid "Move Task _Up"
 msgstr "Помери задатак навише"
 
-#: data/ui/gantt-view.ui.h:8 data/ui/task-view.ui.h:8
+#: data/ui/gantt-view.ui.h:11 data/ui/task-view.ui.h:11
 #: src/planner-application.c:104
 msgid "Move down"
 msgstr "Помери наниже"
 
-#: data/ui/gantt-view.ui.h:9 data/ui/task-view.ui.h:9
+#: data/ui/gantt-view.ui.h:12 data/ui/task-view.ui.h:12
+msgid "Move the selected tasks downwards"
+msgstr "Помери изабране задатке наниже"
+
+#: data/ui/gantt-view.ui.h:13 data/ui/task-view.ui.h:13
+msgid "Move the selected tasks upwards"
+msgstr "Помери изабране задатке навише"
+
+#: data/ui/gantt-view.ui.h:14 data/ui/task-view.ui.h:14
 #: src/planner-application.c:97
 msgid "Move up"
 msgstr "Помери навише"
 
-#: data/ui/gantt-view.ui.h:10 data/ui/resource-view.ui.h:6
-#: data/ui/task-view.ui.h:10 src/planner-application.c:62
+#: data/ui/gantt-view.ui.h:15 data/ui/resource-view.ui.h:8
+#: data/ui/task-view.ui.h:15 src/planner-application.c:62
 #: src/planner-application.c:118
 msgid "Remove"
 msgstr "Уклони"
 
-#: data/ui/gantt-view.ui.h:11 data/ui/task-view.ui.h:11
+#: data/ui/gantt-view.ui.h:16 data/ui/task-view.ui.h:16
+msgid "Remove the selected tasks"
+msgstr "Уклони изабране задатке"
+
+#: data/ui/gantt-view.ui.h:17 data/ui/task-view.ui.h:17
 msgid "Reset _All Constraints"
-msgstr "Поништо сва ограничења"
+msgstr "Поништо _сва ограничења"
 
-#: data/ui/gantt-view.ui.h:12 data/ui/task-view.ui.h:12
+#: data/ui/gantt-view.ui.h:18 data/ui/task-view.ui.h:18
 msgid "Reset _Constraint"
-msgstr "Поништи ограничење"
+msgstr "Поништи о_граничење"
 
-#: data/ui/gantt-view.ui.h:13 data/ui/resource-view.ui.h:7
-#: data/ui/task-view.ui.h:13
+#: data/ui/gantt-view.ui.h:19 data/ui/resource-view.ui.h:10
+#: data/ui/task-view.ui.h:19
 msgid "Select _All"
 msgstr "Изабери све"
 
-#: data/ui/gantt-view.ui.h:14 data/ui/resource-view.ui.h:8
-#: data/ui/task-view.ui.h:14
+#: data/ui/gantt-view.ui.h:20 data/ui/resource-view.ui.h:11
+#: data/ui/task-view.ui.h:20
 msgid "Select all tasks"
 msgstr "Изабери све задатке"
 
-#: data/ui/gantt-view.ui.h:15
+#: data/ui/gantt-view.ui.h:21
 msgid "Test"
 msgstr "Проба"
 
-#: data/ui/gantt-view.ui.h:16 data/ui/task-view.ui.h:15
+#: data/ui/gantt-view.ui.h:22 data/ui/task-view.ui.h:21
 msgid "Unin_dent Task"
 msgstr "Извуци задатак"
 
-#: data/ui/gantt-view.ui.h:17 data/ui/task-view.ui.h:16
+#: data/ui/gantt-view.ui.h:23 data/ui/task-view.ui.h:22
 #: src/planner-application.c:90
 msgid "Unindent"
 msgstr "Извуци"
 
-#: data/ui/gantt-view.ui.h:18 data/ui/task-view.ui.h:17
+#: data/ui/gantt-view.ui.h:24 data/ui/task-view.ui.h:23
+msgid "Unindent the selected tasks"
+msgstr "Извуци изабране задатке"
+
+#: data/ui/gantt-view.ui.h:25 data/ui/task-view.ui.h:24
 #: src/planner-application.c:69
 msgid "Unlink"
 msgstr "Одвежи"
 
-#: data/ui/gantt-view.ui.h:19
+#: data/ui/gantt-view.ui.h:26 data/ui/task-view.ui.h:25
+msgid "Unlink the selected tasks"
+msgstr "Одвежи изабране задатке"
+
+#: data/ui/gantt-view.ui.h:27
 msgid "Zoom In"
 msgstr "Увећај"
 
-#: data/ui/gantt-view.ui.h:20
+#: data/ui/gantt-view.ui.h:28
 msgid "Zoom Out"
 msgstr "Умањи"
 
-#: data/ui/gantt-view.ui.h:21
+#: data/ui/gantt-view.ui.h:29
 msgid "Zoom To Fit"
 msgstr "Прикажи по величини прозора"
 
-#: data/ui/gantt-view.ui.h:22
+#: data/ui/gantt-view.ui.h:30
 msgid "Zoom To _Fit"
 msgstr "Прикажи по величини _прозора"
 
-#: data/ui/gantt-view.ui.h:23
+#: data/ui/gantt-view.ui.h:31
 msgid "Zoom _Out"
-msgstr "_Умањи"
+msgstr "У_мањи"
 
-#: data/ui/gantt-view.ui.h:24 data/ui/task-view.ui.h:19
+#: data/ui/gantt-view.ui.h:32
+msgid "Zoom in"
+msgstr "Увећај"
+
+#: data/ui/gantt-view.ui.h:33
+msgid "Zoom out"
+msgstr "Умањи"
+
+#: data/ui/gantt-view.ui.h:34
+msgid "Zoom to fit the entire project"
+msgstr "Увећај да стане читав пројекат"
+
+#: data/ui/gantt-view.ui.h:35 data/ui/task-view.ui.h:27
 msgid "_Edit Task Properties..."
 msgstr "_Измени својства задатка..."
 
-#: data/ui/gantt-view.ui.h:25 data/ui/task-view.ui.h:20
+#: data/ui/gantt-view.ui.h:36 data/ui/task-view.ui.h:28
 msgid "_Highlight Critical Tasks"
 msgstr "Истакни критичне задатке"
 
-#: data/ui/gantt-view.ui.h:26 data/ui/task-view.ui.h:21
+#: data/ui/gantt-view.ui.h:37 data/ui/task-view.ui.h:29
 msgid "_Insert Task"
 msgstr "_Унеси задатак"
 
-#: data/ui/gantt-view.ui.h:27 data/ui/task-view.ui.h:22
+#: data/ui/gantt-view.ui.h:38 data/ui/task-view.ui.h:30
 msgid "_Link Tasks"
 msgstr "_Вежи задатке"
 
-#: data/ui/gantt-view.ui.h:28 data/ui/task-view.ui.h:23
+#: data/ui/gantt-view.ui.h:39 data/ui/task-view.ui.h:31
 msgid "_Remove Task"
 msgstr "Уклони задатак"
 
-#: data/ui/gantt-view.ui.h:29 data/ui/task-view.ui.h:24
+#: data/ui/gantt-view.ui.h:40 data/ui/task-view.ui.h:32
 msgid "_Unlink Task"
 msgstr "_Одвежи задатке"
 
-#: data/ui/gantt-view.ui.h:30
+#: data/ui/gantt-view.ui.h:41
 msgid "_Zoom In"
 msgstr "_Увећај"
 
@@ -752,22 +796,34 @@ msgid "Edit _Groups"
 msgstr "Измени _групе"
 
 #: data/ui/resource-view.ui.h:3
+msgid "Edit resource groups"
+msgstr "Измени групе извора"
+
+#: data/ui/resource-view.ui.h:4
 msgid "Groups"
 msgstr "Групе"
 
-#: data/ui/resource-view.ui.h:4
+#: data/ui/resource-view.ui.h:5
 msgid "In_sert Resources..."
-msgstr "Унеси изворе..."
+msgstr "У_метни изворе..."
+
+#: data/ui/resource-view.ui.h:7
+msgid "Insert a new resource"
+msgstr "Унеси нови ресурс"
 
 #: data/ui/resource-view.ui.h:9
+msgid "Remove the selected resource"
+msgstr "Уклони изабрани извор"
+
+#: data/ui/resource-view.ui.h:12
 msgid "_Edit Resource Properties..."
 msgstr "_Измени својства извора..."
 
-#: data/ui/resource-view.ui.h:10
+#: data/ui/resource-view.ui.h:13
 msgid "_Insert Resource"
 msgstr "_Унеси извор"
 
-#: data/ui/resource-view.ui.h:11
+#: data/ui/resource-view.ui.h:14
 msgid "_Remove Resource"
 msgstr "_Уклони извор"
 
@@ -779,7 +835,7 @@ msgstr "Отвори из базе података..."
 msgid "Save to Database..."
 msgstr "Сачувај у базу података..."
 
-#: data/ui/task-view.ui.h:18
+#: data/ui/task-view.ui.h:26
 msgid "_Edit Custom Properties..."
 msgstr "_Измени произвољна својства..."
 
@@ -811,15 +867,15 @@ msgstr "Користи основни"
 msgid "Use day from base calendar"
 msgstr "Користи дан из основног календара"
 
-#: libplanner/mrp-parser.c:1058 libplanner/mrp-parser.c:1153
+#: libplanner/mrp-parser.c:1062 libplanner/mrp-parser.c:1157
 msgid "Could not create XML tree"
 msgstr "Не могу да сачиним XML стабло"
 
-#: libplanner/mrp-parser.c:1119
+#: libplanner/mrp-parser.c:1123
 msgid "Could not write XML file"
 msgstr "Не могу да упишем XML датотеку"
 
-#: libplanner/mrp-project.c:440 src/planner-group-dialog.c:829
+#: libplanner/mrp-project.c:440 src/planner-group-dialog.c:830
 msgid "Default"
 msgstr "Подразумевано"
 
@@ -882,12 +938,12 @@ msgstr "Ниједан"
 msgid "Invalid Unicode"
 msgstr "Неисправан Уникод"
 
-#: libplanner/mrp-sql.c:2215
+#: libplanner/mrp-sql.c:2216
 #, c-format
 msgid "Connection to database '%s' failed.\n"
 msgstr "Неуспешно повезивање са базом „%s“.\n"
 
-#: libplanner/mrp-sql.c:2220 libplanner/mrp-sql.c:3660
+#: libplanner/mrp-sql.c:2221 libplanner/mrp-sql.c:3663
 #, c-format
 msgid ""
 "Connection to database '%s' failed.\n"
@@ -896,12 +952,12 @@ msgstr ""
 "Неуспешно повезивање са базом „%s“.\n"
 "%s"
 
-#: libplanner/mrp-sql.c:2228
+#: libplanner/mrp-sql.c:2229
 #, c-format
 msgid "BEGIN command failed %s."
 msgstr "BEGIN наредба неуспешна %s."
 
-#: libplanner/mrp-sql.c:2394
+#: libplanner/mrp-sql.c:2395
 #, c-format
 msgid ""
 "The project '%s' has been changed by the user '%s' since you opened it. Do "
@@ -922,23 +978,23 @@ msgstr "Неисправна SQL адреса (неисправан ид про�
 msgid "Invalid SQL URI (no database name specified)."
 msgstr "Неисправна SQL адреса (није наведено име базе података)."
 
-#: libplanner/mrp-task.c:1016
+#: libplanner/mrp-task.c:1042
 msgid ""
 "Could not add a predecessor relation, because the tasks are already related."
 msgstr ""
 "Не могу да додам предходничку релацију,зато што су задаци већ релативни "
 "(повезани)."
 
-#: libplanner/mrp-task-manager.c:1769
+#: libplanner/mrp-task-manager.c:1809
 msgid "Can not add a predecessor relation between a task and its ancestor."
 msgstr "Не могу да додам предходничку релацију између задатка и свог предака"
 
-#: libplanner/mrp-task-manager.c:1778 libplanner/mrp-task-manager.c:1786
+#: libplanner/mrp-task-manager.c:1818 libplanner/mrp-task-manager.c:1826
 msgid "Can not add a predecessor, because it would result in a loop."
 msgstr ""
 "Не могу да додам предходника, јер би то резултовало бесконачним понављањем"
 
-#: libplanner/mrp-task-manager.c:1821
+#: libplanner/mrp-task-manager.c:1861
 msgid "Can not move the task, since it would result in a loop."
 msgstr ""
 "Нисам могао да померим задатак, јер би то резултовало бесконачним понављањем"
@@ -1084,14 +1140,14 @@ msgstr "%Y %b %d"
 msgid "Project start"
 msgstr "Почетак пројекта"
 
-#: src/planner-gantt-print.c:191 src/planner-group-dialog.c:805
+#: src/planner-gantt-print.c:191 src/planner-group-dialog.c:806
 #: src/planner-property-dialog.c:378 src/planner-resource-view.c:1168
-#: src/planner-task-dialog.c:1319 src/planner-task-dialog.c:1405
+#: src/planner-task-dialog.c:1411 src/planner-task-dialog.c:1497
 #: src/planner-task-view.c:266
 msgid "Name"
 msgstr "Име"
 
-#: src/planner-gantt-print.c:199 src/planner-resource-dialog.c:1298
+#: src/planner-gantt-print.c:199 src/planner-resource-dialog.c:1303
 #: src/planner-resource-view.c:691 src/planner-resource-view.c:707
 #: src/planner-resource-view.c:1595 src/planner-task-view.c:269
 msgid "Work"
@@ -1102,16 +1158,16 @@ msgstr "Рад"
 msgid "Unnamed"
 msgstr "Неименовани"
 
-#: src/planner-gantt-row.c:1907 src/planner-gantt-row.c:1910
+#: src/planner-gantt-row.c:1916 src/planner-gantt-row.c:1919
 msgid "No name"
 msgstr "Без имена"
 
-#: src/planner-gantt-row.c:1913
+#: src/planner-gantt-row.c:1922
 #, c-format
 msgid "Make task '%s' a predecessor of '%s'"
 msgstr "Учини задатак „%s“ претходником „%s“"
 
-#: src/planner-gantt-row.c:1971
+#: src/planner-gantt-row.c:1980
 #, c-format
 msgid "Change work to %s"
 msgstr "Промени рад на %s"
@@ -1128,7 +1184,9 @@ msgstr "_Гант карта"
 msgid ""
 "\n"
 "WBS"
-msgstr "\nWBS"
+msgstr ""
+"\n"
+"WBS"
 
 #: src/planner-gantt-view.c:493
 msgid ""
@@ -1155,23 +1213,23 @@ msgstr "Уметни групу"
 msgid "Remove group"
 msgstr "Уклони групу"
 
-#: src/planner-group-dialog.c:517
+#: src/planner-group-dialog.c:518
 msgid "Default group"
 msgstr "Подразумевана група"
 
-#: src/planner-group-dialog.c:633
+#: src/planner-group-dialog.c:634
 msgid "Edit group property"
 msgstr "Измени својство групе"
 
-#: src/planner-group-dialog.c:811
+#: src/planner-group-dialog.c:812
 msgid "Manager name"
 msgstr "Име управника"
 
-#: src/planner-group-dialog.c:817
+#: src/planner-group-dialog.c:818
 msgid "Manager phone"
 msgstr "Телефон управника"
 
-#: src/planner-group-dialog.c:823
+#: src/planner-group-dialog.c:824
 msgid "Manager email"
 msgstr "Е-пошта управника"
 
@@ -1226,19 +1284,19 @@ msgstr "/_Одвежи задатак"
 msgid "/_Edit task..."
 msgstr "/_Измени задатак..."
 
-#: src/planner-predecessor-model.c:191 src/planner-task-dialog.c:1047
+#: src/planner-predecessor-model.c:191 src/planner-task-dialog.c:1133
 msgid "FS"
 msgstr "КП"
 
-#: src/planner-predecessor-model.c:194 src/planner-task-dialog.c:1048
+#: src/planner-predecessor-model.c:194 src/planner-task-dialog.c:1134
 msgid "FF"
 msgstr "КК"
 
-#: src/planner-predecessor-model.c:197 src/planner-task-dialog.c:1049
+#: src/planner-predecessor-model.c:197 src/planner-task-dialog.c:1135
 msgid "SS"
 msgstr "ПП"
 
-#: src/planner-predecessor-model.c:200 src/planner-task-dialog.c:1050
+#: src/planner-predecessor-model.c:200 src/planner-task-dialog.c:1136
 msgid "SF"
 msgstr "ПК"
 
@@ -1304,7 +1362,7 @@ msgid "Label"
 msgstr "Налепница"
 
 #: src/planner-property-dialog.c:411 src/planner-resource-view.c:1210
-#: src/planner-task-dialog.c:1437
+#: src/planner-task-dialog.c:1529
 msgid "Type"
 msgstr "Тип"
 
@@ -1315,7 +1373,7 @@ msgid "(None)"
 msgstr "(Ниједан)"
 
 #: src/planner-resource-dialog.c:277 src/planner-resource-input-dialog.c:107
-#: src/planner-task-dialog.c:251
+#: src/planner-task-dialog.c:256
 msgid "(No name)"
 msgstr "(Без имена)"
 
@@ -1325,19 +1383,19 @@ msgstr "Измени својство извора помоћу прозорче
 
 #. i18n: time stamp format for notes in task dialog, see strftime(3) for
 #. * a detailed description.
-#: src/planner-resource-dialog.c:910 src/planner-task-dialog.c:687
+#: src/planner-resource-dialog.c:915 src/planner-task-dialog.c:738
 msgid "%a %d %b %Y, %H:%M\n"
 msgstr "%a %d %b %Y, %H:%M\n"
 
-#: src/planner-resource-dialog.c:1008
+#: src/planner-resource-dialog.c:1013
 msgid "None (use project default)"
 msgstr "Ниједан (користи подразумевано за пројекат)"
 
-#: src/planner-resource-dialog.c:1135 src/planner-resource-dialog.c:1137
+#: src/planner-resource-dialog.c:1140 src/planner-resource-dialog.c:1142
 msgid "Edit resource properties"
 msgstr "Измени својства ресурса"
 
-#: src/planner-resource-dialog.c:1299 src/planner-resource-view.c:694
+#: src/planner-resource-dialog.c:1304 src/planner-resource-view.c:694
 #: src/planner-resource-view.c:708 src/planner-resource-view.c:1596
 msgid "Material"
 msgstr "Материјал"
@@ -1449,117 +1507,121 @@ msgstr "Отвори из базе података"
 msgid "Save to Database"
 msgstr "Сачувај у базу података"
 
-#: src/planner-task-dialog.c:753
+#: src/planner-task-dialog.c:804
 msgid "Finish to start (FS)"
 msgstr "Крај са почетком (КП)"
 
-#: src/planner-task-dialog.c:754
+#: src/planner-task-dialog.c:805
 msgid "Finish to finish (FF)"
 msgstr "Крај са крајем (КК)"
 
-#: src/planner-task-dialog.c:755
+#: src/planner-task-dialog.c:806
 msgid "Start to start (SS)"
 msgstr "Почетак са почетком (ПП)"
 
-#: src/planner-task-dialog.c:756
+#: src/planner-task-dialog.c:807
 msgid "Start to finish (SF)"
 msgstr "Почетак са крајем (ПК)"
 
-#: src/planner-task-dialog.c:806
+#: src/planner-task-dialog.c:857
 msgid "Can't add new predecessor. No task selected!"
 msgstr "Не могу да додам претходника. Није изабран задатак!"
 
-#: src/planner-task-dialog.c:1338
+#: src/planner-task-dialog.c:1430
 msgid "Assigned"
 msgstr "Додељен"
 
-#: src/planner-task-dialog.c:1355
+#: src/planner-task-dialog.c:1447
 msgid "Units"
 msgstr "Јединице"
 
-#: src/planner-task-dialog.c:1459
+#: src/planner-task-dialog.c:1551
 msgid "Lag"
 msgstr "Кашњење"
 
-#: src/planner-task-dialog.c:1592 src/planner-task-dialog.c:1594
+#: src/planner-task-dialog.c:1690 src/planner-task-dialog.c:1692
 msgid "Edit task properties"
 msgstr "Измени својства задатка"
 
-#: src/planner-task-tree.c:245
+#: src/planner-task-tree.c:260
 msgid "Insert task"
 msgstr "Унеси задатак"
 
-#: src/planner-task-tree.c:321
+#: src/planner-task-tree.c:336
 msgid "Edit task property"
 msgstr "Измени својства задатка"
 
-#: src/planner-task-tree.c:2347
+#: src/planner-task-tree.c:700
+msgid "Remove task"
+msgstr "Уклони задатак"
+
+#: src/planner-task-tree.c:2891
 msgid "mon"
 msgstr "мес"
 
 # bug: plural-forms (there are many more options in more than one language)
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:2348
+#: src/planner-task-tree.c:2892
 msgid "month"
 msgstr "месец"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:2349
+#: src/planner-task-tree.c:2893
 msgid "months"
 msgstr "месеци"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:2350
+#: src/planner-task-tree.c:2894
 msgid "w"
 msgstr "с"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:2351
+#: src/planner-task-tree.c:2895
 msgid "week"
 msgstr "седмица"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:2352
+#: src/planner-task-tree.c:2896
 msgid "weeks"
 msgstr "седмице"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:2353
+#: src/planner-task-tree.c:2897
 msgid "d"
 msgstr "д"
 
 #. day unit variant accepted in input
-#: src/planner-task-tree.c:2354
+#: src/planner-task-tree.c:2898
 msgid "day"
 msgstr "дан"
 
 #. day unit variant accepted in input
-#: src/planner-task-tree.c:2356
+#: src/planner-task-tree.c:2900
 msgid "h"
 msgstr "ч"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:2357
+#: src/planner-task-tree.c:2901
 msgid "hour"
 msgstr "час"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:2358
+#: src/planner-task-tree.c:2902
 msgid "hours"
 msgstr "часова"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:2359
+#: src/planner-task-tree.c:2903
 msgid "min"
 msgstr "мин"
 
 #. minute unit variant accepted in input
-#: src/planner-task-tree.c:2360
+#: src/planner-task-tree.c:2904
 msgid "minute"
 msgstr "минута"
 
 #. minute unit variant accepted in input
-#: src/planner-task-tree.c:2361
+#: src/planner-task-tree.c:2905
 msgid "minutes"
 msgstr "минуте"
 
