@@ -173,7 +173,7 @@ planner_task_cmd_unlink (PlannerWindow   *main_window,
 	TaskCmdLink         *cmd;
 
 	cmd_base = planner_cmd_new (TaskCmdLink,
-				    _("Unkink task"),
+				    _("Unlink task"),
 				    task_cmd_unlink_do,
 				    task_cmd_unlink_undo,
 				    task_cmd_unlink_free);

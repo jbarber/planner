@@ -47,7 +47,7 @@ enum {
 };
 
 typedef struct {
-	PlannerWindow  *main_window;
+	PlannerWindow *main_window;
 	MrpProject    *project;
 
 	GtkWidget     *dialog;
@@ -125,6 +125,81 @@ static void          cal_dialog_project_day_changed_cb (MrpProject       *projec
 							MrpDay           *day,
 							DialogData       *data);
 static void          cal_dialog_new_dialog_run         (DialogData       *data);
+
+
+typedef struct {
+	PlannerCmd        base;
+
+	MrpCalendar *calendar;
+	MrpDay      *day;
+	MrpDay      *old_day;
+	mrptime      time;
+} CalCmdDayType;
+
+static gboolean
+cal_cmd_day_type_do (PlannerCmd *cmd_base)
+{
+	CalCmdDayType *cmd = (CalCmdDayType*) cmd_base;
+
+	if (g_getenv ("PLANNER_DEBUG_UNDO_CAL")) {
+		g_message ("Changing calendar for day ...");
+	}
+
+	mrp_calendar_set_days (cmd->calendar, cmd->time, cmd->day, -1);
+
+	return TRUE;
+}
+
+static void
+cal_cmd_day_type_undo (PlannerCmd *cmd_base)
+{
+	CalCmdDayType *cmd = (CalCmdDayType*) cmd_base;
+
+	if (g_getenv ("PLANNER_DEBUG_UNDO_CAL")) {
+		g_message ("Undo Changing calendar for day ...");
+	}
+
+	mrp_calendar_set_days (cmd->calendar, cmd->time, cmd->old_day, -1);
+}
+
+
+static void
+cal_cmd_day_type_free (PlannerCmd *cmd_base)
+{
+	CalCmdDayType *cmd = (CalCmdDayType*) cmd_base;
+
+	g_object_unref (cmd->calendar);
+	mrp_day_unref  (cmd->day);
+	mrp_day_unref  (cmd->old_day);
+}
+
+static PlannerCmd *
+planner_cal_cmd_day_type (PlannerWindow  *main_window,
+			  MrpCalendar    *calendar,
+			  MrpDay         *day,
+			  mrptime         time)
+{
+	PlannerCmd    *cmd_base;
+	CalCmdDayType *cmd;
+
+	cmd_base = planner_cmd_new (CalCmdDayType,
+				    _("Change day type"),
+				    cal_cmd_day_type_do,
+				    cal_cmd_day_type_undo,
+				    cal_cmd_day_type_free);
+
+	cmd = (CalCmdDayType*) cmd_base;
+
+	cmd->calendar = g_object_ref (calendar);
+	cmd->day = mrp_day_ref (day);
+	cmd->old_day = mrp_day_ref (mrp_calendar_get_day (calendar, time, FALSE));
+	cmd->time = time;
+			
+	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager 
+					   (main_window),
+					   cmd_base);
+	return cmd_base;
+}
 
 
 static void
@@ -548,7 +623,8 @@ cal_dialog_apply_clicked_cb (GtkWidget  *button,
 	
 	planner_calendar_get_date (PLANNER_CALENDAR (data->calendar), &y, &m, &d);
 	t = mrp_time_compose (y, m + 1, d, 0, 0, 0);
-	mrp_calendar_set_days (calendar, t, day, -1);
+	/* mrp_calendar_set_days (calendar, t, day, -1); */
+	planner_cal_cmd_day_type (data->main_window, calendar, day, t);
 }
 
 static void
