@@ -1,5 +1,8 @@
 2004-10-04  Richard Hult  <richard@imendio.com>
 
+	* src/planner-window.c (window_open_cb): Add file filters, fixes
+	bug #149357.
+
 	* src/planner-cmd-manager.c: (cmd_manager_init),
 	(cmd_manager_dump), (state_changed), (cmd_manager_free_func),
 	(transaction_cmd_do), (transaction_cmd_undo),

@@ -676,6 +676,7 @@ window_open_cb (GtkAction *action,
 	PlannerWindow     *window;
 	PlannerWindowPriv *priv;
 	GtkWidget         *file_chooser;
+	GtkFileFilter     *filter;
 	gint               response;
 	gchar             *filename = NULL;
 	gchar             *last_dir;
@@ -684,13 +685,24 @@ window_open_cb (GtkAction *action,
 	window = PLANNER_WINDOW (data);
 	priv = window->priv;
 
-	file_chooser = gtk_file_chooser_dialog_new (_("Open a file"),
+	file_chooser = gtk_file_chooser_dialog_new (_("Open a File"),
 						    GTK_WINDOW (window),
 						    GTK_FILE_CHOOSER_ACTION_OPEN,
 						    GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
 						    GTK_STOCK_OPEN, GTK_RESPONSE_OK,
 						    NULL);
-	
+
+	filter = gtk_file_filter_new ();
+	gtk_file_filter_set_name (filter, _("Planner Files"));
+	gtk_file_filter_add_pattern (filter, "*.planner");
+	gtk_file_filter_add_pattern (filter, "*.mrproject");
+	gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (file_chooser), filter);
+
+	filter = gtk_file_filter_new ();
+	gtk_file_filter_set_name (filter, _("All Files"));
+	gtk_file_filter_add_pattern (filter, "*");
+	gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (file_chooser), filter);
+
 	last_dir = get_last_dir (window);
 	gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (file_chooser), last_dir);
 	g_free (last_dir);
@@ -1365,7 +1377,7 @@ window_do_save_as (PlannerWindow *window)
 
 	priv = window->priv;
 
-	file_chooser = gtk_file_chooser_dialog_new (_("Save a file"),
+	file_chooser = gtk_file_chooser_dialog_new (_("Save a File"),
 						    GTK_WINDOW (window),
 						    GTK_FILE_CHOOSER_ACTION_SAVE,
 						    GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
