@@ -7,7 +7,7 @@
 
 <!--**************************************************************************
     *
-    * html1.xsl: Convert a MrProject XML file to HTML
+    * html1.xsl: Convert a Planner XML file to HTML
     *
     * Copyright (c)2003 Daniel Lundin
     * Copyright (c)2003 CodeFactory AB
@@ -147,8 +147,8 @@
         XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
       </xsl:comment>
 
-    <title><xsl:value-of select="$title"/> - MrProject</title>
-    <meta name="GENERATOR" content="MrProject HTML output"/>
+    <title><xsl:value-of select="$title"/> - Planner</title>
+    <meta name="GENERATOR" content="Planner HTML output"/>
     <style type="text/css">
       <xsl:value-of select="document($css-stylesheet-local)"/>
     </style>

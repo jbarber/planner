@@ -6,10 +6,10 @@
 <xsl:comment>
 
 /* 
- * CSS Stylesheet for MrProject HTML output.
+ * CSS Stylesheet for Planner HTML output.
  * Copyright (c)2003 CodeFactory AB
  *
- * Daniel Lundin (daniel@codefactory.se)
+ * Daniel Lundin (daniel@edgewall.com)
  *
  */
 
