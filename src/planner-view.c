@@ -1,5 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
+ * Copyright (C) 2003 Imendio HB
  * Copyright (C) 2002 CodeFactory AB
  * Copyright (C) 2002 Richard Hult <richard@imendio.com>
  * Copyright (C) 2002 Mikael Hallendal <micke@imendio.com>
@@ -120,6 +121,18 @@ planner_view_get_icon (PlannerView *view)
 	return NULL;
 }
 
+const gchar *
+planner_view_get_name (PlannerView *view)
+{
+	g_return_val_if_fail (PLANNER_IS_VIEW (view), NULL);
+
+	if (view->get_name) {
+		return view->get_name (view);
+	}
+
+	return NULL;
+}
+
 GtkWidget *
 planner_view_get_widget (PlannerView *view)
 {
@@ -133,8 +146,8 @@ planner_view_get_widget (PlannerView *view)
 }
 
 void
-planner_view_init (PlannerView       *view,
-	      PlannerWindow *main_window)
+planner_view_init (PlannerView   *view,
+		   PlannerWindow *main_window)
 {
 	g_return_if_fail (PLANNER_IS_VIEW (view));
 
@@ -215,10 +228,10 @@ planner_view_print_cleanup (PlannerView *view)
 }
 
 void
-planner_view_activate_helper (PlannerView       *view,
-			 const gchar  *ui_filename,
-			 const gchar  *name,
-			 BonoboUIVerb *verbs)
+planner_view_activate_helper (PlannerView  *view,
+			      const gchar  *ui_filename,
+			      const gchar  *name,
+			      BonoboUIVerb *verbs)
 {
 	BonoboUIContainer *ui_container;
 

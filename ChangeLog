@@ -1,5 +1,19 @@
 2003-12-16  Richard Hult  <richard@imendio.com>
 
+	* src/planner-print-dialog.c:
+	* src/planner-gantt-view.c:
+	* src/planner-resource-view.c:
+	* src/planner-task-view.c:
+	* src/planner-view-loader.c:
+	* src/planner-view.c:
+	* src/planner-view.h: Add a name per view so we can build gconf
+	keys for view preferences and use those to remember which views
+	should be printed.
+
+	* src/planner-sql-plugin.c: Fix indentation.
+
+2003-12-16  Richard Hult  <richard@imendio.com>
+
 	* src/planner-sql-plugin.c (sql_plugin_retrieve_db_values): Don't
 	access the label that was removed.
 

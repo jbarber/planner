@@ -207,8 +207,8 @@ create_sql_uri (const gchar *server,
 }
 
 static void
-show_error_dialog (PlannerPlugin    *plugin,
-		   const gchar *str)
+show_error_dialog (PlannerPlugin *plugin,
+		   const gchar   *str)
 {
 	GtkWindow *window;
 	GtkWidget *dialog;
@@ -244,11 +244,11 @@ selection_changed_cb (GtkTreeSelection *selection, GtkWidget *ok_button)
  */
 static gint
 sql_plugin_retrieve_project_id (PlannerPlugin *plugin,
-				gchar    *server,
-				gchar    *port,
-				gchar    *database,
-				gchar    *login,
-				gchar    *password)
+				gchar         *server,
+				gchar         *port,
+				gchar         *database,
+				gchar         *login,
+				gchar         *password)
 {
 	PGconn            *conn;
  	gchar             *pgoptions = NULL;
@@ -396,17 +396,17 @@ sql_plugin_retrieve_db_values (PlannerPlugin  *plugin,
 			       gchar         **login,
 			       gchar         **password)
 {
-	GladeXML      *gui;
-	GtkWidget     *dialog;
-	gchar         *str;
-	gint           response;
-	GtkWidget     *server_entry;
-	GtkWidget     *db_entry;
-	GtkWidget     *user_entry;
-	GtkWidget     *password_entry;
-	gboolean       ret;
+	GladeXML           *gui;
+	GtkWidget          *dialog;
+	gchar              *str;
+	gint                response;
+	GtkWidget          *server_entry;
+	GtkWidget          *db_entry;
+	GtkWidget          *user_entry;
+	GtkWidget          *password_entry;
+	gboolean            ret;
 	PlannerApplication *application;
-	GConfClient   *gconf_client;
+	GConfClient        *gconf_client;
 
 	application = planner_window_get_application (plugin->main_window);
 	
@@ -584,16 +584,16 @@ sql_plugin_save (BonoboUIComponent *component,
 		 gpointer           user_data,
 		 const gchar       *cname)
 {
-	PlannerPlugin   *plugin = user_data;
-	MrpProject *project;
-	GObject    *object;
-	gchar      *server = NULL;
-	gchar      *port = NULL;
-	gchar      *database = NULL;
-	gchar      *login = NULL;
-	gchar      *password = NULL;
-	gchar      *uri = NULL;
-	GError     *error = NULL;
+	PlannerPlugin  *plugin = user_data;
+	MrpProject    *project;
+	GObject       *object;
+	gchar         *server = NULL;
+	gchar         *port = NULL;
+	gchar         *database = NULL;
+	gchar         *login = NULL;
+	gchar         *password = NULL;
+	gchar         *uri = NULL;
+	GError        *error = NULL;
 		
 	project = planner_window_get_project (plugin->main_window);
 
@@ -645,7 +645,7 @@ plugin_exit (void)
 }
 
 G_MODULE_EXPORT void 
-plugin_init (PlannerPlugin     *plugin,
+plugin_init (PlannerPlugin *plugin,
 	     PlannerWindow *main_window)
 {
 	BonoboUIContainer *ui_container;

@@ -45,19 +45,20 @@ struct _PlannerView {
 	GObject            parent;
 
 	GModule           *handle;
-	PlannerWindow      *main_window;
+	PlannerWindow     *main_window;
 	BonoboUIComponent *ui_component;
 
-	PlannerViewPriv        *priv;
+	PlannerViewPriv   *priv;
 	gboolean           activated;
 	
 	/* Methods. */
 	const gchar *(*get_label)         (PlannerView       *view);
 	const gchar *(*get_menu_label)    (PlannerView       *view);
 	const gchar *(*get_icon)          (PlannerView       *view);
+	const gchar *(*get_name)          (PlannerView       *view);
 	GtkWidget   *(*get_widget)        (PlannerView       *view);
 	void         (*init)              (PlannerView       *view,
-					   PlannerWindow *main_window);
+					   PlannerWindow     *window);
 	void         (*activate)          (PlannerView       *view);
 	void         (*deactivate)        (PlannerView       *view);
 	
@@ -73,37 +74,25 @@ struct _PlannerViewClass {
 };
 
 GType        planner_view_get_type          (void);
-
-const gchar *planner_view_get_label         (PlannerView       *view);
-
-const gchar *planner_view_get_menu_label    (PlannerView       *view);
-
-const gchar *planner_view_get_icon          (PlannerView       *view);
-
-GtkWidget   *planner_view_get_widget        (PlannerView       *view);
-
-void         planner_view_init              (PlannerView       *view,
-					PlannerWindow *main_window);
-
-void         planner_view_activate_helper   (PlannerView       *view,
-					const gchar  *ui_filename,
-					const gchar  *name,
-					BonoboUIVerb *verbs);
-
-void         planner_view_deactivate_helper (PlannerView       *view);
-
-void         planner_view_activate          (PlannerView       *view);
-
-void         planner_view_deactivate        (PlannerView       *view);
-
-void         planner_view_print_init        (PlannerView       *view,
-					PlannerPrintJob   *job);
-
-gint         planner_view_print_get_n_pages (PlannerView       *view);
-
-void         planner_view_print             (PlannerView       *view);
-
-void         planner_view_print_cleanup     (PlannerView       *view);
+const gchar *planner_view_get_label         (PlannerView     *view);
+const gchar *planner_view_get_menu_label    (PlannerView     *view);
+const gchar *planner_view_get_icon          (PlannerView     *view);
+const gchar *planner_view_get_name          (PlannerView     *view);
+GtkWidget   *planner_view_get_widget        (PlannerView     *view);
+void         planner_view_init              (PlannerView     *view,
+					     PlannerWindow   *window);
+void         planner_view_activate_helper   (PlannerView     *view,
+					     const gchar     *ui_filename,
+					     const gchar     *name,
+					     BonoboUIVerb    *verbs);
+void         planner_view_deactivate_helper (PlannerView     *view);
+void         planner_view_activate          (PlannerView     *view);
+void         planner_view_deactivate        (PlannerView     *view);
+void         planner_view_print_init        (PlannerView     *view,
+					     PlannerPrintJob *job);
+gint         planner_view_print_get_n_pages (PlannerView     *view);
+void         planner_view_print             (PlannerView     *view);
+void         planner_view_print_cleanup     (PlannerView     *view);
 
 
 #endif /* __PLANNER_VIEW_H__ */

@@ -1,5 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: nill; c-basic-offset: 8 -*- */
 /*
+ * Copyright (C) 2003 Imendio HB
  * Copyright (C) 2002 CodeFactory AB
  * Copyright (C) 2002 Richard Hult <richard@imendio.com>
  * Copyright (C) 2002 Mikael Hallendal <micke@imendio.com>
@@ -52,12 +53,12 @@
 #include "planner-property-dialog.h"
 
 struct _PlannerViewPriv {
-	GtkItemFactory    *popup_factory;
-	GtkTreeView       *tree_view;
-	GHashTable        *property_to_column;
+	GtkItemFactory         *popup_factory;
+	GtkTreeView            *tree_view;
+	GHashTable             *property_to_column;
 
-	GtkWidget         *group_dialog;
-	GtkWidget         *resource_input_dialog;
+	GtkWidget              *group_dialog;
+	GtkWidget              *resource_input_dialog;
 
 	PlannerTablePrintSheet *print_sheet;
 };
@@ -195,9 +196,10 @@ void           activate                              (PlannerView               
 void           deactivate                            (PlannerView               *view);
 void           init                                  (PlannerView               *view,
 						      PlannerWindow         *main_window);
-gchar         *get_label                             (PlannerView               *view);
-gchar         *get_menu_label                        (PlannerView               *view);
-gchar         *get_icon                              (PlannerView               *view);
+const gchar   *get_label                             (PlannerView               *view);
+const gchar   *get_menu_label                        (PlannerView               *view);
+const gchar   *get_icon                              (PlannerView               *view);
+const gchar   *get_name                              (PlannerView               *view);
 GtkWidget     *get_widget                            (PlannerView               *view);
 void           print_init                            (PlannerView            *view,
 						      PlannerPrintJob        *job);
@@ -334,7 +336,7 @@ init (PlannerView *view, PlannerWindow *main_window)
 			      icon_set);	
 }
 
-G_MODULE_EXPORT gchar *
+G_MODULE_EXPORT const gchar *
 get_label (PlannerView *view)
 {
 	g_return_val_if_fail (PLANNER_IS_VIEW (view), NULL);
@@ -342,7 +344,7 @@ get_label (PlannerView *view)
 	return _("Resources");
 }
 
-G_MODULE_EXPORT gchar *
+G_MODULE_EXPORT const gchar *
 get_menu_label (PlannerView *view)
 {
 	g_return_val_if_fail (PLANNER_IS_VIEW (view), NULL);
@@ -350,7 +352,7 @@ get_menu_label (PlannerView *view)
 	return _("_Resources");
 }
 
-G_MODULE_EXPORT gchar *
+G_MODULE_EXPORT const gchar *
 get_icon (PlannerView *view)
 {
 	g_return_val_if_fail (PLANNER_IS_VIEW (view), NULL);
@@ -358,10 +360,18 @@ get_icon (PlannerView *view)
 	return IMAGEDIR "/resources.png";
 }
 
+G_MODULE_EXPORT const gchar *
+get_name (PlannerView *view)
+{
+	g_return_val_if_fail (PLANNER_IS_VIEW (view), NULL);
+
+	return "resource_view";
+}
+
 G_MODULE_EXPORT GtkWidget *
 get_widget (PlannerView *view)
 {
-	PlannerViewPriv       *priv;
+	PlannerViewPriv  *priv;
 	GtkWidget        *resource_table;
 	GtkWidget        *sw;
 	GtkWidget        *frame;

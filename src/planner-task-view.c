@@ -1,5 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
+ * Copyright (C) 2003 Imendio HB
  * Copyright (C) 2002 CodeFactory AB
  * Copyright (C) 2002 Richard Hult <richard@imendio.com>
  * Copyright (C) 2002 Mikael Hallendal <micke@imendio.com>
@@ -60,9 +61,10 @@ void          activate                           (PlannerView                  *
 void          deactivate                         (PlannerView                  *view);
 void          init                               (PlannerView                  *view,
 						  PlannerWindow                *main_window);
-gchar        *get_label                          (PlannerView                  *view);
-gchar        *get_menu_label                     (PlannerView                  *view);
-gchar        *get_icon                           (PlannerView                  *view);
+const gchar  *get_label                          (PlannerView                  *view);
+const gchar  *get_menu_label                     (PlannerView                  *view);
+const gchar  *get_icon                           (PlannerView                  *view);
+const gchar  *get_name                           (PlannerView                  *view);
 GtkWidget    *get_widget                         (PlannerView                  *view);
 static void   task_view_project_loaded_cb        (MrpProject                   *project,
 						  PlannerView                  *view);
@@ -189,7 +191,7 @@ init (PlannerView *view, PlannerWindow *main_window)
 			  view);
 }
 
-G_MODULE_EXPORT gchar *
+G_MODULE_EXPORT const gchar *
 get_label (PlannerView *view)
 {
 	g_return_val_if_fail (PLANNER_IS_VIEW (view), NULL);
@@ -197,7 +199,7 @@ get_label (PlannerView *view)
 	return _("Tasks");
 }
 
-G_MODULE_EXPORT gchar *
+G_MODULE_EXPORT const gchar *
 get_menu_label (PlannerView *view)
 {
 	g_return_val_if_fail (PLANNER_IS_VIEW (view), NULL);
@@ -205,12 +207,20 @@ get_menu_label (PlannerView *view)
 	return _("_Tasks");
 }
 
-G_MODULE_EXPORT gchar *
+G_MODULE_EXPORT const gchar *
 get_icon (PlannerView *view)
 {
 	g_return_val_if_fail (PLANNER_IS_VIEW (view), NULL);
 
 	return IMAGEDIR "/tasks.png";
+}
+
+G_MODULE_EXPORT const gchar *
+get_name (PlannerView *view)
+{
+	g_return_val_if_fail (PLANNER_IS_VIEW (view), NULL);
+
+	return "task_view";
 }
 
 G_MODULE_EXPORT GtkWidget *

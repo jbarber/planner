@@ -1,5 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
+ * Copyright (C) 2003 Imendio HB
  * Copyright (C) 2002 CodeFactory AB
  * Copyright (C) 2002 Richard Hult <richard@imendio.com>
  * Copyright (C) 2002 Mikael Hallendal <micke@imendio.com>
@@ -20,11 +21,11 @@
  * Boston, MA 02111-1307, USA.
  */
 
+#include <config.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <unistd.h>
-#include <config.h>
 #include <string.h>
 #include <libgnome/libgnome.h>
 #include <libgnome/gnome-i18n.h>
@@ -39,10 +40,10 @@
 
 #define PLANNER_PRINT_CONFIG_FILE "planner-print-config"
 
-static GtkWidget *   print_dialog_create_page  (GtkWidget *dialog,
-						GList     *views);
-
-static GtkNotebook * print_dialog_get_notebook (GtkWidget *dialog);
+static GtkWidget *   print_dialog_create_page  (PlannerWindow *window,
+						GtkWidget     *dialog,
+						GList         *views);
+static GtkNotebook * print_dialog_get_notebook (GtkWidget     *dialog);
 
 
 /*
@@ -110,25 +111,31 @@ planner_print_dialog_new (PlannerWindow  *window,
 	
 	dialog = gnome_print_dialog_new (job, _("Print Project"), 0);
 
-	page = print_dialog_create_page (dialog, views);
+	page = print_dialog_create_page (window, dialog, views);
 	gtk_widget_show (page);
 
 	gtk_notebook_prepend_page (print_dialog_get_notebook (dialog),
 				   page,
 				   gtk_label_new (_("Select views")));
-	
+
+	g_object_set_data (G_OBJECT (dialog), "window", window);
+
 	return dialog;
 }	
 
 static GtkWidget *
-print_dialog_create_page (GtkWidget *dialog, GList *views)
+print_dialog_create_page (PlannerWindow *window,
+			  GtkWidget     *dialog,
+			  GList         *views)
 {
-	GtkWidget *outer_vbox, *vbox;
-	GtkWidget *hbox;
-	GtkWidget *w;
-	GList     *l;
-	GList     *buttons = NULL;
-	gchar     *str;
+	GtkWidget   *outer_vbox, *vbox;
+	GtkWidget   *hbox;
+	GtkWidget   *w;
+	GList       *l;
+	GList       *buttons = NULL;
+	gchar       *str;
+	gboolean     state;
+	GConfClient *gconf_client;
 	
 	outer_vbox = gtk_vbox_new (FALSE, 4);
 	gtk_container_set_border_width (GTK_CONTAINER (outer_vbox), 8);
@@ -154,12 +161,21 @@ print_dialog_create_page (GtkWidget *dialog, GList *views)
 	gtk_box_pack_start (GTK_BOX (vbox), w, FALSE, FALSE, 0);
 	g_object_set_data (G_OBJECT (dialog), "summary-button", w);
 */
+	
+	gconf_client = planner_application_get_gconf_client (
+		planner_window_get_application (window));
+
 	for (l = views; l; l = l->next) {
 		w = gtk_check_button_new_with_label (planner_view_get_label (l->data));
 		gtk_box_pack_start (GTK_BOX (vbox), w, FALSE, FALSE, 0);
 		g_object_set_data (G_OBJECT (w), "view", l->data);
 
-		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (w), TRUE);
+		str = g_strdup_printf ("/apps/planner/views/%s/print_enabled", 
+				       planner_view_get_name (l->data));
+		state = gconf_client_get_bool (gconf_client, str, NULL);
+		g_free (str);
+
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (w), state);
 		
 		buttons = g_list_prepend (buttons, w);
 	}
@@ -174,12 +190,15 @@ print_dialog_create_page (GtkWidget *dialog, GList *views)
 
 GList *
 planner_print_dialog_get_print_selection (GtkDialog *dialog,
-				     gboolean  *summary)
+					  gboolean  *summary)
 {
 	GtkToggleButton *button;
 	GList           *buttons, *l;
 	GList           *views = NULL;
-	PlannerView          *view;
+	PlannerView     *view;
+	GConfClient     *gconf_client;
+	gchar           *str;
+	PlannerWindow   *window;
 
 	g_return_val_if_fail (GTK_IS_DIALOG (dialog), NULL);
 	
@@ -188,14 +207,29 @@ planner_print_dialog_get_print_selection (GtkDialog *dialog,
 		*summary = gtk_toggle_button_get_active (button);
 	}
 */
+
+	window = g_object_get_data (G_OBJECT (dialog), "window");
+	
+	gconf_client = planner_application_get_gconf_client (
+		planner_window_get_application (window));
+	
 	buttons = g_object_get_data (G_OBJECT (dialog), "buttons");
 	for (l = buttons; l; l = l->next) {
 		button = l->data;
 
+		view = g_object_get_data (G_OBJECT (l->data), "view");
+
 		if (gtk_toggle_button_get_active (button)) {
-			view = g_object_get_data (G_OBJECT (l->data), "view");
 			views = g_list_prepend (views, view);
 		}
+
+		str = g_strdup_printf ("/apps/planner/views/%s/print_enabled", 
+				       planner_view_get_name (view));
+		gconf_client_set_bool (gconf_client,
+				       str,
+				       gtk_toggle_button_get_active (button),
+				       NULL);
+		g_free (str);
 	}
 
 	return views;

@@ -1,5 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
+ * Copyright (C) 2003 Imendio HM
  * Copyright (C) 2002 CodeFactory AB
  * Copyright (C) 2002 Richard Hult <richard@imendio.com>
  * Copyright (C) 2002 Mikael Hallendal <micke@imendio.com>
@@ -49,6 +50,7 @@ mvl_load (const gchar *file)
 	g_module_symbol (view->handle, "get_label", (gpointer*)&view->get_label);
 	g_module_symbol (view->handle, "get_menu_label", (gpointer*)&view->get_menu_label);
 	g_module_symbol (view->handle, "get_icon", (gpointer*)&view->get_icon);
+	g_module_symbol (view->handle, "get_name", (gpointer*)&view->get_name);
 	g_module_symbol (view->handle, "get_widget", (gpointer*)&view->get_widget);
 	g_module_symbol (view->handle, "print_init", (gpointer*)&view->print_init);
 	g_module_symbol (view->handle, "print", (gpointer*)&view->print);

@@ -137,9 +137,10 @@ void              activate                                (PlannerView          
 void              deactivate                              (PlannerView                  *view);
 void              init                                    (PlannerView                  *view,
 							   PlannerWindow                *main_window);
-gchar        *    get_label                               (PlannerView                  *view);
-gchar        *    get_menu_label                          (PlannerView                  *view);
-gchar        *    get_icon                                (PlannerView                  *view);
+const gchar  *    get_label                               (PlannerView                  *view);
+const gchar  *    get_menu_label                          (PlannerView                  *view);
+const gchar  *    get_icon                                (PlannerView                  *view);
+const gchar  *    get_name                                (PlannerView                  *view);
 GtkWidget    *    get_widget                              (PlannerView                  *view);
 void              print_init                              (PlannerView                  *view,
 							   PlannerPrintJob              *job);
@@ -268,7 +269,7 @@ init (PlannerView *view, PlannerWindow *main_window)
 			  view);
 }
 
-G_MODULE_EXPORT gchar *
+G_MODULE_EXPORT const gchar *
 get_label (PlannerView *view)
 {
 	g_return_val_if_fail (PLANNER_IS_VIEW (view), NULL);
@@ -276,7 +277,7 @@ get_label (PlannerView *view)
 	return _("Gantt Chart");
 }
 
-G_MODULE_EXPORT gchar *
+G_MODULE_EXPORT const gchar *
 get_menu_label (PlannerView *view)
 {
 	g_return_val_if_fail (PLANNER_IS_VIEW (view), NULL);
@@ -284,12 +285,20 @@ get_menu_label (PlannerView *view)
 	return _("_Gantt Chart");
 }
 
-G_MODULE_EXPORT gchar *
+G_MODULE_EXPORT const gchar *
 get_icon (PlannerView *view)
 {
 	g_return_val_if_fail (PLANNER_IS_VIEW (view), NULL);
 
 	return IMAGEDIR "/gantt.png";
+}
+
+G_MODULE_EXPORT const gchar *
+get_name (PlannerView *view)
+{
+	g_return_val_if_fail (PLANNER_IS_VIEW (view), NULL);
+
+	return "gantt_view";
 }
 
 G_MODULE_EXPORT GtkWidget *
