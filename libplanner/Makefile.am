@@ -90,6 +90,7 @@ libstorage_sql_la_SOURCES = \
 
 libstorage_sql_la_LDFLAGS =  -avoid-version -module
 libstorage_sql_la_LIBADD =  $(PG_LIBS)
+libstorage_sql_la_CFLAGS = $(PG_CFLAGS) 
 endif
 
 #

@@ -173,6 +173,7 @@ libhtml_plugin_la_LDFLAGS = -avoid-version -module
 if HAVE_POSTGRES
 libsql_plugin_la_SOURCES = planner-sql-plugin.c
 libsql_plugin_la_LDFLAGS = -avoid-version -module
+libsql_plugin_la_CFLAGS = $(PG_CFLAGS)
 endif
 
 planner-marshal.h: Makefile.am planner-marshal.list
