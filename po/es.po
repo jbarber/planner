@@ -1,3 +1,4 @@
+# traducción de es.po al Spanish
 # translation of es.po to Spanish
 # translation of planner.HEAD. to Spanish
 # This file is distributed under the same license as the mrproject package.
@@ -9,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-06-05 22:14+0200\n"
-"PO-Revision-Date: 2004-06-05 22:16+0200\n"
+"POT-Creation-Date: 2004-07-05 22:48+0200\n"
+"PO-Revision-Date: 2004-07-05 22:54+0200\n"
 "Last-Translator: Francisco Javier F. Serrador <serrador@cvs.gnome.org>\n"
 "Language-Team: Spanish <traductores@es.gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -193,7 +194,7 @@ msgstr "Editor de grupos"
 msgid "<b>Save to file</b>"
 msgstr "<b>Guardar en archivo</b>"
 
-#: data/glade/html-output.glade.h:4 data/ui/html-plugin.ui.h:1
+#: data/glade/html-output.glade.h:4
 msgid "Export to HTML"
 msgstr "Exportar a HTML"
 
@@ -377,7 +378,7 @@ msgstr "_Terminado:"
 msgid "Predecessors"
 msgstr "Predecesores"
 
-#: data/glade/task-dialog.glade.h:9 src/planner-resource-view.c:397
+#: data/glade/task-dialog.glade.h:9 src/planner-resource-view.c:401
 msgid "Resources"
 msgstr "Recursos"
 
@@ -406,13 +407,17 @@ msgid "_Work:"
 msgstr "_Obra:"
 
 #. day unit variant accepted in input
-#: data/glade/task-dialog.glade.h:17 src/planner-task-tree.c:3561
+#: data/glade/task-dialog.glade.h:17 src/planner-task-tree.c:3314
 msgid "days"
 msgstr "días"
 
 #: data/glade/task-input-dialog.glade.h:2
 msgid "Insert Task"
 msgstr "Introducir tarea"
+
+#: data/mime/planner.xml.in.h:1
+msgid "Planner project plan"
+msgstr "Plan de proyectos Planner"
 
 #: data/planner.desktop.in.h:1
 msgid "Planner Project Management"
@@ -594,6 +599,10 @@ msgstr "Desen_lazar tarea"
 msgid "_Zoom In"
 msgstr "_Ampliar"
 
+#: data/ui/html-plugin.ui.h:1
+msgid "HTML"
+msgstr "HTML"
+
 #: data/ui/main-window.ui.h:1
 msgid "About this application"
 msgstr "Acerca de esta aplicación"
@@ -627,174 +636,178 @@ msgid "Cut the selection"
 msgstr "Cortar la selección"
 
 #: data/ui/main-window.ui.h:9
+msgid "E_xport To"
+msgstr "E_xportar a"
+
+#: data/ui/main-window.ui.h:10
 msgid "Edit Day _Types"
 msgstr "Editar _tipos de días"
 
-#: data/ui/main-window.ui.h:10
+#: data/ui/main-window.ui.h:11
 msgid "Edit Project _Phases"
 msgstr "Edita las _fases del proyecto"
 
-#: data/ui/main-window.ui.h:11
+#: data/ui/main-window.ui.h:12
 msgid "Edit the project properties"
 msgstr "Edita las propiedades del proyecto"
 
-#: data/ui/main-window.ui.h:12
+#: data/ui/main-window.ui.h:13
 msgid "Exit the program"
 msgstr "Salir del programa"
 
-#: data/ui/main-window.ui.h:13
+#: data/ui/main-window.ui.h:14
 msgid "New"
 msgstr "Nuevo"
 
-#: data/ui/main-window.ui.h:14
+#: data/ui/main-window.ui.h:15
 msgid "New..."
 msgstr "Nuevo..."
 
-#: data/ui/main-window.ui.h:15
+#: data/ui/main-window.ui.h:16
 msgid "Open"
 msgstr "Abrir"
 
-#: data/ui/main-window.ui.h:16
+#: data/ui/main-window.ui.h:17
 msgid "Open a project"
 msgstr "Abre un proyecto"
 
-#: data/ui/main-window.ui.h:17
+#: data/ui/main-window.ui.h:18
 msgid "Paste the clipboard"
 msgstr "Pega el contenido del portapapeles"
 
-#: data/ui/main-window.ui.h:18
+#: data/ui/main-window.ui.h:19
 msgid "Print"
 msgstr "Imprimir"
 
-#: data/ui/main-window.ui.h:19
+#: data/ui/main-window.ui.h:20
 msgid "Print Pre_view"
 msgstr "_Vista previa de impresión"
 
-#: data/ui/main-window.ui.h:20
+#: data/ui/main-window.ui.h:21
 msgid "Print preview"
 msgstr "Vista previa de impresión"
 
-#: data/ui/main-window.ui.h:21
+#: data/ui/main-window.ui.h:22
 msgid "Print preview of the current project"
 msgstr "Previsualización de la impresión del proyecto actual"
 
-#: data/ui/main-window.ui.h:22
+#: data/ui/main-window.ui.h:23
 msgid "Print the current project"
 msgstr "Imprime el proyecto"
 
-#: data/ui/main-window.ui.h:23 src/planner-cmd-manager.c:241
+#: data/ui/main-window.ui.h:24 src/planner-cmd-manager.c:241
 msgid "Redo"
 msgstr "Rehacer"
 
-#: data/ui/main-window.ui.h:24
+#: data/ui/main-window.ui.h:25
 msgid "Redo the undone action"
 msgstr "Rehace la última operación deshecha"
 
-#: data/ui/main-window.ui.h:25
+#: data/ui/main-window.ui.h:26
 msgid "Save"
 msgstr "Guardar"
 
-#: data/ui/main-window.ui.h:26
+#: data/ui/main-window.ui.h:27
 msgid "Save _As..."
 msgstr "Guardar c_omo..."
 
-#: data/ui/main-window.ui.h:27
+#: data/ui/main-window.ui.h:28
 msgid "Save the current project"
 msgstr "Guarda el proyecto"
 
-#: data/ui/main-window.ui.h:28
+#: data/ui/main-window.ui.h:29
 msgid "Save the current project with a different name"
 msgstr "Guarda el proyecto con un nombre diferente"
 
-#: data/ui/main-window.ui.h:29
+#: data/ui/main-window.ui.h:30
 msgid "Show the Planner User Guide"
 msgstr "Mostrar la guía del usuario de Planner"
 
-#: data/ui/main-window.ui.h:30 src/planner-cmd-manager.c:229
+#: data/ui/main-window.ui.h:31 src/planner-cmd-manager.c:229
 msgid "Undo"
 msgstr "Deshacer"
 
-#: data/ui/main-window.ui.h:31
+#: data/ui/main-window.ui.h:32
 msgid "Undo the last action"
 msgstr "Deshace la última acción"
 
-#: data/ui/main-window.ui.h:32
+#: data/ui/main-window.ui.h:33
 msgid "_About"
 msgstr "_Acerca de..."
 
-#: data/ui/main-window.ui.h:33
+#: data/ui/main-window.ui.h:34
 msgid "_Actions"
 msgstr "_Acciones"
 
-#: data/ui/main-window.ui.h:34
+#: data/ui/main-window.ui.h:35
 msgid "_Close"
 msgstr "_Cerrar"
 
-#: data/ui/main-window.ui.h:35
+#: data/ui/main-window.ui.h:36
 msgid "_Copy"
 msgstr "_Copiar"
 
-#: data/ui/main-window.ui.h:36
+#: data/ui/main-window.ui.h:37
 msgid "_Edit"
 msgstr "_Editar"
 
-#: data/ui/main-window.ui.h:37
+#: data/ui/main-window.ui.h:38
 msgid "_Edit Project Properties"
 msgstr "_Editar propiedades del proyecto"
 
-#: data/ui/main-window.ui.h:38
+#: data/ui/main-window.ui.h:39
 msgid "_File"
 msgstr "_Archivo"
 
-#: data/ui/main-window.ui.h:39
+#: data/ui/main-window.ui.h:40
 msgid "_Help"
 msgstr "A_yuda"
 
-#: data/ui/main-window.ui.h:40
+#: data/ui/main-window.ui.h:41
 msgid "_Manage Calendars"
 msgstr "_Gestión de calendarios"
 
-#: data/ui/main-window.ui.h:41
+#: data/ui/main-window.ui.h:42
 msgid "_New Project"
 msgstr "Proyecto _nuevo"
 
-#: data/ui/main-window.ui.h:42
+#: data/ui/main-window.ui.h:43
 msgid "_Open..."
 msgstr "_Abrir..."
 
-#: data/ui/main-window.ui.h:43
+#: data/ui/main-window.ui.h:44
 msgid "_Paste"
 msgstr "_Pegar"
 
-#: data/ui/main-window.ui.h:44
+#: data/ui/main-window.ui.h:45
 msgid "_Print..."
 msgstr "_Imprimir..."
 
-#: data/ui/main-window.ui.h:45
+#: data/ui/main-window.ui.h:46
 msgid "_Project"
 msgstr "_Proyecto"
 
-#: data/ui/main-window.ui.h:46
+#: data/ui/main-window.ui.h:47
 msgid "_Quit"
 msgstr "_Salir"
 
-#: data/ui/main-window.ui.h:47
+#: data/ui/main-window.ui.h:48
 msgid "_Redo"
 msgstr "_Rehacer"
 
-#: data/ui/main-window.ui.h:48 src/planner-window.c:1286
+#: data/ui/main-window.ui.h:49 src/planner-window.c:1247
 msgid "_Save"
 msgstr "_Guardar"
 
-#: data/ui/main-window.ui.h:49
+#: data/ui/main-window.ui.h:50
 msgid "_Undo"
 msgstr "_Deshacer"
 
-#: data/ui/main-window.ui.h:50
+#: data/ui/main-window.ui.h:51
 msgid "_User Guide"
 msgstr "_Guía del usuario"
 
-#: data/ui/main-window.ui.h:51
+#: data/ui/main-window.ui.h:52
 msgid "_View"
 msgstr "_Vista"
 
@@ -862,6 +875,10 @@ msgstr "_Editar tarea"
 msgid "Zoom to fit"
 msgstr "Ampliar hasta ajustar"
 
+#: data/ui/xml-planner-plugin.ui.h:1
+msgid "Planner 0.11 Format"
+msgstr "Formato de Planner 0.11"
+
 #: libegg/recent-files/egg-recent-vfs-utils.c:90
 msgid " (invalid Unicode)"
 msgstr " (Unicode inválido)"
@@ -898,7 +915,7 @@ msgstr "No se pudo crear el árbol XML"
 msgid "Could not write XML file"
 msgstr "No se pudo escribir el archivo XML"
 
-#: libplanner/mrp-project.c:440 src/planner-group-dialog.c:844
+#: libplanner/mrp-project.c:440 src/planner-group-dialog.c:840
 msgid "Default"
 msgstr "Predeterminado"
 
@@ -909,8 +926,7 @@ msgstr "No se pudo encontrar un módulo para cargar «%s»"
 
 #: libplanner/mrp-project.c:769 libplanner/mrp-project.c:1053
 msgid "No support for SQL storage built into this version of Planner."
-msgstr ""
-"No hay soporte para almacenes SQL compilado en esta versión de Planner."
+msgstr "No hay soporte para almacenes SQL compilado en esta versión de Planner."
 
 #: libplanner/mrp-project.c:806
 msgid "Invalid URI."
@@ -923,8 +939,7 @@ msgstr "No es posible encontrar el escritor de archivos identificado por «%s»"
 
 #: libplanner/mrp-project.c:1010
 msgid "Couldn't find a suitable file module for loading project"
-msgstr ""
-"No se pudo encontrar un módulo de archivo adecuado para cargar el proyecto"
+msgstr "No se pudo encontrar un módulo de archivo adecuado para cargar el proyecto"
 
 #: libplanner/mrp-property.c:365
 msgid "Text"
@@ -950,25 +965,25 @@ msgstr "Fecha"
 msgid "Duration"
 msgstr "Duración"
 
-#: libplanner/mrp-property.c:377 src/planner-task-view.c:271
+#: libplanner/mrp-property.c:377 src/planner-task-view.c:279
 msgid "Cost"
 msgstr "Coste"
 
-#: libplanner/mrp-property.c:380 src/planner-project-properties.c:735
+#: libplanner/mrp-property.c:380 src/planner-project-properties.c:734
 msgid "None"
 msgstr "Nada"
 
 #. Give up.
-#: libplanner/mrp-sql.c:286 src/planner-sql-plugin.c:173
+#: libplanner/mrp-sql.c:294 src/planner-sql-plugin.c:173
 msgid "Invalid Unicode"
 msgstr "Unicode inválido"
 
-#: libplanner/mrp-sql.c:2161
+#: libplanner/mrp-sql.c:2175
 #, c-format
 msgid "Connection to database '%s' failed.\n"
 msgstr "La conexión con la base de datos «%s» falló.\n"
 
-#: libplanner/mrp-sql.c:2166
+#: libplanner/mrp-sql.c:2180
 #, c-format
 msgid ""
 "Connection to database '%s' failed.\n"
@@ -977,12 +992,12 @@ msgstr ""
 "La conexión con la base de datos «%s» falló.\n"
 "%s"
 
-#: libplanner/mrp-sql.c:2174
+#: libplanner/mrp-sql.c:2188
 #, c-format
 msgid "BEGIN command failed %s."
 msgstr "El comando BEGIN falló %s."
 
-#: libplanner/mrp-sql.c:2340
+#: libplanner/mrp-sql.c:2354
 #, c-format
 msgid ""
 "The project '%s' has been changed by the user '%s' since you opened it. Do "
@@ -991,7 +1006,7 @@ msgstr ""
 "El proyecto «%s» ha sido modificado por el usuario «%s» desde la última vez "
 "que lo abrió. ¿Quiere guardarlo de todas formas?"
 
-#: libplanner/mrp-sql.c:3606 src/planner-sql-plugin.c:336
+#: libplanner/mrp-sql.c:3620 src/planner-sql-plugin.c:338
 #, c-format
 msgid "Connection to database '%s' failed."
 msgstr "La conexión con la base de datos «%s» falló."
@@ -1008,33 +1023,47 @@ msgstr "URI SQL Inválida (id de proyecto inválido)"
 msgid "Invalid SQL URI (no database name specified)."
 msgstr "URI SQL inválida (no hay especificado un nombre de base de datos)."
 
-#: libplanner/mrp-task.c:1042
-msgid ""
-"Could not add a predecessor relation, because the tasks are already related."
+#: libplanner/mrp-task.c:1045
+msgid "Could not add a predecessor relation, because the tasks are already related."
 msgstr ""
 "No se puede añadir una relación predecesora, debido a que las tareas ya se "
 "encuentran relacionadas."
 
-#: libplanner/mrp-task-manager.c:1822
+#: libplanner/mrp-task-manager.c:1851
 msgid "Can not add a predecessor relation between a task and its ancestor."
-msgstr ""
-"No se puede añadir una relación predecesora entre una tarea y sus ancestros."
+msgstr "No se puede añadir una relación predecesora entre una tarea y sus ancestros."
 
-#: libplanner/mrp-task-manager.c:1831 libplanner/mrp-task-manager.c:1839
+#: libplanner/mrp-task-manager.c:1860 libplanner/mrp-task-manager.c:1868
 msgid "Can not add a predecessor, because it would result in a loop."
 msgstr "No se puede añadir un predecesor debido a que formaría un ciclo."
 
-#: libplanner/mrp-task-manager.c:1874
+#: libplanner/mrp-task-manager.c:1903
 msgid "Can not move the task, since it would result in a loop."
 msgstr "No se puede mover la tarea, debido a que formaría un ciclo."
 
-#: libplanner/mrp-xsl.c:96
-msgid "HTML export failed"
-msgstr "Ha fallado la exportación HTML"
+#: libplanner/mrp-xsl.c:102
+msgid "Export to HTML failed"
+msgstr "Ha fallado la exportación a HTML"
+
+#: libplanner/mrp-xsl.c:166
+msgid "Export to Planner pre-0.12 format failed"
+msgstr "Ha fallado la exportacion al formato Planner pre-0.12"
 
 #: src/planner-application.c:125
 msgid "Edit"
 msgstr "Editar"
+
+#: src/planner-calendar-dialog.c:183
+msgid "Change day type"
+msgstr "Cambiar el tipo de día"
+
+#: src/planner-calendar-dialog.c:305
+msgid "Remove calendar"
+msgstr "Eliminar calendario"
+
+#: src/planner-calendar-dialog.c:397
+msgid "Add new calendar"
+msgstr "Añadir un calendario nuevo"
 
 #: src/planner-cell-renderer-date.c:147
 msgid "Constraint type"
@@ -1078,12 +1107,12 @@ msgstr "Deshacer «%s»"
 msgid "Redo '%s'"
 msgstr "Rehacer «%s»"
 
-#: src/planner-day-type-dialog.c:494
+#: src/planner-day-type-dialog.c:491
 #, c-format
 msgid "Add day type \"%s\""
 msgstr "Añadir tipo de día «%s»"
 
-#: src/planner-day-type-dialog.c:553
+#: src/planner-day-type-dialog.c:552
 #, c-format
 msgid "Remove day type \"%s\""
 msgstr "Eliminar tipo de día «%s»"
@@ -1175,34 +1204,34 @@ msgstr "%Y %b %d"
 msgid "Project start"
 msgstr "Comienzo del proyecto:"
 
-#: src/planner-gantt-print.c:191 src/planner-group-dialog.c:820
-#: src/planner-property-dialog.c:509 src/planner-resource-view.c:1182
-#: src/planner-task-dialog.c:1839 src/planner-task-dialog.c:1928
-#: src/planner-task-view.c:266 src/planner-ttable-print.c:97
+#: src/planner-gantt-print.c:189 src/planner-group-dialog.c:816
+#: src/planner-property-dialog.c:481 src/planner-resource-view.c:1152
+#: src/planner-task-dialog.c:2534 src/planner-task-dialog.c:2623
+#: src/planner-task-view.c:274 src/planner-ttable-print.c:108
 msgid "Name"
 msgstr "Nombre"
 
-#: src/planner-gantt-print.c:199 src/planner-resource-dialog.c:1900
-#: src/planner-resource-view.c:700 src/planner-resource-view.c:716
-#: src/planner-resource-view.c:1655 src/planner-task-view.c:269
+#: src/planner-gantt-print.c:197 src/planner-resource-dialog.c:1895
+#: src/planner-resource-view.c:729 src/planner-resource-view.c:745
+#: src/planner-resource-view.c:1623 src/planner-task-view.c:277
 msgid "Work"
 msgstr "Obra"
 
-#: src/planner-gantt-print.c:523 src/planner-gantt-row.c:670
-#: src/planner-window.c:1663
+#: src/planner-gantt-print.c:541 src/planner-gantt-row.c:685
+#: src/planner-window.c:1622
 msgid "Unnamed"
 msgstr "Sin nombre"
 
-#: src/planner-gantt-row.c:1920 src/planner-gantt-row.c:1923
+#: src/planner-gantt-row.c:1758 src/planner-gantt-row.c:1761
 msgid "No name"
 msgstr "Sin nombre"
 
-#: src/planner-gantt-row.c:1926
+#: src/planner-gantt-row.c:1764
 #, c-format
 msgid "Make task '%s' a predecessor of '%s'"
 msgstr "Hacer la tarea «%s» predecesora de «%s»"
 
-#: src/planner-gantt-row.c:1984
+#: src/planner-gantt-row.c:1820
 #, c-format
 msgid "Change work to %s"
 msgstr "Cambiar obra a %s"
@@ -1215,7 +1244,7 @@ msgstr "Diagrama de Gantt"
 msgid "_Gantt Chart"
 msgstr "_Gráfico Gantt"
 
-#. i18n: WBS is sort for work breakdown structure, and is a
+#. i18n: WBS is short for work breakdown structure, and is a
 #. * project management term. You might want to leave it
 #. * untranslated unless there is a localized term for it.
 #.
@@ -1227,7 +1256,7 @@ msgstr ""
 "\n"
 "WBS"
 
-#: src/planner-gantt-view.c:493 src/planner-ttable-tree.c:332
+#: src/planner-gantt-view.c:493 src/planner-ttable-tree.c:343
 msgid ""
 "\n"
 "Name"
@@ -1244,31 +1273,31 @@ msgstr ""
 "\n"
 "Trabajo"
 
-#: src/planner-group-dialog.c:304
+#: src/planner-group-dialog.c:301
 msgid "Insert group"
 msgstr "Insertar grupo"
 
-#: src/planner-group-dialog.c:429
+#: src/planner-group-dialog.c:425
 msgid "Remove group"
 msgstr "Eliminar grupo"
 
-#: src/planner-group-dialog.c:525
+#: src/planner-group-dialog.c:520
 msgid "Default group"
 msgstr "Grupo predeterminado"
 
-#: src/planner-group-dialog.c:644
+#: src/planner-group-dialog.c:638
 msgid "Edit group property"
 msgstr "Editar propiedad del grupo"
 
-#: src/planner-group-dialog.c:826
+#: src/planner-group-dialog.c:822
 msgid "Manager name"
 msgstr "Nombre del encargado"
 
-#: src/planner-group-dialog.c:832
+#: src/planner-group-dialog.c:828
 msgid "Manager phone"
 msgstr "Teléfono del encargado"
 
-#: src/planner-group-dialog.c:838
+#: src/planner-group-dialog.c:834
 msgid "Manager email"
 msgstr "Email del encargado"
 
@@ -1281,7 +1310,8 @@ msgstr ""
 "«%s» es un directorio.\n"
 "Introduzca un nombre de archivo e intente de nuevo."
 
-#: src/planner-html-plugin.c:148 src/planner-window.c:1419
+#: src/planner-html-plugin.c:148 src/planner-window.c:1378
+#: src/planner-xml-planner-plugin.c:133
 #, c-format
 msgid "File \"%s\" exists, do you want to overwrite it?"
 msgstr "El archivo «%s» ya existe, ¿desea sobreescribirlo?"
@@ -1298,11 +1328,11 @@ msgstr "GEOMETRY"
 msgid "planner: --geometry cannot be used with more than one file."
 msgstr "planner: --geometry no se puede usar con más de un archivo."
 
-#: src/planner-phase-dialog.c:535
+#: src/planner-phase-dialog.c:532
 msgid "Insert phase"
 msgstr "Insertar fase"
 
-#: src/planner-phase-dialog.c:635
+#: src/planner-phase-dialog.c:631
 msgid "Remove phase"
 msgstr "Eliminar fase"
 
@@ -1311,19 +1341,20 @@ msgstr "Eliminar fase"
 msgid "Could not open plugin file '%s'\n"
 msgstr "No se pudo abrir el archivo de complemento «%s»\n"
 
-#: src/planner-predecessor-model.c:191 src/planner-task-dialog.c:1514
+#: src/planner-predecessor-model.c:191 src/planner-task-dialog.c:2195
 msgid "FS"
 msgstr "TE"
 
-#: src/planner-predecessor-model.c:194 src/planner-task-dialog.c:1515
+#: src/planner-predecessor-model.c:194
 msgid "FF"
 msgstr "TT"
 
-#: src/planner-predecessor-model.c:197 src/planner-task-dialog.c:1516
+#. list = g_list_append (list, g_strdup (_("FF")));
+#: src/planner-predecessor-model.c:197 src/planner-task-dialog.c:2197
 msgid "SS"
 msgstr "EE"
 
-#: src/planner-predecessor-model.c:200 src/planner-task-dialog.c:1517
+#: src/planner-predecessor-model.c:200
 msgid "SF"
 msgstr "EF"
 
@@ -1339,174 +1370,170 @@ msgstr "Seleccionar vistas"
 msgid "Select the views to print:"
 msgstr "Seleccionar las vistas a imprimir"
 
-#: src/planner-project-properties.c:383
+#: src/planner-project-properties.c:382
 msgid "Select a calendar to use for this project:"
 msgstr "Seleccione un calendario para usar en este proyecto"
 
-#: src/planner-project-properties.c:483
+#: src/planner-project-properties.c:482
 msgid "Edit Project Name"
 msgstr "Editar el nombre del proyecto"
 
-#: src/planner-project-properties.c:519
+#: src/planner-project-properties.c:518
 msgid "Edit Organization"
 msgstr "Editar la organización"
 
-#: src/planner-project-properties.c:555
+#: src/planner-project-properties.c:554
 msgid "Edit Manager"
 msgstr "Editar el encargado"
 
-#: src/planner-project-properties.c:626
+#: src/planner-project-properties.c:625
 msgid "Edit Project Start"
 msgstr "Editar el comienzo del proyecto"
 
-#: src/planner-project-properties.c:695
+#: src/planner-project-properties.c:694
 msgid "Edit Project Phase"
 msgstr "Editar fase del proyecto"
 
-#: src/planner-project-properties.c:828
+#: src/planner-project-properties.c:827
 msgid "Property"
 msgstr "Propiedad"
 
-#: src/planner-project-properties.c:839 src/planner-property-dialog.c:562
+#: src/planner-project-properties.c:838
 msgid "Value"
 msgstr "Valor"
 
-#: src/planner-project-properties.c:1248 src/planner-property-dialog.c:352
+#: src/planner-project-properties.c:1247 src/planner-property-dialog.c:329
 msgid "The name of the custom property needs to start with a letter."
 msgstr "El nombre de la propiedad debe comenzar con una letra."
 
-#: src/planner-project-properties.c:1319 src/planner-property-dialog.c:425
+#: src/planner-project-properties.c:1318 src/planner-property-dialog.c:399
 #, c-format
 msgid "Do you really want to remove the property '%s' from the project?"
 msgstr "¿Está seguro de que desea eliminar la propiedad «%s» del proyecto?"
 
-#: src/planner-project-properties.c:1412
+#: src/planner-project-properties.c:1411
 msgid "Could not create properties dialog."
 msgstr "No se pudo crear el diálogo de propiedades."
 
-#: src/planner-project-properties.c:1777
+#: src/planner-project-properties.c:1776
 msgid "Add project property"
 msgstr "Añadir propiedad al proyecto"
 
-#: src/planner-project-properties.c:1887
+#: src/planner-project-properties.c:1886
 msgid "Remove project property"
 msgstr "Quitar propiedad al proyecto"
 
-#: src/planner-project-properties.c:1980
+#: src/planner-project-properties.c:1979
 msgid "Edit project property value"
 msgstr "Editar el valor de la propiedad del proyecto"
 
-#: src/planner-property-dialog.c:528
+#: src/planner-property-dialog.c:498
 msgid "Label"
 msgstr "Etiqueta"
 
-#: src/planner-property-dialog.c:542 src/planner-resource-view.c:1224
-#: src/planner-task-dialog.c:1960
+#: src/planner-property-dialog.c:510 src/planner-resource-view.c:1194
+#: src/planner-task-dialog.c:2655
 msgid "Type"
 msgstr "Tipo"
 
-#: src/planner-property-dialog.c:776 src/planner-property-dialog.c:879
-#: src/planner-property-dialog.c:961
+#: src/planner-property-dialog.c:664
 msgid "Add property"
 msgstr "Añadir propiedad"
+
+#: src/planner-property-dialog.c:809
+msgid "Remove property"
+msgstr "Quitar propiedad"
+
+#: src/planner-property-dialog.c:902
+msgid "Edit property label"
+msgstr "Editar etiqueta de propiedad"
 
 #: src/planner-python-plugin.c:164 src/planner-window.c:639
 msgid "Open a file"
 msgstr "Abrir un archivo"
 
-#. Put "no group" at the top.
-#: src/planner-resource-dialog.c:326 src/planner-resource-input-dialog.c:97
-#: src/planner-resource-view.c:1866
-msgid "(None)"
-msgstr "(Nada)"
-
-#: src/planner-resource-dialog.c:336 src/planner-resource-input-dialog.c:107
-#: src/planner-task-dialog.c:295
-msgid "(No name)"
-msgstr "(Sin nombre)"
-
-#: src/planner-resource-dialog.c:513
-msgid "Edit resource calendar from dialog"
-msgstr "Edita el calendario de recursos desde el diálogo"
-
-#: src/planner-resource-dialog.c:595
-msgid "Edit resource note from dialog"
-msgstr "Edita la nota de recursos desde el diálogo"
-
-#: src/planner-resource-dialog.c:669
-msgid "Edit resource cost from dialog"
-msgstr "Edita el coste del recurso desde el diálogo"
-
-#: src/planner-resource-dialog.c:739 src/planner-resource-dialog.c:781
-msgid "Edit resource property from dialog"
-msgstr "Edita propiedad del recurso del diálogo"
-
-#. i18n: time stamp format for notes in task dialog, see strftime(3) for
-#. * a detailed description.
-#: src/planner-resource-dialog.c:1458 src/planner-task-dialog.c:1120
-msgid "%a %d %b %Y, %H:%M\n"
-msgstr "%a, %d %b %Y, %H:%M\n"
-
-#: src/planner-resource-dialog.c:1575
-msgid "None (use project default)"
-msgstr "Ninguno (usar los predeterminados del proyecto)"
-
-#: src/planner-resource-dialog.c:1702 src/planner-resource-dialog.c:1704
-msgid "Edit resource properties"
-msgstr "Editar propiedades del recurso"
-
-#: src/planner-resource-dialog.c:1901 src/planner-resource-view.c:703
-#: src/planner-resource-view.c:717 src/planner-resource-view.c:1656
-msgid "Material"
-msgstr "Material"
-
-#: src/planner-resource-view.c:264
-msgid "/_Insert resource"
-msgstr "/_Introducir recurso"
-
-#: src/planner-resource-view.c:265
-msgid "/_Remove resource"
-msgstr "/_Eliminar recurso"
-
-#: src/planner-resource-view.c:266 src/planner-ttable-tree.c:98
-msgid "/_Edit resource..."
-msgstr "/_Editar recurso..."
-
-#: src/planner-resource-view.c:405
-msgid "_Resources"
-msgstr "_Recursos"
-
-#: src/planner-resource-view.c:806
+#: src/planner-resource-cmd.c:74
 msgid "Insert resource"
 msgstr "Introducir recurso"
 
-#: src/planner-resource-view.c:959
-msgid "Remove resource"
-msgstr "Eliminar recurso"
+#. Put "no group" at the top.
+#: src/planner-resource-dialog.c:326 src/planner-resource-input-dialog.c:99
+#: src/planner-resource-view.c:1834
+msgid "(None)"
+msgstr "(Nada)"
 
-#: src/planner-resource-view.c:1061
-msgid "Edit custom resource properties"
-msgstr "Editar propiedades personalizadas del recurso"
+#: src/planner-resource-dialog.c:336 src/planner-resource-input-dialog.c:109
+#: src/planner-task-dialog.c:375
+msgid "(No name)"
+msgstr "(Sin nombre)"
 
-#: src/planner-resource-view.c:1203
-msgid "Short name"
-msgstr "Nombre corto"
+#: src/planner-resource-dialog.c:510
+msgid "Edit resource calendar"
+msgstr "Editar calendario de recursos"
 
-#: src/planner-resource-view.c:1248
-msgid "Group"
-msgstr "Grupo"
+#: src/planner-resource-dialog.c:591 src/planner-resource-dialog.c:664
+msgid "Edit resource note"
+msgstr "Editar nota de recursos"
 
-#: src/planner-resource-view.c:1277
-msgid "Email"
-msgstr "Correo electrónico"
-
-#: src/planner-resource-view.c:1361
+#: src/planner-resource-dialog.c:733 src/planner-resource-dialog.c:774
+#: src/planner-resource-view.c:1328 src/planner-resource-view.c:1412
 msgid "Edit resource property"
 msgstr "Editar propiedad del recurso"
 
-#: src/planner-resource-view.c:1446
-msgid "Edit resource custom property"
-msgstr "Editar propiedad personalizada del recurso"
+#. i18n: time stamp format for notes in task dialog, see strftime(3) for
+#. * a detailed description.
+#: src/planner-resource-dialog.c:1453 src/planner-task-dialog.c:1784
+msgid "%a %d %b %Y, %H:%M\n"
+msgstr "%a, %d %b %Y, %H:%M\n"
+
+#: src/planner-resource-dialog.c:1570
+msgid "None (use project default)"
+msgstr "Ninguno (usar los predeterminados del proyecto)"
+
+#: src/planner-resource-dialog.c:1697 src/planner-resource-dialog.c:1699
+msgid "Edit resource properties"
+msgstr "Editar propiedades del recurso"
+
+#: src/planner-resource-dialog.c:1896 src/planner-resource-view.c:732
+#: src/planner-resource-view.c:746 src/planner-resource-view.c:1624
+msgid "Material"
+msgstr "Material"
+
+#: src/planner-resource-view.c:268
+msgid "/_Insert resource"
+msgstr "/_Introducir recurso"
+
+#: src/planner-resource-view.c:269
+msgid "/_Remove resource"
+msgstr "/_Eliminar recurso"
+
+#: src/planner-resource-view.c:270 src/planner-ttable-tree.c:107
+msgid "/_Edit resource..."
+msgstr "/_Editar recurso..."
+
+#: src/planner-resource-view.c:409
+msgid "_Resources"
+msgstr "_Recursos"
+
+#: src/planner-resource-view.c:927
+msgid "Remove resource"
+msgstr "Eliminar recurso"
+
+#: src/planner-resource-view.c:1031
+msgid "Edit custom resource properties"
+msgstr "Editar propiedades personalizadas del recurso"
+
+#: src/planner-resource-view.c:1173
+msgid "Short name"
+msgstr "Nombre corto"
+
+#: src/planner-resource-view.c:1218
+msgid "Group"
+msgstr "Grupo"
+
+#: src/planner-resource-view.c:1247
+msgid "Email"
+msgstr "Correo electrónico"
 
 #. i18n: Short "Week", preferably 2 letters.
 #: src/planner-scale-utils.c:325
@@ -1555,68 +1582,105 @@ msgstr "H%d"
 msgid "%04d, H%d"
 msgstr "%04d, H%d"
 
-#: src/planner-sql-plugin.c:379
+#: src/planner-sql-plugin.c:381
 msgid "ID"
 msgstr "ID"
 
-#: src/planner-sql-plugin.c:387
+#: src/planner-sql-plugin.c:389
 msgid "Project"
 msgstr "Proyecto"
 
-#: src/planner-sql-plugin.c:395
+#: src/planner-sql-plugin.c:397
 msgid "Phase"
 msgstr "Fase"
 
-#: src/planner-sql-plugin.c:403
+#: src/planner-sql-plugin.c:405
 msgid "Revision"
 msgstr "Revisión"
 
-#: src/planner-sql-plugin.c:602
+#: src/planner-sql-plugin.c:604
 msgid "Open from Database"
 msgstr "Abrir desde base de datos"
 
-#: src/planner-sql-plugin.c:709
+#: src/planner-sql-plugin.c:711
 msgid "Save to Database"
 msgstr "Guardar a base de datos"
 
-#: src/planner-task-dialog.c:377
-msgid "Edit task property from dialog"
-msgstr "Edita propiedad de la tarea desde el diálogo"
+#: src/planner-task-cmd.c:96
+msgid "Link task"
+msgstr "Enlazar tarea"
 
-#: src/planner-task-dialog.c:1186
+#: src/planner-task-cmd.c:172
+msgid "Unlink task"
+msgstr "Desenlazar tarea"
+
+#: src/planner-task-cmd.c:265
+msgid "Insert task"
+msgstr "Introducir tarea"
+
+#: src/planner-task-dialog.c:449 src/planner-task-tree.c:241
+#: src/planner-task-tree.c:995
+msgid "Edit task property"
+msgstr "Editar propiedad de la tarea"
+
+#: src/planner-task-dialog.c:523
+msgid "Edit task type"
+msgstr "Editar tipo de tarea"
+
+#: src/planner-task-dialog.c:590
+msgid "Toggle fixed duration"
+msgstr "Conmutar duración _fija"
+
+#: src/planner-task-dialog.c:668
+msgid "Assign resource to task"
+msgstr "Asignar _recurso a una tarea"
+
+#: src/planner-task-dialog.c:728
+msgid "Unassign resource from task"
+msgstr "Desasigna un recurso a una tarea"
+
+#: src/planner-task-dialog.c:787
+msgid "Change resource units in task"
+msgstr "Cambia las unidades de recursos en una tarea"
+
+#: src/planner-task-dialog.c:875
+msgid "Edit task predecessor"
+msgstr "Editar el predecesor de la tarea"
+
+#: src/planner-task-dialog.c:946
+msgid "Edit lag predecessor"
+msgstr "Editar predecesor del retraso"
+
+#: src/planner-task-dialog.c:1012
+msgid "Edit task note"
+msgstr "Editar nota de la tarea"
+
+#: src/planner-task-dialog.c:1856
 msgid "Finish to start (FS)"
 msgstr "Terminar para empezar (TE)"
 
-#: src/planner-task-dialog.c:1187
-msgid "Finish to finish (FF)"
-msgstr "Terminar para terminar (TT)"
-
-#: src/planner-task-dialog.c:1188
+#. _("Finish to finish (FF)"), MRP_RELATION_FF,
+#: src/planner-task-dialog.c:1858
 msgid "Start to start (SS)"
 msgstr "Empezar para empezar (EE)"
 
-#: src/planner-task-dialog.c:1189
-msgid "Start to finish (SF)"
-msgstr "Empezar para finalizar (EF)"
-
-#: src/planner-task-dialog.c:1239
+#: src/planner-task-dialog.c:1913
 msgid "Can't add new predecessor. No task selected!"
-msgstr ""
-"No se puede añadir un predecesor nuevo. No ha seleccionado ninguna tarea."
+msgstr "No se puede añadir un predecesor nuevo. No ha seleccionado ninguna tarea."
 
-#: src/planner-task-dialog.c:1860
+#: src/planner-task-dialog.c:2555
 msgid "Assigned"
 msgstr "Asignado"
 
-#: src/planner-task-dialog.c:1877
+#: src/planner-task-dialog.c:2572
 msgid "Units"
 msgstr "Unidades"
 
-#: src/planner-task-dialog.c:1982
+#: src/planner-task-dialog.c:2677
 msgid "Lag"
 msgstr "Retraso"
 
-#: src/planner-task-dialog.c:2121 src/planner-task-dialog.c:2123
+#: src/planner-task-dialog.c:2815 src/planner-task-dialog.c:2817
 msgid "Edit task properties"
 msgstr "Editar propiedades de la tarea"
 
@@ -1640,47 +1704,27 @@ msgstr "/_Desenlazar tarea"
 msgid "/Assign _resources..."
 msgstr "/Asignar _recursos..."
 
-#: src/planner-task-popup.c:70 src/planner-ttable-tree.c:99
+#: src/planner-task-popup.c:70 src/planner-ttable-tree.c:110
 msgid "/_Edit task..."
 msgstr "/_Editar tarea..."
 
-#: src/planner-task-tree.c:259
-msgid "Insert task"
-msgstr "Introducir tarea"
-
-#: src/planner-task-tree.c:351
-msgid "Edit task property"
-msgstr "Editar propiedad de la tarea"
-
-#: src/planner-task-tree.c:722
+#: src/planner-task-tree.c:613
 msgid "Remove task"
 msgstr "Eliminar tarea"
 
-#: src/planner-task-tree.c:801
-msgid "Constraint task"
-msgstr "Tarea que impide"
+#: src/planner-task-tree.c:690
+msgid "Apply constraint to task"
+msgstr "Aplicar impedimento a la tarea"
 
-#: src/planner-task-tree.c:864
-msgid "Constraint task reset"
-msgstr "Restablecer restricción de tarea"
+#: src/planner-task-tree.c:752
+msgid "Reset task constraint"
+msgstr "Reiniciar impedimento de la tarea"
 
-#: src/planner-task-tree.c:998
+#: src/planner-task-tree.c:886
 msgid "Move task"
 msgstr "Mover tarea"
 
-#: src/planner-task-tree.c:1117
-msgid "Link task"
-msgstr "Enlazar tarea"
-
-#: src/planner-task-tree.c:1185
-msgid "Unlink task"
-msgstr "Desenlazar tarea"
-
-#: src/planner-task-tree.c:1268
-msgid "Edit task custom property"
-msgstr "Editar propiedad personalizada de la tarea"
-
-#: src/planner-task-tree.c:2922
+#: src/planner-task-tree.c:2675
 #, c-format
 msgid ""
 "You are about to open an edit dialog each for %i tasks. Are you sure that "
@@ -1689,80 +1733,80 @@ msgstr ""
 "Va a abrir un diálogo de edición por cada una de las %i tareas. ¿Seguro que "
 "quiere hacer esto?"
 
-#: src/planner-task-tree.c:3553
+#: src/planner-task-tree.c:3306
 msgid "mon"
 msgstr "mes"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:3554
+#: src/planner-task-tree.c:3307
 msgid "month"
 msgstr "mes"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:3555
+#: src/planner-task-tree.c:3308
 msgid "months"
 msgstr "meses"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:3556
+#: src/planner-task-tree.c:3309
 msgid "w"
 msgstr "s"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:3557
+#: src/planner-task-tree.c:3310
 msgid "week"
 msgstr "semana"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:3558
+#: src/planner-task-tree.c:3311
 msgid "weeks"
 msgstr "semanas"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:3559
+#: src/planner-task-tree.c:3312
 msgid "d"
 msgstr "d"
 
 #. day unit variant accepted in input
-#: src/planner-task-tree.c:3560
+#: src/planner-task-tree.c:3313
 msgid "day"
 msgstr "día"
 
 #. day unit variant accepted in input
-#: src/planner-task-tree.c:3562
+#: src/planner-task-tree.c:3315
 msgid "h"
 msgstr "h"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:3563
+#: src/planner-task-tree.c:3316
 msgid "hour"
 msgstr "hora"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:3564
+#: src/planner-task-tree.c:3317
 msgid "hours"
 msgstr "horas"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:3565
+#: src/planner-task-tree.c:3318
 msgid "min"
 msgstr "min"
 
 #. minute unit variant accepted in input
-#: src/planner-task-tree.c:3566
+#: src/planner-task-tree.c:3319
 msgid "minute"
 msgstr "minuto"
 
 #. minute unit variant accepted in input
-#: src/planner-task-tree.c:3567
+#: src/planner-task-tree.c:3320
 msgid "minutes"
 msgstr "minutos"
 
-#: src/planner-task-view.c:199
+#: src/planner-task-view.c:207
 msgid "Tasks"
 msgstr "Tareas"
 
-#: src/planner-task-view.c:207
+#: src/planner-task-view.c:215
 msgid "_Tasks"
 msgstr "_Tareas"
 
@@ -1770,49 +1814,49 @@ msgstr "_Tareas"
 #. * project management term. You might want to leave it
 #. * untranslated unless there is a localized term for it.
 #.
-#: src/planner-task-view.c:265
+#: src/planner-task-view.c:273
 msgid "WBS"
 msgstr "WBS"
 
-#: src/planner-task-view.c:267
+#: src/planner-task-view.c:275
 msgid "Start"
 msgstr "Inicio"
 
-#: src/planner-task-view.c:268
+#: src/planner-task-view.c:276
 msgid "Finish"
 msgstr "Fin"
 
-#: src/planner-task-view.c:270
+#: src/planner-task-view.c:278
 msgid "Slack"
 msgstr "Desperdicio"
 
-#: src/planner-task-view.c:480
+#: src/planner-task-view.c:488
 msgid "Edit custom task properties"
 msgstr "Editar propiedades personalizadas de la tarea"
 
-#: src/planner-ttable-print.c:134
+#: src/planner-ttable-print.c:189
 msgid "Task"
 msgstr "Tarea"
 
-#: src/planner-ttable-row.c:2111
+#: src/planner-ttable-row.c:2011
 #, c-format
 msgid "Make task '%s' start on %s"
 msgstr "Hacer que la tarea «%s» empiece el «%s»"
 
-#: src/planner-ttable-row.c:2180
+#: src/planner-ttable-row.c:2085
 #, c-format
 msgid "Change task '%s' work to %s, duration to %s (%d)"
 msgstr "Cambiar el trabajo la tarea «%s» a %s, duración a %s (%d)"
 
-#: src/planner-ttable-tree.c:101
+#: src/planner-ttable-tree.c:113
 msgid "/_Expand all resources"
 msgstr "/_Editar todos los recursos..."
 
-#: src/planner-ttable-tree.c:102
+#: src/planner-ttable-tree.c:116
 msgid "/_Collapse all resources"
 msgstr "/_Contraer todos los recursos"
 
-#: src/planner-ttable-tree.c:333
+#: src/planner-ttable-tree.c:345
 msgid ""
 "\n"
 "Task"
@@ -1820,11 +1864,11 @@ msgstr ""
 "\n"
 "Tarea"
 
-#: src/planner-ttable-view.c:144
+#: src/planner-ttable-view.c:147
 msgid "Resource Usage"
 msgstr "Uso de recursos"
 
-#: src/planner-ttable-view.c:151
+#: src/planner-ttable-view.c:154
 msgid "Resource _Usage"
 msgstr "_Uso de recursos"
 
@@ -1836,58 +1880,55 @@ msgstr "No se pudo abrir la vista del archivo la vista del complemento «%s»\n"
 #. I18n: Translators, list your names here, newline separated if there
 #. * are more than one, to appear in the about box.
 #.
-#: src/planner-window.c:1085 src/planner-window.c:1092
+#: src/planner-window.c:1056 src/planner-window.c:1063
 msgid "translator_credits"
 msgstr "Francisco J. Fernandez "
 
 #. "Copyright \xc2\xa9"
-#: src/planner-window.c:1089
+#: src/planner-window.c:1060
 msgid "A Project Management application for the GNOME desktop"
 msgstr "Una aplicación de gestión de proyectos para el escritorio GNOME"
 
-#: src/planner-window.c:1099
+#: src/planner-window.c:1070
 msgid "The Planner Homepage"
 msgstr "La página web de Planner"
 
-#: src/planner-window.c:1227
+#: src/planner-window.c:1188
 msgid "If you don't save, changes made the last minute will be discarded."
-msgstr ""
-"Si no guarda, los cambios hechos en el último minuto serán descartados."
+msgstr "Si no guarda, los cambios hechos en el último minuto serán descartados."
 
-#: src/planner-window.c:1232
+#: src/planner-window.c:1193
 #, c-format
 msgid "If you don't save, changes made the last %d minutes will be discarded."
-msgstr ""
-"Si no guarda, los cambios hechos en los últimos %d minutos serán descartados."
+msgstr "Si no guarda, los cambios hechos en los últimos %d minutos serán descartados."
 
-#: src/planner-window.c:1237
+#: src/planner-window.c:1198
 msgid "If you don't save, changes made the last hour will be discarded."
 msgstr "Si no guarda, los cambios hechos en la última hora serán descartados."
 
-#: src/planner-window.c:1242
+#: src/planner-window.c:1203
 #, c-format
 msgid "If you don't save, changes made the last %d hours will be discarded."
-msgstr ""
-"Si no guarda, los cambios hechos en las últimas %d horas serán descartados."
+msgstr "Si no guarda, los cambios hechos en las últimas %d horas serán descartados."
 
-#: src/planner-window.c:1249
+#: src/planner-window.c:1210
 #, c-format
 msgid "Save changes to document '%s' before closing?"
 msgstr "¿Desea guardar los cambios del documento «%s» antes de cerrar?"
 
-#: src/planner-window.c:1273
+#: src/planner-window.c:1234
 msgid "C_lose without saving"
 msgstr "C_errar sin guardar"
 
-#: src/planner-window.c:1279
+#: src/planner-window.c:1240
 msgid "_Cancel"
 msgstr "_Cancelar"
 
-#: src/planner-window.c:1383
+#: src/planner-window.c:1342
 msgid "Save a file"
 msgstr "Guardar un archivo"
 
-#: src/planner-window.c:1620
+#: src/planner-window.c:1579
 msgid ""
 "You have opened a file that was saved with an old version of Planner.\n"
 "\n"
@@ -1917,9 +1958,47 @@ msgstr ""
 "el elemento del menú «Eliminar todos los impedimentos» en el menú «Editar»."
 
 #. Hack.
-#: src/planner-window.c:1655
+#: src/planner-window.c:1614
 msgid "Unnamed database project"
 msgstr "Base de datos del proyecto sin nombre"
+
+#: src/planner-working-time-dialog.c:143
+msgid "Edit working time"
+msgstr "Editar jornada laboral"
+
+#: src/planner-xml-planner-plugin.c:102
+msgid "Export"
+msgstr "Exportar"
+
+#~ msgid "HTML export failed"
+#~ msgstr "Ha fallado la exportación HTML"
+
+#~ msgid "Edit resource note from dialog"
+#~ msgstr "Edita la nota de recursos desde el diálogo"
+
+#~ msgid "Edit resource cost from dialog"
+#~ msgstr "Edita el coste del recurso desde el diálogo"
+
+#~ msgid "Edit resource property from dialog"
+#~ msgstr "Edita propiedad del recurso del diálogo"
+
+#~ msgid "Edit resource custom property"
+#~ msgstr "Editar propiedad personalizada del recurso"
+
+#~ msgid "Edit task property from dialog"
+#~ msgstr "Edita propiedad de la tarea desde el diálogo"
+
+#~ msgid "Finish to finish (FF)"
+#~ msgstr "Terminar para terminar (TT)"
+
+#~ msgid "Start to finish (SF)"
+#~ msgstr "Empezar para finalizar (EF)"
+
+#~ msgid "Constraint task reset"
+#~ msgstr "Restablecer restricción de tarea"
+
+#~ msgid "Edit task custom property"
+#~ msgstr "Editar propiedad personalizada de la tarea"
 
 #~ msgid "Reset _All Constraints"
 #~ msgstr "Reiniciar _todos los impedimentos"
@@ -2160,3 +2239,4 @@ msgstr "Base de datos del proyecto sin nombre"
 
 #~ msgid "Up"
 #~ msgstr "Arriba"
+
