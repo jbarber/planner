@@ -1,5 +1,16 @@
 2003-12-02  Frederic Crozat  <fcrozat@mandrakesoft.com>
 
+	* autogen.sh:
+	Add support for GNOME2_DIR variable.
+
+	* libplanner-1.pc.in:
+	Use correct name for linking.
+
+	* libplanner/Makefile.am:
+	Fix library version.
+
+2003-12-02  Frederic Crozat  <fcrozat@mandrakesoft.com>
+
 	* libplanner/Makefile.am:
 	* src/Makefile.am:
 	Fix Postgresql compilation (add missing cflags).

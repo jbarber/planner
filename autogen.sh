@@ -21,6 +21,12 @@ DIE=0
 : ${INTLTOOLIZE=intltoolize}
 : ${LIBTOOL=libtool}
 
+# if GNOME2_DIR set, modify ACLOCAL_FLAGS ...
+if [ -n "$GNOME2_DIR" ]; then
+	ACLOCAL_FLAGS="-I $GNOME2_DIR/share/aclocal $ACLOCAL_FLAGS"
+fi
+
+
 ($AUTOCONF --version) < /dev/null > /dev/null 2>&1 || {
 	echo
 	echo "You must have autoconf installed to compile $PROJECT."

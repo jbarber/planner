@@ -52,7 +52,7 @@ libplannerinclude_HEADERS = \
 
 libplanner_1_la_LIBADD = $(LIBPLANNER_LIBS)
 
-libplanner_1_la_LDFLAGS = -avoid-version
+#libplanner_1_la_LDFLAGS = -avoid-version
 # -no-undefined
 
 # -export-symbols-regex "^[^_].*"
