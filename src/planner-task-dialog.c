@@ -1407,10 +1407,12 @@ task_dialog_setup_resource_list (DialogData *data)
 	cell = gtk_cell_renderer_text_new ();
 	g_object_set (cell, "editable", FALSE, NULL);
 	
-	col = gtk_tree_view_column_new_with_attributes (_("Name"),
-							cell,
-							"text", RESOURCE_ASSIGNMENT_COL_NAME,
-							NULL);
+	col = gtk_tree_view_column_new_with_attributes (
+		_("Name"),
+		cell,
+		"text", RESOURCE_ASSIGNMENT_COL_NAME,
+		NULL);
+
 	gtk_tree_view_column_set_resizable (col, TRUE);
 	gtk_tree_view_column_set_min_width (col, 200);
 	gtk_tree_view_append_column (tree, col);
@@ -1426,11 +1428,12 @@ task_dialog_setup_resource_list (DialogData *data)
 			  G_CALLBACK (task_dialog_assignment_toggled_cb),
 			  data);
 	
-	col = gtk_tree_view_column_new_with_attributes (_("Assigned"),
-							cell,
-							"active", RESOURCE_ASSIGNMENT_COL_ASSIGNED,
-							NULL);
-
+	col = gtk_tree_view_column_new_with_attributes (
+		_("Assigned"),
+		cell,
+		"active", RESOURCE_ASSIGNMENT_COL_ASSIGNED,
+		NULL);
+	
 	gtk_tree_view_column_set_resizable (col, TRUE);
 	gtk_tree_view_append_column (tree, col);
 
@@ -1448,6 +1451,7 @@ task_dialog_setup_resource_list (DialogData *data)
 		"text", RESOURCE_ASSIGNMENT_COL_ASSIGNED_UNITS,
 		"editable", RESOURCE_ASSIGNMENT_COL_ASSIGNED_UNITS_EDITABLE,
 		NULL);
+
 	gtk_tree_view_column_set_resizable (col, TRUE);
 	gtk_tree_view_column_set_min_width (col, 50);
 	gtk_tree_view_append_column (tree, col);
@@ -1713,7 +1717,7 @@ task_dialog_destroy_cb (GtkWidget  *parent,
 
 GtkWidget *
 planner_task_dialog_new (PlannerWindow *window,
-		    MrpTask      *task)
+			 MrpTask       *task)
 {
 	DialogData   *data;
 	GladeXML     *glade;

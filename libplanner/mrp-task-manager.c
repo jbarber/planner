@@ -1296,8 +1296,10 @@ task_manager_do_forward_pass (MrpTaskManager *manager,
 	GNode              *child;
 	mrptime             sub_start, sub_work_start, sub_finish;
 	mrptime             old_start, old_finish;
+	mrptime             new_start, new_finish;
 	mrptime             tmp_time;
 	gint                duration;
+	gint                old_duration;
 	gint                work;
 	mrptime             t1, t2;
 	MrpTaskSched        sched;
@@ -1306,6 +1308,7 @@ task_manager_do_forward_pass (MrpTaskManager *manager,
 	
 	old_start = mrp_task_get_start (task);
 	old_finish = mrp_task_get_finish (task);
+	old_duration = old_finish - old_start;
 
 	/*{ gchar *name; g_object_get (task, "name", &name, NULL);
 	g_print ("task %s\n", name);
@@ -1391,28 +1394,30 @@ task_manager_do_forward_pass (MrpTaskManager *manager,
 		}		
 	}
 	
-	tmp_time = mrp_task_get_start (task);
-	if (old_start != tmp_time) {
+	new_start = mrp_task_get_start (task);
+	if (old_start != new_start) {
 		g_object_notify (G_OBJECT (task), "start");
 	}
 	
-	tmp_time = mrp_task_get_finish (task);
-	if (old_finish != tmp_time) {
+	new_finish = mrp_task_get_finish (task);
+	if (old_finish != new_finish) {
 		g_object_notify (G_OBJECT (task), "finish");
 	}
-	
-	tmp_time = mrp_task_get_start (task);
-	if (*start == -1) {
-		*start = tmp_time;
-	} else {
-		*start = MIN (*start, tmp_time);
+
+	if (old_duration != (new_finish - new_start)) {
+		g_object_notify (G_OBJECT (task), "duration");
 	}
 	
-	tmp_time = mrp_task_get_finish (task);
-	if (*finish == -1) {
-		*finish = tmp_time;
+	if (*start == -1) {
+		*start = new_start;
 	} else {
-		*finish = MAX (*finish, tmp_time);
+		*start = MIN (*start, new_start);
+	}
+	
+	if (*finish == -1) {
+		*finish = new_finish;
+	} else {
+		*finish = MAX (*finish, new_finish);
 	}
 
 	tmp_time = mrp_task_get_work_start (task);

@@ -1,5 +1,8 @@
 2004-04-17  Richard Hult  <richard@imendio.com>
 
+	* libplanner/mrp-task-manager.c (task_manager_do_forward_pass):
+	Notify duration changes. Fixes bug #140324.
+
 	* src/planner-window.c (window_get_name): Don't show database
 	details such as password.
 	(window_confirm_exit_run): Hack for now that removes the save
