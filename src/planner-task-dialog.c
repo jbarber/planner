@@ -1758,8 +1758,8 @@ task_dialog_predecessor_dialog_new (MrpTask       *task,
 				       /*_("Start to finish (SF)"), MRP_RELATION_SF,*/
 				       NULL);
 
-	w = glade_xml_get_widget (glade, "lag_spinbutton");
-	g_object_set_data (G_OBJECT (dialog), "lag_spinbutton", w);
+	w = glade_xml_get_widget (glade, "lag_entry");
+	g_object_set_data (G_OBJECT (dialog), "lag_entry", w);
 
 	w = glade_xml_get_widget (glade, "cancel_button");
 	g_signal_connect (w,
@@ -1789,7 +1789,7 @@ task_dialog_new_pred_ok_clicked_cb (GtkWidget *button,
 	MrpProject    *project; 
 	gint           lag;
 	gint           pred_type; 
-	gchar         *str;
+	const gchar   *str;
 	
 	main_window = g_object_get_data (G_OBJECT (dialog), "main_window");
 
@@ -1797,8 +1797,9 @@ task_dialog_new_pred_ok_clicked_cb (GtkWidget *button,
 	mrp_object_get (task_main, "project", &project, NULL);
 
 	/* Predecessor lag. */
-	w = g_object_get_data (G_OBJECT (dialog), "lag_spinbutton");
-	lag = gtk_spin_button_get_value (GTK_SPIN_BUTTON (w)) * (60*60);
+	w = g_object_get_data (G_OBJECT (dialog), "lag_entry");
+	str = gtk_entry_get_text (GTK_ENTRY (w));
+	lag = planner_parse_duration_with_day_length (str, 24*60*60);
 
 	/* Predecessor type. */
 	w = g_object_get_data (G_OBJECT(dialog), "type_optionmenu");
@@ -1813,8 +1814,6 @@ task_dialog_new_pred_ok_clicked_cb (GtkWidget *button,
                 return;
         }
 	
-	mrp_object_get (MRP_OBJECT (new_task_pred), "name", &str, NULL);
-
 	cmd = planner_task_cmd_link (main_window, new_task_pred, task_main,
 				     pred_type, lag, &error);
 	
@@ -1833,8 +1832,6 @@ task_dialog_new_pred_ok_clicked_cb (GtkWidget *button,
 	} else {
 		gtk_widget_destroy (dialog);	
 	}
-
-	g_free (str);
 }
 
 static void  
@@ -1874,7 +1871,6 @@ task_dialog_remove_predecessor_cb (GtkWidget  *widget,
         }
 	
 	predecessor = MRP_TASK (planner_list_model_get_object (PLANNER_LIST_MODEL (model), &iter));
-	/* mrp_task_remove_predecessor (data->task, predecessor); */
 	relation = mrp_task_get_relation (data->task, predecessor);
 	planner_task_cmd_unlink (data->main_window, relation);
 }
@@ -2036,7 +2032,8 @@ task_dialog_pred_cell_edited (GtkCellRendererText *cell,
 		break;
 	}
 	case PREDECESSOR_COL_LAG:
-		task_cmd_edit_lag (data->main_window, relation, 60*60 * atoi (new_text));
+		lag = planner_parse_duration_with_day_length (new_text, 24*60*60);
+		task_cmd_edit_lag (data->main_window, relation, lag);
 		break;
 
 	default:
@@ -2374,7 +2371,6 @@ task_dialog_assignment_toggled_cb (GtkCellRendererText *cell,
 
  	if (!active) {
 		task_cmd_assign_add (data->main_window, data->task, resource, 100);
-		/* mrp_resource_assign (resource, data->task, 100); */
 	} else {
 		MrpAssignment *assignment;
 		
@@ -2382,8 +2378,6 @@ task_dialog_assignment_toggled_cb (GtkCellRendererText *cell,
 
 		if (assignment) {
 			task_cmd_assign_remove (data->main_window, assignment);
-			/* mrp_object_removed (MRP_OBJECT (assignment));
-			   g_object_unref (assignment); */
 		} 
 	}
 }
@@ -2395,18 +2389,17 @@ task_dialog_lag_data_func (GtkTreeViewColumn *tree_column,
 			   GtkTreeIter       *iter,
 			   DialogData        *data)
 {
-	GValue  value = { 0 };
-	gchar  *ret;
+	gint   lag;
+	gchar *ret;
 
-	gtk_tree_model_get_value (tree_model,
-				  iter,
-				  PREDECESSOR_COL_LAG,
-				  &value);
-	
-	ret = g_strdup_printf ("%d", g_value_get_int (&value) / (60*60));
-	
+	gtk_tree_model_get (tree_model,
+			    iter,
+			    PREDECESSOR_COL_LAG,
+			    &lag,
+			    -1);
+
+	ret = planner_format_duration_with_day_length (lag, 24*60*60);
 	g_object_set (cell, "text", ret, NULL);
-	g_value_unset (&value);
 	g_free (ret);
 }
 

@@ -1,5 +1,16 @@
 2005-02-19  Richard Hult  <richard@imendio.com>
 
+	* src/planner-format.c (planner_format_duration_with_day_length):
+	Fix bug.
+	(planner_parse_duration_with_day_length): Add
+
+	* data/glade/add-predecessor.glade: Make lag spinbutton an entry.
+
+	* src/planner-task-dialog.c: Handle lag as other duration instead
+	of hardcoded to always be in hours.
+
+2005-02-19  Richard Hult  <richard@imendio.com>
+
 	* libegg/recent-files/egg-recent-view-uimanager.c:
 	(egg_recent_view_uimanager_set_list): Add comment.
 	* src/planner-window.c: (window_finalize): Free the ui manager and

@@ -201,7 +201,7 @@ mpm_get_value (GtkTreeModel *tree_model,
 			break;
 		default:
 			g_warning("Unknown relation type %d", 
-				  mrp_relation_get_relation_type(relation));
+				  mrp_relation_get_relation_type (relation));
 		}
 		break;
 

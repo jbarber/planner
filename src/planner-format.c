@@ -135,7 +135,11 @@ planner_format_duration_with_day_length (gint duration,
 	gint days;
 	gint hours;
 
-	day_length = day_length / (60*60);
+	day_length = day_length;
+
+	if (day_length == 0) {
+		return g_strdup ("");
+	}
 	
 	days = duration / day_length;
 	duration -= days * day_length;
@@ -162,7 +166,7 @@ planner_format_duration (MrpProject *project,
 	gint         day_length;
 
 	calendar = mrp_project_get_calendar (project);
-	day_length = mrp_calendar_day_get_total_work (calendar, mrp_day_get_work ()) * 60*60;
+	day_length = mrp_calendar_day_get_total_work (calendar, mrp_day_get_work ());
 
 	if (day_length == 0) {
 		day_length = 8*60*60;
@@ -170,38 +174,6 @@ planner_format_duration (MrpProject *project,
 
 	return planner_format_duration_with_day_length (duration, day_length);
 }
-
-#if 0
-gchar *
-planner_format_duration (gint duration,
-		    gint day_length) 
-{
-	gchar  *str, *svalue;
-	gfloat  days;
-	gfloat  rounded;
-
-	days = duration / (60.0*60.0 * day_length);
-
-	/* Take rounding in consideration when deciding on whether to output
-	 * "day" or "days".
-	 */
-	rounded = floor (days * 10 + 0.5);
-	
-	if (rounded > 10.0) {
-		str = planner_format_float (days, 1, FALSE);
-		svalue = g_strdup_printf (_("%s days"), str);
-		g_free (str);
-	} else if (rounded == 0.0) {
-		svalue = g_strdup (_("0 days"));
-	} else {
-		str = planner_format_float (days, 1, FALSE);
-		svalue = g_strdup_printf (_("%s day"), str);
-		g_free (str);
-	}
-
-	return svalue;	
-}
-#endif
 
 gchar * 
 planner_format_date (mrptime date)
@@ -492,8 +464,8 @@ format_multiply_with_unit (gdouble value,
 }
 
 gint
-planner_parse_duration (MrpProject  *project,
-			const gchar *input)
+planner_parse_duration_with_day_length (const gchar *input,
+					gint         day_length)
 {
 	gchar   *str;
 	gchar   *p;
@@ -503,15 +475,10 @@ planner_parse_duration (MrpProject  *project,
 	gint     total;
 	gint     seconds_per_month;
 	gint     seconds_per_week;
-	gint     seconds_per_day;
-
-	seconds_per_day = mrp_calendar_day_get_total_work (
-		mrp_project_get_calendar (project),
-		mrp_day_get_work ());
 
 	/* Hardcode these for now. */
-	seconds_per_week = seconds_per_day * 5;
-	seconds_per_month = seconds_per_day * 30;
+	seconds_per_week = day_length * 5;
+	seconds_per_month = day_length * 30;
 
 	str = g_utf8_casefold (input, -1);
 	if (!str) {
@@ -548,7 +515,7 @@ planner_parse_duration (MrpProject  *project,
 							    unit,
 							    seconds_per_month,
 							    seconds_per_week,
-							    seconds_per_day);
+							    day_length);
 		}
 
 		if (*end_ptr == 0) {
@@ -561,4 +528,17 @@ planner_parse_duration (MrpProject  *project,
 	g_free (str);
 	
 	return total;
+}
+
+gint
+planner_parse_duration (MrpProject  *project,
+			const gchar *input)
+{
+	gint day_length;
+
+	day_length = mrp_calendar_day_get_total_work (
+		mrp_project_get_calendar (project),
+		mrp_day_get_work ());
+
+	return planner_parse_duration_with_day_length (input, day_length);
 }
