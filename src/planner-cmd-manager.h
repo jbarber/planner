@@ -45,9 +45,9 @@ struct _PlannerCmdManagerClass {
 
 typedef struct _PlannerCmd     PlannerCmd;
 
-typedef void (*PlannerCmdDoFunc)   (PlannerCmd *cmd);
-typedef void (*PlannerCmdUndoFunc) (PlannerCmd *cmd);
-typedef void (*PlannerCmdFreeFunc) (PlannerCmd *cmd);
+typedef gboolean (*PlannerCmdDoFunc)   (PlannerCmd *cmd);
+typedef void     (*PlannerCmdUndoFunc) (PlannerCmd *cmd);
+typedef void     (*PlannerCmdFreeFunc) (PlannerCmd *cmd);
 
 typedef enum {
 	PLANNER_CMD_TYPE_NORMAL = 0,
@@ -71,13 +71,20 @@ struct _PlannerCmd {
 
 GType              planner_cmd_manager_get_type          (void) G_GNUC_CONST;
 PlannerCmdManager *planner_cmd_manager_new               (void);
-void               planner_cmd_manager_insert_and_do     (PlannerCmdManager *manager,
-							  PlannerCmd        *cmd);
-gboolean           planner_cmd_manager_undo              (PlannerCmdManager *manager);
-gboolean           planner_cmd_manager_redo              (PlannerCmdManager *manager);
-gboolean           planner_cmd_manager_begin_transaction (PlannerCmdManager *manager,
-							  const gchar       *label);
-gboolean           planner_cmd_manager_end_transaction   (PlannerCmdManager *manager);
+gboolean           planner_cmd_manager_insert_and_do     (PlannerCmdManager  *manager,
+							  PlannerCmd         *cmd);
+gboolean           planner_cmd_manager_undo              (PlannerCmdManager  *manager);
+gboolean           planner_cmd_manager_redo              (PlannerCmdManager  *manager);
+gboolean           planner_cmd_manager_begin_transaction (PlannerCmdManager  *manager,
+							  const gchar        *label);
+gboolean           planner_cmd_manager_end_transaction   (PlannerCmdManager  *manager);
+PlannerCmd *       planner_cmd_new_size                  (gsize               size,
+							  const gchar        *label,
+							  PlannerCmdDoFunc    do_func,
+							  PlannerCmdUndoFunc  undo_func,
+							  PlannerCmdFreeFunc  free_func);
+
+#define planner_cmd_new(t,l,d,u,f) planner_cmd_new_size(sizeof(t),l,d,u,f)
 
 
 #endif /* __PLANNER_CMD_MANAGER_H__ */

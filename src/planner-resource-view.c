@@ -751,7 +751,7 @@ resource_view_popup_edit_resource_cb     (gpointer   callback_data,
 	resource_view_edit_resource_cb (NULL, callback_data, NULL);
 }
 
-static void
+static gboolean
 resource_cmd_insert_do (PlannerCmd *cmd_base)
 {
 	ResourceCmdInsert *cmd;
@@ -759,6 +759,8 @@ resource_cmd_insert_do (PlannerCmd *cmd_base)
 	cmd = (ResourceCmdInsert*) cmd_base;
 
 	mrp_project_add_resource (cmd->project, cmd->resource);
+
+	return TRUE;
 }
 
 static void
@@ -875,7 +877,7 @@ resource_view_insert_resources_cb (BonoboUIComponent *component,
 				   (gpointer *) &priv->resource_input_dialog);
 }
 
-static void
+static gboolean
 resource_cmd_remove_do (PlannerCmd *cmd_base)
 {
 	ResourceCmdRemove *cmd;
@@ -890,8 +892,9 @@ resource_cmd_remove_do (PlannerCmd *cmd_base)
 						  g_object_ref (l->data));
 	}
 
-
 	mrp_project_remove_resource (cmd->project, cmd->resource);
+
+	return TRUE;
 }
 
 static void
@@ -1289,7 +1292,7 @@ resource_view_setup_tree_view (PlannerView *view)
 	}
 }
 
-static void
+static gboolean
 resource_cmd_edit_property_do (PlannerCmd *cmd_base)
 {
 	ResourceCmdEditProperty *cmd;
@@ -1299,6 +1302,8 @@ resource_cmd_edit_property_do (PlannerCmd *cmd_base)
 	g_object_set_property (G_OBJECT (cmd->resource),
 			       cmd->property,
 			       cmd->value);
+
+	return TRUE;
 }
 
 static void
@@ -1372,7 +1377,7 @@ resource_cmd_edit_property (PlannerView  *view,
 	return cmd_base;
 }
 
-static void
+static gboolean
 resource_cmd_edit_custom_property_do (PlannerCmd *cmd_base)
 {
 	ResourceCmdEditCustomProperty *cmd;
@@ -1381,6 +1386,8 @@ resource_cmd_edit_custom_property_do (PlannerCmd *cmd_base)
 	mrp_object_set_property (MRP_OBJECT (cmd->resource),
 				 cmd->property,
 				 cmd->value);
+
+	return TRUE;
 }
 
 static void

@@ -49,6 +49,7 @@ static void cmd_manager_finalize   (GObject                *object);
 static void cmd_manager_free_func  (PlannerCmd             *cmd,
 				    gpointer                data);
 
+
 GType
 planner_cmd_manager_get_type (void)
 {
@@ -259,13 +260,14 @@ cmd_manager_free_func (PlannerCmd *cmd,
 */
 }
 
-static void
+static gboolean
 cmd_manager_insert (PlannerCmdManager *manager,
 		    PlannerCmd        *cmd,
 		    gboolean           run_do)
 {
 	PlannerCmdManagerPriv *priv;
 	GList                 *current;
+	gboolean               retval;
 
 	priv = manager->priv;
 
@@ -314,21 +316,25 @@ cmd_manager_insert (PlannerCmdManager *manager,
 	cmd->manager = manager;
 	
 	if (run_do && cmd->do_func) {
-		cmd->do_func (cmd);
+		retval = cmd->do_func (cmd);
+	} else {
+		retval = TRUE;
 	}
 	
 	cmd_manager_dump (manager);
 
 	state_changed (manager);
+
+	return retval;
 }
 
-void
+gboolean
 planner_cmd_manager_insert_and_do (PlannerCmdManager *manager, PlannerCmd *cmd)
 {
-	g_return_if_fail (PLANNER_IS_CMD_MANAGER (manager));
-	g_return_if_fail (cmd != NULL);
+	g_return_val_if_fail (PLANNER_IS_CMD_MANAGER (manager), FALSE);
+	g_return_val_if_fail (cmd != NULL, FALSE);
 
-	cmd_manager_insert (manager, cmd, TRUE);
+	return cmd_manager_insert (manager, cmd, TRUE);
 }
 
 gboolean
@@ -399,7 +405,7 @@ planner_cmd_manager_new (void)
  * Transaction commands
  */
 
-static void
+static gboolean
 transaction_cmd_do (PlannerCmd *cmd)
 {
 	PlannerCmd *cmd_sub;
@@ -423,6 +429,10 @@ transaction_cmd_do (PlannerCmd *cmd)
 
 		g_assert (cmd_sub->type == PLANNER_CMD_TYPE_NORMAL);
 	}
+
+	/* FIXME: need to make sure we handle transactions that doesn't work. */
+	
+	return TRUE;
 }
 
 static void
@@ -528,5 +538,24 @@ planner_cmd_manager_end_transaction (PlannerCmdManager *manager)
 	cmd_manager_insert (manager, cmd, FALSE);
 
 	return TRUE;
+}
+
+PlannerCmd *
+planner_cmd_new_size (gsize               size,
+		      const gchar        *label,
+		      PlannerCmdDoFunc    do_func,
+		      PlannerCmdUndoFunc  undo_func,
+		      PlannerCmdFreeFunc  free_func)
+{
+	PlannerCmd *cmd;
+
+	cmd = g_malloc0 (size);
+
+	cmd->label = g_strdup (label);
+	cmd->do_func = do_func;
+	cmd->undo_func = undo_func;
+	cmd->free_func = free_func;
+
+	return cmd;
 }
 

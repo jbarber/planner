@@ -3,6 +3,7 @@
  * Copyright (C) 2002 CodeFactory AB
  * Copyright (C) 2002 Richard Hult <richard@imendio.com>
  * Copyright (C) 2002 Mikael Hallendal <micke@imendio.com>
+ * Copyright (C) 2004 Imendio HB
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -241,7 +242,7 @@ cal_dialog_response_cb (GtkWidget  *dialog,
 		window = planner_default_week_dialog_new (data->main_window, calendar);
 
 		/* FIXME: Not very nice to have it modal, but I can't think of a
-		 *  better way right now.
+		 * better way right now.
 		 */
 		gtk_window_set_transient_for (GTK_WINDOW (window),
 					      GTK_WINDOW (data->dialog));
@@ -326,10 +327,10 @@ planner_calendar_dialog_new (PlannerWindow *window)
 	gtk_widget_show (data->calendar);
 
 	planner_calendar_display_options (PLANNER_CALENDAR (data->calendar),
-				     PLANNER_CALENDAR_SHOW_HEADING |
-				     PLANNER_CALENDAR_SHOW_DAY_NAMES |
-				     PLANNER_CALENDAR_SHOW_WEEK_NUMBERS |
-				     PLANNER_CALENDAR_WEEK_START_MONDAY);
+					  PLANNER_CALENDAR_SHOW_HEADING |
+					  PLANNER_CALENDAR_SHOW_DAY_NAMES |
+					  PLANNER_CALENDAR_SHOW_WEEK_NUMBERS |
+					  PLANNER_CALENDAR_WEEK_START_MONDAY);
 	g_signal_connect (data->calendar,
 			  "month_changed",
 			  G_CALLBACK (cal_dialog_month_changed_cb),
@@ -605,13 +606,13 @@ cal_dialog_update_calendar_widgets (DialogData *data)
 
 		if (day == mrp_day_get_nonwork ()) {
 			planner_calendar_mark_day (calendar_widget,
-					      d,
-					      PLANNER_CALENDAR_MARK_SHADE);
+						   d,
+						   PLANNER_CALENDAR_MARK_SHADE);
 		}
 		else if (day == mrp_day_get_work ()) {
 			planner_calendar_mark_day (calendar_widget,
-					      d,
-					      PLANNER_CALENDAR_MARK_NONE);
+						   d,
+						   PLANNER_CALENDAR_MARK_NONE);
 		}
 	}
 }

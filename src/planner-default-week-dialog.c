@@ -3,6 +3,7 @@
  * Copyright (C) 2002 CodeFactory AB
  * Copyright (C) 2002 Richard Hult <richard@imendio.com>
  * Copyright (C) 2002 Mikael Hallendal <micke@imendio.com>
+ * Copyright (C) 2004 Imendio HB
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -53,7 +54,7 @@ enum {
 };
 
 typedef struct {
-	PlannerWindow  *main_window;
+	PlannerWindow *main_window;
 	MrpProject    *project;
 
 	MrpCalendar   *calendar;
@@ -67,27 +68,36 @@ typedef struct {
 	GtkWidget     *dash_label[5];
 } DialogData;
 
+typedef struct {
+	PlannerCmd   base;
+
+	MrpProject  *project;
+	
+	gchar       *name;
+	MrpDay      *day;
+} DefaultWeekCmdEdit;
+
 
 #define DIALOG_GET_DATA(d) g_object_get_data ((GObject*)d, "data")
 
-
-static void    default_week_dialog_response_cb            (GtkWidget        *dialog,
-							   gint              response,
-							   DialogData       *data);
-static void    default_week_dialog_update_labels          (DialogData       *data);
-static void    default_week_dialog_weekday_selected_cb    (GtkOptionMenu    *option_menu,
-							   DialogData       *data);
-static void    default_week_dialog_day_selected_cb        (GtkOptionMenu    *option_menu,
-							   DialogData       *data);
-static void    default_week_dialog_setup_day_option_menu  (GtkOptionMenu    *option_menu,
-							   MrpProject       *project,
-							   MrpCalendar      *calendar);
-static void
-default_week_dialog_setup_weekday_option_menu             (GtkOptionMenu    *option_menu);
-static gint    default_week_dialog_get_selected_weekday   (DialogData       *data);
-static MrpDay *default_week_dialog_get_selected_day       (DialogData       *data);
-static void    default_week_dialog_set_selected_day       (DialogData       *data,
-							   MrpDay           *day);
+static void        default_week_dialog_response_cb               (GtkWidget     *dialog,
+								  gint           response,
+								  DialogData    *data);
+static void        default_week_dialog_update_labels             (DialogData    *data);
+static void        default_week_dialog_weekday_selected_cb       (GtkOptionMenu *option_menu,
+								  DialogData    *data);
+static void        default_week_dialog_day_selected_cb           (GtkOptionMenu *option_menu,
+								  DialogData    *data);
+static void        default_week_dialog_setup_day_option_menu     (GtkOptionMenu *option_menu,
+								  MrpProject    *project,
+								  MrpCalendar   *calendar);
+static void        default_week_dialog_setup_weekday_option_menu (GtkOptionMenu *option_menu);
+static gint        default_week_dialog_get_selected_weekday      (DialogData    *data);
+static MrpDay *    default_week_dialog_get_selected_day          (DialogData    *data);
+static void        default_week_dialog_set_selected_day          (DialogData    *data,
+								  MrpDay        *day);
+static PlannerCmd *default_week_cmd_edit                         (DialogData    *data,
+								  MrpDay        *day);
 
 
 static void
@@ -99,16 +109,15 @@ default_week_dialog_response_cb (GtkWidget  *dialog,
 	gint    weekday;
 	
 	switch (response) {
-	case RESPONSE_REMOVE:
-		break;
-
-	case RESPONSE_ADD:
-		break;
-		
 	case RESPONSE_APPLY:
 		weekday = default_week_dialog_get_selected_weekday (data);
 		day = default_week_dialog_get_selected_day (data);
 
+		/* FIXME: implement. */
+		if (0) {
+			default_week_cmd_edit (data, NULL);
+		}
+		
 		mrp_calendar_set_default_days (data->calendar,
 					       weekday, day,
 					       -1);		
@@ -134,7 +143,7 @@ default_week_dialog_parent_destroy_cb (GtkWidget *window, GtkWidget *dialog)
 
 GtkWidget *
 planner_default_week_dialog_new (PlannerWindow *window,
-			    MrpCalendar  *calendar)
+				 MrpCalendar  *calendar)
 {
 	DialogData *data;
 	GladeXML   *glade;
@@ -446,3 +455,60 @@ default_week_dialog_set_selected_day (DialogData *data,
 	}
 }
 
+static gboolean
+default_week_cmd_edit_do (PlannerCmd *cmd_base)
+{
+	DefaultWeekCmdEdit *cmd;
+
+	cmd = (DefaultWeekCmdEdit *) cmd_base;
+
+	mrp_day_remove (cmd->project, cmd->day);
+	cmd->day = NULL;
+
+	return TRUE;
+}
+
+static void
+default_week_cmd_edit_undo (PlannerCmd *cmd_base)
+{
+	DefaultWeekCmdEdit *cmd;
+
+	cmd = (DefaultWeekCmdEdit *) cmd_base;
+	
+	cmd->day = mrp_day_add (cmd->project, cmd->name, "");
+}
+
+static void
+default_week_cmd_edit_free (PlannerCmd *cmd_base)
+{
+	DefaultWeekCmdEdit *cmd;
+
+	cmd = (DefaultWeekCmdEdit *) cmd_base;
+
+	g_free (cmd->name);
+}
+
+static PlannerCmd *
+default_week_cmd_edit (DialogData *data,
+		       MrpDay     *day)
+{
+	PlannerCmd         *cmd_base;
+	DefaultWeekCmdEdit *cmd;
+
+	cmd_base = planner_cmd_new (DefaultWeekCmdEdit,
+				    _("Edit default week\""),
+				    default_week_cmd_edit_do,
+				    default_week_cmd_edit_undo,
+				    default_week_cmd_edit_free);
+
+	cmd = (DefaultWeekCmdEdit *) cmd_base;
+
+	cmd->project = data->project;
+	cmd->day = day;
+	cmd->name = g_strdup (mrp_day_get_name (day));
+
+	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager (data->main_window),
+					   cmd_base);
+	
+	return cmd_base;
+}

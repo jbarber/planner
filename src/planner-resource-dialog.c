@@ -437,7 +437,7 @@ resource_dialog_resource_removed_cb (GtkWidget  *w,
 	gtk_widget_destroy (data->dialog);
 }
 
-static void
+static gboolean
 resource_cmd_calendar_do (PlannerCmd *cmd_base)
 {
 	ResourceCmdCalendar *cmd;
@@ -445,6 +445,8 @@ resource_cmd_calendar_do (PlannerCmd *cmd_base)
 	cmd = (ResourceCmdCalendar*) cmd_base;	
 
 	mrp_resource_set_calendar (cmd->resource, cmd->calendar);
+
+	return TRUE;
 }
 
 static void
@@ -467,7 +469,7 @@ resource_cmd_calendar_free (PlannerCmd *cmd_base)
 
 	g_object_unref (cmd->resource);
 
-	if (cmd->old_calendar) {
+	if (cmd->calendar) {
 		g_object_unref (cmd->calendar);
 	}
 	if (cmd->old_calendar) {
@@ -516,7 +518,7 @@ resource_cmd_edit_calendar (DialogData  *data,
 	return cmd_base;
 }
 
-static void
+static gboolean
 resource_cmd_note_do (PlannerCmd *cmd_base)
 {
 	ResourceCmdEditNote *cmd;
@@ -529,6 +531,8 @@ resource_cmd_note_do (PlannerCmd *cmd_base)
 	}
 
 	g_object_set (cmd->resource, "note", cmd->note, NULL);
+
+	return TRUE;
 }
 
 static void
@@ -599,7 +603,7 @@ resource_cmd_edit_note (DialogData  *data,
 	return cmd_base;
 }
 
-static void
+static gboolean
 resource_cmd_edit_property_do (PlannerCmd *cmd_base)
 {
 	ResourceCmdEditProperty *cmd;
@@ -609,6 +613,8 @@ resource_cmd_edit_property_do (PlannerCmd *cmd_base)
 	g_object_set_property (G_OBJECT (cmd->resource),
 			       cmd->property,
 			       cmd->value);
+
+	return TRUE;
 }
 
 static void

@@ -253,7 +253,7 @@ group_dialog_setup_tree_view (GtkWidget *dialog)
 	g_object_unref (sorted_model);
 }
 
-static void
+static gboolean
 group_cmd_insert_do (PlannerCmd *cmd_base)
 {
 	GroupCmdInsert *cmd;
@@ -263,6 +263,8 @@ group_cmd_insert_do (PlannerCmd *cmd_base)
 	g_assert (MRP_IS_GROUP (cmd->group));
 		
 	mrp_project_add_group (cmd->project, cmd->group);
+
+	return TRUE;
 }
 
 static void
@@ -348,7 +350,7 @@ group_dialog_insert_group_cb (GtkWidget *button, GtkWidget *dialog)
 	}	
 }
 
-static void
+static gboolean
 group_cmd_remove_do (PlannerCmd *cmd_base)
 {
 	GroupCmdRemove *cmd;
@@ -373,6 +375,8 @@ group_cmd_remove_do (PlannerCmd *cmd_base)
 		cmd->is_default = TRUE;
 	
 	mrp_project_remove_group (cmd->project, cmd->group);
+
+	return TRUE;
 }
 
 static void
@@ -472,7 +476,7 @@ group_dialog_close_editor_cb (GtkWidget *button, GtkWidget *dialog)
 	gtk_widget_destroy (dialog);
 }
 
-static void
+static gboolean
 group_cmd_default_do (PlannerCmd *cmd_base)
 {
 	GroupCmdDefault *cmd;
@@ -480,6 +484,8 @@ group_cmd_default_do (PlannerCmd *cmd_base)
 	cmd = (GroupCmdDefault*) cmd_base;
 
 	mrp_object_set (cmd->project, "default-group", cmd->group, NULL);
+
+	return TRUE;
 }
 
 static void
@@ -584,7 +590,7 @@ group_dialog_cell_toggled (GtkCellRendererText *cell,
 }
 
 
-static void
+static gboolean
 group_cmd_edit_property_do (PlannerCmd *cmd_base)
 {
 	GroupCmdEditProperty *cmd;
@@ -594,6 +600,8 @@ group_cmd_edit_property_do (PlannerCmd *cmd_base)
 	g_object_set_property (G_OBJECT (cmd->group),
 			       cmd->property,
 			       cmd->value);
+
+	return TRUE;
 }
 
 static void

@@ -196,7 +196,7 @@ task_cmd_insert_free (PlannerCmd *cmd_base)
 	g_free (cmd);
 }
 
-static void
+static gboolean
 task_cmd_insert_do (PlannerCmd *cmd_base)
 {
 	TaskCmdInsert *cmd;
@@ -205,7 +205,7 @@ task_cmd_insert_do (PlannerCmd *cmd_base)
 	gint           depth;
 	gint           position;
 
-	cmd = (TaskCmdInsert*) cmd_base;
+	cmd = (TaskCmdInsert *) cmd_base;
 
 	path = gtk_tree_path_copy (cmd->path);
 
@@ -233,6 +233,7 @@ task_cmd_insert_do (PlannerCmd *cmd_base)
 				 position,
 				 cmd->task);
 
+	return TRUE;
 }
 
 static void
@@ -240,10 +241,9 @@ task_cmd_insert_undo (PlannerCmd *cmd_base)
 {
 	TaskCmdInsert *cmd;
 	
-	cmd = (TaskCmdInsert*) cmd_base;
+	cmd = (TaskCmdInsert *) cmd_base;
 
-	mrp_project_remove_task (cmd->project,
-				 cmd->task);
+	mrp_project_remove_task (cmd->project, cmd->task);
 }
 
 static PlannerCmd *
@@ -258,7 +258,7 @@ task_cmd_insert (PlannerTaskTree *tree,
 
 	cmd = g_new0 (TaskCmdInsert, 1);
 
-	cmd_base = (PlannerCmd*) cmd;
+	cmd_base = (PlannerCmd *) cmd;
 
 	cmd_base->label = g_strdup (_("Insert task"));
 	cmd_base->do_func = task_cmd_insert_do;
@@ -291,7 +291,7 @@ typedef struct {
 	GValue            *old_value;
 } TaskCmdEditProperty;
 
-static void
+static gboolean
 task_cmd_edit_property_do (PlannerCmd *cmd_base)
 {
 	TaskCmdEditProperty *cmd;
@@ -302,8 +302,9 @@ task_cmd_edit_property_do (PlannerCmd *cmd_base)
 	task = task_tree_get_task_from_path (cmd->tree, cmd->path);
 	
 	g_object_set_property (G_OBJECT (task),
-			       cmd->property,
-			       cmd->value);
+			       cmd->property, cmd->value);
+
+	return TRUE;
 }
 
 static void
@@ -613,7 +614,7 @@ task_cmd_restore_children (TaskCmdRemove *cmd)
 	}
 }
 
-static void
+static gboolean
 task_cmd_remove_do (PlannerCmd *cmd_base)
 {
 	TaskCmdRemove *cmd;
@@ -631,6 +632,8 @@ task_cmd_remove_do (PlannerCmd *cmd_base)
 	}
 
 	mrp_project_remove_task (cmd->project, cmd->task);
+
+	return TRUE;
 }
 
 static void
@@ -712,14 +715,14 @@ task_cmd_remove (PlannerTaskTree *tree,
 	PlannerTaskTreePriv *priv = tree->priv;
 	PlannerCmd          *cmd_base;
 	TaskCmdRemove       *cmd;
-
-	cmd = g_new0 (TaskCmdRemove, 1);
-
-	cmd_base = (PlannerCmd*) cmd;
-	cmd_base->label = g_strdup (_("Remove task"));
-	cmd_base->do_func = task_cmd_remove_do;
-	cmd_base->undo_func = task_cmd_remove_undo;
-	cmd_base->free_func = task_cmd_remove_free;
+	
+	cmd_base = planner_cmd_new (TaskCmdRemove,
+				    _("Remove task"),
+				    task_cmd_remove_do,
+				    task_cmd_remove_undo,
+				    task_cmd_remove_free);
+	
+	cmd = (TaskCmdRemove *) cmd_base;
 
 	cmd->tree = tree;
 	cmd->project = task_tree_get_project (tree);
@@ -742,15 +745,18 @@ typedef struct {
 	MrpConstraint *constraint_old;
 } TaskCmdConstraint;
 
-static void
+static gboolean
 task_cmd_constraint_do (PlannerCmd *cmd_base)
 {
 	TaskCmdConstraint *cmd;
 
 	cmd = (TaskCmdConstraint*) cmd_base;
 
-	g_object_set (cmd->task, "constraint", 
-		      cmd->constraint, NULL);
+	g_object_set (cmd->task,
+		      "constraint", cmd->constraint,
+		      NULL);
+
+	return TRUE;
 }
 
 static void
@@ -791,7 +797,7 @@ task_cmd_constraint (PlannerTaskTree *tree,
 
 	cmd = g_new0 (TaskCmdConstraint, 1);
 
-	cmd_base = (PlannerCmd*) cmd;
+	cmd_base = (PlannerCmd *) cmd;
 	cmd_base->label = g_strdup (_("Constraint task"));
 	cmd_base->do_func = task_cmd_constraint_do;
 	cmd_base->undo_func = task_cmd_constraint_undo;
@@ -825,7 +831,7 @@ typedef struct {
 	gboolean    success;
 } TaskCmdTaskMove;
 
-static void
+static gboolean
 task_cmd_task_move_do (PlannerCmd *cmd_base)
 {
 	TaskCmdTaskMove *cmd;
@@ -853,6 +859,8 @@ task_cmd_task_move_do (PlannerCmd *cmd_base)
 					 cmd->parent,
 					 cmd->before,
 					 &error);
+
+	return TRUE;
 }
 
 static void

@@ -1,5 +1,42 @@
 2004-05-02  Richard Hult  <richard@imendio.com>
 
+	* src/planner-calendar-dialog.c: (cal_dialog_response_cb),
+	(planner_calendar_dialog_new),
+	(cal_dialog_update_calendar_widgets):
+	* src/planner-cmd-manager.c: (cmd_manager_insert),
+	(planner_cmd_manager_insert_and_do), (transaction_cmd_do),
+	(planner_cmd_manager_end_transaction), (planner_cmd_new_size):
+	* src/planner-cmd-manager.h:
+	* src/planner-day-type-dialog.c: (day_type_cmd_add_do),
+	(day_type_cmd_remove_do):
+	* src/planner-default-week-dialog.c:
+	(default_week_dialog_response_cb),
+	(planner_default_week_dialog_new), (default_week_cmd_edit_do),
+	(default_week_cmd_edit_undo), (default_week_cmd_edit_free),
+	(default_week_cmd_edit):
+	* src/planner-group-dialog.c: (group_cmd_insert_do),
+	(group_cmd_remove_do), (group_cmd_default_do),
+	(group_cmd_edit_property_do):
+	* src/planner-project-properties.c: (property_cmd_edit_do):
+	* src/planner-resource-dialog.c: (resource_cmd_calendar_do),
+	(resource_cmd_calendar_free), (resource_cmd_note_do),
+	(resource_cmd_edit_property_do):
+	* src/planner-resource-view.c: (resource_cmd_insert_do),
+	(resource_cmd_remove_do), (resource_cmd_edit_property_do),
+	(resource_cmd_edit_custom_property_do):
+	* src/planner-task-tree.c: (task_cmd_insert_do),
+	(task_cmd_insert_undo), (task_cmd_insert),
+	(task_cmd_edit_property_do), (task_cmd_remove_do),
+	(task_cmd_remove), (task_cmd_constraint_do), (task_cmd_constraint),
+	(task_cmd_task_move_do): Change the command manager interface
+	slightly to be able to handle commands that fail, and add some
+	convenience API. Update everything to the new interface.
+
+	* src/planner-resource-dialog.c (resource_cmd_calendar_free):
+	Check the right calendar before unreffing it.
+
+2004-05-02  Richard Hult  <richard@imendio.com>
+
 	* libplanner/Makefile.am:
 	* libplanner/mrp-object.c: (mrp_object_set_id):
 	* src/Makefile.am: Add back the warning flags and fix a warning.

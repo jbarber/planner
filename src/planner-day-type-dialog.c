@@ -447,7 +447,7 @@ day_type_dialog_new_dialog_run (DialogData *data)
 
 /* Commands */
 
-static void
+static gboolean
 day_type_cmd_add_do (PlannerCmd *cmd_base)
 {
 	DayTypeCmdAdd *cmd;
@@ -455,6 +455,8 @@ day_type_cmd_add_do (PlannerCmd *cmd_base)
 	cmd = (DayTypeCmdAdd *) cmd_base;
 
 	cmd->day = mrp_day_add (cmd->project, cmd->name, "");
+
+	return TRUE;
 }
 
 static void
@@ -504,7 +506,7 @@ day_type_cmd_add (DialogData  *data,
 	return cmd_base;
 }
 
-static void
+static gboolean
 day_type_cmd_remove_do (PlannerCmd *cmd_base)
 {
 	DayTypeCmdRemove *cmd;
@@ -513,6 +515,8 @@ day_type_cmd_remove_do (PlannerCmd *cmd_base)
 
 	mrp_day_remove (cmd->project, cmd->day);
 	cmd->day = NULL;
+
+	return TRUE;
 }
 
 static void

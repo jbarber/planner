@@ -171,7 +171,7 @@ typedef struct {
 	MrpCalendar *calendar_old;
 } PropertyCmdEdit;
 
-static void
+static gboolean
 property_cmd_edit_do (PlannerCmd *cmd_base)
 {
 	PropertyCmdEdit *cmd;
@@ -180,20 +180,25 @@ property_cmd_edit_do (PlannerCmd *cmd_base)
 
 	switch (cmd->type) {
 	case PROP_STRING:
-		g_object_set (cmd->project, cmd->property,
-			      cmd->str, NULL);
+		g_object_set (cmd->project,
+			      cmd->property, cmd->str,
+			      NULL);
 		break;
 		
 	case PROP_DATE:
-		g_object_set (cmd->project, cmd->property,
-			      cmd->t, NULL);
+		g_object_set (cmd->project,
+			      cmd->property, cmd->t,
+			      NULL);
 		break;
 		
 	case PROP_CALENDAR:
-		g_object_set (cmd->project, cmd->property,
-			      cmd->calendar, NULL);
+		g_object_set (cmd->project,
+			      cmd->property, cmd->calendar,
+			      NULL);
 		break;
 	}
+
+	return TRUE;
 }
 
 static void
