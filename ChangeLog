@@ -1,3 +1,9 @@
+2004-06-19  Richard Hult  <richard@imendio.com>
+
+	* src/planner-ttable-tree.c (planner_ttable_tree_set_model)
+	(ttable_tree_row_inserted): Fix bug #141117, tree and chart
+	expansion gets out of sync.
+
 2004-06-18  Richard Hult  <richard@imendio.com>
 
 	* data/glade/task-dialog.glade:
