@@ -2244,8 +2244,6 @@ resource_view_cost_data_func (GtkTreeViewColumn    *tree_column,
 	g_object_get (resource, "cost", &cost, NULL);
 	cost_text = planner_format_float (cost, 2, FALSE);
 	
-	g_print ("view: %f (%s)\n", cost, cost_text);
-	
 	g_object_set (cell, "text", cost_text, NULL);
 }
 
