@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: planner 2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-04-16 15:55+0200\n"
-"PO-Revision-Date: 2004-04-16 15:59+0200\n"
+"POT-Creation-Date: 2004-05-09 17:45+0200\n"
+"PO-Revision-Date: 2004-05-09 17:48+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian/Bokmaal <i18n-nb@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
@@ -400,7 +400,7 @@ msgid "_Work:"
 msgstr "_Arbeid:"
 
 #. day unit variant accepted in input
-#: data/glade/task-dialog.glade.h:17 src/planner-task-tree.c:2904
+#: data/glade/task-dialog.glade.h:17 src/planner-task-tree.c:3364
 msgid "days"
 msgstr "dager"
 
@@ -489,106 +489,102 @@ msgid "Remove the selected tasks"
 msgstr "Fjern valgte oppgaver"
 
 #: data/ui/gantt-view.ui.h:17 data/ui/task-view.ui.h:17
-msgid "Reset _All Constraints"
-msgstr "Nullstill _alle begrensninger"
-
-#: data/ui/gantt-view.ui.h:18 data/ui/task-view.ui.h:18
 msgid "Reset _Constraint"
 msgstr "Nullstill _begrensning"
 
-#: data/ui/gantt-view.ui.h:19 data/ui/resource-view.ui.h:10
-#: data/ui/task-view.ui.h:19
+#: data/ui/gantt-view.ui.h:18 data/ui/resource-view.ui.h:10
+#: data/ui/task-view.ui.h:18
 msgid "Select _All"
 msgstr "Velg _alle"
 
-#: data/ui/gantt-view.ui.h:20 data/ui/resource-view.ui.h:11
-#: data/ui/task-view.ui.h:20
+#: data/ui/gantt-view.ui.h:19 data/ui/resource-view.ui.h:11
+#: data/ui/task-view.ui.h:19
 msgid "Select all tasks"
 msgstr "Velg alle oppgaver"
 
-#: data/ui/gantt-view.ui.h:21
+#: data/ui/gantt-view.ui.h:20
 msgid "Test"
 msgstr "Test"
 
-#: data/ui/gantt-view.ui.h:22 data/ui/task-view.ui.h:21
+#: data/ui/gantt-view.ui.h:21 data/ui/task-view.ui.h:20
 msgid "Unin_dent Task"
 msgstr "_Fjern innrykk fra oppgaven"
 
-#: data/ui/gantt-view.ui.h:23 data/ui/task-view.ui.h:22
+#: data/ui/gantt-view.ui.h:22 data/ui/task-view.ui.h:21
 #: src/planner-application.c:90
 msgid "Unindent"
 msgstr "Fjern indentering"
 
-#: data/ui/gantt-view.ui.h:24 data/ui/task-view.ui.h:23
+#: data/ui/gantt-view.ui.h:23 data/ui/task-view.ui.h:22
 msgid "Unindent the selected tasks"
 msgstr "Fjern innrykk fra valgte oppgaver"
 
-#: data/ui/gantt-view.ui.h:25 data/ui/task-view.ui.h:24
+#: data/ui/gantt-view.ui.h:24 data/ui/task-view.ui.h:23
 #: src/planner-application.c:69
 msgid "Unlink"
 msgstr "Fjern lenke"
 
-#: data/ui/gantt-view.ui.h:26 data/ui/task-view.ui.h:25
+#: data/ui/gantt-view.ui.h:25 data/ui/task-view.ui.h:24
 msgid "Unlink the selected tasks"
 msgstr "Fjern lenker til valgte oppgaver"
 
-#: data/ui/gantt-view.ui.h:27
+#: data/ui/gantt-view.ui.h:26
 msgid "Zoom In"
 msgstr "Zoom inn"
 
-#: data/ui/gantt-view.ui.h:28
+#: data/ui/gantt-view.ui.h:27
 msgid "Zoom Out"
 msgstr "Zoom ut"
 
-#: data/ui/gantt-view.ui.h:29
+#: data/ui/gantt-view.ui.h:28
 msgid "Zoom To Fit"
 msgstr "Zoom tilpasset"
 
-#: data/ui/gantt-view.ui.h:30
+#: data/ui/gantt-view.ui.h:29
 msgid "Zoom To _Fit"
 msgstr "Zoom til_passet"
 
-#: data/ui/gantt-view.ui.h:31
+#: data/ui/gantt-view.ui.h:30
 msgid "Zoom _Out"
 msgstr "Zoom _ut"
 
-#: data/ui/gantt-view.ui.h:32 data/ui/time-table-view.ui.h:1
+#: data/ui/gantt-view.ui.h:31 data/ui/time-table-view.ui.h:1
 msgid "Zoom in"
 msgstr "Zoom inn"
 
-#: data/ui/gantt-view.ui.h:33 data/ui/time-table-view.ui.h:2
+#: data/ui/gantt-view.ui.h:32 data/ui/time-table-view.ui.h:2
 msgid "Zoom out"
 msgstr "Zoom ut"
 
-#: data/ui/gantt-view.ui.h:34 data/ui/time-table-view.ui.h:4
+#: data/ui/gantt-view.ui.h:33 data/ui/time-table-view.ui.h:4
 msgid "Zoom to fit the entire project"
 msgstr "Zoom tilpasset hele prosjektet"
 
-#: data/ui/gantt-view.ui.h:35 data/ui/task-view.ui.h:27
+#: data/ui/gantt-view.ui.h:34
 msgid "_Edit Task Properties..."
 msgstr "R_ediger egenskaper for oppgave..."
 
-#: data/ui/gantt-view.ui.h:36 data/ui/task-view.ui.h:28
+#: data/ui/gantt-view.ui.h:35 data/ui/task-view.ui.h:27
 msgid "_Highlight Critical Tasks"
 msgstr "_Uthev kritiske oppgaver"
 
-#: data/ui/gantt-view.ui.h:37 data/ui/task-view.ui.h:29
+#: data/ui/gantt-view.ui.h:36 data/ui/task-view.ui.h:28
 msgid "_Insert Task"
 msgstr "Sett _inn oppgave"
 
-#: data/ui/gantt-view.ui.h:38 data/ui/task-view.ui.h:30
+#: data/ui/gantt-view.ui.h:37 data/ui/task-view.ui.h:29
 msgid "_Link Tasks"
 msgstr "_Lenker til oppgaver"
 
-#: data/ui/gantt-view.ui.h:39 data/ui/task-view.ui.h:31
+#: data/ui/gantt-view.ui.h:38 data/ui/task-view.ui.h:30
 msgid "_Remove Task"
 msgstr "Fje_rn oppgave"
 
-#: data/ui/gantt-view.ui.h:40 data/ui/task-view.ui.h:32
+#: data/ui/gantt-view.ui.h:39 data/ui/task-view.ui.h:31
 msgid "_Unlink Task"
 msgstr "Fjern _lenke til oppgave"
 
-#: data/ui/gantt-view.ui.h:41
+#: data/ui/gantt-view.ui.h:40
 msgid "_Zoom In"
 msgstr "_Zoom inn"
 
@@ -672,117 +668,129 @@ msgstr "Forhåndsvisning av dette prosjektet"
 msgid "Print the current project"
 msgstr "Skriv ut aktivt prosjekt"
 
-#: data/ui/main-window.ui.h:21
+#: data/ui/main-window.ui.h:21 src/planner-cmd-manager.c:241
+msgid "Redo"
+msgstr "Gjenopprett"
+
+#: data/ui/main-window.ui.h:22
 msgid "Redo the undone action"
 msgstr "Gjenopprett den angrede handlingen"
 
-#: data/ui/main-window.ui.h:22
+#: data/ui/main-window.ui.h:23
 msgid "Save"
 msgstr "Lagre"
 
-#: data/ui/main-window.ui.h:23
+#: data/ui/main-window.ui.h:24
 msgid "Save _As..."
 msgstr "Lagre _som..."
 
-#: data/ui/main-window.ui.h:24
+#: data/ui/main-window.ui.h:25
 msgid "Save the current project"
 msgstr "Lagre aktivt prosjekt"
 
-#: data/ui/main-window.ui.h:25
+#: data/ui/main-window.ui.h:26
 msgid "Save the current project with a different name"
 msgstr "Lagre aktivt prosjekt med et nytt navn"
 
-#: data/ui/main-window.ui.h:26
+#: data/ui/main-window.ui.h:27
 msgid "Show the Planner User Guide"
 msgstr "Vis brukermanual for Planner"
 
-#: data/ui/main-window.ui.h:27
+#: data/ui/main-window.ui.h:28 src/planner-cmd-manager.c:229
+msgid "Undo"
+msgstr "Angre"
+
+#: data/ui/main-window.ui.h:29
 msgid "Undo the last action"
 msgstr "Angre forrige handling"
 
-#: data/ui/main-window.ui.h:28
+#: data/ui/main-window.ui.h:30
 msgid "_About"
 msgstr "_Om"
 
-#: data/ui/main-window.ui.h:29
+#: data/ui/main-window.ui.h:31
 msgid "_Actions"
 msgstr "H_andlinger"
 
-#: data/ui/main-window.ui.h:30
+#: data/ui/main-window.ui.h:32
 msgid "_Close"
 msgstr "_Lukk"
 
-#: data/ui/main-window.ui.h:31
+#: data/ui/main-window.ui.h:33
 msgid "_Copy"
 msgstr "_Kopier"
 
-#: data/ui/main-window.ui.h:32
+#: data/ui/main-window.ui.h:34
 msgid "_Edit"
 msgstr "R_ediger"
 
-#: data/ui/main-window.ui.h:33
+#: data/ui/main-window.ui.h:35
 msgid "_Edit Project Properties"
 msgstr "R_ediger egenskaper for prosjekt"
 
-#: data/ui/main-window.ui.h:34
+#: data/ui/main-window.ui.h:36
 msgid "_File"
 msgstr "_Fil"
 
-#: data/ui/main-window.ui.h:35
+#: data/ui/main-window.ui.h:37
 msgid "_Help"
 msgstr "_Hjelp"
 
-#: data/ui/main-window.ui.h:36
+#: data/ui/main-window.ui.h:38
 msgid "_Manage Calendars"
 msgstr "_Håndter kalendere"
 
-#: data/ui/main-window.ui.h:37
+#: data/ui/main-window.ui.h:39
 msgid "_New Project"
 msgstr "_Nytt prosjekt"
 
-#: data/ui/main-window.ui.h:38
+#: data/ui/main-window.ui.h:40
 msgid "_Open..."
 msgstr "_Åpne..."
 
-#: data/ui/main-window.ui.h:39
+#: data/ui/main-window.ui.h:41
 msgid "_Paste"
 msgstr "_Lim inn"
 
-#: data/ui/main-window.ui.h:40
+#: data/ui/main-window.ui.h:42
 msgid "_Print Preview"
 msgstr "_Forhåndsvisning"
 
-#: data/ui/main-window.ui.h:41
+#: data/ui/main-window.ui.h:43
 msgid "_Print..."
 msgstr "S_kriv ut..."
 
-#: data/ui/main-window.ui.h:42
+#: data/ui/main-window.ui.h:44
 msgid "_Project"
-msgstr "_Prosject"
+msgstr "_Prosjekt"
 
-#: data/ui/main-window.ui.h:43
+#: data/ui/main-window.ui.h:45
 msgid "_Quit"
 msgstr "A_vslutt"
 
-#: data/ui/main-window.ui.h:44 src/planner-window.c:1168
+#: data/ui/main-window.ui.h:46
 msgid "_Redo"
 msgstr "Gjenopp_rett"
 
-#: data/ui/main-window.ui.h:45 src/planner-window.c:1271
+#: data/ui/main-window.ui.h:47 src/planner-window.c:1286
 msgid "_Save"
 msgstr "_Lagre"
 
-#: data/ui/main-window.ui.h:46 src/planner-window.c:1142
+#: data/ui/main-window.ui.h:48
 msgid "_Undo"
 msgstr "_Angre"
 
-#: data/ui/main-window.ui.h:47
+#: data/ui/main-window.ui.h:49
 msgid "_User Guide"
 msgstr "Br_ukermanual"
 
-#: data/ui/main-window.ui.h:48
+#: data/ui/main-window.ui.h:50
 msgid "_View"
 msgstr "_Vis"
+
+#: data/ui/python-plugin.ui.h:1
+msgid "Execute a Python script"
+msgstr "Kjør et Python-skript"
 
 #: data/ui/resource-view.ui.h:1
 msgid "Edit _Custom Properties..."
@@ -832,9 +840,13 @@ msgstr "Åpne fra database..."
 msgid "Save to Database..."
 msgstr "Lagre til database..."
 
-#: data/ui/task-view.ui.h:26
+#: data/ui/task-view.ui.h:25
 msgid "_Edit Custom Properties..."
 msgstr "R_ediger egendefinerte egenskaper..."
+
+#: data/ui/task-view.ui.h:26
+msgid "_Edit Task"
+msgstr "R_ediger oppgave"
 
 #: data/ui/time-table-view.ui.h:3
 msgid "Zoom to fit"
@@ -876,7 +888,7 @@ msgstr "Kunne ikke opprette XML-tre"
 msgid "Could not write XML file"
 msgstr "Kunne ikke skrive XML-fil"
 
-#: libplanner/mrp-project.c:440 src/planner-group-dialog.c:830
+#: libplanner/mrp-project.c:440 src/planner-group-dialog.c:844
 msgid "Default"
 msgstr "Forvalg"
 
@@ -930,21 +942,21 @@ msgstr "Varighet"
 msgid "Cost"
 msgstr "Kostnad"
 
-#: libplanner/mrp-property.c:380 src/planner-project-properties.c:655
+#: libplanner/mrp-property.c:380 src/planner-project-properties.c:660
 msgid "None"
 msgstr "Ingen"
 
 #. Give up.
-#: libplanner/mrp-sql.c:345 src/planner-sql-plugin.c:171
+#: libplanner/mrp-sql.c:286 src/planner-sql-plugin.c:173
 msgid "Invalid Unicode"
 msgstr "Ugyldig Unicode"
 
-#: libplanner/mrp-sql.c:2216
+#: libplanner/mrp-sql.c:2161
 #, c-format
 msgid "Connection to database '%s' failed.\n"
 msgstr "Tilkobling til database «%s» feilet.\n"
 
-#: libplanner/mrp-sql.c:2221 libplanner/mrp-sql.c:3663
+#: libplanner/mrp-sql.c:2166
 #, c-format
 msgid ""
 "Connection to database '%s' failed.\n"
@@ -953,12 +965,12 @@ msgstr ""
 "Tilkobling til database «%s» feilet.\n"
 "%s"
 
-#: libplanner/mrp-sql.c:2229
+#: libplanner/mrp-sql.c:2174
 #, c-format
 msgid "BEGIN command failed %s."
 msgstr "BEGIN-kommando feilet %s."
 
-#: libplanner/mrp-sql.c:2395
+#: libplanner/mrp-sql.c:2340
 #, c-format
 msgid ""
 "The project '%s' has been changed by the user '%s' since you opened it. Do "
@@ -966,6 +978,11 @@ msgid ""
 msgstr ""
 "Prosjekt «%s» har vært endret av bruker «%s» siden du åpnet det sist. Vil du "
 "lagre det likevel?"
+
+#: libplanner/mrp-sql.c:3606 src/planner-sql-plugin.c:336
+#, c-format
+msgid "Connection to database '%s' failed."
+msgstr "Tilkobling til database «%s» feilet."
 
 #: libplanner/mrp-storage-sql.c:205
 msgid "Invalid SQL URI (must start with 'sql://' and contain '#')."
@@ -986,16 +1003,16 @@ msgstr ""
 "Kunne ikke legge til en opphavs-relasjon fordi oppgavene allerede er "
 "relatert."
 
-#: libplanner/mrp-task-manager.c:1809
+#: libplanner/mrp-task-manager.c:1822
 msgid "Can not add a predecessor relation between a task and its ancestor."
 msgstr ""
 "Kan ikke legge til en forgjenger-relasjon mellom en oppgave og dens opphav."
 
-#: libplanner/mrp-task-manager.c:1818 libplanner/mrp-task-manager.c:1826
+#: libplanner/mrp-task-manager.c:1831 libplanner/mrp-task-manager.c:1839
 msgid "Can not add a predecessor, because it would result in a loop."
 msgstr "Kan ikke legge til et opphav fordi det ville resultere i en løkke."
 
-#: libplanner/mrp-task-manager.c:1861
+#: libplanner/mrp-task-manager.c:1874
 msgid "Can not move the task, since it would result in a loop."
 msgstr "Kan ikke flytte oppgaven fordi det ville resultere i en løkke."
 
@@ -1039,59 +1056,65 @@ msgstr "Avbryt"
 msgid "OK"
 msgstr "OK"
 
-#: src/planner-cmd-manager.c:226
+#: src/planner-cmd-manager.c:227
 #, c-format
 msgid "Undo '%s'"
 msgstr "Angre «%s»"
 
-#: src/planner-cmd-manager.c:228
-msgid "Undo"
-msgstr "Angre"
-
-#: src/planner-cmd-manager.c:238
+#: src/planner-cmd-manager.c:239
 #, c-format
 msgid "Redo '%s'"
 msgstr "Gjenopprett «%s»"
 
-#: src/planner-cmd-manager.c:240
-msgid "Redo"
-msgstr "Gjenopprett"
+#: src/planner-day-type-dialog.c:494
+#, c-format
+msgid "Add day type \"%s\""
+msgstr "Legg til dagtype «%s»"
 
-#: src/planner-default-week-dialog.c:40
+#: src/planner-day-type-dialog.c:553
+#, c-format
+msgid "Remove day type \"%s\""
+msgstr "Fjern dagtype «%s»"
+
+#: src/planner-default-week-dialog.c:41
 msgid "Monday"
 msgstr "Mandag"
 
-#: src/planner-default-week-dialog.c:41
+#: src/planner-default-week-dialog.c:42
 msgid "Tuesday"
 msgstr "Tirsdag"
 
-#: src/planner-default-week-dialog.c:42
+#: src/planner-default-week-dialog.c:43
 msgid "Wednesday"
 msgstr "Onsdag"
 
-#: src/planner-default-week-dialog.c:43
+#: src/planner-default-week-dialog.c:44
 msgid "Thursday"
 msgstr "Torsdag"
 
-#: src/planner-default-week-dialog.c:44
+#: src/planner-default-week-dialog.c:45
 msgid "Friday"
 msgstr "Fredag"
 
-#: src/planner-default-week-dialog.c:45
+#: src/planner-default-week-dialog.c:46
 msgid "Saturday"
 msgstr "Lørdag"
 
-#: src/planner-default-week-dialog.c:46
+#: src/planner-default-week-dialog.c:47
 msgid "Sunday"
 msgstr "Søndag"
 
-#: src/planner-default-week-dialog.c:266
+#: src/planner-default-week-dialog.c:282
 msgid "No working time"
 msgstr "Ingen arbeidstid"
 
-#: src/planner-default-week-dialog.c:277 src/planner-default-week-dialog.c:281
+#: src/planner-default-week-dialog.c:293 src/planner-default-week-dialog.c:297
 msgid "%H:%M"
 msgstr "%H.%M"
+
+#: src/planner-default-week-dialog.c:547
+msgid "Edit default week"
+msgstr "Rediger forvalgt uke"
 
 #: src/planner-format.c:141
 #, c-format
@@ -1140,46 +1163,50 @@ msgstr "%d %b %Y"
 msgid "Project start"
 msgstr "Prosjektstart"
 
-#: src/planner-gantt-print.c:191 src/planner-group-dialog.c:806
+#: src/planner-gantt-print.c:191 src/planner-group-dialog.c:820
 #: src/planner-property-dialog.c:378 src/planner-resource-view.c:1172
-#: src/planner-task-dialog.c:1410 src/planner-task-dialog.c:1496
+#: src/planner-task-dialog.c:1411 src/planner-task-dialog.c:1500
 #: src/planner-task-view.c:266 src/planner-ttable-print.c:97
 msgid "Name"
 msgstr "Navn"
 
-#: src/planner-gantt-print.c:199 src/planner-resource-dialog.c:1303
+#: src/planner-gantt-print.c:199 src/planner-resource-dialog.c:1900
 #: src/planner-resource-view.c:691 src/planner-resource-view.c:707
-#: src/planner-resource-view.c:1599 src/planner-task-view.c:269
+#: src/planner-resource-view.c:1645 src/planner-task-view.c:269
 msgid "Work"
 msgstr "Arbeid"
 
-#: src/planner-gantt-print.c:523 src/planner-gantt-row.c:671
-#: src/planner-window.c:1653
+#: src/planner-gantt-print.c:523 src/planner-gantt-row.c:670
+#: src/planner-window.c:1663
 msgid "Unnamed"
 msgstr "Uten navn"
 
-#: src/planner-gantt-row.c:1921 src/planner-gantt-row.c:1924
+#: src/planner-gantt-row.c:1920 src/planner-gantt-row.c:1923
 msgid "No name"
 msgstr "Uten navn"
 
-#: src/planner-gantt-row.c:1927
+#: src/planner-gantt-row.c:1926
 #, c-format
 msgid "Make task '%s' a predecessor of '%s'"
 msgstr "Gjør oppgave «%s» til en forgjenger av «%s»"
 
-#: src/planner-gantt-row.c:1985
+#: src/planner-gantt-row.c:1984
 #, c-format
 msgid "Change work to %s"
 msgstr "Endre arbeid til %s"
 
-#: src/planner-gantt-view.c:287
+#: src/planner-gantt-view.c:283
 msgid "Gantt Chart"
 msgstr "Gantt-plott"
 
-#: src/planner-gantt-view.c:295
+#: src/planner-gantt-view.c:291
 msgid "_Gantt Chart"
 msgstr "_Gantt-plott"
 
+#. i18n: WBS is sort for work breakdown structure, and is a
+#. * project management term. You might want to leave it
+#. * untranslated unless there is a localized term for it.
+#.
 #: src/planner-gantt-view.c:492
 msgid ""
 "\n"
@@ -1205,31 +1232,31 @@ msgstr ""
 "\n"
 "Arbeid"
 
-#: src/planner-group-dialog.c:302
+#: src/planner-group-dialog.c:304
 msgid "Insert group"
 msgstr "Sett inn gruppe"
 
-#: src/planner-group-dialog.c:425
+#: src/planner-group-dialog.c:429
 msgid "Remove group"
 msgstr "Fjern gruppe"
 
-#: src/planner-group-dialog.c:518
+#: src/planner-group-dialog.c:525
 msgid "Default group"
 msgstr "Forvalgt gruppe"
 
-#: src/planner-group-dialog.c:634
+#: src/planner-group-dialog.c:644
 msgid "Edit group property"
 msgstr "Rediger egenskap for gruppe"
 
-#: src/planner-group-dialog.c:812
+#: src/planner-group-dialog.c:826
 msgid "Manager name"
 msgstr "Leders navn"
 
-#: src/planner-group-dialog.c:818
+#: src/planner-group-dialog.c:832
 msgid "Manager phone"
 msgstr "Leders telefon"
 
-#: src/planner-group-dialog.c:824
+#: src/planner-group-dialog.c:838
 msgid "Manager email"
 msgstr "Leders e-post"
 
@@ -1242,7 +1269,7 @@ msgstr ""
 "«%s» er en katalog.\n"
 "Oppgi et filnavn og prøv på nytt."
 
-#: src/planner-html-plugin.c:148 src/planner-window.c:1415
+#: src/planner-html-plugin.c:148 src/planner-window.c:1419
 #, c-format
 msgid "File \"%s\" exists, do you want to overwrite it?"
 msgstr "Filen «%s» eksisterer. Vil du overskrive den?"
@@ -1263,26 +1290,6 @@ msgstr "planner: --geometry kan ikke brukes med mer enn en fil."
 #, c-format
 msgid "Could not open plugin file '%s'\n"
 msgstr "Kunne ikke åpne tilleggsfil «%s»\n"
-
-#: src/planner-task-popup.c:45
-msgid "/_Insert task"
-msgstr "/Sett _inn oppgave"
-
-#: src/planner-task-popup.c:48
-msgid "/_Insert subtask"
-msgstr "/Sett _inn underoppgave"
-
-#: src/planner-task-popup.c:51
-msgid "/_Remove task"
-msgstr "/Fje_rn oppgave"
-
-#: src/planner-task-popup.c:56
-msgid "/_Unlink task"
-msgstr "/_Fjern lenke til oppgave"
-
-#: src/planner-task-popup.c:61 src/planner-ttable-tree.c:99
-msgid "/_Edit task..."
-msgstr "/R_ediger oppgave..."
 
 #: src/planner-predecessor-model.c:191 src/planner-task-dialog.c:1132
 msgid "FS"
@@ -1312,48 +1319,48 @@ msgstr "Velg visninger"
 msgid "Select the views to print:"
 msgstr "Velg visningene som skal skrives ut:"
 
-#: src/planner-project-properties.c:308
+#: src/planner-project-properties.c:313
 msgid "Select a calendar to use for this project:"
 msgstr "Velg en kalender som skal brukes for dette prosjektet:"
 
-#: src/planner-project-properties.c:403
+#: src/planner-project-properties.c:408
 msgid "Edit Project Name"
 msgstr "Rediger prosjektets navn"
 
-#: src/planner-project-properties.c:439
+#: src/planner-project-properties.c:444
 msgid "Edit Organization"
 msgstr "Rediger organisasjon"
 
-#: src/planner-project-properties.c:475
+#: src/planner-project-properties.c:480
 msgid "Edit Manager"
 msgstr "Rediger leder"
 
-#: src/planner-project-properties.c:546
+#: src/planner-project-properties.c:551
 msgid "Edit Project Start"
 msgstr "Rediger prosjektstart"
 
-#: src/planner-project-properties.c:615
+#: src/planner-project-properties.c:620
 msgid "Edit Project Phase"
 msgstr "Rediger prosjektfase"
 
-#: src/planner-project-properties.c:748
+#: src/planner-project-properties.c:753
 msgid "Property"
 msgstr "Egenskap"
 
-#: src/planner-project-properties.c:759 src/planner-property-dialog.c:431
+#: src/planner-project-properties.c:764 src/planner-property-dialog.c:431
 msgid "Value"
 msgstr "Verdi"
 
-#: src/planner-project-properties.c:1130 src/planner-property-dialog.c:229
+#: src/planner-project-properties.c:1135 src/planner-property-dialog.c:229
 msgid "The name of the custom property needs to start with a letter."
 msgstr "Navn på egendefinert egenskap må starte med en bokstav."
 
-#: src/planner-project-properties.c:1202 src/planner-property-dialog.c:300
+#: src/planner-project-properties.c:1207 src/planner-property-dialog.c:300
 #, c-format
 msgid "Do you really want to remove the property '%s' from the project?"
 msgstr "Vil du virkelig fjerne egenskap «%s» fra prosjektet?"
 
-#: src/planner-project-properties.c:1344
+#: src/planner-project-properties.c:1349
 msgid "Could not create properties dialog."
 msgstr "Kunne ikke opprette egenskaper-dialog."
 
@@ -1362,41 +1369,57 @@ msgid "Label"
 msgstr "Etikett"
 
 #: src/planner-property-dialog.c:411 src/planner-resource-view.c:1214
-#: src/planner-task-dialog.c:1528
+#: src/planner-task-dialog.c:1532
 msgid "Type"
 msgstr "Type"
 
+#: src/planner-python-plugin.c:121 src/planner-window.c:639
+msgid "Open a file"
+msgstr "Åpne en fil"
+
 #. Put "no group" at the top.
-#: src/planner-resource-dialog.c:267 src/planner-resource-input-dialog.c:97
-#: src/planner-resource-view.c:1810
+#: src/planner-resource-dialog.c:326 src/planner-resource-input-dialog.c:97
+#: src/planner-resource-view.c:1856
 msgid "(None)"
 msgstr "(Ingen)"
 
-#: src/planner-resource-dialog.c:277 src/planner-resource-input-dialog.c:107
+#: src/planner-resource-dialog.c:336 src/planner-resource-input-dialog.c:107
 #: src/planner-task-dialog.c:256
 msgid "(No name)"
 msgstr "(Uten navn)"
 
-#: src/planner-resource-dialog.c:426
+#: src/planner-resource-dialog.c:513
+msgid "Edit resource calendar from dialog"
+msgstr "Rediger ressurskalender fra dialog"
+
+#: src/planner-resource-dialog.c:595
+msgid "Edit resource note from dialog"
+msgstr "Rediger ressursnotat fra dialog"
+
+#: src/planner-resource-dialog.c:669
+msgid "Edit resource cost from dialog"
+msgstr "Rediger kostnad for ressurs fra dialog"
+
+#: src/planner-resource-dialog.c:739 src/planner-resource-dialog.c:781
 msgid "Edit resource property from dialog"
 msgstr "Rediger egenskap for ressurs fra dialog"
 
 #. i18n: time stamp format for notes in task dialog, see strftime(3) for
 #. * a detailed description.
-#: src/planner-resource-dialog.c:915 src/planner-task-dialog.c:738
+#: src/planner-resource-dialog.c:1458 src/planner-task-dialog.c:738
 msgid "%a %d %b %Y, %H:%M\n"
 msgstr "%a %d %b %Y, %H.%M\n"
 
-#: src/planner-resource-dialog.c:1013
+#: src/planner-resource-dialog.c:1575
 msgid "None (use project default)"
 msgstr "Ingen (bruk forvalg for prosjektet)"
 
-#: src/planner-resource-dialog.c:1140 src/planner-resource-dialog.c:1142
+#: src/planner-resource-dialog.c:1702 src/planner-resource-dialog.c:1704
 msgid "Edit resource properties"
 msgstr "Rediger egenskaper for ressurs"
 
-#: src/planner-resource-dialog.c:1304 src/planner-resource-view.c:694
-#: src/planner-resource-view.c:708 src/planner-resource-view.c:1600
+#: src/planner-resource-dialog.c:1901 src/planner-resource-view.c:694
+#: src/planner-resource-view.c:708 src/planner-resource-view.c:1646
 msgid "Material"
 msgstr "Materiale"
 
@@ -1416,7 +1439,7 @@ msgstr "/R_ediger ressurs..."
 msgid "_Resources"
 msgstr "_Ressurser"
 
-#: src/planner-resource-view.c:798
+#: src/planner-resource-view.c:797
 msgid "Insert resource"
 msgstr "Sett inn ressurs"
 
@@ -1440,11 +1463,11 @@ msgstr "Gruppe"
 msgid "Email"
 msgstr "E-post"
 
-#: src/planner-resource-view.c:1332
+#: src/planner-resource-view.c:1351
 msgid "Edit resource property"
 msgstr "Rediger egenskap for ressurs"
 
-#: src/planner-resource-view.c:1394
+#: src/planner-resource-view.c:1436
 msgid "Edit resource custom property"
 msgstr "Rediger egendefinert egenskap for ressurs"
 
@@ -1495,15 +1518,27 @@ msgstr "H%d"
 msgid "%04d, H%d"
 msgstr "%04d, H%d"
 
-#: src/planner-sql-plugin.c:368
+#: src/planner-sql-plugin.c:379
+msgid "ID"
+msgstr "ID"
+
+#: src/planner-sql-plugin.c:387
 msgid "Project"
 msgstr "Prosjekt"
 
-#: src/planner-sql-plugin.c:544
+#: src/planner-sql-plugin.c:395
+msgid "Phase"
+msgstr "Fase"
+
+#: src/planner-sql-plugin.c:403
+msgid "Revision"
+msgstr "Revisjon"
+
+#: src/planner-sql-plugin.c:602
 msgid "Open from Database"
 msgstr "Åpne fra database"
 
-#: src/planner-sql-plugin.c:651
+#: src/planner-sql-plugin.c:709
 msgid "Save to Database"
 msgstr "Lagre til database"
 
@@ -1527,111 +1562,162 @@ msgstr "Start til slutt (StSl)"
 msgid "Can't add new predecessor. No task selected!"
 msgstr "Kan ikke legge til ny forgjenger. Ingen oppgave valgt!"
 
-#: src/planner-task-dialog.c:1429
+#: src/planner-task-dialog.c:1432
 msgid "Assigned"
 msgstr "Tildelt"
 
-#: src/planner-task-dialog.c:1446
+#: src/planner-task-dialog.c:1449
 msgid "Units"
 msgstr "Enheter"
 
-#: src/planner-task-dialog.c:1550
+#: src/planner-task-dialog.c:1554
 msgid "Lag"
 msgstr "Pause"
 
-#: src/planner-task-dialog.c:1689 src/planner-task-dialog.c:1691
+#: src/planner-task-dialog.c:1693 src/planner-task-dialog.c:1695
 msgid "Edit task properties"
 msgstr "Rediger egenskaper for oppgave"
 
-#: src/planner-task-tree.c:260
+#: src/planner-task-popup.c:51
+msgid "/_Insert task"
+msgstr "/Sett _inn oppgave"
+
+#: src/planner-task-popup.c:54
+msgid "/Insert _subtask"
+msgstr "/_Sett inn underoppgave"
+
+#: src/planner-task-popup.c:57
+msgid "/_Remove task"
+msgstr "/Fje_rn oppgave"
+
+#: src/planner-task-popup.c:62
+msgid "/_Unlink task"
+msgstr "/_Fjern lenke til oppgave"
+
+#: src/planner-task-popup.c:67
+msgid "/Assign _resources..."
+msgstr "/Tildel _ressurser..."
+
+#: src/planner-task-popup.c:70 src/planner-ttable-tree.c:99
+msgid "/_Edit task..."
+msgstr "/R_ediger oppgave..."
+
+#: src/planner-task-tree.c:259
 msgid "Insert task"
 msgstr "Sett inn oppgave"
 
-#: src/planner-task-tree.c:336
+#: src/planner-task-tree.c:348
 msgid "Edit task property"
 msgstr "Rediger egenskap for oppgave"
 
-#: src/planner-task-tree.c:700
+#: src/planner-task-tree.c:709
 msgid "Remove task"
 msgstr "Fjern oppgave"
 
-#: src/planner-task-tree.c:2896
+#: src/planner-task-tree.c:788
+msgid "Constraint task"
+msgstr "Begrens oppgave"
+
+#: src/planner-task-tree.c:926
+msgid "Move task"
+msgstr "Flytt oppgave"
+
+#: src/planner-task-tree.c:1045
+msgid "Link task"
+msgstr "Lag lenke til oppgave"
+
+#: src/planner-task-tree.c:1113
+msgid "Unlink task"
+msgstr "Fjern lenke til oppgave"
+
+#: src/planner-task-tree.c:2722
+#, c-format
+msgid ""
+"You are about to open an edit dialog each for %i tasks. Are you sure that "
+"you want to do that?"
+msgstr "Du skal til å åpne separate dialoger for %i oppgaver. Er du sikker på at du ønsker å gjøre dette?"
+
+#: src/planner-task-tree.c:3356
 msgid "mon"
 msgstr "måned"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:2897
+#: src/planner-task-tree.c:3357
 msgid "month"
 msgstr "måned"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:2898
+#: src/planner-task-tree.c:3358
 msgid "months"
 msgstr "måneder"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:2899
+#: src/planner-task-tree.c:3359
 msgid "w"
 msgstr "u"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:2900
+#: src/planner-task-tree.c:3360
 msgid "week"
 msgstr "uke"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:2901
+#: src/planner-task-tree.c:3361
 msgid "weeks"
 msgstr "uker"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:2902
+#: src/planner-task-tree.c:3362
 msgid "d"
 msgstr "d"
 
 #. day unit variant accepted in input
-#: src/planner-task-tree.c:2903
+#: src/planner-task-tree.c:3363
 msgid "day"
 msgstr "dag"
 
 #. day unit variant accepted in input
-#: src/planner-task-tree.c:2905
+#: src/planner-task-tree.c:3365
 msgid "h"
 msgstr "t"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:2906
+#: src/planner-task-tree.c:3366
 msgid "hour"
 msgstr "time"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:2907
+#: src/planner-task-tree.c:3367
 msgid "hours"
 msgstr "timer"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:2908
+#: src/planner-task-tree.c:3368
 msgid "min"
 msgstr "min"
 
 #. minute unit variant accepted in input
-#: src/planner-task-tree.c:2909
+#: src/planner-task-tree.c:3369
 msgid "minute"
 msgstr "minutt"
 
 #. minute unit variant accepted in input
-#: src/planner-task-tree.c:2910
+#: src/planner-task-tree.c:3370
 msgid "minutes"
 msgstr "minutter"
 
-#: src/planner-task-view.c:203
+#: src/planner-task-view.c:199
 msgid "Tasks"
 msgstr "Oppgaver"
 
-#: src/planner-task-view.c:211
+#: src/planner-task-view.c:207
 msgid "_Tasks"
 msgstr "_Oppgaver"
 
+#. i18n: WBS is sort for work breakdown structure, and is a
+#. * project management term. You might want to leave it
+#. * untranslated unless there is a localized term for it.
+#.
 #: src/planner-task-view.c:265
 msgid "WBS"
 msgstr "WBS"
@@ -1648,7 +1734,7 @@ msgstr "Slutt"
 msgid "Slack"
 msgstr "Slakk"
 
-#: src/planner-task-view.c:489
+#: src/planner-task-view.c:479
 msgid "Edit custom task properties"
 msgstr "Rediger egendefinerte egenskaper for oppgave"
 
@@ -1678,7 +1764,9 @@ msgstr "/_Slå sammen alle ressurser"
 msgid ""
 "\n"
 "Task"
-msgstr "\nOppgave"
+msgstr ""
+"\n"
+"Oppgave"
 
 #: src/planner-ttable-view.c:141
 msgid "Resource Usage"
@@ -1692,10 +1780,6 @@ msgstr "Ressursbr_uk"
 #, c-format
 msgid "Could not open view plugin file '%s'\n"
 msgstr "Kunne ikke vise tilleggsfil «%s»\n"
-
-#: src/planner-window.c:639
-msgid "Open a file"
-msgstr "Åpne en fil"
 
 #. I18n: Translators, list your names here, newline separated if there
 #. * are more than one, to appear in the about box.
@@ -1737,19 +1821,19 @@ msgstr "Hvis du ikke lagrer vil endringer gjort de siste %d timene forkastes."
 msgid "Save changes to document '%s' before closing?"
 msgstr "Lagre endringer i dokument «%s» før du avslutter?"
 
-#: src/planner-window.c:1267
+#: src/planner-window.c:1273
 msgid "C_lose without saving"
 msgstr "_Lukk uten å lagre"
 
-#: src/planner-window.c:1269
+#: src/planner-window.c:1279
 msgid "_Cancel"
 msgstr "_Avbryt"
 
-#: src/planner-window.c:1379
+#: src/planner-window.c:1383
 msgid "Save a file"
 msgstr "Lagre en fil"
 
-#: src/planner-window.c:1616
+#: src/planner-window.c:1620
 msgid ""
 "You have opened a file that was saved with an old version of Planner.\n"
 "\n"
@@ -1776,3 +1860,8 @@ msgstr ""
 "\n"
 "Etter å ha gjort dette kan du fjerne alle begresninger ved å velge "
 "menyoppføringen «Fjern alle begrensninger» i «Rediger»-menyen."
+
+#. Hack.
+#: src/planner-window.c:1655
+msgid "Unnamed database project"
+msgstr "Databaseprosjekt uten navn"
