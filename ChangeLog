@@ -1,5 +1,10 @@
 2004-08-09  Richard Hult  <richard@imendio.com>
 
+	* libegg/recent-files/: Sync (even though we're not using this at
+	the moment).
+
+2004-08-09  Richard Hult  <richard@imendio.com>
+
 	* libplanner/Makefile.am: Remove mrp-intl.h
 	* libplanner/*.c: Change mrp-intl.h to glib/gi18n.h.
 	* src/*.c: Change libgnome/gnome-i18n.h to glib/gi18n.h.
