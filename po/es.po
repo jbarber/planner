@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-03-15 20:57+0100\n"
-"PO-Revision-Date: 2005-03-15 21:06+0100\n"
+"POT-Creation-Date: 2005-03-26 16:29+0100\n"
+"PO-Revision-Date: 2005-03-26 16:29+0100\n"
 "Last-Translator: Francisco Javier F. Serrador <serrador@cvs.gnome.org>\n"
 "Language-Team: Spanish <traductores@es.gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -545,12 +545,16 @@ msgstr "Indica si la impresión de la vista de tareas está activada."
 #: ../data/planner.schemas.in.h:10
 msgid ""
 "Whether to highlight the tasks along the cricital path in the Gantt view."
-msgstr "Indica si se deben resaltar las tareas junto con la ruta crítica en la vista de Gantt."
+msgstr ""
+"Indica si se deben resaltar las tareas junto con la ruta crítica en la vista "
+"de Gantt."
 
 #: ../data/planner.schemas.in.h:11
 msgid ""
 "Whether to highlight the tasks along the cricital path in the Task view."
-msgstr "Indica si se debe resaltar las tareas a lo largo de la ruta crítica en la vista de tareas."
+msgstr ""
+"Indica si se debe resaltar las tareas a lo largo de la ruta crítica en la "
+"vista de tareas."
 
 #: ../data/planner.schemas.in.h:12
 msgid "Which view to display in the user interface."
@@ -1177,11 +1181,14 @@ msgstr "Prueba"
 msgid "_Highlight Critical Tasks"
 msgstr "_Resaltar tareas críticas"
 
-#: ../src/planner-gantt-view.c:330
-msgid "Gantt Chart"
-msgstr "Diagrama de Gantt"
+#. i18n: Label used for the sidebar. Please try to make it short and use
+#. * a linebreak if necessary/possible.
+#.
+#: ../src/planner-gantt-view.c:333
+msgid "Gantt"
+msgstr "Gantt"
 
-#: ../src/planner-gantt-view.c:338
+#: ../src/planner-gantt-view.c:341
 msgid "_Gantt Chart"
 msgstr "_Gráfico Gantt"
 
@@ -1189,7 +1196,7 @@ msgstr "_Gráfico Gantt"
 #. * project management term. You might want to leave it
 #. * untranslated unless there is a localized term for it.
 #.
-#: ../src/planner-gantt-view.c:539
+#: ../src/planner-gantt-view.c:542
 msgid ""
 "\n"
 "WBS"
@@ -1197,7 +1204,7 @@ msgstr ""
 "\n"
 "WBS"
 
-#: ../src/planner-gantt-view.c:540 ../src/planner-ttable-tree.c:367
+#: ../src/planner-gantt-view.c:543 ../src/planner-ttable-tree.c:367
 msgid ""
 "\n"
 "Name"
@@ -1206,7 +1213,7 @@ msgstr ""
 "Nombre"
 
 #. COL_START,    _("\nStart"),
-#: ../src/planner-gantt-view.c:542
+#: ../src/planner-gantt-view.c:545
 msgid ""
 "\n"
 "Work"
@@ -1962,11 +1969,18 @@ msgstr ""
 msgid "Zoom to fit"
 msgstr "Ampliar hasta ajustar"
 
-#: ../src/planner-ttable-view.c:159
-msgid "Resource Usage"
-msgstr "Uso de recursos"
+#. i18n: Label used for the sidebar. Please try to make it short and use
+#. * a linebreak if necessary/possible.
+#.
+#: ../src/planner-ttable-view.c:162
+msgid ""
+"Resource\n"
+"Usage"
+msgstr ""
+"Uso de\n"
+"recursos"
 
-#: ../src/planner-ttable-view.c:166
+#: ../src/planner-ttable-view.c:169
 msgid "Resource _Usage"
 msgstr "_Uso de recursos"
 
