@@ -39,7 +39,7 @@
 #define WORK_MULTIPLIER (60*60*8.0)
 
 typedef struct {
-	PlannerWindow  *main_window;
+	PlannerWindow *main_window;
 	MrpTask       *task;
 	GtkWidget     *dialog;
 	GtkWidget     *predecessor_list;
@@ -220,6 +220,38 @@ typedef struct {
 	guint          old_units;
 } TaskCmdEditAssignment;
 
+typedef struct {
+	PlannerCmd base;
+
+	MrpTask         *task;
+	MrpTask         *predecessor;
+	MrpTask         *old_predecessor;
+	guint            lag;
+	guint            old_lag;
+	MrpRelationType  rel_type;
+	MrpRelationType  old_rel_type;
+	GError          *error;
+} TaskCmdEditPredecessor;
+
+
+typedef struct {
+	PlannerCmd        base;
+
+	MrpProject       *project;
+	MrpTask          *before;
+	MrpTask          *after;
+	MrpRelationType   relationship;
+	glong             lag;
+	GError           *error;
+} TaskCmdLink;
+
+typedef struct {
+	PlannerCmd base;
+
+	MrpRelation  *relation;
+	guint         lag;
+	guint         old_lag;
+} TaskCmdEditLag;
 
 static void
 task_dialog_setup_option_menu (GtkWidget     *option_menu,
@@ -748,6 +780,337 @@ task_cmd_assign_units (PlannerWindow *main_window,
 	cmd->units = units;
 	cmd->old_units = mrp_assignment_get_units (assignment);
 		
+	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager (main_window),
+					   cmd_base);
+
+	return cmd_base;
+}
+
+/* link and unlink shared with planner-task-tree.c */
+static gboolean
+task_cmd_link_do (PlannerCmd *cmd_base)
+{
+	TaskCmdLink *cmd;
+	GError      *error = NULL;
+	MrpRelation *relation;
+	gboolean     retval;
+
+	cmd = (TaskCmdLink *) cmd_base;
+
+	relation = mrp_task_add_predecessor (cmd->after,
+					     cmd->before,
+					     cmd->relationship,
+					     cmd->lag,
+					     &error);
+	if (!error) {
+		retval = TRUE;
+	} else {
+		cmd->error = error;
+		retval = FALSE;		
+	} 
+
+	return retval;
+}
+
+static void
+task_cmd_link_undo (PlannerCmd *cmd_base)
+{
+	TaskCmdLink *cmd;
+	
+	cmd = (TaskCmdLink*) cmd_base;
+	
+	mrp_task_remove_predecessor (cmd->after, cmd->before);
+}
+
+static void
+task_cmd_link_free (PlannerCmd *cmd_base)
+{
+	TaskCmdLink *cmd;
+
+	cmd = (TaskCmdLink *) cmd_base;
+
+	g_object_unref (cmd->project);
+	g_object_unref (cmd->before);
+	g_object_unref (cmd->after);
+}
+
+
+PlannerCmd *
+planner_task_cmd_link (PlannerWindow   *main_window,
+		       MrpTask         *before,
+		       MrpTask         *after,
+		       MrpRelationType  relationship,
+		       glong            lag,
+		       GError         **error)
+{
+	PlannerCmd          *cmd_base;
+	TaskCmdLink         *cmd;
+
+	cmd_base = planner_cmd_new (TaskCmdLink,
+				    _("Link task"),
+				    task_cmd_link_do,
+				    task_cmd_link_undo,
+				    task_cmd_link_free);
+
+	cmd = (TaskCmdLink *) cmd_base;
+
+	cmd->project = g_object_ref (planner_window_get_project (main_window));
+
+	cmd->before = g_object_ref (before);
+	cmd->after = g_object_ref (after);
+	cmd->relationship = relationship;
+	cmd->lag = lag;
+			
+	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager 
+					   (main_window),
+					   cmd_base);
+
+	if (cmd->error) {
+		g_propagate_error (error, cmd->error);
+		/* FIXME: who clean the cmd memory? */
+		return NULL;
+	}
+
+	return cmd_base;	
+}
+
+static gboolean
+task_cmd_unlink_do (PlannerCmd *cmd_base)
+{
+	TaskCmdLink *cmd;
+	
+	cmd = (TaskCmdLink*) cmd_base;
+
+	if (g_getenv ("PLANNER_DEBUG_UNDO_TASK")) {
+		g_message ("Removing the link ...");
+	}
+	
+	mrp_task_remove_predecessor (cmd->after, cmd->before);
+
+	return TRUE;
+}
+
+static void
+task_cmd_unlink_undo (PlannerCmd *cmd_base)
+{
+	TaskCmdLink *cmd;
+	GError      *error = NULL;
+	MrpRelation *relation;
+
+	cmd = (TaskCmdLink *) cmd_base;
+
+	relation = mrp_task_add_predecessor (cmd->after,
+					     cmd->before,
+					     cmd->relationship,
+					     cmd->lag,
+					     &error);
+	g_assert (relation);
+}
+
+static void
+task_cmd_unlink_free (PlannerCmd *cmd_base)
+{
+	TaskCmdLink *cmd;
+
+	cmd = (TaskCmdLink *) cmd_base;
+
+	g_object_unref (cmd->project);
+	g_object_unref (cmd->before);
+	g_object_unref (cmd->after);
+}
+
+PlannerCmd *
+planner_task_cmd_unlink (PlannerWindow   *main_window,
+			 MrpRelation     *relation)
+{
+	PlannerCmd          *cmd_base;
+	TaskCmdLink         *cmd;
+
+	cmd_base = planner_cmd_new (TaskCmdLink,
+				    _("Unkink task"),
+				    task_cmd_unlink_do,
+				    task_cmd_unlink_undo,
+				    task_cmd_unlink_free);
+	
+	cmd = (TaskCmdLink *) cmd_base;
+
+	cmd->project = g_object_ref (planner_window_get_project (main_window));
+
+	cmd->before = g_object_ref (mrp_relation_get_predecessor (relation));
+	cmd->after = g_object_ref (mrp_relation_get_successor (relation));
+	cmd->relationship = mrp_relation_get_relation_type (relation);
+	cmd->lag = mrp_relation_get_lag (relation);
+			
+	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager 
+					   (main_window),
+					   cmd_base);
+	return cmd_base;
+}
+
+static gboolean
+task_cmd_edit_pred_do (PlannerCmd *cmd_base)
+{
+	GError                 *error = NULL;
+	gboolean                retval;
+	TaskCmdEditPredecessor *cmd = (TaskCmdEditPredecessor*) cmd_base;
+	
+	if (g_getenv ("PLANNER_DEBUG_UNDO_TASK")) {
+		g_message ("Editing predecessor from dialog ...");
+	}
+	
+	mrp_task_remove_predecessor (cmd->task, cmd->old_predecessor);
+
+	mrp_task_add_predecessor (cmd->task,
+				  cmd->predecessor,
+				  cmd->rel_type,
+				  cmd->lag,
+				  &error);
+
+	if (!error) {
+		retval = TRUE;
+	} else {
+		cmd->error = error;
+		retval = FALSE;		
+	} 
+
+	return retval;
+}
+
+static void
+task_cmd_edit_pred_undo (PlannerCmd *cmd_base)
+{
+	GError                 *error = NULL;
+	TaskCmdEditPredecessor *cmd = (TaskCmdEditPredecessor*) cmd_base;
+	
+	if (g_getenv ("PLANNER_DEBUG_UNDO_TASK")) {
+		g_message ("UNDO Editing predecessor from dialog ...");
+	}
+	
+	mrp_task_remove_predecessor (cmd->task, cmd->predecessor);
+
+	mrp_task_add_predecessor (cmd->task,
+				  cmd->old_predecessor,
+				  cmd->old_rel_type,
+				  cmd->old_lag,
+				  &error);
+
+	g_assert (error == NULL);
+}
+
+static void
+task_cmd_edit_pred_free (PlannerCmd *cmd_base)
+{
+	TaskCmdEditPredecessor *cmd;
+
+	cmd = (TaskCmdEditPredecessor *) cmd_base;
+
+	g_object_unref (cmd->task);
+	g_object_unref (cmd->predecessor);
+	g_object_unref (cmd->old_predecessor);
+}
+
+
+
+static PlannerCmd *
+planner_task_cmd_edit_predecessor (PlannerWindow   *main_window,
+				   MrpTask         *task,
+				   MrpTask         *old_predecessor,
+				   MrpTask         *predecessor,
+				   MrpRelationType  relationship,
+				   glong            lag,
+				   GError         **error)
+{
+	PlannerCmd             *cmd_base;
+	TaskCmdEditPredecessor *cmd;
+	MrpRelation            *relation;
+
+	cmd_base = planner_cmd_new (TaskCmdEditPredecessor,
+				    _("Edit task predecessor"),
+				    task_cmd_edit_pred_do,
+				    task_cmd_edit_pred_undo,
+				    task_cmd_edit_pred_free);
+
+	cmd = (TaskCmdEditPredecessor *) cmd_base;
+	
+	cmd->old_predecessor = g_object_ref (old_predecessor);
+	cmd->predecessor = g_object_ref (predecessor);
+	cmd->task = g_object_ref (task);
+
+	relation = mrp_task_get_relation (task, old_predecessor);
+
+	cmd->old_rel_type = mrp_relation_get_relation_type (relation);
+	cmd->rel_type = relationship;
+	cmd->old_lag = mrp_relation_get_lag (relation);
+	cmd->lag = lag;
+			
+	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager 
+					   (main_window),
+					   cmd_base);
+
+	if (cmd->error) {
+		/* FIXME: who clean the cmd memory? */
+		g_propagate_error (error, cmd->error);
+		return NULL;
+	}
+
+	return cmd_base;
+}
+
+static gboolean
+task_cmd_edit_lag_do (PlannerCmd *cmd_base)
+{
+	TaskCmdEditLag *cmd = (TaskCmdEditLag* ) cmd_base;
+
+	mrp_object_set (cmd->relation, "lag", cmd->lag, NULL);
+
+	return TRUE;
+}
+
+static void
+task_cmd_edit_lag_undo (PlannerCmd *cmd_base)
+{
+	TaskCmdEditLag *cmd = (TaskCmdEditLag* ) cmd_base;
+
+	mrp_object_set (cmd->relation, "lag", cmd->old_lag, NULL);
+}
+
+static void
+task_cmd_edit_lag_free (PlannerCmd *cmd_base)
+{
+	TaskCmdEditLag *cmd = (TaskCmdEditLag* ) cmd_base;
+
+	g_object_unref (cmd->relation);
+}
+
+static PlannerCmd *
+task_cmd_edit_lag (PlannerWindow *main_window,
+		   MrpRelation   *relation,
+		   guint          lag)
+{
+	PlannerCmd          *cmd_base;
+	TaskCmdEditLag      *cmd;
+	guint                old_lag;
+
+	mrp_object_get (relation, "lag", &old_lag, NULL);
+
+	if (old_lag == lag) {
+		return NULL;
+	}
+
+	cmd_base = planner_cmd_new (TaskCmdEditType,
+				    _("Edit lag predecessor from dialog"),
+				    task_cmd_edit_lag_do,
+				    task_cmd_edit_lag_undo,
+				    task_cmd_edit_lag_free);
+
+	
+	cmd = (TaskCmdEditLag *) cmd_base;
+	
+	cmd->relation = g_object_ref (relation);
+
+	cmd->old_lag = old_lag;
+	cmd->lag = lag;
+
 	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager (main_window),
 					   cmd_base);
 
@@ -1518,7 +1881,8 @@ task_dialog_task_child_added_or_removed_cb (MrpTask   *task,
 }
 
 static GtkWidget *  
-task_dialog_predecessor_dialog_new (MrpTask *task)
+task_dialog_predecessor_dialog_new (MrpTask       *task,
+				    PlannerWindow *main_window)
 {
 	MrpProject *project;
 	GladeXML   *glade;
@@ -1533,8 +1897,9 @@ task_dialog_predecessor_dialog_new (MrpTask *task)
 			       NULL);
 
 	dialog = glade_xml_get_widget (glade, "add_predecessor_dialog");
-	g_object_set_data (G_OBJECT (dialog), "task_main", task);
 	
+	g_object_set_data (G_OBJECT (dialog), "task_main", task);
+	g_object_set_data (G_OBJECT (dialog), "main_window", main_window);
 	w = glade_xml_get_widget (glade, "predecessor_combo");
 	g_object_set_data (G_OBJECT (dialog), "predecessor_combo", w);
 	
@@ -1575,15 +1940,19 @@ static void
 task_dialog_new_pred_ok_clicked_cb (GtkWidget *button, 
 				    GtkWidget *dialog)
 {
-	GtkWidget   *w;
-	GError      *error = NULL;
-	MrpTask     *task_main;
-	MrpTask     *new_task_pred; 
-	MrpProject  *project; 
-	gint         lag;
-	gint         pred_type; 
-	gchar       *str;
+	PlannerWindow *main_window;
+	PlannerCmd    *cmd;
+	GtkWidget     *w;
+	GError        *error = NULL;
+	MrpTask       *task_main;
+	MrpTask       *new_task_pred; 
+	MrpProject    *project; 
+	gint           lag;
+	gint           pred_type; 
+	gchar         *str;
 	
+	main_window = g_object_get_data (G_OBJECT (dialog), "main_window");
+
 	task_main = g_object_get_data (G_OBJECT (dialog), "task_main");
 	mrp_object_get (task_main, "project", &project, NULL);
 
@@ -1606,11 +1975,10 @@ task_dialog_new_pred_ok_clicked_cb (GtkWidget *button,
 	
 	mrp_object_get (MRP_OBJECT (new_task_pred), "name", &str, NULL);
 
-	if (!mrp_task_add_predecessor (task_main,
-				       new_task_pred,
-				       pred_type,
-				       lag,
-				       &error)) {
+	cmd = planner_task_cmd_link (main_window, new_task_pred, task_main,
+				     pred_type, lag, &error);
+	
+	if (!cmd) {
 		GtkWidget *err_dialog;
 		
 		err_dialog = gtk_message_dialog_new (GTK_WINDOW (dialog),
@@ -1642,7 +2010,7 @@ task_dialog_add_predecessor_cb (GtkWidget  *widget,
 {
 	GtkWidget *dialog;
 	
-	dialog = task_dialog_predecessor_dialog_new (data->task);
+	dialog = task_dialog_predecessor_dialog_new (data->task, data->main_window);
 	gtk_widget_show (dialog);
 }
 
@@ -1650,11 +2018,12 @@ static void
 task_dialog_remove_predecessor_cb (GtkWidget  *widget,
 				   DialogData *data)
 {
-	GtkTreeView        *tree;
-	MrpTask            *predecessor;
+	GtkTreeView             *tree;
+	MrpTask                 *predecessor;
+	MrpRelation             *relation;
 	PlannerPredecessorModel *model;
-	GtkTreeSelection   *selection;
-	GtkTreeIter         iter;
+	GtkTreeSelection        *selection;
+	GtkTreeIter              iter;
 
 	tree = GTK_TREE_VIEW (data->predecessor_list);
 	model = PLANNER_PREDECESSOR_MODEL (gtk_tree_view_get_model (tree));
@@ -1665,7 +2034,9 @@ task_dialog_remove_predecessor_cb (GtkWidget  *widget,
         }
 	
 	predecessor = MRP_TASK (planner_list_model_get_object (PLANNER_LIST_MODEL (model), &iter));
-	mrp_task_remove_predecessor (data->task, predecessor);
+	/* mrp_task_remove_predecessor (data->task, predecessor); */
+	relation = mrp_task_get_relation (data->task, predecessor);
+	planner_task_cmd_unlink (data->main_window, relation);
 }
 
 static void  
@@ -1721,6 +2092,8 @@ task_dialog_pred_cell_edited (GtkCellRendererText *cell,
 	gint                lag;
 	MrpRelationType     type;
 
+	/* FIXME: Undo support */
+
 	tree = GTK_TREE_VIEW (data->predecessor_list);
 	
 	model = gtk_tree_view_get_model (tree);
@@ -1749,15 +2122,22 @@ task_dialog_pred_cell_edited (GtkCellRendererText *cell,
 		new_task_pred = g_list_nth_data (tasks, planner_cell->selected_index);
 
 		if (new_task_pred != task_pred) {
-			GError *error = NULL;
+			GError     *error = NULL;
+			PlannerCmd *cmd;
 
-			mrp_task_remove_predecessor (task_main, task_pred);
+			cmd = planner_task_cmd_edit_predecessor (data->main_window, 
+								 task_main, task_pred,
+								 new_task_pred,
+								 type, lag, &error);
+
+			/* mrp_task_remove_predecessor (task_main, task_pred);
 
 			if (!mrp_task_add_predecessor (task_main,
 						       new_task_pred,
 						       type,
 						       lag,
-						       &error)) {
+						       &error)) { */
+			if (!cmd) {
 				GtkWidget *dialog;
 				
 				dialog = gtk_message_dialog_new (
@@ -1787,13 +2167,22 @@ task_dialog_pred_cell_edited (GtkCellRendererText *cell,
 
 		{	
 			GError *error = NULL;
-			mrp_task_remove_predecessor (task_main, task_pred);
+			PlannerCmd *cmd;
+
+			cmd = planner_task_cmd_edit_predecessor (data->main_window, 
+								 task_main, task_pred,
+								 task_pred,
+								 planner_cell->selected_index + 1,
+								 lag, &error);
+
+			/* mrp_task_remove_predecessor (task_main, task_pred);
 
 			if (!mrp_task_add_predecessor (task_main,
 						       task_pred,
 						       planner_cell->selected_index + 1,
 						       lag,
-						       &error)) {
+						       &error)) {*/
+			if (!cmd) {
 				GtkWidget *dialog;
 				
 				dialog = gtk_message_dialog_new (
@@ -1830,10 +2219,12 @@ task_dialog_pred_cell_edited (GtkCellRendererText *cell,
 		break;
 
 	case PREDECESSOR_COL_LAG:
-		mrp_object_set (relation,
+		/* mrp_object_set (relation,
 				"lag",
 				60*60 * atoi (new_text),
-				NULL);
+				NULL);*/
+		task_cmd_edit_lag (data->main_window, relation, 60*60 * atoi (new_text));
+
 		break;
 
 	default:
