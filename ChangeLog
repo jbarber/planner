@@ -1,5 +1,7 @@
 2004-06-16  Richard Hult  <richard@imendio.com>
 
+	* src/planner-gantt-row.c: Cache the frame gc and colors.
+
 	* src/planner-task-dialog.c (task_dialog_pred_cell_edited): Don't
 	create the predecessor twice.
 
