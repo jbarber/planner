@@ -5,10 +5,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: planner 0.11\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-01-14 23:08+0900\n"
-"PO-Revision-Date: 2004-01-14 23:16+0900\n"
+"POT-Creation-Date: 2004-01-17 17:40+0900\n"
+"PO-Revision-Date: 2004-01-17 17:41+0900\n"
 "Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
-"Language-Team: GNOME KOREA(http://gnome.or.kr)\n"
+"Language-Team: GNOME Korea <gnome-kr-hackers@lists.kldp.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -529,7 +529,7 @@ msgstr "이 프로그램 정보"
 
 #: data/ui/main-window.ui.h:2
 msgid "C_ut"
-msgstr "잘라 내기(_U)"
+msgstr "잘라내기(_U)"
 
 #: data/ui/main-window.ui.h:3
 msgid "Clear"
@@ -850,20 +850,16 @@ msgid "None"
 msgstr "없음"
 
 #. Give up.
-#: libplanner/mrp-sql.c:229 src/planner-sql-plugin.c:131
+#: libplanner/mrp-sql.c:345 src/planner-sql-plugin.c:171
 msgid "Invalid Unicode"
 msgstr "잘못된 유니코드"
 
-#: libplanner/mrp-sql.c:2205
+#: libplanner/mrp-sql.c:2201
 #, c-format
-msgid ""
-"The project '%s' has been changed by the user '%s' since you opened it. Do "
-"you want to save anyway?"
-msgstr ""
-"프로젝트 '%s'을(를) 연 다음에 사용자 '%s'이(가) 그 프로젝트를 바꿨습니다. 그"
-"래도 프로젝트를 저장할까요?"
+msgid "Connection to database '%s' failed.\n"
+msgstr "'%s' 데이타베이스에 연결하는 데 실패했습니다.\n"
 
-#: libplanner/mrp-sql.c:3443
+#: libplanner/mrp-sql.c:2206 libplanner/mrp-sql.c:3643
 #, c-format
 msgid ""
 "Connection to database '%s' failed.\n"
@@ -871,6 +867,20 @@ msgid ""
 msgstr ""
 "'%s' 데이타베이스에 연결하는 데 실패했습니다.\n"
 "%s"
+
+#: libplanner/mrp-sql.c:2214
+#, c-format
+msgid "BEGIN command failed %s."
+msgstr "BEGIN 명령이 %s에 실패했습니다."
+
+#: libplanner/mrp-sql.c:2380
+#, c-format
+msgid ""
+"The project '%s' has been changed by the user '%s' since you opened it. Do "
+"you want to save anyway?"
+msgstr ""
+"프로젝트 '%s'을(를) 연 다음에 사용자 '%s'이(가) 그 프로젝트를 바꿨습니다. 그"
+"래도 프로젝트를 저장할까요?"
 
 #: libplanner/mrp-storage-sql.c:205
 msgid "Invalid SQL URI (must start with 'sql://' and contain '#')."
@@ -1323,24 +1333,15 @@ msgstr "H%d"
 msgid "%04d, H%d"
 msgstr "%04d, %d반기"
 
-#: src/planner-sql-plugin.c:273
-#, c-format
-msgid ""
-"Connection to database '%s' failed:\n"
-"%s"
-msgstr ""
-"'%s' 데이타베이스에 연결하는 데 실패했습니다:\n"
-"%s"
-
-#: src/planner-sql-plugin.c:322
+#: src/planner-sql-plugin.c:367
 msgid "Project"
 msgstr "프로젝트"
 
-#: src/planner-sql-plugin.c:494
+#: src/planner-sql-plugin.c:537
 msgid "Open from Database"
 msgstr "데이타베이스에서 열기"
 
-#: src/planner-sql-plugin.c:601
+#: src/planner-sql-plugin.c:644
 msgid "Save to Database"
 msgstr "데이타베이스로 저장"
 
