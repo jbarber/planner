@@ -1,3 +1,10 @@
+2004-03-22  Xavier Ordoquy  <xordoquy@wanadoo.fr>
+
+	* src/planner-ttable-print.c: Removed the buggy resource usage
+	view print
+	* src/planner-ttable-row.c: Disable the task move (doesn't respond
+	to button press)
+
 2004-03-18  Mikael Hallendal  <micke@imendio.com>
 
 	* data/stylesheets/html1_css.xsl:

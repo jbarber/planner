@@ -1909,6 +1909,7 @@ ttable_row_event (GnomeCanvasItem *item, GdkEvent *event)
 			break;
 			*/			
 		case 1:
+			return FALSE; /* FIXME: Release hook for readonly view */
 			if (priv->state != STATE_NONE) {
 				break;
 			}

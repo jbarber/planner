@@ -75,6 +75,8 @@ planner_ttable_print_do (PlannerTtablePrintData *data)
 	int i,j;
 	gdouble cur_x;
 
+	return; /* FIXME: Release hook to avoid printing */
+
 	for (i=0; i<data->n_pages; i++) {
 		Page *page;
 		cur_x=0;
@@ -201,6 +203,8 @@ planner_ttable_print_get_n_pages (PlannerTtablePrintData *data)
 	
 	g_return_val_if_fail (data != NULL, 0);
 	
+	return data->pages_x*data->pages_y; /* FIXME: Release hook to avoid printing */
+
 	data->lines = 0;
 	font = planner_print_job_get_font(data->job);
 	r=mrp_project_get_resources(data->project);
