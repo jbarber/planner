@@ -1,25 +1,35 @@
 2004-04-27  Xavier Ordoquy  <xordoquy@wanadoo.fr>
 
 	* acinclude.m4:
-	Added checks for python environment (taken from pygtk)
+	Added checks for python environment (taken out from pygtk).
 
 	* configure.in:
-	Updated the python binding and added the python module
+	Updated the python binding and added the python module.
 
 	* Makefile.am:
-	Added conditional python binding build
+	Added conditional python binding build.
 
 	* data/ui/Makefile.am:
 	* data/ui/python-plugin.ui:
 	Added the python-plugin menu entry.
 
 	* python/Makefile.am:
+	Changed the planner module name and cleaned flags.
+
 	* python/planner-arg-types.py:
+	Created from planner-arg-types.defs.
+
 	* python/planner.defs:
+	Added insert_task default parameters.
+
 	* python/test.py:
+	Example script for python binding and python module.
+
 	* src/Makefile.am:
-	* src/planner-python-plugin.c: (window_file_is_dir),
-	(python_plugin_execute), (plugin_init), (plugin_exit):
+	Added the planner-python-plugin.
+
+	* src/planner-python-plugin.c:
+	Created a plugin to get python scripting in planner.
 
 2004-04-26  Richard Hult  <richard@imendio.com>
 
