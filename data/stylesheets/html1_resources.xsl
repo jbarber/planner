@@ -32,6 +32,7 @@
   <table class="resources" cellspacing="1" cellpadding="2" border="1">
     <tr class="resources-hdr">
       <th align="left" class="res-hdr">Name</th>
+      <th align="left" class="res-hdr">Short name</th>
       <th align="left" class="res-hdr">Type</th>
       <th align="left" class="res-hdr">Email</th>
       <th align="left" class="res-hdr">Tasks</th>
@@ -106,6 +107,11 @@
           <td class="res-name">
             <span class="res-name">
               <a name="res-{@id}"><xsl:value-of select="@name"/></a>
+            </span>
+          </td>
+	  <td class="res-short-name">
+            <span class="res-short-name">
+              <xsl:value-of select="@short-name"/>
             </span>
           </td>
           <td class="res-type">

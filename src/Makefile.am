@@ -139,8 +139,8 @@ libgantt_view_la_SOURCES = \
 	planner-scale-utils.h		\
 	planner-task-tree.c		\
 	planner-task-tree.h		\
-    planner-task-popup.c \
-    planner-task-popup.h
+	planner-task-popup.c 		\
+	planner-task-popup.h
 
 libgantt_view_la_LDFLAGS = -avoid-version -module
 libgantt_view_la_LIBADD = libutil.la
@@ -187,6 +187,10 @@ plugindir = $(libdir)/planner/plugins
 
 if HAVE_GDA
 sql_plugin = libsql-plugin.la
+libsql_plugin_la_SOURCES = planner-sql-plugin.c
+libsql_plugin_la_LIBADD =  $(GDA_LIBS)
+libsql_plugin_la_CFLAGS = $(GDA_CFLAGS) 
+libsql_plugin_la_LDFLAGS = -avoid-version -module
 endif
 
 plugin_LTLIBRARIES = \
@@ -195,11 +199,6 @@ plugin_LTLIBRARIES = \
 
 libhtml_plugin_la_SOURCES = planner-html-plugin.c
 libhtml_plugin_la_LDFLAGS = -avoid-version -module
-
-if HAVE_GDA
-libsql_plugin_la_SOURCES = planner-sql-plugin.c
-libsql_plugin_la_LDFLAGS = -avoid-version -module
-endif
 
 planner-marshal.h: Makefile.am planner-marshal.list
 	(cd $(srcdir) && \

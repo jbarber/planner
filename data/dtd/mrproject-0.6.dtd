@@ -78,6 +78,7 @@ Note: A mistake in the format design led to this suboptimality. A
 <!ELEMENT resource (properties?)>
 <!ATTLIST resource id                 CDATA #REQUIRED
                    name               CDATA #REQUIRED
+                   short-name         CDATA #IMPLIED
                    email              CDATA #IMPLIED
                    type               (1|2) #REQUIRED
                    group              CDATA #IMPLIED

@@ -31,6 +31,7 @@ typedef struct {
 	MrpProject *project;
 
 	GtkWidget  *name_entry;
+	GtkWidget  *short_name_entry;
 	GtkWidget  *email_entry;
 	GtkWidget  *group_option_menu;	
 } DialogData;
@@ -163,6 +164,7 @@ resource_input_dialog_response_cb (GtkWidget *button,
 	DialogData  *data;
 	MrpResource *resource;
 	const gchar *name;
+	const gchar *short_name;
 	const gchar *email;
 	MrpGroup    *group;
 	
@@ -171,12 +173,14 @@ resource_input_dialog_response_cb (GtkWidget *button,
 		data = g_object_get_data (G_OBJECT (dialog), "data");
 		
 		name = gtk_entry_get_text (GTK_ENTRY (data->name_entry));
+		short_name = gtk_entry_get_text (GTK_ENTRY (data->short_name_entry));
 		email = gtk_entry_get_text (GTK_ENTRY (data->email_entry));
 
 		group = resource_input_dialog_get_selected (data->group_option_menu);
 			
 		resource = g_object_new (MRP_TYPE_RESOURCE,
 				     "name", name,
+				     "short_name", short_name,
 				     "email", email,
 					 "group", group,
 				     NULL);
@@ -184,6 +188,7 @@ resource_input_dialog_response_cb (GtkWidget *button,
 		mrp_project_add_resource (data->project, resource);
 		
 		gtk_entry_set_text (GTK_ENTRY (data->name_entry), "");
+		gtk_entry_set_text (GTK_ENTRY (data->short_name_entry), "");
 		gtk_entry_set_text (GTK_ENTRY (data->email_entry), "");
 		
 		gtk_widget_grab_focus (data->name_entry);
@@ -234,6 +239,12 @@ planner_resource_input_dialog_new (MrpProject *project)
 			  G_CALLBACK (resource_input_dialog_activate_cb),
 			  dialog);
 	
+	data->short_name_entry = glade_xml_get_widget (gui, "short_name_entry");
+	g_signal_connect (data->short_name_entry,
+			  "activate",
+			  G_CALLBACK (resource_input_dialog_activate_cb),
+			  dialog);
+			  
 	data->email_entry = glade_xml_get_widget (gui, "email_entry");
 	g_signal_connect (data->email_entry,
 			  "activate",

@@ -1,5 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
+ * Copyright (C) 2004 Imendio HB
  * Copyright (C) 2003 CodeFactory AB
  * Copyright (C) 2003 Richard Hult <richard@imendio.com>
  * Copyright (C) 2003 Mikael Hallendal <micke@imendio.com>
@@ -501,23 +502,35 @@ gantt_print_get_allocated_resources_string (PlannerGanttPrintData  *data,
 
 		resource = mrp_assignment_get_resource (assignment);
 		units = mrp_assignment_get_units (assignment);
-		
-		g_object_get (resource, "name", &name, NULL);
 
+		/* Use the resource short_name in preference to the resource
+		 * name.
+		 */
+		g_object_get (resource, 
+			      "short_name", &name, 
+			      NULL);
+				
 		if (name && name[0] == 0) {
 			g_free (name);
-			name = NULL;
+
+			g_object_get (resource, 
+				      "name", &name, 
+				      NULL);
+			
+			if (name && name[0] == 0) {
+				g_free (name);
+				
+				name = g_strdup (_("Unnamed"));
+			}
 		}
 
-		if (units != 100) {
-			name_unit = g_strdup_printf ("%s [%i]", name ? name : _("Unnamed"), units);
+ 		if (units != 100) {
+			name_unit = g_strdup_printf ("%s [%i]", name, units);
 		} else {
-			name_unit = g_strdup_printf ("%s", name ? name : _("Unnamed"));
+			name_unit = g_strdup_printf ("%s", name);
 		}
-
-		g_free (name);
-
-		if (text == NULL) { /* First resource */
+		
+		if (!text) { /* First resource */
 			text = g_strdup_printf ("%s", name_unit);
 			g_free (name_unit);
 			continue;
@@ -525,8 +538,10 @@ gantt_print_get_allocated_resources_string (PlannerGanttPrintData  *data,
 		
 		tmp_str = g_strdup_printf ("%s, %s", text, name_unit);
 		
+		g_free (name);
 		g_free (text);
 		g_free (name_unit);
+
 		text = tmp_str;
 	}
 

@@ -307,18 +307,19 @@ sql_plugin_retrieve_project_id (PlannerPlugin *plugin,
 	GtkTreeSelection  *selection;
 	GtkTreeIter        iter;
 	gchar             *db_txt;
-	gchar             *dsn_name = "planner_project";
+	const gchar       *dsn_name = "planner-auto";
+	const gchar       *provider = "PostgreSQL";
 
 	db_txt = g_strdup_printf ("DATABASE=%s",database);
 	gda_config_save_data_source (dsn_name, 
-                                     "PostgreSQL", 
+                                     provider, 
                                      db_txt,
-                                     "planner", login, password);
+                                     "planner project", login, password);
 	g_free (db_txt);
 
 	client = gda_client_new ();
-	conn = gda_client_open_connection (client, dsn_name, NULL, NULL, 0);
 	
+	conn = gda_client_open_connection (client, dsn_name, NULL, NULL, 0);
 
 	if (!GDA_IS_CONNECTION (conn)) {
 		str = g_strdup_printf ("Connection to database '%s' failed.", database);
@@ -399,7 +400,7 @@ sql_plugin_retrieve_project_id (PlannerPlugin *plugin,
 	
 	g_object_unref (res);
 
-	res = sql_execute_query (conn,"CLOSE idcursor");
+	res = sql_execute_query (conn,"CLOSE mycursor");
 	
 	g_object_unref (res);
 	

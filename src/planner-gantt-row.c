@@ -1,5 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
+ * Copyright (C) 2004 Imendio HB
  * Copyright (C) 2001-2003 CodeFactory AB
  * Copyright (C) 2001-2003 Richard Hult <richard@imendio.com>
  * Copyright (C) 2001-2003 Mikael Hallendal <micke@imendio.com>
@@ -122,75 +123,78 @@ struct _PlannerGanttRowPriv {
 	GtkItemFactory *popup_factory;
 };
 
-static void      gantt_row_class_init               (PlannerGanttRowClass      *class);
-static void      gantt_row_init                     (PlannerGanttRow           *row);
-static void      gantt_row_destroy                  (GtkObject          *object);
-static void      gantt_row_set_property             (GObject            *object,
-						     guint               param_id,
-						     const GValue       *value,
-						     GParamSpec         *pspec);
-static void      gantt_row_get_property             (GObject            *object,
-						     guint               param_id,
-						     GValue             *value,
-						     GParamSpec         *pspec);
+static void     gantt_row_class_init                  (PlannerGanttRowClass  *class);
+static void     gantt_row_init                        (PlannerGanttRow       *row);
+static void     gantt_row_destroy                     (GtkObject             *object);
+static void     gantt_row_set_property                (GObject               *object,
+						       guint                  param_id,
+						       const GValue          *value,
+						       GParamSpec            *pspec);
+static void     gantt_row_get_property                (GObject               *object,
+						       guint                  param_id,
+						       GValue                *value,
+						       GParamSpec            *pspec);
+static void     gantt_row_update                      (GnomeCanvasItem       *item,
+						       double                *affine,
+						       ArtSVP                *clip_path,
+						       int                    flags);
+static void     gantt_row_realize                     (GnomeCanvasItem       *item);
+static void     gantt_row_unrealize                   (GnomeCanvasItem       *item);
+static void     gantt_row_draw                        (GnomeCanvasItem       *item,
+						       GdkDrawable           *drawable,
+						       gint                   x,
+						       gint                   y,
+						       gint                   width,
+						       gint                   height);
+static double   gantt_row_point                       (GnomeCanvasItem       *item,
+						       double                 x,
+						       double                 y,
+						       gint                   cx,
+						       gint                   cy,
+						       GnomeCanvasItem      **actual_item);
+static void     gantt_row_bounds                      (GnomeCanvasItem       *item,
+						       double                *x1,
+						       double                *y1,
+						       double                *x2,
+						       double                *y2);
+static gboolean gantt_row_event                       (GnomeCanvasItem       *item,
+						       GdkEvent              *event);
+static void     gantt_row_notify_cb                   (MrpTask               *task,
+						       GParamSpec            *pspec,
+						       PlannerGanttRow       *row);
+static void     gantt_row_update_assignment_string    (PlannerGanttRow       *row);
+static void     gantt_row_assignment_added            (MrpTask               *task,
+						       MrpAssignment         *assignment,
+						       PlannerGanttRow       *row);
+static void     gantt_row_assignment_removed          (MrpTask               *task,
+						       MrpAssignment         *assignment,
+						       PlannerGanttRow       *row);
+static void     gantt_row_resource_name_changed       (MrpResource           *resource,
+						       GParamSpec            *pspec,
+						       PlannerGanttRow       *row);
+static void     gantt_row_resource_short_name_changed (MrpResource           *resource,
+						       GParamSpec            *pspec,
+						       PlannerGanttRow       *row);
+static void     gantt_row_assignment_units_changed    (MrpAssignment         *assignment,
+						       GParamSpec            *pspec,
+						       PlannerGanttRow       *row);
+static void     gantt_row_ensure_layout               (PlannerGanttRow       *row);
+static void     gantt_row_update_resources            (PlannerGanttRow       *row);
+static void     gantt_row_geometry_changed            (PlannerGanttRow       *row);
+static void     gantt_row_connect_all_resources       (MrpTask               *task,
+						       PlannerGanttRow       *row);
+static void     gantt_row_disconnect_all_resources    (MrpTask               *task,
+						       PlannerGanttRow       *row);
+static gboolean gantt_row_canvas_scroll               (GtkWidget             *widget,
+						       gint                   delta_x,
+						       gint                   delta_y);
+static gint     gantt_row_get_resource_index_at       (PlannerGanttRow       *row,
+						       gint                   x);
+static gboolean gantt_row_get_resource_by_index       (PlannerGanttRow       *row,
+						       gint                   index,
+						       gint                  *x1,
+						       gint                  *x2);
 
-static void      gantt_row_update                   (GnomeCanvasItem    *item,
-						     double             *affine,
-						     ArtSVP             *clip_path,
-						     int                 flags);
-static void      gantt_row_realize                 (GnomeCanvasItem    *item);
-static void      gantt_row_unrealize                (GnomeCanvasItem    *item);
-static void      gantt_row_draw                     (GnomeCanvasItem    *item,
-						     GdkDrawable        *drawable,
-						     gint                 x,
-						     gint                 y,
-						     gint                 width,
-						     gint                 height);
-static double    gantt_row_point                    (GnomeCanvasItem    *item,
-						     double              x,
-						     double              y,
-						     gint                 cx,
-						     gint                 cy,
-						     GnomeCanvasItem   **actual_item);
-static void      gantt_row_bounds                   (GnomeCanvasItem    *item,
-						     double             *x1,
-						     double             *y1,
-						     double             *x2,
-						     double             *y2);
-static gboolean  gantt_row_event                    (GnomeCanvasItem    *item,
-						     GdkEvent           *event);
-static void      gantt_row_notify_cb                (MrpTask            *task,
-						     GParamSpec         *pspec, 
-						     PlannerGanttRow         *row);
-static void      gantt_row_update_assignment_string (PlannerGanttRow      *row);
-static void      gantt_row_assignment_added         (MrpTask            *task,
-						     MrpAssignment      *assignment,
-						     PlannerGanttRow         *row);
-static void      gantt_row_assignment_removed       (MrpTask            *task,
-						     MrpAssignment      *assignment,
-						     PlannerGanttRow         *row);
-static void      gantt_row_resource_name_changed    (MrpResource        *resource,
-						     GParamSpec         *pspec,
-						     PlannerGanttRow         *row);
-static void      gantt_row_assignment_units_changed (MrpAssignment      *assignment,
-						     GParamSpec         *pspec,
-						     PlannerGanttRow         *row);
-static void      gantt_row_ensure_layout            (PlannerGanttRow         *row);
-static void      gantt_row_update_resources         (PlannerGanttRow         *row);
-static void      gantt_row_geometry_changed         (PlannerGanttRow         *row);
-static void      gantt_row_connect_all_resources    (MrpTask            *task,
-						     PlannerGanttRow         *row);
-static void      gantt_row_disconnect_all_resources (MrpTask          *task,
-						     PlannerGanttRow       *row);
-static gboolean  gantt_row_canvas_scroll            (GtkWidget        *widget,
-						     gint              delta_x,
-						     gint    	       delta_y);
-static gint      gantt_row_get_resource_index_at    (PlannerGanttRow       *row,
-						     gint              x);
-static gboolean  gantt_row_get_resource_by_index    (PlannerGanttRow       *row,
-						     gint              index,
-						     gint             *x1,
-						     gint             *x2);
 
 
 static GnomeCanvasItemClass *parent_class;
@@ -606,9 +610,8 @@ gantt_row_ensure_layout (PlannerGanttRow *row)
 	if (row->priv->layout == NULL) {
 		row->priv->layout = gtk_widget_create_pango_layout (
 			GTK_WIDGET (GNOME_CANVAS_ITEM (row)->canvas), NULL);
-
-		gantt_row_update_resources (row);
 	}
+	gantt_row_update_resources (row);
 }
 
 static void
@@ -646,29 +649,39 @@ gantt_row_update_resources (PlannerGanttRow *row)
 
 		assignment = mrp_task_get_assignment (task, resource);
 		units = mrp_assignment_get_units (assignment);
-		
-		g_object_get (resource, "name", &name, NULL);
 
+		/* Try short name first. */
+		g_object_get (resource, 
+			      "short_name", &name, 
+			      NULL);
+		
 		if (name && name[0] == 0) {
 			g_free (name);
-			name = NULL;
+			
+			g_object_get (resource, 
+				      "name", &name, 
+				      NULL);
+			
+			if (name && name[0] == 0) {
+				g_free (name);
+				
+				name = g_strdup (_("Unnamed"));
+			}
 		}
 		
 		g_array_append_val (priv->resource_widths, x);
 
 		if (units != 100) {
-			name_unit = g_strdup_printf ("%s [%i]", name ? name : _("Unnamed"), units);
+			name_unit = g_strdup_printf ("%s [%i]", name, units);
 		} else {
-			name_unit = g_strdup_printf ("%s", name ? name : _("Unnamed"));
+			name_unit = g_strdup_printf ("%s", name);
 		}
-
-		g_free (name);
 
 		pango_layout_set_text (priv->layout, name_unit, -1);
 		pango_layout_get_extents (priv->layout, NULL, &rect);
 		x += rect.width / PANGO_SCALE;
 		g_array_append_val (priv->resource_widths, x);
-
+		
 		x += spacing;
 			
 		if (text == NULL) { /* First resource */
@@ -679,8 +692,10 @@ gantt_row_update_resources (PlannerGanttRow *row)
 		
 		tmp_str = g_strdup_printf ("%s, %s", text, name_unit);
 		
+		g_free (name);	
 		g_free (text);
 		g_free (name_unit);
+
 		text = tmp_str;
 	}
 
@@ -1382,6 +1397,10 @@ gantt_row_assignment_added (MrpTask       *task,
 				 G_CALLBACK (gantt_row_resource_name_changed),
 				 row, 0);
 
+	g_signal_connect_object (resource, "notify::short-name",
+				 G_CALLBACK (gantt_row_resource_short_name_changed),
+				 row, 0);
+
 	g_signal_connect_object (assignment, "notify::units",
 				 G_CALLBACK (gantt_row_assignment_units_changed),
 				 row, 0);
@@ -1402,6 +1421,10 @@ gantt_row_assignment_removed (MrpTask       *task,
 					      gantt_row_resource_name_changed,
 					      row);
 	
+	g_signal_handlers_disconnect_by_func (resource, 
+					      gantt_row_resource_short_name_changed,
+					      row);
+					      
 	g_signal_handlers_disconnect_by_func (assignment, 
 					      gantt_row_assignment_units_changed,
 					      row);
@@ -1410,10 +1433,19 @@ gantt_row_assignment_removed (MrpTask       *task,
 }
 
 static void
-gantt_row_resource_name_changed (MrpResource *resource,
-				 GParamSpec  *pspec,
-				 PlannerGanttRow  *row)
+gantt_row_resource_name_changed (MrpResource     *resource,
+				 GParamSpec      *pspec,
+				 PlannerGanttRow *row)
 {
+	gantt_row_update_assignment_string (row);
+}
+
+static void
+gantt_row_resource_short_name_changed (MrpResource     *resource,
+				       GParamSpec      *pspec,
+				       PlannerGanttRow *row)
+{
+	g_print ("koko %p\n", row);
 	gantt_row_update_assignment_string (row);
 }
 
@@ -1511,6 +1543,11 @@ gantt_row_connect_all_resources (MrpTask *task, PlannerGanttRow *row)
 		g_signal_connect_object (resource, "notify::name",
 					 G_CALLBACK (gantt_row_resource_name_changed),
 					 row, 0);
+
+		g_signal_connect_object (resource, "notify::short-name",
+					 G_CALLBACK (gantt_row_resource_short_name_changed),
+					 row, 0);
+					 
 	}
 
 	g_list_free (resources);
@@ -1529,6 +1566,10 @@ gantt_row_disconnect_all_resources (MrpTask *task, PlannerGanttRow *row)
 		
 		g_signal_handlers_disconnect_by_func (resource,
 						      gantt_row_resource_name_changed,
+						      row);
+						      
+		g_signal_handlers_disconnect_by_func (resource,
+						      gantt_row_resource_short_name_changed,
 						      row);
 	}
 
@@ -1794,7 +1835,7 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 				if (cursor) {
 					gdk_cursor_unref (cursor);
 				}
-			} else { /* Mouse over resource names? */
+			} else { /* Mouse over resource names (or short_name) ? */
  				gint res_index;
 
 				res_index = gantt_row_get_resource_index_at (row,

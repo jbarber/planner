@@ -34,6 +34,7 @@
 
 struct _MrpResourcePriv {
 	gchar           *name;
+	gchar		*short_name;
         MrpGroup        *group;
         MrpResourceType  type;
         gint             units;
@@ -48,6 +49,7 @@ struct _MrpResourcePriv {
 enum {
         PROP_0,
         PROP_NAME,
+	PROP_SHORT_NAME,
         PROP_GROUP,
         PROP_TYPE,
         PROP_UNITS,
@@ -136,6 +138,13 @@ resource_class_init (MrpResourceClass *klass)
                                                               NULL,
                                                               G_PARAM_READWRITE));
         g_object_class_install_property (object_class,
+                                         PROP_SHORT_NAME,
+                                         g_param_spec_string ("short_name",
+                                                              "Short name",
+                                                              "The shorter name, initials or nickname of the resource",
+                                                              NULL,
+                                                              G_PARAM_READWRITE));
+        g_object_class_install_property (object_class,
                                          PROP_GROUP,
                                          g_param_spec_object ("group",
 							      "Group",
@@ -215,6 +224,7 @@ resource_init (MrpResource *resource)
 	priv->assignments = NULL;
 	priv->type        = MRP_RESOURCE_TYPE_NONE;
         priv->name        = g_strdup ("");
+	priv->short_name    = g_strdup ("");
 	priv->group       = NULL;
 	priv->email       = g_strdup ("");
 	priv->note        = g_strdup ("");   
@@ -230,6 +240,7 @@ resource_finalize (GObject *object)
         priv = resource->priv;
 
         g_free (priv->name);
+	g_free (priv->short_name);
         g_free (priv->email);
         g_free (priv->note);
 	if (priv->group) {
@@ -273,6 +284,16 @@ resource_set_property (GObject      *object,
 			changed = TRUE;
 		}
 		break;
+		
+	case PROP_SHORT_NAME: 
+		str = g_value_get_string (value);
+		if (!priv->short_name || strcmp (priv->short_name, str)) {
+			g_free (priv->short_name);
+			priv->short_name = g_strdup (str);
+			changed = TRUE;
+		}
+		break;
+
 	case PROP_GROUP:
 		if (priv->group != NULL) {
 			g_object_unref (priv->group);
@@ -374,6 +395,9 @@ resource_get_property (GObject    *object,
 	switch (prop_id) {
 	case PROP_NAME:
 		g_value_set_string (value, priv->name);
+		break;
+	case PROP_SHORT_NAME:
+		g_value_set_string (value, priv->short_name);
 		break;
 	case PROP_GROUP:
 		g_value_set_object (value, priv->group);

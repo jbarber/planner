@@ -551,6 +551,9 @@ mpp_write_task_cb (MrpTask *task, MrpParser *parser)
 			mpp_write_predecessor (parser, node, l->data);
 		}
 	}
+
+	g_free (name);
+	g_free (note);
 	
 	return FALSE;
 }
@@ -586,7 +589,7 @@ mpp_write_group (MrpParser *parser, xmlNodePtr parent, MrpGroup *group)
 	
 	mpp_xml_set_int (node, "id", entry->id);
 	
-	g_object_get (G_OBJECT (group),
+	g_object_get (group,
 		      "name", &name,
 		      "manager-name", &admin_name,
 		      "manager-phone", &admin_phone,
@@ -596,7 +599,12 @@ mpp_write_group (MrpParser *parser, xmlNodePtr parent, MrpGroup *group)
 	xmlSetProp (node, "name", name);	
 	xmlSetProp (node, "admin-name", admin_name);	
 	xmlSetProp (node, "admin-phone", admin_phone);	
-	xmlSetProp (node, "admin-email", admin_email);	
+	xmlSetProp (node, "admin-email", admin_email);
+
+	g_free (name);
+	g_free (admin_name);
+	g_free (admin_phone);
+	g_free (admin_email);
 }
 
 static void
@@ -616,7 +624,7 @@ mpp_write_resource (MrpParser   *parser,
 		    MrpResource *resource)
 {
 	xmlNodePtr   node;
-	gchar       *name, *email;
+	gchar       *name, *short_name, *email;
 	gchar       *note;
 	gint         type, units;
 	gfloat       std_rate; /*, ovt_rate;*/
@@ -635,6 +643,7 @@ mpp_write_resource (MrpParser   *parser,
 
 	mrp_object_get (MRP_OBJECT (resource),
 			"name", &name,
+			"short_name", &short_name,
 			"email", &email,
 			"type", &type,
 			"units", &units,
@@ -656,6 +665,7 @@ mpp_write_resource (MrpParser   *parser,
 	mpp_xml_set_int (node, "id", resource_entry->id);
 	
 	xmlSetProp (node, "name", name);
+	xmlSetProp (node, "short-name", short_name);
 	
 	mpp_xml_set_int (node, "type", type);
 	
@@ -678,6 +688,11 @@ mpp_write_resource (MrpParser   *parser,
 	}
 
 	mpp_write_custom_properties (parser, node, MRP_OBJECT (resource));
+
+	g_free (name);
+	g_free (short_name);
+	g_free (email);
+	g_free (note);
 }
 
 static void
@@ -699,7 +714,7 @@ mpp_write_assignment (MrpParser     *parser,
 			    "allocation",
 			    NULL);
 
-	g_object_get (G_OBJECT (assignment),
+	g_object_get (assignment,
 		      "task", &task,
 		      "resource", &resource,
 		      "units", &assigned_units,

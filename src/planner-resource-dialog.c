@@ -51,6 +51,7 @@ typedef struct {
 	MrpResource   *resource;
 	GtkWidget     *dialog;
 	GtkWidget     *name_entry;
+	GtkWidget     *short_name_entry;
 	GtkWidget     *type_menu;
 	GtkWidget     *email_entry;
 	GtkWidget     *group_menu;
@@ -83,6 +84,11 @@ enum {
 static void  resource_dialog_name_changed_cb              (GtkWidget    *w,
 							   DialogData   *data);
 static void  resource_dialog_resource_name_changed_cb     (MrpResource  *resource,  
+							   GParamSpec   *pspec, 
+							   GtkWidget    *dialog);
+static void  resource_dialog_short_name_changed_cb          (GtkWidget    *w,
+							   DialogData   *data);
+static void  resource_dialog_resource_short_name_changed_cb (MrpResource  *resource,  
 							   GParamSpec   *pspec, 
 							   GtkWidget    *dialog);
 static void  resource_dialog_type_changed_cb              (GtkWidget    *w,
@@ -317,6 +323,12 @@ resource_dialog_connect_to_resource (DialogData *data)
 				 0);
 
 	g_signal_connect_object (resource,
+				 "notify::short-name",
+				 G_CALLBACK (resource_dialog_resource_short_name_changed_cb),
+				 data->dialog,
+				 0);
+
+	g_signal_connect_object (resource,
 				 "notify::type",
 				 G_CALLBACK (resource_dialog_resource_type_changed_cb),
 				 data->dialog,
@@ -402,6 +414,52 @@ resource_dialog_name_changed_cb (GtkWidget  *w,
 	g_signal_handlers_unblock_by_func (data->resource,
 					   resource_dialog_resource_name_changed_cb,
 					   data);
+}
+
+static void  
+resource_dialog_short_name_changed_cb (GtkWidget  *w,
+				  DialogData *data) 
+{
+	const gchar *short_name;
+
+	short_name = gtk_entry_get_text (GTK_ENTRY (w));
+
+	g_signal_handlers_block_by_func (data->resource,
+					 resource_dialog_resource_short_name_changed_cb, 
+					 data);
+
+	g_object_set (data->resource, "short_name", short_name, NULL);
+
+	g_signal_handlers_unblock_by_func (data->resource,
+					   resource_dialog_resource_short_name_changed_cb, 
+					   data);
+}
+
+static void  
+resource_dialog_resource_short_name_changed_cb (MrpResource *resource,  
+					   GParamSpec  *pspec, 
+					   GtkWidget   *dialog)
+{
+	DialogData *data;
+	gchar      *short_name;
+   
+	g_return_if_fail (MRP_IS_RESOURCE (resource));
+
+	data = DIALOG_GET_DATA (dialog);
+	
+	g_object_get (data->resource, "short_name", &short_name, NULL);
+
+	g_signal_handlers_block_by_func (data->short_name_entry, 
+					 resource_dialog_short_name_changed_cb, 
+					 dialog);
+
+	gtk_entry_set_text (GTK_ENTRY (data->short_name_entry), short_name);
+
+	g_signal_handlers_unblock_by_func (data->short_name_entry, 
+					   resource_dialog_short_name_changed_cb,
+					   dialog);
+
+	g_free (short_name);
 }
 
 static void  
@@ -983,7 +1041,7 @@ planner_resource_dialog_new (PlannerWindow *window,
 	GtkWidget       *dialog;
 	GtkWidget       *w;
 	DialogData      *data;
-	gchar           *name, *email;
+	gchar           *name, *short_name, *email;
 	MrpProject      *project;	
 	MrpGroup        *group;
 	MrpResourceType  type;
@@ -1037,6 +1095,7 @@ planner_resource_dialog_new (PlannerWindow *window,
 				 0);
 
 	data->name_entry = glade_xml_get_widget (glade, "entry_name");
+	data->short_name_entry = glade_xml_get_widget (glade, "entry_short_name");
 	data->type_menu = glade_xml_get_widget (glade, "menu_type");
 	data->group_menu = glade_xml_get_widget (glade, "menu_group");
 	data->email_entry = glade_xml_get_widget (glade, "entry_email");
@@ -1083,6 +1142,7 @@ planner_resource_dialog_new (PlannerWindow *window,
 	
 	mrp_object_get (MRP_OBJECT (resource),
 			"name",  &name,
+			"short_name",  &short_name,
 			"type",  &type,
 			"group", &group,
 			"email", &email,
@@ -1095,6 +1155,13 @@ planner_resource_dialog_new (PlannerWindow *window,
 			  G_CALLBACK (resource_dialog_name_changed_cb),
 			  data);
 
+	gtk_entry_set_text (GTK_ENTRY (data->short_name_entry), short_name);
+
+	g_signal_connect (data->short_name_entry,
+			  "changed",
+			  G_CALLBACK (resource_dialog_short_name_changed_cb),
+			  data);
+			  
 	resource_dialog_setup_option_menu (data->type_menu,
 					   NULL,
 					   NULL,
@@ -1153,6 +1220,7 @@ planner_resource_dialog_new (PlannerWindow *window,
 			  data);
 
 	g_free (name);
+	g_free (short_name);
 	g_free (email);
 
 	resource_dialog_connect_to_resource (data);

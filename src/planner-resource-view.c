@@ -111,6 +111,10 @@ static void    resource_view_cell_name_edited         (GtkCellRendererText *cell
 						       gchar               *path_string,
 						       gchar               *new_text,
 						       gpointer             user_data);
+static void    resource_view_cell_short_name_edited   (GtkCellRendererText *cell,
+						       gchar               *path_string,
+						       gchar               *new_text,
+						       gpointer             user_data);
 static void    resource_view_cell_email_edited        (GtkCellRendererText *cell,
 						       gchar               *path_string,
 						       gchar               *new_text,
@@ -163,6 +167,11 @@ static void    resource_view_property_removed        (MrpProject           *proj
 						      PlannerView          *view);
 
 static void    resource_view_name_data_func          (GtkTreeViewColumn    *tree_column,
+						      GtkCellRenderer      *cell,
+						      GtkTreeModel         *tree_model,
+						      GtkTreeIter          *iter,
+						      gpointer              data);
+static void    resource_view_short_name_data_func       (GtkTreeViewColumn   *tree_column,
 						      GtkCellRenderer      *cell,
 						      GtkTreeModel         *tree_model,
 						      GtkTreeIter          *iter,
@@ -1173,6 +1182,27 @@ resource_view_setup_tree_view (PlannerView *view)
 
 	gtk_tree_view_append_column (tree_view, col);
 
+	/* short_name */
+	cell = gtk_cell_renderer_text_new ();
+	g_object_set (cell, "editable", TRUE, NULL);
+
+	col = gtk_tree_view_column_new_with_attributes (_("Short name"), cell, NULL);
+	gtk_tree_view_column_set_resizable (col, TRUE);
+	/* gtk_tree_view_column_set_min_width (col, 150); */
+	
+	gtk_tree_view_column_set_cell_data_func (col, cell, 
+						 resource_view_short_name_data_func,
+						 NULL, NULL);
+	g_object_set_data (G_OBJECT (col),
+			   "data-func", resource_view_short_name_data_func);
+	
+	gtk_tree_view_append_column (tree_view, col);
+	
+	g_signal_connect (cell,
+			  "edited",
+			  G_CALLBACK (resource_view_cell_short_name_edited),
+			  view);
+
 	/* Type */
 	cell = planner_cell_renderer_list_new ();
 	g_object_set (cell, "editable", TRUE, NULL);
@@ -1416,6 +1446,43 @@ resource_view_cell_name_edited (GtkCellRendererText *cell,
 
 	gtk_tree_path_free (path);
 }
+
+static void
+resource_view_cell_short_name_edited (GtkCellRendererText *cell,
+				 gchar               *path_string,
+				 gchar               *new_text,
+				 gpointer             user_data)
+{
+	PlannerView      *view;
+	PlannerCmd       *cmd;
+	MrpResource      *resource;
+	GtkTreeView      *tree_view;
+	GtkTreeModel     *model;
+	GtkTreePath      *path;
+	GtkTreeIter       iter;
+	GValue            value = { 0 };
+	
+	g_return_if_fail (PLANNER_IS_VIEW (user_data));
+	view = PLANNER_VIEW (user_data);
+	
+	tree_view = view->priv->tree_view;
+	
+	model = gtk_tree_view_get_model (tree_view);
+
+	path = gtk_tree_path_new_from_string (path_string);
+	
+	gtk_tree_model_get_iter (model, &iter, path);
+
+	gtk_tree_model_get (model, &iter, COL_RESOURCE, &resource, -1);
+	
+	g_value_init (&value, G_TYPE_STRING);
+	g_value_set_string (&value, new_text);
+	cmd = resource_cmd_edit_property (view, resource, "short_name", &value);
+	g_value_unset (&value);
+
+	gtk_tree_path_free (path);
+}
+
 
 static void
 resource_view_cell_email_edited (GtkCellRendererText *cell,
@@ -1980,6 +2047,24 @@ resource_view_group_data_func (GtkTreeViewColumn    *tree_column,
 	g_object_set (cell, "text", name, NULL);
 	
 	g_free (name);
+}
+
+static void
+resource_view_short_name_data_func (GtkTreeViewColumn    *tree_column,
+			       GtkCellRenderer      *cell,
+			       GtkTreeModel         *tree_model,
+			       GtkTreeIter          *iter,
+			       gpointer              data)
+{
+	MrpResource *resource;
+	gchar       *short_name;
+	
+	gtk_tree_model_get (tree_model, iter, COL_RESOURCE, &resource, -1);
+
+	g_object_get (resource, "short_name", &short_name, NULL);
+	
+	g_object_set (cell, "text", short_name, NULL);
+	g_free (short_name);
 }
 
 static void

@@ -1,5 +1,10 @@
 2004-03-15  Richard Hult  <richard@imendio.com>
 
+	* Add short name for resources. Fixes bug #132345, based on patch
+	from Lincoln Phipps. Also fix a few memory leaks while at it.
+	
+2004-03-15  Richard Hult  <richard@imendio.com>
+
 	* src/planner-gantt-print.c (planner_gantt_print_data_new): Patch
 	from Heath Wilkinson to fix bug #137204.
 

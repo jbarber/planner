@@ -1585,6 +1585,7 @@ sql_read_resources (SQLData *data)
 	gint          calendar_id;
 	gchar        *name;
 	gchar        *email;
+	gchar	     *short_name;
 	gchar        *note;
 	MrpGroup     *group;
 	MrpCalendar  *calendar;
@@ -1611,17 +1612,22 @@ sql_read_resources (SQLData *data)
 	}
 	
 	n = gda_data_model_get_n_columns (res);
+	
 	for (i = 0; i < gda_data_model_get_n_rows (res); i++) {
 		resource_id = -1;
 		group_id = -1;
 		calendar_id = -1;
 		name = NULL;
+		short_name = NULL;  /* Added in schema 0.7 */
 		email = NULL;
 		note = NULL;
 		
 		for (j = 0; j < n; j++) {
 			if (is_field (res, j, "name")) {
 				name = get_string (res, i, j);
+			}
+			else if (is_field (res, j, "short_name")) {
+				short_name = get_string (res, i, j);
 			}
 			else if (is_field (res, j, "group_id")) {
 				group_id = get_id (res, i, j);
@@ -1643,8 +1649,14 @@ sql_read_resources (SQLData *data)
 		group = g_hash_table_lookup (data->group_id_hash, GINT_TO_POINTER (group_id));
 		calendar = g_hash_table_lookup (data->calendar_id_hash, GINT_TO_POINTER (calendar_id));
 
+		/* Warning: Always check for NULL data on strings here for any new schema variables 
+		*  because if you don't and someone opens an OLD database then it will segfault 
+		*  in resource-set-property. Use short_name as an example.
+		*/
+		
 		resource = g_object_new (MRP_TYPE_RESOURCE,
 					 "name", name,
+					 "short_name", (short_name ? short_name : ""),
 					 "email", email,
 					 "note", note,
 					 "group", group,
@@ -1652,6 +1664,7 @@ sql_read_resources (SQLData *data)
 					 NULL);
 
 		g_free (name);
+		g_free (short_name);
 		g_free (email);
 		g_free (note);
 		
@@ -2163,11 +2176,12 @@ mrp_sql_load_project (MrpStorageSQL *storage,
 	GdaDataModel   *res = NULL;
 	GdaClient      *client;
 	gchar          *str;
-	gchar          *dsn_name;
+	const gchar    *dsn_name = "planner-auto";
 	gchar          *db_txt;
 	MrpCalendar    *calendar;
 	MrpGroup       *group;
 	MrpTaskManager *task_manager;
+	const gchar    *provider = "PostgreSQL";
 
 	data = g_new0 (SQLData, 1);
 
@@ -2188,9 +2202,9 @@ mrp_sql_load_project (MrpStorageSQL *storage,
 
 	db_txt = g_strdup_printf ("DATABASE=%s",database);
 	gda_config_save_data_source (dsn_name, 
-                                     "PostgreSQL", 
+                                     provider, 
                                      db_txt,
-                                     "planner test", login, password);
+                                     "planner project", login, password);
 	g_free (db_txt);
 
 	client = gda_client_new ();
@@ -3245,7 +3259,7 @@ sql_write_resources (SQLData *data)
 	gchar           *query;
 	
 	GList           *resources, *l;
-	gchar           *name, *email, *note;	       
+	gchar           *name, *short_name, *email, *note;	       
 	MrpResource     *resource;
 	MrpCalendar     *calendar;
 	MrpGroup        *group;
@@ -3264,6 +3278,7 @@ sql_write_resources (SQLData *data)
 
 		g_object_get (resource,
 			      "name", &name,
+			      "short_name", &short_name,
 			      "email", &email,
 			      "note", &note,
 			      "units", &units,
@@ -3290,11 +3305,11 @@ sql_write_resources (SQLData *data)
 		}
 
 		query = g_strdup_printf ("INSERT INTO resource(proj_id, group_id, name, "
-					 "email, note, is_worker, units, cal_id) "
+					 "short_name, email, note, is_worker, units, cal_id) "
 					 "VALUES(%d, %s, '%s', "
-					 "'%s', '%s', %s, %g, %s)",
+					 "'%s', '%s', '%s', %s, %g, %s)",
 					 data->project_id, group_id_string, name,
-					 email, note, is_worker, (double) units,
+					 short_name, email, note, is_worker, (double) units,
 					 cal_id_string);
 		res = sql_execute_query (data->con, query); 
 		g_free (query);
@@ -3302,6 +3317,7 @@ sql_write_resources (SQLData *data)
 		g_free (group_id_string);
 		g_free (note);
 		g_free (email);
+		g_free (short_name);
 
 		if (res == NULL) {
 			g_warning ("INSERT command failed (resource) %s.",
@@ -3601,10 +3617,11 @@ mrp_sql_save_project (MrpStorageSQL  *storage,
 	gchar        *pgoptions = NULL;
 	gchar        *pgtty = NULL;
 	gchar        *db_txt = NULL;
-	gchar        *dsn_name = "planner-auto";
+	const gchar  *dsn_name = "planner-auto";
 	GdaDataModel *res = NULL;
 	GdaClient    *client;
 	gboolean      ret = FALSE;
+	const gchar  *provider = "PostgreSQL";
 
 	data = g_new0 (SQLData, 1);
 	data->project_id = *project_id;
@@ -3625,9 +3642,9 @@ mrp_sql_save_project (MrpStorageSQL  *storage,
 
 	db_txt = g_strdup_printf ("DATABASE=%s",db);
 	gda_config_save_data_source (dsn_name, 
-                                     "PostgreSQL",
+                                     provider,
 				     db_txt,
-                                     "planner test", user, password);
+                                     "planner project", user, password);
 	g_free (db_txt);
 
 	client = gda_client_new ();

@@ -182,6 +182,8 @@ TH.res-hdr { }
   margin-left: 10px;
 }
 
+TD.res-short-name { }
+
 TD.res-type { }
 
 TD.res-email { }
