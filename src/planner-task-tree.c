@@ -1606,6 +1606,8 @@ task_tree_add_column (GtkTreeView *tree,
 							 tree, NULL);
 		g_object_set_data (G_OBJECT (col),
 				   "data-func", task_tree_name_data_func);
+		g_object_set_data (G_OBJECT (col),
+				   "user-data", tree);
 		
 		gtk_tree_view_column_set_resizable (col, TRUE);
 		gtk_tree_view_column_set_min_width (col, 100);
@@ -1634,6 +1636,8 @@ task_tree_add_column (GtkTreeView *tree,
 							 tree, NULL);
 		g_object_set_data (G_OBJECT (col),
 				   "data-func", task_tree_start_data_func);
+		g_object_set_data (G_OBJECT (col),
+				   "user-data", tree);
 		
 		gtk_tree_view_append_column (tree, col);
 		break;
@@ -1651,6 +1655,8 @@ task_tree_add_column (GtkTreeView *tree,
 							 NULL);
 		g_object_set_data (G_OBJECT (col),
 				   "data-func", task_tree_duration_data_func);
+		g_object_set_data (G_OBJECT (col),
+				   "user-data", tree);
 		g_signal_connect (cell,
 				  "edited",
 				  G_CALLBACK (task_tree_duration_edited),
@@ -1724,6 +1730,9 @@ task_tree_add_column (GtkTreeView *tree,
 							 tree, NULL);
 		g_object_set_data (G_OBJECT (col),
 				   "data-func", task_tree_finish_data_func);
+		g_object_set_data (G_OBJECT (col),
+				   "user-data", tree);
+
 		gtk_tree_view_append_column (tree, col);
 		break;
 
@@ -1740,6 +1749,9 @@ task_tree_add_column (GtkTreeView *tree,
 							 NULL);
 		g_object_set_data (G_OBJECT (col),
 				   "data-func", task_tree_cost_data_func);
+		g_object_set_data (G_OBJECT (col),
+				   "user-data", tree);
+
 		gtk_tree_view_append_column (tree, col);
 		break;
 

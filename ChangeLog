@@ -1,5 +1,10 @@
 2003-12-16  Richard Hult  <richard@imendio.com>
 
+	* src/planner-task-tree.c:
+	(task_tree_add_column): Set userdata. Fixes printing.
+
+2003-12-16  Richard Hult  <richard@imendio.com>
+
 	* src/planner-window.c: 
 	* src/planner-project-properties.c:
 	* src/planner-task-tree.c:
