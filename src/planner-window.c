@@ -1289,10 +1289,12 @@ window_drag_data_received_cb (GtkWidget        *widget,
 static void
 window_undo_state_changed_cb (PlannerCmdManager *manager,
 			      gboolean           state,
-			      const gchar       *label,
+			      const gchar       *str,
 			      PlannerWindow     *window)
 {
 	PlannerWindowPriv *priv;
+	GtkWidget         *widget;
+	GtkWidget         *label;
 
 	priv = window->priv;
 
@@ -1300,20 +1302,24 @@ window_undo_state_changed_cb (PlannerCmdManager *manager,
 		      "sensitive", state,
 		      NULL);
 	g_object_set (gtk_action_group_get_action (priv->actions, "EditUndo"),
-		      "tooltip", label,
+		      "tooltip", str,
 		      NULL);
-	g_object_set (gtk_action_group_get_action (priv->actions, "EditUndo"),
-		      "label", label,
-		      NULL);
+
+	widget = gtk_ui_manager_get_widget (priv->ui_manager,
+					    "/MenuBar/Edit/EditUndo");
+	label = gtk_bin_get_child (GTK_BIN (widget));
+	gtk_label_set_text (GTK_LABEL (label), str);
 }
 
 static void
 window_redo_state_changed_cb (PlannerCmdManager *manager,
 			      gboolean           state,
-			      const gchar       *label,
+			      const gchar       *str,
 			      PlannerWindow     *window)
 {
 	PlannerWindowPriv *priv;
+	GtkWidget         *widget;
+	GtkWidget         *label;
 	
 	priv = window->priv;
 	
@@ -1321,11 +1327,13 @@ window_redo_state_changed_cb (PlannerCmdManager *manager,
 		      "sensitive", state,
 		      NULL);
 	g_object_set (gtk_action_group_get_action (priv->actions, "EditRedo"),
-		      "tooltip", label,
+		      "tooltip", str,
 		      NULL);
-	g_object_set (gtk_action_group_get_action (priv->actions, "EditRedo"),
-		      "label", label,
-		      NULL);
+
+	widget = gtk_ui_manager_get_widget (priv->ui_manager,
+					    "/MenuBar/Edit/EditRedo");
+	label = gtk_bin_get_child (GTK_BIN (widget));
+	gtk_label_set_text (GTK_LABEL (label), str);
 }
 
 static void

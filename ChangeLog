@@ -1,3 +1,9 @@
+2005-03-02  Richard Hult  <richard@imendio.com>
+
+	* src/planner-window.c (window_redo_state_changed_cb)
+	(window_undo_state_changed_cb): Don't set the full uno/redo label
+	on the toolbar buttons.
+
 2005-02-27 Alvaro del Castillo  <acs@barrapunto.com>
 
 	* libplanner/mrp-sql.c:
