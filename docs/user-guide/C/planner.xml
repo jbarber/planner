@@ -3,8 +3,8 @@
 "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
   <!ENTITY legal SYSTEM "legal.xml">
   <!ENTITY appversion "0.13">
-  <!ENTITY manrevision "0.13-1">
-  <!ENTITY date "10 Feb 2005">
+  <!ENTITY manrevision "0.13">
+  <!ENTITY date "4 Mar 2005">
   <!ENTITY app "Planner">
   <!ENTITY cmd "planner">
   <!-- Information about the entities
@@ -407,7 +407,8 @@
 	<listitem> 
 	  <para><emphasis>Blue</emphasis> has a slightly different meaning
 	    depending on its context.  On the task line, it shows that the 
-	    resource is either partially or fully allocated to the task, but on
+	    resource is either partially or fully allocated to the task (with
+	    the allocation percentage displayed next to it), but on
 	    the resource summary line, it shows that the resource is fully 
 	    allocated at that time.</para>
   	</listitem> 
@@ -551,6 +552,10 @@
 	</listitem> 
 	<listitem> 
 	  <para> 
+	    <xref linkend="mrp-import-export"/></para> 
+	</listitem> 
+	<listitem> 
+	  <para> 
 	    <xref linkend="mrp-undo-redo"/></para> 
 	</listitem> 
 	<listitem> 
@@ -585,10 +590,15 @@
 	<menuchoice> 
 	  <guimenu>File</guimenu> 
 	  <guimenuitem>Open</guimenuitem> 
-	</menuchoice>. The <guilabel>Open File</guilabel> dialog is displayed. 
+	</menuchoice>, or the <guibutton>Open</guibutton> button on the toolbar.
+	The <guilabel>Open File</guilabel> dialog is displayed. 
 	Select the &app; file that you want to open, then click 
 	<guibutton>OK</guibutton>. &app; files are stored with the extension 
 	<filename>.&cmd;</filename>.
+      </para>
+      <para>
+	You can also open a file by selecting it from your file browser or 
+	desktop and dragging it into an open &app; window.
       </para>
       <para>To save a project, choose
 	<menuchoice> 
@@ -651,6 +661,79 @@
       <para>If the database you're saving your file to doesn't exist, &app; will
 	offer you the option to automatically create it.
       </para>
+    </sect2> 
+    <sect2 id="mrp-import-export" xreflabel="Import and Export"> 
+      <title>Import and Export</title> 
+      <para>Planner supports importing and exporting files in various formats.
+      </para>
+      <sect3 id="mrp-import-msxml" xreflabel="Export to HTML">
+        <title>Import Microsoft Project XML</title>
+        <para>The MS Project XML import is new and considered experimental at
+	  this time.  Microsoft Project version 2002 and above supports saving
+	  project files in XML format. Look for it in the MS Project
+	  <guilabel>Save As</guilabel> dialog.  To use this import feature
+	  you must first save your MS Project file in xml format as it will not
+	  work with the native .mpp files.
+	</para>
+	<para>
+	  To import the file, choose 
+	  <menuchoice> 
+	    <guimenu>File</guimenu> 
+	    <guimenuitem>Import</guimenuitem> 
+	    <guimenuitem>MS Project XML</guimenuitem> 
+	  </menuchoice>.
+	  Simply choose the file you'd like to import in the 
+	  <guilabel>Import a File</guilabel> dialog.
+	</para>
+	<para>
+	  Please be aware of the following limitations of the import:
+	  <itemizedlist>
+	  <listitem><para><emphasis>Properties</emphasis> - MS Project does
+	  not save this into to the xml file</para></listitem>
+	  <listitem><para><emphasis>Calendars</emphasis> - not imported
+	  due to differences in the way the two tools store the data</para>
+	  </listitem>
+	  <listitem><para><emphasis>Resource Groups</emphasis> - not imported
+	  due to differences in the way the two tools store the data</para>
+	  </listitem>
+	  </itemizedlist>
+	</para>
+      </sect3>
+      <sect3 id="mrp-export-html" xreflabel="Export to HTML">
+        <title>Export to HTML</title>
+        <para>The Export to HTML function creates a view of your project in 
+	  HTML format that you can publish on a web site, or email to 
+	  stakeholders who don't have access to &app;.  Included in the HTML 
+	  document, is a simplified Gantt chart, task list (with %complete, 
+	  start, end, work, and resource columns), and a resource allocation 
+	  table. Its an excellent way to give people easy access to 
+	  project status information.
+	</para>
+	<para>
+	  You can create the HTML page by choosing 
+	  <menuchoice> 
+	    <guimenu>File</guimenu> 
+	    <guimenuitem>Export</guimenuitem> 
+	    <guimenuitem>HTML</guimenuitem> 
+	  </menuchoice>.
+<!-- web is disabled in v0.12
+	  The <guilabel>Export to HTML</guilabel> dialog will allow you
+	  to send the output either to a file or directly to a web location.
+-->
+	</para>
+      </sect3>
+      <sect3 id="mrp-export-planner-previous" xreflabel="Export to Previous &app; format">
+        <title>Export to Previous &app; Format</title>
+        <para>
+	  For backward compatibility, &app; supports export to formats from
+	  previous versions.  To use this feature, choose
+	  <menuchoice> 
+	    <guimenu>File</guimenu> 
+	    <guimenuitem>Export</guimenuitem> 
+	    <guimenuitem>&app; 0.11 format</guimenuitem> 
+	  </menuchoice>.
+	</para>
+      </sect3>
     </sect2> 
     <!-- ================ Usage Subsection ================================ -->
     <sect2 id="mrp-undo-redo" xreflabel="Undo/Redo"> 
@@ -1008,6 +1091,13 @@
 	      </para>
 	    </listitem>
 	    <listitem>
+	      <para><guilabel>Schedule</guilabel> - sets a constraint on the
+		task start date,
+		which can either be <guimenuitem>As soon as possible
+		</guimenuitem>, <guimenuitem>No earlier than</guimenuitem>, or
+		<guimenuitem>On a fixed date</guimenuitem></para>
+	    </listitem>
+	    <listitem>
 	      <para><guilabel>Complete</guilabel> - allows tracking of the 
 		amount of work done 
 		for the task, entered as a percent of total work</para>
@@ -1064,12 +1154,6 @@
 		by clicking the <guibutton>Add</guibutton> or 
 		<guibutton>Remove</guibutton> button.
 		</para>
-<!--                <figure>
-                  <title>Add/Remove predecessors dialog</title>
-                  <graphic fileref="figures/task-edit-predecessors-add-remove.png"
-			   format="PNG"></graphic>
-                </figure>
--->
 		<para>
                 When you add a new predecessor you need to choose the task 
 		predecessor, which you can select from the drop down list box. 
@@ -1082,11 +1166,20 @@
 		number of days after the relationship has been satisfied.  For 
 		example, if you enter a lag time of 1 in a Finish to Start 
 		relationship, it means that the current task may begin 1 day 
-		after the predecessor task has completed.
+		after the predecessor task has completed.  
                 <figure>
                   <title>Add predecessors dialog</title>
                   <graphic fileref="figures/task-edit-predecessors-add.png" format="PNG"></graphic>
                 </figure>
+		Lag time can be entered in terms of hours, days, or weeks by 
+		appending an h, d, or w to the unit value you enter.  For
+		example:
+		<itemizedlist>
+		<listitem><para>3h = 3 hours</para></listitem>
+		<listitem><para>2d = 2 days </para></listitem>
+		<listitem><para>4w = 4 weeks </para></listitem>
+		</itemizedlist>
+		Time entered as weeks will be converted to days.
               </para>
             </listitem>
             <listitem>
@@ -1464,29 +1557,6 @@
 	</para>
       </sect3>
 
-      <sect3 id="mrp-export-html" xreflabel="Export to HTML">
-        <title>Export to HTML</title>
-        <para>The Export to HTML function creates a view of your project in 
-	  HTML format that you can publish on a web site, or email to 
-	  stakeholders who don't have access to &app;.  Included in the HTML 
-	  document, is a simplified Gantt chart, task list (with %complete, 
-	  start, end, work, and resources columns), and a resource allocation 
-	  table. Its an excellent way to give people easy access to 
-	  project status information.
-	</para>
-	<para>
-	  You can create the HTML page by choosing 
-	  <menuchoice> 
-	    <guimenu>File</guimenu> 
-	    <guimenuitem>Export</guimenuitem> 
-	    <guimenuitem>HTML</guimenuitem> 
-	  </menuchoice>.
-<!-- web is disabled in v0.12
-	  The <guilabel>Export to HTML</guilabel> dialog will allow you
-	  to send the output either to a file or directly to a web location.
--->
-	</para>
-      </sect3>
     </sect2> 
   </sect1>
 <!-- Customization/Settings not yet implemented...
