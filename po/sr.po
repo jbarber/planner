@@ -1,5 +1,5 @@
 # Serbian translation of planner
-# Courtesy of Prevod.org team (http://prevod.org/) -- 2003, 2004.
+# Courtesy of Prevod.org team (http://prevod.org/) -- 2003, 2004, 2005.
 #
 # This file is distributed under the same license as the planner package.
 #
@@ -9,45 +9,40 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Planner\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-04-13 06:26+0200\n"
-"PO-Revision-Date: 2004-04-13 06:28+0200\n"
-"Last-Translator: Бранко Ивановић <popeye@one.ekof.bg.ac.yu>\n"
+"POT-Creation-Date: 2005-04-02 16:45+0200\n"
+"PO-Revision-Date: 2005-04-02 17:03+0200\n"
+"Last-Translator: Данило Шеган <danilo@gnome.org>\n"
 "Language-Team: Serbian (sr) <gnom@prevod.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3;    plural=n%10==1 && n%100!=11 ? 0 :    n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3;    plural=n%10==1 && n%100!=11 ? 0 :    n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 
-#: data/glade/add-predecessor.glade.h:1 data/glade/calendar-dialog.glade.h:4
-#: data/glade/html-output.glade.h:2 data/glade/new-property.glade.h:1
-#: data/glade/project-properties.glade.h:1
-#: data/glade/resource-dialog.glade.h:1
-#: data/glade/resource-input-dialog.glade.h:1 data/glade/sql.glade.h:1
-#: data/glade/task-dialog.glade.h:4 data/glade/task-input-dialog.glade.h:1
-msgid "*"
-msgstr "*"
-
-#: data/glade/add-predecessor.glade.h:2
+#: ../data/glade/add-predecessor.glade.h:1
 msgid "Add Predecessor"
 msgstr "Додај претходника"
 
-#: data/glade/add-predecessor.glade.h:3
+#: ../data/glade/add-predecessor.glade.h:2
 msgid "_Lag:"
 msgstr "_Кашњење:"
 
-#: data/glade/add-predecessor.glade.h:4 data/glade/calendar-dialog.glade.h:35
-#: data/glade/new-property.glade.h:5 data/glade/project-properties.glade.h:10
-#: data/glade/resource-dialog.glade.h:12
-#: data/glade/resource-input-dialog.glade.h:7
-#: data/glade/task-dialog.glade.h:14 data/glade/task-input-dialog.glade.h:4
+#: ../data/glade/add-predecessor.glade.h:3
+#: ../data/glade/calendar-dialog.glade.h:35
+#: ../data/glade/new-property.glade.h:5
+#: ../data/glade/project-properties.glade.h:9
+#: ../data/glade/resource-dialog.glade.h:12
+#: ../data/glade/resource-input-dialog.glade.h:7
+#: ../data/glade/task-dialog.glade.h:16
+#: ../data/glade/task-input-dialog.glade.h:4
 msgid "_Name:"
 msgstr "_Име:"
 
-#: data/glade/add-predecessor.glade.h:5
+#: ../data/glade/add-predecessor.glade.h:4
 msgid "_Relation type:"
 msgstr "_Врста односа:"
 
-#: data/glade/calendar-dialog.glade.h:1
+#: ../data/glade/calendar-dialog.glade.h:1
 msgid ""
 "\n"
 "The selected day type has the following working hours:"
@@ -55,92 +50,100 @@ msgstr ""
 "\n"
 "Изабрани тип дана има следеће радне сате:"
 
-#: data/glade/calendar-dialog.glade.h:3 data/glade/html-output.glade.h:1
-#: data/glade/task-dialog.glade.h:1
+#: ../data/glade/calendar-dialog.glade.h:3 ../data/glade/html-output.glade.h:1
+#: ../data/glade/task-dialog.glade.h:2
 msgid "    "
 msgstr "    "
 
-#: data/glade/calendar-dialog.glade.h:5
+#: ../data/glade/calendar-dialog.glade.h:4 ../data/glade/eds.glade.h:1
+#: ../data/glade/new-property.glade.h:1
+#: ../data/glade/resource-dialog.glade.h:1
+#: ../data/glade/resource-input-dialog.glade.h:1 ../data/glade/sql.glade.h:1
+#: ../data/glade/task-input-dialog.glade.h:1
+msgid "*"
+msgstr "*"
+
+#: ../data/glade/calendar-dialog.glade.h:5
 msgid "-"
 msgstr "-"
 
-#: data/glade/calendar-dialog.glade.h:6
+#: ../data/glade/calendar-dialog.glade.h:6
 msgid "<b>Calendar:</b>"
 msgstr "<b>Календар:</b>"
 
-#: data/glade/calendar-dialog.glade.h:7
+#: ../data/glade/calendar-dialog.glade.h:7
 msgid "<b>Day types</b>"
 msgstr "<b>Типови дана</b>"
 
-#: data/glade/calendar-dialog.glade.h:8
+#: ../data/glade/calendar-dialog.glade.h:8
 msgid "<b>Working hours</b>"
 msgstr "<b>Радни сати</b>"
 
-#: data/glade/calendar-dialog.glade.h:9
+#: ../data/glade/calendar-dialog.glade.h:9
 msgid "<b>Working time</b>"
 msgstr "<b>Радно време</b>"
 
-#: data/glade/calendar-dialog.glade.h:10
+#: ../data/glade/calendar-dialog.glade.h:10
 msgid "Add Day Type"
 msgstr "Додај врсту дана"
 
-#: data/glade/calendar-dialog.glade.h:11
+#: ../data/glade/calendar-dialog.glade.h:11
 msgid "Apply"
 msgstr "Примени"
 
-#: data/glade/calendar-dialog.glade.h:12
+#: ../data/glade/calendar-dialog.glade.h:12
 msgid "C_opy an existing calendar"
 msgstr "Копирај постојећи календар"
 
-#: data/glade/calendar-dialog.glade.h:13
+#: ../data/glade/calendar-dialog.glade.h:13
 msgid "C_reate"
 msgstr "_Направи"
 
-#: data/glade/calendar-dialog.glade.h:14
+#: ../data/glade/calendar-dialog.glade.h:14
 msgid "Calendar Editor"
 msgstr "Уређивач календара"
 
-#: data/glade/calendar-dialog.glade.h:15
+#: ../data/glade/calendar-dialog.glade.h:15
 msgid "Create an _empty calendar"
 msgstr "Направи _празан календар"
 
-#: data/glade/calendar-dialog.glade.h:16
+#: ../data/glade/calendar-dialog.glade.h:16
 msgid "Custom working time"
 msgstr "Произвољно радно време"
 
-#: data/glade/calendar-dialog.glade.h:17
+#: ../data/glade/calendar-dialog.glade.h:17
 msgid "Day type:"
 msgstr "Врста дана:"
 
-#: data/glade/calendar-dialog.glade.h:18
+#: ../data/glade/calendar-dialog.glade.h:18
 msgid "Default Week"
 msgstr "Подразумевана седмица"
 
-#: data/glade/calendar-dialog.glade.h:19
+#: ../data/glade/calendar-dialog.glade.h:19
 msgid "Default week..."
 msgstr "Подразумевана седмица..."
 
-#: data/glade/calendar-dialog.glade.h:20
+#: ../data/glade/calendar-dialog.glade.h:20
 msgid "Edit Day Types"
 msgstr "Измени типове дана"
 
-#: data/glade/calendar-dialog.glade.h:21
+#: ../data/glade/calendar-dialog.glade.h:21
 msgid "Edit Working Time"
 msgstr "Измени радно време"
 
-#: data/glade/calendar-dialog.glade.h:22
+#: ../data/glade/calendar-dialog.glade.h:22
 msgid "From:"
 msgstr "Од:"
 
-#: data/glade/calendar-dialog.glade.h:23
+#: ../data/glade/calendar-dialog.glade.h:23
 msgid "New Calendar"
 msgstr "Нови календар"
 
-#: data/glade/calendar-dialog.glade.h:24
+#: ../data/glade/calendar-dialog.glade.h:24
 msgid "Select a Calendar"
 msgstr "Изаберите календар"
 
-#: data/glade/calendar-dialog.glade.h:25
+#: ../data/glade/calendar-dialog.glade.h:25
 msgid ""
 "Select a weekday and the day type to use for that day in the default week "
 "for this calendar.\n"
@@ -148,152 +151,181 @@ msgstr ""
 "Изабери дан у недељи и тип дана за тај дан у подразумеваној недељи за овај "
 "календар.\n"
 
-#: data/glade/calendar-dialog.glade.h:27
+#: ../data/glade/calendar-dialog.glade.h:27
 msgid "Set day type to:"
 msgstr "Подеси тип дана на:"
 
-#: data/glade/calendar-dialog.glade.h:28
+#: ../data/glade/calendar-dialog.glade.h:28
 msgid "To:"
 msgstr "За:"
 
-#: data/glade/calendar-dialog.glade.h:29
+#: ../data/glade/calendar-dialog.glade.h:29
 msgid "Use working time from derived calendar"
 msgstr "Користи радно време из насталог календара"
 
-#: data/glade/calendar-dialog.glade.h:30
+#: ../data/glade/calendar-dialog.glade.h:30
 msgid "Week day:"
 msgstr "Дан у недељи:"
 
-#: data/glade/calendar-dialog.glade.h:31
+#: ../data/glade/calendar-dialog.glade.h:31
 msgid "Working time..."
 msgstr "Радно време..."
 
-#: data/glade/calendar-dialog.glade.h:32
+#: ../data/glade/calendar-dialog.glade.h:32
 msgid "_Derive from a calendar"
 msgstr "_Изведи из календара"
 
-#: data/glade/calendar-dialog.glade.h:33
+#: ../data/glade/calendar-dialog.glade.h:33
 msgid "_Existing calendars:"
 msgstr "По_стојећи календари:"
 
-#: data/glade/calendar-dialog.glade.h:34
+#: ../data/glade/calendar-dialog.glade.h:34
 msgid "_Name of the new calendar:"
 msgstr "Назив новог календара:"
 
-#: data/glade/calendar-dialog.glade.h:36
+#: ../data/glade/calendar-dialog.glade.h:36
 msgid "_New..."
 msgstr "_Нови..."
 
-#: data/glade/group-dialog.glade.h:1
+#: ../data/glade/eds.glade.h:2
+msgid "Loading resource data"
+msgstr "Учитавам податке о ресурсима"
+
+#: ../data/glade/eds.glade.h:3
+msgid "Search"
+msgstr "Тражи"
+
+#: ../data/glade/eds.glade.h:4
+msgid "Select All"
+msgstr "Изабери све"
+
+#: ../data/glade/eds.glade.h:5
+msgid "Select group"
+msgstr "Изабери групу"
+
+#: ../data/glade/eds.glade.h:6
+msgid "Unselect All"
+msgstr "Не бирај ништа"
+
+#: ../data/glade/eds.glade.h:7
+msgid "dialog1"
+msgstr "dialog1"
+
+#: ../data/glade/group-dialog.glade.h:1
 msgid "Group Editor"
-msgstr "Уредник за групе"
+msgstr "Уређивач за групе"
 
-#: data/glade/html-output.glade.h:3
-msgid "<b>Save to</b>"
-msgstr "<b>Сачувај у</b>"
+#: ../data/glade/html-output.glade.h:2
+msgid "<b>Save to file</b>"
+msgstr "<b>Сачувај у датотеку</b>"
 
-#: data/glade/html-output.glade.h:4 data/ui/html-plugin.ui.h:1
+#: ../data/glade/html-output.glade.h:3
 msgid "Export to HTML"
 msgstr "Извези у HTML"
 
-#: data/glade/html-output.glade.h:5
+#: ../data/glade/html-output.glade.h:4
 msgid "Local file:"
 msgstr "Локална датотека:"
 
-#: data/glade/html-output.glade.h:6
+#: ../data/glade/html-output.glade.h:5
 msgid "Save to HTML File"
 msgstr "Сачувај у HTML датотеку"
 
-#: data/glade/html-output.glade.h:7
+#: ../data/glade/html-output.glade.h:6
+msgid "View the result in browser"
+msgstr "Погледај резултат у читачу"
+
+#: ../data/glade/html-output.glade.h:7
 msgid "Web location:"
 msgstr "Веб путања:"
 
-#: data/glade/new-property.glade.h:2
+#: ../data/glade/new-property.glade.h:2
 msgid "Add Property"
 msgstr "Додај својство"
 
-#: data/glade/new-property.glade.h:3
+#: ../data/glade/new-property.glade.h:3
 msgid "_Description:"
 msgstr "_Опис:"
 
-#: data/glade/new-property.glade.h:4
+#: ../data/glade/new-property.glade.h:4
 msgid "_Label:"
 msgstr "_Ознака:"
 
-#: data/glade/new-property.glade.h:6 data/glade/resource-dialog.glade.h:14
+#: ../data/glade/new-property.glade.h:6
+#: ../data/glade/resource-dialog.glade.h:14
 msgid "_Type:"
 msgstr "Ти_п:"
 
-#: data/glade/project-properties.glade.h:2
+#: ../data/glade/project-properties.glade.h:1
 msgid "Custom"
 msgstr "Произвољно"
 
-#: data/glade/project-properties.glade.h:3
+#: ../data/glade/project-properties.glade.h:2
 msgid "Edit Project Phases"
 msgstr "Уреди фазе пројекта"
 
-#: data/glade/project-properties.glade.h:4
-#: data/glade/resource-dialog.glade.h:5 data/glade/task-dialog.glade.h:6
+#: ../data/glade/project-properties.glade.h:3
+#: ../data/glade/resource-dialog.glade.h:5 ../data/glade/task-dialog.glade.h:6
 msgid "General"
 msgstr "Опште"
 
-#: data/glade/project-properties.glade.h:5
+#: ../data/glade/project-properties.glade.h:4
 msgid "New Project Phase"
 msgstr "Нова фаза пројекта"
 
-#: data/glade/project-properties.glade.h:6
+#: ../data/glade/project-properties.glade.h:5
 msgid "Project Properties"
 msgstr "Својства пројекта"
 
-#: data/glade/project-properties.glade.h:7
+#: ../data/glade/project-properties.glade.h:6
 msgid "Select..."
 msgstr "Изабери..."
 
-#: data/glade/project-properties.glade.h:8
+#: ../data/glade/project-properties.glade.h:7
 msgid "_Calendar:"
 msgstr "_Календар:"
 
-#: data/glade/project-properties.glade.h:9
+#: ../data/glade/project-properties.glade.h:8
 msgid "_Manager:"
 msgstr "_Руководилац:"
 
-#: data/glade/project-properties.glade.h:11
+#: ../data/glade/project-properties.glade.h:10
 msgid "_Organization:"
 msgstr "_Организација:"
 
-#: data/glade/project-properties.glade.h:12
+#: ../data/glade/project-properties.glade.h:11
 msgid "_Phase:"
 msgstr "_Фаза:"
 
-#: data/glade/project-properties.glade.h:13
+#: ../data/glade/project-properties.glade.h:12
 msgid "_Start:"
 msgstr "_Почетак:"
 
-#: data/glade/property-dialog.glade.h:1
+#: ../data/glade/property-dialog.glade.h:1
 msgid "Custom Properties"
 msgstr "Произвољна својства"
 
-#: data/glade/resource-dialog.glade.h:2
+#: ../data/glade/resource-dialog.glade.h:2
 msgid "C_ost:"
 msgstr "_Трошкови:"
 
-#: data/glade/resource-dialog.glade.h:3
+#: ../data/glade/resource-dialog.glade.h:3
 msgid "Calendar"
 msgstr "Календар"
 
-#: data/glade/resource-dialog.glade.h:4
+#: ../data/glade/resource-dialog.glade.h:4
 msgid "Edit Calendars..."
 msgstr "Уреди календаре..."
 
-#: data/glade/resource-dialog.glade.h:6 data/glade/task-dialog.glade.h:7
+#: ../data/glade/resource-dialog.glade.h:6 ../data/glade/task-dialog.glade.h:7
 msgid "Notes"
 msgstr "Белешке"
 
-#: data/glade/resource-dialog.glade.h:7
+#: ../data/glade/resource-dialog.glade.h:7
 msgid "Optional - overrides resource name in Gantt view."
 msgstr "Необавезно — превазилази име ресурса у Гант прегледу."
 
-#: data/glade/resource-dialog.glade.h:8
+#: ../data/glade/resource-dialog.glade.h:8
 msgid ""
 "Select the calendar to use for this resource. If you want to use the default "
 "calendar of the project, select 'None'. "
@@ -301,649 +333,345 @@ msgstr ""
 "Изабери календар за употребу са овим извором. Ако желите да користите "
 "подразумевани календар за пројекат, изаберите „Ниједан“. "
 
-#: data/glade/resource-dialog.glade.h:9
-#: data/glade/resource-input-dialog.glade.h:4
+#: ../data/glade/resource-dialog.glade.h:9
+#: ../data/glade/resource-input-dialog.glade.h:4
 msgid "_Email:"
 msgstr "_Е-пошта:"
 
-#: data/glade/resource-dialog.glade.h:10
-#: data/glade/resource-input-dialog.glade.h:5
+#: ../data/glade/resource-dialog.glade.h:10
+#: ../data/glade/resource-input-dialog.glade.h:5
 msgid "_Group:"
 msgstr "_Група:"
 
-#: data/glade/resource-dialog.glade.h:11
+#: ../data/glade/resource-dialog.glade.h:11
 msgid "_Insert time stamp"
 msgstr "У_метни временску ознаку"
 
-#: data/glade/resource-dialog.glade.h:13
-#: data/glade/resource-input-dialog.glade.h:8
+#: ../data/glade/resource-dialog.glade.h:13
+#: ../data/glade/resource-input-dialog.glade.h:8
 msgid "_Short name:"
 msgstr "_Кратко име:"
 
-#: data/glade/resource-input-dialog.glade.h:2
+#: ../data/glade/resource-input-dialog.glade.h:2
 msgid "Insert Resource"
 msgstr "Уметни ресурс"
 
-#: data/glade/resource-input-dialog.glade.h:3
+#: ../data/glade/resource-input-dialog.glade.h:3
 msgid "Optional - overrides resource name in gantt view."
 msgstr "Необавезно — превазилази име ресурса у Гант прегледу."
 
-#: data/glade/resource-input-dialog.glade.h:6
-#: data/glade/task-input-dialog.glade.h:3
+#: ../data/glade/resource-input-dialog.glade.h:6
+#: ../data/glade/task-input-dialog.glade.h:3
 msgid "_Insert"
 msgstr "_Унеси"
 
-#: data/glade/sql.glade.h:2
+#: ../data/glade/sql.glade.h:2
 msgid "Open Database"
 msgstr "Отвори базу података"
 
-#: data/glade/sql.glade.h:3
+#: ../data/glade/sql.glade.h:3
 msgid "Select a Project"
 msgstr "Изабери пројекат"
 
-#: data/glade/sql.glade.h:4
+#: ../data/glade/sql.glade.h:4
 msgid "The database contains the following projects. Select a project to open:"
 msgstr "База садржи следеће пројекте. Изаберите пројекат да отворите:"
 
-#: data/glade/sql.glade.h:5
+#: ../data/glade/sql.glade.h:5
 msgid "_Database:"
 msgstr "_База:"
 
-#: data/glade/sql.glade.h:6
+#: ../data/glade/sql.glade.h:6
 msgid "_Password:"
 msgstr "_Лозинка:"
 
-#: data/glade/sql.glade.h:7
+#: ../data/glade/sql.glade.h:7
 msgid "_Server:"
 msgstr "_Сервер:"
 
-#: data/glade/sql.glade.h:8
+#: ../data/glade/sql.glade.h:8
 msgid "_Username:"
 msgstr "_Корисник:"
 
-#: data/glade/task-dialog.glade.h:3
+#: ../data/glade/task-date-widget.glade.h:1
+msgid ""
+"As soon as possible\n"
+"No earlier than\n"
+"On fixed date"
+msgstr ""
+"Што је раније могуће\n"
+"Не раније од\n"
+"На назначени датум"
+
+#: ../data/glade/task-date-widget.glade.h:4
+#: ../src/planner-cell-renderer-date.c:182
+#: ../src/planner-project-properties.c:746
+msgid "Cancel"
+msgstr "Откажи"
+
+#. The verb "schedule".
+#. This is the verb "schedule"
+#. I18n: the verb "schedule" here.
+#: ../data/glade/task-date-widget.glade.h:6
+#: ../data/glade/task-dialog.glade.h:11
+#: ../src/planner-cell-renderer-date.c:154
+msgid "Schedule:"
+msgstr "Закажи:"
+
+#: ../data/glade/task-date-widget.glade.h:7
+#: ../src/planner-cell-renderer-date.c:189
+msgid "Select"
+msgstr "Изабери"
+
+#: ../data/glade/task-date-widget.glade.h:8
+#: ../src/planner-cell-renderer-date.c:176
+#: ../src/planner-project-properties.c:739
+msgid "Today"
+msgstr "Данас"
+
+#: ../data/glade/task-date-widget.glade.h:9
+msgid "window"
+msgstr "window"
+
+#: ../data/glade/task-dialog.glade.h:1
+msgid "  "
+msgstr "  "
+
+#: ../data/glade/task-dialog.glade.h:4
 #, no-c-format
 msgid "%"
 msgstr "%"
 
-#: data/glade/task-dialog.glade.h:5
+#: ../data/glade/task-dialog.glade.h:5
 msgid "C_omplete:"
 msgstr "_Завршено:"
 
-#: data/glade/task-dialog.glade.h:8
+#: ../data/glade/task-dialog.glade.h:8
 msgid "Predecessors"
 msgstr "Претходници"
 
-#: data/glade/task-dialog.glade.h:9 src/planner-resource-view.c:393
+#: ../data/glade/task-dialog.glade.h:9 ../src/planner-resource-view.c:419
 msgid "Resources"
 msgstr "Извори"
 
-#: data/glade/task-dialog.glade.h:10
+#: ../data/glade/task-dialog.glade.h:12
 msgid "_Duration:"
 msgstr "_Трајање:"
 
-#: data/glade/task-dialog.glade.h:11
+#: ../data/glade/task-dialog.glade.h:13
 msgid "_Fixed duration"
 msgstr "_Непромењиво трајање"
 
-#: data/glade/task-dialog.glade.h:12
+#: ../data/glade/task-dialog.glade.h:14
 msgid "_Insert Time Stamp"
 msgstr "У_метни временску ознаку"
 
-#: data/glade/task-dialog.glade.h:13
+#: ../data/glade/task-dialog.glade.h:15
 msgid "_Milestone"
 msgstr "_Тежња"
 
-#: data/glade/task-dialog.glade.h:15
+#: ../data/glade/task-dialog.glade.h:17
 msgid "_Priority:"
 msgstr "Приори_тет:"
 
-#: data/glade/task-dialog.glade.h:16 data/glade/task-input-dialog.glade.h:5
+#: ../data/glade/task-dialog.glade.h:18
+#: ../data/glade/task-input-dialog.glade.h:5
 msgid "_Work:"
 msgstr "_Рад:"
 
-#. day unit variant accepted in input
-#: data/glade/task-dialog.glade.h:17 src/planner-task-tree.c:2899
-msgid "days"
-msgstr "дана"
-
-#: data/glade/task-input-dialog.glade.h:2
+#: ../data/glade/task-input-dialog.glade.h:2
 msgid "Insert Task"
 msgstr "Уметни задатак"
 
-#: data/planner.desktop.in.h:1
+#: ../data/mime/planner.keys.in.h:1
+msgid "Documents/Project Management"
+msgstr "Управљање пројектима/документима"
+
+#: ../data/mime/planner.keys.in.h:2
+msgid "Project Plan"
+msgstr "План пројекта"
+
+#: ../data/mime/planner.xml.in.h:1
+msgid "Planner project plan"
+msgstr "Планеров план пројека"
+
+#: ../data/planner.desktop.in.in.h:1
 msgid "Planner Project Management"
 msgstr "Управљање пројектима Планером"
 
-#: data/planner.desktop.in.h:2
+#: ../data/planner.desktop.in.in.h:2
 msgid "Project Management"
 msgstr "Управљање пројектима"
 
-#: data/ui/gantt-view.ui.h:1 data/ui/task-view.ui.h:1
-msgid "I_ndent Task"
-msgstr "У_вуци задатак"
-
-#: data/ui/gantt-view.ui.h:2 data/ui/task-view.ui.h:2
-msgid "In_sert Tasks..."
-msgstr "Унеси задатке..."
-
-#: data/ui/gantt-view.ui.h:3 data/ui/task-view.ui.h:3
-#: src/planner-application.c:83
-msgid "Indent"
-msgstr "Увуци"
-
-#: data/ui/gantt-view.ui.h:4 data/ui/task-view.ui.h:4
-msgid "Indent the selected tasks"
-msgstr "Увуци изабране задатке"
-
-#: data/ui/gantt-view.ui.h:5 data/ui/resource-view.ui.h:6
-#: data/ui/task-view.ui.h:5 src/planner-application.c:55
-#: src/planner-application.c:111
-msgid "Insert"
-msgstr "Унеси"
-
-#: data/ui/gantt-view.ui.h:6 data/ui/task-view.ui.h:6
-msgid "Insert a new task"
-msgstr "Уметни нови задатак"
-
-#: data/ui/gantt-view.ui.h:7 data/ui/task-view.ui.h:7
-#: src/planner-application.c:76
-msgid "Link"
-msgstr "Вежи"
-
-#: data/ui/gantt-view.ui.h:8 data/ui/task-view.ui.h:8
-msgid "Link the selected tasks"
-msgstr "Вежи изабране задатке"
-
-#: data/ui/gantt-view.ui.h:9 data/ui/task-view.ui.h:9
-msgid "Move Task Do_wn"
-msgstr "Помери задатак наниже"
-
-#: data/ui/gantt-view.ui.h:10 data/ui/task-view.ui.h:10
-msgid "Move Task _Up"
-msgstr "Помери задатак навише"
-
-#: data/ui/gantt-view.ui.h:11 data/ui/task-view.ui.h:11
-#: src/planner-application.c:104
-msgid "Move down"
-msgstr "Помери наниже"
-
-#: data/ui/gantt-view.ui.h:12 data/ui/task-view.ui.h:12
-msgid "Move the selected tasks downwards"
-msgstr "Помери изабране задатке наниже"
-
-#: data/ui/gantt-view.ui.h:13 data/ui/task-view.ui.h:13
-msgid "Move the selected tasks upwards"
-msgstr "Помери изабране задатке навише"
-
-#: data/ui/gantt-view.ui.h:14 data/ui/task-view.ui.h:14
-#: src/planner-application.c:97
-msgid "Move up"
-msgstr "Помери навише"
-
-#: data/ui/gantt-view.ui.h:15 data/ui/resource-view.ui.h:8
-#: data/ui/task-view.ui.h:15 src/planner-application.c:62
-#: src/planner-application.c:118
-msgid "Remove"
-msgstr "Уклони"
-
-#: data/ui/gantt-view.ui.h:16 data/ui/task-view.ui.h:16
-msgid "Remove the selected tasks"
-msgstr "Уклони изабране задатке"
-
-#: data/ui/gantt-view.ui.h:17 data/ui/task-view.ui.h:17
-msgid "Reset _All Constraints"
-msgstr "Поништо _сва ограничења"
-
-#: data/ui/gantt-view.ui.h:18 data/ui/task-view.ui.h:18
-msgid "Reset _Constraint"
-msgstr "Поништи о_граничење"
-
-#: data/ui/gantt-view.ui.h:19 data/ui/resource-view.ui.h:10
-#: data/ui/task-view.ui.h:19
-msgid "Select _All"
-msgstr "Изабери све"
-
-#: data/ui/gantt-view.ui.h:20 data/ui/resource-view.ui.h:11
-#: data/ui/task-view.ui.h:20
-msgid "Select all tasks"
-msgstr "Изабери све задатке"
-
-#: data/ui/gantt-view.ui.h:21
-msgid "Test"
-msgstr "Проба"
-
-#: data/ui/gantt-view.ui.h:22 data/ui/task-view.ui.h:21
-msgid "Unin_dent Task"
-msgstr "Извуци задатак"
-
-#: data/ui/gantt-view.ui.h:23 data/ui/task-view.ui.h:22
-#: src/planner-application.c:90
-msgid "Unindent"
-msgstr "Извуци"
-
-#: data/ui/gantt-view.ui.h:24 data/ui/task-view.ui.h:23
-msgid "Unindent the selected tasks"
-msgstr "Извуци изабране задатке"
-
-#: data/ui/gantt-view.ui.h:25 data/ui/task-view.ui.h:24
-#: src/planner-application.c:69
-msgid "Unlink"
-msgstr "Одвежи"
-
-#: data/ui/gantt-view.ui.h:26 data/ui/task-view.ui.h:25
-msgid "Unlink the selected tasks"
-msgstr "Одвежи изабране задатке"
-
-#: data/ui/gantt-view.ui.h:27
-msgid "Zoom In"
-msgstr "Увећај"
-
-#: data/ui/gantt-view.ui.h:28
-msgid "Zoom Out"
-msgstr "Умањи"
-
-#: data/ui/gantt-view.ui.h:29
-msgid "Zoom To Fit"
-msgstr "Прикажи по величини прозора"
-
-#: data/ui/gantt-view.ui.h:30
-msgid "Zoom To _Fit"
-msgstr "Прикажи по величини _прозора"
-
-#: data/ui/gantt-view.ui.h:31
-msgid "Zoom _Out"
-msgstr "У_мањи"
-
-#: data/ui/gantt-view.ui.h:32
-msgid "Zoom in"
-msgstr "Увећај"
-
-#: data/ui/gantt-view.ui.h:33
-msgid "Zoom out"
-msgstr "Умањи"
-
-#: data/ui/gantt-view.ui.h:34
-msgid "Zoom to fit the entire project"
-msgstr "Увећај да стане читав пројекат"
-
-#: data/ui/gantt-view.ui.h:35 data/ui/task-view.ui.h:27
-msgid "_Edit Task Properties..."
-msgstr "_Измени својства задатка..."
-
-#: data/ui/gantt-view.ui.h:36 data/ui/task-view.ui.h:28
-msgid "_Highlight Critical Tasks"
-msgstr "Истакни критичне задатке"
-
-#: data/ui/gantt-view.ui.h:37 data/ui/task-view.ui.h:29
-msgid "_Insert Task"
-msgstr "_Унеси задатак"
-
-#: data/ui/gantt-view.ui.h:38 data/ui/task-view.ui.h:30
-msgid "_Link Tasks"
-msgstr "_Вежи задатке"
-
-#: data/ui/gantt-view.ui.h:39 data/ui/task-view.ui.h:31
-msgid "_Remove Task"
-msgstr "Уклони задатак"
-
-#: data/ui/gantt-view.ui.h:40 data/ui/task-view.ui.h:32
-msgid "_Unlink Task"
-msgstr "_Одвежи задатке"
-
-#: data/ui/gantt-view.ui.h:41
-msgid "_Zoom In"
-msgstr "_Увећај"
-
-#: data/ui/main-window.ui.h:1
-msgid "About this application"
-msgstr "О овом програму"
-
-#: data/ui/main-window.ui.h:2
-msgid "C_ut"
-msgstr "_Исеци"
-
-#: data/ui/main-window.ui.h:3
-msgid "Clear"
-msgstr "Очисти"
-
-#: data/ui/main-window.ui.h:4
-msgid "Clear the selection"
-msgstr "Очисти изабрано"
-
-#: data/ui/main-window.ui.h:5
-msgid "Close the current file"
-msgstr "Затвори текућу датотеку"
-
-#: data/ui/main-window.ui.h:6
-msgid "Copy the selection"
-msgstr "Копирај изабрано"
-
-#: data/ui/main-window.ui.h:7
-msgid "Create a new project"
-msgstr "Направи нови пројекат"
-
-#: data/ui/main-window.ui.h:8
-msgid "Cut the selection"
-msgstr "Исеци изабрано"
-
-#: data/ui/main-window.ui.h:9
-msgid "Edit Day _Types"
-msgstr "Измени _Типове Дана"
-
-#: data/ui/main-window.ui.h:10
-msgid "Edit Project _Phases"
-msgstr "Измени _Фазе Пројекта"
-
-#: data/ui/main-window.ui.h:11
-msgid "Edit the project properties"
-msgstr "Измени својства пројекта"
-
-#: data/ui/main-window.ui.h:12
-msgid "Exit the program"
-msgstr "Излаз из програма"
-
-#: data/ui/main-window.ui.h:13
-msgid "New"
-msgstr "Нови"
-
-#: data/ui/main-window.ui.h:14
-msgid "New..."
-msgstr "Нови..."
-
-#: data/ui/main-window.ui.h:15
-msgid "Open"
-msgstr "Отвори"
-
-#: data/ui/main-window.ui.h:16
-msgid "Open a project"
-msgstr "Отвори пројекат"
-
-#: data/ui/main-window.ui.h:17
-msgid "Paste the clipboard"
-msgstr "Убаци из списка исечака садржај клипборда"
-
-#: data/ui/main-window.ui.h:18
-msgid "Print"
-msgstr "Штампај"
-
-#: data/ui/main-window.ui.h:19
-msgid "Print preview of the current project"
-msgstr "Преглед пред штампу текућег пројекта"
-
-#: data/ui/main-window.ui.h:20
-msgid "Print the current project"
-msgstr "Штампај текући пројекат"
-
-#: data/ui/main-window.ui.h:21
-msgid "Redo the undone action"
-msgstr "Врати поништену акцију"
-
-#: data/ui/main-window.ui.h:22
-msgid "Save"
-msgstr "Сачувај"
-
-#: data/ui/main-window.ui.h:23
-msgid "Save _As..."
-msgstr "Сачувај _као..."
-
-#: data/ui/main-window.ui.h:24
-msgid "Save the current project"
-msgstr "Сачувај текући пројекат"
-
-#: data/ui/main-window.ui.h:25
-msgid "Save the current project with a different name"
-msgstr "Сачувај текући пројекат под другим именом"
-
-#: data/ui/main-window.ui.h:26
-msgid "Show the Planner User Guide"
-msgstr "Прикажи водич за кориснике Планера"
-
-#: data/ui/main-window.ui.h:27
-msgid "Undo the last action"
-msgstr "Поништи последњу акцију"
-
-#: data/ui/main-window.ui.h:28
-msgid "_About"
-msgstr "_О програму"
-
-#: data/ui/main-window.ui.h:29
-msgid "_Actions"
-msgstr "_Aкције"
-
-#: data/ui/main-window.ui.h:30
-msgid "_Close"
-msgstr "_Затвори"
-
-#: data/ui/main-window.ui.h:31
-msgid "_Copy"
-msgstr "_Умножи"
-
-#: data/ui/main-window.ui.h:32
-msgid "_Edit"
-msgstr "_Уређивање"
-
-#: data/ui/main-window.ui.h:33
-msgid "_Edit Project Properties"
-msgstr "Из_мени својства пројекта"
-
-#: data/ui/main-window.ui.h:34
-msgid "_File"
-msgstr "_Датотека"
-
-#: data/ui/main-window.ui.h:35
-msgid "_Help"
-msgstr "_Помоћ"
-
-#: data/ui/main-window.ui.h:36
-msgid "_Manage Calendars"
-msgstr "_Руковање календарима"
-
-#: data/ui/main-window.ui.h:37
-msgid "_New Project"
-msgstr "_Нови пројекат"
-
-#: data/ui/main-window.ui.h:38
-msgid "_Open..."
-msgstr "_Отвори..."
-
-#: data/ui/main-window.ui.h:39
-msgid "_Paste"
-msgstr "У_баци"
-
-#: data/ui/main-window.ui.h:40
-msgid "_Print Preview"
-msgstr "Преглед пре_д штампу"
-
-#: data/ui/main-window.ui.h:41
-msgid "_Print..."
-msgstr "_Штампај..."
-
-#: data/ui/main-window.ui.h:42
-msgid "_Project"
-msgstr "_Пројекат"
-
-#: data/ui/main-window.ui.h:43
-msgid "_Quit"
-msgstr "_Изађи"
-
-#: data/ui/main-window.ui.h:44 src/planner-window.c:1168
-msgid "_Redo"
-msgstr "_Понови"
-
-#: data/ui/main-window.ui.h:45 src/planner-window.c:1271
-msgid "_Save"
-msgstr "_Сачувај"
-
-#: data/ui/main-window.ui.h:46 src/planner-window.c:1142
-msgid "_Undo"
-msgstr "Опо_зови"
-
-#: data/ui/main-window.ui.h:47
-msgid "_User Guide"
-msgstr "Кориснички _водич"
-
-#: data/ui/main-window.ui.h:48
-msgid "_View"
-msgstr "П_реглед"
-
-#: data/ui/resource-view.ui.h:1
-msgid "Edit _Custom Properties..."
-msgstr "Измени _произвољна својства задатка..."
-
-#: data/ui/resource-view.ui.h:2
-msgid "Edit _Groups"
-msgstr "Измени _групе"
-
-#: data/ui/resource-view.ui.h:3
-msgid "Edit resource groups"
-msgstr "Измени групе извора"
-
-#: data/ui/resource-view.ui.h:4
-msgid "Groups"
-msgstr "Групе"
-
-#: data/ui/resource-view.ui.h:5
-msgid "In_sert Resources..."
-msgstr "У_метни изворе..."
-
-#: data/ui/resource-view.ui.h:7
-msgid "Insert a new resource"
-msgstr "Унеси нови ресурс"
-
-#: data/ui/resource-view.ui.h:9
-msgid "Remove the selected resource"
-msgstr "Уклони изабрани извор"
-
-#: data/ui/resource-view.ui.h:12
-msgid "_Edit Resource Properties..."
-msgstr "_Измени својства извора..."
-
-#: data/ui/resource-view.ui.h:13
-msgid "_Insert Resource"
-msgstr "_Унеси извор"
-
-#: data/ui/resource-view.ui.h:14
-msgid "_Remove Resource"
-msgstr "_Уклони извор"
-
-#: data/ui/sql-plugin.ui.h:1
-msgid "Open from Database..."
-msgstr "Отвори из базе података..."
-
-#: data/ui/sql-plugin.ui.h:2
-msgid "Save to Database..."
-msgstr "Сачувај у базу података..."
-
-#: data/ui/task-view.ui.h:26
-msgid "_Edit Custom Properties..."
-msgstr "_Измени произвољна својства..."
-
-#: libegg/recent-files/egg-recent-vfs-utils.c:90
+#: ../data/planner.schemas.in.h:1
+msgid "Highlight critical path in Gantt view"
+msgstr "Истакни критичну путању у Гантовом прегледу"
+
+#: ../data/planner.schemas.in.h:2
+msgid "Highlight critical path in Task view"
+msgstr "Истакни критичну путању у прегледу задатака"
+
+#: ../data/planner.schemas.in.h:3
+msgid "Print the Gantt view"
+msgstr "Штампај Гантов преглед"
+
+#: ../data/planner.schemas.in.h:4
+msgid "Print the Resource view"
+msgstr "Штампај преглед ресурса"
+
+#: ../data/planner.schemas.in.h:5
+msgid "Print the Task view"
+msgstr "Штампај преглед задатака"
+
+#: ../data/planner.schemas.in.h:6
+msgid "The active view"
+msgstr "Активни преглед"
+
+#: ../data/planner.schemas.in.h:7
+msgid "Whether printing of the Gantt view is enabled."
+msgstr "Да ли је укључено штампање Гантовог прегледа."
+
+#: ../data/planner.schemas.in.h:8
+msgid "Whether printing of the Resource view is enabled."
+msgstr "Да ли је укључено штампање прегледа ресурса."
+
+#: ../data/planner.schemas.in.h:9
+msgid "Whether printing of the Task view is enabled."
+msgstr "Да ли је укључено штампање прегледа задатака."
+
+#: ../data/planner.schemas.in.h:10
+msgid ""
+"Whether to highlight the tasks along the cricital path in the Gantt view."
+msgstr "Да ли да истиче задатке дуж критичне путање у Гантовом прегледу."
+
+#: ../data/planner.schemas.in.h:11
+msgid ""
+"Whether to highlight the tasks along the cricital path in the Task view."
+msgstr "Да ли да истиче задатке дуж критичне путање у прегледу задатака."
+
+#: ../data/planner.schemas.in.h:12
+msgid "Which view to display in the user interface."
+msgstr "Који преглед приказати у корисничком сучељу."
+
+#: ../libegg/recent-files/egg-recent-vfs-utils.c:90
 msgid " (invalid Unicode)"
 msgstr " (неисправан Уникод)"
 
-#: libplanner/mrp-day.c:54
+#: ../libplanner/mrp-day.c:54
 msgid "Working"
 msgstr "Радни"
 
-#: libplanner/mrp-day.c:55
+#: ../libplanner/mrp-day.c:55
 msgid "A default working day"
 msgstr "Подразумевани радни дан"
 
-#: libplanner/mrp-day.c:57
+#: ../libplanner/mrp-day.c:57
 msgid "Nonworking"
 msgstr "Нерадни"
 
-#: libplanner/mrp-day.c:58
+#: ../libplanner/mrp-day.c:58
 msgid "A default non working day"
 msgstr "Подразумевани нерадни дан"
 
-#: libplanner/mrp-day.c:60
+#: ../libplanner/mrp-day.c:60
 msgid "Use base"
 msgstr "Користи основни"
 
-#: libplanner/mrp-day.c:61
+#: ../libplanner/mrp-day.c:61
 msgid "Use day from base calendar"
 msgstr "Користи дан из основног календара"
 
-#: libplanner/mrp-parser.c:1062 libplanner/mrp-parser.c:1157
+#: ../libplanner/mrp-file-module.c:115
+msgid "This format does not support reading"
+msgstr "Овај запис не подржава читање"
+
+#: ../libplanner/mrp-parser.c:1064 ../libplanner/mrp-parser.c:1159
 msgid "Could not create XML tree"
 msgstr "Не могу да сачиним XML стабло"
 
-#: libplanner/mrp-parser.c:1123
+#: ../libplanner/mrp-parser.c:1125
 msgid "Could not write XML file"
 msgstr "Не могу да упишем XML датотеку"
 
-#: libplanner/mrp-project.c:440 src/planner-group-dialog.c:830
+#: ../libplanner/mrp-project.c:437 ../src/planner-group-dialog.c:843
 msgid "Default"
 msgstr "Подразумевано"
 
-#: libplanner/mrp-project.c:748
+#: ../libplanner/mrp-project.c:716
+#, c-format
+msgid "Invalid URI: '%s'"
+msgstr "Неисправна адреса: „%s“"
+
+#: ../libplanner/mrp-project.c:755
 #, c-format
 msgid "Couldn't find a suitable file module for loading '%s'"
 msgstr "Нисам могао да нађем прикладан датотечни модул да би учитао '%s'"
 
-#: libplanner/mrp-project.c:769 libplanner/mrp-project.c:1033
+#: ../libplanner/mrp-project.c:776 ../libplanner/mrp-project.c:1060
 msgid "No support for SQL storage built into this version of Planner."
 msgstr "Нема подршке за SQL смештај у овом издању Планера."
 
-#: libplanner/mrp-project.c:806
+#: ../libplanner/mrp-project.c:813
 msgid "Invalid URI."
 msgstr "Неисправна адреса."
 
-#: libplanner/mrp-project.c:927
+#: ../libplanner/mrp-project.c:954
 #, c-format
 msgid "Unable to find file writer identified by '%s'"
 msgstr "Не може да пронађе писца датотеке означеног помоћу „%s“"
 
-#: libplanner/mrp-project.c:990
+#: ../libplanner/mrp-project.c:1017
 msgid "Couldn't find a suitable file module for loading project"
 msgstr "Нисам могао да нађем прикладан датотечни модул да би учитао пројекат"
 
-#: libplanner/mrp-property.c:365
+#: ../libplanner/mrp-property.c:365
 msgid "Text"
 msgstr "Текст"
 
-#: libplanner/mrp-property.c:367
+#: ../libplanner/mrp-property.c:367
 msgid "String list"
 msgstr "Листа низова"
 
-#: libplanner/mrp-property.c:369
+#: ../libplanner/mrp-property.c:369
 msgid "Integer number"
 msgstr "Цео број"
 
-#: libplanner/mrp-property.c:371
+#: ../libplanner/mrp-property.c:371
 msgid "Floating-point number"
 msgstr "Децимални број"
 
-#: libplanner/mrp-property.c:373
+#: ../libplanner/mrp-property.c:373
 msgid "Date"
 msgstr "Датум"
 
-#: libplanner/mrp-property.c:375
+#: ../libplanner/mrp-property.c:375 ../src/planner-task-view.c:283
 msgid "Duration"
 msgstr "Трајање"
 
-#: libplanner/mrp-property.c:377 src/planner-task-view.c:271
+#: ../libplanner/mrp-property.c:377 ../src/planner-resource-view.c:1275
+#: ../src/planner-task-view.c:285
 msgid "Cost"
 msgstr "Трошак"
 
-#: libplanner/mrp-property.c:380 src/planner-project-properties.c:655
+#: ../libplanner/mrp-property.c:380 ../src/planner-project-properties.c:881
 msgid "None"
 msgstr "Ниједан"
 
+#: ../libplanner/mrp-sql.c:206
+msgid "Can't connect to database server"
+msgstr "Неуспешно повезивање са сервером базе"
+
 #. Give up.
-#: libplanner/mrp-sql.c:345 src/planner-sql-plugin.c:171
+#: ../libplanner/mrp-sql.c:297 ../src/planner-sql-plugin.c:198
 msgid "Invalid Unicode"
 msgstr "Неисправан Уникод"
 
-#: libplanner/mrp-sql.c:2216
+#: ../libplanner/mrp-sql.c:2180
 #, c-format
 msgid "Connection to database '%s' failed.\n"
 msgstr "Неуспешно повезивање са базом „%s“.\n"
 
-#: libplanner/mrp-sql.c:2221 libplanner/mrp-sql.c:3663
+#: ../libplanner/mrp-sql.c:2185
 #, c-format
 msgid ""
 "Connection to database '%s' failed.\n"
@@ -952,12 +680,12 @@ msgstr ""
 "Неуспешно повезивање са базом „%s“.\n"
 "%s"
 
-#: libplanner/mrp-sql.c:2229
+#: ../libplanner/mrp-sql.c:2193
 #, c-format
 msgid "BEGIN command failed %s."
 msgstr "BEGIN наредба неуспешна %s."
 
-#: libplanner/mrp-sql.c:2395
+#: ../libplanner/mrp-sql.c:2361
 #, c-format
 msgid ""
 "The project '%s' has been changed by the user '%s' since you opened it. Do "
@@ -966,229 +694,509 @@ msgstr ""
 "Пројекат „%s“ је измењен од стране корисника „%s“ након што сте га ви "
 "отворили. Желите ли ипак да га сачувате?"
 
-#: libplanner/mrp-storage-sql.c:205
+#: ../libplanner/mrp-sql.c:3630
+#, c-format
+msgid "Connection to database '%s' failed."
+msgstr "Неуспешно повезивање са базом „%s“."
+
+#: ../libplanner/mrp-storage-sql.c:205
 msgid "Invalid SQL URI (must start with 'sql://' and contain '#')."
 msgstr "Неисправна SQL адреса (мора почети са „sql://“ и мора садржати „#“)."
 
-#: libplanner/mrp-storage-sql.c:274
+#: ../libplanner/mrp-storage-sql.c:274
 msgid "Invalid SQL URI (invalid project id)."
 msgstr "Неисправна SQL адреса (неисправан ид пројекта)."
 
-#: libplanner/mrp-storage-sql.c:282
+#: ../libplanner/mrp-storage-sql.c:282
 msgid "Invalid SQL URI (no database name specified)."
 msgstr "Неисправна SQL адреса (није наведено име базе података)."
 
-#: libplanner/mrp-task.c:1042
+#: ../libplanner/mrp-task.c:1062
 msgid ""
 "Could not add a predecessor relation, because the tasks are already related."
 msgstr ""
 "Не могу да додам предходничку релацију,зато што су задаци већ релативни "
 "(повезани)."
 
-#: libplanner/mrp-task-manager.c:1809
-msgid "Can not add a predecessor relation between a task and its ancestor."
-msgstr "Не могу да додам предходничку релацију између задатка и свог предака"
+#: ../libplanner/mrp-task-manager.c:2152
+msgid "Cannot add a predecessor, because it would result in a loop."
+msgstr "Не могу да додам предходника, јер би то направило циклус."
 
-#: libplanner/mrp-task-manager.c:1818 libplanner/mrp-task-manager.c:1826
-msgid "Can not add a predecessor, because it would result in a loop."
-msgstr ""
-"Не могу да додам предходника, јер би то резултовало бесконачним понављањем"
+#: ../libplanner/mrp-task-manager.c:2198
+msgid "Cannot move the task, because it would result in a loop."
+msgstr "Не могу да преместим задатак, јер би то направило циклус."
 
-#: libplanner/mrp-task-manager.c:1861
-msgid "Can not move the task, since it would result in a loop."
-msgstr ""
-"Нисам могао да померим задатак, јер би то резултовало бесконачним понављањем"
+#: ../libplanner/mrp-xsl.c:108
+msgid "Export to HTML failed"
+msgstr "Неуспешан извоз у HTML"
 
-#: libplanner/mrp-xsl.c:96
-msgid "HTML export failed"
-msgstr "Неуспешан извоз HTML-а"
+#: ../libplanner/mrp-xsl.c:173
+msgid "Export to Planner pre-0.12 format failed"
+msgstr "Неуспешан извоз у Планеров запис пре издања 0.12"
 
-#: src/planner-application.c:125
+#: ../src/planner-application.c:55 ../src/planner-application.c:111
+msgid "Insert"
+msgstr "Уметни"
+
+#: ../src/planner-application.c:62 ../src/planner-application.c:118
+msgid "Remove"
+msgstr "Уклони"
+
+#: ../src/planner-application.c:69
+msgid "Unlink"
+msgstr "Одвежи"
+
+#: ../src/planner-application.c:76
+msgid "Link"
+msgstr "Вежи"
+
+#: ../src/planner-application.c:83
+msgid "Indent"
+msgstr "Увуци"
+
+#: ../src/planner-application.c:90
+msgid "Unindent"
+msgstr "Извуци"
+
+#: ../src/planner-application.c:97
+msgid "Move up"
+msgstr "Помери навише"
+
+#: ../src/planner-application.c:104
+msgid "Move down"
+msgstr "Помери наниже"
+
+#: ../src/planner-application.c:125
 msgid "Edit"
 msgstr "Уреди"
 
-#: src/planner-cell-renderer-date.c:147
-msgid "Constraint type"
-msgstr "Тип ограничења"
+#: ../src/planner-calendar-dialog.c:183
+msgid "Change day type"
+msgstr "Подеси врсту дана на"
 
-#: src/planner-cell-renderer-date.c:154
+#: ../src/planner-calendar-dialog.c:305
+msgid "Remove calendar"
+msgstr "Уклони календар"
+
+#: ../src/planner-calendar-dialog.c:397
+msgid "Add new calendar"
+msgstr "Додај нови календар"
+
+#: ../src/planner-cell-renderer-date.c:161 ../src/planner-task-dialog.c:1489
 msgid "As soon as possible"
 msgstr "Што је могуће пре"
 
-#: src/planner-cell-renderer-date.c:155
-msgid "Start no earlier than"
-msgstr "Не почињати пре"
+#: ../src/planner-cell-renderer-date.c:162
+msgid "No earlier than"
+msgstr "Не пре"
 
-#: src/planner-cell-renderer-date.c:156
-msgid "Must start on"
-msgstr "Мора почети"
+#: ../src/planner-cell-renderer-date.c:163
+msgid "On fixed date"
+msgstr "Назначеног датума"
 
-#: src/planner-cell-renderer-date.c:171
-msgid "Today"
-msgstr "Данас"
-
-#. gtk_signal_connect (GTK_OBJECT (button), "clicked",
-#. GTK_SIGNAL_FUNC (m_cell_date_today_clicked),
-#. date);
-#.
-#: src/planner-cell-renderer-date.c:179
-msgid "Cancel"
-msgstr "Откажи"
-
-#: src/planner-cell-renderer-date.c:187
-msgid "OK"
-msgstr "У реду"
-
-#: src/planner-cmd-manager.c:226
+#: ../src/planner-cmd-manager.c:227
 #, c-format
 msgid "Undo '%s'"
 msgstr "Опозови „%s“"
 
-#: src/planner-cmd-manager.c:228
+#: ../src/planner-cmd-manager.c:229
 msgid "Undo"
 msgstr "Опозови"
 
-#: src/planner-cmd-manager.c:238
+#: ../src/planner-cmd-manager.c:239
 #, c-format
 msgid "Redo '%s'"
 msgstr "Понови „%s“"
 
-#: src/planner-cmd-manager.c:240
+#: ../src/planner-cmd-manager.c:241
 msgid "Redo"
 msgstr "Понови"
 
-#: src/planner-default-week-dialog.c:40
+#: ../src/planner-day-type-dialog.c:491
+#, c-format
+msgid "Add day type \"%s\""
+msgstr "Додај врсту дана „%s“"
+
+#: ../src/planner-day-type-dialog.c:552
+#, c-format
+msgid "Remove day type \"%s\""
+msgstr "Уклони врсту дана „%s“"
+
+#: ../src/planner-default-week-dialog.c:41
 msgid "Monday"
 msgstr "Понедељак"
 
-#: src/planner-default-week-dialog.c:41
+#: ../src/planner-default-week-dialog.c:42
 msgid "Tuesday"
 msgstr "Уторак"
 
-#: src/planner-default-week-dialog.c:42
+#: ../src/planner-default-week-dialog.c:43
 msgid "Wednesday"
 msgstr "Среда"
 
-#: src/planner-default-week-dialog.c:43
+#: ../src/planner-default-week-dialog.c:44
 msgid "Thursday"
 msgstr "Четвртак"
 
-#: src/planner-default-week-dialog.c:44
+#: ../src/planner-default-week-dialog.c:45
 msgid "Friday"
 msgstr "Петак"
 
-#: src/planner-default-week-dialog.c:45
+#: ../src/planner-default-week-dialog.c:46
 msgid "Saturday"
 msgstr "Субота"
 
-#: src/planner-default-week-dialog.c:46
+#: ../src/planner-default-week-dialog.c:47
 msgid "Sunday"
 msgstr "Недеља"
 
-#: src/planner-default-week-dialog.c:266
+#: ../src/planner-default-week-dialog.c:282
 msgid "No working time"
 msgstr "Нема радног времена"
 
-#: src/planner-default-week-dialog.c:277 src/planner-default-week-dialog.c:281
+#: ../src/planner-default-week-dialog.c:293
+#: ../src/planner-default-week-dialog.c:297
 msgid "%H:%M"
 msgstr "%H:%M"
 
-#: src/planner-format.c:141
+#: ../src/planner-default-week-dialog.c:547
+msgid "Edit default week"
+msgstr "Уреди подразумевану седмицу"
+
+#: ../src/planner-eds-plugin.c:166
+msgid "EDS"
+msgstr "СПЕ"
+
+#: ../src/planner-eds-plugin.c:167
+msgid "Import resources from Evolution Data Server"
+msgstr "Увези ресурсе из Сервера података Еволуције"
+
+#: ../src/planner-eds-plugin.c:393 ../src/planner-gantt-print.c:190
+#: ../src/planner-group-dialog.c:819 ../src/planner-property-dialog.c:481
+#: ../src/planner-resource-view.c:1156 ../src/planner-task-dialog.c:2534
+#: ../src/planner-task-dialog.c:2608 ../src/planner-task-view.c:279
+#: ../src/planner-ttable-print.c:108
+msgid "Name"
+msgstr "Име"
+
+#: ../src/planner-eds-plugin.c:413 ../src/planner-resource-view.c:1253
+msgid "Email"
+msgstr "Е-пошта"
+
+#: ../src/planner-eds-plugin.c:434
+msgid "Import"
+msgstr "Увези"
+
+#: ../src/planner-eds-plugin.c:444
+msgid "Photo"
+msgstr "Слика"
+
+#: ../src/planner-eds-plugin.c:670
+msgid "Imported from Evolution Data Server"
+msgstr "Увежено из Сервера података Еволуције"
+
+#: ../src/planner-eds-plugin.c:671
+msgid "Updated from Evolution Data Server"
+msgstr "Освежено из Сервера података Еволуције"
+
+#: ../src/planner-eds-plugin.c:856
+msgid "Query cancelled."
+msgstr "Упит отказан."
+
+#: ../src/planner-eds-plugin.c:917
+msgid "Evolution Data Server UID"
+msgstr "КИБ сервера података Еволуције"
+
+#: ../src/planner-eds-plugin.c:918
+msgid "Identifier used by Evolution Data Server for resources"
+msgstr "Идентификатор коришћен у серверу података Еволуције за ресурсе"
+
+#: ../src/planner-format.c:149
 #, c-format
 msgid "%dd %dh"
 msgstr "%dd %dh"
 
-#: src/planner-format.c:144
+#: ../src/planner-format.c:152
 #, c-format
 msgid "%dd"
 msgstr "%dd"
 
-#: src/planner-format.c:147
+#: ../src/planner-format.c:155
 #, c-format
 msgid "%dh"
 msgstr "%dh"
-
-#: src/planner-format.c:171
-#, c-format
-msgid "%s days"
-msgstr "дана: %s"
-
-#: src/planner-format.c:174
-msgid "0 days"
-msgstr "0 дана"
-
-#: src/planner-format.c:177
-#, c-format
-msgid "%s day"
-msgstr "%s дан"
 
 #. i18n: this string is the date nr and month name, displayed
 #. * e.g. in the date cells in the task tree. See
 #. * libmrproject/docs/DateFormat.
 #.
-#: src/planner-format.c:197
+#: ../src/planner-format.c:190
 msgid "%b %e"
-msgstr "%b %e"
+msgstr "%b. %e"
+
+#: ../src/planner-format.c:374
+msgid "mon"
+msgstr "мес"
+
+# bug: plural-forms (there are many more options in more than one language)
+#. month unit variant accepted in input
+#: ../src/planner-format.c:375
+msgid "month"
+msgstr "месец"
+
+#. month unit variant accepted in input
+#: ../src/planner-format.c:376
+msgid "months"
+msgstr "месеци"
+
+#. month unit variant accepted in input
+#: ../src/planner-format.c:377
+msgid "w"
+msgstr "с"
+
+#. week unit variant accepted in input
+#: ../src/planner-format.c:378
+msgid "week"
+msgstr "седмица"
+
+#. week unit variant accepted in input
+#: ../src/planner-format.c:379
+msgid "weeks"
+msgstr "седмице"
+
+#. week unit variant accepted in input
+#: ../src/planner-format.c:380
+msgid "d"
+msgstr "д"
+
+#. day unit variant accepted in input
+#: ../src/planner-format.c:381
+msgid "day"
+msgstr "дан"
+
+#. day unit variant accepted in input
+#: ../src/planner-format.c:382
+msgid "days"
+msgstr "дана"
+
+#. day unit variant accepted in input
+#: ../src/planner-format.c:383
+msgid "h"
+msgstr "ч"
+
+#. hour unit variant accepted in input
+#: ../src/planner-format.c:384
+msgid "hour"
+msgstr "час"
+
+#. hour unit variant accepted in input
+#: ../src/planner-format.c:385
+msgid "hours"
+msgstr "часова"
+
+#. hour unit variant accepted in input
+#: ../src/planner-format.c:386
+msgid "min"
+msgstr "мин"
+
+#. minute unit variant accepted in input
+#: ../src/planner-format.c:387
+msgid "minute"
+msgstr "минута"
+
+#. minute unit variant accepted in input
+#: ../src/planner-format.c:388
+msgid "minutes"
+msgstr "минуте"
 
 #. i18n: project start, the date format is described in
 #. * libmrproject/docs/DateFormat.
-#: src/planner-gantt-background.c:579
+#: ../src/planner-gantt-background.c:579
 msgid "%Y %b %d"
-msgstr "%Y %b %d"
+msgstr "%d. %b %Y."
 
-#: src/planner-gantt-background.c:581
+#: ../src/planner-gantt-background.c:581
 msgid "Project start"
 msgstr "Почетак пројекта"
 
-#: src/planner-gantt-print.c:191 src/planner-group-dialog.c:806
-#: src/planner-property-dialog.c:378 src/planner-resource-view.c:1168
-#: src/planner-task-dialog.c:1411 src/planner-task-dialog.c:1497
-#: src/planner-task-view.c:266
-msgid "Name"
-msgstr "Име"
+#: ../src/planner-gantt-header.c:671
+msgid "%e %b %Y"
+msgstr "%e. %b %Y"
 
-#: src/planner-gantt-print.c:199 src/planner-resource-dialog.c:1303
-#: src/planner-resource-view.c:691 src/planner-resource-view.c:707
-#: src/planner-resource-view.c:1595 src/planner-task-view.c:269
+#: ../src/planner-gantt-print.c:198 ../src/planner-resource-dialog.c:1845
+#: ../src/planner-resource-view.c:747 ../src/planner-resource-view.c:763
+#: ../src/planner-resource-view.c:1686 ../src/planner-task-view.c:282
 msgid "Work"
 msgstr "Рад"
 
-#: src/planner-gantt-print.c:523 src/planner-gantt-row.c:668
-#: src/planner-window.c:1648
+#: ../src/planner-gantt-print.c:542 ../src/planner-gantt-row.c:692
+#: ../src/planner-html-plugin.c:140 ../src/planner-task-tree.c:1567
+#: ../src/planner-window.c:1872
 msgid "Unnamed"
 msgstr "Неименовани"
 
-#: src/planner-gantt-row.c:1916 src/planner-gantt-row.c:1919
+#: ../src/planner-gantt-row.c:1767 ../src/planner-gantt-row.c:1770
 msgid "No name"
 msgstr "Без имена"
 
-#: src/planner-gantt-row.c:1922
+#: ../src/planner-gantt-row.c:1773
 #, c-format
 msgid "Make task '%s' a predecessor of '%s'"
 msgstr "Учини задатак „%s“ претходником „%s“"
 
-#: src/planner-gantt-row.c:1980
+#: ../src/planner-gantt-row.c:1821
 #, c-format
 msgid "Change work to %s"
 msgstr "Промени рад на %s"
 
-#: src/planner-gantt-view.c:287
-msgid "Gantt Chart"
-msgstr "Гант карта"
+#: ../src/planner-gantt-row.c:2391 ../src/planner-task-dialog.c:453
+#: ../src/planner-task-tree.c:254 ../src/planner-task-tree.c:942
+msgid "Edit task property"
+msgstr "Измени својства задатка"
 
-#: src/planner-gantt-view.c:295
+#: ../src/planner-gantt-view.c:137 ../src/planner-task-view.c:119
+msgid "_Insert Task"
+msgstr "_Унеси задатак"
+
+#: ../src/planner-gantt-view.c:138 ../src/planner-task-view.c:119
+msgid "Insert a new task"
+msgstr "Уметни нови задатак"
+
+#: ../src/planner-gantt-view.c:140 ../src/planner-task-view.c:120
+msgid "In_sert Tasks..."
+msgstr "Унеси задатке..."
+
+#: ../src/planner-gantt-view.c:143 ../src/planner-task-view.c:121
+msgid "_Remove Task"
+msgstr "Уклони задатак"
+
+#: ../src/planner-gantt-view.c:144 ../src/planner-task-view.c:121
+msgid "Remove the selected tasks"
+msgstr "Уклони изабране задатке"
+
+#: ../src/planner-gantt-view.c:146
+msgid "_Edit Task Properties..."
+msgstr "_Измени својства задатка..."
+
+#: ../src/planner-gantt-view.c:149 ../src/planner-resource-view.c:246
+#: ../src/planner-task-view.c:123
+msgid "Select _All"
+msgstr "Изабери све"
+
+#: ../src/planner-gantt-view.c:150 ../src/planner-resource-view.c:246
+#: ../src/planner-task-view.c:123
+msgid "Select all tasks"
+msgstr "Изабери све задатке"
+
+#: ../src/planner-gantt-view.c:152 ../src/planner-task-view.c:124
+msgid "_Unlink Task"
+msgstr "_Одвежи задатке"
+
+#: ../src/planner-gantt-view.c:153 ../src/planner-task-view.c:124
+msgid "Unlink the selected tasks"
+msgstr "Одвежи изабране задатке"
+
+#: ../src/planner-gantt-view.c:155 ../src/planner-task-view.c:125
+msgid "_Link Tasks"
+msgstr "_Вежи задатке"
+
+#: ../src/planner-gantt-view.c:156 ../src/planner-task-view.c:125
+msgid "Link the selected tasks"
+msgstr "Вежи изабране задатке"
+
+#: ../src/planner-gantt-view.c:158 ../src/planner-task-view.c:126
+msgid "I_ndent Task"
+msgstr "У_вуци задатак"
+
+#: ../src/planner-gantt-view.c:159 ../src/planner-task-view.c:126
+msgid "Indent the selected tasks"
+msgstr "Увуци изабране задатке"
+
+#: ../src/planner-gantt-view.c:161 ../src/planner-task-view.c:127
+msgid "Unin_dent Task"
+msgstr "Извуци задатак"
+
+#: ../src/planner-gantt-view.c:162 ../src/planner-task-view.c:127
+msgid "Unindent the selected tasks"
+msgstr "Извуци изабране задатке"
+
+#: ../src/planner-gantt-view.c:164 ../src/planner-task-view.c:128
+msgid "Move Task _Up"
+msgstr "Помери задатак навише"
+
+#: ../src/planner-gantt-view.c:165 ../src/planner-task-view.c:128
+msgid "Move the selected tasks upwards"
+msgstr "Помери изабране задатке навише"
+
+#: ../src/planner-gantt-view.c:167 ../src/planner-task-view.c:129
+msgid "Move Task Do_wn"
+msgstr "Помери задатак наниже"
+
+#: ../src/planner-gantt-view.c:168 ../src/planner-task-view.c:129
+msgid "Move the selected tasks downwards"
+msgstr "Помери изабране задатке наниже"
+
+#: ../src/planner-gantt-view.c:170 ../src/planner-task-view.c:130
+msgid "Reset _Constraint"
+msgstr "Поништи о_граничење"
+
+#: ../src/planner-gantt-view.c:173
+msgid "Zoom To _Fit"
+msgstr "Прикажи по величини _прозора"
+
+#: ../src/planner-gantt-view.c:174 ../src/planner-ttable-view.c:100
+msgid "Zoom to fit the entire project"
+msgstr "Увећај да стане читав пројекат"
+
+#: ../src/planner-gantt-view.c:176
+msgid "_Zoom In"
+msgstr "_Увећај"
+
+#: ../src/planner-gantt-view.c:177 ../src/planner-ttable-view.c:99
+msgid "Zoom in"
+msgstr "Увећај"
+
+#: ../src/planner-gantt-view.c:179
+msgid "Zoom _Out"
+msgstr "У_мањи"
+
+#: ../src/planner-gantt-view.c:180 ../src/planner-ttable-view.c:98
+msgid "Zoom out"
+msgstr "Умањи"
+
+#: ../src/planner-gantt-view.c:182
+msgid "Test"
+msgstr "Проба"
+
+#: ../src/planner-gantt-view.c:188
+msgid "_Highlight Critical Tasks"
+msgstr "Истакни критичне задатке"
+
+#. i18n: Label used for the sidebar. Please try to make it short and use
+#. * a linebreak if necessary/possible.
+#.
+#: ../src/planner-gantt-view.c:333
+msgid "Gantt"
+msgstr "Гант"
+
+#: ../src/planner-gantt-view.c:341
 msgid "_Gantt Chart"
-msgstr "_Гант карта"
+msgstr "_Гант график"
 
-#: src/planner-gantt-view.c:492
+# СП = Структура Посла
+#. i18n: WBS is short for work breakdown structure, and is a
+#. * project management term. You might want to leave it
+#. * untranslated unless there is a localized term for it.
+#.
+#: ../src/planner-gantt-view.c:542
 msgid ""
 "\n"
 "WBS"
 msgstr ""
 "\n"
-"WBS"
+"СП"
 
-#: src/planner-gantt-view.c:493
+#: ../src/planner-gantt-view.c:543 ../src/planner-ttable-tree.c:367
 msgid ""
 "\n"
 "Name"
@@ -1197,7 +1205,7 @@ msgstr ""
 "Име"
 
 #. COL_START,    _("\nStart"),
-#: src/planner-gantt-view.c:495
+#: ../src/planner-gantt-view.c:545
 msgid ""
 "\n"
 "Work"
@@ -1205,35 +1213,43 @@ msgstr ""
 "\n"
 "Рад"
 
-#: src/planner-group-dialog.c:302
+#: ../src/planner-group-dialog.c:301
 msgid "Insert group"
 msgstr "Уметни групу"
 
-#: src/planner-group-dialog.c:425
+#: ../src/planner-group-dialog.c:428
 msgid "Remove group"
 msgstr "Уклони групу"
 
-#: src/planner-group-dialog.c:518
+#: ../src/planner-group-dialog.c:523
 msgid "Default group"
 msgstr "Подразумевана група"
 
-#: src/planner-group-dialog.c:634
+#: ../src/planner-group-dialog.c:641
 msgid "Edit group property"
 msgstr "Измени својство групе"
 
-#: src/planner-group-dialog.c:812
+#: ../src/planner-group-dialog.c:825
 msgid "Manager name"
 msgstr "Име управника"
 
-#: src/planner-group-dialog.c:818
+#: ../src/planner-group-dialog.c:831
 msgid "Manager phone"
 msgstr "Телефон управника"
 
-#: src/planner-group-dialog.c:824
+#: ../src/planner-group-dialog.c:837
 msgid "Manager email"
 msgstr "Е-пошта управника"
 
-#: src/planner-html-plugin.c:138
+#: ../src/planner-html-plugin.c:75
+msgid "HTML"
+msgstr "HTML"
+
+#: ../src/planner-html-plugin.c:76
+msgid "Export project to HTML"
+msgstr "Извези пројекат у HTML"
+
+#: ../src/planner-html-plugin.c:226
 #, c-format
 msgid ""
 "\"%s\" is a directory.\n"
@@ -1242,483 +1258,946 @@ msgstr ""
 "„%s“ је директоријум.\n"
 "Унесите име датотеке и покуштајте поново."
 
-#: src/planner-html-plugin.c:148 src/planner-window.c:1416
+#: ../src/planner-html-plugin.c:236 ../src/planner-window.c:1580
+#: ../src/planner-xml-planner-plugin.c:125
 #, c-format
 msgid "File \"%s\" exists, do you want to overwrite it?"
 msgstr "Датотека „%s“ постоји, хоћете ли да је препишете?"
 
-#: src/planner-main.c:50
+#: ../src/planner-main.c:51
 msgid "Create the initial window with the given geometry."
 msgstr "Направи почетни прозор са датом геометријом."
 
-#: src/planner-main.c:50
+#: ../src/planner-main.c:51
 msgid "GEOMETRY"
 msgstr "ГЕОМЕТРИЈА"
 
-#: src/planner-main.c:76
+#: ../src/planner-main.c:77
 msgid "planner: --geometry cannot be used with more than one file."
 msgstr "planner: --geometry се не може користити за више датотека."
 
-#: src/planner-plugin-loader.c:40
+#: ../src/planner-msp-plugin.c:49
+msgid "MS Project XML..."
+msgstr "МС Пројекат XML..."
+
+#: ../src/planner-msp-plugin.c:49
+msgid "Import an MS Project XML file"
+msgstr "Увези XML датотеку МС Пројекта"
+
+#: ../src/planner-msp-plugin.c:113
+msgid "Couldn't import file."
+msgstr "Не могу да увезем датотеку."
+
+#: ../src/planner-msp-plugin.c:197
+msgid "Import a File"
+msgstr "Увези датотеку"
+
+#: ../src/planner-msp-plugin.c:205
+msgid "XML Files"
+msgstr "XML датотеке"
+
+#: ../src/planner-msp-plugin.c:210 ../src/planner-window.c:748
+msgid "All Files"
+msgstr "Све датотеке"
+
+#: ../src/planner-phase-dialog.c:532
+msgid "Insert phase"
+msgstr "Уметни фазу"
+
+#: ../src/planner-phase-dialog.c:631
+msgid "Remove phase"
+msgstr "Уклони фазу"
+
+#: ../src/planner-plugin-loader.c:40
 #, c-format
 msgid "Could not open plugin file '%s'\n"
 msgstr "Не могу да отворим датотеку додатка „%s“\n"
 
-#: src/planner-task-popup.c:45
-msgid "/_Insert task"
-msgstr "/_Унеси задатак"
-
-#: src/planner-task-popup.c:48
-msgid "/_Insert subtask"
-msgstr "/_Унеси подзадатак"
-
-#: src/planner-task-popup.c:51
-msgid "/_Remove task"
-msgstr "/_Уклони задатак"
-
-#: src/planner-task-popup.c:56
-msgid "/_Unlink task"
-msgstr "/_Одвежи задатак"
-
-#: src/planner-task-popup.c:61
-msgid "/_Edit task..."
-msgstr "/_Измени задатак..."
-
-#: src/planner-predecessor-model.c:191 src/planner-task-dialog.c:1133
+#: ../src/planner-predecessor-model.c:191 ../src/planner-task-dialog.c:2174
 msgid "FS"
 msgstr "КП"
 
-#: src/planner-predecessor-model.c:194 src/planner-task-dialog.c:1134
+#: ../src/planner-predecessor-model.c:194
 msgid "FF"
 msgstr "КК"
 
-#: src/planner-predecessor-model.c:197 src/planner-task-dialog.c:1135
+#. list = g_list_append (list, g_strdup (_("FF")));
+#: ../src/planner-predecessor-model.c:197 ../src/planner-task-dialog.c:2176
 msgid "SS"
 msgstr "ПП"
 
-#: src/planner-predecessor-model.c:200 src/planner-task-dialog.c:1136
+#: ../src/planner-predecessor-model.c:200
 msgid "SF"
 msgstr "ПК"
 
-#: src/planner-print-dialog.c:112
+#: ../src/planner-print-dialog.c:163
 msgid "Print Project"
 msgstr "Штампај пројекат"
 
-#: src/planner-print-dialog.c:119
+#: ../src/planner-print-dialog.c:170
 msgid "Select views"
 msgstr "Изабери погледе"
 
-#: src/planner-print-dialog.c:143
+#: ../src/planner-print-dialog.c:193
 msgid "Select the views to print:"
 msgstr "Изабери погледе за штампу:"
 
-#: src/planner-project-properties.c:308
+#: ../src/planner-project-properties.c:386
 msgid "Select a calendar to use for this project:"
 msgstr "Изабери календар за употребу уз овај пројекат:"
 
-#: src/planner-project-properties.c:403
+#: ../src/planner-project-properties.c:486
 msgid "Edit Project Name"
 msgstr "Измени име пројекта"
 
-#: src/planner-project-properties.c:439
+#: ../src/planner-project-properties.c:522
 msgid "Edit Organization"
 msgstr "Измени организацију"
 
-#: src/planner-project-properties.c:475
+#: ../src/planner-project-properties.c:558
 msgid "Edit Manager"
 msgstr "Измени руководиоца"
 
-#: src/planner-project-properties.c:546
+#: ../src/planner-project-properties.c:630
+#: ../src/planner-project-properties.c:664
 msgid "Edit Project Start"
 msgstr "Измени почетак пројекта"
 
-#: src/planner-project-properties.c:615
+#: ../src/planner-project-properties.c:753
+msgid "OK"
+msgstr "У реду"
+
+#: ../src/planner-project-properties.c:841
 msgid "Edit Project Phase"
 msgstr "Измени фазе пројекта"
 
-#: src/planner-project-properties.c:748
+#: ../src/planner-project-properties.c:974
 msgid "Property"
 msgstr "Својство"
 
-#: src/planner-project-properties.c:759 src/planner-property-dialog.c:431
+#: ../src/planner-project-properties.c:985
 msgid "Value"
 msgstr "Вредност"
 
-#: src/planner-project-properties.c:1130 src/planner-property-dialog.c:229
+#: ../src/planner-project-properties.c:1386
+#: ../src/planner-property-dialog.c:329
 msgid "The name of the custom property needs to start with a letter."
 msgstr "Назив произвољног својства мора почети словом."
 
-#: src/planner-project-properties.c:1202 src/planner-property-dialog.c:300
+#: ../src/planner-project-properties.c:1457
+#: ../src/planner-property-dialog.c:399
 #, c-format
 msgid "Do you really want to remove the property '%s' from the project?"
 msgstr "Да ли стварно желите да уклоните својство „%s“ са овог пројекта?"
 
-#: src/planner-project-properties.c:1344
+#: ../src/planner-project-properties.c:1548
 msgid "Could not create properties dialog."
 msgstr "Не могу да направим прозорче за својства."
 
-#: src/planner-property-dialog.c:397
-msgid "Label"
-msgstr "Налепница"
+#: ../src/planner-project-properties.c:1582
+msgid "Date..."
+msgstr "Датум..."
 
-#: src/planner-property-dialog.c:411 src/planner-resource-view.c:1210
-#: src/planner-task-dialog.c:1529
+#: ../src/planner-project-properties.c:1925
+msgid "Add project property"
+msgstr "Додај својства пројекта"
+
+#: ../src/planner-project-properties.c:2035
+msgid "Remove project property"
+msgstr "Уклони својства пројекта"
+
+#: ../src/planner-project-properties.c:2128
+msgid "Edit project property value"
+msgstr "Уреди вредност својства пројекта"
+
+#: ../src/planner-property-dialog.c:498
+msgid "Label"
+msgstr "Ознака"
+
+#: ../src/planner-property-dialog.c:510 ../src/planner-resource-view.c:1200
+#: ../src/planner-task-dialog.c:2640
 msgid "Type"
-msgstr "Тип"
+msgstr "Врста"
+
+#: ../src/planner-property-dialog.c:664
+msgid "Add property"
+msgstr "Додај својство"
+
+#: ../src/planner-property-dialog.c:809
+msgid "Remove property"
+msgstr "Уклони својство"
+
+#: ../src/planner-property-dialog.c:902
+msgid "Edit property label"
+msgstr "Уреди ознаку својства"
+
+#: ../src/planner-resource-cmd.c:75
+msgid "Insert resource"
+msgstr "Унеси ресурс"
 
 #. Put "no group" at the top.
-#: src/planner-resource-dialog.c:267 src/planner-resource-input-dialog.c:97
-#: src/planner-resource-view.c:1806
+#: ../src/planner-resource-dialog.c:311
+#: ../src/planner-resource-input-dialog.c:99
+#: ../src/planner-resource-view.c:1897
 msgid "(None)"
 msgstr "(Ниједан)"
 
-#: src/planner-resource-dialog.c:277 src/planner-resource-input-dialog.c:107
-#: src/planner-task-dialog.c:256
+#: ../src/planner-resource-dialog.c:321
+#: ../src/planner-resource-input-dialog.c:109 ../src/planner-task-dialog.c:379
 msgid "(No name)"
 msgstr "(Без имена)"
 
-#: src/planner-resource-dialog.c:426
-msgid "Edit resource property from dialog"
-msgstr "Измени својство извора помоћу прозорчета"
+#: ../src/planner-resource-dialog.c:494
+msgid "Edit resource calendar"
+msgstr "Уреди календар ресурса"
+
+#: ../src/planner-resource-dialog.c:575
+msgid "Edit resource note"
+msgstr "Уреди белешку ресурса"
+
+#: ../src/planner-resource-dialog.c:642
+msgid "Edit resource cost"
+msgstr "Уреди цену ресурса"
+
+#: ../src/planner-resource-dialog.c:710 ../src/planner-resource-dialog.c:751
+#: ../src/planner-resource-view.c:1357 ../src/planner-resource-view.c:1438
+msgid "Edit resource property"
+msgstr "Уреди својство ресурса"
 
 #. i18n: time stamp format for notes in task dialog, see strftime(3) for
 #. * a detailed description.
-#: src/planner-resource-dialog.c:915 src/planner-task-dialog.c:738
+#: ../src/planner-resource-dialog.c:1403 ../src/planner-task-dialog.c:1806
 msgid "%a %d %b %Y, %H:%M\n"
-msgstr "%a %d %b %Y, %H:%M\n"
+msgstr "%a %d. %b %Y. %H:%M\n"
 
-#: src/planner-resource-dialog.c:1013
+#: ../src/planner-resource-dialog.c:1520
 msgid "None (use project default)"
 msgstr "Ниједан (користи подразумевано за пројекат)"
 
-#: src/planner-resource-dialog.c:1140 src/planner-resource-dialog.c:1142
+#: ../src/planner-resource-dialog.c:1647 ../src/planner-resource-dialog.c:1649
 msgid "Edit resource properties"
-msgstr "Измени својства ресурса"
+msgstr "Уреди својства ресурса"
 
-#: src/planner-resource-dialog.c:1304 src/planner-resource-view.c:694
-#: src/planner-resource-view.c:708 src/planner-resource-view.c:1596
+#: ../src/planner-resource-dialog.c:1846 ../src/planner-resource-view.c:750
+#: ../src/planner-resource-view.c:764 ../src/planner-resource-view.c:1687
 msgid "Material"
 msgstr "Материјал"
 
-#: src/planner-resource-view.c:260
+#: ../src/planner-resource-view.c:241
+msgid "_Insert Resource"
+msgstr "_Уметни ресурс"
+
+#: ../src/planner-resource-view.c:241
+msgid "Insert a new resource"
+msgstr "Уметни нови ресурс"
+
+#: ../src/planner-resource-view.c:242
+msgid "In_sert Resources..."
+msgstr "У_метни ресурсе..."
+
+#: ../src/planner-resource-view.c:243
+msgid "_Remove Resource"
+msgstr "_Уклони ресурсе"
+
+#: ../src/planner-resource-view.c:243
+msgid "Remove the selected resource"
+msgstr "Уклони изабране ресурсе"
+
+#: ../src/planner-resource-view.c:244
+msgid "_Edit Resource Properties..."
+msgstr "_Уреди својства ресурса..."
+
+#: ../src/planner-resource-view.c:245
+msgid "Edit _Groups"
+msgstr "Уреди _групе"
+
+#: ../src/planner-resource-view.c:245
+msgid "Edit resource groups"
+msgstr "Уреди групе ресурса"
+
+#: ../src/planner-resource-view.c:247
+msgid "Edit _Custom Properties..."
+msgstr "Уреди _произвољна својства..."
+
+#: ../src/planner-resource-view.c:263
 msgid "/_Insert resource"
-msgstr "/_Унеси извор"
+msgstr "/_Уметни ресурс"
 
-#: src/planner-resource-view.c:261
+#: ../src/planner-resource-view.c:264
 msgid "/_Remove resource"
-msgstr "/_Уклони извор"
+msgstr "/У_клони ресурс"
 
-#: src/planner-resource-view.c:262
+#: ../src/planner-resource-view.c:265 ../src/planner-ttable-tree.c:112
 msgid "/_Edit resource..."
-msgstr "/_Измени извор..."
+msgstr "/У_реди ресурс..."
 
-#: src/planner-resource-view.c:401
+#: ../src/planner-resource-view.c:427
 msgid "_Resources"
-msgstr "_Извори"
+msgstr "_Ресурси"
 
-#: src/planner-resource-view.c:798
-msgid "Insert resource"
-msgstr "Унеси извор"
-
-#: src/planner-resource-view.c:950
+#: ../src/planner-resource-view.c:940
 msgid "Remove resource"
-msgstr "Уклони извор"
+msgstr "Уклони ресурс"
 
-#: src/planner-resource-view.c:1051
+#: ../src/planner-resource-view.c:1040
 msgid "Edit custom resource properties"
-msgstr "Измени произвољна својства извора"
+msgstr "Уреди произвољна својства ресурса"
 
-#: src/planner-resource-view.c:1189
+#: ../src/planner-resource-view.c:1178
 msgid "Short name"
 msgstr "Кратко име"
 
-#: src/planner-resource-view.c:1234
+#: ../src/planner-resource-view.c:1224
 msgid "Group"
 msgstr "Група"
 
-#: src/planner-resource-view.c:1263
-msgid "Email"
-msgstr "Е-пошта"
-
-#: src/planner-resource-view.c:1328
-msgid "Edit resource property"
-msgstr "Измени својство извора"
-
-#: src/planner-resource-view.c:1390
-msgid "Edit resource custom property"
-msgstr "Измени произвољно својство извора"
-
 #. i18n: Short "Week", preferably 2 letters.
-#: src/planner-scale-utils.c:325
+#: ../src/planner-scale-utils.c:129
 #, c-format
 msgid "Wk %d"
 msgstr "Сд %d"
 
-#: src/planner-scale-utils.c:329
+#: ../src/planner-scale-utils.c:133
 #, c-format
 msgid "Week %d"
 msgstr "Седмица %d"
 
 #. i18n: Week, year.
-#: src/planner-scale-utils.c:334
+#: ../src/planner-scale-utils.c:138
 #, c-format
 msgid "Week %d, %d"
 msgstr "Седмица %d, %d"
 
-#. i18n: Short "Quarter", preferrably 1 letter.
-#: src/planner-scale-utils.c:365
+#. i18n: Short "Quarter", preferably 1 letter.
+#: ../src/planner-scale-utils.c:169
 #, c-format
 msgid "Q%d"
 msgstr "К%d"
 
-#. i18n: Short "Quarter", preferrably 2-3 letters.
-#: src/planner-scale-utils.c:369
+#. i18n: Short "Quarter", preferably 2-3 letters.
+#: ../src/planner-scale-utils.c:173
 #, c-format
 msgid "Qtr %d"
 msgstr "Ктл %d"
 
-#. i18n: Year, short "Quarter", preferrably 2-3 letters.
-#: src/planner-scale-utils.c:373
+#. i18n: Year, short "Quarter", preferably 2-3 letters.
+#: ../src/planner-scale-utils.c:177
 #, c-format
 msgid "%d, Qtr %d"
 msgstr "%d, Ктл %d"
 
-#. i18n: Short "Half year", prefferably 1 letter.
-#: src/planner-scale-utils.c:386
+#. i18n: Short "Half year", preferably 1 letter.
+#: ../src/planner-scale-utils.c:190
 #, c-format
 msgid "H%d"
 msgstr "П%d"
 
-#. i18n: Year, short "Half year", prefferably 1 letter.
-#: src/planner-scale-utils.c:391
+#. i18n: Year, short "Half year", preferably 1 letter.
+#: ../src/planner-scale-utils.c:195
 #, c-format
 msgid "%04d, H%d"
 msgstr "%04d, П%d"
 
-#: src/planner-sql-plugin.c:368
-msgid "Project"
-msgstr "Пројекат"
+#: ../src/planner-sql-plugin.c:96
+msgid "Open from Database..."
+msgstr "Отвори из базе података..."
 
-#: src/planner-sql-plugin.c:544
-msgid "Open from Database"
-msgstr "Отвори из базе података"
+#: ../src/planner-sql-plugin.c:96
+msgid "Open a project from a database"
+msgstr "Отвори пројекат из базе података"
 
-#: src/planner-sql-plugin.c:651
+#: ../src/planner-sql-plugin.c:97 ../src/planner-sql-plugin.c:1096
 msgid "Save to Database"
 msgstr "Сачувај у базу података"
 
-#: src/planner-task-dialog.c:804
+#: ../src/planner-sql-plugin.c:97
+msgid "Save the current project to a database"
+msgstr "Сачувај текући пројекат у базу"
+
+#: ../src/planner-sql-plugin.c:129
+msgid "No errors reported."
+msgstr "Нису пријављене грешке."
+
+#: ../src/planner-sql-plugin.c:494
+#, c-format
+msgid ""
+"Database %s needs to be upgraded from version %s to version %s.\n"
+"Please backup database before the upgrade."
+msgstr ""
+"Базу %s треба надоградити са издања %s на издање %s.\n"
+"Направите резервни умножак базе пре надоградње."
+
+#: ../src/planner-sql-plugin.c:501
+msgid "Upgrade"
+msgstr "Надогради"
+
+#: ../src/planner-sql-plugin.c:515
+#, c-format
+msgid ""
+"Could not upgrade database %s.\n"
+" Upgrade file used: %s.\n"
+"\n"
+"Database error: \n"
+"%s"
+msgstr ""
+"Не могу да надоградим базу %s.\n"
+" Коришћена датотека за надоградњу: %s.\n"
+"\n"
+"Грешка из базе: \n"
+"%s"
+
+#: ../src/planner-sql-plugin.c:556
+#, c-format
+msgid "Can't create tables in database %s"
+msgstr "Не могу да направим табеле у бази %s"
+
+#: ../src/planner-sql-plugin.c:618
+#, c-format
+msgid "Database %s is not setup for Planner. Do you want to do that?"
+msgstr "База %s није припремљена за Планер. Да ли желите да је припремите?"
+
+#: ../src/planner-sql-plugin.c:659
+#, c-format
+msgid "Connection to database '%s@%s' failed."
+msgstr "Неуспешно повезивање са базом „%s@%s“."
+
+#: ../src/planner-sql-plugin.c:670
+#, c-format
+msgid "Test to tables in database '%s' failed."
+msgstr "Неуспешна проба са табелама у бази „%s“."
+
+#: ../src/planner-sql-plugin.c:764
+msgid "ID"
+msgstr "ИБ"
+
+#: ../src/planner-sql-plugin.c:772
+msgid "Project"
+msgstr "Пројекат"
+
+#: ../src/planner-sql-plugin.c:780
+msgid "Phase"
+msgstr "Фаза"
+
+#: ../src/planner-sql-plugin.c:788
+msgid "Revision"
+msgstr "Ревизија"
+
+#: ../src/planner-sql-plugin.c:984
+msgid "Open from Database"
+msgstr "Отвори из базе података"
+
+#: ../src/planner-task-cmd.c:97
+msgid "Link task"
+msgstr "Вежи задатак"
+
+#: ../src/planner-task-cmd.c:173
+msgid "Unlink task"
+msgstr "Одвежи задатак"
+
+#: ../src/planner-task-cmd.c:268
+msgid "Insert task"
+msgstr "Уметни задатак"
+
+#: ../src/planner-task-dialog.c:527
+msgid "Edit task type"
+msgstr "Уреди врсту задатка"
+
+#: ../src/planner-task-dialog.c:594
+msgid "Toggle fixed duration"
+msgstr "Измени утврђено трајање"
+
+#: ../src/planner-task-dialog.c:661
+msgid "Edit task scheduling"
+msgstr "Уреди заказивање задатка"
+
+#: ../src/planner-task-dialog.c:741
+msgid "Assign resource to task"
+msgstr "Додели ресурс задатку"
+
+#: ../src/planner-task-dialog.c:801
+msgid "Unassign resource from task"
+msgstr "Одузми ресурс са задатка"
+
+#: ../src/planner-task-dialog.c:860
+msgid "Change resource units in task"
+msgstr "Измени јединице ресурса на задатку"
+
+#: ../src/planner-task-dialog.c:948
+msgid "Edit task predecessor"
+msgstr "Уреди претходника задатка"
+
+# bug: what does this exactly mean?
+#: ../src/planner-task-dialog.c:1019
+msgid "Edit lag predecessor"
+msgstr "Уреди кашњење претходника"
+
+#: ../src/planner-task-dialog.c:1085
+msgid "Edit task note"
+msgstr "Уреди белешку задатка"
+
+#: ../src/planner-task-dialog.c:1493
+#, c-format
+msgid "No earlier than %s"
+msgstr "Не пре %s"
+
+#: ../src/planner-task-dialog.c:1497
+#, c-format
+msgid "On fixed date %s"
+msgstr "Назначеног датума %s"
+
+#: ../src/planner-task-dialog.c:1878
 msgid "Finish to start (FS)"
 msgstr "Крај са почетком (КП)"
 
-#: src/planner-task-dialog.c:805
-msgid "Finish to finish (FF)"
-msgstr "Крај са крајем (КК)"
-
-#: src/planner-task-dialog.c:806
+#. _("Finish to finish (FF)"), MRP_RELATION_FF,
+#: ../src/planner-task-dialog.c:1880
 msgid "Start to start (SS)"
 msgstr "Почетак са почетком (ПП)"
 
-#: src/planner-task-dialog.c:807
-msgid "Start to finish (SF)"
-msgstr "Почетак са крајем (ПК)"
-
-#: src/planner-task-dialog.c:857
+#: ../src/planner-task-dialog.c:1936
 msgid "Can't add new predecessor. No task selected!"
 msgstr "Не могу да додам претходника. Није изабран задатак!"
 
-#: src/planner-task-dialog.c:1430
+#: ../src/planner-task-dialog.c:2381
+msgid "Change..."
+msgstr "Промени..."
+
+#: ../src/planner-task-dialog.c:2555
 msgid "Assigned"
 msgstr "Додељен"
 
-#: src/planner-task-dialog.c:1447
+#: ../src/planner-task-dialog.c:2572
 msgid "Units"
 msgstr "Јединице"
 
-#: src/planner-task-dialog.c:1551
+#: ../src/planner-task-dialog.c:2662
 msgid "Lag"
 msgstr "Кашњење"
 
-#: src/planner-task-dialog.c:1690 src/planner-task-dialog.c:1692
+#: ../src/planner-task-dialog.c:2805 ../src/planner-task-dialog.c:2807
 msgid "Edit task properties"
 msgstr "Измени својства задатка"
 
-#: src/planner-task-tree.c:260
-msgid "Insert task"
-msgstr "Унеси задатак"
+#: ../src/planner-task-popup.c:53
+msgid "/_Insert task"
+msgstr "/_Уметни задатак"
 
-#: src/planner-task-tree.c:336
-msgid "Edit task property"
-msgstr "Измени својства задатка"
+#: ../src/planner-task-popup.c:56
+msgid "/Insert _subtask"
+msgstr "/У_метни подзадатак"
 
-#: src/planner-task-tree.c:700
+#: ../src/planner-task-popup.c:59
+msgid "/_Remove task"
+msgstr "/У_клони задатак"
+
+#: ../src/planner-task-popup.c:64
+msgid "/_Unlink task"
+msgstr "/_Одвежи задатак"
+
+#: ../src/planner-task-popup.c:69
+msgid "/Assign _resources..."
+msgstr "/Додели _ресурсе..."
+
+#: ../src/planner-task-popup.c:72 ../src/planner-ttable-tree.c:115
+msgid "/_Edit task..."
+msgstr "/Уре_ди задатак..."
+
+#: ../src/planner-task-tree.c:562
 msgid "Remove task"
 msgstr "Уклони задатак"
 
-#: src/planner-task-tree.c:2891
-msgid "mon"
-msgstr "мес"
+#: ../src/planner-task-tree.c:639
+msgid "Apply constraint to task"
+msgstr "Примени ограничење на задатак"
 
-# bug: plural-forms (there are many more options in more than one language)
-#. month unit variant accepted in input
-#: src/planner-task-tree.c:2892
-msgid "month"
-msgstr "месец"
+#: ../src/planner-task-tree.c:701
+msgid "Reset task constraint"
+msgstr "Поништи ограничење задатка"
 
-#. month unit variant accepted in input
-#: src/planner-task-tree.c:2893
-msgid "months"
-msgstr "месеци"
+# „Није Доступно“ или „НеДоступно“; може бити и „није применљиво“ за „not applicable“
+#: ../src/planner-task-tree.c:1488 ../src/planner-task-tree.c:1620
+msgid "N/A"
+msgstr "Н/Д"
 
-#. month unit variant accepted in input
-#: src/planner-task-tree.c:2894
-msgid "w"
-msgstr "с"
+#: ../src/planner-task-tree.c:2708
+msgid "Remove tasks"
+msgstr "Уклони задатке"
 
-#. week unit variant accepted in input
-#: src/planner-task-tree.c:2895
-msgid "week"
-msgstr "седмица"
+# bug: plural-forms
+#: ../src/planner-task-tree.c:2770
+#, c-format
+msgid ""
+"You are about to open an edit dialog each for %i tasks. Are you sure that "
+"you want to do that?"
+msgstr "Отварате по прозорче за сваки од %i задатака. Сигурно то желите да урадите?"
 
-#. week unit variant accepted in input
-#: src/planner-task-tree.c:2896
-msgid "weeks"
-msgstr "седмице"
+#: ../src/planner-task-tree.c:2872
+msgid "Unlink tasks"
+msgstr "Одвежи задатке"
 
-#. week unit variant accepted in input
-#: src/planner-task-tree.c:2897
-msgid "d"
-msgstr "д"
+#: ../src/planner-task-tree.c:2924
+msgid "Link tasks"
+msgstr "Вежи задатке"
 
-#. day unit variant accepted in input
-#: src/planner-task-tree.c:2898
-msgid "day"
-msgstr "дан"
+#: ../src/planner-task-tree.c:3015
+msgid "Indent tasks"
+msgstr "Увуци задатке"
 
-#. day unit variant accepted in input
-#: src/planner-task-tree.c:2900
-msgid "h"
-msgstr "ч"
+#: ../src/planner-task-tree.c:3024
+msgid "Indent task"
+msgstr "Увуци задатак"
 
-#. hour unit variant accepted in input
-#: src/planner-task-tree.c:2901
-msgid "hour"
-msgstr "час"
+#: ../src/planner-task-tree.c:3117
+msgid "Unindent tasks"
+msgstr "Извуци задатке"
 
-#. hour unit variant accepted in input
-#: src/planner-task-tree.c:2902
-msgid "hours"
-msgstr "часова"
+#: ../src/planner-task-tree.c:3133
+msgid "Unindent task"
+msgstr "Извуци задатак"
 
-#. hour unit variant accepted in input
-#: src/planner-task-tree.c:2903
-msgid "min"
-msgstr "мин"
+#: ../src/planner-task-tree.c:3210
+msgid "Move tasks up"
+msgstr "Премести задатке изнад"
 
-#. minute unit variant accepted in input
-#: src/planner-task-tree.c:2904
-msgid "minute"
-msgstr "минута"
+#: ../src/planner-task-tree.c:3248
+msgid "Move task up"
+msgstr "Премести задатак изнад"
 
-#. minute unit variant accepted in input
-#: src/planner-task-tree.c:2905
-msgid "minutes"
-msgstr "минуте"
+#: ../src/planner-task-tree.c:3337
+msgid "Move tasks down"
+msgstr "Премести задатке испод"
 
-#: src/planner-task-view.c:203
+#. Moving task from 'position' to 'position + 1'
+#: ../src/planner-task-tree.c:3383
+msgid "Move task down"
+msgstr "Премести задатак испод"
+
+#: ../src/planner-task-tree.c:3439
+msgid "Reset task constraints"
+msgstr "Поништи ограничења задатка"
+
+#: ../src/planner-task-tree.c:3471
+msgid "Reset all task constraints"
+msgstr "Поништи сва ограничења задатка"
+
+#: ../src/planner-task-view.c:122
+msgid "_Edit Task"
+msgstr "Уре_ди задатак"
+
+#: ../src/planner-task-view.c:131
+msgid "_Edit Custom Properties..."
+msgstr "_Уреди произвољна својства..."
+
+#: ../src/planner-task-view.c:212
 msgid "Tasks"
 msgstr "Задаци"
 
-#: src/planner-task-view.c:211
+#: ../src/planner-task-view.c:220
 msgid "_Tasks"
 msgstr "_Задаци"
 
 # Шта је ово?
-#: src/planner-task-view.c:265
+#. i18n: WBS is sort for work breakdown structure, and is a
+#. * project management term. You might want to leave it
+#. * untranslated unless there is a localized term for it.
+#.
+#: ../src/planner-task-view.c:278
 msgid "WBS"
 msgstr "WBS"
 
-#: src/planner-task-view.c:267
+#: ../src/planner-task-view.c:280
 msgid "Start"
 msgstr "Почетак"
 
-#: src/planner-task-view.c:268
+#: ../src/planner-task-view.c:281
 msgid "Finish"
 msgstr "Крај"
 
-#: src/planner-task-view.c:270
+#: ../src/planner-task-view.c:284
 msgid "Slack"
 msgstr "Променљив"
 
-#: src/planner-task-view.c:489
+#: ../src/planner-task-view.c:286
+msgid "Assigned to"
+msgstr "Додељен коме"
+
+#: ../src/planner-task-view.c:482
 msgid "Edit custom task properties"
 msgstr "Измени произвољна својства задатка"
 
-#: src/planner-view-loader.c:41
+#: ../src/planner-ttable-print.c:189
+msgid "Task"
+msgstr "Задатак"
+
+#: ../src/planner-ttable-row.c:1964
+#, c-format
+msgid "Make task '%s' start on %s"
+msgstr "Нека задатак „%s“ почиње „%s“"
+
+#: ../src/planner-ttable-row.c:2029
+#, c-format
+msgid "Change task '%s' work to %s, duration to %s (%d)"
+msgstr "Промени посао задатка „%s“ на %s, и трајање на %s (%d)"
+
+#: ../src/planner-ttable-tree.c:118
+msgid "/_Expand all resources"
+msgstr "/_Рашири све ресурсе"
+
+#: ../src/planner-ttable-tree.c:121
+msgid "/_Collapse all resources"
+msgstr "/_Скупи све ресурсе"
+
+#: ../src/planner-ttable-tree.c:369
+msgid ""
+"\n"
+"Task"
+msgstr "\nЗадатак"
+
+#: ../src/planner-ttable-view.c:100
+msgid "Zoom to fit"
+msgstr "Увећај да стане"
+
+#. i18n: Label used for the sidebar. Please try to make it short and use
+#. * a linebreak if necessary/possible.
+#.
+#: ../src/planner-ttable-view.c:162
+msgid ""
+"Resource\n"
+"Usage"
+msgstr ""
+"Заузеће\n"
+"ресурса"
+
+#: ../src/planner-ttable-view.c:169
+msgid "Resource _Usage"
+msgstr "_Заузеће ресурса"
+
+#: ../src/planner-view-loader.c:41
 #, c-format
 msgid "Could not open view plugin file '%s'\n"
 msgstr "Не могу да отворим датотеку додатка за преглед „%s“\n"
 
-#: src/planner-window.c:639
-msgid "Open a file"
+#: ../src/planner-window.c:218
+msgid "_File"
+msgstr "_Датотека"
+
+#: ../src/planner-window.c:222
+msgid "_New Project"
+msgstr "_Нови пројекат"
+
+#: ../src/planner-window.c:222
+msgid "Create a new project"
+msgstr "Направи нови пројекат"
+
+#: ../src/planner-window.c:226
+msgid "_Open..."
+msgstr "_Отвори..."
+
+#: ../src/planner-window.c:226
+msgid "Open a project"
+msgstr "Отвори пројекат"
+
+#: ../src/planner-window.c:229
+msgid "_Import"
+msgstr "У_вези"
+
+#: ../src/planner-window.c:233 ../src/planner-window.c:1449
+msgid "_Save"
+msgstr "_Сачувај"
+
+#: ../src/planner-window.c:233
+msgid "Save the current project"
+msgstr "Сачувај текући пројекат"
+
+#: ../src/planner-window.c:236
+msgid "_Export"
+msgstr "И_звези"
+
+#: ../src/planner-window.c:239
+msgid "Save _As..."
+msgstr "Сачувај _као..."
+
+#: ../src/planner-window.c:239
+msgid "Save the current project with a different name"
+msgstr "Сачувај текући пројекат под другим именом"
+
+#: ../src/planner-window.c:242
+msgid "_Print..."
+msgstr "_Штампај..."
+
+#: ../src/planner-window.c:242
+msgid "Print the current project"
+msgstr "Штампај текући пројекат"
+
+#: ../src/planner-window.c:245
+msgid "Print Pre_view"
+msgstr "Преглед пре_д штампу"
+
+#: ../src/planner-window.c:245
+msgid "Print preview of the current project"
+msgstr "Преглед пред штампу текућег пројекта"
+
+#: ../src/planner-window.c:248
+msgid "_Close"
+msgstr "_Затвори"
+
+#: ../src/planner-window.c:248
+msgid "Close the current file"
+msgstr "Затвори текућу датотеку"
+
+#: ../src/planner-window.c:251
+msgid "_Quit"
+msgstr "_Изађи"
+
+#: ../src/planner-window.c:251
+msgid "Exit the program"
+msgstr "Излаз из програма"
+
+#: ../src/planner-window.c:255
+msgid "_Edit"
+msgstr "_Уређивање"
+
+#: ../src/planner-window.c:258
+msgid "_Undo"
+msgstr "Опо_зови"
+
+#: ../src/planner-window.c:258
+msgid "Undo the last action"
+msgstr "Поништи последњу акцију"
+
+#: ../src/planner-window.c:261
+msgid "_Redo"
+msgstr "_Понови"
+
+#: ../src/planner-window.c:261
+msgid "Redo the undone action"
+msgstr "Врати поништену акцију"
+
+#: ../src/planner-window.c:265
+msgid "_View"
+msgstr "П_реглед"
+
+#: ../src/planner-window.c:269
+msgid "_Actions"
+msgstr "_Aкције"
+
+#: ../src/planner-window.c:273
+msgid "_Project"
+msgstr "_Пројекат"
+
+#: ../src/planner-window.c:276
+msgid "_Manage Calendars"
+msgstr "_Руковање календарима"
+
+#: ../src/planner-window.c:279
+msgid "Edit Day _Types"
+msgstr "Измени _Типове Дана"
+
+#: ../src/planner-window.c:282
+msgid "Edit Project _Phases"
+msgstr "Измени _Фазе Пројекта"
+
+#: ../src/planner-window.c:285
+msgid "_Edit Project Properties"
+msgstr "Из_мени својства пројекта"
+
+#: ../src/planner-window.c:285
+msgid "Edit the project properties"
+msgstr "Измени својства пројекта"
+
+#: ../src/planner-window.c:293
+msgid "_Help"
+msgstr "_Помоћ"
+
+#: ../src/planner-window.c:296
+msgid "_User Guide"
+msgstr "Кориснички _водич"
+
+#: ../src/planner-window.c:296
+msgid "Show the Planner User Guide"
+msgstr "Прикажи водич за кориснике Планера"
+
+#: ../src/planner-window.c:299
+msgid "_About"
+msgstr "_О програму"
+
+#: ../src/planner-window.c:299
+msgid "About this application"
+msgstr "О овом програму"
+
+#. Note: these strings are leaked.
+#: ../src/planner-window.c:565
+#, c-format
+msgid "Switch to the view \"%s\""
+msgstr "Пређи на преглед „%s“"
+
+#: ../src/planner-window.c:732
+msgid "Open a File"
 msgstr "Отвори датотеку"
+
+#: ../src/planner-window.c:742
+msgid "Planner Files"
+msgstr "Датотеке Планера"
 
 #. I18n: Translators, list your names here, newline separated if there
 #. * are more than one, to appear in the about box.
 #.
-#: src/planner-window.c:1085 src/planner-window.c:1092
-msgid "translator_credits"
+#: ../src/planner-window.c:1152 ../src/planner-window.c:1164
+msgid "translator-credits"
 msgstr ""
 "Бранко Ивановић <popeye@one.ekof.bg.ac.yu>\n"
+"Данило Шеган <danilo@gnome.org>\n"
 "\n"
 "Prevod.org — превод на српски језик."
 
 #. "Copyright \xc2\xa9"
-#: src/planner-window.c:1089
+#: ../src/planner-window.c:1161
 msgid "A Project Management application for the GNOME desktop"
 msgstr "Програм за вођење пројеката под окружењем Гном"
 
-#: src/planner-window.c:1099
+#: ../src/planner-window.c:1180
 msgid "The Planner Homepage"
 msgstr "Домаћа страница Планера"
 
-#: src/planner-window.c:1227
+#: ../src/planner-window.c:1389
 msgid "If you don't save, changes made the last minute will be discarded."
 msgstr "Ако не сачувате, промене начињене у задњем минуту ће бити изгубљене."
 
-#: src/planner-window.c:1232
+# bug: plural-forms
+#: ../src/planner-window.c:1394
 #, c-format
 msgid "If you don't save, changes made the last %d minutes will be discarded."
 msgstr "Ако не сачувате, изгубићете промене начињене задњих %d минута."
 
-#: src/planner-window.c:1237
+#: ../src/planner-window.c:1399
 msgid "If you don't save, changes made the last hour will be discarded."
 msgstr ""
 "Ако не сачувати, промене начињене задњих сат времена ће бити изгубљене."
 
-#: src/planner-window.c:1242
+# bug: plural-forms
+#: ../src/planner-window.c:1404
 #, c-format
 msgid "If you don't save, changes made the last %d hours will be discarded."
 msgstr "Ако не сачувате, изгубићете промене начињене задњих %d сати."
 
-#: src/planner-window.c:1249
+#: ../src/planner-window.c:1411
 #, c-format
 msgid "Save changes to document '%s' before closing?"
 msgstr "Сачувати промене начињене у документу „%s“ пре затварања?"
 
-#: src/planner-window.c:1267
+#: ../src/planner-window.c:1436
 msgid "C_lose without saving"
 msgstr "Затвори без чувања"
 
-#: src/planner-window.c:1269
+#: ../src/planner-window.c:1442
 msgid "_Cancel"
 msgstr "От_кажи"
 
-#: src/planner-window.c:1380
-msgid "Save a file"
+#: ../src/planner-window.c:1541
+msgid "Save a File"
 msgstr "Сачувај датотеку"
 
-#: src/planner-window.c:1611
+#: ../src/planner-window.c:1829
 msgid ""
 "You have opened a file that was saved with an old version of Planner.\n"
 "\n"
@@ -1745,6 +2224,117 @@ msgstr ""
 "\n"
 "Након овога, можете уклонити сва ограничења избором ставке „Уклони сва "
 "ограничења“ у менију „Уређивање“."
+
+#. Hack.
+#: ../src/planner-window.c:1864
+msgid "Unnamed database project"
+msgstr "Безимени пројекат у бази"
+
+#: ../src/planner-window.c:1978
+#, c-format
+msgid "Open '%s'"
+msgstr "Отвори „%s“"
+
+#: ../src/planner-working-time-dialog.c:144
+msgid "Edit working time"
+msgstr "Уреди радно време"
+
+#: ../src/planner-xml-planner-plugin.c:53
+msgid "Planner 0.11 Format"
+msgstr "Запис Планера 0.11"
+
+#: ../src/planner-xml-planner-plugin.c:54
+msgid "Export project to a file suitable for Planner 0.11"
+msgstr "Извези пројекат у датотеку погодну за Планер 0.11"
+
+#: ../src/planner-xml-planner-plugin.c:91
+msgid "Export"
+msgstr "Извези"
+
+#~ msgid "Zoom In"
+#~ msgstr "Увећај"
+
+#~ msgid "Zoom Out"
+#~ msgstr "Умањи"
+
+#~ msgid "C_ut"
+#~ msgstr "_Исеци"
+
+#~ msgid "Clear"
+#~ msgstr "Очисти"
+
+#~ msgid "Clear the selection"
+#~ msgstr "Очисти изабрано"
+
+#~ msgid "Copy the selection"
+#~ msgstr "Копирај изабрано"
+
+#~ msgid "Cut the selection"
+#~ msgstr "Исеци изабрано"
+
+#~ msgid "New"
+#~ msgstr "Нови"
+
+#~ msgid "New..."
+#~ msgstr "Нови..."
+
+#~ msgid "Open"
+#~ msgstr "Отвори"
+
+#~ msgid "Paste the clipboard"
+#~ msgstr "Убаци из списка исечака садржај клипборда"
+
+#~ msgid "Print"
+#~ msgstr "Штампај"
+
+#~ msgid "Save"
+#~ msgstr "Сачувај"
+
+#~ msgid "_Copy"
+#~ msgstr "_Умножи"
+
+#~ msgid "_Paste"
+#~ msgstr "У_баци"
+
+#~ msgid "Groups"
+#~ msgstr "Групе"
+
+#~ msgid "Save to Database..."
+#~ msgstr "Сачувај у базу података..."
+
+#~ msgid "Can not add a predecessor relation between a task and its ancestor."
+#~ msgstr ""
+#~ "Не могу да додам предходничку релацију између задатка и свог предака"
+
+#~ msgid "HTML export failed"
+#~ msgstr "Неуспешан извоз HTML-а"
+
+#~ msgid "Constraint type"
+#~ msgstr "Тип ограничења"
+
+#~ msgid "Must start on"
+#~ msgstr "Мора почети"
+
+#~ msgid "%s days"
+#~ msgstr "дана: %s"
+
+#~ msgid "0 days"
+#~ msgstr "0 дана"
+
+#~ msgid "%s day"
+#~ msgstr "%s дан"
+
+#~ msgid "Edit resource property from dialog"
+#~ msgstr "Измени својство извора помоћу прозорчета"
+
+#~ msgid "Edit resource custom property"
+#~ msgstr "Измени произвољно својство извора"
+
+#~ msgid "Finish to finish (FF)"
+#~ msgstr "Крај са крајем (КК)"
+
+#~ msgid "Start to finish (SF)"
+#~ msgstr "Почетак са крајем (ПК)"
 
 #~ msgid ""
 #~ "Connection to database '%s' failed:\n"
