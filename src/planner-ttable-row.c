@@ -425,18 +425,19 @@ get_resource_bounds (MrpResource *resource,
 
         project = mrp_object_get_project (MRP_OBJECT (resource));
 
-        root = mrp_project_get_root_task (project);
         t = mrp_project_get_project_start (project);
 
         *x_debut = t * scale;
         *x_start_reel = t * scale;
+
+        root = mrp_project_get_root_task (project);
 
 	t = mrp_task_get_finish (root);
         *x_fin = t * scale;
 }
 
 static gboolean
-recalc_bounds (PlannerTtableRow * row)
+recalc_bounds (PlannerTtableRow *row)
 {
         PlannerTtableRowPriv *priv;
         GnomeCanvasItem      *item;
@@ -454,16 +455,24 @@ recalc_bounds (PlannerTtableRow * row)
 
         ttable_row_ensure_layout (row);
 
-        if (priv->assignment != NULL) {
+	/* FIXME: Why can there be rows with no assignment AND no resource?
+	 * Sounds like a bug?
+	 */
+	if (!priv->assignment && !priv->resource) {
+		return FALSE;
+	}
+
+        if (priv->assignment) {
                 get_assignment_bounds (priv->assignment, priv->scale,
                                        &x_debut, &x_fin, &x_debut_real);
         }
-	
-        if (priv->resource != NULL) {
+
+	/* FIXME: Can't have both right, so we should have else if? */
+	if (priv->resource) {
                 get_resource_bounds (priv->resource, priv->scale, &x_debut,
                                      &x_fin, &x_debut_real);
-        }
-
+	}
+	
         priv->x = x_debut;
         priv->width = x_fin - x_debut;
         priv->x_start = x_debut_real;
@@ -726,7 +735,7 @@ gantt_row_update_resources (PlannerGanttRow *row)
 	
 	g_array_set_size (priv->resource_widths, 0);
 
-	// Measure the spacing between resource names. 
+	// Measure the spacing between resource names.
 	pango_layout_set_text (priv->layout, ", ", 2);
 	pango_layout_get_extents (priv->layout, NULL, &rect);
 	spacing = rect.width / PANGO_SCALE;
@@ -942,13 +951,13 @@ typedef enum {
         ROW_START,
         ROW_MIDDLE,
         ROW_END
-} row_chunk;
+} RowChunk;
 
 static void
 ttable_row_draw_resource_ival (mrptime          start,
                                mrptime          end,
                                gint             units,
-                               row_chunk        chunk,
+                               RowChunk         chunk,
                                GdkDrawable     *drawable,
                                GnomeCanvasItem *item,
                                gint             x,
@@ -1020,9 +1029,9 @@ ttable_row_draw_resource_ival (mrptime          start,
         cr_ystart = cs_ystart + 1;
         cr_xend = c_xend;
         cr_yend = cs_yend - 1;
-
+	
         /* Clip to the expose area */
-        r_xstart = MAX (c_xstart, 0);
+	r_xstart = MAX (c_xstart, 0);
         r_xend = MIN (c_xend, width);
         r_ystart = MAX (c_ystart, 0);
         r_yend = MIN (c_yend, height);
@@ -1037,29 +1046,32 @@ ttable_row_draw_resource_ival (mrptime          start,
         rr_ystart = MAX (cr_ystart, 0);
         rr_yend = MIN (cr_yend, height);
 
-
-        if (r_xend <= r_xstart || r_yend <= r_ystart) {
+        if (r_xstart > r_xend || r_ystart > r_yend) {
                 /* Nothing to draw */
                 return;
         }
 
         if (units == 0) {
                 gdk_gc_set_foreground (priv->fill_gc, &color_free);
-        } else if (units < 100) {
+        }
+	else if (units < 100) {
                 gdk_gc_set_foreground (priv->fill_gc, &color_underuse);
-        } else if (units == 100) {
+        }
+	else if (units == 100) {
                 gdk_gc_set_foreground (priv->fill_gc, &color_normal);
         } else {
                 gdk_gc_set_foreground (priv->fill_gc, &color_overuse);
         }
 
         /* Draw the central part of the chunk */
-        gdk_draw_rectangle (drawable,
-                            priv->fill_gc,
-                            TRUE,
-                            rr_xstart, rr_ystart,
-                            rr_xend - rr_xstart + 1, rr_yend - rr_ystart + 1);
-
+	if (rr_xend >= rr_xstart && rr_yend >= rr_ystart) {
+		gdk_draw_rectangle (drawable,
+				    priv->fill_gc,
+				    TRUE,
+				    rr_xstart, rr_ystart,
+				    rr_xend - rr_xstart + 1, rr_yend - rr_ystart + 1);
+	}
+	
         /* Draw the shadow */
         gdk_gc_set_foreground (priv->fill_gc, &color_high);
         /* Draw the top of the shadow, if it can be seen */
@@ -1101,126 +1113,107 @@ ttable_row_draw_resource_ival (mrptime          start,
         if (chunk == ROW_END && c_xend == r_xend)
                 gdk_draw_line (drawable, priv->frame_gc, r_xend, r_ystart, r_xend,
                                r_yend);
-
-        /*      
-         * gchar *couleur;
-         * if (units == 0) {
-         * couleur = "vert";
-         * } else if (units<100) {
-         * couleur = "bleu clair";
-         * } else if (units==100) {
-         * couleur = "bleu";
-         * } else {
-         * couleur = "rouge";
-         * }
-         */
 }
 
 static void
-ttable_row_draw_resource (PlannerTtableRow * row,
-                          GdkDrawable * drawable,
-                          GnomeCanvasItem * item,
-                          gint x, gint y, gint width, gint height)
+ttable_row_draw_resource (PlannerTtableRow *row,
+                          GdkDrawable      *drawable,
+                          GnomeCanvasItem  *item,
+                          gint              x,
+			  gint              y,
+			  gint              width,
+			  gint              height)
 {
-        GList *dates;
-        MrpResource *resource;
-        MrpTask *root;
+        GList         *dates;
+        MrpResource   *resource;
+        MrpTask       *root;
         MrpAssignment *assignment;
-        MrpTask *task;
-        MrpProject *project;
-        GList *assignments;
-        GList *a, *d;
-        Date *date, *date0, *date1;
-        mrptime work_start, finish, previous_time;
-        gint units;
-        row_chunk chunk;
+        MrpTask       *task;
+        MrpProject    *project;
+        GList         *assignments;
+        GList         *a, *d;
+        Date          *date, *date0, *date1;
+        mrptime        work_start, finish, previous_time;
+        gint           units;
+        RowChunk       chunk;
 
         resource = row->priv->resource;
-#ifdef VERBOSE
-        g_object_get (G_OBJECT (resource), "name", &name, NULL);
-        g_message ("Timetable: Resource %s\n", name);
-#endif
 
         dates = NULL;
-        g_object_get (G_OBJECT (resource), "project", &project, NULL);
-        root = mrp_project_get_root_task (project);
-        assignments = mrp_resource_get_assignments (resource);
 
+	project = mrp_object_get_project (MRP_OBJECT (resource));
+
+	assignments = mrp_resource_get_assignments (resource);
         for (a = assignments; a; a = a->next) {
-                assignment = MRP_ASSIGNMENT (a->data);
+                assignment = a->data;
+
                 task = mrp_assignment_get_task (assignment);
                 work_start = mrp_task_get_work_start (task);
                 finish = mrp_task_get_finish (task);
-                units = mrp_assignment_get_units (assignment);
-                date0 = g_new0 (Date, 1);
+
+		units = mrp_assignment_get_units (assignment);
+
+		date0 = g_new0 (Date, 1);
                 date0->type = START_ASSIGN;
                 date0->time = work_start;
                 date0->units = units;
                 date0->assignment = assignment;
                 date0->task = task;
+
                 date1 = g_new0 (Date, 1);
                 date1->type = END_ASSIGN;
                 date1->time = finish;
                 date1->units = units;
                 date1->assignment = assignment;
                 date1->task = task;
-                dates = g_list_insert_sorted (dates, date0,
-                                              ttable_row_date_compare);
-                dates = g_list_insert_sorted (dates, date1,
-                                              ttable_row_date_compare);
+                dates = g_list_insert_sorted (dates, date0, ttable_row_date_compare);
+                dates = g_list_insert_sorted (dates, date1, ttable_row_date_compare);
         }
 
+	/* FIXME: This should be changed to draw the rectangle frame in one
+	 * piece, then fill the different colors.
+	 */
+	
         units = 0;
         previous_time = mrp_project_get_project_start (project);
-        finish = mrp_task_get_finish (root);
+
+	root = mrp_project_get_root_task (project);
+	finish = mrp_task_get_finish (root);
+
         chunk = ROW_START;
-#ifdef VERBOSE
-        g_message ("Timetable: initial load of %d units\n", units);
-#endif
+
         for (d = dates; d; d = d->next) {
                 date = d->data;
+
+		/* FIXME: This code is broken, it never paints the leftmost part
+		 * of the frame for bars that start at the project start.
+		 */
                 if (date->time != previous_time) {
-                        if (date->time == finish)
+                        if (date->time == finish) {
                                 chunk = ROW_END;
+			}
+
                         ttable_row_draw_resource_ival (previous_time,
                                                        date->time,
                                                        units,
                                                        chunk,
                                                        drawable, item,
                                                        x, y, width, height);
-                        if (chunk == ROW_START)
+                        if (chunk == ROW_START) {
                                 chunk = ROW_MIDDLE;
+			}
                         previous_time = date->time;
                 }
-#ifdef VERBOSE
-                g_object_get (G_OBJECT (date->task), "name", &name, NULL);
-#endif
+
                 if (date->type == START_ASSIGN) {
                         units += date->units;
-#ifdef VERBOSE
-                        g_message
-                                ("Timetable: starting task (%s) and now using %d units",
-                                 name, units);
-                        mrp_time_debug_print (date->time);
-#endif
                 } else {
                         units -= date->units;
-#ifdef VERBOSE
-                        g_message
-                                ("Timetable: ending task (%s) and now using %d units",
-                                 name, units);
-                        mrp_time_debug_print (date->time);
-#endif
                 }
-#ifdef VERBOSE
-                g_free (name);
-#endif
                 g_free (date);
         }
         g_list_free (dates);
-#ifdef VERBOSE
-        g_message ("Timetable: final load of %d units", units);
-#endif
+
         if (chunk != ROW_END) {
                 chunk = ROW_END;
                 ttable_row_draw_resource_ival (previous_time,
@@ -1233,15 +1226,17 @@ ttable_row_draw_resource (PlannerTtableRow * row,
 }
 
 static void
-ttable_row_draw_assignment (PlannerTtableRow * row,
-                            MrpAssignment * assign,
-                            GnomeCanvasItem * item,
-                            GdkDrawable * drawable,
-                            gint x, gint y, gint width, gint height)
+ttable_row_draw_assignment (PlannerTtableRow *row,
+                            MrpAssignment    *assign,
+                            GnomeCanvasItem  *item,
+                            GdkDrawable      *drawable,
+                            gint              x,
+			    gint              y,
+			    gint              width,
+			    gint              height)
 {
         PlannerTtableRowPriv *priv;
         MrpTask              *task;
-        //GdkGC *frame_gc;
         gdouble               i2w_dx;
         gdouble               i2w_dy;
         gdouble               dx1, dy1, dx2, dy2;
@@ -1251,8 +1246,6 @@ ttable_row_draw_assignment (PlannerTtableRow * row,
         gint                  rx1, ry1;
         gint                  rx2, ry2;
         gint                  cx1, cy1, cx2, cy2;
-        //GdkColor color;
-        //GdkColor color_high, color_shadow;
         gdouble               ass_x, ass_xend, ass_x_start;
 
         priv = row->priv;
@@ -1371,12 +1364,9 @@ ttable_row_draw (GnomeCanvasItem *item,
 		 gint             width,
 		 gint             height)
 {
-        PlannerTtableRow   *row;
-        PlannerTtableChart *chart;
+        PlannerTtableRow *row;
 
         row = PLANNER_TTABLE_ROW (item);
-
-        chart = g_object_get_data (G_OBJECT (item->canvas), "chart");
 
 	if (row->priv->assignment) {
                 ttable_row_draw_assignment (row,
@@ -1385,18 +1375,7 @@ ttable_row_draw (GnomeCanvasItem *item,
                                             drawable, x, y, width, height);
         }
 	else if (row->priv->resource) {
-                /*
-                 * GList        *assigns,*a;
-                 * gchar        *name=NULL;
-                 * assigns = mrp_resource_get_assignments(row->priv->resource);
-                 * for (a=assigns; a; a=a->next) {
-                 * MrpAssignment        *assign;
-                 * assign = MRP_ASSIGNMENT(a->data);
-                 * ttable_row_draw_assignment(row,assign,item,drawable,x,y,width,height);
-                 * }
-                 */
-                ttable_row_draw_resource (row, drawable, item, x, y, width,
-                                          height);
+                ttable_row_draw_resource (row, drawable, item, x, y, width, height);
         }
 }
 
@@ -1539,7 +1518,10 @@ ttable_row_task_notify_cb (MrpTask          *task,
                 row->priv->fixed_duration = FALSE;
         }
 
-        recalc_bounds (row);
+        if (!recalc_bounds (row)) {
+		return;
+	}
+	
         ttable_row_geometry_changed (row);
         gnome_canvas_item_request_update (GNOME_CANVAS_ITEM (row));
 }
@@ -1824,10 +1806,8 @@ ttable_row_event (GnomeCanvasItem * item, GdkEvent * event)
 
                                 gnome_canvas_item_i2w (item, &wx1, &wy1);
                                 gnome_canvas_item_i2w (item, &wx2, &wy2);
-                                task = mrp_assignment_get_task (priv->
-                                                                assignment);
-                                g_object_get (G_OBJECT (task), "name",
-                                              &task_name, NULL);
+                                task = mrp_assignment_get_task (priv->assignment);
+                                g_object_get (task, "name", &task_name, NULL);
 
                                 /*      red            green          blue          alpha */
                                 rgba = (0xb7 << 24) | (0xc3 << 16) | (0xc9 <<
@@ -1878,10 +1858,8 @@ ttable_row_event (GnomeCanvasItem * item, GdkEvent * event)
                                          "outline_color_rgba", 0,
                                          "width_pixels", 1, NULL);
                                 gnome_canvas_item_hide (drag_item);
-                                task = mrp_assignment_get_task (priv->
-                                                                assignment);
-                                g_object_get (G_OBJECT (task), "name",
-                                              &task_name, NULL);
+                                task = mrp_assignment_get_task (priv->assignment);
+                                g_object_get (task, "name",  &task_name, NULL);
 
                                 /*
                                  * Start the autoscroll timeout.

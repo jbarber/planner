@@ -1636,10 +1636,10 @@ gantt_chart_tree_traverse (TreeNode *node, TreeFunc func, gpointer data)
 
 static void
 gantt_chart_set_scroll_region (PlannerGanttChart *chart,
-			       gdouble       x1,
-			       gdouble       y1,
-			       gdouble       x2,
-			       gdouble       y2)
+			       gdouble            x1,
+			       gdouble            y1,
+			       gdouble            x2,
+			       gdouble            y2)
 {
 	GnomeCanvas *canvas;
 	gdouble      ox1, oy1, ox2, oy2;
@@ -1819,7 +1819,6 @@ planner_gantt_chart_zoom_to_fit (PlannerGanttChart *chart)
 	priv = chart->priv;
 
 	t = gantt_chart_get_width (chart);
-
 	if (t == -1) {
 		return;
 	}
@@ -1827,7 +1826,6 @@ planner_gantt_chart_zoom_to_fit (PlannerGanttChart *chart)
 	alloc = GTK_WIDGET (chart)->allocation.width - PADDING * 2;
 
 	zoom = planner_scale_clamp_zoom (ZOOM (alloc / t));
-	
 	gantt_chart_set_zoom (chart, zoom);
 }
 

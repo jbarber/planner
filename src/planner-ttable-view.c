@@ -415,7 +415,15 @@ ttable_view_project_loaded_cb (MrpProject *project, PlannerView *view)
 {
         GtkTreeModel *model;
 
+	/* FIXME: This is not working so well. Look at how the gantt view
+	 * handles this. (The crux is that the root task for example might
+	 * change when a project is loaded, so we need to rconnect signals
+	 * etc.)
+	 */
         if (project == view->priv->project) {
+		/* FIXME: Due to the above, we have this hack. */
+		planner_ttable_chart_setup_root_task (view->priv->chart);
+		
                 gtk_tree_view_expand_all (GTK_TREE_VIEW (view->priv->tree));
                 planner_ttable_chart_expand_all (view->priv->chart);
                 return;

@@ -195,8 +195,6 @@ static void      ttable_chart_row_inserted          (GtkTreeModel            *mo
 static void      ttable_chart_row_deleted           (GtkTreeModel            *model,
 						     GtkTreePath             *path,
 						     gpointer                 data);
-static void      ttable_chart_update_root_task      (PlannerTtableChart      *chart);
-
 
 
 static guint signals[LAST_SIGNAL];
@@ -532,10 +530,12 @@ planner_ttable_chart_zoom_to_fit (PlannerTtableChart *chart)
 	priv = chart->priv;
 
 	t = ttable_chart_get_width (chart);
-        if (t == -1)
+        if (t == -1) {
                 return;
+	}
 
         alloc = GTK_WIDGET (chart)->allocation.width - PADDING * 2;
+
         zoom = planner_scale_clamp_zoom (ZOOM (alloc / t));
         ttable_chart_set_zoom (chart, zoom);
 }
@@ -551,12 +551,6 @@ planner_ttable_chart_get_zoom (PlannerTtableChart *chart)
 static gint
 ttable_chart_get_width (PlannerTtableChart *chart)
 {
-	/* FIXME: Evil hack that should be removed when the ttable chart gets
-	 * changes in the root task correctly. There is a problem with the
-	 * notify signal on the root task, triggered when a project is loaded.
-	 */
-	ttable_chart_update_root_task (chart);
-	
 	if (chart->priv->project_start == MRP_TIME_INVALID ||
             chart->priv->last_time == MRP_TIME_INVALID) {
                 return -1;
@@ -673,6 +667,11 @@ ttable_chart_map (GtkWidget * widget)
                 GTK_WIDGET_CLASS (parent_class)->map (widget);
         }
 
+	/* FIXME: Workaround for problem when changing the project length from
+	 * other views. Need to fix this for real.
+	 */
+	ttable_chart_set_zoom (chart, chart->priv->zoom);
+
 	chart->priv->height_changed = TRUE;
         ttable_chart_reflow_now (chart);
 }
@@ -680,7 +679,7 @@ ttable_chart_map (GtkWidget * widget)
 static void
 ttable_chart_size_allocate (GtkWidget *widget, GtkAllocation *allocation)
 {
-        PlannerTtableChart *chart;
+	PlannerTtableChart *chart;
         gboolean            height_changed;
 
         height_changed = widget->allocation.height != allocation->height;
@@ -688,6 +687,7 @@ ttable_chart_size_allocate (GtkWidget *widget, GtkAllocation *allocation)
         GTK_WIDGET_CLASS (parent_class)->size_allocate (widget, allocation);
 
 	chart = PLANNER_TTABLE_CHART (widget);
+
         if (GTK_WIDGET_MAPPED (chart)) {
                 ttable_chart_reflow_now (chart);
         }
@@ -708,12 +708,10 @@ ttable_chart_set_adjustments (PlannerTtableChart *chart,
         priv = chart->priv;
 
         if (hadj == NULL) {
-                hadj = GTK_ADJUSTMENT (gtk_adjustment_new
-                                       (0.0, 0.0, 0.0, 0.0, 0.0, 0.0));
+                hadj = GTK_ADJUSTMENT (gtk_adjustment_new (0.0, 0.0, 0.0, 0.0, 0.0, 0.0));
         }
         if (vadj == NULL) {
-                vadj = GTK_ADJUSTMENT (gtk_adjustment_new
-                                       (0.0, 0.0, 0.0, 0.0, 0.0, 0.0));
+                vadj = GTK_ADJUSTMENT (gtk_adjustment_new (0.0, 0.0, 0.0, 0.0, 0.0, 0.0));
         }
         if (priv->hadjustment && (priv->hadjustment != hadj)) {
                 g_object_unref (priv->hadjustment);
@@ -735,6 +733,7 @@ ttable_chart_set_adjustments (PlannerTtableChart *chart,
                 gtk_object_sink (GTK_OBJECT (priv->vadjustment));
                 need_adjust = TRUE;
         }
+	
         if (need_adjust) {
                 gtk_widget_set_scroll_adjustments (GTK_WIDGET (priv->canvas),
                                                    hadj, vadj);
@@ -829,19 +828,32 @@ ttable_chart_reflow_idle (PlannerTtableChart *chart)
         height = MAX (y2 - y1, allocation.height - 1.0);
 
         gnome_canvas_item_get_bounds (priv->canvas->root,
-                                      &bx1, NULL, &bx2, NULL);
+                                      &bx1, NULL,
+				      &bx2, NULL);
 
         bx2 += PADDING;
+
         width = MAX (width, bx2 - bx1);
+
         x2 = x1 + width;
 
-        ttable_chart_set_scroll_region (chart, x1, y1, x2, y1 + height);
+        ttable_chart_set_scroll_region (chart,
+					x1,
+					y1,
+					x2,
+					y1 + height);
+
         if (x1 > -1 && x2 > -1) {
-                g_object_set (priv->header, "x1", x1, "x2", x2, NULL);
+                g_object_set (priv->header,
+			      "x1", x1,
+			      "x2", x2,
+			      NULL);
         }
+	
         priv->height_changed = FALSE;
         priv->reflow_idle_id = 0;
-        return FALSE;
+
+	return FALSE;
 }
 
 static void
@@ -949,7 +961,6 @@ planner_ttable_chart_set_model (PlannerTtableChart *chart,
         MrpProject             *project;
         MrpTask                *root;
         gulong                  signal_id;
-        mrptime                 t;
 
         g_return_if_fail (PLANNER_IS_TTABLE_CHART (chart));
 
@@ -963,6 +974,7 @@ planner_ttable_chart_set_model (PlannerTtableChart *chart,
                 ttable_chart_disconnect_signals (chart);
                 g_object_unref (priv->model);
         }
+	
         priv->model = model;
         if (model) {
                 g_object_ref (model);
@@ -981,14 +993,12 @@ planner_ttable_chart_set_model (PlannerTtableChart *chart,
                 ttable_chart_add_signal (chart, project, signal_id,
                                          "notify::project-start");
 		
-                signal_id = g_signal_connect (root,
-                                              "notify::finish",
-                                              G_CALLBACK
-                                              (ttable_chart_root_finish_changed),
-                                              chart);
-                ttable_chart_add_signal (chart, root, signal_id,
-                                         "notify::finish");
-
+                g_signal_connect (root,
+				  "notify::finish",
+				  G_CALLBACK
+				  (ttable_chart_root_finish_changed),
+				  chart);
+		
                 signal_id = g_signal_connect (model,
                                               "row-changed",
                                               G_CALLBACK
@@ -1021,12 +1031,12 @@ planner_ttable_chart_set_model (PlannerTtableChart *chart,
                  * ttable_chart_add_signal (chart, model, signal_id,"row-reordered");
                  */
 
-                g_object_get (project, "project-start", &t, NULL);
-                priv->project_start = t;
-                g_object_set (priv->background, "project-start", t, NULL);
+                priv->project_start = mrp_project_get_project_start (project);
+                g_object_set (priv->background,
+			      "project-start", priv->project_start,
+			      NULL);
 
-                g_object_get (root, "finish", &t, NULL);
-                priv->last_time = t;
+                priv->last_time = mrp_task_get_finish (root);
 
                 priv->height_changed = TRUE;
                 ttable_chart_reflow_now (chart);
@@ -1186,7 +1196,7 @@ ttable_chart_root_finish_changed (MrpTask            *root,
                                   PlannerTtableChart *chart)
 {
 	chart->priv->last_time = mrp_task_get_finish (root);
-	ttable_chart_reflow_now (chart);
+	ttable_chart_reflow (chart, FALSE);
 }
 
 static void
@@ -1501,9 +1511,8 @@ ttable_chart_remove_children (PlannerTtableChart *chart, TreeNode *node)
         g_free (node);
 }
 
-/* FIXME: Remove this when the workaround isn't needed anymore. */
-static void
-ttable_chart_update_root_task (PlannerTtableChart *chart)
+void
+planner_ttable_chart_setup_root_task (PlannerTtableChart *chart)
 {
         PlannerTtableChartPriv *priv;
         MrpProject             *project;
@@ -1516,7 +1525,10 @@ ttable_chart_update_root_task (PlannerTtableChart *chart)
 	project = planner_ttable_model_get_project (PLANNER_TTABLE_MODEL (priv->model));
 	root = mrp_project_get_root_task (project);
 	
-	priv->project_start = mrp_project_get_project_start (project);
-	priv->last_time = mrp_task_get_finish (root);
+	g_signal_connect (root,
+			  "notify::finish",
+			  G_CALLBACK
+			  (ttable_chart_root_finish_changed),
+			  chart);
 }
 

@@ -74,5 +74,6 @@ gdouble       planner_ttable_chart_get_zoom         (PlannerTtableChart *chart);
 void          planner_ttable_chart_status_updated   (PlannerTtableChart *chart,
 						     gchar              *message);
 
+void planner_ttable_chart_setup_root_task (PlannerTtableChart *chart);
 
 #endif /* __PLANNER_TTABLE_CHART_H__ */

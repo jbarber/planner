@@ -1,4 +1,24 @@
+2004-07-02  Richard Hult  <richard@imendio.com>
+
+	* src/planner-gantt-chart.c: Fix coding style in a few places.
+
+	* src/planner-ttable-chart.c (ttable_chart_map):
+	* src/planner-ttable-view.c: (ttable_view_project_loaded_cb): Add
+	workaround to make this a bit better for 0.12.
+
+2004-07-02  Richard Hult  <richard@imendio.com>
+
+	* src/planner-ttable-chart.c (planner_ttable_chart_set_model):
+	Don't add a signal connected to a task to the list of connections
+	to remove.
+
+	* src/planner-ttable-row.c (recalc_bounds): Don't use
+	uninitialized values.
+
 2004-07-01  Richard Hult  <richard@imendio.com>
+
+	* src/planner-ttable-row.c (ttable_row_draw_resource_ival): Draw
+	the border correctly.
 
 	* src/planner-gantt-chart.c: (gantt_chart_row_has_child_toggled),
 	(planner_gantt_chart_set_model): Redraw when parenthood changes.
