@@ -1,0 +1,25 @@
+The following modifiers can be used with mrp_time_format ():
+
+       %a     The abbreviated weekday name (Mon, Tue, ...)
+       %A     The full weekday name (Monday, Tuesday, ...)
+       %b     The abbreviated month name (Jan, Feb, ...)
+       %B     The full month name (January, February, ...)
+       %d     The day of the month (01 - 31).
+       %e     The day of the month (1 - 31).
+       %H     The hour using a 24-hour clock (00 - 23).
+       %I     The hour using a 12-hour clock (01 - 12).
+       %j     The day of the year (001 - 366).
+       %k     The hour using a 24-hour clock (0 to 23).
+       %l     The hour using a 12-hour clock (1 - 12).
+       %m     The month number (01 to 12).
+       %M     The minute (00 - 59).
+       %p     Either 'AM' or 'PM' according  to the given time value.
+       %P     Like %p but in lowercase.
+       %S     The second (00 - 61).
+       %R     The time in 24 hour notation (%H:%M).
+       %U     The week number, (1 - 53), starting with the first
+              Sunday as the first day of week 1.
+       %W     The week number, (1 - 53), starting with the first
+              Monday as the first day of week 1.
+       %y     The year without a century (range 00 to 99).
+       %Y     The year including the century.

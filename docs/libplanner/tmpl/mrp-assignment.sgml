@@ -1,0 +1,81 @@
+<!-- ##### SECTION Title ##### -->
+MrpAssignment
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### STRUCT MrpAssignmentPriv ##### -->
+<para>
+A private struct for internal use only.  The definition of this
+structure is not publically available.
+</para>
+
+
+<!-- ##### STRUCT MrpAssignment ##### -->
+<para>
+Represents an assignment, i.e. the assignment of a task to a resource.
+</para>
+
+
+<!-- ##### ARG MrpAssignment:resource ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG MrpAssignment:task ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG MrpAssignment:units ##### -->
+<para>
+
+</para>
+
+<!-- ##### FUNCTION mrp_assignment_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_assignment_get_task ##### -->
+<para>
+
+</para>
+
+@assignment: 
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_assignment_get_resource ##### -->
+<para>
+
+</para>
+
+@assignment: 
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_assignment_get_units ##### -->
+<para>
+
+</para>
+
+@assignment: 
+@Returns: 
+<!-- # Unused Parameters # -->
+@assignemnt: 
+
+

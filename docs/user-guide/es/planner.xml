@@ -1,0 +1,1762 @@
+<?xml version="1.0"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
+"http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+  <!ENTITY legal SYSTEM "legal.xml">
+  <!ENTITY appversion "0.10.0">
+  <!ENTITY manrevision "1.5.1">
+  <!ENTITY date "29 May 2003">
+  <!ENTITY app "MrProject">
+  <!-- Information about the entities
+       The legal.xml file contains legal information, there is no need to edit the file. 
+       Use the appversion entity to specify the version of the application.
+       Use the manrevision entity to specify the revision number of this manual.
+       Use the date entity to specify the release date of this manual.
+       Use the app entity to specify the name of the application. -->
+]>
+<!-- 
+      (Do not remove this comment block.)
+  Maintained by the GNOME Documentation Project
+  http://developer.gnome.org/projects/gdp
+  Template version: 2.0 beta
+  Template last modified Apr 11, 2002
+-->
+<!-- =============Document Header ============================= -->
+<article id="index" lang="es">
+<!-- please do not change the id; for translations, change lang to -->
+<!-- appropriate code -->
+  <articleinfo> 
+    <title>&app; Guía del usuario V&manrevision;</title>       
+    <subtitle>para &app; v&appversion;</subtitle>
+
+    <copyright> 
+      <year>2003</year> 
+      <holder>Jordán Arribas Aranda</holder> 
+    </copyright> 
+    <copyright> 
+      <year>2002</year> 
+      <year>2003</year> 
+      <holder>Kurt Maute, PMP</holder> 
+    </copyright> 
+    <copyright> 
+      <year>2000</year> 
+      <year>2001</year> 
+      <holder>Álvaro Del Castillo</holder> 
+    </copyright>
+    <copyright> 
+      <year>2000</year> 
+      <year>2001</year> 
+      <holder>Pedro Soria-Rodríguez</holder> 
+    </copyright>
+<!-- translators: uncomment this:
+
+  <copyright>
+   <year>2002</year>
+   <holder>ME-THE-TRANSLATOR (Latin translation)</holder>
+  </copyright>
+
+   -->
+<!-- An address can be added to the publisher information.  If a role is 
+     not specified, the publisher/author is the same for all versions of the 
+     document.  -->
+    <publisher> 
+      <publishername>Proyecto de documentación GNOME</publishername> 
+    </publisher> 
+
+   &legal;
+   <!-- This file contains link to license for the documentation (GNU FDL), and 
+        other legal stuff such as "NO WARRANTY" statement. Please do not change 
+        any of this. -->
+
+    <authorgroup> 
+      <author> 
+		<firstname>Jordán</firstname> 
+		<surname>Arribas Aranda</surname> 
+		<affiliation> 
+	  		<orgname>Proyecto de documentación GNOME</orgname> 
+	  		<address> <email>jordan.arribas@eresmas.net</email> </address> 
+		</affiliation> 
+      </author> 
+      <author> 
+		<firstname>Kurt</firstname> 
+		<surname>Maute, PMP</surname> 
+		<affiliation> 
+	  		<orgname>Proyecto de documentación GNOME</orgname> 
+	  		<address> <email>Kurt@Maute.us</email> </address> 
+		</affiliation> 
+      </author> 
+      <author> 
+		<firstname>Álvaro</firstname> 
+		<surname>del Castillo</surname> 
+		<affiliation> 
+	  		<orgname>Proyecto de documentación GNOME</orgname> 
+	  		<address> <email>acs@barrapunto.com</email> </address> 
+		</affiliation> 
+      </author> 
+      <author> 
+		<firstname>Pedro</firstname> 
+		<surname>Soria Rodríguez</surname> 
+		<affiliation> 
+	  		<orgname>Proyecto de documentación GNOME</orgname> 
+	  		<address> <email>sorrodp@alum.wpi.edu</email> </address> 
+		</affiliation> 
+      </author> 
+      
+<!-- This is appropriate place for other contributors: translators,
+     maintainers,  etc. Commented out by default.
+     
+      <othercredit role="translator">
+		<firstname>Latin</firstname> 
+		<surname>Translator 1</surname> 
+		<affiliation> 
+	  		<orgname>Latin Translation Team</orgname> 
+	  		<address> <email>translator@gnome.org</email> </address> 
+		</affiliation>
+		<contrib>Latin translation</contrib>
+      </othercredit>
+-->
+    </authorgroup>
+
+
+<!-- According to GNU FDL, revision history is mandatory if you are -->
+<!-- modifying/reusing someone else's document.  If not, you can omit it. -->
+<!-- Remember to remove the &manrevision; entity from the revision entries other
+-->
+<!-- than the current revision. -->
+<!-- The revision numbering system for GNOME manuals is as follows: -->
+<!-- * the revision number consists of two components -->
+<!-- * the first component of the revision number reflects the release version of the GNOME desktop. -->
+<!-- * the second component of the revision number is a decimal unit that is incremented with each revision of the manual. -->
+<!-- For example, if the GNOME desktop release is V2.x, the first version of the manual that -->
+<!-- is written in that desktop timeframe is V2.0, the second version of the manual is V2.1, etc. -->
+<!-- When the desktop release version changes to V3.x, the revision number of the manual changes -->
+<!-- to V3.0, and so on. -->  
+    <revhistory>
+      <revision> 
+	<revnumber>&app; Guía del usuario V&manrevision; para &app; V&appversion;</revnumber> 
+	<date>&date;</date> 
+	<authorinitials>kmm</authorinitials>
+	<revdescription> 
+	  <para>
+	    Adiciones de nuevas características:
+	    <itemizedlist>
+	      <listitem><para>Abrir desde/Guardar como base de datos</para></listitem>
+	      <listitem><para>Apéndice de como configurar la base de datos</para></listitem>
+	      <listitem><para>Guardar como HTML</para></listitem>
+	    </itemizedlist>
+	  </para>
+	</revdescription> 
+      </revision> 
+      <revision> 
+	<revnumber>&app; Guía del usuario V1.4 para &app; V0.9</revnumber> 
+	<date>23 Feb 2003</date> 
+	<authorinitials>kmm</authorinitials>
+	<revdescription> 
+	  <para>
+	      Adiciones de nuevas características:
+	        <itemizedlist>
+	          <listitem><para>Propiedades personalizadas para proyectos, tareas, &amp; recursos
+		    </para></listitem>
+	          <listitem><para>Modo de duración fija para tareas</para></listitem>
+	          <listitem><para>Hitos</para></listitem>
+	          <listitem><para>Localización de recursos por unidades</para></listitem>
+	          <listitem><para>Imprimir</para></listitem>
+	        </itemizedlist>
+	      Utilización de cuadros de diálogo 'Añadir rápido' para tareas &amp; recursos
+	  </para>
+	</revdescription> 
+      </revision> 
+      <revision> 
+	<revnumber>&app; Guía del usuario V1.3 para &app; V0.8</revnumber> 
+	<date>29 Dec 2002</date> 
+	<authorinitials>kmm</authorinitials>
+	<revdescription> 
+	  <para>
+	      Adiciones de nuevas características:
+	        <itemizedlist>
+	          <listitem><para>Calendarios</para></listitem>
+	          <listitem><para>Columna de costes en la vista de recursos</para></listitem>
+	        </itemizedlist>
+	      Algunas capturas de pantallas nuevas
+	  </para>
+	</revdescription> 
+      </revision> 
+    </revhistory> 
+
+    <releaseinfo>Este manual describe la versión &appversion; de &app;
+    </releaseinfo> 
+    <legalnotice> 
+      <title>Feedback</title> 
+      <para>Para informar de fallos o realizar alguna sugerencia de la aplicación &app; o
+      sobre este manual, siga las direcciones en la <ulink url="ghelp:gnome-feedback"
+	  type="help">página feedback de GNOME</ulink>. 
+      </para>
+<!-- Translators may also add here feedback address for translations -->
+    </legalnotice> 
+  </articleinfo> 
+
+  <indexterm zone="index"> 
+    <primary>MY-GNOME-APP</primary> 
+  </indexterm> 
+  <indexterm zone="index"> 
+    <primary>mygnomeapp</primary> 
+  </indexterm>
+
+<!-- ============= Document Body ============================= -->
+<!-- ============= Introduction ============================== -->
+<!-- Use the Introduction section to give a brief overview of what
+     the application is and what it does. -->
+  <sect1 id="mrp-introduction"> 
+    <title>Introducción</title> 
+    <para>&app; es una herramienta para gestionar proyectos de carácter general que proporciona
+    una variedad de características, las cuales están disponibles a través de 3 pantallas distintas
+    llamadas vistas.  Tal y como se verá, las vistas son accesibles haciendo clic sobre los iconos
+	en la izquierda de la barra de herramientas de la ventada de &app;.</para> 
+    <sect2 id="mrp-task-view">
+	<title>Vista de tareas:</title> 
+        <para>
+      Las tareas también son mostradas en la vista de Gantt, pero la vista de tareas muestra		
+	  mas detalles de cada tarea.
+          <figure id="task-view" float="1">
+            <title>Vista de tareas de MrProject</title>
+            <screenshot>
+              <graphic fileref="figures/task-view.png" format="PNG"></graphic>
+            </screenshot>
+          </figure>        
+        </para>
+	<para>La vista de tareas es usada para lo siguiente:</para>
+	<itemizedlist> 
+	<listitem> 
+    	  <para>Definición de tareas - desglosar el proyecto en tareas mas pequeñas y
+		manejables</para> 
+  	</listitem> 
+  	<listitem> 
+    	  <para>Secuenciación de tareas - identificar dependencias entre las tareas y
+		otras restricciones</para> 
+  	</listitem> 
+  	<listitem> 
+    	  <para>Estimación de la duración de tareas - estimar el tiempo que llevará la
+		realización completa de las tareas</para> 
+  	</listitem> 
+  	<listitem> 
+    	  <para>Estimación de el coste de tareas - estimar el coste que llevará la
+		realización completa de las tareas</para> 
+  	</listitem> 
+<!-- 	<listitem> 
+    	<para>Planificación - desarrollar la línea de tiempo basada en los anteriores pasos,
+		mas la disponibilidad de los recursos</para> 
+	</listitem>
+-->
+	</itemizedlist> 
+    </sect2>
+    <sect2 id="mrp-gantt-view">
+	<title>Vista de Gantt:</title> 
+	<para>La vista de Gantt combina el diagrama de Gantt con una versión reducida de la
+	  vista de tareas.
+	</para>
+        <para>
+          El diagrama de Gantt es un gráfico que representa todas las tareas que 
+          componen un proyecto. Cada barra del diagrama es una representación gráfica
+          de la duración de tiempo asignada a cada tarea. El diagrama de Gantt no 
+		  ofrece ninguna característica que no esté disponible en alguna otra vista,
+     	  pero es una herramienta muy útil para la gestión de proyectos por la forma
+		  en que muestra al usuario los datos del proyecto.
+          <figure id="gantt-view" float="1">
+            <title>Vista de Gantt de MrProject</title>
+            <screenshot>
+              <graphic fileref="figures/gantt-view.png" format="PNG"></graphic>
+            </screenshot>
+          </figure>        
+        </para>
+	<para>La vista de Gantt permite:</para>
+	<itemizedlist> 
+	<listitem> 
+	  <para>Ver una representación gráfica de la planificación del proyecto</para>
+  	</listitem> 
+	<listitem> 
+	  <para>Gestionar las relaciones entre las tareas usando arrastrar y soltar</para>
+  	</listitem> 
+	<listitem> 
+	  <para>Utilizar las características de zoom acercar y zoom alejar para ver diferentes
+	  niveles de detalle</para>
+  	</listitem> 
+	<listitem> 
+	  <para>Ver los recursos asignados a cada tarea</para>
+  	</listitem> 
+	</itemizedlist> 
+    </sect2>
+    <sect2 id="mrp-resource-view">
+	<title>Vista de recursos:</title> 
+          <figure id="resource-view" float="1">
+            <title>Vista de recursos de MrProject</title>
+            <screenshot>
+              <graphic fileref="figures/resource-editor.png" format="PNG" ></graphic>
+            </screenshot>
+          </figure>        
+	<para>La vista de recursos proporciona acceso a las siguientes características:</para>
+	<itemizedlist> 
+	<listitem> 
+	  <para>Gestionar la lista de recursos, incluyendo los recursos humanos y los materiales</para>
+  	</listitem> 
+	<listitem> 
+	  <para>Gestionar los recursos de grupo</para>
+  	</listitem> 
+	<listitem> 
+	  <para>Gestionar los recursos de costes</para>
+  	</listitem> 
+	</itemizedlist> 
+    </sect2>
+  </sect1>
+
+<!-- =========== Getting Started ============================== -->
+<!-- Use the Getting Started section to describe the steps required
+     to start the application and to describe the user interface components
+     of the application. If there is other information that it is important
+     for readers to know before they start using the application, you should
+     also include this information here. 
+     If the information about how to get started is very short, you can 
+     include it in the Introduction and omit this section. -->
+
+  <sect1 id="mrp-getting-started"> 
+    <title>Comenzando</title> 
+
+    <sect2 id="mrp-start">
+    <title>El comienzo de &app;</title>
+    <para>Se puede comenzar <application>&app;</application> de las siguientes formas:
+    </para> 
+    <variablelist>
+    	<varlistentry>
+    		<term>Menú <guimenu>aplicaciones</guimenu></term>
+    		<listitem>
+    		<para>Elegir
+    		<menuchoice>
+    		<guisubmenu>Office</guisubmenu>
+    		<guimenuitem>MrProject</guimenuitem>
+    		</menuchoice>. </para>
+    		</listitem>
+    	</varlistentry>
+    	<varlistentry>
+    		<term>Línea de comandos</term>
+    		<listitem>
+    		<para>Para comenzar <application>&app;</application> desde la línea de comandos,
+		 escribir el siguiente comando, entonces presionar <keycap>Return</keycap>:</para>
+    		<para> 
+			<command>mrproject</command> 
+    		</para> 
+    		<para> de momento el comando no tiene argumentos o parámetros de entrada.
+    		</para> 
+    		</listitem>
+    	</varlistentry>
+    </variablelist>
+    </sect2>
+
+    <sect2 id="mrp-when-start">
+    <title>Una vez iniciado &app;</title>
+    <para>Al iniciar <application>&app;</application>, se representa la siguiente
+	ventana. Tal y como se muestra, por defecto es la vista del diagrama de Gantt.</para>
+
+    <!-- ==== Figure ==== -->
+    <figure id="newproject"> 
+	<title>Ventana de inicio de &app;</title> 
+	<screenshot> 
+	  <medíaobject> 
+	    <imageobject><imagedata
+		fileref="figures/new-project.png" format="PNG"/> 
+	    </imageobject>
+	    <textobject> 
+	      <phrase>Se muestra la ventana principal de &app;. Contiene la barra de títulos, la barra
+		  de menús, la barra de herramientas, área de trabajo y las barras de scroll.
+	      La barra de menús contiene los menús: Archivo, Edición, Ver y Ayuda.
+	      </phrase> 
+	    </textobject> 
+	  </medíaobject> 
+	</screenshot> 
+      </figure>
+    <!-- ==== End of Figure ==== -->
+    <para>La ventana de &app; contiene los siguientes elementos:
+    </para>
+      <variablelist>
+	<varlistentry>
+	<term>Barra de menús. </term>
+	<listitem>
+	  <para>Los menús de la barra de menús contienen todos los comandos que se necesitan para
+	    trabajar con los archivos de <application>&app;</application>.</para>
+	</listitem>
+	</varlistentry>
+	<varlistentry>
+	<term>Barra de herramientas. </term>
+	<listitem>
+	  <para>La barra de herramientas contiene el conjunto de comandos a los que se puede 
+	    acceder desde la barra de menús.</para>
+	</listitem>
+	</varlistentry>
+	<varlistentry>
+	<term>Barra de estado. </term>
+	<listitem>
+	  <para>La barra de estado representa información sobre la actividad actual de 
+	  <application>&app;</application> 
+	  e información contextual sobre los elementos del menú. </para>
+	</listitem>
+	</varlistentry>
+	</variablelist>
+    </sect2>
+    <sect2 id="mrp-several-start">
+    <title>Trabajando con múltiples proyectos</title>
+      <para>
+	      Se puede tener abierto mas de un proyecto a la vez. Cada proyecto 
+          tendrá su propia ventada de MrProject. Probarlo presionando "CTRL-N"
+		  algunas veces. Se debería obtener algo similar a
+	  <xref linkend="several-projects"/>.
+       <figure float="1" id="several-projects">
+       <title>Múltiples proyectos al mismo tiempo</title>
+        <screenshot>
+	  <medíaobject> 
+	    <imageobject><imagedata
+               fileref="figures/several-projects.png" format="PNG" ></imagedata>
+	    </imageobject>
+	    <textobject> 
+	      <phrase>Muestra el escritorio de Gnome 2, con 3 ventanas abiertas de &app;.
+	      </phrase> 
+	    </textobject> 
+	  </medíaobject>
+        </screenshot>
+       </figure>
+      </para>
+    </sect2>
+  </sect1>
+<!-- ================ Usage ================================ -->
+<!-- Use this section to describe how to use the application to perform the tasks for 
+  which the application is designed. -->
+  <sect1 id="mrp-usage"> 
+    <title>Utilización</title> 
+    <para>
+      <itemizedlist> 
+	<listitem> 
+	  <para> 
+	    <xref linkend="mrp-open-project"/></para> 
+	</listitem> 
+	<listitem> 
+	  <para> 
+	    <xref linkend="mrp-properties"/></para> 
+	</listitem> 
+	<listitem> 
+	  <para> 
+	    <xref linkend="mrp-calendars"/></para>
+	</listitem> 
+	<listitem> 
+	  <para> 
+	    <xref linkend="mrp-tasks"/></para>
+	</listitem> 
+	<listitem> 
+	  <para> 
+	    <xref linkend="mrp-resources"/></para> 
+	</listitem> 
+	<listitem> 
+	  <para> 
+	    <xref linkend="mrp-print"/></para> 
+	</listitem> 
+	<listitem> 
+	  <para> 
+	    <xref linkend="mrp-export-html"/></para> 
+	</listitem> 
+      </itemizedlist> </para>
+    <!-- ================ Usage Subsection ================================ -->
+    <sect2 id="mrp-open-project" xreflabel="Open and Save Projects"> 
+      <title>Abrir y guardar proyectos</title> 
+      <para>Para abrir un proyecto, elegir
+	<menuchoice> 
+	  <guimenu>Archivo</guimenu> 
+	  <guimenuitem>Abir</guimenuitem> 
+	</menuchoice>. Se visualiza el cuadro de diálogo
+	<guilabel>Abrir Archivo</guilabel>. Seleccionar el archivo MrProject que se
+	desea abrir, a continuación hacer clic en 
+	<guibutton>OK</guibutton>. Los archivos de MrProject son almacenados con la extensión 
+	<filename>.mrproject</filename>.
+      </para>
+      <para>Para guardar un proyecto, elegir
+	<menuchoice> 
+	  <guimenu>Archivo</guimenu> 
+	  <guimenuitem>Guardar como</guimenuitem> 
+	</menuchoice> para guardar un nuevo proyecto, o un proyecto existente con un nuevo
+	nombre de archivo. Elegir
+	<menuchoice> 
+	  <guimenu>Archivo</guimenu> 
+	  <guimenuitem>Guardar</guimenuitem> 
+	</menuchoice> para guardar un proyecto existente, manteniendo el mismo nombre de archivo.
+      </para>
+      <para>
+	Si se intenta abrir un archivo de proyecto en un formato que &app; no reconoce, la
+	aplicación representa un mensaje de error.
+      </para>
+      <caution>
+      <para>Es prudente guardar el trabajo periódicamente.
+	&app; actualmente no tiene una característica de recuperación,
+	por lo que si tu sesión de edición es interrumpida por un corte de luz u otra
+	razón, se perdería todo el trabajo hecho desde la última vez que
+	<guimenuitem>guardaste</guimenuitem>.</para>
+      </caution>
+    </sect2> 
+    <sect2 id="mrp-opensave-database" xreflabel="Open from and Save to Database"> 
+      <title>Abrir proyecto desde y guardar en base de datos</title> 
+      <para>Para abrir un proyecto desde una base de datos, elegir
+	<menuchoice> 
+	  <guimenu>Archivo</guimenu> 
+	  <guimenuitem>Abrir desde base de datos...</guimenuitem> 
+	</menuchoice>. Se representa el cuadro de diálogo de
+	<guilabel>Abrir desde una base de datos</guilabel>. Introducir el <guilabel>
+	servidor, nombre de la base de datos, usuario</guilabel> y <guilabel>password</guilabel>, 
+	y hacer clic en el botón <guibutton>OK</guibutton>.
+	Si la base de datos está en la misma máquina en la que se está ejecutando MrProject,
+	se puede dejar en blanco. También se puede dejar el campo password en blanco si la
+	base de datos no requiere una contraseña de usuario.
+      </para>
+      <para>
+	Después que MrProject se conecte a la base da datos, se abre el cuadro de diálogo
+	<guilabel>Seleccionar un proyecto</guilabel>, el cual representa una lista de los 
+	proyectos que están almacenados en la base de datos. Seleccionar el proyecto que
+    se quiere abrir, entonces hacer clic en el botón <guibutton>OK</guibutton>. 
+      </para>
+      <para>Guardar un proyecto en la base de datos, elegir
+	<menuchoice> 
+	  <guimenu>Archivo</guimenu> 
+	  <guimenuitem>Guardar en la base de datos...</guimenuitem> 
+	</menuchoice>. Se representa el cuadro de diálogo
+	<guilabel>Guardar en la base de datos</guilabel>. Elegir el nombre del <guilabel>
+	servidor, de la base de datos</guilabel>,<guilabel> usuario</guilabel> y <guilabel>
+	password</guilabel>, y entonces hacer clic en el botón <guibutton>OK</guibutton>.
+	Si la base de datos está en la misma máquina en la que se está ejecutando MrProject,
+	se puede dejar en blanco. También se puede dejar el campo password en blanco si la
+	base de datos no requiere una contraseña de usuario.
+      </para>
+    </sect2> 
+    <!-- ================ Usage Subsection ================================ -->
+    <sect2 id="mrp-properties" xreflabel="Project Properties"> 
+      <title>Editar las propiedades del proyecto</title> 
+        <para> Editar las propiedades del proyecto, elegir
+	<menuchoice> 
+	  <guimenu>Archivo</guimenu> 
+	  <guimenuitem>Propiedades del proyecto</guimenuitem> 
+	</menuchoice> 
+          . En este cuadro de diálogo se puede editar el nombre del proyecto, su
+          fecha de comienzo, el nombre del director del proyecto, la organización a la
+          que pertenece el proyecto, la fase del proyecto y el calendario por defecto.
+	</para>
+	<itemizedlist>
+	<listitem>
+	<para>La pestaña <guilabel>General</guilabel></para>
+	<para>
+      Es importante observar que la fecha de comienzo por defecto para todas las tareas
+	  es la fecha de comienzo del proyecto. Por lo que, deberías fijar la fecha de
+	  comienzo del proyecto antes de introducir muchas tareas. Si se cambia la fecha
+	  de comienzo del proyecto después de que las tareas hayan sido introducidas,
+	  estas se modificarán por defecto a la nueva fecha de comienzo del proyecto, a menos
+	  que estén asociadas con restricciones, tales como la tarea predecesora o la
+	  restricción "no comenzar antes que".
+	</para>
+	<para>
+	  Este cuadro de diálogo también permite al usuario asignar una fase al proyecto.
+	  Las fases pueden ser añadidas eligiendo
+	  <menuchoice> 
+	    <guimenu>Proyecto</guimenu> 
+	    <guimenuitem>Editar las fases del proyecto</guimenuitem> 
+	  </menuchoice>
+	  , el cual representa un cuadro de diálogo con una lista simple de las fases del proyecto
+	  y botones para <guibutton>Añadir</guibutton> y <guibutton>Eliminar</guibutton> fases.
+	  Asignar una fase al proyecto sólo tiene un fin informativo. Por el momento
+	  no tiene ninguna otra función.
+	</para>
+	<para>
+      Cada proyecto tiene un calendario por defecto. El calendario por defecto se aplica
+	  a todos los recursos de un proyecto a menos que otro sea especificado en el editor
+	  de recursos. Utilizar el botón de seleccionar de este cuadro de diálogo para cambiar
+	  el calendario por defecto del proyecto. Ver la sección <xref linkend="mrp-calendars"/> 
+	  para mas información sobre calendarios.
+          <figure id="project-properties" float="1">
+            <title>Propiedades del proyecto</title>
+            <screenshot>
+              <graphic fileref="figures/project-properties.png" format="PNG" ></graphic>
+            </screenshot>
+          </figure>
+        </para>
+	</listitem>
+	<listitem>
+	<para>La pestaña <guilabel>Propiedades personales</guilabel></para>
+	<para>Se pueden añadir propiedades personales al proyecto haciendo clic en el botón 
+	<guibutton>Añadir</guibutton>.
+          <figure id="project-properties-custom" float="1">
+            <title>Propiedades personales del proyecto</title>
+            <screenshot>
+              <graphic fileref="figures/project-properties-custom.png" format="PNG" ></graphic>
+            </screenshot>
+          </figure>
+	</para>
+	<para>En el cuadro de diálogo propiedades personales del proyecto, si se hace clic en
+	  el botón añadir, se puede crear una nueva propiedad, con una etiqueta, un nombre, la
+	  descripción y el tipo de propiedad que puede ser: texto, número entero o número decimal.
+	  Una vez que se ha añadido una nueva propiedad, se puede cambiar su valor haciendo clic
+	  en el campo valor del cuadro de diálogo de propiedades personales del proyecto.
+          <figure id="project-properties-custom-add" float="1">
+            <title>Añadir propiedades personales al proyecto</title>
+            <screenshot>
+              <graphic fileref="figures/project-properties-custom-add.png" format="PNG" ></graphic>
+            </screenshot>
+          </figure>
+	</para>
+	</listitem>
+	</itemizedlist>
+    </sect2> 
+    <!-- ================ Usage Subsection ================================ -->
+    <sect2 id="mrp-calendars" xreflabel="Calendars"> 
+      <title>Editar los calendarios del proyecto</title> 
+        <para> Para editar los calendarios del proyecto, elegir
+	<menuchoice> 
+	  <guimenu>Proyecto</guimenu> 
+	  <guimenuitem>Gestionar calendarios</guimenuitem> 
+	</menuchoice>.  
+	  Los calendarios del proyecto nos permiten planificar cuando los recursos pueden
+	  ser utilizados en términos de días laborales y de días festivos y las horas en que
+	  ellos están disponibles en los días laborales. A la izquierda está el nombre del
+	  calendario que está siendo representado, en el centro está el calendario y a la 
+	  derecha está el rango de horas trabajadas para el día seleccionado. El calendario
+	  por defecto representa un mes de trabajo típico, con los fines de semana en gris,
+	  lo que significa que son días no laborales.
+	</para>
+	<note>
+	<title>Nota</title>
+	<para>
+      En el diagrama de Gantt, los días no laborales también se marcan en gris.
+	  Cualquier cambio hecho al calendario por defecto del proyecto se reflejará
+	  en el diagrama de Gantt.
+	</para>
+	</note>
+        <para>
+      Para realizar cambios a un calendario, seleccionar el día a ser cambiado, y a
+	  continuación, seleccionar uno de los 3 botones tipo radio disponibles:
+	  <itemizedlist>
+	  <listitem>
+	    <para><emphasis>Utilizar tiempo de trabajo desde el calendario derivado</emphasis> 
+		  - utiliza el calendario padre para determinar el tiempo de trabajo para ese día.
+	      Ver<xref linkend="mrp-calendar-new"/> para mas información.
+	    </para>
+	  </listitem>
+	  <listitem>
+	    <para><emphasis>Cambiar el tipo de día a:</emphasis> - utiliza el tipo de día seleccionado
+	      para determinar las horas de trabajo para ese día.  Ver la sección
+	      <xref linkend="mrp-working-time"/> para mas información.
+	    </para>
+	  </listitem>
+	  <listitem>
+	    <para><emphasis>Personalizar el tiempo de trabajo</emphasis> - define un único conjunto de
+	      horas de trabajo para el día especificado.
+	    </para>
+	  </listitem>
+	  </itemizedlist>
+	
+          <figure id="calendar" float="1">
+            <title>Editor del calendario de proyectos</title>
+            <screenshot>
+              <graphic fileref="figures/calendar.png" format="PNG" ></graphic>
+            </screenshot>
+          </figure>
+        </para>
+	<sect3 id="mrp-calendar-new" xreflabel="Creating a New Calendar">
+	<title>Crear un nuevo calendario</title>
+	  <para>
+        Nuevos calendarios pueden ser añadidos haciendo clic en el botón
+		<guibutton>Nuevo</guibutton>, el cual lanzará el cuadro de diálogo nuevo calendario.
+		El cuadro de diálogo nuevo calendario contiene una lista de los actuales calendarios
+	    a la izquierda y a la derecha una caja de texto que te permite poner un nombre al 
+	    nuevo calendario. A continuación del cuadro de texto hay tres opciones para crear
+	    un calendario:
+	  <itemizedlist>
+	  <listitem>
+	    <para><emphasis>Derivar de un calendario</emphasis> - crear un calendario hijo.  
+	      El nuevo calendario recibirá las características del calendario padre 
+	      seleccionado a la izquierda. Cualquier cambio realizado en el calendario padre
+	      es reflejado también en el calendario hijo. En el ejemplo a continuación,
+	      "Americas" y "USA" son ejemplos de calendarios hijos.
+	    </para>
+	  </listitem>
+	  <listitem>
+	    <para><emphasis>Copiar un calendario existente</emphasis> - crear una copia del
+	      calendario seleccionado a la izquierda. Después que la copia es realizada, los 
+		  cambios hechos en el calendario original o calendario padre no son reflejados
+		  en la copia. En el ejemplo a continuación, "USA - Copy" es un ejemplo de un
+	      calendario creado utilizando esta opción.
+	    </para>
+	  </listitem>
+	  <listitem>
+	    <para><emphasis>Crear un calendario vacío</emphasis> - crear un nuevo calendario.  
+		  Ninguna característica es derivada o copiada. En el ejemplo a continuación,
+	      "Empty" es un calendario que ha sido creado con esta opción.
+	    </para>
+	  </listitem>
+	  </itemizedlist>
+          <figure id="calendar-new" float="1">
+            <title>Nuevo calendario</title>
+            <screenshot>
+              <graphic fileref="figures/calendar-new.png" format="PNG" ></graphic>
+            </screenshot>
+          </figure>
+	  </para>
+	</sect3>
+	<sect3 id="mrp-default-week">
+	<title>Cambiando la semana por defecto</title>
+	  <para>
+        La semana por defecto puede ser cambiada haciendo clic en el botón
+		<guibutton>Semana por defecto</guibutton>, el cual lanzará el cuadro de diálogo
+		editor de semanas. Este cuadro de diálogo contiene dos listas desplegables, la
+		primera permite seleccionar el día de la semana y la segunda permite seleccionar
+		el tipo de día. Este cuadro de diálogo también representa el tiempo de trabajo
+		planificado para el día seleccionado. Asegurarse de hacer clic en el botón
+		<guibutton>Aplicar</guibutton> antes del botón <guibutton>Cerrar
+	    </guibutton> para guardar los cambios.
+          <figure id="calendar-week" float="1">
+            <title>Semana por defecto</title>
+            <screenshot>
+              <graphic fileref="figures/calendar-week.png" format="PNG" ></graphic>
+            </screenshot>
+          </figure>
+	  </para>
+	</sect3>
+	<sect3 id="mrp-working-time" xreflabel="Working Time and Day Types">
+	<title>Cambiando el tiempo de trabajo y el tipo de día</title>
+	  <para>
+        El tiempo de trabajo para cada tipo de día puede ser cambiado haciendo clic
+	    en el botón <guibutton>Tiempo de trabajo</guibutton>, el cual visualizará el	    
+	    cuadro de diálogo tiempo de trabajo.
+		El cuadro de diálogo tiempo de trabajo muestra una lista de los tipos de día
+		disponibles a la izquierda y las horas de trabajo para el tipo seleccionado a 
+		la derecha. El tiempo es introducido en el formato de 24 horas, los indicadores
+		am/pm no son soportados (p.e. 5:00 PM debería ser introducido como 17:00).
+          <figure id="calendar-working-time" float="1">
+            <title>Cambiar el tiempo de trabajo</title>
+            <screenshot>
+              <graphic fileref="figures/calendar-working-time.png" format="PNG"></graphic>
+           </screenshot>
+          </figure>
+	  </para>
+	  <para>
+	    Se pueden añadir tipos de día eligiendo
+	    <menuchoice> 
+	      <guimenu>Proyecto</guimenu> 
+	      <guimenuitem>Editar tipos de día</guimenuitem>
+	    </menuchoice>
+        Este cuadro de diálogo representa una lista simple de tipos de día. Utilizar los
+	    botones <guibutton>Añadir</guibutton> y <guibutton>Eliminar</guibutton> para
+	    gestionar la lista. Observar que no se pueden eliminar los tipos de día por defecto
+	    "Laboral" y "Festivo".
+          <figure id="day-types" float="1">
+            <title>Cambiar los tipos de día</title>
+            <screenshot>
+              <graphic fileref="figures/day-types.png" format="PNG" ></graphic>
+           </screenshot>
+          </figure>
+	  </para>
+	</sect3>
+    </sect2> 
+    <!-- ================ Usage Subsection ================================ -->
+    <sect2 id="mrp-tasks" xreflabel="Tasks"> 
+      <title>Trabajando con tareas</title> 
+      <sect3 id="mrp-task-add" xreflabel="Adding Tasks">
+	<title>Añadiendo tareas</title>
+	<para>Para añadir una tarea, se puede hacer clic en el botón <guibutton>Insertar</guibutton>
+	  de la barra de herramientas, o se puede hacer clic con el botón derecho en el área de tareas
+	  y elegir <guimenuitem>Insertar tarea</guimenuitem> desde el cuadro de opciones pop-up.
+	  Estas opciones trabajan de la misma forma en la vista de Gantt o en la vista de tareas.
+	</para>
+	<para>Para añadir múltiples tareas rápidamente, elegir
+	  <guimenuitem>Editar -> Insertar tareas</guimenuitem>, el cual abrirá el cuadro de
+	  diálogo insertar tarea. Este cuadro de diálogo permite la entrada rápida de múltiples
+      tareas. Simplemente introducir el nombre de la tarea, el trabajo que va a realizar y
+      presionar <keycap>Enter</keycap>. La nueva tarea será añadida y el cuadro de diálogo
+	  permanecerá abierto y listo para introducir nuevas tareas. Los detalles pueden ser
+	  consultados mas adelante.
+          <figure>
+            <title>Insertar tarea</title>
+            <graphic fileref="figures/task-insert.png" format="PNG" ></graphic>
+          </figure>
+	</para>
+      </sect3>
+      <sect3 id="mrp-task-properties">
+        <title>Propiedades de las tareas</title>
+        <para>
+      Algunas de las propiedades de las tareas pueden ser editadas directamente desde la
+	  vista de tareas de Gantt: el nombre de la tarea y el trabajo a realizar.
+	  También se puede lanzar el cuadro de diálogo de propiedades de las tareas haciendo
+	  clic con el botón derecho sobre la tarea y eligiendo <guimenuitem>Editar tarea</guimenuitem>.
+          <figure>
+            <title>Vista de Gantt</title>
+            <graphic fileref="figures/gantt-view.png" format="PNG" ></graphic>
+          </figure>
+        </para>
+        <para>
+          En la vista de tareas se pueden editar mas campos de una tarea que en la
+		  vista de Gantt y es la vista preferida al comienzo cuando se añaden tareas
+		  a un proyecto.
+          <figure>
+            <title>Vista de tareas</title>
+            <graphic fileref="figures/task-view.png" format="PNG" ></graphic>
+          </figure>
+	</para>
+	<para>
+      Para editar todas las propiedades de las tareas, hacer clic con el botón derecho
+	  sobre una tarea y seleccionar <guimenuitem>Editar tarea</guimenuitem> del cuadro de
+	  diálogo que aparece. Alternativamente, se puede seleccionar la tarea y utilizar el
+	  menú principal:
+	  <menuchoice> 
+	    <guimenu>Editar</guimenu> 
+	    <guimenuitem>Editar propiedades de las tareas</guimenuitem> 
+	  </menuchoice>.
+      Hay varias pestañas para modificar las propiedades.
+          <itemizedlist>
+          <listitem>
+            <para>La pestaña <guilabel>General</guilabel> contiene los siguientes campos:
+	    <itemizedlist>
+	    <listitem>
+	      <para><guilabel>Nombre</guilabel> - el nombre de la tarea</para>
+	    </listitem>
+	    <listitem>
+	      <para><guilabel>Hitos</guilabel> - la casilla de selección de hitos convierte una
+        tarea en un hito, con lo que se deshabilita la posibilidad de modificar los campos
+		<guilabel>Trabajo, Duración, Completar y Prioridad</guilabel>, puesto que un hito 
+		tiene un significado de evento en la línea de tiempo de un proyecto y no tiene 
+		duración de tiempo o actividad de trabajo asociada a ella.
+	      </para>
+	    </listitem>
+	    <listitem>
+	      <para><guilabel>Duración fija</guilabel> - la opción de duración fija es usada cuando
+		la duración de una tarea lleva un tiempo fijo independientemente de los recursos que
+		tenga asignados. Por ejemplo, el periodo de gestación para un bebe humano es de nueve
+        meses. No puede ser acelerado con recursos adicionales.
+	      </para>
+	      <para>Seleccionando Duración fija para una tarea se bloquea el campo
+        <guilabel>Duración</guilabel> y te permite introducir un valor para la duración fija.
+	      </para>
+	    </listitem>
+	    <listitem>
+	      <para><guilabel>Trabajo</guilabel> - este es el conjunto de esfuerzo requerido para 
+		completar la tarea</para>
+	    </listitem>
+	    <listitem>
+	      <para><guilabel>Duración</guilabel> - este es el total de tiempo requerido del
+		calendario para completar la tarea. La duración es normalmente calculada basada en el
+		conjunto del trabajo y de los recursos asignados a las tareas. El cálculo también tiene en
+		cuenta los calendarios. Ver la sección <xref linkend="mrp-calendars"/> para mas información.
+	      </para>
+	    </listitem>
+	    <listitem>
+	      <para><guilabel>Completar</guilabel> - permite especificar el total del trabajo realizado
+		de una tarea, se introduce como el tanto por ciento del trabajo total</para>
+	    </listitem>
+	    <listitem>
+	      <para><guilabel>Prioridad</guilabel> - cambia la prioridad de una tarea. Este campo no tiene
+		una especificación funcional en este momento. Es sólo de carácter informativo</para>
+	    </listitem>
+	    </itemizedlist>
+                <figure>
+                  <title>Propiedades de la tarea</title>
+                  <graphic fileref="figures/task-properties-díalog.png" format="PNG"></graphic>
+                </figure>
+              </para>
+            </listitem>
+            <listitem>
+              <para>
+               La pestaña de <guilabel>Recursos</guilabel> permite asignar recursos a una
+		tarea. Recuerda que los recursos pueden ser materiales y personales.
+        Hacer clic en el cuadro de la columna <guilabel>Asignado</guilabel> para asignar los
+		recursos a la actual tarea. Utilizar el campo de unidades para introducir el tanto por
+		ciento de recurso que es asignado a la tarea.
+                <figure>
+                  <title>Recursos de la tarea</title>
+                  <graphic fileref="figures/task-edit-resources.png" format="PNG"></graphic>
+                </figure>
+		La vista de Gantt muestra los recursos asignados a una tarea a la derecha de la barra.
+                <figure>
+                  <title>Un recurso ha sido asignado a una tarea</title>
+                  <graphic fileref="figures/task-edit-resource-assigned.png" format="PNG"></graphic>
+                </figure>
+              </para>
+            </listitem>
+            <listitem>
+              <para>
+                En la pestaña de <guilabel>Predecesora</guilabel> se encuentran las tareas que 
+		es necesario acabar antes de que la tarea pueda comenzar. En este ejemplo, se tienen 3
+		tareas. En <xref linkend="predecessors"/>, la tercera tarea, t3, requiere que t2 sea
+		completada antes que t3 pueda comenzar.
+                <figure id="predecessors">
+                  <title>Tarea predecesora</title>
+                  <graphic fileref="figures/task-edit-predecessors.png" format="PNG"></graphic>
+                </figure>
+        En este cuadro de diálogo, se pueden cambiar la tarea predecesora, el tipo de precedencia
+		y el retraso entre la tarea y la predecesora.
+		Se pueden añadir y eliminar tareas predecesoras en este cuadro de diálogo haciendo clic
+		en el botón <guibutton>Añadir</guibutton> o <guibutton>Eliminar</guibutton> .
+		</para>
+<!--           <figure>
+               <title>Añadir/Eliminar predecesoras</title>
+               <graphic fileref="figures/task-edit-predecessors-add-remove.png"
+			   format="PNG"></graphic>
+               </figure>
+-->
+		<para>
+                Cuando se añade una nueva predecesora se necesita elegir la tarea predecesora,
+        la cual se puede seleccionar en una lista desplegable. El siguiente campo es el tipo
+		de relación. Tiene las siguientes posibilidades
+		<guimenuitem>Fin a Comienzo (FC)</guimenuitem>,
+		<guimenuitem>Fin a Fin (FF)</guimenuitem>,
+		<guimenuitem>Comienzo a Comienzo (CC)</guimenuitem>, o
+		<guimenuitem>Comienzo a Fin (CF)</guimenuitem>. Finalmente, se puede introducir un retraso
+		para la relación, lo que representa el número de días después de que la precedencia haya sido
+		satisfecha. Por ejemplo, si se introduce un retraso de 1 en una precedencia Fin a Comienzo,
+		esto significa que la actual tarea comenzará 1 día después que la tarea predecesora haya sido
+		completada.
+                <figure>
+                  <title>Añadir predecesoras a la tarea</title>
+                  <graphic fileref="figures/task-edit-predecessors-add.png" format="PNG"></graphic>
+                </figure>
+              </para>
+            </listitem>
+            <listitem>
+              <para>
+			    Se pueden añadir notas a la tarea utilizando la ficha
+                <guilabel>Notas</guilabel>. También se puede insertar la fecha actual en la
+				nota utilizando el botón Insertar fecha de tiempo que aparece en el cuadro de 
+                diálogo.
+                <figure>
+                  <title>Notas o comentarios de la tarea</title>
+                  <graphic fileref="figures/task-edit-note.png" format="PNG"></graphic>
+                </figure>
+              </para>
+            </listitem>
+<!--
+            <listitem>
+              <para>
+			    La última pestaña del cuadro de diálogo editar es la pestaña
+                <guilabel>Avanzada</guilabel>. Actualmente todavía no está 
+                implementada, pero aquí se podrán encontrar propiedades adicionales
+                que serán añadidas en futuras versiones.
+                <figure>
+                  <title>Propiedades avanzadas de la tarea</title>
+                  <graphic fileref="figures/task-edit-advanced.png" format="PNG"></graphic>
+                </figure>
+              </para>
+            </listitem>            
+-->
+          </itemizedlist>          
+	</para>
+      </sect3>
+      <sect3 id="mrp-creating-subtasks">
+        <title>Creando subtareas</title>
+        <para>
+	  Las tareas complejas pueden ser divididas en subtareas que hacen que
+	  sea mas fácil de gestionar. Una tarea que es dividida en subtareas es
+	  llamada una tarea resumen. La fecha de comienzo y la duración de una
+	  tarea resumen no pueden ser editadas ya que son calculadas a partir de
+	  las subtareas.	
+	  <figure>
+	    <title>Una tarea con subtareas</title>
+	    <graphic fileref="figures/group1-subtasks.png" format="PNG"></graphic>
+	  </figure>
+	</para>
+      </sect3>
+      <sect3 id="mrp-task-deps">
+        <title>Dependencias de la tarea</title>
+	<subtitle>Otra forma de realizar las precedencias.</subtitle>
+        <para>
+	  Para comenzar una tarea, a menudo se deben finalizar antes otras tareas. Esto
+	  se puede realizar utilizando la pestaña <guilabel>Predecesoras</guilabel> en el
+	  cuadro de diálogo que se muestra abajo, o se puede realizar gráficamente utilizando
+	  el diagrama de Gantt. Si se hace clic en la barra que representa la predecesora
+	  (manteniendo pulsado el botón del mouse), aparece una flecha. Arrastrando esa flecha
+	  a la barra que representa la tarea dependiente se creará la dependencia. El diagrama
+	  de Gantt muestra inmediatamente la nueva relación desplazando el comienzo de la tarea
+	  dependiente a cuando finaliza la tarea predecesora. Por crear una relación de dependencia
+	  de esta forma, MrProject asume que la precedencia es de Fin a Comienzo y con un 
+	  retraso de cero. Se puede modificar esta relación abriendo el cuadro de diálogo editar 
+	  de la tarea dependiente, y seleccionando la ficha <guilabel>Predecesoras</guilabel>.
+	  <figure>
+	    <title>Creando una dependencia de la tarea</title>
+	    <graphic fileref="figures/group1-task-linking.png" format="PNG"></graphic>
+	  </figure>
+      Si se desea eliminar la dependencia, se puede seleccionar cualquiera de las dos 
+	  tareas y borrar el enlace haciendo clic en el icono <guiicon>Desenlazar</guiicon>
+	  de la barra de herramientas, o haciendo clic derecho en la tarea y seleccionando 
+	  <guimenuitem>Desenlazar</guimenuitem> del menú emergente.
+	  <figure>
+	    <title>Una dependencia ha sido creada</title>
+	    <graphic fileref="figures/group1-task-linked.png" format="PNG"></graphic>
+	  </figure>
+	</para>
+      </sect3>
+      <sect3 id="mrp-moving-tasks">
+        <title>Moviendo tareas</title>
+        <para>
+      Si se necesita cambiar el orden en que las tareas son mostradas en la vista de tareas,
+	  se puede hacer seleccionando la tarea que se quiere mover, y utilizando los iconos
+	  <guiicon>Mover Arriba</guiicon> y <guiicon>Move Abajo</guiicon> de la barra de herramientas.
+          <figure>
+	    <title>Moviendo las tareas arriba y abajo</title>
+	    <graphic fileref="figures/task-up.png" format="PNG"></graphic>
+	  </figure>
+        </para>
+      </sect3>
+      <sect3 id="mrp-zooming-gantt">
+        <title>Realizando zoom en la vista de Gantt</title>
+        <para>
+          Las tareas en un proyecto pueden tener muy diferentes duraciones y a veces
+		  se necesita tener una visión completa de la línea de tiempo para ver la 
+		  dependencia entre las tareas, pero otras veces se necesita una visión completa
+		  del proyecto. Para soportar ambas necesidades, MrProject tiene un poderoso
+		  sistema de zoom que permite visualizar el proyecto completo, realizar zoom en
+		  una vista o de forma incremental hasta el tamaño deseado (el limite inferior 
+		  son horas y el limite superior son años).
+        </para>
+        <para>
+		  Normalmente la mejor forma de visualizar un proyecto es con el Zoom ajustar.
+          <figure>
+	    <title>Zoom ajustar del proyecto</title>
+	    <graphic fileref="figures/project-zoom-fit.png" format="PNG"></graphic>
+	  </figure>
+        </para>
+        <para>
+		  Se pueden utilizar los iconos <guiicon>Zoom acercar</guiicon> y
+	  <guiicon>Zoom alejar</guiicon> para seleccionar la longitud de la línea
+	  de tiempo en la que se quiere trabajar. Observar que cuando se ha hecho
+	  zoom hasta un nivel detallado, se muestran las horas festivas de cada día
+      además de los fines de semana.
+          <figure>
+	    <title>Zoom acercar en una zona del proyecto</title>
+	    <graphic fileref="figures/project-zoom-up.png" format="PNG"></graphic>
+	  </figure>
+        </para>
+      </sect3>
+      
+      <sect3 id="mrp-task-constraints">
+	<title>Limitaciones de las tareas</title>
+	<para>
+	  Todas las tareas comienzan por defecto en la fecha de comienzo del proyecto
+	  (mostrado por el Tipo de limitación) en<guimenuitem> Tan pronto como sea posible
+	  </guimenuitem><xref linkend="constraints"/>).  
+	  La excepción es en los casos en los que existen dependencias. Hay veces, sin embargo,
+	  que no existen dependencias, pero que la tarea debe comenzar, o no antes que una
+	  fecha especificada. Se pueden especificar estas limitaciones en el cuadro de diálogo
+	  fecha de comienzo.
+	  <figure id="constraints">
+	    <title>Limitaciones de la tarea</title>
+	    <graphic fileref="figures/task-constraints.png" format="PNG"></graphic>
+	  </figure>
+	  Se pueden eliminar las limitaciones para la tarea actual eligiendo
+	  <menuchoice> 
+	    <guimenu>Editar</guimenu> 
+	    <guimenuitem>Eliminar limitaciones</guimenuitem> 
+	  </menuchoice>, o para todas las tareas eligiendo
+	  <menuchoice> 
+	    <guimenu>Editar</guimenu> 
+	    <guimenuitem>Eliminar todas las limitaciones</guimenuitem> 
+	  </menuchoice>.
+	</para>
+      </sect3>
+
+      <sect3 id="mrp-task-custom-properties" xreflabel="Custom Task Properties">
+      <title>Propiedades personales de las tareas</title>
+	<para>Propiedades personales pueden ser añadidas en la vista de tareas eligiendo <guimenuitem>
+	  Editar->Editar Propiedades Personales</guimenuitem>. Al hacer clic en el botón
+	  <guibutton>Añadir</guibutton> se mostrará el cuadro de diálogo Nueva Propiedad.
+	  <figure id="task-custom-properties">
+	    <title>Propiedades personales de la tarea</title>
+	    <graphic fileref="figures/task-custom-properties.png" format="PNG"></graphic>
+	  </figure>
+	</para>
+	<para>En el cuadro de diálogo Nueva Propiedad, se puede crear una nueva propiedad a la
+	  que se le asigna una etiqueta, un nombre, una descripción y un tipo de propiedad que
+	  puede ser: texto, número entero o número decimal. Una vez que se haya introducido la
+      nueva propiedad, se mostrará como una nueva columna en la vista de tareas.
+	  <figure id="task-custom-properties-add">
+	    <title>Añadir propiedades personales a la tarea</title>
+	    <graphic fileref="figures/task-custom-properties-add.png" format="PNG"></graphic>
+	  </figure>
+	</para>
+      </sect3>
+    </sect2>
+    <!-- ================ Usage Subsection ================================ -->
+    <sect2 id="mrp-resources" xreflabel="Resources"> 
+      <title>Trabajando con recursos</title>
+      <sect3 id="mrp-resource-props">
+        <title>Propiedades de los recursos</title>
+        <para>
+		  La vista de recursos en MrProject muestra las siguientes propiedades:
+          <itemizedlist>
+            <listitem>
+              <para>Nombre: el nombre del recurso
+              </para>
+            </listitem>
+            <listitem>
+              <para><emphasis>Tipo:</emphasis> los tipos actualmente disponibles son:
+		<guimenuitem>Personal</guimenuitem>
+		y <guimenuitem>Material</guimenuitem>.
+		        Personal es para los recursos humanos que trabajan en el proyecto y
+				Material es para los recursos no humanos que se requieren para completar
+				el proyecto.
+              </para>
+            </listitem>
+            <listitem>
+              <para><emphasis>Grupo:</emphasis> el grupo al que el recurso es asignado.
+		Esta columna ofrece una lista de los grupos definidos. Se debe utilizar el Editor
+		de Grupos para definir grupos antes de asignarlos en la vista de recursos.
+              </para>
+            </listitem>
+            <listitem>
+              <para><emphasis>Email:</emphasis> la dirección electrónica de contacto de
+			  este recurso.
+              </para>
+            </listitem>
+            <listitem>
+              <para><emphasis>Coste:</emphasis> el coste por hora de utilización del recurso.
+		El coste no está actualmente especificado, pero en proyectos multinacionales, es
+		importante decidir una única moneda para realizar los cálculos de costes.	  
+              </para>
+            </listitem>
+          </itemizedlist>
+
+	  <figure>
+	    <title>Vista de recursos</title>
+	    <graphic fileref="figures/resource-editor.png" format="PNG"></graphic>
+	  </figure>
+	</para>
+	<para>
+	      Al igual que las columnas de otras vistas de MrProject, se pueden ordenar las
+		  columnas haciendo clic sobre el nombre de la columna. La siguiente figura es una
+		  ejemplo de la vista de recursos ordenada por la columna nombre.
+	  <figure>
+	    <title>Editor de recursos ordenado</title>
+	    <graphic fileref="figures/resource-editor-sorted.png" format="PNG"></graphic>
+	  </figure>
+	</para>
+      </sect3>
+
+      <sect3 id="mrp-resource-add">
+        <title>Añadiendo recursos</title>
+        <para>Los recursos pueden ser añadidos eligiendo el botón <guibutton>Insertar
+      </guibutton>, o eligiendo <guimenuitem>Editar->Insertar Recurso</guimenuitem>. Para añadir
+	  múltiples recursos rápidamente, elegir <guimenuitem>Editar->Insertar Recurso</guimenuitem>,
+	  el cual abrirá el cuadro de diálogo Insertar Recurso. De una forma similar a
+	  <xref linkend="mrp-task-add"/>, se puede introducir rápidamente múltiples recursos y añadir
+      los detalles posteriormente.
+	  <figure>
+	    <title>Insertar recurso</title>
+	    <graphic fileref="figures/resource-insert.png" format="PNG"></graphic>
+	  </figure>
+	</para>
+      </sect3>
+
+      <sect3 id="mrp-resource-properties-general">
+        <title>Propiedades del recurso</title>
+        <para>
+	  Para editar propiedades del recurso que no son representadas en la vista de
+	  recursos, hacer clic con el botón derecho del ratón sobre el recurso y elegir
+	  <guimenuitem>Editar recurso</guimenuitem>. La pestaña General muestra los mismos
+	  elementos que la vista de recursos.
+	  <figure>
+	    <title>Propiedades del recurso - Pestaña General</title>
+	    <graphic fileref="figures/resource-properties-general.png" format="PNG"></graphic>
+	  </figure>
+	</para>
+	<para>
+	  La pestaña Calendario permite asignar un calendario al recurso específico si
+	  el calendario por defecto del proyecto no es apropiado. Ver 
+	  <xref linkend="mrp-properties"/> para mas información sobre configurar el 
+	  calendario por defecto del proyecto.
+	  Para cambiar el calendario asignado a un recurso, simplemente seleccionarlo de
+	  la lista. Si se desea crear un nuevo calendario para este recurso, se puede hacer
+	  desde este cuadro de diálogo haciendo clic en el botón <guibutton>Editar calendarios
+	  </guibutton>. Ver la sección <xref linkend="mrp-calendars"/> para mas información.
+	</para>
+	<para>
+	  Cualquier tarea asignada a un recurso con un calendario específico utilizará el
+	  calendario asignado al recurso para planificar su duración. Sin embargo, si una
+	  tarea parece estar planificada para un periodo de tiempo mayor que el esperado, es
+	  posible que el recurso esté utilizando un calendario diferente al calendario por
+	  defecto del proyecto.
+	  <figure>
+	    <title>Propiedades del recurso - Pestaña Calendario</title>
+	    <graphic fileref="figures/resource-properties-calendar.png" format="PNG"></graphic>
+	  </figure>
+	</para>
+      </sect3>
+
+      <sect3 id="mrp-resource-custom-properties">
+      <title>Propiedades personales del proyecto</title>
+      <para>
+	Las propiedades personales están disponibles en la vista de recursos así como en la
+	vista de tareas y el funcionamiento es idéntico. Para añadir propiedades personales
+	a los recursos elegir <guimenuitem>Editar->Editar propiedades personales</guimenuitem>.
+	 Ver la sección <xref linkend="mrp-task-custom-properties"/> para mas información.
+      </para>
+      </sect3>
+
+      <sect3 id="mrp-group-editor">
+        <title>Editor de grupo</title>
+        <para>
+		 Con el editor de grupo se pueden definir grupos que son usados para clasificar los
+      recursos. Un grupo tiene un nombre, un encargado, teléfono, email y finalmente, una 
+	  opción para especificar el grupo por defecto. Si se especifica un grupo por defecto,
+	  todos los nuevos recursos que se añadan serán colocados en ese grupo. Por supuesto, se
+	  pueden cambiar a otro grupo si es necesario.
+	  <figure>
+	    <title>Editor de grupo</title>
+	    <graphic fileref="figures/resource-group-editor.png" format="PNG"></graphic>
+	  </figure>
+	</para>
+      </sect3>
+
+      <sect3 id="mrp-print" xreflabel="Print">
+       <title>Imprimiendo</title>
+       <para>Se puede imprimir la información del proyecto seleccionando <guimenuitem>Archivo->Imprimir
+	  </guimenuitem> o haciendo clic en el botón <guilabel>Imprimir</guilabel> en la barra de tareas.
+	  <note><title>Nota</title>
+	    <para>El botón de <guibutton>Vista Previa</guibutton> está disponible en el cuadro de diálogo
+		  imprimir independientemente de la pestaña que esté seleccionada.
+	    </para>
+	  </note>
+	<itemizedlist>
+	<listitem>
+	  <para>El cuadro de diálogo Imprimir Proyecto permite elegir entre imprimir en impresoras,
+	    o a un archivo PDF. Si se selecciona imprimir a un archivo PDF, la opción de Localización
+	    cambiará para que se pueda especificar la ruta y el nombre del archivo de salida.
+	    <figure>
+	    <title>Pestaña de Imprimir</title>
+	    <graphic fileref="figures/print-project.png" format="PNG"></graphic>
+	    </figure>
+	  </para>
+	</listitem>
+	<listitem>
+	  <para>En la pestaña de Seleccionar Vistas, se puede elegir imprimir la vista de Gantt, Tareas,
+	    o Recursos, o todas ellas. Por defecto todas las vistas.
+	    <figure>
+	    <title>Pestaña de Seleccionar Vistas</title>
+	    <graphic fileref="figures/print-project-selectviews.png" format="PNG"></graphic>
+	    </figure>
+	  </para>
+	</listitem>
+	<listitem>
+	  <para>La pestaña Papel permite especificar el tamaño, orientación y características del
+		papel antes de imprimir.
+	    <figure>
+	    <title>Pestaña del Papel</title>
+	    <graphic fileref="figures/print-project-paper.png" format="PNG"></graphic>
+	    </figure>
+	  </para>
+	</listitem>
+	</itemizedlist>
+	</para>
+      </sect3>
+
+      <sect3 id="mrp-export-html" xreflabel="Export to HTML">
+        <title>Exportar a HTML</title>
+        <para>La función de Exportar a HTML crea una vista del proyecto en formato HTML
+	  que se puede publicar en un sitio web, o enviarla por email a los accionistas que no
+	  tienen acceso a MrProject. En el documento HTML se incluye, un diagrama de Gantt
+	  simplificado, una lista de tareas (con %completado, inicio, fin, trabajo y columnas de
+	  recursos) y un tabla de localización de recursos. Es una excelente forma de proporcionar
+	  un fácil acceso a la información del estado de un proyecto a las personas.
+	</para>
+	<para>
+	  Se puede crear el documento HTML eligiendo <guimenuitem>Archivo->Exportar a HTML
+	  </guimenuitem>. El cuadro de diálogo <guilabel>Exportar a HTML</guilabel> permite
+	  enviar la salida a un fichero o directamente a una localización web.
+	</para>
+      </sect3>
+    </sect2> 
+  </sect1>
+<!--Customization/Settings not yet implemented...
+  <- ============= Customization ============================= ->
+  <- Use this section to describe how to customize the application. ->
+  <sect1 id="myapp-prefs"> 
+    <title>Configuración</title> 
+    <para>Para configurar &app; elegir
+      <menuchoice> 
+	<guimenu>Configuración</guimenu> 
+	<guimenuitem>Preferencias</guimenuitem> 
+      </menuchoice>. El cuadro de diálogo<guilabel>Preferencias</guilabel>
+	  contiene las siguientes pestañas:
+    </para> 
+    <itemizedlist> 
+      <listitem> 
+	<para> 
+	  <xref linkend="myapp-prefs-display"/></para> 
+      </listitem> 
+      <listitem> 
+	<para> 
+	  <xref linkend="myapp-prefs-viewers"/></para> 
+      </listitem> 
+    </itemizedlist>
+<- =============== Customization Subsection ================ ->
+<- Use a new section to describe different tabbed sections on the Settings or Preferences
+	     díalog. ->
+    <sect2 id="myapp-prefs-display"> 
+      <title>Visualización</title> 
+      <variablelist> 
+	<varlistentry> 
+	  <term> 
+	    <guilabel>Tipo de interpolación</guilabel> </term> 
+	  <listitem> 
+	    <para>Utilizar la lista desplegable para especificar el método de interpolación que
+          utilizará &app; cuando la aplicación amplíe imágenes. Seleccionar una de las siguientes
+	      opciones:</para>
+	    <itemizedlist> 
+	      <listitem> 
+		<para> 
+		  <guilabel>Vecino mas cercano</guilabel> </para> 
+		<para>Este método de interpolación toma una localización de la imagen original y replica el 
+          pixel que está mas próximo a esta localización. Cuando se realiza zoom acercar de una
+		  imagen, los píxeles son replicados. Cuando se realiza zoom alejar de una imagen, la
+		  imagen pierde algunos de sus detalles. </para> 
+	      </listitem> 
+	      <listitem> 
+		<para> 
+		  <guilabel>Bilineal</guilabel> </para> 
+		<para>Este es un método simple y rápido de interpolación. Cuando se realiza zoom acercar sobre
+		  una imagen, &app; utiliza hasta los cuatro píxeles adyacentes para calcular los colores de los
+		  nuevos píxeles. Cuando se realiza zoom alejar, &app; realiza la media de los colores adyacentes
+		  para calcular los colores de los píxeles. </para> 
+	      </listitem> 
+	      <listitem> 
+		<para> 
+		  <guilabel>Hiperbólica</guilabel> </para> 
+		<para>Este es un método de alta calidad y lento de interpolación. La aplicación implementa
+		  el método descrito en Digital Image Warping por George Wolberg.</para> 
+	      </listitem> 
+	    </itemizedlist> 
+	    <para>Por defecto: 
+	      <guilabel>Vecino mas cercano</guilabel>.</para> 
+	  </listitem> 
+	</varlistentry> 
+	<varlistentry> 
+	  <term> 
+	    <guilabel>Tipo de transparencia</guilabel> </term> 
+	  <listitem> 
+	    <para>Utilizar la lista desplegable para especificar como &app; visualizará la transparencia
+		  o el fondo de imágenes parcialmente opacas. Seleccionar una de las siguientes opciones:
+        </para> 
+	    <itemizedlist> 
+	      <listitem> 
+		<para> 
+		  <guilabel>Cuadros oscuros</guilabel> </para> 
+		<para>Esta opción visualizará cuadros negros y gris oscuro.</para> 
+	      </listitem> 
+	      <listitem> 
+		<para> 
+		  <guilabel>Cuadros medios</guilabel> </para> 
+		<para>Esta opción visualizará cuadros gris oscuro y gris claro.</para> 
+	      </listitem> 
+	      <listitem> 
+		<para> 
+		  <guilabel>Cuadros claros</guilabel> </para> 
+		<para>Esta opción visualizará cuadros gris claro y blancos.</para> 
+	      </listitem> 
+	      <listitem> 
+		<para> 
+		  <guilabel>Sólo negro</guilabel> </para> 
+		<para>Esta opción visualizará negro sólido.</para> 
+	      </listitem> 
+	      <listitem> 
+		<para> 
+		  <guilabel>Sólo gris</guilabel> </para> 
+		<para>Esta opción visualizará gris sólido.</para> 
+	      </listitem> 
+	      <listitem> 
+		<para> 
+		  <guilabel>Sólo blanco</guilabel> </para> 
+		<para>Esta opción visualizará blanco sólido.</para> 
+	      </listitem> 
+	    </itemizedlist> 
+	    <para>Por defecto: 
+	      <guilabel>Cuadros oscuros</guilabel>.</para> 
+	  </listitem> 
+	</varlistentry> 
+	<varlistentry> 
+	  <term> 
+	    <guilabel>Tamaño del cuadro</guilabel> </term> 
+	  <listitem> 
+	    <para>Utilizar la lista desplegable para especificar el tamaño de los cuadros que se usan
+		  para la transparencia o el fondo de imágenes parcialmente opacas. Esta opción es sólo
+		  relevante si se ha seleccionado:
+	      <guilabel>Cuadros oscuros</guilabel>, 
+	      <guilabel>Cuadros medios</guilabel>, o 
+	      <guilabel>Cuadros claros</guilabel> de la lista desplegable
+	      <guilabel>Tipo de transparencia</guilabel>.
+	      Seleccionar una de las siguientes opciones:</para> 
+	    <itemizedlist> 
+	      <listitem> 
+		<para> 
+		  <guilabel>Pequeña</guilabel></para> 
+	      </listitem> 
+	      <listitem> 
+		<para> 
+		  <guilabel>Mediana</guilabel></para> 
+	      </listitem> 
+	      <listitem> 
+		<para> 
+		  <guilabel>Grande</guilabel></para> 
+	      </listitem> 
+	    </itemizedlist> 
+	    <para>Por defecto: 
+	      <guilabel>Pequeña</guilabel>.</para> 
+	  </listitem> 
+	</varlistentry> 
+	<varlistentry> 
+	  <term> 
+	    <guilabel>Tipo diter</guilabel> </term> 
+	  <listitem> 
+	    <para>Utilizar la lista desplegable para seleccionar el método diter que se utilizará
+          para representar las imágenes. El método diter es un técnica que es usada para simular
+		  colores de la imagen original pero que tu sistema no puede representar. Seleccionar
+	      una de las siguientes opciones:</para> 
+	    <itemizedlist> 
+	      <listitem> 
+		<para> 
+		  <guilabel>Ninguna</guilabel> </para> 
+		<para>Esta opción no utiliza diter.</para> 
+	      </listitem> 
+	      <listitem> 
+		<para> 
+		  <guilabel>Normal (pseudocolor)</guilabel> </para> 
+		<para>Esta opción utiliza diter en representaciones en pseudocolor, la cual usa una
+		  paleta limitada de colores.</para> 
+	      </listitem> 
+	      <listitem> 
+		<para> 
+		  <guilabel>Máxima (high color)</guilabel> </para> 
+		<para>Esta opción utiliza diter en representaciones en pseudocolor y high color.</para> 
+	      </listitem> 
+	    </itemizedlist> 
+	    <para>Por defecto: 
+	      <guilabel>Ninguna</guilabel>.</para> 
+	  </listitem> 
+	</varlistentry> 
+	<varlistentry> 
+	  <term> 
+	    <guilabel>Realizando el desplazamiento en dos pasos</guilabel> </term> 
+	  <listitem> 
+	    <para>Seleccionar esta opción para renderizar una imagen en dos pasos cuando se realiza
+		  un desplazamiento rápido. El primer paso renderiza una versión en baja calidad de la
+		  imagen. El segundo paso renderiza una versión de calidad completa de la imagen sobre
+		  la versión de baja calidad. El desplazamiento en dos pasos permite ver al menos una 
+		  versión en baja calidad de la imagen independientemente de la velocidad a la que se
+		  haga el desplazamiento.
+	    </para>
+	    <para>Por defecto: no seleccionado.</para> 
+	  </listitem> 
+	</varlistentry> 
+      </variablelist> 
+    </sect2>
+    <- ============= Customization Subsection ===================== ->
+    <- Another tabbed section on the Preferences díalog. ->
+    <sect2 id="myapp-prefs-viewers"> 
+      <title>Vistas</title> 
+      <para>Se pueden seleccionar las siguientes preferencias de vistas:
+	<itemizedlist> 
+	  <listitem> 
+	    <para> 
+	      <xref linkend="myapp-viewer-prefs-image-window"/></para> 
+	  </listitem> 
+	  <listitem> 
+	    <para> 
+	      <xref linkend="myapp-viewer-prefs-full-screen"/></para> 
+	  </listitem> 
+	</itemizedlist> </para> 
+      <sect3 id="myapp-viewer-prefs-image-window"> 
+	<title>Imágenes en las ventanas</title> 
+	<para>El grupo <guilabel>Imágenes en las ventanas</guilabel> contiene las preferencias que
+	  se pueden configurar para ver las imágenes en las ventanas.</para> 
+	<variablelist> 
+	  <varlistentry> 
+	    <term> 
+	      <guilabel>Uso de las barras de desplazamiento</guilabel> </term> 
+	    <listitem> 
+	      <para>Utilizar la lista desplegable para especificar cuando usar las barras de 
+		desplazamiento sobre las imágenes. Seleccionar una de las siguientes opciones:</para> 
+	      <itemizedlist> 
+		<listitem> 
+		  <para> 
+		    <guilabel>Nunca</guilabel> </para> 
+		  <para>Esta opción nunca visualiza las barras de desplazamiento. Se puede utilizar las
+		    teclas de flecha o el mouse para realizar un desplazamiento sobre la imagen.</para>  
+		</listitem> 
+		<listitem> 
+		  <para> 
+		    <guilabel>Sólo si la imagen no entra</guilabel> </para> 
+		  <para>Esta opción visualiza las barras de desplazamiento cuando la imagen es mayor
+		    que la ventana.</para> 
+		</listitem> 
+	      </itemizedlist> 
+	      <para>Por defecto: 
+		<guilabel>Nunca</guilabel>.</para> 
+	    </listitem> 
+	  </varlistentry> 
+	  <varlistentry> 
+	    <term> 
+	      <guilabel>Ajustar el tamaño de la ventana y el factor de zoom automáticamente
+		</guilabel> </term> 
+	    <listitem> 
+	      <para>Seleccionar esta opción para ajustar la ventana de la imagen a la imagen
+		o para ajustar la imagen a la ventana de la imagen. Si la imagen es pequeña, &app; 
+		ajusta la ventana de la imagen para que encaje con la imagen. Si la imagen es grande,
+		&app; ajusta la imagen para que encaje con la ventana de la imagen. </para> 
+	      <para>Por defecto: no seleccionado.</para> 
+	    </listitem> 
+	  </varlistentry> 
+	  <varlistentry> 
+	    <term> 
+	      <guilabel>Abrir imágenes en una nueva ventana</guilabel> </term> 
+	    <listitem> 
+	      <para>Seleccionar esta opción para abrir una nueva ventana de &app; cada vez que se
+		quiera abrir una imagen. Si no se selecciona esta opción, &app; remplazará la imagen
+		existente con la nueva imagen cuando se abra la imagen. </para> 
+	      <para>Por defecto: no seleccionado.</para> 
+	    </listitem> 
+	  </varlistentry> 
+	</variablelist> 
+      </sect3> 
+      <sect3 id="myapp-viewer-prefs-full-screen"> 
+	<title>Pantalla Completa</title> 
+	<para>El grupo de <guilabel>Pantalla Completa</guilabel> contiene las preferencias que se 
+	  pueden seleccionar al ver las imágenes en el modo pantalla completa.</para> 
+	<variablelist> 
+	  <varlistentry> 
+	    <term> 
+	      <guilabel>Uso de las barras de desplazamiento</guilabel> </term> 
+	    <listitem> 
+	      <para>Utilizar la lista desplegable para especificar cuando usar las barras de 
+		desplazamiento sobre las imágenes. Seleccionar una de las siguientes opciones:</para> 
+	      <itemizedlist> 
+		<listitem> 
+		  <para> 
+		    <guilabel>Nunca</guilabel> </para> 
+		  <para>Esta opción nunca visualiza las barras de desplazamiento. Se pueden utilizar las
+		    teclas de flecha o el mouse para realizar un desplazamiento sobre la imagen.</para>  
+		</listitem> 
+		<listitem> 
+		  <para> 
+		    <guilabel>Sólo si la imagen no entra</guilabel> </para> 
+		  <para>Esta opción visualiza las barras de desplazamiento cuando la imagen es mayor
+		    que la ventana.</para> 
+		</listitem> 
+	      </itemizedlist> 
+	      <para>Por defecto: 
+		<guilabel>Nunca</guilabel>.</para> 
+	    </listitem> 
+	  </varlistentry> 
+	  <varlistentry> 
+	    <term> 
+	      <guilabel>Uso del factor zoom 1:1</guilabel> </term> 
+	    <listitem> 
+	      <para>Seleccionar esta opción para utilizar el factor zoom 1:1 cuando se abra una imagen.
+		El factor zoom 1:1 representa la imagen en sus dimensiones verdaderas. </para>  
+	      <para>Por defecto: seleccionado.</para> 
+	    </listitem> 
+	  </varlistentry> 
+	  <varlistentry> 
+	    <term> 
+	      <guilabel>Uso del mismo factor zoom en la ventana de imagen</guilabel> </term>
+ 	    <listitem> 
+	      <para>Seleccionar esta opción para utilizar el mismo factor zoom que la aplicación
+		utiliza para representar las imágenes en la ventana de imagen. </para>  
+	      <para>Por defecto: no seleccionado.</para> 
+	    </listitem> 
+	  </varlistentry> 
+	  <varlistentry> 
+	    <term> 
+	      <guilabel>Ajustar todas las imágenes a la pantalla</guilabel> </term> 
+	    <listitem> 
+	      <para>Seleccionar esta opción para ajustar todas las imágenes a la pantalla completa
+		cuando se abran imágenes en el modo pantalla completa. </para> 
+	      <para>Por defecto: no seleccionado.</para> 
+	    </listitem> 
+	  </varlistentry> 
+	  <varlistentry> 
+	    <term> 
+	      <guilabel>Ajustar imágenes de tamaño estándar a la pantalla</guilabel> </term> 
+	    <listitem> 
+	      <para>Seleccionar esta opción para ajustar automáticamente las imágenes que son del
+		mismo tamaño que las pantallas estándar por lo que estas imágenes rellenarán la pantalla
+		completa cuando sean abiertas en el modo pantalla completa. Si se selecciona esta opción,
+		&app; ignora la selección de las tres opciones anteriores cuando se abre una imagen que
+		es del mismo tamaño que la pantalla estándar. Ejemplos de pantallas estándar son 640 x
+		480 píxeles, 1024 x 768 píxeles y alguna mas. </para>
+	      <para>Por defecto: no seleccionado.</para> 
+	    </listitem> 
+	  </varlistentry> 
+	  <varlistentry> 
+	    <term> 
+	      <guilabel>Poner un bisel alrededor del borde de la pantalla</guilabel>
+	    </term> 
+	    <listitem> 
+	      <para>Seleccionar esta opción para representar un borde biselado 3D alrededor de la vista
+		pantalla completa de una imagen. </para> 
+	      <para>Por defecto: no seleccionado.</para> 
+	    </listitem> 
+	  </varlistentry> 
+	</variablelist> 
+      </sect3> 
+    </sect2> 
+  </sect1>
+-->
+<!-- ============= Bugs ================================== -->
+<!-- This section is optional and is commented out by default. 
+     You can use it to describe known bugs and limitations of the 
+	  program if there are any - please be frank and list all
+     problems you know of. 
+  
+  <sect1 id="mayapp-bugs">
+  <title>Fallos conocidos y limitaciones del programa</title>
+  <para> </para>
+ </sect1>
+-->
+<!-- ============= About ================================== -->
+<!-- This section contains info about the program (not docs), such as
+      author's name(s), web page, license, feedback address. This
+      section is optional: primary place for this info is "About.." box of
+      the program. However, if you do wish to include this info in the
+      manual, this is the place to put it. Alternatively, you can put this
+	  information in the title page.-->
+  <sect1 id="mrproject-about"> 
+    <title>Sobre &app;</title> 
+    <para> &app; ha sido creado por CodeFactory AB y voluntarios de la comunidad GNOME.
+      (<email>mrproject-team@codefactory.se</email>). Para encontrar mas información sobre
+      &app;, por favor visitar el sitio web de &app;
+      <ulink url="http://mrproject.codefactory.se" type="http"> sitio web</ulink>. </para>
+    <para>
+      Para informar de algún fallo o realizar alguna sugerencia de esta aplicación o de
+	  este manual, se puede enviar a 
+      <ulink url="http://bugzilla.codefactory.se" type="help">bugzilla</ulink>.
+    </para>
+
+    <para>
+      Otra excelente fuente de información sobre MrProject son las 
+      <ulink url="http://mrproject.codefactory.se/lists.php" type="help">listas de correo</ulink>.
+	  Hay listas separadas para los usuarios y los desarrolladores. Suscríbite a la que te interese.
+    </para>
+
+    <para>Este programa es distribuido bajo los términos de la GNU General Public License publicada
+	  por la Fundación del Software Libre Foundation; o la versión 2 de la Licencia, o (como tu opción)
+      cualquier versión posterior. Una copia de este Licencia puede ser encontrada en el 
+      <ulink url="ghelp:gpl" type="help">enlace</ulink>, o en el archivo COPYING incluido con el código
+	  fuente de este programa. </para>
+  </sect1> 
+
+  <appendix id="mrp-database-config">
+  <title>Configurando una base de datos MrProject</title>
+    <para>MrProject puede guardar proyectos en una base de datos PostgreSQL. Para poder hacer esto, 
+	PostgreSQL debe estar instalado y configurado para aceptar los datos del proyecto. Estas 
+	instrucciones se salen de la intención de este manual de MrProject. Para mas información
+	sobre la administración y utilización de PostgreSQL, por favor consultar la documentación de
+	PostgreSQL disponible en el <ulink url="http://www.postgresql.org">sitio web de postgreSQL</ulink>.
+    La documentación de PostgreSQL incluye instrucciones de instalación desde la fuente.
+	RPMs también están disponibles en este sitio si tu prefieres este método.
+    </para>
+    <para>Comienza autentificándote como root y copia el archivo database.sql al directorio /tmp.
+    Se utilizará este archivo en los siguientes pasos del proceso, pero es mejor copiarlo al
+	principio no sea que se dañe mas adelante.
+	Asumiendo que el directorio mrproject está en el directorio raíz, se deberían hacer los
+	siguientes pasos:
+      <screen>
+	<prompt>root#</prompt><userinput> cp mrproject/src/plugins/sql/database.sql /tmp </userinput>
+      </screen>
+    </para>
+    <para>Si estas corriendo RedHat y has elegido instalar los paquetes PostgreSQL junto con el
+	resto del sistema, entonces ya tienes instalado un cluster base de datos y un usuario activo por
+	defecto. El cluster base de datos será /var/lib/pgsql/data y el usuario por defecto será
+	postgres.
+    </para>
+    <para>Si no hay usuarios activos por defecto, entonces crea el usuario postgres con el
+	directorio home /var/lib/pgsql.
+    </para>
+    <para>
+	Crea un cluster base de datos autentificándote con la cuenta postgres y ejecutando el comando
+	initdb:
+      <screen>
+	<prompt>root#</prompt><userinput> su - postgres</userinput>
+	<prompt>bash$</prompt><userinput> initdb -D data</userinput>
+      </screen>
+    </para>
+    <para>
+    Crea un usuario no por defecto autentificándote con la cuenta postgres y ejecutando el comando	
+	createuser (utiliza tu propio nombre aquí - kurt es el mío):
+      <screen>
+	<prompt>root#</prompt><userinput> su - postgres</userinput>
+	<prompt>bash$</prompt><userinput> createuser</userinput>
+	Enter name of user to add:<userinput> kurt</userinput>
+	Shall the new user be allowed to create databases? (y/n)<userinput> y</userinput>
+	Shall the new user be allowed to create more new users? (y/n)<userinput> y</userinput>
+	CREATE USER
+      </screen>
+	Esto te permitirá ejecutar comandos desde tu propia cuenta mejor que utilizar la cuenta por
+	defecto.
+    </para>
+
+    <para>
+	Puedes crear ahora la base de datos y el grupo desde tu propia cuenta:
+      <screen>
+	<prompt>kurt#</prompt><userinput> createdb -U kurt mrprojectdb</userinput>
+	CREATE DATABASE
+	<prompt>kurt#</prompt><userinput> echo 'create group mrproject with user kurt;' | psql -e -U kurt -d mrprojectdb</userinput>
+	create group mrproject with user kurt;
+	CREATE GROUP
+      </screen>
+    </para>
+
+    <para>
+	Este comando final construirá las tablas requeridas para almacenar la información del proyecto
+    en la base de datos mrprojectdb. El archivo <filename>database.sql</filename> puede ser
+	encontrado en el subdirectorio de la distribución de mrproject 
+	<filename class="directory">src/plugins/sql</filename>.
+      <screen>
+	<prompt>kurt#</prompt><userinput> cat /tmp/database.sql | psql -e -U kurt -d mrprojectdb
+	</userinput>
+      </screen>
+	Esta línea genera bastante información de salida. Cuando está completa, deberías regresar
+	atrás y revisar la salida, comprobando cualquier mensaje de error (busca líneas que comiencen
+	con la palabra ERROR).
+    </para>
+
+    <para>Eso es todo. Tu deberías ser capaz de guardar y abrir proyectos utilizando la base de
+	datos PostgreSQL.
+    </para>
+
+    <para>
+	Si tienes algún problema o encontraste algún error, puedes intentarlo de nuevo eliminando 
+	el grupo y la base da datos y volviendo a crearlos:
+      <screen>
+	<prompt>kurt#</prompt><userinput> dropdb mrprojectdb</userinput>
+	<prompt>kurt#</prompt><userinput> echo 'DROP GROUP mrproject;' | psql -e -U kurt -d mrprojectdb</userinput>
+      </screen>
+    </para>
+
+  </appendix>
+
+  <appendix id="mrp-web-resources">
+  <title>Recursos web sobre la gestión de proyectos</title>
+    <para>
+	<ulink url="http://www.pmi.org">El sitio web PMI</ulink>
+    </para>
+  </appendix>
+
+
+  <bibliography>
+  <title>Bibliografía</title>
+      <biblioentry>
+	<abbrev>PMBOK</abbrev>
+	<authorgroup>
+	<author><firstname>Project Management Institute</firstname></author>
+	</authorgroup>
+	<copyright><year>2000</year>
+	<holder>Project Management Institute, Inc.</holder></copyright>
+	<isbn>1-880410-23-0</isbn>
+	<publisher>
+	<publishername>Project Management Institute, Inc.</publishername>
+	</publisher>
+	<title>A Guide to the Project Management Body of Knowledge (PMBOK Guide)</title>
+      </biblioentry>
+  </bibliography>
+</article>

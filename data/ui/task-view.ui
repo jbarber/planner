@@ -1,0 +1,60 @@
+<Root>
+  <commands>
+    <cmd name="InsertTask"          _label="_Insert Task"               pixtype="stock" pixname="planner-stock-insert-task"/>
+    <cmd name="InsertTasks"         _label="In_sert Tasks..."           pixtype="stock" pixname="planner-stock-insert-task"/>
+    <cmd name="RemoveTask"          _label="_Remove Task"               pixtype="stock" pixname="planner-stock-remove-task"    sensitive="0"/>
+    <cmd name="EditTask"            _label="_Edit Task Properties..."                                                     sensitive="0"/>
+    <cmd name="UnlinkTask"          _label="Un_link Task"               pixtype="stock" pixname="planner-stock-unlink-task"/>
+    <cmd name="SelectAll"           _label="Select _All"                 _tip="Select all tasks"/>
+    <cmd name="ResetConstraint"     _label="Reset _Constraint"                                                            sensitive="0"/>
+    <cmd name="ResetAllConstraints" _label="Reset _All Constraints"/>
+    <cmd name="IndentTask"          _label="I_ndent Task"               pixtype="stock" pixname="planner-stock-indent-task"    sensitive="0"/>
+    <cmd name="UnindentTask"        _label="Unin_dent Task"             pixtype="stock" pixname="planner-stock-unindent-task"  sensitive="0"/>
+    <cmd name="MoveTaskUp"	    _label="Move Task _Up"              pixtype="stock" pixname="planner-stock-move-task-up"   sensitive="0"/>
+    <cmd name="MoveTaskDown"	    _label="Move Task Do_wn"            pixtype="stock" pixname="planner-stock-move-task-down" sensitive="0"/>
+    <cmd name="EditCustomProps"     _label="_Edit Custom Properties..." pixtype="stock" pixname="gtk-properties"/>
+  </commands>
+
+  <menu>
+    <submenu    name="Edit">
+      <placeholder name="Selection placeholder">
+        <menuitem name="SelectAll"           verb=""   accel="*Control*a" />
+      </placeholder>
+      <placeholder name="View specific placeholder">
+      </placeholder>
+    </submenu>
+    <submenu    name="Actions">
+      <placeholder name="View specific actions placeholder">
+        <menuitem name="InsertTask"          verb=""   accel="*Control*i" />
+        <menuitem name="InsertTasks"         verb=""/>
+	<menuitem name="RemoveTask"          verb=""/>
+        <menuitem name="UnlinkTask"          verb=""/>
+        <separator/>
+        <menuitem name="IndentTask"          verb=""/>
+        <menuitem name="UnindentTask"        verb=""/>
+        <separator/>
+	<menuitem name="MoveTaskUp"          verb=""/>
+	<menuitem name="MoveTaskDown"        verb=""/>
+        <separator/>
+        <menuitem name="ResetConstraint"     verb=""/>
+        <menuitem name="ResetAllConstraints" verb=""/>
+        <separator/>
+        <menuitem name="EditTask"            verb=""   accel="*Shift**Control*e"/>
+        <separator/>
+        <menuitem name="EditCustomProps"     verb=""/>
+      </placeholder>
+    </submenu>
+  </menu>
+
+  <dockitem name="Toolbar">
+    <toolitem name="InsertTask"   verb="" _label="Insert"/>
+    <toolitem name="RemoveTask"   verb="" _label="Remove"/>
+    <toolitem name="UnlinkTask"   verb="" _label="Unlink"/>
+    <toolitem name="IndentTask"   verb="" _label="Indent"/>
+    <toolitem name="UnindentTask" verb="" _label="Unindent"/>
+    <toolitem name="MoveTaskUp"	  verb="" _label="Move up"/>
+    <toolitem name="MoveTaskDown" verb="" _label="Move down"/>
+  </dockitem>
+
+</Root>
+

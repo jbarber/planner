@@ -1,0 +1,40 @@
+<!-- ##### SECTION Title ##### -->
+MrpError
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### MACRO MRP_ERROR ##### -->
+<para>
+Error domain for libmrproject.
+</para>
+
+
+
+<!-- ##### ENUM MrpError ##### -->
+<para>
+Error codes returned by libmrproject functions.
+</para>
+
+@MRP_ERROR_TASK_RELATION_FAILED: 
+@MRP_ERROR_TASK_MOVE_FAILED: 
+@MRP_ERROR_LOAD_FILE_DONT_EXIST: 
+@MRP_ERROR_LOAD_FILE_INVALID: 
+@MRP_ERROR_SAVE_FILE_EXIST: 
+@MRP_ERROR_SAVE_FILE_CHANGED: 
+@MRP_ERROR_EXPORT_UNSUPPORTED: 
+@MRP_ERROR_NO_FILE_MODULE: 
+@MRP_ERROR_SAVE_WRITE_FAILED: 
+@MRP_ERROR_INVALID_URI: 
+@MRP_ERROR_FAILED: 
+

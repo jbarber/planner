@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<project name="Example" company="CodeFactory" manager="Kurt Maute" project-start="20020819T000000Z" mrproject-version="2">
+  <tasks>
+    <task id="1" name="t1" note="" work="28800" start="20020819T080000Z" end="20020820T170000Z" percent-complete="0">
+      <task id="2" name="t1.1" note="" work="0" start="20020819T080000Z" end="20020819T170000Z" percent-complete="0">
+        <task id="3" name="t1.1.1" note="" work="28800" start="20020819T080000Z" end="20020819T170000Z" percent-complete="0"/>
+        <task id="4" name="t1.1.2" note="" work="28800" start="20020819T080000Z" end="20020819T170000Z" percent-complete="0"/>
+      </task>
+      <task id="5" name="t1.2" note="" work="57600" start="20020819T080000Z" end="20020820T170000Z" percent-complete="0"/>
+    </task>
+    <task id="6" name="t2" note="" work="115200" start="20020819T080000Z" end="20020822T170000Z" percent-complete="0"/>
+    <task id="7" name="t3" note="" work="28800" start="20020823T080000Z" end="20020823T170000Z" percent-complete="0">
+      <predecessors>
+        <predecessor id="1" predecessor-id="6" type="FS"/>
+      </predecessors>
+    </task>
+  </tasks>
+  <resource-groups>
+    <group id="1" name="Software Development" admin-name="Bradley Coyle" admin-phone="999-555-1212" admin-email="BradC@yourco.com"/>
+    <group id="2" name="Project Management" admin-name="Kurt Maute" admin-phone="" admin-email="kmaute@yahoo.com"/>
+    <group id="3" name="Quality Assurance" admin-name="Pat O'Reilley" admin-phone="" admin-email="pat@yourco.com"/>
+    <group id="4" name="Customer Support" admin-name="JQ Public" admin-phone="" admin-email="jq@yourco.com"/>
+  </resource-groups>
+  <resources>
+    <resource group="2" id="1" name="Kurt" type="1" units="0" email="kmaute@yahoo.com" std-rate="0"/>
+    <resource group="1" id="2" name="Alvaro" type="1" units="0" email="acs@barrapunto.com" std-rate="0"/>
+    <resource group="3" id="3" name="Pedro" type="1" units="0" email="sorrodp@alum.wpi.edu" std-rate="0"/>
+  </resources>
+  <allocations>
+    <allocation task-id="1" resource-id="1"/>
+  </allocations>
+</project>

@@ -1,0 +1,116 @@
+%define ver @VERSION@
+%define name @PACKAGE@
+
+Summary: 	A graphical project management tool.
+Name:           %name
+Version:        %ver
+Release:	imendio1
+License: 	GPL
+Group: 		Applications/Productivity
+Url:		http://planner.imendio.org/
+Source: 	%{name}-%{ver}.tar.gz
+BuildRoot:	%{_tmppath}/%{name}-%{ver}-root
+Requires:	gtk2 >= @GTK_REQUIRED@
+Requires:       libgnomeui >= @LIBGNOMEUI_REQUIRED@
+Requires:	popt >= 1.5
+Requires:	libglade2 >= @LIBGLADE_REQUIRED@
+Requires:       libplanner = %{ver}
+Requires:       gnome-vfs2 >= 2.0.2
+Requires:       libgnomeprintui22 >= 2.2.0
+Requires:       libxslt >= 1.0
+PreReq:         scrollkeeper >= 0.3.10
+
+BuildRequires:	gtk2-devel >= @GTK_REQUIRED@
+BuildRequires:	libgnomeui-devel >= @LIBGNOMEUI_REQUIRED@
+BuildRequires:	libglade2-devel >= @LIBGLADE_REQUIRED@
+BuildRequires:	libplanner-devel = %{ver}
+BuildRequires:  gnome-vfs2-devel >= 2.0.2
+BuildRequires:  libgnomeprintui22-devel >= 2.2.0
+BuildRequires:  libxslt-devel >= 1.0
+BuildRequires:	intltool
+
+%description
+Planner is a visual project management application which allows users to
+manage several aspects of a project, including schedule tracking using
+Gantt charts.
+
+You should install Planner if you wish to manage schedules, allocate
+resources, and track the progress of your projects.
+
+%package sql
+Summary:	Planner SQL plugin
+Group:          Applications/Productivity
+Requires:       %name = %{PACKAGE_VERSION}
+Requires:       postgresql-libs
+BuildRequires:  postgresql-devel
+
+%description sql
+SQL plugin for Planner, this plugin can be used to store projects in a PostgreSQL database.
+
+%prep
+%setup -q
+
+%build
+
+intltoolize
+%configure --disable-timetable --enable-postgres
+
+make
+
+%install
+[ -n "$RPM_BUILD_ROOT" -a "$RPM_BUILD_ROOT" != / ] && rm -rf $RPM_BUILD_ROOT
+
+%makeinstall MRP_PLUGINDIR=$RPM_BUILD_ROOT/%{_libdir}/planner/plugins MRP_VIEWDIR=$RPM_BUILD_ROOT/%{_libdir}/planner/views
+
+rm -rf $RPM_BUILD_ROOT/var/scrollkeeper
+rm -f $RPM_BUILD_ROOT%{_libdir}/planner/*/*la
+rm -f $RPM_BUILD_ROOT%{_libdir}/planner/*la
+
+desktop-file-install --vendor imendio --delete-original     \
+  --dir $RPM_BUILD_ROOT%{_datadir}/applications             \
+  --add-category X-Red-Hat-Base                             \
+  $RPM_BUILD_ROOT%{_datadir}/applications/planner.desktop
+
+
+%find_lang %name
+
+
+%clean
+[ -n "$RPM_BUILD_ROOT" -a "$RPM_BUILD_ROOT" != / ] && rm -rf $RPM_BUILD_ROOT
+
+%post
+/sbin/ldconfig
+scrollkeeper-update
+
+%postun
+/sbin/ldconfig
+scrollkeeper-update
+
+%files -f %{name}.lang
+%defattr(-, root, root)
+%doc ChangeLog NEWS README COPYING
+%{_bindir}/planner
+%{_libdir}/planner
+%{_datadir}/planner
+%{_datadir}/gnome-2.0/ui/*.ui
+%{_datadir}/application-registry/*
+%{_datadir}/mime-info/*
+%{_datadir}/pixmaps/*
+%{_datadir}/applications/*
+%{_datadir}/gnome/help/planner/*
+%{_datadir}/omf/planner/*
+
+%exclude %{_libdir}/planner/plugins/libproject-sql*
+%exclude %{_datadir}/planner/glade/mg-sql.glade
+%exclude %{_datadir}/gnome-2.0/ui/sql-plugin.ui
+
+%files sql
+%defattr(-,root,root)
+%{_libdir}/planner/plugins/libproject-sql*
+%{_datadir}/planner/glade/mg-sql.glade
+%{_datadir}/gnome-2.0/ui/sql-plugin.ui
+
+
+%changelog
+* Mon Dec 1 2003 Richard Hult <richard@imendio.com>
+- Start over with a new spec file, needs a lot more work.

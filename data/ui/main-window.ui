@@ -1,0 +1,97 @@
+<Root>
+  <commands>
+    <cmd name="FileNew"          pixtype="stock" pixname="New"          _label="_New Project"  _tip="Create a new project" />
+    <cmd name="FileNewDetails"   pixtype="stock" pixname="New"          _label="New..."        _tip="Create a new project"/>
+    <cmd name="FileOpen"         pixtype="stock" pixname="Open"         _label="_Open..."      _tip="Open a project"/>
+    <cmd name="FileSave"         pixtype="stock" pixname="Save"         _label="_Save"         _tip="Save the current project" sensitive="0"/>
+    <cmd name="FileSaveAs"       pixtype="stock" pixname="Save As"      _label="Save _As..."   _tip="Save the current project with a different name"/>
+    <cmd name="FilePrint"        pixtype="stock" pixname="Print"        _label="_Print..."     _tip="Print the current project"/>
+    <cmd name="FilePrintPreview" pixtype="stock" pixname="PrintPreview" _label="_Print Preview" _tip="Print preview of the current project"/>
+    <cmd name="FileClose"        pixtype="stock" pixname="Close"        _label="_Close"        _tip="Close the current file"/>
+    <cmd name="FileExit"         pixtype="stock" pixname="Quit"         _label="_Quit"         _tip="Exit the program"/>
+    <cmd name="EditCut"          pixtype="stock" pixname="Cut"          _label="C_ut"          _tip="Cut the selection" sensitive="0"/>
+    <cmd name="EditCopy"         pixtype="stock" pixname="Copy"         _label="_Copy"         _tip="Copy the selection" sensitive="0"/>
+    <cmd name="EditPaste"        pixtype="stock" pixname="Paste"        _label="_Paste"        _tip="Paste the clipboard" sensitive="0"/>
+    <cmd name="EditClear"        pixtype="stock" pixname="Clear"        _label="Clear"         _tip="Clear the selection" sensitive="0"/>
+    <cmd name="EditUndo"         pixtype="stock" pixname="Undo"         _label="_Undo"         _tip="Undo the last action" sensitive="0"/>
+    <cmd name="EditRedo"         pixtype="stock" pixname="Redo"         _label="_Redo"         _tip="Redo the undone action" sensitive="0"/>
+    <cmd name="HelpHelp"         pixtype="stock" pixname="Help"         _label="_User Guide"   _tip="Show the MrProject User Guide"/>
+    <cmd name="HelpAbout"        pixtype="stock" pixname="About"        _label="_About"        _tip="About this application"/>
+
+    <cmd name="EditProjectProps" pixtype="stock" pixname="Properties"   _label="_Edit Project Properties" _tip="Edit the project properties"/>
+    <cmd name="ManageCalendars"  _label="_Manage Calendars"/>
+    <cmd name="EditPhases"       _label="Edit Project _Phases"/>
+    <cmd name="EditDayTypes"     _label="Edit Day _Types"/>
+  </commands>
+
+  <menu>
+    <submenu       name="File" _label="_File">
+      <menuitem    name="FileNew"          verb=""  accel="*Control*n"/>
+      <menuitem    name="FileOpen"         verb=""  accel="F3"/>
+      <placeholder name="Import placeholder" delimit="top"/>
+      <separator/>
+      <menuitem    name="FileSave"         verb=""  accel="*Control*s"/>
+      <menuitem    name="FileSaveAs"       verb=""/>
+      <placeholder name="Export placeholder" delimit="top"/>
+      <separator/>
+      <menuitem    name="FilePrint"        verb=""  accel="*Control*p"/>
+      <menuitem    name="FilePrintPreview" verb=""/>
+      <placeholder name="EggRecentDocuments" delimit="top"/>
+      <separator/>
+      <menuitem    name="FileClose"        verb=""  accel="*Control*w"/>
+      <menuitem    name="FileExit"         verb=""  accel="*Control*q"/>
+    </submenu>
+
+    <submenu       name="Edit" _label="_Edit">
+      <menuitem    name="EditUndo"     verb=""  accel="*Control*z"/>
+      <menuitem    name="EditRedo"     verb=""  accel="*Control*r"/>
+      <separator/>
+      <menuitem    name="EditCut"      verb="" accel="*Control*x"/>
+      <menuitem    name="EditCopy"     verb="" accel="*Control*c"/>
+      <menuitem    name="EditPaste"    verb="" accel="*Control*v"/>
+<!--      <separator/> -->
+<!--      <menuitem    name="EditClear"    verb="" /> -->
+<!--      <separator/> -->
+      <placeholder name="View specific placeholder" delimit="top"/>
+      <placeholder name="Selection placeholder" delimit="top"/>
+<!--      menuitem    name="EditUseCalendar"  verb="" type="toggle"/> -->
+    </submenu>
+
+    <submenu       name="View" _label="_View">
+      <placeholder name="Views placeholder" delimit="none"/>
+      <placeholder name="View specific placeholder" delimit="top"/>
+    </submenu>
+
+    <submenu       name="Actions" _label="_Actions">
+	<placeholder name="View specific actions placeholder" delimit="none"/>
+    </submenu>
+
+    <submenu       name="Project" _label="_Project">
+      <menuitem    name="ManageCalendars" verb="" />
+      <menuitem    name="EditDayTypes"    verb="" />
+      <separator/>
+      <menuitem    name="EditPhases"      verb="" />
+      <separator/>
+      <menuitem    name="EditProjectProps" verb=""/>
+    </submenu>
+
+    <submenu       name="Help" _label="_Help">
+      <menuitem    name="HelpHelp"         verb="" />
+      <menuitem    name="HelpAbout"        verb="" />
+    </submenu>
+  </menu>
+
+  <dockitem name="Toolbar" look="icons" homogeneous="0" relief="none" behavior="exclusive">
+    <toolitem      name="FileNew"          verb=""    _label="New"  />
+    <toolitem      name="FileOpen"         verb=""    _label="Open" />
+    <toolitem      name="FileSave"         verb=""    _label="Save" />
+    <separator/>
+    <toolitem      name="FilePrint"        verb=""    _label="Print"/>
+    <separator/> 
+  </dockitem>
+
+  <status>
+    <item name="main"/>
+  </status>
+
+</Root>

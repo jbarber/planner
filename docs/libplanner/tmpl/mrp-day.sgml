@@ -1,0 +1,138 @@
+<!-- ##### SECTION Title ##### -->
+mrpday
+
+<!-- ##### SECTION Short_Description ##### -->
+represents a day type in the project.
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+A day is a specific type of day, such as working day or non-working
+day. Other examples might be custom types like half day, or a holiday.
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### STRUCT MrpDay ##### -->
+<para>
+Object representing a day in the project.
+</para>
+
+
+<!-- ##### FUNCTION mrp_day_add ##### -->
+<para>
+
+</para>
+
+@project: 
+@name: 
+@description: 
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_day_get_all ##### -->
+<para>
+
+</para>
+
+@project: 
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_day_remove ##### -->
+<para>
+
+</para>
+
+@project: 
+@day: 
+
+
+<!-- ##### FUNCTION mrp_day_get_id ##### -->
+<para>
+
+</para>
+
+@day: 
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_day_get_name ##### -->
+<para>
+
+</para>
+
+@day: 
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_day_set_name ##### -->
+<para>
+
+</para>
+
+@day: 
+@name: 
+
+
+<!-- ##### FUNCTION mrp_day_get_description ##### -->
+<para>
+
+</para>
+
+@day: 
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_day_set_description ##### -->
+<para>
+
+</para>
+
+@day: 
+@description: 
+
+
+<!-- ##### FUNCTION mrp_day_ref ##### -->
+<para>
+
+</para>
+
+@day: 
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_day_unref ##### -->
+<para>
+
+</para>
+
+@day: 
+
+
+<!-- ##### FUNCTION mrp_day_get_work ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_day_get_nonwork ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_day_get_use_base ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

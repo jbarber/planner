@@ -1,0 +1,171 @@
+<!-- ##### SECTION Title ##### -->
+MrpResource
+
+<!-- ##### SECTION Short_Description ##### -->
+represents a resource in the project.
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### STRUCT MrpResourcePriv ##### -->
+<para>
+A private struct for internal use only.  The definition of this
+structure is not publically available.
+</para>
+
+
+<!-- ##### STRUCT MrpResource ##### -->
+<para>
+Object representing a task in the project.
+</para>
+
+
+<!-- ##### SIGNAL MrpResource::assignment-added ##### -->
+<para>
+
+</para>
+
+@mrpresource: the object which received the signal.
+@arg1: 
+
+<!-- ##### SIGNAL MrpResource::assignment-removed ##### -->
+<para>
+
+</para>
+
+@mrpresource: the object which received the signal.
+@arg1: 
+
+<!-- ##### ARG MrpResource:calendar ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG MrpResource:email ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG MrpResource:group ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG MrpResource:name ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG MrpResource:note ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG MrpResource:type ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG MrpResource:units ##### -->
+<para>
+
+</para>
+
+<!-- ##### ENUM MrpResourceType ##### -->
+<para>
+The type of the resource, work or material.
+</para>
+
+@MRP_RESOURCE_TYPE_NONE: invalid type (unset)
+@MRP_RESOURCE_TYPE_WORK: work resource
+@MRP_RESOURCE_TYPE_MATERIAL: material resource
+
+<!-- ##### FUNCTION mrp_resource_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_resource_get_name ##### -->
+<para>
+
+</para>
+
+@resource: 
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_resource_set_name ##### -->
+<para>
+
+</para>
+
+@resource: 
+@name: 
+
+
+<!-- ##### FUNCTION mrp_resource_assign ##### -->
+<para>
+
+</para>
+
+@resource: 
+@task: 
+@units: 
+
+
+<!-- ##### FUNCTION mrp_resource_get_assignments ##### -->
+<para>
+
+</para>
+
+@resource: 
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_resource_get_assigned_tasks ##### -->
+<para>
+
+</para>
+
+@resource: 
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_resource_compare ##### -->
+<para>
+
+</para>
+
+@a: 
+@b: 
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_resource_get_calendar ##### -->
+<para>
+
+</para>
+
+@resource: 
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_resource_set_calendar ##### -->
+<para>
+
+</para>
+
+@resource: 
+@calendar: 
+
+

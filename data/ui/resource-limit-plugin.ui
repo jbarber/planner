@@ -1,0 +1,19 @@
+<Root>
+  <commands>
+    <cmd name="ResourceLimit" _label="Resource Limit"/>
+  </commands>
+
+  <menu>
+    <submenu    name="Edit">
+      <separator/>
+         <menuitem name="ResourceLimit"            verb=""   accel="*Shift**Control*l"/>
+      <separator/>   
+    </submenu>
+  </menu>
+
+<!--  <dockitem name="Toolbar">
+    <toolitem name="ResourceLimit" verb="" _label="Resource Limit"/>
+  </dockitem> -->
+
+</Root>
+

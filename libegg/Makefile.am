@@ -1,0 +1,2 @@
+SUBDIRS = recent-files
+

@@ -1,0 +1,57 @@
+<?xml version ='1.0' encoding='UTF-8'?>
+
+<!ELEMENT project (tasks?,resource-groups?,resources?,allocations?)>
+<!ATTLIST project name              CDATA #REQUIRED
+                  company           CDATA #IMPLIED
+                  manager           CDATA #IMPLIED>
+
+<!ELEMENT predecessors (predecessor*)>
+
+<!ELEMENT predecessor EMPTY>
+<!ATTLIST predecessor id             CDATA #REQUIRED
+                      predecessor-id CDATA #REQUIRED
+                      type           (FS|FF|SS|SF) #REQUIRED
+                      lag            CDATA #IMPLIED>
+
+<!ELEMENT tasks (task*)>
+
+<!ELEMENT task (predecessors?,task*)>
+<!ATTLIST task id                    CDATA #REQUIRED
+               name                  CDATA #REQUIRED
+               note                  CDATA #IMPLIED
+               start                 CDATA #REQUIRED
+               end                   CDATA #REQUIRED
+               percent-complete      CDATA #IMPLIED>
+
+<!ELEMENT resource-groups (group*)>
+<!ATTLIST resource-groups default_group CDATA #REQUIRED>
+
+<!ELEMENT group EMPTY>
+<!ATTLIST group id                   CDATA #REQUIRED
+                name                 CDATA #REQUIRED
+                admin-name           CDATA #REQUIRED
+                admin-phone          CDATA #REQUIRED
+                admin-email          CDATA #REQUIRED>
+
+<!ELEMENT resources (resource*)>
+
+<!ELEMENT resource EMPTY>   
+<!ATTLIST resource id                 CDATA #REQUIRED
+                   name               CDATA #REQUIRED
+                   email              CDATA #IMPLIED
+                   type               (1|2) #REQUIRED
+                   group              CDATA #REQUIRED
+                   units              CDATA #REQUIRED
+                   std-rate           CDATA #IMPLIED
+                   ovt-rate           CDATA #IMPLIED>
+
+<!ELEMENT allocations (allocation*)>
+
+<!ELEMENT allocation EMPTY>
+<!ATTLIST allocation task-id          CDATA #REQUIRED
+                     resource-id      CDATA #REQUIRED>
+
+
+
+
+

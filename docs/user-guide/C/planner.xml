@@ -1,0 +1,1773 @@
+<?xml version="1.0"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
+"http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+  <!ENTITY legal SYSTEM "legal.xml">
+  <!ENTITY appversion "0.10.0">
+  <!ENTITY manrevision "1.5.1">
+  <!ENTITY date "29 May 2003">
+  <!ENTITY app "Planner">
+  <!-- Information about the entities
+       The legal.xml file contains legal information, there is no need to edit the file. 
+       Use the appversion entity to specify the version of the application.
+       Use the manrevision entity to specify the revision number of this manual.
+       Use the date entity to specify the release date of this manual.
+       Use the app entity to specify the name of the application. -->
+]>
+<!-- 
+      (Do not remove this comment block.)
+  Maintained by the GNOME Documentation Project
+  http://developer.gnome.org/projects/gdp
+  Template version: 2.0 beta
+  Template last modified Apr 11, 2002
+-->
+<!-- =============Document Header ============================= -->
+<article id="index" lang="en">
+<!-- please do not change the id; for translations, change lang to -->
+<!-- appropriate code -->
+  <articleinfo> 
+    <title>&app; User Guide V&manrevision;</title>       
+    <subtitle>for &app; v&appversion;</subtitle>
+
+    <copyright> 
+      <year>2002</year> 
+      <year>2003</year> 
+      <holder>Kurt Maute, PMP</holder> 
+    </copyright> 
+    <copyright> 
+      <year>2000</year> 
+      <year>2001</year> 
+      <holder>Alvaro Del Castillo</holder> 
+    </copyright>
+    <copyright> 
+      <year>2000</year> 
+      <year>2001</year> 
+      <holder>Pedro Soria-Rodriguez</holder> 
+    </copyright>
+<!-- translators: uncomment this:
+
+  <copyright>
+   <year>2002</year>
+   <holder>ME-THE-TRANSLATOR (Latin translation)</holder>
+  </copyright>
+
+   -->
+<!-- An address can be added to the publisher information.  If a role is 
+     not specified, the publisher/author is the same for all versions of the 
+     document.  -->
+    <publisher> 
+      <publishername> GNOME Documentation Project </publishername> 
+    </publisher> 
+
+   &legal;
+   <!-- This file  contains link to license for the documentation (GNU FDL), and 
+        other legal stuff such as "NO WARRANTY" statement. Please do not change 
+	any of this. -->
+
+    <authorgroup> 
+      <author> 
+		<firstname>Kurt</firstname> 
+		<surname>Maute, PMP</surname> 
+		<affiliation> 
+	  		<orgname>GNOME Documentation Project</orgname> 
+	  		<address> <email>Kurt@Maute.us</email> </address> 
+		</affiliation> 
+      </author> 
+      <author> 
+		<firstname>Alvaro</firstname> 
+		<surname>Del Castillo</surname> 
+		<affiliation> 
+	  		<orgname>GNOME Documentation Project</orgname> 
+	  		<address> <email>acs@barrapunto.com</email> </address> 
+		</affiliation> 
+      </author> 
+      <author> 
+		<firstname>Pedro</firstname> 
+		<surname>Soria-Rodriguez</surname> 
+		<affiliation> 
+	  		<orgname>GNOME Documentation Project</orgname> 
+	  		<address> <email>sorrodp@alum.wpi.edu</email> </address> 
+		</affiliation> 
+      </author> 
+      
+<!-- This is appropriate place for other contributors: translators,
+     maintainers,  etc. Commented out by default.
+     
+      <othercredit role="translator">
+		<firstname>Latin</firstname> 
+		<surname>Translator 1</surname> 
+		<affiliation> 
+	  		<orgname>Latin Translation Team</orgname> 
+	  		<address> <email>translator@gnome.org</email> </address> 
+		</affiliation>
+		<contrib>Latin translation</contrib>
+      </othercredit>
+-->
+    </authorgroup>
+
+
+<!-- According to GNU FDL, revision history is mandatory if you are -->
+<!-- modifying/reusing someone else's document.  If not, you can omit it. -->
+<!-- Remember to remove the &manrevision; entity from the revision entries other
+-->
+<!-- than the current revision. -->
+<!-- The revision numbering system for GNOME manuals is as follows: -->
+<!-- * the revision number consists of two components -->
+<!-- * the first component of the revision number reflects the release version of the GNOME desktop. -->
+<!-- * the second component of the revision number is a decimal unit that is incremented with each revision of the manual. -->
+<!-- For example, if the GNOME desktop release is V2.x, the first version of the manual that -->
+<!-- is written in that desktop timeframe is V2.0, the second version of the manual is V2.1, etc. -->
+<!-- When the desktop release version changes to V3.x, the revision number of the manual changes -->
+<!-- to V3.0, and so on. -->  
+    <revhistory>
+      <revision> 
+	<revnumber>&app; User Guide V&manrevision; for &app; V&appversion;</revnumber> 
+	<date>&date;</date> 
+	<authorinitials>kmm</authorinitials>
+	<revdescription> 
+	  <para>
+	    Additions for new features:  
+	    <itemizedlist>
+	      <listitem><para>Open From/Save to Database</para></listitem>
+	      <listitem><para>Appendix on how to configure the database</para></listitem>
+	      <listitem><para>Save to HTML</para></listitem>
+	    </itemizedlist>
+	  </para>
+	</revdescription> 
+      </revision> 
+      <revision> 
+	<revnumber>&app; User Guide V1.4 for &app; V0.9</revnumber> 
+	<date>23 Feb 2003</date> 
+	<authorinitials>kmm</authorinitials>
+	<revdescription> 
+	  <para>
+	      Additions for new features:
+	        <itemizedlist>
+	          <listitem><para>Custom Properties for Projects, Tasks, &amp; Resources
+		    </para></listitem>
+	          <listitem><para>Fixed Duration mode for Tasks</para></listitem>
+	          <listitem><para>Milestones</para></listitem>
+	          <listitem><para>Resource allocations by units</para></listitem>
+	          <listitem><para>PRINTING!</para></listitem>
+	        </itemizedlist>
+	      Usage of the 'Quick Add' Dialogues for Tasks &amp; Resources
+	  </para>
+	</revdescription> 
+      </revision> 
+      <revision> 
+	<revnumber>&app; User Guide V1.3 for &app; V0.8</revnumber> 
+	<date>29 Dec 2002</date> 
+	<authorinitials>kmm</authorinitials>
+	<revdescription> 
+	  <para>
+	      Additions for new features:
+	        <itemizedlist>
+	          <listitem><para>Calendars</para></listitem>
+	          <listitem><para>Cost column in Resource view</para></listitem>
+	        </itemizedlist>
+	      Some new screenshots
+	  </para>
+	</revdescription> 
+      </revision> 
+    </revhistory> 
+
+    <releaseinfo>This manual describes version &appversion; of &app;
+    </releaseinfo> 
+    <legalnotice> 
+      <title>Feedback</title> 
+      <para>To report a bug or make a suggestion regarding the &app; application or
+      this manual, follow the directions in the <ulink url="ghelp:gnome-feedback"
+	  type="help">GNOME Feedback Page</ulink>. 
+      </para>
+<!-- Translators may also add here feedback address for translations -->
+    </legalnotice> 
+  </articleinfo> 
+
+  <indexterm zone="index"> 
+    <primary>MY-GNOME-APP</primary> 
+  </indexterm> 
+  <indexterm zone="index"> 
+    <primary>mygnomeapp</primary> 
+  </indexterm>
+
+<!-- ============= Document Body ============================= -->
+<!-- ============= Introduction ============================== -->
+<!-- Use the Introduction section to give a brief overview of what
+     the application is and what it does. -->
+  <sect1 id="mrp-introduction"> 
+    <title>Introduction</title> 
+    <para>&app; is a general purpose project management tool
+    that provides a variety of features, which are available via 3 separate screen layouts 
+    called views.  As you will see, the views are accessed by clicking the icons in the left
+    hand toolbar in the &app; window.</para> 
+    <sect2 id="mrp-task-view">
+	<title>Task View:</title> 
+        <para>
+	  Tasks are also shown on the Gantt view, but the Task view shows
+	  more detail for each task.
+          <figure id="task-view" float="1">
+            <title>Planner Task View</title>
+            <screenshot>
+              <graphic fileref="figures/task-view.png" format="PNG"></graphic>
+            </screenshot>
+          </figure>        
+        </para>
+	<para>Task View is used for the following:</para>
+	<itemizedlist> 
+	<listitem> 
+    	  <para>Task Definition - break down project deliverables into smaller, more 
+		manageable tasks</para> 
+  	</listitem> 
+  	<listitem> 
+    	  <para>Task Sequencing - 
+		identify dependencies between tasks and other constraints</para> 
+  	</listitem> 
+  	<listitem> 
+    	  <para>Task Duration Estimating - estimate the time it will take to 
+		complete the tasks</para> 
+  	</listitem> 
+  	<listitem> 
+    	  <para>Task Cost Calculation - estimate what it will cost to 
+		complete the tasks</para> 
+  	</listitem> 
+<!-- 	<listitem> 
+    	<para>Scheduling - develop the timeline based on the steps above,
+		plus resource availability</para> 
+	</listitem>
+-->
+	</itemizedlist> 
+    </sect2>
+    <sect2 id="mrp-gantt-view">
+	<title>Gantt View:</title> 
+	<para>The Gantt View combines the Gantt chart with a shortened version of the
+	  task view.
+	</para>
+        <para>
+          A Gantt chart is a graphical display
+          of all the tasks that a project is composed of.  Each bar on the chart 
+          is a graphical representation of the length of time the task is planned to
+          take.  The Gantt Chart doesn't offer any features that are not available in
+	  the other views, but it is a valuable Project Management tool for the way it
+	  allows the user to see the project data.
+          <figure id="gantt-view" float="1">
+            <title>Planner Gantt View</title>
+            <screenshot>
+              <graphic fileref="figures/gantt-view.png" format="PNG"></graphic>
+            </screenshot>
+          </figure>        
+        </para>
+	<para>The Gantt View allows you to:</para>
+	<itemizedlist> 
+	<listitem> 
+	  <para>View a graphical representation of the project schedule</para>
+  	</listitem> 
+	<listitem> 
+	  <para>Manage task relationships using drag and drop</para>
+  	</listitem> 
+	<listitem> 
+	  <para>Use Zoom in and Zoom out features to view different levels of detail</para>
+  	</listitem> 
+	<listitem> 
+	  <para>View resources assigned to each task</para>
+  	</listitem> 
+	</itemizedlist> 
+    </sect2>
+    <sect2 id="mrp-resource-view">
+	<title>Resource View:</title> 
+          <figure id="resource-view" float="1">
+            <title>Planner Resource View</title>
+            <screenshot>
+              <graphic fileref="figures/resource-editor.png" format="PNG" ></graphic>
+            </screenshot>
+          </figure>        
+	<para>The Resource View gives you access to the following features:</para>
+	<itemizedlist> 
+	<listitem> 
+	  <para>Resource list management, including both human resources and materials</para>
+  	</listitem> 
+	<listitem> 
+	  <para>Resource group management</para>
+  	</listitem> 
+	<listitem> 
+	  <para>Resource cost management</para>
+  	</listitem> 
+	</itemizedlist> 
+    </sect2>
+  </sect1>
+
+<!-- =========== Getting Started ============================== -->
+<!-- Use the Getting Started section to describe the steps required
+     to start the application and to describe the user interface components
+     of the application. If there is other information that it is important
+     for readers to know before they start using the application, you should
+     also include this information here. 
+     If the information about how to get started is very short, you can 
+     include it in the Introduction and omit this section. -->
+
+  <sect1 id="mrp-getting-started"> 
+    <title>Getting Started</title> 
+
+    <sect2 id="mrp-start">
+    <title>To Start &app;</title>
+    <para>You can start <application>&app;</application> in the following ways:
+    </para> 
+    <variablelist>
+    	<varlistentry>
+    		<term><guimenu>Applications</guimenu> menu</term>
+    		<listitem>
+    		<para>Choose 
+    		<menuchoice>
+    		<guisubmenu>Office</guisubmenu>
+    		<guimenuitem>Planner</guimenuitem>
+    		</menuchoice>. </para>
+    		</listitem>
+    	</varlistentry>
+    	<varlistentry>
+    		<term>Command line</term>
+    		<listitem>
+    		<para>To start <application>&app;</application> from a command line,
+		 type the following command, then press <keycap>Return</keycap>:</para>
+    		<para> 
+			<command>mrproject</command> 
+    		</para> 
+    		<para> there are no command line parameters at this time.
+    		</para> 
+    		</listitem>
+    	</varlistentry>
+    </variablelist>
+    </sect2>
+
+    <sect2 id="mrp-when-start">
+    <title>When You Start &app;</title>
+    <para>When you start <application>&app;</application>, the following window is 
+	displayed.  As you can see, the Gantt Chart view is the default.</para>
+
+    <!-- ==== Figure ==== -->
+      <figure id="newproject"> 
+	<title>&app; Start Up Window</title> 
+	<screenshot> 
+	  <mediaobject> 
+	    <imageobject><imagedata
+		fileref="figures/new-project.png" format="PNG"/> 
+	    </imageobject>
+	    <textobject> 
+	      <phrase>Shows &app; main window. Contains titlebar, menubar,
+	      toolbar, display area, and
+	      scrollbars. Menubar contains File, Edit, View, and Help menus.
+	      </phrase> 
+	    </textobject> 
+	  </mediaobject> 
+	</screenshot> 
+      </figure>
+    <!-- ==== End of Figure ==== -->
+    <para>The &app; window contains the following elements:
+    </para>
+      <variablelist>
+	<varlistentry>
+	<term>Menubar. </term>
+	<listitem>
+	  <para>The menus on the menubar contain all of the commands you need 
+	    to work with files in <application>&app;</application>.</para>
+	</listitem>
+	</varlistentry>
+	<varlistentry>
+	<term>Toolbar. </term>
+	<listitem>
+	  <para> The toolbar contains a subset of the commands that you can 
+	    access from the menubar.</para>
+	</listitem>
+	</varlistentry>
+	<varlistentry>
+	<term>Statusbar. </term>
+	<listitem>
+	  <para>The statusbar displays information about current 
+	  <application>&app;</application> 
+	  activity and contextual information about the menu items. </para>
+	</listitem>
+	</varlistentry>
+	</variablelist>
+    </sect2>
+    <sect2 id="mrp-several-start">
+    <title>Editing Multiple Projects</title>
+      <para>
+          More than one project may be open at the same time. Each project
+          will have its own Planner window. Try it by pressing "CTRL-N" several
+          times.  You should get something similar to
+	  <xref linkend="several-projects"/>.
+       <figure float="1" id="several-projects">
+       <title>Several projects at the same time</title>
+        <screenshot>
+	  <mediaobject> 
+	    <imageobject><imagedata
+               fileref="figures/several-projects.png" format="PNG" ></imagedata>
+	    </imageobject>
+	    <textobject> 
+	      <phrase>Shows Gnome 2 Desktop, with three &app; windows open.
+	      </phrase> 
+	    </textobject> 
+	  </mediaobject>
+        </screenshot>
+       </figure>
+      </para>
+    </sect2>
+  </sect1>
+<!-- ================ Usage ================================ -->
+<!-- Use this section to describe how to use the application to perform the tasks for 
+  which the application is designed. -->
+  <sect1 id="mrp-usage"> 
+    <title>Usage</title> 
+    <para>
+      <itemizedlist> 
+	<listitem> 
+	  <para> 
+	    <xref linkend="mrp-open-project"/></para> 
+	</listitem> 
+	<listitem> 
+	  <para> 
+	    <xref linkend="mrp-properties"/></para> 
+	</listitem> 
+	<listitem> 
+	  <para> 
+	    <xref linkend="mrp-calendars"/></para>
+	</listitem> 
+	<listitem> 
+	  <para> 
+	    <xref linkend="mrp-tasks"/></para>
+	</listitem> 
+	<listitem> 
+	  <para> 
+	    <xref linkend="mrp-resources"/></para> 
+	</listitem> 
+	<listitem> 
+	  <para> 
+	    <xref linkend="mrp-print"/></para> 
+	</listitem> 
+	<listitem> 
+	  <para> 
+	    <xref linkend="mrp-export-html"/></para> 
+	</listitem> 
+      </itemizedlist> </para>
+    <!-- ================ Usage Subsection ================================ -->
+    <sect2 id="mrp-open-project" xreflabel="Open and Save Projects"> 
+      <title>Open and Save Projects</title> 
+      <para>To open an project, choose 
+	<menuchoice> 
+	  <guimenu>File</guimenu> 
+	  <guimenuitem>Open</guimenuitem> 
+	</menuchoice>. The 
+	<guilabel>Open File</guilabel> dialog is displayed. Select the Planner file
+	that you want to open, then click 
+	<guibutton>OK</guibutton>. Planner files are stored with the extension 
+	<filename>.mrproject</filename>.
+      </para>
+      <para>To save a project, choose
+	<menuchoice> 
+	  <guimenu>File</guimenu> 
+	  <guimenuitem>Save As</guimenuitem> 
+	</menuchoice> to save a new project, or an existing project under a new 
+	file name.  Choose 
+	<menuchoice> 
+	  <guimenu>File</guimenu> 
+	  <guimenuitem>Save</guimenuitem> 
+	</menuchoice> to save an existing project, keeping the same file name.
+      </para>
+      <para>
+	If you try to open a project file in a format that &app; does
+	not recognize, the application displays an error
+	message.
+      </para>
+      <caution>
+      <para>It is prudent to save your work periodically.
+	&app; does not currently have a recovery feature,
+	so if your editing session is interrupted by a power outage or other reason, you
+	would lose any work done since your last <guimenuitem>save</guimenuitem>.</para>
+      </caution>
+    </sect2> 
+    <sect2 id="mrp-opensave-database" xreflabel="Open from and Save to Database"> 
+      <title>Open Project From and Save To Database</title> 
+      <para>To open an project from a database, choose 
+	<menuchoice> 
+	  <guimenu>File</guimenu> 
+	  <guimenuitem>Open From Database...</guimenuitem> 
+	</menuchoice>. The 
+	<guilabel>Open from Database</guilabel> dialog is displayed. Enter the <guilabel>
+	server,	database name, user,</guilabel> and <guilabel>password</guilabel>, 
+	and then click <guibutton>OK</guibutton>.
+	If the database is on the same machine you're running Planner on, then you
+	can leave that blank.  You can also leave the password field blank if no
+	password is required for the database user.
+      </para>
+      <para>
+	After Planner connects to the database, it will open the <guilabel>Select
+	a Project</guilabel> dialog, which displays a list of projects that are stored
+	in that database.  Select the project plan you want to open, then click
+	<guibutton>OK</guibutton>. 
+      </para>
+      <para>To save a project to a database, choose
+	<menuchoice> 
+	  <guimenu>File</guimenu> 
+	  <guimenuitem>Save to Database...</guimenuitem> 
+	</menuchoice>.  The
+	<guilabel>Save to Database</guilabel> dialog is displayed. Enter the <guilabel>
+	server, database</guilabel> name,<guilabel> user,</guilabel> and <guilabel>
+	password</guilabel>, and then click <guibutton>OK</guibutton>.
+	If the database is on the same machine you're running Planner on, then you
+	can leave that blank.  You can also leave the password field blank if no
+	password is required for the database user.
+      </para>
+    </sect2> 
+    <!-- ================ Usage Subsection ================================ -->
+    <sect2 id="mrp-properties" xreflabel="Project Properties"> 
+      <title>Edit Project Properties</title> 
+        <para> To edit the project properties, choose
+	<menuchoice> 
+	  <guimenu>File</guimenu> 
+	  <guimenuitem>Project Properties</guimenuitem> 
+	</menuchoice> 
+          .  In this dialog box you can edit the name of the project,
+          its start date, the name of the project manager, the organization
+          the project belongs to, the project phase, and the default calendar.
+	</para>
+	<itemizedlist>
+	<listitem>
+	<para>The <guilabel>General</guilabel> Tab</para>
+	<para>
+	  Its important to note that the default start
+	  date for all tasks is the project start date.  Therefore, you should
+	  set the project start date before entering many tasks.  In the event
+	  that you do change the project start date after tasks have been entered,
+	  they will default to the new start date, unless they're associated with
+	  a constraint, such as a predecessor task or "start no earlier than"
+	  constraint.
+	</para>
+	<para>
+	  This dialog also allows the user to assign a phase to the project.
+	  Phases can be added by choosing 
+	  <menuchoice> 
+	    <guimenu>Project</guimenu> 
+	    <guimenuitem>Edit Project Phases</guimenuitem> 
+	  </menuchoice>
+	  , which provides a dialog with a simple list of project phases and buttons
+	  to <guibutton>Add</guibutton> and <guibutton>Remove</guibutton> them.
+	  Assigning a phase to the project is for information purposes only.  It has
+	  no other function at this time.
+	</para>
+	<para>
+	  Each project has a default calendar.  The default calendar applies to
+	  every resource on the project unless otherwise specified in the resource
+	  editor.  Use the select button on this dialog to change the project default
+	  calendar.  See the section <xref linkend="mrp-calendars"/> for more
+	  information on calendars.
+          <figure id="project-properties" float="1">
+            <title>Project Properties</title>
+            <screenshot>
+              <graphic fileref="figures/project-properties.png" format="PNG" ></graphic>
+            </screenshot>
+          </figure>
+        </para>
+	</listitem>
+	<listitem>
+	<para>The <guilabel>Custom properties</guilabel> Tab</para>
+	<para>You can add custom properties to the project by clicking the <guibutton>add
+	  </guibutton> button.
+          <figure id="project-properties-custom" float="1">
+            <title>Custom Project Properties</title>
+            <screenshot>
+              <graphic fileref="figures/project-properties-custom.png" format="PNG" ></graphic>
+            </screenshot>
+          </figure>
+	</para>
+	<para>In the Custom properties add dialog, you can give your new property a label, a name,
+	  description, and set the property type to either text, integer number, or floating point
+	  number.  Once you have added your new property, you can set its value by clicking in the
+	  value field of the Custom project properties dialog.
+          <figure id="project-properties-custom-add" float="1">
+            <title>Custom Project Properties Add Dialog</title>
+            <screenshot>
+              <graphic fileref="figures/project-properties-custom-add.png" format="PNG" ></graphic>
+            </screenshot>
+          </figure>
+	</para>
+	</listitem>
+	</itemizedlist>
+    </sect2> 
+    <!-- ================ Usage Subsection ================================ -->
+    <sect2 id="mrp-calendars" xreflabel="Calendars"> 
+      <title>Edit Project Calendars</title> 
+        <para> To edit the project calendars, choose
+	<menuchoice> 
+	  <guimenu>Project</guimenu> 
+	  <guimenuitem>Manage Calendars</guimenuitem> 
+	</menuchoice>.  
+	  Project Calendars assist us in scheduling by defining when resources can be
+	  used in terms of working and nonworking days, and the hours they are 
+	  available on working days.  On the left is the name of the calendar being 
+	  displayed, in the center is the calendar, and on the right hand side are the 
+	  ranges of working hours for the selected day.  The default calendar shown below
+	  depicts a typical
+	  working month, with weekends grayed out, signifying that they are nonworking days.
+	</para>
+	<note>
+	<title>Note</title>
+	<para>
+	  In the Gantt chart, nonworking days are also grayed out.  Any changes 
+	  made to the project default calendar will be reflected in the Gantt Chart.
+	</para>
+	</note>
+        <para>
+	  To make changes to a calendar, select the day to be changed, and then one of the
+	  3 available radio buttons:
+	  <itemizedlist>
+	  <listitem>
+	    <para><emphasis>Use working time from derived calendar</emphasis> - uses the
+	      parent calendar to determine the working time for that day.  See 
+	      <xref linkend="mrp-calendar-new"/> for more information.
+	    </para>
+	  </listitem>
+	  <listitem>
+	    <para><emphasis>Set day type to:</emphasis> - uses the selected day type to
+	      determine the working hours for that day.  See the section on
+	      <xref linkend="mrp-working-time"/> for more information.
+	    </para>
+	  </listitem>
+	  <listitem>
+	    <para><emphasis>Custom working time</emphasis> - defines a unique set of 
+	      working hours for a specific day.
+	    </para>
+	  </listitem>
+	  </itemizedlist>
+	
+          <figure id="calendar" float="1">
+            <title>Project Calendar Editor</title>
+            <screenshot>
+              <graphic fileref="figures/calendar.png" format="PNG" ></graphic>
+            </screenshot>
+          </figure>
+        </para>
+	<sect3 id="mrp-calendar-new" xreflabel="Creating a New Calendar">
+	<title>Creating a New Calendar</title>
+	  <para>
+	    New Calendars can be added by clicking the <guibutton>New</guibutton>	    
+	    button, which will launch the New Calendar dialog.  The New Calendar Dialog
+	    contains a list of current calendars on the left, and on the right is a text
+	    box that allows you to name the new calendar.  Below the text box are three
+	    options for creating the calendar:
+	  <itemizedlist>
+	  <listitem>
+	    <para><emphasis>Derive from a calendar</emphasis> - creates a child calendar.  
+	      The new calendar will inherit the settings 
+	      from the parent calendar selected on the left.  Any changes made to the 
+	      parent calendar will be reflected in the child calendar.  In the example below,
+	      "Americas" and "USA" are examples of child calendars.
+	    </para>
+	  </listitem>
+	  <listitem>
+	    <para><emphasis>Copy an existing calendar</emphasis> - creates a copy of the
+	      calendar selected on the left.  After the copy is made, changes made to the
+	      original calendar or its parents are
+	      not reflected in the copy.  In the example below, "USA - Copy" is an example
+	      of a calendar created using this option.
+	    </para>
+	  </listitem>
+	  <listitem>
+	    <para><emphasis>Create an empty calendar</emphasis> - creates a new calendar.  
+	      No settings are inherited or copied.  In the example below, "Empty" is a 
+	      calendar that was created using this option.
+	    </para>
+	  </listitem>
+	  </itemizedlist>
+          <figure id="calendar-new" float="1">
+            <title>New Calendar Dialog</title>
+            <screenshot>
+              <graphic fileref="figures/calendar-new.png" format="PNG" ></graphic>
+            </screenshot>
+          </figure>
+	  </para>
+	</sect3>
+	<sect3 id="mrp-default-week">
+	<title>Changing the Default Week</title>
+	  <para>
+	    The default week can be changed by clicking the <guibutton>Default Week</guibutton>	    
+	    button, which will launch the week editor dialog.  The week editor dialog
+	    contains a drop down list
+	    box that allows you to select the day of the week, and another to select the
+	    day type.  This dialog also displays the working time scheduled for the selected
+	    day type.  Be sure to click <guibutton>Apply</guibutton> before <guibutton>Close
+	    </guibutton> to save your changes.
+          <figure id="calendar-week" float="1">
+            <title>Default Week Dialog</title>
+            <screenshot>
+              <graphic fileref="figures/calendar-week.png" format="PNG" ></graphic>
+            </screenshot>
+          </figure>
+	  </para>
+	</sect3>
+	<sect3 id="mrp-working-time" xreflabel="Working Time and Day Types">
+	<title>Working Time and Day Types</title>
+	  <para>
+	    The working times for each day type can be changed by clicking the
+	    <guibutton>Working Time</guibutton>	    
+	    button, which will launch the working time dialog. 
+	    The working time dialog shows a list of the available day types on the left,
+	    and the working hours for the currently selected type on the right.  Time is
+	    entered in 24 hour format as am/pm indicators are not supported (i.e. 5:00 PM
+	    would be entered as 17:00).
+          <figure id="calendar-working-time" float="1">
+            <title>Working Time Dialog</title>
+            <screenshot>
+              <graphic fileref="figures/calendar-working-time.png" format="PNG" ></graphic>
+           </screenshot>
+          </figure>
+	  </para>
+	  <para>
+	    Day types can be added by choosing
+	    <menuchoice> 
+	      <guimenu>Project</guimenu> 
+	      <guimenuitem>Edit Day Types</guimenuitem>
+	    </menuchoice>
+	    This dialog displays a simple list of day types.  Use the 
+	    <guibutton>Add</guibutton> and <guibutton>Remove</guibutton> buttons
+	    to manage the list.  Note that you cannot remove the default day types
+	    "Working" and "Nonworking".
+          <figure id="day-types" float="1">
+            <title>Day Types Dialog</title>
+            <screenshot>
+              <graphic fileref="figures/day-types.png" format="PNG" ></graphic>
+           </screenshot>
+          </figure>
+	  </para>
+	</sect3>
+    </sect2> 
+    <!-- ================ Usage Subsection ================================ -->
+    <sect2 id="mrp-tasks" xreflabel="Tasks"> 
+      <title>Working with Tasks</title> 
+      <sect3 id="mrp-task-add" xreflabel="Adding Tasks">
+	<title>Adding Tasks</title>
+	<para>To add a task, you can either click on the <guibutton>Insert</guibutton>
+	  button on the toolbar, or you can right click in the task area and choose
+	  <guimenuitem>Insert Task</guimenuitem> from the pop-up option box.  These options
+	  work the same in either the Gantt View or the Task View.
+	</para>
+	<para>To add several tasks quickly, choose <guimenuitem>Edit -> Insert Tasks</guimenuitem>
+	  , which will open the insert task dialog.  This dialog allows quick entry of multiple
+	  tasks.  Simply enter the name of the task and amount of work effort and press <keycap>
+	  Enter</keycap>.  The new task will be added, and the dialog will remain open and ready 
+	  for your next task entry.  Details can be added later.
+          <figure>
+            <title>Insert Task</title>
+            <graphic fileref="figures/task-insert.png" format="PNG" ></graphic>
+          </figure>
+	</para>
+      </sect3>
+      <sect3 id="mrp-task-properties">
+        <title>Task properties</title>
+        <para>
+	  Some task properties can be edited directly from the Gantt tasks view: the
+	  name of the task and the work effort. 
+          You can also launch the task properties dialog from here by right clicking on
+	  a task and choosing <guimenuitem>Edit task</guimenuitem>.
+          <figure>
+            <title>Gantt View</title>
+            <graphic fileref="figures/gantt-view.png" format="PNG" ></graphic>
+          </figure>
+        </para>
+        <para>
+          In the Task View you can edit more fields for a task than in the Gantt
+          View, and is the preferred view when you start to add tasks to a project.
+          <figure>
+            <title>Task View</title>
+            <graphic fileref="figures/task-view.png" format="PNG" ></graphic>
+          </figure>
+	</para>
+	<para>
+	  To edit all the task properties, press the right mouse button
+	  over a task and select <guimenuitem>Edit Task</guimenuitem> from the dialog
+	  that appears.  Alternatively, you can select the task and use the main 
+	  menu:
+	  <menuchoice> 
+	    <guimenu>Edit</guimenu> 
+	    <guimenuitem>Edit Task Properties</guimenuitem> 
+	  </menuchoice>.
+	  There are several tabs to modify the properties.
+          <itemizedlist>
+          <listitem>
+            <para>The <guilabel>General</guilabel> tab contains the following fields:
+	    <itemizedlist>
+	    <listitem>
+	      <para><guilabel>Name</guilabel> - the name of the task</para>
+	    </listitem>
+	    <listitem>
+	      <para><guilabel>Milestone</guilabel> - the milestone check box flags the task
+		as a milestone, which disables the ability to modify the <guilabel>Work, Duration, 
+		Complete, and Priority</guilabel> fields, since a milestone signifies a significant
+		event in the timeline of a project that has no duration or work activity of its own.
+	      </para>
+	    </listitem>
+	    <listitem>
+	      <para><guilabel>Fixed duration</guilabel> - the fixed duration option is used when
+		the duration of a task will take a fixed amount of time regardless of the resources
+		devoted to achieving it.  For instance, the gestation period for a human baby is
+		nine months.  It cannot be sped up by addition additional resources.
+	      </para>
+	      <para>Choosing Fixed duration for a task will unlock the <guilabel>Duration</guilabel>
+		 field and allow you to enter a value for the fixed duration.
+	      </para>
+	    </listitem>
+	    <listitem>
+	      <para><guilabel>Work</guilabel> - this is the amount of effort required to complete
+		the task</para>
+	    </listitem>
+	    <listitem>
+	      <para><guilabel>Duration</guilabel> - the amount of calendar time required to 
+		complete the task.  Duration is normally calculated based on the amount of work
+		and the resources assigned to the task.  The calculation also takes calendars 
+		into account.  See the section <xref linkend="mrp-calendars"/> for more information.
+	      </para>
+	    </listitem>
+	    <listitem>
+	      <para><guilabel>Complete</guilabel> - allows tracking of the amount of work done 
+		for the task, entered as a percent of total work</para>
+	    </listitem>
+	    <listitem>
+	      <para><guilabel>Priority</guilabel> - sets a priority for the task.  There is no
+		specific functionality tied to this field at the moment.  It is informational
+		only</para>
+	    </listitem>
+	    </itemizedlist>
+                <figure>
+                  <title>Task properties dialog</title>
+                  <graphic fileref="figures/task-properties-dialog.png" format="PNG"></graphic>
+                </figure>
+              </para>
+            </listitem>
+            <listitem>
+              <para>
+                The <guilabel>Resources</guilabel> tab allows you to assign resources to
+		a task. Remember that resources can include materials as well as people.
+                Click the check box in the <guilabel>Assigned</guilabel> column to allocate
+		the resource to the current task.  Use the Units field to enter the percent
+		of the resource that is allocated to the task.
+                <figure>
+                  <title>Task resources dialog</title>
+                  <graphic fileref="figures/task-edit-resources.png" format="PNG"></graphic>
+                </figure>
+		The Gantt view will list
+                the resources assigned to a task to the right of the bar.
+                <figure>
+                  <title>A resource has been assigned to a task</title>
+                  <graphic fileref="figures/task-edit-resource-assigned.png" format="PNG"></graphic>
+                </figure>
+              </para>
+            </listitem>
+            <listitem>
+              <para>
+                You can see in the <guilabel>Predecessors</guilabel> tab the tasks 
+		that need to be
+                finished before the task being edited can start. In this example,
+                we have three tasks.  In <xref linkend="predecessors"/>, the third task,
+		 t3, requires that t2 be complete before it can start.
+                <figure id="predecessors">
+                  <title>Task predecessors dialog</title>
+                  <graphic fileref="figures/task-edit-predecessors.png" format="PNG"></graphic>
+                </figure>
+                From this dialog, you can change the task predecessor, the predecessor
+                type, and edit the lag between the task and the predecessor.
+                To add or remove predecessors from this dialog by clicking
+		the <guibutton>Add</guibutton> or <guibutton>Remove</guibutton> button.
+		</para>
+<!--                <figure>
+                  <title>Add/Remove predecessors dialog</title>
+                  <graphic fileref="figures/task-edit-predecessors-add-remove.png"
+			   format="PNG"></graphic>
+                </figure>
+-->
+		<para>
+                When you add a new predecessor you need to choose the task predecessor,
+		which you can select from the drop down list box.  The next field is the 
+		Relationship type.  You can choose 
+		<guimenuitem>Finish to Start (FS)</guimenuitem>,
+		<guimenuitem>Finish to Finish (FF)</guimenuitem>,
+		<guimenuitem>Start to Start (SS)</guimenuitem>, or
+		<guimenuitem>Start to Finish (SF)</guimenuitem>.  Finally, you can enter a lag
+		time for the relationship, which represents the number of days after the 
+		relationship has been satisfied.  For example, if you enter a lag time of 1
+		in a Finish to Start relationship, it means that the current task may begin
+		1 day after the predecessor task has completed.
+                <figure>
+                  <title>Add predecessors dialog</title>
+                  <graphic fileref="figures/task-edit-predecessors-add.png" format="PNG"></graphic>
+                </figure>
+              </para>
+            </listitem>
+            <listitem>
+              <para>
+                You can add notes to the task using the editor in the 
+                <guilabel>Notes</guilabel> tab.  You can also insert the current
+                time to the note using the button that appears in the dialog.
+                <figure>
+                  <title>Task notes dialog</title>
+                  <graphic fileref="figures/task-edit-note.png" format="PNG"></graphic>
+                </figure>
+              </para>
+            </listitem>
+<!--
+            <listitem>
+              <para>
+                The last tab from the task dialog editor is the 
+                <guilabel>Advanced</guilabel> tab. Currently it isn't
+                implemented, but here you will find additional properties
+                that will be added in future releases.
+                <figure>
+                  <title>Task advanced properties dialog</title>
+                  <graphic fileref="figures/task-edit-advanced.png" format="PNG"></graphic>
+                </figure>
+              </para>
+            </listitem>            
+-->
+          </itemizedlist>          
+	</para>
+      </sect3>
+      <sect3 id="mrp-creating-subtasks">
+        <title>Creating subtasks</title>
+        <para>
+	  Complex tasks can be broken down into subtasks to make them easier to 
+	  Manage.  A task that is
+	  divided in subtasks is called a summary task.  The summary task's 
+	  start date and the duration can't be edited because it is calculated from
+	  the subtasks.
+	  <figure>
+	    <title>A Task with subtasks</title>
+	    <graphic fileref="figures/group1-subtasks.png" format="PNG"></graphic>
+	  </figure>
+	</para>
+      </sect3>
+      <sect3 id="mrp-task-deps">
+        <title>Task dependencies</title>
+	<subtitle>Another way of looking at predecessors.</subtitle>
+        <para>
+	  To start a task, you often have to finish other tasks first. This can either
+	  be set up by using the <guilabel>Predecessors</guilabel> tab in the task edit
+	  dialog as shown above,
+	  or it can be done graphically by using the Gantt chart.  If you click on the
+	  bar that represents the predecessor (and hold down the mouse button), 
+	  an arrow appears.  dragging that arrow onto the bar that represents the dependent 
+	  task will create the dependency.  The Gantt chart will immediately reflect the 
+	  new relationship by shifting the dependent task to start when the predecessor is
+	  scheduled to complete.  By creating a dependent relationship this way,
+	  Planner always assumes a Finish Start relationship with zero lag time.  You
+	  can modify this relationship by opening the task edit dialog of the dependent
+	  task, and selecting the <guilabel>Predecessors</guilabel> tab.
+	  <figure>
+	    <title>Creating a task dependency</title>
+	    <graphic fileref="figures/group1-task-linking.png" format="PNG"></graphic>
+	  </figure>
+	  If you want to remove the dependency, you can select either
+	  of the two tasks and delete the link by clicking the <guiicon>Unlink</guiicon>
+	  icon on the toolbar,
+	  or by right clicking either task and selecting <guimenuitem>Unlink</guimenuitem>
+	  from the pop up.
+	  <figure>
+	    <title>A dependency has been created</title>
+	    <graphic fileref="figures/group1-task-linked.png" format="PNG"></graphic>
+	  </figure>
+	</para>
+      </sect3>
+      <sect3 id="mrp-moving-tasks">
+        <title>Moving tasks</title>
+        <para>
+	  If you need to rearrange the order that tasks are displayed in the task view, 
+	  you can do so by selecting the task you want to move, and utilizing the 
+	  <guiicon>Move Up</guiicon> and <guiicon>Move Down</guiicon> icons on
+	  the toolbar.
+          <figure>
+	    <title>Moving task up and down</title>
+	    <graphic fileref="figures/task-up.png" format="PNG"></graphic>
+	  </figure>
+        </para>
+      </sect3>
+      <sect3 id="mrp-zooming-gantt">
+        <title>Zooming in the Gantt View</title>
+        <para>
+          The tasks in a project can have very different durations and sometimes you
+          need to have a close view of the time line to see the details of some task
+          dependencies, but other times you need a higher level view of the whole project.
+          To support both needs, Planner has a powerful zoom system that
+          lets you zoom to fit the complete project, zoom in the view or
+          zoom out incrementally to whatever size you like (hours being the lower 
+	  limit, and years is the upper limit).
+        </para>
+        <para>
+          Normally the best way to view a project is with zoom to fit.
+          <figure>
+	    <title>Zoom to fit the project</title>
+	    <graphic fileref="figures/project-zoom-fit.png" format="PNG"></graphic>
+	  </figure>
+        </para>
+        <para>
+          You can use the <guiicon>Zoom in</guiicon> and 
+	  <guiicon>Zoom out</guiicon> icons to select the length of
+          time line in which you want to work.  Notice that when the view is
+	  zoomed to a detailed level, nonworking hours are shown for each day
+	  in addition to weekends.
+          <figure>
+	    <title>Zoom in a zone of the project</title>
+	    <graphic fileref="figures/project-zoom-up.png" format="PNG"></graphic>
+	  </figure>
+        </para>
+      </sect3>
+      
+      <sect3 id="mrp-task-constraints">
+	<title>Task constraints</title>
+	<para>
+	  All tasks begin on the project start date by default (as shown by the 
+	  constraint type <guimenuitem>As soon as possible</guimenuitem> in 
+	  <xref linkend="constraints"/>).  
+	  One exception is
+	  the case where a dependency is set up.  There are times, however, that
+	  a dependency doesn't exist, but the task must start on, or no earlier than
+	  a specific date.  You can
+	  specify these constraints in the start date dialog editor.
+	  <figure id="constraints">
+	    <title>Task constraints</title>
+	    <graphic fileref="figures/task-constraints.png" format="PNG"></graphic>
+	  </figure>
+	  You can delete the constraint for the current task using 
+	  <menuchoice> 
+	    <guimenu>Edit</guimenu> 
+	    <guimenuitem>Reset constraint</guimenuitem> 
+	  </menuchoice>, or for all the tasks by choosing
+	  <menuchoice> 
+	    <guimenu>Edit</guimenu> 
+	    <guimenuitem>Reset all constraints</guimenuitem> 
+	  </menuchoice>.
+	</para>
+      </sect3>
+
+      <sect3 id="mrp-task-custom-properties" xreflabel="Custom Task Properties">
+      <title>Custom Task Properties</title>
+	<para>Custom properties can be added in the task view by choosing <guimenuitem>
+	  Edit->Edit Custom Properties</guimenuitem>.  Clicking the <guibutton>Add</guibutton>
+	  button will open the New Property dialog.
+	  <figure id="task-custom-properties">
+	    <title>Task constraints</title>
+	    <graphic fileref="figures/task-custom-properties.png" format="PNG"></graphic>
+	  </figure>
+	</para>
+	<para>In the New Property dialog, you can give your new property a label, a name,
+	  description, and set the property type to either text, integer number, or floating point
+	  number.  Once you have added your new property, it will show as a new column in the 
+	  Task view.  
+	  <figure id="task-custom-properties-add">
+	    <title>Task constraints</title>
+	    <graphic fileref="figures/task-custom-properties-add.png" format="PNG"></graphic>
+	  </figure>
+	</para>
+      </sect3>
+    </sect2>
+    <!-- ================ Usage Subsection ================================ -->
+    <sect2 id="mrp-resources" xreflabel="Resources"> 
+      <title>Working with Resources</title>
+      <sect3 id="mrp-resource-props">
+        <title>Resource Properties</title>
+        <para>
+          The Resource View in Planner shows the following properties:
+          <itemizedlist>
+            <listitem>
+              <para>Name: the resource name
+              </para>
+            </listitem>
+            <listitem>
+              <para><emphasis>Type:</emphasis> Currently available types are 
+		<guimenuitem>Work</guimenuitem>
+		and <guimenuitem>Material</guimenuitem>.
+                Work is for human resources working in the project, and Material 
+                is for non-human resources required to complete the project.
+              </para>
+            </listitem>
+            <listitem>
+              <para><emphasis>Group:</emphasis> the group that the resource is 
+		assigned.  This column offers
+		a dropdown list of defined groups.  You must use the Group Editor to
+		define groups before assigning them in the Resource View.
+              </para>
+            </listitem>
+            <listitem>
+              <para><emphasis>Email:</emphasis> the electronic mail to contact this resource.
+              </para>
+            </listitem>
+            <listitem>
+              <para><emphasis>Cost:</emphasis> the cost per hour to use this resource.
+		The cost is not currency specific, so in multinational projects, it is
+		important to decide on a single currency to be used for tracking cost.
+              </para>
+            </listitem>
+          </itemizedlist>
+
+	  <figure>
+	    <title>Resource View</title>
+	    <graphic fileref="figures/resource-editor.png" format="PNG"></graphic>
+	  </figure>
+	</para>
+	<para>
+          As with the columns from other Planner views, you can sort the columns by
+          clicking on the column name. The following figure is an example of the 
+          resource view sorted by the name column.
+	  <figure>
+	    <title>Sorting in the resources editor</title>
+	    <graphic fileref="figures/resource-editor-sorted.png" format="PNG"></graphic>
+	  </figure>
+	</para>
+      </sect3>
+
+      <sect3 id="mrp-resource-add">
+        <title>Adding Resources</title>
+        <para>Resources can be added by choosing the <guibutton>Insert</guibutton> button, or 
+	  by choosing <guimenuitem>Edit->Insert Resource</guimenuitem>.  To add multiple
+	  resources quickly, choose <guimenuitem>Edit->Insert Resources</guimenuitem>,  which
+	  will open the Insert Resource dialog.  In a fashion similar to 
+	  <xref linkend="mrp-task-add"/>, you can quickly enter multiple resources and add detail
+	   at a later time.
+	  <figure>
+	    <title>Insert Resource</title>
+	    <graphic fileref="figures/resource-insert.png" format="PNG"></graphic>
+	  </figure>
+	</para>
+      </sect3>
+
+      <sect3 id="mrp-resource-properties-general">
+        <title>Resource Properties Dialog</title>
+        <para>
+	  To edit resource properties that are not displayed in the resource view,
+	  right click on the resource and choose <guimenuitem>Edit resource</guimenuitem>.
+	  The General tab shows the same items that are in the resource view.
+	  <figure>
+	    <title>Resource Properties Dialog - General Tab</title>
+	    <graphic fileref="figures/resource-properties-general.png" format="PNG"></graphic>
+	  </figure>
+	</para>
+	<para>
+	  The Calendar tab allows us to assign a calendar to a specific resource if the 
+	  project default calendar is not appropriate.  See 
+	  <xref linkend="mrp-properties"/> for more information on setting the 
+	  project default calendar.
+	  To change the calendar assigned to a resource, simply select it from the list.
+	  If you would like to create a new calendar for this resource, you can do so from
+	  this dialog by clicking the <guibutton>Edit calendars</guibutton> button.  See 
+	  the section <xref linkend="mrp-calendars"/> for more information.
+	</para>
+	<para>
+	  Any tasks
+	  assigned to a resource with a specific calendar will use the calendar assigned 
+	  to the resource to schedule the work to be done.  Therefore, if a task appears
+	  to be scheduled for a longer than expected time period, it is likely that the
+	  resource is using a calendar that is different from the project default.
+	  <figure>
+	    <title>Resource Properties Dialog - Calendar Tab</title>
+	    <graphic fileref="figures/resource-properties-calendar.png" format="PNG"></graphic>
+	  </figure>
+	</para>
+      </sect3>
+
+      <sect3 id="mrp-resource-custom-properties">
+      <title>Resource Custom Properties</title>
+      <para>
+	Custom Properties are available in the Resource View just as they are in the task
+	view, and the functionality is identical.  To add custom properties to the resources,
+	choose <guimenuitem>Edit->Edit Custom Properties</guimenuitem>.  See the <xref 
+ 	linkend="mrp-task-custom-properties"/> section for more information.
+      </para>
+      </sect3>
+
+      <sect3 id="mrp-group-editor">
+        <title>Group editor</title>
+        <para>
+          With the group editor you can define groups to be used to classify your resources.
+          A group has a name, a manager, telephone, email, and
+          finally, an option to specify the default group.   If you specify a default group,
+	  every new resource that you add will placed in this group.  Of course, you can still
+	  change the group to another as needed.
+	  <figure>
+	    <title>Group editor</title>
+	    <graphic fileref="figures/resource-group-editor.png" format="PNG"></graphic>
+	  </figure>
+	</para>
+      </sect3>
+
+      <sect3 id="mrp-print" xreflabel="Print">
+        <title>Printing</title>
+        <para>You can print your project information by choosing <guimenuitem>File->Print
+	  </guimenuitem> or clicking the <guilabel>Print</guilabel> button on the task bar.
+	  <note><title>Note</title>
+	    <para>The <guibutton>Print Preview</guibutton> button is available in the Print
+		  dialog regardless of what tab is currently visible.
+	    </para>
+	  </note>
+	<itemizedlist>
+	<listitem>
+	  <para>The Print Project dialog allows you to choose between printing on available
+	    printers, or to a PDF file.  If you choose to print to a PDF file, your location
+	    options will change so that you can specify the path and filename of the output file.
+	    <figure>
+	    <title>Printer Tab</title>
+	    <graphic fileref="figures/print-project.png" format="PNG"></graphic>
+	    </figure>
+	  </para>
+	</listitem>
+	<listitem>
+	  <para>In the Select Views tab, you can choose to print the Gantt, Task, or Resource
+		views, or all of them.  The default is all.
+	    <figure>
+	    <title>Select Views Tab</title>
+	    <graphic fileref="figures/print-project-selectviews.png" format="PNG"></graphic>
+	    </figure>
+	  </para>
+	</listitem>
+	<listitem>
+	  <para>The Paper tab allows you to specify the size, orientation, and layout of 
+		your paper prior to printing.
+	    <figure>
+	    <title>Paper Tab</title>
+	    <graphic fileref="figures/print-project-paper.png" format="PNG"></graphic>
+	    </figure>
+	  </para>
+	</listitem>
+	</itemizedlist>
+	</para>
+      </sect3>
+
+      <sect3 id="mrp-export-html" xreflabel="Export to HTML">
+        <title>Export to HTML</title>
+        <para>The Export to HTML function creates a view of your project in HTML format
+	  that you can publish on a web site, or email to stakeholders who don't have
+	  access to Planner.  Included in the HTML document, is a simplified Gantt chart,
+	  task list (with %complete, start, end, work, and resources columns), and a resource
+	  allocation table. Its an excellent way to give people easy access to 
+	  project status information.
+	</para>
+	<para>
+	  You can create the HTML page by choosing <guimenuitem>File->Export to HTML
+	  </guimenuitem>.  The <guilabel>Export to HTML</guilabel> dialog will allow you
+	  to send the output either to a file or directly to a web location.
+	</para>
+      </sect3>
+    </sect2> 
+  </sect1>
+<!-- Customization/Settings not yet implemented...
+  <- ============= Customization ============================= ->
+  <- Use this section to describe how to customize the application. ->
+  <sect1 id="myapp-prefs"> 
+    <title>Settings</title> 
+    <para>To configure &app;, choose 
+      <menuchoice> 
+	<guimenu>Settings</guimenu> 
+	<guimenuitem>Preferences</guimenuitem> 
+      </menuchoice>. The 
+      <guilabel>Preferences</guilabel> dialog contains the following tabbed
+      sections:</para> 
+    <itemizedlist> 
+      <listitem> 
+	<para> 
+	  <xref linkend="myapp-prefs-display"/></para> 
+      </listitem> 
+      <listitem> 
+	<para> 
+	  <xref linkend="myapp-prefs-viewers"/></para> 
+      </listitem> 
+    </itemizedlist>
+<- =============== Customization Subsection ================ ->
+<- Use a new section to describe different tabbed sections on the Settings or Preferences
+	     dialog. ->
+    <sect2 id="myapp-prefs-display"> 
+      <title>Display</title> 
+      <variablelist> 
+	<varlistentry> 
+	  <term> 
+	    <guilabel>Interpolation type</guilabel> </term> 
+	  <listitem> 
+	    <para>Use this drop-down list box to specify the
+	      interpolation method that
+	      &app; uses when the
+	      application resizes images. Select one of the following
+	      options:</para>
+	    <itemizedlist> 
+	      <listitem> 
+		<para> 
+		  <guilabel>Nearest neighbor</guilabel> </para> 
+		<para>This method of interpolation takes a location in the
+		  original image and replicates the pixel that is
+		  nearest to this location. When 
+		  you zoom in on an image, the pixels are
+		  replicated. When you zoom out of an 
+		  image, the image loses some of its detail. </para> 
+	      </listitem> 
+	      <listitem> 
+		<para> 
+		  <guilabel>Bilinear</guilabel> </para> 
+		<para>This is a simple and fast method of interpolation. When
+		  you zoom in on an image, &app; uses up to four
+		  adjacent pixels to compute the colors of the new
+		  pixels. When you zoom out of 
+		  an image, &app; averages regions of color in the
+		  existing image to compute the colors of the pixels. </para> 
+	      </listitem> 
+	      <listitem> 
+		<para> 
+		  <guilabel>Hyperbolic</guilabel> </para> 
+		<para>This is a high-quality, slow method of interpolation. The
+		  application performs interpolation on the image in
+		  the manner described in 
+		  Digital Image Warping by George Wolberg.</para> 
+	      </listitem> 
+	    </itemizedlist> 
+	    <para>Default: 
+	      <guilabel>Nearest neighbor</guilabel>.</para> 
+	  </listitem> 
+	</varlistentry> 
+	<varlistentry> 
+	  <term> 
+	    <guilabel>Transparency type</guilabel> </term> 
+	  <listitem> 
+	    <para>Use this drop-down list box to specify how
+	      &app; displays transparent or partially opaque
+	      backgrounds in images. Select one of the following options:</para> 
+	    <itemizedlist> 
+	      <listitem> 
+		<para> 
+		  <guilabel>Dark checks</guilabel> </para> 
+		<para>This option displays black and dark gray checks.</para> 
+	      </listitem> 
+	      <listitem> 
+		<para> 
+		  <guilabel>Midtone checks</guilabel> </para> 
+		<para>This option displays dark gray and light gray
+		  checks.</para> 
+	      </listitem> 
+	      <listitem> 
+		<para> 
+		  <guilabel>Light checks</guilabel> </para> 
+		<para>This option displays light gray and white checks.</para> 
+	      </listitem> 
+	      <listitem> 
+		<para> 
+		  <guilabel>Black only</guilabel> </para> 
+		<para>This option displays solid black.</para> 
+	      </listitem> 
+	      <listitem> 
+		<para> 
+		  <guilabel>Gray only</guilabel> </para> 
+		<para>This option displays solid gray.</para> 
+	      </listitem> 
+	      <listitem> 
+		<para> 
+		  <guilabel>White only</guilabel> </para> 
+		<para>This option displays solid white.</para> 
+	      </listitem> 
+	    </itemizedlist> 
+	    <para>Default: 
+	      <guilabel>Dark checks</guilabel>.</para> 
+	  </listitem> 
+	</varlistentry> 
+	<varlistentry> 
+	  <term> 
+	    <guilabel>Check size</guilabel> </term> 
+	  <listitem> 
+	    <para>Use this drop-down list box to specify the size of the checks
+	      to use to display transparent or partially opaque
+	      backgrounds in images. This 
+	      option is only relevant if you choose 
+	      <guilabel>Dark checks</guilabel>, 
+	      <guilabel>Midtone checks</guilabel>, or 
+	      <guilabel>Light checks</guilabel> from the 
+	      <guilabel>Transparency type</guilabel> drop-down list box.
+	      Select one of the following options:</para> 
+	    <itemizedlist> 
+	      <listitem> 
+		<para> 
+		  <guilabel>Small</guilabel></para> 
+	      </listitem> 
+	      <listitem> 
+		<para> 
+		  <guilabel>Medium</guilabel></para> 
+	      </listitem> 
+	      <listitem> 
+		<para> 
+		  <guilabel>Large</guilabel></para> 
+	      </listitem> 
+	    </itemizedlist> 
+	    <para>Default: 
+	      <guilabel>Small</guilabel>.</para> 
+	  </listitem> 
+	</varlistentry> 
+	<varlistentry> 
+	  <term> 
+	    <guilabel>Dither type</guilabel> </term> 
+	  <listitem> 
+	    <para>Use this drop-down list box to specify the dithering method
+	      to use to display images. Dithering is a technique that
+	      is used to simulate 
+	      colors in the original image file but that your system
+	      can not display. Select 
+	      one of the following options:</para> 
+	    <itemizedlist> 
+	      <listitem> 
+		<para> 
+		  <guilabel>None</guilabel> </para> 
+		<para>This option does not use dithering. </para> 
+	      </listitem> 
+	      <listitem> 
+		<para> 
+		  <guilabel>Normal (pseudocolor)</guilabel> </para> 
+		<para>This option performs dithering on pseudocolor displays,
+		  which use a limited palette of colors. </para> 
+	      </listitem> 
+	      <listitem> 
+		<para> 
+		  <guilabel>Maximum (high color)</guilabel> </para> 
+		<para>This option performs dithering on pseudocolor and high
+		  color displays. </para> 
+	      </listitem> 
+	    </itemizedlist> 
+	    <para>Default: 
+	      <guilabel>None</guilabel>.</para> 
+	  </listitem> 
+	</varlistentry> 
+	<varlistentry> 
+	  <term> 
+	    <guilabel>Two-pass scrolling</guilabel> </term> 
+	  <listitem> 
+	    <para>Select this option to render an image in two passes
+	      when you scroll the image quickly. The first pass
+	      renders a low quality version of the image. The second
+	      pass renders a full quality version of the image over
+	      the low quality version. Two-pass scrolling enables you
+	      to view at least a low quality version of the image at
+	      all times regardless of how quickly you scroll the
+	      image. 
+	    </para>
+	    <para>Default: unselected.</para> 
+	  </listitem> 
+	</varlistentry> 
+      </variablelist> 
+    </sect2>
+    <- ============= Customization Subsection ===================== ->
+    <- Another tabbed section on the Preferences dialog. ->
+    <sect2 id="myapp-prefs-viewers"> 
+      <title>Viewers</title> 
+      <para>You can set the following viewer preferences: 
+	<itemizedlist> 
+	  <listitem> 
+	    <para> 
+	      <xref linkend="myapp-viewer-prefs-image-window"/></para> 
+	  </listitem> 
+	  <listitem> 
+	    <para> 
+	      <xref linkend="myapp-viewer-prefs-full-screen"/></para> 
+	  </listitem> 
+	</itemizedlist> </para> 
+      <sect3 id="myapp-viewer-prefs-image-window"> 
+	<title>Image Windows</title> 
+	<para>The 
+	  <guilabel>Image Windows</guilabel> group contains the preferences
+	  that you can set to view images in image windows.</para> 
+	<variablelist> 
+	  <varlistentry> 
+	    <term> 
+	      <guilabel>Use scrollbars</guilabel> </term> 
+	    <listitem> 
+	      <para>Use this drop-down list box to specify when to use
+		scrollbars to scroll through an image. Select one of
+		the following options:</para> 
+	      <itemizedlist> 
+		<listitem> 
+		  <para> 
+		    <guilabel>Never</guilabel> </para> 
+		  <para>This option never displays scrollbars. You can use the
+		    arrow keys on the keyboard or the mouse to scroll
+		    through the image. </para>  
+		</listitem> 
+		<listitem> 
+		  <para> 
+		    <guilabel>Only if image does not fit</guilabel> </para> 
+		  <para>This option displays scrollbars when the image is
+		    larger than the image window.</para> 
+		</listitem> 
+	      </itemizedlist> 
+	      <para>Default: 
+		<guilabel>Never</guilabel>.</para> 
+	    </listitem> 
+	  </varlistentry> 
+	  <varlistentry> 
+	    <term> 
+	      <guilabel>Pick window size and zoom factor
+		automatically</guilabel> </term> 
+	    <listitem> 
+	      <para>Select this option to resize the image window to fit the
+		image or to resize the image to fit the image
+		window. If the image is small, 
+		&app; resizes the image window to fit the image. If
+		the image is large, &app; resizes the image to fit
+		the image window. </para> 
+	      <para>Default: unselected.</para> 
+	    </listitem> 
+	  </varlistentry> 
+	  <varlistentry> 
+	    <term> 
+	      <guilabel>Open images in a new window</guilabel> </term> 
+	    <listitem> 
+	      <para>Select this option to open a new
+		&app; window each time you open an image. If you do
+		not select this option, &app; replaces the existing
+		image with the new image when you open an image. </para> 
+	      <para>Default: unselected.</para> 
+	    </listitem> 
+	  </varlistentry> 
+	</variablelist> 
+      </sect3> 
+      <sect3 id="myapp-viewer-prefs-full-screen"> 
+	<title>Full Screen</title> 
+	<para>The 
+	  <guilabel>Full Screen</guilabel> group contains the preferences that
+	  you can set to view images in full screen mode.</para> 
+	<variablelist> 
+	  <varlistentry> 
+	    <term> 
+	      <guilabel>Use scrollbars</guilabel> </term> 
+	    <listitem> 
+	      <para>Use this drop-down list box to specify when to use
+		scrollbars to scroll through an image. Select one of the following
+		options:</para> 
+	      <itemizedlist> 
+		<listitem> 
+		  <para> 
+		    <guilabel>Never</guilabel> </para> 
+		  <para>This option never displays scrollbars. You can use the
+		    arrow keys on the keyboard or the mouse to scroll
+		    through the image. </para>  
+		</listitem> 
+		<listitem> 
+		  <para> 
+		    <guilabel>Only if image does not fit</guilabel> </para> 
+		  <para>This option displays scrollbars when the image is
+		    larger than the full screen. </para> 
+		</listitem> 
+	      </itemizedlist> 
+	      <para>Default: 
+		<guilabel>Never</guilabel>.</para> 
+	    </listitem> 
+	  </varlistentry> 
+	  <varlistentry> 
+	    <term> 
+	      <guilabel>Use 1:1 zoom factor</guilabel> </term> 
+	    <listitem> 
+	      <para>Select this option to use the 1:1 zoom factor when you open
+		an image. The 1:1 zoom factor displays the image at
+		its actual size. </para>  
+	      <para>Default: selected.</para> 
+	    </listitem> 
+	  </varlistentry> 
+	  <varlistentry> 
+	    <term> 
+	      <guilabel>Use same zoom factor as image window</guilabel> </term>
+	    
+	    <listitem> 
+	      <para>Select this option to use the same zoom factor that the
+		application uses to display the image in an image
+	      window. </para>  
+	      <para>Default: unselected.</para> 
+	    </listitem> 
+	  </varlistentry> 
+	  <varlistentry> 
+	    <term> 
+	      <guilabel>Fit all images to screen</guilabel> </term> 
+	    <listitem> 
+	      <para>Select this option to resize images to fill the full screen
+		when you open the images in full screen mode. </para> 
+	      <para>Default: unselected.</para> 
+	    </listitem> 
+	  </varlistentry> 
+	  <varlistentry> 
+	    <term> 
+	      <guilabel>Fit standard-sized images to screen</guilabel> </term> 
+	    <listitem> 
+	      <para>Select this option to automatically resize images
+		that are the same size as standard screens so that the
+		images fill the full screen when you open them in full
+		screen mode. If you select this option, &app; ignores
+		the settings for the previous three options when you
+		open an image that is the same size as a standard
+		screen.  Examples of standard screen sizes are 640 x
+		480 pixels, 1024 x 768 pixels, and so on. </para>
+	      <para>Default: unselected.</para> 
+	    </listitem> 
+	  </varlistentry> 
+	  <varlistentry> 
+	    <term> 
+	      <guilabel>Put a bevel around the edge of the screen</guilabel>
+	    </term> 
+	    <listitem> 
+	      <para>Select this option to display a 3D beveled border around
+		the full screen view of an image. </para> 
+	      <para>Default: unselected.</para> 
+	    </listitem> 
+	  </varlistentry> 
+	</variablelist> 
+      </sect3> 
+    </sect2> 
+  </sect1>
+-->
+<!-- ============= Bugs ================================== -->
+<!-- This section is optional and is commented out by default. 
+     You can use it to describe known bugs and limitations of the 
+	  program if there are any - please be frank and list all
+     problems you know of. 
+  
+  <sect1 id="mayapp-bugs">
+  <title>Known Bugs and Limitations</title>
+  <para> </para>
+ </sect1>
+-->
+<!-- ============= About ================================== -->
+<!-- This section contains info about the program (not docs), such as
+      author's name(s), web page, license, feedback address. This
+      section is optional: primary place for this info is "About.." box of
+      the program. However, if you do wish to include this info in the
+      manual, this is the place to put it. Alternatively, you can put this information in the title page.-->
+  <sect1 id="mrproject-about"> 
+    <title>About &app;</title> 
+    <para> &app; was written by CodeFactory AB and GNOME community volunteers.
+      (<email>mrproject-team@codefactory.se</email>). To find more information about
+      &app;, please visit the 
+      <ulink url="http://mrproject.codefactory.se/" type="http">&app; Web
+	page</ulink>. </para>
+    <para>
+      To report a bug or make a suggestion regarding this application or
+      this manual, you can submit them using 
+      <ulink url="http://bugzilla.codefactory.se"   type="help">bugzilla</ulink>.
+    </para>
+
+    <para>
+      Another excellent source of information are the Planner
+      <ulink url="http://mrproject.codefactory.se/lists.php"   type="help">mailing lists</ulink>.
+      There are separate lists for users and developers.  Subscribe to whatever interests you.
+    </para>
+
+    <para> This program is distributed under the terms of the GNU
+      General Public license as published by the Free Software
+      Foundation; either version 2 of the License, or (at your option)
+      any later version. A copy of this license can be found at this
+      <ulink url="ghelp:gpl" type="help">link</ulink>, or in the file
+      COPYING included with the source code of this program. </para>
+  </sect1> 
+
+  <appendix id="mrp-database-config">
+  <title>Configuring a Planner database</title>
+    <para>Planner can store projects in a PostgreSQL database.  In order to do this, PostgreSQL
+	must be installed and configured to accept the project data.  These instructions are
+	intended to outline the steps you should take to accomplish that.  For more information
+	about PostgreSQL administration and use, please consult the PostgreSQL documentation
+	available at <ulink url="http://www.postgresql.org">The PostgreSQL Web Site</ulink>.
+	The PostgreSQL Documentation includes instructions on installing from source tarballs.
+	RPMs are also available from this site if you prefer that method.
+    </para>
+    <para>Start by logging in as root, and copying the database.sql file to the /tmp directory.
+	You'll use this file in the last step of the process, but its better to copy it first
+	rather than go hunting for it later.
+	Assuming the mrproject folder is in the root directory, you would do the following:
+      <screen>
+	<prompt>root#</prompt><userinput> cp mrproject/src/plugins/sql/database.sql /tmp </userinput>
+      </screen>
+    </para>
+    <para>If you're running RedHat and you chose to install the PostgreSQL packages along with
+	the rest of your system, then you already have a database cluster and default user set
+	up.  The database cluster will be /var/lib/pgsql/data, and the default user will be
+	postgres.
+    </para>
+    <para>If there is no default user set up, then create the user postgres with the home
+	directory /var/lib/pgsql.
+    </para>
+    <para>
+	Create a database cluster by logging into the postgres account and executing the initdb
+	command:
+      <screen>
+	<prompt>root#</prompt><userinput> su - postgres</userinput>
+	<prompt>bash$</prompt><userinput> initdb -D data</userinput>
+      </screen>
+    </para>
+    <para>
+	Create a non-default user by logging into the postgres account and executing the 
+	createuser command (use your own user name here - kurt is mine):
+      <screen>
+	<prompt>root#</prompt><userinput> su - postgres</userinput>
+	<prompt>bash$</prompt><userinput> createuser</userinput>
+	Enter name of user to add:<userinput> kurt</userinput>
+	Shall the new user be allowed to create databases? (y/n)<userinput> y</userinput>
+	Shall the new user be allowed to create more new users? (y/n)<userinput> y</userinput>
+	CREATE USER
+      </screen>
+	This will allow you to execute commands from your own account rather than use the
+	default account.
+    </para>
+
+    <para>
+	You can now create the database and group from your own account:
+      <screen>
+	<prompt>kurt#</prompt><userinput> createdb -U kurt mrprojectdb</userinput>
+	CREATE DATABASE
+	<prompt>kurt#</prompt><userinput> echo 'create group mrproject with user kurt;' | psql -e -U kurt -d mrprojectdb</userinput>
+	create group mrproject with user kurt;
+	CREATE GROUP
+      </screen>
+    </para>
+
+    <para>
+	This final command will build the tables required to store the project information 
+	in the mrprojectdb database.  The file <filename>database.sql</filename> can be 
+	found in the mrproject
+	distribution subfolder <filename class="directory">src/plugins/sql</filename>.
+      <screen>
+	<prompt>kurt#</prompt><userinput> cat /tmp/database.sql | psql -e -U kurt -d mrprojectdb
+	</userinput>
+      </screen>
+	This line generates a lot of output.  When it's complete, you should go back and review
+	the output, checking for any error messages (look for lines that start with the word
+	ERROR).
+    </para>
+
+    <para>That's it.  You should now be able to save and open projects using the PostgreSQL database.
+    </para>
+
+    <para>
+	If you have a problem or encounter an error, you can try again removing the group
+	and database and recreating them:
+      <screen>
+	<prompt>kurt#</prompt><userinput> dropdb mrprojectdb</userinput>
+	<prompt>kurt#</prompt><userinput> echo 'DROP GROUP mrproject;' | psql -e -U kurt -d mrprojectdb</userinput>
+      </screen>
+    </para>
+
+  </appendix>
+
+  <appendix id="mrp-web-resources">
+  <title>Project Management Web Resources</title>
+    <para>
+	<ulink url="http://www.pmi.org">The PMI Web Site</ulink>
+    </para>
+  </appendix>
+
+
+  <bibliography>
+  <title>Bibliography</title>
+      <biblioentry>
+	<abbrev>PMBOK</abbrev>
+	<authorgroup>
+	<author><firstname>Project Management Institute</firstname></author>
+	</authorgroup>
+	<copyright><year>2000</year>
+	<holder>Project Management Institute, Inc.</holder></copyright>
+	<isbn>1-880410-23-0</isbn>
+	<publisher>
+	<publishername>Project Management Institute, Inc.</publishername>
+	</publisher>
+	<title>A Guide to the Project Management Body of Knowledge (PMBOK Guide)</title>
+      </biblioentry>
+  </bibliography>
+</article>

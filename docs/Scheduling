@@ -1,0 +1,153 @@
+Brief description of the task scheduling in Planner
+===================================================
+
+Work breakdown structure
+------------------------
+
+The tasks are organized in a hierarchy of tasks and subtasks. A
+project is normally divided into a few subprojects. Each subproject is
+then divided further until each leaf in the resulting tree
+is sufficiently small to be concrete and manageable. Tasks that have
+subtasks (or children), are called summary tasks.
+
+
+Scheduling
+==========
+
+Each task is scheduled according to its scheduling type, which can be
+any of:
+
+* As-soon-as-possible (ASAP)
+* As-late-as-possible (ALAP)
+* Must-start-on (MSO)
+* Start-no-earlier-than (SNET)
+* Finish-no-later-than (FNLT)
+
+ASAP
+----
+
+Per default, tasks are scheduled as-soon-as-possible (ASAP). This
+means that all tasks start directly at the project start if they have
+no predecessors. Tasks that have predecessors, are scheduled to start
+directly after its latest predecessor.
+
+ALAP
+----
+
+[ Note: Not yet implemented. ]
+
+Tasks that are scheduled with an as-late-as-possible type, are put as
+close to the project finish time as possible.
+
+MSO
+---
+
+The must-start-on constraint means that the task start time is locked
+down to a specific time (but never before the project start).
+
+SNET
+----
+
+Start-no-earlier-than makes the task start when otherwise scheduled,
+but no earlier than the specified time.
+
+FNLT
+----
+
+[ Note: Not yet implemented. ]
+
+Finish-no-eariler-than make the task finish no later than the
+specified time.
+
+
+Summary tasks can only have SNET, FNLT, and ASAP constraints.
+
+
+Predecessors
+============
+
+Predecessor relationships can be of any of the following types:
+
+* Finish-to-start (FS)
+* Start-to-start (SS)
+* Finish-to-finish (FF)
+* Start-to-finish (SF)
+
+[ Note: Only FS is implemented so far. ]
+
+A predecessor relationship can involve a lag time, so that a task is
+scheduled after the predecessor plus the specified lag. A negative lag
+is interpreted as lead time.
+
+[ Note: There is currently no way to set lag in the UI ]
+
+
+Summary tasks can only have predecessors with FS or SS type.
+
+
+Scheduling from project start/finish
+====================================
+
+[ Note: Only scheduling from project start is implemented yet. ]
+
+Project start
+-------------
+
+When scheduling from project start, newly inserted tasks get scheduled
+with an ASAP constraint by default. 
+
+[ Note: We might want to make dragging tasks or entering times in
+cells put a SNET constraint, when scheduling from project start. ]
+
+Project finish
+--------------
+
+When scheduling from project finish, newly inserted tasks get scheduled
+with an ALAP constraint by default. 
+
+[ Note: We might want to make dragging tasks or entering times in
+cells put a FNLT constraint, when scheduling from project finish. ]
+
+
+Topological sorting and CPM
+===========================
+
+When scheduling tasks, they need to be sorted topological, to make the
+order in which they should be layed out known. Since the graph is
+really a tree, we need to special case the sort algorithm a bit:
+
+1. Mark all nodes as unvisited.
+
+2. Traverse the dependency graph and produce a sorted list.
+
+2.1. It the task is not visited, recurse for its successors.
+
+2.2. Also recurse for the ancestors of the successors that has the
+     same parent as an ancestor of the task. This way predecessors
+     will be listed before the summary tasks of the successors.
+
+2.3. Finally recurse for the task's children.
+
+2.4. Prepend the task to the sorted list.
+
+3. Go through the sorted list and build a tree. Parents are listed
+   before their children and predecessors are listed before their
+   successors (including successors' parents) so the tree will be
+   sorted.
+
+4. Do a forward pass through the tasks to set the earliest start and
+   earliest finish times for all tasks.
+
+4.1. Lay out tasks according to constraints and predecessors.
+
+5. Do a backward pass to set latest start and latest finish times.
+
+
+
+Work / Duration / Resources
+===========================
+
+Iterate through calendar intervals, if the start time is inside
+non-working time, then move the start time after that interval.
+
+Then keep iterating and add to the duration 

@@ -1,0 +1,579 @@
+<!-- ##### SECTION Title ##### -->
+MrpProject
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### STRUCT MrpProjectPriv ##### -->
+<para>
+A private struct for internal use only.  The definition of this
+structure is not publically available.
+</para>
+
+
+<!-- ##### STRUCT MrpProject ##### -->
+<para>
+Object representing a project.
+</para>
+
+
+<!-- ##### SIGNAL MrpProject::calendar-tree-changed ##### -->
+<para>
+
+</para>
+
+@mrpproject: the object which received the signal.
+@arg1: 
+
+<!-- ##### SIGNAL MrpProject::day-added ##### -->
+<para>
+
+</para>
+
+@mrpproject: the object which received the signal.
+@arg1: 
+
+<!-- ##### SIGNAL MrpProject::day-changed ##### -->
+<para>
+
+</para>
+
+@mrpproject: the object which received the signal.
+@arg1: 
+
+<!-- ##### SIGNAL MrpProject::day-removed ##### -->
+<para>
+
+</para>
+
+@mrpproject: the object which received the signal.
+@arg1: 
+
+<!-- ##### SIGNAL MrpProject::default-group-changed ##### -->
+<para>
+
+</para>
+
+@mrpproject: the object which received the signal.
+@arg1: 
+
+<!-- ##### SIGNAL MrpProject::group-added ##### -->
+<para>
+
+</para>
+
+@mrpproject: the object which received the signal.
+@arg1: 
+
+<!-- ##### SIGNAL MrpProject::group-removed ##### -->
+<para>
+
+</para>
+
+@mrpproject: the object which received the signal.
+@arg1: 
+
+<!-- ##### SIGNAL MrpProject::loaded ##### -->
+<para>
+
+</para>
+
+@mrpproject: the object which received the signal.
+
+<!-- ##### SIGNAL MrpProject::needs-saving-changed ##### -->
+<para>
+
+</para>
+
+@mrpproject: the object which received the signal.
+@arg1: 
+
+<!-- ##### SIGNAL MrpProject::property-added ##### -->
+<para>
+
+</para>
+
+@mrpproject: the object which received the signal.
+@arg1: 
+@arg2: 
+
+<!-- ##### SIGNAL MrpProject::property-changed ##### -->
+<para>
+
+</para>
+
+@mrpproject: the object which received the signal.
+@arg1: 
+
+<!-- ##### SIGNAL MrpProject::property-removed ##### -->
+<para>
+
+</para>
+
+@mrpproject: the object which received the signal.
+@arg1: 
+
+<!-- ##### SIGNAL MrpProject::resource-added ##### -->
+<para>
+
+</para>
+
+@mrpproject: the object which received the signal.
+@arg1: 
+
+<!-- ##### SIGNAL MrpProject::resource-removed ##### -->
+<para>
+
+</para>
+
+@mrpproject: the object which received the signal.
+@arg1: 
+
+<!-- ##### SIGNAL MrpProject::task-inserted ##### -->
+<para>
+
+</para>
+
+@mrpproject: the object which received the signal.
+@arg1: 
+
+<!-- ##### SIGNAL MrpProject::task-moved ##### -->
+<para>
+
+</para>
+
+@mrpproject: the object which received the signal.
+@arg1: 
+
+<!-- ##### SIGNAL MrpProject::task-removed ##### -->
+<para>
+
+</para>
+
+@mrpproject: the object which received the signal.
+@arg1: 
+
+<!-- ##### ARG MrpProject:calendar ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG MrpProject:default-group ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG MrpProject:manager ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG MrpProject:name ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG MrpProject:organization ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG MrpProject:phase ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG MrpProject:phases ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG MrpProject:project-start ##### -->
+<para>
+
+</para>
+
+<!-- ##### USER_FUNCTION MrpTaskTraverseFunc ##### -->
+<para>
+A function to use with mrp_project_task_traverse(). @task is the
+currently traversed task, and @data is the user data passed to the
+mrp_project_task_traverse(). The traversal can be stopped by returning
+%TRUE.
+</para>
+
+@Param1: 
+@Param2: 
+@Returns: %TRUE if the traversal is to be stopped.
+<!-- # Unused Parameters # -->
+@task: an #MrpTask
+@data: user data
+
+
+<!-- ##### FUNCTION mrp_project_new ##### -->
+<para>
+
+</para>
+
+@app: 
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_project_is_empty ##### -->
+<para>
+
+</para>
+
+@project: 
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_project_needs_saving ##### -->
+<para>
+
+</para>
+
+@project: 
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_project_get_project_start ##### -->
+<para>
+
+</para>
+
+@project: 
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_project_set_project_start ##### -->
+<para>
+
+</para>
+
+@project: 
+@start: 
+
+
+<!-- ##### FUNCTION mrp_project_load ##### -->
+<para>
+
+</para>
+
+@project: 
+@uri: 
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_project_save ##### -->
+<para>
+
+</para>
+
+@project: 
+@force: 
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_project_save_to_xml ##### -->
+<para>
+
+</para>
+
+@project: 
+@str: 
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_project_load_from_xml ##### -->
+<para>
+
+</para>
+
+@project: 
+@str: 
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_project_save_as ##### -->
+<para>
+
+</para>
+
+@project: 
+@uri: 
+@force: 
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_project_close ##### -->
+<para>
+
+</para>
+
+@project: 
+
+
+<!-- ##### FUNCTION mrp_project_get_uri ##### -->
+<para>
+
+</para>
+
+@project: 
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_project_get_resource_by_name ##### -->
+<para>
+
+</para>
+
+@project: 
+@name: 
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_project_get_resources ##### -->
+<para>
+
+</para>
+
+@project: 
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_project_add_resource ##### -->
+<para>
+
+</para>
+
+@project: 
+@resource: 
+
+
+<!-- ##### FUNCTION mrp_project_remove_resource ##### -->
+<para>
+
+</para>
+
+@project: 
+@resource: 
+
+
+<!-- ##### FUNCTION mrp_project_get_group_by_name ##### -->
+<para>
+
+</para>
+
+@project: 
+@name: 
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_project_get_groups ##### -->
+<para>
+
+</para>
+
+@project: 
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_project_add_group ##### -->
+<para>
+
+</para>
+
+@project: 
+@group: 
+
+
+<!-- ##### FUNCTION mrp_project_remove_group ##### -->
+<para>
+
+</para>
+
+@project: 
+@group: 
+
+
+<!-- ##### FUNCTION mrp_project_get_task_by_name ##### -->
+<para>
+
+</para>
+
+@project: 
+@name: 
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_project_get_all_tasks ##### -->
+<para>
+
+</para>
+
+@project: 
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_project_insert_task ##### -->
+<para>
+
+</para>
+
+@project: 
+@parent: 
+@position: 
+@task: 
+
+
+<!-- ##### FUNCTION mrp_project_remove_task ##### -->
+<para>
+
+</para>
+
+@project: 
+@task: 
+
+
+<!-- ##### FUNCTION mrp_project_move_task ##### -->
+<para>
+
+</para>
+
+@project: 
+@task: 
+@sibling: 
+@parent: 
+@before: 
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_project_get_root_task ##### -->
+<para>
+
+</para>
+
+@project: 
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_project_task_traverse ##### -->
+<para>
+
+</para>
+
+@project: 
+@root: 
+@func: 
+@user_data: 
+
+
+<!-- ##### FUNCTION mrp_project_reschedule ##### -->
+<para>
+
+</para>
+
+@project: 
+
+
+<!-- ##### FUNCTION mrp_project_calculate_task_work ##### -->
+<para>
+
+</para>
+
+@project: 
+@task: 
+@start: 
+@finish: 
+@Returns: 
+<!-- # Unused Parameters # -->
+@duration: 
+
+
+<!-- ##### FUNCTION mrp_project_get_properties_from_type ##### -->
+<para>
+
+</para>
+
+@project: 
+@object_type: 
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_project_add_property ##### -->
+<para>
+
+</para>
+
+@project: 
+@object_type: 
+@property: 
+@user_defined: 
+
+
+<!-- ##### FUNCTION mrp_project_remove_property ##### -->
+<para>
+
+</para>
+
+@project: 
+@object_type: 
+@name: 
+
+
+<!-- ##### FUNCTION mrp_project_get_property ##### -->
+<para>
+
+</para>
+
+@project: 
+@name: 
+@object_type: 
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_project_has_property ##### -->
+<para>
+
+</para>
+
+@project: 
+@owner_type: 
+@name: 
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_project_get_root_calendar ##### -->
+<para>
+
+</para>
+
+@project: 
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_project_get_calendar ##### -->
+<para>
+
+</para>
+
+@project: 
+@Returns: 
+
+

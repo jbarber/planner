@@ -1,0 +1,459 @@
+<!-- ##### SECTION Title ##### -->
+MrpTask
+
+<!-- ##### SECTION Short_Description ##### -->
+represents a task in the project.
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### STRUCT MrpTaskPriv ##### -->
+<para>
+A private struct for internal use only.  The definition of this
+structure is not publically available.
+</para>
+
+
+<!-- ##### STRUCT MrpTask ##### -->
+<para>
+Object representing a task in the project.
+</para>
+
+
+<!-- ##### SIGNAL MrpTask::assignment-added ##### -->
+<para>
+
+</para>
+
+@mrptask: the object which received the signal.
+@arg1: 
+
+<!-- ##### SIGNAL MrpTask::assignment-removed ##### -->
+<para>
+
+</para>
+
+@mrptask: the object which received the signal.
+@arg1: 
+
+<!-- ##### SIGNAL MrpTask::child-added ##### -->
+<para>
+
+</para>
+
+@mrptask: the object which received the signal.
+
+<!-- ##### SIGNAL MrpTask::child-removed ##### -->
+<para>
+
+</para>
+
+@mrptask: the object which received the signal.
+
+<!-- ##### SIGNAL MrpTask::relation-added ##### -->
+<para>
+
+</para>
+
+@mrptask: the object which received the signal.
+@arg1: 
+
+<!-- ##### SIGNAL MrpTask::relation-removed ##### -->
+<para>
+
+</para>
+
+@mrptask: the object which received the signal.
+@arg1: 
+
+<!-- ##### SIGNAL MrpTask::task-moved ##### -->
+<para>
+
+</para>
+
+@mrptask: the object which received the signal.
+@arg1: 
+@arg2: 
+
+<!-- ##### ARG MrpTask:constraint ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG MrpTask:critical ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG MrpTask:duration ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG MrpTask:finish ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG MrpTask:latest-finish ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG MrpTask:latest-start ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG MrpTask:name ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG MrpTask:note ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG MrpTask:percent-complete ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG MrpTask:sched ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG MrpTask:start ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG MrpTask:type ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG MrpTask:work ##### -->
+<para>
+
+</para>
+
+<!-- ##### STRUCT MrpConstraint ##### -->
+<para>
+A struct representing a scheduling constraint on a task.
+</para>
+
+@type: 
+@time: 
+
+<!-- ##### ENUM MrpConstraintType ##### -->
+<para>
+The type of constraint for the task. The default is %MRP_CONSTRAINT_ASAP.
+</para>
+
+@MRP_CONSTRAINT_ASAP: as soon as possible
+@MRP_CONSTRAINT_ALAP: as late as possible (unimplemented)
+@MRP_CONSTRAINT_SNET: start no eariler than
+@MRP_CONSTRAINT_FNLT: finish no later than (unimplemented)
+@MRP_CONSTRAINT_MSO: must start on
+
+<!-- ##### FUNCTION mrp_task_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_task_set_name ##### -->
+<para>
+
+</para>
+
+@task: 
+@name: 
+
+
+<!-- ##### FUNCTION mrp_task_get_name ##### -->
+<para>
+
+</para>
+
+@task: 
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_task_add_predecessor ##### -->
+<para>
+
+</para>
+
+@task: 
+@predecessor: 
+@type: 
+@lag: 
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_task_remove_predecessor ##### -->
+<para>
+
+</para>
+
+@task: 
+@predecessor: 
+
+
+<!-- ##### FUNCTION mrp_task_get_relation ##### -->
+<para>
+
+</para>
+
+@task_a: 
+@task_b: 
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_task_get_predecessor_relation ##### -->
+<para>
+
+</para>
+
+@task: 
+@predecessor: 
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_task_get_successor_relation ##### -->
+<para>
+
+</para>
+
+@task: 
+@successor: 
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_task_get_predecessor_relations ##### -->
+<para>
+
+</para>
+
+@task: 
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_task_get_successor_relations ##### -->
+<para>
+
+</para>
+
+@task: 
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_task_has_relation_to ##### -->
+<para>
+
+</para>
+
+@task_a: 
+@task_b: 
+@Returns: 
+<!-- # Unused Parameters # -->
+@a: 
+@b: 
+
+
+<!-- ##### FUNCTION mrp_task_has_relation ##### -->
+<para>
+
+</para>
+
+@task: 
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_task_get_parent ##### -->
+<para>
+
+</para>
+
+@task: 
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_task_get_first_child ##### -->
+<para>
+
+</para>
+
+@task: 
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_task_get_next_sibling ##### -->
+<para>
+
+</para>
+
+@task: 
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_task_get_n_children ##### -->
+<para>
+
+</para>
+
+@task: 
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_task_get_nth_child ##### -->
+<para>
+
+</para>
+
+@task: 
+@n: 
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_task_get_position ##### -->
+<para>
+
+</para>
+
+@task: 
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_task_get_start ##### -->
+<para>
+
+</para>
+
+@task: 
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_task_get_work_start ##### -->
+<para>
+
+</para>
+
+@task: 
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_task_get_finish ##### -->
+<para>
+
+</para>
+
+@task: 
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_task_get_latest_start ##### -->
+<para>
+
+</para>
+
+@task: 
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_task_get_latest_finish ##### -->
+<para>
+
+</para>
+
+@task: 
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_task_get_duration ##### -->
+<para>
+
+</para>
+
+@task: 
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_task_get_work ##### -->
+<para>
+
+</para>
+
+@task: 
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_task_get_assignments ##### -->
+<para>
+
+</para>
+
+@task: 
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_task_get_assignment ##### -->
+<para>
+
+</para>
+
+@task: 
+@resource: 
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_task_reset_constraint ##### -->
+<para>
+
+</para>
+
+@task: 
+
+
+<!-- ##### FUNCTION mrp_task_get_cost ##### -->
+<para>
+
+</para>
+
+@task: 
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_task_get_assigned_resources ##### -->
+<para>
+
+</para>
+
+@task: 
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_task_compare ##### -->
+<para>
+
+</para>
+
+@a: 
+@b: 
+@Returns: 
+
+

@@ -1,0 +1,502 @@
+#include <config.h>
+#include <glib.h>
+#include <gmodule.h>
+#include <gtk/gtk.h>
+#include <gtk/gtkmain.h>
+#include <gtk/gtkhpaned.h>
+#include <libgnome/gnome-i18n.h>
+#include <libplanner/mrp-task.h>
+#include <libplanner/mrp-resource.h>
+#include "app/planner-view.h"
+#include "planner-ttable-print.h"
+#include "planner-ttable-model.h"
+#include "planner-ttable-tree.h"
+#include "planner-ttable-chart.h"
+
+struct _MgViewPriv {
+	GtkWidget	*paned;
+	GtkWidget	*tree;
+	GtkWidget	*gantt;
+	MrpProject	*project;
+
+	MgTtableChart	  *chart;
+	MgTtablePrintData *print_data;
+};
+
+/* Les call-backs pour bonobo */
+//static void		ttable_view_test_cb		(BonoboUIComponent	*component,
+//							 gpointer		 data,
+//							 const char		*cname);
+static void		ttable_view_zoom_out_cb		(BonoboUIComponent	*component,
+							 gpointer		 data,
+							 const char		*cname);
+static void		ttable_view_zoom_in_cb		(BonoboUIComponent	*component,
+							 gpointer		 data,
+							 const char		*cname);
+static void		ttable_view_zoom_to_fit_cb	(BonoboUIComponent	*component,
+							 gpointer		 data,
+							 const char		*cname);
+static BonoboUIVerb verbs[] = {
+	BONOBO_UI_VERB ("ZoomOut",	ttable_view_zoom_out_cb),
+	BONOBO_UI_VERB ("ZoomIn",	ttable_view_zoom_in_cb),
+	BONOBO_UI_VERB ("ZoomToFit",	ttable_view_zoom_to_fit_cb),
+	BONOBO_UI_VERB_END
+};
+
+static void		ttable_view_ui_component_event		(BonoboUIComponent	*component,
+								 const gchar		*path,
+								 Bonobo_UIComponent_EventType type,
+								 const gchar		*state_string,
+								 MgView			*view);
+static GtkWidget 	*ttable_view_create_widget		(MgView			*view);
+static void		ttable_view_project_loaded_cb		(MrpProject		*project,
+								 MgView			*view);
+static void		ttable_view_tree_view_realize_cb	(GtkWidget		*w,
+								 gpointer		 data);
+static void		ttable_view_row_expanded		(GtkTreeView		*tree_view,
+								 GtkTreeIter		*iter,
+								 GtkTreePath		*path,
+								 gpointer		 data);
+static void		ttable_view_row_collapsed		(GtkTreeView		*tree_view,
+								 GtkTreeIter		*iter,
+								 GtkTreePath		*path,
+								 gpointer		 data);
+static void		ttable_view_expand_all			(MgTtableTree		*tree,
+								 MgTtableChart		*chart);
+static void		ttable_view_collapse_all		(MgTtableTree		*tree,
+								 MgTtableChart		*chart);
+static void		ttable_view_ttable_status_updated	(MgTtableChart		*chart,
+								 const gchar		*message,
+								 MgView			*view);
+/* Fonctions exportees par le module */
+void			activate				(MgView			*view);
+void			deactivate				(MgView			*view);
+void			init					(MgView			*view,
+								 MgMainWindow		*main_window);
+gchar*			get_label				(MgView			*view);
+gchar*			get_menu_label				(MgView			*view);
+gchar*			get_icon				(MgView			*view);
+GtkWidget*		get_widget				(MgView			*view);
+void			print_init				(MgView			*view,
+								 MgPrintJob		*job);
+void			print					(MgView			*view);
+gint			print_get_n_pages			(MgView			*view);
+void			print_cleanup				(MgView			*view);
+
+G_MODULE_EXPORT void                                
+activate (MgView *view)
+{      
+	MgViewPriv	*priv;
+
+	priv=view->priv;
+	planner_view_activate_helper(view,
+				DATADIR
+				"/planner/ui/time-table-view.ui",
+				"timetableview",
+				verbs);
+}
+
+G_MODULE_EXPORT void
+deactivate (MgView *view)
+{
+	planner_view_deactivate_helper(view);
+}
+
+G_MODULE_EXPORT void
+init (MgView *view, MgMainWindow *main_window)
+{
+	MgViewPriv	*priv;
+	priv=g_new0 (MgViewPriv, 1);
+	view->priv=priv;
+
+	g_signal_connect (view->ui_component,
+			  "ui-event",
+			  G_CALLBACK (ttable_view_ui_component_event),
+			  view);
+}
+
+G_MODULE_EXPORT gchar *
+get_label (MgView *view)
+{
+	g_return_val_if_fail (MG_IS_VIEW (view), NULL);
+	return _("Time Table");
+}
+
+G_MODULE_EXPORT gchar*
+get_menu_label (MgView *view)
+{
+	g_return_val_if_fail (MG_IS_VIEW(view),NULL);
+	return _("_Time Table");
+}
+
+G_MODULE_EXPORT gchar *
+get_icon (MgView *view)
+{       
+	g_return_val_if_fail (MG_IS_VIEW (view), NULL);
+	return IMAGEDIR "/time-table.png";
+}
+
+G_MODULE_EXPORT GtkWidget *
+get_widget (MgView *view)
+{       
+	MgViewPriv *priv;
+
+	g_return_val_if_fail (MG_IS_VIEW (view), NULL);
+
+	priv = view->priv;
+	if (priv->paned == NULL) {
+		priv->paned=ttable_view_create_widget(view);
+		gtk_widget_show_all(priv->paned);
+	}
+
+	return view->priv->paned;
+}
+
+G_MODULE_EXPORT void
+print_init (MgView     *view,
+	    MgPrintJob *job)
+{       
+	MgViewPriv *priv;
+	
+	g_return_if_fail (MG_IS_VIEW (view));
+	g_return_if_fail (MG_IS_PRINT_JOB (job));
+
+	priv = view->priv;
+
+	g_assert (priv->print_data == NULL);
+
+	priv->print_data = planner_ttable_print_data_new (view, job);
+}
+
+G_MODULE_EXPORT void
+print (MgView *view)
+{
+	g_return_if_fail (MG_IS_VIEW (view));
+	g_assert (view->priv->print_data);
+	planner_ttable_print_do (view->priv->print_data);
+}
+
+G_MODULE_EXPORT gint
+print_get_n_pages (MgView *view)
+{
+	g_return_val_if_fail (MG_IS_VIEW (view),0);
+	g_assert (view->priv->print_data);
+	return planner_ttable_print_get_n_pages(view->priv->print_data);
+}
+
+G_MODULE_EXPORT void
+print_cleanup (MgView *view)
+{
+	g_return_if_fail (MG_IS_VIEW (view));
+	g_assert (view->priv->print_data);
+	planner_ttable_print_data_free(view->priv->print_data);
+	view->priv->print_data=NULL;
+}
+
+
+/*
+static void
+ttable_view_test_cb	(BonoboUIComponent	*component,
+			 gpointer		 data,
+			 const char		*cname)
+{
+	MgView		*view;
+	MgViewPriv	*priv;
+	MrpProject	*project;
+
+	view = MG_VIEW(data);
+	priv = view->priv;
+	project = planner_main_window_get_project(view->main_window);
+//	fprintf(stderr,"Coucou!\n");
+}
+*/
+
+static void
+ttable_view_zoom_out_cb		(BonoboUIComponent	*component,
+				 gpointer		 data,
+				 const char		*cname)
+{
+	MgView		*view;
+	view = MG_VIEW(data);
+	planner_ttable_chart_zoom_out(view->priv->chart);
+}
+
+static void
+ttable_view_zoom_in_cb		(BonoboUIComponent	*component,
+				 gpointer		 data,
+				 const char		*cname)
+{
+	MgView		*view;
+	view = MG_VIEW(data);
+	planner_ttable_chart_zoom_in(view->priv->chart);
+}
+
+static void
+ttable_view_zoom_to_fit_cb	(BonoboUIComponent	*component,
+				 gpointer		 data,
+				 const char		*cname)
+{
+	MgView		*view;
+	view = MG_VIEW(data);
+	planner_ttable_chart_zoom_to_fit(view->priv->chart);
+}
+
+static void
+ttable_view_ui_component_event	(BonoboUIComponent	*component,
+				 const gchar		*path,
+				 Bonobo_UIComponent_EventType type,
+				 const gchar		*state_string,
+				 MgView			*view)
+{
+	MgViewPriv *priv;
+//	gboolean    state;
+
+	priv = view->priv;
+//	fprintf(stderr,"Y'a eu un evenement, et je ne me l'explique pas!\n");
+}
+
+static void
+ttable_view_tree_view_size_request_cb	(GtkWidget	*widget,
+					 GtkRequisition	*req,
+					 gpointer	 data)
+{
+	req->height = -1;
+}
+
+static gboolean
+ttable_view_tree_view_scroll_event_cb	(GtkWidget	*widget,
+					 GdkEventScroll	*event,
+					 gpointer	 data)
+{
+	GtkAdjustment *adj;
+	GtkTreeView   *tv = GTK_TREE_VIEW (widget);
+	gdouble        new_value;
+	if (event->direction != GDK_SCROLL_UP &&
+	    event->direction != GDK_SCROLL_DOWN) {
+		return FALSE;
+	}
+	adj = gtk_tree_view_get_vadjustment (tv);
+	if (event->direction == GDK_SCROLL_UP) {
+		new_value = adj->value - adj->page_increment / 2;
+	} else {
+		new_value = adj->value + adj->page_increment / 2;
+	}
+	new_value = CLAMP (new_value, adj->lower, adj->upper - adj->page_size);
+	gtk_adjustment_set_value (adj, new_value);
+	return TRUE;
+}
+
+static GtkWidget*
+ttable_view_create_widget	(MgView			*view)
+{
+	MgViewPriv	*priv;
+	MrpProject	*project;
+
+	GtkWidget	*hpaned;
+	GtkWidget	*left_frame;
+	GtkWidget	*right_frame;
+	MgTtableModel   *model;
+//	MgTtableTree	*tree;
+	GtkWidget	*tree;
+	GtkWidget	*vbox;
+	GtkWidget	*sw;
+	
+	GtkWidget	*chart;
+	
+	GtkAdjustment    *hadj, *vadj;
+//	GtkWidget	*vbox;
+//	GtkWidget	*
+
+	project = planner_main_window_get_project (view->main_window);
+	priv = view->priv;
+	priv->project = project;
+
+	g_signal_connect (project,
+			  "loaded",
+			  G_CALLBACK (ttable_view_project_loaded_cb),
+			  view);
+
+	model = planner_ttable_model_new(project);
+	tree = planner_ttable_tree_new(view->main_window, model);
+	priv->tree = tree;
+	left_frame = gtk_frame_new(NULL);
+	right_frame = gtk_frame_new(NULL);
+	
+	vbox = gtk_vbox_new (FALSE, 3);
+	gtk_box_pack_start (GTK_BOX (vbox), tree, TRUE, TRUE, 0);
+	hadj = gtk_tree_view_get_hadjustment (GTK_TREE_VIEW (tree));
+	gtk_box_pack_start (GTK_BOX (vbox), gtk_hscrollbar_new (hadj), FALSE, TRUE, 0);
+	gtk_container_add (GTK_CONTAINER (left_frame), vbox);
+	
+	hadj = GTK_ADJUSTMENT (gtk_adjustment_new (0, 0, 0, 90, 250, 2000));
+	vadj = gtk_tree_view_get_vadjustment (GTK_TREE_VIEW (tree));
+
+	//ICI
+	chart = planner_ttable_chart_new_with_model(GTK_TREE_MODEL(model));
+	priv->chart = MG_TTABLE_CHART(chart);
+	sw = gtk_scrolled_window_new (hadj, vadj);
+	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw),
+					GTK_POLICY_ALWAYS,
+					GTK_POLICY_AUTOMATIC);
+	gtk_container_add (GTK_CONTAINER (right_frame), sw);
+	gtk_container_add (GTK_CONTAINER (sw), chart);
+	
+	hpaned = gtk_hpaned_new();
+	gtk_frame_set_shadow_type(GTK_FRAME(left_frame), GTK_SHADOW_IN);
+	gtk_frame_set_shadow_type(GTK_FRAME(right_frame),GTK_SHADOW_IN);
+	gtk_paned_add1(GTK_PANED(hpaned),left_frame);
+	gtk_paned_add2(GTK_PANED(hpaned),right_frame);
+
+	g_signal_connect (tree,"realize",G_CALLBACK(ttable_view_tree_view_realize_cb),chart);
+	g_signal_connect (tree,"row_expanded",G_CALLBACK(ttable_view_row_expanded),chart);
+	g_signal_connect (tree,"row_collapsed",G_CALLBACK(ttable_view_row_collapsed),chart);
+	g_signal_connect (tree,"expand_all",G_CALLBACK(ttable_view_expand_all),chart);
+	g_signal_connect (tree,"collapse_all",G_CALLBACK(ttable_view_collapse_all),chart);
+	g_signal_connect (chart, "status_updated",G_CALLBACK(ttable_view_ttable_status_updated),view);
+	g_signal_connect_after (tree, "size_request",G_CALLBACK(ttable_view_tree_view_size_request_cb),NULL);
+	g_signal_connect_after (tree, "scroll_event",G_CALLBACK(ttable_view_tree_view_scroll_event_cb),view);
+	gtk_tree_view_expand_all(GTK_TREE_VIEW(tree));
+	planner_ttable_chart_expand_all(MG_TTABLE_CHART(chart));
+	g_object_unref(model);
+	return hpaned;
+}
+
+static void
+ttable_view_ttable_status_updated	(MgTtableChart	*chart,
+					 const gchar	*message,
+					 MgView		*view)
+{
+	bonobo_ui_component_set_status (view->ui_component,message,NULL);
+}
+
+static void
+ttable_view_project_loaded_cb	(MrpProject	*project,
+				 MgView		*view)
+{
+	GtkTreeModel *model;
+	if (project == view->priv->project) {
+		gtk_tree_view_expand_all (GTK_TREE_VIEW (view->priv->tree));
+		planner_ttable_chart_expand_all (view->priv->chart);
+		return;
+	}
+	model = GTK_TREE_MODEL (planner_ttable_model_new (project));
+	planner_ttable_tree_set_model (MG_TTABLE_TREE (view->priv->tree),
+			MG_TTABLE_MODEL(model));
+	planner_ttable_chart_set_model(MG_TTABLE_CHART(view->priv->chart),model);
+	g_object_unref (model);
+	gtk_tree_view_expand_all (GTK_TREE_VIEW (view->priv->tree));
+	planner_ttable_chart_expand_all (view->priv->chart);
+//	fprintf(stderr,"Le project a ete lu, ce qui me fait une belle jambe\n");
+}
+
+static void
+ttable_view_tree_view_realize_cb	(GtkWidget	*w,
+					 gpointer	 data)
+{
+	GtkTreeView		*tv = GTK_TREE_VIEW(w);
+	GtkWidget		*chart = data;
+	gint			 row_height;
+	gint			 header_height;
+	gint			 height;
+	GList			*cols, *l;
+	GtkTreeViewColumn	*col;
+	GtkRequisition		 req;
+	
+	cols = gtk_tree_view_get_columns (tv);
+	row_height = 0;
+	header_height = 0;
+	for (l = cols; l; l = l->next) {
+		col = l->data;
+		gtk_widget_size_request (col->button, &req);
+		header_height = MAX (header_height, req.height);
+		gtk_tree_view_column_cell_get_size (col,NULL,NULL,NULL,NULL,&height);
+		row_height = MAX (row_height, height);
+	}
+	g_object_set (chart,"header_height",header_height,"row_height",row_height,NULL);
+}
+
+static void
+ttable_view_row_expanded		(GtkTreeView		*tree_view,
+					 GtkTreeIter		*iter,
+					 GtkTreePath		*path,
+					 gpointer		 data)
+{
+	MgTtableChart *chart = data;
+	fprintf(stderr,"Je transmet l'expand-row au chart\n");
+	planner_ttable_chart_expand_row(chart,path);
+}
+
+static void
+ttable_view_row_collapsed		(GtkTreeView		*tree_view,
+					 GtkTreeIter		*iter,
+					 GtkTreePath		*path,
+					 gpointer		 data)
+{
+	MgTtableChart *chart = data;
+	fprintf(stderr,"Je transmet le collapse-row au chart\n");
+	planner_ttable_chart_collapse_row(chart,path);
+}
+
+static void
+ttable_view_expand_all		(MgTtableTree	*tree,
+				 MgTtableChart	*chart)
+{
+	if (!MG_IS_TTABLE_TREE(tree)) {
+		fprintf(stderr,"Expand sur pas un MgTtableTree\n");
+		return;
+	}
+	if (!MG_IS_TTABLE_CHART(chart)) {
+		fprintf(stderr,"J'ai pas recu un MgTtableChart\n");
+		return;
+	}
+	g_signal_handlers_block_by_func(tree,
+					ttable_view_row_expanded,
+					chart);
+	fprintf(stderr,"Je transmet l'expand-all\n");
+	planner_ttable_tree_expand_all(tree);
+	planner_ttable_chart_expand_all(chart);
+	g_signal_handlers_unblock_by_func(tree,
+					  ttable_view_row_expanded,
+					  chart);
+}
+
+static void
+ttable_view_collapse_all	(MgTtableTree	*tree,
+				 MgTtableChart	*chart)
+{
+	if (!MG_IS_TTABLE_TREE(tree)) {
+		fprintf(stderr,"Expand sur pas un MgTtableTree\n");
+		return;
+	}
+	if (!MG_IS_TTABLE_CHART(chart)) {
+		fprintf(stderr,"J'ai pas recu un MgTtableChart\n");
+		return;
+	}
+	g_signal_handlers_block_by_func(tree,
+					ttable_view_row_collapsed,
+					chart);
+	fprintf(stderr,"Je transmet le collapse-all\n");
+	planner_ttable_tree_collapse_all(tree);
+	planner_ttable_chart_collapse_all(chart);
+	g_signal_handlers_unblock_by_func(tree,
+					  ttable_view_row_collapsed,
+					  chart);
+}
+
+//Quid? :
+//planner_ttable_print_data_new
+//planner_ttable_print_do
+//planner_ttable_print_get_n_pages
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
+               "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd">
+<book id="index" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <bookinfo>
+    <title>Libplanner Reference Manual</title>
+  </bookinfo>
+
+  <chapter>
+    <title>Libplanner API</title>
+    <xi:include href="xml/mrp-application.xml"/>
+    <xi:include href="xml/mrp-assignment.xml"/>
+    <xi:include href="xml/mrp-calendar.xml"/>
+    <xi:include href="xml/mrp-group.xml"/>
+    <xi:include href="xml/mrp-object.xml"/>
+    <xi:include href="xml/mrp-project.xml"/>
+    <xi:include href="xml/mrp-relation.xml"/>
+    <xi:include href="xml/mrp-resource.xml"/>
+    <xi:include href="xml/mrp-task.xml"/>
+    <xi:include href="xml/mrp-error.xml"/>
+    <xi:include href="xml/mrp-property.xml"/>
+    <xi:include href="xml/mrp-time.xml"/>
+    <xi:include href="xml/mrp-day.xml"/>
+  </chapter>
+</book>

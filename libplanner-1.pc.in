@@ -1,0 +1,12 @@
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+libdir=@libdir@
+includedir=@includedir@
+
+Name: libplanner
+Description: Support library for Planner
+Requires: glib-2.0 gmodule-2.0 gobject-2.0 libxml-2.0 libgsf-1
+Version: @VERSION@
+Libs: -L${libdir} -lplanner @PG_LIBS@
+Cflags: -I${includedir}/planner-1.0 @PG_CFLAGS@
+

@@ -1,0 +1,151 @@
+<!-- ##### SECTION Title ##### -->
+MrpProperty
+
+<!-- ##### SECTION Short_Description ##### -->
+represents a custom property in the project.
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+MrpProperty is a typedef to #GParamSpec. It is used to add properties to
+projects, resources and tasks in run time, for example by the user of a
+GUI application, or plugins that add functionality.
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### TYPEDEF MrpProperty ##### -->
+<para>
+Object representing a custom property in the project.
+</para>
+
+
+<!-- ##### ENUM MrpPropertyType ##### -->
+<para>
+The different types of custom properties. Cost and duration are simply
+float and integer values, but the extra information provided makes it
+possible to format the values properly in a GUI.
+</para>
+
+@MRP_PROPERTY_TYPE_NONE: invalid (unset type)
+@MRP_PROPERTY_TYPE_INT: integer type
+@MRP_PROPERTY_TYPE_FLOAT: float type
+@MRP_PROPERTY_TYPE_STRING: string type
+@MRP_PROPERTY_TYPE_STRING_LIST: not implemented
+@MRP_PROPERTY_TYPE_DATE: date type
+@MRP_PROPERTY_TYPE_DURATION: duration type
+@MRP_PROPERTY_TYPE_COST: cost type (float)
+
+<!-- ##### FUNCTION mrp_property_new ##### -->
+<para>
+
+</para>
+
+@name: 
+@type: 
+@label: 
+@description: 
+@user_defined: 
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_property_get_name ##### -->
+<para>
+
+</para>
+
+@property: 
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_property_get_property_type ##### -->
+<para>
+
+</para>
+
+@property: 
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_property_set_label ##### -->
+<para>
+
+</para>
+
+@property: 
+@label: 
+
+
+<!-- ##### FUNCTION mrp_property_get_label ##### -->
+<para>
+
+</para>
+
+@property: 
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_property_set_description ##### -->
+<para>
+
+</para>
+
+@property: 
+@description: 
+
+
+<!-- ##### FUNCTION mrp_property_get_description ##### -->
+<para>
+
+</para>
+
+@property: 
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_property_set_user_defined ##### -->
+<para>
+
+</para>
+
+@property: 
+@user_defined: 
+
+
+<!-- ##### FUNCTION mrp_property_get_user_defined ##### -->
+<para>
+
+</para>
+
+@property: 
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_property_ref ##### -->
+<para>
+
+</para>
+
+@property: 
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_property_unref ##### -->
+<para>
+
+</para>
+
+@property: 
+
+
+<!-- ##### FUNCTION mrp_property_type_as_string ##### -->
+<para>
+
+</para>
+
+@type: 
+@Returns: 
+
+

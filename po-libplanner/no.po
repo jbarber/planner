@@ -1,0 +1,159 @@
+# Norwegian (bokmål) translation of mrproject.
+# Copyright (C) 2001 Free Software Foundation, Inc.
+# Kjartan Maraas <kmaraas@gnome.org>, 2001.
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: mrproject 0.3\n"
+"POT-Creation-Date: 2003-12-01 15:18+0100\n"
+"PO-Revision-Date: 2003-06-07 15:10+0200\n"
+"Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
+"Language-Team: Norwegian/Bokmaal <no@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: libplanner/mrp-project.c:441
+msgid "Default"
+msgstr "Forvalg"
+
+#: libplanner/mrp-project.c:749
+#, c-format
+msgid "Couldn't find a suitable file module for loading '%s'"
+msgstr "Kunne ikke finne en passende filmodul for lasting av «%s»"
+
+#: libplanner/mrp-project.c:770 libplanner/mrp-project.c:1034
+msgid "No support for SQL storage built into this version of MrProject."
+msgstr "Ingen støtte for SQL-lagring i denne versjonen av MrProject."
+
+#: libplanner/mrp-project.c:807
+msgid "Invalid URI."
+msgstr "Ugyldig URI."
+
+#: libplanner/mrp-project.c:928
+#, c-format
+msgid "Unable to find file writer identified by '%s'"
+msgstr "Kunne ikke finne filskriver identifisert av «%s»."
+
+#: libplanner/mrp-project.c:991
+msgid "Couldn't find a suitable file module for loading project"
+msgstr "Kunne ikke finne en passende filmodul for lasting av prosjekt"
+
+#: libplanner/mrp-property.c:365
+msgid "Text"
+msgstr "Tekst"
+
+#: libplanner/mrp-property.c:367
+msgid "String list"
+msgstr "Liste med strenger"
+
+#: libplanner/mrp-property.c:369
+msgid "Integer number"
+msgstr "Heltall"
+
+#: libplanner/mrp-property.c:371
+msgid "Floating-point number"
+msgstr "Flyttall"
+
+#: libplanner/mrp-property.c:373
+msgid "Date"
+msgstr "Dato"
+
+#: libplanner/mrp-property.c:375
+msgid "Duration"
+msgstr "Varighet"
+
+#: libplanner/mrp-property.c:377
+msgid "Cost"
+msgstr "Kostnad"
+
+#: libplanner/mrp-property.c:380
+msgid "None"
+msgstr "Ingen"
+
+#: libplanner/mrp-task-manager.c:1769
+msgid "Can not add a predecessor relation between a task and its ancestor."
+msgstr ""
+"Kan ikke legge til en forgjenger-relasjon mellom en oppgave og dens opphav."
+
+#: libplanner/mrp-task-manager.c:1778 libplanner/mrp-task-manager.c:1786
+msgid "Can not add a predecessor, because it would result in a loop."
+msgstr "Kan ikke legge til et opphav fordi det ville resultere i en løkke."
+
+#: libplanner/mrp-task-manager.c:1821
+msgid "Can not move the task, since it would result in a loop."
+msgstr "Kan ikke flytte oppgaven fordi det ville resultere i en løkke."
+
+#: libplanner/mrp-task.c:1016
+msgid ""
+"Could not add a predecessor relation, because the tasks are already related."
+msgstr ""
+"Kunne ikke legge til en opphavs-relasjon fordi oppgavene allerede er "
+"relatert."
+
+#: libplanner/mrp-day.c:54
+msgid "Working"
+msgstr "Arbeid"
+
+#: libplanner/mrp-day.c:55
+msgid "A default working day"
+msgstr "En forvalgt arbeidsdag"
+
+#: libplanner/mrp-day.c:57
+msgid "Nonworking"
+msgstr "Fri"
+
+#: libplanner/mrp-day.c:58
+msgid "A default non working day"
+msgstr "En forvalgt fridag"
+
+#: libplanner/mrp-day.c:60
+msgid "Use base"
+msgstr "Bruk basis"
+
+#: libplanner/mrp-day.c:61
+msgid "Use day from base calendar"
+msgstr "Bruk dag fra basiskalender"
+
+#: libplanner/mrp-parser.c:1043 libplanner/mrp-parser.c:1138
+msgid "Could not create XML tree"
+msgstr "Kunne ikke opprette XML-tre"
+
+#: libplanner/mrp-parser.c:1104
+msgid "Could not write XML file"
+msgstr "Kunne ikke skrive XML-fil"
+
+#. Give up.
+#: libplanner/mrp-sql.c:229
+msgid "Invalid Unicode"
+msgstr "Ugyldig Unicode"
+
+#: libplanner/mrp-sql.c:2205
+#, c-format
+msgid ""
+"The project '%s' has been changed by the user '%s' since you opened it. Do "
+"you want to save anyway?"
+msgstr ""
+"Prosjekt «%s» har vært endret av bruker «%s» siden du åpnet det sist. Vil du "
+"lagre det likevel?"
+
+#: libplanner/mrp-sql.c:3443
+#, c-format
+msgid ""
+"Connection to database '%s' failed.\n"
+"%s"
+msgstr ""
+"Tilkobling til database «%s» feilet.\n"
+"%s"
+
+#: libplanner/mrp-storage-sql.c:205
+msgid "Invalid SQL URI (must start with 'sql://' and contain '#')."
+msgstr "Ugyldig URI for SQL (må starte med «sql://» og inneholde «#»)."
+
+#: libplanner/mrp-storage-sql.c:274
+msgid "Invalid SQL URI (invalid project id)."
+msgstr "Ugyldig URI for SQL (ugyldig prosjekt-ID)."
+
+#: libplanner/mrp-storage-sql.c:282
+msgid "Invalid SQL URI (no database name specified)."
+msgstr "Ugyldig URI for SQL (ingen databasenavn oppgitt)."

@@ -1,0 +1,35 @@
+This is a plugin that implements a backend for keeping project data in a
+postgres SQL database.
+
+A very brief getting started howto (change username etc to use...):
+
+
+* Init database:
+
+ initdb -D /tmp/test-db
+
+* Start server:
+
+  postmaster -D /tmp/test-db
+
+* Enable access to another user than the default:
+
+  echo 'CREATE USER rhult CREATEDB;' | psql -e
+
+* Create database:
+
+  createdb -U rhult plannerdb
+
+* Create database group:
+
+  echo 'CREATE GROUP planner WITH USER rhult;' | psql -e -U rhult -d plannerdb
+
+* Create tables:
+
+  cat database.sql | psql -e -U rhult -d plannerdb
+
+* Drop database and group to start over:
+
+  dropdb plannerdb
+  echo 'DROP GROUP planner;' | psql -e -U rhult -d plannerdb
+

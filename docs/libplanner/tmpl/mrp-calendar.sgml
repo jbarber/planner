@@ -1,0 +1,266 @@
+<!-- ##### SECTION Title ##### -->
+MrpCalendar
+
+<!-- ##### SECTION Short_Description ##### -->
+represents a calendar in the project.
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+A calendar contains the information on working/nonworking time for
+resources. A calendar has a default week, specifying the day types
+(#MrpDay) used for each day of the week by default. 
+</para>
+
+<para>
+Day types can be overriden so that a working day
+has another set of working time intervals per calendar. Certain dates
+can be overridden to use another day type as well.
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### STRUCT MrpCalendarPriv ##### -->
+<para>
+A private struct for internal use only.  The definition of this
+structure is not publically available.
+</para>
+
+
+<!-- ##### STRUCT MrpCalendar ##### -->
+<para>
+Object representing a calendar in the project.
+</para>
+
+
+<!-- ##### SIGNAL MrpCalendar::calendar-changed ##### -->
+<para>
+
+</para>
+
+@mrpcalendar: the object which received the signal.
+
+<!-- ##### ARG MrpCalendar:name ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG MrpCalendar:project ##### -->
+<para>
+
+</para>
+
+<!-- ##### STRUCT MrpInterval ##### -->
+<para>
+Represents a time interval.
+</para>
+
+
+<!-- ##### FUNCTION mrp_calendar_new ##### -->
+<para>
+
+</para>
+
+@name: 
+@project: 
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_calendar_copy ##### -->
+<para>
+
+</para>
+
+@name: 
+@calendar: 
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_calendar_derive ##### -->
+<para>
+
+</para>
+
+@name: 
+@parent: 
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_calendar_reparent ##### -->
+<para>
+
+</para>
+
+@new_parent: 
+@child: 
+
+
+<!-- ##### FUNCTION mrp_calendar_remove ##### -->
+<para>
+
+</para>
+
+@calendar: 
+
+
+<!-- ##### FUNCTION mrp_calendar_get_name ##### -->
+<para>
+
+</para>
+
+@calendar: 
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_calendar_set_name ##### -->
+<para>
+
+</para>
+
+@calendar: 
+@name: 
+
+
+<!-- ##### FUNCTION mrp_calendar_day_set_intervals ##### -->
+<para>
+
+</para>
+
+@calendar: 
+@day: 
+@intervals: 
+
+
+<!-- ##### FUNCTION mrp_calendar_day_get_intervals ##### -->
+<para>
+
+</para>
+
+@calendar: 
+@day: 
+@check_ancestors: 
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_calendar_day_get_total_work ##### -->
+<para>
+
+</para>
+
+@calendar: 
+@day: 
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_calendar_get_day ##### -->
+<para>
+
+</para>
+
+@calendar: 
+@date: 
+@check_ancestors: 
+@Returns: 
+<!-- # Unused Parameters # -->
+@time: 
+
+
+<!-- ##### FUNCTION mrp_calendar_get_default_day ##### -->
+<para>
+
+</para>
+
+@calendar: 
+@week_day: 
+@Returns: 
+<!-- # Unused Parameters # -->
+@time: 
+
+
+<!-- ##### FUNCTION mrp_calendar_set_default_days ##### -->
+<para>
+
+</para>
+
+@calendar: 
+@week_day: 
+@Varargs: 
+
+
+<!-- ##### FUNCTION mrp_calendar_set_days ##### -->
+<para>
+
+</para>
+
+@calendar: 
+@date: 
+@Varargs: 
+
+
+<!-- ##### FUNCTION mrp_calendar_get_parent ##### -->
+<para>
+
+</para>
+
+@calendar: 
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_calendar_get_children ##### -->
+<para>
+
+</para>
+
+@calendar: 
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_interval_new ##### -->
+<para>
+
+</para>
+
+@start: 
+@end: 
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_interval_copy ##### -->
+<para>
+
+</para>
+
+@interval: 
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_interval_ref ##### -->
+<para>
+
+</para>
+
+@interval: 
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_interval_unref ##### -->
+<para>
+
+</para>
+
+@interval: 
+
+
+<!-- ##### FUNCTION mrp_interval_get_absolute ##### -->
+<para>
+
+</para>
+
+@interval: 
+@offset: 
+@start: 
+@end: 
+
+

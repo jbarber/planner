@@ -1,0 +1,432 @@
+# French translation of libmrproject.
+# Copyright (C) 2002-2003 Free Software Foundation, Inc.
+# Cédric Delfosse <cdelfosse@free.fr>, 2002.
+# Benjamin Bayart <benjamin@sitadelle.com>, 2002.
+# Christophe Merlet (RedFox) <redfox@redfoxcenter.org>, 2003.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: MrProject Library 0.10pre\n"
+"POT-Creation-Date: 2003-12-01 15:18+0100\n"
+"PO-Revision-Date: 2003-06-09 14:06+0200\n"
+"Last-Translator: Christophe Merlet (RedFox) <redfox@redfoxcenter.org>\n"
+"Language-Team: GNOME French Team <gnomefr@traduc.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Report-Msgid-Bugs-To: \n"
+
+#: libplanner/mrp-project.c:441
+msgid "Default"
+msgstr "Défaut"
+
+#: libplanner/mrp-project.c:749
+#, c-format
+msgid "Couldn't find a suitable file module for loading '%s'"
+msgstr "Impossible de trouver un module adéquat pour charger « %s »"
+
+#: libplanner/mrp-project.c:770 libplanner/mrp-project.c:1034
+msgid "No support for SQL storage built into this version of MrProject."
+msgstr ""
+"Aucun support de stockage SQL construit dans cette version de MrProject."
+
+#: libplanner/mrp-project.c:807
+msgid "Invalid URI."
+msgstr "URI non valide"
+
+#: libplanner/mrp-project.c:928
+#, c-format
+msgid "Unable to find file writer identified by '%s'"
+msgstr "Incapable de trouver le rédacteur du fichier identifié par « %s »"
+
+#: libplanner/mrp-project.c:991
+msgid "Couldn't find a suitable file module for loading project"
+msgstr "Ne peut trouver un fichier de module adéquat pour charger le projet"
+
+#: libplanner/mrp-property.c:365
+msgid "Text"
+msgstr "Texte"
+
+#: libplanner/mrp-property.c:367
+msgid "String list"
+msgstr "Liste de chaînes"
+
+#: libplanner/mrp-property.c:369
+msgid "Integer number"
+msgstr "Nombre entier"
+
+#: libplanner/mrp-property.c:371
+msgid "Floating-point number"
+msgstr "Nombre à virgule flottante"
+
+#: libplanner/mrp-property.c:373
+msgid "Date"
+msgstr "Date"
+
+#: libplanner/mrp-property.c:375
+msgid "Duration"
+msgstr "Durée"
+
+#: libplanner/mrp-property.c:377
+msgid "Cost"
+msgstr "Coût"
+
+#: libplanner/mrp-property.c:380
+msgid "None"
+msgstr "(Aucune)"
+
+#: libplanner/mrp-task-manager.c:1769
+msgid "Can not add a predecessor relation between a task and its ancestor."
+msgstr ""
+"Impossible d'ajouter une relation de prédécesseur entre une tâche et son "
+"ancêtre."
+
+#: libplanner/mrp-task-manager.c:1778 libplanner/mrp-task-manager.c:1786
+msgid "Can not add a predecessor, because it would result in a loop."
+msgstr ""
+"Impossible d'ajouter un prédécesseur, car cela engendrerait une boucle."
+
+#: libplanner/mrp-task-manager.c:1821
+msgid "Can not move the task, since it would result in a loop."
+msgstr "Impossible de déplacer la tâche, car cela engendrerait une boucle."
+
+#: libplanner/mrp-task.c:1016
+msgid ""
+"Could not add a predecessor relation, because the tasks are already related."
+msgstr ""
+"Ne peut ajouter une relation de prédécesseur, car les tâches sont déjà liées."
+
+#: libplanner/mrp-day.c:54
+msgid "Working"
+msgstr "Travaillé"
+
+#: libplanner/mrp-day.c:55
+msgid "A default working day"
+msgstr "Un jour travaillé normal"
+
+#: libplanner/mrp-day.c:57
+msgid "Nonworking"
+msgstr "Chômé"
+
+#: libplanner/mrp-day.c:58
+msgid "A default non working day"
+msgstr "Un jour chômé normal"
+
+#: libplanner/mrp-day.c:60
+msgid "Use base"
+msgstr "Utiliser la base"
+
+#: libplanner/mrp-day.c:61
+msgid "Use day from base calendar"
+msgstr "Utiliser le jour du calendrier parent"
+
+#: libplanner/mrp-parser.c:1043 libplanner/mrp-parser.c:1138
+msgid "Could not create XML tree"
+msgstr "Ne peut créer l'arborescense XML"
+
+#: libplanner/mrp-parser.c:1104
+msgid "Could not write XML file"
+msgstr "Ne peut écrire le fichier XML"
+
+#. Give up.
+#: libplanner/mrp-sql.c:229
+msgid "Invalid Unicode"
+msgstr "Unicode non valide"
+
+#: libplanner/mrp-sql.c:2205
+#, c-format
+msgid ""
+"The project '%s' has been changed by the user '%s' since you opened it. Do "
+"you want to save anyway?"
+msgstr ""
+"Le projet « %s » a été modifié par l'utilisateur « %s » depuis la dernière "
+"fois que vous l'avez ouvert. Voulez-vous l'enregistrer malgré tout ?"
+
+#: libplanner/mrp-sql.c:3443
+#, c-format
+msgid ""
+"Connection to database '%s' failed.\n"
+"%s"
+msgstr ""
+"La connexion à la base de données « %s » a échoué.\n"
+"%s"
+
+#: libplanner/mrp-storage-sql.c:205
+msgid "Invalid SQL URI (must start with 'sql://' and contain '#')."
+msgstr "URI SQL non valide (doit commencer par « sql:// » et contenir « # »)."
+
+#: libplanner/mrp-storage-sql.c:274
+msgid "Invalid SQL URI (invalid project id)."
+msgstr "URI SQL non valide (id de projet non valide)."
+
+#: libplanner/mrp-storage-sql.c:282
+msgid "Invalid SQL URI (no database name specified)."
+msgstr "URI SQL non valide (aucun nom de base de données spécifié)."
+
+#~ msgid "Jan"
+#~ msgstr "Jan"
+
+#~ msgid "Feb"
+#~ msgstr "Fév"
+
+#~ msgid "Mar"
+#~ msgstr "Mar"
+
+#~ msgid "Apr"
+#~ msgstr "Avr"
+
+#~ msgid "May"
+#~ msgstr "Mai"
+
+#~ msgid "Jun"
+#~ msgstr "Jun"
+
+#~ msgid "Jul"
+#~ msgstr "Jui"
+
+#~ msgid "Aug"
+#~ msgstr "Aoû"
+
+#~ msgid "Sep"
+#~ msgstr "Sep"
+
+#~ msgid "Oct"
+#~ msgstr "Oct"
+
+#~ msgid "Nov"
+#~ msgstr "Nov"
+
+#~ msgid "Dec"
+#~ msgstr "Déc"
+
+#~ msgid "January"
+#~ msgstr "Janvier"
+
+#~ msgid "February"
+#~ msgstr "Février"
+
+#~ msgid "March"
+#~ msgstr "Mars"
+
+#~ msgid "April"
+#~ msgstr "Avril"
+
+#~ msgid "June"
+#~ msgstr "Juin"
+
+#~ msgid "July"
+#~ msgstr "Juillet"
+
+#~ msgid "August"
+#~ msgstr "Août"
+
+#~ msgid "September"
+#~ msgstr "Septembre"
+
+#~ msgid "October"
+#~ msgstr "Octobre"
+
+#~ msgid "November"
+#~ msgstr "Novembre"
+
+#~ msgid "December"
+#~ msgstr "Décembre"
+
+#~ msgid "J 1"
+#~ msgstr "J 1"
+
+#~ msgid "F 2"
+#~ msgstr "F 2"
+
+#~ msgid "M 3"
+#~ msgstr "M 3"
+
+#~ msgid "A 4"
+#~ msgstr "A 4"
+
+#~ msgid "M 5"
+#~ msgstr "M 5"
+
+#~ msgid "J 6"
+#~ msgstr "J 6"
+
+#~ msgid "J 7"
+#~ msgstr "J 7"
+
+#~ msgid "A 8"
+#~ msgstr "A 8"
+
+#~ msgid "S 9"
+#~ msgstr "S 9"
+
+#~ msgid "O 10"
+#~ msgstr "O 10"
+
+#~ msgid "N 11"
+#~ msgstr "N 11"
+
+#~ msgid "D 12"
+#~ msgstr "D 12"
+
+#~ msgid "Sun"
+#~ msgstr "Dim"
+
+#~ msgid "Mon"
+#~ msgstr "Lun"
+
+#~ msgid "Tue"
+#~ msgstr "Mar"
+
+#~ msgid "Wed"
+#~ msgstr "Mer"
+
+#~ msgid "Thu"
+#~ msgstr "Jeu"
+
+#~ msgid "Fri"
+#~ msgstr "Ven"
+
+#~ msgid "Sat"
+#~ msgstr "Sam"
+
+#~ msgid "Sunday"
+#~ msgstr "Dimanche"
+
+#~ msgid "Monday"
+#~ msgstr "Lundi"
+
+#~ msgid "Tuesday"
+#~ msgstr "Mardi"
+
+#~ msgid "Wednesday"
+#~ msgstr "Mercredi"
+
+#~ msgid "Thursday"
+#~ msgstr "Jeudi"
+
+#~ msgid "Friday"
+#~ msgstr "Vendredi"
+
+#~ msgid "Saturday"
+#~ msgstr "Samedi"
+
+#~ msgid ""
+#~ "Could not load file.\n"
+#~ "Error was: \"%s\""
+#~ msgstr ""
+#~ "Échoué à la lecture du fichier.\n"
+#~ "L'erreur fût: « %s »"
+
+#~ msgid "No MPX header"
+#~ msgstr "Pas d'en-tête MPX"
+
+#~ msgid "Not an mpx '%s'"
+#~ msgstr "Pas un fichier mpx « %s »"
+
+#~ msgid "Failed to load file %s."
+#~ msgstr "Échec du chargement de %s."
+
+#~ msgid "%s is not valid XML."
+#~ msgstr "%s n'est pas un fichier XML valide."
+
+#~ msgid "\"%s\" is not a valid MrProject file"
+#~ msgstr "« %s » n'est pas un fichier MrProject valide"
+
+#~ msgid "Group Name"
+#~ msgstr "Nom du groupe"
+
+#~ msgid "Group Manager Name"
+#~ msgstr "Nom du gestionnaire du groupe"
+
+#~ msgid "Group Manager Phone"
+#~ msgstr "Numéro de téléphone du gestionnaire du groupe"
+
+#~ msgid "Group Manager Email"
+#~ msgstr "Adresse électronique du gestionnaire du groupe"
+
+#~ msgid "Project start"
+#~ msgstr "Début du Projet"
+
+#~ msgid "The start date of the project"
+#~ msgstr "La date de début du projet"
+
+#~ msgid "Project Name"
+#~ msgstr "Nom du projet"
+
+#~ msgid "Organization"
+#~ msgstr "Organisation"
+
+#~ msgid "Project Manager"
+#~ msgstr "Gestionnaire du projet"
+
+#~ msgid "Default group for new resources"
+#~ msgstr "Groupe par défaut des nouvelles ressources"
+
+#~ msgid "Resource Name"
+#~ msgstr "Nom de la ressource"
+
+#~ msgid "Resource Group"
+#~ msgstr "Groupe de la ressource"
+
+#~ msgid "Resource Type"
+#~ msgstr "Type de la ressource"
+
+#~ msgid "Resource Units"
+#~ msgstr "Unités de la ressource"
+
+#~ msgid "Resource Email"
+#~ msgstr "Adresse électronique de la ressource"
+
+#~ msgid "Resource note"
+#~ msgstr "Note de la ressource"
+
+#~ msgid "Project"
+#~ msgstr "Projet"
+
+#~ msgid "The project that this task manager is attached to"
+#~ msgstr "Le projet auquel ce gestionnaire de tâches est lié"
+
+#~ msgid "Task name"
+#~ msgstr "Nom de la tâche"
+
+#~ msgid "Task note"
+#~ msgstr "Note sur la tâche"
+
+#~ msgid "Task start time"
+#~ msgstr "Date de début de la tâche"
+
+#~ msgid "Task finish time"
+#~ msgstr "Date de fin de la tâche"
+
+#~ msgid "Latest task start time"
+#~ msgstr "Date de début de la dernière tâche"
+
+#~ msgid "Latest task finish time"
+#~ msgstr "Date de fin de la dernière tâche"
+
+#~ msgid "Task work"
+#~ msgstr "Activité de la tâche"
+
+#~ msgid "In critical path"
+#~ msgstr "Dans le chemin critique"
+
+#~ msgid "Time constraint"
+#~ msgstr "Contrainte de temps"
+
+#~ msgid "Percent complete"
+#~ msgstr "Pourcent complétée"
+
+#~ msgid "Task with assignment"
+#~ msgstr "Tâche avec une mission"
+
+#~ msgid "Allocated resource"
+#~ msgstr "Ressource allouée"
+
+#~ msgid "Allocated units"
+#~ msgstr "Unités allouées"
+
+#~ msgid "Primary Storage Module"
+#~ msgstr "Module de stockage principal"
+
+#~ msgid "The primary storage module to use for the project"
+#~ msgstr "Le module de stockage principal à utiliser pour ce projet"

@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<project name="" company="" manager="" project-start="20020819T000000Z" mrproject-version="2">
+  <tasks>
+    <task id="1" name="t1" note="" work="28800" start="20020819T080000Z" end="20020819T170000Z" percent-complete="0">
+      <task id="2" name="t1.1" note="" work="-1" start="20020819T080000Z" end="20020819T170000Z" percent-complete="0">
+        <task id="3" name="t1.1.1" note="" work="28800" start="20020819T080000Z" end="20020819T170000Z" percent-complete="0"/>
+      </task>
+      <task id="4" name=" t1.2" note="" work="28800" start="20020819T080000Z" end="20020819T170000Z" percent-complete="0"/>
+    </task>
+    <task id="5" name="t2" note="" work="28800" start="20020823T080000Z" end="20020823T170000Z" percent-complete="0">
+      <predecessors>
+        <predecessor id="1" predecessor-id="8" type="FS"/>
+      </predecessors>
+    </task>
+    <task id="6" name="t3" note="" work="28800" start="20020820T080000Z" end="20020820T170000Z" percent-complete="0">
+      <predecessors>
+        <predecessor id="1" predecessor-id="4" type="FS"/>
+      </predecessors>
+    </task>
+    <task id="7" name="t4" note="" work="28800" start="20020821T080000Z" end="20020821T170000Z" percent-complete="0">
+      <predecessors>
+        <predecessor id="1" predecessor-id="6" type="FS"/>
+      </predecessors>
+    </task>
+    <task id="8" name="t5" note="" work="28800" start="20020822T080000Z" end="20020822T170000Z" percent-complete="0">
+      <predecessors>
+        <predecessor id="1" predecessor-id="7" type="FS"/>
+      </predecessors>
+    </task>
+  </tasks>
+  <resource-groups/>
+  <resources/>
+  <allocations/>
+</project>

@@ -1,0 +1,297 @@
+AC_INIT(AUTHORS)
+AM_INIT_AUTOMAKE(planner, 0.11)
+AM_CONFIG_HEADER(config.h)
+
+AM_MAINTAINER_MODE
+
+AC_ISC_POSIX
+AC_PROG_CC
+AC_STDC_HEADERS
+AM_DISABLE_STATIC
+AM_PROG_LIBTOOL
+
+AC_PATH_PROG(GLIB_GENMARSHAL, glib-genmarshal)
+AC_PATH_PROG(PG_CONFIG, pg_config)
+
+PLANNER_COMPILE_WARNINGS
+
+AC_PROG_INTLTOOL
+
+AC_PATH_PROG(PKG_CONFIG, pkg-config, no)
+if test x$PKG_CONFIG = xno ; then
+  AC_MSG_ERROR([*** pkg-config not found. See http://www.freedesktop.org/software/pkgconfig/])
+fi
+
+GTK_DOC_CHECK
+
+dnl ==========================================================================
+dnl
+dnl Library Dependencies, uses pkg-config to detect correct version, etc
+dnl
+dnl ==========================================================================
+
+dnl If you add a version number here, you *must* add an AC_SUBST line for
+dnl it too, or it will never make it into the spec file!
+
+LIBPLANNER_REQUIRED=0.10
+GLIB_REQUIRED=2.0.4
+GTK_REQUIRED=2.0.3
+LIBGNOMECANVAS_REQUIRED=2.0.1
+LIBGNOMEUI_REQUIRED=2.0.1
+LIBGLADE_REQUIRED=2.0.0
+LIBBONOBOUI_REQUIRED=2.0.0
+LIBGNOMEPRINTUI_REQUIRED=2.1.9
+GNOME_VFS_REQUIRED=2.0.2
+
+XML_REQUIRED=2.4.7
+LIBGSF_REQUIRED=1.4.0
+PYGTK_REQUIRED=1.99.14
+
+AC_SUBST(LIBPLANNER_REQUIRED)
+AC_SUBST(GLIB_REQUIRED)
+AC_SUBST(GTK_REQUIRED)
+AC_SUBST(LIBGNOMECANVAS_REQUIRED)
+AC_SUBST(LIBGNOMEUI_REQUIRED)
+AC_SUBST(LIBGLADE_REQUIRED)
+AC_SUBST(LIBBONOBOUI_REQUIRED)
+AC_SUBST(LIBGNOMEPRINTUI_REQUIRED)
+AC_SUBST(GNOME_VFS_REQUIRED)
+
+AC_SUBST(XML_REQUIRED)
+AC_SUBST(LIBGSF_REQUIRED)
+AC_SUBST(PYGTK_REQUIRED)
+
+dnl ================================
+dnl | planner                      |---------------------------
+dnl ================================
+PKG_CHECK_MODULES(PLANNER,
+[
+	glib-2.0 >= $GLIB_REQUIRED
+	gobject-2.0 gmodule-2.0
+	gtk+-2.0 >= $GTK_REQUIRED
+	libgnomecanvas-2.0 >= $LIBGNOMECANVAS_REQUIRED
+	libgnomeui-2.0 >= $LIBGNOMEUI_REQUIRED
+	libglade-2.0 >= $LIBGLADE_REQUIRED
+	libbonoboui-2.0 >= $LIBBONOBOUI_REQUIRED
+	libgnomeprintui-2.2 >= $LIBGNOMEPRINTUI_REQUIRED
+	gnome-vfs-2.0 >= $GNOME_VFS_REQUIRED
+])
+
+AC_SUBST(PLANNER_CFLAGS)
+AC_SUBST(PLANNER_LIBS)
+dnl -----------------------------------------------------------
+
+dnl ================================
+dnl | libplanner                   |---------------------------
+dnl ================================
+PKG_CHECK_MODULES(LIBPLANNER,
+[
+	glib-2.0 >= $GLIB_REQUIRED
+	libxml-2.0 >= $XML_REQUIRED
+	gobject-2.0 gmodule-2.0
+	libgsf-1 >= $LIBGSF_REQUIRED
+])
+
+AC_SUBST(LIBPLANNER_CFLAGS)
+AC_SUBST(LIBPLANNER_LIBS)
+dnl -----------------------------------------------------------
+
+
+dnl  ------------------
+dnl | libeggrecent    |---------------------------------------
+dnl  ------------------
+PKG_CHECK_MODULES(LIBGNOMEUI, libgnomeui-2.0 >= 2.1.1,
+ GNOMEUI_UNSTABLE="-UUSE_STABLE_LIBGNOMEUI",
+ GNOMEUI_UNSTABLE="-DUSE_STABLE_LIBGNOMEUI")
+AC_SUBST(GNOMEUI_UNSTABLE)
+dnl -----------------------------------------------------------
+
+
+dnl  ------------------
+dnl | PostGreSQL check |---------------------------------------
+dnl  ------------------
+AC_ARG_ENABLE(postgres, [  --enable-postgres       enable PostgreSQL plugin [default=yes]], enable_postgres="$enableval", enable_postgres=yes)
+
+use_postgres=no
+
+if test x$enable_postgres = xyes ; then
+  if test "x$PG_CONFIG" = "x" ; then
+    echo "*** Couldn't find pg_config. Disabling PostgreSQL support."
+  else
+    PG_LIBS="-L`$PG_CONFIG --libdir` -lpq"
+
+    cflags=`$PG_CONFIG --includedir`
+    if test "x$cflags" != "x/usr/include" ; then
+      PG_CFLAGS=-I$cflags
+    fi
+     
+    use_postgres=yes
+  fi
+fi
+AM_CONDITIONAL(HAVE_POSTGRES, test x$use_postgres != xno)
+AC_SUBST(PG_LIBS)
+AC_SUBST(PG_CFLAGS)
+dnl -----------------------------------------------------------
+
+
+dnl ================================
+dnl | HTML output file-module      |---------------------------
+dnl ================================
+PKG_CHECK_MODULES(XSLT, libxslt >= 1.0)
+XSLT_LIBS="$XSLT_LIBS -lexslt"
+AC_SUBST(XSLT_CFLAGS)
+AC_SUBST(XSLT_LIBS)
+dnl -----------------------------------------------------------
+
+
+dnl ================================
+dnl | API documentation            |---------------------------
+dnl ================================
+AC_ARG_WITH(html-dir, [  --with-html-dir=PATH    path to installed docs ])
+
+if test "x$with_html_dir" = "x" ; then
+  HTML_DIR='${datadir}/gtk-doc/html'
+else
+  HTML_DIR=$with_html_dir
+fi
+AC_SUBST(HTML_DIR)
+
+AC_CHECK_PROG(GTKDOC, gtkdoc-mkdb, true, false)
+
+gtk_doc_min_version=0.10
+if $GTKDOC ; then
+    gtk_doc_version=`gtkdoc-mkdb --version`
+    AC_MSG_CHECKING([gtk-doc version ($gtk_doc_version) >= $gtk_doc_min_version])
+
+    IFS="${IFS= 	}"; mrp_save_IFS="$IFS"; IFS="."
+    set $gtk_doc_version
+    for min in $gtk_doc_min_version ; do
+        cur=$1; shift
+        if test -z $min ; then break; fi
+        if test -z $cur ; then GTKDOC=false; break; fi
+        if test $cur -gt $min ; then break ; fi
+        if test $cur -lt $min ; then GTKDOC=false; break ; fi
+    done
+    IFS="$mrp_save_IFS"
+
+    if $GTKDOC ; then
+      AC_MSG_RESULT(yes)
+    else
+      AC_MSG_RESULT(no)
+    fi
+fi
+
+AC_CHECK_PROG(DB2HTML, db2html, true, false)
+AM_CONDITIONAL(HAVE_DOCBOOK, $DB2HTML)
+
+dnl Make people enable the gtk-doc stuff explicitely.
+AC_ARG_ENABLE(gtk-doc, [  --enable-gtk-doc        use gtk-doc to build documentation [default=auto]], enable_gtk_doc="$enableval", enable_gtk_doc=auto)
+
+if test x$enable_gtk_doc = xyes ; then
+  if test x$GTKDOC != xtrue ; then
+    enable_gtk_doc=no 
+  fi
+fi
+
+dnl NOTE: We need to use a separate automake conditional for this
+dnl       to make this work with the tarballs.
+AM_CONDITIONAL(ENABLE_GTK_DOC, test x$enable_gtk_doc = xyes)
+
+AC_PATH_PROG(SGML2HTML, sgml2html, no)
+AM_CONDITIONAL(HAVE_SGML2HTML, test x$SGML2HTML != xno)
+dnl -----------------------------------------------------------
+
+dnl  -------------
+dnl | Build Flags |--------------------------------------------
+dnl  -------------
+DOC_CFLAGS="$LIBPLANNER_CFLAGS"
+#CFLAGS="$CFLAGS $WARN_CFLAGS"
+AC_SUBST(DOC_CFLAGS)
+
+dnl scrollkeeper checks
+                                                                                
+AC_PATH_PROG(SCROLLKEEPER_CONFIG, scrollkeeper-config,no)
+if test x$SCROLLKEEPER_CONFIG = xno; then
+  AC_MSG_ERROR(Couldn't find scrollkeeper-config. Please install the scrollkeeper package)
+fi
+
+
+dnl  ------------------
+dnl | Time table       |---------------------------------------
+dnl  ------------------
+AC_ARG_ENABLE(timetable, [  --enable-timetable      enable time table view [default=no]], enable_timetable="$enableval", enable_timetable=no)
+AM_CONDITIONAL(BUILD_TIMETABLE, test x$enable_timetable != xno)
+dnl -----------------------------------------------------------
+
+
+dnl  ------------------
+dnl | Language Support |---------------------------------------
+dnl  ------------------
+GETTEXT_PACKAGE=planner
+AC_SUBST(GETTEXT_PACKAGE)
+AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE", [The prefix for our gettext translation domains.])
+
+dnl Note to translators: you MUST have .po files in both directories
+dnl po and po-libplanner before adding you language code to
+dnl ALL_LINGUAS
+
+ALL_LINGUAS="am az be ca cs da de es fa fr hu is it ja ko lv ml ms nl nn no pl pt pt_BR ru sk sr sr@Latn sv zh_CN"
+
+dnl Incomplete: el et uk
+
+AM_GLIB_GNU_GETTEXT
+
+if test "x$prefix" = "xNONE"; then
+  GNOMELOCALEDIR=$ac_default_prefix/${DATADIRNAME}/locale
+else
+  GNOMELOCALEDIR=$prefix/${DATADIRNAME}/locale
+fi
+AC_DEFINE_UNQUOTED(GNOMELOCALEDIR, "$GNOMELOCALEDIR", [The locale dir to use])
+dnl -----------------------------------------------------------
+
+
+dnl  -------------
+dnl | Build Flags |--------------------------------------------
+dnl  -------------
+AC_SUBST(CFLAGS)
+AC_SUBST(CPPFLAGS)
+AC_SUBST(LDFLAGS)
+dnl -----------------------------------------------------------
+
+
+AC_CONFIG_FILES([
+Makefile
+libplanner/Makefile
+libegg/Makefile
+libegg/recent-files/Makefile
+src/Makefile
+docs/Makefile
+docs/libplanner/Makefile
+docs/user-guide/Makefile
+docs/user-guide/C/Makefile
+po/Makefile.in
+po-libplanner/Makefile.in
+data/Makefile
+data/images/Makefile
+data/glade/Makefile
+data/ui/Makefile
+data/dtd/Makefile
+data/stylesheets/Makefile
+data/mime/Makefile
+data/planner.spec
+libplanner-1.pc
+])
+
+dnl python/Makefile
+
+AC_CONFIG_COMMANDS([sed-po-makefiles],
+[sed -e "/POTFILES =/r po-libplanner/POTFILES" po-libplanner/Makefile.in > po-libplanner/Makefile])
+
+AC_OUTPUT
+
+echo
+echo "Planner prefix    : $prefix"
+echo "PostgreSQL support: $use_postgres"
+echo "Time table view   : $enable_timetable"
+echo
+

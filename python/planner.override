@@ -1,0 +1,789 @@
+/* -*- Mode: C; c-basic-offset: 4 -*- */
+%%
+headers
+#include <Python.h>
+
+#include "pygobject.h"
+#include <libplanner/planner.h>
+#include <libplanner/mrp-storage-module.h>
+
+%%
+init
+%%
+modulename planner
+%%
+import gobject.GObject as PyGObject_Type
+%%
+ignore-glob
+  *_get_type
+  *_valist
+  mrp_string_list_* 
+%%
+ignore
+  mrp_object_set
+  mrp_object_get
+  mrp_calendar_set_days
+  mrp_calendar_set_default_days 
+  mrp_error_quark
+  mrp_time_from_tm
+  mrp_time_from_msdate_string
+  mrp_param_spec_time
+  mrp_interval_ref
+  mrp_interval_unref
+  mrp_project_task_traverse
+%%
+override mrp_task_get_assignments noargs
+static PyObject *
+_wrap_mrp_task_get_assignments(PyGObject *self)
+{
+    GList *list, *tmp;
+    PyObject *py_list;
+
+    list = mrp_task_get_assignments(MRP_TASK(self->obj));
+
+    if ((py_list = PyList_New(0)) == NULL) {
+	return NULL;
+    }
+    for (tmp = list; tmp != NULL; tmp = tmp->next) {
+	PyObject *obj = pygobject_new(G_OBJECT(tmp->data));
+
+	if (obj == NULL) {
+	    Py_DECREF(py_list);
+	    return NULL;
+	}
+	PyList_Append(py_list, obj);
+	Py_DECREF(obj);
+    }
+    return py_list;
+}
+
+%%
+override mrp_task_get_assigned_resources noargs
+static PyObject *
+_wrap_mrp_task_get_assigned_resources(PyGObject *self)
+{
+    GList *list, *tmp;
+    PyObject *py_list;
+
+    list = mrp_task_get_assigned_resources(MRP_TASK(self->obj));
+
+    if ((py_list = PyList_New(0)) == NULL) {
+	g_list_free(list);
+	return NULL;
+    }
+    for (tmp = list; tmp != NULL; tmp = tmp->next) {
+	PyObject *obj = pygobject_new(G_OBJECT(tmp->data));
+
+	if (obj == NULL) {
+	    g_list_free(list);
+	    Py_DECREF(py_list);
+	    return NULL;
+	}
+	PyList_Append(py_list, obj);
+	Py_DECREF(obj);
+    }
+    g_list_free(list);
+    return py_list;
+}
+
+%%
+override mrp_task_get_successor_relations noargs
+static PyObject *
+_wrap_mrp_task_get_successor_relations(PyGObject *self)
+{
+    GList *list, *tmp;
+    PyObject *py_list;
+
+    list = mrp_task_get_successor_relations(MRP_TASK(self->obj));
+
+    if ((py_list = PyList_New(0)) == NULL) {
+	return NULL;
+    }
+    for (tmp = list; tmp != NULL; tmp = tmp->next) {
+	PyObject *obj = pygobject_new(G_OBJECT(tmp->data));
+
+	if (obj == NULL) {
+	    Py_DECREF(py_list);
+	    return NULL;
+	}
+	PyList_Append(py_list, obj);
+	Py_DECREF(obj);
+    }
+    return py_list;
+}
+
+%%
+override mrp_task_get_predecessor_relations noargs
+static PyObject *
+_wrap_mrp_task_get_predecessor_relations(PyGObject *self)
+{
+    GList *list, *tmp;
+    PyObject *py_list;
+
+    list = mrp_task_get_predecessor_relations(MRP_TASK(self->obj));
+
+    if ((py_list = PyList_New(0)) == NULL) {
+	return NULL;
+    }
+    for (tmp = list; tmp != NULL; tmp = tmp->next) {
+	PyObject *obj = pygobject_new(G_OBJECT(tmp->data));
+
+	if (obj == NULL) {
+	    Py_DECREF(py_list);
+	    return NULL;
+	}
+	PyList_Append(py_list, obj);
+	Py_DECREF(obj);
+    }
+    return py_list;
+}
+%%
+override mrp_day_new args
+static int
+_wrap_mrp_day_new(PyGBoxed *self, PyObject *args)
+{
+    PyGObject *py_project;
+    char *name, *description;
+
+    self->gtype = MRP_TYPE_DAY;
+    self->free_on_dealloc = FALSE;
+    self->boxed = NULL;
+
+    if (!PyArg_ParseTuple (args, "O!ss:mrp_day_new",
+			   &PyGObject_Type, &py_project, &name, &description)) {
+	return -1;
+    }
+    
+    self->boxed = mrp_day_add(MRP_PROJECT (py_project->obj), name, description);
+    if (!self->boxed) {
+	PyErr_SetString(PyExc_RuntimeError,
+			"could not create MrpDay object");
+	return -1;
+    }
+
+    self->free_on_dealloc = TRUE;
+    return 0;
+}
+%%
+override mrp_day_get_all args
+static PyObject *
+_wrap_mrp_day_get_all (PyObject *self, PyObject *args)
+{
+    PyGObject *project;
+    GList     *days, *l;
+    PyObject  *tuple;
+    gint       i;
+    
+    if (!PyArg_ParseTuple (args, "O!:mrp_day_get_all", &PyMrpProject_Type, &project)) {
+	return NULL;
+    }
+    
+    days = mrp_day_get_all (MRP_PROJECT (project->obj));
+    tuple = PyTuple_New (g_list_length (days));
+    for (l = days, i = 0; l; l = l->next, ++i) {
+	PyObject *boxed;
+	
+	boxed = pyg_boxed_new (MRP_TYPE_DAY, l->data, FALSE, FALSE);
+	
+	PyTuple_SET_ITEM (tuple, i, boxed);
+    }
+    return tuple;
+}
+%%
+override mrp_resource_compare args
+static PyObject *
+_wrap_mrp_resource_compare (PyObject *self, PyObject *args)
+{
+	PyGObject *lhs, *rhs;
+
+	if (!PyArg_ParseTuple (args, "O!O!:mrp_resource_compare",
+			       &PyMrpResource_Type, &lhs,
+			       &PyMrpResource_Type, &rhs)) {
+		return NULL;
+	}
+	return PyInt_FromLong (mrp_resource_compare (lhs->obj, rhs->obj));
+}
+%%
+override mrp_task_compare args
+static PyObject *
+_wrap_mrp_task_compare (PyObject *self, PyObject *args)
+{
+	PyGObject *lhs, *rhs;
+
+	if (!PyArg_ParseTuple (args, "O!O!:mrp_task_compare",
+			       &PyMrpTask_Type, &lhs, &PyMrpTask_Type, &rhs)) {
+		return NULL;
+	}
+	return PyInt_FromLong (mrp_task_compare (lhs->obj, rhs->obj));
+}
+%%
+override mrp_interval_new args
+static int
+_wrap_mrp_interval_new(PyGBoxed *self, PyObject *args)
+{
+    glong start, end;
+
+    self->gtype = MRP_TYPE_INTERVAL;
+    self->free_on_dealloc = FALSE;
+    self->boxed = NULL;
+
+    if (!PyArg_ParseTuple (args, "ll:mrp_interval_new", &start, &end)) {
+	return -1;
+    }
+    
+    self->boxed = mrp_interval_new(start, end);
+    if (!self->boxed) {
+	PyErr_SetString(PyExc_RuntimeError,
+			"could not create MrpInterval object");
+	return -1;
+    }
+
+    self->free_on_dealloc = TRUE;
+    return 0;
+}
+%%
+override mrp_interval_get_absolute noargs
+static PyObject *
+_wrap_mrp_interval_get_absolute(PyGObject *self)
+{
+    mrptime start, end;
+
+    mrp_interval_get_absolute((MrpInterval*)self->obj, 0, &start, &end);
+    return Py_BuildValue("(ll)", start, end);
+}
+%%
+override mrp_calendar_day_set_intervals args
+static PyObject *
+_wrap_mrp_calendar_day_set_intervals (PyGObject *self, PyObject *args)
+{
+    PyGBoxed *py_day;
+    PyObject *py_ivals;
+    GList    *ivals = NULL;
+    int       len, i;
+
+    if (!PyArg_ParseTuple (args,
+			   "O!O!:mrp_calendar_day_set_intervals",
+			   &PyGBoxed_Type, &py_day, &PyList_Type, &py_ivals)) {
+	return NULL;
+    }
+    
+    len = PyList_Size(py_ivals);
+    for (i = 0; i < len; i++) {
+	PyObject *item = PyList_GetItem(py_ivals, i);
+	if (!pygobject_check(item, &PyGBoxed_Type)) {
+	    PyErr_SetString(PyExc_TypeError, "list item not a boxed type (day)");
+	    g_list_free(ivals);
+	    return NULL;
+	}
+	ivals = g_list_append(ivals, pygobject_get(item));
+    }
+
+    mrp_calendar_day_set_intervals(MRP_CALENDAR (self->obj), pyg_boxed_get(py_day, MrpDay), ivals);
+
+    g_list_free (ivals);
+
+    Py_INCREF (Py_None);
+    return Py_None;
+}
+%%
+override mrp_calendar_set_day args
+static PyObject *
+_wrap_mrp_calendar_set_day (PyGObject *self, PyObject *args)
+{
+    PyGBoxed *py_day;
+    MrpDay   *day;
+    glong     date;
+
+    if (!PyArg_ParseTuple (args,
+			   "lO!:mrp_calendar_set_day",
+			   &date, &PyGBoxed_Type, &py_day)) {
+	return NULL;
+    }
+
+    day = pyg_boxed_get(py_day, MrpDay);
+    
+    mrp_calendar_set_days(MRP_CALENDAR (self->obj),
+			  date,
+			  day,
+			  -1);
+
+    Py_INCREF (Py_None);
+    return Py_None;
+}
+%%
+override mrp_calendar_set_default_week kwargs
+static PyObject *
+_wrap_mrp_calendar_set_default_week (PyGObject *self, PyObject *args, PyObject *kwargs)
+{
+    static char *kwlist[] = { "mon", "tue", "wed", "thu", "fri", "sat", "sun", NULL };
+    PyGBoxed *py_mon;
+    PyGBoxed *py_tue;
+    PyGBoxed *py_wed;
+    PyGBoxed *py_thu;
+    PyGBoxed *py_fri;
+    PyGBoxed *py_sat;
+    PyGBoxed *py_sun;
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs,
+				     "OOOOOOO:set_default_week", kwlist,
+				     &py_mon, &py_tue, &py_wed, &py_thu, &py_fri, &py_sat, &py_sun))
+	return NULL;
+    
+    mrp_calendar_set_default_days(MRP_CALENDAR(self->obj),
+				  0, pyg_boxed_get(py_sun, MrpDay),
+				  1, pyg_boxed_get(py_mon, MrpDay),
+				  2, pyg_boxed_get(py_tue, MrpDay),
+				  3, pyg_boxed_get(py_wed, MrpDay),
+				  4, pyg_boxed_get(py_thu, MrpDay),
+				  5, pyg_boxed_get(py_fri, MrpDay),
+				  6, pyg_boxed_get(py_sat, MrpDay),
+				  -1);
+
+    Py_INCREF (Py_None);
+    return Py_None;
+}
+%%
+override mrp_resource_get_assignments noargs
+static PyObject *
+_wrap_mrp_resource_get_assignments(PyGObject *self)
+{
+    GList *list, *l;
+    PyObject *py_list;
+    
+    list = mrp_resource_get_assignments(MRP_RESOURCE (self->obj));
+    
+    if ((py_list = PyList_New(0)) == NULL) {
+        return NULL;
+    }
+    
+    for (l = list; l; l = l->next) {
+        PyObject *obj = pygobject_new (G_OBJECT(l->data));
+        
+        if (obj == NULL) {
+            Py_DECREF(py_list);
+            return NULL;
+        }
+        PyList_Append(py_list, obj);
+        Py_DECREF(obj);
+    }
+    
+    return py_list;
+}
+
+%%
+override mrp_resource_get_assigned_tasks noargs
+static PyObject *
+_wrap_mrp_resource_get_assigned_tasks(PyGObject *self)
+{
+    GList *list, *l;
+    PyObject *py_list;
+    
+    list = mrp_resource_get_assigned_tasks(MRP_RESOURCE (self->obj));
+    
+    if ((py_list = PyList_New(0)) == NULL) {
+        g_list_free(list);
+        return NULL;
+    }
+    
+    for (l = list; l; l = l->next) {
+        PyObject *obj = pygobject_new (G_OBJECT(l->data));
+        
+        if (obj == NULL) {
+            g_list_free(list);
+            Py_DECREF(py_list);
+            return NULL;
+        }
+        PyList_Append(py_list, obj);
+        Py_DECREF(obj);
+    }
+    g_list_free(list);
+
+    return py_list;
+}
+
+%%
+override mrp_project_get_resources noargs
+static PyObject *
+_wrap_mrp_project_get_resources(PyGObject *self)
+{
+    GList *list, *l;
+    PyObject *py_list;
+    
+    list = mrp_project_get_resources(MRP_PROJECT (self->obj));
+    
+    if ((py_list = PyList_New(0)) == NULL) {
+        return NULL;
+    }
+    
+    for (l = list; l; l = l->next) {
+        PyObject *obj = pygobject_new (G_OBJECT(l->data));
+        
+        if (obj == NULL) {
+            Py_DECREF(py_list);
+            return NULL;
+        }
+        PyList_Append(py_list, obj);
+        Py_DECREF(obj);
+    }
+    
+    return py_list;
+}
+
+%%
+override mrp_project_get_all_tasks noargs
+static PyObject *
+_wrap_mrp_project_get_all_tasks(PyGObject *self)
+{
+    GList *list, *l;
+    PyObject *py_list;
+    
+    list = mrp_project_get_all_tasks(MRP_PROJECT (self->obj));
+    
+    if ((py_list = PyList_New(0)) == NULL) {
+        return NULL;
+    }
+    
+    for (l = list; l; l = l->next) {
+        PyObject *obj = pygobject_new (G_OBJECT(l->data));
+        
+        if (obj == NULL) {
+            Py_DECREF(py_list);
+            return NULL;
+        }
+        PyList_Append(py_list, obj);
+        Py_DECREF(obj);
+    }
+    
+    return py_list;
+}
+
+%%
+override mrp_project_get_groups noargs
+static PyObject *
+_wrap_mrp_project_get_groups(PyGObject *self)
+{
+    GList *list, *l;
+    PyObject *py_list;
+    
+    list = mrp_project_get_groups(MRP_PROJECT (self->obj));
+    
+    if ((py_list = PyList_New(0)) == NULL) {
+        return NULL;
+    }
+    
+    for (l = list; l; l = l->next) {
+        PyObject *obj = pygobject_new (G_OBJECT(l->data));
+        
+        if (obj == NULL) {
+            Py_DECREF(py_list);
+            return NULL;
+        }
+        PyList_Append(py_list, obj);
+        Py_DECREF(obj);
+    }
+    
+    return py_list;
+}
+
+%%
+override mrp_calendar_day_get_intervals args
+static PyObject *
+_wrap_mrp_calendar_day_get_intervals (PyGObject *self, PyObject *args)
+{
+    MrpCalendar *calendar;
+    GList       *days, *l;
+    PyGBoxed    *py_day;
+    MrpDay      *day;
+    PyObject    *tuple;
+    gint         i;
+    gboolean     check_ancestors;
+    
+    if (!PyArg_ParseTuple (args, "O!b:mrp_calendar_get_interval",
+                           &PyGBoxed_Type, &py_day,
+                           &check_ancestors)) {
+	return NULL;
+    }
+    
+    calendar = MRP_CALENDAR(self->obj);
+    day = MRP_DAY(py_day->boxed);
+    
+    days = mrp_calendar_day_get_intervals (calendar, day, check_ancestors);
+    tuple = PyTuple_New (g_list_length (days));
+    for (l = days, i = 0; l; l = l->next, ++i) {
+	PyObject *boxed;
+	
+	boxed = pyg_boxed_new (MRP_TYPE_INTERVAL, l->data, FALSE, FALSE);
+	
+	PyTuple_SET_ITEM (tuple, i, boxed);
+    }
+    return tuple;
+}
+
+%%
+override mrp_calendar_get_children noargs
+static PyObject *
+_wrap_mrp_calendar_get_children(PyGObject *self)
+{
+    GList    *list, *l;
+    PyObject *py_list;
+    
+    list = mrp_calendar_get_children (MRP_CALENDAR (self->obj));
+    
+    if ((py_list = PyList_New(0)) == NULL) {
+        return NULL;
+    }
+    
+    for (l = list; l; l = l->next) {
+        PyObject *obj = pygobject_new (G_OBJECT(l->data));
+        
+        if (obj == NULL) {
+            Py_DECREF(py_list);
+            return NULL;
+        }
+        PyList_Append(py_list, obj);
+        Py_DECREF(obj);
+    }
+    
+    return py_list;
+}
+
+%%
+override mrp_object_get_properties noargs
+static PyObject *
+_wrap_mrp_object_get_properties(PyGObject *self)
+{
+    GList    *list, *l;
+    PyObject *py_list;
+    
+    list = mrp_object_get_properties (MRP_OBJECT (self->obj));
+    
+    if ((py_list = PyList_New(0)) == NULL) {
+        return NULL;
+    }
+    
+    for (l = list; l; l = l->next) {
+        PyObject *boxed = pyg_boxed_new (MRP_TYPE_PROPERTY, l->data, FALSE, FALSE);
+        if (boxed == NULL) {
+            Py_DECREF(py_list);
+            return NULL;
+        }
+        PyList_Append(py_list, boxed);
+        Py_DECREF(boxed);
+    }
+    
+    return py_list;
+}
+
+%%
+override mrp_project_get_properties_from_type args
+static PyObject *
+_wrap_mrp_project_get_properties_from_type (PyGObject *self, PyObject *args)
+{
+    MrpProject  *project;
+    GList       *list, *l;
+    GType        type;
+    PyObject    *py_list;
+    
+    if (!PyArg_ParseTuple (args, "i:mrp_project_get_properties_from_type",
+                           &type)) {
+	return NULL;
+    }
+    
+    project = MRP_PROJECT(self->obj);
+    
+    list = mrp_project_get_properties_from_type (project, type);
+    if ((py_list = PyList_New(0)) == NULL) {
+        return NULL;
+    }
+
+    for (l = list; l; l = l->next) {
+	PyObject *boxed = pyg_boxed_new (MRP_TYPE_PROPERTY, l->data, FALSE, FALSE);
+        if (boxed == NULL) {
+            Py_DECREF(py_list);
+            return NULL;
+        }
+        
+        PyList_Append(py_list, boxed);
+        Py_DECREF(boxed);
+    }
+    
+    return py_list;
+}
+
+%%
+override mrp_object_set_custom_property args
+static PyObject *
+_wrap_mrp_object_set_custom_property(PyGObject *self, PyObject *args)
+{
+    gchar *param_name;
+    GParamSpec *pspec;
+    GValue value = { 0 };
+    PyObject *pvalue;
+    MrpProject *project;
+
+    if (!PyArg_ParseTuple(args, "sO:GObject.set_custom_property", &param_name, &pvalue)) {
+	return NULL;
+    }
+    
+    pspec = g_object_class_find_property(G_OBJECT_GET_CLASS(self->obj),
+					 param_name);
+    if (!pspec) {
+	g_object_get (self->obj, "project", &project, NULL);
+
+	if (!project) {
+	    PyErr_SetString(PyExc_TypeError,
+			    "object is not inserted into a project");
+	    return NULL;
+	}
+	
+	pspec = G_PARAM_SPEC (mrp_project_get_property (project, 
+							param_name,
+							G_OBJECT_TYPE (self->obj)));
+		
+	if (!pspec) {
+	    PyErr_SetString(PyExc_TypeError,
+			    "the object does not support the given parameter");
+	    return NULL;
+	}
+	
+	if (!(pspec->flags & G_PARAM_WRITABLE)) {
+	    PyErr_SetString(PyExc_TypeError,
+			    "the given parameter is not writable");
+	    return NULL;
+	}
+      
+	g_value_init(&value, G_PARAM_SPEC_VALUE_TYPE(pspec));
+	if (pyg_value_from_pyobject(&value, pvalue) < 0) {
+	    PyErr_SetString(PyExc_TypeError,
+			    "could not convert argument to correct param type");
+	    return NULL;
+	}
+	
+	mrp_object_set_property(MRP_OBJECT (self->obj), pspec, &value);
+	g_value_unset(&value);
+	Py_INCREF(Py_None);
+	return Py_None;
+    } else {
+	/* Regular gobject property. */
+	g_value_init(&value, G_PARAM_SPEC_VALUE_TYPE(pspec));
+	if (pyg_value_from_pyobject(&value, pvalue) < 0) {
+	    PyErr_SetString(PyExc_TypeError,
+			    "could not convert argument to correct param type");
+	    return NULL;
+	}
+	g_object_set_property(self->obj, param_name, &value);
+	g_value_unset(&value);
+	Py_INCREF(Py_None);
+	return Py_None;
+    }
+}
+
+%%
+override mrp_object_get_custom_property args
+static PyObject *
+_wrap_mrp_object_get_custom_property(PyGObject *self, PyObject *args)
+{
+    gchar *param_name;
+    GParamSpec *pspec;
+    GValue value = { 0 };
+    PyObject *ret;
+    MrpProject *project;
+
+    if (!PyArg_ParseTuple(args, "s:get_custom_property", &param_name))
+	return NULL;
+    pspec = g_object_class_find_property(G_OBJECT_GET_CLASS(self->obj),
+					 param_name);
+    if (!pspec) {
+	g_object_get (self->obj, "project", &project, NULL);
+	
+	if (!project) {
+	    PyErr_SetString(PyExc_TypeError,
+			    "object is not inserted into a project");
+	    return NULL;
+	}
+
+	pspec = G_PARAM_SPEC (mrp_project_get_property (project, 
+							param_name,
+							G_OBJECT_TYPE (self->obj)));
+	if (!pspec) {
+	    PyErr_SetString(PyExc_TypeError,
+			    "the object does not support the given parameter");
+	    return NULL;
+	}
+
+	if (!(pspec->flags & G_PARAM_READABLE)) {
+	    PyErr_SetString(PyExc_TypeError,
+			    "the given parameter is not readable");
+	    return NULL;
+	}
+
+	g_value_init(&value, G_PARAM_SPEC_VALUE_TYPE(pspec));
+	mrp_object_get_property(MRP_OBJECT (self->obj), pspec, &value);
+	ret = pyg_value_as_pyobject(&value, TRUE);
+	g_value_unset(&value);
+	return ret;
+    } else {
+	/* Regular gobject property. */
+	g_value_init(&value, G_PARAM_SPEC_VALUE_TYPE(pspec));
+	g_object_get_property(self->obj, param_name, &value);
+	ret = pyg_value_as_pyobject(&value, TRUE);
+	g_value_unset(&value);
+	return ret;
+    }
+}
+
+%%
+override mrp_constraint_new args
+static int
+_wrap_mrp_constraint_new(PyGBoxed *self, PyObject *args)
+{
+    PyObject *py_type;
+    MrpConstraintType type;
+    glong t;
+    MrpConstraint *constraint;
+
+    self->gtype = MRP_TYPE_CONSTRAINT;
+    self->free_on_dealloc = FALSE;
+    self->boxed = NULL;
+
+    if (!PyArg_ParseTuple (args, "Ol:mrp_constraint_new", &py_type, &t)) {
+	return -1;
+    }
+
+    type = PyInt_AsLong (py_type);
+    
+    constraint = g_new0 (MrpConstraint, 1);
+    constraint->type = type;
+    constraint->time  = t;
+
+    self->boxed = constraint;
+    self->free_on_dealloc = TRUE;
+    return 0;
+}
+
+%%
+override-attr MrpConstraint.type
+static int
+_wrap_mrp_constraint__set_type(PyGBoxed *self, PyObject *value, void *closure)
+{
+    gint val;
+
+    val = PyInt_AsLong(value);
+    if (PyErr_Occurred())
+	return -1;
+    pyg_boxed_get(self, MrpConstraint)->type = val;
+    return 0;
+}
+%%
+override-attr MrpConstraint.time
+static int
+_wrap_mrp_constraint__set_time(PyGBoxed *self, PyObject *value, void *closure)
+{
+    glong val;
+
+    val = PyInt_AsLong(value);
+    if (PyErr_Occurred())
+	return -1;
+    pyg_boxed_get(self, MrpConstraint)->time = val;
+    return 0;
+}

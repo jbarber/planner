@@ -1,0 +1,132 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+/*
+ * Copyright (C) 2002 CodeFactory AB
+ * Copyright (C) 2002 Richard Hult <richard@imendio.com>
+ * Copyright (C) 2002 Mikael Hallendal <micke@imendio.com>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public
+ * License along with this program; if not, write to the
+ * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+ * Boston, MA 02111-1307, USA.
+ */
+
+#include <config.h>
+#include <signal.h>
+#include <string.h>
+#include <popt.h>
+#include <gtk/gtkwidget.h>
+#include <libgnome/gnome-i18n.h>
+#include <libgnome/gnome-program.h>
+#include <libgnomeui/gnome-ui-init.h>
+#include <libgnomeui/gnome-window-icon.h>
+#include <libbonoboui.h>
+#include "planner-application.h"
+#include "planner-main-window.h"
+
+static MgApplication *application;
+
+#if 0
+static void
+termination_handler (int signum)
+{
+	if (signum == SIGINT) {
+		planner_application_exit (application);
+	}
+}
+#endif
+
+int
+main (int argc, char **argv)
+{
+        GtkWidget          *main_window;
+        GnomeProgram       *program;
+	gchar              *geometry;
+	poptContext         popt_context;
+	const char        **args;
+#if 0
+	struct sigaction    new_action, old_action;
+#endif
+	struct poptOption   options[] = {
+		{ "geometry", 'g', POPT_ARG_STRING, &geometry, 0,
+		  N_("Create the initial window with the given geometry."), N_("GEOMETRY") },
+		{ NULL, '\0', 0, NULL, 0, NULL, NULL }
+	};
+
+#if 0
+	new_action.sa_handler = termination_handler;
+	sigemptyset (&new_action.sa_mask);
+	new_action.sa_flags = 0;
+	
+	sigaction (SIGINT, NULL, &old_action);
+	if (old_action.sa_handler != SIG_IGN) {
+		sigaction (SIGINT, &new_action, NULL);
+	}
+#endif
+
+	bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);  
+        bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
+	textdomain (GETTEXT_PACKAGE);
+
+	geometry = NULL;
+
+	program = gnome_program_init (PACKAGE, VERSION,
+				      LIBGNOMEUI_MODULE,
+				      argc, argv,
+				      GNOME_PROGRAM_STANDARD_PROPERTIES,
+				      GNOME_PARAM_POPT_TABLE, options,
+				      GNOME_PARAM_HUMAN_READABLE_NAME, "MrProject",
+				      NULL);
+
+	g_object_get (G_OBJECT (program),
+		      GNOME_PARAM_POPT_CONTEXT,
+		      &popt_context,
+		      NULL);
+
+	/* Check for argument consistency. */
+	args = poptGetArgs (popt_context);
+	if (geometry != NULL && args != NULL && args[0] != NULL && args[1] != NULL) {
+		g_warning (_("mrproject: --geometry cannot be used with more than one file."));
+		exit (1);
+	}
+
+	if (g_getenv ("MRP_G_FATAL_WARNINGS") != NULL) {
+		g_log_set_always_fatal (G_LOG_LEVEL_MASK);
+	}
+  
+	application = planner_application_new ();
+
+	main_window = planner_application_new_window (application);
+	
+	if (main_window) {
+		gnome_window_icon_set_default_from_file (
+			DATADIR "/pixmaps/gnome-mrproject.png");
+	}
+
+	if (geometry != NULL) {
+		gtk_window_parse_geometry (GTK_WINDOW (main_window), geometry);
+	}
+		
+	gtk_widget_show_all (main_window);
+
+	if (args != NULL) {
+		planner_main_window_open (MG_MAIN_WINDOW (main_window), args[0]);
+	}
+
+        bonobo_ui_main ();
+
+	g_object_unref (application);
+	
+	poptFreeContext (popt_context);
+
+        return 0;
+}

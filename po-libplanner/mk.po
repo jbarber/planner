@@ -1,0 +1,162 @@
+# translation of libmrproject.HEAD.po to Macedonian
+# translation of libmrproject.HEAD.po to
+# translation of libmrproject.HEAD.po to
+# translation of libmrproject.HEAD.po to
+# This file is distributed under the same license as the PACKAGE package.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER, 2003
+# Marko Ivanoski <marko@programmer.net>, 2003
+# Ivan Stojmirov <stojmir@linux.net.mk>, 2003
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: libmrproject.HEAD\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-06-13 20:52+0200\n"
+"PO-Revision-Date: 2003-06-15 21:37+0200\n"
+"Last-Translator: Ivan Stojmirov <stojmir@linux.net.mk>\n"
+"Language-Team: Macedonian <lug@lists.linux.net.mk>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.0\n"
+
+#: mrproject/mrp-project.c:441
+msgid "Default"
+msgstr "Стандардно"
+
+#: mrproject/mrp-project.c:749
+#, c-format
+msgid "Couldn't find a suitable file module for loading '%s'"
+msgstr "Не може да најде достојна датотека модул за вчитување '%s'"
+
+#: mrproject/mrp-project.c:770 mrproject/mrp-project.c:1034
+msgid "No support for SQL storage built into this version of MrProject."
+msgstr "Нема поддршка за SQL складирање вградено во оваа верзија на MrProject."
+
+#: mrproject/mrp-project.c:807
+msgid "Invalid URI."
+msgstr "Невалидно URI."
+
+#: mrproject/mrp-project.c:928
+#, c-format
+msgid "Unable to find file writer identified by '%s'"
+msgstr "Не е можно да се најде запишувач на датотеки идентификуван од %s"
+
+#: mrproject/mrp-project.c:991
+msgid "Couldn't find a suitable file module for loading project"
+msgstr "Не може да се најде соодветен датотечен модул за вчитување на проекти"
+
+#: mrproject/mrp-property.c:365
+msgid "Text"
+msgstr "Текст"
+
+#: mrproject/mrp-property.c:367
+msgid "String list"
+msgstr "Стринг"
+
+#: mrproject/mrp-property.c:369
+msgid "Integer number"
+msgstr "Цел број"
+
+#: mrproject/mrp-property.c:371
+msgid "Floating-point number"
+msgstr "Децимален број"
+
+#: mrproject/mrp-property.c:373
+msgid "Date"
+msgstr "Датум"
+
+#: mrproject/mrp-property.c:375
+msgid "Duration"
+msgstr "Времетраење"
+
+#: mrproject/mrp-property.c:377
+msgid "Cost"
+msgstr "Вредност"
+
+#: mrproject/mrp-property.c:380
+msgid "None"
+msgstr "Ништо"
+
+#: mrproject/mrp-task-manager.c:1769
+msgid "Can not add a predecessor relation between a task and its ancestor."
+msgstr "Не може да се додаде сродна релација помеѓу задачата и нејзиниот претходник."
+
+#: mrproject/mrp-task-manager.c:1778 mrproject/mrp-task-manager.c:1786
+msgid "Can not add a predecessor, because it would result in a loop."
+msgstr "Не може да се додаде претходник, тоа би резултирало со креирање на јамка."
+
+#: mrproject/mrp-task-manager.c:1821
+msgid "Can not move the task, since it would result in a loop."
+msgstr "Не може да се помрдне задачата, тоа би резултирало со јамка."
+
+#: mrproject/mrp-task.c:1011
+msgid "Could not add a predecessor relation, because the tasks are already related."
+msgstr "Не може да се додаде сродна релација, задачата е веќе поврзана."
+
+#: mrproject/mrp-day.c:54
+msgid "Working"
+msgstr "Работи"
+
+#: mrproject/mrp-day.c:55
+msgid "A default working day"
+msgstr "Стандарен работен ден"
+
+#: mrproject/mrp-day.c:57
+msgid "Nonworking"
+msgstr "Неработи"
+
+#: mrproject/mrp-day.c:58
+msgid "A default non working day"
+msgstr "Стандарден не работен ден"
+
+#: mrproject/mrp-day.c:60
+msgid "Use base"
+msgstr "Употреби основа"
+
+#: mrproject/mrp-day.c:61
+msgid "Use day from base calendar"
+msgstr "Употреби ден од основен календар"
+
+#: storage-modules/mrproject-1/mrp-parser.c:1043
+#: storage-modules/mrproject-1/mrp-parser.c:1138
+msgid "Could not create XML tree"
+msgstr "Не може да се креира XML дрво"
+
+#: storage-modules/mrproject-1/mrp-parser.c:1104
+msgid "Could not write XML file"
+msgstr "Не може да се запише XML датотека"
+
+#. Give up.
+#: storage-modules/sql/mrp-sql.c:229
+msgid "Invalid Unicode"
+msgstr "Невалиден Unicode"
+
+#: storage-modules/sql/mrp-sql.c:2209
+#, c-format
+msgid ""
+"The project '%s' has been changed by the user '%s' since you opened it. Do "
+"you want to save anyway?"
+msgstr "Проектот %s е промент од корисникот %s откога вие го отворивте. Дали сакате да го зачувате секако?"
+
+#: storage-modules/sql/mrp-sql.c:3447
+#, c-format
+msgid ""
+"Connection to database '%s' failed.\n"
+"%s"
+msgstr ""
+"Врска до датабазата %s е неуспешна.\n"
+"%s"
+
+#: storage-modules/sql/mrp-storage-sql.c:205
+msgid "Invalid SQL URI (must start with 'sql://' and contain '#')."
+msgstr "Невавалидно SQL URI (мора да се стартува со 'sql:// и да содржи #')."
+
+#: storage-modules/sql/mrp-storage-sql.c:274
+msgid "Invalid SQL URI (invalid project id)."
+msgstr "Невавалидно SQL URI (неважечки проект id)."
+
+#: storage-modules/sql/mrp-storage-sql.c:282
+msgid "Invalid SQL URI (no database name specified)."
+msgstr "Невавалидно SQL URI (името на базата не е дефинирано)."
+

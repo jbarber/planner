@@ -1,0 +1,1424 @@
+;; -*- scheme -*-
+
+(include "planner-types.defs")
+
+;; From /gnome/head/INSTALL/include/planner-1.0/planner/mrp-application.h
+
+(define-function mrp_application_get_type
+  (c-name "mrp_application_get_type")
+  (return-type "GType")
+)
+
+(define-function mrp_application_new
+  (c-name "mrp_application_new")
+  (is-constructor-of "MrpApplication")
+  (return-type "MrpApplication*")
+)
+
+
+;; From /gnome/head/INSTALL/include/planner-1.0/planner/mrp-assignment.h
+
+(define-function mrp_assignment_get_type
+  (c-name "mrp_assignment_get_type")
+  (return-type "GType")
+)
+
+(define-function mrp_assignment_new
+  (c-name "mrp_assignment_new")
+  (is-constructor-of "MrpAssignment")
+  (return-type "MrpAssignment*")
+)
+
+(define-method get_task
+  (of-object "MrpAssignment")
+  (c-name "mrp_assignment_get_task")
+  (return-type "MrpTask*")
+)
+
+(define-method get_resource
+  (of-object "MrpAssignment")
+  (c-name "mrp_assignment_get_resource")
+  (return-type "MrpResource*")
+)
+
+(define-method get_units
+  (of-object "MrpAssignment")
+  (c-name "mrp_assignment_get_units")
+  (return-type "gint")
+)
+
+
+
+;; From /gnome/head/INSTALL/include/planner-1.0/planner/mrp-calendar.h
+
+(define-function mrp_calendar_get_type
+  (c-name "mrp_calendar_get_type")
+  (return-type "GType")
+)
+
+(define-function mrp_calendar_new
+  (c-name "mrp_calendar_new")
+  (is-constructor-of "MrpCalendar")
+  (return-type "MrpCalendar*")
+  (parameters
+    '("const-gchar*" "name")
+    '("MrpProject*" "project")
+  )
+)
+
+(define-function mrp_calendar_copy
+  (c-name "mrp_calendar_copy")
+  (return-type "MrpCalendar*")
+  (parameters
+    '("const-gchar*" "name")
+    '("MrpCalendar*" "calendar")
+  )
+)
+
+(define-function mrp_calendar_derive
+  (c-name "mrp_calendar_derive")
+  (return-type "MrpCalendar*")
+  (parameters
+    '("const-gchar*" "name")
+    '("MrpCalendar*" "parent")
+  )
+)
+
+(define-method reparent
+  (of-object "MrpCalendar")
+  (c-name "mrp_calendar_reparent")
+  (return-type "none")
+  (parameters
+    '("MrpCalendar*" "child")
+  )
+)
+
+(define-method remove
+  (of-object "MrpCalendar")
+  (c-name "mrp_calendar_remove")
+  (return-type "none")
+)
+
+(define-method get_name
+  (of-object "MrpCalendar")
+  (c-name "mrp_calendar_get_name")
+  (return-type "const-gchar*")
+)
+
+(define-method set_name
+  (of-object "MrpCalendar")
+  (c-name "mrp_calendar_set_name")
+  (return-type "none")
+  (parameters
+    '("const-gchar*" "name")
+  )
+)
+
+(define-method day_set_intervals
+  (of-object "MrpCalendar")
+  (c-name "mrp_calendar_day_set_intervals")
+  (return-type "none")
+  (parameters
+    '("MrpDay*" "day")
+    '("GList*" "intervals")
+  )
+)
+
+(define-method day_get_intervals
+  (of-object "MrpCalendar")
+  (c-name "mrp_calendar_day_get_intervals")
+  (return-type "GList*")
+  (parameters
+    '("MrpDay*" "day")
+    '("gboolean" "check_ancestors")
+  )
+)
+
+(define-method day_get_total_work
+  (of-object "MrpCalendar")
+  (c-name "mrp_calendar_day_get_total_work")
+  (return-type "gint")
+  (parameters
+    '("MrpDay*" "day")
+  )
+)
+
+(define-method get_day
+  (of-object "MrpCalendar")
+  (c-name "mrp_calendar_get_day")
+  (return-type "MrpDay*")
+  (parameters
+    '("mrptime" "date")
+    '("gboolean" "check_ancestors")
+  )
+)
+
+(define-method get_default_day
+  (of-object "MrpCalendar")
+  (c-name "mrp_calendar_get_default_day")
+  (return-type "MrpDay*")
+  (parameters
+    '("gint" "week_day")
+  )
+)
+
+(define-method set_default_days
+  (of-object "MrpCalendar")
+  (c-name "mrp_calendar_set_default_days")
+  (return-type "none")
+  (parameters
+    '("gint" "week_day")
+  )
+  (varargs #t)
+)
+
+(define-method set_default_week
+  (of-object "MrpCalendar")
+  (c-name "mrp_calendar_set_default_week")
+  (return-type "none")
+  (parameters
+   '("MrpDay*" "sun")
+   '("MrpDay*" "mon")
+   '("MrpDay*" "tue")
+   '("MrpDay*" "wed")
+   '("MrpDay*" "thu")
+   '("MrpDay*" "fri")
+   '("MrpDay*" "sat")
+  )
+)
+
+(define-method set_days
+  (of-object "MrpCalendar")
+  (c-name "mrp_calendar_set_days")
+  (return-type "none")
+  (parameters
+    '("mrptime" "date")
+  )
+  (varargs #t)
+)
+
+(define-method set_day
+  (of-object "MrpCalendar")
+  (c-name "mrp_calendar_set_day")
+  (return-type "none")
+  (parameters
+    '("mrptime" "date")
+    '("MrpDay*" "day")
+  )
+)
+
+(define-method get_parent
+  (of-object "MrpCalendar")
+  (c-name "mrp_calendar_get_parent")
+  (return-type "MrpCalendar*")
+)
+
+(define-method get_children
+  (of-object "MrpCalendar")
+  (c-name "mrp_calendar_get_children")
+  (return-type "GList*")
+)
+
+(define-function mrp_interval_new
+  (c-name "mrp_interval_new")
+  (is-constructor-of "MrpInterval")
+  (return-type "MrpInterval*")
+  (parameters
+    '("mrptime" "start")
+    '("mrptime" "end")
+  )
+)
+
+(define-method copy
+  (of-object "MrpInterval")
+  (c-name "mrp_interval_copy")
+  (return-type "MrpInterval*")
+)
+
+(define-method ref
+  (of-object "MrpInterval")
+  (c-name "mrp_interval_ref")
+  (return-type "MrpInterval*")
+)
+
+(define-method unref
+  (of-object "MrpInterval")
+  (c-name "mrp_interval_unref")
+  (return-type "none")
+)
+
+(define-method get_absolute
+  (of-object "MrpInterval")
+  (c-name "mrp_interval_get_absolute")
+  (return-type "none")
+  (parameters
+    '("mrptime" "offset")
+    '("mrptime*" "start")
+    '("mrptime*" "end")
+  )
+)
+
+
+
+;; From /gnome/head/INSTALL/include/planner-1.0/planner/mrp-day.h
+
+(define-function mrp_day_add
+  (is-constructor-of "MrpDay")
+  (c-name "mrp_day_add")
+  (return-type "MrpDay*")
+  (parameters
+    '("MrpProject*" "project")
+    '("const-gchar*" "name")
+    '("const-gchar*" "description")
+  )
+)
+
+(define-function mrp_day_get_all
+  (c-name "mrp_day_get_all")
+  (return-type "GList*")
+  (parameters
+    '("MrpProject*" "project")
+  )
+)
+
+(define-function mrp_day_remove
+  (c-name "mrp_day_remove")
+  (return-type "none")
+  (parameters
+    '("MrpProject*" "project")
+    '("MrpDay*" "day")
+  )
+)
+
+(define-method get_id
+  (of-object "MrpDay")
+  (c-name "mrp_day_get_id")
+  (return-type "gint")
+)
+
+(define-method get_name
+  (of-object "MrpDay")
+  (c-name "mrp_day_get_name")
+  (return-type "const-gchar*")
+)
+
+(define-method set_name
+  (of-object "MrpDay")
+  (c-name "mrp_day_set_name")
+  (return-type "none")
+  (parameters
+    '("const-gchar*" "name")
+  )
+)
+
+(define-method get_description
+  (of-object "MrpDay")
+  (c-name "mrp_day_get_description")
+  (return-type "const-gchar*")
+)
+
+(define-method set_description
+  (of-object "MrpDay")
+  (c-name "mrp_day_set_description")
+  (return-type "none")
+  (parameters
+    '("const-gchar*" "description")
+  )
+)
+
+(define-method ref
+  (of-object "MrpDay")
+  (c-name "mrp_day_ref")
+  (return-type "MrpDay*")
+)
+
+(define-method unref
+  (of-object "MrpDay")
+  (c-name "mrp_day_unref")
+  (return-type "none")
+)
+
+(define-function mrp_day_get_work
+  (c-name "mrp_day_get_work")
+  (return-type "MrpDay*")
+)
+
+(define-function mrp_day_get_nonwork
+  (c-name "mrp_day_get_nonwork")
+  (return-type "MrpDay*")
+)
+
+(define-function mrp_day_get_use_base
+  (c-name "mrp_day_get_use_base")
+  (return-type "MrpDay*")
+)
+
+
+
+;; From /gnome/head/INSTALL/include/planner-1.0/planner/mrp-error.h
+
+(define-function mrp_error_quark
+  (c-name "mrp_error_quark")
+  (return-type "GQuark")
+)
+
+
+
+;; From /gnome/head/INSTALL/include/planner-1.0/planner/mrp-group.h
+
+(define-function mrp_group_get_type
+  (c-name "mrp_group_get_type")
+  (return-type "GType")
+)
+
+(define-function mrp_group_new
+  (c-name "mrp_group_new")
+  (is-constructor-of "MrpGroup")
+  (return-type "MrpGroup*")
+)
+
+(define-method get_name
+  (of-object "MrpGroup")
+  (c-name "mrp_group_get_name")
+  (return-type "const-gchar*")
+)
+
+(define-method set_name
+  (of-object "MrpGroup")
+  (c-name "mrp_group_set_name")
+  (return-type "none")
+  (parameters
+    '("const-gchar*" "name")
+  )
+)
+
+;; From /gnome/head/INSTALL/include/planner-1.0/planner/mrp-object.h
+
+(define-function mrp_object_get_type
+  (c-name "mrp_object_get_type")
+  (return-type "GType")
+)
+
+(define-method removed
+  (of-object "MrpObject")
+  (c-name "mrp_object_removed")
+  (return-type "none")
+)
+
+(define-method changed
+  (of-object "MrpObject")
+  (c-name "mrp_object_changed")
+  (return-type "none")
+)
+
+(define-function mrp_object_set
+  (c-name "mrp_object_set")
+  (return-type "none")
+  (parameters
+    '("gpointer" "object")
+    '("const-gchar*" "first_property_name")
+  )
+  (varargs #t)
+)
+
+(define-function mrp_object_get
+  (c-name "mrp_object_get")
+  (return-type "none")
+  (parameters
+    '("gpointer" "object")
+    '("const-gchar*" "first_property_name")
+  )
+  (varargs #t)
+)
+
+(define-method set_valist
+  (of-object "MrpObject")
+  (c-name "mrp_object_set_valist")
+  (return-type "none")
+  (parameters
+    '("const-gchar*" "first_property_name")
+    '("va_list" "var_args")
+  )
+)
+
+(define-method get_valist
+  (of-object "MrpObject")
+  (c-name "mrp_object_get_valist")
+  (return-type "none")
+  (parameters
+    '("const-gchar*" "first_property_name")
+    '("va_list" "var_args")
+  )
+)
+
+(define-method get_properties
+  (of-object "MrpObject")
+  (c-name "mrp_object_get_properties")
+  (return-type "GList*")
+)
+
+(define-method set_custom_property
+  (of-object "MrpObject")
+  (c-name "mrp_object_set_custom_property")
+  (return-type "none")
+  (parameters
+    '("const-gchar*" "name")
+    '("GValue*" "value")
+  )
+)
+
+(define-method get_custom_property
+  (of-object "MrpObject")
+  (c-name "mrp_object_get_custom_property")
+  (return-type "none")
+  (parameters
+    '("const-gchar*" "name")
+  )
+)
+
+;; From /gnome/head/INSTALL/include/planner-1.0/planner/mrp-project.h
+
+(define-function mrp_project_get_type
+  (c-name "mrp_project_get_type")
+  (return-type "GType")
+)
+
+(define-function mrp_project_new
+  (c-name "mrp_project_new")
+  (is-constructor-of "MrpProject")
+  (return-type "MrpProject*")
+  (parameters
+    '("MrpApplication*" "app")
+  )
+)
+
+(define-method is_empty
+  (of-object "MrpProject")
+  (c-name "mrp_project_is_empty")
+  (return-type "gboolean")
+)
+
+(define-method needs_saving
+  (of-object "MrpProject")
+  (c-name "mrp_project_needs_saving")
+  (return-type "gboolean")
+)
+
+(define-method get_project_start
+  (of-object "MrpProject")
+  (c-name "mrp_project_get_project_start")
+  (return-type "mrptime")
+)
+
+(define-method set_project_start
+  (of-object "MrpProject")
+  (c-name "mrp_project_set_project_start")
+  (return-type "none")
+  (parameters
+    '("mrptime" "start")
+  )
+)
+
+(define-method load
+  (of-object "MrpProject")
+  (c-name "mrp_project_load")
+  (return-type "gboolean")
+  (parameters
+    '("const-gchar*" "uri")
+    '("GError**" "error")
+  )
+)
+
+(define-method save
+  (of-object "MrpProject")
+  (c-name "mrp_project_save")
+  (return-type "gboolean")
+  (parameters
+    '("gboolean" "force")
+    '("GError**" "error")
+  )
+)
+
+(define-method save_as
+  (of-object "MrpProject")
+  (c-name "mrp_project_save_as")
+  (return-type "gboolean")
+  (parameters
+    '("const-gchar*" "uri")
+    '("gboolean" "force")
+    '("GError**" "error")
+  )
+)
+
+(define-method export
+  (of-object "MrpProject")
+  (c-name "mrp_project_export")
+  (return-type "gboolean")
+  (parameters
+    '("const-gchar*" "uri")
+    '("const-gchar*" "identifier")
+    '("gboolean" "force")
+    '("GError**" "error")
+  )
+)
+
+(define-method close
+  (of-object "MrpProject")
+  (c-name "mrp_project_close")
+  (return-type "none")
+)
+
+(define-method get_uri
+  (of-object "MrpProject")
+  (c-name "mrp_project_get_uri")
+  (return-type "const-gchar*")
+)
+
+(define-method get_resource_by_name
+  (of-object "MrpProject")
+  (c-name "mrp_project_get_resource_by_name")
+  (return-type "MrpResource*")
+  (parameters
+    '("const-gchar*" "name")
+  )
+)
+
+(define-method get_resources
+  (of-object "MrpProject")
+  (c-name "mrp_project_get_resources")
+  (return-type "GList*")
+)
+
+(define-method add_resource
+  (of-object "MrpProject")
+  (c-name "mrp_project_add_resource")
+  (return-type "none")
+  (parameters
+    '("MrpResource*" "resource")
+  )
+)
+
+(define-method remove_resource
+  (of-object "MrpProject")
+  (c-name "mrp_project_remove_resource")
+  (return-type "none")
+  (parameters
+    '("MrpResource*" "resource")
+  )
+)
+
+(define-method get_group_by_name
+  (of-object "MrpProject")
+  (c-name "mrp_project_get_group_by_name")
+  (return-type "MrpGroup*")
+  (parameters
+    '("const-gchar*" "name")
+  )
+)
+
+(define-method get_groups
+  (of-object "MrpProject")
+  (c-name "mrp_project_get_groups")
+  (return-type "GList*")
+)
+
+(define-method add_group
+  (of-object "MrpProject")
+  (c-name "mrp_project_add_group")
+  (return-type "none")
+  (parameters
+    '("MrpGroup*" "group")
+  )
+)
+
+(define-method remove_group
+  (of-object "MrpProject")
+  (c-name "mrp_project_remove_group")
+  (return-type "none")
+  (parameters
+    '("MrpGroup*" "group")
+  )
+)
+
+(define-method get_task_by_name
+  (of-object "MrpProject")
+  (c-name "mrp_project_get_task_by_name")
+  (return-type "MrpTask*")
+  (parameters
+    '("const-gchar*" "name")
+  )
+)
+
+
+(define-method get_all_tasks
+  (of-object "MrpProject")
+  (c-name "mrp_project_get_all_tasks")
+  (return-type "GList*")
+)
+
+(define-method insert_task
+  (of-object "MrpProject")
+  (c-name "mrp_project_insert_task")
+  (return-type "none")
+  (parameters
+    '("MrpTask*" "parent")
+    '("gint" "position")
+    '("MrpTask*" "task")
+  )
+)
+
+(define-method remove_task
+  (of-object "MrpProject")
+  (c-name "mrp_project_remove_task")
+  (return-type "none")
+  (parameters
+    '("MrpTask*" "task")
+  )
+)
+
+(define-method move_task
+  (of-object "MrpProject")
+  (c-name "mrp_project_move_task")
+  (return-type "gboolean")
+  (parameters
+    '("MrpTask*" "task")
+    '("MrpTask*" "sibling")
+    '("MrpTask*" "parent")
+    '("gboolean" "before")
+    '("GError**" "error")
+  )
+)
+
+(define-method get_root_task
+  (of-object "MrpProject")
+  (c-name "mrp_project_get_root_task")
+  (return-type "MrpTask*")
+)
+
+(define-method task_traverse
+  (of-object "MrpProject")
+  (c-name "mrp_project_task_traverse")
+  (return-type "none")
+  (parameters
+    '("MrpTask*" "root")
+    '("MrpTaskTraverseFunc" "func")
+    '("gpointer" "user_data")
+  )
+)
+
+(define-method reschedule
+  (of-object "MrpProject")
+  (c-name "mrp_project_reschedule")
+  (return-type "none")
+)
+
+(define-method calculate_task_work
+  (of-object "MrpProject")
+  (c-name "mrp_project_calculate_task_work")
+  (return-type "gint")
+  (parameters
+    '("MrpTask*" "task")
+    '("mrptime" "start")
+    '("mrptime" "finish")
+  )
+)
+
+(define-method get_properties_from_type
+  (of-object "MrpProject")
+  (c-name "mrp_project_get_properties_from_type")
+  (return-type "GList*")
+  (parameters
+    '("GType" "object_type")
+  )
+)
+
+(define-method add_property
+  (of-object "MrpProject")
+  (c-name "mrp_project_add_property")
+  (return-type "none")
+  (parameters
+    '("GType" "object_type")
+    '("MrpProperty*" "property")
+    '("gboolean" "user_defined")
+  )
+)
+
+(define-method remove_property
+  (of-object "MrpProject")
+  (c-name "mrp_project_remove_property")
+  (return-type "none")
+  (parameters
+    '("GType" "object_type")
+    '("const-gchar*" "name")
+  )
+)
+
+(define-method has_property
+  (of-object "MrpProject")
+  (c-name "mrp_project_has_property")
+  (return-type "gboolean")
+  (parameters
+    '("GType" "owner_type")
+    '("const-gchar*" "name")
+  )
+)
+
+(define-method get_root_calendar
+  (of-object "MrpProject")
+  (c-name "mrp_project_get_root_calendar")
+  (return-type "MrpCalendar*")
+)
+
+(define-method get_calendar
+  (of-object "MrpProject")
+  (c-name "mrp_project_get_calendar")
+  (return-type "MrpCalendar*")
+)
+
+
+
+;; From /gnome/head/INSTALL/include/planner-1.0/planner/mrp-property.h
+
+(define-function mrp_property_new
+  (c-name "mrp_property_new")
+  (is-constructor-of "MrpProperty")
+  (return-type "MrpProperty*")
+  (parameters
+    '("const-gchar*" "name")
+    '("MrpPropertyType" "type")
+    '("const-gchar*" "label")
+    '("const-gchar*" "description")
+    '("gboolean" "user_defined")
+  )
+)
+
+(define-method get_name
+  (of-object "MrpProperty")
+  (c-name "mrp_property_get_name")
+  (return-type "const-gchar*")
+)
+
+(define-method get_property_type
+  (of-object "MrpProperty")
+  (c-name "mrp_property_get_property_type")
+  (return-type "MrpPropertyType")
+)
+
+(define-method set_label
+  (of-object "MrpProperty")
+  (c-name "mrp_property_set_label")
+  (return-type "none")
+  (parameters
+    '("const-gchar*" "label")
+  )
+)
+
+(define-method get_label
+  (of-object "MrpProperty")
+  (c-name "mrp_property_get_label")
+  (return-type "const-gchar*")
+)
+
+(define-method set_description
+  (of-object "MrpProperty")
+  (c-name "mrp_property_set_description")
+  (return-type "none")
+  (parameters
+    '("const-gchar*" "description")
+  )
+)
+
+(define-method get_description
+  (of-object "MrpProperty")
+  (c-name "mrp_property_get_description")
+  (return-type "const-gchar*")
+)
+
+(define-method set_user_defined
+  (of-object "MrpProperty")
+  (c-name "mrp_property_set_user_defined")
+  (return-type "none")
+  (parameters
+    '("gboolean" "user_defined")
+  )
+)
+
+(define-method get_user_defined
+  (of-object "MrpProperty")
+  (c-name "mrp_property_get_user_defined")
+  (return-type "gboolean")
+)
+
+(define-method ref
+  (of-object "MrpProperty")
+  (c-name "mrp_property_ref")
+  (return-type "MrpProperty*")
+)
+
+(define-method unref
+  (of-object "MrpProperty")
+  (c-name "mrp_property_unref")
+  (return-type "none")
+)
+
+(define-method as_string
+  (of-object "MrpPropertyType")
+  (c-name "mrp_property_type_as_string")
+  (return-type "const-gchar*")
+)
+
+
+
+;; From /gnome/head/INSTALL/include/planner-1.0/planner/mrp-relation.h
+
+(define-function mrp_relation_get_type
+  (c-name "mrp_relation_get_type")
+  (return-type "GType")
+)
+
+(define-method get_predecessor
+  (of-object "MrpRelation")
+  (c-name "mrp_relation_get_predecessor")
+  (return-type "MrpTask*")
+)
+
+(define-method get_successor
+  (of-object "MrpRelation")
+  (c-name "mrp_relation_get_successor")
+  (return-type "MrpTask*")
+)
+
+(define-method get_lag
+  (of-object "MrpRelation")
+  (c-name "mrp_relation_get_lag")
+  (return-type "gint")
+)
+
+(define-method get_relation_type
+  (of-object "MrpRelation")
+  (c-name "mrp_relation_get_relation_type")
+  (return-type "MrpRelationType")
+)
+
+
+
+;; From /gnome/head/INSTALL/include/planner-1.0/planner/mrp-resource.h
+
+(define-function mrp_resource_get_type
+  (c-name "mrp_resource_get_type")
+  (return-type "GType")
+)
+
+(define-function mrp_resource_new
+  (c-name "mrp_resource_new")
+  (is-constructor-of "MrpResource")
+  (return-type "MrpResource*")
+)
+
+(define-method get_name
+  (of-object "MrpResource")
+  (c-name "mrp_resource_get_name")
+  (return-type "const-gchar*")
+)
+
+(define-method set_name
+  (of-object "MrpResource")
+  (c-name "mrp_resource_set_name")
+  (return-type "none")
+  (parameters
+    '("const-gchar*" "name")
+  )
+)
+
+(define-method assign
+  (of-object "MrpResource")
+  (c-name "mrp_resource_assign")
+  (return-type "none")
+  (parameters
+    '("MrpTask*" "task")
+    '("gint" "units")
+  )
+)
+
+(define-method get_assignments
+  (of-object "MrpResource")
+  (c-name "mrp_resource_get_assignments")
+  (return-type "GList*")
+)
+
+(define-method get_assigned_tasks
+  (of-object "MrpResource")
+  (c-name "mrp_resource_get_assigned_tasks")
+  (return-type "GList*")
+)
+
+(define-function mrp_resource_compare
+  (c-name "mrp_resource_compare")
+  (return-type "gint")
+  (parameters
+    '("gconstpointer" "a")
+    '("gconstpointer" "b")
+  )
+)
+
+(define-method get_calendar
+  (of-object "MrpResource")
+  (c-name "mrp_resource_get_calendar")
+  (return-type "MrpCalendar*")
+)
+
+(define-method set_calendar
+  (of-object "MrpResource")
+  (c-name "mrp_resource_set_calendar")
+  (return-type "none")
+  (parameters
+    '("MrpCalendar*" "calendar")
+  )
+)
+
+
+
+;; From /gnome/head/INSTALL/include/planner-1.0/planner/planner.h
+
+
+
+;; From /gnome/head/INSTALL/include/planner-1.0/planner/mrp-storage-module.h
+
+(define-function mrp_storage_module_get_type
+  (c-name "mrp_storage_module_get_type")
+  (return-type "GType")
+)
+
+(define-method load
+  (of-object "MrpStorageModule")
+  (c-name "mrp_storage_module_load")
+  (return-type "gboolean")
+  (parameters
+    '("const-gchar*" "uri")
+    '("GError**" "error")
+  )
+)
+
+(define-method save
+  (of-object "MrpStorageModule")
+  (c-name "mrp_storage_module_save")
+  (return-type "gboolean")
+  (parameters
+    '("const-gchar*" "uri")
+    '("gboolean" "force")
+    '("GError**" "error")
+  )
+)
+
+
+
+;; From /gnome/head/INSTALL/include/planner-1.0/planner/mrp-task.h
+
+(define-function mrp_task_get_type
+  (c-name "mrp_task_get_type")
+  (return-type "GType")
+)
+
+(define-function mrp_constraint_get_type
+  (c-name "mrp_constraint_get_type")
+  (return-type "GType")
+)
+
+(define-function mrp_relation_get_type
+  (c-name "mrp_relation_get_type")
+  (return-type "GType")
+)
+
+(define-function mrp_task_new
+  (c-name "mrp_task_new")
+  (is-constructor-of "MrpTask")
+  (return-type "MrpTask*")
+)
+
+(define-method get_name
+  (of-object "MrpTask")
+  (c-name "mrp_task_get_name")
+  (return-type "const-gchar*")
+)
+
+(define-method set_name
+  (of-object "MrpTask")
+  (c-name "mrp_task_set_name")
+  (return-type "none")
+  (parameters
+    '("const-gchar*" "name")
+  )
+)
+
+
+(define-method add_predecessor
+  (of-object "MrpTask")
+  (c-name "mrp_task_add_predecessor")
+  (return-type "MrpRelation*")
+  (parameters
+    '("MrpTask*" "predecessor")
+    '("MrpRelationType" "type")
+    '("glong" "lag")
+    '("GError**" "error")
+  )
+)
+
+(define-method remove_predecessor
+  (of-object "MrpTask")
+  (c-name "mrp_task_remove_predecessor")
+  (return-type "none")
+  (parameters
+    '("MrpTask*" "predecessor")
+  )
+)
+
+(define-method get_relation
+  (of-object "MrpTask")
+  (c-name "mrp_task_get_relation")
+  (return-type "MrpRelation*")
+  (parameters
+    '("MrpTask*" "task_b")
+  )
+)
+
+(define-method get_predecessor_relation
+  (of-object "MrpTask")
+  (c-name "mrp_task_get_predecessor_relation")
+  (return-type "MrpRelation*")
+  (parameters
+    '("MrpTask*" "predecessor")
+  )
+)
+
+(define-method get_successor_relation
+  (of-object "MrpTask")
+  (c-name "mrp_task_get_successor_relation")
+  (return-type "MrpRelation*")
+  (parameters
+    '("MrpTask*" "successor")
+  )
+)
+
+(define-method get_predecessor_relations
+  (of-object "MrpTask")
+  (c-name "mrp_task_get_predecessor_relations")
+  (return-type "GList*")
+)
+
+(define-method get_successor_relations
+  (of-object "MrpTask")
+  (c-name "mrp_task_get_successor_relations")
+  (return-type "GList*")
+)
+
+(define-method has_relation_to
+  (of-object "MrpTask")
+  (c-name "mrp_task_has_relation_to")
+  (return-type "gboolean")
+  (parameters
+    '("MrpTask*" "task_b")
+  )
+)
+
+(define-method has_relation
+  (of-object "MrpTask")
+  (c-name "mrp_task_has_relation")
+  (return-type "gboolean")
+)
+
+(define-method get_parent
+  (of-object "MrpTask")
+  (c-name "mrp_task_get_parent")
+  (return-type "MrpTask*")
+)
+
+(define-method get_first_child
+  (of-object "MrpTask")
+  (c-name "mrp_task_get_first_child")
+  (return-type "MrpTask*")
+)
+
+(define-method get_next_sibling
+  (of-object "MrpTask")
+  (c-name "mrp_task_get_next_sibling")
+  (return-type "MrpTask*")
+)
+
+(define-method get_n_children
+  (of-object "MrpTask")
+  (c-name "mrp_task_get_n_children")
+  (return-type "guint")
+)
+
+(define-method get_nth_child
+  (of-object "MrpTask")
+  (c-name "mrp_task_get_nth_child")
+  (return-type "MrpTask*")
+  (parameters
+    '("guint" "n")
+  )
+)
+
+(define-method get_position
+  (of-object "MrpTask")
+  (c-name "mrp_task_get_position")
+  (return-type "gint")
+)
+
+(define-method get_start
+  (of-object "MrpTask")
+  (c-name "mrp_task_get_start")
+  (return-type "mrptime")
+)
+
+(define-method get_work_start
+  (of-object "MrpTask")
+  (c-name "mrp_task_get_work_start")
+  (return-type "mrptime")
+)
+
+(define-method get_finish
+  (of-object "MrpTask")
+  (c-name "mrp_task_get_finish")
+  (return-type "mrptime")
+)
+
+(define-method get_latest_start
+  (of-object "MrpTask")
+  (c-name "mrp_task_get_latest_start")
+  (return-type "mrptime")
+)
+
+(define-method get_latest_finish
+  (of-object "MrpTask")
+  (c-name "mrp_task_get_latest_finish")
+  (return-type "mrptime")
+)
+
+(define-method get_duration
+  (of-object "MrpTask")
+  (c-name "mrp_task_get_duration")
+  (return-type "gint")
+)
+
+(define-method get_work
+  (of-object "MrpTask")
+  (c-name "mrp_task_get_work")
+  (return-type "gint")
+)
+
+(define-method get_assignments
+  (of-object "MrpTask")
+  (c-name "mrp_task_get_assignments")
+  (return-type "GList*")
+)
+
+(define-method get_assignment
+  (of-object "MrpTask")
+  (c-name "mrp_task_get_assignment")
+  (return-type "MrpAssignment*")
+  (parameters
+    '("MrpResource*" "resource")
+  )
+)
+
+(define-method reset_constraint
+  (of-object "MrpTask")
+  (c-name "mrp_task_reset_constraint")
+  (return-type "none")
+)
+
+(define-method get_cost
+  (of-object "MrpTask")
+  (c-name "mrp_task_get_cost")
+  (return-type "gfloat")
+)
+
+(define-method get_assigned_resources
+  (of-object "MrpTask")
+  (c-name "mrp_task_get_assigned_resources")
+  (return-type "GList*")
+)
+
+(define-function mrp_task_compare
+  (c-name "mrp_task_compare")
+  (return-type "gint")
+  (parameters
+    '("gconstpointer" "a")
+    '("gconstpointer" "b")
+  )
+)
+
+(define-function mrp_constraint_new
+  (c-name "mrp_constraint_new")
+  (is-constructor-of "MrpConstraint")
+  (return-type "MrpConstraint*")
+  (parameters
+    '("MrpConstraintType" "type")
+    '("mrptime" "time")
+  )
+)
+
+;; From /gnome/head/INSTALL/include/planner-1.0/planner/mrp-time.h
+
+(define-function mrp_time_current_time
+  (c-name "mrp_time_current_time")
+  (return-type "mrptime")
+)
+
+(define-function mrp_time_from_tm
+  (c-name "mrp_time_from_tm")
+  (return-type "mrptime")
+  (parameters
+    '("struct-tm*" "tm")
+  )
+)
+
+(define-function mrp_time_compose
+  (c-name "mrp_time_compose")
+  (return-type "mrptime")
+  (parameters
+    '("gint" "year")
+    '("gint" "month")
+    '("gint" "day")
+    '("gint" "hour")
+    '("gint" "minute")
+    '("gint" "second")
+  )
+)
+
+(define-method decompose
+  (of-object "mrptime")
+  (c-name "mrp_time_decompose")
+  (return-type "gboolean")
+  (parameters
+    '("gint*" "year")
+    '("gint*" "month")
+    '("gint*" "day")
+    '("gint*" "hour")
+    '("gint*" "minute")
+    '("gint*" "second")
+  )
+)
+
+(define-function mrp_time_from_string
+  (c-name "mrp_time_from_string")
+  (return-type "mrptime")
+  (parameters
+    '("const-gchar*" "str")
+    '("GError**" "err")
+  )
+)
+
+(define-method to_string
+  (of-object "mrptime")
+  (c-name "mrp_time_to_string")
+  (return-type "gchar*")
+)
+
+(define-function mrp_time_from_msdate_string
+  (c-name "mrp_time_from_msdate_string")
+  (return-type "mrptime")
+  (parameters
+    '("const-gchar*" "str")
+  )
+)
+
+(define-method align_day
+  (of-object "mrptime")
+  (c-name "mrp_time_align_day")
+  (return-type "mrptime")
+)
+
+(define-method day_of_week
+  (of-object "mrptime")
+  (c-name "mrp_time_day_of_week")
+  (return-type "gint")
+)
+
+(define-method week_number
+  (of-object "mrptime")
+  (c-name "mrp_time_week_number")
+  (return-type "gint")
+)
+
+(define-method day_name
+  (of-object "mrptime")
+  (c-name "mrp_time_day_name")
+  (return-type "const-gchar*")
+)
+
+(define-method month_name
+  (of-object "mrptime")
+  (c-name "mrp_time_month_name")
+  (return-type "const-gchar*")
+)
+
+(define-method month_name_initial
+  (of-object "mrptime")
+  (c-name "mrp_time_month_name_initial")
+  (return-type "const-gchar*")
+)
+
+(define-function mrp_time_format
+  (c-name "mrp_time_format")
+  (return-type "gchar*")
+  (parameters
+    '("const-gchar*" "format")
+    '("mrptime" "t")
+  )
+)
+
+(define-method debug_print
+  (of-object "mrptime")
+  (c-name "mrp_time_debug_print")
+  (return-type "none")
+)
+
+(define-function mrp_param_spec_time
+  (c-name "mrp_param_spec_time")
+  (return-type "GParamSpec*")
+  (parameters
+    '("const-gchar*" "name")
+    '("const-gchar*" "nick")
+    '("const-gchar*" "blurb")
+    '("GParamFlags" "flags")
+  )
+)
+
+
+
+;; From /gnome/head/INSTALL/include/planner-1.0/planner/mrp-types.h
+
+(define-function mrp_relation_type_get_type
+  (c-name "mrp_relation_type_get_type")
+  (return-type "GType")
+)
+
+(define-function mrp_task_type_get_type
+  (c-name "mrp_task_type_get_type")
+  (return-type "GType")
+)
+
+(define-function mrp_task_sched_get_type
+  (c-name "mrp_task_sched_get_type")
+  (return-type "GType")
+)
+
+(define-function mrp_string_list_copy
+  (c-name "mrp_string_list_copy")
+  (return-type "GList*")
+  (parameters
+    '("const-GList*" "list")
+  )
+)
+
+(define-function mrp_string_list_free
+  (c-name "mrp_string_list_free")
+  (return-type "none")
+  (parameters
+    '("GList*" "list")
+  )
+)
+
+

@@ -1,0 +1,13 @@
+SUBDIRS = glade images ui dtd stylesheets mime
+
+desktopdir = $(datadir)/applications/
+desktop_in_files = planner.desktop.in
+desktop_DATA = planner.desktop
+@INTLTOOL_DESKTOP_RULE@
+
+EXTRA_DIST = \
+	planner.desktop.in			\
+	planner.spec.in				\
+	planner.spec
+
+CLEANFILES = $(desktop_DATA)

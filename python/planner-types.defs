@@ -1,0 +1,227 @@
+;; -*- scheme -*-
+; object definitions ...
+(define-object Application
+  (in-module "Mrp")
+  (parent "GObject")
+  (c-name "MrpApplication")
+  (gtype-id "MRP_TYPE_APPLICATION")
+)
+
+(define-object Object
+  (in-module "Mrp")
+  (parent "GObject")
+  (c-name "MrpObject")
+  (gtype-id "MRP_TYPE_OBJECT")
+)
+
+(define-object Group
+  (in-module "Mrp")
+  (parent "MrpObject")
+  (c-name "MrpGroup")
+  (gtype-id "MRP_TYPE_GROUP")
+)
+
+(define-object Calendar
+  (in-module "Mrp")
+  (parent "MrpObject")
+  (c-name "MrpCalendar")
+  (gtype-id "MRP_TYPE_CALENDAR")
+)
+
+(define-object Assignment
+  (in-module "Mrp")
+  (parent "MrpObject")
+  (c-name "MrpAssignment")
+  (gtype-id "MRP_TYPE_ASSIGNMENT")
+)
+
+(define-object Project
+  (in-module "Mrp")
+  (parent "MrpObject")
+  (c-name "MrpProject")
+  (gtype-id "MRP_TYPE_PROJECT")
+)
+
+(define-object Relation
+  (in-module "Mrp")
+  (parent "MrpObject")
+  (c-name "MrpRelation")
+  (gtype-id "MRP_TYPE_RELATION")
+)
+
+(define-object Resource
+  (in-module "Mrp")
+  (parent "MrpObject")
+  (c-name "MrpResource")
+  (gtype-id "MRP_TYPE_RESOURCE")
+)
+
+(define-object StorageModule
+  (in-module "Mrp")
+  (parent "GObject")
+  (c-name "MrpStorageModule")
+  (gtype-id "MRP_TYPE_STORAGE_MODULE")
+)
+
+(define-object Task
+  (in-module "Mrp")
+  (parent "MrpObject")
+  (c-name "MrpTask")
+  (gtype-id "MRP_TYPE_TASK")
+)
+
+;; Enumerations and flags ...
+
+(define-enum Error
+  (in-module "Mrp")
+  (c-name "MrpError")
+  (values
+    '("task-relation-failed" "MRP_ERROR_TASK_RELATION_FAILED")
+    '("task-move-failed" "MRP_ERROR_TASK_MOVE_FAILED")
+    '("load-file-dont-exist" "MRP_ERROR_LOAD_FILE_DONT_EXIST")
+    '("load-file-invalid" "MRP_ERROR_LOAD_FILE_INVALID")
+    '("save-file-exist" "MRP_ERROR_SAVE_FILE_EXIST")
+    '("no-file-module" "MRP_ERROR_NO_FILE_MODULE")
+    '("save-write-failed" "MRP_ERROR_SAVE_WRITE_FAILED")
+    '("failed" "MRP_ERROR_FAILED")
+  )
+)
+
+(define-enum PropertyType
+  (in-module "Mrp")
+  (c-name "MrpPropertyType")
+  (values
+    '("none" "MRP_PROPERTY_TYPE_NONE")
+    '("int" "MRP_PROPERTY_TYPE_INT")
+    '("float" "MRP_PROPERTY_TYPE_FLOAT")
+    '("string" "MRP_PROPERTY_TYPE_STRING")
+    '("string-list" "MRP_PROPERTY_TYPE_STRING_LIST")
+    '("date" "MRP_PROPERTY_TYPE_DATE")
+    '("duration" "MRP_PROPERTY_TYPE_DURATION")
+    '("cost" "MRP_PROPERTY_TYPE_COST")
+  )
+)
+
+(define-enum ResourceType
+  (in-module "Mrp")
+  (c-name "MrpResourceType")
+  (values
+    '("none" "MRP_RESOURCE_TYPE_NONE")
+    '("work" "MRP_RESOURCE_TYPE_WORK")
+    '("material" "MRP_RESOURCE_TYPE_MATERIAL")
+  )
+)
+
+(define-flags StorageModuleFlags
+  (in-module "Mrp")
+  (c-name "MrpStorageModuleFlags")
+  (values
+    '("none" "MRP_STORAGE_NONE")
+    '("readable" "MRP_STORAGE_READABLE")
+    '("writable" "MRP_STORAGE_WRITABLE")
+    '("direct-write" "MRP_STORAGE_DIRECT_WRITE")
+    '("supports-task" "MRP_STORAGE_SUPPORTS_TASK")
+    '("supports-resource" "MRP_STORAGE_SUPPORTS_RESOURCE")
+    '("supports-primary" "MRP_STORAGE_SUPPORTS_PRIMARY")
+    '("readwrite" "MRP_STORAGE_READWRITE")
+    '("supports-all" "MRP_STORAGE_SUPPORTS_ALL")
+  )
+)
+
+(define-enum RelationType
+  (in-module "Mrp")
+  (c-name "MrpRelationType")
+  (gtype-id "MRP_TYPE_RELATION_TYPE")
+  (values
+    '("none" "MRP_RELATION_NONE")
+    '("fs" "MRP_RELATION_FS")
+    '("ff" "MRP_RELATION_FF")
+    '("ss" "MRP_RELATION_SS")
+    '("sf" "MRP_RELATION_SF")
+  )
+)
+
+(define-enum ConstraintType
+  (in-module "Mrp")
+  (c-name "MrpConstraintType")
+  (values
+    '("asap" "MRP_CONSTRAINT_ASAP")
+    '("alap" "MRP_CONSTRAINT_ALAP")
+    '("snet" "MRP_CONSTRAINT_SNET")
+    '("fnlt" "MRP_CONSTRAINT_FNLT")
+    '("mso" "MRP_CONSTRAINT_MSO")
+  )
+)
+
+(define-enum TaskType
+  (in-module "Mrp")
+  (c-name "MrpTaskType")
+  (gtype-id "MRP_TYPE_TASK_TYPE")
+  (values
+    '("normal" "MRP_TASK_TYPE_NORMAL")
+    '("milestone" "MRP_TASK_TYPE_MILESTONE")
+  )
+)
+
+(define-enum TaskSched
+  (in-module "Mrp")
+  (c-name "MrpTaskSched")
+  (gtype-id "MRP_TYPE_TASK_SCHED")
+  (values
+    '("work" "MRP_TASK_SCHED_FIXED_WORK")
+    '("duration" "MRP_TASK_SCHED_FIXED_DURATION")
+  )
+)
+
+(define-boxed Interval
+  (in-module "Mrp")
+  (c-name "MrpInterval")
+  (gtype-id "MRP_TYPE_INTERVAL")
+  (copy-func "mrp_interval_ref")
+  (release-func "mrp_interval_unref")
+)
+
+(define-boxed Day
+  (in-module "Mrp")
+  (c-name "MrpDay")
+  (gtype-id "MRP_TYPE_DAY")
+  (copy-func "mrp_day_ref")
+  (release-func "mrp_day_unref")
+)
+
+(define-boxed Property
+  (in-module "Mrp")
+  (c-name "MrpProperty")
+  (gtype-id "MRP_TYPE_PROPERTY")
+  (copy-func "g_param_spec_ref")
+  (release-func "g_param_spec_unref")
+)
+
+(define-enum PropertyType
+  (in-module "Mrp")
+  (c-name "MrpPropertyType")
+  (gtype-id "MRP_TYPE_PROPERTY_TYPE")
+  (values
+   '("none" "MRP_PROPERTY_TYPE_NONE")
+   '("int" "MRP_PROPERTY_TYPE_INT")
+   '("float" "MRP_PROPERTY_TYPE_FLOAT")
+   '("string" "MRP_PROPERTY_TYPE_STRING")
+   '("string_list" "MRP_PROPERTY_TYPE_STRING_LIST")
+   '("date" "MRP_PROPERTY_TYPE_DATE")
+   '("duration" "MRP_PROPERTY_TYPE_DURATION")
+   '("cost" "MRP_PROPERTY_TYPE_COST")
+   )
+)
+
+(define-boxed Constraint
+  (in-module "Mrp")
+  (c-name "MrpConstraint")
+  (gtype-id "MRP_TYPE_CONSTRAINT")
+  (copy-func "mrp_constraint_copy")
+  (release-func "g_free")
+  (fields
+   '("MrpConstraintType" "type")
+   '("mrptime" "time")
+  )
+)
+

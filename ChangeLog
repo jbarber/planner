@@ -1,0 +1,22 @@
+2003-12-01  Ryszard Klos <ryszardklos@netscape.net>
+
+	* data/stylesheets: Fix the width of the exported html.
+
+2003-11-30  Richard Hult  <richard@imendio.com>
+
+	* data/ui/main-window.ui: Set delimit to none, to avoid an ugly
+	separator at the top.
+
+	* src/planner-resource-view.c (resource_view_insert_resource_cb):
+	Focus the newly inserted resource, just like for the task/gantt
+	views.
+
+	* libplanner/mrp-task.c (task_remove_assignments): Copy the list
+	before removing from it, and null out the assignment list it's
+	removed.
+
+2003-11-14  Frederic Crozat  <fcrozat@mandrakesoft.com>
+
+	* planner/mrp-time.c: (imrp_time_init): Make sure we use UTF-8
+	strings, not locale encoded one for month and day names.
+

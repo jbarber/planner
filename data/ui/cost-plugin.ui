@@ -1,0 +1,21 @@
+<Root>
+  <commands>
+    <cmd name="ComputeCost_html" _label="Project Report _HTML"/>
+    <cmd name="ComputeCost_abw" _label="Project Report _Abiword"/>
+  </commands>
+
+  <menu>
+    <submenu name="File">
+      <separator/>
+        <menuitem name="ComputeCost_html" verb=""   accel="*Shift**Control*c"/>
+        <menuitem name="ComputeCost_abw"  verb=""   accel="*Shift**Control*a"/>
+      <separator/>   
+    </submenu>
+  </menu>
+
+<!--  <dockitem name="Toolbar">
+    <toolitem name="ComputeCost" verb="" _label="Compute Cost"/>
+  </dockitem> -->
+
+</Root>
+

@@ -1,0 +1,135 @@
+<!-- ##### SECTION Title ##### -->
+MrpObject
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### STRUCT MrpObjectPriv ##### -->
+<para>
+A private struct for internal use only.  The definition of this
+structure is not publically available.
+</para>
+
+
+<!-- ##### STRUCT MrpObject ##### -->
+<para>
+The base class for objects in libmrproject.
+</para>
+
+
+<!-- ##### SIGNAL MrpObject::prop-changed ##### -->
+<para>
+
+</para>
+
+@mrpobject: the object which received the signal.
+@arg1: 
+@arg2: 
+
+<!-- ##### SIGNAL MrpObject::removed ##### -->
+<para>
+
+</para>
+
+@mrpobject: the object which received the signal.
+
+<!-- ##### ARG MrpObject:project ##### -->
+<para>
+
+</para>
+
+<!-- ##### FUNCTION mrp_object_removed ##### -->
+<para>
+
+</para>
+
+@object: 
+
+
+<!-- ##### FUNCTION mrp_object_changed ##### -->
+<para>
+
+</para>
+
+@object: 
+
+
+<!-- ##### FUNCTION mrp_object_set ##### -->
+<para>
+
+</para>
+
+@object: 
+@first_property_name: 
+@Varargs: 
+
+
+<!-- ##### FUNCTION mrp_object_get ##### -->
+<para>
+
+</para>
+
+@object: 
+@first_property_name: 
+@Varargs: 
+
+
+<!-- ##### FUNCTION mrp_object_set_valist ##### -->
+<para>
+
+</para>
+
+@object: 
+@first_property_name: 
+@var_args: 
+
+
+<!-- ##### FUNCTION mrp_object_get_valist ##### -->
+<para>
+
+</para>
+
+@object: 
+@first_property_name: 
+@var_args: 
+
+
+<!-- ##### FUNCTION mrp_object_get_properties ##### -->
+<para>
+
+</para>
+
+@object: 
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_object_get_property ##### -->
+<para>
+
+</para>
+
+@object: 
+@property: 
+@value: 
+
+
+<!-- ##### FUNCTION mrp_object_set_property ##### -->
+<para>
+
+</para>
+
+@object: 
+@property: 
+@value: 
+
+

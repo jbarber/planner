@@ -1,0 +1,41 @@
+<Root>
+  <commands>
+    <cmd name="InsertResource"  _label="_Insert Resource"     pixtype="stock" pixname="planner-stock-insert-resource"/>
+    <cmd name="InsertResources" _label="In_sert Resources..." pixtype="stock" pixname="planner-stock-insert-resource"/>
+    <cmd name="RemoveResource"  _label="_Remove Resource"     pixtype="stock" pixname="planner-stock-remove-resource" sensitive="0"/>
+    <cmd name="EditResource"    _label="_Edit Resource Properties..." pixtype="stock" pixname="gtk-properties"   sensitive="0"/> 
+    <cmd name="EditGroups"      _label="Edit _Groups"         pixtype="stock" pixname="planner-stock-edit-groups"/>	
+    <cmd name="SelectAll"       _label="Select _All"   _tip="Select all tasks"/>
+    <cmd name="EditCustomProps" _label="Edit _Custom Properties..." pixtype="stock" pixname="gtk-properties"/>
+  </commands>
+
+  <menu>
+    <submenu    name="Edit">
+      <placeholder name="Selection placeholder">
+        <menuitem name="SelectAll"           verb=""   accel="*Control*a"/> 
+      </placeholder>
+      <placeholder name="View specific placeholder">
+      </placeholder>
+    </submenu>
+    <submenu    name="Actions">
+      <placeholder name="View specific actions placeholder">
+        <menuitem name="InsertResource"      verb=""   accel="*Control*i"/>
+        <menuitem name="InsertResources"     verb=""/>
+	<menuitem name="RemoveResource"      verb=""/>
+        <separator/>
+        <menuitem name="EditResource"        verb=""   accel="*Shift**Control*e"/>
+	<separator/>
+	<menuitem name="EditGroups"          verb=""/>
+	<separator/>
+        <menuitem name="EditCustomProps"     verb=""/>
+      </placeholder>
+    </submenu>
+  </menu>
+
+  <dockitem name="Toolbar">
+    <toolitem name="InsertResource" verb="" _label="Insert"/>
+    <toolitem name="RemoveResource" verb="" _label="Remove"/>
+    <toolitem name="EditGroups"     verb="" _label="Groups"/>
+  </dockitem>
+</Root>
+

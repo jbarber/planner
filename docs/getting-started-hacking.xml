@@ -1,0 +1,827 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML 4.1.2//EN "
+"http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd">
+
+<book>
+  <bookinfo>
+    <title>Getting started on hacking Planner</title>
+    <authorgroup>
+      <author>
+        <firstname>Mikael</firstname>
+        <surname>Hallendal</surname>
+        <affiliation>
+          <orgname>Imendio HB</orgname>
+          <address>
+            <email>micke@imendio.com</email>
+          </address>
+        </affiliation>
+      </author>
+    </authorgroup>
+    <releaseinfo>Version 0.4</releaseinfo>
+    <copyright>
+      <year>2002</year>
+      <holder>Mikael Hallendal and CodeFactory AB</holder>
+    </copyright>
+    <legalnotice>
+      <para>
+        Permission is granted to copy, distribute and/or modify this document
+        under the terms of the GNU Free Documentation License, Version 1.1
+        or any later version published by the Free Software Foundation.
+     </para>
+    </legalnotice>
+  </bookinfo>
+  
+  <chapter>
+    <title>Getting started</title>
+    <para>
+      The first thing to do if you want to help out hacking on
+      Planner is to join the Planner-devel mailing list. List
+      information can be found at: 
+      <ulink
+      url="http://lists.codefactory.se/mailman/listinfo/planner-devel">
+        http://lists.codefactory.se/mailman/listinfo/planner-devel
+      </ulink>.
+    </para>
+    <para>
+      Then read through this document to learn how we work and the
+      coding style rules that should be used in Planner
+      code. Finally, please join us for discussions in #planner at
+      Gimpnet (irc.gnome.org).
+    </para>
+    <sect1>
+      <title>Requirements</title>
+      <sect2>
+        <title>libplanner</title>
+        <para>
+          <table frame="none">
+            <title>libplanner dependencies</title>
+            <tgroup cols="2" align="left" colsep="1" rowsep="1">
+              <colspec colname="Package"/>
+              <colspec colname="Version"/>
+              <tbody>
+                <row>
+                  <entry><emphasis>Package</emphasis></entry>
+                  <entry><emphasis>Version</emphasis></entry>
+                </row>
+                <row>
+                  <entry>glib</entry>
+                  <entry>>=2.0.4</entry>
+                </row>
+                <row>
+                  <entry>libxml2</entry>
+                  <entry>>=2.4.7</entry>
+                </row>
+              </tbody>
+            </tgroup>
+          </table>
+        </para>
+      </sect2>
+      <sect2>
+        <title>planner</title>
+        <para>
+          <table frame="none">
+            <title>planner dependencies</title>
+            <tgroup cols="2" align="left" colsep="1" rowsep="1">
+              <colspec colname="package"/>
+              <colspec colname="version"/>
+              <tbody> 
+                <row>
+                  <entry><emphasis>Package</emphasis></entry>
+                  <entry><emphasis>Version</emphasis></entry>
+                </row>
+                <row>
+                  <entry>libplanner</entry>
+                  <entry> * </entry>
+                </row>
+                <row>
+                  <entry>gtk+</entry>
+                  <entry> >= 2.0.3</entry>
+                </row>
+                <row>
+                  <entry>libgnomecanvas</entry>
+                  <entry> >= 2.0.1</entry>
+                </row>
+                <row>
+                  <entry>libgnomeui</entry>
+                  <entry> >= 2.0.1</entry>
+                </row>
+                <row>
+                  <entry>libglade</entry>
+                  <entry> >= 2.0.0</entry>
+                </row>
+                <row>
+                  <entry>libbonoboui</entry>
+                  <entry> >= 2.0.0</entry>
+                </row>
+              </tbody>
+            </tgroup>
+          </table>
+        </para>
+      </sect2>
+    </sect1>
+    <sect1>
+      <title>Getting the source</title>
+      <para>
+        When developing on Planner we strongly recommend using the
+        source from CVS. If you have a CVS account at
+        cvs.gnome.org you get the source code by:
+        <programlisting>
+# export CVSROOT=":pserver:yourlogin@cvs.gnome.org:/cvs/gnome"
+# cvs co libplanner
+# cvs co planner</programlisting>
+        Otherwise you can download it from our anonymous cvs with the
+        following commands.
+        <programlisting>
+# export CVSROOT=":pserver:anonymous@anoncvs.gnome.org:/cvs/gnome"
+# cvs login
+
+(No password, just press enter.)
+
+# cvs -z3 co libplanner
+# cvs -z3 co planner</programlisting>
+      </para>
+
+    </sect1>
+    <sect1>
+      <title>Building the source</title>
+      <para>
+        To build Planner you need to first build libplanner. Just
+        execute the following commands.
+        <programlisting>
+# cd libplanner
+# ./autogen.sh --prefix=/prefix
+# make
+# make install</programlisting>
+        Then you can build Planner by the following set of commands.
+        <programlisting>
+# cd planner
+# ./autogen.sh --prefix=/prefix
+# make
+# make install</programlisting>
+      </para>
+    </sect1>
+    <sect1>
+      <title>Creating patches</title>
+      <para>
+        The easiest way to create patches is by using CVS. Before you
+        make the patch, make sure that you have the latest changes
+        from the CVS by executing:
+        <programlisting>
+# cvs up -Pd</programlisting>
+        Then you can create the patch with:
+        <programlisting>
+# cvs diff -u > file.patch</programlisting>
+        Make sure you use the <emphasis>-u</emphasis> flag, that makes
+        the patch easier to read.
+      </para>
+    </sect1>
+    <sect1>
+      <title>Submitting your patches</title>
+      Submitting patches can either be done by sending them to the
+      <ulink
+      url="http://lists.codefactory.se/mailman/listinfo/planner-devel">planner-devel
+      mailing list</ulink>. Or by adding them as attachments to the
+      issue the patch solves at the bugzilla at:
+      <ulink url="http://freedom.codefactory.se/bugzilla/">
+        http://freedom.codefactory.se/bugzilla/
+      </ulink>.
+    </sect1>
+  </chapter>
+  <chapter>
+    <para>
+      This chapter discuss the coding guide lines that should be used in
+      all Planner code. Please notice that if your code doesn't
+      follow these guide lines it won't be included in Planner,
+      therefor please make sure that it does before sending the
+      patches. 
+    </para>
+    <title>Programming Guidelines</title>
+    <sect1>
+      <title>Naming conventions</title>
+      <para>
+        The naming schemes is a little different between libplanner
+        and planner, this is to make it clear by looking at a
+        function name to see where it belongs. The reason for a naming
+        scheme is that it should be easy to find the definition and
+        implementation of a function/enum/class/... by just looking at
+        the name of it.
+      </para>
+      <sect2>
+        <title>Class Names</title>
+        <para>
+          <itemizedlist>
+            <listitem>
+              Classes should be named with a prefix
+              <emphasis>Mrp</emphasis> for classes in libplanner and
+              <emphasis>Planner</emphasis> for classes in planner. 
+            </listitem>
+            <listitem>
+              Use upper case letters as word separators, lower case
+              for the rest of the word.
+            </listitem>
+            <listitem>
+              No underscores ("_") in the names.
+            </listitem>
+          </itemizedlist>
+         
+          <example>
+            <title>Class Names</title>
+            <programlisting>
+ class MrpTaskManager
+ class PlannerResourceModel</programlisting>
+          </example>
+        </para>
+      </sect2>
+      <sect2>
+        <title>File Names</title>
+        <para>
+          File names should be named as follows:
+          <itemizedlist>
+            <listitem>
+              No upper case letters.
+            </listitem>
+            <listitem>
+              Use underscore ("_") to separate words.
+            </listitem>
+            <listitem>
+              Prefix filenames with <emphasis>mrp-</emphasis> for
+              files in libplanner and <emphasis>planner-</emphasis> for
+              files in planner.
+            </listitem>
+          </itemizedlist>
+          <example>
+            <title>Filenames</title>
+            <programlisting>
+ mrp-task-manager.c
+ mrp-task-manager.h
+ planner-resource-model.c
+ planner-resource-model.h</programlisting>
+          </example>
+        </para>
+      </sect2>
+      <sect2>
+        <title>External Functions Names</title>
+        <para>
+          External functions should be named as the file names with
+          every hyphen ("-") replaced by an underscore ("_").
+          <example>
+            <title>External function names</title>
+            <programlisting>
+ mrp_task_manager_get_root (...)
+ planner_resource_model_get_type_string (...)</programlisting>
+          </example>
+        </para>
+      </sect2>
+      <sect2>
+        <title>Static Functions Names</title>
+        <para>
+          This use the same scheme as external functions names but
+          remove the prefix. So for example:
+          <example>
+            <title>Static Functions Names</title>
+            An external function       
+            <programlisting>
+ mrp_resource_get_name (...)</programlisting>
+            would become
+            <programlisting>
+ resource_get_name (...)</programlisting>
+            if it was a static function withing
+            mrp-resource.c.
+          </example>
+        </para>
+        <para>
+          <emphasis>
+            Notice that this scheme is currently not used in Planner 
+            but we'll change to it whenever we are editing those
+            files, please use this scheme for all new code.
+          </emphasis>
+        </para>
+      </sect2>
+      <sect2>
+        <title>Enum/Struct Names</title>
+        <para>
+          Enum and structs follow the same naming convention as the
+          classes.
+          <example>
+            <title>Enum/Struct names</title>
+            in mrp-resource.h
+            <programlisting>
+ typedef enum {
+   	MRP_RESOURCE_TYPE_NONE,
+	MRP_RESOURCE_TYPE_WORK,
+	MRP_RESOURCE_TYPE_MATERIAL
+ } MrpResourceType;</programlisting>
+          </example>
+          Same goes for structures.
+        </para>
+      </sect2>
+      <sect2>
+        <title>#define and Macro Names</title>
+        <para>
+        #defines and macros should be named in the same way as
+         functions but with uppercase letters instead of lowercase.
+        <example>
+          <title>#define and macro names</title>
+          In mrp-resource.h
+          <programlisting>
+ #define MRP_TYPE_RESOURCE         (mrp_resource_get_type ())</programlisting>
+          In planner-resource-model.h
+          <programlisting>
+#define PLANNER_IS_RESOURCE_MODEL(obj) (G_TYPE_CHECK_INSTANCE_TYPE ((obj), 
+                                   PLANNER_TYPE_RESOURCE_MODEL))</programlisting>
+        </example>
+        </para>
+      </sect2>
+    </sect1>
+    <sect1>
+      <title>Code Formatting</title>
+      <para>
+        In order to make the code more readable we here define a
+        number of formatting rules that has to be followed. If
+        everyone hacking on Planner uses the same code formatting
+        it will be much easier to read other persons code.
+      </para>
+      <sect2>
+        <title>Indentation</title>
+        <para>
+          Indentation should be done using tabs and one tab is eight
+          spaces wide.
+          <example>
+            <programlisting>
+static void
+mrp_resource_new (void)
+{
+        MrpResource *resource;
+        
+        resource = g_object_new (MRP_TYPE_RESOURCE, NULL);
+        
+        return resource;
+}</programlisting>
+          </example>
+          This is the same style used by the Linux kernel and by the
+          GNOME project.
+        </para>
+      </sect2>
+      <sect2>
+        <title>Braces policy</title>
+        <para>
+          <itemizedlist>
+            <listitem>
+              All if-, while-, do-, for-statements should use braces,
+              even one-liners. This is because it's obvious where the
+              statement starts/ends, it's also good when you want to
+              put another line in the same statement and you don't
+              have to make sure that you put the braces there.
+              <example>
+                <title>Braces used for statements</title>
+                <programlisting>
+if (i &gt;= 0) {
+        /* do something */
+}</programlisting>
+              </example>
+            </listitem>
+            <listitem>
+              For these types of statements, the open brace should be
+              placed on the same line as the statement with a single
+              space between the statement and the opening brace.
+              <example>
+                <title>One line statements</title>
+                <programlisting>
+for (i = 0; i &lt; len; ++i) {
+        /* my one-liner */
+}</programlisting>
+              </example>
+            </listitem>
+            <listitem>
+              For functions the opening brace should be placed
+              below the function 
+              <example>
+                <title>Braces around function statements</title>
+                <programlisting>
+void static
+my_function (void)
+{
+        /* do something */
+}</programlisting>
+              </example>
+            </listitem>
+            <listitem>
+              If-elseif-else-statements should use the following
+              formatting.
+              <example>
+                <title>If-elseif-else statement</title>
+                <programlisting>
+if (...) {
+        /* do something */
+}
+else if (...) {
+        /* do something else */
+} else {
+        /* do yet another thing */
+}</programlisting>
+              </example>
+            </listitem>
+          </itemizedlist>
+        </para>
+      </sect2>
+      <sect2>
+        <title>Parenthesis policy</title>
+        <para>
+        </para>
+      </sect2>
+      <sect2>
+        <title>Function declarations and implementation</title>
+        <para>
+          A few guidelines on how to write functions.
+          <itemizedlist>
+            <listitem>
+              In declaration, always put one argument per row and
+              align the functions, types and arguments for easy reading.
+              <example>
+                <title>Function declarations</title>
+                <programlisting>
+void      mrp_resource_assign             (MrpResource     *resource,
+		                           MrpTask         *task,
+					   gint             units);
+
+GList *   mrp_resource_get_assignments    (MrpResource     *resource);</programlisting>
+              </example>
+            </listitem>
+            <listitem>
+              When implementing the function, try to fit all arguments
+              on one row, if that doesn't fit in 80 chars width, split
+              them up with one argument per row. Put a single space
+              between the longest type and the arguments.
+              <example>
+                <title>Function implementation</title>
+                <programlisting>
+void
+mrp_resource_assign (MrpResource *resource, MrpTask *task, gint units)
+{
+        /* ... */
+}
+
+gboolean
+mrp_project_save_as (MrpProject   *project,
+                     const gchar  *uri,
+                     gboolean      force,
+                     GError      **error)
+{
+        /* ... */
+}</programlisting>
+              </example>
+            </listitem>
+            <listitem>
+              If you have pointer arguments with * or ** they should
+              be placed together with the argument, not with the
+              type. Also they should be aligned as
+              <example>
+                <title>Align pointer arguments</title>
+                <programlisting>
+gboolean
+mrp_project_save_as (MrpProject   *project,
+                     const gchar  *uri,
+                     gboolean      force,
+                     GError      **error)
+{
+        /* ... */
+}</programlisting>
+              </example>
+            </listitem>
+          </itemizedlist>
+        </para>
+      </sect2>
+      <sect2>
+        <title>Variable definitions</title>
+        <para>
+          Variables should be aligned in the same way as function
+          arguments. Put one space between longest type and arguments
+          and align with * and ** in the same way as for function
+          arguments.
+        </para>
+      </sect2>
+    </sect1>
+    <sect1>
+      <title>Structure of source files</title>
+      <para>
+        All source files should start with the header used in
+        Planner.
+        <example>
+          <title></title>
+          <programlisting>
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+/*
+ * Copyright (C) 2002 Your name &lt;your@email&gt;
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A CHAPTERICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public
+ * License along with this program; if not, write to the
+ * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+ * Boston, MA 02111-1307, USA.
+ */</programlisting>
+        </example>
+        The first row is to make sure that everyone using Emacs gets
+        the correct tab-width and programming mode. 
+      </para>
+      <sect2>
+        <title>Header Files</title>
+        <para>
+          Header files is built up as follows.
+          <example>
+            <title>Commented header file</title>
+            <programlisting>
+/* Header as described above */
+
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+/*
+ * Copyright (C) 2001-2002 CodeFactory AB
+ * Copyright (C) 2001-2002 Richard Hult &lt;rhult@codefactory.se&gt;
+ * Copyright (C) 2001-2002 Mikael Hallendal &lt;micke@codefactory.se&gt;
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A CHAPTERICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public
+ * License along with this program; if not, write to the
+ * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+ * Boston, MA 02111-1307, USA.
+ */
+
+/* 
+ * include guards, these are to make sure that the same header only
+ * gets included once. 
+ */
+#ifndef __MRP_ASSIGNMENT_H__
+#define __MRP_ASSIGNMENT_H__
+
+/* 
+ * Includes needed by this header, put as much includes as possible in
+ * the C-file rather than the header file. 
+ */
+#include &lt;planner/mrp-object.h&gt;
+#include &lt;planner/mrp-time.h&gt;
+#include &lt;planner/mrp-types.h&gt;
+
+/*
+ * If it is a class you are defining you need this convenience macros,
+ * they should come directly after the includes.
+ */
+#define MRP_TYPE_ASSIGNMENT         (mrp_assignment_get_type ())
+#define MRP_ASSIGNMENT(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), 
+                                     MRP_TYPE_ASSIGNMENT, MrpAssignment))
+#define MRP_ASSIGNMENT_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST((k), 
+                                     MRP_TYPE_ASSIGNMENT, MrpAssignmentClass))
+#define MRP_IS_ASSIGNMENT(o)        (G_TYPE_CHECK_INSTANCE_TYPE ((o), 
+                                     MRP_TYPE_ASSIGNMENT))
+#define MRP_IS_ASSIGNMENT_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), 
+                                     MRP_TYPE_ASSIGNMENT))
+#define MRP_ASSIGNMENT_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), 
+                                     MRP_TYPE_ASSIGNMENT, MrpAssignmentClass))
+
+/*
+ * Defining the class structures
+ */
+typedef struct _MrpAssignmentClass MrpAssignmentClass;
+typedef struct _MrpAssignmentPriv  MrpAssignmentPriv;
+
+struct _MrpAssignment {
+        MrpObject          parent;
+
+        MrpAssignmentPriv *priv;
+};
+
+struct _MrpAssignmentClass {
+        MrpObjectClass parent_class;
+};
+
+/* Function declarations */
+GType              mrp_assignment_get_type     (void) G_GNUC_CONST;
+
+MrpAssignment     *mrp_assignment_new          (void);
+
+MrpTimeInterval   *mrp_assignment_get_interval (MrpAssignment *assignment);
+
+MrpTask           *mrp_assignment_get_task     (MrpAssignment *assignment);
+MrpResource       *mrp_assignment_get_resource (MrpAssignment *assignment);
+gint               mrp_assignment_get_units    (MrpAssignment *assignemnt);
+
+/* End of the include guard */
+#endif /* __MRP_ASSIGNMENT_H__ */</programlisting>
+          </example>
+        </para>
+      </sect2>
+      <sect2>
+        <title>C Files</title>
+        <para>
+          <example>
+            <title>Commented C file</title>
+            <programlisting>
+/* Same header as in the header file */
+
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+/*
+ * Copyright (C) 2001-2002 CodeFactory AB
+ * Copyright (C) 2001-2002 Richard Hult &lt;rhult@codefactory.se&gt;
+ * Copyright (C) 2001-2002 Mikael Hallendal &lt;micke@codefactory.se&gt;
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A CHAPTERICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public
+ * License along with this program; if not, write to the
+ * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+ * Boston, MA 02111-1307, USA.
+ */
+
+/*
+ * Declarations of private structures and enums, the should come
+ * before the internal functions since some of the internal functions
+ * might need these structures/enums.
+ */
+struct _MrpAssignmentPriv {
+	MrpTask     *task;
+	MrpResource *resource;
+
+	gint         units;
+};
+
+/* Properties */
+enum {
+        PROP_0,
+        PROP_TASK,
+        PROP_RESOURCE,
+        PROP_UNITS
+};
+
+/* Declaration of internal functions */
+static void mpa_class_init        (MrpAssignmentClass *klass);
+static void mpa_init              (MrpAssignment      *assignment);
+static void mpa_finalize          (GObject            *object);
+static void mpa_set_property      (GObject            *object,
+				   guint               prop_id,
+				   const GValue       *value,
+				   GParamSpec         *pspec);
+static void mpa_get_property      (GObject            *object,
+				   guint               prop_id,
+				   GValue             *value,
+				   GParamSpec         *pspec);
+
+
+/*
+ * Declaration of internal file global variables
+ * NOTE! Try to not use file global variables and instead put them in
+ *       a privat structure as in this example
+ */
+static MrpObjectClass *parent_class;
+
+/* 
+ * Put the get_type function as the first function implementation.
+ */
+GType
+mrp_assignment_get_type (void)
+{
+        /* ... */
+}
+
+/* 
+ * It should be directly followed by the static variables 
+ * (in the same order as they were defined).
+ */
+static void
+mpa_class_init (MrpAssignmentClass *klass)
+{
+      /* &lt;snip&gt; */
+}
+ 
+/* After the internal functions you put the implementations of the
+ * external functions.
+ * (These too in the same order as they were declared).
+ */</programlisting>
+          </example>
+          The reason I'm nagging about putting the implementations
+          in the same order as the declarations is that it's much
+          easier to find a function if you do.
+        </para>
+      </sect2>
+      <sect2>
+        <title>Use of private structures</title>
+        <para>
+          We strongly suggest that you use private structures as where
+          done in the code example above. This makes the code better
+          object oriented and makes sure that you are not using the
+          internal variables directly.
+        </para>
+       </sect2>
+    </sect1>
+  </chapter>
+  <chapter>
+    <title>Design of Planner</title>
+    <sect1>
+      <title>Directory structure</title>
+      <sect2>
+        <title>libplanner</title>
+        <programlisting>
+libplanner
+ |
+ +- docs              All documentation
+ |   |
+ |   +- design        Design documentation
+ |
+ |
+ +- planner         The exported libplanner
+ |
+ |
+ +- po                Translation files.
+ |
+ |
+ +- storage-modules   Storage modules that can be used from Planner
+ |   |
+ |   +- mpx           MPX loader (Microsoft Project eXchange format)
+ |   |
+ |   +- planner-1   The old Planner 0.5 file format
+ |   |
+ |   +- xml           The new XML-based format (currently not used).
+ |
+ |
+ +- tests             Various tests to check that the library does what it's 
+                      supposed to do.</programlisting>
+      </sect2>
+      <sect2>
+        <title>planner</title>
+        <programlisting>
+planner
+ |
+ +- data                   Extra data files.
+ |   |
+ |   +- icons              Icon files for the GUI and the desktop.
+ |   |
+ |   +- mime               Mime-type information for .planner files.
+ |
+ |
+ +- docs                   Documentation about Planner
+ |   |
+ |   +- design             Design documents
+ |   |
+ |   +- user-guide         Planner User Guide
+ |
+ |  
+ +- po                     Translation files.
+ |
+ |
+ +- src                    The source code for Planner.
+     |
+     +- app                Main application files. 
+     |                     (including the planner binary).
+     |  
+     +- cell-renderers     Various GtkTreeView cell renderers
+     |
+     +- dialogs            The dialogs used in Planner (the more 
+     |   |                 complicated).
+     |   |
+     |   +- task-dialog    The Task Dialog (used to edit task properties)
+     |
+     +- models             GtkTreeView storage modules.
+     |
+     +- util               Utility functions and marshal definitions used
+     |                     throughout the entire Planner
+     |
+     +- widgets            Own defined widgets.
+     |   |
+     |   +- sidebar        The Sidebar used in Planner, we have our own 
+     |                     now instead of using the one from GAL.
+     |
+     +- views              The various views (displayed in the sidebar).
+         |
+         +- gantt          The Gantt view and the Task table views. Put 
+         |                 together because they have very much in common 
+         |                 and depend on each other.
+         |
+         +- resources      Resource view and Group dialog (should probably 
+                           be moved to dialogs/group-dialog).</programlisting>
+      </sect2>
+    </sect1>
+  </chapter>
+</book>

@@ -1,0 +1,82 @@
+<!-- ##### SECTION Title ##### -->
+MrpRelation
+
+<!-- ##### SECTION Short_Description ##### -->
+represents a task predecessor relation in the project.
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+A predecessor relation is used to affect the scheduling of a task
+relative another task. The only type supported yet is "Finish to Start"
+(%MRP_RELATION_FS). A relation may have a lag time associated to it,
+so that a task can be scheduled to start after another task has
+finished, plus a lag time.
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### STRUCT MrpRelationPriv ##### -->
+<para>
+A private struct for internal use only.  The definition of this
+structure is not publically available.
+</para>
+
+
+<!-- ##### STRUCT MrpRelation ##### -->
+<para>
+Object representing a predecessor relation between two tasks.
+</para>
+
+@parent: 
+@priv: 
+
+<!-- ##### ENUM MrpRelationType ##### -->
+<para>
+The type of relation. Only finish to start is implemented yet.
+</para>
+
+@MRP_RELATION_NONE: invalid relation type (unset)
+@MRP_RELATION_FS: finish to start
+@MRP_RELATION_FF: finish to finish (unimplemented)
+@MRP_RELATION_SS: start to start (unimplemented)
+@MRP_RELATION_SF: start to finish (unimplemented)
+
+<!-- ##### FUNCTION mrp_relation_get_predecessor ##### -->
+<para>
+
+</para>
+
+@relation: 
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_relation_get_successor ##### -->
+<para>
+
+</para>
+
+@relation: 
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_relation_get_lag ##### -->
+<para>
+
+</para>
+
+@relation: 
+@Returns: 
+
+
+<!-- ##### FUNCTION mrp_relation_get_relation_type ##### -->
+<para>
+
+</para>
+
+@relation: 
+@Returns: 
+
+

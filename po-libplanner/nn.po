@@ -1,0 +1,1068 @@
+# Norwegian (nynorsk) translation of mrproject.
+# Copyright (C) 2001 Free Software Foundation, Inc.
+# Roy-Magne Mo <rmo@sunnmore.net>, 2001
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: mrproject 0.4.1\n"
+"POT-Creation-Date: 2003-12-01 15:18+0100\n"
+"PO-Revision-Date: 2001-12-17 06:51+0100\n"
+"Last-Translator: Roy-Magne Mo <rmo@sunnmore.net>\n"
+"Language-Team: Norwegian/Nynorsk <nn@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: libplanner/mrp-project.c:441
+msgid "Default"
+msgstr "Standard"
+
+#: libplanner/mrp-project.c:749
+#, fuzzy, c-format
+msgid "Couldn't find a suitable file module for loading '%s'"
+msgstr "Klarte ikkje å finne ein fil lastar for dette formatet."
+
+#: libplanner/mrp-project.c:770 libplanner/mrp-project.c:1034
+msgid "No support for SQL storage built into this version of MrProject."
+msgstr ""
+
+#: libplanner/mrp-project.c:807
+msgid "Invalid URI."
+msgstr ""
+
+#: libplanner/mrp-project.c:928
+#, c-format
+msgid "Unable to find file writer identified by '%s'"
+msgstr ""
+
+#: libplanner/mrp-project.c:991
+#, fuzzy
+msgid "Couldn't find a suitable file module for loading project"
+msgstr "Klarte ikkje å finne ein fil lastar for dette formatet."
+
+#: libplanner/mrp-property.c:365
+msgid "Text"
+msgstr ""
+
+#: libplanner/mrp-property.c:367
+msgid "String list"
+msgstr ""
+
+#: libplanner/mrp-property.c:369
+msgid "Integer number"
+msgstr ""
+
+#: libplanner/mrp-property.c:371
+msgid "Floating-point number"
+msgstr ""
+
+#: libplanner/mrp-property.c:373
+#, fuzzy
+msgid "Date"
+msgstr "Lim inn"
+
+#: libplanner/mrp-property.c:375
+#, fuzzy
+msgid "Duration"
+msgstr "Lengd"
+
+# applets/gen_util/mailcheck.c:1522
+# applets/gen_util/mailcheck.c:1522
+#: libplanner/mrp-property.c:377
+#, fuzzy
+msgid "Cost"
+msgstr "L_ukk"
+
+#: libplanner/mrp-property.c:380
+#, fuzzy
+msgid "None"
+msgstr "Notat"
+
+#: libplanner/mrp-task-manager.c:1769
+msgid "Can not add a predecessor relation between a task and its ancestor."
+msgstr ""
+
+#: libplanner/mrp-task-manager.c:1778 libplanner/mrp-task-manager.c:1786
+msgid "Can not add a predecessor, because it would result in a loop."
+msgstr ""
+
+#: libplanner/mrp-task-manager.c:1821
+msgid "Can not move the task, since it would result in a loop."
+msgstr ""
+
+#: libplanner/mrp-task.c:1016
+msgid ""
+"Could not add a predecessor relation, because the tasks are already related."
+msgstr ""
+
+#: libplanner/mrp-day.c:54
+#, fuzzy
+msgid "Working"
+msgstr "Arbeid"
+
+#: libplanner/mrp-day.c:55
+msgid "A default working day"
+msgstr ""
+
+#: libplanner/mrp-day.c:57
+msgid "Nonworking"
+msgstr ""
+
+#: libplanner/mrp-day.c:58
+msgid "A default non working day"
+msgstr ""
+
+#: libplanner/mrp-day.c:60
+msgid "Use base"
+msgstr ""
+
+#: libplanner/mrp-day.c:61
+msgid "Use day from base calendar"
+msgstr ""
+
+#: libplanner/mrp-parser.c:1043 libplanner/mrp-parser.c:1138
+#, fuzzy
+msgid "Could not create XML tree"
+msgstr "Klarte ikkje å opprette forstørringsdialog."
+
+#: libplanner/mrp-parser.c:1104
+#, fuzzy
+msgid "Could not write XML file"
+msgstr "Klarte ikkje å opprette forstørringsdialog."
+
+#. Give up.
+#: libplanner/mrp-sql.c:229
+msgid "Invalid Unicode"
+msgstr ""
+
+#: libplanner/mrp-sql.c:2205
+#, c-format
+msgid ""
+"The project '%s' has been changed by the user '%s' since you opened it. Do "
+"you want to save anyway?"
+msgstr ""
+
+#: libplanner/mrp-sql.c:3443
+#, c-format
+msgid ""
+"Connection to database '%s' failed.\n"
+"%s"
+msgstr ""
+
+#: libplanner/mrp-storage-sql.c:205
+msgid "Invalid SQL URI (must start with 'sql://' and contain '#')."
+msgstr ""
+
+#: libplanner/mrp-storage-sql.c:274
+msgid "Invalid SQL URI (invalid project id)."
+msgstr ""
+
+#: libplanner/mrp-storage-sql.c:282
+msgid "Invalid SQL URI (no database name specified)."
+msgstr ""
+
+#, fuzzy
+#~ msgid "May"
+#~ msgstr "dag"
+
+#, fuzzy
+#~ msgid "Mon"
+#~ msgstr "Månad"
+
+#, fuzzy
+#~ msgid "Sat"
+#~ msgstr "Start"
+
+#, fuzzy
+#~ msgid "Sunday"
+#~ msgstr "dag"
+
+#, fuzzy
+#~ msgid "Monday"
+#~ msgstr "I dag"
+
+#, fuzzy
+#~ msgid "Tuesday"
+#~ msgstr "I dag"
+
+#, fuzzy
+#~ msgid "Thursday"
+#~ msgstr "I dag"
+
+#, fuzzy
+#~ msgid "Friday"
+#~ msgstr "dag"
+
+#, fuzzy
+#~ msgid "Group Name"
+#~ msgstr "Gruppenamn: "
+
+#, fuzzy
+#~ msgid "Group Manager Name"
+#~ msgstr "Gruppenamn: "
+
+#, fuzzy
+#~ msgid "Group Manager Phone"
+#~ msgstr "Gruppenamn: "
+
+#, fuzzy
+#~ msgid "Group Manager Email"
+#~ msgstr "Gruppenamn: "
+
+#~ msgid "Project start"
+#~ msgstr "Prosjektstart"
+
+#, fuzzy
+#~ msgid "The start date of the project"
+#~ msgstr "Gå til byrjinga av prosjektet"
+
+#, fuzzy
+#~ msgid "Project Name"
+#~ msgstr "Prosjekt_namn:"
+
+#, fuzzy
+#~ msgid "Project Manager"
+#~ msgstr "Prosjektstart"
+
+#, fuzzy
+#~ msgid "Default Group"
+#~ msgstr "Sett som standardgruppe"
+
+# gsm/session-properties-capplet.c:226
+#~ msgid "Resource Name"
+#~ msgstr "Ressursnamn"
+
+#, fuzzy
+#~ msgid "Resource Group"
+#~ msgstr "_Ressurs"
+
+# gsm/session-properties-capplet.c:226
+#, fuzzy
+#~ msgid "Resource Type"
+#~ msgstr "Ressursnamn"
+
+# applets/tasklist/tasklist_menu.c:258
+#, fuzzy
+#~ msgid "Resource Units"
+#~ msgstr "Ressursar"
+
+# gsm/session-properties-capplet.c:226
+#, fuzzy
+#~ msgid "Resource Email"
+#~ msgstr "Ressursnamn"
+
+# gsm/session-properties-capplet.c:226
+#, fuzzy
+#~ msgid "Resource note"
+#~ msgstr "Ressursnamn"
+
+#, fuzzy
+#~ msgid "Project"
+#~ msgstr "MrProject"
+
+#, fuzzy
+#~ msgid "Allocated resource"
+#~ msgstr "Vald ressurs: %s"
+
+#~ msgid "MrProject project"
+#~ msgstr "MrProject prosjekt"
+
+#~ msgid "MrProject project engine"
+#~ msgstr "MrProject prosjektmotor"
+
+#~ msgid "MrProject project factory"
+#~ msgstr "MrProject prosjektfabrikk"
+
+#~ msgid "MrProject XML File Filter"
+#~ msgstr "MrProject XML-filfilter"
+
+#~ msgid "MrProject XML file filter factory"
+#~ msgstr "MrProject XML-filfilter fabrikk"
+
+#~ msgid "MrProject MPX File Filter"
+#~ msgstr "MrProject MPX-filfiter"
+
+#~ msgid "MrProject MPX file filter factory"
+#~ msgstr "MrProject MPX filfilter-fabrikk"
+
+#~ msgid "Enables some debugging functions"
+#~ msgstr "Slår på avlusingsinformasjon"
+
+#~ msgid "LEVEL"
+#~ msgstr "LEVEL"
+
+#~ msgid ""
+#~ "The connection to the engine was broken. This probably means that the "
+#~ "engine crashed."
+#~ msgstr ""
+#~ "Sambandet til motoren vart broten. Dette tydar somregel på at motoren har "
+#~ "krasja."
+
+#~ msgid "File not found."
+#~ msgstr "Fann ikkje fil."
+
+#~ msgid "Could not open project."
+#~ msgstr "Klarte ikkje å opne prosjekt."
+
+#~ msgid "Save Project as"
+#~ msgstr "Lagre prosjekt som"
+
+#~ msgid "Copyright (C) 2000-2001 CodeFactory AB"
+#~ msgstr "Opphavsrett © 2000-2001 CodeFactory AB"
+
+#~ msgid "A project management application for the GNOME Desktop Environment"
+#~ msgstr "Eit prosjekstyringsverkty for skrivebordsmiljøet GNOME"
+
+#~ msgid "The MrProject Homepage"
+#~ msgstr "MrProject heimesida"
+
+#~ msgid "Contribute to MrProject"
+#~ msgstr "Medverkande til MrProject:"
+
+#~ msgid ""
+#~ "You have unsaved information.\n"
+#~ "Do you really want to quit?"
+#~ msgstr ""
+#~ "Du har ulagra informasjon.\n"
+#~ "Vil du verkeleg avslutte?"
+
+#~ msgid "Save and quit"
+#~ msgstr "Lagre og avslutt"
+
+#~ msgid "Don't quit"
+#~ msgstr "Ikkje avslutt"
+
+#~ msgid "(Blank Project)"
+#~ msgstr "(Tomt prosjekt)"
+
+#~ msgid "Choose a template:"
+#~ msgstr "Vel ein mal:"
+
+#~ msgid "New Project"
+#~ msgstr "Nytt prosjekt"
+
+# applets/gen_util/printer.c:308
+#~ msgid "Project Properties"
+#~ msgstr "Eigenskapar for prosjekt"
+
+#~ msgid "_Company"
+#~ msgstr "_Firma"
+
+#~ msgid "_Manager:"
+#~ msgstr "_Sjef:"
+
+#~ msgid "_Start date:"
+#~ msgstr "_Start-dato:"
+
+#~ msgid "OK"
+#~ msgstr "OK"
+
+#~ msgid "Cancel"
+#~ msgstr "Avbryt"
+
+#~ msgid "Goto Date"
+#~ msgstr "Gå til dato"
+
+#~ msgid "w"
+#~ msgstr "w"
+
+#~ msgid "weeks"
+#~ msgstr "veker"
+
+#~ msgid "week"
+#~ msgstr "veke"
+
+#~ msgid "wks"
+#~ msgstr "vkr"
+
+#~ msgid "wk"
+#~ msgstr "vk"
+
+#~ msgid "d"
+#~ msgstr "d"
+
+#~ msgid "days"
+#~ msgstr "dagar"
+
+#~ msgid "dys"
+#~ msgstr "dgr"
+
+#~ msgid "dy"
+#~ msgstr "dg"
+
+#~ msgid "h"
+#~ msgstr "t"
+
+#~ msgid "hours"
+#~ msgstr "timar"
+
+#~ msgid "hour"
+#~ msgstr "time"
+
+# applets/tasklist/tasklist_menu.c:264
+#~ msgid "hrs"
+#~ msgstr "tmr"
+
+#~ msgid "hr"
+#~ msgstr "tm"
+
+#~ msgid "Gantt Chart"
+#~ msgstr "Gannt diagram"
+
+# panel/menu-properties.c:211 panel/menu.c:5139 panel/menu.c:5917
+#~ msgid "Edit task..."
+#~ msgstr "Rediger oppgåve ..."
+
+#~ msgid "Insert subtask"
+#~ msgstr "Sett inn deloppgåve"
+
+#~ msgid "Insert task below"
+#~ msgstr "Sett inn oppgåve under"
+
+# gtk/gtkfilesel.c:562 gtk/gtkfilesel.c:937
+#~ msgid "Delete task"
+#~ msgstr "Slett oppgåve"
+
+#~ msgid "%d %s"
+#~ msgstr "%d %s"
+
+#~ msgid "1 day"
+#~ msgstr "1 dag"
+
+#~ msgid "0 days"
+#~ msgstr "0 dagar"
+
+#~ msgid "%d tasks selected"
+#~ msgstr "%d oppgåver vald"
+
+#~ msgid "Selected task: %s"
+#~ msgstr "Vald oppgåve: %s"
+
+#~ msgid "Years"
+#~ msgstr "År"
+
+#~ msgid "years"
+#~ msgstr "år"
+
+#~ msgid "Quarters"
+#~ msgstr "Kvartal"
+
+#~ msgid "quarters"
+#~ msgstr "kvartal"
+
+#~ msgid "Months"
+#~ msgstr "Månader"
+
+#~ msgid "months"
+#~ msgstr "månader"
+
+#~ msgid "Weeks"
+#~ msgstr "Veker"
+
+#~ msgid "Days"
+#~ msgstr "Dagar"
+
+#~ msgid "Hours"
+#~ msgstr "Timar"
+
+# gnome-terminal/gnome-terminal.glade.h:20
+# panel/distribution.c:36
+#~ msgid "Minutes"
+#~ msgstr "Minutt"
+
+# applets/gen_util/mailcheck.c:1217
+#~ msgid "minutes"
+#~ msgstr "minutt"
+
+#~ msgid "Customize Scale..."
+#~ msgstr "Tilpass skala ..."
+
+#~ msgid "Customize the Gantt Scale"
+#~ msgstr "Tilpass Gannt-skala"
+
+#~ msgid "Zoom..."
+#~ msgstr "Forstørring ..."
+
+#~ msgid "Change the zoom factor of the Gantt chart"
+#~ msgstr "Endre forstørringsfaktor på Ganntdiagram"
+
+#~ msgid "Double click on a date to go there"
+#~ msgstr "Dobbelklikk på ein dato for å gå dit"
+
+#~ msgid "Selected task"
+#~ msgstr "Vald oppgåve"
+
+#~ msgid "Go to"
+#~ msgstr "Gå til"
+
+#~ msgid "Print Gantt Chart"
+#~ msgstr "Skriv ut Gannt-diagram"
+
+#~ msgid "Print Preview"
+#~ msgstr "Førehandsvising av utskrift"
+
+#~ msgid "Printing failed."
+#~ msgstr "Utskrift feila."
+
+#~ msgid "MrProject Gantt Chart Component"
+#~ msgstr "MrProject Ganntdiagram komponent"
+
+#~ msgid "MrProject Gantt component factory"
+#~ msgstr "MrProject Gannt komponentfabrikk"
+
+#~ msgid "Assign resource to the selected task"
+#~ msgstr "Tildel ressurs til vald oppgåve"
+
+#~ msgid "Assign resources..."
+#~ msgstr "Tildel ressursar ..."
+
+#~ msgid "Assign..."
+#~ msgstr "Tildel ..."
+
+#~ msgid "Change the zoom factor of the Gantt scale"
+#~ msgstr "Endre på forstørringsfaktor på Gannt-skala"
+
+#~ msgid "Customize the units and zoom factor of the Gantt scale"
+#~ msgstr "Tilpass einingar og forstørringsfaktor på Ganntskalaen"
+
+#~ msgid "Dump"
+#~ msgstr "Dump"
+
+#~ msgid "Edit the selected task"
+#~ msgstr "Rediger vald oppgåve"
+
+#~ msgid "Entire project"
+#~ msgstr "Heile prosjektet"
+
+#~ msgid "Go To"
+#~ msgstr "Gå til"
+
+#~ msgid "Go To a certain date or task"
+#~ msgstr "Gå til ein gitt dato eller oppgåve"
+
+#~ msgid "Go to the current day"
+#~ msgstr "Gå til dagen i dag"
+
+#~ msgid "Go to the selected task"
+#~ msgstr "Gå til vald oppgåve"
+
+#~ msgid "Indent"
+#~ msgstr "Innrykk"
+
+#~ msgid "Indent the task more"
+#~ msgstr "Rykk inn oppgåva meir"
+
+#~ msgid "Insert"
+#~ msgstr "Set inn"
+
+#~ msgid "Insert a new task as a child of the selected task"
+#~ msgstr "Sett inn ei ny oppgåve som barn av vald oppgåve"
+
+#~ msgid "Insert a new task below the selected task"
+#~ msgstr "Sett inn ei ny oppgåve under den valde oppgåva"
+
+#~ msgid "Invert selection"
+#~ msgstr "Inverter val"
+
+#~ msgid "Invert the current selection"
+#~ msgstr "Inverter gjeldande val"
+
+#~ msgid "Link"
+#~ msgstr "Lenkje"
+
+#~ msgid "Link the two selected tasks"
+#~ msgstr "Lenk dei to valde oppgåvene"
+
+#~ msgid "Move down"
+#~ msgstr "Flytt ned"
+
+#~ msgid "Move the task down the list"
+#~ msgstr "Flytt oppgåve nedover i lista"
+
+#~ msgid "Move the task up the list"
+#~ msgstr "Flytt oppgåve oppover i lista"
+
+#~ msgid "Move up"
+#~ msgstr "Flytt opp"
+
+# gnome-terminal/gnome-terminal.glade.h:10
+#~ msgid "Pick a date"
+#~ msgstr "Vel ein dato"
+
+#~ msgid "Pick a date to go to"
+#~ msgstr "Velj ein dato å gå til"
+
+#~ msgid "Print"
+#~ msgstr "Skriv ut"
+
+#~ msgid "Print the current chart"
+#~ msgstr "Skriv ut gjeldande diagram"
+
+# help-browser/bookmarks.c:242
+#~ msgid "Remove"
+#~ msgstr "Fjern"
+
+#~ msgid "Remove some indentation"
+#~ msgstr "Fjern innrykk"
+
+# panel/menu.c:1668
+#~ msgid "Remove this task"
+#~ msgstr "Fjern denne oppgåva"
+
+#~ msgid "Select all"
+#~ msgstr "Vel alle"
+
+#~ msgid "Select all tasks"
+#~ msgstr "Vel alle oppgåver"
+
+#~ msgid "Timescale..."
+#~ msgstr "Tidsskala ..."
+
+#~ msgid "Unindent"
+#~ msgstr "Fjern innrykk"
+
+#~ msgid "Unlink"
+#~ msgstr "Fjern lenke"
+
+#~ msgid "Unlink the selected task"
+#~ msgstr "Fjern lenke på valde oppgåver"
+
+#~ msgid "Zoom to the entire project"
+#~ msgstr "Forstørr til heile prosjektet"
+
+#~ msgid "_Insert"
+#~ msgstr "Set _inn"
+
+#~ msgid "_Subtask"
+#~ msgstr "_Deloppgåve"
+
+#~ msgid "_Task"
+#~ msgstr "_Oppgåve"
+
+#~ msgid "End"
+#~ msgstr "Slutt"
+
+#~ msgid "Id"
+#~ msgstr "Id"
+
+#~ msgid "Name"
+#~ msgstr "Namn"
+
+#~ msgid "         "
+#~ msgstr "         "
+
+#~ msgid "One _month"
+#~ msgstr "Ein _månad"
+
+#~ msgid "One _quarter"
+#~ msgstr "Eit _kvartal"
+
+#~ msgid "One _week"
+#~ msgstr "Ei _veke"
+
+#~ msgid "Reset"
+#~ msgstr "Nullstill"
+
+#~ msgid "The _entire project"
+#~ msgstr "H_eile prosjektet"
+
+#~ msgid "Zoom"
+#~ msgstr "Forstørring"
+
+#~ msgid "Zoom to:"
+#~ msgstr "Forstørr til:"
+
+#~ msgid "_Custom:"
+#~ msgstr "_Eigendefinert:"
+
+#~ msgid "_Selected tasks"
+#~ msgstr "_Valde oppgåver"
+
+#~ msgid " "
+#~ msgstr " "
+
+#~ msgid "Customize Gantt Scale"
+#~ msgstr "Tilpass Gannt-skala"
+
+#~ msgid "M_inor scale:"
+#~ msgstr "L_iten skala:"
+
+#~ msgid "_Major scale:"
+#~ msgstr "_Hovudskala:"
+
+#~ msgid "_Size:"
+#~ msgstr "_Storleik:"
+
+#~ msgid "Groups"
+#~ msgstr "Grupper"
+
+#~ msgid "Insert a new resource on a row"
+#~ msgstr "Set inn ein ny ressurs i ei rad"
+
+#~ msgid "Manage resource groups"
+#~ msgstr "Handsam ressursgrupper"
+
+#~ msgid "Print the resource table"
+#~ msgstr "Skriv ut ressurstabellen"
+
+# panel/menu.c:1668
+#~ msgid "Remove this resource"
+#~ msgstr "Fjern denne ressursen"
+
+#~ msgid "MrProject Resource component factory"
+#~ msgstr "MrProject ressurskomponentfabrikk"
+
+#~ msgid "MrProject resource component"
+#~ msgstr "MrProject ressurskomponent"
+
+#~ msgid "One or more resources of choosen group doesn't have email addresses."
+#~ msgstr "Ein eller fleire ressursar i gitt gruppe har ikkje e-postaddresse."
+
+#~ msgid "Not all of the resources of choosen group have an email address."
+#~ msgstr "Ikkje alle ressursane i vald gruppe har ei e-postaddresse."
+
+#~ msgid "Mail to..."
+#~ msgstr "E-post til ..."
+
+#~ msgid "Mail to group..."
+#~ msgstr "E-post til gruppe ..."
+
+#~ msgid "%d resources selected"
+#~ msgstr "%d ressursar vald"
+
+#~ msgid "Not initialized"
+#~ msgstr "Ikkje initialisert"
+
+#~ msgid "Material"
+#~ msgstr "Materiell"
+
+#~ msgid "No group"
+#~ msgstr "Inga gruppering"
+
+# panel/logout.c:192
+#~ msgid "Print Resource Table"
+#~ msgstr "Skriv ut ressurstabell"
+
+#~ msgid "Group Editor - MrProject"
+#~ msgstr "Grupperedigering - MrProject"
+
+#~ msgid "Add"
+#~ msgstr "Legg til"
+
+#~ msgid "Email"
+#~ msgstr "E-post"
+
+#~ msgid "Group"
+#~ msgstr "Gruppe"
+
+#~ msgid "Ovt. Rate"
+#~ msgstr "Ovt. rate"
+
+#~ msgid "Std. Rate"
+#~ msgstr "Std. rate"
+
+# panel/menu.c:4771
+#~ msgid "Type"
+#~ msgstr "Type"
+
+#~ msgid "Units"
+#~ msgstr "Einingar"
+
+#~ msgid "Email:"
+#~ msgstr "E-post:"
+
+#~ msgid "Group Editor"
+#~ msgstr "Grupperedigering"
+
+#~ msgid "Manager"
+#~ msgstr "Sjef"
+
+#~ msgid "Name:"
+#~ msgstr "Namn:"
+
+#~ msgid "Phone nr:"
+#~ msgstr "Telefonnr:"
+
+#~ msgid "This group is default"
+#~ msgstr "Dette er standardgruppa"
+
+# applets/tasklist/tasklist_properties.c:414
+#~ msgid "Task Properties - MrProject"
+#~ msgstr "Eigenskapar for oppgåve - MrProject"
+
+#~ msgid ""
+#~ "\n"
+#~ "\n"
+#~ "*** %a %d %b %Y, %I:%M %p *** \n"
+#~ "\n"
+#~ msgstr ""
+#~ "\n"
+#~ "\n"
+#~ "*** %a %d %b %Y, %I:%M %p *** \n"
+#~ "\n"
+
+#~ msgid "?"
+#~ msgstr "?"
+
+# gnome-terminal/gnome-terminal.glade.h:20
+#~ msgid "General"
+#~ msgstr "Allment"
+
+# applets/gen_util/clock.c:869
+#~ msgid "Insert time stamp"
+#~ msgstr "Sett inn tidsmerke"
+
+#~ msgid "Task Id: "
+#~ msgstr "Oppgåveid:"
+
+#~ msgid "_Complete [%]:"
+#~ msgstr "_Ferdig [%]"
+
+#~ msgid "_End:"
+#~ msgstr "_Slutt:"
+
+#~ msgid "_Name:"
+#~ msgstr "_Namn:"
+
+#~ msgid "_Priority:"
+#~ msgstr "_Prioritet:"
+
+#~ msgid "_Start:"
+#~ msgstr "_Start:"
+
+#~ msgid "Assigned"
+#~ msgstr "Tildelt"
+
+#~ msgid "Send Project..."
+#~ msgstr "Send prosjekt ..."
+
+#~ msgid "Send the current project as attachment"
+#~ msgstr "Send dette prosjektet som vedlegg"
+
+# gnome-terminal/gnome-terminal.c:1586
+#~ msgid "_File"
+#~ msgstr "_Fil"
+
+#~ msgid "_Send To"
+#~ msgstr "_Send til"
+
+#~ msgid "MrProject Send component"
+#~ msgstr "MrProject Send-komponent"
+
+#~ msgid "MrProject Send component factory"
+#~ msgstr "MrProject Send komponentfabrukk"
+
+#~ msgid ""
+#~ "The project has not been saved,\n"
+#~ "you must save your project before sending it.\n"
+#~ "Do you wish to do so?"
+#~ msgstr ""
+#~ "Dette prosjektet har ikkje vorte lagra,\n"
+#~ "du må lagre prosjekt før sending.\n"
+#~ "Vil du gjere det?"
+
+#~ msgid "Save"
+#~ msgstr "Lagre"
+
+#~ msgid "Save as"
+#~ msgstr "Lagre som"
+
+#~ msgid "MrProject Network component factory"
+#~ msgstr "MrProject nettverkskomponentfabrikk"
+
+#~ msgid "MrProject network component"
+#~ msgstr "MrProject nettverkskomponent"
+
+#~ msgid "Network Diagram"
+#~ msgstr "Nettverksdiagram"
+
+#~ msgid "Network"
+#~ msgstr "Nettverk"
+
+#~ msgid "Name: %s"
+#~ msgstr "Namn: %s"
+
+#~ msgid "Complete: %d%%"
+#~ msgstr "Ferdig: %d%%"
+
+#~ msgid "Duration: %d days"
+#~ msgstr "Lengd: %d dagar"
+
+# panel/menu.c:4751 panel/panel_config.c:1566
+#~ msgid "Calendar"
+#~ msgstr "Kalender"
+
+#~ msgid "MrProject Calendar component factory"
+#~ msgstr "MrProject kalenderkomponent-fabrikk"
+
+#~ msgid "MrProject calendar component"
+#~ msgstr "MrProject kalendarkomponent"
+
+#~ msgid "%Y %B %e"
+#~ msgstr "%Y %B %e"
+
+#~ msgid "Year"
+#~ msgstr "År"
+
+# panel/foobar-widget.c:464
+#~ msgid "%A %d %B"
+#~ msgstr "%A %d %B"
+
+#~ msgid "%a %d %b"
+#~ msgstr "%a %d %b"
+
+#~ msgid "%d %B"
+#~ msgstr "%d. %b"
+
+#~ msgid "%d %b"
+#~ msgstr "%d. %b"
+
+#~ msgid "About this application"
+#~ msgstr "Om dette programmet"
+
+#~ msgid "C_lear"
+#~ msgstr "_Tøm"
+
+# applets/gen_util/mailcheck.c:1522
+# applets/gen_util/mailcheck.c:1522
+#~ msgid "Clear"
+#~ msgstr "Tøm"
+
+#~ msgid "Clear the selection"
+#~ msgstr "Slett valet"
+
+#~ msgid "Close the current file"
+#~ msgstr "Lukk aktiv fil"
+
+#~ msgid "Copy"
+#~ msgstr "Kopier"
+
+#~ msgid "Copy the selection"
+#~ msgstr "Kopier utval"
+
+#~ msgid "Create a new project"
+#~ msgstr "Lag eit nytt prosjekt"
+
+#~ msgid "Customi_ze toolbars..."
+#~ msgstr "Set opp _verktøylinjer"
+
+#~ msgid "Customize"
+#~ msgstr "Tilpasse"
+
+#~ msgid "Customize toolbars"
+#~ msgstr "Set opp verktylinjer"
+
+#~ msgid "Cut"
+#~ msgstr "Klipp ut"
+
+#~ msgid "Cut the selection"
+#~ msgstr "Klipp ut valde område"
+
+#~ msgid "E_xit"
+#~ msgstr "_Avslutt"
+
+#~ msgid "Edit preferences..."
+#~ msgstr "Rediger innstillingar ..."
+
+#~ msgid "Edit the project properties"
+#~ msgstr "Endre eigenskapar for prosjektet"
+
+#~ msgid "Edit your preferences"
+#~ msgstr "Rediger dine innstillingar"
+
+#~ msgid "Exit the program"
+#~ msgstr "Avslutt programmet"
+
+#~ msgid "New"
+#~ msgstr "Ny"
+
+#~ msgid "New..."
+#~ msgstr "Ny ..."
+
+#~ msgid "Open"
+#~ msgstr "Opne"
+
+#~ msgid "Open a file"
+#~ msgstr "Opne ei fil"
+
+#~ msgid "Paste the clipboard"
+#~ msgstr "Lim inn frå utklippstavla"
+
+#~ msgid "Print S_etup..."
+#~ msgstr "Utskriftso_ppsett"
+
+#~ msgid "Print the current file"
+#~ msgstr "Skriv ut aktiv fil"
+
+#~ msgid "Properties..."
+#~ msgstr "Eigenskapar ..."
+
+#~ msgid "Redo"
+#~ msgstr "Gjer om"
+
+#~ msgid "Redo the undone action"
+#~ msgstr "Gjer om handlinga som du har angra på"
+
+# gmenu/edit.c:325 gsm/session-properties.c:173 panel/launcher.c:556
+# panel/menu.c:1396 panel/menu.c:1507
+#~ msgid "Revert"
+#~ msgstr "Gå tilbake"
+
+#~ msgid "Revert to a saved version of the file"
+#~ msgstr "Gå tilbake til lagret versjon av filen"
+
+#~ msgid "Save As"
+#~ msgstr "Lagre som"
+
+#~ msgid "Save _As..."
+#~ msgstr "L_agre som ..."
+
+#~ msgid "Save the current file"
+#~ msgstr "Lagre aktiv fil"
+
+#~ msgid "Save the current file with a different name"
+#~ msgstr "Lagre aktiv fil med eit anna namn"
+
+#~ msgid "Setup the page settings for your current printer"
+#~ msgstr "Endre sideoppsett for aktiv skrivar"
+
+#~ msgid "Test stuff"
+#~ msgstr "Prøv ting"
+
+#~ msgid "Undo"
+#~ msgstr "Angre"
+
+#~ msgid "Undo the last action"
+#~ msgstr "Gjer om siste handling"
+
+#~ msgid "_About..."
+#~ msgstr "_Om ..."
+
+#~ msgid "_Edit"
+#~ msgstr "R_ediger"
+
+#~ msgid "_Help"
+#~ msgstr "_Hjelp"
+
+#~ msgid "_Open..."
+#~ msgstr "_Opne ..."
+
+#~ msgid "_Preferences"
+#~ msgstr "_Instillingar"
+
+#~ msgid "_Redo"
+#~ msgstr "Gje_r om"
+
+# gmenu/edit.c:325 gsm/session-properties.c:173 panel/launcher.c:556
+# panel/menu.c:1396 panel/menu.c:1507
+#~ msgid "_Revert"
+#~ msgstr "_Gå tilbake"
+
+#~ msgid "_Save"
+#~ msgstr "_Lagre"
+
+#~ msgid "_Undo"
+#~ msgstr "_Angre"
+
+#~ msgid "Project Management application"
+#~ msgstr "Prosjektstyringsverkty"
