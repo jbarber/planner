@@ -1496,6 +1496,7 @@ task_dialog_update_schedule_label (DialogData *data)
 		str = g_strdup_printf (_("On fixed date %s"), time_str);
 		break;
 	default:
+		str = NULL;
 		g_assert_not_reached ();
 	}
 		
