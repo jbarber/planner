@@ -1,6 +1,6 @@
 # Slovak translation of planner.pot
 # Copyright (C) 2003, 2004, 2005 Free Software Foundation, Inc.
-# Zdenko Podobný <zdpo@mailbox.sk>, 2003, 2004, 2005.
+# Zdenko Podobný <zdpo@mailbox.sk>, 2003, 2004.
 # Marcel Telka <marcel@telka.sk>, 2005.
 #
 # $Id$
@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: planner\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-02-28 06:15+0100\n"
-"PO-Revision-Date: 2005-02-28 06:40+0100\n"
+"POT-Creation-Date: 2005-03-01 22:42+0100\n"
+"PO-Revision-Date: 2005-03-01 22:41+0100\n"
 "Last-Translator: Marcel Telka <marcel@telka.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
 "MIME-Version: 1.0\n"
@@ -195,12 +195,11 @@ msgstr "Vybrať všetko"
 
 #: data/glade/eds.glade.h:5
 msgid "Select group"
-msgstr "Vybrať skupinu"
+msgstr "Označiť skupinu"
 
 #: data/glade/eds.glade.h:6
-#, fuzzy
 msgid "Unselect All"
-msgstr "Vybrať _všetko"
+msgstr "Odznačiť všetko"
 
 #: data/glade/eds.glade.h:7
 msgid "dialog1"
@@ -317,7 +316,7 @@ msgstr "Poznámky"
 
 #: data/glade/resource-dialog.glade.h:7
 msgid "Optional - overrides resource name in Gantt view."
-msgstr ""
+msgstr "Voliteľné - prekryje názov zdroja v Gantt diagrame."
 
 #: data/glade/resource-dialog.glade.h:8
 msgid ""
@@ -394,6 +393,9 @@ msgid ""
 "No earlier than\n"
 "On fixed date"
 msgstr ""
+"Čo najskôr\n"
+"Nie skôt ako\n"
+"V presne stanovený deň"
 
 #: data/glade/task-date-widget.glade.h:4 src/planner-cell-renderer-date.c:182
 #: src/planner-project-properties.c:746
@@ -404,7 +406,7 @@ msgstr "Zrušiť"
 #: data/glade/task-date-widget.glade.h:5 data/glade/task-dialog.glade.h:10
 #: src/planner-cell-renderer-date.c:154
 msgid "Schedule:"
-msgstr ""
+msgstr "Plánovať:"
 
 #: data/glade/task-date-widget.glade.h:6 src/planner-cell-renderer-date.c:189
 msgid "Select"
@@ -478,11 +480,11 @@ msgstr "Plán projektu"
 
 #: data/mime/planner.xml.in.h:1
 msgid "Planner project plan"
-msgstr "Plán projektu Planer"
+msgstr "Plán projektu Planner"
 
 #: data/planner.desktop.in.in.h:1
 msgid "Planner Project Management"
-msgstr "Planer - správca projektov"
+msgstr "Správa projektov Planner"
 
 #: data/planner.desktop.in.in.h:2
 msgid "Project Management"
@@ -527,18 +529,16 @@ msgstr "Či je povolená tlať zoznamu úloh."
 #: data/planner.schemas.in.h:10
 msgid ""
 "Whether to highlight the tasks along the cricital path in the Gantt view."
-msgstr ""
-"Či v Gantt diagrame zvýrazniť úlohy patriace do kritickej cesty."
+msgstr "Či v Gantt diagrame zvýrazniť úlohy patriace do kritickej cesty."
 
 #: data/planner.schemas.in.h:11
 msgid ""
 "Whether to highlight the tasks along the cricital path in the Task view."
-msgstr ""
-"Či v zozname úloh zvýrazniť úlohy patriace do kritickej cesty."
+msgstr "Či v zozname úloh zvýrazniť úlohy patriace do kritickej cesty."
 
 #: data/planner.schemas.in.h:12
 msgid "Which view to display in the user interface."
-msgstr ""
+msgstr "Ktorý pohľad zobraziť v používateľskom rozhraní."
 
 #: libegg/recent-files/egg-recent-vfs-utils.c:90
 msgid " (invalid Unicode)"
@@ -570,7 +570,7 @@ msgstr "Použiť deň zo základného kalendára"
 
 #: libplanner/mrp-file-module.c:115
 msgid "This format does not support reading"
-msgstr ""
+msgstr "Tento formát nepodporuje čítanie"
 
 #: libplanner/mrp-parser.c:1064 libplanner/mrp-parser.c:1159
 msgid "Could not create XML tree"
@@ -852,11 +852,11 @@ msgstr "Upraviť štandardný týždeň"
 
 #: src/planner-eds-plugin.c:166
 msgid "EDS"
-msgstr "EDS"
+msgstr "DSE"
 
 #: src/planner-eds-plugin.c:167
 msgid "Import resources from Evolution Data Server"
-msgstr ""
+msgstr "Importovať zdroje Dátového servera Evolution"
 
 #: src/planner-eds-plugin.c:393 src/planner-gantt-print.c:190
 #: src/planner-group-dialog.c:819 src/planner-property-dialog.c:481
@@ -880,11 +880,11 @@ msgstr "Fotka"
 
 #: src/planner-eds-plugin.c:670
 msgid "Imported from Evolution Data Server"
-msgstr ""
+msgstr "Importovať z Dátového servera Evolution"
 
 #: src/planner-eds-plugin.c:671
 msgid "Updated from Evolution Data Server"
-msgstr ""
+msgstr "Aktualizované z Dátového servera Evolution"
 
 #: src/planner-eds-plugin.c:856
 msgid "Query cancelled."
@@ -892,11 +892,11 @@ msgstr "Požiadavka zrušená."
 
 #: src/planner-eds-plugin.c:917
 msgid "Evolution Data Server UID"
-msgstr ""
+msgstr "UID Dátového servera Evolution"
 
 #: src/planner-eds-plugin.c:918
 msgid "Identifier used by Evolution Data Server for resources"
-msgstr ""
+msgstr "Identifikátor používaný Dátovým serverom Evolution pre zdroje"
 
 #: src/planner-format.c:149
 #, c-format
@@ -1054,7 +1054,7 @@ msgstr "_Odstrániť úlohu"
 
 #: src/planner-gantt-view.c:144 src/planner-task-view.c:121
 msgid "Remove the selected tasks"
-msgstr ""
+msgstr "Odstrániť označené úlohy"
 
 #: src/planner-gantt-view.c:146
 msgid "_Edit Task Properties..."
@@ -1076,15 +1076,15 @@ msgstr "Od_pojiť úlohu"
 
 #: src/planner-gantt-view.c:153 src/planner-task-view.c:124
 msgid "Unlink the selected tasks"
-msgstr ""
+msgstr "Odpojiť označené úlohy"
 
 #: src/planner-gantt-view.c:155 src/planner-task-view.c:125
 msgid "_Link Tasks"
-msgstr "_Pripojiť úlohu"
+msgstr "_Prepojiť úlohu"
 
 #: src/planner-gantt-view.c:156 src/planner-task-view.c:125
 msgid "Link the selected tasks"
-msgstr ""
+msgstr "Prepojiť označené úlohy"
 
 #: src/planner-gantt-view.c:158 src/planner-task-view.c:126
 msgid "I_ndent Task"
@@ -1092,7 +1092,7 @@ msgstr "_Odsadiť úlohu"
 
 #: src/planner-gantt-view.c:159 src/planner-task-view.c:126
 msgid "Indent the selected tasks"
-msgstr ""
+msgstr "Odsadiť označené úlohy"
 
 #: src/planner-gantt-view.c:161 src/planner-task-view.c:127
 msgid "Unin_dent Task"
@@ -1100,7 +1100,7 @@ msgstr "Zrušiť od_sadenie úlohy"
 
 #: src/planner-gantt-view.c:162 src/planner-task-view.c:127
 msgid "Unindent the selected tasks"
-msgstr ""
+msgstr "Zrušiť odsadenie označených úloh"
 
 #: src/planner-gantt-view.c:164 src/planner-task-view.c:128
 msgid "Move Task _Up"
@@ -1108,7 +1108,7 @@ msgstr "Posu_núť úlohu hore"
 
 #: src/planner-gantt-view.c:165 src/planner-task-view.c:128
 msgid "Move the selected tasks upwards"
-msgstr ""
+msgstr "Presunúť označené úlohy nahor"
 
 #: src/planner-gantt-view.c:167 src/planner-task-view.c:129
 msgid "Move Task Do_wn"
@@ -1171,6 +1171,8 @@ msgid ""
 "\n"
 "WBS"
 msgstr ""
+"\n"
+"WBS"
 
 #: src/planner-gantt-view.c:540 src/planner-ttable-tree.c:367
 msgid ""
@@ -1254,11 +1256,11 @@ msgstr "planner: --geometry nemôže byť použité s viac ako jedným súborom.
 
 #: src/planner-msp-plugin.c:49
 msgid "MS Project XML..."
-msgstr ""
+msgstr "MS Project XML..."
 
 #: src/planner-msp-plugin.c:49
 msgid "Import an MS Project XML file"
-msgstr ""
+msgstr "Importovať XML súbor MS Project"
 
 #: src/planner-msp-plugin.c:113
 msgid "Couldn't import file."
@@ -1679,9 +1681,8 @@ msgid "Toggle fixed duration"
 msgstr "Prepnúť fixné trvanie"
 
 #: src/planner-task-dialog.c:661
-#, fuzzy
 msgid "Edit task scheduling"
-msgstr "Upraviť vlastnosti úlohy"
+msgstr "Upraviť plánovanie úlohy"
 
 #: src/planner-task-dialog.c:741
 msgid "Assign resource to task"
@@ -1715,7 +1716,7 @@ msgstr "Nie skôr ako %s"
 #: src/planner-task-dialog.c:1496
 #, c-format
 msgid "On fixed date %s"
-msgstr ""
+msgstr "V presne stanovený deň %s"
 
 #: src/planner-task-dialog.c:1877
 msgid "Finish to start (FS)"
@@ -1780,7 +1781,7 @@ msgstr "Odstrániť úlohu"
 
 #: src/planner-task-tree.c:639
 msgid "Apply constraint to task"
-msgstr ""
+msgstr "Aplikovať obmedzenie na úlohu"
 
 #: src/planner-task-tree.c:701
 msgid "Reset task constraint"
@@ -1792,7 +1793,7 @@ msgstr "Presunúť úlohu"
 
 #: src/planner-task-tree.c:1485 src/planner-task-tree.c:1617
 msgid "N/A"
-msgstr ""
+msgstr "Neprístupné"
 
 #: src/planner-task-tree.c:2747
 #, c-format
@@ -1800,6 +1801,8 @@ msgid ""
 "You are about to open an edit dialog each for %i tasks. Are you sure that "
 "you want to do that?"
 msgstr ""
+"Idete otvoriť dialógové okno na úpravu samostatne pre každú z %i úloh. Ste "
+"si istý, že to chcete urobiť?"
 
 #: src/planner-task-view.c:122
 msgid "_Edit Task"
@@ -1823,7 +1826,7 @@ msgstr "Ú_lohy"
 #.
 #: src/planner-task-view.c:278
 msgid "WBS"
-msgstr ""
+msgstr "WBS"
 
 #: src/planner-task-view.c:280
 msgid "Start"
@@ -1838,9 +1841,8 @@ msgid "Slack"
 msgstr "Spomalenie"
 
 #: src/planner-task-view.c:286
-#, fuzzy
 msgid "Assigned to"
-msgstr "Priradené"
+msgstr "Má priradené"
 
 #: src/planner-task-view.c:482
 msgid "Edit custom task properties"
@@ -1851,46 +1853,42 @@ msgid "Task"
 msgstr "Úloh"
 
 #: src/planner-ttable-row.c:1964
-#, fuzzy, c-format
+#, c-format
 msgid "Make task '%s' start on %s"
-msgstr "Urobiť úlohu '%s' predchodcom '%s'"
+msgstr "Urobiť úlohu '%s' začínajúcu dňa %s"
 
 #: src/planner-ttable-row.c:2029
 #, c-format
 msgid "Change task '%s' work to %s, duration to %s (%d)"
-msgstr ""
+msgstr "Zmeniť prácu úlohy '%s' na %s, trvanie na %s (%d)"
 
 #: src/planner-ttable-tree.c:118
-#, fuzzy
 msgid "/_Expand all resources"
-msgstr "_Upraviť zdroj..."
+msgstr "/_Rozbali všetky zdroje"
 
 #: src/planner-ttable-tree.c:121
-#, fuzzy
 msgid "/_Collapse all resources"
-msgstr "/_Vložiť zdroj"
+msgstr "/_Zbaliť všetky zdroje"
 
 #: src/planner-ttable-tree.c:369
-#, fuzzy
 msgid ""
 "\n"
 "Task"
-msgstr "Úlohy"
+msgstr ""
+"\n"
+"Úloha"
 
 #: src/planner-ttable-view.c:100
-#, fuzzy
 msgid "Zoom to fit"
-msgstr "Na veľkosť do okna"
+msgstr "Zväčšiť na veľkosť okna"
 
 #: src/planner-ttable-view.c:159
-#, fuzzy
 msgid "Resource Usage"
-msgstr "Zdroje"
+msgstr "Využitie zdrojov"
 
 #: src/planner-ttable-view.c:166
-#, fuzzy
 msgid "Resource _Usage"
-msgstr "Zdroje"
+msgstr "_Využitie zdrojov"
 
 #: src/planner-view-loader.c:41
 #, c-format
@@ -1919,7 +1917,7 @@ msgstr "Otvoriť projekt"
 
 #: src/planner-window.c:229
 msgid "_Import"
-msgstr ""
+msgstr "_Importovať"
 
 #: src/planner-window.c:233 src/planner-window.c:1441
 msgid "_Save"
@@ -1931,7 +1929,7 @@ msgstr "uloží aktuálny projekt"
 
 #: src/planner-window.c:236
 msgid "_Export"
-msgstr ""
+msgstr "_Exportovať"
 
 #: src/planner-window.c:239
 msgid "Save _As..."
@@ -1950,7 +1948,6 @@ msgid "Print the current project"
 msgstr "Vytlačí aktuálny projekt"
 
 #: src/planner-window.c:245
-#, fuzzy
 msgid "Print Pre_view"
 msgstr "_Náhľad pred tlačou"
 
@@ -2036,7 +2033,7 @@ msgstr "_Sprievodca používateľa"
 
 #: src/planner-window.c:296
 msgid "Show the Planner User Guide"
-msgstr "Zobrazí príručku používateľa Planneru"
+msgstr "Zobrazí príručku používateľa Plannera"
 
 #: src/planner-window.c:299
 msgid "_About"
@@ -2050,7 +2047,7 @@ msgstr "O tejto aplikácii"
 #: src/planner-window.c:565
 #, c-format
 msgid "Switch to the view \"%s\""
-msgstr ""
+msgstr "Prepnúť na pohľad \"%s\""
 
 #: src/planner-window.c:732
 msgid "Open a File"
@@ -2058,14 +2055,16 @@ msgstr "Otvoriť súbor"
 
 #: src/planner-window.c:742
 msgid "Planner Files"
-msgstr ""
+msgstr "Súbory pre Planner"
 
 #. I18n: Translators, list your names here, newline separated if there
 #. * are more than one, to appear in the about box.
 #.
 #: src/planner-window.c:1152 src/planner-window.c:1164
 msgid "translator-credits"
-msgstr "Zdenko Podobný\nMarcel Telka <marcel@telka.sk>"
+msgstr ""
+"Zdenko Podobný\n"
+"Marcel Telka <marcel@telka.sk>"
 
 #. "Copyright \xc2\xa9"
 #: src/planner-window.c:1161
@@ -2074,7 +2073,7 @@ msgstr "Aplikácia pre správu projektov pre prostredie GNOME"
 
 #: src/planner-window.c:1180
 msgid "The Planner Homepage"
-msgstr "Domovská stránka Planner-u"
+msgstr "Domovská stránka Plannera"
 
 #: src/planner-window.c:1381
 msgid "If you don't save, changes made the last minute will be discarded."
@@ -2110,7 +2109,6 @@ msgid "_Cancel"
 msgstr "_Zrušiť"
 
 #: src/planner-window.c:1533
-#, fuzzy
 msgid "Save a File"
 msgstr "Uložiť súbor"
 
@@ -2145,7 +2143,7 @@ msgstr ""
 #. Hack.
 #: src/planner-window.c:1856
 msgid "Unnamed database project"
-msgstr ""
+msgstr "Nepomenovaný databázový projekt"
 
 #: src/planner-window.c:1970
 #, c-format
@@ -2158,11 +2156,11 @@ msgstr "Upraviť pracovný čas"
 
 #: src/planner-xml-planner-plugin.c:53
 msgid "Planner 0.11 Format"
-msgstr ""
+msgstr "Formát Planner 0.11"
 
 #: src/planner-xml-planner-plugin.c:54
 msgid "Export project to a file suitable for Planner 0.11"
-msgstr ""
+msgstr "Exportovať projekt do súboru použiteľného pre Planner 0.11"
 
 #: src/planner-xml-planner-plugin.c:91
 msgid "Export"
