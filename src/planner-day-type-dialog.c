@@ -40,7 +40,7 @@ enum {
 };
 
 typedef struct {
-	MgMainWindow  *main_window;
+	PlannerWindow  *main_window;
 	MrpProject    *project;
 
 	GtkWidget     *dialog;
@@ -115,7 +115,7 @@ day_type_dialog_parent_destroy_cb (GtkWidget *window, GtkWidget *dialog)
 }
 
 GtkWidget *
-planner_day_type_dialog_new (MgMainWindow *window)
+planner_day_type_dialog_new (PlannerWindow *window)
 {
 	DialogData        *data;
 	GladeXML          *glade;
@@ -125,7 +125,7 @@ planner_day_type_dialog_new (MgMainWindow *window)
 	GtkTreeViewColumn *col;
 	GtkTreeSelection  *selection;
 	
-	g_return_val_if_fail (MG_IS_MAIN_WINDOW (window), NULL);
+	g_return_val_if_fail (PLANNER_IS_MAIN_WINDOW (window), NULL);
 	
 	glade = glade_xml_new (GLADEDIR "/calendar-dialog.glade",
 			       "day_type_dialog",
@@ -140,7 +140,7 @@ planner_day_type_dialog_new (MgMainWindow *window)
 	data = g_new0 (DialogData, 1);
 
 	data->main_window = window;
-	data->project = planner_main_window_get_project (window);
+	data->project = planner_window_get_project (window);
 	data->dialog = dialog;
 
 	g_signal_connect_object (window,

@@ -34,18 +34,18 @@
 #include "planner-scale-utils.h"
 
 
-struct _MgGanttHeaderPriv {
+struct _PlannerGanttHeaderPriv {
 	GdkWindow     *bin_window;
 	
 	GtkAdjustment *hadjustment;
 
 	PangoLayout   *layout;
 
-	MgScaleUnit    major_unit;
-	MgScaleFormat  major_format;
+	PlannerScaleUnit    major_unit;
+	PlannerScaleFormat  major_format;
 
-	MgScaleUnit    minor_unit;
-	MgScaleFormat  minor_format;
+	PlannerScaleUnit    minor_unit;
+	PlannerScaleFormat  minor_format;
 	
 	gdouble        hscale;
 	
@@ -66,8 +66,8 @@ enum {
 	PROP_ZOOM,
 };
 
-static void     gantt_header_class_init           (MgGanttHeaderClass *klass);
-static void     gantt_header_init                 (MgGanttHeader      *header);
+static void     gantt_header_class_init           (PlannerGanttHeaderClass *klass);
+static void     gantt_header_init                 (PlannerGanttHeader      *header);
 static void     gantt_header_finalize             (GObject            *object);
 static void     gantt_header_set_property         (GObject            *object,
 						   guint               prop_id,
@@ -85,11 +85,11 @@ static void     gantt_header_size_allocate        (GtkWidget          *widget,
 						   GtkAllocation      *allocation);
 static gboolean gantt_header_expose_event         (GtkWidget          *widget,
 						   GdkEventExpose     *event);
-static void     gantt_header_set_adjustments      (MgGanttHeader      *header,
+static void     gantt_header_set_adjustments      (PlannerGanttHeader      *header,
 						   GtkAdjustment      *hadj,
 						   GtkAdjustment      *vadj);
 static void     gantt_header_adjustment_changed   (GtkAdjustment      *adjustment,
-						   MgGanttHeader      *header);
+						   PlannerGanttHeader      *header);
 
 
 static GtkWidgetClass *parent_class = NULL;
@@ -102,20 +102,20 @@ planner_gantt_header_get_type (void)
 
 	if (!planner_gantt_header_type) {
 		static const GTypeInfo planner_gantt_header_info = {
-			sizeof (MgGanttHeaderClass),
+			sizeof (PlannerGanttHeaderClass),
 			NULL,		/* base_init */
 			NULL,		/* base_finalize */
 			(GClassInitFunc) gantt_header_class_init,
 			NULL,		/* class_finalize */
 			NULL,		/* class_data */
-			sizeof (MgGanttHeader),
+			sizeof (PlannerGanttHeader),
 			0,              /* n_preallocs */
 			(GInstanceInitFunc) gantt_header_init
 		};
 
 		planner_gantt_header_type = g_type_register_static (
 			GTK_TYPE_WIDGET,
-			"MgGanttHeader",
+			"PlannerGanttHeader",
 			&planner_gantt_header_info,
 			0);
 	}
@@ -124,7 +124,7 @@ planner_gantt_header_get_type (void)
 }
 
 static void
-gantt_header_class_init (MgGanttHeaderClass *class)
+gantt_header_class_init (PlannerGanttHeaderClass *class)
 {
 	GObjectClass      *o_class;
 	GtkObjectClass    *object_class;
@@ -159,7 +159,7 @@ gantt_header_class_init (MgGanttHeaderClass *class)
 		g_signal_new ("set_scroll_adjustments",
 			      G_TYPE_FROM_CLASS (object_class),
 			      G_SIGNAL_RUN_LAST,
-			      G_STRUCT_OFFSET (MgGanttHeaderClass, set_scroll_adjustments),
+			      G_STRUCT_OFFSET (PlannerGanttHeaderClass, set_scroll_adjustments),
 			      NULL, NULL,
 			      planner_marshal_VOID__OBJECT_OBJECT,
 			      G_TYPE_NONE, 2,
@@ -213,13 +213,13 @@ gantt_header_class_init (MgGanttHeaderClass *class)
 }
 
 static void
-gantt_header_init (MgGanttHeader *header)
+gantt_header_init (PlannerGanttHeader *header)
 {
-	MgGanttHeaderPriv *priv;
+	PlannerGanttHeaderPriv *priv;
 
 	gtk_widget_set_redraw_on_allocate (GTK_WIDGET (header), FALSE);
 
-	priv = g_new0 (MgGanttHeaderPriv, 1);
+	priv = g_new0 (PlannerGanttHeaderPriv, 1);
 	header->priv = priv;
 
 	gantt_header_set_adjustments (header, NULL, NULL);
@@ -230,17 +230,17 @@ gantt_header_init (MgGanttHeader *header)
 	priv->height = -1;
 	priv->width = -1;
 
-	priv->major_unit = MG_SCALE_UNIT_MONTH;
-	priv->minor_unit = MG_SCALE_UNIT_WEEK;
+	priv->major_unit = PLANNER_SCALE_UNIT_MONTH;
+	priv->minor_unit = PLANNER_SCALE_UNIT_WEEK;
 
 	priv->layout = gtk_widget_create_pango_layout (GTK_WIDGET (header),
 						       NULL);
 }
 
 static void
-gantt_header_set_zoom (MgGanttHeader *header, gdouble zoom)
+gantt_header_set_zoom (PlannerGanttHeader *header, gdouble zoom)
 {
-	MgGanttHeaderPriv *priv;
+	PlannerGanttHeaderPriv *priv;
 	gint               level;
 
 	priv = header->priv;
@@ -260,8 +260,8 @@ gantt_header_set_property (GObject      *object,
 			   const GValue *value,
 			   GParamSpec   *pspec)
 {
-	MgGanttHeader     *header;
-	MgGanttHeaderPriv *priv;
+	PlannerGanttHeader     *header;
+	PlannerGanttHeaderPriv *priv;
 	gdouble            tmp;
 	gint               width;
 	gdouble            tmp_scale;
@@ -269,7 +269,7 @@ gantt_header_set_property (GObject      *object,
 	gboolean           change_height = FALSE;
 	gboolean           change_scale = FALSE;
 
-	header = MG_GANTT_HEADER (object);
+	header = PLANNER_GANTT_HEADER (object);
 	priv = header->priv;
 
 	switch (prop_id) {
@@ -338,9 +338,9 @@ gantt_header_get_property (GObject    *object,
 			   GValue     *value,
 			   GParamSpec *pspec)
 {
-	MgGanttHeader *header;
+	PlannerGanttHeader *header;
 
-	header = MG_GANTT_HEADER (object);
+	header = PLANNER_GANTT_HEADER (object);
 
 	switch (prop_id) {
 	default:
@@ -352,7 +352,7 @@ gantt_header_get_property (GObject    *object,
 static void
 gantt_header_finalize (GObject *object)
 {
-	MgGanttHeader *header = MG_GANTT_HEADER (object);
+	PlannerGanttHeader *header = PLANNER_GANTT_HEADER (object);
 
 	g_free (header->priv);
 
@@ -364,7 +364,7 @@ gantt_header_finalize (GObject *object)
 static void
 gantt_header_destroy (GtkObject *object)
 {
-	/*MgGanttHeader *header = MG_GANTT_HEADER (object);*/
+	/*PlannerGanttHeader *header = PLANNER_GANTT_HEADER (object);*/
 
 	/* FIXME: free stuff. */
 
@@ -376,11 +376,11 @@ gantt_header_destroy (GtkObject *object)
 static void
 gantt_header_map (GtkWidget *widget)
 {
-	MgGanttHeader *header;
+	PlannerGanttHeader *header;
 
-	g_return_if_fail (MG_IS_GANTT_HEADER (widget));
+	g_return_if_fail (PLANNER_IS_GANTT_HEADER (widget));
 	
-	header = MG_GANTT_HEADER (widget);
+	header = PLANNER_GANTT_HEADER (widget);
 	
 	GTK_WIDGET_SET_FLAGS (widget, GTK_MAPPED);
 
@@ -392,14 +392,14 @@ gantt_header_map (GtkWidget *widget)
 static void
 gantt_header_realize (GtkWidget *widget)
 {
-	MgGanttHeader *header;
+	PlannerGanttHeader *header;
 	GdkWindowAttr  attributes;
 	GdkGCValues    values;
 	gint           attributes_mask;
   
-	g_return_if_fail (MG_IS_GANTT_HEADER (widget));
+	g_return_if_fail (PLANNER_IS_GANTT_HEADER (widget));
 	
-	header = MG_GANTT_HEADER (widget);
+	header = PLANNER_GANTT_HEADER (widget);
 	
 	GTK_WIDGET_SET_FLAGS (widget, GTK_REALIZED);
 
@@ -454,11 +454,11 @@ gantt_header_realize (GtkWidget *widget)
 static void
 gantt_header_unrealize (GtkWidget *widget)
 {
-	MgGanttHeader *header;
+	PlannerGanttHeader *header;
 
-	g_return_if_fail (MG_IS_GANTT_HEADER (widget));
+	g_return_if_fail (PLANNER_IS_GANTT_HEADER (widget));
 
-	header = MG_GANTT_HEADER (widget);
+	header = PLANNER_GANTT_HEADER (widget);
 
 	gdk_window_set_user_data (header->priv->bin_window, NULL);
 	gdk_window_destroy (header->priv->bin_window);
@@ -473,11 +473,11 @@ static void
 gantt_header_size_allocate (GtkWidget     *widget,
 			    GtkAllocation *allocation)
 {
-	MgGanttHeader *header;
+	PlannerGanttHeader *header;
 
-	g_return_if_fail (MG_IS_GANTT_HEADER (widget));
+	g_return_if_fail (PLANNER_IS_GANTT_HEADER (widget));
 
-	header = MG_GANTT_HEADER (widget);
+	header = PLANNER_GANTT_HEADER (widget);
 
 	if (GTK_WIDGET_REALIZED (widget)) {
 		gdk_window_move_resize (widget->window,
@@ -495,8 +495,8 @@ static gboolean
 gantt_header_expose_event (GtkWidget      *widget,
 			   GdkEventExpose *event)
 {
-	MgGanttHeader     *header;
-	MgGanttHeaderPriv *priv;
+	PlannerGanttHeader     *header;
+	PlannerGanttHeaderPriv *priv;
 	gint               width, height;
 	gdouble            hscale;
 	gint               x;
@@ -509,7 +509,7 @@ gantt_header_expose_event (GtkWidget      *widget,
 	GdkGC             *gc;
 	GdkRectangle       rect;
 	
-	header = MG_GANTT_HEADER (widget);
+	header = PLANNER_GANTT_HEADER (widget);
 	priv = header->priv;
 	hscale = priv->hscale;
 
@@ -556,7 +556,7 @@ gantt_header_expose_event (GtkWidget      *widget,
 	rect.height = height;
 
 	/* Draw the major scale. */
-	if (major_width < 2 || priv->major_unit == MG_SCALE_UNIT_NONE) {
+	if (major_width < 2 || priv->major_unit == PLANNER_SCALE_UNIT_NONE) {
 		/* Unless it's too thin to make sense. */
 		goto minor_ticks;
 	}
@@ -595,7 +595,7 @@ gantt_header_expose_event (GtkWidget      *widget,
  minor_ticks:
 
 	/* Draw the minor scale. */
-	if (minor_width < 2 || priv->major_unit == MG_SCALE_UNIT_NONE) {
+	if (minor_width < 2 || priv->major_unit == PLANNER_SCALE_UNIT_NONE) {
 		/* Unless it's too thin to make sense. */
 		goto done;
 	}
@@ -639,7 +639,7 @@ gantt_header_expose_event (GtkWidget      *widget,
 
 /* Callbacks */
 static void
-gantt_header_set_adjustments (MgGanttHeader *header,
+gantt_header_set_adjustments (PlannerGanttHeader *header,
 			      GtkAdjustment *hadj,
 			      GtkAdjustment *vadj)
 {
@@ -672,7 +672,7 @@ gantt_header_set_adjustments (MgGanttHeader *header,
 
 static void
 gantt_header_adjustment_changed (GtkAdjustment *adjustment,
-				 MgGanttHeader *header)
+				 PlannerGanttHeader *header)
 {
 	if (GTK_WIDGET_REALIZED (header)) {
 		gdk_window_move (header->priv->bin_window,
@@ -685,6 +685,6 @@ GtkWidget *
 planner_gantt_header_new (void)
 {
 
-	return g_object_new (MG_TYPE_GANTT_HEADER, NULL);
+	return g_object_new (PLANNER_TYPE_GANTT_HEADER, NULL);
 }
 

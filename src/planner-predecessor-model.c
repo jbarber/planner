@@ -26,15 +26,15 @@
 #include <libgnome/gnome-i18n.h>
 #include "planner-predecessor-model.h"
 
-struct _MgPredecessorModelPriv {
+struct _PlannerPredecessorModelPriv {
 	MrpProject *project;
 	MrpTask    *task;
 };
 
 #define G_LIST(x) ((GList *) x)
 
-static void       mpm_init                   (MgPredecessorModel      *model);
-static void       mpm_class_init             (MgPredecessorModelClass *class);
+static void       mpm_init                   (PlannerPredecessorModel      *model);
+static void       mpm_class_init             (PlannerPredecessorModelClass *class);
 
 static void       mpm_finalize               (GObject              *object);
 static gint       mpm_get_n_columns          (GtkTreeModel         *treemodel);
@@ -48,9 +48,9 @@ static void       mpm_get_value              (GtkTreeModel         *treemodel,
 
 static void       mpm_predecessor_changed_cb (MrpRelation          *relation,
 					      GParamSpec           *pspec,
-					      MgPredecessorModel   *model);
+					      PlannerPredecessorModel   *model);
 
-static MgListModelClass *parent_class = NULL;
+static PlannerListModelClass *parent_class = NULL;
 
 
 GType
@@ -60,19 +60,19 @@ planner_predecessor_model_get_type (void)
         
         if (!type) {
                 static const GTypeInfo info = {
-                                sizeof (MgPredecessorModelClass),
+                                sizeof (PlannerPredecessorModelClass),
                                 NULL,		/* base_init */
                                 NULL,		/* base_finalize */
                                 (GClassInitFunc) mpm_class_init,
                                 NULL,		/* class_finalize */
                                 NULL,		/* class_data */
-                                sizeof (MgPredecessorModel),
+                                sizeof (PlannerPredecessorModel),
                                 0,
                                 (GInstanceInitFunc) mpm_init,
                         };
 
-                type = g_type_register_static (MG_TYPE_LIST_MODEL,
-					       "MgPredecessorModel",
+                type = g_type_register_static (PLANNER_TYPE_LIST_MODEL,
+					       "PlannerPredecessorModel",
 					       &info, 0);
         }
         
@@ -80,14 +80,14 @@ planner_predecessor_model_get_type (void)
 }
 
 static void
-mpm_class_init (MgPredecessorModelClass *klass)
+mpm_class_init (PlannerPredecessorModelClass *klass)
 {
         GObjectClass     *object_class;
-	MgListModelClass *lm_class;
+	PlannerListModelClass *lm_class;
 	
         parent_class = g_type_class_peek_parent (klass);
         object_class = G_OBJECT_CLASS (klass);
-	lm_class     = MG_LIST_MODEL_CLASS (klass);
+	lm_class     = PLANNER_LIST_MODEL_CLASS (klass);
 	
         object_class->finalize = mpm_finalize;
 
@@ -97,11 +97,11 @@ mpm_class_init (MgPredecessorModelClass *klass)
 }
 
 static void
-mpm_init (MgPredecessorModel *model)
+mpm_init (PlannerPredecessorModel *model)
 {
-        MgPredecessorModelPriv *priv;
+        PlannerPredecessorModelPriv *priv;
         
-        priv = g_new0 (MgPredecessorModelPriv, 1);
+        priv = g_new0 (PlannerPredecessorModelPriv, 1);
 
 	priv->project = NULL;
 
@@ -111,7 +111,7 @@ mpm_init (MgPredecessorModel *model)
 static void
 mpm_finalize (GObject *object)
 {
-	MgPredecessorModel *model = MG_PREDECESSOR_MODEL (object);
+	PlannerPredecessorModel *model = PLANNER_PREDECESSOR_MODEL (object);
 
         if (model->priv) {
 		if (model->priv->project) {
@@ -158,16 +158,16 @@ mpm_get_value (GtkTreeModel *tree_model,
                gint          column,
                GValue       *value)
 {	
-	MgPredecessorModel     *model;
+	PlannerPredecessorModel     *model;
 	MrpTask                *task;
 	MrpRelation            *relation;
-	MgPredecessorModelPriv *priv;
+	PlannerPredecessorModelPriv *priv;
 	gchar                  *str;
 	
-        g_return_if_fail (MG_IS_PREDECESSOR_MODEL (tree_model));
+        g_return_if_fail (PLANNER_IS_PREDECESSOR_MODEL (tree_model));
         g_return_if_fail (iter != NULL);
 
-	model = MG_PREDECESSOR_MODEL (tree_model);	
+	model = PLANNER_PREDECESSOR_MODEL (tree_model);	
 	priv = model->priv;
 	task = G_LIST (iter->user_data)->data;
 	relation = mrp_task_get_relation (priv->task, task);
@@ -218,22 +218,22 @@ mpm_get_value (GtkTreeModel *tree_model,
 static void
 mpm_predecessor_notify_cb (MrpTask            *task,
 			   GParamSpec         *pspec,
-			   MgPredecessorModel *model)
+			   PlannerPredecessorModel *model)
 {
-	g_return_if_fail (MG_IS_PREDECESSOR_MODEL (model));
+	g_return_if_fail (PLANNER_IS_PREDECESSOR_MODEL (model));
 	g_return_if_fail (MRP_IS_TASK (task));
 
-	planner_list_model_update (MG_LIST_MODEL (model), MRP_OBJECT (task));
+	planner_list_model_update (PLANNER_LIST_MODEL (model), MRP_OBJECT (task));
 }
 
 static void
 mpm_relation_added_cb (MrpProject         *project, 
 		       MrpRelation        *relation,
-		       MgPredecessorModel *model)
+		       PlannerPredecessorModel *model)
 {
 	MrpTask *predecessor;
 	
-	g_return_if_fail (MG_IS_PREDECESSOR_MODEL (model));
+	g_return_if_fail (PLANNER_IS_PREDECESSOR_MODEL (model));
 
 	predecessor = mrp_relation_get_predecessor (relation);
 
@@ -244,7 +244,7 @@ mpm_relation_added_cb (MrpProject         *project,
 		return;
 	}
 	
-	planner_list_model_append (MG_LIST_MODEL (model),
+	planner_list_model_append (PLANNER_LIST_MODEL (model),
 			      MRP_OBJECT (predecessor));
 
 	g_signal_connect_object (predecessor, 
@@ -256,11 +256,11 @@ mpm_relation_added_cb (MrpProject         *project,
 static void
 mpm_relation_removed_cb (MrpProject         *project, 
 			 MrpRelation        *relation,
-			 MgPredecessorModel *model)
+			 PlannerPredecessorModel *model)
 {
 	MrpTask *predecessor;
 
-	g_return_if_fail (MG_IS_PREDECESSOR_MODEL (model));
+	g_return_if_fail (PLANNER_IS_PREDECESSOR_MODEL (model));
 
 	/* We're not interested in the case where our task is the
 	 * predecessor.
@@ -271,7 +271,7 @@ mpm_relation_removed_cb (MrpProject         *project,
 		return;
 	}
 
-	planner_list_model_remove (MG_LIST_MODEL (model),
+	planner_list_model_remove (PLANNER_LIST_MODEL (model),
 			      MRP_OBJECT (predecessor));
 
 	g_signal_handlers_disconnect_by_func (predecessor, 
@@ -281,17 +281,17 @@ mpm_relation_removed_cb (MrpProject         *project,
 
 static void 
 mpm_predecessor_changed_cb (MrpRelation *relation, GParamSpec *pspec,
-			    MgPredecessorModel *model)      
+			    PlannerPredecessorModel *model)      
 {
 	MrpTask *predecessor;
 
 	predecessor = mrp_relation_get_predecessor (relation);
 
-	planner_list_model_update (MG_LIST_MODEL (model), MRP_OBJECT (predecessor));
+	planner_list_model_update (PLANNER_LIST_MODEL (model), MRP_OBJECT (predecessor));
 }
 
 static void
-mpm_connect_to_relation (MrpRelation *relation, MgPredecessorModel *model)
+mpm_connect_to_relation (MrpRelation *relation, PlannerPredecessorModel *model)
 {
 	MrpTask *predecessor;
 
@@ -314,13 +314,13 @@ mpm_connect_to_relation (MrpRelation *relation, MgPredecessorModel *model)
 GtkTreeModel *
 planner_predecessor_model_new (MrpTask *task)
 {
-        MgPredecessorModel     *model;
-        MgPredecessorModelPriv *priv;
+        PlannerPredecessorModel     *model;
+        PlannerPredecessorModelPriv *priv;
 	GList                  *list, *l;
 	GList                  *tasks;
 	MrpTask                *predecessor;
 
-        model = g_object_new (MG_TYPE_PREDECESSOR_MODEL, NULL);
+        model = g_object_new (PLANNER_TYPE_PREDECESSOR_MODEL, NULL);
         priv = model->priv;
 
         priv->task = g_object_ref (task); 
@@ -347,7 +347,7 @@ planner_predecessor_model_new (MrpTask *task)
 
 	tasks = g_list_reverse (tasks);
 
-	planner_list_model_set_data (MG_LIST_MODEL (model), tasks);
+	planner_list_model_set_data (PLANNER_LIST_MODEL (model), tasks);
 	g_list_free (tasks);
 
 	g_signal_connect_object (priv->task,

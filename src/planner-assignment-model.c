@@ -27,15 +27,15 @@
 #include <libplanner/mrp-resource.h>
 #include "planner-assignment-model.h"
 
-struct _MgAssignmentModelPriv {
+struct _PlannerAssignmentModelPriv {
 	MrpProject *project;
 	MrpTask    *task;
 };
 
 #define G_LIST(x) ((GList *) x)
 
-static void       mam_init                  (MgAssignmentModel      *model);
-static void       mam_class_init            (MgAssignmentModelClass *class);
+static void       mam_init                  (PlannerAssignmentModel      *model);
+static void       mam_class_init            (PlannerAssignmentModelClass *class);
 
 static void       mam_finalize              (GObject              *object);
 static gint       mam_get_n_columns         (GtkTreeModel         *treemodel);
@@ -48,19 +48,19 @@ static void       mam_get_value             (GtkTreeModel         *treemodel,
 					     GValue               *value);
 static void       mam_assignment_changed_cb (MrpTask              *task,
 					     MrpAssignment        *assignment,
-					     MgAssignmentModel    *model);
+					     PlannerAssignmentModel    *model);
 static void       mam_resource_added_cb     (MrpProject           *project, 
 					     MrpResource          *assignment,
-					     MgAssignmentModel    *model);
+					     PlannerAssignmentModel    *model);
 static void       mam_resource_removed_cb   (MrpProject           *project, 
 					     MrpResource          *resource,
-					     MgAssignmentModel    *model);
+					     PlannerAssignmentModel    *model);
 static void       mam_resource_notify_cb    (MrpResource          *resource,
 					     GParamSpec           *pspec,
-					     MgAssignmentModel    *model);
+					     PlannerAssignmentModel    *model);
 
 
-static MgListModelClass *parent_class = NULL;
+static PlannerListModelClass *parent_class = NULL;
 
 
 GType
@@ -71,19 +71,19 @@ planner_assignment_model_get_type (void)
         if (!type) {
                 static const GTypeInfo info =
                         {
-                                sizeof (MgAssignmentModelClass),
+                                sizeof (PlannerAssignmentModelClass),
                                 NULL,		/* base_init */
                                 NULL,		/* base_finalize */
                                 (GClassInitFunc) mam_class_init,
                                 NULL,		/* class_finalize */
                                 NULL,		/* class_data */
-                                sizeof (MgAssignmentModel),
+                                sizeof (PlannerAssignmentModel),
                                 0,
                                 (GInstanceInitFunc) mam_init,
                         };
 
-                type = g_type_register_static (MG_TYPE_LIST_MODEL,
-					       "MgAssignmentModel",
+                type = g_type_register_static (PLANNER_TYPE_LIST_MODEL,
+					       "PlannerAssignmentModel",
 					       &info, 0);
         }
         
@@ -91,14 +91,14 @@ planner_assignment_model_get_type (void)
 }
 
 static void
-mam_class_init (MgAssignmentModelClass *klass)
+mam_class_init (PlannerAssignmentModelClass *klass)
 {
         GObjectClass     *object_class;
-	MgListModelClass *lm_class;
+	PlannerListModelClass *lm_class;
 	
         parent_class = g_type_class_peek_parent (klass);
         object_class = G_OBJECT_CLASS (klass);
-	lm_class     = MG_LIST_MODEL_CLASS (klass);
+	lm_class     = PLANNER_LIST_MODEL_CLASS (klass);
 	
         object_class->finalize = mam_finalize;
 
@@ -108,11 +108,11 @@ mam_class_init (MgAssignmentModelClass *klass)
 }
 
 static void
-mam_init (MgAssignmentModel *model)
+mam_init (PlannerAssignmentModel *model)
 {
-        MgAssignmentModelPriv *priv;
+        PlannerAssignmentModelPriv *priv;
         
-        priv = g_new0 (MgAssignmentModelPriv, 1);
+        priv = g_new0 (PlannerAssignmentModelPriv, 1);
         
 	priv->project = NULL;
 
@@ -122,7 +122,7 @@ mam_init (MgAssignmentModel *model)
 static void
 mam_finalize (GObject *object)
 {
-	MgAssignmentModel *model = MG_ASSIGNMENT_MODEL (object);
+	PlannerAssignmentModel *model = PLANNER_ASSIGNMENT_MODEL (object);
 
         if (model->priv) {
 		if (model->priv->project) {
@@ -176,17 +176,17 @@ mam_get_value (GtkTreeModel *tree_model,
                gint          column,
                GValue       *value)
 {	
-	MgAssignmentModel *model;
+	PlannerAssignmentModel *model;
 	MrpAssignment     *assignment;
 	MrpResource       *resource;
         gchar             *str;
         gint               units;
         gfloat             rate;
 	
-        g_return_if_fail (MG_IS_ASSIGNMENT_MODEL (tree_model));
+        g_return_if_fail (PLANNER_IS_ASSIGNMENT_MODEL (tree_model));
         g_return_if_fail (iter != NULL);
 
-	model    = MG_ASSIGNMENT_MODEL (tree_model);
+	model    = PLANNER_ASSIGNMENT_MODEL (tree_model);
 	resource = MRP_RESOURCE (G_LIST(iter->user_data)->data);
 
         switch (column) {
@@ -251,27 +251,27 @@ mam_get_value (GtkTreeModel *tree_model,
 static void
 mam_assignment_changed_cb (MrpTask           *task,
 			   MrpAssignment     *assignment,
-			   MgAssignmentModel *model)
+			   PlannerAssignmentModel *model)
 {
 	MrpResource *resource;
 	
-	g_return_if_fail (MG_IS_ASSIGNMENT_MODEL (model));
+	g_return_if_fail (PLANNER_IS_ASSIGNMENT_MODEL (model));
 	g_return_if_fail (MRP_IS_ASSIGNMENT (assignment));
 	
 	resource = mrp_assignment_get_resource (assignment);
 
-	planner_list_model_update (MG_LIST_MODEL (model), MRP_OBJECT (resource));
+	planner_list_model_update (PLANNER_LIST_MODEL (model), MRP_OBJECT (resource));
 }
 
 static void
 mam_resource_added_cb (MrpProject        *project, 
 		       MrpResource       *resource,
-		       MgAssignmentModel *model)
+		       PlannerAssignmentModel *model)
 {
-	g_return_if_fail (MG_IS_ASSIGNMENT_MODEL (model));
+	g_return_if_fail (PLANNER_IS_ASSIGNMENT_MODEL (model));
 	g_return_if_fail (MRP_IS_RESOURCE (resource));
 
-	planner_list_model_append (MG_LIST_MODEL (model), MRP_OBJECT (resource));
+	planner_list_model_append (PLANNER_LIST_MODEL (model), MRP_OBJECT (resource));
 	g_signal_connect_object (resource, 
 				 "notify",
 				 G_CALLBACK (mam_resource_notify_cb),
@@ -281,36 +281,36 @@ mam_resource_added_cb (MrpProject        *project,
 static void
 mam_resource_removed_cb (MrpProject        *project, 
 			 MrpResource       *resource,
-			 MgAssignmentModel *model)
+			 PlannerAssignmentModel *model)
 {
-	g_return_if_fail (MG_IS_ASSIGNMENT_MODEL (model));
+	g_return_if_fail (PLANNER_IS_ASSIGNMENT_MODEL (model));
 	g_return_if_fail (MRP_IS_RESOURCE (resource));
 
-	planner_list_model_remove (MG_LIST_MODEL (model), MRP_OBJECT (resource));
+	planner_list_model_remove (PLANNER_LIST_MODEL (model), MRP_OBJECT (resource));
 }
 
 static void
 mam_resource_notify_cb (MrpResource       *resource,
 			GParamSpec        *pspec,
-			MgAssignmentModel *model)
+			PlannerAssignmentModel *model)
 {
-	g_return_if_fail (MG_IS_ASSIGNMENT_MODEL (model));
+	g_return_if_fail (PLANNER_IS_ASSIGNMENT_MODEL (model));
 	g_return_if_fail (MRP_IS_RESOURCE (resource));
 	
-	planner_list_model_update (MG_LIST_MODEL (model), MRP_OBJECT (resource));
+	planner_list_model_update (PLANNER_LIST_MODEL (model), MRP_OBJECT (resource));
 }
 
-MgAssignmentModel *
+PlannerAssignmentModel *
 planner_assignment_model_new (MrpTask *task)
 {
-        MgAssignmentModel     *model;
-        MgAssignmentModelPriv *priv;
+        PlannerAssignmentModel     *model;
+        PlannerAssignmentModelPriv *priv;
 	GList                 *node;
 	GList                 *resources;
 	
-        model = g_object_new (MG_TYPE_ASSIGNMENT_MODEL, NULL);
+        model = g_object_new (PLANNER_TYPE_ASSIGNMENT_MODEL, NULL);
         
-	g_return_val_if_fail (MG_IS_ASSIGNMENT_MODEL (model), NULL);
+	g_return_val_if_fail (PLANNER_IS_ASSIGNMENT_MODEL (model), NULL);
 
         priv = model->priv;
 
@@ -318,7 +318,7 @@ planner_assignment_model_new (MrpTask *task)
 	g_object_get (priv->task, "project", &priv->project, NULL);
 
 	resources = mrp_project_get_resources (priv->project);
-	planner_list_model_set_data (MG_LIST_MODEL (model), resources);
+	planner_list_model_set_data (PLANNER_LIST_MODEL (model), resources);
 
 	for (node = resources; node; node = node->next) {
 		g_signal_connect_object (node->data,

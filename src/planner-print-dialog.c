@@ -39,7 +39,7 @@ static GtkNotebook * print_dialog_get_notebook (GtkWidget *dialog);
 
 
 GtkWidget *
-planner_print_dialog_new (MgMainWindow  *window,
+planner_print_dialog_new (PlannerWindow  *window,
 		     GnomePrintJob *job,
 		     GList         *views)
 {
@@ -117,7 +117,7 @@ planner_print_dialog_get_print_selection (GtkDialog *dialog,
 	GtkToggleButton *button;
 	GList           *buttons, *l;
 	GList           *views = NULL;
-	MgView          *view;
+	PlannerView          *view;
 
 	g_return_val_if_fail (GTK_IS_DIALOG (dialog), NULL);
 	

@@ -20,12 +20,12 @@
  * Boston, MA 02111-1307, USA.
  */
 
-#ifndef __MG_VIEW_LOADER_H__
-#define __MG_VIEW_LOADER_H__
+#ifndef __PLANNER_VIEW_LOADER_H__
+#define __PLANNER_VIEW_LOADER_H__
 
-#include "planner-main-window.h"
+#include "planner-window.h"
 
-GList *planner_view_loader_load (MgMainWindow *window);
+GList *planner_view_loader_load (PlannerWindow *window);
 
-#endif /* __MG_VIEW_LOADER_H__ */
+#endif /* __PLANNER_VIEW_LOADER_H__ */
 

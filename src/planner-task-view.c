@@ -50,23 +50,23 @@
 #include "planner-table-print-sheet.h"
 
 
-struct _MgViewPriv {
+struct _PlannerViewPriv {
 	GtkWidget         *tree;
 	GtkWidget         *frame;
 	
-	MgTablePrintSheet *print_sheet;
+	PlannerTablePrintSheet *print_sheet;
 };
 
-void          activate                           (MgView            *view);
-void          deactivate                         (MgView            *view);
-void          init                               (MgView            *view,
-						  MgMainWindow      *main_window);
-gchar        *get_label                          (MgView            *view);
-gchar        *get_menu_label                     (MgView            *view);
-gchar        *get_icon                           (MgView            *view);
-GtkWidget    *get_widget                         (MgView            *view);
+void          activate                           (PlannerView            *view);
+void          deactivate                         (PlannerView            *view);
+void          init                               (PlannerView            *view,
+						  PlannerWindow      *main_window);
+gchar        *get_label                          (PlannerView            *view);
+gchar        *get_menu_label                     (PlannerView            *view);
+gchar        *get_icon                           (PlannerView            *view);
+GtkWidget    *get_widget                         (PlannerView            *view);
 static void   task_view_project_loaded_cb        (MrpProject        *project,
-						  MgView            *view);
+						  PlannerView            *view);
 static void   task_view_insert_task_cb           (BonoboUIComponent *component,
 						  gpointer           data, 
 						  const char        *cname);
@@ -106,18 +106,18 @@ static void   task_view_reset_all_constraints_cb (BonoboUIComponent *component,
 static void   task_view_edit_custom_props_cb     (BonoboUIComponent *component,
 						  gpointer           data, 
 						  const char        *cname);
-static void   task_view_selection_changed_cb     (MgTaskTree        *tree,
-						  MgView            *view);
-static void   task_view_relations_changed_cb     (MgTaskTree        *tree,
+static void   task_view_selection_changed_cb     (PlannerTaskTree        *tree,
+						  PlannerView            *view);
+static void   task_view_relations_changed_cb     (PlannerTaskTree        *tree,
 						  MrpTask           *task,
 						  MrpRelation       *relation,
-						  MgView            *view);
-static void   task_view_update_ui                (MgView            *view);
-void          print_init                           (MgView            *view,
-						    MgPrintJob        *job);
-void          print                                (MgView            *view);
-gint          print_get_n_pages                    (MgView            *view);
-void          print_cleanup                        (MgView            *view);
+						  PlannerView            *view);
+static void   task_view_update_ui                (PlannerView            *view);
+void          print_init                           (PlannerView            *view,
+						    PlannerPrintJob        *job);
+void          print                                (PlannerView            *view);
+gint          print_get_n_pages                    (PlannerView            *view);
+void          print_cleanup                        (PlannerView            *view);
 
 static BonoboUIVerb verbs[] = {
 	BONOBO_UI_VERB ("InsertTask",		task_view_insert_task_cb),
@@ -138,7 +138,7 @@ static BonoboUIVerb verbs[] = {
 };
 
 G_MODULE_EXPORT void
-activate (MgView *view)
+activate (PlannerView *view)
 {
 	planner_view_activate_helper (view,
 				 DATADIR
@@ -147,62 +147,62 @@ activate (MgView *view)
 				 verbs);
 	
 	/* Set the initial sensitivity state. */
-	task_view_selection_changed_cb (MG_TASK_TREE (view->priv->tree), view);
+	task_view_selection_changed_cb (PLANNER_TASK_TREE (view->priv->tree), view);
 }
 
 G_MODULE_EXPORT void
-deactivate (MgView *view)
+deactivate (PlannerView *view)
 {
 	planner_view_deactivate_helper (view);
 }
 
 G_MODULE_EXPORT void
-init (MgView *view, MgMainWindow *main_window)
+init (PlannerView *view, PlannerWindow *main_window)
 {
-	MgViewPriv     *priv;
+	PlannerViewPriv     *priv;
 	
-	priv = g_new0 (MgViewPriv, 1);
+	priv = g_new0 (PlannerViewPriv, 1);
 	view->priv = priv;
 }
 
 G_MODULE_EXPORT gchar *
-get_label (MgView *view)
+get_label (PlannerView *view)
 {
-	g_return_val_if_fail (MG_IS_VIEW (view), NULL);
+	g_return_val_if_fail (PLANNER_IS_VIEW (view), NULL);
 
 	return _("Tasks");
 }
 
 G_MODULE_EXPORT gchar *
-get_menu_label (MgView *view)
+get_menu_label (PlannerView *view)
 {
-	g_return_val_if_fail (MG_IS_VIEW (view), NULL);
+	g_return_val_if_fail (PLANNER_IS_VIEW (view), NULL);
 
 	return _("_Tasks");
 }
 
 G_MODULE_EXPORT gchar *
-get_icon (MgView *view)
+get_icon (PlannerView *view)
 {
-	g_return_val_if_fail (MG_IS_VIEW (view), NULL);
+	g_return_val_if_fail (PLANNER_IS_VIEW (view), NULL);
 
 	return IMAGEDIR "/tasks.png";
 }
 
 G_MODULE_EXPORT GtkWidget *
-get_widget (MgView *view)
+get_widget (PlannerView *view)
 {
-	MgViewPriv   *priv;
+	PlannerViewPriv   *priv;
 	MrpProject   *project;
 	GtkWidget    *sw;
-	MgGanttModel *model;
+	PlannerGanttModel *model;
 
-	g_return_val_if_fail (MG_IS_VIEW (view), NULL);
+	g_return_val_if_fail (PLANNER_IS_VIEW (view), NULL);
 
 	priv = view->priv;
 	
 	if (priv->tree == NULL) {
-		project = planner_main_window_get_project (view->main_window);
+		project = planner_window_get_project (view->main_window);
 
 		g_signal_connect (project,
 				  "loaded",
@@ -261,17 +261,17 @@ get_widget (MgView *view)
 
 static void
 task_view_project_loaded_cb (MrpProject *project,
-			     MgView     *view)
+			     PlannerView     *view)
 {
 	GtkTreeModel *model;
-	MgViewPriv   *priv;
+	PlannerViewPriv   *priv;
 
  	priv = view->priv;
 
 	model = GTK_TREE_MODEL (planner_gantt_model_new (project));
 
-	planner_task_tree_set_model (MG_TASK_TREE (priv->tree),
-				MG_GANTT_MODEL (model));
+	planner_task_tree_set_model (PLANNER_TASK_TREE (priv->tree),
+				PLANNER_GANTT_MODEL (model));
 
 	g_object_unref (model);
 }
@@ -283,11 +283,11 @@ task_view_insert_task_cb (BonoboUIComponent *component,
 			  gpointer           data, 
 			  const char        *cname)
 {
-	MgView *view;
+	PlannerView *view;
 
-	view = MG_VIEW (data);
+	view = PLANNER_VIEW (data);
 
-	planner_task_tree_insert_task (MG_TASK_TREE (view->priv->tree));
+	planner_task_tree_insert_task (PLANNER_TASK_TREE (view->priv->tree));
 }
 
 static void
@@ -295,9 +295,9 @@ task_view_insert_tasks_cb (BonoboUIComponent *component,
 			   gpointer           data, 
 			   const char        *cname)
 {
-	MgView *view = MG_VIEW (data);
+	PlannerView *view = PLANNER_VIEW (data);
 
-	planner_task_tree_insert_tasks (MG_TASK_TREE (view->priv->tree));
+	planner_task_tree_insert_tasks (PLANNER_TASK_TREE (view->priv->tree));
 }
 
 static void
@@ -305,11 +305,11 @@ task_view_remove_task_cb (BonoboUIComponent *component,
 			  gpointer           data, 
 			  const char        *cname)
 {
-	MgView *view;
+	PlannerView *view;
 
-	view = MG_VIEW (data);
+	view = PLANNER_VIEW (data);
 
-	planner_task_tree_remove_task (MG_TASK_TREE (view->priv->tree));
+	planner_task_tree_remove_task (PLANNER_TASK_TREE (view->priv->tree));
 }
 
 static void
@@ -317,11 +317,11 @@ task_view_edit_task_cb (BonoboUIComponent *component,
 			gpointer           data, 
 			const char        *cname)
 {
-	MgView *view;
+	PlannerView *view;
 
-	view = MG_VIEW (data);
+	view = PLANNER_VIEW (data);
 
-	planner_task_tree_edit_task (MG_TASK_TREE (view->priv->tree));
+	planner_task_tree_edit_task (PLANNER_TASK_TREE (view->priv->tree));
 }
 
 static void
@@ -329,11 +329,11 @@ task_view_select_all_cb (BonoboUIComponent *component,
 			 gpointer           data, 
 			 const char        *cname)
 {
-	MgView *view;
+	PlannerView *view;
 	
-	view = MG_VIEW (data);
+	view = PLANNER_VIEW (data);
 	
-	planner_task_tree_select_all (MG_TASK_TREE (view->priv->tree));
+	planner_task_tree_select_all (PLANNER_TASK_TREE (view->priv->tree));
 }
 
 static void
@@ -341,11 +341,11 @@ task_view_unlink_task_cb (BonoboUIComponent *component,
 			  gpointer           data, 
 			  const char        *cname)
 {
-	MgView *view;
+	PlannerView *view;
 
-	view = MG_VIEW (data);
+	view = PLANNER_VIEW (data);
 
-	planner_task_tree_unlink_task (MG_TASK_TREE (view->priv->tree));
+	planner_task_tree_unlink_task (PLANNER_TASK_TREE (view->priv->tree));
 }
 
 static void
@@ -353,11 +353,11 @@ task_view_indent_task_cb (BonoboUIComponent *component,
 			  gpointer           data, 
 			  const char        *cname)
 {
-	MgView *view;
+	PlannerView *view;
 
-	view = MG_VIEW (data);
+	view = PLANNER_VIEW (data);
 
-	planner_task_tree_indent_task (MG_TASK_TREE (view->priv->tree));
+	planner_task_tree_indent_task (PLANNER_TASK_TREE (view->priv->tree));
 }
 
 static void 
@@ -365,11 +365,11 @@ task_view_move_task_up_cb (BonoboUIComponent *component,
 			   gpointer	        data,
 			   const char	       *cname)
 {
-	MgView *view;
+	PlannerView *view;
 
-	view = MG_VIEW (data);
+	view = PLANNER_VIEW (data);
 	
-	planner_task_tree_move_task_up (MG_TASK_TREE (view->priv->tree));
+	planner_task_tree_move_task_up (PLANNER_TASK_TREE (view->priv->tree));
 }
 
 static void 
@@ -377,11 +377,11 @@ task_view_move_task_down_cb (BonoboUIComponent *component,
 			     gpointer	          data,
 			     const char	 *cname)
 {
-	MgView *view;
+	PlannerView *view;
 	
-	view = MG_VIEW (data);
+	view = PLANNER_VIEW (data);
 
-	planner_task_tree_move_task_down (MG_TASK_TREE (view->priv->tree));
+	planner_task_tree_move_task_down (PLANNER_TASK_TREE (view->priv->tree));
 }
 
 static void
@@ -389,11 +389,11 @@ task_view_unindent_task_cb (BonoboUIComponent *component,
 			    gpointer           data, 
 			    const char        *cname)
 {
-	MgView *view;
+	PlannerView *view;
 
-	view = MG_VIEW (data);
+	view = PLANNER_VIEW (data);
 
-	planner_task_tree_unindent_task (MG_TASK_TREE (view->priv->tree));
+	planner_task_tree_unindent_task (PLANNER_TASK_TREE (view->priv->tree));
 }
 
 static void
@@ -401,11 +401,11 @@ task_view_reset_constraint_cb (BonoboUIComponent *component,
 			       gpointer           data, 
 			       const char        *cname)
 {
-	MgView *view;
+	PlannerView *view;
 
-	view = MG_VIEW (data);
+	view = PLANNER_VIEW (data);
 
-	planner_task_tree_reset_constraint (MG_TASK_TREE (view->priv->tree));
+	planner_task_tree_reset_constraint (PLANNER_TASK_TREE (view->priv->tree));
 }
 
 static void
@@ -413,11 +413,11 @@ task_view_reset_all_constraints_cb (BonoboUIComponent *component,
 				    gpointer           data, 
 				    const char        *cname)
 {
-	MgView *view;
+	PlannerView *view;
 
-	view = MG_VIEW (data);
+	view = PLANNER_VIEW (data);
 
-	planner_task_tree_reset_all_constraints (MG_TASK_TREE (view->priv->tree));
+	planner_task_tree_reset_all_constraints (PLANNER_TASK_TREE (view->priv->tree));
 }
 
 static void
@@ -425,13 +425,13 @@ task_view_edit_custom_props_cb (BonoboUIComponent *component,
 				gpointer           data, 
 				const char        *cname)
 {
-	MgView     *view;
+	PlannerView     *view;
 	GtkWidget  *dialog;
 	MrpProject *project;
 
-	view = MG_VIEW (data);
+	view = PLANNER_VIEW (data);
 	
-	project = planner_main_window_get_project (view->main_window);
+	project = planner_window_get_project (view->main_window);
 	
 	dialog = planner_property_dialog_new (project,
 					 MRP_TYPE_TASK,
@@ -442,46 +442,46 @@ task_view_edit_custom_props_cb (BonoboUIComponent *component,
 }
 
 static void 
-task_view_selection_changed_cb (MgTaskTree *tree, MgView *view)
+task_view_selection_changed_cb (PlannerTaskTree *tree, PlannerView *view)
 {
-	g_return_if_fail (MG_IS_VIEW (view));
+	g_return_if_fail (PLANNER_IS_VIEW (view));
 
 	task_view_update_ui (view);
 }
 
 static void
-task_view_relations_changed_cb (MgTaskTree  *tree,
+task_view_relations_changed_cb (PlannerTaskTree  *tree,
 				MrpTask     *task,
 				MrpRelation *relation,
-				MgView      *view)
+				PlannerView      *view)
 {
-	g_return_if_fail (MG_IS_VIEW (view));
+	g_return_if_fail (PLANNER_IS_VIEW (view));
 
 	task_view_update_ui (view);
 }
 
 G_MODULE_EXPORT void
-print_init (MgView     *view,
-	    MgPrintJob *job)
+print_init (PlannerView     *view,
+	    PlannerPrintJob *job)
 {
-	MgViewPriv *priv;
+	PlannerViewPriv *priv;
 	
-	g_return_if_fail (MG_IS_VIEW (view));
-	g_return_if_fail (MG_IS_PRINT_JOB (job));
+	g_return_if_fail (PLANNER_IS_VIEW (view));
+	g_return_if_fail (PLANNER_IS_PRINT_JOB (job));
 
 	priv = view->priv;
 	
 	g_assert (priv->print_sheet == NULL);
 
-	priv->print_sheet = planner_table_print_sheet_new (MG_VIEW (view), job, 
+	priv->print_sheet = planner_table_print_sheet_new (PLANNER_VIEW (view), job, 
 						      GTK_TREE_VIEW (priv->tree));
 }
 
 G_MODULE_EXPORT void
-print (MgView *view)
+print (PlannerView *view)
 
 {
-	g_return_if_fail (MG_IS_VIEW (view));
+	g_return_if_fail (PLANNER_IS_VIEW (view));
 
 	g_assert (view->priv->print_sheet);
 	
@@ -489,9 +489,9 @@ print (MgView *view)
 }
 
 G_MODULE_EXPORT gint
-print_get_n_pages (MgView *view)
+print_get_n_pages (PlannerView *view)
 {
-	g_return_val_if_fail (MG_IS_VIEW (view), 0);
+	g_return_val_if_fail (PLANNER_IS_VIEW (view), 0);
 
 	g_assert (view->priv->print_sheet);
 	
@@ -499,10 +499,10 @@ print_get_n_pages (MgView *view)
 }
 
 G_MODULE_EXPORT void
-print_cleanup (MgView *view)
+print_cleanup (PlannerView *view)
 
 {
-	g_return_if_fail (MG_IS_VIEW (view));
+	g_return_if_fail (PLANNER_IS_VIEW (view));
 
 	g_assert (view->priv->print_sheet);
 	
@@ -511,9 +511,9 @@ print_cleanup (MgView *view)
 }
 
 static void
-task_view_update_ui (MgView *view)
+task_view_update_ui (PlannerView *view)
 {
-	MgViewPriv *priv;
+	PlannerViewPriv *priv;
 	GList      *list, *l;
 	gchar      *value;
 	gchar      *rel_value = "0";
@@ -524,7 +524,7 @@ task_view_update_ui (MgView *view)
 	
 	priv = view->priv;
 
-	list = planner_task_tree_get_selected_tasks (MG_TASK_TREE (priv->tree));
+	list = planner_task_tree_get_selected_tasks (PLANNER_TASK_TREE (priv->tree));
 
 	for (l = list; l; l = l->next) {
 		if (mrp_task_has_relation (MRP_TASK (l->data))) {

@@ -20,20 +20,20 @@
  * Boston, MA 02111-1307, USA.
  */
 
-#ifndef __MG_CALENDAR_SELECTOR_H__
-#define __MG_CALENDAR_SELECTOR_H__
+#ifndef __PLANNER_CALENDAR_SELECTOR_H__
+#define __PLANNER_CALENDAR_SELECTOR_H__
 
 #include <gtk/gtkwidget.h>
 #include <libplanner/mrp-project.h>
-#include "planner-main-window.h"
+#include "planner-window.h"
 
-GtkWidget *  planner_calendar_selector_new          (MgMainWindow *window,
+GtkWidget *  planner_calendar_selector_new          (PlannerWindow *window,
 						const gchar  *caption);
 
 
 MrpCalendar *planner_calendar_selector_get_calendar (GtkWidget    *dialog);
 
-#endif /* __MG_CALENDAR_SELECTOR_H__ */
+#endif /* __PLANNER_CALENDAR_SELECTOR_H__ */
 
 
 

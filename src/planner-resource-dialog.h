@@ -21,12 +21,12 @@
  * Boston, MA 02111-1307, USA.
  */
 
-#ifndef __MG_RESOURCE_DIALOG_H__
-#define __MG_RESOURCE_DIALOG_H__
+#ifndef __PLANNER_RESOURCE_DIALOG_H__
+#define __PLANNER_RESOURCE_DIALOG_H__
 
-#include "planner-main-window.h"
+#include "planner-window.h"
 
-GtkWidget * planner_resource_dialog_new (MgMainWindow *window,
+GtkWidget * planner_resource_dialog_new (PlannerWindow *window,
 				    MrpResource  *resource);
 
-#endif /* __MG_RESOURCE_DIALOG_H__ */
+#endif /* __PLANNER_RESOURCE_DIALOG_H__ */

@@ -22,11 +22,11 @@
 
 #include <config.h>
 #include <glib.h>
-#include "planner-main-window.h"
+#include "planner-window.h"
 #include "planner-plugin.h"
 
-static void mv_init       (MgPlugin      *plugin);
-static void mv_class_init (MgPluginClass *class);
+static void mv_init       (PlannerPlugin      *plugin);
+static void mv_class_init (PlannerPluginClass *class);
 
 
 static GObjectClass *parent_class;
@@ -38,26 +38,26 @@ planner_plugin_get_type (void)
 
 	if (!type) {
 		static const GTypeInfo info = {
-			sizeof (MgPluginClass),
+			sizeof (PlannerPluginClass),
 			NULL,		/* base_init */
 			NULL,		/* base_finalize */
 			(GClassInitFunc) mv_class_init,
 			NULL,		/* class_finalize */
 			NULL,		/* class_data */
-			sizeof (MgPlugin),
+			sizeof (PlannerPlugin),
 			0,
 			(GInstanceInitFunc) mv_init
 		};
 
 		type = g_type_register_static (G_TYPE_OBJECT,
-					       "MgPlugin", &info, 0);
+					       "PlannerPlugin", &info, 0);
 	}
 
 	return type;
 }
 
 static void
-mv_class_init (MgPluginClass *klass)
+mv_class_init (PlannerPluginClass *klass)
 {
 	/*GObjectClass *object_class;
 
@@ -67,16 +67,16 @@ mv_class_init (MgPluginClass *klass)
 }
 
 static void
-mv_init (MgPlugin *plugin)
+mv_init (PlannerPlugin *plugin)
 {
 
 }
 
 void
-planner_plugin_init (MgPlugin     *plugin,
-		MgMainWindow *main_window)
+planner_plugin_init (PlannerPlugin     *plugin,
+		PlannerWindow *main_window)
 {
-	g_return_if_fail (MG_IS_PLUGIN (plugin));
+	g_return_if_fail (PLANNER_IS_PLUGIN (plugin));
 
 	plugin->main_window = main_window;
 
@@ -86,9 +86,9 @@ planner_plugin_init (MgPlugin     *plugin,
 }
 
 void
-planner_plugin_exit (MgPlugin *plugin)
+planner_plugin_exit (PlannerPlugin *plugin)
 {
-	g_return_if_fail (MG_IS_PLUGIN (plugin));
+	g_return_if_fail (PLANNER_IS_PLUGIN (plugin));
 
 	if (plugin->exit) {
 		plugin->exit (plugin);

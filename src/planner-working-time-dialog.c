@@ -38,7 +38,7 @@ enum {
 };
 
 typedef struct {
-	MgMainWindow  *main_window;
+	PlannerWindow  *main_window;
 	MrpProject    *project;
 
 	MrpCalendar   *calendar;
@@ -114,7 +114,7 @@ working_time_dialog_parent_destroy_cb (GtkWidget *window, GtkWidget *dialog)
 }
 
 GtkWidget *
-planner_working_time_dialog_new (MgMainWindow *window,
+planner_working_time_dialog_new (PlannerWindow *window,
 			    MrpCalendar  *calendar)
 {
 	DialogData        *data;
@@ -126,7 +126,7 @@ planner_working_time_dialog_new (MgMainWindow *window,
 	GtkTreeViewColumn *col;
 	GtkTreeSelection  *selection;
 	
-	g_return_val_if_fail (MG_IS_MAIN_WINDOW (window), NULL);
+	g_return_val_if_fail (PLANNER_IS_MAIN_WINDOW (window), NULL);
 	
 	glade = glade_xml_new (GLADEDIR "/calendar-dialog.glade",
 			       "working_time_dialog",
@@ -141,7 +141,7 @@ planner_working_time_dialog_new (MgMainWindow *window,
 	data = g_new0 (DialogData, 1);
 
 	data->main_window = window;
-	data->project = planner_main_window_get_project (window);
+	data->project = planner_window_get_project (window);
 	data->calendar = calendar;
 	data->dialog = dialog;
 	data->apply_button = glade_xml_get_widget (glade, "apply_button");

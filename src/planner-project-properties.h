@@ -20,11 +20,11 @@
  * Boston, MA 02111-1307, USA.
  */
 
-#ifndef __MG_PROJECT_PROPERTIES_H__
-#define __MG_PROJECT_PROPERTIES_H__
+#ifndef __PLANNER_PROJECT_PROPERTIES_H__
+#define __PLANNER_PROJECT_PROPERTIES_H__
 
-#include "planner-main-window.h"
+#include "planner-window.h"
 
-GtkWidget * planner_project_properties_new (MgMainWindow *window);
+GtkWidget * planner_project_properties_new (PlannerWindow *window);
 
-#endif /* __MG_PROJECT_PROPERTIES_H__ */
+#endif /* __PLANNER_PROJECT_PROPERTIES_H__ */

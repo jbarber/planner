@@ -38,7 +38,7 @@ enum {
 };
 
 typedef struct {
-	MgMainWindow  *main_window;
+	PlannerWindow  *main_window;
 	MrpProject    *project;
 
 	GtkWidget     *dialog;
@@ -141,14 +141,14 @@ phase_dialog_parent_destroy_cb (GtkWidget *window, GtkWidget *dialog)
 }
 
 GtkWidget *
-planner_phase_dialog_new (MgMainWindow *window)
+planner_phase_dialog_new (PlannerWindow *window)
 {
 	DialogData       *data;
 	GladeXML         *glade;
 	GtkWidget        *dialog;
 	GtkTreeSelection *selection;	
 
-	g_return_val_if_fail (MG_IS_MAIN_WINDOW (window), NULL);
+	g_return_val_if_fail (PLANNER_IS_MAIN_WINDOW (window), NULL);
 	
 	glade = glade_xml_new (GLADEDIR "/project-properties.glade",
 			       "phase_dialog",
@@ -163,7 +163,7 @@ planner_phase_dialog_new (MgMainWindow *window)
 	data = g_new0 (DialogData, 1);
 
 	data->main_window = window;
-	data->project = planner_main_window_get_project (window);
+	data->project = planner_window_get_project (window);
 	data->dialog = dialog;
 
 	g_signal_connect_object (window,

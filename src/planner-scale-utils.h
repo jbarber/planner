@@ -20,8 +20,8 @@
  * Boston, MA 02111-1307, USA.
  */
 
-#ifndef __MG_SCALE_UTILS_H__
-#define __MG_SCALE_UTILS_H__
+#ifndef __PLANNER_SCALE_UTILS_H__
+#define __PLANNER_SCALE_UTILS_H__
 
 #include <libplanner/mrp-time.h>
 
@@ -29,57 +29,57 @@
 #define START_OF_WEEK 1
 
 typedef enum {
-	MG_SCALE_UNIT_NONE,
+	PLANNER_SCALE_UNIT_NONE,
 	
-	MG_SCALE_UNIT_YEAR,     /* Short: N/A     Medium: 2002      Long: N/A         */
+	PLANNER_SCALE_UNIT_YEAR,     /* Short: N/A     Medium: 2002      Long: N/A         */
 
-	MG_SCALE_UNIT_HALFYEAR, /* Short: N/A     Medium: H1        Long: 2002, H1    */
+	PLANNER_SCALE_UNIT_HALFYEAR, /* Short: N/A     Medium: H1        Long: 2002, H1    */
 
-	MG_SCALE_UNIT_QUARTER,  /* Short: Q1      Medium: N/A       Long: 2002, Qtr 1 */
+	PLANNER_SCALE_UNIT_QUARTER,  /* Short: Q1      Medium: N/A       Long: 2002, Qtr 1 */
 
-	MG_SCALE_UNIT_MONTH,    /* Short: J       Medium: Jan       Long: Jan '02     */
+	PLANNER_SCALE_UNIT_MONTH,    /* Short: J       Medium: Jan       Long: Jan '02     */
 
-	MG_SCALE_UNIT_WEEK,     /* Short: Wk 19   Medium: Week 19   Long: Week 19 '02 */
+	PLANNER_SCALE_UNIT_WEEK,     /* Short: Wk 19   Medium: Week 19   Long: Week 19 '02 */
 
-	MG_SCALE_UNIT_DAY,      /* Short: 1       Medium: Mon 1     Long: Mon, Apr 1  */
+	PLANNER_SCALE_UNIT_DAY,      /* Short: 1       Medium: Mon 1     Long: Mon, Apr 1  */
 
-	MG_SCALE_UNIT_HALFDAY,  /* Short: 1       Medium: 1         Long: 1           */
+	PLANNER_SCALE_UNIT_HALFDAY,  /* Short: 1       Medium: 1         Long: 1           */
 
-	MG_SCALE_UNIT_TWO_HOURS,/* Short: 1       Medium: 1         Long: 1           */
+	PLANNER_SCALE_UNIT_TWO_HOURS,/* Short: 1       Medium: 1         Long: 1           */
 
-	MG_SCALE_UNIT_HOUR      /* Short: 1       Medium: 1         Long: 1           */
-} MgScaleUnit;
+	PLANNER_SCALE_UNIT_HOUR      /* Short: 1       Medium: 1         Long: 1           */
+} PlannerScaleUnit;
 
 typedef enum {
-	MG_SCALE_FORMAT_SHORT,
-	MG_SCALE_FORMAT_MEDIUM,
-	MG_SCALE_FORMAT_LONG
-} MgScaleFormat;
+	PLANNER_SCALE_FORMAT_SHORT,
+	PLANNER_SCALE_FORMAT_MEDIUM,
+	PLANNER_SCALE_FORMAT_LONG
+} PlannerScaleFormat;
 
 typedef struct {
-	MgScaleUnit   major_unit;
-	MgScaleFormat major_format;
+	PlannerScaleUnit   major_unit;
+	PlannerScaleFormat major_format;
 	
-	MgScaleUnit   minor_unit;
-	MgScaleFormat minor_format;
+	PlannerScaleUnit   minor_unit;
+	PlannerScaleFormat minor_format;
 
 	/* Nonworking intervals shorter than this is not drawn (seconds). */
 	gint          nonworking_limit;
-} MgScaleConf;
+} PlannerScaleConf;
 
-extern const MgScaleConf *planner_scale_conf;
+extern const PlannerScaleConf *planner_scale_conf;
 
 mrptime planner_scale_time_prev   (mrptime        t,
-			      MgScaleUnit    unit);
+			      PlannerScaleUnit    unit);
 
 mrptime planner_scale_time_next   (mrptime        t,
-			      MgScaleUnit    unit);
+			      PlannerScaleUnit    unit);
 
 gchar * planner_scale_format_time (mrptime        t,
-			      MgScaleUnit    unit,
-			      MgScaleFormat  format);
+			      PlannerScaleUnit    unit,
+			      PlannerScaleFormat  format);
 
 gint    planner_scale_clamp_zoom  (gdouble        zoom);
 
 
-#endif /* __MG_SCALE_UTILS_H__ */
+#endif /* __PLANNER_SCALE_UTILS_H__ */

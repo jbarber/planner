@@ -20,30 +20,30 @@
  * Boston, MA 02111-1307, USA.
  */
 
-#ifndef __MG_GANTT_MODEL_H__
-#define __MG_GANTT_MODEL_H__
+#ifndef __PLANNER_GANTT_MODEL_H__
+#define __PLANNER_GANTT_MODEL_H__
 
 #include <libplanner/mrp-project.h>
 #include <libplanner/mrp-task.h>
 #include <gtk/gtktreemodel.h>
 
-#define MG_TYPE_GANTT_MODEL		(planner_gantt_model_get_type ())
-#define MG_GANTT_MODEL(obj)		(GTK_CHECK_CAST ((obj), MG_TYPE_GANTT_MODEL, MgGanttModel))
-#define MG_GANTT_MODEL_CLASS(klass)	(GTK_CHECK_CLASS_CAST ((klass), MG_TYPE_GANTT_MODEL, MgGanttModelClass))
-#define MG_IS_GANTT_MODEL(obj)		(GTK_CHECK_TYPE ((obj), MG_TYPE_GANTT_MODEL))
-#define MG_IS_GANTT_MODEL_CLASS(klass)  (GTK_CHECK_CLASS_TYPE ((obj), MG_TYPE_GANTT_MODEL))
+#define PLANNER_TYPE_GANTT_MODEL	(planner_gantt_model_get_type ())
+#define PLANNER_GANTT_MODEL(obj)	(GTK_CHECK_CAST ((obj), PLANNER_TYPE_GANTT_MODEL, PlannerGanttModel))
+#define PLANNER_GANTT_MODEL_CLASS(klass)(GTK_CHECK_CLASS_CAST ((klass), PLANNER_TYPE_GANTT_MODEL, PlannerGanttModelClass))
+#define PLANNER_IS_GANTT_MODEL(obj)	(GTK_CHECK_TYPE ((obj), PLANNER_TYPE_GANTT_MODEL))
+#define PLANNER_IS_GANTT_MODEL_CLASS(klass)  (GTK_CHECK_CLASS_TYPE ((obj), PLANNER_TYPE_GANTT_MODEL))
 
-typedef struct _MgGanttModel      MgGanttModel;
-typedef struct _MgGanttModelClass MgGanttModelClass;
-typedef struct _MgGanttModelPriv  MgGanttModelPriv;
+typedef struct _PlannerGanttModel      PlannerGanttModel;
+typedef struct _PlannerGanttModelClass PlannerGanttModelClass;
+typedef struct _PlannerGanttModelPriv  PlannerGanttModelPriv;
 
-struct _MgGanttModel {
-	GObject           parent;
-	gint              stamp;
-	MgGanttModelPriv *priv;
+struct _PlannerGanttModel {
+	GObject                parent;
+	gint                   stamp;
+	PlannerGanttModelPriv *priv;
 };
 
-struct _MgGanttModelClass {
+struct _PlannerGanttModelClass {
 	GObjectClass parent_class;
 };
 
@@ -61,21 +61,18 @@ enum {
 	NUM_COLS
 };
 
-GType         planner_gantt_model_get_type               (void);
-
-MgGanttModel *planner_gantt_model_new                    (MrpProject   *project);
-
-GtkTreePath  *planner_gantt_model_get_path_from_task     (MgGanttModel *model,
-						     MrpTask      *task);
-
-MrpTask      *planner_gantt_model_get_indent_task_target (MgGanttModel *model,
-						     MrpTask      *task);
-
-MrpProject   *planner_gantt_model_get_project            (MgGanttModel *model);
-
-MrpTask      *planner_gantt_model_get_task               (MgGanttModel *model,
-						     GtkTreeIter  *iter);
+GType              planner_gantt_model_get_type               (void);
+PlannerGanttModel *planner_gantt_model_new                    (MrpProject        *project);
+GtkTreePath  *     planner_gantt_model_get_path_from_task     (PlannerGanttModel *model,
+							       MrpTask           *task);
+MrpTask      *     planner_gantt_model_get_indent_task_target (PlannerGanttModel *model,
+							       MrpTask           *task);
+MrpProject   *     planner_gantt_model_get_project            (PlannerGanttModel *model);
+MrpTask      *     planner_gantt_model_get_task               (PlannerGanttModel *model,
+							       GtkTreeIter       *iter);
+MrpTask *          planner_gantt_model_get_task_from_path     (PlannerGanttModel *model,
+							       GtkTreePath       *path);
 
 
-#endif /* __MG_GANTT_MODEL_H__ */
+#endif /* __PLANNER_GANTT_MODEL_H__ */
 

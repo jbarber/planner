@@ -49,7 +49,7 @@ typedef struct {
 	gpointer instance;
 } ConnectData;
 
-struct _MgTtableChartPriv {
+struct _PlannerTtableChartPriv {
 	GtkWidget	*header;
 	GnomeCanvas	*canvas;
 
@@ -85,8 +85,8 @@ enum {
 };
 
 
-static void	ttable_chart_class_init			(MgTtableChartClass	*klass);
-static void	ttable_chart_init			(MgTtableChart		*chart);
+static void	ttable_chart_class_init			(PlannerTtableChartClass	*klass);
+static void	ttable_chart_init			(PlannerTtableChart		*chart);
 static void	ttable_chart_finalize			(GObject		*object);
 static void	ttable_chart_set_property		(GObject		*object,
 							 guint			 prop_id,
@@ -96,7 +96,7 @@ static void	ttable_chart_get_property		(GObject		*object,
 							 guint			 prop_id,
 							 GValue			*value,
 							 GParamSpec		*spec);
-static void	ttable_chart_set_zoom			(MgTtableChart		*chart,
+static void	ttable_chart_set_zoom			(PlannerTtableChart		*chart,
 							 gdouble		 level);
 static void	ttable_chart_destroy			(GtkObject		*object);
 static void	ttable_chart_style_set			(GtkWidget		*widget,
@@ -106,57 +106,57 @@ static void	ttable_chart_map			(GtkWidget		*widget);
 static void	ttable_chart_unrealize			(GtkWidget		*widget);
 static void	ttable_chart_size_allocate		(GtkWidget		*widget,
 							 GtkAllocation		*allocation);
-static void	ttable_chart_set_adjustments		(MgTtableChart		*chart,
+static void	ttable_chart_set_adjustments		(PlannerTtableChart		*chart,
 							 GtkAdjustment		*hadj,
 							 GtkAdjustment		*vadj);
 
-static void	ttable_chart_reflow_now			(MgTtableChart		*chart);
-static void	ttable_chart_reflow			(MgTtableChart		*chart,
+static void	ttable_chart_reflow_now			(PlannerTtableChart		*chart);
+static void	ttable_chart_reflow			(PlannerTtableChart		*chart,
 							 gboolean		 height_changed);
-static gdouble	ttable_chart_reflow_do			(MgTtableChart		*chart,
+static gdouble	ttable_chart_reflow_do			(PlannerTtableChart		*chart,
 							 TreeNode		*root,
 							 gdouble		 start_y);
-static gboolean	ttable_chart_reflow_idle		(MgTtableChart		*chart);
-static gint	ttable_chart_get_width			(MgTtableChart		*chart);
+static gboolean	ttable_chart_reflow_idle		(PlannerTtableChart		*chart);
+static gint	ttable_chart_get_width			(PlannerTtableChart		*chart);
 static TreeNode *ttable_chart_tree_node_new		(void);
 static void	ttable_chart_tree_node_remove		(TreeNode		*node);
-static void	ttable_chart_remove_children		(MgTtableChart		*chart,
+static void	ttable_chart_remove_children		(PlannerTtableChart		*chart,
 							 TreeNode		*node);
 static void	ttable_chart_tree_traverse		(TreeNode		*node,
 							 TreeFunc		 func,
 							 gpointer		 data);
 static void	scale_func				(TreeNode		*node,
 							 gpointer		 data);
-static void	ttable_chart_set_scroll_region		(MgTtableChart		*chart,
+static void	ttable_chart_set_scroll_region		(PlannerTtableChart		*chart,
 							 gdouble		 x1,
 							 gdouble		 y1,
 							 gdouble		 x2,
 							 gdouble		 y2);
-static void	ttable_chart_build_tree			(MgTtableChart		*chart);
-static TreeNode *ttable_chart_insert_resource		(MgTtableChart	*chart,
+static void	ttable_chart_build_tree			(PlannerTtableChart		*chart);
+static TreeNode *ttable_chart_insert_resource		(PlannerTtableChart	*chart,
 							 GtkTreePath	*path,
 							 MrpResource	*resource);
-static TreeNode *ttable_chart_insert_assignment		(MgTtableChart	*chart,
+static TreeNode *ttable_chart_insert_assignment		(PlannerTtableChart	*chart,
 							 GtkTreePath	*path,
 							 MrpAssignment	*assign);
-static TreeNode *ttable_chart_insert_row		(MgTtableChart	*chart,
+static TreeNode *ttable_chart_insert_row		(PlannerTtableChart	*chart,
 							 GtkTreePath	*path,
 							 MrpResource	*resource,
 							 MrpAssignment	*assign);
 static void	ttable_chart_tree_node_insert_path	(TreeNode	*node,
 							 GtkTreePath	*path,
 							 TreeNode	*new_node);
-static void	ttable_chart_add_signal			(MgTtableChart	*chart,
+static void	ttable_chart_add_signal			(PlannerTtableChart	*chart,
 							 gpointer	 instance,
 							 gulong		 sig_id,
 							 char		*sig_name);
-static void	ttable_chart_disconnect_signals		(MgTtableChart	*chart);
+static void	ttable_chart_disconnect_signals		(PlannerTtableChart	*chart);
 static void	ttable_chart_project_start_changed	(MrpProject	*project,
 							 GParamSpec	*spec,
-							 MgTtableChart	*chart);
+							 PlannerTtableChart	*chart);
 static void	ttable_chart_root_finish_changed	(MrpTask	*root,
 							 GParamSpec	*spec,
-							 MgTtableChart	*chart);
+							 PlannerTtableChart	*chart);
 static void	show_hide_descendants			(TreeNode	*node,
 							 gboolean	 show);
 static void	collapse_descendants			(TreeNode	*node);
@@ -187,24 +187,24 @@ planner_ttable_chart_get_type(void)
 
 	if (!type) {
 		static const GTypeInfo info = {
-			sizeof(MgTtableChartClass),
+			sizeof(PlannerTtableChartClass),
 			NULL,           /* base_init */
 			NULL,           /* base_finalize */
 			(GClassInitFunc) ttable_chart_class_init,
 			NULL,           /* class_finalize */
 			NULL,           /* class_data */
-			sizeof(MgTtableChart),
+			sizeof(PlannerTtableChart),
 			0,              /* n_preallocs */
 			(GInstanceInitFunc) ttable_chart_init
 		};
-		type = g_type_register_static (GTK_TYPE_VBOX, "MgTtableChart",
+		type = g_type_register_static (GTK_TYPE_VBOX, "PlannerTtableChart",
 						&info, 0);
 	}
 	return type;
 }
 
 static void
-ttable_chart_class_init (MgTtableChartClass *class)
+ttable_chart_class_init (PlannerTtableChartClass *class)
 {
 	GObjectClass		*o_class;
 	GtkObjectClass		*object_class;
@@ -236,7 +236,7 @@ ttable_chart_class_init (MgTtableChartClass *class)
 		g_signal_new ("set_scroll_adjustments",
 				G_TYPE_FROM_CLASS (object_class),
 				G_SIGNAL_RUN_LAST,
-				G_STRUCT_OFFSET (MgTtableChartClass, set_scroll_adjustments),
+				G_STRUCT_OFFSET (PlannerTtableChartClass, set_scroll_adjustments),
 				NULL, NULL,
 				planner_marshal_VOID__OBJECT_OBJECT,
 				G_TYPE_NONE, 2,
@@ -278,13 +278,13 @@ ttable_chart_class_init (MgTtableChartClass *class)
 }
 
 static void
-ttable_chart_init (MgTtableChart *chart )
+ttable_chart_init (PlannerTtableChart *chart )
 {
-	MgTtableChartPriv *priv;
+	PlannerTtableChartPriv *priv;
 
 	gtk_widget_set_redraw_on_allocate (GTK_WIDGET (chart), FALSE);
 
-	priv = g_new0 (MgTtableChartPriv, 1);
+	priv = g_new0 (PlannerTtableChartPriv, 1);
 	chart->priv = priv;
 
 	priv->tree = ttable_chart_tree_node_new ();
@@ -297,7 +297,7 @@ ttable_chart_init (MgTtableChart *chart )
 	gtk_box_set_homogeneous (GTK_BOX (chart), FALSE);
 	gtk_box_set_spacing (GTK_BOX (chart), 0);
 
-	priv->header = g_object_new (MG_TYPE_GANTT_HEADER,
+	priv->header = g_object_new (PLANNER_TYPE_GANTT_HEADER,
 			"scale", SCALE (priv->zoom),
 			"zoom", priv->zoom,
 			NULL);
@@ -325,7 +325,7 @@ ttable_chart_init (MgTtableChart *chart )
 	priv->project_start = MRP_TIME_INVALID;
 	priv->last_time = MRP_TIME_INVALID;
 	priv->background = gnome_canvas_item_new (gnome_canvas_root (priv->canvas),
-			MG_TYPE_GANTT_BACKGROUND,
+			PLANNER_TYPE_GANTT_BACKGROUND,
 			"scale", SCALE (priv->zoom),
 			"zoom", priv->zoom,
 			NULL);
@@ -346,9 +346,9 @@ ttable_chart_set_property(GObject	*object,
 			  const GValue  *value,
 			  GParamSpec    *spec)
 {
-	MgTtableChart *chart;
+	PlannerTtableChart *chart;
 
-	chart = MG_TTABLE_CHART(object);
+	chart = PLANNER_TTABLE_CHART(object);
 
 	switch (prop_id) {
 		case PROP_MODEL:
@@ -373,9 +373,9 @@ ttable_chart_get_property(GObject	*object,
 			  GValue	*value,
 			  GParamSpec	*spec)
 {
-	MgTtableChart *chart;
+	PlannerTtableChart *chart;
 
-	chart = MG_TTABLE_CHART(object);
+	chart = PLANNER_TTABLE_CHART(object);
 
 	switch (prop_id) {
 		case PROP_MODEL:
@@ -388,9 +388,9 @@ ttable_chart_get_property(GObject	*object,
 }
 
 static void
-ttable_chart_set_zoom (MgTtableChart	*chart, gdouble level)
+ttable_chart_set_zoom (PlannerTtableChart	*chart, gdouble level)
 {
-	MgTtableChartPriv *priv;
+	PlannerTtableChartPriv *priv;
 
 	priv = chart->priv;
 	priv->zoom = level;
@@ -407,9 +407,9 @@ ttable_chart_set_zoom (MgTtableChart	*chart, gdouble level)
 }
 
 static mrptime
-ttable_chart_get_center (MgTtableChart *chart)
+ttable_chart_get_center (PlannerTtableChart *chart)
 {
-	MgTtableChartPriv	*priv;
+	PlannerTtableChartPriv	*priv;
 	gint			 x1,width,x;
 
 	priv = chart->priv;
@@ -422,9 +422,9 @@ ttable_chart_get_center (MgTtableChart *chart)
 }
 
 static void
-ttable_chart_set_center (MgTtableChart *chart, mrptime t)
+ttable_chart_set_center (PlannerTtableChart *chart, mrptime t)
 {
-	MgTtableChartPriv	*priv;
+	PlannerTtableChartPriv	*priv;
 	gint			 x1,width,x;
 
 	priv = chart->priv;
@@ -437,18 +437,18 @@ ttable_chart_set_center (MgTtableChart *chart, mrptime t)
 }
 
 void
-planner_ttable_chart_status_updated (MgTtableChart *chart, gchar *message)
+planner_ttable_chart_status_updated (PlannerTtableChart *chart, gchar *message)
 {
-	g_return_if_fail (MG_IS_TTABLE_CHART (chart));
+	g_return_if_fail (PLANNER_IS_TTABLE_CHART (chart));
 	g_signal_emit (chart, signals[STATUS_UPDATED], 0, message);
 }
 
 void
-planner_ttable_chart_zoom_in (MgTtableChart *chart)
+planner_ttable_chart_zoom_in (PlannerTtableChart *chart)
 {
-	MgTtableChartPriv	*priv;
+	PlannerTtableChartPriv	*priv;
 	mrptime			 mt;
-	g_return_if_fail(MG_IS_TTABLE_CHART(chart));
+	g_return_if_fail(PLANNER_IS_TTABLE_CHART(chart));
 	priv=chart->priv;
 	mt = ttable_chart_get_center(chart);
 	ttable_chart_set_zoom(chart,priv->zoom+1);
@@ -456,11 +456,11 @@ planner_ttable_chart_zoom_in (MgTtableChart *chart)
 }
 
 void
-planner_ttable_chart_zoom_out (MgTtableChart *chart)
+planner_ttable_chart_zoom_out (PlannerTtableChart *chart)
 {
-	MgTtableChartPriv *priv;
+	PlannerTtableChartPriv *priv;
 	mrptime mt;
-	g_return_if_fail(MG_IS_TTABLE_CHART(chart));
+	g_return_if_fail(PLANNER_IS_TTABLE_CHART(chart));
 	priv=chart->priv;
 	mt = ttable_chart_get_center(chart);
 	ttable_chart_set_zoom(chart,priv->zoom-1);
@@ -468,12 +468,12 @@ planner_ttable_chart_zoom_out (MgTtableChart *chart)
 }
 
 void
-planner_ttable_chart_can_zoom	(MgTtableChart	*chart,
+planner_ttable_chart_can_zoom	(PlannerTtableChart	*chart,
 				 gboolean	*in,
 				 gboolean	*out)
 {
-	MgTtableChartPriv	*priv;
-	g_return_if_fail(MG_IS_TTABLE_CHART(chart));
+	PlannerTtableChartPriv	*priv;
+	g_return_if_fail(PLANNER_IS_TTABLE_CHART(chart));
 	priv=chart->priv;
 	if (in) {
 		*in = (priv->zoom < ZOOM_IN_LIMIT);
@@ -485,13 +485,13 @@ planner_ttable_chart_can_zoom	(MgTtableChart	*chart,
 }
 
 void
-planner_ttable_chart_zoom_to_fit	(MgTtableChart *chart)
+planner_ttable_chart_zoom_to_fit	(PlannerTtableChart *chart)
 {
-	MgTtableChartPriv	*priv;
+	PlannerTtableChartPriv	*priv;
 	gdouble			 t;
 	gdouble			 zoom;
 	gdouble			 alloc;
-	g_return_if_fail(MG_IS_TTABLE_CHART(chart));
+	g_return_if_fail(PLANNER_IS_TTABLE_CHART(chart));
 	priv=chart->priv;
 	t = ttable_chart_get_width(chart);
 	if (t==-1)
@@ -503,14 +503,14 @@ planner_ttable_chart_zoom_to_fit	(MgTtableChart *chart)
 }
 
 gdouble
-planner_ttable_chart_get_zoom	(MgTtableChart *chart)
+planner_ttable_chart_get_zoom	(PlannerTtableChart *chart)
 {
-	g_return_val_if_fail(MG_IS_TTABLE_CHART(chart),0);
+	g_return_val_if_fail(PLANNER_IS_TTABLE_CHART(chart),0);
 	return chart->priv->zoom;
 }
 
 static gint
-ttable_chart_get_width (MgTtableChart *chart)
+ttable_chart_get_width (PlannerTtableChart *chart)
 {
 	if (chart->priv->project_start == MRP_TIME_INVALID ||
 	    chart->priv->last_time == MRP_TIME_INVALID) {
@@ -522,9 +522,9 @@ ttable_chart_get_width (MgTtableChart *chart)
 static void
 ttable_chart_finalize(GObject *object)
 {
-	MgTtableChart *chart;
+	PlannerTtableChart *chart;
 
-	chart = MG_TTABLE_CHART(object);
+	chart = PLANNER_TTABLE_CHART(object);
 
 	g_free(chart->priv);
 	if (G_OBJECT_CLASS (parent_class)->finalize) {
@@ -535,9 +535,9 @@ ttable_chart_finalize(GObject *object)
 static void
 ttable_chart_destroy(GtkObject *object)
 {
-	MgTtableChart		*chart;
+	PlannerTtableChart		*chart;
 	
-	chart = MG_TTABLE_CHART(object);
+	chart = PLANNER_TTABLE_CHART(object);
 
 	if (chart->priv->model != NULL) {
 		g_object_unref (chart->priv->model);
@@ -553,20 +553,20 @@ static void
 ttable_chart_style_set(GtkWidget	*widget,
 		       GtkStyle		*prev_style)
 {
-	MgTtableChart		*chart;
-	MgTtableChartPriv	*priv;
+	PlannerTtableChart		*chart;
+	PlannerTtableChartPriv	*priv;
 	GtkWidget		*canvas;
 	PangoContext		*context;
 	PangoFontMetrics	*metrics;
 
-	g_return_if_fail (MG_IS_TTABLE_CHART (widget));
+	g_return_if_fail (PLANNER_IS_TTABLE_CHART (widget));
 
 	if (GTK_WIDGET_CLASS (parent_class)->style_set) {
 		GTK_WIDGET_CLASS (parent_class)->style_set (widget,
 				prev_style);
 	}
 
-	chart = MG_TTABLE_CHART(widget);
+	chart = PLANNER_TTABLE_CHART(widget);
 	priv = chart->priv;
 	canvas = GTK_WIDGET (priv->canvas);
 	context = gtk_widget_get_pango_context (canvas);
@@ -579,14 +579,14 @@ ttable_chart_style_set(GtkWidget	*widget,
 static void
 ttable_chart_realize (GtkWidget *widget)
 {
-	MgTtableChart		*chart;
-	MgTtableChartPriv	*priv;
+	PlannerTtableChart		*chart;
+	PlannerTtableChartPriv	*priv;
 	GtkWidget		*canvas;
 	GtkStyle		*style;
 	GdkColormap		*colormap;
 	
-	g_return_if_fail (MG_IS_TTABLE_CHART (widget));
-	chart = MG_TTABLE_CHART(widget);
+	g_return_if_fail (PLANNER_IS_TTABLE_CHART (widget));
+	chart = PLANNER_TTABLE_CHART(widget);
 	priv = chart->priv;
 	canvas = GTK_WIDGET (priv->canvas);
 	if (GTK_WIDGET_CLASS (parent_class)->realize) {
@@ -605,10 +605,10 @@ ttable_chart_realize (GtkWidget *widget)
 static void
 ttable_chart_unrealize (GtkWidget *widget)
 {
-	MgTtableChart *chart;
+	PlannerTtableChart *chart;
 
-	g_return_if_fail (MG_IS_TTABLE_CHART (widget));
-	chart = MG_TTABLE_CHART(widget);
+	g_return_if_fail (PLANNER_IS_TTABLE_CHART (widget));
+	chart = PLANNER_TTABLE_CHART(widget);
 	if (GTK_WIDGET_CLASS (parent_class)->unrealize) {
 		GTK_WIDGET_CLASS (parent_class)->unrealize (widget);
 	}
@@ -617,10 +617,10 @@ ttable_chart_unrealize (GtkWidget *widget)
 static void
 ttable_chart_map (GtkWidget *widget)
 {
-	MgTtableChart *chart;
+	PlannerTtableChart *chart;
 
-	g_return_if_fail (MG_IS_TTABLE_CHART (widget));
-	chart = MG_TTABLE_CHART(widget);
+	g_return_if_fail (PLANNER_IS_TTABLE_CHART (widget));
+	chart = PLANNER_TTABLE_CHART(widget);
 	if (GTK_WIDGET_CLASS (parent_class)->map) {
 		GTK_WIDGET_CLASS (parent_class)->map (widget);
 	}
@@ -632,25 +632,25 @@ static void
 ttable_chart_size_allocate (GtkWidget		*widget,
 			    GtkAllocation	*allocation)
 {
-	MgTtableChart	*chart;
+	PlannerTtableChart	*chart;
 	gboolean	 height_changed;
 
-	g_return_if_fail (MG_IS_TTABLE_CHART (widget));
+	g_return_if_fail (PLANNER_IS_TTABLE_CHART (widget));
 
 	height_changed = widget->allocation.height != allocation->height;
 	GTK_WIDGET_CLASS (parent_class)->size_allocate (widget, allocation);
-	chart = MG_TTABLE_CHART (widget);
+	chart = PLANNER_TTABLE_CHART (widget);
 	if (GTK_WIDGET_MAPPED (chart)) {
 		ttable_chart_reflow_now(chart);
 	}
 }
 
 static void
-ttable_chart_set_adjustments(MgTtableChart	*chart,
+ttable_chart_set_adjustments(PlannerTtableChart	*chart,
 			     GtkAdjustment	*hadj,
 			     GtkAdjustment	*vadj)
 {
-	MgTtableChartPriv *priv;
+	PlannerTtableChartPriv *priv;
 	gboolean           need_adjust = FALSE;
 
 	g_return_if_fail (hadj == NULL || GTK_IS_ADJUSTMENT (hadj));
@@ -703,7 +703,7 @@ node_is_visible (TreeNode *node)
 }
 
 static gdouble
-ttable_chart_reflow_do (MgTtableChart *chart, TreeNode *root, gdouble start_y)
+ttable_chart_reflow_do (PlannerTtableChart *chart, TreeNode *root, gdouble start_y)
 {
 	gdouble		row_y;
 	TreeNode	*node;
@@ -739,9 +739,9 @@ ttable_chart_reflow_do (MgTtableChart *chart, TreeNode *root, gdouble start_y)
 }
 
 static gboolean
-ttable_chart_reflow_idle (MgTtableChart *chart)
+ttable_chart_reflow_idle (PlannerTtableChart *chart)
 {
-	MgTtableChartPriv	*priv;
+	PlannerTtableChartPriv	*priv;
 	mrptime			 t1,t2;
 	gdouble			 x1, y1, x2, y2;
 	gdouble			 height, width;
@@ -790,7 +790,7 @@ ttable_chart_reflow_idle (MgTtableChart *chart)
 }
 
 static void
-ttable_chart_reflow_now(MgTtableChart *chart)
+ttable_chart_reflow_now(PlannerTtableChart *chart)
 {
 	if (!GTK_WIDGET_MAPPED (chart)) {
 		return;
@@ -799,7 +799,7 @@ ttable_chart_reflow_now(MgTtableChart *chart)
 }
 
 static void
-ttable_chart_reflow(MgTtableChart *chart, gboolean height_changed)
+ttable_chart_reflow(PlannerTtableChart *chart, gboolean height_changed)
 {
 	if (!GTK_WIDGET_MAPPED (chart)) {
 		return;
@@ -830,10 +830,10 @@ static void
 scale_func (TreeNode *node,
 	    gpointer  data)
 {
-	MgTtableChart	  *chart;
-	MgTtableChartPriv *priv;
+	PlannerTtableChart	  *chart;
+	PlannerTtableChartPriv *priv;
 
-	chart = MG_TTABLE_CHART(data);
+	chart = PLANNER_TTABLE_CHART(data);
 	priv = chart->priv;
 
 	if (node->item) {
@@ -845,7 +845,7 @@ scale_func (TreeNode *node,
 }
 
 static void
-ttable_chart_set_scroll_region (MgTtableChart	*chart,
+ttable_chart_set_scroll_region (PlannerTtableChart	*chart,
 				gdouble		 x1,
 				gdouble		 y1,
 				gdouble		 x2,
@@ -870,9 +870,9 @@ planner_ttable_chart_new (void)
 GtkWidget *
 planner_ttable_chart_new_with_model (GtkTreeModel *model)
 {
-	MgTtableChart *chart;
+	PlannerTtableChart *chart;
 
-	chart = MG_TTABLE_CHART(gtk_type_new(planner_ttable_chart_get_type()));
+	chart = PLANNER_TTABLE_CHART(gtk_type_new(planner_ttable_chart_get_type()));
 	if (model) {
 		planner_ttable_chart_set_model(chart,model);
 	}
@@ -880,15 +880,15 @@ planner_ttable_chart_new_with_model (GtkTreeModel *model)
 }
 
 void
-planner_ttable_chart_set_model(MgTtableChart *chart, GtkTreeModel *model)
+planner_ttable_chart_set_model(PlannerTtableChart *chart, GtkTreeModel *model)
 {
-	MgTtableChartPriv	*priv;
+	PlannerTtableChartPriv	*priv;
 	MrpProject		*project;
 	MrpTask			*root;
 	gulong		 	 signal_id;
 	mrptime			 t;
 
-	g_return_if_fail (MG_IS_TTABLE_CHART (chart));
+	g_return_if_fail (PLANNER_IS_TTABLE_CHART (chart));
 	priv = chart->priv;
 	if (model == priv->model) {
 		return;
@@ -902,7 +902,7 @@ planner_ttable_chart_set_model(MgTtableChart *chart, GtkTreeModel *model)
 	if (model) {
 		g_object_ref (model);
 		ttable_chart_build_tree(chart);
-		project = planner_ttable_model_get_project (MG_TTABLE_MODEL (model));
+		project = planner_ttable_model_get_project (PLANNER_TTABLE_MODEL (model));
 		root = mrp_project_get_root_task(project);
 		g_object_set (priv->background, "project", project, NULL);
 
@@ -961,12 +961,12 @@ planner_ttable_chart_set_model(MgTtableChart *chart, GtkTreeModel *model)
 }
 
 static void
-ttable_chart_build_tree (MgTtableChart *chart)
+ttable_chart_build_tree (PlannerTtableChart *chart)
 {
 	// ICI, tout refaire.
 	GtkTreeIter		 iter;
 	GtkTreePath		*path;
-	MgTtableChartPriv	*priv;
+	PlannerTtableChartPriv	*priv;
 	TreeNode		*node;
 	GtkTreeIter		 child;
 
@@ -982,14 +982,14 @@ ttable_chart_build_tree (MgTtableChart *chart)
 
 	do {
 		MrpResource *res;
-		res = planner_ttable_model_get_resource(MG_TTABLE_MODEL(priv->model),&iter);
+		res = planner_ttable_model_get_resource(PLANNER_TTABLE_MODEL(priv->model),&iter);
 		path = gtk_tree_model_get_path (priv->model, &iter);
 		node = ttable_chart_insert_resource (chart, path, res);
 		gtk_tree_path_free (path);
 		if (gtk_tree_model_iter_children (priv->model, &child, &iter)) {
 			do {
 				MrpAssignment *assign;
-				assign = planner_ttable_model_get_assignment(MG_TTABLE_MODEL(priv->model),&child);
+				assign = planner_ttable_model_get_assignment(PLANNER_TTABLE_MODEL(priv->model),&child);
 				path = gtk_tree_model_get_path (priv->model, &child);
 				node = ttable_chart_insert_assignment(chart, path, assign);
 				gtk_tree_path_free(path);
@@ -1002,19 +1002,19 @@ ttable_chart_build_tree (MgTtableChart *chart)
 }
 
 static TreeNode *
-ttable_chart_insert_row	(MgTtableChart	*chart,
+ttable_chart_insert_row	(PlannerTtableChart	*chart,
 			 GtkTreePath	*path,
 			 MrpResource	*resource,
 			 MrpAssignment	*assign)
 {
-	MgTtableChartPriv	*priv;
+	PlannerTtableChartPriv	*priv;
 	GnomeCanvasItem		*item;
 	TreeNode		*tree_node;
 
 	priv = chart->priv;
 
 	item = gnome_canvas_item_new (gnome_canvas_root (priv->canvas),
-			MG_TYPE_TTABLE_ROW,
+			PLANNER_TYPE_TTABLE_ROW,
 			"resource", resource,
 			"assignment", assign,
 			"scale", SCALE (priv->zoom),
@@ -1029,7 +1029,7 @@ ttable_chart_insert_row	(MgTtableChart	*chart,
 }
 
 static TreeNode *
-ttable_chart_insert_resource	(MgTtableChart	*chart,
+ttable_chart_insert_resource	(PlannerTtableChart	*chart,
 				 GtkTreePath	*path,
 				 MrpResource	*resource)
 {
@@ -1040,7 +1040,7 @@ ttable_chart_insert_resource	(MgTtableChart	*chart,
 }
 
 static TreeNode *
-ttable_chart_insert_assignment	(MgTtableChart	*chart,
+ttable_chart_insert_assignment	(PlannerTtableChart	*chart,
 				 GtkTreePath	*path,
 				 MrpAssignment	*assign)
 {
@@ -1079,7 +1079,7 @@ ttable_chart_tree_node_insert_path	(TreeNode	*node,
 static void
 ttable_chart_project_start_changed	(MrpProject *project,
 					 GParamSpec *spec,
-					 MgTtableChart *chart)
+					 PlannerTtableChart *chart)
 {
 	mrptime t;
 	t = mrp_project_get_project_start(project);
@@ -1091,7 +1091,7 @@ ttable_chart_project_start_changed	(MrpProject *project,
 static void
 ttable_chart_root_finish_changed	(MrpTask	*root,
 					 GParamSpec	*spec,
-					 MgTtableChart	*chart)
+					 PlannerTtableChart	*chart)
 {
 	mrptime t;
 	g_object_get(root,"finish",&t,NULL);
@@ -1100,7 +1100,7 @@ ttable_chart_root_finish_changed	(MrpTask	*root,
 }
 
 static void
-ttable_chart_add_signal	(MgTtableChart	*chart,
+ttable_chart_add_signal	(PlannerTtableChart	*chart,
 			 gpointer	 instance,
 			 gulong		 sig_id,
 			 char		*sig_name)
@@ -1114,7 +1114,7 @@ ttable_chart_add_signal	(MgTtableChart	*chart,
 }
 
 static void
-ttable_chart_disconnect_signals	(MgTtableChart	*chart)
+ttable_chart_disconnect_signals	(PlannerTtableChart	*chart)
 {
 	GList		*l;
 	ConnectData	*data;
@@ -1134,7 +1134,7 @@ show_hide_descendants (TreeNode *node, gboolean show)
 	gint i;
 
 	for (i=0; i<node->num_children; i++) {
-		planner_ttable_row_set_visible(MG_TTABLE_ROW(node->children[i]->item),show);
+		planner_ttable_row_set_visible(PLANNER_TTABLE_ROW(node->children[i]->item),show);
 		if (!show || (show && node->children[i]->expanded)) {
 			show_hide_descendants (node->children[i], show);
 		}
@@ -1162,10 +1162,10 @@ collapse_descendants (TreeNode *node)
 }
 
 void
-planner_ttable_chart_expand_row (MgTtableChart *chart, GtkTreePath *path)
+planner_ttable_chart_expand_row (PlannerTtableChart *chart, GtkTreePath *path)
 {
 	TreeNode *node;
-	g_return_if_fail(MG_IS_TTABLE_CHART(chart));
+	g_return_if_fail(PLANNER_IS_TTABLE_CHART(chart));
 	node = ttable_chart_tree_node_at_path(chart->priv->tree,path);
 	if (node) {
 		node->expanded = TRUE;
@@ -1175,11 +1175,11 @@ planner_ttable_chart_expand_row (MgTtableChart *chart, GtkTreePath *path)
 }
 
 void
-planner_ttable_chart_collapse_row(MgTtableChart *chart, GtkTreePath *path)
+planner_ttable_chart_collapse_row(PlannerTtableChart *chart, GtkTreePath *path)
 {
 	TreeNode *node;
 
-	g_return_if_fail(MG_IS_TTABLE_CHART(chart));
+	g_return_if_fail(PLANNER_IS_TTABLE_CHART(chart));
 	node = ttable_chart_tree_node_at_path(chart->priv->tree,path);
 	if (node) {
 		node->expanded=FALSE;
@@ -1190,20 +1190,20 @@ planner_ttable_chart_collapse_row(MgTtableChart *chart, GtkTreePath *path)
 }
 
 void
-planner_ttable_chart_expand_all (MgTtableChart *chart)
+planner_ttable_chart_expand_all (PlannerTtableChart *chart)
 {
-	g_return_if_fail(MG_IS_TTABLE_CHART(chart));
+	g_return_if_fail(PLANNER_IS_TTABLE_CHART(chart));
 	expand_descendants(chart->priv->tree);
 	show_hide_descendants(chart->priv->tree,TRUE);
 	ttable_chart_reflow(chart,TRUE);
 }
 
 void
-planner_ttable_chart_collapse_all (MgTtableChart *chart)
+planner_ttable_chart_collapse_all (PlannerTtableChart *chart)
 {
 	TreeNode	*node;
 	int		 i;
-	g_return_if_fail(MG_IS_TTABLE_CHART(chart));
+	g_return_if_fail(PLANNER_IS_TTABLE_CHART(chart));
 	
 	node = chart->priv->tree;
 	for (i=0; i<node->num_children; i++) {
@@ -1239,8 +1239,8 @@ static void	ttable_chart_row_inserted		(GtkTreeModel	*model,
 							 GtkTreeIter	*iter,
 							 gpointer	 data)
 {
-	MgTtableChart		*chart;
-	MgTtableChartPriv	*priv;
+	PlannerTtableChart		*chart;
+	PlannerTtableChartPriv	*priv;
 	gboolean		 free_path=FALSE;
 	gboolean		 free_iter=FALSE;
 	MrpResource		*res;
@@ -1261,8 +1261,8 @@ static void	ttable_chart_row_inserted		(GtkTreeModel	*model,
 		free_iter = TRUE;
 		gtk_tree_model_get_iter(model,iter,path);
 	}
-	res = planner_ttable_model_get_resource(MG_TTABLE_MODEL(model),iter);
-	assign = planner_ttable_model_get_assignment(MG_TTABLE_MODEL(model),iter);
+	res = planner_ttable_model_get_resource(PLANNER_TTABLE_MODEL(model),iter);
+	assign = planner_ttable_model_get_assignment(PLANNER_TTABLE_MODEL(model),iter);
 	if (res) {
 		node = ttable_chart_insert_resource(chart,path,res);
 	}
@@ -1282,15 +1282,15 @@ static void	ttable_chart_row_deleted		(GtkTreeModel	*model,
 							 GtkTreePath	*path,
 							 gpointer	 data)
 {
-	MgTtableChart		*chart;
-	MgTtableChartPriv	*priv;
+	PlannerTtableChart		*chart;
+	PlannerTtableChartPriv	*priv;
 //	MrpResource		*res;
 //	MrpAssignment		*assign;
 //	gboolean		 free_path;
 //	gboolean		 free_iter;
 	TreeNode		*node;
 
-	chart = MG_TTABLE_CHART(data);
+	chart = PLANNER_TTABLE_CHART(data);
 	priv = chart->priv;
 
 	node = ttable_chart_tree_node_at_path(priv->tree,path);
@@ -1307,8 +1307,8 @@ static void	ttable_chart_row_deleted		(GtkTreeModel	*model,
 		free_iter = TRUE;
 		gtk_tree_model_get_iter(model,iter,path);
 	}
-	res = planner_ttable_model_get_resource(MG_TTABLE_MODEL(model),iter);
-	assign = planner_ttable_model_get_assignment(MG_TTABLE_MODEL(model),iter);
+	res = planner_ttable_model_get_resource(PLANNER_TTABLE_MODEL(model),iter);
+	assign = planner_ttable_model_get_assignment(PLANNER_TTABLE_MODEL(model),iter);
 	if (res) {
 		ttable_chart_remove_resource(chart,path,res);
 	}
@@ -1333,11 +1333,11 @@ static void	ttable_chart_row_deleted		(GtkTreeModel	*model,
 //static void
 //ttable_chart_resource_assignment_added			(MrpResource	*res,
 //							 MrpAssignment	*assign,
-//							 MgTtableChart	*chart)
+//							 PlannerTtableChart	*chart)
 //{
 //	g_return_if_fail(MRP_IS_RESOURCE(res));
 //	g_return_if_fail(MRP_IS_ASSIGNMENT(assign));
-//	g_return_if_fail(MG_IS_TTABLE_CHART(chart));
+//	g_return_if_fail(PLANNER_IS_TTABLE_CHART(chart));
 //	// So, res is added an assignment...
 //}
 
@@ -1366,7 +1366,7 @@ ttable_chart_tree_node_remove		(TreeNode		*node)
 }
 
 static void
-ttable_chart_remove_children		(MgTtableChart		*chart,
+ttable_chart_remove_children		(PlannerTtableChart		*chart,
 					 TreeNode		*node)
 {
 	gint	i;

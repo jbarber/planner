@@ -20,91 +20,91 @@
  * Boston, MA 02111-1307, USA.
  */
 
-#ifndef __MG_VIEW_H__
-#define __MG_VIEW_H__
+#ifndef __PLANNER_VIEW_H__
+#define __PLANNER_VIEW_H__
 
 #include <gmodule.h>
 #include <gtk/gtkwidget.h>
 #include <bonobo/bonobo-ui-component.h>
-#include "planner-main-window.h"
+#include "planner-window.h"
 #include "planner-print-job.h"
 
 
-#define MG_TYPE_VIEW		 (planner_view_get_type ())
-#define MG_VIEW(obj)		 (G_TYPE_CHECK_INSTANCE_CAST ((obj), MG_TYPE_VIEW, MgView))
-#define MG_VIEW_CLASS(klass)     (G_TYPE_CHECK_CLASS_CAST((klass), MG_TYPE_VIEW, MgViewClass))
-#define MG_IS_VIEW(obj)		 (G_TYPE_CHECK_INSTANCE_TYPE ((obj), MG_TYPE_VIEW))
-#define MG_IS_VIEW_CLASS(klass)  (G_TYPE_CHECK_CLASS_TYPE ((klass), MG_TYPE_VIEW))
-#define MG_VIEW_GET_CLASS(obj)   (G_TYPE_INSTANCE_GET_CLASS ((obj), MG_TYPE_VIEW, MgViewClass))
+#define PLANNER_TYPE_VIEW		 (planner_view_get_type ())
+#define PLANNER_VIEW(obj)		 (G_TYPE_CHECK_INSTANCE_CAST ((obj), PLANNER_TYPE_VIEW, PlannerView))
+#define PLANNER_VIEW_CLASS(klass)     (G_TYPE_CHECK_CLASS_CAST((klass), PLANNER_TYPE_VIEW, PlannerViewClass))
+#define PLANNER_IS_VIEW(obj)		 (G_TYPE_CHECK_INSTANCE_TYPE ((obj), PLANNER_TYPE_VIEW))
+#define PLANNER_IS_VIEW_CLASS(klass)  (G_TYPE_CHECK_CLASS_TYPE ((klass), PLANNER_TYPE_VIEW))
+#define PLANNER_VIEW_GET_CLASS(obj)   (G_TYPE_INSTANCE_GET_CLASS ((obj), PLANNER_TYPE_VIEW, PlannerViewClass))
 
-typedef struct _MgView       MgView;
-typedef struct _MgViewClass  MgViewClass;
-typedef struct _MgViewPriv   MgViewPriv;
+typedef struct _PlannerView       PlannerView;
+typedef struct _PlannerViewClass  PlannerViewClass;
+typedef struct _PlannerViewPriv   PlannerViewPriv;
 
-struct _MgView {
+struct _PlannerView {
 	GObject            parent;
 
 	GModule           *handle;
-	MgMainWindow      *main_window;
+	PlannerWindow      *main_window;
 	BonoboUIComponent *ui_component;
 
-	MgViewPriv        *priv;
+	PlannerViewPriv        *priv;
 	gboolean           activated;
 	
 	/* Methods. */
-	const gchar *(*get_label)         (MgView       *view);
-	const gchar *(*get_menu_label)    (MgView       *view);
-	const gchar *(*get_icon)          (MgView       *view);
-	GtkWidget   *(*get_widget)        (MgView       *view);
-	void         (*init)              (MgView       *view,
-					   MgMainWindow *main_window);
-	void         (*activate)          (MgView       *view);
-	void         (*deactivate)        (MgView       *view);
+	const gchar *(*get_label)         (PlannerView       *view);
+	const gchar *(*get_menu_label)    (PlannerView       *view);
+	const gchar *(*get_icon)          (PlannerView       *view);
+	GtkWidget   *(*get_widget)        (PlannerView       *view);
+	void         (*init)              (PlannerView       *view,
+					   PlannerWindow *main_window);
+	void         (*activate)          (PlannerView       *view);
+	void         (*deactivate)        (PlannerView       *view);
 	
-	void         (*print_init)        (MgView       *view,
-					   MgPrintJob   *job);
-	gint         (*print_get_n_pages) (MgView       *view);
-	void         (*print)             (MgView       *view);
-	void         (*print_cleanup)     (MgView       *view);
+	void         (*print_init)        (PlannerView       *view,
+					   PlannerPrintJob   *job);
+	gint         (*print_get_n_pages) (PlannerView       *view);
+	void         (*print)             (PlannerView       *view);
+	void         (*print_cleanup)     (PlannerView       *view);
 };
 
-struct _MgViewClass {
+struct _PlannerViewClass {
 	GObjectClass parent_class;
 };
 
 GType        planner_view_get_type          (void);
 
-const gchar *planner_view_get_label         (MgView       *view);
+const gchar *planner_view_get_label         (PlannerView       *view);
 
-const gchar *planner_view_get_menu_label    (MgView       *view);
+const gchar *planner_view_get_menu_label    (PlannerView       *view);
 
-const gchar *planner_view_get_icon          (MgView       *view);
+const gchar *planner_view_get_icon          (PlannerView       *view);
 
-GtkWidget   *planner_view_get_widget        (MgView       *view);
+GtkWidget   *planner_view_get_widget        (PlannerView       *view);
 
-void         planner_view_init              (MgView       *view,
-					MgMainWindow *main_window);
+void         planner_view_init              (PlannerView       *view,
+					PlannerWindow *main_window);
 
-void         planner_view_activate_helper   (MgView       *view,
+void         planner_view_activate_helper   (PlannerView       *view,
 					const gchar  *ui_filename,
 					const gchar  *name,
 					BonoboUIVerb *verbs);
 
-void         planner_view_deactivate_helper (MgView       *view);
+void         planner_view_deactivate_helper (PlannerView       *view);
 
-void         planner_view_activate          (MgView       *view);
+void         planner_view_activate          (PlannerView       *view);
 
-void         planner_view_deactivate        (MgView       *view);
+void         planner_view_deactivate        (PlannerView       *view);
 
-void         planner_view_print_init        (MgView       *view,
-					MgPrintJob   *job);
+void         planner_view_print_init        (PlannerView       *view,
+					PlannerPrintJob   *job);
 
-gint         planner_view_print_get_n_pages (MgView       *view);
+gint         planner_view_print_get_n_pages (PlannerView       *view);
 
-void         planner_view_print             (MgView       *view);
+void         planner_view_print             (PlannerView       *view);
 
-void         planner_view_print_cleanup     (MgView       *view);
+void         planner_view_print_cleanup     (PlannerView       *view);
 
 
-#endif /* __MG_VIEW_H__ */
+#endif /* __PLANNER_VIEW_H__ */
 

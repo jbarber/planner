@@ -21,8 +21,8 @@
  * Boston, MA 02111-1307, USA.
  */
 
-#ifndef __MG_APPLICATION_H__
-#define __MG_APPLICATION_H__
+#ifndef __PLANNER_APPLICATION_H__
+#define __PLANNER_APPLICATION_H__
 
 #include <bonobo/bonobo-window.h>
 #include <bonobo/bonobo-ui-component.h>
@@ -32,40 +32,34 @@
 #include <libegg/recent-files/egg-recent-model.h>
 
 
-#define MG_TYPE_APPLICATION                (planner_application_get_type ())
-#define MG_APPLICATION(obj)                (G_TYPE_CHECK_INSTANCE_CAST ((obj), MG_TYPE_APPLICATION, MgApplication))
-#define MG_APPLICATION_CLASS(klass)        (G_TYPE_CHECK_CLASS_CAST ((klass), MG_TYPE_APPLICATION, MgApplicationClass))
-#define MG_IS_APPLICATION(obj)             (G_TYPE_CHECK_INSTANCE_TYPE ((obj), MG_TYPE_APPLICATION))
-#define MG_IS_APPLICATION_CLASS(klass)     (G_TYPE_CHECK_CLASS_TYPE ((klass), MG_TYPE_APPLICATION))
-#define MG_APPLICATION_GET_CLASS(obj)      (G_TYPE_INSTANCE_GET_CLASS ((obj), MG_TYPE_APPLICATION, MgApplicationClass))
+#define PLANNER_TYPE_APPLICATION                (planner_application_get_type ())
+#define PLANNER_APPLICATION(obj)                (G_TYPE_CHECK_INSTANCE_CAST ((obj), PLANNER_TYPE_APPLICATION, PlannerApplication))
+#define PLANNER_APPLICATION_CLASS(klass)        (G_TYPE_CHECK_CLASS_CAST ((klass), PLANNER_TYPE_APPLICATION, PlannerApplicationClass))
+#define PLANNER_IS_APPLICATION(obj)             (G_TYPE_CHECK_INSTANCE_TYPE ((obj), PLANNER_TYPE_APPLICATION))
+#define PLANNER_IS_APPLICATION_CLASS(klass)     (G_TYPE_CHECK_CLASS_TYPE ((klass), PLANNER_TYPE_APPLICATION))
+#define PLANNER_APPLICATION_GET_CLASS(obj)      (G_TYPE_INSTANCE_GET_CLASS ((obj), PLANNER_TYPE_APPLICATION, PlannerApplicationClass))
 
-typedef struct _MgApplication        MgApplication;
-typedef struct _MgApplicationClass   MgApplicationClass;
-typedef struct _MgApplicationPriv    MgApplicationPriv;
+typedef struct _PlannerApplication        PlannerApplication;
+typedef struct _PlannerApplicationClass   PlannerApplicationClass;
+typedef struct _PlannerApplicationPriv    PlannerApplicationPriv;
 
-struct _MgApplication
+struct _PlannerApplication
 {
-        MrpApplication     parent;
-        
-        MgApplicationPriv *priv;
+        MrpApplication          parent;
+	PlannerApplicationPriv *priv;
 };
 
-struct _MgApplicationClass
+struct _PlannerApplicationClass
 {
         MrpApplicationClass parent_class;
 };
 
-GType            planner_application_get_type         (void) G_GNUC_CONST;
-
-MgApplication   *planner_application_new              (void);
-
-GtkWidget       *planner_application_new_window       (MgApplication *app);
-
-void             planner_application_exit             (MgApplication *app);
-
-EggRecentModel  *planner_application_get_recent_model (MgApplication *app);
-
-GConfClient     *planner_application_get_gconf_client (MgApplication *app);
+GType                 planner_application_get_type         (void) G_GNUC_CONST;
+PlannerApplication   *planner_application_new              (void);
+GtkWidget       *     planner_application_new_window       (PlannerApplication *app);
+void                  planner_application_exit             (PlannerApplication *app);
+EggRecentModel  *     planner_application_get_recent_model (PlannerApplication *app);
+GConfClient     *     planner_application_get_gconf_client (PlannerApplication *app);
 
 
-#endif /* __MG_APPLICATION_H__ */
+#endif /* __PLANNER_APPLICATION_H__ */

@@ -65,9 +65,9 @@ typedef struct {
 	gboolean     header;
 } PrintRow;
 
-struct _MgTablePrintSheet {
-	MgView       *view;
-	MgPrintJob   *job;
+struct _PlannerTablePrintSheet {
+	PlannerView       *view;
+	PlannerPrintJob   *job;
 	GtkTreeView  *tree_view;
 
 	gdouble       x_pad;
@@ -83,37 +83,37 @@ struct _MgTablePrintSheet {
 	gdouble       page_height;
 };
 
-static void         table_print_sheet_print_header_cell  (MgTablePrintSheet *sheet,
+static void         table_print_sheet_print_header_cell  (PlannerTablePrintSheet *sheet,
 							  PrintColumn       *column,
 							  PrintRow          *row,
 							  gdouble            x,
 							  gdouble            y);
-static void         table_print_sheet_print_cell         (MgTablePrintSheet *sheet,
+static void         table_print_sheet_print_cell         (PlannerTablePrintSheet *sheet,
 							  PrintColumn       *column,
 							  PrintRow          *row,
 							  gdouble            x,
 							  gdouble            y);
-static void         table_print_sheet_print_page         (MgTablePrintSheet *sheet,
+static void         table_print_sheet_print_page         (PlannerTablePrintSheet *sheet,
 							  PrintPage         *page);
 static gboolean     table_print_sheet_foreach_row        (GtkTreeModel      *model,
 							  GtkTreePath       *path,
 							  GtkTreeIter       *iter,
 							  gpointer           user_data);
-static PrintColumn *table_print_sheet_create_column      (MgTablePrintSheet *sheet,
+static PrintColumn *table_print_sheet_create_column      (PlannerTablePrintSheet *sheet,
 							  GtkTreeViewColumn *tree_column,
 							  gboolean           first);
-static void         table_print_sheet_create_pages       (MgTablePrintSheet *sheet);
-static GSList *     table_print_sheet_add_row_of_pages   (MgTablePrintSheet *sheet,
+static void         table_print_sheet_create_pages       (PlannerTablePrintSheet *sheet);
+static GSList *     table_print_sheet_add_row_of_pages   (PlannerTablePrintSheet *sheet,
 							  GSList            *page_row,
 							  GSList            *rows,
 							  gboolean           new_row);
-static void         table_print_sheet_fill_page          (MgTablePrintSheet *sheet,
+static void         table_print_sheet_fill_page          (PlannerTablePrintSheet *sheet,
 							  PrintPage         *page);
 
 
 
 static void
-table_print_sheet_print_header_cell (MgTablePrintSheet *sheet, 
+table_print_sheet_print_header_cell (PlannerTablePrintSheet *sheet, 
 				     PrintColumn       *column, 
 				     PrintRow          *row,
 				     gdouble            x,
@@ -134,7 +134,7 @@ table_print_sheet_print_header_cell (MgTablePrintSheet *sheet,
 }
 
 static void
-table_print_sheet_print_cell (MgTablePrintSheet *sheet,
+table_print_sheet_print_cell (PlannerTablePrintSheet *sheet,
 			      PrintColumn       *column, 
 			      PrintRow          *row,
 			      gdouble            x,
@@ -190,7 +190,7 @@ table_print_sheet_print_cell (MgTablePrintSheet *sheet,
 }
 
 static void
-table_print_sheet_print_page (MgTablePrintSheet *sheet, PrintPage *page)
+table_print_sheet_print_page (PlannerTablePrintSheet *sheet, PrintPage *page)
 {
 	GSList  *r, *c;
 	gdouble  x = 0, y = 0;
@@ -223,7 +223,7 @@ table_print_sheet_print_page (MgTablePrintSheet *sheet, PrintPage *page)
 }
 
 static PrintColumn *
-table_print_sheet_create_column (MgTablePrintSheet *sheet,
+table_print_sheet_create_column (PlannerTablePrintSheet *sheet,
 				 GtkTreeViewColumn *tree_column,
 				 gboolean           first)
 {
@@ -250,7 +250,7 @@ table_print_sheet_foreach_row (GtkTreeModel *model,
 			       GtkTreeIter  *iter,
 			       gpointer      user_data)
 {
-	MgTablePrintSheet *sheet = (MgTablePrintSheet *) user_data;
+	PlannerTablePrintSheet *sheet = (PlannerTablePrintSheet *) user_data;
 	PrintRow          *row;
 	GSList            *l;
 	GtkCellRenderer   *cell;
@@ -313,7 +313,7 @@ table_print_sheet_foreach_row (GtkTreeModel *model,
 }
 
 static void
-table_print_sheet_create_pages (MgTablePrintSheet *sheet)
+table_print_sheet_create_pages (PlannerTablePrintSheet *sheet)
 {
 	GSList    *l, *p = NULL;
 	PrintPage *page = NULL;
@@ -377,7 +377,7 @@ table_print_sheet_create_pages (MgTablePrintSheet *sheet)
 }
 
 static GSList *
-table_print_sheet_add_row_of_pages (MgTablePrintSheet *sheet,
+table_print_sheet_add_row_of_pages (PlannerTablePrintSheet *sheet,
 				    GSList            *page_row,
 				    GSList            *rows,
 				    gboolean           new_row)
@@ -430,7 +430,7 @@ table_print_sheet_add_row_of_pages (MgTablePrintSheet *sheet,
 }
 
 static void
-table_print_sheet_fill_page (MgTablePrintSheet *sheet, PrintPage *page)
+table_print_sheet_fill_page (PlannerTablePrintSheet *sheet, PrintPage *page)
 {
 	GSList  *l;
 	gdouble  extra;
@@ -450,18 +450,18 @@ table_print_sheet_fill_page (MgTablePrintSheet *sheet, PrintPage *page)
 	}
 }
 
-MgTablePrintSheet *
-planner_table_print_sheet_new (MgView      *view, 
-			  MgPrintJob  *job, 
+PlannerTablePrintSheet *
+planner_table_print_sheet_new (PlannerView      *view, 
+			  PlannerPrintJob  *job, 
 			  GtkTreeView *tree_view)
 {
-	MgTablePrintSheet *sheet;
+	PlannerTablePrintSheet *sheet;
 	GtkTreeModel      *model;
 	GList             *tree_columns, *l;
 	PrintRow          *row;
 	gboolean           first = TRUE;
 	
-	sheet = g_new0 (MgTablePrintSheet, 1);
+	sheet = g_new0 (PlannerTablePrintSheet, 1);
 
 	sheet->view        = view;
 	sheet->job         = job;
@@ -520,7 +520,7 @@ planner_table_print_sheet_new (MgView      *view,
 }
 
 void
-planner_table_print_sheet_output (MgTablePrintSheet *sheet) 
+planner_table_print_sheet_output (PlannerTablePrintSheet *sheet) 
 {
 	GSList *p;
 	
@@ -530,7 +530,7 @@ planner_table_print_sheet_output (MgTablePrintSheet *sheet)
 }
 
 gint
-planner_table_print_sheet_get_n_pages (MgTablePrintSheet *sheet)
+planner_table_print_sheet_get_n_pages (PlannerTablePrintSheet *sheet)
 {
 	d(g_print ("Number of pages: %d\n", g_slist_length (sheet->pages)));
 	
@@ -538,7 +538,7 @@ planner_table_print_sheet_get_n_pages (MgTablePrintSheet *sheet)
 }
 
 void
-planner_table_print_sheet_free (MgTablePrintSheet *sheet)
+planner_table_print_sheet_free (PlannerTablePrintSheet *sheet)
 {
 	GSList *l;
 	/* This won't work since several pages will have pointers to the */

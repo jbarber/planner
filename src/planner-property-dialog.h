@@ -19,8 +19,8 @@
  * Boston, MA 02111-1307, USA.
  */
 
-#ifndef __MG_CUSTOM_PROPERTIES_DIALOG_H__
-#define __MG_CUSTOM_PROPERTIES_DIALOG_H__
+#ifndef __PLANNER_CUSTOM_PROPERTIES_DIALOG_H__
+#define __PLANNER_CUSTOM_PROPERTIES_DIALOG_H__
 
 #include <gtk/gtkwidget.h>
 #include <libplanner/mrp-project.h>
@@ -34,4 +34,4 @@ void       planner_property_dialog_value_edited (GtkCellRendererText *cell,
 					    gchar               *new_text, 
 					    gpointer             data);
 
-#endif /* __MG_CUSTOM_PROPERTIES_DIALOG_H__ */
+#endif /* __PLANNER_CUSTOM_PROPERTIES_DIALOG_H__ */

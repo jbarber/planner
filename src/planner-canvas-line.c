@@ -24,8 +24,8 @@
 #include <libgnomecanvas/gnome-canvas-line.h>
 #include "planner-canvas-line.h"
 
-static void   mcl_init	     (MgCanvasLine       *mcl);
-static void   mcl_class_init (MgCanvasLineClass  *klass);
+static void   mcl_init	     (PlannerCanvasLine       *mcl);
+static void   mcl_class_init (PlannerCanvasLineClass  *klass);
 static double mcl_point      (GnomeCanvasItem    *item,
 			      double              x,
 			      double              y,
@@ -41,18 +41,18 @@ planner_canvas_line_get_type (void)
 
 	if (!type) {
 		static const GTypeInfo info = {
-			sizeof (MgCanvasLineClass),
+			sizeof (PlannerCanvasLineClass),
 			NULL,		/* base_init */
 			NULL,		/* base_finalize */
 			(GClassInitFunc) mcl_class_init,
 			NULL,		/* class_finalize */
 			NULL,		/* class_data */
-			sizeof (MgCanvasLine),
+			sizeof (PlannerCanvasLine),
 			0,              /* n_preallocs */
 			(GInstanceInitFunc) mcl_init
 		};
 
-		type = g_type_register_static (GNOME_TYPE_CANVAS_LINE, "MgCanvasLine",
+		type = g_type_register_static (GNOME_TYPE_CANVAS_LINE, "PlannerCanvasLine",
 					       &info, 0);
 	}
 	
@@ -60,7 +60,7 @@ planner_canvas_line_get_type (void)
 }
 
 static void
-mcl_class_init (MgCanvasLineClass *klass)
+mcl_class_init (PlannerCanvasLineClass *klass)
 {
 	GnomeCanvasItemClass *item_class;
 
@@ -71,7 +71,7 @@ mcl_class_init (MgCanvasLineClass *klass)
 }
 
 static void
-mcl_init (MgCanvasLine *item)
+mcl_init (PlannerCanvasLine *item)
 {
 }
 

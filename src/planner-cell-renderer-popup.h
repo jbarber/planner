@@ -1,20 +1,20 @@
-#ifndef __MG_CELL_RENDERER_POPUP_H__
-#define __MG_CELL_RENDERER_POPUP_H__
+#ifndef __PLANNER_CELL_RENDERER_POPUP_H__
+#define __PLANNER_CELL_RENDERER_POPUP_H__
 
 #include <pango/pango.h>
 #include <gtk/gtkcellrenderertext.h>
 
-#define MG_TYPE_CELL_RENDERER_POPUP		(planner_cell_renderer_popup_get_type ())
-#define MG_CELL_RENDERER_POPUP(obj)		(GTK_CHECK_CAST ((obj), MG_TYPE_CELL_RENDERER_POPUP, MgCellRendererPopup))
-#define MG_CELL_RENDERER_POPUP_CLASS(klass)	(GTK_CHECK_CLASS_CAST ((klass), MG_TYPE_CELL_RENDERER_POPUP, MgCellRendererPopupClass))
-#define MG_IS_CELL_RENDERER_POPUP(obj)		(GTK_CHECK_TYPE ((obj), MG_TYPE_CELL_RENDERER_POPUP))
-#define MG_IS_CELL_RENDERER_POPUP_CLASS(klass)	(GTK_CHECK_CLASS_TYPE ((obj), MG_TYPE_CELL_RENDERER_POPUP))
-#define MG_CELL_RENDERER_POPUP_GET_CLASS(obj)   (GTK_CHECK_GET_CLASS ((obj), MG_TYPE_CELL_RENDERER_POPUP, MgCellRendererPopupClass))
+#define PLANNER_TYPE_CELL_RENDERER_POPUP		(planner_cell_renderer_popup_get_type ())
+#define PLANNER_CELL_RENDERER_POPUP(obj)		(GTK_CHECK_CAST ((obj), PLANNER_TYPE_CELL_RENDERER_POPUP, PlannerCellRendererPopup))
+#define PLANNER_CELL_RENDERER_POPUP_CLASS(klass)	(GTK_CHECK_CLASS_CAST ((klass), PLANNER_TYPE_CELL_RENDERER_POPUP, PlannerCellRendererPopupClass))
+#define PLANNER_IS_CELL_RENDERER_POPUP(obj)		(GTK_CHECK_TYPE ((obj), PLANNER_TYPE_CELL_RENDERER_POPUP))
+#define PLANNER_IS_CELL_RENDERER_POPUP_CLASS(klass)	(GTK_CHECK_CLASS_TYPE ((obj), PLANNER_TYPE_CELL_RENDERER_POPUP))
+#define PLANNER_CELL_RENDERER_POPUP_GET_CLASS(obj)   (GTK_CHECK_GET_CLASS ((obj), PLANNER_TYPE_CELL_RENDERER_POPUP, PlannerCellRendererPopupClass))
 
-typedef struct _MgCellRendererPopup      MgCellRendererPopup;
-typedef struct _MgCellRendererPopupClass MgCellRendererPopupClass;
+typedef struct _PlannerCellRendererPopup      PlannerCellRendererPopup;
+typedef struct _PlannerCellRendererPopupClass PlannerCellRendererPopupClass;
 
-struct _MgCellRendererPopup
+struct _PlannerCellRendererPopup
 {
 	GtkCellRendererText  parent;
 
@@ -34,31 +34,31 @@ struct _MgCellRendererPopup
 	gboolean             editing_canceled;
 };
 
-struct _MgCellRendererPopupClass
+struct _PlannerCellRendererPopupClass
 {
 	GtkCellRendererTextClass parent_class;
 	
-	void   (* show_popup) (MgCellRendererPopup *cell,
+	void   (* show_popup) (PlannerCellRendererPopup *cell,
 			       const gchar         *path,
 			       gint                 x1,
 			       gint                 y1,
 			       gint                 x2,
 			       gint                 y2);
 	
-	void   (* hide_popup) (MgCellRendererPopup *cell);
+	void   (* hide_popup) (PlannerCellRendererPopup *cell);
 };
 
 GtkType          planner_cell_renderer_popup_get_type (void);
 
 GtkCellRenderer *planner_cell_renderer_popup_new      (void);
 
-void             planner_cell_renderer_popup_show     (MgCellRendererPopup *cell,
+void             planner_cell_renderer_popup_show     (PlannerCellRendererPopup *cell,
 						  const gchar         *path,
 						  gint                 x1,
 						  gint                 y1,
 						  gint                 x2,
 						  gint                 y2);
 
-void             planner_cell_renderer_popup_hide     (MgCellRendererPopup *cell);
+void             planner_cell_renderer_popup_hide     (PlannerCellRendererPopup *cell);
 
-#endif /* __MG_CELL_RENDERER_POPUP_H__ */
+#endif /* __PLANNER_CELL_RENDERER_POPUP_H__ */

@@ -20,24 +20,24 @@
  * Boston, MA 02111-1307, USA.
  */
 
-#ifndef __MG_PRINT_JOB_H__
-#define __MG_PRINT_JOB_H__
+#ifndef __PLANNER_PRINT_JOB_H__
+#define __PLANNER_PRINT_JOB_H__
 
 #include <libgnomeprint/gnome-print.h>
 #include <libgnomeprint/gnome-print-job.h>
 
-#define MG_TYPE_PRINT_JOB                (planner_print_job_get_type ())
-#define MG_PRINT_JOB(obj)                (G_TYPE_CHECK_INSTANCE_CAST ((obj), MG_TYPE_PRINT_JOB, MgPrintJob))
-#define MG_PRINT_JOB_CLASS(klass)        (G_TYPE_CHECK_CLASS_CAST ((klass), MG_TYPE_PRINT_JOB, MgPrintJobClass))
-#define MG_IS_PRINT_JOB(obj)             (G_TYPE_CHECK_INSTANCE_TYPE ((obj), MG_TYPE_PRINT_JOB))
-#define MG_IS_PRINT_JOB_CLASS(klass)     (G_TYPE_CHECK_CLASS_TYPE ((klass), MG_TYPE_PRINT_JOB))
-#define MG_PRINT_JOB_GET_CLASS(obj)      (G_TYPE_INSTANCE_GET_CLASS ((obj), MG_TYPE_PRINT_JOB, MgPrintJobClass))
+#define PLANNER_TYPE_PRINT_JOB                (planner_print_job_get_type ())
+#define PLANNER_PRINT_JOB(obj)                (G_TYPE_CHECK_INSTANCE_CAST ((obj), PLANNER_TYPE_PRINT_JOB, PlannerPrintJob))
+#define PLANNER_PRINT_JOB_CLASS(klass)        (G_TYPE_CHECK_CLASS_CAST ((klass), PLANNER_TYPE_PRINT_JOB, PlannerPrintJobClass))
+#define PLANNER_IS_PRINT_JOB(obj)             (G_TYPE_CHECK_INSTANCE_TYPE ((obj), PLANNER_TYPE_PRINT_JOB))
+#define PLANNER_IS_PRINT_JOB_CLASS(klass)     (G_TYPE_CHECK_CLASS_TYPE ((klass), PLANNER_TYPE_PRINT_JOB))
+#define PLANNER_PRINT_JOB_GET_CLASS(obj)      (G_TYPE_INSTANCE_GET_CLASS ((obj), PLANNER_TYPE_PRINT_JOB, PlannerPrintJobClass))
 
-typedef struct _MgPrintJob        MgPrintJob;
-typedef struct _MgPrintJobClass   MgPrintJobClass;
-typedef struct _MgPrintJobPriv    MgPrintJobPriv;
+typedef struct _PlannerPrintJob        PlannerPrintJob;
+typedef struct _PlannerPrintJobClass   PlannerPrintJobClass;
+typedef struct _PlannerPrintJobPriv    PlannerPrintJobPriv;
 
-struct _MgPrintJob {
+struct _PlannerPrintJob {
 	GObject            parent;
         GnomePrintContext *pc;
 	GnomePrintJob     *pj;
@@ -49,35 +49,35 @@ struct _MgPrintJob {
 	/* Text padding to use when printing text next to a line. */
 	gdouble            x_pad;
 
-	MgPrintJobPriv    *priv;
+	PlannerPrintJobPriv    *priv;
 };
 
-struct _MgPrintJobClass {
+struct _PlannerPrintJobClass {
 	GObjectClass parent_class;
 };
 
 GType        planner_print_job_get_type         (void) G_GNUC_CONST;
-MgPrintJob * planner_print_job_new              (GnomePrintJob *gpj);
-void         planner_print_job_set_header       (MgPrintJob    *job,
+PlannerPrintJob * planner_print_job_new              (GnomePrintJob *gpj);
+void         planner_print_job_set_header       (PlannerPrintJob    *job,
 					    const gchar   *header);
-void         planner_print_job_set_footer       (MgPrintJob    *job,
+void         planner_print_job_set_footer       (PlannerPrintJob    *job,
 					    const gchar   *footer);
-void         planner_print_job_set_total_pages  (MgPrintJob    *job,
+void         planner_print_job_set_total_pages  (PlannerPrintJob    *job,
 					    gint           total_pages);
-GnomeFont *  planner_print_job_get_font         (MgPrintJob    *job);
-gdouble      planner_print_job_get_font_height  (MgPrintJob    *job);
+GnomeFont *  planner_print_job_get_font         (PlannerPrintJob    *job);
+gdouble      planner_print_job_get_font_height  (PlannerPrintJob    *job);
 
 /* These functions use 0,0 as the top left of printable area. Use these
  * functions when drawing, as they recalculates the coordinates and calls
  * gnome_print_lineto/moveto with absolute coordinates.
  */
-void         planner_print_job_moveto           (MgPrintJob    *job,
+void         planner_print_job_moveto           (PlannerPrintJob    *job,
 					    gdouble        x,
 					    gdouble        y);
-void         planner_print_job_lineto           (MgPrintJob    *job,
+void         planner_print_job_lineto           (PlannerPrintJob    *job,
 					    gdouble        x,
 					    gdouble        y);
-void         planner_print_job_show_clipped     (MgPrintJob    *job,
+void         planner_print_job_show_clipped     (PlannerPrintJob    *job,
 					    gdouble        x,
 					    gdouble        y,
 					    const gchar   *str,
@@ -85,16 +85,16 @@ void         planner_print_job_show_clipped     (MgPrintJob    *job,
 					    gdouble        y1,
 					    gdouble        x2,
 					    gdouble        y2);
-gboolean     planner_print_job_begin_next_page  (MgPrintJob    *job);
-void         planner_print_job_finish_page      (MgPrintJob    *job,
+gboolean     planner_print_job_begin_next_page  (PlannerPrintJob    *job);
+void         planner_print_job_finish_page      (PlannerPrintJob    *job,
 					    gboolean       draw_border);
-void         planner_print_job_set_font_regular (MgPrintJob    *job);
-void         planner_print_job_set_font_bold    (MgPrintJob    *job);
-void         planner_print_job_set_font_italic  (MgPrintJob    *job);
+void         planner_print_job_set_font_regular (PlannerPrintJob    *job);
+void         planner_print_job_set_font_bold    (PlannerPrintJob    *job);
+void         planner_print_job_set_font_italic  (PlannerPrintJob    *job);
 
 
 
 
 
-#endif /* __MG_PRINT_JOB_H__ */
+#endif /* __PLANNER_PRINT_JOB_H__ */
 

@@ -20,46 +20,46 @@
  * Boston, MA 02111-1307, USA.
  */
 
-#ifndef __MG_PLUGIN_H__
-#define __MG_PLUGIN_H__
+#ifndef __PLANNER_PLUGIN_H__
+#define __PLANNER_PLUGIN_H__
 
 #include <gmodule.h>
 #include <gtk/gtkwidget.h>
-#include "planner-main-window.h"
+#include "planner-window.h"
 
-#define MG_TYPE_PLUGIN		   (planner_plugin_get_type ())
-#define MG_PLUGIN(obj)		   (G_TYPE_CHECK_INSTANCE_CAST ((obj), MG_TYPE_PLUGIN, MgPlugin))
-#define MG_PLUGIN_CLASS(klass)     (G_TYPE_CHECK_CLASS_CAST((klass), MG_TYPE_PLUGIN, MgPluginClass))
-#define MG_IS_PLUGIN(obj)	   (G_TYPE_CHECK_INSTANCE_TYPE ((obj), MG_TYPE_PLUGIN))
-#define MG_IS_PLUGIN_CLASS(klass)  (G_TYPE_CHECK_CLASS_TYPE ((klass), MG_TYPE_PLUGIN))
-#define MG_PLUGIN_GET_CLASS(obj)   (G_TYPE_INSTANCE_GET_CLASS ((obj), MG_TYPE_PLUGIN, MgPluginClass))
+#define PLANNER_TYPE_PLUGIN		   (planner_plugin_get_type ())
+#define PLANNER_PLUGIN(obj)		   (G_TYPE_CHECK_INSTANCE_CAST ((obj), PLANNER_TYPE_PLUGIN, PlannerPlugin))
+#define PLANNER_PLUGIN_CLASS(klass)     (G_TYPE_CHECK_CLASS_CAST((klass), PLANNER_TYPE_PLUGIN, PlannerPluginClass))
+#define PLANNER_IS_PLUGIN(obj)	   (G_TYPE_CHECK_INSTANCE_TYPE ((obj), PLANNER_TYPE_PLUGIN))
+#define PLANNER_IS_PLUGIN_CLASS(klass)  (G_TYPE_CHECK_CLASS_TYPE ((klass), PLANNER_TYPE_PLUGIN))
+#define PLANNER_PLUGIN_GET_CLASS(obj)   (G_TYPE_INSTANCE_GET_CLASS ((obj), PLANNER_TYPE_PLUGIN, PlannerPluginClass))
 
-typedef struct _MgPlugin       MgPlugin;
-typedef struct _MgPluginClass  MgPluginClass;
-typedef struct _MgPluginPriv   MgPluginPriv;
+typedef struct _PlannerPlugin       PlannerPlugin;
+typedef struct _PlannerPluginClass  PlannerPluginClass;
+typedef struct _PlannerPluginPriv   PlannerPluginPriv;
 
-struct _MgPlugin {
+struct _PlannerPlugin {
 	GObject            parent;
 
 	GModule           *handle;
-	MgMainWindow      *main_window;
+	PlannerWindow      *main_window;
 
-	MgPluginPriv      *priv;
+	PlannerPluginPriv      *priv;
 	
 	/* Methods. */
-	void         (*init)       (MgPlugin       *plugin,
-				    MgMainWindow *main_window);
-	void         (*exit)       (MgPlugin       *plugin);
+	void         (*init)       (PlannerPlugin       *plugin,
+				    PlannerWindow *main_window);
+	void         (*exit)       (PlannerPlugin       *plugin);
 };
 
-struct _MgPluginClass {
+struct _PlannerPluginClass {
 	GObjectClass parent_class;
 };
 
 GType        planner_plugin_get_type          (void);
-void         planner_plugin_init              (MgPlugin     *plugin,
-					  MgMainWindow *main_window);
-void         planner_plugin_exit              (MgPlugin     *plugin);
+void         planner_plugin_init              (PlannerPlugin     *plugin,
+					  PlannerWindow *main_window);
+void         planner_plugin_exit              (PlannerPlugin     *plugin);
 
-#endif /* __MG_PLUGIN_H__ */
+#endif /* __PLANNER_PLUGIN_H__ */
 

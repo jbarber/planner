@@ -19,19 +19,19 @@
  * Boston, MA 02111-1307, USA.
  */
 
-#ifndef __MG_PRINT_DIALOG_H__
-#define __MG_PRINT_DIALOG_H__
+#ifndef __PLANNER_PRINT_DIALOG_H__
+#define __PLANNER_PRINT_DIALOG_H__
 
-#include "planner-main-window.h"
+#include "planner-window.h"
 
-GtkWidget * planner_print_dialog_new                 (MgMainWindow  *window,
+GtkWidget * planner_print_dialog_new                 (PlannerWindow  *window,
 						 GnomePrintJob *job,
 						 GList         *views);
 GList *     planner_print_dialog_get_print_selection (GtkDialog     *dialog,
 						 gboolean      *summary);
 
 
-#endif /* __MG_PRINT_DIALOG_H__ */
+#endif /* __PLANNER_PRINT_DIALOG_H__ */
 
 
 

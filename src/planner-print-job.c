@@ -30,7 +30,7 @@
 
 #define MARGIN 30
 
-struct _MgPrintJobPriv {
+struct _PlannerPrintJobPriv {
         gchar         *header;
         gchar         *footer;
 
@@ -54,13 +54,13 @@ struct _MgPrintJobPriv {
 	gboolean       upside_down;
 };
 
-static void     print_job_class_init          (MgPrintJobClass *klass);
-static void     print_job_init                (MgPrintJob      *job);
+static void     print_job_class_init          (PlannerPrintJobClass *klass);
+static void     print_job_init                (PlannerPrintJob      *job);
 static void     print_job_finalize            (GObject         *object);
-static void     print_job_transform           (MgPrintJob      *job,
+static void     print_job_transform           (PlannerPrintJob      *job,
 					       gdouble         *x,
 					       gdouble         *y);
-static void     print_job_update_size         (MgPrintJob      *job);
+static void     print_job_update_size         (PlannerPrintJob      *job);
 
 
 static GObjectClass *parent_class = NULL;
@@ -72,26 +72,26 @@ planner_print_job_get_type (void)
 
         if (!type) {
                 static const GTypeInfo info =  {
-                        sizeof (MgPrintJobClass),
+                        sizeof (PlannerPrintJobClass),
                         NULL,           /* base_init */
                         NULL,           /* base_finalize */
                         (GClassInitFunc) print_job_class_init,
                         NULL,           /* class_finalize */
                         NULL,           /* class_data */
-                        sizeof (MgPrintJob),
+                        sizeof (PlannerPrintJob),
                         0,              /* n_preallocs */
                         (GInstanceInitFunc) print_job_init
                 };
                 
                 type = g_type_register_static (G_TYPE_OBJECT,
-					       "MgPrintJob", &info, 0);
+					       "PlannerPrintJob", &info, 0);
         }
 
         return type;
 }
 
 static void 
-print_job_class_init (MgPrintJobClass *klass)
+print_job_class_init (PlannerPrintJobClass *klass)
 {
         GObjectClass *o_class;
 
@@ -102,19 +102,19 @@ print_job_class_init (MgPrintJobClass *klass)
 }
 
 static void 
-print_job_init (MgPrintJob *job)
+print_job_init (PlannerPrintJob *job)
 {
-        MgPrintJobPriv   *priv;
+        PlannerPrintJobPriv   *priv;
 
-        priv = g_new0 (MgPrintJobPriv, 1);
+        priv = g_new0 (PlannerPrintJobPriv, 1);
 	job->priv = priv;
 }
 
 static void
 print_job_finalize (GObject *object)
 {
-        MgPrintJob     *job = MG_PRINT_JOB (object);
-	MgPrintJobPriv *priv = job->priv;
+        PlannerPrintJob     *job = PLANNER_PRINT_JOB (object);
+	PlannerPrintJobPriv *priv = job->priv;
 
 	g_object_unref (job->pj);
 	gnome_print_context_close (job->pc);
@@ -129,9 +129,9 @@ print_job_finalize (GObject *object)
 }
 
 static void
-print_job_transform (MgPrintJob *job, gdouble *x, gdouble *y)
+print_job_transform (PlannerPrintJob *job, gdouble *x, gdouble *y)
 {
-	MgPrintJobPriv *priv;
+	PlannerPrintJobPriv *priv;
 	
 	priv = job->priv;
 	
@@ -145,9 +145,9 @@ print_job_transform (MgPrintJob *job, gdouble *x, gdouble *y)
 }
 
 static void
-print_job_update_size (MgPrintJob *job)
+print_job_update_size (PlannerPrintJob *job)
 {
-	MgPrintJobPriv *priv;
+	PlannerPrintJobPriv *priv;
 
 	priv = job->priv;
 	
@@ -160,15 +160,15 @@ print_job_update_size (MgPrintJob *job)
 		      2 * MARGIN);
 }
 
-MgPrintJob *
+PlannerPrintJob *
 planner_print_job_new (GnomePrintJob *gpj)
 {
-        MgPrintJob       *job;
-	MgPrintJobPriv   *priv;
+        PlannerPrintJob       *job;
+	PlannerPrintJobPriv   *priv;
 	GnomePrintConfig *config;
 	gchar            *orientation;
         
-        job = g_object_new (MG_TYPE_PRINT_JOB, NULL);
+        job = g_object_new (PLANNER_TYPE_PRINT_JOB, NULL);
 	
 	priv = job->priv;
 
@@ -230,11 +230,11 @@ planner_print_job_new (GnomePrintJob *gpj)
 }
 
 void
-planner_print_job_set_header (MgPrintJob *job, const gchar *header)
+planner_print_job_set_header (PlannerPrintJob *job, const gchar *header)
 {
-        MgPrintJobPriv *priv;
+        PlannerPrintJobPriv *priv;
         
-        g_return_if_fail (MG_IS_PRINT_JOB (job));
+        g_return_if_fail (PLANNER_IS_PRINT_JOB (job));
 
         priv = job->priv;
 
@@ -252,11 +252,11 @@ planner_print_job_set_header (MgPrintJob *job, const gchar *header)
 }
 
 void
-planner_print_job_set_footer (MgPrintJob *job, const gchar *footer)
+planner_print_job_set_footer (PlannerPrintJob *job, const gchar *footer)
 {
-        MgPrintJobPriv *priv;
+        PlannerPrintJobPriv *priv;
         
-        g_return_if_fail (MG_IS_PRINT_JOB (job));
+        g_return_if_fail (PLANNER_IS_PRINT_JOB (job));
 
         priv = job->priv;
 
@@ -274,17 +274,17 @@ planner_print_job_set_footer (MgPrintJob *job, const gchar *footer)
 }
 
 void
-planner_print_job_set_total_pages (MgPrintJob *job, gint total_pages)
+planner_print_job_set_total_pages (PlannerPrintJob *job, gint total_pages)
 {
-        g_return_if_fail (MG_IS_PRINT_JOB (job));
+        g_return_if_fail (PLANNER_IS_PRINT_JOB (job));
         
         job->priv->total_pages = total_pages;
 }
 
 void
-planner_print_job_moveto (MgPrintJob *job, gdouble x, gdouble y)
+planner_print_job_moveto (PlannerPrintJob *job, gdouble x, gdouble y)
 {
-	g_return_if_fail (MG_IS_PRINT_JOB (job));
+	g_return_if_fail (PLANNER_IS_PRINT_JOB (job));
 
 	print_job_transform (job, &x, &y);
 	
@@ -292,9 +292,9 @@ planner_print_job_moveto (MgPrintJob *job, gdouble x, gdouble y)
 }
 
 void
-planner_print_job_lineto (MgPrintJob *job, gdouble x, gdouble y)
+planner_print_job_lineto (PlannerPrintJob *job, gdouble x, gdouble y)
 {
-	g_return_if_fail (MG_IS_PRINT_JOB (job));
+	g_return_if_fail (PLANNER_IS_PRINT_JOB (job));
 
 	print_job_transform (job, &x, &y);
 
@@ -302,7 +302,7 @@ planner_print_job_lineto (MgPrintJob *job, gdouble x, gdouble y)
 }
 
 void
-planner_print_job_show_clipped (MgPrintJob  *job,
+planner_print_job_show_clipped (PlannerPrintJob  *job,
 			   gdouble      x,
 			   gdouble      y,
 			   const gchar *str,
@@ -311,7 +311,7 @@ planner_print_job_show_clipped (MgPrintJob  *job,
 			   gdouble      x2,
 			   gdouble      y2)
 {
-	MgPrintJobPriv *priv;
+	PlannerPrintJobPriv *priv;
 	gdouble         width;
 	gdouble         ellipsis_width;
 	gchar          *tmp, *ellipsized;
@@ -389,12 +389,12 @@ planner_print_job_show_clipped (MgPrintJob  *job,
 }
 
 gboolean
-planner_print_job_begin_next_page (MgPrintJob *job)
+planner_print_job_begin_next_page (PlannerPrintJob *job)
 {
-	MgPrintJobPriv *priv;
+	PlannerPrintJobPriv *priv;
 	gchar          *job_name;
 	
-	g_return_val_if_fail (MG_IS_PRINT_JOB (job), FALSE);
+	g_return_val_if_fail (PLANNER_IS_PRINT_JOB (job), FALSE);
 	
 	priv = job->priv;
 
@@ -441,9 +441,9 @@ planner_print_job_begin_next_page (MgPrintJob *job)
 }
 
 void
-planner_print_job_finish_page (MgPrintJob *job, gboolean draw_border)
+planner_print_job_finish_page (PlannerPrintJob *job, gboolean draw_border)
 {
-	g_return_if_fail (MG_IS_PRINT_JOB (job));
+	g_return_if_fail (PLANNER_IS_PRINT_JOB (job));
 
 	if (draw_border) {
 		gnome_print_setlinewidth (job->pc, 0);
@@ -460,27 +460,27 @@ planner_print_job_finish_page (MgPrintJob *job, gboolean draw_border)
 }
 
 GnomeFont *
-planner_print_job_get_font (MgPrintJob *job)
+planner_print_job_get_font (PlannerPrintJob *job)
 {
-	g_return_val_if_fail (MG_IS_PRINT_JOB (job), NULL);
+	g_return_val_if_fail (PLANNER_IS_PRINT_JOB (job), NULL);
 	
 	return job->priv->font;
 }
 
 gdouble
-planner_print_job_get_font_height (MgPrintJob *job)
+planner_print_job_get_font_height (PlannerPrintJob *job)
 {
-	g_return_val_if_fail (MG_IS_PRINT_JOB (job), 0);
+	g_return_val_if_fail (PLANNER_IS_PRINT_JOB (job), 0);
 	
 	return job->priv->font_height;
 }
 
 void
-planner_print_job_set_font_regular (MgPrintJob *job)
+planner_print_job_set_font_regular (PlannerPrintJob *job)
 {
-	MgPrintJobPriv *priv;
+	PlannerPrintJobPriv *priv;
 	
-	g_return_if_fail (MG_IS_PRINT_JOB (job));
+	g_return_if_fail (PLANNER_IS_PRINT_JOB (job));
 
 	priv = job->priv;
 	
@@ -489,11 +489,11 @@ planner_print_job_set_font_regular (MgPrintJob *job)
 }
 
 void
-planner_print_job_set_font_bold (MgPrintJob *job)
+planner_print_job_set_font_bold (PlannerPrintJob *job)
 {
-	MgPrintJobPriv *priv;
+	PlannerPrintJobPriv *priv;
 	
-	g_return_if_fail (MG_IS_PRINT_JOB (job));
+	g_return_if_fail (PLANNER_IS_PRINT_JOB (job));
 	
 	priv = job->priv;
 	
@@ -502,11 +502,11 @@ planner_print_job_set_font_bold (MgPrintJob *job)
 }
 
 void
-planner_print_job_set_font_italic (MgPrintJob *job)
+planner_print_job_set_font_italic (PlannerPrintJob *job)
 {
-	MgPrintJobPriv *priv;
+	PlannerPrintJobPriv *priv;
 	
-	g_return_if_fail (MG_IS_PRINT_JOB (job));
+	g_return_if_fail (PLANNER_IS_PRINT_JOB (job));
 	
 	priv = job->priv;
 

@@ -23,8 +23,8 @@
 #include "planner-main-window.h"
 #include "planner-plugin.h"
 
-void plugin_init (MgPlugin     *plugin,
-		  MgMainWindow *main_window);
+void plugin_init (PlannerPlugin     *plugin,
+		  PlannerWindow *main_window);
 void plugin_exit (void);
 
 G_MODULE_EXPORT void 
@@ -34,8 +34,8 @@ plugin_exit (void)
 }
 
 G_MODULE_EXPORT void 
-plugin_init (MgPlugin     *plugin,
-	     MgMainWindow *main_window)
+plugin_init (PlannerPlugin     *plugin,
+	     PlannerWindow *main_window)
 {
 	g_message ("Test init");
 }

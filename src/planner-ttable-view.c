@@ -13,14 +13,14 @@
 #include "planner-ttable-tree.h"
 #include "planner-ttable-chart.h"
 
-struct _MgViewPriv {
+struct _PlannerViewPriv {
 	GtkWidget	*paned;
 	GtkWidget	*tree;
 	GtkWidget	*gantt;
 	MrpProject	*project;
 
-	MgTtableChart	  *chart;
-	MgTtablePrintData *print_data;
+	PlannerTtableChart	  *chart;
+	PlannerTtablePrintData *print_data;
 };
 
 /* Les call-backs pour bonobo */
@@ -47,10 +47,10 @@ static void		ttable_view_ui_component_event		(BonoboUIComponent	*component,
 								 const gchar		*path,
 								 Bonobo_UIComponent_EventType type,
 								 const gchar		*state_string,
-								 MgView			*view);
-static GtkWidget 	*ttable_view_create_widget		(MgView			*view);
+								 PlannerView			*view);
+static GtkWidget 	*ttable_view_create_widget		(PlannerView			*view);
 static void		ttable_view_project_loaded_cb		(MrpProject		*project,
-								 MgView			*view);
+								 PlannerView			*view);
 static void		ttable_view_tree_view_realize_cb	(GtkWidget		*w,
 								 gpointer		 data);
 static void		ttable_view_row_expanded		(GtkTreeView		*tree_view,
@@ -61,32 +61,32 @@ static void		ttable_view_row_collapsed		(GtkTreeView		*tree_view,
 								 GtkTreeIter		*iter,
 								 GtkTreePath		*path,
 								 gpointer		 data);
-static void		ttable_view_expand_all			(MgTtableTree		*tree,
-								 MgTtableChart		*chart);
-static void		ttable_view_collapse_all		(MgTtableTree		*tree,
-								 MgTtableChart		*chart);
-static void		ttable_view_ttable_status_updated	(MgTtableChart		*chart,
+static void		ttable_view_expand_all			(PlannerTtableTree		*tree,
+								 PlannerTtableChart		*chart);
+static void		ttable_view_collapse_all		(PlannerTtableTree		*tree,
+								 PlannerTtableChart		*chart);
+static void		ttable_view_ttable_status_updated	(PlannerTtableChart		*chart,
 								 const gchar		*message,
-								 MgView			*view);
+								 PlannerView			*view);
 /* Fonctions exportees par le module */
-void			activate				(MgView			*view);
-void			deactivate				(MgView			*view);
-void			init					(MgView			*view,
-								 MgMainWindow		*main_window);
-gchar*			get_label				(MgView			*view);
-gchar*			get_menu_label				(MgView			*view);
-gchar*			get_icon				(MgView			*view);
-GtkWidget*		get_widget				(MgView			*view);
-void			print_init				(MgView			*view,
-								 MgPrintJob		*job);
-void			print					(MgView			*view);
-gint			print_get_n_pages			(MgView			*view);
-void			print_cleanup				(MgView			*view);
+void			activate				(PlannerView			*view);
+void			deactivate				(PlannerView			*view);
+void			init					(PlannerView			*view,
+								 PlannerWindow		*main_window);
+gchar*			get_label				(PlannerView			*view);
+gchar*			get_menu_label				(PlannerView			*view);
+gchar*			get_icon				(PlannerView			*view);
+GtkWidget*		get_widget				(PlannerView			*view);
+void			print_init				(PlannerView			*view,
+								 PlannerPrintJob		*job);
+void			print					(PlannerView			*view);
+gint			print_get_n_pages			(PlannerView			*view);
+void			print_cleanup				(PlannerView			*view);
 
 G_MODULE_EXPORT void                                
-activate (MgView *view)
+activate (PlannerView *view)
 {      
-	MgViewPriv	*priv;
+	PlannerViewPriv	*priv;
 
 	priv=view->priv;
 	planner_view_activate_helper(view,
@@ -97,16 +97,16 @@ activate (MgView *view)
 }
 
 G_MODULE_EXPORT void
-deactivate (MgView *view)
+deactivate (PlannerView *view)
 {
 	planner_view_deactivate_helper(view);
 }
 
 G_MODULE_EXPORT void
-init (MgView *view, MgMainWindow *main_window)
+init (PlannerView *view, PlannerWindow *main_window)
 {
-	MgViewPriv	*priv;
-	priv=g_new0 (MgViewPriv, 1);
+	PlannerViewPriv	*priv;
+	priv=g_new0 (PlannerViewPriv, 1);
 	view->priv=priv;
 
 	g_signal_connect (view->ui_component,
@@ -116,32 +116,32 @@ init (MgView *view, MgMainWindow *main_window)
 }
 
 G_MODULE_EXPORT gchar *
-get_label (MgView *view)
+get_label (PlannerView *view)
 {
-	g_return_val_if_fail (MG_IS_VIEW (view), NULL);
+	g_return_val_if_fail (PLANNER_IS_VIEW (view), NULL);
 	return _("Time Table");
 }
 
 G_MODULE_EXPORT gchar*
-get_menu_label (MgView *view)
+get_menu_label (PlannerView *view)
 {
-	g_return_val_if_fail (MG_IS_VIEW(view),NULL);
+	g_return_val_if_fail (PLANNER_IS_VIEW(view),NULL);
 	return _("_Time Table");
 }
 
 G_MODULE_EXPORT gchar *
-get_icon (MgView *view)
+get_icon (PlannerView *view)
 {       
-	g_return_val_if_fail (MG_IS_VIEW (view), NULL);
+	g_return_val_if_fail (PLANNER_IS_VIEW (view), NULL);
 	return IMAGEDIR "/time-table.png";
 }
 
 G_MODULE_EXPORT GtkWidget *
-get_widget (MgView *view)
+get_widget (PlannerView *view)
 {       
-	MgViewPriv *priv;
+	PlannerViewPriv *priv;
 
-	g_return_val_if_fail (MG_IS_VIEW (view), NULL);
+	g_return_val_if_fail (PLANNER_IS_VIEW (view), NULL);
 
 	priv = view->priv;
 	if (priv->paned == NULL) {
@@ -153,13 +153,13 @@ get_widget (MgView *view)
 }
 
 G_MODULE_EXPORT void
-print_init (MgView     *view,
-	    MgPrintJob *job)
+print_init (PlannerView     *view,
+	    PlannerPrintJob *job)
 {       
-	MgViewPriv *priv;
+	PlannerViewPriv *priv;
 	
-	g_return_if_fail (MG_IS_VIEW (view));
-	g_return_if_fail (MG_IS_PRINT_JOB (job));
+	g_return_if_fail (PLANNER_IS_VIEW (view));
+	g_return_if_fail (PLANNER_IS_PRINT_JOB (job));
 
 	priv = view->priv;
 
@@ -169,25 +169,25 @@ print_init (MgView     *view,
 }
 
 G_MODULE_EXPORT void
-print (MgView *view)
+print (PlannerView *view)
 {
-	g_return_if_fail (MG_IS_VIEW (view));
+	g_return_if_fail (PLANNER_IS_VIEW (view));
 	g_assert (view->priv->print_data);
 	planner_ttable_print_do (view->priv->print_data);
 }
 
 G_MODULE_EXPORT gint
-print_get_n_pages (MgView *view)
+print_get_n_pages (PlannerView *view)
 {
-	g_return_val_if_fail (MG_IS_VIEW (view),0);
+	g_return_val_if_fail (PLANNER_IS_VIEW (view),0);
 	g_assert (view->priv->print_data);
 	return planner_ttable_print_get_n_pages(view->priv->print_data);
 }
 
 G_MODULE_EXPORT void
-print_cleanup (MgView *view)
+print_cleanup (PlannerView *view)
 {
-	g_return_if_fail (MG_IS_VIEW (view));
+	g_return_if_fail (PLANNER_IS_VIEW (view));
 	g_assert (view->priv->print_data);
 	planner_ttable_print_data_free(view->priv->print_data);
 	view->priv->print_data=NULL;
@@ -200,13 +200,13 @@ ttable_view_test_cb	(BonoboUIComponent	*component,
 			 gpointer		 data,
 			 const char		*cname)
 {
-	MgView		*view;
-	MgViewPriv	*priv;
+	PlannerView		*view;
+	PlannerViewPriv	*priv;
 	MrpProject	*project;
 
-	view = MG_VIEW(data);
+	view = PLANNER_VIEW(data);
 	priv = view->priv;
-	project = planner_main_window_get_project(view->main_window);
+	project = planner_window_get_project(view->main_window);
 //	fprintf(stderr,"Coucou!\n");
 }
 */
@@ -216,8 +216,8 @@ ttable_view_zoom_out_cb		(BonoboUIComponent	*component,
 				 gpointer		 data,
 				 const char		*cname)
 {
-	MgView		*view;
-	view = MG_VIEW(data);
+	PlannerView		*view;
+	view = PLANNER_VIEW(data);
 	planner_ttable_chart_zoom_out(view->priv->chart);
 }
 
@@ -226,8 +226,8 @@ ttable_view_zoom_in_cb		(BonoboUIComponent	*component,
 				 gpointer		 data,
 				 const char		*cname)
 {
-	MgView		*view;
-	view = MG_VIEW(data);
+	PlannerView		*view;
+	view = PLANNER_VIEW(data);
 	planner_ttable_chart_zoom_in(view->priv->chart);
 }
 
@@ -236,8 +236,8 @@ ttable_view_zoom_to_fit_cb	(BonoboUIComponent	*component,
 				 gpointer		 data,
 				 const char		*cname)
 {
-	MgView		*view;
-	view = MG_VIEW(data);
+	PlannerView		*view;
+	view = PLANNER_VIEW(data);
 	planner_ttable_chart_zoom_to_fit(view->priv->chart);
 }
 
@@ -246,9 +246,9 @@ ttable_view_ui_component_event	(BonoboUIComponent	*component,
 				 const gchar		*path,
 				 Bonobo_UIComponent_EventType type,
 				 const gchar		*state_string,
-				 MgView			*view)
+				 PlannerView			*view)
 {
-	MgViewPriv *priv;
+	PlannerViewPriv *priv;
 //	gboolean    state;
 
 	priv = view->priv;
@@ -287,16 +287,16 @@ ttable_view_tree_view_scroll_event_cb	(GtkWidget	*widget,
 }
 
 static GtkWidget*
-ttable_view_create_widget	(MgView			*view)
+ttable_view_create_widget	(PlannerView			*view)
 {
-	MgViewPriv	*priv;
+	PlannerViewPriv	*priv;
 	MrpProject	*project;
 
 	GtkWidget	*hpaned;
 	GtkWidget	*left_frame;
 	GtkWidget	*right_frame;
-	MgTtableModel   *model;
-//	MgTtableTree	*tree;
+	PlannerTtableModel   *model;
+//	PlannerTtableTree	*tree;
 	GtkWidget	*tree;
 	GtkWidget	*vbox;
 	GtkWidget	*sw;
@@ -307,7 +307,7 @@ ttable_view_create_widget	(MgView			*view)
 //	GtkWidget	*vbox;
 //	GtkWidget	*
 
-	project = planner_main_window_get_project (view->main_window);
+	project = planner_window_get_project (view->main_window);
 	priv = view->priv;
 	priv->project = project;
 
@@ -333,7 +333,7 @@ ttable_view_create_widget	(MgView			*view)
 
 	//ICI
 	chart = planner_ttable_chart_new_with_model(GTK_TREE_MODEL(model));
-	priv->chart = MG_TTABLE_CHART(chart);
+	priv->chart = PLANNER_TTABLE_CHART(chart);
 	sw = gtk_scrolled_window_new (hadj, vadj);
 	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw),
 					GTK_POLICY_ALWAYS,
@@ -356,22 +356,22 @@ ttable_view_create_widget	(MgView			*view)
 	g_signal_connect_after (tree, "size_request",G_CALLBACK(ttable_view_tree_view_size_request_cb),NULL);
 	g_signal_connect_after (tree, "scroll_event",G_CALLBACK(ttable_view_tree_view_scroll_event_cb),view);
 	gtk_tree_view_expand_all(GTK_TREE_VIEW(tree));
-	planner_ttable_chart_expand_all(MG_TTABLE_CHART(chart));
+	planner_ttable_chart_expand_all(PLANNER_TTABLE_CHART(chart));
 	g_object_unref(model);
 	return hpaned;
 }
 
 static void
-ttable_view_ttable_status_updated	(MgTtableChart	*chart,
+ttable_view_ttable_status_updated	(PlannerTtableChart	*chart,
 					 const gchar	*message,
-					 MgView		*view)
+					 PlannerView		*view)
 {
 	bonobo_ui_component_set_status (view->ui_component,message,NULL);
 }
 
 static void
 ttable_view_project_loaded_cb	(MrpProject	*project,
-				 MgView		*view)
+				 PlannerView		*view)
 {
 	GtkTreeModel *model;
 	if (project == view->priv->project) {
@@ -380,9 +380,9 @@ ttable_view_project_loaded_cb	(MrpProject	*project,
 		return;
 	}
 	model = GTK_TREE_MODEL (planner_ttable_model_new (project));
-	planner_ttable_tree_set_model (MG_TTABLE_TREE (view->priv->tree),
-			MG_TTABLE_MODEL(model));
-	planner_ttable_chart_set_model(MG_TTABLE_CHART(view->priv->chart),model);
+	planner_ttable_tree_set_model (PLANNER_TTABLE_TREE (view->priv->tree),
+			PLANNER_TTABLE_MODEL(model));
+	planner_ttable_chart_set_model(PLANNER_TTABLE_CHART(view->priv->chart),model);
 	g_object_unref (model);
 	gtk_tree_view_expand_all (GTK_TREE_VIEW (view->priv->tree));
 	planner_ttable_chart_expand_all (view->priv->chart);
@@ -421,7 +421,7 @@ ttable_view_row_expanded		(GtkTreeView		*tree_view,
 					 GtkTreePath		*path,
 					 gpointer		 data)
 {
-	MgTtableChart *chart = data;
+	PlannerTtableChart *chart = data;
 	fprintf(stderr,"Je transmet l'expand-row au chart\n");
 	planner_ttable_chart_expand_row(chart,path);
 }
@@ -432,21 +432,21 @@ ttable_view_row_collapsed		(GtkTreeView		*tree_view,
 					 GtkTreePath		*path,
 					 gpointer		 data)
 {
-	MgTtableChart *chart = data;
+	PlannerTtableChart *chart = data;
 	fprintf(stderr,"Je transmet le collapse-row au chart\n");
 	planner_ttable_chart_collapse_row(chart,path);
 }
 
 static void
-ttable_view_expand_all		(MgTtableTree	*tree,
-				 MgTtableChart	*chart)
+ttable_view_expand_all		(PlannerTtableTree	*tree,
+				 PlannerTtableChart	*chart)
 {
-	if (!MG_IS_TTABLE_TREE(tree)) {
-		fprintf(stderr,"Expand sur pas un MgTtableTree\n");
+	if (!PLANNER_IS_TTABLE_TREE(tree)) {
+		fprintf(stderr,"Expand sur pas un PlannerTtableTree\n");
 		return;
 	}
-	if (!MG_IS_TTABLE_CHART(chart)) {
-		fprintf(stderr,"J'ai pas recu un MgTtableChart\n");
+	if (!PLANNER_IS_TTABLE_CHART(chart)) {
+		fprintf(stderr,"J'ai pas recu un PlannerTtableChart\n");
 		return;
 	}
 	g_signal_handlers_block_by_func(tree,
@@ -461,15 +461,15 @@ ttable_view_expand_all		(MgTtableTree	*tree,
 }
 
 static void
-ttable_view_collapse_all	(MgTtableTree	*tree,
-				 MgTtableChart	*chart)
+ttable_view_collapse_all	(PlannerTtableTree	*tree,
+				 PlannerTtableChart	*chart)
 {
-	if (!MG_IS_TTABLE_TREE(tree)) {
-		fprintf(stderr,"Expand sur pas un MgTtableTree\n");
+	if (!PLANNER_IS_TTABLE_TREE(tree)) {
+		fprintf(stderr,"Expand sur pas un PlannerTtableTree\n");
 		return;
 	}
-	if (!MG_IS_TTABLE_CHART(chart)) {
-		fprintf(stderr,"J'ai pas recu un MgTtableChart\n");
+	if (!PLANNER_IS_TTABLE_CHART(chart)) {
+		fprintf(stderr,"J'ai pas recu un PlannerTtableChart\n");
 		return;
 	}
 	g_signal_handlers_block_by_func(tree,

@@ -20,7 +20,7 @@ enum {
 	LAST_SIGNAL
 };
 
-struct _MgTtableModelPriv {
+struct _PlannerTtableModelPriv {
 	MrpProject	*project;
 	GHashTable	*resource2node;
 	GHashTable	*assign2node;
@@ -28,25 +28,25 @@ struct _MgTtableModelPriv {
 	gboolean	 in_new;
 };
 
-static void	ttable_model_init				(MgTtableModel		*model);
-static void	ttable_model_class_init				(MgTtableModelClass	*klass);
+static void	ttable_model_init				(PlannerTtableModel		*model);
+static void	ttable_model_class_init				(PlannerTtableModelClass	*klass);
 static void	ttable_model_finalize				(GObject		*object);
 static void	ttable_model_tree_model_init			(GtkTreeModelIface	*iface);
 static void	ttable_model_resource_assignment_added_cb	(MrpResource	*res,
 								 MrpAssignment	*assign,
-								 MgTtableModel	*model);
+								 PlannerTtableModel	*model);
 static void	ttable_model_resource_assignment_removed_cb	(MrpResource	*res,
 								 MrpAssignment	*assign,
-								 MgTtableModel	*model);
+								 PlannerTtableModel	*model);
 static void	ttable_model_resource_added_cb			(MrpProject	*project,
 								 MrpResource	*resource,
-								 MgTtableModel	*model);
+								 PlannerTtableModel	*model);
 static void	ttable_model_resource_removed_cb		(MrpProject	*project,
 								 MrpResource	*resource,
-								 MgTtableModel	*model);
+								 PlannerTtableModel	*model);
 //static void	ttable_model_assignment_removed_cb		(MrpAssignment	*assign,
 //								 GParamSpec	*spec,
-//								 MgTtableModel	*model);
+//								 PlannerTtableModel	*model);
 
 static GObjectClass *parent_class;
 static guint signals[LAST_SIGNAL];
@@ -57,13 +57,13 @@ planner_ttable_model_get_type(void)
 	static GType type = 0 ;
 	if (!type) {
 		static const GTypeInfo info = {
-			sizeof(MgTtableModelClass),
+			sizeof(PlannerTtableModelClass),
 			NULL, // base init
 			NULL, // base finalize
 			(GClassInitFunc) ttable_model_class_init,
 			NULL, // class finalize
 			NULL, // class data
-			sizeof(MgTtableModel),
+			sizeof(PlannerTtableModel),
 			0,
 			(GInstanceInitFunc) ttable_model_init
 		};
@@ -85,7 +85,7 @@ planner_ttable_model_get_type(void)
 //		};
 #endif
 		type = g_type_register_static (G_TYPE_OBJECT,
-					       "MgTtableModel",
+					       "PlannerTtableModel",
 					       &info, 0);
 		g_type_add_interface_static (type,
 					     GTK_TYPE_TREE_MODEL,
@@ -103,17 +103,17 @@ planner_ttable_model_get_type(void)
 }
 
 MrpProject *
-planner_ttable_model_get_project (MgTtableModel *model)
+planner_ttable_model_get_project (PlannerTtableModel *model)
 {
 	return model->priv->project;
 }
 
 static void
-ttable_model_init	(MgTtableModel	*model)
+ttable_model_init	(PlannerTtableModel	*model)
 {
-	MgTtableModelPriv	*priv;
+	PlannerTtableModelPriv	*priv;
 
-	priv = g_new0(MgTtableModelPriv,1);
+	priv = g_new0(PlannerTtableModelPriv,1);
 	model->priv = priv;
 
 	priv->resource2node = g_hash_table_new (NULL, NULL);
@@ -124,7 +124,7 @@ ttable_model_init	(MgTtableModel	*model)
 static void
 ttable_model_finalize (GObject *object)
 {
-	MgTtableModel *model = MG_TTABLE_MODEL(object);
+	PlannerTtableModel *model = PLANNER_TTABLE_MODEL(object);
 
 	fprintf(stderr,"%p est detruit\n",model);
 	g_free(model->priv);
@@ -135,7 +135,7 @@ ttable_model_finalize (GObject *object)
 }
 
 static void
-ttable_model_class_init	(MgTtableModelClass *klass)
+ttable_model_class_init	(PlannerTtableModelClass *klass)
 {
 	GObjectClass *object_class;
 	object_class = (GObjectClass*)klass;
@@ -209,12 +209,12 @@ ttable_model_get_iter (GtkTreeModel *tree_model,
 		       GtkTreeIter  *iter,
 		       GtkTreePath  *path)
 {
-	MgTtableModel	*model;
+	PlannerTtableModel	*model;
 	GtkTreeIter	 parent;
 	gint		*indices;
 	gint		 depth, i;
 
-	model = MG_TTABLE_MODEL(tree_model);
+	model = PLANNER_TTABLE_MODEL(tree_model);
 
 	indices = gtk_tree_path_get_indices (path);
 	depth = gtk_tree_path_get_depth (path);
@@ -239,7 +239,7 @@ ttable_model_get_iter (GtkTreeModel *tree_model,
 }
 
 static GtkTreePath *
-ttable_model_get_path_from_node (MgTtableModel *model,
+ttable_model_get_path_from_node (PlannerTtableModel *model,
 				 GNode         *node)
 {
 	GtkTreePath *path;
@@ -247,7 +247,7 @@ ttable_model_get_path_from_node (MgTtableModel *model,
 	GNode       *child;
 	gint         i=0;
 
-	g_return_val_if_fail (MG_IS_TTABLE_MODEL (model), NULL);
+	g_return_val_if_fail (PLANNER_IS_TTABLE_MODEL (model), NULL);
 	g_return_val_if_fail (node != NULL, NULL);
 
 	parent = node->parent;
@@ -290,17 +290,17 @@ ttable_model_get_path_from_node (MgTtableModel *model,
 }
 
 GtkTreePath *
-planner_ttable_model_get_path_from_resource (MgTtableModel *model,
+planner_ttable_model_get_path_from_resource (PlannerTtableModel *model,
 					MrpResource   *resource)
 {
 	GNode *node;
 
-	g_return_val_if_fail (MG_IS_TTABLE_MODEL (model), NULL);
+	g_return_val_if_fail (PLANNER_IS_TTABLE_MODEL (model), NULL);
 	g_return_val_if_fail (MRP_IS_RESOURCE (resource), NULL);
 
 	node = g_hash_table_lookup (model->priv->resource2node, resource);
 
-	return ttable_model_get_path_from_node(MG_TTABLE_MODEL(model), node);
+	return ttable_model_get_path_from_node(PLANNER_TTABLE_MODEL(model), node);
 }
 
 static GtkTreePath *
@@ -311,11 +311,11 @@ ttable_model_get_path (GtkTreeModel *tree_model,
 
 	g_return_val_if_fail (iter != NULL, NULL);
 	g_return_val_if_fail (iter->user_data != NULL, NULL);
-	g_return_val_if_fail (iter->stamp == MG_TTABLE_MODEL (tree_model)->stamp, NULL);
+	g_return_val_if_fail (iter->stamp == PLANNER_TTABLE_MODEL (tree_model)->stamp, NULL);
 
 	node = iter->user_data;
 
-	return ttable_model_get_path_from_node (MG_TTABLE_MODEL (tree_model), node);
+	return ttable_model_get_path_from_node (PLANNER_TTABLE_MODEL (tree_model), node);
 }
 
 static void
@@ -404,7 +404,7 @@ ttable_model_iter_next (GtkTreeModel *model,
 	}
 
 	iter->user_data = next;
-	iter->stamp = MG_TTABLE_MODEL(model)->stamp;
+	iter->stamp = PLANNER_TTABLE_MODEL(model)->stamp;
 	return TRUE;
 }
 
@@ -418,7 +418,7 @@ ttable_model_iter_children (GtkTreeModel *tree_model,
 	if (parent) {
 		node = parent->user_data;
 	} else {
-		node = MG_TTABLE_MODEL (tree_model)->priv->tree;
+		node = PLANNER_TTABLE_MODEL (tree_model)->priv->tree;
 	}
 	
 	child = g_node_first_child (node);
@@ -429,7 +429,7 @@ ttable_model_iter_children (GtkTreeModel *tree_model,
 	}
 
 	iter->user_data = child;
-	iter->stamp = MG_TTABLE_MODEL(tree_model)->stamp;
+	iter->stamp = PLANNER_TTABLE_MODEL(tree_model)->stamp;
 	return TRUE;
 }
 
@@ -450,7 +450,7 @@ ttable_model_iter_n_children (GtkTreeModel *tree_model,
 	if (iter) {
 		node = iter->user_data;
 	} else {
-		node = MG_TTABLE_MODEL (tree_model)->priv->tree;
+		node = PLANNER_TTABLE_MODEL (tree_model)->priv->tree;
 	}
 	return g_node_n_children (node);
 }
@@ -461,13 +461,13 @@ ttable_model_iter_nth_child (GtkTreeModel *tree_model,
 			     GtkTreeIter  *parent_iter,
 			     gint          n)
 {
-	MgTtableModel	*model;
+	PlannerTtableModel	*model;
 	GNode		*parent;
 	GNode		*child;
 
 	g_return_val_if_fail (parent_iter == NULL || parent_iter->user_data != NULL, FALSE);
 
-	model = MG_TTABLE_MODEL (tree_model);
+	model = PLANNER_TTABLE_MODEL (tree_model);
 
 	if (parent_iter == NULL) {
 		parent = model->priv->tree;
@@ -499,7 +499,7 @@ ttable_model_iter_parent (GtkTreeModel *tree_model,
 		return FALSE;
 	} else {
 		iter->user_data=parent;
-		iter->stamp = MG_TTABLE_MODEL(tree_model)->stamp;
+		iter->stamp = PLANNER_TTABLE_MODEL(tree_model)->stamp;
 		return TRUE;
 	}
 }
@@ -520,11 +520,11 @@ ttable_model_tree_model_init (GtkTreeModelIface *iface)
 	iface->iter_parent = ttable_model_iter_parent;
 }
 
-MgTtableModel *
+PlannerTtableModel *
 planner_ttable_model_new (MrpProject *project)
 {
-	MgTtableModel		*model;
-	MgTtableModelPriv	*priv;
+	PlannerTtableModel		*model;
+	PlannerTtableModelPriv	*priv;
 
 	GList            	*resources, *r;
 //	GList			*tasks, *t;
@@ -534,7 +534,7 @@ planner_ttable_model_new (MrpProject *project)
 
 //	gulong			 signal_id;
 
-	model = MG_TTABLE_MODEL (g_object_new (MG_TYPE_TTABLE_MODEL, NULL));
+	model = PLANNER_TTABLE_MODEL (g_object_new (PLANNER_TYPE_TTABLE_MODEL, NULL));
 	priv = model->priv;
 	priv->in_new=TRUE;
 	fprintf(stderr,"%p est en construction\n",model);
@@ -562,12 +562,12 @@ planner_ttable_model_new (MrpProject *project)
 }
 
 MrpAssignment *
-planner_ttable_model_get_assignment	(MgTtableModel	*model,
+planner_ttable_model_get_assignment	(PlannerTtableModel	*model,
 				 GtkTreeIter	*iter)
 {
 	MrpAssignment *assign;
 
-	g_return_val_if_fail(MG_IS_TTABLE_MODEL(model),NULL);
+	g_return_val_if_fail(PLANNER_IS_TTABLE_MODEL(model),NULL);
 
 	assign = ((GNode *) iter->user_data)->data;
 
@@ -583,12 +583,12 @@ planner_ttable_model_get_assignment	(MgTtableModel	*model,
 }
 
 MrpResource *
-planner_ttable_model_get_resource	(MgTtableModel	*model,
+planner_ttable_model_get_resource	(PlannerTtableModel	*model,
 				 GtkTreeIter	*iter)
 {
 	MrpResource *res;
 
-	g_return_val_if_fail(MG_IS_TTABLE_MODEL(model),NULL);
+	g_return_val_if_fail(PLANNER_IS_TTABLE_MODEL(model),NULL);
 	
 	res = ((GNode *) iter->user_data)->data;
 
@@ -604,57 +604,57 @@ planner_ttable_model_get_resource	(MgTtableModel	*model,
 }
 
 gboolean
-planner_ttable_model_is_assignment	(MgTtableModel	*model,
+planner_ttable_model_is_assignment	(PlannerTtableModel	*model,
 				 GtkTreeIter	*iter)
 {
-	g_return_val_if_fail(MG_IS_TTABLE_MODEL(model),FALSE);
+	g_return_val_if_fail(PLANNER_IS_TTABLE_MODEL(model),FALSE);
 	return MRP_IS_ASSIGNMENT(((GNode *) iter->user_data)->data);
 }
 
 gboolean
-planner_ttable_model_is_resource	(MgTtableModel	*model,
+planner_ttable_model_is_resource	(PlannerTtableModel	*model,
 				 GtkTreeIter	*iter)
 {
-	g_return_val_if_fail(MG_IS_TTABLE_MODEL(model),FALSE);
+	g_return_val_if_fail(PLANNER_IS_TTABLE_MODEL(model),FALSE);
 	return MRP_IS_RESOURCE(((GNode *) iter->user_data)->data);
 }
 
 MrpAssignment *
-planner_ttable_model_path_get_assignment	(MgTtableModel	*model,
+planner_ttable_model_path_get_assignment	(PlannerTtableModel	*model,
 					 GtkTreePath	*path)
 {
 	GtkTreeIter	iter;
-	g_return_val_if_fail(MG_IS_TTABLE_MODEL(model),NULL);
+	g_return_val_if_fail(PLANNER_IS_TTABLE_MODEL(model),NULL);
 	ttable_model_get_iter(GTK_TREE_MODEL(model),&iter,path);
 	return planner_ttable_model_get_assignment(model,&iter);
 }
 
 MrpResource *
-planner_ttable_model_path_get_resource	(MgTtableModel	*model,
+planner_ttable_model_path_get_resource	(PlannerTtableModel	*model,
 					 GtkTreePath	*path)
 {
 	GtkTreeIter	iter;
-	g_return_val_if_fail(MG_IS_TTABLE_MODEL(model),NULL);
+	g_return_val_if_fail(PLANNER_IS_TTABLE_MODEL(model),NULL);
 	ttable_model_get_iter(GTK_TREE_MODEL(model),&iter,path);
 	return planner_ttable_model_get_resource(model,&iter);
 }
 
 gboolean
-planner_ttable_model_path_is_resource	(MgTtableModel	*model,
+planner_ttable_model_path_is_resource	(PlannerTtableModel	*model,
 					 GtkTreePath	*path)
 {
 	GtkTreeIter	iter;
-	g_return_val_if_fail(MG_IS_TTABLE_MODEL(model),FALSE);
+	g_return_val_if_fail(PLANNER_IS_TTABLE_MODEL(model),FALSE);
 	ttable_model_get_iter(GTK_TREE_MODEL(model),&iter,path);
 	return planner_ttable_model_is_resource(model,&iter);
 }
 
 gboolean
-planner_ttable_model_path_is_assignment	(MgTtableModel	*model,
+planner_ttable_model_path_is_assignment	(PlannerTtableModel	*model,
 					 GtkTreePath	*path)
 {
 	GtkTreeIter	iter;
-	g_return_val_if_fail(MG_IS_TTABLE_MODEL(model),FALSE);
+	g_return_val_if_fail(PLANNER_IS_TTABLE_MODEL(model),FALSE);
 	ttable_model_get_iter(GTK_TREE_MODEL(model),&iter,path);
 	return planner_ttable_model_is_assignment(model,&iter);
 }
@@ -662,9 +662,9 @@ planner_ttable_model_path_is_assignment	(MgTtableModel	*model,
 static void
 ttable_model_resource_assignment_added_cb	(MrpResource	*res,
 						 MrpAssignment	*assign,
-						 MgTtableModel	*model)
+						 PlannerTtableModel	*model)
 {
-	MgTtableModelPriv	*priv;
+	PlannerTtableModelPriv	*priv;
 	GNode			*res_node;
 	GNode			*assign_node;
 	GtkTreePath		*path;
@@ -699,7 +699,7 @@ ttable_model_resource_assignment_added_cb	(MrpResource	*res,
 static void
 ttable_model_resource_assignment_removed_cb	(MrpResource	*res,
 						 MrpAssignment	*assign,
-						 MgTtableModel	*model)
+						 PlannerTtableModel	*model)
 {
 	GNode		*res_node;
 	GNode		*assign_node;
@@ -731,9 +731,9 @@ ttable_model_resource_assignment_removed_cb	(MrpResource	*res,
 static void
 ttable_model_resource_added_cb			(MrpProject	*project,
 						 MrpResource	*resource,
-						 MgTtableModel	*model)
+						 PlannerTtableModel	*model)
 {
-	MgTtableModelPriv	*priv;
+	PlannerTtableModelPriv	*priv;
 	GList			*tasks, *t;
 	GNode			*rnode;
 	MrpAssignment		*assign;
@@ -742,7 +742,7 @@ ttable_model_resource_added_cb			(MrpProject	*project,
 	
 	g_return_if_fail(MRP_IS_PROJECT(project));
 	g_return_if_fail(MRP_IS_RESOURCE(resource));
-	g_return_if_fail(MG_IS_TTABLE_MODEL(model));
+	g_return_if_fail(PLANNER_IS_TTABLE_MODEL(model));
 
 	priv = model->priv;
 	if (priv->in_new) {
@@ -786,18 +786,18 @@ ttable_model_resource_added_cb			(MrpProject	*project,
 static void
 ttable_model_resource_removed_cb		(MrpProject	*project,
 						 MrpResource	*resource,
-						 MgTtableModel	*model)
+						 PlannerTtableModel	*model)
 {
 	fprintf(stderr,"Resource retiree\n");
 	g_return_if_fail(MRP_IS_PROJECT(project));
 	g_return_if_fail(MRP_IS_RESOURCE(resource));
-	g_return_if_fail(MG_IS_TTABLE_MODEL(model));
+	g_return_if_fail(PLANNER_IS_TTABLE_MODEL(model));
 }
 
 //static void
 //ttable_model_assignment_removed_cb		(MrpAssignment	*assign,
 //						 GParamSpec	*spec,
-//						 MgTtableModel	*model)
+//						 PlannerTtableModel	*model)
 //{
 //	fprintf(stderr,"On retire un assignment\n");
 //}

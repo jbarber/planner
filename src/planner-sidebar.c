@@ -27,7 +27,7 @@
 #include <libgnome/gnome-i18n.h>
 #include "planner-sidebar.h"
 
-struct _MgSidebarPriv {
+struct _PlannerSidebarPriv {
 	GList           *buttons;
 	GtkWidget       *event_box;
 	GtkWidget       *vbox;
@@ -45,12 +45,12 @@ enum {
 	LAST_SIGNAL
 };
 
-static void     sidebar_class_init           (MgSidebarClass *klass);
-static void     sidebar_init                 (MgSidebar      *bar);
+static void     sidebar_class_init           (PlannerSidebarClass *klass);
+static void     sidebar_init                 (PlannerSidebar      *bar);
 static void     sidebar_finalize             (GObject        *object);
 static void     sidebar_destroy              (GtkObject      *object);
 static void     sidebar_event_box_realize_cb (GtkWidget      *widget,
-					      MgSidebar      *bar);
+					      PlannerSidebar      *bar);
 static void     sidebar_style_set            (GtkWidget      *widget,
 					      GtkStyle       *previous_style);
 
@@ -66,18 +66,18 @@ planner_sidebar_get_type (void)
 
 	if (!planner_sidebar_type) {
 		static const GTypeInfo planner_sidebar_info = {
-			sizeof (MgSidebarClass),
+			sizeof (PlannerSidebarClass),
 			NULL,		/* base_init */
 			NULL,		/* base_finalize */
 			(GClassInitFunc) sidebar_class_init,
 			NULL,		/* class_finalize */
 			NULL,		/* class_data */
-			sizeof (MgSidebar),
+			sizeof (PlannerSidebar),
 			0,              /* n_preallocs */
 			(GInstanceInitFunc) sidebar_init
 		};
 
-		planner_sidebar_type = g_type_register_static (GTK_TYPE_FRAME, "MgSidebar",
+		planner_sidebar_type = g_type_register_static (GTK_TYPE_FRAME, "PlannerSidebar",
 							  &planner_sidebar_info, 0);
 	}
 	
@@ -85,7 +85,7 @@ planner_sidebar_get_type (void)
 }
 
 static void
-sidebar_class_init (MgSidebarClass *class)
+sidebar_class_init (PlannerSidebarClass *class)
 {
 	GObjectClass   *o_class;
 	GtkObjectClass *object_class;
@@ -115,9 +115,9 @@ sidebar_class_init (MgSidebarClass *class)
 }
 
 static void
-sidebar_init (MgSidebar *bar)
+sidebar_init (PlannerSidebar *bar)
 {
-	bar->priv = g_new0 (MgSidebarPriv, 1);
+	bar->priv = g_new0 (PlannerSidebarPriv, 1);
 
 	bar->priv->event_box = gtk_event_box_new ();
 	gtk_widget_show (bar->priv->event_box);
@@ -140,7 +140,7 @@ sidebar_init (MgSidebar *bar)
 static void
 sidebar_finalize (GObject *object)
 {
-	MgSidebar *bar = MG_SIDEBAR (object);
+	PlannerSidebar *bar = PLANNER_SIDEBAR (object);
 
 	g_free (bar->priv);
 
@@ -351,7 +351,7 @@ sidebar_darken_color (GdkColor *color,
 }
 
 static void
-sidebar_modify_bg (MgSidebar *bar)
+sidebar_modify_bg (PlannerSidebar *bar)
 {
 	GList       *l;
 	GdkColor     normal_color;
@@ -382,7 +382,7 @@ sidebar_modify_bg (MgSidebar *bar)
 }
 
 static void
-sidebar_event_box_realize_cb (GtkWidget *widget, MgSidebar *bar)
+sidebar_event_box_realize_cb (GtkWidget *widget, PlannerSidebar *bar)
 {
 	sidebar_modify_bg (bar);
 }
@@ -391,7 +391,7 @@ static void
 sidebar_style_set (GtkWidget *widget,
 		   GtkStyle  *previous_style)
 {
-	MgSidebar *bar = MG_SIDEBAR (widget);
+	PlannerSidebar *bar = PLANNER_SIDEBAR (widget);
 
 	if (GTK_WIDGET_CLASS (parent_class)->style_set) {
 		GTK_WIDGET_CLASS (parent_class)->style_set (widget,
@@ -405,14 +405,14 @@ GtkWidget *
 planner_sidebar_new (void)
 {
 
-	return g_object_new (MG_TYPE_SIDEBAR, NULL);
+	return g_object_new (PLANNER_TYPE_SIDEBAR, NULL);
 }
 
 static void
 sidebar_button_toggled_cb (GtkToggleButton *button,
-			   MgSidebar       *sidebar)
+			   PlannerSidebar       *sidebar)
 {
-	MgSidebarPriv   *priv;
+	PlannerSidebarPriv   *priv;
 	ButtonEntry     *entry;
 	gint             index;
 	GtkToggleButton *selected_button;
@@ -441,16 +441,16 @@ sidebar_button_toggled_cb (GtkToggleButton *button,
 }
 
 void
-planner_sidebar_append (MgSidebar   *sidebar,
+planner_sidebar_append (PlannerSidebar   *sidebar,
 		   const gchar *icon_filename,
 		   const gchar *text)
 {
-	MgSidebarPriv *priv;
+	PlannerSidebarPriv *priv;
 	ButtonEntry   *entry;
 	GtkWidget     *vbox;
 	GtkWidget     *image;
 
-	g_return_if_fail (MG_IS_SIDEBAR (sidebar));
+	g_return_if_fail (PLANNER_IS_SIDEBAR (sidebar));
 
 	priv = sidebar->priv;
 	
@@ -497,13 +497,13 @@ planner_sidebar_append (MgSidebar   *sidebar,
 }
 
 void
-planner_sidebar_set_active (MgSidebar *sidebar,
+planner_sidebar_set_active (PlannerSidebar *sidebar,
 		       gint       index)
 {
-	MgSidebarPriv *priv;
+	PlannerSidebarPriv *priv;
 	ButtonEntry   *entry;
 
-	g_return_if_fail (MG_IS_SIDEBAR (sidebar));
+	g_return_if_fail (PLANNER_IS_SIDEBAR (sidebar));
 
 	priv = sidebar->priv;
 

@@ -20,44 +20,44 @@
  * Boston, MA 02111-1307, USA.
  */
 
-#ifndef __MG_GANTT_ROW_H__
-#define __MG_GANTT_ROW_H__
+#ifndef __PLANNER_GANTT_ROW_H__
+#define __PLANNER_GANTT_ROW_H__
 
 #include <gtk/gtk.h>
 #include <libgnomecanvas/gnome-canvas.h>
 #include <libgnomecanvas/gnome-canvas-util.h>
 
-#define MG_TYPE_GANTT_ROW            (planner_gantt_row_get_type ())
-#define MG_GANTT_ROW(obj)            (GTK_CHECK_CAST ((obj), MG_TYPE_GANTT_ROW, MgGanttRow))
-#define MG_GANTT_ROW_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), MG_TYPE_GANTT_ROW, MgGanttRowClass))
-#define MG_IS_GANTT_ROW(obj)         (GTK_CHECK_TYPE ((obj), MG_TYPE_GANTT_ROW))
-#define MG_IS_GANTT_ROW_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), MG_TYPE_GANTT_ROW))
-#define MG_GANTT_ROW_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), MG_TYPE_GANTT_ROW, MgGanttRowClass))
+#define PLANNER_TYPE_GANTT_ROW            (planner_gantt_row_get_type ())
+#define PLANNER_GANTT_ROW(obj)            (GTK_CHECK_CAST ((obj), PLANNER_TYPE_GANTT_ROW, PlannerGanttRow))
+#define PLANNER_GANTT_ROW_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), PLANNER_TYPE_GANTT_ROW, PlannerGanttRowClass))
+#define PLANNER_IS_GANTT_ROW(obj)         (GTK_CHECK_TYPE ((obj), PLANNER_TYPE_GANTT_ROW))
+#define PLANNER_IS_GANTT_ROW_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), PLANNER_TYPE_GANTT_ROW))
+#define PLANNER_GANTT_ROW_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), PLANNER_TYPE_GANTT_ROW, PlannerGanttRowClass))
 
 
-typedef struct _MgGanttRow      MgGanttRow;
-typedef struct _MgGanttRowClass MgGanttRowClass;
-typedef struct _MgGanttRowPriv  MgGanttRowPriv;
+typedef struct _PlannerGanttRow      PlannerGanttRow;
+typedef struct _PlannerGanttRowClass PlannerGanttRowClass;
+typedef struct _PlannerGanttRowPriv  PlannerGanttRowPriv;
 
-struct _MgGanttRow {
+struct _PlannerGanttRow {
 	GnomeCanvasItem  parent;
-	MgGanttRowPriv  *priv;	
+	PlannerGanttRowPriv  *priv;	
 };
 
-struct _MgGanttRowClass {
+struct _PlannerGanttRowClass {
 	GnomeCanvasItemClass parent_class;
 };
 
 
 GType planner_gantt_row_get_type     (void) G_GNUC_CONST;
-void  planner_gantt_row_get_geometry (MgGanttRow *row,
+void  planner_gantt_row_get_geometry (PlannerGanttRow *row,
 				 gdouble    *x1,
 				 gdouble    *y1,
 				 gdouble    *x2,
 				 gdouble    *y2);
-void  planner_gantt_row_set_visible  (MgGanttRow *row,
+void  planner_gantt_row_set_visible  (PlannerGanttRow *row,
 				 gboolean    is_visible);
 
 
-#endif /* __MG_GANTT_ROW_H__ */
+#endif /* __PLANNER_GANTT_ROW_H__ */
 

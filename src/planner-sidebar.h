@@ -20,29 +20,29 @@
  * Boston, MA 02111-1307, USA.
  */
 
-#ifndef __MG_SIDEBAR_H__
-#define __MG_SIDEBAR_H__
+#ifndef __PLANNER_SIDEBAR_H__
+#define __PLANNER_SIDEBAR_H__
 
 #include <gtk/gtkframe.h>
 
-#define MG_TYPE_SIDEBAR		(planner_sidebar_get_type ())
-#define MG_SIDEBAR(obj)		(GTK_CHECK_CAST ((obj), MG_TYPE_SIDEBAR, MgSidebar))
-#define MG_SIDEBAR_CLASS(klass)	(GTK_CHECK_CLASS_CAST ((klass), MG_TYPE_SIDEBAR, MgSidebarClass))
-#define MG_IS_SIDEBAR(obj)		(GTK_CHECK_TYPE ((obj), MG_TYPE_SIDEBAR))
-#define MG_IS_SIDEBAR_CLASS(klass)	(GTK_CHECK_CLASS_TYPE ((obj), MG_TYPE_SIDEBAR))
-#define MG_SIDEBAR_GET_CLASS(obj)	(GTK_CHECK_GET_CLASS ((obj), MG_TYPE_SIDEBAR, MgSidebarClass))
+#define PLANNER_TYPE_SIDEBAR		(planner_sidebar_get_type ())
+#define PLANNER_SIDEBAR(obj)		(GTK_CHECK_CAST ((obj), PLANNER_TYPE_SIDEBAR, PlannerSidebar))
+#define PLANNER_SIDEBAR_CLASS(klass)	(GTK_CHECK_CLASS_CAST ((klass), PLANNER_TYPE_SIDEBAR, PlannerSidebarClass))
+#define PLANNER_IS_SIDEBAR(obj)		(GTK_CHECK_TYPE ((obj), PLANNER_TYPE_SIDEBAR))
+#define PLANNER_IS_SIDEBAR_CLASS(klass)	(GTK_CHECK_CLASS_TYPE ((obj), PLANNER_TYPE_SIDEBAR))
+#define PLANNER_SIDEBAR_GET_CLASS(obj)	(GTK_CHECK_GET_CLASS ((obj), PLANNER_TYPE_SIDEBAR, PlannerSidebarClass))
 
-typedef struct _MgSidebar           MgSidebar;
-typedef struct _MgSidebarClass      MgSidebarClass;
-typedef struct _MgSidebarPriv       MgSidebarPriv;
+typedef struct _PlannerSidebar           PlannerSidebar;
+typedef struct _PlannerSidebarClass      PlannerSidebarClass;
+typedef struct _PlannerSidebarPriv       PlannerSidebarPriv;
 
-struct _MgSidebar
+struct _PlannerSidebar
 {
 	GtkFrame       parent;
-	MgSidebarPriv *priv;
+	PlannerSidebarPriv *priv;
 };
 
-struct _MgSidebarClass
+struct _PlannerSidebarClass
 {
 	GtkFrameClass  parent_class;
 };
@@ -52,13 +52,13 @@ GtkType    planner_sidebar_get_type     (void);
 
 GtkWidget *planner_sidebar_new          (void);
 
-void       planner_sidebar_append       (MgSidebar   *sidebar,
+void       planner_sidebar_append       (PlannerSidebar   *sidebar,
 				    const gchar *icon_filename,
 				    const gchar *text);
 
-void       planner_sidebar_set_active   (MgSidebar   *sidebar,
+void       planner_sidebar_set_active   (PlannerSidebar   *sidebar,
 				    gint         index);
 
 
-#endif /* __MG_SIDEBAR_H__ */
+#endif /* __PLANNER_SIDEBAR_H__ */
 

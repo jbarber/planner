@@ -20,33 +20,33 @@
  * Boston, MA 02111-1307, USA.
  */
 
-#ifndef __MG_ASSIGNMENT_MODEL_H__
-#define __MG_ASSIGNMENT_MODEL_H__
+#ifndef __PLANNER_ASSIGNMENT_MODEL_H__
+#define __PLANNER_ASSIGNMENT_MODEL_H__
 
 #include <libplanner/mrp-project.h>
 #include "planner-list-model.h"
 
-#define MG_TYPE_ASSIGNMENT_MODEL	          (planner_assignment_model_get_type ())
-#define MG_ASSIGNMENT_MODEL(obj)	          (G_TYPE_CHECK_INSTANCE_CAST ((obj), MG_TYPE_ASSIGNMENT_MODEL, MgAssignmentModel))
-#define MG_ASSIGNMENT_MODEL_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), MG_TYPE_ASSIGNMENT_MODEL, MgAssignmentModelClass))
-#define MG_IS_ASSIGNMENT_MODEL(obj)	  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), MG_TYPE_ASSIGNMENT_MODEL))
-#define MG_IS_ASSIGNMENT_MODEL_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), MG_TYPE_ASSIGNMENT_MODEL))
-#define MG_ASSIGNMENT_MODEL_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), MG_TYPE_ASSIGNMENT_MODEL, MgAssignmentModelClass))
+#define PLANNER_TYPE_ASSIGNMENT_MODEL	          (planner_assignment_model_get_type ())
+#define PLANNER_ASSIGNMENT_MODEL(obj)	          (G_TYPE_CHECK_INSTANCE_CAST ((obj), PLANNER_TYPE_ASSIGNMENT_MODEL, PlannerAssignmentModel))
+#define PLANNER_ASSIGNMENT_MODEL_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), PLANNER_TYPE_ASSIGNMENT_MODEL, PlannerAssignmentModelClass))
+#define PLANNER_IS_ASSIGNMENT_MODEL(obj)	  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), PLANNER_TYPE_ASSIGNMENT_MODEL))
+#define PLANNER_IS_ASSIGNMENT_MODEL_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), PLANNER_TYPE_ASSIGNMENT_MODEL))
+#define PLANNER_ASSIGNMENT_MODEL_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), PLANNER_TYPE_ASSIGNMENT_MODEL, PlannerAssignmentModelClass))
 
-typedef struct _MgAssignmentModel       MgAssignmentModel;
-typedef struct _MgAssignmentModelClass  MgAssignmentModelClass;
-typedef struct _MgAssignmentModelPriv   MgAssignmentModelPriv;
+typedef struct _PlannerAssignmentModel       PlannerAssignmentModel;
+typedef struct _PlannerAssignmentModelClass  PlannerAssignmentModelClass;
+typedef struct _PlannerAssignmentModelPriv   PlannerAssignmentModelPriv;
 
-struct _MgAssignmentModel
+struct _PlannerAssignmentModel
 {
-        MgListModel          parent;
+        PlannerListModel          parent;
 
-        MgAssignmentModelPriv *priv;
+        PlannerAssignmentModelPriv *priv;
 };
 
-struct _MgAssignmentModelClass
+struct _PlannerAssignmentModelClass
 {
-	MgListModelClass parent_class;
+	PlannerListModelClass parent_class;
 };
 
 enum {
@@ -61,6 +61,6 @@ enum {
 };
 
 GType              planner_assignment_model_get_type     (void);
-MgAssignmentModel *planner_assignment_model_new          (MrpTask    *task);
+PlannerAssignmentModel *planner_assignment_model_new          (MrpTask    *task);
 
-#endif /* __MG_ASSIGNMENT_MODEL_H__ */
+#endif /* __PLANNER_ASSIGNMENT_MODEL_H__ */

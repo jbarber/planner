@@ -58,7 +58,7 @@ typedef enum {
 	STATE_DRAG_ANY		= STATE_DRAG_MOVE | STATE_DRAG_DURATION
 } State;
 
-struct _MgTtableRowPriv {
+struct _PlannerTtableRowPriv {
 	GdkGC		*complete_gc;
 	GdkGC		*break_gc;
 	GdkGC		*fill_gc;
@@ -85,8 +85,8 @@ struct _MgTtableRowPriv {
 	State		state;
 };
 
-static void	ttable_row_class_init		(MgTtableRowClass	*class);
-static void	ttable_row_init			(MgTtableRow		*row);
+static void	ttable_row_class_init		(PlannerTtableRowClass	*class);
+static void	ttable_row_init			(PlannerTtableRow		*row);
 static void	ttable_row_destroy		(GtkObject		*object);
 static void	ttable_row_set_property		(GObject		*object,
 						 guint			 param_id,
@@ -121,23 +121,23 @@ static void	ttable_row_bounds		(GnomeCanvasItem	*item,
 						 double			*y2);
 static gboolean	ttable_row_event		(GnomeCanvasItem	*item,
 						 GdkEvent		*event);
-static void	ttable_row_geometry_changed	(MgTtableRow		*row);
+static void	ttable_row_geometry_changed	(PlannerTtableRow		*row);
 //static gboolean	ttable_row_canvas_scroll	(GtkWidget		*widget,
 //						 gint			 delta_x,
 //						 gint			 delta_y);
-static void	ttable_row_ensure_layout	(MgTtableRow		*row);
+static void	ttable_row_ensure_layout	(PlannerTtableRow		*row);
 static void	ttable_row_resource_notify_cb	(MrpResource		*resource,
 						 GParamSpec		*pspec,
-						 MgTtableRow		*row);
+						 PlannerTtableRow		*row);
 static void	ttable_row_assignment_notify_cb (MrpAssignment		*assign,
 						 GParamSpec		*pspec,
-						 MgTtableRow		*row);
+						 PlannerTtableRow		*row);
 static void	ttable_row_task_notify_cb	(MrpTask		*task,
 						 GParamSpec		*pspec,
-						 MgTtableRow		*row);
+						 PlannerTtableRow		*row);
 static void	ttable_row_resource_assignment_added_cb	(MrpResource	*resource,
 						 MrpAssignment		*assign, 
-						 MgTtableRow		*row);
+						 PlannerTtableRow		*row);
 static GdkGC *	ttable_row_create_frame_gc	(GnomeCanvas		*canvas);
 
 
@@ -162,18 +162,18 @@ planner_ttable_row_get_type(void)
 
 	if (!type) {
 		static const GTypeInfo info = {
-			sizeof (MgTtableRowClass),
+			sizeof (PlannerTtableRowClass),
 			NULL,           /* base_init */
 			NULL,           /* base_finalize */
 			(GClassInitFunc) ttable_row_class_init,
 			NULL,           /* class_finalize */
 			NULL,           /* class_data */
-			sizeof (MgTtableRow),
+			sizeof (PlannerTtableRow),
 			0,              /* n_preallocs */
 			(GInstanceInitFunc) ttable_row_init
 		};
 		type = g_type_register_static (GNOME_TYPE_CANVAS_ITEM,
-				"MgTtableRow",
+				"PlannerTtableRow",
 				&info,
 				0);
 	}
@@ -182,7 +182,7 @@ planner_ttable_row_get_type(void)
 
 
 static void
-ttable_row_class_init (MgTtableRowClass *class)
+ttable_row_class_init (PlannerTtableRowClass *class)
 {
 	GObjectClass         *gobject_class;
 	GtkObjectClass       *object_class;
@@ -288,11 +288,11 @@ ttable_row_class_init (MgTtableRowClass *class)
 }
 
 static void
-ttable_row_init (MgTtableRow *row)
+ttable_row_init (PlannerTtableRow *row)
 {
-	MgTtableRowPriv *priv;
+	PlannerTtableRowPriv *priv;
 	
-	row->priv = g_new0 (MgTtableRowPriv, 1);
+	row->priv = g_new0 (PlannerTtableRowPriv, 1);
 	priv = row->priv;
 	
 	priv->x = 0.0;
@@ -306,7 +306,7 @@ ttable_row_init (MgTtableRow *row)
 	priv->fixed_duration = 0;
 	priv->resource = NULL;
 	priv->state = STATE_NONE;
-//	fprintf(stderr,"Un nouveau MgTtableRow en %p\n",priv);
+//	fprintf(stderr,"Un nouveau PlannerTtableRow en %p\n",priv);
 //	priv->highlight = FALSE;
 //	priv->mouse_over_index = -1;
 //	priv->resource_widths = g_array_new (TRUE, FALSE, sizeof (gint));
@@ -315,12 +315,12 @@ ttable_row_init (MgTtableRow *row)
 static void
 ttable_row_destroy (GtkObject *object)
 {
-	MgTtableRow     *row;
-	MgTtableRowPriv *priv;
+	PlannerTtableRow     *row;
+	PlannerTtableRowPriv *priv;
 
-	g_return_if_fail (MG_IS_TTABLE_ROW (object));
+	g_return_if_fail (PLANNER_IS_TTABLE_ROW (object));
 
-	row = MG_TTABLE_ROW (object);
+	row = PLANNER_TTABLE_ROW (object);
 	priv = row->priv;
 
 	if (priv) {
@@ -341,7 +341,7 @@ ttable_row_destroy (GtkObject *object)
 }
 
 static void
-ttable_row_get_bounds (MgTtableRow *row,
+ttable_row_get_bounds (PlannerTtableRow *row,
 		       double     *px1,
 		       double     *py1,
 		       double     *px2,
@@ -413,9 +413,9 @@ get_resource_bounds	(MrpResource	*resource,
 
 /* FIXME: Rename this function to something more descriptive. */
 static void
-recalc_bounds (MgTtableRow *row)
+recalc_bounds (PlannerTtableRow *row)
 {
-	MgTtableRowPriv *priv;
+	PlannerTtableRowPriv *priv;
 	GnomeCanvasItem *item;
 //	gint             width;
 //	mrptime          t;
@@ -481,8 +481,8 @@ ttable_row_set_property (GObject      *object,
 			 GParamSpec   *pspec)
 {
 	GnomeCanvasItem *item;
-	MgTtableRow      *row;
-	MgTtableRowPriv  *priv;
+	PlannerTtableRow      *row;
+	PlannerTtableRowPriv  *priv;
 	gboolean         changed = FALSE;
 	gfloat           tmp_scale;
 	gdouble          tmp_dbl;
@@ -490,10 +490,10 @@ ttable_row_set_property (GObject      *object,
 //	gint             tmp_int;
 	MrpTask		*task;
 	
-	g_return_if_fail (MG_IS_TTABLE_ROW (object));
+	g_return_if_fail (PLANNER_IS_TTABLE_ROW (object));
 
 	item = GNOME_CANVAS_ITEM (object);
-	row  = MG_TTABLE_ROW (object);
+	row  = PLANNER_TTABLE_ROW (object);
 	priv = row->priv;
 	
 	switch (param_id) {
@@ -655,12 +655,12 @@ ttable_row_get_property (GObject    *object,
 			 GValue     *value,
 			 GParamSpec *pspec)
 {
-	MgTtableRow     *row;
-	MgTtableRowPriv *priv;
+	PlannerTtableRow     *row;
+	PlannerTtableRowPriv *priv;
 
-	g_return_if_fail (MG_IS_TTABLE_ROW (object));
+	g_return_if_fail (PLANNER_IS_TTABLE_ROW (object));
 
-	row = MG_TTABLE_ROW (object);
+	row = PLANNER_TTABLE_ROW (object);
 	priv = row->priv;
 	
 	switch (param_id) {
@@ -699,7 +699,7 @@ ttable_row_get_property (GObject    *object,
 }
 
 static void
-ttable_row_ensure_layout (MgTtableRow *row)
+ttable_row_ensure_layout (PlannerTtableRow *row)
 {
 	if (row->priv->layout == NULL) {
 		row->priv->layout = gtk_widget_create_pango_layout (
@@ -711,9 +711,9 @@ ttable_row_ensure_layout (MgTtableRow *row)
 
 /*
 static void
-gantt_row_update_resources (MgGanttRow *row)
+gantt_row_update_resources (PlannerGanttRow *row)
 {
-	MgGanttRowPriv *priv;
+	PlannerGanttRowPriv *priv;
 	GList          *l;
 	GList          *assignments;
 	MrpAssignment  *assignment;
@@ -800,10 +800,10 @@ ttable_row_update (GnomeCanvasItem *item,
 		   ArtSVP          *clip_path,
 		   gint             flags)
 {
-	MgTtableRow *row;
+	PlannerTtableRow *row;
 	double      x1, y1, x2, y2;
 
-	row = MG_TTABLE_ROW (item);
+	row = PLANNER_TTABLE_ROW (item);
 
 	GNOME_CANVAS_ITEM_CLASS (parent_class)->update (item,
 							affine,
@@ -819,10 +819,10 @@ ttable_row_update (GnomeCanvasItem *item,
 static void
 ttable_row_realize (GnomeCanvasItem *item)
 {
-	MgTtableRow     *row;
-	MgTtableRowPriv *priv;
+	PlannerTtableRow     *row;
+	PlannerTtableRowPriv *priv;
 
-	row = MG_TTABLE_ROW (item);
+	row = PLANNER_TTABLE_ROW (item);
 	priv = row->priv;
 	
 	GNOME_CANVAS_ITEM_CLASS (parent_class)->realize (item);
@@ -867,9 +867,9 @@ ttable_row_realize (GnomeCanvasItem *item)
 static void
 ttable_row_unrealize (GnomeCanvasItem *item)
 {
-	MgTtableRow *row;
+	PlannerTtableRow *row;
 
-	row = MG_TTABLE_ROW (item);
+	row = PLANNER_TTABLE_ROW (item);
 
 	gdk_gc_unref (row->priv->complete_gc);
 	row->priv->complete_gc = NULL;
@@ -960,8 +960,8 @@ ttable_row_draw_resource_ival	(mrptime		 start,
 				 gint			 width,
 				 gint			 height)
 {
-	MgTtableRow	*row;
-	MgTtableRowPriv	*priv;
+	PlannerTtableRow	*row;
+	PlannerTtableRowPriv	*priv;
 	GdkColor	 color_normal;
 	GdkColor	 color_free;
 	GdkColor	 color_underuse;
@@ -1003,7 +1003,7 @@ ttable_row_draw_resource_ival	(mrptime		 start,
 				"gray40",
 				&color_shadow);
 
-	row = MG_TTABLE_ROW(item);
+	row = PLANNER_TTABLE_ROW(item);
 	priv = row->priv;
 
 	// Graphical Context
@@ -1146,7 +1146,7 @@ ttable_row_draw_resource_ival	(mrptime		 start,
 }
 
 static void
-ttable_row_draw_resource	(MgTtableRow		*row,
+ttable_row_draw_resource	(PlannerTtableRow		*row,
 				 GdkDrawable		*drawable,
 				 GnomeCanvasItem	*item,
 				 gint			 x,
@@ -1250,7 +1250,7 @@ ttable_row_draw_resource	(MgTtableRow		*row,
 }
 
 static void
-ttable_row_draw_assignment	(MgTtableRow		*row,
+ttable_row_draw_assignment	(PlannerTtableRow		*row,
 				 MrpAssignment		*assign,
 				 GnomeCanvasItem	*item,
 		 		 GdkDrawable     	*drawable,
@@ -1259,7 +1259,7 @@ ttable_row_draw_assignment	(MgTtableRow		*row,
 				 gint             	width,
 				 gint             	height)
 {
-	MgTtableRowPriv	*priv;
+	PlannerTtableRowPriv	*priv;
 	MrpTask 	*task;
 	GdkGC           *frame_gc;
 	gdouble          i2w_dx; 
@@ -1444,10 +1444,10 @@ ttable_row_draw (GnomeCanvasItem *item,
 		 gint             width,
 		 gint             height)
 {
-	MgTtableRow     *row;
-	MgTtableChart   *chart;
+	PlannerTtableRow     *row;
+	PlannerTtableChart   *chart;
 
-	row = MG_TTABLE_ROW (item);
+	row = PLANNER_TTABLE_ROW (item);
 	chart = g_object_get_data (G_OBJECT (item->canvas), "chart");
 	if (row->priv->assignment) {
 		ttable_row_draw_assignment(row,
@@ -1483,13 +1483,13 @@ ttable_row_point (GnomeCanvasItem  *item,
 		  gint              cy,
 		  GnomeCanvasItem **actual_item)
 {
-	MgTtableRow     *row;
-	MgTtableRowPriv *priv;
+	PlannerTtableRow     *row;
+	PlannerTtableRowPriv *priv;
 //	gint             text_width;
 	gdouble          x1, y1, x2, y2;
 	gdouble          dx, dy;
 	
-	row = MG_TTABLE_ROW (item);
+	row = PLANNER_TTABLE_ROW (item);
 	priv = row->priv;
 	
 	*actual_item = item;
@@ -1537,9 +1537,9 @@ ttable_row_bounds (GnomeCanvasItem *item,
 		   double          *x2,
 		   double          *y2)
 {
-	MgTtableRow *row;
+	PlannerTtableRow *row;
 
-	row = MG_TTABLE_ROW (item);
+	row = PLANNER_TTABLE_ROW (item);
 
 	ttable_row_get_bounds (row, x1, y1, x2, y2);
 	
@@ -1549,7 +1549,7 @@ ttable_row_bounds (GnomeCanvasItem *item,
 }
 
 static void
-ttable_row_resource_notify_cb (MrpResource *resource, GParamSpec *pspec, MgTtableRow *row)
+ttable_row_resource_notify_cb (MrpResource *resource, GParamSpec *pspec, PlannerTtableRow *row)
 {
 	gchar *name=NULL;
 	g_object_get(resource,"name",&name,NULL);
@@ -1563,7 +1563,7 @@ ttable_row_resource_notify_cb (MrpResource *resource, GParamSpec *pspec, MgTtabl
 static void
 ttable_row_resource_assignment_added_cb	(MrpResource	*resource,
 					 MrpAssignment	*assign,
-					 MgTtableRow	*row)
+					 PlannerTtableRow	*row)
 {
 	MrpTask	*task;
 	task = mrp_assignment_get_task(assign);
@@ -1584,7 +1584,7 @@ ttable_row_resource_assignment_added_cb	(MrpResource	*resource,
 }
 
 static void
-ttable_row_assignment_notify_cb (MrpAssignment *assignment, GParamSpec *pspec, MgTtableRow *row)
+ttable_row_assignment_notify_cb (MrpAssignment *assignment, GParamSpec *pspec, PlannerTtableRow *row)
 {
 	recalc_bounds (row);
 	ttable_row_geometry_changed (row); 
@@ -1592,7 +1592,7 @@ ttable_row_assignment_notify_cb (MrpAssignment *assignment, GParamSpec *pspec, M
 }
 
 static void
-ttable_row_task_notify_cb (MrpTask *task, GParamSpec *pspec, MgTtableRow *row)
+ttable_row_task_notify_cb (MrpTask *task, GParamSpec *pspec, PlannerTtableRow *row)
 {
 	MrpTaskSched	sched;
 	g_object_get (G_OBJECT(task),"sched",&sched,NULL);
@@ -1607,7 +1607,7 @@ ttable_row_task_notify_cb (MrpTask *task, GParamSpec *pspec, MgTtableRow *row)
 }
 
 //static void
-//gantt_row_update_assignment_string (MgGanttRow *row)
+//gantt_row_update_assignment_string (PlannerGanttRow *row)
 //{
 //	gantt_row_update_resources (row);
 //	
@@ -1619,7 +1619,7 @@ ttable_row_task_notify_cb (MrpTask *task, GParamSpec *pspec, MgTtableRow *row)
 static void 
 gantt_row_res_assignment_added (MrpResource   *resource, 
 			        MrpAssignment *assignment,
-			        MgGanttRow    *row)
+			        PlannerGanttRow    *row)
 {
 	MrpTask *task;
 	
@@ -1639,7 +1639,7 @@ gantt_row_res_assignment_added (MrpResource   *resource,
 static void 
 gantt_row_assignment_removed (MrpTask       *task, 
 			      MrpAssignment *assignment,
-			      MgGanttRow    *row)
+			      PlannerGanttRow    *row)
 {
 	MrpResource *resource;
 
@@ -1660,7 +1660,7 @@ gantt_row_assignment_removed (MrpTask       *task,
 static void
 gantt_row_resource_name_changed (MrpResource *resource,
 				 GParamSpec  *pspec,
-				 MgGanttRow  *row)
+				 PlannerGanttRow  *row)
 {
 	gantt_row_update_assignment_string (row);
 }
@@ -1669,7 +1669,7 @@ gantt_row_resource_name_changed (MrpResource *resource,
 static void
 gantt_row_assignment_units_changed (MrpAssignment *assignment,
 				    GParamSpec    *pspec,
-				    MgGanttRow    *row)
+				    PlannerGanttRow    *row)
 {
 	gantt_row_update_assignment_string (row);
 }
@@ -1679,15 +1679,15 @@ gantt_row_assignment_units_changed (MrpAssignment *assignment,
  * the text labels.
  */
 void
-planner_ttable_row_get_geometry (MgTtableRow *row,
+planner_ttable_row_get_geometry (PlannerTtableRow *row,
 			    gdouble    *x1,
 			    gdouble    *y1,
 			    gdouble    *x2,
 			    gdouble    *y2)
 {
-	MgTtableRowPriv *priv;
+	PlannerTtableRowPriv *priv;
 	
-	g_return_if_fail (MG_IS_TTABLE_ROW (row));
+	g_return_if_fail (PLANNER_IS_TTABLE_ROW (row));
 
 	priv = row->priv;
 	
@@ -1709,7 +1709,7 @@ planner_ttable_row_get_geometry (MgTtableRow *row,
 }
 
 void
-planner_ttable_row_set_visible (MgTtableRow *row,
+planner_ttable_row_set_visible (PlannerTtableRow *row,
 			   gboolean    is_visible)
 {
 	if (is_visible ==row->priv->visible) {
@@ -1731,7 +1731,7 @@ planner_ttable_row_set_visible (MgTtableRow *row,
 }
 			   
 static void
-ttable_row_geometry_changed (MgTtableRow *row)
+ttable_row_geometry_changed (PlannerTtableRow *row)
 {
 	gdouble x1, y1, x2, y2;
 
@@ -1749,7 +1749,7 @@ ttable_row_geometry_changed (MgTtableRow *row)
 
 /*
 static void
-gantt_row_connect_all_resources (MrpTask *task, MgGanttRow *row)
+gantt_row_connect_all_resources (MrpTask *task, PlannerGanttRow *row)
 {
 	GList       *resources, *node;
 	MrpResource *resource;
@@ -1766,7 +1766,7 @@ gantt_row_connect_all_resources (MrpTask *task, MgGanttRow *row)
 }
 
 static void
-gantt_row_disconnect_all_resources (MrpTask *task, MgGanttRow *row)
+gantt_row_disconnect_all_resources (MrpTask *task, PlannerGanttRow *row)
 {
 	GList       *resources, *node;
 	MrpResource *resource;
@@ -1784,7 +1784,7 @@ gantt_row_disconnect_all_resources (MrpTask *task, MgGanttRow *row)
 */
 /*
 static gboolean
-ttable_row_scroll_timeout_cb (MgTtableRow *row)
+ttable_row_scroll_timeout_cb (PlannerTtableRow *row)
 {
 	GtkWidget *widget;
 	gint       width, height;
@@ -1834,9 +1834,9 @@ ttable_row_scroll_timeout_cb (MgTtableRow *row)
 static gboolean
 ttable_row_event (GnomeCanvasItem *item, GdkEvent *event)
 {
-	MgTtableRow              *row;
-	MgTtableRowPriv          *priv;
-	MgTtableChart            *chart;
+	PlannerTtableRow              *row;
+	PlannerTtableRowPriv          *priv;
+	PlannerTtableChart            *chart;
 	GtkWidget                *canvas_widget;
 	GdkCursor                *cursor;
 	static gdouble            x1, y1;
@@ -1851,7 +1851,7 @@ ttable_row_event (GnomeCanvasItem *item, GdkEvent *event)
 	MrpTask                  *target_task;*/
 	gchar                    *message;
 
-	row = MG_TTABLE_ROW (item);
+	row = PLANNER_TTABLE_ROW (item);
 	priv = row->priv;
 	canvas_widget = GTK_WIDGET (item->canvas);
 	
@@ -1961,7 +1961,7 @@ ttable_row_event (GnomeCanvasItem *item, GdkEvent *event)
 
 					resource = g_list_nth_data (resources, res_index);
 					if (resource) {
-						MgGanttChart *chart;
+						PlannerGanttChart *chart;
 
 						chart = g_object_get_data (G_OBJECT (item->canvas),
 									   "chart");
@@ -2225,7 +2225,7 @@ ttable_row_event (GnomeCanvasItem *item, GdkEvent *event)
 				GError *error = NULL;
 				
 				task = priv->task;
-				target_task = MG_GANTT_ROW (target_item)->priv->task;
+				target_task = PLANNER_GANTT_ROW (target_item)->priv->task;
 				
 				if (!mrp_task_add_predecessor (target_task,
 							       task,
@@ -2316,10 +2316,10 @@ ttable_row_canvas_scroll (GtkWidget *widget,
 */
 /*
 static gint
-gantt_row_get_resource_index_at (MgGanttRow *row,
+gantt_row_get_resource_index_at (PlannerGanttRow *row,
 				 gint        x)
 {
-	MgGanttRowPriv *priv;
+	PlannerGanttRowPriv *priv;
 	gint            i, len;
 	gint            left, right;
 	gint            offset;
@@ -2343,12 +2343,12 @@ gantt_row_get_resource_index_at (MgGanttRow *row,
 }
 
 static gboolean
-gantt_row_get_resource_by_index (MgGanttRow *row,
+gantt_row_get_resource_by_index (PlannerGanttRow *row,
 				 gint        index,
 				 gint       *x1,
 				 gint       *x2)
 {
-	MgGanttRowPriv *priv;
+	PlannerGanttRowPriv *priv;
 
 	g_return_val_if_fail (index >= 0, FALSE);
 

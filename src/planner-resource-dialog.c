@@ -47,7 +47,7 @@
 #include "planner-resource-dialog.h"
 
 typedef struct {
-	MgMainWindow  *main_window;
+	PlannerWindow  *main_window;
 	MrpResource   *resource;
 	GtkWidget     *dialog;
 	GtkWidget     *name_entry;
@@ -653,7 +653,7 @@ static void
 resource_dialog_edit_calendar_clicked_cb (GtkWidget  *button,
 					  DialogData *data)
 {
-	planner_main_window_show_calendar_dialog (data->main_window);
+	planner_window_show_calendar_dialog (data->main_window);
 }
 
 static void
@@ -815,7 +815,7 @@ resource_dialog_build_calendar_tree (DialogData *data)
 	GList        *children, *l;
 	MrpCalendar  *calendar;
 
-	project = planner_main_window_get_project (data->main_window);
+	project = planner_window_get_project (data->main_window);
 	root = mrp_project_get_root_calendar (project);
 
 	store = GTK_TREE_STORE (gtk_tree_view_get_model (GTK_TREE_VIEW (data->calendar_tree_view)));
@@ -874,7 +874,7 @@ resource_dialog_create_calendar_model (DialogData *data)
 	GtkTreeStore *store;
 	MrpCalendar  *root;
 
-	project = planner_main_window_get_project (data->main_window);
+	project = planner_window_get_project (data->main_window);
 
 	root = mrp_project_get_root_calendar (project);
 
@@ -901,7 +901,7 @@ resource_dialog_setup_calendar_tree_view (DialogData *data)
 	GtkCellRenderer   *cell;
 	GtkTreeViewColumn *col;
 	
-	project = planner_main_window_get_project (data->main_window);
+	project = planner_window_get_project (data->main_window);
 	tree_view = GTK_TREE_VIEW (data->calendar_tree_view);
 	
 	model = resource_dialog_create_calendar_model (data);
@@ -976,7 +976,7 @@ resource_dialog_destroy_cb (GtkWidget  *parent,
 }
 
 GtkWidget *
-planner_resource_dialog_new (MgMainWindow *window,
+planner_resource_dialog_new (PlannerWindow *window,
 			MrpResource  *resource)
 {
 	GladeXML        *glade;
@@ -992,7 +992,7 @@ planner_resource_dialog_new (MgMainWindow *window,
 	gint             index = 0;
 	gchar           *note;
 
-	g_return_val_if_fail (MG_IS_MAIN_WINDOW (window), NULL);
+	g_return_val_if_fail (PLANNER_IS_MAIN_WINDOW (window), NULL);
 	g_return_val_if_fail (MRP_IS_RESOURCE (resource), NULL);
 
 	if (!dialogs) {

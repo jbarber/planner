@@ -20,36 +20,36 @@
  * Boston, MA 02111-1307, USA.
  */
 
-#ifndef __MG_GANTT_CHART_H__
-#define __MG_GANTT_CHART_H__
+#ifndef __PLANNER_GANTT_CHART_H__
+#define __PLANNER_GANTT_CHART_H__
 
 #include <gtk/gtkwidget.h>
 #include <gtk/gtkvbox.h>
 #include <gtk/gtktreemodel.h>
 #include <libgnomecanvas/gnome-canvas.h>
 
-#define MG_TYPE_GANTT_CHART		(planner_gantt_chart_get_type ())
-#define MG_GANTT_CHART(obj)		(GTK_CHECK_CAST ((obj), MG_TYPE_GANTT_CHART, MgGanttChart))
-#define MG_GANTT_CHART_CLASS(klass)	(GTK_CHECK_CLASS_CAST ((klass), MG_TYPE_GANTT_CHART, MgGanttChartClass))
-#define MG_IS_GANTT_CHART(obj)		(GTK_CHECK_TYPE ((obj), MG_TYPE_GANTT_CHART))
-#define MG_IS_GANTT_CHART_CLASS(klass)	(GTK_CHECK_CLASS_TYPE ((obj), MG_TYPE_GANTT_CHART))
-#define MG_GANTT_CHART_GET_CLASS(obj)	(GTK_CHECK_GET_CLASS ((obj), MG_TYPE_GANTT_CHART, MgGanttChartClass))
+#define PLANNER_TYPE_GANTT_CHART		(planner_gantt_chart_get_type ())
+#define PLANNER_GANTT_CHART(obj)		(GTK_CHECK_CAST ((obj), PLANNER_TYPE_GANTT_CHART, PlannerGanttChart))
+#define PLANNER_GANTT_CHART_CLASS(klass)	(GTK_CHECK_CLASS_CAST ((klass), PLANNER_TYPE_GANTT_CHART, PlannerGanttChartClass))
+#define PLANNER_IS_GANTT_CHART(obj)		(GTK_CHECK_TYPE ((obj), PLANNER_TYPE_GANTT_CHART))
+#define PLANNER_IS_GANTT_CHART_CLASS(klass)	(GTK_CHECK_CLASS_TYPE ((obj), PLANNER_TYPE_GANTT_CHART))
+#define PLANNER_GANTT_CHART_GET_CLASS(obj)	(GTK_CHECK_GET_CLASS ((obj), PLANNER_TYPE_GANTT_CHART, PlannerGanttChartClass))
 
-typedef struct _MgGanttChart           MgGanttChart;
-typedef struct _MgGanttChartClass      MgGanttChartClass;
-typedef struct _MgGanttChartPriv       MgGanttChartPriv;
+typedef struct _PlannerGanttChart           PlannerGanttChart;
+typedef struct _PlannerGanttChartClass      PlannerGanttChartClass;
+typedef struct _PlannerGanttChartPriv       PlannerGanttChartPriv;
 
-struct _MgGanttChart
+struct _PlannerGanttChart
 {
 	GtkVBox           parent;
-	MgGanttChartPriv *priv;
+	PlannerGanttChartPriv *priv;
 };
 
-struct _MgGanttChartClass
+struct _PlannerGanttChartClass
 {
 	GtkVBoxClass parent_class;
 
-	void  (* set_scroll_adjustments) (MgGanttChart  *chart,
+	void  (* set_scroll_adjustments) (PlannerGanttChart  *chart,
 					  GtkAdjustment *hadjustment,
 					  GtkAdjustment *vadjustment);
 };
@@ -61,45 +61,45 @@ GtkWidget       *planner_gantt_chart_new              (void);
 
 GtkWidget       *planner_gantt_chart_new_with_model   (GtkTreeModel  *model);
 
-GtkTreeModel    *planner_gantt_chart_get_model        (MgGanttChart  *tree_view);
+GtkTreeModel    *planner_gantt_chart_get_model        (PlannerGanttChart  *tree_view);
 
-void             planner_gantt_chart_set_model        (MgGanttChart  *tree_view,
+void             planner_gantt_chart_set_model        (PlannerGanttChart  *tree_view,
 						  GtkTreeModel  *model);
 
-void             planner_gantt_chart_expand_row       (MgGanttChart  *chart,
+void             planner_gantt_chart_expand_row       (PlannerGanttChart  *chart,
 						  GtkTreePath   *path);
 
-void             planner_gantt_chart_collapse_row     (MgGanttChart  *chart,
+void             planner_gantt_chart_collapse_row     (PlannerGanttChart  *chart,
 						  GtkTreePath   *path);
 
-void             planner_gantt_chart_scroll_to        (MgGanttChart  *chart,
+void             planner_gantt_chart_scroll_to        (PlannerGanttChart  *chart,
 						  time_t         t);
 
-void             planner_gantt_chart_zoom_in          (MgGanttChart  *chart);
+void             planner_gantt_chart_zoom_in          (PlannerGanttChart  *chart);
 
-void             planner_gantt_chart_zoom_out         (MgGanttChart  *chart);
+void             planner_gantt_chart_zoom_out         (PlannerGanttChart  *chart);
 
-void             planner_gantt_chart_zoom_to_fit      (MgGanttChart  *chart);
+void             planner_gantt_chart_zoom_to_fit      (PlannerGanttChart  *chart);
 
-gdouble          planner_gantt_chart_get_zoom         (MgGanttChart  *chart);
+gdouble          planner_gantt_chart_get_zoom         (PlannerGanttChart  *chart);
 
-void             planner_gantt_chart_can_zoom         (MgGanttChart  *chart,
+void             planner_gantt_chart_can_zoom         (PlannerGanttChart  *chart,
 						  gboolean      *in,
 						  gboolean      *out);
 
-void             planner_gantt_chart_status_updated   (MgGanttChart  *chart,
+void             planner_gantt_chart_status_updated   (PlannerGanttChart  *chart,
 						  const gchar   *message);
 
-void             planner_gantt_chart_resource_clicked (MgGanttChart  *chart,
+void             planner_gantt_chart_resource_clicked (PlannerGanttChart  *chart,
 						  MrpResource   *resource);
 
 void
-planner_gantt_chart_set_highlight_critical_tasks      (MgGanttChart  *chart,
+planner_gantt_chart_set_highlight_critical_tasks      (PlannerGanttChart  *chart,
 						  gboolean       state);
 
 gboolean
-planner_gantt_chart_get_highlight_critical_tasks      (MgGanttChart  *chart);
+planner_gantt_chart_get_highlight_critical_tasks      (PlannerGanttChart  *chart);
 
 
-#endif /* __MG_GANTT_CHART_H__ */
+#endif /* __PLANNER_GANTT_CHART_H__ */
 

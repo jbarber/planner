@@ -80,7 +80,7 @@ typedef enum {
 	STATE_DRAG_ANY = STATE_DRAG_LINK | STATE_DRAG_DURATION
 } State;
 
-struct _MgGanttRowPriv {
+struct _PlannerGanttRowPriv {
 	GdkGC       *complete_gc;
 	GdkGC       *break_gc;
 	GdkGC       *fill_gc;
@@ -118,8 +118,8 @@ struct _MgGanttRowPriv {
 	GArray      *resource_widths;
 };
 
-static void      gantt_row_class_init               (MgGanttRowClass      *class);
-static void      gantt_row_init                     (MgGanttRow           *row);
+static void      gantt_row_class_init               (PlannerGanttRowClass      *class);
+static void      gantt_row_init                     (PlannerGanttRow           *row);
 static void      gantt_row_destroy                  (GtkObject          *object);
 static void      gantt_row_set_property             (GObject            *object,
 						     guint               param_id,
@@ -157,33 +157,33 @@ static gboolean  gantt_row_event                    (GnomeCanvasItem    *item,
 						     GdkEvent           *event);
 static void      gantt_row_notify_cb                (MrpTask            *task,
 						     GParamSpec         *pspec, 
-						     MgGanttRow         *row);
-static void      gantt_row_update_assignment_string (MgGanttRow      *row);
+						     PlannerGanttRow         *row);
+static void      gantt_row_update_assignment_string (PlannerGanttRow      *row);
 static void      gantt_row_assignment_added         (MrpTask            *task,
 						     MrpAssignment      *assignment,
-						     MgGanttRow         *row);
+						     PlannerGanttRow         *row);
 static void      gantt_row_assignment_removed       (MrpTask            *task,
 						     MrpAssignment      *assignment,
-						     MgGanttRow         *row);
+						     PlannerGanttRow         *row);
 static void      gantt_row_resource_name_changed    (MrpResource        *resource,
 						     GParamSpec         *pspec,
-						     MgGanttRow         *row);
+						     PlannerGanttRow         *row);
 static void      gantt_row_assignment_units_changed (MrpAssignment      *assignment,
 						     GParamSpec         *pspec,
-						     MgGanttRow         *row);
-static void      gantt_row_ensure_layout            (MgGanttRow         *row);
-static void      gantt_row_update_resources         (MgGanttRow         *row);
-static void      gantt_row_geometry_changed         (MgGanttRow         *row);
+						     PlannerGanttRow         *row);
+static void      gantt_row_ensure_layout            (PlannerGanttRow         *row);
+static void      gantt_row_update_resources         (PlannerGanttRow         *row);
+static void      gantt_row_geometry_changed         (PlannerGanttRow         *row);
 static void      gantt_row_connect_all_resources    (MrpTask            *task,
-						     MgGanttRow         *row);
+						     PlannerGanttRow         *row);
 static void      gantt_row_disconnect_all_resources (MrpTask          *task,
-						     MgGanttRow       *row);
+						     PlannerGanttRow       *row);
 static gboolean  gantt_row_canvas_scroll            (GtkWidget        *widget,
 						     gint              delta_x,
 						     gint    	       delta_y);
-static gint      gantt_row_get_resource_index_at    (MgGanttRow       *row,
+static gint      gantt_row_get_resource_index_at    (PlannerGanttRow       *row,
 						     gint              x);
-static gboolean  gantt_row_get_resource_by_index    (MgGanttRow       *row,
+static gboolean  gantt_row_get_resource_by_index    (PlannerGanttRow       *row,
 						     gint              index,
 						     gint             *x1,
 						     gint             *x2);
@@ -204,19 +204,19 @@ planner_gantt_row_get_type (void)
 
 	if (!type) {
 		static const GTypeInfo info = {
-			sizeof (MgGanttRowClass),
+			sizeof (PlannerGanttRowClass),
 			NULL,		/* base_init */
 			NULL,		/* base_finalize */
 			(GClassInitFunc) gantt_row_class_init,
 			NULL,		/* class_finalize */
 			NULL,		/* class_data */
-			sizeof (MgGanttRow),
+			sizeof (PlannerGanttRow),
 			0,              /* n_preallocs */
 			(GInstanceInitFunc) gantt_row_init
 		};
 
 		type = g_type_register_static (GNOME_TYPE_CANVAS_ITEM,
-					       "MgGanttRow",
+					       "PlannerGanttRow",
 					       &info,
 					       0);
 	}
@@ -225,7 +225,7 @@ planner_gantt_row_get_type (void)
 }
 
 static void
-gantt_row_class_init (MgGanttRowClass *class)
+gantt_row_class_init (PlannerGanttRowClass *class)
 {
 	GObjectClass         *gobject_class;
 	GtkObjectClass       *object_class;
@@ -324,11 +324,11 @@ gantt_row_class_init (MgGanttRowClass *class)
 }
 
 static void
-gantt_row_init (MgGanttRow *row)
+gantt_row_init (PlannerGanttRow *row)
 {
-	MgGanttRowPriv *priv;
+	PlannerGanttRowPriv *priv;
 	
-	row->priv = g_new0 (MgGanttRowPriv, 1);
+	row->priv = g_new0 (PlannerGanttRowPriv, 1);
 	priv = row->priv;
 	
 	priv->x = 0.0;
@@ -345,12 +345,12 @@ gantt_row_init (MgGanttRow *row)
 static void
 gantt_row_destroy (GtkObject *object)
 {
-	MgGanttRow     *row;
-	MgGanttRowPriv *priv;
+	PlannerGanttRow     *row;
+	PlannerGanttRowPriv *priv;
 
-	g_return_if_fail (MG_IS_GANTT_ROW (object));
+	g_return_if_fail (PLANNER_IS_GANTT_ROW (object));
 
-	row = MG_GANTT_ROW (object);
+	row = PLANNER_GANTT_ROW (object);
 	priv = row->priv;
 
 	if (priv) {
@@ -371,7 +371,7 @@ gantt_row_destroy (GtkObject *object)
 }
 
 static void
-gantt_row_get_bounds (MgGanttRow *row,
+gantt_row_get_bounds (PlannerGanttRow *row,
 		      double     *px1,
 		      double     *py1,
 		      double     *px2,
@@ -403,9 +403,9 @@ gantt_row_get_bounds (MgGanttRow *row,
 
 /* FIXME: Rename this function to something more descriptive. */
 static void
-recalc_bounds (MgGanttRow *row)
+recalc_bounds (PlannerGanttRow *row)
 {
-	MgGanttRowPriv  *priv;
+	PlannerGanttRowPriv  *priv;
 	GnomeCanvasItem *item;
 	gint             width;
 	mrptime          t;
@@ -449,18 +449,18 @@ gantt_row_set_property (GObject      *object,
 			GParamSpec   *pspec)
 {
 	GnomeCanvasItem *item;
-	MgGanttRow      *row;
-	MgGanttRowPriv  *priv;
+	PlannerGanttRow      *row;
+	PlannerGanttRowPriv  *priv;
 	gboolean         changed = FALSE;
 	gfloat           tmp_scale;
 	gdouble          tmp_dbl;
 	gboolean         tmp_bool;
 	gint             tmp_int;
 	
-	g_return_if_fail (MG_IS_GANTT_ROW (object));
+	g_return_if_fail (PLANNER_IS_GANTT_ROW (object));
 
 	item = GNOME_CANVAS_ITEM (object);
-	row  = MG_GANTT_ROW (object);
+	row  = PLANNER_GANTT_ROW (object);
 	priv = row->priv;
 	
 	switch (param_id) {
@@ -557,12 +557,12 @@ gantt_row_get_property (GObject    *object,
 			GValue     *value,
 			GParamSpec *pspec)
 {
-	MgGanttRow     *row;
-	MgGanttRowPriv *priv;
+	PlannerGanttRow     *row;
+	PlannerGanttRowPriv *priv;
 
-	g_return_if_fail (MG_IS_GANTT_ROW (object));
+	g_return_if_fail (PLANNER_IS_GANTT_ROW (object));
 
-	row = MG_GANTT_ROW (object);
+	row = PLANNER_GANTT_ROW (object);
 	priv = row->priv;
 	
 	switch (param_id) {
@@ -597,7 +597,7 @@ gantt_row_get_property (GObject    *object,
 }
 
 static void
-gantt_row_ensure_layout (MgGanttRow *row)
+gantt_row_ensure_layout (PlannerGanttRow *row)
 {
 	if (row->priv->layout == NULL) {
 		row->priv->layout = gtk_widget_create_pango_layout (
@@ -608,9 +608,9 @@ gantt_row_ensure_layout (MgGanttRow *row)
 }
 
 static void
-gantt_row_update_resources (MgGanttRow *row)
+gantt_row_update_resources (PlannerGanttRow *row)
 {
-	MgGanttRowPriv *priv;
+	PlannerGanttRowPriv *priv;
 	GList          *l;
 	GList          *resources;
 	MrpTask        *task;
@@ -697,10 +697,10 @@ gantt_row_update (GnomeCanvasItem *item,
 		  ArtSVP          *clip_path,
 		  gint             flags)
 {
-	MgGanttRow *row;
+	PlannerGanttRow *row;
 	double      x1, y1, x2, y2;
 
-	row = MG_GANTT_ROW (item);
+	row = PLANNER_GANTT_ROW (item);
 
 	GNOME_CANVAS_ITEM_CLASS (parent_class)->update (item,
 							affine,
@@ -716,10 +716,10 @@ gantt_row_update (GnomeCanvasItem *item,
 static void
 gantt_row_realize (GnomeCanvasItem *item)
 {
-	MgGanttRow     *row;
-	MgGanttRowPriv *priv;
+	PlannerGanttRow     *row;
+	PlannerGanttRowPriv *priv;
 
-	row = MG_GANTT_ROW (item);
+	row = PLANNER_GANTT_ROW (item);
 	priv = row->priv;
 	
 	GNOME_CANVAS_ITEM_CLASS (parent_class)->realize (item);
@@ -764,9 +764,9 @@ gantt_row_realize (GnomeCanvasItem *item)
 static void
 gantt_row_unrealize (GnomeCanvasItem *item)
 {
-	MgGanttRow *row;
+	PlannerGanttRow *row;
 
-	row = MG_GANTT_ROW (item);
+	row = PLANNER_GANTT_ROW (item);
 
 	gdk_gc_unref (row->priv->complete_gc);
 	row->priv->complete_gc = NULL;
@@ -812,9 +812,9 @@ gantt_row_draw (GnomeCanvasItem *item,
 		gint             width,
 		gint             height)
 {
-	MgGanttRow     *row;
-	MgGanttRowPriv *priv;
-	MgGanttChart   *chart;
+	PlannerGanttRow     *row;
+	PlannerGanttRowPriv *priv;
+	PlannerGanttChart   *chart;
 	GdkGC          *frame_gc;
 	gdouble         i2w_dx; 
 	gdouble         i2w_dy;
@@ -851,7 +851,7 @@ gantt_row_draw (GnomeCanvasItem *item,
 	MrpInterval    *ival;
 	GdkColor        color_break;
 
-	row = MG_GANTT_ROW (item);
+	row = PLANNER_GANTT_ROW (item);
 	priv = row->priv;
 
 	chart = g_object_get_data (G_OBJECT (item->canvas), "chart");
@@ -1283,13 +1283,13 @@ gantt_row_point (GnomeCanvasItem  *item,
 		 gint              cy,
 		 GnomeCanvasItem **actual_item)
 {
-	MgGanttRow     *row;
-	MgGanttRowPriv *priv;
+	PlannerGanttRow     *row;
+	PlannerGanttRowPriv *priv;
 	gint            text_width;
 	gdouble         x1, y1, x2, y2;
 	gdouble         dx, dy;
 	
-	row = MG_GANTT_ROW (item);
+	row = PLANNER_GANTT_ROW (item);
 	priv = row->priv;
 	
 	*actual_item = item;
@@ -1337,9 +1337,9 @@ gantt_row_bounds (GnomeCanvasItem *item,
 		  double          *x2,
 		  double          *y2)
 {
-	MgGanttRow *row;
+	PlannerGanttRow *row;
 
-	row = MG_GANTT_ROW (item);
+	row = PLANNER_GANTT_ROW (item);
 
 	gantt_row_get_bounds (row, x1, y1, x2, y2);
 	
@@ -1349,7 +1349,7 @@ gantt_row_bounds (GnomeCanvasItem *item,
 }
 
 static void
-gantt_row_notify_cb (MrpTask *task, GParamSpec *pspec, MgGanttRow *row)
+gantt_row_notify_cb (MrpTask *task, GParamSpec *pspec, PlannerGanttRow *row)
 {
 	recalc_bounds (row);
 	gantt_row_geometry_changed (row); 
@@ -1357,7 +1357,7 @@ gantt_row_notify_cb (MrpTask *task, GParamSpec *pspec, MgGanttRow *row)
 }
 
 static void
-gantt_row_update_assignment_string (MgGanttRow *row)
+gantt_row_update_assignment_string (PlannerGanttRow *row)
 {
 	gantt_row_update_resources (row);
 	
@@ -1368,7 +1368,7 @@ gantt_row_update_assignment_string (MgGanttRow *row)
 static void 
 gantt_row_assignment_added (MrpTask       *task, 
 			    MrpAssignment *assignment,
-			    MgGanttRow    *row)
+			    PlannerGanttRow    *row)
 {
 	MrpResource *resource;
 	
@@ -1388,7 +1388,7 @@ gantt_row_assignment_added (MrpTask       *task,
 static void 
 gantt_row_assignment_removed (MrpTask       *task, 
 			      MrpAssignment *assignment,
-			      MgGanttRow    *row)
+			      PlannerGanttRow    *row)
 {
 	MrpResource *resource;
 
@@ -1408,7 +1408,7 @@ gantt_row_assignment_removed (MrpTask       *task,
 static void
 gantt_row_resource_name_changed (MrpResource *resource,
 				 GParamSpec  *pspec,
-				 MgGanttRow  *row)
+				 PlannerGanttRow  *row)
 {
 	gantt_row_update_assignment_string (row);
 }
@@ -1416,7 +1416,7 @@ gantt_row_resource_name_changed (MrpResource *resource,
 static void
 gantt_row_assignment_units_changed (MrpAssignment *assignment,
 				    GParamSpec    *pspec,
-				    MgGanttRow    *row)
+				    PlannerGanttRow    *row)
 {
 	gantt_row_update_assignment_string (row);
 }
@@ -1425,15 +1425,15 @@ gantt_row_assignment_units_changed (MrpAssignment *assignment,
  * the text labels.
  */
 void
-planner_gantt_row_get_geometry (MgGanttRow *row,
+planner_gantt_row_get_geometry (PlannerGanttRow *row,
 			   gdouble    *x1,
 			   gdouble    *y1,
 			   gdouble    *x2,
 			   gdouble    *y2)
 {
-	MgGanttRowPriv *priv;
+	PlannerGanttRowPriv *priv;
 	
-	g_return_if_fail (MG_IS_GANTT_ROW (row));
+	g_return_if_fail (PLANNER_IS_GANTT_ROW (row));
 
 	priv = row->priv;
 	
@@ -1455,7 +1455,7 @@ planner_gantt_row_get_geometry (MgGanttRow *row,
 }
 
 void
-planner_gantt_row_set_visible (MgGanttRow *row,
+planner_gantt_row_set_visible (PlannerGanttRow *row,
 			  gboolean    is_visible)
 {
 	if (is_visible == row->priv->visible) {
@@ -1477,7 +1477,7 @@ planner_gantt_row_set_visible (MgGanttRow *row,
 }
 			   
 static void
-gantt_row_geometry_changed (MgGanttRow *row)
+gantt_row_geometry_changed (PlannerGanttRow *row)
 {
 	gdouble x1, y1, x2, y2;
 
@@ -1494,7 +1494,7 @@ gantt_row_geometry_changed (MgGanttRow *row)
 }
 
 static void
-gantt_row_connect_all_resources (MrpTask *task, MgGanttRow *row)
+gantt_row_connect_all_resources (MrpTask *task, PlannerGanttRow *row)
 {
 	GList       *resources, *node;
 	MrpResource *resource;
@@ -1513,7 +1513,7 @@ gantt_row_connect_all_resources (MrpTask *task, MgGanttRow *row)
 }
 
 static void
-gantt_row_disconnect_all_resources (MrpTask *task, MgGanttRow *row)
+gantt_row_disconnect_all_resources (MrpTask *task, PlannerGanttRow *row)
 {
 	GList       *resources, *node;
 	MrpResource *resource;
@@ -1532,7 +1532,7 @@ gantt_row_disconnect_all_resources (MrpTask *task, MgGanttRow *row)
 }
 
 static gboolean
-gantt_row_scroll_timeout_cb (MgGanttRow *row)
+gantt_row_scroll_timeout_cb (PlannerGanttRow *row)
 {
 	GtkWidget *widget;
 	gint       width, height;
@@ -1580,9 +1580,9 @@ gantt_row_scroll_timeout_cb (MgGanttRow *row)
 static gboolean
 gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 {
-	MgGanttRow               *row;
-	MgGanttRowPriv           *priv;
-	MgGanttChart             *chart;
+	PlannerGanttRow               *row;
+	PlannerGanttRowPriv           *priv;
+	PlannerGanttChart             *chart;
 	GtkWidget                *canvas_widget;
 	static gdouble            x1, y1;
 	gdouble                   wx1, wy1;
@@ -1598,7 +1598,7 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 	MrpTaskType               type;
 	gchar                    *message;
 			
-	row = MG_GANTT_ROW (item);
+	row = PLANNER_GANTT_ROW (item);
 	priv = row->priv;
 	canvas_widget = GTK_WIDGET (item->canvas);
 	
@@ -1669,7 +1669,7 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 				}
 
 				drag_item = gnome_canvas_item_new (gnome_canvas_root (item->canvas),
-								   MG_TYPE_CANVAS_LINE,
+								   PLANNER_TYPE_CANVAS_LINE,
 								   "points", drag_points,
 								   "last_arrowhead", TRUE,
 								   "arrow_shape_a", 6.0,
@@ -1701,7 +1701,7 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 
 					resource = g_list_nth_data (resources, res_index);
 					if (resource) {
-						MgGanttChart *chart;
+						PlannerGanttChart *chart;
 
 						chart = g_object_get_data (G_OBJECT (item->canvas),
 									   "chart");
@@ -1827,7 +1827,7 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 					      TRUE,
 					      NULL);
 
-				g_object_get (MG_GANTT_ROW (target_item)->priv->task,
+				g_object_get (PLANNER_GANTT_ROW (target_item)->priv->task,
 					      "name",
 					      &target_name,
 					      NULL);
@@ -1972,7 +1972,7 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 				GError *error = NULL;
 				
 				task = priv->task;
-				target_task = MG_GANTT_ROW (target_item)->priv->task;
+				target_task = PLANNER_GANTT_ROW (target_item)->priv->task;
 				
 				if (!mrp_task_add_predecessor (target_task,
 							       task,
@@ -2060,10 +2060,10 @@ gantt_row_canvas_scroll (GtkWidget *widget,
 }
 
 static gint
-gantt_row_get_resource_index_at (MgGanttRow *row,
+gantt_row_get_resource_index_at (PlannerGanttRow *row,
 				 gint        x)
 {
-	MgGanttRowPriv *priv;
+	PlannerGanttRowPriv *priv;
 	gint            i, len;
 	gint            left, right;
 	gint            offset;
@@ -2087,12 +2087,12 @@ gantt_row_get_resource_index_at (MgGanttRow *row,
 }
 
 static gboolean
-gantt_row_get_resource_by_index (MgGanttRow *row,
+gantt_row_get_resource_by_index (PlannerGanttRow *row,
 				 gint        index,
 				 gint       *x1,
 				 gint       *x2)
 {
-	MgGanttRowPriv *priv;
+	PlannerGanttRowPriv *priv;
 
 	g_return_val_if_fail (index >= 0, FALSE);
 

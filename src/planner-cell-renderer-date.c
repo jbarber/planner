@@ -50,8 +50,8 @@ enum {
 	PROP_USE_CONSTRAINT,
 };
 
-static void     mcrd_init                    (MgCellRendererDate      *date);
-static void     mcrd_class_init              (MgCellRendererDateClass *class);
+static void     mcrd_init                    (PlannerCellRendererDate      *date);
+static void     mcrd_class_init              (PlannerCellRendererDateClass *class);
 static void     mcrd_set_property            (GObject                 *object,
 					      guint                    param_id,
 					      const GValue            *value,
@@ -61,13 +61,13 @@ static void     mcrd_get_property            (GObject                 *object,
 					      GValue                  *value,
 					      GParamSpec              *pspec);
 static void     mcrd_cancel_clicked          (GtkWidget               *popup_window,
-					      MgCellRendererDate      *cell);
+					      PlannerCellRendererDate      *cell);
 static void     mcrd_ok_clicked              (GtkWidget               *popup_window,
-					      MgCellRendererDate      *cell);
+					      PlannerCellRendererDate      *cell);
 static void     mcrd_day_selected            (GtkWidget               *popup_window,
-					      MgCellRendererDate      *cell);
+					      PlannerCellRendererDate      *cell);
 static void     mcrd_constraint_activated_cb (GtkWidget               *widget,
-					      MgCellRendererDate      *cell);
+					      PlannerCellRendererDate      *cell);
 GtkCellEditable *mcrd_start_editing          (GtkCellRenderer         *cell,
 					      GdkEvent                *event,
 					      GtkWidget               *widget,
@@ -75,20 +75,20 @@ GtkCellEditable *mcrd_start_editing          (GtkCellRenderer         *cell,
 					      GdkRectangle            *background_area,
 					      GdkRectangle            *cell_area,
 					      GtkCellRendererState     flags);
-static void     mcrd_show                    (MgCellRendererPopup     *cell,
+static void     mcrd_show                    (PlannerCellRendererPopup     *cell,
 					      const gchar             *path,
 					      gint                     x1,
 					      gint                     y1,
 					      gint                     x2,
 					      gint                     y2);
-static void     mcrd_hide                    (MgCellRendererPopup     *cell);
+static void     mcrd_hide                    (PlannerCellRendererPopup     *cell);
 static void     mcrd_setup_option_menu       (GtkWidget               *option_menu,
 					      GtkSignalFunc            func,
 					      gpointer                 user_data,
 					      gpointer                 str1, ...);
 
 
-static MgCellRendererPopupClass *parent_class;
+static PlannerCellRendererPopupClass *parent_class;
 
 GType
 planner_cell_renderer_date_get_type (void)
@@ -97,19 +97,19 @@ planner_cell_renderer_date_get_type (void)
 	
 	if (!cell_text_type) {
 		static const GTypeInfo cell_text_info = {
-			sizeof (MgCellRendererDateClass),
+			sizeof (PlannerCellRendererDateClass),
 			NULL,		/* base_init */
 			NULL,		/* base_finalize */
 			(GClassInitFunc) mcrd_class_init,
 			NULL,		/* class_finalize */
 			NULL,		/* class_data */
-			sizeof (MgCellRendererDate),
+			sizeof (PlannerCellRendererDate),
 			0,              /* n_preallocs */
 			(GInstanceInitFunc) mcrd_init,
 		};
 		
-		cell_text_type = g_type_register_static (MG_TYPE_CELL_RENDERER_POPUP,
-							 "MgCellRendererDate",
+		cell_text_type = g_type_register_static (PLANNER_TYPE_CELL_RENDERER_POPUP,
+							 "PlannerCellRendererDate",
 							 &cell_text_info,
 							 0);
 	}
@@ -118,16 +118,16 @@ planner_cell_renderer_date_get_type (void)
 }
 
 static void
-mcrd_init (MgCellRendererDate *date)
+mcrd_init (PlannerCellRendererDate *date)
 {
-	MgCellRendererPopup *popup;
+	PlannerCellRendererPopup *popup;
 	GtkWidget           *frame;
 	GtkWidget           *vbox;
 	GtkWidget           *hbox;
 	GtkWidget           *bbox;
 	GtkWidget           *button;
 
-	popup = MG_CELL_RENDERER_POPUP (date);
+	popup = PLANNER_CELL_RENDERER_POPUP (date);
 
 	frame = gtk_frame_new (NULL);
 	gtk_container_add (GTK_CONTAINER (popup->popup_window), frame);
@@ -203,15 +203,15 @@ mcrd_init (MgCellRendererDate *date)
 }
 
 static void
-mcrd_class_init (MgCellRendererDateClass *class)
+mcrd_class_init (PlannerCellRendererDateClass *class)
 {
-	MgCellRendererPopupClass *popup_class;
+	PlannerCellRendererPopupClass *popup_class;
 	GtkCellRendererClass     *cell_class;
 	GObjectClass             *gobject_class;
 
-	popup_class = MG_CELL_RENDERER_POPUP_CLASS (class);
+	popup_class = PLANNER_CELL_RENDERER_POPUP_CLASS (class);
 	cell_class = GTK_CELL_RENDERER_CLASS (class);	
-	parent_class = MG_CELL_RENDERER_POPUP_CLASS (g_type_class_peek_parent (class));
+	parent_class = PLANNER_CELL_RENDERER_POPUP_CLASS (g_type_class_peek_parent (class));
 	gobject_class = G_OBJECT_CLASS (class);
 
 	gobject_class->set_property = mcrd_set_property;
@@ -239,9 +239,9 @@ mcrd_set_property (GObject      *object,
 		   const GValue *value,
 		   GParamSpec   *pspec)
 {
-	MgCellRendererDate *date;
+	PlannerCellRendererDate *date;
 
-	date = MG_CELL_RENDERER_DATE (object);
+	date = PLANNER_CELL_RENDERER_DATE (object);
 	
 	switch (param_id) {
 	case PROP_USE_CONSTRAINT:
@@ -267,9 +267,9 @@ mcrd_get_property (GObject    *object,
 		   GValue     *value,
 		   GParamSpec *pspec)
 {
-	MgCellRendererDate *date;
+	PlannerCellRendererDate *date;
 
-	date = MG_CELL_RENDERER_DATE (object);
+	date = PLANNER_CELL_RENDERER_DATE (object);
 	
 	switch (param_id) {
 	case PROP_USE_CONSTRAINT:
@@ -291,7 +291,7 @@ mcrd_start_editing (GtkCellRenderer      *cell,
 		    GdkRectangle         *cell_area,
 		    GtkCellRendererState  flags)
 {
-	MG_CELL_RENDERER_POPUP (cell)->editing_canceled = TRUE;
+	PLANNER_CELL_RENDERER_POPUP (cell)->editing_canceled = TRUE;
 	
 	if (GTK_CELL_RENDERER_CLASS (parent_class)->start_editing) {
 		return GTK_CELL_RENDERER_CLASS (parent_class)->start_editing (
@@ -309,7 +309,7 @@ mcrd_start_editing (GtkCellRenderer      *cell,
 
 
 static void
-mcrd_hide (MgCellRendererPopup *cell)
+mcrd_hide (PlannerCellRendererPopup *cell)
 {
 	if (parent_class->hide_popup) {
 		parent_class->hide_popup (cell);
@@ -317,14 +317,14 @@ mcrd_hide (MgCellRendererPopup *cell)
 }
 
 static void
-mcrd_show (MgCellRendererPopup *cell,
+mcrd_show (PlannerCellRendererPopup *cell,
 	   const gchar         *path,
 	   gint                 x1,
 	   gint                 y1,
 	   gint                 x2,
 	   gint                 y2)
 {
-	MgCellRendererDate *date;
+	PlannerCellRendererDate *date;
 	gint                year;
 	gint                month;
 	gint                day;
@@ -338,7 +338,7 @@ mcrd_show (MgCellRendererPopup *cell,
 					  x2, y2);
 	}
 
-	date = MG_CELL_RENDERER_DATE (cell);
+	date = PLANNER_CELL_RENDERER_DATE (cell);
 
 	mrp_time_decompose (date->time, &year, &month, &day, NULL, NULL, NULL);
 	
@@ -380,7 +380,7 @@ planner_cell_renderer_date_new (gboolean use_constraint)
 {
 	GObject *cell;
 
-	cell = g_object_new (MG_TYPE_CELL_RENDERER_DATE,
+	cell = g_object_new (PLANNER_TYPE_CELL_RENDERER_DATE,
 			     "use-constraint", use_constraint,
 			     NULL);
 	
@@ -389,11 +389,11 @@ planner_cell_renderer_date_new (gboolean use_constraint)
 
 static void
 mcrd_cancel_clicked (GtkWidget          *popup_window,
-		     MgCellRendererDate *cell)
+		     PlannerCellRendererDate *cell)
 {
-	MgCellRendererPopup *popup;
+	PlannerCellRendererPopup *popup;
 	
-	popup = MG_CELL_RENDERER_POPUP (cell);
+	popup = PLANNER_CELL_RENDERER_POPUP (cell);
 
 	popup->editing_canceled = TRUE;
 	planner_cell_renderer_popup_hide (popup);
@@ -401,11 +401,11 @@ mcrd_cancel_clicked (GtkWidget          *popup_window,
 
 static void
 mcrd_ok_clicked (GtkWidget          *popup_window,
-		 MgCellRendererDate *cell)
+		 PlannerCellRendererDate *cell)
 {
-	MgCellRendererPopup *popup;
+	PlannerCellRendererPopup *popup;
 	
-	popup = MG_CELL_RENDERER_POPUP (cell);
+	popup = PLANNER_CELL_RENDERER_POPUP (cell);
 
 	mcrd_day_selected (popup_window, cell);
 
@@ -415,7 +415,7 @@ mcrd_ok_clicked (GtkWidget          *popup_window,
 
 static void
 mcrd_day_selected (GtkWidget          *popup_window,
-		   MgCellRendererDate *cell)
+		   PlannerCellRendererDate *cell)
 {
 	guint    year;
 	guint    month;
@@ -434,7 +434,7 @@ mcrd_day_selected (GtkWidget          *popup_window,
 
 	str = planner_format_date (t);
 	planner_popup_entry_set_text (
-		MG_POPUP_ENTRY (MG_CELL_RENDERER_POPUP (cell)->editable), str);
+		PLANNER_POPUP_ENTRY (PLANNER_CELL_RENDERER_POPUP (cell)->editable), str);
 	g_free (str);
 }
 
@@ -460,7 +460,7 @@ mcrd_grab_on_window (GdkWindow *window,
 
 static void
 mcrd_constraint_activated_cb (GtkWidget          *widget,
-			      MgCellRendererDate *cell)
+			      PlannerCellRendererDate *cell)
 {
 	gpointer data;
 	gboolean sensitive;
@@ -479,7 +479,7 @@ mcrd_constraint_activated_cb (GtkWidget          *widget,
 	 * optionmenu is activated, since focus is transferred to the optionmenu
 	 * when it's popped up.
 	 */
-	mcrd_grab_on_window (MG_CELL_RENDERER_POPUP (cell)->popup_window->window,
+	mcrd_grab_on_window (PLANNER_CELL_RENDERER_POPUP (cell)->popup_window->window,
 			     gtk_get_current_event_time ());
 }
 

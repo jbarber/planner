@@ -27,12 +27,12 @@
 #include "planner-plugin.h"
 #include "planner-plugin-loader.h"
 
-static MgPlugin *
+static PlannerPlugin *
 mpl_load (const gchar *file)
 {
-	MgPlugin *plugin;
+	PlannerPlugin *plugin;
 
-	plugin = g_object_new (MG_TYPE_PLUGIN, NULL);
+	plugin = g_object_new (PLANNER_TYPE_PLUGIN, NULL);
 	
 	plugin->handle = g_module_open (file, G_MODULE_BIND_LAZY);
 	
@@ -50,11 +50,11 @@ mpl_load (const gchar *file)
 }
 
 static GList *
-mpl_load_dir (const gchar *path, MgMainWindow *window)
+mpl_load_dir (const gchar *path, PlannerWindow *window)
 {
 	GDir*        dir;
 	const gchar *name;
-	MgPlugin    *plugin;
+	PlannerPlugin    *plugin;
 	GList       *list = NULL;
 
 	dir = g_dir_open (path, 0, NULL);
@@ -85,7 +85,7 @@ mpl_load_dir (const gchar *path, MgMainWindow *window)
 }
 
 GList *
-planner_plugin_loader_load (MgMainWindow *window)
+planner_plugin_loader_load (PlannerWindow *window)
 {
 	return mpl_load_dir (MRP_PLUGINDIR, window);
 }

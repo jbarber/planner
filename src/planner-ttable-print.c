@@ -23,10 +23,10 @@ typedef struct {
 } Page;
 
 
-struct _MgTtablePrintData {
+struct _PlannerTtablePrintData {
 	MrpProject	*project;
-	MgView		*view;
-	MgPrintJob	*job;
+	PlannerView		*view;
+	PlannerPrintJob	*job;
 	Page		*pages;
 
 	gint		 pages_x;
@@ -49,7 +49,7 @@ struct _MgTtablePrintData {
 #define TEXT_PAD 15.0
 
 void
-planner_ttable_print_do (MgTtablePrintData *data) {
+planner_ttable_print_do (PlannerTtablePrintData *data) {
 	int i,j;
 	gdouble cur_x;
 	fprintf(stderr,"Print do\n");
@@ -156,22 +156,22 @@ planner_ttable_print_do (MgTtablePrintData *data) {
 	*/
 }
 
-MgTtablePrintData *
-planner_ttable_print_data_new (MgView *view,
-			  MgPrintJob *job)
+PlannerTtablePrintData *
+planner_ttable_print_data_new (PlannerView *view,
+			  PlannerPrintJob *job)
 {
-	MgTtablePrintData	*data;
+	PlannerTtablePrintData	*data;
 
 	fprintf(stderr,"Print data new\n");
-	data = g_new0(MgTtablePrintData,1);
+	data = g_new0(PlannerTtablePrintData,1);
 	data->view = view;
 	data->job = job;
-	data->project = planner_main_window_get_project(view->main_window);
+	data->project = planner_window_get_project(view->main_window);
 	return data;
 }
 
 void
-planner_ttable_print_data_free (MgTtablePrintData *data)
+planner_ttable_print_data_free (PlannerTtablePrintData *data)
 {
 	g_return_if_fail (data != NULL);
 	fprintf(stderr,"Print data free\n");
@@ -179,7 +179,7 @@ planner_ttable_print_data_free (MgTtablePrintData *data)
 }
 
 gint
-planner_ttable_print_get_n_pages (MgTtablePrintData *data)
+planner_ttable_print_get_n_pages (PlannerTtablePrintData *data)
 {
 	GnomeFont	*font;
 	GList		*r,*a;

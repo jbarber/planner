@@ -52,10 +52,10 @@ typedef struct {
 	GList  *background_elements;
 } Page;
 
-struct _MgGanttPrintData {
+struct _PlannerGanttPrintData {
 	MrpProject        *project;
-	MgView            *view;
-	MgPrintJob        *job;
+	PlannerView            *view;
+	PlannerPrintJob        *job;
 
 	/* Used to get the visible (expanded) tasks. */
 	GtkTreeView       *tree_view;
@@ -65,11 +65,11 @@ struct _MgGanttPrintData {
 
 	gint               level;
 	
-	MgScaleUnit        major_unit;
-	MgScaleFormat      major_format;
+	PlannerScaleUnit        major_unit;
+	PlannerScaleFormat      major_format;
 	
-	MgScaleUnit        minor_unit;
-	MgScaleFormat      minor_format;
+	PlannerScaleUnit        minor_unit;
+	PlannerScaleFormat      minor_format;
 	
 	gdouble            header_height;
 	
@@ -169,7 +169,7 @@ typedef struct {
 
 
 static void
-print_table_header (MgGanttPrintData *data)
+print_table_header (PlannerGanttPrintData *data)
 {
 	gdouble x, y;
 
@@ -203,7 +203,7 @@ print_table_header (MgGanttPrintData *data)
 }
 
 static void
-print_table_tasks (MgGanttPrintData *data,
+print_table_tasks (PlannerGanttPrintData *data,
 		   gboolean          header,
 		   GList           *tasks,
 		   gint              first)
@@ -280,7 +280,7 @@ print_table_tasks (MgGanttPrintData *data,
 }
 
 static void
-print_time_header (MgGanttPrintData *data,
+print_time_header (PlannerGanttPrintData *data,
 		   gdouble           x1,
 		   gdouble           x2,
 		   mrptime           start,
@@ -407,7 +407,7 @@ foreach_visible_task (GtkTreeModel *model,
 }
 
 static GList *
-gantt_print_get_visible_tasks (MgGanttPrintData *data)
+gantt_print_get_visible_tasks (PlannerGanttPrintData *data)
 {
 	ForeachVisibleData  fvd;
 	GtkTreeModel       *model;
@@ -435,7 +435,7 @@ gantt_print_free_print_tasks (GList *tasks)
 }	
 
 static GList *
-gantt_print_get_relations (MgGanttPrintData *data)
+gantt_print_get_relations (PlannerGanttPrintData *data)
 {
 	GList   *tasks, *l;
 	GList   *predecessors, *p;
@@ -456,7 +456,7 @@ gantt_print_get_relations (MgGanttPrintData *data)
 }
 
 static void
-gantt_print_task (MgGanttPrintData *data, Element *element)
+gantt_print_task (PlannerGanttPrintData *data, Element *element)
 {
 	gnome_print_newpath (data->job->pc);
 	planner_print_job_moveto (data->job, element->x1, element->y1);
@@ -481,7 +481,7 @@ gantt_print_task (MgGanttPrintData *data, Element *element)
 }
 
 static gboolean
-gantt_print_get_allocated_resources_string (MgGanttPrintData  *data,
+gantt_print_get_allocated_resources_string (PlannerGanttPrintData  *data,
 					    MrpTask           *task,
 					    gchar            **str,
 					    gdouble           *width)
@@ -549,7 +549,7 @@ gantt_print_get_allocated_resources_string (MgGanttPrintData  *data,
 }
 
 void
-planner_gantt_print_do (MgGanttPrintData *data)
+planner_gantt_print_do (PlannerGanttPrintData *data)
 {
 	GList      *relations;
 	GList      *l;
@@ -1253,24 +1253,24 @@ planner_gantt_print_do (MgGanttPrintData *data)
 	}
 }
 
-MgGanttPrintData *
-planner_gantt_print_data_new (MgView      *view,
-			 MgPrintJob  *job,
+PlannerGanttPrintData *
+planner_gantt_print_data_new (PlannerView      *view,
+			 PlannerPrintJob  *job,
 			 GtkTreeView *tree_view,
 			 gint         level,
 			 gboolean     show_critical)
 {
-	MgGanttPrintData *data;
+	PlannerGanttPrintData *data;
 	GnomeFont        *font;
 	GList            *tasks = NULL, *l;
 	gint              num_tasks;
 	gdouble           max_name_width = 0.0;
 
-	data = g_new0 (MgGanttPrintData, 1);
+	data = g_new0 (PlannerGanttPrintData, 1);
 
 	data->view = view;
 	data->job = job;
-	data->project = planner_main_window_get_project (view->main_window);
+	data->project = planner_window_get_project (view->main_window);
 
 	data->tree_view = tree_view;
 
@@ -1376,7 +1376,7 @@ planner_gantt_print_data_new (MgView      *view,
 }
 
 void
-planner_gantt_print_data_free (MgGanttPrintData *data)
+planner_gantt_print_data_free (PlannerGanttPrintData *data)
 {
 	g_return_if_fail (data != NULL);
 
@@ -1393,7 +1393,7 @@ planner_gantt_print_data_free (MgGanttPrintData *data)
 }
 
 gint
-planner_gantt_print_get_n_pages (MgGanttPrintData *data)
+planner_gantt_print_get_n_pages (PlannerGanttPrintData *data)
 {
 	g_return_val_if_fail (data != NULL, 0);
 	

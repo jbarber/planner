@@ -20,8 +20,8 @@
  * Boston, MA 02111-1307, USA.
  */
 
-#ifndef __MG_CELL_RENDERER_DATE_H__
-#define __MG_CELL_RENDERER_DATE_H__
+#ifndef __PLANNER_CELL_RENDERER_DATE_H__
+#define __PLANNER_CELL_RENDERER_DATE_H__
 
 #include <glib-object.h>
 #include <gtk/gtkwidget.h>
@@ -29,19 +29,19 @@
 #include <libplanner/mrp-types.h>
 #include "planner-cell-renderer-popup.h"
 
-#define MG_TYPE_CELL_RENDERER_DATE	      (planner_cell_renderer_date_get_type ())
-#define MG_CELL_RENDERER_DATE(obj)	      (GTK_CHECK_CAST ((obj), MG_TYPE_CELL_RENDERER_DATE, MgCellRendererDate))
-#define MG_CELL_RENDERER_DATE_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), MG_TYPE_CELL_RENDERER_DATE, MgCellRendererDateClass))
-#define MG_IS_CELL_RENDERER_DATE(obj)	      (GTK_CHECK_TYPE ((obj), MG_TYPE_CELL_RENDERER_DATE))
-#define MG_IS_CELL_RENDERER_DATE_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((obj), MG_TYPE_CELL_RENDERER_DATE))
-#define MG_CELL_RENDERER_DATE_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), MG_TYPE_CELL_RENDERER_DATE, MgCellRendererDateClass))
+#define PLANNER_TYPE_CELL_RENDERER_DATE	      (planner_cell_renderer_date_get_type ())
+#define PLANNER_CELL_RENDERER_DATE(obj)	      (GTK_CHECK_CAST ((obj), PLANNER_TYPE_CELL_RENDERER_DATE, PlannerCellRendererDate))
+#define PLANNER_CELL_RENDERER_DATE_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), PLANNER_TYPE_CELL_RENDERER_DATE, PlannerCellRendererDateClass))
+#define PLANNER_IS_CELL_RENDERER_DATE(obj)	      (GTK_CHECK_TYPE ((obj), PLANNER_TYPE_CELL_RENDERER_DATE))
+#define PLANNER_IS_CELL_RENDERER_DATE_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((obj), PLANNER_TYPE_CELL_RENDERER_DATE))
+#define PLANNER_CELL_RENDERER_DATE_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), PLANNER_TYPE_CELL_RENDERER_DATE, PlannerCellRendererDateClass))
 
-typedef struct _MgCellRendererDate      MgCellRendererDate;
-typedef struct _MgCellRendererDateClass MgCellRendererDateClass;
+typedef struct _PlannerCellRendererDate      PlannerCellRendererDate;
+typedef struct _PlannerCellRendererDateClass PlannerCellRendererDateClass;
 
-struct _MgCellRendererDate
+struct _PlannerCellRendererDate
 {
-	MgCellRendererPopup  parent;
+	PlannerCellRendererPopup  parent;
 	GtkWidget           *calendar;
 	GtkWidget           *option_menu;
 
@@ -51,13 +51,13 @@ struct _MgCellRendererDate
 	MrpConstraintType    type;
 };
 
-struct _MgCellRendererDateClass
+struct _PlannerCellRendererDateClass
 {
-	MgCellRendererPopupClass parent_class;
+	PlannerCellRendererPopupClass parent_class;
 };
 
 GType            planner_cell_renderer_date_get_type (void);
 GtkCellRenderer *planner_cell_renderer_date_new      (gboolean use_constraint);
 
 
-#endif /* __MG_CELL_RENDERER_DATE_H__ */
+#endif /* __PLANNER_CELL_RENDERER_DATE_H__ */

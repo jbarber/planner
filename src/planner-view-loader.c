@@ -27,12 +27,12 @@
 #include "planner-view.h"
 #include "planner-view-loader.h"
 
-static MgView *
+static PlannerView *
 mvl_load (const gchar *file)
 {
-	MgView *view;
+	PlannerView *view;
 
-	view = g_object_new (MG_TYPE_VIEW, NULL);
+	view = g_object_new (PLANNER_TYPE_VIEW, NULL);
 	
 	view->handle = g_module_open (file, G_MODULE_BIND_LAZY);
 	
@@ -59,11 +59,11 @@ mvl_load (const gchar *file)
 }
 
 static GList *
-mvl_load_dir (const gchar *path, MgMainWindow *window)
+mvl_load_dir (const gchar *path, PlannerWindow *window)
 {
 	GDir*        dir;
 	const gchar *name;
-	MgView      *view;
+	PlannerView      *view;
 	GList       *list = NULL;
 
 	dir = g_dir_open (path, 0, NULL);
@@ -93,7 +93,7 @@ mvl_load_dir (const gchar *path, MgMainWindow *window)
 }
 
 GList *
-planner_view_loader_load (MgMainWindow *window)
+planner_view_loader_load (PlannerWindow *window)
 {
 	return mvl_load_dir (MRP_VIEWDIR, window);
 }

@@ -46,7 +46,7 @@ enum {
 };
 
 typedef struct {
-	MgMainWindow  *main_window;
+	PlannerWindow  *main_window;
 	MrpProject    *project;
 
 	GtkWidget     *dialog;
@@ -104,9 +104,9 @@ static void          cal_dialog_selection_changed_cb   (GtkTreeSelection *select
 static void          cal_dialog_apply_clicked_cb       (GtkWidget        *button,
 							DialogData       *data);
 static void          cal_dialog_update_calendar_widgets (DialogData      *data);
-static void          cal_dialog_month_changed_cb       (MgCalendar       *calendar,
+static void          cal_dialog_month_changed_cb       (PlannerCalendar       *calendar,
 							DialogData       *data);
-static void          cal_dialog_date_selected_cb       (MgCalendar       *calendar,
+static void          cal_dialog_date_selected_cb       (PlannerCalendar       *calendar,
 							DialogData       *data);
 static void          cal_dialog_option_menu_changed_cb (GtkWidget        *option_menu,
 							DialogData       *data);
@@ -288,7 +288,7 @@ cal_dialog_parent_destroy_cb (GtkWidget *window, GtkWidget *dialog)
 }
 	
 GtkWidget *
-planner_calendar_dialog_new (MgMainWindow *window)
+planner_calendar_dialog_new (PlannerWindow *window)
 {
 	DialogData       *data;
 	GladeXML         *glade;
@@ -297,7 +297,7 @@ planner_calendar_dialog_new (MgMainWindow *window)
 	GtkTreeSelection *selection;
 	gint              i;
 	
-	g_return_val_if_fail (MG_IS_MAIN_WINDOW (window), NULL);
+	g_return_val_if_fail (PLANNER_IS_MAIN_WINDOW (window), NULL);
 	
 	glade = glade_xml_new (GLADEDIR "/calendar-dialog.glade",
 			       "calendar_dialog",
@@ -311,7 +311,7 @@ planner_calendar_dialog_new (MgMainWindow *window)
 	
 	data = g_new0 (DialogData, 1);
 
-	data->project = planner_main_window_get_project (window);
+	data->project = planner_window_get_project (window);
 	data->main_window = window;
 	data->dialog = dialog;
 
@@ -325,11 +325,11 @@ planner_calendar_dialog_new (MgMainWindow *window)
 	data->calendar = planner_calendar_new ();
 	gtk_widget_show (data->calendar);
 
-	planner_calendar_display_options (MG_CALENDAR (data->calendar),
-				     MG_CALENDAR_SHOW_HEADING |
-				     MG_CALENDAR_SHOW_DAY_NAMES |
-				     MG_CALENDAR_SHOW_WEEK_NUMBERS |
-				     MG_CALENDAR_WEEK_START_MONDAY);
+	planner_calendar_display_options (PLANNER_CALENDAR (data->calendar),
+				     PLANNER_CALENDAR_SHOW_HEADING |
+				     PLANNER_CALENDAR_SHOW_DAY_NAMES |
+				     PLANNER_CALENDAR_SHOW_WEEK_NUMBERS |
+				     PLANNER_CALENDAR_WEEK_START_MONDAY);
 	g_signal_connect (data->calendar,
 			  "month_changed",
 			  G_CALLBACK (cal_dialog_month_changed_cb),
@@ -545,7 +545,7 @@ cal_dialog_apply_clicked_cb (GtkWidget  *button,
 		return;
 	}
 	
-	planner_calendar_get_date (MG_CALENDAR (data->calendar), &y, &m, &d);
+	planner_calendar_get_date (PLANNER_CALENDAR (data->calendar), &y, &m, &d);
 	t = mrp_time_compose (y, m + 1, d, 0, 0, 0);
 	mrp_calendar_set_days (calendar, t, day, -1);
 }
@@ -577,7 +577,7 @@ static void
 cal_dialog_update_calendar_widgets (DialogData *data)
 {
 	MrpCalendar *calendar;
-	MgCalendar  *calendar_widget;
+	PlannerCalendar  *calendar_widget;
 	guint        y, m, d;
 	mrptime      t;
 	MrpDay      *day;
@@ -590,7 +590,7 @@ cal_dialog_update_calendar_widgets (DialogData *data)
 		return;
 	}
 
-	calendar_widget = MG_CALENDAR (data->calendar);
+	calendar_widget = PLANNER_CALENDAR (data->calendar);
 
 	gtk_widget_set_sensitive (data->calendar, TRUE);
 	gtk_widget_set_sensitive (data->default_week_button, TRUE);
@@ -606,18 +606,18 @@ cal_dialog_update_calendar_widgets (DialogData *data)
 		if (day == mrp_day_get_nonwork ()) {
 			planner_calendar_mark_day (calendar_widget,
 					      d,
-					      MG_CALENDAR_MARK_SHADE);
+					      PLANNER_CALENDAR_MARK_SHADE);
 		}
 		else if (day == mrp_day_get_work ()) {
 			planner_calendar_mark_day (calendar_widget,
 					      d,
-					      MG_CALENDAR_MARK_NONE);
+					      PLANNER_CALENDAR_MARK_NONE);
 		}
 	}
 }
 
 static void
-cal_dialog_month_changed_cb (MgCalendar *calendar_widget,
+cal_dialog_month_changed_cb (PlannerCalendar *calendar_widget,
 			     DialogData *data)
 {
 	cal_dialog_update_calendar_widgets (data);
@@ -625,7 +625,7 @@ cal_dialog_month_changed_cb (MgCalendar *calendar_widget,
 }
 
 static void
-cal_dialog_date_selected_cb (MgCalendar *calendar_widget,
+cal_dialog_date_selected_cb (PlannerCalendar *calendar_widget,
 			     DialogData *data)
 {
 	cal_dialog_update_day_widgets (data);
@@ -664,7 +664,7 @@ cal_dialog_update_day_widgets (DialogData *data)
 	MrpDay      *day;
 	GList       *ivals, *l;
 	MrpCalendar *calendar, *root;
-	MgCalendar  *calendar_widget;
+	PlannerCalendar  *calendar_widget;
 	guint        y, m, d;
 	mrptime      t;
 	gint         i;
@@ -708,7 +708,7 @@ cal_dialog_update_day_widgets (DialogData *data)
 		gtk_widget_set_sensitive (data->base_radiobutton, TRUE);
 	}
 
-	calendar_widget = MG_CALENDAR (data->calendar);
+	calendar_widget = PLANNER_CALENDAR (data->calendar);
 	
 	planner_calendar_get_date (calendar_widget, &y, &m, &d);
 	t = mrp_time_compose (y, m + 1, d, 0, 0, 0);

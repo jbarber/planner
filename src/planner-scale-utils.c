@@ -30,56 +30,56 @@
 #define HALFDAY (60*60*4)
 #define HOUR (60*60)
 
-static const MgScaleConf scale_conf[] = {
+static const PlannerScaleConf scale_conf[] = {
 	/* Major unit             Major format              Minor unit                Minor format */
 
-	{ MG_SCALE_UNIT_YEAR,     MG_SCALE_FORMAT_MEDIUM,   MG_SCALE_UNIT_HALFYEAR,   MG_SCALE_FORMAT_SHORT,  WEEK },
+	{ PLANNER_SCALE_UNIT_YEAR,     PLANNER_SCALE_FORMAT_MEDIUM,   PLANNER_SCALE_UNIT_HALFYEAR,   PLANNER_SCALE_FORMAT_SHORT,  WEEK },
 
-	{ MG_SCALE_UNIT_YEAR,     MG_SCALE_FORMAT_MEDIUM,   MG_SCALE_UNIT_HALFYEAR,   MG_SCALE_FORMAT_SHORT,  WEEK },
-	{ MG_SCALE_UNIT_YEAR,     MG_SCALE_FORMAT_MEDIUM,   MG_SCALE_UNIT_QUARTER,    MG_SCALE_FORMAT_SHORT,  WEEK },
-	{ MG_SCALE_UNIT_YEAR,     MG_SCALE_FORMAT_MEDIUM,   MG_SCALE_UNIT_QUARTER,    MG_SCALE_FORMAT_MEDIUM, WEEK },
+	{ PLANNER_SCALE_UNIT_YEAR,     PLANNER_SCALE_FORMAT_MEDIUM,   PLANNER_SCALE_UNIT_HALFYEAR,   PLANNER_SCALE_FORMAT_SHORT,  WEEK },
+	{ PLANNER_SCALE_UNIT_YEAR,     PLANNER_SCALE_FORMAT_MEDIUM,   PLANNER_SCALE_UNIT_QUARTER,    PLANNER_SCALE_FORMAT_SHORT,  WEEK },
+	{ PLANNER_SCALE_UNIT_YEAR,     PLANNER_SCALE_FORMAT_MEDIUM,   PLANNER_SCALE_UNIT_QUARTER,    PLANNER_SCALE_FORMAT_MEDIUM, WEEK },
 
-	{ MG_SCALE_UNIT_HALFYEAR, MG_SCALE_FORMAT_LONG,     MG_SCALE_UNIT_MONTH,      MG_SCALE_FORMAT_LONG,   WEEK },
+	{ PLANNER_SCALE_UNIT_HALFYEAR, PLANNER_SCALE_FORMAT_LONG,     PLANNER_SCALE_UNIT_MONTH,      PLANNER_SCALE_FORMAT_LONG,   WEEK },
 
-	{ MG_SCALE_UNIT_QUARTER,  MG_SCALE_FORMAT_LONG,     MG_SCALE_UNIT_MONTH,      MG_SCALE_FORMAT_MEDIUM, DAY },
+	{ PLANNER_SCALE_UNIT_QUARTER,  PLANNER_SCALE_FORMAT_LONG,     PLANNER_SCALE_UNIT_MONTH,      PLANNER_SCALE_FORMAT_MEDIUM, DAY },
 
-	{ MG_SCALE_UNIT_MONTH,    MG_SCALE_FORMAT_LONG,     MG_SCALE_UNIT_WEEK,       MG_SCALE_FORMAT_MEDIUM, DAY },
+	{ PLANNER_SCALE_UNIT_MONTH,    PLANNER_SCALE_FORMAT_LONG,     PLANNER_SCALE_UNIT_WEEK,       PLANNER_SCALE_FORMAT_MEDIUM, DAY },
 
-	{ MG_SCALE_UNIT_WEEK,     MG_SCALE_FORMAT_LONG,     MG_SCALE_UNIT_DAY,        MG_SCALE_FORMAT_SHORT,  DAY },
-	{ MG_SCALE_UNIT_WEEK,     MG_SCALE_FORMAT_LONG,     MG_SCALE_UNIT_DAY,        MG_SCALE_FORMAT_MEDIUM, HALFDAY },
+	{ PLANNER_SCALE_UNIT_WEEK,     PLANNER_SCALE_FORMAT_LONG,     PLANNER_SCALE_UNIT_DAY,        PLANNER_SCALE_FORMAT_SHORT,  DAY },
+	{ PLANNER_SCALE_UNIT_WEEK,     PLANNER_SCALE_FORMAT_LONG,     PLANNER_SCALE_UNIT_DAY,        PLANNER_SCALE_FORMAT_MEDIUM, HALFDAY },
 
-	{ MG_SCALE_UNIT_DAY,      MG_SCALE_FORMAT_LONG,     MG_SCALE_UNIT_HALFDAY,    MG_SCALE_FORMAT_MEDIUM, HALFDAY },
-	{ MG_SCALE_UNIT_DAY,      MG_SCALE_FORMAT_LONG,     MG_SCALE_UNIT_HALFDAY,    MG_SCALE_FORMAT_MEDIUM, HOUR },
+	{ PLANNER_SCALE_UNIT_DAY,      PLANNER_SCALE_FORMAT_LONG,     PLANNER_SCALE_UNIT_HALFDAY,    PLANNER_SCALE_FORMAT_MEDIUM, HALFDAY },
+	{ PLANNER_SCALE_UNIT_DAY,      PLANNER_SCALE_FORMAT_LONG,     PLANNER_SCALE_UNIT_HALFDAY,    PLANNER_SCALE_FORMAT_MEDIUM, HOUR },
 
-	{ MG_SCALE_UNIT_DAY,      MG_SCALE_FORMAT_LONG,     MG_SCALE_UNIT_TWO_HOURS,  MG_SCALE_FORMAT_MEDIUM, HOUR },
+	{ PLANNER_SCALE_UNIT_DAY,      PLANNER_SCALE_FORMAT_LONG,     PLANNER_SCALE_UNIT_TWO_HOURS,  PLANNER_SCALE_FORMAT_MEDIUM, HOUR },
 
-	{ MG_SCALE_UNIT_DAY,      MG_SCALE_FORMAT_LONG,     MG_SCALE_UNIT_HOUR,       MG_SCALE_FORMAT_MEDIUM, HOUR },
-	{ MG_SCALE_UNIT_DAY,      MG_SCALE_FORMAT_LONG,     MG_SCALE_UNIT_HOUR,       MG_SCALE_FORMAT_MEDIUM, HOUR }
+	{ PLANNER_SCALE_UNIT_DAY,      PLANNER_SCALE_FORMAT_LONG,     PLANNER_SCALE_UNIT_HOUR,       PLANNER_SCALE_FORMAT_MEDIUM, HOUR },
+	{ PLANNER_SCALE_UNIT_DAY,      PLANNER_SCALE_FORMAT_LONG,     PLANNER_SCALE_UNIT_HOUR,       PLANNER_SCALE_FORMAT_MEDIUM, HOUR }
 };
 
-const MgScaleConf *planner_scale_conf = scale_conf;
+const PlannerScaleConf *planner_scale_conf = scale_conf;
 
 mrptime
 planner_scale_time_prev (mrptime     t,
-		    MgScaleUnit unit)
+		    PlannerScaleUnit unit)
 {
 	struct tm *tm;
 
 	tm = mrp_time_to_tm (t);
 	
 	switch (unit) {
-	case MG_SCALE_UNIT_HOUR:
+	case PLANNER_SCALE_UNIT_HOUR:
 		tm->tm_min = 0;
 		tm->tm_sec = 0;
 		break;
 
-	case MG_SCALE_UNIT_TWO_HOURS:
+	case PLANNER_SCALE_UNIT_TWO_HOURS:
 		tm->tm_min = 0;
 		tm->tm_sec = 0;
 		tm->tm_hour -= 2 - tm->tm_hour % 2;
 		break;
 
-	case MG_SCALE_UNIT_HALFDAY:
+	case PLANNER_SCALE_UNIT_HALFDAY:
 		if (tm->tm_hour < 12) {
 			tm->tm_hour = 0;
 		} else {
@@ -89,27 +89,27 @@ planner_scale_time_prev (mrptime     t,
 		tm->tm_sec = 0;
 		break;
 		
-	case MG_SCALE_UNIT_DAY:
+	case PLANNER_SCALE_UNIT_DAY:
 		tm->tm_hour = 0;
 		tm->tm_min = 0;
 		tm->tm_sec = 0;
 		break;
 		
-	case MG_SCALE_UNIT_WEEK:
+	case PLANNER_SCALE_UNIT_WEEK:
 		tm->tm_mday -= tm->tm_wday - START_OF_WEEK; 
 		tm->tm_hour = 0;
 		tm->tm_min = 0;
 		tm->tm_sec = 0;
 		break;
 
-	case MG_SCALE_UNIT_MONTH:
+	case PLANNER_SCALE_UNIT_MONTH:
 		tm->tm_mday = 1;
 		tm->tm_hour = 0;
 		tm->tm_min = 0;
 		tm->tm_sec = 0;
 		break;
 
-	case MG_SCALE_UNIT_QUARTER:
+	case PLANNER_SCALE_UNIT_QUARTER:
 		tm->tm_mday = 1;
 		tm->tm_hour = 0;
 		tm->tm_min = 0;
@@ -128,7 +128,7 @@ planner_scale_time_prev (mrptime     t,
 		}
 		break;
 		
-	case MG_SCALE_UNIT_HALFYEAR:
+	case PLANNER_SCALE_UNIT_HALFYEAR:
 		if (tm->tm_mon <= 5) {
 			tm->tm_mon = 0;
 		} else {
@@ -140,7 +140,7 @@ planner_scale_time_prev (mrptime     t,
 		tm->tm_sec = 0;
 		break;
 
-	case MG_SCALE_UNIT_YEAR:
+	case PLANNER_SCALE_UNIT_YEAR:
 		tm->tm_mday = 1;
 		tm->tm_mon = 0;
 		tm->tm_hour = 0;
@@ -148,7 +148,7 @@ planner_scale_time_prev (mrptime     t,
 		tm->tm_sec = 0;
 		break;
 
-	case MG_SCALE_UNIT_NONE:
+	case PLANNER_SCALE_UNIT_NONE:
 		break;
 
 	default:
@@ -160,26 +160,26 @@ planner_scale_time_prev (mrptime     t,
 
 mrptime
 planner_scale_time_next (mrptime     t,
-		    MgScaleUnit unit)
+		    PlannerScaleUnit unit)
 {
 	struct tm *tm;
 	
 	tm = mrp_time_to_tm (t);
 	
 	switch (unit) {
-	case MG_SCALE_UNIT_HOUR:
+	case PLANNER_SCALE_UNIT_HOUR:
 		tm->tm_min = 0;
 		tm->tm_sec = 0;
 		tm->tm_hour++;
 		break;
 
-	case MG_SCALE_UNIT_TWO_HOURS:
+	case PLANNER_SCALE_UNIT_TWO_HOURS:
 		tm->tm_min = 0;
 		tm->tm_sec = 0;
 		tm->tm_hour += 2 - tm->tm_hour % 2;
 		break;
 
-	case MG_SCALE_UNIT_HALFDAY:
+	case PLANNER_SCALE_UNIT_HALFDAY:
 		if (tm->tm_hour < 12) {
 			tm->tm_hour = 12;
 		} else {
@@ -190,21 +190,21 @@ planner_scale_time_next (mrptime     t,
 		tm->tm_sec = 0;
 		break;
 		
-	case MG_SCALE_UNIT_DAY:
+	case PLANNER_SCALE_UNIT_DAY:
 		tm->tm_hour = 0;
 		tm->tm_min = 0;
 		tm->tm_sec = 0;
 		tm->tm_mday++;
 		break;
 		
-	case MG_SCALE_UNIT_WEEK:
+	case PLANNER_SCALE_UNIT_WEEK:
 		tm->tm_hour = 0;
 		tm->tm_min = 0;
 		tm->tm_sec = 0;
 		tm->tm_mday += 6 - tm->tm_wday + START_OF_WEEK + 1;
 		break;
 
-	case MG_SCALE_UNIT_MONTH:
+	case PLANNER_SCALE_UNIT_MONTH:
 		tm->tm_mday = 1;
 		tm->tm_hour = 0;
 		tm->tm_min = 0;
@@ -212,7 +212,7 @@ planner_scale_time_next (mrptime     t,
 		tm->tm_mon++;
 		break;
 
-	case MG_SCALE_UNIT_QUARTER:
+	case PLANNER_SCALE_UNIT_QUARTER:
 		tm->tm_mday = 1;
 		tm->tm_hour = 0;
 		tm->tm_min = 0;
@@ -231,7 +231,7 @@ planner_scale_time_next (mrptime     t,
 		}
 		break;
 		
-	case MG_SCALE_UNIT_HALFYEAR:
+	case PLANNER_SCALE_UNIT_HALFYEAR:
 		if (tm->tm_mon <= 5) {
 			tm->tm_mon = 6;
 		} else {
@@ -244,7 +244,7 @@ planner_scale_time_next (mrptime     t,
 		tm->tm_sec = 0;
 		break;
 		
-	case MG_SCALE_UNIT_YEAR:
+	case PLANNER_SCALE_UNIT_YEAR:
 		tm->tm_mon = 0;
 		tm->tm_mday = 1;
 		tm->tm_hour = 0;
@@ -253,7 +253,7 @@ planner_scale_time_next (mrptime     t,
 		tm->tm_year++;
 		break;
 
-	case MG_SCALE_UNIT_NONE:
+	case PLANNER_SCALE_UNIT_NONE:
 		break;
 		
 	default:
@@ -265,8 +265,8 @@ planner_scale_time_next (mrptime     t,
 
 gchar *
 planner_scale_format_time (mrptime       t,
-		      MgScaleUnit   unit,
-		      MgScaleFormat format)
+		      PlannerScaleUnit   unit,
+		      PlannerScaleFormat format)
 {
 	struct tm *tm;
 	gchar     *str = NULL;
@@ -275,7 +275,7 @@ planner_scale_format_time (mrptime       t,
 	tm = mrp_time_to_tm (t);
 	
 	switch (unit) {
-	case MG_SCALE_UNIT_HOUR:
+	case PLANNER_SCALE_UNIT_HOUR:
 		switch (format) {
 		default:
 			str = g_strdup_printf ("%d", tm->tm_hour);
@@ -283,7 +283,7 @@ planner_scale_format_time (mrptime       t,
 		}
 		break;
 
-	case MG_SCALE_UNIT_TWO_HOURS:
+	case PLANNER_SCALE_UNIT_TWO_HOURS:
 		switch (format) {
 		default:
 			str = g_strdup_printf ("%d", tm->tm_hour);
@@ -291,7 +291,7 @@ planner_scale_format_time (mrptime       t,
 		}
 		break;
 		
-	case MG_SCALE_UNIT_HALFDAY:
+	case PLANNER_SCALE_UNIT_HALFDAY:
 		switch (format) {
 		default:
 			str = g_strdup_printf ("%d", tm->tm_hour);
@@ -299,17 +299,17 @@ planner_scale_format_time (mrptime       t,
 		}
 		break;
 		
-	case MG_SCALE_UNIT_DAY:
+	case PLANNER_SCALE_UNIT_DAY:
 		switch (format) {
-		case MG_SCALE_FORMAT_SHORT:
+		case PLANNER_SCALE_FORMAT_SHORT:
 			str = g_strdup_printf ("%d", tm->tm_mday);
 			break;
-		case MG_SCALE_FORMAT_MEDIUM:
+		case PLANNER_SCALE_FORMAT_MEDIUM:
 			str = g_strdup_printf ("%s %d",
 					       mrp_time_day_name (t),
 					       tm->tm_mday);
 			break;
-		case MG_SCALE_FORMAT_LONG:
+		case PLANNER_SCALE_FORMAT_LONG:
 			str = g_strdup_printf ("%s, %s %d",
 					       mrp_time_day_name (t),
 					       mrp_time_month_name (t),
@@ -318,18 +318,18 @@ planner_scale_format_time (mrptime       t,
 		}
 		break;
 
-	case MG_SCALE_UNIT_WEEK:
+	case PLANNER_SCALE_UNIT_WEEK:
 		switch (format) {
-		case MG_SCALE_FORMAT_SHORT:
+		case PLANNER_SCALE_FORMAT_SHORT:
 			/* i18n: Short "Week", preferably 2 letters. */
 			str = g_strdup_printf (_("Wk %d"),
 					       mrp_time_week_number (t));
 			break;
-		case MG_SCALE_FORMAT_MEDIUM:
+		case PLANNER_SCALE_FORMAT_MEDIUM:
 			str = g_strdup_printf (_("Week %d"),
 					       mrp_time_week_number (t));
 			break; 
-		case MG_SCALE_FORMAT_LONG:
+		case PLANNER_SCALE_FORMAT_LONG:
 			/* i18n: Week, year. */
 			str = g_strdup_printf (_("Week %d, %d"),
 					       mrp_time_week_number (t),
@@ -338,17 +338,17 @@ planner_scale_format_time (mrptime       t,
 		}
 		break;
 
-	case MG_SCALE_UNIT_MONTH:
+	case PLANNER_SCALE_UNIT_MONTH:
 		switch (format) {
-		case MG_SCALE_FORMAT_SHORT:
+		case PLANNER_SCALE_FORMAT_SHORT:
 			str = g_strdup_printf ("%s",
 					       mrp_time_month_name_initial (t));
 			break;
-		case MG_SCALE_FORMAT_MEDIUM:
+		case PLANNER_SCALE_FORMAT_MEDIUM:
 			str = g_strdup_printf ("%s",
 					       mrp_time_month_name (t));
 			break;
-		case MG_SCALE_FORMAT_LONG:
+		case PLANNER_SCALE_FORMAT_LONG:
 			str = g_strdup_printf ("%s %d",
 					       mrp_time_month_name (t),
 					       tm->tm_year + 1900);
@@ -356,19 +356,19 @@ planner_scale_format_time (mrptime       t,
 		}
 		break;
 		
-	case MG_SCALE_UNIT_QUARTER:
+	case PLANNER_SCALE_UNIT_QUARTER:
 		num = 1 + floor (tm->tm_mon / 3);
 		
 		switch (format) {
-		case MG_SCALE_FORMAT_SHORT:
+		case PLANNER_SCALE_FORMAT_SHORT:
 			/* i18n: Short "Quarter", preferrably 1 letter. */
 			str = g_strdup_printf (_("Q%d"), num);
 			break;
-		case MG_SCALE_FORMAT_MEDIUM:
+		case PLANNER_SCALE_FORMAT_MEDIUM:
 			/* i18n: Short "Quarter", preferrably 2-3 letters. */
 			str = g_strdup_printf (_("Qtr %d"), num);
 			break; 
-		case MG_SCALE_FORMAT_LONG:
+		case PLANNER_SCALE_FORMAT_LONG:
 			/* i18n: Year, short "Quarter", preferrably 2-3 letters. */
 			str = g_strdup_printf (_("%d, Qtr %d"),
 					       tm->tm_year + 1900,
@@ -377,16 +377,16 @@ planner_scale_format_time (mrptime       t,
 		}
 		break;
 	
-	case MG_SCALE_UNIT_HALFYEAR:
+	case PLANNER_SCALE_UNIT_HALFYEAR:
 		num = 1 + floor (tm->tm_mon / 6);
 
 		switch (format) {
-		case MG_SCALE_FORMAT_SHORT:
+		case PLANNER_SCALE_FORMAT_SHORT:
 			/* i18n: Short "Half year", prefferably 1 letter. */
 			str = g_strdup_printf (_("H%d"), num);
 			break;
-		case MG_SCALE_FORMAT_LONG:
-		case MG_SCALE_FORMAT_MEDIUM:
+		case PLANNER_SCALE_FORMAT_LONG:
+		case PLANNER_SCALE_FORMAT_MEDIUM:
 			/* i18n: Year, short "Half year", prefferably 1 letter. */
 			str = g_strdup_printf (_("%04d, H%d"),
 					       tm->tm_year + 1900,
@@ -395,7 +395,7 @@ planner_scale_format_time (mrptime       t,
 		}
 		break;
 
-	case MG_SCALE_UNIT_YEAR:
+	case PLANNER_SCALE_UNIT_YEAR:
 		switch (format) {
 		default:
 			str = g_strdup_printf ("%d", tm->tm_year + 1900);
@@ -403,7 +403,7 @@ planner_scale_format_time (mrptime       t,
 		}
 		break;
 
-	case MG_SCALE_UNIT_NONE:
+	case PLANNER_SCALE_UNIT_NONE:
 		str = NULL;
 		break;
 		

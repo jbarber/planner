@@ -20,33 +20,33 @@
  * Boston, MA 02111-1307, USA.
  */
 
-#ifndef __MG_GANTT_HEADER_H__
-#define __MG_GANTT_HEADER_H__
+#ifndef __PLANNER_GANTT_HEADER_H__
+#define __PLANNER_GANTT_HEADER_H__
 
 #include <gtk/gtkwidget.h>
 
-#define MG_TYPE_GANTT_HEADER		(planner_gantt_header_get_type ())
-#define MG_GANTT_HEADER(obj)		(GTK_CHECK_CAST ((obj), MG_TYPE_GANTT_HEADER, MgGanttHeader))
-#define MG_GANTT_HEADER_CLASS(klass)	(GTK_CHECK_CLASS_CAST ((klass), MG_TYPE_GANTT_HEADER, MgGanttHeaderClass))
-#define MG_IS_GANTT_HEADER(obj)		(GTK_CHECK_TYPE ((obj), MG_TYPE_GANTT_HEADER))
-#define MG_IS_GANTT_HEADER_CLASS(klass)	(GTK_CHECK_CLASS_TYPE ((obj), MG_TYPE_GANTT_HEADER))
-#define MG_GANTT_HEADER_GET_CLASS(obj)	(GTK_CHECK_GET_CLASS ((obj), MG_TYPE_GANTT_HEADER, MgGanttHeaderClass))
+#define PLANNER_TYPE_GANTT_HEADER		(planner_gantt_header_get_type ())
+#define PLANNER_GANTT_HEADER(obj)		(GTK_CHECK_CAST ((obj), PLANNER_TYPE_GANTT_HEADER, PlannerGanttHeader))
+#define PLANNER_GANTT_HEADER_CLASS(klass)	(GTK_CHECK_CLASS_CAST ((klass), PLANNER_TYPE_GANTT_HEADER, PlannerGanttHeaderClass))
+#define PLANNER_IS_GANTT_HEADER(obj)		(GTK_CHECK_TYPE ((obj), PLANNER_TYPE_GANTT_HEADER))
+#define PLANNER_IS_GANTT_HEADER_CLASS(klass)	(GTK_CHECK_CLASS_TYPE ((obj), PLANNER_TYPE_GANTT_HEADER))
+#define PLANNER_GANTT_HEADER_GET_CLASS(obj)	(GTK_CHECK_GET_CLASS ((obj), PLANNER_TYPE_GANTT_HEADER, PlannerGanttHeaderClass))
 
-typedef struct _MgGanttHeader           MgGanttHeader;
-typedef struct _MgGanttHeaderClass      MgGanttHeaderClass;
-typedef struct _MgGanttHeaderPriv       MgGanttHeaderPriv;
+typedef struct _PlannerGanttHeader           PlannerGanttHeader;
+typedef struct _PlannerGanttHeaderClass      PlannerGanttHeaderClass;
+typedef struct _PlannerGanttHeaderPriv       PlannerGanttHeaderPriv;
 
-struct _MgGanttHeader
+struct _PlannerGanttHeader
 {
 	GtkWidget          parent;
-	MgGanttHeaderPriv *priv;
+	PlannerGanttHeaderPriv *priv;
 };
 
-struct _MgGanttHeaderClass
+struct _PlannerGanttHeaderClass
 {
 	GtkWidgetClass parent_class;
 
-	void  (* set_scroll_adjustments) (MgGanttHeader  *header,
+	void  (* set_scroll_adjustments) (PlannerGanttHeader  *header,
 					  GtkAdjustment *hadjustment,
 					  GtkAdjustment *vadjustment);
 };
@@ -56,5 +56,5 @@ GtkType                planner_gantt_header_get_type        (void);
 GtkWidget             *planner_gantt_header_new             (void);
 
 
-#endif /* __MG_GANTT_HEADER_H__ */
+#endif /* __PLANNER_GANTT_HEADER_H__ */
 

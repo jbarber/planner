@@ -242,7 +242,7 @@ group_dialog_cell_toggled (GtkCellRendererText *cell,
 		gtk_tree_model_get (model, &iter, column, &is_default, -1);
 
 		group = MRP_GROUP (planner_list_model_get_object (
-					   MG_LIST_MODEL (model), &iter));
+					   PLANNER_LIST_MODEL (model), &iter));
 		if (!is_default) {
 			g_object_set (data->project, 
 				      "default-group", group, 
@@ -289,7 +289,7 @@ group_dialog_cell_edited (GtkCellRendererText *cell,
 							&sorted_iter);
 
 	group = MRP_GROUP (planner_list_model_get_object (
-				   MG_LIST_MODEL (model), &iter));
+				   PLANNER_LIST_MODEL (model), &iter));
 	
 	switch (column) {
 	case GROUP_COL_NAME:
@@ -445,9 +445,9 @@ group_dialog_get_selected_func (GtkTreeModel *sorted_model,
 	GList       **list = data;
 	MrpObject    *object;
 	GtkTreeIter   iter;
-	MgListModel  *model;
+	PlannerListModel  *model;
 	
-	model = MG_LIST_MODEL (gtk_tree_model_sort_get_model (
+	model = PLANNER_LIST_MODEL (gtk_tree_model_sort_get_model (
 				       GTK_TREE_MODEL_SORT (sorted_model)));
 
  	gtk_tree_model_sort_convert_iter_to_child_iter (

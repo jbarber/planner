@@ -20,30 +20,30 @@
  * Boston, MA 02111-1307, USA.
  */
 
-#ifndef __MG_GANTT_BACKGROUND_H__
-#define __MG_GANTT_BACKGROUND_H__
+#ifndef __PLANNER_GANTT_BACKGROUND_H__
+#define __PLANNER_GANTT_BACKGROUND_H__
 
 #include <gtk/gtk.h>
 #include <libgnomecanvas/gnome-canvas.h>
 #include <libgnomecanvas/gnome-canvas-util.h>
 
-#define MG_TYPE_GANTT_BACKGROUND		(planner_gantt_background_get_type ())
-#define MG_GANTT_BACKGROUND(obj)		(G_TYPE_CHECK_INSTANCE_CAST ((obj), MG_TYPE_GANTT_BACKGROUND, MgGanttBackground))
-#define MG_GANTT_BACKGROUND_CLASS(klass)	(G_TYPE_CHECK_CLASS_CAST ((klass), MG_TYPE_GANTT_BACKGROUND, MgGanttBackgroundClass))
-#define MG_IS_GANTT_BACKGROUND(obj)		(G_TYPE_CHECK_INSTANCE_TYPE ((obj), MG_TYPE_GANTT_BACKGROUND))
-#define MG_IS_GANTT_BACKGROUND_CLASS(klass)	(G_TYPE_CHECK_TYPE ((obj), MG_TYPE_GANTT_BACKGROUND))
-#define MG_GANTT_BACKGROUND_GET_CLASS(obj)	(G_TYPE_INSTANCE_GET_CLASS ((obj), MG_TYPE_GANTT_BACKGROUND, MgGanttBackgroundClass))
+#define PLANNER_TYPE_GANTT_BACKGROUND		(planner_gantt_background_get_type ())
+#define PLANNER_GANTT_BACKGROUND(obj)		(G_TYPE_CHECK_INSTANCE_CAST ((obj), PLANNER_TYPE_GANTT_BACKGROUND, PlannerGanttBackground))
+#define PLANNER_GANTT_BACKGROUND_CLASS(klass)	(G_TYPE_CHECK_CLASS_CAST ((klass), PLANNER_TYPE_GANTT_BACKGROUND, PlannerGanttBackgroundClass))
+#define PLANNER_IS_GANTT_BACKGROUND(obj)		(G_TYPE_CHECK_INSTANCE_TYPE ((obj), PLANNER_TYPE_GANTT_BACKGROUND))
+#define PLANNER_IS_GANTT_BACKGROUND_CLASS(klass)	(G_TYPE_CHECK_TYPE ((obj), PLANNER_TYPE_GANTT_BACKGROUND))
+#define PLANNER_GANTT_BACKGROUND_GET_CLASS(obj)	(G_TYPE_INSTANCE_GET_CLASS ((obj), PLANNER_TYPE_GANTT_BACKGROUND, PlannerGanttBackgroundClass))
 
-typedef struct _MgGanttBackground      MgGanttBackground;
-typedef struct _MgGanttBackgroundClass MgGanttBackgroundClass;
-typedef struct _MgGanttBackgroundPriv  MgGanttBackgroundPriv;
+typedef struct _PlannerGanttBackground      PlannerGanttBackground;
+typedef struct _PlannerGanttBackgroundClass PlannerGanttBackgroundClass;
+typedef struct _PlannerGanttBackgroundPriv  PlannerGanttBackgroundPriv;
 
-struct _MgGanttBackground {
+struct _PlannerGanttBackground {
 	GnomeCanvasItem         parent;
-	MgGanttBackgroundPriv  *priv;	
+	PlannerGanttBackgroundPriv  *priv;	
 };
 
-struct _MgGanttBackgroundClass {
+struct _PlannerGanttBackgroundClass {
 	GnomeCanvasItemClass parent_class;
 };
 
@@ -51,5 +51,5 @@ struct _MgGanttBackgroundClass {
 GType planner_gantt_background_get_type (void) G_GNUC_CONST;
 
 
-#endif /* __MG_GANTT_BACKGROUND_H__ */
+#endif /* __PLANNER_GANTT_BACKGROUND_H__ */
 

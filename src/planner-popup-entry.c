@@ -32,8 +32,8 @@
 #include <gdk/gdkkeysyms.h>
 #include "planner-popup-entry.h"
 
-static void     planner_popup_entry_init       (MgPopupEntry        *entry);
-static void     planner_popup_entry_class_init (MgPopupEntryClass   *class);
+static void     planner_popup_entry_init       (PlannerPopupEntry        *entry);
+static void     planner_popup_entry_class_init (PlannerPopupEntryClass   *class);
 static void     mpw_cell_editable_init    (GtkCellEditableIface *iface);
 static gboolean mpw_key_press_event       (GtkWidget            *box,
 					   GdkEventKey          *key_event);
@@ -53,13 +53,13 @@ planner_popup_entry_get_type (void)
 	
 	if (!widget_type) {
 		static const GTypeInfo widget_info = {
-			sizeof (MgPopupEntryClass),
+			sizeof (PlannerPopupEntryClass),
 			NULL,		/* base_init */
 			NULL,		/* base_finalize */
 			(GClassInitFunc) planner_popup_entry_class_init,
 			NULL,		/* class_finalize */
 			NULL,		/* class_data */
-			sizeof (MgPopupEntry),
+			sizeof (PlannerPopupEntry),
 			0,              /* n_preallocs */
 			(GInstanceInitFunc) planner_popup_entry_init,
 		};
@@ -71,7 +71,7 @@ planner_popup_entry_get_type (void)
 		};
       
 		widget_type = g_type_register_static (GTK_TYPE_EVENT_BOX,
-						      "MgPopupEntry",
+						      "PlannerPopupEntry",
 						      &widget_info,
 						      0);
 		
@@ -84,7 +84,7 @@ planner_popup_entry_get_type (void)
 }
 
 static void
-planner_popup_entry_init (MgPopupEntry *widget)
+planner_popup_entry_init (PlannerPopupEntry *widget)
 {
 	GtkWidget *arrow;
 
@@ -114,7 +114,7 @@ planner_popup_entry_init (MgPopupEntry *widget)
 }
 
 static void
-planner_popup_entry_class_init (MgPopupEntryClass *klass)
+planner_popup_entry_class_init (PlannerPopupEntryClass *klass)
 {
 	GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
@@ -133,7 +133,7 @@ planner_popup_entry_class_init (MgPopupEntryClass *klass)
 }
 
 static void
-mpw_arrow_clicked (GtkWidget *button, MgPopupEntry *widget)
+mpw_arrow_clicked (GtkWidget *button, PlannerPopupEntry *widget)
 {
 	g_signal_emit (widget, signals[ARROW_CLICKED], 0);
 }
@@ -141,7 +141,7 @@ mpw_arrow_clicked (GtkWidget *button, MgPopupEntry *widget)
 /* GtkCellEditable method implementations
  */
 static void
-gtk_cell_editable_entry_activated (GtkEntry *entry, MgPopupEntry *widget)
+gtk_cell_editable_entry_activated (GtkEntry *entry, PlannerPopupEntry *widget)
 {
 	gtk_cell_editable_editing_done (GTK_CELL_EDITABLE (widget));
 	gtk_cell_editable_remove_widget (GTK_CELL_EDITABLE (widget));
@@ -150,7 +150,7 @@ gtk_cell_editable_entry_activated (GtkEntry *entry, MgPopupEntry *widget)
 static gboolean
 gtk_cell_editable_key_press_event (GtkEntry      *entry,
 				   GdkEventKey   *key_event,
-				   MgPopupEntry *widget)
+				   PlannerPopupEntry *widget)
 {
 	if (key_event->keyval == GDK_Escape) {
 		widget->editing_canceled = TRUE;
@@ -168,7 +168,7 @@ static gboolean
 mpw_key_press_event (GtkWidget   *box,
 		     GdkEventKey *key_event)
 {
-	MgPopupEntry *widget = MG_POPUP_ENTRY (box);
+	PlannerPopupEntry *widget = PLANNER_POPUP_ENTRY (box);
 	GdkEvent       tmp_event;
 	
 	if (key_event->keyval == GDK_Escape) {
@@ -198,7 +198,7 @@ static void
 mpw_start_editing (GtkCellEditable *cell_editable,
 		   GdkEvent        *event)
 {
-	MgPopupEntry *widget = MG_POPUP_ENTRY (cell_editable);
+	PlannerPopupEntry *widget = PLANNER_POPUP_ENTRY (cell_editable);
 
 	gtk_editable_select_region (GTK_EDITABLE (widget->entry), 0, -1);
 
@@ -223,17 +223,17 @@ mpw_cell_editable_init (GtkCellEditableIface *iface)
 }
 
 void
-planner_popup_entry_set_text (MgPopupEntry *popup, const gchar *text)
+planner_popup_entry_set_text (PlannerPopupEntry *popup, const gchar *text)
 {
-	g_return_if_fail (MG_IS_POPUP_ENTRY (popup));
+	g_return_if_fail (PLANNER_IS_POPUP_ENTRY (popup));
 
 	gtk_entry_set_text (GTK_ENTRY (popup->entry), text ? text : "");
 }
 
 const gchar *
-planner_popup_entry_get_text (MgPopupEntry *popup)
+planner_popup_entry_get_text (PlannerPopupEntry *popup)
 {
-	g_return_val_if_fail (MG_IS_POPUP_ENTRY (popup), NULL);
+	g_return_val_if_fail (PLANNER_IS_POPUP_ENTRY (popup), NULL);
 
 	return gtk_entry_get_text (GTK_ENTRY (popup->entry));
 }

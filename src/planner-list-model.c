@@ -28,7 +28,7 @@
 
 #include "planner-list-model.h"
 
-struct _MgListModelPriv {
+struct _PlannerListModelPriv {
 	GList       *data_list;
         gint         stamp;
 	gulong       empty_notify_handler;
@@ -36,8 +36,8 @@ struct _MgListModelPriv {
 
 #define G_LIST(x) ((GList *) x)
 
-static void          mlm_init                 (MgListModel          *model);
-static void          mlm_class_init           (MgListModelClass     *klass);
+static void          mlm_init                 (PlannerListModel          *model);
+static void          mlm_class_init           (PlannerListModelClass     *klass);
 static void          mlm_tree_model_init      (GtkTreeModelIface    *iface);
 
 static void          mlm_finalize             (GObject              *object);
@@ -83,13 +83,13 @@ planner_list_model_get_type (void)
         if (!type) {
                 static const GTypeInfo info =
                         {
-                                sizeof (MgListModelClass),
+                                sizeof (PlannerListModelClass),
                                 NULL,		/* base_init */
                                 NULL,		/* base_finalize */
                                 (GClassInitFunc) mlm_class_init,
                                 NULL,		/* class_finalize */
                                 NULL,		/* class_data */
-                                sizeof (MgListModel),
+                                sizeof (PlannerListModel),
                                 0,
                                 (GInstanceInitFunc) mlm_init,
                         };
@@ -102,7 +102,7 @@ planner_list_model_get_type (void)
                         };
 
                 type = g_type_register_static (G_TYPE_OBJECT,
-					       "MgListModel", 
+					       "PlannerListModel", 
 					       &info, 0);
       
                 g_type_add_interface_static (type,
@@ -114,7 +114,7 @@ planner_list_model_get_type (void)
 }
 
 static void
-mlm_class_init (MgListModelClass *klass)
+mlm_class_init (PlannerListModelClass *klass)
 {
         GObjectClass *object_class;
 
@@ -147,11 +147,11 @@ mlm_tree_model_init (GtkTreeModelIface *iface)
 }
 
 static void
-mlm_init (MgListModel *model)
+mlm_init (PlannerListModel *model)
 {
-        MgListModelPriv *priv;
+        PlannerListModelPriv *priv;
 
-        priv = g_new0 (MgListModelPriv, 1);
+        priv = g_new0 (PlannerListModelPriv, 1);
 
 	do {
 		priv->stamp = g_random_int ();
@@ -164,8 +164,8 @@ mlm_init (MgListModel *model)
 static void
 mlm_finalize (GObject *object)
 {
-	MgListModel     *model = MG_LIST_MODEL (object);
-	MgListModelPriv *priv  = model->priv;
+	PlannerListModel     *model = PLANNER_LIST_MODEL (object);
+	PlannerListModelPriv *priv  = model->priv;
 
 	if (priv->data_list) {
  		g_list_free (priv->data_list);
@@ -185,15 +185,15 @@ mlm_get_iter (GtkTreeModel *tree_model,
               GtkTreeIter  *iter,
               GtkTreePath  *path)
 {
-        MgListModel     *model;
-	MgListModelPriv *priv;
+        PlannerListModel     *model;
+	PlannerListModelPriv *priv;
         GList           *node;
         gint             i;
         
-        g_return_val_if_fail (MG_IS_LIST_MODEL (tree_model), FALSE);
+        g_return_val_if_fail (PLANNER_IS_LIST_MODEL (tree_model), FALSE);
         g_return_val_if_fail (gtk_tree_path_get_depth (path) > 0, FALSE);
 
-        model = MG_LIST_MODEL (tree_model);
+        model = PLANNER_LIST_MODEL (tree_model);
 	priv  = model->priv;
 	
         i = gtk_tree_path_get_indices (path)[0];
@@ -214,13 +214,13 @@ static GtkTreePath *
 mlm_get_path (GtkTreeModel *tree_model,
               GtkTreeIter  *iter)
 {
-        MgListModel     *model = MG_LIST_MODEL (tree_model);
-        MgListModelPriv *priv;
+        PlannerListModel     *model = PLANNER_LIST_MODEL (tree_model);
+        PlannerListModelPriv *priv;
         GtkTreePath     *path;
         GList           *node;
         gint             i = 0;
 
-        g_return_val_if_fail (MG_IS_LIST_MODEL (tree_model), NULL);
+        g_return_val_if_fail (PLANNER_IS_LIST_MODEL (tree_model), NULL);
         g_return_val_if_fail (model->priv->stamp == iter->stamp, NULL);
 
         priv = model->priv;
@@ -246,9 +246,9 @@ static gboolean
 mlm_iter_next (GtkTreeModel  *tree_model,
                GtkTreeIter   *iter)
 {
-	MgListModel *model = MG_LIST_MODEL (tree_model);
+	PlannerListModel *model = PLANNER_LIST_MODEL (tree_model);
         
-        g_return_val_if_fail (MG_IS_LIST_MODEL (tree_model), FALSE);
+        g_return_val_if_fail (PLANNER_IS_LIST_MODEL (tree_model), FALSE);
         g_return_val_if_fail (model->priv->stamp == iter->stamp, FALSE);
 
         iter->user_data = G_LIST(iter->user_data)->next;
@@ -261,12 +261,12 @@ mlm_iter_children (GtkTreeModel *tree_model,
                    GtkTreeIter  *iter,
                    GtkTreeIter  *parent)
 {
-	MgListModel     *model;
-        MgListModelPriv *priv;
+	PlannerListModel     *model;
+        PlannerListModelPriv *priv;
         
-        g_return_val_if_fail (MG_IS_LIST_MODEL (tree_model), FALSE);
+        g_return_val_if_fail (PLANNER_IS_LIST_MODEL (tree_model), FALSE);
 
-        model = MG_LIST_MODEL (tree_model);
+        model = PLANNER_LIST_MODEL (tree_model);
         priv  = model->priv;
         
         /* this is a list, nodes have no children */
@@ -298,12 +298,12 @@ static gint
 mlm_iter_n_children (GtkTreeModel *tree_model,
                      GtkTreeIter  *iter)
 {
-	MgListModel     *model;
-        MgListModelPriv *priv;
+	PlannerListModel     *model;
+        PlannerListModelPriv *priv;
         
-        g_return_val_if_fail (MG_IS_LIST_MODEL (tree_model), -1);
+        g_return_val_if_fail (PLANNER_IS_LIST_MODEL (tree_model), -1);
 	
-	model = MG_LIST_MODEL (tree_model);
+	model = PLANNER_LIST_MODEL (tree_model);
         priv  = model->priv;
 
         if (iter == NULL) {
@@ -321,13 +321,13 @@ mlm_iter_nth_child (GtkTreeModel *tree_model,
                     GtkTreeIter  *parent,
                     gint          n)
 {
-        MgListModel     *model;
-	MgListModelPriv *priv;
+        PlannerListModel     *model;
+	PlannerListModelPriv *priv;
         GList           *child;
 
-        g_return_val_if_fail (MG_IS_LIST_MODEL (tree_model), FALSE);
+        g_return_val_if_fail (PLANNER_IS_LIST_MODEL (tree_model), FALSE);
 
-        model = MG_LIST_MODEL (tree_model);
+        model = PLANNER_LIST_MODEL (tree_model);
 	priv  = model->priv;
         
         if (parent) {
@@ -356,9 +356,9 @@ mlm_iter_parent (GtkTreeModel *tree_model,
 static gint
 mlm_get_n_columns (GtkTreeModel *tree_model)
 {
-	MgListModelClass *klass;
+	PlannerListModelClass *klass;
 	
-	klass = MG_LIST_MODEL_GET_CLASS (tree_model);
+	klass = PLANNER_LIST_MODEL_GET_CLASS (tree_model);
 	
 	if (klass->get_n_columns) {
 		return klass->get_n_columns (tree_model);
@@ -372,9 +372,9 @@ mlm_get_n_columns (GtkTreeModel *tree_model)
 static GType
 mlm_get_column_type (GtkTreeModel *tree_model, gint column)
 {
-	MgListModelClass *klass;
+	PlannerListModelClass *klass;
 	
-	klass = MG_LIST_MODEL_GET_CLASS (tree_model);
+	klass = PLANNER_LIST_MODEL_GET_CLASS (tree_model);
 	
 	if (klass->get_column_type) {
 		return klass->get_column_type (tree_model, column);
@@ -392,9 +392,9 @@ mlm_get_value (GtkTreeModel *tree_model,
 	       gint          column,
 	       GValue       *value)
 {
-	MgListModelClass *klass;
+	PlannerListModelClass *klass;
 	
-	klass = MG_LIST_MODEL_GET_CLASS (tree_model);
+	klass = PLANNER_LIST_MODEL_GET_CLASS (tree_model);
 	
 	if (klass->get_value) {
 		klass->get_value (tree_model, iter, column, value);
@@ -402,14 +402,14 @@ mlm_get_value (GtkTreeModel *tree_model,
 }
 
 void
-planner_list_model_append (MgListModel *model, MrpObject *object)
+planner_list_model_append (PlannerListModel *model, MrpObject *object)
 {
-	MgListModelPriv *priv;
+	PlannerListModelPriv *priv;
 	GtkTreePath     *path;
 	GtkTreeIter      iter;
 	gint             i;
 
-	g_return_if_fail (MG_IS_LIST_MODEL (model));
+	g_return_if_fail (PLANNER_IS_LIST_MODEL (model));
 	g_return_if_fail (MRP_IS_OBJECT (object));
 	
 	priv = model->priv;
@@ -430,13 +430,13 @@ planner_list_model_append (MgListModel *model, MrpObject *object)
 }
 
 void
-planner_list_model_remove (MgListModel *model, MrpObject *object)
+planner_list_model_remove (PlannerListModel *model, MrpObject *object)
 {
-	MgListModelPriv *priv;
+	PlannerListModelPriv *priv;
         GtkTreePath     *path;
         gint             i;
 
-	g_return_if_fail (MG_IS_LIST_MODEL (model));
+	g_return_if_fail (PLANNER_IS_LIST_MODEL (model));
 	g_return_if_fail (MRP_IS_OBJECT (object));
 
 	priv = model->priv;
@@ -456,14 +456,14 @@ planner_list_model_remove (MgListModel *model, MrpObject *object)
 }
 
 void
-planner_list_model_update (MgListModel *model, MrpObject *object)
+planner_list_model_update (PlannerListModel *model, MrpObject *object)
 {
-	MgListModelPriv *priv;
+	PlannerListModelPriv *priv;
         GtkTreePath     *path;
 	GtkTreeIter      iter;
         gint             i;
 
-	g_return_if_fail (MG_IS_LIST_MODEL (model));
+	g_return_if_fail (PLANNER_IS_LIST_MODEL (model));
 	g_return_if_fail (MRP_IS_OBJECT (object));
 
 	priv = model->priv;
@@ -481,13 +481,13 @@ planner_list_model_update (MgListModel *model, MrpObject *object)
 }
 
 GtkTreePath *
-planner_list_model_get_path (MgListModel *model, MrpObject *object)
+planner_list_model_get_path (PlannerListModel *model, MrpObject *object)
 {
-	MgListModelPriv *priv;
+	PlannerListModelPriv *priv;
 	GtkTreePath     *path;
 	gint             index = -1;
 
-	g_return_val_if_fail (MG_IS_LIST_MODEL (model), NULL);
+	g_return_val_if_fail (PLANNER_IS_LIST_MODEL (model), NULL);
 	g_return_val_if_fail (MRP_IS_OBJECT (object), NULL);
 
 	priv = model->priv;
@@ -504,19 +504,19 @@ planner_list_model_get_path (MgListModel *model, MrpObject *object)
 }
 
 MrpObject *
-planner_list_model_get_object (MgListModel *model, GtkTreeIter *iter)
+planner_list_model_get_object (PlannerListModel *model, GtkTreeIter *iter)
 {
 	return MRP_OBJECT (((GList *) iter->user_data)->data);
 }
 
 void
-planner_list_model_set_data (MgListModel *model, GList *data)
+planner_list_model_set_data (PlannerListModel *model, GList *data)
 {
-	MgListModelPriv *priv;
+	PlannerListModelPriv *priv;
 	GList           *old_list;
 	GList           *node;
 	
-	g_return_if_fail (MG_IS_LIST_MODEL (model));
+	g_return_if_fail (PLANNER_IS_LIST_MODEL (model));
 	
 	priv = model->priv;
 
@@ -540,9 +540,9 @@ planner_list_model_set_data (MgListModel *model, GList *data)
 }
 
 GList *
-planner_list_model_get_data (MgListModel *model)
+planner_list_model_get_data (PlannerListModel *model)
 {
-	g_return_val_if_fail (MG_IS_LIST_MODEL (model), NULL);
+	g_return_val_if_fail (PLANNER_IS_LIST_MODEL (model), NULL);
 	
 	return model->priv->data_list;
 }

@@ -52,7 +52,7 @@ typedef struct {
 	GtkTreeModel *model;
 	MrpProject   *project;
 	GType         type;
-} MgPropertyDialogPriv;
+} PlannerPropertyDialogPriv;
 
 static void
 property_dialog_setup_option_menu (GtkWidget     *option_menu,
@@ -154,7 +154,7 @@ static void
 property_dialog_add_cb (GtkWidget *button,
 			GtkWidget *dialog)
 {
-	MgPropertyDialogPriv *priv;
+	PlannerPropertyDialogPriv *priv;
 	MrpProperty          *property;
 	MrpPropertyType       type;
 	const gchar          *label;
@@ -273,7 +273,7 @@ property_dialog_add_cb (GtkWidget *button,
 static void
 property_dialog_remove_cb (GtkWidget *button, GtkWidget *dialog)
 {
-	MgPropertyDialogPriv *priv;
+	PlannerPropertyDialogPriv *priv;
 	GtkTreeSelection     *selection;
 	GtkTreeIter           iter;
 	gchar                *name;
@@ -329,7 +329,7 @@ property_dialog_label_edited (GtkCellRendererText *cell,
 			      gchar               *new_text, 
 			      GtkWidget           *dialog)
 {
-	MgPropertyDialogPriv *priv;
+	PlannerPropertyDialogPriv *priv;
 	GtkTreePath          *path;
 	GtkTreeIter           iter;
 	GtkTreeModel         *model;
@@ -355,7 +355,7 @@ static void
 property_dialog_setup_list (GtkWidget *dialog,
 			    guint      cols)
 {
-	MgPropertyDialogPriv *priv;
+	PlannerPropertyDialogPriv *priv;
 	GtkTreeView          *tree;
 	GtkTreeViewColumn    *col;
 	GtkCellRenderer      *cell;
@@ -453,7 +453,7 @@ static void
 property_dialog_setup_widgets (GtkWidget *dialog,
 			       GladeXML  *glade)
 {
-	MgPropertyDialogPriv *priv;
+	PlannerPropertyDialogPriv *priv;
 	GtkWidget            *w;
 
 	priv = GET_PRIV (dialog);
@@ -489,11 +489,11 @@ planner_property_dialog_new (MrpProject  *project,
 {
 	GladeXML             *glade;
 	GtkWidget            *dialog;
-	MgPropertyDialogPriv *priv;
+	PlannerPropertyDialogPriv *priv;
 
 	g_return_val_if_fail (MRP_IS_PROJECT (project), NULL);
 
-	priv = g_new0 (MgPropertyDialogPriv, 1);
+	priv = g_new0 (PlannerPropertyDialogPriv, 1);
 	
 	glade = glade_xml_new (GLADEDIR"/property-dialog.glade",
 			       NULL, NULL);
@@ -518,7 +518,7 @@ planner_property_dialog_value_edited (GtkCellRendererText *cell,
 				 gchar               *new_text, 
 				 gpointer             data)
 {
-	/*MgPropertyDialogPriv *priv;*/
+	/*PlannerPropertyDialogPriv *priv;*/
 	GtkTreePath          *path;
 	GtkTreeIter           iter;
 	GtkTreeModel         *model;

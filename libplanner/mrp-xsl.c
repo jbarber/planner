@@ -23,6 +23,7 @@
 #include <config.h>
 #include <glib.h>
 #include <gmodule.h>
+#include <libgnomevfs/gnome-vfs.h>
 #include <libxslt/xslt.h>
 #include <libxslt/transform.h>
 #include <libxslt/xsltutils.h>
@@ -50,6 +51,11 @@ html_write (MrpFileWriter  *writer,
         xsltStylesheet *stylesheet;
         xmlDoc         *doc;
         xmlDoc         *final_doc;
+	GnomeVFSHandle *handle;
+	xmlChar        *buffer;
+	gint            len;
+	GnomeVFSResult  result;
+	gboolean        ret;
 
 	mrp_project_save_to_xml (project, &xml_project, NULL);
 
@@ -65,13 +71,37 @@ html_write (MrpFileWriter  *writer,
         final_doc = xsltApplyStylesheet (stylesheet, doc, NULL);
                                                                                 
         xmlFree (doc);
-                                                                                
-        xsltSaveResultToFilename (uri, final_doc, stylesheet, FALSE);
 
+	ret = TRUE;
+	
+	if (xsltSaveResultToString (&buffer, &len, final_doc, stylesheet) != -1) {
+		result = gnome_vfs_create (&handle, uri, GNOME_VFS_OPEN_WRITE,
+					   FALSE, 644);
+		
+		if (result == GNOME_VFS_OK) { 
+			gnome_vfs_write (handle, buffer, (GnomeVFSFileSize) len, NULL);
+			gnome_vfs_close (handle);
+		} else {
+		  	g_set_error (error,
+				     MRP_ERROR,
+				     MRP_ERROR_EXPORT_FAILED,
+				     gnome_vfs_result_to_string (result));
+			ret = FALSE;
+		}
+		
+		xmlFree (buffer);
+	} else {
+		g_set_error (error,
+			     MRP_ERROR,
+			     MRP_ERROR_EXPORT_FAILED,
+			     _("HTML export failed"));
+		ret = FALSE;
+	}
+	
 	xsltFreeStylesheet (stylesheet);
         xmlFree (final_doc);
 
-	return TRUE;
+	return ret;
 }
 
 G_MODULE_EXPORT void

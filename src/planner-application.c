@@ -25,14 +25,14 @@
 #include <gtk/gtkmain.h>
 #include <gtk/gtkstock.h>
 #include <libgnome/gnome-i18n.h>
-#include "planner-main-window.h"
+#include "planner-window.h"
 #include "planner-application.h"
 
 
 
 #define d(x) 
 
-struct _MgApplicationPriv {
+struct _PlannerApplicationPriv {
 	GList *windows;
 
 	/* recent file stuff */
@@ -40,11 +40,11 @@ struct _MgApplicationPriv {
 };
 
 
-static void     application_class_init       (MgApplicationClass *klass);
-static void     application_init             (MgApplication      *page);
+static void     application_class_init       (PlannerApplicationClass *klass);
+static void     application_init             (PlannerApplication      *page);
 static void     application_finalize         (GObject            *object);
-static void     application_window_closed_cb (MgMainWindow       *window,
-					      MgApplication      *application);
+static void     application_window_closed_cb (PlannerWindow       *window,
+					      PlannerApplication      *application);
 
 
 static MrpApplicationClass *parent_class = NULL;
@@ -131,26 +131,26 @@ planner_application_get_type (void)
 
 	if (!type) {
 		static const GTypeInfo info = {
-			sizeof (MgApplicationClass),
+			sizeof (PlannerApplicationClass),
 			NULL,		/* base_init */
 			NULL,		/* base_finalize */
 			(GClassInitFunc) application_class_init,
 			NULL,		/* class_finalize */
 			NULL,		/* class_data */
-			sizeof (MgApplication),
+			sizeof (PlannerApplication),
 			0,              /* n_preallocs */
 			(GInstanceInitFunc) application_init
 		};
 
 		type = g_type_register_static (MRP_TYPE_APPLICATION,
-					       "MgApplication", &info, 0);
+					       "PlannerApplication", &info, 0);
 	}
 	
 	return type;
 }
 
 static void
-application_class_init (MgApplicationClass *klass)
+application_class_init (PlannerApplicationClass *klass)
 {
 	GObjectClass *o_class;
 	
@@ -166,11 +166,11 @@ application_class_init (MgApplicationClass *klass)
 }
 
 static void
-application_init (MgApplication *app)
+application_init (PlannerApplication *app)
 {
-	MgApplicationPriv *priv;
+	PlannerApplicationPriv *priv;
 
-	priv = g_new0 (MgApplicationPriv, 1);
+	priv = g_new0 (PlannerApplicationPriv, 1);
 
 	priv->windows = NULL;
 	
@@ -186,7 +186,7 @@ application_init (MgApplication *app)
 static void
 application_finalize (GObject *object)
 {
-	MgApplication *app = MG_APPLICATION (object);
+	PlannerApplication *app = PLANNER_APPLICATION (object);
 
 	g_object_unref (app->priv->recent_model);
 	
@@ -198,13 +198,13 @@ application_finalize (GObject *object)
 }
 
 static void
-application_window_closed_cb (MgMainWindow  *window,
-		      MgApplication *application)
+application_window_closed_cb (PlannerWindow  *window,
+		      PlannerApplication *application)
 {
-	MgApplicationPriv *priv;
+	PlannerApplicationPriv *priv;
 	
-	g_return_if_fail (MG_IS_MAIN_WINDOW (window));
-	g_return_if_fail (MG_IS_APPLICATION (application));
+	g_return_if_fail (PLANNER_IS_MAIN_WINDOW (window));
+	g_return_if_fail (PLANNER_IS_APPLICATION (application));
 	
 	priv = application->priv;
 	
@@ -218,29 +218,29 @@ application_window_closed_cb (MgMainWindow  *window,
 	}
 }
 
-MgApplication *
+PlannerApplication *
 planner_application_new (void)
 {
-	MgApplication     *app;
-	MgApplicationPriv *priv;
+	PlannerApplication     *app;
+	PlannerApplicationPriv *priv;
 	
-	app  = MG_APPLICATION (g_object_new (MG_TYPE_APPLICATION, NULL));
+	app  = PLANNER_APPLICATION (g_object_new (PLANNER_TYPE_APPLICATION, NULL));
 	priv = app->priv;
 	
 	return app;
 }
 
 GtkWidget *
-planner_application_new_window (MgApplication *app)
+planner_application_new_window (PlannerApplication *app)
 {
-	MgApplicationPriv *priv;
+	PlannerApplicationPriv *priv;
 	GtkWidget         *window;
 
-	g_return_val_if_fail (MG_IS_APPLICATION (app), NULL);
+	g_return_val_if_fail (PLANNER_IS_APPLICATION (app), NULL);
 
 	priv = app->priv;
 
-	window = planner_main_window_new (app);
+	window = planner_window_new (app);
 
 	g_signal_connect (window,
 			  "closed",
@@ -253,39 +253,39 @@ planner_application_new_window (MgApplication *app)
 }
 
 void
-planner_application_exit (MgApplication *app)
+planner_application_exit (PlannerApplication *app)
 {
-	MgApplicationPriv *priv;
+	PlannerApplicationPriv *priv;
 	GList             *list_cpy;
 	GList             *l;
 	
-	g_return_if_fail (MG_IS_APPLICATION (app));
+	g_return_if_fail (PLANNER_IS_APPLICATION (app));
 	
 	priv = app->priv;
 
 	list_cpy = g_list_copy (priv->windows);
 
 	for (l = list_cpy; l; l = l->next) {
-		planner_main_window_close (MG_MAIN_WINDOW (l->data));
+		planner_window_close (PLANNER_WINDOW (l->data));
 	}
 	
 	g_list_free (list_cpy);
 }
 
 EggRecentModel *
-planner_application_get_recent_model (MgApplication *app)
+planner_application_get_recent_model (PlannerApplication *app)
 {
-	g_return_val_if_fail (MG_IS_APPLICATION (app), NULL);
+	g_return_val_if_fail (PLANNER_IS_APPLICATION (app), NULL);
 
 	return app->priv->recent_model;
 }
 
 GConfClient *
-planner_application_get_gconf_client (MgApplication *app)
+planner_application_get_gconf_client (PlannerApplication *app)
 {
 	static GConfClient *client;
 	
-	g_return_val_if_fail (MG_IS_APPLICATION (app), NULL);
+	g_return_val_if_fail (PLANNER_IS_APPLICATION (app), NULL);
 
 	if (!client) {
 		client = gconf_client_get_default ();

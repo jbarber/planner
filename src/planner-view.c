@@ -28,8 +28,8 @@
 #include <bonobo/bonobo-ui-util.h>
 #include "planner-view.h"
 
-static void mv_init       (MgView      *view);
-static void mv_class_init (MgViewClass *class);
+static void mv_init       (PlannerView      *view);
+static void mv_class_init (PlannerViewClass *class);
 
 
 static GObjectClass *parent_class;
@@ -42,19 +42,19 @@ planner_view_get_type (void)
 
 	if (!type) {
 		static const GTypeInfo info = {
-			sizeof (MgViewClass),
+			sizeof (PlannerViewClass),
 			NULL,		/* base_init */
 			NULL,		/* base_finalize */
 			(GClassInitFunc) mv_class_init,
 			NULL,		/* class_finalize */
 			NULL,		/* class_data */
-			sizeof (MgView),
+			sizeof (PlannerView),
 			0,
 			(GInstanceInitFunc) mv_init
 		};
 
 		type = g_type_register_static (G_TYPE_OBJECT,
-					       "MgView", &info, 0);
+					       "PlannerView", &info, 0);
 	}
 
 	return type;
@@ -67,7 +67,7 @@ mv_finalize (GObject *object)
 }
 
 static void
-mv_class_init (MgViewClass *klass)
+mv_class_init (PlannerViewClass *klass)
 {
 	GObjectClass *object_class;
 
@@ -79,15 +79,15 @@ mv_class_init (MgViewClass *klass)
 }
 
 static void
-mv_init (MgView *view)
+mv_init (PlannerView *view)
 {
 
 }
 
 const gchar *
-planner_view_get_label (MgView *view)
+planner_view_get_label (PlannerView *view)
 {
-	g_return_val_if_fail (MG_IS_VIEW (view), NULL);
+	g_return_val_if_fail (PLANNER_IS_VIEW (view), NULL);
 
 	if (view->get_label) {
 		return view->get_label (view);
@@ -97,9 +97,9 @@ planner_view_get_label (MgView *view)
 }
 
 const gchar *
-planner_view_get_menu_label (MgView *view)
+planner_view_get_menu_label (PlannerView *view)
 {
-	g_return_val_if_fail (MG_IS_VIEW (view), NULL);
+	g_return_val_if_fail (PLANNER_IS_VIEW (view), NULL);
 
 	if (view->get_menu_label) {
 		return view->get_menu_label (view);
@@ -109,9 +109,9 @@ planner_view_get_menu_label (MgView *view)
 }
 
 const gchar *
-planner_view_get_icon (MgView *view)
+planner_view_get_icon (PlannerView *view)
 {
-	g_return_val_if_fail (MG_IS_VIEW (view), NULL);
+	g_return_val_if_fail (PLANNER_IS_VIEW (view), NULL);
 
 	if (view->get_icon) {
 		return view->get_icon (view);
@@ -121,9 +121,9 @@ planner_view_get_icon (MgView *view)
 }
 
 GtkWidget *
-planner_view_get_widget (MgView *view)
+planner_view_get_widget (PlannerView *view)
 {
-	g_return_val_if_fail (MG_IS_VIEW (view), NULL);
+	g_return_val_if_fail (PLANNER_IS_VIEW (view), NULL);
 
 	if (view->get_widget) {
 		return view->get_widget (view);
@@ -133,10 +133,10 @@ planner_view_get_widget (MgView *view)
 }
 
 void
-planner_view_init (MgView       *view,
-	      MgMainWindow *main_window)
+planner_view_init (PlannerView       *view,
+	      PlannerWindow *main_window)
 {
-	g_return_if_fail (MG_IS_VIEW (view));
+	g_return_if_fail (PLANNER_IS_VIEW (view));
 
 	view->main_window = main_window;
 	view->ui_component = bonobo_ui_component_new_default ();
@@ -147,9 +147,9 @@ planner_view_init (MgView       *view,
 }
 
 void
-planner_view_activate (MgView *view)
+planner_view_activate (PlannerView *view)
 {
-	g_return_if_fail (MG_IS_VIEW (view));
+	g_return_if_fail (PLANNER_IS_VIEW (view));
 
 	view->activated = TRUE;
 	
@@ -159,9 +159,9 @@ planner_view_activate (MgView *view)
 }
 
 void
-planner_view_deactivate (MgView *view)
+planner_view_deactivate (PlannerView *view)
 {
-	g_return_if_fail (MG_IS_VIEW (view));
+	g_return_if_fail (PLANNER_IS_VIEW (view));
 
 	view->activated = FALSE;
 
@@ -171,11 +171,11 @@ planner_view_deactivate (MgView *view)
 }
 
 void
-planner_view_print_init (MgView     *view,
-		    MgPrintJob *job)
+planner_view_print_init (PlannerView     *view,
+		    PlannerPrintJob *job)
 {
-	g_return_if_fail (MG_IS_VIEW (view));
-	g_return_if_fail (MG_IS_PRINT_JOB (job));
+	g_return_if_fail (PLANNER_IS_VIEW (view));
+	g_return_if_fail (PLANNER_IS_PRINT_JOB (job));
 
 	if (view->print_init) {
 		view->print_init (view, job);
@@ -183,9 +183,9 @@ planner_view_print_init (MgView     *view,
 }
 
 gint
-planner_view_print_get_n_pages (MgView *view)
+planner_view_print_get_n_pages (PlannerView *view)
 {
-	g_return_val_if_fail (MG_IS_VIEW (view), 0);
+	g_return_val_if_fail (PLANNER_IS_VIEW (view), 0);
 	
 	if (view->print_get_n_pages) {
 		return view->print_get_n_pages (view);
@@ -195,9 +195,9 @@ planner_view_print_get_n_pages (MgView *view)
 }
 
 void
-planner_view_print (MgView *view)
+planner_view_print (PlannerView *view)
 {
-	g_return_if_fail (MG_IS_VIEW (view));
+	g_return_if_fail (PLANNER_IS_VIEW (view));
 
 	if (view->print) {
 		view->print (view);
@@ -205,9 +205,9 @@ planner_view_print (MgView *view)
 }
 
 void
-planner_view_print_cleanup (MgView *view)
+planner_view_print_cleanup (PlannerView *view)
 {
-	g_return_if_fail (MG_IS_VIEW (view));
+	g_return_if_fail (PLANNER_IS_VIEW (view));
 
 	if (view->print_cleanup) {
 		view->print_cleanup (view);
@@ -215,16 +215,16 @@ planner_view_print_cleanup (MgView *view)
 }
 
 void
-planner_view_activate_helper (MgView       *view,
+planner_view_activate_helper (PlannerView       *view,
 			 const gchar  *ui_filename,
 			 const gchar  *name,
 			 BonoboUIVerb *verbs)
 {
 	BonoboUIContainer *ui_container;
 
-	g_return_if_fail (MG_IS_VIEW (view));
+	g_return_if_fail (PLANNER_IS_VIEW (view));
 	
-	ui_container = planner_main_window_get_ui_container (view->main_window);
+	ui_container = planner_window_get_ui_container (view->main_window);
 	
 	bonobo_ui_component_set_container (view->ui_component,
 					   BONOBO_OBJREF (ui_container),
@@ -246,9 +246,9 @@ planner_view_activate_helper (MgView       *view,
 }
 
 void
-planner_view_deactivate_helper (MgView *view)
+planner_view_deactivate_helper (PlannerView *view)
 {
-	g_return_if_fail (MG_IS_VIEW (view));
+	g_return_if_fail (PLANNER_IS_VIEW (view));
 
 	bonobo_ui_component_rm (view->ui_component, "/", NULL);
  	bonobo_ui_component_unset_container (view->ui_component, NULL);

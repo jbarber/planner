@@ -20,46 +20,46 @@
  * Boston, MA 02111-1307, USA.
  */
 
-#ifndef __MG_RELATION_ARROW_H__
-#define __MG_RELATION_ARROW_H__
+#ifndef __PLANNER_RELATION_ARROW_H__
+#define __PLANNER_RELATION_ARROW_H__
 
 #include <glib-object.h>
 #include <libgnomecanvas/gnome-canvas.h>
 #include "planner-gantt-row.h"
 
-#define MG_TYPE_RELATION_ARROW            (planner_relation_arrow_get_type ())
-#define MG_RELATION_ARROW(obj)            (GTK_CHECK_CAST ((obj), MG_TYPE_RELATION_ARROW, MgRelationArrow))
-#define MG_RELATION_ARROW_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), MG_TYPE_RELATION_ARROW, MgRelationArrowClass))
-#define MG_IS_RELATION_ARROW(obj)         (GTK_CHECK_TYPE ((obj), MG_TYPE_RELATION_ARROW))
-#define MG_IS_RELATION_ARROW_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), MG_TYPE_RELATION_ARROW))
-#define MG_RELATION_ARROW_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), MG_TYPE_RELATION_ARROW, MgRelationArrowClass))
+#define PLANNER_TYPE_RELATION_ARROW            (planner_relation_arrow_get_type ())
+#define PLANNER_RELATION_ARROW(obj)            (GTK_CHECK_CAST ((obj), PLANNER_TYPE_RELATION_ARROW, PlannerRelationArrow))
+#define PLANNER_RELATION_ARROW_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), PLANNER_TYPE_RELATION_ARROW, PlannerRelationArrowClass))
+#define PLANNER_IS_RELATION_ARROW(obj)         (GTK_CHECK_TYPE ((obj), PLANNER_TYPE_RELATION_ARROW))
+#define PLANNER_IS_RELATION_ARROW_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), PLANNER_TYPE_RELATION_ARROW))
+#define PLANNER_RELATION_ARROW_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), PLANNER_TYPE_RELATION_ARROW, PlannerRelationArrowClass))
 
 
-typedef struct _MgRelationArrow      MgRelationArrow;
-typedef struct _MgRelationArrowClass MgRelationArrowClass;
-typedef struct _MgRelationArrowPriv  MgRelationArrowPriv;
+typedef struct _PlannerRelationArrow      PlannerRelationArrow;
+typedef struct _PlannerRelationArrowClass PlannerRelationArrowClass;
+typedef struct _PlannerRelationArrowPriv  PlannerRelationArrowPriv;
 
-struct _MgRelationArrow {
+struct _PlannerRelationArrow {
 	GnomeCanvasItem      parent;
-	MgRelationArrowPriv *priv;
+	PlannerRelationArrowPriv *priv;
 };
 
-struct _MgRelationArrowClass {
+struct _PlannerRelationArrowClass {
 	GnomeCanvasItemClass parent_class;
 };
 
 
 GType            planner_relation_arrow_get_type (void) G_GNUC_CONST;
 
-MgRelationArrow *planner_relation_arrow_new      (MgGanttRow *successor,
-					     MgGanttRow *predecessor);
+PlannerRelationArrow *planner_relation_arrow_new      (PlannerGanttRow *successor,
+					     PlannerGanttRow *predecessor);
 void
-planner_relation_arrow_set_successor             (MgRelationArrow *arrow,
-					     MgGanttRow      *successor);
+planner_relation_arrow_set_successor             (PlannerRelationArrow *arrow,
+					     PlannerGanttRow      *successor);
 void
-planner_relation_arrow_set_predecessor           (MgRelationArrow *arrow,
-					     MgGanttRow      *predecessor);
+planner_relation_arrow_set_predecessor           (PlannerRelationArrow *arrow,
+					     PlannerGanttRow      *predecessor);
 
 
-#endif /* __MG_RELATION_ARROW_H__ */
+#endif /* __PLANNER_RELATION_ARROW_H__ */
 

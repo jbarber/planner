@@ -26,41 +26,41 @@
  * GTK+ at ftp://ftp.gtk.org/pub/gtk/. 
  */
 
-#ifndef __MG_CALENDAR_H__
-#define __MG_CALENDAR_H__
+#ifndef __PLANNER_CALENDAR_H__
+#define __PLANNER_CALENDAR_H__
 
 #include <gdk/gdk.h>
 #include <gtk/gtkwidget.h>
 
-#define MG_TYPE_CALENDAR                  (planner_calendar_get_type ())
-#define MG_CALENDAR(obj)                  (G_TYPE_CHECK_INSTANCE_CAST ((obj), MG_TYPE_CALENDAR, MgCalendar))
-#define MG_CALENDAR_CLASS(klass)          (G_TYPE_CHECK_CLASS_CAST ((klass), MG_TYPE_CALENDAR, MgCalendarClass))
-#define MG_IS_CALENDAR(obj)               (G_TYPE_CHECK_INSTANCE_TYPE ((obj), MG_TYPE_CALENDAR))
-#define MG_IS_CALENDAR_CLASS(klass)       (G_TYPE_CHECK_CLASS_TYPE ((klass), MG_TYPE_CALENDAR))
-#define MG_CALENDAR_GET_CLASS(obj)        (G_TYPE_INSTANCE_GET_CLASS ((obj), MG_TYPE_CALENDAR, MgCalendarClass))
+#define PLANNER_TYPE_CALENDAR                  (planner_calendar_get_type ())
+#define PLANNER_CALENDAR(obj)                  (G_TYPE_CHECK_INSTANCE_CAST ((obj), PLANNER_TYPE_CALENDAR, PlannerCalendar))
+#define PLANNER_CALENDAR_CLASS(klass)          (G_TYPE_CHECK_CLASS_CAST ((klass), PLANNER_TYPE_CALENDAR, PlannerCalendarClass))
+#define PLANNER_IS_CALENDAR(obj)               (G_TYPE_CHECK_INSTANCE_TYPE ((obj), PLANNER_TYPE_CALENDAR))
+#define PLANNER_IS_CALENDAR_CLASS(klass)       (G_TYPE_CHECK_CLASS_TYPE ((klass), PLANNER_TYPE_CALENDAR))
+#define PLANNER_CALENDAR_GET_CLASS(obj)        (G_TYPE_INSTANCE_GET_CLASS ((obj), PLANNER_TYPE_CALENDAR, PlannerCalendarClass))
 
 
-typedef struct _MgCalendar	      MgCalendar;
-typedef struct _MgCalendarClass       MgCalendarClass;
-
-typedef enum
-{
-	MG_CALENDAR_SHOW_HEADING	= 1 << 0,
-	MG_CALENDAR_SHOW_DAY_NAMES	= 1 << 1,
-	MG_CALENDAR_NO_MONTH_CHANGE	= 1 << 2,
-	MG_CALENDAR_SHOW_WEEK_NUMBERS	= 1 << 3,
-	MG_CALENDAR_WEEK_START_MONDAY	= 1 << 4} MgCalendarDisplayOptions;
+typedef struct _PlannerCalendar	      PlannerCalendar;
+typedef struct _PlannerCalendarClass       PlannerCalendarClass;
 
 typedef enum
 {
-	MG_CALENDAR_MARK_NONE,
-	MG_CALENDAR_MARK_BOLD,
-	MG_CALENDAR_MARK_UNDERLINE,
-	MG_CALENDAR_MARK_SHADE,
-	MG_CALENDAR_MARK_STRIPE
-} MgCalendarMarkType;
+	PLANNER_CALENDAR_SHOW_HEADING	= 1 << 0,
+	PLANNER_CALENDAR_SHOW_DAY_NAMES	= 1 << 1,
+	PLANNER_CALENDAR_NO_MONTH_CHANGE	= 1 << 2,
+	PLANNER_CALENDAR_SHOW_WEEK_NUMBERS	= 1 << 3,
+	PLANNER_CALENDAR_WEEK_START_MONDAY	= 1 << 4} PlannerCalendarDisplayOptions;
 
-struct _MgCalendar
+typedef enum
+{
+	PLANNER_CALENDAR_MARK_NONE,
+	PLANNER_CALENDAR_MARK_BOLD,
+	PLANNER_CALENDAR_MARK_UNDERLINE,
+	PLANNER_CALENDAR_MARK_SHADE,
+	PLANNER_CALENDAR_MARK_STRIPE
+} PlannerCalendarMarkType;
+
+struct _PlannerCalendar
 {
 	GtkWidget widget;
 	
@@ -76,7 +76,7 @@ struct _MgCalendar
 	
 	gint num_marked_dates;
 	gint marked_date[31];
-	MgCalendarDisplayOptions  display_flags;
+	PlannerCalendarDisplayOptions  display_flags;
 	GdkColor marked_date_color[31];
 	
 	GdkGC *gc;
@@ -98,18 +98,18 @@ struct _MgCalendar
 	void (*_gtk_reserved4) (void);
 };
 
-struct _MgCalendarClass
+struct _PlannerCalendarClass
 {
 	GtkWidgetClass parent_class;
 	
 	/* Signal handlers */
-	void (* month_changed)		(MgCalendar *calendar);
-	void (* day_selected)			(MgCalendar *calendar);
-	void (* day_selected_double_click)	(MgCalendar *calendar);
-	void (* prev_month)			(MgCalendar *calendar);
-	void (* next_month)			(MgCalendar *calendar);
-	void (* prev_year)			(MgCalendar *calendar);
-	void (* next_year)			(MgCalendar *calendar);
+	void (* month_changed)		(PlannerCalendar *calendar);
+	void (* day_selected)			(PlannerCalendar *calendar);
+	void (* day_selected_double_click)	(PlannerCalendar *calendar);
+	void (* prev_month)			(PlannerCalendar *calendar);
+	void (* next_month)			(PlannerCalendar *calendar);
+	void (* prev_year)			(PlannerCalendar *calendar);
+	void (* next_year)			(PlannerCalendar *calendar);
 	
 };
 
@@ -117,31 +117,31 @@ struct _MgCalendarClass
 GType	   planner_calendar_get_type	(void) G_GNUC_CONST;
 GtkWidget* planner_calendar_new		(void);
 
-gboolean   planner_calendar_select_month	(MgCalendar *calendar, 
+gboolean   planner_calendar_select_month	(PlannerCalendar *calendar, 
 					 guint	      month,
 					 guint	      year);
-void	   planner_calendar_select_day	(MgCalendar *calendar,
+void	   planner_calendar_select_day	(PlannerCalendar *calendar,
 					 guint	      day);
-gboolean   planner_calendar_unmark_day	(MgCalendar *calendar,
+gboolean   planner_calendar_unmark_day	(PlannerCalendar *calendar,
 					 guint	      day);
-void	   planner_calendar_clear_marks	(MgCalendar *calendar);
+void	   planner_calendar_clear_marks	(PlannerCalendar *calendar);
 
 
-void	   planner_calendar_display_options (MgCalendar		  *calendar,
-					 MgCalendarDisplayOptions flags);
+void	   planner_calendar_display_options (PlannerCalendar		  *calendar,
+					 PlannerCalendarDisplayOptions flags);
 
-void	   planner_calendar_get_date	(MgCalendar *calendar, 
+void	   planner_calendar_get_date	(PlannerCalendar *calendar, 
 				 guint	     *year,
 				 guint	     *month,
 				 guint	     *day);
-void	   planner_calendar_freeze		(MgCalendar *calendar);
-void	   planner_calendar_thaw		(MgCalendar *calendar);
+void	   planner_calendar_freeze		(PlannerCalendar *calendar);
+void	   planner_calendar_thaw		(PlannerCalendar *calendar);
 
 
 
-void       planner_calendar_mark_day (MgCalendar         *calendar,
+void       planner_calendar_mark_day (PlannerCalendar         *calendar,
 				 guint               day,
-				 MgCalendarMarkType  type);
+				 PlannerCalendarMarkType  type);
 
 
-#endif /* __MG_CALENDAR_H__ */
+#endif /* __PLANNER_CALENDAR_H__ */

@@ -30,17 +30,17 @@ enum {
 	LAST_SIGNAL
 };
 
-struct _MgTtableTreePriv {
+struct _PlannerTtableTreePriv {
 	MrpProject	*project;
-	MgMainWindow	*main_window;
+	PlannerWindow	*main_window;
 	GHashTable	*task_dialogs;
 	GHashTable	*resource_dialogs;
 
 	GtkItemFactory	*popup_factory;
 };
 
-static void	 ttable_tree_class_init				(MgTtableTreeClass	*klass);
-static void	 ttable_tree_init				(MgTtableTree		*tree);
+static void	 ttable_tree_class_init				(PlannerTtableTreeClass	*klass);
+static void	 ttable_tree_init				(PlannerTtableTree		*tree);
 static void	 ttable_tree_finalize				(GObject		*object);
 static void	 ttable_tree_popup_edit_resource_cb		(gpointer		 callback_data,
 								 guint			 action,
@@ -57,10 +57,10 @@ static void	 ttable_tree_popup_collapse_all_cb		(gpointer		 callback_data,
 static char	*ttable_tree_item_factory_trans			(const char		*path,
 								 gpointer		 data);
 static void	ttable_tree_tree_view_popup_menu		(GtkWidget		*widget,
-								 MgTtableTree		*tree);
+								 PlannerTtableTree		*tree);
 static gboolean	ttable_tree_tree_view_button_press_event	(GtkTreeView		*tree_view,
 								 GdkEventButton		*event,
-								 MgTtableTree		*tree);
+								 PlannerTtableTree		*tree);
 
 static GtkTreeViewClass *parent_class = NULL;
 static guint signals[LAST_SIGNAL];
@@ -89,24 +89,24 @@ planner_ttable_tree_get_type(void) {
 
 	if (!type) {
 		static const GTypeInfo info = {
-			sizeof (MgTtableTreeClass),
+			sizeof (PlannerTtableTreeClass),
 			NULL,           /* base_init */
 			NULL,           /* base_finalize */
 			(GClassInitFunc) ttable_tree_class_init,
 			NULL,           /* class_finalize */
 			NULL,           /* class_data */
-			sizeof (MgTtableTree),
+			sizeof (PlannerTtableTree),
 			0,              /* n_preallocs */
 			(GInstanceInitFunc) ttable_tree_init
 		};
-		type = g_type_register_static (GTK_TYPE_TREE_VIEW, "MgTtableTree",
+		type = g_type_register_static (GTK_TYPE_TREE_VIEW, "PlannerTtableTree",
 					       &info, 0);
 	}
 	return type;
 }
 
 static void
-ttable_tree_class_init (MgTtableTreeClass *klass)
+ttable_tree_class_init (PlannerTtableTreeClass *klass)
 {
 	GObjectClass *o_class;
 
@@ -145,11 +145,11 @@ ttable_tree_class_init (MgTtableTreeClass *klass)
 }
 
 static void
-ttable_tree_init (MgTtableTree *tree)
+ttable_tree_init (PlannerTtableTree *tree)
 {
-	MgTtableTreePriv *priv;
+	PlannerTtableTreePriv *priv;
 
-	priv = g_new0(MgTtableTreePriv,1);
+	priv = g_new0(PlannerTtableTreePriv,1);
 	tree->priv = priv;
 
 	priv->popup_factory = gtk_item_factory_new (
@@ -171,9 +171,9 @@ ttable_tree_init (MgTtableTree *tree)
 static void
 ttable_tree_finalize (GObject *object)
 {
-	MgTtableTree		*tree;
-	MgTtableTreePriv	*priv;
-	tree = MG_TTABLE_TREE(object);
+	PlannerTtableTree		*tree;
+	PlannerTtableTreePriv	*priv;
+	tree = PLANNER_TTABLE_TREE(object);
 	priv = tree->priv;
 	g_free(priv);
 	if (G_OBJECT_CLASS (parent_class)->finalize) {
@@ -182,8 +182,8 @@ ttable_tree_finalize (GObject *object)
 }
 
 void
-planner_ttable_tree_set_model (MgTtableTree  *tree,
-		          MgTtableModel *model)
+planner_ttable_tree_set_model (PlannerTtableTree  *tree,
+		          PlannerTtableModel *model)
 {
 	gtk_tree_view_set_model (GTK_TREE_VIEW (tree),
 				 GTK_TREE_MODEL (model));
@@ -193,12 +193,12 @@ planner_ttable_tree_set_model (MgTtableTree  *tree,
 static void
 ttable_tree_setup_tree_view (GtkTreeView   *gtk_tree,
 			     MrpProject    *project,
-			     MgTtableModel *model)
+			     PlannerTtableModel *model)
 {
-	MgTtableTree     *tree;
+	PlannerTtableTree     *tree;
 //	GtkTreeSelection *selection;
 
-	tree = MG_TTABLE_TREE(gtk_tree);
+	tree = PLANNER_TTABLE_TREE(gtk_tree);
 
 	planner_ttable_tree_set_model(tree,model);
 
@@ -293,19 +293,19 @@ ttable_tree_add_column(GtkTreeView *tree,
 }
 
 GtkWidget *
-planner_ttable_tree_new (MgMainWindow  *main_window,
-		    MgTtableModel *model)
+planner_ttable_tree_new (PlannerWindow  *main_window,
+		    PlannerTtableModel *model)
 {
 	MrpProject		*project;
-	MgTtableTree		*tree;
-	MgTtableTreePriv	*priv;
+	PlannerTtableTree		*tree;
+	PlannerTtableTreePriv	*priv;
 //	va_list			 args;
 //	gpointer		 str;
 //	gint			 col;
 
-	tree = g_object_new (MG_TYPE_TTABLE_TREE, NULL);
+	tree = g_object_new (PLANNER_TYPE_TTABLE_TREE, NULL);
 
-	project = planner_main_window_get_project (main_window);
+	project = planner_window_get_project (main_window);
 
 	priv = tree->priv;
 
@@ -352,16 +352,16 @@ ttable_tree_popup_expand_all_cb		(gpointer	 callback_data,
 }
 
 void
-planner_ttable_tree_expand_all	(MgTtableTree	*tree)
+planner_ttable_tree_expand_all	(PlannerTtableTree	*tree)
 {
-	g_return_if_fail(MG_IS_TTABLE_TREE(tree));
+	g_return_if_fail(PLANNER_IS_TTABLE_TREE(tree));
 	gtk_tree_view_expand_all(GTK_TREE_VIEW(tree));
 }
 
 void
-planner_ttable_tree_collapse_all	(MgTtableTree	*tree)
+planner_ttable_tree_collapse_all	(PlannerTtableTree	*tree)
 {
-	g_return_if_fail(MG_IS_TTABLE_TREE(tree));
+	g_return_if_fail(PLANNER_IS_TTABLE_TREE(tree));
 	gtk_tree_view_collapse_all(GTK_TREE_VIEW(tree));
 }
 
@@ -375,15 +375,15 @@ ttable_tree_popup_collapse_all_cb	(gpointer	 callback_data,
 }
 
 void
-planner_ttable_tree_edit_resource	(MgTtableTree	*tree)
+planner_ttable_tree_edit_resource	(PlannerTtableTree	*tree)
 {
-	MgTtableTreePriv	*priv;
+	PlannerTtableTreePriv	*priv;
 	MrpResource		*resource;
 	MrpAssignment		*assignment;
 	GtkWidget		*dialog;
 	GList			*list;
 
-	g_return_if_fail(MG_IS_TTABLE_TREE(tree));
+	g_return_if_fail(PLANNER_IS_TTABLE_TREE(tree));
 
 	priv = tree->priv;
 
@@ -404,15 +404,15 @@ planner_ttable_tree_edit_resource	(MgTtableTree	*tree)
 }
 
 void
-planner_ttable_tree_edit_task	(MgTtableTree	*tree)
+planner_ttable_tree_edit_task	(PlannerTtableTree	*tree)
 {
-	MgTtableTreePriv	*priv;
+	PlannerTtableTreePriv	*priv;
 	MrpAssignment		*assignment;
 	MrpTask			*task;
 	GtkWidget		*dialog;
 	GList			*list, *l;
 
-	g_return_if_fail(MG_IS_TTABLE_TREE(tree));
+	g_return_if_fail(PLANNER_IS_TTABLE_TREE(tree));
 
 	priv = tree->priv;
 
@@ -457,12 +457,12 @@ ttable_tree_get_selected_func	(GtkTreeModel	*model,
 	} else if (resource != NULL) {
 		*list = g_list_prepend(*list,resource);
 	} else {
-		fprintf(stderr,"MgTtableTree: Ni resource ni assignment dans la selection, va comprendre\n");
+		fprintf(stderr,"PlannerTtableTree: Ni resource ni assignment dans la selection, va comprendre\n");
 	}
 }
 
 GList*
-planner_ttable_tree_get_selected_items	(MgTtableTree	*tree)
+planner_ttable_tree_get_selected_items	(PlannerTtableTree	*tree)
 {
 	GtkTreeSelection	*selection;
 	GList			*list;
@@ -481,7 +481,7 @@ planner_ttable_tree_get_selected_items	(MgTtableTree	*tree)
 
 static void
 ttable_tree_tree_view_popup_menu	(GtkWidget	*widget,
-					 MgTtableTree	*tree)
+					 PlannerTtableTree	*tree)
 {
 	gint	x, y;
 
@@ -495,18 +495,18 @@ ttable_tree_tree_view_popup_menu	(GtkWidget	*widget,
 static gboolean
 ttable_tree_tree_view_button_press_event	(GtkTreeView	*tree_view,
 						 GdkEventButton	*event,
-						 MgTtableTree	*tree)
+						 PlannerTtableTree	*tree)
 {
 	GtkTreePath		*path;
 	GtkTreeView		*tv;
-	MgTtableTreePriv	*priv;
-	MgTtableModel		*model;
+	PlannerTtableTreePriv	*priv;
+	PlannerTtableModel		*model;
 	GtkItemFactory		*factory;
 
 	tv = GTK_TREE_VIEW(tree);
 	priv = tree->priv;
 	factory = priv->popup_factory;
-	model = MG_TTABLE_MODEL(gtk_tree_view_get_model(tv));
+	model = PLANNER_TTABLE_MODEL(gtk_tree_view_get_model(tv));
 
 	if (event->button == 3) {
 		gtk_widget_grab_focus (GTK_WIDGET (tree));

@@ -42,26 +42,26 @@
 #include "planner-popup-entry.h"
 
 
-static void     mcrl_init                 (MgCellRendererList      *list);
-static void     mcrl_class_init           (MgCellRendererListClass *class);
-static void     mcrl_show_popup           (MgCellRendererPopup     *cell,
+static void     mcrl_init                 (PlannerCellRendererList      *list);
+static void     mcrl_class_init           (PlannerCellRendererListClass *class);
+static void     mcrl_show_popup           (PlannerCellRendererPopup     *cell,
 					   const gchar             *path,
 					   gint                     x1,
 					   gint                     y1,
 					   gint                     x2,
 					   gint                     y2);
-static void     mcrl_hide_popup           (MgCellRendererPopup     *cell);
+static void     mcrl_hide_popup           (PlannerCellRendererPopup     *cell);
 static void     mcrl_selection_changed_cb (GtkTreeSelection        *selection,
-					   MgCellRendererList      *cell);
+					   PlannerCellRendererList      *cell);
 
-static void     mcrl_select_index         (MgCellRendererList      *cell,
+static void     mcrl_select_index         (PlannerCellRendererList      *cell,
 					   gint                     index);
 static gboolean mcrl_button_press_event   (GtkWidget               *widget,
 					   GdkEventButton          *event,
-					   MgCellRendererList      *list);
+					   PlannerCellRendererList      *list);
 
 
-static MgCellRendererPopupClass *parent_class;
+static PlannerCellRendererPopupClass *parent_class;
 
 
 GType
@@ -71,19 +71,19 @@ planner_cell_renderer_list_get_type (void)
 	
 	if (!type) {
 		static const GTypeInfo info = {
-			sizeof (MgCellRendererListClass),
+			sizeof (PlannerCellRendererListClass),
 			NULL,		/* base_init */
 			NULL,		/* base_finalize */
 			(GClassInitFunc) mcrl_class_init,
 			NULL,		/* class_finalize */
 			NULL,		/* class_data */
-			sizeof (MgCellRendererList),
+			sizeof (PlannerCellRendererList),
 			0,              /* n_preallocs */
 			(GInstanceInitFunc) mcrl_init,
 		};
 		
-		type = g_type_register_static (MG_TYPE_CELL_RENDERER_POPUP,
-					       "MgCellRendererList",
+		type = g_type_register_static (PLANNER_TYPE_CELL_RENDERER_POPUP,
+					       "PlannerCellRendererList",
 					       &info,
 					       0);
 	}
@@ -92,14 +92,14 @@ planner_cell_renderer_list_get_type (void)
 }
 
 static void
-mcrl_init (MgCellRendererList *cell)
+mcrl_init (PlannerCellRendererList *cell)
 {
-	MgCellRendererPopup *popup_cell;
+	PlannerCellRendererPopup *popup_cell;
 	GtkWidget           *frame;
 	GtkCellRenderer     *textcell;
 	GtkTreeSelection    *selection;
 
-	popup_cell = MG_CELL_RENDERER_POPUP (cell);
+	popup_cell = PLANNER_CELL_RENDERER_POPUP (cell);
 	
 	frame = gtk_frame_new (NULL);
 	gtk_container_add (GTK_CONTAINER (popup_cell->popup_window), frame);
@@ -137,13 +137,13 @@ mcrl_init (MgCellRendererList *cell)
 }
 
 static void
-mcrl_class_init (MgCellRendererListClass *class)
+mcrl_class_init (PlannerCellRendererListClass *class)
 {
-	MgCellRendererPopupClass *popup_class;
+	PlannerCellRendererPopupClass *popup_class;
 
-	popup_class = MG_CELL_RENDERER_POPUP_CLASS (class);
+	popup_class = PLANNER_CELL_RENDERER_POPUP_CLASS (class);
 
-	parent_class = MG_CELL_RENDERER_POPUP_CLASS (
+	parent_class = PLANNER_CELL_RENDERER_POPUP_CLASS (
 		g_type_class_peek_parent (class));
 
 	popup_class->show_popup = mcrl_show_popup;
@@ -151,19 +151,19 @@ mcrl_class_init (MgCellRendererListClass *class)
 }
 
 static void
-mcrl_show_popup (MgCellRendererPopup *cell,
+mcrl_show_popup (PlannerCellRendererPopup *cell,
 		 const gchar         *path,
 		 gint                 x1,
 		 gint                 y1,
 		 gint                 x2,
 		 gint                 y2)
 {
-	MgCellRendererList *list_cell;
+	PlannerCellRendererList *list_cell;
 	GList              *l;
 	GtkTreeModel       *model;
 	GtkTreeIter         iter;
 
-	list_cell = MG_CELL_RENDERER_LIST (cell);
+	list_cell = PLANNER_CELL_RENDERER_LIST (cell);
 
 	if (list_cell->list == NULL) {
 		return;
@@ -195,12 +195,12 @@ mcrl_show_popup (MgCellRendererPopup *cell,
 }
 
 static void
-mcrl_hide_popup (MgCellRendererPopup *cell)
+mcrl_hide_popup (PlannerCellRendererPopup *cell)
 {
-	MgCellRendererList *list_cell;
+	PlannerCellRendererList *list_cell;
 	GList              *l;
 
-	list_cell = MG_CELL_RENDERER_LIST (cell);
+	list_cell = PLANNER_CELL_RENDERER_LIST (cell);
 	
 	if (parent_class->hide_popup) {
 		parent_class->hide_popup (cell);
@@ -219,14 +219,14 @@ planner_cell_renderer_list_new (void)
 {
 	GObject *cell;
 
-	cell = g_object_new (MG_TYPE_CELL_RENDERER_LIST, NULL);
+	cell = g_object_new (PLANNER_TYPE_CELL_RENDERER_LIST, NULL);
 
 	return GTK_CELL_RENDERER (cell);
 }
 
 static void 
 mcrl_selection_changed_cb (GtkTreeSelection   *selection,
-			   MgCellRendererList *cell)
+			   PlannerCellRendererList *cell)
 {
 	gboolean      selected;
 	GtkTreeModel *model;
@@ -251,7 +251,7 @@ mcrl_selection_changed_cb (GtkTreeSelection   *selection,
 }
 
 static void 
-mcrl_select_index (MgCellRendererList *cell,
+mcrl_select_index (PlannerCellRendererList *cell,
 		   gint                index)
 {
 	GtkTreeView      *tree_view;
@@ -278,10 +278,10 @@ mcrl_select_index (MgCellRendererList *cell,
 static gboolean
 mcrl_button_press_event (GtkWidget          *widget,
 			 GdkEventButton     *event,
-			 MgCellRendererList *list)
+			 PlannerCellRendererList *list)
 {
 	if (event->button == 1) {
-		planner_cell_renderer_popup_hide (MG_CELL_RENDERER_POPUP (list));
+		planner_cell_renderer_popup_hide (PLANNER_CELL_RENDERER_POPUP (list));
 		return TRUE;
 	}
 

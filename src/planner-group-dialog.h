@@ -21,8 +21,8 @@
  * Boston, MA 02111-1307, USA.
  */
 
-#ifndef __MG_RESOURCES_GROUP_DIALOG_H__
-#define __MG_RESOURCES_GROUP_DIALOG_H__
+#ifndef __PLANNER_RESOURCES_GROUP_DIALOG_H__
+#define __PLANNER_RESOURCES_GROUP_DIALOG_H__
 
 #include <gtk/gtkwindow.h>
 #include <libplanner/mrp-project.h>

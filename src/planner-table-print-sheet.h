@@ -20,20 +20,20 @@
  * Boston, MA 02111-1307, USA.
  */
 
-#ifndef __MG_TABLE_PRINT_SHEET_H__
-#define __MG_TABLE_PRINT_SHEET_H__
+#ifndef __PLANNER_TABLE_PRINT_SHEET_H__
+#define __PLANNER_TABLE_PRINT_SHEET_H__
 
 #include <gtk/gtktreeview.h>
 #include "planner-print-job.h"
 #include "planner-view.h"
 
-typedef struct _MgTablePrintSheet MgTablePrintSheet;
+typedef struct _PlannerTablePrintSheet PlannerTablePrintSheet;
 
-void               planner_table_print_sheet_output      (MgTablePrintSheet *sheet);
-gint               planner_table_print_sheet_get_n_pages (MgTablePrintSheet *sheet);
-MgTablePrintSheet *planner_table_print_sheet_new         (MgView            *view,
-						     MgPrintJob        *job,
+void               planner_table_print_sheet_output      (PlannerTablePrintSheet *sheet);
+gint               planner_table_print_sheet_get_n_pages (PlannerTablePrintSheet *sheet);
+PlannerTablePrintSheet *planner_table_print_sheet_new         (PlannerView            *view,
+						     PlannerPrintJob        *job,
 						     GtkTreeView       *tree);
-void               planner_table_print_sheet_free        (MgTablePrintSheet *sheet);
+void               planner_table_print_sheet_free        (PlannerTablePrintSheet *sheet);
 
-#endif /* __MG_TABLE_PRINT_SHEET_H__ */
+#endif /* __PLANNER_TABLE_PRINT_SHEET_H__ */

@@ -39,7 +39,7 @@
 #define WORK_MULTIPLIER (60*60*8.0)
 
 typedef struct {
-	MgMainWindow  *main_window;
+	PlannerWindow  *main_window;
 	MrpTask       *task;
 	GtkWidget     *dialog;
 	GtkWidget     *predecessor_list;
@@ -113,21 +113,21 @@ static void  task_dialog_pred_cell_edited           (GtkCellRendererText  *cell,
 						     gchar                *path_str,
 						     gchar                *new_text,
 						     DialogData           *data);
-static void  task_dialog_cell_type_show_popup       (MgCellRendererList   *cell,
+static void  task_dialog_cell_type_show_popup       (PlannerCellRendererList   *cell,
 						     const gchar          *path_string,
 						     gint                  x1,
 						     gint                  y1,
 						     gint                  x2,
 						     gint                  y2,
 						     DialogData           *data);
-static void  task_dialog_cell_name_show_popup       (MgCellRendererList   *cell,
+static void  task_dialog_cell_name_show_popup       (PlannerCellRendererList   *cell,
 						     const gchar          *path_string,
 						     gint                  x1,
 						     gint                  y1,
 						     gint                  x2,
 						     gint                  y2,
 						     DialogData           *data);
-static void  task_dialog_cell_hide_popup            (MgCellRendererList   *cell,
+static void  task_dialog_cell_hide_popup            (PlannerCellRendererList   *cell,
 						     GtkWidget            *view);
 static void  task_dialog_add_predecessor_cb         (GtkWidget            *widget,
 						     DialogData           *data);
@@ -847,19 +847,19 @@ task_dialog_remove_predecessor_cb (GtkWidget  *widget,
 {
 	GtkTreeView        *tree;
 	MrpTask            *predecessor;
-	MgPredecessorModel *model;
+	PlannerPredecessorModel *model;
 	GtkTreeSelection   *selection;
 	GtkTreeIter         iter;
 
 	tree = GTK_TREE_VIEW (data->predecessor_list);
-	model = MG_PREDECESSOR_MODEL (gtk_tree_view_get_model (tree));
+	model = PLANNER_PREDECESSOR_MODEL (gtk_tree_view_get_model (tree));
 	
 	selection = gtk_tree_view_get_selection (tree);
 	if (!gtk_tree_selection_get_selected (selection, NULL, &iter)) {
                 return;
         }
 	
-	predecessor = MRP_TASK (planner_list_model_get_object (MG_LIST_MODEL (model), &iter));
+	predecessor = MRP_TASK (planner_list_model_get_object (PLANNER_LIST_MODEL (model), &iter));
 	mrp_task_remove_predecessor (data->task, predecessor);
 }
 
@@ -910,7 +910,7 @@ task_dialog_pred_cell_edited (GtkCellRendererText *cell,
 	MrpTask            *task_main;
 	MrpTask            *task_pred;
 	MrpTask            *new_task_pred;
-	MgCellRendererList *planner_cell;
+	PlannerCellRendererList *planner_cell;
 	gint                column;
 	GList              *tasks;
 	gint                lag;
@@ -924,7 +924,7 @@ task_dialog_pred_cell_edited (GtkCellRendererText *cell,
 
 	gtk_tree_model_get_iter (model, &iter, path);
 
-	task_pred = MRP_TASK (planner_list_model_get_object (MG_LIST_MODEL (model),
+	task_pred = MRP_TASK (planner_list_model_get_object (PLANNER_LIST_MODEL (model),
 							&iter)); 
 	task_main = data->task;
 	
@@ -936,7 +936,7 @@ task_dialog_pred_cell_edited (GtkCellRendererText *cell,
 
 	switch (column) {
 	case PREDECESSOR_COL_NAME:
-		planner_cell = MG_CELL_RENDERER_LIST (cell);
+		planner_cell = PLANNER_CELL_RENDERER_LIST (cell);
 
 		tasks = mrp_project_get_all_tasks (project);
 		tasks = g_list_remove (tasks, task_main);
@@ -978,7 +978,7 @@ task_dialog_pred_cell_edited (GtkCellRendererText *cell,
 		break;
 
 	case PREDECESSOR_COL_TYPE:
-		planner_cell = MG_CELL_RENDERER_LIST (cell);
+		planner_cell = PLANNER_CELL_RENDERER_LIST (cell);
 
 		/* The index + 1 happens to be the same as the enum,
 		 * we should probably do this some other way.
@@ -1005,7 +1005,7 @@ task_dialog_pred_cell_edited (GtkCellRendererText *cell,
 }
 
 static void  
-task_dialog_cell_type_show_popup (MgCellRendererList *cell,
+task_dialog_cell_type_show_popup (PlannerCellRendererList *cell,
 				  const gchar        *path_string,
 				  gint                x1,
 				  gint                y1,
@@ -1015,18 +1015,18 @@ task_dialog_cell_type_show_popup (MgCellRendererList *cell,
 {
 	GtkTreeView  *tree;
 	GtkTreeModel *model;
-	MgListModel  *list_model;
+	PlannerListModel  *list_model;
 	GtkTreeIter   iter;
 	GtkTreePath  *path;
 	MrpTask      *predecessor;
 	MrpRelation  *relation;
 	GList        *list;
 
-	g_return_if_fail (MG_IS_CELL_RENDERER_LIST (cell));
+	g_return_if_fail (PLANNER_IS_CELL_RENDERER_LIST (cell));
 
 	tree = GTK_TREE_VIEW (data->predecessor_list);
 	model = gtk_tree_view_get_model (tree);
-	list_model = MG_LIST_MODEL (model);
+	list_model = PLANNER_LIST_MODEL (model);
 	
 	path = gtk_tree_path_new_from_string (path_string);
 	gtk_tree_model_get_iter (model, &iter, path);
@@ -1064,7 +1064,7 @@ task_dialog_cell_type_show_popup (MgCellRendererList *cell,
 }
 
 static void  
-task_dialog_cell_name_show_popup (MgCellRendererList *cell,
+task_dialog_cell_name_show_popup (PlannerCellRendererList *cell,
 				  const gchar        *path_string,
 				  gint                x1,
 				  gint                y1,
@@ -1081,7 +1081,7 @@ task_dialog_cell_name_show_popup (MgCellRendererList *cell,
 	MrpProject   *project;
 	GList        *list, *tasks, *l;
 
-	g_return_if_fail (MG_IS_CELL_RENDERER_LIST (cell));
+	g_return_if_fail (PLANNER_IS_CELL_RENDERER_LIST (cell));
 
 	tree = GTK_TREE_VIEW (data->predecessor_list);
 	model = gtk_tree_view_get_model (tree);	
@@ -1090,7 +1090,7 @@ task_dialog_cell_name_show_popup (MgCellRendererList *cell,
 	
 	task_main = data->task;
 	
-	task_pred = MRP_TASK (planner_list_model_get_object (MG_LIST_MODEL (model),
+	task_pred = MRP_TASK (planner_list_model_get_object (PLANNER_LIST_MODEL (model),
 							&iter));
 
 	g_object_get (task_main, "project", &project, NULL);
@@ -1113,7 +1113,7 @@ task_dialog_cell_name_show_popup (MgCellRendererList *cell,
 }
 
 static void  
-task_dialog_cell_hide_popup (MgCellRendererList *cell,
+task_dialog_cell_hide_popup (PlannerCellRendererList *cell,
 			     GtkWidget          *view) 
 {
 	GList *l;
@@ -1607,7 +1607,7 @@ task_dialog_destroy_cb (GtkWidget  *parent,
 }
 
 GtkWidget *
-planner_task_dialog_new (MgMainWindow *window,
+planner_task_dialog_new (PlannerWindow *window,
 		    MrpTask      *task)
 {
 	DialogData   *data;

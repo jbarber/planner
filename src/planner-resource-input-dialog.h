@@ -21,15 +21,15 @@
  * Boston, MA 02111-1307, USA.
  */
 
-#ifndef __MG_RESOURCE_INPUT_DIALOG_H__
-#define __MG_RESOURCE_INPUT_DIALOG_H__
+#ifndef __PLANNER_RESOURCE_INPUT_DIALOG_H__
+#define __PLANNER_RESOURCE_INPUT_DIALOG_H__
 
 #include <gtk/gtkwidget.h>
 #include <libplanner/mrp-project.h>
 
 GtkWidget * planner_resource_input_dialog_new (MrpProject *project);
 
-#endif /* __MG_RESOURCE_INPUT_DIALOG_H__ */
+#endif /* __PLANNER_RESOURCE_INPUT_DIALOG_H__ */
 
 
 

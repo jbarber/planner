@@ -21,8 +21,8 @@
  * Boston, MA 02111-1307, USA.
  */
 
-#ifndef __MG_GROUP_MODEL_H__
-#define __MG_GROUP_MODEL_H__
+#ifndef __PLANNER_GROUP_MODEL_H__
+#define __PLANNER_GROUP_MODEL_H__
 
 #include <glib-object.h>
 #include <gtk/gtktreemodel.h>
@@ -31,27 +31,27 @@
 #include <libplanner/mrp-group.h>
 #include "planner-list-model.h"
 
-#define MG_TYPE_GROUP_MODEL	          (planner_group_model_get_type ())
-#define MG_GROUP_MODEL(obj)	          (G_TYPE_CHECK_INSTANCE_CAST ((obj), MG_TYPE_GROUP_MODEL, MgGroupModel))
-#define MG_GROUP_MODEL_CLASS(klass)       (G_TYPE_CHECK_CLASS_CAST ((klass), MG_TYPE_GROUP_MODEL, MgGroupModelClass))
-#define MG_IS_GROUP_MODEL(obj)	          (G_TYPE_CHECK_INSTANCE_TYPE ((obj), MG_TYPE_GROUP_MODEL))
-#define MG_IS_GROUP_MODEL_CLASS(klass)    (G_TYPE_CHECK_CLASS_TYPE ((klass), MG_TYPE_GROUP_MODEL))
-#define MG_GROUP_MODEL_GET_CLASS(obj)     (G_TYPE_INSTANCE_GET_CLASS ((obj), MG_TYPE_GROUP_MODEL, MgGroupModelClass))
+#define PLANNER_TYPE_GROUP_MODEL	          (planner_group_model_get_type ())
+#define PLANNER_GROUP_MODEL(obj)	          (G_TYPE_CHECK_INSTANCE_CAST ((obj), PLANNER_TYPE_GROUP_MODEL, PlannerGroupModel))
+#define PLANNER_GROUP_MODEL_CLASS(klass)       (G_TYPE_CHECK_CLASS_CAST ((klass), PLANNER_TYPE_GROUP_MODEL, PlannerGroupModelClass))
+#define PLANNER_IS_GROUP_MODEL(obj)	          (G_TYPE_CHECK_INSTANCE_TYPE ((obj), PLANNER_TYPE_GROUP_MODEL))
+#define PLANNER_IS_GROUP_MODEL_CLASS(klass)    (G_TYPE_CHECK_CLASS_TYPE ((klass), PLANNER_TYPE_GROUP_MODEL))
+#define PLANNER_GROUP_MODEL_GET_CLASS(obj)     (G_TYPE_INSTANCE_GET_CLASS ((obj), PLANNER_TYPE_GROUP_MODEL, PlannerGroupModelClass))
 
-typedef struct _MgGroupModel       MgGroupModel;
-typedef struct _MgGroupModelClass  MgGroupModelClass;
-typedef struct _MgGroupModelPriv   MgGroupModelPriv;
+typedef struct _PlannerGroupModel       PlannerGroupModel;
+typedef struct _PlannerGroupModelClass  PlannerGroupModelClass;
+typedef struct _PlannerGroupModelPriv   PlannerGroupModelPriv;
 
-struct _MgGroupModel
+struct _PlannerGroupModel
 {
-        MgListModel       parent;
+        PlannerListModel       parent;
 
-        MgGroupModelPriv *priv;
+        PlannerGroupModelPriv *priv;
 };
 
-struct _MgGroupModelClass
+struct _PlannerGroupModelClass
 {
-	MgListModelClass  parent_class;
+	PlannerListModelClass  parent_class;
 };
 
 enum {
@@ -65,6 +65,6 @@ enum {
 
 
 GType           planner_group_model_get_type        (void);
-MgGroupModel *  planner_group_model_new             (MrpProject      *project);
+PlannerGroupModel *  planner_group_model_new             (MrpProject      *project);
 
-#endif /* __MG_GROUP_MODEL_H__ */
+#endif /* __PLANNER_GROUP_MODEL_H__ */

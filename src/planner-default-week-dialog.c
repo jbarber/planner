@@ -53,7 +53,7 @@ enum {
 };
 
 typedef struct {
-	MgMainWindow  *main_window;
+	PlannerWindow  *main_window;
 	MrpProject    *project;
 
 	MrpCalendar   *calendar;
@@ -133,7 +133,7 @@ default_week_dialog_parent_destroy_cb (GtkWidget *window, GtkWidget *dialog)
 }
 
 GtkWidget *
-planner_default_week_dialog_new (MgMainWindow *window,
+planner_default_week_dialog_new (PlannerWindow *window,
 			    MrpCalendar  *calendar)
 {
 	DialogData *data;
@@ -142,7 +142,7 @@ planner_default_week_dialog_new (MgMainWindow *window,
 	GtkWidget  *w;
 	gint        i;
 	
-	g_return_val_if_fail (MG_IS_MAIN_WINDOW (window), NULL);
+	g_return_val_if_fail (PLANNER_IS_MAIN_WINDOW (window), NULL);
 	
 	glade = glade_xml_new (GLADEDIR "/calendar-dialog.glade",
 			       "default_week_dialog",
@@ -158,7 +158,7 @@ planner_default_week_dialog_new (MgMainWindow *window,
 
 	data->main_window = window;
 	data->calendar = calendar;
-	data->project = planner_main_window_get_project (window);
+	data->project = planner_window_get_project (window);
 	data->dialog = dialog;
 
 	g_signal_connect_object (window,

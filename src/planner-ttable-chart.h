@@ -1,30 +1,30 @@
-#ifndef __MG_TTABLE_CHART_H__
-#define __MG_TTABLE_CHART_H__
+#ifndef __PLANNER_TTABLE_CHART_H__
+#define __PLANNER_TTABLE_CHART_H__
 
 #include <gtk/gtkwidget.h>
 #include <gtk/gtkvbox.h>
 #include <gtk/gtktreemodel.h>
 #include <libgnomecanvas/gnome-canvas.h>
 
-#define MG_TYPE_TTABLE_CHART             (planner_ttable_chart_get_type ())
-#define MG_TTABLE_CHART(obj)             (GTK_CHECK_CAST ((obj), MG_TYPE_TTABLE_CHART, MgTtableChart))
-#define MG_TTABLE_CHART_CLASS(klass)     (GTK_CHECK_CLASS_CAST ((klass), MG_TYPE_TTABLE_CHART, MgTtableChartClass))
-#define MG_IS_TTABLE_CHART(obj)          (GTK_CHECK_TYPE ((obj), MG_TYPE_TTABLE_CHART))
-#define MG_IS_TTABLE_CHART_CLASS(klass)  (GTK_CHECK_CLASS_TYPE ((obj), MG_TYPE_TTABLE_CHART))
-#define MG_TTABLE_CHART_GET_CLASS(obj)   (GTK_CHECK_GET_CLASS ((obj), MG_TYPE_TTABLE_CHART, MgTtableChartClass))
+#define PLANNER_TYPE_TTABLE_CHART             (planner_ttable_chart_get_type ())
+#define PLANNER_TTABLE_CHART(obj)             (GTK_CHECK_CAST ((obj), PLANNER_TYPE_TTABLE_CHART, PlannerTtableChart))
+#define PLANNER_TTABLE_CHART_CLASS(klass)     (GTK_CHECK_CLASS_CAST ((klass), PLANNER_TYPE_TTABLE_CHART, PlannerTtableChartClass))
+#define PLANNER_IS_TTABLE_CHART(obj)          (GTK_CHECK_TYPE ((obj), PLANNER_TYPE_TTABLE_CHART))
+#define PLANNER_IS_TTABLE_CHART_CLASS(klass)  (GTK_CHECK_CLASS_TYPE ((obj), PLANNER_TYPE_TTABLE_CHART))
+#define PLANNER_TTABLE_CHART_GET_CLASS(obj)   (GTK_CHECK_GET_CLASS ((obj), PLANNER_TYPE_TTABLE_CHART, PlannerTtableChartClass))
 
-typedef struct _MgTtableChart           MgTtableChart;
-typedef struct _MgTtableChartClass      MgTtableChartClass;
-typedef struct _MgTtableChartPriv       MgTtableChartPriv;
+typedef struct _PlannerTtableChart           PlannerTtableChart;
+typedef struct _PlannerTtableChartClass      PlannerTtableChartClass;
+typedef struct _PlannerTtableChartPriv       PlannerTtableChartPriv;
 
-struct _MgTtableChart {
+struct _PlannerTtableChart {
 	GtkVBox			parent_class;
-	MgTtableChartPriv	*priv;
+	PlannerTtableChartPriv	*priv;
 };
 
-struct _MgTtableChartClass {
+struct _PlannerTtableChartClass {
 	GtkVBoxClass	parent_class;
-	void (*set_scroll_adjustments) (MgTtableChart *chart,
+	void (*set_scroll_adjustments) (PlannerTtableChart *chart,
 				        GtkAdjustment *hadj,
 				        GtkAdjustment *vadj);
 };
@@ -32,22 +32,22 @@ struct _MgTtableChartClass {
 GType		 planner_ttable_chart_get_type	(void);
 GtkWidget	*planner_ttable_chart_new		(void);
 GtkWidget	*planner_ttable_chart_new_with_model	(GtkTreeModel	*model);
-GtkTreeModel	*planner_ttable_chart_get_model	(MgTtableChart	*chart);
-void		 planner_ttable_chart_set_model	(MgTtableChart	*chart,
+GtkTreeModel	*planner_ttable_chart_get_model	(PlannerTtableChart	*chart);
+void		 planner_ttable_chart_set_model	(PlannerTtableChart	*chart,
 						 GtkTreeModel	*model);
-void		 planner_ttable_chart_expand_row	(MgTtableChart	*chart,
+void		 planner_ttable_chart_expand_row	(PlannerTtableChart	*chart,
 						 GtkTreePath	*path);
-void		 planner_ttable_chart_collapse_row	(MgTtableChart	*chart,
+void		 planner_ttable_chart_collapse_row	(PlannerTtableChart	*chart,
 						 GtkTreePath	*path);
-void		 planner_ttable_chart_expand_all	(MgTtableChart	*chart);
-void		 planner_ttable_chart_collapse_all	(MgTtableChart	*chart);
-void		 planner_ttable_chart_zoom_in	(MgTtableChart	*chart);
-void		 planner_ttable_chart_zoom_out	(MgTtableChart	*chart);
-void		 planner_ttable_chart_can_zoom	(MgTtableChart	*chart,
+void		 planner_ttable_chart_expand_all	(PlannerTtableChart	*chart);
+void		 planner_ttable_chart_collapse_all	(PlannerTtableChart	*chart);
+void		 planner_ttable_chart_zoom_in	(PlannerTtableChart	*chart);
+void		 planner_ttable_chart_zoom_out	(PlannerTtableChart	*chart);
+void		 planner_ttable_chart_can_zoom	(PlannerTtableChart	*chart,
 		                                 gboolean	*in,
 			                         gboolean	*out);
-void		 planner_ttable_chart_zoom_to_fit    (MgTtableChart	*chart);
-gdouble		 planner_ttable_chart_get_zoom       (MgTtableChart	*chart);
-void		 planner_ttable_chart_status_updated	(MgTtableChart	*chart,
+void		 planner_ttable_chart_zoom_to_fit    (PlannerTtableChart	*chart);
+gdouble		 planner_ttable_chart_get_zoom       (PlannerTtableChart	*chart);
+void		 planner_ttable_chart_status_updated	(PlannerTtableChart	*chart,
 						 gchar		*message);
 #endif

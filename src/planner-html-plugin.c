@@ -28,14 +28,15 @@
 #include <glade/glade.h>
 #include <gtk/gtkradiobutton.h>
 #include <gtk/gtkmessagedialog.h>
+#include <gtk/gtkentry.h>
 #include <gtk/gtkstock.h>
 #include <libgnome/gnome-i18n.h>
 #include <libgnomeui/gnome-file-entry.h>
-#include "planner-main-window.h"
+#include "planner-window.h"
 #include "planner-plugin.h"
 
-struct _MgPluginPriv {
-	MgMainWindow *main_window;
+struct _PlannerPluginPriv {
+	PlannerWindow *main_window;
 	GtkWidget    *dialog;
 	GtkWidget    *local_rbutton;
 	GtkWidget    *local_fileentry;
@@ -48,21 +49,21 @@ static void html_output_plugin_export           (BonoboUIComponent *component,
 						 const gchar       *cname);
 static void 
 html_output_plugin_ok_button_clicked            (GtkButton         *button,
-						 MgPlugin          *plugin);
+						 PlannerPlugin          *plugin);
 static void
 html_output_plugin_cancel_button_clicked        (GtkButton         *button,
-						 MgPlugin          *plugin);
+						 PlannerPlugin          *plugin);
 static void html_output_plugin_local_toggled    (GtkToggleButton   *button,
-						 MgPlugin          *plugin);
+						 PlannerPlugin          *plugin);
 static void html_output_plugin_server_toggled   (GtkToggleButton   *button,
-						 MgPlugin          *plugin);
-static void html_output_plugin_do_local_export  (MgPlugin          *plugin,
+						 PlannerPlugin          *plugin);
+static void html_output_plugin_do_local_export  (PlannerPlugin          *plugin,
 						 const gchar       *path);
 
 
-void        plugin_init                  (MgPlugin          *plugin,
-					  MgMainWindow      *main_window);
-void        plugin_exit                  (MgPlugin          *plugin);
+void        plugin_init                  (PlannerPlugin          *plugin,
+					  PlannerWindow      *main_window);
+void        plugin_exit                  (PlannerPlugin          *plugin);
 
 static BonoboUIVerb verbs[] = {
 	BONOBO_UI_VERB ("Html Export", html_output_plugin_export),
@@ -74,7 +75,7 @@ html_output_plugin_export (BonoboUIComponent *component,
 			   gpointer           user_data,
 			   const gchar       *cname)
 {
-	MgPluginPriv *priv = MG_PLUGIN (user_data)->priv;
+	PlannerPluginPriv *priv = PLANNER_PLUGIN (user_data)->priv;
 	GladeXML     *glade;
 	GtkWidget    *ok_button;
 	GtkWidget    *cancel_button;
@@ -114,18 +115,17 @@ html_output_plugin_export (BonoboUIComponent *component,
 }
 
 static void 
-html_output_plugin_ok_button_clicked (GtkButton *button, MgPlugin *plugin)
+html_output_plugin_ok_button_clicked (GtkButton *button, PlannerPlugin *plugin)
 {
-	MgPluginPriv *priv = plugin->priv;
-	gchar        *path;
+	PlannerPluginPriv *priv = plugin->priv;
+	GtkWidget         *dialog;
+	gint               res;
+	const gchar       *path;
 	
 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (priv->local_rbutton))) {
 		path = gnome_file_entry_get_full_path (GNOME_FILE_ENTRY (priv->local_fileentry), FALSE);
 
 		if (g_file_test (path, G_FILE_TEST_IS_DIR)) {
-			GtkWidget *dialog;
-			gint       res;
-			
 			dialog = gtk_message_dialog_new (GTK_WINDOW (priv->dialog),
 							 GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
 							 GTK_MESSAGE_WARNING,
@@ -136,9 +136,6 @@ html_output_plugin_ok_button_clicked (GtkButton *button, MgPlugin *plugin)
 			gtk_widget_destroy (dialog);
 		}
 		else if (g_file_test (path, G_FILE_TEST_EXISTS)) {
-			GtkWidget *dialog;
-			gint       res;
-			
 			dialog = gtk_message_dialog_new (GTK_WINDOW (priv->dialog),
 							 GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
 							 GTK_MESSAGE_WARNING,
@@ -150,7 +147,7 @@ html_output_plugin_ok_button_clicked (GtkButton *button, MgPlugin *plugin)
 
 			switch (res) {
 			case GTK_RESPONSE_YES:
-				html_output_plugin_do_local_export (plugin, 
+				html_output_plugin_do_local_export (plugin,
 								    path);
 				gtk_widget_destroy (priv->dialog);
 				return;
@@ -166,22 +163,27 @@ html_output_plugin_ok_button_clicked (GtkButton *button, MgPlugin *plugin)
 			gtk_widget_destroy (priv->dialog);
 		}
 	} else {
-		/* Path from server_entry */
+		GtkEntry *entry;
+		
+		entry = GTK_ENTRY (gnome_entry_gtk_entry (GNOME_ENTRY (priv->server_entry)));
+			
+		path = gtk_entry_get_text (entry);
+		html_output_plugin_do_local_export (plugin, path);
 	}
 }
 
 static void
-html_output_plugin_cancel_button_clicked (GtkButton *button, MgPlugin *plugin)
+html_output_plugin_cancel_button_clicked (GtkButton *button, PlannerPlugin *plugin)
 {
-	MgPluginPriv *priv = plugin->priv;
+	PlannerPluginPriv *priv = plugin->priv;
 	
 	gtk_widget_destroy (priv->dialog);
 }
 
 static void
-html_output_plugin_local_toggled (GtkToggleButton *button, MgPlugin *plugin)
+html_output_plugin_local_toggled (GtkToggleButton *button, PlannerPlugin *plugin)
 {
-	MgPluginPriv *priv   = plugin->priv;
+	PlannerPluginPriv *priv   = plugin->priv;
 	gboolean      active = FALSE;
 	
 	if (gtk_toggle_button_get_active (button)) {
@@ -192,9 +194,9 @@ html_output_plugin_local_toggled (GtkToggleButton *button, MgPlugin *plugin)
 }
 
 static void
-html_output_plugin_server_toggled (GtkToggleButton *button, MgPlugin *plugin)
+html_output_plugin_server_toggled (GtkToggleButton *button, PlannerPlugin *plugin)
 {
-	MgPluginPriv *priv   = plugin->priv;
+	PlannerPluginPriv *priv   = plugin->priv;
 	gboolean      active = FALSE;
 	
 	if (gtk_toggle_button_get_active (button)) {
@@ -205,13 +207,13 @@ html_output_plugin_server_toggled (GtkToggleButton *button, MgPlugin *plugin)
 }
 
 static void
-html_output_plugin_do_local_export (MgPlugin *plugin, const gchar *path)
+html_output_plugin_do_local_export (PlannerPlugin *plugin, const gchar *path)
 {
-	MgPluginPriv *priv = plugin->priv;
+	PlannerPluginPriv *priv = plugin->priv;
 	MrpProject   *project;
 	GError       *error = NULL;
 
-	project = planner_main_window_get_project (priv->main_window);
+	project = planner_window_get_project (priv->main_window);
 	
 	if (!mrp_project_export (project, path,
 				 "Planner HTML",
@@ -222,17 +224,17 @@ html_output_plugin_do_local_export (MgPlugin *plugin, const gchar *path)
 }
 
 G_MODULE_EXPORT void 
-plugin_init (MgPlugin *plugin, MgMainWindow *main_window)
+plugin_init (PlannerPlugin *plugin, PlannerWindow *main_window)
 {
-	MgPluginPriv      *priv;
+	PlannerPluginPriv      *priv;
 	BonoboUIContainer *ui_container;
 	BonoboUIComponent *ui_component;
 	
-	priv = g_new0 (MgPluginPriv, 1);
+	priv = g_new0 (PlannerPluginPriv, 1);
 	plugin->priv = priv;
 	priv->main_window = main_window;
 	
-	ui_container = planner_main_window_get_ui_container (main_window);
+	ui_container = planner_window_get_ui_container (main_window);
 	ui_component = bonobo_ui_component_new_default ();
 	
 	bonobo_ui_component_set_container (ui_component, 
@@ -252,7 +254,7 @@ plugin_init (MgPlugin *plugin, MgMainWindow *main_window)
 }
 
 G_MODULE_EXPORT void 
-plugin_exit (MgPlugin *plugin) 
+plugin_exit (PlannerPlugin *plugin) 
 {
 	g_message ("Test exit");
 }

@@ -61,26 +61,26 @@ TODO: Implement other types, remove the arguments from the geometry-changed sign
 typedef struct {
 	gdouble x;
 	gdouble y;
-} MgPoint;
+} PlannerPoint;
 
 typedef enum {
-	MG_ARROW_UP,
-	MG_ARROW_DOWN,
-	MG_ARROW_RIGHT,
-	MG_ARROW_LEFT
-} MgArrowDir;
+	PLANNER_ARROW_UP,
+	PLANNER_ARROW_DOWN,
+	PLANNER_ARROW_RIGHT,
+	PLANNER_ARROW_LEFT
+} PlannerArrowDir;
 	
-struct _MgRelationArrowPriv {
-	MgGanttRow      *successor;
-	MgGanttRow      *predecessor;
+struct _PlannerRelationArrowPriv {
+	PlannerGanttRow      *successor;
+	PlannerGanttRow      *predecessor;
 	MrpRelationType  type;
 
 	gboolean         successor_visible;
 	gboolean         predecessor_visible;
 
 	guint            num_points;
-	MgPoint          points[6];
-	MgArrowDir       arrow_dir;
+	PlannerPoint          points[6];
+	PlannerArrowDir       arrow_dir;
 		
 	gdouble          x1;
 	gdouble          y1;
@@ -91,8 +91,8 @@ struct _MgRelationArrowPriv {
 };
 
 
-static void    relation_arrow_init         (MgRelationArrow       *mra);
-static void    relation_arrow_class_init   (MgRelationArrowClass  *klass);
+static void    relation_arrow_init         (PlannerRelationArrow       *mra);
+static void    relation_arrow_class_init   (PlannerRelationArrowClass  *klass);
 static void    relation_arrow_finalize     (GObject               *object);
 static void    relation_arrow_set_property (GObject               *object,
 					    guint                  prop_id,
@@ -133,19 +133,19 @@ planner_relation_arrow_get_type (void)
 
 	if (!type) {
 		static const GTypeInfo info = {
-			sizeof (MgRelationArrowClass),
+			sizeof (PlannerRelationArrowClass),
 			NULL,		/* base_init */
 			NULL,		/* base_finalize */
 			(GClassInitFunc) relation_arrow_class_init,
 			NULL,		/* class_finalize */
 			NULL,		/* class_data */
-			sizeof (MgRelationArrow),
+			sizeof (PlannerRelationArrow),
 			0,              /* n_preallocs */
 			(GInstanceInitFunc) relation_arrow_init
 		};
 
 		type = g_type_register_static (GNOME_TYPE_CANVAS_ITEM,
-					       "MgRelationArrow",
+					       "PlannerRelationArrow",
 					       &info,
 					       0);
 	}
@@ -154,7 +154,7 @@ planner_relation_arrow_get_type (void)
 }
 
 static void
-relation_arrow_class_init (MgRelationArrowClass *klass)
+relation_arrow_class_init (PlannerRelationArrowClass *klass)
 {
 	GnomeCanvasItemClass *item_class;
 	GObjectClass         *o_class;
@@ -184,25 +184,25 @@ relation_arrow_class_init (MgRelationArrowClass *klass)
 }
 
 static void
-relation_arrow_init (MgRelationArrow *item)
+relation_arrow_init (PlannerRelationArrow *item)
 {
-	MgRelationArrowPriv *priv;
+	PlannerRelationArrowPriv *priv;
 
-	priv = g_new0 (MgRelationArrowPriv, 1);
+	priv = g_new0 (PlannerRelationArrowPriv, 1);
 	item->priv = priv;
 	
 	priv->successor_visible = TRUE;
 	priv->predecessor_visible = TRUE;
 
 	priv->type = MRP_RELATION_FS;
-	priv->arrow_dir = MG_ARROW_DOWN;
+	priv->arrow_dir = PLANNER_ARROW_DOWN;
 }
 
 static void
 relation_arrow_finalize (GObject *object)
 {
-	MgRelationArrow     *arrow = MG_RELATION_ARROW (object);
-	MgRelationArrowPriv *priv;
+	PlannerRelationArrow     *arrow = PLANNER_RELATION_ARROW (object);
+	PlannerRelationArrowPriv *priv;
 
 	priv = arrow->priv;
 	
@@ -230,9 +230,9 @@ relation_arrow_set_property (GObject      *object,
 			     const GValue *value,
 			     GParamSpec   *pspec)
 {
-	MgRelationArrow *arrow;
+	PlannerRelationArrow *arrow;
 
-	arrow = MG_RELATION_ARROW (object);
+	arrow = PLANNER_RELATION_ARROW (object);
 	
 	switch (prop_id) {
 	case PROP_TYPE:
@@ -245,9 +245,9 @@ relation_arrow_set_property (GObject      *object,
 }
 
 static void
-relation_arrow_update_line_segments (MgRelationArrow *arrow)
+relation_arrow_update_line_segments (PlannerRelationArrow *arrow)
 {
-	MgRelationArrowPriv *priv;
+	PlannerRelationArrowPriv *priv;
 	gdouble              px1, py1, px2, py2;
 	gdouble              sx1, sy1, sx2, sy2;
 	gdouble              y;
@@ -279,14 +279,14 @@ relation_arrow_update_line_segments (MgRelationArrow *arrow)
 		priv->points[2].x = MAX (px2 + MIN_SPACING, sx1);
 		if (sy1 > py1) {
 			priv->points[2].y = sy1;
-			priv->arrow_dir = MG_ARROW_DOWN;
+			priv->arrow_dir = PLANNER_ARROW_DOWN;
 		} else {
 			priv->points[2].y = sy2;
-			priv->arrow_dir = MG_ARROW_UP;
+			priv->arrow_dir = PLANNER_ARROW_UP;
 		}
 	} else {
 		priv->num_points = 6;
-		priv->arrow_dir = MG_ARROW_RIGHT;
+		priv->arrow_dir = PLANNER_ARROW_RIGHT;
 
 		priv->points[0].x = px2;
 		priv->points[0].y = py1 + (py2 - py1) / 2;
@@ -317,20 +317,20 @@ relation_arrow_update_line_segments (MgRelationArrow *arrow)
 }
 
 static void
-relation_arrow_geometry_changed (MgGanttRow      *row,
+relation_arrow_geometry_changed (PlannerGanttRow      *row,
 				 gdouble          x1,
 				 gdouble          y1,
 				 gdouble          x2,
 				 gdouble          y2,
-				 MgRelationArrow *arrow)
+				 PlannerRelationArrow *arrow)
 {
 	relation_arrow_update_line_segments (arrow);
 }
 
 static void
-relation_arrow_successor_visibility_changed (MgGanttRow      *row,
+relation_arrow_successor_visibility_changed (PlannerGanttRow      *row,
 					     gboolean         visible,
-					     MgRelationArrow *arrow)
+					     PlannerRelationArrow *arrow)
 {
 	arrow->priv->successor_visible = visible;
 	
@@ -342,9 +342,9 @@ relation_arrow_successor_visibility_changed (MgGanttRow      *row,
 }
 
 static void
-relation_arrow_predecessor_visibility_changed (MgGanttRow      *row,
+relation_arrow_predecessor_visibility_changed (PlannerGanttRow      *row,
 					       gboolean         visible,
-					       MgRelationArrow *arrow)
+					       PlannerRelationArrow *arrow)
 {
 	arrow->priv->predecessor_visible = visible;
 
@@ -356,13 +356,13 @@ relation_arrow_predecessor_visibility_changed (MgGanttRow      *row,
 }
 
 void
-planner_relation_arrow_set_predecessor (MgRelationArrow *arrow,
-				   MgGanttRow      *predecessor)
+planner_relation_arrow_set_predecessor (PlannerRelationArrow *arrow,
+				   PlannerGanttRow      *predecessor)
 {
-	MgRelationArrowPriv *priv; 
+	PlannerRelationArrowPriv *priv; 
 	
-	g_return_if_fail (MG_IS_RELATION_ARROW (arrow));
-	g_return_if_fail (MG_IS_GANTT_ROW (predecessor));
+	g_return_if_fail (PLANNER_IS_RELATION_ARROW (arrow));
+	g_return_if_fail (PLANNER_IS_GANTT_ROW (predecessor));
 
 	priv = arrow->priv;
 
@@ -394,13 +394,13 @@ planner_relation_arrow_set_predecessor (MgRelationArrow *arrow,
 }
 
 void
-planner_relation_arrow_set_successor (MgRelationArrow *arrow,
-				 MgGanttRow      *successor)
+planner_relation_arrow_set_successor (PlannerRelationArrow *arrow,
+				 PlannerGanttRow      *successor)
 {
-	MgRelationArrowPriv *priv; 
+	PlannerRelationArrowPriv *priv; 
 
-	g_return_if_fail (MG_IS_RELATION_ARROW (arrow));
-	g_return_if_fail (MG_IS_GANTT_ROW (successor));
+	g_return_if_fail (PLANNER_IS_RELATION_ARROW (arrow));
+	g_return_if_fail (PLANNER_IS_GANTT_ROW (successor));
 
 	priv = arrow->priv;
 
@@ -430,17 +430,17 @@ planner_relation_arrow_set_successor (MgRelationArrow *arrow,
 	}
 }
 
-MgRelationArrow *
-planner_relation_arrow_new (MgGanttRow *successor, MgGanttRow *predecessor)
+PlannerRelationArrow *
+planner_relation_arrow_new (PlannerGanttRow *successor, PlannerGanttRow *predecessor)
 {
-	MgRelationArrow   *arrow;
+	PlannerRelationArrow   *arrow;
 	GnomeCanvasGroup  *root;
 
 	root = gnome_canvas_root (GNOME_CANVAS_ITEM (successor)->canvas);
 
-	arrow = MG_RELATION_ARROW (gnome_canvas_item_new (
+	arrow = PLANNER_RELATION_ARROW (gnome_canvas_item_new (
 					   root,
-					   MG_TYPE_RELATION_ARROW,
+					   PLANNER_TYPE_RELATION_ARROW,
 					   NULL));
 	
 	planner_relation_arrow_set_successor (arrow, successor);
@@ -450,13 +450,13 @@ planner_relation_arrow_new (MgGanttRow *successor, MgGanttRow *predecessor)
 }
 
 static void
-relation_arrow_get_bounds (MgRelationArrow *arrow,
+relation_arrow_get_bounds (PlannerRelationArrow *arrow,
 			   gdouble         *x1,
 			   gdouble         *y1,
 			   gdouble         *x2,
 			   gdouble         *y2)
 {
-	MgRelationArrowPriv *priv;
+	PlannerRelationArrowPriv *priv;
 	GnomeCanvasItem     *item;
 	gdouble              wx1, wy1, wx2, wy2;
 	gint                 cx1, cy1, cx2, cy2;
@@ -503,10 +503,10 @@ relation_arrow_update (GnomeCanvasItem *item,
 		       ArtSVP          *clip_path,
 		       gint              flags)
 {
-	MgRelationArrow *arrow;
+	PlannerRelationArrow *arrow;
 	gdouble          x1, y1, x2, y2;
 
-	arrow = MG_RELATION_ARROW (item);
+	arrow = PLANNER_RELATION_ARROW (item);
 	
 	GNOME_CANVAS_ITEM_CLASS (parent_class)->update (item,
 							affine,
@@ -519,7 +519,7 @@ relation_arrow_update (GnomeCanvasItem *item,
 }
 
 static void
-relation_arrow_setup_arrow (MgArrowDir dir,
+relation_arrow_setup_arrow (PlannerArrowDir dir,
 			    GdkPoint   points[4],
 			    gdouble    cx1,
 			    gdouble    cy1,
@@ -527,7 +527,7 @@ relation_arrow_setup_arrow (MgArrowDir dir,
 			    gdouble    cy2)
 {
 	switch (dir) {
-	case MG_ARROW_DOWN:
+	case PLANNER_ARROW_DOWN:
 		points[0].x = cx2;
 		points[0].y = cy2;
 		points[1].x = cx2 - ARROW_SIZE / 2;
@@ -537,7 +537,7 @@ relation_arrow_setup_arrow (MgArrowDir dir,
 		points[3].x = cx2;
 		points[3].y = cy2 + 1;
 		break;
-	case MG_ARROW_UP:
+	case PLANNER_ARROW_UP:
 		points[0].x = cx2;
 		points[0].y = cy2 + 1;
 		points[1].x = cx2 + ARROW_SIZE / 2;
@@ -547,7 +547,7 @@ relation_arrow_setup_arrow (MgArrowDir dir,
 		points[3].x = cx2 + 1;
 		points[3].y = cy2;
 		break;
-	case MG_ARROW_RIGHT:
+	case PLANNER_ARROW_RIGHT:
 		points[0].x = cx2;
 		points[0].y = cy2;
 		points[1].x = cx2 - ARROW_SIZE;
@@ -557,7 +557,7 @@ relation_arrow_setup_arrow (MgArrowDir dir,
 		points[3].x = cx2;
 		points[3].y = cy2;
 		break;
-	case MG_ARROW_LEFT:
+	case PLANNER_ARROW_LEFT:
 		points[0].x = cx2;
 		points[0].y = cy2;
 		points[1].x = cx2 + (ARROW_SIZE - 0);
@@ -581,8 +581,8 @@ relation_arrow_draw (GnomeCanvasItem *item,
 		     gint             width,
 		     gint             height)
 {
-	MgRelationArrow     *arrow;
-	MgRelationArrowPriv *priv;
+	PlannerRelationArrow     *arrow;
+	PlannerRelationArrowPriv *priv;
 #ifdef USE_AFFINE
 	gdouble              i2c[6];
 	ArtPoint             i1, i2, c1, c2;
@@ -596,7 +596,7 @@ relation_arrow_draw (GnomeCanvasItem *item,
 	GdkPoint             points[4];
 	gint                 i;
 	
-	arrow = MG_RELATION_ARROW (item);
+	arrow = PLANNER_RELATION_ARROW (item);
 	priv = arrow->priv;
 
 	gc = gdk_gc_new (drawable);

@@ -19,14 +19,14 @@
  * Boston, MA 02111-1307, USA.
  */
 
-#ifndef __MG_TASK_DIALOG_H__
-#define __MG_TASK_DIALOG_H__
+#ifndef __PLANNER_TASK_DIALOG_H__
+#define __PLANNER_TASK_DIALOG_H__
 
 #include <gtk/gtkwidget.h>
 #include <libplanner/mrp-project.h>
-#include "planner-main-window.h"
+#include "planner-window.h"
 
-GtkWidget * planner_task_dialog_new (MgMainWindow *window,
+GtkWidget * planner_task_dialog_new (PlannerWindow *window,
 				MrpTask      *task);
 
 #endif /* __TASK_DIALOG_H__ */

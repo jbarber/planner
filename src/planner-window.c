@@ -1,5 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
+ * Copyright (C) 2003      Imendio HB
  * Copyright (C) 2002-2003 CodeFactory AB
  * Copyright (C) 2002-2003 Richard Hult <richard@imendio.com>
  * Copyright (C) 2002-2003 Mikael Hallendal <micke@imendio.com>
@@ -52,7 +53,7 @@
 #include <libegg/recent-files/egg-recent-view-bonobo.h>
 #include "planner-marshal.h"
 #include "planner-sidebar.h"
-#include "planner-main-window.h"
+#include "planner-window.h"
 #include "planner-view-loader.h"
 #include "planner-plugin-loader.h"
 #include "planner-project-properties.h"
@@ -61,15 +62,18 @@
 #include "planner-day-type-dialog.h"
 #include "planner-print-dialog.h"
 #include "planner-view.h"
+#include "planner-cmd-manager.h"
 
 #define d(x)
 #define GCONF_PATH "/apps/planner"
 
-struct _MgMainWindowPriv {
-	MgApplication       *application;
+struct _PlannerWindowPriv {
+	PlannerApplication  *application;
 
 	BonoboUIContainer   *ui_container;
 	BonoboUIComponent   *ui_component;
+
+	PlannerCmdManager   *cmd_manager;
 
 	MrpProject          *project;
 
@@ -81,7 +85,7 @@ struct _MgMainWindowPriv {
 	GtkWidget           *day_type_dialog;
 	GtkWidget           *phase_dialog;
 
-	MgView              *current_view;
+	PlannerView         *current_view;
 	GList               *views;
 	GList               *plugins;
 	GTimer              *last_saved;
@@ -97,98 +101,98 @@ enum {
 	LAST_SIGNAL
 };
 
-static void     main_window_class_init          (MgMainWindowClass *klass);
-static void     main_window_init                (MgMainWindow      *window);
-static void     main_window_finalize            (GObject           *object);
-static void     main_window_populate            (MgMainWindow      *window);
-static void     main_window_view_selected       (MgSidebar         *sidebar,
-						 gint               index,
-						 MgMainWindow      *window);
-static void     main_window_new_cb              (BonoboUIComponent *component, 
-						 gpointer           data, 
-						 const char        *cname);
-static void     main_window_open_cb             (BonoboUIComponent *component,
-						 gpointer           data,
-						 const char        *cname);
-static void     main_window_save_as_cb          (BonoboUIComponent *component,
-						 gpointer           data,
-						 const char        *cname);
-static void     main_window_save_cb             (BonoboUIComponent *component,
-						 gpointer           data,
-						 const char        *cname);
-static void     main_window_print_cb            (BonoboUIComponent *component,
-						 gpointer           data,
-						 const char        *cname);
-static void     main_window_print_preview_cb    (BonoboUIComponent *component,
-						 gpointer           data,
-						 const char        *cname);
-static void     main_window_properties_cb       (BonoboUIComponent *component,
-						 gpointer           data, 
-						 const char        *cname);
-static void     main_window_close_cb            (BonoboUIComponent *component,
-						 gpointer           data,
-						 const char        *cname);
-static void     main_window_exit_cb             (BonoboUIComponent *component,
-						 gpointer           data,
-						 const char        *cname);
-static void     main_window_undo_cb             (BonoboUIComponent *component,
-						 gpointer           data,
-						 const char        *cname);
-static void     main_window_redo_cb             (BonoboUIComponent *component,
-						 gpointer           data,
-						 const char        *cname);
-static void     main_window_project_props_cb    (BonoboUIComponent *component,
-						 gpointer           data,
-						 const char        *cname);
-static void     main_window_manage_calendars_cb (BonoboUIComponent *component,
-						 gpointer           data,
-						 const char        *cname);
-static void     main_window_edit_day_types_cb   (BonoboUIComponent *component,
-						 gpointer           data,
-						 const char        *cname);
-static void     main_window_edit_phases_cb      (BonoboUIComponent *component,
-						 gpointer           data,
-						 const char        *cname);
-static void     main_window_preferences_cb      (BonoboUIComponent *component,
-						 gpointer           data,
-						 const char        *cname);
-static void     main_window_ui_component_event  (BonoboUIComponent *comp,
-						 const gchar       *path,
-						 Bonobo_UIComponent_EventType  type,
-						 const gchar       *state_string,
-						 MgMainWindow      *window);
-static void     main_window_help_cb             (BonoboUIComponent *component, 
-						 gpointer           data,
-						 const char        *cname);
-static void     main_window_about_cb            (BonoboUIComponent *component, 
-						 gpointer           data,
-						 const char        *cname);
-static gboolean main_window_delete_event_cb     (MgMainWindow      *window,
-						 gpointer           user_data);
-static void    
-main_window_project_needs_saving_changed_cb     (MrpProject        *project,
-						 gboolean           needs_saving,
-						 MgMainWindow      *window);
-static void
-main_window_project_notify_name_cb              (MrpProject        *project,
-						 GParamSpec        *pspec,
-						 MgMainWindow      *window);
-static gboolean main_window_confirm_exit_run    (MgMainWindow      *window);
-static gboolean main_window_do_save             (MgMainWindow      *window,
-						 gboolean           force);
-static gboolean main_window_do_save_as          (MgMainWindow      *window);
+static void       window_class_init                      (PlannerWindowClass           *klass);
+static void       window_init                            (PlannerWindow                *window);
+static void       window_finalize                        (GObject                      *object);
+static void       window_populate                        (PlannerWindow                *window);
+static void       window_view_selected                   (PlannerSidebar               *sidebar,
+							  gint                          index,
+							  PlannerWindow                *window);
+static void       window_new_cb                          (BonoboUIComponent            *component,
+							  gpointer                      data,
+							  const char                   *cname);
+static void       window_open_cb                         (BonoboUIComponent            *component,
+							  gpointer                      data,
+							  const char                   *cname);
+static void       window_save_as_cb                      (BonoboUIComponent            *component,
+							  gpointer                      data,
+							  const char                   *cname);
+static void       window_save_cb                         (BonoboUIComponent            *component,
+							  gpointer                      data,
+							  const char                   *cname);
+static void       window_print_cb                        (BonoboUIComponent            *component,
+							  gpointer                      data,
+							  const char                   *cname);
+static void       window_print_preview_cb                (BonoboUIComponent            *component,
+							  gpointer                      data,
+							  const char                   *cname);
+static void       window_properties_cb                   (BonoboUIComponent            *component,
+							  gpointer                      data,
+							  const char                   *cname);
+static void       window_close_cb                        (BonoboUIComponent            *component,
+							  gpointer                      data,
+							  const char                   *cname);
+static void       window_exit_cb                         (BonoboUIComponent            *component,
+							  gpointer                      data,
+							  const char                   *cname);
+static void       window_undo_cb                         (BonoboUIComponent            *component,
+							  gpointer                      data,
+							  const char                   *cname);
+static void       window_redo_cb                         (BonoboUIComponent            *component,
+							  gpointer                      data,
+							  const char                   *cname);
+static void       window_project_props_cb                (BonoboUIComponent            *component,
+							  gpointer                      data,
+							  const char                   *cname);
+static void       window_manage_calendars_cb             (BonoboUIComponent            *component,
+							  gpointer                      data,
+							  const char                   *cname);
+static void       window_edit_day_types_cb               (BonoboUIComponent            *component,
+							  gpointer                      data,
+							  const char                   *cname);
+static void       window_edit_phases_cb                  (BonoboUIComponent            *component,
+							  gpointer                      data,
+							  const char                   *cname);
+static void       window_preferences_cb                  (BonoboUIComponent            *component,
+							  gpointer                      data,
+							  const char                   *cname);
+static void       window_ui_component_event_cb           (BonoboUIComponent            *comp,
+							  const gchar                  *path,
+							  Bonobo_UIComponent_EventType  type,
+							  const gchar                  *state_string,
+							  PlannerWindow                *window);
+static void       window_help_cb                         (BonoboUIComponent            *component,
+							  gpointer                      data,
+							  const char                   *cname);
+static void       window_about_cb                        (BonoboUIComponent            *component,
+							  gpointer                      data,
+							  const char                   *cname);
+static gboolean   window_delete_event_cb                 (PlannerWindow                *window,
+							  gpointer                      user_data);
+static void       window_undo_state_changed_cb           (PlannerCmdManager            *manager,
+							  gboolean                      state,
+							  PlannerWindow                *window);
+static void       window_redo_state_changed_cb           (PlannerCmdManager            *manager,
+							  gboolean                      state,
+							  PlannerWindow                *window);
+static void       window_project_needs_saving_changed_cb (MrpProject                   *project,
+							  gboolean                      needs_saving,
+							  PlannerWindow                *window);
+static void       window_project_notify_name_cb          (MrpProject                   *project,
+							  GParamSpec                   *pspec,
+							  PlannerWindow                *window);
+static gboolean   window_confirm_exit_run                (PlannerWindow                *window);
+static gboolean   window_do_save                         (PlannerWindow                *window,
+							  gboolean                      force);
+static gboolean   window_do_save_as                      (PlannerWindow                *window);
+static gchar *    window_get_name                        (PlannerWindow                *window);
+static void       window_update_title                    (PlannerWindow                *window);
+static GtkWidget *window_create_dialog_button            (const gchar                  *icon_name,
+							  const gchar                  *text);
+static gchar *    window_recent_tooltip_func             (EggRecentItem                *item,
+							  gpointer                      user_data);
 
-static gchar *  main_window_get_name            (MgMainWindow      *window);
 
-static void     main_window_update_title        (MgMainWindow      *window);
-
-/* Candidate for moving to src/widgets/MgDialogButton? */
-static GtkWidget * 
-main_window_create_dialog_button                (const gchar       *icon_name,
-						 const gchar       *text);
-
-static gchar *  main_window_recent_tooltip_func (EggRecentItem     *item,
-						 gpointer           user_data);
 
 
 #define VIEW_PATH "/menu/View/Views placeholder"
@@ -198,60 +202,60 @@ static BonoboWindowClass *parent_class = NULL;
 static guint signals[LAST_SIGNAL];
 
 static BonoboUIVerb verbs[] = {
-	BONOBO_UI_VERB ("FileNew",		main_window_new_cb),
-	BONOBO_UI_VERB ("FileOpen",		main_window_open_cb),
-	BONOBO_UI_VERB ("FileSave",		main_window_save_cb),
-	BONOBO_UI_VERB ("FileSaveAs",		main_window_save_as_cb),
-	BONOBO_UI_VERB ("FileProperties",	main_window_properties_cb),
-	BONOBO_UI_VERB ("FilePrint",		main_window_print_cb),
-	BONOBO_UI_VERB ("FilePrintPreview",	main_window_print_preview_cb),
-	BONOBO_UI_VERB ("FileClose",		main_window_close_cb),
-	BONOBO_UI_VERB ("FileExit",		main_window_exit_cb),
+	BONOBO_UI_VERB ("FileNew",		window_new_cb),
+	BONOBO_UI_VERB ("FileOpen",		window_open_cb),
+	BONOBO_UI_VERB ("FileSave",		window_save_cb),
+	BONOBO_UI_VERB ("FileSaveAs",		window_save_as_cb),
+	BONOBO_UI_VERB ("FileProperties",	window_properties_cb),
+	BONOBO_UI_VERB ("FilePrint",		window_print_cb),
+	BONOBO_UI_VERB ("FilePrintPreview",	window_print_preview_cb),
+	BONOBO_UI_VERB ("FileClose",		window_close_cb),
+	BONOBO_UI_VERB ("FileExit",		window_exit_cb),
 
-	BONOBO_UI_VERB ("EditUndo",		main_window_undo_cb),
-	BONOBO_UI_VERB ("EditRedo",		main_window_redo_cb),
-	BONOBO_UI_VERB ("EditProjectProps",	main_window_project_props_cb),
+	BONOBO_UI_VERB ("EditUndo",		window_undo_cb),
+	BONOBO_UI_VERB ("EditRedo",		window_redo_cb),
+	BONOBO_UI_VERB ("EditProjectProps",	window_project_props_cb),
 
-	BONOBO_UI_VERB ("ManageCalendars",      main_window_manage_calendars_cb),
-	BONOBO_UI_VERB ("EditDayTypes",         main_window_edit_day_types_cb),
-	BONOBO_UI_VERB ("EditPhases",           main_window_edit_phases_cb),
+	BONOBO_UI_VERB ("ManageCalendars",      window_manage_calendars_cb),
+	BONOBO_UI_VERB ("EditDayTypes",         window_edit_day_types_cb),
+	BONOBO_UI_VERB ("EditPhases",           window_edit_phases_cb),
 
 	BONOBO_UI_VERB ("PreferencesEditPreferences",
-			main_window_preferences_cb),
+			window_preferences_cb),
 
-	BONOBO_UI_VERB ("HelpHelp",		main_window_help_cb),
-	BONOBO_UI_VERB ("HelpAbout",		main_window_about_cb),
+	BONOBO_UI_VERB ("HelpHelp",		window_help_cb),
+	BONOBO_UI_VERB ("HelpAbout",		window_about_cb),
 
 	BONOBO_UI_VERB_END
 };
 
 GType
-planner_main_window_get_type (void)
+planner_window_get_type (void)
 {
 	static GtkType type = 0;
 
 	if (!type) {
 		static const GTypeInfo info = {
-			sizeof (MgMainWindowClass),
+			sizeof (PlannerWindowClass),
 			NULL,		/* base_init */
 			NULL,		/* base_finalize */
-			(GClassInitFunc) main_window_class_init,
+			(GClassInitFunc) window_class_init,
 			NULL,		/* class_finalize */
 			NULL,		/* class_data */
-			sizeof (MgMainWindow),
+			sizeof (PlannerWindow),
 			0,              /* n_preallocs */
-			(GInstanceInitFunc) main_window_init
+			(GInstanceInitFunc) window_init
 		};
 
 		type = g_type_register_static (BONOBO_TYPE_WINDOW,
-					       "MgMainWindow", &info, 0);
+					       "PlannerWindow", &info, 0);
 	}
 	
 	return type;
 }
 
 static void
-main_window_class_init (MgMainWindowClass *klass)
+window_class_init (PlannerWindowClass *klass)
 {
 	GObjectClass *o_class;
 	
@@ -260,26 +264,38 @@ main_window_class_init (MgMainWindowClass *klass)
 	o_class = (GObjectClass *) klass;
 
 	/* GObject functions */
-	o_class->finalize = main_window_finalize;
+	o_class->finalize = window_finalize;
 
 	/* Signals */
 	signals[CLOSED] = g_signal_new 
 		("closed",
 		 G_TYPE_FROM_CLASS (klass),
 		 G_SIGNAL_RUN_LAST,
-		 0, /*G_STRUCT_OFFSET (MgMainWindowClass, method), */
+		 0, /*G_STRUCT_OFFSET (PlannerWindowClass, method), */
 		 NULL, NULL,
 		 planner_marshal_VOID__VOID,
 		 G_TYPE_NONE, 0);
 }
 
 static void
-main_window_init (MgMainWindow *window)
+window_init (PlannerWindow *window)
 {
-	MgMainWindowPriv *priv;
+	PlannerWindowPriv *priv;
 
-	priv = g_new0 (MgMainWindowPriv, 1);
+	priv = g_new0 (PlannerWindowPriv, 1);
 	window->priv = priv;
+
+	priv->cmd_manager = planner_cmd_manager_new ();
+
+	g_signal_connect (priv->cmd_manager,
+			  "undo_state_changed",
+			  G_CALLBACK (window_undo_state_changed_cb),
+			  window);
+
+	g_signal_connect (priv->cmd_manager,
+			  "redo_state_changed",
+			  G_CALLBACK (window_redo_state_changed_cb),
+			  window);
 
 	priv->ui_container = 
 		bonobo_window_get_ui_container (BONOBO_WINDOW (window));
@@ -292,15 +308,15 @@ main_window_init (MgMainWindow *window)
 
 	g_signal_connect_object (priv->ui_component,
 				 "ui-event",
-				 G_CALLBACK (main_window_ui_component_event),
+				 G_CALLBACK (window_ui_component_event_cb),
 				 window,
 				 0);
 }
 
 static void
-main_window_finalize (GObject *object)
+window_finalize (GObject *object)
 {
-	MgMainWindow *window = MG_MAIN_WINDOW (object);
+	PlannerWindow *window = PLANNER_WINDOW (object);
 
 	d(g_print ("Window::Finalize\n"));
 
@@ -322,9 +338,9 @@ main_window_finalize (GObject *object)
 }
 
 static void
-main_window_add_view_menu_item (BonoboUIComponent *ui,
-				guint              index,
-				const gchar       *label)
+window_add_view_menu_item (BonoboUIComponent *ui,
+			   guint              index,
+			   const gchar       *label)
 {
 	gchar *xml_item, *xml_command; 
 	gchar *command_name;
@@ -355,9 +371,9 @@ main_window_add_view_menu_item (BonoboUIComponent *ui,
 }
 
 static void
-planner_main_window_open_recent (GtkWidget           *widget,
+planner_window_open_recent (GtkWidget           *widget,
 			    const EggRecentItem *item,
-			    MgMainWindow        *window)
+			    PlannerWindow        *window)
 {
 	gchar     *uri, *filename;
 	GtkWidget *new_window;
@@ -369,11 +385,11 @@ planner_main_window_open_recent (GtkWidget           *widget,
 	g_free (uri);
 
 	if (mrp_project_is_empty (window->priv->project)) {
-		planner_main_window_open (window, filename);
+		planner_window_open (window, filename);
 	} else {
 		new_window = 
 			planner_application_new_window (window->priv->application);
-		if (planner_main_window_open (MG_MAIN_WINDOW (new_window),
+		if (planner_window_open (PLANNER_WINDOW (new_window),
 					 filename)) {
 			gtk_widget_show_all (new_window);
 		} else {
@@ -387,16 +403,16 @@ planner_main_window_open_recent (GtkWidget           *widget,
 }
 
 static void
-main_window_populate (MgMainWindow *window)
+window_populate (PlannerWindow *window)
 {
-	MgMainWindowPriv *priv;
+	PlannerWindowPriv *priv;
 	GtkWidget        *hbox;
 	GList            *l;
 	GtkWidget        *view_widget;
-	MgView           *view;
+	PlannerView           *view;
 	gint              view_num;
 
-	g_return_if_fail (MG_IS_MAIN_WINDOW (window));
+	g_return_if_fail (PLANNER_IS_MAIN_WINDOW (window));
 	
 	priv = window->priv;
 
@@ -417,11 +433,11 @@ main_window_populate (MgMainWindow *window)
 	egg_recent_view_set_model (EGG_RECENT_VIEW (priv->view),
 				   planner_application_get_recent_model (priv->application));
 	egg_recent_view_bonobo_set_tooltip_func (priv->view,
-						 main_window_recent_tooltip_func,
+						 window_recent_tooltip_func,
 						 NULL);
 
 	g_signal_connect (priv->view, "activate",
-			  G_CALLBACK (planner_main_window_open_recent), window);
+			  G_CALLBACK (planner_window_open_recent), window);
 
 	hbox = gtk_hbox_new (FALSE, 0);
 
@@ -429,7 +445,7 @@ main_window_populate (MgMainWindow *window)
 	gtk_box_pack_start (GTK_BOX (hbox), priv->sidebar, FALSE, TRUE, 0); 
 	g_signal_connect (priv->sidebar, 
 			  "icon-selected",
-			  G_CALLBACK (main_window_view_selected),
+			  G_CALLBACK (window_view_selected),
 			  window);
 
 	priv->notebook = gtk_notebook_new ();
@@ -448,13 +464,13 @@ main_window_populate (MgMainWindow *window)
 		view_widget = planner_view_get_widget (view);
 		gtk_widget_show (view_widget);
 		
-		planner_sidebar_append (MG_SIDEBAR (priv->sidebar),
-				   planner_view_get_icon (view),
-				   planner_view_get_label (view));
+		planner_sidebar_append (PLANNER_SIDEBAR (priv->sidebar),
+					planner_view_get_icon (view),
+					planner_view_get_label (view));
 
-		main_window_add_view_menu_item (priv->ui_component,
-						view_num++,
-						planner_view_get_menu_label (view));
+		window_add_view_menu_item (priv->ui_component,
+					   view_num++,
+					   planner_view_get_menu_label (view));
 		
 		gtk_notebook_append_page (
 			GTK_NOTEBOOK (priv->notebook),
@@ -467,17 +483,17 @@ main_window_populate (MgMainWindow *window)
 
 	bonobo_ui_component_thaw (priv->ui_component, NULL);
 
-	main_window_view_selected (MG_SIDEBAR (priv->sidebar), 0, window);
+	window_view_selected (PLANNER_SIDEBAR (priv->sidebar), 0, window);
 }
 
 static void
-main_window_view_selected (MgSidebar    *sidebar,
-			   gint          index,
-			   MgMainWindow *window)
+window_view_selected (PlannerSidebar    *sidebar,
+		      gint          index,
+		      PlannerWindow *window)
 {
-	MgMainWindowPriv *priv;
+	PlannerWindowPriv *priv;
 	GList            *list;
-	MgView           *view;
+	PlannerView           *view;
 	gchar            *cmd;
 	gchar            *state;
 		
@@ -504,9 +520,9 @@ main_window_view_selected (MgSidebar    *sidebar,
 
 	gtk_notebook_set_current_page (GTK_NOTEBOOK (priv->notebook), index);
 
-	g_signal_handlers_block_by_func (sidebar, main_window_view_selected, window);
-	planner_sidebar_set_active (MG_SIDEBAR (sidebar), index);
-	g_signal_handlers_unblock_by_func (sidebar, main_window_view_selected, window);
+	g_signal_handlers_block_by_func (sidebar, window_view_selected, window);
+	planner_sidebar_set_active (PLANNER_SIDEBAR (sidebar), index);
+	g_signal_handlers_unblock_by_func (sidebar, window_view_selected, window);
 	
 	priv->current_view = view;
 
@@ -518,7 +534,7 @@ main_window_view_selected (MgSidebar    *sidebar,
 
 	if (state == NULL || !strcmp (state, "0")) {
 		g_signal_handlers_block_by_func (priv->ui_component,
-						 main_window_ui_component_event,
+						 window_ui_component_event_cb,
 						 window);
 		
 		bonobo_ui_component_set_prop (priv->ui_component,
@@ -528,7 +544,7 @@ main_window_view_selected (MgSidebar    *sidebar,
 					      NULL);
 
 		g_signal_handlers_unblock_by_func (priv->ui_component,
-						   main_window_ui_component_event,
+						   window_ui_component_event_cb,
 						   window);
 	}
 
@@ -537,17 +553,17 @@ main_window_view_selected (MgSidebar    *sidebar,
 }
 
 static void
-main_window_new_cb (BonoboUIComponent *component,
-		    gpointer           data, 
-		    const char        *cname)
+window_new_cb (BonoboUIComponent *component,
+	       gpointer           data, 
+	       const char        *cname)
 {
-	MgMainWindow     *window;
-	MgMainWindowPriv *priv;
+	PlannerWindow     *window;
+	PlannerWindowPriv *priv;
 	GtkWidget        *new_window;
 	
-	g_return_if_fail (MG_IS_MAIN_WINDOW (data));
+	g_return_if_fail (PLANNER_IS_MAIN_WINDOW (data));
 	
-	window = MG_MAIN_WINDOW (data);
+	window = PLANNER_WINDOW (data);
 	priv   = window->priv;
 
 	new_window = planner_application_new_window (priv->application);
@@ -555,7 +571,7 @@ main_window_new_cb (BonoboUIComponent *component,
 }
 
 static gboolean
-main_window_file_is_dir (const gchar *file)
+window_file_is_dir (const gchar *file)
 {
 	struct stat sb;
 
@@ -567,9 +583,9 @@ main_window_file_is_dir (const gchar *file)
 }
 
 static gchar *
-get_last_dir (MgMainWindow *window)
+get_last_dir (PlannerWindow *window)
 {
-	MgMainWindowPriv *priv;
+	PlannerWindowPriv *priv;
 	GConfClient      *gconf_client;
 	gchar            *last_dir;
 	
@@ -597,12 +613,12 @@ get_last_dir (MgMainWindow *window)
 }
 
 static void
-main_window_open_cb (BonoboUIComponent *component,
-		     gpointer           data,
-		     const char        *cname)
+window_open_cb (BonoboUIComponent *component,
+		gpointer           data,
+		const char        *cname)
 {
-	MgMainWindow     *window;
-	MgMainWindowPriv *priv;
+	PlannerWindow     *window;
+	PlannerWindowPriv *priv;
 	GtkWidget        *file_sel;
 	gint              response;
 	const gchar      *filename = NULL;
@@ -610,9 +626,9 @@ main_window_open_cb (BonoboUIComponent *component,
 	GtkWidget        *new_window;
 	GConfClient      *gconf_client;
 
-	g_return_if_fail (MG_IS_MAIN_WINDOW (data));
+	g_return_if_fail (PLANNER_IS_MAIN_WINDOW (data));
 
-	window = MG_MAIN_WINDOW (data);
+	window = PLANNER_WINDOW (data);
 	priv = window->priv;
 
 	gconf_client = planner_application_get_gconf_client (priv->application);
@@ -633,7 +649,7 @@ main_window_open_cb (BonoboUIComponent *component,
 		filename = gtk_file_selection_get_filename (
 			GTK_FILE_SELECTION (file_sel));
 		
-		if (main_window_file_is_dir (filename)) {
+		if (window_file_is_dir (filename)) {
 			filename = NULL;
 		}
 	}
@@ -642,11 +658,11 @@ main_window_open_cb (BonoboUIComponent *component,
 
 	if (filename != NULL) {
 		if (mrp_project_is_empty (priv->project)) {
-			planner_main_window_open (window, filename);
+			planner_window_open (window, filename);
 		} else {
 			new_window = 
 				planner_application_new_window (priv->application);
-			if (planner_main_window_open (MG_MAIN_WINDOW (new_window),
+			if (planner_window_open (PLANNER_WINDOW (new_window),
 						 filename)) {
 				gtk_widget_show_all (new_window);
 			} else {
@@ -667,50 +683,50 @@ main_window_open_cb (BonoboUIComponent *component,
 }
 
 static void
-main_window_save_as_cb (BonoboUIComponent *component,
-			gpointer           data,
-			const char        *cname)
+window_save_as_cb (BonoboUIComponent *component,
+		   gpointer           data,
+		   const char        *cname)
 {
-	MgMainWindow *window;
+	PlannerWindow *window;
 
-	g_return_if_fail (MG_IS_MAIN_WINDOW(data));
+	g_return_if_fail (PLANNER_IS_MAIN_WINDOW(data));
 	
-	window = MG_MAIN_WINDOW (data);
+	window = PLANNER_WINDOW (data);
 
-        main_window_do_save_as (window);
+        window_do_save_as (window);
 }
 
 static void
-main_window_save_cb (BonoboUIComponent *component,
-		     gpointer           data,
-		     const char        *cname)
+window_save_cb (BonoboUIComponent *component,
+		gpointer           data,
+		const char        *cname)
 {
-	MgMainWindow     *window;
+	PlannerWindow     *window;
 
-	g_return_if_fail (MG_IS_MAIN_WINDOW (data));
+	g_return_if_fail (PLANNER_IS_MAIN_WINDOW (data));
 
-	window = MG_MAIN_WINDOW (data);
+	window = PLANNER_WINDOW (data);
 
-	main_window_do_save (window, FALSE);
+	window_do_save (window, FALSE);
 }
 
 static void
-main_window_print_preview_cb (BonoboUIComponent *component,
-			      gpointer           data,
-			      const char        *cname)
+window_print_preview_cb (BonoboUIComponent *component,
+			 gpointer           data,
+			 const char        *cname)
 {
-	MgMainWindow     *window;
-	MgMainWindowPriv *priv;
+	PlannerWindow     *window;
+	PlannerWindowPriv *priv;
 	GnomePrintJob    *gpj;
 	GtkWidget        *preview;
 	GList            *l;
-	MgView           *view;
-	MgPrintJob       *job;
+	PlannerView           *view;
+	PlannerPrintJob       *job;
 	gint              n_pages;
-	
-	g_return_if_fail (MG_IS_MAIN_WINDOW (data));
 
-	window = MG_MAIN_WINDOW (data);
+	g_return_if_fail (PLANNER_IS_MAIN_WINDOW (data));
+
+	window = PLANNER_WINDOW (data);
 	priv = window->priv;
 
 	gpj = gnome_print_job_new (NULL);
@@ -745,24 +761,24 @@ main_window_print_preview_cb (BonoboUIComponent *component,
 }
 
 static void
-main_window_print_cb (BonoboUIComponent *component,
-		      gpointer           data,
-		      const char        *cname)
+window_print_cb (BonoboUIComponent *component,
+		 gpointer           data,
+		 const char        *cname)
 {
-	MgMainWindow     *window;
-	MgMainWindowPriv *priv;
+	PlannerWindow     *window;
+	PlannerWindowPriv *priv;
 	GnomePrintJob    *gpj;
 	GtkWidget        *dialog;
 	gint              response;
 	gboolean          summary;
 	GList            *views, *l;
-	MgView           *view;
-	MgPrintJob       *job;
+	PlannerView           *view;
+	PlannerPrintJob       *job;
 	gint              n_pages;
 	
-	g_return_if_fail (MG_IS_MAIN_WINDOW (data));
+	g_return_if_fail (PLANNER_IS_MAIN_WINDOW (data));
 
-	window = MG_MAIN_WINDOW (data);
+	window = PLANNER_WINDOW (data);
 	priv = window->priv;
 
 	gpj = gnome_print_job_new (NULL);
@@ -826,67 +842,84 @@ main_window_print_cb (BonoboUIComponent *component,
 }
 
 static void
-main_window_properties_cb (BonoboUIComponent *component,
-			   gpointer           data, 
-			   const char        *cname)
-{
-	g_return_if_fail (MG_IS_MAIN_WINDOW (data));
-}
-
-static void
-main_window_close_cb (BonoboUIComponent *component,
-		      gpointer           data,
+window_properties_cb (BonoboUIComponent *component,
+		      gpointer           data, 
 		      const char        *cname)
 {
-	g_return_if_fail (MG_IS_MAIN_WINDOW (data));
-
-	planner_main_window_close (MG_MAIN_WINDOW (data));
+	g_return_if_fail (PLANNER_IS_MAIN_WINDOW (data));
 }
 
 static void
-main_window_exit_cb (BonoboUIComponent *component, 
-		     gpointer           data, 
-		     const char        *cname)
+window_close_cb (BonoboUIComponent *component,
+		 gpointer           data,
+		 const char        *cname)
 {
-	MgMainWindow     *window;
-	MgMainWindowPriv *priv;
+	g_return_if_fail (PLANNER_IS_MAIN_WINDOW (data));
+
+	planner_window_close (PLANNER_WINDOW (data));
+}
+
+static void
+window_exit_cb (BonoboUIComponent *component, 
+		gpointer           data, 
+		const char        *cname)
+{
+	PlannerWindow     *window;
+	PlannerWindowPriv *priv;
 	
-	g_return_if_fail (MG_IS_MAIN_WINDOW (data));
+	g_return_if_fail (PLANNER_IS_MAIN_WINDOW (data));
 	
-	window = MG_MAIN_WINDOW (data);
+	window = PLANNER_WINDOW (data);
 	priv   = window->priv;
 	
 	planner_application_exit (priv->application);
 }
 
 static void
-main_window_undo_cb (BonoboUIComponent *component,
-		     gpointer           data,
-		     const char        *cname)
+window_redo_cb (BonoboUIComponent *component,
+		gpointer           data,
+		const char        *cname)
 {
-	g_return_if_fail (MG_IS_MAIN_WINDOW (data));
+	PlannerWindow     *window;
+	PlannerWindowPriv *priv;
 
-}
+	g_return_if_fail (PLANNER_IS_MAIN_WINDOW (data));
 
-static void
-main_window_redo_cb (BonoboUIComponent *component,
-		     gpointer           data,
-		     const char        *cname)
-{
-	g_return_if_fail (MG_IS_MAIN_WINDOW (data));
-}
+	window = PLANNER_WINDOW (data);
 
-static void
-main_window_project_props_cb (BonoboUIComponent *component,
-			      gpointer           data,
-			      const char        *cname)
-{
-	MgMainWindow     *window;
-	MgMainWindowPriv *priv;
+	priv = window->priv;
 	
-	g_return_if_fail (MG_IS_MAIN_WINDOW (data));
+	planner_cmd_manager_redo (priv->cmd_manager);
+}
 
-	window = MG_MAIN_WINDOW (data);
+static void
+window_undo_cb (BonoboUIComponent *component,
+		gpointer           data,
+		const char        *cname)
+{
+	PlannerWindow     *window;
+	PlannerWindowPriv *priv;
+
+	g_return_if_fail (PLANNER_IS_MAIN_WINDOW (data));
+
+	window = PLANNER_WINDOW (data);
+
+	priv = window->priv;
+
+	planner_cmd_manager_undo (priv->cmd_manager);
+}
+
+static void
+window_project_props_cb (BonoboUIComponent *component,
+			 gpointer           data,
+			 const char        *cname)
+{
+	PlannerWindow     *window;
+	PlannerWindowPriv *priv;
+	
+	g_return_if_fail (PLANNER_IS_MAIN_WINDOW (data));
+
+	window = PLANNER_WINDOW (data);
 	priv = window->priv;
 	
 	if (priv->properties_dialog) {
@@ -902,44 +935,44 @@ main_window_project_props_cb (BonoboUIComponent *component,
 }
 
 static void
-main_window_manage_calendars_cb (BonoboUIComponent *component,
-				 gpointer           data,
-				 const char        *cname)
-{
-	MgMainWindow *window;
-	
-	g_return_if_fail (MG_IS_MAIN_WINDOW (data));
-
-	window = MG_MAIN_WINDOW (data);
-
-	planner_main_window_show_calendar_dialog (window);
-}
-
-static void
-main_window_edit_day_types_cb (BonoboUIComponent *component,
-			       gpointer           data,
-			       const char        *cname)
-{
-	MgMainWindow *window;
-	
-	g_return_if_fail (MG_IS_MAIN_WINDOW (data));
-
-	window = MG_MAIN_WINDOW (data);
-
-	planner_main_window_show_day_type_dialog (window);
-}
-
-static void
-main_window_edit_phases_cb (BonoboUIComponent *component,
+window_manage_calendars_cb (BonoboUIComponent *component,
 			    gpointer           data,
 			    const char        *cname)
 {
-	MgMainWindow     *window;
-	MgMainWindowPriv *priv;
+	PlannerWindow *window;
 	
-	g_return_if_fail (MG_IS_MAIN_WINDOW (data));
+	g_return_if_fail (PLANNER_IS_MAIN_WINDOW (data));
 
-	window = MG_MAIN_WINDOW (data);
+	window = PLANNER_WINDOW (data);
+
+	planner_window_show_calendar_dialog (window);
+}
+
+static void
+window_edit_day_types_cb (BonoboUIComponent *component,
+			  gpointer           data,
+			  const char        *cname)
+{
+	PlannerWindow *window;
+	
+	g_return_if_fail (PLANNER_IS_MAIN_WINDOW (data));
+
+	window = PLANNER_WINDOW (data);
+
+	planner_window_show_day_type_dialog (window);
+}
+
+static void
+window_edit_phases_cb (BonoboUIComponent *component,
+		       gpointer           data,
+		       const char        *cname)
+{
+	PlannerWindow     *window;
+	PlannerWindowPriv *priv;
+	
+	g_return_if_fail (PLANNER_IS_MAIN_WINDOW (data));
+
+	window = PLANNER_WINDOW (data);
 	priv = window->priv;
 	
 	if (priv->phase_dialog) {
@@ -955,22 +988,22 @@ main_window_edit_phases_cb (BonoboUIComponent *component,
 }
 
 static void
-main_window_preferences_cb (BonoboUIComponent *component,
-			    gpointer           data,
-			    const char        *cname)
+window_preferences_cb (BonoboUIComponent *component,
+		       gpointer           data,
+		       const char        *cname)
 {
-	g_return_if_fail (MG_IS_MAIN_WINDOW (data));
+	g_return_if_fail (PLANNER_IS_MAIN_WINDOW (data));
 
 }
 
 static void
-main_window_ui_component_event (BonoboUIComponent            *comp,
-				const gchar                  *path,
-				Bonobo_UIComponent_EventType  type,
-				const gchar                  *state_string,
-				MgMainWindow                 *window)
+window_ui_component_event_cb (BonoboUIComponent            *comp,
+			      const gchar                  *path,
+			      Bonobo_UIComponent_EventType  type,
+			      const gchar                  *state_string,
+			      PlannerWindow                 *window)
 {
-	MgMainWindowPriv *priv;
+	PlannerWindowPriv *priv;
 	gint              index;
 
 	priv = window->priv;
@@ -980,21 +1013,21 @@ main_window_ui_component_event (BonoboUIComponent            *comp,
 	    strlen (path) >= 5 && !strncmp (path, "view ", 5)) {
 		index = atoi (path + 5);
 		
-		main_window_view_selected (MG_SIDEBAR (priv->sidebar),
-					   index,
-					   window);
+		window_view_selected (PLANNER_SIDEBAR (priv->sidebar),
+				      index,
+				      window);
 	}
 }
 
 static void
-main_window_help_cb (BonoboUIComponent *component, 
-		     gpointer           data,
-		     const char        *cname)
+window_help_cb (BonoboUIComponent *component, 
+		gpointer           data,
+		const char        *cname)
 {
 	GError    *error = NULL;
 	GtkWidget *dialog;
 	
-	g_return_if_fail (MG_IS_MAIN_WINDOW (data));
+	g_return_if_fail (PLANNER_IS_MAIN_WINDOW (data));
 
 	if (!gnome_help_display ("planner.xml", NULL, &error)) {
 		dialog = gtk_message_dialog_new (GTK_WINDOW (data),
@@ -1012,9 +1045,9 @@ main_window_help_cb (BonoboUIComponent *component,
 }
 
 static void
-main_window_about_cb (BonoboUIComponent *component, 
-		      gpointer           data,
-		      const char        *cname)
+window_about_cb (BonoboUIComponent *component, 
+		 gpointer           data,
+		 const char        *cname)
 {
 	GtkWidget   *about;
 	GtkWidget   *hbox;
@@ -1040,7 +1073,7 @@ main_window_about_cb (BonoboUIComponent *component,
 	const gchar *translator_credits = N_("translator_credits");
 	
 	about = gnome_about_new ("Planner", VERSION,
-				 "", //"Copyright \xc2\xa9 2001-2002 CodeFactory AB",
+				 "", /*"Copyright \xc2\xa9"*/
 				 _("A Project Management application for the GNOME desktop"),
 				 authors,
 				 documenters,
@@ -1055,33 +1088,63 @@ main_window_about_cb (BonoboUIComponent *component,
 	gtk_box_pack_start (GTK_BOX (hbox), href, TRUE, FALSE, 0);
 
 	/*href= gnome_href_new ("http://planner.imendio.org/contribute/",
-			      _("Contribute to Planner"));
-			      gtk_box_pack_start (GTK_BOX (hbox), href, TRUE, FALSE, 0);
+	  _("Contribute to Planner"));
+	  gtk_box_pack_start (GTK_BOX (hbox), href, TRUE, FALSE, 0);
 	*/
 	gtk_widget_show_all (about);
 }
 
 static gboolean
-main_window_delete_event_cb (MgMainWindow *window,
-			     gpointer      user_data)
+window_delete_event_cb (PlannerWindow *window,
+			gpointer      user_data)
 {
-	g_return_val_if_fail (MG_IS_MAIN_WINDOW (window), FALSE);
+	g_return_val_if_fail (PLANNER_IS_MAIN_WINDOW (window), FALSE);
 
-	planner_main_window_close (window);
+	planner_window_close (window);
 
 	return TRUE;
 }
 
 static void
-main_window_project_needs_saving_changed_cb (MrpProject   *project,
-					     gboolean      needs_saving,
-					     MgMainWindow *window)
+window_undo_state_changed_cb (PlannerCmdManager *manager,
+			      gboolean           state,
+			      PlannerWindow     *window)
 {
-	MgMainWindowPriv *priv;
+	PlannerWindowPriv *priv;
+
+	priv = window->priv;
+
+	bonobo_ui_component_set_prop (priv->ui_component, 
+				      "/commands/EditUndo",
+				      "sensitive", state ? "1" : "0", 
+				      NULL);	
+}
+
+static void
+window_redo_state_changed_cb (PlannerCmdManager *manager,
+			      gboolean           state,
+			      PlannerWindow     *window)
+{
+	PlannerWindowPriv *priv;
+	
+	priv = window->priv;
+	
+	bonobo_ui_component_set_prop (priv->ui_component, 
+				      "/commands/EditRedo",
+				      "sensitive", state ? "1" : "0", 
+				      NULL);	
+}
+
+static void
+window_project_needs_saving_changed_cb (MrpProject   *project,
+					gboolean      needs_saving,
+					PlannerWindow *window)
+{
+	PlannerWindowPriv *priv;
 	gchar            *value;
 	
 	g_return_if_fail (MRP_IS_PROJECT (project));
-	g_return_if_fail (MG_IS_MAIN_WINDOW (window));
+	g_return_if_fail (PLANNER_IS_MAIN_WINDOW (window));
 
 	priv = window->priv;
 	
@@ -1098,17 +1161,17 @@ main_window_project_needs_saving_changed_cb (MrpProject   *project,
 }
 
 static void
-main_window_project_notify_name_cb (MrpProject   *project,
-				    GParamSpec   *pspec,
-				    MgMainWindow *window)
+window_project_notify_name_cb (MrpProject   *project,
+			       GParamSpec   *pspec,
+			       PlannerWindow *window)
 {
-	main_window_update_title (window);
+	window_update_title (window);
 }
 
 static gboolean
-main_window_confirm_exit_run (MgMainWindow *window)
+window_confirm_exit_run (PlannerWindow *window)
 {
-	MgMainWindowPriv *priv;
+	PlannerWindowPriv *priv;
 	gchar            *time_str;
 	GtkWidget        *dialog;
 	GtkWidget        *quit_button, *cancel_button, *save_button;
@@ -1147,7 +1210,7 @@ main_window_confirm_exit_run (MgMainWindow *window)
 					   "discarded."), hours);
 	}
 
-	name = main_window_get_name (window);
+	name = window_get_name (window);
 
 	tmp = g_strdup_printf (_("Save changes to document '%s' before closing?"), name);
 	
@@ -1166,12 +1229,12 @@ main_window_confirm_exit_run (MgMainWindow *window)
 		      "wrap", FALSE,
 		      NULL);
 
-	quit_button = main_window_create_dialog_button (GTK_STOCK_QUIT, 
-							_("C_lose without saving"));
-	cancel_button = main_window_create_dialog_button (GTK_STOCK_CANCEL,
-							  _("_Cancel"));
-	save_button = main_window_create_dialog_button (GTK_STOCK_SAVE,
-							_("_Save"));
+	quit_button = window_create_dialog_button (GTK_STOCK_QUIT, 
+						   _("C_lose without saving"));
+	cancel_button = window_create_dialog_button (GTK_STOCK_CANCEL,
+						     _("_Cancel"));
+	save_button = window_create_dialog_button (GTK_STOCK_SAVE,
+						   _("_Save"));
 
 	gtk_dialog_add_action_widget (GTK_DIALOG (dialog),
 				      quit_button,
@@ -1202,7 +1265,7 @@ main_window_confirm_exit_run (MgMainWindow *window)
                 return FALSE;
 		break;
 	case GTK_RESPONSE_YES: /* Save and quit */
-		return main_window_do_save (window, FALSE);
+		return window_do_save (window, FALSE);
 		break;
 	default:
 		g_assert_not_reached ();
@@ -1212,21 +1275,21 @@ main_window_confirm_exit_run (MgMainWindow *window)
 }
 
 static gboolean
-main_window_do_save (MgMainWindow *window, gboolean force)
+window_do_save (PlannerWindow *window, gboolean force)
 {
-	MgMainWindowPriv *priv;
+	PlannerWindowPriv *priv;
 	const gchar      *uri = NULL;
 	GError           *error = NULL;
 	gint              response;
 	
-	g_return_val_if_fail (MG_IS_MAIN_WINDOW (window), FALSE);
+	g_return_val_if_fail (PLANNER_IS_MAIN_WINDOW (window), FALSE);
 
 	priv = window->priv;
 	
 	uri = mrp_project_get_uri (priv->project);
 
 	if (uri == NULL) {
-		return main_window_do_save_as (window);
+		return window_do_save_as (window);
 	} else {
 		if (!mrp_project_save (priv->project, force, &error)) {
 			GtkWidget *dialog;
@@ -1242,7 +1305,7 @@ main_window_do_save (MgMainWindow *window, gboolean force)
 				gtk_widget_destroy (dialog);
 				
 				if (response == GTK_RESPONSE_YES) {
-					return main_window_do_save (window, TRUE);
+					return window_do_save (window, TRUE);
 				}
 
 				return FALSE;
@@ -1265,16 +1328,16 @@ main_window_do_save (MgMainWindow *window, gboolean force)
 }
 
 static gboolean
-main_window_do_save_as (MgMainWindow *window)
+window_do_save_as (PlannerWindow *window)
 {
-	MgMainWindowPriv *priv;
+	PlannerWindowPriv *priv;
 	GtkWidget        *file_sel;
 	gint              response;
 	const gchar      *filename = NULL;
 	gchar            *last_dir;
 	GConfClient      *gconf_client;
 	
-	g_return_val_if_fail (MG_IS_MAIN_WINDOW (window), FALSE);
+	g_return_val_if_fail (PLANNER_IS_MAIN_WINDOW (window), FALSE);
 	
 	priv = window->priv;
 
@@ -1292,7 +1355,7 @@ main_window_do_save_as (MgMainWindow *window)
 		filename = gtk_file_selection_get_filename (
 			GTK_FILE_SELECTION (file_sel));
 
-		if (main_window_file_is_dir (filename)) {
+		if (window_file_is_dir (filename)) {
 			filename = NULL;
 		}
 	}
@@ -1330,7 +1393,7 @@ main_window_do_save_as (MgMainWindow *window)
 				break;
 			case GTK_RESPONSE_NO:
 			case GTK_RESPONSE_DELETE_EVENT:
-				return main_window_do_save_as (window);
+				return window_do_save_as (window);
 				break;
 			default:
 				g_assert_not_reached ();
@@ -1365,7 +1428,7 @@ main_window_do_save_as (MgMainWindow *window)
 }
 
 static GtkWidget *
-main_window_create_dialog_button (const gchar *icon_name, const gchar *text)
+window_create_dialog_button (const gchar *icon_name, const gchar *text)
 {
 	GtkWidget *button;
 	GtkWidget *image;
@@ -1395,12 +1458,12 @@ main_window_create_dialog_button (const gchar *icon_name, const gchar *text)
 }
 
 GtkWidget *
-planner_main_window_new (MgApplication *application)
+planner_window_new (PlannerApplication *application)
 {
-	MgMainWindow     *window;
-	MgMainWindowPriv *priv;
+	PlannerWindow     *window;
+	PlannerWindowPriv *priv;
 	
-	window = g_object_new (MG_TYPE_MAIN_WINDOW, NULL);
+	window = g_object_new (PLANNER_TYPE_MAIN_WINDOW, NULL);
 	priv   = window->priv;
 	
 	priv->application = g_object_ref (application);
@@ -1410,35 +1473,35 @@ planner_main_window_new (MgApplication *application)
 	priv->last_saved = g_timer_new ();
 	
 	g_signal_connect (priv->project, "needs_saving_changed",
-			  G_CALLBACK (main_window_project_needs_saving_changed_cb),
+			  G_CALLBACK (window_project_needs_saving_changed_cb),
 			  window);
 
 	g_signal_connect (priv->project, "notify::name",
-			  G_CALLBACK (main_window_project_notify_name_cb),
+			  G_CALLBACK (window_project_notify_name_cb),
 			  window);
 	
 	gtk_window_set_default_size (GTK_WINDOW (window), 800, 600);
 
 	g_signal_connect (window, "delete_event", 
-			  G_CALLBACK (main_window_delete_event_cb),
+			  G_CALLBACK (window_delete_event_cb),
 			  NULL);
 
-	main_window_populate (window);
+	window_populate (window);
 	
-	main_window_update_title (window);
+	window_update_title (window);
 
 	return GTK_WIDGET (window);
 }
 
 gboolean
-planner_main_window_open (MgMainWindow *window, const gchar *uri)
+planner_window_open (PlannerWindow *window, const gchar *uri)
 {
-	MgMainWindowPriv *priv;
+	PlannerWindowPriv *priv;
 	GError           *error = NULL;
 	GtkWidget        *dialog;
 	EggRecentItem    *item;
 	
-	g_return_val_if_fail (MG_IS_MAIN_WINDOW (window), FALSE);
+	g_return_val_if_fail (PLANNER_IS_MAIN_WINDOW (window), FALSE);
 	g_return_val_if_fail (uri != NULL, FALSE);
 
 	priv = window->priv;
@@ -1456,7 +1519,7 @@ planner_main_window_open (MgMainWindow *window, const gchar *uri)
 		return FALSE;
 	} 
 
-	planner_main_window_check_version (window);
+	planner_window_check_version (window);
 
 	/* Add the file to the recent list */
 	item = egg_recent_item_new_from_uri (uri);
@@ -1468,37 +1531,37 @@ planner_main_window_open (MgMainWindow *window, const gchar *uri)
 }
 
 BonoboUIContainer *
-planner_main_window_get_ui_container (MgMainWindow *window)
+planner_window_get_ui_container (PlannerWindow *window)
 {
-	g_return_val_if_fail (MG_IS_MAIN_WINDOW (window), NULL);
+	g_return_val_if_fail (PLANNER_IS_MAIN_WINDOW (window), NULL);
 	
 	return window->priv->ui_container;
 }
 
 MrpProject *
-planner_main_window_get_project (MgMainWindow *window)
+planner_window_get_project (PlannerWindow *window)
 {
-	g_return_val_if_fail (MG_IS_MAIN_WINDOW (window), NULL);
+	g_return_val_if_fail (PLANNER_IS_MAIN_WINDOW (window), NULL);
 	
 	return window->priv->project;
 }
 
-MgApplication *
-planner_main_window_get_application (MgMainWindow  *window)
+PlannerApplication *
+planner_window_get_application (PlannerWindow  *window)
 {
-	g_return_val_if_fail (MG_IS_MAIN_WINDOW (window), NULL);
+	g_return_val_if_fail (PLANNER_IS_MAIN_WINDOW (window), NULL);
 	
 	return window->priv->application;
 }
 
 void
-planner_main_window_check_version (MgMainWindow *window)
+planner_window_check_version (PlannerWindow *window)
 {
-	MgMainWindowPriv *priv;
+	PlannerWindowPriv *priv;
 	GtkWidget        *dialog;
 	gint              version;
 
-	g_return_if_fail (MG_IS_MAIN_WINDOW (window));
+	g_return_if_fail (PLANNER_IS_MAIN_WINDOW (window));
 
 	priv = window->priv;
 	
@@ -1534,9 +1597,9 @@ planner_main_window_check_version (MgMainWindow *window)
 
 /* Returns the project name, filename, or "Unnamed", in that order. */
 static gchar *
-main_window_get_name (MgMainWindow *window)
+window_get_name (PlannerWindow *window)
 {
-	MgMainWindowPriv *priv;
+	PlannerWindowPriv *priv;
 	gchar            *name;
 	gchar            *uri;
 
@@ -1559,15 +1622,15 @@ main_window_get_name (MgMainWindow *window)
 }
 
 static void
-main_window_update_title (MgMainWindow *window)
+window_update_title (PlannerWindow *window)
 {
- 	MgMainWindowPriv *priv;
+ 	PlannerWindowPriv *priv;
 	gchar            *name;
 	gchar            *title;
 
 	priv = window->priv;
 
-	name = main_window_get_name (window);
+	name = window_get_name (window);
 
 	title = g_strconcat (name, " - Planner", NULL);
 
@@ -1578,17 +1641,17 @@ main_window_update_title (MgMainWindow *window)
 }
 
 void
-planner_main_window_close (MgMainWindow *window)
+planner_window_close (PlannerWindow *window)
 {
-	MgMainWindowPriv *priv;
+	PlannerWindowPriv *priv;
         gboolean          close = TRUE;
         
-	g_return_if_fail (MG_IS_MAIN_WINDOW (window));
+	g_return_if_fail (PLANNER_IS_MAIN_WINDOW (window));
 
 	priv = window->priv;
 
 	if (mrp_project_needs_saving (priv->project)) {
-		close = main_window_confirm_exit_run (window);
+		close = window_confirm_exit_run (window);
 	}
 
         if (close) {
@@ -1599,11 +1662,11 @@ planner_main_window_close (MgMainWindow *window)
 }
 
 void
-planner_main_window_show_day_type_dialog (MgMainWindow *window)
+planner_window_show_day_type_dialog (PlannerWindow *window)
 {
-	MgMainWindowPriv *priv;
+	PlannerWindowPriv *priv;
 	
-	g_return_if_fail (MG_IS_MAIN_WINDOW (window));
+	g_return_if_fail (PLANNER_IS_MAIN_WINDOW (window));
 
 	priv = window->priv;
 	
@@ -1620,11 +1683,11 @@ planner_main_window_show_day_type_dialog (MgMainWindow *window)
 }
 
 void
-planner_main_window_show_calendar_dialog (MgMainWindow *window)
+planner_window_show_calendar_dialog (PlannerWindow *window)
 {
-	MgMainWindowPriv *priv;
+	PlannerWindowPriv *priv;
 	
-	g_return_if_fail (MG_IS_MAIN_WINDOW (window));
+	g_return_if_fail (PLANNER_IS_MAIN_WINDOW (window));
 
 	priv = window->priv;
 	
@@ -1641,8 +1704,25 @@ planner_main_window_show_calendar_dialog (MgMainWindow *window)
 }
 
 static gchar *
-main_window_recent_tooltip_func (EggRecentItem *item,
-				 gpointer user_data)
+window_recent_tooltip_func (EggRecentItem *item,
+			    gpointer user_data)
 {
 	return egg_recent_item_get_uri_for_display (item);
+}
+
+PlannerCmdManager *
+planner_window_get_cmd_manager (PlannerWindow *window)
+{
+	g_return_val_if_fail (PLANNER_IS_MAIN_WINDOW (window), NULL);
+	
+	return window->priv->cmd_manager;
+}
+
+void
+planner_window_cmd_manager_insert_and_do (PlannerWindow *window,
+					  PlannerCmd   *cmd)
+{
+	g_return_if_fail (PLANNER_IS_MAIN_WINDOW (window));
+	
+	planner_cmd_manager_insert_and_do (window->priv->cmd_manager, cmd);
 }

@@ -20,33 +20,33 @@
  * Boston, MA 02111-1307, USA.
  */
 
-#ifndef __MG_PREDECESSOR_MODEL_H__
-#define __MG_PREDECESSOR_MODEL_H__
+#ifndef __PLANNER_PREDECESSOR_MODEL_H__
+#define __PLANNER_PREDECESSOR_MODEL_H__
 
 #include <libplanner/mrp-project.h>
 #include "planner-list-model.h"
 
-#define MG_TYPE_PREDECESSOR_MODEL	     (planner_predecessor_model_get_type ())
-#define MG_PREDECESSOR_MODEL(obj)	     (G_TYPE_CHECK_INSTANCE_CAST ((obj), MG_TYPE_PREDECESSOR_MODEL, MgPredecessorModel))
-#define MG_PREDECESSOR_MODEL_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), MG_TYPE_PREDECESSOR_MODEL, MgPredecessorModelClass))
-#define MG_IS_PREDECESSOR_MODEL(obj)	     (G_TYPE_CHECK_INSTANCE_TYPE ((obj), MG_TYPE_PREDECESSOR_MODEL))
-#define MG_IS_PREDECESSOR_MODEL_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), MG_TYPE_PREDECESSOR_MODEL))
-#define MG_PREDECESSOR_MODEL_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), MG_TYPE_PREDECESSOR_MODEL, MgPredecessorModelClass))
+#define PLANNER_TYPE_PREDECESSOR_MODEL	     (planner_predecessor_model_get_type ())
+#define PLANNER_PREDECESSOR_MODEL(obj)	     (G_TYPE_CHECK_INSTANCE_CAST ((obj), PLANNER_TYPE_PREDECESSOR_MODEL, PlannerPredecessorModel))
+#define PLANNER_PREDECESSOR_MODEL_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), PLANNER_TYPE_PREDECESSOR_MODEL, PlannerPredecessorModelClass))
+#define PLANNER_IS_PREDECESSOR_MODEL(obj)	     (G_TYPE_CHECK_INSTANCE_TYPE ((obj), PLANNER_TYPE_PREDECESSOR_MODEL))
+#define PLANNER_IS_PREDECESSOR_MODEL_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), PLANNER_TYPE_PREDECESSOR_MODEL))
+#define PLANNER_PREDECESSOR_MODEL_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), PLANNER_TYPE_PREDECESSOR_MODEL, PlannerPredecessorModelClass))
 
-typedef struct _MgPredecessorModel       MgPredecessorModel;
-typedef struct _MgPredecessorModelClass  MgPredecessorModelClass;
-typedef struct _MgPredecessorModelPriv   MgPredecessorModelPriv;
+typedef struct _PlannerPredecessorModel       PlannerPredecessorModel;
+typedef struct _PlannerPredecessorModelClass  PlannerPredecessorModelClass;
+typedef struct _PlannerPredecessorModelPriv   PlannerPredecessorModelPriv;
 
-struct _MgPredecessorModel
+struct _PlannerPredecessorModel
 {
-        MgListModel             parent;
+        PlannerListModel             parent;
 
-        MgPredecessorModelPriv *priv;
+        PlannerPredecessorModelPriv *priv;
 };
 
-struct _MgPredecessorModelClass
+struct _PlannerPredecessorModelClass
 {
-	MgListModelClass parent_class;
+	PlannerListModelClass parent_class;
 };
 
 enum {
@@ -59,4 +59,4 @@ enum {
 GType         planner_predecessor_model_get_type (void);
 GtkTreeModel *planner_predecessor_model_new      (MrpTask    *task);
 
-#endif /* __MG_PREDECESSOR_MODEL_H__ */
+#endif /* __PLANNER_PREDECESSOR_MODEL_H__ */

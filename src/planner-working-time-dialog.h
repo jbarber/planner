@@ -20,17 +20,17 @@
  * Boston, MA 02111-1307, USA.
  */
 
-#ifndef __MG_WORKING_TIME_DIALOG_H__
-#define __MG_WORKING_TIME_DIALOG_H__
+#ifndef __PLANNER_WORKING_TIME_DIALOG_H__
+#define __PLANNER_WORKING_TIME_DIALOG_H__
 
 #include <gtk/gtkwidget.h>
 #include <libplanner/mrp-project.h>
-#include "planner-main-window.h"
+#include "planner-window.h"
 
-GtkWidget * planner_working_time_dialog_new (MgMainWindow *window,
+GtkWidget * planner_working_time_dialog_new (PlannerWindow *window,
 					MrpCalendar  *calendar);
 
-#endif /* __MG_WORKING_TIME_DIALOG_H__ */
+#endif /* __PLANNER_WORKING_TIME_DIALOG_H__ */
 
 
 

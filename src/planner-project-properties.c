@@ -37,7 +37,7 @@
 #include "planner-project-properties.h"
 
 typedef struct {
-	MgMainWindow *main_window;
+	PlannerWindow *main_window;
 	MrpProject   *project;
 	GtkWidget    *dialog;
 	GtkWidget    *name_entry;
@@ -1143,7 +1143,7 @@ mpp_property_value_edited (GtkCellRendererText *cell,
 		
 
 	case MRP_PROPERTY_TYPE_DATE:
-/* 		date = MG_CELL_RENDERER_DATE (cell); */
+/* 		date = PLANNER_CELL_RENDERER_DATE (cell); */
 /* 		mrp_object_set (MRP_OBJECT (project), */
 /* 				mrp_property_get_name (property),  */
 /* 				&(date->time), */
@@ -1175,7 +1175,7 @@ mpp_parent_destroy_cb (GtkWidget *parent,
 }
 
 GtkWidget *
-planner_project_properties_new (MgMainWindow *window)
+planner_project_properties_new (PlannerWindow *window)
 {
 	GladeXML    *glade;
 	GtkWidget   *dialog;
@@ -1185,7 +1185,7 @@ planner_project_properties_new (MgMainWindow *window)
 	gchar       *name, *org, *manager;
 	MrpCalendar *calendar;
 	
-	g_return_val_if_fail (MG_IS_MAIN_WINDOW (window), NULL);
+	g_return_val_if_fail (PLANNER_IS_MAIN_WINDOW (window), NULL);
 	
 	glade = glade_xml_new (GLADEDIR "/project-properties.glade",
 			       "project_properties",
@@ -1200,7 +1200,7 @@ planner_project_properties_new (MgMainWindow *window)
 	data = g_new0 (DialogData, 1);
 
 	data->main_window = window;
-	data->project = planner_main_window_get_project (window);
+	data->project = planner_window_get_project (window);
 	data->dialog = dialog;
 
 	g_signal_connect_object (glade_xml_get_widget (glade, "close_button"),

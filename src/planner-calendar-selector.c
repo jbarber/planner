@@ -37,7 +37,7 @@ enum {
 };
 
 typedef struct {
-	MgMainWindow  *main_window;
+	PlannerWindow  *main_window;
 	MrpProject    *project;
 
 	GtkWidget     *selector;
@@ -67,7 +67,7 @@ static void          cal_selector_selection_changed_cb  (GtkTreeSelection *selec
 							 DialogData       *data);
 
 GtkWidget *
-planner_calendar_selector_new (MgMainWindow *window,
+planner_calendar_selector_new (PlannerWindow *window,
 			  const gchar  *caption)
 {
 	DialogData       *data;
@@ -76,7 +76,7 @@ planner_calendar_selector_new (MgMainWindow *window,
 	GtkWidget        *w;
 	GtkTreeSelection *selection;
 	
-	g_return_val_if_fail (MG_IS_MAIN_WINDOW (window), NULL);
+	g_return_val_if_fail (PLANNER_IS_MAIN_WINDOW (window), NULL);
 	
 	glade = glade_xml_new (GLADEDIR "/calendar-dialog.glade",
 			       "calendar_selector",
@@ -90,7 +90,7 @@ planner_calendar_selector_new (MgMainWindow *window,
 	
 	data = g_new0 (DialogData, 1);
 
-	data->project = planner_main_window_get_project (window);
+	data->project = planner_window_get_project (window);
 	data->main_window = window;
 	data->selector = selector;
 

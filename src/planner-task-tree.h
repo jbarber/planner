@@ -20,32 +20,32 @@
  * Boston, MA 02111-1307, USA.
  */
 
-#ifndef __MG_TASK_TREE_H__
-#define __MG_TASK_TREE_H__
+#ifndef __PLANNER_TASK_TREE_H__
+#define __PLANNER_TASK_TREE_H__
 
 #include <gtk/gtktreeview.h>
 #include <libplanner/mrp-project.h>
 #include "planner-gantt-model.h"
-#include "planner-main-window.h"
+#include "planner-window.h"
 
-#define MG_TYPE_TASK_TREE		(planner_task_tree_get_type ())
-#define MG_TASK_TREE(obj)		(GTK_CHECK_CAST ((obj), MG_TYPE_TASK_TREE, MgTaskTree))
-#define MG_TASK_TREE_CLASS(klass)	(GTK_CHECK_CLASS_CAST ((klass), MG_TYPE_TASK_TREE, MgTaskTreeClass))
-#define MG_IS_TASK_TREE(obj)		(GTK_CHECK_TYPE ((obj), MG_TYPE_TASK_TREE))
-#define MG_IS_TASK_TREE_CLASS(klass)	(GTK_CHECK_CLASS_TYPE ((obj), MG_TYPE_TASK_TREE))
-#define MG_TASK_TREE_GET_CLASS(obj)	(GTK_CHECK_GET_CLASS ((obj), MG_TYPE_TASK_TREE, MgTaskTreeClass))
+#define PLANNER_TYPE_TASK_TREE		(planner_task_tree_get_type ())
+#define PLANNER_TASK_TREE(obj)		(GTK_CHECK_CAST ((obj), PLANNER_TYPE_TASK_TREE, PlannerTaskTree))
+#define PLANNER_TASK_TREE_CLASS(klass)	(GTK_CHECK_CLASS_CAST ((klass), PLANNER_TYPE_TASK_TREE, PlannerTaskTreeClass))
+#define PLANNER_IS_TASK_TREE(obj)		(GTK_CHECK_TYPE ((obj), PLANNER_TYPE_TASK_TREE))
+#define PLANNER_IS_TASK_TREE_CLASS(klass)	(GTK_CHECK_CLASS_TYPE ((obj), PLANNER_TYPE_TASK_TREE))
+#define PLANNER_TASK_TREE_GET_CLASS(obj)	(GTK_CHECK_GET_CLASS ((obj), PLANNER_TYPE_TASK_TREE, PlannerTaskTreeClass))
 
-typedef struct _MgTaskTree           MgTaskTree;
-typedef struct _MgTaskTreeClass      MgTaskTreeClass;
-typedef struct _MgTaskTreePriv       MgTaskTreePriv;
+typedef struct _PlannerTaskTree           PlannerTaskTree;
+typedef struct _PlannerTaskTreeClass      PlannerTaskTreeClass;
+typedef struct _PlannerTaskTreePriv       PlannerTaskTreePriv;
 
-struct _MgTaskTree
+struct _PlannerTaskTree
 {
 	GtkTreeView       parent;
-	MgTaskTreePriv   *priv;
+	PlannerTaskTreePriv   *priv;
 };
 
-struct _MgTaskTreeClass
+struct _PlannerTaskTreeClass
 {
 	GtkTreeViewClass  parent_class;
 };
@@ -53,43 +53,43 @@ struct _MgTaskTreeClass
 
 GType      planner_task_tree_get_type              (void);
 
-GtkWidget *planner_task_tree_new                   (MgMainWindow *main_window,
-					       MgGanttModel *model,
+GtkWidget *planner_task_tree_new                   (PlannerWindow *main_window,
+					       PlannerGanttModel *model,
 					       gboolean      custom_properties,
 					       gpointer      first_column,
 					       ...);
 
-void       planner_task_tree_set_model             (MgTaskTree   *tree,
-					       MgGanttModel *model);
+void       planner_task_tree_set_model             (PlannerTaskTree   *tree,
+					       PlannerGanttModel *model);
 
-void       planner_task_tree_insert_subtask        (MgTaskTree   *tree);
+void       planner_task_tree_insert_subtask        (PlannerTaskTree   *tree);
 
-void       planner_task_tree_insert_task           (MgTaskTree   *tree);
+void       planner_task_tree_insert_task           (PlannerTaskTree   *tree);
 
-void       planner_task_tree_remove_task           (MgTaskTree   *tree);
+void       planner_task_tree_remove_task           (PlannerTaskTree   *tree);
 
-void       planner_task_tree_edit_task             (MgTaskTree   *tree);
+void       planner_task_tree_edit_task             (PlannerTaskTree   *tree);
 
-void       planner_task_tree_insert_tasks          (MgTaskTree   *tree);
+void       planner_task_tree_insert_tasks          (PlannerTaskTree   *tree);
 
-void       planner_task_tree_select_all            (MgTaskTree   *tree);
+void       planner_task_tree_select_all            (PlannerTaskTree   *tree);
 
-void       planner_task_tree_unlink_task           (MgTaskTree   *tree);
+void       planner_task_tree_unlink_task           (PlannerTaskTree   *tree);
 
-void       planner_task_tree_indent_task           (MgTaskTree   *tree);
+void       planner_task_tree_indent_task           (PlannerTaskTree   *tree);
 
-void       planner_task_tree_unindent_task         (MgTaskTree   *tree);
+void       planner_task_tree_unindent_task         (PlannerTaskTree   *tree);
 
-void       planner_task_tree_reset_constraint      (MgTaskTree   *tree);
+void       planner_task_tree_reset_constraint      (PlannerTaskTree   *tree);
 
-void       planner_task_tree_reset_all_constraints (MgTaskTree   *tree);
+void       planner_task_tree_reset_all_constraints (PlannerTaskTree   *tree);
 
-void       planner_task_tree_move_task_up          (MgTaskTree   *tree);
+void       planner_task_tree_move_task_up          (PlannerTaskTree   *tree);
 
-void       planner_task_tree_move_task_down        (MgTaskTree   *tree);
+void       planner_task_tree_move_task_down        (PlannerTaskTree   *tree);
 
-GList *    planner_task_tree_get_selected_tasks    (MgTaskTree   *tree);
+GList *    planner_task_tree_get_selected_tasks    (PlannerTaskTree   *tree);
 
 gboolean   planner_task_tree_has_relation          (GList        *list);
 
-#endif /* __MG_TASK_TREE_H__ */
+#endif /* __PLANNER_TASK_TREE_H__ */

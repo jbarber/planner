@@ -40,7 +40,7 @@ enum {
 	PROP_ZOOM
 };
 
-struct _MgGanttBackgroundPriv {
+struct _PlannerGanttBackgroundPriv {
 	GdkGC       *border_gc;
 	GdkGC       *fill_gc;
 	GdkGC       *timeline_gc;
@@ -60,8 +60,8 @@ struct _MgGanttBackgroundPriv {
 };
 
 
-static void     gantt_background_class_init       (MgGanttBackgroundClass *class);
-static void     gantt_background_init             (MgGanttBackground      *background);
+static void     gantt_background_class_init       (PlannerGanttBackgroundClass *class);
+static void     gantt_background_init             (PlannerGanttBackground      *background);
 static void     gantt_background_finalize         (GObject                *object);
 static void     gantt_background_set_property     (GObject                *object,
 						   guint                   param_id,
@@ -87,12 +87,12 @@ static void     gantt_background_draw             (GnomeCanvasItem        *item,
 						   gint                    height);
 static gboolean gantt_background_update_timeline  (gpointer                data);
 static void     gantt_background_calendar_changed (MrpCalendar            *calendar,
-						   MgGanttBackground      *background);
+						   PlannerGanttBackground      *background);
 static void
 gantt_background_project_calendar_notify_cb       (MrpProject             *project,
 						   GParamSpec             *spec,
-						   MgGanttBackground      *background);
-static void        gantt_background_set_calendar  (MgGanttBackground      *background,
+						   PlannerGanttBackground      *background);
+static void        gantt_background_set_calendar  (PlannerGanttBackground      *background,
 						   MrpCalendar            *calendar);
 
 
@@ -106,19 +106,19 @@ planner_gantt_background_get_type (void)
 
 	if (!type) {
 		static const GTypeInfo info = {
-			sizeof (MgGanttBackgroundClass),
+			sizeof (PlannerGanttBackgroundClass),
 			NULL,		/* base_init */
 			NULL,		/* base_finalize */
 			(GClassInitFunc) gantt_background_class_init,
 			NULL,		/* class_finalize */
 			NULL,		/* class_data */
-			sizeof (MgGanttBackground),
+			sizeof (PlannerGanttBackground),
 			0,              /* n_preallocs */
 			(GInstanceInitFunc) gantt_background_init
 		};
 
 		type = g_type_register_static (GNOME_TYPE_CANVAS_ITEM,
-					       "MgGanttBackground",
+					       "PlannerGanttBackground",
 					       &info,
 					       0);
 	}
@@ -127,7 +127,7 @@ planner_gantt_background_get_type (void)
 }
 
 static void
-gantt_background_class_init (MgGanttBackgroundClass *class)
+gantt_background_class_init (PlannerGanttBackgroundClass *class)
 {
 	GObjectClass         *gobject_class;
 	GnomeCanvasItemClass *item_class;
@@ -186,11 +186,11 @@ gantt_background_class_init (MgGanttBackgroundClass *class)
 }
 
 static void
-gantt_background_init (MgGanttBackground *background)
+gantt_background_init (PlannerGanttBackground *background)
 {
-	MgGanttBackgroundPriv *priv;
+	PlannerGanttBackgroundPriv *priv;
 
-	priv = g_new0 (MgGanttBackgroundPriv, 1);
+	priv = g_new0 (PlannerGanttBackgroundPriv, 1);
 	background->priv = priv;
 
 	priv->hscale = 1.0;
@@ -201,12 +201,12 @@ gantt_background_init (MgGanttBackground *background)
 static void
 gantt_background_finalize (GObject *object)
 {
-	MgGanttBackground     *background;
-	MgGanttBackgroundPriv *priv;
+	PlannerGanttBackground     *background;
+	PlannerGanttBackgroundPriv *priv;
 
-	g_return_if_fail (MG_IS_GANTT_BACKGROUND (object));
+	g_return_if_fail (PLANNER_IS_GANTT_BACKGROUND (object));
 
-	background = MG_GANTT_BACKGROUND (object);
+	background = PLANNER_GANTT_BACKGROUND (object);
 	priv = background->priv;
 	
 	if (priv->timeout_id) {
@@ -223,7 +223,7 @@ gantt_background_finalize (GObject *object)
 }
 
 static void
-gantt_background_get_bounds (MgGanttBackground *background,
+gantt_background_get_bounds (PlannerGanttBackground *background,
 			     gdouble           *px1,
 			     gdouble           *py1,
 			     gdouble           *px2,
@@ -261,14 +261,14 @@ gantt_background_set_property (GObject      *object,
 			       GParamSpec   *pspec)
 {
 	GnomeCanvasItem       *item;
-	MgGanttBackground     *background;
-	MgGanttBackgroundPriv *priv;
+	PlannerGanttBackground     *background;
+	PlannerGanttBackgroundPriv *priv;
 	MrpCalendar           *calendar;
 
-	g_return_if_fail (MG_IS_GANTT_BACKGROUND (object));
+	g_return_if_fail (PLANNER_IS_GANTT_BACKGROUND (object));
 
 	item = GNOME_CANVAS_ITEM (object);
-	background = MG_GANTT_BACKGROUND (object);
+	background = PLANNER_GANTT_BACKGROUND (object);
 	priv = background->priv;
 	
 	switch (param_id) {
@@ -317,10 +317,10 @@ gantt_background_update (GnomeCanvasItem *item,
 			 ArtSVP          *clip_path,
 			 int              flags)
 {
-	MgGanttBackground *background;
+	PlannerGanttBackground *background;
 	double             x1, y1, x2, y2;
 
-	background = MG_GANTT_BACKGROUND (item);
+	background = PLANNER_GANTT_BACKGROUND (item);
 
 	GNOME_CANVAS_ITEM_CLASS (parent_class)->update (item,
 							affine,
@@ -335,11 +335,11 @@ gantt_background_update (GnomeCanvasItem *item,
 static void
 gantt_background_realize (GnomeCanvasItem *item)
 {
-	MgGanttBackground     *background;
-	MgGanttBackgroundPriv *priv;
+	PlannerGanttBackground     *background;
+	PlannerGanttBackgroundPriv *priv;
 	GdkColor               color;
 
-	background = MG_GANTT_BACKGROUND (item);
+	background = PLANNER_GANTT_BACKGROUND (item);
 	priv = background->priv;
 
 	GNOME_CANVAS_ITEM_CLASS (parent_class)->realize (item);
@@ -388,9 +388,9 @@ gantt_background_realize (GnomeCanvasItem *item)
 static void
 gantt_background_unrealize (GnomeCanvasItem *item)
 {
-	MgGanttBackground *background;
+	PlannerGanttBackground *background;
 
-	background = MG_GANTT_BACKGROUND (item);
+	background = PLANNER_GANTT_BACKGROUND (item);
 
 	gdk_gc_unref (background->priv->border_gc);
 	background->priv->border_gc = NULL;
@@ -410,10 +410,10 @@ gantt_background_unrealize (GnomeCanvasItem *item)
 static gboolean 
 gantt_background_update_timeline (gpointer data)
 {
-	MgGanttBackground     *background;
-	MgGanttBackgroundPriv *priv;;
+	PlannerGanttBackground     *background;
+	PlannerGanttBackgroundPriv *priv;;
 
-	background = MG_GANTT_BACKGROUND (data);
+	background = PLANNER_GANTT_BACKGROUND (data);
 	priv = background->priv;
 	
 	priv->timeline = mrp_time_current_time ();
@@ -431,8 +431,8 @@ gantt_background_draw (GnomeCanvasItem *item,
 		       int              width,
 		       int              height)
 {
-	MgGanttBackground     *background;
-	MgGanttBackgroundPriv *priv;
+	PlannerGanttBackground     *background;
+	PlannerGanttBackgroundPriv *priv;
 	gint                   cx1, cx2;  /* Canvas pixel coordinates */
 	gint                   cy1, cy2;  
 	gdouble                wx1, wx2;  /* World coordinates */
@@ -446,7 +446,7 @@ gantt_background_draw (GnomeCanvasItem *item,
 	MrpInterval           *ival;
 	gint                   level;
 
-	background = MG_GANTT_BACKGROUND (item);
+	background = PLANNER_GANTT_BACKGROUND (item);
 	priv = background->priv;
 
 	if (!priv->project) {
@@ -614,7 +614,7 @@ gantt_background_draw (GnomeCanvasItem *item,
 
 static void
 gantt_background_calendar_changed (MrpCalendar       *calendar,
-				   MgGanttBackground *background)
+				   PlannerGanttBackground *background)
 {
 	gnome_canvas_item_request_update (GNOME_CANVAS_ITEM (background));
 }
@@ -622,7 +622,7 @@ gantt_background_calendar_changed (MrpCalendar       *calendar,
 static void
 gantt_background_project_calendar_notify_cb (MrpProject        *project,
 					     GParamSpec        *spec,
-					     MgGanttBackground *background)
+					     PlannerGanttBackground *background)
 {
 	MrpCalendar *calendar;
 	
@@ -632,10 +632,10 @@ gantt_background_project_calendar_notify_cb (MrpProject        *project,
 }
 
 static void
-gantt_background_set_calendar (MgGanttBackground *background,
+gantt_background_set_calendar (PlannerGanttBackground *background,
 			       MrpCalendar       *calendar)
 {
-	MgGanttBackgroundPriv *priv;
+	PlannerGanttBackgroundPriv *priv;
 
 	priv = background->priv;
 

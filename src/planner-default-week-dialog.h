@@ -20,18 +20,18 @@
  * Boston, MA 02111-1307, USA.
  */
 
-#ifndef __MG_DEFAULT_WEEK_DIALOG_H__
-#define __MG_DEFAULT_WEEK_DIALOG_H__
+#ifndef __PLANNER_DEFAULT_WEEK_DIALOG_H__
+#define __PLANNER_DEFAULT_WEEK_DIALOG_H__
 
 #include <gtk/gtkwidget.h>
 #include <libplanner/mrp-project.h>
 #include <libplanner/mrp-calendar.h>
-#include "planner-main-window.h"
+#include "planner-window.h"
 
-GtkWidget * planner_default_week_dialog_new (MgMainWindow *window,
+GtkWidget * planner_default_week_dialog_new (PlannerWindow *window,
 					MrpCalendar  *calendar);
 
-#endif /* __MG_DEFAULT_WEEK_DIALOG_H__ */
+#endif /* __PLANNER_DEFAULT_WEEK_DIALOG_H__ */
 
 
 

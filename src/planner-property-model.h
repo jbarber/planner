@@ -19,8 +19,8 @@
  * Boston, MA 02111-1307, USA.
  */
 
-#ifndef __MG_PROPERTY_MODEL_H__
-#define __MG_PROPERTY_MODEL_H__
+#ifndef __PLANNER_PROPERTY_MODEL_H__
+#define __PLANNER_PROPERTY_MODEL_H__
 
 #include <gtk/gtktreemodel.h>
 #include <libplanner/mrp-project.h>
@@ -36,7 +36,7 @@ enum {
 GtkTreeModel *planner_property_model_new (MrpProject *project,
 				     GType       owner_type);
 
-#endif /* __MG_PROPERTY_MODEL_H__ */
+#endif /* __PLANNER_PROPERTY_MODEL_H__ */
 
 
 

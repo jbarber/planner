@@ -39,8 +39,8 @@ enum {
 	LAST_SIGNAL
 };
 
-static void      mcrp_init               (MgCellRendererPopup      *popup);
-static void      mcrp_class_init         (MgCellRendererPopupClass *class);
+static void      mcrp_init               (PlannerCellRendererPopup      *popup);
+static void      mcrp_class_init         (PlannerCellRendererPopupClass *class);
 
 static GtkCellEditable *
 mcrp_start_editing                       (GtkCellRenderer          *cell,
@@ -50,13 +50,13 @@ mcrp_start_editing                       (GtkCellRenderer          *cell,
 					  GdkRectangle             *background_area,
 					  GdkRectangle             *cell_area,
 					  GtkCellRendererState      flags);
-static void      mcrp_show_popup         (MgCellRendererPopup      *cell,
+static void      mcrp_show_popup         (PlannerCellRendererPopup      *cell,
 					  const gchar              *path,
 					  gint                      x1,
 					  gint                      y1,
 					  gint                      x2,
 					  gint                      y2);
-static void      mcrp_hide_popup         (MgCellRendererPopup      *cell);
+static void      mcrp_hide_popup         (PlannerCellRendererPopup      *cell);
 static void      mcrp_get_size           (GtkCellRenderer          *cell,
 					  GtkWidget                *widget,
 					  GdkRectangle             *cell_area,
@@ -66,19 +66,19 @@ static void      mcrp_get_size           (GtkCellRenderer          *cell,
 					  gint                     *height);
 static void      mcrp_style_set           (GtkWidget               *widget,
 					   GtkStyle                *old_style,
-					   MgCellRendererPopup     *popup);
+					   PlannerCellRendererPopup     *popup);
 static gboolean  mcrp_key_press_event    (GtkWidget                *popup_window,
 					  GdkEventKey              *event,
-					  MgCellRendererPopup      *cell);
+					  PlannerCellRendererPopup      *cell);
 static gboolean  mcrp_button_press_event (GtkWidget                *widget,
 					  GdkEventButton           *event,
-					  MgCellRendererPopup      *popup);
+					  PlannerCellRendererPopup      *popup);
 
 
 static GtkCellRendererTextClass *parent_class;
 static guint signals[LAST_SIGNAL];
 
-#define MG_CELL_RENDERER_POPUP_PATH "planner-cell-renderer-popup-path"
+#define PLANNER_CELL_RENDERER_POPUP_PATH "planner-cell-renderer-popup-path"
 
 GType
 planner_cell_renderer_popup_get_type (void)
@@ -87,19 +87,19 @@ planner_cell_renderer_popup_get_type (void)
 	
 	if (!cell_text_type) {
 		static const GTypeInfo cell_text_info = {
-			sizeof (MgCellRendererPopupClass),
+			sizeof (PlannerCellRendererPopupClass),
 			NULL,		/* base_init */
 			NULL,		/* base_finalize */
 			(GClassInitFunc) mcrp_class_init,
 			NULL,		/* class_finalize */
 			NULL,		/* class_data */
-			sizeof (MgCellRendererPopup),
+			sizeof (PlannerCellRendererPopup),
 			0,              /* n_preallocs */
 			(GInstanceInitFunc) mcrp_init,
 		};
 		
 		cell_text_type = g_type_register_static (GTK_TYPE_CELL_RENDERER_TEXT,
-							 "MgCellRendererPopup",
+							 "PlannerCellRendererPopup",
 							 &cell_text_info,
 							 0);
 	}
@@ -108,7 +108,7 @@ planner_cell_renderer_popup_get_type (void)
 }
 
 static void
-mcrp_init (MgCellRendererPopup *popup)
+mcrp_init (PlannerCellRendererPopup *popup)
 {
 	popup->popup_window = gtk_window_new (GTK_WINDOW_POPUP);
 
@@ -131,7 +131,7 @@ mcrp_init (MgCellRendererPopup *popup)
 }
 
 static void
-mcrp_class_init (MgCellRendererPopupClass *class)
+mcrp_class_init (PlannerCellRendererPopupClass *class)
 {
 	GtkCellRendererClass *cell_class = GTK_CELL_RENDERER_CLASS (class);
 	
@@ -147,7 +147,7 @@ mcrp_class_init (MgCellRendererPopupClass *class)
 		"show-popup",
 		G_TYPE_FROM_CLASS (class),
 		G_SIGNAL_RUN_LAST,
-		G_STRUCT_OFFSET (MgCellRendererPopupClass, show_popup),
+		G_STRUCT_OFFSET (PlannerCellRendererPopupClass, show_popup),
 		NULL, NULL,
 		planner_marshal_VOID__STRING_INT_INT_INT_INT,
 		G_TYPE_NONE, 5,
@@ -161,7 +161,7 @@ mcrp_class_init (MgCellRendererPopupClass *class)
 		"hide-popup",
 		G_TYPE_FROM_CLASS (class),
 		G_SIGNAL_RUN_LAST,
-		G_STRUCT_OFFSET (MgCellRendererPopupClass, hide_popup),
+		G_STRUCT_OFFSET (PlannerCellRendererPopupClass, hide_popup),
 		NULL, NULL,
 		planner_marshal_VOID__VOID,
 		G_TYPE_NONE, 0);
@@ -169,19 +169,19 @@ mcrp_class_init (MgCellRendererPopupClass *class)
 
 static void
 mcrp_editing_done (GtkCellEditable     *editable,
-		   MgCellRendererPopup *cell)
+		   PlannerCellRendererPopup *cell)
 {
 	gchar       *path;
 	const gchar *new_text;
 
-	if (MG_POPUP_ENTRY (editable)->editing_canceled ||
+	if (PLANNER_POPUP_ENTRY (editable)->editing_canceled ||
 	    cell->editing_canceled) {
 		return;
 	}
 	
 	path = g_object_get_data (G_OBJECT (editable),
-				  MG_CELL_RENDERER_POPUP_PATH);
-	new_text = planner_popup_entry_get_text (MG_POPUP_ENTRY (editable));
+				  PLANNER_CELL_RENDERER_POPUP_PATH);
+	new_text = planner_popup_entry_get_text (PLANNER_POPUP_ENTRY (editable));
 
 	g_signal_emit_by_name (cell,
 			       "edited",
@@ -192,7 +192,7 @@ mcrp_editing_done (GtkCellEditable     *editable,
 static void
 mcrp_style_set (GtkWidget           *widget,
 		GtkStyle            *old_style,
-		MgCellRendererPopup *popup)
+		PlannerCellRendererPopup *popup)
 {
 	/* Invalidate the cache. */
 	popup->button_width = -1;
@@ -220,7 +220,7 @@ mcrp_grab_on_window (GdkWindow *window,
 }
 
 static void
-mcrp_show_popup (MgCellRendererPopup *cell,
+mcrp_show_popup (PlannerCellRendererPopup *cell,
 		 const gchar         *path,
 		 gint                 x1,
 		 gint                 y1,
@@ -290,7 +290,7 @@ mcrp_show_popup (MgCellRendererPopup *cell,
 }
 
 static void
-mcrp_hide_popup (MgCellRendererPopup *cell)
+mcrp_hide_popup (PlannerCellRendererPopup *cell)
 {
 	gtk_grab_remove (cell->popup_window);
 	gtk_widget_hide (cell->popup_window);
@@ -312,7 +312,7 @@ mcrp_hide_popup (MgCellRendererPopup *cell)
 
 static void
 mcrp_arrow_clicked (GtkCellEditable     *entry,
-		    MgCellRendererPopup *cell)
+		    PlannerCellRendererPopup *cell)
 {
 	GtkAllocation  alloc;
 	gint           x, y;
@@ -325,7 +325,7 @@ mcrp_arrow_clicked (GtkCellEditable     *entry,
 	}
 	
 	path = g_object_get_data (G_OBJECT (entry),
-				  MG_CELL_RENDERER_POPUP_PATH);
+				  PLANNER_CELL_RENDERER_POPUP_PATH);
 
 	/* Temporarily grab pointer and keyboard on a window we know exists; we
 	 * do this so that the grab (with owner events == TRUE) affects
@@ -337,7 +337,7 @@ mcrp_arrow_clicked (GtkCellEditable     *entry,
 		return;
 	}
 	
-	gtk_editable_select_region (GTK_EDITABLE (MG_POPUP_ENTRY (entry)->entry), 0, 0);
+	gtk_editable_select_region (GTK_EDITABLE (PLANNER_POPUP_ENTRY (entry)->entry), 0, 0);
 
 	gdk_window_get_origin (GTK_WIDGET (entry)->window, &x, &y);
 	
@@ -360,24 +360,24 @@ mcrp_start_editing (GtkCellRenderer      *cell,
 		    GdkRectangle         *cell_area,
 		    GtkCellRendererState  flags)
 {
-	MgCellRendererPopup *popup;
+	PlannerCellRendererPopup *popup;
 	GtkWidget           *editable;
 	gchar               *text;
 	
-	popup = MG_CELL_RENDERER_POPUP (cell);
+	popup = PLANNER_CELL_RENDERER_POPUP (cell);
 
 	/* If the cell isn't editable we return NULL. */
 	if (GTK_CELL_RENDERER_TEXT (popup)->editable == FALSE) {
 		return NULL;
 	}
 	
-	editable = g_object_new (MG_TYPE_POPUP_ENTRY, NULL);
+	editable = g_object_new (PLANNER_TYPE_POPUP_ENTRY, NULL);
 
 	text = GTK_CELL_RENDERER_TEXT (cell)->text;
-	planner_popup_entry_set_text (MG_POPUP_ENTRY (editable), text ? text : "");
+	planner_popup_entry_set_text (PLANNER_POPUP_ENTRY (editable), text ? text : "");
 	
 	g_object_set_data_full (G_OBJECT (editable),
-				MG_CELL_RENDERER_POPUP_PATH,
+				PLANNER_CELL_RENDERER_POPUP_PATH,
 				g_strdup (path),
 				g_free);
 	
@@ -409,9 +409,9 @@ planner_cell_renderer_popup_new (void)
 }
 
 void
-planner_cell_renderer_popup_hide (MgCellRendererPopup *cell)
+planner_cell_renderer_popup_hide (PlannerCellRendererPopup *cell)
 { 
-	g_return_if_fail (MG_IS_CELL_RENDERER_POPUP (cell));
+	g_return_if_fail (PLANNER_IS_CELL_RENDERER_POPUP (cell));
 	
 	g_signal_emit (cell, signals[HIDE_POPUP], 0);
 }
@@ -425,9 +425,9 @@ mcrp_get_size (GtkCellRenderer *cell,
 	       gint            *width,
 	       gint            *height)
 {
-	MgCellRendererPopup *popup;
+	PlannerCellRendererPopup *popup;
 
-	popup = MG_CELL_RENDERER_POPUP (cell);
+	popup = PLANNER_CELL_RENDERER_POPUP (cell);
 	
 	if (GTK_CELL_RENDERER_CLASS (parent_class)->get_size) { 
 		(* GTK_CELL_RENDERER_CLASS (parent_class)->get_size) (cell,
@@ -450,7 +450,7 @@ mcrp_get_size (GtkCellRenderer *cell,
 static gboolean
 mcrp_key_press_event (GtkWidget           *popup_window,
 		      GdkEventKey         *event,
-		      MgCellRendererPopup *cell)
+		      PlannerCellRendererPopup *cell)
 {
 	if (event->keyval != GDK_Escape &&
 	    event->keyval != GDK_Return &&
@@ -474,7 +474,7 @@ mcrp_key_press_event (GtkWidget           *popup_window,
 static gboolean
 mcrp_button_press_event (GtkWidget           *widget,
 			 GdkEventButton      *event,
-			 MgCellRendererPopup *popup)
+			 PlannerCellRendererPopup *popup)
 {
 	GtkAllocation alloc;
 	gdouble       x, y;

@@ -21,33 +21,33 @@
  * Boston, MA 02111-1307, USA.
  */
 
-#ifndef __MG_LIST_MODEL_H__
-#define __MG_LIST_MODEL_H__
+#ifndef __PLANNER_LIST_MODEL_H__
+#define __PLANNER_LIST_MODEL_H__
 
 #include <glib-object.h>
 #include <gtk/gtktreemodel.h>
 #include <gtk/gtktreesortable.h>
 #include <libplanner/mrp-object.h>
 
-#define MG_TYPE_LIST_MODEL	          (planner_list_model_get_type ())
-#define MG_LIST_MODEL(obj)	          (G_TYPE_CHECK_INSTANCE_CAST ((obj), MG_TYPE_LIST_MODEL, MgListModel))
-#define MG_LIST_MODEL_CLASS(klass)        (G_TYPE_CHECK_CLASS_CAST ((klass), MG_TYPE_LIST_MODEL, MgListModelClass))
-#define MG_IS_LIST_MODEL(obj)	          (G_TYPE_CHECK_INSTANCE_TYPE ((obj), MG_TYPE_LIST_MODEL))
-#define MG_IS_LIST_MODEL_CLASS(klass)     (G_TYPE_CHECK_CLASS_TYPE ((klass), MG_TYPE_LIST_MODEL))
-#define MG_LIST_MODEL_GET_CLASS(obj)      (G_TYPE_INSTANCE_GET_CLASS ((obj), MG_TYPE_LIST_MODEL, MgListModelClass))
+#define PLANNER_TYPE_LIST_MODEL	          (planner_list_model_get_type ())
+#define PLANNER_LIST_MODEL(obj)	          (G_TYPE_CHECK_INSTANCE_CAST ((obj), PLANNER_TYPE_LIST_MODEL, PlannerListModel))
+#define PLANNER_LIST_MODEL_CLASS(klass)        (G_TYPE_CHECK_CLASS_CAST ((klass), PLANNER_TYPE_LIST_MODEL, PlannerListModelClass))
+#define PLANNER_IS_LIST_MODEL(obj)	          (G_TYPE_CHECK_INSTANCE_TYPE ((obj), PLANNER_TYPE_LIST_MODEL))
+#define PLANNER_IS_LIST_MODEL_CLASS(klass)     (G_TYPE_CHECK_CLASS_TYPE ((klass), PLANNER_TYPE_LIST_MODEL))
+#define PLANNER_LIST_MODEL_GET_CLASS(obj)      (G_TYPE_INSTANCE_GET_CLASS ((obj), PLANNER_TYPE_LIST_MODEL, PlannerListModelClass))
 
-typedef struct _MgListModel       MgListModel;
-typedef struct _MgListModelClass  MgListModelClass;
-typedef struct _MgListModelPriv   MgListModelPriv;
+typedef struct _PlannerListModel       PlannerListModel;
+typedef struct _PlannerListModelClass  PlannerListModelClass;
+typedef struct _PlannerListModelPriv   PlannerListModelPriv;
 
-struct _MgListModel
+struct _PlannerListModel
 {
         GObject          parent;
 	
-        MgListModelPriv *priv;
+        PlannerListModelPriv *priv;
 };
 
-struct _MgListModelClass
+struct _PlannerListModelClass
 {
 	GObjectClass parent_class;
 
@@ -61,18 +61,18 @@ struct _MgListModelClass
 };
 
 GType            planner_list_model_get_type      (void);
-void             planner_list_model_append        (MgListModel      *model, 
+void             planner_list_model_append        (PlannerListModel      *model, 
 					      MrpObject        *object);
-void             planner_list_model_remove        (MgListModel      *model, 
+void             planner_list_model_remove        (PlannerListModel      *model, 
 					      MrpObject        *object);
-void             planner_list_model_update        (MgListModel      *model,
+void             planner_list_model_update        (PlannerListModel      *model,
 					      MrpObject        *object);
-GtkTreePath *    planner_list_model_get_path      (MgListModel      *model,
+GtkTreePath *    planner_list_model_get_path      (PlannerListModel      *model,
 					      MrpObject        *object);
-MrpObject *      planner_list_model_get_object    (MgListModel      *model,
+MrpObject *      planner_list_model_get_object    (PlannerListModel      *model,
 					      GtkTreeIter      *iter);
-void             planner_list_model_set_data      (MgListModel      *model,
+void             planner_list_model_set_data      (PlannerListModel      *model,
 					      GList            *data);
-GList *          planner_list_model_get_data      (MgListModel      *model);
+GList *          planner_list_model_get_data      (PlannerListModel      *model);
 
-#endif /* __MG_LIST_MODEL_H__ */
+#endif /* __PLANNER_LIST_MODEL_H__ */

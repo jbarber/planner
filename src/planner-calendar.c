@@ -218,8 +218,8 @@ static gint planner_calendar_signals[LAST_SIGNAL] = { 0 };
 
 static GtkWidgetClass *parent_class = NULL;
 
-typedef struct _MgCalendarPrivateData MgCalendarPrivateData;
-struct _MgCalendarPrivateData
+typedef struct _PlannerCalendarPrivateData PlannerCalendarPrivateData;
+struct _PlannerCalendarPrivateData
 {
 	GdkWindow *header_win;
 	GdkWindow *day_name_win;
@@ -256,12 +256,12 @@ struct _MgCalendarPrivateData
 	guint dirty_week : 1;
 };
 
-#define MG_CALENDAR_PRIVATE_DATA(widget)  (((MgCalendarPrivateData*)(MG_CALENDAR (widget)->private_data)))
+#define PLANNER_CALENDAR_PRIVATE_DATA(widget)  (((PlannerCalendarPrivateData*)(PLANNER_CALENDAR (widget)->private_data)))
 
-typedef void (*MgCalendarSignalDate) (GtkObject *object, guint arg1, guint arg2, guint arg3, gpointer data);
+typedef void (*PlannerCalendarSignalDate) (GtkObject *object, guint arg1, guint arg2, guint arg3, gpointer data);
 
-static void planner_calendar_class_init	(MgCalendarClass *class);
-static void planner_calendar_init		(MgCalendar *calendar);
+static void planner_calendar_class_init	(PlannerCalendarClass *class);
+static void planner_calendar_init		(PlannerCalendar *calendar);
 static void planner_calendar_finalize	(GObject *calendar);
 static void planner_calendar_realize	(GtkWidget *widget);
 static void planner_calendar_unrealize	(GtkWidget *widget);
@@ -292,7 +292,7 @@ static void planner_calendar_paint_day_names    (GtkWidget *widget);
 static void planner_calendar_paint_week_numbers (GtkWidget *widget);
 static void planner_calendar_paint_main	    (GtkWidget *widget);
 
-static void planner_calendar_select_and_focus_day (MgCalendar *calendar,
+static void planner_calendar_select_and_focus_day (PlannerCalendar *calendar,
 					      guint        day);
 
 static void planner_calendar_paint_arrow	(GtkWidget    *widget,
@@ -302,10 +302,10 @@ static void planner_calendar_paint_day_num	(GtkWidget    *widget,
 static void planner_calendar_paint_day	(GtkWidget    *widget,
 					 gint	       row,
 					 gint	       col);
-static void planner_calendar_compute_days	(MgCalendar  *calendar);
-static gint left_x_for_column		(MgCalendar  *calendar,
+static void planner_calendar_compute_days	(PlannerCalendar  *calendar);
+static gint left_x_for_column		(PlannerCalendar  *calendar,
 					 gint	       column);
-static gint top_y_for_row		(MgCalendar  *calendar,
+static gint top_y_for_row		(PlannerCalendar  *calendar,
 					 gint	       row);
 
 static char    *default_abbreviated_dayname[7];
@@ -320,18 +320,18 @@ planner_calendar_get_type (void)
 	{
 		static const GTypeInfo calendar_info =
 			{
-				sizeof (MgCalendarClass),
+				sizeof (PlannerCalendarClass),
 				NULL,		/* base_init */
 				NULL,		/* base_finalize */
 				(GClassInitFunc) planner_calendar_class_init,
 				NULL,		/* class_finalize */
 				NULL,		/* class_data */
-				sizeof (MgCalendar),
+				sizeof (PlannerCalendar),
 				0,		/* n_preallocs */
 				(GInstanceInitFunc) planner_calendar_init,
 			};
 
-		calendar_type = g_type_register_static (GTK_TYPE_WIDGET, "MgCalendar",
+		calendar_type = g_type_register_static (GTK_TYPE_WIDGET, "PlannerCalendar",
 							&calendar_info, 0);
 	}
   
@@ -339,7 +339,7 @@ planner_calendar_get_type (void)
 }
 
 static void
-planner_calendar_class_init (MgCalendarClass *class)
+planner_calendar_class_init (PlannerCalendarClass *class)
 {
 	GObjectClass   *gobject_class;
 	GtkWidgetClass *widget_class;
@@ -376,7 +376,7 @@ planner_calendar_class_init (MgCalendarClass *class)
 		g_signal_new ("month_changed",
 			      G_OBJECT_CLASS_TYPE (gobject_class),
 			      G_SIGNAL_RUN_FIRST,
-			      G_STRUCT_OFFSET (MgCalendarClass, month_changed),
+			      G_STRUCT_OFFSET (PlannerCalendarClass, month_changed),
 			      NULL, NULL,
 			      g_cclosure_marshal_VOID__VOID,
 			      G_TYPE_NONE, 0);
@@ -384,7 +384,7 @@ planner_calendar_class_init (MgCalendarClass *class)
 		g_signal_new ("day_selected",
 			      G_OBJECT_CLASS_TYPE (gobject_class),
 			      G_SIGNAL_RUN_FIRST,
-			      G_STRUCT_OFFSET (MgCalendarClass, day_selected),
+			      G_STRUCT_OFFSET (PlannerCalendarClass, day_selected),
 			      NULL, NULL,
 			      g_cclosure_marshal_VOID__VOID,
 			      G_TYPE_NONE, 0);
@@ -392,7 +392,7 @@ planner_calendar_class_init (MgCalendarClass *class)
 		g_signal_new ("day_selected_double_click",
 			      G_OBJECT_CLASS_TYPE (gobject_class),
 			      G_SIGNAL_RUN_FIRST,
-			      G_STRUCT_OFFSET (MgCalendarClass, day_selected_double_click),
+			      G_STRUCT_OFFSET (PlannerCalendarClass, day_selected_double_click),
 			      NULL, NULL,
 			      g_cclosure_marshal_VOID__VOID,
 			      G_TYPE_NONE, 0);
@@ -400,7 +400,7 @@ planner_calendar_class_init (MgCalendarClass *class)
 		g_signal_new ("prev_month",
 			      G_OBJECT_CLASS_TYPE (gobject_class),
 			      G_SIGNAL_RUN_FIRST,
-			      G_STRUCT_OFFSET (MgCalendarClass, prev_month),
+			      G_STRUCT_OFFSET (PlannerCalendarClass, prev_month),
 			      NULL, NULL,
 			      g_cclosure_marshal_VOID__VOID,
 			      G_TYPE_NONE, 0);
@@ -408,7 +408,7 @@ planner_calendar_class_init (MgCalendarClass *class)
 		g_signal_new ("next_month",
 			      G_OBJECT_CLASS_TYPE (gobject_class),
 			      G_SIGNAL_RUN_FIRST,
-			      G_STRUCT_OFFSET (MgCalendarClass, next_month),
+			      G_STRUCT_OFFSET (PlannerCalendarClass, next_month),
 			      NULL, NULL,
 			      g_cclosure_marshal_VOID__VOID,
 			      G_TYPE_NONE, 0);
@@ -416,7 +416,7 @@ planner_calendar_class_init (MgCalendarClass *class)
 		g_signal_new ("prev_year",
 			      G_OBJECT_CLASS_TYPE (gobject_class),
 			      G_SIGNAL_RUN_FIRST,
-			      G_STRUCT_OFFSET (MgCalendarClass, prev_year),
+			      G_STRUCT_OFFSET (PlannerCalendarClass, prev_year),
 			      NULL, NULL,
 			      g_cclosure_marshal_VOID__VOID,
 			      G_TYPE_NONE, 0);
@@ -424,14 +424,14 @@ planner_calendar_class_init (MgCalendarClass *class)
 		g_signal_new ("next_year",
 			      G_OBJECT_CLASS_TYPE (gobject_class),
 			      G_SIGNAL_RUN_FIRST,
-			      G_STRUCT_OFFSET (MgCalendarClass, next_year),
+			      G_STRUCT_OFFSET (PlannerCalendarClass, next_year),
 			      NULL, NULL,
 			      g_cclosure_marshal_VOID__VOID,
 			      G_TYPE_NONE, 0);
 }
 
 static void
-planner_calendar_init (MgCalendar *calendar)
+planner_calendar_init (PlannerCalendar *calendar)
 {
 	time_t secs;
 	struct tm *tm;
@@ -439,13 +439,13 @@ planner_calendar_init (MgCalendar *calendar)
 	char buffer[255];
 	time_t tmp_time;
 	GtkWidget *widget;
-	MgCalendarPrivateData *private_data;
+	PlannerCalendarPrivateData *private_data;
   
 	widget = GTK_WIDGET (calendar);
 	GTK_WIDGET_SET_FLAGS (widget, GTK_CAN_FOCUS);
   
-	calendar->private_data = g_malloc (sizeof (MgCalendarPrivateData));
-	private_data = MG_CALENDAR_PRIVATE_DATA (calendar);
+	calendar->private_data = g_malloc (sizeof (PlannerCalendarPrivateData));
+	private_data = PLANNER_CALENDAR_PRIVATE_DATA (calendar);
 
 	if (!default_abbreviated_dayname[0])
 		for (i=0; i<7; i++)
@@ -470,12 +470,12 @@ planner_calendar_init (MgCalendar *calendar)
 	calendar->year  = 1900 + tm->tm_year;
   
 	for (i=0;i<31;i++)
-		calendar->marked_date[i] = MG_CALENDAR_MARK_NONE;
+		calendar->marked_date[i] = PLANNER_CALENDAR_MARK_NONE;
 	calendar->num_marked_dates = 0;
 	calendar->selected_day = tm->tm_mday;
   
-	calendar->display_flags = ( MG_CALENDAR_SHOW_HEADING | 
-				    MG_CALENDAR_SHOW_DAY_NAMES );
+	calendar->display_flags = ( PLANNER_CALENDAR_SHOW_HEADING | 
+				    PLANNER_CALENDAR_SHOW_DAY_NAMES );
   
 	calendar->highlight_row = -1;
 	calendar->highlight_col = -1;
@@ -507,13 +507,13 @@ planner_calendar_init (MgCalendar *calendar)
 GtkWidget*
 planner_calendar_new (void)
 {
-	return g_object_new (MG_TYPE_CALENDAR, NULL);
+	return g_object_new (PLANNER_TYPE_CALENDAR, NULL);
 }
 
 /* column_from_x: returns the column 0-6 that the
  * x pixel of the xwindow is in */
 static gint
-column_from_x (MgCalendar *calendar,
+column_from_x (PlannerCalendar *calendar,
 	       gint	    event_x)
 {
 	gint c, column;
@@ -524,7 +524,7 @@ column_from_x (MgCalendar *calendar,
 	for (c = 0; c < 7; c++)
 	{
 		x_left = left_x_for_column (calendar, c);
-		x_right = x_left + MG_CALENDAR_PRIVATE_DATA (calendar)->day_width;
+		x_right = x_left + PLANNER_CALENDAR_PRIVATE_DATA (calendar)->day_width;
       
 		if (event_x >= x_left && event_x < x_right)
 		{
@@ -537,10 +537,10 @@ column_from_x (MgCalendar *calendar,
 }
 
 static gint
-row_height (MgCalendar *calendar)
+row_height (PlannerCalendar *calendar)
 {
-	return (MG_CALENDAR_PRIVATE_DATA (calendar)->main_h - CALENDAR_MARGIN
-		- ((calendar->display_flags & MG_CALENDAR_SHOW_DAY_NAMES)
+	return (PLANNER_CALENDAR_PRIVATE_DATA (calendar)->main_h - CALENDAR_MARGIN
+		- ((calendar->display_flags & PLANNER_CALENDAR_SHOW_DAY_NAMES)
 		   ? CALENDAR_YSEP : CALENDAR_MARGIN)) / 6;
 }
 
@@ -548,7 +548,7 @@ row_height (MgCalendar *calendar)
 /* row_from_y: returns the row 0-5 that the
  * y pixel of the xwindow is in */
 static gint
-row_from_y (MgCalendar *calendar,
+row_from_y (PlannerCalendar *calendar,
 	    gint	 event_y)
 {
 	gint r, row;
@@ -576,7 +576,7 @@ row_from_y (MgCalendar *calendar,
 /* left_x_for_column: returns the x coordinate
  * for the left of the column */
 static gint
-left_x_for_column (MgCalendar *calendar,
+left_x_for_column (PlannerCalendar *calendar,
 		   gint		column)
 {
 	gint width;
@@ -585,8 +585,8 @@ left_x_for_column (MgCalendar *calendar,
 	if (gtk_widget_get_direction (GTK_WIDGET (calendar)) == GTK_TEXT_DIR_RTL)
 		column = 6 - column;
 
-	width = MG_CALENDAR_PRIVATE_DATA (calendar)->day_width;
-	if (calendar->display_flags & MG_CALENDAR_SHOW_WEEK_NUMBERS)
+	width = PLANNER_CALENDAR_PRIVATE_DATA (calendar)->day_width;
+	if (calendar->display_flags & PLANNER_CALENDAR_SHOW_WEEK_NUMBERS)
 		x_left = CALENDAR_XSEP + (width + DAY_XSEP) * column;
 	else
 		x_left = CALENDAR_MARGIN + (width + DAY_XSEP) * column;
@@ -597,11 +597,11 @@ left_x_for_column (MgCalendar *calendar,
 /* top_y_for_row: returns the y coordinate
  * for the top of the row */
 static gint
-top_y_for_row (MgCalendar *calendar,
+top_y_for_row (PlannerCalendar *calendar,
 	       gint	    row)
 {
   
-	return (MG_CALENDAR_PRIVATE_DATA (calendar)->main_h 
+	return (PLANNER_CALENDAR_PRIVATE_DATA (calendar)->main_h 
 		- (CALENDAR_MARGIN + (6 - row)
 		   * row_height (calendar)));
 }
@@ -649,11 +649,11 @@ draw_arrow_left (GdkWindow *window,
 }
 
 static void
-planner_calendar_set_month_prev (MgCalendar *calendar)
+planner_calendar_set_month_prev (PlannerCalendar *calendar)
 {
 	gint month_len;
   
-	if (calendar->display_flags & MG_CALENDAR_NO_MONTH_CHANGE)
+	if (calendar->display_flags & PLANNER_CALENDAR_NO_MONTH_CHANGE)
 		return;
   
 	if (calendar->month == 0)
@@ -694,13 +694,13 @@ planner_calendar_set_month_prev (MgCalendar *calendar)
 
 
 static void
-planner_calendar_set_month_next (MgCalendar *calendar)
+planner_calendar_set_month_next (PlannerCalendar *calendar)
 {
 	gint month_len;
   
 	g_return_if_fail (GTK_IS_WIDGET (calendar));
   
-	if (calendar->display_flags & MG_CALENDAR_NO_MONTH_CHANGE)
+	if (calendar->display_flags & PLANNER_CALENDAR_NO_MONTH_CHANGE)
 		return;
   
   
@@ -736,7 +736,7 @@ planner_calendar_set_month_next (MgCalendar *calendar)
 }
 
 static void
-planner_calendar_set_year_prev (MgCalendar *calendar)
+planner_calendar_set_year_prev (PlannerCalendar *calendar)
 {
 	gint month_len;
   
@@ -767,7 +767,7 @@ planner_calendar_set_year_prev (MgCalendar *calendar)
 }
 
 static void
-planner_calendar_set_year_next (MgCalendar *calendar)
+planner_calendar_set_year_next (PlannerCalendar *calendar)
 {
 	gint month_len;
 	GtkWidget *widget;
@@ -805,13 +805,13 @@ static void
 planner_calendar_main_button (GtkWidget	 *widget,
 			 GdkEventButton *event)
 {
-	MgCalendar *calendar;
+	PlannerCalendar *calendar;
 	gint x, y;
 	gint row, col;
 	gint day_month;
 	gint day;
   
-	calendar = MG_CALENDAR (widget);
+	calendar = PLANNER_CALENDAR (widget);
   
 	x = (gint) (event->x);
 	y = (gint) (event->y);
@@ -852,20 +852,20 @@ planner_calendar_main_button (GtkWidget	 *widget,
 static void
 planner_calendar_realize_arrows (GtkWidget *widget)
 {
-	MgCalendar *calendar;
-	MgCalendarPrivateData *private_data;
+	PlannerCalendar *calendar;
+	PlannerCalendarPrivateData *private_data;
 	GdkWindowAttr attributes;
 	gint attributes_mask;
 	gint i;
   
-	g_return_if_fail (MG_IS_CALENDAR (widget));
+	g_return_if_fail (PLANNER_IS_CALENDAR (widget));
   
-	calendar = MG_CALENDAR (widget);
-	private_data = MG_CALENDAR_PRIVATE_DATA (widget);
+	calendar = PLANNER_CALENDAR (widget);
+	private_data = PLANNER_CALENDAR_PRIVATE_DATA (widget);
 
 	/* Arrow windows ------------------------------------- */
-	if (! (calendar->display_flags & MG_CALENDAR_NO_MONTH_CHANGE)
-	    && (calendar->display_flags & MG_CALENDAR_SHOW_HEADING))
+	if (! (calendar->display_flags & PLANNER_CALENDAR_NO_MONTH_CHANGE)
+	    && (calendar->display_flags & PLANNER_CALENDAR_SHOW_HEADING))
 	{
 		attributes.wclass = GDK_INPUT_OUTPUT;
 		attributes.window_type = GDK_WINDOW_CHILD;
@@ -919,18 +919,18 @@ planner_calendar_realize_arrows (GtkWidget *widget)
 static void
 planner_calendar_realize_header (GtkWidget *widget)
 {
-	MgCalendar *calendar;
-	MgCalendarPrivateData *private_data;
+	PlannerCalendar *calendar;
+	PlannerCalendarPrivateData *private_data;
 	GdkWindowAttr attributes;
 	gint attributes_mask;
   
-	g_return_if_fail (MG_IS_CALENDAR (widget));
+	g_return_if_fail (PLANNER_IS_CALENDAR (widget));
   
-	calendar = MG_CALENDAR (widget);
-	private_data = MG_CALENDAR_PRIVATE_DATA (widget);
+	calendar = PLANNER_CALENDAR (widget);
+	private_data = PLANNER_CALENDAR_PRIVATE_DATA (widget);
 
 	/* Header window ------------------------------------- */
-	if (calendar->display_flags & MG_CALENDAR_SHOW_HEADING)
+	if (calendar->display_flags & PLANNER_CALENDAR_SHOW_HEADING)
 	{
 		attributes.wclass = GDK_INPUT_OUTPUT;
 		attributes.window_type = GDK_WINDOW_CHILD;
@@ -961,18 +961,18 @@ planner_calendar_realize_header (GtkWidget *widget)
 static void
 planner_calendar_realize_day_names (GtkWidget *widget)
 {
-	MgCalendar *calendar;
-	MgCalendarPrivateData *private_data;
+	PlannerCalendar *calendar;
+	PlannerCalendarPrivateData *private_data;
 	GdkWindowAttr attributes;
 	gint attributes_mask;
   
-	g_return_if_fail (MG_IS_CALENDAR (widget));
+	g_return_if_fail (PLANNER_IS_CALENDAR (widget));
   
-	calendar = MG_CALENDAR (widget);
-	private_data = MG_CALENDAR_PRIVATE_DATA (widget);
+	calendar = PLANNER_CALENDAR (widget);
+	private_data = PLANNER_CALENDAR_PRIVATE_DATA (widget);
 
 	/* Day names	window --------------------------------- */
-	if ( calendar->display_flags & MG_CALENDAR_SHOW_DAY_NAMES)
+	if ( calendar->display_flags & PLANNER_CALENDAR_SHOW_DAY_NAMES)
 	{
 		attributes.wclass = GDK_INPUT_OUTPUT;
 		attributes.window_type = GDK_WINDOW_CHILD;
@@ -1004,18 +1004,18 @@ planner_calendar_realize_day_names (GtkWidget *widget)
 static void
 planner_calendar_realize_week_numbers (GtkWidget *widget)
 {
-	MgCalendar *calendar;
-	MgCalendarPrivateData *private_data;
+	PlannerCalendar *calendar;
+	PlannerCalendarPrivateData *private_data;
 	GdkWindowAttr attributes;
 	gint attributes_mask;
   
-	g_return_if_fail (MG_IS_CALENDAR (widget));
+	g_return_if_fail (PLANNER_IS_CALENDAR (widget));
   
-	calendar = MG_CALENDAR (widget);
-	private_data = MG_CALENDAR_PRIVATE_DATA (widget);
+	calendar = PLANNER_CALENDAR (widget);
+	private_data = PLANNER_CALENDAR_PRIVATE_DATA (widget);
 
 	/* Week number window -------------------------------- */
-	if (calendar->display_flags & MG_CALENDAR_SHOW_WEEK_NUMBERS)
+	if (calendar->display_flags & PLANNER_CALENDAR_SHOW_WEEK_NUMBERS)
 	{
 		attributes.wclass = GDK_INPUT_OUTPUT;
 		attributes.window_type = GDK_WINDOW_CHILD;
@@ -1045,14 +1045,14 @@ planner_calendar_realize_week_numbers (GtkWidget *widget)
 static void
 planner_calendar_realize (GtkWidget *widget)
 {
-	MgCalendar *calendar;
-	MgCalendarPrivateData *private_data;
+	PlannerCalendar *calendar;
+	PlannerCalendarPrivateData *private_data;
 	GdkWindowAttr attributes;
 	gint attributes_mask;
 	GdkGCValues values;
 
-	calendar = MG_CALENDAR (widget);
-	private_data = MG_CALENDAR_PRIVATE_DATA (widget);
+	calendar = PLANNER_CALENDAR (widget);
+	private_data = PLANNER_CALENDAR_PRIVATE_DATA (widget);
   
 	GTK_WIDGET_SET_FLAGS (widget, GTK_REALIZED);
 	planner_calendar_compute_days (calendar);
@@ -1115,12 +1115,12 @@ planner_calendar_realize (GtkWidget *widget)
 static void
 planner_calendar_unrealize (GtkWidget *widget)
 {
-	MgCalendar *calendar;
-	MgCalendarPrivateData *private_data;
+	PlannerCalendar *calendar;
+	PlannerCalendarPrivateData *private_data;
 	gint i;
   
-	calendar = MG_CALENDAR (widget);
-	private_data = MG_CALENDAR_PRIVATE_DATA (widget);
+	calendar = PLANNER_CALENDAR (widget);
+	private_data = PLANNER_CALENDAR_PRIVATE_DATA (widget);
   
 	if (private_data->header_win)
 	{
@@ -1170,8 +1170,8 @@ static void
 planner_calendar_size_request (GtkWidget	  *widget,
 			  GtkRequisition *requisition)
 {
-	MgCalendar *calendar;
-	MgCalendarPrivateData *private_data;
+	PlannerCalendar *calendar;
+	PlannerCalendarPrivateData *private_data;
 	PangoLayout *layout;
 	PangoRectangle logical_rect;
 
@@ -1184,8 +1184,8 @@ planner_calendar_size_request (GtkWidget	  *widget,
 	gint focus_width;
 	gint focus_padding;
   
-	calendar = MG_CALENDAR (widget);
-	private_data = MG_CALENDAR_PRIVATE_DATA (widget);
+	calendar = PLANNER_CALENDAR (widget);
+	private_data = PLANNER_CALENDAR_PRIVATE_DATA (widget);
 	gtk_widget_style_get (GTK_WIDGET (widget),
 			      "focus-line-width", &focus_width,
 			      "focus-padding", &focus_padding,
@@ -1199,7 +1199,7 @@ planner_calendar_size_request (GtkWidget	  *widget,
   
 	/* Header width */
   
-	if (calendar->display_flags & MG_CALENDAR_SHOW_HEADING)
+	if (calendar->display_flags & PLANNER_CALENDAR_SHOW_HEADING)
 	{
 		private_data->max_month_width = 0;
 		for (i = 0; i < 12; i++)
@@ -1227,7 +1227,7 @@ planner_calendar_size_request (GtkWidget	  *widget,
 		private_data->max_year_width = 0;
 	}
   
-	if (calendar->display_flags & MG_CALENDAR_NO_MONTH_CHANGE)
+	if (calendar->display_flags & PLANNER_CALENDAR_NO_MONTH_CHANGE)
 		header_width = (private_data->max_month_width 
 				+ private_data->max_year_width
 				+ 3 * 3);
@@ -1259,7 +1259,7 @@ planner_calendar_size_request (GtkWidget	  *widget,
 	/* We add one to max_day_char_width to be able to make the marked day "bold" */
 	private_data->max_day_char_width = private_data->min_day_width / 2 + 1;
   
-	if (calendar->display_flags & MG_CALENDAR_SHOW_DAY_NAMES)
+	if (calendar->display_flags & PLANNER_CALENDAR_SHOW_DAY_NAMES)
 		for (i = 0; i < 7; i++)
 		{
 			pango_layout_set_text (layout, default_abbreviated_dayname[i], -1);
@@ -1273,7 +1273,7 @@ planner_calendar_size_request (GtkWidget	  *widget,
 		}
   
 	private_data->max_week_char_width = 0;
-	if (calendar->display_flags & MG_CALENDAR_SHOW_WEEK_NUMBERS)
+	if (calendar->display_flags & PLANNER_CALENDAR_SHOW_WEEK_NUMBERS)
 		for (i = 0; i < 9; i++)
 		{
 			sprintf (buffer, "%d%d", i, i);
@@ -1295,7 +1295,7 @@ planner_calendar_size_request (GtkWidget	  *widget,
 	 * Calculate the requisition height for the widget.
 	 */
   
-	if (calendar->display_flags & MG_CALENDAR_SHOW_HEADING)
+	if (calendar->display_flags & PLANNER_CALENDAR_SHOW_HEADING)
 	{
 		private_data->header_h = (max_header_height + CALENDAR_YSEP * 2);
 	}
@@ -1304,7 +1304,7 @@ planner_calendar_size_request (GtkWidget	  *widget,
 		private_data->header_h = 0;
 	}
   
-	if (calendar->display_flags & MG_CALENDAR_SHOW_DAY_NAMES)
+	if (calendar->display_flags & PLANNER_CALENDAR_SHOW_DAY_NAMES)
 	{
 		private_data->day_name_h = (private_data->max_label_char_ascent
 					    + private_data->max_label_char_descent
@@ -1334,17 +1334,17 @@ static void
 planner_calendar_size_allocate (GtkWidget	  *widget,
 			   GtkAllocation *allocation)
 {
-	MgCalendar *calendar;
-	MgCalendarPrivateData *private_data;
+	PlannerCalendar *calendar;
+	PlannerCalendarPrivateData *private_data;
 	gint xthickness = widget->style->xthickness;
 	gint ythickness = widget->style->xthickness;
   
 	widget->allocation = *allocation;
   
-	calendar = MG_CALENDAR (widget);
-	private_data = MG_CALENDAR_PRIVATE_DATA (widget);
+	calendar = PLANNER_CALENDAR (widget);
+	private_data = PLANNER_CALENDAR_PRIVATE_DATA (widget);
   
-	if (calendar->display_flags & MG_CALENDAR_SHOW_WEEK_NUMBERS)
+	if (calendar->display_flags & PLANNER_CALENDAR_SHOW_WEEK_NUMBERS)
 	{
 		private_data->day_width = (private_data->min_day_width
 					   * ((allocation->width - (xthickness + INNER_BORDER) * 2
@@ -1427,11 +1427,11 @@ static gboolean
 planner_calendar_expose (GtkWidget	    *widget,
 		    GdkEventExpose *event)
 {
-	MgCalendar *calendar;
-	MgCalendarPrivateData *private_data;
+	PlannerCalendar *calendar;
+	PlannerCalendarPrivateData *private_data;
 
-	calendar = MG_CALENDAR (widget);
-	private_data = MG_CALENDAR_PRIVATE_DATA (widget);
+	calendar = PLANNER_CALENDAR (widget);
+	private_data = PLANNER_CALENDAR_PRIVATE_DATA (widget);
   
 	if (GTK_WIDGET_DRAWABLE (widget))
 	{
@@ -1460,19 +1460,19 @@ planner_calendar_expose (GtkWidget	    *widget,
 static void
 planner_calendar_paint_header (GtkWidget *widget)
 {
-	MgCalendar *calendar;
+	PlannerCalendar *calendar;
 	GdkGC *gc;
 	char buffer[255];
 	int x, y;
 	gint header_width, cal_height;
 	gint max_month_width;
 	gint max_year_width;
-	MgCalendarPrivateData *private_data;
+	PlannerCalendarPrivateData *private_data;
 	PangoLayout *layout;
 	PangoRectangle logical_rect;
 
-	calendar = MG_CALENDAR (widget);
-	private_data = MG_CALENDAR_PRIVATE_DATA (widget);
+	calendar = PLANNER_CALENDAR (widget);
+	private_data = PLANNER_CALENDAR_PRIVATE_DATA (widget);
 
 	if (private_data->freeze_count)
 	{
@@ -1507,7 +1507,7 @@ planner_calendar_paint_header (GtkWidget *widget)
   
 	/* Draw year and its arrows */
   
-	if (calendar->display_flags & MG_CALENDAR_NO_MONTH_CHANGE)
+	if (calendar->display_flags & PLANNER_CALENDAR_NO_MONTH_CHANGE)
 		x = header_width - (3 + max_year_width
 				    - (max_year_width - logical_rect.width)/2);
 	else
@@ -1523,7 +1523,7 @@ planner_calendar_paint_header (GtkWidget *widget)
 	pango_layout_set_text (layout, buffer, -1);
 	pango_layout_get_pixel_extents (layout, NULL, &logical_rect);
 
-	if (calendar->display_flags & MG_CALENDAR_NO_MONTH_CHANGE)
+	if (calendar->display_flags & PLANNER_CALENDAR_NO_MONTH_CHANGE)
 		x = 3 + (max_month_width - logical_rect.width) / 2;
 	else
 		x = 3 + private_data->arrow_width + (max_month_width - logical_rect.width)/2;
@@ -1543,7 +1543,7 @@ planner_calendar_paint_header (GtkWidget *widget)
 static void
 planner_calendar_paint_day_names (GtkWidget *widget)
 {
-	MgCalendar *calendar;
+	PlannerCalendar *calendar;
 	GdkGC *gc;
 	char buffer[255];
 	int day,i;
@@ -1552,13 +1552,13 @@ planner_calendar_paint_day_names (GtkWidget *widget)
 	int day_wid_sep;
 	PangoLayout *layout;
 	PangoRectangle logical_rect;
-	MgCalendarPrivateData *private_data;
+	PlannerCalendarPrivateData *private_data;
 	gint focus_padding;
 	gint focus_width;
   
-	g_return_if_fail (MG_IS_CALENDAR (widget));
-	calendar = MG_CALENDAR (widget);
-	private_data = MG_CALENDAR_PRIVATE_DATA (widget);
+	g_return_if_fail (PLANNER_IS_CALENDAR (widget));
+	calendar = PLANNER_CALENDAR (widget);
+	private_data = PLANNER_CALENDAR_PRIVATE_DATA (widget);
 	gc = calendar->gc;
   
 	gtk_widget_style_get (GTK_WIDGET (widget),
@@ -1597,7 +1597,7 @@ planner_calendar_paint_day_names (GtkWidget *widget)
 			    cal_width-CALENDAR_MARGIN * 2,
 			    private_data->day_name_h - CALENDAR_MARGIN);
   
-	if (calendar->display_flags & MG_CALENDAR_SHOW_WEEK_NUMBERS)
+	if (calendar->display_flags & PLANNER_CALENDAR_SHOW_WEEK_NUMBERS)
 		gdk_draw_rectangle (private_data->day_name_win, gc, TRUE,
 				    CALENDAR_MARGIN,
 				    private_data->day_name_h - CALENDAR_YSEP,
@@ -1617,7 +1617,7 @@ planner_calendar_paint_day_names (GtkWidget *widget)
 			day = 6 - i;
 		else
 			day = i;
-		if (calendar->display_flags & MG_CALENDAR_WEEK_START_MONDAY)
+		if (calendar->display_flags & PLANNER_CALENDAR_WEEK_START_MONDAY)
 			day= (day+1)%7;
 		sprintf (buffer, "%s", default_abbreviated_dayname[day]);
 
@@ -1640,22 +1640,22 @@ planner_calendar_paint_day_names (GtkWidget *widget)
 static void
 planner_calendar_paint_week_numbers (GtkWidget *widget)
 {
-	MgCalendar *calendar;
+	PlannerCalendar *calendar;
 	GdkGC *gc;
 	gint row, week = 0, year;
 	gint x_loc;
 	char buffer[3];
 	gint y_loc, day_height;
-	MgCalendarPrivateData *private_data;
+	PlannerCalendarPrivateData *private_data;
 	PangoLayout *layout;
 	PangoRectangle logical_rect;
 	gint focus_padding;
 	gint focus_width;
   
-	g_return_if_fail (MG_IS_CALENDAR (widget));
+	g_return_if_fail (PLANNER_IS_CALENDAR (widget));
 	g_return_if_fail (widget->window != NULL);
-	calendar = MG_CALENDAR (widget);
-	private_data = MG_CALENDAR_PRIVATE_DATA (widget);
+	calendar = PLANNER_CALENDAR (widget);
+	private_data = PLANNER_CALENDAR_PRIVATE_DATA (widget);
 	gc = calendar->gc;
   
 	/*
@@ -1736,12 +1736,12 @@ static void
 planner_calendar_paint_day_num (GtkWidget *widget,
 			   gint       day)
 {
-	MgCalendar *calendar;
+	PlannerCalendar *calendar;
 	gint r, c, row, col;
   
-	g_return_if_fail (MG_IS_CALENDAR (widget));
+	g_return_if_fail (PLANNER_IS_CALENDAR (widget));
   
-	calendar = MG_CALENDAR (widget);
+	calendar = PLANNER_CALENDAR (widget);
   
 	row = -1;
 	col = -1;
@@ -1765,7 +1765,7 @@ planner_calendar_paint_day (GtkWidget *widget,
 		       gint	   row,
 		       gint	   col)
 {
-	MgCalendar *calendar;
+	PlannerCalendar *calendar;
 	GdkGC *gc;
 	gchar buffer[255];
 	gint day;
@@ -1777,15 +1777,15 @@ planner_calendar_paint_day (GtkWidget *widget,
 	gint day_xspace;
 	gint focus_width;
 
-	MgCalendarPrivateData *private_data;
+	PlannerCalendarPrivateData *private_data;
 	PangoLayout *layout;
 	PangoRectangle logical_rect;
   
-	g_return_if_fail (MG_IS_CALENDAR (widget));
+	g_return_if_fail (PLANNER_IS_CALENDAR (widget));
 	g_return_if_fail (row < 6);
 	g_return_if_fail (col < 7);
-	calendar = MG_CALENDAR (widget);
-	private_data = MG_CALENDAR_PRIVATE_DATA (widget);
+	calendar = PLANNER_CALENDAR (widget);
+	private_data = PLANNER_CALENDAR_PRIVATE_DATA (widget);
 
 	/*
 	 * Handle freeze/thaw functionality
@@ -1842,16 +1842,16 @@ planner_calendar_paint_day (GtkWidget *widget,
 		else
 		{
 			switch (calendar->marked_date[day-1]) {
-			case MG_CALENDAR_MARK_NONE:
-			case MG_CALENDAR_MARK_UNDERLINE:
-			case MG_CALENDAR_MARK_BOLD:
+			case PLANNER_CALENDAR_MARK_NONE:
+			case PLANNER_CALENDAR_MARK_UNDERLINE:
+			case PLANNER_CALENDAR_MARK_BOLD:
 				break;
-			case MG_CALENDAR_MARK_SHADE:
+			case PLANNER_CALENDAR_MARK_SHADE:
 				gdk_gc_set_foreground (gc, SHADED_BG_COLOR (GTK_WIDGET (calendar)));
 				gdk_draw_rectangle (private_data->main_win, gc, TRUE, x_left, y_top,
 						    private_data->day_width, day_height);
 				break;
-			case MG_CALENDAR_MARK_STRIPE:
+			case PLANNER_CALENDAR_MARK_STRIPE:
 			{
 				static GdkBitmap *stripe_stipple = NULL;
 				gchar             stipple_pattern[] = { 2, 1, 8, 4 };
@@ -1874,12 +1874,12 @@ planner_calendar_paint_day (GtkWidget *widget,
 		}
       
 		switch (calendar->marked_date[day-1]) {
-		case MG_CALENDAR_MARK_BOLD:
+		case PLANNER_CALENDAR_MARK_BOLD:
 			gdk_gc_set_foreground (gc, MARKED_COLOR (GTK_WIDGET (calendar)));
 			break;
-		case MG_CALENDAR_MARK_SHADE:
-		case MG_CALENDAR_MARK_UNDERLINE:
-		case MG_CALENDAR_MARK_NONE:
+		case PLANNER_CALENDAR_MARK_SHADE:
+		case PLANNER_CALENDAR_MARK_UNDERLINE:
+		case PLANNER_CALENDAR_MARK_NONE:
 			gdk_gc_set_foreground (gc, NORMAL_DAY_COLOR (GTK_WIDGET (calendar)));
 			break;
 		}
@@ -1902,7 +1902,7 @@ planner_calendar_paint_day (GtkWidget *widget,
 			 x_loc, y_loc, layout);
 
 	switch (calendar->marked_date[day-1]) {
-	case MG_CALENDAR_MARK_BOLD:
+	case PLANNER_CALENDAR_MARK_BOLD:
 		if (calendar->day_month[row][col] == MONTH_CURRENT) 
 			gdk_draw_layout (private_data->main_win, gc,
 					 x_loc-1, y_loc, layout);
@@ -1939,15 +1939,15 @@ planner_calendar_paint_day (GtkWidget *widget,
 static void
 planner_calendar_paint_main (GtkWidget *widget)
 {
-	MgCalendar *calendar;
-	MgCalendarPrivateData *private_data;
+	PlannerCalendar *calendar;
+	PlannerCalendarPrivateData *private_data;
 	gint row, col;
   
-	g_return_if_fail (MG_IS_CALENDAR (widget));
+	g_return_if_fail (PLANNER_IS_CALENDAR (widget));
 	g_return_if_fail (widget->window != NULL);
   
-	calendar = MG_CALENDAR (widget);
-	private_data = MG_CALENDAR_PRIVATE_DATA (widget);
+	calendar = PLANNER_CALENDAR (widget);
+	private_data = PLANNER_CALENDAR_PRIVATE_DATA (widget);
 
 	if (private_data->freeze_count)
 	{
@@ -1965,7 +1965,7 @@ planner_calendar_paint_main (GtkWidget *widget)
 }
 
 static void
-planner_calendar_compute_days (MgCalendar *calendar)
+planner_calendar_compute_days (PlannerCalendar *calendar)
 {
 	gint month;
 	gint year;
@@ -1976,7 +1976,7 @@ planner_calendar_compute_days (MgCalendar *calendar)
 	gint col;
 	gint day;
   
-	g_return_if_fail (MG_IS_CALENDAR (calendar));
+	g_return_if_fail (PLANNER_IS_CALENDAR (calendar));
   
 	year = calendar->year;
 	month = calendar->month + 1;
@@ -1985,7 +1985,7 @@ planner_calendar_compute_days (MgCalendar *calendar)
   
 	first_day = day_of_week (year, month, 1);
   
-	if (calendar->display_flags & MG_CALENDAR_WEEK_START_MONDAY)
+	if (calendar->display_flags & PLANNER_CALENDAR_WEEK_START_MONDAY)
 		first_day--;
 	else
 		first_day %= 7;
@@ -2044,36 +2044,36 @@ planner_calendar_compute_days (MgCalendar *calendar)
    heading and the month headings)
    
    flags is can be an XOR of:
-   MG_CALENDAR_SHOW_HEADING
-   MG_CALENDAR_SHOW_DAY_NAMES
-   MG_CALENDAR_NO_MONTH_CHANGE
-   MG_CALENDAR_SHOW_WEEK_NUMBERS
-   MG_CALENDAR_WEEK_START_MONDAY
+   PLANNER_CALENDAR_SHOW_HEADING
+   PLANNER_CALENDAR_SHOW_DAY_NAMES
+   PLANNER_CALENDAR_NO_MONTH_CHANGE
+   PLANNER_CALENDAR_SHOW_WEEK_NUMBERS
+   PLANNER_CALENDAR_WEEK_START_MONDAY
    ---------------------------------------------------------------------- */
 
 void
-planner_calendar_display_options (MgCalendar	       *calendar,
-			     MgCalendarDisplayOptions flags)
+planner_calendar_display_options (PlannerCalendar	       *calendar,
+			     PlannerCalendarDisplayOptions flags)
 {
-	MgCalendarPrivateData *private_data;
+	PlannerCalendarPrivateData *private_data;
 	gint resize = 0;
 	GtkWidget *widget;
 	gint i;
   
-	g_return_if_fail (MG_IS_CALENDAR (calendar));
+	g_return_if_fail (PLANNER_IS_CALENDAR (calendar));
   
 	widget = GTK_WIDGET (calendar);
-	private_data = MG_CALENDAR_PRIVATE_DATA (calendar);
+	private_data = PLANNER_CALENDAR_PRIVATE_DATA (calendar);
   
 	if (GTK_WIDGET_REALIZED (widget))
 	{
-		if ((flags ^ calendar->display_flags) & MG_CALENDAR_NO_MONTH_CHANGE)
+		if ((flags ^ calendar->display_flags) & PLANNER_CALENDAR_NO_MONTH_CHANGE)
 		{
 			resize ++;
-			if (! (flags & MG_CALENDAR_NO_MONTH_CHANGE)
+			if (! (flags & PLANNER_CALENDAR_NO_MONTH_CHANGE)
 			    && (private_data->header_win))
 			{
-				calendar->display_flags &= ~MG_CALENDAR_NO_MONTH_CHANGE;
+				calendar->display_flags &= ~PLANNER_CALENDAR_NO_MONTH_CHANGE;
 				planner_calendar_realize_arrows (widget);
 			}
 			else
@@ -2091,13 +2091,13 @@ planner_calendar_display_options (MgCalendar	       *calendar,
 			}
 		}
       
-		if ((flags ^ calendar->display_flags) & MG_CALENDAR_SHOW_HEADING)
+		if ((flags ^ calendar->display_flags) & PLANNER_CALENDAR_SHOW_HEADING)
 		{
 			resize++;
 	  
-			if (flags & MG_CALENDAR_SHOW_HEADING)
+			if (flags & PLANNER_CALENDAR_SHOW_HEADING)
 			{
-				calendar->display_flags |= MG_CALENDAR_SHOW_HEADING;
+				calendar->display_flags |= PLANNER_CALENDAR_SHOW_HEADING;
 				planner_calendar_realize_header (widget);
 			}
 			else
@@ -2119,13 +2119,13 @@ planner_calendar_display_options (MgCalendar	       *calendar,
 		}
       
       
-		if ((flags ^ calendar->display_flags) & MG_CALENDAR_SHOW_DAY_NAMES)
+		if ((flags ^ calendar->display_flags) & PLANNER_CALENDAR_SHOW_DAY_NAMES)
 		{
 			resize++;
 	  
-			if (flags & MG_CALENDAR_SHOW_DAY_NAMES)
+			if (flags & PLANNER_CALENDAR_SHOW_DAY_NAMES)
 			{
-				calendar->display_flags |= MG_CALENDAR_SHOW_DAY_NAMES;
+				calendar->display_flags |= PLANNER_CALENDAR_SHOW_DAY_NAMES;
 				planner_calendar_realize_day_names (widget);
 			}
 			else
@@ -2136,13 +2136,13 @@ planner_calendar_display_options (MgCalendar	       *calendar,
 			}
 		}
       
-		if ((flags ^ calendar->display_flags) & MG_CALENDAR_SHOW_WEEK_NUMBERS)
+		if ((flags ^ calendar->display_flags) & PLANNER_CALENDAR_SHOW_WEEK_NUMBERS)
 		{
 			resize++;
 	  
-			if (flags & MG_CALENDAR_SHOW_WEEK_NUMBERS)
+			if (flags & PLANNER_CALENDAR_SHOW_WEEK_NUMBERS)
 			{
-				calendar->display_flags |= MG_CALENDAR_SHOW_WEEK_NUMBERS;
+				calendar->display_flags |= PLANNER_CALENDAR_SHOW_WEEK_NUMBERS;
 				planner_calendar_realize_week_numbers (widget);
 			}
 			else
@@ -2153,12 +2153,12 @@ planner_calendar_display_options (MgCalendar	       *calendar,
 			}
 		}
       
-		if ((flags ^ calendar->display_flags) & MG_CALENDAR_WEEK_START_MONDAY)
+		if ((flags ^ calendar->display_flags) & PLANNER_CALENDAR_WEEK_START_MONDAY)
 		{
-			if (calendar->display_flags & MG_CALENDAR_WEEK_START_MONDAY)
-				calendar->display_flags &= ~MG_CALENDAR_WEEK_START_MONDAY;
+			if (calendar->display_flags & PLANNER_CALENDAR_WEEK_START_MONDAY)
+				calendar->display_flags &= ~PLANNER_CALENDAR_WEEK_START_MONDAY;
 			else
-				calendar->display_flags |= MG_CALENDAR_WEEK_START_MONDAY;
+				calendar->display_flags |= PLANNER_CALENDAR_WEEK_START_MONDAY;
 	  
 			planner_calendar_compute_days (calendar);
 			planner_calendar_paint_main (GTK_WIDGET (calendar));
@@ -2177,11 +2177,11 @@ planner_calendar_display_options (MgCalendar	       *calendar,
 }
 
 gboolean
-planner_calendar_select_month (MgCalendar *calendar,
+planner_calendar_select_month (PlannerCalendar *calendar,
 			  guint	month,
 			  guint	year)
 {
-	g_return_val_if_fail (MG_IS_CALENDAR (calendar), FALSE);
+	g_return_val_if_fail (PLANNER_IS_CALENDAR (calendar), FALSE);
 	g_return_val_if_fail (month <= 11, FALSE);
   
 	calendar->month = month;
@@ -2197,10 +2197,10 @@ planner_calendar_select_month (MgCalendar *calendar,
 }
 
 void
-planner_calendar_select_day (MgCalendar *calendar,
+planner_calendar_select_day (PlannerCalendar *calendar,
 			guint	      day)
 {
-	g_return_if_fail (MG_IS_CALENDAR (calendar));
+	g_return_if_fail (PLANNER_IS_CALENDAR (calendar));
 	g_return_if_fail (day <= 31);
   
 	/* planner_calendar_compute_days (calendar); */
@@ -2231,7 +2231,7 @@ planner_calendar_select_day (MgCalendar *calendar,
 }
 
 static void
-planner_calendar_select_and_focus_day (MgCalendar *calendar,
+planner_calendar_select_and_focus_day (PlannerCalendar *calendar,
 				  guint        day)
 {
 	gint old_focus_row = calendar->focus_row;
@@ -2257,15 +2257,15 @@ planner_calendar_select_and_focus_day (MgCalendar *calendar,
 }
 
 void
-planner_calendar_clear_marks (MgCalendar *calendar)
+planner_calendar_clear_marks (PlannerCalendar *calendar)
 {
 	guint day;
   
-	g_return_if_fail (MG_IS_CALENDAR (calendar));
+	g_return_if_fail (PLANNER_IS_CALENDAR (calendar));
   
 	for (day = 0; day < 31; day++)
 	{
-		calendar->marked_date[day] = MG_CALENDAR_MARK_NONE;
+		calendar->marked_date[day] = PLANNER_CALENDAR_MARK_NONE;
 	}
  
 	calendar->num_marked_dates = 0;
@@ -2277,10 +2277,10 @@ planner_calendar_clear_marks (MgCalendar *calendar)
 }
 
 gboolean
-planner_calendar_unmark_day (MgCalendar *calendar,
+planner_calendar_unmark_day (PlannerCalendar *calendar,
 			guint	      day)
 {
-	g_return_val_if_fail (MG_IS_CALENDAR (calendar), FALSE);
+	g_return_val_if_fail (PLANNER_IS_CALENDAR (calendar), FALSE);
   
 	if (day >= 1 && day <= 31 && calendar->marked_date[day-1] == TRUE)
 	{
@@ -2297,12 +2297,12 @@ planner_calendar_unmark_day (MgCalendar *calendar,
 }
 
 void
-planner_calendar_get_date (MgCalendar *calendar,
+planner_calendar_get_date (PlannerCalendar *calendar,
 		      guint	   *year,
 		      guint	   *month,
 		      guint	   *day)
 {
-	g_return_if_fail (MG_IS_CALENDAR (calendar));
+	g_return_if_fail (PLANNER_IS_CALENDAR (calendar));
   
 	if (year)
 		*year = calendar->year;
@@ -2318,13 +2318,13 @@ static gboolean
 planner_calendar_button_press (GtkWidget	  *widget,
 			  GdkEventButton *event)
 {
-	MgCalendar *calendar;
-	MgCalendarPrivateData *private_data;
+	PlannerCalendar *calendar;
+	PlannerCalendarPrivateData *private_data;
 	gint x, y;
-	void (* action_func) (MgCalendar *);
+	void (* action_func) (PlannerCalendar *);
   
-	calendar = MG_CALENDAR (widget);
-	private_data = MG_CALENDAR_PRIVATE_DATA (widget);
+	calendar = PLANNER_CALENDAR (widget);
+	private_data = PLANNER_CALENDAR_PRIVATE_DATA (widget);
   
 	x = (gint) (event->x);
 	y = (gint) (event->y);
@@ -2354,14 +2354,14 @@ static gboolean
 planner_calendar_motion_notify (GtkWidget	   *widget,
 			   GdkEventMotion *event)
 {
-	MgCalendar *calendar;
-	MgCalendarPrivateData *private_data;
+	PlannerCalendar *calendar;
+	PlannerCalendarPrivateData *private_data;
 	gint event_x, event_y;
 	gint row, col;
 	gint old_row, old_col;
   
-	calendar = MG_CALENDAR (widget);
-	private_data = MG_CALENDAR_PRIVATE_DATA (widget);
+	calendar = PLANNER_CALENDAR (widget);
+	private_data = PLANNER_CALENDAR_PRIVATE_DATA (widget);
 	event_x = (gint) (event->x);
 	event_y = (gint) (event->y);
   
@@ -2396,11 +2396,11 @@ static gboolean
 planner_calendar_enter_notify (GtkWidget	    *widget,
 			  GdkEventCrossing *event)
 {
-	MgCalendar *calendar;
-	MgCalendarPrivateData *private_data;
+	PlannerCalendar *calendar;
+	PlannerCalendarPrivateData *private_data;
   
-	calendar = MG_CALENDAR (widget);
-	private_data = MG_CALENDAR_PRIVATE_DATA (widget);
+	calendar = PLANNER_CALENDAR (widget);
+	private_data = PLANNER_CALENDAR_PRIVATE_DATA (widget);
   
 	if (event->window == private_data->arrow_win[ARROW_MONTH_LEFT])
 	{
@@ -2433,13 +2433,13 @@ static gboolean
 planner_calendar_leave_notify (GtkWidget	    *widget,
 			  GdkEventCrossing *event)
 {
-	MgCalendar *calendar;
-	MgCalendarPrivateData *private_data;
+	PlannerCalendar *calendar;
+	PlannerCalendarPrivateData *private_data;
 	gint row;
 	gint col;
   
-	calendar = MG_CALENDAR (widget);
-	private_data = MG_CALENDAR_PRIVATE_DATA (widget);
+	calendar = PLANNER_CALENDAR (widget);
+	private_data = PLANNER_CALENDAR_PRIVATE_DATA (widget);
   
 	if (event->window == private_data->main_win)
 	{
@@ -2482,15 +2482,15 @@ static void
 planner_calendar_paint_arrow (GtkWidget *widget,
 			 guint	     arrow)
 {
-	MgCalendarPrivateData *private_data;
+	PlannerCalendarPrivateData *private_data;
 	GdkWindow *window;
 	GdkGC *gc;
-	MgCalendar *calendar;
+	PlannerCalendar *calendar;
 	gint state;
 	gint width, height;
   
-	calendar = MG_CALENDAR (widget);
-	private_data = MG_CALENDAR_PRIVATE_DATA (widget);
+	calendar = PLANNER_CALENDAR (widget);
+	private_data = PLANNER_CALENDAR_PRIVATE_DATA (widget);
 
 	if (private_data->freeze_count)
 	{
@@ -2521,21 +2521,21 @@ planner_calendar_paint_arrow (GtkWidget *widget,
 }
 
 void
-planner_calendar_freeze (MgCalendar *calendar)
+planner_calendar_freeze (PlannerCalendar *calendar)
 {
-	g_return_if_fail (MG_IS_CALENDAR (calendar));
+	g_return_if_fail (PLANNER_IS_CALENDAR (calendar));
   
-	MG_CALENDAR_PRIVATE_DATA (calendar)->freeze_count++;
+	PLANNER_CALENDAR_PRIVATE_DATA (calendar)->freeze_count++;
 }
 
 void
-planner_calendar_thaw (MgCalendar *calendar)
+planner_calendar_thaw (PlannerCalendar *calendar)
 {
-	MgCalendarPrivateData *private_data;
+	PlannerCalendarPrivateData *private_data;
 
-	g_return_if_fail (MG_IS_CALENDAR (calendar));
+	g_return_if_fail (PLANNER_IS_CALENDAR (calendar));
   
-	private_data = MG_CALENDAR_PRIVATE_DATA (calendar);
+	private_data = PLANNER_CALENDAR_PRIVATE_DATA (calendar);
   
 	if (private_data->freeze_count)
 		if (!(--private_data->freeze_count))
@@ -2561,12 +2561,12 @@ planner_calendar_thaw (MgCalendar *calendar)
 static void
 planner_calendar_set_background (GtkWidget *widget)
 {
-	MgCalendar *calendar;
-	MgCalendarPrivateData *private_data;
+	PlannerCalendar *calendar;
+	PlannerCalendarPrivateData *private_data;
 	gint i;
   
-	calendar = MG_CALENDAR (widget);
-	private_data = MG_CALENDAR_PRIVATE_DATA (widget);
+	calendar = PLANNER_CALENDAR (widget);
+	private_data = PLANNER_CALENDAR_PRIVATE_DATA (widget);
 
 	if (GTK_WIDGET_REALIZED (widget))
 	{
@@ -2612,8 +2612,8 @@ planner_calendar_state_changed (GtkWidget	   *widget,
 static void
 planner_calendar_finalize (GObject *object)
 {
-	MgCalendarPrivateData *private_data;
-	private_data = MG_CALENDAR_PRIVATE_DATA (object);
+	PlannerCalendarPrivateData *private_data;
+	private_data = PLANNER_CALENDAR_PRIVATE_DATA (object);
   
 	g_free (private_data);
   
@@ -2625,13 +2625,13 @@ static gboolean
 planner_calendar_key_press (GtkWidget   *widget,
 		       GdkEventKey *event)
 {
-	MgCalendar *calendar;
+	PlannerCalendar *calendar;
 	gint return_val;
 	gint old_focus_row;
 	gint old_focus_col;
 	gint row, col, day;
   
-	calendar = MG_CALENDAR (widget);
+	calendar = PLANNER_CALENDAR (widget);
 	return_val = FALSE;
   
 	old_focus_row = calendar->focus_row;
@@ -2755,13 +2755,13 @@ planner_calendar_key_press (GtkWidget   *widget,
 /* ------------------------------- */
 
 void
-planner_calendar_mark_day (MgCalendar         *calendar,
+planner_calendar_mark_day (PlannerCalendar         *calendar,
 		      guint               day,
-		      MgCalendarMarkType  type)
+		      PlannerCalendarMarkType  type)
 {
 	gint index;
 	
-	g_return_if_fail (MG_IS_CALENDAR (calendar));
+	g_return_if_fail (PLANNER_IS_CALENDAR (calendar));
 	g_return_if_fail (day >= 1 && day <= 31);
 
 	index = day - 1;
@@ -2771,7 +2771,7 @@ planner_calendar_mark_day (MgCalendar         *calendar,
 	}
 
 	calendar->marked_date[index] = type;
-	if (type != MG_CALENDAR_MARK_NONE) {
+	if (type != PLANNER_CALENDAR_MARK_NONE) {
 		calendar->num_marked_dates++;
 	} else {
 		calendar->num_marked_dates--;

@@ -38,6 +38,8 @@ planner_SOURCES = \
 	planner-cell-renderer-list.h	\
 	planner-cell-renderer-popup.c	\
 	planner-cell-renderer-popup.h	\
+	planner-cmd-manager.c		\
+	planner-cmd-manager.h		\
 	planner-day-type-dialog.c	\
 	planner-day-type-dialog.h	\
 	planner-default-week-dialog.c	\
@@ -51,8 +53,6 @@ planner_SOURCES = \
 	planner-list-model.c		\
 	planner-list-model.h		\
 	planner-main.c			\
-	planner-main-window.c		\
-	planner-main-window.h		\
 	planner-phase-dialog.c		\
 	planner-phase-dialog.h		\
 	planner-plugin.c		\
@@ -89,6 +89,8 @@ planner_SOURCES = \
 	planner-view.h			\
 	planner-view-loader.c		\
 	planner-view-loader.h		\
+	planner-window.c		\
+	planner-window.h		\
 	planner-working-time-dialog.c	\
 	planner-working-time-dialog.h	
 

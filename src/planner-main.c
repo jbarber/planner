@@ -32,9 +32,9 @@
 #include <libgnomeui/gnome-window-icon.h>
 #include <libbonoboui.h>
 #include "planner-application.h"
-#include "planner-main-window.h"
+#include "planner-window.h"
 
-static MgApplication *application;
+static PlannerApplication *application;
 
 
 int
@@ -97,7 +97,7 @@ main (int argc, char **argv)
 	gtk_widget_show_all (main_window);
 
 	if (args != NULL) {
-		planner_main_window_open (MG_MAIN_WINDOW (main_window), args[0]);
+		planner_window_open (PLANNER_WINDOW (main_window), args[0]);
 	}
 
         bonobo_ui_main ();

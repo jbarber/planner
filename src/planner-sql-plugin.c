@@ -33,7 +33,7 @@
 #include <gtk/gtk.h>
 #include <gconf/gconf-client.h>
 #include <libpq-fe.h>
-#include "planner-main-window.h"
+#include "planner-window.h"
 #include "planner-application.h"
 #include "planner-plugin.h"
 
@@ -52,13 +52,13 @@ typedef struct {
 	GtkWidget *open_dialog;
 } SQLPluginPriv; 
 
-static gint     sql_plugin_retrieve_project_id (MgPlugin           *plugin,
+static gint     sql_plugin_retrieve_project_id (PlannerPlugin           *plugin,
 						gchar              *server,
 						gchar              *port,
 						gchar              *database,
 						gchar              *login,
 						gchar              *password);
-static gboolean sql_plugin_retrieve_db_values  (MgPlugin           *plugin,
+static gboolean sql_plugin_retrieve_db_values  (PlannerPlugin           *plugin,
 						const gchar        *title,
 						gchar             **server,
 						gchar             **port,
@@ -71,8 +71,8 @@ static void     sql_plugin_open                (BonoboUIComponent  *component,
 static void     sql_plugin_save                (BonoboUIComponent  *component,
 						gpointer            user_data,
 						const gchar        *cname);
-void            plugin_init                    (MgPlugin           *plugin,
-						MgMainWindow       *main_window);
+void            plugin_init                    (PlannerPlugin           *plugin,
+						PlannerWindow       *main_window);
 void            plugin_exit                    (void);
 
 
@@ -207,7 +207,7 @@ create_sql_uri (const gchar *server,
 }
 
 static void
-show_error_dialog (MgPlugin    *plugin,
+show_error_dialog (PlannerPlugin    *plugin,
 		   const gchar *str)
 {
 	GtkWindow *window;
@@ -243,7 +243,7 @@ selection_changed_cb (GtkTreeSelection *selection, GtkWidget *ok_button)
  * id of the selected one.
  */
 static gint
-sql_plugin_retrieve_project_id (MgPlugin *plugin,
+sql_plugin_retrieve_project_id (PlannerPlugin *plugin,
 				gchar    *server,
 				gchar    *port,
 				gchar    *database,
@@ -388,7 +388,7 @@ sql_plugin_retrieve_project_id (MgPlugin *plugin,
 }
 
 static gboolean
-sql_plugin_retrieve_db_values (MgPlugin     *plugin,
+sql_plugin_retrieve_db_values (PlannerPlugin     *plugin,
 			       const gchar  *title,
 			       gchar       **server,
 			       gchar       **port,
@@ -405,10 +405,10 @@ sql_plugin_retrieve_db_values (MgPlugin     *plugin,
 	GtkWidget     *user_entry;
 	GtkWidget     *password_entry;
 	gboolean       ret;
-	MgApplication *application;
+	PlannerApplication *application;
 	GConfClient   *gconf_client;
 
-	application = planner_main_window_get_application (plugin->main_window);
+	application = planner_window_get_application (plugin->main_window);
 	
 	gconf_client = planner_application_get_gconf_client (application);
 
@@ -481,8 +481,8 @@ sql_plugin_open (BonoboUIComponent *component,
 		 gpointer           user_data,
 		 const gchar       *cname)
 {
-	MgPlugin      *plugin = user_data;
-	MgApplication *application;
+	PlannerPlugin      *plugin = user_data;
+	PlannerApplication *application;
 	GtkWidget     *window;
 	MrpProject    *project;
 	gchar         *server = NULL;
@@ -520,9 +520,9 @@ sql_plugin_open (BonoboUIComponent *component,
 
 	uri = create_sql_uri (server, port, database, login, password, project_id);
 
-	project = planner_main_window_get_project (plugin->main_window);
+	project = planner_window_get_project (plugin->main_window);
 	window = GTK_WIDGET (plugin->main_window);
-	application = planner_main_window_get_application (plugin->main_window);
+	application = planner_window_get_application (plugin->main_window);
 	
 	if (mrp_project_is_empty (project)) {
 		GObject *object = G_OBJECT (window);
@@ -546,7 +546,7 @@ sql_plugin_open (BonoboUIComponent *component,
 		GObject *object;
 		
 		window = planner_application_new_window (application);
-		project = planner_main_window_get_project (MG_MAIN_WINDOW (window));
+		project = planner_window_get_project (PLANNER_WINDOW (window));
 		
 		object = G_OBJECT (window);
 		
@@ -588,7 +588,7 @@ sql_plugin_save (BonoboUIComponent *component,
 		 gpointer           user_data,
 		 const gchar       *cname)
 {
-	MgPlugin   *plugin = user_data;
+	PlannerPlugin   *plugin = user_data;
 	MrpProject *project;
 	GObject    *object;
 	gchar      *server = NULL;
@@ -599,7 +599,7 @@ sql_plugin_save (BonoboUIComponent *component,
 	gchar      *uri = NULL;
 	GError     *error = NULL;
 		
-	project = planner_main_window_get_project (plugin->main_window);
+	project = planner_window_get_project (plugin->main_window);
 
 	if (!sql_plugin_retrieve_db_values (plugin,
 					    _("Save to Database"),
@@ -649,8 +649,8 @@ plugin_exit (void)
 }
 
 G_MODULE_EXPORT void 
-plugin_init (MgPlugin     *plugin,
-	     MgMainWindow *main_window)
+plugin_init (PlannerPlugin     *plugin,
+	     PlannerWindow *main_window)
 {
 	BonoboUIContainer *ui_container;
 	BonoboUIComponent *ui_component;
@@ -670,7 +670,7 @@ plugin_init (MgPlugin     *plugin,
 			   "sql-plugin",
 			   plugin);
 	
-	ui_container = planner_main_window_get_ui_container (main_window);
+	ui_container = planner_window_get_ui_container (main_window);
 	ui_component = bonobo_ui_component_new_default ();
 	
 	bonobo_ui_component_set_container (ui_component, 

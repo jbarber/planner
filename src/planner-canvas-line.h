@@ -20,28 +20,28 @@
  * Boston, MA 02111-1307, USA.
  */
 
-#ifndef __MG_CANVAS_LINE_H__
-#define __MG_CANVAS_LINE_H__
+#ifndef __PLANNER_CANVAS_LINE_H__
+#define __PLANNER_CANVAS_LINE_H__
 
 #include <glib-object.h>
 #include <libgnomecanvas/gnome-canvas-line.h>
 
-#define MG_TYPE_CANVAS_LINE            (planner_canvas_line_get_type ())
-#define MG_CANVAS_LINE(obj)            (GTK_CHECK_CAST ((obj), MG_TYPE_CANVAS_LINE, MgCanvasLine))
-#define MG_CANVAS_LINE_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), MG_TYPE_CANVAS_LINE, MgCanvasLineClass))
-#define MG_IS_CANVAS_LINE(obj)         (GTK_CHECK_TYPE ((obj), MG_TYPE_CANVAS_LINE))
-#define MG_IS_CANVAS_LINE_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), MG_TYPE_CANVAS_LINE))
-#define MG_CANVAS_LINE_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), MG_TYPE_CANVAS_LINE, MgCanvasLineClass))
+#define PLANNER_TYPE_CANVAS_LINE            (planner_canvas_line_get_type ())
+#define PLANNER_CANVAS_LINE(obj)            (GTK_CHECK_CAST ((obj), PLANNER_TYPE_CANVAS_LINE, PlannerCanvasLine))
+#define PLANNER_CANVAS_LINE_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), PLANNER_TYPE_CANVAS_LINE, PlannerCanvasLineClass))
+#define PLANNER_IS_CANVAS_LINE(obj)         (GTK_CHECK_TYPE ((obj), PLANNER_TYPE_CANVAS_LINE))
+#define PLANNER_IS_CANVAS_LINE_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), PLANNER_TYPE_CANVAS_LINE))
+#define PLANNER_CANVAS_LINE_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), PLANNER_TYPE_CANVAS_LINE, PlannerCanvasLineClass))
 
 
-typedef struct _MgCanvasLine      MgCanvasLine;
-typedef struct _MgCanvasLineClass MgCanvasLineClass;
+typedef struct _PlannerCanvasLine      PlannerCanvasLine;
+typedef struct _PlannerCanvasLineClass PlannerCanvasLineClass;
 
-struct _MgCanvasLine {
+struct _PlannerCanvasLine {
 	GnomeCanvasLine  parent;
 };
 
-struct _MgCanvasLineClass {
+struct _PlannerCanvasLineClass {
 	GnomeCanvasLineClass parent_class;
 };
 
@@ -49,5 +49,5 @@ struct _MgCanvasLineClass {
 GType planner_canvas_line_get_type (void) G_GNUC_CONST;
 
 
-#endif /* __MG_CANVAS_LINE_H__ */
+#endif /* __PLANNER_CANVAS_LINE_H__ */
 

@@ -20,8 +20,8 @@
  * Boston, MA 02111-1307, USA.
  */
 
-#ifndef __MG_FORMAT_H__
-#define __MG_FORMAT_H__
+#ifndef __PLANNER_FORMAT_H__
+#define __PLANNER_FORMAT_H__
 
 #include <glib.h>
 #include <libplanner/mrp-time.h>
@@ -38,4 +38,4 @@ gchar *planner_format_float    (gfloat    number,
 			   gboolean  fill_with_zeroes);
 
 
-#endif /* __MG_FORMAT_H__ */
+#endif /* __PLANNER_FORMAT_H__ */
