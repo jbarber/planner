@@ -211,11 +211,20 @@ libpython_plugin_la_LIBADD  = $(PYTHON_LDFLAGS)
 libpython_plugin_la_CFLAGS  = $(PYGTK_CFLAGS)
 endif
 
+if HAVE_EDS_PLUGIN
+eds_plugin = libeds-plugin.la
+libeds_plugin_la_SOURCES = planner-eds-plugin.c
+libeds_plugin_la_LDFLAGS = -avoid-version -module
+libeds_plugin_la_LIBADD  = $(EDS_LIBS)
+libeds_plugin_la_CFLAGS  = $(EDS_CFLAGS)
+endif
+
 plugin_LTLIBRARIES = \
 	libhtml-plugin.la		\
 	libxmlplanner-plugin.la		\
 	$(sql_plugin)			\
-	$(python_plugin)
+	$(python_plugin)		\
+	$(eds_plugin)
 
 libhtml_plugin_la_SOURCES = planner-html-plugin.c
 libhtml_plugin_la_LDFLAGS = -avoid-version -module

@@ -3,7 +3,9 @@
     <menu            action="File">
       <menuitem      action="FileNew"/>
       <menuitem      action="FileOpen"/>
-      <placeholder   name="Import placeholder"/>
+      <menu          action="Import">
+        <placeholder name="Import placeholder"/>
+      </menu>
       <separator/>
       <menuitem      action="FileSave"/>
       <menuitem      action="FileSaveAs"/>

@@ -1,3 +1,19 @@
+2004-08-10  Alvaro del Castillo  <acs@barrapunto.com>
+
+	* configure.in
+	* src/Makefile.am:
+	Added support for enable evolution data server (eds) plugin
+	* data/glade/Makefile.am:
+	* data/glade/eds.glade (added):
+	GUI for the evolution data server (eds) plugin
+	* data/ui/Makefile.am:
+	* data/ui/main-window.ui
+	* data/ui/eds-plugin.ui (added)
+	* src/planner-window.c:
+	New Import menu and new entry in Import for eds plugin
+	* src/planner-eds-plugin.c (added):
+	eds plugin implementation
+	
 2004-08-09  Richard Hult  <richard@imendio.com>
 
 	* libegg/recent-files/: Sync (even though we're not using this at

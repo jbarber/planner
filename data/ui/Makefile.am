@@ -10,7 +10,8 @@ ui_DATA = \
 	sql-plugin.ui		\
 	task-view.ui		\
 	xml-planner-plugin.ui	\
-	time-table-view.ui
+	time-table-view.ui	\
+	eds-plugin.ui
 
 
 EXTRA_DIST = $(ui_DATA)
