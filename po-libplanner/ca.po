@@ -6,135 +6,134 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libmrproject HEAD\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-10-02 11:12+0200\n"
+"POT-Creation-Date: 2003-12-01 20:39+0100\n"
 "PO-Revision-Date: 2003-10-01 08:18+0200\n"
 "Last-Translator: Josep Puigdemont <baldrick@terra.es>\n"
 "Language-Team: Catalan <tradgnome@softcatala.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Report-Msgid-Bugs-To: \n"
 "X-Generator: KBabel 1.0.2\n"
 
-#: mrproject/mrp-project.c:441
+#: libplanner/mrp-project.c:441
 msgid "Default"
 msgstr "Defecte"
 
-#: mrproject/mrp-project.c:749
+#: libplanner/mrp-project.c:749
 #, c-format
 msgid "Couldn't find a suitable file module for loading '%s'"
 msgstr "No s'ha pogut trobar cap mòdul per carregar '%s'"
 
-#: mrproject/mrp-project.c:770 mrproject/mrp-project.c:1034
+#: libplanner/mrp-project.c:770 libplanner/mrp-project.c:1034
 msgid "No support for SQL storage built into this version of MrProject."
 msgstr "Aquesta versió del MrProject no implementa emmagatzemament SQL."
 
-#: mrproject/mrp-project.c:807
+#: libplanner/mrp-project.c:807
 msgid "Invalid URI."
 msgstr "URI invàlida."
 
-#: mrproject/mrp-project.c:928
+#: libplanner/mrp-project.c:928
 #, c-format
 msgid "Unable to find file writer identified by '%s'"
 msgstr "No s'ha pogut trobar cap fitxer d'escriptura identificat per '%s'"
 
-#: mrproject/mrp-project.c:991
+#: libplanner/mrp-project.c:991
 msgid "Couldn't find a suitable file module for loading project"
 msgstr "No s'ha pogut trobar cap mòdul per carregar el projecte"
 
-#: mrproject/mrp-property.c:365
+#: libplanner/mrp-property.c:365
 msgid "Text"
 msgstr "Text"
 
-#: mrproject/mrp-property.c:367
+#: libplanner/mrp-property.c:367
 msgid "String list"
 msgstr "Llista de cadenes"
 
-#: mrproject/mrp-property.c:369
+#: libplanner/mrp-property.c:369
 msgid "Integer number"
 msgstr "Nombre enter"
 
-#: mrproject/mrp-property.c:371
+#: libplanner/mrp-property.c:371
 msgid "Floating-point number"
 msgstr "Nombre de coma flotant"
 
-#: mrproject/mrp-property.c:373
+#: libplanner/mrp-property.c:373
 msgid "Date"
 msgstr "Data"
 
-#: mrproject/mrp-property.c:375
+#: libplanner/mrp-property.c:375
 msgid "Duration"
 msgstr "Durada"
 
-#: mrproject/mrp-property.c:377
+#: libplanner/mrp-property.c:377
 msgid "Cost"
 msgstr "Cost"
 
-#: mrproject/mrp-property.c:380
+#: libplanner/mrp-property.c:380
 msgid "None"
 msgstr "Cap"
 
-#: mrproject/mrp-task-manager.c:1769
+#: libplanner/mrp-task-manager.c:1769
 msgid "Can not add a predecessor relation between a task and its ancestor."
 msgstr ""
 "No s'ha pogut afegir cap relació predecessora entre la tasca i la seva "
 "antecessora."
 
-#: mrproject/mrp-task-manager.c:1778 mrproject/mrp-task-manager.c:1786
+#: libplanner/mrp-task-manager.c:1778 libplanner/mrp-task-manager.c:1786
 msgid "Can not add a predecessor, because it would result in a loop."
 msgstr ""
 "No s'ha pogut afegir cap predecessor, ja que resultaria un bucle infinit."
 
-#: mrproject/mrp-task-manager.c:1821
+#: libplanner/mrp-task-manager.c:1821
 msgid "Can not move the task, since it would result in a loop."
 msgstr "No s'ha pogu moure la tasca, ja que resultaria en un bucle infinit."
 
-#: mrproject/mrp-task.c:1011
+#: libplanner/mrp-task.c:1016
 msgid ""
 "Could not add a predecessor relation, because the tasks are already related."
 msgstr ""
 "No s'ha pogut afegir cap relació predecessora, ja que les tasques ja estan "
 "relacionades."
 
-#: mrproject/mrp-day.c:54
+#: libplanner/mrp-day.c:54
 msgid "Working"
 msgstr "Feiner"
 
-#: mrproject/mrp-day.c:55
+#: libplanner/mrp-day.c:55
 msgid "A default working day"
 msgstr "Un dia feiner per defecte"
 
-#: mrproject/mrp-day.c:57
+#: libplanner/mrp-day.c:57
 msgid "Nonworking"
 msgstr "Festiu"
 
-#: mrproject/mrp-day.c:58
+#: libplanner/mrp-day.c:58
 msgid "A default non working day"
 msgstr "Un dia festiu per defecte"
 
-#: mrproject/mrp-day.c:60
+#: libplanner/mrp-day.c:60
 msgid "Use base"
 msgstr "Fes servir la base"
 
-#: mrproject/mrp-day.c:61
+#: libplanner/mrp-day.c:61
 msgid "Use day from base calendar"
 msgstr "Fes servir un dia del calendari base"
 
-#: storage-modules/mrproject-1/mrp-parser.c:1043
-#: storage-modules/mrproject-1/mrp-parser.c:1138
+#: libplanner/mrp-parser.c:1043 libplanner/mrp-parser.c:1138
 msgid "Could not create XML tree"
 msgstr "No s'ha pogut crear l'àrbre XML."
 
-#: storage-modules/mrproject-1/mrp-parser.c:1104
+#: libplanner/mrp-parser.c:1104
 msgid "Could not write XML file"
 msgstr "No s'ha pogut escriure el fitxer XML."
 
 #. Give up.
-#: storage-modules/sql/mrp-sql.c:229
+#: libplanner/mrp-sql.c:229
 msgid "Invalid Unicode"
 msgstr "Unicode invàlid"
 
-#: storage-modules/sql/mrp-sql.c:2209
+#: libplanner/mrp-sql.c:2205
 #, c-format
 msgid ""
 "The project '%s' has been changed by the user '%s' since you opened it. Do "
@@ -143,7 +142,7 @@ msgstr ""
 "El projecte '%s' ha estat modificat per l'usuari '%s' des que l'heu obert. "
 "Voleu guardar-lo de totes maneres?"
 
-#: storage-modules/sql/mrp-sql.c:3447
+#: libplanner/mrp-sql.c:3443
 #, c-format
 msgid ""
 "Connection to database '%s' failed.\n"
@@ -152,14 +151,14 @@ msgstr ""
 "La connexió a la base de dades '%s' ha fallat.\n"
 "%s"
 
-#: storage-modules/sql/mrp-storage-sql.c:205
+#: libplanner/mrp-storage-sql.c:205
 msgid "Invalid SQL URI (must start with 'sql://' and contain '#')."
 msgstr "URI d'SQL invàlida (ha de començar amb 'sql://' i contenir '#')."
 
-#: storage-modules/sql/mrp-storage-sql.c:274
+#: libplanner/mrp-storage-sql.c:274
 msgid "Invalid SQL URI (invalid project id)."
 msgstr "URI d'SQL invàlida (id del projecte invàlid)"
 
-#: storage-modules/sql/mrp-storage-sql.c:282
+#: libplanner/mrp-storage-sql.c:282
 msgid "Invalid SQL URI (no database name specified)."
 msgstr "URI d'SQL invàlida (no s'ha especificat cap base de dades)."

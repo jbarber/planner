@@ -7,331 +7,886 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: el\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-10-28 18:19+0200\n"
+"POT-Creation-Date: 2003-12-01 23:08+0100\n"
 "PO-Revision-Date: 2003-10-28 18:17+0200\n"
 "Last-Translator: Kostas Papadimas <pkst@gnome.org>\n"
 "Language-Team: Greek <nls@tux.hellug.gr>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Report-Msgid-Bugs-To: \n"
 "X-Generator: KBabel 1.0\n"
+
+#: data/planner.desktop.in.h:1
+#, fuzzy
+msgid "Planner Project Management"
+msgstr "Διαχείριση Εργασιών"
+
+#: data/planner.desktop.in.h:2
+msgid "Project Management"
+msgstr "Διαχείριση Εργασιών"
 
 #: libegg/recent-files/egg-recent-vfs-utils.c:90
 msgid " (invalid Unicode)"
 msgstr " (μή έγκυρο Unicode)"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:1
+#: data/ui/main-window.ui.h:1
 msgid "About this application"
 msgstr "Περί αυτής της εφαρμογής"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:2
+#: data/ui/main-window.ui.h:2
 msgid "C_ut"
 msgstr "Αποκο_πή"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:3
+#: data/ui/main-window.ui.h:3
 msgid "Clear"
 msgstr "Εκκαθάριση"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:4
+#: data/ui/main-window.ui.h:4
 msgid "Clear the selection"
 msgstr "Καθαρισμός της επιλογής"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:5
+#: data/ui/main-window.ui.h:5
 msgid "Close the current file"
 msgstr "Κλείσιμο του τρέχοντος αρχείου"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:6
+#: data/ui/main-window.ui.h:6
 msgid "Copy the selection"
 msgstr "Αντιγραφή της επιλογής"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:7
+#: data/ui/main-window.ui.h:7
 msgid "Create a new project"
 msgstr "Δημιουργία νέας εργασίας"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:8
+#: data/ui/main-window.ui.h:8
 msgid "Cut the selection"
 msgstr "Αποκοπή της επιλογής"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:9
+#: data/ui/main-window.ui.h:9
 msgid "Edit Day _Types"
 msgstr "Επεξεργασία _τύπου ημέρας"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:10
+#: data/ui/main-window.ui.h:10
 msgid "Edit Project _Phases"
 msgstr "Επεξεργασία _φάσεων εργασίας"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:11
+#: data/ui/main-window.ui.h:11
 msgid "Edit the project properties"
 msgstr "Επεξεργασία των ιδιοτήτων της εργασίας"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:12
+#: data/ui/main-window.ui.h:12
 msgid "Exit the program"
 msgstr "Έξοδος από το πρόγραμμα"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:13
+#: data/ui/main-window.ui.h:13
 msgid "New"
 msgstr "Νέο"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:14
+#: data/ui/main-window.ui.h:14
 msgid "New..."
 msgstr "Νέο..."
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:15
+#: data/ui/main-window.ui.h:15
 msgid "Open"
 msgstr "Άνοιγμα"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:16
+#: data/ui/main-window.ui.h:16
 msgid "Open a project"
 msgstr "Άνοιγμα μιας εργασίας"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:17
+#: data/ui/main-window.ui.h:17
 msgid "Paste the clipboard"
 msgstr "Επικόλληση του προχείρου"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:18
+#: data/ui/main-window.ui.h:18
 msgid "Print"
 msgstr "Εκτύπωση"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:19
+#: data/ui/main-window.ui.h:19
 msgid "Print preview of the current project"
 msgstr "Προεπισκόπηση εκτύπωσης της τρέχουσας εργασίας"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:20
+#: data/ui/main-window.ui.h:20
 msgid "Print the current project"
 msgstr "Εκτύπωση της τρέχουσας εργασίας"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:21
+#: data/ui/main-window.ui.h:21
 msgid "Redo the undone action"
 msgstr "Ακύρωση της ανηρημένης ενέργειας"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:22
+#: data/ui/main-window.ui.h:22
 msgid "Save"
 msgstr "Αποθήκευση"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:23
+#: data/ui/main-window.ui.h:23
 msgid "Save _As..."
 msgstr "Αποθήκευση _Ως..."
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:24
+#: data/ui/main-window.ui.h:24
 msgid "Save the current project"
 msgstr "Αποθήκευση της τρέχουσας εργασίας"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:25
+#: data/ui/main-window.ui.h:25
 msgid "Save the current project with a different name"
 msgstr "Αποθήκευση της τρέχουσας εργασίας με διαφορετικό όνομα"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:26
+#: data/ui/main-window.ui.h:26
 msgid "Show the MrProject User Guide"
 msgstr "Εμφάνιση του οδηγού χρήσης του MrProject"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:27
+#: data/ui/main-window.ui.h:27
 msgid "Undo the last action"
 msgstr "Αναίρεση της τελευταίας ενέργειας"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:28
+#: data/ui/main-window.ui.h:28
 msgid "_About"
 msgstr "Πε_ρί"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:29
+#: data/ui/main-window.ui.h:29
 msgid "_Actions"
 msgstr "Ε_νέργειες"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:30
+#: data/ui/main-window.ui.h:30
 msgid "_Close"
 msgstr "_Κλείσιμο"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:31
+#: data/ui/main-window.ui.h:31
 msgid "_Copy"
 msgstr "Αντιγρα_φή"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:32
+#: data/ui/main-window.ui.h:32
 msgid "_Edit"
 msgstr "_Επεξεργασία"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:33
+#: data/ui/main-window.ui.h:33
 msgid "_Edit Project Properties"
 msgstr "_Επεξεργασία των ιδιοτήτων της εργασίας"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:34
+#: data/ui/main-window.ui.h:34
 msgid "_File"
 msgstr "_Αρχείο"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:35
+#: data/ui/main-window.ui.h:35
 msgid "_Help"
 msgstr "_Βοήθεια"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:36
+#: data/ui/main-window.ui.h:36
 msgid "_Manage Calendars"
 msgstr "_Διαχείριση εργασιών"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:37
+#: data/ui/main-window.ui.h:37
 msgid "_New Project"
 msgstr "_Νέα εργασία"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:38
+#: data/ui/main-window.ui.h:38
 msgid "_Open..."
 msgstr "Άνοι_γμα..."
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:39
+#: data/ui/main-window.ui.h:39
 msgid "_Paste"
 msgstr "Επι_κόλληση"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:40
+#: data/ui/main-window.ui.h:40
 msgid "_Print Preview"
 msgstr "Προεπισκόπηση εκτύπωσης"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:41
+#: data/ui/main-window.ui.h:41
 msgid "_Print..."
 msgstr "Εκτύ_πωση..."
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:42
+#: data/ui/main-window.ui.h:42
 msgid "_Project"
 msgstr "Ερ_γασία"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:43
+#: data/ui/main-window.ui.h:43
 msgid "_Quit"
 msgstr "_Τερματισμός"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:44
+#: data/ui/main-window.ui.h:44
 msgid "_Redo"
 msgstr "Ακ_ύρωση αναίρεσης"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:45 src/app/mg-main-window.c:1133
+#: data/ui/main-window.ui.h:45 src/planner-main-window.c:1127
 msgid "_Save"
 msgstr "Αποθήκευ_ση"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:46
+#: data/ui/main-window.ui.h:46
 msgid "_Undo"
 msgstr "Α_ναίρεση"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:47
+#: data/ui/main-window.ui.h:47
 msgid "_User Guide"
 msgstr "Οδηγός _χρήστη"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:48
+#: data/ui/main-window.ui.h:48
 msgid "_View"
 msgstr "_Προβολή"
 
-#: src/app/mg-application.c:54 src/app/mg-application.c:103
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:4
-#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:4
-#: src/views/resources/GNOME_MrProject_ResourcesView.ui.h:5
-msgid "Insert"
-msgstr "Εισαγωγή"
+#: data/ui/gantt-view.ui.h:1 data/ui/task-view.ui.h:1
+msgid "I_ndent Task"
+msgstr "Α_νάθεση έργου"
 
-#: src/app/mg-application.c:61 src/app/mg-application.c:110
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:9
-#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:9
-#: src/views/resources/GNOME_MrProject_ResourcesView.ui.h:6
-msgid "Remove"
-msgstr "Αφαίρεση"
+#: data/ui/gantt-view.ui.h:2 data/ui/task-view.ui.h:2
+msgid "In_sert Tasks..."
+msgstr "Ει_σαγωγή έργων..."
 
-#: src/app/mg-application.c:68
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:18
-#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:17
-msgid "Unlink"
-msgstr "Ακύρωση δεσμού"
-
-#: src/app/mg-application.c:75
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:3
-#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:3
+#: data/ui/gantt-view.ui.h:3 data/ui/task-view.ui.h:3
+#: src/planner-application.c:75
 msgid "Indent"
 msgstr "Ανάθεση"
 
-#: src/app/mg-application.c:82
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:17
-#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:16
-msgid "Unindent"
-msgstr "Άρση ανάθεσης"
+#: data/ui/gantt-view.ui.h:4 data/ui/task-view.ui.h:4
+#: data/ui/resource-view.ui.h:5 src/planner-application.c:54
+#: src/planner-application.c:103
+msgid "Insert"
+msgstr "Εισαγωγή"
 
-#: src/app/mg-application.c:89
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:8
-#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:8
-msgid "Move up"
-msgstr "Μετακίνηση πάνω"
+#: data/ui/gantt-view.ui.h:5 data/ui/task-view.ui.h:5
+msgid "Move Task Do_wn"
+msgstr "Μετακίνηση έργου προς τα κά_τω"
 
-#: src/app/mg-application.c:96
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:7
-#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:7
+#: data/ui/gantt-view.ui.h:6 data/ui/task-view.ui.h:6
+msgid "Move Task _Up"
+msgstr "Μετακίνηση έργου προς τα πά_νω"
+
+#: data/ui/gantt-view.ui.h:7 data/ui/task-view.ui.h:7
+#: src/planner-application.c:96
 msgid "Move down"
 msgstr "Μετακίνηση κάτω"
 
-#: src/app/mg-application.c:117
+#: data/ui/gantt-view.ui.h:8 data/ui/task-view.ui.h:8
+#: src/planner-application.c:89
+msgid "Move up"
+msgstr "Μετακίνηση πάνω"
+
+#: data/ui/gantt-view.ui.h:9 data/ui/task-view.ui.h:9
+#: data/ui/resource-view.ui.h:6 src/planner-application.c:61
+#: src/planner-application.c:110
+msgid "Remove"
+msgstr "Αφαίρεση"
+
+#: data/ui/gantt-view.ui.h:10 data/ui/task-view.ui.h:10
+msgid "Reset _All Constraints"
+msgstr "Αρχικοποίηση ό_λων των περιορισμών"
+
+#: data/ui/gantt-view.ui.h:11 data/ui/task-view.ui.h:11
+msgid "Reset _Constraint"
+msgstr "Αρχικοποίηση _περιορισμού"
+
+#: data/ui/gantt-view.ui.h:12 data/ui/task-view.ui.h:12
+#: data/ui/resource-view.ui.h:7
+msgid "Select _All"
+msgstr "Επιλογή Ό_λων"
+
+#: data/ui/gantt-view.ui.h:13 data/ui/task-view.ui.h:13
+#: data/ui/resource-view.ui.h:8
+msgid "Select all tasks"
+msgstr "Επιλογή όλων των έργων"
+
+#: data/ui/gantt-view.ui.h:14
+msgid "Test"
+msgstr "Δοκιμή"
+
+#: data/ui/gantt-view.ui.h:15 data/ui/task-view.ui.h:14
+msgid "Un_link Task"
+msgstr "Αποσύ_νδεση έργου"
+
+#: data/ui/gantt-view.ui.h:16 data/ui/task-view.ui.h:15
+msgid "Unin_dent Task"
+msgstr "Άρση ανά_θεσης έργου"
+
+#: data/ui/gantt-view.ui.h:17 data/ui/task-view.ui.h:16
+#: src/planner-application.c:82
+msgid "Unindent"
+msgstr "Άρση ανάθεσης"
+
+#: data/ui/gantt-view.ui.h:18 data/ui/task-view.ui.h:17
+#: src/planner-application.c:68
+msgid "Unlink"
+msgstr "Ακύρωση δεσμού"
+
+#: data/ui/gantt-view.ui.h:19
+msgid "Zoom In"
+msgstr "Μεγέθυνση"
+
+#: data/ui/gantt-view.ui.h:20
+msgid "Zoom Out"
+msgstr "Σμίκρυνση"
+
+#: data/ui/gantt-view.ui.h:21
+msgid "Zoom To Fit"
+msgstr "Μεγέθυνση στην σελίδα"
+
+#: data/ui/gantt-view.ui.h:22
+msgid "Zoom To _Fit"
+msgstr "Μεγέθυνση στην σ_ελίδα"
+
+#: data/ui/gantt-view.ui.h:23
+msgid "Zoom _Out"
+msgstr "Σ_μίκρυνση"
+
+#: data/ui/gantt-view.ui.h:24 data/ui/task-view.ui.h:19
+msgid "_Edit Task Properties..."
+msgstr "Επεξεργασία ιδιοτήτων έργου..."
+
+#: data/ui/gantt-view.ui.h:25
+msgid "_Highlight Critical Tasks"
+msgstr "Επισή_μανση σημαντικών έργων"
+
+#: data/ui/gantt-view.ui.h:26 data/ui/task-view.ui.h:20
+msgid "_Insert Task"
+msgstr "Ε_ισαγωγή έργου"
+
+#: data/ui/gantt-view.ui.h:27 data/ui/task-view.ui.h:21
+msgid "_Remove Task"
+msgstr "Αφαί_ρεση έργου"
+
+#: data/ui/gantt-view.ui.h:28
+msgid "_Zoom In"
+msgstr "_Μεγέθυνση"
+
+#: data/ui/task-view.ui.h:18
+msgid "_Edit Custom Properties..."
+msgstr "_Επεξεργασία προσαρμοσμένων ιδιοτήτων..."
+
+#: data/ui/html-plugin.ui.h:1 data/glade/html-output.glade.h:4
+msgid "Export to HTML"
+msgstr "Εξαγωγή σε HTML"
+
+#: data/ui/sql-plugin.ui.h:1
+msgid "Open from Database..."
+msgstr "Άνοιγμα από βάση δεδομένων..."
+
+#: data/ui/sql-plugin.ui.h:2
+msgid "Save to Database..."
+msgstr "Αποθήκευση σε βάση δεδομένων..."
+
+#: data/ui/resource-view.ui.h:1
+msgid "Edit _Custom Properties..."
+msgstr "Επεξεργασία προ_σαρμοσμένων ιδιοτήτων..."
+
+#: data/ui/resource-view.ui.h:2
+msgid "Edit _Groups"
+msgstr "Επεξεργασία ο_μάδων"
+
+#: data/ui/resource-view.ui.h:3
+msgid "Groups"
+msgstr "Ομάδες"
+
+#: data/ui/resource-view.ui.h:4
+msgid "In_sert Resources..."
+msgstr "Εισα_γωγή πόρων..."
+
+#: data/ui/resource-view.ui.h:9
+msgid "_Edit Resource Properties..."
+msgstr "_Επεξεργασία ιδιοτήτων πόρου..."
+
+#: data/ui/resource-view.ui.h:10
+msgid "_Insert Resource"
+msgstr "Ε_ισαγωγή πόρου"
+
+#: data/ui/resource-view.ui.h:11
+msgid "_Remove Resource"
+msgstr "Αφαί_ρεση πόρου"
+
+#: data/glade/add-predecessor.glade.h:1 data/glade/calendar-dialog.glade.h:4
+#: data/glade/html-output.glade.h:2 data/glade/new-property.glade.h:1
+#: data/glade/project-properties.glade.h:1
+#: data/glade/resource-dialog.glade.h:1
+#: data/glade/resource-input-dialog.glade.h:1 data/glade/sql.glade.h:2
+#: data/glade/task-dialog.glade.h:4 data/glade/task-input-dialog.glade.h:1
+msgid "*"
+msgstr "*"
+
+#: data/glade/add-predecessor.glade.h:2
+msgid "Lag: "
+msgstr "Lag: "
+
+#: data/glade/add-predecessor.glade.h:3
+msgid "New predecessor"
+msgstr "Νέος πρόγονος"
+
+#: data/glade/add-predecessor.glade.h:4
+msgid "Predecessor: "
+msgstr "Πρόγονος:"
+
+#: data/glade/add-predecessor.glade.h:5
+msgid "Relation type: "
+msgstr "Τύπος συγγένειας:"
+
+#: data/glade/calendar-dialog.glade.h:1
+msgid ""
+"\n"
+"The selected day type has the following working hours:"
+msgstr ""
+"\n"
+"Ο επιλεγμένος τύπος ημέρας έχει τις ακόλουθες εργάσιμες ώρες:"
+
+#: data/glade/calendar-dialog.glade.h:3 data/glade/html-output.glade.h:1
+#: data/glade/sql.glade.h:1 data/glade/task-dialog.glade.h:1
+msgid "    "
+msgstr "    "
+
+#: data/glade/calendar-dialog.glade.h:5
+msgid "-"
+msgstr "-"
+
+#: data/glade/calendar-dialog.glade.h:6
+msgid "<b>Calendar:</b>"
+msgstr "<b> Ημερολόγιο:</b>"
+
+#: data/glade/calendar-dialog.glade.h:7
+msgid "<b>Day types</b>"
+msgstr "<b> Τύποι ημέρας</b>"
+
+#: data/glade/calendar-dialog.glade.h:8
+msgid "<b>Working hours</b>"
+msgstr "<b> Εργάσιμες ώρες</b>"
+
+#: data/glade/calendar-dialog.glade.h:9
+msgid "<b>Working time</b>"
+msgstr "<b> Εργάσιμος χρόνος</b>"
+
+#: data/glade/calendar-dialog.glade.h:10
+msgid "Apply"
+msgstr "Εφαρμογή"
+
+#: data/glade/calendar-dialog.glade.h:11
+msgid "C_opy an existing calendar"
+msgstr "Αν_τιγραφή υπάρχοντος ημερολογίου"
+
+#: data/glade/calendar-dialog.glade.h:12
+msgid "C_reate"
+msgstr "Δη_μιουργία"
+
+#: data/glade/calendar-dialog.glade.h:13
+msgid "Calendar Editor"
+msgstr "Επεξεργαστής ημερολογίου"
+
+#: data/glade/calendar-dialog.glade.h:14
+msgid "Create an _empty calendar"
+msgstr "Δημιουργία ενός κ_ενού ημερολογίου"
+
+#: data/glade/calendar-dialog.glade.h:15
+msgid "Custom working time"
+msgstr "Προσαρμοσμένος εργάσιμος χρόνος"
+
+#: data/glade/calendar-dialog.glade.h:16
+msgid "Day type:"
+msgstr "Τύπος ημέρας:"
+
+#: data/glade/calendar-dialog.glade.h:17
+msgid "Default Week"
+msgstr "Εξ ορισμού εβδομάδα"
+
+#: data/glade/calendar-dialog.glade.h:18
+msgid "Default week..."
+msgstr "Εξ ορισμού εβδομάδα..."
+
+#: data/glade/calendar-dialog.glade.h:19
+msgid "Edit Day Types"
+msgstr "Επεξεργασία τύπων ημέρας"
+
+#: data/glade/calendar-dialog.glade.h:20
+msgid "Edit Working Time"
+msgstr "Επεξεργασία εργάσιμου χρόνου"
+
+#: data/glade/calendar-dialog.glade.h:21
+msgid "Enter the name of the new day type:"
+msgstr "Εισάγετε το όνομα του νέου τύπου ημέρας:"
+
+#: data/glade/calendar-dialog.glade.h:22
+msgid "Existing calendars:"
+msgstr "Υπάρχοντα ημερολόγια:"
+
+#: data/glade/calendar-dialog.glade.h:23
+msgid "From:"
+msgstr "Από:"
+
+#: data/glade/calendar-dialog.glade.h:24
+msgid "MrProject Team"
+msgstr "Ομάδα του MrProject"
+
+#: data/glade/calendar-dialog.glade.h:25
+msgid "New Calendar"
+msgstr "Νέο ημερολόγιο"
+
+#: data/glade/calendar-dialog.glade.h:26
+msgid "New Day Type"
+msgstr "Νέος τύπος ημέρας"
+
+#: data/glade/calendar-dialog.glade.h:27
+msgid "Select a calendar"
+msgstr "Επιλογή ενός ημερολογίου"
+
+#: data/glade/calendar-dialog.glade.h:28
+msgid ""
+"Select a weekday and the day type to use for that day in the default week "
+"for this calendar.\n"
+msgstr ""
+"Επιλογή μιας καθημερινής και του τύπου της ημέρας που θα χρησιμοποιηθεί στην "
+"εξ ορισμού εβδομάδα για αυτό το ημερολόγιο.\n"
+
+#: data/glade/calendar-dialog.glade.h:30
+msgid "Set day type to:"
+msgstr "Ορισμός τύπου ημέρας σε:"
+
+#: data/glade/calendar-dialog.glade.h:31
+msgid "To:"
+msgstr "Προς:"
+
+#: data/glade/calendar-dialog.glade.h:32
+msgid "Use working time from derived calendar"
+msgstr "Χρήση εργάσιμου χρόνου από προερχόμενο ημερολόγιο"
+
+#: data/glade/calendar-dialog.glade.h:33
+msgid "Week day:"
+msgstr "Ημέρα εβδομάδας:"
+
+#: data/glade/calendar-dialog.glade.h:34
+msgid "Working time..."
+msgstr "Εργάσιμος χρόνος..."
+
+#: data/glade/calendar-dialog.glade.h:35
+msgid "_Derive from a calendar"
+msgstr "Π_ροέλευση από ημερολόγιο"
+
+#: data/glade/calendar-dialog.glade.h:36
+msgid "_Name of the new calendar:"
+msgstr "Ό_νομα του νέου ημερολογίου:"
+
+#: data/glade/calendar-dialog.glade.h:37
+msgid "_New..."
+msgstr "_Νέο..."
+
+#: data/glade/group-dialog.glade.h:1
+msgid "Group Editor"
+msgstr "Επεξεργαστής ομάδας"
+
+#: data/glade/html-output.glade.h:3
+msgid "<b>Save to</b>"
+msgstr "<b> Αποθήκευση σε</b>"
+
+#: data/glade/html-output.glade.h:5
+msgid "Local file"
+msgstr "Τοπικό αρχείο"
+
+#: data/glade/html-output.glade.h:6
+msgid "Save to HTML File"
+msgstr "Αποθήκευση σε αρχείο HTML"
+
+#: data/glade/html-output.glade.h:7
+msgid "Web location"
+msgstr "Τοποθεσία στον ιστό"
+
+#: data/glade/new-property.glade.h:2
+msgid "Description: "
+msgstr "Περιγραφή:"
+
+#: data/glade/new-property.glade.h:3
+msgid "Label: "
+msgstr "Ετικέτα:"
+
+#: data/glade/new-property.glade.h:4
+msgid "Name: "
+msgstr "Όνομα:"
+
+#: data/glade/new-property.glade.h:5
+msgid "New Property"
+msgstr "Νέα ιδιότητα"
+
+#: data/glade/new-property.glade.h:6
+msgid "Type: "
+msgstr "Τύπος:"
+
+#: data/glade/project-properties.glade.h:2
+msgid "<b>Project phases</b>"
+msgstr "<b>Φάσεις εργασίας</b>"
+
+#: data/glade/project-properties.glade.h:3
+msgid "Calendar:"
+msgstr "Ημερολόγιο:"
+
+#: data/glade/project-properties.glade.h:4
+msgid "Custom properties"
+msgstr "Προσαρμοσμένες ιδιότητες"
+
+#: data/glade/project-properties.glade.h:5
+msgid "Edit Project phases"
+msgstr "Επεξεργασία φάσεων εργασίας"
+
+#: data/glade/project-properties.glade.h:6
+msgid "Enter the name of the new project phase:"
+msgstr "Εισάγετε το όνομα της νέας φάσης εργασίας:"
+
+#: data/glade/project-properties.glade.h:7
+#: data/glade/resource-dialog.glade.h:5 data/glade/task-dialog.glade.h:6
+msgid "General"
+msgstr "Γενικά"
+
+#: data/glade/project-properties.glade.h:8
+msgid "New Project Phase"
+msgstr "Νέα φάση εργασίας"
+
+#: data/glade/project-properties.glade.h:9
+msgid "Project _name:"
+msgstr "Ό_νομα εργασίας:"
+
+#: data/glade/project-properties.glade.h:10
+msgid "Project _start:"
+msgstr "Έναρ_ξη εργασίας:"
+
+#: data/glade/project-properties.glade.h:11
+msgid "Project phase:"
+msgstr "Φάση εργασίας:"
+
+#: data/glade/project-properties.glade.h:12
+msgid "Project properties"
+msgstr "Ιδιότητες εργασίας"
+
+#: data/glade/project-properties.glade.h:13
+msgid "Select..."
+msgstr "Επιλογή..."
+
+#: data/glade/project-properties.glade.h:14
+msgid "_Manager:"
+msgstr "_Διαχειριστής:"
+
+#: data/glade/project-properties.glade.h:15
+msgid "_Organization:"
+msgstr "_Οργανισμός:"
+
+#: data/glade/property-dialog.glade.h:1
+msgid "Custom Properties"
+msgstr "Προσαρμοσμένες ιδιότητες"
+
+#: data/glade/resource-dialog.glade.h:2
+msgid "C_ost:"
+msgstr "Κό_στος:"
+
+#: data/glade/resource-dialog.glade.h:3
+msgid "Calendar"
+msgstr "Ημερολόγιο"
+
+#: data/glade/resource-dialog.glade.h:4
+msgid "Edit calendars..."
+msgstr "Επεξεργασία ημερολογίων..."
+
+#: data/glade/resource-dialog.glade.h:6 data/glade/task-dialog.glade.h:7
+msgid "Insert time stamp"
+msgstr "Εισαγωγή ώρας"
+
+#: data/glade/resource-dialog.glade.h:7 data/glade/task-dialog.glade.h:9
+msgid "Notes"
+msgstr "Σημειώσεις"
+
+#: data/glade/resource-dialog.glade.h:8
+msgid ""
+"Select the calendar to use for this resource. If you want to use the default "
+"calendar of the project, select 'None'. "
+msgstr ""
+"Επιλογή του ημερολογίου για χρήση για αυτό τον πόρο. Αν θέλετε να "
+"χρησιμοποιήσετε το εξ ορισμού ημερολόγιο της εργασίας επιλέξτε 'Κανένα'."
+
+#: data/glade/resource-dialog.glade.h:9
+msgid "_Email:"
+msgstr "_Email:"
+
+#: data/glade/resource-dialog.glade.h:10
+msgid "_Group:"
+msgstr "Ομά_δα:"
+
+#: data/glade/resource-dialog.glade.h:11
+msgid "_Name:"
+msgstr "Ό_νομα:"
+
+#: data/glade/resource-dialog.glade.h:12
+msgid "_Type:"
+msgstr "_Τύπος:"
+
+#: data/glade/resource-input-dialog.glade.h:2
+msgid "Email:"
+msgstr "Email:"
+
+#: data/glade/resource-input-dialog.glade.h:3
+msgid "Group:"
+msgstr "Ομάδα:"
+
+#: data/glade/resource-input-dialog.glade.h:4
+msgid "Insert resource"
+msgstr "Εισαγωγή πηγής"
+
+#: data/glade/resource-input-dialog.glade.h:5
+#: data/glade/task-input-dialog.glade.h:3
+msgid "Name:"
+msgstr "Όνομα:"
+
+#: data/glade/resource-input-dialog.glade.h:6
+#: data/glade/task-input-dialog.glade.h:5
+msgid "_Insert"
+msgstr "Εισα_γωγή"
+
+#: data/glade/sql.glade.h:3
+msgid "<b>Open Database</b>"
+msgstr "<b> Άνοιγμα Βάσης δεδομένων</b>"
+
+#: data/glade/sql.glade.h:4
+msgid "Database:"
+msgstr "Βάση δεδομένων:"
+
+#: data/glade/sql.glade.h:5
+msgid "Open Database"
+msgstr "Άνοιγμα Βάσης δεδομένων"
+
+#: data/glade/sql.glade.h:6
+msgid "Password:"
+msgstr "Κωδικός:"
+
+#: data/glade/sql.glade.h:7
+msgid "Select a Project"
+msgstr "Επιλογή μιας εργασίας"
+
+#: data/glade/sql.glade.h:8
+msgid "Server:"
+msgstr "Εξυπηρετητής:"
+
+#: data/glade/sql.glade.h:9
+msgid "The database contains the following projects. Select a project to open:"
+msgstr ""
+"Η βάση δεδομένων περιέχει τις ακόλουθες εργασίες. Επιλέξτε μια εργασία για "
+"άνοιγμα:"
+
+#: data/glade/sql.glade.h:10
+msgid "Username:"
+msgstr "Όνομα Χρήστη:"
+
+#: data/glade/task-dialog.glade.h:3
+#, no-c-format
+msgid "%"
+msgstr "%"
+
+#: data/glade/task-dialog.glade.h:5
+msgid "C_omplete:"
+msgstr "Ολο_κληρώθηκε:"
+
+#: data/glade/task-dialog.glade.h:8
+msgid "Na_me:"
+msgstr "Όνο_μα:"
+
+#: data/glade/task-dialog.glade.h:10
+msgid "Pr_iority:"
+msgstr "Προ_τεραιότητα:"
+
+#: data/glade/task-dialog.glade.h:11
+msgid "Predecessors"
+msgstr "Πρόγονοι"
+
+#: data/glade/task-dialog.glade.h:12 src/planner-resource-view.c:342
+msgid "Resources"
+msgstr "Πόροι"
+
+#: data/glade/task-dialog.glade.h:13
+msgid "_Duration:"
+msgstr "_Διάρκεια:"
+
+#: data/glade/task-dialog.glade.h:14
+msgid "_Fixed duration"
+msgstr "Κα_θορισμένη διάρκεια:"
+
+#: data/glade/task-dialog.glade.h:15
+msgid "_Milestone"
+msgstr "_Milestone"
+
+#: data/glade/task-dialog.glade.h:16
+msgid "_Work:"
+msgstr "Ερ_γασία:"
+
+#. day unit variant accepted in input
+#: data/glade/task-dialog.glade.h:17 src/planner-task-tree.c:2120
+msgid "days"
+msgstr "ημέρες"
+
+#: data/glade/task-input-dialog.glade.h:2
+msgid "Insert task"
+msgstr "Εισαγωγή έργου"
+
+#: data/glade/task-input-dialog.glade.h:4
+msgid "Work:"
+msgstr "Εργασία:"
+
+#: src/planner-application.c:117
 msgid "Edit"
 msgstr "Επεξεργασία"
 
-#: src/app/mg-main-window.c:585
+#: src/planner-main-window.c:584
 msgid "Open a file"
 msgstr "Άνοιγμα αρχείου"
 
 #. I18n: Translators, list your names here, newline separated if there
 #. * are more than one, to appear in the about box.
 #.
-#: src/app/mg-main-window.c:995 src/app/mg-main-window.c:1004
+#: src/planner-main-window.c:993 src/planner-main-window.c:1000
 msgid "translator_credits"
 msgstr "Κώστας Παπαδήμας <pkst@gnome.org>"
 
-#: src/app/mg-main-window.c:1001
+#. "Copyright \xc2\xa9 2001-2002 CodeFactory AB",
+#: src/planner-main-window.c:997
 msgid "A Project Management application for the GNOME desktop"
 msgstr "Μια εφαρμογή διαχείρισης εργασιών για το GNOME"
 
-#: src/app/mg-main-window.c:1013
-msgid "The MrProject Homepage"
+#: src/planner-main-window.c:1007
+#, fuzzy
+msgid "The Planner Homepage"
 msgstr "Η αρχική σελίδα του MrProject "
 
-#: src/app/mg-main-window.c:1017
-msgid "Contribute to MrProject"
-msgstr "Συμβάλλετε στο MrProject"
-
-#: src/app/mg-main-window.c:1089
+#: src/planner-main-window.c:1083
 msgid "If you don't save, changes made the last minute will be discarded."
 msgstr ""
 "Αν δεν αποθηκεύσετε, οι αλλαγές που κάνατε το τελευταίο λεπτό θα χαθούν."
 
-#: src/app/mg-main-window.c:1094
+#: src/planner-main-window.c:1088
 #, c-format
 msgid "If you don't save, changes made the last %d minutes will be discarded."
 msgstr ""
 "Αν δεν αποθηκεύσετε, οι αλλαγές που κάνατε τα τελευταία %d λεπτό θα χαθούν."
 
-#: src/app/mg-main-window.c:1099
+#: src/planner-main-window.c:1093
 msgid "If you don't save, changes made the last hour will be discarded."
 msgstr ""
 "Αν δεν αποθηκεύσετε, οι αλλαγές που κάνατε την τελευταία ώρα θα χαθούν."
 
-#: src/app/mg-main-window.c:1104
+#: src/planner-main-window.c:1098
 #, c-format
 msgid "If you don't save, changes made the last %d hours will be discarded."
 msgstr ""
 "Αν δεν αποθηκεύσετε, οι αλλαγές που κάνατε τις τελευταίες %d ώρες θα χαθούν."
 
-#: src/app/mg-main-window.c:1111
+#: src/planner-main-window.c:1105
 #, c-format
 msgid "Save changes to document '%s' before closing?"
 msgstr "Αποθήκευση αλλαγών στο έγγραφο '%s' πριν την έξοδο?"
 
-#: src/app/mg-main-window.c:1129
+#: src/planner-main-window.c:1123
 msgid "C_lose without saving"
 msgstr "Κ_λείσιμο χωρίς αποθήκευση"
 
-#: src/app/mg-main-window.c:1131
+#: src/planner-main-window.c:1125
 msgid "_Cancel"
 msgstr "Ακύ_ρωση"
 
-#: src/app/mg-main-window.c:1238
+#: src/planner-main-window.c:1232
 msgid "Save a file"
 msgstr "Αποθήκευση ενός αρχείου"
 
-#: src/app/mg-main-window.c:1270
-#: src/plugins/html-output/mg-html-output-plugin.c:146
+#: src/planner-main-window.c:1264 src/planner-html-plugin.c:146
 #, c-format
 msgid "File \"%s\" exists, do you want to overwrite it?"
 msgstr "Το αρχείο \"%s\" υπάρχει, θέλετε να το αντικαταστήσετε?"
 
-#: src/app/mg-main-window.c:1458
+#: src/planner-main-window.c:1452
+#, fuzzy
 msgid ""
-"You have opened a file that was saved with an old version of MrProject.\n"
+"You have opened a file that was saved with an old version of Planner.\n"
 "\n"
 "When loading old files, all tasks will use the constraint 'Must Start On', "
 "since the old version did not fully support automatic rescheduling. To take "
@@ -358,53 +913,53 @@ msgstr ""
 "Μετά από αυτό μπορείτε να αφαιρέσετε όλους τους περιορισμούς, επιλέγοντας  "
 "Άπομάκρυνση όλων των περιορισμών' από το μενού 'Έπεξεργασία'."
 
-#: src/app/mg-main-window.c:1495 src/views/gantt/mg-gantt-row.c:656
-#: src/views/gantt/mg-gantt-row.c:658 src/views/gantt/mg-gantt-print.c:513
-#: src/views/gantt/mg-gantt-print.c:515
+#: src/planner-main-window.c:1489 src/planner-gantt-row.c:656
+#: src/planner-gantt-row.c:658 src/planner-gantt-print.c:513
+#: src/planner-gantt-print.c:515
 msgid "Unnamed"
 msgstr "Χωρίς Τίτλο"
 
-#: src/app/mg-main.c:61
+#: src/planner-main.c:61
 msgid "Create the initial window with the given geometry."
 msgstr "Δημιουργία του αρχικού παραθύρου με την δοθείσα γεωμετρία."
 
-#: src/app/mg-main.c:61
+#: src/planner-main.c:61
 msgid "GEOMETRY"
 msgstr "ΓΕΩΜΕΤΡΙΑ"
 
-#: src/app/mg-main.c:98
+#: src/planner-main.c:98
 msgid "mrproject: --geometry cannot be used with more than one file."
 msgstr ""
 "mrproject: --η γεμετρία δεν μπορεί να χρησιμοποιηθεί με περισσότερα από ένα "
 "αρχεία."
 
-#: src/app/mg-plugin-loader.c:40
+#: src/planner-plugin-loader.c:40
 #, c-format
 msgid "Could not open plugin file '%s'\n"
 msgstr "Αδυναμία ανοίγματος αρχείου πρόσθετων λειτουργιών  '%s'\n"
 
-#: src/app/mg-view-loader.c:40
+#: src/planner-view-loader.c:40
 #, c-format
 msgid "Could not open view plugin file '%s'\n"
 msgstr "Αδυναμία ανοίγματος προβολής αρχείου πρόσθετων λειτουργιών  '%s'\n"
 
-#: src/cell-renderers/mg-cell-renderer-date.c:147
+#: src/planner-cell-renderer-date.c:147
 msgid "Constraint type"
 msgstr "Τύπος περιορισμού"
 
-#: src/cell-renderers/mg-cell-renderer-date.c:154
+#: src/planner-cell-renderer-date.c:154
 msgid "As soon as possible"
 msgstr "Όσον το δυνατόν πιό σύντομα"
 
-#: src/cell-renderers/mg-cell-renderer-date.c:155
+#: src/planner-cell-renderer-date.c:155
 msgid "Start no earlier than"
 msgstr "Έναρξη όχι πριν από"
 
-#: src/cell-renderers/mg-cell-renderer-date.c:156
+#: src/planner-cell-renderer-date.c:156
 msgid "Must start on"
 msgstr "Θα πρέπει να ξεκινήσει στις"
 
-#: src/cell-renderers/mg-cell-renderer-date.c:171
+#: src/planner-cell-renderer-date.c:171
 msgid "Today"
 msgstr "Σήμερα"
 
@@ -412,640 +967,213 @@ msgstr "Σήμερα"
 #. GTK_SIGNAL_FUNC (m_cell_date_today_clicked),
 #. date);
 #.
-#: src/cell-renderers/mg-cell-renderer-date.c:179
+#: src/planner-cell-renderer-date.c:179
 msgid "Cancel"
 msgstr "Ακύρωση"
 
-#: src/cell-renderers/mg-cell-renderer-date.c:187
+#: src/planner-cell-renderer-date.c:187
 msgid "OK"
 msgstr "ΟΚ"
 
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:1
-msgid ""
-"\n"
-"The selected day type has the following working hours:"
-msgstr ""
-"\n"
-"Ο επιλεγμένος τύπος ημέρας έχει τις ακόλουθες εργάσιμες ώρες:"
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:3
-#: src/dialogs/task-dialog/mg-task-dialog.glade.h:1
-#: src/plugins/html-output/mg-html-output.glade.h:1
-#: src/plugins/sql/mg-sql.glade.h:1
-msgid "    "
-msgstr "    "
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:4
-#: src/dialogs/project-dialog/mg-project-properties.glade.h:1
-#: src/dialogs/property-dialog/mg-new-property.glade.h:1
-#: src/dialogs/resource-dialog/mg-resource-dialog.glade.h:1
-#: src/dialogs/resource-input-dialog/mg-resource-input-dialog.glade.h:1
-#: src/dialogs/task-dialog/mg-add-predecessor.glade.h:1
-#: src/dialogs/task-dialog/mg-task-dialog.glade.h:4
-#: src/dialogs/task-input-dialog/mg-task-input-dialog.glade.h:1
-#: src/plugins/html-output/mg-html-output.glade.h:2
-#: src/plugins/sql/mg-sql.glade.h:2
-msgid "*"
-msgstr "*"
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:5
-msgid "-"
-msgstr "-"
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:6
-msgid "<b>Calendar:</b>"
-msgstr "<b> Ημερολόγιο:</b>"
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:7
-msgid "<b>Day types</b>"
-msgstr "<b> Τύποι ημέρας</b>"
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:8
-msgid "<b>Working hours</b>"
-msgstr "<b> Εργάσιμες ώρες</b>"
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:9
-msgid "<b>Working time</b>"
-msgstr "<b> Εργάσιμος χρόνος</b>"
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:10
-msgid "Apply"
-msgstr "Εφαρμογή"
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:11
-msgid "C_opy an existing calendar"
-msgstr "Αν_τιγραφή υπάρχοντος ημερολογίου"
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:12
-msgid "C_reate"
-msgstr "Δη_μιουργία"
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:13
-msgid "Calendar Editor"
-msgstr "Επεξεργαστής ημερολογίου"
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:14
-msgid "Create an _empty calendar"
-msgstr "Δημιουργία ενός κ_ενού ημερολογίου"
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:15
-msgid "Custom working time"
-msgstr "Προσαρμοσμένος εργάσιμος χρόνος"
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:16
-msgid "Day type:"
-msgstr "Τύπος ημέρας:"
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:17
-msgid "Default Week"
-msgstr "Εξ ορισμού εβδομάδα"
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:18
-msgid "Default week..."
-msgstr "Εξ ορισμού εβδομάδα..."
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:19
-msgid "Edit Day Types"
-msgstr "Επεξεργασία τύπων ημέρας"
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:20
-msgid "Edit Working Time"
-msgstr "Επεξεργασία εργάσιμου χρόνου"
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:21
-msgid "Enter the name of the new day type:"
-msgstr "Εισάγετε το όνομα του νέου τύπου ημέρας:"
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:22
-msgid "Existing calendars:"
-msgstr "Υπάρχοντα ημερολόγια:"
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:23
-msgid "From:"
-msgstr "Από:"
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:24
-msgid "MrProject Team"
-msgstr "Ομάδα του MrProject"
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:25
-msgid "New Calendar"
-msgstr "Νέο ημερολόγιο"
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:26
-msgid "New Day Type"
-msgstr "Νέος τύπος ημέρας"
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:27
-msgid "Select a calendar"
-msgstr "Επιλογή ενός ημερολογίου"
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:28
-msgid ""
-"Select a weekday and the day type to use for that day in the default week "
-"for this calendar.\n"
-msgstr ""
-"Επιλογή μιας καθημερινής και του τύπου της ημέρας που θα χρησιμοποιηθεί στην "
-"εξ ορισμού εβδομάδα για αυτό το ημερολόγιο.\n"
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:30
-msgid "Set day type to:"
-msgstr "Ορισμός τύπου ημέρας σε:"
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:31
-msgid "To:"
-msgstr "Προς:"
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:32
-msgid "Use working time from derived calendar"
-msgstr "Χρήση εργάσιμου χρόνου από προερχόμενο ημερολόγιο"
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:33
-msgid "Week day:"
-msgstr "Ημέρα εβδομάδας:"
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:34
-msgid "Working time..."
-msgstr "Εργάσιμος χρόνος..."
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:35
-msgid "_Derive from a calendar"
-msgstr "Π_ροέλευση από ημερολόγιο"
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:36
-msgid "_Name of the new calendar:"
-msgstr "Ό_νομα του νέου ημερολογίου:"
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:37
-msgid "_New..."
-msgstr "_Νέο..."
-
-#: src/dialogs/calendar-dialog/mg-default-week-dialog.c:40
+#: src/planner-default-week-dialog.c:40
 msgid "Monday"
 msgstr "Δευτέρα"
 
-#: src/dialogs/calendar-dialog/mg-default-week-dialog.c:41
+#: src/planner-default-week-dialog.c:41
 msgid "Tuesday"
 msgstr "Τρίτη"
 
-#: src/dialogs/calendar-dialog/mg-default-week-dialog.c:42
+#: src/planner-default-week-dialog.c:42
 msgid "Wednesday"
 msgstr "Τετάρτη"
 
-#: src/dialogs/calendar-dialog/mg-default-week-dialog.c:43
+#: src/planner-default-week-dialog.c:43
 msgid "Thursday"
 msgstr "Πέμπτη"
 
-#: src/dialogs/calendar-dialog/mg-default-week-dialog.c:44
+#: src/planner-default-week-dialog.c:44
 msgid "Friday"
 msgstr "Παρασκευή"
 
-#: src/dialogs/calendar-dialog/mg-default-week-dialog.c:45
+#: src/planner-default-week-dialog.c:45
 msgid "Saturday"
 msgstr "Σάββατο"
 
-#: src/dialogs/calendar-dialog/mg-default-week-dialog.c:46
+#: src/planner-default-week-dialog.c:46
 msgid "Sunday"
 msgstr "Κυριακή"
 
-#: src/dialogs/calendar-dialog/mg-default-week-dialog.c:267
+#: src/planner-default-week-dialog.c:266
 msgid "No working time"
 msgstr "Όχι εργάσιμος χρόνος"
 
-#: src/dialogs/calendar-dialog/mg-default-week-dialog.c:278
-#: src/dialogs/calendar-dialog/mg-default-week-dialog.c:282
+#: src/planner-default-week-dialog.c:277 src/planner-default-week-dialog.c:281
 msgid "%H:%M"
 msgstr "%H:%M"
 
-#: src/dialogs/group-dialog/mg-group-dialog.c:387
-#: src/dialogs/property-dialog/mg-property-dialog.c:380
-#: src/dialogs/task-dialog/mg-task-dialog.c:1312
-#: src/dialogs/task-dialog/mg-task-dialog.c:1398
-#: src/views/gantt/mg-task-view.c:227 src/views/gantt/mg-gantt-print.c:190
-#: src/views/resources/mg-resource-view.c:942
+#: src/planner-group-dialog.c:387 src/planner-property-dialog.c:378
+#: src/planner-task-dialog.c:1311 src/planner-task-dialog.c:1397
+#: src/planner-task-view.c:227 src/planner-gantt-print.c:190
+#: src/planner-resource-view.c:966
 msgid "Name"
 msgstr "Όνομα"
 
-#: src/dialogs/group-dialog/mg-group-dialog.c:393
+#: src/planner-group-dialog.c:393
 msgid "Manager name"
 msgstr "Όνομα διαχειριστή"
 
-#: src/dialogs/group-dialog/mg-group-dialog.c:399
+#: src/planner-group-dialog.c:399
 msgid "Manager phone"
 msgstr "Τηλέφωνο διαχειριστή"
 
-#: src/dialogs/group-dialog/mg-group-dialog.c:405
+#: src/planner-group-dialog.c:405
 msgid "Manager email"
 msgstr "email διαχειριστή"
 
-#: src/dialogs/group-dialog/mg-group-dialog.c:411
+#: src/planner-group-dialog.c:411
 msgid "Default"
 msgstr "Εξ ορισμού"
 
-#: src/dialogs/group-dialog/mg-group-dialog.glade.h:1
-msgid "Group Editor"
-msgstr "Επεξεργαστής ομάδας"
-
-#: src/dialogs/project-dialog/mg-project-properties.c:146
+#: src/planner-project-properties.c:146
 msgid "Select a calendar to use for this project:"
 msgstr "Επιλέξτε ένα ημερολόγιο για χρήση σε αυτή την εργασία:"
 
-#: src/dialogs/project-dialog/mg-project-properties.c:505
+#: src/planner-project-properties.c:505
 msgid "None"
 msgstr "Κανένα"
 
-#: src/dialogs/project-dialog/mg-project-properties.c:606
+#: src/planner-project-properties.c:606
 msgid "Property"
 msgstr "Ιδιότητα"
 
-#: src/dialogs/project-dialog/mg-project-properties.c:617
-#: src/dialogs/property-dialog/mg-property-dialog.c:433
+#: src/planner-project-properties.c:617 src/planner-property-dialog.c:431
 msgid "Value"
 msgstr "Τιμή"
 
-#: src/dialogs/project-dialog/mg-project-properties.c:994
-#: src/dialogs/property-dialog/mg-property-dialog.c:231
+#: src/planner-project-properties.c:993 src/planner-property-dialog.c:229
 msgid "The name of the custom property needs to start with a letter."
 msgstr ""
 "Το όνομα της προσαρμοσμένης ιδιότητας χρειάζεται να ξεκινά με ένα γράμμα."
 
-#: src/dialogs/project-dialog/mg-project-properties.c:1066
-#: src/dialogs/property-dialog/mg-property-dialog.c:302
+#: src/planner-project-properties.c:1065 src/planner-property-dialog.c:300
 #, c-format
 msgid "Do you really want to remove the property '%s' from the project?"
 msgstr "Θέλετε πραγματικά να αφαιρέσετε την ιδιότητα '%s' από την εργασία?"
 
-#: src/dialogs/project-dialog/mg-project-properties.c:1196
+#: src/planner-project-properties.c:1194
 msgid "Could not create properties dialog."
 msgstr "Αδυναμία δημιουργίας διαλόγου ιδιοτήτων."
 
-#: src/dialogs/project-dialog/mg-project-properties.glade.h:2
-msgid "<b>Project phases</b>"
-msgstr "<b>Φάσεις εργασίας</b>"
-
-#: src/dialogs/project-dialog/mg-project-properties.glade.h:3
-msgid "Calendar:"
-msgstr "Ημερολόγιο:"
-
-#: src/dialogs/project-dialog/mg-project-properties.glade.h:4
-msgid "Custom properties"
-msgstr "Προσαρμοσμένες ιδιότητες"
-
-#: src/dialogs/project-dialog/mg-project-properties.glade.h:5
-msgid "Edit Project phases"
-msgstr "Επεξεργασία φάσεων εργασίας"
-
-#: src/dialogs/project-dialog/mg-project-properties.glade.h:6
-msgid "Enter the name of the new project phase:"
-msgstr "Εισάγετε το όνομα της νέας φάσης εργασίας:"
-
-#: src/dialogs/project-dialog/mg-project-properties.glade.h:7
-#: src/dialogs/resource-dialog/mg-resource-dialog.glade.h:5
-#: src/dialogs/task-dialog/mg-task-dialog.glade.h:6
-msgid "General"
-msgstr "Γενικά"
-
-#: src/dialogs/project-dialog/mg-project-properties.glade.h:8
-msgid "New Project Phase"
-msgstr "Νέα φάση εργασίας"
-
-#: src/dialogs/project-dialog/mg-project-properties.glade.h:9
-msgid "Project _name:"
-msgstr "Ό_νομα εργασίας:"
-
-#: src/dialogs/project-dialog/mg-project-properties.glade.h:10
-msgid "Project _start:"
-msgstr "Έναρ_ξη εργασίας:"
-
-#: src/dialogs/project-dialog/mg-project-properties.glade.h:11
-msgid "Project phase:"
-msgstr "Φάση εργασίας:"
-
-#: src/dialogs/project-dialog/mg-project-properties.glade.h:12
-msgid "Project properties"
-msgstr "Ιδιότητες εργασίας"
-
-#: src/dialogs/project-dialog/mg-project-properties.glade.h:13
-msgid "Select..."
-msgstr "Επιλογή..."
-
-#: src/dialogs/project-dialog/mg-project-properties.glade.h:14
-msgid "_Manager:"
-msgstr "_Διαχειριστής:"
-
-#: src/dialogs/project-dialog/mg-project-properties.glade.h:15
-msgid "_Organization:"
-msgstr "_Οργανισμός:"
-
-#: src/dialogs/property-dialog/mg-new-property.glade.h:2
-msgid "Description: "
-msgstr "Περιγραφή:"
-
-#: src/dialogs/property-dialog/mg-new-property.glade.h:3
-msgid "Label: "
-msgstr "Ετικέτα:"
-
-#: src/dialogs/property-dialog/mg-new-property.glade.h:4
-msgid "Name: "
-msgstr "Όνομα:"
-
-#: src/dialogs/property-dialog/mg-new-property.glade.h:5
-msgid "New Property"
-msgstr "Νέα ιδιότητα"
-
-#: src/dialogs/property-dialog/mg-new-property.glade.h:6
-msgid "Type: "
-msgstr "Τύπος:"
-
-#: src/dialogs/property-dialog/mg-property-dialog.c:399
+#: src/planner-property-dialog.c:397
 msgid "Label"
 msgstr "Ετικέτα"
 
-#: src/dialogs/property-dialog/mg-property-dialog.c:413
-#: src/dialogs/task-dialog/mg-task-dialog.c:1430
-#: src/views/resources/mg-resource-view.c:963
+#: src/planner-property-dialog.c:411 src/planner-task-dialog.c:1429
+#: src/planner-resource-view.c:987
 msgid "Type"
 msgstr "Τύπος"
 
-#: src/dialogs/property-dialog/mg-property-dialog.glade.h:1
-msgid "Custom Properties"
-msgstr "Προσαρμοσμένες ιδιότητες"
-
-#: src/dialogs/print-dialog/mg-print-dialog.c:49
+#: src/planner-print-dialog.c:49
 msgid "Print Project"
 msgstr "Εκτύπωση εργασίας"
 
-#: src/dialogs/print-dialog/mg-print-dialog.c:56
+#: src/planner-print-dialog.c:56
 msgid "Select views"
 msgstr "Επιλογή προβολών"
 
-#: src/dialogs/print-dialog/mg-print-dialog.c:74
+#: src/planner-print-dialog.c:74
 msgid "Select the views to print:"
 msgstr "Επιλέξτε τις προβολές για εκτύπωση:"
 
 #. Put "no group" at the top.
-#: src/dialogs/resource-dialog/mg-resource-dialog.c:248
-#: src/dialogs/resource-input-dialog/mg-resource-input-dialog.c:97
-#: src/views/resources/mg-resource-view.c:1351
+#: src/planner-resource-dialog.c:248 src/planner-resource-input-dialog.c:96
+#: src/planner-resource-view.c:1375
 msgid "(None)"
 msgstr "(Κανένα)"
 
-#: src/dialogs/resource-dialog/mg-resource-dialog.c:258
-#: src/dialogs/resource-input-dialog/mg-resource-input-dialog.c:107
-#: src/dialogs/task-dialog/mg-task-dialog.c:249
+#: src/planner-resource-dialog.c:258 src/planner-resource-input-dialog.c:106
+#: src/planner-task-dialog.c:249
 msgid "(No name)"
 msgstr "(ανώνυμο)"
 
 #. i18n: time stamp format for notes in task dialog, see strftime(3) for
 #. * a detailed description.
-#: src/dialogs/resource-dialog/mg-resource-dialog.c:728
-#: src/dialogs/task-dialog/mg-task-dialog.c:679
+#: src/planner-resource-dialog.c:728 src/planner-task-dialog.c:679
 msgid "%a %d %b %Y, %H:%M\n"
 msgstr "%a %d %b %Y, %H:%M\n"
 
-#: src/dialogs/resource-dialog/mg-resource-dialog.c:826
+#: src/planner-resource-dialog.c:826
 msgid "None (use project default)"
 msgstr "Κανένα (χρήση του προεπιλεγμένου της εργασίας)"
 
-#: src/dialogs/resource-dialog/mg-resource-dialog.c:953
-#: src/dialogs/resource-dialog/mg-resource-dialog.c:955
+#: src/planner-resource-dialog.c:953 src/planner-resource-dialog.c:955
 msgid "Edit resource properties"
 msgstr "Επεξεργασία ιδιοτήτων πόρου"
 
-#: src/dialogs/resource-dialog/mg-resource-dialog.c:1102
-#: src/views/gantt/mg-task-view.c:230 src/views/gantt/mg-gantt-print.c:198
-#: src/views/resources/mg-resource-view.c:629
-#: src/views/resources/mg-resource-view.c:645
-#: src/views/resources/mg-resource-view.c:1163
+#: src/planner-resource-dialog.c:1101 src/planner-task-view.c:230
+#: src/planner-gantt-print.c:198 src/planner-resource-view.c:629
+#: src/planner-resource-view.c:645 src/planner-resource-view.c:1187
 msgid "Work"
 msgstr "Εργασία"
 
-#: src/dialogs/resource-dialog/mg-resource-dialog.c:1103
-#: src/views/resources/mg-resource-view.c:632
-#: src/views/resources/mg-resource-view.c:646
-#: src/views/resources/mg-resource-view.c:1164
+#: src/planner-resource-dialog.c:1102 src/planner-resource-view.c:632
+#: src/planner-resource-view.c:646 src/planner-resource-view.c:1188
 msgid "Material"
 msgstr "Υλικό"
 
-#: src/dialogs/resource-dialog/mg-resource-dialog.glade.h:2
-msgid "C_ost:"
-msgstr "Κό_στος:"
-
-#: src/dialogs/resource-dialog/mg-resource-dialog.glade.h:3
-msgid "Calendar"
-msgstr "Ημερολόγιο"
-
-#: src/dialogs/resource-dialog/mg-resource-dialog.glade.h:4
-msgid "Edit calendars..."
-msgstr "Επεξεργασία ημερολογίων..."
-
-#: src/dialogs/resource-dialog/mg-resource-dialog.glade.h:6
-#: src/dialogs/task-dialog/mg-task-dialog.glade.h:7
-msgid "Insert time stamp"
-msgstr "Εισαγωγή ώρας"
-
-#: src/dialogs/resource-dialog/mg-resource-dialog.glade.h:7
-#: src/dialogs/task-dialog/mg-task-dialog.glade.h:9
-msgid "Notes"
-msgstr "Σημειώσεις"
-
-#: src/dialogs/resource-dialog/mg-resource-dialog.glade.h:8
-msgid ""
-"Select the calendar to use for this resource. If you want to use the default "
-"calendar of the project, select 'None'. "
-msgstr ""
-"Επιλογή του ημερολογίου για χρήση για αυτό τον πόρο. Αν θέλετε να "
-"χρησιμοποιήσετε το εξ ορισμού ημερολόγιο της εργασίας επιλέξτε 'Κανένα'."
-
-#: src/dialogs/resource-dialog/mg-resource-dialog.glade.h:9
-msgid "_Email:"
-msgstr "_Email:"
-
-#: src/dialogs/resource-dialog/mg-resource-dialog.glade.h:10
-msgid "_Group:"
-msgstr "Ομά_δα:"
-
-#: src/dialogs/resource-dialog/mg-resource-dialog.glade.h:11
-msgid "_Name:"
-msgstr "Ό_νομα:"
-
-#: src/dialogs/resource-dialog/mg-resource-dialog.glade.h:12
-msgid "_Type:"
-msgstr "_Τύπος:"
-
-#: src/dialogs/resource-input-dialog/mg-resource-input-dialog.glade.h:2
-msgid "Email:"
-msgstr "Email:"
-
-#: src/dialogs/resource-input-dialog/mg-resource-input-dialog.glade.h:3
-msgid "Group:"
-msgstr "Ομάδα:"
-
-#: src/dialogs/resource-input-dialog/mg-resource-input-dialog.glade.h:4
-msgid "Insert resource"
-msgstr "Εισαγωγή πηγής"
-
-#: src/dialogs/resource-input-dialog/mg-resource-input-dialog.glade.h:5
-#: src/dialogs/task-input-dialog/mg-task-input-dialog.glade.h:3
-msgid "Name:"
-msgstr "Όνομα:"
-
-#: src/dialogs/resource-input-dialog/mg-resource-input-dialog.glade.h:6
-#: src/dialogs/task-input-dialog/mg-task-input-dialog.glade.h:5
-msgid "_Insert"
-msgstr "Εισα_γωγή"
-
-#: src/dialogs/task-dialog/mg-add-predecessor.glade.h:2
-msgid "Lag: "
-msgstr "Lag: "
-
-#: src/dialogs/task-dialog/mg-add-predecessor.glade.h:3
-msgid "New predecessor"
-msgstr "Νέος πρόγονος"
-
-#: src/dialogs/task-dialog/mg-add-predecessor.glade.h:4
-msgid "Predecessor: "
-msgstr "Πρόγονος:"
-
-#: src/dialogs/task-dialog/mg-add-predecessor.glade.h:5
-msgid "Relation type: "
-msgstr "Τύπος συγγένειας:"
-
-#: src/dialogs/task-dialog/mg-predecessor-model.c:191
-#: src/dialogs/task-dialog/mg-task-dialog.c:1040
+#: src/planner-predecessor-model.c:191 src/planner-task-dialog.c:1039
 msgid "FS"
 msgstr "FS"
 
-#: src/dialogs/task-dialog/mg-predecessor-model.c:194
-#: src/dialogs/task-dialog/mg-task-dialog.c:1041
+#: src/planner-predecessor-model.c:194 src/planner-task-dialog.c:1040
 msgid "FF"
 msgstr "FF"
 
-#: src/dialogs/task-dialog/mg-predecessor-model.c:197
-#: src/dialogs/task-dialog/mg-task-dialog.c:1042
+#: src/planner-predecessor-model.c:197 src/planner-task-dialog.c:1041
 msgid "SS"
 msgstr "SS"
 
-#: src/dialogs/task-dialog/mg-predecessor-model.c:200
-#: src/dialogs/task-dialog/mg-task-dialog.c:1043
+#: src/planner-predecessor-model.c:200 src/planner-task-dialog.c:1042
 msgid "SF"
 msgstr "SF"
 
-#: src/dialogs/task-dialog/mg-task-dialog.c:746
+#: src/planner-task-dialog.c:745
 msgid "Finish to start (FS)"
 msgstr "Τέλος σε έναρξη (FS)"
 
-#: src/dialogs/task-dialog/mg-task-dialog.c:747
+#: src/planner-task-dialog.c:746
 msgid "Finish to finish (FF)"
 msgstr "Τέλος σε τέλος (FF)"
 
-#: src/dialogs/task-dialog/mg-task-dialog.c:748
+#: src/planner-task-dialog.c:747
 msgid "Start to start (SS)"
 msgstr "Έναρξη σε έναρξη (SS)"
 
-#: src/dialogs/task-dialog/mg-task-dialog.c:749
+#: src/planner-task-dialog.c:748
 msgid "Start to finish (SF)"
 msgstr "Έναρξη σε τέλος (SF)"
 
-#: src/dialogs/task-dialog/mg-task-dialog.c:799
+#: src/planner-task-dialog.c:798
 msgid "Can't add new predecessor. No task selected!"
 msgstr "Αδυναμία προσθήκης νέου πρόγονου. Δεν επιλέχθηκε έργο!"
 
-#: src/dialogs/task-dialog/mg-task-dialog.c:1331
+#: src/planner-task-dialog.c:1330
 msgid "Assigned"
 msgstr "Ανατέθηκε"
 
-#: src/dialogs/task-dialog/mg-task-dialog.c:1348
+#: src/planner-task-dialog.c:1347
 msgid "Units"
 msgstr "Μονάδες"
 
-#: src/dialogs/task-dialog/mg-task-dialog.c:1452
+#: src/planner-task-dialog.c:1451
 msgid "Lag"
 msgstr "Lag"
 
-#: src/dialogs/task-dialog/mg-task-dialog.c:1585
-#: src/dialogs/task-dialog/mg-task-dialog.c:1587
+#: src/planner-task-dialog.c:1584 src/planner-task-dialog.c:1586
 msgid "Edit task properties"
 msgstr "Επεξεργασία ιδιοτήτων έργου"
 
-#: src/dialogs/task-dialog/mg-task-dialog.glade.h:3
-#, no-c-format
-msgid "%"
-msgstr "%"
-
-#: src/dialogs/task-dialog/mg-task-dialog.glade.h:5
-msgid "C_omplete:"
-msgstr "Ολο_κληρώθηκε:"
-
-#: src/dialogs/task-dialog/mg-task-dialog.glade.h:8
-msgid "Na_me:"
-msgstr "Όνο_μα:"
-
-#: src/dialogs/task-dialog/mg-task-dialog.glade.h:10
-msgid "Pr_iority:"
-msgstr "Προ_τεραιότητα:"
-
-#: src/dialogs/task-dialog/mg-task-dialog.glade.h:11
-msgid "Predecessors"
-msgstr "Πρόγονοι"
-
-#: src/dialogs/task-dialog/mg-task-dialog.glade.h:12
-#: src/views/resources/mg-resource-view.c:342
-msgid "Resources"
-msgstr "Πόροι"
-
-#: src/dialogs/task-dialog/mg-task-dialog.glade.h:13
-msgid "_Duration:"
-msgstr "_Διάρκεια:"
-
-#: src/dialogs/task-dialog/mg-task-dialog.glade.h:14
-msgid "_Fixed duration"
-msgstr "Κα_θορισμένη διάρκεια:"
-
-#: src/dialogs/task-dialog/mg-task-dialog.glade.h:15
-msgid "_Milestone"
-msgstr "_Milestone"
-
-#: src/dialogs/task-dialog/mg-task-dialog.glade.h:16
-msgid "_Work:"
-msgstr "Ερ_γασία:"
-
-#. day unit variant accepted in input
-#: src/dialogs/task-dialog/mg-task-dialog.glade.h:17
-#: src/views/gantt/mg-task-tree.c:2121
-msgid "days"
-msgstr "ημέρες"
-
-#: src/dialogs/task-input-dialog/mg-task-input-dialog.glade.h:2
-msgid "Insert task"
-msgstr "Εισαγωγή έργου"
-
-#: src/dialogs/task-input-dialog/mg-task-input-dialog.glade.h:4
-msgid "Work:"
-msgstr "Εργασία:"
-
-#: src/plugins/html-output/GNOME_MrProject_HtmlOutputPlugin.ui.h:1
-#: src/plugins/html-output/mg-html-output.glade.h:4
-msgid "Export to HTML"
-msgstr "Εξαγωγή σε HTML"
-
-#: src/plugins/html-output/mg-html-output.glade.h:3
-msgid "<b>Save to</b>"
-msgstr "<b> Αποθήκευση σε</b>"
-
-#: src/plugins/html-output/mg-html-output.glade.h:5
-msgid "Local file"
-msgstr "Τοπικό αρχείο"
-
-#: src/plugins/html-output/mg-html-output.glade.h:6
-msgid "Save to HTML File"
-msgstr "Αποθήκευση σε αρχείο HTML"
-
-#: src/plugins/html-output/mg-html-output.glade.h:7
-msgid "Web location"
-msgstr "Τοποθεσία στον ιστό"
-
-#: src/plugins/html-output/mg-html-output-plugin.c:133
+#: src/planner-html-plugin.c:133
 #, c-format
 msgid ""
 "\"%s\" is a directory.\n"
@@ -1054,54 +1182,12 @@ msgstr ""
 "\"%s\" είναι ένας κατάλογος.\n"
 "Εισάγετε ένα όνομα αρχείου και προσπαθήστε ξανά."
 
-#: src/plugins/sql/GNOME_MrProject_SQLPlugin.ui.h:1
-msgid "Open from Database..."
-msgstr "Άνοιγμα από βάση δεδομένων..."
-
-#: src/plugins/sql/GNOME_MrProject_SQLPlugin.ui.h:2
-msgid "Save to Database..."
-msgstr "Αποθήκευση σε βάση δεδομένων..."
-
-#: src/plugins/sql/mg-sql.glade.h:3
-msgid "<b>Open Database</b>"
-msgstr "<b> Άνοιγμα Βάσης δεδομένων</b>"
-
-#: src/plugins/sql/mg-sql.glade.h:4
-msgid "Database:"
-msgstr "Βάση δεδομένων:"
-
-#: src/plugins/sql/mg-sql.glade.h:5
-msgid "Open Database"
-msgstr "Άνοιγμα Βάσης δεδομένων"
-
-#: src/plugins/sql/mg-sql.glade.h:6
-msgid "Password:"
-msgstr "Κωδικός:"
-
-#: src/plugins/sql/mg-sql.glade.h:7
-msgid "Select a Project"
-msgstr "Επιλογή μιας εργασίας"
-
-#: src/plugins/sql/mg-sql.glade.h:8
-msgid "Server:"
-msgstr "Εξυπηρετητής:"
-
-#: src/plugins/sql/mg-sql.glade.h:9
-msgid "The database contains the following projects. Select a project to open:"
-msgstr ""
-"Η βάση δεδομένων περιέχει τις ακόλουθες εργασίες. Επιλέξτε μια εργασία για "
-"άνοιγμα:"
-
-#: src/plugins/sql/mg-sql.glade.h:10
-msgid "Username:"
-msgstr "Όνομα Χρήστη:"
-
 #. Give up.
-#: src/plugins/sql/mg-sql-plugin.c:127
+#: src/planner-sql-plugin.c:127
 msgid "Invalid Unicode"
 msgstr "Μη έγκυρο Unicode"
 
-#: src/plugins/sql/mg-sql-plugin.c:269
+#: src/planner-sql-plugin.c:269
 #, c-format
 msgid ""
 "Connection to database '%s' failed:\n"
@@ -1110,43 +1196,43 @@ msgstr ""
 "Η σύνδεση στην βάση δεδομένων '%s' απέτυχε:\n"
 "%s"
 
-#: src/plugins/sql/mg-sql-plugin.c:318
+#: src/planner-sql-plugin.c:318
 msgid "Project"
 msgstr "Εργασία"
 
-#: src/plugins/sql/mg-sql-plugin.c:466
+#: src/planner-sql-plugin.c:466
 msgid "Open from Database"
 msgstr "Άνοιγμα απο την Βάση δεδομένων"
 
-#: src/plugins/sql/mg-sql-plugin.c:573
+#: src/planner-sql-plugin.c:573
 msgid "Save to Database"
 msgstr "Αποθήκευση σε Βάση δεδομένων"
 
-#: src/util/mg-format.c:141
+#: src/planner-format.c:141
 #, c-format
 msgid "%dd %dh"
 msgstr "%dd %dh"
 
-#: src/util/mg-format.c:144
+#: src/planner-format.c:144
 #, c-format
 msgid "%dd"
 msgstr "%dd"
 
-#: src/util/mg-format.c:147
+#: src/planner-format.c:147
 #, c-format
 msgid "%dh"
 msgstr "%dh"
 
-#: src/util/mg-format.c:171
+#: src/planner-format.c:171
 #, c-format
 msgid "%s days"
 msgstr "%s ημέρες"
 
-#: src/util/mg-format.c:174
+#: src/planner-format.c:174
 msgid "0 days"
 msgstr "0 ημέρες"
 
-#: src/util/mg-format.c:177
+#: src/planner-format.c:177
 #, c-format
 msgid "%s day"
 msgstr "%s ημέρα"
@@ -1155,146 +1241,43 @@ msgstr "%s ημέρα"
 #. * e.g. in the date cells in the task tree. See
 #. * libmrproject/docs/DateFormat.
 #.
-#: src/util/mg-format.c:197
+#: src/planner-format.c:197
 msgid "%b %e"
 msgstr "%b %e"
 
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:1
-#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:1
-msgid "I_ndent Task"
-msgstr "Α_νάθεση έργου"
-
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:2
-#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:2
-msgid "In_sert Tasks..."
-msgstr "Ει_σαγωγή έργων..."
-
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:5
-#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:5
-msgid "Move Task Do_wn"
-msgstr "Μετακίνηση έργου προς τα κά_τω"
-
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:6
-#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:6
-msgid "Move Task _Up"
-msgstr "Μετακίνηση έργου προς τα πά_νω"
-
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:10
-#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:10
-msgid "Reset _All Constraints"
-msgstr "Αρχικοποίηση ό_λων των περιορισμών"
-
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:11
-#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:11
-msgid "Reset _Constraint"
-msgstr "Αρχικοποίηση _περιορισμού"
-
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:12
-#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:12
-#: src/views/resources/GNOME_MrProject_ResourcesView.ui.h:7
-msgid "Select _All"
-msgstr "Επιλογή Ό_λων"
-
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:13
-#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:13
-#: src/views/resources/GNOME_MrProject_ResourcesView.ui.h:8
-msgid "Select all tasks"
-msgstr "Επιλογή όλων των έργων"
-
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:14
-msgid "Test"
-msgstr "Δοκιμή"
-
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:15
-#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:14
-msgid "Un_link Task"
-msgstr "Αποσύ_νδεση έργου"
-
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:16
-#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:15
-msgid "Unin_dent Task"
-msgstr "Άρση ανά_θεσης έργου"
-
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:19
-msgid "Zoom In"
-msgstr "Μεγέθυνση"
-
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:20
-msgid "Zoom Out"
-msgstr "Σμίκρυνση"
-
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:21
-msgid "Zoom To Fit"
-msgstr "Μεγέθυνση στην σελίδα"
-
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:22
-msgid "Zoom To _Fit"
-msgstr "Μεγέθυνση στην σ_ελίδα"
-
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:23
-msgid "Zoom _Out"
-msgstr "Σ_μίκρυνση"
-
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:24
-#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:19
-msgid "_Edit Task Properties..."
-msgstr "Επεξεργασία ιδιοτήτων έργου..."
-
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:25
-msgid "_Highlight Critical Tasks"
-msgstr "Επισή_μανση σημαντικών έργων"
-
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:26
-#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:20
-msgid "_Insert Task"
-msgstr "Ε_ισαγωγή έργου"
-
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:27
-#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:21
-msgid "_Remove Task"
-msgstr "Αφαί_ρεση έργου"
-
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:28
-msgid "_Zoom In"
-msgstr "_Μεγέθυνση"
-
-#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:18
-msgid "_Edit Custom Properties..."
-msgstr "_Επεξεργασία προσαρμοσμένων ιδιοτήτων..."
-
 #. i18n: project start, the date format is described in
 #. * libmrproject/docs/DateFormat.
-#: src/views/gantt/mg-gantt-background.c:579
+#: src/planner-gantt-background.c:579
 msgid "%Y %b %d"
 msgstr "%Y %b %d"
 
-#: src/views/gantt/mg-gantt-background.c:581
+#: src/planner-gantt-background.c:581
 msgid "Project start"
 msgstr "Έναρξη εργασίας"
 
-#: src/views/gantt/mg-gantt-row.c:1841 src/views/gantt/mg-gantt-row.c:1844
+#: src/planner-gantt-row.c:1841 src/planner-gantt-row.c:1844
 msgid "No name"
 msgstr "Χωρίς όνομα"
 
-#: src/views/gantt/mg-gantt-row.c:1847
+#: src/planner-gantt-row.c:1847
 #, c-format
 msgid "Make task '%s' a predecessor of '%s'"
 msgstr "Μετατροπή έργου '%s' ως πρόγονου του '%s'"
 
-#: src/views/gantt/mg-gantt-row.c:1905
+#: src/planner-gantt-row.c:1905
 #, c-format
 msgid "Change work to %s"
 msgstr "Αλλαγή εργασίας σε %s"
 
-#: src/views/gantt/mg-gantt-view.c:274
+#: src/planner-gantt-view.c:273
 msgid "Gantt Chart"
 msgstr "Gantt Chart"
 
-#: src/views/gantt/mg-gantt-view.c:282
+#: src/planner-gantt-view.c:281
 msgid "_Gantt Chart"
 msgstr "_Gantt Chart"
 
-#: src/views/gantt/mg-gantt-view.c:471
+#: src/planner-gantt-view.c:470
 msgid ""
 "\n"
 "Name"
@@ -1303,7 +1286,7 @@ msgstr ""
 "Όνομα"
 
 #. COL_START,    _("\nStart"),
-#: src/views/gantt/mg-gantt-view.c:473
+#: src/planner-gantt-view.c:472
 msgid ""
 "\n"
 "Work"
@@ -1312,229 +1295,199 @@ msgstr ""
 "Εργασία"
 
 #. i18n: Short "Week", preferably 2 letters.
-#: src/views/gantt/mg-scale-utils.c:325
+#: src/planner-scale-utils.c:325
 #, c-format
 msgid "Wk %d"
 msgstr "Wk %d"
 
-#: src/views/gantt/mg-scale-utils.c:329
+#: src/planner-scale-utils.c:329
 #, c-format
 msgid "Week %d"
 msgstr "Εβδομάδα  %d"
 
 #. i18n: Week, year.
-#: src/views/gantt/mg-scale-utils.c:334
+#: src/planner-scale-utils.c:334
 #, c-format
 msgid "Week %d, %d"
 msgstr "Εβδομάδα %d, %d"
 
 #. i18n: Short "Quarter", preferrably 1 letter.
-#: src/views/gantt/mg-scale-utils.c:365
+#: src/planner-scale-utils.c:365
 #, c-format
 msgid "Q%d"
 msgstr "Τ%d"
 
 #. i18n: Short "Quarter", preferrably 2-3 letters.
-#: src/views/gantt/mg-scale-utils.c:369
+#: src/planner-scale-utils.c:369
 #, c-format
 msgid "Qtr %d"
 msgstr "Τετρ %d"
 
 #. i18n: Year, short "Quarter", preferrably 2-3 letters.
-#: src/views/gantt/mg-scale-utils.c:373
+#: src/planner-scale-utils.c:373
 #, c-format
 msgid "%d, Qtr %d"
 msgstr "%d, Τετρ %d"
 
 #. i18n: Short "Half year", prefferably 1 letter.
-#: src/views/gantt/mg-scale-utils.c:386
+#: src/planner-scale-utils.c:386
 #, c-format
 msgid "H%d"
 msgstr "Ε%d"
 
 #. i18n: Year, short "Half year", prefferably 1 letter.
-#: src/views/gantt/mg-scale-utils.c:391
+#: src/planner-scale-utils.c:391
 #, c-format
 msgid "%04d, H%d"
 msgstr "%04d, Ε%d"
 
-#: src/views/gantt/mg-task-tree.c:185
+#: src/planner-task-tree.c:184
 msgid "/_Insert task"
 msgstr "/Ε_ισαγωγή έργου"
 
-#: src/views/gantt/mg-task-tree.c:186
+#: src/planner-task-tree.c:185
 msgid "/_Insert subtask"
 msgstr "/Ε_ισαγωγή υποέργου"
 
-#: src/views/gantt/mg-task-tree.c:187
+#: src/planner-task-tree.c:186
 msgid "/_Remove task"
 msgstr "/Α_φαίρεση έργου"
 
-#: src/views/gantt/mg-task-tree.c:189
+#: src/planner-task-tree.c:188
 msgid "/_Unlink task"
 msgstr "/Απο_σύνδεση έργου"
 
-#: src/views/gantt/mg-task-tree.c:191
+#: src/planner-task-tree.c:190
 msgid "/_Edit task..."
 msgstr "/_Επεξεργασία έργου..."
 
-#: src/views/gantt/mg-task-tree.c:2113
+#: src/planner-task-tree.c:2112
 msgid "mon"
 msgstr "μήν"
 
 #. month unit variant accepted in input
-#: src/views/gantt/mg-task-tree.c:2114
+#: src/planner-task-tree.c:2113
 msgid "month"
 msgstr "μήνας"
 
 #. month unit variant accepted in input
-#: src/views/gantt/mg-task-tree.c:2115
+#: src/planner-task-tree.c:2114
 msgid "months"
 msgstr "μήνες"
 
 #. month unit variant accepted in input
-#: src/views/gantt/mg-task-tree.c:2116
+#: src/planner-task-tree.c:2115
 msgid "w"
 msgstr "εβ"
 
 #. week unit variant accepted in input
-#: src/views/gantt/mg-task-tree.c:2117
+#: src/planner-task-tree.c:2116
 msgid "week"
 msgstr "εβδομάδα"
 
 #. week unit variant accepted in input
-#: src/views/gantt/mg-task-tree.c:2118
+#: src/planner-task-tree.c:2117
 msgid "weeks"
 msgstr "εβδομάδες"
 
 #. week unit variant accepted in input
-#: src/views/gantt/mg-task-tree.c:2119
+#: src/planner-task-tree.c:2118
 msgid "d"
 msgstr "ημ"
 
 #. day unit variant accepted in input
-#: src/views/gantt/mg-task-tree.c:2120
+#: src/planner-task-tree.c:2119
 msgid "day"
 msgstr "ημέρα"
 
 #. day unit variant accepted in input
-#: src/views/gantt/mg-task-tree.c:2122
+#: src/planner-task-tree.c:2121
 msgid "h"
 msgstr "ω"
 
 #. hour unit variant accepted in input
-#: src/views/gantt/mg-task-tree.c:2123
+#: src/planner-task-tree.c:2122
 msgid "hour"
 msgstr "ώρα"
 
 #. hour unit variant accepted in input
-#: src/views/gantt/mg-task-tree.c:2124
+#: src/planner-task-tree.c:2123
 msgid "hours"
 msgstr "ώρες"
 
 #. hour unit variant accepted in input
-#: src/views/gantt/mg-task-tree.c:2125
+#: src/planner-task-tree.c:2124
 msgid "min"
 msgstr "λεπ"
 
 #. minute unit variant accepted in input
-#: src/views/gantt/mg-task-tree.c:2126
+#: src/planner-task-tree.c:2125
 msgid "minute"
 msgstr "λεπτό"
 
 #. minute unit variant accepted in input
-#: src/views/gantt/mg-task-tree.c:2127
+#: src/planner-task-tree.c:2126
 msgid "minutes"
 msgstr "λεπτά"
 
-#: src/views/gantt/mg-task-view.c:173
+#: src/planner-task-view.c:173
 msgid "Tasks"
 msgstr "Έργα"
 
-#: src/views/gantt/mg-task-view.c:181
+#: src/planner-task-view.c:181
 msgid "_Tasks"
 msgstr "Έρ_γα"
 
-#: src/views/gantt/mg-task-view.c:228
+#: src/planner-task-view.c:228
 msgid "Start"
 msgstr "Έναρξη"
 
-#: src/views/gantt/mg-task-view.c:229
+#: src/planner-task-view.c:229
 msgid "Finish"
 msgstr "Τέλος"
 
-#: src/views/gantt/mg-task-view.c:231
+#: src/planner-task-view.c:231
 msgid "Slack"
 msgstr "Ασυντόνιστο"
 
-#: src/views/gantt/mg-task-view.c:232
+#: src/planner-task-view.c:232
 msgid "Cost"
 msgstr "Κόστος"
 
-#: src/views/gantt/mg-task-view.c:438
+#: src/planner-task-view.c:438
 msgid "Edit custom task properties"
 msgstr "Επεξεργασία ιδιοτήτων προσαρμοσμένου έργου"
 
-#: src/views/resources/GNOME_MrProject_ResourcesView.ui.h:1
-msgid "Edit _Custom Properties..."
-msgstr "Επεξεργασία προ_σαρμοσμένων ιδιοτήτων..."
-
-#: src/views/resources/GNOME_MrProject_ResourcesView.ui.h:2
-msgid "Edit _Groups"
-msgstr "Επεξεργασία ο_μάδων"
-
-#: src/views/resources/GNOME_MrProject_ResourcesView.ui.h:3
-msgid "Groups"
-msgstr "Ομάδες"
-
-#: src/views/resources/GNOME_MrProject_ResourcesView.ui.h:4
-msgid "In_sert Resources..."
-msgstr "Εισα_γωγή πόρων..."
-
-#: src/views/resources/GNOME_MrProject_ResourcesView.ui.h:9
-msgid "_Edit Resource Properties..."
-msgstr "_Επεξεργασία ιδιοτήτων πόρου..."
-
-#: src/views/resources/GNOME_MrProject_ResourcesView.ui.h:10
-msgid "_Insert Resource"
-msgstr "Ε_ισαγωγή πόρου"
-
-#: src/views/resources/GNOME_MrProject_ResourcesView.ui.h:11
-msgid "_Remove Resource"
-msgstr "Αφαί_ρεση πόρου"
-
-#: src/views/resources/mg-resource-view.c:248
+#: src/planner-resource-view.c:248
 msgid "/_Insert resource"
 msgstr "/Ε_ισαγωγή πόρου"
 
-#: src/views/resources/mg-resource-view.c:249
+#: src/planner-resource-view.c:249
 msgid "/_Remove resource"
 msgstr "/Αφαί_ρεση πόρου"
 
-#: src/views/resources/mg-resource-view.c:250
+#: src/planner-resource-view.c:250
 msgid "/_Edit resource..."
 msgstr "/Επε_ξεργασία πόρου..."
 
-#: src/views/resources/mg-resource-view.c:350
+#: src/planner-resource-view.c:350
 msgid "_Resources"
 msgstr "Πό_ροι"
 
-#: src/views/resources/mg-resource-view.c:825
+#: src/planner-resource-view.c:849
 msgid "Edit custom resource properties"
 msgstr "Επεξεργασία ιδιοτήτων προσαρμοσμένου πόρου"
 
-#: src/views/resources/mg-resource-view.c:987
+#: src/planner-resource-view.c:1011
 msgid "Group"
 msgstr "Ομάδα"
 
-#: src/views/resources/mg-resource-view.c:1016
+#: src/planner-resource-view.c:1040
 msgid "Email"
 msgstr "Email"
 
-#: mrproject.desktop.in.h:1
-msgid "MrProject Project Management Tool"
-msgstr "MrProject Εργαλείο Διαχείρισης Εργασιών"
+#~ msgid "Contribute to MrProject"
+#~ msgstr "Συμβάλλετε στο MrProject"
 
-#: mrproject.desktop.in.h:2
-msgid "Project Management"
-msgstr "Διαχείριση Εργασιών"
+#~ msgid "MrProject Project Management Tool"
+#~ msgstr "MrProject Εργαλείο Διαχείρισης Εργασιών"

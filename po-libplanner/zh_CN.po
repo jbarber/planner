@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libmrproject\n"
-"POT-Creation-Date: 2003-09-11 12:36+0200\n"
+"POT-Creation-Date: 2003-12-01 20:39+0100\n"
 "PO-Revision-Date: 2003-06-04 17:30+0800\n"
 "Last-Translator: Funda Wang <fundawang@linux.net.cn>\n"
 "Language-Team: zh_CN <i18n-translation@lists.linux.net.cn>\n"
@@ -15,126 +15,126 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: mrproject/mrp-project.c:441
+#: libplanner/mrp-project.c:441
 msgid "Default"
 msgstr "默认"
 
-#: mrproject/mrp-project.c:749
+#: libplanner/mrp-project.c:749
 #, c-format
 msgid "Couldn't find a suitable file module for loading '%s'"
 msgstr "找不到可装入“%s”的文件模块"
 
-#: mrproject/mrp-project.c:770 mrproject/mrp-project.c:1034
+#: libplanner/mrp-project.c:770 libplanner/mrp-project.c:1034
 msgid "No support for SQL storage built into this version of MrProject."
 msgstr "此版本的 MrProject 不支持内建的 SQL 存储。"
 
-#: mrproject/mrp-project.c:807
+#: libplanner/mrp-project.c:807
 msgid "Invalid URI."
 msgstr "无效的 URI。"
 
-#: mrproject/mrp-project.c:928
+#: libplanner/mrp-project.c:928
 #, c-format
 msgid "Unable to find file writer identified by '%s'"
 msgstr "找不到由“%s”标识的文件写入程序"
 
-#: mrproject/mrp-project.c:991
+#: libplanner/mrp-project.c:991
 msgid "Couldn't find a suitable file module for loading project"
 msgstr "找不到适合装入项目的文件模块"
 
-#: mrproject/mrp-property.c:365
+#: libplanner/mrp-property.c:365
 msgid "Text"
 msgstr "文本"
 
-#: mrproject/mrp-property.c:367
+#: libplanner/mrp-property.c:367
 msgid "String list"
 msgstr "字符串列表"
 
-#: mrproject/mrp-property.c:369
+#: libplanner/mrp-property.c:369
 msgid "Integer number"
 msgstr "整数"
 
-#: mrproject/mrp-property.c:371
+#: libplanner/mrp-property.c:371
 msgid "Floating-point number"
 msgstr "浮点数"
 
-#: mrproject/mrp-property.c:373
+#: libplanner/mrp-property.c:373
 msgid "Date"
 msgstr "日期"
 
-#: mrproject/mrp-property.c:375
+#: libplanner/mrp-property.c:375
 msgid "Duration"
 msgstr "持续时间"
 
-#: mrproject/mrp-property.c:377
+#: libplanner/mrp-property.c:377
 msgid "Cost"
 msgstr "成本"
 
-#: mrproject/mrp-property.c:380
+#: libplanner/mrp-property.c:380
 msgid "None"
 msgstr "无"
 
-#: mrproject/mrp-task-manager.c:1769
+#: libplanner/mrp-task-manager.c:1769
 msgid "Can not add a predecessor relation between a task and its ancestor."
 msgstr "无法在任务及其祖先之间添加前趋关系。"
 
-#: mrproject/mrp-task-manager.c:1778 mrproject/mrp-task-manager.c:1786
+#: libplanner/mrp-task-manager.c:1778 libplanner/mrp-task-manager.c:1786
 msgid "Can not add a predecessor, because it would result in a loop."
 msgstr "无法添加前趋，原因是将导致循环。"
 
-#: mrproject/mrp-task-manager.c:1821
+#: libplanner/mrp-task-manager.c:1821
 msgid "Can not move the task, since it would result in a loop."
 msgstr "无法移动任务，原因是将导致循环。"
 
-#: mrproject/mrp-task.c:1011
+#: libplanner/mrp-task.c:1016
 msgid ""
 "Could not add a predecessor relation, because the tasks are already related."
 msgstr "无法添加前趋关系，原因是任务已经有关系了。"
 
-#: mrproject/mrp-day.c:54
+#: libplanner/mrp-day.c:54
 msgid "Working"
 msgstr "工作"
 
-#: mrproject/mrp-day.c:55
+#: libplanner/mrp-day.c:55
 msgid "A default working day"
 msgstr "默认工作日"
 
-#: mrproject/mrp-day.c:57
+#: libplanner/mrp-day.c:57
 msgid "Nonworking"
 msgstr "不工作"
 
-#: mrproject/mrp-day.c:58
+#: libplanner/mrp-day.c:58
 msgid "A default non working day"
 msgstr "默认的不工作日"
 
-#: mrproject/mrp-day.c:60
+#: libplanner/mrp-day.c:60
 msgid "Use base"
 msgstr "使用基础"
 
-#: mrproject/mrp-day.c:61
+#: libplanner/mrp-day.c:61
 msgid "Use day from base calendar"
 msgstr "使用基础日历的日设置"
 
-#: storage-modules/mrproject-1/mrp-parser.c:1043
-#: storage-modules/mrproject-1/mrp-parser.c:1138
+#: libplanner/mrp-parser.c:1043 libplanner/mrp-parser.c:1138
 msgid "Could not create XML tree"
 msgstr "无法创建 XML 树"
 
-#: storage-modules/mrproject-1/mrp-parser.c:1104
+#: libplanner/mrp-parser.c:1104
 msgid "Could not write XML file"
 msgstr "无法写入 XML 文件"
 
-#: storage-modules/sql/mrp-sql.c:229
+#. Give up.
+#: libplanner/mrp-sql.c:229
 msgid "Invalid Unicode"
 msgstr "无效的 Unicode"
 
-#: storage-modules/sql/mrp-sql.c:2209
+#: libplanner/mrp-sql.c:2205
 #, c-format
 msgid ""
 "The project '%s' has been changed by the user '%s' since you opened it. Do "
 "you want to save anyway?"
 msgstr "项目“%s”自您打开后已经由用户“%s”进行了更改。您仍然要保存吗？"
 
-#: storage-modules/sql/mrp-sql.c:3447
+#: libplanner/mrp-sql.c:3443
 #, c-format
 msgid ""
 "Connection to database '%s' failed.\n"
@@ -143,14 +143,14 @@ msgstr ""
 "连接到数据库“%s”失败。\n"
 "%s"
 
-#: storage-modules/sql/mrp-storage-sql.c:205
+#: libplanner/mrp-storage-sql.c:205
 msgid "Invalid SQL URI (must start with 'sql://' and contain '#')."
 msgstr "无效的 SQL URI (必须以“sql://”开始且包含“#”)。"
 
-#: storage-modules/sql/mrp-storage-sql.c:274
+#: libplanner/mrp-storage-sql.c:274
 msgid "Invalid SQL URI (invalid project id)."
 msgstr "无效的 SQL URI (无效的项目 id)。"
 
-#: storage-modules/sql/mrp-storage-sql.c:282
+#: libplanner/mrp-storage-sql.c:282
 msgid "Invalid SQL URI (no database name specified)."
 msgstr "无效的 SQL URI (没有指定数据库名)。"

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libmrproject\n"
-"POT-Creation-Date: 2003-09-11 12:36+0200\n"
+"POT-Creation-Date: 2003-12-01 20:39+0100\n"
 "PO-Revision-Date: 2003-02-24 14:22+0330\n"
 "Last-Translator: Roozbeh Pournader <roozbeh@sharif.edu>\n"
 "Language-Team: Persian <farsi@lists.sharif.edu>\n"
@@ -13,142 +13,142 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: mrproject/mrp-project.c:441
+#: libplanner/mrp-project.c:441
 msgid "Default"
 msgstr ""
 
-#: mrproject/mrp-project.c:749
+#: libplanner/mrp-project.c:749
 #, c-format
 msgid "Couldn't find a suitable file module for loading '%s'"
 msgstr ""
 
-#: mrproject/mrp-project.c:770 mrproject/mrp-project.c:1034
+#: libplanner/mrp-project.c:770 libplanner/mrp-project.c:1034
 msgid "No support for SQL storage built into this version of MrProject."
 msgstr ""
 
-#: mrproject/mrp-project.c:807
+#: libplanner/mrp-project.c:807
 msgid "Invalid URI."
 msgstr ""
 
-#: mrproject/mrp-project.c:928
+#: libplanner/mrp-project.c:928
 #, c-format
 msgid "Unable to find file writer identified by '%s'"
 msgstr ""
 
-#: mrproject/mrp-project.c:991
+#: libplanner/mrp-project.c:991
 msgid "Couldn't find a suitable file module for loading project"
 msgstr ""
 
-#: mrproject/mrp-property.c:365
+#: libplanner/mrp-property.c:365
 msgid "Text"
 msgstr "متن"
 
-#: mrproject/mrp-property.c:367
+#: libplanner/mrp-property.c:367
 msgid "String list"
 msgstr "فهرست رشته"
 
-#: mrproject/mrp-property.c:369
+#: libplanner/mrp-property.c:369
 msgid "Integer number"
 msgstr "عدد صحیح"
 
-#: mrproject/mrp-property.c:371
+#: libplanner/mrp-property.c:371
 msgid "Floating-point number"
 msgstr "عدد ممیزشناور"
 
-#: mrproject/mrp-property.c:373
+#: libplanner/mrp-property.c:373
 msgid "Date"
 msgstr "تاریخ"
 
-#: mrproject/mrp-property.c:375
+#: libplanner/mrp-property.c:375
 msgid "Duration"
 msgstr "مدت"
 
-#: mrproject/mrp-property.c:377
+#: libplanner/mrp-property.c:377
 msgid "Cost"
 msgstr "هزینه"
 
-#: mrproject/mrp-property.c:380
+#: libplanner/mrp-property.c:380
 msgid "None"
 msgstr "هیچ‌کدام"
 
-#: mrproject/mrp-task-manager.c:1769
+#: libplanner/mrp-task-manager.c:1769
 msgid "Can not add a predecessor relation between a task and its ancestor."
 msgstr ""
 
-#: mrproject/mrp-task-manager.c:1778 mrproject/mrp-task-manager.c:1786
+#: libplanner/mrp-task-manager.c:1778 libplanner/mrp-task-manager.c:1786
 msgid "Can not add a predecessor, because it would result in a loop."
 msgstr ""
 
-#: mrproject/mrp-task-manager.c:1821
+#: libplanner/mrp-task-manager.c:1821
 msgid "Can not move the task, since it would result in a loop."
 msgstr ""
 
-#: mrproject/mrp-task.c:1011
+#: libplanner/mrp-task.c:1016
 msgid ""
 "Could not add a predecessor relation, because the tasks are already related."
 msgstr ""
 
-#: mrproject/mrp-day.c:54
+#: libplanner/mrp-day.c:54
 msgid "Working"
 msgstr "کاری"
 
-#: mrproject/mrp-day.c:55
+#: libplanner/mrp-day.c:55
 msgid "A default working day"
 msgstr "روز کاری پیش‌فرض"
 
-#: mrproject/mrp-day.c:57
+#: libplanner/mrp-day.c:57
 msgid "Nonworking"
 msgstr "غیرکاری"
 
-#: mrproject/mrp-day.c:58
+#: libplanner/mrp-day.c:58
 msgid "A default non working day"
 msgstr "روز غیرکاری پیش‌فرض"
 
-#: mrproject/mrp-day.c:60
+#: libplanner/mrp-day.c:60
 msgid "Use base"
 msgstr ""
 
-#: mrproject/mrp-day.c:61
+#: libplanner/mrp-day.c:61
 msgid "Use day from base calendar"
 msgstr ""
 
-#: storage-modules/mrproject-1/mrp-parser.c:1043
-#: storage-modules/mrproject-1/mrp-parser.c:1138
+#: libplanner/mrp-parser.c:1043 libplanner/mrp-parser.c:1138
 #, fuzzy
 msgid "Could not create XML tree"
 msgstr "نمی‌توان پرونده‌ی xml را نوشت"
 
-#: storage-modules/mrproject-1/mrp-parser.c:1104
+#: libplanner/mrp-parser.c:1104
 #, fuzzy
 msgid "Could not write XML file"
 msgstr "نمی‌توان پرونده‌ی xml را نوشت"
 
-#: storage-modules/sql/mrp-sql.c:229
+#. Give up.
+#: libplanner/mrp-sql.c:229
 msgid "Invalid Unicode"
 msgstr ""
 
-#: storage-modules/sql/mrp-sql.c:2209
+#: libplanner/mrp-sql.c:2205
 #, c-format
 msgid ""
 "The project '%s' has been changed by the user '%s' since you opened it. Do "
 "you want to save anyway?"
 msgstr ""
 
-#: storage-modules/sql/mrp-sql.c:3447
+#: libplanner/mrp-sql.c:3443
 #, c-format
 msgid ""
 "Connection to database '%s' failed.\n"
 "%s"
 msgstr ""
 
-#: storage-modules/sql/mrp-storage-sql.c:205
+#: libplanner/mrp-storage-sql.c:205
 msgid "Invalid SQL URI (must start with 'sql://' and contain '#')."
 msgstr ""
 
-#: storage-modules/sql/mrp-storage-sql.c:274
+#: libplanner/mrp-storage-sql.c:274
 msgid "Invalid SQL URI (invalid project id)."
 msgstr ""
 
-#: storage-modules/sql/mrp-storage-sql.c:282
+#: libplanner/mrp-storage-sql.c:282
 msgid "Invalid SQL URI (no database name specified)."
 msgstr ""

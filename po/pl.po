@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mrproject\n"
-"POT-Creation-Date: 2003-09-12 18:55+0200\n"
+"POT-Creation-Date: 2003-12-01 23:08+0100\n"
 "PO-Revision-Date: 2003-06-29 13:27+0200\n"
 "Last-Translator: GNOME PL Team <translators@gnome.pl>\n"
 "Language-Team: Polish <pl@li.org>\n"
@@ -17,326 +17,879 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: data/planner.desktop.in.h:1
+#, fuzzy
+msgid "Planner Project Management"
+msgstr "Zarządzanie projektami"
+
+#: data/planner.desktop.in.h:2
+msgid "Project Management"
+msgstr "Zarządzanie projektami"
+
 #: libegg/recent-files/egg-recent-vfs-utils.c:90
 msgid " (invalid Unicode)"
 msgstr " (niepoprawny Unicode)"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:1
+#: data/ui/main-window.ui.h:1
 msgid "About this application"
 msgstr "Informacje o aplikacji"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:2
+#: data/ui/main-window.ui.h:2
 msgid "C_ut"
 msgstr "_Wytnij"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:3
+#: data/ui/main-window.ui.h:3
 msgid "Clear"
 msgstr "Wyczyść"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:4
+#: data/ui/main-window.ui.h:4
 msgid "Clear the selection"
 msgstr "Czyści zaznaczenie"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:5
+#: data/ui/main-window.ui.h:5
 msgid "Close the current file"
 msgstr "Zamyka bieżący plik"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:6
+#: data/ui/main-window.ui.h:6
 msgid "Copy the selection"
 msgstr "Kopiuje zaznaczenie"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:7
+#: data/ui/main-window.ui.h:7
 msgid "Create a new project"
 msgstr "Tworzy nowy projekt"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:8
+#: data/ui/main-window.ui.h:8
 msgid "Cut the selection"
 msgstr "Wycina zaznaczenie"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:9
+#: data/ui/main-window.ui.h:9
 msgid "Edit Day _Types"
 msgstr "Zmień _typy dni"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:10
+#: data/ui/main-window.ui.h:10
 msgid "Edit Project _Phases"
 msgstr "Zmień f_azy projektu"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:11
+#: data/ui/main-window.ui.h:11
 msgid "Edit the project properties"
 msgstr "Modyfikuje właściwości projektu"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:12
+#: data/ui/main-window.ui.h:12
 msgid "Exit the program"
 msgstr "Kończy pracę programu"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:13
+#: data/ui/main-window.ui.h:13
 msgid "New"
 msgstr "Nowy"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:14
+#: data/ui/main-window.ui.h:14
 msgid "New..."
 msgstr "Nowy..."
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:15
+#: data/ui/main-window.ui.h:15
 msgid "Open"
 msgstr "Otwórz"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:16
+#: data/ui/main-window.ui.h:16
 msgid "Open a project"
 msgstr "Otwiera projekt"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:17
+#: data/ui/main-window.ui.h:17
 msgid "Paste the clipboard"
 msgstr "Wkleja zawartość schowka"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:18
+#: data/ui/main-window.ui.h:18
 msgid "Print"
 msgstr "Wydrukuj"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:19
+#: data/ui/main-window.ui.h:19
 msgid "Print preview of the current project"
 msgstr "Drukuje podgląd bieżącego projektu"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:20
+#: data/ui/main-window.ui.h:20
 msgid "Print the current project"
 msgstr "Drukuje bieżący projekt"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:21
+#: data/ui/main-window.ui.h:21
 msgid "Redo the undone action"
 msgstr "Ponawia cofniętą czynność"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:22
+#: data/ui/main-window.ui.h:22
 msgid "Save"
 msgstr "Zapisz"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:23
+#: data/ui/main-window.ui.h:23
 msgid "Save _As..."
 msgstr "Z_apisz jako..."
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:24
+#: data/ui/main-window.ui.h:24
 msgid "Save the current project"
 msgstr "Zapisuje bieżący projekt"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:25
+#: data/ui/main-window.ui.h:25
 msgid "Save the current project with a different name"
 msgstr "Zapisuje bieżący projekt pod inną nazwą"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:26
+#: data/ui/main-window.ui.h:26
 msgid "Show the MrProject User Guide"
 msgstr "Wyświetla podręcznik użytkownika programu MrProject"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:27
+#: data/ui/main-window.ui.h:27
 msgid "Undo the last action"
 msgstr "Cofa ostatnią czynność"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:28
+#: data/ui/main-window.ui.h:28
 msgid "_About"
 msgstr "_Informacje o"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:29
+#: data/ui/main-window.ui.h:29
 msgid "_Actions"
 msgstr "_Działania"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:30
+#: data/ui/main-window.ui.h:30
 msgid "_Close"
 msgstr "Za_mknij"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:31
+#: data/ui/main-window.ui.h:31
 msgid "_Copy"
 msgstr "S_kopiuj"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:32
+#: data/ui/main-window.ui.h:32
 msgid "_Edit"
 msgstr "_Edycja"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:33
+#: data/ui/main-window.ui.h:33
 msgid "_Edit Project Properties"
 msgstr "Z_mień właściwości projektu"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:34
+#: data/ui/main-window.ui.h:34
 msgid "_File"
 msgstr "_Plik"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:35
+#: data/ui/main-window.ui.h:35
 msgid "_Help"
 msgstr "Pomo_c"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:36
+#: data/ui/main-window.ui.h:36
 msgid "_Manage Calendars"
 msgstr "_Zarządzanie kalendarzami"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:37
+#: data/ui/main-window.ui.h:37
 msgid "_New Project"
 msgstr "_Nowy projekt"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:38
+#: data/ui/main-window.ui.h:38
 msgid "_Open..."
 msgstr "_Otwórz..."
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:39
+#: data/ui/main-window.ui.h:39
 msgid "_Paste"
 msgstr "Wk_lej"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:40
+#: data/ui/main-window.ui.h:40
 msgid "_Print Preview"
 msgstr "_Podgląd wydruku"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:41
+#: data/ui/main-window.ui.h:41
 msgid "_Print..."
 msgstr "Wy_drukuj..."
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:42
+#: data/ui/main-window.ui.h:42
 msgid "_Project"
 msgstr "P_rojekt"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:43
+#: data/ui/main-window.ui.h:43
 msgid "_Quit"
 msgstr "Za_kończ"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:44
+#: data/ui/main-window.ui.h:44
 msgid "_Redo"
 msgstr "P_onów"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:45 src/app/mg-main-window.c:1133
+#: data/ui/main-window.ui.h:45 src/planner-main-window.c:1127
 msgid "_Save"
 msgstr "_Zapisz"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:46
+#: data/ui/main-window.ui.h:46
 msgid "_Undo"
 msgstr "Cof_nij"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:47
+#: data/ui/main-window.ui.h:47
 msgid "_User Guide"
 msgstr "Podręcznik _użytkownika"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:48
+#: data/ui/main-window.ui.h:48
 msgid "_View"
 msgstr "_Widok"
 
-#: src/app/mg-application.c:54 src/app/mg-application.c:103
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:4
-#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:4
-#: src/views/resources/GNOME_MrProject_ResourcesView.ui.h:5
-msgid "Insert"
-msgstr "Wstaw"
+#: data/ui/gantt-view.ui.h:1 data/ui/task-view.ui.h:1
+msgid "I_ndent Task"
+msgstr "W_suń zadanie"
 
-#: src/app/mg-application.c:61 src/app/mg-application.c:110
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:9
-#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:9
-#: src/views/resources/GNOME_MrProject_ResourcesView.ui.h:6
-msgid "Remove"
-msgstr "Usuń"
+#: data/ui/gantt-view.ui.h:2 data/ui/task-view.ui.h:2
+msgid "In_sert Tasks..."
+msgstr "Ws_taw zadanie"
 
-#: src/app/mg-application.c:68
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:18
-#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:17
-msgid "Unlink"
-msgstr "Rozłącz"
-
-#: src/app/mg-application.c:75
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:3
-#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:3
+#: data/ui/gantt-view.ui.h:3 data/ui/task-view.ui.h:3
+#: src/planner-application.c:75
 msgid "Indent"
 msgstr "Wsuń"
 
-#: src/app/mg-application.c:82
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:17
-#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:16
-msgid "Unindent"
-msgstr "Zsuń"
+#: data/ui/gantt-view.ui.h:4 data/ui/task-view.ui.h:4
+#: data/ui/resource-view.ui.h:5 src/planner-application.c:54
+#: src/planner-application.c:103
+msgid "Insert"
+msgstr "Wstaw"
 
-#: src/app/mg-application.c:89
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:8
-#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:8
-msgid "Move up"
-msgstr "W górę"
+#: data/ui/gantt-view.ui.h:5 data/ui/task-view.ui.h:5
+msgid "Move Task Do_wn"
+msgstr "Przesuń zadanie w _dół"
 
-#: src/app/mg-application.c:96
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:7
-#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:7
+#: data/ui/gantt-view.ui.h:6 data/ui/task-view.ui.h:6
+msgid "Move Task _Up"
+msgstr "Przesuń _zadanie w górę"
+
+#: data/ui/gantt-view.ui.h:7 data/ui/task-view.ui.h:7
+#: src/planner-application.c:96
 msgid "Move down"
 msgstr "W dół"
 
-#: src/app/mg-application.c:117
+#: data/ui/gantt-view.ui.h:8 data/ui/task-view.ui.h:8
+#: src/planner-application.c:89
+msgid "Move up"
+msgstr "W górę"
+
+#: data/ui/gantt-view.ui.h:9 data/ui/task-view.ui.h:9
+#: data/ui/resource-view.ui.h:6 src/planner-application.c:61
+#: src/planner-application.c:110
+msgid "Remove"
+msgstr "Usuń"
+
+#: data/ui/gantt-view.ui.h:10 data/ui/task-view.ui.h:10
+msgid "Reset _All Constraints"
+msgstr "Wyzeruj _wszystkie ograniczenia"
+
+#: data/ui/gantt-view.ui.h:11 data/ui/task-view.ui.h:11
+msgid "Reset _Constraint"
+msgstr "Wyzeruj _ograniczenie"
+
+#: data/ui/gantt-view.ui.h:12 data/ui/task-view.ui.h:12
+#: data/ui/resource-view.ui.h:7
+msgid "Select _All"
+msgstr "Wybierz _wszystko"
+
+#: data/ui/gantt-view.ui.h:13 data/ui/task-view.ui.h:13
+#: data/ui/resource-view.ui.h:8
+msgid "Select all tasks"
+msgstr "Wybiera wszystkie zadania"
+
+#: data/ui/gantt-view.ui.h:14
+msgid "Test"
+msgstr "Przetestuj"
+
+#: data/ui/gantt-view.ui.h:15 data/ui/task-view.ui.h:14
+msgid "Un_link Task"
+msgstr "_Rozłącz zadanie"
+
+#: data/ui/gantt-view.ui.h:16 data/ui/task-view.ui.h:15
+msgid "Unin_dent Task"
+msgstr "Zs_uń zadanie"
+
+#: data/ui/gantt-view.ui.h:17 data/ui/task-view.ui.h:16
+#: src/planner-application.c:82
+msgid "Unindent"
+msgstr "Zsuń"
+
+#: data/ui/gantt-view.ui.h:18 data/ui/task-view.ui.h:17
+#: src/planner-application.c:68
+msgid "Unlink"
+msgstr "Rozłącz"
+
+#: data/ui/gantt-view.ui.h:19
+msgid "Zoom In"
+msgstr "Powiększa"
+
+#: data/ui/gantt-view.ui.h:20
+msgid "Zoom Out"
+msgstr "Pomniejsza"
+
+#: data/ui/gantt-view.ui.h:21
+msgid "Zoom To Fit"
+msgstr "Dopasowuje powiększenie"
+
+#: data/ui/gantt-view.ui.h:22
+msgid "Zoom To _Fit"
+msgstr "_Dopasuj powiększenie"
+
+#: data/ui/gantt-view.ui.h:23
+msgid "Zoom _Out"
+msgstr "Po_mniejsz"
+
+#: data/ui/gantt-view.ui.h:24 data/ui/task-view.ui.h:19
+msgid "_Edit Task Properties..."
+msgstr "_Modyfikacja właściwości zadania..."
+
+#: data/ui/gantt-view.ui.h:25
+msgid "_Highlight Critical Tasks"
+msgstr "_Wyróżnianie zadań krytycznych"
+
+#: data/ui/gantt-view.ui.h:26 data/ui/task-view.ui.h:20
+msgid "_Insert Task"
+msgstr "_Wstaw zadanie"
+
+#: data/ui/gantt-view.ui.h:27 data/ui/task-view.ui.h:21
+msgid "_Remove Task"
+msgstr "_Usuń zadanie"
+
+#: data/ui/gantt-view.ui.h:28
+msgid "_Zoom In"
+msgstr "Po_większ"
+
+#: data/ui/task-view.ui.h:18
+msgid "_Edit Custom Properties..."
+msgstr "_Modyfikacja dowolnych właściwości..."
+
+#: data/ui/html-plugin.ui.h:1 data/glade/html-output.glade.h:4
+msgid "Export to HTML"
+msgstr "Eksport do HTML"
+
+#: data/ui/sql-plugin.ui.h:1
+msgid "Open from Database..."
+msgstr "Otwórz z bazy danych..."
+
+#: data/ui/sql-plugin.ui.h:2
+msgid "Save to Database..."
+msgstr "Zapisz do bazy danych..."
+
+#: data/ui/resource-view.ui.h:1
+msgid "Edit _Custom Properties..."
+msgstr "Modyfikacja _dowolnych właściwości..."
+
+#: data/ui/resource-view.ui.h:2
+msgid "Edit _Groups"
+msgstr "Zmodyfikuj gr_upy"
+
+#: data/ui/resource-view.ui.h:3
+msgid "Groups"
+msgstr "Grupy"
+
+#: data/ui/resource-view.ui.h:4
+msgid "In_sert Resources..."
+msgstr "Ws_taw zasoby..."
+
+#: data/ui/resource-view.ui.h:9
+msgid "_Edit Resource Properties..."
+msgstr "Z_modyfikuj właściwości zasobu..."
+
+#: data/ui/resource-view.ui.h:10
+msgid "_Insert Resource"
+msgstr "_Wstaw zasób"
+
+#: data/ui/resource-view.ui.h:11
+msgid "_Remove Resource"
+msgstr "_Usuń zasób"
+
+#: data/glade/add-predecessor.glade.h:1 data/glade/calendar-dialog.glade.h:4
+#: data/glade/html-output.glade.h:2 data/glade/new-property.glade.h:1
+#: data/glade/project-properties.glade.h:1
+#: data/glade/resource-dialog.glade.h:1
+#: data/glade/resource-input-dialog.glade.h:1 data/glade/sql.glade.h:2
+#: data/glade/task-dialog.glade.h:4 data/glade/task-input-dialog.glade.h:1
+msgid "*"
+msgstr "*"
+
+#: data/glade/add-predecessor.glade.h:2
+msgid "Lag: "
+msgstr "Opóźnienie:"
+
+#: data/glade/add-predecessor.glade.h:3
+msgid "New predecessor"
+msgstr "Nowy poprzednik"
+
+#: data/glade/add-predecessor.glade.h:4
+msgid "Predecessor: "
+msgstr "Poprzednie zadanie: "
+
+#: data/glade/add-predecessor.glade.h:5
+msgid "Relation type: "
+msgstr "Typ relacji: "
+
+#: data/glade/calendar-dialog.glade.h:1
+msgid ""
+"\n"
+"The selected day type has the following working hours:"
+msgstr ""
+"\n"
+"Wybrany typ dnia posiada poniższe godziny robocze:"
+
+#: data/glade/calendar-dialog.glade.h:3 data/glade/html-output.glade.h:1
+#: data/glade/sql.glade.h:1 data/glade/task-dialog.glade.h:1
+msgid "    "
+msgstr "    "
+
+#: data/glade/calendar-dialog.glade.h:5
+msgid "-"
+msgstr "-"
+
+#: data/glade/calendar-dialog.glade.h:6
+msgid "<b>Calendar:</b>"
+msgstr "<b>Kalendarz:</b>"
+
+#: data/glade/calendar-dialog.glade.h:7
+msgid "<b>Day types</b>"
+msgstr "<b>Typy dni</b>"
+
+#: data/glade/calendar-dialog.glade.h:8
+msgid "<b>Working hours</b>"
+msgstr "<b>Godziny robocze</b>"
+
+#: data/glade/calendar-dialog.glade.h:9
+msgid "<b>Working time</b>"
+msgstr "<b>Czas pracy</b>"
+
+#: data/glade/calendar-dialog.glade.h:10
+msgid "Apply"
+msgstr "Zastosuj"
+
+#: data/glade/calendar-dialog.glade.h:11
+msgid "C_opy an existing calendar"
+msgstr "_Kopia istniejącego kalendarza"
+
+#: data/glade/calendar-dialog.glade.h:12
+msgid "C_reate"
+msgstr "U_twórz"
+
+#: data/glade/calendar-dialog.glade.h:13
+msgid "Calendar Editor"
+msgstr "Edytor kalendarza"
+
+#: data/glade/calendar-dialog.glade.h:14
+msgid "Create an _empty calendar"
+msgstr "Utworzenie p_ustego kalendarza"
+
+#: data/glade/calendar-dialog.glade.h:15
+msgid "Custom working time"
+msgstr "Dowolny czas pracy"
+
+#: data/glade/calendar-dialog.glade.h:16
+msgid "Day type:"
+msgstr "Typ dnia:"
+
+#: data/glade/calendar-dialog.glade.h:17
+msgid "Default Week"
+msgstr "Domyślny tydzień"
+
+#: data/glade/calendar-dialog.glade.h:18
+msgid "Default week..."
+msgstr "Domyślny tydzień..."
+
+#: data/glade/calendar-dialog.glade.h:19
+msgid "Edit Day Types"
+msgstr "Edycja typów dni"
+
+#: data/glade/calendar-dialog.glade.h:20
+msgid "Edit Working Time"
+msgstr "Edycja czasu pracy"
+
+#: data/glade/calendar-dialog.glade.h:21
+msgid "Enter the name of the new day type:"
+msgstr "Podaj nazwę nowego typu dnia:"
+
+#: data/glade/calendar-dialog.glade.h:22
+msgid "Existing calendars:"
+msgstr "Istniejące kalendarze:"
+
+#: data/glade/calendar-dialog.glade.h:23
+msgid "From:"
+msgstr "Od:"
+
+#: data/glade/calendar-dialog.glade.h:24
+msgid "MrProject Team"
+msgstr "Zespół projektu MrProject"
+
+#: data/glade/calendar-dialog.glade.h:25
+msgid "New Calendar"
+msgstr "Nowy kalendarz"
+
+#: data/glade/calendar-dialog.glade.h:26
+msgid "New Day Type"
+msgstr "Nowy typ dnia"
+
+#: data/glade/calendar-dialog.glade.h:27
+msgid "Select a calendar"
+msgstr "Wybór kalendarza"
+
+#: data/glade/calendar-dialog.glade.h:28
+msgid ""
+"Select a weekday and the day type to use for that day in the default week "
+"for this calendar.\n"
+msgstr ""
+"Wybierz dzień tygodnia i typ dnia dla niego używany w domyślnym tygodniu dla "
+"tego kalendarza.\n"
+
+#: data/glade/calendar-dialog.glade.h:30
+msgid "Set day type to:"
+msgstr "Typ dnia ustawiony na:"
+
+#: data/glade/calendar-dialog.glade.h:31
+msgid "To:"
+msgstr "Do:"
+
+#: data/glade/calendar-dialog.glade.h:32
+msgid "Use working time from derived calendar"
+msgstr "Czas pracy przejęty z kalendarza bazowego"
+
+#: data/glade/calendar-dialog.glade.h:33
+msgid "Week day:"
+msgstr "Dzień tygodnia:"
+
+#: data/glade/calendar-dialog.glade.h:34
+msgid "Working time..."
+msgstr "Czas pracy..."
+
+#: data/glade/calendar-dialog.glade.h:35
+msgid "_Derive from a calendar"
+msgstr "_Pochodzący od kalendarza"
+
+#: data/glade/calendar-dialog.glade.h:36
+msgid "_Name of the new calendar:"
+msgstr "_Nazwa nowego kalendarza:"
+
+#: data/glade/calendar-dialog.glade.h:37
+msgid "_New..."
+msgstr "_Nowy..."
+
+#: data/glade/group-dialog.glade.h:1
+msgid "Group Editor"
+msgstr "Edytor grup"
+
+#: data/glade/html-output.glade.h:3
+msgid "<b>Save to</b>"
+msgstr "<b>Zapis do</b>"
+
+#: data/glade/html-output.glade.h:5
+msgid "Local file"
+msgstr "Plik lokalny"
+
+#: data/glade/html-output.glade.h:6
+msgid "Save to HTML File"
+msgstr "Zapis do pliku HTML"
+
+#: data/glade/html-output.glade.h:7
+msgid "Web location"
+msgstr "Lokacja WWW"
+
+#: data/glade/new-property.glade.h:2
+msgid "Description: "
+msgstr "Opis: "
+
+#: data/glade/new-property.glade.h:3
+msgid "Label: "
+msgstr "Etykieta: "
+
+#: data/glade/new-property.glade.h:4
+msgid "Name: "
+msgstr "Nazwa: "
+
+#: data/glade/new-property.glade.h:5
+msgid "New Property"
+msgstr "Nowa własność"
+
+#: data/glade/new-property.glade.h:6
+msgid "Type: "
+msgstr "Typ: "
+
+#: data/glade/project-properties.glade.h:2
+msgid "<b>Project phases</b>"
+msgstr "<b>Fazy projektu</b>"
+
+#: data/glade/project-properties.glade.h:3
+msgid "Calendar:"
+msgstr "Kalendarz:"
+
+#: data/glade/project-properties.glade.h:4
+msgid "Custom properties"
+msgstr "Dowolne właściwości"
+
+#: data/glade/project-properties.glade.h:5
+msgid "Edit Project phases"
+msgstr "Modyfikacja faz projektu"
+
+#: data/glade/project-properties.glade.h:6
+msgid "Enter the name of the new project phase:"
+msgstr "Podaj nazwę nowej fazy projektu:"
+
+#: data/glade/project-properties.glade.h:7
+#: data/glade/resource-dialog.glade.h:5 data/glade/task-dialog.glade.h:6
+msgid "General"
+msgstr "Ogólne"
+
+#: data/glade/project-properties.glade.h:8
+msgid "New Project Phase"
+msgstr "Nowa faza projektu"
+
+#: data/glade/project-properties.glade.h:9
+msgid "Project _name:"
+msgstr "_Nazwa projektu:"
+
+#: data/glade/project-properties.glade.h:10
+msgid "Project _start:"
+msgstr "_Początek projektu:"
+
+#: data/glade/project-properties.glade.h:11
+msgid "Project phase:"
+msgstr "Faza projektu:"
+
+#: data/glade/project-properties.glade.h:12
+msgid "Project properties"
+msgstr "Właściwości projektu"
+
+#: data/glade/project-properties.glade.h:13
+msgid "Select..."
+msgstr "Wybierz..."
+
+#: data/glade/project-properties.glade.h:14
+msgid "_Manager:"
+msgstr "Menedżer:"
+
+#: data/glade/project-properties.glade.h:15
+msgid "_Organization:"
+msgstr "_Organizacja:"
+
+#: data/glade/property-dialog.glade.h:1
+msgid "Custom Properties"
+msgstr "Dowolne właściwości"
+
+#: data/glade/resource-dialog.glade.h:2
+msgid "C_ost:"
+msgstr "K_oszt:"
+
+#: data/glade/resource-dialog.glade.h:3
+msgid "Calendar"
+msgstr "Kalendarz"
+
+#: data/glade/resource-dialog.glade.h:4
+msgid "Edit calendars..."
+msgstr "Zmodyfikuj kalendarze..."
+
+#: data/glade/resource-dialog.glade.h:6 data/glade/task-dialog.glade.h:7
+msgid "Insert time stamp"
+msgstr "Wstaw znacznik czasu"
+
+#: data/glade/resource-dialog.glade.h:7 data/glade/task-dialog.glade.h:9
+msgid "Notes"
+msgstr "Uwagi"
+
+#: data/glade/resource-dialog.glade.h:8
+msgid ""
+"Select the calendar to use for this resource. If you want to use the default "
+"calendar of the project, select 'None'. "
+msgstr ""
+"Wybierz kalendarz dla tego zasobu. Jeśli chcesz skorzystać z domyślnego "
+"kalendarza projektu, wybierz pozycję \"Brak\"."
+
+#: data/glade/resource-dialog.glade.h:9
+msgid "_Email:"
+msgstr "_E-mail:"
+
+#: data/glade/resource-dialog.glade.h:10
+msgid "_Group:"
+msgstr "_Grupa:"
+
+#: data/glade/resource-dialog.glade.h:11
+msgid "_Name:"
+msgstr "_Nazwa:"
+
+#: data/glade/resource-dialog.glade.h:12
+msgid "_Type:"
+msgstr "_Typ:"
+
+#: data/glade/resource-input-dialog.glade.h:2
+msgid "Email:"
+msgstr "E-mail:"
+
+#: data/glade/resource-input-dialog.glade.h:3
+msgid "Group:"
+msgstr "Grupa:"
+
+#: data/glade/resource-input-dialog.glade.h:4
+msgid "Insert resource"
+msgstr "Wstaw zasób"
+
+#: data/glade/resource-input-dialog.glade.h:5
+#: data/glade/task-input-dialog.glade.h:3
+msgid "Name:"
+msgstr "Nazwa:"
+
+#: data/glade/resource-input-dialog.glade.h:6
+#: data/glade/task-input-dialog.glade.h:5
+msgid "_Insert"
+msgstr "_Wstaw"
+
+#: data/glade/sql.glade.h:3
+msgid "<b>Open Database</b>"
+msgstr "<b>Otwarcie bazy danych</b>"
+
+#: data/glade/sql.glade.h:4
+msgid "Database:"
+msgstr "Baza danych:"
+
+#: data/glade/sql.glade.h:5
+msgid "Open Database"
+msgstr "Otwórz bazę danych"
+
+#: data/glade/sql.glade.h:6
+msgid "Password:"
+msgstr "Hasło:"
+
+#: data/glade/sql.glade.h:7
+msgid "Select a Project"
+msgstr "Wybierz projekt"
+
+#: data/glade/sql.glade.h:8
+msgid "Server:"
+msgstr "Serwer:"
+
+#: data/glade/sql.glade.h:9
+msgid "The database contains the following projects. Select a project to open:"
+msgstr "Baza danych zawiera następujące projekty. Wybierz projekt do otwarcia:"
+
+#: data/glade/sql.glade.h:10
+msgid "Username:"
+msgstr "Nazwa użytkownika:"
+
+#: data/glade/task-dialog.glade.h:3
+#, no-c-format
+msgid "%"
+msgstr "%s"
+
+#: data/glade/task-dialog.glade.h:5
+msgid "C_omplete:"
+msgstr "_Zrealizowane:"
+
+#: data/glade/task-dialog.glade.h:8
+msgid "Na_me:"
+msgstr "N_azwa:"
+
+#: data/glade/task-dialog.glade.h:10
+msgid "Pr_iority:"
+msgstr "Pr_iorytet:"
+
+#: data/glade/task-dialog.glade.h:11
+msgid "Predecessors"
+msgstr "Poprzednie zadania"
+
+#: data/glade/task-dialog.glade.h:12 src/planner-resource-view.c:342
+msgid "Resources"
+msgstr "Zasoby"
+
+#: data/glade/task-dialog.glade.h:13
+msgid "_Duration:"
+msgstr "_Trwanie:"
+
+#: data/glade/task-dialog.glade.h:14
+msgid "_Fixed duration"
+msgstr "_Zmienny czas trwania"
+
+#: data/glade/task-dialog.glade.h:15
+msgid "_Milestone"
+msgstr "_Kamień milowy"
+
+#: data/glade/task-dialog.glade.h:16
+msgid "_Work:"
+msgstr "_Praca:"
+
+#. day unit variant accepted in input
+#: data/glade/task-dialog.glade.h:17 src/planner-task-tree.c:2120
+msgid "days"
+msgstr "dni"
+
+#: data/glade/task-input-dialog.glade.h:2
+msgid "Insert task"
+msgstr "Wstaw zadanie"
+
+#: data/glade/task-input-dialog.glade.h:4
+msgid "Work:"
+msgstr "Praca:"
+
+#: src/planner-application.c:117
 msgid "Edit"
 msgstr "Zmień"
 
-#: src/app/mg-main-window.c:585
+#: src/planner-main-window.c:584
 msgid "Open a file"
 msgstr "Otwiera plik"
 
 #. I18n: Translators, list your names here, newline separated if there
 #. * are more than one, to appear in the about box.
 #.
-#: src/app/mg-main-window.c:995 src/app/mg-main-window.c:1004
+#: src/planner-main-window.c:993 src/planner-main-window.c:1000
 msgid "translator_credits"
 msgstr "GNOME PL Team <translators@gnome.pl>"
 
-#: src/app/mg-main-window.c:1001
+#. "Copyright \xc2\xa9 2001-2002 CodeFactory AB",
+#: src/planner-main-window.c:997
 msgid "A Project Management application for the GNOME desktop"
 msgstr ""
 "Aplikacja wspomagająca zarządzanie projektami, pracująca w środowisku GNOME"
 
-#: src/app/mg-main-window.c:1013
-msgid "The MrProject Homepage"
+#: src/planner-main-window.c:1007
+#, fuzzy
+msgid "The Planner Homepage"
 msgstr "MrProject - witryna domowa"
 
-#: src/app/mg-main-window.c:1017
-msgid "Contribute to MrProject"
-msgstr "Pomóż tworzyć MrProject"
-
-#: src/app/mg-main-window.c:1089
+#: src/planner-main-window.c:1083
 msgid "If you don't save, changes made the last minute will be discarded."
 msgstr ""
 "Przy rezygnacji z zapisu wszystkie zmiany dokonane w ciągu ostatniej minuty "
 "zostaną utracone."
 
-#: src/app/mg-main-window.c:1094
+#: src/planner-main-window.c:1088
 #, c-format
 msgid "If you don't save, changes made the last %d minutes will be discarded."
 msgstr ""
 "Przy rezygnacji z zapisu wszystkie zmiany dokonane w ciągu ostatnich %d "
 "minut zostaną utracone."
 
-#: src/app/mg-main-window.c:1099
+#: src/planner-main-window.c:1093
 msgid "If you don't save, changes made the last hour will be discarded."
 msgstr ""
 "Przy rezygnacji z zapisu wszystkie zmiany dokonane w ciągu ostatniej godziny "
 "zostaną utracone."
 
-#: src/app/mg-main-window.c:1104
+#: src/planner-main-window.c:1098
 #, c-format
 msgid "If you don't save, changes made the last %d hours will be discarded."
 msgstr ""
 "Przy rezygnacji z zapisu wszystkie zmiany dokonane w ciągu ostatnich %d "
 "godzin zostaną utracone."
 
-#: src/app/mg-main-window.c:1111
+#: src/planner-main-window.c:1105
 #, c-format
 msgid "Save changes to document '%s' before closing?"
 msgstr "Czy chcesz przed zakończeniem zapisać zmiany w dokumencie \"%s\"?"
 
-#: src/app/mg-main-window.c:1129
+#: src/planner-main-window.c:1123
 msgid "C_lose without saving"
 msgstr "Za_mknij bez zapisywania"
 
-#: src/app/mg-main-window.c:1131
+#: src/planner-main-window.c:1125
 msgid "_Cancel"
 msgstr "_Anuluj"
 
-#: src/app/mg-main-window.c:1238
+#: src/planner-main-window.c:1232
 msgid "Save a file"
 msgstr "Wybór pliku do zapisu"
 
-#: src/app/mg-main-window.c:1270
-#: src/plugins/html-output/mg-html-output-plugin.c:146
+#: src/planner-main-window.c:1264 src/planner-html-plugin.c:146
 #, c-format
 msgid "File \"%s\" exists, do you want to overwrite it?"
 msgstr "Plik \"%s\" istnieje, czy chcesz go nadpisać?"
 
-#: src/app/mg-main-window.c:1458
+#: src/planner-main-window.c:1452
+#, fuzzy
 msgid ""
-"You have opened a file that was saved with an old version of MrProject.\n"
+"You have opened a file that was saved with an old version of Planner.\n"
 "\n"
 "When loading old files, all tasks will use the constraint 'Must Start On', "
 "since the old version did not fully support automatic rescheduling. To take "
@@ -363,52 +916,52 @@ msgstr ""
 "Po wykonaniu tej operacji, można usunąć związek klikając pozycję menu \"Usuń "
 "wszystkie ograniczenia\" w menu \"Edycji\"."
 
-#: src/app/mg-main-window.c:1495 src/views/gantt/mg-gantt-row.c:656
-#: src/views/gantt/mg-gantt-row.c:658 src/views/gantt/mg-gantt-print.c:513
-#: src/views/gantt/mg-gantt-print.c:515
+#: src/planner-main-window.c:1489 src/planner-gantt-row.c:656
+#: src/planner-gantt-row.c:658 src/planner-gantt-print.c:513
+#: src/planner-gantt-print.c:515
 msgid "Unnamed"
 msgstr "Bez nazwy"
 
-#: src/app/mg-main.c:61
+#: src/planner-main.c:61
 msgid "Create the initial window with the given geometry."
 msgstr "Tworzy okno początkowe o podanych wymiarach."
 
-#: src/app/mg-main.c:61
+#: src/planner-main.c:61
 msgid "GEOMETRY"
 msgstr "WYMIARY"
 
-#: src/app/mg-main.c:98
+#: src/planner-main.c:98
 msgid "mrproject: --geometry cannot be used with more than one file."
 msgstr ""
 "mrproject: opcja --geometry nie może być użyta z więcej niż jednym plikiem."
 
-#: src/app/mg-plugin-loader.c:40
+#: src/planner-plugin-loader.c:40
 #, c-format
 msgid "Could not open plugin file '%s'\n"
 msgstr "Nie można otworzyć pliku wtyczki \"%s\"\n"
 
-#: src/app/mg-view-loader.c:40
+#: src/planner-view-loader.c:40
 #, c-format
 msgid "Could not open view plugin file '%s'\n"
 msgstr "Nie można otworzyć pliku wtyczki widoku \"%s\"\n"
 
-#: src/cell-renderers/mg-cell-renderer-date.c:147
+#: src/planner-cell-renderer-date.c:147
 msgid "Constraint type"
 msgstr "Typ powiązania"
 
-#: src/cell-renderers/mg-cell-renderer-date.c:154
+#: src/planner-cell-renderer-date.c:154
 msgid "As soon as possible"
 msgstr "Tak szybko jak to możliwe"
 
-#: src/cell-renderers/mg-cell-renderer-date.c:155
+#: src/planner-cell-renderer-date.c:155
 msgid "Start no earlier than"
 msgstr "Początek nie wcześniej niż"
 
-#: src/cell-renderers/mg-cell-renderer-date.c:156
+#: src/planner-cell-renderer-date.c:156
 msgid "Must start on"
 msgstr "Musi zaczynać się od"
 
-#: src/cell-renderers/mg-cell-renderer-date.c:171
+#: src/planner-cell-renderer-date.c:171
 msgid "Today"
 msgstr "Dzisiaj"
 
@@ -416,639 +969,212 @@ msgstr "Dzisiaj"
 #. GTK_SIGNAL_FUNC (m_cell_date_today_clicked),
 #. date);
 #.
-#: src/cell-renderers/mg-cell-renderer-date.c:179
+#: src/planner-cell-renderer-date.c:179
 msgid "Cancel"
 msgstr "Anuluj"
 
-#: src/cell-renderers/mg-cell-renderer-date.c:187
+#: src/planner-cell-renderer-date.c:187
 msgid "OK"
 msgstr "OK"
 
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:1
-msgid ""
-"\n"
-"The selected day type has the following working hours:"
-msgstr ""
-"\n"
-"Wybrany typ dnia posiada poniższe godziny robocze:"
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:3
-#: src/dialogs/task-dialog/mg-task-dialog.glade.h:1
-#: src/plugins/html-output/mg-html-output.glade.h:1
-#: src/plugins/sql/mg-sql.glade.h:1
-msgid "    "
-msgstr "    "
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:4
-#: src/dialogs/project-dialog/mg-project-properties.glade.h:1
-#: src/dialogs/property-dialog/mg-new-property.glade.h:1
-#: src/dialogs/resource-dialog/mg-resource-dialog.glade.h:1
-#: src/dialogs/resource-input-dialog/mg-resource-input-dialog.glade.h:1
-#: src/dialogs/task-dialog/mg-add-predecessor.glade.h:1
-#: src/dialogs/task-dialog/mg-task-dialog.glade.h:4
-#: src/dialogs/task-input-dialog/mg-task-input-dialog.glade.h:1
-#: src/plugins/html-output/mg-html-output.glade.h:2
-#: src/plugins/sql/mg-sql.glade.h:2
-msgid "*"
-msgstr "*"
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:5
-msgid "-"
-msgstr "-"
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:6
-msgid "<b>Calendar:</b>"
-msgstr "<b>Kalendarz:</b>"
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:7
-msgid "<b>Day types</b>"
-msgstr "<b>Typy dni</b>"
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:8
-msgid "<b>Working hours</b>"
-msgstr "<b>Godziny robocze</b>"
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:9
-msgid "<b>Working time</b>"
-msgstr "<b>Czas pracy</b>"
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:10
-msgid "Apply"
-msgstr "Zastosuj"
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:11
-msgid "C_opy an existing calendar"
-msgstr "_Kopia istniejącego kalendarza"
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:12
-msgid "C_reate"
-msgstr "U_twórz"
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:13
-msgid "Calendar Editor"
-msgstr "Edytor kalendarza"
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:14
-msgid "Create an _empty calendar"
-msgstr "Utworzenie p_ustego kalendarza"
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:15
-msgid "Custom working time"
-msgstr "Dowolny czas pracy"
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:16
-msgid "Day type:"
-msgstr "Typ dnia:"
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:17
-msgid "Default Week"
-msgstr "Domyślny tydzień"
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:18
-msgid "Default week..."
-msgstr "Domyślny tydzień..."
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:19
-msgid "Edit Day Types"
-msgstr "Edycja typów dni"
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:20
-msgid "Edit Working Time"
-msgstr "Edycja czasu pracy"
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:21
-msgid "Enter the name of the new day type:"
-msgstr "Podaj nazwę nowego typu dnia:"
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:22
-msgid "Existing calendars:"
-msgstr "Istniejące kalendarze:"
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:23
-msgid "From:"
-msgstr "Od:"
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:24
-msgid "MrProject Team"
-msgstr "Zespół projektu MrProject"
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:25
-msgid "New Calendar"
-msgstr "Nowy kalendarz"
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:26
-msgid "New Day Type"
-msgstr "Nowy typ dnia"
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:27
-msgid "Select a calendar"
-msgstr "Wybór kalendarza"
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:28
-msgid ""
-"Select a weekday and the day type to use for that day in the default week "
-"for this calendar.\n"
-msgstr ""
-"Wybierz dzień tygodnia i typ dnia dla niego używany w domyślnym tygodniu dla "
-"tego kalendarza.\n"
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:30
-msgid "Set day type to:"
-msgstr "Typ dnia ustawiony na:"
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:31
-msgid "To:"
-msgstr "Do:"
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:32
-msgid "Use working time from derived calendar"
-msgstr "Czas pracy przejęty z kalendarza bazowego"
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:33
-msgid "Week day:"
-msgstr "Dzień tygodnia:"
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:34
-msgid "Working time..."
-msgstr "Czas pracy..."
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:35
-msgid "_Derive from a calendar"
-msgstr "_Pochodzący od kalendarza"
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:36
-msgid "_Name of the new calendar:"
-msgstr "_Nazwa nowego kalendarza:"
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:37
-msgid "_New..."
-msgstr "_Nowy..."
-
-#: src/dialogs/calendar-dialog/mg-default-week-dialog.c:40
+#: src/planner-default-week-dialog.c:40
 msgid "Monday"
 msgstr "Poniedziałek"
 
-#: src/dialogs/calendar-dialog/mg-default-week-dialog.c:41
+#: src/planner-default-week-dialog.c:41
 msgid "Tuesday"
 msgstr "Wtorek"
 
-#: src/dialogs/calendar-dialog/mg-default-week-dialog.c:42
+#: src/planner-default-week-dialog.c:42
 msgid "Wednesday"
 msgstr "Środa"
 
-#: src/dialogs/calendar-dialog/mg-default-week-dialog.c:43
+#: src/planner-default-week-dialog.c:43
 msgid "Thursday"
 msgstr "Czwartek"
 
-#: src/dialogs/calendar-dialog/mg-default-week-dialog.c:44
+#: src/planner-default-week-dialog.c:44
 msgid "Friday"
 msgstr "Piątek"
 
-#: src/dialogs/calendar-dialog/mg-default-week-dialog.c:45
+#: src/planner-default-week-dialog.c:45
 msgid "Saturday"
 msgstr "Sobota"
 
-#: src/dialogs/calendar-dialog/mg-default-week-dialog.c:46
+#: src/planner-default-week-dialog.c:46
 msgid "Sunday"
 msgstr "Niedziela"
 
-#: src/dialogs/calendar-dialog/mg-default-week-dialog.c:267
+#: src/planner-default-week-dialog.c:266
 msgid "No working time"
 msgstr "Bez czasu pracy"
 
-#: src/dialogs/calendar-dialog/mg-default-week-dialog.c:278
-#: src/dialogs/calendar-dialog/mg-default-week-dialog.c:282
+#: src/planner-default-week-dialog.c:277 src/planner-default-week-dialog.c:281
 msgid "%H:%M"
 msgstr "%H:%M"
 
-#: src/dialogs/group-dialog/mg-group-dialog.c:387
-#: src/dialogs/property-dialog/mg-property-dialog.c:380
-#: src/dialogs/task-dialog/mg-task-dialog.c:1312
-#: src/dialogs/task-dialog/mg-task-dialog.c:1398
-#: src/views/gantt/mg-task-view.c:227 src/views/gantt/mg-gantt-print.c:190
-#: src/views/resources/mg-resource-view.c:942
+#: src/planner-group-dialog.c:387 src/planner-property-dialog.c:378
+#: src/planner-task-dialog.c:1311 src/planner-task-dialog.c:1397
+#: src/planner-task-view.c:227 src/planner-gantt-print.c:190
+#: src/planner-resource-view.c:966
 msgid "Name"
 msgstr "Nazwa"
 
-#: src/dialogs/group-dialog/mg-group-dialog.c:393
+#: src/planner-group-dialog.c:393
 msgid "Manager name"
 msgstr "Nazwa menedżera"
 
-#: src/dialogs/group-dialog/mg-group-dialog.c:399
+#: src/planner-group-dialog.c:399
 msgid "Manager phone"
 msgstr "Telefon menedżera"
 
-#: src/dialogs/group-dialog/mg-group-dialog.c:405
+#: src/planner-group-dialog.c:405
 msgid "Manager email"
 msgstr "E-mail menedżera"
 
-#: src/dialogs/group-dialog/mg-group-dialog.c:411
+#: src/planner-group-dialog.c:411
 msgid "Default"
 msgstr "Domyślny"
 
-#: src/dialogs/group-dialog/mg-group-dialog.glade.h:1
-msgid "Group Editor"
-msgstr "Edytor grup"
-
-#: src/dialogs/project-dialog/mg-project-properties.c:146
+#: src/planner-project-properties.c:146
 msgid "Select a calendar to use for this project:"
 msgstr "Wybierz kalendarz używany w tym projekcie:"
 
-#: src/dialogs/project-dialog/mg-project-properties.c:505
+#: src/planner-project-properties.c:505
 msgid "None"
 msgstr "Brak"
 
-#: src/dialogs/project-dialog/mg-project-properties.c:606
+#: src/planner-project-properties.c:606
 msgid "Property"
 msgstr "Właściwość"
 
-#: src/dialogs/project-dialog/mg-project-properties.c:617
-#: src/dialogs/property-dialog/mg-property-dialog.c:433
+#: src/planner-project-properties.c:617 src/planner-property-dialog.c:431
 msgid "Value"
 msgstr "Wartość"
 
-#: src/dialogs/project-dialog/mg-project-properties.c:994
-#: src/dialogs/property-dialog/mg-property-dialog.c:231
+#: src/planner-project-properties.c:993 src/planner-property-dialog.c:229
 msgid "The name of the custom property needs to start with a letter."
 msgstr "Nazwa dowolnej właściwości musi rozpoczynać się literą."
 
-#: src/dialogs/project-dialog/mg-project-properties.c:1066
-#: src/dialogs/property-dialog/mg-property-dialog.c:302
+#: src/planner-project-properties.c:1065 src/planner-property-dialog.c:300
 #, c-format
 msgid "Do you really want to remove the property '%s' from the project?"
 msgstr "Czy rzeczywiście chcesz usunąć właściwość \"%s\" z projektu?"
 
-#: src/dialogs/project-dialog/mg-project-properties.c:1196
+#: src/planner-project-properties.c:1194
 msgid "Could not create properties dialog."
 msgstr "Nie można utworzyć okna właściwości."
 
-#: src/dialogs/project-dialog/mg-project-properties.glade.h:2
-msgid "<b>Project phases</b>"
-msgstr "<b>Fazy projektu</b>"
-
-#: src/dialogs/project-dialog/mg-project-properties.glade.h:3
-msgid "Calendar:"
-msgstr "Kalendarz:"
-
-#: src/dialogs/project-dialog/mg-project-properties.glade.h:4
-msgid "Custom properties"
-msgstr "Dowolne właściwości"
-
-#: src/dialogs/project-dialog/mg-project-properties.glade.h:5
-msgid "Edit Project phases"
-msgstr "Modyfikacja faz projektu"
-
-#: src/dialogs/project-dialog/mg-project-properties.glade.h:6
-msgid "Enter the name of the new project phase:"
-msgstr "Podaj nazwę nowej fazy projektu:"
-
-#: src/dialogs/project-dialog/mg-project-properties.glade.h:7
-#: src/dialogs/resource-dialog/mg-resource-dialog.glade.h:5
-#: src/dialogs/task-dialog/mg-task-dialog.glade.h:6
-msgid "General"
-msgstr "Ogólne"
-
-#: src/dialogs/project-dialog/mg-project-properties.glade.h:8
-msgid "New Project Phase"
-msgstr "Nowa faza projektu"
-
-#: src/dialogs/project-dialog/mg-project-properties.glade.h:9
-msgid "Project _name:"
-msgstr "_Nazwa projektu:"
-
-#: src/dialogs/project-dialog/mg-project-properties.glade.h:10
-msgid "Project _start:"
-msgstr "_Początek projektu:"
-
-#: src/dialogs/project-dialog/mg-project-properties.glade.h:11
-msgid "Project phase:"
-msgstr "Faza projektu:"
-
-#: src/dialogs/project-dialog/mg-project-properties.glade.h:12
-msgid "Project properties"
-msgstr "Właściwości projektu"
-
-#: src/dialogs/project-dialog/mg-project-properties.glade.h:13
-msgid "Select..."
-msgstr "Wybierz..."
-
-#: src/dialogs/project-dialog/mg-project-properties.glade.h:14
-msgid "_Manager:"
-msgstr "Menedżer:"
-
-#: src/dialogs/project-dialog/mg-project-properties.glade.h:15
-msgid "_Organization:"
-msgstr "_Organizacja:"
-
-#: src/dialogs/property-dialog/mg-new-property.glade.h:2
-msgid "Description: "
-msgstr "Opis: "
-
-#: src/dialogs/property-dialog/mg-new-property.glade.h:3
-msgid "Label: "
-msgstr "Etykieta: "
-
-#: src/dialogs/property-dialog/mg-new-property.glade.h:4
-msgid "Name: "
-msgstr "Nazwa: "
-
-#: src/dialogs/property-dialog/mg-new-property.glade.h:5
-msgid "New Property"
-msgstr "Nowa własność"
-
-#: src/dialogs/property-dialog/mg-new-property.glade.h:6
-msgid "Type: "
-msgstr "Typ: "
-
-#: src/dialogs/property-dialog/mg-property-dialog.c:399
+#: src/planner-property-dialog.c:397
 msgid "Label"
 msgstr "Etykieta"
 
-#: src/dialogs/property-dialog/mg-property-dialog.c:413
-#: src/dialogs/task-dialog/mg-task-dialog.c:1430
-#: src/views/resources/mg-resource-view.c:963
+#: src/planner-property-dialog.c:411 src/planner-task-dialog.c:1429
+#: src/planner-resource-view.c:987
 msgid "Type"
 msgstr "Typ"
 
-#: src/dialogs/property-dialog/mg-property-dialog.glade.h:1
-msgid "Custom Properties"
-msgstr "Dowolne właściwości"
-
-#: src/dialogs/print-dialog/mg-print-dialog.c:49
+#: src/planner-print-dialog.c:49
 msgid "Print Project"
 msgstr "Wydruk projektu"
 
-#: src/dialogs/print-dialog/mg-print-dialog.c:56
+#: src/planner-print-dialog.c:56
 msgid "Select views"
 msgstr "Wybór widoków"
 
-#: src/dialogs/print-dialog/mg-print-dialog.c:74
+#: src/planner-print-dialog.c:74
 msgid "Select the views to print:"
 msgstr "Wybierz widoki do wydruku:"
 
 #. Put "no group" at the top.
-#: src/dialogs/resource-dialog/mg-resource-dialog.c:248
-#: src/dialogs/resource-input-dialog/mg-resource-input-dialog.c:97
-#: src/views/resources/mg-resource-view.c:1351
+#: src/planner-resource-dialog.c:248 src/planner-resource-input-dialog.c:96
+#: src/planner-resource-view.c:1375
 msgid "(None)"
 msgstr "(Brak)"
 
-#: src/dialogs/resource-dialog/mg-resource-dialog.c:258
-#: src/dialogs/resource-input-dialog/mg-resource-input-dialog.c:107
-#: src/dialogs/task-dialog/mg-task-dialog.c:249
+#: src/planner-resource-dialog.c:258 src/planner-resource-input-dialog.c:106
+#: src/planner-task-dialog.c:249
 msgid "(No name)"
 msgstr "(Brak nazwy)"
 
 #. i18n: time stamp format for notes in task dialog, see strftime(3) for
 #. * a detailed description.
-#: src/dialogs/resource-dialog/mg-resource-dialog.c:728
-#: src/dialogs/task-dialog/mg-task-dialog.c:679
+#: src/planner-resource-dialog.c:728 src/planner-task-dialog.c:679
 msgid "%a %d %b %Y, %H:%M\n"
 msgstr "%a %d %b %Y, %H:%M\n"
 
-#: src/dialogs/resource-dialog/mg-resource-dialog.c:826
+#: src/planner-resource-dialog.c:826
 msgid "None (use project default)"
 msgstr "Brak (użycie wartości domyślnej projektu)"
 
-#: src/dialogs/resource-dialog/mg-resource-dialog.c:953
-#: src/dialogs/resource-dialog/mg-resource-dialog.c:955
+#: src/planner-resource-dialog.c:953 src/planner-resource-dialog.c:955
 msgid "Edit resource properties"
 msgstr "Modyfikacja właściwości zasobu"
 
-#: src/dialogs/resource-dialog/mg-resource-dialog.c:1102
-#: src/views/gantt/mg-task-view.c:230 src/views/gantt/mg-gantt-print.c:198
-#: src/views/resources/mg-resource-view.c:629
-#: src/views/resources/mg-resource-view.c:645
-#: src/views/resources/mg-resource-view.c:1163
+#: src/planner-resource-dialog.c:1101 src/planner-task-view.c:230
+#: src/planner-gantt-print.c:198 src/planner-resource-view.c:629
+#: src/planner-resource-view.c:645 src/planner-resource-view.c:1187
 msgid "Work"
 msgstr "Praca"
 
-#: src/dialogs/resource-dialog/mg-resource-dialog.c:1103
-#: src/views/resources/mg-resource-view.c:632
-#: src/views/resources/mg-resource-view.c:646
-#: src/views/resources/mg-resource-view.c:1164
+#: src/planner-resource-dialog.c:1102 src/planner-resource-view.c:632
+#: src/planner-resource-view.c:646 src/planner-resource-view.c:1188
 msgid "Material"
 msgstr "Materiał"
 
-#: src/dialogs/resource-dialog/mg-resource-dialog.glade.h:2
-msgid "C_ost:"
-msgstr "K_oszt:"
-
-#: src/dialogs/resource-dialog/mg-resource-dialog.glade.h:3
-msgid "Calendar"
-msgstr "Kalendarz"
-
-#: src/dialogs/resource-dialog/mg-resource-dialog.glade.h:4
-msgid "Edit calendars..."
-msgstr "Zmodyfikuj kalendarze..."
-
-#: src/dialogs/resource-dialog/mg-resource-dialog.glade.h:6
-#: src/dialogs/task-dialog/mg-task-dialog.glade.h:7
-msgid "Insert time stamp"
-msgstr "Wstaw znacznik czasu"
-
-#: src/dialogs/resource-dialog/mg-resource-dialog.glade.h:7
-#: src/dialogs/task-dialog/mg-task-dialog.glade.h:9
-msgid "Notes"
-msgstr "Uwagi"
-
-#: src/dialogs/resource-dialog/mg-resource-dialog.glade.h:8
-msgid ""
-"Select the calendar to use for this resource. If you want to use the default "
-"calendar of the project, select 'None'. "
-msgstr ""
-"Wybierz kalendarz dla tego zasobu. Jeśli chcesz skorzystać z domyślnego "
-"kalendarza projektu, wybierz pozycję \"Brak\"."
-
-#: src/dialogs/resource-dialog/mg-resource-dialog.glade.h:9
-msgid "_Email:"
-msgstr "_E-mail:"
-
-#: src/dialogs/resource-dialog/mg-resource-dialog.glade.h:10
-msgid "_Group:"
-msgstr "_Grupa:"
-
-#: src/dialogs/resource-dialog/mg-resource-dialog.glade.h:11
-msgid "_Name:"
-msgstr "_Nazwa:"
-
-#: src/dialogs/resource-dialog/mg-resource-dialog.glade.h:12
-msgid "_Type:"
-msgstr "_Typ:"
-
-#: src/dialogs/resource-input-dialog/mg-resource-input-dialog.glade.h:2
-msgid "Email:"
-msgstr "E-mail:"
-
-#: src/dialogs/resource-input-dialog/mg-resource-input-dialog.glade.h:3
-msgid "Group:"
-msgstr "Grupa:"
-
-#: src/dialogs/resource-input-dialog/mg-resource-input-dialog.glade.h:4
-msgid "Insert resource"
-msgstr "Wstaw zasób"
-
-#: src/dialogs/resource-input-dialog/mg-resource-input-dialog.glade.h:5
-#: src/dialogs/task-input-dialog/mg-task-input-dialog.glade.h:3
-msgid "Name:"
-msgstr "Nazwa:"
-
-#: src/dialogs/resource-input-dialog/mg-resource-input-dialog.glade.h:6
-#: src/dialogs/task-input-dialog/mg-task-input-dialog.glade.h:5
-msgid "_Insert"
-msgstr "_Wstaw"
-
-#: src/dialogs/task-dialog/mg-add-predecessor.glade.h:2
-msgid "Lag: "
-msgstr "Opóźnienie:"
-
-#: src/dialogs/task-dialog/mg-add-predecessor.glade.h:3
-msgid "New predecessor"
-msgstr "Nowy poprzednik"
-
-#: src/dialogs/task-dialog/mg-add-predecessor.glade.h:4
-msgid "Predecessor: "
-msgstr "Poprzednie zadanie: "
-
-#: src/dialogs/task-dialog/mg-add-predecessor.glade.h:5
-msgid "Relation type: "
-msgstr "Typ relacji: "
-
-#: src/dialogs/task-dialog/mg-predecessor-model.c:191
-#: src/dialogs/task-dialog/mg-task-dialog.c:1040
+#: src/planner-predecessor-model.c:191 src/planner-task-dialog.c:1039
 msgid "FS"
 msgstr "FS"
 
-#: src/dialogs/task-dialog/mg-predecessor-model.c:194
-#: src/dialogs/task-dialog/mg-task-dialog.c:1041
+#: src/planner-predecessor-model.c:194 src/planner-task-dialog.c:1040
 msgid "FF"
 msgstr "FF"
 
-#: src/dialogs/task-dialog/mg-predecessor-model.c:197
-#: src/dialogs/task-dialog/mg-task-dialog.c:1042
+#: src/planner-predecessor-model.c:197 src/planner-task-dialog.c:1041
 msgid "SS"
 msgstr "SS"
 
-#: src/dialogs/task-dialog/mg-predecessor-model.c:200
-#: src/dialogs/task-dialog/mg-task-dialog.c:1043
+#: src/planner-predecessor-model.c:200 src/planner-task-dialog.c:1042
 msgid "SF"
 msgstr "SF"
 
-#: src/dialogs/task-dialog/mg-task-dialog.c:746
+#: src/planner-task-dialog.c:745
 msgid "Finish to start (FS)"
 msgstr "Koniec do początku (FS)"
 
-#: src/dialogs/task-dialog/mg-task-dialog.c:747
+#: src/planner-task-dialog.c:746
 msgid "Finish to finish (FF)"
 msgstr "Koniec do końca (FF)"
 
-#: src/dialogs/task-dialog/mg-task-dialog.c:748
+#: src/planner-task-dialog.c:747
 msgid "Start to start (SS)"
 msgstr "Początek do początku (SS)"
 
-#: src/dialogs/task-dialog/mg-task-dialog.c:749
+#: src/planner-task-dialog.c:748
 msgid "Start to finish (SF)"
 msgstr "Początek do końca (SF)"
 
-#: src/dialogs/task-dialog/mg-task-dialog.c:799
+#: src/planner-task-dialog.c:798
 msgid "Can't add new predecessor. No task selected!"
 msgstr "Nie można dodać nowego poprzednika. Nie wybrano zadania!"
 
-#: src/dialogs/task-dialog/mg-task-dialog.c:1331
+#: src/planner-task-dialog.c:1330
 msgid "Assigned"
 msgstr "Przyporządkowany"
 
-#: src/dialogs/task-dialog/mg-task-dialog.c:1348
+#: src/planner-task-dialog.c:1347
 msgid "Units"
 msgstr "Jednostki"
 
-#: src/dialogs/task-dialog/mg-task-dialog.c:1452
+#: src/planner-task-dialog.c:1451
 msgid "Lag"
 msgstr "Opóźnienie"
 
-#: src/dialogs/task-dialog/mg-task-dialog.c:1585
-#: src/dialogs/task-dialog/mg-task-dialog.c:1587
+#: src/planner-task-dialog.c:1584 src/planner-task-dialog.c:1586
 msgid "Edit task properties"
 msgstr "Modyfikacja właściwości zadania"
 
-#: src/dialogs/task-dialog/mg-task-dialog.glade.h:3
-#, no-c-format
-msgid "%"
-msgstr "%s"
-
-#: src/dialogs/task-dialog/mg-task-dialog.glade.h:5
-msgid "C_omplete:"
-msgstr "_Zrealizowane:"
-
-#: src/dialogs/task-dialog/mg-task-dialog.glade.h:8
-msgid "Na_me:"
-msgstr "N_azwa:"
-
-#: src/dialogs/task-dialog/mg-task-dialog.glade.h:10
-msgid "Pr_iority:"
-msgstr "Pr_iorytet:"
-
-#: src/dialogs/task-dialog/mg-task-dialog.glade.h:11
-msgid "Predecessors"
-msgstr "Poprzednie zadania"
-
-#: src/dialogs/task-dialog/mg-task-dialog.glade.h:12
-#: src/views/resources/mg-resource-view.c:342
-msgid "Resources"
-msgstr "Zasoby"
-
-#: src/dialogs/task-dialog/mg-task-dialog.glade.h:13
-msgid "_Duration:"
-msgstr "_Trwanie:"
-
-#: src/dialogs/task-dialog/mg-task-dialog.glade.h:14
-msgid "_Fixed duration"
-msgstr "_Zmienny czas trwania"
-
-#: src/dialogs/task-dialog/mg-task-dialog.glade.h:15
-msgid "_Milestone"
-msgstr "_Kamień milowy"
-
-#: src/dialogs/task-dialog/mg-task-dialog.glade.h:16
-msgid "_Work:"
-msgstr "_Praca:"
-
-#. day unit variant accepted in input
-#: src/dialogs/task-dialog/mg-task-dialog.glade.h:17
-#: src/views/gantt/mg-task-tree.c:2121
-msgid "days"
-msgstr "dni"
-
-#: src/dialogs/task-input-dialog/mg-task-input-dialog.glade.h:2
-msgid "Insert task"
-msgstr "Wstaw zadanie"
-
-#: src/dialogs/task-input-dialog/mg-task-input-dialog.glade.h:4
-msgid "Work:"
-msgstr "Praca:"
-
-#: src/plugins/html-output/GNOME_MrProject_HtmlOutputPlugin.ui.h:1
-#: src/plugins/html-output/mg-html-output.glade.h:4
-msgid "Export to HTML"
-msgstr "Eksport do HTML"
-
-#: src/plugins/html-output/mg-html-output.glade.h:3
-msgid "<b>Save to</b>"
-msgstr "<b>Zapis do</b>"
-
-#: src/plugins/html-output/mg-html-output.glade.h:5
-msgid "Local file"
-msgstr "Plik lokalny"
-
-#: src/plugins/html-output/mg-html-output.glade.h:6
-msgid "Save to HTML File"
-msgstr "Zapis do pliku HTML"
-
-#: src/plugins/html-output/mg-html-output.glade.h:7
-msgid "Web location"
-msgstr "Lokacja WWW"
-
-#: src/plugins/html-output/mg-html-output-plugin.c:133
+#: src/planner-html-plugin.c:133
 #, c-format
 msgid ""
 "\"%s\" is a directory.\n"
@@ -1057,52 +1183,12 @@ msgstr ""
 "\"%s\" jest katalogiem.\n"
 "Podaj nazwę pliku i spróbuj ponownie."
 
-#: src/plugins/sql/GNOME_MrProject_SQLPlugin.ui.h:1
-msgid "Open from Database..."
-msgstr "Otwórz z bazy danych..."
-
-#: src/plugins/sql/GNOME_MrProject_SQLPlugin.ui.h:2
-msgid "Save to Database..."
-msgstr "Zapisz do bazy danych..."
-
-#: src/plugins/sql/mg-sql.glade.h:3
-msgid "<b>Open Database</b>"
-msgstr "<b>Otwarcie bazy danych</b>"
-
-#: src/plugins/sql/mg-sql.glade.h:4
-msgid "Database:"
-msgstr "Baza danych:"
-
-#: src/plugins/sql/mg-sql.glade.h:5
-msgid "Open Database"
-msgstr "Otwórz bazę danych"
-
-#: src/plugins/sql/mg-sql.glade.h:6
-msgid "Password:"
-msgstr "Hasło:"
-
-#: src/plugins/sql/mg-sql.glade.h:7
-msgid "Select a Project"
-msgstr "Wybierz projekt"
-
-#: src/plugins/sql/mg-sql.glade.h:8
-msgid "Server:"
-msgstr "Serwer:"
-
-#: src/plugins/sql/mg-sql.glade.h:9
-msgid "The database contains the following projects. Select a project to open:"
-msgstr "Baza danych zawiera następujące projekty. Wybierz projekt do otwarcia:"
-
-#: src/plugins/sql/mg-sql.glade.h:10
-msgid "Username:"
-msgstr "Nazwa użytkownika:"
-
 #. Give up.
-#: src/plugins/sql/mg-sql-plugin.c:127
+#: src/planner-sql-plugin.c:127
 msgid "Invalid Unicode"
 msgstr "Niepoprawny Unicode"
 
-#: src/plugins/sql/mg-sql-plugin.c:269
+#: src/planner-sql-plugin.c:269
 #, c-format
 msgid ""
 "Connection to database '%s' failed:\n"
@@ -1111,43 +1197,43 @@ msgstr ""
 "Połączenie z bazą danych \"%s\" zakończone niepowodzeniem:\n"
 "%s"
 
-#: src/plugins/sql/mg-sql-plugin.c:318
+#: src/planner-sql-plugin.c:318
 msgid "Project"
 msgstr "Projekt"
 
-#: src/plugins/sql/mg-sql-plugin.c:466
+#: src/planner-sql-plugin.c:466
 msgid "Open from Database"
 msgstr "Otwórz z bazy danych"
 
-#: src/plugins/sql/mg-sql-plugin.c:573
+#: src/planner-sql-plugin.c:573
 msgid "Save to Database"
 msgstr "Zapisz do bazy danych"
 
-#: src/util/mg-format.c:141
+#: src/planner-format.c:141
 #, c-format
 msgid "%dd %dh"
 msgstr "%dd %dh"
 
-#: src/util/mg-format.c:144
+#: src/planner-format.c:144
 #, c-format
 msgid "%dd"
 msgstr "%dd"
 
-#: src/util/mg-format.c:147
+#: src/planner-format.c:147
 #, c-format
 msgid "%dh"
 msgstr "%dh"
 
-#: src/util/mg-format.c:171
+#: src/planner-format.c:171
 #, c-format
 msgid "%s days"
 msgstr "%s dni"
 
-#: src/util/mg-format.c:174
+#: src/planner-format.c:174
 msgid "0 days"
 msgstr "0 dni"
 
-#: src/util/mg-format.c:177
+#: src/planner-format.c:177
 #, c-format
 msgid "%s day"
 msgstr "%s dzień"
@@ -1156,146 +1242,43 @@ msgstr "%s dzień"
 #. * e.g. in the date cells in the task tree. See
 #. * libmrproject/docs/DateFormat.
 #.
-#: src/util/mg-format.c:197
+#: src/planner-format.c:197
 msgid "%b %e"
 msgstr "%b %e"
 
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:1
-#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:1
-msgid "I_ndent Task"
-msgstr "W_suń zadanie"
-
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:2
-#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:2
-msgid "In_sert Tasks..."
-msgstr "Ws_taw zadanie"
-
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:5
-#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:5
-msgid "Move Task Do_wn"
-msgstr "Przesuń zadanie w _dół"
-
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:6
-#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:6
-msgid "Move Task _Up"
-msgstr "Przesuń _zadanie w górę"
-
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:10
-#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:10
-msgid "Reset _All Constraints"
-msgstr "Wyzeruj _wszystkie ograniczenia"
-
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:11
-#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:11
-msgid "Reset _Constraint"
-msgstr "Wyzeruj _ograniczenie"
-
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:12
-#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:12
-#: src/views/resources/GNOME_MrProject_ResourcesView.ui.h:7
-msgid "Select _All"
-msgstr "Wybierz _wszystko"
-
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:13
-#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:13
-#: src/views/resources/GNOME_MrProject_ResourcesView.ui.h:8
-msgid "Select all tasks"
-msgstr "Wybiera wszystkie zadania"
-
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:14
-msgid "Test"
-msgstr "Przetestuj"
-
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:15
-#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:14
-msgid "Un_link Task"
-msgstr "_Rozłącz zadanie"
-
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:16
-#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:15
-msgid "Unin_dent Task"
-msgstr "Zs_uń zadanie"
-
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:19
-msgid "Zoom In"
-msgstr "Powiększa"
-
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:20
-msgid "Zoom Out"
-msgstr "Pomniejsza"
-
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:21
-msgid "Zoom To Fit"
-msgstr "Dopasowuje powiększenie"
-
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:22
-msgid "Zoom To _Fit"
-msgstr "_Dopasuj powiększenie"
-
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:23
-msgid "Zoom _Out"
-msgstr "Po_mniejsz"
-
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:24
-#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:19
-msgid "_Edit Task Properties..."
-msgstr "_Modyfikacja właściwości zadania..."
-
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:25
-msgid "_Highlight Critical Tasks"
-msgstr "_Wyróżnianie zadań krytycznych"
-
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:26
-#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:20
-msgid "_Insert Task"
-msgstr "_Wstaw zadanie"
-
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:27
-#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:21
-msgid "_Remove Task"
-msgstr "_Usuń zadanie"
-
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:28
-msgid "_Zoom In"
-msgstr "Po_większ"
-
-#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:18
-msgid "_Edit Custom Properties..."
-msgstr "_Modyfikacja dowolnych właściwości..."
-
 #. i18n: project start, the date format is described in
 #. * libmrproject/docs/DateFormat.
-#: src/views/gantt/mg-gantt-background.c:579
+#: src/planner-gantt-background.c:579
 msgid "%Y %b %d"
 msgstr "%Y %b %d"
 
-#: src/views/gantt/mg-gantt-background.c:581
+#: src/planner-gantt-background.c:581
 msgid "Project start"
 msgstr "Początek projektu"
 
-#: src/views/gantt/mg-gantt-row.c:1841 src/views/gantt/mg-gantt-row.c:1844
+#: src/planner-gantt-row.c:1841 src/planner-gantt-row.c:1844
 msgid "No name"
 msgstr "Bez nazwy"
 
-#: src/views/gantt/mg-gantt-row.c:1847
+#: src/planner-gantt-row.c:1847
 #, c-format
 msgid "Make task '%s' a predecessor of '%s'"
 msgstr "Czyni zadanie \"%s\" poprzednikiem \"%s\""
 
-#: src/views/gantt/mg-gantt-row.c:1905
+#: src/planner-gantt-row.c:1905
 #, c-format
 msgid "Change work to %s"
 msgstr "Zmienia pracę na %s"
 
-#: src/views/gantt/mg-gantt-view.c:274
+#: src/planner-gantt-view.c:273
 msgid "Gantt Chart"
 msgstr "Diagram Gantta"
 
-#: src/views/gantt/mg-gantt-view.c:282
+#: src/planner-gantt-view.c:281
 msgid "_Gantt Chart"
 msgstr "Diagram _Gantta"
 
-#: src/views/gantt/mg-gantt-view.c:471
+#: src/planner-gantt-view.c:470
 msgid ""
 "\n"
 "Name"
@@ -1304,7 +1287,7 @@ msgstr ""
 "Nazwa"
 
 #. COL_START,    _("\nStart"),
-#: src/views/gantt/mg-gantt-view.c:473
+#: src/planner-gantt-view.c:472
 msgid ""
 "\n"
 "Work"
@@ -1313,232 +1296,202 @@ msgstr ""
 "Praca"
 
 #. i18n: Short "Week", preferably 2 letters.
-#: src/views/gantt/mg-scale-utils.c:325
+#: src/planner-scale-utils.c:325
 #, c-format
 msgid "Wk %d"
 msgstr "%d. tydz."
 
-#: src/views/gantt/mg-scale-utils.c:329
+#: src/planner-scale-utils.c:329
 #, c-format
 msgid "Week %d"
 msgstr "%d. tydzień"
 
 #. i18n: Week, year.
-#: src/views/gantt/mg-scale-utils.c:334
+#: src/planner-scale-utils.c:334
 #, c-format
 msgid "Week %d, %d"
 msgstr "%d. tydzień, %d"
 
 #. i18n: Short "Quarter", preferrably 1 letter.
-#: src/views/gantt/mg-scale-utils.c:365
+#: src/planner-scale-utils.c:365
 #, c-format
 msgid "Q%d"
 msgstr "K%d"
 
 #. i18n: Short "Quarter", preferrably 2-3 letters.
-#: src/views/gantt/mg-scale-utils.c:369
+#: src/planner-scale-utils.c:369
 #, c-format
 msgid "Qtr %d"
 msgstr "%d. kw."
 
 #. i18n: Year, short "Quarter", preferrably 2-3 letters.
-#: src/views/gantt/mg-scale-utils.c:373
+#: src/planner-scale-utils.c:373
 #, c-format
 msgid "%d, Qtr %d"
 msgstr "%d, %d. kw."
 
 #. i18n: Short "Half year", prefferably 1 letter.
-#: src/views/gantt/mg-scale-utils.c:386
+#: src/planner-scale-utils.c:386
 #, c-format
 msgid "H%d"
 msgstr "H%d"
 
 #. i18n: Year, short "Half year", prefferably 1 letter.
-#: src/views/gantt/mg-scale-utils.c:391
+#: src/planner-scale-utils.c:391
 #, c-format
 msgid "%04d, H%d"
 msgstr "%04d, H%d"
 
-#: src/views/gantt/mg-task-tree.c:185
+#: src/planner-task-tree.c:184
 msgid "/_Insert task"
 msgstr "/_Wstaw zadanie"
 
-#: src/views/gantt/mg-task-tree.c:186
+#: src/planner-task-tree.c:185
 msgid "/_Insert subtask"
 msgstr "/_Wstaw podzadanie"
 
-#: src/views/gantt/mg-task-tree.c:187
+#: src/planner-task-tree.c:186
 msgid "/_Remove task"
 msgstr "/_Usuń zadanie"
 
-#: src/views/gantt/mg-task-tree.c:189
+#: src/planner-task-tree.c:188
 msgid "/_Unlink task"
 msgstr "/R_ozłącz zadanie"
 
-#: src/views/gantt/mg-task-tree.c:191
+#: src/planner-task-tree.c:190
 msgid "/_Edit task..."
 msgstr "/Z_modyfikuj zadanie..."
 
-#: src/views/gantt/mg-task-tree.c:2113
+#: src/planner-task-tree.c:2112
 msgid "mon"
 msgstr "mie"
 
 #. month unit variant accepted in input
-#: src/views/gantt/mg-task-tree.c:2114
+#: src/planner-task-tree.c:2113
 msgid "month"
 msgstr "miesiąc"
 
 #. month unit variant accepted in input
-#: src/views/gantt/mg-task-tree.c:2115
+#: src/planner-task-tree.c:2114
 msgid "months"
 msgstr "miesięcy"
 
 #. month unit variant accepted in input
-#: src/views/gantt/mg-task-tree.c:2116
+#: src/planner-task-tree.c:2115
 msgid "w"
 msgstr "t"
 
 #. week unit variant accepted in input
-#: src/views/gantt/mg-task-tree.c:2117
+#: src/planner-task-tree.c:2116
 msgid "week"
 msgstr "tydzień"
 
 #. week unit variant accepted in input
-#: src/views/gantt/mg-task-tree.c:2118
+#: src/planner-task-tree.c:2117
 msgid "weeks"
 msgstr "tygodni"
 
 #. week unit variant accepted in input
-#: src/views/gantt/mg-task-tree.c:2119
+#: src/planner-task-tree.c:2118
 msgid "d"
 msgstr "d"
 
 #. day unit variant accepted in input
-#: src/views/gantt/mg-task-tree.c:2120
+#: src/planner-task-tree.c:2119
 msgid "day"
 msgstr "dzień"
 
 #. day unit variant accepted in input
-#: src/views/gantt/mg-task-tree.c:2122
+#: src/planner-task-tree.c:2121
 msgid "h"
 msgstr "g"
 
 #. hour unit variant accepted in input
-#: src/views/gantt/mg-task-tree.c:2123
+#: src/planner-task-tree.c:2122
 msgid "hour"
 msgstr "godzina"
 
 #. hour unit variant accepted in input
-#: src/views/gantt/mg-task-tree.c:2124
+#: src/planner-task-tree.c:2123
 msgid "hours"
 msgstr "godzin"
 
 #. hour unit variant accepted in input
-#: src/views/gantt/mg-task-tree.c:2125
+#: src/planner-task-tree.c:2124
 msgid "min"
 msgstr "min"
 
 #. minute unit variant accepted in input
-#: src/views/gantt/mg-task-tree.c:2126
+#: src/planner-task-tree.c:2125
 msgid "minute"
 msgstr "minuta"
 
 #. minute unit variant accepted in input
-#: src/views/gantt/mg-task-tree.c:2127
+#: src/planner-task-tree.c:2126
 msgid "minutes"
 msgstr "minut"
 
-#: src/views/gantt/mg-task-view.c:173
+#: src/planner-task-view.c:173
 msgid "Tasks"
 msgstr "Zadania"
 
-#: src/views/gantt/mg-task-view.c:181
+#: src/planner-task-view.c:181
 msgid "_Tasks"
 msgstr "_Zadania"
 
-#: src/views/gantt/mg-task-view.c:228
+#: src/planner-task-view.c:228
 msgid "Start"
 msgstr "Początek"
 
-#: src/views/gantt/mg-task-view.c:229
+#: src/planner-task-view.c:229
 msgid "Finish"
 msgstr "Koniec"
 
-#: src/views/gantt/mg-task-view.c:231
+#: src/planner-task-view.c:231
 msgid "Slack"
 msgstr "Zastój"
 
-#: src/views/gantt/mg-task-view.c:232
+#: src/planner-task-view.c:232
 msgid "Cost"
 msgstr "Koszt"
 
-#: src/views/gantt/mg-task-view.c:438
+#: src/planner-task-view.c:438
 msgid "Edit custom task properties"
 msgstr "Modyfikacja dowolnych właściwości zadania"
 
-#: src/views/resources/GNOME_MrProject_ResourcesView.ui.h:1
-msgid "Edit _Custom Properties..."
-msgstr "Modyfikacja _dowolnych właściwości..."
-
-#: src/views/resources/GNOME_MrProject_ResourcesView.ui.h:2
-msgid "Edit _Groups"
-msgstr "Zmodyfikuj gr_upy"
-
-#: src/views/resources/GNOME_MrProject_ResourcesView.ui.h:3
-msgid "Groups"
-msgstr "Grupy"
-
-#: src/views/resources/GNOME_MrProject_ResourcesView.ui.h:4
-msgid "In_sert Resources..."
-msgstr "Ws_taw zasoby..."
-
-#: src/views/resources/GNOME_MrProject_ResourcesView.ui.h:9
-msgid "_Edit Resource Properties..."
-msgstr "Z_modyfikuj właściwości zasobu..."
-
-#: src/views/resources/GNOME_MrProject_ResourcesView.ui.h:10
-msgid "_Insert Resource"
-msgstr "_Wstaw zasób"
-
-#: src/views/resources/GNOME_MrProject_ResourcesView.ui.h:11
-msgid "_Remove Resource"
-msgstr "_Usuń zasób"
-
-#: src/views/resources/mg-resource-view.c:248
+#: src/planner-resource-view.c:248
 msgid "/_Insert resource"
 msgstr "/_Wstaw zasób"
 
-#: src/views/resources/mg-resource-view.c:249
+#: src/planner-resource-view.c:249
 msgid "/_Remove resource"
 msgstr "/_Usuń zasób"
 
-#: src/views/resources/mg-resource-view.c:250
+#: src/planner-resource-view.c:250
 msgid "/_Edit resource..."
 msgstr "/Z_modyfikuj zasób..."
 
-#: src/views/resources/mg-resource-view.c:350
+#: src/planner-resource-view.c:350
 msgid "_Resources"
 msgstr "_Zasoby"
 
-#: src/views/resources/mg-resource-view.c:825
+#: src/planner-resource-view.c:849
 msgid "Edit custom resource properties"
 msgstr "Modyfikuje dowolne właściwości zasobu"
 
-#: src/views/resources/mg-resource-view.c:987
+#: src/planner-resource-view.c:1011
 msgid "Group"
 msgstr "Grupa"
 
-#: src/views/resources/mg-resource-view.c:1016
+#: src/planner-resource-view.c:1040
 msgid "Email"
 msgstr "E-mail"
 
-#: mrproject.desktop.in.h:1
-msgid "MrProject Project Management Tool"
-msgstr "MrProject - narzędzie do zarządzania projektami"
+#~ msgid "Contribute to MrProject"
+#~ msgstr "Pomóż tworzyć MrProject"
 
-#: mrproject.desktop.in.h:2
-msgid "Project Management"
-msgstr "Zarządzanie projektami"
+#~ msgid "MrProject Project Management Tool"
+#~ msgstr "MrProject - narzędzie do zarządzania projektami"
 
 #~ msgid "(C) 2001 - 2002 CodeFactory AB"
 #~ msgstr "(C) 2001 - 2002 CodeFactory AB"

@@ -6,8 +6,6 @@ desktop_DATA = planner.desktop
 @INTLTOOL_DESKTOP_RULE@
 
 EXTRA_DIST = \
-	planner.desktop.in			\
-	planner.spec.in				\
-	planner.spec
+	planner.desktop.in
 
 CLEANFILES = $(desktop_DATA)

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: MrProjecte\n"
-"POT-Creation-Date: 2003-09-12 18:55+0200\n"
+"POT-Creation-Date: 2003-12-01 23:08+0100\n"
 "PO-Revision-Date: 2002-12-14 05:37+0100\n"
 "Last-Translator: Softcatala <tradgnome@softcatala.org>\n"
 "Language-Team: linux-ca@chanae.alphanet.ch\n"
@@ -14,337 +14,934 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: data/planner.desktop.in.h:1
+#, fuzzy
+msgid "Planner Project Management"
+msgstr "Gestor de Projectes"
+
+#: data/planner.desktop.in.h:2
+msgid "Project Management"
+msgstr "Gestor de Projectes"
+
 #: libegg/recent-files/egg-recent-vfs-utils.c:90
 msgid " (invalid Unicode)"
 msgstr ""
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:1
+#: data/ui/main-window.ui.h:1
 msgid "About this application"
 msgstr "Quant a aquesta aplicació"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:2
+#: data/ui/main-window.ui.h:2
 #, fuzzy
 msgid "C_ut"
 msgstr "Retalla"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:3
+#: data/ui/main-window.ui.h:3
 msgid "Clear"
 msgstr "Esborra"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:4
+#: data/ui/main-window.ui.h:4
 msgid "Clear the selection"
 msgstr "Esborra la selecció"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:5
+#: data/ui/main-window.ui.h:5
 msgid "Close the current file"
 msgstr "Tanca el fitxer actual"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:6
+#: data/ui/main-window.ui.h:6
 msgid "Copy the selection"
 msgstr "Copia la selecció"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:7
+#: data/ui/main-window.ui.h:7
 msgid "Create a new project"
 msgstr "Crea un nou projecte"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:8
+#: data/ui/main-window.ui.h:8
 msgid "Cut the selection"
 msgstr "Retalla la selecció"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:9
+#: data/ui/main-window.ui.h:9
 msgid "Edit Day _Types"
 msgstr ""
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:10
+#: data/ui/main-window.ui.h:10
 #, fuzzy
 msgid "Edit Project _Phases"
 msgstr "_Nom del projecte:"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:11
+#: data/ui/main-window.ui.h:11
 msgid "Edit the project properties"
 msgstr "Edita les propietats del projecte"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:12
+#: data/ui/main-window.ui.h:12
 msgid "Exit the program"
 msgstr "Surt del programa"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:13
+#: data/ui/main-window.ui.h:13
 msgid "New"
 msgstr "Nou"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:14
+#: data/ui/main-window.ui.h:14
 msgid "New..."
 msgstr "Nou..."
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:15
+#: data/ui/main-window.ui.h:15
 msgid "Open"
 msgstr "Obre"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:16
+#: data/ui/main-window.ui.h:16
 #, fuzzy
 msgid "Open a project"
 msgstr "Crea un nou projecte"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:17
+#: data/ui/main-window.ui.h:17
 msgid "Paste the clipboard"
 msgstr "Enganxa el porta-retalls"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:18
+#: data/ui/main-window.ui.h:18
 msgid "Print"
 msgstr "Imprimeix"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:19
+#: data/ui/main-window.ui.h:19
 #, fuzzy
 msgid "Print preview of the current project"
 msgstr "Imprimeix el fitxer actual"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:20
+#: data/ui/main-window.ui.h:20
 #, fuzzy
 msgid "Print the current project"
 msgstr "Imprimeix el fitxer actual"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:21
+#: data/ui/main-window.ui.h:21
 msgid "Redo the undone action"
 msgstr "Refés l'acció sense fer"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:22
+#: data/ui/main-window.ui.h:22
 msgid "Save"
 msgstr "Desa"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:23
+#: data/ui/main-window.ui.h:23
 #, fuzzy
 msgid "Save _As..."
 msgstr "Desa com..."
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:24
+#: data/ui/main-window.ui.h:24
 #, fuzzy
 msgid "Save the current project"
 msgstr "Desa el fitxer actual"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:25
+#: data/ui/main-window.ui.h:25
 #, fuzzy
 msgid "Save the current project with a different name"
 msgstr "Desa el fitxer actual amb un nom diferent"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:26
+#: data/ui/main-window.ui.h:26
 msgid "Show the MrProject User Guide"
 msgstr "Mostra la guia de l'usuari de MrProject"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:27
+#: data/ui/main-window.ui.h:27
 msgid "Undo the last action"
 msgstr "Desfés l'última acció"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:28
+#: data/ui/main-window.ui.h:28
 msgid "_About"
 msgstr "_Quan a"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:29
+#: data/ui/main-window.ui.h:29
 msgid "_Actions"
 msgstr ""
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:30
+#: data/ui/main-window.ui.h:30
 msgid "_Close"
 msgstr "_Tanca"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:31
+#: data/ui/main-window.ui.h:31
 #, fuzzy
 msgid "_Copy"
 msgstr "Copia"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:32
+#: data/ui/main-window.ui.h:32
 msgid "_Edit"
 msgstr "_Edita"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:33
+#: data/ui/main-window.ui.h:33
 #, fuzzy
 msgid "_Edit Project Properties"
 msgstr "Propietats del projecte"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:34
+#: data/ui/main-window.ui.h:34
 msgid "_File"
 msgstr "_Fitxer"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:35
+#: data/ui/main-window.ui.h:35
 msgid "_Help"
 msgstr "_Ajuda"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:36
+#: data/ui/main-window.ui.h:36
 #, fuzzy
 msgid "_Manage Calendars"
 msgstr "Prova el calendari"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:37
+#: data/ui/main-window.ui.h:37
 msgid "_New Project"
 msgstr "_Projecte nou"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:38
+#: data/ui/main-window.ui.h:38
 #, fuzzy
 msgid "_Open..."
 msgstr "Obre..."
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:39
+#: data/ui/main-window.ui.h:39
 #, fuzzy
 msgid "_Paste"
 msgstr "Enganxa"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:40
+#: data/ui/main-window.ui.h:40
 #, fuzzy
 msgid "_Print Preview"
 msgstr "Exemple d'impressió"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:41
+#: data/ui/main-window.ui.h:41
 #, fuzzy
 msgid "_Print..."
 msgstr "Imprimeix"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:42
+#: data/ui/main-window.ui.h:42
 #, fuzzy
 msgid "_Project"
 msgstr "MrProject"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:43
+#: data/ui/main-window.ui.h:43
 msgid "_Quit"
 msgstr "_Surt"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:44
+#: data/ui/main-window.ui.h:44
 #, fuzzy
 msgid "_Redo"
 msgstr "Refés"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:45 src/app/mg-main-window.c:1133
+#: data/ui/main-window.ui.h:45 src/planner-main-window.c:1127
 msgid "_Save"
 msgstr "_Desa"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:46
+#: data/ui/main-window.ui.h:46
 #, fuzzy
 msgid "_Undo"
 msgstr "Desfés"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:47
+#: data/ui/main-window.ui.h:47
 msgid "_User Guide"
 msgstr "_Guia d'Usuari"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:48
+#: data/ui/main-window.ui.h:48
 msgid "_View"
 msgstr "_Visualitza"
 
-#: src/app/mg-application.c:54 src/app/mg-application.c:103
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:4
-#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:4
-#: src/views/resources/GNOME_MrProject_ResourcesView.ui.h:5
-msgid "Insert"
-msgstr "Insereix"
+#: data/ui/gantt-view.ui.h:1 data/ui/task-view.ui.h:1
+#, fuzzy
+msgid "I_ndent Task"
+msgstr "Sagna la tasca"
 
-#: src/app/mg-application.c:61 src/app/mg-application.c:110
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:9
-#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:9
-#: src/views/resources/GNOME_MrProject_ResourcesView.ui.h:6
-msgid "Remove"
-msgstr "Esborra"
+#: data/ui/gantt-view.ui.h:2 data/ui/task-view.ui.h:2
+#, fuzzy
+msgid "In_sert Tasks..."
+msgstr "Insereix les tasques..."
 
-#: src/app/mg-application.c:68
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:18
-#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:17
-msgid "Unlink"
-msgstr "Desenllaça"
-
-#: src/app/mg-application.c:75
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:3
-#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:3
+#: data/ui/gantt-view.ui.h:3 data/ui/task-view.ui.h:3
+#: src/planner-application.c:75
 msgid "Indent"
 msgstr "Sagnat"
 
-#: src/app/mg-application.c:82
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:17
-#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:16
-msgid "Unindent"
-msgstr "Desagnat"
+#: data/ui/gantt-view.ui.h:4 data/ui/task-view.ui.h:4
+#: data/ui/resource-view.ui.h:5 src/planner-application.c:54
+#: src/planner-application.c:103
+msgid "Insert"
+msgstr "Insereix"
 
-#: src/app/mg-application.c:89
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:8
-#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:8
-msgid "Move up"
+#: data/ui/gantt-view.ui.h:5 data/ui/task-view.ui.h:5
+#, fuzzy
+msgid "Move Task Do_wn"
+msgstr "Mou cap a baix"
+
+#: data/ui/gantt-view.ui.h:6 data/ui/task-view.ui.h:6
+#, fuzzy
+msgid "Move Task _Up"
 msgstr "Mou cap amunt"
 
-#: src/app/mg-application.c:96
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:7
-#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:7
+#: data/ui/gantt-view.ui.h:7 data/ui/task-view.ui.h:7
+#: src/planner-application.c:96
 msgid "Move down"
 msgstr "Mou cap a baix"
 
-#: src/app/mg-application.c:117
+#: data/ui/gantt-view.ui.h:8 data/ui/task-view.ui.h:8
+#: src/planner-application.c:89
+msgid "Move up"
+msgstr "Mou cap amunt"
+
+#: data/ui/gantt-view.ui.h:9 data/ui/task-view.ui.h:9
+#: data/ui/resource-view.ui.h:6 src/planner-application.c:61
+#: src/planner-application.c:110
+msgid "Remove"
+msgstr "Esborra"
+
+#: data/ui/gantt-view.ui.h:10 data/ui/task-view.ui.h:10
+#, fuzzy
+msgid "Reset _All Constraints"
+msgstr "Reinicia totes les limitacions"
+
+#: data/ui/gantt-view.ui.h:11 data/ui/task-view.ui.h:11
+#, fuzzy
+msgid "Reset _Constraint"
+msgstr "Reinicia la limitació"
+
+#: data/ui/gantt-view.ui.h:12 data/ui/task-view.ui.h:12
+#: data/ui/resource-view.ui.h:7
+#, fuzzy
+msgid "Select _All"
+msgstr "Selecciona-ho tot"
+
+#: data/ui/gantt-view.ui.h:13 data/ui/task-view.ui.h:13
+#: data/ui/resource-view.ui.h:8
+msgid "Select all tasks"
+msgstr "Selecciona totes les tasques"
+
+#: data/ui/gantt-view.ui.h:14
+msgid "Test"
+msgstr "Prova"
+
+#: data/ui/gantt-view.ui.h:15 data/ui/task-view.ui.h:14
+#, fuzzy
+msgid "Un_link Task"
+msgstr "Desenllaça la tasca"
+
+#: data/ui/gantt-view.ui.h:16 data/ui/task-view.ui.h:15
+#, fuzzy
+msgid "Unin_dent Task"
+msgstr "Desagna la tasca"
+
+#: data/ui/gantt-view.ui.h:17 data/ui/task-view.ui.h:16
+#: src/planner-application.c:82
+msgid "Unindent"
+msgstr "Desagnat"
+
+#: data/ui/gantt-view.ui.h:18 data/ui/task-view.ui.h:17
+#: src/planner-application.c:68
+msgid "Unlink"
+msgstr "Desenllaça"
+
+#: data/ui/gantt-view.ui.h:19
+#, fuzzy
+msgid "Zoom In"
+msgstr "Apropar"
+
+#: data/ui/gantt-view.ui.h:20
+#, fuzzy
+msgid "Zoom Out"
+msgstr "Allunyar"
+
+#: data/ui/gantt-view.ui.h:21
+#, fuzzy
+msgid "Zoom To Fit"
+msgstr "Escala per encabir-ho"
+
+#: data/ui/gantt-view.ui.h:22
+#, fuzzy
+msgid "Zoom To _Fit"
+msgstr "Escala per encabir-ho"
+
+#: data/ui/gantt-view.ui.h:23
+#, fuzzy
+msgid "Zoom _Out"
+msgstr "Allunyar"
+
+#: data/ui/gantt-view.ui.h:24 data/ui/task-view.ui.h:19
+#, fuzzy
+msgid "_Edit Task Properties..."
+msgstr "Edita les propietats de la tasca..."
+
+#: data/ui/gantt-view.ui.h:25
+#, fuzzy
+msgid "_Highlight Critical Tasks"
+msgstr "Destaca les tasques crítiques"
+
+#: data/ui/gantt-view.ui.h:26 data/ui/task-view.ui.h:20
+#, fuzzy
+msgid "_Insert Task"
+msgstr "/_Insereix la tasca"
+
+#: data/ui/gantt-view.ui.h:27 data/ui/task-view.ui.h:21
+#, fuzzy
+msgid "_Remove Task"
+msgstr "/_Esborra la tasca"
+
+#: data/ui/gantt-view.ui.h:28
+#, fuzzy
+msgid "_Zoom In"
+msgstr "Apropar"
+
+#: data/ui/task-view.ui.h:18
+#, fuzzy
+msgid "_Edit Custom Properties..."
+msgstr "Edita les propietats personals..."
+
+#: data/ui/html-plugin.ui.h:1 data/glade/html-output.glade.h:4
+msgid "Export to HTML"
+msgstr ""
+
+#: data/ui/sql-plugin.ui.h:1
+msgid "Open from Database..."
+msgstr ""
+
+#: data/ui/sql-plugin.ui.h:2
+#, fuzzy
+msgid "Save to Database..."
+msgstr "Desa com..."
+
+#: data/ui/resource-view.ui.h:1
+#, fuzzy
+msgid "Edit _Custom Properties..."
+msgstr "Edita les propietats personals..."
+
+#: data/ui/resource-view.ui.h:2
+#, fuzzy
+msgid "Edit _Groups"
+msgstr "Edita els grups"
+
+#: data/ui/resource-view.ui.h:3
+msgid "Groups"
+msgstr "Groups"
+
+#: data/ui/resource-view.ui.h:4
+#, fuzzy
+msgid "In_sert Resources..."
+msgstr "Insereix recursos..."
+
+#: data/ui/resource-view.ui.h:9
+#, fuzzy
+msgid "_Edit Resource Properties..."
+msgstr "Edita les propietats del recurs..."
+
+#: data/ui/resource-view.ui.h:10
+#, fuzzy
+msgid "_Insert Resource"
+msgstr "/_Insereix el recurs"
+
+#: data/ui/resource-view.ui.h:11
+#, fuzzy
+msgid "_Remove Resource"
+msgstr "/_Esborra el recurs"
+
+#: data/glade/add-predecessor.glade.h:1 data/glade/calendar-dialog.glade.h:4
+#: data/glade/html-output.glade.h:2 data/glade/new-property.glade.h:1
+#: data/glade/project-properties.glade.h:1
+#: data/glade/resource-dialog.glade.h:1
+#: data/glade/resource-input-dialog.glade.h:1 data/glade/sql.glade.h:2
+#: data/glade/task-dialog.glade.h:4 data/glade/task-input-dialog.glade.h:1
+msgid "*"
+msgstr "*"
+
+#: data/glade/add-predecessor.glade.h:2
+msgid "Lag: "
+msgstr "Retard: "
+
+#: data/glade/add-predecessor.glade.h:3
+msgid "New predecessor"
+msgstr "Nova tasca predecessora"
+
+#: data/glade/add-predecessor.glade.h:4
+msgid "Predecessor: "
+msgstr "Predecessor: "
+
+#: data/glade/add-predecessor.glade.h:5
+msgid "Relation type: "
+msgstr "Tipus de relació: "
+
+#: data/glade/calendar-dialog.glade.h:1
+msgid ""
+"\n"
+"The selected day type has the following working hours:"
+msgstr ""
+
+#: data/glade/calendar-dialog.glade.h:3 data/glade/html-output.glade.h:1
+#: data/glade/sql.glade.h:1 data/glade/task-dialog.glade.h:1
+msgid "    "
+msgstr ""
+
+#: data/glade/calendar-dialog.glade.h:5
+msgid "-"
+msgstr ""
+
+#: data/glade/calendar-dialog.glade.h:6
+msgid "<b>Calendar:</b>"
+msgstr ""
+
+#: data/glade/calendar-dialog.glade.h:7
+msgid "<b>Day types</b>"
+msgstr ""
+
+#: data/glade/calendar-dialog.glade.h:8
+msgid "<b>Working hours</b>"
+msgstr ""
+
+#: data/glade/calendar-dialog.glade.h:9
+msgid "<b>Working time</b>"
+msgstr ""
+
+#: data/glade/calendar-dialog.glade.h:10
+msgid "Apply"
+msgstr ""
+
+#: data/glade/calendar-dialog.glade.h:11
+msgid "C_opy an existing calendar"
+msgstr ""
+
+#: data/glade/calendar-dialog.glade.h:12
+msgid "C_reate"
+msgstr ""
+
+#: data/glade/calendar-dialog.glade.h:13
+msgid "Calendar Editor"
+msgstr ""
+
+#: data/glade/calendar-dialog.glade.h:14
+msgid "Create an _empty calendar"
+msgstr ""
+
+#: data/glade/calendar-dialog.glade.h:15
+#, fuzzy
+msgid "Custom working time"
+msgstr "Propietats personals"
+
+#: data/glade/calendar-dialog.glade.h:16
+msgid "Day type:"
+msgstr ""
+
+#: data/glade/calendar-dialog.glade.h:17
+#, fuzzy
+msgid "Default Week"
+msgstr "Per defecte"
+
+#: data/glade/calendar-dialog.glade.h:18
+#, fuzzy
+msgid "Default week..."
+msgstr "Per defecte"
+
+#: data/glade/calendar-dialog.glade.h:19
+msgid "Edit Day Types"
+msgstr ""
+
+#: data/glade/calendar-dialog.glade.h:20
+msgid "Edit Working Time"
+msgstr ""
+
+#: data/glade/calendar-dialog.glade.h:21
+msgid "Enter the name of the new day type:"
+msgstr ""
+
+#: data/glade/calendar-dialog.glade.h:22
+#, fuzzy
+msgid "Existing calendars:"
+msgstr "Utilitza el calendari"
+
+#: data/glade/calendar-dialog.glade.h:23
+msgid "From:"
+msgstr ""
+
+#: data/glade/calendar-dialog.glade.h:24
+#, fuzzy
+msgid "MrProject Team"
+msgstr "MrProject"
+
+#: data/glade/calendar-dialog.glade.h:25
+#, fuzzy
+msgid "New Calendar"
+msgstr "Prova el calendari"
+
+#: data/glade/calendar-dialog.glade.h:26
+msgid "New Day Type"
+msgstr ""
+
+#: data/glade/calendar-dialog.glade.h:27
+#, fuzzy
+msgid "Select a calendar"
+msgstr "Utilitza el calendari"
+
+#: data/glade/calendar-dialog.glade.h:28
+msgid ""
+"Select a weekday and the day type to use for that day in the default week "
+"for this calendar.\n"
+msgstr ""
+
+#: data/glade/calendar-dialog.glade.h:30
+msgid "Set day type to:"
+msgstr ""
+
+#: data/glade/calendar-dialog.glade.h:31
+msgid "To:"
+msgstr ""
+
+#: data/glade/calendar-dialog.glade.h:32
+msgid "Use working time from derived calendar"
+msgstr ""
+
+#: data/glade/calendar-dialog.glade.h:33
+#, fuzzy
+msgid "Week day:"
+msgstr "Setmana %d"
+
+#: data/glade/calendar-dialog.glade.h:34
+msgid "Working time..."
+msgstr ""
+
+#: data/glade/calendar-dialog.glade.h:35
+msgid "_Derive from a calendar"
+msgstr ""
+
+#: data/glade/calendar-dialog.glade.h:36
+msgid "_Name of the new calendar:"
+msgstr ""
+
+#: data/glade/calendar-dialog.glade.h:37
+#, fuzzy
+msgid "_New..."
+msgstr "Nou..."
+
+#: data/glade/group-dialog.glade.h:1
+msgid "Group Editor"
+msgstr "Editor de groups"
+
+#: data/glade/html-output.glade.h:3
+msgid "<b>Save to</b>"
+msgstr ""
+
+#: data/glade/html-output.glade.h:5
+msgid "Local file"
+msgstr ""
+
+#: data/glade/html-output.glade.h:6
+#, fuzzy
+msgid "Save to HTML File"
+msgstr "Desa al fitxer"
+
+#: data/glade/html-output.glade.h:7
+msgid "Web location"
+msgstr ""
+
+#: data/glade/new-property.glade.h:2
+msgid "Description: "
+msgstr "Descripció: "
+
+#: data/glade/new-property.glade.h:3
+msgid "Label: "
+msgstr "Etiqueta: "
+
+#: data/glade/new-property.glade.h:4
+msgid "Name: "
+msgstr "Nom: "
+
+#: data/glade/new-property.glade.h:5
+msgid "New Property"
+msgstr "Nova propietat"
+
+#: data/glade/new-property.glade.h:6
+msgid "Type: "
+msgstr "Tipus: "
+
+#: data/glade/project-properties.glade.h:2
+msgid "<b>Project phases</b>"
+msgstr ""
+
+#: data/glade/project-properties.glade.h:3
+#, fuzzy
+msgid "Calendar:"
+msgstr "Prova el calendari"
+
+#: data/glade/project-properties.glade.h:4
+#, fuzzy
+msgid "Custom properties"
+msgstr "Propietats personals"
+
+#: data/glade/project-properties.glade.h:5
+#, fuzzy
+msgid "Edit Project phases"
+msgstr "Edita les propietats del projecte"
+
+#: data/glade/project-properties.glade.h:6
+msgid "Enter the name of the new project phase:"
+msgstr ""
+
+#: data/glade/project-properties.glade.h:7
+#: data/glade/resource-dialog.glade.h:5 data/glade/task-dialog.glade.h:6
+msgid "General"
+msgstr "General"
+
+#: data/glade/project-properties.glade.h:8
+#, fuzzy
+msgid "New Project Phase"
+msgstr "_Projecte nou"
+
+#: data/glade/project-properties.glade.h:9
+msgid "Project _name:"
+msgstr "_Nom del projecte:"
+
+#: data/glade/project-properties.glade.h:10
+msgid "Project _start:"
+msgstr "_Començament del projecte:"
+
+#: data/glade/project-properties.glade.h:11
+#, fuzzy
+msgid "Project phase:"
+msgstr "_Nom del projecte:"
+
+#: data/glade/project-properties.glade.h:12
+msgid "Project properties"
+msgstr "Propietats del projecte"
+
+#: data/glade/project-properties.glade.h:13
+#, fuzzy
+msgid "Select..."
+msgstr "Selecciona-ho tot"
+
+#: data/glade/project-properties.glade.h:14
+msgid "_Manager:"
+msgstr "_Gestor:"
+
+#: data/glade/project-properties.glade.h:15
+msgid "_Organization:"
+msgstr "_Organització:"
+
+#: data/glade/property-dialog.glade.h:1
+msgid "Custom Properties"
+msgstr "Propietats personals"
+
+#: data/glade/resource-dialog.glade.h:2
+#, fuzzy
+msgid "C_ost:"
+msgstr "_Cost"
+
+#: data/glade/resource-dialog.glade.h:3
+#, fuzzy
+msgid "Calendar"
+msgstr "Esborra"
+
+#: data/glade/resource-dialog.glade.h:4
+#, fuzzy
+msgid "Edit calendars..."
+msgstr "/_Edita la tasca..."
+
+#: data/glade/resource-dialog.glade.h:6 data/glade/task-dialog.glade.h:7
+msgid "Insert time stamp"
+msgstr "Insereix la marca horària"
+
+#: data/glade/resource-dialog.glade.h:7 data/glade/task-dialog.glade.h:9
+msgid "Notes"
+msgstr "Notes"
+
+#: data/glade/resource-dialog.glade.h:8
+msgid ""
+"Select the calendar to use for this resource. If you want to use the default "
+"calendar of the project, select 'None'. "
+msgstr ""
+
+#: data/glade/resource-dialog.glade.h:9
+msgid "_Email:"
+msgstr "_Correu electrònic:"
+
+#: data/glade/resource-dialog.glade.h:10
+msgid "_Group:"
+msgstr "_Group:"
+
+#: data/glade/resource-dialog.glade.h:11
+msgid "_Name:"
+msgstr "_Nom:"
+
+#: data/glade/resource-dialog.glade.h:12
+msgid "_Type:"
+msgstr "_Tipus:"
+
+#: data/glade/resource-input-dialog.glade.h:2
+msgid "Email:"
+msgstr "Correu electrònic:"
+
+#: data/glade/resource-input-dialog.glade.h:3
+msgid "Group:"
+msgstr "Grup:"
+
+#: data/glade/resource-input-dialog.glade.h:4
+msgid "Insert resource"
+msgstr "Insereix el recurs"
+
+#: data/glade/resource-input-dialog.glade.h:5
+#: data/glade/task-input-dialog.glade.h:3
+msgid "Name:"
+msgstr "Nom:"
+
+#: data/glade/resource-input-dialog.glade.h:6
+#: data/glade/task-input-dialog.glade.h:5
+msgid "_Insert"
+msgstr "_Insereix"
+
+#: data/glade/sql.glade.h:3
+msgid "<b>Open Database</b>"
+msgstr ""
+
+#: data/glade/sql.glade.h:4
+msgid "Database:"
+msgstr ""
+
+#: data/glade/sql.glade.h:5
+msgid "Open Database"
+msgstr ""
+
+#: data/glade/sql.glade.h:6
+msgid "Password:"
+msgstr ""
+
+#: data/glade/sql.glade.h:7
+#, fuzzy
+msgid "Select a Project"
+msgstr "_Projecte nou"
+
+#: data/glade/sql.glade.h:8
+msgid "Server:"
+msgstr ""
+
+#: data/glade/sql.glade.h:9
+msgid "The database contains the following projects. Select a project to open:"
+msgstr ""
+
+#: data/glade/sql.glade.h:10
+#, fuzzy
+msgid "Username:"
+msgstr "Sense nom"
+
+#: data/glade/task-dialog.glade.h:3
+#, no-c-format
+msgid "%"
+msgstr "%"
+
+#: data/glade/task-dialog.glade.h:5
+#, fuzzy
+msgid "C_omplete:"
+msgstr "_Complet:"
+
+#: data/glade/task-dialog.glade.h:8
+msgid "Na_me:"
+msgstr "No_m"
+
+#: data/glade/task-dialog.glade.h:10
+msgid "Pr_iority:"
+msgstr "Pr_ioritat:"
+
+#: data/glade/task-dialog.glade.h:11
+msgid "Predecessors"
+msgstr "Predecessores"
+
+#: data/glade/task-dialog.glade.h:12 src/planner-resource-view.c:342
+msgid "Resources"
+msgstr "Recursos"
+
+#: data/glade/task-dialog.glade.h:13
+#, fuzzy
+msgid "_Duration:"
+msgstr "_Organització:"
+
+#: data/glade/task-dialog.glade.h:14
+msgid "_Fixed duration"
+msgstr ""
+
+#: data/glade/task-dialog.glade.h:15
+msgid "_Milestone"
+msgstr ""
+
+#: data/glade/task-dialog.glade.h:16
+msgid "_Work:"
+msgstr "_Feina:"
+
+#. day unit variant accepted in input
+#: data/glade/task-dialog.glade.h:17 src/planner-task-tree.c:2120
+msgid "days"
+msgstr "dies"
+
+#: data/glade/task-input-dialog.glade.h:2
+msgid "Insert task"
+msgstr "Insereix una tasca"
+
+#: data/glade/task-input-dialog.glade.h:4
+msgid "Work:"
+msgstr "Feina:"
+
+#: src/planner-application.c:117
 msgid "Edit"
 msgstr "Edita"
 
-#: src/app/mg-main-window.c:585
+#: src/planner-main-window.c:584
 msgid "Open a file"
 msgstr "Obre el fitxer"
 
 #. I18n: Translators, list your names here, newline separated if there
 #. * are more than one, to appear in the about box.
 #.
-#: src/app/mg-main-window.c:995 src/app/mg-main-window.c:1004
+#: src/planner-main-window.c:993 src/planner-main-window.c:1000
 msgid "translator_credits"
 msgstr ""
 
-#: src/app/mg-main-window.c:1001
+#. "Copyright \xc2\xa9 2001-2002 CodeFactory AB",
+#: src/planner-main-window.c:997
 msgid "A Project Management application for the GNOME desktop"
 msgstr "Gestor de projectes per l'entorn d'escriptori GNOME"
 
-#: src/app/mg-main-window.c:1013
-msgid "The MrProject Homepage"
+#: src/planner-main-window.c:1007
+#, fuzzy
+msgid "The Planner Homepage"
 msgstr "Pàgina web de MrProject"
 
-#: src/app/mg-main-window.c:1017
-msgid "Contribute to MrProject"
-msgstr "Col·labora amb MrProject"
-
-#: src/app/mg-main-window.c:1089
+#: src/planner-main-window.c:1083
 msgid "If you don't save, changes made the last minute will be discarded."
 msgstr "Si no deseu, els canvis fets l'últim minut seran descartats."
 
-#: src/app/mg-main-window.c:1094
+#: src/planner-main-window.c:1088
 #, c-format
 msgid "If you don't save, changes made the last %d minutes will be discarded."
 msgstr "Si no deseu, els canvis fets els últims %d minuts seran descartats."
 
-#: src/app/mg-main-window.c:1099
+#: src/planner-main-window.c:1093
 msgid "If you don't save, changes made the last hour will be discarded."
 msgstr "Si no deseu, els canvis fets l'última hora seran descartats."
 
-#: src/app/mg-main-window.c:1104
+#: src/planner-main-window.c:1098
 #, c-format
 msgid "If you don't save, changes made the last %d hours will be discarded."
 msgstr "Si no deseu, els canvis fets les últimes %d hores seran descartats."
 
-#: src/app/mg-main-window.c:1111
+#: src/planner-main-window.c:1105
 #, fuzzy, c-format
 msgid "Save changes to document '%s' before closing?"
 msgstr ""
 "<b>Voleu desar els canvis del document '%s' abans de tancar-lo?</b>\n"
 "%s"
 
-#: src/app/mg-main-window.c:1129
+#: src/planner-main-window.c:1123
 msgid "C_lose without saving"
 msgstr "T_anca sense desar"
 
-#: src/app/mg-main-window.c:1131
+#: src/planner-main-window.c:1125
 msgid "_Cancel"
 msgstr "_Cancel·la"
 
-#: src/app/mg-main-window.c:1238
+#: src/planner-main-window.c:1232
 msgid "Save a file"
 msgstr "Desa al fitxer"
 
-#: src/app/mg-main-window.c:1270
-#: src/plugins/html-output/mg-html-output-plugin.c:146
+#: src/planner-main-window.c:1264 src/planner-html-plugin.c:146
 #, c-format
 msgid "File \"%s\" exists, do you want to overwrite it?"
 msgstr "El fitxer \"%s\" existeix, el voleu sobreescriure?"
 
-#: src/app/mg-main-window.c:1458
+#: src/planner-main-window.c:1452
+#, fuzzy
 msgid ""
-"You have opened a file that was saved with an old version of MrProject.\n"
+"You have opened a file that was saved with an old version of Planner.\n"
 "\n"
 "When loading old files, all tasks will use the constraint 'Must Start On', "
 "since the old version did not fully support automatic rescheduling. To take "
@@ -370,51 +967,51 @@ msgstr ""
 "Després de fer això, podeu esborrar totes les limitacions seleccionant "
 "l'element del menú 'Esborra totes les limitacions' dins del menú 'Edita'."
 
-#: src/app/mg-main-window.c:1495 src/views/gantt/mg-gantt-row.c:656
-#: src/views/gantt/mg-gantt-row.c:658 src/views/gantt/mg-gantt-print.c:513
-#: src/views/gantt/mg-gantt-print.c:515
+#: src/planner-main-window.c:1489 src/planner-gantt-row.c:656
+#: src/planner-gantt-row.c:658 src/planner-gantt-print.c:513
+#: src/planner-gantt-print.c:515
 msgid "Unnamed"
 msgstr "Sense nom"
 
-#: src/app/mg-main.c:61
+#: src/planner-main.c:61
 msgid "Create the initial window with the given geometry."
 msgstr "Crea la finestra inicial amb la geometria donada."
 
-#: src/app/mg-main.c:61
+#: src/planner-main.c:61
 msgid "GEOMETRY"
 msgstr "GEOMETRIA"
 
-#: src/app/mg-main.c:98
+#: src/planner-main.c:98
 msgid "mrproject: --geometry cannot be used with more than one file."
 msgstr "mrproject: --geometry no es pot utilitzar amb més d'un fitxer."
 
-#: src/app/mg-plugin-loader.c:40
+#: src/planner-plugin-loader.c:40
 #, c-format
 msgid "Could not open plugin file '%s'\n"
 msgstr "No s'ha pogut obrir el fitxer '%s' del connector\n"
 
-#: src/app/mg-view-loader.c:40
+#: src/planner-view-loader.c:40
 #, c-format
 msgid "Could not open view plugin file '%s'\n"
 msgstr "No s'ha pogut obrir el fitxer '%s' del connector de visualització\n"
 
-#: src/cell-renderers/mg-cell-renderer-date.c:147
+#: src/planner-cell-renderer-date.c:147
 msgid "Constraint type"
 msgstr "Tipus de limitació"
 
-#: src/cell-renderers/mg-cell-renderer-date.c:154
+#: src/planner-cell-renderer-date.c:154
 msgid "As soon as possible"
 msgstr "Al més aviat possible"
 
-#: src/cell-renderers/mg-cell-renderer-date.c:155
+#: src/planner-cell-renderer-date.c:155
 msgid "Start no earlier than"
 msgstr "No començar abans de"
 
-#: src/cell-renderers/mg-cell-renderer-date.c:156
+#: src/planner-cell-renderer-date.c:156
 msgid "Must start on"
 msgstr "S'ha de començar"
 
-#: src/cell-renderers/mg-cell-renderer-date.c:171
+#: src/planner-cell-renderer-date.c:171
 msgid "Today"
 msgstr "Avui"
 
@@ -422,766 +1019,281 @@ msgstr "Avui"
 #. GTK_SIGNAL_FUNC (m_cell_date_today_clicked),
 #. date);
 #.
-#: src/cell-renderers/mg-cell-renderer-date.c:179
+#: src/planner-cell-renderer-date.c:179
 msgid "Cancel"
 msgstr "Cancel·la"
 
-#: src/cell-renderers/mg-cell-renderer-date.c:187
+#: src/planner-cell-renderer-date.c:187
 msgid "OK"
 msgstr "D'acord"
 
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:1
-msgid ""
-"\n"
-"The selected day type has the following working hours:"
-msgstr ""
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:3
-#: src/dialogs/task-dialog/mg-task-dialog.glade.h:1
-#: src/plugins/html-output/mg-html-output.glade.h:1
-#: src/plugins/sql/mg-sql.glade.h:1
-msgid "    "
-msgstr ""
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:4
-#: src/dialogs/project-dialog/mg-project-properties.glade.h:1
-#: src/dialogs/property-dialog/mg-new-property.glade.h:1
-#: src/dialogs/resource-dialog/mg-resource-dialog.glade.h:1
-#: src/dialogs/resource-input-dialog/mg-resource-input-dialog.glade.h:1
-#: src/dialogs/task-dialog/mg-add-predecessor.glade.h:1
-#: src/dialogs/task-dialog/mg-task-dialog.glade.h:4
-#: src/dialogs/task-input-dialog/mg-task-input-dialog.glade.h:1
-#: src/plugins/html-output/mg-html-output.glade.h:2
-#: src/plugins/sql/mg-sql.glade.h:2
-msgid "*"
-msgstr "*"
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:5
-msgid "-"
-msgstr ""
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:6
-msgid "<b>Calendar:</b>"
-msgstr ""
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:7
-msgid "<b>Day types</b>"
-msgstr ""
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:8
-msgid "<b>Working hours</b>"
-msgstr ""
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:9
-msgid "<b>Working time</b>"
-msgstr ""
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:10
-msgid "Apply"
-msgstr ""
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:11
-msgid "C_opy an existing calendar"
-msgstr ""
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:12
-msgid "C_reate"
-msgstr ""
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:13
-msgid "Calendar Editor"
-msgstr ""
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:14
-msgid "Create an _empty calendar"
-msgstr ""
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:15
-#, fuzzy
-msgid "Custom working time"
-msgstr "Propietats personals"
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:16
-msgid "Day type:"
-msgstr ""
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:17
-#, fuzzy
-msgid "Default Week"
-msgstr "Per defecte"
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:18
-#, fuzzy
-msgid "Default week..."
-msgstr "Per defecte"
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:19
-msgid "Edit Day Types"
-msgstr ""
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:20
-msgid "Edit Working Time"
-msgstr ""
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:21
-msgid "Enter the name of the new day type:"
-msgstr ""
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:22
-#, fuzzy
-msgid "Existing calendars:"
-msgstr "Utilitza el calendari"
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:23
-msgid "From:"
-msgstr ""
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:24
-#, fuzzy
-msgid "MrProject Team"
-msgstr "MrProject"
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:25
-#, fuzzy
-msgid "New Calendar"
-msgstr "Prova el calendari"
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:26
-msgid "New Day Type"
-msgstr ""
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:27
-#, fuzzy
-msgid "Select a calendar"
-msgstr "Utilitza el calendari"
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:28
-msgid ""
-"Select a weekday and the day type to use for that day in the default week "
-"for this calendar.\n"
-msgstr ""
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:30
-msgid "Set day type to:"
-msgstr ""
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:31
-msgid "To:"
-msgstr ""
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:32
-msgid "Use working time from derived calendar"
-msgstr ""
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:33
-#, fuzzy
-msgid "Week day:"
-msgstr "Setmana %d"
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:34
-msgid "Working time..."
-msgstr ""
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:35
-msgid "_Derive from a calendar"
-msgstr ""
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:36
-msgid "_Name of the new calendar:"
-msgstr ""
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:37
-#, fuzzy
-msgid "_New..."
-msgstr "Nou..."
-
-#: src/dialogs/calendar-dialog/mg-default-week-dialog.c:40
+#: src/planner-default-week-dialog.c:40
 #, fuzzy
 msgid "Monday"
 msgstr "Avui"
 
-#: src/dialogs/calendar-dialog/mg-default-week-dialog.c:41
+#: src/planner-default-week-dialog.c:41
 #, fuzzy
 msgid "Tuesday"
 msgstr "Avui"
 
-#: src/dialogs/calendar-dialog/mg-default-week-dialog.c:42
+#: src/planner-default-week-dialog.c:42
 msgid "Wednesday"
 msgstr ""
 
-#: src/dialogs/calendar-dialog/mg-default-week-dialog.c:43
+#: src/planner-default-week-dialog.c:43
 #, fuzzy
 msgid "Thursday"
 msgstr "Avui"
 
-#: src/dialogs/calendar-dialog/mg-default-week-dialog.c:44
+#: src/planner-default-week-dialog.c:44
 #, fuzzy
 msgid "Friday"
 msgstr "dia"
 
-#: src/dialogs/calendar-dialog/mg-default-week-dialog.c:45
+#: src/planner-default-week-dialog.c:45
 msgid "Saturday"
 msgstr ""
 
-#: src/dialogs/calendar-dialog/mg-default-week-dialog.c:46
+#: src/planner-default-week-dialog.c:46
 #, fuzzy
 msgid "Sunday"
 msgstr "dia"
 
-#: src/dialogs/calendar-dialog/mg-default-week-dialog.c:267
+#: src/planner-default-week-dialog.c:266
 msgid "No working time"
 msgstr ""
 
-#: src/dialogs/calendar-dialog/mg-default-week-dialog.c:278
-#: src/dialogs/calendar-dialog/mg-default-week-dialog.c:282
+#: src/planner-default-week-dialog.c:277 src/planner-default-week-dialog.c:281
 msgid "%H:%M"
 msgstr ""
 
-#: src/dialogs/group-dialog/mg-group-dialog.c:387
-#: src/dialogs/property-dialog/mg-property-dialog.c:380
-#: src/dialogs/task-dialog/mg-task-dialog.c:1312
-#: src/dialogs/task-dialog/mg-task-dialog.c:1398
-#: src/views/gantt/mg-task-view.c:227 src/views/gantt/mg-gantt-print.c:190
-#: src/views/resources/mg-resource-view.c:942
+#: src/planner-group-dialog.c:387 src/planner-property-dialog.c:378
+#: src/planner-task-dialog.c:1311 src/planner-task-dialog.c:1397
+#: src/planner-task-view.c:227 src/planner-gantt-print.c:190
+#: src/planner-resource-view.c:966
 msgid "Name"
 msgstr "Nom"
 
-#: src/dialogs/group-dialog/mg-group-dialog.c:393
+#: src/planner-group-dialog.c:393
 msgid "Manager name"
 msgstr "Gestor de noms"
 
-#: src/dialogs/group-dialog/mg-group-dialog.c:399
+#: src/planner-group-dialog.c:399
 msgid "Manager phone"
 msgstr "Gestor de telèfons"
 
-#: src/dialogs/group-dialog/mg-group-dialog.c:405
+#: src/planner-group-dialog.c:405
 msgid "Manager email"
 msgstr "Gestor de correu electrònic"
 
-#: src/dialogs/group-dialog/mg-group-dialog.c:411
+#: src/planner-group-dialog.c:411
 msgid "Default"
 msgstr "Per defecte"
 
-#: src/dialogs/group-dialog/mg-group-dialog.glade.h:1
-msgid "Group Editor"
-msgstr "Editor de groups"
-
-#: src/dialogs/project-dialog/mg-project-properties.c:146
+#: src/planner-project-properties.c:146
 msgid "Select a calendar to use for this project:"
 msgstr ""
 
-#: src/dialogs/project-dialog/mg-project-properties.c:505
+#: src/planner-project-properties.c:505
 #, fuzzy
 msgid "None"
 msgstr "(Cap)"
 
-#: src/dialogs/project-dialog/mg-project-properties.c:606
+#: src/planner-project-properties.c:606
 #, fuzzy
 msgid "Property"
 msgstr "Nova propietat"
 
-#: src/dialogs/project-dialog/mg-project-properties.c:617
-#: src/dialogs/property-dialog/mg-property-dialog.c:433
+#: src/planner-project-properties.c:617 src/planner-property-dialog.c:431
 msgid "Value"
 msgstr "Valor"
 
-#: src/dialogs/project-dialog/mg-project-properties.c:994
-#: src/dialogs/property-dialog/mg-property-dialog.c:231
+#: src/planner-project-properties.c:993 src/planner-property-dialog.c:229
 msgid "The name of the custom property needs to start with a letter."
 msgstr ""
 "El nom de la propietat personalitada necessita començar amb una lletra."
 
-#: src/dialogs/project-dialog/mg-project-properties.c:1066
-#: src/dialogs/property-dialog/mg-property-dialog.c:302
+#: src/planner-project-properties.c:1065 src/planner-property-dialog.c:300
 #, c-format
 msgid "Do you really want to remove the property '%s' from the project?"
 msgstr "Esteu segur d'esborrar la propietat '%s' del projecte?"
 
-#: src/dialogs/project-dialog/mg-project-properties.c:1196
+#: src/planner-project-properties.c:1194
 msgid "Could not create properties dialog."
 msgstr "No s'ha pogut crear el diàleg de propietats"
 
-#: src/dialogs/project-dialog/mg-project-properties.glade.h:2
-msgid "<b>Project phases</b>"
-msgstr ""
-
-#: src/dialogs/project-dialog/mg-project-properties.glade.h:3
-#, fuzzy
-msgid "Calendar:"
-msgstr "Prova el calendari"
-
-#: src/dialogs/project-dialog/mg-project-properties.glade.h:4
-#, fuzzy
-msgid "Custom properties"
-msgstr "Propietats personals"
-
-#: src/dialogs/project-dialog/mg-project-properties.glade.h:5
-#, fuzzy
-msgid "Edit Project phases"
-msgstr "Edita les propietats del projecte"
-
-#: src/dialogs/project-dialog/mg-project-properties.glade.h:6
-msgid "Enter the name of the new project phase:"
-msgstr ""
-
-#: src/dialogs/project-dialog/mg-project-properties.glade.h:7
-#: src/dialogs/resource-dialog/mg-resource-dialog.glade.h:5
-#: src/dialogs/task-dialog/mg-task-dialog.glade.h:6
-msgid "General"
-msgstr "General"
-
-#: src/dialogs/project-dialog/mg-project-properties.glade.h:8
-#, fuzzy
-msgid "New Project Phase"
-msgstr "_Projecte nou"
-
-#: src/dialogs/project-dialog/mg-project-properties.glade.h:9
-msgid "Project _name:"
-msgstr "_Nom del projecte:"
-
-#: src/dialogs/project-dialog/mg-project-properties.glade.h:10
-msgid "Project _start:"
-msgstr "_Començament del projecte:"
-
-#: src/dialogs/project-dialog/mg-project-properties.glade.h:11
-#, fuzzy
-msgid "Project phase:"
-msgstr "_Nom del projecte:"
-
-#: src/dialogs/project-dialog/mg-project-properties.glade.h:12
-msgid "Project properties"
-msgstr "Propietats del projecte"
-
-#: src/dialogs/project-dialog/mg-project-properties.glade.h:13
-#, fuzzy
-msgid "Select..."
-msgstr "Selecciona-ho tot"
-
-#: src/dialogs/project-dialog/mg-project-properties.glade.h:14
-msgid "_Manager:"
-msgstr "_Gestor:"
-
-#: src/dialogs/project-dialog/mg-project-properties.glade.h:15
-msgid "_Organization:"
-msgstr "_Organització:"
-
-#: src/dialogs/property-dialog/mg-new-property.glade.h:2
-msgid "Description: "
-msgstr "Descripció: "
-
-#: src/dialogs/property-dialog/mg-new-property.glade.h:3
-msgid "Label: "
-msgstr "Etiqueta: "
-
-#: src/dialogs/property-dialog/mg-new-property.glade.h:4
-msgid "Name: "
-msgstr "Nom: "
-
-#: src/dialogs/property-dialog/mg-new-property.glade.h:5
-msgid "New Property"
-msgstr "Nova propietat"
-
-#: src/dialogs/property-dialog/mg-new-property.glade.h:6
-msgid "Type: "
-msgstr "Tipus: "
-
-#: src/dialogs/property-dialog/mg-property-dialog.c:399
+#: src/planner-property-dialog.c:397
 msgid "Label"
 msgstr "Etiqueta"
 
-#: src/dialogs/property-dialog/mg-property-dialog.c:413
-#: src/dialogs/task-dialog/mg-task-dialog.c:1430
-#: src/views/resources/mg-resource-view.c:963
+#: src/planner-property-dialog.c:411 src/planner-task-dialog.c:1429
+#: src/planner-resource-view.c:987
 msgid "Type"
 msgstr "Tipus"
 
-#: src/dialogs/property-dialog/mg-property-dialog.glade.h:1
-msgid "Custom Properties"
-msgstr "Propietats personals"
-
-#: src/dialogs/print-dialog/mg-print-dialog.c:49
+#: src/planner-print-dialog.c:49
 #, fuzzy
 msgid "Print Project"
 msgstr "MrProject"
 
-#: src/dialogs/print-dialog/mg-print-dialog.c:56
+#: src/planner-print-dialog.c:56
 #, fuzzy
 msgid "Select views"
 msgstr "Selecciona-ho tot"
 
-#: src/dialogs/print-dialog/mg-print-dialog.c:74
+#: src/planner-print-dialog.c:74
 #, fuzzy
 msgid "Select the views to print:"
 msgstr "Previsualitza la impressió"
 
 #. Put "no group" at the top.
-#: src/dialogs/resource-dialog/mg-resource-dialog.c:248
-#: src/dialogs/resource-input-dialog/mg-resource-input-dialog.c:97
-#: src/views/resources/mg-resource-view.c:1351
+#: src/planner-resource-dialog.c:248 src/planner-resource-input-dialog.c:96
+#: src/planner-resource-view.c:1375
 msgid "(None)"
 msgstr "(Cap)"
 
-#: src/dialogs/resource-dialog/mg-resource-dialog.c:258
-#: src/dialogs/resource-input-dialog/mg-resource-input-dialog.c:107
-#: src/dialogs/task-dialog/mg-task-dialog.c:249
+#: src/planner-resource-dialog.c:258 src/planner-resource-input-dialog.c:106
+#: src/planner-task-dialog.c:249
 msgid "(No name)"
 msgstr "(Sense nom)"
 
 #. i18n: time stamp format for notes in task dialog, see strftime(3) for
 #. * a detailed description.
-#: src/dialogs/resource-dialog/mg-resource-dialog.c:728
-#: src/dialogs/task-dialog/mg-task-dialog.c:679
+#: src/planner-resource-dialog.c:728 src/planner-task-dialog.c:679
 msgid "%a %d %b %Y, %H:%M\n"
 msgstr "%a %d %b %Y, %H:%M\n"
 
-#: src/dialogs/resource-dialog/mg-resource-dialog.c:826
+#: src/planner-resource-dialog.c:826
 msgid "None (use project default)"
 msgstr ""
 
-#: src/dialogs/resource-dialog/mg-resource-dialog.c:953
-#: src/dialogs/resource-dialog/mg-resource-dialog.c:955
+#: src/planner-resource-dialog.c:953 src/planner-resource-dialog.c:955
 msgid "Edit resource properties"
 msgstr "Edita les propietats del recurs"
 
-#: src/dialogs/resource-dialog/mg-resource-dialog.c:1102
-#: src/views/gantt/mg-task-view.c:230 src/views/gantt/mg-gantt-print.c:198
-#: src/views/resources/mg-resource-view.c:629
-#: src/views/resources/mg-resource-view.c:645
-#: src/views/resources/mg-resource-view.c:1163
+#: src/planner-resource-dialog.c:1101 src/planner-task-view.c:230
+#: src/planner-gantt-print.c:198 src/planner-resource-view.c:629
+#: src/planner-resource-view.c:645 src/planner-resource-view.c:1187
 msgid "Work"
 msgstr "Feina"
 
-#: src/dialogs/resource-dialog/mg-resource-dialog.c:1103
-#: src/views/resources/mg-resource-view.c:632
-#: src/views/resources/mg-resource-view.c:646
-#: src/views/resources/mg-resource-view.c:1164
+#: src/planner-resource-dialog.c:1102 src/planner-resource-view.c:632
+#: src/planner-resource-view.c:646 src/planner-resource-view.c:1188
 msgid "Material"
 msgstr "Material"
 
-#: src/dialogs/resource-dialog/mg-resource-dialog.glade.h:2
-#, fuzzy
-msgid "C_ost:"
-msgstr "_Cost"
-
-#: src/dialogs/resource-dialog/mg-resource-dialog.glade.h:3
-#, fuzzy
-msgid "Calendar"
-msgstr "Esborra"
-
-#: src/dialogs/resource-dialog/mg-resource-dialog.glade.h:4
-#, fuzzy
-msgid "Edit calendars..."
-msgstr "/_Edita la tasca..."
-
-#: src/dialogs/resource-dialog/mg-resource-dialog.glade.h:6
-#: src/dialogs/task-dialog/mg-task-dialog.glade.h:7
-msgid "Insert time stamp"
-msgstr "Insereix la marca horària"
-
-#: src/dialogs/resource-dialog/mg-resource-dialog.glade.h:7
-#: src/dialogs/task-dialog/mg-task-dialog.glade.h:9
-msgid "Notes"
-msgstr "Notes"
-
-#: src/dialogs/resource-dialog/mg-resource-dialog.glade.h:8
-msgid ""
-"Select the calendar to use for this resource. If you want to use the default "
-"calendar of the project, select 'None'. "
-msgstr ""
-
-#: src/dialogs/resource-dialog/mg-resource-dialog.glade.h:9
-msgid "_Email:"
-msgstr "_Correu electrònic:"
-
-#: src/dialogs/resource-dialog/mg-resource-dialog.glade.h:10
-msgid "_Group:"
-msgstr "_Group:"
-
-#: src/dialogs/resource-dialog/mg-resource-dialog.glade.h:11
-msgid "_Name:"
-msgstr "_Nom:"
-
-#: src/dialogs/resource-dialog/mg-resource-dialog.glade.h:12
-msgid "_Type:"
-msgstr "_Tipus:"
-
-#: src/dialogs/resource-input-dialog/mg-resource-input-dialog.glade.h:2
-msgid "Email:"
-msgstr "Correu electrònic:"
-
-#: src/dialogs/resource-input-dialog/mg-resource-input-dialog.glade.h:3
-msgid "Group:"
-msgstr "Grup:"
-
-#: src/dialogs/resource-input-dialog/mg-resource-input-dialog.glade.h:4
-msgid "Insert resource"
-msgstr "Insereix el recurs"
-
-#: src/dialogs/resource-input-dialog/mg-resource-input-dialog.glade.h:5
-#: src/dialogs/task-input-dialog/mg-task-input-dialog.glade.h:3
-msgid "Name:"
-msgstr "Nom:"
-
-#: src/dialogs/resource-input-dialog/mg-resource-input-dialog.glade.h:6
-#: src/dialogs/task-input-dialog/mg-task-input-dialog.glade.h:5
-msgid "_Insert"
-msgstr "_Insereix"
-
-#: src/dialogs/task-dialog/mg-add-predecessor.glade.h:2
-msgid "Lag: "
-msgstr "Retard: "
-
-#: src/dialogs/task-dialog/mg-add-predecessor.glade.h:3
-msgid "New predecessor"
-msgstr "Nova tasca predecessora"
-
-#: src/dialogs/task-dialog/mg-add-predecessor.glade.h:4
-msgid "Predecessor: "
-msgstr "Predecessor: "
-
-#: src/dialogs/task-dialog/mg-add-predecessor.glade.h:5
-msgid "Relation type: "
-msgstr "Tipus de relació: "
-
-#: src/dialogs/task-dialog/mg-predecessor-model.c:191
-#: src/dialogs/task-dialog/mg-task-dialog.c:1040
+#: src/planner-predecessor-model.c:191 src/planner-task-dialog.c:1039
 msgid "FS"
 msgstr "AS"
 
-#: src/dialogs/task-dialog/mg-predecessor-model.c:194
-#: src/dialogs/task-dialog/mg-task-dialog.c:1041
+#: src/planner-predecessor-model.c:194 src/planner-task-dialog.c:1040
 msgid "FF"
 msgstr "AA"
 
-#: src/dialogs/task-dialog/mg-predecessor-model.c:197
-#: src/dialogs/task-dialog/mg-task-dialog.c:1042
+#: src/planner-predecessor-model.c:197 src/planner-task-dialog.c:1041
 msgid "SS"
 msgstr "CC"
 
-#: src/dialogs/task-dialog/mg-predecessor-model.c:200
-#: src/dialogs/task-dialog/mg-task-dialog.c:1043
+#: src/planner-predecessor-model.c:200 src/planner-task-dialog.c:1042
 msgid "SF"
 msgstr "CA"
 
-#: src/dialogs/task-dialog/mg-task-dialog.c:746
+#: src/planner-task-dialog.c:745
 msgid "Finish to start (FS)"
 msgstr "Acaba la tasca per començar (AC)"
 
-#: src/dialogs/task-dialog/mg-task-dialog.c:747
+#: src/planner-task-dialog.c:746
 msgid "Finish to finish (FF)"
 msgstr "Acaba la tasca per acabar (AA)"
 
-#: src/dialogs/task-dialog/mg-task-dialog.c:748
+#: src/planner-task-dialog.c:747
 msgid "Start to start (SS)"
 msgstr "Comença la tasca per començar (CC)"
 
-#: src/dialogs/task-dialog/mg-task-dialog.c:749
+#: src/planner-task-dialog.c:748
 msgid "Start to finish (SF)"
 msgstr "Comença la tasca per acabar (CA)"
 
-#: src/dialogs/task-dialog/mg-task-dialog.c:799
+#: src/planner-task-dialog.c:798
 msgid "Can't add new predecessor. No task selected!"
 msgstr ""
 "No s'ha pogut afegir cap predecessora nova. No s'ha seleccionat cap tasca!"
 
-#: src/dialogs/task-dialog/mg-task-dialog.c:1331
+#: src/planner-task-dialog.c:1330
 msgid "Assigned"
 msgstr "Assignat"
 
-#: src/dialogs/task-dialog/mg-task-dialog.c:1348
+#: src/planner-task-dialog.c:1347
 #, fuzzy
 msgid "Units"
 msgstr "Desenllaça la tasca"
 
-#: src/dialogs/task-dialog/mg-task-dialog.c:1452
+#: src/planner-task-dialog.c:1451
 msgid "Lag"
 msgstr "Retard"
 
-#: src/dialogs/task-dialog/mg-task-dialog.c:1585
-#: src/dialogs/task-dialog/mg-task-dialog.c:1587
+#: src/planner-task-dialog.c:1584 src/planner-task-dialog.c:1586
 msgid "Edit task properties"
 msgstr "Edita les propietats de la tasca"
 
-#: src/dialogs/task-dialog/mg-task-dialog.glade.h:3
-#, no-c-format
-msgid "%"
-msgstr "%"
-
-#: src/dialogs/task-dialog/mg-task-dialog.glade.h:5
-#, fuzzy
-msgid "C_omplete:"
-msgstr "_Complet:"
-
-#: src/dialogs/task-dialog/mg-task-dialog.glade.h:8
-msgid "Na_me:"
-msgstr "No_m"
-
-#: src/dialogs/task-dialog/mg-task-dialog.glade.h:10
-msgid "Pr_iority:"
-msgstr "Pr_ioritat:"
-
-#: src/dialogs/task-dialog/mg-task-dialog.glade.h:11
-msgid "Predecessors"
-msgstr "Predecessores"
-
-#: src/dialogs/task-dialog/mg-task-dialog.glade.h:12
-#: src/views/resources/mg-resource-view.c:342
-msgid "Resources"
-msgstr "Recursos"
-
-#: src/dialogs/task-dialog/mg-task-dialog.glade.h:13
-#, fuzzy
-msgid "_Duration:"
-msgstr "_Organització:"
-
-#: src/dialogs/task-dialog/mg-task-dialog.glade.h:14
-msgid "_Fixed duration"
-msgstr ""
-
-#: src/dialogs/task-dialog/mg-task-dialog.glade.h:15
-msgid "_Milestone"
-msgstr ""
-
-#: src/dialogs/task-dialog/mg-task-dialog.glade.h:16
-msgid "_Work:"
-msgstr "_Feina:"
-
-#. day unit variant accepted in input
-#: src/dialogs/task-dialog/mg-task-dialog.glade.h:17
-#: src/views/gantt/mg-task-tree.c:2121
-msgid "days"
-msgstr "dies"
-
-#: src/dialogs/task-input-dialog/mg-task-input-dialog.glade.h:2
-msgid "Insert task"
-msgstr "Insereix una tasca"
-
-#: src/dialogs/task-input-dialog/mg-task-input-dialog.glade.h:4
-msgid "Work:"
-msgstr "Feina:"
-
-#: src/plugins/html-output/GNOME_MrProject_HtmlOutputPlugin.ui.h:1
-#: src/plugins/html-output/mg-html-output.glade.h:4
-msgid "Export to HTML"
-msgstr ""
-
-#: src/plugins/html-output/mg-html-output.glade.h:3
-msgid "<b>Save to</b>"
-msgstr ""
-
-#: src/plugins/html-output/mg-html-output.glade.h:5
-msgid "Local file"
-msgstr ""
-
-#: src/plugins/html-output/mg-html-output.glade.h:6
-#, fuzzy
-msgid "Save to HTML File"
-msgstr "Desa al fitxer"
-
-#: src/plugins/html-output/mg-html-output.glade.h:7
-msgid "Web location"
-msgstr ""
-
-#: src/plugins/html-output/mg-html-output-plugin.c:133
+#: src/planner-html-plugin.c:133
 #, c-format
 msgid ""
 "\"%s\" is a directory.\n"
 "Enter a filename and try again."
 msgstr ""
 
-#: src/plugins/sql/GNOME_MrProject_SQLPlugin.ui.h:1
-msgid "Open from Database..."
-msgstr ""
-
-#: src/plugins/sql/GNOME_MrProject_SQLPlugin.ui.h:2
-#, fuzzy
-msgid "Save to Database..."
-msgstr "Desa com..."
-
-#: src/plugins/sql/mg-sql.glade.h:3
-msgid "<b>Open Database</b>"
-msgstr ""
-
-#: src/plugins/sql/mg-sql.glade.h:4
-msgid "Database:"
-msgstr ""
-
-#: src/plugins/sql/mg-sql.glade.h:5
-msgid "Open Database"
-msgstr ""
-
-#: src/plugins/sql/mg-sql.glade.h:6
-msgid "Password:"
-msgstr ""
-
-#: src/plugins/sql/mg-sql.glade.h:7
-#, fuzzy
-msgid "Select a Project"
-msgstr "_Projecte nou"
-
-#: src/plugins/sql/mg-sql.glade.h:8
-msgid "Server:"
-msgstr ""
-
-#: src/plugins/sql/mg-sql.glade.h:9
-msgid "The database contains the following projects. Select a project to open:"
-msgstr ""
-
-#: src/plugins/sql/mg-sql.glade.h:10
-#, fuzzy
-msgid "Username:"
-msgstr "Sense nom"
-
 #. Give up.
-#: src/plugins/sql/mg-sql-plugin.c:127
+#: src/planner-sql-plugin.c:127
 msgid "Invalid Unicode"
 msgstr ""
 
-#: src/plugins/sql/mg-sql-plugin.c:269
+#: src/planner-sql-plugin.c:269
 #, c-format
 msgid ""
 "Connection to database '%s' failed:\n"
 "%s"
 msgstr ""
 
-#: src/plugins/sql/mg-sql-plugin.c:318
+#: src/planner-sql-plugin.c:318
 #, fuzzy
 msgid "Project"
 msgstr "MrProject"
 
-#: src/plugins/sql/mg-sql-plugin.c:466
+#: src/planner-sql-plugin.c:466
 msgid "Open from Database"
 msgstr ""
 
-#: src/plugins/sql/mg-sql-plugin.c:573
+#: src/planner-sql-plugin.c:573
 msgid "Save to Database"
 msgstr ""
 
-#: src/util/mg-format.c:141
+#: src/planner-format.c:141
 #, c-format
 msgid "%dd %dh"
 msgstr "%dd %dh"
 
-#: src/util/mg-format.c:144
+#: src/planner-format.c:144
 #, c-format
 msgid "%dd"
 msgstr "%dd"
 
-#: src/util/mg-format.c:147
+#: src/planner-format.c:147
 #, c-format
 msgid "%dh"
 msgstr "%dh"
 
-#: src/util/mg-format.c:171
+#: src/planner-format.c:171
 #, c-format
 msgid "%s days"
 msgstr "%s dies"
 
-#: src/util/mg-format.c:174
+#: src/planner-format.c:174
 msgid "0 days"
 msgstr "0 dies"
 
-#: src/util/mg-format.c:177
+#: src/planner-format.c:177
 #, c-format
 msgid "%s day"
 msgstr "%s dies"
@@ -1190,169 +1302,46 @@ msgstr "%s dies"
 #. * e.g. in the date cells in the task tree. See
 #. * libmrproject/docs/DateFormat.
 #.
-#: src/util/mg-format.c:197
+#: src/planner-format.c:197
 msgid "%b %e"
 msgstr "%b %e"
 
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:1
-#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:1
-#, fuzzy
-msgid "I_ndent Task"
-msgstr "Sagna la tasca"
-
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:2
-#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:2
-#, fuzzy
-msgid "In_sert Tasks..."
-msgstr "Insereix les tasques..."
-
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:5
-#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:5
-#, fuzzy
-msgid "Move Task Do_wn"
-msgstr "Mou cap a baix"
-
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:6
-#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:6
-#, fuzzy
-msgid "Move Task _Up"
-msgstr "Mou cap amunt"
-
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:10
-#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:10
-#, fuzzy
-msgid "Reset _All Constraints"
-msgstr "Reinicia totes les limitacions"
-
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:11
-#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:11
-#, fuzzy
-msgid "Reset _Constraint"
-msgstr "Reinicia la limitació"
-
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:12
-#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:12
-#: src/views/resources/GNOME_MrProject_ResourcesView.ui.h:7
-#, fuzzy
-msgid "Select _All"
-msgstr "Selecciona-ho tot"
-
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:13
-#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:13
-#: src/views/resources/GNOME_MrProject_ResourcesView.ui.h:8
-msgid "Select all tasks"
-msgstr "Selecciona totes les tasques"
-
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:14
-msgid "Test"
-msgstr "Prova"
-
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:15
-#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:14
-#, fuzzy
-msgid "Un_link Task"
-msgstr "Desenllaça la tasca"
-
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:16
-#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:15
-#, fuzzy
-msgid "Unin_dent Task"
-msgstr "Desagna la tasca"
-
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:19
-#, fuzzy
-msgid "Zoom In"
-msgstr "Apropar"
-
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:20
-#, fuzzy
-msgid "Zoom Out"
-msgstr "Allunyar"
-
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:21
-#, fuzzy
-msgid "Zoom To Fit"
-msgstr "Escala per encabir-ho"
-
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:22
-#, fuzzy
-msgid "Zoom To _Fit"
-msgstr "Escala per encabir-ho"
-
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:23
-#, fuzzy
-msgid "Zoom _Out"
-msgstr "Allunyar"
-
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:24
-#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:19
-#, fuzzy
-msgid "_Edit Task Properties..."
-msgstr "Edita les propietats de la tasca..."
-
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:25
-#, fuzzy
-msgid "_Highlight Critical Tasks"
-msgstr "Destaca les tasques crítiques"
-
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:26
-#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:20
-#, fuzzy
-msgid "_Insert Task"
-msgstr "/_Insereix la tasca"
-
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:27
-#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:21
-#, fuzzy
-msgid "_Remove Task"
-msgstr "/_Esborra la tasca"
-
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:28
-#, fuzzy
-msgid "_Zoom In"
-msgstr "Apropar"
-
-#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:18
-#, fuzzy
-msgid "_Edit Custom Properties..."
-msgstr "Edita les propietats personals..."
-
 #. i18n: project start, the date format is described in
 #. * libmrproject/docs/DateFormat.
-#: src/views/gantt/mg-gantt-background.c:579
+#: src/planner-gantt-background.c:579
 #, fuzzy
 msgid "%Y %b %d"
 msgstr "%b %e"
 
-#: src/views/gantt/mg-gantt-background.c:581
+#: src/planner-gantt-background.c:581
 #, fuzzy
 msgid "Project start"
 msgstr "_Començament del projecte:"
 
-#: src/views/gantt/mg-gantt-row.c:1841 src/views/gantt/mg-gantt-row.c:1844
+#: src/planner-gantt-row.c:1841 src/planner-gantt-row.c:1844
 msgid "No name"
 msgstr "Sense nom"
 
-#: src/views/gantt/mg-gantt-row.c:1847
+#: src/planner-gantt-row.c:1847
 #, c-format
 msgid "Make task '%s' a predecessor of '%s'"
 msgstr "Crea la tasca '%s' predecessora de '%s'"
 
-#: src/views/gantt/mg-gantt-row.c:1905
+#: src/planner-gantt-row.c:1905
 #, c-format
 msgid "Change work to %s"
 msgstr "Canvia la feina a %s"
 
-#: src/views/gantt/mg-gantt-view.c:274
+#: src/planner-gantt-view.c:273
 msgid "Gantt Chart"
 msgstr "Gràfic de Gantt"
 
-#: src/views/gantt/mg-gantt-view.c:282
+#: src/planner-gantt-view.c:281
 #, fuzzy
 msgid "_Gantt Chart"
 msgstr "Gràfic de Gantt"
 
-#: src/views/gantt/mg-gantt-view.c:471
+#: src/planner-gantt-view.c:470
 msgid ""
 "\n"
 "Name"
@@ -1361,7 +1350,7 @@ msgstr ""
 "Nom"
 
 #. COL_START,    _("\nStart"),
-#: src/views/gantt/mg-gantt-view.c:473
+#: src/planner-gantt-view.c:472
 msgid ""
 "\n"
 "Work"
@@ -1370,242 +1359,206 @@ msgstr ""
 "Feina"
 
 #. i18n: Short "Week", preferably 2 letters.
-#: src/views/gantt/mg-scale-utils.c:325
+#: src/planner-scale-utils.c:325
 #, c-format
 msgid "Wk %d"
 msgstr "Wk %d"
 
-#: src/views/gantt/mg-scale-utils.c:329
+#: src/planner-scale-utils.c:329
 #, c-format
 msgid "Week %d"
 msgstr "Setmana %d"
 
 #. i18n: Week, year.
-#: src/views/gantt/mg-scale-utils.c:334
+#: src/planner-scale-utils.c:334
 #, c-format
 msgid "Week %d, %d"
 msgstr "Setmana %d, %d"
 
 #. i18n: Short "Quarter", preferrably 1 letter.
-#: src/views/gantt/mg-scale-utils.c:365
+#: src/planner-scale-utils.c:365
 #, c-format
 msgid "Q%d"
 msgstr "Q%d"
 
 #. i18n: Short "Quarter", preferrably 2-3 letters.
-#: src/views/gantt/mg-scale-utils.c:369
+#: src/planner-scale-utils.c:369
 #, c-format
 msgid "Qtr %d"
 msgstr "Qtr %d"
 
 #. i18n: Year, short "Quarter", preferrably 2-3 letters.
-#: src/views/gantt/mg-scale-utils.c:373
+#: src/planner-scale-utils.c:373
 #, c-format
 msgid "%d, Qtr %d"
 msgstr "%d, Qtr %d"
 
 #. i18n: Short "Half year", prefferably 1 letter.
-#: src/views/gantt/mg-scale-utils.c:386
+#: src/planner-scale-utils.c:386
 #, c-format
 msgid "H%d"
 msgstr "H%d"
 
 #. i18n: Year, short "Half year", prefferably 1 letter.
-#: src/views/gantt/mg-scale-utils.c:391
+#: src/planner-scale-utils.c:391
 #, c-format
 msgid "%04d, H%d"
 msgstr "%04d, H%d"
 
-#: src/views/gantt/mg-task-tree.c:185
+#: src/planner-task-tree.c:184
 msgid "/_Insert task"
 msgstr "/_Insereix la tasca"
 
-#: src/views/gantt/mg-task-tree.c:186
+#: src/planner-task-tree.c:185
 msgid "/_Insert subtask"
 msgstr "/_Insereix la subtasca"
 
-#: src/views/gantt/mg-task-tree.c:187
+#: src/planner-task-tree.c:186
 msgid "/_Remove task"
 msgstr "/_Esborra la tasca"
 
-#: src/views/gantt/mg-task-tree.c:189
+#: src/planner-task-tree.c:188
 msgid "/_Unlink task"
 msgstr "/_Desenllaça la tasca"
 
-#: src/views/gantt/mg-task-tree.c:191
+#: src/planner-task-tree.c:190
 msgid "/_Edit task..."
 msgstr "/_Edita la tasca..."
 
-#: src/views/gantt/mg-task-tree.c:2113
+#: src/planner-task-tree.c:2112
 msgid "mon"
 msgstr "mes"
 
 #. month unit variant accepted in input
-#: src/views/gantt/mg-task-tree.c:2114
+#: src/planner-task-tree.c:2113
 msgid "month"
 msgstr "mes"
 
 #. month unit variant accepted in input
-#: src/views/gantt/mg-task-tree.c:2115
+#: src/planner-task-tree.c:2114
 msgid "months"
 msgstr "mesos"
 
 #. month unit variant accepted in input
-#: src/views/gantt/mg-task-tree.c:2116
+#: src/planner-task-tree.c:2115
 msgid "w"
 msgstr "s"
 
 #. week unit variant accepted in input
-#: src/views/gantt/mg-task-tree.c:2117
+#: src/planner-task-tree.c:2116
 msgid "week"
 msgstr "setmana"
 
 #. week unit variant accepted in input
-#: src/views/gantt/mg-task-tree.c:2118
+#: src/planner-task-tree.c:2117
 msgid "weeks"
 msgstr "setmanes"
 
 #. week unit variant accepted in input
-#: src/views/gantt/mg-task-tree.c:2119
+#: src/planner-task-tree.c:2118
 msgid "d"
 msgstr "d"
 
 #. day unit variant accepted in input
-#: src/views/gantt/mg-task-tree.c:2120
+#: src/planner-task-tree.c:2119
 msgid "day"
 msgstr "dia"
 
 #. day unit variant accepted in input
-#: src/views/gantt/mg-task-tree.c:2122
+#: src/planner-task-tree.c:2121
 msgid "h"
 msgstr "h"
 
 #. hour unit variant accepted in input
-#: src/views/gantt/mg-task-tree.c:2123
+#: src/planner-task-tree.c:2122
 msgid "hour"
 msgstr "hora"
 
 #. hour unit variant accepted in input
-#: src/views/gantt/mg-task-tree.c:2124
+#: src/planner-task-tree.c:2123
 msgid "hours"
 msgstr "hores"
 
 #. hour unit variant accepted in input
-#: src/views/gantt/mg-task-tree.c:2125
+#: src/planner-task-tree.c:2124
 msgid "min"
 msgstr "min"
 
 #. minute unit variant accepted in input
-#: src/views/gantt/mg-task-tree.c:2126
+#: src/planner-task-tree.c:2125
 msgid "minute"
 msgstr "minut"
 
 #. minute unit variant accepted in input
-#: src/views/gantt/mg-task-tree.c:2127
+#: src/planner-task-tree.c:2126
 msgid "minutes"
 msgstr "minuts"
 
-#: src/views/gantt/mg-task-view.c:173
+#: src/planner-task-view.c:173
 msgid "Tasks"
 msgstr "Tasques"
 
-#: src/views/gantt/mg-task-view.c:181
+#: src/planner-task-view.c:181
 #, fuzzy
 msgid "_Tasks"
 msgstr "Tasques"
 
-#: src/views/gantt/mg-task-view.c:228
+#: src/planner-task-view.c:228
 msgid "Start"
 msgstr "Comença"
 
-#: src/views/gantt/mg-task-view.c:229
+#: src/planner-task-view.c:229
 msgid "Finish"
 msgstr "Acaba"
 
-#: src/views/gantt/mg-task-view.c:231
+#: src/planner-task-view.c:231
 msgid "Slack"
 msgstr ""
 
-#: src/views/gantt/mg-task-view.c:232
+#: src/planner-task-view.c:232
 msgid "Cost"
 msgstr "Cost"
 
-#: src/views/gantt/mg-task-view.c:438
+#: src/planner-task-view.c:438
 #, fuzzy
 msgid "Edit custom task properties"
 msgstr "Edita les propietats de la tasca"
 
-#: src/views/resources/GNOME_MrProject_ResourcesView.ui.h:1
-#, fuzzy
-msgid "Edit _Custom Properties..."
-msgstr "Edita les propietats personals..."
-
-#: src/views/resources/GNOME_MrProject_ResourcesView.ui.h:2
-#, fuzzy
-msgid "Edit _Groups"
-msgstr "Edita els grups"
-
-#: src/views/resources/GNOME_MrProject_ResourcesView.ui.h:3
-msgid "Groups"
-msgstr "Groups"
-
-#: src/views/resources/GNOME_MrProject_ResourcesView.ui.h:4
-#, fuzzy
-msgid "In_sert Resources..."
-msgstr "Insereix recursos..."
-
-#: src/views/resources/GNOME_MrProject_ResourcesView.ui.h:9
-#, fuzzy
-msgid "_Edit Resource Properties..."
-msgstr "Edita les propietats del recurs..."
-
-#: src/views/resources/GNOME_MrProject_ResourcesView.ui.h:10
-#, fuzzy
-msgid "_Insert Resource"
-msgstr "/_Insereix el recurs"
-
-#: src/views/resources/GNOME_MrProject_ResourcesView.ui.h:11
-#, fuzzy
-msgid "_Remove Resource"
-msgstr "/_Esborra el recurs"
-
-#: src/views/resources/mg-resource-view.c:248
+#: src/planner-resource-view.c:248
 msgid "/_Insert resource"
 msgstr "/_Insereix el recurs"
 
-#: src/views/resources/mg-resource-view.c:249
+#: src/planner-resource-view.c:249
 msgid "/_Remove resource"
 msgstr "/_Esborra el recurs"
 
-#: src/views/resources/mg-resource-view.c:250
+#: src/planner-resource-view.c:250
 msgid "/_Edit resource..."
 msgstr "/_Edita el recurs..."
 
-#: src/views/resources/mg-resource-view.c:350
+#: src/planner-resource-view.c:350
 #, fuzzy
 msgid "_Resources"
 msgstr "Recursos"
 
-#: src/views/resources/mg-resource-view.c:825
+#: src/planner-resource-view.c:849
 #, fuzzy
 msgid "Edit custom resource properties"
 msgstr "Edita les propietats del recurs"
 
-#: src/views/resources/mg-resource-view.c:987
+#: src/planner-resource-view.c:1011
 msgid "Group"
 msgstr "Grup"
 
-#: src/views/resources/mg-resource-view.c:1016
+#: src/planner-resource-view.c:1040
 msgid "Email"
 msgstr "Correu electrònic"
 
-#: mrproject.desktop.in.h:1
-msgid "MrProject Project Management Tool"
-msgstr "Gestor de Projectes MrProject"
+#~ msgid "Contribute to MrProject"
+#~ msgstr "Col·labora amb MrProject"
 
-#: mrproject.desktop.in.h:2
-msgid "Project Management"
-msgstr "Gestor de Projectes"
+#~ msgid "MrProject Project Management Tool"
+#~ msgstr "Gestor de Projectes MrProject"
 
 #~ msgid "About"
 #~ msgstr "Quant a"

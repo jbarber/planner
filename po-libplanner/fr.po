@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: MrProject Library 0.10pre\n"
-"POT-Creation-Date: 2003-09-11 12:36+0200\n"
+"POT-Creation-Date: 2003-12-01 20:39+0100\n"
 "PO-Revision-Date: 2003-06-09 14:06+0200\n"
 "Last-Translator: Christophe Merlet (RedFox) <redfox@redfoxcenter.org>\n"
 "Language-Team: GNOME French Team <gnomefr@traduc.org>\n"
@@ -16,124 +16,124 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Report-Msgid-Bugs-To: \n"
 
-#: mrproject/mrp-project.c:441
+#: libplanner/mrp-project.c:441
 msgid "Default"
 msgstr "Défaut"
 
-#: mrproject/mrp-project.c:749
+#: libplanner/mrp-project.c:749
 #, c-format
 msgid "Couldn't find a suitable file module for loading '%s'"
 msgstr "Impossible de trouver un module adéquat pour charger « %s »"
 
-#: mrproject/mrp-project.c:770 mrproject/mrp-project.c:1034
+#: libplanner/mrp-project.c:770 libplanner/mrp-project.c:1034
 msgid "No support for SQL storage built into this version of MrProject."
 msgstr ""
 "Aucun support de stockage SQL construit dans cette version de MrProject."
 
-#: mrproject/mrp-project.c:807
+#: libplanner/mrp-project.c:807
 msgid "Invalid URI."
 msgstr "URI non valide"
 
-#: mrproject/mrp-project.c:928
+#: libplanner/mrp-project.c:928
 #, c-format
 msgid "Unable to find file writer identified by '%s'"
 msgstr "Incapable de trouver le rédacteur du fichier identifié par « %s »"
 
-#: mrproject/mrp-project.c:991
+#: libplanner/mrp-project.c:991
 msgid "Couldn't find a suitable file module for loading project"
 msgstr "Ne peut trouver un fichier de module adéquat pour charger le projet"
 
-#: mrproject/mrp-property.c:365
+#: libplanner/mrp-property.c:365
 msgid "Text"
 msgstr "Texte"
 
-#: mrproject/mrp-property.c:367
+#: libplanner/mrp-property.c:367
 msgid "String list"
 msgstr "Liste de chaînes"
 
-#: mrproject/mrp-property.c:369
+#: libplanner/mrp-property.c:369
 msgid "Integer number"
 msgstr "Nombre entier"
 
-#: mrproject/mrp-property.c:371
+#: libplanner/mrp-property.c:371
 msgid "Floating-point number"
 msgstr "Nombre à virgule flottante"
 
-#: mrproject/mrp-property.c:373
+#: libplanner/mrp-property.c:373
 msgid "Date"
 msgstr "Date"
 
-#: mrproject/mrp-property.c:375
+#: libplanner/mrp-property.c:375
 msgid "Duration"
 msgstr "Durée"
 
-#: mrproject/mrp-property.c:377
+#: libplanner/mrp-property.c:377
 msgid "Cost"
 msgstr "Coût"
 
-#: mrproject/mrp-property.c:380
+#: libplanner/mrp-property.c:380
 msgid "None"
 msgstr "(Aucune)"
 
-#: mrproject/mrp-task-manager.c:1769
+#: libplanner/mrp-task-manager.c:1769
 msgid "Can not add a predecessor relation between a task and its ancestor."
 msgstr ""
 "Impossible d'ajouter une relation de prédécesseur entre une tâche et son "
 "ancêtre."
 
-#: mrproject/mrp-task-manager.c:1778 mrproject/mrp-task-manager.c:1786
+#: libplanner/mrp-task-manager.c:1778 libplanner/mrp-task-manager.c:1786
 msgid "Can not add a predecessor, because it would result in a loop."
 msgstr ""
 "Impossible d'ajouter un prédécesseur, car cela engendrerait une boucle."
 
-#: mrproject/mrp-task-manager.c:1821
+#: libplanner/mrp-task-manager.c:1821
 msgid "Can not move the task, since it would result in a loop."
 msgstr "Impossible de déplacer la tâche, car cela engendrerait une boucle."
 
-#: mrproject/mrp-task.c:1011
+#: libplanner/mrp-task.c:1016
 msgid ""
 "Could not add a predecessor relation, because the tasks are already related."
 msgstr ""
 "Ne peut ajouter une relation de prédécesseur, car les tâches sont déjà liées."
 
-#: mrproject/mrp-day.c:54
+#: libplanner/mrp-day.c:54
 msgid "Working"
 msgstr "Travaillé"
 
-#: mrproject/mrp-day.c:55
+#: libplanner/mrp-day.c:55
 msgid "A default working day"
 msgstr "Un jour travaillé normal"
 
-#: mrproject/mrp-day.c:57
+#: libplanner/mrp-day.c:57
 msgid "Nonworking"
 msgstr "Chômé"
 
-#: mrproject/mrp-day.c:58
+#: libplanner/mrp-day.c:58
 msgid "A default non working day"
 msgstr "Un jour chômé normal"
 
-#: mrproject/mrp-day.c:60
+#: libplanner/mrp-day.c:60
 msgid "Use base"
 msgstr "Utiliser la base"
 
-#: mrproject/mrp-day.c:61
+#: libplanner/mrp-day.c:61
 msgid "Use day from base calendar"
 msgstr "Utiliser le jour du calendrier parent"
 
-#: storage-modules/mrproject-1/mrp-parser.c:1043
-#: storage-modules/mrproject-1/mrp-parser.c:1138
+#: libplanner/mrp-parser.c:1043 libplanner/mrp-parser.c:1138
 msgid "Could not create XML tree"
 msgstr "Ne peut créer l'arborescense XML"
 
-#: storage-modules/mrproject-1/mrp-parser.c:1104
+#: libplanner/mrp-parser.c:1104
 msgid "Could not write XML file"
 msgstr "Ne peut écrire le fichier XML"
 
-#: storage-modules/sql/mrp-sql.c:229
+#. Give up.
+#: libplanner/mrp-sql.c:229
 msgid "Invalid Unicode"
 msgstr "Unicode non valide"
 
-#: storage-modules/sql/mrp-sql.c:2209
+#: libplanner/mrp-sql.c:2205
 #, c-format
 msgid ""
 "The project '%s' has been changed by the user '%s' since you opened it. Do "
@@ -142,7 +142,7 @@ msgstr ""
 "Le projet « %s » a été modifié par l'utilisateur « %s » depuis la dernière "
 "fois que vous l'avez ouvert. Voulez-vous l'enregistrer malgré tout ?"
 
-#: storage-modules/sql/mrp-sql.c:3447
+#: libplanner/mrp-sql.c:3443
 #, c-format
 msgid ""
 "Connection to database '%s' failed.\n"
@@ -151,15 +151,15 @@ msgstr ""
 "La connexion à la base de données « %s » a échoué.\n"
 "%s"
 
-#: storage-modules/sql/mrp-storage-sql.c:205
+#: libplanner/mrp-storage-sql.c:205
 msgid "Invalid SQL URI (must start with 'sql://' and contain '#')."
 msgstr "URI SQL non valide (doit commencer par « sql:// » et contenir « # »)."
 
-#: storage-modules/sql/mrp-storage-sql.c:274
+#: libplanner/mrp-storage-sql.c:274
 msgid "Invalid SQL URI (invalid project id)."
 msgstr "URI SQL non valide (id de projet non valide)."
 
-#: storage-modules/sql/mrp-storage-sql.c:282
+#: libplanner/mrp-storage-sql.c:282
 msgid "Invalid SQL URI (no database name specified)."
 msgstr "URI SQL non valide (aucun nom de base de données spécifié)."
 

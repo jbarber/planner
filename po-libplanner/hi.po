@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libmrproject\n"
-"POT-Creation-Date: 2003-11-26 17:11+0530\n"
+"POT-Creation-Date: 2003-12-01 20:39+0100\n"
 "PO-Revision-Date: 2003-11-15 11:05-0530\n"
 "Last-Translator: Sanjay Khatri <sk_ind at vsnl dot net>\n"
 "Language-Team: Gnome Hindi <indlinux-hindi-gnome@lists.sourceforge.net>\n"
@@ -14,120 +14,119 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: mrproject/mrp-project.c:441
+#: libplanner/mrp-project.c:441
 msgid "Default"
 msgstr "पूर्वःनिर्धारित मान"
 
-#: mrproject/mrp-project.c:749
+#: libplanner/mrp-project.c:749
 #, c-format
 msgid "Couldn't find a suitable file module for loading '%s'"
 msgstr "'%s' भारण के लिए उपयुक्त फाइल मॉड्यूल नहीं मिला"
 
-#: mrproject/mrp-project.c:770 mrproject/mrp-project.c:1034
+#: libplanner/mrp-project.c:770 libplanner/mrp-project.c:1034
 msgid "No support for SQL storage built into this version of MrProject."
 msgstr "MrProject  के इस संस्करण में SQL भंड़ारण की सुविधा नहीं हैं।"
 
-#: mrproject/mrp-project.c:807
+#: libplanner/mrp-project.c:807
 msgid "Invalid URI."
 msgstr "अवैध URI"
 
-#: mrproject/mrp-project.c:928
+#: libplanner/mrp-project.c:928
 #, c-format
 msgid "Unable to find file writer identified by '%s'"
 msgstr "'%s' द्वारा परिचित फाइल लेखक नहीं मिला "
 
-#: mrproject/mrp-project.c:991
+#: libplanner/mrp-project.c:991
 msgid "Couldn't find a suitable file module for loading project"
 msgstr "प्रोजेक्ट भारण के लिए उपयुक्त फाइल मॉड्यूल नहीं मिला"
 
-#: mrproject/mrp-property.c:365
+#: libplanner/mrp-property.c:365
 msgid "Text"
 msgstr "पाठ्य"
 
-#: mrproject/mrp-property.c:367
+#: libplanner/mrp-property.c:367
 msgid "String list"
 msgstr "रज्जुओ की सूची"
 
-#: mrproject/mrp-property.c:369
+#: libplanner/mrp-property.c:369
 msgid "Integer number"
 msgstr "पूर्ण संख्या"
 
-#: mrproject/mrp-property.c:371
+#: libplanner/mrp-property.c:371
 msgid "Floating-point number"
 msgstr "चल बिन्दु संख्या"
 
-#: mrproject/mrp-property.c:373
+#: libplanner/mrp-property.c:373
 msgid "Date"
 msgstr "दिनांक"
 
-#: mrproject/mrp-property.c:375
+#: libplanner/mrp-property.c:375
 msgid "Duration"
 msgstr "समय-सीमा"
 
-#: mrproject/mrp-property.c:377
+#: libplanner/mrp-property.c:377
 msgid "Cost"
 msgstr "लागत"
 
-#: mrproject/mrp-property.c:380
+#: libplanner/mrp-property.c:380
 msgid "None"
 msgstr "कुछ नहीं"
 
-#: mrproject/mrp-task-manager.c:1769
+#: libplanner/mrp-task-manager.c:1769
 msgid "Can not add a predecessor relation between a task and its ancestor."
 msgstr "एक कार्य और उसके उत्तराधिकारी के बीच पूर्वाधिकार संबंध नहीं बना सके।"
 
-#: mrproject/mrp-task-manager.c:1778 mrproject/mrp-task-manager.c:1786
+#: libplanner/mrp-task-manager.c:1778 libplanner/mrp-task-manager.c:1786
 msgid "Can not add a predecessor, because it would result in a loop."
 msgstr "पूर्वाधिकारी नहीं जोड़  सकते क्योकि इससे पाश बन जाएगा ।"
 
-#: mrproject/mrp-task-manager.c:1821
+#: libplanner/mrp-task-manager.c:1821
 msgid "Can not move the task, since it would result in a loop."
 msgstr "कार्य स्थानांतरित नहीं  सकते क्योकि इससे पाश बन जाएगा ।"
 
-#: mrproject/mrp-task.c:1011
+#: libplanner/mrp-task.c:1016
 msgid ""
 "Could not add a predecessor relation, because the tasks are already related."
 msgstr "पूर्वाधिकार संबंध नहीं बना सके, क्योकि कार्यों में संबंध पहले से हैं।"
 
-#: mrproject/mrp-day.c:54
+#: libplanner/mrp-day.c:54
 msgid "Working"
 msgstr "कार्यकारी"
 
-#: mrproject/mrp-day.c:55
+#: libplanner/mrp-day.c:55
 msgid "A default working day"
 msgstr "एक पूर्वःनिर्धारित कार्यकारी दिन"
 
-#: mrproject/mrp-day.c:57
+#: libplanner/mrp-day.c:57
 msgid "Nonworking"
 msgstr "गैर कार्यकारी"
 
-#: mrproject/mrp-day.c:58
+#: libplanner/mrp-day.c:58
 msgid "A default non working day"
 msgstr "एक पूर्वःनिर्धारित अकार्यकारी दिन"
 
-#: mrproject/mrp-day.c:60
+#: libplanner/mrp-day.c:60
 msgid "Use base"
 msgstr "आधार का उपयोग करें"
 
-#: mrproject/mrp-day.c:61
+#: libplanner/mrp-day.c:61
 msgid "Use day from base calendar"
 msgstr "आधार कैलेंडर से दिन का उपयोग करें"
 
-#: storage-modules/mrproject-1/mrp-parser.c:1043
-#: storage-modules/mrproject-1/mrp-parser.c:1138
+#: libplanner/mrp-parser.c:1043 libplanner/mrp-parser.c:1138
 msgid "Could not create XML tree"
 msgstr "XML तरु नहीं बना सकें"
 
-#: storage-modules/mrproject-1/mrp-parser.c:1104
+#: libplanner/mrp-parser.c:1104
 msgid "Could not write XML file"
 msgstr "XML फाइल में नहीं लिख सकें"
 
 #. Give up.
-#: storage-modules/sql/mrp-sql.c:229
+#: libplanner/mrp-sql.c:229
 msgid "Invalid Unicode"
 msgstr "अवैध यूनीकोड"
 
-#: storage-modules/sql/mrp-sql.c:2209
+#: libplanner/mrp-sql.c:2205
 #, c-format
 msgid ""
 "The project '%s' has been changed by the user '%s' since you opened it. Do "
@@ -136,7 +135,7 @@ msgstr ""
 "आप से पहले प्रोजेक्ट '%s' को '%s' ने परिवर्तित किया हैं । क्या आप फिर भी संग्रहित करना "
 "चाहते हैं ?"
 
-#: storage-modules/sql/mrp-sql.c:3447
+#: libplanner/mrp-sql.c:3443
 #, c-format
 msgid ""
 "Connection to database '%s' failed.\n"
@@ -145,14 +144,14 @@ msgstr ""
 "आंकड़ासंचय %s से संयोजन करने असफल।\n"
 "%s"
 
-#: storage-modules/sql/mrp-storage-sql.c:205
+#: libplanner/mrp-storage-sql.c:205
 msgid "Invalid SQL URI (must start with 'sql://' and contain '#')."
 msgstr "अवैध SQL URI ( 'sql://' से शुरू और '#' भी होना चाहिए) ।"
 
-#: storage-modules/sql/mrp-storage-sql.c:274
+#: libplanner/mrp-storage-sql.c:274
 msgid "Invalid SQL URI (invalid project id)."
 msgstr "अवैध SQL URI (अवैध प्रोजेक्ट आईडी)"
 
-#: storage-modules/sql/mrp-storage-sql.c:282
+#: libplanner/mrp-storage-sql.c:282
 msgid "Invalid SQL URI (no database name specified)."
 msgstr "अवैध SQL URI (आंकड़ासंचय का नाम नहीं दिया गया)"

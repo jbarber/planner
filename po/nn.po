@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mrproject 0.4.1\n"
-"POT-Creation-Date: 2003-09-12 18:55+0200\n"
+"POT-Creation-Date: 2003-12-01 23:08+0100\n"
 "PO-Revision-Date: 2001-12-17 06:51+0100\n"
 "Last-Translator: Roy-Magne Mo <rmo@sunnmore.net>\n"
 "Language-Team: Norwegian/Nynorsk <nn@li.org>\n"
@@ -13,347 +13,989 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: data/planner.desktop.in.h:1
+#, fuzzy
+msgid "Planner Project Management"
+msgstr "Prosjektstyringsverkty"
+
+#: data/planner.desktop.in.h:2
+#, fuzzy
+msgid "Project Management"
+msgstr "Prosjektstyringsverkty"
+
 #: libegg/recent-files/egg-recent-vfs-utils.c:90
 msgid " (invalid Unicode)"
 msgstr ""
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:1
+#: data/ui/main-window.ui.h:1
 msgid "About this application"
 msgstr "Om dette programmet"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:2
+#: data/ui/main-window.ui.h:2
 #, fuzzy
 msgid "C_ut"
 msgstr "Klipp ut"
 
 # applets/gen_util/mailcheck.c:1522
 # applets/gen_util/mailcheck.c:1522
-#: src/app/GNOME_MrProject_MainWindow.ui.h:3
+#: data/ui/main-window.ui.h:3
 msgid "Clear"
 msgstr "Tøm"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:4
+#: data/ui/main-window.ui.h:4
 msgid "Clear the selection"
 msgstr "Slett valet"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:5
+#: data/ui/main-window.ui.h:5
 msgid "Close the current file"
 msgstr "Lukk aktiv fil"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:6
+#: data/ui/main-window.ui.h:6
 msgid "Copy the selection"
 msgstr "Kopier utval"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:7
+#: data/ui/main-window.ui.h:7
 msgid "Create a new project"
 msgstr "Lag eit nytt prosjekt"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:8
+#: data/ui/main-window.ui.h:8
 msgid "Cut the selection"
 msgstr "Klipp ut valde område"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:9
+#: data/ui/main-window.ui.h:9
 msgid "Edit Day _Types"
 msgstr ""
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:10
+#: data/ui/main-window.ui.h:10
 #, fuzzy
 msgid "Edit Project _Phases"
 msgstr "Endre eigenskapar for prosjektet"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:11
+#: data/ui/main-window.ui.h:11
 msgid "Edit the project properties"
 msgstr "Endre eigenskapar for prosjektet"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:12
+#: data/ui/main-window.ui.h:12
 msgid "Exit the program"
 msgstr "Avslutt programmet"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:13
+#: data/ui/main-window.ui.h:13
 msgid "New"
 msgstr "Ny"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:14
+#: data/ui/main-window.ui.h:14
 msgid "New..."
 msgstr "Ny ..."
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:15
+#: data/ui/main-window.ui.h:15
 msgid "Open"
 msgstr "Opne"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:16
+#: data/ui/main-window.ui.h:16
 #, fuzzy
 msgid "Open a project"
 msgstr "Lag eit nytt prosjekt"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:17
+#: data/ui/main-window.ui.h:17
 msgid "Paste the clipboard"
 msgstr "Lim inn frå utklippstavla"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:18
+#: data/ui/main-window.ui.h:18
 msgid "Print"
 msgstr "Skriv ut"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:19
+#: data/ui/main-window.ui.h:19
 #, fuzzy
 msgid "Print preview of the current project"
 msgstr "Skriv ut gjeldande diagram"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:20
+#: data/ui/main-window.ui.h:20
 #, fuzzy
 msgid "Print the current project"
 msgstr "Skriv ut gjeldande diagram"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:21
+#: data/ui/main-window.ui.h:21
 msgid "Redo the undone action"
 msgstr "Gjer om handlinga som du har angra på"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:22
+#: data/ui/main-window.ui.h:22
 msgid "Save"
 msgstr "Lagre"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:23
+#: data/ui/main-window.ui.h:23
 #, fuzzy
 msgid "Save _As..."
 msgstr "L_agre som ..."
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:24
+#: data/ui/main-window.ui.h:24
 #, fuzzy
 msgid "Save the current project"
 msgstr "Lagre aktiv fil"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:25
+#: data/ui/main-window.ui.h:25
 #, fuzzy
 msgid "Save the current project with a different name"
 msgstr "Lagre aktiv fil med eit anna namn"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:26
+#: data/ui/main-window.ui.h:26
 msgid "Show the MrProject User Guide"
 msgstr ""
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:27
+#: data/ui/main-window.ui.h:27
 msgid "Undo the last action"
 msgstr "Gjer om siste handling"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:28
+#: data/ui/main-window.ui.h:28
 #, fuzzy
 msgid "_About"
 msgstr "_Om ..."
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:29
+#: data/ui/main-window.ui.h:29
 msgid "_Actions"
 msgstr ""
 
 # applets/gen_util/mailcheck.c:1522
 # applets/gen_util/mailcheck.c:1522
-#: src/app/GNOME_MrProject_MainWindow.ui.h:30
+#: data/ui/main-window.ui.h:30
 msgid "_Close"
 msgstr "L_ukk"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:31
+#: data/ui/main-window.ui.h:31
 #, fuzzy
 msgid "_Copy"
 msgstr "Kopier"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:32
+#: data/ui/main-window.ui.h:32
 msgid "_Edit"
 msgstr "R_ediger"
 
 # applets/gen_util/printer.c:308
-#: src/app/GNOME_MrProject_MainWindow.ui.h:33
+#: data/ui/main-window.ui.h:33
 #, fuzzy
 msgid "_Edit Project Properties"
 msgstr "Eigenskapar for prosjekt"
 
 # gnome-terminal/gnome-terminal.c:1586
-#: src/app/GNOME_MrProject_MainWindow.ui.h:34
+#: data/ui/main-window.ui.h:34
 msgid "_File"
 msgstr "_Fil"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:35
+#: data/ui/main-window.ui.h:35
 msgid "_Help"
 msgstr "_Hjelp"
 
 # panel/menu.c:4751 panel/panel_config.c:1566
-#: src/app/GNOME_MrProject_MainWindow.ui.h:36
+#: data/ui/main-window.ui.h:36
 #, fuzzy
 msgid "_Manage Calendars"
 msgstr "Kalender"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:37
+#: data/ui/main-window.ui.h:37
 #, fuzzy
 msgid "_New Project"
 msgstr "Nytt prosjekt"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:38
+#: data/ui/main-window.ui.h:38
 #, fuzzy
 msgid "_Open..."
 msgstr "_Opne ..."
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:39
+#: data/ui/main-window.ui.h:39
 #, fuzzy
 msgid "_Paste"
 msgstr "Lim inn"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:40
+#: data/ui/main-window.ui.h:40
 #, fuzzy
 msgid "_Print Preview"
 msgstr "Førehandsvising av utskrift"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:41
+#: data/ui/main-window.ui.h:41
 #, fuzzy
 msgid "_Print..."
 msgstr "Skriv ut"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:42
+#: data/ui/main-window.ui.h:42
 #, fuzzy
 msgid "_Project"
 msgstr "MrProject"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:43
+#: data/ui/main-window.ui.h:43
 msgid "_Quit"
 msgstr ""
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:44
+#: data/ui/main-window.ui.h:44
 msgid "_Redo"
 msgstr "Gje_r om"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:45 src/app/mg-main-window.c:1133
+#: data/ui/main-window.ui.h:45 src/planner-main-window.c:1127
 msgid "_Save"
 msgstr "_Lagre"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:46
+#: data/ui/main-window.ui.h:46
 msgid "_Undo"
 msgstr "_Angre"
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:47
+#: data/ui/main-window.ui.h:47
 msgid "_User Guide"
 msgstr ""
 
-#: src/app/GNOME_MrProject_MainWindow.ui.h:48
+#: data/ui/main-window.ui.h:48
 msgid "_View"
 msgstr ""
 
-#: src/app/mg-application.c:54 src/app/mg-application.c:103
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:4
-#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:4
-#: src/views/resources/GNOME_MrProject_ResourcesView.ui.h:5
-msgid "Insert"
-msgstr "Set inn"
+#: data/ui/gantt-view.ui.h:1 data/ui/task-view.ui.h:1
+#, fuzzy
+msgid "I_ndent Task"
+msgstr "Sett inn deloppgåve"
 
-# help-browser/bookmarks.c:242
-#: src/app/mg-application.c:61 src/app/mg-application.c:110
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:9
-#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:9
-#: src/views/resources/GNOME_MrProject_ResourcesView.ui.h:6
-msgid "Remove"
-msgstr "Fjern"
+#: data/ui/gantt-view.ui.h:2 data/ui/task-view.ui.h:2
+#, fuzzy
+msgid "In_sert Tasks..."
+msgstr "Sett inn deloppgåve"
 
-#: src/app/mg-application.c:68
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:18
-#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:17
-msgid "Unlink"
-msgstr "Fjern lenke"
-
-#: src/app/mg-application.c:75
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:3
-#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:3
+#: data/ui/gantt-view.ui.h:3 data/ui/task-view.ui.h:3
+#: src/planner-application.c:75
 msgid "Indent"
 msgstr "Innrykk"
 
-#: src/app/mg-application.c:82
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:17
-#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:16
-msgid "Unindent"
-msgstr "Fjern innrykk"
+#: data/ui/gantt-view.ui.h:4 data/ui/task-view.ui.h:4
+#: data/ui/resource-view.ui.h:5 src/planner-application.c:54
+#: src/planner-application.c:103
+msgid "Insert"
+msgstr "Set inn"
 
-#: src/app/mg-application.c:89
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:8
-#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:8
-msgid "Move up"
+#: data/ui/gantt-view.ui.h:5 data/ui/task-view.ui.h:5
+#, fuzzy
+msgid "Move Task Do_wn"
+msgstr "Flytt ned"
+
+#: data/ui/gantt-view.ui.h:6 data/ui/task-view.ui.h:6
+#, fuzzy
+msgid "Move Task _Up"
 msgstr "Flytt opp"
 
-#: src/app/mg-application.c:96
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:7
-#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:7
+#: data/ui/gantt-view.ui.h:7 data/ui/task-view.ui.h:7
+#: src/planner-application.c:96
 msgid "Move down"
 msgstr "Flytt ned"
 
-#: src/app/mg-application.c:117
+#: data/ui/gantt-view.ui.h:8 data/ui/task-view.ui.h:8
+#: src/planner-application.c:89
+msgid "Move up"
+msgstr "Flytt opp"
+
+# help-browser/bookmarks.c:242
+#: data/ui/gantt-view.ui.h:9 data/ui/task-view.ui.h:9
+#: data/ui/resource-view.ui.h:6 src/planner-application.c:61
+#: src/planner-application.c:110
+msgid "Remove"
+msgstr "Fjern"
+
+#: data/ui/gantt-view.ui.h:10 data/ui/task-view.ui.h:10
+msgid "Reset _All Constraints"
+msgstr ""
+
+#: data/ui/gantt-view.ui.h:11 data/ui/task-view.ui.h:11
+msgid "Reset _Constraint"
+msgstr ""
+
+#: data/ui/gantt-view.ui.h:12 data/ui/task-view.ui.h:12
+#: data/ui/resource-view.ui.h:7
+#, fuzzy
+msgid "Select _All"
+msgstr "Vel alle"
+
+#: data/ui/gantt-view.ui.h:13 data/ui/task-view.ui.h:13
+#: data/ui/resource-view.ui.h:8
+msgid "Select all tasks"
+msgstr "Vel alle oppgåver"
+
+#: data/ui/gantt-view.ui.h:14
+#, fuzzy
+msgid "Test"
+msgstr "Nullstill"
+
+#: data/ui/gantt-view.ui.h:15 data/ui/task-view.ui.h:14
+#, fuzzy
+msgid "Un_link Task"
+msgstr "Fjern lenke"
+
+#: data/ui/gantt-view.ui.h:16 data/ui/task-view.ui.h:15
+#, fuzzy
+msgid "Unin_dent Task"
+msgstr "Fjern innrykk"
+
+#: data/ui/gantt-view.ui.h:17 data/ui/task-view.ui.h:16
+#: src/planner-application.c:82
+msgid "Unindent"
+msgstr "Fjern innrykk"
+
+#: data/ui/gantt-view.ui.h:18 data/ui/task-view.ui.h:17
+#: src/planner-application.c:68
+msgid "Unlink"
+msgstr "Fjern lenke"
+
+#: data/ui/gantt-view.ui.h:19
+#, fuzzy
+msgid "Zoom In"
+msgstr "Forstørring"
+
+#: data/ui/gantt-view.ui.h:20
+#, fuzzy
+msgid "Zoom Out"
+msgstr "Forstørr til:"
+
+#: data/ui/gantt-view.ui.h:21
+#, fuzzy
+msgid "Zoom To Fit"
+msgstr "Forstørr til:"
+
+#: data/ui/gantt-view.ui.h:22
+#, fuzzy
+msgid "Zoom To _Fit"
+msgstr "Forstørr til:"
+
+#: data/ui/gantt-view.ui.h:23
+#, fuzzy
+msgid "Zoom _Out"
+msgstr "Forstørr til:"
+
+# panel/menu-properties.c:211 panel/menu.c:5139 panel/menu.c:5917
+#: data/ui/gantt-view.ui.h:24 data/ui/task-view.ui.h:19
+#, fuzzy
+msgid "_Edit Task Properties..."
+msgstr "Rediger oppgåve ..."
+
+#: data/ui/gantt-view.ui.h:25
+msgid "_Highlight Critical Tasks"
+msgstr ""
+
+#: data/ui/gantt-view.ui.h:26 data/ui/task-view.ui.h:20
+#, fuzzy
+msgid "_Insert Task"
+msgstr "Sett inn deloppgåve"
+
+# panel/menu.c:1668
+#: data/ui/gantt-view.ui.h:27 data/ui/task-view.ui.h:21
+#, fuzzy
+msgid "_Remove Task"
+msgstr "Fjern denne oppgåva"
+
+#: data/ui/gantt-view.ui.h:28
+#, fuzzy
+msgid "_Zoom In"
+msgstr "Forstørring"
+
+#: data/ui/task-view.ui.h:18
+#, fuzzy
+msgid "_Edit Custom Properties..."
+msgstr "Endre eigenskapar for prosjektet"
+
+#: data/ui/html-plugin.ui.h:1 data/glade/html-output.glade.h:4
+msgid "Export to HTML"
+msgstr ""
+
+#: data/ui/sql-plugin.ui.h:1
+msgid "Open from Database..."
+msgstr ""
+
+#: data/ui/sql-plugin.ui.h:2
+#, fuzzy
+msgid "Save to Database..."
+msgstr "L_agre som ..."
+
+#: data/ui/resource-view.ui.h:1
+#, fuzzy
+msgid "Edit _Custom Properties..."
+msgstr "Endre eigenskapar for prosjektet"
+
+#: data/ui/resource-view.ui.h:2
+#, fuzzy
+msgid "Edit _Groups"
+msgstr "Inga gruppering"
+
+#: data/ui/resource-view.ui.h:3
+msgid "Groups"
+msgstr "Grupper"
+
+#: data/ui/resource-view.ui.h:4
+#, fuzzy
+msgid "In_sert Resources..."
+msgstr "Tildel ressursar ..."
+
+#: data/ui/resource-view.ui.h:9
+#, fuzzy
+msgid "_Edit Resource Properties..."
+msgstr "Endre eigenskapar for prosjektet"
+
+#: data/ui/resource-view.ui.h:10
+#, fuzzy
+msgid "_Insert Resource"
+msgstr "Set inn ein ny ressurs i ei rad"
+
+# panel/menu.c:1668
+#: data/ui/resource-view.ui.h:11
+#, fuzzy
+msgid "_Remove Resource"
+msgstr "Fjern denne ressursen"
+
+#: data/glade/add-predecessor.glade.h:1 data/glade/calendar-dialog.glade.h:4
+#: data/glade/html-output.glade.h:2 data/glade/new-property.glade.h:1
+#: data/glade/project-properties.glade.h:1
+#: data/glade/resource-dialog.glade.h:1
+#: data/glade/resource-input-dialog.glade.h:1 data/glade/sql.glade.h:2
+#: data/glade/task-dialog.glade.h:4 data/glade/task-input-dialog.glade.h:1
+msgid "*"
+msgstr ""
+
+#: data/glade/add-predecessor.glade.h:2
+msgid "Lag: "
+msgstr ""
+
+#: data/glade/add-predecessor.glade.h:3
+msgid "New predecessor"
+msgstr ""
+
+#: data/glade/add-predecessor.glade.h:4
+msgid "Predecessor: "
+msgstr ""
+
+#: data/glade/add-predecessor.glade.h:5
+msgid "Relation type: "
+msgstr ""
+
+#: data/glade/calendar-dialog.glade.h:1
+msgid ""
+"\n"
+"The selected day type has the following working hours:"
+msgstr ""
+
+#: data/glade/calendar-dialog.glade.h:3 data/glade/html-output.glade.h:1
+#: data/glade/sql.glade.h:1 data/glade/task-dialog.glade.h:1
+#, fuzzy
+msgid "    "
+msgstr "         "
+
+#: data/glade/calendar-dialog.glade.h:5
+msgid "-"
+msgstr ""
+
+#: data/glade/calendar-dialog.glade.h:6
+msgid "<b>Calendar:</b>"
+msgstr ""
+
+#: data/glade/calendar-dialog.glade.h:7
+msgid "<b>Day types</b>"
+msgstr ""
+
+#: data/glade/calendar-dialog.glade.h:8
+msgid "<b>Working hours</b>"
+msgstr ""
+
+#: data/glade/calendar-dialog.glade.h:9
+msgid "<b>Working time</b>"
+msgstr ""
+
+#: data/glade/calendar-dialog.glade.h:10
+msgid "Apply"
+msgstr ""
+
+#: data/glade/calendar-dialog.glade.h:11
+msgid "C_opy an existing calendar"
+msgstr ""
+
+#: data/glade/calendar-dialog.glade.h:12
+#, fuzzy
+msgid "C_reate"
+msgstr "_Tøm"
+
+#: data/glade/calendar-dialog.glade.h:13
+msgid "Calendar Editor"
+msgstr ""
+
+# panel/menu.c:4751 panel/panel_config.c:1566
+#: data/glade/calendar-dialog.glade.h:14
+#, fuzzy
+msgid "Create an _empty calendar"
+msgstr "Kalender"
+
+# applets/gen_util/printer.c:308
+#: data/glade/calendar-dialog.glade.h:15
+#, fuzzy
+msgid "Custom working time"
+msgstr "Eigenskapar for prosjekt"
+
+#: data/glade/calendar-dialog.glade.h:16
+msgid "Day type:"
+msgstr ""
+
+#: data/glade/calendar-dialog.glade.h:17
+#, fuzzy
+msgid "Default Week"
+msgstr "Standard"
+
+#: data/glade/calendar-dialog.glade.h:18
+#, fuzzy
+msgid "Default week..."
+msgstr "Standard"
+
+#: data/glade/calendar-dialog.glade.h:19
+msgid "Edit Day Types"
+msgstr ""
+
+#: data/glade/calendar-dialog.glade.h:20
+msgid "Edit Working Time"
+msgstr ""
+
+#: data/glade/calendar-dialog.glade.h:21
+msgid "Enter the name of the new day type:"
+msgstr ""
+
+# panel/menu.c:4751 panel/panel_config.c:1566
+#: data/glade/calendar-dialog.glade.h:22
+#, fuzzy
+msgid "Existing calendars:"
+msgstr "Kalender"
+
+#: data/glade/calendar-dialog.glade.h:23
+msgid "From:"
+msgstr ""
+
+#: data/glade/calendar-dialog.glade.h:24
+#, fuzzy
+msgid "MrProject Team"
+msgstr "MrProject"
+
+# panel/menu.c:4751 panel/panel_config.c:1566
+#: data/glade/calendar-dialog.glade.h:25
+#, fuzzy
+msgid "New Calendar"
+msgstr "Kalender"
+
+#: data/glade/calendar-dialog.glade.h:26
+msgid "New Day Type"
+msgstr ""
+
+# panel/menu.c:4751 panel/panel_config.c:1566
+#: data/glade/calendar-dialog.glade.h:27
+#, fuzzy
+msgid "Select a calendar"
+msgstr "Kalender"
+
+#: data/glade/calendar-dialog.glade.h:28
+msgid ""
+"Select a weekday and the day type to use for that day in the default week "
+"for this calendar.\n"
+msgstr ""
+
+#: data/glade/calendar-dialog.glade.h:30
+msgid "Set day type to:"
+msgstr ""
+
+#: data/glade/calendar-dialog.glade.h:31
+msgid "To:"
+msgstr ""
+
+#: data/glade/calendar-dialog.glade.h:32
+msgid "Use working time from derived calendar"
+msgstr ""
+
+#: data/glade/calendar-dialog.glade.h:33
+#, fuzzy
+msgid "Week day:"
+msgstr "Veker"
+
+#: data/glade/calendar-dialog.glade.h:34
+msgid "Working time..."
+msgstr ""
+
+#: data/glade/calendar-dialog.glade.h:35
+msgid "_Derive from a calendar"
+msgstr ""
+
+#: data/glade/calendar-dialog.glade.h:36
+msgid "_Name of the new calendar:"
+msgstr ""
+
+#: data/glade/calendar-dialog.glade.h:37
+#, fuzzy
+msgid "_New..."
+msgstr "Ny ..."
+
+#: data/glade/group-dialog.glade.h:1
+msgid "Group Editor"
+msgstr "Grupperedigering"
+
+#: data/glade/html-output.glade.h:3
+msgid "<b>Save to</b>"
+msgstr ""
+
+#: data/glade/html-output.glade.h:5
+msgid "Local file"
+msgstr ""
+
+#: data/glade/html-output.glade.h:6
+#, fuzzy
+msgid "Save to HTML File"
+msgstr "Opne ei fil"
+
+#: data/glade/html-output.glade.h:7
+msgid "Web location"
+msgstr ""
+
+#: data/glade/new-property.glade.h:2
+msgid "Description: "
+msgstr ""
+
+#: data/glade/new-property.glade.h:3
+msgid "Label: "
+msgstr ""
+
+#: data/glade/new-property.glade.h:4
+#, fuzzy
+msgid "Name: "
+msgstr "Namn:"
+
+#: data/glade/new-property.glade.h:5
+#, fuzzy
+msgid "New Property"
+msgstr "Nytt prosjekt"
+
+# panel/menu.c:4771
+#: data/glade/new-property.glade.h:6
+#, fuzzy
+msgid "Type: "
+msgstr "Type"
+
+#: data/glade/project-properties.glade.h:2
+msgid "<b>Project phases</b>"
+msgstr ""
+
+# applets/gen_util/mailcheck.c:1522
+# applets/gen_util/mailcheck.c:1522
+#: data/glade/project-properties.glade.h:3
+#, fuzzy
+msgid "Calendar:"
+msgstr "Tøm"
+
+# applets/gen_util/printer.c:308
+#: data/glade/project-properties.glade.h:4
+#, fuzzy
+msgid "Custom properties"
+msgstr "Eigenskapar for prosjekt"
+
+#: data/glade/project-properties.glade.h:5
+#, fuzzy
+msgid "Edit Project phases"
+msgstr "Endre eigenskapar for prosjektet"
+
+#: data/glade/project-properties.glade.h:6
+#, fuzzy
+msgid "Enter the name of the new project phase:"
+msgstr "Gå til byrjinga av prosjektet"
+
+# gnome-terminal/gnome-terminal.glade.h:20
+#: data/glade/project-properties.glade.h:7
+#: data/glade/resource-dialog.glade.h:5 data/glade/task-dialog.glade.h:6
+msgid "General"
+msgstr "Allment"
+
+#: data/glade/project-properties.glade.h:8
+#, fuzzy
+msgid "New Project Phase"
+msgstr "Nytt prosjekt"
+
+#: data/glade/project-properties.glade.h:9
+#, fuzzy
+msgid "Project _name:"
+msgstr "Prosjekt_namn:"
+
+#: data/glade/project-properties.glade.h:10
+#, fuzzy
+msgid "Project _start:"
+msgstr "Prosjektstart"
+
+#: data/glade/project-properties.glade.h:11
+#, fuzzy
+msgid "Project phase:"
+msgstr "Prosjekt_namn:"
+
+# applets/gen_util/printer.c:308
+#: data/glade/project-properties.glade.h:12
+#, fuzzy
+msgid "Project properties"
+msgstr "Eigenskapar for prosjekt"
+
+#: data/glade/project-properties.glade.h:13
+#, fuzzy
+msgid "Select..."
+msgstr "Send prosjekt ..."
+
+#: data/glade/project-properties.glade.h:14
+msgid "_Manager:"
+msgstr "_Sjef:"
+
+#: data/glade/project-properties.glade.h:15
+msgid "_Organization:"
+msgstr ""
+
+# applets/gen_util/printer.c:308
+#: data/glade/property-dialog.glade.h:1
+#, fuzzy
+msgid "Custom Properties"
+msgstr "Eigenskapar for prosjekt"
+
+#: data/glade/resource-dialog.glade.h:2
+#, fuzzy
+msgid "C_ost:"
+msgstr "_Eigendefinert:"
+
+# applets/gen_util/mailcheck.c:1522
+# applets/gen_util/mailcheck.c:1522
+#: data/glade/resource-dialog.glade.h:3
+#, fuzzy
+msgid "Calendar"
+msgstr "Tøm"
+
+# panel/menu-properties.c:211 panel/menu.c:5139 panel/menu.c:5917
+#: data/glade/resource-dialog.glade.h:4
+#, fuzzy
+msgid "Edit calendars..."
+msgstr "Rediger oppgåve ..."
+
+# applets/gen_util/clock.c:869
+#: data/glade/resource-dialog.glade.h:6 data/glade/task-dialog.glade.h:7
+msgid "Insert time stamp"
+msgstr "Sett inn tidsmerke"
+
+#: data/glade/resource-dialog.glade.h:7 data/glade/task-dialog.glade.h:9
+msgid "Notes"
+msgstr "Notat"
+
+#: data/glade/resource-dialog.glade.h:8
+msgid ""
+"Select the calendar to use for this resource. If you want to use the default "
+"calendar of the project, select 'None'. "
+msgstr ""
+
+#: data/glade/resource-dialog.glade.h:9
+#, fuzzy
+msgid "_Email:"
+msgstr "E-post:"
+
+#: data/glade/resource-dialog.glade.h:10
+#, fuzzy
+msgid "_Group:"
+msgstr "Gruppe"
+
+#: data/glade/resource-dialog.glade.h:11
+msgid "_Name:"
+msgstr "_Namn:"
+
+# panel/menu.c:4771
+#: data/glade/resource-dialog.glade.h:12
+#, fuzzy
+msgid "_Type:"
+msgstr "Type"
+
+#: data/glade/resource-input-dialog.glade.h:2
+#, fuzzy
+msgid "Email:"
+msgstr "E-post:"
+
+#: data/glade/resource-input-dialog.glade.h:3
+#, fuzzy
+msgid "Group:"
+msgstr "Gruppe"
+
+#: data/glade/resource-input-dialog.glade.h:4
+#, fuzzy
+msgid "Insert resource"
+msgstr "Set inn ein ny ressurs i ei rad"
+
+#: data/glade/resource-input-dialog.glade.h:5
+#: data/glade/task-input-dialog.glade.h:3
+#, fuzzy
+msgid "Name:"
+msgstr "Namn:"
+
+#: data/glade/resource-input-dialog.glade.h:6
+#: data/glade/task-input-dialog.glade.h:5
+msgid "_Insert"
+msgstr "Set _inn"
+
+#: data/glade/sql.glade.h:3
+msgid "<b>Open Database</b>"
+msgstr ""
+
+#: data/glade/sql.glade.h:4
+msgid "Database:"
+msgstr ""
+
+#: data/glade/sql.glade.h:5
+msgid "Open Database"
+msgstr ""
+
+#: data/glade/sql.glade.h:6
+msgid "Password:"
+msgstr ""
+
+#: data/glade/sql.glade.h:7
+#, fuzzy
+msgid "Select a Project"
+msgstr "(Tomt prosjekt)"
+
+# gmenu/edit.c:325 gsm/session-properties.c:173 panel/launcher.c:556
+# panel/menu.c:1396 panel/menu.c:1507
+#: data/glade/sql.glade.h:8
+#, fuzzy
+msgid "Server:"
+msgstr "Gå tilbake"
+
+#: data/glade/sql.glade.h:9
+msgid "The database contains the following projects. Select a project to open:"
+msgstr ""
+
+#: data/glade/sql.glade.h:10
+msgid "Username:"
+msgstr ""
+
+#: data/glade/task-dialog.glade.h:3
+#, no-c-format
+msgid "%"
+msgstr ""
+
+#: data/glade/task-dialog.glade.h:5
+#, fuzzy
+msgid "C_omplete:"
+msgstr "_Ferdig [%]"
+
+#: data/glade/task-dialog.glade.h:8
+#, fuzzy
+msgid "Na_me:"
+msgstr "Namn:"
+
+#: data/glade/task-dialog.glade.h:10
+#, fuzzy
+msgid "Pr_iority:"
+msgstr "_Prioritet:"
+
+#: data/glade/task-dialog.glade.h:11
+msgid "Predecessors"
+msgstr ""
+
+# applets/tasklist/tasklist_menu.c:258
+#: data/glade/task-dialog.glade.h:12 src/planner-resource-view.c:342
+msgid "Resources"
+msgstr "Ressursar"
+
+#: data/glade/task-dialog.glade.h:13
+#, fuzzy
+msgid "_Duration:"
+msgstr "Lengd"
+
+#: data/glade/task-dialog.glade.h:14
+#, fuzzy
+msgid "_Fixed duration"
+msgstr "Lengd"
+
+#: data/glade/task-dialog.glade.h:15
+msgid "_Milestone"
+msgstr ""
+
+#: data/glade/task-dialog.glade.h:16
+#, fuzzy
+msgid "_Work:"
+msgstr "Arbeid"
+
+#. day unit variant accepted in input
+#: data/glade/task-dialog.glade.h:17 src/planner-task-tree.c:2120
+msgid "days"
+msgstr "dagar"
+
+#: data/glade/task-input-dialog.glade.h:2
+#, fuzzy
+msgid "Insert task"
+msgstr "Sett inn deloppgåve"
+
+#: data/glade/task-input-dialog.glade.h:4
+#, fuzzy
+msgid "Work:"
+msgstr "Arbeid"
+
+#: src/planner-application.c:117
 #, fuzzy
 msgid "Edit"
 msgstr "R_ediger"
 
-#: src/app/mg-main-window.c:585
+#: src/planner-main-window.c:584
 msgid "Open a file"
 msgstr "Opne ei fil"
 
 #. I18n: Translators, list your names here, newline separated if there
 #. * are more than one, to appear in the about box.
 #.
-#: src/app/mg-main-window.c:995 src/app/mg-main-window.c:1004
+#: src/planner-main-window.c:993 src/planner-main-window.c:1000
 msgid "translator_credits"
 msgstr ""
 
-#: src/app/mg-main-window.c:1001
+#. "Copyright \xc2\xa9 2001-2002 CodeFactory AB",
+#: src/planner-main-window.c:997
 #, fuzzy
 msgid "A Project Management application for the GNOME desktop"
 msgstr "Eit prosjekstyringsverkty for skrivebordsmiljøet GNOME"
 
-#: src/app/mg-main-window.c:1013
-msgid "The MrProject Homepage"
+#: src/planner-main-window.c:1007
+#, fuzzy
+msgid "The Planner Homepage"
 msgstr "MrProject heimesida"
 
-#: src/app/mg-main-window.c:1017
-msgid "Contribute to MrProject"
-msgstr "Medverkande til MrProject:"
-
-#: src/app/mg-main-window.c:1089
+#: src/planner-main-window.c:1083
 msgid "If you don't save, changes made the last minute will be discarded."
 msgstr ""
 
-#: src/app/mg-main-window.c:1094
+#: src/planner-main-window.c:1088
 #, c-format
 msgid "If you don't save, changes made the last %d minutes will be discarded."
 msgstr ""
 
-#: src/app/mg-main-window.c:1099
+#: src/planner-main-window.c:1093
 msgid "If you don't save, changes made the last hour will be discarded."
 msgstr ""
 
-#: src/app/mg-main-window.c:1104
+#: src/planner-main-window.c:1098
 #, c-format
 msgid "If you don't save, changes made the last %d hours will be discarded."
 msgstr ""
 
-#: src/app/mg-main-window.c:1111
+#: src/planner-main-window.c:1105
 #, c-format
 msgid "Save changes to document '%s' before closing?"
 msgstr ""
 
-#: src/app/mg-main-window.c:1129
+#: src/planner-main-window.c:1123
 msgid "C_lose without saving"
 msgstr ""
 
-#: src/app/mg-main-window.c:1131
+#: src/planner-main-window.c:1125
 #, fuzzy
 msgid "_Cancel"
 msgstr "Avbryt"
 
-#: src/app/mg-main-window.c:1238
+#: src/planner-main-window.c:1232
 #, fuzzy
 msgid "Save a file"
 msgstr "Opne ei fil"
 
-#: src/app/mg-main-window.c:1270
-#: src/plugins/html-output/mg-html-output-plugin.c:146
+#: src/planner-main-window.c:1264 src/planner-html-plugin.c:146
 #, c-format
 msgid "File \"%s\" exists, do you want to overwrite it?"
 msgstr ""
 
-#: src/app/mg-main-window.c:1458
+#: src/planner-main-window.c:1452
 msgid ""
-"You have opened a file that was saved with an old version of MrProject.\n"
+"You have opened a file that was saved with an old version of Planner.\n"
 "\n"
 "When loading old files, all tasks will use the constraint 'Must Start On', "
 "since the old version did not fully support automatic rescheduling. To take "
@@ -367,51 +1009,51 @@ msgid ""
 "'Remove all constraints' in the 'Edit' menu."
 msgstr ""
 
-#: src/app/mg-main-window.c:1495 src/views/gantt/mg-gantt-row.c:656
-#: src/views/gantt/mg-gantt-row.c:658 src/views/gantt/mg-gantt-print.c:513
-#: src/views/gantt/mg-gantt-print.c:515
+#: src/planner-main-window.c:1489 src/planner-gantt-row.c:656
+#: src/planner-gantt-row.c:658 src/planner-gantt-print.c:513
+#: src/planner-gantt-print.c:515
 msgid "Unnamed"
 msgstr ""
 
-#: src/app/mg-main.c:61
+#: src/planner-main.c:61
 msgid "Create the initial window with the given geometry."
 msgstr ""
 
-#: src/app/mg-main.c:61
+#: src/planner-main.c:61
 msgid "GEOMETRY"
 msgstr ""
 
-#: src/app/mg-main.c:98
+#: src/planner-main.c:98
 msgid "mrproject: --geometry cannot be used with more than one file."
 msgstr ""
 
-#: src/app/mg-plugin-loader.c:40
+#: src/planner-plugin-loader.c:40
 #, fuzzy, c-format
 msgid "Could not open plugin file '%s'\n"
 msgstr "Klarte ikkje å opne prosjekt."
 
-#: src/app/mg-view-loader.c:40
+#: src/planner-view-loader.c:40
 #, c-format
 msgid "Could not open view plugin file '%s'\n"
 msgstr ""
 
-#: src/cell-renderers/mg-cell-renderer-date.c:147
+#: src/planner-cell-renderer-date.c:147
 msgid "Constraint type"
 msgstr ""
 
-#: src/cell-renderers/mg-cell-renderer-date.c:154
+#: src/planner-cell-renderer-date.c:154
 msgid "As soon as possible"
 msgstr ""
 
-#: src/cell-renderers/mg-cell-renderer-date.c:155
+#: src/planner-cell-renderer-date.c:155
 msgid "Start no earlier than"
 msgstr ""
 
-#: src/cell-renderers/mg-cell-renderer-date.c:156
+#: src/planner-cell-renderer-date.c:156
 msgid "Must start on"
 msgstr ""
 
-#: src/cell-renderers/mg-cell-renderer-date.c:171
+#: src/planner-cell-renderer-date.c:171
 msgid "Today"
 msgstr "I dag"
 
@@ -419,442 +1061,152 @@ msgstr "I dag"
 #. GTK_SIGNAL_FUNC (m_cell_date_today_clicked),
 #. date);
 #.
-#: src/cell-renderers/mg-cell-renderer-date.c:179
+#: src/planner-cell-renderer-date.c:179
 msgid "Cancel"
 msgstr "Avbryt"
 
-#: src/cell-renderers/mg-cell-renderer-date.c:187
+#: src/planner-cell-renderer-date.c:187
 msgid "OK"
 msgstr "OK"
 
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:1
-msgid ""
-"\n"
-"The selected day type has the following working hours:"
-msgstr ""
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:3
-#: src/dialogs/task-dialog/mg-task-dialog.glade.h:1
-#: src/plugins/html-output/mg-html-output.glade.h:1
-#: src/plugins/sql/mg-sql.glade.h:1
-#, fuzzy
-msgid "    "
-msgstr "         "
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:4
-#: src/dialogs/project-dialog/mg-project-properties.glade.h:1
-#: src/dialogs/property-dialog/mg-new-property.glade.h:1
-#: src/dialogs/resource-dialog/mg-resource-dialog.glade.h:1
-#: src/dialogs/resource-input-dialog/mg-resource-input-dialog.glade.h:1
-#: src/dialogs/task-dialog/mg-add-predecessor.glade.h:1
-#: src/dialogs/task-dialog/mg-task-dialog.glade.h:4
-#: src/dialogs/task-input-dialog/mg-task-input-dialog.glade.h:1
-#: src/plugins/html-output/mg-html-output.glade.h:2
-#: src/plugins/sql/mg-sql.glade.h:2
-msgid "*"
-msgstr ""
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:5
-msgid "-"
-msgstr ""
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:6
-msgid "<b>Calendar:</b>"
-msgstr ""
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:7
-msgid "<b>Day types</b>"
-msgstr ""
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:8
-msgid "<b>Working hours</b>"
-msgstr ""
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:9
-msgid "<b>Working time</b>"
-msgstr ""
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:10
-msgid "Apply"
-msgstr ""
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:11
-msgid "C_opy an existing calendar"
-msgstr ""
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:12
-#, fuzzy
-msgid "C_reate"
-msgstr "_Tøm"
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:13
-msgid "Calendar Editor"
-msgstr ""
-
-# panel/menu.c:4751 panel/panel_config.c:1566
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:14
-#, fuzzy
-msgid "Create an _empty calendar"
-msgstr "Kalender"
-
-# applets/gen_util/printer.c:308
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:15
-#, fuzzy
-msgid "Custom working time"
-msgstr "Eigenskapar for prosjekt"
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:16
-msgid "Day type:"
-msgstr ""
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:17
-#, fuzzy
-msgid "Default Week"
-msgstr "Standard"
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:18
-#, fuzzy
-msgid "Default week..."
-msgstr "Standard"
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:19
-msgid "Edit Day Types"
-msgstr ""
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:20
-msgid "Edit Working Time"
-msgstr ""
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:21
-msgid "Enter the name of the new day type:"
-msgstr ""
-
-# panel/menu.c:4751 panel/panel_config.c:1566
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:22
-#, fuzzy
-msgid "Existing calendars:"
-msgstr "Kalender"
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:23
-msgid "From:"
-msgstr ""
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:24
-#, fuzzy
-msgid "MrProject Team"
-msgstr "MrProject"
-
-# panel/menu.c:4751 panel/panel_config.c:1566
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:25
-#, fuzzy
-msgid "New Calendar"
-msgstr "Kalender"
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:26
-msgid "New Day Type"
-msgstr ""
-
-# panel/menu.c:4751 panel/panel_config.c:1566
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:27
-#, fuzzy
-msgid "Select a calendar"
-msgstr "Kalender"
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:28
-msgid ""
-"Select a weekday and the day type to use for that day in the default week "
-"for this calendar.\n"
-msgstr ""
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:30
-msgid "Set day type to:"
-msgstr ""
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:31
-msgid "To:"
-msgstr ""
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:32
-msgid "Use working time from derived calendar"
-msgstr ""
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:33
-#, fuzzy
-msgid "Week day:"
-msgstr "Veker"
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:34
-msgid "Working time..."
-msgstr ""
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:35
-msgid "_Derive from a calendar"
-msgstr ""
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:36
-msgid "_Name of the new calendar:"
-msgstr ""
-
-#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:37
-#, fuzzy
-msgid "_New..."
-msgstr "Ny ..."
-
-#: src/dialogs/calendar-dialog/mg-default-week-dialog.c:40
+#: src/planner-default-week-dialog.c:40
 #, fuzzy
 msgid "Monday"
 msgstr "I dag"
 
-#: src/dialogs/calendar-dialog/mg-default-week-dialog.c:41
+#: src/planner-default-week-dialog.c:41
 #, fuzzy
 msgid "Tuesday"
 msgstr "I dag"
 
-#: src/dialogs/calendar-dialog/mg-default-week-dialog.c:42
+#: src/planner-default-week-dialog.c:42
 msgid "Wednesday"
 msgstr ""
 
-#: src/dialogs/calendar-dialog/mg-default-week-dialog.c:43
+#: src/planner-default-week-dialog.c:43
 #, fuzzy
 msgid "Thursday"
 msgstr "timar"
 
-#: src/dialogs/calendar-dialog/mg-default-week-dialog.c:44
+#: src/planner-default-week-dialog.c:44
 #, fuzzy
 msgid "Friday"
 msgstr "dag"
 
-#: src/dialogs/calendar-dialog/mg-default-week-dialog.c:45
+#: src/planner-default-week-dialog.c:45
 msgid "Saturday"
 msgstr ""
 
-#: src/dialogs/calendar-dialog/mg-default-week-dialog.c:46
+#: src/planner-default-week-dialog.c:46
 #, fuzzy
 msgid "Sunday"
 msgstr "dag"
 
-#: src/dialogs/calendar-dialog/mg-default-week-dialog.c:267
+#: src/planner-default-week-dialog.c:266
 msgid "No working time"
 msgstr ""
 
-#: src/dialogs/calendar-dialog/mg-default-week-dialog.c:278
-#: src/dialogs/calendar-dialog/mg-default-week-dialog.c:282
+#: src/planner-default-week-dialog.c:277 src/planner-default-week-dialog.c:281
 msgid "%H:%M"
 msgstr ""
 
-#: src/dialogs/group-dialog/mg-group-dialog.c:387
-#: src/dialogs/property-dialog/mg-property-dialog.c:380
-#: src/dialogs/task-dialog/mg-task-dialog.c:1312
-#: src/dialogs/task-dialog/mg-task-dialog.c:1398
-#: src/views/gantt/mg-task-view.c:227 src/views/gantt/mg-gantt-print.c:190
-#: src/views/resources/mg-resource-view.c:942
+#: src/planner-group-dialog.c:387 src/planner-property-dialog.c:378
+#: src/planner-task-dialog.c:1311 src/planner-task-dialog.c:1397
+#: src/planner-task-view.c:227 src/planner-gantt-print.c:190
+#: src/planner-resource-view.c:966
 msgid "Name"
 msgstr "Namn"
 
-#: src/dialogs/group-dialog/mg-group-dialog.c:393
+#: src/planner-group-dialog.c:393
 #, fuzzy
 msgid "Manager name"
 msgstr "Sjef"
 
-#: src/dialogs/group-dialog/mg-group-dialog.c:399
+#: src/planner-group-dialog.c:399
 #, fuzzy
 msgid "Manager phone"
 msgstr "Sjef"
 
-#: src/dialogs/group-dialog/mg-group-dialog.c:405
+#: src/planner-group-dialog.c:405
 #, fuzzy
 msgid "Manager email"
 msgstr "Sjef"
 
-#: src/dialogs/group-dialog/mg-group-dialog.c:411
+#: src/planner-group-dialog.c:411
 msgid "Default"
 msgstr "Standard"
 
-#: src/dialogs/group-dialog/mg-group-dialog.glade.h:1
-msgid "Group Editor"
-msgstr "Grupperedigering"
-
-#: src/dialogs/project-dialog/mg-project-properties.c:146
+#: src/planner-project-properties.c:146
 msgid "Select a calendar to use for this project:"
 msgstr ""
 
-#: src/dialogs/project-dialog/mg-project-properties.c:505
+#: src/planner-project-properties.c:505
 #, fuzzy
 msgid "None"
 msgstr "Namn"
 
-#: src/dialogs/project-dialog/mg-project-properties.c:606
+#: src/planner-project-properties.c:606
 #, fuzzy
 msgid "Property"
 msgstr "Nytt prosjekt"
 
-#: src/dialogs/project-dialog/mg-project-properties.c:617
-#: src/dialogs/property-dialog/mg-property-dialog.c:433
+#: src/planner-project-properties.c:617 src/planner-property-dialog.c:431
 msgid "Value"
 msgstr ""
 
-#: src/dialogs/project-dialog/mg-project-properties.c:994
-#: src/dialogs/property-dialog/mg-property-dialog.c:231
+#: src/planner-project-properties.c:993 src/planner-property-dialog.c:229
 msgid "The name of the custom property needs to start with a letter."
 msgstr ""
 
-#: src/dialogs/project-dialog/mg-project-properties.c:1066
-#: src/dialogs/property-dialog/mg-property-dialog.c:302
+#: src/planner-project-properties.c:1065 src/planner-property-dialog.c:300
 #, c-format
 msgid "Do you really want to remove the property '%s' from the project?"
 msgstr ""
 
-#: src/dialogs/project-dialog/mg-project-properties.c:1196
+#: src/planner-project-properties.c:1194
 #, fuzzy
 msgid "Could not create properties dialog."
 msgstr "Klarte ikkje å opprette forstørringsdialog."
 
-#: src/dialogs/project-dialog/mg-project-properties.glade.h:2
-msgid "<b>Project phases</b>"
-msgstr ""
-
-# applets/gen_util/mailcheck.c:1522
-# applets/gen_util/mailcheck.c:1522
-#: src/dialogs/project-dialog/mg-project-properties.glade.h:3
-#, fuzzy
-msgid "Calendar:"
-msgstr "Tøm"
-
-# applets/gen_util/printer.c:308
-#: src/dialogs/project-dialog/mg-project-properties.glade.h:4
-#, fuzzy
-msgid "Custom properties"
-msgstr "Eigenskapar for prosjekt"
-
-#: src/dialogs/project-dialog/mg-project-properties.glade.h:5
-#, fuzzy
-msgid "Edit Project phases"
-msgstr "Endre eigenskapar for prosjektet"
-
-#: src/dialogs/project-dialog/mg-project-properties.glade.h:6
-#, fuzzy
-msgid "Enter the name of the new project phase:"
-msgstr "Gå til byrjinga av prosjektet"
-
-# gnome-terminal/gnome-terminal.glade.h:20
-#: src/dialogs/project-dialog/mg-project-properties.glade.h:7
-#: src/dialogs/resource-dialog/mg-resource-dialog.glade.h:5
-#: src/dialogs/task-dialog/mg-task-dialog.glade.h:6
-msgid "General"
-msgstr "Allment"
-
-#: src/dialogs/project-dialog/mg-project-properties.glade.h:8
-#, fuzzy
-msgid "New Project Phase"
-msgstr "Nytt prosjekt"
-
-#: src/dialogs/project-dialog/mg-project-properties.glade.h:9
-#, fuzzy
-msgid "Project _name:"
-msgstr "Prosjekt_namn:"
-
-#: src/dialogs/project-dialog/mg-project-properties.glade.h:10
-#, fuzzy
-msgid "Project _start:"
-msgstr "Prosjektstart"
-
-#: src/dialogs/project-dialog/mg-project-properties.glade.h:11
-#, fuzzy
-msgid "Project phase:"
-msgstr "Prosjekt_namn:"
-
-# applets/gen_util/printer.c:308
-#: src/dialogs/project-dialog/mg-project-properties.glade.h:12
-#, fuzzy
-msgid "Project properties"
-msgstr "Eigenskapar for prosjekt"
-
-#: src/dialogs/project-dialog/mg-project-properties.glade.h:13
-#, fuzzy
-msgid "Select..."
-msgstr "Send prosjekt ..."
-
-#: src/dialogs/project-dialog/mg-project-properties.glade.h:14
-msgid "_Manager:"
-msgstr "_Sjef:"
-
-#: src/dialogs/project-dialog/mg-project-properties.glade.h:15
-msgid "_Organization:"
-msgstr ""
-
-#: src/dialogs/property-dialog/mg-new-property.glade.h:2
-msgid "Description: "
-msgstr ""
-
-#: src/dialogs/property-dialog/mg-new-property.glade.h:3
-msgid "Label: "
-msgstr ""
-
-#: src/dialogs/property-dialog/mg-new-property.glade.h:4
-#, fuzzy
-msgid "Name: "
-msgstr "Namn:"
-
-#: src/dialogs/property-dialog/mg-new-property.glade.h:5
-#, fuzzy
-msgid "New Property"
-msgstr "Nytt prosjekt"
-
-# panel/menu.c:4771
-#: src/dialogs/property-dialog/mg-new-property.glade.h:6
-#, fuzzy
-msgid "Type: "
-msgstr "Type"
-
-#: src/dialogs/property-dialog/mg-property-dialog.c:399
+#: src/planner-property-dialog.c:397
 msgid "Label"
 msgstr ""
 
 # panel/menu.c:4771
-#: src/dialogs/property-dialog/mg-property-dialog.c:413
-#: src/dialogs/task-dialog/mg-task-dialog.c:1430
-#: src/views/resources/mg-resource-view.c:963
+#: src/planner-property-dialog.c:411 src/planner-task-dialog.c:1429
+#: src/planner-resource-view.c:987
 msgid "Type"
 msgstr "Type"
 
-# applets/gen_util/printer.c:308
-#: src/dialogs/property-dialog/mg-property-dialog.glade.h:1
-#, fuzzy
-msgid "Custom Properties"
-msgstr "Eigenskapar for prosjekt"
-
-#: src/dialogs/print-dialog/mg-print-dialog.c:49
+#: src/planner-print-dialog.c:49
 #, fuzzy
 msgid "Print Project"
 msgstr "MrProject"
 
-#: src/dialogs/print-dialog/mg-print-dialog.c:56
+#: src/planner-print-dialog.c:56
 #, fuzzy
 msgid "Select views"
 msgstr "Vald oppgåve"
 
-#: src/dialogs/print-dialog/mg-print-dialog.c:74
+#: src/planner-print-dialog.c:74
 msgid "Select the views to print:"
 msgstr ""
 
 #. Put "no group" at the top.
-#: src/dialogs/resource-dialog/mg-resource-dialog.c:248
-#: src/dialogs/resource-input-dialog/mg-resource-input-dialog.c:97
-#: src/views/resources/mg-resource-view.c:1351
+#: src/planner-resource-dialog.c:248 src/planner-resource-input-dialog.c:96
+#: src/planner-resource-view.c:1375
 msgid "(None)"
 msgstr ""
 
-#: src/dialogs/resource-dialog/mg-resource-dialog.c:258
-#: src/dialogs/resource-input-dialog/mg-resource-input-dialog.c:107
-#: src/dialogs/task-dialog/mg-task-dialog.c:249
+#: src/planner-resource-dialog.c:258 src/planner-resource-input-dialog.c:106
+#: src/planner-task-dialog.c:249
 #, fuzzy
 msgid "(No name)"
 msgstr "Namn"
 
 #. i18n: time stamp format for notes in task dialog, see strftime(3) for
 #. * a detailed description.
-#: src/dialogs/resource-dialog/mg-resource-dialog.c:728
-#: src/dialogs/task-dialog/mg-task-dialog.c:679
+#: src/planner-resource-dialog.c:728 src/planner-task-dialog.c:679
 #, fuzzy
 msgid "%a %d %b %Y, %H:%M\n"
 msgstr ""
@@ -863,376 +1215,137 @@ msgstr ""
 "*** %a %d %b %Y, %I:%M %p *** \n"
 "\n"
 
-#: src/dialogs/resource-dialog/mg-resource-dialog.c:826
+#: src/planner-resource-dialog.c:826
 msgid "None (use project default)"
 msgstr ""
 
-#: src/dialogs/resource-dialog/mg-resource-dialog.c:953
-#: src/dialogs/resource-dialog/mg-resource-dialog.c:955
+#: src/planner-resource-dialog.c:953 src/planner-resource-dialog.c:955
 #, fuzzy
 msgid "Edit resource properties"
 msgstr "Endre eigenskapar for prosjektet"
 
-#: src/dialogs/resource-dialog/mg-resource-dialog.c:1102
-#: src/views/gantt/mg-task-view.c:230 src/views/gantt/mg-gantt-print.c:198
-#: src/views/resources/mg-resource-view.c:629
-#: src/views/resources/mg-resource-view.c:645
-#: src/views/resources/mg-resource-view.c:1163
+#: src/planner-resource-dialog.c:1101 src/planner-task-view.c:230
+#: src/planner-gantt-print.c:198 src/planner-resource-view.c:629
+#: src/planner-resource-view.c:645 src/planner-resource-view.c:1187
 msgid "Work"
 msgstr "Arbeid"
 
-#: src/dialogs/resource-dialog/mg-resource-dialog.c:1103
-#: src/views/resources/mg-resource-view.c:632
-#: src/views/resources/mg-resource-view.c:646
-#: src/views/resources/mg-resource-view.c:1164
+#: src/planner-resource-dialog.c:1102 src/planner-resource-view.c:632
+#: src/planner-resource-view.c:646 src/planner-resource-view.c:1188
 msgid "Material"
 msgstr "Materiell"
 
-#: src/dialogs/resource-dialog/mg-resource-dialog.glade.h:2
-#, fuzzy
-msgid "C_ost:"
-msgstr "_Eigendefinert:"
-
-# applets/gen_util/mailcheck.c:1522
-# applets/gen_util/mailcheck.c:1522
-#: src/dialogs/resource-dialog/mg-resource-dialog.glade.h:3
-#, fuzzy
-msgid "Calendar"
-msgstr "Tøm"
-
-# panel/menu-properties.c:211 panel/menu.c:5139 panel/menu.c:5917
-#: src/dialogs/resource-dialog/mg-resource-dialog.glade.h:4
-#, fuzzy
-msgid "Edit calendars..."
-msgstr "Rediger oppgåve ..."
-
-# applets/gen_util/clock.c:869
-#: src/dialogs/resource-dialog/mg-resource-dialog.glade.h:6
-#: src/dialogs/task-dialog/mg-task-dialog.glade.h:7
-msgid "Insert time stamp"
-msgstr "Sett inn tidsmerke"
-
-#: src/dialogs/resource-dialog/mg-resource-dialog.glade.h:7
-#: src/dialogs/task-dialog/mg-task-dialog.glade.h:9
-msgid "Notes"
-msgstr "Notat"
-
-#: src/dialogs/resource-dialog/mg-resource-dialog.glade.h:8
-msgid ""
-"Select the calendar to use for this resource. If you want to use the default "
-"calendar of the project, select 'None'. "
-msgstr ""
-
-#: src/dialogs/resource-dialog/mg-resource-dialog.glade.h:9
-#, fuzzy
-msgid "_Email:"
-msgstr "E-post:"
-
-#: src/dialogs/resource-dialog/mg-resource-dialog.glade.h:10
-#, fuzzy
-msgid "_Group:"
-msgstr "Gruppe"
-
-#: src/dialogs/resource-dialog/mg-resource-dialog.glade.h:11
-msgid "_Name:"
-msgstr "_Namn:"
-
-# panel/menu.c:4771
-#: src/dialogs/resource-dialog/mg-resource-dialog.glade.h:12
-#, fuzzy
-msgid "_Type:"
-msgstr "Type"
-
-#: src/dialogs/resource-input-dialog/mg-resource-input-dialog.glade.h:2
-#, fuzzy
-msgid "Email:"
-msgstr "E-post:"
-
-#: src/dialogs/resource-input-dialog/mg-resource-input-dialog.glade.h:3
-#, fuzzy
-msgid "Group:"
-msgstr "Gruppe"
-
-#: src/dialogs/resource-input-dialog/mg-resource-input-dialog.glade.h:4
-#, fuzzy
-msgid "Insert resource"
-msgstr "Set inn ein ny ressurs i ei rad"
-
-#: src/dialogs/resource-input-dialog/mg-resource-input-dialog.glade.h:5
-#: src/dialogs/task-input-dialog/mg-task-input-dialog.glade.h:3
-#, fuzzy
-msgid "Name:"
-msgstr "Namn:"
-
-#: src/dialogs/resource-input-dialog/mg-resource-input-dialog.glade.h:6
-#: src/dialogs/task-input-dialog/mg-task-input-dialog.glade.h:5
-msgid "_Insert"
-msgstr "Set _inn"
-
-#: src/dialogs/task-dialog/mg-add-predecessor.glade.h:2
-msgid "Lag: "
-msgstr ""
-
-#: src/dialogs/task-dialog/mg-add-predecessor.glade.h:3
-msgid "New predecessor"
-msgstr ""
-
-#: src/dialogs/task-dialog/mg-add-predecessor.glade.h:4
-msgid "Predecessor: "
-msgstr ""
-
-#: src/dialogs/task-dialog/mg-add-predecessor.glade.h:5
-msgid "Relation type: "
-msgstr ""
-
-#: src/dialogs/task-dialog/mg-predecessor-model.c:191
-#: src/dialogs/task-dialog/mg-task-dialog.c:1040
+#: src/planner-predecessor-model.c:191 src/planner-task-dialog.c:1039
 msgid "FS"
 msgstr ""
 
-#: src/dialogs/task-dialog/mg-predecessor-model.c:194
-#: src/dialogs/task-dialog/mg-task-dialog.c:1041
+#: src/planner-predecessor-model.c:194 src/planner-task-dialog.c:1040
 msgid "FF"
 msgstr ""
 
-#: src/dialogs/task-dialog/mg-predecessor-model.c:197
-#: src/dialogs/task-dialog/mg-task-dialog.c:1042
+#: src/planner-predecessor-model.c:197 src/planner-task-dialog.c:1041
 msgid "SS"
 msgstr ""
 
-#: src/dialogs/task-dialog/mg-predecessor-model.c:200
-#: src/dialogs/task-dialog/mg-task-dialog.c:1043
+#: src/planner-predecessor-model.c:200 src/planner-task-dialog.c:1042
 msgid "SF"
 msgstr ""
 
-#: src/dialogs/task-dialog/mg-task-dialog.c:746
+#: src/planner-task-dialog.c:745
 msgid "Finish to start (FS)"
 msgstr ""
 
-#: src/dialogs/task-dialog/mg-task-dialog.c:747
+#: src/planner-task-dialog.c:746
 msgid "Finish to finish (FF)"
 msgstr ""
 
-#: src/dialogs/task-dialog/mg-task-dialog.c:748
+#: src/planner-task-dialog.c:747
 msgid "Start to start (SS)"
 msgstr ""
 
-#: src/dialogs/task-dialog/mg-task-dialog.c:749
+#: src/planner-task-dialog.c:748
 msgid "Start to finish (SF)"
 msgstr ""
 
-#: src/dialogs/task-dialog/mg-task-dialog.c:799
+#: src/planner-task-dialog.c:798
 msgid "Can't add new predecessor. No task selected!"
 msgstr ""
 
-#: src/dialogs/task-dialog/mg-task-dialog.c:1331
+#: src/planner-task-dialog.c:1330
 msgid "Assigned"
 msgstr "Tildelt"
 
-#: src/dialogs/task-dialog/mg-task-dialog.c:1348
+#: src/planner-task-dialog.c:1347
 msgid "Units"
 msgstr "Einingar"
 
-#: src/dialogs/task-dialog/mg-task-dialog.c:1452
+#: src/planner-task-dialog.c:1451
 msgid "Lag"
 msgstr ""
 
-#: src/dialogs/task-dialog/mg-task-dialog.c:1585
-#: src/dialogs/task-dialog/mg-task-dialog.c:1587
+#: src/planner-task-dialog.c:1584 src/planner-task-dialog.c:1586
 #, fuzzy
 msgid "Edit task properties"
 msgstr "Endre eigenskapar for prosjektet"
 
-#: src/dialogs/task-dialog/mg-task-dialog.glade.h:3
-#, no-c-format
-msgid "%"
-msgstr ""
-
-#: src/dialogs/task-dialog/mg-task-dialog.glade.h:5
-#, fuzzy
-msgid "C_omplete:"
-msgstr "_Ferdig [%]"
-
-#: src/dialogs/task-dialog/mg-task-dialog.glade.h:8
-#, fuzzy
-msgid "Na_me:"
-msgstr "Namn:"
-
-#: src/dialogs/task-dialog/mg-task-dialog.glade.h:10
-#, fuzzy
-msgid "Pr_iority:"
-msgstr "_Prioritet:"
-
-#: src/dialogs/task-dialog/mg-task-dialog.glade.h:11
-msgid "Predecessors"
-msgstr ""
-
-# applets/tasklist/tasklist_menu.c:258
-#: src/dialogs/task-dialog/mg-task-dialog.glade.h:12
-#: src/views/resources/mg-resource-view.c:342
-msgid "Resources"
-msgstr "Ressursar"
-
-#: src/dialogs/task-dialog/mg-task-dialog.glade.h:13
-#, fuzzy
-msgid "_Duration:"
-msgstr "Lengd"
-
-#: src/dialogs/task-dialog/mg-task-dialog.glade.h:14
-#, fuzzy
-msgid "_Fixed duration"
-msgstr "Lengd"
-
-#: src/dialogs/task-dialog/mg-task-dialog.glade.h:15
-msgid "_Milestone"
-msgstr ""
-
-#: src/dialogs/task-dialog/mg-task-dialog.glade.h:16
-#, fuzzy
-msgid "_Work:"
-msgstr "Arbeid"
-
-#. day unit variant accepted in input
-#: src/dialogs/task-dialog/mg-task-dialog.glade.h:17
-#: src/views/gantt/mg-task-tree.c:2121
-msgid "days"
-msgstr "dagar"
-
-#: src/dialogs/task-input-dialog/mg-task-input-dialog.glade.h:2
-#, fuzzy
-msgid "Insert task"
-msgstr "Sett inn deloppgåve"
-
-#: src/dialogs/task-input-dialog/mg-task-input-dialog.glade.h:4
-#, fuzzy
-msgid "Work:"
-msgstr "Arbeid"
-
-#: src/plugins/html-output/GNOME_MrProject_HtmlOutputPlugin.ui.h:1
-#: src/plugins/html-output/mg-html-output.glade.h:4
-msgid "Export to HTML"
-msgstr ""
-
-#: src/plugins/html-output/mg-html-output.glade.h:3
-msgid "<b>Save to</b>"
-msgstr ""
-
-#: src/plugins/html-output/mg-html-output.glade.h:5
-msgid "Local file"
-msgstr ""
-
-#: src/plugins/html-output/mg-html-output.glade.h:6
-#, fuzzy
-msgid "Save to HTML File"
-msgstr "Opne ei fil"
-
-#: src/plugins/html-output/mg-html-output.glade.h:7
-msgid "Web location"
-msgstr ""
-
-#: src/plugins/html-output/mg-html-output-plugin.c:133
+#: src/planner-html-plugin.c:133
 #, c-format
 msgid ""
 "\"%s\" is a directory.\n"
 "Enter a filename and try again."
 msgstr ""
 
-#: src/plugins/sql/GNOME_MrProject_SQLPlugin.ui.h:1
-msgid "Open from Database..."
-msgstr ""
-
-#: src/plugins/sql/GNOME_MrProject_SQLPlugin.ui.h:2
-#, fuzzy
-msgid "Save to Database..."
-msgstr "L_agre som ..."
-
-#: src/plugins/sql/mg-sql.glade.h:3
-msgid "<b>Open Database</b>"
-msgstr ""
-
-#: src/plugins/sql/mg-sql.glade.h:4
-msgid "Database:"
-msgstr ""
-
-#: src/plugins/sql/mg-sql.glade.h:5
-msgid "Open Database"
-msgstr ""
-
-#: src/plugins/sql/mg-sql.glade.h:6
-msgid "Password:"
-msgstr ""
-
-#: src/plugins/sql/mg-sql.glade.h:7
-#, fuzzy
-msgid "Select a Project"
-msgstr "(Tomt prosjekt)"
-
-# gmenu/edit.c:325 gsm/session-properties.c:173 panel/launcher.c:556
-# panel/menu.c:1396 panel/menu.c:1507
-#: src/plugins/sql/mg-sql.glade.h:8
-#, fuzzy
-msgid "Server:"
-msgstr "Gå tilbake"
-
-#: src/plugins/sql/mg-sql.glade.h:9
-msgid "The database contains the following projects. Select a project to open:"
-msgstr ""
-
-#: src/plugins/sql/mg-sql.glade.h:10
-msgid "Username:"
-msgstr ""
-
 #. Give up.
-#: src/plugins/sql/mg-sql-plugin.c:127
+#: src/planner-sql-plugin.c:127
 msgid "Invalid Unicode"
 msgstr ""
 
-#: src/plugins/sql/mg-sql-plugin.c:269
+#: src/planner-sql-plugin.c:269
 #, c-format
 msgid ""
 "Connection to database '%s' failed:\n"
 "%s"
 msgstr ""
 
-#: src/plugins/sql/mg-sql-plugin.c:318
+#: src/planner-sql-plugin.c:318
 #, fuzzy
 msgid "Project"
 msgstr "MrProject"
 
-#: src/plugins/sql/mg-sql-plugin.c:466
+#: src/planner-sql-plugin.c:466
 msgid "Open from Database"
 msgstr ""
 
-#: src/plugins/sql/mg-sql-plugin.c:573
+#: src/planner-sql-plugin.c:573
 #, fuzzy
 msgid "Save to Database"
 msgstr "Lagre som"
 
-#: src/util/mg-format.c:141
+#: src/planner-format.c:141
 #, fuzzy, c-format
 msgid "%dd %dh"
 msgstr "%d %s"
 
-#: src/util/mg-format.c:144
+#: src/planner-format.c:144
 #, fuzzy, c-format
 msgid "%dd"
 msgstr "Legg til"
 
-#: src/util/mg-format.c:147
+#: src/planner-format.c:147
 #, c-format
 msgid "%dh"
 msgstr ""
 
-#: src/util/mg-format.c:171
+#: src/planner-format.c:171
 #, fuzzy, c-format
 msgid "%s days"
 msgstr "0 dagar"
 
-#: src/util/mg-format.c:174
+#: src/planner-format.c:174
 msgid "0 days"
 msgstr "0 dagar"
 
-#: src/util/mg-format.c:177
+#: src/planner-format.c:177
 #, fuzzy, c-format
 msgid "%s day"
 msgstr "1 dag"
@@ -1241,172 +1354,49 @@ msgstr "1 dag"
 #. * e.g. in the date cells in the task tree. See
 #. * libmrproject/docs/DateFormat.
 #.
-#: src/util/mg-format.c:197
+#: src/planner-format.c:197
 #, fuzzy
 msgid "%b %e"
 msgstr "%Y %B %e"
 
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:1
-#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:1
-#, fuzzy
-msgid "I_ndent Task"
-msgstr "Sett inn deloppgåve"
-
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:2
-#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:2
-#, fuzzy
-msgid "In_sert Tasks..."
-msgstr "Sett inn deloppgåve"
-
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:5
-#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:5
-#, fuzzy
-msgid "Move Task Do_wn"
-msgstr "Flytt ned"
-
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:6
-#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:6
-#, fuzzy
-msgid "Move Task _Up"
-msgstr "Flytt opp"
-
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:10
-#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:10
-msgid "Reset _All Constraints"
-msgstr ""
-
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:11
-#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:11
-msgid "Reset _Constraint"
-msgstr ""
-
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:12
-#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:12
-#: src/views/resources/GNOME_MrProject_ResourcesView.ui.h:7
-#, fuzzy
-msgid "Select _All"
-msgstr "Vel alle"
-
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:13
-#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:13
-#: src/views/resources/GNOME_MrProject_ResourcesView.ui.h:8
-msgid "Select all tasks"
-msgstr "Vel alle oppgåver"
-
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:14
-#, fuzzy
-msgid "Test"
-msgstr "Nullstill"
-
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:15
-#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:14
-#, fuzzy
-msgid "Un_link Task"
-msgstr "Fjern lenke"
-
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:16
-#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:15
-#, fuzzy
-msgid "Unin_dent Task"
-msgstr "Fjern innrykk"
-
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:19
-#, fuzzy
-msgid "Zoom In"
-msgstr "Forstørring"
-
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:20
-#, fuzzy
-msgid "Zoom Out"
-msgstr "Forstørr til:"
-
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:21
-#, fuzzy
-msgid "Zoom To Fit"
-msgstr "Forstørr til:"
-
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:22
-#, fuzzy
-msgid "Zoom To _Fit"
-msgstr "Forstørr til:"
-
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:23
-#, fuzzy
-msgid "Zoom _Out"
-msgstr "Forstørr til:"
-
-# panel/menu-properties.c:211 panel/menu.c:5139 panel/menu.c:5917
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:24
-#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:19
-#, fuzzy
-msgid "_Edit Task Properties..."
-msgstr "Rediger oppgåve ..."
-
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:25
-msgid "_Highlight Critical Tasks"
-msgstr ""
-
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:26
-#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:20
-#, fuzzy
-msgid "_Insert Task"
-msgstr "Sett inn deloppgåve"
-
-# panel/menu.c:1668
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:27
-#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:21
-#, fuzzy
-msgid "_Remove Task"
-msgstr "Fjern denne oppgåva"
-
-#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:28
-#, fuzzy
-msgid "_Zoom In"
-msgstr "Forstørring"
-
-#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:18
-#, fuzzy
-msgid "_Edit Custom Properties..."
-msgstr "Endre eigenskapar for prosjektet"
-
 # panel/foobar-widget.c:464
 #. i18n: project start, the date format is described in
 #. * libmrproject/docs/DateFormat.
-#: src/views/gantt/mg-gantt-background.c:579
+#: src/planner-gantt-background.c:579
 #, fuzzy
 msgid "%Y %b %d"
 msgstr "%A %d %B"
 
-#: src/views/gantt/mg-gantt-background.c:581
+#: src/planner-gantt-background.c:581
 #, fuzzy
 msgid "Project start"
 msgstr "Prosjektstart"
 
-#: src/views/gantt/mg-gantt-row.c:1841 src/views/gantt/mg-gantt-row.c:1844
+#: src/planner-gantt-row.c:1841 src/planner-gantt-row.c:1844
 #, fuzzy
 msgid "No name"
 msgstr "Namn"
 
-#: src/views/gantt/mg-gantt-row.c:1847
+#: src/planner-gantt-row.c:1847
 #, c-format
 msgid "Make task '%s' a predecessor of '%s'"
 msgstr ""
 
-#: src/views/gantt/mg-gantt-row.c:1905
+#: src/planner-gantt-row.c:1905
 #, c-format
 msgid "Change work to %s"
 msgstr ""
 
-#: src/views/gantt/mg-gantt-view.c:274
+#: src/planner-gantt-view.c:273
 msgid "Gantt Chart"
 msgstr "Gannt diagram"
 
-#: src/views/gantt/mg-gantt-view.c:282
+#: src/planner-gantt-view.c:281
 #, fuzzy
 msgid "_Gantt Chart"
 msgstr "Gannt diagram"
 
-#: src/views/gantt/mg-gantt-view.c:471
+#: src/planner-gantt-view.c:470
 #, fuzzy
 msgid ""
 "\n"
@@ -1414,7 +1404,7 @@ msgid ""
 msgstr "Namn"
 
 #. COL_START,    _("\nStart"),
-#: src/views/gantt/mg-gantt-view.c:473
+#: src/planner-gantt-view.c:472
 #, fuzzy
 msgid ""
 "\n"
@@ -1422,262 +1412,224 @@ msgid ""
 msgstr "Arbeid"
 
 #. i18n: Short "Week", preferably 2 letters.
-#: src/views/gantt/mg-scale-utils.c:325
+#: src/planner-scale-utils.c:325
 #, c-format
 msgid "Wk %d"
 msgstr ""
 
-#: src/views/gantt/mg-scale-utils.c:329
+#: src/planner-scale-utils.c:329
 #, fuzzy, c-format
 msgid "Week %d"
 msgstr "Veker"
 
 #. i18n: Week, year.
-#: src/views/gantt/mg-scale-utils.c:334
+#: src/planner-scale-utils.c:334
 #, c-format
 msgid "Week %d, %d"
 msgstr ""
 
 #. i18n: Short "Quarter", preferrably 1 letter.
-#: src/views/gantt/mg-scale-utils.c:365
+#: src/planner-scale-utils.c:365
 #, c-format
 msgid "Q%d"
 msgstr ""
 
 #. i18n: Short "Quarter", preferrably 2-3 letters.
-#: src/views/gantt/mg-scale-utils.c:369
+#: src/planner-scale-utils.c:369
 #, c-format
 msgid "Qtr %d"
 msgstr ""
 
 #. i18n: Year, short "Quarter", preferrably 2-3 letters.
-#: src/views/gantt/mg-scale-utils.c:373
+#: src/planner-scale-utils.c:373
 #, c-format
 msgid "%d, Qtr %d"
 msgstr ""
 
 #. i18n: Short "Half year", prefferably 1 letter.
-#: src/views/gantt/mg-scale-utils.c:386
+#: src/planner-scale-utils.c:386
 #, c-format
 msgid "H%d"
 msgstr ""
 
 #. i18n: Year, short "Half year", prefferably 1 letter.
-#: src/views/gantt/mg-scale-utils.c:391
+#: src/planner-scale-utils.c:391
 #, c-format
 msgid "%04d, H%d"
 msgstr ""
 
-#: src/views/gantt/mg-task-tree.c:185
+#: src/planner-task-tree.c:184
 #, fuzzy
 msgid "/_Insert task"
 msgstr "Sett inn deloppgåve"
 
-#: src/views/gantt/mg-task-tree.c:186
+#: src/planner-task-tree.c:185
 #, fuzzy
 msgid "/_Insert subtask"
 msgstr "Sett inn deloppgåve"
 
 # panel/menu.c:1668
-#: src/views/gantt/mg-task-tree.c:187
+#: src/planner-task-tree.c:186
 #, fuzzy
 msgid "/_Remove task"
 msgstr "Fjern denne oppgåva"
 
-#: src/views/gantt/mg-task-tree.c:189
+#: src/planner-task-tree.c:188
 #, fuzzy
 msgid "/_Unlink task"
 msgstr "Fjern lenke"
 
 # panel/menu-properties.c:211 panel/menu.c:5139 panel/menu.c:5917
-#: src/views/gantt/mg-task-tree.c:191
+#: src/planner-task-tree.c:190
 #, fuzzy
 msgid "/_Edit task..."
 msgstr "Rediger oppgåve ..."
 
-#: src/views/gantt/mg-task-tree.c:2113
+#: src/planner-task-tree.c:2112
 #, fuzzy
 msgid "mon"
 msgstr "månader"
 
 #. month unit variant accepted in input
-#: src/views/gantt/mg-task-tree.c:2114
+#: src/planner-task-tree.c:2113
 #, fuzzy
 msgid "month"
 msgstr "månader"
 
 #. month unit variant accepted in input
-#: src/views/gantt/mg-task-tree.c:2115
+#: src/planner-task-tree.c:2114
 msgid "months"
 msgstr "månader"
 
 #. month unit variant accepted in input
-#: src/views/gantt/mg-task-tree.c:2116
+#: src/planner-task-tree.c:2115
 msgid "w"
 msgstr "w"
 
 #. week unit variant accepted in input
-#: src/views/gantt/mg-task-tree.c:2117
+#: src/planner-task-tree.c:2116
 msgid "week"
 msgstr "veke"
 
 #. week unit variant accepted in input
-#: src/views/gantt/mg-task-tree.c:2118
+#: src/planner-task-tree.c:2117
 msgid "weeks"
 msgstr "veker"
 
 #. week unit variant accepted in input
-#: src/views/gantt/mg-task-tree.c:2119
+#: src/planner-task-tree.c:2118
 msgid "d"
 msgstr "d"
 
 #. day unit variant accepted in input
-#: src/views/gantt/mg-task-tree.c:2120
+#: src/planner-task-tree.c:2119
 msgid "day"
 msgstr "dag"
 
 #. day unit variant accepted in input
-#: src/views/gantt/mg-task-tree.c:2122
+#: src/planner-task-tree.c:2121
 msgid "h"
 msgstr "t"
 
 #. hour unit variant accepted in input
-#: src/views/gantt/mg-task-tree.c:2123
+#: src/planner-task-tree.c:2122
 msgid "hour"
 msgstr "time"
 
 #. hour unit variant accepted in input
-#: src/views/gantt/mg-task-tree.c:2124
+#: src/planner-task-tree.c:2123
 msgid "hours"
 msgstr "timar"
 
 #. hour unit variant accepted in input
-#: src/views/gantt/mg-task-tree.c:2125
+#: src/planner-task-tree.c:2124
 msgid "min"
 msgstr ""
 
 # applets/gen_util/mailcheck.c:1217
 #. minute unit variant accepted in input
-#: src/views/gantt/mg-task-tree.c:2126
+#: src/planner-task-tree.c:2125
 #, fuzzy
 msgid "minute"
 msgstr "minutt"
 
 # applets/gen_util/mailcheck.c:1217
 #. minute unit variant accepted in input
-#: src/views/gantt/mg-task-tree.c:2127
+#: src/planner-task-tree.c:2126
 msgid "minutes"
 msgstr "minutt"
 
-#: src/views/gantt/mg-task-view.c:173
+#: src/planner-task-view.c:173
 #, fuzzy
 msgid "Tasks"
 msgstr "_Oppgåve"
 
-#: src/views/gantt/mg-task-view.c:181
+#: src/planner-task-view.c:181
 #, fuzzy
 msgid "_Tasks"
 msgstr "_Oppgåve"
 
-#: src/views/gantt/mg-task-view.c:228
+#: src/planner-task-view.c:228
 msgid "Start"
 msgstr "Start"
 
-#: src/views/gantt/mg-task-view.c:229
+#: src/planner-task-view.c:229
 msgid "Finish"
 msgstr ""
 
-#: src/views/gantt/mg-task-view.c:231
+#: src/planner-task-view.c:231
 msgid "Slack"
 msgstr ""
 
-#: src/views/gantt/mg-task-view.c:232
+#: src/planner-task-view.c:232
 msgid "Cost"
 msgstr ""
 
-#: src/views/gantt/mg-task-view.c:438
+#: src/planner-task-view.c:438
 #, fuzzy
 msgid "Edit custom task properties"
 msgstr "Endre eigenskapar for prosjektet"
 
-#: src/views/resources/GNOME_MrProject_ResourcesView.ui.h:1
-#, fuzzy
-msgid "Edit _Custom Properties..."
-msgstr "Endre eigenskapar for prosjektet"
-
-#: src/views/resources/GNOME_MrProject_ResourcesView.ui.h:2
-#, fuzzy
-msgid "Edit _Groups"
-msgstr "Inga gruppering"
-
-#: src/views/resources/GNOME_MrProject_ResourcesView.ui.h:3
-msgid "Groups"
-msgstr "Grupper"
-
-#: src/views/resources/GNOME_MrProject_ResourcesView.ui.h:4
-#, fuzzy
-msgid "In_sert Resources..."
-msgstr "Tildel ressursar ..."
-
-#: src/views/resources/GNOME_MrProject_ResourcesView.ui.h:9
-#, fuzzy
-msgid "_Edit Resource Properties..."
-msgstr "Endre eigenskapar for prosjektet"
-
-#: src/views/resources/GNOME_MrProject_ResourcesView.ui.h:10
-#, fuzzy
-msgid "_Insert Resource"
-msgstr "Set inn ein ny ressurs i ei rad"
-
-# panel/menu.c:1668
-#: src/views/resources/GNOME_MrProject_ResourcesView.ui.h:11
-#, fuzzy
-msgid "_Remove Resource"
-msgstr "Fjern denne ressursen"
-
-#: src/views/resources/mg-resource-view.c:248
+#: src/planner-resource-view.c:248
 #, fuzzy
 msgid "/_Insert resource"
 msgstr "Set inn ein ny ressurs i ei rad"
 
 # panel/menu.c:1668
-#: src/views/resources/mg-resource-view.c:249
+#: src/planner-resource-view.c:249
 #, fuzzy
 msgid "/_Remove resource"
 msgstr "Fjern denne ressursen"
 
-#: src/views/resources/mg-resource-view.c:250
+#: src/planner-resource-view.c:250
 #, fuzzy
 msgid "/_Edit resource..."
 msgstr "Tildel ressursar ..."
 
-#: src/views/resources/mg-resource-view.c:350
+#: src/planner-resource-view.c:350
 #, fuzzy
 msgid "_Resources"
 msgstr "_Ressurs"
 
-#: src/views/resources/mg-resource-view.c:825
+#: src/planner-resource-view.c:849
 #, fuzzy
 msgid "Edit custom resource properties"
 msgstr "Endre eigenskapar for prosjektet"
 
-#: src/views/resources/mg-resource-view.c:987
+#: src/planner-resource-view.c:1011
 msgid "Group"
 msgstr "Gruppe"
 
-#: src/views/resources/mg-resource-view.c:1016
+#: src/planner-resource-view.c:1040
 msgid "Email"
 msgstr "E-post"
 
-#: mrproject.desktop.in.h:1
-#, fuzzy
-msgid "MrProject Project Management Tool"
-msgstr "MrProject prosjektmotor"
+#~ msgid "Contribute to MrProject"
+#~ msgstr "Medverkande til MrProject:"
 
-#: mrproject.desktop.in.h:2
 #, fuzzy
-msgid "Project Management"
-msgstr "Prosjektstyringsverkty"
+#~ msgid "MrProject Project Management Tool"
+#~ msgstr "MrProject prosjektmotor"
 
 #, fuzzy
 #~ msgid "About"
