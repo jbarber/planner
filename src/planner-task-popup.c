@@ -1,4 +1,5 @@
 /*
+ * Copyright (C) 2005 Imendio AB
  * Copyright (C) 2004 Chris Ladd <caladd@particlestorm.net>
  *
  * This program is free software; you can redistribute it and/or
