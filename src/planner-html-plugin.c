@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
- * Copyright (C) 2003-2004 Imendio AB
+ * Copyright (C) 2003-2005 Imendio AB
  * Copyright (C) 2003 CodeFactory AB
  * Copyright (C) 2003 Richard Hult <richard@imendio.com>
  * Copyright (C) 2003 Mikael Hallendal <micke@imendio.com>
@@ -31,17 +31,23 @@
 #include <gtk/gtkstock.h>
 #include <glib/gi18n.h>
 #include <libgnomeui/gnome-file-entry.h>
+#include <libgnomevfs/gnome-vfs-utils.h>
+#include <gconf/gconf-client.h>
+
 #include "planner-window.h"
 #include "planner-plugin.h"
 
 struct _PlannerPluginPriv {
 	PlannerWindow *main_window;
 	GtkWidget     *dialog;
-	GtkWidget     *local_rbutton;
+	GtkWidget     *local_button;
 	GtkWidget     *local_fileentry;
-	GtkWidget     *server_rbutton;
+	GtkWidget     *server_button;
 	GtkWidget     *server_entry;
+
+	GtkWidget     *browser_button;
 };
+
 
 static void html_plugin_export                (GtkAction         *action,
 					       gpointer           user_data);
@@ -93,16 +99,20 @@ html_plugin_export (GtkAction *action,
 
 	gtk_window_set_transient_for (GTK_WINDOW (priv->dialog),
 				      GTK_WINDOW (priv->main_window));
-	priv->local_rbutton = glade_xml_get_widget (glade,
+	priv->local_button = glade_xml_get_widget (glade,
 						     "local_radiobutton");
 	priv->local_fileentry = glade_xml_get_widget (glade, 
 						      "local_fileentry");
-	priv->server_rbutton = glade_xml_get_widget (glade,
+	priv->server_button = glade_xml_get_widget (glade,
 						     "server_radiobutton");
 	priv->server_entry = glade_xml_get_widget (glade, "server_entry");
+
+	priv->browser_button = glade_xml_get_widget (glade,
+						     "browser_button");
+	
 	ok_button = glade_xml_get_widget (glade, "ok_button");
 	cancel_button = glade_xml_get_widget (glade, "cancel_button");
-	
+
 	g_signal_connect (ok_button, "clicked",
 			  G_CALLBACK (html_plugin_ok_button_clicked),
 			  user_data);
@@ -111,10 +121,10 @@ html_plugin_export (GtkAction *action,
 			  G_CALLBACK (html_plugin_cancel_button_clicked),
 			  user_data);
 	
-	g_signal_connect (priv->local_rbutton, "toggled",
+	g_signal_connect (priv->local_button, "toggled",
 			  G_CALLBACK (html_plugin_local_toggled),
 			  user_data);
-	g_signal_connect (priv->server_rbutton, "toggled",
+	g_signal_connect (priv->server_button, "toggled",
 			  G_CALLBACK (html_plugin_server_toggled),
 			  user_data);
 
@@ -155,15 +165,53 @@ html_plugin_export (GtkAction *action,
 	g_object_unref (glade);
 }
 
+/* Really ugly... */
+static void
+show_url (PlannerPlugin *plugin, const char *url)
+{
+	GConfClient *gconf_client;
+	gchar       *cmd, *tmp;
+	gchar       *cmdline;
+
+	gconf_client = gconf_client_get_default ();
+	cmd = gconf_client_get_string (gconf_client,
+				       "/desktop/gnome/url-handlers/http/command",
+				       NULL);
+	g_object_unref (gconf_client);
+
+	if (!cmd) {
+		return;
+	}
+
+	tmp = strchr (cmd, ' ');
+	if (tmp) {
+		tmp[0] = '\0';
+	}
+
+	cmdline = g_strconcat (cmd, " ", url, NULL);
+	
+	gdk_spawn_command_line_on_screen (gtk_widget_get_screen (GTK_WIDGET (plugin->priv->main_window)),
+					  cmdline,
+					  NULL);
+
+	g_free (cmdline);
+	g_free (cmd);
+}
+
 static void 
 html_plugin_ok_button_clicked (GtkButton *button, PlannerPlugin *plugin)
 {
-	PlannerPluginPriv *priv = plugin->priv;
+	PlannerPluginPriv *priv;
+	gboolean           view;
 	GtkWidget         *dialog;
 	gint               res;
 	const gchar       *path;
+
+	priv = plugin->priv;
 	
-	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (priv->local_rbutton))) {
+	view = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (priv->browser_button));
+	
+	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (priv->local_button))) {
 		path = gnome_file_entry_get_full_path (GNOME_FILE_ENTRY (priv->local_fileentry), FALSE);
 
 		if (!path || strlen (path) == 0) {
@@ -192,11 +240,9 @@ html_plugin_ok_button_clicked (GtkButton *button, PlannerPlugin *plugin)
 
 			switch (res) {
 			case GTK_RESPONSE_YES:
-				html_plugin_do_local_export (plugin,
-								    path);
-				gtk_widget_destroy (priv->dialog);
-				return;
-				break;
+				html_plugin_do_local_export (plugin, path);
+				goto done;
+
 			case GTK_RESPONSE_NO:
 			case GTK_RESPONSE_DELETE_EVENT:
 				break;
@@ -205,7 +251,7 @@ html_plugin_ok_button_clicked (GtkButton *button, PlannerPlugin *plugin)
 			}
 		} else {
 			html_plugin_do_local_export (plugin, path);
-			gtk_widget_destroy (priv->dialog);
+			goto done;
 		}
 	} else {
 		GtkEntry *entry;
@@ -215,9 +261,24 @@ html_plugin_ok_button_clicked (GtkButton *button, PlannerPlugin *plugin)
 		path = gtk_entry_get_text (entry);
 		if (strlen (path) > 0) {
 			html_plugin_do_local_export (plugin, path);
-			gtk_widget_destroy (priv->dialog);
+			goto done;
 		}
 	}
+
+	gtk_widget_destroy (priv->dialog);
+	return;
+	
+ done:
+	if (view) {
+		gchar *url;
+		
+		url = gnome_vfs_get_uri_from_local_path (path);
+
+		show_url (plugin, url);
+		g_free (url);
+	}
+
+	gtk_widget_destroy (priv->dialog);
 }
 
 static void
