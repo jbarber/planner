@@ -210,7 +210,7 @@ mrp_object_set_property (MrpObject *object, MrpProperty *property, GValue *value
 			     property, value_cpy);
 
 	g_signal_emit (object, signals[PROP_CHANGED], 
-		       g_quark_from_string (G_PARAM_SPEC(property)->name),
+		       g_quark_from_string (G_PARAM_SPEC (property)->name),
 		       property, value);
 
 	mrp_object_changed (object);

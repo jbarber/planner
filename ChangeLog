@@ -1,5 +1,13 @@
 2004-04-15  Richard Hult  <richard@imendio.com>
 
+	* libplanner/mrp-assignment.c: (assignment_set_property):
+	* libplanner/mrp-object.c: (mrp_object_set_property):
+	* src/planner-task-dialog.c:
+	(task_dialog_resource_units_cell_edited): Workaround for bug
+	#138368, based on patch from Lincoln.
+
+2004-04-15  Richard Hult  <richard@imendio.com>
+
 	* src/planner-task-tree.c: (planner_task_tree_move_task_up),
 	(planner_task_tree_move_task_down): Patch from Lincoln.
 

@@ -166,22 +166,33 @@ assignment_set_property (GObject      *object,
 	assignment = MRP_ASSIGNMENT (object);
 	priv       = assignment->priv;
 	
+	/* FIXME: See bug #138368 about this. The assignment doesn't have a
+	 * project pointer so we can't emit changed on it. We cheat for now and
+	 * use the resource/task in those cases.
+	 */
+
 	switch (prop_id) {
 	case PROP_TASK:
 		if (priv->task) {
 			g_object_unref (priv->task);
 		}
 		priv->task = g_object_ref (g_value_get_object (value));
+		mrp_object_changed (MRP_OBJECT (priv->task));
 		break;
+		
 	case PROP_RESOURCE:
 		if (priv->resource) {
 			g_object_unref (priv->resource);
 		}
 		priv->resource = g_object_ref (g_value_get_object (value));
+		mrp_object_changed (MRP_OBJECT (priv->resource));
 		break;
+
 	case PROP_UNITS:
 		priv->units = g_value_get_int (value);
+		mrp_object_changed (MRP_OBJECT (priv->resource));
 		break;
+
 	default:
 		break;
 	}

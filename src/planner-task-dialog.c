@@ -934,7 +934,7 @@ task_dialog_resource_units_cell_edited (GtkCellRendererText *cell,
 	GtkTreeIter    iter;
 	MrpResource   *resource;
 	MrpAssignment *assignment;
-	
+
 	tree = GTK_TREE_VIEW (data->resource_list);
 	
 	model = gtk_tree_view_get_model (tree);
@@ -946,7 +946,6 @@ task_dialog_resource_units_cell_edited (GtkCellRendererText *cell,
 	resource = ((GList *)iter.user_data)->data;
 		
 	assignment = mrp_task_get_assignment (data->task, resource);
-
 	if (assignment) {
 		g_object_set (assignment,
 			      "units", atoi (new_text),
