@@ -62,19 +62,19 @@
   </menu>
 
   <dockitem name="Toolbar">
-    <toolitem name="InsertTask"   verb="" _label="Insert"/>
-    <toolitem name="RemoveTask"   verb="" _label="Remove"/>
-    <toolitem name="LinkTasks"    verb="" _label="Link"/>
-    <toolitem name="UnlinkTask"   verb="" _label="Unlink"/>
-    <toolitem name="IndentTask"   verb="" _label="Indent"/>
-    <toolitem name="UnindentTask" verb="" _label="Unindent"/>
+    <toolitem name="InsertTask"   verb="" _label="Insert"        _tip="Insert a new task"/>
+    <toolitem name="RemoveTask"   verb="" _label="Remove"        _tip="Remove the selected tasks"/>
+    <toolitem name="LinkTasks"    verb="" _label="Link"          _tip="Link the selected tasks"/>
+    <toolitem name="UnlinkTask"   verb="" _label="Unlink"        _tip="Unlink the selected tasks"/>
+    <toolitem name="IndentTask"   verb="" _label="Indent"        _tip="Indent the selected tasks"/>
+    <toolitem name="UnindentTask" verb="" _label="Unindent"      _tip="Unindent the selected tasks"/>
     <separator/>
-    <toolitem name="MoveTaskUp"   verb="" _label="Move up"/>
-    <toolitem name="MoveTaskDown" verb="" _label="Move down"/>
+    <toolitem name="MoveTaskUp"   verb="" _label="Move up"       _tip="Move the selected tasks upwards"/>
+    <toolitem name="MoveTaskDown" verb="" _label="Move down"     _tip="Move the selected tasks downwards"/>
     <separator/>
-    <toolitem name="ZoomToFit"    verb="" _label="Zoom To Fit"/>
-    <toolitem name="ZoomIn"       verb="" _label="Zoom In"/>
-    <toolitem name="ZoomOut"      verb="" _label="Zoom Out"/>
+    <toolitem name="ZoomToFit"    verb="" _label="Zoom To Fit"   _tip="Zoom to fit the entire project"/>
+    <toolitem name="ZoomIn"       verb="" _label="Zoom In"       _tip="Zoom in"/>
+    <toolitem name="ZoomOut"      verb="" _label="Zoom Out"      _tip="Zoom out"/>
     <!--separator/-->
     <!--toolitem name="Test" verb=""/-->
   </dockitem>
