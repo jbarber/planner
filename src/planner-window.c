@@ -1435,7 +1435,7 @@ window_do_save_as (PlannerWindow *window)
 
 		if (success) {
 			/* Add the file to the recent list */
-			item = egg_recent_item_new_from_uri (
+			item = egg_recent_item_new_from_uri (mrp_project_get_uri (priv->project));
 			egg_recent_item_set_mime_type (item, "application/x-mrproject");
 			egg_recent_model_add_full (planner_application_get_recent_model (priv->application), item);
 			egg_recent_item_unref (item);

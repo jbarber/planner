@@ -2639,8 +2639,11 @@ planner_task_tree_move_task_up (PlannerTaskTree *tree)
 		 */
 
 		/* FIXME: This checking isn't enough, we need to check if any
-		 * ancestor of the task is selected.
+		 * ancestor of the task is selected. The following won't pick up
+		 * unusual selections e.g. if just 1.1 and 1.1.1.1 selected.
+		 * To do that we need to recurse this selection list.
 		 */
+		 
  		skip = FALSE;
  		for (m = list; m; m = m->next) {
  			if (m->data == parent ) {
@@ -2737,7 +2740,9 @@ planner_task_tree_move_task_down (PlannerTaskTree *tree)
 		 */
 		
 		/* FIXME: This checking isn't enough, we need to check if any
-		 * ancestor of the task is selected.
+		 * ancestor of the task is selected. The following won't pick up
+		 * unusual selections e.g. if just 1.1 and 1.1.1.1 selected.
+		 * To do that we need to recurse this selection list.
 		 */
 		skip = FALSE;
 		for (m = list; m; m = m->next) {
@@ -2747,24 +2752,20 @@ planner_task_tree_move_task_down (PlannerTaskTree *tree)
 			}
 		}
 
-		/* FIXME: This looks a bit suspicious, position might not be a
-		 * child of the root so comparing their positions isn't
-		 * correct.
-		 */
-		if (position == mrp_task_get_n_children (mrp_project_get_root_task (project)) - 1 && count == 1) {
-			/* We stop if at bottom of project and first attempt at
-			 * moving stuff else just stop moving this one task.
+		if (parent == mrp_project_get_root_task (project) && position == mrp_task_get_n_children (mrp_project_get_root_task (project)) - 1) {
+			/* We stop if at bottom of project and our parent is root task.
 			 */
 			proceed = FALSE;
 		}
-		else if (!skip && position == mrp_task_get_n_children (parent) - 1 && count == 1) {
-			/* If the parent task is selected then we don't care if
-			 * we are at the bottom of our particular position.
+		else if (!skip && position == mrp_task_get_n_children (parent) - 1) {
+			/* If the parent task was selected then we don't care if
+			 * we are at the bottom of our particular position. Note NOT
+			 * all possible selection cases are catered for. 
 			 */ 
 			proceed = FALSE;
 		}
 		
-		if (!skip && position <= mrp_task_get_n_children (parent) - 1 && proceed) {
+		if (!skip && proceed) {
 			/* Move task from position to position + 1. */
 			sibling = mrp_task_get_nth_child (parent, position + 1);
 			mrp_project_move_task (project, task, sibling, 
