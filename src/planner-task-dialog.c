@@ -36,6 +36,8 @@
 #include "planner-predecessor-model.h"
 #include "planner-task-cmd.h"
 #include "planner-format.h"
+#include "planner-popup-button.h"
+#include "planner-task-date-widget.h"
 #include "planner-task-dialog.h"
 
 
@@ -167,14 +169,7 @@ static void            task_dialog_cell_type_show_popup           (PlannerCellRe
 								   gint                     x2,
 								   gint                     y2,
 								   DialogData              *data);
-static void            task_dialog_cell_name_show_popup           (PlannerCellRendererList *cell,
-								   const gchar             *path_string,
-								   gint                     x1,
-								   gint                     y1,
-								   gint                     x2,
-								   gint                     y2,
-								   DialogData              *data);
-static void            task_dialog_cell_hide_popup                (PlannerCellRendererList *cell,
+static void            task_dialog_cell_type_hide_popup           (PlannerCellRendererList *cell,
 								   GtkWidget               *view);
 static void            task_dialog_add_predecessor_cb             (GtkWidget               *widget,
 								   DialogData              *data);
@@ -2049,10 +2044,8 @@ task_dialog_pred_cell_edited (GtkCellRendererText *cell,
 	MrpRelation             *relation;
 	MrpTask                 *task_main;
 	MrpTask                 *task_pred;
-	MrpTask                 *new_task_pred;
 	PlannerCellRendererList *planner_cell;
 	gint                     column;
-	GList                   *tasks;
 	gint                     lag;
 	MrpRelationType          type, new_type;
 
@@ -2076,47 +2069,7 @@ task_dialog_pred_cell_edited (GtkCellRendererText *cell,
 
 	switch (column) {
 	case PREDECESSOR_COL_NAME:
-		planner_cell = PLANNER_CELL_RENDERER_LIST (cell);
-
-		tasks = mrp_project_get_all_tasks (project);
-		tasks = g_list_remove (tasks, task_main);
-
-		new_task_pred = g_list_nth_data (tasks, planner_cell->selected_index);
-
-		if (new_task_pred != task_pred) {
-			GError     *error = NULL;
-			PlannerCmd *cmd;
-
-			cmd = planner_task_cmd_edit_predecessor (data->main_window, 
-								 task_main, task_pred,
-								 new_task_pred,
-								 type, lag, &error);
-
-			if (!cmd) {
-				GtkWidget *dialog;
-				
-				dialog = gtk_message_dialog_new (
-					NULL,
-					GTK_DIALOG_DESTROY_WITH_PARENT,
-					GTK_MESSAGE_ERROR,
-					GTK_BUTTONS_OK,
-					"%s", error->message);
-
-				gtk_dialog_run (GTK_DIALOG (dialog));
-				gtk_widget_destroy (dialog);
-				
-				g_error_free (error);
-
-				/* Restore the previous state. */
-				mrp_task_add_predecessor (task_main,
-							  task_pred, 
-							  type,
-							  lag,
-							  NULL);
-			}
-		}
-
-		g_list_free (tasks);
+		g_assert_not_reached ();
 		break;
 
 	case PREDECESSOR_COL_TYPE: {
@@ -2245,73 +2198,21 @@ task_dialog_cell_type_show_popup (PlannerCellRendererList *cell,
 	}	
 }
 
-static void  
-task_dialog_cell_name_show_popup (PlannerCellRendererList *cell,
-				  const gchar        *path_string,
-				  gint                x1,
-				  gint                y1,
-				  gint                x2,
-				  gint                y2,
-				  DialogData         *data)
+static void
+task_dialog_cell_type_hide_popup (PlannerCellRendererList *cell,
+				  GtkWidget          *view)
 {
-	GtkTreeView  *tree;
-	GtkTreeModel *model;
-	GtkTreeIter   iter;
-	GtkTreePath  *path;
-	MrpTask      *task_main;
-	MrpTask      *task_pred;
-	MrpProject   *project;
-	GList        *list, *tasks, *l;
+       GList *l;
 
-	tree = GTK_TREE_VIEW (data->predecessor_list);
-	model = gtk_tree_view_get_model (tree);	
-	path  = gtk_tree_path_new_from_string (path_string);
-	gtk_tree_model_get_iter (model, &iter, path);
-	
-	task_main = data->task;
-	
-	task_pred = MRP_TASK (planner_list_model_get_object (PLANNER_LIST_MODEL (model),
-							&iter));
+       for (l = cell->user_data; l; l = l->next) {
+               if (l->data) {
+                       g_object_unref (l->data);
+               }
+       }
 
-	g_object_get (task_main, "project", &project, NULL);
-	tasks = mrp_project_get_all_tasks (project);
-	tasks = g_list_remove (tasks, task_main);
-
-	list = NULL;
-
-	for (l = tasks; l; l = l->next) {
-		gchar *name;
-
-		g_object_get (l->data, "name", &name, NULL);
-
-		list = g_list_append (list, name);
-	}
-	
-	cell->list = list;
-
-	/* FIXME: Select the actual task being edited */
-
-	cell->selected_index = 1;
+       g_list_free (cell->user_data);
+       /* cell->user_data = NULL; */
 }
-
-static void  
-task_dialog_cell_hide_popup (PlannerCellRendererList *cell,
-			     GtkWidget          *view) 
-{
-	GList *l;
-
-	for (l = cell->user_data; l; l = l->next) {
-		if (l->data) {
-			g_object_unref (l->data);
-		}
-	}
-	
-	g_list_free (cell->user_data);
-	/* cell->user_data = NULL; */
-}
-
-#include "planner-popup-button.h"
-#include "planner-task-date-widget.h"
 
 static void
 task_dialog_schedule_date_selected_cb (GtkWidget          *button,
@@ -2696,26 +2597,11 @@ task_dialog_setup_predecessor_list (DialogData *data)
 	/* Name */
 	cell = planner_cell_renderer_list_new ();
 
-	g_object_set (cell, "editable", TRUE, NULL);
+	g_object_set (cell, "editable", FALSE, NULL);
 
 	g_object_set_data (G_OBJECT (cell),
 			   "column",
 			   GINT_TO_POINTER (PREDECESSOR_COL_NAME));
-
-	g_signal_connect (cell,
-			  "edited",
-			  G_CALLBACK (task_dialog_pred_cell_edited),
-			  data);
-	
-	g_signal_connect (cell,
-			  "show_popup",
-			  G_CALLBACK (task_dialog_cell_name_show_popup),
-			  data);
-	
-	g_signal_connect_after (cell,
-				"hide_popup",
-				G_CALLBACK (task_dialog_cell_hide_popup),
-				data);
 
 	col = gtk_tree_view_column_new_with_attributes (_("Name"),
 							cell,
@@ -2746,7 +2632,7 @@ task_dialog_setup_predecessor_list (DialogData *data)
 
 	g_signal_connect_after (cell,
 				"hide_popup",
-				G_CALLBACK (task_dialog_cell_hide_popup),
+				G_CALLBACK (task_dialog_cell_type_hide_popup),
 				data);
 	
 	col = gtk_tree_view_column_new_with_attributes (_("Type"),

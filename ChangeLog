@@ -1,5 +1,14 @@
 2005-02-20  Richard Hult  <richard@imendio.com>
 
+	* src/planner-task-dialog.c: (task_dialog_pred_cell_edited),
+	(task_dialog_cell_type_hide_popup),
+	(task_dialog_setup_predecessor_list): Don't make the name editable
+	in the predecessor list. It's not very logical that editing the
+	name of a predecessor changes which predecessor is used. Also
+	fixes bug #139671.
+
+2005-02-20  Richard Hult  <richard@imendio.com>
+
 	* data/glade/Makefile.am:
 	* data/glade/project-properties.glade:
 	* data/glade/task-date-widget.glade:
