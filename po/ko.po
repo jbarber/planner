@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: planner 0.11\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2004-02-21 02:38+0900\n"
-"PO-Revision-Date: 2004-02-21 02:42+0900\n"
+"PO-Revision-Date: 2004-04-21 02:24+0900\n"
 "Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
 "Language-Team: GNOME Korea <gnome-kr-hackers@lists.kldp.net>\n"
 "MIME-Version: 1.0\n"
@@ -1056,7 +1056,7 @@ msgstr "%b %e일"
 #. * libmrproject/docs/DateFormat.
 #: src/planner-gantt-background.c:579
 msgid "%Y %b %d"
-msgstr "%Y년 %b %-d일"
+msgstr "%Y년 %b %e일"
 
 #: src/planner-gantt-background.c:581
 msgid "Project start"
@@ -1277,7 +1277,7 @@ msgstr "(이름 없음)"
 #. * a detailed description.
 #: src/planner-resource-dialog.c:728 src/planner-task-dialog.c:679
 msgid "%a %d %b %Y, %H:%M\n"
-msgstr "%Y년 %b %-d일 (%a), %H:%M\n"
+msgstr "%Y년 %b %e일 (%a), %H:%M\n"
 
 #: src/planner-resource-dialog.c:826
 msgid "None (use project default)"
