@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libmrproject VERSION\n"
-"POT-Creation-Date: 2003-12-01 15:18+0100\n"
+"POT-Creation-Date: 2003-09-11 12:36+0200\n"
 "PO-Revision-Date: 2003-04-13 13:30+0200\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
@@ -13,122 +13,122 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: libplanner/mrp-project.c:441
+#: mrproject/mrp-project.c:441
 msgid "Default"
 msgstr "Implicitní"
 
-#: libplanner/mrp-project.c:749
+#: mrproject/mrp-project.c:749
 #, c-format
 msgid "Couldn't find a suitable file module for loading '%s'"
 msgstr "Nemohu najít vhodný modul souboru pro načtení '%s'"
 
-#: libplanner/mrp-project.c:770 libplanner/mrp-project.c:1034
+#: mrproject/mrp-project.c:770 mrproject/mrp-project.c:1034
 msgid "No support for SQL storage built into this version of MrProject."
 msgstr "V této verzi MrProject není vestavěna podpora pro ukládání do SQL."
 
-#: libplanner/mrp-project.c:807
+#: mrproject/mrp-project.c:807
 msgid "Invalid URI."
 msgstr "Neplatné URI."
 
-#: libplanner/mrp-project.c:928
+#: mrproject/mrp-project.c:928
 #, c-format
 msgid "Unable to find file writer identified by '%s'"
 msgstr "Nemohu najít zapisovač souboru identifikovaný '%s'"
 
-#: libplanner/mrp-project.c:991
+#: mrproject/mrp-project.c:991
 msgid "Couldn't find a suitable file module for loading project"
 msgstr "Nemohu najít vhodný modul souboru pro načtení projektu"
 
-#: libplanner/mrp-property.c:365
+#: mrproject/mrp-property.c:365
 msgid "Text"
 msgstr "Text"
 
-#: libplanner/mrp-property.c:367
+#: mrproject/mrp-property.c:367
 msgid "String list"
 msgstr "Seznam řetězců"
 
-#: libplanner/mrp-property.c:369
+#: mrproject/mrp-property.c:369
 msgid "Integer number"
 msgstr "Celé číslo"
 
-#: libplanner/mrp-property.c:371
+#: mrproject/mrp-property.c:371
 msgid "Floating-point number"
 msgstr "Číslo s pohyblivou řádovou čárkou"
 
-#: libplanner/mrp-property.c:373
+#: mrproject/mrp-property.c:373
 msgid "Date"
 msgstr "Datum"
 
-#: libplanner/mrp-property.c:375
+#: mrproject/mrp-property.c:375
 msgid "Duration"
 msgstr "Trvání"
 
-#: libplanner/mrp-property.c:377
+#: mrproject/mrp-property.c:377
 msgid "Cost"
 msgstr "Cena"
 
-#: libplanner/mrp-property.c:380
+#: mrproject/mrp-property.c:380
 msgid "None"
 msgstr "Žádný"
 
-#: libplanner/mrp-task-manager.c:1769
+#: mrproject/mrp-task-manager.c:1769
 msgid "Can not add a predecessor relation between a task and its ancestor."
 msgstr "Nemohu přidat vztah předchůdce mezi úlohou a jejím předchůdcem."
 
-#: libplanner/mrp-task-manager.c:1778 libplanner/mrp-task-manager.c:1786
+#: mrproject/mrp-task-manager.c:1778 mrproject/mrp-task-manager.c:1786
 msgid "Can not add a predecessor, because it would result in a loop."
 msgstr "Nemohu přidat předchůdce, protože by tím vznikla smyčka."
 
-#: libplanner/mrp-task-manager.c:1821
+#: mrproject/mrp-task-manager.c:1821
 msgid "Can not move the task, since it would result in a loop."
 msgstr "Nemohu přesunout úlohu, protože by tím vznikla smyčka."
 
-#: libplanner/mrp-task.c:1016
+#: mrproject/mrp-task.c:1011
 msgid ""
 "Could not add a predecessor relation, because the tasks are already related."
 msgstr ""
 "Nemohu přidat vztah předchůdce, protože mezi úlohami již existuje vztah."
 
-#: libplanner/mrp-day.c:54
+#: mrproject/mrp-day.c:54
 msgid "Working"
 msgstr "Pracovní"
 
-#: libplanner/mrp-day.c:55
+#: mrproject/mrp-day.c:55
 msgid "A default working day"
 msgstr "Implicitně pracovní den"
 
-#: libplanner/mrp-day.c:57
+#: mrproject/mrp-day.c:57
 msgid "Nonworking"
 msgstr "Nepracovní"
 
-#: libplanner/mrp-day.c:58
+#: mrproject/mrp-day.c:58
 msgid "A default non working day"
 msgstr "Implicitně nepracovní den"
 
 # ???
-#: libplanner/mrp-day.c:60
+#: mrproject/mrp-day.c:60
 msgid "Use base"
 msgstr "Základ použití"
 
 # ???
-#: libplanner/mrp-day.c:61
+#: mrproject/mrp-day.c:61
 msgid "Use day from base calendar"
 msgstr "Den použití ze základního kalendáře"
 
-#: libplanner/mrp-parser.c:1043 libplanner/mrp-parser.c:1138
+#: storage-modules/mrproject-1/mrp-parser.c:1043
+#: storage-modules/mrproject-1/mrp-parser.c:1138
 msgid "Could not create XML tree"
 msgstr "Nemohu vytvořit strom XML"
 
-#: libplanner/mrp-parser.c:1104
+#: storage-modules/mrproject-1/mrp-parser.c:1104
 msgid "Could not write XML file"
 msgstr "Nemohu zapsat soubor XML"
 
-#. Give up.
-#: libplanner/mrp-sql.c:229
+#: storage-modules/sql/mrp-sql.c:229
 msgid "Invalid Unicode"
 msgstr "Neplatný Unicode."
 
-#: libplanner/mrp-sql.c:2205
+#: storage-modules/sql/mrp-sql.c:2209
 #, c-format
 msgid ""
 "The project '%s' has been changed by the user '%s' since you opened it. Do "
@@ -137,7 +137,7 @@ msgstr ""
 "Projekt '%s' byl změněn uživatelem '%s' poté, co jste jej otevřeli. Chcete "
 "jej přesto uložit?"
 
-#: libplanner/mrp-sql.c:3443
+#: storage-modules/sql/mrp-sql.c:3447
 #, c-format
 msgid ""
 "Connection to database '%s' failed.\n"
@@ -146,15 +146,15 @@ msgstr ""
 "Připojení k databázi '%s' selhalo.\n"
 "%s"
 
-#: libplanner/mrp-storage-sql.c:205
+#: storage-modules/sql/mrp-storage-sql.c:205
 msgid "Invalid SQL URI (must start with 'sql://' and contain '#')."
 msgstr "Neplatné SQL URI (musí začínat 'sql://' a obsahovat '#')."
 
-#: libplanner/mrp-storage-sql.c:274
+#: storage-modules/sql/mrp-storage-sql.c:274
 msgid "Invalid SQL URI (invalid project id)."
 msgstr "Neplatné SQL URI (neplatné id projektu)."
 
-#: libplanner/mrp-storage-sql.c:282
+#: storage-modules/sql/mrp-storage-sql.c:282
 msgid "Invalid SQL URI (no database name specified)."
 msgstr "Neplatné SQL URI (neurčen název databáze)."
 

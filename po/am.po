@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mrproject\n"
-"POT-Creation-Date: 2003-12-01 16:26+0100\n"
+"POT-Creation-Date: 2003-09-12 18:55+0200\n"
 "PO-Revision-Date: 2003-02-08 10:46+EDT\n"
 "Last-Translator: Ge'ez Frontier Foundation <locales@geez.org>\n"
 "Language-Team: Amharic <locales@geez.org>\n"
@@ -15,903 +15,332 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: data/planner.desktop.in.h:1
-#, fuzzy
-msgid "Planner Project Management"
-msgstr "የዕቅድ ጉባኤ"
-
-#: data/planner.desktop.in.h:2
-msgid "Project Management"
-msgstr "የዕቅድ ጉባኤ"
-
 #: libegg/recent-files/egg-recent-vfs-utils.c:90
 msgid " (invalid Unicode)"
 msgstr " (ዩኒኮድ ተቀብሏል)"
 
-#: data/ui/main-window.ui.h:1
+#: src/app/GNOME_MrProject_MainWindow.ui.h:1
 msgid "About this application"
 msgstr "ስለዚህ ፕሮግራም"
 
-#: data/ui/main-window.ui.h:2
+#: src/app/GNOME_MrProject_MainWindow.ui.h:2
 #, fuzzy
 msgid "C_ut"
 msgstr "ቁረጥ"
 
-#: data/ui/main-window.ui.h:3
+#: src/app/GNOME_MrProject_MainWindow.ui.h:3
 msgid "Clear"
 msgstr "ሰርዝ"
 
-#: data/ui/main-window.ui.h:4
+#: src/app/GNOME_MrProject_MainWindow.ui.h:4
 msgid "Clear the selection"
 msgstr "የተመረጠውን ሰርዝ"
 
-#: data/ui/main-window.ui.h:5
+#: src/app/GNOME_MrProject_MainWindow.ui.h:5
 msgid "Close the current file"
 msgstr "የአሁኑን ፋይል ዝጋ"
 
-#: data/ui/main-window.ui.h:6
+#: src/app/GNOME_MrProject_MainWindow.ui.h:6
 msgid "Copy the selection"
 msgstr "የተመረጠውን ቅጂ"
 
-#: data/ui/main-window.ui.h:7
+#: src/app/GNOME_MrProject_MainWindow.ui.h:7
 msgid "Create a new project"
 msgstr "አዲስ ዕቅድን ፍጠር"
 
-#: data/ui/main-window.ui.h:8
+#: src/app/GNOME_MrProject_MainWindow.ui.h:8
 msgid "Cut the selection"
 msgstr "የተመረጠውን ቁረጥ"
 
-#: data/ui/main-window.ui.h:9
+#: src/app/GNOME_MrProject_MainWindow.ui.h:9
 #, fuzzy
 msgid "Edit Day _Types"
 msgstr "የቀን ዓይነታት ያስተካክሉ"
 
-#: data/ui/main-window.ui.h:10
+#: src/app/GNOME_MrProject_MainWindow.ui.h:10
 #, fuzzy
 msgid "Edit Project _Phases"
 msgstr "የዕቅድ ስም፦ (_N)"
 
-#: data/ui/main-window.ui.h:11
+#: src/app/GNOME_MrProject_MainWindow.ui.h:11
 msgid "Edit the project properties"
 msgstr "የዕቅድ ምርጫዎች ያስተካክሉ"
 
-#: data/ui/main-window.ui.h:12
+#: src/app/GNOME_MrProject_MainWindow.ui.h:12
 msgid "Exit the program"
 msgstr "ከፕሮግራሙ ውጣ"
 
-#: data/ui/main-window.ui.h:13
+#: src/app/GNOME_MrProject_MainWindow.ui.h:13
 msgid "New"
 msgstr "አዲስ"
 
-#: data/ui/main-window.ui.h:14
+#: src/app/GNOME_MrProject_MainWindow.ui.h:14
 msgid "New..."
 msgstr "አዲስ..."
 
-#: data/ui/main-window.ui.h:15
+#: src/app/GNOME_MrProject_MainWindow.ui.h:15
 msgid "Open"
 msgstr "ክፈት"
 
-#: data/ui/main-window.ui.h:16
+#: src/app/GNOME_MrProject_MainWindow.ui.h:16
 msgid "Open a project"
 msgstr "ዕቅድ ፍጠር"
 
-#: data/ui/main-window.ui.h:17
+#: src/app/GNOME_MrProject_MainWindow.ui.h:17
 msgid "Paste the clipboard"
 msgstr "ክሊፕቦርዱን ለጥፍ"
 
-#: data/ui/main-window.ui.h:18
+#: src/app/GNOME_MrProject_MainWindow.ui.h:18
 #, fuzzy
 msgid "Print"
 msgstr "አትም..."
 
-#: data/ui/main-window.ui.h:19
+#: src/app/GNOME_MrProject_MainWindow.ui.h:19
 #, fuzzy
 msgid "Print preview of the current project"
 msgstr "የአሁኑን ዕቅድ አትም"
 
-#: data/ui/main-window.ui.h:20
+#: src/app/GNOME_MrProject_MainWindow.ui.h:20
 msgid "Print the current project"
 msgstr "የአሁኑን ዕቅድ አትም"
 
-#: data/ui/main-window.ui.h:21
+#: src/app/GNOME_MrProject_MainWindow.ui.h:21
 msgid "Redo the undone action"
 msgstr "የተተወውን ድርጊት እንደገና አድርግ"
 
-#: data/ui/main-window.ui.h:22
+#: src/app/GNOME_MrProject_MainWindow.ui.h:22
 msgid "Save"
 msgstr "አስቀምጥ"
 
-#: data/ui/main-window.ui.h:23
+#: src/app/GNOME_MrProject_MainWindow.ui.h:23
 #, fuzzy
 msgid "Save _As..."
 msgstr "በሌላ ስም አስቀምጥ..."
 
-#: data/ui/main-window.ui.h:24
+#: src/app/GNOME_MrProject_MainWindow.ui.h:24
 msgid "Save the current project"
 msgstr "የአሁኑን ዕቅድ አስቀምጥ"
 
-#: data/ui/main-window.ui.h:25
+#: src/app/GNOME_MrProject_MainWindow.ui.h:25
 msgid "Save the current project with a different name"
 msgstr "የአሁኑን ዕቅድ በተለየ ስም አስቀምጥ"
 
-#: data/ui/main-window.ui.h:26
+#: src/app/GNOME_MrProject_MainWindow.ui.h:26
 msgid "Show the MrProject User Guide"
 msgstr ""
 
-#: data/ui/main-window.ui.h:27
+#: src/app/GNOME_MrProject_MainWindow.ui.h:27
 msgid "Undo the last action"
 msgstr "የመጨረሻውን ትግባር ተወው"
 
-#: data/ui/main-window.ui.h:28
+#: src/app/GNOME_MrProject_MainWindow.ui.h:28
 msgid "_About"
 msgstr "ስለ (_A)"
 
-#: data/ui/main-window.ui.h:29
+#: src/app/GNOME_MrProject_MainWindow.ui.h:29
 msgid "_Actions"
 msgstr ""
 
-#: data/ui/main-window.ui.h:30
+#: src/app/GNOME_MrProject_MainWindow.ui.h:30
 msgid "_Close"
 msgstr "ዝጋ (_C)"
 
-#: data/ui/main-window.ui.h:31
+#: src/app/GNOME_MrProject_MainWindow.ui.h:31
 #, fuzzy
 msgid "_Copy"
 msgstr "ቅጂ"
 
-#: data/ui/main-window.ui.h:32
+#: src/app/GNOME_MrProject_MainWindow.ui.h:32
 msgid "_Edit"
 msgstr "አስተካክል (_E)"
 
-#: data/ui/main-window.ui.h:33
+#: src/app/GNOME_MrProject_MainWindow.ui.h:33
 #, fuzzy
 msgid "_Edit Project Properties"
 msgstr "የዕቅድ ምርጫዎች"
 
-#: data/ui/main-window.ui.h:34
+#: src/app/GNOME_MrProject_MainWindow.ui.h:34
 msgid "_File"
 msgstr "ፋይል (_F)"
 
-#: data/ui/main-window.ui.h:35
+#: src/app/GNOME_MrProject_MainWindow.ui.h:35
 msgid "_Help"
 msgstr "_መረጃ (_H)"
 
-#: data/ui/main-window.ui.h:36
+#: src/app/GNOME_MrProject_MainWindow.ui.h:36
 #, fuzzy
 msgid "_Manage Calendars"
 msgstr "ቀን መቁጠሪያዎችን ይቆጣጠሩ"
 
-#: data/ui/main-window.ui.h:37
+#: src/app/GNOME_MrProject_MainWindow.ui.h:37
 msgid "_New Project"
 msgstr "አዲስ ዕቅድ (_N)"
 
-#: data/ui/main-window.ui.h:38
+#: src/app/GNOME_MrProject_MainWindow.ui.h:38
 #, fuzzy
 msgid "_Open..."
 msgstr "ክፈት..."
 
-#: data/ui/main-window.ui.h:39
+#: src/app/GNOME_MrProject_MainWindow.ui.h:39
 #, fuzzy
 msgid "_Paste"
 msgstr "ለጥፍ"
 
-#: data/ui/main-window.ui.h:40
+#: src/app/GNOME_MrProject_MainWindow.ui.h:40
 #, fuzzy
 msgid "_Print Preview"
 msgstr "ዕቅድን አትም"
 
-#: data/ui/main-window.ui.h:41
+#: src/app/GNOME_MrProject_MainWindow.ui.h:41
 #, fuzzy
 msgid "_Print..."
 msgstr "አትም..."
 
-#: data/ui/main-window.ui.h:42
+#: src/app/GNOME_MrProject_MainWindow.ui.h:42
 msgid "_Project"
 msgstr "ዕቅድ (_P)"
 
-#: data/ui/main-window.ui.h:43
+#: src/app/GNOME_MrProject_MainWindow.ui.h:43
 msgid "_Quit"
 msgstr "ውጣ (_Q)"
 
-#: data/ui/main-window.ui.h:44
+#: src/app/GNOME_MrProject_MainWindow.ui.h:44
 #, fuzzy
 msgid "_Redo"
 msgstr "እንደገና አድርግ"
 
-#: data/ui/main-window.ui.h:45 src/planner-main-window.c:1127
+#: src/app/GNOME_MrProject_MainWindow.ui.h:45 src/app/mg-main-window.c:1133
 msgid "_Save"
 msgstr "አስቀምጥ (_S)"
 
-#: data/ui/main-window.ui.h:46
+#: src/app/GNOME_MrProject_MainWindow.ui.h:46
 #, fuzzy
 msgid "_Undo"
 msgstr "ወደ ነበረበት መልስ"
 
-#: data/ui/main-window.ui.h:47
+#: src/app/GNOME_MrProject_MainWindow.ui.h:47
 msgid "_User Guide"
 msgstr ""
 
-#: data/ui/main-window.ui.h:48
+#: src/app/GNOME_MrProject_MainWindow.ui.h:48
 msgid "_View"
 msgstr "ተመልከት (_V)"
 
-#: data/ui/gantt-view.ui.h:1 data/ui/task-view.ui.h:1
-#, fuzzy
-msgid "I_ndent Task"
-msgstr "አዲስ አንቀጽ"
-
-#: data/ui/gantt-view.ui.h:2 data/ui/task-view.ui.h:2
-msgid "In_sert Tasks..."
-msgstr ""
-
-#: data/ui/gantt-view.ui.h:3 data/ui/task-view.ui.h:3
-#: src/planner-application.c:75
-msgid "Indent"
-msgstr "አዲስ አንቀጽ"
-
-#: data/ui/gantt-view.ui.h:4 data/ui/task-view.ui.h:4
-#: data/ui/resource-view.ui.h:5 src/planner-application.c:54
-#: src/planner-application.c:103
+#: src/app/mg-application.c:54 src/app/mg-application.c:103
+#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:4
+#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:4
+#: src/views/resources/GNOME_MrProject_ResourcesView.ui.h:5
 msgid "Insert"
 msgstr "አስገባ"
 
-#: data/ui/gantt-view.ui.h:5 data/ui/task-view.ui.h:5
-#, fuzzy
-msgid "Move Task Do_wn"
-msgstr "ወደታች አንቀሳቅስ"
-
-#: data/ui/gantt-view.ui.h:6 data/ui/task-view.ui.h:6
-#, fuzzy
-msgid "Move Task _Up"
-msgstr "ወደላይ አንቀሳቅስ"
-
-#: data/ui/gantt-view.ui.h:7 data/ui/task-view.ui.h:7
-#: src/planner-application.c:96
-msgid "Move down"
-msgstr "ወደታች አንቀሳቅስ"
-
-#: data/ui/gantt-view.ui.h:8 data/ui/task-view.ui.h:8
-#: src/planner-application.c:89
-msgid "Move up"
-msgstr "ወደላይ አንቀሳቅስ"
-
-#: data/ui/gantt-view.ui.h:9 data/ui/task-view.ui.h:9
-#: data/ui/resource-view.ui.h:6 src/planner-application.c:61
-#: src/planner-application.c:110
+#: src/app/mg-application.c:61 src/app/mg-application.c:110
+#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:9
+#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:9
+#: src/views/resources/GNOME_MrProject_ResourcesView.ui.h:6
 msgid "Remove"
 msgstr "አስወግድ"
 
-#: data/ui/gantt-view.ui.h:10 data/ui/task-view.ui.h:10
-msgid "Reset _All Constraints"
-msgstr ""
-
-#: data/ui/gantt-view.ui.h:11 data/ui/task-view.ui.h:11
-msgid "Reset _Constraint"
-msgstr ""
-
-#: data/ui/gantt-view.ui.h:12 data/ui/task-view.ui.h:12
-#: data/ui/resource-view.ui.h:7
-#, fuzzy
-msgid "Select _All"
-msgstr "ሁሉንም ምረጡ"
-
-#: data/ui/gantt-view.ui.h:13 data/ui/task-view.ui.h:13
-#: data/ui/resource-view.ui.h:8
-msgid "Select all tasks"
-msgstr ""
-
-#: data/ui/gantt-view.ui.h:14
-msgid "Test"
-msgstr "ፈተና"
-
-#: data/ui/gantt-view.ui.h:15 data/ui/task-view.ui.h:14
-msgid "Un_link Task"
-msgstr ""
-
-#: data/ui/gantt-view.ui.h:16 data/ui/task-view.ui.h:15
-#, fuzzy
-msgid "Unin_dent Task"
-msgstr "አንቀጽ የሌለው"
-
-#: data/ui/gantt-view.ui.h:17 data/ui/task-view.ui.h:16
-#: src/planner-application.c:82
-msgid "Unindent"
-msgstr "አንቀጽ የሌለው"
-
-#: data/ui/gantt-view.ui.h:18 data/ui/task-view.ui.h:17
-#: src/planner-application.c:68
+#: src/app/mg-application.c:68
+#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:18
+#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:17
 msgid "Unlink"
 msgstr ""
 
-#: data/ui/gantt-view.ui.h:19
-#, fuzzy
-msgid "Zoom In"
-msgstr "ከቅርበት ዕይታ"
-
-#: data/ui/gantt-view.ui.h:20
-#, fuzzy
-msgid "Zoom Out"
-msgstr "ከርቀት ዕይታ"
-
-#: data/ui/gantt-view.ui.h:21
-#, fuzzy
-msgid "Zoom To Fit"
-msgstr "በመስኮቱ ልክ አጉላ"
-
-#: data/ui/gantt-view.ui.h:22
-#, fuzzy
-msgid "Zoom To _Fit"
-msgstr "በመስኮቱ ልክ አጉላ"
-
-#: data/ui/gantt-view.ui.h:23
-#, fuzzy
-msgid "Zoom _Out"
-msgstr "ከርቀት ዕይታ"
-
-#: data/ui/gantt-view.ui.h:24 data/ui/task-view.ui.h:19
-msgid "_Edit Task Properties..."
-msgstr ""
-
-#: data/ui/gantt-view.ui.h:25
-msgid "_Highlight Critical Tasks"
-msgstr ""
-
-#: data/ui/gantt-view.ui.h:26 data/ui/task-view.ui.h:20
-#, fuzzy
-msgid "_Insert Task"
-msgstr "አስገባ (_I)"
-
-#: data/ui/gantt-view.ui.h:27 data/ui/task-view.ui.h:21
-#, fuzzy
-msgid "_Remove Task"
-msgstr "አስወግድ"
-
-#: data/ui/gantt-view.ui.h:28
-#, fuzzy
-msgid "_Zoom In"
-msgstr "ከቅርበት ዕይታ"
-
-#: data/ui/task-view.ui.h:18
-#, fuzzy
-msgid "_Edit Custom Properties..."
-msgstr "የተለመደው ምርጫዎች"
-
-#: data/ui/html-plugin.ui.h:1 data/glade/html-output.glade.h:4
-msgid "Export to HTML"
-msgstr ""
-
-#: data/ui/sql-plugin.ui.h:1
-msgid "Open from Database..."
-msgstr ""
-
-#: data/ui/sql-plugin.ui.h:2
-#, fuzzy
-msgid "Save to Database..."
-msgstr "በሌላ ስም አስቀምጥ..."
-
-#: data/ui/resource-view.ui.h:1
-#, fuzzy
-msgid "Edit _Custom Properties..."
-msgstr "የተለመደው ምርጫዎች"
-
-#: data/ui/resource-view.ui.h:2
-#, fuzzy
-msgid "Edit _Groups"
-msgstr "መድረኮችን ያስተካክሉ"
-
-#: data/ui/resource-view.ui.h:3
-msgid "Groups"
-msgstr "መድረኮች"
-
-#: data/ui/resource-view.ui.h:4
-msgid "In_sert Resources..."
-msgstr ""
-
-#: data/ui/resource-view.ui.h:9
-#, fuzzy
-msgid "_Edit Resource Properties..."
-msgstr "የዕቅድ ምርጫዎች ያስተካክሉ"
-
-#: data/ui/resource-view.ui.h:10
-#, fuzzy
-msgid "_Insert Resource"
-msgstr "አስገባ (_I)"
-
-#: data/ui/resource-view.ui.h:11
-msgid "_Remove Resource"
-msgstr ""
-
-#: data/glade/add-predecessor.glade.h:1 data/glade/calendar-dialog.glade.h:4
-#: data/glade/html-output.glade.h:2 data/glade/new-property.glade.h:1
-#: data/glade/project-properties.glade.h:1
-#: data/glade/resource-dialog.glade.h:1
-#: data/glade/resource-input-dialog.glade.h:1 data/glade/sql.glade.h:2
-#: data/glade/task-dialog.glade.h:4 data/glade/task-input-dialog.glade.h:1
-msgid "*"
-msgstr "*"
-
-#: data/glade/add-predecessor.glade.h:2
-msgid "Lag: "
-msgstr ""
-
-#: data/glade/add-predecessor.glade.h:3
-msgid "New predecessor"
-msgstr ""
-
-#: data/glade/add-predecessor.glade.h:4
-msgid "Predecessor: "
-msgstr ""
-
-#: data/glade/add-predecessor.glade.h:5
-msgid "Relation type: "
-msgstr ""
-
-#: data/glade/calendar-dialog.glade.h:1
-msgid ""
-"\n"
-"The selected day type has the following working hours:"
-msgstr ""
-
-#: data/glade/calendar-dialog.glade.h:3 data/glade/html-output.glade.h:1
-#: data/glade/sql.glade.h:1 data/glade/task-dialog.glade.h:1
-msgid "    "
-msgstr "    "
-
-#: data/glade/calendar-dialog.glade.h:5
-msgid "-"
-msgstr "-"
-
-#: data/glade/calendar-dialog.glade.h:6
-msgid "<b>Calendar:</b>"
-msgstr "<b>ቀን መቁጠሪያ፦</b>"
-
-#: data/glade/calendar-dialog.glade.h:7
-msgid "<b>Day types</b>"
-msgstr "<b>የቀን ዓይነታት</b>"
-
-#: data/glade/calendar-dialog.glade.h:8
-msgid "<b>Working hours</b>"
-msgstr ""
-
-#: data/glade/calendar-dialog.glade.h:9
-msgid "<b>Working time</b>"
-msgstr ""
-
-#: data/glade/calendar-dialog.glade.h:10
-msgid "Apply"
-msgstr "ተጠቀም"
-
-#: data/glade/calendar-dialog.glade.h:11
-msgid "C_opy an existing calendar"
-msgstr "የሚገኙት ቀን መቁጠሪያን ቅጂ (_O)"
-
-#: data/glade/calendar-dialog.glade.h:12
-msgid "C_reate"
-msgstr "ፍጠር (_R)"
-
-#: data/glade/calendar-dialog.glade.h:13
-msgid "Calendar Editor"
-msgstr "የቀን መቁጠሪያ ማቀናጃ"
-
-#: data/glade/calendar-dialog.glade.h:14
-msgid "Create an _empty calendar"
-msgstr "ባዶ የቀን መቁጠሪያን ፍጠር (_E)"
-
-#: data/glade/calendar-dialog.glade.h:15
-msgid "Custom working time"
-msgstr ""
-
-#: data/glade/calendar-dialog.glade.h:16
-msgid "Day type:"
-msgstr "የቀን ዓይነት፦"
-
-#: data/glade/calendar-dialog.glade.h:17
-msgid "Default Week"
-msgstr "የነበረው ሳመንት"
-
-#: data/glade/calendar-dialog.glade.h:18
-msgid "Default week..."
-msgstr "የነበረው ሳመንት..."
-
-#: data/glade/calendar-dialog.glade.h:19
-msgid "Edit Day Types"
-msgstr "የቀን ዓይነታት ያስተካክሉ"
-
-#: data/glade/calendar-dialog.glade.h:20
-msgid "Edit Working Time"
-msgstr ""
-
-#: data/glade/calendar-dialog.glade.h:21
-msgid "Enter the name of the new day type:"
-msgstr ""
-
-#: data/glade/calendar-dialog.glade.h:22
-msgid "Existing calendars:"
-msgstr "የሚገኙት ቀን መቁጠሪያዎች፦"
-
-#: data/glade/calendar-dialog.glade.h:23
-msgid "From:"
-msgstr "ከ፦"
-
-#: data/glade/calendar-dialog.glade.h:24
-msgid "MrProject Team"
-msgstr "የአቶዕቅድ ቡድን"
-
-#: data/glade/calendar-dialog.glade.h:25
-msgid "New Calendar"
-msgstr "አዲስ ቀን መቁጠሪያ"
-
-#: data/glade/calendar-dialog.glade.h:26
-msgid "New Day Type"
-msgstr "አዲስ የቀን ዓይነት"
-
-#: data/glade/calendar-dialog.glade.h:27
-msgid "Select a calendar"
-msgstr "ቀን መቁጠሪያ ምረጡ"
-
-#: data/glade/calendar-dialog.glade.h:28
-msgid ""
-"Select a weekday and the day type to use for that day in the default week "
-"for this calendar.\n"
-msgstr ""
-
-#: data/glade/calendar-dialog.glade.h:30
-msgid "Set day type to:"
-msgstr ""
-
-#: data/glade/calendar-dialog.glade.h:31
-msgid "To:"
-msgstr "ወደ፦"
-
-#: data/glade/calendar-dialog.glade.h:32
-msgid "Use working time from derived calendar"
-msgstr ""
-
-#: data/glade/calendar-dialog.glade.h:33
-msgid "Week day:"
-msgstr ""
-
-#: data/glade/calendar-dialog.glade.h:34
-msgid "Working time..."
-msgstr ""
-
-#: data/glade/calendar-dialog.glade.h:35
-msgid "_Derive from a calendar"
-msgstr ""
-
-#: data/glade/calendar-dialog.glade.h:36
-msgid "_Name of the new calendar:"
-msgstr "የአዲስ ቀን መቁጠሪያ ስም፦ (_N)"
-
-#: data/glade/calendar-dialog.glade.h:37
-msgid "_New..."
-msgstr "አዲስ... (N)"
-
-#: data/glade/group-dialog.glade.h:1
-msgid "Group Editor"
-msgstr ""
-
-#: data/glade/html-output.glade.h:3
-#, fuzzy
-msgid "<b>Save to</b>"
-msgstr "<b>የቀን ዓይነታት</b>"
-
-#: data/glade/html-output.glade.h:5
-msgid "Local file"
-msgstr ""
-
-#: data/glade/html-output.glade.h:6
-#, fuzzy
-msgid "Save to HTML File"
-msgstr "ፋይል አስቀምጥ"
-
-#: data/glade/html-output.glade.h:7
-msgid "Web location"
-msgstr ""
-
-#: data/glade/new-property.glade.h:2
-msgid "Description: "
-msgstr "መግለጫ፦"
-
-#: data/glade/new-property.glade.h:3
-msgid "Label: "
-msgstr "መለያ፦"
-
-#: data/glade/new-property.glade.h:4
-msgid "Name: "
-msgstr "ስም፦"
-
-#: data/glade/new-property.glade.h:5
-msgid "New Property"
-msgstr "አዲስ ምርጫ"
-
-#: data/glade/new-property.glade.h:6
-msgid "Type: "
-msgstr "ዓይነት፦"
-
-#: data/glade/project-properties.glade.h:2
-msgid "<b>Project phases</b>"
-msgstr ""
-
-#: data/glade/project-properties.glade.h:3
-msgid "Calendar:"
-msgstr "ቀን መቁጠሪያ፦"
-
-#: data/glade/project-properties.glade.h:4
-msgid "Custom properties"
-msgstr "የተለመደው ምርጫዎች"
-
-#: data/glade/project-properties.glade.h:5
-msgid "Edit Project phases"
-msgstr ""
-
-#: data/glade/project-properties.glade.h:6
-msgid "Enter the name of the new project phase:"
-msgstr ""
-
-#: data/glade/project-properties.glade.h:7
-#: data/glade/resource-dialog.glade.h:5 data/glade/task-dialog.glade.h:6
-msgid "General"
-msgstr "አጠቃላይ"
-
-#: data/glade/project-properties.glade.h:8
-msgid "New Project Phase"
-msgstr ""
-
-#: data/glade/project-properties.glade.h:9
-msgid "Project _name:"
-msgstr "የዕቅድ ስም፦ (_N)"
-
-#: data/glade/project-properties.glade.h:10
-msgid "Project _start:"
-msgstr ""
-
-#: data/glade/project-properties.glade.h:11
-msgid "Project phase:"
-msgstr ""
-
-#: data/glade/project-properties.glade.h:12
-msgid "Project properties"
-msgstr "የዕቅድ ምርጫዎች"
-
-#: data/glade/project-properties.glade.h:13
-msgid "Select..."
-msgstr "ምርጡ..."
-
-#: data/glade/project-properties.glade.h:14
-msgid "_Manager:"
-msgstr "መቆጣጠሪያ፦ (_M)"
-
-#: data/glade/project-properties.glade.h:15
-msgid "_Organization:"
-msgstr ""
-
-#: data/glade/property-dialog.glade.h:1
-msgid "Custom Properties"
-msgstr "የተለመደው ምርጫዎች"
-
-#: data/glade/resource-dialog.glade.h:2
-#, fuzzy
-msgid "C_ost:"
-msgstr "ዋጋ፦ (_C)"
-
-#: data/glade/resource-dialog.glade.h:3
-msgid "Calendar"
-msgstr "ቀን መቁጠሪያ"
-
-#: data/glade/resource-dialog.glade.h:4
-msgid "Edit calendars..."
-msgstr ""
-
-#: data/glade/resource-dialog.glade.h:6 data/glade/task-dialog.glade.h:7
-msgid "Insert time stamp"
-msgstr ""
-
-#: data/glade/resource-dialog.glade.h:7 data/glade/task-dialog.glade.h:9
-msgid "Notes"
-msgstr "ማስታወሻዎች"
-
-#: data/glade/resource-dialog.glade.h:8
-msgid ""
-"Select the calendar to use for this resource. If you want to use the default "
-"calendar of the project, select 'None'. "
-msgstr ""
-
-#: data/glade/resource-dialog.glade.h:9
-msgid "_Email:"
-msgstr "ኢሜይል፦ (_E)"
-
-#: data/glade/resource-dialog.glade.h:10
-msgid "_Group:"
-msgstr "መድረክ፦ (_G)"
-
-#: data/glade/resource-dialog.glade.h:11
-msgid "_Name:"
-msgstr "ስም፦ (_N)"
-
-#: data/glade/resource-dialog.glade.h:12
-msgid "_Type:"
-msgstr "ዓይነት፦ (_T)"
-
-#: data/glade/resource-input-dialog.glade.h:2
-msgid "Email:"
-msgstr "ኢሜይል፦"
-
-#: data/glade/resource-input-dialog.glade.h:3
-msgid "Group:"
-msgstr "መድረክ፦"
-
-#: data/glade/resource-input-dialog.glade.h:4
-msgid "Insert resource"
-msgstr ""
-
-#: data/glade/resource-input-dialog.glade.h:5
-#: data/glade/task-input-dialog.glade.h:3
-msgid "Name:"
-msgstr "ስም፦"
-
-#: data/glade/resource-input-dialog.glade.h:6
-#: data/glade/task-input-dialog.glade.h:5
-msgid "_Insert"
-msgstr "አስገባ (_I)"
-
-#: data/glade/sql.glade.h:3
-#, fuzzy
-msgid "<b>Open Database</b>"
-msgstr "<b>የቀን ዓይነታት</b>"
-
-#: data/glade/sql.glade.h:4
-msgid "Database:"
-msgstr ""
-
-#: data/glade/sql.glade.h:5
-msgid "Open Database"
-msgstr ""
-
-#: data/glade/sql.glade.h:6
-msgid "Password:"
-msgstr ""
-
-#: data/glade/sql.glade.h:7
-#, fuzzy
-msgid "Select a Project"
-msgstr "ዕቅድ ፍጠር"
-
-#: data/glade/sql.glade.h:8
-msgid "Server:"
-msgstr ""
-
-#: data/glade/sql.glade.h:9
-msgid "The database contains the following projects. Select a project to open:"
-msgstr ""
-
-#: data/glade/sql.glade.h:10
-#, fuzzy
-msgid "Username:"
-msgstr "ያለ ስም"
-
-#: data/glade/task-dialog.glade.h:3
-#, no-c-format
-msgid "%"
-msgstr "%"
-
-#: data/glade/task-dialog.glade.h:5
-msgid "C_omplete:"
-msgstr ""
-
-#: data/glade/task-dialog.glade.h:8
-msgid "Na_me:"
-msgstr "ስም፦ (_M)"
-
-#: data/glade/task-dialog.glade.h:10
-msgid "Pr_iority:"
-msgstr "ቅድሚያ፦ (_I)"
-
-#: data/glade/task-dialog.glade.h:11
-msgid "Predecessors"
-msgstr ""
-
-#: data/glade/task-dialog.glade.h:12 src/planner-resource-view.c:342
-msgid "Resources"
-msgstr ""
-
-#: data/glade/task-dialog.glade.h:13
-msgid "_Duration:"
-msgstr ""
-
-#: data/glade/task-dialog.glade.h:14
-msgid "_Fixed duration"
-msgstr ""
-
-#: data/glade/task-dialog.glade.h:15
-msgid "_Milestone"
-msgstr ""
-
-#: data/glade/task-dialog.glade.h:16
-msgid "_Work:"
-msgstr "መሥራት፦ (_W)"
-
-#. day unit variant accepted in input
-#: data/glade/task-dialog.glade.h:17 src/planner-task-tree.c:2120
-msgid "days"
-msgstr "ቀን"
-
-#: data/glade/task-input-dialog.glade.h:2
-msgid "Insert task"
-msgstr ""
-
-#: data/glade/task-input-dialog.glade.h:4
-msgid "Work:"
-msgstr "መሥራት፦"
-
-#: src/planner-application.c:117
+#: src/app/mg-application.c:75
+#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:3
+#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:3
+msgid "Indent"
+msgstr "አዲስ አንቀጽ"
+
+#: src/app/mg-application.c:82
+#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:17
+#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:16
+msgid "Unindent"
+msgstr "አንቀጽ የሌለው"
+
+#: src/app/mg-application.c:89
+#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:8
+#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:8
+msgid "Move up"
+msgstr "ወደላይ አንቀሳቅስ"
+
+#: src/app/mg-application.c:96
+#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:7
+#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:7
+msgid "Move down"
+msgstr "ወደታች አንቀሳቅስ"
+
+#: src/app/mg-application.c:117
 msgid "Edit"
 msgstr "አስተካክል"
 
-#: src/planner-main-window.c:584
+#: src/app/mg-main-window.c:585
 msgid "Open a file"
 msgstr "ፋይል ክፈት"
 
 #. I18n: Translators, list your names here, newline separated if there
 #. * are more than one, to appear in the about box.
 #.
-#: src/planner-main-window.c:993 src/planner-main-window.c:1000
+#: src/app/mg-main-window.c:995 src/app/mg-main-window.c:1004
 msgid "translator_credits"
 msgstr ""
 
-#. "Copyright \xc2\xa9 2001-2002 CodeFactory AB",
-#: src/planner-main-window.c:997
+#: src/app/mg-main-window.c:1001
 msgid "A Project Management application for the GNOME desktop"
 msgstr ""
 
-#: src/planner-main-window.c:1007
-#, fuzzy
-msgid "The Planner Homepage"
+#: src/app/mg-main-window.c:1013
+msgid "The MrProject Homepage"
 msgstr "የአቶዕቅዱ ማነሻ ገጽ"
 
-#: src/planner-main-window.c:1083
+#: src/app/mg-main-window.c:1017
+msgid "Contribute to MrProject"
+msgstr ""
+
+#: src/app/mg-main-window.c:1089
 msgid "If you don't save, changes made the last minute will be discarded."
 msgstr ""
 
-#: src/planner-main-window.c:1088
+#: src/app/mg-main-window.c:1094
 #, c-format
 msgid "If you don't save, changes made the last %d minutes will be discarded."
 msgstr ""
 
-#: src/planner-main-window.c:1093
+#: src/app/mg-main-window.c:1099
 msgid "If you don't save, changes made the last hour will be discarded."
 msgstr ""
 
-#: src/planner-main-window.c:1098
+#: src/app/mg-main-window.c:1104
 #, c-format
 msgid "If you don't save, changes made the last %d hours will be discarded."
 msgstr ""
 
-#: src/planner-main-window.c:1105
+#: src/app/mg-main-window.c:1111
 #, c-format
 msgid "Save changes to document '%s' before closing?"
 msgstr ""
 
-#: src/planner-main-window.c:1123
+#: src/app/mg-main-window.c:1129
 msgid "C_lose without saving"
 msgstr ""
 
-#: src/planner-main-window.c:1125
+#: src/app/mg-main-window.c:1131
 msgid "_Cancel"
 msgstr "ተወው (_C)"
 
-#: src/planner-main-window.c:1232
+#: src/app/mg-main-window.c:1238
 msgid "Save a file"
 msgstr "ፋይል አስቀምጥ"
 
-#: src/planner-main-window.c:1264 src/planner-html-plugin.c:146
+#: src/app/mg-main-window.c:1270
+#: src/plugins/html-output/mg-html-output-plugin.c:146
 #, c-format
 msgid "File \"%s\" exists, do you want to overwrite it?"
 msgstr ""
 
-#: src/planner-main-window.c:1452
+#: src/app/mg-main-window.c:1458
 msgid ""
-"You have opened a file that was saved with an old version of Planner.\n"
+"You have opened a file that was saved with an old version of MrProject.\n"
 "\n"
 "When loading old files, all tasks will use the constraint 'Must Start On', "
 "since the old version did not fully support automatic rescheduling. To take "
@@ -925,51 +354,51 @@ msgid ""
 "'Remove all constraints' in the 'Edit' menu."
 msgstr ""
 
-#: src/planner-main-window.c:1489 src/planner-gantt-row.c:656
-#: src/planner-gantt-row.c:658 src/planner-gantt-print.c:513
-#: src/planner-gantt-print.c:515
+#: src/app/mg-main-window.c:1495 src/views/gantt/mg-gantt-row.c:656
+#: src/views/gantt/mg-gantt-row.c:658 src/views/gantt/mg-gantt-print.c:513
+#: src/views/gantt/mg-gantt-print.c:515
 msgid "Unnamed"
 msgstr "ያለ ስም"
 
-#: src/planner-main.c:61
+#: src/app/mg-main.c:61
 msgid "Create the initial window with the given geometry."
 msgstr ""
 
-#: src/planner-main.c:61
+#: src/app/mg-main.c:61
 msgid "GEOMETRY"
 msgstr "ጂኦሜትሪ"
 
-#: src/planner-main.c:98
+#: src/app/mg-main.c:98
 msgid "mrproject: --geometry cannot be used with more than one file."
 msgstr ""
 
-#: src/planner-plugin-loader.c:40
+#: src/app/mg-plugin-loader.c:40
 #, c-format
 msgid "Could not open plugin file '%s'\n"
 msgstr ""
 
-#: src/planner-view-loader.c:40
+#: src/app/mg-view-loader.c:40
 #, c-format
 msgid "Could not open view plugin file '%s'\n"
 msgstr ""
 
-#: src/planner-cell-renderer-date.c:147
+#: src/cell-renderers/mg-cell-renderer-date.c:147
 msgid "Constraint type"
 msgstr ""
 
-#: src/planner-cell-renderer-date.c:154
+#: src/cell-renderers/mg-cell-renderer-date.c:154
 msgid "As soon as possible"
 msgstr ""
 
-#: src/planner-cell-renderer-date.c:155
+#: src/cell-renderers/mg-cell-renderer-date.c:155
 msgid "Start no earlier than"
 msgstr ""
 
-#: src/planner-cell-renderer-date.c:156
+#: src/cell-renderers/mg-cell-renderer-date.c:156
 msgid "Must start on"
 msgstr ""
 
-#: src/planner-cell-renderer-date.c:171
+#: src/cell-renderers/mg-cell-renderer-date.c:171
 msgid "Today"
 msgstr "ዛሬ"
 
@@ -977,269 +406,737 @@ msgstr "ዛሬ"
 #. GTK_SIGNAL_FUNC (m_cell_date_today_clicked),
 #. date);
 #.
-#: src/planner-cell-renderer-date.c:179
+#: src/cell-renderers/mg-cell-renderer-date.c:179
 msgid "Cancel"
 msgstr "ተወው"
 
-#: src/planner-cell-renderer-date.c:187
+#: src/cell-renderers/mg-cell-renderer-date.c:187
 msgid "OK"
 msgstr "እሺ"
 
-#: src/planner-default-week-dialog.c:40
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:1
+msgid ""
+"\n"
+"The selected day type has the following working hours:"
+msgstr ""
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:3
+#: src/dialogs/task-dialog/mg-task-dialog.glade.h:1
+#: src/plugins/html-output/mg-html-output.glade.h:1
+#: src/plugins/sql/mg-sql.glade.h:1
+msgid "    "
+msgstr "    "
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:4
+#: src/dialogs/project-dialog/mg-project-properties.glade.h:1
+#: src/dialogs/property-dialog/mg-new-property.glade.h:1
+#: src/dialogs/resource-dialog/mg-resource-dialog.glade.h:1
+#: src/dialogs/resource-input-dialog/mg-resource-input-dialog.glade.h:1
+#: src/dialogs/task-dialog/mg-add-predecessor.glade.h:1
+#: src/dialogs/task-dialog/mg-task-dialog.glade.h:4
+#: src/dialogs/task-input-dialog/mg-task-input-dialog.glade.h:1
+#: src/plugins/html-output/mg-html-output.glade.h:2
+#: src/plugins/sql/mg-sql.glade.h:2
+msgid "*"
+msgstr "*"
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:5
+msgid "-"
+msgstr "-"
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:6
+msgid "<b>Calendar:</b>"
+msgstr "<b>ቀን መቁጠሪያ፦</b>"
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:7
+msgid "<b>Day types</b>"
+msgstr "<b>የቀን ዓይነታት</b>"
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:8
+msgid "<b>Working hours</b>"
+msgstr ""
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:9
+msgid "<b>Working time</b>"
+msgstr ""
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:10
+msgid "Apply"
+msgstr "ተጠቀም"
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:11
+msgid "C_opy an existing calendar"
+msgstr "የሚገኙት ቀን መቁጠሪያን ቅጂ (_O)"
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:12
+msgid "C_reate"
+msgstr "ፍጠር (_R)"
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:13
+msgid "Calendar Editor"
+msgstr "የቀን መቁጠሪያ ማቀናጃ"
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:14
+msgid "Create an _empty calendar"
+msgstr "ባዶ የቀን መቁጠሪያን ፍጠር (_E)"
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:15
+msgid "Custom working time"
+msgstr ""
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:16
+msgid "Day type:"
+msgstr "የቀን ዓይነት፦"
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:17
+msgid "Default Week"
+msgstr "የነበረው ሳመንት"
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:18
+msgid "Default week..."
+msgstr "የነበረው ሳመንት..."
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:19
+msgid "Edit Day Types"
+msgstr "የቀን ዓይነታት ያስተካክሉ"
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:20
+msgid "Edit Working Time"
+msgstr ""
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:21
+msgid "Enter the name of the new day type:"
+msgstr ""
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:22
+msgid "Existing calendars:"
+msgstr "የሚገኙት ቀን መቁጠሪያዎች፦"
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:23
+msgid "From:"
+msgstr "ከ፦"
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:24
+msgid "MrProject Team"
+msgstr "የአቶዕቅድ ቡድን"
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:25
+msgid "New Calendar"
+msgstr "አዲስ ቀን መቁጠሪያ"
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:26
+msgid "New Day Type"
+msgstr "አዲስ የቀን ዓይነት"
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:27
+msgid "Select a calendar"
+msgstr "ቀን መቁጠሪያ ምረጡ"
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:28
+msgid ""
+"Select a weekday and the day type to use for that day in the default week "
+"for this calendar.\n"
+msgstr ""
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:30
+msgid "Set day type to:"
+msgstr ""
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:31
+msgid "To:"
+msgstr "ወደ፦"
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:32
+msgid "Use working time from derived calendar"
+msgstr ""
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:33
+msgid "Week day:"
+msgstr ""
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:34
+msgid "Working time..."
+msgstr ""
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:35
+msgid "_Derive from a calendar"
+msgstr ""
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:36
+msgid "_Name of the new calendar:"
+msgstr "የአዲስ ቀን መቁጠሪያ ስም፦ (_N)"
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:37
+msgid "_New..."
+msgstr "አዲስ... (N)"
+
+#: src/dialogs/calendar-dialog/mg-default-week-dialog.c:40
 msgid "Monday"
 msgstr "ሰኞ"
 
-#: src/planner-default-week-dialog.c:41
+#: src/dialogs/calendar-dialog/mg-default-week-dialog.c:41
 msgid "Tuesday"
 msgstr "ማክሰኞ"
 
-#: src/planner-default-week-dialog.c:42
+#: src/dialogs/calendar-dialog/mg-default-week-dialog.c:42
 msgid "Wednesday"
 msgstr "ረቡዕ"
 
-#: src/planner-default-week-dialog.c:43
+#: src/dialogs/calendar-dialog/mg-default-week-dialog.c:43
 msgid "Thursday"
 msgstr "ሐሙስ"
 
-#: src/planner-default-week-dialog.c:44
+#: src/dialogs/calendar-dialog/mg-default-week-dialog.c:44
 msgid "Friday"
 msgstr "ዓርብ"
 
-#: src/planner-default-week-dialog.c:45
+#: src/dialogs/calendar-dialog/mg-default-week-dialog.c:45
 msgid "Saturday"
 msgstr "ቅዳሜ"
 
-#: src/planner-default-week-dialog.c:46
+#: src/dialogs/calendar-dialog/mg-default-week-dialog.c:46
 msgid "Sunday"
 msgstr "እሑድ"
 
-#: src/planner-default-week-dialog.c:266
+#: src/dialogs/calendar-dialog/mg-default-week-dialog.c:267
 msgid "No working time"
 msgstr ""
 
-#: src/planner-default-week-dialog.c:277 src/planner-default-week-dialog.c:281
+#: src/dialogs/calendar-dialog/mg-default-week-dialog.c:278
+#: src/dialogs/calendar-dialog/mg-default-week-dialog.c:282
 msgid "%H:%M"
 msgstr "%H:%M"
 
-#: src/planner-group-dialog.c:387 src/planner-property-dialog.c:378
-#: src/planner-task-dialog.c:1311 src/planner-task-dialog.c:1397
-#: src/planner-task-view.c:227 src/planner-gantt-print.c:190
-#: src/planner-resource-view.c:966
+#: src/dialogs/group-dialog/mg-group-dialog.c:387
+#: src/dialogs/property-dialog/mg-property-dialog.c:380
+#: src/dialogs/task-dialog/mg-task-dialog.c:1312
+#: src/dialogs/task-dialog/mg-task-dialog.c:1398
+#: src/views/gantt/mg-task-view.c:227 src/views/gantt/mg-gantt-print.c:190
+#: src/views/resources/mg-resource-view.c:942
 msgid "Name"
 msgstr "ስም"
 
-#: src/planner-group-dialog.c:393
+#: src/dialogs/group-dialog/mg-group-dialog.c:393
 msgid "Manager name"
 msgstr ""
 
-#: src/planner-group-dialog.c:399
+#: src/dialogs/group-dialog/mg-group-dialog.c:399
 msgid "Manager phone"
 msgstr ""
 
-#: src/planner-group-dialog.c:405
+#: src/dialogs/group-dialog/mg-group-dialog.c:405
 msgid "Manager email"
 msgstr ""
 
-#: src/planner-group-dialog.c:411
+#: src/dialogs/group-dialog/mg-group-dialog.c:411
 msgid "Default"
 msgstr "የነበረው"
 
-#: src/planner-project-properties.c:146
+#: src/dialogs/group-dialog/mg-group-dialog.glade.h:1
+msgid "Group Editor"
+msgstr ""
+
+#: src/dialogs/project-dialog/mg-project-properties.c:146
 msgid "Select a calendar to use for this project:"
 msgstr ""
 
-#: src/planner-project-properties.c:505
+#: src/dialogs/project-dialog/mg-project-properties.c:505
 msgid "None"
 msgstr "ምንም"
 
-#: src/planner-project-properties.c:606
+#: src/dialogs/project-dialog/mg-project-properties.c:606
 msgid "Property"
 msgstr "ምርጫ"
 
-#: src/planner-project-properties.c:617 src/planner-property-dialog.c:431
+#: src/dialogs/project-dialog/mg-project-properties.c:617
+#: src/dialogs/property-dialog/mg-property-dialog.c:433
 msgid "Value"
 msgstr "ዕሴት"
 
-#: src/planner-project-properties.c:993 src/planner-property-dialog.c:229
+#: src/dialogs/project-dialog/mg-project-properties.c:994
+#: src/dialogs/property-dialog/mg-property-dialog.c:231
 msgid "The name of the custom property needs to start with a letter."
 msgstr ""
 
-#: src/planner-project-properties.c:1065 src/planner-property-dialog.c:300
+#: src/dialogs/project-dialog/mg-project-properties.c:1066
+#: src/dialogs/property-dialog/mg-property-dialog.c:302
 #, c-format
 msgid "Do you really want to remove the property '%s' from the project?"
 msgstr ""
 
-#: src/planner-project-properties.c:1194
+#: src/dialogs/project-dialog/mg-project-properties.c:1196
 msgid "Could not create properties dialog."
 msgstr ""
 
-#: src/planner-property-dialog.c:397
+#: src/dialogs/project-dialog/mg-project-properties.glade.h:2
+msgid "<b>Project phases</b>"
+msgstr ""
+
+#: src/dialogs/project-dialog/mg-project-properties.glade.h:3
+msgid "Calendar:"
+msgstr "ቀን መቁጠሪያ፦"
+
+#: src/dialogs/project-dialog/mg-project-properties.glade.h:4
+msgid "Custom properties"
+msgstr "የተለመደው ምርጫዎች"
+
+#: src/dialogs/project-dialog/mg-project-properties.glade.h:5
+msgid "Edit Project phases"
+msgstr ""
+
+#: src/dialogs/project-dialog/mg-project-properties.glade.h:6
+msgid "Enter the name of the new project phase:"
+msgstr ""
+
+#: src/dialogs/project-dialog/mg-project-properties.glade.h:7
+#: src/dialogs/resource-dialog/mg-resource-dialog.glade.h:5
+#: src/dialogs/task-dialog/mg-task-dialog.glade.h:6
+msgid "General"
+msgstr "አጠቃላይ"
+
+#: src/dialogs/project-dialog/mg-project-properties.glade.h:8
+msgid "New Project Phase"
+msgstr ""
+
+#: src/dialogs/project-dialog/mg-project-properties.glade.h:9
+msgid "Project _name:"
+msgstr "የዕቅድ ስም፦ (_N)"
+
+#: src/dialogs/project-dialog/mg-project-properties.glade.h:10
+msgid "Project _start:"
+msgstr ""
+
+#: src/dialogs/project-dialog/mg-project-properties.glade.h:11
+msgid "Project phase:"
+msgstr ""
+
+#: src/dialogs/project-dialog/mg-project-properties.glade.h:12
+msgid "Project properties"
+msgstr "የዕቅድ ምርጫዎች"
+
+#: src/dialogs/project-dialog/mg-project-properties.glade.h:13
+msgid "Select..."
+msgstr "ምርጡ..."
+
+#: src/dialogs/project-dialog/mg-project-properties.glade.h:14
+msgid "_Manager:"
+msgstr "መቆጣጠሪያ፦ (_M)"
+
+#: src/dialogs/project-dialog/mg-project-properties.glade.h:15
+msgid "_Organization:"
+msgstr ""
+
+#: src/dialogs/property-dialog/mg-new-property.glade.h:2
+msgid "Description: "
+msgstr "መግለጫ፦"
+
+#: src/dialogs/property-dialog/mg-new-property.glade.h:3
+msgid "Label: "
+msgstr "መለያ፦"
+
+#: src/dialogs/property-dialog/mg-new-property.glade.h:4
+msgid "Name: "
+msgstr "ስም፦"
+
+#: src/dialogs/property-dialog/mg-new-property.glade.h:5
+msgid "New Property"
+msgstr "አዲስ ምርጫ"
+
+#: src/dialogs/property-dialog/mg-new-property.glade.h:6
+msgid "Type: "
+msgstr "ዓይነት፦"
+
+#: src/dialogs/property-dialog/mg-property-dialog.c:399
 msgid "Label"
 msgstr "መለያ"
 
-#: src/planner-property-dialog.c:411 src/planner-task-dialog.c:1429
-#: src/planner-resource-view.c:987
+#: src/dialogs/property-dialog/mg-property-dialog.c:413
+#: src/dialogs/task-dialog/mg-task-dialog.c:1430
+#: src/views/resources/mg-resource-view.c:963
 msgid "Type"
 msgstr "ዓይነት"
 
-#: src/planner-print-dialog.c:49
+#: src/dialogs/property-dialog/mg-property-dialog.glade.h:1
+msgid "Custom Properties"
+msgstr "የተለመደው ምርጫዎች"
+
+#: src/dialogs/print-dialog/mg-print-dialog.c:49
 msgid "Print Project"
 msgstr "ዕቅድን አትም"
 
-#: src/planner-print-dialog.c:56
+#: src/dialogs/print-dialog/mg-print-dialog.c:56
 msgid "Select views"
 msgstr "ዕይታዎች ምረጡ"
 
-#: src/planner-print-dialog.c:74
+#: src/dialogs/print-dialog/mg-print-dialog.c:74
 msgid "Select the views to print:"
 msgstr ""
 
 #. Put "no group" at the top.
-#: src/planner-resource-dialog.c:248 src/planner-resource-input-dialog.c:96
-#: src/planner-resource-view.c:1375
+#: src/dialogs/resource-dialog/mg-resource-dialog.c:248
+#: src/dialogs/resource-input-dialog/mg-resource-input-dialog.c:97
+#: src/views/resources/mg-resource-view.c:1351
 msgid "(None)"
 msgstr "(ምንም)"
 
-#: src/planner-resource-dialog.c:258 src/planner-resource-input-dialog.c:106
-#: src/planner-task-dialog.c:249
+#: src/dialogs/resource-dialog/mg-resource-dialog.c:258
+#: src/dialogs/resource-input-dialog/mg-resource-input-dialog.c:107
+#: src/dialogs/task-dialog/mg-task-dialog.c:249
 msgid "(No name)"
 msgstr "(ስም የለም)"
 
 #. i18n: time stamp format for notes in task dialog, see strftime(3) for
 #. * a detailed description.
-#: src/planner-resource-dialog.c:728 src/planner-task-dialog.c:679
+#: src/dialogs/resource-dialog/mg-resource-dialog.c:728
+#: src/dialogs/task-dialog/mg-task-dialog.c:679
 msgid "%a %d %b %Y, %H:%M\n"
 msgstr "%a %d %b %Y, %H:%M\n"
 
-#: src/planner-resource-dialog.c:826
+#: src/dialogs/resource-dialog/mg-resource-dialog.c:826
 msgid "None (use project default)"
 msgstr ""
 
-#: src/planner-resource-dialog.c:953 src/planner-resource-dialog.c:955
+#: src/dialogs/resource-dialog/mg-resource-dialog.c:953
+#: src/dialogs/resource-dialog/mg-resource-dialog.c:955
 msgid "Edit resource properties"
 msgstr ""
 
-#: src/planner-resource-dialog.c:1101 src/planner-task-view.c:230
-#: src/planner-gantt-print.c:198 src/planner-resource-view.c:629
-#: src/planner-resource-view.c:645 src/planner-resource-view.c:1187
+#: src/dialogs/resource-dialog/mg-resource-dialog.c:1102
+#: src/views/gantt/mg-task-view.c:230 src/views/gantt/mg-gantt-print.c:198
+#: src/views/resources/mg-resource-view.c:629
+#: src/views/resources/mg-resource-view.c:645
+#: src/views/resources/mg-resource-view.c:1163
 msgid "Work"
 msgstr "መሥራት"
 
-#: src/planner-resource-dialog.c:1102 src/planner-resource-view.c:632
-#: src/planner-resource-view.c:646 src/planner-resource-view.c:1188
+#: src/dialogs/resource-dialog/mg-resource-dialog.c:1103
+#: src/views/resources/mg-resource-view.c:632
+#: src/views/resources/mg-resource-view.c:646
+#: src/views/resources/mg-resource-view.c:1164
 msgid "Material"
 msgstr ""
 
-#: src/planner-predecessor-model.c:191 src/planner-task-dialog.c:1039
+#: src/dialogs/resource-dialog/mg-resource-dialog.glade.h:2
+#, fuzzy
+msgid "C_ost:"
+msgstr "ዋጋ፦ (_C)"
+
+#: src/dialogs/resource-dialog/mg-resource-dialog.glade.h:3
+msgid "Calendar"
+msgstr "ቀን መቁጠሪያ"
+
+#: src/dialogs/resource-dialog/mg-resource-dialog.glade.h:4
+msgid "Edit calendars..."
+msgstr ""
+
+#: src/dialogs/resource-dialog/mg-resource-dialog.glade.h:6
+#: src/dialogs/task-dialog/mg-task-dialog.glade.h:7
+msgid "Insert time stamp"
+msgstr ""
+
+#: src/dialogs/resource-dialog/mg-resource-dialog.glade.h:7
+#: src/dialogs/task-dialog/mg-task-dialog.glade.h:9
+msgid "Notes"
+msgstr "ማስታወሻዎች"
+
+#: src/dialogs/resource-dialog/mg-resource-dialog.glade.h:8
+msgid ""
+"Select the calendar to use for this resource. If you want to use the default "
+"calendar of the project, select 'None'. "
+msgstr ""
+
+#: src/dialogs/resource-dialog/mg-resource-dialog.glade.h:9
+msgid "_Email:"
+msgstr "ኢሜይል፦ (_E)"
+
+#: src/dialogs/resource-dialog/mg-resource-dialog.glade.h:10
+msgid "_Group:"
+msgstr "መድረክ፦ (_G)"
+
+#: src/dialogs/resource-dialog/mg-resource-dialog.glade.h:11
+msgid "_Name:"
+msgstr "ስም፦ (_N)"
+
+#: src/dialogs/resource-dialog/mg-resource-dialog.glade.h:12
+msgid "_Type:"
+msgstr "ዓይነት፦ (_T)"
+
+#: src/dialogs/resource-input-dialog/mg-resource-input-dialog.glade.h:2
+msgid "Email:"
+msgstr "ኢሜይል፦"
+
+#: src/dialogs/resource-input-dialog/mg-resource-input-dialog.glade.h:3
+msgid "Group:"
+msgstr "መድረክ፦"
+
+#: src/dialogs/resource-input-dialog/mg-resource-input-dialog.glade.h:4
+msgid "Insert resource"
+msgstr ""
+
+#: src/dialogs/resource-input-dialog/mg-resource-input-dialog.glade.h:5
+#: src/dialogs/task-input-dialog/mg-task-input-dialog.glade.h:3
+msgid "Name:"
+msgstr "ስም፦"
+
+#: src/dialogs/resource-input-dialog/mg-resource-input-dialog.glade.h:6
+#: src/dialogs/task-input-dialog/mg-task-input-dialog.glade.h:5
+msgid "_Insert"
+msgstr "አስገባ (_I)"
+
+#: src/dialogs/task-dialog/mg-add-predecessor.glade.h:2
+msgid "Lag: "
+msgstr ""
+
+#: src/dialogs/task-dialog/mg-add-predecessor.glade.h:3
+msgid "New predecessor"
+msgstr ""
+
+#: src/dialogs/task-dialog/mg-add-predecessor.glade.h:4
+msgid "Predecessor: "
+msgstr ""
+
+#: src/dialogs/task-dialog/mg-add-predecessor.glade.h:5
+msgid "Relation type: "
+msgstr ""
+
+#: src/dialogs/task-dialog/mg-predecessor-model.c:191
+#: src/dialogs/task-dialog/mg-task-dialog.c:1040
 msgid "FS"
 msgstr ""
 
-#: src/planner-predecessor-model.c:194 src/planner-task-dialog.c:1040
+#: src/dialogs/task-dialog/mg-predecessor-model.c:194
+#: src/dialogs/task-dialog/mg-task-dialog.c:1041
 msgid "FF"
 msgstr ""
 
-#: src/planner-predecessor-model.c:197 src/planner-task-dialog.c:1041
+#: src/dialogs/task-dialog/mg-predecessor-model.c:197
+#: src/dialogs/task-dialog/mg-task-dialog.c:1042
 msgid "SS"
 msgstr ""
 
-#: src/planner-predecessor-model.c:200 src/planner-task-dialog.c:1042
+#: src/dialogs/task-dialog/mg-predecessor-model.c:200
+#: src/dialogs/task-dialog/mg-task-dialog.c:1043
 msgid "SF"
 msgstr ""
 
-#: src/planner-task-dialog.c:745
+#: src/dialogs/task-dialog/mg-task-dialog.c:746
 msgid "Finish to start (FS)"
 msgstr ""
 
-#: src/planner-task-dialog.c:746
+#: src/dialogs/task-dialog/mg-task-dialog.c:747
 msgid "Finish to finish (FF)"
 msgstr ""
 
-#: src/planner-task-dialog.c:747
+#: src/dialogs/task-dialog/mg-task-dialog.c:748
 msgid "Start to start (SS)"
 msgstr ""
 
-#: src/planner-task-dialog.c:748
+#: src/dialogs/task-dialog/mg-task-dialog.c:749
 msgid "Start to finish (SF)"
 msgstr ""
 
-#: src/planner-task-dialog.c:798
+#: src/dialogs/task-dialog/mg-task-dialog.c:799
 msgid "Can't add new predecessor. No task selected!"
 msgstr ""
 
-#: src/planner-task-dialog.c:1330
+#: src/dialogs/task-dialog/mg-task-dialog.c:1331
 msgid "Assigned"
 msgstr ""
 
-#: src/planner-task-dialog.c:1347
+#: src/dialogs/task-dialog/mg-task-dialog.c:1348
 msgid "Units"
 msgstr "ክፍሎች"
 
-#: src/planner-task-dialog.c:1451
+#: src/dialogs/task-dialog/mg-task-dialog.c:1452
 msgid "Lag"
 msgstr ""
 
-#: src/planner-task-dialog.c:1584 src/planner-task-dialog.c:1586
+#: src/dialogs/task-dialog/mg-task-dialog.c:1585
+#: src/dialogs/task-dialog/mg-task-dialog.c:1587
 msgid "Edit task properties"
 msgstr ""
 
-#: src/planner-html-plugin.c:133
+#: src/dialogs/task-dialog/mg-task-dialog.glade.h:3
+#, no-c-format
+msgid "%"
+msgstr "%"
+
+#: src/dialogs/task-dialog/mg-task-dialog.glade.h:5
+msgid "C_omplete:"
+msgstr ""
+
+#: src/dialogs/task-dialog/mg-task-dialog.glade.h:8
+msgid "Na_me:"
+msgstr "ስም፦ (_M)"
+
+#: src/dialogs/task-dialog/mg-task-dialog.glade.h:10
+msgid "Pr_iority:"
+msgstr "ቅድሚያ፦ (_I)"
+
+#: src/dialogs/task-dialog/mg-task-dialog.glade.h:11
+msgid "Predecessors"
+msgstr ""
+
+#: src/dialogs/task-dialog/mg-task-dialog.glade.h:12
+#: src/views/resources/mg-resource-view.c:342
+msgid "Resources"
+msgstr ""
+
+#: src/dialogs/task-dialog/mg-task-dialog.glade.h:13
+msgid "_Duration:"
+msgstr ""
+
+#: src/dialogs/task-dialog/mg-task-dialog.glade.h:14
+msgid "_Fixed duration"
+msgstr ""
+
+#: src/dialogs/task-dialog/mg-task-dialog.glade.h:15
+msgid "_Milestone"
+msgstr ""
+
+#: src/dialogs/task-dialog/mg-task-dialog.glade.h:16
+msgid "_Work:"
+msgstr "መሥራት፦ (_W)"
+
+#. day unit variant accepted in input
+#: src/dialogs/task-dialog/mg-task-dialog.glade.h:17
+#: src/views/gantt/mg-task-tree.c:2121
+msgid "days"
+msgstr "ቀን"
+
+#: src/dialogs/task-input-dialog/mg-task-input-dialog.glade.h:2
+msgid "Insert task"
+msgstr ""
+
+#: src/dialogs/task-input-dialog/mg-task-input-dialog.glade.h:4
+msgid "Work:"
+msgstr "መሥራት፦"
+
+#: src/plugins/html-output/GNOME_MrProject_HtmlOutputPlugin.ui.h:1
+#: src/plugins/html-output/mg-html-output.glade.h:4
+msgid "Export to HTML"
+msgstr ""
+
+#: src/plugins/html-output/mg-html-output.glade.h:3
+#, fuzzy
+msgid "<b>Save to</b>"
+msgstr "<b>የቀን ዓይነታት</b>"
+
+#: src/plugins/html-output/mg-html-output.glade.h:5
+msgid "Local file"
+msgstr ""
+
+#: src/plugins/html-output/mg-html-output.glade.h:6
+#, fuzzy
+msgid "Save to HTML File"
+msgstr "ፋይል አስቀምጥ"
+
+#: src/plugins/html-output/mg-html-output.glade.h:7
+msgid "Web location"
+msgstr ""
+
+#: src/plugins/html-output/mg-html-output-plugin.c:133
 #, c-format
 msgid ""
 "\"%s\" is a directory.\n"
 "Enter a filename and try again."
 msgstr ""
 
+#: src/plugins/sql/GNOME_MrProject_SQLPlugin.ui.h:1
+msgid "Open from Database..."
+msgstr ""
+
+#: src/plugins/sql/GNOME_MrProject_SQLPlugin.ui.h:2
+#, fuzzy
+msgid "Save to Database..."
+msgstr "በሌላ ስም አስቀምጥ..."
+
+#: src/plugins/sql/mg-sql.glade.h:3
+#, fuzzy
+msgid "<b>Open Database</b>"
+msgstr "<b>የቀን ዓይነታት</b>"
+
+#: src/plugins/sql/mg-sql.glade.h:4
+msgid "Database:"
+msgstr ""
+
+#: src/plugins/sql/mg-sql.glade.h:5
+msgid "Open Database"
+msgstr ""
+
+#: src/plugins/sql/mg-sql.glade.h:6
+msgid "Password:"
+msgstr ""
+
+#: src/plugins/sql/mg-sql.glade.h:7
+#, fuzzy
+msgid "Select a Project"
+msgstr "ዕቅድ ፍጠር"
+
+#: src/plugins/sql/mg-sql.glade.h:8
+msgid "Server:"
+msgstr ""
+
+#: src/plugins/sql/mg-sql.glade.h:9
+msgid "The database contains the following projects. Select a project to open:"
+msgstr ""
+
+#: src/plugins/sql/mg-sql.glade.h:10
+#, fuzzy
+msgid "Username:"
+msgstr "ያለ ስም"
+
 #. Give up.
-#: src/planner-sql-plugin.c:127
+#: src/plugins/sql/mg-sql-plugin.c:127
 #, fuzzy
 msgid "Invalid Unicode"
 msgstr " (ዩኒኮድ ተቀብሏል)"
 
-#: src/planner-sql-plugin.c:269
+#: src/plugins/sql/mg-sql-plugin.c:269
 #, c-format
 msgid ""
 "Connection to database '%s' failed:\n"
 "%s"
 msgstr ""
 
-#: src/planner-sql-plugin.c:318
+#: src/plugins/sql/mg-sql-plugin.c:318
 #, fuzzy
 msgid "Project"
 msgstr "ዕቅድ (_P)"
 
-#: src/planner-sql-plugin.c:466
+#: src/plugins/sql/mg-sql-plugin.c:466
 msgid "Open from Database"
 msgstr ""
 
-#: src/planner-sql-plugin.c:573
+#: src/plugins/sql/mg-sql-plugin.c:573
 msgid "Save to Database"
 msgstr ""
 
-#: src/planner-format.c:141
+#: src/util/mg-format.c:141
 #, c-format
 msgid "%dd %dh"
 msgstr "%dቀ %dሰ"
 
-#: src/planner-format.c:144
+#: src/util/mg-format.c:144
 #, c-format
 msgid "%dd"
 msgstr "%dቀ"
 
-#: src/planner-format.c:147
+#: src/util/mg-format.c:147
 #, c-format
 msgid "%dh"
 msgstr "%dሰ"
 
-#: src/planner-format.c:171
+#: src/util/mg-format.c:171
 #, c-format
 msgid "%s days"
 msgstr "%s ቀን"
 
-#: src/planner-format.c:174
+#: src/util/mg-format.c:174
 msgid "0 days"
 msgstr "0 ቀን"
 
-#: src/planner-format.c:177
+#: src/util/mg-format.c:177
 #, c-format
 msgid "%s day"
 msgstr "%s ቀን"
@@ -1248,43 +1145,160 @@ msgstr "%s ቀን"
 #. * e.g. in the date cells in the task tree. See
 #. * libmrproject/docs/DateFormat.
 #.
-#: src/planner-format.c:197
+#: src/util/mg-format.c:197
 msgid "%b %e"
 msgstr "%b %e"
 
+#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:1
+#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:1
+#, fuzzy
+msgid "I_ndent Task"
+msgstr "አዲስ አንቀጽ"
+
+#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:2
+#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:2
+msgid "In_sert Tasks..."
+msgstr ""
+
+#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:5
+#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:5
+#, fuzzy
+msgid "Move Task Do_wn"
+msgstr "ወደታች አንቀሳቅስ"
+
+#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:6
+#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:6
+#, fuzzy
+msgid "Move Task _Up"
+msgstr "ወደላይ አንቀሳቅስ"
+
+#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:10
+#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:10
+msgid "Reset _All Constraints"
+msgstr ""
+
+#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:11
+#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:11
+msgid "Reset _Constraint"
+msgstr ""
+
+#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:12
+#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:12
+#: src/views/resources/GNOME_MrProject_ResourcesView.ui.h:7
+#, fuzzy
+msgid "Select _All"
+msgstr "ሁሉንም ምረጡ"
+
+#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:13
+#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:13
+#: src/views/resources/GNOME_MrProject_ResourcesView.ui.h:8
+msgid "Select all tasks"
+msgstr ""
+
+#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:14
+msgid "Test"
+msgstr "ፈተና"
+
+#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:15
+#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:14
+msgid "Un_link Task"
+msgstr ""
+
+#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:16
+#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:15
+#, fuzzy
+msgid "Unin_dent Task"
+msgstr "አንቀጽ የሌለው"
+
+#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:19
+#, fuzzy
+msgid "Zoom In"
+msgstr "ከቅርበት ዕይታ"
+
+#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:20
+#, fuzzy
+msgid "Zoom Out"
+msgstr "ከርቀት ዕይታ"
+
+#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:21
+#, fuzzy
+msgid "Zoom To Fit"
+msgstr "በመስኮቱ ልክ አጉላ"
+
+#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:22
+#, fuzzy
+msgid "Zoom To _Fit"
+msgstr "በመስኮቱ ልክ አጉላ"
+
+#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:23
+#, fuzzy
+msgid "Zoom _Out"
+msgstr "ከርቀት ዕይታ"
+
+#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:24
+#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:19
+msgid "_Edit Task Properties..."
+msgstr ""
+
+#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:25
+msgid "_Highlight Critical Tasks"
+msgstr ""
+
+#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:26
+#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:20
+#, fuzzy
+msgid "_Insert Task"
+msgstr "አስገባ (_I)"
+
+#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:27
+#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:21
+#, fuzzy
+msgid "_Remove Task"
+msgstr "አስወግድ"
+
+#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:28
+#, fuzzy
+msgid "_Zoom In"
+msgstr "ከቅርበት ዕይታ"
+
+#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:18
+#, fuzzy
+msgid "_Edit Custom Properties..."
+msgstr "የተለመደው ምርጫዎች"
+
 #. i18n: project start, the date format is described in
 #. * libmrproject/docs/DateFormat.
-#: src/planner-gantt-background.c:579
+#: src/views/gantt/mg-gantt-background.c:579
 msgid "%Y %b %d"
 msgstr "%Y %b %d"
 
-#: src/planner-gantt-background.c:581
+#: src/views/gantt/mg-gantt-background.c:581
 msgid "Project start"
 msgstr ""
 
-#: src/planner-gantt-row.c:1841 src/planner-gantt-row.c:1844
+#: src/views/gantt/mg-gantt-row.c:1841 src/views/gantt/mg-gantt-row.c:1844
 msgid "No name"
 msgstr "ስም የለም"
 
-#: src/planner-gantt-row.c:1847
+#: src/views/gantt/mg-gantt-row.c:1847
 #, c-format
 msgid "Make task '%s' a predecessor of '%s'"
 msgstr ""
 
-#: src/planner-gantt-row.c:1905
+#: src/views/gantt/mg-gantt-row.c:1905
 #, c-format
 msgid "Change work to %s"
 msgstr ""
 
-#: src/planner-gantt-view.c:273
+#: src/views/gantt/mg-gantt-view.c:274
 msgid "Gantt Chart"
 msgstr ""
 
-#: src/planner-gantt-view.c:281
+#: src/views/gantt/mg-gantt-view.c:282
 msgid "_Gantt Chart"
 msgstr ""
 
-#: src/planner-gantt-view.c:470
+#: src/views/gantt/mg-gantt-view.c:471
 msgid ""
 "\n"
 "Name"
@@ -1293,7 +1307,7 @@ msgstr ""
 "ስም"
 
 #. COL_START,    _("\nStart"),
-#: src/planner-gantt-view.c:472
+#: src/views/gantt/mg-gantt-view.c:473
 msgid ""
 "\n"
 "Work"
@@ -1302,199 +1316,236 @@ msgstr ""
 "መሥራት"
 
 #. i18n: Short "Week", preferably 2 letters.
-#: src/planner-scale-utils.c:325
+#: src/views/gantt/mg-scale-utils.c:325
 #, c-format
 msgid "Wk %d"
 msgstr "ሳመንት %d"
 
-#: src/planner-scale-utils.c:329
+#: src/views/gantt/mg-scale-utils.c:329
 #, c-format
 msgid "Week %d"
 msgstr "ሳመንት %d"
 
 #. i18n: Week, year.
-#: src/planner-scale-utils.c:334
+#: src/views/gantt/mg-scale-utils.c:334
 #, c-format
 msgid "Week %d, %d"
 msgstr "ሳመንት %d፣ %d"
 
 #. i18n: Short "Quarter", preferrably 1 letter.
-#: src/planner-scale-utils.c:365
+#: src/views/gantt/mg-scale-utils.c:365
 #, c-format
 msgid "Q%d"
 msgstr "Q%d"
 
 #. i18n: Short "Quarter", preferrably 2-3 letters.
-#: src/planner-scale-utils.c:369
+#: src/views/gantt/mg-scale-utils.c:369
 #, c-format
 msgid "Qtr %d"
 msgstr ""
 
 #. i18n: Year, short "Quarter", preferrably 2-3 letters.
-#: src/planner-scale-utils.c:373
+#: src/views/gantt/mg-scale-utils.c:373
 #, c-format
 msgid "%d, Qtr %d"
 msgstr ""
 
 #. i18n: Short "Half year", prefferably 1 letter.
-#: src/planner-scale-utils.c:386
+#: src/views/gantt/mg-scale-utils.c:386
 #, c-format
 msgid "H%d"
 msgstr "H%d"
 
 #. i18n: Year, short "Half year", prefferably 1 letter.
-#: src/planner-scale-utils.c:391
+#: src/views/gantt/mg-scale-utils.c:391
 #, c-format
 msgid "%04d, H%d"
 msgstr "%04d፣ H%d"
 
-#: src/planner-task-tree.c:184
+#: src/views/gantt/mg-task-tree.c:185
 msgid "/_Insert task"
 msgstr ""
 
-#: src/planner-task-tree.c:185
+#: src/views/gantt/mg-task-tree.c:186
 msgid "/_Insert subtask"
 msgstr ""
 
-#: src/planner-task-tree.c:186
+#: src/views/gantt/mg-task-tree.c:187
 msgid "/_Remove task"
 msgstr ""
 
-#: src/planner-task-tree.c:188
+#: src/views/gantt/mg-task-tree.c:189
 msgid "/_Unlink task"
 msgstr ""
 
-#: src/planner-task-tree.c:190
+#: src/views/gantt/mg-task-tree.c:191
 msgid "/_Edit task..."
 msgstr ""
 
-#: src/planner-task-tree.c:2112
+#: src/views/gantt/mg-task-tree.c:2113
 msgid "mon"
 msgstr "ወር"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:2113
+#: src/views/gantt/mg-task-tree.c:2114
 msgid "month"
 msgstr "ወር"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:2114
+#: src/views/gantt/mg-task-tree.c:2115
 msgid "months"
 msgstr "ወር"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:2115
+#: src/views/gantt/mg-task-tree.c:2116
 msgid "w"
 msgstr "ምዕራብ"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:2116
+#: src/views/gantt/mg-task-tree.c:2117
 msgid "week"
 msgstr "ሳመንት"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:2117
+#: src/views/gantt/mg-task-tree.c:2118
 msgid "weeks"
 msgstr "ሳመንት"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:2118
+#: src/views/gantt/mg-task-tree.c:2119
 msgid "d"
 msgstr "ቀ"
 
 #. day unit variant accepted in input
-#: src/planner-task-tree.c:2119
+#: src/views/gantt/mg-task-tree.c:2120
 msgid "day"
 msgstr "ቀን"
 
 #. day unit variant accepted in input
-#: src/planner-task-tree.c:2121
+#: src/views/gantt/mg-task-tree.c:2122
 msgid "h"
 msgstr "ሰ"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:2122
+#: src/views/gantt/mg-task-tree.c:2123
 msgid "hour"
 msgstr "ሰዓት"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:2123
+#: src/views/gantt/mg-task-tree.c:2124
 msgid "hours"
 msgstr "ሰዓት"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:2124
+#: src/views/gantt/mg-task-tree.c:2125
 msgid "min"
 msgstr "ደቂቃ"
 
 #. minute unit variant accepted in input
-#: src/planner-task-tree.c:2125
+#: src/views/gantt/mg-task-tree.c:2126
 msgid "minute"
 msgstr "ደቂቃ"
 
 #. minute unit variant accepted in input
-#: src/planner-task-tree.c:2126
+#: src/views/gantt/mg-task-tree.c:2127
 msgid "minutes"
 msgstr "ደቂቃዎች"
 
-#: src/planner-task-view.c:173
+#: src/views/gantt/mg-task-view.c:173
 msgid "Tasks"
 msgstr ""
 
-#: src/planner-task-view.c:181
+#: src/views/gantt/mg-task-view.c:181
 msgid "_Tasks"
 msgstr ""
 
-#: src/planner-task-view.c:228
+#: src/views/gantt/mg-task-view.c:228
 msgid "Start"
 msgstr "ጀምር"
 
-#: src/planner-task-view.c:229
+#: src/views/gantt/mg-task-view.c:229
 msgid "Finish"
 msgstr "መጨረሻው"
 
-#: src/planner-task-view.c:231
+#: src/views/gantt/mg-task-view.c:231
 msgid "Slack"
 msgstr ""
 
-#: src/planner-task-view.c:232
+#: src/views/gantt/mg-task-view.c:232
 msgid "Cost"
 msgstr "ዋጋ"
 
-#: src/planner-task-view.c:438
+#: src/views/gantt/mg-task-view.c:438
 msgid "Edit custom task properties"
 msgstr ""
 
-#: src/planner-resource-view.c:248
+#: src/views/resources/GNOME_MrProject_ResourcesView.ui.h:1
+#, fuzzy
+msgid "Edit _Custom Properties..."
+msgstr "የተለመደው ምርጫዎች"
+
+#: src/views/resources/GNOME_MrProject_ResourcesView.ui.h:2
+#, fuzzy
+msgid "Edit _Groups"
+msgstr "መድረኮችን ያስተካክሉ"
+
+#: src/views/resources/GNOME_MrProject_ResourcesView.ui.h:3
+msgid "Groups"
+msgstr "መድረኮች"
+
+#: src/views/resources/GNOME_MrProject_ResourcesView.ui.h:4
+msgid "In_sert Resources..."
+msgstr ""
+
+#: src/views/resources/GNOME_MrProject_ResourcesView.ui.h:9
+#, fuzzy
+msgid "_Edit Resource Properties..."
+msgstr "የዕቅድ ምርጫዎች ያስተካክሉ"
+
+#: src/views/resources/GNOME_MrProject_ResourcesView.ui.h:10
+#, fuzzy
+msgid "_Insert Resource"
+msgstr "አስገባ (_I)"
+
+#: src/views/resources/GNOME_MrProject_ResourcesView.ui.h:11
+msgid "_Remove Resource"
+msgstr ""
+
+#: src/views/resources/mg-resource-view.c:248
 msgid "/_Insert resource"
 msgstr ""
 
-#: src/planner-resource-view.c:249
+#: src/views/resources/mg-resource-view.c:249
 msgid "/_Remove resource"
 msgstr ""
 
-#: src/planner-resource-view.c:250
+#: src/views/resources/mg-resource-view.c:250
 msgid "/_Edit resource..."
 msgstr ""
 
-#: src/planner-resource-view.c:350
+#: src/views/resources/mg-resource-view.c:350
 msgid "_Resources"
 msgstr ""
 
-#: src/planner-resource-view.c:849
+#: src/views/resources/mg-resource-view.c:825
 msgid "Edit custom resource properties"
 msgstr ""
 
-#: src/planner-resource-view.c:1011
+#: src/views/resources/mg-resource-view.c:987
 msgid "Group"
 msgstr "መድረክ"
 
-#: src/planner-resource-view.c:1040
+#: src/views/resources/mg-resource-view.c:1016
 msgid "Email"
 msgstr "ኢሜይል"
 
-#~ msgid "MrProject Project Management Tool"
-#~ msgstr "አቶዕቅድ የዕቅድ ጉባኤ መሣሪያ"
+#: mrproject.desktop.in.h:1
+msgid "MrProject Project Management Tool"
+msgstr "አቶዕቅድ የዕቅድ ጉባኤ መሣሪያ"
+
+#: mrproject.desktop.in.h:2
+msgid "Project Management"
+msgstr "የዕቅድ ጉባኤ"
 
 #~ msgid "About"
 #~ msgstr "ስለ"

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: MrProject 0.9.1\n"
-"POT-Creation-Date: 2003-12-01 16:26+0100\n"
+"POT-Creation-Date: 2003-09-12 18:55+0200\n"
 "PO-Revision-Date: 2003-06-28 16:51+0400\n"
 "Last-Translator: Valek Filippov <frob@df.ru>\n"
 "Language-Team: Russian <gnome-cyr@gnome.org>\n"
@@ -13,879 +13,325 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: data/planner.desktop.in.h:1
-#, fuzzy
-msgid "Planner Project Management"
-msgstr "Управление проектами"
-
-#: data/planner.desktop.in.h:2
-msgid "Project Management"
-msgstr "Управление проектами"
-
 #: libegg/recent-files/egg-recent-vfs-utils.c:90
 msgid " (invalid Unicode)"
 msgstr " (недопустимый Unicode)"
 
-#: data/ui/main-window.ui.h:1
+#: src/app/GNOME_MrProject_MainWindow.ui.h:1
 msgid "About this application"
 msgstr "О программе"
 
-#: data/ui/main-window.ui.h:2
+#: src/app/GNOME_MrProject_MainWindow.ui.h:2
 msgid "C_ut"
 msgstr "Вырезать"
 
-#: data/ui/main-window.ui.h:3
+#: src/app/GNOME_MrProject_MainWindow.ui.h:3
 msgid "Clear"
 msgstr "Очистить"
 
-#: data/ui/main-window.ui.h:4
+#: src/app/GNOME_MrProject_MainWindow.ui.h:4
 msgid "Clear the selection"
 msgstr "Очистить выделенное"
 
-#: data/ui/main-window.ui.h:5
+#: src/app/GNOME_MrProject_MainWindow.ui.h:5
 msgid "Close the current file"
 msgstr "Закрыть текущий файл"
 
-#: data/ui/main-window.ui.h:6
+#: src/app/GNOME_MrProject_MainWindow.ui.h:6
 msgid "Copy the selection"
 msgstr "Запомнить выделенное"
 
-#: data/ui/main-window.ui.h:7
+#: src/app/GNOME_MrProject_MainWindow.ui.h:7
 msgid "Create a new project"
 msgstr "Создать новый проект"
 
-#: data/ui/main-window.ui.h:8
+#: src/app/GNOME_MrProject_MainWindow.ui.h:8
 msgid "Cut the selection"
 msgstr "Вырезать выделенное"
 
-#: data/ui/main-window.ui.h:9
+#: src/app/GNOME_MrProject_MainWindow.ui.h:9
 msgid "Edit Day _Types"
 msgstr "Редактировать виды дней"
 
-#: data/ui/main-window.ui.h:10
+#: src/app/GNOME_MrProject_MainWindow.ui.h:10
 msgid "Edit Project _Phases"
 msgstr "Редактировать фазы проекта"
 
-#: data/ui/main-window.ui.h:11
+#: src/app/GNOME_MrProject_MainWindow.ui.h:11
 msgid "Edit the project properties"
 msgstr "Изменить свойства проекта"
 
-#: data/ui/main-window.ui.h:12
+#: src/app/GNOME_MrProject_MainWindow.ui.h:12
 msgid "Exit the program"
 msgstr "Выйти из программы"
 
-#: data/ui/main-window.ui.h:13
+#: src/app/GNOME_MrProject_MainWindow.ui.h:13
 msgid "New"
 msgstr "Создать"
 
-#: data/ui/main-window.ui.h:14
+#: src/app/GNOME_MrProject_MainWindow.ui.h:14
 msgid "New..."
 msgstr "Создать..."
 
-#: data/ui/main-window.ui.h:15
+#: src/app/GNOME_MrProject_MainWindow.ui.h:15
 msgid "Open"
 msgstr "Открыть"
 
-#: data/ui/main-window.ui.h:16
+#: src/app/GNOME_MrProject_MainWindow.ui.h:16
 msgid "Open a project"
 msgstr "Открыть проект"
 
-#: data/ui/main-window.ui.h:17
+#: src/app/GNOME_MrProject_MainWindow.ui.h:17
 msgid "Paste the clipboard"
 msgstr "Вставить запомненное в буфере"
 
-#: data/ui/main-window.ui.h:18
+#: src/app/GNOME_MrProject_MainWindow.ui.h:18
 msgid "Print"
 msgstr "Печать"
 
-#: data/ui/main-window.ui.h:19
+#: src/app/GNOME_MrProject_MainWindow.ui.h:19
 msgid "Print preview of the current project"
 msgstr "Просмотр печати текущего проекта"
 
-#: data/ui/main-window.ui.h:20
+#: src/app/GNOME_MrProject_MainWindow.ui.h:20
 msgid "Print the current project"
 msgstr "Напечатать текущий проект"
 
-#: data/ui/main-window.ui.h:21
+#: src/app/GNOME_MrProject_MainWindow.ui.h:21
 msgid "Redo the undone action"
 msgstr "Вернуть отменённое действие"
 
-#: data/ui/main-window.ui.h:22
+#: src/app/GNOME_MrProject_MainWindow.ui.h:22
 msgid "Save"
 msgstr "Сохранить"
 
-#: data/ui/main-window.ui.h:23
+#: src/app/GNOME_MrProject_MainWindow.ui.h:23
 msgid "Save _As..."
 msgstr "Сохранить как..."
 
-#: data/ui/main-window.ui.h:24
+#: src/app/GNOME_MrProject_MainWindow.ui.h:24
 msgid "Save the current project"
 msgstr "Сохранить текущий проект"
 
-#: data/ui/main-window.ui.h:25
+#: src/app/GNOME_MrProject_MainWindow.ui.h:25
 msgid "Save the current project with a different name"
 msgstr "Сохранить текущий проект под другим именем"
 
-#: data/ui/main-window.ui.h:26
+#: src/app/GNOME_MrProject_MainWindow.ui.h:26
 msgid "Show the MrProject User Guide"
 msgstr "Показать руководство пользователя по MrProject"
 
-#: data/ui/main-window.ui.h:27
+#: src/app/GNOME_MrProject_MainWindow.ui.h:27
 msgid "Undo the last action"
 msgstr "Откатить последнее действие"
 
-#: data/ui/main-window.ui.h:28
+#: src/app/GNOME_MrProject_MainWindow.ui.h:28
 msgid "_About"
 msgstr "_О программе"
 
-#: data/ui/main-window.ui.h:29
+#: src/app/GNOME_MrProject_MainWindow.ui.h:29
 msgid "_Actions"
 msgstr "Действия"
 
-#: data/ui/main-window.ui.h:30
+#: src/app/GNOME_MrProject_MainWindow.ui.h:30
 msgid "_Close"
 msgstr "_Закрыть"
 
-#: data/ui/main-window.ui.h:31
+#: src/app/GNOME_MrProject_MainWindow.ui.h:31
 msgid "_Copy"
 msgstr "Скопировать"
 
-#: data/ui/main-window.ui.h:32
+#: src/app/GNOME_MrProject_MainWindow.ui.h:32
 msgid "_Edit"
 msgstr "_Правка"
 
-#: data/ui/main-window.ui.h:33
+#: src/app/GNOME_MrProject_MainWindow.ui.h:33
 msgid "_Edit Project Properties"
 msgstr "Правка свойств проекта"
 
-#: data/ui/main-window.ui.h:34
+#: src/app/GNOME_MrProject_MainWindow.ui.h:34
 msgid "_File"
 msgstr "_Файл"
 
-#: data/ui/main-window.ui.h:35
+#: src/app/GNOME_MrProject_MainWindow.ui.h:35
 msgid "_Help"
 msgstr "_Справка"
 
-#: data/ui/main-window.ui.h:36
+#: src/app/GNOME_MrProject_MainWindow.ui.h:36
 msgid "_Manage Calendars"
 msgstr "Управление календарями"
 
-#: data/ui/main-window.ui.h:37
+#: src/app/GNOME_MrProject_MainWindow.ui.h:37
 msgid "_New Project"
 msgstr "_Создать проект"
 
-#: data/ui/main-window.ui.h:38
+#: src/app/GNOME_MrProject_MainWindow.ui.h:38
 msgid "_Open..."
 msgstr "Открыть..."
 
-#: data/ui/main-window.ui.h:39
+#: src/app/GNOME_MrProject_MainWindow.ui.h:39
 msgid "_Paste"
 msgstr "Вставить"
 
-#: data/ui/main-window.ui.h:40
+#: src/app/GNOME_MrProject_MainWindow.ui.h:40
 msgid "_Print Preview"
 msgstr "Просмотр печати"
 
-#: data/ui/main-window.ui.h:41
+#: src/app/GNOME_MrProject_MainWindow.ui.h:41
 msgid "_Print..."
 msgstr "Печать..."
 
-#: data/ui/main-window.ui.h:42
+#: src/app/GNOME_MrProject_MainWindow.ui.h:42
 msgid "_Project"
 msgstr "_Проект"
 
-#: data/ui/main-window.ui.h:43
+#: src/app/GNOME_MrProject_MainWindow.ui.h:43
 msgid "_Quit"
 msgstr "_Выйти"
 
-#: data/ui/main-window.ui.h:44
+#: src/app/GNOME_MrProject_MainWindow.ui.h:44
 msgid "_Redo"
 msgstr "Вернуть"
 
-#: data/ui/main-window.ui.h:45 src/planner-main-window.c:1127
+#: src/app/GNOME_MrProject_MainWindow.ui.h:45 src/app/mg-main-window.c:1133
 msgid "_Save"
 msgstr "_Сохранить"
 
-#: data/ui/main-window.ui.h:46
+#: src/app/GNOME_MrProject_MainWindow.ui.h:46
 msgid "_Undo"
 msgstr "Откатить"
 
-#: data/ui/main-window.ui.h:47
+#: src/app/GNOME_MrProject_MainWindow.ui.h:47
 msgid "_User Guide"
 msgstr "_Руководство пользователя"
 
-#: data/ui/main-window.ui.h:48
+#: src/app/GNOME_MrProject_MainWindow.ui.h:48
 msgid "_View"
 msgstr "_Вид"
 
-#: data/ui/gantt-view.ui.h:1 data/ui/task-view.ui.h:1
-msgid "I_ndent Task"
-msgstr "Вложить задачу"
-
-#: data/ui/gantt-view.ui.h:2 data/ui/task-view.ui.h:2
-msgid "In_sert Tasks..."
-msgstr "Вставить задачи..."
-
-#: data/ui/gantt-view.ui.h:3 data/ui/task-view.ui.h:3
-#: src/planner-application.c:75
-msgid "Indent"
-msgstr "Правее"
-
-#: data/ui/gantt-view.ui.h:4 data/ui/task-view.ui.h:4
-#: data/ui/resource-view.ui.h:5 src/planner-application.c:54
-#: src/planner-application.c:103
+#: src/app/mg-application.c:54 src/app/mg-application.c:103
+#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:4
+#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:4
+#: src/views/resources/GNOME_MrProject_ResourcesView.ui.h:5
 msgid "Insert"
 msgstr "Добавить"
 
-#: data/ui/gantt-view.ui.h:5 data/ui/task-view.ui.h:5
-msgid "Move Task Do_wn"
-msgstr "Передвинуть задачу ниже"
-
-#: data/ui/gantt-view.ui.h:6 data/ui/task-view.ui.h:6
-msgid "Move Task _Up"
-msgstr "Передвинуть задачу выше"
-
-#: data/ui/gantt-view.ui.h:7 data/ui/task-view.ui.h:7
-#: src/planner-application.c:96
-msgid "Move down"
-msgstr "Ниже"
-
-#: data/ui/gantt-view.ui.h:8 data/ui/task-view.ui.h:8
-#: src/planner-application.c:89
-msgid "Move up"
-msgstr "Выше"
-
-#: data/ui/gantt-view.ui.h:9 data/ui/task-view.ui.h:9
-#: data/ui/resource-view.ui.h:6 src/planner-application.c:61
-#: src/planner-application.c:110
+#: src/app/mg-application.c:61 src/app/mg-application.c:110
+#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:9
+#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:9
+#: src/views/resources/GNOME_MrProject_ResourcesView.ui.h:6
 msgid "Remove"
 msgstr "Удалить"
 
-#: data/ui/gantt-view.ui.h:10 data/ui/task-view.ui.h:10
-msgid "Reset _All Constraints"
-msgstr "Снять все ограничения"
-
-#: data/ui/gantt-view.ui.h:11 data/ui/task-view.ui.h:11
-msgid "Reset _Constraint"
-msgstr "Снять ограничение"
-
-#: data/ui/gantt-view.ui.h:12 data/ui/task-view.ui.h:12
-#: data/ui/resource-view.ui.h:7
-msgid "Select _All"
-msgstr "Выбрать всё"
-
-#: data/ui/gantt-view.ui.h:13 data/ui/task-view.ui.h:13
-#: data/ui/resource-view.ui.h:8
-msgid "Select all tasks"
-msgstr "Выбрать все задачи"
-
-#: data/ui/gantt-view.ui.h:14
-msgid "Test"
-msgstr "Проверка"
-
-#: data/ui/gantt-view.ui.h:15 data/ui/task-view.ui.h:14
-msgid "Un_link Task"
-msgstr "Отвязать задачу"
-
-#: data/ui/gantt-view.ui.h:16 data/ui/task-view.ui.h:15
-msgid "Unin_dent Task"
-msgstr ""
-
-#: data/ui/gantt-view.ui.h:17 data/ui/task-view.ui.h:16
-#: src/planner-application.c:82
-msgid "Unindent"
-msgstr "Левее"
-
-#: data/ui/gantt-view.ui.h:18 data/ui/task-view.ui.h:17
-#: src/planner-application.c:68
+#: src/app/mg-application.c:68
+#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:18
+#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:17
 msgid "Unlink"
 msgstr "Отсоединить"
 
-#: data/ui/gantt-view.ui.h:19
-msgid "Zoom In"
-msgstr "Увеличить"
-
-#: data/ui/gantt-view.ui.h:20
-msgid "Zoom Out"
-msgstr "Уменьшить"
-
-#: data/ui/gantt-view.ui.h:21
-msgid "Zoom To Fit"
-msgstr "К размеру окна"
-
-#: data/ui/gantt-view.ui.h:22
-msgid "Zoom To _Fit"
-msgstr "К размеру окна"
-
-#: data/ui/gantt-view.ui.h:23
-msgid "Zoom _Out"
-msgstr "Уменьшить"
-
-#: data/ui/gantt-view.ui.h:24 data/ui/task-view.ui.h:19
-msgid "_Edit Task Properties..."
-msgstr "Изменить свойства задачи..."
-
-#: data/ui/gantt-view.ui.h:25
-msgid "_Highlight Critical Tasks"
-msgstr "Подсветить критические задачи"
-
-#: data/ui/gantt-view.ui.h:26 data/ui/task-view.ui.h:20
-msgid "_Insert Task"
-msgstr "Вставить задачу"
-
-#: data/ui/gantt-view.ui.h:27 data/ui/task-view.ui.h:21
-msgid "_Remove Task"
-msgstr "Удалить задачу"
-
-#: data/ui/gantt-view.ui.h:28
-msgid "_Zoom In"
-msgstr "Увеличить"
-
-#: data/ui/task-view.ui.h:18
-msgid "_Edit Custom Properties..."
-msgstr "Изменить дополнительные свойства..."
-
-#: data/ui/html-plugin.ui.h:1 data/glade/html-output.glade.h:4
-msgid "Export to HTML"
-msgstr "Экспорт в HTML"
-
-#: data/ui/sql-plugin.ui.h:1
-msgid "Open from Database..."
-msgstr "Открыть из базы данных..."
-
-#: data/ui/sql-plugin.ui.h:2
-msgid "Save to Database..."
-msgstr "Сохранить в базе данных..."
-
-#: data/ui/resource-view.ui.h:1
-msgid "Edit _Custom Properties..."
-msgstr "Изменить дополнительные свойства..."
-
-#: data/ui/resource-view.ui.h:2
-msgid "Edit _Groups"
-msgstr "Изменить группы"
-
-#: data/ui/resource-view.ui.h:3
-msgid "Groups"
-msgstr "Группы"
-
-#: data/ui/resource-view.ui.h:4
-msgid "In_sert Resources..."
-msgstr "Вставить ресурсы..."
-
-#: data/ui/resource-view.ui.h:9
-msgid "_Edit Resource Properties..."
-msgstr "Изменить свойства ресурсов..."
-
-#: data/ui/resource-view.ui.h:10
-msgid "_Insert Resource"
-msgstr "_Добавить ресурс"
-
-#: data/ui/resource-view.ui.h:11
-msgid "_Remove Resource"
-msgstr "_Удалить ресурс"
-
-#: data/glade/add-predecessor.glade.h:1 data/glade/calendar-dialog.glade.h:4
-#: data/glade/html-output.glade.h:2 data/glade/new-property.glade.h:1
-#: data/glade/project-properties.glade.h:1
-#: data/glade/resource-dialog.glade.h:1
-#: data/glade/resource-input-dialog.glade.h:1 data/glade/sql.glade.h:2
-#: data/glade/task-dialog.glade.h:4 data/glade/task-input-dialog.glade.h:1
-msgid "*"
-msgstr "*"
-
-#: data/glade/add-predecessor.glade.h:2
-msgid "Lag: "
-msgstr "Отставание: "
-
-#: data/glade/add-predecessor.glade.h:3
-msgid "New predecessor"
-msgstr "Создать взаимосвязь"
-
-#: data/glade/add-predecessor.glade.h:4
-msgid "Predecessor: "
-msgstr "Предшественник: "
-
-#: data/glade/add-predecessor.glade.h:5
-msgid "Relation type: "
-msgstr "Вид отношения: "
-
-#: data/glade/calendar-dialog.glade.h:1
-msgid ""
-"\n"
-"The selected day type has the following working hours:"
-msgstr ""
-"\n"
-"Выбранный вид дня имеет следующие рабочие часы:"
-
-#: data/glade/calendar-dialog.glade.h:3 data/glade/html-output.glade.h:1
-#: data/glade/sql.glade.h:1 data/glade/task-dialog.glade.h:1
-msgid "    "
-msgstr "    "
-
-#: data/glade/calendar-dialog.glade.h:5
-msgid "-"
-msgstr "-"
-
-#: data/glade/calendar-dialog.glade.h:6
-msgid "<b>Calendar:</b>"
-msgstr "<b>Календарь:</b>"
-
-#: data/glade/calendar-dialog.glade.h:7
-msgid "<b>Day types</b>"
-msgstr "<b>Виды дней</b>"
-
-#: data/glade/calendar-dialog.glade.h:8
-msgid "<b>Working hours</b>"
-msgstr "<b>Рабочие часы</b>"
-
-#: data/glade/calendar-dialog.glade.h:9
-msgid "<b>Working time</b>"
-msgstr "<b>Рабочее время</b>"
-
-#: data/glade/calendar-dialog.glade.h:10
-msgid "Apply"
-msgstr "Применить"
-
-#: data/glade/calendar-dialog.glade.h:11
-msgid "C_opy an existing calendar"
-msgstr "Скопировать существующий календарь"
-
-#: data/glade/calendar-dialog.glade.h:12
-msgid "C_reate"
-msgstr "_Создать"
-
-#: data/glade/calendar-dialog.glade.h:13
-msgid "Calendar Editor"
-msgstr "Редактор календаря"
-
-#: data/glade/calendar-dialog.glade.h:14
-msgid "Create an _empty calendar"
-msgstr "Создать _пустой календарь"
-
-#: data/glade/calendar-dialog.glade.h:15
-msgid "Custom working time"
-msgstr "Нестандартное рабочее время"
-
-#: data/glade/calendar-dialog.glade.h:16
-msgid "Day type:"
-msgstr "Вид дня:"
-
-#: data/glade/calendar-dialog.glade.h:17
-msgid "Default Week"
-msgstr "Неделя по умолчанию"
-
-#: data/glade/calendar-dialog.glade.h:18
-msgid "Default week..."
-msgstr "Неделя по умолчанию..."
-
-#: data/glade/calendar-dialog.glade.h:19
-msgid "Edit Day Types"
-msgstr "Редактировать виды дней"
-
-#: data/glade/calendar-dialog.glade.h:20
-msgid "Edit Working Time"
-msgstr "Редактировать рабочее время"
-
-#: data/glade/calendar-dialog.glade.h:21
-msgid "Enter the name of the new day type:"
-msgstr "Введине название нового вида дня:"
-
-#: data/glade/calendar-dialog.glade.h:22
-msgid "Existing calendars:"
-msgstr "Существующие календари"
-
-#: data/glade/calendar-dialog.glade.h:23
-msgid "From:"
-msgstr "От:"
-
-#: data/glade/calendar-dialog.glade.h:24
-msgid "MrProject Team"
-msgstr "Группа разработки MrProject"
-
-#: data/glade/calendar-dialog.glade.h:25
-msgid "New Calendar"
-msgstr "Создать календарь"
-
-#: data/glade/calendar-dialog.glade.h:26
-msgid "New Day Type"
-msgstr "Создать вид дня"
-
-#: data/glade/calendar-dialog.glade.h:27
-msgid "Select a calendar"
-msgstr "Выбрать календарь"
-
-#: data/glade/calendar-dialog.glade.h:28
-msgid ""
-"Select a weekday and the day type to use for that day in the default week "
-"for this calendar.\n"
-msgstr ""
-"Выбрать день недели и вид дня для использования этого дня в неделе по "
-"умолчанию для данного календаря.\n"
-
-#: data/glade/calendar-dialog.glade.h:30
-msgid "Set day type to:"
-msgstr "Установить вид дня в:"
-
-#: data/glade/calendar-dialog.glade.h:31
-msgid "To:"
-msgstr "Куда:"
-
-#: data/glade/calendar-dialog.glade.h:32
-msgid "Use working time from derived calendar"
-msgstr "Использовать рабочее время от наследованного календаря"
-
-#: data/glade/calendar-dialog.glade.h:33
-msgid "Week day:"
-msgstr "День недели:"
-
-#: data/glade/calendar-dialog.glade.h:34
-msgid "Working time..."
-msgstr "Рабочее время..."
-
-#: data/glade/calendar-dialog.glade.h:35
-msgid "_Derive from a calendar"
-msgstr "_Наследовать от календаря"
-
-#: data/glade/calendar-dialog.glade.h:36
-msgid "_Name of the new calendar:"
-msgstr "_Название нового календаря:"
-
-#: data/glade/calendar-dialog.glade.h:37
-msgid "_New..."
-msgstr "_Создать..."
-
-#: data/glade/group-dialog.glade.h:1
-msgid "Group Editor"
-msgstr "Редактор групп"
-
-#: data/glade/html-output.glade.h:3
-msgid "<b>Save to</b>"
-msgstr "<b>Сохранить в</b>"
-
-#: data/glade/html-output.glade.h:5
-msgid "Local file"
-msgstr "Локальный файл"
-
-#: data/glade/html-output.glade.h:6
-msgid "Save to HTML File"
-msgstr "Сохранить в файл HTML"
-
-#: data/glade/html-output.glade.h:7
-msgid "Web location"
-msgstr ""
-
-#: data/glade/new-property.glade.h:2
-msgid "Description: "
-msgstr "Описание: "
-
-#: data/glade/new-property.glade.h:3
-msgid "Label: "
-msgstr "Метка: "
-
-#: data/glade/new-property.glade.h:4
-msgid "Name: "
-msgstr "Название: "
-
-#: data/glade/new-property.glade.h:5
-msgid "New Property"
-msgstr "Добавить свойство"
-
-#: data/glade/new-property.glade.h:6
-msgid "Type: "
-msgstr "Вид: "
-
-#: data/glade/project-properties.glade.h:2
-msgid "<b>Project phases</b>"
-msgstr "<b>Фазы проекта</b>"
-
-#: data/glade/project-properties.glade.h:3
-msgid "Calendar:"
-msgstr "Календарь:"
-
-#: data/glade/project-properties.glade.h:4
-msgid "Custom properties"
-msgstr "Дополнительные свойства"
-
-#: data/glade/project-properties.glade.h:5
-msgid "Edit Project phases"
-msgstr "Редактировать фазы проекта"
-
-#: data/glade/project-properties.glade.h:6
-msgid "Enter the name of the new project phase:"
-msgstr "Введите название новой фазы проекта:"
-
-#: data/glade/project-properties.glade.h:7
-#: data/glade/resource-dialog.glade.h:5 data/glade/task-dialog.glade.h:6
-msgid "General"
-msgstr "Общее"
-
-#: data/glade/project-properties.glade.h:8
-msgid "New Project Phase"
-msgstr "Новая фаза проекта"
-
-#: data/glade/project-properties.glade.h:9
-msgid "Project _name:"
-msgstr "_Название проекта:"
-
-#: data/glade/project-properties.glade.h:10
-msgid "Project _start:"
-msgstr "На_чало проекта:"
-
-#: data/glade/project-properties.glade.h:11
-msgid "Project phase:"
-msgstr "Фаза проекта:"
-
-#: data/glade/project-properties.glade.h:12
-msgid "Project properties"
-msgstr "Свойства проекта"
-
-#: data/glade/project-properties.glade.h:13
-msgid "Select..."
-msgstr "Выбрать..."
-
-#: data/glade/project-properties.glade.h:14
-msgid "_Manager:"
-msgstr "_Руководитель:"
-
-#: data/glade/project-properties.glade.h:15
-msgid "_Organization:"
-msgstr "_Организация:"
-
-#: data/glade/property-dialog.glade.h:1
-msgid "Custom Properties"
-msgstr "Дополнительные свойства"
-
-#: data/glade/resource-dialog.glade.h:2
-msgid "C_ost:"
-msgstr "_Стоимость:"
-
-#: data/glade/resource-dialog.glade.h:3
-msgid "Calendar"
-msgstr "Календарь"
-
-#: data/glade/resource-dialog.glade.h:4
-msgid "Edit calendars..."
-msgstr "Редактировать календари..."
-
-#: data/glade/resource-dialog.glade.h:6 data/glade/task-dialog.glade.h:7
-msgid "Insert time stamp"
-msgstr "Вставить время"
-
-#: data/glade/resource-dialog.glade.h:7 data/glade/task-dialog.glade.h:9
-msgid "Notes"
-msgstr "Заметки"
-
-#: data/glade/resource-dialog.glade.h:8
-msgid ""
-"Select the calendar to use for this resource. If you want to use the default "
-"calendar of the project, select 'None'. "
-msgstr ""
-"Выбрать календарь для использования данного ресурса. Если вы хотите "
-"использовать календарь по умолчанию для данного проекта, выберите `Ничего`. "
-
-#: data/glade/resource-dialog.glade.h:9
-msgid "_Email:"
-msgstr "_Электронный адрес:"
-
-#: data/glade/resource-dialog.glade.h:10
-msgid "_Group:"
-msgstr "_Группа:"
-
-#: data/glade/resource-dialog.glade.h:11
-msgid "_Name:"
-msgstr "_Название:"
-
-#: data/glade/resource-dialog.glade.h:12
-msgid "_Type:"
-msgstr "_Вид:"
-
-#: data/glade/resource-input-dialog.glade.h:2
-msgid "Email:"
-msgstr "E-mail:"
-
-#: data/glade/resource-input-dialog.glade.h:3
-msgid "Group:"
-msgstr "Группа:"
-
-#: data/glade/resource-input-dialog.glade.h:4
-msgid "Insert resource"
-msgstr "Добавить ресурс"
-
-#: data/glade/resource-input-dialog.glade.h:5
-#: data/glade/task-input-dialog.glade.h:3
-msgid "Name:"
-msgstr "Название:"
-
-#: data/glade/resource-input-dialog.glade.h:6
-#: data/glade/task-input-dialog.glade.h:5
-msgid "_Insert"
-msgstr "_Вставить"
-
-#: data/glade/sql.glade.h:3
-msgid "<b>Open Database</b>"
-msgstr "<b>Открыть базу данных</b>"
-
-#: data/glade/sql.glade.h:4
-msgid "Database:"
-msgstr "База данных:"
-
-#: data/glade/sql.glade.h:5
-msgid "Open Database"
-msgstr "Открыть базу данных:"
-
-#: data/glade/sql.glade.h:6
-msgid "Password:"
-msgstr "Пароль:"
-
-#: data/glade/sql.glade.h:7
-msgid "Select a Project"
-msgstr "Выбрать проект"
-
-#: data/glade/sql.glade.h:8
-msgid "Server:"
-msgstr "Сервер:"
-
-#: data/glade/sql.glade.h:9
-msgid "The database contains the following projects. Select a project to open:"
-msgstr ""
-"База данных содержит перечисленные проекты. Выберите какой из них открыть:"
-
-#: data/glade/sql.glade.h:10
-msgid "Username:"
-msgstr "Имя пользователя:"
-
-#: data/glade/task-dialog.glade.h:3
-#, no-c-format
-msgid "%"
-msgstr "%"
-
-#: data/glade/task-dialog.glade.h:5
-msgid "C_omplete:"
-msgstr "_Завершено:"
-
-#: data/glade/task-dialog.glade.h:8
-msgid "Na_me:"
-msgstr "Наз_вание:"
-
-#: data/glade/task-dialog.glade.h:10
-msgid "Pr_iority:"
-msgstr "При_оритет:"
-
-#: data/glade/task-dialog.glade.h:11
-msgid "Predecessors"
-msgstr "Предшественники"
-
-#: data/glade/task-dialog.glade.h:12 src/planner-resource-view.c:342
-msgid "Resources"
-msgstr "Ресурсы"
-
-#: data/glade/task-dialog.glade.h:13
-msgid "_Duration:"
-msgstr "_Продолжительность:"
-
-#: data/glade/task-dialog.glade.h:14
-msgid "_Fixed duration"
-msgstr "_Фиксированная продолжительность"
-
-#: data/glade/task-dialog.glade.h:15
-msgid "_Milestone"
-msgstr "_Веха"
-
-#: data/glade/task-dialog.glade.h:16
-msgid "_Work:"
-msgstr "_Длительность:"
-
-#. day unit variant accepted in input
-#: data/glade/task-dialog.glade.h:17 src/planner-task-tree.c:2120
-msgid "days"
-msgstr "дней"
-
-#: data/glade/task-input-dialog.glade.h:2
-msgid "Insert task"
-msgstr "Добавить задачу"
-
-#: data/glade/task-input-dialog.glade.h:4
-msgid "Work:"
-msgstr "Работа:"
-
-#: src/planner-application.c:117
+#: src/app/mg-application.c:75
+#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:3
+#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:3
+msgid "Indent"
+msgstr "Правее"
+
+#: src/app/mg-application.c:82
+#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:17
+#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:16
+msgid "Unindent"
+msgstr "Левее"
+
+#: src/app/mg-application.c:89
+#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:8
+#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:8
+msgid "Move up"
+msgstr "Выше"
+
+#: src/app/mg-application.c:96
+#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:7
+#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:7
+msgid "Move down"
+msgstr "Ниже"
+
+#: src/app/mg-application.c:117
 msgid "Edit"
 msgstr "Правка"
 
-#: src/planner-main-window.c:584
+#: src/app/mg-main-window.c:585
 msgid "Open a file"
 msgstr "Открыть файл"
 
 #. I18n: Translators, list your names here, newline separated if there
 #. * are more than one, to appear in the about box.
 #.
-#: src/planner-main-window.c:993 src/planner-main-window.c:1000
+#: src/app/mg-main-window.c:995 src/app/mg-main-window.c:1004
 msgid "translator_credits"
 msgstr "Виталий Липатов & Валёк Филиппов"
 
-#. "Copyright \xc2\xa9 2001-2002 CodeFactory AB",
-#: src/planner-main-window.c:997
+#: src/app/mg-main-window.c:1001
 msgid "A Project Management application for the GNOME desktop"
 msgstr "Программа управления проектами для GNOME"
 
-#: src/planner-main-window.c:1007
-#, fuzzy
-msgid "The Planner Homepage"
+#: src/app/mg-main-window.c:1013
+msgid "The MrProject Homepage"
 msgstr "Домашняя страница MrProject"
 
-#: src/planner-main-window.c:1083
+#: src/app/mg-main-window.c:1017
+msgid "Contribute to MrProject"
+msgstr "Помочь MrProject"
+
+#: src/app/mg-main-window.c:1089
 msgid "If you don't save, changes made the last minute will be discarded."
 msgstr ""
 "Если вы не сохраните, все изменения, сделанные за последнюю минуту, будут "
 "отброшены."
 
-#: src/planner-main-window.c:1088
+#: src/app/mg-main-window.c:1094
 #, c-format
 msgid "If you don't save, changes made the last %d minutes will be discarded."
 msgstr ""
 "Если вы не сохраните, все изменения, сделанные за последние %d минут, будут "
 "отброшены."
 
-#: src/planner-main-window.c:1093
+#: src/app/mg-main-window.c:1099
 msgid "If you don't save, changes made the last hour will be discarded."
 msgstr ""
 "Если вы не сохраните, все изменения, сделанные за последний час, будут "
 "отброшены."
 
-#: src/planner-main-window.c:1098
+#: src/app/mg-main-window.c:1104
 #, c-format
 msgid "If you don't save, changes made the last %d hours will be discarded."
 msgstr ""
 "Если вы не сохраните, все изменения, сделанные за последние %d часов, будут "
 "отброшены."
 
-#: src/planner-main-window.c:1105
+#: src/app/mg-main-window.c:1111
 #, c-format
 msgid "Save changes to document '%s' before closing?"
 msgstr "Сохранить изменения в документе `%s` перед закрытием?"
 
-#: src/planner-main-window.c:1123
+#: src/app/mg-main-window.c:1129
 msgid "C_lose without saving"
 msgstr "Закрыть без сохранения"
 
-#: src/planner-main-window.c:1125
+#: src/app/mg-main-window.c:1131
 msgid "_Cancel"
 msgstr "_Отменить"
 
-#: src/planner-main-window.c:1232
+#: src/app/mg-main-window.c:1238
 msgid "Save a file"
 msgstr "Сохранить файл"
 
-#: src/planner-main-window.c:1264 src/planner-html-plugin.c:146
+#: src/app/mg-main-window.c:1270
+#: src/plugins/html-output/mg-html-output-plugin.c:146
 #, c-format
 msgid "File \"%s\" exists, do you want to overwrite it?"
 msgstr "Файл \"%s\" уже существует, перезаписать его?"
 
-#: src/planner-main-window.c:1452
-#, fuzzy
+#: src/app/mg-main-window.c:1458
 msgid ""
-"You have opened a file that was saved with an old version of Planner.\n"
+"You have opened a file that was saved with an old version of MrProject.\n"
 "\n"
 "When loading old files, all tasks will use the constraint 'Must Start On', "
 "since the old version did not fully support automatic rescheduling. To take "
@@ -912,52 +358,52 @@ msgstr ""
 " После выполнения этого вы можете удалить все принуждения выбором пункта "
 "'Удалить все принуждения' в меню 'Правка'."
 
-#: src/planner-main-window.c:1489 src/planner-gantt-row.c:656
-#: src/planner-gantt-row.c:658 src/planner-gantt-print.c:513
-#: src/planner-gantt-print.c:515
+#: src/app/mg-main-window.c:1495 src/views/gantt/mg-gantt-row.c:656
+#: src/views/gantt/mg-gantt-row.c:658 src/views/gantt/mg-gantt-print.c:513
+#: src/views/gantt/mg-gantt-print.c:515
 msgid "Unnamed"
 msgstr "Без названия"
 
-#: src/planner-main.c:61
+#: src/app/mg-main.c:61
 msgid "Create the initial window with the given geometry."
 msgstr "Создавать начальное окно с указанными размерами."
 
-#: src/planner-main.c:61
+#: src/app/mg-main.c:61
 msgid "GEOMETRY"
 msgstr "РАЗМЕРЫ"
 
-#: src/planner-main.c:98
+#: src/app/mg-main.c:98
 msgid "mrproject: --geometry cannot be used with more than one file."
 msgstr ""
 "mrproject: --geometry не может быть использован больше чем с одним файлом."
 
-#: src/planner-plugin-loader.c:40
+#: src/app/mg-plugin-loader.c:40
 #, c-format
 msgid "Could not open plugin file '%s'\n"
 msgstr "Невозможно открыть файл модуля '%s'\n"
 
-#: src/planner-view-loader.c:40
+#: src/app/mg-view-loader.c:40
 #, c-format
 msgid "Could not open view plugin file '%s'\n"
 msgstr "Невозможно открыть модуль просмотра '%s'\n"
 
-#: src/planner-cell-renderer-date.c:147
+#: src/cell-renderers/mg-cell-renderer-date.c:147
 msgid "Constraint type"
 msgstr "Вид принуждения"
 
-#: src/planner-cell-renderer-date.c:154
+#: src/cell-renderers/mg-cell-renderer-date.c:154
 msgid "As soon as possible"
 msgstr "По возможности"
 
-#: src/planner-cell-renderer-date.c:155
+#: src/cell-renderers/mg-cell-renderer-date.c:155
 msgid "Start no earlier than"
 msgstr "Начать не раньше чем"
 
-#: src/planner-cell-renderer-date.c:156
+#: src/cell-renderers/mg-cell-renderer-date.c:156
 msgid "Must start on"
 msgstr "Должно быть начато"
 
-#: src/planner-cell-renderer-date.c:171
+#: src/cell-renderers/mg-cell-renderer-date.c:171
 msgid "Today"
 msgstr "Сегодня"
 
@@ -965,213 +411,640 @@ msgstr "Сегодня"
 #. GTK_SIGNAL_FUNC (m_cell_date_today_clicked),
 #. date);
 #.
-#: src/planner-cell-renderer-date.c:179
+#: src/cell-renderers/mg-cell-renderer-date.c:179
 msgid "Cancel"
 msgstr "Отменить"
 
-#: src/planner-cell-renderer-date.c:187
+#: src/cell-renderers/mg-cell-renderer-date.c:187
 msgid "OK"
 msgstr "OK"
 
-#: src/planner-default-week-dialog.c:40
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:1
+msgid ""
+"\n"
+"The selected day type has the following working hours:"
+msgstr ""
+"\n"
+"Выбранный вид дня имеет следующие рабочие часы:"
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:3
+#: src/dialogs/task-dialog/mg-task-dialog.glade.h:1
+#: src/plugins/html-output/mg-html-output.glade.h:1
+#: src/plugins/sql/mg-sql.glade.h:1
+msgid "    "
+msgstr "    "
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:4
+#: src/dialogs/project-dialog/mg-project-properties.glade.h:1
+#: src/dialogs/property-dialog/mg-new-property.glade.h:1
+#: src/dialogs/resource-dialog/mg-resource-dialog.glade.h:1
+#: src/dialogs/resource-input-dialog/mg-resource-input-dialog.glade.h:1
+#: src/dialogs/task-dialog/mg-add-predecessor.glade.h:1
+#: src/dialogs/task-dialog/mg-task-dialog.glade.h:4
+#: src/dialogs/task-input-dialog/mg-task-input-dialog.glade.h:1
+#: src/plugins/html-output/mg-html-output.glade.h:2
+#: src/plugins/sql/mg-sql.glade.h:2
+msgid "*"
+msgstr "*"
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:5
+msgid "-"
+msgstr "-"
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:6
+msgid "<b>Calendar:</b>"
+msgstr "<b>Календарь:</b>"
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:7
+msgid "<b>Day types</b>"
+msgstr "<b>Виды дней</b>"
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:8
+msgid "<b>Working hours</b>"
+msgstr "<b>Рабочие часы</b>"
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:9
+msgid "<b>Working time</b>"
+msgstr "<b>Рабочее время</b>"
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:10
+msgid "Apply"
+msgstr "Применить"
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:11
+msgid "C_opy an existing calendar"
+msgstr "Скопировать существующий календарь"
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:12
+msgid "C_reate"
+msgstr "_Создать"
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:13
+msgid "Calendar Editor"
+msgstr "Редактор календаря"
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:14
+msgid "Create an _empty calendar"
+msgstr "Создать _пустой календарь"
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:15
+msgid "Custom working time"
+msgstr "Нестандартное рабочее время"
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:16
+msgid "Day type:"
+msgstr "Вид дня:"
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:17
+msgid "Default Week"
+msgstr "Неделя по умолчанию"
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:18
+msgid "Default week..."
+msgstr "Неделя по умолчанию..."
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:19
+msgid "Edit Day Types"
+msgstr "Редактировать виды дней"
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:20
+msgid "Edit Working Time"
+msgstr "Редактировать рабочее время"
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:21
+msgid "Enter the name of the new day type:"
+msgstr "Введине название нового вида дня:"
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:22
+msgid "Existing calendars:"
+msgstr "Существующие календари"
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:23
+msgid "From:"
+msgstr "От:"
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:24
+msgid "MrProject Team"
+msgstr "Группа разработки MrProject"
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:25
+msgid "New Calendar"
+msgstr "Создать календарь"
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:26
+msgid "New Day Type"
+msgstr "Создать вид дня"
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:27
+msgid "Select a calendar"
+msgstr "Выбрать календарь"
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:28
+msgid ""
+"Select a weekday and the day type to use for that day in the default week "
+"for this calendar.\n"
+msgstr ""
+"Выбрать день недели и вид дня для использования этого дня в неделе по "
+"умолчанию для данного календаря.\n"
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:30
+msgid "Set day type to:"
+msgstr "Установить вид дня в:"
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:31
+msgid "To:"
+msgstr "Куда:"
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:32
+msgid "Use working time from derived calendar"
+msgstr "Использовать рабочее время от наследованного календаря"
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:33
+msgid "Week day:"
+msgstr "День недели:"
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:34
+msgid "Working time..."
+msgstr "Рабочее время..."
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:35
+msgid "_Derive from a calendar"
+msgstr "_Наследовать от календаря"
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:36
+msgid "_Name of the new calendar:"
+msgstr "_Название нового календаря:"
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:37
+msgid "_New..."
+msgstr "_Создать..."
+
+#: src/dialogs/calendar-dialog/mg-default-week-dialog.c:40
 msgid "Monday"
 msgstr "Понедельник"
 
-#: src/planner-default-week-dialog.c:41
+#: src/dialogs/calendar-dialog/mg-default-week-dialog.c:41
 msgid "Tuesday"
 msgstr "Вторник"
 
-#: src/planner-default-week-dialog.c:42
+#: src/dialogs/calendar-dialog/mg-default-week-dialog.c:42
 msgid "Wednesday"
 msgstr "Среда"
 
-#: src/planner-default-week-dialog.c:43
+#: src/dialogs/calendar-dialog/mg-default-week-dialog.c:43
 msgid "Thursday"
 msgstr "Четверг"
 
-#: src/planner-default-week-dialog.c:44
+#: src/dialogs/calendar-dialog/mg-default-week-dialog.c:44
 msgid "Friday"
 msgstr "Пятница"
 
-#: src/planner-default-week-dialog.c:45
+#: src/dialogs/calendar-dialog/mg-default-week-dialog.c:45
 msgid "Saturday"
 msgstr "Суббота"
 
-#: src/planner-default-week-dialog.c:46
+#: src/dialogs/calendar-dialog/mg-default-week-dialog.c:46
 msgid "Sunday"
 msgstr "Воскресенье"
 
-#: src/planner-default-week-dialog.c:266
+#: src/dialogs/calendar-dialog/mg-default-week-dialog.c:267
 msgid "No working time"
 msgstr "Нет рабочего времени"
 
-#: src/planner-default-week-dialog.c:277 src/planner-default-week-dialog.c:281
+#: src/dialogs/calendar-dialog/mg-default-week-dialog.c:278
+#: src/dialogs/calendar-dialog/mg-default-week-dialog.c:282
 msgid "%H:%M"
 msgstr "%H:%M"
 
-#: src/planner-group-dialog.c:387 src/planner-property-dialog.c:378
-#: src/planner-task-dialog.c:1311 src/planner-task-dialog.c:1397
-#: src/planner-task-view.c:227 src/planner-gantt-print.c:190
-#: src/planner-resource-view.c:966
+#: src/dialogs/group-dialog/mg-group-dialog.c:387
+#: src/dialogs/property-dialog/mg-property-dialog.c:380
+#: src/dialogs/task-dialog/mg-task-dialog.c:1312
+#: src/dialogs/task-dialog/mg-task-dialog.c:1398
+#: src/views/gantt/mg-task-view.c:227 src/views/gantt/mg-gantt-print.c:190
+#: src/views/resources/mg-resource-view.c:942
 msgid "Name"
 msgstr "Название"
 
-#: src/planner-group-dialog.c:393
+#: src/dialogs/group-dialog/mg-group-dialog.c:393
 msgid "Manager name"
 msgstr "Имя менеджера"
 
-#: src/planner-group-dialog.c:399
+#: src/dialogs/group-dialog/mg-group-dialog.c:399
 msgid "Manager phone"
 msgstr "Телефон менеджера"
 
-#: src/planner-group-dialog.c:405
+#: src/dialogs/group-dialog/mg-group-dialog.c:405
 msgid "Manager email"
 msgstr "Электронный адрес менеджера"
 
-#: src/planner-group-dialog.c:411
+#: src/dialogs/group-dialog/mg-group-dialog.c:411
 msgid "Default"
 msgstr "По умолчанию"
 
-#: src/planner-project-properties.c:146
+#: src/dialogs/group-dialog/mg-group-dialog.glade.h:1
+msgid "Group Editor"
+msgstr "Редактор групп"
+
+#: src/dialogs/project-dialog/mg-project-properties.c:146
 msgid "Select a calendar to use for this project:"
 msgstr "Выбрать календарь для использования для этого проекта:"
 
-#: src/planner-project-properties.c:505
+#: src/dialogs/project-dialog/mg-project-properties.c:505
 msgid "None"
 msgstr "Ничего"
 
-#: src/planner-project-properties.c:606
+#: src/dialogs/project-dialog/mg-project-properties.c:606
 msgid "Property"
 msgstr "Свойство"
 
-#: src/planner-project-properties.c:617 src/planner-property-dialog.c:431
+#: src/dialogs/project-dialog/mg-project-properties.c:617
+#: src/dialogs/property-dialog/mg-property-dialog.c:433
 msgid "Value"
 msgstr "Значение"
 
-#: src/planner-project-properties.c:993 src/planner-property-dialog.c:229
+#: src/dialogs/project-dialog/mg-project-properties.c:994
+#: src/dialogs/property-dialog/mg-property-dialog.c:231
 msgid "The name of the custom property needs to start with a letter."
 msgstr ""
 "Название дополнительного свойства должно обязательно начинаться с буквы."
 
-#: src/planner-project-properties.c:1065 src/planner-property-dialog.c:300
+#: src/dialogs/project-dialog/mg-project-properties.c:1066
+#: src/dialogs/property-dialog/mg-property-dialog.c:302
 #, c-format
 msgid "Do you really want to remove the property '%s' from the project?"
 msgstr "Вы действительно хотите удалить свойство '%s' из проекта?"
 
-#: src/planner-project-properties.c:1194
+#: src/dialogs/project-dialog/mg-project-properties.c:1196
 msgid "Could not create properties dialog."
 msgstr "Невозможно открыть диалог со свойствами."
 
-#: src/planner-property-dialog.c:397
+#: src/dialogs/project-dialog/mg-project-properties.glade.h:2
+msgid "<b>Project phases</b>"
+msgstr "<b>Фазы проекта</b>"
+
+#: src/dialogs/project-dialog/mg-project-properties.glade.h:3
+msgid "Calendar:"
+msgstr "Календарь:"
+
+#: src/dialogs/project-dialog/mg-project-properties.glade.h:4
+msgid "Custom properties"
+msgstr "Дополнительные свойства"
+
+#: src/dialogs/project-dialog/mg-project-properties.glade.h:5
+msgid "Edit Project phases"
+msgstr "Редактировать фазы проекта"
+
+#: src/dialogs/project-dialog/mg-project-properties.glade.h:6
+msgid "Enter the name of the new project phase:"
+msgstr "Введите название новой фазы проекта:"
+
+#: src/dialogs/project-dialog/mg-project-properties.glade.h:7
+#: src/dialogs/resource-dialog/mg-resource-dialog.glade.h:5
+#: src/dialogs/task-dialog/mg-task-dialog.glade.h:6
+msgid "General"
+msgstr "Общее"
+
+#: src/dialogs/project-dialog/mg-project-properties.glade.h:8
+msgid "New Project Phase"
+msgstr "Новая фаза проекта"
+
+#: src/dialogs/project-dialog/mg-project-properties.glade.h:9
+msgid "Project _name:"
+msgstr "_Название проекта:"
+
+#: src/dialogs/project-dialog/mg-project-properties.glade.h:10
+msgid "Project _start:"
+msgstr "На_чало проекта:"
+
+#: src/dialogs/project-dialog/mg-project-properties.glade.h:11
+msgid "Project phase:"
+msgstr "Фаза проекта:"
+
+#: src/dialogs/project-dialog/mg-project-properties.glade.h:12
+msgid "Project properties"
+msgstr "Свойства проекта"
+
+#: src/dialogs/project-dialog/mg-project-properties.glade.h:13
+msgid "Select..."
+msgstr "Выбрать..."
+
+#: src/dialogs/project-dialog/mg-project-properties.glade.h:14
+msgid "_Manager:"
+msgstr "_Руководитель:"
+
+#: src/dialogs/project-dialog/mg-project-properties.glade.h:15
+msgid "_Organization:"
+msgstr "_Организация:"
+
+#: src/dialogs/property-dialog/mg-new-property.glade.h:2
+msgid "Description: "
+msgstr "Описание: "
+
+#: src/dialogs/property-dialog/mg-new-property.glade.h:3
+msgid "Label: "
+msgstr "Метка: "
+
+#: src/dialogs/property-dialog/mg-new-property.glade.h:4
+msgid "Name: "
+msgstr "Название: "
+
+#: src/dialogs/property-dialog/mg-new-property.glade.h:5
+msgid "New Property"
+msgstr "Добавить свойство"
+
+#: src/dialogs/property-dialog/mg-new-property.glade.h:6
+msgid "Type: "
+msgstr "Вид: "
+
+#: src/dialogs/property-dialog/mg-property-dialog.c:399
 msgid "Label"
 msgstr "Метка"
 
-#: src/planner-property-dialog.c:411 src/planner-task-dialog.c:1429
-#: src/planner-resource-view.c:987
+#: src/dialogs/property-dialog/mg-property-dialog.c:413
+#: src/dialogs/task-dialog/mg-task-dialog.c:1430
+#: src/views/resources/mg-resource-view.c:963
 msgid "Type"
 msgstr "Вид"
 
-#: src/planner-print-dialog.c:49
+#: src/dialogs/property-dialog/mg-property-dialog.glade.h:1
+msgid "Custom Properties"
+msgstr "Дополнительные свойства"
+
+#: src/dialogs/print-dialog/mg-print-dialog.c:49
 msgid "Print Project"
 msgstr "Напечатать проект"
 
-#: src/planner-print-dialog.c:56
+#: src/dialogs/print-dialog/mg-print-dialog.c:56
 msgid "Select views"
 msgstr "Выберите вид"
 
-#: src/planner-print-dialog.c:74
+#: src/dialogs/print-dialog/mg-print-dialog.c:74
 msgid "Select the views to print:"
 msgstr "Выберите вид для печати:"
 
 #. Put "no group" at the top.
-#: src/planner-resource-dialog.c:248 src/planner-resource-input-dialog.c:96
-#: src/planner-resource-view.c:1375
+#: src/dialogs/resource-dialog/mg-resource-dialog.c:248
+#: src/dialogs/resource-input-dialog/mg-resource-input-dialog.c:97
+#: src/views/resources/mg-resource-view.c:1351
 msgid "(None)"
 msgstr "(Нет)"
 
-#: src/planner-resource-dialog.c:258 src/planner-resource-input-dialog.c:106
-#: src/planner-task-dialog.c:249
+#: src/dialogs/resource-dialog/mg-resource-dialog.c:258
+#: src/dialogs/resource-input-dialog/mg-resource-input-dialog.c:107
+#: src/dialogs/task-dialog/mg-task-dialog.c:249
 msgid "(No name)"
 msgstr "(Нет названия)"
 
 #. i18n: time stamp format for notes in task dialog, see strftime(3) for
 #. * a detailed description.
-#: src/planner-resource-dialog.c:728 src/planner-task-dialog.c:679
+#: src/dialogs/resource-dialog/mg-resource-dialog.c:728
+#: src/dialogs/task-dialog/mg-task-dialog.c:679
 msgid "%a %d %b %Y, %H:%M\n"
 msgstr "%a %d %b %Y, %H:%M\n"
 
-#: src/planner-resource-dialog.c:826
+#: src/dialogs/resource-dialog/mg-resource-dialog.c:826
 msgid "None (use project default)"
 msgstr "Ничего (использовать умолчания проекта)"
 
-#: src/planner-resource-dialog.c:953 src/planner-resource-dialog.c:955
+#: src/dialogs/resource-dialog/mg-resource-dialog.c:953
+#: src/dialogs/resource-dialog/mg-resource-dialog.c:955
 msgid "Edit resource properties"
 msgstr "Редактировать свойства ресурса"
 
-#: src/planner-resource-dialog.c:1101 src/planner-task-view.c:230
-#: src/planner-gantt-print.c:198 src/planner-resource-view.c:629
-#: src/planner-resource-view.c:645 src/planner-resource-view.c:1187
+#: src/dialogs/resource-dialog/mg-resource-dialog.c:1102
+#: src/views/gantt/mg-task-view.c:230 src/views/gantt/mg-gantt-print.c:198
+#: src/views/resources/mg-resource-view.c:629
+#: src/views/resources/mg-resource-view.c:645
+#: src/views/resources/mg-resource-view.c:1163
 msgid "Work"
 msgstr "Длительность"
 
-#: src/planner-resource-dialog.c:1102 src/planner-resource-view.c:632
-#: src/planner-resource-view.c:646 src/planner-resource-view.c:1188
+#: src/dialogs/resource-dialog/mg-resource-dialog.c:1103
+#: src/views/resources/mg-resource-view.c:632
+#: src/views/resources/mg-resource-view.c:646
+#: src/views/resources/mg-resource-view.c:1164
 msgid "Material"
 msgstr "Материал"
 
-#: src/planner-predecessor-model.c:191 src/planner-task-dialog.c:1039
+#: src/dialogs/resource-dialog/mg-resource-dialog.glade.h:2
+msgid "C_ost:"
+msgstr "_Стоимость:"
+
+#: src/dialogs/resource-dialog/mg-resource-dialog.glade.h:3
+msgid "Calendar"
+msgstr "Календарь"
+
+#: src/dialogs/resource-dialog/mg-resource-dialog.glade.h:4
+msgid "Edit calendars..."
+msgstr "Редактировать календари..."
+
+#: src/dialogs/resource-dialog/mg-resource-dialog.glade.h:6
+#: src/dialogs/task-dialog/mg-task-dialog.glade.h:7
+msgid "Insert time stamp"
+msgstr "Вставить время"
+
+#: src/dialogs/resource-dialog/mg-resource-dialog.glade.h:7
+#: src/dialogs/task-dialog/mg-task-dialog.glade.h:9
+msgid "Notes"
+msgstr "Заметки"
+
+#: src/dialogs/resource-dialog/mg-resource-dialog.glade.h:8
+msgid ""
+"Select the calendar to use for this resource. If you want to use the default "
+"calendar of the project, select 'None'. "
+msgstr ""
+"Выбрать календарь для использования данного ресурса. Если вы хотите "
+"использовать календарь по умолчанию для данного проекта, выберите `Ничего`. "
+
+#: src/dialogs/resource-dialog/mg-resource-dialog.glade.h:9
+msgid "_Email:"
+msgstr "_Электронный адрес:"
+
+#: src/dialogs/resource-dialog/mg-resource-dialog.glade.h:10
+msgid "_Group:"
+msgstr "_Группа:"
+
+#: src/dialogs/resource-dialog/mg-resource-dialog.glade.h:11
+msgid "_Name:"
+msgstr "_Название:"
+
+#: src/dialogs/resource-dialog/mg-resource-dialog.glade.h:12
+msgid "_Type:"
+msgstr "_Вид:"
+
+#: src/dialogs/resource-input-dialog/mg-resource-input-dialog.glade.h:2
+msgid "Email:"
+msgstr "E-mail:"
+
+#: src/dialogs/resource-input-dialog/mg-resource-input-dialog.glade.h:3
+msgid "Group:"
+msgstr "Группа:"
+
+#: src/dialogs/resource-input-dialog/mg-resource-input-dialog.glade.h:4
+msgid "Insert resource"
+msgstr "Добавить ресурс"
+
+#: src/dialogs/resource-input-dialog/mg-resource-input-dialog.glade.h:5
+#: src/dialogs/task-input-dialog/mg-task-input-dialog.glade.h:3
+msgid "Name:"
+msgstr "Название:"
+
+#: src/dialogs/resource-input-dialog/mg-resource-input-dialog.glade.h:6
+#: src/dialogs/task-input-dialog/mg-task-input-dialog.glade.h:5
+msgid "_Insert"
+msgstr "_Вставить"
+
+#: src/dialogs/task-dialog/mg-add-predecessor.glade.h:2
+msgid "Lag: "
+msgstr "Отставание: "
+
+#: src/dialogs/task-dialog/mg-add-predecessor.glade.h:3
+msgid "New predecessor"
+msgstr "Создать взаимосвязь"
+
+#: src/dialogs/task-dialog/mg-add-predecessor.glade.h:4
+msgid "Predecessor: "
+msgstr "Предшественник: "
+
+#: src/dialogs/task-dialog/mg-add-predecessor.glade.h:5
+msgid "Relation type: "
+msgstr "Вид отношения: "
+
+#: src/dialogs/task-dialog/mg-predecessor-model.c:191
+#: src/dialogs/task-dialog/mg-task-dialog.c:1040
 msgid "FS"
 msgstr "НЗ"
 
-#: src/planner-predecessor-model.c:194 src/planner-task-dialog.c:1040
+#: src/dialogs/task-dialog/mg-predecessor-model.c:194
+#: src/dialogs/task-dialog/mg-task-dialog.c:1041
 msgid "FF"
 msgstr "ЗЗ"
 
-#: src/planner-predecessor-model.c:197 src/planner-task-dialog.c:1041
+#: src/dialogs/task-dialog/mg-predecessor-model.c:197
+#: src/dialogs/task-dialog/mg-task-dialog.c:1042
 msgid "SS"
 msgstr "НН"
 
-#: src/planner-predecessor-model.c:200 src/planner-task-dialog.c:1042
+#: src/dialogs/task-dialog/mg-predecessor-model.c:200
+#: src/dialogs/task-dialog/mg-task-dialog.c:1043
 msgid "SF"
 msgstr "ЗН"
 
-#: src/planner-task-dialog.c:745
+#: src/dialogs/task-dialog/mg-task-dialog.c:746
 msgid "Finish to start (FS)"
 msgstr "Начать по завершении (НЗ)"
 
-#: src/planner-task-dialog.c:746
+#: src/dialogs/task-dialog/mg-task-dialog.c:747
 msgid "Finish to finish (FF)"
 msgstr "Закончить по завершении (ЗЗ)"
 
-#: src/planner-task-dialog.c:747
+#: src/dialogs/task-dialog/mg-task-dialog.c:748
 msgid "Start to start (SS)"
 msgstr "Начать с началом (НН)"
 
-#: src/planner-task-dialog.c:748
+#: src/dialogs/task-dialog/mg-task-dialog.c:749
 msgid "Start to finish (SF)"
 msgstr "Закончить к началу (ЗН)"
 
-#: src/planner-task-dialog.c:798
+#: src/dialogs/task-dialog/mg-task-dialog.c:799
 msgid "Can't add new predecessor. No task selected!"
 msgstr "Невозможно добавить нового предшественника. Не выбрана задача!"
 
-#: src/planner-task-dialog.c:1330
+#: src/dialogs/task-dialog/mg-task-dialog.c:1331
 msgid "Assigned"
 msgstr "Назначено"
 
-#: src/planner-task-dialog.c:1347
+#: src/dialogs/task-dialog/mg-task-dialog.c:1348
 msgid "Units"
 msgstr "Единицы измерения"
 
-#: src/planner-task-dialog.c:1451
+#: src/dialogs/task-dialog/mg-task-dialog.c:1452
 msgid "Lag"
 msgstr "Отставание"
 
-#: src/planner-task-dialog.c:1584 src/planner-task-dialog.c:1586
+#: src/dialogs/task-dialog/mg-task-dialog.c:1585
+#: src/dialogs/task-dialog/mg-task-dialog.c:1587
 msgid "Edit task properties"
 msgstr "Редактировать свойства задачи"
 
-#: src/planner-html-plugin.c:133
+#: src/dialogs/task-dialog/mg-task-dialog.glade.h:3
+#, no-c-format
+msgid "%"
+msgstr "%"
+
+#: src/dialogs/task-dialog/mg-task-dialog.glade.h:5
+msgid "C_omplete:"
+msgstr "_Завершено:"
+
+#: src/dialogs/task-dialog/mg-task-dialog.glade.h:8
+msgid "Na_me:"
+msgstr "Наз_вание:"
+
+#: src/dialogs/task-dialog/mg-task-dialog.glade.h:10
+msgid "Pr_iority:"
+msgstr "При_оритет:"
+
+#: src/dialogs/task-dialog/mg-task-dialog.glade.h:11
+msgid "Predecessors"
+msgstr "Предшественники"
+
+#: src/dialogs/task-dialog/mg-task-dialog.glade.h:12
+#: src/views/resources/mg-resource-view.c:342
+msgid "Resources"
+msgstr "Ресурсы"
+
+#: src/dialogs/task-dialog/mg-task-dialog.glade.h:13
+msgid "_Duration:"
+msgstr "_Продолжительность:"
+
+#: src/dialogs/task-dialog/mg-task-dialog.glade.h:14
+msgid "_Fixed duration"
+msgstr "_Фиксированная продолжительность"
+
+#: src/dialogs/task-dialog/mg-task-dialog.glade.h:15
+msgid "_Milestone"
+msgstr "_Веха"
+
+#: src/dialogs/task-dialog/mg-task-dialog.glade.h:16
+msgid "_Work:"
+msgstr "_Длительность:"
+
+#. day unit variant accepted in input
+#: src/dialogs/task-dialog/mg-task-dialog.glade.h:17
+#: src/views/gantt/mg-task-tree.c:2121
+msgid "days"
+msgstr "дней"
+
+#: src/dialogs/task-input-dialog/mg-task-input-dialog.glade.h:2
+msgid "Insert task"
+msgstr "Добавить задачу"
+
+#: src/dialogs/task-input-dialog/mg-task-input-dialog.glade.h:4
+msgid "Work:"
+msgstr "Работа:"
+
+#: src/plugins/html-output/GNOME_MrProject_HtmlOutputPlugin.ui.h:1
+#: src/plugins/html-output/mg-html-output.glade.h:4
+msgid "Export to HTML"
+msgstr "Экспорт в HTML"
+
+#: src/plugins/html-output/mg-html-output.glade.h:3
+msgid "<b>Save to</b>"
+msgstr "<b>Сохранить в</b>"
+
+#: src/plugins/html-output/mg-html-output.glade.h:5
+msgid "Local file"
+msgstr "Локальный файл"
+
+#: src/plugins/html-output/mg-html-output.glade.h:6
+msgid "Save to HTML File"
+msgstr "Сохранить в файл HTML"
+
+#: src/plugins/html-output/mg-html-output.glade.h:7
+msgid "Web location"
+msgstr ""
+
+#: src/plugins/html-output/mg-html-output-plugin.c:133
 #, c-format
 msgid ""
 "\"%s\" is a directory.\n"
@@ -1180,12 +1053,53 @@ msgstr ""
 "\"%s\" -- это каталог.\n"
 "Введите имя файла и попробуйте ещё раз."
 
+#: src/plugins/sql/GNOME_MrProject_SQLPlugin.ui.h:1
+msgid "Open from Database..."
+msgstr "Открыть из базы данных..."
+
+#: src/plugins/sql/GNOME_MrProject_SQLPlugin.ui.h:2
+msgid "Save to Database..."
+msgstr "Сохранить в базе данных..."
+
+#: src/plugins/sql/mg-sql.glade.h:3
+msgid "<b>Open Database</b>"
+msgstr "<b>Открыть базу данных</b>"
+
+#: src/plugins/sql/mg-sql.glade.h:4
+msgid "Database:"
+msgstr "База данных:"
+
+#: src/plugins/sql/mg-sql.glade.h:5
+msgid "Open Database"
+msgstr "Открыть базу данных:"
+
+#: src/plugins/sql/mg-sql.glade.h:6
+msgid "Password:"
+msgstr "Пароль:"
+
+#: src/plugins/sql/mg-sql.glade.h:7
+msgid "Select a Project"
+msgstr "Выбрать проект"
+
+#: src/plugins/sql/mg-sql.glade.h:8
+msgid "Server:"
+msgstr "Сервер:"
+
+#: src/plugins/sql/mg-sql.glade.h:9
+msgid "The database contains the following projects. Select a project to open:"
+msgstr ""
+"База данных содержит перечисленные проекты. Выберите какой из них открыть:"
+
+#: src/plugins/sql/mg-sql.glade.h:10
+msgid "Username:"
+msgstr "Имя пользователя:"
+
 #. Give up.
-#: src/planner-sql-plugin.c:127
+#: src/plugins/sql/mg-sql-plugin.c:127
 msgid "Invalid Unicode"
 msgstr "Недопустимый Unicode"
 
-#: src/planner-sql-plugin.c:269
+#: src/plugins/sql/mg-sql-plugin.c:269
 #, c-format
 msgid ""
 "Connection to database '%s' failed:\n"
@@ -1194,43 +1108,43 @@ msgstr ""
 "Сбой подключения к базе данных \"%s\":\n"
 "%s"
 
-#: src/planner-sql-plugin.c:318
+#: src/plugins/sql/mg-sql-plugin.c:318
 msgid "Project"
 msgstr "_Проект"
 
-#: src/planner-sql-plugin.c:466
+#: src/plugins/sql/mg-sql-plugin.c:466
 msgid "Open from Database"
 msgstr "Открыть из базы данных"
 
-#: src/planner-sql-plugin.c:573
+#: src/plugins/sql/mg-sql-plugin.c:573
 msgid "Save to Database"
 msgstr "Сохранить в базе данных"
 
-#: src/planner-format.c:141
+#: src/util/mg-format.c:141
 #, c-format
 msgid "%dd %dh"
 msgstr "%dd %dh"
 
-#: src/planner-format.c:144
+#: src/util/mg-format.c:144
 #, c-format
 msgid "%dd"
 msgstr "%dd"
 
-#: src/planner-format.c:147
+#: src/util/mg-format.c:147
 #, c-format
 msgid "%dh"
 msgstr "%dh"
 
-#: src/planner-format.c:171
+#: src/util/mg-format.c:171
 #, c-format
 msgid "%s days"
 msgstr "%s дней"
 
-#: src/planner-format.c:174
+#: src/util/mg-format.c:174
 msgid "0 days"
 msgstr "0 дней"
 
-#: src/planner-format.c:177
+#: src/util/mg-format.c:177
 #, c-format
 msgid "%s day"
 msgstr "%s день"
@@ -1239,43 +1153,146 @@ msgstr "%s день"
 #. * e.g. in the date cells in the task tree. See
 #. * libmrproject/docs/DateFormat.
 #.
-#: src/planner-format.c:197
+#: src/util/mg-format.c:197
 msgid "%b %e"
 msgstr "%b %e"
 
+#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:1
+#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:1
+msgid "I_ndent Task"
+msgstr "Вложить задачу"
+
+#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:2
+#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:2
+msgid "In_sert Tasks..."
+msgstr "Вставить задачи..."
+
+#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:5
+#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:5
+msgid "Move Task Do_wn"
+msgstr "Передвинуть задачу ниже"
+
+#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:6
+#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:6
+msgid "Move Task _Up"
+msgstr "Передвинуть задачу выше"
+
+#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:10
+#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:10
+msgid "Reset _All Constraints"
+msgstr "Снять все ограничения"
+
+#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:11
+#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:11
+msgid "Reset _Constraint"
+msgstr "Снять ограничение"
+
+#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:12
+#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:12
+#: src/views/resources/GNOME_MrProject_ResourcesView.ui.h:7
+msgid "Select _All"
+msgstr "Выбрать всё"
+
+#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:13
+#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:13
+#: src/views/resources/GNOME_MrProject_ResourcesView.ui.h:8
+msgid "Select all tasks"
+msgstr "Выбрать все задачи"
+
+#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:14
+msgid "Test"
+msgstr "Проверка"
+
+#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:15
+#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:14
+msgid "Un_link Task"
+msgstr "Отвязать задачу"
+
+#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:16
+#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:15
+msgid "Unin_dent Task"
+msgstr ""
+
+#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:19
+msgid "Zoom In"
+msgstr "Увеличить"
+
+#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:20
+msgid "Zoom Out"
+msgstr "Уменьшить"
+
+#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:21
+msgid "Zoom To Fit"
+msgstr "К размеру окна"
+
+#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:22
+msgid "Zoom To _Fit"
+msgstr "К размеру окна"
+
+#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:23
+msgid "Zoom _Out"
+msgstr "Уменьшить"
+
+#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:24
+#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:19
+msgid "_Edit Task Properties..."
+msgstr "Изменить свойства задачи..."
+
+#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:25
+msgid "_Highlight Critical Tasks"
+msgstr "Подсветить критические задачи"
+
+#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:26
+#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:20
+msgid "_Insert Task"
+msgstr "Вставить задачу"
+
+#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:27
+#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:21
+msgid "_Remove Task"
+msgstr "Удалить задачу"
+
+#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:28
+msgid "_Zoom In"
+msgstr "Увеличить"
+
+#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:18
+msgid "_Edit Custom Properties..."
+msgstr "Изменить дополнительные свойства..."
+
 #. i18n: project start, the date format is described in
 #. * libmrproject/docs/DateFormat.
-#: src/planner-gantt-background.c:579
+#: src/views/gantt/mg-gantt-background.c:579
 msgid "%Y %b %d"
 msgstr "%Y %b %d"
 
-#: src/planner-gantt-background.c:581
+#: src/views/gantt/mg-gantt-background.c:581
 msgid "Project start"
 msgstr "Начало проекта"
 
-#: src/planner-gantt-row.c:1841 src/planner-gantt-row.c:1844
+#: src/views/gantt/mg-gantt-row.c:1841 src/views/gantt/mg-gantt-row.c:1844
 msgid "No name"
 msgstr "Без названия"
 
-#: src/planner-gantt-row.c:1847
+#: src/views/gantt/mg-gantt-row.c:1847
 #, c-format
 msgid "Make task '%s' a predecessor of '%s'"
 msgstr "Сделать задачу '%s' предшественником задачи '%s'"
 
-#: src/planner-gantt-row.c:1905
+#: src/views/gantt/mg-gantt-row.c:1905
 #, c-format
 msgid "Change work to %s"
 msgstr "Изменить продолжительность на %s"
 
-#: src/planner-gantt-view.c:273
+#: src/views/gantt/mg-gantt-view.c:274
 msgid "Gantt Chart"
 msgstr "Диаграмма Ганта"
 
-#: src/planner-gantt-view.c:281
+#: src/views/gantt/mg-gantt-view.c:282
 msgid "_Gantt Chart"
 msgstr "Диаграмма Ганта"
 
-#: src/planner-gantt-view.c:470
+#: src/views/gantt/mg-gantt-view.c:471
 msgid ""
 "\n"
 "Name"
@@ -1284,7 +1301,7 @@ msgstr ""
 "Название"
 
 #. COL_START,    _("\nStart"),
-#: src/planner-gantt-view.c:472
+#: src/views/gantt/mg-gantt-view.c:473
 msgid ""
 "\n"
 "Work"
@@ -1293,199 +1310,229 @@ msgstr ""
 "Длительность"
 
 #. i18n: Short "Week", preferably 2 letters.
-#: src/planner-scale-utils.c:325
+#: src/views/gantt/mg-scale-utils.c:325
 #, c-format
 msgid "Wk %d"
 msgstr "Wk %d"
 
-#: src/planner-scale-utils.c:329
+#: src/views/gantt/mg-scale-utils.c:329
 #, c-format
 msgid "Week %d"
 msgstr "Нед.%d"
 
 #. i18n: Week, year.
-#: src/planner-scale-utils.c:334
+#: src/views/gantt/mg-scale-utils.c:334
 #, c-format
 msgid "Week %d, %d"
 msgstr "Неделя %d, %d"
 
 #. i18n: Short "Quarter", preferrably 1 letter.
-#: src/planner-scale-utils.c:365
+#: src/views/gantt/mg-scale-utils.c:365
 #, c-format
 msgid "Q%d"
 msgstr "Кв%d"
 
 #. i18n: Short "Quarter", preferrably 2-3 letters.
-#: src/planner-scale-utils.c:369
+#: src/views/gantt/mg-scale-utils.c:369
 #, c-format
 msgid "Qtr %d"
 msgstr "Квартал %d"
 
 #. i18n: Year, short "Quarter", preferrably 2-3 letters.
-#: src/planner-scale-utils.c:373
+#: src/views/gantt/mg-scale-utils.c:373
 #, c-format
 msgid "%d, Qtr %d"
 msgstr "%d, Кв %d"
 
 #. i18n: Short "Half year", prefferably 1 letter.
-#: src/planner-scale-utils.c:386
+#: src/views/gantt/mg-scale-utils.c:386
 #, c-format
 msgid "H%d"
 msgstr "К%d"
 
 #. i18n: Year, short "Half year", prefferably 1 letter.
-#: src/planner-scale-utils.c:391
+#: src/views/gantt/mg-scale-utils.c:391
 #, c-format
 msgid "%04d, H%d"
 msgstr "%04d, Кв%d"
 
-#: src/planner-task-tree.c:184
+#: src/views/gantt/mg-task-tree.c:185
 msgid "/_Insert task"
 msgstr "/_Добавить задачу"
 
-#: src/planner-task-tree.c:185
+#: src/views/gantt/mg-task-tree.c:186
 msgid "/_Insert subtask"
 msgstr "/_Добавить подзадачу"
 
-#: src/planner-task-tree.c:186
+#: src/views/gantt/mg-task-tree.c:187
 msgid "/_Remove task"
 msgstr "/_Удалить задачу"
 
-#: src/planner-task-tree.c:188
+#: src/views/gantt/mg-task-tree.c:189
 msgid "/_Unlink task"
 msgstr "/_Отвязать задачу"
 
-#: src/planner-task-tree.c:190
+#: src/views/gantt/mg-task-tree.c:191
 msgid "/_Edit task..."
 msgstr "_Изменить свойства..."
 
-#: src/planner-task-tree.c:2112
+#: src/views/gantt/mg-task-tree.c:2113
 msgid "mon"
 msgstr "мес"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:2113
+#: src/views/gantt/mg-task-tree.c:2114
 msgid "month"
 msgstr "месяц"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:2114
+#: src/views/gantt/mg-task-tree.c:2115
 msgid "months"
 msgstr "месяцы"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:2115
+#: src/views/gantt/mg-task-tree.c:2116
 msgid "w"
 msgstr "н"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:2116
+#: src/views/gantt/mg-task-tree.c:2117
 msgid "week"
 msgstr "неделя"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:2117
+#: src/views/gantt/mg-task-tree.c:2118
 msgid "weeks"
 msgstr "недели"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:2118
+#: src/views/gantt/mg-task-tree.c:2119
 msgid "d"
 msgstr "d"
 
 #. day unit variant accepted in input
-#: src/planner-task-tree.c:2119
+#: src/views/gantt/mg-task-tree.c:2120
 msgid "day"
 msgstr "день"
 
 #. day unit variant accepted in input
-#: src/planner-task-tree.c:2121
+#: src/views/gantt/mg-task-tree.c:2122
 msgid "h"
 msgstr "ч"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:2122
+#: src/views/gantt/mg-task-tree.c:2123
 msgid "hour"
 msgstr "час"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:2123
+#: src/views/gantt/mg-task-tree.c:2124
 msgid "hours"
 msgstr "часы"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:2124
+#: src/views/gantt/mg-task-tree.c:2125
 msgid "min"
 msgstr "мин."
 
 #. minute unit variant accepted in input
-#: src/planner-task-tree.c:2125
+#: src/views/gantt/mg-task-tree.c:2126
 msgid "minute"
 msgstr "минута"
 
 #. minute unit variant accepted in input
-#: src/planner-task-tree.c:2126
+#: src/views/gantt/mg-task-tree.c:2127
 msgid "minutes"
 msgstr "минуты"
 
-#: src/planner-task-view.c:173
+#: src/views/gantt/mg-task-view.c:173
 msgid "Tasks"
 msgstr "Задачи"
 
-#: src/planner-task-view.c:181
+#: src/views/gantt/mg-task-view.c:181
 msgid "_Tasks"
 msgstr "Задачи"
 
-#: src/planner-task-view.c:228
+#: src/views/gantt/mg-task-view.c:228
 msgid "Start"
 msgstr "Начало"
 
-#: src/planner-task-view.c:229
+#: src/views/gantt/mg-task-view.c:229
 msgid "Finish"
 msgstr "Завершение"
 
-#: src/planner-task-view.c:231
+#: src/views/gantt/mg-task-view.c:231
 msgid "Slack"
 msgstr "Отставание"
 
-#: src/planner-task-view.c:232
+#: src/views/gantt/mg-task-view.c:232
 msgid "Cost"
 msgstr "Стоимость"
 
-#: src/planner-task-view.c:438
+#: src/views/gantt/mg-task-view.c:438
 msgid "Edit custom task properties"
 msgstr "Редактировать свойства задачи"
 
-#: src/planner-resource-view.c:248
+#: src/views/resources/GNOME_MrProject_ResourcesView.ui.h:1
+msgid "Edit _Custom Properties..."
+msgstr "Изменить дополнительные свойства..."
+
+#: src/views/resources/GNOME_MrProject_ResourcesView.ui.h:2
+msgid "Edit _Groups"
+msgstr "Изменить группы"
+
+#: src/views/resources/GNOME_MrProject_ResourcesView.ui.h:3
+msgid "Groups"
+msgstr "Группы"
+
+#: src/views/resources/GNOME_MrProject_ResourcesView.ui.h:4
+msgid "In_sert Resources..."
+msgstr "Вставить ресурсы..."
+
+#: src/views/resources/GNOME_MrProject_ResourcesView.ui.h:9
+msgid "_Edit Resource Properties..."
+msgstr "Изменить свойства ресурсов..."
+
+#: src/views/resources/GNOME_MrProject_ResourcesView.ui.h:10
+msgid "_Insert Resource"
+msgstr "_Добавить ресурс"
+
+#: src/views/resources/GNOME_MrProject_ResourcesView.ui.h:11
+msgid "_Remove Resource"
+msgstr "_Удалить ресурс"
+
+#: src/views/resources/mg-resource-view.c:248
 msgid "/_Insert resource"
 msgstr "/_Добавить ресурс"
 
-#: src/planner-resource-view.c:249
+#: src/views/resources/mg-resource-view.c:249
 msgid "/_Remove resource"
 msgstr "/_Удалить ресурс"
 
-#: src/planner-resource-view.c:250
+#: src/views/resources/mg-resource-view.c:250
 msgid "/_Edit resource..."
 msgstr "/_Изменить ресурс..."
 
-#: src/planner-resource-view.c:350
+#: src/views/resources/mg-resource-view.c:350
 msgid "_Resources"
 msgstr "Ресурсы"
 
-#: src/planner-resource-view.c:849
+#: src/views/resources/mg-resource-view.c:825
 msgid "Edit custom resource properties"
 msgstr "Редактировать свойства ресурса"
 
-#: src/planner-resource-view.c:1011
+#: src/views/resources/mg-resource-view.c:987
 msgid "Group"
 msgstr "Группа"
 
-#: src/planner-resource-view.c:1040
+#: src/views/resources/mg-resource-view.c:1016
 msgid "Email"
 msgstr "Электронный адрес"
 
-#~ msgid "Contribute to MrProject"
-#~ msgstr "Помочь MrProject"
+#: mrproject.desktop.in.h:1
+msgid "MrProject Project Management Tool"
+msgstr "Управление проектами MrProject"
 
-#~ msgid "MrProject Project Management Tool"
-#~ msgstr "Управление проектами MrProject"
+#: mrproject.desktop.in.h:2
+msgid "Project Management"
+msgstr "Управление проектами"

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mrproject\n"
-"POT-Creation-Date: 2003-12-01 16:26+0100\n"
+"POT-Creation-Date: 2003-09-12 18:55+0200\n"
 "PO-Revision-Date: 2003-06-04 17:30+0800\n"
 "Last-Translator: Funda Wang <fundawang@linux.net.cn>\n"
 "Language-Team: zh_CN <i18n-translation@lists.linux.net.cn>\n"
@@ -13,866 +13,317 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: data/planner.desktop.in.h:1
-#, fuzzy
-msgid "Planner Project Management"
-msgstr "项目管理"
-
-#: data/planner.desktop.in.h:2
-msgid "Project Management"
-msgstr "项目管理"
-
 #: libegg/recent-files/egg-recent-vfs-utils.c:90
 msgid " (invalid Unicode)"
 msgstr " (无效的 Unicode)"
 
-#: data/ui/main-window.ui.h:1
+#: src/app/GNOME_MrProject_MainWindow.ui.h:1
 msgid "About this application"
 msgstr "关于本程序"
 
-#: data/ui/main-window.ui.h:2
+#: src/app/GNOME_MrProject_MainWindow.ui.h:2
 msgid "C_ut"
 msgstr "剪切(_U)"
 
-#: data/ui/main-window.ui.h:3
+#: src/app/GNOME_MrProject_MainWindow.ui.h:3
 msgid "Clear"
 msgstr "清除"
 
-#: data/ui/main-window.ui.h:4
+#: src/app/GNOME_MrProject_MainWindow.ui.h:4
 msgid "Clear the selection"
 msgstr "清除选中内容"
 
-#: data/ui/main-window.ui.h:5
+#: src/app/GNOME_MrProject_MainWindow.ui.h:5
 msgid "Close the current file"
 msgstr "关闭当前文件"
 
-#: data/ui/main-window.ui.h:6
+#: src/app/GNOME_MrProject_MainWindow.ui.h:6
 msgid "Copy the selection"
 msgstr "复制选中内容"
 
-#: data/ui/main-window.ui.h:7
+#: src/app/GNOME_MrProject_MainWindow.ui.h:7
 msgid "Create a new project"
 msgstr "创建新项目"
 
-#: data/ui/main-window.ui.h:8
+#: src/app/GNOME_MrProject_MainWindow.ui.h:8
 msgid "Cut the selection"
 msgstr "剪切选中内容"
 
-#: data/ui/main-window.ui.h:9
+#: src/app/GNOME_MrProject_MainWindow.ui.h:9
 msgid "Edit Day _Types"
 msgstr "编辑日类型(_T)"
 
-#: data/ui/main-window.ui.h:10
+#: src/app/GNOME_MrProject_MainWindow.ui.h:10
 msgid "Edit Project _Phases"
 msgstr "编辑项目阶段(_P)"
 
-#: data/ui/main-window.ui.h:11
+#: src/app/GNOME_MrProject_MainWindow.ui.h:11
 msgid "Edit the project properties"
 msgstr "编辑项目属性"
 
-#: data/ui/main-window.ui.h:12
+#: src/app/GNOME_MrProject_MainWindow.ui.h:12
 msgid "Exit the program"
 msgstr "退出程序"
 
-#: data/ui/main-window.ui.h:13
+#: src/app/GNOME_MrProject_MainWindow.ui.h:13
 msgid "New"
 msgstr "新建"
 
-#: data/ui/main-window.ui.h:14
+#: src/app/GNOME_MrProject_MainWindow.ui.h:14
 msgid "New..."
 msgstr "新建..."
 
-#: data/ui/main-window.ui.h:15
+#: src/app/GNOME_MrProject_MainWindow.ui.h:15
 msgid "Open"
 msgstr "打开"
 
-#: data/ui/main-window.ui.h:16
+#: src/app/GNOME_MrProject_MainWindow.ui.h:16
 msgid "Open a project"
 msgstr "打开项目"
 
-#: data/ui/main-window.ui.h:17
+#: src/app/GNOME_MrProject_MainWindow.ui.h:17
 msgid "Paste the clipboard"
 msgstr "粘贴剪贴板"
 
-#: data/ui/main-window.ui.h:18
+#: src/app/GNOME_MrProject_MainWindow.ui.h:18
 msgid "Print"
 msgstr "打印"
 
-#: data/ui/main-window.ui.h:19
+#: src/app/GNOME_MrProject_MainWindow.ui.h:19
 msgid "Print preview of the current project"
 msgstr "当前项目的打印预览"
 
-#: data/ui/main-window.ui.h:20
+#: src/app/GNOME_MrProject_MainWindow.ui.h:20
 msgid "Print the current project"
 msgstr "打印当前项目"
 
-#: data/ui/main-window.ui.h:21
+#: src/app/GNOME_MrProject_MainWindow.ui.h:21
 msgid "Redo the undone action"
 msgstr "重做撤消的操作"
 
-#: data/ui/main-window.ui.h:22
+#: src/app/GNOME_MrProject_MainWindow.ui.h:22
 msgid "Save"
 msgstr "保存"
 
-#: data/ui/main-window.ui.h:23
+#: src/app/GNOME_MrProject_MainWindow.ui.h:23
 msgid "Save _As..."
 msgstr "另存为(_A)..."
 
-#: data/ui/main-window.ui.h:24
+#: src/app/GNOME_MrProject_MainWindow.ui.h:24
 msgid "Save the current project"
 msgstr "保存当前项目"
 
-#: data/ui/main-window.ui.h:25
+#: src/app/GNOME_MrProject_MainWindow.ui.h:25
 msgid "Save the current project with a different name"
 msgstr "用不同的名称保存当前项目"
 
-#: data/ui/main-window.ui.h:26
+#: src/app/GNOME_MrProject_MainWindow.ui.h:26
 msgid "Show the MrProject User Guide"
 msgstr "显示 MrProject 用户指南"
 
-#: data/ui/main-window.ui.h:27
+#: src/app/GNOME_MrProject_MainWindow.ui.h:27
 msgid "Undo the last action"
 msgstr "撤消上次操作"
 
-#: data/ui/main-window.ui.h:28
+#: src/app/GNOME_MrProject_MainWindow.ui.h:28
 msgid "_About"
 msgstr "关于(_A)"
 
-#: data/ui/main-window.ui.h:29
+#: src/app/GNOME_MrProject_MainWindow.ui.h:29
 msgid "_Actions"
 msgstr "操作(_A)"
 
-#: data/ui/main-window.ui.h:30
+#: src/app/GNOME_MrProject_MainWindow.ui.h:30
 msgid "_Close"
 msgstr "关闭(_C)"
 
-#: data/ui/main-window.ui.h:31
+#: src/app/GNOME_MrProject_MainWindow.ui.h:31
 msgid "_Copy"
 msgstr "复制(_C)"
 
-#: data/ui/main-window.ui.h:32
+#: src/app/GNOME_MrProject_MainWindow.ui.h:32
 msgid "_Edit"
 msgstr "编辑(_E)"
 
-#: data/ui/main-window.ui.h:33
+#: src/app/GNOME_MrProject_MainWindow.ui.h:33
 msgid "_Edit Project Properties"
 msgstr "编辑项目属性(_E)"
 
-#: data/ui/main-window.ui.h:34
+#: src/app/GNOME_MrProject_MainWindow.ui.h:34
 msgid "_File"
 msgstr "文件(_F)"
 
-#: data/ui/main-window.ui.h:35
+#: src/app/GNOME_MrProject_MainWindow.ui.h:35
 msgid "_Help"
 msgstr "帮助(_H)"
 
-#: data/ui/main-window.ui.h:36
+#: src/app/GNOME_MrProject_MainWindow.ui.h:36
 msgid "_Manage Calendars"
 msgstr "管理日历(_M)"
 
-#: data/ui/main-window.ui.h:37
+#: src/app/GNOME_MrProject_MainWindow.ui.h:37
 msgid "_New Project"
 msgstr "新建项目(_N)"
 
-#: data/ui/main-window.ui.h:38
+#: src/app/GNOME_MrProject_MainWindow.ui.h:38
 msgid "_Open..."
 msgstr "打开(_O)..."
 
-#: data/ui/main-window.ui.h:39
+#: src/app/GNOME_MrProject_MainWindow.ui.h:39
 msgid "_Paste"
 msgstr "粘贴(_P)"
 
-#: data/ui/main-window.ui.h:40
+#: src/app/GNOME_MrProject_MainWindow.ui.h:40
 msgid "_Print Preview"
 msgstr "打印预览(_P)"
 
-#: data/ui/main-window.ui.h:41
+#: src/app/GNOME_MrProject_MainWindow.ui.h:41
 msgid "_Print..."
 msgstr "打印(_P)..."
 
-#: data/ui/main-window.ui.h:42
+#: src/app/GNOME_MrProject_MainWindow.ui.h:42
 msgid "_Project"
 msgstr "项目(_P)"
 
-#: data/ui/main-window.ui.h:43
+#: src/app/GNOME_MrProject_MainWindow.ui.h:43
 msgid "_Quit"
 msgstr "退出(_Q)"
 
-#: data/ui/main-window.ui.h:44
+#: src/app/GNOME_MrProject_MainWindow.ui.h:44
 msgid "_Redo"
 msgstr "重做(_R)"
 
-#: data/ui/main-window.ui.h:45 src/planner-main-window.c:1127
+#: src/app/GNOME_MrProject_MainWindow.ui.h:45 src/app/mg-main-window.c:1133
 msgid "_Save"
 msgstr "保存(_S)"
 
-#: data/ui/main-window.ui.h:46
+#: src/app/GNOME_MrProject_MainWindow.ui.h:46
 msgid "_Undo"
 msgstr "撤消(_U)"
 
-#: data/ui/main-window.ui.h:47
+#: src/app/GNOME_MrProject_MainWindow.ui.h:47
 msgid "_User Guide"
 msgstr "用户指南(_U)"
 
-#: data/ui/main-window.ui.h:48
+#: src/app/GNOME_MrProject_MainWindow.ui.h:48
 msgid "_View"
 msgstr "查看(_V)"
 
-#: data/ui/gantt-view.ui.h:1 data/ui/task-view.ui.h:1
-msgid "I_ndent Task"
-msgstr "缩进任务(_N)"
-
-#: data/ui/gantt-view.ui.h:2 data/ui/task-view.ui.h:2
-msgid "In_sert Tasks..."
-msgstr "插入任务(_S)..."
-
-#: data/ui/gantt-view.ui.h:3 data/ui/task-view.ui.h:3
-#: src/planner-application.c:75
-msgid "Indent"
-msgstr "缩进"
-
-#: data/ui/gantt-view.ui.h:4 data/ui/task-view.ui.h:4
-#: data/ui/resource-view.ui.h:5 src/planner-application.c:54
-#: src/planner-application.c:103
+#: src/app/mg-application.c:54 src/app/mg-application.c:103
+#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:4
+#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:4
+#: src/views/resources/GNOME_MrProject_ResourcesView.ui.h:5
 msgid "Insert"
 msgstr "插入"
 
-#: data/ui/gantt-view.ui.h:5 data/ui/task-view.ui.h:5
-msgid "Move Task Do_wn"
-msgstr "任务下移(_W)"
-
-#: data/ui/gantt-view.ui.h:6 data/ui/task-view.ui.h:6
-msgid "Move Task _Up"
-msgstr "任务上移(_U)"
-
-#: data/ui/gantt-view.ui.h:7 data/ui/task-view.ui.h:7
-#: src/planner-application.c:96
-msgid "Move down"
-msgstr "下移"
-
-#: data/ui/gantt-view.ui.h:8 data/ui/task-view.ui.h:8
-#: src/planner-application.c:89
-msgid "Move up"
-msgstr "上移"
-
-#: data/ui/gantt-view.ui.h:9 data/ui/task-view.ui.h:9
-#: data/ui/resource-view.ui.h:6 src/planner-application.c:61
-#: src/planner-application.c:110
+#: src/app/mg-application.c:61 src/app/mg-application.c:110
+#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:9
+#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:9
+#: src/views/resources/GNOME_MrProject_ResourcesView.ui.h:6
 msgid "Remove"
 msgstr "删除"
 
-#: data/ui/gantt-view.ui.h:10 data/ui/task-view.ui.h:10
-msgid "Reset _All Constraints"
-msgstr "重置全部约束条件(_A)"
-
-#: data/ui/gantt-view.ui.h:11 data/ui/task-view.ui.h:11
-msgid "Reset _Constraint"
-msgstr "重置约束条件(_C)"
-
-#: data/ui/gantt-view.ui.h:12 data/ui/task-view.ui.h:12
-#: data/ui/resource-view.ui.h:7
-msgid "Select _All"
-msgstr "全选(_A)"
-
-#: data/ui/gantt-view.ui.h:13 data/ui/task-view.ui.h:13
-#: data/ui/resource-view.ui.h:8
-msgid "Select all tasks"
-msgstr "选中所有任务"
-
-#: data/ui/gantt-view.ui.h:14
-msgid "Test"
-msgstr "测试"
-
-#: data/ui/gantt-view.ui.h:15 data/ui/task-view.ui.h:14
-msgid "Un_link Task"
-msgstr "取消任务链接(_L)"
-
-#: data/ui/gantt-view.ui.h:16 data/ui/task-view.ui.h:15
-msgid "Unin_dent Task"
-msgstr "取消任务缩进(_D)"
-
-#: data/ui/gantt-view.ui.h:17 data/ui/task-view.ui.h:16
-#: src/planner-application.c:82
-msgid "Unindent"
-msgstr "取消缩进"
-
-#: data/ui/gantt-view.ui.h:18 data/ui/task-view.ui.h:17
-#: src/planner-application.c:68
+#: src/app/mg-application.c:68
+#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:18
+#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:17
 msgid "Unlink"
 msgstr "取消链接"
 
-#: data/ui/gantt-view.ui.h:19
-msgid "Zoom In"
-msgstr "放大"
-
-#: data/ui/gantt-view.ui.h:20
-msgid "Zoom Out"
-msgstr "缩小"
-
-#: data/ui/gantt-view.ui.h:21
-msgid "Zoom To Fit"
-msgstr "最佳比例"
-
-#: data/ui/gantt-view.ui.h:22
-msgid "Zoom To _Fit"
-msgstr "最佳比例(_F)"
-
-#: data/ui/gantt-view.ui.h:23
-msgid "Zoom _Out"
-msgstr "缩小(_O)"
-
-#: data/ui/gantt-view.ui.h:24 data/ui/task-view.ui.h:19
-msgid "_Edit Task Properties..."
-msgstr "编辑任务属性(_E)..."
-
-#: data/ui/gantt-view.ui.h:25
-msgid "_Highlight Critical Tasks"
-msgstr "突出显示关键任务(_H)"
-
-#: data/ui/gantt-view.ui.h:26 data/ui/task-view.ui.h:20
-msgid "_Insert Task"
-msgstr "插入任务(_I)"
-
-#: data/ui/gantt-view.ui.h:27 data/ui/task-view.ui.h:21
-msgid "_Remove Task"
-msgstr "删除任务(_R)"
-
-#: data/ui/gantt-view.ui.h:28
-msgid "_Zoom In"
-msgstr "放大(_Z)"
-
-#: data/ui/task-view.ui.h:18
-msgid "_Edit Custom Properties..."
-msgstr "编辑自定义属性(_E)..."
-
-#: data/ui/html-plugin.ui.h:1 data/glade/html-output.glade.h:4
-msgid "Export to HTML"
-msgstr "导出为 HTML"
-
-#: data/ui/sql-plugin.ui.h:1
-msgid "Open from Database..."
-msgstr "从数据库打开..."
-
-#: data/ui/sql-plugin.ui.h:2
-msgid "Save to Database..."
-msgstr "保存到数据库..."
-
-#: data/ui/resource-view.ui.h:1
-msgid "Edit _Custom Properties..."
-msgstr "编辑自定义属性(_C)..."
-
-#: data/ui/resource-view.ui.h:2
-msgid "Edit _Groups"
-msgstr "编辑组(_G)"
-
-#: data/ui/resource-view.ui.h:3
-msgid "Groups"
-msgstr "组"
-
-#: data/ui/resource-view.ui.h:4
-msgid "In_sert Resources..."
-msgstr "插入资源(_S)..."
-
-#: data/ui/resource-view.ui.h:9
-msgid "_Edit Resource Properties..."
-msgstr "编辑资源属性(_E)..."
-
-#: data/ui/resource-view.ui.h:10
-msgid "_Insert Resource"
-msgstr "插入资源(_I)"
-
-#: data/ui/resource-view.ui.h:11
-msgid "_Remove Resource"
-msgstr "删除资源(_R)"
-
-#: data/glade/add-predecessor.glade.h:1 data/glade/calendar-dialog.glade.h:4
-#: data/glade/html-output.glade.h:2 data/glade/new-property.glade.h:1
-#: data/glade/project-properties.glade.h:1
-#: data/glade/resource-dialog.glade.h:1
-#: data/glade/resource-input-dialog.glade.h:1 data/glade/sql.glade.h:2
-#: data/glade/task-dialog.glade.h:4 data/glade/task-input-dialog.glade.h:1
-msgid "*"
-msgstr "*"
-
-#: data/glade/add-predecessor.glade.h:2
-msgid "Lag: "
-msgstr "推后："
-
-#: data/glade/add-predecessor.glade.h:3
-msgid "New predecessor"
-msgstr "新建前趋"
-
-#: data/glade/add-predecessor.glade.h:4
-msgid "Predecessor: "
-msgstr "前趋："
-
-#: data/glade/add-predecessor.glade.h:5
-msgid "Relation type: "
-msgstr "关系类型："
-
-#: data/glade/calendar-dialog.glade.h:1
-msgid ""
-"\n"
-"The selected day type has the following working hours:"
-msgstr ""
-"\n"
-"选中的日类型有以下工作小时："
-
-#: data/glade/calendar-dialog.glade.h:3 data/glade/html-output.glade.h:1
-#: data/glade/sql.glade.h:1 data/glade/task-dialog.glade.h:1
-msgid "    "
-msgstr "    "
-
-#: data/glade/calendar-dialog.glade.h:5
-msgid "-"
-msgstr "-"
-
-#: data/glade/calendar-dialog.glade.h:6
-msgid "<b>Calendar:</b>"
-msgstr "<b>日历：</b>"
-
-#: data/glade/calendar-dialog.glade.h:7
-msgid "<b>Day types</b>"
-msgstr "<b>日类型</b>"
-
-#: data/glade/calendar-dialog.glade.h:8
-msgid "<b>Working hours</b>"
-msgstr "<b>工作小时</b>"
-
-#: data/glade/calendar-dialog.glade.h:9
-msgid "<b>Working time</b>"
-msgstr "<b>工作时间</b>"
-
-#: data/glade/calendar-dialog.glade.h:10
-msgid "Apply"
-msgstr "应用"
-
-#: data/glade/calendar-dialog.glade.h:11
-msgid "C_opy an existing calendar"
-msgstr "复制已有日历(_O)"
-
-#: data/glade/calendar-dialog.glade.h:12
-msgid "C_reate"
-msgstr "创建(_R)"
-
-#: data/glade/calendar-dialog.glade.h:13
-msgid "Calendar Editor"
-msgstr "日历编辑器"
-
-#: data/glade/calendar-dialog.glade.h:14
-msgid "Create an _empty calendar"
-msgstr "创建空日历(_E)"
-
-#: data/glade/calendar-dialog.glade.h:15
-msgid "Custom working time"
-msgstr "自定义工作时间"
-
-#: data/glade/calendar-dialog.glade.h:16
-msgid "Day type:"
-msgstr "日类型："
-
-#: data/glade/calendar-dialog.glade.h:17
-msgid "Default Week"
-msgstr "默认星期"
-
-#: data/glade/calendar-dialog.glade.h:18
-msgid "Default week..."
-msgstr "默认星期..."
-
-#: data/glade/calendar-dialog.glade.h:19
-msgid "Edit Day Types"
-msgstr "编辑日类型"
-
-#: data/glade/calendar-dialog.glade.h:20
-msgid "Edit Working Time"
-msgstr "编辑工作时间"
-
-#: data/glade/calendar-dialog.glade.h:21
-msgid "Enter the name of the new day type:"
-msgstr "输入新日类型的名称："
-
-#: data/glade/calendar-dialog.glade.h:22
-msgid "Existing calendars:"
-msgstr "已有日历："
-
-#: data/glade/calendar-dialog.glade.h:23
-msgid "From:"
-msgstr "从："
-
-#: data/glade/calendar-dialog.glade.h:24
-msgid "MrProject Team"
-msgstr "MrProject 团队"
-
-#: data/glade/calendar-dialog.glade.h:25
-msgid "New Calendar"
-msgstr "新建日历"
-
-#: data/glade/calendar-dialog.glade.h:26
-msgid "New Day Type"
-msgstr "新建日类型"
-
-#: data/glade/calendar-dialog.glade.h:27
-msgid "Select a calendar"
-msgstr "选择日历"
-
-#: data/glade/calendar-dialog.glade.h:28
-msgid ""
-"Select a weekday and the day type to use for that day in the default week "
-"for this calendar.\n"
-msgstr "选择此日历默认星期中所使用的计周法和日类型。\n"
-
-#: data/glade/calendar-dialog.glade.h:30
-msgid "Set day type to:"
-msgstr "设置日类型为："
-
-#: data/glade/calendar-dialog.glade.h:31
-msgid "To:"
-msgstr "到："
-
-#: data/glade/calendar-dialog.glade.h:32
-msgid "Use working time from derived calendar"
-msgstr "使用日历衍生的工作时间"
-
-#: data/glade/calendar-dialog.glade.h:33
-msgid "Week day:"
-msgstr "星期计日："
-
-#: data/glade/calendar-dialog.glade.h:34
-msgid "Working time..."
-msgstr "工作时间..."
-
-#: data/glade/calendar-dialog.glade.h:35
-msgid "_Derive from a calendar"
-msgstr "从日历衍生(_D)"
-
-#: data/glade/calendar-dialog.glade.h:36
-msgid "_Name of the new calendar:"
-msgstr "新日历的名称(_N)："
-
-#: data/glade/calendar-dialog.glade.h:37
-msgid "_New..."
-msgstr "新建(_N)..."
-
-#: data/glade/group-dialog.glade.h:1
-msgid "Group Editor"
-msgstr "组编辑器"
-
-#: data/glade/html-output.glade.h:3
-msgid "<b>Save to</b>"
-msgstr "<b>保存到</b>"
-
-#: data/glade/html-output.glade.h:5
-msgid "Local file"
-msgstr "本地文件"
-
-#: data/glade/html-output.glade.h:6
-msgid "Save to HTML File"
-msgstr "保存到 HTML 文件"
-
-#: data/glade/html-output.glade.h:7
-msgid "Web location"
-msgstr "网址"
-
-#: data/glade/new-property.glade.h:2
-msgid "Description: "
-msgstr "描述："
-
-#: data/glade/new-property.glade.h:3
-msgid "Label: "
-msgstr "标签："
-
-#: data/glade/new-property.glade.h:4
-msgid "Name: "
-msgstr "名称："
-
-#: data/glade/new-property.glade.h:5
-msgid "New Property"
-msgstr "新属性"
-
-#: data/glade/new-property.glade.h:6
-msgid "Type: "
-msgstr "类型："
-
-#: data/glade/project-properties.glade.h:2
-msgid "<b>Project phases</b>"
-msgstr "<b>项目阶段</b>"
-
-#: data/glade/project-properties.glade.h:3
-msgid "Calendar:"
-msgstr "日历："
-
-#: data/glade/project-properties.glade.h:4
-msgid "Custom properties"
-msgstr "自定义属性"
-
-#: data/glade/project-properties.glade.h:5
-msgid "Edit Project phases"
-msgstr "编辑项目阶段"
-
-#: data/glade/project-properties.glade.h:6
-msgid "Enter the name of the new project phase:"
-msgstr "输入新项目阶段的名称："
-
-#: data/glade/project-properties.glade.h:7
-#: data/glade/resource-dialog.glade.h:5 data/glade/task-dialog.glade.h:6
-msgid "General"
-msgstr "常规"
-
-#: data/glade/project-properties.glade.h:8
-msgid "New Project Phase"
-msgstr "新建项目阶段"
-
-#: data/glade/project-properties.glade.h:9
-msgid "Project _name:"
-msgstr "项目名称(_N)："
-
-#: data/glade/project-properties.glade.h:10
-msgid "Project _start:"
-msgstr "项目启动(_S)："
-
-#: data/glade/project-properties.glade.h:11
-msgid "Project phase:"
-msgstr "项目阶段："
-
-#: data/glade/project-properties.glade.h:12
-msgid "Project properties"
-msgstr "工程属性"
-
-#: data/glade/project-properties.glade.h:13
-msgid "Select..."
-msgstr "选择..."
-
-#: data/glade/project-properties.glade.h:14
-msgid "_Manager:"
-msgstr "经理(_M)："
-
-#: data/glade/project-properties.glade.h:15
-msgid "_Organization:"
-msgstr "组织(_O)："
-
-#: data/glade/property-dialog.glade.h:1
-msgid "Custom Properties"
-msgstr "自定义属性"
-
-#: data/glade/resource-dialog.glade.h:2
-msgid "C_ost:"
-msgstr "成本(_O)："
-
-#: data/glade/resource-dialog.glade.h:3
-msgid "Calendar"
-msgstr "日历"
-
-#: data/glade/resource-dialog.glade.h:4
-msgid "Edit calendars..."
-msgstr "编辑日历..."
-
-#: data/glade/resource-dialog.glade.h:6 data/glade/task-dialog.glade.h:7
-msgid "Insert time stamp"
-msgstr "插入时间戳"
-
-#: data/glade/resource-dialog.glade.h:7 data/glade/task-dialog.glade.h:9
-msgid "Notes"
-msgstr "注释"
-
-#: data/glade/resource-dialog.glade.h:8
-msgid ""
-"Select the calendar to use for this resource. If you want to use the default "
-"calendar of the project, select 'None'. "
-msgstr "选择此资源使用的日历。如果您想要使用项目的默认日历，请选择“无”。"
-
-#: data/glade/resource-dialog.glade.h:9
-msgid "_Email:"
-msgstr "电子邮件(_E)："
-
-#: data/glade/resource-dialog.glade.h:10
-msgid "_Group:"
-msgstr "组(_G)："
-
-#: data/glade/resource-dialog.glade.h:11
-msgid "_Name:"
-msgstr "名称(_N)："
-
-#: data/glade/resource-dialog.glade.h:12
-msgid "_Type:"
-msgstr "类型(_T)："
-
-#: data/glade/resource-input-dialog.glade.h:2
-msgid "Email:"
-msgstr "电子邮件："
-
-#: data/glade/resource-input-dialog.glade.h:3
-msgid "Group:"
-msgstr "组："
-
-#: data/glade/resource-input-dialog.glade.h:4
-msgid "Insert resource"
-msgstr "插入资源"
-
-#: data/glade/resource-input-dialog.glade.h:5
-#: data/glade/task-input-dialog.glade.h:3
-msgid "Name:"
-msgstr "名称："
-
-#: data/glade/resource-input-dialog.glade.h:6
-#: data/glade/task-input-dialog.glade.h:5
-msgid "_Insert"
-msgstr "插入(_I)"
-
-#: data/glade/sql.glade.h:3
-msgid "<b>Open Database</b>"
-msgstr "<b>打开数据库</b>"
-
-#: data/glade/sql.glade.h:4
-msgid "Database:"
-msgstr "数据库："
-
-#: data/glade/sql.glade.h:5
-msgid "Open Database"
-msgstr "打开数据库"
-
-#: data/glade/sql.glade.h:6
-msgid "Password:"
-msgstr "密码："
-
-#: data/glade/sql.glade.h:7
-msgid "Select a Project"
-msgstr "选择项目"
-
-#: data/glade/sql.glade.h:8
-msgid "Server:"
-msgstr "服务器："
-
-#: data/glade/sql.glade.h:9
-msgid "The database contains the following projects. Select a project to open:"
-msgstr "数据库包含下列项目。请选择要打开的项目："
-
-#: data/glade/sql.glade.h:10
-msgid "Username:"
-msgstr "用户名："
-
-#: data/glade/task-dialog.glade.h:3
-#, no-c-format
-msgid "%"
-msgstr "%"
-
-#: data/glade/task-dialog.glade.h:5
-msgid "C_omplete:"
-msgstr "完成(_O)："
-
-#: data/glade/task-dialog.glade.h:8
-msgid "Na_me:"
-msgstr "名称(_M)："
-
-#: data/glade/task-dialog.glade.h:10
-msgid "Pr_iority:"
-msgstr "优先级(_I)："
-
-#: data/glade/task-dialog.glade.h:11
-msgid "Predecessors"
-msgstr "前趋"
-
-#: data/glade/task-dialog.glade.h:12 src/planner-resource-view.c:342
-msgid "Resources"
-msgstr "资源"
-
-#: data/glade/task-dialog.glade.h:13
-msgid "_Duration:"
-msgstr "持续时间(_D)："
-
-#: data/glade/task-dialog.glade.h:14
-msgid "_Fixed duration"
-msgstr "固定持续时间(_F)"
-
-#: data/glade/task-dialog.glade.h:15
-msgid "_Milestone"
-msgstr "里程碑(_M)"
-
-#: data/glade/task-dialog.glade.h:16
-msgid "_Work:"
-msgstr "工作(_W)："
-
-#. day unit variant accepted in input
-#: data/glade/task-dialog.glade.h:17 src/planner-task-tree.c:2120
-msgid "days"
-msgstr "天"
-
-#: data/glade/task-input-dialog.glade.h:2
-msgid "Insert task"
-msgstr "插入任务"
-
-#: data/glade/task-input-dialog.glade.h:4
-msgid "Work:"
-msgstr "工作："
-
-#: src/planner-application.c:117
+#: src/app/mg-application.c:75
+#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:3
+#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:3
+msgid "Indent"
+msgstr "缩进"
+
+#: src/app/mg-application.c:82
+#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:17
+#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:16
+msgid "Unindent"
+msgstr "取消缩进"
+
+#: src/app/mg-application.c:89
+#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:8
+#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:8
+msgid "Move up"
+msgstr "上移"
+
+#: src/app/mg-application.c:96
+#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:7
+#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:7
+msgid "Move down"
+msgstr "下移"
+
+#: src/app/mg-application.c:117
 msgid "Edit"
 msgstr "编辑"
 
-#: src/planner-main-window.c:584
+#: src/app/mg-main-window.c:585
 msgid "Open a file"
 msgstr "打开文件"
 
 #. I18n: Translators, list your names here, newline separated if there
 #. * are more than one, to appear in the about box.
 #.
-#: src/planner-main-window.c:993 src/planner-main-window.c:1000
+#: src/app/mg-main-window.c:995 src/app/mg-main-window.c:1004
 msgid "translator_credits"
 msgstr "GNOME 简体中文翻译小组"
 
-#. "Copyright \xc2\xa9 2001-2002 CodeFactory AB",
-#: src/planner-main-window.c:997
+#: src/app/mg-main-window.c:1001
 msgid "A Project Management application for the GNOME desktop"
 msgstr "GNOME 桌面环境下的项目管理程序"
 
-#: src/planner-main-window.c:1007
-#, fuzzy
-msgid "The Planner Homepage"
+#: src/app/mg-main-window.c:1013
+msgid "The MrProject Homepage"
 msgstr "MrProject 主页"
 
-#: src/planner-main-window.c:1083
+#: src/app/mg-main-window.c:1017
+msgid "Contribute to MrProject"
+msgstr "为 MrProject 做出贡献"
+
+#: src/app/mg-main-window.c:1089
 msgid "If you don't save, changes made the last minute will be discarded."
 msgstr "如果您不保存，前一分钟所作的更改都会被丢弃。"
 
-#: src/planner-main-window.c:1088
+#: src/app/mg-main-window.c:1094
 #, c-format
 msgid "If you don't save, changes made the last %d minutes will be discarded."
 msgstr "如果您不保存，前 %d 分钟所作的更改都会被丢弃。"
 
-#: src/planner-main-window.c:1093
+#: src/app/mg-main-window.c:1099
 msgid "If you don't save, changes made the last hour will be discarded."
 msgstr "如果您不保存，前一小时所作的更改都会被丢弃。"
 
-#: src/planner-main-window.c:1098
+#: src/app/mg-main-window.c:1104
 #, c-format
 msgid "If you don't save, changes made the last %d hours will be discarded."
 msgstr "如果您不保存，前 %d 小时所作的更改都会被丢弃。"
 
-#: src/planner-main-window.c:1105
+#: src/app/mg-main-window.c:1111
 #, c-format
 msgid "Save changes to document '%s' before closing?"
 msgstr "在关闭前保存对文档“%s”的更改吗？"
 
-#: src/planner-main-window.c:1123
+#: src/app/mg-main-window.c:1129
 msgid "C_lose without saving"
 msgstr "不保存就关闭(_L)"
 
-#: src/planner-main-window.c:1125
+#: src/app/mg-main-window.c:1131
 msgid "_Cancel"
 msgstr "取消(_C)"
 
-#: src/planner-main-window.c:1232
+#: src/app/mg-main-window.c:1238
 msgid "Save a file"
 msgstr "保存文件"
 
-#: src/planner-main-window.c:1264 src/planner-html-plugin.c:146
+#: src/app/mg-main-window.c:1270
+#: src/plugins/html-output/mg-html-output-plugin.c:146
 #, c-format
 msgid "File \"%s\" exists, do you want to overwrite it?"
 msgstr "文件“%s”已存在，您想要覆盖吗？"
 
-#: src/planner-main-window.c:1452
-#, fuzzy
+#: src/app/mg-main-window.c:1458
 msgid ""
-"You have opened a file that was saved with an old version of Planner.\n"
+"You have opened a file that was saved with an old version of MrProject.\n"
 "\n"
 "When loading old files, all tasks will use the constraint 'Must Start On', "
 "since the old version did not fully support automatic rescheduling. To take "
@@ -895,51 +346,51 @@ msgstr ""
 "\n"
 "完成这一操作之后，您就可以从“编辑”菜单中选择“删除全部约束条件”功能了。"
 
-#: src/planner-main-window.c:1489 src/planner-gantt-row.c:656
-#: src/planner-gantt-row.c:658 src/planner-gantt-print.c:513
-#: src/planner-gantt-print.c:515
+#: src/app/mg-main-window.c:1495 src/views/gantt/mg-gantt-row.c:656
+#: src/views/gantt/mg-gantt-row.c:658 src/views/gantt/mg-gantt-print.c:513
+#: src/views/gantt/mg-gantt-print.c:515
 msgid "Unnamed"
 msgstr "未命名"
 
-#: src/planner-main.c:61
+#: src/app/mg-main.c:61
 msgid "Create the initial window with the given geometry."
 msgstr "以给定的几何属性创建初识窗口。"
 
-#: src/planner-main.c:61
+#: src/app/mg-main.c:61
 msgid "GEOMETRY"
 msgstr "几何属性"
 
-#: src/planner-main.c:98
+#: src/app/mg-main.c:98
 msgid "mrproject: --geometry cannot be used with more than one file."
 msgstr "mrproject：--geometry 无法用于多个文件。"
 
-#: src/planner-plugin-loader.c:40
+#: src/app/mg-plugin-loader.c:40
 #, c-format
 msgid "Could not open plugin file '%s'\n"
 msgstr "打不开插件文件“%s”\n"
 
-#: src/planner-view-loader.c:40
+#: src/app/mg-view-loader.c:40
 #, c-format
 msgid "Could not open view plugin file '%s'\n"
 msgstr "打不开查看插件文件“%s”\n"
 
-#: src/planner-cell-renderer-date.c:147
+#: src/cell-renderers/mg-cell-renderer-date.c:147
 msgid "Constraint type"
 msgstr "约束条件类型"
 
-#: src/planner-cell-renderer-date.c:154
+#: src/cell-renderers/mg-cell-renderer-date.c:154
 msgid "As soon as possible"
 msgstr "尽快"
 
-#: src/planner-cell-renderer-date.c:155
+#: src/cell-renderers/mg-cell-renderer-date.c:155
 msgid "Start no earlier than"
 msgstr "启动不早于"
 
-#: src/planner-cell-renderer-date.c:156
+#: src/cell-renderers/mg-cell-renderer-date.c:156
 msgid "Must start on"
 msgstr "必须启动于"
 
-#: src/planner-cell-renderer-date.c:171
+#: src/cell-renderers/mg-cell-renderer-date.c:171
 msgid "Today"
 msgstr "今天"
 
@@ -947,212 +398,635 @@ msgstr "今天"
 #. GTK_SIGNAL_FUNC (m_cell_date_today_clicked),
 #. date);
 #.
-#: src/planner-cell-renderer-date.c:179
+#: src/cell-renderers/mg-cell-renderer-date.c:179
 msgid "Cancel"
 msgstr "取消"
 
-#: src/planner-cell-renderer-date.c:187
+#: src/cell-renderers/mg-cell-renderer-date.c:187
 msgid "OK"
 msgstr "确定"
 
-#: src/planner-default-week-dialog.c:40
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:1
+msgid ""
+"\n"
+"The selected day type has the following working hours:"
+msgstr ""
+"\n"
+"选中的日类型有以下工作小时："
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:3
+#: src/dialogs/task-dialog/mg-task-dialog.glade.h:1
+#: src/plugins/html-output/mg-html-output.glade.h:1
+#: src/plugins/sql/mg-sql.glade.h:1
+msgid "    "
+msgstr "    "
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:4
+#: src/dialogs/project-dialog/mg-project-properties.glade.h:1
+#: src/dialogs/property-dialog/mg-new-property.glade.h:1
+#: src/dialogs/resource-dialog/mg-resource-dialog.glade.h:1
+#: src/dialogs/resource-input-dialog/mg-resource-input-dialog.glade.h:1
+#: src/dialogs/task-dialog/mg-add-predecessor.glade.h:1
+#: src/dialogs/task-dialog/mg-task-dialog.glade.h:4
+#: src/dialogs/task-input-dialog/mg-task-input-dialog.glade.h:1
+#: src/plugins/html-output/mg-html-output.glade.h:2
+#: src/plugins/sql/mg-sql.glade.h:2
+msgid "*"
+msgstr "*"
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:5
+msgid "-"
+msgstr "-"
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:6
+msgid "<b>Calendar:</b>"
+msgstr "<b>日历：</b>"
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:7
+msgid "<b>Day types</b>"
+msgstr "<b>日类型</b>"
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:8
+msgid "<b>Working hours</b>"
+msgstr "<b>工作小时</b>"
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:9
+msgid "<b>Working time</b>"
+msgstr "<b>工作时间</b>"
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:10
+msgid "Apply"
+msgstr "应用"
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:11
+msgid "C_opy an existing calendar"
+msgstr "复制已有日历(_O)"
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:12
+msgid "C_reate"
+msgstr "创建(_R)"
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:13
+msgid "Calendar Editor"
+msgstr "日历编辑器"
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:14
+msgid "Create an _empty calendar"
+msgstr "创建空日历(_E)"
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:15
+msgid "Custom working time"
+msgstr "自定义工作时间"
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:16
+msgid "Day type:"
+msgstr "日类型："
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:17
+msgid "Default Week"
+msgstr "默认星期"
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:18
+msgid "Default week..."
+msgstr "默认星期..."
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:19
+msgid "Edit Day Types"
+msgstr "编辑日类型"
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:20
+msgid "Edit Working Time"
+msgstr "编辑工作时间"
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:21
+msgid "Enter the name of the new day type:"
+msgstr "输入新日类型的名称："
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:22
+msgid "Existing calendars:"
+msgstr "已有日历："
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:23
+msgid "From:"
+msgstr "从："
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:24
+msgid "MrProject Team"
+msgstr "MrProject 团队"
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:25
+msgid "New Calendar"
+msgstr "新建日历"
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:26
+msgid "New Day Type"
+msgstr "新建日类型"
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:27
+msgid "Select a calendar"
+msgstr "选择日历"
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:28
+msgid ""
+"Select a weekday and the day type to use for that day in the default week "
+"for this calendar.\n"
+msgstr "选择此日历默认星期中所使用的计周法和日类型。\n"
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:30
+msgid "Set day type to:"
+msgstr "设置日类型为："
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:31
+msgid "To:"
+msgstr "到："
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:32
+msgid "Use working time from derived calendar"
+msgstr "使用日历衍生的工作时间"
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:33
+msgid "Week day:"
+msgstr "星期计日："
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:34
+msgid "Working time..."
+msgstr "工作时间..."
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:35
+msgid "_Derive from a calendar"
+msgstr "从日历衍生(_D)"
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:36
+msgid "_Name of the new calendar:"
+msgstr "新日历的名称(_N)："
+
+#: src/dialogs/calendar-dialog/mg-calendar-dialog.glade.h:37
+msgid "_New..."
+msgstr "新建(_N)..."
+
+#: src/dialogs/calendar-dialog/mg-default-week-dialog.c:40
 msgid "Monday"
 msgstr "周一"
 
-#: src/planner-default-week-dialog.c:41
+#: src/dialogs/calendar-dialog/mg-default-week-dialog.c:41
 msgid "Tuesday"
 msgstr "周二"
 
-#: src/planner-default-week-dialog.c:42
+#: src/dialogs/calendar-dialog/mg-default-week-dialog.c:42
 msgid "Wednesday"
 msgstr "周三"
 
-#: src/planner-default-week-dialog.c:43
+#: src/dialogs/calendar-dialog/mg-default-week-dialog.c:43
 msgid "Thursday"
 msgstr "周四"
 
-#: src/planner-default-week-dialog.c:44
+#: src/dialogs/calendar-dialog/mg-default-week-dialog.c:44
 msgid "Friday"
 msgstr "周五"
 
-#: src/planner-default-week-dialog.c:45
+#: src/dialogs/calendar-dialog/mg-default-week-dialog.c:45
 msgid "Saturday"
 msgstr "周六"
 
-#: src/planner-default-week-dialog.c:46
+#: src/dialogs/calendar-dialog/mg-default-week-dialog.c:46
 msgid "Sunday"
 msgstr "周日"
 
-#: src/planner-default-week-dialog.c:266
+#: src/dialogs/calendar-dialog/mg-default-week-dialog.c:267
 msgid "No working time"
 msgstr "没有工作时间"
 
-#: src/planner-default-week-dialog.c:277 src/planner-default-week-dialog.c:281
+#: src/dialogs/calendar-dialog/mg-default-week-dialog.c:278
+#: src/dialogs/calendar-dialog/mg-default-week-dialog.c:282
 msgid "%H:%M"
 msgstr "%H:%M"
 
-#: src/planner-group-dialog.c:387 src/planner-property-dialog.c:378
-#: src/planner-task-dialog.c:1311 src/planner-task-dialog.c:1397
-#: src/planner-task-view.c:227 src/planner-gantt-print.c:190
-#: src/planner-resource-view.c:966
+#: src/dialogs/group-dialog/mg-group-dialog.c:387
+#: src/dialogs/property-dialog/mg-property-dialog.c:380
+#: src/dialogs/task-dialog/mg-task-dialog.c:1312
+#: src/dialogs/task-dialog/mg-task-dialog.c:1398
+#: src/views/gantt/mg-task-view.c:227 src/views/gantt/mg-gantt-print.c:190
+#: src/views/resources/mg-resource-view.c:942
 msgid "Name"
 msgstr "名称"
 
-#: src/planner-group-dialog.c:393
+#: src/dialogs/group-dialog/mg-group-dialog.c:393
 msgid "Manager name"
 msgstr "经理姓名"
 
-#: src/planner-group-dialog.c:399
+#: src/dialogs/group-dialog/mg-group-dialog.c:399
 msgid "Manager phone"
 msgstr "经理电话"
 
-#: src/planner-group-dialog.c:405
+#: src/dialogs/group-dialog/mg-group-dialog.c:405
 msgid "Manager email"
 msgstr "经理邮件"
 
-#: src/planner-group-dialog.c:411
+#: src/dialogs/group-dialog/mg-group-dialog.c:411
 msgid "Default"
 msgstr "默认"
 
-#: src/planner-project-properties.c:146
+#: src/dialogs/group-dialog/mg-group-dialog.glade.h:1
+msgid "Group Editor"
+msgstr "组编辑器"
+
+#: src/dialogs/project-dialog/mg-project-properties.c:146
 msgid "Select a calendar to use for this project:"
 msgstr "选择此项目使用的日历："
 
-#: src/planner-project-properties.c:505
+#: src/dialogs/project-dialog/mg-project-properties.c:505
 msgid "None"
 msgstr "无"
 
-#: src/planner-project-properties.c:606
+#: src/dialogs/project-dialog/mg-project-properties.c:606
 msgid "Property"
 msgstr "属性"
 
-#: src/planner-project-properties.c:617 src/planner-property-dialog.c:431
+#: src/dialogs/project-dialog/mg-project-properties.c:617
+#: src/dialogs/property-dialog/mg-property-dialog.c:433
 msgid "Value"
 msgstr "值"
 
-#: src/planner-project-properties.c:993 src/planner-property-dialog.c:229
+#: src/dialogs/project-dialog/mg-project-properties.c:994
+#: src/dialogs/property-dialog/mg-property-dialog.c:231
 msgid "The name of the custom property needs to start with a letter."
 msgstr "自定义属性的名称必须以字母开头。"
 
-#: src/planner-project-properties.c:1065 src/planner-property-dialog.c:300
+#: src/dialogs/project-dialog/mg-project-properties.c:1066
+#: src/dialogs/property-dialog/mg-property-dialog.c:302
 #, c-format
 msgid "Do you really want to remove the property '%s' from the project?"
 msgstr "您真的想要从项目中删除属性“%s”吗？"
 
-#: src/planner-project-properties.c:1194
+#: src/dialogs/project-dialog/mg-project-properties.c:1196
 msgid "Could not create properties dialog."
 msgstr "无法创建属性对话框。"
 
-#: src/planner-property-dialog.c:397
+#: src/dialogs/project-dialog/mg-project-properties.glade.h:2
+msgid "<b>Project phases</b>"
+msgstr "<b>项目阶段</b>"
+
+#: src/dialogs/project-dialog/mg-project-properties.glade.h:3
+msgid "Calendar:"
+msgstr "日历："
+
+#: src/dialogs/project-dialog/mg-project-properties.glade.h:4
+msgid "Custom properties"
+msgstr "自定义属性"
+
+#: src/dialogs/project-dialog/mg-project-properties.glade.h:5
+msgid "Edit Project phases"
+msgstr "编辑项目阶段"
+
+#: src/dialogs/project-dialog/mg-project-properties.glade.h:6
+msgid "Enter the name of the new project phase:"
+msgstr "输入新项目阶段的名称："
+
+#: src/dialogs/project-dialog/mg-project-properties.glade.h:7
+#: src/dialogs/resource-dialog/mg-resource-dialog.glade.h:5
+#: src/dialogs/task-dialog/mg-task-dialog.glade.h:6
+msgid "General"
+msgstr "常规"
+
+#: src/dialogs/project-dialog/mg-project-properties.glade.h:8
+msgid "New Project Phase"
+msgstr "新建项目阶段"
+
+#: src/dialogs/project-dialog/mg-project-properties.glade.h:9
+msgid "Project _name:"
+msgstr "项目名称(_N)："
+
+#: src/dialogs/project-dialog/mg-project-properties.glade.h:10
+msgid "Project _start:"
+msgstr "项目启动(_S)："
+
+#: src/dialogs/project-dialog/mg-project-properties.glade.h:11
+msgid "Project phase:"
+msgstr "项目阶段："
+
+#: src/dialogs/project-dialog/mg-project-properties.glade.h:12
+msgid "Project properties"
+msgstr "工程属性"
+
+#: src/dialogs/project-dialog/mg-project-properties.glade.h:13
+msgid "Select..."
+msgstr "选择..."
+
+#: src/dialogs/project-dialog/mg-project-properties.glade.h:14
+msgid "_Manager:"
+msgstr "经理(_M)："
+
+#: src/dialogs/project-dialog/mg-project-properties.glade.h:15
+msgid "_Organization:"
+msgstr "组织(_O)："
+
+#: src/dialogs/property-dialog/mg-new-property.glade.h:2
+msgid "Description: "
+msgstr "描述："
+
+#: src/dialogs/property-dialog/mg-new-property.glade.h:3
+msgid "Label: "
+msgstr "标签："
+
+#: src/dialogs/property-dialog/mg-new-property.glade.h:4
+msgid "Name: "
+msgstr "名称："
+
+#: src/dialogs/property-dialog/mg-new-property.glade.h:5
+msgid "New Property"
+msgstr "新属性"
+
+#: src/dialogs/property-dialog/mg-new-property.glade.h:6
+msgid "Type: "
+msgstr "类型："
+
+#: src/dialogs/property-dialog/mg-property-dialog.c:399
 msgid "Label"
 msgstr "标签"
 
-#: src/planner-property-dialog.c:411 src/planner-task-dialog.c:1429
-#: src/planner-resource-view.c:987
+#: src/dialogs/property-dialog/mg-property-dialog.c:413
+#: src/dialogs/task-dialog/mg-task-dialog.c:1430
+#: src/views/resources/mg-resource-view.c:963
 msgid "Type"
 msgstr "类型"
 
-#: src/planner-print-dialog.c:49
+#: src/dialogs/property-dialog/mg-property-dialog.glade.h:1
+msgid "Custom Properties"
+msgstr "自定义属性"
+
+#: src/dialogs/print-dialog/mg-print-dialog.c:49
 msgid "Print Project"
 msgstr "打印项目"
 
-#: src/planner-print-dialog.c:56
+#: src/dialogs/print-dialog/mg-print-dialog.c:56
 msgid "Select views"
 msgstr "选择视图"
 
-#: src/planner-print-dialog.c:74
+#: src/dialogs/print-dialog/mg-print-dialog.c:74
 msgid "Select the views to print:"
 msgstr "选择要打印的视图："
 
 #. Put "no group" at the top.
-#: src/planner-resource-dialog.c:248 src/planner-resource-input-dialog.c:96
-#: src/planner-resource-view.c:1375
+#: src/dialogs/resource-dialog/mg-resource-dialog.c:248
+#: src/dialogs/resource-input-dialog/mg-resource-input-dialog.c:97
+#: src/views/resources/mg-resource-view.c:1351
 msgid "(None)"
 msgstr "(无)"
 
-#: src/planner-resource-dialog.c:258 src/planner-resource-input-dialog.c:106
-#: src/planner-task-dialog.c:249
+#: src/dialogs/resource-dialog/mg-resource-dialog.c:258
+#: src/dialogs/resource-input-dialog/mg-resource-input-dialog.c:107
+#: src/dialogs/task-dialog/mg-task-dialog.c:249
 msgid "(No name)"
 msgstr "(无名称)"
 
 #. i18n: time stamp format for notes in task dialog, see strftime(3) for
 #. * a detailed description.
-#: src/planner-resource-dialog.c:728 src/planner-task-dialog.c:679
+#: src/dialogs/resource-dialog/mg-resource-dialog.c:728
+#: src/dialogs/task-dialog/mg-task-dialog.c:679
 msgid "%a %d %b %Y, %H:%M\n"
 msgstr "%Y年%-m月%-d日%A，%H:%M\n"
 
-#: src/planner-resource-dialog.c:826
+#: src/dialogs/resource-dialog/mg-resource-dialog.c:826
 msgid "None (use project default)"
 msgstr "无(使用项目默认值)"
 
-#: src/planner-resource-dialog.c:953 src/planner-resource-dialog.c:955
+#: src/dialogs/resource-dialog/mg-resource-dialog.c:953
+#: src/dialogs/resource-dialog/mg-resource-dialog.c:955
 msgid "Edit resource properties"
 msgstr "编辑资源属性"
 
-#: src/planner-resource-dialog.c:1101 src/planner-task-view.c:230
-#: src/planner-gantt-print.c:198 src/planner-resource-view.c:629
-#: src/planner-resource-view.c:645 src/planner-resource-view.c:1187
+#: src/dialogs/resource-dialog/mg-resource-dialog.c:1102
+#: src/views/gantt/mg-task-view.c:230 src/views/gantt/mg-gantt-print.c:198
+#: src/views/resources/mg-resource-view.c:629
+#: src/views/resources/mg-resource-view.c:645
+#: src/views/resources/mg-resource-view.c:1163
 msgid "Work"
 msgstr "工作"
 
-#: src/planner-resource-dialog.c:1102 src/planner-resource-view.c:632
-#: src/planner-resource-view.c:646 src/planner-resource-view.c:1188
+#: src/dialogs/resource-dialog/mg-resource-dialog.c:1103
+#: src/views/resources/mg-resource-view.c:632
+#: src/views/resources/mg-resource-view.c:646
+#: src/views/resources/mg-resource-view.c:1164
 msgid "Material"
 msgstr "材料"
 
-#: src/planner-predecessor-model.c:191 src/planner-task-dialog.c:1039
+#: src/dialogs/resource-dialog/mg-resource-dialog.glade.h:2
+msgid "C_ost:"
+msgstr "成本(_O)："
+
+#: src/dialogs/resource-dialog/mg-resource-dialog.glade.h:3
+msgid "Calendar"
+msgstr "日历"
+
+#: src/dialogs/resource-dialog/mg-resource-dialog.glade.h:4
+msgid "Edit calendars..."
+msgstr "编辑日历..."
+
+#: src/dialogs/resource-dialog/mg-resource-dialog.glade.h:6
+#: src/dialogs/task-dialog/mg-task-dialog.glade.h:7
+msgid "Insert time stamp"
+msgstr "插入时间戳"
+
+#: src/dialogs/resource-dialog/mg-resource-dialog.glade.h:7
+#: src/dialogs/task-dialog/mg-task-dialog.glade.h:9
+msgid "Notes"
+msgstr "注释"
+
+#: src/dialogs/resource-dialog/mg-resource-dialog.glade.h:8
+msgid ""
+"Select the calendar to use for this resource. If you want to use the default "
+"calendar of the project, select 'None'. "
+msgstr "选择此资源使用的日历。如果您想要使用项目的默认日历，请选择“无”。"
+
+#: src/dialogs/resource-dialog/mg-resource-dialog.glade.h:9
+msgid "_Email:"
+msgstr "电子邮件(_E)："
+
+#: src/dialogs/resource-dialog/mg-resource-dialog.glade.h:10
+msgid "_Group:"
+msgstr "组(_G)："
+
+#: src/dialogs/resource-dialog/mg-resource-dialog.glade.h:11
+msgid "_Name:"
+msgstr "名称(_N)："
+
+#: src/dialogs/resource-dialog/mg-resource-dialog.glade.h:12
+msgid "_Type:"
+msgstr "类型(_T)："
+
+#: src/dialogs/resource-input-dialog/mg-resource-input-dialog.glade.h:2
+msgid "Email:"
+msgstr "电子邮件："
+
+#: src/dialogs/resource-input-dialog/mg-resource-input-dialog.glade.h:3
+msgid "Group:"
+msgstr "组："
+
+#: src/dialogs/resource-input-dialog/mg-resource-input-dialog.glade.h:4
+msgid "Insert resource"
+msgstr "插入资源"
+
+#: src/dialogs/resource-input-dialog/mg-resource-input-dialog.glade.h:5
+#: src/dialogs/task-input-dialog/mg-task-input-dialog.glade.h:3
+msgid "Name:"
+msgstr "名称："
+
+#: src/dialogs/resource-input-dialog/mg-resource-input-dialog.glade.h:6
+#: src/dialogs/task-input-dialog/mg-task-input-dialog.glade.h:5
+msgid "_Insert"
+msgstr "插入(_I)"
+
+#: src/dialogs/task-dialog/mg-add-predecessor.glade.h:2
+msgid "Lag: "
+msgstr "推后："
+
+#: src/dialogs/task-dialog/mg-add-predecessor.glade.h:3
+msgid "New predecessor"
+msgstr "新建前趋"
+
+#: src/dialogs/task-dialog/mg-add-predecessor.glade.h:4
+msgid "Predecessor: "
+msgstr "前趋："
+
+#: src/dialogs/task-dialog/mg-add-predecessor.glade.h:5
+msgid "Relation type: "
+msgstr "关系类型："
+
+#: src/dialogs/task-dialog/mg-predecessor-model.c:191
+#: src/dialogs/task-dialog/mg-task-dialog.c:1040
 msgid "FS"
 msgstr "FS"
 
-#: src/planner-predecessor-model.c:194 src/planner-task-dialog.c:1040
+#: src/dialogs/task-dialog/mg-predecessor-model.c:194
+#: src/dialogs/task-dialog/mg-task-dialog.c:1041
 msgid "FF"
 msgstr "FF"
 
-#: src/planner-predecessor-model.c:197 src/planner-task-dialog.c:1041
+#: src/dialogs/task-dialog/mg-predecessor-model.c:197
+#: src/dialogs/task-dialog/mg-task-dialog.c:1042
 msgid "SS"
 msgstr "SS"
 
-#: src/planner-predecessor-model.c:200 src/planner-task-dialog.c:1042
+#: src/dialogs/task-dialog/mg-predecessor-model.c:200
+#: src/dialogs/task-dialog/mg-task-dialog.c:1043
 msgid "SF"
 msgstr "SF"
 
-#: src/planner-task-dialog.c:745
+#: src/dialogs/task-dialog/mg-task-dialog.c:746
 msgid "Finish to start (FS)"
 msgstr "完成到启动(FS)"
 
-#: src/planner-task-dialog.c:746
+#: src/dialogs/task-dialog/mg-task-dialog.c:747
 msgid "Finish to finish (FF)"
 msgstr "完成到完成(FF)"
 
-#: src/planner-task-dialog.c:747
+#: src/dialogs/task-dialog/mg-task-dialog.c:748
 msgid "Start to start (SS)"
 msgstr "启动到启动(SS)"
 
-#: src/planner-task-dialog.c:748
+#: src/dialogs/task-dialog/mg-task-dialog.c:749
 msgid "Start to finish (SF)"
 msgstr "启动到完成(SF)"
 
-#: src/planner-task-dialog.c:798
+#: src/dialogs/task-dialog/mg-task-dialog.c:799
 msgid "Can't add new predecessor. No task selected!"
 msgstr "无法添加新前趋。没有选中任务！"
 
-#: src/planner-task-dialog.c:1330
+#: src/dialogs/task-dialog/mg-task-dialog.c:1331
 msgid "Assigned"
 msgstr "已指派"
 
-#: src/planner-task-dialog.c:1347
+#: src/dialogs/task-dialog/mg-task-dialog.c:1348
 msgid "Units"
 msgstr "单位"
 
-#: src/planner-task-dialog.c:1451
+#: src/dialogs/task-dialog/mg-task-dialog.c:1452
 msgid "Lag"
 msgstr "推后"
 
-#: src/planner-task-dialog.c:1584 src/planner-task-dialog.c:1586
+#: src/dialogs/task-dialog/mg-task-dialog.c:1585
+#: src/dialogs/task-dialog/mg-task-dialog.c:1587
 msgid "Edit task properties"
 msgstr "编辑任务属性"
 
-#: src/planner-html-plugin.c:133
+#: src/dialogs/task-dialog/mg-task-dialog.glade.h:3
+#, no-c-format
+msgid "%"
+msgstr "%"
+
+#: src/dialogs/task-dialog/mg-task-dialog.glade.h:5
+msgid "C_omplete:"
+msgstr "完成(_O)："
+
+#: src/dialogs/task-dialog/mg-task-dialog.glade.h:8
+msgid "Na_me:"
+msgstr "名称(_M)："
+
+#: src/dialogs/task-dialog/mg-task-dialog.glade.h:10
+msgid "Pr_iority:"
+msgstr "优先级(_I)："
+
+#: src/dialogs/task-dialog/mg-task-dialog.glade.h:11
+msgid "Predecessors"
+msgstr "前趋"
+
+#: src/dialogs/task-dialog/mg-task-dialog.glade.h:12
+#: src/views/resources/mg-resource-view.c:342
+msgid "Resources"
+msgstr "资源"
+
+#: src/dialogs/task-dialog/mg-task-dialog.glade.h:13
+msgid "_Duration:"
+msgstr "持续时间(_D)："
+
+#: src/dialogs/task-dialog/mg-task-dialog.glade.h:14
+msgid "_Fixed duration"
+msgstr "固定持续时间(_F)"
+
+#: src/dialogs/task-dialog/mg-task-dialog.glade.h:15
+msgid "_Milestone"
+msgstr "里程碑(_M)"
+
+#: src/dialogs/task-dialog/mg-task-dialog.glade.h:16
+msgid "_Work:"
+msgstr "工作(_W)："
+
+#. day unit variant accepted in input
+#: src/dialogs/task-dialog/mg-task-dialog.glade.h:17
+#: src/views/gantt/mg-task-tree.c:2121
+msgid "days"
+msgstr "天"
+
+#: src/dialogs/task-input-dialog/mg-task-input-dialog.glade.h:2
+msgid "Insert task"
+msgstr "插入任务"
+
+#: src/dialogs/task-input-dialog/mg-task-input-dialog.glade.h:4
+msgid "Work:"
+msgstr "工作："
+
+#: src/plugins/html-output/GNOME_MrProject_HtmlOutputPlugin.ui.h:1
+#: src/plugins/html-output/mg-html-output.glade.h:4
+msgid "Export to HTML"
+msgstr "导出为 HTML"
+
+#: src/plugins/html-output/mg-html-output.glade.h:3
+msgid "<b>Save to</b>"
+msgstr "<b>保存到</b>"
+
+#: src/plugins/html-output/mg-html-output.glade.h:5
+msgid "Local file"
+msgstr "本地文件"
+
+#: src/plugins/html-output/mg-html-output.glade.h:6
+msgid "Save to HTML File"
+msgstr "保存到 HTML 文件"
+
+#: src/plugins/html-output/mg-html-output.glade.h:7
+msgid "Web location"
+msgstr "网址"
+
+#: src/plugins/html-output/mg-html-output-plugin.c:133
 #, c-format
 msgid ""
 "\"%s\" is a directory.\n"
@@ -1161,12 +1035,52 @@ msgstr ""
 "“%s”是目录。\n"
 "请输入文件名然后再试一次。"
 
+#: src/plugins/sql/GNOME_MrProject_SQLPlugin.ui.h:1
+msgid "Open from Database..."
+msgstr "从数据库打开..."
+
+#: src/plugins/sql/GNOME_MrProject_SQLPlugin.ui.h:2
+msgid "Save to Database..."
+msgstr "保存到数据库..."
+
+#: src/plugins/sql/mg-sql.glade.h:3
+msgid "<b>Open Database</b>"
+msgstr "<b>打开数据库</b>"
+
+#: src/plugins/sql/mg-sql.glade.h:4
+msgid "Database:"
+msgstr "数据库："
+
+#: src/plugins/sql/mg-sql.glade.h:5
+msgid "Open Database"
+msgstr "打开数据库"
+
+#: src/plugins/sql/mg-sql.glade.h:6
+msgid "Password:"
+msgstr "密码："
+
+#: src/plugins/sql/mg-sql.glade.h:7
+msgid "Select a Project"
+msgstr "选择项目"
+
+#: src/plugins/sql/mg-sql.glade.h:8
+msgid "Server:"
+msgstr "服务器："
+
+#: src/plugins/sql/mg-sql.glade.h:9
+msgid "The database contains the following projects. Select a project to open:"
+msgstr "数据库包含下列项目。请选择要打开的项目："
+
+#: src/plugins/sql/mg-sql.glade.h:10
+msgid "Username:"
+msgstr "用户名："
+
 #. Give up.
-#: src/planner-sql-plugin.c:127
+#: src/plugins/sql/mg-sql-plugin.c:127
 msgid "Invalid Unicode"
 msgstr "无效的 Unicode"
 
-#: src/planner-sql-plugin.c:269
+#: src/plugins/sql/mg-sql-plugin.c:269
 #, c-format
 msgid ""
 "Connection to database '%s' failed:\n"
@@ -1175,43 +1089,43 @@ msgstr ""
 "连接到数据库“%s”失败：\n"
 "%s"
 
-#: src/planner-sql-plugin.c:318
+#: src/plugins/sql/mg-sql-plugin.c:318
 msgid "Project"
 msgstr "项目"
 
-#: src/planner-sql-plugin.c:466
+#: src/plugins/sql/mg-sql-plugin.c:466
 msgid "Open from Database"
 msgstr "从数据库打开"
 
-#: src/planner-sql-plugin.c:573
+#: src/plugins/sql/mg-sql-plugin.c:573
 msgid "Save to Database"
 msgstr "保存到数据库"
 
-#: src/planner-format.c:141
+#: src/util/mg-format.c:141
 #, c-format
 msgid "%dd %dh"
 msgstr "%d天%d小时"
 
-#: src/planner-format.c:144
+#: src/util/mg-format.c:144
 #, c-format
 msgid "%dd"
 msgstr "%d天"
 
-#: src/planner-format.c:147
+#: src/util/mg-format.c:147
 #, c-format
 msgid "%dh"
 msgstr "%d小时"
 
-#: src/planner-format.c:171
+#: src/util/mg-format.c:171
 #, c-format
 msgid "%s days"
 msgstr "%s 天"
 
-#: src/planner-format.c:174
+#: src/util/mg-format.c:174
 msgid "0 days"
 msgstr "0 天"
 
-#: src/planner-format.c:177
+#: src/util/mg-format.c:177
 #, c-format
 msgid "%s day"
 msgstr "%s 天"
@@ -1220,43 +1134,146 @@ msgstr "%s 天"
 #. * e.g. in the date cells in the task tree. See
 #. * libmrproject/docs/DateFormat.
 #.
-#: src/planner-format.c:197
+#: src/util/mg-format.c:197
 msgid "%b %e"
 msgstr "%m月%d日"
 
+#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:1
+#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:1
+msgid "I_ndent Task"
+msgstr "缩进任务(_N)"
+
+#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:2
+#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:2
+msgid "In_sert Tasks..."
+msgstr "插入任务(_S)..."
+
+#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:5
+#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:5
+msgid "Move Task Do_wn"
+msgstr "任务下移(_W)"
+
+#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:6
+#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:6
+msgid "Move Task _Up"
+msgstr "任务上移(_U)"
+
+#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:10
+#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:10
+msgid "Reset _All Constraints"
+msgstr "重置全部约束条件(_A)"
+
+#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:11
+#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:11
+msgid "Reset _Constraint"
+msgstr "重置约束条件(_C)"
+
+#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:12
+#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:12
+#: src/views/resources/GNOME_MrProject_ResourcesView.ui.h:7
+msgid "Select _All"
+msgstr "全选(_A)"
+
+#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:13
+#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:13
+#: src/views/resources/GNOME_MrProject_ResourcesView.ui.h:8
+msgid "Select all tasks"
+msgstr "选中所有任务"
+
+#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:14
+msgid "Test"
+msgstr "测试"
+
+#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:15
+#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:14
+msgid "Un_link Task"
+msgstr "取消任务链接(_L)"
+
+#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:16
+#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:15
+msgid "Unin_dent Task"
+msgstr "取消任务缩进(_D)"
+
+#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:19
+msgid "Zoom In"
+msgstr "放大"
+
+#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:20
+msgid "Zoom Out"
+msgstr "缩小"
+
+#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:21
+msgid "Zoom To Fit"
+msgstr "最佳比例"
+
+#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:22
+msgid "Zoom To _Fit"
+msgstr "最佳比例(_F)"
+
+#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:23
+msgid "Zoom _Out"
+msgstr "缩小(_O)"
+
+#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:24
+#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:19
+msgid "_Edit Task Properties..."
+msgstr "编辑任务属性(_E)..."
+
+#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:25
+msgid "_Highlight Critical Tasks"
+msgstr "突出显示关键任务(_H)"
+
+#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:26
+#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:20
+msgid "_Insert Task"
+msgstr "插入任务(_I)"
+
+#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:27
+#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:21
+msgid "_Remove Task"
+msgstr "删除任务(_R)"
+
+#: src/views/gantt/GNOME_MrProject_GanttView.ui.h:28
+msgid "_Zoom In"
+msgstr "放大(_Z)"
+
+#: src/views/gantt/GNOME_MrProject_TaskView.ui.h:18
+msgid "_Edit Custom Properties..."
+msgstr "编辑自定义属性(_E)..."
+
 #. i18n: project start, the date format is described in
 #. * libmrproject/docs/DateFormat.
-#: src/planner-gantt-background.c:579
+#: src/views/gantt/mg-gantt-background.c:579
 msgid "%Y %b %d"
 msgstr "%Y年%m月%d日"
 
-#: src/planner-gantt-background.c:581
+#: src/views/gantt/mg-gantt-background.c:581
 msgid "Project start"
 msgstr "项目启动"
 
-#: src/planner-gantt-row.c:1841 src/planner-gantt-row.c:1844
+#: src/views/gantt/mg-gantt-row.c:1841 src/views/gantt/mg-gantt-row.c:1844
 msgid "No name"
 msgstr "无名称"
 
-#: src/planner-gantt-row.c:1847
+#: src/views/gantt/mg-gantt-row.c:1847
 #, c-format
 msgid "Make task '%s' a predecessor of '%s'"
 msgstr "将任务“%s”作为“%s”的前趋"
 
-#: src/planner-gantt-row.c:1905
+#: src/views/gantt/mg-gantt-row.c:1905
 #, c-format
 msgid "Change work to %s"
 msgstr "将工作改为 %s"
 
-#: src/planner-gantt-view.c:273
+#: src/views/gantt/mg-gantt-view.c:274
 msgid "Gantt Chart"
 msgstr "甘特图"
 
-#: src/planner-gantt-view.c:281
+#: src/views/gantt/mg-gantt-view.c:282
 msgid "_Gantt Chart"
 msgstr "甘特图(_G)"
 
-#: src/planner-gantt-view.c:470
+#: src/views/gantt/mg-gantt-view.c:471
 msgid ""
 "\n"
 "Name"
@@ -1265,7 +1282,7 @@ msgstr ""
 "名称"
 
 #. COL_START,    _("\nStart"),
-#: src/planner-gantt-view.c:472
+#: src/views/gantt/mg-gantt-view.c:473
 msgid ""
 "\n"
 "Work"
@@ -1274,199 +1291,229 @@ msgstr ""
 "工作"
 
 #. i18n: Short "Week", preferably 2 letters.
-#: src/planner-scale-utils.c:325
+#: src/views/gantt/mg-scale-utils.c:325
 #, c-format
 msgid "Wk %d"
 msgstr "第%d周"
 
-#: src/planner-scale-utils.c:329
+#: src/views/gantt/mg-scale-utils.c:329
 #, c-format
 msgid "Week %d"
 msgstr "第%d周"
 
 #. i18n: Week, year.
-#: src/planner-scale-utils.c:334
+#: src/views/gantt/mg-scale-utils.c:334
 #, c-format
 msgid "Week %d, %d"
 msgstr "%2$d年，第%1$d周"
 
 #. i18n: Short "Quarter", preferrably 1 letter.
-#: src/planner-scale-utils.c:365
+#: src/views/gantt/mg-scale-utils.c:365
 #, c-format
 msgid "Q%d"
 msgstr "第%d季度"
 
 #. i18n: Short "Quarter", preferrably 2-3 letters.
-#: src/planner-scale-utils.c:369
+#: src/views/gantt/mg-scale-utils.c:369
 #, c-format
 msgid "Qtr %d"
 msgstr "第%d季度"
 
 #. i18n: Year, short "Quarter", preferrably 2-3 letters.
-#: src/planner-scale-utils.c:373
+#: src/views/gantt/mg-scale-utils.c:373
 #, c-format
 msgid "%d, Qtr %d"
 msgstr "%d年，第%d季度"
 
 #. i18n: Short "Half year", prefferably 1 letter.
-#: src/planner-scale-utils.c:386
+#: src/views/gantt/mg-scale-utils.c:386
 #, c-format
 msgid "H%d"
 msgstr ""
 
 #. i18n: Year, short "Half year", prefferably 1 letter.
-#: src/planner-scale-utils.c:391
+#: src/views/gantt/mg-scale-utils.c:391
 #, c-format
 msgid "%04d, H%d"
 msgstr ""
 
-#: src/planner-task-tree.c:184
+#: src/views/gantt/mg-task-tree.c:185
 msgid "/_Insert task"
 msgstr "/插入任务(_I)"
 
-#: src/planner-task-tree.c:185
+#: src/views/gantt/mg-task-tree.c:186
 msgid "/_Insert subtask"
 msgstr "/插入子任务(_I)"
 
-#: src/planner-task-tree.c:186
+#: src/views/gantt/mg-task-tree.c:187
 msgid "/_Remove task"
 msgstr "/删除任务(_R)"
 
-#: src/planner-task-tree.c:188
+#: src/views/gantt/mg-task-tree.c:189
 msgid "/_Unlink task"
 msgstr "/取消任务关联(_U)"
 
-#: src/planner-task-tree.c:190
+#: src/views/gantt/mg-task-tree.c:191
 msgid "/_Edit task..."
 msgstr "/编辑任务(_E)..."
 
-#: src/planner-task-tree.c:2112
+#: src/views/gantt/mg-task-tree.c:2113
 msgid "mon"
 msgstr "月"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:2113
+#: src/views/gantt/mg-task-tree.c:2114
 msgid "month"
 msgstr "月"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:2114
+#: src/views/gantt/mg-task-tree.c:2115
 msgid "months"
 msgstr "月"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:2115
+#: src/views/gantt/mg-task-tree.c:2116
 msgid "w"
 msgstr "周"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:2116
+#: src/views/gantt/mg-task-tree.c:2117
 msgid "week"
 msgstr "周"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:2117
+#: src/views/gantt/mg-task-tree.c:2118
 msgid "weeks"
 msgstr "周"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:2118
+#: src/views/gantt/mg-task-tree.c:2119
 msgid "d"
 msgstr "天"
 
 #. day unit variant accepted in input
-#: src/planner-task-tree.c:2119
+#: src/views/gantt/mg-task-tree.c:2120
 msgid "day"
 msgstr "天"
 
 #. day unit variant accepted in input
-#: src/planner-task-tree.c:2121
+#: src/views/gantt/mg-task-tree.c:2122
 msgid "h"
 msgstr "小时"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:2122
+#: src/views/gantt/mg-task-tree.c:2123
 msgid "hour"
 msgstr "小时"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:2123
+#: src/views/gantt/mg-task-tree.c:2124
 msgid "hours"
 msgstr "小时"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:2124
+#: src/views/gantt/mg-task-tree.c:2125
 msgid "min"
 msgstr "分"
 
 #. minute unit variant accepted in input
-#: src/planner-task-tree.c:2125
+#: src/views/gantt/mg-task-tree.c:2126
 msgid "minute"
 msgstr "分"
 
 #. minute unit variant accepted in input
-#: src/planner-task-tree.c:2126
+#: src/views/gantt/mg-task-tree.c:2127
 msgid "minutes"
 msgstr "分"
 
-#: src/planner-task-view.c:173
+#: src/views/gantt/mg-task-view.c:173
 msgid "Tasks"
 msgstr "任务"
 
-#: src/planner-task-view.c:181
+#: src/views/gantt/mg-task-view.c:181
 msgid "_Tasks"
 msgstr "任务(_T)"
 
-#: src/planner-task-view.c:228
+#: src/views/gantt/mg-task-view.c:228
 msgid "Start"
 msgstr "启动"
 
-#: src/planner-task-view.c:229
+#: src/views/gantt/mg-task-view.c:229
 msgid "Finish"
 msgstr "完成"
 
-#: src/planner-task-view.c:231
+#: src/views/gantt/mg-task-view.c:231
 msgid "Slack"
 msgstr "迟缓"
 
-#: src/planner-task-view.c:232
+#: src/views/gantt/mg-task-view.c:232
 msgid "Cost"
 msgstr "成本"
 
-#: src/planner-task-view.c:438
+#: src/views/gantt/mg-task-view.c:438
 msgid "Edit custom task properties"
 msgstr "编辑自定义任务属性"
 
-#: src/planner-resource-view.c:248
+#: src/views/resources/GNOME_MrProject_ResourcesView.ui.h:1
+msgid "Edit _Custom Properties..."
+msgstr "编辑自定义属性(_C)..."
+
+#: src/views/resources/GNOME_MrProject_ResourcesView.ui.h:2
+msgid "Edit _Groups"
+msgstr "编辑组(_G)"
+
+#: src/views/resources/GNOME_MrProject_ResourcesView.ui.h:3
+msgid "Groups"
+msgstr "组"
+
+#: src/views/resources/GNOME_MrProject_ResourcesView.ui.h:4
+msgid "In_sert Resources..."
+msgstr "插入资源(_S)..."
+
+#: src/views/resources/GNOME_MrProject_ResourcesView.ui.h:9
+msgid "_Edit Resource Properties..."
+msgstr "编辑资源属性(_E)..."
+
+#: src/views/resources/GNOME_MrProject_ResourcesView.ui.h:10
+msgid "_Insert Resource"
+msgstr "插入资源(_I)"
+
+#: src/views/resources/GNOME_MrProject_ResourcesView.ui.h:11
+msgid "_Remove Resource"
+msgstr "删除资源(_R)"
+
+#: src/views/resources/mg-resource-view.c:248
 msgid "/_Insert resource"
 msgstr "/插入资源(_I)"
 
-#: src/planner-resource-view.c:249
+#: src/views/resources/mg-resource-view.c:249
 msgid "/_Remove resource"
 msgstr "/删除资源(_R)"
 
-#: src/planner-resource-view.c:250
+#: src/views/resources/mg-resource-view.c:250
 msgid "/_Edit resource..."
 msgstr "/编辑资源(_E)..."
 
-#: src/planner-resource-view.c:350
+#: src/views/resources/mg-resource-view.c:350
 msgid "_Resources"
 msgstr "资源(_R)"
 
-#: src/planner-resource-view.c:849
+#: src/views/resources/mg-resource-view.c:825
 msgid "Edit custom resource properties"
 msgstr "编辑自定义资源属性"
 
-#: src/planner-resource-view.c:1011
+#: src/views/resources/mg-resource-view.c:987
 msgid "Group"
 msgstr "组"
 
-#: src/planner-resource-view.c:1040
+#: src/views/resources/mg-resource-view.c:1016
 msgid "Email"
 msgstr "电子邮件"
 
-#~ msgid "Contribute to MrProject"
-#~ msgstr "为 MrProject 做出贡献"
+#: mrproject.desktop.in.h:1
+msgid "MrProject Project Management Tool"
+msgstr "MrProject 项目管理工具"
 
-#~ msgid "MrProject Project Management Tool"
-#~ msgstr "MrProject 项目管理工具"
+#: mrproject.desktop.in.h:2
+msgid "Project Management"
+msgstr "项目管理"

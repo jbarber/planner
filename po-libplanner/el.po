@@ -1,0 +1,157 @@
+# translation of el.po to Greek
+# This file is distributed under the same license as the PACKAGE package.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER.
+# Kostas Papadimas <pkst@gnome.org>, 2003.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: el\n"
+"POT-Creation-Date: 2003-11-20 04:23+0100\n"
+"PO-Revision-Date: 2003-11-20 19:04+0200\n"
+"Last-Translator: Kostas Papadimas <pkst@gnome.org>\n"
+"Language-Team: Greek <nls@tux.hellug.gr>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.0.2\n"
+
+#: mrproject/mrp-project.c:441
+msgid "Default"
+msgstr "Προεπιλογή"
+
+#: mrproject/mrp-project.c:749
+#, c-format
+msgid "Couldn't find a suitable file module for loading '%s'"
+msgstr "Δεν είναι δυνατή η εύρεση κατάλληλης μονάδας αρχείου για την φόρτωση '%s'"
+
+#: mrproject/mrp-project.c:770
+#: mrproject/mrp-project.c:1034
+msgid "No support for SQL storage built into this version of MrProject."
+msgstr "Δεν έχει γίνει built η υποστήριξη για SQL storage σε αυτή την έκδοση του MrProject."
+
+#: mrproject/mrp-project.c:807
+msgid "Invalid URI."
+msgstr "Μη έγκυρο URI"
+
+#: mrproject/mrp-project.c:928
+#, c-format
+msgid "Unable to find file writer identified by '%s'"
+msgstr "Αδυναμία εύρεσης  file writer identified από '%s'"
+
+#: mrproject/mrp-project.c:991
+msgid "Couldn't find a suitable file module for loading project"
+msgstr "Δεν είναι δυνατή η εύρεση κατάλληλης μονάδας αρχείου για την φόρτωση της εργασίας"
+
+#: mrproject/mrp-property.c:365
+msgid "Text"
+msgstr "Κείμενο"
+
+#: mrproject/mrp-property.c:367
+msgid "String list"
+msgstr "Λίστα αλφαριθμητικού"
+
+#: mrproject/mrp-property.c:369
+msgid "Integer number"
+msgstr "Ακέραιος αριθμός"
+
+#: mrproject/mrp-property.c:371
+msgid "Floating-point number"
+msgstr "Κινητός δεκαδικός αριθμός"
+
+#: mrproject/mrp-property.c:373
+msgid "Date"
+msgstr "Ημερομηνία"
+
+#: mrproject/mrp-property.c:375
+msgid "Duration"
+msgstr "Διάρκεια"
+
+#: mrproject/mrp-property.c:377
+msgid "Cost"
+msgstr "Κόστος"
+
+#: mrproject/mrp-property.c:380
+msgid "None"
+msgstr "Κανένα"
+
+#: mrproject/mrp-task-manager.c:1769
+msgid "Can not add a predecessor relation between a task and its ancestor."
+msgstr "Δεν είναι δυνατή η προσθήκη προγονικής σχέσης μεταξύ μιας εργασίας και του προγόνου της."
+
+#: mrproject/mrp-task-manager.c:1778
+#: mrproject/mrp-task-manager.c:1786
+msgid "Can not add a predecessor, because it would result in a loop."
+msgstr "Δεν είναι δυνατή η προσθήκη προγόνου, γιατί θα  έχει αποτέλεσμα βρόγχο (loop)."
+
+#: mrproject/mrp-task-manager.c:1821
+msgid "Can not move the task, since it would result in a loop."
+msgstr "Δεν είναι δυνατή η μετακίνηση έργου, μιας και θα έχει σαν αποτέλεσμα ένα βρόγχο (loop)."
+
+#: mrproject/mrp-task.c:1011
+msgid "Could not add a predecessor relation, because the tasks are already related."
+msgstr "Δεν είναι δυνατή η προσθήκη προγονικής σχέσης, επειδή τα έργα σχετίζονται ήδη"
+
+#: mrproject/mrp-day.c:54
+msgid "Working"
+msgstr "Εργάσιμη"
+
+#: mrproject/mrp-day.c:55
+msgid "A default working day"
+msgstr "Μια προκαθορισμένη εργάσιμη μέρα"
+
+#: mrproject/mrp-day.c:57
+msgid "Nonworking"
+msgstr "Μη εργάσιμη"
+
+#: mrproject/mrp-day.c:58
+msgid "A default non working day"
+msgstr "Μια προκαθορισμένη μη εργάσιμη μέρα"
+
+#: mrproject/mrp-day.c:60
+msgid "Use base"
+msgstr "Χρήση βάσης"
+
+#: mrproject/mrp-day.c:61
+msgid "Use day from base calendar"
+msgstr "Χρήση ημέρας από ημερολόγιου βάσης"
+
+#: storage-modules/mrproject-1/mrp-parser.c:1043
+#: storage-modules/mrproject-1/mrp-parser.c:1138
+msgid "Could not create XML tree"
+msgstr "Αδυναμία δημιουργίας δένδρου XML "
+
+#: storage-modules/mrproject-1/mrp-parser.c:1104
+msgid "Could not write XML file"
+msgstr "Αδυναμία δημιουργίας αρχείου  XML "
+
+#. Give up.
+#: storage-modules/sql/mrp-sql.c:229
+msgid "Invalid Unicode"
+msgstr "Μή έγκυρο Unicode"
+
+#: storage-modules/sql/mrp-sql.c:2209
+#, c-format
+msgid "The project '%s' has been changed by the user '%s' since you opened it. Do you want to save anyway?"
+msgstr "Η εργασία  '%s' έχει αλλάξει από τον χρήστη  '%s' απλο τότε που την ανοίξατε. Θέλετε να την αποθηκεύσετε οπωσδήποτε?"
+
+#: storage-modules/sql/mrp-sql.c:3447
+#, c-format
+msgid ""
+"Connection to database '%s' failed.\n"
+"%s"
+msgstr ""
+"Η σύνδεση στη βάση δεδομένων '%s' απέτυχε.\n"
+"%s"
+
+#: storage-modules/sql/mrp-storage-sql.c:205
+msgid "Invalid SQL URI (must start with 'sql://' and contain '#')."
+msgstr "Μη έγκυρο SQL URI (θα πρέπει να ξεκινάει με  'sql://' και να περιέχει '#')."
+
+#: storage-modules/sql/mrp-storage-sql.c:274
+msgid "Invalid SQL URI (invalid project id)."
+msgstr "Μη έγκυρο SQL URI (μη έγκυρο id εργασίας)."
+
+#: storage-modules/sql/mrp-storage-sql.c:282
+msgid "Invalid SQL URI (no database name specified)."
+msgstr "Μη έγκυρο SQL URI (δεν καθορίστηκε όνομα βάσης δεδομένων)"
+
