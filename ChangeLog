@@ -1,5 +1,14 @@
 2004-10-06  Richard Hult  <richard@imendio.com>
 
+	* src/planner-task-tree.c (planner_task_tree_insert_task): Select
+	the inserted task, not the parent. Fixes bug #151729.
+	(planner_task_tree_insert_subtask): Likewise.
+
+	* tests/Makefile.am: Don't add the tests to make check since the
+	loadable modules aren't found when doing distcheck. We should fix
+	this for real at some point instead of disabling the automatic
+	testing.
+
 	* data/images/Makefile.am: Rename the mime icon for the new mime
 	system, install in the right spot.
 	

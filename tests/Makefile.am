@@ -20,15 +20,17 @@ libselfcheck_la_SOURCES =                              \
 noinst_PROGRAMS = scheduler-test time-test calendar-test task-test
 
 scheduler_test_SOURCES = scheduler-test.c
-scheduler_test_LDFLAGS = $(top_builddir)/tests/libselfcheck.la
+scheduler_test_LDFLAGS = libselfcheck.la
 
 time_test_SOURCES = time-test.c
-time_test_LDFLAGS = $(top_builddir)/tests/libselfcheck.la
+time_test_LDFLAGS = libselfcheck.la
 
 calendar_test_SOURCES = calendar-test.c
-calendar_test_LDFLAGS = $(top_builddir)/tests/libselfcheck.la
+calendar_test_LDFLAGS = libselfcheck.la
 
 task_test_SOURCES = task-test.c
-task_test_LDFLAGS = $(top_builddir)/tests/libselfcheck.la
+task_test_LDFLAGS = libselfcheck.la
 
-TESTS = scheduler-test time-test calendar-test task-test
+# The loadable modules can't be found at distcheck time so disable the
+# tests for distcheck.
+#TESTS = scheduler-test time-test calendar-test task-test

@@ -10,7 +10,6 @@ if HAVE_EDS_BACKEND
 eds_backend_DIR = eds-backend
 endif
 
-
 SUBDIRS = \
 	po 				\
 	libplanner			\
@@ -47,4 +46,3 @@ distuninstallcheck_listfiles = find . -type f -print | grep -v '^\./var/scrollke
  grep -v '/share/mime/' | grep -v '/share/omf/planner'
 
 DISTCLEANFILES = intltool-extract intltool-merge intltool-update 
-

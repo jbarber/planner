@@ -2526,8 +2526,12 @@ planner_task_tree_insert_subtask (PlannerTaskTree *tree)
 	position = gtk_tree_path_get_indices (path)[depth - 1];
 
 	if (depth > 1) {
-		gtk_tree_path_up (path);
-		parent = task_tree_get_task_from_path (tree, path);
+		GtkTreePath *parent_path;
+
+		parent_path = gtk_tree_path_copy (path);
+		gtk_tree_path_up (parent_path);
+		parent = task_tree_get_task_from_path (tree, parent_path);
+		gtk_tree_path_free (parent_path);
 	} else {
 		parent = NULL;
 	}
@@ -2535,8 +2539,6 @@ planner_task_tree_insert_subtask (PlannerTaskTree *tree)
 	cmd = planner_task_cmd_insert (tree->priv->main_window, 
 				       parent, position, work, work, NULL);
 	
-	/* cmd = planner_task_cmd_insert (tree, path, work, work); */
-
 	if (!GTK_WIDGET_HAS_FOCUS (tree)) {
 		gtk_widget_grab_focus (GTK_WIDGET (tree));
 	}
@@ -2548,7 +2550,7 @@ planner_task_tree_insert_subtask (PlannerTaskTree *tree)
 	gtk_tree_view_set_cursor (tree_view,
 				  path,
 				  gtk_tree_view_get_column (tree_view, 0),
-				  TRUE);
+				  FALSE);
 	
 	planner_task_tree_set_anchor (tree, path);
 	
@@ -2598,21 +2600,22 @@ planner_task_tree_insert_task (PlannerTaskTree *tree)
 		}
 	}
 
-	/*planner_cmd_manager_begin_transaction (planner_window_get_cmd_manager (priv->main_window),
-	  _("Insert Task"));*/
-		
 	work = mrp_calendar_day_get_total_work (
 		mrp_project_get_calendar (priv->project),
 		mrp_day_get_work ());
-	
-	/* cmd = planner_task_cmd_insert (tree, path, work, work); */
 	
 	depth = gtk_tree_path_get_depth (path);
 	position = gtk_tree_path_get_indices (path)[depth - 1];
 
 	if (depth > 1) {
-		gtk_tree_path_up (path);
-		parent = task_tree_get_task_from_path (tree, path);
+		GtkTreePath *parent_path;
+
+		parent_path = gtk_tree_path_copy (path);
+		gtk_tree_path_up (parent_path);
+
+		parent = task_tree_get_task_from_path (tree, parent_path);
+
+		gtk_tree_path_free (parent_path);
 	} else {
 		parent = NULL;
 	}
@@ -2629,10 +2632,10 @@ planner_task_tree_insert_task (PlannerTaskTree *tree)
 	gtk_tree_view_set_cursor (tree_view,
 				  path,
 				  gtk_tree_view_get_column (tree_view, 0),
-				  TRUE);
+				  FALSE);
 
 	planner_task_tree_set_anchor (tree, path);
-	
+
 	g_list_free (list);
 }
 
