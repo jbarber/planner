@@ -118,16 +118,18 @@ activate (PlannerView *view)
 
 	gtk_ui_manager_insert_action_group (priv->ui_manager, priv->actions, 0);
 	priv->merged_id = gtk_ui_manager_add_ui_from_file (priv->ui_manager,
-							   DATADIR"/planner/ui/time-table-view.ui",
+							   DATADIR "/planner/ui/time-table-view.ui",
 							   &error);
 	if (error != NULL) {
-		g_message("Building menu failed: %s", error->message);
-		g_message ("Couldn't load: %s",DATADIR"/planner/ui/time-table-view.ui");
-                g_error_free(error);
+		g_message ("Building menu failed: %s", error->message);
+		g_message ("Couldn't load: %s", DATADIR "/planner/ui/time-table-view.ui");
+                g_error_free (error);
 	}
-	gtk_ui_manager_ensure_update(priv->ui_manager);
+	gtk_ui_manager_ensure_update (priv->ui_manager);
 
         ttable_view_update_zoom_sensitivity (view);
+
+	gtk_widget_grab_focus (priv->tree);
 }
 
 G_MODULE_EXPORT void

@@ -1,5 +1,14 @@
 2004-10-13  Richard Hult  <richard@imendio.com>
 
+	* src/planner-*-view.c: Grab focus on activate so we don't
+	end up with the toolbar focused.
+
+	* data/glade/html-output.glade:
+	* src/planner-html-plugin.c: Activate on enter, use save
+	filechooser instead of open.
+
+2004-10-13  Richard Hult  <richard@imendio.com>
+
 	* libplanner/mrp-xsl.c (xml_planner_pre012_write, html_write):
 	Check error after saving to XML.
 

@@ -158,14 +158,14 @@ activate (PlannerView *view)
 
 	gtk_ui_manager_insert_action_group (priv->ui_manager, priv->actions, 0);
 	priv->merged_id = gtk_ui_manager_add_ui_from_file (priv->ui_manager,
-							   DATADIR"/planner/ui/task-view.ui",
+							   DATADIR "/planner/ui/task-view.ui",
 							   &error);
 	if (error != NULL) {
-		g_message("Building menu failed: %s", error->message);
-		g_message ("Couldn't load: %s",DATADIR"/planner/ui/task-view.ui");
+		g_message ("Building menu failed: %s", error->message);
+		g_message ("Couldn't load: %s", DATADIR "/planner/ui/task-view.ui");
                 g_error_free(error);
 	}
-	gtk_ui_manager_ensure_update(priv->ui_manager);
+	gtk_ui_manager_ensure_update (priv->ui_manager);
 
 	/* Set the initial UI state. */
 
@@ -174,10 +174,13 @@ activate (PlannerView *view)
 	planner_task_tree_set_highlight_critical (PLANNER_TASK_TREE (priv->tree),
 						  show_critical);
 
-	gtk_toggle_action_set_active (GTK_TOGGLE_ACTION(gtk_action_group_get_action (priv->actions, "HighlightCriticalTasks")),
-				      show_critical);
+	gtk_toggle_action_set_active (
+		GTK_TOGGLE_ACTION (gtk_action_group_get_action (priv->actions, "HighlightCriticalTasks")),
+		show_critical);
 	
-	task_view_selection_changed_cb (PLANNER_TASK_TREE (view->priv->tree), view);
+	task_view_selection_changed_cb (PLANNER_TASK_TREE (priv->tree), view);
+
+	gtk_widget_grab_focus (priv->tree);
 }
 
 G_MODULE_EXPORT void

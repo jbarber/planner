@@ -47,6 +47,7 @@
 	    <widget class="GtkButton" id="ok_button">
 	      <property name="visible">True</property>
 	      <property name="can_default">True</property>
+	      <property name="has_default">True</property>
 	      <property name="can_focus">True</property>
 	      <property name="label">gtk-save</property>
 	      <property name="use_stock">True</property>
@@ -140,6 +141,7 @@
 			  <property name="directory_entry">False</property>
 			  <property name="modal">False</property>
 			  <property name="use_filechooser">True</property>
+			  <property name="filechooser_action">GTK_FILE_CHOOSER_ACTION_SAVE</property>
 
 			  <child internal-child="entry">
 			    <widget class="GtkEntry" id="combo-entry3">
@@ -150,7 +152,7 @@
 			      <property name="max_length">0</property>
 			      <property name="text" translatable="yes"></property>
 			      <property name="has_frame">True</property>
-			      <property name="invisible_char" translatable="yes">*</property>
+			      <property name="invisible_char">*</property>
 			      <property name="activates_default">False</property>
 			    </widget>
 			  </child>
@@ -231,6 +233,7 @@
 			  <property name="directory_entry">True</property>
 			  <property name="modal">False</property>
 			  <property name="use_filechooser">False</property>
+			  <property name="filechooser_action">GTK_FILE_CHOOSER_ACTION_OPEN</property>
 
 			  <child internal-child="entry">
 			    <widget class="GtkEntry" id="combo-entry1">
@@ -241,7 +244,7 @@
 			      <property name="max_length">0</property>
 			      <property name="text" translatable="yes"></property>
 			      <property name="has_frame">True</property>
-			      <property name="invisible_char" translatable="yes">*</property>
+			      <property name="invisible_char">*</property>
 			      <property name="activates_default">False</property>
 			    </widget>
 			  </child>
@@ -270,7 +273,7 @@
 			      <property name="max_length">0</property>
 			      <property name="text" translatable="yes"></property>
 			      <property name="has_frame">True</property>
-			      <property name="invisible_char" translatable="yes">*</property>
+			      <property name="invisible_char">*</property>
 			      <property name="activates_default">False</property>
 			    </widget>
 			  </child>

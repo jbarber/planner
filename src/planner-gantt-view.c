@@ -177,14 +177,15 @@ activate (PlannerView *view)
 
 	gtk_ui_manager_insert_action_group (priv->ui_manager, priv->actions, 0);
 	priv->merged_id = gtk_ui_manager_add_ui_from_file (priv->ui_manager,
-							   DATADIR"/planner/ui/gantt-view.ui",
+							   DATADIR "/planner/ui/gantt-view.ui",
 							   &error);
 	if (error != NULL) {
-		g_message("Building menu failed: %s", error->message);
-		g_message ("Couldn't load: %s",DATADIR"/planner/ui/gantt-view.ui");
-                g_error_free(error);
+		g_message ("Building menu failed: %s", error->message);
+		g_message ("Couldn't load: %s", DATADIR "/planner/ui/gantt-view.ui");
+                g_error_free (error);
 	}
-	gtk_ui_manager_ensure_update(priv->ui_manager);
+
+	gtk_ui_manager_ensure_update (priv->ui_manager);
 
 	/* Set the initial UI state. */
 	show_critical = planner_gantt_chart_get_highlight_critical_tasks (
@@ -193,12 +194,14 @@ activate (PlannerView *view)
 	planner_task_tree_set_highlight_critical (PLANNER_TASK_TREE (priv->tree),
 						  show_critical);
 
-	gtk_toggle_action_set_active (GTK_TOGGLE_ACTION(gtk_action_group_get_action (priv->actions, "HighlightCriticalTasks")),
-				      show_critical);
+	gtk_toggle_action_set_active (
+		GTK_TOGGLE_ACTION (gtk_action_group_get_action (priv->actions, "HighlightCriticalTasks")),
+		show_critical);
 
 	gantt_view_selection_changed_cb (PLANNER_TASK_TREE (priv->tree), view);
 	gantt_view_update_zoom_sensitivity (view);
 
+	gtk_widget_grab_focus (priv->tree);
 }
 
 G_MODULE_EXPORT void
@@ -207,16 +210,17 @@ deactivate (PlannerView *view)
 	PlannerViewPriv *priv;
 
 	priv = view->priv;
+	
 	gtk_ui_manager_remove_ui (priv->ui_manager, priv->merged_id);
 }
 
 G_MODULE_EXPORT void
 init (PlannerView *view, PlannerWindow *main_window)
 {
-	PlannerViewPriv  *priv;
-	GtkIconFactory   *icon_factory;
-	GtkIconSet       *icon_set;
-	GdkPixbuf        *pixbuf;
+	PlannerViewPriv *priv;
+	GtkIconFactory  *icon_factory;
+	GtkIconSet      *icon_set;
+	GdkPixbuf       *pixbuf;
 	
 	priv = g_new0 (PlannerViewPriv, 1);
 	view->priv = priv;

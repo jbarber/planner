@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
- * Copyright (C) 2003 Imendio AB
+ * Copyright (C) 2003-2004 Imendio AB
  * Copyright (C) 2003 CodeFactory AB
  * Copyright (C) 2003 Richard Hult <richard@imendio.com>
  * Copyright (C) 2003 Mikael Hallendal <micke@imendio.com>
@@ -49,6 +49,8 @@ static void html_plugin_ok_button_clicked     (GtkButton         *button,
 					       PlannerPlugin     *plugin);
 static void html_plugin_cancel_button_clicked (GtkButton         *button,
 					       PlannerPlugin     *plugin);
+static void html_plugin_activated             (GtkEntry          *entry,
+					       GtkWidget         *ok_button);
 static void html_plugin_local_toggled         (GtkToggleButton   *button,
 					       PlannerPlugin     *plugin);
 static void html_plugin_server_toggled        (GtkToggleButton   *button,
@@ -72,8 +74,8 @@ static guint n_action_entries = G_N_ELEMENTS (action_entries);
 
 
 static void
-html_plugin_export (GtkAction         *action,
-		    gpointer           user_data)
+html_plugin_export (GtkAction *action,
+		    gpointer   user_data)
 {
 	PlannerPluginPriv *priv = PLANNER_PLUGIN (user_data)->priv;
 	GladeXML          *glade;
@@ -112,7 +114,14 @@ html_plugin_export (GtkAction         *action,
 			  G_CALLBACK (html_plugin_server_toggled),
 			  user_data);
 
+	g_signal_connect (gnome_file_entry_gtk_entry (GNOME_FILE_ENTRY (priv->local_fileentry)),
+			  "activate",
+			  G_CALLBACK (html_plugin_activated),
+			  ok_button);
+
 	gtk_widget_show (priv->dialog);
+
+	g_object_unref (glade);
 }
 
 static void 
@@ -186,6 +195,12 @@ html_plugin_cancel_button_clicked (GtkButton *button, PlannerPlugin *plugin)
 	PlannerPluginPriv *priv = plugin->priv;
 	
 	gtk_widget_destroy (priv->dialog);
+}
+
+static void
+html_plugin_activated (GtkEntry *entry, GtkWidget *ok_button)
+{
+	gtk_widget_activate (ok_button);
 }
 
 static void

@@ -308,7 +308,7 @@ typedef struct {
 } ResourceCmdEditProperty;
 
 typedef struct {
-	PlannerCmd   base;
+	PlannerCmd    base;
 
 	MrpResource  *resource;
 	MrpProperty  *property;  
@@ -332,17 +332,19 @@ activate (PlannerView *view)
 
 	gtk_ui_manager_insert_action_group (priv->ui_manager, priv->actions, 0);
 	priv->merged_id = gtk_ui_manager_add_ui_from_file (priv->ui_manager,
-							   DATADIR"/planner/ui/resource-view.ui",
+							   DATADIR "/planner/ui/resource-view.ui",
 							   &error);
 	if (error != NULL) {
-		g_message("Building menu failed: %s", error->message);
-		g_message ("Couldn't load: %s",DATADIR"/planner/ui/resource-view.ui");
-                g_error_free(error);
+		g_message ("Building menu failed: %s", error->message);
+		g_message ("Couldn't load: %s", DATADIR "/planner/ui/resource-view.ui");
+                g_error_free (error);
 	}
-	gtk_ui_manager_ensure_update(priv->ui_manager);
+	gtk_ui_manager_ensure_update (priv->ui_manager);
 
 	/* Set the initial UI state. */
 	resource_view_update_ui (view);
+
+	gtk_widget_grab_focus (GTK_WIDGET (priv->tree_view));
 }
 
 static char *
