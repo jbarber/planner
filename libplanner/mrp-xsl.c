@@ -31,6 +31,7 @@
 #include <string.h>
 #include <libplanner/mrp-file-module.h>
 #include <libplanner/mrp-private.h>
+#include <libplanner/mrp-intl.h>
 
 void              init          (MrpFileModule    *module,
 				 MrpApplication   *application);
@@ -70,13 +71,11 @@ html_write (MrpFileWriter  *writer,
                                                                                 
         final_doc = xsltApplyStylesheet (stylesheet, doc, NULL);
                                                                                 
-        xmlFree (doc);
-
 	ret = TRUE;
-	
+
 	if (xsltSaveResultToString (&buffer, &len, final_doc, stylesheet) != -1) {
 		result = gnome_vfs_create (&handle, uri, GNOME_VFS_OPEN_WRITE,
-					   FALSE, 644);
+					   FALSE, 0644);
 		
 		if (result == GNOME_VFS_OK) { 
 			gnome_vfs_write (handle, buffer, (GnomeVFSFileSize) len, NULL);
@@ -100,6 +99,7 @@ html_write (MrpFileWriter  *writer,
 	
 	xsltFreeStylesheet (stylesheet);
         xmlFree (final_doc);
+        xmlFree (doc);
 
 	return ret;
 }

@@ -169,6 +169,7 @@ html_output_plugin_ok_button_clicked (GtkButton *button, PlannerPlugin *plugin)
 			
 		path = gtk_entry_get_text (entry);
 		html_output_plugin_do_local_export (plugin, path);
+		gtk_widget_destroy (priv->dialog);
 	}
 }
 

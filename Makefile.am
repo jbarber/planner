@@ -24,4 +24,6 @@ pkgconfig_DATA = libplanner-1.pc
 DISTCHECK_CONFIGURE_FLAGS = --enable-gtk-doc
 
 # Workaround broken scrollkeeper that doesn't remove its files on uninstall
-distuninstallcheck_listfiles = find . -type f -print | grep -v '^\./var/scrollkeeper'
+distuninstallcheck_listfiles = find . -type f -print | grep -v '^\./var/scrollkeeper' 	\
+	intltool-extract intltool-merge intltool-update
+

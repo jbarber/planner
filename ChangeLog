@@ -1,9 +1,18 @@
 2003-12-11  Richard Hult  <richard@imendio.com>
 
+	* Makefile.am: Fix distcheck.
+	* libplanner/mrp-xsl.c: (html_write): Tweak.
+	* src/planner-html-plugin.c:
+	(html_output_plugin_ok_button_clicked): Close the dialog when
+	we're done.
+
+2003-12-11  Richard Hult  <richard@imendio.com>
+
 	* configure.in: Add gnome-vfs.
 	* data/glade/html-output.glade:
 	* data/ui/main-window.ui:
 	* src/planner-html-plugin.c:
+
 	* libplanner/mrp-error.h:
 	* libplanner/mrp-xsl.c: Start to implement the "save to location
 	feature". Based on patch from Bernardo Silveira.
