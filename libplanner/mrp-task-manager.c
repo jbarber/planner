@@ -44,6 +44,7 @@ struct _MrpTaskManagerPriv {
 
 	/* Whether the task tree needs to be recalculated. */
 	gboolean    needs_recalc;
+	gboolean    in_recalc;
 };
 
 typedef struct {
@@ -1568,8 +1569,12 @@ mrp_task_manager_recalc (MrpTaskManager *manager,
 	g_return_if_fail (manager->priv->root != NULL);
 
 	priv = manager->priv;
-
+	
 	if (priv->block_scheduling) {
+		return;
+	}
+
+	if (priv->in_recalc) {
 		return;
 	}
 	
@@ -1590,7 +1595,9 @@ mrp_task_manager_recalc (MrpTaskManager *manager,
 	if (!project) {
 		return;
 	}
-	
+
+	priv->in_recalc = TRUE;
+
 	if (priv->needs_rebuild) {
 		mrp_task_manager_rebuild (manager);
 	}
@@ -1603,6 +1610,7 @@ mrp_task_manager_recalc (MrpTaskManager *manager,
 	task_manager_do_backward_pass (manager);
 
 	priv->needs_recalc = FALSE;
+	priv->in_recalc = FALSE;
 }
 
 static void

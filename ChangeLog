@@ -1,3 +1,8 @@
+2004-04-19  Richard Hult  <richard@imendio.com>
+
+	* libplanner/mrp-task-manager.c: (mrp_task_manager_recalc): Don't
+	let recalc trigger a recursive recalc.
+
 2004-04-19  Tomasz Kłoczko <kloczek@pld.org.pl>
 
 	* docs/sql/Makefile.am: updated EXTRA_DIST files list.
