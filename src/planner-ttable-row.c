@@ -869,7 +869,7 @@ ttable_row_realize (GnomeCanvasItem *item)
 			2);
 		
 		g_object_add_weak_pointer (G_OBJECT (complete_stipple),
-					   (gpointer *) complete_stipple);
+					   (gpointer) &complete_stipple);
 	} else {
 		g_object_ref (complete_stipple);
 	}
@@ -882,7 +882,7 @@ ttable_row_realize (GnomeCanvasItem *item)
 			1);
 		
 		g_object_add_weak_pointer (G_OBJECT (break_stipple),
-					   (gpointer *) break_stipple);
+					   (gpointer) &break_stipple);
 	} else {
 		g_object_ref (break_stipple);
 	}
