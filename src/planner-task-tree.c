@@ -2285,7 +2285,7 @@ task_tree_add_column (GtkTreeView *tree,
 		gtk_tree_view_column_set_resizable (col, TRUE);
 		gtk_tree_view_column_set_min_width (col, 100);
 		gtk_tree_view_append_column (tree, col);
-
+		gtk_tree_view_column_set_sizing (col, GTK_TREE_VIEW_COLUMN_FIXED);
 		gtk_tree_view_set_expander_column (tree, col);
                                              
 		break;

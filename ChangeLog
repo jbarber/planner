@@ -1,6 +1,10 @@
 2005-02-18  Richard Hult  <richard@imendio.com>
 
-	* configure.in: Bump for a pre-release.
+	* src/planner-task-tree.c (task_tree_add_column): Set sizing to
+	fixed for name column. Fixes bug #151780.
+
+	* src/planner-resource-view.c (resource_view_setup_tree_view):
+	Likewise for name and short name.
 
 	* data/glade/task-dialog.glade: Change the work/duration
 	spinbuttons to entries.

@@ -1156,7 +1156,8 @@ resource_view_setup_tree_view (PlannerView *view)
 	col = gtk_tree_view_column_new_with_attributes (_("Name"), cell, NULL);
 	gtk_tree_view_column_set_resizable (col, TRUE);
 	gtk_tree_view_column_set_min_width (col, 150);
-	
+	gtk_tree_view_column_set_sizing (col, GTK_TREE_VIEW_COLUMN_FIXED);
+
 	gtk_tree_view_column_set_cell_data_func (col, cell, 
 						 resource_view_name_data_func,
 						 NULL, NULL);
@@ -1170,13 +1171,14 @@ resource_view_setup_tree_view (PlannerView *view)
 
 	gtk_tree_view_append_column (tree_view, col);
 
-	/* short_name */
+	/* Short name. */
 	cell = gtk_cell_renderer_text_new ();
 	g_object_set (cell, "editable", TRUE, NULL);
 
 	col = gtk_tree_view_column_new_with_attributes (_("Short name"), cell, NULL);
 	gtk_tree_view_column_set_resizable (col, TRUE);
-	/* gtk_tree_view_column_set_min_width (col, 150); */
+	gtk_tree_view_column_set_sizing (col, GTK_TREE_VIEW_COLUMN_FIXED);
+	gtk_tree_view_column_set_min_width (col, 75);
 	
 	gtk_tree_view_column_set_cell_data_func (col, cell, 
 						 resource_view_short_name_data_func,
