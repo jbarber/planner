@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: planner\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-02-19 16:55+0100\n"
+"POT-Creation-Date: 2005-02-20 01:18+0100\n"
 "PO-Revision-Date: 2004-07-04 16:55+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -1003,7 +1003,7 @@ msgstr "Arbete"
 
 #: ../src/planner-gantt-print.c:542 ../src/planner-gantt-row.c:692
 #: ../src/planner-html-plugin.c:130 ../src/planner-task-tree.c:1564
-#: ../src/planner-window.c:1838
+#: ../src/planner-window.c:1864
 msgid "Unnamed"
 msgstr "Namnlös"
 
@@ -1226,7 +1226,7 @@ msgstr ""
 "\"%s\" är en katalog.\n"
 "Ange ett filnamn och försök igen."
 
-#: ../src/planner-html-plugin.c:188 ../src/planner-window.c:1552
+#: ../src/planner-html-plugin.c:188 ../src/planner-window.c:1572
 #: ../src/planner-xml-planner-plugin.c:125
 #, c-format
 msgid "File \"%s\" exists, do you want to overwrite it?"
@@ -1243,6 +1243,30 @@ msgstr "GEOMETRI"
 #: ../src/planner-main.c:77
 msgid "planner: --geometry cannot be used with more than one file."
 msgstr "planner: --geometry kan bara användas med en fil."
+
+#: ../src/planner-msp-plugin.c:49
+msgid "MS Project XML..."
+msgstr "MS Project XML..."
+
+#: ../src/planner-msp-plugin.c:49
+msgid "Import an MS Project XML file"
+msgstr "Importera en MS Project XML-fil"
+
+#: ../src/planner-msp-plugin.c:113
+msgid "Couldn't import file."
+msgstr "Kunde inte importera fil."
+
+#: ../src/planner-msp-plugin.c:197
+msgid "Import a File"
+msgstr "Importera en fil"
+
+#: ../src/planner-msp-plugin.c:205
+msgid "XML Files"
+msgstr "XML-filer"
+
+#: ../src/planner-msp-plugin.c:210 ../src/planner-window.c:748
+msgid "All Files"
+msgstr "Alla filer"
 
 #: ../src/planner-phase-dialog.c:532
 msgid "Insert phase"
@@ -1274,15 +1298,15 @@ msgstr "SS"
 msgid "SF"
 msgstr "SF"
 
-#: ../src/planner-print-dialog.c:154
+#: ../src/planner-print-dialog.c:157
 msgid "Print Project"
 msgstr "Skriv ut projekt"
 
-#: ../src/planner-print-dialog.c:161
+#: ../src/planner-print-dialog.c:164
 msgid "Select views"
 msgstr "Välj vyer"
 
-#: ../src/planner-print-dialog.c:184
+#: ../src/planner-print-dialog.c:187
 msgid "Select the views to print:"
 msgstr "Välj de vyer som ska skrivas ut:"
 
@@ -1334,15 +1358,15 @@ msgstr "Vill du verkligen ta bort egenskaper \"%s\" från projektet?"
 msgid "Could not create properties dialog."
 msgstr "Kunde inte skapa egenskapsdialog."
 
-#: ../src/planner-project-properties.c:2021
+#: ../src/planner-project-properties.c:2027
 msgid "Add project property"
 msgstr "Lägg till projektegenskap"
 
-#: ../src/planner-project-properties.c:2131
+#: ../src/planner-project-properties.c:2137
 msgid "Remove project property"
 msgstr "Ta bort projektegenskap"
 
-#: ../src/planner-project-properties.c:2224
+#: ../src/planner-project-properties.c:2230
 msgid "Edit project property value"
 msgstr "Redigera projektegenskapsvärde"
 
@@ -1841,176 +1865,172 @@ msgstr "Resurs_utnyttjande"
 msgid "Could not open view plugin file '%s'\n"
 msgstr "Kunde inte öppna vyinsticksfilen \"%s\"\n"
 
-#: ../src/planner-window.c:217
+#: ../src/planner-window.c:218
 msgid "_File"
 msgstr "_Arkiv"
 
-#: ../src/planner-window.c:221
+#: ../src/planner-window.c:222
 msgid "_New Project"
 msgstr "_Nytt projekt"
 
-#: ../src/planner-window.c:221
+#: ../src/planner-window.c:222
 msgid "Create a new project"
 msgstr "Skapa ett nytt projekt"
 
-#: ../src/planner-window.c:225
+#: ../src/planner-window.c:226
 msgid "_Open..."
 msgstr "_Öppna..."
 
-#: ../src/planner-window.c:225
+#: ../src/planner-window.c:226
 msgid "Open a project"
 msgstr "Öppna ett projekt"
 
-#: ../src/planner-window.c:228
+#: ../src/planner-window.c:229
 msgid "_Import"
 msgstr "_Importera"
 
-#: ../src/planner-window.c:232 ../src/planner-window.c:1421
+#: ../src/planner-window.c:233 ../src/planner-window.c:1441
 msgid "_Save"
 msgstr "_Spara"
 
-#: ../src/planner-window.c:232
+#: ../src/planner-window.c:233
 msgid "Save the current project"
 msgstr "Spara det aktuella projekt"
 
-#: ../src/planner-window.c:235
+#: ../src/planner-window.c:236
 msgid "_Export"
 msgstr "_Exportera"
 
-#: ../src/planner-window.c:238
+#: ../src/planner-window.c:239
 msgid "Save _As..."
 msgstr "Spara s_om..."
 
-#: ../src/planner-window.c:238
+#: ../src/planner-window.c:239
 msgid "Save the current project with a different name"
 msgstr "Spara det aktuella projektet med ett annat namn"
 
-#: ../src/planner-window.c:241
+#: ../src/planner-window.c:242
 msgid "_Print..."
 msgstr "S_kriv ut..."
 
-#: ../src/planner-window.c:241
+#: ../src/planner-window.c:242
 msgid "Print the current project"
 msgstr "Skriv ut aktuellt projekt"
 
-#: ../src/planner-window.c:244
+#: ../src/planner-window.c:245
 msgid "Print Pre_view"
 msgstr "_Förhandsgranskning"
 
-#: ../src/planner-window.c:244
+#: ../src/planner-window.c:245
 msgid "Print preview of the current project"
 msgstr "Förhandsgranska aktuellt projekt"
 
-#: ../src/planner-window.c:247
+#: ../src/planner-window.c:248
 msgid "_Close"
 msgstr "S_täng"
 
-#: ../src/planner-window.c:247
+#: ../src/planner-window.c:248
 msgid "Close the current file"
 msgstr "Stäng aktuell fil"
 
-#: ../src/planner-window.c:250
+#: ../src/planner-window.c:251
 msgid "_Quit"
 msgstr "_Avsluta"
 
-#: ../src/planner-window.c:250
+#: ../src/planner-window.c:251
 msgid "Exit the program"
 msgstr "Avsluta programmet"
 
-#: ../src/planner-window.c:254
+#: ../src/planner-window.c:255
 msgid "_Edit"
 msgstr "_Redigera"
 
-#: ../src/planner-window.c:257
+#: ../src/planner-window.c:258
 msgid "_Undo"
 msgstr "_Ångra"
 
-#: ../src/planner-window.c:257
+#: ../src/planner-window.c:258
 msgid "Undo the last action"
 msgstr "Ångra den senaste åtgärden"
 
-#: ../src/planner-window.c:260
+#: ../src/planner-window.c:261
 msgid "_Redo"
 msgstr "_Gör om"
 
-#: ../src/planner-window.c:260
+#: ../src/planner-window.c:261
 msgid "Redo the undone action"
 msgstr "Gör om den ångrade åtgärden"
 
-#: ../src/planner-window.c:264
+#: ../src/planner-window.c:265
 msgid "_View"
 msgstr "_Visa"
 
-#: ../src/planner-window.c:268
+#: ../src/planner-window.c:269
 msgid "_Actions"
 msgstr "_Åtgärder"
 
-#: ../src/planner-window.c:272
+#: ../src/planner-window.c:273
 msgid "_Project"
 msgstr "_Projekt"
 
-#: ../src/planner-window.c:275
+#: ../src/planner-window.c:276
 msgid "_Manage Calendars"
 msgstr "_Hantera kalendrar"
 
-#: ../src/planner-window.c:278
+#: ../src/planner-window.c:279
 msgid "Edit Day _Types"
 msgstr "Redigera dag_typer"
 
-#: ../src/planner-window.c:281
+#: ../src/planner-window.c:282
 msgid "Edit Project _Phases"
 msgstr "Redigera projekt_faser"
 
-#: ../src/planner-window.c:284
+#: ../src/planner-window.c:285
 msgid "_Edit Project Properties"
 msgstr "_Redigera projektegenskaper"
 
-#: ../src/planner-window.c:284
+#: ../src/planner-window.c:285
 msgid "Edit the project properties"
 msgstr "Redigera projektegenskaperna"
 
-#: ../src/planner-window.c:292
+#: ../src/planner-window.c:293
 msgid "_Help"
 msgstr "_Hjälp"
 
-#: ../src/planner-window.c:295
+#: ../src/planner-window.c:296
 msgid "_User Guide"
 msgstr "_Användarmanual"
 
-#: ../src/planner-window.c:295
+#: ../src/planner-window.c:296
 msgid "Show the Planner User Guide"
 msgstr "Visa Planner användarmanual"
 
-#: ../src/planner-window.c:298
+#: ../src/planner-window.c:299
 msgid "_About"
 msgstr "_Om"
 
-#: ../src/planner-window.c:298
+#: ../src/planner-window.c:299
 msgid "About this application"
 msgstr "Om detta program"
 
 #. Note: these strings are leaked.
-#: ../src/planner-window.c:568
+#: ../src/planner-window.c:565
 #, c-format
 msgid "Switch to the view \"%s\""
 msgstr "Växla till vyn \"%s\""
 
-#: ../src/planner-window.c:712
+#: ../src/planner-window.c:732
 msgid "Open a File"
 msgstr "Öppna en fil"
 
-#: ../src/planner-window.c:722
+#: ../src/planner-window.c:742
 msgid "Planner Files"
 msgstr "Planner-filer"
-
-#: ../src/planner-window.c:728
-msgid "All Files"
-msgstr "Alla filer"
 
 #. I18n: Translators, list your names here, newline separated if there
 #. * are more than one, to appear in the about box.
 #.
-#: ../src/planner-window.c:1132 ../src/planner-window.c:1144
+#: ../src/planner-window.c:1152 ../src/planner-window.c:1164
 msgid "translator-credits"
 msgstr ""
 "Christian Rose\n"
@@ -2018,58 +2038,58 @@ msgstr ""
 "Skicka synpunkter på översättningen till sv@li.org"
 
 #. "Copyright \xc2\xa9"
-#: ../src/planner-window.c:1141
+#: ../src/planner-window.c:1161
 msgid "A Project Management application for the GNOME desktop"
 msgstr "Ett projekthanteringsprogram för GNOME-skrivbordet"
 
-#: ../src/planner-window.c:1160
+#: ../src/planner-window.c:1180
 msgid "The Planner Homepage"
 msgstr "Planners hemsida"
 
-#: ../src/planner-window.c:1361
+#: ../src/planner-window.c:1381
 msgid "If you don't save, changes made the last minute will be discarded."
 msgstr ""
 "Om du inte sparar kommer ändringarna gjorda den senaste minuten att gå "
 "förlorade."
 
-#: ../src/planner-window.c:1366
+#: ../src/planner-window.c:1386
 #, c-format
 msgid "If you don't save, changes made the last %d minutes will be discarded."
 msgstr ""
 "Om du inte sparar kommer ändringarna gjorda de senaste %d minuterna att gå "
 "förlorade."
 
-#: ../src/planner-window.c:1371
+#: ../src/planner-window.c:1391
 msgid "If you don't save, changes made the last hour will be discarded."
 msgstr ""
 "Om du inte sparar kommer ändringarna gjorda den senaste timmen att gå "
 "förlorade."
 
-#: ../src/planner-window.c:1376
+#: ../src/planner-window.c:1396
 #, c-format
 msgid "If you don't save, changes made the last %d hours will be discarded."
 msgstr ""
 "Om du inte sparar kommer ändringarna gjorda de senaste %d timmarna att gå "
 "förlorade."
 
-#: ../src/planner-window.c:1383
+#: ../src/planner-window.c:1403
 #, c-format
 msgid "Save changes to document '%s' before closing?"
 msgstr "Spara ändringarna i dokumentet \"%s\" innan det stängs?"
 
-#: ../src/planner-window.c:1408
+#: ../src/planner-window.c:1428
 msgid "C_lose without saving"
 msgstr "S_täng utan att spara"
 
-#: ../src/planner-window.c:1414
+#: ../src/planner-window.c:1434
 msgid "_Cancel"
 msgstr "_Avbryt"
 
-#: ../src/planner-window.c:1513
+#: ../src/planner-window.c:1533
 msgid "Save a File"
 msgstr "Spara en fil"
 
-#: ../src/planner-window.c:1795
+#: ../src/planner-window.c:1821
 msgid ""
 "You have opened a file that was saved with an old version of Planner.\n"
 "\n"
@@ -2098,11 +2118,11 @@ msgstr ""
 "\"Återställ alla restriktioner\" i \"Redigera\"-menyn."
 
 #. Hack.
-#: ../src/planner-window.c:1830
+#: ../src/planner-window.c:1856
 msgid "Unnamed database project"
 msgstr "Namnlöst databasprojekt"
 
-#: ../src/planner-window.c:1944
+#: ../src/planner-window.c:1970
 #, c-format
 msgid "Open '%s'"
 msgstr "Öppna \"%s\""
