@@ -912,7 +912,6 @@ task_dialog_complete_focus_out_cb (GtkWidget     *w,
 				   DialogData    *data)
 {
 	guint         current_complete;
-	/* guint        *focus_in_complete;*/
 	guint         focus_in_complete;
 	GValue        value = { 0 };
 	PlannerCmd   *cmd;
@@ -926,7 +925,6 @@ task_dialog_complete_focus_out_cb (GtkWidget     *w,
 	current_complete = gtk_spin_button_get_value (GTK_SPIN_BUTTON (w));
 
 	if (focus_in_complete == current_complete) {
-		/* g_free (focus_in_complete); */
 		return FALSE;
 	}
 
@@ -937,8 +935,6 @@ task_dialog_complete_focus_out_cb (GtkWidget     *w,
 
 	cmd = task_cmd_edit_property_focus (data->main_window, 
 					    data->task, "percent_complete", &value);
-
-	/* g_free (focus_in_complete); */
 
 	return FALSE;
 }
@@ -2274,7 +2270,3 @@ planner_task_dialog_new (PlannerWindow *window,
 	
 	return dialog;
 }
-
-
-
-
