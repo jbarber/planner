@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: planner\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-12-04 16:40+0100\n"
+"POT-Creation-Date: 2004-03-30 11:23+0300\n"
 "PO-Revision-Date: 2003-03-28 03:28--500\n"
 "Last-Translator: Yuriy Syrota <yuri@renome.rovno.ua>\n"
 "Language-Team: Ukrainian <linux@linux.org.ua>\n"
@@ -15,8 +15,439 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: data/planner.desktop.in.h:1
+#: data/glade/add-predecessor.glade.h:1 data/glade/calendar-dialog.glade.h:4
+#: data/glade/html-output.glade.h:2 data/glade/new-property.glade.h:1
+#: data/glade/project-properties.glade.h:1
+#: data/glade/resource-dialog.glade.h:1
+#: data/glade/resource-input-dialog.glade.h:1 data/glade/sql.glade.h:1
+#: data/glade/task-dialog.glade.h:4 data/glade/task-input-dialog.glade.h:1
+msgid "*"
+msgstr "*"
+
+#: data/glade/add-predecessor.glade.h:2
+msgid "Add Predecessor"
+msgstr ""
+
+#: data/glade/add-predecessor.glade.h:3
+msgid "_Lag:"
+msgstr "_Відставання:"
+
+#: data/glade/add-predecessor.glade.h:4 data/glade/calendar-dialog.glade.h:35
+#: data/glade/new-property.glade.h:5 data/glade/project-properties.glade.h:10
+#: data/glade/resource-dialog.glade.h:12
+#: data/glade/resource-input-dialog.glade.h:7
+#: data/glade/task-dialog.glade.h:14 data/glade/task-input-dialog.glade.h:4
+msgid "_Name:"
+msgstr "_Назва:"
+
+#: data/glade/add-predecessor.glade.h:5
+msgid "_Relation type:"
+msgstr "Тип _відношення:"
+
+#: data/glade/calendar-dialog.glade.h:1
+msgid ""
+"\n"
+"The selected day type has the following working hours:"
+msgstr ""
+
+# @ Gabber gEdit gnome-utils nautilus
+# * Yuriy Syrota <rasta@renome.rovno.ua>
+#: data/glade/calendar-dialog.glade.h:3 data/glade/html-output.glade.h:1
+#: data/glade/task-dialog.glade.h:1
+msgid "    "
+msgstr "    "
+
+# @ BomberMaze balsa gnome-libs gnome-utils kbattleship kbattleship.po kde-i18n_4:2.2.2-2_knetmgr.po knetmgr.po knu kuickshow libkscan.po
+# * Yuriy Syrota <rasta@renome.rovno.ua>
+#: data/glade/calendar-dialog.glade.h:5
+msgid "-"
+msgstr "-"
+
+#: data/glade/calendar-dialog.glade.h:6
+msgid "<b>Calendar:</b>"
+msgstr "<b>Календар:</b>"
+
+#: data/glade/calendar-dialog.glade.h:7
+msgid "<b>Day types</b>"
+msgstr "<b>Типи днів</b>"
+
+#: data/glade/calendar-dialog.glade.h:8
+msgid "<b>Working hours</b>"
+msgstr "<b>Робочі години</b>"
+
+#: data/glade/calendar-dialog.glade.h:9
+msgid "<b>Working time</b>"
+msgstr "<b>Робочий час</b>"
+
+#: data/glade/calendar-dialog.glade.h:10
+msgid "Add Day Type"
+msgstr "Дадати тип дня"
+
+# @ Dia GIMP Scribus ToDoManager WindowMaker authconfig-4.2.9-2.src.rpm.dir_1_1_authconfig-_po_uk.po drakcronat ee gdm gimp-std-plugins- glade- gnome-libs gnome-media gphoto gqview gtk kdelibs ktelnet xchat xfce xmms
+# * Yuriy Syrota <rasta@renome.rovno.ua>
+#: data/glade/calendar-dialog.glade.h:11
+msgid "Apply"
+msgstr "Застосувати"
+
+#: data/glade/calendar-dialog.glade.h:12
+msgid "C_opy an existing calendar"
+msgstr ""
+
+# @ gtk profterm
+# * Yuriy Syrota <rasta@renome.rovno.ua>
+#: data/glade/calendar-dialog.glade.h:13
+msgid "C_reate"
+msgstr "С_творити"
+
+# @ mrproject
+# * Yuriy Syrota <rasta@renome.rovno.ua>
+#: data/glade/calendar-dialog.glade.h:14
 #, fuzzy
+msgid "Calendar Editor"
+msgstr "Календар"
+
+#: data/glade/calendar-dialog.glade.h:15
+msgid "Create an _empty calendar"
+msgstr ""
+
+#: data/glade/calendar-dialog.glade.h:16
+#, fuzzy
+msgid "Custom working time"
+msgstr "Нетипові властивості"
+
+# @ Galeon- anjuta evolution gEdit galeon gnome-libs gnumeric gtk gtkhtml libgnomeui
+# * Yuriy Syrota <rasta@renome.rovno.ua>
+#: data/glade/calendar-dialog.glade.h:17
+#, fuzzy
+msgid "Day type:"
+msgstr "В_ставити"
+
+#: data/glade/calendar-dialog.glade.h:18
+msgid "Default Week"
+msgstr ""
+
+#: data/glade/calendar-dialog.glade.h:19
+msgid "Default week..."
+msgstr ""
+
+#: data/glade/calendar-dialog.glade.h:20
+msgid "Edit Day Types"
+msgstr ""
+
+#: data/glade/calendar-dialog.glade.h:21
+#, fuzzy
+msgid "Edit Working Time"
+msgstr "Робочий час..."
+
+# @ GIMP balsa cupsdconf.po evolution gEdit kcmbind kdelibs kregexpeditor.po ksirc ktalk kword nautilus pan pybliographer
+# * Yuriy Syrota <rasta@renome.rovno.ua>
+#: data/glade/calendar-dialog.glade.h:22
+msgid "From:"
+msgstr "Від:"
+
+# @ korganizer
+# * Andriy Rysin <arysin@yahoo.com>
+#: data/glade/calendar-dialog.glade.h:23
+msgid "New Calendar"
+msgstr "Новий календар"
+
+# @ korganizer
+# * Andriy Rysin <arysin@yahoo.com>
+#: data/glade/calendar-dialog.glade.h:24
+#, fuzzy
+msgid "Select a Calendar"
+msgstr "Новий календар"
+
+#: data/glade/calendar-dialog.glade.h:25
+msgid ""
+"Select a weekday and the day type to use for that day in the default week "
+"for this calendar.\n"
+msgstr ""
+
+#: data/glade/calendar-dialog.glade.h:27
+msgid "Set day type to:"
+msgstr ""
+
+# @ GIMP balsa bug-buddy cupsdconf.po evolution gEdit kcmbind kdelibs kregexpeditor.po ksirc ktalk kword nautilus pybliographer screem
+# * Yuriy Syrota <rasta@renome.rovno.ua>
+#: data/glade/calendar-dialog.glade.h:28
+msgid "To:"
+msgstr "До:"
+
+#: data/glade/calendar-dialog.glade.h:29
+msgid "Use working time from derived calendar"
+msgstr ""
+
+#: data/glade/calendar-dialog.glade.h:30
+msgid "Week day:"
+msgstr "День тижня:"
+
+#: data/glade/calendar-dialog.glade.h:31
+msgid "Working time..."
+msgstr "Робочий час..."
+
+#: data/glade/calendar-dialog.glade.h:32
+msgid "_Derive from a calendar"
+msgstr ""
+
+#: data/glade/calendar-dialog.glade.h:33
+#, fuzzy
+msgid "_Existing calendars:"
+msgstr "/_Змінити завдання..."
+
+#: data/glade/calendar-dialog.glade.h:34
+msgid "_Name of the new calendar:"
+msgstr "_Назва нового календаря:"
+
+# @ dr-genius gal gnumeric profterm
+# * Yuriy Syrota <rasta@renome.rovno.ua>
+#: data/glade/calendar-dialog.glade.h:36
+msgid "_New..."
+msgstr "_Новий..."
+
+#: data/glade/group-dialog.glade.h:1
+msgid "Group Editor"
+msgstr ""
+
+#: data/glade/html-output.glade.h:3
+msgid "<b>Save to</b>"
+msgstr ""
+
+#: data/glade/html-output.glade.h:4 data/ui/html-plugin.ui.h:1
+msgid "Export to HTML"
+msgstr "Експортувати в HTML"
+
+#: data/glade/html-output.glade.h:5
+msgid "Local file:"
+msgstr ""
+
+#: data/glade/html-output.glade.h:6
+msgid "Save to HTML File"
+msgstr "Зберегти у файлі HTML"
+
+#: data/glade/html-output.glade.h:7
+msgid "Web location:"
+msgstr ""
+
+#: data/glade/new-property.glade.h:2
+msgid "Add Property"
+msgstr "Додати властивість"
+
+#: data/glade/new-property.glade.h:3
+msgid "_Description:"
+msgstr "_Опис: "
+
+#: data/glade/new-property.glade.h:4
+msgid "_Label:"
+msgstr "По_значка:"
+
+# @ gconf-editor gnome-applets gnumeric
+# * Yuriy Syrota <rasta@renome.rovno.ua>
+#: data/glade/new-property.glade.h:6 data/glade/resource-dialog.glade.h:14
+msgid "_Type:"
+msgstr "_Тип:"
+
+#: data/glade/project-properties.glade.h:2
+#, fuzzy
+msgid "Custom"
+msgstr "Вартість"
+
+#: data/glade/project-properties.glade.h:3
+msgid "Edit Project Phases"
+msgstr "Змінити фази проекту"
+
+#: data/glade/project-properties.glade.h:4
+#: data/glade/resource-dialog.glade.h:5 data/glade/task-dialog.glade.h:6
+msgid "General"
+msgstr "Загальне"
+
+#: data/glade/project-properties.glade.h:5
+msgid "New Project Phase"
+msgstr "Нова фаза проекту"
+
+#: data/glade/project-properties.glade.h:6
+msgid "Project Properties"
+msgstr "Властивості проекту..."
+
+#: data/glade/project-properties.glade.h:7
+msgid "Select..."
+msgstr "Вибрати..."
+
+#: data/glade/project-properties.glade.h:8
+msgid "_Calendar:"
+msgstr "_Календар:"
+
+# @ mrproject
+#: data/glade/project-properties.glade.h:9
+msgid "_Manager:"
+msgstr "_Керівник:"
+
+# @ evolution
+# * Yuriy Syrota <rasta@renome.rovno.ua>
+#: data/glade/project-properties.glade.h:11
+msgid "_Organization:"
+msgstr "_Організація:"
+
+#: data/glade/project-properties.glade.h:12
+msgid "_Phase:"
+msgstr "_Фаза:"
+
+#: data/glade/project-properties.glade.h:13
+msgid "_Start:"
+msgstr "_Початок:"
+
+#: data/glade/property-dialog.glade.h:1
+msgid "Custom Properties"
+msgstr "Нетипові властивості"
+
+#: data/glade/resource-dialog.glade.h:2
+msgid "C_ost:"
+msgstr "_Вартість:"
+
+# @ mrproject
+# * Yuriy Syrota <rasta@renome.rovno.ua>
+#: data/glade/resource-dialog.glade.h:3
+msgid "Calendar"
+msgstr "Календар"
+
+#: data/glade/resource-dialog.glade.h:4
+#, fuzzy
+msgid "Edit Calendars..."
+msgstr "/_Змінити завдання..."
+
+# @ mrproject
+# * Yuriy Syrota <rasta@renome.rovno.ua>
+#: data/glade/resource-dialog.glade.h:6 data/glade/task-dialog.glade.h:7
+msgid "Notes"
+msgstr "Нотатки"
+
+#: data/glade/resource-dialog.glade.h:7
+msgid "Optional - overrides resource name in Gantt view."
+msgstr ""
+
+#: data/glade/resource-dialog.glade.h:8
+msgid ""
+"Select the calendar to use for this resource. If you want to use the default "
+"calendar of the project, select 'None'. "
+msgstr ""
+
+#: data/glade/resource-dialog.glade.h:9
+#: data/glade/resource-input-dialog.glade.h:4
+msgid "_Email:"
+msgstr "_Ел. пошта:"
+
+# @ Gabber
+# * Yuriy Syrota <rasta@renome.rovno.ua>
+#: data/glade/resource-dialog.glade.h:10
+#: data/glade/resource-input-dialog.glade.h:5
+msgid "_Group:"
+msgstr "_Група:"
+
+# @ mrproject
+#: data/glade/resource-dialog.glade.h:11
+#, fuzzy
+msgid "_Insert time stamp"
+msgstr "Вставити часову мітку"
+
+#: data/glade/resource-dialog.glade.h:13
+#: data/glade/resource-input-dialog.glade.h:8
+msgid "_Short name:"
+msgstr "_Коротка назва:"
+
+#: data/glade/resource-input-dialog.glade.h:2
+msgid "Insert Resource"
+msgstr "Внести ресурс"
+
+#: data/glade/resource-input-dialog.glade.h:3
+msgid "Optional - overrides resource name in gantt view."
+msgstr ""
+
+# @ mrproject
+# * Yuriy Syrota <rasta@renome.rovno.ua>
+#: data/glade/resource-input-dialog.glade.h:6
+#: data/glade/task-input-dialog.glade.h:3
+msgid "_Insert"
+msgstr "В_нести"
+
+#: data/glade/sql.glade.h:2
+msgid "Open Database"
+msgstr "Відкрити базу даних"
+
+#: data/glade/sql.glade.h:3
+msgid "Select a Project"
+msgstr "Вибрати проект"
+
+#: data/glade/sql.glade.h:4
+msgid "The database contains the following projects. Select a project to open:"
+msgstr "База даних містить такі проекти. Виберіть один для відкривання:"
+
+#: data/glade/sql.glade.h:5
+msgid "_Database:"
+msgstr "_База даних:"
+
+#: data/glade/sql.glade.h:6
+msgid "_Password:"
+msgstr "_Пароль:"
+
+#: data/glade/sql.glade.h:7
+msgid "_Server:"
+msgstr "_Сервер:"
+
+#: data/glade/sql.glade.h:8
+msgid "_Username:"
+msgstr "_Користувач"
+
+#: data/glade/task-dialog.glade.h:3
+#, no-c-format
+msgid "%"
+msgstr "%"
+
+#: data/glade/task-dialog.glade.h:5
+msgid "C_omplete:"
+msgstr "_Завершення:"
+
+#: data/glade/task-dialog.glade.h:8
+msgid "Predecessors"
+msgstr "Попередні"
+
+#: data/glade/task-dialog.glade.h:9 src/planner-resource-view.c:393
+msgid "Resources"
+msgstr "Ресурси"
+
+#: data/glade/task-dialog.glade.h:10
+msgid "_Duration:"
+msgstr "_Тривалість:"
+
+#: data/glade/task-dialog.glade.h:11
+msgid "_Fixed duration"
+msgstr "_Фіксована тривалість"
+
+#: data/glade/task-dialog.glade.h:12
+msgid "_Insert Time Stamp"
+msgstr "Вставити позначку _часу"
+
+#: data/glade/task-dialog.glade.h:13
+msgid "_Milestone"
+msgstr "_Етап"
+
+#: data/glade/task-dialog.glade.h:15
+msgid "_Priority:"
+msgstr "Пр_іоритет:"
+
+#: data/glade/task-dialog.glade.h:16 data/glade/task-input-dialog.glade.h:5
+msgid "_Work:"
+msgstr "_Робота:"
+
+#. day unit variant accepted in input
+#: data/glade/task-dialog.glade.h:17 src/planner-task-tree.c:2355
+msgid "days"
+msgstr "дні"
+
+#: data/glade/task-input-dialog.glade.h:2
+msgid "Insert Task"
+msgstr "В_нести завдання"
+
+#: data/planner.desktop.in.h:1
 msgid "Planner Project Management"
 msgstr "Керування проектами"
 
@@ -24,11 +455,155 @@ msgstr "Керування проектами"
 msgid "Project Management"
 msgstr "Керування проектами"
 
-# @ gEdit nautilus
+#: data/ui/gantt-view.ui.h:1 data/ui/task-view.ui.h:1
+#, fuzzy
+msgid "I_ndent Task"
+msgstr "За_брати відступ для завдання"
+
+#: data/ui/gantt-view.ui.h:2 data/ui/task-view.ui.h:2
+msgid "In_sert Tasks..."
+msgstr "В_нести завдання..."
+
+#: data/ui/gantt-view.ui.h:3 data/ui/task-view.ui.h:3
+#: src/planner-application.c:83
+msgid "Indent"
+msgstr "Відступ"
+
+#: data/ui/gantt-view.ui.h:4 data/ui/resource-view.ui.h:5
+#: data/ui/task-view.ui.h:4 src/planner-application.c:55
+#: src/planner-application.c:111
+msgid "Insert"
+msgstr "Внести"
+
+#: data/ui/gantt-view.ui.h:5 data/ui/task-view.ui.h:5
+#: src/planner-application.c:76
+msgid "Link"
+msgstr ""
+
+#: data/ui/gantt-view.ui.h:6 data/ui/task-view.ui.h:6
+msgid "Move Task Do_wn"
+msgstr "Перенести завдання вниз"
+
+#: data/ui/gantt-view.ui.h:7 data/ui/task-view.ui.h:7
+msgid "Move Task _Up"
+msgstr "перенести завдання вверх"
+
+#: data/ui/gantt-view.ui.h:8 data/ui/task-view.ui.h:8
+#: src/planner-application.c:104
+msgid "Move down"
+msgstr "Вниз"
+
+#: data/ui/gantt-view.ui.h:9 data/ui/task-view.ui.h:9
+#: src/planner-application.c:97
+msgid "Move up"
+msgstr "Вверх"
+
+#: data/ui/gantt-view.ui.h:10 data/ui/resource-view.ui.h:6
+#: data/ui/task-view.ui.h:10 src/planner-application.c:62
+#: src/planner-application.c:118
+msgid "Remove"
+msgstr "Вилучити"
+
+#: data/ui/gantt-view.ui.h:11 data/ui/task-view.ui.h:11
+msgid "Reset _All Constraints"
+msgstr "Скасувати _всі обмеження"
+
+#: data/ui/gantt-view.ui.h:12 data/ui/task-view.ui.h:12
+msgid "Reset _Constraint"
+msgstr "Скасувати _обмеження"
+
+# @ evolution gEdit gnumeric gtkhtml libgnomeui mc nautilus
 # * Yuriy Syrota <rasta@renome.rovno.ua>
-#: libegg/recent-files/egg-recent-vfs-utils.c:90
-msgid " (invalid Unicode)"
-msgstr "(неправильний знак Унікоду)"
+#: data/ui/gantt-view.ui.h:13 data/ui/resource-view.ui.h:7
+#: data/ui/task-view.ui.h:13
+msgid "Select _All"
+msgstr "Вибрати вс_е"
+
+# @ mrproject
+#: data/ui/gantt-view.ui.h:14 data/ui/resource-view.ui.h:8
+#: data/ui/task-view.ui.h:14
+msgid "Select all tasks"
+msgstr "Вибрати всі завдання"
+
+#: data/ui/gantt-view.ui.h:15
+msgid "Test"
+msgstr "Тест"
+
+#: data/ui/gantt-view.ui.h:16 data/ui/task-view.ui.h:15
+msgid "Unin_dent Task"
+msgstr "За_брати відступ для завдання"
+
+# @ mrproject
+# * Yuriy Syrota <rasta@renome.rovno.ua>
+#: data/ui/gantt-view.ui.h:17 data/ui/task-view.ui.h:16
+#: src/planner-application.c:90
+msgid "Unindent"
+msgstr "Забрати відступ"
+
+#: data/ui/gantt-view.ui.h:18 data/ui/task-view.ui.h:17
+#: src/planner-application.c:69
+msgid "Unlink"
+msgstr ""
+
+# @ GIMP eog kdelibs kivio korganizer kpixmap kuickshow nautilus
+# * Yuriy Syrota <rasta@renome.rovno.ua>
+#: data/ui/gantt-view.ui.h:19
+msgid "Zoom In"
+msgstr "Збільшити"
+
+# @ GIMP eog kdelibs kivio korganizer kpixmap kuickshow nautilus
+# * Yuriy Syrota <rasta@renome.rovno.ua>
+#: data/ui/gantt-view.ui.h:20
+msgid "Zoom Out"
+msgstr "Зменшити"
+
+# @ GIMP eog kdelibs kivio korganizer kpixmap kuickshow nautilus
+# * Yuriy Syrota <rasta@renome.rovno.ua>
+#: data/ui/gantt-view.ui.h:21
+msgid "Zoom To Fit"
+msgstr "Підігнати"
+
+#: data/ui/gantt-view.ui.h:22
+msgid "Zoom To _Fit"
+msgstr "Піді_гнати"
+
+# @ Dia eog ggv gtk nautilus
+# * Yuriy Syrota <rasta@renome.rovno.ua>
+#: data/ui/gantt-view.ui.h:23
+msgid "Zoom _Out"
+msgstr "З_меншити"
+
+#: data/ui/gantt-view.ui.h:24 data/ui/task-view.ui.h:19
+msgid "_Edit Task Properties..."
+msgstr "_Змінити властивості завдання..."
+
+#: data/ui/gantt-view.ui.h:25 data/ui/task-view.ui.h:20
+msgid "_Highlight Critical Tasks"
+msgstr "Під_світити критичні завдання"
+
+#: data/ui/gantt-view.ui.h:26 data/ui/task-view.ui.h:21
+msgid "_Insert Task"
+msgstr "В_нести завдання"
+
+#: data/ui/gantt-view.ui.h:27 data/ui/task-view.ui.h:22
+#, fuzzy
+msgid "_Link Tasks"
+msgstr "За_брати відступ для завдання"
+
+#: data/ui/gantt-view.ui.h:28 data/ui/task-view.ui.h:23
+msgid "_Remove Task"
+msgstr "Ви_лучити завдання"
+
+#: data/ui/gantt-view.ui.h:29 data/ui/task-view.ui.h:24
+#, fuzzy
+msgid "_Unlink Task"
+msgstr "За_брати відступ для завдання"
+
+# @ eog
+# * Yuriy Syrota <rasta@renome.rovno.ua>
+#: data/ui/gantt-view.ui.h:30
+msgid "_Zoom In"
+msgstr "З_більшити"
 
 # @ mrproject
 # * Yuriy Syrota <rasta@renome.rovno.ua>
@@ -80,38 +655,29 @@ msgstr "Вирізати вибране"
 
 #: data/ui/main-window.ui.h:9
 msgid "Edit Day _Types"
-msgstr ""
+msgstr "_Типи днів..."
 
 #: data/ui/main-window.ui.h:10
-#, fuzzy
 msgid "Edit Project _Phases"
-msgstr "Змінити фази проекту"
+msgstr "_Фази проекту..."
 
 # @ mrproject
 #: data/ui/main-window.ui.h:11
 msgid "Edit the project properties"
 msgstr "Змінити властивості проекту"
 
-# @ mrproject
-# * Yuriy Syrota <rasta@renome.rovno.ua>
 #: data/ui/main-window.ui.h:12
 msgid "Exit the program"
 msgstr "Вийти з програми"
 
-# @ mrproject
-# * Yuriy Syrota <rasta@renome.rovno.ua>
 #: data/ui/main-window.ui.h:13
 msgid "New"
 msgstr "Новий"
 
-# @ mrproject
-# * Andriy Rysin <arysin@yahoo.com>
 #: data/ui/main-window.ui.h:14
 msgid "New..."
 msgstr "Новий..."
 
-# @ mrproject
-# * Yuriy Syrota <rasta@renome.rovno.ua>
 #: data/ui/main-window.ui.h:15
 msgid "Open"
 msgstr "Відкрити"
@@ -126,16 +692,13 @@ msgstr "Відкрити проект"
 msgid "Paste the clipboard"
 msgstr "Вставити вміст кишені"
 
-# @ mrproject
-# * Yuriy Syrota <rasta@renome.rovno.ua>
 #: data/ui/main-window.ui.h:18
 msgid "Print"
-msgstr "Друкувати"
+msgstr "Друк"
 
 #: data/ui/main-window.ui.h:19
-#, fuzzy
 msgid "Print preview of the current project"
-msgstr "Надрукувати поточний проект"
+msgstr "Попередній перегляд друку поточного проекту"
 
 #: data/ui/main-window.ui.h:20
 msgid "Print the current project"
@@ -147,14 +710,10 @@ msgstr "Надрукувати поточний проект"
 msgid "Redo the undone action"
 msgstr "Повторити скасовану дію"
 
-# @ mrproject
-# * Yuriy Syrota <rasta@renome.rovno.ua>
 #: data/ui/main-window.ui.h:22
 msgid "Save"
 msgstr "Зберегти"
 
-# @ mrproject
-# * Yuriy Syrota <rasta@renome.rovno.ua>
 #: data/ui/main-window.ui.h:23
 msgid "Save _As..."
 msgstr "Зберегти _як..."
@@ -164,28 +723,21 @@ msgid "Save the current project"
 msgstr "Зберегти поточний проект"
 
 #: data/ui/main-window.ui.h:25
-#, fuzzy
 msgid "Save the current project with a different name"
-msgstr "Зберегти поточний проект"
+msgstr "Зберегти поточний проект з іншою назвою"
 
 #: data/ui/main-window.ui.h:26
-msgid "Show the MrProject User Guide"
-msgstr ""
+msgid "Show the Planner User Guide"
+msgstr "Показати довідку користувача програми"
 
-# @ mrproject
-# * Yuriy Syrota <rasta@renome.rovno.ua>
 #: data/ui/main-window.ui.h:27
 msgid "Undo the last action"
 msgstr "Скасувати останню дію"
 
-# @ Gabber eog gEdit glade- libgnomeui nautilus sawfish
-# * Yuriy Syrota <rasta@renome.rovno.ua>
 #: data/ui/main-window.ui.h:28
 msgid "_About"
-msgstr "_Про"
+msgstr "_Про програму"
 
-# @ evolution
-# * Yuriy Syrota <rasta@renome.rovno.ua>
 #: data/ui/main-window.ui.h:29
 msgid "_Actions"
 msgstr "_Дії"
@@ -201,15 +753,13 @@ msgstr "За_крити"
 msgid "_Copy"
 msgstr "С_копіювати"
 
-# @ mrproject
-# * Yuriy Syrota <rasta@renome.rovno.ua>
 #: data/ui/main-window.ui.h:32
 msgid "_Edit"
 msgstr "_Редагування"
 
 #: data/ui/main-window.ui.h:33
 msgid "_Edit Project Properties"
-msgstr "_Змінити властивості проекту"
+msgstr "_Властивості проекту"
 
 # @ mrproject
 # * Yuriy Syrota <rasta@renome.rovno.ua>
@@ -217,18 +767,13 @@ msgstr "_Змінити властивості проекту"
 msgid "_File"
 msgstr "_Файл"
 
-# @ mrproject
-# * Yuriy Syrota <rasta@renome.rovno.ua>
 #: data/ui/main-window.ui.h:35
 msgid "_Help"
 msgstr "_Довідка"
 
-# @ korganizer
-# * Andriy Rysin <arysin@yahoo.com>
 #: data/ui/main-window.ui.h:36
-#, fuzzy
 msgid "_Manage Calendars"
-msgstr "Новий календар"
+msgstr "_Календарі..."
 
 # @ glade-
 # * Yuriy Syrota <rasta@renome.rovno.ua>
@@ -245,20 +790,18 @@ msgstr "_Відкрити..."
 # @ gtk profterm
 # * Yuriy Syrota <rasta@renome.rovno.ua>
 #: data/ui/main-window.ui.h:39
-#, fuzzy
 msgid "_Paste"
-msgstr "С_творити"
+msgstr "В_ставити"
 
 #: data/ui/main-window.ui.h:40
-#, fuzzy
 msgid "_Print Preview"
-msgstr "Надрукувати проект"
+msgstr "_Попередній перегляд"
 
 # @ Galeon- balsa eog evolution gEdit galeon gnumeric libgnomeui
 # * Yuriy Syrota <rasta@renome.rovno.ua>
 #: data/ui/main-window.ui.h:41
 msgid "_Print..."
-msgstr "На_друкувати..."
+msgstr "_Друк..."
 
 # @ anjuta gIDE glade-
 # * Yuriy Syrota <rasta@renome.rovno.ua>
@@ -274,19 +817,19 @@ msgstr "Ви_йти"
 
 # @ mrproject
 # * Yuriy Syrota <rasta@renome.rovno.ua>
-#: data/ui/main-window.ui.h:44
+#: data/ui/main-window.ui.h:44 src/planner-window.c:1168
 msgid "_Redo"
 msgstr "_Повторити"
 
 # @ mrproject
 # * Yuriy Syrota <rasta@renome.rovno.ua>
-#: data/ui/main-window.ui.h:45 src/planner-main-window.c:1127
+#: data/ui/main-window.ui.h:45 src/planner-window.c:1271
 msgid "_Save"
 msgstr "З_берегти"
 
 # @ mrproject
 # * Yuriy Syrota <rasta@renome.rovno.ua>
-#: data/ui/main-window.ui.h:46
+#: data/ui/main-window.ui.h:46 src/planner-window.c:1142
 msgid "_Undo"
 msgstr "_Скасувати"
 
@@ -297,190 +840,6 @@ msgstr "Посібник _користувача"
 #: data/ui/main-window.ui.h:48
 msgid "_View"
 msgstr "_Відображення"
-
-#: data/ui/gantt-view.ui.h:1 data/ui/task-view.ui.h:1
-#, fuzzy
-msgid "I_ndent Task"
-msgstr "За_брати відступ для завдання"
-
-#: data/ui/gantt-view.ui.h:2 data/ui/task-view.ui.h:2
-#, fuzzy
-msgid "In_sert Tasks..."
-msgstr "В_нести завдання"
-
-# @ mrproject
-# * Yuriy Syrota <rasta@renome.rovno.ua>
-#: data/ui/gantt-view.ui.h:3 data/ui/task-view.ui.h:3
-#: src/planner-application.c:75
-msgid "Indent"
-msgstr "Відступ"
-
-# @ mrproject
-# * Yuriy Syrota <rasta@renome.rovno.ua>
-#: data/ui/gantt-view.ui.h:4 data/ui/task-view.ui.h:4
-#: data/ui/resource-view.ui.h:5 src/planner-application.c:54
-#: src/planner-application.c:103
-msgid "Insert"
-msgstr "Внести"
-
-# @ mrproject
-# * Yuriy Syrota <rasta@renome.rovno.ua>
-#: data/ui/gantt-view.ui.h:5 data/ui/task-view.ui.h:5
-#, fuzzy
-msgid "Move Task Do_wn"
-msgstr "Перенести вниз"
-
-#: data/ui/gantt-view.ui.h:6 data/ui/task-view.ui.h:6
-#, fuzzy
-msgid "Move Task _Up"
-msgstr "Ви_лучити завдання"
-
-# @ mrproject
-# * Yuriy Syrota <rasta@renome.rovno.ua>
-#: data/ui/gantt-view.ui.h:7 data/ui/task-view.ui.h:7
-#: src/planner-application.c:96
-msgid "Move down"
-msgstr "Перенести вниз"
-
-# @ mrproject
-# * Yuriy Syrota <rasta@renome.rovno.ua>
-#: data/ui/gantt-view.ui.h:8 data/ui/task-view.ui.h:8
-#: src/planner-application.c:89
-msgid "Move up"
-msgstr "Перенести вверх"
-
-# @ mrproject
-# * Taras Boychuk <btr1@torba.com>
-#: data/ui/gantt-view.ui.h:9 data/ui/task-view.ui.h:9
-#: data/ui/resource-view.ui.h:6 src/planner-application.c:61
-#: src/planner-application.c:110
-msgid "Remove"
-msgstr "Вилучити"
-
-#: data/ui/gantt-view.ui.h:10 data/ui/task-view.ui.h:10
-msgid "Reset _All Constraints"
-msgstr ""
-
-#: data/ui/gantt-view.ui.h:11 data/ui/task-view.ui.h:11
-msgid "Reset _Constraint"
-msgstr ""
-
-# @ evolution gEdit gnumeric gtkhtml libgnomeui mc nautilus
-# * Yuriy Syrota <rasta@renome.rovno.ua>
-#: data/ui/gantt-view.ui.h:12 data/ui/task-view.ui.h:12
-#: data/ui/resource-view.ui.h:7
-msgid "Select _All"
-msgstr "Вибрати вс_е"
-
-# @ mrproject
-#: data/ui/gantt-view.ui.h:13 data/ui/task-view.ui.h:13
-#: data/ui/resource-view.ui.h:8
-msgid "Select all tasks"
-msgstr "Вибрати всі завдання"
-
-# @ anaconda-7.3.92-4.src.rpm.dir_1_1_anaconda-_po_uk.po caitoo control-center evolution gnumeric kcmiwatcher kcmkamera kdelibs keduca ktalk userdrake xfce
-# * Yuriy Syrota <rasta@renome.rovno.ua>
-#: data/ui/gantt-view.ui.h:14
-#, fuzzy
-msgid "Test"
-msgstr "Тест"
-
-#: data/ui/gantt-view.ui.h:15 data/ui/task-view.ui.h:14
-#, fuzzy
-msgid "Un_link Task"
-msgstr "За_брати відступ для завдання"
-
-#: data/ui/gantt-view.ui.h:16 data/ui/task-view.ui.h:15
-msgid "Unin_dent Task"
-msgstr "За_брати відступ для завдання"
-
-# @ mrproject
-# * Yuriy Syrota <rasta@renome.rovno.ua>
-#: data/ui/gantt-view.ui.h:17 data/ui/task-view.ui.h:16
-#: src/planner-application.c:82
-msgid "Unindent"
-msgstr "Забрати відступ"
-
-#: data/ui/gantt-view.ui.h:18 data/ui/task-view.ui.h:17
-#: src/planner-application.c:68
-msgid "Unlink"
-msgstr ""
-
-# @ GIMP eog kdelibs kivio korganizer kpixmap kuickshow nautilus
-# * Yuriy Syrota <rasta@renome.rovno.ua>
-#: data/ui/gantt-view.ui.h:19
-msgid "Zoom In"
-msgstr "Збільшити"
-
-# @ GIMP eog kdelibs kivio korganizer kpixmap kuickshow nautilus
-# * Yuriy Syrota <rasta@renome.rovno.ua>
-#: data/ui/gantt-view.ui.h:20
-msgid "Zoom Out"
-msgstr "Зменшити"
-
-# @ GIMP eog kdelibs kivio korganizer kpixmap kuickshow nautilus
-# * Yuriy Syrota <rasta@renome.rovno.ua>
-#: data/ui/gantt-view.ui.h:21
-#, fuzzy
-msgid "Zoom To Fit"
-msgstr "Зменшити"
-
-# @ Dia eog ggv gtk nautilus
-# * Yuriy Syrota <rasta@renome.rovno.ua>
-#: data/ui/gantt-view.ui.h:22
-#, fuzzy
-msgid "Zoom To _Fit"
-msgstr "З_меншити"
-
-# @ Dia eog ggv gtk nautilus
-# * Yuriy Syrota <rasta@renome.rovno.ua>
-#: data/ui/gantt-view.ui.h:23
-msgid "Zoom _Out"
-msgstr "З_меншити"
-
-#: data/ui/gantt-view.ui.h:24 data/ui/task-view.ui.h:19
-msgid "_Edit Task Properties..."
-msgstr "_Змінити властивості завдання..."
-
-#: data/ui/gantt-view.ui.h:25
-msgid "_Highlight Critical Tasks"
-msgstr "Під_світити критичні завдання"
-
-#: data/ui/gantt-view.ui.h:26 data/ui/task-view.ui.h:20
-msgid "_Insert Task"
-msgstr "В_нести завдання"
-
-#: data/ui/gantt-view.ui.h:27 data/ui/task-view.ui.h:21
-msgid "_Remove Task"
-msgstr "Ви_лучити завдання"
-
-# @ eog
-# * Yuriy Syrota <rasta@renome.rovno.ua>
-#: data/ui/gantt-view.ui.h:28
-msgid "_Zoom In"
-msgstr "З_більшити"
-
-#: data/ui/task-view.ui.h:18
-msgid "_Edit Custom Properties..."
-msgstr "_Змінити нетипові властивості..."
-
-#: data/ui/html-plugin.ui.h:1 data/glade/html-output.glade.h:4
-msgid "Export to HTML"
-msgstr ""
-
-# @ mrproject
-# * Yuriy Syrota <rasta@renome.rovno.ua>
-#: data/ui/sql-plugin.ui.h:1
-#, fuzzy
-msgid "Open from Database..."
-msgstr "Зберегти _як..."
-
-# @ mrproject
-# * Yuriy Syrota <rasta@renome.rovno.ua>
-#: data/ui/sql-plugin.ui.h:2
-#, fuzzy
-msgid "Save to Database..."
-msgstr "Зберегти _як..."
 
 #: data/ui/resource-view.ui.h:1
 msgid "Edit _Custom Properties..."
@@ -502,7 +861,7 @@ msgstr "Вс_нести ресурси..."
 
 #: data/ui/resource-view.ui.h:9
 msgid "_Edit Resource Properties..."
-msgstr "_Змінити властивості ресурсу..."
+msgstr "_Властивості ресурсу..."
 
 #: data/ui/resource-view.ui.h:10
 msgid "_Insert Resource"
@@ -512,612 +871,43 @@ msgstr "В_нести ресурс"
 msgid "_Remove Resource"
 msgstr "Ви_лучити ресурс"
 
-# @ bug-buddy control-center gEdit gdm gnome-libs gnome-panel gnome-utils gtk kab magicdev menudrake nautilus profterm usermode yelp
+# @ mrproject
 # * Yuriy Syrota <rasta@renome.rovno.ua>
-#: data/glade/add-predecessor.glade.h:1 data/glade/calendar-dialog.glade.h:4
-#: data/glade/html-output.glade.h:2 data/glade/new-property.glade.h:1
-#: data/glade/project-properties.glade.h:1
-#: data/glade/resource-dialog.glade.h:1
-#: data/glade/resource-input-dialog.glade.h:1 data/glade/sql.glade.h:2
-#: data/glade/task-dialog.glade.h:4 data/glade/task-input-dialog.glade.h:1
-msgid "*"
-msgstr "*"
-
-#: data/glade/add-predecessor.glade.h:2
-msgid "Lag: "
-msgstr "Відставання:"
-
-#: data/glade/add-predecessor.glade.h:3
-msgid "New predecessor"
-msgstr ""
-
-#: data/glade/add-predecessor.glade.h:4
-msgid "Predecessor: "
-msgstr ""
-
-#: data/glade/add-predecessor.glade.h:5
-msgid "Relation type: "
-msgstr "Тип відношення:"
-
-#: data/glade/calendar-dialog.glade.h:1
-msgid ""
-"\n"
-"The selected day type has the following working hours:"
-msgstr ""
-
-# @ Gabber gEdit gnome-utils nautilus
-# * Yuriy Syrota <rasta@renome.rovno.ua>
-#: data/glade/calendar-dialog.glade.h:3 data/glade/html-output.glade.h:1
-#: data/glade/sql.glade.h:1 data/glade/task-dialog.glade.h:1
-msgid "    "
-msgstr "    "
-
-# @ BomberMaze balsa gnome-libs gnome-utils kbattleship kbattleship.po kde-i18n_4:2.2.2-2_knetmgr.po knetmgr.po knu kuickshow libkscan.po
-# * Yuriy Syrota <rasta@renome.rovno.ua>
-#: data/glade/calendar-dialog.glade.h:5
-msgid "-"
-msgstr "-"
-
-#: data/glade/calendar-dialog.glade.h:6
-#, fuzzy
-msgid "<b>Calendar:</b>"
-msgstr "Календар:"
-
-#: data/glade/calendar-dialog.glade.h:7
-msgid "<b>Day types</b>"
-msgstr ""
-
-#: data/glade/calendar-dialog.glade.h:8
-msgid "<b>Working hours</b>"
-msgstr ""
-
-#: data/glade/calendar-dialog.glade.h:9
-#, fuzzy
-msgid "<b>Working time</b>"
-msgstr "Робочий час..."
-
-# @ Dia GIMP Scribus ToDoManager WindowMaker authconfig-4.2.9-2.src.rpm.dir_1_1_authconfig-_po_uk.po drakcronat ee gdm gimp-std-plugins- glade- gnome-libs gnome-media gphoto gqview gtk kdelibs ktelnet xchat xfce xmms
-# * Yuriy Syrota <rasta@renome.rovno.ua>
-#: data/glade/calendar-dialog.glade.h:10
-msgid "Apply"
-msgstr "Застосувати"
-
-#: data/glade/calendar-dialog.glade.h:11
-msgid "C_opy an existing calendar"
-msgstr ""
-
-# @ gtk profterm
-# * Yuriy Syrota <rasta@renome.rovno.ua>
-#: data/glade/calendar-dialog.glade.h:12
-msgid "C_reate"
-msgstr "С_творити"
+#: data/ui/sql-plugin.ui.h:1
+msgid "Open from Database..."
+msgstr "Відкрити з бази даних..."
 
 # @ mrproject
 # * Yuriy Syrota <rasta@renome.rovno.ua>
-#: data/glade/calendar-dialog.glade.h:13
-#, fuzzy
-msgid "Calendar Editor"
-msgstr "Календар"
-
-#: data/glade/calendar-dialog.glade.h:14
-msgid "Create an _empty calendar"
-msgstr ""
-
-#: data/glade/calendar-dialog.glade.h:15
-#, fuzzy
-msgid "Custom working time"
-msgstr "Нетипові властивості"
-
-# @ Galeon- anjuta evolution gEdit galeon gnome-libs gnumeric gtk gtkhtml libgnomeui
-# * Yuriy Syrota <rasta@renome.rovno.ua>
-#: data/glade/calendar-dialog.glade.h:16
-#, fuzzy
-msgid "Day type:"
-msgstr "В_ставити"
-
-#: data/glade/calendar-dialog.glade.h:17
-msgid "Default Week"
-msgstr ""
-
-#: data/glade/calendar-dialog.glade.h:18
-msgid "Default week..."
-msgstr ""
-
-#: data/glade/calendar-dialog.glade.h:19
-msgid "Edit Day Types"
-msgstr ""
-
-#: data/glade/calendar-dialog.glade.h:20
-#, fuzzy
-msgid "Edit Working Time"
-msgstr "Робочий час..."
-
-#: data/glade/calendar-dialog.glade.h:21
-#, fuzzy
-msgid "Enter the name of the new day type:"
-msgstr "Введіть назву нової фази проекту:"
-
-#: data/glade/calendar-dialog.glade.h:22
-msgid "Existing calendars:"
-msgstr ""
-
-# @ GIMP balsa cupsdconf.po evolution gEdit kcmbind kdelibs kregexpeditor.po ksirc ktalk kword nautilus pan pybliographer
-# * Yuriy Syrota <rasta@renome.rovno.ua>
-#: data/glade/calendar-dialog.glade.h:23
-msgid "From:"
-msgstr "Від:"
-
-#: data/glade/calendar-dialog.glade.h:24
-#, fuzzy
-msgid "MrProject Team"
-msgstr "_Назва проекту:"
-
-# @ korganizer
-# * Andriy Rysin <arysin@yahoo.com>
-#: data/glade/calendar-dialog.glade.h:25
-msgid "New Calendar"
-msgstr "Новий календар"
-
-#: data/glade/calendar-dialog.glade.h:26
-msgid "New Day Type"
-msgstr ""
-
-# @ korganizer
-# * Andriy Rysin <arysin@yahoo.com>
-#: data/glade/calendar-dialog.glade.h:27
-#, fuzzy
-msgid "Select a calendar"
-msgstr "Новий календар"
-
-#: data/glade/calendar-dialog.glade.h:28
-msgid ""
-"Select a weekday and the day type to use for that day in the default week "
-"for this calendar.\n"
-msgstr ""
-
-#: data/glade/calendar-dialog.glade.h:30
-msgid "Set day type to:"
-msgstr ""
-
-# @ GIMP balsa bug-buddy cupsdconf.po evolution gEdit kcmbind kdelibs kregexpeditor.po ksirc ktalk kword nautilus pybliographer screem
-# * Yuriy Syrota <rasta@renome.rovno.ua>
-#: data/glade/calendar-dialog.glade.h:31
-msgid "To:"
-msgstr "До:"
-
-#: data/glade/calendar-dialog.glade.h:32
-msgid "Use working time from derived calendar"
-msgstr ""
-
-#: data/glade/calendar-dialog.glade.h:33
-msgid "Week day:"
-msgstr "День тижня:"
-
-#: data/glade/calendar-dialog.glade.h:34
-msgid "Working time..."
-msgstr "Робочий час..."
-
-#: data/glade/calendar-dialog.glade.h:35
-msgid "_Derive from a calendar"
-msgstr ""
-
-#: data/glade/calendar-dialog.glade.h:36
-msgid "_Name of the new calendar:"
-msgstr "_Назва нового календаря:"
-
-# @ dr-genius gal gnumeric profterm
-# * Yuriy Syrota <rasta@renome.rovno.ua>
-#: data/glade/calendar-dialog.glade.h:37
-msgid "_New..."
-msgstr "_Новий..."
-
-#: data/glade/group-dialog.glade.h:1
-msgid "Group Editor"
-msgstr ""
-
-#: data/glade/html-output.glade.h:3
-msgid "<b>Save to</b>"
-msgstr ""
-
-#: data/glade/html-output.glade.h:5
-msgid "Local file"
-msgstr ""
-
-# @ kdelibs
-# * Andriy Rysin <arysin@yahoo.com>
-#: data/glade/html-output.glade.h:6
-#, fuzzy
-msgid "Save to HTML File"
-msgstr "Зберегти файл"
-
-#: data/glade/html-output.glade.h:7
-msgid "Web location"
-msgstr ""
-
-# @ rpmdrake
-# * Gladky Dima <gladimdim@inbox.ru>
-#: data/glade/new-property.glade.h:2
-msgid "Description: "
-msgstr "Опис: "
-
-#: data/glade/new-property.glade.h:3
-msgid "Label: "
-msgstr "Позначка:"
-
-# @ gdm kate kate.po kmessedwords rpmdrake
-# * Taras Boychuk <btr1@torba.com>
-#: data/glade/new-property.glade.h:4
-msgid "Name: "
-msgstr "Назва: "
-
-#: data/glade/new-property.glade.h:5
-msgid "New Property"
-msgstr "Нова властивість"
-
-#: data/glade/new-property.glade.h:6
-msgid "Type: "
-msgstr "Тип: "
-
-#: data/glade/project-properties.glade.h:2
-msgid "<b>Project phases</b>"
-msgstr "<b>Фази проекту</b>"
-
-#: data/glade/project-properties.glade.h:3
-msgid "Calendar:"
-msgstr "Календар:"
-
-#: data/glade/project-properties.glade.h:4
-msgid "Custom properties"
-msgstr "Нетипові властивості"
-
-#: data/glade/project-properties.glade.h:5
-msgid "Edit Project phases"
-msgstr "Змінити фази проекту"
-
-#: data/glade/project-properties.glade.h:6
-msgid "Enter the name of the new project phase:"
-msgstr "Введіть назву нової фази проекту:"
-
-#: data/glade/project-properties.glade.h:7
-#: data/glade/resource-dialog.glade.h:5 data/glade/task-dialog.glade.h:6
-msgid "General"
-msgstr "Загальне"
-
-#: data/glade/project-properties.glade.h:8
-msgid "New Project Phase"
-msgstr "Нова фаза проекту"
-
-#: data/glade/project-properties.glade.h:9
-msgid "Project _name:"
-msgstr "_Назва проекту:"
-
-#: data/glade/project-properties.glade.h:10
-msgid "Project _start:"
-msgstr "По_чаток проекту:"
-
-#: data/glade/project-properties.glade.h:11
-msgid "Project phase:"
-msgstr "Фаза проекту:"
-
-#: data/glade/project-properties.glade.h:12
-msgid "Project properties"
-msgstr "Властивості проекту"
-
-#: data/glade/project-properties.glade.h:13
-msgid "Select..."
-msgstr "Вибрати..."
-
-# @ mrproject
-#: data/glade/project-properties.glade.h:14
-msgid "_Manager:"
-msgstr "_Керівник:"
-
-# @ evolution
-# * Yuriy Syrota <rasta@renome.rovno.ua>
-#: data/glade/project-properties.glade.h:15
-msgid "_Organization:"
-msgstr "_Організація:"
-
-#: data/glade/property-dialog.glade.h:1
-msgid "Custom Properties"
-msgstr "Нетипові властивості"
-
-#: data/glade/resource-dialog.glade.h:2
-#, fuzzy
-msgid "C_ost:"
-msgstr "_Вартість:"
-
-# @ mrproject
-# * Yuriy Syrota <rasta@renome.rovno.ua>
-#: data/glade/resource-dialog.glade.h:3
-msgid "Calendar"
-msgstr "Календар"
-
-#: data/glade/resource-dialog.glade.h:4
-#, fuzzy
-msgid "Edit calendars..."
-msgstr "/_Змінити завдання..."
-
-# @ mrproject
-#: data/glade/resource-dialog.glade.h:6 data/glade/task-dialog.glade.h:7
-msgid "Insert time stamp"
-msgstr "Вставити часову мітку"
-
-# @ mrproject
-# * Yuriy Syrota <rasta@renome.rovno.ua>
-#: data/glade/resource-dialog.glade.h:7 data/glade/task-dialog.glade.h:9
-msgid "Notes"
-msgstr "Нотатки"
-
-#: data/glade/resource-dialog.glade.h:8
-msgid ""
-"Select the calendar to use for this resource. If you want to use the default "
-"calendar of the project, select 'None'. "
-msgstr ""
-
-#: data/glade/resource-dialog.glade.h:9
-msgid "_Email:"
-msgstr "_Ел. пошта:"
-
-# @ Gabber
-# * Yuriy Syrota <rasta@renome.rovno.ua>
-#: data/glade/resource-dialog.glade.h:10
-msgid "_Group:"
-msgstr "_Група:"
-
-# @ mrproject
-# * Volodymyr M. Lisivka <lvm@mystery.lviv.net>
-#: data/glade/resource-dialog.glade.h:11
-msgid "_Name:"
-msgstr "_Назва:"
-
-# @ gconf-editor gnome-applets gnumeric
-# * Yuriy Syrota <rasta@renome.rovno.ua>
-#: data/glade/resource-dialog.glade.h:12
-msgid "_Type:"
-msgstr "_Тип:"
-
-#: data/glade/resource-input-dialog.glade.h:2
-msgid "Email:"
-msgstr "Ел. пошта:"
-
-# @ KDat anjuta cupsdconf.po filetypes glade- kdelibs koffice ksirc kwuftpd nautilus screem
-# * Yuriy Syrota <rasta@renome.rovno.ua>
-#: data/glade/resource-input-dialog.glade.h:3
-msgid "Group:"
-msgstr "Група:"
-
-#: data/glade/resource-input-dialog.glade.h:4
-msgid "Insert resource"
-msgstr "Внести ресурс"
-
-# @ Dia GIMP Gabber Galeon- Ximian-setup-tools balsa control-center evolution galeon gimp gimp-std-plugins- glade- gnome-core gnome-libs gnome-pim gnomeicu gphoto graphite guppi kandy kandy.po kateprojectmanager.po kcmemail kcmkio kde-i18n_4:2.2.2-2_kdeprintfax.po kdelibs keduca kmail kmenuedit kmessedwords knode koffice korganizer ksysguard kword lynx pybliographer red-carpet rpmdrake screem userdrake xchat
-# * Yuriy Syrota <rasta@renome.rovno.ua>
-#: data/glade/resource-input-dialog.glade.h:5
-#: data/glade/task-input-dialog.glade.h:3
-msgid "Name:"
-msgstr "Назва:"
-
-# @ mrproject
-# * Yuriy Syrota <rasta@renome.rovno.ua>
-#: data/glade/resource-input-dialog.glade.h:6
-#: data/glade/task-input-dialog.glade.h:5
-msgid "_Insert"
-msgstr "В_нести"
-
-#: data/glade/sql.glade.h:3
-msgid "<b>Open Database</b>"
-msgstr ""
-
-# @ Galeon- anjuta evolution gEdit galeon gnome-libs gnumeric gtk gtkhtml libgnomeui
-# * Yuriy Syrota <rasta@renome.rovno.ua>
-#: data/glade/sql.glade.h:4
-#, fuzzy
-msgid "Database:"
-msgstr "В_ставити"
-
-# @ mrproject
-# * Yuriy Syrota <rasta@renome.rovno.ua>
-#: data/glade/sql.glade.h:5
-#, fuzzy
-msgid "Open Database"
-msgstr "Зберегти _як..."
-
-#: data/glade/sql.glade.h:6
-msgid "Password:"
-msgstr ""
-
-#: data/glade/sql.glade.h:7
-#, fuzzy
-msgid "Select a Project"
-msgstr "Відкрити проект"
-
-#: data/glade/sql.glade.h:8
-msgid "Server:"
-msgstr ""
-
-#: data/glade/sql.glade.h:9
-msgid "The database contains the following projects. Select a project to open:"
-msgstr ""
-
-# @ GIMP gimp kcmkonsole.po kdao kmail
-# * Yuriy Syrota <rasta@renome.rovno.ua>
-#: data/glade/sql.glade.h:10
-#, fuzzy
-msgid "Username:"
-msgstr "Неназваний"
-
-# @ Galeon- caitoo galeon gnumeric karchiver karchiver.po kcmstyle kdelibs kivio libgnomeprint sodipodi yank
-# * Yuriy Syrota <rasta@renome.rovno.ua>
-#: data/glade/task-dialog.glade.h:3
-#, no-c-format
-msgid "%"
-msgstr "%"
-
-#: data/glade/task-dialog.glade.h:5
-#, fuzzy
-msgid "C_omplete:"
-msgstr "_Завершено:"
-
-# @ Dia GIMP Gabber Galeon- Ximian-setup-tools balsa control-center evolution galeon gimp gimp-std-plugins- glade- gnome-core gnome-libs gnome-pim gnomeicu gphoto graphite guppi kandy kandy.po kateprojectmanager.po kcmemail kcmkio kde-i18n_4:2.2.2-2_kdeprintfax.po kdelibs keduca kmail kmenuedit kmessedwords knode koffice korganizer ksysguard kword lynx pybliographer red-carpet rpmdrake screem userdrake xchat
-# * Yuriy Syrota <rasta@renome.rovno.ua>
-#: data/glade/task-dialog.glade.h:8
-#, fuzzy
-msgid "Na_me:"
-msgstr "Назва:"
-
-# @ Gabber
-# * Yuriy Syrota <rasta@renome.rovno.ua>
-#: data/glade/task-dialog.glade.h:10
-msgid "Pr_iority:"
-msgstr "Пр_іоритет:"
-
-#: data/glade/task-dialog.glade.h:11
-msgid "Predecessors"
-msgstr ""
-
-# @ mrproject
-# * Andriy Rysin <arysin@yahoo.com>
-#: data/glade/task-dialog.glade.h:12 src/planner-resource-view.c:342
-msgid "Resources"
-msgstr "Ресурси"
-
-#: data/glade/task-dialog.glade.h:13
-#, fuzzy
-msgid "_Duration:"
-msgstr "_Тривалість:"
-
-#: data/glade/task-dialog.glade.h:14
-msgid "_Fixed duration"
-msgstr "_Фіксована тривалість"
-
-#: data/glade/task-dialog.glade.h:15
-msgid "_Milestone"
-msgstr ""
-
-#: data/glade/task-dialog.glade.h:16
-msgid "_Work:"
-msgstr "Робота:"
-
-#. day unit variant accepted in input
-#: data/glade/task-dialog.glade.h:17 src/planner-task-tree.c:2120
-msgid "days"
-msgstr "дні"
-
-#: data/glade/task-input-dialog.glade.h:2
-msgid "Insert task"
-msgstr "Внести завдання"
-
-#: data/glade/task-input-dialog.glade.h:4
-#, fuzzy
-msgid "Work:"
-msgstr "Робота:"
-
-# @ GIMP Galeon- Ximian-setup-tools anaconda-7.3.92-4.src.rpm.dir_1_1_anaconda-_po_uk.po apacheconf-0.9.0-2.src.rpm.dir_1_1_apacheconf-_po_uk.po balsa evolution galeon gdm ghex gimp gnome-panel gnome-pim gnome-utils gnomeicu guppi kdelibs nautilus sawfish xfce xmms yank
-# * Volodymyr M. Lisivka <lvm@mystery.lviv.net>
-#: libplanner/mrp-project.c:441 src/planner-group-dialog.c:411
-msgid "Default"
-msgstr ""
-
-#: libplanner/mrp-project.c:749
-#, c-format
-msgid "Couldn't find a suitable file module for loading '%s'"
-msgstr ""
-
-#: libplanner/mrp-project.c:770 libplanner/mrp-project.c:1034
-msgid "No support for SQL storage built into this version of MrProject."
-msgstr ""
+#: data/ui/sql-plugin.ui.h:2
+msgid "Save to Database..."
+msgstr "Зберегти в базі даних..."
+
+#: data/ui/task-view.ui.h:18
+msgid "_Edit Custom Properties..."
+msgstr "_Змінити нетипові властивості..."
 
 # @ gEdit nautilus
 # * Yuriy Syrota <rasta@renome.rovno.ua>
-#: libplanner/mrp-project.c:807
-#, fuzzy
-msgid "Invalid URI."
+#: libegg/recent-files/egg-recent-vfs-utils.c:90
+msgid " (invalid Unicode)"
 msgstr "(неправильний знак Унікоду)"
 
-#: libplanner/mrp-project.c:928
-#, c-format
-msgid "Unable to find file writer identified by '%s'"
-msgstr ""
-
-#: libplanner/mrp-project.c:991
-msgid "Couldn't find a suitable file module for loading project"
-msgstr ""
-
-# @ anaconda-7.3.92-4.src.rpm.dir_1_1_anaconda-_po_uk.po caitoo control-center evolution gnumeric kcmiwatcher kcmkamera kdelibs keduca ktalk userdrake xfce
-# * Yuriy Syrota <rasta@renome.rovno.ua>
-#: libplanner/mrp-property.c:365
-#, fuzzy
-msgid "Text"
-msgstr "Тест"
-
-#: libplanner/mrp-property.c:367
-msgid "String list"
-msgstr ""
-
-#: libplanner/mrp-property.c:369
-msgid "Integer number"
-msgstr ""
-
-#: libplanner/mrp-property.c:371
-msgid "Floating-point number"
-msgstr ""
-
-# @ Galeon- anjuta evolution gEdit galeon gnome-libs gnumeric gtk gtkhtml libgnomeui
-# * Yuriy Syrota <rasta@renome.rovno.ua>
-#: libplanner/mrp-property.c:373
-#, fuzzy
-msgid "Date"
-msgstr "В_ставити"
-
-#: libplanner/mrp-property.c:375
-#, fuzzy
-msgid "Duration"
-msgstr "_Тривалість:"
-
-#: libplanner/mrp-property.c:377 src/planner-task-view.c:232
-msgid "Cost"
-msgstr "Вартість"
-
-# @ Dia GIMP Galeon- Linux-Mandrake Scribus ToDoManager anaconda-7.3.92-4.src.rpm.dir_1_1_anaconda-_po_uk.po anjuta clockapplet control-center csvfilter cupsdconf cupsdconf.po evolution filetypes galeon gdm gimp glade- gnome-games gnome-pilot gnome-pim gnome-utils gnumeric gphoto gqview graphite gtkhtml guppi kchart kcmcrypto kcmdhcpd kcmkeys kcmusb.po kde-i18n_4:2.2.2-2_kcmusb.po kde-i18n_4:2.2.2-2_ksirtet.po kde-i18n_4:2.2.2-2_multiplayers.po kde-i18n_4:2.2.2-2_ppdtranslations.po kdebugdialog kdelibs kdemultimedia kdf khexedit koncd.po kpaint kppp krayon ksirtet.po kspread kword libkonq lynx mc multiplayers.po noatun ppdtranslations.po sawfish sodipodi xmms
-# * Volodymyr M. Lisivka <lvm@mystery.lviv.net>
-#: libplanner/mrp-property.c:380 src/planner-project-properties.c:505
-msgid "None"
-msgstr "Нічого"
-
-#: libplanner/mrp-task-manager.c:1769
-msgid "Can not add a predecessor relation between a task and its ancestor."
-msgstr ""
-
-#: libplanner/mrp-task-manager.c:1778 libplanner/mrp-task-manager.c:1786
-msgid "Can not add a predecessor, because it would result in a loop."
-msgstr ""
-
-#: libplanner/mrp-task-manager.c:1821
-msgid "Can not move the task, since it would result in a loop."
-msgstr ""
-
-#: libplanner/mrp-task.c:1016
-msgid ""
-"Could not add a predecessor relation, because the tasks are already related."
-msgstr ""
-
 #: libplanner/mrp-day.c:54
-#, fuzzy
 msgid "Working"
-msgstr "Робота:"
+msgstr "Робочий"
 
 #: libplanner/mrp-day.c:55
 msgid "A default working day"
-msgstr ""
+msgstr "Звичайний робочий день"
 
 #: libplanner/mrp-day.c:57
 msgid "Nonworking"
-msgstr ""
+msgstr "Неробочий"
 
 #: libplanner/mrp-day.c:58
 msgid "A default non working day"
-msgstr ""
+msgstr "Звичайний неробочий день"
 
 #: libplanner/mrp-day.c:60
 msgid "Use base"
@@ -1127,35 +917,103 @@ msgstr ""
 msgid "Use day from base calendar"
 msgstr ""
 
-#: libplanner/mrp-parser.c:1043 libplanner/mrp-parser.c:1138
-#, fuzzy
+#: libplanner/mrp-parser.c:1058 libplanner/mrp-parser.c:1153
 msgid "Could not create XML tree"
-msgstr "Не вдалось створити діалог властивостей."
+msgstr "Не вдалось створити дерево XML"
 
-#: libplanner/mrp-parser.c:1104
+#: libplanner/mrp-parser.c:1119
 msgid "Could not write XML file"
+msgstr "Не вдалось записати файл у форматі XML"
+
+#: libplanner/mrp-project.c:440 src/planner-group-dialog.c:830
+msgid "Default"
 msgstr ""
 
-# @ gEdit nautilus
-# * Yuriy Syrota <rasta@renome.rovno.ua>
-#. Give up.
-#: libplanner/mrp-sql.c:229 src/planner-sql-plugin.c:127
-#, fuzzy
-msgid "Invalid Unicode"
-msgstr "(неправильний знак Унікоду)"
-
-#: libplanner/mrp-sql.c:2205
+#: libplanner/mrp-project.c:748
 #, c-format
-msgid ""
-"The project '%s' has been changed by the user '%s' since you opened it. Do "
-"you want to save anyway?"
+msgid "Couldn't find a suitable file module for loading '%s'"
 msgstr ""
 
-#: libplanner/mrp-sql.c:3443
+#: libplanner/mrp-project.c:769 libplanner/mrp-project.c:1033
+msgid "No support for SQL storage built into this version of Planner."
+msgstr ""
+
+#: libplanner/mrp-project.c:806
+msgid "Invalid URI."
+msgstr "Неправильна адреса (URI)."
+
+#: libplanner/mrp-project.c:927
+#, c-format
+msgid "Unable to find file writer identified by '%s'"
+msgstr ""
+
+#: libplanner/mrp-project.c:990
+msgid "Couldn't find a suitable file module for loading project"
+msgstr ""
+
+# @ anaconda-7.3.92-4.src.rpm.dir_1_1_anaconda-_po_uk.po caitoo control-center evolution gnumeric kcmiwatcher kcmkamera kdelibs keduca ktalk userdrake xfce
+# * Yuriy Syrota <rasta@renome.rovno.ua>
+#: libplanner/mrp-property.c:365
+msgid "Text"
+msgstr "Текст"
+
+#: libplanner/mrp-property.c:367
+msgid "String list"
+msgstr ""
+
+#: libplanner/mrp-property.c:369
+msgid "Integer number"
+msgstr "Ціле число"
+
+#: libplanner/mrp-property.c:371
+msgid "Floating-point number"
+msgstr ""
+
+#: libplanner/mrp-property.c:373
+msgid "Date"
+msgstr "Дата"
+
+#: libplanner/mrp-property.c:375
+msgid "Duration"
+msgstr "Тривалість"
+
+#: libplanner/mrp-property.c:377 src/planner-task-view.c:271
+msgid "Cost"
+msgstr "Вартість"
+
+# * Volodymyr M. Lisivka <lvm@mystery.lviv.net>
+#: libplanner/mrp-property.c:380 src/planner-project-properties.c:655
+msgid "None"
+msgstr "Нічого"
+
+#: libplanner/mrp-sql.c:345 src/planner-sql-plugin.c:171
+msgid "Invalid Unicode"
+msgstr "Неправильний Юнікод"
+
+#: libplanner/mrp-sql.c:2215
+#, c-format
+msgid "Connection to database '%s' failed.\n"
+msgstr "Збій з'єднання з базою даних \"%s\".\n"
+
+#: libplanner/mrp-sql.c:2220 libplanner/mrp-sql.c:3660
 #, c-format
 msgid ""
 "Connection to database '%s' failed.\n"
 "%s"
+msgstr ""
+"Збій з'єднання з базою даних \"%s\".\n"
+"%s"
+
+#: libplanner/mrp-sql.c:2228
+#, c-format
+msgid "BEGIN command failed %s."
+msgstr "Збій команди BEGIN %s."
+
+#: libplanner/mrp-sql.c:2394
+#, c-format
+msgid ""
+"The project '%s' has been changed by the user '%s' since you opened it. Do "
+"you want to save anyway?"
 msgstr ""
 
 #: libplanner/mrp-storage-sql.c:205
@@ -1170,158 +1028,53 @@ msgstr ""
 msgid "Invalid SQL URI (no database name specified)."
 msgstr ""
 
+#: libplanner/mrp-task.c:1016
+msgid ""
+"Could not add a predecessor relation, because the tasks are already related."
+msgstr ""
+
+#: libplanner/mrp-task-manager.c:1769
+msgid "Can not add a predecessor relation between a task and its ancestor."
+msgstr ""
+
+#: libplanner/mrp-task-manager.c:1778 libplanner/mrp-task-manager.c:1786
+msgid "Can not add a predecessor, because it would result in a loop."
+msgstr ""
+
+#: libplanner/mrp-task-manager.c:1821
+msgid "Can not move the task, since it would result in a loop."
+msgstr ""
+
+#: libplanner/mrp-xsl.c:96
+msgid "HTML export failed"
+msgstr ""
+
 # @ CenterICQ Dia GIMP Galeon- Scribus anaconda-7.3.92-4.src.rpm.dir_1_1_anaconda-_po_uk.po anjuta balsa galeon gimp gimp-perl glade- gnome-libs gnome-media gnome-utils gqview kdelibs mc nautilus pan profterm rpmdrake screem sodipodi userdrake xchat xfce
 # * Volodymyr M. Lisivka <lvm@mystery.lviv.net>
-#: src/planner-application.c:117
+#: src/planner-application.c:125
 msgid "Edit"
 msgstr "Редагування"
 
-# @ mrproject
-# * Yuriy Syrota <rasta@renome.rovno.ua>
-#: src/planner-main-window.c:584
-msgid "Open a file"
-msgstr "Відкрити файл"
-
-# @ control-center gEdit gnome-applets gnome-core gnome-games gnome-media gnome-panel gnome-utils procman profterm yelp
-# * Yuriy Syrota <rasta@renome.rovno.ua>
-#. I18n: Translators, list your names here, newline separated if there
-#. * are more than one, to appear in the about box.
-#.
-#: src/planner-main-window.c:993 src/planner-main-window.c:1000
-msgid "translator_credits"
-msgstr "Володимир Лісівка <lvm@mystery.lviv.net>Юрій Сирота <yuriy@beer.com>"
-
-#. "Copyright \xc2\xa9 2001-2002 CodeFactory AB",
-#: src/planner-main-window.c:997
-msgid "A Project Management application for the GNOME desktop"
-msgstr ""
-
-#: src/planner-main-window.c:1007
-#, fuzzy
-msgid "The Planner Homepage"
-msgstr "Домашня сторінка проекту MrProject"
-
-#: src/planner-main-window.c:1083
-msgid "If you don't save, changes made the last minute will be discarded."
-msgstr ""
-
-#: src/planner-main-window.c:1088
-#, c-format
-msgid "If you don't save, changes made the last %d minutes will be discarded."
-msgstr ""
-
-#: src/planner-main-window.c:1093
-msgid "If you don't save, changes made the last hour will be discarded."
-msgstr ""
-
-#: src/planner-main-window.c:1098
-#, c-format
-msgid "If you don't save, changes made the last %d hours will be discarded."
-msgstr ""
-
-#: src/planner-main-window.c:1105
-#, c-format
-msgid "Save changes to document '%s' before closing?"
-msgstr ""
-
-#: src/planner-main-window.c:1123
-msgid "C_lose without saving"
-msgstr "За_крити без збереження"
-
-# @ gtk usermode
-#: src/planner-main-window.c:1125
-msgid "_Cancel"
-msgstr "_Скасувати"
-
-# @ kdelibs
-# * Andriy Rysin <arysin@yahoo.com>
-#: src/planner-main-window.c:1232
-msgid "Save a file"
-msgstr "Зберегти файл"
-
-#: src/planner-main-window.c:1264 src/planner-html-plugin.c:146
-#, c-format
-msgid "File \"%s\" exists, do you want to overwrite it?"
-msgstr ""
-
-#: src/planner-main-window.c:1452
-msgid ""
-"You have opened a file that was saved with an old version of Planner.\n"
-"\n"
-"When loading old files, all tasks will use the constraint 'Must Start On', "
-"since the old version did not fully support automatic rescheduling. To take "
-"advantage of this new feature, you should add predecessor relations between "
-"tasks that are dependant on each other.\n"
-"\n"
-"You can add a predecessor relation by clicking on the predecessor and "
-"dragging to the successor.\n"
-"\n"
-"After doing this, you can remove all constraints by selecting the menu item "
-"'Remove all constraints' in the 'Edit' menu."
-msgstr ""
-
-# @ GIMP gimp kcmkonsole.po kdao kmail
-# * Yuriy Syrota <rasta@renome.rovno.ua>
-#: src/planner-main-window.c:1489 src/planner-gantt-row.c:656
-#: src/planner-gantt-row.c:658 src/planner-gantt-print.c:513
-#: src/planner-gantt-print.c:515
-msgid "Unnamed"
-msgstr "Неназваний"
-
-# @ nautilus
-# * Yuriy Syrota <rasta@renome.rovno.ua>
-#: src/planner-main.c:61
-msgid "Create the initial window with the given geometry."
-msgstr "Створити початкове вікно з вказаною геометрією."
-
-# @ Galeon- galeon ggv gnome-games gnome-media gnome-pim gnome-utils gtop- gtranslator mc nautilus pan profterm
-# * Yuriy Syrota <rasta@renome.rovno.ua>
-#: src/planner-main.c:61
-msgid "GEOMETRY"
-msgstr "ГЕОМЕТРІЯ"
-
-#: src/planner-main.c:98
-msgid "mrproject: --geometry cannot be used with more than one file."
-msgstr ""
-
-#: src/planner-plugin-loader.c:40
-#, c-format
-msgid "Could not open plugin file '%s'\n"
-msgstr ""
-
-#: src/planner-view-loader.c:40
-#, c-format
-msgid "Could not open view plugin file '%s'\n"
-msgstr ""
-
 #: src/planner-cell-renderer-date.c:147
 msgid "Constraint type"
-msgstr ""
+msgstr "Тип обмеження"
 
 #: src/planner-cell-renderer-date.c:154
 msgid "As soon as possible"
-msgstr ""
+msgstr "Якомога раніше"
 
 #: src/planner-cell-renderer-date.c:155
 msgid "Start no earlier than"
-msgstr ""
+msgstr "Не пізніше ніж"
 
 #: src/planner-cell-renderer-date.c:156
 msgid "Must start on"
 msgstr ""
 
-# @ mrproject
-# * Yuriy Syrota <rasta@renome.rovno.ua>
 #: src/planner-cell-renderer-date.c:171
 msgid "Today"
 msgstr "Сьогодні"
 
-# @ mrproject
-# * Yuriy Syrota <rasta@renome.rovno.ua>
-#. gtk_signal_connect (GTK_OBJECT (button), "clicked",
-#. GTK_SIGNAL_FUNC (m_cell_date_today_clicked),
-#. date);
-#.
 #: src/planner-cell-renderer-date.c:179
 msgid "Cancel"
 msgstr "Скасувати"
@@ -1331,6 +1084,28 @@ msgstr "Скасувати"
 #: src/planner-cell-renderer-date.c:187
 msgid "OK"
 msgstr "Гаразд"
+
+#: src/planner-cmd-manager.c:226
+#, c-format
+msgid "Undo '%s'"
+msgstr "Скасувати \"%s\""
+
+# @ mrproject
+# * Yuriy Syrota <rasta@renome.rovno.ua>
+#: src/planner-cmd-manager.c:228
+msgid "Undo"
+msgstr "Скасувати"
+
+#: src/planner-cmd-manager.c:238
+#, c-format
+msgid "Redo '%s'"
+msgstr "Відновити \"%s\""
+
+# @ mrproject
+# * Yuriy Syrota <rasta@renome.rovno.ua>
+#: src/planner-cmd-manager.c:240
+msgid "Redo"
+msgstr "Відновити"
 
 # @ evolution gnome-pim gnumeric kdelibs xfce
 # * Yuriy Syrota <rasta@renome.rovno.ua>
@@ -1385,236 +1160,20 @@ msgstr "Робочий час..."
 msgid "%H:%M"
 msgstr "%H:%M"
 
-# @ mrproject
-# * Yuriy Syrota <rasta@renome.rovno.ua>
-#: src/planner-group-dialog.c:387 src/planner-property-dialog.c:378
-#: src/planner-task-dialog.c:1311 src/planner-task-dialog.c:1397
-#: src/planner-task-view.c:227 src/planner-gantt-print.c:190
-#: src/planner-resource-view.c:966
-msgid "Name"
-msgstr "Назва"
-
-# @ mrproject
-#: src/planner-group-dialog.c:393
-#, fuzzy
-msgid "Manager name"
-msgstr "_Керівник:"
-
-# @ mrproject
-#: src/planner-group-dialog.c:399
-#, fuzzy
-msgid "Manager phone"
-msgstr "_Керівник:"
-
-# @ mrproject
-#: src/planner-group-dialog.c:405
-#, fuzzy
-msgid "Manager email"
-msgstr "_Керівник:"
-
-#: src/planner-project-properties.c:146
-msgid "Select a calendar to use for this project:"
-msgstr ""
-
-# @ gnome-games kfinger libkdegames.po
-# * Yuriy Syrota <rasta@renome.rovno.ua>
-#: src/planner-project-properties.c:606
-msgid "Property"
-msgstr "Властивість"
-
-# @  GIMP anjuta dr-genius gconf-editor gimp gnome-games gnome-utils gnumeric gofai gphoto gtk gtop- kaddressbook kaddressbook.po kandy kandy.po katepart.po kcminfo kcmlinuz.po kcmthemes kcron kdbg kdcop kde-i18n_4:2.2.2-2_kcmlinuz.po keduca kfinger kmail knode krayon kspread ktables kword libkdegames.po nsplugin pixie pybliographer sawfish screem sodipodi
-# * Yuriy Syrota <rasta@renome.rovno.ua>
-#: src/planner-project-properties.c:617 src/planner-property-dialog.c:431
-msgid "Value"
-msgstr "Значення"
-
-#: src/planner-project-properties.c:993 src/planner-property-dialog.c:229
-msgid "The name of the custom property needs to start with a letter."
-msgstr ""
-
-#: src/planner-project-properties.c:1065 src/planner-property-dialog.c:300
-#, c-format
-msgid "Do you really want to remove the property '%s' from the project?"
-msgstr ""
-
-#: src/planner-project-properties.c:1194
-#, fuzzy
-msgid "Could not create properties dialog."
-msgstr "Не вдалось створити діалог властивостей."
-
-# @ fontinst.po glade- gnome-applets gnumeric gtk kchart ksysguard ktables
-# * Yuriy Syrota <rasta@renome.rovno.ua>
-#: src/planner-property-dialog.c:397
-msgid "Label"
-msgstr "Позначка"
-
-# @ mrproject
-# * Yuriy Syrota <rasta@renome.rovno.ua>
-#: src/planner-property-dialog.c:411 src/planner-task-dialog.c:1429
-#: src/planner-resource-view.c:987
-msgid "Type"
-msgstr "Тип"
-
-#: src/planner-print-dialog.c:49
-msgid "Print Project"
-msgstr "Надрукувати проект"
-
-# @ evolution gEdit gnumeric gtkhtml libgnomeui mc nautilus
-# * Yuriy Syrota <rasta@renome.rovno.ua>
-#: src/planner-print-dialog.c:56
-#, fuzzy
-msgid "Select views"
-msgstr "Вибрати вс_е"
-
-#: src/planner-print-dialog.c:74
-msgid "Select the views to print:"
-msgstr ""
-
-# @ GIMP evolution gconf-editor kde-i18n_4:2.2.2-2_ppdtranslations.po ppdtranslations.po
-# * Yuriy Syrota <rasta@renome.rovno.ua>
-#. Put "no group" at the top.
-#: src/planner-resource-dialog.c:248 src/planner-resource-input-dialog.c:96
-#: src/planner-resource-view.c:1375
-msgid "(None)"
-msgstr "(Немає)"
-
-# @ evolution
-# * Yuriy Syrota <rasta@renome.rovno.ua>
-#: src/planner-resource-dialog.c:258 src/planner-resource-input-dialog.c:106
-#: src/planner-task-dialog.c:249
-msgid "(No name)"
-msgstr "(Без назви)"
-
-#. i18n: time stamp format for notes in task dialog, see strftime(3) for
-#. * a detailed description.
-#: src/planner-resource-dialog.c:728 src/planner-task-dialog.c:679
-msgid "%a %d %b %Y, %H:%M\n"
-msgstr ""
-
-#: src/planner-resource-dialog.c:826
-msgid "None (use project default)"
-msgstr ""
-
-#: src/planner-resource-dialog.c:953 src/planner-resource-dialog.c:955
-msgid "Edit resource properties"
-msgstr "Змінити властивості ресурсу"
-
-#: src/planner-resource-dialog.c:1101 src/planner-task-view.c:230
-#: src/planner-gantt-print.c:198 src/planner-resource-view.c:629
-#: src/planner-resource-view.c:645 src/planner-resource-view.c:1187
-#, fuzzy
-msgid "Work"
-msgstr "Робота:"
-
-#: src/planner-resource-dialog.c:1102 src/planner-resource-view.c:632
-#: src/planner-resource-view.c:646 src/planner-resource-view.c:1188
-msgid "Material"
-msgstr ""
-
-#: src/planner-predecessor-model.c:191 src/planner-task-dialog.c:1039
-msgid "FS"
-msgstr "ПЗ"
-
-#: src/planner-predecessor-model.c:194 src/planner-task-dialog.c:1040
-msgid "FF"
-msgstr "ЗЗ"
-
-#: src/planner-predecessor-model.c:197 src/planner-task-dialog.c:1041
-msgid "SS"
-msgstr "ПП"
-
-#: src/planner-predecessor-model.c:200 src/planner-task-dialog.c:1042
-msgid "SF"
-msgstr "ЗП"
-
-#: src/planner-task-dialog.c:745
-msgid "Finish to start (FS)"
-msgstr "Почати по завершенню (ПЗ)"
-
-#: src/planner-task-dialog.c:746
-msgid "Finish to finish (FF)"
-msgstr "Закінчити по завершенню (ЗЗ)"
-
-#: src/planner-task-dialog.c:747
-msgid "Start to start (SS)"
-msgstr "Почати з початком (ПП)"
-
-#: src/planner-task-dialog.c:748
-msgid "Start to finish (SF)"
-msgstr "Закінчити до початку (ЗП)"
-
-#: src/planner-task-dialog.c:798
-msgid "Can't add new predecessor. No task selected!"
-msgstr ""
-
-# @ mrproject
-#: src/planner-task-dialog.c:1330
-msgid "Assigned"
-msgstr "Призначено"
-
-# @ mrproject
-# * Yuriy Syrota <rasta@renome.rovno.ua>
-#: src/planner-task-dialog.c:1347
-msgid "Units"
-msgstr "Одиниці"
-
-#: src/planner-task-dialog.c:1451
-msgid "Lag"
-msgstr "Відставання"
-
-#: src/planner-task-dialog.c:1584 src/planner-task-dialog.c:1586
-msgid "Edit task properties"
-msgstr "Змінити властивості завдання"
-
-#: src/planner-html-plugin.c:133
-#, c-format
-msgid ""
-"\"%s\" is a directory.\n"
-"Enter a filename and try again."
-msgstr ""
-
-#: src/planner-sql-plugin.c:269
-#, c-format
-msgid ""
-"Connection to database '%s' failed:\n"
-"%s"
-msgstr ""
-
-# @ anjuta gIDE glade-
-# * Yuriy Syrota <rasta@renome.rovno.ua>
-#: src/planner-sql-plugin.c:318
-#, fuzzy
-msgid "Project"
-msgstr "_Проект"
-
-# @ mrproject
-# * Yuriy Syrota <rasta@renome.rovno.ua>
-#: src/planner-sql-plugin.c:466
-#, fuzzy
-msgid "Open from Database"
-msgstr "Зберегти _як..."
-
-# @ mrproject
-# * Yuriy Syrota <rasta@renome.rovno.ua>
-#: src/planner-sql-plugin.c:573
-#, fuzzy
-msgid "Save to Database"
-msgstr "Зберегти _як..."
-
 #: src/planner-format.c:141
 #, c-format
 msgid "%dd %dh"
-msgstr ""
+msgstr "%dд %dг"
 
 #: src/planner-format.c:144
 #, c-format
 msgid "%dd"
-msgstr ""
+msgstr "%dд"
 
 #: src/planner-format.c:147
 #, c-format
 msgid "%dh"
-msgstr ""
+msgstr "%dг"
 
 #: src/planner-format.c:171
 #, c-format
@@ -1635,62 +1194,365 @@ msgstr "%s день"
 #. * libmrproject/docs/DateFormat.
 #.
 #: src/planner-format.c:197
-#, fuzzy
 msgid "%b %e"
-msgstr "%Y %b %d"
+msgstr "%b %e"
 
 #. i18n: project start, the date format is described in
 #. * libmrproject/docs/DateFormat.
 #: src/planner-gantt-background.c:579
 msgid "%Y %b %d"
-msgstr "%Y %b %d"
+msgstr "%d %b %Y"
 
 # @ mrproject
 #: src/planner-gantt-background.c:581
 msgid "Project start"
 msgstr "Початок проекту"
 
+# @ mrproject
+# * Yuriy Syrota <rasta@renome.rovno.ua>
+#: src/planner-gantt-print.c:191 src/planner-group-dialog.c:806
+#: src/planner-property-dialog.c:378 src/planner-resource-view.c:1168
+#: src/planner-task-dialog.c:1319 src/planner-task-dialog.c:1405
+#: src/planner-task-view.c:266
+msgid "Name"
+msgstr "Назва"
+
+#: src/planner-gantt-print.c:199 src/planner-resource-dialog.c:1298
+#: src/planner-resource-view.c:691 src/planner-resource-view.c:707
+#: src/planner-resource-view.c:1595 src/planner-task-view.c:269
+msgid "Work"
+msgstr "Робота"
+
+# @ GIMP gimp kcmkonsole.po kdao kmail
+# * Yuriy Syrota <rasta@renome.rovno.ua>
+#: src/planner-gantt-print.c:523 src/planner-gantt-row.c:668
+#: src/planner-window.c:1648
+msgid "Unnamed"
+msgstr "Неназваний"
+
 # @  gnome-core koshell
 # * Yuriy Syrota <rasta@renome.rovno.ua>
-#: src/planner-gantt-row.c:1841 src/planner-gantt-row.c:1844
+#: src/planner-gantt-row.c:1903 src/planner-gantt-row.c:1906
 msgid "No name"
 msgstr "Без назви"
 
-#: src/planner-gantt-row.c:1847
+#: src/planner-gantt-row.c:1909
 #, c-format
 msgid "Make task '%s' a predecessor of '%s'"
 msgstr ""
 
-#: src/planner-gantt-row.c:1905
+#: src/planner-gantt-row.c:1967
 #, c-format
 msgid "Change work to %s"
 msgstr ""
 
 # @ mrproject
-#: src/planner-gantt-view.c:273
+#: src/planner-gantt-view.c:287
 msgid "Gantt Chart"
 msgstr "Графік Ґантта"
 
-#: src/planner-gantt-view.c:281
+#: src/planner-gantt-view.c:295
 msgid "_Gantt Chart"
 msgstr "Графік _Ґантта"
 
+#: src/planner-gantt-view.c:492
+msgid ""
+"\n"
+"WBS"
+msgstr ""
+
 # @ mrproject
 # * Yuriy Syrota <rasta@renome.rovno.ua>
-#: src/planner-gantt-view.c:470
-#, fuzzy
+#: src/planner-gantt-view.c:493
 msgid ""
 "\n"
 "Name"
-msgstr "Назва"
+msgstr ""
+"\n"
+"Назва"
 
 #. COL_START,    _("\nStart"),
-#: src/planner-gantt-view.c:472
-#, fuzzy
+#: src/planner-gantt-view.c:495
 msgid ""
 "\n"
 "Work"
-msgstr "Робота:"
+msgstr ""
+"\n"
+"Робота"
+
+#: src/planner-group-dialog.c:302
+msgid "Insert group"
+msgstr "Внести групу"
+
+#: src/planner-group-dialog.c:425
+msgid "Remove group"
+msgstr "Вилучити групу"
+
+#: src/planner-group-dialog.c:518
+msgid "Default group"
+msgstr ""
+
+#: src/planner-group-dialog.c:634
+#, fuzzy
+msgid "Edit group property"
+msgstr "Змінити властивості ресурсу"
+
+# @ mrproject
+#: src/planner-group-dialog.c:812
+msgid "Manager name"
+msgstr "Ім'я керівника"
+
+# @ mrproject
+#: src/planner-group-dialog.c:818
+msgid "Manager phone"
+msgstr "Телефон керівника"
+
+# @ mrproject
+#: src/planner-group-dialog.c:824
+msgid "Manager email"
+msgstr "Електронна адреса керівника"
+
+#: src/planner-html-plugin.c:138
+#, c-format
+msgid ""
+"\"%s\" is a directory.\n"
+"Enter a filename and try again."
+msgstr ""
+
+#: src/planner-html-plugin.c:148 src/planner-window.c:1416
+#, c-format
+msgid "File \"%s\" exists, do you want to overwrite it?"
+msgstr ""
+
+# @ nautilus
+# * Yuriy Syrota <rasta@renome.rovno.ua>
+#: src/planner-main.c:50
+msgid "Create the initial window with the given geometry."
+msgstr "Створити початкове вікно з вказаною геометрією."
+
+# @ Galeon- galeon ggv gnome-games gnome-media gnome-pim gnome-utils gtop- gtranslator mc nautilus pan profterm
+# * Yuriy Syrota <rasta@renome.rovno.ua>
+#: src/planner-main.c:50
+msgid "GEOMETRY"
+msgstr "ГЕОМЕТРІЯ"
+
+#: src/planner-main.c:76
+msgid "planner: --geometry cannot be used with more than one file."
+msgstr ""
+
+#: src/planner-plugin-loader.c:40
+#, c-format
+msgid "Could not open plugin file '%s'\n"
+msgstr ""
+
+#: src/planner-task-popup.c:45
+msgid "/_Insert task"
+msgstr "/В_нести завдання"
+
+#: src/planner-task-popup.c:48
+msgid "/_Insert subtask"
+msgstr "/В_нести підзавдання"
+
+#: src/planner-task-popup.c:51
+msgid "/_Remove task"
+msgstr "/Ви_лучити завдання"
+
+#: src/planner-task-popup.c:56
+#, fuzzy
+msgid "/_Unlink task"
+msgstr "/В_нести завдання"
+
+#: src/planner-task-popup.c:61
+msgid "/_Edit task..."
+msgstr "/_Змінити завдання..."
+
+#: src/planner-predecessor-model.c:191 src/planner-task-dialog.c:1047
+msgid "FS"
+msgstr "ПЗ"
+
+#: src/planner-predecessor-model.c:194 src/planner-task-dialog.c:1048
+msgid "FF"
+msgstr "ЗЗ"
+
+#: src/planner-predecessor-model.c:197 src/planner-task-dialog.c:1049
+msgid "SS"
+msgstr "ПП"
+
+#: src/planner-predecessor-model.c:200 src/planner-task-dialog.c:1050
+msgid "SF"
+msgstr "ЗП"
+
+#: src/planner-print-dialog.c:112
+msgid "Print Project"
+msgstr "Надрукувати проект"
+
+# @ evolution gEdit gnumeric gtkhtml libgnomeui mc nautilus
+# * Yuriy Syrota <rasta@renome.rovno.ua>
+#: src/planner-print-dialog.c:119
+#, fuzzy
+msgid "Select views"
+msgstr "Вибрати вс_е"
+
+#: src/planner-print-dialog.c:143
+msgid "Select the views to print:"
+msgstr ""
+
+#: src/planner-project-properties.c:308
+msgid "Select a calendar to use for this project:"
+msgstr ""
+
+#: src/planner-project-properties.c:403
+msgid "Edit Project Name"
+msgstr "Змінити назву проекту"
+
+# @ evolution
+# * Yuriy Syrota <rasta@renome.rovno.ua>
+#: src/planner-project-properties.c:439
+msgid "Edit Organization"
+msgstr "Змінити організацію"
+
+# @ mrproject
+#: src/planner-project-properties.c:475
+msgid "Edit Manager"
+msgstr "Змінити керівника"
+
+# @ mrproject
+#: src/planner-project-properties.c:546
+msgid "Edit Project Start"
+msgstr "Змінити початок проекту"
+
+#: src/planner-project-properties.c:615
+msgid "Edit Project Phase"
+msgstr "Змінити фазу проекту"
+
+# @ gnome-games kfinger libkdegames.po
+# * Yuriy Syrota <rasta@renome.rovno.ua>
+#: src/planner-project-properties.c:748
+msgid "Property"
+msgstr "Властивість"
+
+# @  GIMP anjuta dr-genius gconf-editor gimp gnome-games gnome-utils gnumeric gofai gphoto gtk gtop- kaddressbook kaddressbook.po kandy kandy.po katepart.po kcminfo kcmlinuz.po kcmthemes kcron kdbg kdcop kde-i18n_4:2.2.2-2_kcmlinuz.po keduca kfinger kmail knode krayon kspread ktables kword libkdegames.po nsplugin pixie pybliographer sawfish screem sodipodi
+# * Yuriy Syrota <rasta@renome.rovno.ua>
+#: src/planner-project-properties.c:759 src/planner-property-dialog.c:431
+msgid "Value"
+msgstr "Значення"
+
+#: src/planner-project-properties.c:1130 src/planner-property-dialog.c:229
+msgid "The name of the custom property needs to start with a letter."
+msgstr ""
+
+#: src/planner-project-properties.c:1202 src/planner-property-dialog.c:300
+#, c-format
+msgid "Do you really want to remove the property '%s' from the project?"
+msgstr ""
+
+#: src/planner-project-properties.c:1344
+msgid "Could not create properties dialog."
+msgstr "Не вдалось створити діалог властивостей."
+
+# @ fontinst.po glade- gnome-applets gnumeric gtk kchart ksysguard ktables
+# * Yuriy Syrota <rasta@renome.rovno.ua>
+#: src/planner-property-dialog.c:397
+msgid "Label"
+msgstr "Позначка"
+
+# @ mrproject
+# * Yuriy Syrota <rasta@renome.rovno.ua>
+#: src/planner-property-dialog.c:411 src/planner-resource-view.c:1210
+#: src/planner-task-dialog.c:1437
+msgid "Type"
+msgstr "Тип"
+
+# @ GIMP evolution gconf-editor kde-i18n_4:2.2.2-2_ppdtranslations.po ppdtranslations.po
+# * Yuriy Syrota <rasta@renome.rovno.ua>
+#. Put "no group" at the top.
+#: src/planner-resource-dialog.c:267 src/planner-resource-input-dialog.c:97
+#: src/planner-resource-view.c:1806
+msgid "(None)"
+msgstr "(Немає)"
+
+#: src/planner-resource-dialog.c:277 src/planner-resource-input-dialog.c:107
+#: src/planner-task-dialog.c:251
+msgid "(No name)"
+msgstr "(Без назви)"
+
+#: src/planner-resource-dialog.c:426
+#, fuzzy
+msgid "Edit resource property from dialog"
+msgstr "Змінити властивості ресурсу"
+
+#. i18n: time stamp format for notes in task dialog, see strftime(3) for
+#. * a detailed description.
+#: src/planner-resource-dialog.c:910 src/planner-task-dialog.c:687
+msgid "%a %d %b %Y, %H:%M\n"
+msgstr ""
+
+#: src/planner-resource-dialog.c:1008
+msgid "None (use project default)"
+msgstr ""
+
+#: src/planner-resource-dialog.c:1135 src/planner-resource-dialog.c:1137
+msgid "Edit resource properties"
+msgstr "Змінити властивості ресурсу"
+
+#: src/planner-resource-dialog.c:1299 src/planner-resource-view.c:694
+#: src/planner-resource-view.c:708 src/planner-resource-view.c:1596
+msgid "Material"
+msgstr "Матеріал"
+
+#: src/planner-resource-view.c:260
+msgid "/_Insert resource"
+msgstr "/В_нести ресурс"
+
+#: src/planner-resource-view.c:261
+msgid "/_Remove resource"
+msgstr "/Ви_лучити ресурс"
+
+#: src/planner-resource-view.c:262
+msgid "/_Edit resource..."
+msgstr "/_Змінити ресурс"
+
+#: src/planner-resource-view.c:401
+msgid "_Resources"
+msgstr "_Ресурси"
+
+#: src/planner-resource-view.c:798
+msgid "Insert resource"
+msgstr "Внести ресурс"
+
+#: src/planner-resource-view.c:950
+msgid "Remove resource"
+msgstr "Вилучити ресурс"
+
+#: src/planner-resource-view.c:1051
+msgid "Edit custom resource properties"
+msgstr "Змінити нетипові властивості ресурсу"
+
+# @  gnome-core koshell
+# * Yuriy Syrota <rasta@renome.rovno.ua>
+#: src/planner-resource-view.c:1189
+msgid "Short name"
+msgstr "Коротка назва"
+
+# @ mrproject
+# * Yuriy Syrota <rasta@renome.rovno.ua>
+#: src/planner-resource-view.c:1234
+msgid "Group"
+msgstr "Група"
+
+# @ mrproject
+# * Taras Boychuk <btr1@torba.com>
+#: src/planner-resource-view.c:1263
+msgid "Email"
+msgstr "Ел. пошта"
+
+#: src/planner-resource-view.c:1328
+msgid "Edit resource property"
+msgstr "Змінити властивість ресурсу"
+
+#: src/planner-resource-view.c:1390
+msgid "Edit resource custom property"
+msgstr ""
 
 #. i18n: Short "Week", preferably 2 letters.
 #: src/planner-scale-utils.c:325
@@ -1739,172 +1601,268 @@ msgstr ""
 msgid "%04d, H%d"
 msgstr "Тиждень %d, %d"
 
-#: src/planner-task-tree.c:184
-msgid "/_Insert task"
-msgstr "/В_нести завдання"
+# @ anjuta gIDE glade-
+# * Yuriy Syrota <rasta@renome.rovno.ua>
+#: src/planner-sql-plugin.c:368
+msgid "Project"
+msgstr "Проект"
 
-#: src/planner-task-tree.c:185
-msgid "/_Insert subtask"
-msgstr "/В_нести підзавдання"
+# @ mrproject
+# * Yuriy Syrota <rasta@renome.rovno.ua>
+#: src/planner-sql-plugin.c:544
+msgid "Open from Database"
+msgstr "Відкрити з бази данних"
 
-#: src/planner-task-tree.c:186
-msgid "/_Remove task"
-msgstr "/Ви_лучити завдання"
+# @ mrproject
+# * Yuriy Syrota <rasta@renome.rovno.ua>
+#: src/planner-sql-plugin.c:651
+msgid "Save to Database"
+msgstr "Зберегти в базі данних"
 
-#: src/planner-task-tree.c:188
-#, fuzzy
-msgid "/_Unlink task"
-msgstr "/В_нести завдання"
+#: src/planner-task-dialog.c:753
+msgid "Finish to start (FS)"
+msgstr "Почати по завершенню (ПЗ)"
 
-#: src/planner-task-tree.c:190
-msgid "/_Edit task..."
-msgstr "/_Змінити завдання..."
+#: src/planner-task-dialog.c:754
+msgid "Finish to finish (FF)"
+msgstr "Закінчити по завершенню (ЗЗ)"
 
-#: src/planner-task-tree.c:2112
+#: src/planner-task-dialog.c:755
+msgid "Start to start (SS)"
+msgstr "Почати з початком (ПП)"
+
+#: src/planner-task-dialog.c:756
+msgid "Start to finish (SF)"
+msgstr "Закінчити до початку (ЗП)"
+
+#: src/planner-task-dialog.c:806
+msgid "Can't add new predecessor. No task selected!"
+msgstr ""
+
+# @ mrproject
+#: src/planner-task-dialog.c:1338
+msgid "Assigned"
+msgstr "Призначено"
+
+# @ mrproject
+# * Yuriy Syrota <rasta@renome.rovno.ua>
+#: src/planner-task-dialog.c:1355
+msgid "Units"
+msgstr "Одиниці"
+
+#: src/planner-task-dialog.c:1459
+msgid "Lag"
+msgstr "Відставання"
+
+#: src/planner-task-dialog.c:1592 src/planner-task-dialog.c:1594
+msgid "Edit task properties"
+msgstr "Змінити властивості завдання"
+
+#: src/planner-task-tree.c:245
+msgid "Insert task"
+msgstr "Внести завдання"
+
+#: src/planner-task-tree.c:321
+msgid "Edit task property"
+msgstr "Змінити властивість завдання"
+
+#: src/planner-task-tree.c:2347
 msgid "mon"
 msgstr "міс"
 
 # @ evolution gnome-pim kspread
 # * Yuriy Syrota <rasta@renome.rovno.ua>
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:2113
+#: src/planner-task-tree.c:2348
 msgid "month"
 msgstr "місяць"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:2114
+#: src/planner-task-tree.c:2349
 msgid "months"
 msgstr "місяці"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:2115
+#: src/planner-task-tree.c:2350
 msgid "w"
 msgstr "т"
 
 # @ evolution gnome-pim
 # * Yuriy Syrota <rasta@renome.rovno.ua>
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:2116
+#: src/planner-task-tree.c:2351
 msgid "week"
 msgstr "тиждень"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:2117
+#: src/planner-task-tree.c:2352
 msgid "weeks"
 msgstr "тижні"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:2118
+#: src/planner-task-tree.c:2353
 msgid "d"
 msgstr "д"
 
 # @ evolution gnome-pim konqueror korganizer
 # * Yuriy Syrota <rasta@renome.rovno.ua>
 #. day unit variant accepted in input
-#: src/planner-task-tree.c:2119
+#: src/planner-task-tree.c:2354
 msgid "day"
 msgstr "день"
 
 # @ gnome-pim kspread
 # * Yuriy Syrota <rasta@renome.rovno.ua>
 #. day unit variant accepted in input
-#: src/planner-task-tree.c:2121
+#: src/planner-task-tree.c:2356
 msgid "h"
 msgstr "г"
 
 # @ evolution gnome-pim
 # * Yuriy Syrota <rasta@renome.rovno.ua>
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:2122
+#: src/planner-task-tree.c:2357
 msgid "hour"
 msgstr "година"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:2123
+#: src/planner-task-tree.c:2358
 msgid "hours"
 msgstr "години"
 
 # @ gnome-pim kpresenter kspread
 # * Yuriy Syrota <rasta@renome.rovno.ua>
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:2124
+#: src/planner-task-tree.c:2359
 msgid "min"
 msgstr "хв"
 
 # @ evolution gnome-pim konqueror
 # * Yuriy Syrota <rasta@renome.rovno.ua>
 #. minute unit variant accepted in input
-#: src/planner-task-tree.c:2125
+#: src/planner-task-tree.c:2360
 msgid "minute"
 msgstr "хвилина"
 
 # @ balsa caitoo evolution gEdit gnome-core gnome-media gnome-panel gnome-utils gnomeicu konqueror kscoreapplet kwuftpd
 #. minute unit variant accepted in input
-#: src/planner-task-tree.c:2126
+#: src/planner-task-tree.c:2361
 msgid "minutes"
 msgstr "хвилини"
 
 # @ evolution kcron
 # * Andriy Rysin <arysin@yahoo.com>
-#: src/planner-task-view.c:173
+#: src/planner-task-view.c:203
 msgid "Tasks"
 msgstr "Завдання"
 
-#: src/planner-task-view.c:181
+#: src/planner-task-view.c:211
 msgid "_Tasks"
 msgstr "_Завдання"
 
+#: src/planner-task-view.c:265
+msgid "WBS"
+msgstr ""
+
 # @ mrproject
 # * Yuriy Syrota <rasta@renome.rovno.ua>
-#: src/planner-task-view.c:228
+#: src/planner-task-view.c:267
 msgid "Start"
 msgstr "Запустити"
 
 # @ galeon gnome-libs kdelibs mdkonline
 # * Andriy Rysin <arysin@yahoo.com>
-#: src/planner-task-view.c:229
+#: src/planner-task-view.c:268
 msgid "Finish"
 msgstr "Завершити"
 
-#: src/planner-task-view.c:231
+#: src/planner-task-view.c:270
 msgid "Slack"
 msgstr ""
 
-#: src/planner-task-view.c:438
+#: src/planner-task-view.c:489
 msgid "Edit custom task properties"
 msgstr "Змінити нетипові властивості завдання"
 
-#: src/planner-resource-view.c:248
-msgid "/_Insert resource"
-msgstr "/В_нести ресурс"
-
-#: src/planner-resource-view.c:249
-msgid "/_Remove resource"
-msgstr "/Ви_лучити ресурс"
-
-#: src/planner-resource-view.c:250
-msgid "/_Edit resource..."
-msgstr "/_Змінити ресурс"
-
-#: src/planner-resource-view.c:350
-msgid "_Resources"
-msgstr "_Ресурси"
-
-#: src/planner-resource-view.c:849
-msgid "Edit custom resource properties"
-msgstr "Змінити нетипові властивості ресурсу"
+#: src/planner-view-loader.c:41
+#, c-format
+msgid "Could not open view plugin file '%s'\n"
+msgstr ""
 
 # @ mrproject
 # * Yuriy Syrota <rasta@renome.rovno.ua>
-#: src/planner-resource-view.c:1011
-msgid "Group"
-msgstr "Група"
+#: src/planner-window.c:639
+msgid "Open a file"
+msgstr "Відкрити файл"
 
-# @ mrproject
-# * Taras Boychuk <btr1@torba.com>
-#: src/planner-resource-view.c:1040
-msgid "Email"
-msgstr "Ел. пошта"
+# @ control-center gEdit gnome-applets gnome-core gnome-games gnome-media gnome-panel gnome-utils procman profterm yelp
+# * Yuriy Syrota <rasta@renome.rovno.ua>
+#. I18n: Translators, list your names here, newline separated if there
+#. * are more than one, to appear in the about box.
+#.
+#: src/planner-window.c:1085 src/planner-window.c:1092
+msgid "translator_credits"
+msgstr "Володимир Лісівка <lvm@mystery.lviv.net>\nЮрій Сирота <yuriy@beer.com>"
 
-#~ msgid "Contribute to MrProject"
-#~ msgstr "Долучитися до проекту MrProject"
+#. "Copyright \xc2\xa9"
+#: src/planner-window.c:1089
+msgid "A Project Management application for the GNOME desktop"
+msgstr "Програма керування проектами для середовища GNOME"
+
+#: src/planner-window.c:1099
+msgid "The Planner Homepage"
+msgstr "Домашня сторінка проекту Planner"
+
+#: src/planner-window.c:1227
+msgid "If you don't save, changes made the last minute will be discarded."
+msgstr "Якщо ви не збережете їх, то зміни, що робилися протягом останньої хвилини, буде втрачено."
+
+#: src/planner-window.c:1232
+#, c-format
+msgid "If you don't save, changes made the last %d minutes will be discarded."
+msgstr "Якщо ви не збережете їх, то зміни, що робилися протягом останніх %d хвилин, буде втрачено."
+
+#: src/planner-window.c:1237
+msgid "If you don't save, changes made the last hour will be discarded."
+msgstr "Якщо ви не збережете їх, то зміни, що робилися протягом останньої години, буде втрачено."
+
+#: src/planner-window.c:1242
+#, c-format
+msgid "If you don't save, changes made the last %d hours will be discarded."
+msgstr "Якщо ви не збережете їх, то зміни, що робилися протягом останніх %d годин, буде втрачено."
+
+#: src/planner-window.c:1249
+#, c-format
+msgid "Save changes to document '%s' before closing?"
+msgstr "Зберегти зміни у документі \"%s\" перед закриттям?"
+
+#: src/planner-window.c:1267
+msgid "C_lose without saving"
+msgstr "За_крити без збереження"
+
+# @ gtk usermode
+#: src/planner-window.c:1269
+msgid "_Cancel"
+msgstr "_Скасувати"
+
+# @ kdelibs
+# * Andriy Rysin <arysin@yahoo.com>
+#: src/planner-window.c:1380
+msgid "Save a file"
+msgstr "Зберегти файл"
+
+#: src/planner-window.c:1611
+msgid ""
+"You have opened a file that was saved with an old version of Planner.\n"
+"\n"
+"When loading old files, all tasks will use the constraint 'Must Start On', "
+"since the old version did not fully support automatic rescheduling. To take "
+"advantage of this new feature, you should add predecessor relations between "
+"tasks that are dependant on each other.\n"
+"\n"
+"You can add a predecessor relation by clicking on the predecessor and "
+"dragging to the successor.\n"
+"\n"
+"After doing this, you can remove all constraints by selecting the menu item "
+"'Remove all constraints' in the 'Edit' menu."
+msgstr ""
