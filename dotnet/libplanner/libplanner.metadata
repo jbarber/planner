@@ -3,4 +3,8 @@
   <attr path="//namespace" name="name">Planner</attr>
   <!-- We should really use ends-with here -->
   <attr path="//struct[contains(@cname,'Priv')]" name="hidden">1</attr>
+
+  <attr path="//object[@cname='MrpProject']/method[@name='GetAllTasks']/return-type" name="element_type">Planner.Task</attr>
+
+  <attr path="//object[@cname='MrpProject']/method[@name='GetResources']/return-type" name="element_type">Planner.Resource</attr>
 </metadata>

@@ -317,7 +317,7 @@
         </parameters>
       </method>
       <method name="GetAllTasks" cname="mrp_project_get_all_tasks">
-        <return-type type="GList*" />
+        <return-type type="GList*" element_type="Planner.Task" />
       </method>
       <method name="GetCalendar" cname="mrp_project_get_calendar">
         <return-type type="MrpCalendar*" />
@@ -342,7 +342,7 @@
         </parameters>
       </method>
       <method name="GetResources" cname="mrp_project_get_resources">
-        <return-type type="GList*" />
+        <return-type type="GList*" element_type="Planner.Resource" />
       </method>
       <method name="GetRootCalendar" cname="mrp_project_get_root_calendar">
         <return-type type="MrpCalendar*" />
