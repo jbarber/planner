@@ -25,9 +25,9 @@
 #define __PLANNER_RESOURCE_INPUT_DIALOG_H__
 
 #include <gtk/gtkwidget.h>
-#include <libplanner/mrp-project.h>
+#include "planner-window.h"
 
-GtkWidget * planner_resource_input_dialog_new (MrpProject *project);
+GtkWidget * planner_resource_input_dialog_new (PlannerWindow *main_window);
 
 #endif /* __PLANNER_RESOURCE_INPUT_DIALOG_H__ */
 
