@@ -112,7 +112,7 @@ html_plugin_export (BonoboUIComponent *component,
 			  G_CALLBACK (html_plugin_server_toggled),
 			  user_data);
 
-	gtk_widget_show_all (priv->dialog);
+	gtk_widget_show (priv->dialog);
 }
 
 static void 

@@ -1,5 +1,11 @@
 2004-04-15  Richard Hult  <richard@imendio.com>
 
+	* data/glade/html-output.glade:
+	* src/planner-html-plugin.c: (html_plugin_export): Hide the remote
+	saving for now since it doesn't really work.
+
+2004-04-15  Richard Hult  <richard@imendio.com>
+
 	* configure.in: Disable dotnet by default.
 	* src/planner-task-tree.c: (planner_task_tree_move_task_up),
 	(planner_task_tree_move_task_down): Clean up a bit.

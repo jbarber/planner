@@ -12,6 +12,11 @@
   <property name="modal">False</property>
   <property name="resizable">True</property>
   <property name="destroy_with_parent">False</property>
+  <property name="decorated">True</property>
+  <property name="skip_taskbar_hint">False</property>
+  <property name="skip_pager_hint">False</property>
+  <property name="type_hint">GDK_WINDOW_TYPE_HINT_DIALOG</property>
+  <property name="gravity">GDK_GRAVITY_NORTH_WEST</property>
   <property name="has_separator">False</property>
 
   <child internal-child="vbox">
@@ -33,6 +38,7 @@
 	      <property name="label">gtk-cancel</property>
 	      <property name="use_stock">True</property>
 	      <property name="relief">GTK_RELIEF_NORMAL</property>
+	      <property name="focus_on_click">True</property>
 	      <property name="response_id">-6</property>
 	    </widget>
 	  </child>
@@ -42,9 +48,10 @@
 	      <property name="visible">True</property>
 	      <property name="can_default">True</property>
 	      <property name="can_focus">True</property>
-	      <property name="label">gtk-ok</property>
+	      <property name="label">gtk-save</property>
 	      <property name="use_stock">True</property>
 	      <property name="relief">GTK_RELIEF_NORMAL</property>
+	      <property name="focus_on_click">True</property>
 	      <property name="response_id">-5</property>
 	    </widget>
 	  </child>
@@ -67,7 +74,7 @@
 	  <child>
 	    <widget class="GtkLabel" id="label254">
 	      <property name="visible">True</property>
-	      <property name="label" translatable="yes">&lt;b&gt;Save to&lt;/b&gt;</property>
+	      <property name="label" translatable="yes">&lt;b&gt;Save to file&lt;/b&gt;</property>
 	      <property name="use_underline">False</property>
 	      <property name="use_markup">True</property>
 	      <property name="justify">GTK_JUSTIFY_LEFT</property>
@@ -119,8 +126,51 @@
 		  <property name="spacing">0</property>
 
 		  <child>
-		    <widget class="GtkTable" id="table9">
+		    <widget class="GtkHBox" id="hbox120">
 		      <property name="visible">True</property>
+		      <property name="homogeneous">False</property>
+		      <property name="spacing">0</property>
+
+		      <child>
+			<widget class="GnomeFileEntry" id="local_fileentry">
+			  <property name="border_width">2</property>
+			  <property name="visible">True</property>
+			  <property name="history_id">mg-html-plugin-file</property>
+			  <property name="max_saved">10</property>
+			  <property name="directory_entry">False</property>
+			  <property name="modal">False</property>
+			  <property name="use_filechooser">False</property>
+
+			  <child internal-child="entry">
+			    <widget class="GtkEntry" id="combo-entry3">
+			      <property name="visible">True</property>
+			      <property name="can_focus">True</property>
+			      <property name="editable">True</property>
+			      <property name="visibility">True</property>
+			      <property name="max_length">0</property>
+			      <property name="text" translatable="yes"></property>
+			      <property name="has_frame">True</property>
+			      <property name="invisible_char" translatable="yes">*</property>
+			      <property name="activates_default">False</property>
+			    </widget>
+			  </child>
+			</widget>
+			<packing>
+			  <property name="padding">0</property>
+			  <property name="expand">True</property>
+			  <property name="fill">True</property>
+			</packing>
+		      </child>
+		    </widget>
+		    <packing>
+		      <property name="padding">0</property>
+		      <property name="expand">True</property>
+		      <property name="fill">True</property>
+		    </packing>
+		  </child>
+
+		  <child>
+		    <widget class="GtkTable" id="table9">
 		      <property name="n_rows">2</property>
 		      <property name="n_columns">2</property>
 		      <property name="homogeneous">False</property>
@@ -134,6 +184,7 @@
 			  <property name="label" translatable="yes">Local file:</property>
 			  <property name="use_underline">True</property>
 			  <property name="relief">GTK_RELIEF_NORMAL</property>
+			  <property name="focus_on_click">True</property>
 			  <property name="active">True</property>
 			  <property name="inconsistent">False</property>
 			  <property name="draw_indicator">True</property>
@@ -155,6 +206,7 @@
 			  <property name="label" translatable="yes">Web location:</property>
 			  <property name="use_underline">True</property>
 			  <property name="relief">GTK_RELIEF_NORMAL</property>
+			  <property name="focus_on_click">True</property>
 			  <property name="active">False</property>
 			  <property name="inconsistent">False</property>
 			  <property name="draw_indicator">True</property>
@@ -171,13 +223,14 @@
 		      </child>
 
 		      <child>
-			<widget class="GnomeFileEntry" id="local_fileentry">
+			<widget class="GnomeFileEntry" id="foo_local_fileentry">
 			  <property name="visible">True</property>
 			  <property name="history_id">mg-html-plugin-file</property>
 			  <property name="max_saved">10</property>
 			  <property name="browse_dialog_title" translatable="yes">Save to HTML File</property>
 			  <property name="directory_entry">False</property>
 			  <property name="modal">False</property>
+			  <property name="use_filechooser">False</property>
 
 			  <child internal-child="entry">
 			    <widget class="GtkEntry" id="combo-entry1">
