@@ -1,5 +1,11 @@
 2004-04-15  Richard Hult  <richard@imendio.com>
 
+	* configure.in: Disable dotnet by default.
+	* src/planner-task-tree.c: (planner_task_tree_move_task_up),
+	(planner_task_tree_move_task_down): Clean up a bit.
+
+2004-04-15  Richard Hult  <richard@imendio.com>
+
 	* libplanner/mrp-assignment.c: (assignment_set_property):
 	* libplanner/mrp-object.c: (mrp_object_set_property):
 	* src/planner-task-dialog.c:
