@@ -1,392 +1,19 @@
-# mrproject ja.po.
+# planner, mrproject ja.po.
 # Copyright (C) 2001-2003 Free Software Foundation, Inc.
 # TAKEDA Hirofumi <takepin@turbolinux.co.jp>, 2001
 # Takeshi Aihana <aihana@gnome.gr.jp>, 2001-2003.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: mrproject HEAD\n"
+"Project-Id-Version: planner HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-12-04 16:40+0100\n"
-"PO-Revision-Date: 2003-09-13 23:50+0900\n"
+"POT-Creation-Date: 2003-12-14 12:19+0900\n"
+"PO-Revision-Date: 2003-12-14 12:18+0900\n"
 "Last-Translator: Takeshi AIHANA <aihana@gnome.gr.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-
-#: data/planner.desktop.in.h:1
-#, fuzzy
-msgid "Planner Project Management"
-msgstr "プロジェクト管理"
-
-#: data/planner.desktop.in.h:2
-msgid "Project Management"
-msgstr "プロジェクト管理"
-
-#: libegg/recent-files/egg-recent-vfs-utils.c:90
-msgid " (invalid Unicode)"
-msgstr " (不正な Unicode)"
-
-#: data/ui/main-window.ui.h:1
-msgid "About this application"
-msgstr "このアプリについて"
-
-#: data/ui/main-window.ui.h:2
-msgid "C_ut"
-msgstr "切り取り(_U)"
-
-#: data/ui/main-window.ui.h:3
-msgid "Clear"
-msgstr "消去"
-
-#: data/ui/main-window.ui.h:4
-msgid "Clear the selection"
-msgstr "選択範囲を消去します"
-
-#: data/ui/main-window.ui.h:5
-msgid "Close the current file"
-msgstr "現在編集中のファイルを閉じます"
-
-#: data/ui/main-window.ui.h:6
-msgid "Copy the selection"
-msgstr "選択範囲をクリップボードにコピーします"
-
-#: data/ui/main-window.ui.h:7
-msgid "Create a new project"
-msgstr "新しいプロジェクトを生成します"
-
-#: data/ui/main-window.ui.h:8
-msgid "Cut the selection"
-msgstr "選択範囲を切り取って、クリップボードにコピーします"
-
-#: data/ui/main-window.ui.h:9
-msgid "Edit Day _Types"
-msgstr "日付の種類の編集(_T)"
-
-#: data/ui/main-window.ui.h:10
-msgid "Edit Project _Phases"
-msgstr "プロジェクト・フェーズの編集(_P)"
-
-#: data/ui/main-window.ui.h:11
-msgid "Edit the project properties"
-msgstr "プロジェクトのプロパティを編集します"
-
-#: data/ui/main-window.ui.h:12
-msgid "Exit the program"
-msgstr "プログラムを終了します"
-
-#: data/ui/main-window.ui.h:13
-msgid "New"
-msgstr "新規"
-
-#: data/ui/main-window.ui.h:14
-msgid "New..."
-msgstr "新規..."
-
-#: data/ui/main-window.ui.h:15
-msgid "Open"
-msgstr "開く"
-
-#: data/ui/main-window.ui.h:16
-msgid "Open a project"
-msgstr "プロジェクトを開きます"
-
-#: data/ui/main-window.ui.h:17
-msgid "Paste the clipboard"
-msgstr "クリップボードから貼り付けます"
-
-#: data/ui/main-window.ui.h:18
-msgid "Print"
-msgstr "印刷"
-
-#: data/ui/main-window.ui.h:19
-msgid "Print preview of the current project"
-msgstr "現在編集中のプロジェクトのプレビューを表示します"
-
-#: data/ui/main-window.ui.h:20
-msgid "Print the current project"
-msgstr "現在編集中のプロジェクトを印刷します"
-
-#: data/ui/main-window.ui.h:21
-msgid "Redo the undone action"
-msgstr "前の操作をやり直します"
-
-#: data/ui/main-window.ui.h:22
-msgid "Save"
-msgstr "保存"
-
-#: data/ui/main-window.ui.h:23
-msgid "Save _As..."
-msgstr "別名で保存(_A)..."
-
-#: data/ui/main-window.ui.h:24
-msgid "Save the current project"
-msgstr "現在編集中のプロジェクトを保存します"
-
-#: data/ui/main-window.ui.h:25
-msgid "Save the current project with a different name"
-msgstr "現在編集中のプロジェクトに別の名前を付けて保存します"
-
-#: data/ui/main-window.ui.h:26
-msgid "Show the MrProject User Guide"
-msgstr "MrProject のユーザガイドを表示します"
-
-#: data/ui/main-window.ui.h:27
-msgid "Undo the last action"
-msgstr "最後の操作を戻します"
-
-#: data/ui/main-window.ui.h:28
-msgid "_About"
-msgstr "情報(_A)"
-
-#: data/ui/main-window.ui.h:29
-msgid "_Actions"
-msgstr "操作(_A)"
-
-#: data/ui/main-window.ui.h:30
-msgid "_Close"
-msgstr "閉じる(_C)"
-
-#: data/ui/main-window.ui.h:31
-msgid "_Copy"
-msgstr "コピー(_C)"
-
-#: data/ui/main-window.ui.h:32
-msgid "_Edit"
-msgstr "編集(_E)"
-
-#: data/ui/main-window.ui.h:33
-msgid "_Edit Project Properties"
-msgstr "プロジェクトのプロパティの編集(_E)"
-
-#: data/ui/main-window.ui.h:34
-msgid "_File"
-msgstr "ファイル(_F)"
-
-#: data/ui/main-window.ui.h:35
-msgid "_Help"
-msgstr "ヘルプ(_H)"
-
-#: data/ui/main-window.ui.h:36
-msgid "_Manage Calendars"
-msgstr "カレンダの管理(_M)"
-
-#: data/ui/main-window.ui.h:37
-msgid "_New Project"
-msgstr "新しいプロジェクト(_N)"
-
-#: data/ui/main-window.ui.h:38
-msgid "_Open..."
-msgstr "開く(_O)..."
-
-#: data/ui/main-window.ui.h:39
-msgid "_Paste"
-msgstr "貼り付け(_P)"
-
-#: data/ui/main-window.ui.h:40
-msgid "_Print Preview"
-msgstr "プロジェクトのプレビュー(_P)"
-
-#: data/ui/main-window.ui.h:41
-msgid "_Print..."
-msgstr "印刷(_P)..."
-
-#: data/ui/main-window.ui.h:42
-msgid "_Project"
-msgstr "プロジェクト(_P)"
-
-#: data/ui/main-window.ui.h:43
-msgid "_Quit"
-msgstr "終了(_Q)"
-
-#: data/ui/main-window.ui.h:44
-msgid "_Redo"
-msgstr "やり直し(_R)"
-
-#: data/ui/main-window.ui.h:45 src/planner-main-window.c:1127
-msgid "_Save"
-msgstr "保存(_S)"
-
-#: data/ui/main-window.ui.h:46
-msgid "_Undo"
-msgstr "元に戻す(_U)"
-
-#: data/ui/main-window.ui.h:47
-msgid "_User Guide"
-msgstr "ユーザガイド(_U)"
-
-#: data/ui/main-window.ui.h:48
-msgid "_View"
-msgstr "表示(_V)"
-
-#: data/ui/gantt-view.ui.h:1 data/ui/task-view.ui.h:1
-msgid "I_ndent Task"
-msgstr "タスクのインデント(_N)"
-
-#: data/ui/gantt-view.ui.h:2 data/ui/task-view.ui.h:2
-msgid "In_sert Tasks..."
-msgstr "タスクの挿入(_S)..."
-
-#: data/ui/gantt-view.ui.h:3 data/ui/task-view.ui.h:3
-#: src/planner-application.c:75
-msgid "Indent"
-msgstr "インデント"
-
-#: data/ui/gantt-view.ui.h:4 data/ui/task-view.ui.h:4
-#: data/ui/resource-view.ui.h:5 src/planner-application.c:54
-#: src/planner-application.c:103
-msgid "Insert"
-msgstr "挿入"
-
-#: data/ui/gantt-view.ui.h:5 data/ui/task-view.ui.h:5
-msgid "Move Task Do_wn"
-msgstr "タスクを下へ移動(_W)"
-
-#: data/ui/gantt-view.ui.h:6 data/ui/task-view.ui.h:6
-msgid "Move Task _Up"
-msgstr "タスクを上へ移動(_U)"
-
-#: data/ui/gantt-view.ui.h:7 data/ui/task-view.ui.h:7
-#: src/planner-application.c:96
-msgid "Move down"
-msgstr "下へ"
-
-#: data/ui/gantt-view.ui.h:8 data/ui/task-view.ui.h:8
-#: src/planner-application.c:89
-msgid "Move up"
-msgstr "上へ"
-
-#: data/ui/gantt-view.ui.h:9 data/ui/task-view.ui.h:9
-#: data/ui/resource-view.ui.h:6 src/planner-application.c:61
-#: src/planner-application.c:110
-msgid "Remove"
-msgstr "削除"
-
-#: data/ui/gantt-view.ui.h:10 data/ui/task-view.ui.h:10
-msgid "Reset _All Constraints"
-msgstr "全制約のリセット(_A)"
-
-#: data/ui/gantt-view.ui.h:11 data/ui/task-view.ui.h:11
-msgid "Reset _Constraint"
-msgstr "制約のリセット(_C)"
-
-#: data/ui/gantt-view.ui.h:12 data/ui/task-view.ui.h:12
-#: data/ui/resource-view.ui.h:7
-msgid "Select _All"
-msgstr "全て選択(_A)"
-
-#: data/ui/gantt-view.ui.h:13 data/ui/task-view.ui.h:13
-#: data/ui/resource-view.ui.h:8
-msgid "Select all tasks"
-msgstr "全てのタスクを選択します"
-
-#: data/ui/gantt-view.ui.h:14
-#, fuzzy
-msgid "Test"
-msgstr "テスト"
-
-#: data/ui/gantt-view.ui.h:15 data/ui/task-view.ui.h:14
-msgid "Un_link Task"
-msgstr "タスクのリンク削除(_L)"
-
-#: data/ui/gantt-view.ui.h:16 data/ui/task-view.ui.h:15
-msgid "Unin_dent Task"
-msgstr "タスクのインデント無し(_D)"
-
-#: data/ui/gantt-view.ui.h:17 data/ui/task-view.ui.h:16
-#: src/planner-application.c:82
-msgid "Unindent"
-msgstr "インデント無し"
-
-#: data/ui/gantt-view.ui.h:18 data/ui/task-view.ui.h:17
-#: src/planner-application.c:68
-msgid "Unlink"
-msgstr "リンク削除"
-
-#: data/ui/gantt-view.ui.h:19
-msgid "Zoom In"
-msgstr "拡大"
-
-#: data/ui/gantt-view.ui.h:20
-msgid "Zoom Out"
-msgstr "縮小"
-
-#: data/ui/gantt-view.ui.h:21
-msgid "Zoom To Fit"
-msgstr "フィット"
-
-#: data/ui/gantt-view.ui.h:22
-msgid "Zoom To _Fit"
-msgstr "フィット(_F)"
-
-#: data/ui/gantt-view.ui.h:23
-msgid "Zoom _Out"
-msgstr "縮小(_O)"
-
-#: data/ui/gantt-view.ui.h:24 data/ui/task-view.ui.h:19
-msgid "_Edit Task Properties..."
-msgstr "タスク・プロパティの編集(_E)..."
-
-#: data/ui/gantt-view.ui.h:25
-msgid "_Highlight Critical Tasks"
-msgstr "重大なタスクの強調表示(_H)"
-
-#: data/ui/gantt-view.ui.h:26 data/ui/task-view.ui.h:20
-msgid "_Insert Task"
-msgstr "タスクの挿入(_I)"
-
-#: data/ui/gantt-view.ui.h:27 data/ui/task-view.ui.h:21
-msgid "_Remove Task"
-msgstr "タスクの削除(_R)"
-
-#: data/ui/gantt-view.ui.h:28
-msgid "_Zoom In"
-msgstr "拡大(_Z)"
-
-#: data/ui/task-view.ui.h:18
-msgid "_Edit Custom Properties..."
-msgstr "カスタム・プロパティの編集(_E)..."
-
-#: data/ui/html-plugin.ui.h:1 data/glade/html-output.glade.h:4
-msgid "Export to HTML"
-msgstr "HTML へエキスポート"
-
-#: data/ui/sql-plugin.ui.h:1
-msgid "Open from Database..."
-msgstr "データベースから開く..."
-
-#: data/ui/sql-plugin.ui.h:2
-msgid "Save to Database..."
-msgstr "データベースへ保存..."
-
-#: data/ui/resource-view.ui.h:1
-msgid "Edit _Custom Properties..."
-msgstr "カスタム・プロパティの編集(_C)..."
-
-#: data/ui/resource-view.ui.h:2
-msgid "Edit _Groups"
-msgstr "グループの編集(_G)"
-
-#: data/ui/resource-view.ui.h:3
-msgid "Groups"
-msgstr "グループ"
-
-#: data/ui/resource-view.ui.h:4
-msgid "In_sert Resources..."
-msgstr "リソースの挿入(_S)..."
-
-#: data/ui/resource-view.ui.h:9
-msgid "_Edit Resource Properties..."
-msgstr "リソース・プロパティの編集(_E)..."
-
-#: data/ui/resource-view.ui.h:10
-msgid "_Insert Resource"
-msgstr "リソースの挿入(_I)"
-
-#: data/ui/resource-view.ui.h:11
-msgid "_Remove Resource"
-msgstr "リソースの削除(_R)"
 
 #: data/glade/add-predecessor.glade.h:1 data/glade/calendar-dialog.glade.h:4
 #: data/glade/html-output.glade.h:2 data/glade/new-property.glade.h:1
@@ -471,9 +98,8 @@ msgid "Custom working time"
 msgstr "作業時間をカスタマイズする"
 
 #: data/glade/calendar-dialog.glade.h:16
-#, fuzzy
 msgid "Day type:"
-msgstr "新しい日付の種類"
+msgstr "日付の種類:"
 
 #: data/glade/calendar-dialog.glade.h:17
 msgid "Default Week"
@@ -504,58 +130,53 @@ msgid "From:"
 msgstr "開始:"
 
 #: data/glade/calendar-dialog.glade.h:24
-msgid "MrProject Team"
-msgstr "MrProject チーム"
-
-#: data/glade/calendar-dialog.glade.h:25
 msgid "New Calendar"
 msgstr "新しいカレンダ"
 
-#: data/glade/calendar-dialog.glade.h:26
+#: data/glade/calendar-dialog.glade.h:25
 msgid "New Day Type"
 msgstr "新しい日付の種類"
 
-#: data/glade/calendar-dialog.glade.h:27
+#: data/glade/calendar-dialog.glade.h:26
 msgid "Select a calendar"
 msgstr "カレンダの選択"
 
-#: data/glade/calendar-dialog.glade.h:28
+#: data/glade/calendar-dialog.glade.h:27
 msgid ""
 "Select a weekday and the day type to use for that day in the default week "
 "for this calendar.\n"
 msgstr ""
 "このカレンダでデフォルトの平日にする曜日と日付の種類を選択して下さい。\n"
 
-#: data/glade/calendar-dialog.glade.h:30
+#: data/glade/calendar-dialog.glade.h:29
 msgid "Set day type to:"
 msgstr "セットする日付の種類:"
 
-#: data/glade/calendar-dialog.glade.h:31
+#: data/glade/calendar-dialog.glade.h:30
 msgid "To:"
 msgstr "終了:"
 
-#: data/glade/calendar-dialog.glade.h:32
+#: data/glade/calendar-dialog.glade.h:31
 msgid "Use working time from derived calendar"
 msgstr "派生したカレンダの作業時間を使用する"
 
-#: data/glade/calendar-dialog.glade.h:33
+#: data/glade/calendar-dialog.glade.h:32
 msgid "Week day:"
 msgstr "平日:"
 
-#: data/glade/calendar-dialog.glade.h:34
+#: data/glade/calendar-dialog.glade.h:33
 msgid "Working time..."
 msgstr "作業時間..."
 
-#: data/glade/calendar-dialog.glade.h:35
-#, fuzzy
+#: data/glade/calendar-dialog.glade.h:34
 msgid "_Derive from a calendar"
-msgstr "カレンダを派生させる(_D)"
+msgstr "カレンダから継承(_D)"
 
-#: data/glade/calendar-dialog.glade.h:36
+#: data/glade/calendar-dialog.glade.h:35
 msgid "_Name of the new calendar:"
 msgstr "新しいカレンダの名前(_N):"
 
-#: data/glade/calendar-dialog.glade.h:37
+#: data/glade/calendar-dialog.glade.h:36
 msgid "_New..."
 msgstr "新規(_N)..."
 
@@ -566,6 +187,10 @@ msgstr "グループの編集"
 #: data/glade/html-output.glade.h:3
 msgid "<b>Save to</b>"
 msgstr "<b>保存先</b>"
+
+#: data/glade/html-output.glade.h:4 data/ui/html-plugin.ui.h:1
+msgid "Export to HTML"
+msgstr "HTML へエキスポート"
 
 #: data/glade/html-output.glade.h:5
 msgid "Local file"
@@ -600,53 +225,53 @@ msgid "Type: "
 msgstr "種類: "
 
 #: data/glade/project-properties.glade.h:2
-msgid "<b>Project phases</b>"
-msgstr "<b>プロジェクトのフェーズ</b>"
-
-#: data/glade/project-properties.glade.h:3
-msgid "Calendar:"
-msgstr "カレンダ:"
-
-#: data/glade/project-properties.glade.h:4
 msgid "Custom properties"
 msgstr "カスタム・プロパティ"
 
-#: data/glade/project-properties.glade.h:5
+#: data/glade/project-properties.glade.h:3
 msgid "Edit Project phases"
 msgstr "プロジェクト・フェーズの編集"
 
-#: data/glade/project-properties.glade.h:6
+#: data/glade/project-properties.glade.h:4
 msgid "Enter the name of the new project phase:"
 msgstr "新しいプロジェクト・フェーズの名前を入力して下さい:"
 
-#: data/glade/project-properties.glade.h:7
+#: data/glade/project-properties.glade.h:5
 #: data/glade/resource-dialog.glade.h:5 data/glade/task-dialog.glade.h:6
 msgid "General"
 msgstr "全般"
 
-#: data/glade/project-properties.glade.h:8
+#: data/glade/project-properties.glade.h:6
 msgid "New Project Phase"
 msgstr "新しいプロジェクト・フェーズ"
 
-#: data/glade/project-properties.glade.h:9
+#: data/glade/project-properties.glade.h:7
 msgid "Project _name:"
 msgstr "プロジェクト名(_N):"
 
-#: data/glade/project-properties.glade.h:10
+#: data/glade/project-properties.glade.h:8
+msgid "Project _phase:"
+msgstr "プロジェクトのフェーズ(_P):"
+
+#: data/glade/project-properties.glade.h:9
 msgid "Project _start:"
 msgstr "プロジェクトの開始(_S):"
 
-#: data/glade/project-properties.glade.h:11
-msgid "Project phase:"
-msgstr "プロジェクトのフェーズ:"
+#: data/glade/project-properties.glade.h:10
+msgid "Project phases"
+msgstr "プロジェクトのフェーズ"
 
-#: data/glade/project-properties.glade.h:12
+#: data/glade/project-properties.glade.h:11
 msgid "Project properties"
 msgstr "プロジェクトのプロパティ"
 
-#: data/glade/project-properties.glade.h:13
+#: data/glade/project-properties.glade.h:12
 msgid "Select..."
 msgstr "選択..."
+
+#: data/glade/project-properties.glade.h:13
+msgid "_Calendar:"
+msgstr "カレンダ(_C):"
 
 #: data/glade/project-properties.glade.h:14
 msgid "_Manager:"
@@ -786,7 +411,6 @@ msgid "Resources"
 msgstr "リソース"
 
 #: data/glade/task-dialog.glade.h:13
-#, fuzzy
 msgid "_Duration:"
 msgstr "期間(_D):"
 
@@ -803,17 +427,416 @@ msgid "_Work:"
 msgstr "作業(_W):"
 
 #. day unit variant accepted in input
-#: data/glade/task-dialog.glade.h:17 src/planner-task-tree.c:2120
+#: data/glade/task-dialog.glade.h:17 src/planner-task-tree.c:2386
 msgid "days"
 msgstr "日間"
 
-#: data/glade/task-input-dialog.glade.h:2
+#: data/glade/task-input-dialog.glade.h:2 src/planner-task-tree.c:296
 msgid "Insert task"
 msgstr "タスクの挿入"
 
 #: data/glade/task-input-dialog.glade.h:4
 msgid "Work:"
 msgstr "作業:"
+
+#: data/planner.desktop.in.h:1
+msgid "Planner Project Management"
+msgstr "Planner プロジェクト管理"
+
+#: data/planner.desktop.in.h:2
+msgid "Project Management"
+msgstr "プロジェクト管理"
+
+#: data/ui/gantt-view.ui.h:1 data/ui/task-view.ui.h:1
+msgid "I_ndent Task"
+msgstr "タスクのインデント(_N)"
+
+#: data/ui/gantt-view.ui.h:2 data/ui/task-view.ui.h:2
+msgid "In_sert Tasks..."
+msgstr "タスクの挿入(_S)..."
+
+#: data/ui/gantt-view.ui.h:3 data/ui/task-view.ui.h:3
+#: src/planner-application.c:76
+msgid "Indent"
+msgstr "インデント"
+
+#: data/ui/gantt-view.ui.h:4 data/ui/resource-view.ui.h:5
+#: data/ui/task-view.ui.h:4 src/planner-application.c:55
+#: src/planner-application.c:104
+msgid "Insert"
+msgstr "挿入"
+
+#: data/ui/gantt-view.ui.h:5 data/ui/task-view.ui.h:5
+msgid "Move Task Do_wn"
+msgstr "タスクを下へ移動(_W)"
+
+#: data/ui/gantt-view.ui.h:6 data/ui/task-view.ui.h:6
+msgid "Move Task _Up"
+msgstr "タスクを上へ移動(_U)"
+
+#: data/ui/gantt-view.ui.h:7 data/ui/task-view.ui.h:7
+#: src/planner-application.c:97
+msgid "Move down"
+msgstr "下へ"
+
+#: data/ui/gantt-view.ui.h:8 data/ui/task-view.ui.h:8
+#: src/planner-application.c:90
+msgid "Move up"
+msgstr "上へ"
+
+#: data/ui/gantt-view.ui.h:9 data/ui/resource-view.ui.h:6
+#: data/ui/task-view.ui.h:9 src/planner-application.c:62
+#: src/planner-application.c:111
+msgid "Remove"
+msgstr "削除"
+
+#: data/ui/gantt-view.ui.h:10 data/ui/task-view.ui.h:10
+msgid "Reset _All Constraints"
+msgstr "全制約のリセット(_A)"
+
+#: data/ui/gantt-view.ui.h:11 data/ui/task-view.ui.h:11
+msgid "Reset _Constraint"
+msgstr "制約のリセット(_C)"
+
+#: data/ui/gantt-view.ui.h:12 data/ui/resource-view.ui.h:7
+#: data/ui/task-view.ui.h:12
+msgid "Select _All"
+msgstr "全て選択(_A)"
+
+#: data/ui/gantt-view.ui.h:13 data/ui/resource-view.ui.h:8
+#: data/ui/task-view.ui.h:13
+msgid "Select all tasks"
+msgstr "全てのタスクを選択します"
+
+#: data/ui/gantt-view.ui.h:14
+msgid "Test"
+msgstr "テスト"
+
+#: data/ui/gantt-view.ui.h:15 data/ui/task-view.ui.h:14
+msgid "Un_link Task"
+msgstr "タスクのリンク削除(_L)"
+
+#: data/ui/gantt-view.ui.h:16 data/ui/task-view.ui.h:15
+msgid "Unin_dent Task"
+msgstr "タスクのインデント無し(_D)"
+
+#: data/ui/gantt-view.ui.h:17 data/ui/task-view.ui.h:16
+#: src/planner-application.c:83
+msgid "Unindent"
+msgstr "インデント無し"
+
+#: data/ui/gantt-view.ui.h:18 data/ui/task-view.ui.h:17
+#: src/planner-application.c:69
+msgid "Unlink"
+msgstr "リンク削除"
+
+#: data/ui/gantt-view.ui.h:19
+msgid "Zoom In"
+msgstr "拡大"
+
+#: data/ui/gantt-view.ui.h:20
+msgid "Zoom Out"
+msgstr "縮小"
+
+#: data/ui/gantt-view.ui.h:21
+msgid "Zoom To Fit"
+msgstr "フィット"
+
+#: data/ui/gantt-view.ui.h:22
+msgid "Zoom To _Fit"
+msgstr "フィット(_F)"
+
+#: data/ui/gantt-view.ui.h:23
+msgid "Zoom _Out"
+msgstr "縮小(_O)"
+
+#: data/ui/gantt-view.ui.h:24 data/ui/task-view.ui.h:19
+msgid "_Edit Task Properties..."
+msgstr "タスク・プロパティの編集(_E)..."
+
+#: data/ui/gantt-view.ui.h:25
+msgid "_Highlight Critical Tasks"
+msgstr "重大なタスクの強調表示(_H)"
+
+#: data/ui/gantt-view.ui.h:26 data/ui/task-view.ui.h:20
+msgid "_Insert Task"
+msgstr "タスクの挿入(_I)"
+
+#: data/ui/gantt-view.ui.h:27 data/ui/task-view.ui.h:21
+msgid "_Remove Task"
+msgstr "タスクの削除(_R)"
+
+#: data/ui/gantt-view.ui.h:28
+msgid "_Zoom In"
+msgstr "拡大(_Z)"
+
+#: data/ui/main-window.ui.h:1
+msgid "About this application"
+msgstr "このアプリについて"
+
+#: data/ui/main-window.ui.h:2
+msgid "C_ut"
+msgstr "切り取り(_U)"
+
+#: data/ui/main-window.ui.h:3
+msgid "Clear"
+msgstr "消去"
+
+#: data/ui/main-window.ui.h:4
+msgid "Clear the selection"
+msgstr "選択範囲を消去します"
+
+#: data/ui/main-window.ui.h:5
+msgid "Close the current file"
+msgstr "現在編集中のファイルを閉じます"
+
+#: data/ui/main-window.ui.h:6
+msgid "Copy the selection"
+msgstr "選択範囲をクリップボードにコピーします"
+
+#: data/ui/main-window.ui.h:7
+msgid "Create a new project"
+msgstr "新しいプロジェクトを生成します"
+
+#: data/ui/main-window.ui.h:8
+msgid "Cut the selection"
+msgstr "選択範囲を切り取って、クリップボードにコピーします"
+
+#: data/ui/main-window.ui.h:9
+msgid "Edit Day _Types"
+msgstr "日付の種類の編集(_T)"
+
+#: data/ui/main-window.ui.h:10
+msgid "Edit Project _Phases"
+msgstr "プロジェクト・フェーズの編集(_P)"
+
+#: data/ui/main-window.ui.h:11
+msgid "Edit the project properties"
+msgstr "プロジェクトのプロパティを編集します"
+
+#: data/ui/main-window.ui.h:12
+msgid "Exit the program"
+msgstr "プログラムを終了します"
+
+#: data/ui/main-window.ui.h:13
+msgid "New"
+msgstr "新規"
+
+#: data/ui/main-window.ui.h:14
+msgid "New..."
+msgstr "新規..."
+
+#: data/ui/main-window.ui.h:15
+msgid "Open"
+msgstr "開く"
+
+#: data/ui/main-window.ui.h:16
+msgid "Open a project"
+msgstr "プロジェクトを開きます"
+
+#: data/ui/main-window.ui.h:17
+msgid "Paste the clipboard"
+msgstr "クリップボードから貼り付けます"
+
+#: data/ui/main-window.ui.h:18
+msgid "Print"
+msgstr "印刷"
+
+#: data/ui/main-window.ui.h:19
+msgid "Print preview of the current project"
+msgstr "現在編集中のプロジェクトのプレビューを表示します"
+
+#: data/ui/main-window.ui.h:20
+msgid "Print the current project"
+msgstr "現在編集中のプロジェクトを印刷します"
+
+#: data/ui/main-window.ui.h:21
+msgid "Redo the undone action"
+msgstr "前の操作をやり直します"
+
+#: data/ui/main-window.ui.h:22
+msgid "Save"
+msgstr "保存"
+
+#: data/ui/main-window.ui.h:23
+msgid "Save _As..."
+msgstr "別名で保存(_A)..."
+
+#: data/ui/main-window.ui.h:24
+msgid "Save the current project"
+msgstr "現在編集中のプロジェクトを保存します"
+
+#: data/ui/main-window.ui.h:25
+msgid "Save the current project with a different name"
+msgstr "現在編集中のプロジェクトに別の名前を付けて保存します"
+
+#: data/ui/main-window.ui.h:26
+msgid "Show the Planner User Guide"
+msgstr "Planner のユーザガイドを表示します"
+
+#: data/ui/main-window.ui.h:27
+msgid "Undo the last action"
+msgstr "最後の操作を戻します"
+
+#: data/ui/main-window.ui.h:28
+msgid "_About"
+msgstr "情報(_A)"
+
+#: data/ui/main-window.ui.h:29
+msgid "_Actions"
+msgstr "操作(_A)"
+
+#: data/ui/main-window.ui.h:30
+msgid "_Close"
+msgstr "閉じる(_C)"
+
+#: data/ui/main-window.ui.h:31
+msgid "_Copy"
+msgstr "コピー(_C)"
+
+#: data/ui/main-window.ui.h:32
+msgid "_Edit"
+msgstr "編集(_E)"
+
+#: data/ui/main-window.ui.h:33
+msgid "_Edit Project Properties"
+msgstr "プロジェクトのプロパティの編集(_E)"
+
+#: data/ui/main-window.ui.h:34
+msgid "_File"
+msgstr "ファイル(_F)"
+
+#: data/ui/main-window.ui.h:35
+msgid "_Help"
+msgstr "ヘルプ(_H)"
+
+#: data/ui/main-window.ui.h:36
+msgid "_Manage Calendars"
+msgstr "カレンダの管理(_M)"
+
+#: data/ui/main-window.ui.h:37
+msgid "_New Project"
+msgstr "新しいプロジェクト(_N)"
+
+#: data/ui/main-window.ui.h:38
+msgid "_Open..."
+msgstr "開く(_O)..."
+
+#: data/ui/main-window.ui.h:39
+msgid "_Paste"
+msgstr "貼り付け(_P)"
+
+#: data/ui/main-window.ui.h:40
+msgid "_Print Preview"
+msgstr "プロジェクトのプレビュー(_P)"
+
+#: data/ui/main-window.ui.h:41
+msgid "_Print..."
+msgstr "印刷(_P)..."
+
+#: data/ui/main-window.ui.h:42
+msgid "_Project"
+msgstr "プロジェクト(_P)"
+
+#: data/ui/main-window.ui.h:43
+msgid "_Quit"
+msgstr "終了(_Q)"
+
+#: data/ui/main-window.ui.h:44 src/planner-cmd-manager.c:192
+msgid "_Redo"
+msgstr "やり直し(_R)"
+
+#: data/ui/main-window.ui.h:45 src/planner-window.c:1249
+msgid "_Save"
+msgstr "保存(_S)"
+
+#: data/ui/main-window.ui.h:46 src/planner-cmd-manager.c:170
+msgid "_Undo"
+msgstr "元に戻す(_U)"
+
+#: data/ui/main-window.ui.h:47
+msgid "_User Guide"
+msgstr "ユーザガイド(_U)"
+
+#: data/ui/main-window.ui.h:48
+msgid "_View"
+msgstr "表示(_V)"
+
+#: data/ui/resource-view.ui.h:1
+msgid "Edit _Custom Properties..."
+msgstr "カスタム・プロパティの編集(_C)..."
+
+#: data/ui/resource-view.ui.h:2
+msgid "Edit _Groups"
+msgstr "グループの編集(_G)"
+
+#: data/ui/resource-view.ui.h:3
+msgid "Groups"
+msgstr "グループ"
+
+#: data/ui/resource-view.ui.h:4
+msgid "In_sert Resources..."
+msgstr "リソースの挿入(_S)..."
+
+#: data/ui/resource-view.ui.h:9
+msgid "_Edit Resource Properties..."
+msgstr "リソース・プロパティの編集(_E)..."
+
+#: data/ui/resource-view.ui.h:10
+msgid "_Insert Resource"
+msgstr "リソースの挿入(_I)"
+
+#: data/ui/resource-view.ui.h:11
+msgid "_Remove Resource"
+msgstr "リソースの削除(_R)"
+
+#: data/ui/sql-plugin.ui.h:1
+msgid "Open from Database..."
+msgstr "データベースから開く..."
+
+#: data/ui/sql-plugin.ui.h:2
+msgid "Save to Database..."
+msgstr "データベースへ保存..."
+
+#: data/ui/task-view.ui.h:18
+msgid "_Edit Custom Properties..."
+msgstr "カスタム・プロパティの編集(_E)..."
+
+#: libegg/recent-files/egg-recent-vfs-utils.c:90
+msgid " (invalid Unicode)"
+msgstr " (不正な Unicode)"
+
+#: libplanner/mrp-day.c:54
+msgid "Working"
+msgstr "作業する日"
+
+#: libplanner/mrp-day.c:55
+msgid "A default working day"
+msgstr "デフォルトの作業日"
+
+#: libplanner/mrp-day.c:57
+msgid "Nonworking"
+msgstr "作業しない日"
+
+#: libplanner/mrp-day.c:58
+msgid "A default non working day"
+msgstr "デフォルトの未作業日"
+
+#: libplanner/mrp-day.c:60
+msgid "Use base"
+msgstr "ベースを使用する"
+
+#: libplanner/mrp-day.c:61
+msgid "Use day from base calendar"
+msgstr "基本カレンダの日を利用する"
+
+#: libplanner/mrp-parser.c:1043 libplanner/mrp-parser.c:1138
+msgid "Could not create XML tree"
+msgstr "XML ツリーを生成できませんでした"
+
+#: libplanner/mrp-parser.c:1104
+msgid "Could not write XML file"
+msgstr "XML ファイルに書き込めませんでした"
 
 #: libplanner/mrp-project.c:441 src/planner-group-dialog.c:411
 msgid "Default"
@@ -825,13 +848,12 @@ msgid "Couldn't find a suitable file module for loading '%s'"
 msgstr "'%s' の読み込みに必要なファイル・モジュールが見つかりませんでした。"
 
 #: libplanner/mrp-project.c:770 libplanner/mrp-project.c:1034
-msgid "No support for SQL storage built into this version of MrProject."
-msgstr "このバージョンの MrProject は SQL への保管がサポートされていません."
+msgid "No support for SQL storage built into this version of Planner."
+msgstr "このバージョンの Planner は SQL ストレージをサポートしていません。"
 
 #: libplanner/mrp-project.c:807
-#, fuzzy
 msgid "Invalid URI."
-msgstr "不正な Unicode"
+msgstr "URI が不正です。"
 
 #: libplanner/mrp-project.c:928
 #, c-format
@@ -844,98 +866,39 @@ msgstr ""
 "プロジェクトの読み込みに必要なファイル・モジュールが見つかりませんでした。"
 
 #: libplanner/mrp-property.c:365
-#, fuzzy
 msgid "Text"
-msgstr "テスト"
+msgstr "テキスト"
 
 #: libplanner/mrp-property.c:367
 msgid "String list"
 msgstr "文字列の一覧"
 
 #: libplanner/mrp-property.c:369
-#, fuzzy
 msgid "Integer number"
-msgstr "マネージャの名前"
+msgstr "整数値"
 
 #: libplanner/mrp-property.c:371
 msgid "Floating-point number"
 msgstr "浮動小数点数値"
 
 #: libplanner/mrp-property.c:373
-#, fuzzy
 msgid "Date"
-msgstr "日付の種類:"
+msgstr "日付"
 
 #: libplanner/mrp-property.c:375
-#, fuzzy
 msgid "Duration"
-msgstr "期間(_D):"
+msgstr "期間"
 
 #: libplanner/mrp-property.c:377 src/planner-task-view.c:232
 msgid "Cost"
 msgstr "コスト"
 
-#: libplanner/mrp-property.c:380 src/planner-project-properties.c:505
+#: libplanner/mrp-property.c:380 src/planner-project-properties.c:654
 msgid "None"
 msgstr "なし"
 
-#: libplanner/mrp-task-manager.c:1769
-msgid "Can not add a predecessor relation between a task and its ancestor."
-msgstr "タスクとその前のタスクの間に関連している前任者は追加できません。"
-
-#: libplanner/mrp-task-manager.c:1778 libplanner/mrp-task-manager.c:1786
-msgid "Can not add a predecessor, because it would result in a loop."
-msgstr "ループの中に返されるので、前任者を追加できません。"
-
-#: libplanner/mrp-task-manager.c:1821
-msgid "Can not move the task, since it would result in a loop."
-msgstr "ループの中に返されるので、タスクを移動できません。"
-
-#: libplanner/mrp-task.c:1016
-msgid ""
-"Could not add a predecessor relation, because the tasks are already related."
-msgstr ""
-"タスクが既に関連づけられているので、前任者の関係を追加できませんでした。"
-
-#: libplanner/mrp-day.c:54
-#, fuzzy
-msgid "Working"
-msgstr "作業"
-
-#: libplanner/mrp-day.c:55
-msgid "A default working day"
-msgstr "デフォルトの作業日"
-
-#: libplanner/mrp-day.c:57
-#, fuzzy
-msgid "Nonworking"
-msgstr "作業しない時間"
-
-#: libplanner/mrp-day.c:58
-msgid "A default non working day"
-msgstr "デフォルトの未作業日"
-
-#: libplanner/mrp-day.c:60
-msgid "Use base"
-msgstr "ベースを使用する"
-
-#: libplanner/mrp-day.c:61
-#, fuzzy
-msgid "Use day from base calendar"
-msgstr "カレンダを派生させる(_D)"
-
-#: libplanner/mrp-parser.c:1043 libplanner/mrp-parser.c:1138
-#, fuzzy
-msgid "Could not create XML tree"
-msgstr "プロパティ・ダイアログを生成できませんでした。"
-
-#: libplanner/mrp-parser.c:1104
-#, fuzzy
-msgid "Could not write XML file"
-msgstr "プラグイン・ファイル '%s' が開けませんでした。\n"
-
 #. Give up.
-#: libplanner/mrp-sql.c:229 src/planner-sql-plugin.c:127
+#: libplanner/mrp-sql.c:229 src/planner-sql-plugin.c:131
 msgid "Invalid Unicode"
 msgstr "不正な Unicode"
 
@@ -949,12 +912,12 @@ msgstr ""
 "います. それでも保存しますか?"
 
 #: libplanner/mrp-sql.c:3443
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Connection to database '%s' failed.\n"
 "%s"
 msgstr ""
-"データベース '%s' への接続に失敗:\n"
+"データベース '%s' への接続に失敗しました。\n"
 "%s"
 
 #: libplanner/mrp-storage-sql.c:205
@@ -969,127 +932,31 @@ msgstr "無効な SQL URI (Project ID が無効です)."
 msgid "Invalid SQL URI (no database name specified)."
 msgstr "無効な SQL URI (データベース名が指定されてません)."
 
-#: src/planner-application.c:117
+#: libplanner/mrp-task.c:1016
+msgid ""
+"Could not add a predecessor relation, because the tasks are already related."
+msgstr ""
+"タスクが既に関連づけられているので、前任者の関係を追加できませんでした。"
+
+#: libplanner/mrp-task-manager.c:1769
+msgid "Can not add a predecessor relation between a task and its ancestor."
+msgstr "タスクとその前のタスクの間に関連している前任者は追加できません。"
+
+#: libplanner/mrp-task-manager.c:1778 libplanner/mrp-task-manager.c:1786
+msgid "Can not add a predecessor, because it would result in a loop."
+msgstr "ループの中に返されるので、前任者を追加できません。"
+
+#: libplanner/mrp-task-manager.c:1821
+msgid "Can not move the task, since it would result in a loop."
+msgstr "ループの中に返されるので、タスクを移動できません。"
+
+#: libplanner/mrp-xsl.c:96
+msgid "HTML export failed"
+msgstr "HTML のエキスポートに失敗しました"
+
+#: src/planner-application.c:118
 msgid "Edit"
 msgstr "編集"
-
-#: src/planner-main-window.c:584
-msgid "Open a file"
-msgstr "プロジェクトファイルを開きます"
-
-#. I18n: Translators, list your names here, newline separated if there
-#. * are more than one, to appear in the about box.
-#.
-#: src/planner-main-window.c:993 src/planner-main-window.c:1000
-msgid "translator_credits"
-msgstr "Takeshi AIHANA <aihana@gnome.gr.jp>"
-
-#. "Copyright \xc2\xa9 2001-2002 CodeFactory AB",
-#: src/planner-main-window.c:997
-msgid "A Project Management application for the GNOME desktop"
-msgstr "GNOME デスクトップ向けのプロジェクト管理アプリ"
-
-#: src/planner-main-window.c:1007
-#, fuzzy
-msgid "The Planner Homepage"
-msgstr "MrProject ホームページ"
-
-#: src/planner-main-window.c:1083
-msgid "If you don't save, changes made the last minute will be discarded."
-msgstr "保存しないと、1分前に変更した内容が破棄されます。"
-
-#: src/planner-main-window.c:1088
-#, c-format
-msgid "If you don't save, changes made the last %d minutes will be discarded."
-msgstr "保存しないと、%d分前の変更が破棄されます。"
-
-#: src/planner-main-window.c:1093
-msgid "If you don't save, changes made the last hour will be discarded."
-msgstr "保存しないと、1時間前の変更が破棄されます。"
-
-#: src/planner-main-window.c:1098
-#, c-format
-msgid "If you don't save, changes made the last %d hours will be discarded."
-msgstr "保存しないと、%d時間前の変更が破棄されます。"
-
-#: src/planner-main-window.c:1105
-#, c-format
-msgid "Save changes to document '%s' before closing?"
-msgstr "閉じる前にドキュメント '%s' の変更を保存しますか？"
-
-#: src/planner-main-window.c:1123
-msgid "C_lose without saving"
-msgstr "保存せずに閉じる(_L)"
-
-#: src/planner-main-window.c:1125
-msgid "_Cancel"
-msgstr "キャンセル(_C)"
-
-#: src/planner-main-window.c:1232
-msgid "Save a file"
-msgstr "保存する"
-
-#: src/planner-main-window.c:1264 src/planner-html-plugin.c:146
-#, c-format
-msgid "File \"%s\" exists, do you want to overwrite it?"
-msgstr "ファイル \"%s\" が存在します。上書きしても宜しいですか？"
-
-#: src/planner-main-window.c:1452
-#, fuzzy
-msgid ""
-"You have opened a file that was saved with an old version of Planner.\n"
-"\n"
-"When loading old files, all tasks will use the constraint 'Must Start On', "
-"since the old version did not fully support automatic rescheduling. To take "
-"advantage of this new feature, you should add predecessor relations between "
-"tasks that are dependant on each other.\n"
-"\n"
-"You can add a predecessor relation by clicking on the predecessor and "
-"dragging to the successor.\n"
-"\n"
-"After doing this, you can remove all constraints by selecting the menu item "
-"'Remove all constraints' in the 'Edit' menu."
-msgstr ""
-"貴方が開いたファイルは MrProject の古いバージョンで保存されたものです。\n"
-"\n"
-"古いファイルを読み込むと、古いバージョンは完全に自動再スケジューリングできな"
-"い理由で、全てのタスクが全て '作業開始してません' 属性になります。この新しい"
-"機能を利用するためには、お互いのタスク間で依存した前任の情報を追加する必要が"
-"あります。\n"
-"\n"
-"前任をクリックすることで前任の関係を追加して後任へドラッグすることが可能で"
-"す。\n"
-"\n"
-"この後に、'編集' メニューの '全ての制限の排除' を選択すると全ての制限が削除さ"
-"れます。"
-
-#: src/planner-main-window.c:1489 src/planner-gantt-row.c:656
-#: src/planner-gantt-row.c:658 src/planner-gantt-print.c:513
-#: src/planner-gantt-print.c:515
-msgid "Unnamed"
-msgstr "名前なし"
-
-#: src/planner-main.c:61
-msgid "Create the initial window with the given geometry."
-msgstr "指定した位置に初期ウィンドウを表示する"
-
-#: src/planner-main.c:61
-msgid "GEOMETRY"
-msgstr "GEOMETRY"
-
-#: src/planner-main.c:98
-msgid "mrproject: --geometry cannot be used with more than one file."
-msgstr "mrproject: オプション --geometry は一つ以上指定できません。"
-
-#: src/planner-plugin-loader.c:40
-#, fuzzy, c-format
-msgid "Could not open plugin file '%s'\n"
-msgstr "表示プラグイン・ファイル '%s' を開けませんでした。\n"
-
-#: src/planner-view-loader.c:40
-#, c-format
-msgid "Could not open view plugin file '%s'\n"
-msgstr "表示プラグイン・ファイル '%s' を開けませんでした。\n"
 
 #: src/planner-cell-renderer-date.c:147
 msgid "Constraint type"
@@ -1123,6 +990,16 @@ msgstr "取り消し"
 msgid "OK"
 msgstr "OK"
 
+#: src/planner-cmd-manager.c:168
+#, c-format
+msgid "_Undo '%s'"
+msgstr "元に戻す:'%s' (_U)"
+
+#: src/planner-cmd-manager.c:190
+#, c-format
+msgid "_Redo '%s'"
+msgstr "やり直す:'%s' (_R)"
+
 #: src/planner-default-week-dialog.c:40
 msgid "Monday"
 msgstr "月曜日"
@@ -1152,201 +1029,12 @@ msgid "Sunday"
 msgstr "日曜日"
 
 #: src/planner-default-week-dialog.c:266
-#, fuzzy
 msgid "No working time"
-msgstr "作業時間をカスタマイズする"
+msgstr "作業時間がありません"
 
 #: src/planner-default-week-dialog.c:277 src/planner-default-week-dialog.c:281
 msgid "%H:%M"
 msgstr "%H:%M"
-
-#: src/planner-group-dialog.c:387 src/planner-property-dialog.c:378
-#: src/planner-task-dialog.c:1311 src/planner-task-dialog.c:1397
-#: src/planner-task-view.c:227 src/planner-gantt-print.c:190
-#: src/planner-resource-view.c:966
-msgid "Name"
-msgstr "名前"
-
-#: src/planner-group-dialog.c:393
-#, fuzzy
-msgid "Manager name"
-msgstr "マネージャの連絡先"
-
-#: src/planner-group-dialog.c:399
-msgid "Manager phone"
-msgstr "マネージャの連絡先"
-
-#: src/planner-group-dialog.c:405
-msgid "Manager email"
-msgstr "マネージャの E-メール"
-
-#: src/planner-project-properties.c:146
-msgid "Select a calendar to use for this project:"
-msgstr "このプロジェクトに使用するカレンダを選択して下さい:"
-
-#: src/planner-project-properties.c:606
-msgid "Property"
-msgstr "プロパティ"
-
-#: src/planner-project-properties.c:617 src/planner-property-dialog.c:431
-msgid "Value"
-msgstr "値"
-
-#: src/planner-project-properties.c:993 src/planner-property-dialog.c:229
-msgid "The name of the custom property needs to start with a letter."
-msgstr "カスタム・プロパティ名の最初は文字にして下さい。"
-
-#: src/planner-project-properties.c:1065 src/planner-property-dialog.c:300
-#, c-format
-msgid "Do you really want to remove the property '%s' from the project?"
-msgstr "プロジェクトからプロパティ '%s' を削除しても宜しいですか？"
-
-#: src/planner-project-properties.c:1194
-#, fuzzy
-msgid "Could not create properties dialog."
-msgstr "プロパティ・ダイアログを生成できませんでした。"
-
-#: src/planner-property-dialog.c:397
-msgid "Label"
-msgstr "ラベル"
-
-#: src/planner-property-dialog.c:411 src/planner-task-dialog.c:1429
-#: src/planner-resource-view.c:987
-msgid "Type"
-msgstr "種類"
-
-#: src/planner-print-dialog.c:49
-msgid "Print Project"
-msgstr "プロジェクト印刷"
-
-#: src/planner-print-dialog.c:56
-msgid "Select views"
-msgstr "ビューの選択"
-
-#: src/planner-print-dialog.c:74
-msgid "Select the views to print:"
-msgstr "印刷するビューの選択:"
-
-#. Put "no group" at the top.
-#: src/planner-resource-dialog.c:248 src/planner-resource-input-dialog.c:96
-#: src/planner-resource-view.c:1375
-msgid "(None)"
-msgstr "(なし)"
-
-#: src/planner-resource-dialog.c:258 src/planner-resource-input-dialog.c:106
-#: src/planner-task-dialog.c:249
-msgid "(No name)"
-msgstr "(名前なし)"
-
-#. i18n: time stamp format for notes in task dialog, see strftime(3) for
-#. * a detailed description.
-#: src/planner-resource-dialog.c:728 src/planner-task-dialog.c:679
-msgid "%a %d %b %Y, %H:%M\n"
-msgstr "%Y/%m/%d (%a), %p %I:%M\n"
-
-#: src/planner-resource-dialog.c:826
-msgid "None (use project default)"
-msgstr "なし (デフォルトを使用する)"
-
-#: src/planner-resource-dialog.c:953 src/planner-resource-dialog.c:955
-msgid "Edit resource properties"
-msgstr "リソース・プロパティの編集"
-
-#: src/planner-resource-dialog.c:1101 src/planner-task-view.c:230
-#: src/planner-gantt-print.c:198 src/planner-resource-view.c:629
-#: src/planner-resource-view.c:645 src/planner-resource-view.c:1187
-#, fuzzy
-msgid "Work"
-msgstr ""
-"\n"
-"作業"
-
-#: src/planner-resource-dialog.c:1102 src/planner-resource-view.c:632
-#: src/planner-resource-view.c:646 src/planner-resource-view.c:1188
-msgid "Material"
-msgstr "資材"
-
-#: src/planner-predecessor-model.c:191 src/planner-task-dialog.c:1039
-msgid "FS"
-msgstr "FS"
-
-#: src/planner-predecessor-model.c:194 src/planner-task-dialog.c:1040
-msgid "FF"
-msgstr "FF"
-
-#: src/planner-predecessor-model.c:197 src/planner-task-dialog.c:1041
-msgid "SS"
-msgstr "SS"
-
-#: src/planner-predecessor-model.c:200 src/planner-task-dialog.c:1042
-msgid "SF"
-msgstr "SF"
-
-#: src/planner-task-dialog.c:745
-msgid "Finish to start (FS)"
-msgstr "Finish to start (FS)"
-
-#: src/planner-task-dialog.c:746
-msgid "Finish to finish (FF)"
-msgstr "Finish to finish (FF)"
-
-#: src/planner-task-dialog.c:747
-msgid "Start to start (SS)"
-msgstr "Start to start (SS)"
-
-#: src/planner-task-dialog.c:748
-msgid "Start to finish (SF)"
-msgstr "Start to finish (SF)"
-
-#: src/planner-task-dialog.c:798
-msgid "Can't add new predecessor. No task selected!"
-msgstr "新しい前任を追加できません。タスクが選択されていません！"
-
-#: src/planner-task-dialog.c:1330
-msgid "Assigned"
-msgstr "割り当て"
-
-#: src/planner-task-dialog.c:1347
-msgid "Units"
-msgstr "ユニット"
-
-#: src/planner-task-dialog.c:1451
-msgid "Lag"
-msgstr "遅れ"
-
-#: src/planner-task-dialog.c:1584 src/planner-task-dialog.c:1586
-msgid "Edit task properties"
-msgstr "タスク・プロパティの編集"
-
-#: src/planner-html-plugin.c:133
-#, c-format
-msgid ""
-"\"%s\" is a directory.\n"
-"Enter a filename and try again."
-msgstr ""
-"\"%s\" はフォルダです。\n"
-"ファイル名を入力して再度実行して下さい。"
-
-#: src/planner-sql-plugin.c:269
-#, fuzzy, c-format
-msgid ""
-"Connection to database '%s' failed:\n"
-"%s"
-msgstr ""
-"データベース '%s' への接続に失敗:\n"
-"%s"
-
-#: src/planner-sql-plugin.c:318
-msgid "Project"
-msgstr "プロジェクト"
-
-#: src/planner-sql-plugin.c:466
-msgid "Open from Database"
-msgstr "データベースから開く"
-
-#: src/planner-sql-plugin.c:573
-msgid "Save to Database"
-msgstr "データベースへ保存"
 
 #: src/planner-format.c:141
 #, c-format
@@ -1395,6 +1083,25 @@ msgstr "%Y年 %b %d日"
 msgid "Project start"
 msgstr "プロジェクトの開始"
 
+#: src/planner-gantt-print.c:190 src/planner-group-dialog.c:387
+#: src/planner-property-dialog.c:378 src/planner-resource-view.c:966
+#: src/planner-task-dialog.c:1311 src/planner-task-dialog.c:1397
+#: src/planner-task-view.c:227
+msgid "Name"
+msgstr "名前"
+
+#: src/planner-gantt-print.c:198 src/planner-resource-dialog.c:1101
+#: src/planner-resource-view.c:629 src/planner-resource-view.c:645
+#: src/planner-resource-view.c:1187 src/planner-task-view.c:230
+msgid "Work"
+msgstr "作業"
+
+#: src/planner-gantt-print.c:513 src/planner-gantt-print.c:515
+#: src/planner-gantt-row.c:656 src/planner-gantt-row.c:658
+#: src/planner-window.c:1626
+msgid "Unnamed"
+msgstr "名前なし"
+
 #: src/planner-gantt-row.c:1841 src/planner-gantt-row.c:1844
 msgid "No name"
 msgstr "名前なし"
@@ -1433,6 +1140,189 @@ msgid ""
 msgstr ""
 "\n"
 "作業"
+
+#: src/planner-group-dialog.c:393
+msgid "Manager name"
+msgstr "マネージャの名前"
+
+#: src/planner-group-dialog.c:399
+msgid "Manager phone"
+msgstr "マネージャの連絡先"
+
+#: src/planner-group-dialog.c:405
+msgid "Manager email"
+msgstr "マネージャの E-メール"
+
+#: src/planner-html-plugin.c:133
+#, c-format
+msgid ""
+"\"%s\" is a directory.\n"
+"Enter a filename and try again."
+msgstr ""
+"\"%s\" はフォルダです。\n"
+"ファイル名を入力して再度実行して下さい。"
+
+#: src/planner-html-plugin.c:143 src/planner-window.c:1394
+#, c-format
+msgid "File \"%s\" exists, do you want to overwrite it?"
+msgstr "ファイル \"%s\" が存在します。上書きしても宜しいですか？"
+
+#: src/planner-main.c:50
+msgid "Create the initial window with the given geometry."
+msgstr "指定した位置に初期ウィンドウを表示する"
+
+#: src/planner-main.c:50
+msgid "GEOMETRY"
+msgstr "GEOMETRY"
+
+#: src/planner-main.c:76
+msgid "planner: --geometry cannot be used with more than one file."
+msgstr "planner: オプション --geometry は一つ以上指定できません。"
+
+#: src/planner-plugin-loader.c:40
+#, c-format
+msgid "Could not open plugin file '%s'\n"
+msgstr "プラグイン・ファイル '%s' を開けませんでした。\n"
+
+#: src/planner-predecessor-model.c:191 src/planner-task-dialog.c:1039
+msgid "FS"
+msgstr "FS"
+
+#: src/planner-predecessor-model.c:194 src/planner-task-dialog.c:1040
+msgid "FF"
+msgstr "FF"
+
+#: src/planner-predecessor-model.c:197 src/planner-task-dialog.c:1041
+msgid "SS"
+msgstr "SS"
+
+#: src/planner-predecessor-model.c:200 src/planner-task-dialog.c:1042
+msgid "SF"
+msgstr "SF"
+
+#: src/planner-print-dialog.c:49
+msgid "Print Project"
+msgstr "プロジェクト印刷"
+
+#: src/planner-print-dialog.c:56
+msgid "Select views"
+msgstr "ビューの選択"
+
+#: src/planner-print-dialog.c:74
+msgid "Select the views to print:"
+msgstr "印刷するビューの選択:"
+
+#: src/planner-project-properties.c:307
+msgid "Select a calendar to use for this project:"
+msgstr "このプロジェクトに使用するカレンダを選択して下さい:"
+
+#: src/planner-project-properties.c:402
+msgid "Edit Project Name"
+msgstr "プロジェクト名の編集"
+
+#: src/planner-project-properties.c:438
+msgid "Edit Organization"
+msgstr "組織の編集"
+
+#: src/planner-project-properties.c:474
+msgid "Edit Manager"
+msgstr "マネージャの編集"
+
+#: src/planner-project-properties.c:545
+msgid "Edit Project Start"
+msgstr "プロジェクトの開始の編集"
+
+#: src/planner-project-properties.c:614
+msgid "Edit Project Phase"
+msgstr "プロジェクト・フェーズの編集"
+
+#: src/planner-project-properties.c:747
+msgid "Property"
+msgstr "プロパティ"
+
+#: src/planner-project-properties.c:758 src/planner-property-dialog.c:431
+msgid "Value"
+msgstr "値"
+
+#: src/planner-project-properties.c:1129 src/planner-property-dialog.c:229
+msgid "The name of the custom property needs to start with a letter."
+msgstr "カスタム・プロパティ名の最初は文字にして下さい。"
+
+#: src/planner-project-properties.c:1201 src/planner-property-dialog.c:300
+#, c-format
+msgid "Do you really want to remove the property '%s' from the project?"
+msgstr "プロジェクトからプロパティ '%s' を削除しても宜しいですか？"
+
+#: src/planner-project-properties.c:1343
+msgid "Could not create properties dialog."
+msgstr "プロパティ・ダイアログを生成できませんでした。"
+
+#: src/planner-property-dialog.c:397
+msgid "Label"
+msgstr "ラベル"
+
+#: src/planner-property-dialog.c:411 src/planner-resource-view.c:987
+#: src/planner-task-dialog.c:1429
+msgid "Type"
+msgstr "種類"
+
+#. Put "no group" at the top.
+#: src/planner-resource-dialog.c:248 src/planner-resource-input-dialog.c:96
+#: src/planner-resource-view.c:1375
+msgid "(None)"
+msgstr "(なし)"
+
+#: src/planner-resource-dialog.c:258 src/planner-resource-input-dialog.c:106
+#: src/planner-task-dialog.c:249
+msgid "(No name)"
+msgstr "(名前なし)"
+
+#. i18n: time stamp format for notes in task dialog, see strftime(3) for
+#. * a detailed description.
+#: src/planner-resource-dialog.c:728 src/planner-task-dialog.c:679
+msgid "%a %d %b %Y, %H:%M\n"
+msgstr "%Y/%m/%d (%a), %p %I:%M\n"
+
+#: src/planner-resource-dialog.c:826
+msgid "None (use project default)"
+msgstr "なし (デフォルトを使用する)"
+
+#: src/planner-resource-dialog.c:953 src/planner-resource-dialog.c:955
+msgid "Edit resource properties"
+msgstr "リソース・プロパティの編集"
+
+#: src/planner-resource-dialog.c:1102 src/planner-resource-view.c:632
+#: src/planner-resource-view.c:646 src/planner-resource-view.c:1188
+msgid "Material"
+msgstr "資材"
+
+#: src/planner-resource-view.c:248
+msgid "/_Insert resource"
+msgstr "/リソースの挿入(_I)"
+
+#: src/planner-resource-view.c:249
+msgid "/_Remove resource"
+msgstr "/リソースの削除(_R)"
+
+#: src/planner-resource-view.c:250
+msgid "/_Edit resource..."
+msgstr "/リソースの編集(_E)..."
+
+#: src/planner-resource-view.c:350
+msgid "_Resources"
+msgstr "リソース(_R)"
+
+#: src/planner-resource-view.c:849
+msgid "Edit custom resource properties"
+msgstr "カスタム・リソース・プロパティの編集"
+
+#: src/planner-resource-view.c:1011
+msgid "Group"
+msgstr "グループ"
+
+#: src/planner-resource-view.c:1040
+msgid "Email"
+msgstr "E-メール"
 
 #. i18n: Short "Week", preferably 2 letters.
 #: src/planner-scale-utils.c:325
@@ -1481,92 +1371,153 @@ msgstr "H%d"
 msgid "%04d, H%d"
 msgstr "%04d年 H%d"
 
-#: src/planner-task-tree.c:184
+#: src/planner-sql-plugin.c:273
+#, c-format
+msgid ""
+"Connection to database '%s' failed:\n"
+"%s"
+msgstr ""
+"データベース '%s' への接続に失敗:\n"
+"%s"
+
+#: src/planner-sql-plugin.c:322
+msgid "Project"
+msgstr "プロジェクト"
+
+#: src/planner-sql-plugin.c:498
+msgid "Open from Database"
+msgstr "データベースから開く"
+
+#: src/planner-sql-plugin.c:605
+msgid "Save to Database"
+msgstr "データベースへ保存"
+
+#: src/planner-task-dialog.c:745
+msgid "Finish to start (FS)"
+msgstr "Finish to start (FS)"
+
+#: src/planner-task-dialog.c:746
+msgid "Finish to finish (FF)"
+msgstr "Finish to finish (FF)"
+
+#: src/planner-task-dialog.c:747
+msgid "Start to start (SS)"
+msgstr "Start to start (SS)"
+
+#: src/planner-task-dialog.c:748
+msgid "Start to finish (SF)"
+msgstr "Start to finish (SF)"
+
+#: src/planner-task-dialog.c:798
+msgid "Can't add new predecessor. No task selected!"
+msgstr "新しい前任を追加できません。タスクが選択されていません！"
+
+#: src/planner-task-dialog.c:1330
+msgid "Assigned"
+msgstr "割り当て"
+
+#: src/planner-task-dialog.c:1347
+msgid "Units"
+msgstr "ユニット"
+
+#: src/planner-task-dialog.c:1451
+msgid "Lag"
+msgstr "遅れ"
+
+#: src/planner-task-dialog.c:1584 src/planner-task-dialog.c:1586
+msgid "Edit task properties"
+msgstr "タスク・プロパティの編集"
+
+#: src/planner-task-tree.c:187
 msgid "/_Insert task"
 msgstr "/タスクの挿入(_I)"
 
-#: src/planner-task-tree.c:185
+#: src/planner-task-tree.c:190
 msgid "/_Insert subtask"
 msgstr "/サブタスクの挿入(_I)"
 
-#: src/planner-task-tree.c:186
+#: src/planner-task-tree.c:193
 msgid "/_Remove task"
 msgstr "/タスクの削除(_R)"
 
-#: src/planner-task-tree.c:188
+#: src/planner-task-tree.c:198
 msgid "/_Unlink task"
 msgstr "/タスクのリンク削除(_U)"
 
-#: src/planner-task-tree.c:190
+#: src/planner-task-tree.c:204
 msgid "/_Edit task..."
 msgstr "/タスクの編集(_E)..."
 
-#: src/planner-task-tree.c:2112
+#: src/planner-task-tree.c:373
+msgid "Edit task property"
+msgstr "タスク・プロパティの編集"
+
+#: src/planner-task-tree.c:2378
 msgid "mon"
 msgstr "月"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:2113
+#: src/planner-task-tree.c:2379
 msgid "month"
 msgstr "月"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:2114
+#: src/planner-task-tree.c:2380
 msgid "months"
 msgstr "月間"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:2115
+#: src/planner-task-tree.c:2381
 msgid "w"
 msgstr "w"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:2116
+#: src/planner-task-tree.c:2382
 msgid "week"
 msgstr "週"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:2117
+#: src/planner-task-tree.c:2383
 msgid "weeks"
 msgstr "週間"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:2118
+#: src/planner-task-tree.c:2384
 msgid "d"
 msgstr "d"
 
 #. day unit variant accepted in input
-#: src/planner-task-tree.c:2119
+#: src/planner-task-tree.c:2385
 msgid "day"
 msgstr "日"
 
 #. day unit variant accepted in input
-#: src/planner-task-tree.c:2121
+#: src/planner-task-tree.c:2387
 msgid "h"
 msgstr "h"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:2122
+#: src/planner-task-tree.c:2388
 msgid "hour"
 msgstr "時間"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:2123
+#: src/planner-task-tree.c:2389
 msgid "hours"
 msgstr "時間"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:2124
+#: src/planner-task-tree.c:2390
 msgid "min"
 msgstr "分"
 
 #. minute unit variant accepted in input
-#: src/planner-task-tree.c:2125
+#: src/planner-task-tree.c:2391
 msgid "minute"
 msgstr "分"
 
 #. minute unit variant accepted in input
-#: src/planner-task-tree.c:2126
+#: src/planner-task-tree.c:2392
 msgid "minutes"
 msgstr "分間"
 
@@ -1594,36 +1545,90 @@ msgstr "停滞"
 msgid "Edit custom task properties"
 msgstr "カスタム・タスク・プロパティの編集"
 
-#: src/planner-resource-view.c:248
-msgid "/_Insert resource"
-msgstr "/リソースの挿入(_I)"
+#: src/planner-view-loader.c:40
+#, c-format
+msgid "Could not open view plugin file '%s'\n"
+msgstr "表示プラグイン・ファイル '%s' を開けませんでした。\n"
 
-#: src/planner-resource-view.c:249
-msgid "/_Remove resource"
-msgstr "/リソースの削除(_R)"
+#: src/planner-window.c:638
+msgid "Open a file"
+msgstr "プロジェクトファイルを開きます"
 
-#: src/planner-resource-view.c:250
-msgid "/_Edit resource..."
-msgstr "/リソースの編集(_E)..."
+#. I18n: Translators, list your names here, newline separated if there
+#. * are more than one, to appear in the about box.
+#.
+#: src/planner-window.c:1075 src/planner-window.c:1082
+msgid "translator_credits"
+msgstr "Takeshi AIHANA <aihana@gnome.gr.jp>"
 
-#: src/planner-resource-view.c:350
-msgid "_Resources"
-msgstr "リソース(_R)"
+#. "Copyright \xc2\xa9"
+#: src/planner-window.c:1079
+msgid "A Project Management application for the GNOME desktop"
+msgstr "GNOME デスクトップ向けのプロジェクト管理アプリ"
 
-#: src/planner-resource-view.c:849
-msgid "Edit custom resource properties"
-msgstr "カスタム・リソース・プロパティの編集"
+#: src/planner-window.c:1089
+msgid "The Planner Homepage"
+msgstr "Planner のホームページ"
 
-#: src/planner-resource-view.c:1011
-msgid "Group"
-msgstr "グループ"
+#: src/planner-window.c:1205
+msgid "If you don't save, changes made the last minute will be discarded."
+msgstr "保存しないと、1分前に変更した内容が破棄されます。"
 
-#: src/planner-resource-view.c:1040
-msgid "Email"
-msgstr "E-メール"
+#: src/planner-window.c:1210
+#, c-format
+msgid "If you don't save, changes made the last %d minutes will be discarded."
+msgstr "保存しないと、%d分前の変更が破棄されます。"
 
-#~ msgid "Contribute to MrProject"
-#~ msgstr "MrProject への支援"
+#: src/planner-window.c:1215
+msgid "If you don't save, changes made the last hour will be discarded."
+msgstr "保存しないと、1時間前の変更が破棄されます。"
 
-#~ msgid "MrProject Project Management Tool"
-#~ msgstr "MrProject プロジェクト管理ツール"
+#: src/planner-window.c:1220
+#, c-format
+msgid "If you don't save, changes made the last %d hours will be discarded."
+msgstr "保存しないと、%d時間前の変更が破棄されます。"
+
+#: src/planner-window.c:1227
+#, c-format
+msgid "Save changes to document '%s' before closing?"
+msgstr "閉じる前にドキュメント '%s' の変更を保存しますか？"
+
+#: src/planner-window.c:1245
+msgid "C_lose without saving"
+msgstr "保存せずに閉じる(_L)"
+
+#: src/planner-window.c:1247
+msgid "_Cancel"
+msgstr "キャンセル(_C)"
+
+#: src/planner-window.c:1358
+msgid "Save a file"
+msgstr "保存する"
+
+#: src/planner-window.c:1589
+msgid ""
+"You have opened a file that was saved with an old version of Planner.\n"
+"\n"
+"When loading old files, all tasks will use the constraint 'Must Start On', "
+"since the old version did not fully support automatic rescheduling. To take "
+"advantage of this new feature, you should add predecessor relations between "
+"tasks that are dependant on each other.\n"
+"\n"
+"You can add a predecessor relation by clicking on the predecessor and "
+"dragging to the successor.\n"
+"\n"
+"After doing this, you can remove all constraints by selecting the menu item "
+"'Remove all constraints' in the 'Edit' menu."
+msgstr ""
+"あなたが開いたファイルは Planner の古いバージョンで保存されたものです。\n"
+"\n"
+"古いファイルを読み込むと、古いバージョンは完全に自動再スケジューリングできな"
+"い理由で、全てのタスクが全て '作業開始してません' 属性になります。この新しい"
+"機能を利用するためには、お互いのタスク間で依存した前任の情報を追加する必要が"
+"あります。\n"
+"\n"
+"前任をクリックすることで前任の関係を追加して後任へドラッグすることが可能で"
+"す。\n"
+"\n"
+"この後に、'編集' メニューの '全ての制限の排除' を選択すると全ての制限が削除さ"
+"れます。"
