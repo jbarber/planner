@@ -1138,7 +1138,7 @@ window_undo_state_changed_cb (PlannerCmdManager *manager,
 	bonobo_ui_component_set_prop (priv->ui_component, 
 				      "/commands/EditUndo",
 				      "label", label,
-				      NULL);	
+				      NULL);
 }
 
 static void

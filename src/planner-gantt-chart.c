@@ -1312,13 +1312,13 @@ planner_gantt_chart_get_model (PlannerGanttChart *chart)
 
 void
 planner_gantt_chart_set_model (PlannerGanttChart *chart,
-			  GtkTreeModel *model)
+			       GtkTreeModel *model)
 {
 	PlannerGanttChartPriv *priv;
-	MrpTask          *root;
-	MrpProject       *project;
-	mrptime           t;
-	gulong            id;
+	MrpTask               *root;
+	MrpProject            *project;
+	mrptime                t;
+	gulong                 id;
 	
 	g_return_if_fail (PLANNER_IS_GANTT_CHART (chart));
 

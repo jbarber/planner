@@ -172,10 +172,10 @@ mgm_get_value (GtkTreeModel *tree_model,
 		gint          column,
 		GValue       *value)
 {
-        gchar            *str = NULL;
-	MrpGroup         *group, *default_group;
+        gchar                 *str = NULL;
+	MrpGroup              *group, *default_group;
 	PlannerGroupModelPriv *priv;
-	gboolean          is_default;
+	gboolean               is_default;
 
         g_return_if_fail (PLANNER_IS_GROUP_MODEL (tree_model));
         g_return_if_fail (iter != NULL);
@@ -201,6 +201,7 @@ mgm_get_value (GtkTreeModel *tree_model,
 		
                 g_value_init (value, G_TYPE_BOOLEAN);
                 g_value_set_boolean (value, is_default);
+
                 break;
 
         case GROUP_COL_MANAGER_NAME:
@@ -208,6 +209,7 @@ mgm_get_value (GtkTreeModel *tree_model,
                 g_value_init (value, G_TYPE_STRING);
 		g_value_set_string (value, str);
 		g_free (str);
+
                 break;
 
 	case GROUP_COL_MANAGER_PHONE:
@@ -320,7 +322,7 @@ planner_group_model_new (MrpProject *project)
 {
         PlannerGroupModel     *model;
         PlannerGroupModelPriv *priv;
-	GList            *groups;
+	GList                 *groups;
 	
         model = g_object_new (PLANNER_TYPE_GROUP_MODEL, NULL);
         
@@ -348,4 +350,3 @@ planner_group_model_new (MrpProject *project)
 
         return model;
 }
-

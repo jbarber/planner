@@ -148,6 +148,8 @@ group_finalize (GObject *object)
 {
         MrpGroup     *group = MRP_GROUP (object);
         MrpGroupPriv *priv;
+
+	g_warning ("Removing the group ... it can't be recovered");
         
         priv = group->priv;
         

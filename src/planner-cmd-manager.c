@@ -118,7 +118,7 @@ cmd_manager_init (PlannerCmdManager *manager)
 	/* FIXME: What default to use? Need some limit, or we'll use a lot of
 	 * memory.
 	 */
-	priv->limit = 100;
+	priv->limit = 2;
 }
 
 static void

@@ -49,6 +49,7 @@ typedef struct {
 	MrpProject  *project;
 	MrpGroup    *group;
 	GList       *group_resources;
+	gboolean     is_default;
 } GroupCmdRemove;
 
 typedef struct {
@@ -59,6 +60,15 @@ typedef struct {
 	GValue      *value;
 	GValue      *old_value;
 } GroupCmdEditProperty;
+
+
+typedef struct {
+	PlannerCmd   base;
+
+	MrpProject  *project;
+	MrpGroup    *group;
+	MrpGroup    *old_group;
+} GroupCmdDefault;
 
 typedef struct {
 	MrpProject  *project;
@@ -267,8 +277,18 @@ group_cmd_insert_undo (PlannerCmd *cmd_base)
 	mrp_project_remove_group (cmd->project,
 				  cmd->group);
 	
-	/* If we want to remove the object from memory ... but we don't */
-	/* g_object_unref (cmd->group); */
+}
+
+
+static void
+group_cmd_insert_free (PlannerCmd *cmd_base)
+{
+	GroupCmdInsert  *cmd;
+
+	cmd = (GroupCmdInsert*) cmd_base;	
+
+	cmd->group = NULL;
+	cmd->project = NULL;
 }
 
 static PlannerCmd *
@@ -284,7 +304,7 @@ group_cmd_insert (PlannerView *view)
 	cmd_base->label = g_strdup (_("Insert group"));
 	cmd_base->do_func = group_cmd_insert_do;
 	cmd_base->undo_func = group_cmd_insert_undo;
-	cmd_base->free_func = NULL; /* FIXME */
+	cmd_base->free_func = group_cmd_insert_free;
 
 	cmd->project = planner_window_get_project (view->main_window);
 
@@ -311,10 +331,6 @@ group_dialog_insert_group_cb (GtkWidget *button, GtkWidget *dialog)
 	
 	cmd = (GroupCmdInsert*) group_cmd_insert (data->view);
 
-	/* group = mrp_group_new ();
-
-	mrp_project_add_group (data->project, group); */
-
 	if (!GTK_WIDGET_HAS_FOCUS (data->tree_view)) {
 		gtk_widget_grab_focus (GTK_WIDGET (data->tree_view));
 	}
@@ -339,11 +355,10 @@ group_cmd_remove_do (PlannerCmd *cmd_base)
 {
 	GroupCmdRemove *cmd;
 	GList          *resources, *l;
+	MrpGroup       *default_group;
 
 	cmd = (GroupCmdRemove*) cmd_base;
 
-	/* FIXME: Maybe it is better to implement mrp_group_add_resource */ 
-	/* We need to store the users in the group */
 	resources = mrp_project_get_resources (cmd->project);
 
 	for (l = resources; l; l = l->next) {
@@ -354,12 +369,12 @@ group_cmd_remove_do (PlannerCmd *cmd_base)
 		if (cmd->group == group)
 			cmd->group_resources = g_list_prepend (cmd->group_resources, l->data);
 	}
+
+	mrp_object_get (cmd->project, "default-group", &default_group, NULL);
+	if (default_group == cmd->group)
+		cmd->is_default = TRUE;
 	
-
 	mrp_project_remove_group (cmd->project, cmd->group);
-
-	/* We don't want to really remove the group for undo reasons*/
-	/* cmd->group = NULL; */
 }
 
 static void
@@ -383,6 +398,24 @@ group_cmd_remove_undo (PlannerCmd *cmd_base)
 	for (l = cmd->group_resources; l; l = l->next) {
 		mrp_object_set (MRP_OBJECT (l->data), "group", cmd->group, NULL);
 	}
+
+	if (cmd->is_default) 
+		mrp_object_set (cmd->project, "default-group", cmd->group, NULL);
+}
+
+static void
+group_cmd_remove_free (PlannerCmd *cmd_base)
+{
+	GroupCmdRemove *cmd;
+
+	cmd = (GroupCmdRemove*) cmd_base;
+
+	g_list_free (cmd->group_resources);
+
+	cmd->project = NULL;
+	/* We need to unref to really remove it. We need to find why ;-) */
+	g_object_unref (cmd->group);
+	g_object_unref (cmd->group);
 }
 
 static PlannerCmd *
@@ -398,7 +431,7 @@ group_cmd_remove (PlannerView *view, MrpGroup *group)
 	cmd_base->label = g_strdup (_("Remove group"));
 	cmd_base->do_func = group_cmd_remove_do;
 	cmd_base->undo_func = group_cmd_remove_undo;
-	cmd_base->free_func = NULL; /* FIXME */
+	cmd_base->free_func = group_cmd_remove_free;
 
 	cmd->project = planner_window_get_project (view->main_window);
 	cmd->group = group;
@@ -423,8 +456,6 @@ group_dialog_remove_group_cb (GtkWidget *widget, GtkWidget *dialog)
 	list = group_dialog_selection_get_list (dialog);
 
 	for (node = list; node; node = node->next) {
-		/* mrp_project_remove_group (data->project, 
-		   MRP_GROUP (node->data)); */
 		cmd = (GroupCmdRemove*) group_cmd_remove (data->view, MRP_GROUP (node->data));
 	}
 	
@@ -446,6 +477,64 @@ group_dialog_close_editor_cb (GtkWidget *button, GtkWidget *dialog)
 
 	gtk_widget_destroy (dialog);
 }
+static void
+group_cmd_default_do (PlannerCmd *cmd_base)
+{
+	GroupCmdDefault *cmd;
+
+	cmd = (GroupCmdDefault*) cmd_base;
+
+	mrp_object_get (cmd->project, "default-group", &cmd->old_group, NULL);
+	mrp_object_set (cmd->project, "default-group", cmd->group, NULL);
+}
+
+static void
+group_cmd_default_undo (PlannerCmd *cmd_base)
+{
+	GroupCmdDefault *cmd;
+	
+	cmd = (GroupCmdDefault*) cmd_base;
+	mrp_object_set (cmd->project, "default-group", cmd->old_group, NULL);
+}
+
+static void
+group_cmd_default_free (PlannerCmd *cmd_base)
+{
+	GroupCmdDefault *cmd;
+	
+	cmd = (GroupCmdDefault*) cmd_base;
+	/* We haven't ref this objects ... we must? */
+	cmd->project = NULL;
+	cmd->group = NULL;
+	cmd->old_group = NULL;
+}
+
+static PlannerCmd *
+group_cmd_default (PlannerView *view,
+		   MrpGroup    *group)
+{
+	PlannerCmd       *cmd_base;
+	GroupCmdDefault  *cmd;
+
+	cmd = g_new0 (GroupCmdDefault, 1);
+
+	cmd_base = (PlannerCmd*) cmd;
+
+	cmd_base->label = g_strdup (_("Default group"));
+	cmd_base->do_func = group_cmd_default_do;
+	cmd_base->undo_func = group_cmd_default_undo;
+	cmd_base->free_func = group_cmd_default_free;
+
+	cmd->project = planner_window_get_project (view->main_window);
+
+	cmd->group = group;	
+
+	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager (view->main_window),
+					   cmd_base);
+
+	return cmd_base;
+}
+
 
 static void
 group_dialog_cell_toggled (GtkCellRendererText *cell, 
@@ -486,9 +575,7 @@ group_dialog_cell_toggled (GtkCellRendererText *cell,
 		group = MRP_GROUP (planner_list_model_get_object (
 					   PLANNER_LIST_MODEL (model), &iter));
 		if (!is_default) {
-			g_object_set (data->project, 
-				      "default-group", group, 
-				      NULL);
+			group_cmd_default (data->view, group);
 		}
 		break;
 
@@ -524,6 +611,18 @@ group_cmd_edit_property_undo (PlannerCmd *cmd_base)
 			       cmd->old_value);
 }
 
+static void
+group_cmd_edit_property_free (PlannerCmd *cmd_base)
+{
+	GroupCmdEditProperty *cmd;
+	
+	cmd = (GroupCmdEditProperty *) cmd_base;
+	
+	cmd->group = NULL;
+	g_value_unset (cmd->value);
+	g_value_unset (cmd->old_value);
+}
+
 static PlannerCmd *
 group_cmd_edit_property (PlannerView  *view, 
 			 MrpGroup     *group,
@@ -540,7 +639,7 @@ group_cmd_edit_property (PlannerView  *view,
 	cmd_base->label = g_strdup (_("Edit group property"));
 	cmd_base->do_func = group_cmd_edit_property_do;
 	cmd_base->undo_func = group_cmd_edit_property_undo;
-	cmd_base->free_func = NULL; /* FIXME */
+	cmd_base->free_func = group_cmd_edit_property_free;
 
 	cmd->property = property;
 	cmd->group = group;
