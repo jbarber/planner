@@ -44,7 +44,9 @@
 #define PASSWORD   "sql-plugin-password"
 #define PROJECT_ID "sql-plugin-project-id"
 
-#define GCONF_PATH "/apps/planner/plugins/sql"
+#define CONF_SERVER "/plugins/sql/server"
+#define CONF_DATABASE "/plugins/sql/database"
+#define CONF_USERNAME "/plugins/sql/username"
 
 #define STOP_ON_ERR GDA_COMMAND_OPTION_STOP_ON_ERRORS
 
@@ -894,12 +896,9 @@ sql_plugin_retrieve_db_values (PlannerPlugin  *plugin,
 	GtkWidget          *password_entry;
 	gboolean            ret;
 	PlannerApplication *application;
-	GConfClient        *gconf_client;
 
 	application = planner_window_get_application (plugin->main_window);
 	
-	gconf_client = planner_application_get_gconf_client ();
-
 	gui = glade_xml_new (GLADEDIR"/sql.glade", "open_dialog" , NULL);
 	dialog = glade_xml_get_widget (gui, "open_dialog");
 
@@ -913,19 +912,19 @@ sql_plugin_retrieve_db_values (PlannerPlugin  *plugin,
 		GNOME_ENTRY (glade_xml_get_widget (gui, "user_entry")));
 	password_entry = glade_xml_get_widget (gui, "password_entry");
 
-	str = gconf_client_get_string (gconf_client, GCONF_PATH "/server", NULL);
+	str = planner_conf_get_string (CONF_SERVER, NULL);
 	if (str) {
 		gtk_entry_set_text (GTK_ENTRY (server_entry), str);
 		g_free (str);
 	}
 
-	str = gconf_client_get_string (gconf_client, GCONF_PATH "/database", NULL);
+	str = planner_conf_get_string (CONF_DATABASE, NULL);
 	if (str) {
 		gtk_entry_set_text (GTK_ENTRY (db_entry), str);
 		g_free (str);
 	}
 
-	str = gconf_client_get_string (gconf_client, GCONF_PATH "/username", NULL);
+	str = planner_conf_get_string (CONF_USERNAME, NULL);
 	if (str) {
 		gtk_entry_set_text (GTK_ENTRY (user_entry), str);
 		g_free (str);
@@ -942,15 +941,17 @@ sql_plugin_retrieve_db_values (PlannerPlugin  *plugin,
 		*database = strdup_null_if_empty (gtk_entry_get_text (GTK_ENTRY (db_entry)));
 		*login = strdup_null_if_empty (gtk_entry_get_text (GTK_ENTRY (user_entry)));
 		*password = strdup_null_if_empty (gtk_entry_get_text (GTK_ENTRY (password_entry)));
+		
+		planner_conf_set_string (CONF_SERVER, 
+					 *server ? *server : "",
+					 NULL);
+		
+		planner_conf_set_string (CONF_DATABASE,
+					 *database ? *database : "",
+					 NULL);
 
-		gconf_client_set_string (gconf_client,
-					 GCONF_PATH "/server", *server ? *server : "",
-					 NULL);
-		gconf_client_set_string (gconf_client,
-					 GCONF_PATH "/database", *database ? *database : "",
-					 NULL);
-		gconf_client_set_string (gconf_client,
-					 GCONF_PATH "/username", *login ? *login : "",
+		planner_conf_set_string (CONF_USERNAME,
+					 *login ? *login : "",
 					 NULL);
 		ret = TRUE;
 		break;
