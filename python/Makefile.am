@@ -34,6 +34,7 @@ EXTRA_DIST = 				\
 	 && $(PYGTK_CODEGEN) \
 	    --override $*.override \
             --load-types planner-arg-types.py \
+            --register $(PYGTK_DEFSDIR)/gtk-types.defs \
 	    --prefix $* $*.defs) > gen-$*.c \
 	&& cp gen-$*.c $*.c \
 	&& rm -f gen-$*.c

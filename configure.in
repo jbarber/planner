@@ -195,6 +195,10 @@ if test "x$enable_python" != "xno"; then
         have_python=no
       fi
     fi
+    AC_MSG_CHECKING(for pygtk defs)
+    PYGTK_DEFSDIR=`$PKG_CONFIG --variable=defsdir pygtk-2.0`
+    AC_SUBST(PYGTK_DEFSDIR)
+    AC_MSG_RESULT($PYGTK_DEFSDIR)
 else
     have_python=no
 fi

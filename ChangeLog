@@ -1,5 +1,23 @@
 2004-08-27  Xavier Ordoquy  <xordoquy@linovia.com>
 
+	* configure.in:
+	searches for the gtk.def file
+
+	* python/Makefile.am:
+	includes the gtk.def file while generating the wrapper.
+
+	* python/planner.defs:
+	regenerated the PlannerWindow wrapper.
+
+	* python/planner-types.defs:
+	* python/planner.override:
+	reflect the move to GtkUIManager
+
+	* python/python-demo.py:
+	demo to show a bit python scripting abilities.
+
+2004-08-27  Xavier Ordoquy  <xordoquy@linovia.com>
+
 	* data/ui/sql-plugin.ui:
 	open/save are now in the import/export placeholders.
 

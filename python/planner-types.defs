@@ -79,7 +79,7 @@
 
 (define-object Window
   (in-module "Planner")
-  (parent "BonoboWindow")
+  (parent "GtkWindow")
   (c-name "PlannerWindow")
   (gtype-id "PLANNER_TYPE_MAIN_WINDOW")
 )
