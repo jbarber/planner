@@ -1504,21 +1504,20 @@ task_dialog_duration_focus_in_cb (GtkWidget     *w,
 	return FALSE;
 }
 
-
 static void
 task_dialog_task_complete_changed_cb (MrpTask    *task, 
 				      GParamSpec *pspec,
 				      GtkWidget  *dialog)
 {
 	DialogData *data;
-	gint       complete;
+	gshort      complete;
 	
 	g_return_if_fail (MRP_IS_TASK (task));
 	g_return_if_fail (GTK_IS_WIDGET (dialog));
 
 	data = DIALOG_GET_DATA (dialog);
 	
-	g_object_get (task, "percent_complete", &complete, NULL);
+	complete = mrp_task_get_percent_complete (task);
 	
 	g_signal_handlers_block_by_func (data->complete_spinbutton,
 					 task_dialog_complete_changed_cb,
@@ -2766,7 +2765,7 @@ task_dialog_connect_to_task (DialogData *data)
 				 0);
 
 	g_signal_connect_object (data->task,
-				 "notify::percent_complete",
+				 "notify::percent-complete",
 				 G_CALLBACK (task_dialog_task_complete_changed_cb),
 				 data->dialog,
 				 0);

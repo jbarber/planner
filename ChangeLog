@@ -3,6 +3,9 @@
 	* data/glade/task-dialog.glade:
 	* src/planner-task-dialog.c: (planner_task_dialog_new): Remove the
 	disabled option menus until we actually implement those parts.
+	(task_dialog_connect_to_task): Use - instead of _ in notify signal
+	names, fixes bug where the spinbutton wasn't updated.
+	(task_dialog_task_complete_changed_cb): Use accessor.
 
 2004-06-18 Alvaro del Castillo  <acs@barrapunto.com>
 
