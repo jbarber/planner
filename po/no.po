@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: planner 2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-01-26 09:13+0100\n"
-"PO-Revision-Date: 2004-01-26 09:15+0100\n"
+"POT-Creation-Date: 2004-01-31 15:02+0100\n"
+"PO-Revision-Date: 2004-01-31 15:03+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian/Bokmaal <i18n-nb@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
@@ -29,7 +29,7 @@ msgstr "Legg til forgjenger"
 
 #: data/glade/add-predecessor.glade.h:3
 msgid "_Lag:"
-msgstr "_Pause: "
+msgstr "_Pause:"
 
 #: data/glade/add-predecessor.glade.h:4 data/glade/calendar-dialog.glade.h:35
 #: data/glade/new-property.glade.h:5 data/glade/project-properties.glade.h:10
@@ -158,7 +158,7 @@ msgstr "Bruk arbeidstid fra derivert kalender"
 
 #: data/glade/calendar-dialog.glade.h:30
 msgid "Week day:"
-msgstr "Ukedag"
+msgstr "Ukedag:"
 
 #: data/glade/calendar-dialog.glade.h:31
 msgid "Working time..."
@@ -358,7 +358,7 @@ msgstr "_Fullført:"
 msgid "Predecessors"
 msgstr "Forgjengere"
 
-#: data/glade/task-dialog.glade.h:9 src/planner-resource-view.c:365
+#: data/glade/task-dialog.glade.h:9 src/planner-resource-view.c:388
 msgid "Resources"
 msgstr "Ressurser"
 
@@ -794,29 +794,29 @@ msgstr "Kunne ikke opprette XML-tre"
 msgid "Could not write XML file"
 msgstr "Kunne ikke skrive XML-fil"
 
-#: libplanner/mrp-project.c:442 src/planner-group-dialog.c:411
+#: libplanner/mrp-project.c:440 src/planner-group-dialog.c:491
 msgid "Default"
 msgstr "Forvalg"
 
-#: libplanner/mrp-project.c:750
+#: libplanner/mrp-project.c:748
 #, c-format
 msgid "Couldn't find a suitable file module for loading '%s'"
 msgstr "Kunne ikke finne en passende filmodul for lasting av «%s»"
 
-#: libplanner/mrp-project.c:771 libplanner/mrp-project.c:1035
+#: libplanner/mrp-project.c:769 libplanner/mrp-project.c:1033
 msgid "No support for SQL storage built into this version of Planner."
 msgstr "Ingen støtte for SQL-lagring i denne versjonen av Planner."
 
-#: libplanner/mrp-project.c:808
+#: libplanner/mrp-project.c:806
 msgid "Invalid URI."
 msgstr "Ugyldig URI."
 
-#: libplanner/mrp-project.c:929
+#: libplanner/mrp-project.c:927
 #, c-format
 msgid "Unable to find file writer identified by '%s'"
 msgstr "Kunne ikke finne filskriver identifisert av «%s»."
 
-#: libplanner/mrp-project.c:992
+#: libplanner/mrp-project.c:990
 msgid "Couldn't find a suitable file module for loading project"
 msgstr "Kunne ikke finne en passende filmodul for lasting av prosjekt"
 
@@ -1058,16 +1058,16 @@ msgstr "%d %b %Y"
 msgid "Project start"
 msgstr "Prosjektstart"
 
-#: src/planner-gantt-print.c:190 src/planner-group-dialog.c:387
-#: src/planner-property-dialog.c:378 src/planner-resource-view.c:1047
+#: src/planner-gantt-print.c:190 src/planner-group-dialog.c:467
+#: src/planner-property-dialog.c:378 src/planner-resource-view.c:1137
 #: src/planner-task-dialog.c:1311 src/planner-task-dialog.c:1397
 #: src/planner-task-view.c:261
 msgid "Name"
 msgstr "Navn"
 
 #: src/planner-gantt-print.c:198 src/planner-resource-dialog.c:1101
-#: src/planner-resource-view.c:660 src/planner-resource-view.c:676
-#: src/planner-resource-view.c:1337 src/planner-task-view.c:264
+#: src/planner-resource-view.c:686 src/planner-resource-view.c:702
+#: src/planner-resource-view.c:1509 src/planner-task-view.c:264
 msgid "Work"
 msgstr "Arbeid"
 
@@ -1116,15 +1116,15 @@ msgstr ""
 "\n"
 "Arbeid"
 
-#: src/planner-group-dialog.c:393
+#: src/planner-group-dialog.c:473
 msgid "Manager name"
 msgstr "Leders navn"
 
-#: src/planner-group-dialog.c:399
+#: src/planner-group-dialog.c:479
 msgid "Manager phone"
 msgstr "Leders telefon"
 
-#: src/planner-group-dialog.c:405
+#: src/planner-group-dialog.c:485
 msgid "Manager email"
 msgstr "Leders e-post"
 
@@ -1236,14 +1236,14 @@ msgstr "Kunne ikke opprette egenskaper-dialog."
 msgid "Label"
 msgstr "Etikett"
 
-#: src/planner-property-dialog.c:411 src/planner-resource-view.c:1068
+#: src/planner-property-dialog.c:411 src/planner-resource-view.c:1158
 #: src/planner-task-dialog.c:1429
 msgid "Type"
 msgstr "Type"
 
 #. Put "no group" at the top.
 #: src/planner-resource-dialog.c:248 src/planner-resource-input-dialog.c:96
-#: src/planner-resource-view.c:1525
+#: src/planner-resource-view.c:1745
 msgid "(None)"
 msgstr "(Ingen)"
 
@@ -1266,46 +1266,54 @@ msgstr "Ingen (bruk forvalg for prosjektet)"
 msgid "Edit resource properties"
 msgstr "Rediger egenskaper for ressurs"
 
-#: src/planner-resource-dialog.c:1102 src/planner-resource-view.c:663
-#: src/planner-resource-view.c:677 src/planner-resource-view.c:1338
+#: src/planner-resource-dialog.c:1102 src/planner-resource-view.c:689
+#: src/planner-resource-view.c:703 src/planner-resource-view.c:1510
 msgid "Material"
 msgstr "Materiale"
 
-#: src/planner-resource-view.c:250
+#: src/planner-resource-view.c:251
 msgid "/_Insert resource"
 msgstr "/Sett _inn ressurs"
 
-#: src/planner-resource-view.c:251
+#: src/planner-resource-view.c:252
 msgid "/_Remove resource"
 msgstr "/Fje_rn ressurs"
 
-#: src/planner-resource-view.c:252
+#: src/planner-resource-view.c:253
 msgid "/_Edit resource..."
 msgstr "/R_ediger ressurs..."
 
-#: src/planner-resource-view.c:373
+#: src/planner-resource-view.c:396
 msgid "_Resources"
 msgstr "_Ressurser"
 
-#: src/planner-resource-view.c:763
+#: src/planner-resource-view.c:789
 msgid "Insert resource"
 msgstr "Sett inn ressurs"
 
-#: src/planner-resource-view.c:930
+#: src/planner-resource-view.c:918
+msgid "Remove resource"
+msgstr "Fjern ressurs"
+
+#: src/planner-resource-view.c:1020
 msgid "Edit custom resource properties"
 msgstr "Rediger egendefinerte egenskaper for ressurs"
 
-#: src/planner-resource-view.c:1092
+#: src/planner-resource-view.c:1182
 msgid "Group"
 msgstr "Gruppe"
 
-#: src/planner-resource-view.c:1121
+#: src/planner-resource-view.c:1211
 msgid "Email"
 msgstr "E-post"
 
-#: src/planner-resource-view.c:1186
+#: src/planner-resource-view.c:1276
 msgid "Edit resource property"
 msgstr "Rediger egenskap for ressurs"
+
+#: src/planner-resource-view.c:1338
+msgid "Edit resource custom property"
+msgstr "Rediger egendefinert egenskap for ressurs"
 
 #. i18n: Short "Week", preferably 2 letters.
 #: src/planner-scale-utils.c:325
