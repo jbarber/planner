@@ -333,12 +333,11 @@ sql_plugin_retrieve_project_id (PlannerPlugin *plugin,
 	conn = gda_client_open_connection (client, dsn_name, NULL, NULL, 0);
 
 	if (!GDA_IS_CONNECTION (conn)) {
-		str = g_strdup_printf ("Connection to database '%s' failed.", database);
-		g_warning (str); /* sql_show_error_dialog (storage, str); */
+		str = g_strdup_printf (_("Connection to database '%s' failed."), database);
+		show_error_dialog (plugin, str);
 		g_free (str);
 		return -1;
 	}
-	
 
 	res = sql_execute_query (conn, "BEGIN");
 	if (res == NULL) {

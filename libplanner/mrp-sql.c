@@ -3672,9 +3672,7 @@ mrp_sql_save_project (MrpStorageSQL  *storage,
 		g_set_error (error,
 			     MRP_ERROR,
 			     MRP_ERROR_SAVE_WRITE_FAILED,
-			     _("Connection to database '%s' failed.\n%s"),
-			     db,
-			     sql_get_last_error (data->con));
+			     _("Connection to database '%s' failed."), db);
 		goto out;
 	}
 
@@ -3763,8 +3761,10 @@ mrp_sql_save_project (MrpStorageSQL  *storage,
 	if (res) {
 		g_object_unref (res);
 	}
-	
-	g_object_unref (data->con);
+
+	if (data->con) {
+		g_object_unref (data->con);
+	}
 	
 	/* FIXME: free more data */
 

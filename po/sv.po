@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: planner\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-04-17 16:59+0200\n"
+"POT-Creation-Date: 2004-04-17 17:22+0200\n"
 "PO-Revision-Date: 2004-04-08 23:50+0200\n"
 "Last-Translator: Richard Hult <richard@imendio.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -957,7 +957,7 @@ msgstr "Ogiltig Unicode"
 msgid "Connection to database '%s' failed.\n"
 msgstr "Anslutning till databas \"%s\" misslyckades.\n"
 
-#: libplanner/mrp-sql.c:2233 libplanner/mrp-sql.c:3675
+#: libplanner/mrp-sql.c:2233
 #, c-format
 msgid ""
 "Connection to database '%s' failed.\n"
@@ -980,6 +980,11 @@ msgstr ""
 "Projektet \"%s\" har ändrats av användaren \"%s\" sedan du öppnade det. Vill "
 "du spara ändå?"
 
+#: libplanner/mrp-sql.c:3675 src/planner-sql-plugin.c:336
+#, c-format
+msgid "Connection to database '%s' failed."
+msgstr "Anslutning till databasen \"%s\" misslyckades."
+
 #: libplanner/mrp-storage-sql.c:205
 msgid "Invalid SQL URI (must start with 'sql://' and contain '#')."
 msgstr "Ogiltig SQL-URI (måste börja med \"sql://\" och innehålla \"#\")."
@@ -999,18 +1004,18 @@ msgstr ""
 "Kan inte lägga till en föregångarrelation, eftersom aktiviteterna redan är "
 "släkt."
 
-#: libplanner/mrp-task-manager.c:1809
+#: libplanner/mrp-task-manager.c:1814
 msgid "Can not add a predecessor relation between a task and its ancestor."
 msgstr ""
 "Kan inte lägga till en föregångarrelation mellan en aktivitet och dess "
 "förfader."
 
-#: libplanner/mrp-task-manager.c:1818 libplanner/mrp-task-manager.c:1826
+#: libplanner/mrp-task-manager.c:1823 libplanner/mrp-task-manager.c:1831
 msgid "Can not add a predecessor, because it would result in a loop."
 msgstr ""
 "Kan inte lägga till en föregångare eftersom det skulle resultera i en slinga."
 
-#: libplanner/mrp-task-manager.c:1861
+#: libplanner/mrp-task-manager.c:1866
 msgid "Can not move the task, since it would result in a loop."
 msgstr "Kan inte flytta aktiviteten eftersom det skulle resultera i en slinga."
 
@@ -1149,7 +1154,7 @@ msgstr "Projektstart"
 
 #: src/planner-gantt-print.c:191 src/planner-group-dialog.c:806
 #: src/planner-property-dialog.c:378 src/planner-resource-view.c:1172
-#: src/planner-task-dialog.c:1410 src/planner-task-dialog.c:1496
+#: src/planner-task-dialog.c:1411 src/planner-task-dialog.c:1500
 #: src/planner-task-view.c:270 src/planner-ttable-print.c:97
 msgid "Name"
 msgstr "Namn"
@@ -1373,7 +1378,7 @@ msgid "Label"
 msgstr "Etikett"
 
 #: src/planner-property-dialog.c:411 src/planner-resource-view.c:1214
-#: src/planner-task-dialog.c:1528
+#: src/planner-task-dialog.c:1532
 msgid "Type"
 msgstr "Typ"
 
@@ -1506,27 +1511,27 @@ msgstr "H%d"
 msgid "%04d, H%d"
 msgstr "%04d, H%d"
 
-#: src/planner-sql-plugin.c:380
+#: src/planner-sql-plugin.c:379
 msgid "ID"
 msgstr "ID"
 
-#: src/planner-sql-plugin.c:388
+#: src/planner-sql-plugin.c:387
 msgid "Project"
 msgstr "Projekt"
 
-#: src/planner-sql-plugin.c:396
+#: src/planner-sql-plugin.c:395
 msgid "Phase"
 msgstr "Fas"
 
-#: src/planner-sql-plugin.c:404
+#: src/planner-sql-plugin.c:403
 msgid "Revision"
 msgstr "Revision"
 
-#: src/planner-sql-plugin.c:603
+#: src/planner-sql-plugin.c:602
 msgid "Open from Database"
 msgstr "Öppna från databas"
 
-#: src/planner-sql-plugin.c:710
+#: src/planner-sql-plugin.c:709
 msgid "Save to Database"
 msgstr "Spara till databas"
 
@@ -1550,19 +1555,19 @@ msgstr "Start till slut (SF)"
 msgid "Can't add new predecessor. No task selected!"
 msgstr "Kan inte lägga till föregångare, ingen aktivitet markerad."
 
-#: src/planner-task-dialog.c:1429
+#: src/planner-task-dialog.c:1432
 msgid "Assigned"
 msgstr "Tilldelad"
 
-#: src/planner-task-dialog.c:1446
+#: src/planner-task-dialog.c:1449
 msgid "Units"
 msgstr "Enheter"
 
-#: src/planner-task-dialog.c:1550
+#: src/planner-task-dialog.c:1554
 msgid "Lag"
 msgstr "Fördröjning"
 
-#: src/planner-task-dialog.c:1689 src/planner-task-dialog.c:1691
+#: src/planner-task-dialog.c:1693 src/planner-task-dialog.c:1695
 msgid "Edit task properties"
 msgstr "Redigera aktivitetsegenskaper"
 

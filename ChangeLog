@@ -1,5 +1,11 @@
 2004-04-17  Richard Hult  <richard@imendio.com>
 
+	* libplanner/mrp-sql.c: (mrp_sql_save_project):
+	* src/planner-sql-plugin.c: (sql_plugin_retrieve_project_id):
+	Handle errors (such as no database server running) better.
+
+2004-04-17  Richard Hult  <richard@imendio.com>
+
 	* libplanner/mrp-task-manager.c (task_manager_do_forward_pass):
 	Notify duration changes. Fixes bug #140324.
 
