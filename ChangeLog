@@ -1,3 +1,12 @@
+2004-06-16  Richard Hult  <richard@imendio.com>
+
+	* src/planner-gantt-print.c: (print_table_header),
+	(print_table_tasks), (print_time_header),
+	(planner_gantt_print_do),
+	(planner_gantt_print_data_new), (free_page),
+	(planner_gantt_print_data_free): Reindent, fix style issues, plug
+	leaks.
+
 2004-06-15  Richard Hult  <richard@imendio.com>
 
 	* dotnet/libplanner/Makefile.am: Patch from steevdave@steev.net to
