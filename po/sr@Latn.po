@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Planner\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-12-19 18:13+0100\n"
-"PO-Revision-Date: 2003-12-19 18:16+0100\n"
+"POT-Creation-Date: 2004-01-18 13:59+0100\n"
+"PO-Revision-Date: 2004-01-18 14:02+0100\n"
 "Last-Translator: Branko Ivanović <popeye@one.ekof.bg.ac.yu>\n"
 "Language-Team: Serbian (sr) <serbiangnome-lista@bogus.example.com>\n"
 "MIME-Version: 1.0\n"
@@ -857,20 +857,16 @@ msgid "None"
 msgstr "Nijedan"
 
 #. Give up.
-#: libplanner/mrp-sql.c:229 src/planner-sql-plugin.c:131
+#: libplanner/mrp-sql.c:345 src/planner-sql-plugin.c:171
 msgid "Invalid Unicode"
 msgstr "Neispravan Unikod"
 
-#: libplanner/mrp-sql.c:2205
+#: libplanner/mrp-sql.c:2201
 #, c-format
-msgid ""
-"The project '%s' has been changed by the user '%s' since you opened it. Do "
-"you want to save anyway?"
-msgstr ""
-"Projekat „%s“ je izmenjen od strane korisnika „%s“ nakon što ste ga vi "
-"otvorili. Želite li ipak da ga sačuvate?"
+msgid "Connection to database '%s' failed.\n"
+msgstr "Neuspešno povezivanje sa bazom „%s“.\n"
 
-#: libplanner/mrp-sql.c:3443
+#: libplanner/mrp-sql.c:2206 libplanner/mrp-sql.c:3643
 #, c-format
 msgid ""
 "Connection to database '%s' failed.\n"
@@ -878,6 +874,20 @@ msgid ""
 msgstr ""
 "Neuspešno povezivanje sa bazom „%s“.\n"
 "%s"
+
+#: libplanner/mrp-sql.c:2214
+#, c-format
+msgid "BEGIN command failed %s."
+msgstr "BEGIN naredba neuspešna %s."
+
+#: libplanner/mrp-sql.c:2380
+#, c-format
+msgid ""
+"The project '%s' has been changed by the user '%s' since you opened it. Do "
+"you want to save anyway?"
+msgstr ""
+"Projekat „%s“ je izmenjen od strane korisnika „%s“ nakon što ste ga vi "
+"otvorili. Želite li ipak da ga sačuvate?"
 
 #: libplanner/mrp-storage-sql.c:205
 msgid "Invalid SQL URI (must start with 'sql://' and contain '#')."
@@ -1333,24 +1343,15 @@ msgstr "P%d"
 msgid "%04d, H%d"
 msgstr "%04d, P%d"
 
-#: src/planner-sql-plugin.c:273
-#, c-format
-msgid ""
-"Connection to database '%s' failed:\n"
-"%s"
-msgstr ""
-"Neuspešno povezivanje sa bazom „%s“:\n"
-"%s"
-
-#: src/planner-sql-plugin.c:322
+#: src/planner-sql-plugin.c:367
 msgid "Project"
 msgstr "Projekat"
 
-#: src/planner-sql-plugin.c:494
+#: src/planner-sql-plugin.c:537
 msgid "Open from Database"
 msgstr "Otvori iz baze podataka"
 
-#: src/planner-sql-plugin.c:601
+#: src/planner-sql-plugin.c:644
 msgid "Save to Database"
 msgstr "Sačuvaj u bazu podataka"
 
@@ -1603,6 +1604,13 @@ msgstr ""
 "\n"
 "Nakon ovoga, možete ukloniti sva ograničenja izborom stavke „Ukloni sva "
 "ograničenja“ u meniju „Uređivanje“."
+
+#~ msgid ""
+#~ "Connection to database '%s' failed:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Neuspešno povezivanje sa bazom „%s“:\n"
+#~ "%s"
 
 #~ msgid "New predecessor"
 #~ msgstr "Novi prethodnik"
