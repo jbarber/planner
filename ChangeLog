@@ -1,5 +1,8 @@
 2005-02-13  Richard Hult  <richard@imendio.com>
 
+	* libplanner/mrp-task-manager.c
+	(task_manager_calculate_task_finish): Remove old code.
+
 	* src/planner-gantt-row.c (gantt_row_event): Update sensitivity
 	for the context menu items.
 	(gantt_row_get_selected_tasks): Add.

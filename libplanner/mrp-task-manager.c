@@ -1612,16 +1612,7 @@ task_manager_calculate_task_finish (MrpTaskManager *manager,
 	if (work_start == -1) {
 		work_start = start;
 	}
-
-	if (type == MRP_TASK_TYPE_MILESTONE) {
-		//g_print ("milestone, start ");
-		//mrp_time_debug_print (start);
-		//imrp_task_set_work_start (task, work_start);
-	} else { 
-		//g_print ("task, start      ");
-		//mrp_time_debug_print (work_start);
-		imrp_task_set_work_start (task, work_start);
-	}
+	imrp_task_set_work_start (task, work_start);
 	
 	g_list_foreach (unit_ivals, (GFunc) g_free, NULL);
 	g_list_free (unit_ivals);
