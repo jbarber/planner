@@ -3,7 +3,7 @@
 AC_PREREQ(2.54)
 
 AC_INIT(AUTHORS)
-AM_INIT_AUTOMAKE(planner, 0.13)
+AM_INIT_AUTOMAKE(planner, 0.13.90)
 AM_CONFIG_HEADER(config.h)
 
 AM_MAINTAINER_MODE
@@ -67,17 +67,17 @@ dnl ==========================================================================
 dnl If you add a version number here, you *must* add an AC_SUBST line for
 dnl it too, or it will never make it into the spec file!
 
-GLIB_REQUIRED=2.4.0
-GTK_REQUIRED=2.4.0
-LIBGNOMECANVAS_REQUIRED=2.6.0
-LIBGNOMEUI_REQUIRED=2.6.0
+GLIB_REQUIRED=2.6.0
+GTK_REQUIRED=2.6.0
+LIBGNOMECANVAS_REQUIRED=2.10.0
+LIBGNOMEUI_REQUIRED=2.10.0
 LIBGLADE_REQUIRED=2.4.0
-LIBGNOMEPRINTUI_REQUIRED=2.6.0
-GNOME_VFS_REQUIRED=2.6.0
-GCONF_REQUIRED=2.6.0
+LIBGNOMEPRINTUI_REQUIRED=2.10.0
+GNOME_VFS_REQUIRED=2.10.0
+GCONF_REQUIRED=2.10.0
 LIBXML_REQUIRED=2.6.0
 LIBXSLT_REQUIRED=1.1.0
-PYGTK_REQUIRED=2.0.0
+PYGTK_REQUIRED=2.6.0
 
 dnl  -----------
 dnl | Database/GDA check |----------------------------------------------

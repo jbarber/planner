@@ -26,6 +26,7 @@
 #include <glib/gi18n.h>
 #include <libgnomeprint/gnome-print-config.h>
 #include <libgnomeprint/gnome-print-job.h>
+#include <libgnomeprint/gnome-print-pango.h>
 #include <libart_lgpl/libart.h>
 #include "planner-print-job.h"
 
@@ -290,6 +291,36 @@ planner_print_job_lineto (PlannerPrintJob *job, gdouble x, gdouble y)
 }
 
 void
+planner_print_job_text (PlannerPrintJob *job,
+			gint x,
+			gint y,
+			const char      *str)
+{
+	g_return_if_fail (job != NULL);
+	g_return_if_fail (str != NULL);
+
+	PangoLayout *layout = gnome_print_pango_create_layout (job->pc);
+	PlannerPrintJobPriv *priv;
+
+	priv = job->priv;
+
+	pango_layout_set_text (layout, str, strlen(str));
+
+	PangoFontDescription *fd = gnome_font_get_pango_description (priv->current_font, 72);
+	pango_layout_set_font_description (layout, fd);
+	
+	pango_layout_context_changed (layout);
+
+	planner_print_job_moveto (job, x, y-gnome_font_get_ascender (priv->current_font)-gnome_font_get_descender (priv->current_font));
+
+	gnome_print_pango_layout (job->pc, layout);
+
+	pango_font_description_free (fd);
+
+	g_object_unref (layout);
+}
+
+void
 planner_print_job_show_clipped (PlannerPrintJob *job,
 				gdouble          x,
 				gdouble          y,
@@ -300,11 +331,6 @@ planner_print_job_show_clipped (PlannerPrintJob *job,
 				gdouble          y2)
 {
 	PlannerPrintJobPriv *priv;
-	gdouble              width;
-	gdouble              ellipsis_width;
-	gchar               *tmp, *ellipsized;
-	gchar               *p;
-	glong                len;
 
 	priv = job->priv;
 	
@@ -318,8 +344,6 @@ planner_print_job_show_clipped (PlannerPrintJob *job,
 		return;
 	}
 	
-	width = gnome_font_get_width_utf8 (priv->current_font, str);
-
 	gnome_print_gsave (job->pc);
 
 	gnome_print_setlinewidth (job->pc, 0);
@@ -333,42 +357,23 @@ planner_print_job_show_clipped (PlannerPrintJob *job,
 
 	gnome_print_clip (job->pc);
 
-	/* First, see if we can fit the text without ellipsizing. */
-	if (x + width <= x2) {
-		planner_print_job_moveto (job, x, y);
-		gnome_print_show (job->pc, str);
-		gnome_print_grestore (job->pc);
-		return;
-	}
-	
-	ellipsis_width = gnome_font_get_width_utf8 (priv->current_font, "...");
+	PangoLayout *layout = gnome_print_pango_create_layout (job->pc);
 
-	tmp = g_strdup (str);
-	len = g_utf8_strlen (tmp, -1);
-
-	do {
-		p = g_utf8_offset_to_pointer (tmp, len);
-		*p = 0;
-
-		width = gnome_font_get_width_utf8 (priv->current_font, tmp) + ellipsis_width;
+	pango_layout_set_text (layout, str, strlen(str));
+	pango_layout_set_ellipsize (layout, PANGO_ELLIPSIZE_END);
+	pango_layout_set_width (layout, (x2 - x1) * PANGO_SCALE);
 		
-		if (x + width <= x2) {
-			ellipsized = g_strconcat (tmp, "...", NULL);
+	PangoFontDescription *fd = gnome_font_get_pango_description (priv->current_font, 72);
+	pango_layout_set_font_description (layout, fd);
+	pango_layout_context_changed (layout);
 			
-			planner_print_job_moveto (job, x, y);
-			gnome_print_show (job->pc, ellipsized);
-			gnome_print_grestore (job->pc);
+	planner_print_job_moveto (job, x, y-gnome_font_get_ascender (priv->current_font)-gnome_font_get_descender (priv->current_font));
 			
-			g_free (tmp);
-			g_free (ellipsized);
-			
-			return;
-		}
+	gnome_print_pango_layout (job->pc, layout);
 		
-		len--;
-	} while (len);
+	pango_font_description_free (fd);
 
-	g_free (tmp);
+	g_object_unref (layout);
 	
 	gnome_print_grestore (job->pc);
 }

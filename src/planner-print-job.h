@@ -77,6 +77,11 @@ void         planner_print_job_moveto           (PlannerPrintJob    *job,
 void         planner_print_job_lineto           (PlannerPrintJob    *job,
 					    gdouble        x,
 					    gdouble        y);
+void         planner_print_job_text             (PlannerPrintJob *job,
+						 gint x,
+						 gint y,
+						 const char      *str);
+
 void         planner_print_job_show_clipped     (PlannerPrintJob    *job,
 					    gdouble        x,
 					    gdouble        y,

@@ -1,3 +1,18 @@
+2005-04-05  Richard Hult  <richard@imendio.com>
+
+	* src/planner-print-job.c: (planner_print_job_text),
+	(planner_print_job_show_clipped):
+	* src/planner-print-job.h:
+	* src/planner-table-print-sheet.c:
+	(table_print_sheet_print_header_cell),
+	(table_print_sheet_print_cell): Patch from fmoraes@nc.rr.com to
+	use pango for printing text.
+
+2005-04-02  Richard Hult  <richard@imendio.com>
+
+	* autogen.sh:
+	* configure.in: Bump requirements.
+
 2005-04-01  Steve Murphy  <murf@e-tools.com>
 
         * configure.in: Added "rw" to ALL_LINGUAS.

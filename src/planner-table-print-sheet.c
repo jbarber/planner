@@ -126,8 +126,7 @@ table_print_sheet_print_header_cell (PlannerTablePrintSheet *sheet,
 	
 	planner_print_job_set_font_bold (sheet->job);
 	
-	planner_print_job_moveto (sheet->job, text_x, text_y);
-	gnome_print_show (sheet->job->pc, column->name);
+	planner_print_job_text (sheet->job, text_x, text_y, column->name);
 	
 	planner_print_job_set_font_regular (sheet->job);
 }
@@ -185,8 +184,7 @@ table_print_sheet_print_cell (PlannerTablePrintSheet *sheet,
 	text_x = x + sheet->x_pad + INDENT_FACTOR * depth;
 	text_y = y + TEXT_IN_CELL_MULTI * row->height;
 	
-	planner_print_job_moveto (sheet->job, text_x, text_y);
-	gnome_print_show (sheet->job->pc, str);
+	planner_print_job_text (sheet->job, text_x, text_y, str);
 	g_free (str);
 		
 	planner_print_job_set_font_regular (sheet->job);
