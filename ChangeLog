@@ -1,5 +1,14 @@
 2005-02-13  Richard Hult  <richard@imendio.com>
 
+	* src/planner-project-properties.c (mpp_calendar_popdown)
+	(mpp_calendar_cancel_clicked_cb, mpp_calendar_save_date)
+	(mpp_calendar_ok_clicked_cb, mpp_calendar_set_date)
+	(mpp_calendar_today_clicked_cb, mpp_calendar_double_click_cb)
+	(mpp_grab_on_window, mpp_calendar_popup_helper)
+	(mpp_calendar_popup, mpp_calendar_button_toggled_cb)
+	(planner_project_properties_new): Add a calendar popup to select
+	the start date with.
+
 	* src/planner-window.c (window_do_save_as): Set default response.
 
 	* src/planner-task-tree.c (task_tree_work_data_func)

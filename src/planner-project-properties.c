@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
- * Copyright (C) 2003-2004 Imendio AB
+ * Copyright (C) 2003-2005 Imendio AB
  * Copyright (C) 2001-2002 CodeFactory AB
  * Copyright (C) 2001-2002 Richard Hult <richard@imendio.com>
  * Copyright (C) 2001-2002 Mikael Hallendal <micke@imendio.com>
@@ -45,9 +45,13 @@ typedef struct {
 	GtkWidget     *org_entry;
 	GtkWidget     *manager_entry;
 	GtkWidget     *start_entry;
+	GtkWidget     *calendar_button;
 	GtkWidget     *phase_option_menu;
 	GtkWidget     *calendar_label;
 
+	GtkWidget     *calendar;
+	GtkWidget     *calendar_window;
+	
 	GtkTreeView   *properties_tree;
 	GtkWidget     *add_property_button;
 	GtkWidget     *remove_property_button;
@@ -312,7 +316,7 @@ property_cmd_edit (DialogData  *data,
 				    label,
 				    property_cmd_edit_do,
 				    property_cmd_edit_undo,
-				     NULL /* FIXME */);
+				    NULL /* FIXME */);
 	
 	cmd = (PropertyCmdEdit *) cmd_base;
 
@@ -620,7 +624,10 @@ mpp_start_set_from_widget (GtkWidget *dialog)
 	g_date_free (date);
 	
 	start = mrp_time_from_tm (&tm);
-
+	if (start < 0) {
+		return;
+	}
+	
 	property_cmd_edit (data, _("Edit Project Start"), PROP_DATE, "project-start", NULL, start, NULL);
 }
 
@@ -632,6 +639,259 @@ mpp_start_focus_out_event_cb (GtkWidget *widget,
 	mpp_start_set_from_widget (dialog);
 	
 	return FALSE;
+}
+
+static void
+mpp_calendar_popdown (GtkWidget *dialog)
+{
+	DialogData *data;
+
+	data = DIALOG_GET_DATA (dialog);
+
+	if (!data->calendar) {
+		return;
+	}
+
+	gtk_widget_destroy (data->calendar_window);
+	data->calendar_window = NULL;
+	data->calendar = NULL;
+
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (data->calendar_button), FALSE);
+}
+
+static void
+mpp_calendar_cancel_clicked_cb (GtkWidget *button,
+				GtkWidget *dialog)
+{
+	mpp_calendar_popdown (dialog);
+}
+
+static void
+mpp_calendar_save_date (GtkWidget *dialog)
+{
+	DialogData *data;
+	mrptime     start;
+	gint        year, month, day;
+
+	data = DIALOG_GET_DATA (dialog);
+
+	gtk_calendar_get_date (GTK_CALENDAR (data->calendar), &year, &month, &day);
+
+	month++;
+	start = mrp_time_compose (year, month, day, 0, 0, 0);
+	
+	property_cmd_edit (data, _("Edit Project Start"), PROP_DATE, "project-start", NULL, start, NULL);
+
+	mpp_set_start (dialog, start);
+}
+
+static void
+mpp_calendar_ok_clicked_cb (GtkWidget *button,
+			    GtkWidget *dialog)
+{
+	mpp_calendar_save_date (dialog);
+	mpp_calendar_popdown (dialog);
+}
+
+static void
+mpp_calendar_set_date (GtkCalendar *calendar, mrptime t)
+{
+	gint year, month, day;
+
+	if (!mrp_time_decompose (t, &year, &month, &day, NULL, NULL, NULL)) {
+		return;
+	}
+
+	gtk_calendar_select_month (calendar, month - 1, year);
+	gtk_calendar_select_day (calendar, day);
+}
+
+static void
+mpp_calendar_today_clicked_cb (GtkWidget *button,
+			       GtkWidget *dialog)
+{
+	DialogData *data;
+	mrptime     today;
+
+	data = DIALOG_GET_DATA (dialog);
+	
+	today = mrp_time_current_time ();
+	mpp_calendar_set_date (GTK_CALENDAR (data->calendar), today);
+}
+
+static void
+mpp_calendar_double_click_cb (GtkWidget *calendar,
+			      GtkWidget *dialog)
+{
+	mpp_calendar_save_date (dialog);
+	mpp_calendar_popdown (dialog);
+}
+	
+static gboolean
+mpp_grab_on_window (GdkWindow *window,
+		    guint32    activate_time)
+{
+	if ((gdk_pointer_grab (window, TRUE,
+			       GDK_BUTTON_PRESS_MASK |
+			       GDK_BUTTON_RELEASE_MASK |
+			       GDK_POINTER_MOTION_MASK,
+			       NULL, NULL, activate_time) == 0)) {
+		if (gdk_keyboard_grab (window, TRUE,
+			       activate_time) == 0)
+			return TRUE;
+		else {
+			gdk_pointer_ungrab (activate_time);
+			return FALSE;
+		}
+	}
+
+	return FALSE;
+}
+
+static void
+mpp_calendar_popup_helper (GtkWidget *dialog)
+{
+	DialogData    *data;
+	GtkAllocation  alloc;
+	gint           x, y;
+	gint           screen_height, screen_width;
+	gint           button_height;
+
+	data = DIALOG_GET_DATA (dialog);
+	
+	gtk_widget_realize (data->calendar_window);
+
+	alloc = data->calendar_window->allocation;
+
+	gdk_window_get_origin (dialog->window, &x, &y);
+
+	x += data->calendar_button->allocation.x; 
+	y += data->calendar_button->allocation.y; 
+	
+	button_height = data->calendar_button->allocation.height; 
+
+	screen_height = gdk_screen_height () - y;
+	screen_width = gdk_screen_width ();
+
+	/* Check if it fits in the available height. */
+	if (alloc.height > screen_height) {
+		/* It doesn't fit, so we see if we have the minimum space needed. */
+		if (alloc.height > screen_height && y - button_height > screen_height) {
+			/* We don't, so we show the popup above the cell
+			 * instead of below it.
+			 */
+			y -= (alloc.height + button_height);
+			if (y < 0) {
+				y = 0;
+			}
+		}
+	} else {
+		y += button_height;
+	}
+
+	x -= data->calendar_button->allocation.width;
+	
+	/* We try to line it up with the right edge of the column, but we don't
+	 * want it to go off the edges of the screen.
+	 */
+	if (x > screen_width) {
+		x = screen_width;
+	}
+
+	x -= alloc.width;
+	if (x < 0) {
+		x = 0;
+	}
+
+	gtk_grab_add (data->calendar_window);
+
+	gtk_window_move (GTK_WINDOW (data->calendar_window), x, y);
+	gtk_widget_show (data->calendar_window);
+
+	mpp_grab_on_window (data->calendar_window->window, gtk_get_current_event_time ());
+}
+
+static void
+mpp_calendar_popup (GtkWidget *dialog)
+{
+	DialogData *data;
+	GtkWidget  *frame;
+	GtkWidget  *vbox;
+	GtkWidget  *bbox;
+	GtkWidget  *button;
+	mrptime     start;
+
+	data = DIALOG_GET_DATA (dialog);
+
+	if (data->calendar) {
+		return;
+	}
+
+	data->calendar_window = gtk_window_new (GTK_WINDOW_POPUP);
+
+	frame = gtk_frame_new (NULL);
+	gtk_container_add (GTK_CONTAINER (data->calendar_window), frame);
+	gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_OUT);
+	
+	vbox = gtk_vbox_new (FALSE, 0);
+	gtk_container_add (GTK_CONTAINER (frame), vbox);
+
+	data->calendar = gtk_calendar_new ();
+	gtk_box_pack_start (GTK_BOX (vbox), data->calendar, TRUE, TRUE, 0);
+
+	start = mrp_project_get_project_start (data->project);
+	mpp_calendar_set_date (GTK_CALENDAR (data->calendar), start);
+	
+	bbox = gtk_hbutton_box_new ();
+	gtk_container_set_border_width (GTK_CONTAINER (bbox), 4);
+	gtk_box_set_spacing (GTK_BOX (bbox), 2);
+	gtk_box_pack_start (GTK_BOX (vbox), bbox, FALSE, FALSE, 0);
+
+	button = gtk_button_new_with_label (_("Today"));
+	gtk_container_add (GTK_CONTAINER (bbox), button);
+	g_signal_connect (button,
+			  "clicked",
+			  G_CALLBACK (mpp_calendar_today_clicked_cb),
+			  dialog);
+	
+	button = gtk_button_new_with_label (_("Cancel"));
+	gtk_container_add (GTK_CONTAINER (bbox), button);
+	g_signal_connect (button,
+			  "clicked",
+			  G_CALLBACK (mpp_calendar_cancel_clicked_cb),
+			  dialog);
+
+	button = gtk_button_new_with_label (_("OK"));
+	gtk_container_add (GTK_CONTAINER (bbox), button);
+	g_signal_connect (button, "clicked",
+			  G_CALLBACK (mpp_calendar_ok_clicked_cb),
+			  dialog);
+
+	g_signal_connect (data->calendar,
+			  "day-selected-double-click", 
+			  G_CALLBACK (mpp_calendar_double_click_cb),
+			  dialog);
+
+	mpp_calendar_popup_helper (dialog);
+	
+        gtk_widget_show_all (data->calendar_window);
+
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (data->calendar_button), TRUE);
+}
+
+static void
+mpp_calendar_button_toggled_cb (GtkToggleButton *button,
+				GtkWidget       *dialog)
+{
+	DialogData *data;
+	
+	data = DIALOG_GET_DATA (dialog);
+
+	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (data->calendar_button))) {
+		mpp_calendar_popup (dialog);
+	} else {
+		mpp_calendar_popdown (dialog);
+	}	
 }
 
 static void  
@@ -1385,9 +1645,6 @@ mpp_dialog_destroy_cb (GtkWidget *dialog,
 	mpp_org_set_from_widget (dialog);
 	mpp_manager_set_from_widget (dialog);
 	mpp_start_set_from_widget (dialog);
-	mpp_phase_set_from_widget (dialog);
-
-	/* FIXME: calendar */
 }
 	
 GtkWidget *
@@ -1440,16 +1697,21 @@ planner_project_properties_new (PlannerWindow *window)
 	data->org_entry = glade_xml_get_widget (glade, "entry_org");
 	data->manager_entry = glade_xml_get_widget (glade, "entry_manager");
 	data->start_entry = glade_xml_get_widget (glade, "entry_start");
+	data->calendar_button = glade_xml_get_widget (glade, "calendar_button");
 	data->phase_option_menu = glade_xml_get_widget (glade, "optionmenu_phase");
 	data->calendar_label = glade_xml_get_widget (glade, "label_calendar");
-	data->properties_tree = GTK_TREE_VIEW (
-		glade_xml_get_widget (glade, "properties_tree"));
+	data->properties_tree = GTK_TREE_VIEW (glade_xml_get_widget (glade, "properties_tree"));
 	
 	data->add_property_button = glade_xml_get_widget (glade,
 							  "add_property_button");
 	data->remove_property_button = glade_xml_get_widget (glade,
 							     "remove_property_button");
 
+	g_signal_connect (data->calendar_button,
+			  "toggled",
+			  G_CALLBACK (mpp_calendar_button_toggled_cb),
+			  dialog);
+	
 	start = mrp_project_get_project_start (data->project);
 
 	g_object_set_data_full (G_OBJECT (dialog), "data", data, g_free);

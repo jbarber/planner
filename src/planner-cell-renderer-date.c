@@ -121,11 +121,11 @@ static void
 mcrd_init (PlannerCellRendererDate *date)
 {
 	PlannerCellRendererPopup *popup;
-	GtkWidget           *frame;
-	GtkWidget           *vbox;
-	GtkWidget           *hbox;
-	GtkWidget           *bbox;
-	GtkWidget           *button;
+	GtkWidget                *frame;
+	GtkWidget                *vbox;
+	GtkWidget                *hbox;
+	GtkWidget                *bbox;
+	GtkWidget                *button;
 
 	popup = PLANNER_CELL_RENDERER_POPUP (date);
 
