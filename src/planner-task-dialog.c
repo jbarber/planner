@@ -444,7 +444,7 @@ task_cmd_edit_property_focus (PlannerWindow *main_window,
 	TaskCmdEditProperty *cmd;
 
 	cmd_base = planner_cmd_new (TaskCmdEditProperty,
-				    _("Edit task property from dialog"),
+				    _("Edit task property"),
 				    task_cmd_edit_property_do,
 				    task_cmd_edit_property_undo,
 				    task_cmd_edit_property_free);
@@ -518,7 +518,7 @@ task_cmd_edit_type (PlannerWindow *main_window,
 	}
 
 	cmd_base = planner_cmd_new (TaskCmdEditType,
-				    _("Edit task type from dialog"),
+				    _("Edit task type"),
 				    task_cmd_edit_type_do,
 				    task_cmd_edit_type_undo,
 				    task_cmd_edit_type_free);
@@ -585,7 +585,7 @@ task_cmd_edit_sched (PlannerWindow *main_window,
 	}
 
 	cmd_base = planner_cmd_new (TaskCmdEditSchedule,
-				    _("Edit task schedule from dialog"),
+				    _("Edit task schedule"),
 				    task_cmd_edit_sched_do,
 				    task_cmd_edit_sched_undo,
 				    task_cmd_edit_sched_free);
@@ -663,7 +663,7 @@ task_cmd_assign_add (PlannerWindow *main_window,
 	}
 
 	cmd_base = planner_cmd_new (TaskCmdEditAssignment,
-				    _("Add a resource for a task from dialog"),
+				    _("Add resource to task"),
 				    task_cmd_assign_add_do,
 				    task_cmd_assign_add_undo,
 				    task_cmd_assign_add_free);
@@ -723,7 +723,7 @@ task_cmd_assign_remove (PlannerWindow *main_window,
 	TaskCmdEditAssignment  *cmd;
 
 	cmd_base = planner_cmd_new (TaskCmdEditAssignment,
-				    _("Remove a resource from a task from dialog"),
+				    _("Remove resource from task"),
 				    task_cmd_assign_remove_do,
 				    task_cmd_assign_remove_undo,
 				    task_cmd_assign_remove_free);
@@ -782,7 +782,7 @@ task_cmd_assign_units (PlannerWindow *main_window,
 	TaskCmdEditAssignment  *cmd;
 
 	cmd_base = planner_cmd_new (TaskCmdEditAssignment,
-				    _("Change resource units for a task from dialog"),
+				    _("Change resource units in task"),
 				    task_cmd_assign_units_do,
 				    task_cmd_assign_units_undo,
 				    task_cmd_assign_units_free);
@@ -949,7 +949,7 @@ task_cmd_edit_lag (PlannerWindow *main_window,
 	}
 
 	cmd_base = planner_cmd_new (TaskCmdEditType,
-				    _("Edit lag predecessor from dialog"),
+				    _("Edit lag predecessor"),
 				    task_cmd_edit_lag_do,
 				    task_cmd_edit_lag_undo,
 				    task_cmd_edit_lag_free);
@@ -1015,7 +1015,7 @@ task_cmd_edit_note (DialogData  *data,
 	}
 
 	cmd_base = planner_cmd_new (TaskCmdEditNote,
-				    _("Edit task note from dialog"),
+				    _("Edit task note"),
 				    task_cmd_edit_note_do,
 				    task_cmd_edit_note_undo,
 				    task_cmd_edit_note_free);
@@ -2489,7 +2489,6 @@ task_dialog_assignment_toggled_cb (GtkCellRendererText *cell,
 	} else {
 		MrpAssignment *assignment;
 		
-		/* FIXME: UNDO */
 		assignment = mrp_task_get_assignment (data->task, resource);
 
 		if (assignment) {

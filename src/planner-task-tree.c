@@ -237,15 +237,13 @@ task_cmd_edit_property (PlannerTaskTree *tree,
 	TaskCmdEditProperty *cmd;
 	PlannerGanttModel   *model;
 
-	cmd = g_new0 (TaskCmdEditProperty, 1);
+	cmd_base = planner_cmd_new (TaskCmdEditProperty,
+				    _("Edit task property"),
+				    task_cmd_edit_property_do,
+				    task_cmd_edit_property_undo,
+				    task_cmd_edit_property_free);
 
-	cmd_base = (PlannerCmd*) cmd;
-
-	cmd_base->label = g_strdup (_("Edit task property"));
-
-	cmd_base->do_func = task_cmd_edit_property_do;
-	cmd_base->undo_func = task_cmd_edit_property_undo;
-	cmd_base->free_func = task_cmd_edit_property_free;
+	cmd = (TaskCmdEditProperty *) cmd_base;
 
 	cmd->tree = tree;
 	cmd->project = task_tree_get_project (tree);
@@ -688,16 +686,15 @@ task_cmd_constraint (PlannerTaskTree *tree,
 	PlannerCmd          *cmd_base;
 	TaskCmdConstraint   *cmd;
 
-	cmd = g_new0 (TaskCmdConstraint, 1);
+	cmd_base = planner_cmd_new (TaskCmdConstraint,
+				    _("Apply constraint to task"),
+				    task_cmd_constraint_do,
+				    task_cmd_constraint_undo,
+				    task_cmd_constraint_free);
 
-	cmd_base = (PlannerCmd *) cmd;
-	cmd_base->label = g_strdup (_("Constraint task"));
-	cmd_base->do_func = task_cmd_constraint_do;
-	cmd_base->undo_func = task_cmd_constraint_undo;
-	cmd_base->free_func = task_cmd_constraint_free;
-	
+	cmd = (TaskCmdConstraint *) cmd_base;
+
 	cmd->task = g_object_ref (task);
-
 	cmd->constraint = g_new0 (MrpConstraint, 1);
 	cmd->constraint->time = constraint.time;
 	cmd->constraint->type = constraint.type;
@@ -751,14 +748,14 @@ task_cmd_reset_constraint (PlannerTaskTree *tree,
 	PlannerCmd          *cmd_base;
 	TaskCmdConstraint   *cmd;
 
-	cmd = g_new0 (TaskCmdConstraint, 1);
+	cmd_base = planner_cmd_new (TaskCmdConstraint,
+				    _("Reset task constraint"),
+				    task_cmd_constraint_reset_do,
+				    task_cmd_constraint_reset_undo,
+				    task_cmd_constraint_reset_free);
 
-	cmd_base = (PlannerCmd *) cmd;
-	cmd_base->label = g_strdup (_("Constraint task reset"));
-	cmd_base->do_func = task_cmd_constraint_reset_do;
-	cmd_base->undo_func = task_cmd_constraint_reset_undo;
-	cmd_base->free_func = task_cmd_constraint_reset_free;
-	
+	cmd = (TaskCmdConstraint *) cmd_base;
+
 	cmd->task = g_object_ref (task);
 
 	g_object_get (task, "constraint", 
@@ -885,13 +882,13 @@ task_cmd_move (PlannerTaskTree *tree,
 	MrpTask             *parent_old;
 
 
-	cmd = g_new0 (TaskCmdMove, 1);
+	cmd_base = planner_cmd_new (TaskCmdMove,
+				    _("Move task"),
+				    task_cmd_move_do,
+				    task_cmd_move_undo,
+				    task_cmd_move_free);
 
-	cmd_base = (PlannerCmd*) cmd;
-	cmd_base->label = g_strdup (_("Move task"));
-	cmd_base->do_func = task_cmd_move_do;
-	cmd_base->undo_func = task_cmd_move_undo;
-	cmd_base->free_func = task_cmd_move_free;
+	cmd = (TaskCmdMove *) cmd_base;
 	
 	cmd->project = g_object_ref (tree->priv->project);
 	cmd->task = g_object_ref (task);
@@ -994,14 +991,14 @@ task_cmd_edit_custom_property (PlannerTaskTree  *tree,
 	PlannerTaskTreePriv       *priv = tree->priv;
 	TaskCmdEditCustomProperty *cmd;
 
-	cmd = g_new0 (TaskCmdEditCustomProperty, 1);
+	cmd_base = planner_cmd_new (TaskCmdEditCustomProperty,
+				    _("Edit task custom property"),
+				    task_cmd_edit_custom_property_do,
+				    task_cmd_edit_custom_property_undo,
+				    task_cmd_edit_custom_property_free);
+	
 
-	cmd_base = (PlannerCmd*) cmd;
-
-	cmd_base->label = g_strdup (_("Edit task custom property"));
-	cmd_base->do_func = task_cmd_edit_custom_property_do;
-	cmd_base->undo_func = task_cmd_edit_custom_property_undo;
-	cmd_base->free_func = task_cmd_edit_custom_property_free;
+	cmd = (TaskCmdEditCustomProperty *) cmd_base;
 
 	cmd->property = property;
 	cmd->task = g_object_ref (task);

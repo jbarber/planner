@@ -528,14 +528,13 @@ phase_cmd_insert (PlannerWindow *main_window,
 	PlannerCmd     *cmd_base;
 	PhaseCmdInsert *cmd;
 
-	cmd = g_new0 (PhaseCmdInsert, 1);
+	cmd_base = planner_cmd_new (PhaseCmdInsert,
+				    _("Insert phase"),
+				    phase_cmd_insert_do,
+				    phase_cmd_insert_undo,
+				    phase_cmd_insert_free);
 
-	cmd_base = (PlannerCmd*) cmd;
-
-	cmd_base->label = g_strdup (_("Insert phase"));
-	cmd_base->do_func =  phase_cmd_insert_do; 
-	cmd_base->undo_func = phase_cmd_insert_undo;
-	cmd_base->free_func = phase_cmd_insert_free;
+	cmd = (PhaseCmdInsert *) cmd_base;
 
 	cmd->project = planner_window_get_project (main_window);
 
@@ -628,14 +627,13 @@ phase_cmd_remove (PlannerWindow *window,
 	PlannerCmd     *cmd_base;
 	PhaseCmdRemove *cmd;
 
-	cmd = g_new0 (PhaseCmdRemove, 1);
+	cmd_base = planner_cmd_new (PhaseCmdRemove,
+				    _("Remove phase"),
+				    phase_cmd_remove_do,
+				    phase_cmd_remove_undo,
+				    phase_cmd_remove_free);
 
-	cmd_base = (PlannerCmd*) cmd;
-
-	cmd_base->label = g_strdup (_("Remove phase"));
-	cmd_base->do_func =   phase_cmd_remove_do;
-	cmd_base->undo_func = phase_cmd_remove_undo;
-	cmd_base->free_func = phase_cmd_remove_free;
+	cmd = (PhaseCmdRemove *) cmd_base;
 
 	cmd->project = planner_window_get_project (window);
 	cmd->phase = g_strdup (phase);

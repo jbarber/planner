@@ -923,14 +923,13 @@ resource_cmd_remove (PlannerView *view,
 	PlannerCmd          *cmd_base;
 	ResourceCmdRemove   *cmd;
 
-	cmd = g_new0 (ResourceCmdRemove, 1);
+	cmd_base = planner_cmd_new (ResourceCmdRemove,
+				    _("Remove resource"),
+				    resource_cmd_remove_do,
+				    resource_cmd_remove_undo,
+				    resource_cmd_remove_free);
 
-	cmd_base = (PlannerCmd*) cmd;
-
-	cmd_base->label = g_strdup (_("Remove resource"));
-	cmd_base->do_func = resource_cmd_remove_do;
-	cmd_base->undo_func = resource_cmd_remove_undo;
-	cmd_base->free_func = resource_cmd_remove_free;
+	cmd = (ResourceCmdRemove *) cmd_base;
 
 	cmd->project = planner_window_get_project (view->main_window);
 	cmd->resource = g_object_ref (resource);
@@ -1325,14 +1324,13 @@ resource_cmd_edit_property (PlannerView  *view,
 	PlannerCmd              *cmd_base;
 	ResourceCmdEditProperty *cmd;
 
-	cmd = g_new0 (ResourceCmdEditProperty, 1);
+	cmd_base = planner_cmd_new (ResourceCmdEditProperty,
+				    _("Edit resource property"),
+				    resource_cmd_edit_property_do,
+				    resource_cmd_edit_property_undo,
+				    resource_cmd_edit_property_free);
 
-	cmd_base = (PlannerCmd*) cmd;
-
-	cmd_base->label = g_strdup (_("Edit resource property"));
-	cmd_base->do_func = resource_cmd_edit_property_do;
-	cmd_base->undo_func = resource_cmd_edit_property_undo;
-	cmd_base->free_func = resource_cmd_edit_property_free;
+	cmd = (ResourceCmdEditProperty *) cmd_base;
 
 	cmd->property = g_strdup (property);
 	cmd->resource = g_object_ref (resource);
@@ -1410,14 +1408,13 @@ resource_cmd_edit_custom_property (PlannerView  *view,
 	PlannerCmd                    *cmd_base;
 	ResourceCmdEditCustomProperty *cmd;
 
-	cmd = g_new0 (ResourceCmdEditCustomProperty, 1);
+	cmd_base = planner_cmd_new (ResourceCmdEditCustomProperty,
+				    _("Edit resource custom property"),
+				    resource_cmd_edit_custom_property_do,
+				    resource_cmd_edit_custom_property_undo,
+				    resource_cmd_edit_custom_property_free);
 
-	cmd_base = (PlannerCmd*) cmd;
-
-	cmd_base->label = g_strdup (_("Edit resource custom property"));
-	cmd_base->do_func = resource_cmd_edit_custom_property_do;
-	cmd_base->undo_func = resource_cmd_edit_custom_property_undo;
-	cmd_base->free_func = resource_cmd_edit_custom_property_free;
+	cmd = (ResourceCmdEditCustomProperty *) cmd_base;
 
 	cmd->property = property;
 	cmd->resource = g_object_ref (resource);

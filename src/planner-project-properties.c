@@ -308,7 +308,13 @@ property_cmd_edit (DialogData  *data,
 	PlannerCmd      *cmd_base;
 	PropertyCmdEdit *cmd;
 
-	cmd = g_new0 (PropertyCmdEdit, 1);
+	cmd_base = planner_cmd_new (PropertyCmdEdit,
+				    label,
+				    property_cmd_edit_do,
+				    property_cmd_edit_undo,
+				     NULL /* FIXME */);
+	
+	cmd = (PropertyCmdEdit *) cmd_base;
 
 	switch (type) {
 	case PROP_STRING:
@@ -344,13 +350,6 @@ property_cmd_edit (DialogData  *data,
 		break;
 	}
 	
-	cmd_base = (PlannerCmd*) cmd;
-
-	cmd_base->label = g_strdup (label);
-	cmd_base->do_func = property_cmd_edit_do;
-	cmd_base->undo_func = property_cmd_edit_undo;
-	cmd_base->free_func = NULL; /* FIXME */
-
 	cmd->project = data->project;
 	cmd->type = type;
 	cmd->property = g_strdup (property);

@@ -297,14 +297,13 @@ group_cmd_insert (PlannerView *view)
 	PlannerCmd      *cmd_base;
 	GroupCmdInsert  *cmd;
 
-	cmd = g_new0 (GroupCmdInsert, 1);
+	cmd_base = planner_cmd_new (GroupCmdInsert,
+				    _("Insert group"),
+				    group_cmd_insert_do,
+				    group_cmd_insert_undo,
+				    group_cmd_insert_free);
 
-	cmd_base = (PlannerCmd*) cmd;
-
-	cmd_base->label = g_strdup (_("Insert group"));
-	cmd_base->do_func = group_cmd_insert_do;
-	cmd_base->undo_func = group_cmd_insert_undo;
-	cmd_base->free_func = group_cmd_insert_free;
+	cmd = (GroupCmdInsert *) cmd_base;
 
 	cmd->project = planner_window_get_project (view->main_window);
 
@@ -422,14 +421,13 @@ group_cmd_remove (PlannerView *view, MrpGroup *group)
 	PlannerCmd      *cmd_base;
 	GroupCmdRemove  *cmd;
 
-	cmd = g_new0 (GroupCmdRemove, 1);
+	cmd_base = planner_cmd_new (GroupCmdRemove,
+				    _("Remove group"),
+				    group_cmd_remove_do,
+				    group_cmd_remove_undo,
+				    group_cmd_remove_free);
 
-	cmd_base = (PlannerCmd*) cmd;
-
-	cmd_base->label = g_strdup (_("Remove group"));
-	cmd_base->do_func = group_cmd_remove_do;
-	cmd_base->undo_func = group_cmd_remove_undo;
-	cmd_base->free_func = group_cmd_remove_free;
+	cmd = (GroupCmdRemove *) cmd_base;
 
 	cmd->project = planner_window_get_project (view->main_window);
 	cmd->group = group;
@@ -518,14 +516,13 @@ group_cmd_default (PlannerView *view,
 	PlannerCmd       *cmd_base;
 	GroupCmdDefault  *cmd;
 
-	cmd = g_new0 (GroupCmdDefault, 1);
+	cmd_base = planner_cmd_new (GroupCmdDefault,
+				    _("Default group"),
+				    group_cmd_default_do,
+				    group_cmd_default_undo,
+				    group_cmd_default_free);
 
-	cmd_base = (PlannerCmd*) cmd;
-
-	cmd_base->label = g_strdup (_("Default group"));
-	cmd_base->do_func = group_cmd_default_do;
-	cmd_base->undo_func = group_cmd_default_undo;
-	cmd_base->free_func = group_cmd_default_free;
+	cmd = (GroupCmdDefault *) cmd_base;
 
 	cmd->project = planner_window_get_project (view->main_window);
 
@@ -637,14 +634,13 @@ group_cmd_edit_property (PlannerView  *view,
 	PlannerCmd            *cmd_base;
 	GroupCmdEditProperty  *cmd;
 
-	cmd = g_new0 (GroupCmdEditProperty, 1);
+	cmd_base = planner_cmd_new (GroupCmdEditProperty,
+				    _("Edit group property"),
+				    group_cmd_edit_property_do,
+				    group_cmd_edit_property_undo,
+				    group_cmd_edit_property_free);
 
-	cmd_base = (PlannerCmd*) cmd;
-
-	cmd_base->label = g_strdup (_("Edit group property"));
-	cmd_base->do_func = group_cmd_edit_property_do;
-	cmd_base->undo_func = group_cmd_edit_property_undo;
-	cmd_base->free_func = group_cmd_edit_property_free;
+	cmd = (GroupCmdEditProperty *) cmd_base;
 
 	cmd->property = property;
 	cmd->group = group;

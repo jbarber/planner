@@ -1,3 +1,20 @@
+2004-06-23 Alvaro del Castillo  <acs@barrapunto.com>
+	
+	* src/planner-calendar-dialog.c
+	* src/planner-day-type-dialog.c
+	* src/planner-group-dialog.c
+	* src/planner-phase-dialog.c
+	* src/planner-project-properties.c
+	* src/planner-resource-cmd.c
+	* src/planner-resource-dialog.c
+	* src/planner-resource-view.c
+	* src/planner-task-cmd.c
+	* src/planner-task-dialog.c
+	* src/planner-task-tree.c:
+	Change strings from undo command to fix bug #144742 and
+	use the new undo API call planner_cmd_new which fix the
+	more hard change in bug #144734.
+
 2004-06-23  Richard Hult  <richard@imendio.com>
 
 	* src/planner-ttable-model.c (ttable_model_resource_removed_cb):

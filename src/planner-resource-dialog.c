@@ -506,14 +506,13 @@ resource_cmd_edit_calendar (DialogData  *data,
 	ResourceCmdCalendar *cmd;
 	MrpCalendar         *current_calendar;
 
-	cmd = g_new0 (ResourceCmdCalendar, 1);
+	cmd_base = planner_cmd_new (ResourceCmdCalendar,
+				    _("Edit resource calendar"),
+				    resource_cmd_calendar_do,
+				    resource_cmd_calendar_undo,
+				    resource_cmd_calendar_free);
 
-	cmd_base = (PlannerCmd*) cmd;
-
-	cmd_base->label = g_strdup (_("Edit resource calendar from dialog"));
-	cmd_base->do_func = resource_cmd_calendar_do;
-	cmd_base->undo_func = resource_cmd_calendar_undo;
-	cmd_base->free_func = resource_cmd_calendar_free;
+	cmd = (ResourceCmdCalendar *) cmd_base;
 
 	cmd->resource = g_object_ref (data->resource);
 
@@ -588,14 +587,13 @@ resource_cmd_edit_note (DialogData  *data,
 		return NULL;
 	}
 
-	cmd = g_new0 (ResourceCmdEditNote, 1);
+	cmd_base = planner_cmd_new (ResourceCmdEditNote,
+				    _("Edit resource note"),
+				    resource_cmd_note_do,
+				    resource_cmd_note_undo,
+				    resource_cmd_note_free);
 
-	cmd_base = (PlannerCmd*) cmd;
-
-	cmd_base->label = g_strdup (_("Edit resource note from dialog"));
-	cmd_base->do_func = resource_cmd_note_do;
-	cmd_base->undo_func = resource_cmd_note_undo;
-	cmd_base->free_func = resource_cmd_note_free;
+	cmd = (ResourceCmdEditNote *) cmd_base;
 
 	cmd->property = g_strdup ("note");
 	cmd->resource = g_object_ref (data->resource);
@@ -661,15 +659,14 @@ resource_cmd_edit_cost (DialogData  *data,
 	if (cost == old_cost) {
 		return NULL;
 	}
+
+	cmd_base = planner_cmd_new (ResourceCmdEditCost,
+				    _("Edit resource note"),
+				    resource_cmd_cost_do,
+				    resource_cmd_cost_undo,
+				    resource_cmd_cost_free);
 	
-	cmd = g_new0 (ResourceCmdEditCost, 1);
-
-	cmd_base = (PlannerCmd*) cmd;
-
-	cmd_base->label = g_strdup (_("Edit resource cost from dialog"));
-	cmd_base->do_func = resource_cmd_cost_do;
-	cmd_base->undo_func = resource_cmd_cost_undo;
-	cmd_base->free_func = resource_cmd_cost_free;
+	cmd = (ResourceCmdEditCost *) cmd_base;
 
 	cmd->property = g_strdup ("cost");
 	cmd->resource = g_object_ref (data->resource);
@@ -732,14 +729,13 @@ resource_cmd_edit_property (PlannerWindow *main_window,
 	PlannerCmd              *cmd_base;
 	ResourceCmdEditProperty *cmd;
 
-	cmd = g_new0 (ResourceCmdEditProperty, 1);
+	cmd_base = planner_cmd_new (ResourceCmdEditProperty,
+				    _("Edit resource property"),
+				    resource_cmd_edit_property_do,
+				    resource_cmd_edit_property_undo,
+				    resource_cmd_edit_property_free);
 
-	cmd_base = (PlannerCmd*) cmd;
-
-	cmd_base->label = g_strdup (_("Edit resource property from dialog"));
-	cmd_base->do_func = resource_cmd_edit_property_do;
-	cmd_base->undo_func = resource_cmd_edit_property_undo;
-	cmd_base->free_func = resource_cmd_edit_property_free;
+	cmd = (ResourceCmdEditProperty *) cmd_base;
 
 	cmd->property = g_strdup (property);
 	cmd->resource = g_object_ref (resource);
@@ -774,14 +770,13 @@ resource_cmd_edit_property_focus (PlannerWindow *main_window,
 	PlannerCmd              *cmd_base;
 	ResourceCmdEditProperty *cmd;
 
-	cmd = g_new0 (ResourceCmdEditProperty, 1);
+	cmd_base = planner_cmd_new (ResourceCmdEditProperty,
+				    _("Edit resource property"),
+				    resource_cmd_edit_property_do,
+				    resource_cmd_edit_property_undo,
+				    resource_cmd_edit_property_free);
 
-	cmd_base = (PlannerCmd*) cmd;
-
-	cmd_base->label = g_strdup (_("Edit resource property from dialog"));
-	cmd_base->do_func = resource_cmd_edit_property_do;
-	cmd_base->undo_func = resource_cmd_edit_property_undo;
-	cmd_base->free_func = resource_cmd_edit_property_free;
+	cmd = (ResourceCmdEditProperty *) cmd_base;
 
 	cmd->property = g_strdup (property);
 	cmd->resource = g_object_ref (resource);
@@ -1286,7 +1281,7 @@ resource_dialog_resource_cost_changed_cb (MrpResource *resource,
 					   dialog);
 }
 
-/* FIXME: undo support */
+/* FIXME: undo support ... it seems undo is working */
 static void  
 resource_dialog_resource_calendar_changed_cb (MrpResource *resource,  
 					      GParamSpec  *pspec, 

@@ -70,14 +70,13 @@ planner_resource_cmd_insert (PlannerWindow *main_window,
 	PlannerCmd          *cmd_base;
 	ResourceCmdInsert   *cmd;
 
-	cmd = g_new0 (ResourceCmdInsert, 1);
+	cmd_base = planner_cmd_new (ResourceCmdInsert,
+				    _("Insert resource"),
+				    resource_cmd_insert_do,
+				    resource_cmd_insert_undo,
+				    resource_cmd_insert_free);
 
-	cmd_base = (PlannerCmd*) cmd;
-
-	cmd_base->label = g_strdup (_("Insert resource"));
-	cmd_base->do_func = resource_cmd_insert_do;
-	cmd_base->undo_func = resource_cmd_insert_undo;
-	cmd_base->free_func = resource_cmd_insert_free;
+	cmd = (ResourceCmdInsert *) cmd_base;
 
 	if (resource == NULL) {
 		cmd->resource = g_object_new (MRP_TYPE_RESOURCE, NULL);

@@ -156,10 +156,6 @@ cal_cmd_day_type_undo (PlannerCmd *cmd_base)
 {
 	CalCmdDayType *cmd = (CalCmdDayType*) cmd_base;
 
-	if (g_getenv ("PLANNER_DEBUG_UNDO_CAL")) {
-		g_message ("Undo Changing calendar for day ...");
-	}
-
 	mrp_calendar_set_days (cmd->calendar, cmd->time, cmd->old_day, -1);
 }
 
@@ -254,10 +250,6 @@ cal_cmd_remove_undo (PlannerCmd *cmd_base)
 	GList        *r;
 	GList        *c;
 	CalCmdRemove *cmd = (CalCmdRemove*) cmd_base;
-
-	if (g_getenv ("PLANNER_DEBUG_UNDO_CAL")) {
-		g_message ("Undo removing calendar ...");
-	}
 
 	mrp_calendar_add (cmd->calendar, cmd->parent);
 
@@ -376,9 +368,6 @@ cal_cmd_add_undo (PlannerCmd *cmd_base)
 {
 	CalCmdAdd *cmd = (CalCmdAdd*) cmd_base;
 
-	if (g_getenv ("PLANNER_DEBUG_UNDO_CAL")) {
-		g_message ("Undo adding calendar ...");
-	}
 	mrp_calendar_remove (cmd->calendar);
 }
 

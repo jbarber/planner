@@ -127,10 +127,6 @@ task_cmd_unlink_do (PlannerCmd *cmd_base)
 	
 	cmd = (TaskCmdLink*) cmd_base;
 
-	if (g_getenv ("PLANNER_DEBUG_UNDO_TASK")) {
-		g_message ("Removing the link ...");
-	}
-	
 	mrp_task_remove_predecessor (cmd->after, cmd->before);
 
 	return TRUE;
