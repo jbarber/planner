@@ -1,5 +1,12 @@
 2004-06-25  Richard Hult  <richard@imendio.com>
 
+	* src/planner-ttable-row.c: (recalc_bounds),
+	(ttable_row_resource_notify_cb),
+	(ttable_row_assignment_notify_cb): Don't redraw unless the
+	geometry is changed.
+
+2004-06-25  Richard Hult  <richard@imendio.com>
+
 	* src/planner-ttable-*.[ch]: Indent this so it at least remotely
 	looks like the rest of the planner code. Sigh.  Do some of the
 	same optimizations to the drawing code as was done to the gantt

@@ -435,74 +435,44 @@ get_resource_bounds (MrpResource *resource,
         *x_fin = t * scale;
 }
 
-static void
+static gboolean
 recalc_bounds (PlannerTtableRow * row)
 {
         PlannerTtableRowPriv *priv;
         GnomeCanvasItem      *item;
-        /*
-         * gint             width;
-         * mrptime          t;
-         */
-        gdouble               x_debut;
-        gdouble               x_fin;
-        gdouble               x_debut_real;
-
+        gdouble               x_debut, x_fin, x_debut_real;
+	gdouble               old_x, old_x_start, old_width;
+	gboolean              changed;
+	
         item = GNOME_CANVAS_ITEM (row);
 
         priv = row->priv;
 
+	old_x = priv->x;
+	old_x_start = priv->x_start;
+	old_width = priv->width;
+
         ttable_row_ensure_layout (row);
-        /*
-         * pango_layout_get_pixel_size (priv->layout,
-         * &width,
-         * NULL);
-         * 
-         * if (width > 0) {
-         * width += TEXT_PADDING;
-         * }
-         * 
-         * priv->text_width = width;
-         */
 
         if (priv->assignment != NULL) {
                 get_assignment_bounds (priv->assignment, priv->scale,
                                        &x_debut, &x_fin, &x_debut_real);
         }
+	
         if (priv->resource != NULL) {
                 get_resource_bounds (priv->resource, priv->scale, &x_debut,
                                      &x_fin, &x_debut_real);
-                /*
-                 * GList *assigns,*a;
-                 * assigns = mrp_resource_get_assignments(priv->resource);
-                 * for (a=assigns; a; a=a->next) {
-                 * gdouble               loc_debut;
-                 * gdouble               loc_fin;
-                 * gdouble               loc_debut_reel;
-                 * MrpAssignment        *assign;
-                 * assign = MRP_ASSIGNMENT(a->data);
-                 * get_assignment_bounds(assign,
-                 * priv->scale,
-                 * &loc_debut,
-                 * &loc_fin,
-                 * &loc_debut_reel);
-                 * if (loc_debut<x_debut || x_debut==-1.0) {
-                 * x_debut = loc_debut;
-                 * }
-                 * if (loc_fin>x_fin || x_fin==-1.0) {
-                 * x_fin = loc_fin;
-                 * }
-                 * if (loc_debut_reel<x_debut_reel || x_debut_reel) {
-                 * x_debut_reel = loc_debut_reel;
-                 * }
-                 * }
-                 */
         }
+
         priv->x = x_debut;
         priv->width = x_fin - x_debut;
         priv->x_start = x_debut_real;
-}
 
+	changed = (old_x != priv->x || old_x_start != priv->x_start ||
+		   old_width != priv->width);
+
+	return changed;
+}
 
 static void
 ttable_row_set_property (GObject      *object,
@@ -1510,8 +1480,9 @@ ttable_row_resource_notify_cb (MrpResource      *resource,
 			       GParamSpec       *pspec,
                                PlannerTtableRow *row)
 {
-	/* FIXME: Only redraw if changes occurred. */
-        recalc_bounds (row);
+        if (!recalc_bounds (row)) {
+		return;
+	}
 
         ttable_row_geometry_changed (row);
         gnome_canvas_item_request_update (GNOME_CANVAS_ITEM (row));
@@ -1545,7 +1516,10 @@ ttable_row_assignment_notify_cb (MrpAssignment    *assignment,
                                  GParamSpec       *pspec,
 				 PlannerTtableRow *row)
 {
-        recalc_bounds (row);
+        if (!recalc_bounds (row)) {
+		return;
+	}
+	
         ttable_row_geometry_changed (row);
         gnome_canvas_item_request_update (GNOME_CANVAS_ITEM (row));
 }
