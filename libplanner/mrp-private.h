@@ -89,8 +89,6 @@ GNode *         imrp_task_get_node                 (MrpTask           *task);
 GNode *         imrp_task_get_sorted_node          (MrpTask           *task);
 GList *         imrp_task_peek_predecessors        (MrpTask           *task);
 GList *         imrp_task_peek_successors          (MrpTask           *task);
-MrpTaskType     imrp_task_get_type                 (MrpTask           *task);
-MrpTaskSched    imrp_task_get_sched                (MrpTask           *task);
 
 /* MrpTime funcitons. */
 void            imrp_time_init                     (void);

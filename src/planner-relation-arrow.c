@@ -263,7 +263,7 @@ relation_arrow_set_property (GObject      *object,
 	PlannerRelationArrow *arrow;
 
 	arrow = PLANNER_RELATION_ARROW (object);
-	
+
 	switch (prop_id) {
 	case PROP_TYPE:
 		arrow->priv->type = g_value_get_enum (value);
@@ -278,29 +278,29 @@ static void
 relation_arrow_update_line_segments (PlannerRelationArrow *arrow)
 {
 	PlannerRelationArrowPriv *priv;
-	gdouble              px1, py1, px2, py2;
-	gdouble              sx1, sy1, sx2, sy2;
-	gdouble              y;
-	MrpRelationType type;
+	gdouble                   px1, py1, px2, py2;
+	gdouble                   sx1, sy1, sx2, sy2;
+	gdouble                   y;
+	MrpRelationType           type;
 
 	priv = arrow->priv;
 	type = priv->type;
 
 	planner_gantt_row_get_geometry (priv->predecessor,
-				   &px1,
-				   &py1,
-				   &px2,
-				   &py2);
+					&px1,
+					&py1,
+					&px2,
+					&py2);
 	
 	planner_gantt_row_get_geometry (priv->successor,
-				   &sx1,
-				   &sy1,
-				   &sx2,
-				   &sy2);
+					&sx1,
+					&sy1,
+					&sx2,
+					&sy2);
 	if (type == MRP_RELATION_SS) {
 		priv->num_points = 4;
 		priv->arrow_dir = PLANNER_ARROW_RIGHT;
-
+		
 		/* LHS of pred */
 		priv->points[0].x = px1;
 		priv->points[0].y = py1 + (py2 - py1) / 2;
@@ -454,10 +454,10 @@ relation_arrow_update_line_segments (PlannerRelationArrow *arrow)
 
 static void
 relation_arrow_geometry_changed (PlannerGanttRow      *row,
-				 gdouble          x1,
-				 gdouble          y1,
-				 gdouble          x2,
-				 gdouble          y2,
+				 gdouble               x1,
+				 gdouble               y1,
+				 gdouble               x2,
+				 gdouble               y2,
 				 PlannerRelationArrow *arrow)
 {
 	relation_arrow_update_line_segments (arrow);
@@ -465,7 +465,7 @@ relation_arrow_geometry_changed (PlannerGanttRow      *row,
 
 static void
 relation_arrow_successor_visibility_changed (PlannerGanttRow      *row,
-					     gboolean         visible,
+					     gboolean              visible,
 					     PlannerRelationArrow *arrow)
 {
 	arrow->priv->successor_visible = visible;
@@ -479,7 +479,7 @@ relation_arrow_successor_visibility_changed (PlannerGanttRow      *row,
 
 static void
 relation_arrow_predecessor_visibility_changed (PlannerGanttRow      *row,
-					       gboolean         visible,
+					       gboolean              visible,
 					       PlannerRelationArrow *arrow)
 {
 	arrow->priv->predecessor_visible = visible;
@@ -493,7 +493,7 @@ relation_arrow_predecessor_visibility_changed (PlannerGanttRow      *row,
 
 void
 planner_relation_arrow_set_predecessor (PlannerRelationArrow *arrow,
-				   PlannerGanttRow      *predecessor)
+					PlannerGanttRow      *predecessor)
 {
 	PlannerRelationArrowPriv *priv; 
 	
@@ -501,7 +501,7 @@ planner_relation_arrow_set_predecessor (PlannerRelationArrow *arrow,
 	g_return_if_fail (PLANNER_IS_GANTT_ROW (predecessor));
 
 	priv = arrow->priv;
-
+	
 	if (priv->predecessor) {
 		g_object_remove_weak_pointer (G_OBJECT (priv->predecessor),
 					      (gpointer)&priv->predecessor);
@@ -531,7 +531,7 @@ planner_relation_arrow_set_predecessor (PlannerRelationArrow *arrow,
 
 void
 planner_relation_arrow_set_successor (PlannerRelationArrow *arrow,
-				 PlannerGanttRow      *successor)
+				      PlannerGanttRow      *successor)
 {
 	PlannerRelationArrowPriv *priv; 
 
@@ -567,36 +567,40 @@ planner_relation_arrow_set_successor (PlannerRelationArrow *arrow,
 }
 
 PlannerRelationArrow *
-planner_relation_arrow_new (PlannerGanttRow *successor, PlannerGanttRow *predecessor, MrpRelationType type)
+planner_relation_arrow_new (PlannerGanttRow *successor,
+			    PlannerGanttRow *predecessor,
+			    MrpRelationType  type)
 {
-	PlannerRelationArrow   *arrow;
-	GnomeCanvasGroup  *root;
+	PlannerRelationArrow *arrow;
+	GnomeCanvasGroup     *root;
 
 	root = gnome_canvas_root (GNOME_CANVAS_ITEM (successor)->canvas);
-
-	arrow = PLANNER_RELATION_ARROW (gnome_canvas_item_new (
-					   root,
-					   PLANNER_TYPE_RELATION_ARROW,
-					   NULL));
 	
+	arrow = PLANNER_RELATION_ARROW (
+		gnome_canvas_item_new (root,
+				       PLANNER_TYPE_RELATION_ARROW,
+				       NULL));
+	
+	arrow->priv->type = type;
+
 	planner_relation_arrow_set_successor (arrow, successor);
 	planner_relation_arrow_set_predecessor (arrow, predecessor);
-	arrow->priv->type = type;
+
 	return arrow;
 }
 
 static void
 relation_arrow_get_bounds (PlannerRelationArrow *arrow,
-			   gdouble         *x1,
-			   gdouble         *y1,
-			   gdouble         *x2,
-			   gdouble         *y2)
+			   gdouble              *x1,
+			   gdouble              *y1,
+			   gdouble              *x2,
+			   gdouble              *y2)
 {
 	PlannerRelationArrowPriv *priv;
-	GnomeCanvasItem     *item;
-	gdouble              wx1, wy1, wx2, wy2;
-	gint                 cx1, cy1, cx2, cy2;
-	gint                 i;
+	GnomeCanvasItem          *item;
+	gdouble                   wx1, wy1, wx2, wy2;
+	gint                      cx1, cy1, cx2, cy2;
+	gint                      i;
 
 	item = GNOME_CANVAS_ITEM (arrow);
 	priv = arrow->priv;
@@ -637,10 +641,10 @@ static void
 relation_arrow_update (GnomeCanvasItem *item,
 		       double          *affine,
 		       ArtSVP          *clip_path,
-		       gint              flags)
+		       gint             flags)
 {
 	PlannerRelationArrow *arrow;
-	gdouble          x1, y1, x2, y2;
+	gdouble               x1, y1, x2, y2;
 
 	arrow = PLANNER_RELATION_ARROW (item);
 	
@@ -656,11 +660,11 @@ relation_arrow_update (GnomeCanvasItem *item,
 
 static void
 relation_arrow_setup_arrow (PlannerArrowDir dir,
-			    GdkPoint   points[4],
-			    gdouble    cx1,
-			    gdouble    cy1,
-			    gdouble    cx2,
-			    gdouble    cy2)
+			    GdkPoint        points[4],
+			    gdouble         cx1,
+			    gdouble         cy1,
+			    gdouble         cx2,
+			    gdouble         cy2)
 {
 	switch (dir) {
 	case PLANNER_ARROW_DOWN:
@@ -720,17 +724,17 @@ relation_arrow_draw (GnomeCanvasItem *item,
 	PlannerRelationArrow     *arrow;
 	PlannerRelationArrowPriv *priv;
 #ifdef USE_AFFINE
-	gdouble              i2c[6];
-	ArtPoint             i1, i2, c1, c2;
+	gdouble                   i2c[6];
+	ArtPoint                  i1, i2, c1, c2;
 #else
-	gdouble              i2w_dx;
-	gdouble              i2w_dy;
-	gdouble              dx1, dy1, dx2, dy2;
+	gdouble                   i2w_dx;
+	gdouble                   i2w_dy;
+	gdouble                   dx1, dy1, dx2, dy2;
 #endif
-	gint                 cx1, cy1, cx2, cy2;
-	GdkGC               *gc;
-	GdkPoint             points[4];
-	gint                 i;
+	gint                      cx1, cy1, cx2, cy2;
+	GdkGC                    *gc;
+	GdkPoint                  points[4];
+	gint                      i;
 	
 	arrow = PLANNER_RELATION_ARROW (item);
 	priv = arrow->priv;

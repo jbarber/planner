@@ -584,6 +584,36 @@ void mrp_resource_set_name (MrpResource *resource, const gchar *name)
 }
 
 /**
+ * mrp_resource_get_short_name:
+ * @resource: an #MrpResource
+ * 
+ * Retrives the short_name of @resource.
+ * 
+ * Return value: the short name
+ **/
+const gchar *
+mrp_resource_get_short_name (MrpResource *resource)
+{
+	g_return_val_if_fail (MRP_IS_RESOURCE (resource), NULL);
+		
+	return resource->priv->short_name;
+}
+
+/**
+ * mrp_resource_set_short_name:
+ * @resource: an #MrpResource
+ * @name: new short name of @resource
+ * 
+ * Sets the short name of @resource.
+ **/
+void mrp_resource_set_short_name (MrpResource *resource, const gchar *name)
+{
+	g_return_if_fail (MRP_IS_RESOURCE (resource));
+
+	mrp_object_set (MRP_OBJECT (resource), "short_name", name, NULL);
+}
+
+/**
  * mrp_resource_assign:
  * @resource: an #MrpResource
  * @task: an #MrpTask

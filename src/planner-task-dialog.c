@@ -157,6 +157,7 @@ static void  task_dialog_pred_cell_edited           (GtkCellRendererText  *cell,
 						     gchar                *path_str,
 						     gchar                *new_text,
 						     DialogData           *data);
+static MrpRelationType cell_index_to_relation_type  (gint                  i);
 static void  task_dialog_cell_type_show_popup       (PlannerCellRendererList   *cell,
 						     const gchar          *path_string,
 						     gint                  x1,
@@ -317,57 +318,66 @@ task_dialog_option_menu_get_selected (GtkWidget *option_menu)
 	return ret;
 }	
 
+#if 0
+static void
+task_dialog_option_menu_set_selected (GtkWidget *option_menu, gint data)
+{
+	GtkWidget *menu;
+	GtkWidget *item;
+	GList     *children, *l;
+	gint       i;
+	
+       	menu = gtk_option_menu_get_menu (GTK_OPTION_MENU (option_menu));
+
+	children = GTK_MENU_SHELL (menu)->children;
+	for (i = 0, l = children; l; i++, l = l->next) {
+		item = l->data;
+
+		if (GINT_TO_POINTER (data) == g_object_get_data (G_OBJECT (item), "data")) {
+			gtk_option_menu_set_history (GTK_OPTION_MENU (option_menu), i);
+			break;
+		}
+	}
+}	
+#endif
+
 static void
 task_dialog_task_combo_select_child_cb (GtkList   *list,
 					GtkWidget *item,
 					GtkCombo  *combo)
 {
 	MrpTask *task;
-	gchar   *name;
 
 	task = g_object_get_data (G_OBJECT (item), "task");
-	
 	g_object_set_data (G_OBJECT (combo), "selected_task", task);
-
-	g_object_get (task,
-		      "name", &name,
-		      NULL);
 }
 
 static void
 task_dialog_setup_task_combo (GtkCombo *combo,
 			      GList    *tasks)
 {
-	GList *strings;
-	GList *children;
-	GList *l;
-	gchar *name;
-
+	GList       *strings;
+	GList       *children;
+	GList       *l;
+	const gchar *name;
+	
 	if (tasks == NULL) {
 		return;
 	}
 	
 	strings = NULL;
 	for (l = tasks; l; l = l->next) {
-		g_object_get (G_OBJECT (l->data),
-			      "name", &name,
-			      NULL);
-
+		name = mrp_task_get_name (l->data);
 		if (name == NULL || name[0] == 0) {
 			strings = g_list_prepend (strings,
-						  g_strdup (_("(No name)")));
+						  _("(No name)"));
 		} else {
-			strings = g_list_prepend (strings, name);
+			strings = g_list_prepend (strings, (gchar*) name);
 		}
 	}
 
 	strings = g_list_reverse (strings);
-
 	gtk_combo_set_popdown_strings (combo, strings);
-
-	for (l = strings; l; l = l->next) {
-		g_free (l->data);
-	}
 	g_list_free (strings);
 	
 	g_object_set_data (G_OBJECT (combo), "selected_task", tasks->data);
@@ -886,12 +896,10 @@ planner_task_cmd_edit_predecessor (PlannerWindow   *main_window,
 	cmd->old_lag = mrp_relation_get_lag (relation);
 	cmd->lag = lag;
 			
-	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager 
-					   (main_window),
-					   cmd_base);
+	planner_cmd_manager_insert_and_do (
+		planner_window_get_cmd_manager (main_window), cmd_base);
 
 	if (cmd->error) {
-		/* FIXME: who clean the cmd memory? */
 		g_propagate_error (error, cmd->error);
 		return NULL;
 	}
@@ -1865,13 +1873,17 @@ task_dialog_predecessor_dialog_new (MrpTask       *task,
 	
 	w = glade_xml_get_widget (glade, "type_optionmenu");
 	g_object_set_data (G_OBJECT (dialog), "type_optionmenu", w);
+
+	/* FIXME: FF and SF are disabled for now, since the scheduler doesn't
+	 * handle them.
+	 */
 	task_dialog_setup_option_menu (w,
 				       NULL,
 				       NULL,
 				       _("Finish to start (FS)"), MRP_RELATION_FS,
-				       _("Finish to finish (FF)"), MRP_RELATION_FF,
+				       /*_("Finish to finish (FF)"), MRP_RELATION_FF,*/
 				       _("Start to start (SS)"), MRP_RELATION_SS,
-				       _("Start to finish (SF)"), MRP_RELATION_SF,
+				       /*_("Start to finish (SF)"), MRP_RELATION_SF,*/
 				       NULL);
 
 	w = glade_xml_get_widget (glade, "lag_spinbutton");
@@ -2033,22 +2045,20 @@ task_dialog_pred_cell_edited (GtkCellRendererText *cell,
 			      gchar               *new_text, 
 			      DialogData          *data)
 {
-	GtkTreeView        *tree;
-	GtkTreePath        *path;
-	GtkTreeIter         iter;
-	GtkTreeModel       *model;
-	MrpProject         *project;
-	MrpRelation        *relation;
-	MrpTask            *task_main;
-	MrpTask            *task_pred;
-	MrpTask            *new_task_pred;
+	GtkTreeView             *tree;
+	GtkTreePath             *path;
+	GtkTreeIter              iter;
+	GtkTreeModel            *model;
+	MrpProject              *project;
+	MrpRelation             *relation;
+	MrpTask                 *task_main;
+	MrpTask                 *task_pred;
+	MrpTask                 *new_task_pred;
 	PlannerCellRendererList *planner_cell;
-	gint                column;
-	GList              *tasks;
-	gint                lag;
-	MrpRelationType     type;
-
-	/* FIXME: Undo support */
+	gint                     column;
+	GList                   *tasks;
+	gint                     lag;
+	MrpRelationType          type, new_type;
 
 	tree = GTK_TREE_VIEW (data->predecessor_list);
 	
@@ -2057,12 +2067,12 @@ task_dialog_pred_cell_edited (GtkCellRendererText *cell,
 	column = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (cell), "column"));
 
 	gtk_tree_model_get_iter (model, &iter, path);
-
+	
 	task_pred = MRP_TASK (planner_list_model_get_object (PLANNER_LIST_MODEL (model),
-							&iter)); 
+							     &iter)); 
 	task_main = data->task;
 	
-	mrp_object_get (task_main, "project", &project, NULL);
+	project = mrp_object_get_project (MRP_OBJECT (task_main));
 
 	relation = mrp_task_get_relation (task_main, task_pred);
 	lag = mrp_relation_get_lag (relation) / (60*60);
@@ -2086,13 +2096,6 @@ task_dialog_pred_cell_edited (GtkCellRendererText *cell,
 								 new_task_pred,
 								 type, lag, &error);
 
-			/* mrp_task_remove_predecessor (task_main, task_pred);
-
-			if (!mrp_task_add_predecessor (task_main,
-						       new_task_pred,
-						       type,
-						       lag,
-						       &error)) { */
 			if (!cmd) {
 				GtkWidget *dialog;
 				
@@ -2116,71 +2119,50 @@ task_dialog_pred_cell_edited (GtkCellRendererText *cell,
 							  NULL);
 			}
 		}
+
+		g_list_free (tasks);
 		break;
 
-	case PREDECESSOR_COL_TYPE:
+	case PREDECESSOR_COL_TYPE: {
+		GError     *error = NULL;
+		PlannerCmd *cmd;
+
 		planner_cell = PLANNER_CELL_RENDERER_LIST (cell);
 
-		{	
-			GError *error = NULL;
-			PlannerCmd *cmd;
+		new_type = cell_index_to_relation_type (planner_cell->selected_index);
 
-			cmd = planner_task_cmd_edit_predecessor (data->main_window, 
-								 task_main, task_pred,
-								 task_pred,
-								 planner_cell->selected_index + 1,
-								 lag, &error);
-
-			/* mrp_task_remove_predecessor (task_main, task_pred);
-
-			if (!mrp_task_add_predecessor (task_main,
-						       task_pred,
-						       planner_cell->selected_index + 1,
-						       lag,
-						       &error)) {*/
-			if (!cmd) {
-				GtkWidget *dialog;
-				
-				dialog = gtk_message_dialog_new (
-					NULL,
-					GTK_DIALOG_DESTROY_WITH_PARENT,
-					GTK_MESSAGE_ERROR,
-					GTK_BUTTONS_OK,
-					"%s", error->message);
-
-				gtk_dialog_run (GTK_DIALOG (dialog));
-				gtk_widget_destroy (dialog);
-				
-				g_error_free (error);
-
-				/* Restore the previous state. */
-				mrp_task_add_predecessor (task_main,
-							  task_pred, 
-							  type,
-							  lag,
-							  NULL);
-			}
-		}
-		/* The index + 1 happens to be the same as the enum,
-		 * we should probably do this some other way.
-		 */
+		cmd = planner_task_cmd_edit_predecessor (data->main_window, 
+							 task_main, task_pred,
+							 task_pred,
+							 new_type,
+							 lag, &error);
 		
-		relation = mrp_task_get_relation (task_main, task_pred);
-		mrp_object_set (relation,
-				"type",
-				planner_cell->selected_index + 1,
-				NULL);
-				
-
+		if (!cmd) {
+			GtkWidget *dialog;
+			
+			dialog = gtk_message_dialog_new (
+				NULL,
+				GTK_DIALOG_DESTROY_WITH_PARENT,
+				GTK_MESSAGE_ERROR,
+				GTK_BUTTONS_OK,
+				"%s", error->message);
+			
+			gtk_dialog_run (GTK_DIALOG (dialog));
+			gtk_widget_destroy (dialog);
+			
+			g_error_free (error);
+			
+			/* Restore the previous state. */
+			mrp_task_add_predecessor (task_main,
+						  task_pred, 
+						  type,
+						  lag,
+						  NULL);
+		}
 		break;
-
+	}
 	case PREDECESSOR_COL_LAG:
-		/* mrp_object_set (relation,
-				"lag",
-				60*60 * atoi (new_text),
-				NULL);*/
 		task_cmd_edit_lag (data->main_window, relation, 60*60 * atoi (new_text));
-
 		break;
 
 	default:
@@ -2189,6 +2171,20 @@ task_dialog_pred_cell_edited (GtkCellRendererText *cell,
 	}
 
 	gtk_tree_path_free (path);
+}
+
+static MrpRelationType
+cell_index_to_relation_type (gint i)
+{
+	switch (i) {
+	case 0:
+		return MRP_RELATION_FS;
+	case 1:
+		return MRP_RELATION_SS;
+	default:
+		g_warning ("Unknown relation type index");
+		return MRP_RELATION_FS;
+	}
 }
 
 static void  
@@ -2222,11 +2218,13 @@ task_dialog_cell_type_show_popup (PlannerCellRendererList *cell,
 
 	relation = mrp_task_get_relation (data->task, predecessor);
 
+	/* FIXME: FF and SF are disabled for now. */
+	
 	list = NULL;
 	list = g_list_append (list, g_strdup (_("FS")));
-	list = g_list_append (list, g_strdup (_("FF")));
+	/*list = g_list_append (list, g_strdup (_("FF")));*/
 	list = g_list_append (list, g_strdup (_("SS")));
-	list = g_list_append (list, g_strdup (_("SF")));
+	/*list = g_list_append (list, g_strdup (_("SF")));*/
 	
 	cell->list = list;
 
@@ -2234,18 +2232,20 @@ task_dialog_cell_type_show_popup (PlannerCellRendererList *cell,
 	case MRP_RELATION_FS:
 		cell->selected_index = 0;
 		break;
-	case MRP_RELATION_FF:
+	case MRP_RELATION_SS:
 		cell->selected_index = 1;
 		break;
-	case MRP_RELATION_SS:
-		cell->selected_index = 2;
+#if 0
+		/* FIXME: FF and SF disabled. Renumber indices when enabling. */
+	case MRP_RELATION_FF:
+		cell->selected_index = 1;
 		break;
 	case MRP_RELATION_SF:
 		cell->selected_index = 3;
 		break;
+#endif
 	default:
-		g_warning ("Unknown relation type %d", 
-			   mrp_relation_get_relation_type (relation));
+		cell->selected_index = 0;
 		break;
 	}	
 }
@@ -2295,7 +2295,9 @@ task_dialog_cell_name_show_popup (PlannerCellRendererList *cell,
 	}
 	
 	cell->list = list;
+
 	/* FIXME: Select the actual task being edited */
+
 	cell->selected_index = 1;
 }
 

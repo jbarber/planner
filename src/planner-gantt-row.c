@@ -412,19 +412,24 @@ gantt_row_get_bounds (PlannerGanttRow *row,
 	*py2 = cy2 + 1;
 }
 
-/* FIXME: Rename this function to something more descriptive. */
-static void
+static gboolean
 recalc_bounds (PlannerGanttRow *row)
 {
-	PlannerGanttRowPriv  *priv;
-	GnomeCanvasItem *item;
-	gint             width;
-	mrptime          t;
-	MrpTaskType      type;
+	PlannerGanttRowPriv *priv;
+	GnomeCanvasItem     *item;
+	gint                 width;
+	mrptime              t;
+	MrpTaskType          type;
+	gdouble              old_x, old_x_start, old_width;
+	gboolean             changed;
 
 	item = GNOME_CANVAS_ITEM (row);
 
 	priv = row->priv;
+
+	old_x = priv->x;
+	old_x_start = priv->x_start;
+	old_width = priv->width;
 	
 	gantt_row_ensure_layout (row);
 
@@ -441,7 +446,7 @@ recalc_bounds (PlannerGanttRow *row)
 	t = mrp_task_get_work_start (priv->task);
 	priv->x = t * priv->scale;
 
-	g_object_get (priv->task, "type", &type, NULL);
+	type = mrp_task_get_task_type (priv->task);
 	if (type == MRP_TASK_TYPE_MILESTONE) {
 		priv->width = MILESTONE_SIZE * 2;
 	} else {
@@ -451,6 +456,11 @@ recalc_bounds (PlannerGanttRow *row)
 	
 	t = mrp_task_get_start (priv->task);
 	priv->x_start = t * priv->scale;
+
+	changed = (old_x != priv->x || old_x_start != priv->x_start ||
+		   old_width != priv->width);
+	
+	return changed;
 }
 
 static void
@@ -626,7 +636,8 @@ gantt_row_update_resources (PlannerGanttRow *row)
 	MrpTask        *task;
 	MrpAssignment  *assignment;
 	MrpResource    *resource;
-	gchar          *name, *name_unit;
+	const gchar    *name;
+	gchar          *name_unit;
 	gchar          *tmp_str;
 	gchar          *text = NULL;
 	PangoRectangle  rect;
@@ -654,22 +665,14 @@ gantt_row_update_resources (PlannerGanttRow *row)
 		units = mrp_assignment_get_units (assignment);
 
 		/* Try short name first. */
-		g_object_get (resource, 
-			      "short_name", &name, 
-			      NULL);
+		name = mrp_resource_get_short_name (resource);
 		
-		if (name && name[0] == 0) {
-			g_free (name);
-			
-			g_object_get (resource, 
-				      "name", &name, 
-				      NULL);
-			
-			if (name && name[0] == 0) {
-				g_free (name);
-				
-				name = g_strdup (_("Unnamed"));
-			}
+		if (!name || name[0] == 0) {
+			name = mrp_resource_get_name (resource);
+		}
+		
+		if (!name || name[0] == 0) {
+				name = _("Unnamed");
 		}
 		
 		g_array_append_val (priv->resource_widths, x);
@@ -695,7 +698,6 @@ gantt_row_update_resources (PlannerGanttRow *row)
 		
 		tmp_str = g_strdup_printf ("%s, %s", text, name_unit);
 		
-		g_free (name);	
 		g_free (text);
 		g_free (name_unit);
 
@@ -813,7 +815,7 @@ gantt_row_unrealize (GnomeCanvasItem *item)
 static GdkGC *
 gantt_row_create_frame_gc (GnomeCanvas *canvas, gboolean highlight)
 {
-	GdkGC    *gc;
+	GdkGC *gc;
  
 	gc = gdk_gc_new (canvas->layout.bin_window);
 
@@ -881,12 +883,6 @@ gantt_row_draw (GnomeCanvasItem *item,
 
 	level = planner_scale_clamp_zoom (priv->zoom);
 
-	g_object_get (priv->task,
-		      "percent-complete", &percent_complete,
-		      "critical", &critical,
-		      "type", &type,
-		      NULL);
-
 	/* Get item area in canvas coordinates. */
 	i2w_dx = 0.0;
 	i2w_dy = 0.0;
@@ -933,12 +929,11 @@ gantt_row_draw (GnomeCanvasItem *item,
 	complete_width = 0;
 	complete_x2 = 0;
 
+	percent_complete = mrp_task_get_percent_complete (priv->task);
+	critical = mrp_task_get_critical (priv->task);
+	type = mrp_task_get_task_type (priv->task);
+	
 	if (!summary) {
-		g_object_get (priv->task,
-			      "percent-complete", &percent_complete,
-			      "critical", &critical,
-			      "type", &type,
-			      NULL);  
 		complete_width = floor ((cx2 - cx1) * (percent_complete / 100.0) + 0.5);
 		complete_x2 = MIN (cx1 + complete_width, rx2);
 	}
@@ -951,6 +946,7 @@ gantt_row_draw (GnomeCanvasItem *item,
 							 priv->complete_gc);
 		}
 
+		/* FIXME: cache the colors. */
 		if (!highlight_critical || !critical) {
 			gnome_canvas_get_color (item->canvas,
 						"LightSkyBlue3",
@@ -1375,7 +1371,10 @@ gantt_row_bounds (GnomeCanvasItem *item,
 static void
 gantt_row_notify_cb (MrpTask *task, GParamSpec *pspec, PlannerGanttRow *row)
 {
-	recalc_bounds (row);
+	if (!recalc_bounds (row)) {
+		return;
+	}
+
 	gantt_row_geometry_changed (row); 
 	gnome_canvas_item_request_update (GNOME_CANVAS_ITEM (row));
 }
@@ -1390,9 +1389,9 @@ gantt_row_update_assignment_string (PlannerGanttRow *row)
 }
 
 static void 
-gantt_row_assignment_added (MrpTask       *task, 
-			    MrpAssignment *assignment,
-			    PlannerGanttRow    *row)
+gantt_row_assignment_added (MrpTask         *task, 
+			    MrpAssignment   *assignment,
+			    PlannerGanttRow *row)
 {
 	MrpResource *resource;
 	
@@ -1414,9 +1413,9 @@ gantt_row_assignment_added (MrpTask       *task,
 }
 
 static void 
-gantt_row_assignment_removed (MrpTask       *task, 
-			      MrpAssignment *assignment,
-			      PlannerGanttRow    *row)
+gantt_row_assignment_removed (MrpTask         *task, 
+			      MrpAssignment   *assignment,
+			      PlannerGanttRow *row)
 {
 	MrpResource *resource;
 
@@ -1454,9 +1453,9 @@ gantt_row_resource_short_name_changed (MrpResource     *resource,
 }
 
 static void
-gantt_row_assignment_units_changed (MrpAssignment *assignment,
-				    GParamSpec    *pspec,
-				    PlannerGanttRow    *row)
+gantt_row_assignment_units_changed (MrpAssignment   *assignment,
+				    GParamSpec      *pspec,
+				    PlannerGanttRow *row)
 {
 	gantt_row_update_assignment_string (row);
 }
@@ -1466,19 +1465,16 @@ gantt_row_assignment_units_changed (MrpAssignment *assignment,
  */
 void
 planner_gantt_row_get_geometry (PlannerGanttRow *row,
-			   gdouble    *x1,
-			   gdouble    *y1,
-			   gdouble    *x2,
-			   gdouble    *y2)
+				gdouble         *x1,
+				gdouble         *y1,
+				gdouble         *x2,
+				gdouble         *y2)
 {
 	PlannerGanttRowPriv *priv;
 	
 	g_return_if_fail (PLANNER_IS_GANTT_ROW (row));
 
 	priv = row->priv;
-	
-	/* FIXME: Need to do recalc here? */
-	/*recalc_bounds (row); */
 	
 	if (x1) {
 		*x1 = priv->x;
@@ -1496,7 +1492,7 @@ planner_gantt_row_get_geometry (PlannerGanttRow *row,
 
 void
 planner_gantt_row_set_visible (PlannerGanttRow *row,
-			  gboolean    is_visible)
+			       gboolean         is_visible)
 {
 	if (is_visible == row->priv->visible) {
 		return;
@@ -1652,7 +1648,7 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 	canvas_widget = GTK_WIDGET (item->canvas);
 	
 	summary = (mrp_task_get_n_children (priv->task) > 0);
-	g_object_get (priv->task, "type", &type, NULL);
+	type = mrp_task_get_task_type (priv->task);
 
 	switch (event->type) {
 	case GDK_BUTTON_PRESS:
@@ -1900,28 +1896,22 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 			}
 			
 			if (target_item && target_item != item) {
-				gchar *task_name, *target_name;
-
+				const gchar *task_name, *target_name;
+				
 				g_object_set (target_item,
 					      "highlight",
 					      TRUE,
 					      NULL);
 
-				g_object_get (PLANNER_GANTT_ROW (target_item)->priv->task,
-					      "name",
-					      &target_name,
-					      NULL);
+				target_name = mrp_task_get_name (PLANNER_GANTT_ROW (target_item)->priv->task);
 
-				g_object_get (priv->task,
-					      "name",
-					      &task_name,
-					      NULL);
+				task_name = mrp_task_get_name (priv->task);
 				
 				if (target_name == NULL || target_name[0] == 0) {
-					target_name = g_strdup (_("No name"));
+					target_name = _("No name");
 				}
 				if (task_name == NULL || task_name[0] == 0) {
-					task_name = g_strdup (_("No name"));
+					task_name = _("No name");
 				}
 				
 				message = g_strdup_printf (_("Make task '%s' a predecessor of '%s'"),
@@ -1931,8 +1921,6 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 				planner_gantt_chart_status_updated (chart, message);
 
 				g_free (message);
-				g_free (target_name);
-				g_free (task_name);
 			}
 
 			if (target_item == NULL) {
@@ -1948,7 +1936,7 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 			MrpCalendar *calendar;
 			gint         hours_per_day;
 
-			g_object_get (priv->task, "project", &project, NULL);
+			project = mrp_object_get_project (MRP_OBJECT (priv->task));
 			calendar = mrp_project_get_calendar (project);
 			
 			hours_per_day = mrp_calendar_day_get_total_work (
@@ -2003,7 +1991,7 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 			gint        duration;
 			gint        work;
 
-			g_object_get (priv->task, "project", &project, NULL);
+			project = mrp_object_get_project (MRP_OBJECT (priv->task));
 			
 			duration = MAX (0, (event->button.x - priv->x_start) / priv->scale);
 			/* Snap to quarters. */
@@ -2085,8 +2073,7 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 				}
 			}
 			
-			chart = g_object_get_data (G_OBJECT (item->canvas),
-						   "chart");
+			chart = g_object_get_data (G_OBJECT (item->canvas), "chart");
 			
 			planner_gantt_chart_status_updated (chart, NULL);
 		}
@@ -2130,12 +2117,12 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 			if (anchor) {
 				gtk_tree_selection_unselect_all (selection);
 				gtk_tree_selection_select_range(selection, anchor, path);
-				gtk_tree_path_free(path);
+				gtk_tree_path_free (path);
 			}
 			else {
 				gtk_tree_selection_unselect_all (selection);
 				gtk_tree_selection_select_path (selection, path);
-				planner_task_tree_set_anchor(tree, path);
+				planner_task_tree_set_anchor (tree, path);
 			}
 		}
 		

@@ -189,7 +189,7 @@ task_cmd_edit_property_do (PlannerCmd *cmd_base)
 	cmd = (TaskCmdEditProperty*) cmd_base;
 
 	task = task_tree_get_task_from_path (cmd->tree, cmd->path);
-	
+
 	g_object_set_property (G_OBJECT (task),
 			       cmd->property, cmd->value);
 

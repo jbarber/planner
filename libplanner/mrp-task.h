@@ -101,8 +101,10 @@ gfloat           mrp_task_get_cost                  (MrpTask          *task);
 GList           *mrp_task_get_assigned_resources    (MrpTask          *task);
 gint             mrp_task_compare                   (gconstpointer     a,
 						     gconstpointer     b);
-
-
+MrpTaskType      mrp_task_get_task_type             (MrpTask          *task);
+MrpTaskSched     mrp_task_get_sched                 (MrpTask          *task);
+gshort           mrp_task_get_percent_complete      (MrpTask          *task);
+gboolean         mrp_task_get_critical              (MrpTask          *task);
 
 
 #endif /* __MRP_TASK_H__ */

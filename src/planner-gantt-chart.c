@@ -775,25 +775,25 @@ gantt_chart_build_tree_do (PlannerGanttChart *chart,
 
 static void
 gantt_chart_build_relations (PlannerGanttChart *chart,
-			     GtkTreeIter  *iter,
-			     GHashTable   *hash)
+			     GtkTreeIter       *iter,
+			     GHashTable        *hash)
 {
 	PlannerGanttChartPriv *priv;
-	GtkTreeIter       child;
-	MrpTask          *task;
-	MrpRelation      *relation;
-	MrpTask          *predecessor;
-	TreeNode         *task_node;
-	TreeNode         *predecessor_node;
-	GList            *relations, *l;
+	GtkTreeIter            child;
+	MrpTask               *task;
+	MrpRelation           *relation;
+	MrpTask               *predecessor;
+	TreeNode              *task_node;
+	TreeNode              *predecessor_node;
+	GList                 *relations, *l;
 	PlannerRelationArrow  *arrow;
-	MrpRelationType	      rel_type;
+	MrpRelationType	       rel_type;
 
 	priv = chart->priv;
 	
 	do {
 		task = planner_gantt_model_get_task (PLANNER_GANTT_MODEL (priv->model),
-						iter);
+						     iter);
 		
 		relations = mrp_task_get_predecessor_relations (task);
 		for (l = relations; l; l = l->next) {
@@ -906,11 +906,11 @@ static gboolean
 gantt_chart_reflow_idle (PlannerGanttChart *chart)
 {
 	PlannerGanttChartPriv *priv;
-	mrptime           t1, t2;
-	gdouble           x1, y1, x2, y2;
-	gdouble           width, height;
-	gdouble           bx1, bx2;
-	GtkAllocation     allocation;
+	mrptime               t1, t2;
+	gdouble               x1, y1, x2, y2;
+	gdouble               width, height;
+	gdouble               bx1, bx2;
+	GtkAllocation         allocation;
 
 	priv = chart->priv;
 	
@@ -1006,8 +1006,8 @@ gantt_chart_insert_task (PlannerGanttChart *chart,
 			 MrpTask      *task)
 {
 	PlannerGanttChartPriv *priv;
-	GnomeCanvasItem  *item;
-	TreeNode         *tree_node;
+	GnomeCanvasItem       *item;
+	TreeNode              *tree_node;
 
 	priv = chart->priv;
 
@@ -1040,13 +1040,13 @@ gantt_chart_insert_task (PlannerGanttChart *chart,
 
 static PlannerRelationArrow *
 gantt_chart_add_relation (PlannerGanttChart *chart,
-			  TreeNode     *task,
-			  TreeNode     		*predecessor,
-			  MrpRelationType 	type)
+			  TreeNode          *task,
+			  TreeNode     	    *predecessor,
+			  MrpRelationType    type)
 {
 	return planner_relation_arrow_new (PLANNER_GANTT_ROW (task->item),
-				      PLANNER_GANTT_ROW (predecessor->item),
-				      type);
+					   PLANNER_GANTT_ROW (predecessor->item),
+					   type);
 }
 
 static void
@@ -1147,30 +1147,26 @@ gantt_chart_project_start_changed (MrpProject   *project,
 }
 
 static void
-gantt_chart_root_finish_changed (MrpTask      *root,
-				 GParamSpec   *spec,
+gantt_chart_root_finish_changed (MrpTask           *root,
+				 GParamSpec        *spec,
 				 PlannerGanttChart *chart)
 {
-	mrptime t;
-	
-	g_object_get (root, "finish", &t, NULL);
-	chart->priv->last_time = t;
-
+	chart->priv->last_time = mrp_task_get_finish (root);
 	gantt_chart_reflow (chart, FALSE);
 }
 
 static void
-gantt_chart_relation_added (MrpTask      *task,
-			    MrpRelation  *relation,
+gantt_chart_relation_added (MrpTask           *task,
+			    MrpRelation       *relation,
 			    PlannerGanttChart *chart)
 {
-	GtkTreePath     *task_path;
-	GtkTreePath     *predecessor_path;
-	TreeNode        *task_node;
-	TreeNode        *predecessor_node;
+	GtkTreePath          *task_path;
+	GtkTreePath          *predecessor_path;
+	TreeNode             *task_node;
+	TreeNode             *predecessor_node;
 	PlannerRelationArrow *arrow;
-	MrpTask         *predecessor;
-	MrpRelationType	 rel_type;
+	MrpTask              *predecessor;
+	MrpRelationType	      rel_type;
 
 	predecessor = mrp_relation_get_predecessor (relation);
 	
@@ -1190,7 +1186,7 @@ gantt_chart_relation_added (MrpTask      *task,
 	predecessor_node = gantt_chart_tree_node_at_path (chart->priv->tree,
 							  predecessor_path);
 	
-	rel_type = mrp_relation_get_relation_type(relation);
+	rel_type = mrp_relation_get_relation_type (relation);
 	
 	arrow = gantt_chart_add_relation (chart,
 					  task_node,
@@ -1201,8 +1197,8 @@ gantt_chart_relation_added (MrpTask      *task,
 }
 
 static void
-gantt_chart_relation_removed (MrpTask      *task,
-			      MrpRelation  *relation,
+gantt_chart_relation_removed (MrpTask           *task,
+			      MrpRelation       *relation,
 			      PlannerGanttChart *chart)
 {
 	GnomeCanvasItem *arrow;
@@ -1220,7 +1216,6 @@ gantt_chart_relation_removed (MrpTask      *task,
 		g_hash_table_remove (chart->priv->relation_hash, relation);
 		
 		gtk_object_destroy (GTK_OBJECT (arrow));
-	
 		gantt_chart_reflow (chart, FALSE);
 	}
 }
@@ -1228,9 +1223,9 @@ gantt_chart_relation_removed (MrpTask      *task,
 static gboolean
 gantt_chart_task_moved_task_traverse_func (MrpTask *task, PlannerGanttChart *chart)
 {
-	GList            *relations;
-	GList            *l;
-	MrpRelation      *relation;
+	GList                 *relations;
+	GList                 *l;
+	MrpRelation           *relation;
 	PlannerGanttChartPriv *priv;
 	PlannerRelationArrow  *arrow;
 	PlannerGanttRow       *row;
@@ -1263,8 +1258,8 @@ gantt_chart_task_moved_task_traverse_func (MrpTask *task, PlannerGanttChart *cha
 }
 
 static void
-gantt_chart_task_moved (MrpProject   *project,
-			MrpTask      *task,
+gantt_chart_task_moved (MrpProject        *project,
+			MrpTask           *task,
 			PlannerGanttChart *chart)
 {
 	PlannerGanttChartPriv *priv;
@@ -1343,7 +1338,7 @@ planner_gantt_chart_get_model (PlannerGanttChart *chart)
 
 void
 planner_gantt_chart_set_model (PlannerGanttChart *chart,
-			       GtkTreeModel *model)
+			       GtkTreeModel      *model)
 {
 	PlannerGanttChartPriv *priv;
 	MrpTask               *root;
@@ -1711,7 +1706,7 @@ static mrptime
 gantt_chart_get_center (PlannerGanttChart *chart)
 {
 	PlannerGanttChartPriv *priv;
-	gint              x1, width, x;
+	gint                   x1, width, x;
 	
 	priv = chart->priv;
 
@@ -1729,7 +1724,7 @@ static void
 gantt_chart_set_center (PlannerGanttChart *chart, mrptime t)
 {
 	PlannerGanttChartPriv *priv;
-	gint              x, x1, width;
+	gint                   x, x1, width;
 	
 	priv = chart->priv;
 
@@ -1748,7 +1743,7 @@ void
 planner_gantt_chart_zoom_in (PlannerGanttChart *chart)
 {
 	PlannerGanttChartPriv *priv;
-	mrptime           mt;
+	mrptime                mt;
 
 	g_return_if_fail (PLANNER_IS_GANTT_CHART (chart));
 
@@ -1763,7 +1758,7 @@ void
 planner_gantt_chart_zoom_out (PlannerGanttChart *chart)
 {
 	PlannerGanttChartPriv *priv;
-	mrptime           mt;
+	mrptime                mt;
 
 	g_return_if_fail (PLANNER_IS_GANTT_CHART (chart));
 
@@ -1798,9 +1793,9 @@ void
 planner_gantt_chart_zoom_to_fit (PlannerGanttChart *chart)
 {
 	PlannerGanttChartPriv *priv;
-	gdouble           t;
-	gdouble           zoom;
-	gdouble           alloc;
+	gdouble                t;
+	gdouble                zoom;
+	gdouble                alloc;
 
 	g_return_if_fail (PLANNER_IS_GANTT_CHART (chart));
 
@@ -1848,7 +1843,7 @@ gantt_chart_get_width (PlannerGanttChart *chart)
 
 void
 planner_gantt_chart_status_updated (PlannerGanttChart *chart,
-			       const gchar  *message)
+				    const gchar       *message)
 {
 	g_return_if_fail (PLANNER_IS_GANTT_CHART (chart));
 
@@ -1857,7 +1852,7 @@ planner_gantt_chart_status_updated (PlannerGanttChart *chart,
 
 void
 planner_gantt_chart_resource_clicked (PlannerGanttChart *chart,
-				 MrpResource  *resource)
+				      MrpResource       *resource)
 {
 	g_return_if_fail (PLANNER_IS_GANTT_CHART (chart));
 
@@ -1866,7 +1861,7 @@ planner_gantt_chart_resource_clicked (PlannerGanttChart *chart,
 
 void
 planner_gantt_chart_set_highlight_critical_tasks (PlannerGanttChart *chart,
-					     gboolean      state)
+						  gboolean           state)
 {
 	PlannerGanttChartPriv *priv;
 	

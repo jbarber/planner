@@ -1,5 +1,37 @@
 2004-06-16  Richard Hult  <richard@imendio.com>
 
+	* src/planner-task-dialog.c (task_dialog_pred_cell_edited): Don't
+	create the predecessor twice.
+
+	* libplanner/mrp-resource.c: (mrp_resource_get_short_name),
+	(mrp_resource_set_short_name):
+	* libplanner/mrp-task-manager.c: (dump_children),
+	(mrp_task_manager_dump_task_list), (task_manager_calc_relation),
+	(task_manager_get_task_units_intervals),
+	(task_manager_calculate_task_finish),
+	(task_manager_do_forward_pass), (mrp_task_manager_recalc):
+	* libplanner/mrp-task.c: (mrp_task_add_predecessor): Add accessors
+	to speed up things, clean up coding style-wise.
+	
+	* src/planner-gantt-chart.c: Clean up a bit and use accessors.
+	
+	* src/planner-gantt-row.c (recalc_bounds): Check if things really
+	changed.
+	(gantt_row_notify_cb): Don't redraw if things didn't change.
+	(gantt_row_draw, gantt_row_assignment_added),
+	(gantt_row_assignment_removed),
+	(gantt_row_assignment_units_changed),
+	(planner_gantt_row_get_geometry), (planner_gantt_row_set_visible),
+	(gantt_row_event): Use accessors.
+
+	* src/planner-relation-arrow.c: Indent.
+	(planner_relation_arrow_new): Set the relation type before setting
+	up the geometry, fixes creating other relations than the default.
+
+	* src/planner-task-dialog.c: Comment out FF and SF for now. Get
+	the right relation type instead of relying on the index to match
+	the enum value. Use accessors.
+
 	* src/planner-gantt-print.c: (print_table_header),
 	(print_table_tasks), (print_time_header),
 	(planner_gantt_print_do),

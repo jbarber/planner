@@ -60,6 +60,9 @@ MrpResource *   mrp_resource_new                (void);
 const gchar *   mrp_resource_get_name           (MrpResource     *resource);
 void            mrp_resource_set_name           (MrpResource     *resource,
 						 const gchar     *name);
+const gchar *   mrp_resource_get_short_name     (MrpResource     *resource);
+void            mrp_resource_set_short_name     (MrpResource     *resource,
+						 const gchar     *short_name);
 void            mrp_resource_assign             (MrpResource     *resource,
 						 MrpTask         *task,
 						 gint             units);

@@ -1044,8 +1044,8 @@ mrp_task_add_predecessor (MrpTask          *task,
 		
 		return NULL;
 	}
-
-	g_object_get (task, "project", &project, NULL);
+	
+	project = mrp_object_get_project (MRP_OBJECT (task));
 	manager = imrp_project_get_task_manager (project);
 	if (!mrp_task_manager_check_predecessor (manager, task, predecessor, error)) {
 		return NULL;
@@ -1760,7 +1760,7 @@ imrp_task_peek_successors (MrpTask *task)
 }
 
 MrpTaskType
-imrp_task_get_type (MrpTask *task)
+mrp_task_get_task_type (MrpTask *task)
 {
 	g_return_val_if_fail (MRP_IS_TASK (task), MRP_TASK_TYPE_NORMAL);
 
@@ -1768,9 +1768,25 @@ imrp_task_get_type (MrpTask *task)
 }
 
 MrpTaskSched
-imrp_task_get_sched (MrpTask *task)
+mrp_task_get_sched (MrpTask *task)
 {
 	g_return_val_if_fail (MRP_IS_TASK (task), MRP_TASK_SCHED_FIXED_WORK);
 
 	return task->priv->sched;
+}
+
+gshort
+mrp_task_get_percent_complete (MrpTask *task)
+{
+	g_return_val_if_fail (MRP_IS_TASK (task), 0);
+
+	return task->priv->percent_complete;
+}
+
+gboolean
+mrp_task_get_critical (MrpTask *task)
+{
+	g_return_val_if_fail (MRP_IS_TASK (task), FALSE);
+
+	return task->priv->critical;
 }
