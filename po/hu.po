@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: planner.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-03-17 12:28+0100\n"
-"PO-Revision-Date: 2005-03-07 12:10+0100\n"
+"POT-Creation-Date: 2005-03-20 12:18+0100\n"
+"PO-Revision-Date: 2005-03-20 20:56+0100\n"
 "Last-Translator: Gabor Kelemen <kelemeng@gnome.hu>\n"
 "Language-Team: Hungarian <gnome@gnome.hu>\n"
 "MIME-Version: 1.0\n"
@@ -531,16 +531,12 @@ msgid "Whether printing of the Task view is enabled."
 msgstr "A Feladatok nézet nyomtatása engedélyezve van-e?"
 
 #: data/planner.schemas.in.h:10
-msgid ""
-"Whether to highlight the tasks along the cricital path in the Gantt view."
-msgstr ""
-"Kiemelje-e a kritikus útvonal mentén lévő feladatokat a Gantt-nézetben?"
+msgid "Whether to highlight the tasks along the cricital path in the Gantt view."
+msgstr "Kiemelje-e a kritikus útvonal mentén lévő feladatokat a Gantt-nézetben?"
 
 #: data/planner.schemas.in.h:11
-msgid ""
-"Whether to highlight the tasks along the cricital path in the Task view."
-msgstr ""
-"Kiemelje-e a kritikus útvonal mentén lévő feladatokat a Feladatok nézetben?"
+msgid "Whether to highlight the tasks along the cricital path in the Task view."
+msgstr "Kiemelje-e a kritikus útvonal mentén lévő feladatokat a Feladatok nézetben?"
 
 #: data/planner.schemas.in.h:12
 msgid "Which view to display in the user interface."
@@ -707,8 +703,7 @@ msgid "Invalid SQL URI (no database name specified)."
 msgstr "Érvénytelen SQL URI (nincs megadva adatbázisnév)."
 
 #: libplanner/mrp-task.c:1062
-msgid ""
-"Could not add a predecessor relation, because the tasks are already related."
+msgid "Could not add a predecessor relation, because the tasks are already related."
 msgstr ""
 "Nem lehet hozzáadni egy előzményrelációt, mert a feladatok már relációban "
 "vannak."
@@ -1165,11 +1160,14 @@ msgstr "Teszt"
 msgid "_Highlight Critical Tasks"
 msgstr "_Kritikus feladatok kiemelése"
 
-#: src/planner-gantt-view.c:330
-msgid "Gantt Chart"
-msgstr "Gantt-diagram"
+#. i18n: Label used for the sidebar. Please try to make it short and use
+#. * a linebreak if necessary/possible.
+#.
+#: src/planner-gantt-view.c:333
+msgid "Gantt"
+msgstr "Gantt"
 
-#: src/planner-gantt-view.c:338
+#: src/planner-gantt-view.c:341
 msgid "_Gantt Chart"
 msgstr "_Gantt-diagram"
 
@@ -1177,7 +1175,7 @@ msgstr "_Gantt-diagram"
 #. * project management term. You might want to leave it
 #. * untranslated unless there is a localized term for it.
 #.
-#: src/planner-gantt-view.c:539
+#: src/planner-gantt-view.c:542
 msgid ""
 "\n"
 "WBS"
@@ -1185,7 +1183,7 @@ msgstr ""
 "\n"
 "WBS"
 
-#: src/planner-gantt-view.c:540 src/planner-ttable-tree.c:367
+#: src/planner-gantt-view.c:543 src/planner-ttable-tree.c:367
 msgid ""
 "\n"
 "Name"
@@ -1194,7 +1192,7 @@ msgstr ""
 "Név"
 
 #. COL_START,    _("\nStart"),
-#: src/planner-gantt-view.c:542
+#: src/planner-gantt-view.c:545
 msgid ""
 "\n"
 "Work"
@@ -1639,8 +1637,7 @@ msgstr "Nem lehet táblákat létrehozni a(z) %s adatbázisban"
 #: src/planner-sql-plugin.c:618
 #, c-format
 msgid "Database %s is not setup for Planner. Do you want to do that?"
-msgstr ""
-"A(z) %s adatbázis nincs beállítva a Planner-hez. Meg szeretné ezt tenni?"
+msgstr "A(z) %s adatbázis nincs beállítva a Planner-hez. Meg szeretné ezt tenni?"
 
 #: src/planner-sql-plugin.c:659
 #, c-format
@@ -1943,11 +1940,18 @@ msgstr ""
 msgid "Zoom to fit"
 msgstr "Ablakmérethez igazítás"
 
-#: src/planner-ttable-view.c:159
-msgid "Resource Usage"
-msgstr "Erőforráshasználat"
+#. i18n: Label used for the sidebar. Please try to make it short and use
+#. * a linebreak if necessary/possible.
+#.
+#: src/planner-ttable-view.c:162
+msgid ""
+"Resource\n"
+"Usage"
+msgstr ""
+"Erőforrás\n"
+"Használat"
 
-#: src/planner-ttable-view.c:166
+#: src/planner-ttable-view.c:169
 msgid "Resource _Usage"
 msgstr "Erőforrás_használat"
 
@@ -2225,3 +2229,4 @@ msgstr "Projekt exportálása a Planner 0.11 számára megfelelő formátumba"
 #: src/planner-xml-planner-plugin.c:91
 msgid "Export"
 msgstr "Exportálás"
+
