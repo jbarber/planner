@@ -202,6 +202,9 @@ sql_get_last_error (GdaConnection *connection)
 	GdaError    *error;
 	const gchar *error_txt;
 
+	g_return_val_if_fail (GDA_IS_CONNECTION (connection), 
+			      _("Can't connect to database server"));
+
 	list = (GList *) gda_connection_get_errors (connection);
 
 	error = (GdaError *) g_list_last (list)->data;
@@ -2126,7 +2129,7 @@ sql_read_tasks (SQLData *data)
 
 gboolean
 mrp_sql_load_project (MrpStorageSQL *storage,
-		      const gchar   *server,
+		      const gchar   *host,
 		      const gchar   *port,
 		      const gchar   *database,
 		      const gchar   *login,
@@ -2162,7 +2165,7 @@ mrp_sql_load_project (MrpStorageSQL *storage,
 
 	data->root_task = mrp_task_new ();
 
-	db_txt = g_strdup_printf ("DATABASE=%s",database);
+	db_txt = g_strdup_printf ("HOST=%s;DATABASE=%s", host, database);
 	gda_config_save_data_source (dsn_name, 
                                      provider, 
                                      db_txt,
@@ -2267,7 +2270,9 @@ mrp_sql_load_project (MrpStorageSQL *storage,
 		g_object_unref (res);
 	}
 	
-	g_object_unref (data->con);
+	if (data->con) {
+		g_object_unref (data->con);
+	}
 	return FALSE;
 
 	/* FIXME: free data */
@@ -3571,9 +3576,9 @@ sql_write_tasks (SQLData *data)
 gboolean
 mrp_sql_save_project (MrpStorageSQL  *storage,
 		      gboolean        force,
-		      const gchar    *server,
+		      const gchar    *host,
 		      const gchar    *port,
-		      const gchar    *db,
+		      const gchar    *database,
 		      const gchar    *user,
 		      const gchar    *password,
 		      gint           *project_id,
@@ -3604,7 +3609,7 @@ mrp_sql_save_project (MrpStorageSQL  *storage,
 	
 	data->project = storage->project;
 
-	db_txt = g_strdup_printf ("DATABASE=%s",db);
+	db_txt = g_strdup_printf ("HOST=%s;DATABASE=%s", host, database);
 	gda_config_save_data_source (dsn_name, 
                                      provider,
 				     db_txt,
@@ -3615,13 +3620,14 @@ mrp_sql_save_project (MrpStorageSQL  *storage,
 
 	data->con = gda_client_open_connection (client, dsn_name, NULL, NULL, 0);
 	
-	data->revision = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (data->project), REVISION));
+	data->revision = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (data->project), 
+							     REVISION));
 
 	if (!GDA_IS_CONNECTION (data->con)) {
 		g_set_error (error,
 			     MRP_ERROR,
 			     MRP_ERROR_SAVE_WRITE_FAILED,
-			     _("Connection to database '%s' failed."), db);
+			     _("Connection to database '%s' failed."), database);
 		goto out;
 	}
 

@@ -580,6 +580,7 @@ check_database_tables (GdaConnection *conn,
 /* Try to create the database */
 static gboolean
 create_database (const gchar   *dsn_name,
+		 const gchar   *host,
 		 const gchar   *db_name,
 		 PlannerPlugin *plugin)
 {
@@ -602,7 +603,7 @@ create_database (const gchar   *dsn_name,
 	window = GTK_WINDOW (plugin->main_window);
 
 	/* Use same data but changing the database */
-	dsn->cnc_string = g_strdup_printf ("DATABASE=%s", init_database); 
+	dsn->cnc_string = g_strdup_printf ("HOST=%s;DATABASE=%s", host, init_database); 
 	gda_config_save_data_source_info (dsn);
 
 	client = gda_client_new ();
@@ -643,6 +644,7 @@ create_database (const gchar   *dsn_name,
 /* Test database status: database exists, correct tables, correct version */
 static GdaConnection *
 sql_get_tested_connection (const gchar   *dsn_name,
+			   const gchar   *host,
 			   const gchar   *db_name,
 			   GdaClient     *client,
 			   PlannerPlugin *plugin) 
@@ -653,9 +655,9 @@ sql_get_tested_connection (const gchar   *dsn_name,
 	conn = gda_client_open_connection (client, dsn_name, NULL, NULL, 0);
 
 	if (conn == NULL) {
-		if (!create_database (dsn_name, db_name, plugin)) {
-			str = g_strdup_printf (_("Connection to database '%s' failed."), 
-					       db_name);
+		if (!create_database (dsn_name, host, db_name, plugin)) {
+			str = g_strdup_printf (_("Connection to database '%s@%s' failed."), 
+					       db_name, host);
 			show_error_dialog (plugin, str);
 			conn = NULL;
 		} else {
@@ -665,7 +667,8 @@ sql_get_tested_connection (const gchar   *dsn_name,
 
 	if (conn != NULL) {
 		if (!check_database_tables (conn, plugin)) {		
-			str = g_strdup_printf (_("Test to tables in database '%s' failed."), db_name);
+			str = g_strdup_printf (_("Test to tables in database '%s' failed."), 
+					       db_name);
 			show_error_dialog (plugin, str);
 			g_free (str);
 			gda_connection_close (conn);
@@ -708,7 +711,7 @@ sql_plugin_retrieve_project_id (PlannerPlugin *plugin,
 	const gchar       *dsn_name = "planner-auto";
 	const gchar       *provider = "PostgreSQL";
 
-	db_txt = g_strdup_printf ("DATABASE=%s",database);
+	db_txt = g_strdup_printf ("HOST=%s;DATABASE=%s",server,database);
 	gda_config_save_data_source (dsn_name, 
                                      provider, 
                                      db_txt,
@@ -716,7 +719,7 @@ sql_plugin_retrieve_project_id (PlannerPlugin *plugin,
 	g_free (db_txt);
 
 	client = gda_client_new ();
-	conn = sql_get_tested_connection (dsn_name, database, client, plugin);
+	conn = sql_get_tested_connection (dsn_name, server, database, client, plugin);
 
 	if (conn == NULL) {
 		return -1;
@@ -1099,14 +1102,14 @@ sql_plugin_save (GtkAction *action,
 		return;
 	}
 
-	db_txt = g_strdup_printf ("DATABASE=%s",database);
+	db_txt = g_strdup_printf ("HOST=%s;DATABASE=%s",server,database);
 	gda_config_save_data_source (dsn_name, 
                                      provider, 
                                      db_txt,
                                      "planner project", login, password);
 	g_free (db_txt);
 	client = gda_client_new ();
-	conn = sql_get_tested_connection (dsn_name, database, client, plugin);
+	conn = sql_get_tested_connection (dsn_name, server, database, client, plugin);
 	if (conn == NULL) {
 		g_object_unref (client);
 		return;
