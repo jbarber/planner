@@ -272,6 +272,7 @@ mam_resource_added_cb (MrpProject        *project,
 	g_return_if_fail (MRP_IS_RESOURCE (resource));
 
 	planner_list_model_append (PLANNER_LIST_MODEL (model), MRP_OBJECT (resource));
+	
 	g_signal_connect_object (resource, 
 				 "notify",
 				 G_CALLBACK (mam_resource_notify_cb),
@@ -287,6 +288,10 @@ mam_resource_removed_cb (MrpProject        *project,
 	g_return_if_fail (MRP_IS_RESOURCE (resource));
 
 	planner_list_model_remove (PLANNER_LIST_MODEL (model), MRP_OBJECT (resource));
+
+	g_signal_handlers_disconnect_by_func (resource,
+                                              mam_resource_notify_cb,
+                                              model);
 }
 
 static void

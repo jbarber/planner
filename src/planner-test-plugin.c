@@ -30,12 +30,12 @@ void plugin_exit (void);
 G_MODULE_EXPORT void 
 plugin_exit (void) 
 {
-	g_message ("Test exit");
+	/* g_message ("Test exit"); */
 }
 
 G_MODULE_EXPORT void 
 plugin_init (PlannerPlugin     *plugin,
 	     PlannerWindow *main_window)
 {
-	g_message ("Test init");
+	/* g_message ("Test init"); */
 }

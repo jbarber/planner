@@ -699,7 +699,7 @@ task_remove_assignments (MrpTask *task)
 	for (l = copy; l; l = l->next) {
 		assignment = l->data;
 		
-		g_signal_handlers_disconnect_by_func (assignment,
+		g_signal_handlers_disconnect_by_func (MRP_ASSIGNMENT (l->data),
 						      task_assignment_removed_cb,
 						      task);
 		g_object_unref (assignment);

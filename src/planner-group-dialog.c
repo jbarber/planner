@@ -262,8 +262,6 @@ group_cmd_insert_do (PlannerCmd *cmd_base)
 
 	g_assert (MRP_IS_GROUP (cmd->group));
 		
-	/* cmd->group = g_object_new (MRP_TYPE_GROUP, NULL); */
-
 	mrp_project_add_group (cmd->project, cmd->group);
 }
 
@@ -388,8 +386,6 @@ group_cmd_remove_undo (PlannerCmd *cmd_base)
 	/* We need to recover the group deleted */
 	g_assert (MRP_IS_GROUP (cmd->group));
 		
-	/* cmd->group = g_object_new (MRP_TYPE_GROUP, NULL); */
-
 	mrp_project_add_group (cmd->project, cmd->group);
 
 	/* Now we need to recover all the links of the project

@@ -270,12 +270,8 @@ typedef struct {
 	PlannerCmd   base;
 
 	MrpProject  *project;
-	guint        project_id;
 	MrpResource *resource;
-	guint        resource_id;
-	guint        group_id;
-	
-	MrpResource *clone;
+	GList       *assignments;
 } ResourceCmdRemove;
 
 typedef struct {
@@ -750,15 +746,10 @@ static void
 resource_cmd_insert_do (PlannerCmd *cmd_base)
 {
 	ResourceCmdInsert *cmd;
-	MrpResource       *resource;
 
 	cmd = (ResourceCmdInsert*) cmd_base;
-
-	resource = g_object_new (MRP_TYPE_RESOURCE, NULL);
-
-	mrp_project_add_resource (cmd->project, resource);
-
-	cmd->resource = resource;
+	g_assert (MRP_IS_RESOURCE (cmd->resource));
+	mrp_project_add_resource (cmd->project, cmd->resource);
 }
 
 static void
@@ -771,9 +762,18 @@ resource_cmd_insert_undo (PlannerCmd *cmd_base)
 	mrp_project_remove_resource (cmd->project,
 				     cmd->resource);
 	
-	cmd->resource = NULL;
+	/* Don't clean the resource before the cmd free */
+	/* cmd->resource = NULL; */
 }
 
+static void
+resource_cmd_insert_free (PlannerCmd  *cmd_base)
+{
+	ResourceCmdInsert *cmd;
+	cmd = (ResourceCmdInsert*) cmd_base;
+
+	g_object_unref (cmd->resource);
+}
 
 
 static PlannerCmd *
@@ -789,7 +789,9 @@ resource_cmd_insert (PlannerView *view)
 	cmd_base->label = g_strdup (_("Insert resource"));
 	cmd_base->do_func = resource_cmd_insert_do;
 	cmd_base->undo_func = resource_cmd_insert_undo;
-	cmd_base->free_func = NULL; /* FIXME */
+	cmd_base->free_func = resource_cmd_insert_free;
+
+	cmd->resource = g_object_new (MRP_TYPE_RESOURCE, NULL);
 
 	cmd->project = planner_window_get_project (view->main_window);
 
@@ -871,53 +873,63 @@ static void
 resource_cmd_remove_do (PlannerCmd *cmd_base)
 {
 	ResourceCmdRemove *cmd;
-	guint              resource_removed_id;
-	MrpGroup          *group;
+	GList             *assignments, *l;
 
 	cmd = (ResourceCmdRemove*) cmd_base;
 
-	resource_removed_id = mrp_object_get_id (MRP_OBJECT (cmd->resource));
+	assignments = mrp_resource_get_assignments (cmd->resource);
 
-	cmd->project_id = mrp_object_get_id (MRP_OBJECT (cmd->project));
-	cmd->resource_id = resource_removed_id;
-
-	cmd->clone = mrp_resource_clone (cmd->resource);
-
-	mrp_object_get (cmd->clone, "group", &group, NULL);
-
-	if (group != NULL) { 
-		cmd->group_id = mrp_object_get_id (MRP_OBJECT (group));
+	for (l = assignments; l; l = l->next) {
+		cmd->assignments = g_list_prepend (cmd->assignments, l->data);
 	}
 
 	mrp_project_remove_resource (cmd->project, cmd->resource);
-
-	cmd->resource = NULL;
 }
 
 static void
 resource_cmd_remove_undo (PlannerCmd *cmd_base)
 {
 	ResourceCmdRemove *cmd;
-	gpointer          *data;
+	GList             *l;
 	
 	cmd = (ResourceCmdRemove*) cmd_base;
 
-	data = mrp_application_id_get_data (cmd->project_id);
+	g_assert (MRP_IS_RESOURCE (cmd->resource));
 
-	g_assert (MRP_IS_PROJECT (data));
+	mrp_project_add_resource (cmd->project, cmd->resource);
 
-	mrp_object_set (cmd->clone, "project", MRP_OBJECT (data), NULL);
+	for (l = cmd->assignments; l; l = l->next) {
+		MrpTask *task;
+		guint    units;
 
-	if (!mrp_object_set_id (MRP_OBJECT (cmd->clone), cmd->resource_id))
-		g_warning ("Could't set the id to the object: %d", cmd->resource_id);
+		task = mrp_assignment_get_task (l->data);
+		units = mrp_assignment_get_units (l->data);
 
-	mrp_project_add_resource (cmd->project, cmd->clone);
-	cmd->resource = cmd->clone;
+		mrp_resource_assign (cmd->resource, task, units);
+	}
+
+	g_list_free (cmd->assignments);
+	cmd->assignments = NULL;
 }
 
+static void
+resource_cmd_remove_free (PlannerCmd *cmd_base)
+{
+	ResourceCmdRemove *cmd;
+	cmd = (ResourceCmdRemove*) cmd_base;
+
+	g_list_free (cmd->assignments);
+
+	g_object_unref (cmd->resource);
+
+	cmd->assignments = NULL;
+	cmd->resource    = NULL;
+	cmd->project     = NULL;
+}
 
 static PlannerCmd *
-resource_cmd_remove (PlannerView *view, MrpResource *resource)
+resource_cmd_remove (PlannerView *view, 
+		     MrpResource *resource)
 {
 	PlannerCmd          *cmd_base;
 	ResourceCmdRemove   *cmd;
@@ -929,10 +941,10 @@ resource_cmd_remove (PlannerView *view, MrpResource *resource)
 	cmd_base->label = g_strdup (_("Remove resource"));
 	cmd_base->do_func = resource_cmd_remove_do;
 	cmd_base->undo_func = resource_cmd_remove_undo;
-	cmd_base->free_func = NULL; /* FIXME */
+	cmd_base->free_func = resource_cmd_remove_free;
 
 	cmd->project = planner_window_get_project (view->main_window);
-	cmd->resource = resource;
+	cmd->resource = g_object_ref (resource);
 
 	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager (view->main_window),
 					   cmd_base);

@@ -239,16 +239,6 @@ resource_finalize (GObject *object)
 		g_object_unref (priv->calendar);
 	}
 	
-	if (priv->assignments) {
-		GList *l;
-		
-		for (l = priv->assignments; l; l = l->next) {
-			g_object_unref (l->data);
-		}
-		
-		g_list_free (priv->assignments);
-	}
-	
 	g_free (priv);
 	resource->priv = NULL;
 
@@ -418,6 +408,9 @@ resource_remove_assignment_foreach (MrpAssignment *assignment,
 	g_signal_handlers_disconnect_by_func (MRP_OBJECT (assignment),
 					      resource_assignment_removed_cb,
 					      resource);
+
+	g_object_unref (assignment);
+
 	mrp_object_removed (MRP_OBJECT (assignment));
 }
 
@@ -436,6 +429,9 @@ resource_removed (MrpObject *object)
 			(GFunc) resource_remove_assignment_foreach,
 			resource);
 	
+	g_list_free (priv->assignments);
+	priv->assignments = NULL;
+
         if (MRP_OBJECT_CLASS (parent_class)->removed) {
                 (* MRP_OBJECT_CLASS (parent_class)->removed) (object);
         }
@@ -698,60 +694,4 @@ mrp_resource_set_calendar (MrpResource *resource, MrpCalendar *calendar)
 	g_return_if_fail (MRP_IS_RESOURCE (resource));
 
 	g_object_set (resource, "calendar", calendar, NULL);
-}
-
-/**
- * mrp_resource_clone:
- * @resource: an #MrpResource
- *
- * Returns a clone of the MrpResource 
- * 
- **/
-MrpResource *
-mrp_resource_clone (MrpResource *resource)
-{
-	MrpResource     *clone;
-	MrpResourcePriv *priv;
-	MrpProject      *project;
-	GList           *custom_prop, *l;
-
-	g_return_if_fail (MRP_IS_RESOURCE (resource));
-
-	priv = clone->priv;
-	
-	clone = g_object_new (MRP_TYPE_RESOURCE, NULL);
-	priv = clone->priv;
-
-	mrp_object_get (resource,
-			"name",     &priv->name,
-			"group",    &priv->group,
-			"type",     &priv->type,
-			"units",    &priv->units,
-			"email",    &priv->email,
-			"note",     &priv->note,
-			"calendar", &priv->calendar,
-			"project",  &project,
-			NULL);
-
-	mrp_object_set (clone, "project", project, NULL);
-
-	/* Custom properties */
-	custom_prop = mrp_project_get_properties_from_type (project,
-							    MRP_TYPE_RESOURCE);
-	for (l = custom_prop; l; l = l->next) {
-		MrpProperty *property;
-		GValue       value = { 0 };
-		GParamSpec  *pspec;
-
-		property = l->data;
-
-		pspec = G_PARAM_SPEC (property);
-		g_value_init (&value, G_PARAM_SPEC_VALUE_TYPE (pspec));
-
-		mrp_object_get_property (MRP_OBJECT (resource), l->data, &value);
-		mrp_object_set_property (MRP_OBJECT (clone), l->data, &value);
-	}
-	/* FIXME: assignments */
-
-	return clone;
 }

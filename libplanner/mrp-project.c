@@ -1209,8 +1209,10 @@ mrp_project_add_resource (MrpProject *project, MrpResource *resource)
 		g_object_set (resource, "type", MRP_RESOURCE_TYPE_WORK, NULL);
 	}
 
+	
 	project_connect_object (MRP_OBJECT (resource), project);
 	
+
 	g_signal_emit (project, signals[RESOURCE_ADDED], 0, resource);
 
 	imrp_project_set_needs_saving (project, TRUE);
@@ -1236,8 +1238,6 @@ mrp_project_remove_resource (MrpProject *project, MrpResource *resource)
 	mrp_object_removed (MRP_OBJECT (resource));
 
 	priv->resources = g_list_remove (priv->resources, resource);
-
-	imrp_application_id_remove_data (mrp_object_get_id (resource));
 
 	g_signal_emit (project, signals[RESOURCE_REMOVED], 0, resource);
 

@@ -1,3 +1,19 @@
+2004-02-17  Alvaro del Castillo  <acs@barrapunto.com>
+	
+	* libplanner/mrp-project.c
+	* libplanner/mrp-resource.c
+	* libplanner/mrp-resource.h
+	* libplanner/mrp-task.c
+	* src/planner-assignment-model.c
+	* src/planner-group-dialog.c
+	* src/planner-resource-view.c
+	Completed the undo/redo stuff for resources and groups
+	except the resource dialog that needs some thoughts.
+	Started the implementation of free methods in undo/redo commands.
+	Cleaned the use of object ids for the moment.
+	Cleaned the object clone methods.
+	* src/planner-test-plugin.c: cleaned test output
+
 2004-02-16  Richard Hult  <richard@imendio.com>
 
 	* src/planner-gantt-view.c (init): Fix icon/stock names.
