@@ -1,8 +1,7 @@
 INCLUDES = \
 	-I$(top_srcdir)						\
 	-I$(top_srcdir)/src					\
-	$(PLANNER_CFLAGS)					\
-	$(WARN_CFLAGS)						\
+	$(PLANNER_CFLAGS) $(WARN_CFLAGS)			\
 	-DG_LOG_DOMAIN=\"Planner\"				\
 	-DPREFIX=\""$(prefix)"\"				\
 	-DSYSCONFDIR=\""$(sysconfdir)"\"			\

@@ -647,6 +647,8 @@ mrp_object_set_id (MrpObject *object,
 
 	g_return_val_if_fail (MRP_IS_OBJECT (object), FALSE);
 
+	priv = object->priv;
+	
 	if (imrp_application_id_set_data (object, id)) {		
 		priv->id = id;
 		return TRUE;
