@@ -3628,3 +3628,11 @@ planner_task_tree_get_anchor (PlannerTaskTree *tree)
 
 	return tree->priv->anchor;
 }
+
+PlannerWindow* 
+planner_task_tree_get_window (PlannerTaskTree       *tree)
+{
+	g_return_val_if_fail (PLANNER_IS_TASK_TREE (tree), NULL);
+
+	return tree->priv->main_window;
+}

@@ -1,5 +1,18 @@
 2004-06-12 Alvaro del Castillo  <acs@barrapunto.com>
 
+	* src/planner-task-tree.[ch]: added new function to get the 
+	PlannerWindow for a PlannerTaskTree. This is need because we
+	are moving task undo commands to a central point so we have removed
+	from src/planner-task-tree.c the undo command that were used in
+	planner-gantt-row.
+
+	(planner_task_tree_get_window)
+
+	I need to check with richard the change and maybe, find a better way to 
+	do it. The CVS doesn't work so we need a quick fix ;-)
+
+2004-06-12 Alvaro del Castillo  <acs@barrapunto.com>
+
 	* src/planner-task-tree.c: moved undo code to planner-task-dialog
 	in last commit but failed to commit this file.
 

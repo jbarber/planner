@@ -94,4 +94,7 @@ PlannerCmd*  planner_task_tree_task_cmd_link          (PlannerTaskTree       *tr
 						       glong                  lag,
 						       GError               **error);
 
+/* Temporal function until we do it in a clean way */
+PlannerWindow * planner_task_tree_get_window          (PlannerTaskTree       *tree);
+
 #endif /* __PLANNER_TASK_TREE_H__ */

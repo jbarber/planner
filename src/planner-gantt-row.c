@@ -39,6 +39,7 @@
 #include "planner-scale-utils.h"
 #include "planner-task-tree.h"
 #include "planner-task-popup.h"
+#include "planner-task-dialog.h"
 
 /* The padding between the gantt bar and the text. */
 #define TEXT_PADDING 10.0
@@ -458,14 +459,14 @@ gantt_row_set_property (GObject      *object,
 			const GValue *value,
 			GParamSpec   *pspec)
 {
-	GnomeCanvasItem *item;
+	GnomeCanvasItem      *item;
 	PlannerGanttRow      *row;
 	PlannerGanttRowPriv  *priv;
-	gboolean         changed = FALSE;
-	gfloat           tmp_scale;
-	gdouble          tmp_dbl;
-	gboolean         tmp_bool;
-	gint             tmp_int;
+	gboolean              changed = FALSE;
+	gfloat                tmp_scale;
+	gdouble               tmp_dbl;
+	gboolean              tmp_bool;
+	gint                  tmp_int;
 	
 	g_return_if_fail (PLANNER_IS_GANTT_ROW (object));
 
@@ -885,7 +886,7 @@ gantt_row_draw (GnomeCanvasItem *item,
 		      "critical", &critical,
 		      "type", &type,
 		      NULL);
-	
+
 	/* Get item area in canvas coordinates. */
 	i2w_dx = 0.0;
 	i2w_dy = 0.0;
@@ -2052,19 +2053,21 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 				PlannerCmd        *cmd;
 				PlannerGanttChart *chart;
 				PlannerTaskTree   *tree;
+				PlannerWindow     *main_window;
 				
 				task = priv->task;
 				target_task = PLANNER_GANTT_ROW (target_item)->priv->task;
 
 				chart = g_object_get_data (G_OBJECT (item->canvas), "chart");
 				tree = planner_gantt_chart_get_view (chart);
+				main_window = planner_task_tree_get_window (tree);
 
-				cmd = planner_task_tree_task_cmd_link (tree,
-								       task,
-								       target_task,
-								       MRP_RELATION_FS,
-								       0,
-								       &error);
+				cmd = planner_task_cmd_link (main_window,
+							     task,
+							     target_task,
+							     MRP_RELATION_FS,
+							     0,
+							     &error);
 				
 				if (!cmd) {
 					GtkWidget   *dialog;
