@@ -1,5 +1,13 @@
 2004-03-15  Richard Hult  <richard@imendio.com>
 
+	* data/glade/task-dialog.glade: Use better step/page sizes. Fixes
+	bug #132342, idea by Lincoln Phipps.
+
+	* src/planner-gantt-row.c: (gantt_row_event): Fix indentation and
+	don't mix declarations and assignments.
+
+2004-03-15  Richard Hult  <richard@imendio.com>
+
 	* src/planner-task-tree.c (planner_task_tree_link_tasks): Hm, I
 	could have sworn that this worked before. Reverse the list to get
 	the right order when linking.

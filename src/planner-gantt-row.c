@@ -1655,31 +1655,33 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 		switch (event->button.button) {
 		case 3:
 			if (IN_DRAG_RELATION_SPOT (event->button.x, event->button.y,
-                priv->x + priv->width, priv->y, priv->height)) {
+						   priv->x + priv->width, priv->y, priv->height)) {
+
+				PlannerGanttChart *chart;
+				PlannerTaskTree   *tree;
+				GtkTreePath       *path;
+				GtkTreeSelection  *selection;
+				gint               x, y;
 				
-				/* Select the clicked task in the PlannerTaskTree */
-				PlannerGanttChart *chart = g_object_get_data (
-                    G_OBJECT (item->canvas), "chart");
-			    PlannerTaskTree *tree = planner_gantt_chart_get_view (chart);
-	
-				GtkTreePath *path = planner_gantt_model_get_path_from_task (
-                    PLANNER_GANTT_MODEL (planner_gantt_chart_get_model (chart)),
-                    priv->task);
-							   
-				GtkTreeSelection *selection = gtk_tree_view_get_selection (
-                    GTK_TREE_VIEW (tree));
+				chart = g_object_get_data (G_OBJECT (item->canvas), "chart");
+				tree = planner_gantt_chart_get_view (chart);
 				
-                gtk_tree_selection_unselect_all (selection);
-			    gtk_tree_selection_select_path (selection, path);
-							   
-				/* Traslate the event coordinates to window coordinates */
-			    gint x, y;
+				path = planner_gantt_model_get_path_from_task (
+					PLANNER_GANTT_MODEL (planner_gantt_chart_get_model (chart)),
+					priv->task);
+				
+				selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (tree));
+				
+				gtk_tree_selection_unselect_all (selection);
+				gtk_tree_selection_select_path (selection, path);
+				
 				gdk_window_get_origin (event->button.window, &x, &y);
 				
-				/* Show the menu */
 				gtk_item_factory_popup (priv->popup_factory,
-                    event->button.x_root - wx1, event->button.y_root - wy1,
-                    0, gtk_get_current_event_time ());
+							event->button.x_root - wx1,
+							event->button.y_root - wy1,
+							0,
+							gtk_get_current_event_time ());
 			}
 			break;
 			
