@@ -1,13 +1,14 @@
-# Czech translation of mrproject
-# This file is distributed under the same license as the mrproject package.
-# Miloslav Trmac <mitr@volny.cz>, 2002, 2003.
+# Czech translation of planner
+# This file is distributed under the same license as the planner package.
+# Copyright (C) 2004 Miloslav Trmac <mitr@volny.cz>
+# Miloslav Trmac <mitr@volny.cz>, 2002, 2003, 2004.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: mrproject VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-12-18 15:33+0100\n"
-"PO-Revision-Date: 2003-12-18 17:29+0100\n"
+"POT-Creation-Date: 2004-01-21 04:55+0100\n"
+"PO-Revision-Date: 2004-01-21 19:08+0100\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -853,20 +854,16 @@ msgid "None"
 msgstr "Žádný"
 
 #. Give up.
-#: libplanner/mrp-sql.c:229 src/planner-sql-plugin.c:131
+#: libplanner/mrp-sql.c:345 src/planner-sql-plugin.c:171
 msgid "Invalid Unicode"
 msgstr "Neplatné Unicode"
 
-#: libplanner/mrp-sql.c:2205
+#: libplanner/mrp-sql.c:2201
 #, c-format
-msgid ""
-"The project '%s' has been changed by the user '%s' since you opened it. Do "
-"you want to save anyway?"
-msgstr ""
-"Projekt '%s' byl změněn uživatelem '%s' poté, co jste jej otevřeli. Chcete "
-"jej přesto uložit?"
+msgid "Connection to database '%s' failed.\n"
+msgstr "Připojení k databázi '%s' selhalo.\n"
 
-#: libplanner/mrp-sql.c:3443
+#: libplanner/mrp-sql.c:2206 libplanner/mrp-sql.c:3643
 #, c-format
 msgid ""
 "Connection to database '%s' failed.\n"
@@ -874,6 +871,20 @@ msgid ""
 msgstr ""
 "Připojení k databázi '%s' selhalo.\n"
 "%s"
+
+#: libplanner/mrp-sql.c:2214
+#, c-format
+msgid "BEGIN command failed %s."
+msgstr "Příkaz BEGIN selhal %s."
+
+#: libplanner/mrp-sql.c:2380
+#, c-format
+msgid ""
+"The project '%s' has been changed by the user '%s' since you opened it. Do "
+"you want to save anyway?"
+msgstr ""
+"Projekt '%s' byl změněn uživatelem '%s' poté, co jste jej otevřeli. Chcete "
+"jej přesto uložit?"
 
 #: libplanner/mrp-storage-sql.c:205
 msgid "Invalid SQL URI (must start with 'sql://' and contain '#')."
@@ -1326,24 +1337,15 @@ msgstr "P%d"
 msgid "%04d, H%d"
 msgstr "%04d, P%d"
 
-#: src/planner-sql-plugin.c:273
-#, c-format
-msgid ""
-"Connection to database '%s' failed:\n"
-"%s"
-msgstr ""
-"Připojení k databázi '%s' selhalo:\n"
-"%s"
-
-#: src/planner-sql-plugin.c:322
+#: src/planner-sql-plugin.c:367
 msgid "Project"
 msgstr "Projekt"
 
-#: src/planner-sql-plugin.c:494
+#: src/planner-sql-plugin.c:537
 msgid "Open from Database"
 msgstr "Otevřít z databáze"
 
-#: src/planner-sql-plugin.c:601
+#: src/planner-sql-plugin.c:644
 msgid "Save to Database"
 msgstr "Uložit do databáze"
 
