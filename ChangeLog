@@ -1,3 +1,8 @@
+2003-12-16  Richard Hult  <richard@imendio.com>
+
+	* src/planner-sql-plugin.c (sql_plugin_retrieve_db_values): Don't
+	access the label that was removed.
+
 2003-12-16  Christian Neumair  <chris@gnome-de.org>
 
 	* data/glade/add-predecessor.glade:

@@ -388,13 +388,13 @@ sql_plugin_retrieve_project_id (PlannerPlugin *plugin,
 }
 
 static gboolean
-sql_plugin_retrieve_db_values (PlannerPlugin     *plugin,
-			       const gchar  *title,
-			       gchar       **server,
-			       gchar       **port,
-			       gchar       **database,
-			       gchar       **login,
-			       gchar       **password)
+sql_plugin_retrieve_db_values (PlannerPlugin  *plugin,
+			       const gchar    *title,
+			       gchar         **server,
+			       gchar         **port,
+			       gchar         **database,
+			       gchar         **login,
+			       gchar         **password)
 {
 	GladeXML      *gui;
 	GtkWidget     *dialog;
@@ -417,10 +417,6 @@ sql_plugin_retrieve_db_values (PlannerPlugin     *plugin,
 
 	gtk_window_set_title (GTK_WINDOW (dialog), title);
 
-	str = g_strdup_printf ("<b>%s</b>", title);
-	gtk_label_set_markup (GTK_LABEL (glade_xml_get_widget (gui, "title_label")), str);
-	g_free (str);
-	
 	server_entry = gnome_entry_gtk_entry (
 		GNOME_ENTRY (glade_xml_get_widget (gui, "server_entry")));
 	db_entry = gnome_entry_gtk_entry (
@@ -483,16 +479,16 @@ sql_plugin_open (BonoboUIComponent *component,
 {
 	PlannerPlugin      *plugin = user_data;
 	PlannerApplication *application;
-	GtkWidget     *window;
-	MrpProject    *project;
-	gchar         *server = NULL;
-	gchar         *port = NULL;
-	gchar         *database = NULL;
-	gchar         *login = NULL;
-	gchar         *password = NULL;
-	gint           project_id = -1;
-	gchar         *uri = NULL;
-	GError        *error = NULL;
+	GtkWidget          *window;
+	MrpProject         *project;
+	gchar              *server = NULL;
+	gchar              *port = NULL;
+	gchar              *database = NULL;
+	gchar              *login = NULL;
+	gchar              *password = NULL;
+	gint                project_id = -1;
+	gchar              *uri = NULL;
+	GError             *error = NULL;
 
 	if (!sql_plugin_retrieve_db_values (plugin,
 					    _("Open from Database"),
