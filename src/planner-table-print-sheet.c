@@ -33,7 +33,7 @@
 #define d(x)
 
 #define TEXT_IN_CELL_MULTI 0.67
-#define INDENT_FACTOR 8
+#define INDENT_FACTOR 4
 
 #define PRINT_ROW(o)  ((PrintRow *) o)
 #define PRINT_COL(o)  ((PrintColumn *) o)
@@ -53,7 +53,7 @@ typedef struct {
 	
 	gdouble              width;
 
-	gboolean             first;
+	gboolean             expander_column;
 
 	GtkTreeCellDataFunc  data_func;
 	gpointer             user_data;
@@ -66,58 +66,57 @@ typedef struct {
 } PrintRow;
 
 struct _PlannerTablePrintSheet {
-	PlannerView       *view;
-	PlannerPrintJob   *job;
-	GtkTreeView  *tree_view;
+	PlannerView     *view;
+	PlannerPrintJob *job;
+	GtkTreeView     *tree_view;
 
-	gdouble       x_pad;
+	gdouble          x_pad;
 
-	GSList       *pages;
+	GSList          *pages;
 
 	/* Used during creation */
-	GnomeFont    *font;
-	GSList       *columns;
-	GSList       *rows;
-	gdouble       row_height;
-	gdouble       page_width;
-	gdouble       page_height;
+	GnomeFont       *font;
+	GSList          *columns;
+	GSList          *rows;
+	gdouble          row_height;
+	gdouble          page_width;
+	gdouble          page_height;
 };
 
-static void         table_print_sheet_print_header_cell  (PlannerTablePrintSheet *sheet,
-							  PrintColumn       *column,
-							  PrintRow          *row,
-							  gdouble            x,
-							  gdouble            y);
-static void         table_print_sheet_print_cell         (PlannerTablePrintSheet *sheet,
-							  PrintColumn       *column,
-							  PrintRow          *row,
-							  gdouble            x,
-							  gdouble            y);
-static void         table_print_sheet_print_page         (PlannerTablePrintSheet *sheet,
-							  PrintPage         *page);
-static gboolean     table_print_sheet_foreach_row        (GtkTreeModel      *model,
-							  GtkTreePath       *path,
-							  GtkTreeIter       *iter,
-							  gpointer           user_data);
-static PrintColumn *table_print_sheet_create_column      (PlannerTablePrintSheet *sheet,
-							  GtkTreeViewColumn *tree_column,
-							  gboolean           first);
-static void         table_print_sheet_create_pages       (PlannerTablePrintSheet *sheet);
-static GSList *     table_print_sheet_add_row_of_pages   (PlannerTablePrintSheet *sheet,
-							  GSList            *page_row,
-							  GSList            *rows,
-							  gboolean           new_row);
-static void         table_print_sheet_fill_page          (PlannerTablePrintSheet *sheet,
-							  PrintPage         *page);
-
+static void         table_print_sheet_print_header_cell (PlannerTablePrintSheet *sheet,
+							 PrintColumn            *column,
+							 PrintRow               *row,
+							 gdouble                 x,
+							 gdouble                 y);
+static void         table_print_sheet_print_cell        (PlannerTablePrintSheet *sheet,
+							 PrintColumn            *column,
+							 PrintRow               *row,
+							 gdouble                 x,
+							 gdouble                 y);
+static void         table_print_sheet_print_page        (PlannerTablePrintSheet *sheet,
+							 PrintPage              *page);
+static gboolean     table_print_sheet_foreach_row       (GtkTreeModel           *model,
+							 GtkTreePath            *path,
+							 GtkTreeIter            *iter,
+							 gpointer                user_data);
+static PrintColumn *table_print_sheet_create_column     (PlannerTablePrintSheet *sheet,
+							 GtkTreeViewColumn      *tree_column,
+							 gboolean                expander_column);
+static void         table_print_sheet_create_pages      (PlannerTablePrintSheet *sheet);
+static GSList *     table_print_sheet_add_row_of_pages  (PlannerTablePrintSheet *sheet,
+							 GSList                 *page_row,
+							 GSList                 *rows,
+							 gboolean                new_row);
+static void         table_print_sheet_fill_page         (PlannerTablePrintSheet *sheet,
+							 PrintPage              *page);
 
 
 static void
 table_print_sheet_print_header_cell (PlannerTablePrintSheet *sheet, 
-				     PrintColumn       *column, 
-				     PrintRow          *row,
-				     gdouble            x,
-				     gdouble            y)
+				     PrintColumn            *column, 
+				     PrintRow               *row,
+				     gdouble                 x,
+				     gdouble                 y)
 {
 	gdouble text_x;
 	gdouble text_y;
@@ -135,10 +134,10 @@ table_print_sheet_print_header_cell (PlannerTablePrintSheet *sheet,
 
 static void
 table_print_sheet_print_cell (PlannerTablePrintSheet *sheet,
-			      PrintColumn       *column, 
-			      PrintRow          *row,
-			      gdouble            x,
-			      gdouble            y)
+			      PrintColumn            *column, 
+			      PrintRow               *row,
+			      gdouble                 x,
+			      gdouble                 y)
 {
 	GtkTreeModel    *model;
 	gdouble          text_x;
@@ -155,7 +154,7 @@ table_print_sheet_print_cell (PlannerTablePrintSheet *sheet,
 	}
 
 	cell  = gtk_cell_renderer_text_new ();
-	if (column->first) {
+	if (column->expander_column) {
 		depth = gtk_tree_path_get_depth (row->path);
 	}
 	
@@ -179,7 +178,7 @@ table_print_sheet_print_cell (PlannerTablePrintSheet *sheet,
 
 	d(g_print ("Writing: [%s]\n", str));
 
-	text_x = x + sheet->x_pad + INDENT_FACTOR * (depth);
+	text_x = x + sheet->x_pad + INDENT_FACTOR * depth;
 	text_y = y + TEXT_IN_CELL_MULTI * row->height;
 	
 	planner_print_job_moveto (sheet->job, text_x, text_y);
@@ -224,15 +223,15 @@ table_print_sheet_print_page (PlannerTablePrintSheet *sheet, PrintPage *page)
 
 static PrintColumn *
 table_print_sheet_create_column (PlannerTablePrintSheet *sheet,
-				 GtkTreeViewColumn *tree_column,
-				 gboolean           first)
+				 GtkTreeViewColumn      *tree_column,
+				 gboolean                expander_column)
 {
 	PrintColumn *column;
 	
 	column = g_new0 (PrintColumn, 1);
 	
 	column->tree_column = tree_column;
-	column->first = first;
+	column->expander_column = expander_column;
 	column->name = g_strdup (gtk_tree_view_column_get_title (tree_column));
 	column->width = gnome_font_get_width_utf8 (sheet->font, column->name) + 3 * sheet->x_pad;
 	
@@ -250,13 +249,13 @@ table_print_sheet_foreach_row (GtkTreeModel *model,
 			       GtkTreeIter  *iter,
 			       gpointer      user_data)
 {
-	PlannerTablePrintSheet *sheet = (PlannerTablePrintSheet *) user_data;
-	PrintRow          *row;
-	GSList            *l;
-	GtkCellRenderer   *cell;
-	gint               depth;
-	GtkTreeIter        parent_iter;
-	GtkTreePath       *parent_path = NULL;
+	PlannerTablePrintSheet *sheet = user_data;
+	PrintRow               *row;
+	GSList                 *l;
+	GtkCellRenderer        *cell;
+	gint                    depth;
+	GtkTreeIter             parent_iter;
+	GtkTreePath            *parent_path = NULL;
 	
 	d(g_print ("%s\n", gtk_tree_path_to_string (path)));
 	
@@ -293,8 +292,8 @@ table_print_sheet_foreach_row (GtkTreeModel *model,
 				      "text", &str,
 				      NULL);
 			
- 			if (column->first) {
-				extra += (depth) * INDENT_FACTOR * sheet->x_pad;
+ 			if (column->expander_column) {
+				extra += depth * INDENT_FACTOR * sheet->x_pad;
  			}
 			
 			column->width = MAX (column->width, 
@@ -372,8 +371,6 @@ table_print_sheet_create_pages (PlannerTablePrintSheet *sheet)
 							   rows, TRUE);
 	}
 	g_slist_free (page_row);
-	
-	/* Do this! */
 }
 
 static GSList *
@@ -451,16 +448,16 @@ table_print_sheet_fill_page (PlannerTablePrintSheet *sheet, PrintPage *page)
 }
 
 PlannerTablePrintSheet *
-planner_table_print_sheet_new (PlannerView      *view, 
-			  PlannerPrintJob  *job, 
-			  GtkTreeView *tree_view)
+planner_table_print_sheet_new (PlannerView     *view, 
+			       PlannerPrintJob *job, 
+			       GtkTreeView     *tree_view)
 {
 	PlannerTablePrintSheet *sheet;
-	GtkTreeModel      *model;
-	GList             *tree_columns, *l;
-	PrintRow          *row;
-	gboolean           first = TRUE;
-	
+	GtkTreeModel           *model;
+	GList                  *tree_columns, *l;
+	PrintRow               *row;
+	gboolean                expander_column;
+ 
 	sheet = g_new0 (PlannerTablePrintSheet, 1);
 
 	sheet->view        = view;
@@ -493,10 +490,16 @@ planner_table_print_sheet_new (PlannerView      *view,
 			continue;
 		}
 		
-		column      = table_print_sheet_create_column (sheet,
-							       tree_column,
-							       first);
-		first = FALSE;
+		if (tree_column == gtk_tree_view_get_expander_column (tree_view)) {
+			expander_column = TRUE;
+		} else {
+			expander_column = FALSE;
+		}
+		
+		column = table_print_sheet_create_column (sheet,
+							  tree_column,
+							  expander_column);
+
 		sheet->columns = g_slist_prepend (sheet->columns, column);
 	}
 	g_list_free (tree_columns);
@@ -541,6 +544,7 @@ void
 planner_table_print_sheet_free (PlannerTablePrintSheet *sheet)
 {
 	GSList *l;
+
 	/* This won't work since several pages will have pointers to the */
 	/* same columns/rows                                             */
 	

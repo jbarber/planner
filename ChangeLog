@@ -1,5 +1,17 @@
 2004-03-26  Richard Hult  <richard@imendio.com>
 
+	* src/planner-gantt-print.c: (planner_gantt_print_do),
+	(planner_gantt_print_data_new):
+	* src/planner-table-print-sheet.c:
+	(table_print_sheet_print_header_cell),
+	(table_print_sheet_print_cell), (table_print_sheet_create_column),
+	(table_print_sheet_foreach_row), (table_print_sheet_create_pages),
+	(planner_table_print_sheet_new), (planner_table_print_sheet_free):
+	Don't indent the first column, indent the one with the
+	expander. Fixes printing with the WBS column.
+
+2004-03-26  Richard Hult  <richard@imendio.com>
+
 	* libplanner/mrp-old-xml.c: (old_xml_read_resource): Fix bug
 	#138145, read resource note, modified patch from Lincoln Phipps.
 
@@ -21,9 +33,10 @@
 2004-03-22  Xavier Ordoquy  <xordoquy@wanadoo.fr>
 
 	* src/planner-ttable-print.c: Removed the buggy resource usage
-	view print
+	view print.
+
 	* src/planner-ttable-row.c: Disable the task move (doesn't respond
-	to button press)
+	to button press).
 
 2004-03-18  Mikael Hallendal  <micke@imendio.com>
 

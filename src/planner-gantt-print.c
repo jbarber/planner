@@ -1052,7 +1052,7 @@ planner_gantt_print_do (PlannerGanttPrintData *data)
 
 				print_table_tasks (data,
 						   row == 0,
-						   data->tasks, /* FIXME: remove, use data->tasks */
+						   data->tasks,
 						   i);
 			} else {
 				x1 = 0;
@@ -1298,17 +1298,17 @@ planner_gantt_print_do (PlannerGanttPrintData *data)
 }
 
 PlannerGanttPrintData *
-planner_gantt_print_data_new (PlannerView      *view,
-			 PlannerPrintJob  *job,
-			 GtkTreeView *tree_view,
-			 gint         level,
-			 gboolean     show_critical)
+planner_gantt_print_data_new (PlannerView     *view,
+			      PlannerPrintJob *job,
+			      GtkTreeView     *tree_view,
+			      gint             level,
+			      gboolean         show_critical)
 {
 	PlannerGanttPrintData *data;
-	GnomeFont        *font;
-	GList            *tasks = NULL, *l;
-	gint              num_tasks;
-	gdouble           max_name_width = 0.0;
+	GnomeFont             *font;
+	GList                 *tasks = NULL, *l;
+	gint                   num_tasks;
+	gdouble                max_name_width = 0.0;
 
 	data = g_new0 (PlannerGanttPrintData, 1);
 
@@ -1376,7 +1376,7 @@ planner_gantt_print_data_new (PlannerView      *view,
 		(font, "WW");
 	
 	data->work_x1 = data->name_x2;
-	data->work_x2 = data->work_x1 + gnome_font_get_width_utf8 (font, "WORKW");
+	data->work_x2 = data->work_x1 + gnome_font_get_width_utf8 (font, "WORKWO");
 
 	data->tree_x1 = 0;
 	data->tree_x2 = data->work_x2;
