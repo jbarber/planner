@@ -1,5 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
+ * Copyright (C) 2003 Imendio HB
  * Copyright (C) 2002 CodeFactory AB
  * Copyright (C) 2002 Richard Hult <richard@imendio.com>
  * Copyright (C) 2002 Mikael Hallendal <micke@imendio.com>
@@ -35,15 +36,6 @@
 
 static MgApplication *application;
 
-#if 0
-static void
-termination_handler (int signum)
-{
-	if (signum == SIGINT) {
-		planner_application_exit (application);
-	}
-}
-#endif
 
 int
 main (int argc, char **argv)
@@ -53,25 +45,11 @@ main (int argc, char **argv)
 	gchar              *geometry;
 	poptContext         popt_context;
 	const char        **args;
-#if 0
-	struct sigaction    new_action, old_action;
-#endif
 	struct poptOption   options[] = {
 		{ "geometry", 'g', POPT_ARG_STRING, &geometry, 0,
 		  N_("Create the initial window with the given geometry."), N_("GEOMETRY") },
 		{ NULL, '\0', 0, NULL, 0, NULL, NULL }
 	};
-
-#if 0
-	new_action.sa_handler = termination_handler;
-	sigemptyset (&new_action.sa_mask);
-	new_action.sa_flags = 0;
-	
-	sigaction (SIGINT, NULL, &old_action);
-	if (old_action.sa_handler != SIG_IGN) {
-		sigaction (SIGINT, &new_action, NULL);
-	}
-#endif
 
 	bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);  
         bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
@@ -84,10 +62,10 @@ main (int argc, char **argv)
 				      argc, argv,
 				      GNOME_PROGRAM_STANDARD_PROPERTIES,
 				      GNOME_PARAM_POPT_TABLE, options,
-				      GNOME_PARAM_HUMAN_READABLE_NAME, "MrProject",
+				      GNOME_PARAM_HUMAN_READABLE_NAME, "Planner",
 				      NULL);
 
-	g_object_get (G_OBJECT (program),
+	g_object_get (program,
 		      GNOME_PARAM_POPT_CONTEXT,
 		      &popt_context,
 		      NULL);
@@ -95,21 +73,21 @@ main (int argc, char **argv)
 	/* Check for argument consistency. */
 	args = poptGetArgs (popt_context);
 	if (geometry != NULL && args != NULL && args[0] != NULL && args[1] != NULL) {
-		g_warning (_("mrproject: --geometry cannot be used with more than one file."));
+		g_warning (_("planner: --geometry cannot be used with more than one file."));
 		exit (1);
 	}
 
 	if (g_getenv ("MRP_G_FATAL_WARNINGS") != NULL) {
 		g_log_set_always_fatal (G_LOG_LEVEL_MASK);
 	}
-  
+
 	application = planner_application_new ();
 
 	main_window = planner_application_new_window (application);
-	
+
 	if (main_window) {
 		gnome_window_icon_set_default_from_file (
-			DATADIR "/pixmaps/gnome-mrproject.png");
+			DATADIR "/pixmaps/gnome-planner.png");
 	}
 
 	if (geometry != NULL) {

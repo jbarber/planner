@@ -1,5 +1,23 @@
 2003-12-08  Richard Hult  <richard@imendio.com>
 
+	* configure.in: Add gconf.
+
+	* data/ui/main-window.ui: Fix a string.
+
+	* libplanner/Makefile.am: Remove obsolete comment.
+	
+	* src/Makefile.am: Link postgres plugin with the pg libs.
+	
+	* src/planner-application.c:
+	(planner_application_get_gconf_client):
+	* src/planner-application.h: Add.
+
+	* src/planner-sql-plugin.c: (sql_plugin_retrieve_db_values):
+	Store/get values in gconf. Loosely based on patch from Bernardo
+	Silveira.
+
+2003-12-08  Richard Hult  <richard@imendio.com>
+
 	* configure.in: Remove --with-html-dir, since gtk-doc.makefile
 	handles that. Gets rid of duplicate --with-html-dir options.
 	Add commented python checks, need to add this back.	

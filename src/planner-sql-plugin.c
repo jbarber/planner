@@ -1,5 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
+ * Copyright (C) 2003 Imendio HB
  * Copyright (C) 2003 CodeFactory AB
  * Copyright (C) 2003 Richard Hult <richard@imendio.com>
  * Copyright (C) 2003 Mikael Hallendal <micke@imendio.com>
@@ -30,8 +31,10 @@
 #include <libgnomeui/gnome-entry.h>
 #include <glade/glade.h>
 #include <gtk/gtk.h>
+#include <gconf/gconf-client.h>
 #include <libpq-fe.h>
 #include "planner-main-window.h"
+#include "planner-application.h"
 #include "planner-plugin.h"
 
 #define d(x)
@@ -43,6 +46,7 @@
 #define PASSWORD   "sql-plugin-password"
 #define PROJECT_ID "sql-plugin-project-id"
 
+#define GCONF_PATH "/apps/planner/plugins/sql"
 
 typedef struct {
 	GtkWidget *open_dialog;
@@ -392,15 +396,21 @@ sql_plugin_retrieve_db_values (MgPlugin     *plugin,
 			       gchar       **login,
 			       gchar       **password)
 {
-	GladeXML    *gui;
-	GtkWidget   *dialog;
-	gchar       *str;
-	gint         response;
-	GtkWidget   *server_entry;
-	GtkWidget   *db_entry;
-	GtkWidget   *user_entry;
-	GtkWidget   *password_entry;
-	gboolean     ret;
+	GladeXML      *gui;
+	GtkWidget     *dialog;
+	gchar         *str;
+	gint           response;
+	GtkWidget     *server_entry;
+	GtkWidget     *db_entry;
+	GtkWidget     *user_entry;
+	GtkWidget     *password_entry;
+	gboolean       ret;
+	MgApplication *application;
+	GConfClient   *gconf_client;
+
+	application = planner_main_window_get_application (plugin->main_window);
+	
+	gconf_client = planner_application_get_gconf_client (application);
 
 	gui = glade_xml_new (GLADEDIR"/sql.glade", "open_dialog" , NULL);
 	dialog = glade_xml_get_widget (gui, "open_dialog");
@@ -419,6 +429,24 @@ sql_plugin_retrieve_db_values (MgPlugin     *plugin,
 		GNOME_ENTRY (glade_xml_get_widget (gui, "user_entry")));
 	password_entry = glade_xml_get_widget (gui, "password_entry");
 
+	str = gconf_client_get_string (gconf_client, GCONF_PATH "/server", NULL);
+	if (str) {
+		gtk_entry_set_text (GTK_ENTRY (server_entry), str);
+		g_free (str);
+	}
+
+	str = gconf_client_get_string (gconf_client, GCONF_PATH "/database", NULL);
+	if (str) {
+		gtk_entry_set_text (GTK_ENTRY (db_entry), str);
+		g_free (str);
+	}
+
+	str = gconf_client_get_string (gconf_client, GCONF_PATH "/username", NULL);
+	if (str) {
+		gtk_entry_set_text (GTK_ENTRY (user_entry), str);
+		g_free (str);
+	}
+	
 	g_object_unref (gui);
 
 	response = gtk_dialog_run (GTK_DIALOG (dialog));
@@ -430,6 +458,10 @@ sql_plugin_retrieve_db_values (MgPlugin     *plugin,
 		*database = strdup_null_if_empty (gtk_entry_get_text (GTK_ENTRY (db_entry)));
 		*login = strdup_null_if_empty (gtk_entry_get_text (GTK_ENTRY (user_entry)));
 		*password = strdup_null_if_empty (gtk_entry_get_text (GTK_ENTRY (password_entry)));
+
+		gconf_client_set_string (gconf_client, GCONF_PATH "/server", *server, NULL);
+		gconf_client_set_string (gconf_client, GCONF_PATH "/database", *database, NULL);
+		gconf_client_set_string (gconf_client, GCONF_PATH "/username", *login, NULL);
 
 		ret = TRUE;
 		break;

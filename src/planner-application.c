@@ -1,5 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
+ * Copyright (C) 2003 Imendio HB
  * Copyright (C) 2002 CodeFactory AB
  * Copyright (C) 2002 Richard Hult <richard@imendio.com>
  * Copyright (C) 2002 Mikael Hallendal <micke@imendio.com>
@@ -275,5 +276,19 @@ planner_application_get_recent_model (MgApplication *app)
 	g_return_val_if_fail (MG_IS_APPLICATION (app), NULL);
 
 	return app->priv->recent_model;
+}
+
+GConfClient *
+planner_application_get_gconf_client (MgApplication *app)
+{
+	static GConfClient *client;
+	
+	g_return_val_if_fail (MG_IS_APPLICATION (app), NULL);
+
+	if (!client) {
+		client = gconf_client_get_default ();
+	}
+
+	return client;
 }
 

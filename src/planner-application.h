@@ -1,5 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
+ * Copyright (C) 2003 Imendio HB
  * Copyright (C) 2002 CodeFactory AB
  * Copyright (C) 2002 Richard Hult <richard@imendio.com>
  * Copyright (C) 2002 Mikael Hallendal <micke@imendio.com>
@@ -25,9 +26,11 @@
 
 #include <bonobo/bonobo-window.h>
 #include <bonobo/bonobo-ui-component.h>
+#include <gconf/gconf-client.h>
 #include <libplanner/mrp-application.h>
 #include <libplanner/mrp-project.h>
 #include <libegg/recent-files/egg-recent-model.h>
+
 
 #define MG_TYPE_APPLICATION                (planner_application_get_type ())
 #define MG_APPLICATION(obj)                (G_TYPE_CHECK_INSTANCE_CAST ((obj), MG_TYPE_APPLICATION, MgApplication))
@@ -61,5 +64,8 @@ GtkWidget       *planner_application_new_window       (MgApplication *app);
 void             planner_application_exit             (MgApplication *app);
 
 EggRecentModel  *planner_application_get_recent_model (MgApplication *app);
+
+GConfClient     *planner_application_get_gconf_client (MgApplication *app);
+
 
 #endif /* __MG_APPLICATION_H__ */

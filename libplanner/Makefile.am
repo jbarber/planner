@@ -1,4 +1,4 @@
-INCLUDES = \
+	INCLUDES = \
 	-I. -I$(top_srcdir) \
 	$(LIBPLANNER_CFLAGS) \
 	-DMRP_STORAGEMODULEDIR=\""$(libdir)/planner/storage-modules"\" \
@@ -51,9 +51,6 @@ libplannerinclude_HEADERS = \
 	mrp-error.h
 
 libplanner_1_la_LIBADD = $(LIBPLANNER_LIBS)
-
-#libplanner_1_la_LDFLAGS = -avoid-version
-# -no-undefined
 
 # -export-symbols-regex "^[^_].*"
 
