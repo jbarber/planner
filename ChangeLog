@@ -1,5 +1,11 @@
 2004-07-02  Richard Hult  <richard@imendio.com>
 
+	* src/planner-ttable-row.c: (ttable_row_realize),
+	(ttable_row_draw_resource_ival): Draw vertical separators between
+	the intervals.
+
+2004-07-02  Richard Hult  <richard@imendio.com>
+
 	* src/planner-gantt-chart.c: Fix coding style in a few places.
 
 	* src/planner-ttable-chart.c (ttable_chart_map):

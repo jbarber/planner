@@ -839,7 +839,14 @@ ttable_row_realize (GnomeCanvasItem * item)
 
                 g_object_add_weak_pointer (G_OBJECT (complete_stipple),
                                            (gpointer) & complete_stipple);
-        } else {
+
+		gnome_canvas_get_color (item->canvas, "LightSkyBlue3", &color_normal);
+		gnome_canvas_get_color (item->canvas, "indian red", &color_overuse);
+		gnome_canvas_get_color (item->canvas, "grey", &color_underuse);
+		gnome_canvas_get_color (item->canvas, "medium sea green", &color_free);
+		gnome_canvas_get_color (item->canvas, "gray75", &color_high);
+		gnome_canvas_get_color (item->canvas, "gray40", &color_shadow);
+	} else {
                 g_object_ref (complete_stipple);
         }
 
@@ -869,13 +876,6 @@ ttable_row_realize (GnomeCanvasItem * item)
                                     0,
                                     GDK_LINE_SOLID,
                                     GDK_CAP_BUTT, GDK_JOIN_MITER);
-	
-	gnome_canvas_get_color (item->canvas, "LightSkyBlue3", &color_normal);
-        gnome_canvas_get_color (item->canvas, "indian red", &color_overuse);
-        gnome_canvas_get_color (item->canvas, "light sea green", &color_underuse);
-        gnome_canvas_get_color (item->canvas, "medium sea green", &color_free);
-        gnome_canvas_get_color (item->canvas, "gray75", &color_high);
-        gnome_canvas_get_color (item->canvas, "gray40", &color_shadow);
 }
 
 static void
@@ -1072,47 +1072,64 @@ ttable_row_draw_resource_ival (mrptime          start,
 				    rr_xend - rr_xstart + 1, rr_yend - rr_ystart + 1);
 	}
 	
-        /* Draw the shadow */
         gdk_gc_set_foreground (priv->fill_gc, &color_high);
-        /* Draw the top of the shadow, if it can be seen */
+
+        /* Top of the shadow. */
         if (cs_ystart == rs_ystart) {
                 gdk_draw_line (drawable, priv->fill_gc, r_xstart, rs_ystart,
                                r_xend, rs_ystart);
         }
-        /* Draw the left of the shadow, if it exists and can be seen */
+	
+        /* Left of the shadow. */
         if (chunk == ROW_START && cs_xstart == rs_xstart) {
                 gdk_draw_line (drawable, priv->fill_gc, rs_xstart, rs_ystart,
                                rs_xstart, cs_yend);
         }
 
         gdk_gc_set_foreground (priv->fill_gc, &color_shadow);
-        /* Draw the bottom of the shadow, if it can be seen */
+
+        /* Bottom of the shadow. */
         if (cs_yend == rs_yend) {
                 gdk_draw_line (drawable, priv->fill_gc, r_xstart, rs_yend,
                                r_xend, rs_yend);
         }
-        /* Draw the right of the shadow, if it exists and can be seen */
+	
+        /* Right of the shadow. */
         if (chunk == ROW_END && cs_xend == rs_xend) {
                 gdk_draw_line (drawable, priv->fill_gc, rs_xend, rs_ystart,
                                rs_xend, cs_yend);
         }
 
-        /* Draw the top line, if it can be seen */
-        if (c_ystart == r_ystart)
+	/* Interval separator. */
+	if (chunk != ROW_START) {
+		gdk_gc_set_foreground (priv->fill_gc, &GTK_WIDGET (item->canvas)->style->white);
+		gdk_draw_line (drawable, priv->fill_gc, c_xstart, rs_ystart, c_xstart,
+                               rr_yend);
+	}
+	
+        /* Top frame. */
+        if (c_ystart == r_ystart) {
                 gdk_draw_line (drawable, priv->frame_gc, r_xstart, r_ystart, r_xend,
                                r_ystart);
-        /* Draw the bottom line, if it can be seen */
-        if (c_yend == r_yend)
+	}
+	
+        /* Bottom frame. */
+        if (c_yend == r_yend) {
                 gdk_draw_line (drawable, priv->frame_gc, r_xstart, r_yend, r_xend,
                                r_yend);
-        /* Draw the left line, if it exists and can be seen */
-        if (chunk == ROW_START && c_xstart == r_xstart)
+	}
+	
+        /* Left frame. */
+        if (chunk == ROW_START && c_xstart == r_xstart) {
                 gdk_draw_line (drawable, priv->frame_gc, r_xstart, r_ystart,
                                r_xstart, r_yend);
-        /* Draw the right line, if it exists and can be seen */
-        if (chunk == ROW_END && c_xend == r_xend)
+	}
+	
+        /* Right frame. */
+        if (chunk == ROW_END && c_xend == r_xend) {
                 gdk_draw_line (drawable, priv->frame_gc, r_xend, r_ystart, r_xend,
                                r_yend);
+	}
 }
 
 static void
