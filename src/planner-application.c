@@ -177,6 +177,8 @@ application_init (MgApplication *app)
 	priv->recent_model = egg_recent_model_new (EGG_RECENT_MODEL_SORT_MRU);
 	egg_recent_model_set_filter_mime_types (priv->recent_model, "application/x-mrproject", NULL);
 	egg_recent_model_set_filter_uri_schemes (priv->recent_model, "file", NULL);
+
+	g_object_set (priv->recent_model, "limit", 5, NULL);
 	
 	app->priv = priv;
 }

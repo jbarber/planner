@@ -1,5 +1,11 @@
 2003-12-09  Richard Hult  <richard@imendio.com>
 
+	* src/planner-application.c (application_init): Lower the limit on
+	the number of recent files to keep the menu down a bit.
+
+	* data/ui/main-window.ui: Use correct stock name for print
+	preview.
+
 	* Makefile.am: Update for new intltool.
 
 	* src/planner-main-window.c: (get_last_dir), (main_window_open_cb),
