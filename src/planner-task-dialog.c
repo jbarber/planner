@@ -2959,12 +2959,13 @@ planner_task_dialog_new (PlannerWindow *window,
 
 	w = glade_xml_get_widget (glade, "milestone_pad");
 	gtk_size_group_add_widget (size_group, w);
-	
-	w = glade_xml_get_widget (glade, "work_optionmenu");
-	gtk_size_group_add_widget (size_group, w);
+
+	/* FIXME: Add those back when we use them. */
+	/*w = glade_xml_get_widget (glade, "work_optionmenu");
+	  gtk_size_group_add_widget (size_group, w);
 
 	w = glade_xml_get_widget (glade, "duration_optionmenu");
-	gtk_size_group_add_widget (size_group, w);
+	gtk_size_group_add_widget (size_group, w);*/
 
 	w = glade_xml_get_widget (glade, "complete_pad");
 	gtk_size_group_add_widget (size_group, w);
