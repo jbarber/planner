@@ -1,7 +1,13 @@
+2004-06-06 Alvaro del Castillo  <acs@barrapunto.com>
+
+	* src/planner-task-dialog.c: implemented undo milestone and 
+	fixed duration in task dialog.
+	
 2004-06-04 Alvaro del Castillo  <acs@barrapunto.com>
 
 	* src/planner-task-dialog.c: implemented undo for all the fields
-	in the first page of the task dialog editor notebook.
+	in the first page of the task dialog editor notebook, except 
+	milestone and fixed duration.
 
 	* src/planner-resource-view.c: fixed memory leaks using GValues.
 

@@ -194,6 +194,23 @@ typedef struct {
 	GValue  *old_value;
 } TaskCmdEditProperty;
 
+typedef struct {
+	PlannerCmd base;
+
+	MrpTask     *task;
+	MrpTaskType  type;
+	MrpTaskType  old_type;
+} TaskCmdEditType;
+
+typedef struct {
+	PlannerCmd base;
+
+	MrpTask     *task;
+	MrpTaskSched sched;
+	MrpTaskSched old_sched;
+} TaskCmdEditSchedule;
+
+
 static void
 task_dialog_setup_option_menu (GtkWidget     *option_menu,
 			       GCallback      func,
@@ -398,6 +415,140 @@ task_cmd_edit_property_focus (PlannerWindow *main_window,
 	return cmd_base;
 }
 
+static gboolean
+task_cmd_type_do (PlannerCmd *cmd_base)
+{
+	TaskCmdEditType *cmd;
+
+	cmd = (TaskCmdEditType* ) cmd_base;
+
+	mrp_object_set (cmd->task, "type", cmd->type, NULL);
+
+	return TRUE;
+}
+
+static void
+task_cmd_type_undo (PlannerCmd *cmd_base)
+{
+	TaskCmdEditType *cmd;
+
+	cmd = (TaskCmdEditType* ) cmd_base;
+
+	mrp_object_set (cmd->task, "type", cmd->old_type, NULL);
+}
+
+static void
+task_cmd_type_free (PlannerCmd *cmd_base)
+{
+	TaskCmdEditType *cmd;
+
+	cmd = (TaskCmdEditType* ) cmd_base;
+
+	g_object_unref (cmd->task);
+}
+
+static PlannerCmd *
+task_cmd_edit_type (PlannerWindow *main_window,
+		    MrpTask       *task,
+		    MrpTaskType    type)
+{
+	PlannerCmd          *cmd_base;
+	TaskCmdEditType     *cmd;
+	MrpTaskType          old_type;
+
+	mrp_object_get (task, "type", &old_type, NULL);
+
+	if (old_type == type) {
+		return NULL;
+	}
+
+	cmd = g_new0 (TaskCmdEditType, 1);
+
+	cmd_base = (PlannerCmd*) cmd;
+
+	cmd_base->label = g_strdup (_("Edit type task from dialog"));
+	cmd_base->do_func = task_cmd_type_do;
+	cmd_base->undo_func = task_cmd_type_undo;
+	cmd_base->free_func = task_cmd_type_free;
+
+	cmd->task = g_object_ref (task);
+
+	cmd->old_type = old_type;
+	cmd->type = type;
+
+	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager (main_window),
+					   cmd_base);
+
+	return cmd_base;
+}
+
+static gboolean
+task_cmd_sched_do (PlannerCmd *cmd_base)
+{
+	TaskCmdEditSchedule *cmd;
+
+	cmd = (TaskCmdEditSchedule* ) cmd_base;
+
+	mrp_object_set (cmd->task, "sched", cmd->sched, NULL);
+
+	return TRUE;
+}
+
+static void
+task_cmd_sched_undo (PlannerCmd *cmd_base)
+{
+	TaskCmdEditSchedule *cmd;
+
+	cmd = (TaskCmdEditSchedule* ) cmd_base;
+
+	mrp_object_set (cmd->task, "sched", cmd->old_sched, NULL);
+}
+
+static void
+task_cmd_sched_free (PlannerCmd *cmd_base)
+{
+	TaskCmdEditSchedule *cmd;
+
+	cmd = (TaskCmdEditSchedule* ) cmd_base;
+
+	g_object_unref (cmd->task);
+}
+
+static PlannerCmd *
+task_cmd_edit_sched (PlannerWindow *main_window,
+		     MrpTask       *task,
+		     MrpTaskSched   sched)
+{
+	PlannerCmd          *cmd_base;
+	TaskCmdEditSchedule *cmd;
+	MrpTaskSched         old_sched;
+
+	mrp_object_get (task, "sched", &old_sched, NULL);
+
+	if (old_sched == sched) {
+		return NULL;
+	}
+
+	cmd = g_new0 (TaskCmdEditSchedule, 1);
+
+	cmd_base = (PlannerCmd*) cmd;
+
+	cmd_base->label = g_strdup (_("Edit task schedule from dialog"));
+	cmd_base->do_func = task_cmd_sched_do;
+	cmd_base->undo_func = task_cmd_sched_undo;
+	cmd_base->free_func = task_cmd_sched_free;
+
+	cmd->task = g_object_ref (task);
+
+	cmd->old_sched = old_sched;
+	cmd->sched = sched;
+
+	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager (main_window),
+					   cmd_base);
+
+	return cmd_base;
+}
+
 static void
 task_dialog_close_clicked_cb (GtkWidget *w, DialogData *data)
 {
@@ -510,13 +661,15 @@ task_dialog_task_type_changed_cb (MrpTask *task, GParamSpec *pspec, GtkWidget *d
 
 	g_object_get (task, "type", &type, NULL);
 
-	/* FIXME: this doesn't do anything right now. */
-	
 	g_signal_handlers_block_by_func (data->milestone_checkbutton,
 					 task_dialog_type_toggled_cb,
 					 dialog);
 	
-	/* Set the toggle */
+	if (type == MRP_TASK_TYPE_MILESTONE) {
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (data->milestone_checkbutton), TRUE); 
+	} else {
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (data->milestone_checkbutton), FALSE);
+	}
 
 	g_signal_handlers_unblock_by_func (data->milestone_checkbutton,
 					   task_dialog_type_toggled_cb,
@@ -540,7 +693,8 @@ task_dialog_type_toggled_cb (GtkWidget *w, DialogData *data)
 					 task_dialog_task_type_changed_cb,
 					 data->dialog);
 	
-	g_object_set (data->task, "type", type, NULL);
+	/* g_object_set (data->task, "type", type, NULL); */
+	task_cmd_edit_type (data->main_window, data->task, type);
 
 	g_signal_handlers_unblock_by_func (data->task, 
 					   task_dialog_task_type_changed_cb,
@@ -567,6 +721,12 @@ task_dialog_task_sched_changed_cb (MrpTask *task, GParamSpec *pspec, GtkWidget *
 	g_signal_handlers_block_by_func (data->fixed_checkbutton,
 					 task_dialog_fixed_toggled_cb,
 					 dialog);
+
+	if (sched == MRP_TASK_SCHED_FIXED_DURATION) {
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (data->fixed_checkbutton), TRUE);
+	} else {
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (data->fixed_checkbutton), FALSE);	
+	}
 	
 	/* Set the toggle */
 
@@ -592,7 +752,8 @@ task_dialog_fixed_toggled_cb (GtkWidget *w, DialogData *data)
 					 task_dialog_task_sched_changed_cb,
 					 data->dialog);
 
-	g_object_set (data->task, "sched", sched, NULL);
+	/* g_object_set (data->task, "sched", sched, NULL); */
+	task_cmd_edit_sched (data->main_window, data->task, sched);
 
 	g_signal_handlers_unblock_by_func (data->task, 
 					   task_dialog_task_sched_changed_cb,
