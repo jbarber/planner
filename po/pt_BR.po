@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: planner.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-05-11 12:55-0400\n"
-"PO-Revision-Date: 2004-05-11 11:35-0300\n"
+"POT-Creation-Date: 2004-05-19 10:46-0400\n"
+"PO-Revision-Date: 2004-05-19 00:17-0300\n"
 "Last-Translator: Afonso Celso Medina <medina@maua.br>\n"
 "Language-Team: Portuguese/Brazil <gnome-l10n-br@listas.cipsga.org.br>\n"
 "MIME-Version: 1.0\n"
@@ -408,7 +408,7 @@ msgid "_Work:"
 msgstr "_Trabalho:"
 
 #. day unit variant accepted in input
-#: data/glade/task-dialog.glade.h:17 src/planner-task-tree.c:3364
+#: data/glade/task-dialog.glade.h:17 src/planner-task-tree.c:3534
 msgid "days"
 msgstr "dias"
 
@@ -1393,7 +1393,7 @@ msgstr "Rótulo"
 msgid "Type"
 msgstr "Tipo"
 
-#: src/planner-python-plugin.c:121 src/planner-window.c:639
+#: src/planner-python-plugin.c:164 src/planner-window.c:639
 msgid "Open a file"
 msgstr "Abre um arquivo"
 
@@ -1631,27 +1631,35 @@ msgstr "Inserir tarefa"
 msgid "Edit task property"
 msgstr "Editar as propriedades da tarefa"
 
-#: src/planner-task-tree.c:709
+#: src/planner-task-tree.c:719
 msgid "Remove task"
 msgstr "Remover tarefa"
 
-#: src/planner-task-tree.c:788
+#: src/planner-task-tree.c:798
 msgid "Constraint task"
 msgstr "Restrição da tarefa"
 
-#: src/planner-task-tree.c:926
+#: src/planner-task-tree.c:861
+msgid "Constraint task reset"
+msgstr "Redefine a restrição da tarefa"
+
+#: src/planner-task-tree.c:995
 msgid "Move task"
 msgstr "Move tarefa"
 
-#: src/planner-task-tree.c:1045
+#: src/planner-task-tree.c:1114
 msgid "Link task"
 msgstr "Vincula a tarefa"
 
-#: src/planner-task-tree.c:1113
+#: src/planner-task-tree.c:1182
 msgid "Unlink task"
 msgstr "Desvincula a tarefa"
 
-#: src/planner-task-tree.c:2722
+#: src/planner-task-tree.c:1263
+msgid "Edit task custom property"
+msgstr "Edita as propriedades customizadas da tarefa"
+
+#: src/planner-task-tree.c:2895
 #, c-format
 msgid ""
 "You are about to open an edit dialog each for %i tasks. Are you sure that "
@@ -1660,72 +1668,72 @@ msgstr ""
 "Você está prestes a abrir um diálogo de edição para %i tarefas. Tem·certeza "
 "de que deseja fazer isso?"
 
-#: src/planner-task-tree.c:3356
+#: src/planner-task-tree.c:3526
 msgid "mon"
 msgstr "mês"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:3357
+#: src/planner-task-tree.c:3527
 msgid "month"
 msgstr "mês"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:3358
+#: src/planner-task-tree.c:3528
 msgid "months"
 msgstr "meses"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:3359
+#: src/planner-task-tree.c:3529
 msgid "w"
 msgstr "s"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:3360
+#: src/planner-task-tree.c:3530
 msgid "week"
 msgstr "semana"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:3361
+#: src/planner-task-tree.c:3531
 msgid "weeks"
 msgstr "semanas"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:3362
+#: src/planner-task-tree.c:3532
 msgid "d"
 msgstr "d"
 
 #. day unit variant accepted in input
-#: src/planner-task-tree.c:3363
+#: src/planner-task-tree.c:3533
 msgid "day"
 msgstr "dia"
 
 #. day unit variant accepted in input
-#: src/planner-task-tree.c:3365
+#: src/planner-task-tree.c:3535
 msgid "h"
 msgstr "h"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:3366
+#: src/planner-task-tree.c:3536
 msgid "hour"
 msgstr "hora"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:3367
+#: src/planner-task-tree.c:3537
 msgid "hours"
 msgstr "horas"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:3368
+#: src/planner-task-tree.c:3538
 msgid "min"
 msgstr "min"
 
 #. minute unit variant accepted in input
-#: src/planner-task-tree.c:3369
+#: src/planner-task-tree.c:3539
 msgid "minute"
 msgstr "minuto"
 
 #. minute unit variant accepted in input
-#: src/planner-task-tree.c:3370
+#: src/planner-task-tree.c:3540
 msgid "minutes"
 msgstr "minutos"
 
