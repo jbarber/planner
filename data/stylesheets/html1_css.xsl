@@ -7,7 +7,7 @@
 
 /* CSS Stylesheet for Planner HTML output.
  * 
- * Copyright (C) 2004 Imendio AB
+ * Copyright (C) 2004-2005 Imendio AB
  * Copyright (C) 2003 CodeFactory AB
  * Copyright (C) 2003 Daniel Lundin (daniel@edgewall.com)
  * Copyright (C) 2004 Chris Ladd (caladd@particlestorm.net)
@@ -45,6 +45,7 @@ div.separator {
 table.proj-header {
  border: 0;
  margin: 0;
+ width: auto;
 }
 
 table.proj-header .header {
@@ -79,19 +80,31 @@ a:hover[href] {
 /*
  * Tables
  */
-table {
- display: table;
- border-collapse: collapse;	
+
+.scroll-div {
+ overflow: auto;
  border-style: solid;
- border-width: 1px
- border-color: #000000;
+ border-width: 1px;
+ border-color: #aaaaaa;
+}
+
+table {
+ width: 100%;
+ border-collapse: collapse;	
+ border-style: none;
+ border-color: white;
  white-space: nowrap;
- margin: 2px;
- padding: 2px;
+ margin: 0;
 }
 
 tr, td, th {
  white-space: nowrap;
+ vertical-align: middle;
+ padding-top: 1px;
+ padding-bottom: 1px;
+}
+
+th {
  vertical-align: top;
 }
 
@@ -109,8 +122,8 @@ tr.odd {
 }
 
 th span, td span {
- margin-left: 8px;
- margin-right: 8px;
+ margin-left: 6px;
+ margin-right: 6px;
 }
 
 span.note {
@@ -138,7 +151,6 @@ div.gantt-complete-notdone {
  background-color: #8db6cd;
  border-style: solid;
  border-width: 1px;
- border-color: #4d768d;
 }
 
 div.gantt-summary {

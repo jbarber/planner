@@ -5,16 +5,12 @@
                   xmlns="http://www.w3.org/1999/xhtml"
              xmlns:date="http://exslt.org/dates-and-times">
 
-<!--**************************************************************************
-    *
-    * html1.xsl: Convert a Planner XML file to HTML
-    *
-    * Copyright (C) 2004 Imendio AB
-    * Copyright (c) 2003 Daniel Lundin
-    * Copyright (c) 2003 CodeFactory AB
-    * Copyright (c) 2004 Chris Ladd (caladd@particlestorm.net)
-    *
-    *-->
+<!--
+  Copyright (C) 2004-2005 Imendio AB
+  Copyright (c) 2003 Daniel Lundin
+  Copyright (c) 2003 CodeFactory AB
+  Copyright (c) 2004 Chris Ladd (caladd@particlestorm.net)
+-->
 
 <!-- ********************************************************************* -->
 <!--                            Output settings                            -->
