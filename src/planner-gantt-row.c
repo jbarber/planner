@@ -1212,7 +1212,11 @@ gantt_row_notify_cb (MrpTask *task, GParamSpec *pspec, PlannerGanttRow *row)
 	if (recalc_bounds (row)) {
 		gantt_row_geometry_changed (row);
 	}
-	else if (strcmp (pspec->name, "critical") != 0) {
+	/* Note: This is not really nice, it's bug-prone, but we can live with
+	 * it since it's a good optimization.
+	 */
+	else if (strcmp (pspec->name, "critical") != 0 &&
+		 strcmp (pspec->name, "percent-complete")) {
 		return;
 	}
 	

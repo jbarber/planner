@@ -1,5 +1,8 @@
 2004-06-18  Richard Hult  <richard@imendio.com>
 
+	* src/planner-gantt-row.c (gantt_row_notify_cb): Update when
+	percent complete changes.
+
 	* src/planner-gantt-print.c (planner_gantt_print_do)
 	(gantt_print_task): Fix bug #134552, print out percent complete.
 
