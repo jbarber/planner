@@ -25,7 +25,7 @@
 #include <libgnomevfs/gnome-vfs.h>
 #include <libgnomevfs/gnome-vfs-mime-utils.h>
 #include "egg-recent-item.h"
-#include "egg-recent-vfs-utils.h"
+
 
 
 EggRecentItem *
@@ -36,7 +36,7 @@ egg_recent_item_new (void)
 	item = g_new (EggRecentItem, 1);
 
 	item->groups = NULL;
-	item->private = FALSE;
+	item->private_data = FALSE;
 	item->uri = NULL;
 	item->mime_type = NULL;
 
@@ -63,13 +63,14 @@ egg_recent_item_free (EggRecentItem *item)
 	g_free (item);
 }
 
-void
+EggRecentItem *
 egg_recent_item_ref (EggRecentItem *item)
 {
 	item->refcount++;
+	return item;
 }
 
-void
+EggRecentItem *
 egg_recent_item_unref (EggRecentItem *item)
 {
 	item->refcount--;
@@ -77,6 +78,8 @@ egg_recent_item_unref (EggRecentItem *item)
 	if (item->refcount == 0) {
 		egg_recent_item_free (item);
 	}
+
+	return item;
 }
 
 
@@ -130,7 +133,7 @@ egg_recent_item_copy (const EggRecentItem *item)
 	if (item->mime_type)
 		newitem->mime_type = g_strdup (item->mime_type);
 	newitem->timestamp = item->timestamp;
-	newitem->private = item->private;
+	newitem->private_data = item->private_data;
 	newitem->groups = egg_recent_item_copy_groups (item->groups);
 
 	return newitem;
@@ -186,7 +189,7 @@ egg_recent_item_set_uri (EggRecentItem *item, const gchar *uri)
 
 	/* if G_BROKEN_FILENAMES is not set, this should succede */
 	if (g_utf8_validate (uri, -1, NULL)) {
-		item->uri = egg_recent_vfs_make_uri_from_input (uri);
+		item->uri = gnome_vfs_make_uri_from_input (uri);
 	} else {
 		utf8_uri = g_filename_to_utf8 (uri, -1, NULL, NULL, NULL);
 
@@ -196,7 +199,7 @@ egg_recent_item_set_uri (EggRecentItem *item, const gchar *uri)
 		}
 
 		if (g_utf8_validate (utf8_uri, -1, NULL)) {
-			item->uri = egg_recent_vfs_make_uri_from_input (utf8_uri);
+			item->uri = gnome_vfs_make_uri_from_input (utf8_uri);
 		} else {
 			g_free (utf8_uri);
 			return FALSE;
@@ -232,7 +235,7 @@ egg_recent_item_get_uri_utf8 (const EggRecentItem *item)
 gchar *
 egg_recent_item_get_uri_for_display (const EggRecentItem *item)
 {
-	return egg_recent_vfs_format_uri_for_display (item->uri);
+	return gnome_vfs_format_uri_for_display (item->uri);
 }
 
 void 
@@ -320,13 +323,13 @@ egg_recent_item_remove_group (EggRecentItem *item, const gchar *group_name)
 void
 egg_recent_item_set_private (EggRecentItem *item, gboolean priv)
 {
-	item->private = priv;
+	item->private_data = priv;
 }
 
 gboolean
 egg_recent_item_get_private (const EggRecentItem *item)
 {
-	return item->private;
+	return item->private_data;
 }
 
 GType

@@ -29,26 +29,26 @@ egg_recent_util_escape_underlines (const gchar* text)
 
 	str = g_string_new ("");
 
-  	p = text;
-  	end = text + length;
+	p = text;
+	end = text + length;
 
-  	while (p != end)
-    	{
-      		const gchar *next;
-      		next = g_utf8_next_char (p);
+	while (p != end)
+	{
+		const gchar *next;
+		next = g_utf8_next_char (p);
 
 		switch (*p)
-        	{
-       			case '_':
-          			g_string_append (str, "__");
-          			break;
-        		default:
-          			g_string_append_len (str, p, next - p);
-          			break;
-        	}
+		{
+			case '_':
+				g_string_append (str, "__");
+				break;
+			default:
+				g_string_append_len (str, p, next - p);
+			break;
+		}
 
-      		p = next;
-    	}
+		p = next;
+	}
 
 	return g_string_free (str, FALSE);
 }
@@ -127,6 +127,10 @@ egg_recent_util_get_icon (GnomeIconTheme *theme, const gchar *uri,
 						 &icon_data,
 						 &base_size);
 	g_free (icon);
+
+	if (filename == NULL) {
+		return NULL;
+	}
 
 	pixbuf = load_icon_file (filename, base_size, size);
 	g_free (filename);

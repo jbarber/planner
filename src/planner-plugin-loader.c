@@ -63,11 +63,12 @@ mpl_load_dir (const gchar *path, PlannerWindow *window)
 	}
 	
 	while ((name = g_dir_read_name (dir)) != NULL) {
-		if (strncmp (name + strlen (name) - 3, ".so", 3) == 0) {
-			gchar *plugin_name =  g_build_path (G_DIR_SEPARATOR_S,
-							    path,
-							    name,
-							    NULL);
+		if (g_str_has_suffix (name, G_MODULE_SUFFIX)) {
+			gchar *plugin_name;
+
+			plugin_name = g_build_filename (path,
+							name,
+							NULL);
 			plugin = mpl_load (plugin_name);
 			if (plugin) {
 				list = g_list_append (list, plugin);

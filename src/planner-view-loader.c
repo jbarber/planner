@@ -74,11 +74,12 @@ mvl_load_dir (const gchar *path, PlannerWindow *window)
 	}
 
 	while ((name = g_dir_read_name (dir)) != NULL) {
-		if (strncmp (name + strlen (name) - 3, ".so", 3) == 0) {
-			gchar *plugin = g_build_path (G_DIR_SEPARATOR_S,
-						      path,
-						      name,
-						      NULL);
+		if (g_str_has_suffix (name, G_MODULE_SUFFIX)) {
+			gchar *plugin;
+			
+			plugin = g_build_filename (path,
+						   name,
+						   NULL);
 			view = mvl_load (plugin);
 			if (view) {
 				list = g_list_append (list, view);

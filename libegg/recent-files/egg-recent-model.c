@@ -36,7 +36,6 @@
 #include <gconf/gconf-client.h>
 #include "egg-recent-model.h"
 #include "egg-recent-item.h"
-#include "egg-recent-vfs-utils.h"
 
 #define EGG_RECENT_MODEL_FILE_PATH "/.recently-used"
 #define EGG_RECENT_MODEL_BUFFER_SIZE 8192
@@ -261,7 +260,7 @@ egg_recent_model_update_item (GList *items, EggRecentItem *upd_item)
 	while (tmp) {
 		EggRecentItem *item = tmp->data;
 
-		if (egg_recent_vfs_uris_match (egg_recent_item_peek_uri (item), uri)) {
+		if (gnome_vfs_uris_match (egg_recent_item_peek_uri (item), uri)) {
 			egg_recent_item_set_timestamp (item, (time_t) -1);
 
 			egg_recent_model_add_new_groups (item, upd_item);
@@ -283,7 +282,7 @@ egg_recent_model_read_raw (EggRecentModel *model, FILE *file)
 
 	rewind (file);
 
-	string = g_string_new ("");
+	string = g_string_new (NULL);
 	while (fgets (buf, EGG_RECENT_MODEL_BUFFER_SIZE, file)) {
 		string = g_string_append (string, buf);
 	}
@@ -559,7 +558,7 @@ egg_recent_model_filter (EggRecentModel *model,
 		    model->priv->scheme_filter_values != NULL) {
 			gchar *scheme;
 			
-			scheme = egg_recent_vfs_get_uri_scheme (uri);
+			scheme = gnome_vfs_get_uri_scheme (uri);
 
 			if (egg_recent_model_string_match
 				(model->priv->scheme_filter_values, scheme))
@@ -876,11 +875,27 @@ static gboolean
 egg_recent_model_lock_file (FILE *file)
 {
 	int fd;
+	gboolean locked = FALSE;
+	gint	try = 4;
 
 	rewind (file);
 	fd = fileno (file);
 
-	return lockf (fd, F_LOCK, 0) == 0 ? TRUE : FALSE;
+	/* Attempt to lock the file 4 times,
+	 * waiting 1 second in between attempts.
+	 * We should really be doing asynchronous
+	 * locking, but requires substantially larger
+	 * changes.
+	 */
+	
+	while (try-- > 0)
+	{
+		if ((locked = lockf (fd, F_TLOCK, 0) < 0 ? FALSE : TRUE));
+			break;
+		sleep (1);
+	}
+
+	return locked;
 }
 
 static gboolean
@@ -1393,14 +1408,15 @@ egg_recent_model_get_list (EggRecentModel *model)
 	GList *list=NULL;
 
 	file = egg_recent_model_open_file (model);
-	g_return_val_if_fail (file != NULL, FALSE);
+	g_return_val_if_fail (file != NULL, NULL);
 	
 	if (egg_recent_model_lock_file (file)) {
 		list = egg_recent_model_read (model, file);
 		
 	} else {
 		g_warning ("Failed to lock:  %s", strerror (errno));
-		return FALSE;
+		fclose (file);
+		return NULL;
 	}
 
 	if (!egg_recent_model_unlock_file (file))

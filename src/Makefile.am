@@ -140,35 +140,24 @@ libgantt_view_la_SOURCES = \
 	planner-gantt-chart.h		\
 	planner-gantt-header.c		\
 	planner-gantt-header.h		\
-	planner-gantt-model.c		\
-	planner-gantt-model.h		\
 	planner-gantt-print.c		\
 	planner-gantt-print.h		\
 	planner-gantt-row.c		\
 	planner-gantt-row.h		\
 	planner-gantt-view.c		\
 	planner-scale-utils.c		\
-	planner-scale-utils.h		\
-	planner-task-tree.c		\
-	planner-task-tree.h		\
-	planner-task-popup.c 		\
-	planner-task-popup.h
+	planner-scale-utils.h
 
 libgantt_view_la_LDFLAGS = -avoid-version -module
-libgantt_view_la_LIBADD = libutil.la
+libgantt_view_la_LIBADD = libutil.la libgantt-task.la
+
 
 libtask_view_la_SOURCES = \
-	planner-task-view.c		\
-	planner-gantt-model.c		\
-	planner-gantt-model.h		\
-	planner-task-tree.c		\
-	planner-task-tree.h		\
-	planner-task-popup.c \
-	planner-task-popup.h
-
+	planner-task-view.c
 
 libtask_view_la_LDFLAGS = -avoid-version -module
-libtask_view_la_LIBADD = libutil.la
+libtask_view_la_LIBADD = libutil.la libgantt-task.la
+
 
 libresource_view_la_SOURCES = \
 	planner-resource-view.c		
@@ -190,6 +179,22 @@ libtimetable_view_la_LDFLAGS = -avoid-version -module
 libtimetable_view_la_LIBADD = libutil.la
 
 endif
+
+# Small shared lib for the task gantt views
+gantt_taskdir = $(libdir)/planner
+gantt_task_LTLIBRARIES = libgantt-task.la
+libgantt_task_la_LIBADD = libutil.la
+libgantt_task_la_LDFLAGS = -avoid-version
+
+libgantt_task_la_SOURCES = 		\
+	planner-gantt-model.c		\
+	planner-gantt-model.h		\
+	planner-task-tree.c		\
+	planner-task-tree.h		\
+	planner-task-popup.c 		\
+	planner-task-popup.h
+
+
 
 #
 # Plugins
