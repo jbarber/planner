@@ -93,6 +93,7 @@ PKG_CHECK_MODULES(LIBPLANNER,
 	libxml-2.0 >= $XML_REQUIRED
 	gobject-2.0 gmodule-2.0
 	libgsf-1 >= $LIBGSF_REQUIRED
+	gnome-vfs-2.0 >= $GNOME_VFS_REQUIRED
 ])
 
 AC_SUBST(LIBPLANNER_CFLAGS)
