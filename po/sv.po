@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: planner\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-03-03 19:56+0100\n"
+"POT-Creation-Date: 2005-03-03 22:25+0100\n"
 "PO-Revision-Date: 2004-07-04 16:55+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -1031,7 +1031,7 @@ msgid "Work"
 msgstr "Arbete"
 
 #: ../src/planner-gantt-print.c:542 ../src/planner-gantt-row.c:692
-#: ../src/planner-html-plugin.c:140 ../src/planner-task-tree.c:1564
+#: ../src/planner-html-plugin.c:140 ../src/planner-task-tree.c:1567
 #: ../src/planner-window.c:1872
 msgid "Unnamed"
 msgstr "Namnlös"
@@ -1051,7 +1051,7 @@ msgid "Change work to %s"
 msgstr "Ändra arbete till %s"
 
 #: ../src/planner-gantt-row.c:2391 ../src/planner-task-dialog.c:453
-#: ../src/planner-task-tree.c:254 ../src/planner-task-tree.c:939
+#: ../src/planner-task-tree.c:254 ../src/planner-task-tree.c:942
 msgid "Edit task property"
 msgstr "Redigera aktivitetsegenskap"
 
@@ -1812,19 +1812,15 @@ msgstr "Sätt restriktion på aktivitet"
 msgid "Reset task constraint"
 msgstr "Återställ aktivitetsrestriktion"
 
-#: ../src/planner-task-tree.c:824
-msgid "Move task"
-msgstr "Flytta aktivitet"
-
-#: ../src/planner-task-tree.c:1485 ../src/planner-task-tree.c:1617
+#: ../src/planner-task-tree.c:1488 ../src/planner-task-tree.c:1620
 msgid "N/A"
 msgstr "-"
 
-#: ../src/planner-task-tree.c:2705
-msgid "Remove Tasks"
+#: ../src/planner-task-tree.c:2708
+msgid "Remove tasks"
 msgstr "Ta bort aktiviteter"
 
-#: ../src/planner-task-tree.c:2767
+#: ../src/planner-task-tree.c:2770
 #, c-format
 msgid ""
 "You are about to open an edit dialog each for %i tasks. Are you sure that "
@@ -1832,6 +1828,55 @@ msgid ""
 msgstr ""
 "En dialog kommer att öppnas för var och en av %d aktiviteter. Är du säger på "
 "att du vill det?"
+
+#: ../src/planner-task-tree.c:2872
+msgid "Unlink tasks"
+msgstr "Avlänka aktiviteter"
+
+#: ../src/planner-task-tree.c:2924
+msgid "Link tasks"
+msgstr "Länka aktiviteter"
+
+#: ../src/planner-task-tree.c:3015
+msgid "Indent tasks"
+msgstr "Drag in aktiviteter"
+
+#: ../src/planner-task-tree.c:3024
+msgid "Indent task"
+msgstr "Drag in aktivitet"
+
+#: ../src/planner-task-tree.c:3117
+msgid "Unindent tasks"
+msgstr "Dra ut aktiviteter"
+
+#: ../src/planner-task-tree.c:3133
+msgid "Unindent task"
+msgstr "Dra ut aktiviteter"
+
+#: ../src/planner-task-tree.c:3210
+msgid "Move tasks up"
+msgstr "Flytta aktiviteter uppåt"
+
+#: ../src/planner-task-tree.c:3248
+msgid "Move task up"
+msgstr "Flytta aktivitet uppåt"
+
+#: ../src/planner-task-tree.c:3337
+msgid "Move tasks down"
+msgstr "Flytta aktiviteter nedåt"
+
+#. Moving task from 'position' to 'position + 1'
+#: ../src/planner-task-tree.c:3383
+msgid "Move task down"
+msgstr "Flytta aktiviteter nedåt"
+
+#: ../src/planner-task-tree.c:3439
+msgid "Reset task constraints"
+msgstr "Återställ aktivitetsrestriktioner"
+
+#: ../src/planner-task-tree.c:3471
+msgid "Reset all task constraints"
+msgstr "Återställ alla aktivitetsrestriktioner"
 
 #: ../src/planner-task-view.c:122
 msgid "_Edit Task"
@@ -2206,6 +2251,9 @@ msgstr "Exportera projekt till en fil som passar Planner 0.11"
 #: ../src/planner-xml-planner-plugin.c:91
 msgid "Export"
 msgstr "Exportera"
+
+#~ msgid "Remove Tasks"
+#~ msgstr "Ta bort aktiviteter"
 
 #~ msgid "Constraint type"
 #~ msgstr "Restriktionstyp"
