@@ -237,10 +237,7 @@ AM_CONDITIONAL(HAVE_DOTNET, test x$have_dotnet = xyes)
 dnl  -----------------------------
 dnl | Evolution Data Server check |----------------------------------------------
 dnl  -----------------------------
-AC_ARG_ENABLE(eds, 
-	AC_HELP_STRING ([--enable-eds],      
-		       [Enable evolution-data-server support [default=no]])
-		       , enable_eds="$enableval", enable_eds=no)
+AC_ARG_ENABLE(eds, [  --enable-eds           build evolution-data-server support [default=no]], enable_eds="$enableval", enable_eds=no)
 
 if test "x$enable_eds" = "xyes" ; then
     EDS_REQUIRED=0.0.95
