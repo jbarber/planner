@@ -1,3 +1,23 @@
+2004-06-30  Richard Hult  <richard@imendio.com>
+
+	* Makefile.am:
+	* configure.in:
+	* examples/sample-1.planner:  Dist the examples.
+
+	* data/ui/xml-planner-plugin.ui: Fix string.
+
+	* docs/user-guide/C/planner.xml: Make the man version the same as
+	the app version, looks silly otherwise.
+	
+	* libplanner/mrp-parser.c: (mrp_parser_save):
+	* libplanner/mrp-project.c: (mrp_project_save_as):
+	* src/planner-application.c: (application_init):
+	* src/planner-window.c: (window_do_save_as), (planner_window_open):
+	* src/planner-xml-planner-plugin.c: (xml_planner_plugin_export):
+	Fix up filename extensions and mime types.
+
+	* planner.spec.in: Get this baby working.
+	
 2004-06-30 Alvaro del Castillo  <acs@barrapunto.com>
 
 	* configure.in

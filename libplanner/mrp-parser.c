@@ -1087,8 +1087,8 @@ mrp_parser_save (MrpStorageMrproject  *module,
 	g_return_val_if_fail (MRP_IS_STORAGE_MRPROJECT (module), FALSE);
 	g_return_val_if_fail (filename != NULL && filename[0] != 0, FALSE);
 
-	if (!strstr (filename, ".mrproject")) {
-		real_filename = g_strconcat (filename, ".mrproject", NULL);
+	if (!strstr (filename, ".mrproject") && !strstr (filename, ".planner")) {
+		real_filename = g_strconcat (filename, ".planner", NULL);
 	} else {
 		real_filename = g_strdup (filename);
 	}

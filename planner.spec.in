@@ -79,15 +79,15 @@ rm -rf "%{buildroot}"
 
 %post
 scrollkeeper-update
-if test x$UPDATE_MIME_DATABASE != xno ; then
-  $(UPDATE_MIME_DATABASE) "%{_datadir}/mime"
-endif
+if (update-mime-database -v &> /dev/null); then
+  update-mime-database "%{_datadir}/mime"
+fi
 
 %postun
 scrollkeeper-update
-if test x$UPDATE_MIME_DATABASE != xno ; then
-  $(UPDATE_MIME_DATABASE) "%{_datadir}/mime"
-endif
+if (update-mime-database -v &> /dev/null); then
+  update-mime-database "%{_datadir}/mime"
+fi
 
 %files
 %defattr(-,root,root)
@@ -113,6 +113,8 @@ endif
 %exclude %{_libdir}/planner/plugins/libsql-plugin*
 %exclude %{_datadir}/planner/glade/sql.glade
 %exclude %{_datadir}/planner/ui/sql-plugin.ui
+%exclude %{_datadir}/planner/sql/*
+%exclude %{_datadir}/doc/planner/README.sql
 
 # Database (GDA) package
 %package database

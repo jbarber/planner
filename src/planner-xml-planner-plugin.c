@@ -95,6 +95,7 @@ xml_planner_plugin_export (BonoboUIComponent *component,
 	GtkWidget         *dialog;
 	gint               response;
 	const gchar       *filename = NULL;
+	gchar             *real_filename;
 	gchar             *last_dir;
 	GConfClient       *gconf_client; 
 
@@ -116,7 +117,14 @@ xml_planner_plugin_export (BonoboUIComponent *component,
 		filename = gtk_file_selection_get_filename (
 			GTK_FILE_SELECTION (file_sel));
 
-		if (g_file_test (filename, G_FILE_TEST_EXISTS)) {
+
+		if (!strstr (filename, ".mrproject") || !strstr (filename, ".planner")) {
+			real_filename = g_strconcat (filename, ".mrproject", NULL);
+		} else {
+			real_filename = g_strdup (filename);
+		}
+	
+		if (g_file_test (real_filename, G_FILE_TEST_EXISTS)) {
 			dialog = gtk_message_dialog_new (GTK_WINDOW (priv->main_window),
 							 GTK_DIALOG_MODAL |
 							 GTK_DIALOG_DESTROY_WITH_PARENT,
@@ -124,7 +132,7 @@ xml_planner_plugin_export (BonoboUIComponent *component,
 							 GTK_BUTTONS_YES_NO,
 							 _("File \"%s\" exists, "
 							   "do you want to overwrite it?"),
-							 filename);
+							 real_filename);
 			
 			response = gtk_dialog_run (GTK_DIALOG (dialog));
 			gtk_widget_destroy (dialog);
@@ -133,6 +141,7 @@ xml_planner_plugin_export (BonoboUIComponent *component,
 			case GTK_RESPONSE_YES:
 				break;
 			default:
+				g_free (real_filename);
 				continue;
 			}
 		}
@@ -142,8 +151,8 @@ xml_planner_plugin_export (BonoboUIComponent *component,
 	} 
 
 	project = planner_window_get_project (priv->main_window);
-	
-	if (!mrp_project_export (project, filename,
+
+	if (!mrp_project_export (project, real_filename,
 				 "Planner XML pre-0.12",
 				 TRUE,
 				 &error)) {
@@ -152,12 +161,13 @@ xml_planner_plugin_export (BonoboUIComponent *component,
 
 	gconf_client = planner_application_get_gconf_client ();
 	
-	last_dir = g_path_get_dirname (filename);
+	last_dir = g_path_get_dirname (real_filename);
 	gconf_client_set_string (gconf_client,
 				 GCONF_PATH "/general/last_dir",
 				 last_dir,
 				 NULL);
 	g_free (last_dir);
+	g_free (real_filename);
 
 	gtk_widget_destroy (file_sel);
 }

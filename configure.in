@@ -25,7 +25,6 @@ fi
 AC_PATH_PROG(UPDATE_MIME_DATABASE, update-mime-database, no)
 AM_CONDITIONAL(HAVE_NEW_MIME, test x$UPDATE_MIME_DATABASE != xno)
 
-
 dnl  -------------
 dnl | API docs    |--------------------------------------------
 dnl  -------------
@@ -269,6 +268,7 @@ docs/libplanner/Makefile
 docs/user-guide/Makefile
 docs/user-guide/C/Makefile
 docs/sql/Makefile
+examples/Makefile
 po/Makefile.in
 data/Makefile
 data/images/Makefile

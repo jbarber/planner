@@ -858,8 +858,8 @@ mrp_project_save_as (MrpProject   *project,
 		is_sql = FALSE;
 
 		/* Hack for now. */
-		if (!strstr (uri, ".mrproject")) {
-			real_uri = g_strconcat (uri, ".mrproject", NULL);
+		if (!strstr (uri, ".mrproject") && !strstr (uri, ".planner")) {
+			real_uri = g_strconcat (uri, ".planner", NULL);
 		} else {
 			real_uri = g_strdup (uri);
 		}

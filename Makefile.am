@@ -13,6 +13,7 @@ SUBDIRS = \
 	src				\
 	data				\
 	docs				\
+	examples			\
 	$(python_DIR)			\
 	$(dotnet_DIR)
 

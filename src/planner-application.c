@@ -182,7 +182,10 @@ application_init (PlannerApplication *app)
 	priv->windows = NULL;
 	
 	priv->recent_model = egg_recent_model_new (EGG_RECENT_MODEL_SORT_MRU);
-	egg_recent_model_set_filter_mime_types (priv->recent_model, "application/x-mrproject", NULL);
+	egg_recent_model_set_filter_mime_types (priv->recent_model,
+						"application/x-planner",
+						"application/x-mrproject",
+						NULL);
 	egg_recent_model_set_filter_uri_schemes (priv->recent_model, "file", NULL);
 
 	g_object_set (priv->recent_model, "limit", 5, NULL);
