@@ -27,6 +27,6 @@
 #include "planner-window.h"
 
 GtkWidget * planner_resource_dialog_new (PlannerWindow *window,
-				    MrpResource  *resource);
+					 MrpResource  *resource);
 
 #endif /* __PLANNER_RESOURCE_DIALOG_H__ */

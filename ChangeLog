@@ -1,3 +1,11 @@
+2004-02-17  Alvaro del Castillo  <acs@barrapunto.com>
+                                                                                                   
+	* src/planner-group-dialog.c: Cleaned code commented.
+	* src/planner-resource-dialog.c: Some support for undo stuff.
+	We need to find how to undo keystroke dialogs entries.
+	If the resource is removed, the dialog is closed.
+	* src/planner-task-dialog.c: If task removed, close the dialog.
+
 2004-03-16  Richard Hult  <richard@imendio.com>
 
 	* src/planner-gantt-print.c: Fix bug #134969, to fix printing

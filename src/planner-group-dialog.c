@@ -697,25 +697,25 @@ group_dialog_cell_edited (GtkCellRendererText *cell,
 		property = "name";
 		g_value_init (&value, G_TYPE_STRING);
 		g_value_set_string (&value, new_text);
-		// mrp_object_set (group, "name", new_text, NULL);
+
 		break;
 	case GROUP_COL_MANAGER_NAME:
 		property = "manager_name";
 		g_value_init (&value, G_TYPE_STRING);
 		g_value_set_string (&value, new_text);
-		// mrp_object_set (group, "manager_name", new_text, NULL);
+
 		break;
 	case GROUP_COL_MANAGER_PHONE:
 		property = "manager_phone";
 		g_value_init (&value, G_TYPE_STRING);
 		g_value_set_string (&value, new_text);
-		// mrp_object_set (group, "manager_phone", new_text, NULL);
+
 		break;
 	case GROUP_COL_MANAGER_EMAIL:
 		property = "manager_email";
 		g_value_init (&value, G_TYPE_STRING);
 		g_value_set_string (&value, new_text);
-		// mrp_object_set (group, "manager_email", new_text, NULL);
+
 		break;
 	default:
 		g_assert_not_reached ();

@@ -47,7 +47,7 @@
 #include "planner-resource-dialog.h"
 
 typedef struct {
-	PlannerWindow  *main_window;
+	PlannerWindow *main_window;
 	MrpResource   *resource;
 	GtkWidget     *dialog;
 	GtkWidget     *name_entry;
@@ -81,57 +81,61 @@ enum {
 };
 
 
-static void  resource_dialog_name_changed_cb              (GtkWidget    *w,
-							   DialogData   *data);
-static void  resource_dialog_resource_name_changed_cb     (MrpResource  *resource,  
-							   GParamSpec   *pspec, 
-							   GtkWidget    *dialog);
+static void  resource_dialog_name_changed_cb                (GtkWidget    *w,
+							     DialogData   *data);
+static void  resource_dialog_resource_name_changed_cb       (MrpResource  *resource,  
+							     GParamSpec   *pspec, 
+							     GtkWidget    *dialog);
 static void  resource_dialog_short_name_changed_cb          (GtkWidget    *w,
-							   DialogData   *data);
+							     DialogData   *data);
 static void  resource_dialog_resource_short_name_changed_cb (MrpResource  *resource,  
-							   GParamSpec   *pspec, 
-							   GtkWidget    *dialog);
-static void  resource_dialog_type_changed_cb              (GtkWidget    *w,
-							   DialogData   *data);
-static void  resource_dialog_resource_type_changed_cb     (MrpResource  *resource,  
-							   GParamSpec   *pspec, 
-							   GtkWidget    *dialog);
-static void  resource_dialog_group_changed_cb             (GtkWidget    *w,
-							   DialogData   *data);
-static void  resource_dialog_resource_group_changed_cb    (MrpResource  *resource,  
-							   GParamSpec   *pspec, 
-							   GtkWidget    *dialog);
-static void  resource_dialog_email_changed_cb             (GtkWidget    *w,
-							   DialogData   *data);
-static void  resource_dialog_resource_email_changed_cb    (MrpResource  *resource,  
-							   GParamSpec   *pspec, 
-							   GtkWidget    *dialog);
-static void  resource_dialog_resource_cost_changed_cb     (MrpResource  *resource,  
-							   MrpProperty  *property,
-							   GValue       *value,
-							   GtkWidget    *dialog);
-static void  resource_dialog_resource_calendar_changed_cb (MrpResource  *resource,
-							   GParamSpec   *pspec,
-							   GtkWidget    *dialog);
-static void  resource_dialog_edit_calendar_clicked_cb     (GtkWidget    *button,
-							   DialogData   *data);
-static void  resource_dialog_resource_note_changed_cb     (MrpResource  *resource, 
-							   GParamSpec   *pspec, 
-							   GtkWidget    *dialog);
-static void  resource_dialog_note_changed_cb              (GtkWidget    *w,
-							   DialogData   *data);
-static void  resource_dialog_note_stamp_clicked_cb        (GtkWidget    *w,
-							   DialogData   *data);
-static void  resource_dialog_build_calendar_tree_recurse  (GtkTreeStore *store,
-							   GtkTreeIter  *parent,
-							   MrpCalendar  *calendar);
-static void  resource_dialog_build_calendar_tree          (DialogData   *data);
-static void  resource_dialog_calendar_tree_changed_cb     (MrpProject   *project,
-							   MrpCalendar  *root,
-							   GtkWidget    *dialog);
-static GtkTreeModel *resource_dialog_create_calendar_model(DialogData   *data);
-static void  resource_dialog_setup_calendar_tree_view     (DialogData   *data);
-static void  resource_dialog_update_title                 (DialogData   *data);
+							     GParamSpec   *pspec, 
+							     GtkWidget    *dialog);
+static void  resource_dialog_type_changed_cb                (GtkWidget    *w,
+							     DialogData   *data);
+static void  resource_dialog_resource_type_changed_cb       (MrpResource  *resource,  
+							     GParamSpec   *pspec, 
+							     GtkWidget    *dialog);
+static void  resource_dialog_group_changed_cb               (GtkWidget    *w,
+							     DialogData   *data);
+static void  resource_dialog_resource_group_changed_cb      (MrpResource  *resource,  
+							     GParamSpec   *pspec, 
+							     GtkWidget    *dialog);
+static void  resource_dialog_email_changed_cb               (GtkWidget    *w,
+							     DialogData   *data);
+static void  resource_dialog_resource_email_changed_cb      (MrpResource  *resource,  
+							     GParamSpec   *pspec, 
+							     GtkWidget    *dialog);
+static void  resource_dialog_resource_cost_changed_cb       (MrpResource  *resource,  
+							     MrpProperty  *property,
+							     GValue       *value,
+							     GtkWidget    *dialog);
+static void  resource_dialog_resource_calendar_changed_cb   (MrpResource  *resource,
+							     GParamSpec   *pspec,
+							     GtkWidget    *dialog);
+static void  resource_dialog_edit_calendar_clicked_cb       (GtkWidget    *button,
+							     DialogData   *data);
+static void  resource_dialog_resource_note_changed_cb       (MrpResource  *resource, 
+							     GParamSpec   *pspec, 
+							     GtkWidget    *dialog);
+static void  resource_dialog_note_changed_cb                (GtkWidget    *w,
+							     DialogData   *data);
+static void  resource_dialog_note_stamp_clicked_cb          (GtkWidget    *w,
+							     DialogData   *data);
+static void  resource_dialog_build_calendar_tree_recurse    (GtkTreeStore *store,
+							     GtkTreeIter  *parent,
+							     MrpCalendar  *calendar);
+static void  resource_dialog_build_calendar_tree            (DialogData   *data);
+static void  resource_dialog_calendar_tree_changed_cb       (MrpProject   *project,
+							     MrpCalendar  *root,
+							     GtkWidget    *dialog);
+static GtkTreeModel *resource_dialog_create_calendar_model  (DialogData   *data);
+static void  resource_dialog_setup_calendar_tree_view       (DialogData   *data);
+static void  resource_dialog_update_title                   (DialogData   *data);
+static void  resource_dialog_close_clicked_cb               (GtkWidget    *w, 
+							     DialogData   *data);
+static void  resource_dialog_resource_removed_cb            (GtkWidget    *w,
+							     DialogData   *data);
 
 
 /* Keep the dialogs here so that we can just raise the dialog if it's
@@ -140,6 +144,15 @@ static void  resource_dialog_update_title                 (DialogData   *data);
 static GHashTable *dialogs = NULL;
 
 #define DIALOG_GET_DATA(d) g_object_get_data ((GObject*)d, "data")
+
+typedef struct {
+	PlannerCmd   base;
+
+	MrpResource *resource;
+	const gchar *property;  
+	GValue      *value;
+	GValue      *old_value;
+} ResourceCmdEditProperty;
 
 static gboolean
 foreach_find_calendar (GtkTreeModel *model,
@@ -366,6 +379,77 @@ resource_dialog_close_clicked_cb (GtkWidget  *w,
 	gtk_widget_destroy (data->dialog);
 }
 
+static void
+resource_dialog_resource_removed_cb (GtkWidget  *w,
+				     DialogData *data)
+{
+	gtk_widget_destroy (data->dialog);
+}
+
+static void
+resource_cmd_edit_property_do (PlannerCmd *cmd_base)
+{
+	ResourceCmdEditProperty *cmd;
+
+	cmd = (ResourceCmdEditProperty*) cmd_base;
+
+	g_object_set_property (G_OBJECT (cmd->resource),
+			       cmd->property,
+			       cmd->value);
+}
+
+static void
+resource_cmd_edit_property_undo (PlannerCmd *cmd_base)
+{
+	ResourceCmdEditProperty *cmd;
+
+	cmd = (ResourceCmdEditProperty*) cmd_base;
+
+	g_object_set_property (G_OBJECT (cmd->resource),
+			       cmd->property,
+			       cmd->old_value);
+}
+
+static PlannerCmd *
+resource_cmd_edit_property (PlannerWindow *main_window,
+			    MrpResource   *resource,
+			    const gchar   *property,
+			    const GValue  *value)
+{
+	PlannerCmd              *cmd_base;
+	ResourceCmdEditProperty *cmd;
+
+	cmd = g_new0 (ResourceCmdEditProperty, 1);
+
+	cmd_base = (PlannerCmd*) cmd;
+
+	cmd_base->label = g_strdup (_("Edit resource property from dialog"));
+	cmd_base->do_func = resource_cmd_edit_property_do;
+	cmd_base->undo_func = resource_cmd_edit_property_undo;
+	cmd_base->free_func = NULL; /* FIXME */
+
+	cmd->property = property;
+	cmd->resource = resource;
+
+	cmd->value = g_new0 (GValue, 1);
+	g_value_init (cmd->value, G_VALUE_TYPE (value));
+	g_value_copy (value, cmd->value);
+
+	cmd->old_value = g_new0 (GValue, 1);
+	g_value_init (cmd->old_value, G_VALUE_TYPE (value));
+
+	g_object_get_property (G_OBJECT (cmd->resource),
+			       cmd->property,
+			       cmd->old_value);
+
+	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager (main_window),
+					   cmd_base);
+
+	return cmd_base;
+}
+
+
+
 static void  
 resource_dialog_resource_name_changed_cb (MrpResource *resource,  
 					  GParamSpec  *pspec, 
@@ -399,14 +483,21 @@ static void
 resource_dialog_name_changed_cb (GtkWidget  *w,
 				 DialogData *data)
 {
-	const gchar *name;
+	const gchar  *name;
+	GValue        value = { 0 };
+	/* PlannerCmd   *cmd; */
 
 	name = gtk_entry_get_text (GTK_ENTRY (w));
+
+	g_value_init (&value, G_TYPE_STRING);
+	g_value_set_string (&value, name);
 
 	g_signal_handlers_block_by_func (data->resource,
 					 resource_dialog_resource_name_changed_cb,
 					 data);
 
+	/* FIXME: activate undo support when clear how to group several keystrokes */
+	/* cmd = resource_cmd_edit_property (data->main_window, data->resource, "name", &value); */
 	g_object_set (data->resource, "name", name, NULL);
 
 	resource_dialog_update_title (data);
@@ -414,6 +505,8 @@ resource_dialog_name_changed_cb (GtkWidget  *w,
 	g_signal_handlers_unblock_by_func (data->resource,
 					   resource_dialog_resource_name_changed_cb,
 					   data);
+
+	g_value_unset (&value);
 }
 
 static void  
@@ -502,19 +595,26 @@ static void
 resource_dialog_type_changed_cb (GtkWidget  *w,
 				 DialogData *data)
 {
-	MrpResourceType type;
+	MrpResourceType  type;
+	GValue           value = { 0 };
+	PlannerCmd      *cmd; 
 
 	type = resource_dialog_option_menu_get_type_selected (data->type_menu);
+
+	g_value_init (&value, G_TYPE_INT);
+	g_value_set_int (&value, type);
 	
 	g_signal_handlers_block_by_func (data->resource,
 					 resource_dialog_resource_type_changed_cb, 
 					 data);
 
-	g_object_set (data->resource, "type", type, NULL);
+	/* g_object_set (data->resource, "type", type, NULL); */
+	cmd = resource_cmd_edit_property (data->main_window, data->resource, "type", &value);
 
 	g_signal_handlers_unblock_by_func (data->resource,
 					   resource_dialog_resource_type_changed_cb, 
 					   data);
+	g_value_unset (&value);
 }
 
 static void  
@@ -559,19 +659,26 @@ static void
 resource_dialog_group_changed_cb (GtkWidget  *w,
 				  DialogData *data)
 {
-	MrpGroup *group;
-
+	MrpGroup    *group;
+	GValue       value = { 0 };
+	PlannerCmd  *cmd;
+	
 	group = resource_dialog_option_menu_get_group_selected (data->group_menu);
+
+	g_value_init (&value, MRP_TYPE_GROUP);
+	g_value_set_object (&value, group);
 
 	g_signal_handlers_block_by_func (data->resource,
 					 resource_dialog_resource_group_changed_cb, 
 					 data);
 
-	g_object_set (data->resource, "group", group, NULL);
+	cmd = resource_cmd_edit_property (data->main_window, data->resource, "group", &value);
+	/* g_object_set (data->resource, "group", group, NULL); */
 
 	g_signal_handlers_unblock_by_func (data->resource,
 					   resource_dialog_resource_group_changed_cb, 
 					   data);
+	g_value_unset (&value);
 }
 
 static void  
@@ -579,18 +686,26 @@ resource_dialog_email_changed_cb (GtkWidget  *w,
 				  DialogData *data) 
 {
 	const gchar *email;
-
+	GValue       value = { 0 };
+	/* PlannerCmd  *cmd; */
+	
 	email = gtk_entry_get_text (GTK_ENTRY (w));
+
+	g_value_init (&value, G_TYPE_STRING);
+	g_value_set_object (&value, g_strdup (email));
 
 	g_signal_handlers_block_by_func (data->resource,
 					 resource_dialog_resource_email_changed_cb, 
 					 data);
 
+	/* FIXME: activate undo support when clear how to group several keystrokes */
+	/* cmd = resource_cmd_edit_property (data->main_window, data->resource, "email", &value); */
 	g_object_set (data->resource, "email", email, NULL);
 
 	g_signal_handlers_unblock_by_func (data->resource,
 					   resource_dialog_resource_email_changed_cb, 
 					   data);
+	g_value_unset (&value);
 }
 
 static void  
@@ -626,19 +741,27 @@ resource_dialog_cost_changed_cb (GtkWidget  *w,
 {
 	const gchar *cost;
 	gfloat       fvalue;
+	GValue       value = { 0 };
+	/* PlannerCmd  *cmd; */
 
 	cost = gtk_entry_get_text (GTK_ENTRY (w));
+
+	fvalue = g_ascii_strtod (cost, NULL);
+	g_value_init (&value, G_TYPE_FLOAT);
+	g_value_set_float (&value, fvalue);
 	
 	g_signal_handlers_block_by_func (data->resource,
 					 resource_dialog_resource_cost_changed_cb, 
 					 data);
 
-	fvalue = g_ascii_strtod (cost, NULL);
+	/* FIXME: we need custom properties undo support and group several keystrokes */
+	/* cmd = resource_cmd_edit_property (data->main_window, data->resource, "cost", &value); */
 	mrp_object_set (data->resource, "cost", fvalue, NULL);
 
 	g_signal_handlers_unblock_by_func (data->resource,
 					   resource_dialog_resource_cost_changed_cb, 
 					   data);
+	g_value_unset (&value);
 }
 
 static void  
@@ -670,6 +793,7 @@ resource_dialog_resource_cost_changed_cb (MrpResource *resource,
 					   dialog);
 }
 
+/* FIXME: undo support */
 static void  
 resource_dialog_resource_calendar_changed_cb (MrpResource *resource,  
 					      GParamSpec  *pspec, 
@@ -1093,6 +1217,12 @@ planner_resource_dialog_new (PlannerWindow *window,
 				 G_CALLBACK (resource_dialog_parent_destroy_cb),
 				 dialog,
 				 0);
+
+	g_signal_connect (resource,
+			  "removed",
+			  G_CALLBACK (resource_dialog_resource_removed_cb),
+			  data);
+
 
 	data->name_entry = glade_xml_get_widget (glade, "entry_name");
 	data->short_name_entry = glade_xml_get_widget (glade, "entry_short_name");

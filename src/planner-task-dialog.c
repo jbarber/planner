@@ -58,6 +58,8 @@ typedef struct {
 
 static void  task_dialog_close_clicked_cb           (GtkWidget           *w, 
 						     DialogData          *data);
+static void  task_dialog_task_removed_cb            (GtkWidget           *w, 
+						     DialogData          *data);
 static void  task_dialog_task_name_changed_cb       (MrpTask             *task, 
 						     GParamSpec          *pspec, 
 						     GtkWidget           *dialog);
@@ -277,6 +279,12 @@ task_dialog_setup_task_combo (GtkCombo *combo,
 
 static void
 task_dialog_close_clicked_cb (GtkWidget *w, DialogData *data)
+{
+	gtk_widget_destroy (data->dialog);
+}
+
+static void
+task_dialog_task_removed_cb (GtkWidget *w, DialogData *data)
 {
 	gtk_widget_destroy (data->dialog);
 }
@@ -1658,6 +1666,11 @@ planner_task_dialog_new (PlannerWindow *window,
 				 G_CALLBACK (task_dialog_parent_destroy_cb),
 				 dialog,
 				 0);
+
+	g_signal_connect (task,
+			  "removed",
+			  G_CALLBACK (task_dialog_task_removed_cb),
+			  data);
 
 	data->resource_list = glade_xml_get_widget (glade, "resource_list");
 	task_dialog_setup_resource_list (data);
