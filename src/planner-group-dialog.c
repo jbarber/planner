@@ -413,8 +413,6 @@ group_cmd_remove_free (PlannerCmd *cmd_base)
 	g_list_free (cmd->group_resources);
 
 	cmd->project = NULL;
-	/* We need to unref to really remove it. We need to find why ;-) */
-	g_object_unref (cmd->group);
 	g_object_unref (cmd->group);
 }
 
