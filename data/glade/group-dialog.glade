@@ -2,8 +2,10 @@
 <!DOCTYPE glade-interface SYSTEM "http://glade.gnome.org/glade-2.0.dtd">
 
 <glade-interface>
+<requires lib="gnome"/>
 
 <widget class="GtkDialog" id="dialog_group_editor">
+  <property name="border_width">5</property>
   <property name="visible">True</property>
   <property name="title" translatable="yes">Group Editor</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
@@ -11,37 +13,20 @@
   <property name="modal">False</property>
   <property name="default_width">400</property>
   <property name="default_height">300</property>
-  <property name="wmclass_name">GroupDlg</property>
-  <property name="wmclass_class">MrProject</property>
   <property name="resizable">True</property>
   <property name="destroy_with_parent">False</property>
   <property name="has_separator">False</property>
 
   <child internal-child="vbox">
     <widget class="GtkVBox" id="dialog-vbox1">
-      <property name="border_width">2</property>
       <property name="visible">True</property>
       <property name="homogeneous">False</property>
       <property name="spacing">0</property>
 
       <child internal-child="action_area">
 	<widget class="GtkHButtonBox" id="dialog-action_area1">
-	  <property name="border_width">5</property>
 	  <property name="visible">True</property>
 	  <property name="layout_style">GTK_BUTTONBOX_END</property>
-	  <property name="spacing">10</property>
-
-	  <child>
-	    <widget class="GtkButton" id="add_group">
-	      <property name="visible">True</property>
-	      <property name="can_default">True</property>
-	      <property name="can_focus">True</property>
-	      <property name="label">gtk-add</property>
-	      <property name="use_stock">True</property>
-	      <property name="relief">GTK_RELIEF_NORMAL</property>
-	      <property name="response_id">0</property>
-	    </widget>
-	  </child>
 
 	  <child>
 	    <widget class="GtkButton" id="remove_group">
@@ -50,6 +35,18 @@
 	      <property name="can_default">True</property>
 	      <property name="can_focus">True</property>
 	      <property name="label">gtk-remove</property>
+	      <property name="use_stock">True</property>
+	      <property name="relief">GTK_RELIEF_NORMAL</property>
+	      <property name="response_id">0</property>
+	    </widget>
+	  </child>
+
+	  <child>
+	    <widget class="GtkButton" id="add_group">
+	      <property name="visible">True</property>
+	      <property name="can_default">True</property>
+	      <property name="can_focus">True</property>
+	      <property name="label">gtk-add</property>
 	      <property name="use_stock">True</property>
 	      <property name="relief">GTK_RELIEF_NORMAL</property>
 	      <property name="response_id">0</property>
@@ -78,6 +75,7 @@
 
       <child>
 	<widget class="GtkScrolledWindow" id="scrolledwindow1">
+	  <property name="border_width">5</property>
 	  <property name="visible">True</property>
 	  <property name="can_focus">True</property>
 	  <property name="hscrollbar_policy">GTK_POLICY_NEVER</property>

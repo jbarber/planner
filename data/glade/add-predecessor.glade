@@ -2,30 +2,29 @@
 <!DOCTYPE glade-interface SYSTEM "http://glade.gnome.org/glade-2.0.dtd">
 
 <glade-interface>
+<requires lib="gnome"/>
 
 <widget class="GtkDialog" id="add_predecessor_dialog">
+  <property name="border_width">5</property>
   <property name="visible">True</property>
-  <property name="title" translatable="yes">New predecessor</property>
+  <property name="title" translatable="yes">Add Predecessor</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
   <property name="window_position">GTK_WIN_POS_NONE</property>
   <property name="modal">True</property>
-  <property name="resizable">True</property>
+  <property name="resizable">False</property>
   <property name="destroy_with_parent">False</property>
-  <property name="has_separator">True</property>
+  <property name="has_separator">False</property>
 
   <child internal-child="vbox">
     <widget class="GtkVBox" id="dialog-vbox1">
-      <property name="border_width">2</property>
       <property name="visible">True</property>
       <property name="homogeneous">False</property>
-      <property name="spacing">0</property>
+      <property name="spacing">2</property>
 
       <child internal-child="action_area">
 	<widget class="GtkHButtonBox" id="dialog-action_area1">
-	  <property name="border_width">5</property>
 	  <property name="visible">True</property>
 	  <property name="layout_style">GTK_BUTTONBOX_END</property>
-	  <property name="spacing">10</property>
 
 	  <child>
 	    <widget class="GtkButton" id="cancel_button">
@@ -61,27 +60,28 @@
 
       <child>
 	<widget class="GtkTable" id="table1">
-	  <property name="border_width">4</property>
+	  <property name="border_width">5</property>
 	  <property name="visible">True</property>
 	  <property name="n_rows">3</property>
 	  <property name="n_columns">2</property>
 	  <property name="homogeneous">False</property>
 	  <property name="row_spacing">6</property>
-	  <property name="column_spacing">0</property>
+	  <property name="column_spacing">12</property>
 
 	  <child>
 	    <widget class="GtkLabel" id="predecessor-name">
 	      <property name="visible">True</property>
-	      <property name="label" translatable="yes">Predecessor: </property>
-	      <property name="use_underline">False</property>
+	      <property name="label" translatable="yes">_Name:</property>
+	      <property name="use_underline">True</property>
 	      <property name="use_markup">False</property>
 	      <property name="justify">GTK_JUSTIFY_LEFT</property>
 	      <property name="wrap">False</property>
 	      <property name="selectable">False</property>
-	      <property name="xalign">1</property>
+	      <property name="xalign">0</property>
 	      <property name="yalign">0.5</property>
 	      <property name="xpad">0</property>
 	      <property name="ypad">0</property>
+	      <property name="mnemonic_widget">combo-entry1</property>
 	    </widget>
 	    <packing>
 	      <property name="left_attach">0</property>
@@ -96,16 +96,17 @@
 	  <child>
 	    <widget class="GtkLabel" id="predecessor_type">
 	      <property name="visible">True</property>
-	      <property name="label" translatable="yes">Relation type: </property>
-	      <property name="use_underline">False</property>
+	      <property name="label" translatable="yes">_Relation type:</property>
+	      <property name="use_underline">True</property>
 	      <property name="use_markup">False</property>
 	      <property name="justify">GTK_JUSTIFY_LEFT</property>
 	      <property name="wrap">False</property>
 	      <property name="selectable">False</property>
-	      <property name="xalign">1</property>
+	      <property name="xalign">0</property>
 	      <property name="yalign">0.5</property>
 	      <property name="xpad">0</property>
 	      <property name="ypad">0</property>
+	      <property name="mnemonic_widget">type_optionmenu</property>
 	    </widget>
 	    <packing>
 	      <property name="left_attach">0</property>
@@ -136,16 +137,17 @@
 	  <child>
 	    <widget class="GtkLabel" id="predecessor_lag">
 	      <property name="visible">True</property>
-	      <property name="label" translatable="yes">Lag: </property>
-	      <property name="use_underline">False</property>
+	      <property name="label" translatable="yes">_Lag:</property>
+	      <property name="use_underline">True</property>
 	      <property name="use_markup">False</property>
 	      <property name="justify">GTK_JUSTIFY_LEFT</property>
 	      <property name="wrap">False</property>
 	      <property name="selectable">False</property>
-	      <property name="xalign">1</property>
+	      <property name="xalign">0</property>
 	      <property name="yalign">0.5</property>
 	      <property name="xpad">0</property>
 	      <property name="ypad">0</property>
+	      <property name="mnemonic_widget">lag_spinbutton</property>
 	    </widget>
 	    <packing>
 	      <property name="left_attach">0</property>

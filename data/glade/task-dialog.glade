@@ -5,6 +5,7 @@
 <requires lib="gnome"/>
 
 <widget class="GtkDialog" id="task_dialog">
+  <property name="border_width">5</property>
   <property name="visible">True</property>
   <property name="title" translatable="yes"></property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
@@ -18,7 +19,7 @@
     <widget class="GtkVBox" id="dialog-vbox">
       <property name="visible">True</property>
       <property name="homogeneous">False</property>
-      <property name="spacing">0</property>
+      <property name="spacing">2</property>
 
       <child internal-child="action_area">
 	<widget class="GtkHButtonBox" id="dialog-action_area1">
@@ -47,6 +48,7 @@
 
       <child>
 	<widget class="GtkNotebook" id="notebook1">
+	  <property name="border_width">5</property>
 	  <property name="visible">True</property>
 	  <property name="can_focus">True</property>
 	  <property name="show_tabs">True</property>
@@ -68,13 +70,13 @@
 		  <property name="n_rows">6</property>
 		  <property name="n_columns">3</property>
 		  <property name="homogeneous">False</property>
-		  <property name="row_spacing">2</property>
-		  <property name="column_spacing">4</property>
+		  <property name="row_spacing">6</property>
+		  <property name="column_spacing">12</property>
 
 		  <child>
 		    <widget class="GtkLabel" id="label104">
 		      <property name="visible">True</property>
-		      <property name="label" translatable="yes">Na_me:</property>
+		      <property name="label" translatable="yes">_Name:</property>
 		      <property name="use_underline">True</property>
 		      <property name="use_markup">False</property>
 		      <property name="justify">GTK_JUSTIFY_LEFT</property>
@@ -174,7 +176,7 @@
 		  <child>
 		    <widget class="GtkLabel" id="label108">
 		      <property name="visible">True</property>
-		      <property name="label" translatable="yes">Pr_iority:</property>
+		      <property name="label" translatable="yes">_Priority:</property>
 		      <property name="use_underline">True</property>
 		      <property name="use_markup">False</property>
 		      <property name="justify">GTK_JUSTIFY_LEFT</property>
@@ -569,7 +571,7 @@
 
 	  <child>
 	    <widget class="GtkScrolledWindow" id="scrolledwindow2">
-	      <property name="border_width">4</property>
+	      <property name="border_width">12</property>
 	      <property name="visible">True</property>
 	      <property name="can_focus">True</property>
 	      <property name="hscrollbar_policy">GTK_POLICY_NEVER</property>
@@ -615,13 +617,13 @@
 
 	  <child>
 	    <widget class="GtkVBox" id="vbox101">
+	      <property name="border_width">12</property>
 	      <property name="visible">True</property>
 	      <property name="homogeneous">False</property>
-	      <property name="spacing">0</property>
+	      <property name="spacing">6</property>
 
 	      <child>
 		<widget class="GtkScrolledWindow" id="scrolledwindow4">
-		  <property name="border_width">4</property>
 		  <property name="visible">True</property>
 		  <property name="can_focus">True</property>
 		  <property name="hscrollbar_policy">GTK_POLICY_NEVER</property>
@@ -649,21 +651,9 @@
 
 	      <child>
 		<widget class="GtkHButtonBox" id="hbuttonbox2">
-		  <property name="border_width">4</property>
 		  <property name="visible">True</property>
 		  <property name="layout_style">GTK_BUTTONBOX_END</property>
 		  <property name="spacing">6</property>
-
-		  <child>
-		    <widget class="GtkButton" id="add_predecessor_button">
-		      <property name="visible">True</property>
-		      <property name="can_default">True</property>
-		      <property name="can_focus">True</property>
-		      <property name="label">gtk-add</property>
-		      <property name="use_stock">True</property>
-		      <property name="relief">GTK_RELIEF_NORMAL</property>
-		    </widget>
-		  </child>
 
 		  <child>
 		    <widget class="GtkButton" id="remove_predecessor_button">
@@ -671,6 +661,17 @@
 		      <property name="can_default">True</property>
 		      <property name="can_focus">True</property>
 		      <property name="label">gtk-remove</property>
+		      <property name="use_stock">True</property>
+		      <property name="relief">GTK_RELIEF_NORMAL</property>
+		    </widget>
+		  </child>
+
+		  <child>
+		    <widget class="GtkButton" id="add_predecessor_button">
+		      <property name="visible">True</property>
+		      <property name="can_default">True</property>
+		      <property name="can_focus">True</property>
+		      <property name="label">gtk-add</property>
 		      <property name="use_stock">True</property>
 		      <property name="relief">GTK_RELIEF_NORMAL</property>
 		    </widget>
@@ -710,13 +711,13 @@
 
 	  <child>
 	    <widget class="GtkVBox" id="vbox100">
+	      <property name="border_width">12</property>
 	      <property name="visible">True</property>
 	      <property name="homogeneous">False</property>
-	      <property name="spacing">2</property>
+	      <property name="spacing">6</property>
 
 	      <child>
 		<widget class="GtkScrolledWindow" id="scrolledwindow5">
-		  <property name="border_width">4</property>
 		  <property name="visible">True</property>
 		  <property name="can_focus">True</property>
 		  <property name="hscrollbar_policy">GTK_POLICY_AUTOMATIC</property>
@@ -751,7 +752,6 @@
 
 	      <child>
 		<widget class="GtkHButtonBox" id="hbuttonbox1">
-		  <property name="border_width">4</property>
 		  <property name="visible">True</property>
 		  <property name="layout_style">GTK_BUTTONBOX_END</property>
 		  <property name="spacing">0</property>
@@ -797,7 +797,7 @@
 			      <child>
 				<widget class="GtkLabel" id="label100">
 				  <property name="visible">True</property>
-				  <property name="label" translatable="yes">Insert time stamp</property>
+				  <property name="label" translatable="yes">_Insert Time Stamp</property>
 				  <property name="use_underline">True</property>
 				  <property name="use_markup">False</property>
 				  <property name="justify">GTK_JUSTIFY_LEFT</property>
