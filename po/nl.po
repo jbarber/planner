@@ -1,13 +1,13 @@
 # Mrproject Dutch translation.
 # Copyright (C) 2003 THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# Jan-Willem Harmanny <jwharmanny@hotmail.com>, 2003.
+# Jan-Willem Harmanny <jwharmanny@hotmail.com>, 2003-2004.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: mrproject cvs\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-07-06 04:53+0200\n"
+"POT-Creation-Date: 2004-10-14 04:03+0200\n"
 "PO-Revision-Date: 2003-02-03 23:06+0100\n"
 "Last-Translator: Jan-Willem Harmanny <jwharmanny@hotmail.com>\n"
 "Language-Team: Dutch <nl@li.org>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: data/glade/add-predecessor.glade.h:1 data/glade/calendar-dialog.glade.h:4
-#: data/glade/html-output.glade.h:2 data/glade/new-property.glade.h:1
+#: data/glade/eds.glade.h:1 data/glade/new-property.glade.h:1
 #: data/glade/project-properties.glade.h:1
 #: data/glade/resource-dialog.glade.h:1
 #: data/glade/resource-input-dialog.glade.h:1 data/glade/sql.glade.h:1
@@ -181,27 +181,51 @@ msgstr "Naam van de nieuwe _kalender:"
 msgid "_New..."
 msgstr "_Nieuw..."
 
+#: data/glade/eds.glade.h:2
+msgid "Loading resource data"
+msgstr "Laden van hulpbron-gegevens"
+
+#: data/glade/eds.glade.h:3
+msgid "Search"
+msgstr "Zoeken"
+
+#: data/glade/eds.glade.h:4
+msgid "Select All"
+msgstr "Alles selecteren"
+
+#: data/glade/eds.glade.h:5
+msgid "Select group"
+msgstr "Selecteer een groep"
+
+#: data/glade/eds.glade.h:6
+msgid "Unselect All"
+msgstr "Alles deselecteren"
+
+#: data/glade/eds.glade.h:7
+msgid "dialog1"
+msgstr "dialoog1"
+
 #: data/glade/group-dialog.glade.h:1
 msgid "Group Editor"
 msgstr "Groep bewerken"
 
-#: data/glade/html-output.glade.h:3
+#: data/glade/html-output.glade.h:2
 msgid "<b>Save to file</b>"
 msgstr "<b>Opslaan in bestand</b>"
 
-#: data/glade/html-output.glade.h:4
+#: data/glade/html-output.glade.h:3
 msgid "Export to HTML"
 msgstr "Exporteren naar HTML"
 
-#: data/glade/html-output.glade.h:5
+#: data/glade/html-output.glade.h:4
 msgid "Local file:"
 msgstr "Lokaal bestand:"
 
-#: data/glade/html-output.glade.h:6
+#: data/glade/html-output.glade.h:5
 msgid "Save to HTML File"
 msgstr "Opslaan naar HTML bestand"
 
-#: data/glade/html-output.glade.h:7
+#: data/glade/html-output.glade.h:6
 msgid "Web location:"
 msgstr "Web lokatie:"
 
@@ -372,7 +396,7 @@ msgstr "_Afgerond:"
 msgid "Predecessors"
 msgstr "Voorgangers"
 
-#: data/glade/task-dialog.glade.h:9 src/planner-resource-view.c:401
+#: data/glade/task-dialog.glade.h:9 src/planner-resource-view.c:431
 msgid "Resources"
 msgstr "Hulpbronnen"
 
@@ -401,13 +425,21 @@ msgid "_Work:"
 msgstr "_Werk:"
 
 #. day unit variant accepted in input
-#: data/glade/task-dialog.glade.h:17 src/planner-task-tree.c:3314
+#: data/glade/task-dialog.glade.h:17 src/planner-task-tree.c:3328
 msgid "days"
 msgstr "dagen"
 
 #: data/glade/task-input-dialog.glade.h:2
 msgid "Insert Task"
 msgstr "Taak invoegen"
+
+#: data/mime/planner.keys.in.h:1
+msgid "Documents/Project Management"
+msgstr "Documenten/Project Management"
+
+#: data/mime/planner.keys.in.h:2
+msgid "Project Plan"
+msgstr "Project plan"
 
 #: data/mime/planner.xml.in.h:1
 msgid "Planner project plan"
@@ -420,458 +452,6 @@ msgstr "Planner Project Management"
 #: data/planner.desktop.in.h:2
 msgid "Project Management"
 msgstr "Project Management"
-
-#: data/ui/gantt-view.ui.h:1 data/ui/task-view.ui.h:1
-msgid "I_ndent Task"
-msgstr "Taak i_nspringen"
-
-#: data/ui/gantt-view.ui.h:2 data/ui/task-view.ui.h:2
-msgid "In_sert Tasks..."
-msgstr "Taken _invoegen..."
-
-#: data/ui/gantt-view.ui.h:3 data/ui/task-view.ui.h:3
-#: src/planner-application.c:83
-msgid "Indent"
-msgstr "Inspringen"
-
-#: data/ui/gantt-view.ui.h:4 data/ui/task-view.ui.h:4
-msgid "Indent the selected tasks"
-msgstr "De geselecteerde taken inspringen"
-
-#: data/ui/gantt-view.ui.h:5 data/ui/resource-view.ui.h:6
-#: data/ui/task-view.ui.h:5 src/planner-application.c:55
-#: src/planner-application.c:111
-msgid "Insert"
-msgstr "Invoegen"
-
-#: data/ui/gantt-view.ui.h:6 data/ui/task-view.ui.h:6
-msgid "Insert a new task"
-msgstr "Nieuwe taak invoegen"
-
-#: data/ui/gantt-view.ui.h:7 data/ui/task-view.ui.h:7
-#: src/planner-application.c:76
-msgid "Link"
-msgstr "Koppelen"
-
-#: data/ui/gantt-view.ui.h:8 data/ui/task-view.ui.h:8
-msgid "Link the selected tasks"
-msgstr "De geselecteerde taken koppelen"
-
-#: data/ui/gantt-view.ui.h:9 data/ui/task-view.ui.h:9
-msgid "Move Task Do_wn"
-msgstr "Om_laag"
-
-#: data/ui/gantt-view.ui.h:10 data/ui/task-view.ui.h:10
-msgid "Move Task _Up"
-msgstr "Om_hoog"
-
-#: data/ui/gantt-view.ui.h:11 data/ui/task-view.ui.h:11
-#: src/planner-application.c:104
-msgid "Move down"
-msgstr "Omlaag"
-
-#: data/ui/gantt-view.ui.h:12 data/ui/task-view.ui.h:12
-msgid "Move the selected tasks downwards"
-msgstr "De geselecteerde taken omlaag verplaatsen"
-
-#: data/ui/gantt-view.ui.h:13 data/ui/task-view.ui.h:13
-msgid "Move the selected tasks upwards"
-msgstr "De geselecteerde taken omhoog verplaatsen"
-
-#: data/ui/gantt-view.ui.h:14 data/ui/task-view.ui.h:14
-#: src/planner-application.c:97
-msgid "Move up"
-msgstr "Omhoog"
-
-#: data/ui/gantt-view.ui.h:15 data/ui/resource-view.ui.h:8
-#: data/ui/task-view.ui.h:15 src/planner-application.c:62
-#: src/planner-application.c:118
-msgid "Remove"
-msgstr "Verwijderen"
-
-#: data/ui/gantt-view.ui.h:16 data/ui/task-view.ui.h:16
-msgid "Remove the selected tasks"
-msgstr "De geselecteerde taken verwijderen"
-
-#: data/ui/gantt-view.ui.h:17 data/ui/task-view.ui.h:17
-msgid "Reset _Constraint"
-msgstr "_Voorwaarde herinitialiseren"
-
-#: data/ui/gantt-view.ui.h:18 data/ui/resource-view.ui.h:10
-#: data/ui/task-view.ui.h:18 data/ui/time-table-view.ui.h:1
-msgid "Select _All"
-msgstr "_Alles selecteren"
-
-#: data/ui/gantt-view.ui.h:19 data/ui/resource-view.ui.h:11
-#: data/ui/task-view.ui.h:19 data/ui/time-table-view.ui.h:2
-msgid "Select all tasks"
-msgstr "Alle taken selecteren"
-
-#: data/ui/gantt-view.ui.h:20
-msgid "Test"
-msgstr "Test"
-
-#: data/ui/gantt-view.ui.h:21 data/ui/task-view.ui.h:20
-msgid "Unin_dent Task"
-msgstr "Niet _ingesprongen taak"
-
-#: data/ui/gantt-view.ui.h:22 data/ui/task-view.ui.h:21
-#: src/planner-application.c:90
-msgid "Unindent"
-msgstr "Niet inspringen"
-
-#: data/ui/gantt-view.ui.h:23 data/ui/task-view.ui.h:22
-msgid "Unindent the selected tasks"
-msgstr "De geselecteerde taken niet inspringen"
-
-#: data/ui/gantt-view.ui.h:24 data/ui/task-view.ui.h:23
-#: src/planner-application.c:69
-msgid "Unlink"
-msgstr "Ontkoppelen"
-
-#: data/ui/gantt-view.ui.h:25 data/ui/task-view.ui.h:24
-msgid "Unlink the selected tasks"
-msgstr "De geselecteerde taken ontkoppelen"
-
-#: data/ui/gantt-view.ui.h:26
-msgid "Zoom In"
-msgstr "Inzoomen"
-
-#: data/ui/gantt-view.ui.h:27
-msgid "Zoom Out"
-msgstr "Uitzoomen"
-
-#: data/ui/gantt-view.ui.h:28
-msgid "Zoom To Fit"
-msgstr "Zoomen naar passend formaat"
-
-#: data/ui/gantt-view.ui.h:29
-msgid "Zoom To _Fit"
-msgstr "Zoomen naar passend _formaat"
-
-#: data/ui/gantt-view.ui.h:30
-msgid "Zoom _Out"
-msgstr "_Uitzoomen"
-
-#: data/ui/gantt-view.ui.h:31 data/ui/time-table-view.ui.h:3
-msgid "Zoom in"
-msgstr "Inzoomen"
-
-#: data/ui/gantt-view.ui.h:32 data/ui/time-table-view.ui.h:4
-msgid "Zoom out"
-msgstr "Uitzoomen"
-
-#: data/ui/gantt-view.ui.h:33 data/ui/time-table-view.ui.h:6
-msgid "Zoom to fit the entire project"
-msgstr "Zoomen naar volledig overzicht project"
-
-#: data/ui/gantt-view.ui.h:34
-msgid "_Edit Task Properties..."
-msgstr "Taak eigenschappen be_werken..."
-
-#: data/ui/gantt-view.ui.h:35 data/ui/task-view.ui.h:27
-msgid "_Highlight Critical Tasks"
-msgstr "Kritieke taken op_lichten"
-
-#: data/ui/gantt-view.ui.h:36 data/ui/task-view.ui.h:28
-msgid "_Insert Task"
-msgstr "Taak _invoegen"
-
-#: data/ui/gantt-view.ui.h:37 data/ui/task-view.ui.h:29
-msgid "_Link Tasks"
-msgstr "Taken _koppelen"
-
-#: data/ui/gantt-view.ui.h:38 data/ui/task-view.ui.h:30
-msgid "_Remove Task"
-msgstr "Taak _verwijderen"
-
-#: data/ui/gantt-view.ui.h:39 data/ui/task-view.ui.h:31
-msgid "_Unlink Task"
-msgstr "Taak _ontkoppelen"
-
-#: data/ui/gantt-view.ui.h:40
-msgid "_Zoom In"
-msgstr "_Inzoomen"
-
-#: data/ui/html-plugin.ui.h:1
-msgid "HTML"
-msgstr "HTML"
-
-#: data/ui/main-window.ui.h:1
-msgid "About this application"
-msgstr "Info over deze toepassing"
-
-#: data/ui/main-window.ui.h:2
-msgid "C_ut"
-msgstr "K_nippen"
-
-#: data/ui/main-window.ui.h:3
-msgid "Clear"
-msgstr "Wissen"
-
-#: data/ui/main-window.ui.h:4
-msgid "Clear the selection"
-msgstr "De selectie leegmaken"
-
-#: data/ui/main-window.ui.h:5
-msgid "Close the current file"
-msgstr "Het huidige bestand sluiten"
-
-#: data/ui/main-window.ui.h:6
-msgid "Copy the selection"
-msgstr "Selectie kopiëren"
-
-#: data/ui/main-window.ui.h:7
-msgid "Create a new project"
-msgstr "Een nieuw project maken"
-
-#: data/ui/main-window.ui.h:8
-msgid "Cut the selection"
-msgstr "Selectie knippen"
-
-#: data/ui/main-window.ui.h:9
-msgid "E_xport To"
-msgstr "E_xporteren naar"
-
-#: data/ui/main-window.ui.h:10
-msgid "Edit Day _Types"
-msgstr "Dag_typen bewerken"
-
-#: data/ui/main-window.ui.h:11
-msgid "Edit Project _Phases"
-msgstr "_Projectfasen bewerken"
-
-#: data/ui/main-window.ui.h:12
-msgid "Edit the project properties"
-msgstr "De projecteigenschappen bewerken"
-
-#: data/ui/main-window.ui.h:13
-msgid "Exit the program"
-msgstr "Programma afsluiten"
-
-#: data/ui/main-window.ui.h:14
-msgid "New"
-msgstr "Nieuw"
-
-#: data/ui/main-window.ui.h:15
-msgid "New..."
-msgstr "Nieuw..."
-
-#: data/ui/main-window.ui.h:16
-msgid "Open"
-msgstr "Openen"
-
-#: data/ui/main-window.ui.h:17
-msgid "Open a project"
-msgstr "Een project openen"
-
-#: data/ui/main-window.ui.h:18
-msgid "Paste the clipboard"
-msgstr "Plakken vanuit klembord"
-
-#: data/ui/main-window.ui.h:19
-msgid "Print"
-msgstr "Afdrukken"
-
-#: data/ui/main-window.ui.h:20
-msgid "Print Pre_view"
-msgstr "Afdruk_voorbeeld"
-
-#: data/ui/main-window.ui.h:21
-msgid "Print preview"
-msgstr "Afdruk_voorbeeld"
-
-#: data/ui/main-window.ui.h:22
-msgid "Print preview of the current project"
-msgstr "Afdrukvoorbeeld van het huidige project"
-
-#: data/ui/main-window.ui.h:23
-msgid "Print the current project"
-msgstr "Het huidige project afdrukken"
-
-#: data/ui/main-window.ui.h:24 src/planner-cmd-manager.c:241
-msgid "Redo"
-msgstr "Opnieuw"
-
-#: data/ui/main-window.ui.h:25
-msgid "Redo the undone action"
-msgstr "De ongedaan gemaakte actie opnieuw uitvoeren"
-
-#: data/ui/main-window.ui.h:26
-msgid "Save"
-msgstr "Opslaan"
-
-#: data/ui/main-window.ui.h:27
-msgid "Save _As..."
-msgstr "Opslaan _als..."
-
-#: data/ui/main-window.ui.h:28
-msgid "Save the current project"
-msgstr "Het huidige project opslaan"
-
-#: data/ui/main-window.ui.h:29
-msgid "Save the current project with a different name"
-msgstr "Het huidige project opslaan onder een andere naam"
-
-#: data/ui/main-window.ui.h:30
-msgid "Show the Planner User Guide"
-msgstr "De Planner gebruikershandleiding weergeven"
-
-#: data/ui/main-window.ui.h:31 src/planner-cmd-manager.c:229
-msgid "Undo"
-msgstr "Ongedaan maken"
-
-#: data/ui/main-window.ui.h:32
-msgid "Undo the last action"
-msgstr "Laatste bewerking ongedaan maken"
-
-#: data/ui/main-window.ui.h:33
-msgid "_About"
-msgstr "In_fo"
-
-#: data/ui/main-window.ui.h:34
-msgid "_Actions"
-msgstr "_Acties"
-
-#: data/ui/main-window.ui.h:35
-msgid "_Close"
-msgstr "Sl_uiten"
-
-#: data/ui/main-window.ui.h:36
-msgid "_Copy"
-msgstr "_Kopiëren"
-
-#: data/ui/main-window.ui.h:37
-msgid "_Edit"
-msgstr "Be_werken"
-
-#: data/ui/main-window.ui.h:38
-msgid "_Edit Project Properties"
-msgstr "Project _eigenschappen"
-
-#: data/ui/main-window.ui.h:39
-msgid "_File"
-msgstr "_Bestand"
-
-#: data/ui/main-window.ui.h:40
-msgid "_Help"
-msgstr "_Hulp"
-
-#: data/ui/main-window.ui.h:41
-msgid "_Manage Calendars"
-msgstr "Kalenders _beheren"
-
-#: data/ui/main-window.ui.h:42
-msgid "_New Project"
-msgstr "_Nieuw project"
-
-#: data/ui/main-window.ui.h:43
-msgid "_Open..."
-msgstr "_Openen..."
-
-#: data/ui/main-window.ui.h:44
-msgid "_Paste"
-msgstr "_Plakken"
-
-#: data/ui/main-window.ui.h:45
-msgid "_Print..."
-msgstr "Af_drukken..."
-
-#: data/ui/main-window.ui.h:46
-msgid "_Project"
-msgstr "_Project"
-
-#: data/ui/main-window.ui.h:47
-msgid "_Quit"
-msgstr "A_fsluiten"
-
-#: data/ui/main-window.ui.h:48
-msgid "_Redo"
-msgstr "O_pnieuw"
-
-#: data/ui/main-window.ui.h:49 src/planner-window.c:1247
-msgid "_Save"
-msgstr "Op_slaan"
-
-#: data/ui/main-window.ui.h:50
-msgid "_Undo"
-msgstr "_Ongedaan maken"
-
-#: data/ui/main-window.ui.h:51
-msgid "_User Guide"
-msgstr "_Gebruikershandleiding"
-
-#: data/ui/main-window.ui.h:52
-msgid "_View"
-msgstr "Beel_d"
-
-#: data/ui/python-plugin.ui.h:1
-msgid "Execute a Python script"
-msgstr "Een Python script uitvoeren"
-
-#: data/ui/resource-view.ui.h:1
-msgid "Edit _Custom Properties..."
-msgstr "_Aangepaste eigenschappen bewerken..."
-
-#: data/ui/resource-view.ui.h:2
-msgid "Edit _Groups"
-msgstr "_Groepen bewerken"
-
-#: data/ui/resource-view.ui.h:3
-msgid "Edit resource groups"
-msgstr "Hulpbron groepen bewerken"
-
-#: data/ui/resource-view.ui.h:4
-msgid "Groups"
-msgstr "Groepen"
-
-#: data/ui/resource-view.ui.h:5
-msgid "In_sert Resources..."
-msgstr "Hulpbronnen tu_ssenvoegen..."
-
-#: data/ui/resource-view.ui.h:7
-msgid "Insert a new resource"
-msgstr "Nieuwe hulpbron invoegen"
-
-#: data/ui/resource-view.ui.h:9
-msgid "Remove the selected resource"
-msgstr "Geselecteerde hulpbron verwijderen"
-
-#: data/ui/resource-view.ui.h:12
-msgid "_Edit Resource Properties..."
-msgstr "Hulpbron eigenschappen be_werken..."
-
-#: data/ui/resource-view.ui.h:13
-msgid "_Insert Resource"
-msgstr "Hulpbron _tussenvoegen"
-
-#: data/ui/resource-view.ui.h:14
-msgid "_Remove Resource"
-msgstr "Hulpbron _verwijderen"
-
-#: data/ui/sql-plugin.ui.h:1
-msgid "Open from Database..."
-msgstr "Openen van database..."
-
-#: data/ui/sql-plugin.ui.h:2
-msgid "Save to Database..."
-msgstr "Opslaan naar database..."
-
-#: data/ui/task-view.ui.h:25
-msgid "_Edit Custom Properties..."
-msgstr "Aan_gepaste eigenschappen bewerken..."
-
-#: data/ui/task-view.ui.h:26
-msgid "_Edit Task"
-msgstr "Taak b_ewerken..."
-
-#: data/ui/time-table-view.ui.h:5
-msgid "Zoom to fit"
-msgstr "Zoomen naar passend formaat"
-
-#: data/ui/xml-planner-plugin.ui.h:1
-msgid "Planner 0.11 Format"
-msgstr "Planner 0.11 formaat"
 
 #: libegg/recent-files/egg-recent-vfs-utils.c:90
 msgid " (invalid Unicode)"
@@ -901,6 +481,10 @@ msgstr "Gebruiksbasis"
 msgid "Use day from base calendar"
 msgstr "Gebruik dag van basiskalender"
 
+#: libplanner/mrp-file-module.c:115
+msgid "This format does not support reading"
+msgstr "Dit formaat kan niet worden gelezen"
+
 #: libplanner/mrp-parser.c:1062 libplanner/mrp-parser.c:1157
 msgid "Could not create XML tree"
 msgstr "Kan de XML boomstructuur niet aanmaken"
@@ -909,31 +493,36 @@ msgstr "Kan de XML boomstructuur niet aanmaken"
 msgid "Could not write XML file"
 msgstr "Kan XML bestand niet schrijven"
 
-#: libplanner/mrp-project.c:440 src/planner-group-dialog.c:840
+#: libplanner/mrp-project.c:437 src/planner-group-dialog.c:837
 msgid "Default"
 msgstr "Standaard"
 
-#: libplanner/mrp-project.c:748
+#: libplanner/mrp-project.c:716
+#, c-format
+msgid "Invalid URI: '%s'"
+msgstr "Ongeldige URI: '%s'"
+
+#: libplanner/mrp-project.c:755
 #, c-format
 msgid "Couldn't find a suitable file module for loading '%s'"
 msgstr "Kan geen passende bestandsmodule vinden voor het laden van '%s'"
 
-#: libplanner/mrp-project.c:769 libplanner/mrp-project.c:1053
+#: libplanner/mrp-project.c:776 libplanner/mrp-project.c:1060
 msgid "No support for SQL storage built into this version of Planner."
 msgstr ""
 "Er is geen ondersteuning voor SQL opslag in deze versie van Planner "
 "ingebouwd."
 
-#: libplanner/mrp-project.c:806
+#: libplanner/mrp-project.c:813
 msgid "Invalid URI."
 msgstr "Ongeldige URI."
 
-#: libplanner/mrp-project.c:947
+#: libplanner/mrp-project.c:954
 #, c-format
 msgid "Unable to find file writer identified by '%s'"
 msgstr "Kan bestandschrijver met de naam '%s' niet vinden"
 
-#: libplanner/mrp-project.c:1010
+#: libplanner/mrp-project.c:1017
 msgid "Couldn't find a suitable file module for loading project"
 msgstr "Kan geen passende bestandsmodule vinden voor het laden van dit project"
 
@@ -961,25 +550,26 @@ msgstr "Datum"
 msgid "Duration"
 msgstr "Tijdsduur"
 
-#: libplanner/mrp-property.c:377 src/planner-task-view.c:279
+#: libplanner/mrp-property.c:377 src/planner-resource-view.c:1287
+#: src/planner-task-view.c:283
 msgid "Cost"
 msgstr "Kosten"
 
-#: libplanner/mrp-property.c:380 src/planner-project-properties.c:734
+#: libplanner/mrp-property.c:380 src/planner-project-properties.c:733
 msgid "None"
 msgstr "Geen"
 
 #. Give up.
-#: libplanner/mrp-sql.c:294 src/planner-sql-plugin.c:173
+#: libplanner/mrp-sql.c:294 src/planner-sql-plugin.c:198
 msgid "Invalid Unicode"
 msgstr "Ongeldige Unicode"
 
-#: libplanner/mrp-sql.c:2175
+#: libplanner/mrp-sql.c:2177
 #, c-format
 msgid "Connection to database '%s' failed.\n"
 msgstr "Verbinding met database '%s' mislukt.\n"
 
-#: libplanner/mrp-sql.c:2180
+#: libplanner/mrp-sql.c:2182
 #, c-format
 msgid ""
 "Connection to database '%s' failed.\n"
@@ -988,12 +578,12 @@ msgstr ""
 "Verbinding met database '%s' mislukt.\n"
 "%s"
 
-#: libplanner/mrp-sql.c:2188
+#: libplanner/mrp-sql.c:2190
 #, c-format
 msgid "BEGIN command failed %s."
 msgstr "BEGIN commando mislukt %s."
 
-#: libplanner/mrp-sql.c:2354
+#: libplanner/mrp-sql.c:2356
 #, c-format
 msgid ""
 "The project '%s' has been changed by the user '%s' since you opened it. Do "
@@ -1002,7 +592,7 @@ msgstr ""
 "Het project '%s' is veranderd door de gebruiker '%s' sinds u het hebt "
 "geopend. Wilt u het toch opslaan?"
 
-#: libplanner/mrp-sql.c:3620 src/planner-sql-plugin.c:338
+#: libplanner/mrp-sql.c:3622 src/planner-sql-plugin.c:663
 #, c-format
 msgid "Connection to database '%s' failed."
 msgstr "Verbinding met database '%s' mislukt."
@@ -1019,32 +609,59 @@ msgstr "Ongeldige SQL URI (ongeldig project id)."
 msgid "Invalid SQL URI (no database name specified)."
 msgstr "Ongeldige SQL URI (geen database naam gespecificeerd)."
 
-#: libplanner/mrp-task.c:1045
+#: libplanner/mrp-task.c:1048
 msgid ""
 "Could not add a predecessor relation, because the tasks are already related."
 msgstr ""
 "Kan geen voorganger-relatie toevoegen, omdat de taken al relaties hebben."
 
-#: libplanner/mrp-task-manager.c:1851
-msgid "Can not add a predecessor relation between a task and its ancestor."
-msgstr ""
-"Kan geen voorganger-relatie toevoegen tussen een taak en zijn voorganger."
+#: libplanner/mrp-task-manager.c:2050
+msgid "Cannot add a predecessor, because it would result in a loop."
+msgstr "Kan geen voorganger toevoegen, omdat dat een lus zou veroorzaken."
 
-#: libplanner/mrp-task-manager.c:1860 libplanner/mrp-task-manager.c:1868
-msgid "Can not add a predecessor, because it would result in a loop."
-msgstr "Kan geen voorganger toevoegen, omdat het een lus veroorzaakt."
+#: libplanner/mrp-task-manager.c:2096
+msgid "Cannot move the task, because it would result in a loop."
+msgstr "Kan de taak niet verplaatsen, omdat dat een lus zou veroorzaken."
 
-#: libplanner/mrp-task-manager.c:1903
-msgid "Can not move the task, since it would result in a loop."
-msgstr "Kan de taak niet verplaatsen, omdat het een lus veroorzaakt."
-
-#: libplanner/mrp-xsl.c:102
+#: libplanner/mrp-xsl.c:106
 msgid "Export to HTML failed"
 msgstr "Exporteren naar HTML mislukt"
 
-#: libplanner/mrp-xsl.c:166
+#: libplanner/mrp-xsl.c:172
 msgid "Export to Planner pre-0.12 format failed"
 msgstr "Exporteren naar Planner pre-0.12 formaat mislukt"
+
+#: src/planner-application.c:55 src/planner-application.c:111
+msgid "Insert"
+msgstr "Invoegen"
+
+#: src/planner-application.c:62 src/planner-application.c:118
+msgid "Remove"
+msgstr "Verwijderen"
+
+#: src/planner-application.c:69
+msgid "Unlink"
+msgstr "Ontkoppelen"
+
+#: src/planner-application.c:76
+msgid "Link"
+msgstr "Koppelen"
+
+#: src/planner-application.c:83
+msgid "Indent"
+msgstr "Inspringen"
+
+#: src/planner-application.c:90
+msgid "Unindent"
+msgstr "Niet inspringen"
+
+#: src/planner-application.c:97
+msgid "Move up"
+msgstr "Omhoog"
+
+#: src/planner-application.c:104
+msgid "Move down"
+msgstr "Omlaag"
 
 #: src/planner-application.c:125
 msgid "Edit"
@@ -1094,15 +711,23 @@ msgstr "Annuleren"
 msgid "OK"
 msgstr "OK"
 
-#: src/planner-cmd-manager.c:227
+#: src/planner-cmd-manager.c:225
 #, c-format
 msgid "Undo '%s'"
 msgstr "Ongedaan maken '%s'"
 
-#: src/planner-cmd-manager.c:239
+#: src/planner-cmd-manager.c:227
+msgid "Undo"
+msgstr "Ongedaan maken"
+
+#: src/planner-cmd-manager.c:237
 #, c-format
 msgid "Redo '%s'"
 msgstr "Opnieuw '%s'"
+
+#: src/planner-cmd-manager.c:239
+msgid "Redo"
+msgstr "Opnieuw"
 
 #: src/planner-day-type-dialog.c:491
 #, c-format
@@ -1154,6 +779,55 @@ msgstr "%H:%M"
 msgid "Edit default week"
 msgstr "Standaard week bewerken"
 
+#: src/planner-eds-plugin.c:166
+msgid "EDS"
+msgstr "EDS"
+
+#: src/planner-eds-plugin.c:167
+msgid "Import resources from Evolution Data Server"
+msgstr "Hulpbronnen importeren van Evolution Data Server"
+
+#: src/planner-eds-plugin.c:388 src/planner-gantt-print.c:190
+#: src/planner-group-dialog.c:813 src/planner-property-dialog.c:481
+#: src/planner-resource-view.c:1170 src/planner-task-dialog.c:2536
+#: src/planner-task-dialog.c:2625 src/planner-task-view.c:278
+#: src/planner-ttable-print.c:108
+msgid "Name"
+msgstr "Naam"
+
+#: src/planner-eds-plugin.c:408 src/planner-resource-view.c:1265
+msgid "Email"
+msgstr "E-mail"
+
+#: src/planner-eds-plugin.c:429
+msgid "Import"
+msgstr "Importeren"
+
+#: src/planner-eds-plugin.c:439
+msgid "Photo"
+msgstr "Foto"
+
+#: src/planner-eds-plugin.c:655
+msgid "Imported from Evolution Data Server"
+msgstr "Geimporteerd vanuit Evolution Data Server"
+
+#: src/planner-eds-plugin.c:656
+msgid "Updated from Evolution Data Server"
+msgstr "Bijgewerkt vanuit Evolution Data Server"
+
+#: src/planner-eds-plugin.c:841
+msgid "Query cancelled."
+msgstr "Query geannuleerd."
+
+#: src/planner-eds-plugin.c:902
+msgid "Evolution Data Server UID"
+msgstr "Evolution Data Server UID"
+
+#: src/planner-eds-plugin.c:903
+msgid "Identifier used by Evolution Data Server for resources"
+msgstr ""
+"Identificatie die door Evolution Data Server voor hulpbronnen wordt gebruikt"
+
 #: src/planner-format.c:141
 #, c-format
 msgid "%dd %dh"
@@ -1201,29 +875,22 @@ msgstr "%d %b %Y"
 msgid "Project start"
 msgstr "Project start"
 
-#: src/planner-gantt-print.c:189 src/planner-group-dialog.c:816
-#: src/planner-property-dialog.c:481 src/planner-resource-view.c:1152
-#: src/planner-task-dialog.c:2534 src/planner-task-dialog.c:2623
-#: src/planner-task-view.c:274 src/planner-ttable-print.c:108
-msgid "Name"
-msgstr "Naam"
-
-#: src/planner-gantt-print.c:197 src/planner-resource-dialog.c:1895
-#: src/planner-resource-view.c:729 src/planner-resource-view.c:745
-#: src/planner-resource-view.c:1623 src/planner-task-view.c:277
+#: src/planner-gantt-print.c:198 src/planner-resource-dialog.c:1869
+#: src/planner-resource-view.c:759 src/planner-resource-view.c:775
+#: src/planner-resource-view.c:1698 src/planner-task-view.c:281
 msgid "Work"
 msgstr "Werk"
 
-#: src/planner-gantt-print.c:541 src/planner-gantt-row.c:685
-#: src/planner-window.c:1622
+#: src/planner-gantt-print.c:542 src/planner-gantt-row.c:690
+#: src/planner-task-tree.c:1512 src/planner-window.c:1660
 msgid "Unnamed"
 msgstr "Naamloos"
 
-#: src/planner-gantt-row.c:1758 src/planner-gantt-row.c:1761
+#: src/planner-gantt-row.c:1760 src/planner-gantt-row.c:1763
 msgid "No name"
 msgstr "Geen naam"
 
-#: src/planner-gantt-row.c:1764
+#: src/planner-gantt-row.c:1766
 #, c-format
 msgid "Make task '%s' a predecessor of '%s'"
 msgstr "Maak taak '%s' een voorganger van '%s'"
@@ -1233,11 +900,141 @@ msgstr "Maak taak '%s' een voorganger van '%s'"
 msgid "Change work to %s"
 msgstr "Verander werk naar %s"
 
-#: src/planner-gantt-view.c:283
+#: src/planner-gantt-row.c:2392 src/planner-task-dialog.c:449
+#: src/planner-task-tree.c:257 src/planner-task-tree.c:934
+msgid "Edit task property"
+msgstr "Taak eigenschap bewerken"
+
+#: src/planner-gantt-view.c:137 src/planner-task-view.c:119
+msgid "_Insert Task"
+msgstr "Taak _invoegen"
+
+#: src/planner-gantt-view.c:137 src/planner-task-view.c:119
+msgid "Insert a new task"
+msgstr "Nieuwe taak invoegen"
+
+#: src/planner-gantt-view.c:138 src/planner-task-view.c:120
+msgid "In_sert Tasks..."
+msgstr "Taken _invoegen..."
+
+#: src/planner-gantt-view.c:139 src/planner-task-view.c:121
+msgid "_Remove Task"
+msgstr "Taak _verwijderen"
+
+#: src/planner-gantt-view.c:139 src/planner-task-view.c:121
+msgid "Remove the selected tasks"
+msgstr "De geselecteerde taken verwijderen"
+
+#. sensitive = 0
+#: src/planner-gantt-view.c:140
+msgid "_Edit Task Properties..."
+msgstr "Taak eigenschappen be_werken..."
+
+#. sensitive = 0
+#: src/planner-gantt-view.c:141 src/planner-resource-view.c:258
+#: src/planner-task-view.c:123
+msgid "Select _All"
+msgstr "_Alles selecteren"
+
+#: src/planner-gantt-view.c:141 src/planner-resource-view.c:258
+#: src/planner-task-view.c:123
+msgid "Select all tasks"
+msgstr "Alle taken selecteren"
+
+#: src/planner-gantt-view.c:142 src/planner-task-view.c:124
+msgid "_Unlink Task"
+msgstr "Taak _ontkoppelen"
+
+#: src/planner-gantt-view.c:142 src/planner-task-view.c:124
+msgid "Unlink the selected tasks"
+msgstr "De geselecteerde taken ontkoppelen"
+
+#: src/planner-gantt-view.c:143 src/planner-task-view.c:125
+msgid "_Link Tasks"
+msgstr "Taken _koppelen"
+
+#: src/planner-gantt-view.c:143 src/planner-task-view.c:125
+msgid "Link the selected tasks"
+msgstr "De geselecteerde taken koppelen"
+
+#: src/planner-gantt-view.c:144 src/planner-task-view.c:126
+msgid "I_ndent Task"
+msgstr "Taak i_nspringen"
+
+#: src/planner-gantt-view.c:144 src/planner-task-view.c:126
+msgid "Indent the selected tasks"
+msgstr "De geselecteerde taken inspringen"
+
+#. sensitive = 0
+#: src/planner-gantt-view.c:145 src/planner-task-view.c:127
+msgid "Unin_dent Task"
+msgstr "Niet _ingesprongen taak"
+
+#: src/planner-gantt-view.c:145 src/planner-task-view.c:127
+msgid "Unindent the selected tasks"
+msgstr "De geselecteerde taken niet inspringen"
+
+#. sensitive = 0
+#: src/planner-gantt-view.c:146 src/planner-task-view.c:128
+msgid "Move Task _Up"
+msgstr "Om_hoog"
+
+#: src/planner-gantt-view.c:146 src/planner-task-view.c:128
+msgid "Move the selected tasks upwards"
+msgstr "De geselecteerde taken omhoog verplaatsen"
+
+#. sensitive = 0
+#: src/planner-gantt-view.c:147 src/planner-task-view.c:129
+msgid "Move Task Do_wn"
+msgstr "Om_laag"
+
+#: src/planner-gantt-view.c:147 src/planner-task-view.c:129
+msgid "Move the selected tasks downwards"
+msgstr "De geselecteerde taken omlaag verplaatsen"
+
+#. sensitive = 0
+#: src/planner-gantt-view.c:148 src/planner-task-view.c:130
+msgid "Reset _Constraint"
+msgstr "_Voorwaarde herinitialiseren"
+
+#. sensitive = 0
+#: src/planner-gantt-view.c:149
+msgid "Zoom To _Fit"
+msgstr "Zoomen naar passend _formaat"
+
+#: src/planner-gantt-view.c:149 src/planner-ttable-view.c:100
+msgid "Zoom to fit the entire project"
+msgstr "Zoomen naar volledig overzicht project"
+
+#: src/planner-gantt-view.c:150
+msgid "_Zoom In"
+msgstr "_Inzoomen"
+
+#: src/planner-gantt-view.c:150 src/planner-ttable-view.c:99
+msgid "Zoom in"
+msgstr "Inzoomen"
+
+#: src/planner-gantt-view.c:151
+msgid "Zoom _Out"
+msgstr "_Uitzoomen"
+
+#: src/planner-gantt-view.c:151 src/planner-ttable-view.c:98
+msgid "Zoom out"
+msgstr "Uitzoomen"
+
+#: src/planner-gantt-view.c:152
+msgid "Test"
+msgstr "Test"
+
+#: src/planner-gantt-view.c:156
+msgid "_Highlight Critical Tasks"
+msgstr "Kritieke taken op_lichten"
+
+#: src/planner-gantt-view.c:298
 msgid "Gantt Chart"
 msgstr "Gantt grafiek"
 
-#: src/planner-gantt-view.c:291
+#: src/planner-gantt-view.c:306
 msgid "_Gantt Chart"
 msgstr "_Gantt grafiek"
 
@@ -1245,7 +1042,7 @@ msgstr "_Gantt grafiek"
 #. * project management term. You might want to leave it
 #. * untranslated unless there is a localized term for it.
 #.
-#: src/planner-gantt-view.c:492
+#: src/planner-gantt-view.c:507
 msgid ""
 "\n"
 "WBS"
@@ -1253,7 +1050,7 @@ msgstr ""
 "\n"
 "WBS"
 
-#: src/planner-gantt-view.c:493 src/planner-ttable-tree.c:343
+#: src/planner-gantt-view.c:508 src/planner-ttable-tree.c:343
 msgid ""
 "\n"
 "Name"
@@ -1262,7 +1059,7 @@ msgstr ""
 "Naam"
 
 #. COL_START,    _("\nStart"),
-#: src/planner-gantt-view.c:495
+#: src/planner-gantt-view.c:510
 msgid ""
 "\n"
 "Work"
@@ -1278,27 +1075,35 @@ msgstr "Groep invoegen"
 msgid "Remove group"
 msgstr "Groep verwijderen"
 
-#: src/planner-group-dialog.c:520
+#: src/planner-group-dialog.c:517
 msgid "Default group"
 msgstr "Standaard groep"
 
-#: src/planner-group-dialog.c:638
+#: src/planner-group-dialog.c:635
 msgid "Edit group property"
 msgstr "Groep eigenschappen bewerken"
 
-#: src/planner-group-dialog.c:822
+#: src/planner-group-dialog.c:819
 msgid "Manager name"
 msgstr "Manager naam"
 
-#: src/planner-group-dialog.c:828
+#: src/planner-group-dialog.c:825
 msgid "Manager phone"
 msgstr "Manager telefoon"
 
-#: src/planner-group-dialog.c:834
+#: src/planner-group-dialog.c:831
 msgid "Manager email"
 msgstr "Manager email"
 
-#: src/planner-html-plugin.c:138
+#: src/planner-html-plugin.c:69
+msgid "HTML"
+msgstr "HTML"
+
+#: src/planner-html-plugin.c:70
+msgid "Export project to HTML"
+msgstr "Project exporteren naar HTML"
+
+#: src/planner-html-plugin.c:147
 #, c-format
 msgid ""
 "\"%s\" is a directory.\n"
@@ -1307,8 +1112,8 @@ msgstr ""
 "\"%s\" is een directory.\n"
 "Geen een bestandsnaam en probeer opnieuw."
 
-#: src/planner-html-plugin.c:148 src/planner-window.c:1378
-#: src/planner-xml-planner-plugin.c:133
+#: src/planner-html-plugin.c:157 src/planner-window.c:1417
+#: src/planner-xml-planner-plugin.c:125
 #, c-format
 msgid "File \"%s\" exists, do you want to overwrite it?"
 msgstr "Het bestand \"%s\" bestaat reeds, wilt u het overschrijven?"
@@ -1338,7 +1143,7 @@ msgstr "Fase verwijderen"
 msgid "Could not open plugin file '%s'\n"
 msgstr "Kan pluginbestand '%s' niet openen\n"
 
-#: src/planner-predecessor-model.c:191 src/planner-task-dialog.c:2195
+#: src/planner-predecessor-model.c:191 src/planner-task-dialog.c:2197
 msgid "FS"
 msgstr "FS"
 
@@ -1347,7 +1152,7 @@ msgid "FF"
 msgstr "FF"
 
 #. list = g_list_append (list, g_strdup (_("FF")));
-#: src/planner-predecessor-model.c:197 src/planner-task-dialog.c:2197
+#: src/planner-predecessor-model.c:197 src/planner-task-dialog.c:2199
 msgid "SS"
 msgstr "SS"
 
@@ -1355,72 +1160,72 @@ msgstr "SS"
 msgid "SF"
 msgstr "SF"
 
-#: src/planner-print-dialog.c:112
+#: src/planner-print-dialog.c:154
 msgid "Print Project"
 msgstr "Project afdrukken"
 
-#: src/planner-print-dialog.c:119
+#: src/planner-print-dialog.c:161
 msgid "Select views"
 msgstr "Weergaven selecteren"
 
-#: src/planner-print-dialog.c:143
+#: src/planner-print-dialog.c:184
 msgid "Select the views to print:"
 msgstr "Selecteer de weergaven om af te drukken:"
 
-#: src/planner-project-properties.c:382
+#: src/planner-project-properties.c:381
 msgid "Select a calendar to use for this project:"
 msgstr "Selecteer een kalender om voor dit project te gebruiken:"
 
-#: src/planner-project-properties.c:482
+#: src/planner-project-properties.c:481
 msgid "Edit Project Name"
 msgstr "Projectnaam bewerken"
 
-#: src/planner-project-properties.c:518
+#: src/planner-project-properties.c:517
 msgid "Edit Organization"
 msgstr "Organisatie bewerken"
 
-#: src/planner-project-properties.c:554
+#: src/planner-project-properties.c:553
 msgid "Edit Manager"
 msgstr "Manager bewerken"
 
-#: src/planner-project-properties.c:625
+#: src/planner-project-properties.c:624
 msgid "Edit Project Start"
 msgstr "Projectstart bewerken"
 
-#: src/planner-project-properties.c:694
+#: src/planner-project-properties.c:693
 msgid "Edit Project Phase"
 msgstr "Projectfasen bewerken"
 
-#: src/planner-project-properties.c:827
+#: src/planner-project-properties.c:826
 msgid "Property"
 msgstr "Eigenschap"
 
-#: src/planner-project-properties.c:838
+#: src/planner-project-properties.c:837
 msgid "Value"
 msgstr "Waarde"
 
-#: src/planner-project-properties.c:1247 src/planner-property-dialog.c:329
+#: src/planner-project-properties.c:1246 src/planner-property-dialog.c:329
 msgid "The name of the custom property needs to start with a letter."
 msgstr "De naam van de aangepaste eigenschap moet met een letter beginnen."
 
-#: src/planner-project-properties.c:1318 src/planner-property-dialog.c:399
+#: src/planner-project-properties.c:1317 src/planner-property-dialog.c:399
 #, c-format
 msgid "Do you really want to remove the property '%s' from the project?"
 msgstr "Wilt u de eigenschap '%s' echt van het project verwijderen?"
 
-#: src/planner-project-properties.c:1411
+#: src/planner-project-properties.c:1410
 msgid "Could not create properties dialog."
 msgstr "Kan de eigenschappen dialoog niet creëren."
 
-#: src/planner-project-properties.c:1776
+#: src/planner-project-properties.c:1775
 msgid "Add project property"
 msgstr "Projecteigenschap toevoegen"
 
-#: src/planner-project-properties.c:1886
+#: src/planner-project-properties.c:1885
 msgid "Remove project property"
 msgstr "Projecteigenschap verwijderen"
 
-#: src/planner-project-properties.c:1979
+#: src/planner-project-properties.c:1978
 msgid "Edit project property value"
 msgstr "Waarde van projecteigenschap aanpassen"
 
@@ -1428,8 +1233,8 @@ msgstr "Waarde van projecteigenschap aanpassen"
 msgid "Label"
 msgstr "Label"
 
-#: src/planner-property-dialog.c:510 src/planner-resource-view.c:1194
-#: src/planner-task-dialog.c:2655
+#: src/planner-property-dialog.c:510 src/planner-resource-view.c:1212
+#: src/planner-task-dialog.c:2657
 msgid "Type"
 msgstr "Type"
 
@@ -1445,92 +1250,124 @@ msgstr "Eigenschap verwijderen"
 msgid "Edit property label"
 msgstr "Eigenschap-label bewerken"
 
-#: src/planner-python-plugin.c:164 src/planner-window.c:639
-msgid "Open a file"
-msgstr "Bestand openen"
-
-#: src/planner-resource-cmd.c:74
+#: src/planner-resource-cmd.c:75
 msgid "Insert resource"
 msgstr "Hulpbron invoegen"
 
 #. Put "no group" at the top.
-#: src/planner-resource-dialog.c:326 src/planner-resource-input-dialog.c:99
-#: src/planner-resource-view.c:1834
+#: src/planner-resource-dialog.c:325 src/planner-resource-input-dialog.c:99
+#: src/planner-resource-view.c:1909
 msgid "(None)"
 msgstr "(Geen)"
 
-#: src/planner-resource-dialog.c:336 src/planner-resource-input-dialog.c:109
+#: src/planner-resource-dialog.c:335 src/planner-resource-input-dialog.c:109
 #: src/planner-task-dialog.c:375
 msgid "(No name)"
 msgstr "(Geen naam)"
 
-#: src/planner-resource-dialog.c:510
+#: src/planner-resource-dialog.c:508
 msgid "Edit resource calendar"
 msgstr "Hulpbron-kalender bewerken"
 
-#: src/planner-resource-dialog.c:591 src/planner-resource-dialog.c:664
+#: src/planner-resource-dialog.c:589
 msgid "Edit resource note"
 msgstr "Hulpbron-notitie bewerken"
 
-#: src/planner-resource-dialog.c:733 src/planner-resource-dialog.c:774
-#: src/planner-resource-view.c:1328 src/planner-resource-view.c:1412
+#: src/planner-resource-dialog.c:662
+msgid "Edit resource cost"
+msgstr "Hulpbron-kosten bewerken"
+
+#: src/planner-resource-dialog.c:731 src/planner-resource-dialog.c:772
+#: src/planner-resource-view.c:1369 src/planner-resource-view.c:1450
 msgid "Edit resource property"
 msgstr "Hulpbron-eigenschap bewerken"
 
 #. i18n: time stamp format for notes in task dialog, see strftime(3) for
 #. * a detailed description.
-#: src/planner-resource-dialog.c:1453 src/planner-task-dialog.c:1784
+#: src/planner-resource-dialog.c:1427 src/planner-task-dialog.c:1784
 msgid "%a %d %b %Y, %H:%M\n"
 msgstr "%a %d %b %Y, %H:%M\n"
 
-#: src/planner-resource-dialog.c:1570
+#: src/planner-resource-dialog.c:1544
 msgid "None (use project default)"
 msgstr "Geen (gebruik verstekwaarden van project)"
 
-#: src/planner-resource-dialog.c:1697 src/planner-resource-dialog.c:1699
+#: src/planner-resource-dialog.c:1671 src/planner-resource-dialog.c:1673
 msgid "Edit resource properties"
 msgstr "Hulpbron eigenschappen bewerken"
 
-#: src/planner-resource-dialog.c:1896 src/planner-resource-view.c:732
-#: src/planner-resource-view.c:746 src/planner-resource-view.c:1624
+#: src/planner-resource-dialog.c:1870 src/planner-resource-view.c:762
+#: src/planner-resource-view.c:776 src/planner-resource-view.c:1699
 msgid "Material"
 msgstr "Materiaal"
 
-#: src/planner-resource-view.c:268
+#: src/planner-resource-view.c:253
+msgid "_Insert Resource"
+msgstr "Hulpbron _tussenvoegen"
+
+#: src/planner-resource-view.c:253
+msgid "Insert a new resource"
+msgstr "Nieuwe hulpbron invoegen"
+
+#: src/planner-resource-view.c:254
+msgid "In_sert Resources..."
+msgstr "Hulpbronnen tu_ssenvoegen..."
+
+#: src/planner-resource-view.c:255
+msgid "_Remove Resource"
+msgstr "Hulpbron _verwijderen"
+
+#: src/planner-resource-view.c:255
+msgid "Remove the selected resource"
+msgstr "Geselecteerde hulpbron verwijderen"
+
+#: src/planner-resource-view.c:256
+msgid "_Edit Resource Properties..."
+msgstr "Hulpbron eigenschappen be_werken..."
+
+#: src/planner-resource-view.c:257
+msgid "Edit _Groups"
+msgstr "_Groepen bewerken"
+
+#: src/planner-resource-view.c:257
+msgid "Edit resource groups"
+msgstr "Hulpbron groepen bewerken"
+
+#: src/planner-resource-view.c:259
+msgid "Edit _Custom Properties..."
+msgstr "_Aangepaste eigenschappen bewerken..."
+
+#: src/planner-resource-view.c:275
 msgid "/_Insert resource"
 msgstr "/Hulpbron _tussenvoegen"
 
-#: src/planner-resource-view.c:269
+#: src/planner-resource-view.c:276
 msgid "/_Remove resource"
 msgstr "/Hulpbron _verwijderen"
 
-#: src/planner-resource-view.c:270 src/planner-ttable-tree.c:107
+#: src/planner-resource-view.c:277 src/planner-ttable-tree.c:107
 msgid "/_Edit resource..."
 msgstr "/Hulpbron _bewerken"
 
-#: src/planner-resource-view.c:409
+#: src/planner-resource-view.c:439
 msgid "_Resources"
 msgstr "H_ulpbronnen"
 
-#: src/planner-resource-view.c:927
+#: src/planner-resource-view.c:952
 msgid "Remove resource"
 msgstr "Hulpbron verwijderen"
 
-#: src/planner-resource-view.c:1031
+#: src/planner-resource-view.c:1052
 msgid "Edit custom resource properties"
 msgstr "Aangepaste hulpbron eigenschappen bewerken"
 
-#: src/planner-resource-view.c:1173
+#: src/planner-resource-view.c:1191
 msgid "Short name"
 msgstr "Korte naam"
 
-#: src/planner-resource-view.c:1218
+#: src/planner-resource-view.c:1236
 msgid "Group"
 msgstr "Groep"
-
-#: src/planner-resource-view.c:1247
-msgid "Email"
-msgstr "E-mail"
 
 #. i18n: Short "Week", preferably 2 letters.
 #: src/planner-scale-utils.c:325
@@ -1549,76 +1386,130 @@ msgstr "Week %d"
 msgid "Week %d, %d"
 msgstr "Week %d, %d"
 
-#. i18n: Short "Quarter", preferrably 1 letter.
+#. i18n: Short "Quarter", preferably 1 letter.
 #: src/planner-scale-utils.c:365
 #, c-format
 msgid "Q%d"
 msgstr "Q%d"
 
-#. i18n: Short "Quarter", preferrably 2-3 letters.
+#. i18n: Short "Quarter", preferably 2-3 letters.
 #: src/planner-scale-utils.c:369
 #, c-format
 msgid "Qtr %d"
 msgstr "Kw %d"
 
-#. i18n: Year, short "Quarter", preferrably 2-3 letters.
+#. i18n: Year, short "Quarter", preferably 2-3 letters.
 #: src/planner-scale-utils.c:373
 #, c-format
 msgid "%d, Qtr %d"
 msgstr "%d, Kw %d"
 
-#. i18n: Short "Half year", prefferably 1 letter.
+#. i18n: Short "Half year", preferably 1 letter.
 #: src/planner-scale-utils.c:386
 #, c-format
 msgid "H%d"
 msgstr "H%d"
 
-#. i18n: Year, short "Half year", prefferably 1 letter.
+#. i18n: Year, short "Half year", preferably 1 letter.
 #: src/planner-scale-utils.c:391
 #, c-format
 msgid "%04d, H%d"
 msgstr "%04d, H%d"
 
-#: src/planner-sql-plugin.c:381
-msgid "ID"
-msgstr "ID"
+#: src/planner-sql-plugin.c:96
+msgid "Open from Database..."
+msgstr "Openen vanuit database..."
 
-#: src/planner-sql-plugin.c:389
-msgid "Project"
-msgstr "Project"
+#: src/planner-sql-plugin.c:96
+msgid "Open a project from a database"
+msgstr "Een project vanuit een database openen"
 
-#: src/planner-sql-plugin.c:397
-msgid "Phase"
-msgstr "Fase"
-
-#: src/planner-sql-plugin.c:405
-msgid "Revision"
-msgstr "Revisie"
-
-#: src/planner-sql-plugin.c:604
-msgid "Open from Database"
-msgstr "Openen van database"
-
-#: src/planner-sql-plugin.c:711
+#: src/planner-sql-plugin.c:97 src/planner-sql-plugin.c:1099
 msgid "Save to Database"
 msgstr "Opslaan naar database"
 
-#: src/planner-task-cmd.c:96
+#: src/planner-sql-plugin.c:97
+msgid "Save the current project to a database"
+msgstr "Het huidige project opslaan naar een database"
+
+#: src/planner-sql-plugin.c:129
+msgid "No errors reported."
+msgstr "Geen fouten gerapporteerd"
+
+#: src/planner-sql-plugin.c:494
+#, c-format
+msgid ""
+"Database %s needs to be upgraded from version %s to version %s.\n"
+"Please backup database before the upgrade."
+msgstr ""
+"Database %s moet worden bijgewerkt van versie %s naar versie %s.\n"
+"Maak voor het bijwerken eerst een reservekopie van de database."
+
+#: src/planner-sql-plugin.c:501
+msgid "Upgrade"
+msgstr "Bijwerken"
+
+#: src/planner-sql-plugin.c:515
+#, c-format
+msgid ""
+"Could not upgrade database %s.\n"
+" Upgrade file used: %s.\n"
+"\n"
+"Database error: \n"
+"%s"
+msgstr ""
+"Kan database %s niet bijwerken.\n"
+" Gebruikt upgrade-bestand: %s.\n"
+"\n"
+"Database fout: \n"
+"%s"
+
+#: src/planner-sql-plugin.c:556
+#, c-format
+msgid "Can't create tables in database %s"
+msgstr "Kan tabellen in database %s niet aanmaken"
+
+#: src/planner-sql-plugin.c:617
+#, c-format
+msgid "Database %s is not setup for Planner. Do you want to do that?"
+msgstr "Database %s is niet opgezet voor Planner. Wilt u dat nu doen?"
+
+#: src/planner-sql-plugin.c:674
+#, c-format
+msgid "Test to tables in database '%s' failed."
+msgstr "Test met tabellen in database '%s' mislukt."
+
+#: src/planner-sql-plugin.c:767
+msgid "ID"
+msgstr "ID"
+
+#: src/planner-sql-plugin.c:775
+msgid "Project"
+msgstr "Project"
+
+#: src/planner-sql-plugin.c:783
+msgid "Phase"
+msgstr "Fase"
+
+#: src/planner-sql-plugin.c:791
+msgid "Revision"
+msgstr "Revisie"
+
+#: src/planner-sql-plugin.c:987
+msgid "Open from Database"
+msgstr "Openen van database"
+
+#: src/planner-task-cmd.c:98
 msgid "Link task"
 msgstr "Taak koppelen"
 
-#: src/planner-task-cmd.c:172
+#: src/planner-task-cmd.c:174
 msgid "Unlink task"
 msgstr "Taak ontkoppelen"
 
-#: src/planner-task-cmd.c:265
+#: src/planner-task-cmd.c:269
 msgid "Insert task"
 msgstr "Taak invoegen"
-
-#: src/planner-task-dialog.c:449 src/planner-task-tree.c:241
-#: src/planner-task-tree.c:995
-msgid "Edit task property"
-msgstr "Taak eigenschap bewerken"
 
 #: src/planner-task-dialog.c:523
 msgid "Edit task type"
@@ -1665,63 +1556,63 @@ msgstr "Start to start (SS)"
 msgid "Can't add new predecessor. No task selected!"
 msgstr "Kan geen nieuwe voorganger toevoegen. Geen taak geselecteerd!"
 
-#: src/planner-task-dialog.c:2555
+#: src/planner-task-dialog.c:2557
 msgid "Assigned"
 msgstr "Toegewezen"
 
-#: src/planner-task-dialog.c:2572
+#: src/planner-task-dialog.c:2574
 msgid "Units"
 msgstr "Eenheden"
 
-#: src/planner-task-dialog.c:2677
+#: src/planner-task-dialog.c:2679
 msgid "Lag"
 msgstr "Achterstand"
 
-#: src/planner-task-dialog.c:2815 src/planner-task-dialog.c:2817
+#: src/planner-task-dialog.c:2817 src/planner-task-dialog.c:2819
 msgid "Edit task properties"
 msgstr "Taak eigenschappen bewerken"
 
-#: src/planner-task-popup.c:51
+#: src/planner-task-popup.c:52
 msgid "/_Insert task"
 msgstr "/Taak _invoegen"
 
-#: src/planner-task-popup.c:54
+#: src/planner-task-popup.c:55
 msgid "/Insert _subtask"
 msgstr "/_Subtaak invoegen"
 
-#: src/planner-task-popup.c:57
+#: src/planner-task-popup.c:58
 msgid "/_Remove task"
 msgstr "/Taak _verwijderen"
 
-#: src/planner-task-popup.c:62
+#: src/planner-task-popup.c:63
 msgid "/_Unlink task"
 msgstr "/Taak _ontkoppelen"
 
-#: src/planner-task-popup.c:67
+#: src/planner-task-popup.c:68
 msgid "/Assign _resources..."
 msgstr "/Hulpb_ronnen toewijzen..."
 
-#: src/planner-task-popup.c:70 src/planner-ttable-tree.c:110
+#: src/planner-task-popup.c:71 src/planner-ttable-tree.c:110
 msgid "/_Edit task..."
 msgstr "/Taak _bewerken..."
 
-#: src/planner-task-tree.c:613
+#: src/planner-task-tree.c:565
 msgid "Remove task"
 msgstr "Taak verwijderen"
 
-#: src/planner-task-tree.c:690
+#: src/planner-task-tree.c:642
 msgid "Apply constraint to task"
 msgstr "Voorwaarde toepassen op taak"
 
-#: src/planner-task-tree.c:752
+#: src/planner-task-tree.c:704
 msgid "Reset task constraint"
 msgstr "Voorwaarde herinitialiseren"
 
-#: src/planner-task-tree.c:886
+#: src/planner-task-tree.c:821
 msgid "Move task"
 msgstr "Taak verplaatsen"
 
-#: src/planner-task-tree.c:2675
+#: src/planner-task-tree.c:2709
 #, c-format
 msgid ""
 "You are about to open an edit dialog each for %i tasks. Are you sure that "
@@ -1730,80 +1621,88 @@ msgstr ""
 "U staat op het punt om voor %i taken een bewerkings-dialoog te openen. Bent "
 "u er zeker van dat u dit wilt doen?"
 
-#: src/planner-task-tree.c:3306
+#: src/planner-task-tree.c:3320
 msgid "mon"
 msgstr "mnd"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:3307
+#: src/planner-task-tree.c:3321
 msgid "month"
 msgstr "maand"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:3308
+#: src/planner-task-tree.c:3322
 msgid "months"
 msgstr "maanden"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:3309
+#: src/planner-task-tree.c:3323
 msgid "w"
 msgstr "w"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:3310
+#: src/planner-task-tree.c:3324
 msgid "week"
 msgstr "week"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:3311
+#: src/planner-task-tree.c:3325
 msgid "weeks"
 msgstr "weken"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:3312
+#: src/planner-task-tree.c:3326
 msgid "d"
 msgstr "d"
 
 #. day unit variant accepted in input
-#: src/planner-task-tree.c:3313
+#: src/planner-task-tree.c:3327
 msgid "day"
 msgstr "dag"
 
 #. day unit variant accepted in input
-#: src/planner-task-tree.c:3315
+#: src/planner-task-tree.c:3329
 msgid "h"
 msgstr "u"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:3316
+#: src/planner-task-tree.c:3330
 msgid "hour"
 msgstr "uur"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:3317
+#: src/planner-task-tree.c:3331
 msgid "hours"
 msgstr "uren"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:3318
+#: src/planner-task-tree.c:3332
 msgid "min"
 msgstr "min"
 
 #. minute unit variant accepted in input
-#: src/planner-task-tree.c:3319
+#: src/planner-task-tree.c:3333
 msgid "minute"
 msgstr "minuut"
 
 #. minute unit variant accepted in input
-#: src/planner-task-tree.c:3320
+#: src/planner-task-tree.c:3334
 msgid "minutes"
 msgstr "minuten"
 
-#: src/planner-task-view.c:207
+#: src/planner-task-view.c:122
+msgid "_Edit Task"
+msgstr "Taak b_ewerken..."
+
+#: src/planner-task-view.c:131
+msgid "_Edit Custom Properties..."
+msgstr "Aan_gepaste eigenschappen bewerken..."
+
+#: src/planner-task-view.c:211
 msgid "Tasks"
 msgstr "Taken"
 
-#: src/planner-task-view.c:215
+#: src/planner-task-view.c:219
 msgid "_Tasks"
 msgstr "_Taken"
 
@@ -1811,23 +1710,27 @@ msgstr "_Taken"
 #. * project management term. You might want to leave it
 #. * untranslated unless there is a localized term for it.
 #.
-#: src/planner-task-view.c:273
+#: src/planner-task-view.c:277
 msgid "WBS"
 msgstr "WBS"
 
-#: src/planner-task-view.c:275
+#: src/planner-task-view.c:279
 msgid "Start"
 msgstr "Start"
 
-#: src/planner-task-view.c:276
+#: src/planner-task-view.c:280
 msgid "Finish"
 msgstr "Finish"
 
-#: src/planner-task-view.c:278
+#: src/planner-task-view.c:282
 msgid "Slack"
 msgstr "Laks"
 
-#: src/planner-task-view.c:488
+#: src/planner-task-view.c:284
+msgid "Assigned to"
+msgstr "Toegewezen aan"
+
+#: src/planner-task-view.c:480
 msgid "Edit custom task properties"
 msgstr "Aangepaste taak eigenschappen bewerken"
 
@@ -1861,11 +1764,15 @@ msgstr ""
 "\n"
 "Taak"
 
-#: src/planner-ttable-view.c:147
+#: src/planner-ttable-view.c:100
+msgid "Zoom to fit"
+msgstr "Zoomen naar passend formaat"
+
+#: src/planner-ttable-view.c:159
 msgid "Resource Usage"
 msgstr "Gebruik van hulpbron"
 
-#: src/planner-ttable-view.c:154
+#: src/planner-ttable-view.c:166
 msgid "Resource _Usage"
 msgstr "_Gebruik van hulpbron"
 
@@ -1874,66 +1781,232 @@ msgstr "_Gebruik van hulpbron"
 msgid "Could not open view plugin file '%s'\n"
 msgstr "Kan weergave pluginbestand '%s' niet openen\n"
 
+#: src/planner-window.c:197
+msgid "_File"
+msgstr "_Bestand"
+
+#: src/planner-window.c:201
+msgid "_New Project"
+msgstr "_Nieuw project"
+
+#: src/planner-window.c:201
+msgid "Create a new project"
+msgstr "Een nieuw project maken"
+
+#: src/planner-window.c:205
+msgid "_Open..."
+msgstr "_Openen..."
+
+#: src/planner-window.c:205
+msgid "Open a project"
+msgstr "Een project openen"
+
+#: src/planner-window.c:208
+msgid "_Import"
+msgstr "_Importeren"
+
+#: src/planner-window.c:212 src/planner-window.c:1288
+msgid "_Save"
+msgstr "Op_slaan"
+
+#: src/planner-window.c:212
+msgid "Save the current project"
+msgstr "Het huidige project opslaan"
+
+#: src/planner-window.c:215
+msgid "_Export"
+msgstr "_Exporteren"
+
+#: src/planner-window.c:218
+msgid "Save _As..."
+msgstr "Opslaan _als..."
+
+#: src/planner-window.c:218
+msgid "Save the current project with a different name"
+msgstr "Het huidige project opslaan onder een andere naam"
+
+#: src/planner-window.c:221
+msgid "_Print..."
+msgstr "Af_drukken..."
+
+#: src/planner-window.c:221
+msgid "Print the current project"
+msgstr "Het huidige project afdrukken"
+
+#: src/planner-window.c:224
+msgid "Print Pre_view"
+msgstr "Afdruk_voorbeeld"
+
+#: src/planner-window.c:224
+msgid "Print preview of the current project"
+msgstr "Afdrukvoorbeeld van het huidige project"
+
+#: src/planner-window.c:227
+msgid "_Close"
+msgstr "Sl_uiten"
+
+#: src/planner-window.c:227
+msgid "Close the current file"
+msgstr "Het huidige bestand sluiten"
+
+#: src/planner-window.c:230
+msgid "_Quit"
+msgstr "A_fsluiten"
+
+#: src/planner-window.c:230
+msgid "Exit the program"
+msgstr "Programma afsluiten"
+
+#: src/planner-window.c:234
+msgid "_Edit"
+msgstr "Be_werken"
+
+#: src/planner-window.c:237
+msgid "_Undo"
+msgstr "_Ongedaan maken"
+
+#: src/planner-window.c:237
+msgid "Undo the last action"
+msgstr "Laatste bewerking ongedaan maken"
+
+#: src/planner-window.c:240
+msgid "_Redo"
+msgstr "O_pnieuw"
+
+#: src/planner-window.c:240
+msgid "Redo the undone action"
+msgstr "De ongedaan gemaakte actie opnieuw uitvoeren"
+
+#: src/planner-window.c:244
+msgid "_View"
+msgstr "Beel_d"
+
+#: src/planner-window.c:248
+msgid "_Actions"
+msgstr "_Acties"
+
+#: src/planner-window.c:252
+msgid "_Project"
+msgstr "_Project"
+
+#: src/planner-window.c:255
+msgid "_Manage Calendars"
+msgstr "Kalenders _beheren"
+
+#: src/planner-window.c:258
+msgid "Edit Day _Types"
+msgstr "Dag_typen bewerken"
+
+#: src/planner-window.c:261
+msgid "Edit Project _Phases"
+msgstr "_Projectfasen bewerken"
+
+#: src/planner-window.c:264
+msgid "_Edit Project Properties"
+msgstr "Project _eigenschappen"
+
+#: src/planner-window.c:264
+msgid "Edit the project properties"
+msgstr "De projecteigenschappen bewerken"
+
+#: src/planner-window.c:272
+msgid "_Help"
+msgstr "_Hulp"
+
+#: src/planner-window.c:275
+msgid "_User Guide"
+msgstr "_Gebruikershandleiding"
+
+#: src/planner-window.c:275
+msgid "Show the Planner User Guide"
+msgstr "De Planner gebruikershandleiding weergeven"
+
+#: src/planner-window.c:278
+msgid "_About"
+msgstr "In_fo"
+
+#: src/planner-window.c:278
+msgid "About this application"
+msgstr "Info over deze toepassing"
+
+#. Note: these strings are leaked.
+#: src/planner-window.c:542
+#, c-format
+msgid "Switch to the view \"%s\""
+msgstr "Naar weergave \"%s\" overschakelen"
+
+#: src/planner-window.c:688
+msgid "Open a File"
+msgstr "Een bestand openen"
+
+#: src/planner-window.c:696
+msgid "Planner Files"
+msgstr "Planner bestanden"
+
+#: src/planner-window.c:702
+msgid "All Files"
+msgstr "Alle bestanden"
+
 #. I18n: Translators, list your names here, newline separated if there
 #. * are more than one, to appear in the about box.
 #.
-#: src/planner-window.c:1056 src/planner-window.c:1063
-msgid "translator_credits"
-msgstr "Vertaling: Jan-Willem Harmanny"
+#: src/planner-window.c:1109 src/planner-window.c:1116
+msgid "translator-credits"
+msgstr "Jan-Willem Harmanny"
 
 #. "Copyright \xc2\xa9"
-#: src/planner-window.c:1060
+#: src/planner-window.c:1113
 msgid "A Project Management application for the GNOME desktop"
 msgstr "Een project management toepassing voor de GNOME werkomgeving"
 
-#: src/planner-window.c:1070
+#: src/planner-window.c:1123
 msgid "The Planner Homepage"
 msgstr "De Planner thuispagina"
 
-#: src/planner-window.c:1188
+#: src/planner-window.c:1229
 msgid "If you don't save, changes made the last minute will be discarded."
 msgstr ""
 "Als u niet opslaat, zullen aanpassingen die in de laatste minuut zijn "
 "gemaakt, verloren gaan."
 
-#: src/planner-window.c:1193
+#: src/planner-window.c:1234
 #, c-format
 msgid "If you don't save, changes made the last %d minutes will be discarded."
 msgstr ""
 "Als u niet opslaat, zullen aanpassingen die in de laatste %d minuten zijn "
 "gemaakt, verloren gaan."
 
-#: src/planner-window.c:1198
+#: src/planner-window.c:1239
 msgid "If you don't save, changes made the last hour will be discarded."
 msgstr ""
 "Als u niet opslaat, zullen aanpassingen die in het laatste uur zijn gemaakt, "
 "verloren gaan."
 
-#: src/planner-window.c:1203
+#: src/planner-window.c:1244
 #, c-format
 msgid "If you don't save, changes made the last %d hours will be discarded."
 msgstr ""
 "Als u niet opslaat, zullen aanpassingen die in de laatste %d uren zijn "
 "gemaakt, verloren gaan."
 
-#: src/planner-window.c:1210
+#: src/planner-window.c:1251
 #, c-format
 msgid "Save changes to document '%s' before closing?"
 msgstr "Aanpassingen in document '%s' opslaan voor sluiten?"
 
-#: src/planner-window.c:1234
+#: src/planner-window.c:1275
 msgid "C_lose without saving"
 msgstr "_Sluiten zonder opslaan"
 
-#: src/planner-window.c:1240
+#: src/planner-window.c:1281
 msgid "_Cancel"
 msgstr "_Annuleren"
 
-#: src/planner-window.c:1342
-msgid "Save a file"
+#: src/planner-window.c:1380
+msgid "Save a File"
 msgstr "Een bestand opslaan"
 
-#: src/planner-window.c:1579
+#: src/planner-window.c:1617
 msgid ""
 "You have opened a file that was saved with an old version of Planner.\n"
 "\n"
@@ -1964,17 +2037,98 @@ msgstr ""
 "menu 'Bewerken' de optie 'Alle voorwaarden verwijderen' te kiezen."
 
 #. Hack.
-#: src/planner-window.c:1614
+#: src/planner-window.c:1652
 msgid "Unnamed database project"
 msgstr "Database project zonder naam"
 
-#: src/planner-working-time-dialog.c:143
+#: src/planner-window.c:1766
+#, c-format
+msgid "Open '%s'"
+msgstr "'%s' openen"
+
+#: src/planner-working-time-dialog.c:144
 msgid "Edit working time"
 msgstr "Werktijden bewerken"
 
-#: src/planner-xml-planner-plugin.c:102
+#: src/planner-xml-planner-plugin.c:53
+msgid "Planner 0.11 Format"
+msgstr "Planner 0.11 formaat"
+
+#: src/planner-xml-planner-plugin.c:54
+msgid "Export project to a file suitable for Planner 0.11"
+msgstr ""
+"Exporteer het project naar een bestand dat geschikt is voor Planner 0.11"
+
+#: src/planner-xml-planner-plugin.c:91
 msgid "Export"
 msgstr "Exporteren"
+
+#~ msgid "Zoom In"
+#~ msgstr "Inzoomen"
+
+#~ msgid "Zoom Out"
+#~ msgstr "Uitzoomen"
+
+#~ msgid "Zoom To Fit"
+#~ msgstr "Zoomen naar passend formaat"
+
+#~ msgid "C_ut"
+#~ msgstr "K_nippen"
+
+#~ msgid "Clear"
+#~ msgstr "Wissen"
+
+#~ msgid "Clear the selection"
+#~ msgstr "De selectie leegmaken"
+
+#~ msgid "Copy the selection"
+#~ msgstr "Selectie kopiëren"
+
+#~ msgid "Cut the selection"
+#~ msgstr "Selectie knippen"
+
+#~ msgid "E_xport To"
+#~ msgstr "E_xporteren naar"
+
+#~ msgid "New"
+#~ msgstr "Nieuw"
+
+#~ msgid "New..."
+#~ msgstr "Nieuw..."
+
+#~ msgid "Open"
+#~ msgstr "Openen"
+
+#~ msgid "Paste the clipboard"
+#~ msgstr "Plakken vanuit klembord"
+
+#~ msgid "Print"
+#~ msgstr "Afdrukken"
+
+#~ msgid "Print preview"
+#~ msgstr "Afdruk_voorbeeld"
+
+#~ msgid "Save"
+#~ msgstr "Opslaan"
+
+#~ msgid "_Copy"
+#~ msgstr "_Kopiëren"
+
+#~ msgid "_Paste"
+#~ msgstr "_Plakken"
+
+#~ msgid "Execute a Python script"
+#~ msgstr "Een Python script uitvoeren"
+
+#~ msgid "Groups"
+#~ msgstr "Groepen"
+
+#~ msgid "Save to Database..."
+#~ msgstr "Opslaan naar database..."
+
+#~ msgid "Can not add a predecessor relation between a task and its ancestor."
+#~ msgstr ""
+#~ "Kan geen voorganger-relatie toevoegen tussen een taak en zijn voorganger."
 
 #~ msgid "HTML export failed"
 #~ msgstr "Exporteren naar HTML mislukt"
@@ -2121,9 +2275,6 @@ msgstr "Exporteren"
 
 #~ msgid "February"
 #~ msgstr "Februari"
-
-#~ msgid "March"
-#~ msgstr "Maart"
 
 #~ msgid "June"
 #~ msgstr "Juni"
