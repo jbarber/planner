@@ -1,4 +1,4 @@
- /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
  * Copyright (C) 2002-2003 CodeFactory AB
  * Copyright (C) 2002-2003 Richard Hult <richard@imendio.com>
@@ -33,6 +33,7 @@
 #include "planner-cell-renderer-list.h"
 #include "planner-assignment-model.h"
 #include "planner-predecessor-model.h"
+#include "planner-task-cmd.h"
 #include "planner-task-dialog.h"
 
 /* FIXME: This should be read from the option menu when that works */
@@ -238,18 +239,6 @@ typedef struct {
 	MrpRelationType  old_rel_type;
 	GError          *error;
 } TaskCmdEditPredecessor;
-
-
-typedef struct {
-	PlannerCmd        base;
-
-	MrpProject       *project;
-	MrpTask          *before;
-	MrpTask          *after;
-	MrpRelationType   relationship;
-	glong             lag;
-	GError           *error;
-} TaskCmdLink;
 
 typedef struct {
 	PlannerCmd base;
@@ -798,167 +787,6 @@ task_cmd_assign_units (PlannerWindow *main_window,
 	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager (main_window),
 					   cmd_base);
 
-	return cmd_base;
-}
-
-/* link and unlink shared with planner-task-tree.c */
-static gboolean
-task_cmd_link_do (PlannerCmd *cmd_base)
-{
-	TaskCmdLink *cmd;
-	GError      *error = NULL;
-	MrpRelation *relation;
-	gboolean     retval;
-
-	cmd = (TaskCmdLink *) cmd_base;
-
-	relation = mrp_task_add_predecessor (cmd->after,
-					     cmd->before,
-					     cmd->relationship,
-					     cmd->lag,
-					     &error);
-	if (!error) {
-		retval = TRUE;
-	} else {
-		cmd->error = error;
-		retval = FALSE;		
-	} 
-
-	return retval;
-}
-
-static void
-task_cmd_link_undo (PlannerCmd *cmd_base)
-{
-	TaskCmdLink *cmd;
-	
-	cmd = (TaskCmdLink*) cmd_base;
-	
-	mrp_task_remove_predecessor (cmd->after, cmd->before);
-}
-
-static void
-task_cmd_link_free (PlannerCmd *cmd_base)
-{
-	TaskCmdLink *cmd;
-
-	cmd = (TaskCmdLink *) cmd_base;
-
-	g_object_unref (cmd->project);
-	g_object_unref (cmd->before);
-	g_object_unref (cmd->after);
-}
-
-
-PlannerCmd *
-planner_task_cmd_link (PlannerWindow   *main_window,
-		       MrpTask         *before,
-		       MrpTask         *after,
-		       MrpRelationType  relationship,
-		       glong            lag,
-		       GError         **error)
-{
-	PlannerCmd          *cmd_base;
-	TaskCmdLink         *cmd;
-
-	cmd_base = planner_cmd_new (TaskCmdLink,
-				    _("Link task"),
-				    task_cmd_link_do,
-				    task_cmd_link_undo,
-				    task_cmd_link_free);
-
-	cmd = (TaskCmdLink *) cmd_base;
-
-	cmd->project = g_object_ref (planner_window_get_project (main_window));
-
-	cmd->before = g_object_ref (before);
-	cmd->after = g_object_ref (after);
-	cmd->relationship = relationship;
-	cmd->lag = lag;
-			
-	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager 
-					   (main_window),
-					   cmd_base);
-
-	if (cmd->error) {
-		g_propagate_error (error, cmd->error);
-		/* FIXME: who clean the cmd memory? */
-		return NULL;
-	}
-
-	return cmd_base;	
-}
-
-static gboolean
-task_cmd_unlink_do (PlannerCmd *cmd_base)
-{
-	TaskCmdLink *cmd;
-	
-	cmd = (TaskCmdLink*) cmd_base;
-
-	if (g_getenv ("PLANNER_DEBUG_UNDO_TASK")) {
-		g_message ("Removing the link ...");
-	}
-	
-	mrp_task_remove_predecessor (cmd->after, cmd->before);
-
-	return TRUE;
-}
-
-static void
-task_cmd_unlink_undo (PlannerCmd *cmd_base)
-{
-	TaskCmdLink *cmd;
-	GError      *error = NULL;
-	MrpRelation *relation;
-
-	cmd = (TaskCmdLink *) cmd_base;
-
-	relation = mrp_task_add_predecessor (cmd->after,
-					     cmd->before,
-					     cmd->relationship,
-					     cmd->lag,
-					     &error);
-	g_assert (relation);
-}
-
-static void
-task_cmd_unlink_free (PlannerCmd *cmd_base)
-{
-	TaskCmdLink *cmd;
-
-	cmd = (TaskCmdLink *) cmd_base;
-
-	g_object_unref (cmd->project);
-	g_object_unref (cmd->before);
-	g_object_unref (cmd->after);
-}
-
-PlannerCmd *
-planner_task_cmd_unlink (PlannerWindow   *main_window,
-			 MrpRelation     *relation)
-{
-	PlannerCmd          *cmd_base;
-	TaskCmdLink         *cmd;
-
-	cmd_base = planner_cmd_new (TaskCmdLink,
-				    _("Unkink task"),
-				    task_cmd_unlink_do,
-				    task_cmd_unlink_undo,
-				    task_cmd_unlink_free);
-	
-	cmd = (TaskCmdLink *) cmd_base;
-
-	cmd->project = g_object_ref (planner_window_get_project (main_window));
-
-	cmd->before = g_object_ref (mrp_relation_get_predecessor (relation));
-	cmd->after = g_object_ref (mrp_relation_get_successor (relation));
-	cmd->relationship = mrp_relation_get_relation_type (relation);
-	cmd->lag = mrp_relation_get_lag (relation);
-			
-	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager 
-					   (main_window),
-					   cmd_base);
 	return cmd_base;
 }
 

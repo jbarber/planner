@@ -39,7 +39,7 @@
 #include "planner-scale-utils.h"
 #include "planner-task-tree.h"
 #include "planner-task-popup.h"
-#include "planner-task-dialog.h"
+#include "planner-task-cmd.h"
 
 /* The padding between the gantt bar and the text. */
 #define TEXT_PADDING 10.0

@@ -1,3 +1,22 @@
+2004-06-14 Alvaro del Castillo  <acs@barrapunto.com>
+
+	* Added src/planner-task-cmd.[ch]: shared undo commands for tasks
+	go to this file.
+	* Added src/planner-resource-cmd.[ch]: shared undo commands for resources
+	go to this file.	
+	* po/ChangeLog, po/POTFILES.in: new files has strings to be translated. Added.
+	* src/Makefile.am: new files need to be compiled and linked in planner.
+	* src/planner-gantt-row.c: use the new files for task undo commands 
+	planner-task-cmd.[ch]
+	* src/planner-resource-input-dialog.[ch]: undo for resources inserted implemented.
+	* src/planner-resource-view.c: move some resource undo code to new file 
+	planner-resource-cmd.[ch]
+	* src/planner-task-dialog.[ch]: move some task undo code to new file 
+	planner-task-cmd.[ch]
+	* src/planner-task-input-dialog.[ch]: undo for tasks inserted implemented.
+	* src/planner-task-tree.[ch]: use the new files for task undo commands 
+	planner-task-cmd.[ch]. Move some task undo code to these files.
+
 2004-06-13 Alvaro del Castillo  <acs@barrapunto.com>
 
 	* src/planner-task-dialog.c: implemented undo for note

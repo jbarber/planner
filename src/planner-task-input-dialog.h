@@ -25,15 +25,11 @@
 #define __PLANNER_TASK_INPUT_DIALOG_H__
 
 #include <gtk/gtkwidget.h>
-#include <libplanner/mrp-project.h>
+#include "planner-window.h"
 
-GtkWidget * planner_task_input_dialog_new (MrpProject *project);
+GtkWidget * planner_task_input_dialog_new (PlannerWindow *main_window);
 
 #endif /* __PLANNER_TASK_INPUT_DIALOG_H__ */
-
-
-
-
 
 
 

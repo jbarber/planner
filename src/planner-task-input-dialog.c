@@ -25,12 +25,14 @@
 #include <gtk/gtk.h>
 #include "planner-marshal.h"
 #include "planner-task-input-dialog.h"
+#include "planner-task-cmd.h"
 
 typedef struct {
-	MrpProject *project;
+	MrpProject    *project;
+	PlannerWindow *main_window;
 
-	GtkWidget  *name_entry;
-	GtkWidget  *work_entry;
+	GtkWidget     *name_entry;
+	GtkWidget     *work_entry;
 } DialogData;
 
 static void
@@ -39,6 +41,7 @@ task_input_dialog_free (gpointer user_data)
 	DialogData *data = user_data;
 
 	g_object_unref (data->project);
+	g_object_unref (data->main_window);
 
 	g_free (data);
 }
@@ -68,7 +71,9 @@ task_input_dialog_response_cb (GtkWidget *button,
 				     "name", name,
 				     NULL);
 		
-		mrp_project_insert_task (data->project, NULL, -1, task);
+		/*mrp_project_insert_task (data->project, NULL, -1, task);*/
+		planner_task_cmd_insert (data->main_window, 
+					 NULL, -1, 0, 0, task);
 		
 		gtk_entry_set_text (GTK_ENTRY (data->name_entry), "");
 		gtk_entry_set_text (GTK_ENTRY (data->work_entry), "");
@@ -94,17 +99,19 @@ task_input_dialog_activate_cb (GtkWidget *widget, GtkDialog *dialog)
 }
 
 GtkWidget *
-planner_task_input_dialog_new (MrpProject *project)
+planner_task_input_dialog_new (PlannerWindow *main_window)
 {
 	GtkWidget  *dialog;
 	DialogData *data;
 	GladeXML   *gui;
+	MrpProject *project;
 
-	g_return_val_if_fail (MRP_IS_PROJECT (project), NULL);
-	
 	data = g_new0 (DialogData, 1);
 
+	project = planner_window_get_project (main_window);
+
 	data->project = g_object_ref (project);
+	data->main_window = g_object_ref (main_window);
 	
 	gui = glade_xml_new (GLADEDIR "/task-input-dialog.glade",
 			     NULL , NULL);

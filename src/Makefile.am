@@ -76,6 +76,8 @@ planner_SOURCES = \
 	planner-property-dialog.h	\
 	planner-property-model.c	\
 	planner-property-model.h	\
+	planner-resource-cmd.c		\
+	planner-resource-cmd.h		\
 	planner-resource-dialog.c	\
 	planner-resource-dialog.h	\
 	planner-resource-input-dialog.c	\
@@ -84,6 +86,8 @@ planner_SOURCES = \
 	planner-sidebar.h		\
 	planner-table-print-sheet.c	\
 	planner-table-print-sheet.h	\
+	planner-task-cmd.c		\
+	planner-task-cmd.h		\
 	planner-task-dialog.c		\
 	planner-task-dialog.h		\
 	planner-task-input-dialog.c	\

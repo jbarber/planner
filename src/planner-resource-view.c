@@ -52,6 +52,7 @@
 #include "planner-resource-input-dialog.h"
 #include "planner-table-print-sheet.h"
 #include "planner-property-dialog.h"
+#include "planner-resource-cmd.h"
 
 struct _PlannerViewPriv {
 	GtkItemFactory         *popup_factory;
@@ -760,64 +761,6 @@ resource_view_popup_edit_resource_cb     (gpointer   callback_data,
 	resource_view_edit_resource_cb (NULL, callback_data, NULL);
 }
 
-static gboolean
-resource_cmd_insert_do (PlannerCmd *cmd_base)
-{
-	ResourceCmdInsert *cmd;
-
-	cmd = (ResourceCmdInsert*) cmd_base;
-
-	mrp_project_add_resource (cmd->project, cmd->resource);
-
-	return TRUE;
-}
-
-static void
-resource_cmd_insert_undo (PlannerCmd *cmd_base)
-{
-	ResourceCmdInsert *cmd;
-	
-	cmd = (ResourceCmdInsert*) cmd_base;
-
-	mrp_project_remove_resource (cmd->project,
-				     cmd->resource);
-}
-
-static void
-resource_cmd_insert_free (PlannerCmd  *cmd_base)
-{
-	ResourceCmdInsert *cmd;
-	cmd = (ResourceCmdInsert*) cmd_base;
-
-	g_object_unref (cmd->resource);
-}
-
-
-static PlannerCmd *
-resource_cmd_insert (PlannerView *view)
-{
-	PlannerCmd          *cmd_base;
-	ResourceCmdInsert   *cmd;
-
-	cmd = g_new0 (ResourceCmdInsert, 1);
-
-	cmd_base = (PlannerCmd*) cmd;
-
-	cmd_base->label = g_strdup (_("Insert resource"));
-	cmd_base->do_func = resource_cmd_insert_do;
-	cmd_base->undo_func = resource_cmd_insert_undo;
-	cmd_base->free_func = resource_cmd_insert_free;
-
-	cmd->resource = g_object_new (MRP_TYPE_RESOURCE, NULL);
-
-	cmd->project = planner_window_get_project (view->main_window);
-
-	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager (view->main_window),
-					   cmd_base);
-
-	return cmd_base;
-}
-
 static void
 resource_view_insert_resource_cb (BonoboUIComponent *component, 
 				  gpointer           data, 
@@ -833,7 +776,7 @@ resource_view_insert_resource_cb (BonoboUIComponent *component,
 	view = PLANNER_VIEW (data);
 	priv = view->priv;
 
-	cmd = (ResourceCmdInsert*) resource_cmd_insert (view);
+	cmd = (ResourceCmdInsert*) planner_resource_cmd_insert (view->main_window, NULL);
 
 	if (!GTK_WIDGET_HAS_FOCUS (priv->tree_view)) {
 		gtk_widget_grab_focus (GTK_WIDGET (priv->tree_view));
@@ -875,7 +818,7 @@ resource_view_insert_resources_cb (BonoboUIComponent *component,
 		return;
 	}
 
-	priv->resource_input_dialog = planner_resource_input_dialog_new (project);
+	priv->resource_input_dialog = planner_resource_input_dialog_new (view->main_window);
 
 	gtk_window_set_transient_for (GTK_WINDOW (priv->resource_input_dialog),
 				      GTK_WINDOW (view->main_window));

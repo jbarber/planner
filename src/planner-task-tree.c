@@ -46,6 +46,7 @@
 #include "planner-task-tree.h"
 #include "planner-gantt-model.h"
 #include "planner-task-popup.h"
+#include "planner-task-cmd.h"
 
 #define WARN_TASK_DIALOGS 10
 #define MAX_TASK_DIALOGS 25
@@ -156,7 +157,7 @@ static gint        task_tree_parse_time_string         (PlannerTaskTree      *tr
 							const gchar          *str);
 static MrpProject *task_tree_get_project               (PlannerTaskTree      *tree);
 static MrpTask *   task_tree_get_task_from_path        (PlannerTaskTree      *tree,
-							GtkTreePath          *path);
+                                                        GtkTreePath          *path);
 
 
 static GtkTreeViewClass *parent_class = NULL;
@@ -165,114 +166,6 @@ static guint signals[LAST_SIGNAL];
 /*
  * Commands
  */
-
-typedef struct {
-	PlannerCmd       base;
-
-	PlannerTaskTree *tree;
-	MrpProject      *project;
-	
-	gint             work;
-	gint             duration;
-	
-	GtkTreePath     *path;
-
-	MrpTask         *task; 	/* The inserted task */
-} TaskCmdInsert;
-
-static void
-task_cmd_insert_free (PlannerCmd *cmd_base)
-{
-	TaskCmdInsert *cmd;
-
-	cmd = (TaskCmdInsert*) cmd_base;
-
-	gtk_tree_path_free (cmd->path);
-	g_object_unref (cmd->task);
-	cmd->task = NULL;
-}
-
-static gboolean
-task_cmd_insert_do (PlannerCmd *cmd_base)
-{
-	TaskCmdInsert *cmd;
-	GtkTreePath   *path;
-	MrpTask       *parent;
-	gint           depth;
-	gint           position;
-
-	cmd = (TaskCmdInsert *) cmd_base;
-
-	path = gtk_tree_path_copy (cmd->path);
-
-	depth = gtk_tree_path_get_depth (path);
-	position = gtk_tree_path_get_indices (path)[depth - 1];
-
- 	if (depth > 1) {
-		gtk_tree_path_up (path);
-		parent = task_tree_get_task_from_path (cmd->tree, path);
-	} else {
-		parent = NULL;
-	}
-	
-	gtk_tree_path_free (path);
-	
-	if (cmd->task == NULL) {
-		cmd->task = g_object_new (MRP_TYPE_TASK,
-					  "work", cmd->work,
-					  "duration", cmd->duration,
-					  NULL);
-	}
-
-	mrp_project_insert_task (cmd->project,
-				 parent,
-				 position,
-				 cmd->task);
-
-	return TRUE;
-}
-
-static void
-task_cmd_insert_undo (PlannerCmd *cmd_base)
-{
-	TaskCmdInsert *cmd;
-	
-	cmd = (TaskCmdInsert *) cmd_base;
-
-	mrp_project_remove_task (cmd->project, cmd->task);
-}
-
-static PlannerCmd *
-task_cmd_insert (PlannerTaskTree *tree,
-		 GtkTreePath     *path,
-		 gint             work,
-		 gint             duration)
-{
-	PlannerTaskTreePriv *priv = tree->priv;
-	PlannerCmd          *cmd_base;
-	TaskCmdInsert       *cmd;
-
-	cmd = g_new0 (TaskCmdInsert, 1);
-
-	cmd_base = (PlannerCmd *) cmd;
-
-	cmd_base->label = g_strdup (_("Insert task"));
-	cmd_base->do_func = task_cmd_insert_do;
-	cmd_base->undo_func = task_cmd_insert_undo;
-	cmd_base->free_func = task_cmd_insert_free;
-
-	cmd->tree = tree;
-	cmd->project = task_tree_get_project (tree);
-
-	cmd->path = gtk_tree_path_copy (path);
-	cmd->work = work;
-	cmd->duration = duration;
-	
-	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager (priv->main_window),
-					   cmd_base);
-
-	return cmd_base;
-}
 
 typedef struct {
 	PlannerCmd         base;
@@ -2576,8 +2469,9 @@ planner_task_tree_insert_subtask (PlannerTaskTree *tree)
 	MrpTask           *parent;
 	GList             *list;
 	gint               work;
+	gint               depth;
 	gint               position;
-	TaskCmdInsert     *cmd;
+	PlannerCmd        *cmd;
 	GtkTreeIter        iter;
 
 	list = planner_task_tree_get_selected_tasks (tree);
@@ -2603,7 +2497,20 @@ planner_task_tree_insert_subtask (PlannerTaskTree *tree)
 		mrp_project_get_calendar (tree->priv->project),
 		mrp_day_get_work ());
 
-	cmd = (TaskCmdInsert*) task_cmd_insert (tree, path, work, work);
+	depth = gtk_tree_path_get_depth (path);
+	position = gtk_tree_path_get_indices (path)[depth - 1];
+
+	if (depth > 1) {
+		gtk_tree_path_up (path);
+		parent = task_tree_get_task_from_path (tree, path);
+	} else {
+		parent = NULL;
+	}
+
+	cmd = planner_task_cmd_insert (tree->priv->main_window, 
+				       parent, position, work, work, NULL);
+
+	/* cmd = planner_task_cmd_insert (tree, path, work, work); */
 
 	if (!GTK_WIDGET_HAS_FOCUS (tree)) {
 		gtk_widget_grab_focus (GTK_WIDGET (tree));
@@ -2634,7 +2541,8 @@ planner_task_tree_insert_task (PlannerTaskTree *tree)
 	GList               *list;
 	gint                 work;
 	gint                 position;
-	TaskCmdInsert       *cmd;
+	gint                 depth;
+	PlannerCmd          *cmd;
 
 	priv = tree->priv;
 	
@@ -2672,7 +2580,20 @@ planner_task_tree_insert_task (PlannerTaskTree *tree)
 		mrp_project_get_calendar (priv->project),
 		mrp_day_get_work ());
 	
-	cmd = (TaskCmdInsert*) task_cmd_insert (tree, path, work, work);
+	/* cmd = planner_task_cmd_insert (tree, path, work, work); */
+	
+	depth = gtk_tree_path_get_depth (path);
+	position = gtk_tree_path_get_indices (path)[depth - 1];
+
+	if (depth > 1) {
+		gtk_tree_path_up (path);
+		parent = task_tree_get_task_from_path (tree, path);
+	} else {
+		parent = NULL;
+	}
+
+	cmd = planner_task_cmd_insert (tree->priv->main_window, 
+				       parent, position, work, work, NULL);
 	
 	if (!GTK_WIDGET_HAS_FOCUS (tree)) {
 		gtk_widget_grab_focus (GTK_WIDGET (tree));
@@ -2811,7 +2732,7 @@ planner_task_tree_insert_tasks (PlannerTaskTree   *tree)
 		return;
 	}
 
-	widget = planner_task_input_dialog_new (priv->project);
+	widget = planner_task_input_dialog_new (priv->main_window);
 	gtk_window_set_transient_for (GTK_WINDOW (widget),
 				      GTK_WINDOW (priv->main_window));
 	gtk_widget_show (widget);
