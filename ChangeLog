@@ -1,3 +1,14 @@
+2004-03-26  Richard Hult  <richard@imendio.com>
+
+	* src/planner-gantt-model.c: (gantt_model_get_column_type),
+	(gantt_model_get_value):
+	* src/planner-gantt-model.h:
+	* src/planner-gantt-view.c: (gantt_view_create_widget):
+	* src/planner-task-tree.c: (task_tree_id_data_func),
+	(task_tree_add_column), (planner_task_tree_new):
+	* src/planner-task-tree.h:
+	* src/planner-task-view.c: (get_widget): Add WBS column.
+
 2004-03-24  Gareth Owen  <gowen72@yahoo.com>
 
 	* configure.in: Added en_GB to ALL_LINGUAS

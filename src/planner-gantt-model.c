@@ -589,6 +589,8 @@ gantt_model_get_column_type (GtkTreeModel *tree_model,
 			     gint          column)
 {
 	switch (column) {
+	case COL_ID:
+		return G_TYPE_STRING;
 	case COL_NAME:
 		return G_TYPE_STRING;
 	case COL_START:
@@ -749,6 +751,8 @@ gantt_model_get_value (GtkTreeModel *tree_model,
 	mrptime     t, t1, t2;
 	gint        duration;
 	MrpTaskType type;
+	gint        pos;
+	GString    *string;
 
 	g_return_if_fail (iter != NULL);
 
@@ -756,6 +760,34 @@ gantt_model_get_value (GtkTreeModel *tree_model,
 	task = node->data;
 
 	switch (column) {
+	case COL_ID:
+		string = g_string_sized_new (24);
+
+		pos = -1;
+		while (task) {
+			if (pos != -1) {
+				g_string_prepend_c (string, '.');
+			}
+
+			pos = mrp_task_get_position (task) + 1;
+
+			str = g_strdup_printf ("%d", pos);
+			g_string_prepend (string, str);
+			g_free (str);
+			
+			task = mrp_task_get_parent (task);
+
+			/* Skip the root. */
+			if (mrp_task_get_parent (task) == NULL)
+				break;
+		}
+		
+		g_value_init (value, G_TYPE_STRING);
+		g_value_set_string (value, string->str);
+
+		g_string_free (string, TRUE);
+		break;
+
 	case COL_NAME:
 		g_object_get (task, "name", &str, NULL);
 		if (str == NULL) {

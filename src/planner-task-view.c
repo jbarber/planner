@@ -260,15 +260,16 @@ get_widget (PlannerView *view)
 		model = planner_gantt_model_new (project);
 
 		priv->tree = planner_task_tree_new (view->main_window,
-					       model,
-					       TRUE,
-					       COL_NAME, _("Name"), 
-					       COL_START, _("Start"), 
-					       COL_FINISH, _("Finish"),
-					       COL_WORK, _("Work"),
-					       COL_SLACK, _("Slack"),
-					       COL_COST, _("Cost"),
-					       -1);
+						    model,
+						    TRUE,
+						    COL_ID,     _("WBS"),
+						    COL_NAME,   _("Name"), 
+						    COL_START,  _("Start"), 
+						    COL_FINISH, _("Finish"),
+						    COL_WORK,   _("Work"),
+						    COL_SLACK,  _("Slack"),
+						    COL_COST,   _("Cost"),
+						    -1);
 
 		g_object_unref (model);
 

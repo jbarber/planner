@@ -48,6 +48,7 @@ struct _PlannerGanttModelClass {
 };
 
 enum {
+	COL_ID,
 	COL_NAME,
 	COL_START,
 	COL_FINISH,

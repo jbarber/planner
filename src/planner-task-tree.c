@@ -616,6 +616,30 @@ task_tree_tree_view_button_press_event (GtkTreeView    *tree_view,
 }
 
 static void
+task_tree_id_data_func (GtkTreeViewColumn *tree_column,
+			GtkCellRenderer   *cell,
+			GtkTreeModel      *tree_model,
+			GtkTreeIter       *iter,
+			gpointer           data)
+{
+	PlannerTaskTree *tree;
+	gchar           *str;
+	
+	tree = PLANNER_TASK_TREE (data);
+	
+	gtk_tree_model_get (tree_model,
+			    iter,
+			    COL_ID, &str,
+			    -1);
+
+	g_object_set (cell,
+		      "text", str,
+		      NULL);
+	
+	g_free (str);
+}
+
+static void
 task_tree_name_data_func (GtkTreeViewColumn *tree_column,
 			  GtkCellRenderer   *cell,
 			  GtkTreeModel      *tree_model,
@@ -1428,6 +1452,26 @@ task_tree_add_column (GtkTreeView *tree,
 	GtkCellRenderer   *cell;
 
 	switch (column) {
+	case COL_ID:
+		cell = gtk_cell_renderer_text_new ();
+
+		col = gtk_tree_view_column_new_with_attributes (title,
+								cell,
+								NULL);
+		gtk_tree_view_column_set_cell_data_func (col,
+							 cell,
+							 task_tree_id_data_func,
+							 tree, NULL);
+		g_object_set_data (G_OBJECT (col),
+				   "data-func", task_tree_id_data_func);
+		g_object_set_data (G_OBJECT (col),
+				   "user-data", tree);
+		
+		gtk_tree_view_column_set_resizable (col, TRUE);
+		gtk_tree_view_column_set_min_width (col, 50);
+		gtk_tree_view_append_column (tree, col);
+		break;
+
 	case COL_NAME:
 		cell = gtk_cell_renderer_text_new ();
 		g_object_set (cell, "editable", TRUE, NULL);
@@ -1452,6 +1496,9 @@ task_tree_add_column (GtkTreeView *tree,
 		gtk_tree_view_column_set_resizable (col, TRUE);
 		gtk_tree_view_column_set_min_width (col, 100);
 		gtk_tree_view_append_column (tree, col);
+
+		gtk_tree_view_set_expander_column (tree, col);
+                                             
 		break;
 
 	case COL_START:
@@ -1601,10 +1648,10 @@ task_tree_add_column (GtkTreeView *tree,
 }
 
 GtkWidget *
-planner_task_tree_new (PlannerWindow *main_window,
+planner_task_tree_new (PlannerWindow     *main_window,
 		       PlannerGanttModel *model, 
-		       gboolean      custom_properties,
-		       gpointer      first_column,
+		       gboolean           custom_properties,
+		       gint               first_column,
 		       ...)
 {
 	MrpProject          *project;
@@ -1628,7 +1675,7 @@ planner_task_tree_new (PlannerWindow *main_window,
 
 	va_start (args, first_column);
 
-	col = GPOINTER_TO_INT (first_column);
+	col = first_column;
 	while (col != -1) {
 		str = va_arg (args, gpointer);
 

@@ -489,9 +489,10 @@ gantt_view_create_widget (PlannerView *view)
 	tree = planner_task_tree_new (view->main_window,
 				 PLANNER_GANTT_MODEL (model),
 				 FALSE,
-				 COL_NAME,     _("\nName"),
+				 COL_ID,         _("\nWBS"),
+				 COL_NAME,       _("\nName"),
 				 /*COL_START,    _("\nStart"),*/
-				 COL_WORK, _("\nWork"), 
+				 COL_WORK,       _("\nWork"), 
 				 /*COL_DURATION, _("\nDuration"),*/
 				 -1);
 	
