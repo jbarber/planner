@@ -470,8 +470,7 @@ check_database_tables (GdaConnection *conn,
 	   and the upgrades files from different versions */
 	if ((is_newer_version (max_version_upgrade, max_version_database) ||
 	    is_newer_version (max_version_database, max_version_upgrade))
-	    && 
-	    (upgradable || create_tables)) {
+	    && upgradable) {
 		g_warning ("Database file version %s (%s) is different from upgrade file version %s (%s)",
 			   max_version_database,
 			   database_file,
