@@ -1,11 +1,26 @@
+2004-03-15  Richard Hult  <richard@imendio.com>
+
+	* src/Makefile.am:
+	* src/planner-gantt-chart.c: (gantt_chart_insert_task),
+	(planner_gantt_chart_get_view), (planner_gantt_chart_set_view),
+	(planner_gantt_chart_get_highlight_critical_tasks):
+	* src/planner-gantt-chart.h:
+	* src/planner-gantt-row.c: (gantt_row_event),
+	(planner_gantt_row_init_menu):
+	* src/planner-gantt-row.h:
+	* src/planner-gantt-view.c: (gantt_view_create_widget),
+	(gantt_view_update_zoom_sensitivity):
+	* src/planner-task-tree.c: (task_tree_init),
+	(task_tree_tree_view_popup_menu): Commit patch from Chris Ladd
+	<caladd@particlestorm.net> to fix bug #129149.
+
 2004-03-13  Alexander Shopov  <ash@contact.bg>
 
 	* configure.in: Added "bg" (Bulgarian) to ALL_LINGUAS
 
 2004-03-10	Mohammad DAMT  <mdamt@bisnisweb.com>
 
-	* configure.in: Added id (Indonesian) to ALL_LINGUAS
-	* po/id.po: Added Indonesian Translation by Arief Mulya Utama <arief_mulya@yahoo.com>
+	* configure.in: Added id (Indonesian) to ALL_LINGUAS.
 
 2004-02-27  Richard Hult  <richard@imendio.com>
 
