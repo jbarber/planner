@@ -1,25 +1,23 @@
-# planner.po fordítása Hungarianra
-# mrproject hu.po
-# Copyright (C) 2001, 2004 Free Software Foundation, Inc.
-# Andras Timar <timar@gnome.hu>, 2002.
-# Gabor Kelemen <kg0021@stud.unideb.hu>, 2004.
+# Hungarian translation of planner.
+# Copyright (C) 2002, 2003, 2004 Free Software Foundation, Inc.
+# This file is distributed under the same license as the planner package.
+# Andras Timar <timar@gnome.hu>, 2002, 2003.
+# Gabor Kelemen <kelemeng@gnome.hu>, 2004.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: planner\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-03-23 04:13+0100\n"
-"PO-Revision-Date: 2004-04-12 17:56+0200\n"
-"Last-Translator: Gabor Kelemen <kg0021@stud.unideb.hu>\n"
+"POT-Creation-Date: 2004-12-03 11:56+0100\n"
+"PO-Revision-Date: 2004-12-03 16:51+0100\n"
+"Last-Translator: Gabor Kelemen <kelemeng@gnome.hu>\n"
 "Language-Team: Hungarian <gnome@gnome.hu>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.3.1\n"
-"Plural-Forms:  nplurals=1; plural=0;\n"
 
 #: data/glade/add-predecessor.glade.h:1 data/glade/calendar-dialog.glade.h:4
-#: data/glade/html-output.glade.h:2 data/glade/new-property.glade.h:1
+#: data/glade/eds.glade.h:1 data/glade/new-property.glade.h:1
 #: data/glade/project-properties.glade.h:1
 #: data/glade/resource-dialog.glade.h:1
 #: data/glade/resource-input-dialog.glade.h:1 data/glade/sql.glade.h:1
@@ -28,9 +26,8 @@ msgid "*"
 msgstr "*"
 
 #: data/glade/add-predecessor.glade.h:2
-#, fuzzy
 msgid "Add Predecessor"
-msgstr "Előzmények"
+msgstr "Előzmény hozzáadása"
 
 #: data/glade/add-predecessor.glade.h:3
 msgid "_Lag:"
@@ -45,20 +42,21 @@ msgid "_Name:"
 msgstr "_Név:"
 
 #: data/glade/add-predecessor.glade.h:5
-#, fuzzy
 msgid "_Relation type:"
-msgstr "Reláció típusa: "
+msgstr "_Reláció típusa:"
 
 #: data/glade/calendar-dialog.glade.h:1
 msgid ""
 "\n"
 "The selected day type has the following working hours:"
 msgstr ""
+"\n"
+"A kiválasztott naptípushoz a következő munkaidők tartoznak:"
 
 #: data/glade/calendar-dialog.glade.h:3 data/glade/html-output.glade.h:1
 #: data/glade/task-dialog.glade.h:1
 msgid "    "
-msgstr ""
+msgstr "    "
 
 #: data/glade/calendar-dialog.glade.h:5
 msgid "-"
@@ -81,9 +79,8 @@ msgid "<b>Working time</b>"
 msgstr "<b>Munkaidő</b>"
 
 #: data/glade/calendar-dialog.glade.h:10
-#, fuzzy
 msgid "Add Day Type"
-msgstr "Naptípusok szerkesztése"
+msgstr "Naptípus hozzáadása"
 
 #: data/glade/calendar-dialog.glade.h:11
 msgid "Apply"
@@ -110,9 +107,8 @@ msgid "Custom working time"
 msgstr "Egyedi munkaidő"
 
 #: data/glade/calendar-dialog.glade.h:17
-#, fuzzy
 msgid "Day type:"
-msgstr "Új naptípus"
+msgstr "Nap típusa:"
 
 #: data/glade/calendar-dialog.glade.h:18
 msgid "Default Week"
@@ -139,7 +135,6 @@ msgid "New Calendar"
 msgstr "Új naptár"
 
 #: data/glade/calendar-dialog.glade.h:24
-#, fuzzy
 msgid "Select a Calendar"
 msgstr "Naptár kiválasztása"
 
@@ -148,10 +143,12 @@ msgid ""
 "Select a weekday and the day type to use for that day in the default week "
 "for this calendar.\n"
 msgstr ""
+"Válasszon ki egy munkanapot és a használandó naptípust ezen naptár "
+"alapértelmezett hetében.\n"
 
 #: data/glade/calendar-dialog.glade.h:27
 msgid "Set day type to:"
-msgstr ""
+msgstr "Nap típusa:"
 
 #: data/glade/calendar-dialog.glade.h:28
 msgid "To:"
@@ -159,25 +156,23 @@ msgstr "Eddig:"
 
 #: data/glade/calendar-dialog.glade.h:29
 msgid "Use working time from derived calendar"
-msgstr ""
+msgstr "Munkaidők használata a származtatott naptárból"
 
 #: data/glade/calendar-dialog.glade.h:30
 msgid "Week day:"
-msgstr "Hétköznap:"
+msgstr "Hét napja:"
 
 #: data/glade/calendar-dialog.glade.h:31
 msgid "Working time..."
 msgstr "Munkaidő..."
 
 #: data/glade/calendar-dialog.glade.h:32
-#, fuzzy
 msgid "_Derive from a calendar"
-msgstr "Naptár kiválasztása"
+msgstr "_Származtatás naptárból"
 
 #: data/glade/calendar-dialog.glade.h:33
-#, fuzzy
 msgid "_Existing calendars:"
-msgstr "Meglévő naptárak:"
+msgstr "_Meglévő naptárak:"
 
 #: data/glade/calendar-dialog.glade.h:34
 msgid "_Name of the new calendar:"
@@ -187,60 +182,77 @@ msgstr "Az új naptár _neve:"
 msgid "_New..."
 msgstr "Ú_j..."
 
+#: data/glade/eds.glade.h:2
+msgid "Loading resource data"
+msgstr "Erőforrásadatok betöltése"
+
+#: data/glade/eds.glade.h:3
+msgid "Search"
+msgstr "Keresés"
+
+#: data/glade/eds.glade.h:4
+msgid "Select All"
+msgstr "Mindent kijelöl"
+
+#: data/glade/eds.glade.h:5
+msgid "Select group"
+msgstr "Válasszon csoportot"
+
+#: data/glade/eds.glade.h:6
+msgid "Unselect All"
+msgstr "Kijelölés megszüntetése"
+
+#: data/glade/eds.glade.h:7
+msgid "dialog1"
+msgstr "dialog1"
+
 #: data/glade/group-dialog.glade.h:1
 msgid "Group Editor"
 msgstr "Csoportszerkesztő"
 
-#: data/glade/html-output.glade.h:3
-msgid "<b>Save to</b>"
-msgstr "<b>Mentés</b>"
+#: data/glade/html-output.glade.h:2
+msgid "<b>Save to file</b>"
+msgstr "<b>Mentés fájlba</b>"
 
-#: data/glade/html-output.glade.h:4 data/ui/html-plugin.ui.h:1
+#: data/glade/html-output.glade.h:3
 msgid "Export to HTML"
 msgstr "Exportálás HTML-be"
 
-#: data/glade/html-output.glade.h:5
-#, fuzzy
+#: data/glade/html-output.glade.h:4
 msgid "Local file:"
-msgstr "Helyi fájl"
+msgstr "Helyi fájl:"
 
-#: data/glade/html-output.glade.h:6
+#: data/glade/html-output.glade.h:5
 msgid "Save to HTML File"
 msgstr "Mentés HTML-fájlba"
 
-#: data/glade/html-output.glade.h:7
-#, fuzzy
+#: data/glade/html-output.glade.h:6
 msgid "Web location:"
-msgstr "Webhely"
+msgstr "Webhely:"
 
 #: data/glade/new-property.glade.h:2
-#, fuzzy
 msgid "Add Property"
-msgstr "Tulajdonság"
+msgstr "Tulajdonság hozzáadása"
 
 #: data/glade/new-property.glade.h:3
-#, fuzzy
 msgid "_Description:"
-msgstr "Leírás: "
+msgstr "_Leírás:"
 
 #: data/glade/new-property.glade.h:4
-#, fuzzy
 msgid "_Label:"
-msgstr "Címke: "
+msgstr "_Címke:"
 
 #: data/glade/new-property.glade.h:6 data/glade/resource-dialog.glade.h:14
 msgid "_Type:"
 msgstr "_Típus:"
 
 #: data/glade/project-properties.glade.h:2
-#, fuzzy
 msgid "Custom"
-msgstr "Költség"
+msgstr "Egyéni"
 
 #: data/glade/project-properties.glade.h:3
-#, fuzzy
 msgid "Edit Project Phases"
-msgstr "Projekt _fázisainak szerkesztése"
+msgstr "Projekt fázisainak szerkesztése"
 
 #: data/glade/project-properties.glade.h:4
 #: data/glade/resource-dialog.glade.h:5 data/glade/task-dialog.glade.h:6
@@ -252,18 +264,16 @@ msgid "New Project Phase"
 msgstr "Új projektfázis"
 
 #: data/glade/project-properties.glade.h:6
-#, fuzzy
 msgid "Project Properties"
-msgstr "A projekt adatai"
+msgstr "Projekt tulajdonságai"
 
 #: data/glade/project-properties.glade.h:7
 msgid "Select..."
 msgstr "Kijelölés..."
 
 #: data/glade/project-properties.glade.h:8
-#, fuzzy
 msgid "_Calendar:"
-msgstr "Naptár:"
+msgstr "_Naptár:"
 
 #: data/glade/project-properties.glade.h:9
 msgid "_Manager:"
@@ -274,14 +284,12 @@ msgid "_Organization:"
 msgstr "_Szervezet:"
 
 #: data/glade/project-properties.glade.h:12
-#, fuzzy
 msgid "_Phase:"
-msgstr "_Beillesztés"
+msgstr "Fá_zis:"
 
 #: data/glade/project-properties.glade.h:13
-#, fuzzy
 msgid "_Start:"
-msgstr "Kezdet"
+msgstr "_Kezdet:"
 
 #: data/glade/property-dialog.glade.h:1
 msgid "Custom Properties"
@@ -296,7 +304,6 @@ msgid "Calendar"
 msgstr "Naptár"
 
 #: data/glade/resource-dialog.glade.h:4
-#, fuzzy
 msgid "Edit Calendars..."
 msgstr "Naptárak szerkesztése..."
 
@@ -306,13 +313,15 @@ msgstr "Megjegyzések"
 
 #: data/glade/resource-dialog.glade.h:7
 msgid "Optional - overrides resource name in Gantt view."
-msgstr ""
+msgstr "Opcionális - felülbírálja az erőforrásnevet a Gantt-diagramnézetben."
 
 #: data/glade/resource-dialog.glade.h:8
 msgid ""
 "Select the calendar to use for this resource. If you want to use the default "
 "calendar of the project, select 'None'. "
 msgstr ""
+"Az ezen erőforráshoz használandó naptár. Ha a projekt alapértelmezett "
+"naptárát szeretné használni, válassza a \"Nincs\" -et. "
 
 #: data/glade/resource-dialog.glade.h:9
 #: data/glade/resource-input-dialog.glade.h:4
@@ -325,24 +334,21 @@ msgid "_Group:"
 msgstr "_Csoport:"
 
 #: data/glade/resource-dialog.glade.h:11
-#, fuzzy
 msgid "_Insert time stamp"
-msgstr "Időbélyeg beszúrása"
+msgstr "_Időbélyeg beszúrása"
 
 #: data/glade/resource-dialog.glade.h:13
 #: data/glade/resource-input-dialog.glade.h:8
-#, fuzzy
 msgid "_Short name:"
-msgstr "Névtelen"
+msgstr "_Rövid név:"
 
 #: data/glade/resource-input-dialog.glade.h:2
-#, fuzzy
 msgid "Insert Resource"
-msgstr "_Erőforrás beillesztése"
+msgstr "Erőforrás beillesztése"
 
 #: data/glade/resource-input-dialog.glade.h:3
 msgid "Optional - overrides resource name in gantt view."
-msgstr ""
+msgstr "Opcionális - felülbírálja az erőforrásnevet a Gantt-diagramnézetben."
 
 #: data/glade/resource-input-dialog.glade.h:6
 #: data/glade/task-input-dialog.glade.h:3
@@ -360,26 +366,24 @@ msgstr "Projekt kiválasztása"
 #: data/glade/sql.glade.h:4
 msgid "The database contains the following projects. Select a project to open:"
 msgstr ""
+"Az adatbázis a következő projekteket tartalmazza. Válassza ki a megnyitandó "
+"projektet:"
 
 #: data/glade/sql.glade.h:5
-#, fuzzy
 msgid "_Database:"
-msgstr "Adatbázis:"
+msgstr "_Adatbázis:"
 
 #: data/glade/sql.glade.h:6
-#, fuzzy
 msgid "_Password:"
-msgstr "Jelszó:"
+msgstr "_Jelszó:"
 
 #: data/glade/sql.glade.h:7
-#, fuzzy
 msgid "_Server:"
-msgstr "Kiszolgáló:"
+msgstr "_Kiszolgáló:"
 
 #: data/glade/sql.glade.h:8
-#, fuzzy
 msgid "_Username:"
-msgstr "Felhasználói név:"
+msgstr "_Felhasználónév:"
 
 #: data/glade/task-dialog.glade.h:3
 #, no-c-format
@@ -394,12 +398,11 @@ msgstr "_Készenlét:"
 msgid "Predecessors"
 msgstr "Előzmények"
 
-#: data/glade/task-dialog.glade.h:9 src/planner-resource-view.c:393
+#: data/glade/task-dialog.glade.h:9 src/planner-resource-view.c:431
 msgid "Resources"
 msgstr "Erőforrások"
 
 #: data/glade/task-dialog.glade.h:10
-#, fuzzy
 msgid "_Duration:"
 msgstr "_Időtartam:"
 
@@ -408,16 +411,14 @@ msgid "_Fixed duration"
 msgstr "_Rögzített időtartam"
 
 #: data/glade/task-dialog.glade.h:12
-#, fuzzy
 msgid "_Insert Time Stamp"
-msgstr "Időbélyeg beszúrása"
+msgstr "_Időbélyeg beszúrása"
 
 #: data/glade/task-dialog.glade.h:13
 msgid "_Milestone"
 msgstr "_Mérföldkő"
 
 #: data/glade/task-dialog.glade.h:15
-#, fuzzy
 msgid "_Priority:"
 msgstr "_Prioritás:"
 
@@ -426,405 +427,41 @@ msgid "_Work:"
 msgstr "_Munka:"
 
 #. day unit variant accepted in input
-#: data/glade/task-dialog.glade.h:17 src/planner-task-tree.c:2308
+#: data/glade/task-dialog.glade.h:17 src/planner-task-tree.c:3328
 msgid "days"
 msgstr "nap"
 
 #: data/glade/task-input-dialog.glade.h:2
-#, fuzzy
 msgid "Insert Task"
-msgstr "_Feladat beszúrása"
+msgstr "Feladat beszúrása"
 
-#: data/planner.desktop.in.h:1
-#, fuzzy
+#: data/mime/planner.keys.in.h:1
+msgid "Documents/Project Management"
+msgstr "Dokumentum/Projektmenedzsment"
+
+#: data/mime/planner.keys.in.h:2
+msgid "Project Plan"
+msgstr "Projektterv"
+
+#: data/mime/planner.xml.in.h:1
+msgid "Planner project plan"
+msgstr "Planner projektterv"
+
+#: data/planner.desktop.in.in.h:1
 msgid "Planner Project Management"
-msgstr "Projektmenedzsment"
+msgstr "Planner projektmenedzsment"
 
-#: data/planner.desktop.in.h:2
+#: data/planner.desktop.in.in.h:2
 msgid "Project Management"
 msgstr "Projektmenedzsment"
-
-#: data/ui/gantt-view.ui.h:1 data/ui/task-view.ui.h:1
-msgid "I_ndent Task"
-msgstr "Feladat _behúzása"
-
-#: data/ui/gantt-view.ui.h:2 data/ui/task-view.ui.h:2
-msgid "In_sert Tasks..."
-msgstr "F_eladatok beszúrása..."
-
-#: data/ui/gantt-view.ui.h:3 data/ui/task-view.ui.h:3
-#: src/planner-application.c:83
-msgid "Indent"
-msgstr "Behúzás"
-
-#: data/ui/gantt-view.ui.h:4 data/ui/resource-view.ui.h:5
-#: data/ui/task-view.ui.h:4 src/planner-application.c:55
-#: src/planner-application.c:111
-msgid "Insert"
-msgstr "Beszúrás"
-
-#: data/ui/gantt-view.ui.h:5 data/ui/task-view.ui.h:5
-#: src/planner-application.c:76
-#, fuzzy
-msgid "Link"
-msgstr "Nem függ"
-
-#: data/ui/gantt-view.ui.h:6 data/ui/task-view.ui.h:6
-#, fuzzy
-msgid "Move Task Do_wn"
-msgstr "Le"
-
-#: data/ui/gantt-view.ui.h:7 data/ui/task-view.ui.h:7
-#, fuzzy
-msgid "Move Task _Up"
-msgstr "Le"
-
-#: data/ui/gantt-view.ui.h:8 data/ui/task-view.ui.h:8
-#: src/planner-application.c:104
-msgid "Move down"
-msgstr "Le"
-
-#: data/ui/gantt-view.ui.h:9 data/ui/task-view.ui.h:9
-#: src/planner-application.c:97
-msgid "Move up"
-msgstr "Fel"
-
-#: data/ui/gantt-view.ui.h:10 data/ui/resource-view.ui.h:6
-#: data/ui/task-view.ui.h:10 src/planner-application.c:62
-#: src/planner-application.c:118
-msgid "Remove"
-msgstr "Eltávolítás"
-
-#: data/ui/gantt-view.ui.h:11 data/ui/task-view.ui.h:11
-msgid "Reset _All Constraints"
-msgstr ""
-
-#: data/ui/gantt-view.ui.h:12 data/ui/task-view.ui.h:12
-msgid "Reset _Constraint"
-msgstr ""
-
-#: data/ui/gantt-view.ui.h:13 data/ui/resource-view.ui.h:7
-#: data/ui/task-view.ui.h:13
-msgid "Select _All"
-msgstr "_Mindet kijelöli"
-
-#: data/ui/gantt-view.ui.h:14 data/ui/resource-view.ui.h:8
-#: data/ui/task-view.ui.h:14
-msgid "Select all tasks"
-msgstr "Az összes feladat kijelölése"
-
-#: data/ui/gantt-view.ui.h:15
-#, fuzzy
-msgid "Test"
-msgstr "Teszt"
-
-#: data/ui/gantt-view.ui.h:16 data/ui/task-view.ui.h:15
-msgid "Unin_dent Task"
-msgstr "Feladat behúzásának _csökkentése"
-
-#: data/ui/gantt-view.ui.h:17 data/ui/task-view.ui.h:16
-#: src/planner-application.c:90
-msgid "Unindent"
-msgstr "Behúzás csökkentése"
-
-#: data/ui/gantt-view.ui.h:18 data/ui/task-view.ui.h:17
-#: src/planner-application.c:69
-msgid "Unlink"
-msgstr "Nem függ"
-
-#: data/ui/gantt-view.ui.h:19
-msgid "Zoom In"
-msgstr "Nagyítás"
-
-#: data/ui/gantt-view.ui.h:20
-msgid "Zoom Out"
-msgstr "Kicsinyítés"
-
-#: data/ui/gantt-view.ui.h:21
-#, fuzzy
-msgid "Zoom To Fit"
-msgstr "Nagyítás:"
-
-#: data/ui/gantt-view.ui.h:22
-#, fuzzy
-msgid "Zoom To _Fit"
-msgstr "Nagyítás:"
-
-#: data/ui/gantt-view.ui.h:23
-msgid "Zoom _Out"
-msgstr "_Kicsinyítés"
-
-#: data/ui/gantt-view.ui.h:24 data/ui/task-view.ui.h:19
-msgid "_Edit Task Properties..."
-msgstr "_Feladat tulajdonságainak szerkesztése..."
-
-#: data/ui/gantt-view.ui.h:25 data/ui/task-view.ui.h:20
-msgid "_Highlight Critical Tasks"
-msgstr "_Kritikus feladatok kiemelése"
-
-#: data/ui/gantt-view.ui.h:26 data/ui/task-view.ui.h:21
-msgid "_Insert Task"
-msgstr "_Feladat beszúrása"
-
-#: data/ui/gantt-view.ui.h:27 data/ui/task-view.ui.h:22
-#, fuzzy
-msgid "_Link Tasks"
-msgstr "Feladat _nem függ"
-
-#: data/ui/gantt-view.ui.h:28 data/ui/task-view.ui.h:23
-msgid "_Remove Task"
-msgstr "Feladat _eltávolítása"
-
-#: data/ui/gantt-view.ui.h:29 data/ui/task-view.ui.h:24
-#, fuzzy
-msgid "_Unlink Task"
-msgstr "Feladat _nem függ"
-
-#: data/ui/gantt-view.ui.h:30
-msgid "_Zoom In"
-msgstr "_Nagyítás"
-
-#: data/ui/main-window.ui.h:1
-msgid "About this application"
-msgstr "Az alkalmazás névjegye"
-
-#: data/ui/main-window.ui.h:2
-msgid "C_ut"
-msgstr "_Kivágás"
-
-#: data/ui/main-window.ui.h:3
-msgid "Clear"
-msgstr "Törlés"
-
-#: data/ui/main-window.ui.h:4
-msgid "Clear the selection"
-msgstr "A kijelölés törlése"
-
-#: data/ui/main-window.ui.h:5
-msgid "Close the current file"
-msgstr "A jelenlegi fájl bezárása"
-
-#: data/ui/main-window.ui.h:6
-msgid "Copy the selection"
-msgstr "A kijelölés másolása"
-
-#: data/ui/main-window.ui.h:7
-msgid "Create a new project"
-msgstr "Új projekt létrehozása"
-
-#: data/ui/main-window.ui.h:8
-msgid "Cut the selection"
-msgstr "A kijelölés kivágása"
-
-#: data/ui/main-window.ui.h:9
-msgid "Edit Day _Types"
-msgstr "Nap_típusok szerkesztése"
-
-#: data/ui/main-window.ui.h:10
-msgid "Edit Project _Phases"
-msgstr "Projekt _fázisainak szerkesztése"
-
-#: data/ui/main-window.ui.h:11
-msgid "Edit the project properties"
-msgstr "A projekt tulajdonságainak szerkesztése"
-
-#: data/ui/main-window.ui.h:12
-msgid "Exit the program"
-msgstr "Kilépés a programból"
-
-#: data/ui/main-window.ui.h:13
-msgid "New"
-msgstr "Új"
-
-#: data/ui/main-window.ui.h:14
-msgid "New..."
-msgstr "Új..."
-
-#: data/ui/main-window.ui.h:15
-msgid "Open"
-msgstr "Megnyitás"
-
-#: data/ui/main-window.ui.h:16
-msgid "Open a project"
-msgstr "Projekt megnyitása"
-
-#: data/ui/main-window.ui.h:17
-msgid "Paste the clipboard"
-msgstr "A vágólap tartalmának beillesztése"
-
-#: data/ui/main-window.ui.h:18
-msgid "Print"
-msgstr "Nyomtatás"
-
-#: data/ui/main-window.ui.h:19
-msgid "Print preview of the current project"
-msgstr "A jelenlegi projekt nyomtatási képe"
-
-#: data/ui/main-window.ui.h:20
-msgid "Print the current project"
-msgstr "A jelenlegi projekt nyomtatása"
-
-#: data/ui/main-window.ui.h:21
-msgid "Redo the undone action"
-msgstr "A visszavont művelet ismételt végrehajtása"
-
-#: data/ui/main-window.ui.h:22
-msgid "Save"
-msgstr "Mentés"
-
-#: data/ui/main-window.ui.h:23
-msgid "Save _As..."
-msgstr "Men_tés másként..."
-
-#: data/ui/main-window.ui.h:24
-msgid "Save the current project"
-msgstr "A jelenlegi projekt mentése"
-
-#: data/ui/main-window.ui.h:25
-msgid "Save the current project with a different name"
-msgstr "A jelenlegi projekt mentése más néven"
-
-#: data/ui/main-window.ui.h:26
-#, fuzzy
-msgid "Show the Planner User Guide"
-msgstr "A MrProject felhasználói kézikönyvének megjelenítése"
-
-#: data/ui/main-window.ui.h:27
-msgid "Undo the last action"
-msgstr "Az utolsó művelet visszavonása"
-
-#: data/ui/main-window.ui.h:28
-msgid "_About"
-msgstr "_Névjegy"
-
-#: data/ui/main-window.ui.h:29
-msgid "_Actions"
-msgstr "_Műveletek"
-
-#: data/ui/main-window.ui.h:30
-msgid "_Close"
-msgstr "_Bezárás"
-
-#: data/ui/main-window.ui.h:31
-msgid "_Copy"
-msgstr "_Másolás"
-
-#: data/ui/main-window.ui.h:32
-msgid "_Edit"
-msgstr "S_zerkesztés"
-
-#: data/ui/main-window.ui.h:33
-msgid "_Edit Project Properties"
-msgstr "Projekt _adatainak szerkesztése"
-
-#: data/ui/main-window.ui.h:34
-msgid "_File"
-msgstr "_Fájl"
-
-#: data/ui/main-window.ui.h:35
-msgid "_Help"
-msgstr "_Súgó"
-
-#: data/ui/main-window.ui.h:36
-msgid "_Manage Calendars"
-msgstr "Naptárak _kezelése"
-
-#: data/ui/main-window.ui.h:37
-msgid "_New Project"
-msgstr "Ú_j projekt"
-
-#: data/ui/main-window.ui.h:38
-msgid "_Open..."
-msgstr "_Megnyitás..."
-
-#: data/ui/main-window.ui.h:39
-msgid "_Paste"
-msgstr "_Beillesztés"
-
-#: data/ui/main-window.ui.h:40
-msgid "_Print Preview"
-msgstr "Nyomtatási _kép"
-
-#: data/ui/main-window.ui.h:41
-msgid "_Print..."
-msgstr "_Nyomtatás..."
-
-#: data/ui/main-window.ui.h:42
-msgid "_Project"
-msgstr "_Project"
-
-#: data/ui/main-window.ui.h:43
-msgid "_Quit"
-msgstr "_Kilépés"
-
-#: data/ui/main-window.ui.h:44 src/planner-window.c:1168
-msgid "_Redo"
-msgstr "Új_ra"
-
-#: data/ui/main-window.ui.h:45 src/planner-window.c:1271
-msgid "_Save"
-msgstr "M_entés"
-
-#: data/ui/main-window.ui.h:46 src/planner-window.c:1142
-msgid "_Undo"
-msgstr "_Visszavonás"
-
-#: data/ui/main-window.ui.h:47
-msgid "_User Guide"
-msgstr "_Felhasználói kézikönyv"
-
-#: data/ui/main-window.ui.h:48
-msgid "_View"
-msgstr "_Nézet"
-
-#: data/ui/resource-view.ui.h:1
-msgid "Edit _Custom Properties..."
-msgstr "Egyesi _tulajdonságok szerkesztése..."
-
-#: data/ui/resource-view.ui.h:2
-msgid "Edit _Groups"
-msgstr "_Csoportok szerkesztése"
-
-#: data/ui/resource-view.ui.h:3
-msgid "Groups"
-msgstr "Csoportok"
-
-#: data/ui/resource-view.ui.h:4
-msgid "In_sert Resources..."
-msgstr "Erő_források beszúrása..."
-
-#: data/ui/resource-view.ui.h:9
-msgid "_Edit Resource Properties..."
-msgstr "_Erőforrás tulajdonságainak szerkesztése..."
-
-#: data/ui/resource-view.ui.h:10
-msgid "_Insert Resource"
-msgstr "_Erőforrás beillesztése"
-
-#: data/ui/resource-view.ui.h:11
-msgid "_Remove Resource"
-msgstr "E_rőforrás eltávolítása"
-
-#: data/ui/sql-plugin.ui.h:1
-msgid "Open from Database..."
-msgstr "Megnyitás adatbázisból..."
-
-#: data/ui/sql-plugin.ui.h:2
-msgid "Save to Database..."
-msgstr "Mentés adatbázisba..."
-
-#: data/ui/task-view.ui.h:18
-msgid "_Edit Custom Properties..."
-msgstr "_Egyéni tulajdonságok szerkesztése..."
 
 #: libegg/recent-files/egg-recent-vfs-utils.c:90
 msgid " (invalid Unicode)"
 msgstr " (érvénytelen Unicode)"
 
 #: libplanner/mrp-day.c:54
-#, fuzzy
 msgid "Working"
-msgstr "Munka"
+msgstr "Munkanap"
 
 #: libplanner/mrp-day.c:55
 msgid "A default working day"
@@ -840,153 +477,214 @@ msgstr "Egy alapértelmezett nem munkanap"
 
 #: libplanner/mrp-day.c:60
 msgid "Use base"
-msgstr ""
+msgstr "Alap használata"
 
 #: libplanner/mrp-day.c:61
 msgid "Use day from base calendar"
-msgstr ""
+msgstr "Nap használata az alapnaptárból"
 
-#: libplanner/mrp-parser.c:1058 libplanner/mrp-parser.c:1153
+#: libplanner/mrp-file-module.c:115
+msgid "This format does not support reading"
+msgstr "Ez a formátum nem támogatja az olvasást"
+
+#: libplanner/mrp-parser.c:1062 libplanner/mrp-parser.c:1157
 msgid "Could not create XML tree"
-msgstr "Nem lehet XML fát létrehozni"
+msgstr "Nem lehet XML-fát létrehozni"
 
-#: libplanner/mrp-parser.c:1119
+#: libplanner/mrp-parser.c:1123
 msgid "Could not write XML file"
-msgstr "Nem lehet írni az XML fájlt"
+msgstr "Nem lehet írni az XML-fájlt"
 
-#: libplanner/mrp-project.c:440 src/planner-group-dialog.c:829
+#: libplanner/mrp-project.c:437 src/planner-group-dialog.c:837
 msgid "Default"
 msgstr "Alapértelmezett"
 
-#: libplanner/mrp-project.c:748
+#: libplanner/mrp-project.c:716
+#, c-format
+msgid "Invalid URI: '%s'"
+msgstr "Érvénytelen URI: '%s'"
+
+#: libplanner/mrp-project.c:755
 #, c-format
 msgid "Couldn't find a suitable file module for loading '%s'"
 msgstr "Nem található megfelelő modul a következő betöltéséhez: '%s'"
 
-#: libplanner/mrp-project.c:769 libplanner/mrp-project.c:1033
+#: libplanner/mrp-project.c:776 libplanner/mrp-project.c:1060
 msgid "No support for SQL storage built into this version of Planner."
-msgstr ""
+msgstr "A Planner ezen verziójába nincs SQL tároló támogatás beépítve."
 
-#: libplanner/mrp-project.c:806
-#, fuzzy
+#: libplanner/mrp-project.c:813
 msgid "Invalid URI."
-msgstr "Érvénytelen unicode"
+msgstr "Érvénytelen URI."
 
-#: libplanner/mrp-project.c:927
+#: libplanner/mrp-project.c:954
 #, c-format
 msgid "Unable to find file writer identified by '%s'"
-msgstr ""
+msgstr "Nem található \"%s\" által azonosított fájlíró"
 
-#: libplanner/mrp-project.c:990
+#: libplanner/mrp-project.c:1017
 msgid "Couldn't find a suitable file module for loading project"
-msgstr "Nem található megfelelő modul a projekt betöltéséhez."
+msgstr "Nem található megfelelő modul a projekt betöltéséhez"
 
 #: libplanner/mrp-property.c:365
-#, fuzzy
 msgid "Text"
-msgstr "Teszt"
+msgstr "Szöveg"
 
 #: libplanner/mrp-property.c:367
 msgid "String list"
-msgstr ""
+msgstr "Karakterlánc-lista"
 
 #: libplanner/mrp-property.c:369
-#, fuzzy
 msgid "Integer number"
-msgstr "Menedzser neve"
+msgstr "Egész szám"
 
 #: libplanner/mrp-property.c:371
 msgid "Floating-point number"
 msgstr "Lebegőpontos szám"
 
 #: libplanner/mrp-property.c:373
-#, fuzzy
 msgid "Date"
-msgstr "Naptípus:"
+msgstr "Dátum"
 
 #: libplanner/mrp-property.c:375
-#, fuzzy
 msgid "Duration"
-msgstr "_Időtartam:"
+msgstr "Időtartam"
 
-#: libplanner/mrp-property.c:377 src/planner-task-view.c:270
+#: libplanner/mrp-property.c:377 src/planner-resource-view.c:1287
+#: src/planner-task-view.c:283
 msgid "Cost"
 msgstr "Költség"
 
-#: libplanner/mrp-property.c:380 src/planner-project-properties.c:655
+#: libplanner/mrp-property.c:380 src/planner-project-properties.c:733
 msgid "None"
 msgstr "Nincs"
 
 #. Give up.
-#: libplanner/mrp-sql.c:345 src/planner-sql-plugin.c:171
+#: libplanner/mrp-sql.c:294 src/planner-sql-plugin.c:198
 msgid "Invalid Unicode"
-msgstr "Érvénytelen unicode"
+msgstr "Érvénytelen Unicode"
 
-#: libplanner/mrp-sql.c:2215
+#: libplanner/mrp-sql.c:2177
 #, c-format
 msgid "Connection to database '%s' failed.\n"
-msgstr ""
+msgstr "A(z) '%s' adatbázishoz való kapcsolódás sikertelen.\n"
 
-#: libplanner/mrp-sql.c:2220 libplanner/mrp-sql.c:3660
+#: libplanner/mrp-sql.c:2182
 #, c-format
 msgid ""
 "Connection to database '%s' failed.\n"
 "%s"
 msgstr ""
+"A(z) '%s' adatbázishoz való kapcsolódás sikertelen.\n"
+"%s"
 
-#: libplanner/mrp-sql.c:2228
+#: libplanner/mrp-sql.c:2190
 #, c-format
 msgid "BEGIN command failed %s."
-msgstr ""
+msgstr "A BEGIN parancs elhibázta %s-t."
 
-#: libplanner/mrp-sql.c:2394
+#: libplanner/mrp-sql.c:2356
 #, c-format
 msgid ""
 "The project '%s' has been changed by the user '%s' since you opened it. Do "
 "you want to save anyway?"
 msgstr ""
+"A(z) '%s' projektet '%s' felhasználó megváltoztatta, mióta Ön megnyitotta. "
+"Mindenképpen menti?"
+
+#: libplanner/mrp-sql.c:3624 src/planner-sql-plugin.c:657
+#, c-format
+msgid "Connection to database '%s' failed."
+msgstr "A(z) '%s' adatbázishoz való kapcsolódás sikertelen."
 
 #: libplanner/mrp-storage-sql.c:205
 msgid "Invalid SQL URI (must start with 'sql://' and contain '#')."
 msgstr ""
+"Érvénytelen SQL URI ('sql://'-el kell kezdődnie és tartalmaznia kell egy '#' "
+"jelet)."
 
 #: libplanner/mrp-storage-sql.c:274
 msgid "Invalid SQL URI (invalid project id)."
-msgstr ""
+msgstr "Érvénytelen SQL URI (érvénytelen projektazonosító)."
 
 #: libplanner/mrp-storage-sql.c:282
 msgid "Invalid SQL URI (no database name specified)."
-msgstr ""
+msgstr "Érvénytelen SQL URI (nincs megadva adatbázisnév)."
 
-#: libplanner/mrp-task.c:1016
-msgid "Could not add a predecessor relation, because the tasks are already related."
+#: libplanner/mrp-task.c:1048
+msgid ""
+"Could not add a predecessor relation, because the tasks are already related."
 msgstr ""
-"Nem lehet hozzáadni egy előzmény relációt, mert a feladatok már relációban "
+"Nem lehet hozzáadni egy előzményrelációt, mert a feladatok már relációban "
 "vannak."
 
-#: libplanner/mrp-task-manager.c:1769
-msgid "Can not add a predecessor relation between a task and its ancestor."
-msgstr "Nem lehet előzménye egy feladat az ősének."
+#: libplanner/mrp-task-manager.c:2050
+msgid "Cannot add a predecessor, because it would result in a loop."
+msgstr "Nem lehet előzményt hozzáadni, mert hurok alakulna ki."
 
-#: libplanner/mrp-task-manager.c:1778 libplanner/mrp-task-manager.c:1786
-msgid "Can not add a predecessor, because it would result in a loop."
-msgstr "Nem lehet előzmény, mert hurok alakulna ki."
-
-#: libplanner/mrp-task-manager.c:1821
-msgid "Can not move the task, since it would result in a loop."
+#: libplanner/mrp-task-manager.c:2096
+msgid "Cannot move the task, because it would result in a loop."
 msgstr "Nem lehet áthelyezni a feladatot, mert hurok alakulna ki."
 
-#: libplanner/mrp-xsl.c:96
-msgid "HTML export failed"
-msgstr ""
+#: libplanner/mrp-xsl.c:106
+msgid "Export to HTML failed"
+msgstr "Exportálás HTML-be sikertelen"
+
+#: libplanner/mrp-xsl.c:172
+msgid "Export to Planner pre-0.12 format failed"
+msgstr "Exportálás Planner pre-0.12 formátumba sikertelen"
+
+#: src/planner-application.c:55 src/planner-application.c:111
+msgid "Insert"
+msgstr "Beszúrás"
+
+#: src/planner-application.c:62 src/planner-application.c:118
+msgid "Remove"
+msgstr "Eltávolítás"
+
+#: src/planner-application.c:69
+msgid "Unlink"
+msgstr "Nem kapcsolódik"
+
+#: src/planner-application.c:76
+msgid "Link"
+msgstr "Kapcsolódik"
+
+#: src/planner-application.c:83
+msgid "Indent"
+msgstr "Behúzás"
+
+#: src/planner-application.c:90
+msgid "Unindent"
+msgstr "Behúzás csökkentése"
+
+#: src/planner-application.c:97
+msgid "Move up"
+msgstr "Fel"
+
+#: src/planner-application.c:104
+msgid "Move down"
+msgstr "Le"
 
 #: src/planner-application.c:125
 msgid "Edit"
 msgstr "Szerkesztés"
 
+#: src/planner-calendar-dialog.c:183
+msgid "Change day type"
+msgstr "Nap típusának megváltoztatása"
+
+#: src/planner-calendar-dialog.c:305
+msgid "Remove calendar"
+msgstr "Naptár eltávolítása"
+
+#: src/planner-calendar-dialog.c:397
+msgid "Add new calendar"
+msgstr "Új naptár hozzáadása"
+
 #: src/planner-cell-renderer-date.c:147
 msgid "Constraint type"
-msgstr ""
+msgstr "Megszorítás típusa"
 
 #: src/planner-cell-renderer-date.c:154
 msgid "As soon as possible"
@@ -1016,62 +714,121 @@ msgstr "Mégsem"
 msgid "OK"
 msgstr "OK"
 
-#: src/planner-cmd-manager.c:226
+#: src/planner-cmd-manager.c:225
 #, c-format
 msgid "Undo '%s'"
-msgstr ""
+msgstr "'%s' visszavonása"
 
-#: src/planner-cmd-manager.c:228
-#, fuzzy
+#: src/planner-cmd-manager.c:227
 msgid "Undo"
-msgstr "_Visszavonás"
+msgstr "Visszavonás"
 
-#: src/planner-cmd-manager.c:238
+#: src/planner-cmd-manager.c:237
 #, c-format
 msgid "Redo '%s'"
-msgstr ""
+msgstr "'%s' végrehajtása"
 
-#: src/planner-cmd-manager.c:240
-#, fuzzy
+#: src/planner-cmd-manager.c:239
 msgid "Redo"
-msgstr "Új_ra"
+msgstr "Újra"
 
-#: src/planner-default-week-dialog.c:40
+#: src/planner-day-type-dialog.c:491
+#, c-format
+msgid "Add day type \"%s\""
+msgstr "\"%s\" naptípus hozzáadása"
+
+#: src/planner-day-type-dialog.c:552
+#, c-format
+msgid "Remove day type \"%s\""
+msgstr "\"%s\" naptípus eltávolítása"
+
+#: src/planner-default-week-dialog.c:41
 msgid "Monday"
 msgstr "Hétfő"
 
-#: src/planner-default-week-dialog.c:41
+#: src/planner-default-week-dialog.c:42
 msgid "Tuesday"
 msgstr "Kedd"
 
-#: src/planner-default-week-dialog.c:42
+#: src/planner-default-week-dialog.c:43
 msgid "Wednesday"
 msgstr "Szerda"
 
-#: src/planner-default-week-dialog.c:43
+#: src/planner-default-week-dialog.c:44
 msgid "Thursday"
 msgstr "Csütörtök"
 
-#: src/planner-default-week-dialog.c:44
+#: src/planner-default-week-dialog.c:45
 msgid "Friday"
 msgstr "Péntek"
 
-#: src/planner-default-week-dialog.c:45
+#: src/planner-default-week-dialog.c:46
 msgid "Saturday"
 msgstr "Szombat"
 
-#: src/planner-default-week-dialog.c:46
+#: src/planner-default-week-dialog.c:47
 msgid "Sunday"
 msgstr "Vasárnap"
 
-#: src/planner-default-week-dialog.c:266
-#, fuzzy
+#: src/planner-default-week-dialog.c:282
 msgid "No working time"
-msgstr "Egyedi munkaidő"
+msgstr "Nincs munkaidő"
 
-#: src/planner-default-week-dialog.c:277 src/planner-default-week-dialog.c:281
+#: src/planner-default-week-dialog.c:293 src/planner-default-week-dialog.c:297
 msgid "%H:%M"
-msgstr "%H:%M"
+msgstr "%H.%M"
+
+#: src/planner-default-week-dialog.c:547
+msgid "Edit default week"
+msgstr "Alapértelmezett hét szerkesztése"
+
+#: src/planner-eds-plugin.c:166
+msgid "EDS"
+msgstr "EDS"
+
+#: src/planner-eds-plugin.c:167
+msgid "Import resources from Evolution Data Server"
+msgstr "Erőforrások importálása az Evolution adatkiszolgálótól"
+
+#: src/planner-eds-plugin.c:388 src/planner-gantt-print.c:190
+#: src/planner-group-dialog.c:813 src/planner-property-dialog.c:481
+#: src/planner-resource-view.c:1170 src/planner-task-dialog.c:2536
+#: src/planner-task-dialog.c:2625 src/planner-task-view.c:278
+#: src/planner-ttable-print.c:108
+msgid "Name"
+msgstr "Név"
+
+#: src/planner-eds-plugin.c:408 src/planner-resource-view.c:1265
+msgid "Email"
+msgstr "E-mail"
+
+#: src/planner-eds-plugin.c:429
+msgid "Import"
+msgstr "Importálás"
+
+#: src/planner-eds-plugin.c:439
+msgid "Photo"
+msgstr "Fotó"
+
+#: src/planner-eds-plugin.c:655
+msgid "Imported from Evolution Data Server"
+msgstr "Importálva az Evolution adatkiszolgálótól"
+
+#: src/planner-eds-plugin.c:656
+msgid "Updated from Evolution Data Server"
+msgstr "Frissítve az Evolution adatkiszolgálótól"
+
+#: src/planner-eds-plugin.c:841
+msgid "Query cancelled."
+msgstr "Lekérdezés visszavonva."
+
+#: src/planner-eds-plugin.c:902
+msgid "Evolution Data Server UID"
+msgstr "Evolution adatkiszolgáló UID"
+
+#: src/planner-eds-plugin.c:903
+msgid "Identifier used by Evolution Data Server for resources"
+msgstr "Az Evolution adatkiszolgáló által erőforrásokhoz használt azonosító"
 
 #: src/planner-format.c:141
 #, c-format
@@ -1108,62 +865,195 @@ msgstr "%s nap"
 #.
 #: src/planner-format.c:197
 msgid "%b %e"
-msgstr "%b %e"
+msgstr "%b. %e."
 
 #. i18n: project start, the date format is described in
 #. * libmrproject/docs/DateFormat.
 #: src/planner-gantt-background.c:579
 msgid "%Y %b %d"
-msgstr "%Y %b %d"
+msgstr "%Y. %b. %e."
 
 #: src/planner-gantt-background.c:581
 msgid "Project start"
 msgstr "Projekt kezdete"
 
-#: src/planner-gantt-print.c:191 src/planner-group-dialog.c:805
-#: src/planner-property-dialog.c:378 src/planner-resource-view.c:1168
-#: src/planner-task-dialog.c:1319 src/planner-task-dialog.c:1405
-#: src/planner-task-view.c:265
-msgid "Name"
-msgstr "Név"
-
-#: src/planner-gantt-print.c:199 src/planner-resource-dialog.c:1298
-#: src/planner-resource-view.c:691 src/planner-resource-view.c:707
-#: src/planner-resource-view.c:1595 src/planner-task-view.c:268
-#, fuzzy
+#: src/planner-gantt-print.c:198 src/planner-resource-dialog.c:1869
+#: src/planner-resource-view.c:759 src/planner-resource-view.c:775
+#: src/planner-resource-view.c:1698 src/planner-task-view.c:281
 msgid "Work"
-msgstr ""
-"\n"
-"Munka"
+msgstr "Munka"
 
-#: src/planner-gantt-print.c:523 src/planner-gantt-row.c:668
-#: src/planner-window.c:1648
+#: src/planner-gantt-print.c:542 src/planner-gantt-row.c:690
+#: src/planner-html-plugin.c:130 src/planner-task-tree.c:1512
+#: src/planner-window.c:1660
 msgid "Unnamed"
 msgstr "Névtelen"
 
-#: src/planner-gantt-row.c:1907 src/planner-gantt-row.c:1910
+#: src/planner-gantt-row.c:1760 src/planner-gantt-row.c:1763
 msgid "No name"
 msgstr "Névtelen"
 
-#: src/planner-gantt-row.c:1913
+#: src/planner-gantt-row.c:1766
 #, c-format
 msgid "Make task '%s' a predecessor of '%s'"
-msgstr ""
+msgstr "Legyen '%s' feladat a(z) '%s' előzménye"
 
-#: src/planner-gantt-row.c:1971
+#: src/planner-gantt-row.c:1820
 #, c-format
 msgid "Change work to %s"
-msgstr ""
+msgstr "Munka megváltoztatása erre: %s"
 
-#: src/planner-gantt-view.c:287
+#: src/planner-gantt-row.c:2392 src/planner-task-dialog.c:449
+#: src/planner-task-tree.c:257 src/planner-task-tree.c:934
+msgid "Edit task property"
+msgstr "Feladat tulajdonságainak szerkesztése"
+
+#: src/planner-gantt-view.c:137 src/planner-task-view.c:119
+msgid "_Insert Task"
+msgstr "_Feladat beszúrása"
+
+#: src/planner-gantt-view.c:137 src/planner-task-view.c:119
+msgid "Insert a new task"
+msgstr "Új feladat beszúrása"
+
+#: src/planner-gantt-view.c:138 src/planner-task-view.c:120
+msgid "In_sert Tasks..."
+msgstr "F_eladatok beszúrása..."
+
+#: src/planner-gantt-view.c:139 src/planner-task-view.c:121
+msgid "_Remove Task"
+msgstr "Feladat _eltávolítása"
+
+#: src/planner-gantt-view.c:139 src/planner-task-view.c:121
+msgid "Remove the selected tasks"
+msgstr "Kiválasztott feladat eltávolítása"
+
+#. sensitive = 0
+#: src/planner-gantt-view.c:140
+msgid "_Edit Task Properties..."
+msgstr "_Feladat tulajdonságainak szerkesztése..."
+
+#. sensitive = 0
+#: src/planner-gantt-view.c:141 src/planner-resource-view.c:258
+#: src/planner-task-view.c:123
+msgid "Select _All"
+msgstr "_Mindent kijelöl"
+
+#: src/planner-gantt-view.c:141 src/planner-resource-view.c:258
+#: src/planner-task-view.c:123
+msgid "Select all tasks"
+msgstr "Az összes feladat kijelölése"
+
+#: src/planner-gantt-view.c:142 src/planner-task-view.c:124
+msgid "_Unlink Task"
+msgstr "Feladat _szétválasztása"
+
+#: src/planner-gantt-view.c:142 src/planner-task-view.c:124
+msgid "Unlink the selected tasks"
+msgstr "A kiválasztott feladatok szétválasztása"
+
+#: src/planner-gantt-view.c:143 src/planner-task-view.c:125
+msgid "_Link Tasks"
+msgstr "Feladatok ö_sszekapcsolása"
+
+#: src/planner-gantt-view.c:143 src/planner-task-view.c:125
+msgid "Link the selected tasks"
+msgstr "A kiválasztott feladatok összekapcsolása"
+
+#: src/planner-gantt-view.c:144 src/planner-task-view.c:126
+msgid "I_ndent Task"
+msgstr "Feladat _behúzása"
+
+#: src/planner-gantt-view.c:144 src/planner-task-view.c:126
+msgid "Indent the selected tasks"
+msgstr "Kiválasztott feladatok behúzása"
+
+#. sensitive = 0
+#: src/planner-gantt-view.c:145 src/planner-task-view.c:127
+msgid "Unin_dent Task"
+msgstr "Feladat behúzásának _csökkentése"
+
+#: src/planner-gantt-view.c:145 src/planner-task-view.c:127
+msgid "Unindent the selected tasks"
+msgstr "Kiválasztott feladatok behúzásának csökkentése"
+
+#. sensitive = 0
+#: src/planner-gantt-view.c:146 src/planner-task-view.c:128
+msgid "Move Task _Up"
+msgstr "Feladat mozgatása _fel"
+
+#: src/planner-gantt-view.c:146 src/planner-task-view.c:128
+msgid "Move the selected tasks upwards"
+msgstr "Kiválasztott feladat mozgatása fel"
+
+#. sensitive = 0
+#: src/planner-gantt-view.c:147 src/planner-task-view.c:129
+msgid "Move Task Do_wn"
+msgstr "Feladat mozgatása _le"
+
+#: src/planner-gantt-view.c:147 src/planner-task-view.c:129
+msgid "Move the selected tasks downwards"
+msgstr "Kiválasztott feladat mozgatása le"
+
+#. sensitive = 0
+#: src/planner-gantt-view.c:148 src/planner-task-view.c:130
+msgid "Reset _Constraint"
+msgstr "_Megszorítás visszaállítása"
+
+#. sensitive = 0
+#: src/planner-gantt-view.c:149
+msgid "Zoom To _Fit"
+msgstr "Ablakmérethez _igazítás"
+
+#: src/planner-gantt-view.c:149 src/planner-ttable-view.c:100
+msgid "Zoom to fit the entire project"
+msgstr "Az egész projekt látszódjon"
+
+#: src/planner-gantt-view.c:150
+msgid "_Zoom In"
+msgstr "_Nagyítás"
+
+#: src/planner-gantt-view.c:150 src/planner-ttable-view.c:99
+msgid "Zoom in"
+msgstr "Nagyítás"
+
+#: src/planner-gantt-view.c:151
+msgid "Zoom _Out"
+msgstr "_Kicsinyítés"
+
+#: src/planner-gantt-view.c:151 src/planner-ttable-view.c:98
+msgid "Zoom out"
+msgstr "Kicsinyítés"
+
+#: src/planner-gantt-view.c:152
+msgid "Test"
+msgstr "Teszt"
+
+#: src/planner-gantt-view.c:156
+msgid "_Highlight Critical Tasks"
+msgstr "_Kritikus feladatok kiemelése"
+
+#: src/planner-gantt-view.c:298
 msgid "Gantt Chart"
 msgstr "Gantt-diagram"
 
-#: src/planner-gantt-view.c:295
+#: src/planner-gantt-view.c:306
 msgid "_Gantt Chart"
 msgstr "_Gantt-diagram"
 
-#: src/planner-gantt-view.c:492
+#. i18n: WBS is short for work breakdown structure, and is a
+#. * project management term. You might want to leave it
+#. * untranslated unless there is a localized term for it.
+#.
+#: src/planner-gantt-view.c:507
+msgid ""
+"\n"
+"WBS"
+msgstr ""
+"\n"
+"WBS"
+
+#: src/planner-gantt-view.c:508 src/planner-ttable-tree.c:343
 msgid ""
 "\n"
 "Name"
@@ -1172,7 +1062,7 @@ msgstr ""
 "Név"
 
 #. COL_START,    _("\nStart"),
-#: src/planner-gantt-view.c:494
+#: src/planner-gantt-view.c:510
 msgid ""
 "\n"
 "Work"
@@ -1180,54 +1070,60 @@ msgstr ""
 "\n"
 "Munka"
 
-#: src/planner-group-dialog.c:302
-#, fuzzy
+#: src/planner-group-dialog.c:301
 msgid "Insert group"
-msgstr "Erőforrás beillesztése"
+msgstr "Csoport beillesztése"
 
 #: src/planner-group-dialog.c:425
-#, fuzzy
 msgid "Remove group"
-msgstr "/E_rőforrás eltávolítása"
+msgstr "Csoport eltávolítása"
 
 #: src/planner-group-dialog.c:517
-#, fuzzy
 msgid "Default group"
-msgstr "Alapértelmezett"
+msgstr "Alapértelmezett csoport"
 
-#: src/planner-group-dialog.c:633
-#, fuzzy
+#: src/planner-group-dialog.c:635
 msgid "Edit group property"
-msgstr "Erőforrás tulajdonságainak szerkesztése"
+msgstr "Csoport tulajdonságainak szerkesztése"
 
-#: src/planner-group-dialog.c:811
-#, fuzzy
+#: src/planner-group-dialog.c:819
 msgid "Manager name"
-msgstr "Menedzser telefonja"
+msgstr "Menedzser neve"
 
-#: src/planner-group-dialog.c:817
+#: src/planner-group-dialog.c:825
 msgid "Manager phone"
 msgstr "Menedzser telefonja"
 
-#: src/planner-group-dialog.c:823
+#: src/planner-group-dialog.c:831
 msgid "Manager email"
 msgstr "Menedzser e-mail címe"
 
-#: src/planner-html-plugin.c:138
+#: src/planner-html-plugin.c:69
+msgid "HTML"
+msgstr "HTML"
+
+#: src/planner-html-plugin.c:70
+msgid "Export project to HTML"
+msgstr "Projekt exportálása HTML-be"
+
+#: src/planner-html-plugin.c:178
 #, c-format
 msgid ""
 "\"%s\" is a directory.\n"
 "Enter a filename and try again."
 msgstr ""
+"\"%s\" egy könyvtár.\n"
+"Adjon meg egy fájlnevet és próbálja újra."
 
-#: src/planner-html-plugin.c:148 src/planner-window.c:1416
+#: src/planner-html-plugin.c:188 src/planner-window.c:1417
+#: src/planner-xml-planner-plugin.c:125
 #, c-format
 msgid "File \"%s\" exists, do you want to overwrite it?"
-msgstr "A(z) \"%s\" fájl létezik, felülírod?"
+msgstr "A(z) \"%s\" fájl létezik, felülírja?"
 
 #: src/planner-main.c:50
 msgid "Create the initial window with the given geometry."
-msgstr ""
+msgstr "Az indulóablak létrehozása adott méretekkel."
 
 #: src/planner-main.c:50
 msgid "GEOMETRY"
@@ -1235,466 +1131,880 @@ msgstr "GEOMETRY"
 
 #: src/planner-main.c:76
 msgid "planner: --geometry cannot be used with more than one file."
-msgstr ""
+msgstr "planner: a --geometry nem használható egynél több fájllal."
+
+#: src/planner-phase-dialog.c:532
+msgid "Insert phase"
+msgstr "Fázis beszúrása"
+
+#: src/planner-phase-dialog.c:631
+msgid "Remove phase"
+msgstr "Fázis eltávolítása"
 
 #: src/planner-plugin-loader.c:40
 #, c-format
 msgid "Could not open plugin file '%s'\n"
-msgstr "Nem lehet a(z) %s bővítményfájlt megnyitni'\n"
+msgstr "Nem lehet megnyitni a(z) '%s' bővítményfájlt\n"
 
-#: src/planner-task-popup.c:45
-msgid "/_Insert task"
-msgstr "/_Feladat beszúrása"
-
-#: src/planner-task-popup.c:48
-msgid "/_Insert subtask"
-msgstr "/_Alfeladat beszúrása"
-
-#: src/planner-task-popup.c:51
-msgid "/_Remove task"
-msgstr "/Feladat _törlése"
-
-#: src/planner-task-popup.c:56
-msgid "/_Unlink task"
-msgstr "/_Nem függ"
-
-#: src/planner-task-popup.c:61
-msgid "/_Edit task..."
-msgstr "/_Feladat szerkesztése..."
-
-#: src/planner-predecessor-model.c:191 src/planner-task-dialog.c:1047
+#: src/planner-predecessor-model.c:191 src/planner-task-dialog.c:2197
 msgid "FS"
 msgstr "FS"
 
-#: src/planner-predecessor-model.c:194 src/planner-task-dialog.c:1048
+#: src/planner-predecessor-model.c:194
 msgid "FF"
 msgstr "FF"
 
-#: src/planner-predecessor-model.c:197 src/planner-task-dialog.c:1049
+#. list = g_list_append (list, g_strdup (_("FF")));
+#: src/planner-predecessor-model.c:197 src/planner-task-dialog.c:2199
 msgid "SS"
 msgstr "SS"
 
-#: src/planner-predecessor-model.c:200 src/planner-task-dialog.c:1050
+#: src/planner-predecessor-model.c:200
 msgid "SF"
 msgstr "SF"
 
-#: src/planner-print-dialog.c:112
+#: src/planner-print-dialog.c:154
 msgid "Print Project"
 msgstr "Projekt nyomtatása"
 
-#: src/planner-print-dialog.c:119
+#: src/planner-print-dialog.c:161
 msgid "Select views"
-msgstr "Nézetek választása"
+msgstr "Nézetek kiválasztása"
 
-#: src/planner-print-dialog.c:143
+#: src/planner-print-dialog.c:184
 msgid "Select the views to print:"
-msgstr "Válaszd ki a nyomtatandó nézeteket:"
+msgstr "Válassza ki a nyomtatandó nézeteket:"
 
-#: src/planner-project-properties.c:308
+#: src/planner-project-properties.c:381
 msgid "Select a calendar to use for this project:"
-msgstr ""
+msgstr "Válassza ki az ezen projekthez használandó naptárt:"
 
-#: src/planner-project-properties.c:403
-#, fuzzy
+#: src/planner-project-properties.c:481
 msgid "Edit Project Name"
-msgstr "Projektfázisok szerkesztése"
+msgstr "Projektnév szerkesztése"
 
-#: src/planner-project-properties.c:439
-#, fuzzy
+#: src/planner-project-properties.c:517
 msgid "Edit Organization"
-msgstr "_Szervezet:"
+msgstr "Szervezet szerkesztése"
 
-#: src/planner-project-properties.c:475
-#, fuzzy
+#: src/planner-project-properties.c:553
 msgid "Edit Manager"
-msgstr "_Menedzser:"
+msgstr "Menedzser szerkesztése"
 
-#: src/planner-project-properties.c:546
-#, fuzzy
+#: src/planner-project-properties.c:624
 msgid "Edit Project Start"
-msgstr "Projekt kezdete"
+msgstr "Projekt kezdetének szerkesztése"
 
-#: src/planner-project-properties.c:615
-#, fuzzy
+#: src/planner-project-properties.c:693
 msgid "Edit Project Phase"
-msgstr "Projekt _fázisainak szerkesztése"
+msgstr "Projekt fázisának szerkesztése"
 
-#: src/planner-project-properties.c:748
+#: src/planner-project-properties.c:826
 msgid "Property"
 msgstr "Tulajdonság"
 
-#: src/planner-project-properties.c:759 src/planner-property-dialog.c:431
+#: src/planner-project-properties.c:837
 msgid "Value"
 msgstr "Érték"
 
-#: src/planner-project-properties.c:1130 src/planner-property-dialog.c:229
+#: src/planner-project-properties.c:1246 src/planner-property-dialog.c:329
 msgid "The name of the custom property needs to start with a letter."
-msgstr ""
+msgstr "Az egyéni tulajdonság nevének betűvel kell kezdődnie."
 
-#: src/planner-project-properties.c:1202 src/planner-property-dialog.c:300
+#: src/planner-project-properties.c:1317 src/planner-property-dialog.c:399
 #, c-format
 msgid "Do you really want to remove the property '%s' from the project?"
-msgstr ""
+msgstr "Valóban el akarja távolítani a(z) '%s' tulajdonságot a projektből?"
 
-#: src/planner-project-properties.c:1344
+#: src/planner-project-properties.c:1410
 msgid "Could not create properties dialog."
-msgstr "A tulajdonságok párbeszédablak létrehozása nem sikerült."
+msgstr "Nem lehet létrehozni a tulajdonságok párbeszédablakot."
 
-#: src/planner-property-dialog.c:397
+#: src/planner-project-properties.c:1775
+msgid "Add project property"
+msgstr "Projekttulajdonság hozzáadása"
+
+#: src/planner-project-properties.c:1885
+msgid "Remove project property"
+msgstr "Projekttulajdonság eltávolítása"
+
+#: src/planner-project-properties.c:1978
+msgid "Edit project property value"
+msgstr "Projekttulajdonság értékének szerkesztése"
+
+#: src/planner-property-dialog.c:498
 msgid "Label"
 msgstr "Címke"
 
-#: src/planner-property-dialog.c:411 src/planner-resource-view.c:1210
-#: src/planner-task-dialog.c:1437
+#: src/planner-property-dialog.c:510 src/planner-resource-view.c:1212
+#: src/planner-task-dialog.c:2657
 msgid "Type"
 msgstr "Típus"
 
+#: src/planner-property-dialog.c:664
+msgid "Add property"
+msgstr "Tulajdonság hozzáadása"
+
+#: src/planner-property-dialog.c:809
+msgid "Remove property"
+msgstr "Tulajdonság eltávolítása"
+
+#: src/planner-property-dialog.c:902
+msgid "Edit property label"
+msgstr "Tulajdonság címkéjének szerkesztése"
+
+#: src/planner-resource-cmd.c:75
+msgid "Insert resource"
+msgstr "Erőforrás beillesztése"
+
 #. Put "no group" at the top.
-#: src/planner-resource-dialog.c:267 src/planner-resource-input-dialog.c:97
-#: src/planner-resource-view.c:1806
+#: src/planner-resource-dialog.c:325 src/planner-resource-input-dialog.c:99
+#: src/planner-resource-view.c:1909
 msgid "(None)"
 msgstr "(Nincs)"
 
-#: src/planner-resource-dialog.c:277 src/planner-resource-input-dialog.c:107
-#: src/planner-task-dialog.c:251
+#: src/planner-resource-dialog.c:335 src/planner-resource-input-dialog.c:109
+#: src/planner-task-dialog.c:375
 msgid "(No name)"
 msgstr "(Névtelen)"
 
-#: src/planner-resource-dialog.c:426
-#, fuzzy
-msgid "Edit resource property from dialog"
+#: src/planner-resource-dialog.c:508
+msgid "Edit resource calendar"
+msgstr "Erőforrásnaptár szerkesztése"
+
+#: src/planner-resource-dialog.c:589
+msgid "Edit resource note"
+msgstr "Erőforrásmegjegyzés szerkesztése"
+
+#: src/planner-resource-dialog.c:662
+msgid "Edit resource cost"
+msgstr "Erőforrás költségének szerkesztése"
+
+#: src/planner-resource-dialog.c:731 src/planner-resource-dialog.c:772
+#: src/planner-resource-view.c:1369 src/planner-resource-view.c:1450
+msgid "Edit resource property"
 msgstr "Erőforrás tulajdonságainak szerkesztése"
 
 #. i18n: time stamp format for notes in task dialog, see strftime(3) for
 #. * a detailed description.
-#: src/planner-resource-dialog.c:910 src/planner-task-dialog.c:687
+#: src/planner-resource-dialog.c:1427 src/planner-task-dialog.c:1784
 msgid "%a %d %b %Y, %H:%M\n"
-msgstr "%a, %Y %b %d, %H:%M\n"
+msgstr "%Y. %b. %e., %a., %H.%M\n"
 
-#: src/planner-resource-dialog.c:1008
+#: src/planner-resource-dialog.c:1544
 msgid "None (use project default)"
 msgstr "Nincs (a projekt alapértelmezésének használata)"
 
-#: src/planner-resource-dialog.c:1135 src/planner-resource-dialog.c:1137
+#: src/planner-resource-dialog.c:1671 src/planner-resource-dialog.c:1673
 msgid "Edit resource properties"
 msgstr "Erőforrás tulajdonságainak szerkesztése"
 
-#: src/planner-resource-dialog.c:1299 src/planner-resource-view.c:694
-#: src/planner-resource-view.c:708 src/planner-resource-view.c:1596
+#: src/planner-resource-dialog.c:1870 src/planner-resource-view.c:762
+#: src/planner-resource-view.c:776 src/planner-resource-view.c:1699
 msgid "Material"
 msgstr "Anyag"
 
-#: src/planner-resource-view.c:260
+#: src/planner-resource-view.c:253
+msgid "_Insert Resource"
+msgstr "_Erőforrás beillesztése"
+
+#: src/planner-resource-view.c:253
+msgid "Insert a new resource"
+msgstr "Új erőforrás beillesztése"
+
+#: src/planner-resource-view.c:254
+msgid "In_sert Resources..."
+msgstr "Erő_források beszúrása..."
+
+#: src/planner-resource-view.c:255
+msgid "_Remove Resource"
+msgstr "E_rőforrás eltávolítása"
+
+#: src/planner-resource-view.c:255
+msgid "Remove the selected resource"
+msgstr "A kiválasztott erőforrás eltávolítása"
+
+#: src/planner-resource-view.c:256
+msgid "_Edit Resource Properties..."
+msgstr "_Erőforrás tulajdonságainak szerkesztése..."
+
+#: src/planner-resource-view.c:257
+msgid "Edit _Groups"
+msgstr "_Csoportok szerkesztése"
+
+#: src/planner-resource-view.c:257
+msgid "Edit resource groups"
+msgstr "Erőforráscsoportok szerkesztése"
+
+#: src/planner-resource-view.c:259
+msgid "Edit _Custom Properties..."
+msgstr "Egyéni _tulajdonságok szerkesztése..."
+
+#: src/planner-resource-view.c:275
 msgid "/_Insert resource"
 msgstr "/_Erőforrás beillesztése"
 
-#: src/planner-resource-view.c:261
+#: src/planner-resource-view.c:276
 msgid "/_Remove resource"
 msgstr "/E_rőforrás eltávolítása"
 
-#: src/planner-resource-view.c:262
+#: src/planner-resource-view.c:277 src/planner-ttable-tree.c:107
 msgid "/_Edit resource..."
 msgstr "/Erő_forrás szerkesztése..."
 
-#: src/planner-resource-view.c:401
+#: src/planner-resource-view.c:439
 msgid "_Resources"
 msgstr "_Erőforrások"
 
-#: src/planner-resource-view.c:798
-msgid "Insert resource"
-msgstr "Erőforrás beillesztése"
-
-#: src/planner-resource-view.c:950
-#, fuzzy
+#: src/planner-resource-view.c:952
 msgid "Remove resource"
-msgstr "/E_rőforrás eltávolítása"
+msgstr "Erőforrás eltávolítása"
 
-#: src/planner-resource-view.c:1051
+#: src/planner-resource-view.c:1052
 msgid "Edit custom resource properties"
-msgstr "Egyedi erőforrás tulajdonságainak szerkesztése"
+msgstr "Egyéni erőforrás tulajdonságainak szerkesztése"
 
-#: src/planner-resource-view.c:1189
-#, fuzzy
+#: src/planner-resource-view.c:1191
 msgid "Short name"
-msgstr "Névtelen"
+msgstr "Rövid név"
 
-#: src/planner-resource-view.c:1234
+#: src/planner-resource-view.c:1236
 msgid "Group"
 msgstr "Csoport"
-
-#: src/planner-resource-view.c:1263
-msgid "Email"
-msgstr "E-mail"
-
-#: src/planner-resource-view.c:1328
-#, fuzzy
-msgid "Edit resource property"
-msgstr "Erőforrás tulajdonságainak szerkesztése"
-
-#: src/planner-resource-view.c:1390
-#, fuzzy
-msgid "Edit resource custom property"
-msgstr "Erőforrás tulajdonságainak szerkesztése"
 
 #. i18n: Short "Week", preferably 2 letters.
 #: src/planner-scale-utils.c:325
 #, c-format
 msgid "Wk %d"
-msgstr "Hét %d"
+msgstr "%d. hét"
 
 #: src/planner-scale-utils.c:329
 #, c-format
 msgid "Week %d"
-msgstr "Hét %d"
+msgstr "%d. hét"
 
 #. i18n: Week, year.
 #: src/planner-scale-utils.c:334
 #, c-format
 msgid "Week %d, %d"
-msgstr "Hét %d, %d"
+msgstr "%d. hét, %d."
 
-#. i18n: Short "Quarter", preferrably 1 letter.
+#. i18n: Short "Quarter", preferably 1 letter.
 #: src/planner-scale-utils.c:365
 #, c-format
 msgid "Q%d"
 msgstr "N%d"
 
-#. i18n: Short "Quarter", preferrably 2-3 letters.
+#. i18n: Short "Quarter", preferably 2-3 letters.
 #: src/planner-scale-utils.c:369
 #, c-format
 msgid "Qtr %d"
-msgstr "Negy, %d"
+msgstr "%d. negy."
 
-#. i18n: Year, short "Quarter", preferrably 2-3 letters.
+#. i18n: Year, short "Quarter", preferably 2-3 letters.
 #: src/planner-scale-utils.c:373
 #, c-format
 msgid "%d, Qtr %d"
-msgstr "%d, Negy %d"
+msgstr "%d., %d. negy."
 
-#. i18n: Short "Half year", prefferably 1 letter.
+#. i18n: Short "Half year", preferably 1 letter.
 #: src/planner-scale-utils.c:386
 #, c-format
 msgid "H%d"
 msgstr "F%d"
 
-#. i18n: Year, short "Half year", prefferably 1 letter.
+#. i18n: Year, short "Half year", preferably 1 letter.
 #: src/planner-scale-utils.c:391
 #, c-format
 msgid "%04d, H%d"
-msgstr "%04d, N%d"
+msgstr "%04d., N%d"
 
-#: src/planner-sql-plugin.c:368
-msgid "Project"
-msgstr "Projekt"
+#: src/planner-sql-plugin.c:96
+msgid "Open from Database..."
+msgstr "Megnyitás adatbázisból..."
 
-#: src/planner-sql-plugin.c:544
-msgid "Open from Database"
-msgstr "Megnyitás adatbázisból"
+#: src/planner-sql-plugin.c:96
+msgid "Open a project from a database"
+msgstr "Projekt megnyitása adatbázisból"
 
-#: src/planner-sql-plugin.c:651
+#: src/planner-sql-plugin.c:97 src/planner-sql-plugin.c:1093
 msgid "Save to Database"
 msgstr "Mentés adatbázisba"
 
-#: src/planner-task-dialog.c:753
-msgid "Finish to start (FS)"
-msgstr "Kezdet - vég (FS)"
+#: src/planner-sql-plugin.c:97
+msgid "Save the current project to a database"
+msgstr "A jelenlegi projekt mentése egy adatbázisba"
 
-#: src/planner-task-dialog.c:754
-msgid "Finish to finish (FF)"
-msgstr "Vég - vég (FF)"
+#: src/planner-sql-plugin.c:129
+msgid "No errors reported."
+msgstr "Nem történt hiba."
 
-#: src/planner-task-dialog.c:755
-msgid "Start to start (SS)"
-msgstr "Kezdet - kezdet (SS)"
+#: src/planner-sql-plugin.c:494
+#, c-format
+msgid ""
+"Database %s needs to be upgraded from version %s to version %s.\n"
+"Please backup database before the upgrade."
+msgstr ""
+"A(z) %s adatbázist frissíteni kell %s verzióról %s verzióra.\n"
+"Kérem a frissítés előtt készítsen biztonsági másolatot az adatbázisról."
 
-#: src/planner-task-dialog.c:756
-msgid "Start to finish (SF)"
-msgstr "Kezdet - vég (SF)"
+#: src/planner-sql-plugin.c:501
+msgid "Upgrade"
+msgstr "Frissítés"
 
-#: src/planner-task-dialog.c:806
-msgid "Can't add new predecessor. No task selected!"
-msgstr "Nem lehet elődöt hozzáadni. Nincs kiválasztva feladat!"
+#: src/planner-sql-plugin.c:515
+#, c-format
+msgid ""
+"Could not upgrade database %s.\n"
+" Upgrade file used: %s.\n"
+"\n"
+"Database error: \n"
+"%s"
+msgstr ""
+"Nem lehet frissíteni a(z) %s adatbázist.\n"
+"Használt frissítési fájl: %s.\n"
+"\n"
+"Adatbázishiba:\n"
+"%s"
 
-#: src/planner-task-dialog.c:1338
-msgid "Assigned"
-msgstr "Hozzárendelve"
+#: src/planner-sql-plugin.c:556
+#, c-format
+msgid "Can't create tables in database %s"
+msgstr "Nem lehet táblákat létrehozni a(z) %s adatbázisban"
 
-#: src/planner-task-dialog.c:1355
-msgid "Units"
-msgstr "Egységek"
+#: src/planner-sql-plugin.c:617
+#, c-format
+msgid "Database %s is not setup for Planner. Do you want to do that?"
+msgstr ""
+"A(z) %s adatbázis nincs beállítva a Planner-hez. Meg szeretné ezt tenni?"
 
-#: src/planner-task-dialog.c:1459
-msgid "Lag"
-msgstr "Késés"
+#: src/planner-sql-plugin.c:668
+#, c-format
+msgid "Test to tables in database '%s' failed."
+msgstr "A(z) '%s' adatbázis tábláinak tesztelése sikertelen."
 
-#: src/planner-task-dialog.c:1592 src/planner-task-dialog.c:1594
-msgid "Edit task properties"
-msgstr "Feladat tulajdonságainak szerkesztése"
+#: src/planner-sql-plugin.c:761
+msgid "ID"
+msgstr "Azonosító"
 
-#: src/planner-task-tree.c:245
+#: src/planner-sql-plugin.c:769
+msgid "Project"
+msgstr "Projekt"
+
+#: src/planner-sql-plugin.c:777
+msgid "Phase"
+msgstr "Fázis"
+
+#: src/planner-sql-plugin.c:785
+msgid "Revision"
+msgstr "Revízió"
+
+#: src/planner-sql-plugin.c:981
+msgid "Open from Database"
+msgstr "Megnyitás adatbázisból"
+
+#: src/planner-task-cmd.c:98
+msgid "Link task"
+msgstr "Feladat összekapcsolása"
+
+#: src/planner-task-cmd.c:174
+msgid "Unlink task"
+msgstr "Feladat szétválasztása"
+
+#: src/planner-task-cmd.c:269
 msgid "Insert task"
 msgstr "Feladat beszúrása"
 
-#: src/planner-task-tree.c:321
-#, fuzzy
-msgid "Edit task property"
+#: src/planner-task-dialog.c:523
+msgid "Edit task type"
+msgstr "Feladat típusának szerkesztése"
+
+#: src/planner-task-dialog.c:590
+msgid "Toggle fixed duration"
+msgstr "Rögzített időtartam átváltása"
+
+#: src/planner-task-dialog.c:668
+msgid "Assign resource to task"
+msgstr "Erőforrás feladathoz rendelése"
+
+#: src/planner-task-dialog.c:728
+msgid "Unassign resource from task"
+msgstr "Erőforrás elvétele a feladattól"
+
+#: src/planner-task-dialog.c:787
+msgid "Change resource units in task"
+msgstr "Erőforrásegységek megváltoztatása a feladatban"
+
+#: src/planner-task-dialog.c:875
+msgid "Edit task predecessor"
+msgstr "Feladat előzményének szerkesztése"
+
+#: src/planner-task-dialog.c:946
+msgid "Edit lag predecessor"
+msgstr "Késés előzményének szerkesztése"
+
+#: src/planner-task-dialog.c:1012
+msgid "Edit task note"
+msgstr "Feladat megjegyzésének szerkesztése"
+
+#: src/planner-task-dialog.c:1856
+msgid "Finish to start (FS)"
+msgstr "Kezdet - vég (FS)"
+
+#. _("Finish to finish (FF)"), MRP_RELATION_FF,
+#: src/planner-task-dialog.c:1858
+msgid "Start to start (SS)"
+msgstr "Kezdet - kezdet (SS)"
+
+#: src/planner-task-dialog.c:1913
+msgid "Can't add new predecessor. No task selected!"
+msgstr "Nem lehet előzményt hozzáadni. Nincs kiválasztva feladat!"
+
+#: src/planner-task-dialog.c:2557
+msgid "Assigned"
+msgstr "Hozzárendelve"
+
+#: src/planner-task-dialog.c:2574
+msgid "Units"
+msgstr "Egységek"
+
+#: src/planner-task-dialog.c:2679
+msgid "Lag"
+msgstr "Késés"
+
+#: src/planner-task-dialog.c:2817 src/planner-task-dialog.c:2819
+msgid "Edit task properties"
 msgstr "Feladat tulajdonságainak szerkesztése"
 
-#: src/planner-task-tree.c:2300
+#: src/planner-task-popup.c:52
+msgid "/_Insert task"
+msgstr "/_Feladat beszúrása"
+
+#: src/planner-task-popup.c:55
+msgid "/Insert _subtask"
+msgstr "/_Alfeladat beszúrása"
+
+#: src/planner-task-popup.c:58
+msgid "/_Remove task"
+msgstr "/Feladat _törlése"
+
+#: src/planner-task-popup.c:63
+msgid "/_Unlink task"
+msgstr "/_Feladat szétválasztása"
+
+#: src/planner-task-popup.c:68
+msgid "/Assign _resources..."
+msgstr "/Erő_forrás hozzárendelése..."
+
+#: src/planner-task-popup.c:71 src/planner-ttable-tree.c:110
+msgid "/_Edit task..."
+msgstr "/_Feladat szerkesztése..."
+
+#: src/planner-task-tree.c:565
+msgid "Remove task"
+msgstr "Feladat eltávolítása"
+
+#: src/planner-task-tree.c:642
+msgid "Apply constraint to task"
+msgstr "Megszorítás hozzáadása a feladathoz"
+
+#: src/planner-task-tree.c:704
+msgid "Reset task constraint"
+msgstr "Feladat megszorításának visszaállítása"
+
+#: src/planner-task-tree.c:821
+msgid "Move task"
+msgstr "Feladat áthelyezése"
+
+#: src/planner-task-tree.c:2709
+#, c-format
+msgid ""
+"You are about to open an edit dialog each for %i tasks. Are you sure that "
+"you want to do that?"
+msgstr ""
+"Szerkesztési párbeszédablakot próbált nyitni mind a(z) %i feladathoz. "
+"Valóban ezt akarja tenni?"
+
+#: src/planner-task-tree.c:3320
 msgid "mon"
 msgstr "hón"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:2301
+#: src/planner-task-tree.c:3321
 msgid "month"
 msgstr "hónap"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:2302
+#: src/planner-task-tree.c:3322
 msgid "months"
 msgstr "hónap"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:2303
+#: src/planner-task-tree.c:3323
 msgid "w"
 msgstr "h"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:2304
+#: src/planner-task-tree.c:3324
 msgid "week"
 msgstr "hét"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:2305
+#: src/planner-task-tree.c:3325
 msgid "weeks"
 msgstr "hét"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:2306
+#: src/planner-task-tree.c:3326
 msgid "d"
 msgstr "n"
 
 #. day unit variant accepted in input
-#: src/planner-task-tree.c:2307
+#: src/planner-task-tree.c:3327
 msgid "day"
 msgstr "nap"
 
 #. day unit variant accepted in input
-#: src/planner-task-tree.c:2309
+#: src/planner-task-tree.c:3329
 msgid "h"
 msgstr "ó"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:2310
+#: src/planner-task-tree.c:3330
 msgid "hour"
 msgstr "óra"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:2311
+#: src/planner-task-tree.c:3331
 msgid "hours"
 msgstr "óra"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:2312
+#: src/planner-task-tree.c:3332
 msgid "min"
 msgstr "p"
 
 #. minute unit variant accepted in input
-#: src/planner-task-tree.c:2313
+#: src/planner-task-tree.c:3333
 msgid "minute"
 msgstr "perc"
 
 #. minute unit variant accepted in input
-#: src/planner-task-tree.c:2314
+#: src/planner-task-tree.c:3334
 msgid "minutes"
 msgstr "perc"
 
-#: src/planner-task-view.c:203
+#: src/planner-task-view.c:122
+msgid "_Edit Task"
+msgstr "_Feladat szerkesztése"
+
+#: src/planner-task-view.c:131
+msgid "_Edit Custom Properties..."
+msgstr "_Egyéni tulajdonságok szerkesztése..."
+
+#: src/planner-task-view.c:211
 msgid "Tasks"
 msgstr "Feladatok"
 
-#: src/planner-task-view.c:211
+#: src/planner-task-view.c:219
 msgid "_Tasks"
 msgstr "_Feladatok"
 
-#: src/planner-task-view.c:266
+#. i18n: WBS is sort for work breakdown structure, and is a
+#. * project management term. You might want to leave it
+#. * untranslated unless there is a localized term for it.
+#.
+#: src/planner-task-view.c:277
+msgid "WBS"
+msgstr "WBS"
+
+#: src/planner-task-view.c:279
 msgid "Start"
 msgstr "Kezdet"
 
-#: src/planner-task-view.c:267
+#: src/planner-task-view.c:280
 msgid "Finish"
 msgstr "Vége"
 
-#: src/planner-task-view.c:269
+#: src/planner-task-view.c:282
 msgid "Slack"
-msgstr ""
+msgstr "Marad"
 
-#: src/planner-task-view.c:488
+#: src/planner-task-view.c:284
+msgid "Assigned to"
+msgstr "Hozzárendelve"
+
+#: src/planner-task-view.c:480
 msgid "Edit custom task properties"
-msgstr "_Egyedi feladat tulajdonságainak szerkesztése"
+msgstr "Egyéni feladat tulajdonságainak szerkesztése"
+
+#: src/planner-ttable-print.c:189
+msgid "Task"
+msgstr "Feladat"
+
+#: src/planner-ttable-row.c:2011
+#, c-format
+msgid "Make task '%s' start on %s"
+msgstr "'%s' feladat kezdete legyen '%s'"
+
+#: src/planner-ttable-row.c:2085
+#, c-format
+msgid "Change task '%s' work to %s, duration to %s (%d)"
+msgstr "'%s' feladat változása: munka: %s, időtartam: %s (%d)"
+
+#: src/planner-ttable-tree.c:113
+msgid "/_Expand all resources"
+msgstr "/Minden erő_forrás kibontása"
+
+#: src/planner-ttable-tree.c:116
+msgid "/_Collapse all resources"
+msgstr "/Minden _erőforrás összecsukása"
+
+#: src/planner-ttable-tree.c:345
+msgid ""
+"\n"
+"Task"
+msgstr ""
+"\n"
+"Feladat"
+
+#: src/planner-ttable-view.c:100
+msgid "Zoom to fit"
+msgstr "Ablakmérethez igazítás"
+
+#: src/planner-ttable-view.c:159
+msgid "Resource Usage"
+msgstr "Erőforráshasználat"
+
+#: src/planner-ttable-view.c:166
+msgid "Resource _Usage"
+msgstr "Erőforrás_használat"
 
 #: src/planner-view-loader.c:41
 #, c-format
 msgid "Could not open view plugin file '%s'\n"
-msgstr ""
+msgstr "Nem lehet megnyitni a(z) '%s' nézetbővítmény fájlt\n"
 
-#: src/planner-window.c:639
-msgid "Open a file"
+#: src/planner-window.c:197
+msgid "_File"
+msgstr "_Fájl"
+
+#: src/planner-window.c:201
+msgid "_New Project"
+msgstr "Ú_j projekt"
+
+#: src/planner-window.c:201
+msgid "Create a new project"
+msgstr "Új projekt létrehozása"
+
+#: src/planner-window.c:205
+msgid "_Open..."
+msgstr "_Megnyitás..."
+
+#: src/planner-window.c:205
+msgid "Open a project"
+msgstr "Projekt megnyitása"
+
+#: src/planner-window.c:208
+msgid "_Import"
+msgstr "_Importálás"
+
+#: src/planner-window.c:212 src/planner-window.c:1288
+msgid "_Save"
+msgstr "M_entés"
+
+#: src/planner-window.c:212
+msgid "Save the current project"
+msgstr "A jelenlegi projekt mentése"
+
+#: src/planner-window.c:215
+msgid "_Export"
+msgstr "_Exportálás"
+
+#: src/planner-window.c:218
+msgid "Save _As..."
+msgstr "Men_tés másként..."
+
+#: src/planner-window.c:218
+msgid "Save the current project with a different name"
+msgstr "A jelenlegi projekt mentése más néven"
+
+#: src/planner-window.c:221
+msgid "_Print..."
+msgstr "_Nyomtatás..."
+
+#: src/planner-window.c:221
+msgid "Print the current project"
+msgstr "A jelenlegi projekt nyomtatása"
+
+#: src/planner-window.c:224
+msgid "Print Pre_view"
+msgstr "Nyomtatási _kép"
+
+#: src/planner-window.c:224
+msgid "Print preview of the current project"
+msgstr "A jelenlegi projekt nyomtatási képe"
+
+#: src/planner-window.c:227
+msgid "_Close"
+msgstr "_Bezárás"
+
+#: src/planner-window.c:227
+msgid "Close the current file"
+msgstr "A jelenlegi fájl bezárása"
+
+#: src/planner-window.c:230
+msgid "_Quit"
+msgstr "_Kilépés"
+
+#: src/planner-window.c:230
+msgid "Exit the program"
+msgstr "Kilépés a programból"
+
+#: src/planner-window.c:234
+msgid "_Edit"
+msgstr "S_zerkesztés"
+
+#: src/planner-window.c:237
+msgid "_Undo"
+msgstr "_Visszavonás"
+
+#: src/planner-window.c:237
+msgid "Undo the last action"
+msgstr "Az utolsó művelet visszavonása"
+
+#: src/planner-window.c:240
+msgid "_Redo"
+msgstr "Új_ra"
+
+#: src/planner-window.c:240
+msgid "Redo the undone action"
+msgstr "A visszavont művelet ismételt végrehajtása"
+
+#: src/planner-window.c:244
+msgid "_View"
+msgstr "_Nézet"
+
+#: src/planner-window.c:248
+msgid "_Actions"
+msgstr "_Műveletek"
+
+#: src/planner-window.c:252
+msgid "_Project"
+msgstr "_Projekt"
+
+#: src/planner-window.c:255
+msgid "_Manage Calendars"
+msgstr "Naptárak _kezelése"
+
+#: src/planner-window.c:258
+msgid "Edit Day _Types"
+msgstr "Nap_típusok szerkesztése"
+
+#: src/planner-window.c:261
+msgid "Edit Project _Phases"
+msgstr "Projekt _fázisainak szerkesztése"
+
+#: src/planner-window.c:264
+msgid "_Edit Project Properties"
+msgstr "Projekt _adatainak szerkesztése"
+
+#: src/planner-window.c:264
+msgid "Edit the project properties"
+msgstr "A projekt tulajdonságainak szerkesztése"
+
+#: src/planner-window.c:272
+msgid "_Help"
+msgstr "_Súgó"
+
+#: src/planner-window.c:275
+msgid "_User Guide"
+msgstr "_Felhasználói kézikönyv"
+
+#: src/planner-window.c:275
+msgid "Show the Planner User Guide"
+msgstr "A Planner felhasználói kézikönyvének megjelenítése"
+
+#: src/planner-window.c:278
+msgid "_About"
+msgstr "_Névjegy"
+
+#: src/planner-window.c:278
+msgid "About this application"
+msgstr "Az alkalmazás névjegye"
+
+#. Note: these strings are leaked.
+#: src/planner-window.c:542
+#, c-format
+msgid "Switch to the view \"%s\""
+msgstr "\"%s\" nézetre váltás"
+
+#: src/planner-window.c:688
+msgid "Open a File"
 msgstr "Fájl megnyitása"
+
+#: src/planner-window.c:696
+msgid "Planner Files"
+msgstr "Planner-fájlok"
+
+#: src/planner-window.c:702
+msgid "All Files"
+msgstr "Minden fájl"
 
 #. I18n: Translators, list your names here, newline separated if there
 #. * are more than one, to appear in the about box.
 #.
-#: src/planner-window.c:1085 src/planner-window.c:1092
-msgid "translator_credits"
-msgstr "Tímár András <timar@gnome.hu>"
+#: src/planner-window.c:1109 src/planner-window.c:1116
+msgid "translator-credits"
+msgstr ""
+"Kelemen Gábor <kelemeng@gnome.hu>\n"
+"Tímár András <timar@gnome.hu>"
 
 #. "Copyright \xc2\xa9"
-#: src/planner-window.c:1089
+#: src/planner-window.c:1113
 msgid "A Project Management application for the GNOME desktop"
 msgstr "Projektmenedzsment alkalmazás a GNOME munkaasztalhoz"
 
-#: src/planner-window.c:1099
-#, fuzzy
+#: src/planner-window.c:1123
 msgid "The Planner Homepage"
-msgstr "A MrProject honlapja"
+msgstr "A Planner honlapja"
 
-#: src/planner-window.c:1227
+#: src/planner-window.c:1229
 msgid "If you don't save, changes made the last minute will be discarded."
-msgstr "Ha nem mentesz, az utolsó perc módosításai elvesznek."
+msgstr "Ha nem menti, az utolsó perc módosításai elvesznek."
 
-#: src/planner-window.c:1232
+#: src/planner-window.c:1234
 #, c-format
 msgid "If you don't save, changes made the last %d minutes will be discarded."
-msgstr "Ha nem mentesz, az utolsó %d perc módosításai elvesznek."
+msgstr "Ha nem menti, az utolsó %d perc módosításai elvesznek."
 
-#: src/planner-window.c:1237
+#: src/planner-window.c:1239
 msgid "If you don't save, changes made the last hour will be discarded."
-msgstr "Ha nem mentesz, az utolsó óra módosításai elvesznek."
+msgstr "Ha nem menti, az utolsó óra módosításai elvesznek."
 
-#: src/planner-window.c:1242
+#: src/planner-window.c:1244
 #, c-format
 msgid "If you don't save, changes made the last %d hours will be discarded."
-msgstr "Ha nem mentesz, az utolsó %d óra módosításai elvesznek."
+msgstr "Ha nem menti, az utolsó %d óra módosításai elvesznek."
 
-#: src/planner-window.c:1249
+#: src/planner-window.c:1251
 #, c-format
 msgid "Save changes to document '%s' before closing?"
-msgstr "Mented a(z) '%s' dokumentumot bezárás előtt?"
+msgstr "Menti a(z) '%s' dokumentumot bezárás előtt?"
 
-#: src/planner-window.c:1267
+#: src/planner-window.c:1275
 msgid "C_lose without saving"
 msgstr "_Bezárás mentés nélkül"
 
-#: src/planner-window.c:1269
+#: src/planner-window.c:1281
 msgid "_Cancel"
 msgstr "_Mégsem"
 
 #: src/planner-window.c:1380
-msgid "Save a file"
+msgid "Save a File"
 msgstr "Fájl mentése"
 
-#: src/planner-window.c:1611
+#: src/planner-window.c:1617
 msgid ""
 "You have opened a file that was saved with an old version of Planner.\n"
 "\n"
@@ -1709,4 +2019,41 @@ msgid ""
 "After doing this, you can remove all constraints by selecting the menu item "
 "'Remove all constraints' in the 'Edit' menu."
 msgstr ""
+"Egy, a Planner régi verziójával készült fájlt nyitott meg.\n"
+"\n"
+"Régi fájlok betöltésekor minden feladat az 'El kell kezdeni' megszorítást "
+"fogja használni, mivel a régi verzió nem támogatta teljesen az automatikus "
+"újraütemezést. Ezen új szolgáltatás használatbavételéhez előzményrelációkat "
+"kell az egymástól függő feladatokhoz adni.\n"
+"\n"
+"Előzményreláció az előzményre kattintással és a mutató utódra húzásával "
+"adható hozzá.\n"
+"\n"
+"Ezután eltávolíthatja az összes megszorítást a Szerkesztés menü 'Minden "
+"megszorítás eltávolítása' pontjával."
 
+#. Hack.
+#: src/planner-window.c:1652
+msgid "Unnamed database project"
+msgstr "Névtelen adatbázisprojekt"
+
+#: src/planner-window.c:1766
+#, c-format
+msgid "Open '%s'"
+msgstr "'%s' megnyitása"
+
+#: src/planner-working-time-dialog.c:144
+msgid "Edit working time"
+msgstr "Munkaidő szerkesztése"
+
+#: src/planner-xml-planner-plugin.c:53
+msgid "Planner 0.11 Format"
+msgstr "Planner 0.11 formátum"
+
+#: src/planner-xml-planner-plugin.c:54
+msgid "Export project to a file suitable for Planner 0.11"
+msgstr "Projekt exportálása a Planner 0.11 számára megfelelő formátumba"
+
+#: src/planner-xml-planner-plugin.c:91
+msgid "Export"
+msgstr "Exportálás"
