@@ -27,6 +27,7 @@
 #include <libplanner/mrp-application.h>
 #include <libplanner/mrp-error.h>
 #include <libplanner/mrp-group.h>
+#include <libplanner/mrp-object.h>
 
 #define MRP_TYPE_PROJECT         (mrp_project_get_type ())
 #define MRP_PROJECT(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), MRP_TYPE_PROJECT, MrpProject))

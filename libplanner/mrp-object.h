@@ -53,33 +53,35 @@ struct _MrpObjectClass {
 				GValue      *new_value);
 };
 
-GType     mrp_object_get_type           (void) G_GNUC_CONST;
-void      mrp_object_removed            (MrpObject      *object);
-void      mrp_object_changed            (MrpObject      *object);
-void	  mrp_object_set                (gpointer	 object,
-					 const gchar    *first_property_name,
-					 ...);
-void      mrp_object_get                (gpointer        object,
-					 const gchar    *first_property_name,
-					 ...);
-void      mrp_object_set_property       (MrpObject      *object,
-					 MrpProperty    *property,
-					 GValue         *value);
-void      mrp_object_get_property       (MrpObject      *object,
-					 MrpProperty    *property,
-					 GValue         *value);
-void      mrp_object_set_valist         (MrpObject      *object,
-					 const gchar    *first_property_name,
-					 va_list         var_args);
 
-void      mrp_object_get_valist         (MrpObject      *object,
-					 const gchar    *first_property_name,
-					 va_list         var_args);
+GType       mrp_object_get_type       (void) G_GNUC_CONST;
+void        mrp_object_removed        (MrpObject   *object);
+void        mrp_object_changed        (MrpObject   *object);
+void        mrp_object_set            (gpointer     object,
+				       const gchar *first_property_name,
+				       ...);
+void        mrp_object_get            (gpointer     object,
+				       const gchar *first_property_name,
+				       ...);
+void        mrp_object_set_property   (MrpObject   *object,
+				       MrpProperty *property,
+				       GValue      *value);
+void        mrp_object_get_property   (MrpObject   *object,
+				       MrpProperty *property,
+				       GValue      *value);
+void        mrp_object_set_valist     (MrpObject   *object,
+				       const gchar *first_property_name,
+				       va_list      var_args);
+void        mrp_object_get_valist     (MrpObject   *object,
+				       const gchar *first_property_name,
+				       va_list      var_args);
+GList    *  mrp_object_get_properties (MrpObject   *object);
+guint       mrp_object_get_id         (MrpObject   *object);
+gboolean    mrp_object_set_id         (MrpObject   *object,
+				       guint        id);
 
-GList    *mrp_object_get_properties     (MrpObject      *object);
+/* FIXME: Sucks but we have a circular dependency. Could fix properly later. */
+gpointer    mrp_object_get_project    (MrpObject   *object);
 
-guint     mrp_object_get_id             (MrpObject      *object);
-gboolean  mrp_object_set_id             (MrpObject      *object,
-					 guint           id);
 
 #endif /* __MRP_OBJECT_H__ */

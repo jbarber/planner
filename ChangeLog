@@ -1,3 +1,14 @@
+2004-06-08  Richard Hult  <richard@imendio.com>
+
+	* libplanner/mrp-object.c: (mrp_object_get_project):
+	* libplanner/mrp-object.h:
+	* libplanner/mrp-project.h: Small hack to avoid a lot of
+	g_object_get.
+	
+	* src/planner-gantt-model.c: (gantt_model_get_value): Use
+	work_start instead of start for display and use the getters
+	instead of g_object_get in the get_value function.
+
 2004-06-07 Alvaro del Castillo  <acs@barrapunto.com>
 
 	* src/planner-task-dialog.c: implemented undo for resource

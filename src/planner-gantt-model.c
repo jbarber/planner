@@ -746,15 +746,16 @@ gantt_model_get_value (GtkTreeModel *tree_model,
 		       gint          column,
 		       GValue       *value)
 {
-	GNode      *node;
-	MrpTask    *task;
-	MrpProject *project;
-	gchar      *str;
-	mrptime     t, t1, t2;
-	gint        duration;
-	MrpTaskType type;
-	gint        pos;
-	GString    *string;
+	GNode       *node;
+	MrpTask     *task;
+	MrpProject  *project;
+	gchar       *str;
+	mrptime      t1, t2;
+	gint         duration;
+	MrpTaskType  type;
+	gint         pos;
+	GString     *string;
+	const gchar *name;
 
 	g_return_if_fail (iter != NULL);
 
@@ -763,6 +764,9 @@ gantt_model_get_value (GtkTreeModel *tree_model,
 
 	switch (column) {
 	case COL_WBS:
+		/* FIXME: We really need to cache this, it's too expensive to do
+		 * in get_value.
+		 */
 		string = g_string_sized_new (24);
 
 		pos = -1;
@@ -791,52 +795,40 @@ gantt_model_get_value (GtkTreeModel *tree_model,
 		break;
 
 	case COL_NAME:
-		g_object_get (task, "name", &str, NULL);
-		if (str == NULL) {
-			str = g_strdup ("");
+		name = mrp_task_get_name (task);
+		if (name == NULL) {
+			name = "";
 		}
 		
 		g_value_init (value, G_TYPE_STRING);
-		g_value_set_string (value, str);
-
-		g_free (str);
+		g_value_set_string (value, name);
 		break;
 
 	case COL_START:
-		g_object_get (task, "start", &t, NULL);
-		
 		g_value_init (value, G_TYPE_LONG);
-		g_value_set_long (value, t);
+		g_value_set_long (value, mrp_task_get_work_start (task));
 		break;
 
 	case COL_FINISH:
-		g_object_get (task, "finish", &t, NULL);
-
 		g_value_init (value, G_TYPE_LONG);
-		g_value_set_long (value, t);
+		g_value_set_long (value, mrp_task_get_finish (task));
 		break;
 		
 	case COL_DURATION:
-		g_object_get (task, "duration", &duration, NULL);
-
 		g_value_init (value, G_TYPE_INT);
-		g_value_set_int (value, duration);
+		g_value_set_int (value, mrp_task_get_duration (task));
 		break;
 		
 	case COL_WORK:
-		g_object_get (task, "work", &duration, NULL);
-
 		g_value_init (value, G_TYPE_INT);
-		g_value_set_int (value, duration);
+		g_value_set_int (value, mrp_task_get_work (task));
 		break;
 
 	case COL_SLACK:
-		g_object_get (task,
-			      "finish", &t1,
-			      "latest-finish", &t2,
-			      "project", &project,
-			      NULL);
-
+		t1 = mrp_task_get_finish (task);
+		t2 = mrp_task_get_latest_finish (task);
+		project = mrp_object_get_project (MRP_OBJECT (task));
+		
 		/* We don't support negative slack yet. */
 		if (t2 >= t1) {
 			duration = mrp_project_calculate_task_work (

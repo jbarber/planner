@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
- * Copyright (C) 2003      Imendio HB
+ * Copyright (C) 2003-2004 Imendio HB
  * Copyright (C) 2001-2003 CodeFactory AB
  * Copyright (C) 2001-2003 Richard Hult <richard@imendio.com>
  * Copyright (C) 2001-2002 Mikael Hallendal <micke@imendio.com>
@@ -34,7 +34,7 @@
 
 struct _MrpObjectPriv {
 	MrpProject *project;
-	guint        id;
+	guint       id;
 	GHashTable *property_hash;
 };
 
@@ -655,4 +655,16 @@ mrp_object_set_id (MrpObject *object,
 	} else {
 		return FALSE;
 	}
+}
+
+gpointer
+mrp_object_get_project (MrpObject *object)
+{
+	MrpObjectPriv *priv;
+
+	g_return_val_if_fail (MRP_IS_OBJECT (object), FALSE);
+
+	priv = object->priv;
+
+	return priv->project;
 }
