@@ -24,8 +24,6 @@ EXTRA_DIST = \
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = libplanner-1.pc
 
-CLEANFILES = intltool-extract intltool-merge intltool-update
-
 DISTCHECK_CONFIGURE_FLAGS = --enable-gtk-doc
 
 # Workaround broken scrollkeeper that doesn't remove its files on uninstall

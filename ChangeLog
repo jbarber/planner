@@ -1,5 +1,14 @@
 2003-12-02  Frederic Crozat  <fcrozat@mandrakesoft.com>
 
+	* Makefile.am:
+	Don't remove intltool-* on make clean, they are 
+	generated at configure time.
+
+	* src/Makefile.am:
+	Fix parallel build.
+
+2003-12-02  Frederic Crozat  <fcrozat@mandrakesoft.com>
+
 	* autogen.sh:
 	Add support for GNOME2_DIR variable.
 

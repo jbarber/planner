@@ -98,7 +98,7 @@ planner_LDFLAGS = -export-dynamic
 planner_LDADD =	\
 	$(top_builddir)/libplanner/libplanner-1.la \
 	$(top_builddir)/libegg/recent-files/libeggrecent.la \
-	$(top_builddir)/src/libutil.la	\
+	libutil.la	\
 	$(PLANNER_LIBS)
 
 #	$(top_builddir)/libfoocanvas/libfoocanvas.la 
@@ -135,7 +135,7 @@ libgantt_view_la_SOURCES = \
 	planner-task-tree.h			
 
 libgantt_view_la_LDFLAGS = -avoid-version -module
-libgantt_view_la_LIBADD = $(top_builddir)/src/libutil.la
+libgantt_view_la_LIBADD = libutil.la
 
 libtask_view_la_SOURCES = \
 	planner-task-view.c		\
@@ -145,13 +145,13 @@ libtask_view_la_SOURCES = \
 	planner-task-tree.h			
 
 libtask_view_la_LDFLAGS = -avoid-version -module
-libtask_view_la_LIBADD = $(top_builddir)/src/libutil.la
+libtask_view_la_LIBADD = libutil.la
 
 libresource_view_la_SOURCES = \
 	planner-resource-view.c		
 
 libresource_view_la_LDFLAGS = -avoid-version -module
-libresource_view_la_LIBADD = $(top_builddir)/src/libutil.la
+libresource_view_la_LIBADD = libutil.la
 
 #
 # Plugins
