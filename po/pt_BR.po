@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-03-17 04:15+0100\n"
-"PO-Revision-Date: 2004-03-17 11:02-0300\n"
+"POT-Creation-Date: 2004-03-18 15:19+0100\n"
+"PO-Revision-Date: 2004-03-18 12:12-0300\n"
 "Last-Translator: Afonso Celso Medina <medina@maua.br>\n"
 "Language-Team: Portuguese/Brazil\n"
 "MIME-Version: 1.0\n"
@@ -147,8 +147,8 @@ msgid ""
 "Select a weekday and the day type to use for that day in the default week "
 "for this calendar.\n"
 msgstr ""
-"Selecione um dia de semana e o tipo de dia a ser utilizado na semana "
-"padrão deste calendário.\n"
+"Selecione um dia de semana e o tipo de dia a ser utilizado na semana padrão "
+"deste calendário.\n"
 
 #: data/glade/calendar-dialog.glade.h:27
 msgid "Set day type to:"
@@ -345,7 +345,8 @@ msgstr "Selecionar um Projeto"
 
 #: data/glade/sql.glade.h:4
 msgid "The database contains the following projects. Select a project to open:"
-msgstr "O banco de dados contém os seguintes projetos. Selecione um projeto para "
+msgstr ""
+"O banco de dados contém os seguintes projetos. Selecione um projeto para "
 "abrir:"
 
 #: data/glade/sql.glade.h:5
@@ -846,7 +847,8 @@ msgstr "Impossível encontrar escritor de arquivo identificado por '%s'"
 
 #: libplanner/mrp-project.c:990
 msgid "Couldn't find a suitable file module for loading project"
-msgstr "Não pude encontrar um módulo de arquivo adequado para carregar o projeto"
+msgstr ""
+"Não pude encontrar um módulo de arquivo adequado para carregar o projeto"
 
 #: libplanner/mrp-property.c:365
 msgid "Text"
@@ -1089,12 +1091,12 @@ msgstr "Início do projeto"
 
 #: src/planner-gantt-print.c:191 src/planner-group-dialog.c:805
 #: src/planner-property-dialog.c:378 src/planner-resource-view.c:1168
-#: src/planner-task-dialog.c:1311 src/planner-task-dialog.c:1397
+#: src/planner-task-dialog.c:1319 src/planner-task-dialog.c:1405
 #: src/planner-task-view.c:265
 msgid "Name"
 msgstr "Nome"
 
-#: src/planner-gantt-print.c:199 src/planner-resource-dialog.c:1168
+#: src/planner-gantt-print.c:199 src/planner-resource-dialog.c:1298
 #: src/planner-resource-view.c:691 src/planner-resource-view.c:707
 #: src/planner-resource-view.c:1595 src/planner-task-view.c:268
 msgid "Work"
@@ -1223,19 +1225,19 @@ msgstr "/_Desvincular tarefa"
 msgid "/_Edit task..."
 msgstr "/_Editar tarefa..."
 
-#: src/planner-predecessor-model.c:191 src/planner-task-dialog.c:1039
+#: src/planner-predecessor-model.c:191 src/planner-task-dialog.c:1047
 msgid "FS"
 msgstr "FI"
 
-#: src/planner-predecessor-model.c:194 src/planner-task-dialog.c:1040
+#: src/planner-predecessor-model.c:194 src/planner-task-dialog.c:1048
 msgid "FF"
 msgstr "FF"
 
-#: src/planner-predecessor-model.c:197 src/planner-task-dialog.c:1041
+#: src/planner-predecessor-model.c:197 src/planner-task-dialog.c:1049
 msgid "SS"
 msgstr "II"
 
-#: src/planner-predecessor-model.c:200 src/planner-task-dialog.c:1042
+#: src/planner-predecessor-model.c:200 src/planner-task-dialog.c:1050
 msgid "SF"
 msgstr "IF"
 
@@ -1301,36 +1303,40 @@ msgid "Label"
 msgstr "Rótulo"
 
 #: src/planner-property-dialog.c:411 src/planner-resource-view.c:1210
-#: src/planner-task-dialog.c:1429
+#: src/planner-task-dialog.c:1437
 msgid "Type"
 msgstr "Tipo"
 
 #. Put "no group" at the top.
-#: src/planner-resource-dialog.c:254 src/planner-resource-input-dialog.c:97
+#: src/planner-resource-dialog.c:267 src/planner-resource-input-dialog.c:97
 #: src/planner-resource-view.c:1806
 msgid "(None)"
 msgstr "(Nenhum)"
 
-#: src/planner-resource-dialog.c:264 src/planner-resource-input-dialog.c:107
-#: src/planner-task-dialog.c:249
+#: src/planner-resource-dialog.c:277 src/planner-resource-input-dialog.c:107
+#: src/planner-task-dialog.c:251
 msgid "(No name)"
 msgstr "(Sem nome)"
 
+#: src/planner-resource-dialog.c:426
+msgid "Edit resource property from dialog"
+msgstr "Editar propriedades do recurso a partir da caixa de diálogo"
+
 #. i18n: time stamp format for notes in task dialog, see strftime(3) for
 #. * a detailed description.
-#: src/planner-resource-dialog.c:786 src/planner-task-dialog.c:679
+#: src/planner-resource-dialog.c:910 src/planner-task-dialog.c:687
 msgid "%a %d %b %Y, %H:%M\n"
 msgstr "%a %d %b %Y, %H:%M\n"
 
-#: src/planner-resource-dialog.c:884
+#: src/planner-resource-dialog.c:1008
 msgid "None (use project default)"
 msgstr "Nenhum (utilizar padrões do projeto)"
 
-#: src/planner-resource-dialog.c:1011 src/planner-resource-dialog.c:1013
+#: src/planner-resource-dialog.c:1135 src/planner-resource-dialog.c:1137
 msgid "Edit resource properties"
 msgstr "Editar propriedades do recurso"
 
-#: src/planner-resource-dialog.c:1169 src/planner-resource-view.c:694
+#: src/planner-resource-dialog.c:1299 src/planner-resource-view.c:694
 #: src/planner-resource-view.c:708 src/planner-resource-view.c:1596
 msgid "Material"
 msgstr "Materiais"
@@ -1442,39 +1448,39 @@ msgstr "Abrir do Banco de Dados"
 msgid "Save to Database"
 msgstr "Salvar no Banco de Dados"
 
-#: src/planner-task-dialog.c:745
+#: src/planner-task-dialog.c:753
 msgid "Finish to start (FS)"
 msgstr "Final para início (FI)"
 
-#: src/planner-task-dialog.c:746
+#: src/planner-task-dialog.c:754
 msgid "Finish to finish (FF)"
 msgstr "Final para final (FF)"
 
-#: src/planner-task-dialog.c:747
+#: src/planner-task-dialog.c:755
 msgid "Start to start (SS)"
 msgstr "Início para início (II)"
 
-#: src/planner-task-dialog.c:748
+#: src/planner-task-dialog.c:756
 msgid "Start to finish (SF)"
 msgstr "Início para final (IF)"
 
-#: src/planner-task-dialog.c:798
+#: src/planner-task-dialog.c:806
 msgid "Can't add new predecessor. No task selected!"
 msgstr "Impossível adicionar novo predecessor. Nenhuma tarefa selecionada!"
 
-#: src/planner-task-dialog.c:1330
+#: src/planner-task-dialog.c:1338
 msgid "Assigned"
 msgstr "Alocado"
 
-#: src/planner-task-dialog.c:1347
+#: src/planner-task-dialog.c:1355
 msgid "Units"
 msgstr "Unidades"
 
-#: src/planner-task-dialog.c:1451
+#: src/planner-task-dialog.c:1459
 msgid "Lag"
 msgstr "Atraso"
 
-#: src/planner-task-dialog.c:1584 src/planner-task-dialog.c:1586
+#: src/planner-task-dialog.c:1592 src/planner-task-dialog.c:1594
 msgid "Edit task properties"
 msgstr "Editar as propriedades da tarefa"
 
@@ -1610,12 +1616,14 @@ msgstr "A Página Web do Planner"
 
 #: src/planner-window.c:1227
 msgid "If you don't save, changes made the last minute will be discarded."
-msgstr "Se não salvar, as alterações efetuadas no último minuto serão perdidas."
+msgstr ""
+"Se não salvar, as alterações efetuadas no último minuto serão perdidas."
 
 #: src/planner-window.c:1232
 #, c-format
 msgid "If you don't save, changes made the last %d minutes will be discarded."
-msgstr "Se não salvar, as alterações efetuadas nos últimos %d minutos serão perdidas."
+msgstr ""
+"Se não salvar, as alterações efetuadas nos últimos %d minutos serão perdidas."
 
 #: src/planner-window.c:1237
 msgid "If you don't save, changes made the last hour will be discarded."
@@ -1624,7 +1632,8 @@ msgstr "Se não salvar, as alterações efetuadas na última hora serão perdida
 #: src/planner-window.c:1242
 #, c-format
 msgid "If you don't save, changes made the last %d hours will be discarded."
-msgstr "Se não salvar, as alterações efetuadas nas últimas %d horas serão perdidas."
+msgstr ""
+"Se não salvar, as alterações efetuadas nas últimas %d horas serão perdidas."
 
 #: src/planner-window.c:1249
 #, c-format
