@@ -2126,15 +2126,35 @@ static Units units[] = {
 	{ N_("minutes"), UNIT_MINUTE }  /* minute unit variant accepted in input */
 };
 
-static Units *translated_units;
-
 static Unit
 task_tree_get_unit_from_string (const gchar *str)
 {
-	Unit unit = UNIT_NONE;
-	gint i;
-	gint len;
+	static Units    *translated_units;
+	static gboolean  inited = FALSE;
+	Unit             unit = UNIT_NONE;
+	gint             i, len;
+	gchar           *tmp, *tmp2;
 
+	if (!inited) {
+		len = G_N_ELEMENTS (units);
+
+		translated_units = g_new0 (Units, len);
+		
+		for (i = 0; i < len; i++) {
+			tmp = _(units[i].name);
+
+			tmp2 = g_utf8_casefold (tmp, -1);
+			/* Not sure this is necessary... */
+			tmp = g_utf8_normalize (tmp2, -1, G_NORMALIZE_DEFAULT);
+
+			translated_units[i].name = tmp;
+			translated_units[i].unit = units[i].unit;
+		}
+		
+		inited = TRUE;
+	}
+
+	
 	len = G_N_ELEMENTS (units);
 	for (i = 0; i < len; i++) {
 		if (!strncmp (str, translated_units[i].name,
@@ -2201,28 +2221,6 @@ task_tree_parse_time_string (MgTaskTree  *tree,
 	gint             seconds_per_month;
 	gint             seconds_per_week;
 	gint             seconds_per_day;
-	static gboolean  inited = FALSE;
-	gunichar         c;
-	gint             i, len;
-
-	if (!inited) {
-		len = G_N_ELEMENTS (units);
-
-		translated_units = g_new0 (Units, len);
-		
-		for (i = 0; i < len; i++) {
-			tmp = _(units[i].name);
-
-			str = g_utf8_casefold (tmp, -1);
-			/* Not sure this is necessary... */
-			tmp = g_utf8_normalize (str, -1, G_NORMALIZE_DEFAULT);
-
-			translated_units[i].name = tmp;
-			translated_units[i].unit = units[i].unit;
-		}
-		
-		inited = TRUE;
-	}
 
 	seconds_per_day = mrp_calendar_day_get_total_work (
 		mrp_project_get_calendar (tree->priv->project),
@@ -2239,12 +2237,14 @@ task_tree_parse_time_string (MgTaskTree  *tree,
 
 	freeme = str;
 
+	if (!str) {
+		return 0;
+	}
+	
 	total = 0;
-	while (1) {
-		c = g_utf8_get_char (str);
-		while (c && g_unichar_isalpha (c)) {   
+	while (*str) {
+		while (*str && g_unichar_isalpha (g_utf8_get_char (str))) {   
 			str = g_utf8_next_char (str);
-			c = g_utf8_get_char (str);
 		}
 
 		if (*str == 0) {
@@ -2252,6 +2252,7 @@ task_tree_parse_time_string (MgTaskTree  *tree,
 		}
 
 		dbl = g_strtod (str, &end_ptr);
+
 		if (end_ptr == str) {
 			break;
 		}
@@ -2273,6 +2274,10 @@ task_tree_parse_time_string (MgTaskTree  *tree,
 							       seconds_per_day);
 		}
 
+		if (*end_ptr == 0) {
+			break;
+		}
+		
 		str = end_ptr + 1;
 	}
 
