@@ -1,1 +1,5 @@
-EXTRA_DIST = README database.sql database-0.11.sql upgrade-0.6.x-0.11.sql
+sqldocdir = $(datadir)/doc/planner
+sqldoc_DATA =				\
+	README.sql
+
+EXTRA_DIST = $(sqldoc_DATA)
