@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mrproject VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-04-07 04:00+0200\n"
-"PO-Revision-Date: 2004-04-07 13:28+0200\n"
+"POT-Creation-Date: 2004-04-16 15:22+0200\n"
+"PO-Revision-Date: 2004-04-16 17:00+0200\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -186,8 +186,8 @@ msgid "Group Editor"
 msgstr "Editor skupin"
 
 #: data/glade/html-output.glade.h:3
-msgid "<b>Save to</b>"
-msgstr "<b>Uložit do</b>"
+msgid "<b>Save to file</b>"
+msgstr "<b>Uložit do souboru</b>"
 
 #: data/glade/html-output.glade.h:4 data/ui/html-plugin.ui.h:1
 msgid "Export to HTML"
@@ -401,7 +401,7 @@ msgid "_Work:"
 msgstr "_Práce:"
 
 #. day unit variant accepted in input
-#: data/glade/task-dialog.glade.h:17 src/planner-task-tree.c:2788
+#: data/glade/task-dialog.glade.h:17 src/planner-task-tree.c:2904
 msgid "days"
 msgstr "dní"
 
@@ -882,7 +882,7 @@ msgstr "Implicitní"
 msgid "Couldn't find a suitable file module for loading '%s'"
 msgstr "Nemohu najít vhodný modul souboru pro načtení '%s'"
 
-#: libplanner/mrp-project.c:769 libplanner/mrp-project.c:1033
+#: libplanner/mrp-project.c:769 libplanner/mrp-project.c:1053
 msgid "No support for SQL storage built into this version of Planner."
 msgstr "V této verzi Planneru není vestavěna podpora pro ukládání do SQL."
 
@@ -890,12 +890,12 @@ msgstr "V této verzi Planneru není vestavěna podpora pro ukládání do SQL."
 msgid "Invalid URI."
 msgstr "Neplatné URI."
 
-#: libplanner/mrp-project.c:927
+#: libplanner/mrp-project.c:947
 #, c-format
 msgid "Unable to find file writer identified by '%s'"
 msgstr "Nemohu najít zapisovač souboru identifikovaný '%s'"
 
-#: libplanner/mrp-project.c:990
+#: libplanner/mrp-project.c:1010
 msgid "Couldn't find a suitable file module for loading project"
 msgstr "Nemohu najít vhodný modul souboru pro načtení projektu"
 
@@ -1136,20 +1136,20 @@ msgid "Project start"
 msgstr "Začátek projektu"
 
 #: src/planner-gantt-print.c:191 src/planner-group-dialog.c:806
-#: src/planner-property-dialog.c:378 src/planner-resource-view.c:1168
-#: src/planner-task-dialog.c:1411 src/planner-task-dialog.c:1497
+#: src/planner-property-dialog.c:378 src/planner-resource-view.c:1172
+#: src/planner-task-dialog.c:1410 src/planner-task-dialog.c:1496
 #: src/planner-task-view.c:266
 msgid "Name"
 msgstr "Jméno"
 
-#: src/planner-gantt-print.c:199 src/planner-resource-dialog.c:1298
+#: src/planner-gantt-print.c:199 src/planner-resource-dialog.c:1303
 #: src/planner-resource-view.c:691 src/planner-resource-view.c:707
-#: src/planner-resource-view.c:1595 src/planner-task-view.c:269
+#: src/planner-resource-view.c:1599 src/planner-task-view.c:269
 msgid "Work"
 msgstr "Práce"
 
 #: src/planner-gantt-print.c:523 src/planner-gantt-row.c:668
-#: src/planner-window.c:1648
+#: src/planner-window.c:1653
 msgid "Unnamed"
 msgstr "Nepojmenovaný"
 
@@ -1237,7 +1237,7 @@ msgstr ""
 "\"%s\" je adresář.\n"
 "Zadejte název souboru a zkuste to znovu."
 
-#: src/planner-html-plugin.c:148 src/planner-window.c:1416
+#: src/planner-html-plugin.c:148 src/planner-window.c:1415
 #, c-format
 msgid "File \"%s\" exists, do you want to overwrite it?"
 msgstr "Soubor \"%s\" existuje, chcete jej přepsat?"
@@ -1279,19 +1279,19 @@ msgstr "/Od_pojit úlohu"
 msgid "/_Edit task..."
 msgstr "/_Upravit úlohu..."
 
-#: src/planner-predecessor-model.c:191 src/planner-task-dialog.c:1133
+#: src/planner-predecessor-model.c:191 src/planner-task-dialog.c:1132
 msgid "FS"
 msgstr "KZ"
 
-#: src/planner-predecessor-model.c:194 src/planner-task-dialog.c:1134
+#: src/planner-predecessor-model.c:194 src/planner-task-dialog.c:1133
 msgid "FF"
 msgstr "KK"
 
-#: src/planner-predecessor-model.c:197 src/planner-task-dialog.c:1135
+#: src/planner-predecessor-model.c:197 src/planner-task-dialog.c:1134
 msgid "SS"
 msgstr "ZZ"
 
-#: src/planner-predecessor-model.c:200 src/planner-task-dialog.c:1136
+#: src/planner-predecessor-model.c:200 src/planner-task-dialog.c:1135
 msgid "SF"
 msgstr "ZK"
 
@@ -1356,14 +1356,14 @@ msgstr "Nemohu vytvořit dialog vlastností."
 msgid "Label"
 msgstr "Jmenovka"
 
-#: src/planner-property-dialog.c:411 src/planner-resource-view.c:1210
-#: src/planner-task-dialog.c:1529
+#: src/planner-property-dialog.c:411 src/planner-resource-view.c:1214
+#: src/planner-task-dialog.c:1528
 msgid "Type"
 msgstr "Typ"
 
 #. Put "no group" at the top.
 #: src/planner-resource-dialog.c:267 src/planner-resource-input-dialog.c:97
-#: src/planner-resource-view.c:1806
+#: src/planner-resource-view.c:1810
 msgid "(None)"
 msgstr "(žádná)"
 
@@ -1378,20 +1378,20 @@ msgstr "Upravit vlastnost zdroje v dialogu"
 
 #. i18n: time stamp format for notes in task dialog, see strftime(3) for
 #. * a detailed description.
-#: src/planner-resource-dialog.c:910 src/planner-task-dialog.c:738
+#: src/planner-resource-dialog.c:915 src/planner-task-dialog.c:738
 msgid "%a %d %b %Y, %H:%M\n"
 msgstr "%a %d. %b %Y, %H:%M\n"
 
-#: src/planner-resource-dialog.c:1008
+#: src/planner-resource-dialog.c:1013
 msgid "None (use project default)"
 msgstr "Žádný (použít implicitní pro projekt)"
 
-#: src/planner-resource-dialog.c:1135 src/planner-resource-dialog.c:1137
+#: src/planner-resource-dialog.c:1140 src/planner-resource-dialog.c:1142
 msgid "Edit resource properties"
 msgstr "Upravit vlastnosti zdroje"
 
-#: src/planner-resource-dialog.c:1299 src/planner-resource-view.c:694
-#: src/planner-resource-view.c:708 src/planner-resource-view.c:1596
+#: src/planner-resource-dialog.c:1304 src/planner-resource-view.c:694
+#: src/planner-resource-view.c:708 src/planner-resource-view.c:1600
 msgid "Material"
 msgstr "Materiál"
 
@@ -1423,23 +1423,23 @@ msgstr "Odstranit zdroj"
 msgid "Edit custom resource properties"
 msgstr "Upravit vlastní vlastnosti zdroje"
 
-#: src/planner-resource-view.c:1189
+#: src/planner-resource-view.c:1193
 msgid "Short name"
 msgstr "Krátký název"
 
-#: src/planner-resource-view.c:1234
+#: src/planner-resource-view.c:1238
 msgid "Group"
 msgstr "Skupina"
 
-#: src/planner-resource-view.c:1263
+#: src/planner-resource-view.c:1267
 msgid "Email"
 msgstr "E-mail"
 
-#: src/planner-resource-view.c:1328
+#: src/planner-resource-view.c:1332
 msgid "Edit resource property"
 msgstr "Upravit vlastnost zdroje"
 
-#: src/planner-resource-view.c:1390
+#: src/planner-resource-view.c:1394
 msgid "Edit resource custom property"
 msgstr "Upravit vlastní vlastnost zdroje"
 
@@ -1522,19 +1522,19 @@ msgstr "Začátek před koncem (ZK)"
 msgid "Can't add new predecessor. No task selected!"
 msgstr "Nemohu přidat nového předchůdce. Nevybrána žádná úloha!"
 
-#: src/planner-task-dialog.c:1430
+#: src/planner-task-dialog.c:1429
 msgid "Assigned"
 msgstr "Přiřazeno"
 
-#: src/planner-task-dialog.c:1447
+#: src/planner-task-dialog.c:1446
 msgid "Units"
 msgstr "Jednotky"
 
-#: src/planner-task-dialog.c:1551
+#: src/planner-task-dialog.c:1550
 msgid "Lag"
 msgstr "Zpoždění"
 
-#: src/planner-task-dialog.c:1690 src/planner-task-dialog.c:1692
+#: src/planner-task-dialog.c:1689 src/planner-task-dialog.c:1691
 msgid "Edit task properties"
 msgstr "Upravit vlastnosti úlohy"
 
@@ -1550,72 +1550,72 @@ msgstr "Upravit vlastnosti úlohy"
 msgid "Remove task"
 msgstr "Odstranit úlohu"
 
-#: src/planner-task-tree.c:2780
+#: src/planner-task-tree.c:2896
 msgid "mon"
 msgstr "měs"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:2781
+#: src/planner-task-tree.c:2897
 msgid "month"
 msgstr "měsíc"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:2782
+#: src/planner-task-tree.c:2898
 msgid "months"
 msgstr "měsíců"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:2783
+#: src/planner-task-tree.c:2899
 msgid "w"
 msgstr "t"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:2784
+#: src/planner-task-tree.c:2900
 msgid "week"
 msgstr "týden"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:2785
+#: src/planner-task-tree.c:2901
 msgid "weeks"
 msgstr "týdnů"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:2786
+#: src/planner-task-tree.c:2902
 msgid "d"
 msgstr "d"
 
 #. day unit variant accepted in input
-#: src/planner-task-tree.c:2787
+#: src/planner-task-tree.c:2903
 msgid "day"
 msgstr "den"
 
 #. day unit variant accepted in input
-#: src/planner-task-tree.c:2789
+#: src/planner-task-tree.c:2905
 msgid "h"
 msgstr "h"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:2790
+#: src/planner-task-tree.c:2906
 msgid "hour"
 msgstr "hodina"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:2791
+#: src/planner-task-tree.c:2907
 msgid "hours"
 msgstr "hodin"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:2792
+#: src/planner-task-tree.c:2908
 msgid "min"
 msgstr "min"
 
 #. minute unit variant accepted in input
-#: src/planner-task-tree.c:2793
+#: src/planner-task-tree.c:2909
 msgid "minute"
 msgstr "minuta"
 
 #. minute unit variant accepted in input
-#: src/planner-task-tree.c:2794
+#: src/planner-task-tree.c:2910
 msgid "minutes"
 msgstr "minut"
 
@@ -1705,11 +1705,11 @@ msgstr "Z_avřít bez uložení"
 msgid "_Cancel"
 msgstr "_Zrušit"
 
-#: src/planner-window.c:1380
+#: src/planner-window.c:1379
 msgid "Save a file"
 msgstr "Uložit soubor"
 
-#: src/planner-window.c:1611
+#: src/planner-window.c:1616
 msgid ""
 "You have opened a file that was saved with an old version of Planner.\n"
 "\n"
