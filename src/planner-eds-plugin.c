@@ -19,7 +19,7 @@
  *
  * TODO:
  *
- *  - Caching issues  
+ *  - Caching answers issues  
  */
 
 #include <config.h>
@@ -135,7 +135,11 @@ static void eds_resource_selected       (GtkCellRendererToggle *toggle,
 static void eds_import_resource         (gchar                 *name,
 					 gchar                 *email,
 					 gchar                 *uid,
-					 PlannerPlugin         *plugin);
+					 PlannerPlugin         *plugin,
+					 GList                 *resources_orig);
+static MrpResource * eds_find_resource  (PlannerPlugin         *plugin,
+					 const gchar           *uid,
+					 GList                 *resources_orig);
 static gboolean eds_create_uid_property (PlannerPlugin         *plugin);
 static void eds_load_resources          (ESourceGroup          *group, 
 					 PlannerPlugin         *plugin,
@@ -505,7 +509,7 @@ eds_receive_book_cb (EBook         *client,
 	}
 
 	if (status != E_BOOK_ERROR_OK) {
-		g_message ("Problems opening: %s", book_uri);
+		g_warning ("Problems opening: %s", book_uri);
 		return;
 	}
 
@@ -519,7 +523,6 @@ eds_receive_book_cb (EBook         *client,
 	async_query->plugin = plugin;
 
 	query = e_book_query_any_field_contains (search); 
-	g_message ("Async uid: %s", async_query->uid);
 	e_book_async_get_contacts (client, query, 
 				   eds_receive_contacts_cb, 
 				   (gpointer) async_query);
@@ -618,23 +621,59 @@ eds_import_change_all (PlannerPlugin *plugin,
 	} while (gtk_tree_model_iter_next (priv->resources_model, &iter));
 }
 
+static MrpResource *
+eds_find_resource (PlannerPlugin *plugin,
+		   const gchar   *uid,
+		   GList         *resources_orig) 
+{
+	GList *l;
+	MrpResource *resource = NULL;
 
+	for (l = resources_orig; l; l = l->next) {
+		gchar *current_uid;
+
+		mrp_object_get (l->data, "eds-uid", &current_uid, NULL);
+		if (!current_uid) {
+			continue;
+		}
+		if (!strcmp (uid, current_uid)) {
+			resource = l->data;
+			break;
+		}
+	}
+	return resource;
+}
+
+/* If the resource is already imported, update it */
 static void
 eds_import_resource (gchar         *name,
 		     gchar         *email,
 		     gchar         *uid,
-		     PlannerPlugin *plugin) 
+		     PlannerPlugin *plugin,
+		     GList         *resources_orig) 
 {
-	MrpResource *resource = mrp_resource_new ();
+	MrpResource *resource;
 	gchar       *note = _("Imported from Evolution Data Server");
+	gchar       *note_update = _("Updated from Evolution Data Server");
 
-	planner_resource_cmd_insert (plugin->main_window, resource);
-	mrp_object_set (resource, 
-			"type", MRP_RESOURCE_TYPE_WORK, 
-			"units", 1,
-			"note", g_strdup_printf ("%s:\n%s", note, uid),
-			"eds-uid", g_strdup (uid),
-			NULL);
+
+	resource = eds_find_resource (plugin, uid, resources_orig);
+	if (!resource) {
+		resource = mrp_resource_new ();
+		planner_resource_cmd_insert (plugin->main_window, resource);		
+		mrp_object_set (resource, 
+				"type", MRP_RESOURCE_TYPE_WORK, 
+				"units", 1,
+				"note", g_strdup_printf ("%s:\n%s", note, uid),
+				"eds-uid", g_strdup (uid),
+				NULL);
+	} else {
+		gchar *note_now;
+		mrp_object_get (resource, "note", &note_now, NULL);
+		mrp_object_set (resource, "note", 
+				g_strdup_printf ("%s\n%s", note_now, note_update), NULL);
+		g_free (note_now);
+	}
 
 	if (name) {
 		mrp_object_set (resource, "name", name, NULL);
@@ -697,6 +736,10 @@ eds_ok_button_clicked (GtkButton     *button,
 {
 	GtkTreeIter        iter;
 	PlannerPluginPriv *priv = plugin->priv;
+	GList             *resources_orig;
+
+	/* We are going to modify the resources. Work with a copy */
+	resources_orig = mrp_project_get_resources (plugin->priv->project);
 
 	if (!priv->resources_model) {
 		eds_dialog_close (plugin);
@@ -730,7 +773,7 @@ eds_ok_button_clicked (GtkButton     *button,
 			gchar *name = e_contact_get (contact, E_CONTACT_GIVEN_NAME);
 			gchar *email = e_contact_get (contact, E_CONTACT_EMAIL_1);
 			gchar *eds_uid = e_contact_get (contact, E_CONTACT_UID);
-			eds_import_resource (name, email, eds_uid, plugin);
+			eds_import_resource (name, email, eds_uid, plugin, resources_orig);
 			g_free (name);
 			g_free (email);
 			g_free (eds_uid);

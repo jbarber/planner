@@ -1,3 +1,10 @@
+2004-08-12  Alvaro del Castillo  <acs@barrapunto.com>
+	
+	* src/planner-eds-plugin.c:
+	(eds_find_resource): search if a resource was imported.
+	(eds_import_resource): checks if a resource was imported and update
+	it if it was already in the resource list.
+	
 2004-08-11  Alvaro del Castillo  <acs@barrapunto.com>
 	
 	* src/planner-eds-plugin.c:
