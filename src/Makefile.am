@@ -88,6 +88,11 @@ planner_SOURCES = \
 	planner-task-dialog.h		\
 	planner-task-input-dialog.c	\
 	planner-task-input-dialog.h	\
+	planner-ttable-chart.h		\
+	planner-ttable-model.h		\
+	planner-ttable-print.h		\
+	planner-ttable-row.h		\
+	planner-ttable-tree.h		\
 	planner-view.c			\
 	planner-view.h			\
 	planner-view-loader.c		\

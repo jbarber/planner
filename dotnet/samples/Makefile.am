@@ -1,6 +1,9 @@
 local_paths = -L ../libplanner
 all_assemblies = -r libplanner.dll -r gtk-sharp.dll -r glib-sharp.dll
 
+EXTRA_DIST = \
+	Example01.cs \
+	Example10.cs
 
 MCS = mcs
 

@@ -1,1 +1,1 @@
-SUBDIRS = libplanner
+SUBDIRS = libplanner samples

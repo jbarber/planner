@@ -1,13 +1,19 @@
 uidir = $(datadir)/planner/ui
 
+timetable_view_ui_files = \
+	time-table-view.ui
+
+python_script_ui_files = \
+	python-plugin.ui
+
 if BUILD_TIMETABLE
-timetable_view_ui = time-table-view.ui
+timetable_view_ui = $(timetable_view_ui_files)
 else
 timetable_view_ui =
 endif
 
 if HAVE_PYTHON_PLUGIN
-python_script_ui = python-plugin.ui
+python_script_ui = $(python_script_ui_files)
 else
 python_script_ui =
 endif
@@ -24,4 +30,4 @@ ui_DATA = \
 	$(python_script_ui)	\
 	$(timetable_view_ui)
 
-EXTRA_DIST = $(ui_DATA) $(timetable_view_ui) $(python_script_ui)
+EXTRA_DIST = $(ui_DATA) $(timetable_view_ui_files) $(python_script_ui_files)
