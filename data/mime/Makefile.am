@@ -27,9 +27,15 @@ install-data-hook:
 if HAVE_NEW_MIME
 	$(UPDATE_MIME_DATABASE) "$(DESTDIR)$(datadir)/mime"
 endif
+if HAVE_NEWER_MIME
+	$(UPDATE_DESKTOP_DATABASE) 
+endif
 
 uninstall-hook:
 if HAVE_NEW_MIME
 	$(UPDATE_MIME_DATABASE) "$(DESTDIR)$(datadir)/mime"
+endif
+if HAVE_NEWER_MIME
+	$(UPDATE_DESKTOP_DATABASE) 
 endif
 
