@@ -158,6 +158,9 @@ mgm_get_column_type (GtkTreeModel *tree_model,
         case GROUP_COL_GROUP_DEFAULT:
                 return G_TYPE_BOOLEAN;
 
+	case GROUP_COL:
+		return MRP_TYPE_GROUP;
+
 	default:
 		return G_TYPE_INVALID;
         }
@@ -220,6 +223,12 @@ mgm_get_value (GtkTreeModel *tree_model,
                 g_value_init (value, G_TYPE_STRING);
 		g_value_set_string (value, str);
 		g_free (str);
+		
+                break;
+
+	case GROUP_COL:
+                g_value_init (value, MRP_TYPE_GROUP);
+		g_value_set_object (value, group);
 		
                 break;
 

@@ -42,6 +42,65 @@ typedef struct {
 	GtkWidget   *remove_button;
 } DialogData;
 
+typedef struct {
+	MrpGroup    *group;
+	GtkTreeIter *found_iter;
+} FindGroupData;
+
+static void 
+group_dialog_free_find_group_data (FindGroupData *data)
+{
+	if (data->found_iter) {
+		gtk_tree_iter_free (data->found_iter);
+	}
+	
+	g_free (data);
+}
+
+static gboolean
+group_dialog_foreach_find_group_func (GtkTreeModel     *model,
+				      GtkTreePath      *path,
+				      GtkTreeIter      *iter,
+				      FindGroupData    *data)
+{
+	MrpGroup *group;
+	
+	gtk_tree_model_get (model, iter,
+			    GROUP_COL, &group,
+			    -1);
+	
+	if (group == data->group) {
+		data->found_iter = gtk_tree_iter_copy (iter);
+		return TRUE;
+	}
+	
+	return FALSE;
+}
+
+static FindGroupData *
+group_dialog_find_group (GtkTreeView *tree_view, MrpGroup *group)
+{
+	FindGroupData *data;
+	GtkTreeModel  *model;
+	
+	data = g_new0 (FindGroupData, 1);
+	data->group = group;
+	data->found_iter = NULL;
+
+	model = gtk_tree_view_get_model (tree_view);
+
+	gtk_tree_model_foreach (model,
+				(GtkTreeModelForeachFunc) group_dialog_foreach_find_group_func,
+				data);
+
+	if (data->found_iter) {
+		return data;
+	}
+	
+	g_free (data);
+	return NULL;
+}
+
 
 static GtkWidget * 
 group_dialog_create                       (MrpProject           *project);
@@ -157,8 +216,11 @@ group_dialog_setup_tree_view (GtkWidget *dialog)
 static void
 group_dialog_insert_group_cb (GtkWidget *button, GtkWidget *dialog)
 {
-	DialogData *data;
-	MrpGroup          *group;
+	DialogData     *data;
+	MrpGroup       *group;
+	FindGroupData  *find_data;
+	GtkTreeModel   *model;
+	GtkTreePath    *path;
 	
 	g_return_if_fail (GTK_IS_DIALOG (dialog));
 
@@ -167,6 +229,24 @@ group_dialog_insert_group_cb (GtkWidget *button, GtkWidget *dialog)
 	group = mrp_group_new ();
 
 	mrp_project_add_group (data->project, group);
+
+	if (!GTK_WIDGET_HAS_FOCUS (data->tree_view)) {
+		gtk_widget_grab_focus (GTK_WIDGET (data->tree_view));
+	}
+
+	find_data = group_dialog_find_group (data->tree_view, group);
+	if (find_data) {
+		model = gtk_tree_view_get_model (data->tree_view);
+		path = gtk_tree_model_get_path (model, find_data->found_iter);
+		
+		gtk_tree_view_set_cursor (data->tree_view,
+					  path,
+					  gtk_tree_view_get_column (data->tree_view, 0),
+					  TRUE);	
+		gtk_tree_path_free (path);
+
+		group_dialog_free_find_group_data (find_data);
+	}	
 }
 
 static void

@@ -1,5 +1,15 @@
 2004-01-28  Alvaro del Castillo  <acs@barrapunto.com>
 
+	* src/planner-group-dialog.c
+	* src/planner-group-model.c
+	* src/planner-group-model.h
+	When you add a new group, it is selected by default and the
+	group name cell is in editing state.
+	* src/planner-resource-view.c
+	When you add a resource, the resource name cell is in editing state.
+
+2004-01-28  Alvaro del Castillo  <acs@barrapunto.com>
+
 	* src/planner-resource-view.c: Added undo for all resources properties.
 
 2004-01-25  Richard Hult  <richard@imendio.com>

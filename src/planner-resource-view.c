@@ -4,7 +4,7 @@
  * Copyright (C) 2002 CodeFactory AB
  * Copyright (C) 2002 Richard Hult <richard@imendio.com>
  * Copyright (C) 2002 Mikael Hallendal <micke@imendio.com>
- * Copyright (C) 2002 Alvaro del Castillo <acs@barrapunto.com>
+ * Copyright (C) 2002-2004 Alvaro del Castillo <acs@barrapunto.com>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -812,8 +812,8 @@ resource_view_insert_resource_cb (BonoboUIComponent *component,
 		
 		gtk_tree_view_set_cursor (priv->tree_view,
 					  path,
-					  NULL,
-					  FALSE);
+					  gtk_tree_view_get_column (priv->tree_view, 0),
+					  TRUE);
 	
 		gtk_tree_path_free (path);
 
