@@ -246,11 +246,11 @@ init (PlannerView *view, PlannerWindow *main_window)
 			      "planner-stock-unlink-task",
 			      icon_set);
 
-	pixbuf = gdk_pixbuf_new_from_file (IMAGEDIR "/24_link_tasks.png", NULL);
+	pixbuf = gdk_pixbuf_new_from_file (IMAGEDIR "/24_link_task.png", NULL);
 	icon_set = gtk_icon_set_new_from_pixbuf (pixbuf);
 	g_object_unref (pixbuf);
 	gtk_icon_factory_add (icon_factory,
-			      "planner-stock-link-tasks",
+			      "planner-stock-link-task",
 			      icon_set);
 
 	pixbuf = gdk_pixbuf_new_from_file (IMAGEDIR "/24_indent_task.png", NULL);

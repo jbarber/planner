@@ -138,14 +138,14 @@ G_MODULE_EXPORT gchar *
 get_label (PlannerView *view)
 {
 	g_return_val_if_fail (PLANNER_IS_VIEW (view), NULL);
-	return _("Resource usage");
+	return _("Resource Usage");
 }
 
 G_MODULE_EXPORT gchar*
 get_menu_label (PlannerView *view)
 {
 	g_return_val_if_fail (PLANNER_IS_VIEW(view),NULL);
-	return _("_Resource usage");
+	return _("Resource _Usage");
 }
 
 G_MODULE_EXPORT gchar *

@@ -1,3 +1,10 @@
+2004-02-16  Richard Hult  <richard@imendio.com>
+
+	* src/planner-gantt-view.c (init): Fix icon/stock names.
+
+	* src/planner-ttable-view.c (get_menu_label, get_label): Use title
+	style and fix clashing access keys.
+
 2004-02-14  Richard Hult  <richard@imendio.com>
 
 	* data/images/24_link_task.png:
