@@ -47,6 +47,8 @@
 #include "planner-window.h"
 #include "planner-plugin.h"
 #include "planner-resource-cmd.h"
+#include <libplanner/mrp-object.h>
+#include <libplanner/mrp-property.h>
 
 /* Evolution Data Server sources */
 #include <libedataserver/e-source-list.h>
@@ -101,57 +103,59 @@ enum {
 	NUM_GROUP_COLS
 };
 
-static void eds_plugin_import          (GtkAction             *action,
-					gpointer               user_data,
-					const gchar           *cname);
-static void eds_create_groups_model    (GSList                *groups,
-					PlannerPlugin         *plugin);
-static void eds_ok_button_clicked      (GtkButton             *button,
-					PlannerPlugin         *plugin);
-static void eds_cancel_button_clicked  (GtkButton             *button,
-					PlannerPlugin         *plugin);
-static void eds_search_button_clicked  (GtkButton             *button,
-					PlannerPlugin         *plugin);
-static void eds_import_change_all      (PlannerPlugin         *plugin,
-					gboolean               state);
-static void eds_all_button_clicked     (GtkButton             *button,
-					PlannerPlugin         *plugin);
-static void eds_none_button_clicked    (GtkButton             *button,
-					PlannerPlugin         *plugin);
-static void eds_stop_button_clicked    (GtkButton             *button,
-					PlannerPlugin         *plugin);
-static gboolean eds_search_key_pressed (GtkEntry              *entry,
-					GdkEventKey           *event,
-					PlannerPlugin         *plugin);
-static void eds_column_clicked         (GtkTreeViewColumn     *treeviewcolumn,
-                                        PlannerPlugin         *plugin);
-static void eds_group_selected         (GtkComboBox           *select_group, 
-					PlannerPlugin         *plugin);
-static void eds_resource_selected      (GtkCellRendererToggle *toggle, 
-					const gchar           *path_str,
-					PlannerPlugin         *plugin);
-static void eds_import_resource        (gchar                 *name,
-					gchar                 *email,
-					PlannerPlugin         *plugin);
-static void eds_load_resources         (ESourceGroup          *group, 
-					PlannerPlugin         *plugin,
-					const gchar           *search);
-static void eds_receive_contacts_cb    (EBook                 *book, 
-					EBookStatus            status, 
-					GList                 *contacts, 
-					gpointer               plugin);
-static void eds_receive_book_cb        (EBook                 *book, 
-					EBookStatus            status, 
-					gpointer               user_data);
-static void eds_plugin_busy            (PlannerPlugin         *plugin,
-					gboolean               busy);
-static gboolean eds_query_cancelled    (PlannerPlugin         *plugin,
-					const gchar           *uid);
-static void eds_dialog_close           (PlannerPlugin         *plugin);
+static void eds_plugin_import           (GtkAction             *action,
+					 gpointer               user_data,
+					 const gchar           *cname);
+static void eds_create_groups_model     (GSList                *groups,
+					 PlannerPlugin         *plugin);
+static void eds_ok_button_clicked       (GtkButton             *button,
+					 PlannerPlugin         *plugin);
+static void eds_cancel_button_clicked   (GtkButton             *button,
+					 PlannerPlugin         *plugin);
+static void eds_search_button_clicked   (GtkButton             *button,
+					 PlannerPlugin         *plugin);
+static void eds_import_change_all       (PlannerPlugin         *plugin,
+					 gboolean               state);
+static void eds_all_button_clicked      (GtkButton             *button,
+					 PlannerPlugin         *plugin);
+static void eds_none_button_clicked     (GtkButton             *button,
+					 PlannerPlugin         *plugin);
+static void eds_stop_button_clicked     (GtkButton             *button,
+					 PlannerPlugin         *plugin);
+static gboolean eds_search_key_pressed  (GtkEntry              *entry,
+					 GdkEventKey           *event,
+					 PlannerPlugin         *plugin);
+static void eds_column_clicked          (GtkTreeViewColumn     *treeviewcolumn,
+					 PlannerPlugin         *plugin);
+static void eds_group_selected          (GtkComboBox           *select_group, 
+					 PlannerPlugin         *plugin);
+static void eds_resource_selected       (GtkCellRendererToggle *toggle, 
+					 const gchar           *path_str,
+					 PlannerPlugin         *plugin);
+static void eds_import_resource         (gchar                 *name,
+					 gchar                 *email,
+					 gchar                 *uid,
+					 PlannerPlugin         *plugin);
+static gboolean eds_create_uid_property (PlannerPlugin         *plugin);
+static void eds_load_resources          (ESourceGroup          *group, 
+					 PlannerPlugin         *plugin,
+					 const gchar           *search);
+static void eds_receive_contacts_cb     (EBook                 *book, 
+					 EBookStatus            status, 
+					 GList                 *contacts, 
+					 gpointer               plugin);
+static void eds_receive_book_cb         (EBook                 *book, 
+					 EBookStatus            status, 
+					 gpointer               user_data);
+static void eds_plugin_busy             (PlannerPlugin         *plugin,
+					 gboolean               busy);
+static gboolean eds_query_cancelled     (PlannerPlugin         *plugin,
+					 const gchar           *uid);
+static void eds_dialog_close            (PlannerPlugin         *plugin);
 
-void        plugin_init                (PlannerPlugin         *plugin,
-					PlannerWindow         *main_window);
-void        plugin_exit                (PlannerPlugin         *plugin);
+void        plugin_init                 (PlannerPlugin         *plugin,
+					 PlannerWindow         *main_window);
+void        plugin_exit                 (PlannerPlugin         *plugin);
 
 
 static GtkActionEntry action_entries[] = {
@@ -618,11 +622,20 @@ eds_import_change_all (PlannerPlugin *plugin,
 static void
 eds_import_resource (gchar         *name,
 		     gchar         *email,
+		     gchar         *uid,
 		     PlannerPlugin *plugin) 
 {
-	MrpResource *resource = mrp_resource_new ();	
+	MrpResource *resource = mrp_resource_new ();
+	gchar       *note = _("Imported from Evolution Data Server");
 
 	planner_resource_cmd_insert (plugin->main_window, resource);
+	mrp_object_set (resource, 
+			"type", MRP_RESOURCE_TYPE_WORK, 
+			"units", 1,
+			"note", g_strdup_printf ("%s:\n%s", note, uid),
+			"eds-uid", g_strdup (uid),
+			NULL);
+
 	if (name) {
 		mrp_object_set (resource, "name", name, NULL);
 	}
@@ -698,6 +711,12 @@ eds_ok_button_clicked (GtkButton     *button,
 		return;
 	}
 
+	/* Custom property for e-d-s resource UID */
+	if (!mrp_project_has_property (plugin->priv->project, 
+				       MRP_TYPE_RESOURCE, "eds-uid")) {
+		eds_create_uid_property (plugin);
+	}
+
 	do {
 		EContact *contact;
 		gboolean  selected;
@@ -710,7 +729,11 @@ eds_ok_button_clicked (GtkButton     *button,
 		if (selected) {
 			gchar *name = e_contact_get (contact, E_CONTACT_GIVEN_NAME);
 			gchar *email = e_contact_get (contact, E_CONTACT_EMAIL_1);
-			eds_import_resource (name, email, plugin);
+			gchar *eds_uid = e_contact_get (contact, E_CONTACT_UID);
+			eds_import_resource (name, email, eds_uid, plugin);
+			g_free (name);
+			g_free (email);
+			g_free (eds_uid);
 		} 
 	} while (gtk_tree_model_iter_next (priv->resources_model, &iter));
 
@@ -824,6 +847,29 @@ eds_dialog_close (PlannerPlugin *plugin)
 	g_object_unref (priv->glade);
 	
 	gtk_widget_destroy (priv->dialog_get_resources);
+}
+
+/* FIXME: Undo support : planner-property-dialog.c */
+static gboolean
+eds_create_uid_property (PlannerPlugin *plugin)
+{	
+	MrpProperty *property;
+
+	property = mrp_property_new ("eds-uid", 
+				     MRP_PROPERTY_TYPE_STRING,
+				     _("Evolution Data Server UID"),
+				     _("Identifier used by Evolution Data Server for resources"),
+				     FALSE);
+			
+	mrp_project_add_property (plugin->priv->project, 
+				  MRP_TYPE_RESOURCE,
+				  property,
+				  FALSE);
+	if (!mrp_project_has_property (plugin->priv->project, 
+				       MRP_TYPE_RESOURCE, "eds-uid")) {
+		return FALSE;
+	}
+	return TRUE;
 }
 
 /* FIXME: Undo support */
