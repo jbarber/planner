@@ -17,7 +17,9 @@ EXTRA_DIST = \
 	intltool-merge.in		\
 	intltool-update.in		\
 	xmldocs.make			\
-	omf.make
+	omf.make			\
+	planner.spec.in			\
+	planner.spec
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = libplanner-1.pc

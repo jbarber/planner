@@ -1,5 +1,10 @@
 2003-12-01  Richard Hult  <richard@imendio.com>
 
+	* src/planner-task-tree.c (task_tree_parse_time_string): Fix
+	invalid read and...
+	(task_tree_get_unit_from_string): ...move i18n initialization
+	here.
+
 	* configure.in: Sync translations.
 
 2003-12-01  Ryszard Klos <ryszardklos@netscape.net>
