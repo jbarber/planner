@@ -1,5 +1,8 @@
 2005-02-20  Richard Hult  <richard@imendio.com>
 
+	* src/planner-print-dialog.c (planner_print_dialog_save_config):
+	Fix bug #167899.
+
 	* src/planner-project-properties.c: (mpp_set_start),
 	(mpp_start_set_from_widget): Try to fix bug #156615.
 

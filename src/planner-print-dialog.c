@@ -22,6 +22,7 @@
  */
 
 #include <config.h>
+#include <errno.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
@@ -123,7 +124,7 @@ planner_print_dialog_save_config (GnomePrintConfig *config)
 {
 	gint   fd;
 	gchar *str;
-	gint   bytes;
+	gint   bytes, bytes_written;
 	gchar *filename;
 	
 	g_return_if_fail (config != NULL);
@@ -138,7 +139,12 @@ planner_print_dialog_save_config (GnomePrintConfig *config)
 		if (fd >= 0) {
 			bytes = strlen (str);
 			
-			write (fd, str, bytes);
+		again:
+			bytes_written = write (fd, str, bytes);
+			if (bytes_written < 0 && errno == EINTR) {
+				goto again;
+			}
+
 			close (fd);
 		}
 		
