@@ -1,3 +1,17 @@
+2003-12-13  Richard Hult  <richard@imendio.com>
+
+	* .cvsignore:
+	* data/glade/.cvsignore:
+	* docs/libplanner/libplanner-sections.txt:
+	* docs/libplanner/tmpl/libplanner-unused.sgml:
+	* docs/libplanner/tmpl/mrp-error.sgml: Clean up.
+	
+	* src/planner-project-properties.c: (property_cmd_edit),
+	(mpp_connect_to_project), (mpp_phase_option_menu_changed_cb),
+	(mpp_phase_set_from_widget), (mpp_project_phase_notify_cb),
+	(mpp_setup_phases), (mpp_property_added), (mpp_dialog_destroy_cb):
+	More undo hacking.
+
 2003-12-12  Xavier Ordoquy <xordoquy@wanadoo.fr>
 
 	* src/planner-ttable-model.h: typo

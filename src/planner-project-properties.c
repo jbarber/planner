@@ -92,13 +92,14 @@ static void     mpp_project_calendar_notify_cb        (MrpProject          *proj
 						       GtkWidget           *dialog);
 static void     mpp_phase_option_menu_changed_cb      (GtkOptionMenu       *option_menu,
 						       GtkWidget           *dialog);
-static void     mpp_project_phase_changed_cb          (MrpProject          *project,
-						       MrpProperty         *property,
-						       GValue              *value,
-						       GtkWidget           *dialog);
 static void     mpp_project_phases_notify_cb          (MrpProject          *project,
 						       GParamSpec          *pspec,
 						       GtkWidget           *dialog);
+static void     mpp_phase_set_from_widget             (GtkWidget *dialog);
+
+static void     mpp_project_phase_notify_cb          (MrpProject          *project,
+						      GParamSpec          *pspec,
+						      GtkWidget           *dialog);
 static void     mpp_setup_phases                      (DialogData          *data);
 static void     mpp_set_phase                         (DialogData          *data,
 						       const gchar         *phase);
@@ -237,7 +238,12 @@ property_cmd_edit (DialogData  *data,
 	switch (type) {
 	case PROP_STRING:
 		g_object_get (data->project, property, &cmd->str_old, NULL);
-		if (strcmp (str_value, cmd->str_old) == 0) {
+		if (str_value == NULL && cmd->str_old == NULL) {
+			goto no_change;
+		}
+		
+		if (str_value && cmd->str_old &&
+		    strcmp (str_value, cmd->str_old) == 0) {
 			goto no_change;
 		}
 
@@ -352,10 +358,11 @@ mpp_connect_to_project (MrpProject *project, GtkWidget *dialog)
 				 0);
 
 	g_signal_connect_object (project,
-				 "prop-changed::phase",
-				 G_CALLBACK (mpp_project_phase_changed_cb),
+				 "notify::phase",
+				 G_CALLBACK (mpp_project_phase_notify_cb),
 				 dialog,
 				 0);
+
 	g_signal_connect_object (project,
 				 "property_added",
 				 G_CALLBACK (mpp_property_added),
@@ -568,36 +575,7 @@ static void
 mpp_phase_option_menu_changed_cb (GtkOptionMenu *option_menu,
 				  GtkWidget     *dialog)
 {
-	DialogData  *data = DIALOG_GET_DATA (dialog);
-	gint         active;
-	GtkWidget   *menu;
-	GtkMenuItem *item;
-	const gchar *name;
-
-	menu = gtk_option_menu_get_menu (option_menu);
-	active = gtk_option_menu_get_history (option_menu);
-	
-	item = g_list_nth_data (GTK_MENU_SHELL (menu)->children, active);
-
-	name = g_object_get_data (G_OBJECT (item), "data");
-	
-	g_object_set (data->project, "phase", name, NULL);
-}
-
-static void
-mpp_project_phase_changed_cb (MrpProject *project,  
-			      MrpProperty *property,
-			      GValue      *value,
-			      GtkWidget   *dialog)
-{
-	DialogData  *data = DIALOG_GET_DATA (dialog);
-	const gchar *phase;
-	
-	g_return_if_fail (MRP_IS_PROJECT (project));
-
-	phase = g_value_get_string (value);
-	
-	mpp_set_phase (data, phase);
+	mpp_phase_set_from_widget (dialog);
 }
 
 static void
@@ -616,6 +594,39 @@ mpp_project_phases_notify_cb (MrpProject  *project,
 	g_signal_handlers_unblock_by_func (data->phase_option_menu,
 					   mpp_phase_option_menu_changed_cb,
 					   dialog);
+}
+
+static void
+mpp_phase_set_from_widget (GtkWidget *dialog)
+{
+	DialogData  *data;
+	GtkWidget    *menu;
+	GtkWidget    *item;
+	const gchar *phase;
+
+	data = DIALOG_GET_DATA (dialog);
+
+       	menu = gtk_option_menu_get_menu (GTK_OPTION_MENU (data->phase_option_menu));
+	item = gtk_menu_get_active (GTK_MENU (menu));
+
+	phase = g_object_get_data (G_OBJECT (item), "data");
+	
+	property_cmd_edit (data, _("Edit Project Phase"), PROP_STRING, "phase", phase, 0, NULL);
+}
+
+static void
+mpp_project_phase_notify_cb (MrpProject  *project,  
+			     GParamSpec  *pspec,
+			     GtkWidget   *dialog)
+{
+	DialogData *data;
+	gchar      *phase;
+
+	data = DIALOG_GET_DATA (dialog);
+
+	g_object_get (data->project, "phase", &phase, NULL);
+	mpp_set_phase (data, phase);
+	g_free (phase);
 }
 
 static void
@@ -643,12 +654,12 @@ mpp_setup_phases (DialogData *data)
 	menu_item = gtk_menu_item_new_with_label (_("None"));
 	gtk_widget_show (menu_item);
 	gtk_menu_append (GTK_MENU (menu), menu_item);
-	
+
 	for (l = phases; l; l = l->next) {
 		menu_item = gtk_menu_item_new_with_label (l->data);
 		gtk_widget_show (menu_item);
 		gtk_menu_append (GTK_MENU (menu), menu_item);
-
+		
 		g_object_set_data_full (G_OBJECT (menu_item),
 					"data",
 					g_strdup (l->data),
@@ -880,19 +891,16 @@ mpp_property_added (MrpProject  *project,
 	    !mrp_property_get_user_defined (property)) {
  		return;
 	}
-	
+/*	
 	if (gtk_tree_view_get_model (data->properties_tree) != model) {
-		g_print ("AARGH\n");
+		return;
 	}
-	
+*/
 	gtk_list_store_append (GTK_LIST_STORE (model), &iter);
 	gtk_list_store_set (GTK_LIST_STORE (model),
 			    &iter,
 			    COL_PROPERTY, mrp_property_ref (property),
 			    -1);
-	
-	g_print ("Property added: %s\n",
-		 mrp_property_get_name (property));
 }
 
 typedef struct {
@@ -1310,8 +1318,9 @@ mpp_dialog_destroy_cb (GtkWidget *dialog,
 	mpp_org_set_from_widget (dialog);
 	mpp_manager_set_from_widget (dialog);
 	mpp_start_set_from_widget (dialog);
+	mpp_phase_set_from_widget (dialog);
 
-	/* FIXME: more... */
+	/* FIXME: calendar */
 }
 	
 GtkWidget *
