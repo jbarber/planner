@@ -1,0 +1,672 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.2//EN"
+     "http://docbook.org/xml/4.2/docbookx.dtd" [
+  <!ENTITY date "1 Oct 2004">
+  <!ENTITY app "Planner">
+  <!ENTITY appver "0.12">
+  <!ENTITY fcver "2">
+  <!ENTITY gladever "2.4.0">
+  <!ENTITY printver "2.6.0">
+  <!ENTITY gdaver "1.1.6">
+]>
+
+
+<article>
+
+  <articleinfo>
+
+    <!-- Use "HOWTO", "mini HOWTO", "FAQ" in title, if appropriate -->
+    <title>Planner Installation Guide V&appver;</title>
+
+    <author>
+       <firstname>Kurt</firstname>
+       <surname>Maute, PMP</surname>
+       <affiliation>
+          <!-- Valid email...spamblock/scramble if so desired -->
+          <address><email>Kurt@Maute.us</email></address>
+       </affiliation>
+     </author>
+
+     <!-- All dates specified in ISO "YYYY-MM-DD" format -->
+     <pubdate>&date;</pubdate>
+
+     <!-- Most recent revision goes at the top; list in descending order -->
+     <revhistory>
+<!--
+       <revision>
+          <revnumber>1.0</revnumber>
+          <date>2003-12-01</date>
+          <authorinitials>xx</authorinitials>
+          <revremark>first official release</revremark>
+       </revision>  -->
+       <revision>
+          <revnumber>0.12</revnumber>
+          <date>2004-10-01</date>
+          <authorinitials>km</authorinitials>
+          <revremark>minor corrections - ready for publication</revremark>
+       </revision>
+       <revision>
+          <revnumber>0.2</revnumber>
+          <date>2004-09-20</date>
+          <authorinitials>km</authorinitials>
+          <revremark>added instructions for cvs install</revremark>
+       </revision>
+       <revision>
+          <revnumber>0.1</revnumber>
+          <date>2004-08-17</date>
+          <authorinitials>km</authorinitials>
+          <revremark>first draft</revremark>
+       </revision>
+     </revhistory>
+
+     <!-- Provide a good abstract; a couple of sentences is sufficient -->
+     <abstract>
+        <para>
+         This Guide provides instructions on builing &app; from source code,
+	 specifically for the Fedora distribution, but can be applied to other
+	 distributions as well.
+        </para>
+     </abstract>
+
+  </articleinfo>
+
+
+<!-- Content follows...include introduction, license information, feedback -->
+
+<sect1 id="intro">
+  <title>Introduction</title>
+
+<!--
+  <para>
+   Provide a good overview and anything else you may think is needed in
+   this area. Looking at other HOWTOs may assist in providing ideas.
+  </para>
+-->
+
+  <!-- Legal Sections -->
+  <sect2 id="copyright">
+    <title>Copyright and License</title>
+
+    <!-- The LDP recommends, but doesn't require, the GFDL --> 
+    <para>
+     This document, <emphasis>Planner Installation Guide</emphasis>,
+     is copyrighted (c) 2004 by <emphasis>Kurt Maute</emphasis>.
+     Permission is granted to copy, distribute and/or modify this
+     document under the terms of the GNU Free Documentation
+     License, Version 1.1 or any later version published
+     by the Free Software Foundation; with no Invariant Sections,
+     with no Front-Cover Texts, and with no Back-Cover Texts.
+     A copy of the license is available at
+     <ulink url="http://www.gnu.org/copyleft/fdl.html">
+     http://www.gnu.org/copyleft/fdl.html</ulink>.
+    </para>
+
+    <para>
+     Linux is a registered trademark of Linus Torvalds.
+    </para>
+  </sect2>
+
+  <sect2 id="disclaimer">
+    <title>Disclaimer</title>
+
+    <para>
+     No liability for the contents of this document can be accepted.
+     Use the concepts, examples and information at your own risk.
+     There may be errors and inaccuracies, that could be damaging to
+     your system.  Proceed with caution, and although this is highly
+     unlikely, the author(s) do not take any responsibility.
+    </para>
+
+    <para>
+     All copyrights are held by their by their respective owners,
+     unless specifically noted otherwise.  Use of a term in this
+     document should not be regarded as affecting the validity of any
+     trademark or service mark.  Naming of particular products or
+     brands should not be seen as endorsements.
+    </para>
+  </sect2>
+
+  <!-- Give credit where credit is due...very important -->
+  <!-- no contributors at this time
+  <sect2 id="credits">
+    <title>Credits / Contributors</title>
+
+    <para>
+     In this document, I have the pleasure of acknowledging:
+    </para>
+
+    <!- Please scramble addresses; help prevent spam/email harvesting ->
+    <itemizedlist>
+      <listitem> 
+        <para>Individual 1 <email>someone1 (at) somewhere.org</email></para>
+      </listitem>
+      <listitem> 
+        <para>Individual 2 <email>someone2 (at) somewhere.org</email></para>
+      </listitem>
+    </itemizedlist>
+  </sect2>
+  -->
+
+  <!-- Feedback -->
+  <sect2 id="feedback">
+    <title>Feedback</title>
+    <para>
+     Feedback is most certainly welcome for this document. Send
+     your additions, comments and criticisms to the following
+     email address : <email>Kurt@Maute.us</email>.
+    </para>
+  </sect2>
+
+  <!-- Translations -->
+  <!-- ** no translations at this time
+  <sect2 id="translations">
+    <title>Translations</title>
+
+    <para>
+     Pointers to available translations are nice.
+     Also your translators tend to give very important inputs.
+    </para>
+
+    <itemizedlist>
+      <listitem>
+        <para>
+         <ulink url="http://some_site.org/">French Translation</ulink>
+         provided by Individual <email>someone (at) somewhere.fr</email>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+         <ulink url="http://some_site.org/">German Translation</ulink>
+         provided by Individual <email>someone (at) somewhere.de</email>
+        </para>
+      </listitem>
+    </itemizedlist>
+  </sect2>
+  -->
+</sect1>
+
+<sect1 id="Installation-Source">
+  <title>Installing from Source Tarball</title>
+  <para>
+    This guide is written based on &app; v&appver; and the Fedora Core 
+   &fcver; Linux distribution.  Other combinations of Linux distribution
+    or Planner version will likely require adjustments in installation
+    procedures such as the need to satisfy package dependencies not listed
+    here.
+  </para>
+  <para>
+    This guide assumes that you're logged in as root, that you download all
+    files into a folder named 
+    <filename class="directory">/root/downloads</filename>, and unless 
+    otherwise specified, navigation begins from the
+    <filename class="directory">/root</filename> folder.
+  </para>
+
+  <sect2 id="Base-System">
+    <title>Base System Installation</title>
+    <para>
+      To successfully build &app; from source, you need to start with a Linux
+      system with some basic requirements installed.  This Guide is focused on
+      the Fedora Core distribution, so the package groups listed here are 
+      specific to that distribution.
+      <itemizedlist>
+      <listitem>
+        <para><emphasis>The Gnome Desktop environment</emphasis></para>
+      </listitem>
+      <listitem>
+        <para><emphasis>Development Tools</emphasis></para>
+      </listitem>
+      <listitem>
+        <para><emphasis>X Software Development</emphasis></para>
+      </listitem>
+      <listitem>
+        <para><emphasis>Gnome Software Development</emphasis></para>
+      </listitem>
+      </itemizedlist>
+    </para>
+    <para>
+      If you are starting with a fresh install of Fedora Core, make sure you
+      select all of these packages.  If you have an existing installation and
+      these are not all installed, then you can use the system-config-packages
+      application to install them.  Make sure you're logged in as root, then 
+      choose 
+      <menuchoice>
+        <guimenu>Applications</guimenu>
+        <guisubmenu>System Settings</guisubmenu>
+        <guimenuitem>Add/Remove Applications</guimenuitem>
+      </menuchoice>, or type the command 
+      <command>system-config-packages</command> from a terminal window.
+    </para>
+  </sect2>
+
+  <sect2 id="Dependencies">
+    <title>Planner Dependencies</title>
+    <para>
+      The prerequisites that &app; needs for basic operation are:
+      <screen>
+        glib-2.0 >= 2.4.0
+        gobject-2.0 gmodule-2.0
+        gtk+-2.0 >= 2.4.0
+        libgnomecanvas-2.0 >= 2.6.0
+        libgnomeui-2.0 >= 2.6.0
+        libglade-2.0 >= 2.4.0
+        libbonoboui-2.0 >= 2.6.0
+        libgnomeprintui-2.2 >= 2.6.0
+        gnome-vfs-2.0 >= 2.6.0
+        gconf-2.0 >= 2.6.0
+      </screen>
+    </para>
+    <para>
+      Most of these requirements are met by Fedora Core 2, except for
+      libglade-2.0 and libgnomeprintui-2.2.  If you'd like to confirm this,
+      use the <command>rpm</command> command:
+      <screen>
+        <prompt>#</prompt><userinput> rpm -qa | grep libglade</userinput>
+	pygtk2-libglade-2.2.0-1
+	libglade2-devel-2.3.6-1
+	libglade-0.17-13.2.1
+	libglade-devel-0.17-13.2.1
+	libglade2-2.3.6-1
+      </screen>
+    </para>
+    <para>
+      RPM is Red Hat's packaging utility.  The -qa qualifiers will list all
+      installed packages, and piping the result through grep gives us an easy
+      way to find packages without knowing their exact name.
+    </para>
+    <para>
+      The output clearly shows that libglade2 is at version 2.3.6-1, and 
+      we need version 2.4 or higher.  You can repeat this for each of the
+      required packages to be sure of what's needed on your system.
+    </para>
+  </sect2>
+
+  <sect2 id="BuildingDependencies">
+    <title>Building Dependencies</title>
+    <para>
+	The source files for all of the prerequisites that &app; needs 
+	(as well as &app; itself) can be found at
+	<ulink url="http://ftp.gnome.org/pub/GNOME/sources/">
+	  http://ftp.gnome.org/pub/GNOME/sources/
+	</ulink>.  Each of the packages are listed by name under this URL.
+	To get a package, simply find its name and choose that folder.  The
+	next set of folders listed is the version number.  Choose the folder
+	for the version that &app; requires.  You may of course choose
+	a more recent version than required if its listed, but the risk in
+	doing that is that you may need to install additional packages if 
+	the one you chose requires more recent versions than you have on your
+	system, so its safest to go with what's required and no more.
+    </para>
+    <sect3>
+      <title>Building libglade</title>
+      <para>
+	Assuming you've successfully downloaded 
+	<filename>libglade-&gladever;.tar.gz</filename>, you first need to 
+	unpack it.
+        <screen>
+          <prompt>#</prompt> <userinput> tar -xzvf downloads/libglade-&gladever;.tar.gz</userinput>
+        </screen>
+	This command will unpack the file into a new directory named
+	<filename class="directory">libglade-&gladever;</filename> change your
+	current directory to that one, and configure, make, and make install:
+        <screen>
+          <prompt>#</prompt> <userinput> cd libglade-&gladever;</userinput>
+          <prompt>#</prompt> <userinput> ./configure</userinput>
+          <prompt>#</prompt> <userinput> make</userinput>
+          <prompt>#</prompt> <userinput> make install</userinput>
+        </screen>
+      </para>
+      <para>
+	Each of these commands produces some fairly verbose output, and though
+	its not necessary to understand it all, it is important to visually
+	scan the messages for errors that have occurred before proceeding with
+	the next step.
+      </para>
+      <para>
+	<command>Configure</command> checks for dependencies required to 
+	perform the build and
+	creates the Makefile and other files required to compile the software.
+      </para>
+      <para>
+	<command>Make</command> compiles the software, and 
+	<command>make install</command> copies the resulting executables
+	and other files to their target directories.
+      </para>
+      <para>
+      </para>
+    </sect3>
+    <sect3>
+      <title>Setting PKG_CONFIG_PATH</title>
+      <para>
+	Pkg-config is a system for managing library compile/link flags.  When
+	you compile a library such as libglade, a file named 
+	<filename>libglade-2.0.pc</filename> is created.  It holds information
+	needed for other programs that depend on it to successfully find and 
+	link to it.
+      </para>
+      <para>
+	Check the output from the <command>make install</command> you executed
+	in the previous section.  You should see something like this:
+	<screen>
+test -z "/usr/local/lib/pkgconfig" || mkdir -p -- .  "/usr/local/lib/pkgconfig"
+ /usr/bin/install -c -m 644 'libglade-2.0.pc' '/usr/local/lib/pkgconfig/libglade-2.0.pc'
+	</screen>
+      </para>
+      <para>
+	This line shows that the <filename>libglade-2.0.pc</filename> file was
+	installed in the <filename class="directory">/usr/local/lib/pkgconfig
+	</filename> directory.  We need to make sure that when we compile other
+	programs and libraries that require libglade know where to find 
+	this file.
+      </para>
+      <note><title>Note</title>
+	<para>
+	If you can't find the information above in the output of your
+	<command>make install</command>, then you could use the <command>
+	locate</command> command to find the file.  For example:  
+	<userinput>locate libglade-2.0.pc</userinput>.  You may need to 
+	update <command>locate</command>'s database first using the 
+	<command>updatedb</command> command.
+	</para>
+      </note>
+      <para>
+	To see if pkg-config is finding the libraries you just compiled, use
+	the following command:
+	<screen>
+	  <prompt># </prompt><userinput>pkg-config --modversion libglade-2.0.pc</userinput>
+	  2.3.6
+	</screen>
+      </para>
+      <para>
+	As you can see, pkg-config returned the version 2.3.6 - not &gladever;!
+	So when you go to run <command>configure</command> on the next package
+	that needs libglade-2.0 => 2.4, it will only see the old version, and
+	barf some error message at you.  To fix this, set the <envar>
+	PKG_CONFIG_PATH</envar> environment variable to the correct folder:
+	<screen>
+	  <prompt># </prompt><userinput>export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig</userinput>
+	</screen>
+      </para>
+      <para>
+	If you repeat the <command>pkg-config</command> command now, you get:
+	<screen>
+	  <prompt># </prompt><userinput>pkg-config --modversion libglade-2.0.pc</userinput>
+	  &gladever;
+	</screen>
+      </para>
+      <para>
+	That's much better.  It might be a good idea to permanently set
+	<envar>PKG_CONFIG_PATH</envar> so you don't need to set
+	it by hand each time you log in and want to build some more packages.
+	Do this by placing the same line as you used above into root's login
+	script file, <filename>.bashrc</filename>.  
+	<note><title>Note</title>
+	<para>
+	  Different shells
+	  have different names for this file, so if you're not using BASH
+	  (Fedora Core's default), then you should consult the documentation for
+	  your shell to determine the correct filename.
+	</para>
+	</note>
+      </para>
+      <para>
+	You can check your <envar>PKG_CONFIG_PATH</envar> setting with the 
+	<command>echo</command> command:
+	<screen>
+	  <prompt># </prompt><userinput>echo $PKG_CONFIG_PATH</userinput>
+	  /usr/local/lib/pkgconfig
+	</screen>
+      </para>
+    </sect3>
+    <sect3>
+      <title>Building Other Dependencies</title>
+      <para>
+	Now that we've set up our <envar>PKG_CONFIG_PATH</envar> environment
+	variable, the rest of our setup should run smoothly.  The other
+	dependencies (pango 1.5, libgnomeprint 2.6 and libgnomeprintui 2.6) 
+	are built in the same manner as we did for libglade-2.0.  I'll simply 
+	summarize the steps for brevity.
+      </para>
+      <para>
+	<itemizedlist>
+	<listitem>
+	  <para><emphasis>download the package source</emphasis> - from
+	    <ulink url="http://ftp.gnome.org/pub/GNOME/sources/">
+	     http://ftp.gnome.org/pub/GNOME/sources/</ulink>.
+	  </para>
+	</listitem>
+	<listitem>
+	  <para><emphasis>unpack the package:  </emphasis>
+		<prompt># </prompt>
+		<userinput>tar -xzvf downloads/[packagename]</userinput>
+	  </para>
+	</listitem>
+	<listitem>
+	  <para><emphasis>change directory:  </emphasis> 
+		<prompt># </prompt><userinput>cd [packagedir]</userinput>
+	  </para>
+	</listitem>
+	<listitem>
+	  <para><emphasis>run configure:  </emphasis>
+		<prompt># </prompt><userinput>./configure</userinput>
+	  </para>
+	</listitem>
+	<listitem>
+	  <para><emphasis>run make:  </emphasis>
+		<prompt># </prompt><userinput>make</userinput>
+	  </para>
+	</listitem>
+	<listitem>
+	  <para><emphasis>run make install:  </emphasis>
+	  	<prompt># </prompt><userinput>make install</userinput>
+	  </para>
+	</listitem>
+	<listitem>
+	  <para><emphasis>return to your home directory:  </emphasis>
+		<prompt># </prompt><userinput>cd</userinput>
+	  </para>
+	</listitem>
+	</itemizedlist>
+      </para>
+    </sect3>
+  </sect2>
+  <sect2 id="BuildingPlanner">
+    <title>Building Planner</title>
+    <para>
+      If you're building &app; v&appver; and Fedora Core
+      &fcver;, then you've satisfied the dependencies for building &app;
+      with its default features, and the procedure is the same as it was
+      with building the dependencies:  Download, unpack, configure, make, and
+      make install.
+    </para>
+    <para>
+      Once installed, &app; can be launched with the command
+      <command>&app;</command>.
+    </para>
+    <para>
+      If you're building either some other version of &app;, or not using
+      Fedora Core &fcver;, then you'll discover the dependent packages when
+      you get to the <command>configure</command> step.  As an example and a 
+      convenient lead-in to the next topic, I'll ask configure to enable an
+      extra feature - the database functionality.
+      <screen>
+        <prompt>#</prompt><userinput> ./configure --enable-database</userinput>
+	&hellip;
+	checking for libgda >= 1.0... Package libgda was not found in 
+	the pkg-config search path.
+	Perhaps you should add the directory containing `libgda.pc'
+	to the PKG_CONFIG_PATH environment variable
+	No package 'libgda' found
+      </screen>
+    </para>
+    <para>
+      As you can see, enabling the database feature adds a dependency on libgda,
+      which will need to be satisfied before <command>configure</command> will
+      run successfully with this option enabled.
+    </para>
+    <sect3>
+      <title>Building Planner with Database Support</title>
+      <para>
+	Since compiling &app; with database support requires libgda, go
+	ahead and download it from 
+	<ulink url="http://ftp.gnome.org/pub/GNOME/sources/">
+	http://ftp.gnome.org/pub/GNOME/sources/</ulink>.  I used version
+	&gdaver;.  After you unpack it and run <command>configure</command>,
+	you'll notice that not much is enabled:
+	<screen>
+	 Configuration summary
+	   Installation prefix = /usr/local
+	   Providers
+	      XML = yes
+	      Berkeley DB = yes
+	      FireBird = no
+	      FreeTDS = no
+	      IBM DB2 = no
+	      MDB (MS Access) = no
+	      MySQL = no
+	      mSQL = no
+	      ODBC = no
+	      Oracle = no
+	      PostgreSQL = no
+	      SQLite = no
+	      Sybase = no
+	      xBase (dBase, Clipper, FoxPro) = no
+	      LDAP = yes
+	</screen>
+      </para>
+      <para>
+	&app;'s default database is PostgreSQL, so you'll want to download and
+	install that.  Support for other databases is planned, but not
+	implemented yet, so its PostgreSQL or nothing for now.  PostgreSQL is
+	available at <ulink url="http://www.postgresql.org">
+	http://www.postgresql.org</ulink>, and there's some very good
+	installation instructions available there as well, so rather than
+	reinventing the wheel here, I'll trust that you're able to follow
+	their instructions and get it installed (Hint: Download, unpack,
+	configure, make, make install).  Don't worry about creating
+	or configuring any databases just yet.  The &app; user guide
+	includes instructions on how to create a database and configure it
+	for use with &app;.
+      </para>
+      <para>
+	Now that PostgreSQL is installed, return to the 
+	<filename class="directory">libgda</filename> directory and rerun
+	<command>configure</command>.  If PostgreSQL is installed correctly,
+	you should see the output showing PostgreSQL support switched on.
+	Go ahead and do the <command>make</command> and <command>make install
+	</command>.
+      </para>
+      <para>
+	Now you can switch back to your &app; directory and rerun <command>
+	configure --enable-database</command>.  You'll see the output confirm
+	that database support will be included in the build:
+	<screen>
+	Planner prefix                : /usr/local
+	Build API docs                : no
+	Python bindings               : yes
+	Python plugin                 : no
+	Dotnet bindings               : no
+	Database/GDA support          : yes
+	Evolution Data Server support : no
+	</screen>
+      </para>
+      <para>
+	We're in the home stretch.  Now run <command>make</command> and 
+	<command>make install</command> (by now I presume you're noticing a 
+	pattern).  Then 
+	launch the application with the command <command>planner</command>.
+      </para>
+      <para>
+	To set up a PostgreSQL database for use with &app;, follow the
+	instructions in the &app; user guide, which you can open from
+	&app; by choosing
+	<menuchoice>
+	  <guimenu>Help</guimenu>
+	  <guimenuitem>User Guide</guimenuitem>
+	</menuchoice>.  Look for the section entitled "Configuring a &app;
+	database".
+      </para>
+    </sect3>
+  </sect2>
+</sect1>
+
+<sect1 id="Installation-CVS">
+  <title>Installing from CVS</title>
+  <para>
+    Installation of &app; from CVS differs very little from the way you'd
+    install it from a source tarball.  So the instructions in this section will
+    be very brief.
+  </para>
+  <para>
+    Essentially the only difference in building &app; from CVS is in how you
+    get the source code.  Instead of getting the source from 
+    <ulink url="http://ftp.gnome.org/pub/GNOME/sources/">
+      http://ftp.gnome.org/pub/GNOME/sources/
+    </ulink> as you do in <xref linkend="BuildingPlanner"/>, you
+    get the source tree via the following steps:
+    <screen>
+      <prompt>#</prompt> <userinput> export CVSROOT=:pserver:anonymous@anoncvs.gnome.org:/cvs/gnome</userinput>
+      <prompt>#</prompt> <userinput> cvs login</userinput>
+      CVS password:
+      <prompt>#</prompt> <userinput> cvs co planner</userinput>
+    </screen>
+  </para>
+  <para>
+    Since you're using the anonymous cvs account to fetch the &app; source
+    tree, you don't need to enter a password, so just hit enter at that prompt.
+  </para>
+  <para>
+    The the <command>cvs co planner</command> command fetches the latest
+    &app; source code from the archive, recreating the source tree in your
+    current directory.  
+  </para>
+  <para>
+    The build process is the same as for the &app; tarball, except that 
+    instead of running <command>configure</command>, you run <command>
+    autogen</command> instead.  <command>autogen</command> will accept the
+    same qualifiers that <command>configure</command> does:
+    <screen>
+      <prompt>#</prompt> <userinput> cd planner</userinput>
+      <prompt>#</prompt> <userinput> ./autogen.sh</userinput>
+      <prompt>#</prompt> <userinput> make</userinput>
+      <prompt>#</prompt> <userinput> make install</userinput>
+    </screen>
+  </para>
+</sect1>
+<!-- Other Sections of Interest... -->
+<!--
+<sect1 id="troubleshooting">
+  <title>Troubleshooting</title>
+
+  <para>
+     This area contains general troubleshooting information,
+     if applicable. The question/answer format works best 
+     (like a FAQ).
+  </para>
+
+  <qandaset>
+    <qandaentry>
+      <question>
+        <para>Question One</para>
+      </question>
+      <answer>
+        <para>Answer One</para>
+      </answer>
+    </qandaentry>
+
+  </qandaset>
+</sect1>
+
+
+<sect1 id="moreinfo">
+  <title>Further Information</title>
+
+  <para>
+     This area lists other resources, which would include
+     books, web sites, newsgroups, mailing lists, etc.
+  </para>
+</sect1>
+-->
+
+</article>
+
