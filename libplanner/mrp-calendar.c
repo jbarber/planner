@@ -396,6 +396,24 @@ foreach_copy_days (gpointer     key,
 }
 
 /**
+ * mrp_calendar_add:
+ * @calendar: a #MrpCalendar to add
+ * @parent: a #MrpCalendar to inherit from 
+ * 
+ * Add @calendar to the project 
+ * 
+ * Return value:
+ **/
+void
+mrp_calendar_add (MrpCalendar *calendar, MrpCalendar *parent)
+{
+	calendar_add_child (parent, calendar);
+
+	imrp_project_signal_calendar_tree_changed (calendar->priv->project);
+	imrp_project_set_needs_saving (calendar->priv->project, TRUE);
+}
+
+/**
  * mrp_calendar_copy:
  * @name: the name of the new calendar
  * @calendar: a #MrpCalendar to copy

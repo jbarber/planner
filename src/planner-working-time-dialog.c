@@ -3,6 +3,7 @@
  * Copyright (C) 2002-2003 CodeFactory AB
  * Copyright (C) 2002-2003 Richard Hult <richard@imendio.com>
  * Copyright (C) 2002 Mikael Hallendal <micke@imendio.com>
+ * Copyright (C) 2004 Alvaro del Castillo <acs@barrapunto.com>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -38,7 +39,7 @@ enum {
 };
 
 typedef struct {
-	PlannerWindow  *main_window;
+	PlannerWindow *main_window;
 	MrpProject    *project;
 
 	MrpCalendar   *calendar;
@@ -83,6 +84,84 @@ static void          working_time_dialog_apply                (DialogData       
 
 static void          working_time_dialog_entries_changed_cb   (GtkEntry         *entry,
 							       DialogData       *data);
+
+
+typedef struct {
+	PlannerCmd   base;
+
+	MrpDay      *day;
+	MrpCalendar *calendar;
+	GList       *ivals;
+	GList       *old_ivals;
+} WorkingTimeCmdEdit;
+
+static gboolean
+working_time_cmd_edit_do (PlannerCmd *cmd_base)
+{
+	WorkingTimeCmdEdit *cmd = (WorkingTimeCmdEdit*) cmd_base;
+
+	mrp_calendar_day_set_intervals (cmd->calendar, cmd->day, cmd->ivals);
+
+	return TRUE;
+}
+
+static void
+working_time_cmd_edit_undo (PlannerCmd *cmd_base)
+{
+	WorkingTimeCmdEdit *cmd = (WorkingTimeCmdEdit*) cmd_base;
+
+	mrp_calendar_day_set_intervals (cmd->calendar, cmd->day, cmd->old_ivals);
+}
+
+static void
+working_time_cmd_edit_free (PlannerCmd *cmd_base)
+{
+	WorkingTimeCmdEdit *cmd = (WorkingTimeCmdEdit*) cmd_base;
+
+	g_list_foreach (cmd->ivals, (GFunc) mrp_interval_unref, NULL);
+	g_list_free (cmd->ivals);
+	cmd->ivals = NULL;
+
+	g_list_foreach (cmd->old_ivals, (GFunc) mrp_interval_unref, NULL);
+	g_list_free (cmd->old_ivals);
+	cmd->old_ivals = NULL;
+
+	mrp_day_unref (cmd->day);
+	g_object_unref (cmd->calendar);
+}
+
+static PlannerCmd *
+working_time_cmd_edit (PlannerWindow   *main_window,
+		       MrpCalendar     *calendar,
+		       MrpDay          *day,
+		       GList           *ivals)
+{
+	PlannerCmd          *cmd_base;
+	WorkingTimeCmdEdit  *cmd;
+
+	cmd_base = planner_cmd_new (WorkingTimeCmdEdit,
+				    _("Edit working time"),
+				    working_time_cmd_edit_do,
+				    working_time_cmd_edit_undo,
+				    working_time_cmd_edit_free);
+	
+	cmd = (WorkingTimeCmdEdit *) cmd_base;
+
+	cmd->calendar = g_object_ref (calendar);
+	cmd->day = mrp_day_ref (day);
+
+	cmd->ivals = g_list_copy (ivals);
+	g_list_foreach (ivals, (GFunc) mrp_interval_ref, NULL);
+
+	cmd->old_ivals = g_list_copy (mrp_calendar_day_get_intervals 
+				      (cmd->calendar, cmd->day, TRUE));
+	g_list_foreach (cmd->old_ivals, (GFunc) mrp_interval_ref, NULL);
+			
+	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager 
+					   (main_window),
+					   cmd_base);
+	return cmd_base;
+}
 
 
 static void
@@ -490,7 +569,8 @@ working_time_dialog_apply (DialogData *data)
 		}
 	}
 
-	mrp_calendar_day_set_intervals (data->calendar, day, ivals);
+	/* mrp_calendar_day_set_intervals (data->calendar, day, ivals); */
+	working_time_cmd_edit (data->main_window, data->calendar, day, ivals);		     
 
 	g_list_foreach (ivals, (GFunc) mrp_interval_unref, NULL);
 	g_list_free (ivals);

@@ -4,6 +4,7 @@
  * Copyright (C) 2002 Richard Hult <richard@imendio.com>
  * Copyright (C) 2002 Mikael Hallendal <micke@imendio.com>
  * Copyright (C) 2004 Imendio HB
+ * Copyright (C) 2004 Alvaro del Castillo <acs@barrapunto.com>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -201,6 +202,230 @@ planner_cal_cmd_day_type (PlannerWindow  *main_window,
 	return cmd_base;
 }
 
+typedef struct {
+	PlannerCmd   base;
+
+	MrpProject  *project;
+	MrpCalendar *calendar;
+	MrpCalendar *parent;
+	/* Resources that use this calendar */
+	GList       *resources;
+	/* Calendar that inherits from this calendar */
+	GList       *children;
+} CalCmdRemove;
+
+static gboolean
+cal_cmd_remove_do (PlannerCmd *cmd_base)
+{
+	GList *all_resources, *r;
+
+	CalCmdRemove *cmd = (CalCmdRemove*) cmd_base;
+
+	if (g_getenv ("PLANNER_DEBUG_UNDO_CAL")) {
+		g_message ("Removing a calendar ...");
+	}
+
+	all_resources = mrp_project_get_resources (cmd->project);
+	for (r = all_resources; r; r = r->next) {
+		MrpResource *resource = r->data;
+		MrpCalendar *tmp_cal;
+		
+		tmp_cal = mrp_resource_get_calendar (resource);
+		if (tmp_cal == cmd->calendar) {			
+			cmd->resources = g_list_append (cmd->resources, 
+							g_object_ref (resource));
+		} 
+	}
+
+	cmd->children = g_list_copy (mrp_calendar_get_children (cmd->calendar));
+	if (cmd->children) {
+		g_list_foreach (cmd->children, (GFunc) g_object_ref, NULL);
+	}
+		
+	mrp_calendar_remove (cmd->calendar);
+
+	return TRUE;
+}
+
+/* Reassign resources and calendar childs */
+static void
+cal_cmd_remove_undo (PlannerCmd *cmd_base)
+{
+	GList        *r;
+	GList        *c;
+	CalCmdRemove *cmd = (CalCmdRemove*) cmd_base;
+
+	if (g_getenv ("PLANNER_DEBUG_UNDO_CAL")) {
+		g_message ("Undo removing calendar ...");
+	}
+
+	mrp_calendar_add (cmd->calendar, cmd->parent);
+
+	if (cmd->resources != NULL) {
+		for (r = cmd->resources; r; r = r->next) {
+			mrp_resource_set_calendar (r->data, cmd->calendar);
+		}
+		g_list_foreach (cmd->resources, (GFunc) g_object_unref, NULL);
+		g_list_free (cmd->resources);
+		cmd->resources = NULL;
+	}
+
+	if (cmd->children != NULL) {
+		for (c = cmd->children; c; c = c->next) {
+			mrp_calendar_reparent (cmd->calendar, c->data);
+		}
+		g_list_foreach (cmd->children, (GFunc) g_object_unref, NULL);
+		g_list_free (cmd->children);
+		cmd->children = NULL;
+	}
+}
+
+
+static void
+cal_cmd_remove_free (PlannerCmd *cmd_base)
+{
+	CalCmdRemove *cmd = (CalCmdRemove*) cmd_base;
+
+	g_object_unref (cmd->calendar);
+	g_object_unref (cmd->project);
+
+	if (cmd->resources != NULL) {
+		g_list_foreach (cmd->resources, (GFunc) g_object_unref, NULL);
+		g_list_free (cmd->resources);
+		cmd->resources = NULL;
+	}
+	if (cmd->children != NULL) {
+		g_list_foreach (cmd->children, (GFunc) g_object_unref, NULL);
+		g_list_free (cmd->children);
+		cmd->children = NULL;
+	}
+}
+
+static PlannerCmd *
+planner_cal_cmd_remove (PlannerWindow  *main_window,
+			MrpProject     *project,
+			MrpCalendar    *calendar)
+{
+	PlannerCmd   *cmd_base;
+	CalCmdRemove *cmd;
+
+	cmd_base = planner_cmd_new (CalCmdRemove,
+				    _("Remove calendar"),
+				    cal_cmd_remove_do,
+				    cal_cmd_remove_undo,
+				    cal_cmd_remove_free);
+
+	cmd = (CalCmdRemove*) cmd_base;
+
+	cmd->project = g_object_ref (project);
+	cmd->calendar = g_object_ref (calendar);
+	cmd->parent = g_object_ref (mrp_calendar_get_parent (cmd->calendar));
+
+	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager 
+					   (main_window),
+					   cmd_base);
+	return cmd_base;
+}
+
+typedef struct {
+	PlannerCmd   base;
+
+	gchar       *name;
+	MrpProject  *project;
+	MrpCalendar *calendar;
+	MrpCalendar *parent;
+	MrpCalendar *copy;
+} CalCmdAdd;
+
+static gboolean
+cal_cmd_add_do (PlannerCmd *cmd_base)
+{
+	CalCmdAdd *cmd = (CalCmdAdd*) cmd_base;
+
+	if (g_getenv ("PLANNER_DEBUG_UNDO_CAL")) {
+		g_message ("Adding a new calendar ...");
+	}
+
+	if (cmd->calendar == NULL) {
+		if (cmd->parent != NULL && cmd->copy == NULL) {
+			cmd->calendar = mrp_calendar_derive (cmd->name, cmd->parent);
+			g_object_unref (cmd->parent);
+			cmd->parent = NULL;
+		} 
+		else if (cmd->parent == NULL && cmd->copy != NULL) {
+			cmd->calendar = mrp_calendar_copy (cmd->name, cmd->copy);
+			g_object_unref (cmd->copy);
+			cmd->copy = NULL;
+		} 
+		else if (cmd->parent == NULL && cmd->copy == NULL) {
+			cmd->calendar = mrp_calendar_new (cmd->name, cmd->project);
+			cmd->parent = g_object_ref (mrp_calendar_get_parent (cmd->calendar));
+		} else {
+			g_warning ("Incorrect use adding new calendar");
+		}
+		cmd->parent = g_object_ref (mrp_calendar_get_parent (cmd->calendar));
+	} else {
+		mrp_calendar_add (cmd->calendar, cmd->parent);
+	}
+
+	return TRUE;
+}
+
+static void
+cal_cmd_add_undo (PlannerCmd *cmd_base)
+{
+	CalCmdAdd *cmd = (CalCmdAdd*) cmd_base;
+
+	if (g_getenv ("PLANNER_DEBUG_UNDO_CAL")) {
+		g_message ("Undo adding calendar ...");
+	}
+	mrp_calendar_remove (cmd->calendar);
+}
+
+
+static void
+cal_cmd_add_free (PlannerCmd *cmd_base)
+{
+	CalCmdAdd *cmd = (CalCmdAdd*) cmd_base;
+
+	g_object_unref (cmd->calendar);
+	g_object_unref (cmd->parent);
+	g_object_unref (cmd->project);
+
+	g_free (cmd->name);
+}
+
+static PlannerCmd *
+planner_cal_cmd_add (PlannerWindow  *main_window,
+		     const gchar    *name,
+		     MrpCalendar    *parent,
+		     MrpCalendar    *copy)
+{
+	PlannerCmd *cmd_base;
+	CalCmdAdd  *cmd;
+
+	cmd_base = planner_cmd_new (CalCmdAdd,
+				    _("Add new calendar"),
+				    cal_cmd_add_do,
+				    cal_cmd_add_undo,
+				    cal_cmd_add_free);
+
+	cmd = (CalCmdAdd*) cmd_base;
+
+	cmd->project = g_object_ref (planner_window_get_project (main_window));
+	cmd->name = g_strdup (name);
+	if (parent != NULL) {
+		cmd->parent = g_object_ref (parent);
+	}
+	if (copy != NULL) {
+		cmd->copy = g_object_ref (copy);
+	}
+			
+	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager 
+					   (main_window),
+					   cmd_base);
+	return cmd_base;
+}
 
 static void
 cal_dialog_setup_option_menu (DialogData *data)
@@ -292,7 +517,8 @@ cal_dialog_response_cb (GtkWidget  *dialog,
 	
 	switch (response) {
 	case RESPONSE_REMOVE:
-		mrp_calendar_remove (calendar);
+		/* mrp_calendar_remove (calendar); */
+		planner_cal_cmd_remove (data->main_window, data->project, calendar);
 		break;
 
 	case RESPONSE_ADD:
@@ -1026,7 +1252,6 @@ cal_dialog_new_dialog_run (DialogData *data)
 	GladeXML         *glade;
 	GtkWidget        *dialog;
 	MrpCalendar      *parent;
-	MrpCalendar      *calendar;
 	GtkTreeSelection *selection;
 	GtkWidget        *entry;
 	GtkWidget        *tree_view;
@@ -1081,13 +1306,17 @@ cal_dialog_new_dialog_run (DialogData *data)
 		parent = cal_dialog_get_selected_calendar (GTK_TREE_VIEW (tree_view));
 
 		if (parent && gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (data->new_copy_radiobutton))) {
-			calendar = mrp_calendar_copy (name, parent);
+			/* calendar = mrp_calendar_copy (name, parent); */
+			planner_cal_cmd_add (data->main_window, name, NULL, parent);
 		}
 		else if (parent && gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (data->new_derive_radiobutton))) {
-			calendar = mrp_calendar_derive (name, parent);
+			/* calendar = mrp_calendar_derive (name, parent); */
+			planner_cal_cmd_add (data->main_window, name, parent, NULL);
 		}
 		else if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (data->new_empty_radiobutton))) {
-			calendar = mrp_calendar_new (name, data->project);
+			/* calendar = mrp_calendar_new (name, data->project); */
+			planner_cal_cmd_add (data->main_window, name, NULL, NULL);
+			   
 		}
 	}
 

@@ -80,6 +80,8 @@ enum {
 GType        mrp_calendar_get_type                 (void) G_GNUC_CONST;
 MrpCalendar *mrp_calendar_new                      (const gchar *name,
 						    MrpProject  *project);
+void         mrp_calendar_add                      (MrpCalendar *calendar,
+						    MrpCalendar *parent);
 MrpCalendar *mrp_calendar_copy                     (const gchar *name,
 						    MrpCalendar *calendar);
 MrpCalendar *mrp_calendar_derive                   (const gchar *name,

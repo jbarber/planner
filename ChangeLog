@@ -1,3 +1,12 @@
+2004-06-21 Alvaro del Castillo  <acs@barrapunto.com>
+
+	* libplanner/mrp-calendar.[ch] (mrp_calendar_add): new function
+	needed for the undo system.
+	* src/planner-calendar-dialog.c: undo support for add and remove
+	calendars.
+	* src/planner-working-time-dialog.c: undo support for changing the
+	working time in calendars.
+
 2004-06-21  Richard Hult  <richard@imendio.com>
 
 	* src/planner-property-dialog.c:
