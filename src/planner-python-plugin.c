@@ -183,7 +183,7 @@ plugin_exit (PlannerPlugin *plugin)
 {
 	g_message ("%s(%i) FIXME: free the Python plugin priv structure !!!",__FILE__,__LINE__);
 	if (plugin != NULL) {
-		//planner_python_env_free (NULL);
+		/*planner_python_env_free (NULL);*/
 	}
 	Py_Finalize ();
 }

@@ -1190,7 +1190,6 @@ planner_gantt_print_do (PlannerGanttPrintData *data)
 					gantt_print_task (data, element);
 					break;
 				case SUMMARY_LEFT:
-					//koko
 					planner_print_job_moveto (data->job,
 								  element->x1,
 								  element->y1 + data->summary_thick);
