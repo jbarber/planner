@@ -66,7 +66,9 @@ html_write (MrpFileWriter  *writer,
 	GnomeVFSResult  result;
 	gboolean        ret;
 
-	mrp_project_save_to_xml (project, &xml_project, NULL);
+	if (!mrp_project_save_to_xml (project, &xml_project, error)) {
+		return FALSE;
+	}
 
         /* libxml housekeeping */
         xmlSubstituteEntitiesDefault (1);
@@ -130,8 +132,10 @@ xml_planner_pre012_write (MrpFileWriter  *writer,
 	GnomeVFSResult  result;
 	gboolean        ret;
 
-	mrp_project_save_to_xml (project, &xml_project, NULL);
-
+	if (!mrp_project_save_to_xml (project, &xml_project, error)) {
+		return FALSE;
+	}
+	
         /* libxml housekeeping */
         xmlSubstituteEntitiesDefault(1);
         xmlLoadExtDtdDefaultValue = 1;

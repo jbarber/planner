@@ -1,5 +1,8 @@
 2004-10-13  Richard Hult  <richard@imendio.com>
 
+	* libplanner/mrp-xsl.c (xml_planner_pre012_write, html_write):
+	Check error after saving to XML.
+
 	* libplanner/mrp-file-module.c (mrp_file_reader_read_string): Fix
 	typo.
 
