@@ -1,3 +1,9 @@
+2004-04-14  Richard Hult  <richard@imendio.com>
+
+	* libplanner/mrp-project.c: (mrp_project_save_as):
+	* src/planner-window.c: (window_do_save_as): Fix bug #139317,
+	based on patch from Doroszlai Attila.
+	
 2004-04-09  Richard Hult  <richard@imendio.com>
 
 	* src/planner-resource-dialog.c: (resource_dialog_name_changed_cb),

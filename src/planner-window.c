@@ -1370,9 +1370,8 @@ window_do_save_as (PlannerWindow *window)
 	const gchar      *filename = NULL;
 	gchar            *last_dir;
 	GConfClient      *gconf_client;
-	
-	g_return_val_if_fail (PLANNER_IS_MAIN_WINDOW (window), FALSE);
-	
+	EggRecentItem    *item;
+
 	priv = window->priv;
 
 	gconf_client = planner_application_get_gconf_client (priv->application);
@@ -1434,7 +1433,13 @@ window_do_save_as (PlannerWindow *window)
 			};
 		}
 
-		if (!success) {
+		if (success) {
+			/* Add the file to the recent list */
+			item = egg_recent_item_new_from_uri (
+			egg_recent_item_set_mime_type (item, "application/x-mrproject");
+			egg_recent_model_add_full (planner_application_get_recent_model (priv->application), item);
+			egg_recent_item_unref (item);
+		} else {
 			GtkWidget *dialog;
 			
 			dialog = gtk_message_dialog_new (GTK_WINDOW (window),

@@ -842,13 +842,31 @@ mrp_project_save_as (MrpProject   *project,
 		     GError      **error)
 {
 	MrpProjectPriv *priv;
+	gboolean        is_sql;
+	gchar          *real_uri;
 	
 	g_return_val_if_fail (MRP_IS_PROJECT (project), FALSE);
 	g_return_val_if_fail (uri != NULL && uri[0] != '\0', FALSE);
 	
 	priv = project->priv;
 
-	if (!project_do_save (project, uri, force, error)) {
+	if (strncmp (uri, "sql://", 6) == 0) {
+		is_sql = TRUE;
+
+		real_uri = g_strdup (uri);
+	} else {
+		is_sql = FALSE;
+
+		/* Hack for now. */
+		if (!strstr (uri, ".mrproject")) {
+			real_uri = g_strconcat (uri, ".mrproject", NULL);
+		} else {
+			real_uri = g_strdup (uri);
+		}
+	}
+	
+	if (!project_do_save (project, real_uri, force, error)) {
+		g_free (real_uri);
 		return FALSE;
 	}
 
@@ -857,14 +875,16 @@ mrp_project_save_as (MrpProject   *project,
 	/* A small hack for now: check if it's SQL and update the URI to include
 	 * the newly assigned id.
 	 */
-	if (strncmp (uri, "sql://", 6) == 0) {
+	if (is_sql) {
 		gchar *new_uri;
 		
 		new_uri = g_object_get_data (G_OBJECT (priv->primary_storage), "uri");
 		priv->uri = g_strdup (new_uri);
 	} else {
-		priv->uri = g_strdup (uri);
+		priv->uri = g_strdup (real_uri);
 	}
+	
+	g_free (real_uri);
 	
 	imrp_project_set_needs_saving (project, FALSE);
 	
