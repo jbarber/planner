@@ -575,18 +575,6 @@ window_new_cb (BonoboUIComponent *component,
 	gtk_widget_show_all (new_window);
 }
 
-static gboolean
-window_file_is_dir (const gchar *file)
-{
-	struct stat sb;
-
-	if ((stat (file, &sb) == 0) && S_ISDIR (sb.st_mode)) {
-		return TRUE;
-	}
-
-	return FALSE;
-}
-
 static gchar *
 get_last_dir (PlannerWindow *window)
 {
@@ -656,11 +644,6 @@ window_open_cb (BonoboUIComponent *component,
 	if (response == GTK_RESPONSE_OK) {
 		filename = gtk_file_chooser_get_filename (
 			GTK_FILE_CHOOSER (file_chooser));
-		
-		if (window_file_is_dir (filename)) {
-			g_free (filename);
-			filename = NULL;
-		}
 	}
 	
 	gtk_widget_destroy (file_chooser);
@@ -1362,11 +1345,6 @@ window_do_save_as (PlannerWindow *window)
 	if (response == GTK_RESPONSE_OK) {
 		filename = gtk_file_chooser_get_filename (
 			GTK_FILE_CHOOSER (file_chooser));
-
-		if (window_file_is_dir (filename)) {
-			g_free (filename);
-			filename = NULL;
-		}
 	}
 	
 	gtk_widget_destroy (file_chooser);

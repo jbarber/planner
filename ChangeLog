@@ -1,5 +1,10 @@
 2004-07-08  Anders Carlsson  <andersca@gnome.org>
 
+	* src/planner-window.c: (window_open_cb), (window_do_save_as):
+	We don't need to check if we're opening a directory.
+
+2004-07-08  Anders Carlsson  <andersca@gnome.org>
+
 	* configure.in:
 	* data/glade/html-output.glade:
 	* src/planner-window.c: (window_open_cb), (window_do_save_as):
