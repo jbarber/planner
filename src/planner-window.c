@@ -29,11 +29,11 @@
 #include <sys/stat.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
 #include <gtk/gtk.h>
+#include <gtk/gtkaboutdialog.h>
 #include <glade/glade.h>
 #include <libgnome/gnome-help.h>
+#include <libgnome/gnome-url.h>
 #include <glib/gi18n.h>
-#include <libgnomeui/gnome-about.h>
-#include <libgnomeui/gnome-href.h>
 #include <libgnomeui/gnome-stock-icons.h>
 #include <libgnomeprintui/gnome-print-dialog.h>
 #include <libgnomeprintui/gnome-print-job-preview.h>
@@ -105,6 +105,12 @@ enum {
 	NEW_WINDOW,
 	EXIT,
 	LAST_SIGNAL
+};
+
+/* Links type */
+enum {
+	LINK_TYPE_EMAIL,
+	LINK_TYPE_URL
 };
 
 static void       window_class_init                      (PlannerWindowClass           *klass);
@@ -196,6 +202,9 @@ static void window_connect_proxy_cb (GtkUIManager  *manager,
 				     GtkWidget     *proxy,
 				     PlannerWindow *window);
 
+static void handle_links (GtkAboutDialog *about G_GNUC_UNUSED, 
+			  const gchar *link,
+			  gpointer data);
 
 #define CONF_MAIN_WINDOW_DIR       "/ui"
 #define CONF_MAIN_WINDOW_MAXIMIZED "/ui/main_window_maximized"
@@ -1124,13 +1133,36 @@ window_help_cb (GtkAction *action,
 	}
 }
 
+static  void
+handle_links (GtkAboutDialog *about, 
+	      const gchar    *link,
+	      gpointer        data)
+{
+	gchar *newlink;
+
+	switch (GPOINTER_TO_INT (data)){
+	case LINK_TYPE_EMAIL:
+		newlink = g_strdup_printf ("mailto:%s", link);
+		break;
+	case LINK_TYPE_URL:
+		newlink = g_strdup (link);
+		break;
+	default:
+		g_assert_not_reached ();
+	}
+	
+	if (!gnome_url_show (newlink, NULL)) {
+		/*g_warning ("Unable to follow link %s\n", link);*/
+	}
+	
+	g_free (newlink);
+}
+
 static void
 window_about_cb (GtkAction *action, 
 		 gpointer   data)
 {
-	static GtkWidget *about;
-	GtkWidget        *hbox;
-	GtkWidget        *href;
+	GdkPixbuf *pixbuf = NULL;
 
 	const gchar *authors[] = {
 		"Richard Hult <richard@imendio.com>",
@@ -1150,37 +1182,30 @@ window_about_cb (GtkAction *action,
 	 * are more than one, to appear in the about box.
 	 */
 	const gchar *translator_credits = N_("translator-credits");
-
-	if (about) {
-		gtk_window_present (GTK_WINDOW (about));
-		return;
+	
+	pixbuf = gdk_pixbuf_new_from_file (DATADIR "/pixmaps/gnome-planner.png", NULL);
+	
+	gtk_about_dialog_set_email_hook ((GtkAboutDialogActivateLinkFunc) handle_links, 
+					 GINT_TO_POINTER (LINK_TYPE_EMAIL), NULL);
+	
+	gtk_about_dialog_set_url_hook ((GtkAboutDialogActivateLinkFunc) handle_links, 
+				       GINT_TO_POINTER (LINK_TYPE_URL), NULL);
+	
+	gtk_show_about_dialog (NULL,
+			       "name", "Imendio Planner", 
+			       "version", VERSION,
+			       "comments", _("A Project Management application for the GNOME desktop"),
+			       "authors", authors,
+			       "documenters", documenters,
+			       "translator-credits", strcmp (translator_credits, _("translator-credits")) != 0 ? _(translator_credits) : NULL,
+			       "website", "http://www.imendio.com/projects/planner/",
+			       "website-label", _("The Planner Homepage"),
+			       "logo", pixbuf,
+			       NULL);
+	
+	if (pixbuf != NULL) {
+		gdk_pixbuf_unref (pixbuf);
 	}
-
-	about = gnome_about_new ("Imendio Planner", VERSION,
-				 "", /*"Copyright \xc2\xa9"*/
-				 _("A Project Management application for the GNOME desktop"),
-				 authors,
-				 documenters,
-				 strcmp (translator_credits, _("translator-credits")) != 0 ? _(translator_credits) : NULL,
-				 NULL);
-
-	gtk_window_set_transient_for (GTK_WINDOW (about),
-				      GTK_WINDOW (data));
-	
-	gtk_window_set_destroy_with_parent (GTK_WINDOW (about), TRUE);
-
-	g_signal_connect (about, "destroy",
-			  G_CALLBACK (gtk_widget_destroyed),
-			  &about);
-	
-	hbox = gtk_hbox_new (FALSE, 0);
-	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (about)->vbox), hbox, FALSE, FALSE, 0);
-	
-	href = gnome_href_new ("http://www.imendio.com/projects/planner/",
-			       _("The Planner Homepage"));
-	gtk_box_pack_start (GTK_BOX (hbox), href, TRUE, FALSE, 0);
-
-	gtk_widget_show_all (about);
 }
 
 static gboolean
