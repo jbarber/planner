@@ -1,5 +1,11 @@
 2004-08-06  Richard Hult  <richard@imendio.com>
 
+	* src/planner-window.c: Break some really long lines.
+	(window_populate): Add tooltip to the view radio items.
+
+	* src/planner-ttable-view.c (ttable_view_ttable_status_updated):
+	Set status message.
+
 	* src/Makefile.am: Fix libutil linkage.
 
 	* src/planner-gantt-view.c: (gantt_view_gantt_status_updated_cb): 

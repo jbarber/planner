@@ -402,7 +402,7 @@ ttable_view_ttable_status_updated (PlannerTtableChart *chart,
                                    const gchar        *message,
 				   PlannerView        *view)
 {
-	g_message("This message should appear in the status bar:\n%s", message);
+	planner_window_set_status (view->main_window, message);
 }
 
 static void
