@@ -156,7 +156,10 @@ G_MODULE_EXPORT gchar *
 get_label (PlannerView *view)
 {
         g_return_val_if_fail (PLANNER_IS_VIEW (view), NULL);
-        return _("Resource Usage");
+	/* i18n: Label used for the sidebar. Please try to make it short and use
+	 * a linebreak if necessary/possible.
+	 */
+        return _("Resource\nUsage");
 }
 
 G_MODULE_EXPORT gchar *

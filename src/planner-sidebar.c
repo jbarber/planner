@@ -133,7 +133,7 @@ sidebar_init (PlannerSidebar *bar)
 
 	gtk_container_add (GTK_CONTAINER (bar->priv->event_box), bar->priv->vbox);
 	
-	gtk_container_set_border_width (GTK_CONTAINER (bar->priv->vbox), 4);
+	gtk_container_set_border_width (GTK_CONTAINER (bar->priv->vbox), 6);
 	gtk_frame_set_shadow_type (GTK_FRAME (bar), GTK_SHADOW_OUT);
 }
 
@@ -363,10 +363,10 @@ sidebar_modify_bg (PlannerSidebar *bar)
 	style = GTK_WIDGET (bar)->style;
 
 	normal_color = style->dark[GTK_STATE_NORMAL];
-	sidebar_darken_color (&normal_color, 3);
+	sidebar_darken_color (&normal_color, 4);
 
 	prelight_color = style->dark[GTK_STATE_PRELIGHT];
-	sidebar_darken_color (&prelight_color, 3);
+	sidebar_darken_color (&prelight_color, 4);
 	
 	gtk_widget_modify_bg (bar->priv->event_box, GTK_STATE_NORMAL, &normal_color);
 
@@ -378,6 +378,8 @@ sidebar_modify_bg (PlannerSidebar *bar)
 		gtk_widget_modify_bg (button, GTK_STATE_NORMAL, &normal_color);
 		gtk_widget_modify_bg (button, GTK_STATE_ACTIVE, &normal_color);
 		gtk_widget_modify_bg (button, GTK_STATE_PRELIGHT, &prelight_color);
+
+		gtk_widget_modify_fg (entry->label, GTK_STATE_NORMAL, &style->white);
 	}
 }
 
@@ -441,14 +443,14 @@ sidebar_button_toggled_cb (GtkToggleButton *button,
 }
 
 void
-planner_sidebar_append (PlannerSidebar   *sidebar,
-		   const gchar *icon_filename,
-		   const gchar *text)
+planner_sidebar_append (PlannerSidebar *sidebar,
+			const gchar    *icon_filename,
+			const gchar    *text)
 {
 	PlannerSidebarPriv *priv;
-	ButtonEntry   *entry;
-	GtkWidget     *vbox;
-	GtkWidget     *image;
+	ButtonEntry        *entry;
+	GtkWidget          *vbox;
+	GtkWidget          *image;
 
 	g_return_if_fail (PLANNER_IS_SIDEBAR (sidebar));
 
@@ -477,9 +479,10 @@ planner_sidebar_append (PlannerSidebar   *sidebar,
 			    GTK_WIDGET (entry->button),
 			    FALSE,
 			    TRUE,
-			    2);
+			    0);
 
 	entry->label = gtk_label_new (text);
+	gtk_label_set_justify (GTK_LABEL (entry->label), GTK_JUSTIFY_CENTER);
 
 	gtk_box_pack_start (GTK_BOX (vbox),
 			    entry->label,
@@ -493,12 +496,12 @@ planner_sidebar_append (PlannerSidebar   *sidebar,
 			    vbox,
 			    FALSE,
 			    TRUE,
-			    8);
+			    6);
 }
 
 void
 planner_sidebar_set_active (PlannerSidebar *sidebar,
-		       gint       index)
+			    gint            index)
 {
 	PlannerSidebarPriv *priv;
 	ButtonEntry   *entry;

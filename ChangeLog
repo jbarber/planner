@@ -1,3 +1,10 @@
+2005-03-20  Richard Hult  <richard@imendio.com>
+
+	* src/planner-gantt-view.c: (get_label):
+	* src/planner-sidebar.c: (sidebar_init), (sidebar_modify_bg),
+	(planner_sidebar_append), (planner_sidebar_set_active):
+	* src/planner-ttable-view.c: (get_label): Tweak the sidebar a bit.
+
 2005-03-15  Richard Hult  <richard@imendio.com>
 
 	Fix bug #157254.

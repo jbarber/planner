@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: planner\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-03-03 22:25+0100\n"
+"POT-Creation-Date: 2005-03-18 23:41+0100\n"
 "PO-Revision-Date: 2004-07-04 16:55+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -788,7 +788,7 @@ msgstr "Ta bort kalender"
 msgid "Add new calendar"
 msgstr "Skapa ny kalender"
 
-#: ../src/planner-cell-renderer-date.c:161 ../src/planner-task-dialog.c:1490
+#: ../src/planner-cell-renderer-date.c:161 ../src/planner-task-dialog.c:1489
 msgid "As soon as possible"
 msgstr "Så tidigt som möjligt"
 
@@ -800,21 +800,21 @@ msgstr "Inte tidigare än"
 msgid "On fixed date"
 msgstr "På fast datum"
 
-#: ../src/planner-cmd-manager.c:225
+#: ../src/planner-cmd-manager.c:227
 #, c-format
 msgid "Undo '%s'"
 msgstr "Ångra \"%s\""
 
-#: ../src/planner-cmd-manager.c:227
+#: ../src/planner-cmd-manager.c:229
 msgid "Undo"
 msgstr "Ångra"
 
-#: ../src/planner-cmd-manager.c:237
+#: ../src/planner-cmd-manager.c:239
 #, c-format
 msgid "Redo '%s'"
 msgstr "Gör om \"%s\""
 
-#: ../src/planner-cmd-manager.c:239
+#: ../src/planner-cmd-manager.c:241
 msgid "Redo"
 msgstr "Gör om"
 
@@ -879,8 +879,8 @@ msgstr "Importera resurser från Evolution dataserver"
 
 #: ../src/planner-eds-plugin.c:393 ../src/planner-gantt-print.c:190
 #: ../src/planner-group-dialog.c:819 ../src/planner-property-dialog.c:481
-#: ../src/planner-resource-view.c:1156 ../src/planner-task-dialog.c:2533
-#: ../src/planner-task-dialog.c:2607 ../src/planner-task-view.c:279
+#: ../src/planner-resource-view.c:1156 ../src/planner-task-dialog.c:2534
+#: ../src/planner-task-dialog.c:2608 ../src/planner-task-view.c:279
 #: ../src/planner-ttable-print.c:108
 msgid "Name"
 msgstr "Namn"
@@ -1023,6 +1023,10 @@ msgstr "%d %b %Y"
 #: ../src/planner-gantt-background.c:581
 msgid "Project start"
 msgstr "Projektstart"
+
+#: ../src/planner-gantt-header.c:671
+msgid "%e %b %Y"
+msgstr "%d %b %Y"
 
 #: ../src/planner-gantt-print.c:198 ../src/planner-resource-dialog.c:1845
 #: ../src/planner-resource-view.c:747 ../src/planner-resource-view.c:763
@@ -1173,11 +1177,14 @@ msgstr "Test"
 msgid "_Highlight Critical Tasks"
 msgstr "_Visa kritiska aktiviteter"
 
-#: ../src/planner-gantt-view.c:330
-msgid "Gantt Chart"
-msgstr "Ganttschema"
+#. i18n: Label used for the sidebar. Please try to make it short and use
+#. * a linebreak if necessary/possible.
+#.
+#: ../src/planner-gantt-view.c:333
+msgid "Gantt"
+msgstr "Gantt"
 
-#: ../src/planner-gantt-view.c:338
+#: ../src/planner-gantt-view.c:341
 msgid "_Gantt Chart"
 msgstr "_Ganttschema"
 
@@ -1185,7 +1192,7 @@ msgstr "_Ganttschema"
 #. * project management term. You might want to leave it
 #. * untranslated unless there is a localized term for it.
 #.
-#: ../src/planner-gantt-view.c:539
+#: ../src/planner-gantt-view.c:542
 msgid ""
 "\n"
 "WBS"
@@ -1193,7 +1200,7 @@ msgstr ""
 "\n"
 "WBS"
 
-#: ../src/planner-gantt-view.c:540 ../src/planner-ttable-tree.c:367
+#: ../src/planner-gantt-view.c:543 ../src/planner-ttable-tree.c:367
 msgid ""
 "\n"
 "Name"
@@ -1202,7 +1209,7 @@ msgstr ""
 "Namn"
 
 #. COL_START,    _("\nStart"),
-#: ../src/planner-gantt-view.c:542
+#: ../src/planner-gantt-view.c:545
 msgid ""
 "\n"
 "Work"
@@ -1310,7 +1317,7 @@ msgstr "Ta bort fas"
 msgid "Could not open plugin file '%s'\n"
 msgstr "Kunde inte öppna insticksfilen \"%s\"\n"
 
-#: ../src/planner-predecessor-model.c:191 ../src/planner-task-dialog.c:2173
+#: ../src/planner-predecessor-model.c:191 ../src/planner-task-dialog.c:2174
 msgid "FS"
 msgstr "FS"
 
@@ -1319,7 +1326,7 @@ msgid "FF"
 msgstr "FF"
 
 #. list = g_list_append (list, g_strdup (_("FF")));
-#: ../src/planner-predecessor-model.c:197 ../src/planner-task-dialog.c:2175
+#: ../src/planner-predecessor-model.c:197 ../src/planner-task-dialog.c:2176
 msgid "SS"
 msgstr "SS"
 
@@ -1412,7 +1419,7 @@ msgid "Label"
 msgstr "Etikett"
 
 #: ../src/planner-property-dialog.c:510 ../src/planner-resource-view.c:1200
-#: ../src/planner-task-dialog.c:2639
+#: ../src/planner-task-dialog.c:2640
 msgid "Type"
 msgstr "Typ"
 
@@ -1463,7 +1470,7 @@ msgstr "Redigera resursegenskap"
 
 #. i18n: time stamp format for notes in task dialog, see strftime(3) for
 #. * a detailed description.
-#: ../src/planner-resource-dialog.c:1403 ../src/planner-task-dialog.c:1805
+#: ../src/planner-resource-dialog.c:1403 ../src/planner-task-dialog.c:1806
 msgid "%a %d %b %Y, %H:%M\n"
 msgstr "%a %d %b %Y, %H.%M\n"
 
@@ -1549,48 +1556,48 @@ msgid "Group"
 msgstr "Grupp"
 
 #. i18n: Short "Week", preferably 2 letters.
-#: ../src/planner-scale-utils.c:325
+#: ../src/planner-scale-utils.c:129
 #, c-format
 msgid "Wk %d"
 msgstr "V %d"
 
-#: ../src/planner-scale-utils.c:329
+#: ../src/planner-scale-utils.c:133
 #, c-format
 msgid "Week %d"
 msgstr "Vecka %d"
 
 #. i18n: Week, year.
-#: ../src/planner-scale-utils.c:334
+#: ../src/planner-scale-utils.c:138
 #, c-format
 msgid "Week %d, %d"
 msgstr "Vecka %d, %d"
 
 #. i18n: Short "Quarter", preferably 1 letter.
-#: ../src/planner-scale-utils.c:365
+#: ../src/planner-scale-utils.c:169
 #, c-format
 msgid "Q%d"
 msgstr "K%d"
 
 #. i18n: Short "Quarter", preferably 2-3 letters.
-#: ../src/planner-scale-utils.c:369
+#: ../src/planner-scale-utils.c:173
 #, c-format
 msgid "Qtr %d"
 msgstr "Kv %d"
 
 #. i18n: Year, short "Quarter", preferably 2-3 letters.
-#: ../src/planner-scale-utils.c:373
+#: ../src/planner-scale-utils.c:177
 #, c-format
 msgid "%d, Qtr %d"
 msgstr "%d, kv %d"
 
 #. i18n: Short "Half year", preferably 1 letter.
-#: ../src/planner-scale-utils.c:386
+#: ../src/planner-scale-utils.c:190
 #, c-format
 msgid "H%d"
 msgstr "H%d"
 
 #. i18n: Year, short "Half year", preferably 1 letter.
-#: ../src/planner-scale-utils.c:391
+#: ../src/planner-scale-utils.c:195
 #, c-format
 msgid "%04d, H%d"
 msgstr "%04d, H%d"
@@ -1738,41 +1745,41 @@ msgstr "Redigera aktivitetsanteckning"
 msgid "No earlier than %s"
 msgstr "Inte tidigare än %s"
 
-#: ../src/planner-task-dialog.c:1496
+#: ../src/planner-task-dialog.c:1497
 #, c-format
 msgid "On fixed date %s"
 msgstr "På fast datum %s"
 
-#: ../src/planner-task-dialog.c:1877
+#: ../src/planner-task-dialog.c:1878
 msgid "Finish to start (FS)"
 msgstr "Slut till start (FS)"
 
 #. _("Finish to finish (FF)"), MRP_RELATION_FF,
-#: ../src/planner-task-dialog.c:1879
+#: ../src/planner-task-dialog.c:1880
 msgid "Start to start (SS)"
 msgstr "Start till start (SS)"
 
-#: ../src/planner-task-dialog.c:1935
+#: ../src/planner-task-dialog.c:1936
 msgid "Can't add new predecessor. No task selected!"
 msgstr "Kan inte lägga till föregångare, ingen aktivitet markerad."
 
-#: ../src/planner-task-dialog.c:2380
+#: ../src/planner-task-dialog.c:2381
 msgid "Change..."
 msgstr "Ändra..."
 
-#: ../src/planner-task-dialog.c:2554
+#: ../src/planner-task-dialog.c:2555
 msgid "Assigned"
 msgstr "Tilldelad"
 
-#: ../src/planner-task-dialog.c:2571
+#: ../src/planner-task-dialog.c:2572
 msgid "Units"
 msgstr "Enheter"
 
-#: ../src/planner-task-dialog.c:2661
+#: ../src/planner-task-dialog.c:2662
 msgid "Lag"
 msgstr "Fördröjning"
 
-#: ../src/planner-task-dialog.c:2835 ../src/planner-task-dialog.c:2837
+#: ../src/planner-task-dialog.c:2805 ../src/planner-task-dialog.c:2807
 msgid "Edit task properties"
 msgstr "Redigera aktivitetsegenskaper"
 
@@ -1961,11 +1968,18 @@ msgstr ""
 msgid "Zoom to fit"
 msgstr "Zooma hela"
 
-#: ../src/planner-ttable-view.c:159
-msgid "Resource Usage"
-msgstr "Resursutnyttjande"
+#. i18n: Label used for the sidebar. Please try to make it short and use
+#. * a linebreak if necessary/possible.
+#.
+#: ../src/planner-ttable-view.c:162
+msgid ""
+"Resource\n"
+"Usage"
+msgstr ""
+"Resurs-\n"
+"utnyttjande"
 
-#: ../src/planner-ttable-view.c:166
+#: ../src/planner-ttable-view.c:169
 msgid "Resource _Usage"
 msgstr "Resurs_utnyttjande"
 
