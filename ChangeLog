@@ -1,5 +1,11 @@
 2004-08-03  Richard Hult  <richard@imendio.com>
 
+	* src/planner-task-tree.c: (task_tree_init), (task_tree_finalize),
+	(task_tree_row_activated_cb): Bring up task dialog when a row is
+	activated. Fixes bug #148058.
+
+2004-08-03  Richard Hult  <richard@imendio.com>
+
 	* src/planner-resource-dialog.c: Clean up coding style a bit. Use
 	g_strtod instead of g_ascii_strtod. Change cost to a regular
 	property.
@@ -40,7 +46,7 @@
 	(is_newer_version): compare to planner versions
 	(check_database_tables): check if tables in planner database already exists
 	and create them if not.
-	(create_database): check if plannet database exists and create it if not.
+	(create_database): check if planner database exists and create it if not.
 	(sql_get_tested_connection): get a connection to the database checking that
 	planner database and tables are created if they don't exist.
 	

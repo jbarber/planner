@@ -65,9 +65,9 @@ struct _PlannerTaskTreePriv {
 	MrpProject     *project;
 	GHashTable     *property_to_column;
 
-	PlannerWindow   *main_window;
+	PlannerWindow  *main_window;
 
-	gboolean         highlight_critical;
+	gboolean        highlight_critical;
 	
 	/* Keep the dialogs here so that we can just raise the dialog if it's
 	 * opened twice for the same task.
@@ -139,6 +139,10 @@ static void        task_tree_work_data_func            (GtkTreeViewColumn    *tr
 							GtkTreeModel         *tree_model,
 							GtkTreeIter          *iter,
 							gpointer              data);
+static void        task_tree_row_activated_cb          (GtkTreeView          *tree,
+							GtkTreePath          *path,
+							GtkTreeViewColumn    *col,
+							gpointer              user_data);
 static void        task_tree_block_selection_changed   (PlannerTaskTree      *tree);
 static void        task_tree_unblock_selection_changed (PlannerTaskTree      *tree);
 static void        task_tree_selection_changed_cb      (GtkTreeSelection     *selection,
@@ -1104,10 +1108,13 @@ task_tree_init (PlannerTaskTree *tree)
 	tree->priv = priv;
 
 	priv->property_to_column = g_hash_table_new (NULL, NULL);
-	
 	priv->popup_factory = planner_task_popup_new (tree);
-	
 	priv->anchor = NULL;
+
+	g_signal_connect (tree,
+			  "row_activated",
+			  G_CALLBACK (task_tree_row_activated_cb),
+			  NULL);
 }
 
 static void
@@ -1128,6 +1135,16 @@ task_tree_finalize (GObject *object)
 	}
 	
 	planner_task_tree_set_anchor (tree, NULL);
+}
+
+static void
+task_tree_row_activated_cb (GtkTreeView       *tree,
+			    GtkTreePath       *path,
+			    GtkTreeViewColumn *col,
+			    gpointer           user_data)
+{
+	planner_task_tree_edit_task (PLANNER_TASK_TREE (tree),
+				     PLANNER_TASK_DIALOG_PAGE_GENERAL);
 }
 
 static void
