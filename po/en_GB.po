@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: planner HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-05-02 15:54-0400\n"
-"PO-Revision-Date: 2004-05-02 15:54-0400\n"
+"POT-Creation-Date: 2004-05-03 21:39-0400\n"
+"PO-Revision-Date: 2004-05-03 21:40-0400\n"
 "Last-Translator: David Lodge <dave@cirt.net>\n"
 "Language-Team: English (British) <en_gb@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -792,6 +792,10 @@ msgstr "_User Guide"
 msgid "_View"
 msgstr "_View"
 
+#: data/ui/python-plugin.ui.h:1
+msgid "Execute a Python script"
+msgstr "Execute a Python script"
+
 #: data/ui/resource-view.ui.h:1
 msgid "Edit _Custom Properties..."
 msgstr "Edit _Custom Properties..."
@@ -947,16 +951,16 @@ msgid "None"
 msgstr "None"
 
 #. Give up.
-#: libplanner/mrp-sql.c:345 src/planner-sql-plugin.c:173
+#: libplanner/mrp-sql.c:286 src/planner-sql-plugin.c:173
 msgid "Invalid Unicode"
 msgstr "Invalid Unicode"
 
-#: libplanner/mrp-sql.c:2228
+#: libplanner/mrp-sql.c:2161
 #, c-format
 msgid "Connection to database '%s' failed.\n"
 msgstr "Connection to database '%s' failed.\n"
 
-#: libplanner/mrp-sql.c:2233
+#: libplanner/mrp-sql.c:2166
 #, c-format
 msgid ""
 "Connection to database '%s' failed.\n"
@@ -965,12 +969,12 @@ msgstr ""
 "Connection to database '%s' failed.\n"
 "%s"
 
-#: libplanner/mrp-sql.c:2241
+#: libplanner/mrp-sql.c:2174
 #, c-format
 msgid "BEGIN command failed %s."
 msgstr "BEGIN command failed %s."
 
-#: libplanner/mrp-sql.c:2407
+#: libplanner/mrp-sql.c:2340
 #, c-format
 msgid ""
 "The project '%s' has been changed by the user '%s' since you opened it. Do "
@@ -979,7 +983,7 @@ msgstr ""
 "The project '%s' has been changed by the user '%s' since you opened it. Do "
 "you want to save anyway?"
 
-#: libplanner/mrp-sql.c:3675 src/planner-sql-plugin.c:336
+#: libplanner/mrp-sql.c:3606 src/planner-sql-plugin.c:336
 #, c-format
 msgid "Connection to database '%s' failed."
 msgstr "Connection to database '%s' failed."
@@ -1063,6 +1067,16 @@ msgstr "Undo '%s'"
 msgid "Redo '%s'"
 msgstr "Redo '%s'"
 
+#: src/planner-day-type-dialog.c:494
+#, c-format
+msgid "Add day type \"%s\""
+msgstr "Add day type \"%s\""
+
+#: src/planner-day-type-dialog.c:553
+#, c-format
+msgid "Remove day type \"%s\""
+msgstr "Remove day type \"%s\""
+
 #: src/planner-default-week-dialog.c:41
 msgid "Monday"
 msgstr "Monday"
@@ -1091,17 +1105,17 @@ msgstr "Saturday"
 msgid "Sunday"
 msgstr "Sunday"
 
-#: src/planner-default-week-dialog.c:275
+#: src/planner-default-week-dialog.c:282
 msgid "No working time"
 msgstr "No working time"
 
-#: src/planner-default-week-dialog.c:286 src/planner-default-week-dialog.c:290
+#: src/planner-default-week-dialog.c:293 src/planner-default-week-dialog.c:297
 msgid "%H:%M"
 msgstr "%H:%M"
 
-#: src/planner-default-week-dialog.c:499
-msgid "Edit default week\""
-msgstr "Edit default week\""
+#: src/planner-default-week-dialog.c:547
+msgid "Edit default week"
+msgstr "Edit default week"
 
 #: src/planner-format.c:141
 #, c-format
@@ -1157,7 +1171,7 @@ msgstr "Project start"
 msgid "Name"
 msgstr "Name"
 
-#: src/planner-gantt-print.c:199 src/planner-resource-dialog.c:1795
+#: src/planner-gantt-print.c:199 src/planner-resource-dialog.c:1900
 #: src/planner-resource-view.c:691 src/planner-resource-view.c:707
 #: src/planner-resource-view.c:1645 src/planner-task-view.c:269
 msgid "Work"
@@ -1278,30 +1292,6 @@ msgstr "planner: --geometry cannot be used with more than one file."
 msgid "Could not open plugin file '%s'\n"
 msgstr "Could not open plugin file '%s'\n"
 
-#: src/planner-task-popup.c:51
-msgid "/_Insert task"
-msgstr "/_Insert task"
-
-#: src/planner-task-popup.c:54
-msgid "/Insert _subtask"
-msgstr "/Insert _subtask"
-
-#: src/planner-task-popup.c:57
-msgid "/_Remove task"
-msgstr "/_Remove task"
-
-#: src/planner-task-popup.c:62
-msgid "/_Unlink task"
-msgstr "/_Unlink task"
-
-#: src/planner-task-popup.c:67
-msgid "/Assign _resources..."
-msgstr "/Assign _resources..."
-
-#: src/planner-task-popup.c:70 src/planner-ttable-tree.c:99
-msgid "/_Edit task..."
-msgstr "/_Edit task..."
-
 #: src/planner-predecessor-model.c:191 src/planner-task-dialog.c:1132
 msgid "FS"
 msgstr "FS"
@@ -1384,44 +1374,52 @@ msgstr "Label"
 msgid "Type"
 msgstr "Type"
 
+#: src/planner-python-plugin.c:121 src/planner-window.c:639
+msgid "Open a file"
+msgstr "Open a file"
+
 #. Put "no group" at the top.
-#: src/planner-resource-dialog.c:311 src/planner-resource-input-dialog.c:97
+#: src/planner-resource-dialog.c:326 src/planner-resource-input-dialog.c:97
 #: src/planner-resource-view.c:1856
 msgid "(None)"
 msgstr "(None)"
 
-#: src/planner-resource-dialog.c:321 src/planner-resource-input-dialog.c:107
+#: src/planner-resource-dialog.c:336 src/planner-resource-input-dialog.c:107
 #: src/planner-task-dialog.c:256
 msgid "(No name)"
 msgstr "(No name)"
 
-#: src/planner-resource-dialog.c:494
+#: src/planner-resource-dialog.c:513
 msgid "Edit resource calendar from dialog"
 msgstr "Edit resource calendar from dialogue"
 
-#: src/planner-resource-dialog.c:589
+#: src/planner-resource-dialog.c:595
 msgid "Edit resource note from dialog"
 msgstr "Edit resource note from dialogue"
 
-#: src/planner-resource-dialog.c:661 src/planner-resource-dialog.c:703
+#: src/planner-resource-dialog.c:669
+msgid "Edit resource cost from dialog"
+msgstr "Edit resource cost from dialogue"
+
+#: src/planner-resource-dialog.c:739 src/planner-resource-dialog.c:781
 msgid "Edit resource property from dialog"
 msgstr "Edit resource property from dialogue"
 
 #. i18n: time stamp format for notes in task dialog, see strftime(3) for
 #. * a detailed description.
-#: src/planner-resource-dialog.c:1357 src/planner-task-dialog.c:738
+#: src/planner-resource-dialog.c:1458 src/planner-task-dialog.c:738
 msgid "%a %d %b %Y, %H:%M\n"
 msgstr "%a %d %b %Y, %H:%M\n"
 
-#: src/planner-resource-dialog.c:1474
+#: src/planner-resource-dialog.c:1575
 msgid "None (use project default)"
 msgstr "None (use project default)"
 
-#: src/planner-resource-dialog.c:1601 src/planner-resource-dialog.c:1603
+#: src/planner-resource-dialog.c:1702 src/planner-resource-dialog.c:1704
 msgid "Edit resource properties"
 msgstr "Edit resource properties"
 
-#: src/planner-resource-dialog.c:1796 src/planner-resource-view.c:694
+#: src/planner-resource-dialog.c:1901 src/planner-resource-view.c:694
 #: src/planner-resource-view.c:708 src/planner-resource-view.c:1646
 msgid "Material"
 msgstr "Material"
@@ -1580,6 +1578,30 @@ msgstr "Lag"
 #: src/planner-task-dialog.c:1693 src/planner-task-dialog.c:1695
 msgid "Edit task properties"
 msgstr "Edit task properties"
+
+#: src/planner-task-popup.c:51
+msgid "/_Insert task"
+msgstr "/_Insert task"
+
+#: src/planner-task-popup.c:54
+msgid "/Insert _subtask"
+msgstr "/Insert _subtask"
+
+#: src/planner-task-popup.c:57
+msgid "/_Remove task"
+msgstr "/_Remove task"
+
+#: src/planner-task-popup.c:62
+msgid "/_Unlink task"
+msgstr "/_Unlink task"
+
+#: src/planner-task-popup.c:67
+msgid "/Assign _resources..."
+msgstr "/Assign _resources..."
+
+#: src/planner-task-popup.c:70 src/planner-ttable-tree.c:99
+msgid "/_Edit task..."
+msgstr "/_Edit task..."
 
 #: src/planner-task-tree.c:263
 msgid "Insert task"
@@ -1753,10 +1775,6 @@ msgstr "Resource _Usage"
 #, c-format
 msgid "Could not open view plugin file '%s'\n"
 msgstr "Could not open view plugin file '%s'\n"
-
-#: src/planner-window.c:639
-msgid "Open a file"
-msgstr "Open a file"
 
 #. I18n: Translators, list your names here, newline separated if there
 #. * are more than one, to appear in the about box.
