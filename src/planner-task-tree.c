@@ -1058,13 +1058,13 @@ task_tree_finalize (GObject *object)
 	
 	g_hash_table_destroy (priv->property_to_column);
 
+	planner_task_tree_set_anchor (tree, NULL);
+
 	g_free (priv);
 
 	if (G_OBJECT_CLASS (parent_class)->finalize) {
 		(* G_OBJECT_CLASS (parent_class)->finalize) (object);
 	}
-	
-	planner_task_tree_set_anchor (tree, NULL);
 }
 
 static void

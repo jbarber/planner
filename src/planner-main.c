@@ -80,15 +80,13 @@ main (int argc, char **argv)
 	if (g_getenv ("MRP_G_FATAL_WARNINGS") != NULL) {
 		g_log_set_always_fatal (G_LOG_LEVEL_MASK);
 	}
-
+	
 	application = planner_application_new ();
 
 	main_window = planner_application_new_window (application);
-
-	if (main_window) {
-		gnome_window_icon_set_default_from_file (
-			DATADIR "/pixmaps/gnome-planner.png");
-	}
+	gtk_window_set_icon_from_file (GTK_WINDOW (main_window),
+				       DATADIR "/pixmaps/gnome-planner.png",
+				       NULL);
 
 	if (geometry != NULL) {
 		gtk_window_parse_geometry (GTK_WINDOW (main_window), geometry);

@@ -1,5 +1,24 @@
 2005-02-18  Richard Hult  <richard@imendio.com>
 
+	* src/planner-format.c:
+	* src/planner-format.h: New functions to parse an int and float
+	that handles thousands separators.
+	
+	* src/planner-main.c: Use some more modern API for setting the
+	window icon.
+
+	* src/planner-resource-dialog.c:
+	* src/planner-resource-view.c: Use parsing functions from
+	above. Fixes bug #161330.
+
+	* src/planner-window.c: (window_about_cb): Make about box
+	transient.
+
+2005-02-18  Richard Hult  <richard@imendio.com>
+
+	* src/planner-task-tree.c (task_tree_finalize): Don't access
+	memory after it's been freed.
+
 	* data/dtd/mrproject-0.6.dtd:
 	* data/stylesheets/html1_gantt.xsl:
 	* data/stylesheets/planner2plannerv011.xsl:

@@ -1,5 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
+ * Copyright (C) 2005 Imendio AB
  * Copyright (C) 2002 CodeFactory AB
  * Copyright (C) 2002 Richard Hult <richard@imendio.com>
  * Copyright (C) 2002 Mikael Hallendal <micke@imendio.com>
@@ -44,6 +45,7 @@ planner_format_int (gint number)
 
 	locality = localeconv ();
 	grouping = locality->grouping;
+	
 	while (number) {
 		char *group;
 		switch (*grouping) {
@@ -128,7 +130,7 @@ format_strip_trailing_zeroes (gchar *str)
 
 gchar *
 planner_format_duration (gint duration,
-		    gint day_length)
+			 gint day_length)
 {
 	gint   days;
 	gint   hours;
@@ -202,8 +204,8 @@ planner_format_date (mrptime date)
 
 gchar *
 planner_format_float (gfloat   number,
-		 guint    precision,
-		 gboolean fill_with_zeroes)
+		      guint    precision,
+		      gboolean fill_with_zeroes)
 {
 	gint          int_part;
 	gint          fraction;
@@ -269,3 +271,96 @@ planner_format_float (gfloat   number,
 
 	return value;
 }
+
+/* Strips out all occurances of thousands separators. */
+gint
+planner_parse_int (const gchar *str)
+{
+	GString      *tmp;
+	const gchar  *p;
+	gint          value;
+	struct lconv *locality;
+	gint          sep_len;
+
+	if (!str || !str[0]) {
+		return 0;
+	}
+	
+	locality = localeconv ();
+	sep_len = strlen (locality->thousands_sep);
+
+	if (sep_len == 0) {
+		return atoi (str);
+	}
+	
+	tmp = g_string_new (NULL);
+
+	p = str;
+	while (*p) {
+		if (strncmp (p, locality->thousands_sep, sep_len) == 0) {
+			p = g_utf8_offset_to_pointer (p, sep_len);
+		} else {
+			g_string_append_unichar (tmp, g_utf8_get_char (p));
+			p = g_utf8_next_char (p);
+		}
+	}
+
+	value = atoi (tmp->str);
+	g_string_free (tmp, TRUE);
+
+	return value;
+}
+
+/* Strips out all occurances of thousands separators. */
+gfloat
+planner_parse_float (const gchar *str)
+{
+	const gchar  *p;
+	gint          int_part, dec_part;
+	gint          dec_factor;
+	struct lconv *locality;
+	gchar        *dec_point;
+	gint          dec_len;
+	gint          i;
+	
+	if (!str || !str[0]) {
+		return 0.0;
+	}
+
+	/* First get the integer part. */
+	int_part = planner_parse_int (str);
+
+	locality = localeconv ();
+	
+	dec_len = strlen (locality->mon_decimal_point);
+	if (dec_len == 0) {
+		dec_point = ".";
+		dec_len = 1;
+	}
+	else {
+		dec_point = locality->mon_decimal_point;
+	}
+
+	p = strstr (str, dec_point);
+	if (!p) {
+		return int_part;
+	}
+
+	p = p + dec_len;
+	
+	dec_part = planner_parse_int (p);
+
+	i = dec_part;
+	dec_factor = 0;
+	while (i > 0) {
+		i = i / 10;
+		dec_factor++;
+	}
+
+	if (dec_factor == 0) {
+		dec_factor = 1;
+	}
+	
+	return int_part + dec_part / pow (10, dec_factor);
+}
+

@@ -1,5 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
+ * Copyright (C) 2005      Imendio AB
  * Copyright (C) 2001-2002 CodeFactory AB
  * Copyright (C) 2001-2002 Richard Hult <richard@imendio.com>
  * Copyright (C) 2001-2002 Mikael Hallendal <micke@imendio.com>
@@ -26,16 +27,14 @@
 #include <glib.h>
 #include <libplanner/mrp-time.h>
 
-gchar *planner_format_int      (gint      number);
-
-gchar *planner_format_duration (gint      duration,
-			   gint      day_length);
-
-gchar *planner_format_date     (mrptime   date);
-
-gchar *planner_format_float    (gfloat    number,
-			   guint     precision,
-			   gboolean  fill_with_zeroes);
-
+gchar *planner_format_int      (gint         number);
+gchar *planner_format_duration (gint         duration,
+				gint         day_length);
+gchar *planner_format_date     (mrptime      date);
+gchar *planner_format_float    (gfloat       number,
+				guint        precision,
+				gboolean     fill_with_zeroes);
+gint   planner_parse_int       (const gchar *str);
+gfloat planner_parse_float     (const gchar *str);
 
 #endif /* __PLANNER_FORMAT_H__ */

@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
- * Copyright (C) 2004      Imendio AB
+ * Copyright (C) 2004-2005 Imendio AB
  * Copyright (C) 2001-2002 CodeFactory AB
  * Copyright (C) 2001-2002 Richard Hult <richard@imendio.com>
  * Copyright (C) 2001-2002 Mikael Hallendal <micke@imendio.com>
@@ -26,24 +26,12 @@
 #include <time.h>
 #include <string.h>
 #include <glade/glade.h>
-#include <gtk/gtkentry.h>
-#include <gtk/gtkdialog.h>
-#include <gtk/gtklabel.h>
-#include <gtk/gtkcombo.h>
-#include <gtk/gtkliststore.h>
-#include <gtk/gtkoptionmenu.h>
-#include <gtk/gtkmenu.h>
-#include <gtk/gtkmenuitem.h>
-#include <gtk/gtktreeview.h>
-#include <gtk/gtktreestore.h>
-#include <gtk/gtkcellrenderertext.h>
-#include <gtk/gtkcellrenderertoggle.h>
-#include <gtk/gtktextview.h>
-#include <gtk/gtktextbuffer.h>
+#include <gtk/gtk.h>
 #include <glib/gi18n.h>
 #include <libplanner/mrp-resource.h>
 #include <libplanner/mrp-calendar.h>
 #include <libplanner/mrp-time.h>
+
 #include "planner-format.h"
 #include "planner-resource-dialog.h"
 
@@ -65,7 +53,6 @@ typedef struct {
 	 * off later.
 	 */
 	MrpCalendar   *selected_calendar;
-
 } DialogData;
 
 typedef struct {
@@ -198,7 +185,6 @@ typedef struct {
 	PlannerCmd   base;
 
 	MrpResource *resource;
-	gchar       *property;
 	gfloat       cost;
 	gfloat       old_cost;
 } ResourceCmdEditCost;
@@ -644,16 +630,10 @@ resource_cmd_edit_cost (DialogData  *data,
 	PlannerCmd          *cmd_base;
 	ResourceCmdEditCost *cmd;
 	gfloat               cost, old_cost;
-	gchar               *end_ptr;
 
 	mrp_object_get (data->resource, "cost", &cost, NULL);
 
-	old_cost = g_strtod (focus_in_cost, &end_ptr);
-
-	if (end_ptr == focus_in_cost) {
-		return NULL;
-	}
-
+	old_cost = planner_parse_float (focus_in_cost);
 	if (cost == old_cost) {
 		return NULL;
 	}
@@ -666,7 +646,6 @@ resource_cmd_edit_cost (DialogData  *data,
 	
 	cmd = (ResourceCmdEditCost *) cmd_base;
 
-	cmd->property = g_strdup ("cost");
 	cmd->resource = g_object_ref (data->resource);
 
 	cmd->old_cost = old_cost;
@@ -1192,7 +1171,7 @@ resource_dialog_resource_cost_focus_out_cb (GtkWidget     *w,
 	PlannerCmd *cmd;
 
 	focus_in_cost = g_object_get_data (G_OBJECT (data->resource), "focus_in_cost");
-	
+
 	cmd = resource_cmd_edit_cost (data, focus_in_cost);
 
 	g_free (focus_in_cost);
@@ -1208,7 +1187,7 @@ resource_dialog_resource_cost_focus_in_cb (GtkWidget     *w,
 	gchar *cost;
 	   
 	cost = g_strdup (gtk_entry_get_text (GTK_ENTRY (w)));
-	
+
 	g_object_set_data (G_OBJECT (data->resource), "focus_in_cost", cost);
 
 	return FALSE;
@@ -1221,14 +1200,10 @@ resource_dialog_cost_changed_cb (GtkWidget  *w,
 	const gchar *cost;
 	gfloat       fvalue;
 	GValue       value = { 0 };
-	gchar       *nptr = NULL;
 
 	cost = gtk_entry_get_text (GTK_ENTRY (w));
 
-	fvalue = g_strtod (cost, &nptr);
-	if (nptr == cost) {
-		return;
-	}
+	fvalue = planner_parse_float (cost);
 	
 	g_value_init (&value, G_TYPE_FLOAT);
 	g_value_set_float (&value, fvalue);
@@ -1265,6 +1240,7 @@ resource_dialog_notify_cost_cb (MrpResource *resource,
 					 dialog);
 
 	str = planner_format_float (cost, 2, FALSE);
+
 	gtk_entry_set_text (GTK_ENTRY (data->cost_entry), str);
 	g_free (str);
 

@@ -1061,7 +1061,7 @@ window_edit_phases_cb (GtkAction *action,
 
 static void
 window_help_cb (GtkAction *action, 
-		gpointer           data)
+		gpointer   data)
 {
 	GError    *error = NULL;
 	GtkWidget *dialog;
@@ -1085,9 +1085,9 @@ static void
 window_about_cb (GtkAction *action, 
 		 gpointer   data)
 {
-	GtkWidget *about;
-	GtkWidget *hbox;
-	GtkWidget *href;
+	static GtkWidget *about;
+	GtkWidget        *hbox;
+	GtkWidget        *href;
 
 	const gchar *authors[] = {
 		"Richard Hult <richard@imendio.com>",
@@ -1107,7 +1107,12 @@ window_about_cb (GtkAction *action,
 	 * are more than one, to appear in the about box.
 	 */
 	const gchar *translator_credits = N_("translator-credits");
-	
+
+	if (about) {
+		gtk_window_present (GTK_WINDOW (about));
+		return;
+	}
+
 	about = gnome_about_new ("Imendio Planner", VERSION,
 				 "", /*"Copyright \xc2\xa9"*/
 				 _("A Project Management application for the GNOME desktop"),
@@ -1115,6 +1120,15 @@ window_about_cb (GtkAction *action,
 				 documenters,
 				 strcmp (translator_credits, _("translator-credits")) != 0 ? _(translator_credits) : NULL,
 				 NULL);
+
+	gtk_window_set_transient_for (GTK_WINDOW (about),
+				      GTK_WINDOW (data));
+	
+	gtk_window_set_destroy_with_parent (GTK_WINDOW (about), TRUE);
+
+	g_signal_connect (about, "destroy",
+			  G_CALLBACK (gtk_widget_destroyed),
+			  &about);
 	
 	hbox = gtk_hbox_new (FALSE, 0);
 	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (about)->vbox), hbox, FALSE, FALSE, 0);

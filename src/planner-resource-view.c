@@ -1612,7 +1612,7 @@ resource_view_cell_cost_edited (GtkCellRendererText *cell,
 
 	gtk_tree_model_get (model, &iter, COL_RESOURCE, &resource, -1);
 	
-	fvalue = g_strtod (new_text, NULL);
+	fvalue = planner_parse_float (new_text);
 	g_value_init (&value, G_TYPE_FLOAT);
 	g_value_set_float (&value, fvalue);
 	cmd = resource_cmd_edit_property (view, resource, "cost", &value);
@@ -1784,7 +1784,7 @@ resource_view_custom_property_set_value (MrpProperty *property,
 
 		break;
 	case MRP_PROPERTY_TYPE_FLOAT:
-		fvalue = g_strtod (new_text, NULL);
+		fvalue = planner_parse_float (new_text);
 		g_value_init (&value, G_TYPE_FLOAT);
 		g_value_set_float (&value, fvalue);
 
@@ -1802,7 +1802,7 @@ resource_view_custom_property_set_value (MrpProperty *property,
 
 		break;
 	case MRP_PROPERTY_TYPE_COST:
-		fvalue = g_strtod (new_text, NULL);
+		fvalue = planner_parse_float (new_text);
 		g_value_init (&value, G_TYPE_FLOAT);
 		g_value_set_float (&value, fvalue);
 
@@ -2243,6 +2243,8 @@ resource_view_cost_data_func (GtkTreeViewColumn    *tree_column,
 
 	g_object_get (resource, "cost", &cost, NULL);
 	cost_text = planner_format_float (cost, 2, FALSE);
+	
+	g_print ("view: %f (%s)\n", cost, cost_text);
 	
 	g_object_set (cell, "text", cost_text, NULL);
 }
