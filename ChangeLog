@@ -1,3 +1,17 @@
+2004-05-10  Richard Hult  <richard@imendio.com>
+
+	* data/ui/Makefile.am: Dist all ui files unconditionally.
+
+	* data/glade/project-properties.glade:
+	* src/planner-phase-dialog.c: (phase_dialog_remove_phase),
+	(phase_dialog_new_dialog_run), (phase_cmd_insert_do),
+	(phase_cmd_insert_undo), (phase_cmd_insert_free),
+	(phase_cmd_insert), (phase_cmd_remove_do), (phase_cmd_remove_undo),
+
+	(phase_cmd_remove_free), (phase_cmd_remove): Commit patch from
+	Lincoln Phipps with modifications. Fixes bug #141177 and bug
+	#141184.
+
 2004-05-09 Alvaro del Castillo  <acs@barrapunto.com>
 
 	* src/planner-gantt-row.c: Task link undo with new GError system.

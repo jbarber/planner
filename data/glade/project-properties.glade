@@ -533,6 +533,7 @@
 	  <child>
 	    <widget class="GtkButton" id="remove_button">
 	      <property name="visible">True</property>
+	      <property name="sensitive">False</property>
 	      <property name="can_default">True</property>
 	      <property name="can_focus">True</property>
 	      <property name="label">gtk-remove</property>
@@ -543,7 +544,7 @@
 	  </child>
 
 	  <child>
-	    <widget class="GtkButton" id="button1">
+	    <widget class="GtkButton" id="add_button">
 	      <property name="visible">True</property>
 	      <property name="can_default">True</property>
 	      <property name="can_focus">True</property>
@@ -643,6 +644,7 @@
 	  <child>
 	    <widget class="GtkButton" id="ok_button">
 	      <property name="visible">True</property>
+	      <property name="sensitive">False</property>
 	      <property name="can_default">True</property>
 	      <property name="has_default">True</property>
 	      <property name="can_focus">True</property>
