@@ -1,19 +1,399 @@
 # Slovak translation of planner.pot
-# Copyright (C) 2003 Free Software Foundation, Inc.
-# Zdenko Podobný <zdpo@mailbox.sk>, 2003.
+# Copyright (C) 2003, 2004 Free Software Foundation, Inc.
+# Zdenko Podobný <zdpo@mailbox.sk>, 2003, 2004.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: planner.sk.po\n"
+"Project-Id-Version: planner.HEAD\n"
 "Report-Msgid-Bugs-To: Zdenko Podobný <zdpo@mailbox.sk>\n"
-"POT-Creation-Date: 2003-12-11 04:24+0100\n"
-"PO-Revision-Date: 2003-12-14 18:45+0100\n"
+"POT-Creation-Date: 2004-01-19 04:55+0100\n"
+"PO-Revision-Date: 2004-01-24 13:30+0100\n"
 "Last-Translator: Zdenko Podobný <zdpo@mailbox.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.2beta3\n"
+
+#: data/glade/add-predecessor.glade.h:1 data/glade/calendar-dialog.glade.h:4
+#: data/glade/html-output.glade.h:2 data/glade/new-property.glade.h:1
+#: data/glade/project-properties.glade.h:1
+#: data/glade/resource-dialog.glade.h:1
+#: data/glade/resource-input-dialog.glade.h:1 data/glade/sql.glade.h:1
+#: data/glade/task-dialog.glade.h:4 data/glade/task-input-dialog.glade.h:1
+msgid "*"
+msgstr "*"
+
+#: data/glade/add-predecessor.glade.h:2
+msgid "Add Predecessor"
+msgstr "Pridať predchodcu"
+
+#: data/glade/add-predecessor.glade.h:3
+msgid "_Lag:"
+msgstr "_Oneskorenie:"
+
+#: data/glade/add-predecessor.glade.h:4 data/glade/calendar-dialog.glade.h:35
+#: data/glade/new-property.glade.h:5 data/glade/project-properties.glade.h:10
+#: data/glade/resource-dialog.glade.h:11
+#: data/glade/resource-input-dialog.glade.h:6
+#: data/glade/task-dialog.glade.h:14 data/glade/task-input-dialog.glade.h:4
+msgid "_Name:"
+msgstr "_Názov:"
+
+#: data/glade/add-predecessor.glade.h:5
+msgid "_Relation type:"
+msgstr "_Typ vzťahu:"
+
+#: data/glade/calendar-dialog.glade.h:1
+msgid ""
+"\n"
+"The selected day type has the following working hours:"
+msgstr ""
+"\n"
+"Vybraný typ dní má nasledujúce pracovné hodiny:"
+
+#: data/glade/calendar-dialog.glade.h:3 data/glade/html-output.glade.h:1
+#: data/glade/task-dialog.glade.h:1
+msgid "    "
+msgstr "    "
+
+#: data/glade/calendar-dialog.glade.h:5
+msgid "-"
+msgstr "-"
+
+#: data/glade/calendar-dialog.glade.h:6
+msgid "<b>Calendar:</b>"
+msgstr "<b>Kalendár:</b>"
+
+#: data/glade/calendar-dialog.glade.h:7
+msgid "<b>Day types</b>"
+msgstr "<b>Typy dní</b>"
+
+#: data/glade/calendar-dialog.glade.h:8
+msgid "<b>Working hours</b>"
+msgstr "<b>Pracovné hodiny</b>"
+
+#: data/glade/calendar-dialog.glade.h:9
+msgid "<b>Working time</b>"
+msgstr "<b>Pracovná doba</b"
+
+#: data/glade/calendar-dialog.glade.h:10
+msgid "Add Day Type"
+msgstr "Pridať typ dňa"
+
+#: data/glade/calendar-dialog.glade.h:11
+msgid "Apply"
+msgstr "Použiť"
+
+#: data/glade/calendar-dialog.glade.h:12
+msgid "C_opy an existing calendar"
+msgstr "K_opírovať existujúci kalendár"
+
+#: data/glade/calendar-dialog.glade.h:13
+msgid "C_reate"
+msgstr "_Vytvoriť"
+
+#: data/glade/calendar-dialog.glade.h:14
+msgid "Calendar Editor"
+msgstr "Editor kalendára"
+
+#: data/glade/calendar-dialog.glade.h:15
+msgid "Create an _empty calendar"
+msgstr "Vytvoriť prázdny kalendár"
+
+#: data/glade/calendar-dialog.glade.h:16
+msgid "Custom working time"
+msgstr "Vlastná pracovná doba"
+
+#: data/glade/calendar-dialog.glade.h:17
+msgid "Day type:"
+msgstr "Typ dňa:"
+
+#: data/glade/calendar-dialog.glade.h:18
+msgid "Default Week"
+msgstr "Štandardný týždeň"
+
+#: data/glade/calendar-dialog.glade.h:19
+msgid "Default week..."
+msgstr "Štandardný týždeň..."
+
+#: data/glade/calendar-dialog.glade.h:20
+msgid "Edit Day Types"
+msgstr "Upraviť typy dní"
+
+#: data/glade/calendar-dialog.glade.h:21
+msgid "Edit Working Time"
+msgstr "Upraviť pracovný čas"
+
+#: data/glade/calendar-dialog.glade.h:22
+msgid "From:"
+msgstr "Od:"
+
+#: data/glade/calendar-dialog.glade.h:23
+msgid "New Calendar"
+msgstr "Nový Kalendár"
+
+#: data/glade/calendar-dialog.glade.h:24
+msgid "Select a Calendar"
+msgstr "Vyberte kalendár"
+
+#: data/glade/calendar-dialog.glade.h:25
+msgid ""
+"Select a weekday and the day type to use for that day in the default week "
+"for this calendar.\n"
+msgstr ""
+"Vyberte deň v týždni a typ dňa, ktorý použiť pre ten deň v štandardnom "
+"týždni pre tento kalendár.\n"
+
+#: data/glade/calendar-dialog.glade.h:27
+msgid "Set day type to:"
+msgstr "Nastaviť typ dňa na:"
+
+#: data/glade/calendar-dialog.glade.h:28
+msgid "To:"
+msgstr "Komu:"
+
+#: data/glade/calendar-dialog.glade.h:29
+msgid "Use working time from derived calendar"
+msgstr "Používať pracovnú dobu z odvodeného kalendára"
+
+#: data/glade/calendar-dialog.glade.h:30
+msgid "Week day:"
+msgstr "Deň v týždni:"
+
+#: data/glade/calendar-dialog.glade.h:31
+msgid "Working time..."
+msgstr "Pracovná doba..."
+
+#: data/glade/calendar-dialog.glade.h:32
+msgid "_Derive from a calendar"
+msgstr "_Odvodiť z kalendára"
+
+#: data/glade/calendar-dialog.glade.h:33
+msgid "_Existing calendars:"
+msgstr "_Existujúce kalendáre:"
+
+#: data/glade/calendar-dialog.glade.h:34
+msgid "_Name of the new calendar:"
+msgstr "_Názov nového kalendára:"
+
+#: data/glade/calendar-dialog.glade.h:36
+msgid "_New..."
+msgstr "_Nový..."
+
+#: data/glade/group-dialog.glade.h:1
+msgid "Group Editor"
+msgstr "Editor skupín"
+
+#: data/glade/html-output.glade.h:3
+msgid "<b>Save to</b>"
+msgstr "<b>Uložiť do</b>"
+
+#: data/glade/html-output.glade.h:4 data/ui/html-plugin.ui.h:1
+msgid "Export to HTML"
+msgstr "Export do HTML"
+
+#: data/glade/html-output.glade.h:5
+msgid "Local file:"
+msgstr "Miestny súbor:"
+
+#: data/glade/html-output.glade.h:6
+msgid "Save to HTML File"
+msgstr "Uložiť do HTML súbora"
+
+#: data/glade/html-output.glade.h:7
+msgid "Web location:"
+msgstr "Umiestnenie na webe:"
+
+#: data/glade/new-property.glade.h:2
+msgid "Add Property"
+msgstr "Pridat vlastnosť"
+
+#: data/glade/new-property.glade.h:3
+msgid "_Description:"
+msgstr "_Popis:"
+
+#: data/glade/new-property.glade.h:4
+msgid "_Label:"
+msgstr "_Menovka:"
+
+#: data/glade/new-property.glade.h:6 data/glade/resource-dialog.glade.h:12
+msgid "_Type:"
+msgstr "_Typ:"
+
+#: data/glade/project-properties.glade.h:2
+msgid "Custom"
+msgstr "Vlastný"
+
+#: data/glade/project-properties.glade.h:3
+msgid "Edit Project Phases"
+msgstr "Upraviť fázy projektu"
+
+#: data/glade/project-properties.glade.h:4
+#: data/glade/resource-dialog.glade.h:5 data/glade/task-dialog.glade.h:6
+msgid "General"
+msgstr "Všeobecné"
+
+#: data/glade/project-properties.glade.h:5
+msgid "New Project Phase"
+msgstr "Nová fáza projektu"
+
+#: data/glade/project-properties.glade.h:6
+msgid "Project Properties"
+msgstr "Nastavenia projektu"
+
+#: data/glade/project-properties.glade.h:7
+msgid "Select..."
+msgstr "Vybrať..."
+
+#: data/glade/project-properties.glade.h:8
+msgid "_Calendar:"
+msgstr "_Kalendár:"
+
+#: data/glade/project-properties.glade.h:9
+msgid "_Manager:"
+msgstr "_Manažér:"
+
+#: data/glade/project-properties.glade.h:11
+msgid "_Organization:"
+msgstr "_Organizácia:"
+
+#: data/glade/project-properties.glade.h:12
+msgid "_Phase:"
+msgstr "_Fáza:"
+
+#: data/glade/project-properties.glade.h:13
+msgid "_Start:"
+msgstr "_Začiatok:"
+
+#: data/glade/property-dialog.glade.h:1
+msgid "Custom Properties"
+msgstr "Vlastná vlasnosť"
+
+#: data/glade/resource-dialog.glade.h:2
+msgid "C_ost:"
+msgstr "Nák_lady"
+
+#: data/glade/resource-dialog.glade.h:3
+msgid "Calendar"
+msgstr "Kalendár"
+
+#: data/glade/resource-dialog.glade.h:4
+msgid "Edit Calendars..."
+msgstr "Upraviť kalendáre..."
+
+#: data/glade/resource-dialog.glade.h:6 data/glade/task-dialog.glade.h:7
+msgid "Notes"
+msgstr "Poznámky"
+
+#: data/glade/resource-dialog.glade.h:7
+msgid ""
+"Select the calendar to use for this resource. If you want to use the default "
+"calendar of the project, select 'None'. "
+msgstr ""
+"Vyberte kalendár, ktorý sa použije pre tento zdroj. Ak chcete použiť "
+"štandardný kalendár projektu, zvoľte 'Žiadny'."
+
+#: data/glade/resource-dialog.glade.h:8
+#: data/glade/resource-input-dialog.glade.h:3
+msgid "_Email:"
+msgstr "_E-Mail:"
+
+#: data/glade/resource-dialog.glade.h:9
+#: data/glade/resource-input-dialog.glade.h:4
+msgid "_Group:"
+msgstr "_Skupina:"
+
+#: data/glade/resource-dialog.glade.h:10
+msgid "_Insert time stamp"
+msgstr "Vlož_iť časovú pečiatku"
+
+#: data/glade/resource-input-dialog.glade.h:2
+msgid "Insert Resource"
+msgstr "Vložiť zdroj"
+
+#: data/glade/resource-input-dialog.glade.h:5
+#: data/glade/task-input-dialog.glade.h:3
+msgid "_Insert"
+msgstr "_Vložiť"
+
+#: data/glade/sql.glade.h:2
+msgid "Open Database"
+msgstr "Otvoriť databázu"
+
+#: data/glade/sql.glade.h:3
+msgid "Select a Project"
+msgstr "Vyberte projekt"
+
+#: data/glade/sql.glade.h:4
+msgid "The database contains the following projects. Select a project to open:"
+msgstr "Databáza obsahuje nasledujúce projekty. Vyberte projekt, ktorý sa má otvoriť:"
+
+#: data/glade/sql.glade.h:5
+msgid "_Database:"
+msgstr "_Databáza:"
+
+#: data/glade/sql.glade.h:6
+msgid "_Password:"
+msgstr "_Heslo:"
+
+#: data/glade/sql.glade.h:7
+msgid "_Server:"
+msgstr "_Server:"
+
+#: data/glade/sql.glade.h:8
+msgid "_Username:"
+msgstr "Meno po_užívateľa:"
+
+#: data/glade/task-dialog.glade.h:3
+#, no-c-format
+msgid "%"
+msgstr "%"
+
+#: data/glade/task-dialog.glade.h:5
+msgid "C_omplete:"
+msgstr "_Hotovo:"
+
+#: data/glade/task-dialog.glade.h:8
+msgid "Predecessors"
+msgstr "Predchodcovia"
+
+#: data/glade/task-dialog.glade.h:9 src/planner-resource-view.c:344
+msgid "Resources"
+msgstr "Zdroje"
+
+#: data/glade/task-dialog.glade.h:10
+msgid "_Duration:"
+msgstr "_Trvanie:"
+
+#: data/glade/task-dialog.glade.h:11
+msgid "_Fixed duration"
+msgstr "_Fixné trvanie"
+
+#: data/glade/task-dialog.glade.h:12
+msgid "_Insert Time Stamp"
+msgstr "Vlož_iť časovú pečiatku"
+
+#: data/glade/task-dialog.glade.h:13
+msgid "_Milestone"
+msgstr "_Míľnik"
+
+#: data/glade/task-dialog.glade.h:15
+msgid "_Priority:"
+msgstr "_Priorita:"
+
+#: data/glade/task-dialog.glade.h:16 data/glade/task-input-dialog.glade.h:5
+msgid "_Work:"
+msgstr "_Práca:"
+
+#. day unit variant accepted in input
+#: data/glade/task-dialog.glade.h:17 src/planner-task-tree.c:2429
+msgid "days"
+msgstr "dní"
+
+#: data/glade/task-input-dialog.glade.h:2
+msgid "Insert Task"
+msgstr "Vložiť úlohu"
 
 #: data/planner.desktop.in.h:1
 msgid "Planner Project Management"
@@ -23,9 +403,128 @@ msgstr "Planer - správca projektov"
 msgid "Project Management"
 msgstr "Správca projektov"
 
-#: libegg/recent-files/egg-recent-vfs-utils.c:90
-msgid " (invalid Unicode)"
-msgstr " (neplatný Unicode kód)"
+#: data/ui/gantt-view.ui.h:1 data/ui/task-view.ui.h:1
+msgid "I_ndent Task"
+msgstr "_Odsadiť úlohu"
+
+#: data/ui/gantt-view.ui.h:2 data/ui/task-view.ui.h:2
+msgid "In_sert Tasks..."
+msgstr "_Vložiť úlohy..."
+
+#: data/ui/gantt-view.ui.h:3 data/ui/task-view.ui.h:3
+#: src/planner-application.c:76
+msgid "Indent"
+msgstr "Odsadenie"
+
+#: data/ui/gantt-view.ui.h:4 data/ui/resource-view.ui.h:5
+#: data/ui/task-view.ui.h:4 src/planner-application.c:55
+#: src/planner-application.c:104
+msgid "Insert"
+msgstr "Vložiť"
+
+#: data/ui/gantt-view.ui.h:5 data/ui/task-view.ui.h:5
+msgid "Move Task Do_wn"
+msgstr "Posunúť úlohu _dole"
+
+#: data/ui/gantt-view.ui.h:6 data/ui/task-view.ui.h:6
+msgid "Move Task _Up"
+msgstr "Posu_núť úlohu hore"
+
+#: data/ui/gantt-view.ui.h:7 data/ui/task-view.ui.h:7
+#: src/planner-application.c:97
+msgid "Move down"
+msgstr "Posunúť nadol"
+
+#: data/ui/gantt-view.ui.h:8 data/ui/task-view.ui.h:8
+#: src/planner-application.c:90
+msgid "Move up"
+msgstr "Posunúť nahor"
+
+#: data/ui/gantt-view.ui.h:9 data/ui/resource-view.ui.h:6
+#: data/ui/task-view.ui.h:9 src/planner-application.c:62
+#: src/planner-application.c:111
+msgid "Remove"
+msgstr "Odstrániť"
+
+#: data/ui/gantt-view.ui.h:10 data/ui/task-view.ui.h:10
+msgid "Reset _All Constraints"
+msgstr "Odstrániť _všetky obmedzenia"
+
+#: data/ui/gantt-view.ui.h:11 data/ui/task-view.ui.h:11
+msgid "Reset _Constraint"
+msgstr "Odstrániť obmedzenia"
+
+#: data/ui/gantt-view.ui.h:12 data/ui/resource-view.ui.h:7
+#: data/ui/task-view.ui.h:12
+msgid "Select _All"
+msgstr "Vybrať _všetko"
+
+#: data/ui/gantt-view.ui.h:13 data/ui/resource-view.ui.h:8
+#: data/ui/task-view.ui.h:13
+msgid "Select all tasks"
+msgstr "Zvoliť všetky úlohy"
+
+#: data/ui/gantt-view.ui.h:14
+msgid "Test"
+msgstr "Test"
+
+#: data/ui/gantt-view.ui.h:15 data/ui/task-view.ui.h:14
+msgid "Un_link Task"
+msgstr "Od_pojiť úlohu"
+
+#: data/ui/gantt-view.ui.h:16 data/ui/task-view.ui.h:15
+msgid "Unin_dent Task"
+msgstr "Zrušiť od_sadenie úlohy"
+
+#: data/ui/gantt-view.ui.h:17 data/ui/task-view.ui.h:16
+#: src/planner-application.c:83
+msgid "Unindent"
+msgstr "Zrušiť odsadenie"
+
+#: data/ui/gantt-view.ui.h:18 data/ui/task-view.ui.h:17
+#: src/planner-application.c:69
+msgid "Unlink"
+msgstr "Zrušiť spojenie"
+
+#: data/ui/gantt-view.ui.h:19
+msgid "Zoom In"
+msgstr "Zväčšiť"
+
+#: data/ui/gantt-view.ui.h:20
+msgid "Zoom Out"
+msgstr "Zmenšiť"
+
+#: data/ui/gantt-view.ui.h:21
+msgid "Zoom To Fit"
+msgstr "Na veľkosť do okna"
+
+#: data/ui/gantt-view.ui.h:22
+msgid "Zoom To _Fit"
+msgstr "Na veľkosť do _okna"
+
+#: data/ui/gantt-view.ui.h:23
+msgid "Zoom _Out"
+msgstr "Z_menšiť"
+
+#: data/ui/gantt-view.ui.h:24 data/ui/task-view.ui.h:19
+msgid "_Edit Task Properties..."
+msgstr "Upraviť vlastnosti úlohy..."
+
+#: data/ui/gantt-view.ui.h:25 data/ui/task-view.ui.h:20
+msgid "_Highlight Critical Tasks"
+msgstr "_Zvýrazniť kritické úlohy"
+
+#: data/ui/gantt-view.ui.h:26 data/ui/task-view.ui.h:21
+msgid "_Insert Task"
+msgstr "_Vložiť úlohu"
+
+#: data/ui/gantt-view.ui.h:27 data/ui/task-view.ui.h:22
+msgid "_Remove Task"
+msgstr "_Odstrániť úlohu"
+
+#: data/ui/gantt-view.ui.h:28
+msgid "_Zoom In"
+msgstr "Z_väčšiť"
 
 #: data/ui/main-window.ui.h:1
 msgid "About this application"
@@ -199,15 +698,15 @@ msgstr "_Projekt"
 msgid "_Quit"
 msgstr "_Koniec"
 
-#: data/ui/main-window.ui.h:44
+#: data/ui/main-window.ui.h:44 src/planner-cmd-manager.c:240
 msgid "_Redo"
 msgstr "_Opakovať vrátené"
 
-#: data/ui/main-window.ui.h:45 src/planner-main-window.c:1174
+#: data/ui/main-window.ui.h:45 src/planner-window.c:1259
 msgid "_Save"
 msgstr "_Uložiť"
 
-#: data/ui/main-window.ui.h:46
+#: data/ui/main-window.ui.h:46 src/planner-cmd-manager.c:228
 msgid "_Undo"
 msgstr "_Späť"
 
@@ -218,145 +717,6 @@ msgstr "_Sprievodca používateľa"
 #: data/ui/main-window.ui.h:48
 msgid "_View"
 msgstr "_Zobraziť"
-
-#: data/ui/gantt-view.ui.h:1 data/ui/task-view.ui.h:1
-msgid "I_ndent Task"
-msgstr "_Odsadiť úlohu"
-
-#: data/ui/gantt-view.ui.h:2 data/ui/task-view.ui.h:2
-msgid "In_sert Tasks..."
-msgstr "_Vložiť úlohy..."
-
-#: data/ui/gantt-view.ui.h:3 data/ui/task-view.ui.h:3
-#: src/planner-application.c:76
-msgid "Indent"
-msgstr "Odsadenie"
-
-#: data/ui/gantt-view.ui.h:4 data/ui/task-view.ui.h:4
-#: data/ui/resource-view.ui.h:5 src/planner-application.c:55
-#: src/planner-application.c:104
-msgid "Insert"
-msgstr "Vložiť"
-
-#: data/ui/gantt-view.ui.h:5 data/ui/task-view.ui.h:5
-msgid "Move Task Do_wn"
-msgstr "Posunúť úlohu _dole"
-
-#: data/ui/gantt-view.ui.h:6 data/ui/task-view.ui.h:6
-msgid "Move Task _Up"
-msgstr "Posu_núť úlohu hore"
-
-#: data/ui/gantt-view.ui.h:7 data/ui/task-view.ui.h:7
-#: src/planner-application.c:97
-msgid "Move down"
-msgstr "Posunúť nadol"
-
-#: data/ui/gantt-view.ui.h:8 data/ui/task-view.ui.h:8
-#: src/planner-application.c:90
-msgid "Move up"
-msgstr "Posunúť nahor"
-
-#: data/ui/gantt-view.ui.h:9 data/ui/task-view.ui.h:9
-#: data/ui/resource-view.ui.h:6 src/planner-application.c:62
-#: src/planner-application.c:111
-msgid "Remove"
-msgstr "Odstrániť"
-
-#: data/ui/gantt-view.ui.h:10 data/ui/task-view.ui.h:10
-msgid "Reset _All Constraints"
-msgstr "Odstrániť _všetky obmedzenia"
-
-#: data/ui/gantt-view.ui.h:11 data/ui/task-view.ui.h:11
-msgid "Reset _Constraint"
-msgstr "Odstrániť obmedzenia"
-
-#: data/ui/gantt-view.ui.h:12 data/ui/task-view.ui.h:12
-#: data/ui/resource-view.ui.h:7
-msgid "Select _All"
-msgstr "Vybrať _všetko"
-
-#: data/ui/gantt-view.ui.h:13 data/ui/task-view.ui.h:13
-#: data/ui/resource-view.ui.h:8
-msgid "Select all tasks"
-msgstr "Zvoliť všetky úlohy"
-
-#: data/ui/gantt-view.ui.h:14
-msgid "Test"
-msgstr "Test"
-
-#: data/ui/gantt-view.ui.h:15 data/ui/task-view.ui.h:14
-msgid "Un_link Task"
-msgstr "Od_pojiť úlohu"
-
-#: data/ui/gantt-view.ui.h:16 data/ui/task-view.ui.h:15
-msgid "Unin_dent Task"
-msgstr "Zrušiť od_sadenie úlohy"
-
-#: data/ui/gantt-view.ui.h:17 data/ui/task-view.ui.h:16
-#: src/planner-application.c:83
-msgid "Unindent"
-msgstr "Zrušiť odsadenie"
-
-#: data/ui/gantt-view.ui.h:18 data/ui/task-view.ui.h:17
-#: src/planner-application.c:69
-msgid "Unlink"
-msgstr "Zrušiť spojenie"
-
-#: data/ui/gantt-view.ui.h:19
-msgid "Zoom In"
-msgstr "Zväčšiť"
-
-#: data/ui/gantt-view.ui.h:20
-msgid "Zoom Out"
-msgstr "Zmenšiť"
-
-#: data/ui/gantt-view.ui.h:21
-msgid "Zoom To Fit"
-msgstr "Na veľkosť do okna"
-
-#: data/ui/gantt-view.ui.h:22
-msgid "Zoom To _Fit"
-msgstr "Na veľkosť do _okna"
-
-#: data/ui/gantt-view.ui.h:23
-msgid "Zoom _Out"
-msgstr "Z_menšiť"
-
-#: data/ui/gantt-view.ui.h:24 data/ui/task-view.ui.h:19
-msgid "_Edit Task Properties..."
-msgstr "Upraviť vlastnosti úlohy..."
-
-#: data/ui/gantt-view.ui.h:25
-msgid "_Highlight Critical Tasks"
-msgstr "_Zvýrazniť kritické úlohy"
-
-#: data/ui/gantt-view.ui.h:26 data/ui/task-view.ui.h:20
-msgid "_Insert Task"
-msgstr "_Vložiť úlohu"
-
-#: data/ui/gantt-view.ui.h:27 data/ui/task-view.ui.h:21
-msgid "_Remove Task"
-msgstr "_Odstrániť úlohu"
-
-#: data/ui/gantt-view.ui.h:28
-msgid "_Zoom In"
-msgstr "Z_väčšiť"
-
-#: data/ui/task-view.ui.h:18
-msgid "_Edit Custom Properties..."
-msgstr "Upraviť _vlastné vlastnosti..."
-
-#: data/ui/html-plugin.ui.h:1 data/glade/html-output.glade.h:4
-msgid "Export to HTML"
-msgstr "Export do HTML"
-
-#: data/ui/sql-plugin.ui.h:1
-msgid "Open from Database..."
-msgstr "Otvoriť z databázy..."
-
-#: data/ui/sql-plugin.ui.h:2
-msgid "Save to Database..."
-msgstr "Uložiť do databázy..."
 
 #: data/ui/resource-view.ui.h:1
 msgid "Edit _Custom Properties..."
@@ -386,504 +746,21 @@ msgstr "_Vložiť zdroj"
 msgid "_Remove Resource"
 msgstr "_Odstrániť zdroj"
 
-#: data/glade/add-predecessor.glade.h:1 data/glade/calendar-dialog.glade.h:4
-#: data/glade/html-output.glade.h:2 data/glade/new-property.glade.h:1
-#: data/glade/project-properties.glade.h:1
-#: data/glade/resource-dialog.glade.h:1
-#: data/glade/resource-input-dialog.glade.h:1 data/glade/sql.glade.h:2
-#: data/glade/task-dialog.glade.h:4 data/glade/task-input-dialog.glade.h:1
-msgid "*"
-msgstr "*"
-
-#: data/glade/add-predecessor.glade.h:2
-msgid "Lag: "
-msgstr "Oneskorenie:"
-
-#: data/glade/add-predecessor.glade.h:3
-msgid "New predecessor"
-msgstr "Nový predchodca"
-
-#: data/glade/add-predecessor.glade.h:4
-msgid "Predecessor: "
-msgstr "Predchodca: "
-
-#: data/glade/add-predecessor.glade.h:5
-msgid "Relation type: "
-msgstr "Typ vzťahu"
-
-#: data/glade/calendar-dialog.glade.h:1
-msgid ""
-"\n"
-"The selected day type has the following working hours:"
-msgstr ""
-"\n"
-"Vybraný typ dní má nasledujúce pracovné hodiny:"
-
-#: data/glade/calendar-dialog.glade.h:3 data/glade/html-output.glade.h:1
-#: data/glade/sql.glade.h:1 data/glade/task-dialog.glade.h:1
-msgid "    "
-msgstr "    "
-
-#: data/glade/calendar-dialog.glade.h:5
-msgid "-"
-msgstr "-"
-
-#: data/glade/calendar-dialog.glade.h:6
-msgid "<b>Calendar:</b>"
-msgstr "<b>Kalendár:</b>"
-
-#: data/glade/calendar-dialog.glade.h:7
-msgid "<b>Day types</b>"
-msgstr "<b>Typy dní</b>"
-
-#: data/glade/calendar-dialog.glade.h:8
-msgid "<b>Working hours</b>"
-msgstr "<b>Pracovné hodiny</b>"
-
-#: data/glade/calendar-dialog.glade.h:9
-msgid "<b>Working time</b>"
-msgstr "<b>Pracovná doba</b"
-
-#: data/glade/calendar-dialog.glade.h:10
-msgid "Apply"
-msgstr "Použiť"
-
-#: data/glade/calendar-dialog.glade.h:11
-msgid "C_opy an existing calendar"
-msgstr "K_opírovať existujúci kalendár"
-
-#: data/glade/calendar-dialog.glade.h:12
-msgid "C_reate"
-msgstr "_Vytvoriť"
-
-#: data/glade/calendar-dialog.glade.h:13
-msgid "Calendar Editor"
-msgstr "Editor kalendára"
-
-#: data/glade/calendar-dialog.glade.h:14
-msgid "Create an _empty calendar"
-msgstr "Vytvoriť prázdny kalendár"
-
-#: data/glade/calendar-dialog.glade.h:15
-msgid "Custom working time"
-msgstr "Vlastná pracovná doba"
-
-#: data/glade/calendar-dialog.glade.h:16
-msgid "Day type:"
-msgstr "Typ dňa:"
-
-#: data/glade/calendar-dialog.glade.h:17
-msgid "Default Week"
-msgstr "Štandardný týždeň"
-
-#: data/glade/calendar-dialog.glade.h:18
-msgid "Default week..."
-msgstr "Štandardný týždeň..."
-
-#: data/glade/calendar-dialog.glade.h:19
-msgid "Edit Day Types"
-msgstr "Upraviť typy dní"
-
-#: data/glade/calendar-dialog.glade.h:20
-msgid "Edit Working Time"
-msgstr "Upraviť pracovný čas"
-
-#: data/glade/calendar-dialog.glade.h:21
-msgid "Enter the name of the new day type:"
-msgstr "Zadajte názov nového typu dní:"
-
-#: data/glade/calendar-dialog.glade.h:22
-msgid "Existing calendars:"
-msgstr "Existujúce kalendáre:"
-
-#: data/glade/calendar-dialog.glade.h:23
-msgid "From:"
-msgstr "Od:"
-
-#: data/glade/calendar-dialog.glade.h:24
-msgid "MrProject Team"
-msgstr "MrProject tým"
-
-#: data/glade/calendar-dialog.glade.h:25
-msgid "New Calendar"
-msgstr "Nový Kalendár"
-
-#: data/glade/calendar-dialog.glade.h:26
-msgid "New Day Type"
-msgstr "Nový typ dní"
-
-#: data/glade/calendar-dialog.glade.h:27
-msgid "Select a calendar"
-msgstr "Vyberte kalendár"
-
-#: data/glade/calendar-dialog.glade.h:28
-msgid ""
-"Select a weekday and the day type to use for that day in the default week "
-"for this calendar.\n"
-msgstr ""
-"Vyberte deň v týždni a typ dňa, ktorý použiť pre ten deň v štandardnom "
-"týždni pre tento kalendár.\n"
-
-#: data/glade/calendar-dialog.glade.h:30
-msgid "Set day type to:"
-msgstr "Nastaviť typ dňa na:"
-
-#: data/glade/calendar-dialog.glade.h:31
-msgid "To:"
-msgstr "Komu:"
-
-#: data/glade/calendar-dialog.glade.h:32
-msgid "Use working time from derived calendar"
-msgstr "Používať pracovnú dobu z odvodeného kalendára"
-
-#: data/glade/calendar-dialog.glade.h:33
-msgid "Week day:"
-msgstr "Deň v týždni:"
-
-#: data/glade/calendar-dialog.glade.h:34
-msgid "Working time..."
-msgstr "Pracovná doba..."
-
-#: data/glade/calendar-dialog.glade.h:35
-msgid "_Derive from a calendar"
-msgstr "_Odvodiť z kalendára"
-
-#: data/glade/calendar-dialog.glade.h:36
-msgid "_Name of the new calendar:"
-msgstr "_Názov nového kalendára:"
-
-#: data/glade/calendar-dialog.glade.h:37
-msgid "_New..."
-msgstr "_Nový..."
-
-#: data/glade/group-dialog.glade.h:1
-msgid "Group Editor"
-msgstr "Editor skupín"
-
-#: data/glade/html-output.glade.h:3
-msgid "<b>Save to</b>"
-msgstr "<b>Uložiť do</b>"
-
-#: data/glade/html-output.glade.h:5
-msgid "Local file"
-msgstr "Miestny súbor"
-
-#: data/glade/html-output.glade.h:6
-msgid "Save to HTML File"
-msgstr "Uložiť do HTML súbora"
-
-#: data/glade/html-output.glade.h:7
-msgid "Web location"
-msgstr "Umiestnenie na webe"
-
-#: data/glade/new-property.glade.h:2
-msgid "Description: "
-msgstr "Popis:"
-
-#: data/glade/new-property.glade.h:3
-msgid "Label: "
-msgstr "Menovka: "
-
-#: data/glade/new-property.glade.h:4
-msgid "Name: "
-msgstr "Názov: "
-
-#: data/glade/new-property.glade.h:5
-msgid "New Property"
-msgstr "Nová vlastnosť"
-
-#: data/glade/new-property.glade.h:6
-msgid "Type: "
-msgstr "Typ: "
-
-#: data/glade/project-properties.glade.h:2
-msgid "<b>Project phases</b>"
-msgstr "<b>Fázy projektu</b>"
-
-#: data/glade/project-properties.glade.h:3
-msgid "Calendar:"
-msgstr "Kalendár"
-
-#: data/glade/project-properties.glade.h:4
-msgid "Custom properties"
-msgstr "Vlastné vlastnosti"
-
-#: data/glade/project-properties.glade.h:5
-msgid "Edit Project phases"
-msgstr "Upraviť fázy projektu"
-
-#: data/glade/project-properties.glade.h:6
-msgid "Enter the name of the new project phase:"
-msgstr "Vložte názov novej fázy projektu:"
-
-#: data/glade/project-properties.glade.h:7
-#: data/glade/resource-dialog.glade.h:5 data/glade/task-dialog.glade.h:6
-msgid "General"
-msgstr "Všeobecné"
-
-#: data/glade/project-properties.glade.h:8
-msgid "New Project Phase"
-msgstr "Nová fáza projektu"
-
-#: data/glade/project-properties.glade.h:9
-msgid "Project _name:"
-msgstr "_Názov projektu:"
-
-#: data/glade/project-properties.glade.h:10
-msgid "Project _start:"
-msgstr "_Začiatok projektu"
-
-#: data/glade/project-properties.glade.h:11
-msgid "Project phase:"
-msgstr "Fáza projektu:"
-
-#: data/glade/project-properties.glade.h:12
-msgid "Project properties"
-msgstr "Vlastnosti projektu"
-
-#: data/glade/project-properties.glade.h:13
-msgid "Select..."
-msgstr "Vybrať..."
-
-#: data/glade/project-properties.glade.h:14
-msgid "_Manager:"
-msgstr "_Manažér:"
-
-#: data/glade/project-properties.glade.h:15
-msgid "_Organization:"
-msgstr "_Organizácia:"
-
-#: data/glade/property-dialog.glade.h:1
-msgid "Custom Properties"
-msgstr "Vlastná vlasnosť"
-
-#: data/glade/resource-dialog.glade.h:2
-msgid "C_ost:"
-msgstr "Nák_lady"
-
-#: data/glade/resource-dialog.glade.h:3
-msgid "Calendar"
-msgstr "Kalendár"
-
-#: data/glade/resource-dialog.glade.h:4
-msgid "Edit calendars..."
-msgstr "Upraviť kalendáre..."
-
-#: data/glade/resource-dialog.glade.h:6 data/glade/task-dialog.glade.h:7
-msgid "Insert time stamp"
-msgstr "Vložiť časovú pečiatku"
-
-#: data/glade/resource-dialog.glade.h:7 data/glade/task-dialog.glade.h:9
-msgid "Notes"
-msgstr "Poznámky"
-
-#: data/glade/resource-dialog.glade.h:8
-msgid ""
-"Select the calendar to use for this resource. If you want to use the default "
-"calendar of the project, select 'None'. "
-msgstr ""
-"Vyberte kalendár, ktorý sa použije pre tento zdroj. Ak chcete použiť "
-"štandardný kalendár projektu, zvoľte 'Žiadny'."
-
-#: data/glade/resource-dialog.glade.h:9
-msgid "_Email:"
-msgstr "_E-Mail:"
-
-#: data/glade/resource-dialog.glade.h:10
-msgid "_Group:"
-msgstr "_Skupina:"
-
-#: data/glade/resource-dialog.glade.h:11
-msgid "_Name:"
-msgstr "_Názov:"
-
-#: data/glade/resource-dialog.glade.h:12
-msgid "_Type:"
-msgstr "_Typ:"
-
-#: data/glade/resource-input-dialog.glade.h:2
-msgid "Email:"
-msgstr "E-mail:"
-
-#: data/glade/resource-input-dialog.glade.h:3
-msgid "Group:"
-msgstr "Skupina:"
-
-#: data/glade/resource-input-dialog.glade.h:4
-msgid "Insert resource"
-msgstr "Vložiť zdroj"
-
-#: data/glade/resource-input-dialog.glade.h:5
-#: data/glade/task-input-dialog.glade.h:3
-msgid "Name:"
-msgstr "Názov:"
-
-#: data/glade/resource-input-dialog.glade.h:6
-#: data/glade/task-input-dialog.glade.h:5
-msgid "_Insert"
-msgstr "_Vložiť"
-
-#: data/glade/sql.glade.h:3
-msgid "<b>Open Database</b>"
-msgstr "<b>Otvoriť databázu</b>"
-
-#: data/glade/sql.glade.h:4
-msgid "Database:"
-msgstr "Databáza:"
-
-#: data/glade/sql.glade.h:5
-msgid "Open Database"
-msgstr "Otvoriť databázu"
-
-#: data/glade/sql.glade.h:6
-msgid "Password:"
-msgstr "Heslo:"
-
-#: data/glade/sql.glade.h:7
-msgid "Select a Project"
-msgstr "Vyberte projekt"
-
-#: data/glade/sql.glade.h:8
-msgid "Server:"
-msgstr "Server:"
-
-#: data/glade/sql.glade.h:9
-msgid "The database contains the following projects. Select a project to open:"
-msgstr "Databáza obsahuje nasledujúce projekty. Vyberte projekt, ktorý sa má otvoriť:"
-
-#: data/glade/sql.glade.h:10
-msgid "Username:"
-msgstr "Používateľské meno:"
-
-#: data/glade/task-dialog.glade.h:3
-#, no-c-format
-msgid "%"
-msgstr "%"
-
-#: data/glade/task-dialog.glade.h:5
-msgid "C_omplete:"
-msgstr "_Hotovo:"
-
-#: data/glade/task-dialog.glade.h:8
-msgid "Na_me:"
-msgstr "Ná_zov:"
-
-#: data/glade/task-dialog.glade.h:10
-msgid "Pr_iority:"
-msgstr "Pr_iorita:"
-
-#: data/glade/task-dialog.glade.h:11
-msgid "Predecessors"
-msgstr "Predchodcovia"
-
-#: data/glade/task-dialog.glade.h:12 src/planner-resource-view.c:342
-msgid "Resources"
-msgstr "Zdroje"
-
-#: data/glade/task-dialog.glade.h:13
-msgid "_Duration:"
-msgstr "_Trvanie:"
-
-#: data/glade/task-dialog.glade.h:14
-msgid "_Fixed duration"
-msgstr "_Fixné trvanie"
-
-#: data/glade/task-dialog.glade.h:15
-msgid "_Milestone"
-msgstr "_Míľnik"
-
-#: data/glade/task-dialog.glade.h:16
-msgid "_Work:"
-msgstr "_Práca:"
-
-#. day unit variant accepted in input
-#: data/glade/task-dialog.glade.h:17 src/planner-task-tree.c:2120
-msgid "days"
-msgstr "dní"
-
-#: data/glade/task-input-dialog.glade.h:2
-msgid "Insert task"
-msgstr "Vložiť úlohu"
-
-#: data/glade/task-input-dialog.glade.h:4
-msgid "Work:"
-msgstr "Práca:"
-
-#: libplanner/mrp-project.c:441 src/planner-group-dialog.c:411
-msgid "Default"
-msgstr "Štandard"
-
-#: libplanner/mrp-project.c:749
-#, c-format
-msgid "Couldn't find a suitable file module for loading '%s'"
-msgstr "Nie je možné nájsť vhodný modul súborov pre načítanie '%s'"
-
-#: libplanner/mrp-project.c:770 libplanner/mrp-project.c:1034
-msgid "No support for SQL storage built into this version of MrProject."
-msgstr "V tejto verzií MrProject nie je zabudovaná podpora pre ukladanie do SQL."
-
-#: libplanner/mrp-project.c:807
-msgid "Invalid URI."
-msgstr "Neplatné URI."
-
-#: libplanner/mrp-project.c:928
-#, c-format
-msgid "Unable to find file writer identified by '%s'"
-msgstr "Nie je možné nájsť zapisovač súborov identifikovaný '%s'"
-
-#: libplanner/mrp-project.c:991
-msgid "Couldn't find a suitable file module for loading project"
-msgstr "Nie je možné nájsť vhodný modul súborov pre načítanie projektu"
-
-#: libplanner/mrp-property.c:365
-msgid "Text"
-msgstr "Text"
-
-#: libplanner/mrp-property.c:367
-msgid "String list"
-msgstr "Zoznam reťazcov"
-
-#: libplanner/mrp-property.c:369
-msgid "Integer number"
-msgstr "Celé číslo"
-
-#: libplanner/mrp-property.c:371
-msgid "Floating-point number"
-msgstr "Číslo s pohyblivou desatinnou čiarkou"
-
-#: libplanner/mrp-property.c:373
-msgid "Date"
-msgstr "Dátum"
-
-#: libplanner/mrp-property.c:375
-msgid "Duration"
-msgstr "Trvanie"
-
-#: libplanner/mrp-property.c:377 src/planner-task-view.c:232
-msgid "Cost"
-msgstr "Náklady"
-
-#: libplanner/mrp-property.c:380 src/planner-project-properties.c:505
-msgid "None"
-msgstr "Žiadne"
-
-#: libplanner/mrp-task-manager.c:1769
-msgid "Can not add a predecessor relation between a task and its ancestor."
-msgstr "Nie je možné pridať predchodcu medzi úlohu a jej predchodcu."
-
-#: libplanner/mrp-task-manager.c:1778 libplanner/mrp-task-manager.c:1786
-msgid "Can not add a predecessor, because it would result in a loop."
-msgstr "Nie je možné pridať predchodcu, pretože by tak vznikla slučka."
-
-#: libplanner/mrp-task-manager.c:1821
-msgid "Can not move the task, since it would result in a loop."
-msgstr "Nie je možné presunúť úlohu, pretože by tak vznikla slučka."
-
-#: libplanner/mrp-task.c:1016
-msgid "Could not add a predecessor relation, because the tasks are already related."
-msgstr ""
-"Nie je možné pridať vzťah predchodcu, pretože medzi úlohami už existuje "
-"vzťah."
+#: data/ui/sql-plugin.ui.h:1
+msgid "Open from Database..."
+msgstr "Otvoriť z databázy..."
+
+#: data/ui/sql-plugin.ui.h:2
+msgid "Save to Database..."
+msgstr "Uložiť do databázy..."
+
+#: data/ui/task-view.ui.h:18
+msgid "_Edit Custom Properties..."
+msgstr "Upraviť _vlastné vlastnosti..."
+
+#: libegg/recent-files/egg-recent-vfs-utils.c:90
+msgid " (invalid Unicode)"
+msgstr " (neplatný Unicode kód)"
 
 #: libplanner/mrp-day.c:54
 msgid "Working"
@@ -917,21 +794,75 @@ msgstr "Nie je možné vytvoriť XML strom"
 msgid "Could not write XML file"
 msgstr "Nie je možné zapísať XML súbor"
 
+#: libplanner/mrp-project.c:442 src/planner-group-dialog.c:411
+msgid "Default"
+msgstr "Štandard"
+
+#: libplanner/mrp-project.c:750
+#, c-format
+msgid "Couldn't find a suitable file module for loading '%s'"
+msgstr "Nie je možné nájsť vhodný modul súborov pre načítanie '%s'"
+
+#: libplanner/mrp-project.c:771 libplanner/mrp-project.c:1035
+msgid "No support for SQL storage built into this version of Planner."
+msgstr "V tejto verzii Plannera nie je zabudovaná podpora pre ukladanie do SQL."
+
+#: libplanner/mrp-project.c:808
+msgid "Invalid URI."
+msgstr "Neplatné URI."
+
+#: libplanner/mrp-project.c:929
+#, c-format
+msgid "Unable to find file writer identified by '%s'"
+msgstr "Nie je možné nájsť zapisovač súborov identifikovaný '%s'"
+
+#: libplanner/mrp-project.c:992
+msgid "Couldn't find a suitable file module for loading project"
+msgstr "Nie je možné nájsť vhodný modul súborov pre načítanie projektu"
+
+#: libplanner/mrp-property.c:365
+msgid "Text"
+msgstr "Text"
+
+#: libplanner/mrp-property.c:367
+msgid "String list"
+msgstr "Zoznam reťazcov"
+
+#: libplanner/mrp-property.c:369
+msgid "Integer number"
+msgstr "Celé číslo"
+
+#: libplanner/mrp-property.c:371
+msgid "Floating-point number"
+msgstr "Číslo s pohyblivou desatinnou čiarkou"
+
+#: libplanner/mrp-property.c:373
+msgid "Date"
+msgstr "Dátum"
+
+#: libplanner/mrp-property.c:375
+msgid "Duration"
+msgstr "Trvanie"
+
+#: libplanner/mrp-property.c:377 src/planner-task-view.c:266
+msgid "Cost"
+msgstr "Náklady"
+
+#: libplanner/mrp-property.c:380 src/planner-project-properties.c:655
+msgid "None"
+msgstr "Žiadne"
+
 #. Give up.
-#: libplanner/mrp-sql.c:229 src/planner-sql-plugin.c:131
+#: libplanner/mrp-sql.c:345 src/planner-sql-plugin.c:171
 msgid "Invalid Unicode"
 msgstr "Neplatné Unicode"
 
-#: libplanner/mrp-sql.c:2205
+#: libplanner/mrp-sql.c:2201
 #, c-format
-msgid ""
-"The project '%s' has been changed by the user '%s' since you opened it. Do "
-"you want to save anyway?"
-msgstr ""
-"Projekt '%s' bol zmenený používateľom '%s' potom, čo ste ho otvorili. Chcete "
-"ho aj tak uložiť?"
+msgid "Connection to database '%s' failed.\n"
+msgstr "Pripojenie k databáze '%s' zlyhalo.\n"
 
-#: libplanner/mrp-sql.c:3443
+#: libplanner/mrp-sql.c:2206 libplanner/mrp-sql.c:3643
 #, c-format
 msgid ""
 "Connection to database '%s' failed.\n"
@@ -939,6 +870,20 @@ msgid ""
 msgstr ""
 "Pripojenie k databáze '%s' zlyhalo.\n"
 "%s"
+
+#: libplanner/mrp-sql.c:2214
+#, c-format
+msgid "BEGIN command failed %s."
+msgstr "Príkaz BEGIN zlyhal %s."
+
+#: libplanner/mrp-sql.c:2380
+#, c-format
+msgid ""
+"The project '%s' has been changed by the user '%s' since you opened it. Do "
+"you want to save anyway?"
+msgstr ""
+"Projekt '%s' bol zmenený používateľom '%s' potom, čo ste ho otvorili. Chcete "
+"ho aj tak uložiť?"
 
 #: libplanner/mrp-storage-sql.c:205
 msgid "Invalid SQL URI (must start with 'sql://' and contain '#')."
@@ -952,125 +897,31 @@ msgstr "Neplatné SQL URI (neplatné id projektu)."
 msgid "Invalid SQL URI (no database name specified)."
 msgstr "Neplatné SQL URI (nebol určený názov databázy)."
 
+#: libplanner/mrp-task.c:1016
+msgid "Could not add a predecessor relation, because the tasks are already related."
+msgstr ""
+"Nie je možné pridať vzťah predchodcu, pretože medzi úlohami už existuje "
+"vzťah."
+
+#: libplanner/mrp-task-manager.c:1769
+msgid "Can not add a predecessor relation between a task and its ancestor."
+msgstr "Nie je možné pridať predchodcu medzi úlohu a jej predchodcu."
+
+#: libplanner/mrp-task-manager.c:1778 libplanner/mrp-task-manager.c:1786
+msgid "Can not add a predecessor, because it would result in a loop."
+msgstr "Nie je možné pridať predchodcu, pretože by tak vznikla slučka."
+
+#: libplanner/mrp-task-manager.c:1821
+msgid "Can not move the task, since it would result in a loop."
+msgstr "Nie je možné presunúť úlohu, pretože by tak vznikla slučka."
+
+#: libplanner/mrp-xsl.c:96
+msgid "HTML export failed"
+msgstr "HTML export sa nepodaril"
+
 #: src/planner-application.c:118
 msgid "Edit"
 msgstr "Upraviť"
-
-#: src/planner-main-window.c:620
-msgid "Open a file"
-msgstr "Otvoriť súbor"
-
-#. I18n: Translators, list your names here, newline separated if there
-#. * are more than one, to appear in the about box.
-#.
-#: src/planner-main-window.c:1040 src/planner-main-window.c:1047
-msgid "translator_credits"
-msgstr "Zdenko Podobný"
-
-#. "Copyright \xc2\xa9 2001-2002 CodeFactory AB",
-#: src/planner-main-window.c:1044
-msgid "A Project Management application for the GNOME desktop"
-msgstr "Aplikácia pre správu projektov pre prostredie GNOME"
-
-#: src/planner-main-window.c:1054
-msgid "The Planner Homepage"
-msgstr "Domovská stránka Planner-u"
-
-#: src/planner-main-window.c:1130
-msgid "If you don't save, changes made the last minute will be discarded."
-msgstr "Pokiaľ neuložíte, budú zmeny vykonané v poslednej minúte stratené."
-
-#: src/planner-main-window.c:1135
-#, c-format
-msgid "If you don't save, changes made the last %d minutes will be discarded."
-msgstr "Pokiaľ neuložíte, budú zmeny vykonané v posledných %d minutách stratené."
-
-#: src/planner-main-window.c:1140
-msgid "If you don't save, changes made the last hour will be discarded."
-msgstr "Pokiaľ neuložíte, budú zmeny vykonané v poslednej hodine stratené."
-
-#: src/planner-main-window.c:1145
-#, c-format
-msgid "If you don't save, changes made the last %d hours will be discarded."
-msgstr "Pokiaľ neuložíte, budú zmeny vykonané v posledných %d hodinách stratené."
-
-#: src/planner-main-window.c:1152
-#, c-format
-msgid "Save changes to document '%s' before closing?"
-msgstr "uložiť zmeny do dokumentu '%s' pred zatvorením?"
-
-#: src/planner-main-window.c:1170
-msgid "C_lose without saving"
-msgstr "Z_atvoriť bez uloženia"
-
-#: src/planner-main-window.c:1172
-msgid "_Cancel"
-msgstr "_Zrušiť"
-
-#: src/planner-main-window.c:1283
-msgid "Save a file"
-msgstr "Uložiť súbor"
-
-#: src/planner-main-window.c:1319 src/planner-html-plugin.c:146
-#, c-format
-msgid "File \"%s\" exists, do you want to overwrite it?"
-msgstr "Súbor \"%s\" existuje, chcete ho prepísať?"
-
-#: src/planner-main-window.c:1514
-msgid ""
-"You have opened a file that was saved with an old version of Planner.\n"
-"\n"
-"When loading old files, all tasks will use the constraint 'Must Start On', "
-"since the old version did not fully support automatic rescheduling. To take "
-"advantage of this new feature, you should add predecessor relations between "
-"tasks that are dependant on each other.\n"
-"\n"
-"You can add a predecessor relation by clicking on the predecessor and "
-"dragging to the successor.\n"
-"\n"
-"After doing this, you can remove all constraints by selecting the menu item "
-"'Remove all constraints' in the 'Edit' menu."
-msgstr ""
-"Otvorili ste súbor, ktorý bol uložený v staršej verzií Planneru.\n"
-"\n"
-"Pri načítaní starých súborov budú všetky úlohy používať obmedzenie 'Musí "
-"začať v', pretože stará verzia nemala plnú podporu automatického "
-"preplánovania. Túto novú vlastnosť môžete využívať po pridaní vzťahov "
-"predchodcu medzi úlohami, ktoré sú na sebe závislé.\n"
-"\n"
-"Vzťah predchodcu môžete pridať kliknutím na predchodcu a ťahaním na "
-"následníka.\n"
-"\n"
-"Potom môžete odstrániť všetky obmedzenia výberom položky 'Odstrániť všetky "
-"obmedzenia' v ponuke 'Úpravy'."
-
-#: src/planner-main-window.c:1551 src/planner-gantt-row.c:656
-#: src/planner-gantt-row.c:658 src/planner-gantt-print.c:513
-#: src/planner-gantt-print.c:515
-msgid "Unnamed"
-msgstr "Nepomenovaný"
-
-#: src/planner-main.c:50
-msgid "Create the initial window with the given geometry."
-msgstr "Vytvoriť počiatočné okno s danou geometriou."
-
-#: src/planner-main.c:50
-msgid "GEOMETRY"
-msgstr "GEOMETRIA"
-
-#: src/planner-main.c:76
-msgid "planner: --geometry cannot be used with more than one file."
-msgstr "planner: --geometry nemôže byť použité s viac ako jedným súborom."
-
-#: src/planner-plugin-loader.c:40
-#, c-format
-msgid "Could not open plugin file '%s'\n"
-msgstr "Nie je možné otvoriť súbor modulu '%s'\n"
-
-#: src/planner-view-loader.c:40
-#, c-format
-msgid "Could not open view plugin file '%s'\n"
-msgstr "Nie je možné otvoriť súbor modulu pohľadu '%s'\n"
 
 #: src/planner-cell-renderer-date.c:147
 msgid "Constraint type"
@@ -1103,6 +954,16 @@ msgstr "Zrušiť"
 #: src/planner-cell-renderer-date.c:187
 msgid "OK"
 msgstr "OK"
+
+#: src/planner-cmd-manager.c:226
+#, c-format
+msgid "_Undo '%s'"
+msgstr "_Vrátiť späť '%s'"
+
+#: src/planner-cmd-manager.c:238
+#, c-format
+msgid "_Redo '%s'"
+msgstr "_Opakovať '%s'"
 
 #: src/planner-default-week-dialog.c:40
 msgid "Monday"
@@ -1139,189 +1000,6 @@ msgstr "Žiadna pracovná doba"
 #: src/planner-default-week-dialog.c:277 src/planner-default-week-dialog.c:281
 msgid "%H:%M"
 msgstr "%H:%M"
-
-#: src/planner-group-dialog.c:387 src/planner-property-dialog.c:378
-#: src/planner-task-dialog.c:1311 src/planner-task-dialog.c:1397
-#: src/planner-task-view.c:227 src/planner-gantt-print.c:190
-#: src/planner-resource-view.c:966
-msgid "Name"
-msgstr "Meno"
-
-#: src/planner-group-dialog.c:393
-msgid "Manager name"
-msgstr "Meno manažéra"
-
-#: src/planner-group-dialog.c:399
-msgid "Manager phone"
-msgstr "Telefón manažéra"
-
-#: src/planner-group-dialog.c:405
-msgid "Manager email"
-msgstr "E-mail manažéra"
-
-#: src/planner-project-properties.c:146
-msgid "Select a calendar to use for this project:"
-msgstr "Vyberte kalendár pre tento projekt:"
-
-#: src/planner-project-properties.c:606
-msgid "Property"
-msgstr "Vlastnosť"
-
-#: src/planner-project-properties.c:617 src/planner-property-dialog.c:431
-msgid "Value"
-msgstr "Hodnota"
-
-#: src/planner-project-properties.c:993 src/planner-property-dialog.c:229
-msgid "The name of the custom property needs to start with a letter."
-msgstr "Názov vlastnej vlastnosti musí začínať písmenom"
-
-#: src/planner-project-properties.c:1065 src/planner-property-dialog.c:300
-#, c-format
-msgid "Do you really want to remove the property '%s' from the project?"
-msgstr "Skutočne chcete odstrániť vlastnosť '%s' z projektu?"
-
-#: src/planner-project-properties.c:1194
-msgid "Could not create properties dialog."
-msgstr "Nie je možné vytvoriť dialóg vlastností."
-
-#: src/planner-property-dialog.c:397
-msgid "Label"
-msgstr "Popis"
-
-#: src/planner-property-dialog.c:411 src/planner-task-dialog.c:1429
-#: src/planner-resource-view.c:987
-msgid "Type"
-msgstr "Typ"
-
-#: src/planner-print-dialog.c:49
-msgid "Print Project"
-msgstr "Vytlačiť projekt"
-
-#: src/planner-print-dialog.c:56
-msgid "Select views"
-msgstr "Vyberte pohľady"
-
-#: src/planner-print-dialog.c:74
-msgid "Select the views to print:"
-msgstr "Vyberte pohľady, ktoré chcete vytlačiť"
-
-#. Put "no group" at the top.
-#: src/planner-resource-dialog.c:248 src/planner-resource-input-dialog.c:96
-#: src/planner-resource-view.c:1375
-msgid "(None)"
-msgstr "(Žiadna)"
-
-#: src/planner-resource-dialog.c:258 src/planner-resource-input-dialog.c:106
-#: src/planner-task-dialog.c:249
-msgid "(No name)"
-msgstr "(Bez mena)"
-
-#. i18n: time stamp format for notes in task dialog, see strftime(3) for
-#. * a detailed description.
-#: src/planner-resource-dialog.c:728 src/planner-task-dialog.c:679
-msgid "%a %d %b %Y, %H:%M\n"
-msgstr "%a %d %b %Y, %H:%M\n"
-
-#: src/planner-resource-dialog.c:826
-msgid "None (use project default)"
-msgstr "Žiadny (použiť štandardný projekt)"
-
-#: src/planner-resource-dialog.c:953 src/planner-resource-dialog.c:955
-msgid "Edit resource properties"
-msgstr "Upraviť vlastnosti zdroja"
-
-#: src/planner-resource-dialog.c:1101 src/planner-task-view.c:230
-#: src/planner-gantt-print.c:198 src/planner-resource-view.c:629
-#: src/planner-resource-view.c:645 src/planner-resource-view.c:1187
-msgid "Work"
-msgstr "Zamestnanie"
-
-#: src/planner-resource-dialog.c:1102 src/planner-resource-view.c:632
-#: src/planner-resource-view.c:646 src/planner-resource-view.c:1188
-msgid "Material"
-msgstr "Materiál"
-
-#: src/planner-predecessor-model.c:191 src/planner-task-dialog.c:1039
-msgid "FS"
-msgstr "KZ"
-
-#: src/planner-predecessor-model.c:194 src/planner-task-dialog.c:1040
-msgid "FF"
-msgstr "KK"
-
-#: src/planner-predecessor-model.c:197 src/planner-task-dialog.c:1041
-msgid "SS"
-msgstr "ZZ"
-
-#: src/planner-predecessor-model.c:200 src/planner-task-dialog.c:1042
-msgid "SF"
-msgstr "ZK"
-
-#: src/planner-task-dialog.c:745
-msgid "Finish to start (FS)"
-msgstr "Koniec pred začiatkom (KZ)"
-
-#: src/planner-task-dialog.c:746
-msgid "Finish to finish (FF)"
-msgstr "Koniec pred koncom (KK)"
-
-#: src/planner-task-dialog.c:747
-msgid "Start to start (SS)"
-msgstr "Začiatok pred začiatkom (ZZ)"
-
-#: src/planner-task-dialog.c:748
-msgid "Start to finish (SF)"
-msgstr "Začiatok pred koncom (ZK)"
-
-#: src/planner-task-dialog.c:798
-msgid "Can't add new predecessor. No task selected!"
-msgstr "Nie je možné pridať nového predchodcu. Nie je vybraná žiadna úloha!"
-
-#: src/planner-task-dialog.c:1330
-msgid "Assigned"
-msgstr "Priradené"
-
-#: src/planner-task-dialog.c:1347
-msgid "Units"
-msgstr "Jednotky"
-
-#: src/planner-task-dialog.c:1451
-msgid "Lag"
-msgstr "Oneskorenie"
-
-#: src/planner-task-dialog.c:1584 src/planner-task-dialog.c:1586
-msgid "Edit task properties"
-msgstr "Upraviť vlastnosti úlohy"
-
-#: src/planner-html-plugin.c:133
-#, c-format
-msgid ""
-"\"%s\" is a directory.\n"
-"Enter a filename and try again."
-msgstr ""
-"\"%s\" je priečinok.\n"
-"Zadajte názov súboru a skúste to znovu."
-
-#: src/planner-sql-plugin.c:273
-#, c-format
-msgid ""
-"Connection to database '%s' failed:\n"
-"%s"
-msgstr ""
-"Spojenie s databázou '%s' zlyhalo:\n"
-"%s"
-
-#: src/planner-sql-plugin.c:322
-msgid "Project"
-msgstr "Projekt"
-
-#: src/planner-sql-plugin.c:498
-msgid "Open from Database"
-msgstr "Otvoriť z databázy"
-
-#: src/planner-sql-plugin.c:605
-msgid "Save to Database"
-msgstr "Uložiť do databázy"
 
 #: src/planner-format.c:141
 #, c-format
@@ -1370,6 +1048,25 @@ msgstr "%Y %b %d"
 msgid "Project start"
 msgstr "Začiatok projektu"
 
+#: src/planner-gantt-print.c:190 src/planner-group-dialog.c:387
+#: src/planner-property-dialog.c:378 src/planner-resource-view.c:976
+#: src/planner-task-dialog.c:1311 src/planner-task-dialog.c:1397
+#: src/planner-task-view.c:261
+msgid "Name"
+msgstr "Meno"
+
+#: src/planner-gantt-print.c:198 src/planner-resource-dialog.c:1101
+#: src/planner-resource-view.c:639 src/planner-resource-view.c:655
+#: src/planner-resource-view.c:1197 src/planner-task-view.c:264
+msgid "Work"
+msgstr "Zamestnanie"
+
+#: src/planner-gantt-print.c:513 src/planner-gantt-print.c:515
+#: src/planner-gantt-row.c:656 src/planner-gantt-row.c:658
+#: src/planner-window.c:1636
+msgid "Unnamed"
+msgstr "Nepomenovaný"
+
 #: src/planner-gantt-row.c:1841 src/planner-gantt-row.c:1844
 msgid "No name"
 msgstr "Bez mena"
@@ -1384,15 +1081,15 @@ msgstr "Urobiť úlohu '%s' predchodcom '%s'"
 msgid "Change work to %s"
 msgstr "Zmeniť prácu na %s"
 
-#: src/planner-gantt-view.c:273
+#: src/planner-gantt-view.c:277
 msgid "Gantt Chart"
 msgstr "Ganttov diagram"
 
-#: src/planner-gantt-view.c:281
+#: src/planner-gantt-view.c:285
 msgid "_Gantt Chart"
 msgstr "_Ganttov diagram"
 
-#: src/planner-gantt-view.c:470
+#: src/planner-gantt-view.c:482
 msgid ""
 "\n"
 "Name"
@@ -1401,13 +1098,196 @@ msgstr ""
 "Názov"
 
 #. COL_START,    _("\nStart"),
-#: src/planner-gantt-view.c:472
+#: src/planner-gantt-view.c:484
 msgid ""
 "\n"
 "Work"
 msgstr ""
 "\n"
 "Práca"
+
+#: src/planner-group-dialog.c:393
+msgid "Manager name"
+msgstr "Meno manažéra"
+
+#: src/planner-group-dialog.c:399
+msgid "Manager phone"
+msgstr "Telefón manažéra"
+
+#: src/planner-group-dialog.c:405
+msgid "Manager email"
+msgstr "E-mail manažéra"
+
+#: src/planner-html-plugin.c:138
+#, c-format
+msgid ""
+"\"%s\" is a directory.\n"
+"Enter a filename and try again."
+msgstr ""
+"\"%s\" je priečinok.\n"
+"Zadajte názov súboru a skúste to znovu."
+
+#: src/planner-html-plugin.c:148 src/planner-window.c:1404
+#, c-format
+msgid "File \"%s\" exists, do you want to overwrite it?"
+msgstr "Súbor \"%s\" existuje, chcete ho prepísať?"
+
+#: src/planner-main.c:50
+msgid "Create the initial window with the given geometry."
+msgstr "Vytvoriť počiatočné okno s danou geometriou."
+
+#: src/planner-main.c:50
+msgid "GEOMETRY"
+msgstr "GEOMETRIA"
+
+#: src/planner-main.c:76
+msgid "planner: --geometry cannot be used with more than one file."
+msgstr "planner: --geometry nemôže byť použité s viac ako jedným súborom."
+
+#: src/planner-plugin-loader.c:40
+#, c-format
+msgid "Could not open plugin file '%s'\n"
+msgstr "Nie je možné otvoriť súbor modulu '%s'\n"
+
+#: src/planner-predecessor-model.c:191 src/planner-task-dialog.c:1039
+msgid "FS"
+msgstr "KZ"
+
+#: src/planner-predecessor-model.c:194 src/planner-task-dialog.c:1040
+msgid "FF"
+msgstr "KK"
+
+#: src/planner-predecessor-model.c:197 src/planner-task-dialog.c:1041
+msgid "SS"
+msgstr "ZZ"
+
+#: src/planner-predecessor-model.c:200 src/planner-task-dialog.c:1042
+msgid "SF"
+msgstr "ZK"
+
+#: src/planner-print-dialog.c:112
+msgid "Print Project"
+msgstr "Vytlačiť projekt"
+
+#: src/planner-print-dialog.c:119
+msgid "Select views"
+msgstr "Vyberte pohľady"
+
+#: src/planner-print-dialog.c:143
+msgid "Select the views to print:"
+msgstr "Vyberte pohľady, ktoré chcete vytlačiť"
+
+#: src/planner-project-properties.c:308
+msgid "Select a calendar to use for this project:"
+msgstr "Vyberte kalendár pre tento projekt:"
+
+#: src/planner-project-properties.c:403
+msgid "Edit Project Name"
+msgstr "Upraviť názov projektu"
+
+#: src/planner-project-properties.c:439
+msgid "Edit Organization"
+msgstr "Upraviť organizáciu:"
+
+#: src/planner-project-properties.c:475
+msgid "Edit Manager"
+msgstr "Upraviť manažéra:"
+
+#: src/planner-project-properties.c:546
+msgid "Edit Project Start"
+msgstr "Upraviť začiatok projektu"
+
+#: src/planner-project-properties.c:615
+msgid "Edit Project Phase"
+msgstr "Upraviť fázy projektu"
+
+#: src/planner-project-properties.c:748
+msgid "Property"
+msgstr "Vlastnosť"
+
+#: src/planner-project-properties.c:759 src/planner-property-dialog.c:431
+msgid "Value"
+msgstr "Hodnota"
+
+#: src/planner-project-properties.c:1130 src/planner-property-dialog.c:229
+msgid "The name of the custom property needs to start with a letter."
+msgstr "Názov vlastnej vlastnosti musí začínať písmenom"
+
+#: src/planner-project-properties.c:1202 src/planner-property-dialog.c:300
+#, c-format
+msgid "Do you really want to remove the property '%s' from the project?"
+msgstr "Skutočne chcete odstrániť vlastnosť '%s' z projektu?"
+
+#: src/planner-project-properties.c:1344
+msgid "Could not create properties dialog."
+msgstr "Nie je možné vytvoriť dialóg vlastností."
+
+#: src/planner-property-dialog.c:397
+msgid "Label"
+msgstr "Popis"
+
+#: src/planner-property-dialog.c:411 src/planner-resource-view.c:997
+#: src/planner-task-dialog.c:1429
+msgid "Type"
+msgstr "Typ"
+
+#. Put "no group" at the top.
+#: src/planner-resource-dialog.c:248 src/planner-resource-input-dialog.c:96
+#: src/planner-resource-view.c:1385
+msgid "(None)"
+msgstr "(Žiadna)"
+
+#: src/planner-resource-dialog.c:258 src/planner-resource-input-dialog.c:106
+#: src/planner-task-dialog.c:249
+msgid "(No name)"
+msgstr "(Bez mena)"
+
+#. i18n: time stamp format for notes in task dialog, see strftime(3) for
+#. * a detailed description.
+#: src/planner-resource-dialog.c:728 src/planner-task-dialog.c:679
+msgid "%a %d %b %Y, %H:%M\n"
+msgstr "%a %d %b %Y, %H:%M\n"
+
+#: src/planner-resource-dialog.c:826
+msgid "None (use project default)"
+msgstr "Žiadny (použiť štandardný projekt)"
+
+#: src/planner-resource-dialog.c:953 src/planner-resource-dialog.c:955
+msgid "Edit resource properties"
+msgstr "Upraviť vlastnosti zdroja"
+
+#: src/planner-resource-dialog.c:1102 src/planner-resource-view.c:642
+#: src/planner-resource-view.c:656 src/planner-resource-view.c:1198
+msgid "Material"
+msgstr "Materiál"
+
+#: src/planner-resource-view.c:250
+msgid "/_Insert resource"
+msgstr "/_Vložiť zdroj"
+
+#: src/planner-resource-view.c:251
+msgid "/_Remove resource"
+msgstr "/_Odstrániť zdroj"
+
+#: src/planner-resource-view.c:252
+msgid "/_Edit resource..."
+msgstr "_Upraviť zdroj..."
+
+#: src/planner-resource-view.c:352
+msgid "_Resources"
+msgstr "_Zdroje"
+
+#: src/planner-resource-view.c:859
+msgid "Edit custom resource properties"
+msgstr "Upraviť vlastné vlastnosti zdroja"
+
+#: src/planner-resource-view.c:1021
+msgid "Group"
+msgstr "Skupina"
+
+#: src/planner-resource-view.c:1050
+msgid "Email"
+msgstr "E-mail"
 
 #. i18n: Short "Week", preferably 2 letters.
 #: src/planner-scale-utils.c:325
@@ -1456,146 +1336,332 @@ msgstr "P%d"
 msgid "%04d, H%d"
 msgstr "%04d, P%d"
 
-#: src/planner-task-tree.c:184
+#: src/planner-sql-plugin.c:367
+msgid "Project"
+msgstr "Projekt"
+
+#: src/planner-sql-plugin.c:537
+msgid "Open from Database"
+msgstr "Otvoriť z databázy"
+
+#: src/planner-sql-plugin.c:644
+msgid "Save to Database"
+msgstr "Uložiť do databázy"
+
+#: src/planner-task-dialog.c:745
+msgid "Finish to start (FS)"
+msgstr "Koniec pred začiatkom (KZ)"
+
+#: src/planner-task-dialog.c:746
+msgid "Finish to finish (FF)"
+msgstr "Koniec pred koncom (KK)"
+
+#: src/planner-task-dialog.c:747
+msgid "Start to start (SS)"
+msgstr "Začiatok pred začiatkom (ZZ)"
+
+#: src/planner-task-dialog.c:748
+msgid "Start to finish (SF)"
+msgstr "Začiatok pred koncom (ZK)"
+
+#: src/planner-task-dialog.c:798
+msgid "Can't add new predecessor. No task selected!"
+msgstr "Nie je možné pridať nového predchodcu. Nie je vybraná žiadna úloha!"
+
+#: src/planner-task-dialog.c:1330
+msgid "Assigned"
+msgstr "Priradené"
+
+#: src/planner-task-dialog.c:1347
+msgid "Units"
+msgstr "Jednotky"
+
+#: src/planner-task-dialog.c:1451
+msgid "Lag"
+msgstr "Oneskorenie"
+
+#: src/planner-task-dialog.c:1584 src/planner-task-dialog.c:1586
+msgid "Edit task properties"
+msgstr "Upraviť vlastnosti úlohy"
+
+#: src/planner-task-tree.c:189
 msgid "/_Insert task"
 msgstr "/_Vložiť úlohu"
 
-#: src/planner-task-tree.c:185
+#: src/planner-task-tree.c:192
 msgid "/_Insert subtask"
 msgstr "/_Vložiť podúlohu"
 
-#: src/planner-task-tree.c:186
+#: src/planner-task-tree.c:195
 msgid "/_Remove task"
 msgstr "/_Odstrániť úlohu"
 
-#: src/planner-task-tree.c:188
+#: src/planner-task-tree.c:200
 msgid "/_Unlink task"
 msgstr "/Od_pojiť úlohu"
 
-#: src/planner-task-tree.c:190
+#: src/planner-task-tree.c:206
 msgid "/_Edit task..."
 msgstr "/_Upraviť úlohu..."
 
-#: src/planner-task-tree.c:2112
+#: src/planner-task-tree.c:297
+msgid "Insert task"
+msgstr "Vložiť úlohu"
+
+#: src/planner-task-tree.c:373
+msgid "Edit task property"
+msgstr "Upraviť vlastnosti úlohy"
+
+#: src/planner-task-tree.c:2421
 msgid "mon"
 msgstr "pon"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:2113
+#: src/planner-task-tree.c:2422
 msgid "month"
 msgstr "mesiac"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:2114
+#: src/planner-task-tree.c:2423
 msgid "months"
 msgstr "mesiacov"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:2115
+#: src/planner-task-tree.c:2424
 msgid "w"
 msgstr "t"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:2116
+#: src/planner-task-tree.c:2425
 msgid "week"
 msgstr "týždeň"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:2117
+#: src/planner-task-tree.c:2426
 msgid "weeks"
 msgstr "týždňov"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:2118
+#: src/planner-task-tree.c:2427
 msgid "d"
 msgstr "d"
 
 #. day unit variant accepted in input
-#: src/planner-task-tree.c:2119
+#: src/planner-task-tree.c:2428
 msgid "day"
 msgstr "deň"
 
 #. day unit variant accepted in input
-#: src/planner-task-tree.c:2121
+#: src/planner-task-tree.c:2430
 msgid "h"
 msgstr "h"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:2122
+#: src/planner-task-tree.c:2431
 msgid "hour"
 msgstr "hodina"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:2123
+#: src/planner-task-tree.c:2432
 msgid "hours"
 msgstr "hodín"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:2124
+#: src/planner-task-tree.c:2433
 msgid "min"
 msgstr "min"
 
 #. minute unit variant accepted in input
-#: src/planner-task-tree.c:2125
+#: src/planner-task-tree.c:2434
 msgid "minute"
 msgstr "minúty"
 
 #. minute unit variant accepted in input
-#: src/planner-task-tree.c:2126
+#: src/planner-task-tree.c:2435
 msgid "minutes"
 msgstr "min."
 
-#: src/planner-task-view.c:173
+#: src/planner-task-view.c:199
 msgid "Tasks"
 msgstr "Úlohy"
 
-#: src/planner-task-view.c:181
+#: src/planner-task-view.c:207
 msgid "_Tasks"
 msgstr "Ú_lohy"
 
-#: src/planner-task-view.c:228
+#: src/planner-task-view.c:262
 msgid "Start"
 msgstr "Začiatok"
 
-#: src/planner-task-view.c:229
+#: src/planner-task-view.c:263
 msgid "Finish"
 msgstr "Koniec"
 
-#: src/planner-task-view.c:231
+#: src/planner-task-view.c:265
 msgid "Slack"
 msgstr "Spomalenie"
 
-#: src/planner-task-view.c:438
+#: src/planner-task-view.c:472
 msgid "Edit custom task properties"
 msgstr "Upraviť vlastné vlastnosti úlohy"
 
-#: src/planner-resource-view.c:248
-msgid "/_Insert resource"
-msgstr "/_Vložiť zdroj"
+#: src/planner-view-loader.c:41
+#, c-format
+msgid "Could not open view plugin file '%s'\n"
+msgstr "Nie je možné otvoriť súbor modulu pohľadu '%s'\n"
 
-#: src/planner-resource-view.c:249
-msgid "/_Remove resource"
-msgstr "/_Odstrániť zdroj"
+#: src/planner-window.c:639
+msgid "Open a file"
+msgstr "Otvoriť súbor"
 
-#: src/planner-resource-view.c:250
-msgid "/_Edit resource..."
-msgstr "_Upraviť zdroj..."
+#. I18n: Translators, list your names here, newline separated if there
+#. * are more than one, to appear in the about box.
+#.
+#: src/planner-window.c:1085 src/planner-window.c:1092
+msgid "translator_credits"
+msgstr "Zdenko Podobný"
 
-#: src/planner-resource-view.c:350
-msgid "_Resources"
-msgstr "_Zdroje"
+#. "Copyright \xc2\xa9"
+#: src/planner-window.c:1089
+msgid "A Project Management application for the GNOME desktop"
+msgstr "Aplikácia pre správu projektov pre prostredie GNOME"
 
-#: src/planner-resource-view.c:849
-msgid "Edit custom resource properties"
-msgstr "Upraviť vlastné vlastnosti zdroja"
+#: src/planner-window.c:1099
+msgid "The Planner Homepage"
+msgstr "Domovská stránka Planner-u"
 
-#: src/planner-resource-view.c:1011
-msgid "Group"
-msgstr "Skupina"
+#: src/planner-window.c:1215
+msgid "If you don't save, changes made the last minute will be discarded."
+msgstr "Pokiaľ neuložíte, budú zmeny vykonané v poslednej minúte stratené."
 
-#: src/planner-resource-view.c:1040
-msgid "Email"
-msgstr "E-mail"
+#: src/planner-window.c:1220
+#, c-format
+msgid "If you don't save, changes made the last %d minutes will be discarded."
+msgstr "Pokiaľ neuložíte, budú zmeny vykonané v posledných %d minutách stratené."
+
+#: src/planner-window.c:1225
+msgid "If you don't save, changes made the last hour will be discarded."
+msgstr "Pokiaľ neuložíte, budú zmeny vykonané v poslednej hodine stratené."
+
+#: src/planner-window.c:1230
+#, c-format
+msgid "If you don't save, changes made the last %d hours will be discarded."
+msgstr "Pokiaľ neuložíte, budú zmeny vykonané v posledných %d hodinách stratené."
+
+#: src/planner-window.c:1237
+#, c-format
+msgid "Save changes to document '%s' before closing?"
+msgstr "uložiť zmeny do dokumentu '%s' pred zatvorením?"
+
+#: src/planner-window.c:1255
+msgid "C_lose without saving"
+msgstr "Z_atvoriť bez uloženia"
+
+#: src/planner-window.c:1257
+msgid "_Cancel"
+msgstr "_Zrušiť"
+
+#: src/planner-window.c:1368
+msgid "Save a file"
+msgstr "Uložiť súbor"
+
+#: src/planner-window.c:1599
+msgid ""
+"You have opened a file that was saved with an old version of Planner.\n"
+"\n"
+"When loading old files, all tasks will use the constraint 'Must Start On', "
+"since the old version did not fully support automatic rescheduling. To take "
+"advantage of this new feature, you should add predecessor relations between "
+"tasks that are dependant on each other.\n"
+"\n"
+"You can add a predecessor relation by clicking on the predecessor and "
+"dragging to the successor.\n"
+"\n"
+"After doing this, you can remove all constraints by selecting the menu item "
+"'Remove all constraints' in the 'Edit' menu."
+msgstr ""
+"Otvorili ste súbor, ktorý bol uložený v staršej verzií Planneru.\n"
+"\n"
+"Pri načítaní starých súborov budú všetky úlohy používať obmedzenie 'Musí "
+"začať v', pretože stará verzia nemala plnú podporu automatického "
+"preplánovania. Túto novú vlastnosť môžete využívať po pridaní vzťahov "
+"predchodcu medzi úlohami, ktoré sú na sebe závislé.\n"
+"\n"
+"Vzťah predchodcu môžete pridať kliknutím na predchodcu a ťahaním na "
+"následníka.\n"
+"\n"
+"Potom môžete odstrániť všetky obmedzenia výberom položky 'Odstrániť všetky "
+"obmedzenia' v ponuke 'Úpravy'."
+
+#~ msgid "New predecessor"
+#~ msgstr "Nový predchodca"
+
+#~ msgid "Predecessor: "
+#~ msgstr "Predchodca: "
+
+#~ msgid "Enter the name of the new day type:"
+#~ msgstr "Zadajte názov nového typu dní:"
+
+#~ msgid "MrProject Team"
+#~ msgstr "MrProject tým"
+
+#~ msgid "New Day Type"
+#~ msgstr "Nový typ dní"
+
+#~ msgid "Name: "
+#~ msgstr "Názov: "
+
+#~ msgid "New Property"
+#~ msgstr "Nová vlastnosť"
+
+#~ msgid "Type: "
+#~ msgstr "Typ: "
+
+#~ msgid "<b>Project phases</b>"
+#~ msgstr "<b>Fázy projektu</b>"
+
+#~ msgid "Custom properties"
+#~ msgstr "Vlastné vlastnosti"
+
+#~ msgid "Enter the name of the new project phase:"
+#~ msgstr "Vložte názov novej fázy projektu:"
+
+#~ msgid "Project _name:"
+#~ msgstr "_Názov projektu:"
+
+#~ msgid "Project _start:"
+#~ msgstr "_Začiatok projektu"
+
+#~ msgid "Project phase:"
+#~ msgstr "Fáza projektu:"
+
+#~ msgid "Email:"
+#~ msgstr "E-mail:"
+
+#~ msgid "Group:"
+#~ msgstr "Skupina:"
+
+#~ msgid "Insert resource"
+#~ msgstr "Vložiť zdroj"
+
+#~ msgid "Name:"
+#~ msgstr "Názov:"
+
+#~ msgid "<b>Open Database</b>"
+#~ msgstr "<b>Otvoriť databázu</b>"
+
+#~ msgid "Na_me:"
+#~ msgstr "Ná_zov:"
+
+#~ msgid "Work:"
+#~ msgstr "Práca:"
+
+#~ msgid ""
+#~ "Connection to database '%s' failed:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Spojenie s databázou '%s' zlyhalo:\n"
+#~ "%s"
 
 #~ msgid "Contribute to MrProject"
 #~ msgstr "Príspevok do MrProject"
