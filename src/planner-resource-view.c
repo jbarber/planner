@@ -262,9 +262,18 @@ typedef struct {
 
 	MrpProject  *project;
 	const gchar *name;
-	MrpResource *resource; /* The inserted resource */
+	MrpResource *resource;
 	MrpGroup    *group;
 } ResourceCmdInsert;
+
+typedef struct {
+	PlannerCmd   base;
+
+	MrpProject  *project;
+	const gchar *name;
+	MrpResource *resource;
+	MrpGroup    *group;
+} ResourceCmdRemove;
 
 typedef struct {
 	PlannerCmd   base;
@@ -552,7 +561,7 @@ resource_view_foreach_find_resource_func (GtkTreeModel     *model,
 	gtk_tree_model_get (model, iter,
 			    COL_RESOURCE, &resource,
 			    -1);
-	
+
 	if (resource == data->resource) {
 		data->found_path = gtk_tree_path_copy (path);
 		data->found_iter = gtk_tree_iter_copy (iter);
@@ -641,7 +650,8 @@ resource_view_resource_removed_cb (MrpProject  *project,
 {
 	GtkTreeModel     *model;
 	FindResourceData *data;
-	
+
+
 	g_return_if_fail (PLANNER_IS_VIEW (view));
 	g_return_if_fail (MRP_IS_RESOURCE (resource));
 
@@ -654,6 +664,8 @@ resource_view_resource_removed_cb (MrpProject  *project,
 	data = resource_view_find_resource (view, resource);
 
 	if (data) {
+		/* If the focus in the cell it core dumps */
+		gtk_widget_grab_focus (GTK_WIDGET (view->priv->tree_view));
 		gtk_list_store_remove (GTK_LIST_STORE (model), 
 				       data->found_iter);
 		resource_view_free_find_resource_data (data);
@@ -853,27 +865,84 @@ resource_view_insert_resources_cb (BonoboUIComponent *component,
 }
 
 static void
+resource_cmd_remove_do (PlannerCmd *cmd_base)
+{
+	ResourceCmdRemove *cmd;
+
+	cmd = (ResourceCmdRemove*) cmd_base;
+
+	mrp_project_remove_resource (cmd->project, cmd->resource);
+
+	cmd->resource = NULL;
+}
+
+static void
+resource_cmd_remove_undo (PlannerCmd *cmd_base)
+{
+	ResourceCmdRemove *cmd;
+	MrpResource       *resource;
+	
+	cmd = (ResourceCmdRemove*) cmd_base;
+
+	resource = g_object_new (MRP_TYPE_RESOURCE, NULL);
+
+	mrp_object_set (resource, "name", cmd->name, NULL);
+
+	mrp_project_add_resource (cmd->project, resource);
+
+	cmd->resource = resource;
+}
+
+
+/* FIXME: add all the attributes from a resource to the UNDO system */
+static PlannerCmd *
+resource_cmd_remove (PlannerView *view, MrpResource *resource)
+{
+	PlannerCmd          *cmd_base;
+	ResourceCmdRemove   *cmd;
+
+	cmd = g_new0 (ResourceCmdRemove, 1);
+
+	cmd_base = (PlannerCmd*) cmd;
+
+	cmd_base->label = g_strdup (_("Remove resource"));
+	cmd_base->do_func = resource_cmd_remove_do;
+	cmd_base->undo_func = resource_cmd_remove_undo;
+	cmd_base->free_func = NULL; /* FIXME */
+
+	cmd->project = planner_window_get_project (view->main_window);
+	cmd->resource = resource;
+	mrp_object_get (resource, "name", &cmd->name, NULL);
+
+	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager (view->main_window),
+					   cmd_base);
+
+	return cmd_base;
+}
+
+static void
 resource_view_remove_resource_cb (BonoboUIComponent *component, 
 				  gpointer           data, 
 				  const char        *cname)
 {
-	PlannerView     *view;
-	PlannerViewPriv *priv;
-	MrpProject      *project;
-	GList           *list, *node;
+	PlannerView       *view;
+	PlannerViewPriv   *priv;
+	MrpProject        *project;
+	GList             *list, *node;
+	ResourceCmdRemove *cmd;
 
 	g_return_if_fail (PLANNER_IS_VIEW (data));
 	
 	view = PLANNER_VIEW (data);
 	priv = view->priv;
 	
+	
 	project = planner_window_get_project (view->main_window);
 
 	list = resource_view_selection_get_list (view);
 	
 	for (node = list; node; node = node->next) {
-		mrp_project_remove_resource (project, 
-					     MRP_RESOURCE (node->data));
+		cmd = (ResourceCmdRemove*) resource_cmd_remove (view, MRP_RESOURCE (node->data));
 	}
 
 	g_list_free (list);

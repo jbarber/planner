@@ -1,5 +1,14 @@
 2004-01-28  Alvaro del Castillo  <acs@barrapunto.com>
 
+	* src/planner-resource-view.c
+	Solved a core dump when you remove a resource that is been edited
+	inline.
+	Added undo for the remove resource operation. Missing some properties
+	in the undo yet, but we are going to start using object ids before
+	going more far.
+
+2004-01-28  Alvaro del Castillo  <acs@barrapunto.com>
+
 	* src/planner-group-dialog.c
 	* src/planner-group-model.c
 	* src/planner-group-model.h
