@@ -585,8 +585,8 @@ gantt_print_get_allocated_resources_string (PlannerGanttPrintData  *data,
 void
 planner_gantt_print_do (PlannerGanttPrintData *data)
 {
-	GList      *relations;
-	GList      *l;
+	GList       *relations;
+	GList       *l;
 	gdouble      x1, x2;
 	gdouble      y1, y2;
 	gint         num_tasks;
@@ -1190,6 +1190,7 @@ planner_gantt_print_do (PlannerGanttPrintData *data)
 					gantt_print_task (data, element);
 					break;
 				case SUMMARY_LEFT:
+					//koko
 					planner_print_job_moveto (data->job,
 								  element->x1,
 								  element->y1 + data->summary_thick);

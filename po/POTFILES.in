@@ -3,6 +3,7 @@
 
 data/glade/add-predecessor.glade
 data/glade/calendar-dialog.glade
+data/glade/eds.glade
 data/glade/group-dialog.glade
 data/glade/html-output.glade
 data/glade/new-property.glade
@@ -52,6 +53,7 @@ src/planner-cell-renderer-popup.c
 src/planner-cmd-manager.c
 src/planner-day-type-dialog.c
 src/planner-default-week-dialog.c
+src/planner-eds-plugin.c
 src/planner-format.c
 src/planner-gantt-background.c
 src/planner-gantt-chart.c
@@ -95,5 +97,6 @@ src/planner-view-loader.c
 src/planner-window.c
 src/planner-working-time-dialog.c
 src/planner-xml-planner-plugin.c
+
 
 

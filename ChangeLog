@@ -1,3 +1,18 @@
+2004-09-24  Richard Hult  <richard@imendio.com>
+
+	* src/planner-xml-planner-plugin.c: Fix up this plugin, use a
+	separate gconf key for the last used dir, fix logic when adding an
+	extension, use filechooser. Fixes bug #149281 and some more.
+
+	* libplanner/mrp-time.c (mrp_time_from_tm): Try to fix a bug when
+	running on solaris. Could fix bug #153643.
+
+	* data/stylesheets/html1_gantt.xsl: Add 1 to the week
+	number. Fixes bug #153170.
+
+	* src/planner-window.c: Add locale.h to fix build for some
+	systems.
+
 2004-09-11  Richard Hult  <richard@imendio.com>
 
 	* src/planner-print-dialog.c:

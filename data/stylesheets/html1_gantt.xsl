@@ -21,7 +21,7 @@
   <xsl:choose>
     <xsl:when test="date:day-in-week($date) = 2 and $days >= 7">
       <th align="center" colspan="7">
-		Week <xsl:value-of select="date:week-in-year($date)"/>,
+		Week <xsl:value-of select="date:week-in-year($date) + 1"/>,
 		<xsl:value-of select="date:year($date)"/>
       </th>
       <xsl:if test="not($days = 7)">

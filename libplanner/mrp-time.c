@@ -38,8 +38,6 @@ static const gchar *month_names_initial[12];
 static const gchar *short_day_names[7];
 static const gchar *day_names[7];
 
-static gchar *time_tz_orig = NULL;
-
 /**
  * mrp_time_compose:
  * @year: the year
@@ -162,32 +160,6 @@ mrp_time_debug_print (mrptime t)
 		 tm->tm_sec);
 }
 
-static void
-time_set_tz_utc (void)
-{
-	const gchar *tmp;
-	
-	if (time_tz_orig == NULL) {
-		tmp = g_getenv ("TZ");
-		
-		if (tmp != NULL) {
-			time_tz_orig = g_strconcat ("TZ=", tmp, NULL);
-		} else {
-			time_tz_orig = g_strdup ("TZ");
-		}
-	}
-
-	putenv ("TZ=UTC");
-}
-
-static void
-time_reset_tz (void)
-{
-	if (time_tz_orig != NULL) {
-		putenv (time_tz_orig);
-	}
-}
-
 /**
  * mrp_time_from_tm:
  * @tm: pointer to a struct tm time value
@@ -199,12 +171,27 @@ time_reset_tz (void)
 mrptime
 mrp_time_from_tm (struct tm *tm)
 {
-	mrptime t;
+	gchar   *old_tz;
+	gchar   *tmp;
+	mrptime  t;
 
-	time_set_tz_utc ();
+	/* This is a hack. Set the timezone to UTC temporarily. */
+	old_tz = g_strdup (g_getenv ("TZ"));
+	putenv ("TZ=UTC");
+	
 	t = mktime (tm);
-	time_reset_tz ();
 
+	/* And set it back. */
+	if (old_tz != NULL && old_tz[0] != '\0') {
+		tmp = g_strconcat ("TZ=", old_tz, NULL);
+		putenv (tmp);
+		g_free (tmp);
+	} else {
+		unsetenv ("TZ");
+	}
+
+	g_free (old_tz);
+	
 	return t;
 }
 

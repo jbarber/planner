@@ -2,9 +2,6 @@
 /*
  * Copyright (C) 2003-2004 Imendio HB
  * Copyright (C) 2004 Lincoln Phipps <lincoln.phipps@openmutual.net>
- * Copyright (C) 2003 CodeFactory AB
- * Copyright (C) 2003 Richard Hult <richard@imendio.com>
- * Copyright (C) 2003 Mikael Hallendal <micke@imendio.com>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -32,7 +29,8 @@
 #include "planner-window.h"
 #include "planner-plugin.h"
 
-#define GCONF_PATH "/apps/planner"
+#define CONF_MAIN_LAST_XML_EXPORT_DIR "/plugins/xml_export/last_dir"
+
 
 struct _PlannerPluginPriv {
 	PlannerWindow *main_window;
@@ -59,63 +57,60 @@ static GtkActionEntry action_entries[] = {
 static guint n_action_entries = G_N_ELEMENTS (action_entries);
 
 
-
 static gchar *
 get_last_dir (void)
 {
-	gchar       *last_dir;
+	gchar *last_dir;
 	
-	last_dir = planner_conf_get_string ("/general/last_dir", NULL);
-	
+	last_dir = planner_conf_get_string (CONF_MAIN_LAST_XML_EXPORT_DIR, NULL);
 	if (last_dir == NULL) {
 		last_dir = g_strdup (g_get_home_dir ());
 	}
 	
-	if (last_dir[strlen (last_dir)] != G_DIR_SEPARATOR) {
-		gchar *tmp;
-		
-		tmp = g_strconcat (last_dir, G_DIR_SEPARATOR_S, NULL);
-		g_free (last_dir);
-		last_dir = tmp;
-	}
-
 	return last_dir;
 }
 
 static void
-xml_planner_plugin_export (GtkAction         *action,
-			   gpointer           user_data)
+xml_planner_plugin_export (GtkAction *action,
+			   gpointer   user_data)
 {
-	PlannerPluginPriv *priv = PLANNER_PLUGIN (user_data)->priv;
+	PlannerPluginPriv *priv;
 	MrpProject        *project;
 	GError            *error = NULL;
-	GtkWidget         *file_sel;
+	GtkWidget         *file_chooser;
 	GtkWidget         *dialog;
 	gint               response;
-	const gchar       *filename = NULL;
+	gchar             *filename = NULL;
 	gchar             *real_filename;
 	gchar             *last_dir;
 
-	file_sel = gtk_file_selection_new (_("Export"));
+	priv = PLANNER_PLUGIN (user_data)->priv;
+
+ try_again:
+
+	file_chooser = gtk_file_chooser_dialog_new (_("Export"),
+						    GTK_WINDOW (priv->main_window),
+						    GTK_FILE_CHOOSER_ACTION_SAVE,
+						    GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+						    GTK_STOCK_SAVE, GTK_RESPONSE_OK,
+						    NULL);
+	gtk_window_set_modal (GTK_WINDOW (file_chooser), TRUE);
 
 	last_dir = get_last_dir ();
-	gtk_file_selection_set_filename (GTK_FILE_SELECTION (file_sel), last_dir);
+	gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (file_chooser), last_dir);
 	g_free (last_dir);
+	
+	response = gtk_dialog_run (GTK_DIALOG (file_chooser));
+	if (response == GTK_RESPONSE_OK) {
+		filename = gtk_file_chooser_get_filename (
+			GTK_FILE_CHOOSER (file_chooser));
+	}
 
-	gtk_window_set_modal (GTK_WINDOW (file_sel), TRUE);
-
-	while (TRUE) {
-		response = gtk_dialog_run (GTK_DIALOG (file_sel));
-		if (response != GTK_RESPONSE_OK) {
-			gtk_widget_destroy (file_sel);
-			return;
-		}
-		
-		filename = gtk_file_selection_get_filename (
-			GTK_FILE_SELECTION (file_sel));
-
-
-		if (!strstr (filename, ".mrproject") || !strstr (filename, ".planner")) {
+	gtk_widget_destroy (file_chooser);
+	
+	if (filename) {
+		if (!g_str_has_suffix (filename, ".mrproject") && !g_str_has_suffix (filename, ".planner")) {
+			/* Add the old extension for old format files. */
 			real_filename = g_strconcat (filename, ".mrproject", NULL);
 		} else {
 			real_filename = g_strdup (filename);
@@ -139,14 +134,15 @@ xml_planner_plugin_export (GtkAction         *action,
 				break;
 			default:
 				g_free (real_filename);
-				continue;
+				goto try_again;
 			}
 		}
-
-		gtk_widget_hide (file_sel);
-		break;
 	} 
 
+	if (!filename) {
+		return;
+	}
+	
 	project = planner_window_get_project (priv->main_window);
 
 	if (!mrp_project_export (project, real_filename,
@@ -157,12 +153,11 @@ xml_planner_plugin_export (GtkAction         *action,
 	}
 
 	last_dir = g_path_get_dirname (real_filename);
-	planner_conf_set_string ("/general/last_dir", last_dir, NULL);
+	planner_conf_set_string (CONF_MAIN_LAST_XML_EXPORT_DIR, last_dir, NULL);
 	g_free (last_dir);
 
 	g_free (real_filename);
-
-	gtk_widget_destroy (file_sel);
+	g_free (filename);
 }
 
 G_MODULE_EXPORT void 
