@@ -136,7 +136,7 @@ void            imrp_application_register_reader   (MrpApplication    *app,
 						    MrpFileReader     *reader);
 void            imrp_application_register_writer   (MrpApplication    *app,
 						    MrpFileWriter     *writer);
-gboolean        imrp_application_id_set_data       (gpointer          *data,
+gboolean        imrp_application_id_set_data       (gpointer           data,
 						    guint              data_id);
 gboolean        imrp_application_id_remove_data    (guint              object_id);
 

@@ -54,6 +54,6 @@ GType            mrp_application_get_type      (void) G_GNUC_CONST;
 
 MrpApplication * mrp_application_new           (void);
 guint            mrp_application_get_unique_id (void);
-gpointer       * mrp_application_id_get_data   (guint object_id);
+gpointer         mrp_application_id_get_data   (guint object_id);
 
 #endif /* __MRP_APPLICATION_H__ */

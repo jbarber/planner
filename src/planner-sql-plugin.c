@@ -498,9 +498,15 @@ sql_plugin_retrieve_db_values (PlannerPlugin  *plugin,
 		*login = strdup_null_if_empty (gtk_entry_get_text (GTK_ENTRY (user_entry)));
 		*password = strdup_null_if_empty (gtk_entry_get_text (GTK_ENTRY (password_entry)));
 
-		gconf_client_set_string (gconf_client, GCONF_PATH "/server", *server, NULL);
-		gconf_client_set_string (gconf_client, GCONF_PATH "/database", *database, NULL);
-		gconf_client_set_string (gconf_client, GCONF_PATH "/username", *login, NULL);
+		gconf_client_set_string (gconf_client,
+					 GCONF_PATH "/server", *server ? *server : "",
+					 NULL);
+		gconf_client_set_string (gconf_client,
+					 GCONF_PATH "/database", *database ? *database : "",
+					 NULL);
+		gconf_client_set_string (gconf_client,
+					 GCONF_PATH "/username", *login ? *login : "",
+					 NULL);
 
 		ret = TRUE;
 		break;

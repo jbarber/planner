@@ -1,3 +1,12 @@
+2004-02-26  Richard Hult  <richard@imendio.com>
+
+	* libplanner/mrp-application.c: (imrp_application_id_set_data):
+	* libplanner/mrp-application.h:
+	* libplanner/mrp-private.h: Fix a few warnings.
+
+	* src/planner-sql-plugin.c (sql_plugin_retrieve_db_values): Don't
+	set NULL strings as gconf values.
+
 2004-02-17  Alvaro del Castillo  <acs@barrapunto.com>
 	
 	* libplanner/mrp-project.c

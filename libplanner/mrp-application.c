@@ -219,8 +219,8 @@ mrp_application_get_unique_id (void)
  * Return value: TRUE if the change has been done
  **/
 gboolean
-imrp_application_id_set_data (gpointer  *data,
-			      guint      data_id)
+imrp_application_id_set_data (gpointer data,
+			      guint    data_id)
 {
 	g_assert (g_hash_table_lookup (data_hash, GUINT_TO_POINTER (data_id)) == NULL);
 
@@ -239,7 +239,7 @@ imrp_application_id_set_data (gpointer  *data,
  * 
  * Return value: a pointer to the data
  **/
-gpointer *  
+gpointer
 mrp_application_id_get_data (guint object_id)
 {
 	return g_hash_table_lookup (data_hash, GUINT_TO_POINTER (object_id));
