@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mrproject VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-12-12 15:20+0100\n"
-"PO-Revision-Date: 2003-12-12 18:07+0100\n"
+"POT-Creation-Date: 2003-12-14 04:21+0100\n"
+"PO-Revision-Date: 2003-12-14 16:43+0100\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -891,7 +891,7 @@ msgstr "Trvání"
 msgid "Cost"
 msgstr "Cena"
 
-#: libplanner/mrp-property.c:380 src/planner-project-properties.c:501
+#: libplanner/mrp-property.c:380 src/planner-project-properties.c:654
 msgid "None"
 msgstr "Žádný"
 
@@ -1210,28 +1210,48 @@ msgstr "Vyberte pohledy"
 msgid "Select the views to print:"
 msgstr "Vyberte pohledy, které chcete vytisknout:"
 
-#: src/planner-project-properties.c:145
+#: src/planner-project-properties.c:307
 msgid "Select a calendar to use for this project:"
 msgstr "Vyberte kalendář, který používat pro tento projekt:"
 
-#: src/planner-project-properties.c:594
+#: src/planner-project-properties.c:402
+msgid "Edit Project Name"
+msgstr "Upravit název projektu"
+
+#: src/planner-project-properties.c:438
+msgid "Edit Organization"
+msgstr "Upravit organizaci"
+
+#: src/planner-project-properties.c:474
+msgid "Edit Manager"
+msgstr "Upravit manažera"
+
+#: src/planner-project-properties.c:545
+msgid "Edit Project Start"
+msgstr "Upravit začátek projektu"
+
+#: src/planner-project-properties.c:614
+msgid "Edit Project Phase"
+msgstr "Upravit fázi projektu"
+
+#: src/planner-project-properties.c:747
 msgid "Property"
 msgstr "Vlastnost"
 
-#: src/planner-project-properties.c:605 src/planner-property-dialog.c:431
+#: src/planner-project-properties.c:758 src/planner-property-dialog.c:431
 msgid "Value"
 msgstr "Hodnota"
 
-#: src/planner-project-properties.c:981 src/planner-property-dialog.c:229
+#: src/planner-project-properties.c:1129 src/planner-property-dialog.c:229
 msgid "The name of the custom property needs to start with a letter."
 msgstr "Název vlastní vlastnosti musí začínat písmenem."
 
-#: src/planner-project-properties.c:1053 src/planner-property-dialog.c:300
+#: src/planner-project-properties.c:1201 src/planner-property-dialog.c:300
 #, c-format
 msgid "Do you really want to remove the property '%s' from the project?"
 msgstr "Opravdu chcete z projektu odstranit vlastnost '%s'?"
 
-#: src/planner-project-properties.c:1182
+#: src/planner-project-properties.c:1343
 msgid "Could not create properties dialog."
 msgstr "Nemohu vytvořit dialog vlastností."
 
