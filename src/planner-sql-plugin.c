@@ -626,12 +626,6 @@ create_database (const gchar   *dsn_name,
 						 db_name); 
 			sql_execute_query (conn, query);
 			g_free (query);
-			/* FIXME: Tables will need the group: dirty relation between 
-			   code and tables definitions in sql file.*/
-			query = g_strdup_printf ("CREATE GROUP planner WITH USER %s", 
-						 gda_connection_get_username (conn));
-			sql_execute_query (conn, query);
-			g_free (query);
 			retval = TRUE;
 		} else {
 			retval = FALSE;

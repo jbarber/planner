@@ -1,3 +1,12 @@
+2004-11-09  Alvaro del Castillo  <acs@barrapunto.com>
+
+	* docs/sql/README.sql: use template1 as connection database.
+
+	* src/planner-sql-plugin.c: don't create planner group because
+	normal postgres user can't create a GROUP.
+
+	* data/sql/database-0.13.sql: don't use planner GROUP.
+
 2004-11-04  Richard Hult  <richard@imendio.com>
 
 	* gtk-doc.make: Update.

@@ -14,7 +14,7 @@ A very brief getting started howto (change username etc to use...):
 
 * Enable access to another user than the default:
 
-  echo 'CREATE USER rhult CREATEDB;' | psql -e
+  echo 'CREATE USER rhult CREATEDB;' | psql -e template1
 
 * Create a UNICODE database:
 

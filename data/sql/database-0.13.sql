@@ -22,8 +22,7 @@ CREATE TABLE project (
 	last_user        text NOT NULL DEFAULT (user),
 	PRIMARY KEY (proj_id)
 );
-GRANT select,insert,update,delete ON project TO GROUP planner;
-GRANT select,update ON project_proj_id_seq TO GROUP planner;
+
 
 --
 -- Phases
@@ -36,8 +35,7 @@ CREATE TABLE phase (
 		ON DELETE CASCADE ON UPDATE CASCADE,
 	PRIMARY KEY (phase_id)
 );
-GRANT select,insert,update,delete ON phase TO GROUP planner;
-GRANT select,update ON phase_phase_id_seq TO GROUP planner;
+
 
 --
 -- Day Types
@@ -54,8 +52,6 @@ CREATE TABLE daytype (
 		ON DELETE CASCADE ON UPDATE CASCADE,
 	PRIMARY KEY (dtype_id)
 );
-GRANT select,insert,update,delete ON daytype TO GROUP planner;
-GRANT select,update ON daytype_dtype_id_seq TO GROUP planner;
 
 
 --
@@ -100,8 +96,6 @@ CREATE TABLE calendar (
 		ON DELETE SET NULL ON UPDATE CASCADE,
 	PRIMARY KEY (cal_id)
 );
-GRANT select,insert,update,delete ON calendar TO GROUP planner;
-GRANT select,update ON calendar_cal_id_seq TO GROUP planner;
 ALTER TABLE project ADD CONSTRAINT project_cal_id 
 	FOREIGN KEY (cal_id) REFERENCES calendar (cal_id) 
 	ON DELETE CASCADE ON UPDATE CASCADE DEFERRABLE INITIALLY DEFERRED;
@@ -121,7 +115,6 @@ CREATE TABLE day (
 		ON DELETE CASCADE ON UPDATE CASCADE,
 	PRIMARY KEY (day_id)
 );
-GRANT select,insert,update,delete ON day TO GROUP planner;
 
 
 --
@@ -138,7 +131,6 @@ CREATE TABLE day_interval (
 		ON DELETE CASCADE ON UPDATE CASCADE,
 	PRIMARY KEY (dtype_id, cal_id, start_time, end_time)
 );
-GRANT select,insert,update,delete ON day_interval TO GROUP planner;
 
 
 --
@@ -169,8 +161,6 @@ CREATE TABLE task (
 		ON DELETE SET NULL ON UPDATE CASCADE,
 	PRIMARY KEY (task_id)
 );
-GRANT select,insert,update,delete ON task TO GROUP planner;
-GRANT select,update ON task_task_id_seq TO GROUP planner;
 
 -- FIXME: Add triggers to handle different types of tasks/milestones
 
@@ -192,8 +182,6 @@ CREATE TABLE predecessor (
 		ON DELETE CASCADE ON UPDATE CASCADE,
 	PRIMARY KEY (task_id, pred_task_id)
 );
-GRANT select,insert,update,delete ON predecessor TO GROUP planner;
-GRANT select,update ON predecessor_pred_id_seq TO GROUP planner;
 
 
 --
@@ -216,8 +204,6 @@ CREATE TABLE property_type (
 		ON DELETE CASCADE ON UPDATE CASCADE,
 	PRIMARY KEY (proptype_id)
 );
-GRANT select,insert,update,delete ON property_type TO GROUP planner;
-GRANT select,update ON property_type_proptype_id_seq TO GROUP planner;
 
 
 --
@@ -231,8 +217,6 @@ CREATE TABLE property (
 		ON DELETE CASCADE ON UPDATE CASCADE,
 	PRIMARY KEY (prop_id)
 );
-GRANT select,insert,update,delete ON property TO GROUP planner;
-GRANT select,update ON property_prop_id_seq TO GROUP planner;
 
 
 --
@@ -247,7 +231,6 @@ CREATE TABLE project_to_property (
 		ON DELETE CASCADE ON UPDATE CASCADE,
 	PRIMARY KEY (proj_id, prop_id)
 );
-GRANT select,insert,update,delete ON project_to_property TO GROUP planner;
 
 
 --
@@ -262,7 +245,6 @@ CREATE TABLE task_to_property (
 		ON DELETE CASCADE ON UPDATE CASCADE,
 	PRIMARY KEY (task_id, prop_id)
 );
-GRANT select,insert,update,delete ON task_to_property TO GROUP planner;
 
 
 --
@@ -279,8 +261,6 @@ CREATE TABLE resource_group (
 		ON DELETE CASCADE ON UPDATE CASCADE,
 	PRIMARY KEY (group_id)
 );
-GRANT select,insert,update,delete ON resource_group TO GROUP planner;
-GRANT select,update ON resource_group_group_id_seq TO GROUP planner;
 
 
 --
@@ -307,8 +287,6 @@ CREATE TABLE resource (
 		ON DELETE CASCADE ON UPDATE CASCADE,
 	PRIMARY KEY (res_id)
 );
-GRANT select,insert,update,delete ON resource TO GROUP planner;
-GRANT select,update ON resource_res_id_seq TO GROUP planner;
 
 
 --
@@ -323,7 +301,6 @@ CREATE TABLE resource_to_property (
 		ON DELETE CASCADE ON UPDATE CASCADE,
 	PRIMARY KEY (res_id, prop_id)
 );
-GRANT select,insert,update,delete ON resource_to_property TO GROUP planner;
 
 
 --
@@ -339,7 +316,6 @@ CREATE TABLE allocation (
 		ON DELETE CASCADE ON UPDATE CASCADE,
 	PRIMARY KEY (res_id, task_id)
 );
-GRANT select,insert,update,delete ON allocation TO GROUP planner;
 
 --
 -- Global planner properties
