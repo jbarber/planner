@@ -249,16 +249,6 @@ fi
 
 AM_CONDITIONAL(HAVE_DOTNET, test x$have_dotnet = xyes)
 
-
-dnl  -------------
-dnl | Build Flags |--------------------------------------------
-dnl  -------------
-AC_SUBST(CFLAGS)
-AC_SUBST(CPPFLAGS)
-AC_SUBST(LDFLAGS)
-dnl -----------------------------------------------------------
-
-
 AC_CONFIG_FILES([
 Makefile
 libplanner/Makefile
