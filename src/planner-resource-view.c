@@ -818,7 +818,7 @@ resource_view_insert_resource_cb (BonoboUIComponent *component,
 		gtk_tree_view_set_cursor (priv->tree_view,
 					  path,
 					  gtk_tree_view_get_column (priv->tree_view, 0),
-					  TRUE);
+					  FALSE);
 	
 		gtk_tree_path_free (path);
 
