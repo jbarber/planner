@@ -1,5 +1,8 @@
 2004-06-17  Richard Hult  <richard@imendio.com>
 
+	* src/planner-gantt-row.c (gantt_row_notify_cb): Only redraw if
+	critical changed, don't update arrow positions.
+
 	* src/planner-gantt-model.c: Improve the caching scheme (AKA make
 	it work).
 

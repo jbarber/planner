@@ -1209,11 +1209,13 @@ gantt_row_bounds (GnomeCanvasItem *item,
 static void
 gantt_row_notify_cb (MrpTask *task, GParamSpec *pspec, PlannerGanttRow *row)
 {
-	if (!recalc_bounds (row)) {
+	if (recalc_bounds (row)) {
+		gantt_row_geometry_changed (row);
+	}
+	else if (strcmp (pspec->name, "critical") != 0) {
 		return;
 	}
-
-	gantt_row_geometry_changed (row); 
+	
 	gnome_canvas_item_request_update (GNOME_CANVAS_ITEM (row));
 }
 
