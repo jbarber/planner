@@ -1457,7 +1457,7 @@ task_tree_duration_data_func (GtkTreeViewColumn *tree_column,
 
 	if (mrp_task_get_task_type (task) == MRP_TASK_TYPE_MILESTONE) {
 		editable = FALSE;
-		str = g_strdup ("");
+		str = g_strdup (_("N/A"));
 	} else {
 		calendar = mrp_project_get_calendar (priv->project);
 		
@@ -1601,7 +1601,7 @@ task_tree_work_data_func (GtkTreeViewColumn *tree_column,
 		g_object_set (cell, 
 			      "weight", weight,
 			      "editable", FALSE,
-			      "text", "",
+			      "text", _("N/A"),
 			      NULL);
 	} else {
 		gchar *str = planner_format_duration (work, hours_per_day);
