@@ -1,5 +1,20 @@
 2004-04-06  Richard Hult  <richard@imendio.com>
 
+	* data/dtd/mrproject-0.6.dtd:
+	* data/glade/task-dialog.glade:
+	* data/stylesheets/html1_css.xsl:
+	* data/stylesheets/html1_tasks.xsl:
+	* docs/sql/database-0.11.sql:
+	* docs/sql/upgrade-0.6.x-0.11.sql:
+	* libplanner/mrp-old-xml.c:
+	* libplanner/mrp-parser.c:
+	* libplanner/mrp-sql.c:
+	* libplanner/mrp-task.c:
+	* src/planner-task-dialog.c: Fix bug #137544, task priority
+	spinner not effective. Patch from Lincoln Phipps.
+
+2004-04-06  Richard Hult  <richard@imendio.com>
+
 	* libplanner/mrp-task-manager.c: (task_manager_do_backward_pass):
 	Fix bug #137063, higlight critical tasks and sub-tasks. Patch from
 	Doroszlai Attila. This also fixes bug #138437.

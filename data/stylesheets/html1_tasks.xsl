@@ -30,6 +30,7 @@
       <th align="left" class="tasks-hdr">Start</th>
       <th align="left" class="tasks-hdr">End</th>
       <th align="left" class="tasks-hdr">Work</th>
+      <th align="left" class="tasks-hdr">Priority</th>
       <th align="left" class="tasks-hdr">Resources</th>
       <xsl:if test="$hasproperties">
         <th align="left" class="tasks-hdr">Properties</th>
@@ -150,6 +151,9 @@
                 <xsl:call-template name="mrproj-duration">
                   <xsl:with-param name="duration" select="substring (date:duration ((3600 * @work) div 1200),2)"/>
                 </xsl:call-template>
+              </td>
+              <td class="task-priority">
+                  <xsl:value-of select="format-number(@priority, '0')"/>
               </td>
               <td class="task-resources">
                 <xsl:for-each select="/project/allocations/allocation[@task-id=$tid]">

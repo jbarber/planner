@@ -484,6 +484,7 @@ mpp_write_task_cb (MrpTask *task, MrpParser *parser)
 	gint           duration;
 	gint           work;
 	gint           complete;
+	gint           priority;
 	MrpTaskType    type;
 	MrpTaskSched   sched;
 	GList         *predecessors, *l;
@@ -512,6 +513,7 @@ mpp_write_task_cb (MrpTask *task, MrpParser *parser)
 		      "work", &work,
 		      "constraint", &constraint,
 		      "percent-complete", &complete,
+		      "priority", &priority,
 		      "type", &type,
 		      "sched", &sched,
 		      NULL);
@@ -535,6 +537,8 @@ mpp_write_task_cb (MrpTask *task, MrpParser *parser)
 	mpp_xml_set_date (node, "end", finish);
 
 	mpp_xml_set_int (node, "percent-complete", complete);
+
+	mpp_xml_set_int (node, "priority", priority);
 
 	mpp_xml_set_task_type (node, "type", type);
 

@@ -318,6 +318,11 @@ TD.task-date .time {
 
 TD.task-work { }
 
+TD.task-priority { 
+  font-size: 9pt; 
+  text-align: center;
+}
+
 TD.task-note { 
   font-size: 9pt; 
 }

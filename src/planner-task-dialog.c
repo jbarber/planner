@@ -90,6 +90,11 @@ static void  task_dialog_task_complete_changed_cb   (MrpTask             *task,
 						     GtkWidget           *dialog);
 static void  task_dialog_complete_changed_cb        (GtkWidget           *w, 
 						     DialogData          *data);
+static void  task_dialog_task_priority_changed_cb   (MrpTask             *task, 
+						     GParamSpec          *pspec,
+						     GtkWidget           *dialog);
+static void  task_dialog_priority_changed_cb        (GtkWidget           *w, 
+						     DialogData          *data);
 static void  task_dialog_task_note_changed_cb       (MrpTask             *task, 
 						     GParamSpec          *pspec, 
 						     GtkWidget           *dialog);
@@ -612,6 +617,52 @@ task_dialog_complete_changed_cb (GtkWidget  *w,
 
 	g_signal_handlers_unblock_by_func (data->task, 
 					   task_dialog_task_complete_changed_cb,
+					   data->dialog);
+}
+
+static void
+task_dialog_task_priority_changed_cb (MrpTask    *task, 
+				      GParamSpec *pspec,
+				      GtkWidget  *dialog)
+{
+	DialogData *data;
+	gint       priority;
+	
+	g_return_if_fail (MRP_IS_TASK (task));
+	g_return_if_fail (GTK_IS_WIDGET (dialog));
+
+	data = DIALOG_GET_DATA (dialog);
+	
+	g_object_get (task, "priority", &priority, NULL);
+	
+	g_signal_handlers_block_by_func (data->priority_spinbutton,
+					 task_dialog_priority_changed_cb,
+					 data);
+
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON (data->priority_spinbutton),
+				   priority);
+	
+	g_signal_handlers_unblock_by_func (data->priority_spinbutton,
+					   task_dialog_priority_changed_cb,
+					   data);
+}
+
+static void
+task_dialog_priority_changed_cb (GtkWidget  *w,
+				 DialogData *data)
+{
+	gint priority;
+
+	priority = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (w));
+	
+	g_signal_handlers_block_by_func (data->task,
+					 task_dialog_task_priority_changed_cb,
+					 data->dialog);
+	
+	g_object_set (data->task, "priority", priority, NULL);
+
+	g_signal_handlers_unblock_by_func (data->task, 
+					   task_dialog_task_priority_changed_cb,
 					   data->dialog);
 }
 
@@ -1217,6 +1268,12 @@ task_dialog_setup_widgets (DialogData *data,
 			  data);
 	
 	data->priority_spinbutton = glade_xml_get_widget (glade, "priority_spinbutton");
+	g_object_get (data->task, "priority", &int_value, NULL);	
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON (data->priority_spinbutton), int_value);
+	g_signal_connect (data->priority_spinbutton,
+			  "value_changed",
+			  G_CALLBACK (task_dialog_priority_changed_cb),
+			  data);	
 
 	data->note_textview = glade_xml_get_widget (glade, "note_textview");
 
@@ -1521,6 +1578,12 @@ task_dialog_connect_to_task (DialogData *data)
 				 data->dialog,
 				 0);
 
+	g_signal_connect_object (data->task,
+				 "notify::priority",
+				 G_CALLBACK (task_dialog_task_priority_changed_cb),
+				 data->dialog,
+				 0);
+				 
 	g_signal_connect_object (data->task,
 				 "child_added",
 				 G_CALLBACK (task_dialog_task_child_added_or_removed_cb),

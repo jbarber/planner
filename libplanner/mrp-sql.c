@@ -458,11 +458,6 @@ get_hash_data_as_id (GHashTable *hash, gpointer key)
 	return GPOINTER_TO_INT (value);
 }
 
-enum {
-	COL_ID,
-	COL_NAME
-};
-
 static gboolean
 sql_read_project (SQLData *data, gint proj_id)
 {
@@ -1954,6 +1949,7 @@ sql_read_tasks (SQLData *data)
 	gint               work;
 	gint               duration;
 	gint               percent_complete;
+	gint               priority;
 	gboolean           is_fixed_work;
 	gboolean           is_milestone;
 	MrpTaskType        type;
@@ -2000,6 +1996,7 @@ sql_read_tasks (SQLData *data)
 		work = 0;
 		duration = 0;
 		percent_complete = 0;
+		priority = 0;
 		is_fixed_work = FALSE;
 		is_milestone = FALSE;
 		constraint_time = 0;
@@ -2023,6 +2020,9 @@ sql_read_tasks (SQLData *data)
 			}
 			else if (is_field (res, j, "percent_complete")) {
 				percent_complete = get_int (res, i, j);
+			}
+			else if (is_field (res, j, "priority")) {
+				priority = get_int (res, i, j);
 			}
 			else if (is_field (res, j, "is_milestone")) {
 				is_milestone = get_boolean (res, i, j);
@@ -2063,6 +2063,7 @@ sql_read_tasks (SQLData *data)
 				     "note", note,
 				     "type", type,
 				     "percent_complete", percent_complete,
+				     "priority", priority,
 				     "sched", sched,
 				     "work", work,
 				     "duration", duration,
@@ -3367,6 +3368,7 @@ sql_write_tasks (SQLData *data)
 	mrptime          start, finish;
 	gint             work, duration;
 	gint             percent_complete;
+	gint             priority;
 	const gchar     *is_fixed_work;
 	const gchar     *is_milestone;
 	MrpConstraint   *constraint;
@@ -3399,6 +3401,7 @@ sql_write_tasks (SQLData *data)
 			      "note", &note,
 			      "work", &work,
 			      "percent_complete", &percent_complete,
+			      "priority", &priority,
 			      "duration", &duration,
 			      "start", &start,
 			      "finish", &finish,
@@ -3465,15 +3468,15 @@ sql_write_tasks (SQLData *data)
 		query = g_strdup_printf ("INSERT INTO task(proj_id, parent_id, name, "
 					 "note, start, finish, work, duration, "
 					 "percent_complete, is_milestone, is_fixed_work, "
-					 "constraint_type, constraint_time) "
+					 "constraint_type, constraint_time, priority) "
 					 "VALUES(%d, %s, '%s', "
 					 "'%s', '%s', '%s', %d, %d, "
 					 "%d, %s, %s, "
-					 "'%s', %s)",
+					 "'%s', %s, %d)",
 					 data->project_id, parent_id_string, name,
 					 note, start_string, finish_string, work, duration,
 					 percent_complete, is_milestone, is_fixed_work,
-					 constraint_type, constraint_time);
+					 constraint_type, constraint_time, priority);
 
 		res = sql_execute_query (data->con, query); 
 		g_free (query);

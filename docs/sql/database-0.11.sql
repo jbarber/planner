@@ -155,12 +155,14 @@ CREATE TABLE task (
 	work	 	  integer DEFAULT 0,
 	duration	  integer DEFAULT 0,
 	percent_complete  integer DEFAULT 0,
+	priority          integer DEFAULT 0,
 	is_milestone	  boolean NOT NULL DEFAULT FALSE,
 	is_fixed_work     boolean NOT NULL DEFAULT TRUE,
 	constraint_type   text NOT NULL DEFAULT 'ASAP',
         constraint_time   timestamp with time zone,
 	CHECK (constraint_type = 'ASAP' OR constraint_type = 'MSO' OR constraint_type = 'FNLT' OR constraint_type = 'SNET'),
  	CHECK (percent_complete > -1 AND percent_complete < 101),
+	CHECK (priority > -1 AND priority < 10000),
 	FOREIGN KEY (proj_id) REFERENCES project (proj_id) 
 		ON DELETE CASCADE ON UPDATE CASCADE,
 	FOREIGN KEY (parent_id) REFERENCES task (task_id) 

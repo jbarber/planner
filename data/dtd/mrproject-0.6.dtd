@@ -59,6 +59,7 @@ Note: A mistake in the format design led to this suboptimality. A
                duration             CDATA #IMPLIED
                work                 CDATA #IMPLIED
                percent-complete     CDATA #IMPLIED
+               priority             CDATA #IMPLIED
                type                 (normal|milestone) "normal"
                scheduling           (fixed-work|
                                      fixed-duration) "fixed-work">

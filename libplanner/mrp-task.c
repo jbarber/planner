@@ -43,7 +43,8 @@ enum {
 	PROP_SCHED,
 	PROP_CONSTRAINT,
 	PROP_NOTE,
-	PROP_PERCENT_COMPLETE
+	PROP_PERCENT_COMPLETE,
+	PROP_PRIORITY
 };
 
 /* Signals */
@@ -78,6 +79,9 @@ struct _MrpTaskPriv {
 	
 	/* Percent complete, 0-100. */
 	gshort            percent_complete;
+	
+	/* Arbitary range of 0,1..9999. A hint for any (3rd party) resource leveller */
+	gint              priority;
 	
 	gchar            *name;
 	gchar            *note;
@@ -378,6 +382,15 @@ task_class_init (MrpTaskClass *klass)
 				  "Percent completed of task",
 				  0, 100, 0,
 				  G_PARAM_READWRITE));
+				  
+	g_object_class_install_property (
+		object_class,
+		PROP_PRIORITY,
+		g_param_spec_int ("priority",
+				  "Priority",
+				  "Priority of the task",
+				  0, 9999, 0,
+				  G_PARAM_READWRITE));
 }
 
 static void
@@ -541,6 +554,16 @@ task_set_property (GObject      *object,
 		
 		break;
 
+	case PROP_PRIORITY:
+		i_val = g_value_get_int (value);
+		
+		if (priv->priority != i_val) {
+			priv->priority = i_val;
+			changed = TRUE;
+		}
+		
+		break;
+		
 	default:
 		break;
 	}
@@ -601,6 +624,9 @@ task_get_property (GObject    *object,
 		break;
 	case PROP_PERCENT_COMPLETE:
 		g_value_set_int (value, priv->percent_complete);
+		break;
+	case PROP_PRIORITY:
+		g_value_set_int (value, priv->priority);
 		break;
 	default:
 		G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);

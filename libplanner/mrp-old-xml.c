@@ -212,6 +212,7 @@ old_xml_read_task (MrpParser *parser, xmlNodePtr tree, MrpTask *parent)
 	MrpTask       *task;
 	MrpConstraint  constraint;
 	guint          percent_complete = 0;
+	gint          priority = 0;
 	gchar         *note;
 	gint           duration, work;
 	gboolean       got_constraint = FALSE;
@@ -227,6 +228,7 @@ old_xml_read_task (MrpParser *parser, xmlNodePtr tree, MrpTask *parent)
 	note = old_xml_get_string (tree, "note");
 	id = old_xml_get_int (tree, "id");
 	percent_complete = old_xml_get_int (tree, "percent-complete");
+	priority = old_xml_get_int (tree, "priority");
 	type = old_xml_get_task_type (tree, "type");
 	sched = old_xml_get_task_sched (tree, "scheduling");
 	
@@ -250,6 +252,7 @@ old_xml_read_task (MrpParser *parser, xmlNodePtr tree, MrpTask *parent)
 				     "name", name,
 				     "duration", duration,
 				     "percent_complete", percent_complete,
+				     "priority", priority,
 				     "note", note,
 				     NULL);
 	} else {
@@ -284,6 +287,7 @@ old_xml_read_task (MrpParser *parser, xmlNodePtr tree, MrpTask *parent)
 				     "work", work,
 				     "duration", duration,
 				     "percent_complete", percent_complete,
+				     "priority", priority,
 				     "note", note,
 				     NULL);
 	}
