@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: planner 2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-03-16 21:02+0100\n"
-"PO-Revision-Date: 2004-03-16 21:03+0100\n"
+"POT-Creation-Date: 2004-03-26 12:25+0100\n"
+"PO-Revision-Date: 2004-03-26 12:26+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian/Bokmaal <i18n-nb@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
@@ -400,7 +400,7 @@ msgid "_Work:"
 msgstr "_Arbeid:"
 
 #. day unit variant accepted in input
-#: data/glade/task-dialog.glade.h:17 src/planner-task-tree.c:2308
+#: data/glade/task-dialog.glade.h:17 src/planner-task-tree.c:2355
 msgid "days"
 msgstr "dager"
 
@@ -866,7 +866,7 @@ msgstr "Dato"
 msgid "Duration"
 msgstr "Varighet"
 
-#: libplanner/mrp-property.c:377 src/planner-task-view.c:270
+#: libplanner/mrp-property.c:377 src/planner-task-view.c:271
 msgid "Cost"
 msgstr "Kostnad"
 
@@ -1082,14 +1082,14 @@ msgstr "Prosjektstart"
 
 #: src/planner-gantt-print.c:191 src/planner-group-dialog.c:805
 #: src/planner-property-dialog.c:378 src/planner-resource-view.c:1168
-#: src/planner-task-dialog.c:1311 src/planner-task-dialog.c:1397
-#: src/planner-task-view.c:265
+#: src/planner-task-dialog.c:1319 src/planner-task-dialog.c:1405
+#: src/planner-task-view.c:266
 msgid "Name"
 msgstr "Navn"
 
-#: src/planner-gantt-print.c:199 src/planner-resource-dialog.c:1168
+#: src/planner-gantt-print.c:199 src/planner-resource-dialog.c:1298
 #: src/planner-resource-view.c:691 src/planner-resource-view.c:707
-#: src/planner-resource-view.c:1595 src/planner-task-view.c:268
+#: src/planner-resource-view.c:1595 src/planner-task-view.c:269
 msgid "Work"
 msgstr "Arbeid"
 
@@ -1098,16 +1098,16 @@ msgstr "Arbeid"
 msgid "Unnamed"
 msgstr "Uten navn"
 
-#: src/planner-gantt-row.c:1908 src/planner-gantt-row.c:1911
+#: src/planner-gantt-row.c:1907 src/planner-gantt-row.c:1910
 msgid "No name"
 msgstr "Uten navn"
 
-#: src/planner-gantt-row.c:1914
+#: src/planner-gantt-row.c:1913
 #, c-format
 msgid "Make task '%s' a predecessor of '%s'"
 msgstr "Gjør oppgave «%s» til en forgjenger av «%s»"
 
-#: src/planner-gantt-row.c:1972
+#: src/planner-gantt-row.c:1971
 #, c-format
 msgid "Change work to %s"
 msgstr "Endre arbeid til %s"
@@ -1123,13 +1123,19 @@ msgstr "_Gantt-plott"
 #: src/planner-gantt-view.c:492
 msgid ""
 "\n"
+"WBS"
+msgstr "\nWBS"
+
+#: src/planner-gantt-view.c:493
+msgid ""
+"\n"
 "Name"
 msgstr ""
 "\n"
 "Navn"
 
 #. COL_START,    _("\nStart"),
-#: src/planner-gantt-view.c:494
+#: src/planner-gantt-view.c:495
 msgid ""
 "\n"
 "Work"
@@ -1216,19 +1222,19 @@ msgstr "/_Fjern lenke til oppgave"
 msgid "/_Edit task..."
 msgstr "/R_ediger oppgave..."
 
-#: src/planner-predecessor-model.c:191 src/planner-task-dialog.c:1039
+#: src/planner-predecessor-model.c:191 src/planner-task-dialog.c:1047
 msgid "FS"
 msgstr "SlSt"
 
-#: src/planner-predecessor-model.c:194 src/planner-task-dialog.c:1040
+#: src/planner-predecessor-model.c:194 src/planner-task-dialog.c:1048
 msgid "FF"
 msgstr "StSt"
 
-#: src/planner-predecessor-model.c:197 src/planner-task-dialog.c:1041
+#: src/planner-predecessor-model.c:197 src/planner-task-dialog.c:1049
 msgid "SS"
 msgstr "SlSl"
 
-#: src/planner-predecessor-model.c:200 src/planner-task-dialog.c:1042
+#: src/planner-predecessor-model.c:200 src/planner-task-dialog.c:1050
 msgid "SF"
 msgstr "StSl"
 
@@ -1294,36 +1300,40 @@ msgid "Label"
 msgstr "Etikett"
 
 #: src/planner-property-dialog.c:411 src/planner-resource-view.c:1210
-#: src/planner-task-dialog.c:1429
+#: src/planner-task-dialog.c:1437
 msgid "Type"
 msgstr "Type"
 
 #. Put "no group" at the top.
-#: src/planner-resource-dialog.c:254 src/planner-resource-input-dialog.c:97
+#: src/planner-resource-dialog.c:267 src/planner-resource-input-dialog.c:97
 #: src/planner-resource-view.c:1806
 msgid "(None)"
 msgstr "(Ingen)"
 
-#: src/planner-resource-dialog.c:264 src/planner-resource-input-dialog.c:107
-#: src/planner-task-dialog.c:249
+#: src/planner-resource-dialog.c:277 src/planner-resource-input-dialog.c:107
+#: src/planner-task-dialog.c:251
 msgid "(No name)"
 msgstr "(Uten navn)"
 
+#: src/planner-resource-dialog.c:426
+msgid "Edit resource property from dialog"
+msgstr "Rediger egenskap for ressurs fra dialog"
+
 #. i18n: time stamp format for notes in task dialog, see strftime(3) for
 #. * a detailed description.
-#: src/planner-resource-dialog.c:786 src/planner-task-dialog.c:679
+#: src/planner-resource-dialog.c:910 src/planner-task-dialog.c:687
 msgid "%a %d %b %Y, %H:%M\n"
 msgstr "%a %d %b %Y, %H.%M\n"
 
-#: src/planner-resource-dialog.c:884
+#: src/planner-resource-dialog.c:1008
 msgid "None (use project default)"
 msgstr "Ingen (bruk forvalg for prosjektet)"
 
-#: src/planner-resource-dialog.c:1011 src/planner-resource-dialog.c:1013
+#: src/planner-resource-dialog.c:1135 src/planner-resource-dialog.c:1137
 msgid "Edit resource properties"
 msgstr "Rediger egenskaper for ressurs"
 
-#: src/planner-resource-dialog.c:1169 src/planner-resource-view.c:694
+#: src/planner-resource-dialog.c:1299 src/planner-resource-view.c:694
 #: src/planner-resource-view.c:708 src/planner-resource-view.c:1596
 msgid "Material"
 msgstr "Materiale"
@@ -1425,7 +1435,7 @@ msgstr "%04d, H%d"
 
 #: src/planner-sql-plugin.c:368
 msgid "Project"
-msgstr "Prosject"
+msgstr "Prosjekt"
 
 #: src/planner-sql-plugin.c:544
 msgid "Open from Database"
@@ -1435,39 +1445,39 @@ msgstr "Åpne fra database"
 msgid "Save to Database"
 msgstr "Lagre til database"
 
-#: src/planner-task-dialog.c:745
+#: src/planner-task-dialog.c:753
 msgid "Finish to start (FS)"
 msgstr "Slutt til start (SlSt)"
 
-#: src/planner-task-dialog.c:746
+#: src/planner-task-dialog.c:754
 msgid "Finish to finish (FF)"
 msgstr "Slutt til slutt (SlSL)"
 
-#: src/planner-task-dialog.c:747
+#: src/planner-task-dialog.c:755
 msgid "Start to start (SS)"
 msgstr "Start til start (StSt)"
 
-#: src/planner-task-dialog.c:748
+#: src/planner-task-dialog.c:756
 msgid "Start to finish (SF)"
 msgstr "Start til slutt (StSl)"
 
-#: src/planner-task-dialog.c:798
+#: src/planner-task-dialog.c:806
 msgid "Can't add new predecessor. No task selected!"
 msgstr "Kan ikke legge til ny forgjenger. Ingen oppgave valgt!"
 
-#: src/planner-task-dialog.c:1330
+#: src/planner-task-dialog.c:1338
 msgid "Assigned"
 msgstr "Tildelt"
 
-#: src/planner-task-dialog.c:1347
+#: src/planner-task-dialog.c:1355
 msgid "Units"
 msgstr "Enheter"
 
-#: src/planner-task-dialog.c:1451
+#: src/planner-task-dialog.c:1459
 msgid "Lag"
 msgstr "Pause"
 
-#: src/planner-task-dialog.c:1584 src/planner-task-dialog.c:1586
+#: src/planner-task-dialog.c:1592 src/planner-task-dialog.c:1594
 msgid "Edit task properties"
 msgstr "Rediger egenskaper for oppgave"
 
@@ -1479,72 +1489,72 @@ msgstr "Sett inn oppgave"
 msgid "Edit task property"
 msgstr "Rediger egenskap for oppgave"
 
-#: src/planner-task-tree.c:2300
+#: src/planner-task-tree.c:2347
 msgid "mon"
 msgstr "måned"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:2301
+#: src/planner-task-tree.c:2348
 msgid "month"
 msgstr "måned"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:2302
+#: src/planner-task-tree.c:2349
 msgid "months"
 msgstr "måneder"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:2303
+#: src/planner-task-tree.c:2350
 msgid "w"
 msgstr "u"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:2304
+#: src/planner-task-tree.c:2351
 msgid "week"
 msgstr "uke"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:2305
+#: src/planner-task-tree.c:2352
 msgid "weeks"
 msgstr "uker"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:2306
+#: src/planner-task-tree.c:2353
 msgid "d"
 msgstr "d"
 
 #. day unit variant accepted in input
-#: src/planner-task-tree.c:2307
+#: src/planner-task-tree.c:2354
 msgid "day"
 msgstr "dag"
 
 #. day unit variant accepted in input
-#: src/planner-task-tree.c:2309
+#: src/planner-task-tree.c:2356
 msgid "h"
 msgstr "t"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:2310
+#: src/planner-task-tree.c:2357
 msgid "hour"
 msgstr "time"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:2311
+#: src/planner-task-tree.c:2358
 msgid "hours"
 msgstr "timer"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:2312
+#: src/planner-task-tree.c:2359
 msgid "min"
 msgstr "min"
 
 #. minute unit variant accepted in input
-#: src/planner-task-tree.c:2313
+#: src/planner-task-tree.c:2360
 msgid "minute"
 msgstr "minutt"
 
 #. minute unit variant accepted in input
-#: src/planner-task-tree.c:2314
+#: src/planner-task-tree.c:2361
 msgid "minutes"
 msgstr "minutter"
 
@@ -1556,19 +1566,23 @@ msgstr "Oppgaver"
 msgid "_Tasks"
 msgstr "_Oppgaver"
 
-#: src/planner-task-view.c:266
+#: src/planner-task-view.c:265
+msgid "WBS"
+msgstr "WBS"
+
+#: src/planner-task-view.c:267
 msgid "Start"
 msgstr "Start"
 
-#: src/planner-task-view.c:267
+#: src/planner-task-view.c:268
 msgid "Finish"
 msgstr "Slutt"
 
-#: src/planner-task-view.c:269
+#: src/planner-task-view.c:270
 msgid "Slack"
 msgstr "Slakk"
 
-#: src/planner-task-view.c:488
+#: src/planner-task-view.c:489
 msgid "Edit custom task properties"
 msgstr "Rediger egendefinerte egenskaper for oppgave"
 
