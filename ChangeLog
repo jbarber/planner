@@ -1,5 +1,13 @@
 2004-10-06  Richard Hult  <richard@imendio.com>
 
+	* data/images/Makefile.am: Rename the mime icon for the new mime
+	system, install in the right spot.
+	
+	* data/mime/planner.keys.in: Mark for translation, patch from
+	Takao.Fujiwara@Sun.COM. Use the new name for the mime icon.
+
+2004-10-06  Richard Hult  <richard@imendio.com>
+
 	* data/stylesheets/html1_css.xsl:
 	* data/stylesheets/html1_gantt.xsl:
 	* data/stylesheets/mrproject2html.xsl: Tweak milestone style

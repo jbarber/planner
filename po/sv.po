@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: planner\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-10-04 23:31+0200\n"
+"POT-Creation-Date: 2004-10-05 20:19+0200\n"
 "PO-Revision-Date: 2004-07-04 16:55+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -429,13 +429,21 @@ msgid "_Work:"
 msgstr "_Arbete:"
 
 #. day unit variant accepted in input
-#: data/glade/task-dialog.glade.h:17 src/planner-task-tree.c:3422
+#: data/glade/task-dialog.glade.h:17 src/planner-task-tree.c:3327
 msgid "days"
 msgstr "dagar"
 
 #: data/glade/task-input-dialog.glade.h:2
 msgid "Insert Task"
 msgstr "Infoga aktivitet"
+
+#: data/mime/planner.keys.in.h:1
+msgid "Documents/Project Management"
+msgstr "Dokument/Projekthantering"
+
+#: data/mime/planner.keys.in.h:2
+msgid "Project Plan"
+msgstr "Projektplan"
 
 #: data/mime/planner.xml.in.h:1
 msgid "Planner project plan"
@@ -603,7 +611,7 @@ msgstr "Ogiltig SQL-URI (ogiltigt projektid)."
 msgid "Invalid SQL URI (no database name specified)."
 msgstr "Ogiltig SQL-URI (inget databasnamn angivet)."
 
-#: libplanner/mrp-task.c:1047
+#: libplanner/mrp-task.c:1048
 msgid ""
 "Could not add a predecessor relation, because the tasks are already related."
 msgstr ""
@@ -880,7 +888,7 @@ msgid "Work"
 msgstr "Arbete"
 
 #: src/planner-gantt-print.c:542 src/planner-gantt-row.c:690
-#: src/planner-task-tree.c:1589 src/planner-window.c:1660
+#: src/planner-task-tree.c:1514 src/planner-window.c:1660
 msgid "Unnamed"
 msgstr "Namnlös"
 
@@ -899,7 +907,7 @@ msgid "Change work to %s"
 msgstr "Ändra arbete till %s"
 
 #: src/planner-gantt-row.c:2392 src/planner-task-dialog.c:449
-#: src/planner-task-tree.c:257 src/planner-task-tree.c:1011
+#: src/planner-task-tree.c:257 src/planner-task-tree.c:936
 msgid "Edit task property"
 msgstr "Redigera aktivitetsegenskap"
 
@@ -1497,15 +1505,15 @@ msgstr "Revision"
 msgid "Open from Database"
 msgstr "Öppna från databas"
 
-#: src/planner-task-cmd.c:97
+#: src/planner-task-cmd.c:98
 msgid "Link task"
 msgstr "Länka aktivitet"
 
-#: src/planner-task-cmd.c:173
+#: src/planner-task-cmd.c:174
 msgid "Unlink task"
 msgstr "Avlänka aktivitet"
 
-#: src/planner-task-cmd.c:268
+#: src/planner-task-cmd.c:269
 msgid "Insert task"
 msgstr "Infoga aktivitet"
 
@@ -1596,23 +1604,23 @@ msgstr "/_Tilldela resurser..."
 msgid "/_Edit task..."
 msgstr "/_Redigera aktivitet..."
 
-#: src/planner-task-tree.c:629
+#: src/planner-task-tree.c:565
 msgid "Remove task"
 msgstr "Ta bort aktivitet"
 
-#: src/planner-task-tree.c:706
+#: src/planner-task-tree.c:642
 msgid "Apply constraint to task"
 msgstr "Sätt restriktion på aktivitet"
 
-#: src/planner-task-tree.c:768
+#: src/planner-task-tree.c:704
 msgid "Reset task constraint"
 msgstr "Återställ aktivitetsrestriktion"
 
-#: src/planner-task-tree.c:902
+#: src/planner-task-tree.c:823
 msgid "Move task"
 msgstr "Flytta aktivitet"
 
-#: src/planner-task-tree.c:2783
+#: src/planner-task-tree.c:2708
 #, c-format
 msgid ""
 "You are about to open an edit dialog each for %i tasks. Are you sure that "
@@ -1621,72 +1629,72 @@ msgstr ""
 "En dialog kommer att öppnas för var och en av %d aktiviteter. Är du säger på "
 "att du vill det?"
 
-#: src/planner-task-tree.c:3414
+#: src/planner-task-tree.c:3319
 msgid "mon"
 msgstr "mån"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:3415
+#: src/planner-task-tree.c:3320
 msgid "month"
 msgstr "månad"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:3416
+#: src/planner-task-tree.c:3321
 msgid "months"
 msgstr "månader"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:3417
+#: src/planner-task-tree.c:3322
 msgid "w"
 msgstr "v"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:3418
+#: src/planner-task-tree.c:3323
 msgid "week"
 msgstr "vecka"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:3419
+#: src/planner-task-tree.c:3324
 msgid "weeks"
 msgstr "veckor"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:3420
+#: src/planner-task-tree.c:3325
 msgid "d"
 msgstr "d"
 
 #. day unit variant accepted in input
-#: src/planner-task-tree.c:3421
+#: src/planner-task-tree.c:3326
 msgid "day"
 msgstr "dag"
 
 #. day unit variant accepted in input
-#: src/planner-task-tree.c:3423
+#: src/planner-task-tree.c:3328
 msgid "h"
 msgstr "t"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:3424
+#: src/planner-task-tree.c:3329
 msgid "hour"
 msgstr "timme"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:3425
+#: src/planner-task-tree.c:3330
 msgid "hours"
 msgstr "timmar"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:3426
+#: src/planner-task-tree.c:3331
 msgid "min"
 msgstr "min"
 
 #. minute unit variant accepted in input
-#: src/planner-task-tree.c:3427
+#: src/planner-task-tree.c:3332
 msgid "minute"
 msgstr "minut"
 
 #. minute unit variant accepted in input
-#: src/planner-task-tree.c:3428
+#: src/planner-task-tree.c:3333
 msgid "minutes"
 msgstr "minuter"
 
