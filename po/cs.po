@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mrproject VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-04-28 04:12+0200\n"
-"PO-Revision-Date: 2004-04-28 12:22+0200\n"
+"POT-Creation-Date: 2004-05-02 15:16+0200\n"
+"PO-Revision-Date: 2004-05-02 16:33+0200\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -1151,7 +1151,7 @@ msgstr "Začátek projektu"
 msgid "Name"
 msgstr "Jméno"
 
-#: src/planner-gantt-print.c:199 src/planner-resource-dialog.c:1499
+#: src/planner-gantt-print.c:199 src/planner-resource-dialog.c:1789
 #: src/planner-resource-view.c:691 src/planner-resource-view.c:707
 #: src/planner-resource-view.c:1638 src/planner-task-view.c:269
 msgid "Work"
@@ -1379,35 +1379,43 @@ msgid "Type"
 msgstr "Typ"
 
 #. Put "no group" at the top.
-#: src/planner-resource-dialog.c:285 src/planner-resource-input-dialog.c:97
+#: src/planner-resource-dialog.c:311 src/planner-resource-input-dialog.c:97
 #: src/planner-resource-view.c:1849
 msgid "(None)"
 msgstr "(žádná)"
 
-#: src/planner-resource-dialog.c:295 src/planner-resource-input-dialog.c:107
+#: src/planner-resource-dialog.c:321 src/planner-resource-input-dialog.c:107
 #: src/planner-task-dialog.c:256
 msgid "(No name)"
 msgstr "(beze jména)"
 
-#: src/planner-resource-dialog.c:462 src/planner-resource-dialog.c:504
+#: src/planner-resource-dialog.c:492
+msgid "Edit resource calendar from dialog"
+msgstr "Upravit kalendář zdroje v dialogu"
+
+#: src/planner-resource-dialog.c:585
+msgid "Edit resource note from dialog"
+msgstr "Upravit poznámku o zdroji v dialogu"
+
+#: src/planner-resource-dialog.c:655 src/planner-resource-dialog.c:697
 msgid "Edit resource property from dialog"
 msgstr "Upravit vlastnost zdroje v dialogu"
 
 #. i18n: time stamp format for notes in task dialog, see strftime(3) for
 #. * a detailed description.
-#: src/planner-resource-dialog.c:1091 src/planner-task-dialog.c:738
+#: src/planner-resource-dialog.c:1351 src/planner-task-dialog.c:738
 msgid "%a %d %b %Y, %H:%M\n"
 msgstr "%a %d. %b %Y, %H:%M\n"
 
-#: src/planner-resource-dialog.c:1189
+#: src/planner-resource-dialog.c:1468
 msgid "None (use project default)"
 msgstr "Žádný (použít implicitní pro projekt)"
 
-#: src/planner-resource-dialog.c:1316 src/planner-resource-dialog.c:1318
+#: src/planner-resource-dialog.c:1595 src/planner-resource-dialog.c:1597
 msgid "Edit resource properties"
 msgstr "Upravit vlastnosti zdroje"
 
-#: src/planner-resource-dialog.c:1500 src/planner-resource-view.c:694
+#: src/planner-resource-dialog.c:1790 src/planner-resource-view.c:694
 #: src/planner-resource-view.c:708 src/planner-resource-view.c:1639
 msgid "Material"
 msgstr "Materiál"
@@ -1592,7 +1600,9 @@ msgstr "Přesunout úlohu"
 msgid ""
 "You are about to open an edit dialog each for %i tasks. Are you sure that "
 "you want to do that?"
-msgstr "Hodláte otevřít dialog úprav pro každou z %i úloh. Jste si jisti, že to chcete udělat?"
+msgstr ""
+"Hodláte otevřít dialog úprav pro každou z %i úloh. Jste si jisti, že to "
+"chcete udělat?"
 
 #: src/planner-task-tree.c:3203
 msgid "mon"
