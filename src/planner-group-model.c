@@ -123,15 +123,30 @@ static void
 mgm_finalize (GObject *object)
 {
 	PlannerGroupModel *model = PLANNER_GROUP_MODEL (object);
-    
-        if (model->priv) {
-		if (model->priv->project) {
-			g_object_unref (model->priv->project);
-		}
+	GList             *l, *groups;
 
-                g_free (model->priv);
-                model->priv = NULL;
-        }
+	g_return_if_fail (model->priv != NULL);
+	g_return_if_fail (MRP_IS_PROJECT (model->priv->project));
+
+	groups = planner_list_model_get_data (PLANNER_LIST_MODEL (model));
+	for (l = groups; l; l = l->next) {
+		g_signal_handlers_disconnect_by_func (MRP_GROUP (l->data), 
+						      mgm_group_notify_cb,
+						      model);
+	}
+	g_signal_handlers_disconnect_by_func (model->priv->project, 
+					      mgm_group_added_cb,
+					      model);
+	g_signal_handlers_disconnect_by_func (model->priv->project, 
+					      mgm_group_removed_cb,
+					      model);
+	g_signal_handlers_disconnect_by_func (model->priv->project, 
+					      mgm_default_group_changed_cb,
+					      model);
+
+	g_object_unref (model->priv->project);
+	g_free (model->priv);
+	model->priv = NULL;
         
         if (G_OBJECT_CLASS (parent_class)->finalize) {
                 (* G_OBJECT_CLASS (parent_class)->finalize) (object);
@@ -246,6 +261,9 @@ mgm_group_notify_cb (MrpGroup *group, GParamSpec *pspec, PlannerGroupModel *mode
 	GtkTreePath  *path;
 	GtkTreeIter   iter;
 
+	g_return_if_fail (PLANNER_IS_GROUP_MODEL (model));
+	g_return_if_fail (MRP_IS_GROUP (group));
+
 	tree_model = GTK_TREE_MODEL (model);
 
 	path = planner_list_model_get_path (PLANNER_LIST_MODEL (model), 
@@ -301,7 +319,9 @@ mgm_default_group_changed_cb (MrpProject   *project,
 	GList       *groups;
 
 	g_return_if_fail (PLANNER_IS_GROUP_MODEL (model));
-	g_return_if_fail (MRP_IS_GROUP (group));
+
+	if (group == NULL) 
+		return;
 
 	groups = planner_list_model_get_data (PLANNER_LIST_MODEL (model));
 	
@@ -331,7 +351,7 @@ planner_group_model_new (MrpProject *project)
         groups = mrp_project_get_groups (project);
 	planner_list_model_set_data (PLANNER_LIST_MODEL (model), groups);
 
-	priv->project = project;
+	priv->project = g_object_ref (project);
 
 	g_signal_connect_object (project,  
 				 "group_added", 

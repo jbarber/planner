@@ -1021,14 +1021,14 @@ task_dialog_cell_type_show_popup (PlannerCellRendererList *cell,
 				  gint                y2,
 				  DialogData         *data) 
 {
-	GtkTreeView  *tree;
-	GtkTreeModel *model;
+	GtkTreeView       *tree;
+	GtkTreeModel      *model;
 	PlannerListModel  *list_model;
-	GtkTreeIter   iter;
-	GtkTreePath  *path;
-	MrpTask      *predecessor;
-	MrpRelation  *relation;
-	GList        *list;
+	GtkTreeIter        iter;
+	GtkTreePath       *path;
+	MrpTask           *predecessor;
+	MrpRelation       *relation;
+	GList             *list;
 
 	g_return_if_fail (PLANNER_IS_CELL_RENDERER_LIST (cell));
 

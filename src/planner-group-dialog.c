@@ -187,7 +187,7 @@ group_dialog_create (PlannerView *view)
 
 	data->view = g_object_ref (view);
 	project = planner_window_get_project (data->view->main_window);
-	
+
 	data->project = g_object_ref (project);
 	
 	gui = glade_xml_new (
@@ -465,12 +465,13 @@ group_dialog_close_editor_cb (GtkWidget *button, GtkWidget *dialog)
 
 	/* We have to destroy the model data */
 	data = g_object_get_data (G_OBJECT (dialog), "data");
-	
+
 	g_object_unref (data->project);
 	g_free (data);
 
 	gtk_widget_destroy (dialog);
 }
+
 static void
 group_cmd_default_do (PlannerCmd *cmd_base)
 {
@@ -586,7 +587,7 @@ group_cmd_edit_property_do (PlannerCmd *cmd_base)
 {
 	GroupCmdEditProperty *cmd;
 
-	cmd = (GroupCmdEditProperty *) cmd_base;
+	cmd = (GroupCmdEditProperty *) cmd_base;	
 	
 	g_object_set_property (G_OBJECT (cmd->group),
 			       cmd->property,
@@ -667,11 +668,11 @@ group_dialog_cell_edited (GtkCellRendererText *cell,
 	GtkTreeIter       iter;
 	GtkTreeModelSort *sorted_model;
 	GtkTreeIter       sorted_iter;
-	GValue                value = { 0 };
+	GValue            value = { 0 };
 	gint              column;
 	MrpGroup         *group;
-	PlannerCmd           *cmd;
-	gchar                *property = "";
+	PlannerCmd       *cmd;
+	gchar            *property = "";
 
 	data  = g_object_get_data (G_OBJECT (dialog), "data");
 
@@ -860,11 +861,11 @@ group_dialog_get_selected_func (GtkTreeModel *sorted_model,
 				GtkTreeIter  *sorted_iter,
 				gpointer      data)
 {
-	GList       **list = data;
-	MrpObject    *object;
-	GtkTreeIter   iter;
+	GList            **list = data;
+	MrpObject         *object;
+	GtkTreeIter        iter;
 	PlannerListModel  *model;
-	
+
 	model = PLANNER_LIST_MODEL (gtk_tree_model_sort_get_model (
 				       GTK_TREE_MODEL_SORT (sorted_model)));
 

@@ -692,7 +692,7 @@ resource_dialog_email_changed_cb (GtkWidget  *w,
 	email = gtk_entry_get_text (GTK_ENTRY (w));
 
 	g_value_init (&value, G_TYPE_STRING);
-	g_value_set_object (&value, g_strdup (email));
+	g_value_set_string (&value, g_strdup (email));
 
 	g_signal_handlers_block_by_func (data->resource,
 					 resource_dialog_resource_email_changed_cb, 

@@ -1,3 +1,13 @@
+2004-03-27  Alvaro del Castillo  <acs@barrapunto.com>
+
+	* src/planner-group-model.c:
+	project object ref
+	disconnect signals when destroying the model
+	code cleaning in destroy function
+	* src/planner-resource-view.c: cleaned unused variable
+	* src/planner-resource-dialog.c: (resource_dialog_email_changed_cb)
+	corrected string g_value (detected by Lincoln Phipps)
+		
 2004-03-26  Richard Hult  <richard@imendio.com>
 
 	* src/planner-gantt-print.c: (planner_gantt_print_do),

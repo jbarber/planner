@@ -1842,10 +1842,8 @@ resource_view_edit_groups_cb (BonoboUIComponent *component,
 			      const char        *cname)
 {
 	PlannerView *view;
-	MrpProject  *project;
 
 	view = PLANNER_VIEW (data);
-	project = planner_window_get_project (view->main_window);
 
 	/* FIXME: we have to destroy group_dialog correctly */
 	if (view->priv->group_dialog == NULL) {
