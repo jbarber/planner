@@ -9,15 +9,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Planner\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-02-20 06:01+0100\n"
-"PO-Revision-Date: 2004-02-20 06:01+0100\n"
+"POT-Creation-Date: 2004-03-26 16:38+0100\n"
+"PO-Revision-Date: 2004-03-26 16:44+0100\n"
 "Last-Translator: Бранко Ивановић <popeye@one.ekof.bg.ac.yu>\n"
-"Language-Team: Serbian (sr) <serbiangnome-lista@bogus.example.com>\n"
+"Language-Team: Serbian (sr) <gnom@prevod.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3;    plural=n%10==1 && n%100!=11 ? 0 :    n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3;    plural=n%10==1 && n%100!=11 ? 0 :    n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 
 #: data/glade/add-predecessor.glade.h:1 data/glade/calendar-dialog.glade.h:4
 #: data/glade/html-output.glade.h:2 data/glade/new-property.glade.h:1
@@ -38,8 +37,8 @@ msgstr "_Кашњење:"
 
 #: data/glade/add-predecessor.glade.h:4 data/glade/calendar-dialog.glade.h:35
 #: data/glade/new-property.glade.h:5 data/glade/project-properties.glade.h:10
-#: data/glade/resource-dialog.glade.h:11
-#: data/glade/resource-input-dialog.glade.h:6
+#: data/glade/resource-dialog.glade.h:12
+#: data/glade/resource-input-dialog.glade.h:7
 #: data/glade/task-dialog.glade.h:14 data/glade/task-input-dialog.glade.h:4
 msgid "_Name:"
 msgstr "_Име:"
@@ -221,7 +220,7 @@ msgstr "_Опис:"
 msgid "_Label:"
 msgstr "_Ознака:"
 
-#: data/glade/new-property.glade.h:6 data/glade/resource-dialog.glade.h:12
+#: data/glade/new-property.glade.h:6 data/glade/resource-dialog.glade.h:14
 msgid "_Type:"
 msgstr "Ти_п:"
 
@@ -291,6 +290,10 @@ msgid "Notes"
 msgstr "Белешке"
 
 #: data/glade/resource-dialog.glade.h:7
+msgid "Optional - overrides resource name in Gantt view."
+msgstr "Необавезно — превазилази име ресурса у Гант прегледу."
+
+#: data/glade/resource-dialog.glade.h:8
 msgid ""
 "Select the calendar to use for this resource. If you want to use the default "
 "calendar of the project, select 'None'. "
@@ -298,25 +301,34 @@ msgstr ""
 "Изабери календар за употребу са овим извором. Ако желите да користите "
 "подразумевани календар за пројекат, изаберите „Ниједан“. "
 
-#: data/glade/resource-dialog.glade.h:8
-#: data/glade/resource-input-dialog.glade.h:3
+#: data/glade/resource-dialog.glade.h:9
+#: data/glade/resource-input-dialog.glade.h:4
 msgid "_Email:"
 msgstr "_Е-пошта:"
 
-#: data/glade/resource-dialog.glade.h:9
-#: data/glade/resource-input-dialog.glade.h:4
+#: data/glade/resource-dialog.glade.h:10
+#: data/glade/resource-input-dialog.glade.h:5
 msgid "_Group:"
 msgstr "_Група:"
 
-#: data/glade/resource-dialog.glade.h:10
+#: data/glade/resource-dialog.glade.h:11
 msgid "_Insert time stamp"
 msgstr "У_метни временску ознаку"
+
+#: data/glade/resource-dialog.glade.h:13
+#: data/glade/resource-input-dialog.glade.h:8
+msgid "_Short name:"
+msgstr "_Кратко име:"
 
 #: data/glade/resource-input-dialog.glade.h:2
 msgid "Insert Resource"
 msgstr "Уметни ресурс"
 
-#: data/glade/resource-input-dialog.glade.h:5
+#: data/glade/resource-input-dialog.glade.h:3
+msgid "Optional - overrides resource name in gantt view."
+msgstr "Необавезно — превазилази име ресурса у Гант прегледу."
+
+#: data/glade/resource-input-dialog.glade.h:6
 #: data/glade/task-input-dialog.glade.h:3
 msgid "_Insert"
 msgstr "_Унеси"
@@ -362,7 +374,7 @@ msgstr "_Завршено:"
 msgid "Predecessors"
 msgstr "Претходници"
 
-#: data/glade/task-dialog.glade.h:9 src/planner-resource-view.c:384
+#: data/glade/task-dialog.glade.h:9 src/planner-resource-view.c:393
 msgid "Resources"
 msgstr "Извори"
 
@@ -391,7 +403,7 @@ msgid "_Work:"
 msgstr "_Рад:"
 
 #. day unit variant accepted in input
-#: data/glade/task-dialog.glade.h:17 src/planner-task-tree.c:2479
+#: data/glade/task-dialog.glade.h:17 src/planner-task-tree.c:2355
 msgid "days"
 msgstr "дана"
 
@@ -799,11 +811,11 @@ msgstr "Користи основни"
 msgid "Use day from base calendar"
 msgstr "Користи дан из основног календара"
 
-#: libplanner/mrp-parser.c:1043 libplanner/mrp-parser.c:1138
+#: libplanner/mrp-parser.c:1058 libplanner/mrp-parser.c:1153
 msgid "Could not create XML tree"
 msgstr "Не могу да сачиним XML стабло"
 
-#: libplanner/mrp-parser.c:1104
+#: libplanner/mrp-parser.c:1119
 msgid "Could not write XML file"
 msgstr "Не могу да упишем XML датотеку"
 
@@ -857,7 +869,7 @@ msgstr "Датум"
 msgid "Duration"
 msgstr "Трајање"
 
-#: libplanner/mrp-property.c:377 src/planner-task-view.c:270
+#: libplanner/mrp-property.c:377 src/planner-task-view.c:271
 msgid "Cost"
 msgstr "Трошак"
 
@@ -870,12 +882,12 @@ msgstr "Ниједан"
 msgid "Invalid Unicode"
 msgstr "Неисправан Уникод"
 
-#: libplanner/mrp-sql.c:2201
+#: libplanner/mrp-sql.c:2215
 #, c-format
 msgid "Connection to database '%s' failed.\n"
 msgstr "Неуспешно повезивање са базом „%s“.\n"
 
-#: libplanner/mrp-sql.c:2206 libplanner/mrp-sql.c:3643
+#: libplanner/mrp-sql.c:2220 libplanner/mrp-sql.c:3660
 #, c-format
 msgid ""
 "Connection to database '%s' failed.\n"
@@ -884,12 +896,12 @@ msgstr ""
 "Неуспешно повезивање са базом „%s“.\n"
 "%s"
 
-#: libplanner/mrp-sql.c:2214
+#: libplanner/mrp-sql.c:2228
 #, c-format
 msgid "BEGIN command failed %s."
 msgstr "BEGIN наредба неуспешна %s."
 
-#: libplanner/mrp-sql.c:2380
+#: libplanner/mrp-sql.c:2394
 #, c-format
 msgid ""
 "The project '%s' has been changed by the user '%s' since you opened it. Do "
@@ -1072,46 +1084,51 @@ msgstr "%Y %b %d"
 msgid "Project start"
 msgstr "Почетак пројекта"
 
-#: src/planner-gantt-print.c:190 src/planner-group-dialog.c:805
-#: src/planner-property-dialog.c:378 src/planner-resource-view.c:1159
-#: src/planner-task-dialog.c:1311 src/planner-task-dialog.c:1397
-#: src/planner-task-view.c:265
+#: src/planner-gantt-print.c:191 src/planner-group-dialog.c:805
+#: src/planner-property-dialog.c:378 src/planner-resource-view.c:1168
+#: src/planner-task-dialog.c:1319 src/planner-task-dialog.c:1405
+#: src/planner-task-view.c:266
 msgid "Name"
 msgstr "Име"
 
-#: src/planner-gantt-print.c:198 src/planner-resource-dialog.c:1101
-#: src/planner-resource-view.c:682 src/planner-resource-view.c:698
-#: src/planner-resource-view.c:1528 src/planner-task-view.c:268
+#: src/planner-gantt-print.c:199 src/planner-resource-dialog.c:1298
+#: src/planner-resource-view.c:691 src/planner-resource-view.c:707
+#: src/planner-resource-view.c:1595 src/planner-task-view.c:269
 msgid "Work"
 msgstr "Рад"
 
-#: src/planner-gantt-print.c:513 src/planner-gantt-print.c:515
-#: src/planner-gantt-row.c:656 src/planner-gantt-row.c:658
+#: src/planner-gantt-print.c:523 src/planner-gantt-row.c:668
 #: src/planner-window.c:1648
 msgid "Unnamed"
 msgstr "Неименовани"
 
-#: src/planner-gantt-row.c:1841 src/planner-gantt-row.c:1844
+#: src/planner-gantt-row.c:1907 src/planner-gantt-row.c:1910
 msgid "No name"
 msgstr "Без имена"
 
-#: src/planner-gantt-row.c:1847
+#: src/planner-gantt-row.c:1913
 #, c-format
 msgid "Make task '%s' a predecessor of '%s'"
 msgstr "Учини задатак „%s“ претходником „%s“"
 
-#: src/planner-gantt-row.c:1905
+#: src/planner-gantt-row.c:1971
 #, c-format
 msgid "Change work to %s"
 msgstr "Промени рад на %s"
 
-#: src/planner-gantt-view.c:288
+#: src/planner-gantt-view.c:287
 msgid "Gantt Chart"
 msgstr "Гант карта"
 
-#: src/planner-gantt-view.c:296
+#: src/planner-gantt-view.c:295
 msgid "_Gantt Chart"
 msgstr "_Гант карта"
+
+#: src/planner-gantt-view.c:492
+msgid ""
+"\n"
+"WBS"
+msgstr "\nWBS"
 
 #: src/planner-gantt-view.c:493
 msgid ""
@@ -1189,19 +1206,39 @@ msgstr "planner: --geometry се не може користити за више 
 msgid "Could not open plugin file '%s'\n"
 msgstr "Не могу да отворим датотеку додатка „%s“\n"
 
-#: src/planner-predecessor-model.c:191 src/planner-task-dialog.c:1039
+#: src/planner-task-popup.c:45
+msgid "/_Insert task"
+msgstr "/_Унеси задатак"
+
+#: src/planner-task-popup.c:48
+msgid "/_Insert subtask"
+msgstr "/_Унеси подзадатак"
+
+#: src/planner-task-popup.c:51
+msgid "/_Remove task"
+msgstr "/_Уклони задатак"
+
+#: src/planner-task-popup.c:56
+msgid "/_Unlink task"
+msgstr "/_Одвежи задатак"
+
+#: src/planner-task-popup.c:61
+msgid "/_Edit task..."
+msgstr "/_Измени задатак..."
+
+#: src/planner-predecessor-model.c:191 src/planner-task-dialog.c:1047
 msgid "FS"
 msgstr "КП"
 
-#: src/planner-predecessor-model.c:194 src/planner-task-dialog.c:1040
+#: src/planner-predecessor-model.c:194 src/planner-task-dialog.c:1048
 msgid "FF"
 msgstr "КК"
 
-#: src/planner-predecessor-model.c:197 src/planner-task-dialog.c:1041
+#: src/planner-predecessor-model.c:197 src/planner-task-dialog.c:1049
 msgid "SS"
 msgstr "ПП"
 
-#: src/planner-predecessor-model.c:200 src/planner-task-dialog.c:1042
+#: src/planner-predecessor-model.c:200 src/planner-task-dialog.c:1050
 msgid "SF"
 msgstr "ПК"
 
@@ -1266,82 +1303,90 @@ msgstr "Не могу да направим прозорче за својств
 msgid "Label"
 msgstr "Налепница"
 
-#: src/planner-property-dialog.c:411 src/planner-resource-view.c:1180
-#: src/planner-task-dialog.c:1429
+#: src/planner-property-dialog.c:411 src/planner-resource-view.c:1210
+#: src/planner-task-dialog.c:1437
 msgid "Type"
 msgstr "Тип"
 
 #. Put "no group" at the top.
-#: src/planner-resource-dialog.c:248 src/planner-resource-input-dialog.c:96
-#: src/planner-resource-view.c:1739
+#: src/planner-resource-dialog.c:267 src/planner-resource-input-dialog.c:97
+#: src/planner-resource-view.c:1806
 msgid "(None)"
 msgstr "(Ниједан)"
 
-#: src/planner-resource-dialog.c:258 src/planner-resource-input-dialog.c:106
-#: src/planner-task-dialog.c:249
+#: src/planner-resource-dialog.c:277 src/planner-resource-input-dialog.c:107
+#: src/planner-task-dialog.c:251
 msgid "(No name)"
 msgstr "(Без имена)"
 
+#: src/planner-resource-dialog.c:426
+msgid "Edit resource property from dialog"
+msgstr "Измени својство извора помоћу прозорчета"
+
 #. i18n: time stamp format for notes in task dialog, see strftime(3) for
 #. * a detailed description.
-#: src/planner-resource-dialog.c:728 src/planner-task-dialog.c:679
+#: src/planner-resource-dialog.c:910 src/planner-task-dialog.c:687
 msgid "%a %d %b %Y, %H:%M\n"
 msgstr "%a %d %b %Y, %H:%M\n"
 
-#: src/planner-resource-dialog.c:826
+#: src/planner-resource-dialog.c:1008
 msgid "None (use project default)"
 msgstr "Ниједан (користи подразумевано за пројекат)"
 
-#: src/planner-resource-dialog.c:953 src/planner-resource-dialog.c:955
+#: src/planner-resource-dialog.c:1135 src/planner-resource-dialog.c:1137
 msgid "Edit resource properties"
 msgstr "Измени својства ресурса"
 
-#: src/planner-resource-dialog.c:1102 src/planner-resource-view.c:685
-#: src/planner-resource-view.c:699 src/planner-resource-view.c:1529
+#: src/planner-resource-dialog.c:1299 src/planner-resource-view.c:694
+#: src/planner-resource-view.c:708 src/planner-resource-view.c:1596
 msgid "Material"
 msgstr "Материјал"
 
-#: src/planner-resource-view.c:251
+#: src/planner-resource-view.c:260
 msgid "/_Insert resource"
 msgstr "/_Унеси извор"
 
-#: src/planner-resource-view.c:252
+#: src/planner-resource-view.c:261
 msgid "/_Remove resource"
 msgstr "/_Уклони извор"
 
-#: src/planner-resource-view.c:253
+#: src/planner-resource-view.c:262
 msgid "/_Edit resource..."
 msgstr "/_Измени извор..."
 
-#: src/planner-resource-view.c:392
+#: src/planner-resource-view.c:401
 msgid "_Resources"
 msgstr "_Извори"
 
-#: src/planner-resource-view.c:789
+#: src/planner-resource-view.c:798
 msgid "Insert resource"
 msgstr "Унеси извор"
 
-#: src/planner-resource-view.c:941
+#: src/planner-resource-view.c:950
 msgid "Remove resource"
 msgstr "Уклони извор"
 
-#: src/planner-resource-view.c:1042
+#: src/planner-resource-view.c:1051
 msgid "Edit custom resource properties"
 msgstr "Измени произвољна својства извора"
 
-#: src/planner-resource-view.c:1204
+#: src/planner-resource-view.c:1189
+msgid "Short name"
+msgstr "Кратко име"
+
+#: src/planner-resource-view.c:1234
 msgid "Group"
 msgstr "Група"
 
-#: src/planner-resource-view.c:1233
+#: src/planner-resource-view.c:1263
 msgid "Email"
 msgstr "Е-пошта"
 
-#: src/planner-resource-view.c:1298
+#: src/planner-resource-view.c:1328
 msgid "Edit resource property"
 msgstr "Измени својство извора"
 
-#: src/planner-resource-view.c:1360
+#: src/planner-resource-view.c:1390
 msgid "Edit resource custom property"
 msgstr "Измени произвољно својство извора"
 
@@ -1392,149 +1437,129 @@ msgstr "П%d"
 msgid "%04d, H%d"
 msgstr "%04d, П%d"
 
-#: src/planner-sql-plugin.c:367
+#: src/planner-sql-plugin.c:368
 msgid "Project"
 msgstr "Пројекат"
 
-#: src/planner-sql-plugin.c:537
+#: src/planner-sql-plugin.c:544
 msgid "Open from Database"
 msgstr "Отвори из базе података"
 
-#: src/planner-sql-plugin.c:644
+#: src/planner-sql-plugin.c:651
 msgid "Save to Database"
 msgstr "Сачувај у базу података"
 
-#: src/planner-task-dialog.c:745
+#: src/planner-task-dialog.c:753
 msgid "Finish to start (FS)"
 msgstr "Крај са почетком (КП)"
 
-#: src/planner-task-dialog.c:746
+#: src/planner-task-dialog.c:754
 msgid "Finish to finish (FF)"
 msgstr "Крај са крајем (КК)"
 
-#: src/planner-task-dialog.c:747
+#: src/planner-task-dialog.c:755
 msgid "Start to start (SS)"
 msgstr "Почетак са почетком (ПП)"
 
-#: src/planner-task-dialog.c:748
+#: src/planner-task-dialog.c:756
 msgid "Start to finish (SF)"
 msgstr "Почетак са крајем (ПК)"
 
-#: src/planner-task-dialog.c:798
+#: src/planner-task-dialog.c:806
 msgid "Can't add new predecessor. No task selected!"
 msgstr "Не могу да додам претходника. Није изабран задатак!"
 
-#: src/planner-task-dialog.c:1330
+#: src/planner-task-dialog.c:1338
 msgid "Assigned"
 msgstr "Додељен"
 
-#: src/planner-task-dialog.c:1347
+#: src/planner-task-dialog.c:1355
 msgid "Units"
 msgstr "Јединице"
 
-#: src/planner-task-dialog.c:1451
+#: src/planner-task-dialog.c:1459
 msgid "Lag"
 msgstr "Кашњење"
 
-#: src/planner-task-dialog.c:1584 src/planner-task-dialog.c:1586
+#: src/planner-task-dialog.c:1592 src/planner-task-dialog.c:1594
 msgid "Edit task properties"
 msgstr "Измени својства задатка"
 
-#: src/planner-task-tree.c:189
-msgid "/_Insert task"
-msgstr "/_Унеси задатак"
-
-#: src/planner-task-tree.c:192
-msgid "/_Insert subtask"
-msgstr "/_Унеси подзадатак"
-
-#: src/planner-task-tree.c:195
-msgid "/_Remove task"
-msgstr "/_Уклони задатак"
-
-#: src/planner-task-tree.c:200
-msgid "/_Unlink task"
-msgstr "/_Одвежи задатак"
-
-#: src/planner-task-tree.c:206
-msgid "/_Edit task..."
-msgstr "/_Измени задатак..."
-
-#: src/planner-task-tree.c:297
+#: src/planner-task-tree.c:245
 msgid "Insert task"
 msgstr "Унеси задатак"
 
-#: src/planner-task-tree.c:373
+#: src/planner-task-tree.c:321
 msgid "Edit task property"
 msgstr "Измени својства задатка"
 
-#: src/planner-task-tree.c:2471
+#: src/planner-task-tree.c:2347
 msgid "mon"
 msgstr "мес"
 
 # bug: plural-forms (there are many more options in more than one language)
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:2472
+#: src/planner-task-tree.c:2348
 msgid "month"
 msgstr "месец"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:2473
+#: src/planner-task-tree.c:2349
 msgid "months"
 msgstr "месеци"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:2474
+#: src/planner-task-tree.c:2350
 msgid "w"
 msgstr "с"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:2475
+#: src/planner-task-tree.c:2351
 msgid "week"
 msgstr "седмица"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:2476
+#: src/planner-task-tree.c:2352
 msgid "weeks"
 msgstr "седмице"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:2477
+#: src/planner-task-tree.c:2353
 msgid "d"
 msgstr "д"
 
 #. day unit variant accepted in input
-#: src/planner-task-tree.c:2478
+#: src/planner-task-tree.c:2354
 msgid "day"
 msgstr "дан"
 
 #. day unit variant accepted in input
-#: src/planner-task-tree.c:2480
+#: src/planner-task-tree.c:2356
 msgid "h"
 msgstr "ч"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:2481
+#: src/planner-task-tree.c:2357
 msgid "hour"
 msgstr "час"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:2482
+#: src/planner-task-tree.c:2358
 msgid "hours"
 msgstr "часова"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:2483
+#: src/planner-task-tree.c:2359
 msgid "min"
 msgstr "мин"
 
 #. minute unit variant accepted in input
-#: src/planner-task-tree.c:2484
+#: src/planner-task-tree.c:2360
 msgid "minute"
 msgstr "минута"
 
 #. minute unit variant accepted in input
-#: src/planner-task-tree.c:2485
+#: src/planner-task-tree.c:2361
 msgid "minutes"
 msgstr "минуте"
 
@@ -1546,19 +1571,24 @@ msgstr "Задаци"
 msgid "_Tasks"
 msgstr "_Задаци"
 
-#: src/planner-task-view.c:266
+# Шта је ово?
+#: src/planner-task-view.c:265
+msgid "WBS"
+msgstr "WBS"
+
+#: src/planner-task-view.c:267
 msgid "Start"
 msgstr "Почетак"
 
-#: src/planner-task-view.c:267
+#: src/planner-task-view.c:268
 msgid "Finish"
 msgstr "Крај"
 
-#: src/planner-task-view.c:269
+#: src/planner-task-view.c:270
 msgid "Slack"
 msgstr "Променљив"
 
-#: src/planner-task-view.c:488
+#: src/planner-task-view.c:489
 msgid "Edit custom task properties"
 msgstr "Измени произвољна својства задатка"
 
