@@ -470,9 +470,9 @@ static void
 task_tree_init (PlannerTaskTree *tree)
 {
 	PlannerTaskTreePriv *priv;
-	GtkIconFactory *icon_factory;
-	GtkIconSet     *icon_set;
-	GdkPixbuf      *pixbuf;
+	GtkIconFactory      *icon_factory;
+	GtkIconSet          *icon_set;
+	GdkPixbuf           *pixbuf;
 	
 	priv = g_new0 (PlannerTaskTreePriv, 1);
 	tree->priv = priv;
@@ -726,10 +726,10 @@ task_tree_tree_view_button_press_event (GtkTreeView    *tree_view,
 					GdkEventButton *event,
 					PlannerTaskTree     *tree)
 {
-	GtkTreePath    *path;
-	GtkTreeView    *tv;
+	GtkTreePath         *path;
+	GtkTreeView         *tv;
 	PlannerTaskTreePriv *priv;
-	GtkItemFactory *factory;
+	GtkItemFactory      *factory;
 
 	tv = GTK_TREE_VIEW (tree);
 	priv = tree->priv;
@@ -874,12 +874,12 @@ task_tree_duration_data_func (GtkTreeViewColumn *tree_column,
 {
 	PlannerTaskTree     *task_tree;
 	PlannerTaskTreePriv *priv;
-	MrpCalendar    *calendar;
-	gint            hours_per_day;
-	gint            duration;
-	gchar          *str;
-	gint            weight;
-	gboolean        editable;
+	MrpCalendar         *calendar;
+	gint                 hours_per_day;
+	gint                 duration;
+	gchar               *str;
+	gint                 weight;
+	gboolean             editable;
 
 	task_tree = PLANNER_TASK_TREE (data);
 	priv = task_tree->priv;
@@ -993,10 +993,10 @@ task_tree_slack_data_func (GtkTreeViewColumn *tree_column,
 			   gpointer           data)
 {
 	PlannerTaskTree *tree = data;
-	gint        slack;
-	gint        hours_per_day;
-	gchar      *str;
-	gint        weight;
+	gint             slack;
+	gint             hours_per_day;
+	gchar           *str;
+	gint             weight;
 
 	hours_per_day = mrp_calendar_day_get_total_work (
 		mrp_project_get_calendar (tree->priv->project),
@@ -1073,12 +1073,12 @@ task_tree_start_edited (GtkCellRendererText *cell,
 			gpointer             data)
 {
 	PlannerCellRendererDate *date;
-	GtkTreeView        *view;
-	GtkTreeModel       *model;
-	GtkTreePath        *path;
-	GtkTreeIter         iter;
-	MrpTask            *task;
-	MrpConstraint       constraint;
+	GtkTreeView             *view;
+	GtkTreeModel            *model;
+	GtkTreePath             *path;
+	GtkTreeIter              iter;
+	MrpTask                 *task;
+	MrpConstraint            constraint;
 
 	/* FIXME: undo */
 	
@@ -1168,17 +1168,17 @@ task_tree_duration_edited (GtkCellRendererText *cell,
 			   gchar               *new_text,
 			   gpointer             data)
 {
-	PlannerTaskTree   *tree = data;
-	GtkTreeView  *view = data;
-	GtkTreeModel *model;
-	GtkTreePath  *path;
-	GtkTreeIter   iter;
-	gfloat        flt;
-	gint          duration;
-	gint          seconds_per_day;
-	gchar        *ptr;
-	MrpTask      *task;
-	GValue        value = { 0 };
+	PlannerTaskTree *tree = data;
+	GtkTreeView     *view = data;
+	GtkTreeModel    *model;
+	GtkTreePath     *path;
+	GtkTreeIter      iter;
+	gfloat           flt;
+	gint             duration;
+	gint             seconds_per_day;
+	gchar           *ptr;
+	MrpTask         *task;
+	GValue           value = { 0 };
 	
 	model = gtk_tree_view_get_model (view);
 	path = gtk_tree_path_new_from_string (path_string);	
@@ -1341,14 +1341,14 @@ task_tree_property_value_edited (GtkCellRendererText *cell,
 				 gchar               *new_text, 
 				 ColPropertyData     *data)
 {
-	GtkTreePath        *path;
-	GtkTreeIter         iter;
-	GtkTreeModel       *model;
-	MrpProperty        *property;
-	MrpPropertyType     type;
-	MrpTask            *task;
+	GtkTreePath             *path;
+	GtkTreeIter              iter;
+	GtkTreeModel            *model;
+	MrpProperty             *property;
+	MrpPropertyType          type;
+	MrpTask                 *task;
 	PlannerCellRendererDate *date;	
-	gfloat              fvalue;
+	gfloat                   fvalue;
 
 	/* FIXME: undo */
 	
@@ -1424,12 +1424,12 @@ task_tree_property_added (MrpProject      *project,
 			  MrpProperty     *property,
 			  PlannerTaskTree *task_tree)
 {
-	GtkTreeView       *tree;
-	PlannerTaskTreePriv    *priv;
-	MrpPropertyType    type;
-	GtkTreeViewColumn *col;	
-	GtkCellRenderer   *cell;
-	ColPropertyData   *data;
+	GtkTreeView         *tree;
+	PlannerTaskTreePriv *priv;
+	MrpPropertyType      type;
+	GtkTreeViewColumn   *col;	
+	GtkCellRenderer     *cell;
+	ColPropertyData     *data;
 
 	priv = task_tree->priv;
 	
@@ -1497,8 +1497,8 @@ task_tree_property_removed (MrpProject  *project,
 			    MrpProperty *property,
 			    PlannerTaskTree  *task_tree)
 {
-	PlannerTaskTreePriv    *priv;
-	GtkTreeViewColumn *col;
+	PlannerTaskTreePriv *priv;
+	GtkTreeViewColumn   *col;
 
 	priv = task_tree->priv;
 	
@@ -1540,7 +1540,7 @@ task_tree_setup_tree_view (GtkTreeView  *tree,
 			   MrpProject   *project,
 			   PlannerGanttModel *model)
 {
-	PlannerTaskTree       *task_tree;
+	PlannerTaskTree  *task_tree;
 	GtkTreeSelection *selection;
 
 	task_tree = PLANNER_TASK_TREE (tree);
@@ -1773,12 +1773,12 @@ planner_task_tree_new (PlannerWindow *main_window,
 		       gpointer      first_column,
 		       ...)
 {
-	MrpProject     *project;
+	MrpProject          *project;
 	PlannerTaskTree     *tree;
 	PlannerTaskTreePriv *priv;
-	va_list         args;
-	gpointer        str;
-	gint            col;
+	va_list              args;
+	gpointer             str;
+	gint                 col;
 	
 	tree = g_object_new (PLANNER_TYPE_TASK_TREE, NULL);
 
@@ -1958,9 +1958,9 @@ void
 planner_task_tree_edit_task (PlannerTaskTree *tree)
 {
 	PlannerTaskTreePriv *priv;
-	MrpTask        *task;
-	GList          *list;
-	GtkWidget      *dialog;
+	MrpTask             *task;
+	GList               *list;
+	GtkWidget           *dialog;
 
 	g_return_if_fail (PLANNER_IS_TASK_TREE (tree));
 	
@@ -1990,7 +1990,7 @@ void
 planner_task_tree_insert_tasks (PlannerTaskTree   *tree)
 {
 	PlannerTaskTreePriv *priv;
-	GtkWidget      *widget;
+	GtkWidget           *widget;
 
 	g_return_if_fail (PLANNER_IS_TASK_TREE (tree));
 	
@@ -2072,17 +2072,17 @@ planner_task_tree_unlink_task (PlannerTaskTree *tree)
 void
 planner_task_tree_indent_task (PlannerTaskTree *tree)
 {
-	PlannerGanttModel     *model;
-	MrpTask          *task;
-	MrpTask          *new_parent;
-	MrpTask          *first_task_parent;
-	MrpProject       *project;
-	GList            *list, *l;
-	GList            *indent_tasks = NULL;
-	GError           *error = NULL;
-	GtkTreePath      *path;
-	GtkWidget        *dialog;
-	GtkTreeSelection *selection;
+	PlannerGanttModel *model;
+	MrpTask           *task;
+	MrpTask           *new_parent;
+	MrpTask           *first_task_parent;
+	MrpProject        *project;
+	GList             *list, *l;
+	GList             *indent_tasks = NULL;
+	GError            *error = NULL;
+	GtkTreePath       *path;
+	GtkWidget         *dialog;
+	GtkTreeSelection  *selection;
 
 	/* FIXME: undo */
 
@@ -2159,15 +2159,15 @@ planner_task_tree_indent_task (PlannerTaskTree *tree)
 void
 planner_task_tree_unindent_task (PlannerTaskTree *tree)
 {
-	PlannerGanttModel     *model;
-	MrpTask          *task;
-	MrpTask          *new_parent;
-	MrpTask          *first_task_parent;
-	MrpProject       *project;
-	GList            *list, *l;
-	GList            *unindent_tasks = NULL;
-	GtkTreePath      *path;
-	GtkTreeSelection *selection;
+	PlannerGanttModel *model;
+	MrpTask           *task;
+	MrpTask           *new_parent;
+	MrpTask           *first_task_parent;
+	MrpProject        *project;
+	GList             *list, *l;
+	GList             *unindent_tasks = NULL;
+	GtkTreePath       *path;
+	GtkTreeSelection  *selection;
 
 	/* FIXME: undo */
 
@@ -2286,7 +2286,7 @@ planner_task_tree_move_task_down (PlannerTaskTree *tree)
 	MrpProject 	 *project;
 	MrpTask	   	 *task, *parent, *sibling;
 	GList		 *list;
-	guint		 position;
+	guint		  position;
 
 	/* FIXME: undo */
 

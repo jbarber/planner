@@ -14,6 +14,12 @@
 
 2004-01-25  Alvaro del Castillo  <acs@barrapunto.com>
 
+	* src/planner-resource-view.c: Added undo for resource name property.
+	Now it will be easy to add undo for all the other properties.
+	* src/planner-task-tree.c: coding style corrections.
+
+2004-01-25  Alvaro del Castillo  <acs@barrapunto.com>
+
 	* src/planner-resource-view.c: Added undo for resource insertion.
 
 2004-01-23  Xavier Ordoquy   <xordoquy@wanadoo.fr>
