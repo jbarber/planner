@@ -1,5 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
+ * Copyright (C) 2003      Imendio HB
  * Copyright (C) 2001-2002 CodeFactory AB
  * Copyright (C) 2001-2002 Richard Hult <richard@imendio.com>
  * Copyright (C) 2001-2002 Mikael Hallendal <micke@imendio.com>
@@ -38,91 +39,89 @@
 
 typedef struct {
 	PlannerWindow *main_window;
-	MrpProject   *project;
-	GtkWidget    *dialog;
-	GtkWidget    *name_entry;
-	GtkWidget    *org_entry;
-	GtkWidget    *manager_entry;
-	GtkWidget    *start_date;
-	GtkWidget    *phase_option_menu;
-	GtkWidget    *calendar_label;
+	MrpProject    *project;
+	GtkWidget     *dialog;
+	GtkWidget     *name_entry;
+	GtkWidget     *org_entry;
+	GtkWidget     *manager_entry;
+	GtkWidget     *start_date;
+	GtkWidget     *phase_option_menu;
+	GtkWidget     *calendar_label;
 
-	GtkTreeView  *properties_tree;
-	GtkWidget    *add_property_button;
-	GtkWidget    *remove_property_button;
+	GtkTreeView   *properties_tree;
+	GtkWidget     *add_property_button;
+	GtkWidget     *remove_property_button;
 } DialogData;
 
 #define DIALOG_GET_DATA(d) g_object_get_data ((GObject*)d, "data")
 
-static void  mpp_select_calendar_clicked_cb      (GtkWidget         *button,
-						  GtkWidget         *dialog);
-static void  mpp_start_changed_cb                (GtkWidget         *w,
-						  GtkWidget         *dialog);
-static void  mpp_project_start_notify_cb         (MrpProject        *project,  
-						  GParamSpec        *pspec, 
-						  GtkWidget         *dialog);
-static void  mpp_project_calendar_notify_cb      (MrpProject        *project,  
-						  GParamSpec        *pspec, 
-						  GtkWidget         *dialog);
-static void  mpp_manager_changed_cb              (GtkWidget         *w,
-						  GtkWidget         *dialog);
-static void  mpp_project_manager_notify_cb       (MrpProject        *project,  
-						  GParamSpec        *pspec, 
-						  GtkWidget         *dialog);
-static void  mpp_organization_changed_cb         (GtkWidget         *w,
-						  GtkWidget         *dialog);
-static void  mpp_project_organization_notify_cb  (MrpProject        *project,  
-						  GParamSpec        *pspec, 
-						  GtkWidget         *dialog);
-static void  mpp_name_changed_cb                 (GtkWidget         *w,
-						  GtkWidget         *dialog);
-static void  mpp_project_name_notify_cb          (MrpProject        *project,  
-						  GParamSpec        *pspec, 
-						  GtkWidget         *dialog);
-static void  mpp_project_calendar_notify_cb      (MrpProject        *project,  
-						  GParamSpec        *pspec, 
-						  GtkWidget         *dialog);
-static void  mpp_phase_option_menu_changed_cb    (GtkOptionMenu     *option_menu,
-						  GtkWidget         *dialog);
-static void  mpp_project_phase_changed_cb        (MrpProject        *project,  
-						  MrpProperty       *property,
-						  GValue            *value,
-						  GtkWidget         *dialog);
-static void  mpp_project_phases_notify_cb        (MrpProject        *project,  
-						  GParamSpec        *pspec,
-						  GtkWidget         *dialog);
-static void  mpp_setup_phases                    (DialogData        *data);
-static void  mpp_set_phase                       (DialogData        *data,
-						  const gchar       *phase);
-static void  mpp_setup_properties_list           (GtkWidget         *dialog);
-static void  mpp_property_name_data_func         (GtkTreeViewColumn    *tree_column,
-						  GtkCellRenderer      *cell,
-						  GtkTreeModel         *tree_model,
-						  GtkTreeIter          *iter,
-						  GtkWidget            *dialog);
-static void  mpp_property_value_data_func        (GtkTreeViewColumn    *tree_column,
-						  GtkCellRenderer      *cell,
-						  GtkTreeModel         *tree_model,
-						  GtkTreeIter          *iter,
-						  GtkWidget            *dialog);
+static void mpp_select_calendar_clicked_cb        (GtkWidget           *button,
+						   GtkWidget           *dialog);
+static void mpp_start_changed_cb                  (GtkWidget           *w,
+						   GtkWidget           *dialog);
+static void mpp_project_start_notify_cb           (MrpProject          *project,
+						   GParamSpec          *pspec,
+						   GtkWidget           *dialog);
+static void mpp_project_calendar_notify_cb        (MrpProject          *project,
+						   GParamSpec          *pspec,
+						   GtkWidget           *dialog);
+static void mpp_manager_changed_cb                (GtkWidget           *w,
+						   GtkWidget           *dialog);
+static void mpp_project_manager_notify_cb         (MrpProject          *project,
+						   GParamSpec          *pspec,
+						   GtkWidget           *dialog);
+static void mpp_organization_changed_cb           (GtkWidget           *w,
+						   GtkWidget           *dialog);
+static void mpp_project_organization_notify_cb    (MrpProject          *project,
+						   GParamSpec          *pspec,
+						   GtkWidget           *dialog);
+static void mpp_name_changed_cb                   (GtkWidget           *w,
+						   GtkWidget           *dialog);
+static void mpp_project_name_notify_cb            (MrpProject          *project,
+						   GParamSpec          *pspec,
+						   GtkWidget           *dialog);
+static void mpp_project_calendar_notify_cb        (MrpProject          *project,
+						   GParamSpec          *pspec,
+						   GtkWidget           *dialog);
+static void mpp_phase_option_menu_changed_cb      (GtkOptionMenu       *option_menu,
+						   GtkWidget           *dialog);
+static void mpp_project_phase_changed_cb          (MrpProject          *project,
+						   MrpProperty         *property,
+						   GValue              *value,
+						   GtkWidget           *dialog);
+static void mpp_project_phases_notify_cb          (MrpProject          *project,
+						   GParamSpec          *pspec,
+						   GtkWidget           *dialog);
+static void mpp_setup_phases                      (DialogData          *data);
+static void mpp_set_phase                         (DialogData          *data,
+						   const gchar         *phase);
+static void mpp_setup_properties_list             (GtkWidget           *dialog);
+static void mpp_property_name_data_func           (GtkTreeViewColumn   *tree_column,
+						   GtkCellRenderer     *cell,
+						   GtkTreeModel        *tree_model,
+						   GtkTreeIter         *iter,
+						   GtkWidget           *dialog);
+static void mpp_property_value_data_func          (GtkTreeViewColumn   *tree_column,
+						   GtkCellRenderer     *cell,
+						   GtkTreeModel        *tree_model,
+						   GtkTreeIter         *iter,
+						   GtkWidget           *dialog);
+static void mpp_property_added                    (MrpProject          *project,
+						   GType                object_type,
+						   MrpProperty         *property,
+						   GtkWidget           *dialog);
+static void mpp_property_removed                  (MrpProject          *project,
+						   MrpProperty         *property,
+						   GtkWidget           *dialog);
+static void mpp_add_property_button_clicked_cb    (GtkButton           *button,
+						   GtkWidget           *dialog);
+static void mpp_remove_property_button_clicked_cb (GtkButton           *button,
+						   GtkWidget           *dialog);
+static void mpp_property_value_edited             (GtkCellRendererText *cell,
+						   gchar               *path_string,
+						   gchar               *new_text,
+						   GtkWidget           *dialog);
 
-
-static void  mpp_property_added                  (MrpProject  *project, 
-						  GType        object_type,
-						  MrpProperty *property,
-						  GtkWidget   *dialog);
-static void  mpp_property_removed                (MrpProject  *project, 
-						  MrpProperty *property,
-						  GtkWidget   *dialog);
-static void  mpp_add_property_button_clicked_cb  (GtkButton   *button,
-						  GtkWidget   *dialog);
-static void  mpp_remove_property_button_clicked_cb  (GtkButton   *button,
-						     GtkWidget   *dialog);
-
-static void  mpp_property_value_edited           (GtkCellRendererText *cell,
-						  gchar               *path_string,
-						  gchar               *new_text,
-						  GtkWidget           *dialog);
 
 
 enum {
@@ -152,11 +151,9 @@ mpp_select_calendar_clicked_cb (GtkWidget *button,
 		g_object_set (data->project, "calendar", calendar, NULL);
 		break;
 		
+	case GTK_RESPONSE_DELETE_EVENT:
 	case GTK_RESPONSE_CANCEL:
 		break;
-		
-	case GTK_RESPONSE_DELETE_EVENT:
-		return;
 
 	default:
 		break;
@@ -222,7 +219,7 @@ mpp_project_name_notify_cb  (MrpProject *project,
 {
 	
 	DialogData *data;
-	gchar             *name;
+	gchar      *name;
 
 	g_return_if_fail (MRP_IS_PROJECT (project));
 	g_return_if_fail (GTK_IS_DIALOG (dialog));
@@ -241,14 +238,13 @@ mpp_project_name_notify_cb  (MrpProject *project,
 					   project);
 
 	g_free (name);
-
 }
 
 static void
 mpp_name_changed_cb (GtkWidget *w, GtkWidget *dialog) {
 
-	MrpProject *project;
-	const gchar      *name;
+	MrpProject  *project;
+	const gchar *name;
 
 	name = gtk_entry_get_text (GTK_ENTRY (w));
 
@@ -269,7 +265,7 @@ mpp_project_organization_notify_cb (MrpProject *project,
 				    GtkWidget *dialog)
 {
 	DialogData *data;
-	gchar             *organization;
+	gchar      *organization;
 
 	g_return_if_fail (MRP_IS_PROJECT (project));
 	g_return_if_fail (GTK_IS_DIALOG (dialog));
@@ -315,7 +311,7 @@ mpp_project_manager_notify_cb (MrpProject *project,
 			       GtkWidget  *dialog)
 {	
 	DialogData *data;
-	gchar             *manager;
+	gchar      *manager;
 
 	g_return_if_fail (MRP_IS_PROJECT (project));
 	g_return_if_fail (GTK_IS_DIALOG (dialog));
@@ -361,7 +357,7 @@ mpp_project_start_notify_cb (MrpProject *project,
 			     GtkWidget  *dialog)
 {
 	DialogData *data;
-	mrptime            start;
+	mrptime     start;
 
 	g_return_if_fail (MRP_IS_PROJECT (project));
 	g_return_if_fail (GTK_IS_DIALOG (dialog));
@@ -412,8 +408,8 @@ mpp_project_calendar_notify_cb (MrpProject *project,
 				GParamSpec *pspec, 
 				GtkWidget  *dialog)
 {	
-	DialogData *data;
-	MrpCalendar       *calendar;
+	DialogData  *data;
+	MrpCalendar *calendar;
 
 	g_return_if_fail (MRP_IS_PROJECT (project));
 	g_return_if_fail (GTK_IS_DIALOG (dialog));
@@ -581,17 +577,9 @@ mpp_setup_properties_list (GtkWidget *dialog)
 		GtkTreeIter  iter;
 		
 		if (!mrp_property_get_user_defined (property)) {
-			g_print ("foo\n");
 			continue;
 		}
 		
-
-		/* FIXME: Don't hard code this, use user_defined instead */
-/* 		if (!strcmp ("phase", mrp_property_get_name (property)) ||
- 		    !strcmp ("phases", mrp_property_get_name (property))) {
- 			continue;
-		}
-*/
 		gtk_list_store_append (GTK_LIST_STORE (model),
 				       &iter);
 		gtk_list_store_set (GTK_LIST_STORE (model),

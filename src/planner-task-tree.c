@@ -242,7 +242,7 @@ task_cmd_insert_do (PlannerCmd *cmd_base)
 	depth = gtk_tree_path_get_depth (path);
 	position = gtk_tree_path_get_indices (path)[depth - 1];
 
-	if (depth > 1) {
+ 	if (depth > 1) {
 		gtk_tree_path_up (path);
 		parent = task_tree_get_task_from_path (cmd->tree, path);
 	} else {
@@ -1041,8 +1041,6 @@ task_tree_name_edited (GtkCellRendererText *cell,
 				"name",
 				&value);
 	
-	//g_object_set (task, "name", new_text, NULL);
-		
 	gtk_tree_path_free (path);
 }
 
@@ -1095,6 +1093,8 @@ task_tree_start_show_popup (PlannerCellRendererDate *cell,
 	mrptime        start;
 	MrpConstraint *constraint;
 
+	/* FIXME: undo */
+	
 	model = gtk_tree_view_get_model (tree_view);
 	
 	path = gtk_tree_path_new_from_string (path_string);
@@ -1154,6 +1154,7 @@ task_tree_duration_edited (GtkCellRendererText *cell,
 	gint          seconds_per_day;
 	gchar        *ptr;
 	MrpTask      *task;
+	GValue        value = { 0 };
 	
 	model = gtk_tree_view_get_model (view);
 	path = gtk_tree_path_new_from_string (path_string);	
@@ -1169,7 +1170,14 @@ task_tree_duration_edited (GtkCellRendererText *cell,
 		gtk_tree_model_get (model, &iter, 
 				    COL_TASK, &task,
 				    -1);
-		g_object_set (task, "duration", duration, NULL);
+
+		g_value_init (&value, G_TYPE_INT);
+		g_value_set_int (&value, duration);
+		
+		task_cmd_edit_property (PLANNER_TASK_TREE (view),
+					task,
+					"duration",
+					&value);
 	}
 	
 	gtk_tree_path_free (path);
@@ -1187,6 +1195,7 @@ task_tree_work_edited (GtkCellRendererText *cell,
 	GtkTreeIter   iter;
 	gint          work;
 	MrpTask      *task;
+	GValue        value = { 0 };
 	
 	view = GTK_TREE_VIEW (data);
 	
@@ -1199,7 +1208,14 @@ task_tree_work_edited (GtkCellRendererText *cell,
 	gtk_tree_model_get (model, &iter, 
 			    COL_TASK, &task,
 			    -1);
-	g_object_set (task, "work", work, NULL);
+
+	g_value_init (&value, G_TYPE_INT);
+	g_value_set_int (&value, work);
+	
+	task_cmd_edit_property (PLANNER_TASK_TREE (view),
+				task,
+				"work",
+				&value);
 	
 	gtk_tree_path_free (path);
 }
@@ -1309,6 +1325,8 @@ task_tree_property_value_edited (GtkCellRendererText *cell,
 	MrpTask            *task;
 	PlannerCellRendererDate *date;	
 	gfloat              fvalue;
+
+	/* FIXME: undo */
 	
 	model = gtk_tree_view_get_model (data->tree);
 	property = data->property;
@@ -1377,10 +1395,10 @@ task_tree_property_value_edited (GtkCellRendererText *cell,
 }
 
 static void
-task_tree_property_added (MrpProject  *project,
-			  GType        object_type,
-			  MrpProperty *property,
-			  PlannerTaskTree  *task_tree)
+task_tree_property_added (MrpProject      *project,
+			  GType            object_type,
+			  MrpProperty     *property,
+			  PlannerTaskTree *task_tree)
 {
 	GtkTreeView       *tree;
 	PlannerTaskTreePriv    *priv;
@@ -1879,6 +1897,8 @@ planner_task_tree_remove_task (PlannerTaskTree *tree)
 {
 	GList *list, *l;
 
+	/* FIXME: undo */
+	
 	list = planner_task_tree_get_selected_tasks (tree);
 	if (list == NULL) {
 		return;
@@ -1972,6 +1992,8 @@ planner_task_tree_unlink_task (PlannerTaskTree *tree)
 	GList       *relations, *r;
 	MrpRelation *relation;
 
+	/* FIXME: undo */
+	
 	list = planner_task_tree_get_selected_tasks (tree);
 	if (list == NULL) {
 		return;
@@ -2018,7 +2040,9 @@ planner_task_tree_indent_task (PlannerTaskTree *tree)
 	GtkTreePath      *path;
 	GtkWidget        *dialog;
 	GtkTreeSelection *selection;
-				
+
+	/* FIXME: undo */
+
 	project = tree->priv->project;
 
 	model = PLANNER_GANTT_MODEL (gtk_tree_view_get_model (GTK_TREE_VIEW (tree)));
@@ -2102,6 +2126,8 @@ planner_task_tree_unindent_task (PlannerTaskTree *tree)
 	GtkTreePath      *path;
 	GtkTreeSelection *selection;
 
+	/* FIXME: undo */
+
 	project = tree->priv->project;
 
 	model = PLANNER_GANTT_MODEL (gtk_tree_view_get_model (GTK_TREE_VIEW (tree)));
@@ -2172,6 +2198,8 @@ planner_task_tree_move_task_up (PlannerTaskTree *tree)
 	GList	    	 *list;
 	guint	    	  position;
 
+	/* FIXME: undo */
+	
 	project = tree->priv->project;
 
 	task_tree_block_selection_changed (tree);
@@ -2217,6 +2245,8 @@ planner_task_tree_move_task_down (PlannerTaskTree *tree)
 	GList		 *list;
 	guint		 position;
 
+	/* FIXME: undo */
+
 	project = tree->priv->project;
 
 	task_tree_block_selection_changed (tree);
@@ -2255,6 +2285,8 @@ planner_task_tree_reset_constraint (PlannerTaskTree *tree)
 	MrpTask *task;
 	GList   *list, *l;
 
+	/* FIXME: undo */
+
 	list = planner_task_tree_get_selected_tasks (tree);
 
 	for (l = list; l; l = l->next) {
@@ -2272,6 +2304,8 @@ planner_task_tree_reset_all_constraints (PlannerTaskTree *tree)
 	MrpProject *project;
 	MrpTask    *task;
 	GList      *list, *l;
+
+	/* FIXME: undo */
 
 	project = tree->priv->project;
 		

@@ -69,7 +69,7 @@ imrp_property_set_project (MrpProperty *property, MrpProject *project)
  * 
  * Creates a new #MrpProperty. @name must be unique in the application.
  * @user_defined specifies if the property was created by a user or a plugin 
- * or MrProject itself.
+ * or Planner itself.
  * 
  * Return value: a newly create property
  **/
@@ -288,7 +288,7 @@ mrp_property_get_description (MrpProperty *property)
  * @property: an #MrpProperty
  * @user_defined: if the property is user defined
  * 
- * Sets if @property is user-defined or created by a plugin or MrProject
+ * Sets if @property is user-defined or created by a plugin or Planner
  * itself.
  **/
 void

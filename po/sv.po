@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Planner\n"
-"POT-Creation-Date: 2003-12-11 21:29+0100\n"
+"POT-Creation-Date: 2003-12-12 00:45+0100\n"
 "PO-Revision-Date: 2003-02-07 12:32+0100\n"
 "Last-Translator: Richard Hult <richard@imendio.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -234,49 +234,49 @@ msgid "<b>Project phases</b>"
 msgstr "<b>Projektfaser</b>"
 
 #: data/glade/project-properties.glade.h:3
-msgid "Calendar:"
-msgstr "Kalender:"
-
-#: data/glade/project-properties.glade.h:4
 msgid "Custom properties"
 msgstr "Egna egenskaper"
 
-#: data/glade/project-properties.glade.h:5
+#: data/glade/project-properties.glade.h:4
 msgid "Edit Project phases"
 msgstr "Redigera projektfaser"
 
-#: data/glade/project-properties.glade.h:6
+#: data/glade/project-properties.glade.h:5
 msgid "Enter the name of the new project phase:"
 msgstr "Ange namnet på den nya projektfasen:"
 
-#: data/glade/project-properties.glade.h:7
+#: data/glade/project-properties.glade.h:6
 #: data/glade/resource-dialog.glade.h:5 data/glade/task-dialog.glade.h:6
 msgid "General"
 msgstr "Allmänt"
 
-#: data/glade/project-properties.glade.h:8
+#: data/glade/project-properties.glade.h:7
 msgid "New Project Phase"
 msgstr "Ny projektfas"
 
-#: data/glade/project-properties.glade.h:9
+#: data/glade/project-properties.glade.h:8
 msgid "Project _name:"
 msgstr "Projekt_namn:"
+
+#: data/glade/project-properties.glade.h:9
+msgid "Project _phase:"
+msgstr "Projekt_fas:"
 
 #: data/glade/project-properties.glade.h:10
 msgid "Project _start:"
 msgstr "Projekt_start:"
 
 #: data/glade/project-properties.glade.h:11
-msgid "Project phase:"
-msgstr "Projekt_fas:"
-
-#: data/glade/project-properties.glade.h:12
 msgid "Project properties"
 msgstr "Projektegenskaper"
 
-#: data/glade/project-properties.glade.h:13
+#: data/glade/project-properties.glade.h:12
 msgid "Select..."
 msgstr "Välj..."
+
+#: data/glade/project-properties.glade.h:13
+msgid "_Calendar:"
+msgstr "_Kalender:"
 
 #: data/glade/project-properties.glade.h:14
 msgid "_Manager:"
@@ -430,11 +430,11 @@ msgid "_Work:"
 msgstr "_Arbete:"
 
 #. day unit variant accepted in input
-#: data/glade/task-dialog.glade.h:17 src/planner-task-tree.c:2343
+#: data/glade/task-dialog.glade.h:17 src/planner-task-tree.c:2370
 msgid "days"
 msgstr "dagar"
 
-#: data/glade/task-input-dialog.glade.h:2 src/planner-task-tree.c:295
+#: data/glade/task-input-dialog.glade.h:2 src/planner-task-tree.c:296
 msgid "Insert task"
 msgstr "Infoga aktivitet"
 
@@ -1434,76 +1434,76 @@ msgstr "_Avlänka aktivitet"
 msgid "/_Edit task..."
 msgstr "/_Redigera aktivitet..."
 
-#: src/planner-task-tree.c:372
+#: src/planner-task-tree.c:373
 msgid "Edit task property"
 msgstr "Redigera aktivitetsegenskap"
 
-#: src/planner-task-tree.c:2335
+#: src/planner-task-tree.c:2362
 msgid "mon"
 msgstr "mån"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:2336
+#: src/planner-task-tree.c:2363
 msgid "month"
 msgstr "månad"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:2337
+#: src/planner-task-tree.c:2364
 msgid "months"
 msgstr "månader"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:2338
+#: src/planner-task-tree.c:2365
 msgid "w"
 msgstr "v"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:2339
+#: src/planner-task-tree.c:2366
 msgid "week"
 msgstr "vecka"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:2340
+#: src/planner-task-tree.c:2367
 msgid "weeks"
 msgstr "veckor"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:2341
+#: src/planner-task-tree.c:2368
 msgid "d"
 msgstr "d"
 
 #. day unit variant accepted in input
-#: src/planner-task-tree.c:2342
+#: src/planner-task-tree.c:2369
 msgid "day"
 msgstr "dag"
 
 #. day unit variant accepted in input
-#: src/planner-task-tree.c:2344
+#: src/planner-task-tree.c:2371
 msgid "h"
 msgstr "t"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:2345
+#: src/planner-task-tree.c:2372
 msgid "hour"
 msgstr "timme"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:2346
+#: src/planner-task-tree.c:2373
 msgid "hours"
 msgstr "timmar"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:2347
+#: src/planner-task-tree.c:2374
 msgid "min"
 msgstr "min"
 
 #. minute unit variant accepted in input
-#: src/planner-task-tree.c:2348
+#: src/planner-task-tree.c:2375
 msgid "minute"
 msgstr "minut"
 
 #. minute unit variant accepted in input
-#: src/planner-task-tree.c:2349
+#: src/planner-task-tree.c:2376
 msgid "minutes"
 msgstr "minuter"
 

@@ -1,4 +1,16 @@
+2003-12-12  Richard Hult  <richard@imendio.com>
+
+	* libplanner/mrp-property.c: Fix comment.
+
+	* data/glade/project-properties.glade:
+	* src/planner-project-properties.c: Close the calendar selector
+	window. Tweak a bit, fix a few UI inconsistencies, remove dialog
+	separators.
+
 2003-12-11  Richard Hult  <richard@imendio.com>
+
+	* src/planner-task-tree.c (task_tree_duration_edited) 
+	(task_tree_work_edited): Undo support.
 
 	* data/glade/calendar-dialog.glade: Remove unnecessary string.
 	
