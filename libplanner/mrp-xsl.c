@@ -99,7 +99,7 @@ html_write (MrpFileWriter  *writer,
 		g_set_error (error,
 			     MRP_ERROR,
 			     MRP_ERROR_EXPORT_FAILED,
-			     _("HTML export failed"));
+			     _("Export to HTML failed"));
 		ret = FALSE;
 	}
 	
@@ -163,7 +163,7 @@ xml_planner_pre012_write (MrpFileWriter  *writer,
 		g_set_error (error,
 			     MRP_ERROR,
 			     MRP_ERROR_EXPORT_FAILED,
-			     _("Planner pre 0.12 export failed"));
+			     _("Export to Planner pre-0.12 format failed"));
 		ret = FALSE;
 	}
 	

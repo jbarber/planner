@@ -20,8 +20,8 @@ images_DATA = \
 	24_task_down.png		\
 	24_task_up.png
 
-mimeiconsdir = $(datadir)/pixmaps/document-icons
-mimeicons_DATA = gnome-application-x-mrproject.png
+mimeiconsdir = $(datadir)/pixmaps
+mimeicons_DATA = gnome-application-x-planner.png
 
 EXTRA_DIST = \
 	$(pixmap_DATA)			\

@@ -22,6 +22,10 @@ if test x$PKG_CONFIG = xno ; then
   AC_MSG_ERROR([*** pkg-config not found. See http://www.freedesktop.org/software/pkgconfig/])
 fi
 
+AC_PATH_PROG(UPDATE_MIME_DATABASE, update-mime-database, no)
+AM_CONDITIONAL(HAVE_NEW_MIME, test x$UPDATE_MIME_DATABASE != xno)
+
+
 dnl  -------------
 dnl | API docs    |--------------------------------------------
 dnl  -------------

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
+   <mime-type type="application/x-planner">
+     <_comment>Planner project plan</_comment>
+     <magic priority="50">
+       <match type="string" value="mrproject-version" offset="20:140"/>
+     </magic>
+     <glob pattern="*.planner"/>
+     <glob pattern="*.mrproject"/>
+   </mime-type>
+</mime-info>

@@ -1,3 +1,18 @@
+2004-06-22  Richard Hult  <richard@imendio.com>
+
+	* configure.in:
+	* data/images/Makefile.am:
+	* data/images/gnome-application-x-mrproject.png:
+	* data/images/gnome-application-x-planner.png:
+	* data/mime/Makefile.am:
+	* data/mime/planner.applications:
+	* data/mime/planner.keys.in:
+	* data/mime/planner.mime:
+	* data/mime/planner.xml.in: Make the mime type stuff work.
+
+	* libplanner/mrp-xsl.c: (html_write), (xml_planner_pre012_write):
+	Fix strings.
+
 2004-06-22  Alvaro del Castillo  <acs@barrapunto.com>
 
 	* src/planner-gantt-chart.c:
