@@ -65,6 +65,13 @@ static void	ttable_model_resource_added_cb			(MrpProject	*project,
 static void	ttable_model_resource_removed_cb		(MrpProject	*project,
 								 MrpResource	*resource,
 								 PlannerTtableModel	*model);
+static void	ttable_model_task_added_cb			(MrpProject		*project,
+								 MrpTask		*task,
+								 PlannerTtableModel	*model);
+static void	ttable_model_task_removed_cb			(MrpProject		*project,
+								 MrpTask		*task,
+								 PlannerTtableModel	*model);	 
+
 /*
 static void	ttable_model_assignment_removed_cb		(MrpAssignment	*assign,
 								 GParamSpec	*spec,
@@ -200,6 +207,24 @@ ttable_model_class_init	(PlannerTtableModelClass *klass)
 			      G_TYPE_NONE,
 			      1, MRP_TYPE_TASK);
 	
+	signals[ASSIGNMENT_ADDED] =
+		g_signal_new ("assignment-added",
+			      G_TYPE_FROM_CLASS (klass),
+			      G_SIGNAL_RUN_LAST,
+			      0,
+			      NULL, NULL,
+			      planner_marshal_VOID__OBJECT,
+			      G_TYPE_NONE,
+			      1, MRP_TYPE_ASSIGNMENT);
+	signals[ASSIGNMENT_REMOVED] =
+		g_signal_new ("assignment-removed",
+			      G_TYPE_FROM_CLASS (klass),
+			      G_SIGNAL_RUN_LAST,
+			      0,
+			      NULL, NULL,
+			      planner_marshal_VOID__OBJECT,
+			      G_TYPE_NONE,
+			      1, MRP_TYPE_ASSIGNMENT);	
 }
 
 static int
@@ -556,54 +581,71 @@ planner_ttable_model_new (MrpProject *project)
 	priv->in_new=TRUE;
 
 	priv->project = project;
-	resources = mrp_project_get_resources(project);
-	priv->tree = g_node_new(NULL);
+
+	resources = mrp_project_get_resources (project);
+
+	priv->tree = g_node_new (NULL);
+
 	for (r=resources; r; r=r->next) {
-		resource = MRP_RESOURCE(r->data);
-		ttable_model_resource_added_cb(project,resource,model);
+		resource = r->data;
+		ttable_model_resource_added_cb (project, resource, model);
 	}
-	g_signal_connect_object(project,
+
+	g_signal_connect_object (project,
 			"resource_added",
-			G_CALLBACK(ttable_model_resource_added_cb),
+			G_CALLBACK (ttable_model_resource_added_cb),
 			model,
 			0);
-	g_signal_connect_object(project,
+	g_signal_connect_object (project,
 			"resource_removed",
-			G_CALLBACK(ttable_model_resource_removed_cb),
+			G_CALLBACK (ttable_model_resource_removed_cb),
 			model,
 			0);
-	priv->in_new=FALSE;
+	g_signal_connect_object (project,
+			"task_inserted",
+			G_CALLBACK (ttable_model_task_added_cb),
+			model,
+			0);
+	g_signal_connect_object (project,
+			"task_removed",
+			G_CALLBACK (ttable_model_task_removed_cb),
+			model,
+			0);
+
+	priv->in_new = FALSE;
+
 	return model;
 }
 
 MrpAssignment *
-planner_ttable_model_get_assignment	(PlannerTtableModel	*model,
-				 GtkTreeIter	*iter)
+planner_ttable_model_get_assignment (PlannerTtableModel	*model,
+				     GtkTreeIter	*iter)
 {
 	MrpAssignment *assign;
 
-	g_return_val_if_fail(PLANNER_IS_TTABLE_MODEL(model),NULL);
-
+	g_return_val_if_fail (PLANNER_IS_TTABLE_MODEL (model),NULL);
+	
 	assign = ((GNode *) iter->user_data)->data;
 
 	if (assign == NULL) {
 		g_warning ("Eeek");
 		return NULL;
 	} else {
-		if (MRP_IS_ASSIGNMENT(assign))
-			return MRP_ASSIGNMENT(assign);
-		else
+		if (MRP_IS_ASSIGNMENT (assign)) {
+			return assign;
+		} else {
 			return NULL;
+		}
 	}
 }
 
 MrpResource *
-planner_ttable_model_get_resource	(PlannerTtableModel	*model,
-				 GtkTreeIter	*iter)
+planner_ttable_model_get_resource (PlannerTtableModel *model,
+				   GtkTreeIter	      *iter)
 {
 	MrpResource *res;
 
-	g_return_val_if_fail(PLANNER_IS_TTABLE_MODEL(model),NULL);
+	g_return_val_if_fail (PLANNER_IS_TTABLE_MODEL (model), NULL);
 	
 	res = ((GNode *) iter->user_data)->data;
 
@@ -611,67 +653,82 @@ planner_ttable_model_get_resource	(PlannerTtableModel	*model,
 		g_warning ("Eeek");
 		return NULL;
 	} else {
-		if (MRP_IS_RESOURCE(res))
-			return MRP_RESOURCE(res);
-		else
+		if (MRP_IS_RESOURCE(res)) {
+			return res;
+		} else {
 			return NULL;
+		}
 	}
 }
 
 gboolean
-planner_ttable_model_is_assignment	(PlannerTtableModel	*model,
-				 GtkTreeIter	*iter)
+planner_ttable_model_is_assignment (PlannerTtableModel *model,
+				    GtkTreeIter	       *iter)
 {
-	g_return_val_if_fail(PLANNER_IS_TTABLE_MODEL(model),FALSE);
-	return MRP_IS_ASSIGNMENT(((GNode *) iter->user_data)->data);
+	g_return_val_if_fail (PLANNER_IS_TTABLE_MODEL (model), FALSE);
+	
+	return MRP_IS_ASSIGNMENT (((GNode *) iter->user_data)->data);
 }
 
 gboolean
-planner_ttable_model_is_resource	(PlannerTtableModel	*model,
-				 GtkTreeIter	*iter)
+planner_ttable_model_is_resource (PlannerTtableModel *model,
+				  GtkTreeIter	     *iter)
 {
-	g_return_val_if_fail(PLANNER_IS_TTABLE_MODEL(model),FALSE);
+	g_return_val_if_fail (PLANNER_IS_TTABLE_MODEL (model), FALSE);
+
 	return MRP_IS_RESOURCE(((GNode *) iter->user_data)->data);
 }
 
 MrpAssignment *
-planner_ttable_model_path_get_assignment	(PlannerTtableModel	*model,
-					 GtkTreePath	*path)
+planner_ttable_model_path_get_assignment (PlannerTtableModel *model,
+					  GtkTreePath	     *path)
 {
-	GtkTreeIter	iter;
-	g_return_val_if_fail(PLANNER_IS_TTABLE_MODEL(model),NULL);
-	ttable_model_get_iter(GTK_TREE_MODEL(model),&iter,path);
-	return planner_ttable_model_get_assignment(model,&iter);
+	GtkTreeIter iter;
+	
+	g_return_val_if_fail (PLANNER_IS_TTABLE_MODEL (model), NULL);
+
+	ttable_model_get_iter (GTK_TREE_MODEL (model), &iter, path);
+
+	return planner_ttable_model_get_assignment (model, &iter);
 }
 
 MrpResource *
-planner_ttable_model_path_get_resource	(PlannerTtableModel	*model,
-					 GtkTreePath	*path)
+planner_ttable_model_path_get_resource (PlannerTtableModel *model,
+					GtkTreePath        *path)
 {
-	GtkTreeIter	iter;
-	g_return_val_if_fail(PLANNER_IS_TTABLE_MODEL(model),NULL);
-	ttable_model_get_iter(GTK_TREE_MODEL(model),&iter,path);
-	return planner_ttable_model_get_resource(model,&iter);
+	GtkTreeIter iter;
+	
+	g_return_val_if_fail (PLANNER_IS_TTABLE_MODEL (model), NULL);
+
+	ttable_model_get_iter (GTK_TREE_MODEL (model), &iter, path);
+
+	return planner_ttable_model_get_resource (model, &iter);
 }
 
 gboolean
-planner_ttable_model_path_is_resource	(PlannerTtableModel	*model,
-					 GtkTreePath	*path)
+planner_ttable_model_path_is_resource (PlannerTtableModel *model,
+				       GtkTreePath	  *path)
 {
-	GtkTreeIter	iter;
-	g_return_val_if_fail(PLANNER_IS_TTABLE_MODEL(model),FALSE);
-	ttable_model_get_iter(GTK_TREE_MODEL(model),&iter,path);
-	return planner_ttable_model_is_resource(model,&iter);
+	GtkTreeIter iter;
+
+	g_return_val_if_fail (PLANNER_IS_TTABLE_MODEL (model), FALSE);
+
+	ttable_model_get_iter (GTK_TREE_MODEL (model), &iter, path);
+
+	return planner_ttable_model_is_resource (model, &iter);
 }
 
 gboolean
-planner_ttable_model_path_is_assignment	(PlannerTtableModel	*model,
-					 GtkTreePath	*path)
+planner_ttable_model_path_is_assignment	(PlannerTtableModel *model,
+					 GtkTreePath	    *path)
 {
-	GtkTreeIter	iter;
-	g_return_val_if_fail(PLANNER_IS_TTABLE_MODEL(model),FALSE);
-	ttable_model_get_iter(GTK_TREE_MODEL(model),&iter,path);
-	return planner_ttable_model_is_assignment(model,&iter);
+	GtkTreeIter iter;
+
+	g_return_val_if_fail (PLANNER_IS_TTABLE_MODEL (model), FALSE);
+
+	ttable_model_get_iter (GTK_TREE_MODEL (model), &iter, path);
+
+	return planner_ttable_model_is_assignment (model, &iter);
 }
 
 static void
@@ -818,6 +875,22 @@ ttable_model_resource_removed_cb (MrpProject         *project,
 	/* ttable_model_get_iter(GTK_TREE_MODEL(model),&iter,path); */
 	gtk_tree_model_row_deleted(GTK_TREE_MODEL (model), path);
 	gtk_tree_path_free (path);
+}
+
+static void
+ttable_model_task_added_cb (MrpProject         *project,
+			    MrpTask            *task,
+			    PlannerTtableModel *model)
+{
+	g_signal_emit (model, signals[TASK_ADDED],0, task);
+}
+
+static void
+ttable_model_task_removed_cb (MrpProject         *project,
+			      MrpTask            *task,
+			      PlannerTtableModel *model)
+{
+	g_signal_emit (model, signals[TASK_REMOVED],0, task);
 }
 
 /*
