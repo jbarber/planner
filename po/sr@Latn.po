@@ -1,23 +1,22 @@
-# Serbian translation of mrproject
+# Serbian translation of planner
 # Courtesy of Prevod.org team (http://www.prevod.org/) -- 2003.
-# 
-# This file is distributed under the same license as the mrproject package.
-# 
+#
+# This file is distributed under the same license as the planner package.
+#
 # Maintainer: Branko Ivanović <popeye@one.ekof.bg.ac.yu>
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: MrProject 0.9\n"
+"Project-Id-Version: Planner\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-12-04 17:31+0100\n"
-"PO-Revision-Date: 2003-12-04 17:36+0100\n"
+"POT-Creation-Date: 2003-12-11 19:05+0100\n"
+"PO-Revision-Date: 2003-12-11 19:06+0100\n"
 "Last-Translator: Branko Ivanović <popeye@one.ekof.bg.ac.yu>\n"
 "Language-Team: Serbian (sr) <serbiangnome-lista@bogus.example.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3;    plural=n%10==1 && n%100!=11 ? 0 :    n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3;    plural=n%10==1 && n%100!=11 ? 0 :    n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 
 #: data/planner.desktop.in.h:1
 msgid "Planner Project Management"
@@ -132,8 +131,8 @@ msgid "Save the current project with a different name"
 msgstr "Sačuvaj tekući projekat pod drugim imenom"
 
 #: data/ui/main-window.ui.h:26
-msgid "Show the MrProject User Guide"
-msgstr "Prikaži MrProject korisnički vodič"
+msgid "Show the Planner User Guide"
+msgstr "Prikaži vodič za korisnike Planera"
 
 #: data/ui/main-window.ui.h:27
 msgid "Undo the last action"
@@ -207,7 +206,7 @@ msgstr "_Izađi"
 msgid "_Redo"
 msgstr "_Ponovi"
 
-#: data/ui/main-window.ui.h:45 src/planner-main-window.c:1127
+#: data/ui/main-window.ui.h:45 src/planner-window.c:1237
 msgid "_Save"
 msgstr "_Sačuvaj"
 
@@ -232,13 +231,13 @@ msgid "In_sert Tasks..."
 msgstr "Unesi zadatke..."
 
 #: data/ui/gantt-view.ui.h:3 data/ui/task-view.ui.h:3
-#: src/planner-application.c:75
+#: src/planner-application.c:76
 msgid "Indent"
 msgstr "Uvuci"
 
 #: data/ui/gantt-view.ui.h:4 data/ui/task-view.ui.h:4
-#: data/ui/resource-view.ui.h:5 src/planner-application.c:54
-#: src/planner-application.c:103
+#: data/ui/resource-view.ui.h:5 src/planner-application.c:55
+#: src/planner-application.c:104
 msgid "Insert"
 msgstr "Unesi"
 
@@ -251,18 +250,18 @@ msgid "Move Task _Up"
 msgstr "Pomeri zadatak naviše"
 
 #: data/ui/gantt-view.ui.h:7 data/ui/task-view.ui.h:7
-#: src/planner-application.c:96
+#: src/planner-application.c:97
 msgid "Move down"
 msgstr "Pomeri naniže"
 
 #: data/ui/gantt-view.ui.h:8 data/ui/task-view.ui.h:8
-#: src/planner-application.c:89
+#: src/planner-application.c:90
 msgid "Move up"
 msgstr "Pomeri naviše"
 
 #: data/ui/gantt-view.ui.h:9 data/ui/task-view.ui.h:9
-#: data/ui/resource-view.ui.h:6 src/planner-application.c:61
-#: src/planner-application.c:110
+#: data/ui/resource-view.ui.h:6 src/planner-application.c:62
+#: src/planner-application.c:111
 msgid "Remove"
 msgstr "Ukloni"
 
@@ -297,12 +296,12 @@ msgid "Unin_dent Task"
 msgstr "Izvuci zadatak"
 
 #: data/ui/gantt-view.ui.h:17 data/ui/task-view.ui.h:16
-#: src/planner-application.c:82
+#: src/planner-application.c:83
 msgid "Unindent"
 msgstr "Izvuci"
 
 #: data/ui/gantt-view.ui.h:18 data/ui/task-view.ui.h:17
-#: src/planner-application.c:68
+#: src/planner-application.c:69
 msgid "Unlink"
 msgstr "Odveži"
 
@@ -506,7 +505,7 @@ msgstr "Od:"
 
 #: data/glade/calendar-dialog.glade.h:24
 msgid "MrProject Team"
-msgstr "MrProject Tim"
+msgstr "Tim Planera"
 
 #: data/glade/calendar-dialog.glade.h:25
 msgid "New Calendar"
@@ -801,7 +800,7 @@ msgid "_Work:"
 msgstr "Rad:"
 
 #. day unit variant accepted in input
-#: data/glade/task-dialog.glade.h:17 src/planner-task-tree.c:2120
+#: data/glade/task-dialog.glade.h:17 src/planner-task-tree.c:2328
 msgid "days"
 msgstr "dana"
 
@@ -925,7 +924,7 @@ msgid "Could not write XML file"
 msgstr "Ne mogu da upišem XML datoteku"
 
 #. Give up.
-#: libplanner/mrp-sql.c:229 src/planner-sql-plugin.c:127
+#: libplanner/mrp-sql.c:229 src/planner-sql-plugin.c:131
 msgid "Invalid Unicode"
 msgstr "Neispravan Unikod"
 
@@ -959,75 +958,79 @@ msgstr "Neispravna SQL adresa (neispravan id projekta)."
 msgid "Invalid SQL URI (no database name specified)."
 msgstr "Neispravna SQL adresa (nije navedeno ime baze podataka)."
 
-#: src/planner-application.c:117
-msgid "Edit"
-msgstr "Izmeni"
+#: libplanner/mrp-xsl.c:96
+msgid "HTML export failed"
+msgstr "Neuspešan izvoz HTML-a"
 
-#: src/planner-main-window.c:584
+#: src/planner-application.c:118
+msgid "Edit"
+msgstr "Uredi"
+
+#: src/planner-window.c:636
 msgid "Open a file"
 msgstr "Otvori datoteku"
 
 #. I18n: Translators, list your names here, newline separated if there
 #. * are more than one, to appear in the about box.
 #.
-#: src/planner-main-window.c:993 src/planner-main-window.c:1000
+#: src/planner-window.c:1073 src/planner-window.c:1080
 msgid "translator_credits"
 msgstr ""
 "Branko Ivanović <popeye@one.ekof.bg.ac.yu>\n"
 "\n"
 "Prevod.org — prevod na srpski jezik."
 
-#. "Copyright \xc2\xa9 2001-2002 CodeFactory AB",
-#: src/planner-main-window.c:997
+#. "Copyright \xc2\xa9"
+#: src/planner-window.c:1077
 msgid "A Project Management application for the GNOME desktop"
 msgstr "Program za vođenje projekata pod okruženjem Gnom"
 
-#: src/planner-main-window.c:1007
+#: src/planner-window.c:1087
 msgid "The Planner Homepage"
 msgstr "Domaća stranica Planera"
 
-#: src/planner-main-window.c:1083
+#: src/planner-window.c:1193
 msgid "If you don't save, changes made the last minute will be discarded."
 msgstr "Ako ne sačuvate, promene načinjene u zadnjem minutu će biti izgubljene."
 
-#: src/planner-main-window.c:1088
+#: src/planner-window.c:1198
 #, c-format
 msgid "If you don't save, changes made the last %d minutes will be discarded."
 msgstr "Ako ne sačuvate, izgubićete promene načinjene zadnjih %d minuta."
 
-#: src/planner-main-window.c:1093
+#: src/planner-window.c:1203
 msgid "If you don't save, changes made the last hour will be discarded."
 msgstr ""
 "Ako ne sačuvati, promene načinjene zadnjih sat vremena će biti izgubljene."
 
-#: src/planner-main-window.c:1098
+#: src/planner-window.c:1208
 #, c-format
 msgid "If you don't save, changes made the last %d hours will be discarded."
 msgstr "Ako ne sačuvate, izgubićete promene načinjene zadnjih %d sati."
 
-#: src/planner-main-window.c:1105
+#: src/planner-window.c:1215
 #, c-format
 msgid "Save changes to document '%s' before closing?"
 msgstr "Sačuvati promene načinjene u dokumentu „%s“ pre zatvaranja?"
 
-#: src/planner-main-window.c:1123
+#: src/planner-window.c:1233
 msgid "C_lose without saving"
 msgstr "Zatvori bez čuvanja"
 
-#: src/planner-main-window.c:1125
+#: src/planner-window.c:1235
 msgid "_Cancel"
 msgstr "Ot_kaži"
 
-#: src/planner-main-window.c:1232
+#: src/planner-window.c:1346
 msgid "Save a file"
 msgstr "Sačuvaj datoteku"
 
-#: src/planner-main-window.c:1264 src/planner-html-plugin.c:146
+#: src/planner-window.c:1382 src/planner-html-plugin.c:143
 #, c-format
 msgid "File \"%s\" exists, do you want to overwrite it?"
 msgstr "Datoteka „%s“ postoji, hoćete li da je prepišete?"
 
-#: src/planner-main-window.c:1452
+#: src/planner-window.c:1577
 msgid ""
 "You have opened a file that was saved with an old version of Planner.\n"
 "\n"
@@ -1044,29 +1047,34 @@ msgid ""
 msgstr ""
 "Otvorili ste datoteku koja je sačuvana starim izdanjem Planera.\n"
 "\n"
-"Kada se učitavaju stare datoteke, svi zadaci će imati ograničenje „Mora početi“, budući da stara verzija nije potpuno podržavala automatsko odlaganje. Da biste iskoristili ovu novu mogućnost, trebate dodati nasledne odnose između zadataka koji su međusobno zavisni.\n"
+"Kada se učitavaju stare datoteke, svi zadaci će imati ograničenje „Mora "
+"početi“, budući da stara verzija nije potpuno podržavala automatsko "
+"odlaganje. Da biste iskoristili ovu novu mogućnost, trebate dodati nasledne "
+"odnose između zadataka koji su međusobno zavisni.\n"
 "\n"
-"Možete dodati nasledne odnose klikom na prethodnika i zatim prevlačenjem do naslednika.\n"
+"Možete dodati nasledne odnose klikom na prethodnika i zatim prevlačenjem do "
+"naslednika.\n"
 "\n"
-"Nakon ovoga, možete ukloniti sva ograničenja izborom stavke „Ukloni sva ograničenja“ u meniju „Uređivanje“."
+"Nakon ovoga, možete ukloniti sva ograničenja izborom stavke „Ukloni sva "
+"ograničenja“ u meniju „Uređivanje“."
 
-#: src/planner-main-window.c:1489 src/planner-gantt-row.c:656
+#: src/planner-window.c:1614 src/planner-gantt-row.c:656
 #: src/planner-gantt-row.c:658 src/planner-gantt-print.c:513
 #: src/planner-gantt-print.c:515
 msgid "Unnamed"
 msgstr "Neimenovani"
 
-#: src/planner-main.c:61
+#: src/planner-main.c:50
 msgid "Create the initial window with the given geometry."
 msgstr "Napravi početni prozor sa datom geometrijom."
 
-#: src/planner-main.c:61
+#: src/planner-main.c:50
 msgid "GEOMETRY"
 msgstr "GEOMETRIJA"
 
-#: src/planner-main.c:98
-msgid "mrproject: --geometry cannot be used with more than one file."
-msgstr "mrproject: --geometry se ne može koristiti za više datoteka."
+#: src/planner-main.c:76
+msgid "planner: --geometry cannot be used with more than one file."
+msgstr "planner: --geometry se ne može koristiti za više datoteka."
 
 #: src/planner-plugin-loader.c:40
 #, c-format
@@ -1308,7 +1316,7 @@ msgstr ""
 "„%s“ je direktorijum.\n"
 "Unesite ime datoteke i pokuštajte ponovo."
 
-#: src/planner-sql-plugin.c:269
+#: src/planner-sql-plugin.c:273
 #, c-format
 msgid ""
 "Connection to database '%s' failed:\n"
@@ -1317,15 +1325,15 @@ msgstr ""
 "Neuspešno povezivanje sa bazom „%s“:\n"
 "%s"
 
-#: src/planner-sql-plugin.c:318
+#: src/planner-sql-plugin.c:322
 msgid "Project"
 msgstr "Projekat"
 
-#: src/planner-sql-plugin.c:466
+#: src/planner-sql-plugin.c:498
 msgid "Open from Database"
 msgstr "Otvori iz baze podataka"
 
-#: src/planner-sql-plugin.c:573
+#: src/planner-sql-plugin.c:605
 msgid "Save to Database"
 msgstr "Sačuvaj u bazu podataka"
 
@@ -1462,92 +1470,92 @@ msgstr "P%d"
 msgid "%04d, H%d"
 msgstr "%04d, P%d"
 
-#: src/planner-task-tree.c:184
+#: src/planner-task-tree.c:385
 msgid "/_Insert task"
 msgstr "/_Unesi zadatak"
 
-#: src/planner-task-tree.c:185
+#: src/planner-task-tree.c:386
 msgid "/_Insert subtask"
 msgstr "/_Unesi podzadatak"
 
-#: src/planner-task-tree.c:186
+#: src/planner-task-tree.c:387
 msgid "/_Remove task"
 msgstr "/_Ukloni zadatak"
 
-#: src/planner-task-tree.c:188
+#: src/planner-task-tree.c:389
 msgid "/_Unlink task"
 msgstr "/_Odveži zadatak"
 
-#: src/planner-task-tree.c:190
+#: src/planner-task-tree.c:391
 msgid "/_Edit task..."
 msgstr "/_Izmeni zadatak..."
 
-#: src/planner-task-tree.c:2112
+#: src/planner-task-tree.c:2320
 msgid "mon"
 msgstr "mes"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:2113
+#: src/planner-task-tree.c:2321
 msgid "month"
 msgstr "mesec"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:2114
+#: src/planner-task-tree.c:2322
 msgid "months"
 msgstr "meseci"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:2115
+#: src/planner-task-tree.c:2323
 msgid "w"
 msgstr "s"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:2116
+#: src/planner-task-tree.c:2324
 msgid "week"
 msgstr "sedmica"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:2117
+#: src/planner-task-tree.c:2325
 msgid "weeks"
 msgstr "sedmice"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:2118
+#: src/planner-task-tree.c:2326
 msgid "d"
 msgstr "d"
 
 #. day unit variant accepted in input
-#: src/planner-task-tree.c:2119
+#: src/planner-task-tree.c:2327
 msgid "day"
 msgstr "dan"
 
 #. day unit variant accepted in input
-#: src/planner-task-tree.c:2121
+#: src/planner-task-tree.c:2329
 msgid "h"
 msgstr "č"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:2122
+#: src/planner-task-tree.c:2330
 msgid "hour"
 msgstr "čas"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:2123
+#: src/planner-task-tree.c:2331
 msgid "hours"
 msgstr "časova"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:2124
+#: src/planner-task-tree.c:2332
 msgid "min"
 msgstr "min"
 
 #. minute unit variant accepted in input
-#: src/planner-task-tree.c:2125
+#: src/planner-task-tree.c:2333
 msgid "minute"
 msgstr "minuta"
 
 #. minute unit variant accepted in input
-#: src/planner-task-tree.c:2126
+#: src/planner-task-tree.c:2334
 msgid "minutes"
 msgstr "minute"
 
