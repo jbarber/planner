@@ -112,7 +112,7 @@ mrp_file_reader_read_string (MrpFileReader  *reader,
 	g_set_error (error, 
 		     MRP_ERROR,
 		     MRP_ERROR_FAILED,
-		     _("This format is does support reading"));
+		     _("This format does not support reading"));
 	
 	return FALSE;
 }

@@ -775,8 +775,6 @@ task_cmd_move_undo (PlannerCmd *cmd_base)
 					&error);
 	g_assert (result);
 
-	// test
-
 	g_object_set (cmd->parent,
 		      "work", cmd->parent_work,
 		      "duration", cmd->parent_duration,
