@@ -1,3 +1,9 @@
+2004-04-29  Xavier Ordoquy  <xordoquy@wanadoo.fr>
+
+	* libplanner/mrp-task-manager.c:
+	(mrp_task_manager_calculate_task_work):
+	Added the assignement units to the duration to work convertion.
+
 2004-04-28  Tomasz Kłoczko <kloczek@pld.org.pl>
 
 	* configure.in: remove AC_SUBST() for CFLAGS, CPPFLAGS, LDFLAGS

@@ -1985,7 +1985,8 @@ mrp_task_manager_calculate_task_work (MrpTaskManager *manager,
 		work += task_manager_get_work_for_calendar (manager,
 							    calendar,
 							    start,
-							    finish);
+							    finish) *
+			mrp_assignment_get_units (assignment) / 100;
 	}
 	
 	if (!assignments) {
