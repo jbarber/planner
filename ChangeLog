@@ -1,3 +1,8 @@
+2005-02-13  Richard Hult  <richard@imendio.com>
+
+	* libplanner/mrp-xsl.c (html_write): Don't crash if the stylesheet
+	is invalid.
+
 2005-02-12  Richard Hult  <richard@imendio.com>
 
 	* src/planner-task-tree.c (task_tree_init): Disable search.

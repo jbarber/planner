@@ -78,12 +78,14 @@ html_write (MrpFileWriter  *writer,
         stylesheet = xsltParseStylesheetFile (STYLESHEETDIR "/planner2html.xsl");
 
         doc = xmlParseMemory (xml_project, strlen (xml_project));
-                                                                                
+
         final_doc = xsltApplyStylesheet (stylesheet, doc, NULL);
-                                                                                
+        xmlFree (doc);
+
 	ret = TRUE;
 
-	if (xsltSaveResultToString (&buffer, &len, final_doc, stylesheet) != -1) {
+	if (final_doc &&
+	    xsltSaveResultToString (&buffer, &len, final_doc, stylesheet) != -1) {
 		result = gnome_vfs_create (&handle, uri, GNOME_VFS_OPEN_WRITE,
 					   FALSE, 0644);
 		
@@ -109,7 +111,6 @@ html_write (MrpFileWriter  *writer,
 	
 	xsltFreeStylesheet (stylesheet);
         xmlFree (final_doc);
-        xmlFree (doc);
 
 	return ret;
 }
