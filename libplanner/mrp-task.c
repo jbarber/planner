@@ -64,8 +64,9 @@ struct _MrpTaskPriv {
 
 	/* Used for topological order sorting. */
 	guint             visited : 1;
-	GNode            *sorted_node;
 
+	MrpTaskGraphNode *graph_node;
+	
 	/* FIXME: This might be a mistake... I can't think of any other types,
 	 * besides milestone and normal. Should we have a boolean instead,
 	 * is_milestone? That or a flags type variable.
@@ -184,9 +185,9 @@ task_init (MrpTask *task)
 
 	priv->name = g_strdup ("");
 	priv->node = g_node_new (task);
-	priv->sorted_node = g_node_new (task);
 	priv->assignments = NULL;
 	priv->constraint.type = MRP_CONSTRAINT_ASAP;
+	priv->graph_node = g_new0 (MrpTaskGraphNode, 1);
 	priv->note = g_strdup ("");
 }
 
@@ -414,7 +415,6 @@ task_finalize (GObject *object)
 	g_assert (priv->successors == NULL);
 	
 	g_node_destroy (priv->node);
-	g_node_destroy (priv->sorted_node);
 
 	g_free (priv);
 	task->priv = NULL;
@@ -752,7 +752,8 @@ task_remove_subtree_cb (GNode *node, gpointer data)
 	task_remove_assignments (task);
 
 	g_node_unlink (priv->node);
-	g_node_unlink (priv->sorted_node);
+
+	mrp_object_removed (MRP_OBJECT (task));
 
 	mrp_object_removed (MRP_OBJECT (task));
 
@@ -934,9 +935,6 @@ imrp_task_insert_child (MrpTask *parent,
 	g_node_insert (parent->priv->node,
 		       position,
 		       child->priv->node);
-
-	g_node_prepend (parent->priv->sorted_node,
-			child->priv->sorted_node);
 
 	g_signal_emit (parent, signals[CHILD_ADDED], 0);
 }
@@ -1737,12 +1735,12 @@ imrp_task_get_node (MrpTask *task)
 	return task->priv->node;
 }
 
-GNode *
-imrp_task_get_sorted_node (MrpTask *task)
+MrpTaskGraphNode *
+imrp_task_get_graph_node (MrpTask *task)
 {
 	g_return_val_if_fail (MRP_IS_TASK (task), NULL);
 	
-	return task->priv->sorted_node;
+	return task->priv->graph_node;
 }
 
 GList *

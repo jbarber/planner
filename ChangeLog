@@ -1,4 +1,40 @@
 2004-08-01  Richard Hult  <richard@imendio.com>
+	
+	* libplanner/mrp-task-manager.c:
+	(task_manager_clean_graph_func),
+	(task_manager_build_dependency_graph),
+	(add_predecessor_to_dependency_graph),
+	(remove_predecessor_from_dependency_graph_recursive),
+	(remove_predecessor_from_dependency_graph),
+	(remove_parent_from_dependency_graph),
+	(add_parent_to_dependency_graph),
+	(remove_task_from_dependency_graph),
+	(add_task_to_dependency_graph): Build dependency graph in one go,
+	and add functions to add/remove a single task.
+
+	(task_manager_traverse_dependency_graph),
+	(task_manager_calc_relation),
+	(task_manager_do_forward_pass_helper),
+	(task_manager_do_forward_pass), (task_manager_do_backward_pass),
+	(mrp_task_manager_rebuild), (mrp_task_manager_recalc): Use the new
+	dependency graph when doing the CPM forward/backward passes.
+
+	(check_predecessor_traverse),
+	(mrp_task_manager_check_predecessor),
+	(mrp_task_manager_check_move): Check for loops in the graph when
+	adding a predecessor or moving a subtree.
+
+	* libplanner/mrp-private.h:
+	* libplanner/mrp-task.c: (task_init), (task_finalize),
+	(task_remove_subtree_cb), (imrp_task_insert_child),
+	(imrp_task_get_graph_node): Replace the dependency tree + links
+	with a graph.
+ 	
+	* tests/files/test-2.planner:
+	* tests/scheduler-test.c: (main): Make it simple to add more test
+	files, and add one.
+
+2004-08-01  Richard Hult  <richard@imendio.com>
 
 	* src/Makefile.am: Clean up.
 

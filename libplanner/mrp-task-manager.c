@@ -40,12 +40,14 @@ struct _MrpTaskManagerPriv {
 
 	gboolean    block_scheduling;
 	
-	/* Whether the sorted tree is valid or needs to be rebuilt. */
+	/* Whether the dependency graph is valid or needs to be rebuilt. */
 	gboolean    needs_rebuild;
 
 	/* Whether the task tree needs to be recalculated. */
 	gboolean    needs_recalc;
 	gboolean    in_recalc;
+
+	GList      *depencency_list;
 };
 
 typedef struct {
@@ -106,8 +108,6 @@ static void
 task_manager_assignment_units_notify_cb   (MrpAssignment       *assignment,
 					   GParamSpec          *spec,
 					   MrpTaskManager      *manager);
-static void
-task_manager_unlink_sorted_tree           (MrpTaskManager      *manager);
 
 static void
 task_manager_dump_task_tree               (GNode               *node);
@@ -314,6 +314,9 @@ mrp_task_manager_insert_task (MrpTaskManager *manager,
 
 	imrp_task_insert_child (parent, position, task);
 
+	/* FIXME: implement adding the task to the dependency graph instead. */
+	manager->priv->needs_rebuild = TRUE;
+
 	manager->priv->needs_recalc = TRUE;
 	
 	imrp_project_task_inserted (manager->priv->project, task);
@@ -500,46 +503,19 @@ mrp_task_manager_move_task (MrpTaskManager  *manager,
 
 	grand_parent = mrp_task_get_parent (old_parent);
 
-	imrp_task_detach (task);
-
-	/* If we change parents, we need to special case a bit:
-	 *
-	 * 1. We rebuild the sorted tree completely, because it's easier than to
-	 *    figure out what to change.
-	 *
-	 * 2. We must check for loops.
-	 *
-	 * 2a. Unless, we "unindent", i.e. just change depth one level. That can
-	 *     never result in a loop and if we did check it would prevent
-	 *     unindenting in some cases.
-	 */
-	if (parent != old_parent) {
-		task_manager_unlink_sorted_tree (manager);
-		
-		if (parent != grand_parent &&
-		    !mrp_task_manager_check_move (manager,
-						  task,
-						  parent,
-						  error)) {
-			imrp_task_reattach_pos (task, old_pos, old_parent);
-			
-			mrp_task_manager_rebuild (manager);
-			
-			return FALSE;
-		}
+	if (!mrp_task_manager_check_move (manager,
+					  task,
+					  parent,
+					  error)) {
+		return FALSE;
 	}
 
+	imrp_task_detach (task);
 	imrp_task_reattach (task, sibling, parent, before);
 
-	/* If we changed parents, we must rebuild, since we unlinked the sorted
-	 * tree above.
-	 */
-	if (parent != old_parent) {
-		mrp_task_manager_rebuild (manager);
-	}
+	mrp_task_manager_rebuild (manager);
 	
-	imrp_project_task_moved (manager->priv->project,
-				 task);
+	imrp_project_task_moved (manager->priv->project, task);
 	
 	mrp_task_manager_recalc (manager, FALSE);
 
@@ -681,28 +657,6 @@ mrp_task_manager_dump_task_list (MrpTaskManager *manager)
 
 /* ------------------------------------------------------------------------ */
 
-static gboolean
-task_manager_unlink_tree_recursive_cb (GNode *node, gpointer data)
-{
-	g_node_unlink (node);
-
-	return FALSE;
-}
-	
-static void
-task_manager_unlink_sorted_tree (MrpTaskManager *manager)
-{
-	GNode *root;
-
-	root = imrp_task_get_sorted_node (manager->priv->root);
-
-	g_node_traverse (root,
-			 G_POST_ORDER,
-			 G_TRAVERSE_ALL,
-			 -1,
-			 (GNodeTraverseFunc) task_manager_unlink_tree_recursive_cb,
-			 NULL);
-}
 
 /* Get the ancestor of task_a, that has the same parent as an ancestor or
  * task_b.
@@ -791,8 +745,232 @@ task_manager_traverse_dependency_graph (MrpTaskManager  *manager,
 	}
 
 	if (task != manager->priv->root) {
-		/*g_print ("Adding: %s\n", task->priv->name);*/
+		g_print ("Adding: %s\n", mrp_task_get_name (task));
 		*output = g_list_prepend (*output, task);
+	}
+}
+
+static void
+dump_task_node (MrpTask *task)
+{
+	MrpTaskGraphNode *node;
+	GList            *l;
+	
+	node = imrp_task_get_graph_node (task);
+
+	g_print ("Task: %s\n", mrp_task_get_name (task));
+	
+	for (l = node->prev; l; l = l->next) {
+		g_print (" from %s\n", mrp_task_get_name (l->data));
+	}
+
+	for (l = node->next; l; l = l->next) {
+		g_print (" to %s\n", mrp_task_get_name (l->data));
+	}
+}
+
+static void
+dump_all_task_nodes (MrpTaskManager *manager)
+{
+	GList *tasks, *l;
+
+	tasks = mrp_task_manager_get_all_tasks (manager);
+	for (l = tasks; l; l = l->next) {
+		dump_task_node (l->data);
+	}
+
+	g_list_free (tasks);
+}
+
+static void
+add_predecessor_to_dependency_graph_recursive (MrpTask *task,
+					       MrpTask *predecessor)
+{
+	MrpTaskGraphNode *predecessor_node;
+	MrpTask          *child;
+	MrpTaskGraphNode *child_node;
+	
+	predecessor_node = imrp_task_get_graph_node (predecessor);
+
+	child = mrp_task_get_first_child (task);
+	while (child) {
+		child_node = imrp_task_get_graph_node (child);
+		
+		child_node->prev = g_list_append (child_node->prev, predecessor);
+		predecessor_node->next = g_list_append (predecessor_node->next, child);
+		
+		if (mrp_task_get_n_children (child) > 0) {
+			add_predecessor_to_dependency_graph_recursive (child, predecessor);
+		}
+		
+		child = mrp_task_get_next_sibling (child);
+	}
+}
+
+static void
+add_predecessor_to_dependency_graph (MrpTaskManager *manager,
+				     MrpTask        *task,
+				     MrpTask        *predecessor)
+{
+	MrpTaskManagerPriv *priv;
+	MrpTaskGraphNode   *task_node;
+	MrpTaskGraphNode   *predecessor_node;
+	
+	priv = manager->priv;
+	
+	predecessor_node = imrp_task_get_graph_node (predecessor);
+
+	task_node = imrp_task_get_graph_node (task);
+
+	task_node->prev = g_list_append (task_node->prev, predecessor);
+	predecessor_node->next = g_list_append (predecessor_node->next, task);
+
+	/* Add dependencies from the predecessor to the task's children,
+	 * recursively.
+	 */
+	add_predecessor_to_dependency_graph_recursive (task, predecessor);
+}
+
+static void
+remove_predecessor_from_dependency_graph_recursive (MrpTask *task,
+						    MrpTask *predecessor)
+{
+	MrpTaskGraphNode *predecessor_node;
+	MrpTask          *child;
+	MrpTaskGraphNode *child_node;
+	
+	predecessor_node = imrp_task_get_graph_node (predecessor);
+
+	child = mrp_task_get_first_child (task);
+	while (child) {
+		child_node = imrp_task_get_graph_node (child);
+		
+		child_node->prev = g_list_remove (child_node->prev, predecessor);
+		predecessor_node->next = g_list_remove (predecessor_node->next, child);
+		
+		if (mrp_task_get_n_children (child) > 0) {
+			remove_predecessor_from_dependency_graph_recursive (child, predecessor);
+		}
+		
+		child = mrp_task_get_next_sibling (child);
+	}
+}
+
+static void
+remove_predecessor_from_dependency_graph (MrpTaskManager *manager,
+					  MrpTask        *task,
+					  MrpTask        *predecessor)
+{
+	MrpTaskManagerPriv *priv;
+	MrpTaskGraphNode   *task_node;
+	MrpTaskGraphNode   *predecessor_node;
+	
+	priv = manager->priv;
+	
+	predecessor_node = imrp_task_get_graph_node (predecessor);
+
+	task_node = imrp_task_get_graph_node (task);
+
+	task_node->prev = g_list_remove (task_node->prev, predecessor);
+	predecessor_node->next = g_list_remove (predecessor_node->next, task);
+	
+	/* Remove dependencies from the predecessor to the task's children,
+	 * recursively.
+	 */
+	remove_predecessor_from_dependency_graph_recursive (task, predecessor);
+}
+
+static void
+remove_parent_from_dependency_graph (MrpTaskManager *manager,
+				     MrpTask        *task,
+				     MrpTask        *parent)
+{
+	MrpTaskManagerPriv *priv;
+	MrpTaskGraphNode   *task_node;
+	MrpTaskGraphNode   *parent_node;
+
+	priv = manager->priv;
+	
+	task_node = imrp_task_get_graph_node (task);
+	parent_node = imrp_task_get_graph_node (parent);
+
+	task_node->next = g_list_remove (task_node->next, parent);
+	parent_node->prev = g_list_remove (parent_node->prev, task);
+}
+
+static void
+add_parent_to_dependency_graph (MrpTaskManager *manager,
+				MrpTask        *task,
+				MrpTask        *parent)
+{
+	MrpTaskManagerPriv *priv;
+	MrpTaskGraphNode   *task_node;
+	MrpTaskGraphNode   *parent_node;
+
+	priv = manager->priv;
+	
+	task_node = imrp_task_get_graph_node (task);
+	parent_node = imrp_task_get_graph_node (parent);
+
+	task_node->next = g_list_append (task_node->next, parent);
+	parent_node->prev = g_list_append (parent_node->prev, task);
+}
+
+static void
+remove_task_from_dependency_graph (MrpTaskManager *manager,
+				   MrpTask        *task,
+				   MrpTask        *parent)
+{
+	MrpTaskManagerPriv *priv;
+	GList              *list, *l;
+	MrpRelation        *relation;
+	MrpTask            *predecessor;
+
+	priv = manager->priv;
+	
+	/* Remove predecessors. */
+	list = imrp_task_peek_predecessors (task);
+	for (l = list; l; l = l->next) {
+		relation = l->data;
+		predecessor = mrp_relation_get_predecessor (relation);
+
+		remove_predecessor_from_dependency_graph (manager, task, predecessor);
+	}
+
+	/* Remove the parent. */
+	if (parent && parent != priv->root) {
+		remove_parent_from_dependency_graph (manager, task, parent);
+	}
+}
+
+static void
+add_task_to_dependency_graph (MrpTaskManager *manager,
+			      MrpTask        *task,
+			      MrpTask        *parent)
+{
+	MrpTaskManagerPriv *priv;
+	GList              *list, *l;
+	MrpRelation        *relation;
+	MrpTask            *predecessor;
+
+	priv = manager->priv;
+	
+	if (task == priv->root) {
+		return;
+	}
+
+	/* Add predecessors. */
+	list = imrp_task_peek_predecessors (task);
+	for (l = list; l; l = l->next) {
+		relation = l->data;
+		predecessor = mrp_relation_get_predecessor (relation);
+
+		add_predecessor_to_dependency_graph (manager, task, predecessor);
+	}
+	
+	/* Add the parent. */
+	if (parent && parent != priv->root) {
+		add_parent_to_dependency_graph (manager, task, parent);
 	}
 }
 
@@ -805,53 +983,116 @@ task_manager_unset_visited_func (MrpTask  *task,
 	return FALSE;
 }
 
-static void
-task_manager_sort_tree (MrpTaskManager *manager)
+static gboolean
+task_manager_clean_graph_func (MrpTask  *task,
+			       gpointer  user_data)
 {
-	GList      *list, *l;
-	GNode      *root, *node, *parent_node;
-	GHashTable *hash;
-	MrpTask    *task;
+	MrpTaskGraphNode *node;
 
-	/* Mark all nodes as unvisited. */
+	imrp_task_set_visited (task, FALSE);
+
+	node = imrp_task_get_graph_node (task);
+
+	g_list_free (node->prev);
+	node->prev = NULL;
+
+	g_list_free (node->next);
+	node->next = NULL;
+
+	return FALSE;
+}
+
+static void
+task_manager_build_dependency_graph (MrpTaskManager *manager)
+{
+	MrpTaskManagerPriv *priv;
+	GList              *tasks;
+	GList              *l;
+	GList              *deps;
+	MrpTask            *task;
+	MrpTaskGraphNode   *node;
+	GList              *queue;
+	
+	priv = manager->priv;
+
+	/* Build a directed, acyclic graph, where relation links and children ->
+	 * parent are graph links (children must be calculated before
+	 * parents). Then do topological sorting on the graph to get the order
+	 * to go through the tasks.
+	 */
+
 	mrp_task_manager_traverse (manager,
-				   manager->priv->root,
-				   task_manager_unset_visited_func,
+				   priv->root,
+				   task_manager_clean_graph_func,
 				   NULL);
-	
-	list = NULL;
-	task_manager_traverse_dependency_graph (manager,
-						manager->priv->root,
-						&list);
 
-	hash = g_hash_table_new (NULL, NULL);
-
-	root = imrp_task_get_sorted_node (manager->priv->root);
-
-	/* Disconnect all the nodes. */
-	task_manager_unlink_sorted_tree (manager);
-	
-	g_hash_table_insert (hash, manager->priv->root, root);
-	
-	for (l = list; l; l = l->next) {
-		task = MRP_TASK (l->data);
-
-		node = imrp_task_get_sorted_node (task);
-
-		g_hash_table_insert (hash, task, node);
-
-		parent_node = g_hash_table_lookup (hash,
-						   mrp_task_get_parent (task));
-		
-		g_node_append (parent_node, node);
+	/* FIXME: Optimize by not getting all tasks but just traversing and
+	 * adding them that way. Saves a constant factor.
+	 */
+	tasks = mrp_task_manager_get_all_tasks (manager);
+	for (l = tasks; l; l = l->next) {
+		add_task_to_dependency_graph (manager, l->data, mrp_task_get_parent (l->data));
 	}
 
-	g_list_free (list);
-	g_hash_table_destroy (hash);
+	/* Do a topological sort. Get the tasks without dependencies to start
+	 * with.
+	 */
+	queue = NULL;
+	for (l = tasks; l; l = l->next) {
+		task = l->data;
+		
+		node = imrp_task_get_graph_node (task);
+
+		if (node->prev == NULL) {
+			queue = g_list_prepend (queue, task);
+		}
+	}
+
+	deps = NULL;
+	while (queue) {
+		GList *next, *link;
+		
+		task = queue->data;
+
+		link = queue;
+		queue = g_list_remove_link (queue, link);
+
+		link->next = deps;
+		if (deps) {
+			deps->prev = link;
+		}
+		deps = link;
+		
+		/* Remove this task from all the dependent tasks. */
+		node = imrp_task_get_graph_node (task);
+		for (next = node->next; next; next = next->next) {
+			MrpTaskGraphNode *next_node;
+
+			next_node = imrp_task_get_graph_node (next->data);
+			next_node->prev = g_list_remove (next_node->prev, task);
+
+			/* Add the task to the output queue if it has no
+			 * dependencies left.
+			 */
+			if (next_node->prev == NULL) {
+				queue = g_list_prepend (queue, next->data);
+			}
+		}
+	}
+
+	g_list_free (priv->depencency_list);
+	priv->depencency_list = g_list_reverse (deps);
+
+	g_list_free (queue);
+	g_list_free (tasks);
+	
+	mrp_task_manager_traverse (manager,
+				   priv->root,
+				   task_manager_unset_visited_func,
+				   NULL);
 
 	manager->priv->needs_rebuild = FALSE;
 	manager->priv->needs_recalc = TRUE;
-	/*dump_task_tree (root);*/
 }
 
 /* Calcluate the earliest start time that a particular predesessor relation
@@ -889,7 +1130,7 @@ task_manager_calc_relation (MrpTask	*task,
 		/* start-to-finish */
 		start = mrp_task_get_start (task);
 		finish = mrp_task_get_finish (task);
-		
+
 		time = mrp_task_get_start (predecessor) +
 			mrp_relation_get_lag (relation) - (finish - start);
 		break;
@@ -1312,18 +1553,13 @@ task_manager_calculate_task_finish (MrpTaskManager *manager,
 }
 
 static void
-task_manager_do_forward_pass (MrpTaskManager *manager,
-			      MrpTask        *task,
-			      mrptime        *start,
-			      mrptime        *finish,
-			      mrptime        *work_start)
+task_manager_do_forward_pass_helper (MrpTaskManager *manager,
+				     MrpTask        *task)
 {
 	MrpTaskManagerPriv *priv;
-	GNode              *child;
 	mrptime             sub_start, sub_work_start, sub_finish;
 	mrptime             old_start, old_finish;
 	mrptime             new_start, new_finish;
-	mrptime             tmp_time;
 	gint                duration;
 	gint                old_duration;
 	gint                work;
@@ -1335,25 +1571,40 @@ task_manager_do_forward_pass (MrpTaskManager *manager,
 	old_start = mrp_task_get_start (task);
 	old_finish = mrp_task_get_finish (task);
 	old_duration = old_finish - old_start;
+	
+	if (mrp_task_get_n_children (task) > 0) {
+		MrpTask *child;
 
-	if (g_node_n_children (imrp_task_get_sorted_node (task)) > 0) {
-		/* Summary task. */
 		sub_start = -1;
 		sub_work_start = -1;
 		sub_finish = -1;
-		
-		child = g_node_first_child (imrp_task_get_sorted_node (task));
-		for (; child; child = g_node_next_sibling (child)) {
-			task_manager_do_forward_pass (manager,
-						      child->data,
-						      &sub_start,
-						      &sub_finish,
-						      &sub_work_start);
+				
+		child = mrp_task_get_first_child (task);
+		while (child) {
+			t1 = mrp_task_get_start (child);
+			if (sub_start == -1) {
+				sub_start = t1;
+			} else {
+				sub_start = MIN (sub_start, t1);
+			}
+
+			t2 = mrp_task_get_finish (child);
+			if (sub_finish == -1) {
+				sub_finish = t2;
+			} else {
+				sub_finish = MAX (sub_finish, t2);
+			}
+			
+			t2 = mrp_task_get_work_start (child);
+			if (sub_work_start == -1) {
+				sub_work_start = t2;
+			} else {
+				sub_work_start = MIN (sub_work_start, t2);
+			}
+
+			child = mrp_task_get_next_sibling (child);
 		}
-		
-		/* Now the whole subtree has been traversed, set start/finish
-		 * from the children.
-		 */
+
 		imrp_task_set_start (task, sub_start);
 		imrp_task_set_work_start (task, sub_work_start);
 		imrp_task_set_finish (task, sub_finish);
@@ -1372,13 +1623,12 @@ task_manager_do_forward_pass (MrpTaskManager *manager,
 		imrp_task_set_duration (task, work);
 	} else {
 		/* Non-summary task. */
-		
 		t1 = task_manager_calculate_task_start (manager, task);
 		t2 = task_manager_calculate_task_finish (manager, task, t1, &duration);
 		
 		imrp_task_set_start (task, t1);
 		imrp_task_set_finish (task, t2);
-
+		
 		sched = mrp_task_get_sched (task);
 		if (sched == MRP_TASK_SCHED_FIXED_WORK) {
 			imrp_task_set_duration (task, duration);
@@ -1409,11 +1659,9 @@ task_manager_do_forward_pass (MrpTaskManager *manager,
 					g_signal_handlers_unblock_by_func (assignment,
 									   task_manager_assignment_units_notify_cb,
 									   manager);
-					
-					
 				}
 			}
-		}		
+		}
 	}
 
 	new_start = mrp_task_get_start (task);
@@ -1429,82 +1677,64 @@ task_manager_do_forward_pass (MrpTaskManager *manager,
 	if (old_duration != (new_finish - new_start)) {
 		g_object_notify (G_OBJECT (task), "duration");
 	}
-	
-	if (*start == -1) {
-		*start = new_start;
-	} else {
-		*start = MIN (*start, new_start);
-	}
-	
-	if (*finish == -1) {
-		*finish = new_finish;
-	} else {
-		*finish = MAX (*finish, new_finish);
-	}
-
-	tmp_time = mrp_task_get_work_start (task);
-	if (*work_start == -1) {
-		*work_start = tmp_time;
-	} else {
-		*work_start = MIN (*work_start, tmp_time);
-	}
 }
 
-typedef struct {
-	GSList  *list;
-	MrpTask *root;
-} GetSortedData;
-
-static gboolean
-traverse_get_sorted_tasks (GNode         *node,
-			   GetSortedData *data)
+static void
+task_manager_do_forward_pass (MrpTaskManager *manager,
+			      MrpTask        *start_task)
 {
-	if (node->data != data->root) {
-		data->list = g_slist_prepend (data->list, node->data);
+	MrpTaskManagerPriv *priv;
+	GList              *l;
+
+	priv = manager->priv;
+
+	/* Do forward pass, start at the task and do all tasks that come after
+	 * it in the dependency list. Note: we could try to skip tasks that are
+	 * not dependent, but I don't think that's really worth it.
+	*/
+
+	if (start_task) {
+		l = g_list_find (priv->depencency_list, start_task);
+	} else {
+		l = priv->depencency_list;
 	}
 	
-	return FALSE;
+	while (l) {
+		task_manager_do_forward_pass_helper (manager, l->data);
+		l = l->next;
+	}
+
+	/* FIXME: Might need to rework this if we make the forward/backward
+	 * passes only recalculate tasks that depend on the changed task.
+	 */
+	task_manager_do_forward_pass_helper (manager, priv->root);
 }
 
 static void
 task_manager_do_backward_pass (MrpTaskManager *manager)
 {
 	MrpTaskManagerPriv *priv;
-	GNode              *root;
-	GetSortedData       data;
-	GSList             *tasks, *l;
+	GList              *tasks, *l;
 	GList              *successors, *s;
 	mrptime             project_finish;
 	mrptime             t1, t2;
 	gint                duration;
+	gboolean            critical;
+	gboolean            was_critical;
 	
 	priv = manager->priv;
 
-	root = imrp_task_get_sorted_node (priv->root);
-
-	data.list = NULL;
-	data.root = root->data;
-
-	g_node_traverse (root,
-			 G_POST_ORDER,
-			 G_TRAVERSE_ALL,
-			 -1,
-			 (GNodeTraverseFunc) traverse_get_sorted_tasks,
-			 &data);
-
-	tasks = data.list;
-
 	project_finish = mrp_task_get_finish (priv->root);
-	
-	for (l = tasks; l; l = l->next) {
-		MrpTask  *task;
-		MrpTask  *parent;
-		gboolean  was_critical, critical;
 
-		task = l->data;
+	tasks = g_list_reverse (g_list_copy (priv->depencency_list));
+
+	for (l = tasks; l; l = l->next) {
+		MrpTask *task, *parent;
+
+		task =  l->data;
 		parent = mrp_task_get_parent (task);
 
-		if ((NULL == parent) || (parent == manager->priv->root)) {
+		if (!parent || parent == priv->root) {
 			t1 = project_finish;
 		} else {
 			t1 = MIN (project_finish, mrp_task_get_latest_finish (parent));
@@ -1542,7 +1772,7 @@ task_manager_do_backward_pass (MrpTaskManager *manager)
 		}
 	}
 
-	g_slist_free (tasks);
+	g_list_free (tasks);
 }
 
 void
@@ -1561,8 +1791,6 @@ mrp_task_manager_set_block_scheduling (MrpTaskManager *manager, gboolean block)
 	priv->block_scheduling = block;
 
 	if (!block) {
-		/* FIXME: why do we need two recalcs here, see bug #500. */
-		mrp_task_manager_recalc (manager, TRUE);
 		mrp_task_manager_recalc (manager, TRUE);
 	}
 }
@@ -1581,7 +1809,8 @@ mrp_task_manager_rebuild (MrpTaskManager *manager)
 		return;
 	}
 
-	task_manager_sort_tree (manager);
+	task_manager_build_dependency_graph (manager);
+	
 	priv->needs_rebuild = FALSE;
 	priv->needs_recalc = TRUE;
 }
@@ -1592,7 +1821,6 @@ mrp_task_manager_recalc (MrpTaskManager *manager,
 {
 	MrpTaskManagerPriv *priv;
 	MrpProject         *project;
-	mrptime             start, finish, work_start;
 
 	g_return_if_fail (MRP_IS_TASK_MANAGER (manager));
 	g_return_if_fail (manager->priv->root != NULL);
@@ -1612,7 +1840,7 @@ mrp_task_manager_recalc (MrpTaskManager *manager,
 	if (!priv->needs_recalc && !priv->needs_rebuild) {
 		return;
 	}
-	
+
 	/* If we don't have any children yet, or if the root is not inserted
 	 * properly into the project yet, just postpone the recalc.
 	 */
@@ -1631,11 +1859,7 @@ mrp_task_manager_recalc (MrpTaskManager *manager,
 		mrp_task_manager_rebuild (manager);
 	}
 
-	start = MRP_TIME_MAX;
-	work_start = MRP_TIME_MAX;
-	finish = 0;
-	
-	task_manager_do_forward_pass (manager, priv->root, &start, &finish, &work_start);
+	task_manager_do_forward_pass (manager, NULL);
 	task_manager_do_backward_pass (manager);
 
 	priv->needs_recalc = FALSE;
@@ -1693,6 +1917,7 @@ task_manager_task_relation_added_cb (MrpTask        *task,
 	if (task == mrp_relation_get_predecessor (relation)) {
 		return;
 	}
+
 	g_signal_connect_object (relation,
 				 "notify",
 				 G_CALLBACK (task_manager_task_relation_notify_cb),
@@ -1749,64 +1974,29 @@ task_manager_task_assignment_removed_cb (MrpTask        *task,
 }
 
 static gboolean
-task_manager_check_successor_loop (MrpTask *task, MrpTask *end_task)
+check_predecessor_traverse (MrpTaskManager *manager,
+			    MrpTask        *task,
+			    MrpTask        *end,
+			    gint            length)
 {
-	GList       *successors, *l;
-	MrpRelation *relation;
-	MrpTask     *child;
+	MrpTaskGraphNode *node;
+	GList            *l;
 
-	if (task == end_task) {
+	if (length > 1 && task == end) {
 		return FALSE;
 	}
+
+	/* Avoid endless loop. */
+	if (imrp_task_get_visited (task)) {
+		return TRUE;
+	}
+
+	imrp_task_set_visited (task, TRUE);
 	
-	successors = imrp_task_peek_successors (task);
-	for (l = successors; l; l = l->next) {
-		relation = l->data;
-		if (!task_manager_check_successor_loop (mrp_relation_get_successor (relation),
-							end_task)) {
+	node = imrp_task_get_graph_node (task);
+	for (l = node->next; l; l = l->next) {
+		if (!check_predecessor_traverse (manager, l->data, end, length + 1))
 			return FALSE;
-		}
-	}
-
-	child = mrp_task_get_first_child (task);
-	while (child) {
-		if (!task_manager_check_successor_loop (child, end_task)) {
-			return FALSE;
-		}
-		
-		child = mrp_task_get_next_sibling (child);
-	}
-	
-	return TRUE;
-}
-
-static gboolean
-task_manager_check_predecessor_loop (MrpTask *task, MrpTask *end_task)
-{
-	GList       *predecessors, *l;
-	MrpRelation *relation;
-	MrpTask     *child;
-
-	if (task == end_task) {
-		return FALSE;
-	}
-	
-	predecessors = imrp_task_peek_predecessors (task);
-	for (l = predecessors; l; l = l->next) {
-		relation = l->data;
-		if (!task_manager_check_predecessor_loop (mrp_relation_get_predecessor (relation),
-							  end_task)) {
-			return FALSE;
-		}
-	}
-
-	child = mrp_task_get_first_child (task);
-	while (child) {
-		if (!task_manager_check_predecessor_loop (child, end_task)) {
-			return FALSE;
-		}
-		
-		child = mrp_task_get_next_sibling (child);
 	}
 	
 	return TRUE;
@@ -1818,54 +2008,40 @@ mrp_task_manager_check_predecessor (MrpTaskManager  *manager,
 				    MrpTask         *predecessor,
 				    GError         **error)
 {
-	gint     depth_task, depth_predecessor;
-	gint     i;
-	MrpTask *task_ancestor;
-	MrpTask *predecessor_ancestor;
-
+	gboolean retval;
+	
 	g_return_val_if_fail (MRP_IS_TASK_MANAGER (manager), FALSE);
 	g_return_val_if_fail (MRP_IS_TASK (task), FALSE);
 	g_return_val_if_fail (MRP_IS_TASK (predecessor), FALSE);
 
-	/* "Inbreed" check, i.e. a relation between a task and it's ancestor. */
-	depth_task = imrp_task_get_depth (task);
-	depth_predecessor = imrp_task_get_depth (predecessor);
-
-	task_ancestor = task;
-	predecessor_ancestor = predecessor;
-
-	if (depth_task < depth_predecessor) {
-		for (i = depth_predecessor; i > depth_task; i--) {
-			predecessor_ancestor = mrp_task_get_parent (predecessor_ancestor);
-		}
-	} else if (depth_predecessor < depth_task) {
-		for (i = depth_task; i > depth_predecessor; i--) {
-			task_ancestor = mrp_task_get_parent (task_ancestor);
-		}
+	if (manager->priv->needs_rebuild) {
+		mrp_task_manager_rebuild (manager);
 	}
+	
+	/* Add the predecessor to check. */
+	add_predecessor_to_dependency_graph (manager, task, predecessor);
+	
+	if (0) {
+		g_print ("--->\n");
+		dump_all_task_nodes (manager);
+		g_print ("<---\n");
+	}
+	
+	mrp_task_manager_traverse (manager,
+				   manager->priv->root,
+				   task_manager_unset_visited_func,
+				   NULL);
+	
+	retval = check_predecessor_traverse (manager, predecessor, predecessor, 1);
 
-	if (task_ancestor == predecessor_ancestor) {
+	/* Remove the predecessor again. */
+	remove_predecessor_from_dependency_graph (manager, task, predecessor);
+	
+	if (!retval) {
 		g_set_error (error,
 			     MRP_ERROR,
 			     MRP_ERROR_TASK_RELATION_FAILED,
-			     _("Can not add a predecessor relation between a task and its ancestor."));
-		return FALSE;
-	}
-
-	/* Loop checking. */
-	if (!task_manager_check_successor_loop (task, predecessor)) {
-		g_set_error (error,
-			     MRP_ERROR,
-			     MRP_ERROR_TASK_RELATION_FAILED,
-			     _("Can not add a predecessor, because it would result in a loop."));
-		return FALSE;
-	}
-
-	if (!task_manager_check_predecessor_loop (predecessor, task)) {
-		g_set_error (error,
-			     MRP_ERROR,
-			     MRP_ERROR_TASK_RELATION_FAILED,
-			     _("Can not add a predecessor, because it would result in a loop."));
+			     _("Cannot add a predecessor, because it would result in a loop."));
 		return FALSE;
 	}
 
@@ -1878,33 +2054,44 @@ mrp_task_manager_check_move (MrpTaskManager  *manager,
 			     MrpTask         *parent,
 			     GError         **error)
 {
-	gboolean success;
+	gboolean retval;
 	
 	g_return_val_if_fail (MRP_IS_TASK_MANAGER (manager), FALSE);
 	g_return_val_if_fail (MRP_IS_TASK (task), FALSE);
 	g_return_val_if_fail (MRP_IS_TASK (parent), FALSE);
 
-	/* If there is a link between the task's subtree and the new parent or
-	 * any of its ancestors, the move will result in a loop.
-	 */
-	success = mrp_task_manager_check_predecessor (manager,
-						      task,
-						      parent,
-						      NULL) &&
-		mrp_task_manager_check_predecessor (manager,
-						    parent,
-						    task,
-						    NULL);
+	/* FIXME: Check this. */
 
-	if (!success) {
+	/* Remove the task from the old parent and add it to its new parent. */
+	remove_task_from_dependency_graph (manager, task, mrp_task_get_parent (task));
+	add_task_to_dependency_graph (manager, task, parent);
+	
+	if (0) {
+		g_print ("--->\n");
+		dump_all_task_nodes (manager);
+		g_print ("<---\n");
+	}
+	
+	mrp_task_manager_traverse (manager,
+				   manager->priv->root,
+				   task_manager_unset_visited_func,
+				   NULL);
+	
+	retval = check_predecessor_traverse (manager, task, task, 1);
+
+	/* Put the task back again. */
+	remove_task_from_dependency_graph (manager, task, parent);
+	add_task_to_dependency_graph (manager, task, mrp_task_get_parent (task));
+
+	if (!retval) {
 		g_set_error (error,
 			     MRP_ERROR,
 			     MRP_ERROR_TASK_MOVE_FAILED,
-			     _("Can not move the task, since it would result in a loop."));
+			     _("Cannot move the task, because it would result in a loop."));
 		return FALSE;
 	}
 
-	return TRUE;
+	return retval;
 }
 
 static gint
@@ -2029,3 +2216,4 @@ mrp_task_manager_calculate_task_work (MrpTaskManager *manager,
 
 	return work;
 }
+

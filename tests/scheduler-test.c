@@ -215,31 +215,43 @@ check_project (ProjectData *data, MrpProject *project)
 gint
 main (gint argc, gchar **argv)
 {
-	MrpApplication *app;
-	const gchar    *filename;
-	ProjectData    *data;
-	MrpProject     *project;
-	gchar          *buf;
-	
+	MrpApplication  *app;
+	ProjectData     *data;
+	MrpProject      *project;
+	gchar           *buf;
+	gchar           *tmp;
+	gint             i;
+	const gchar    *filenames[] = {
+		"test-1.planner",
+		"test-2.planner",
+		NULL
+	};
+
         g_type_init ();
 
 	app = mrp_application_new ();
 
-	filename = EXAMPLESDIR "/test-1.planner";
+	i = 0;
+	while (filenames[i]) {
+		tmp = g_build_filename (EXAMPLESDIR, filenames[i], NULL);
 
-	/* Just parse the XML. */
-	data = read_project (filename);
-
-	/* Create a project from the same file. */
-	project = mrp_project_new (app);
-	g_assert (g_file_get_contents (filename, &buf, NULL, NULL));
-	g_assert (mrp_project_load_from_xml (project, buf, NULL));
-
-	g_free (buf);
+		/* Just parse the XML. */
+		data = read_project (tmp);
 		
-	/* Reschedule the project and check that the info is correct. */
-	mrp_project_reschedule (project);
-	check_project (data, project);
+		/* Create a project from the same file. */
+		project = mrp_project_new (app);
+		g_assert (g_file_get_contents (tmp, &buf, NULL, NULL));
+		g_assert (mrp_project_load_from_xml (project, buf, NULL));
+		
+		g_free (buf);
+		g_free (tmp);
+		
+		/* Reschedule the project and check that the info is correct. */
+		mrp_project_reschedule (project);
+		check_project (data, project);
+
+		i++;
+	}
 	
 	return EXIT_SUCCESS;
 }
