@@ -1825,7 +1825,11 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 			
 		break;
 		
-	case GDK_BUTTON_RELEASE:
+	case GDK_BUTTON_RELEASE: {
+		PlannerTaskTree   *tree;
+		GtkTreePath       *path;
+		GtkTreeSelection  *selection;
+				
 		if (event->button.button != 1) {
 			return FALSE;
 		}
@@ -1931,10 +1935,6 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 		gnome_canvas_item_ungrab (item, event->button.time);
 		
 		/* Select the clicked on task in the treeview */
-		PlannerTaskTree   *tree;
-		GtkTreePath       *path;
-		GtkTreeSelection  *selection;
-		
 		chart = g_object_get_data (G_OBJECT (item->canvas), "chart");
 		tree = planner_gantt_chart_get_view (chart);
 		gtk_widget_grab_focus (GTK_WIDGET (tree));
@@ -1960,7 +1960,10 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 			planner_task_tree_set_anchor (tree, path);
 		}
 		else if (event->button.state & GDK_SHIFT_MASK) {
-			GtkTreePath* anchor = planner_task_tree_get_anchor (tree);
+			GtkTreePath *anchor;
+
+			anchor = planner_task_tree_get_anchor (tree);
+			
 			if (anchor) {
 				gtk_tree_selection_unselect_all (selection);
 				gtk_tree_selection_select_range(selection, anchor, path);
@@ -1976,6 +1979,7 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 		priv->state = STATE_NONE;
 	
 		return TRUE;
+	}
 		
 	case GDK_2BUTTON_PRESS:
 		if (event->button.button == 1) {
