@@ -219,8 +219,8 @@ mrp_object_set_property (MrpObject *object, MrpProperty *property, GValue *value
 /**
  * mrp_object_get_property:
  * @object: an #MrpObject
- * @property: the property to set
- * @value: the value to set
+ * @property: the property to get
+ * @value: the value to get
  * 
  * Gets a custom property. This is mostly for language bindings. C programmers
  * should use mrp_object_get instead.

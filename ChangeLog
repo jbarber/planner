@@ -1,3 +1,10 @@
+2004-06-26 Alvaro del Castillo  <acs@barrapunto.com>
+	
+	* libplanner/mrp-object.c: Fix in mrp_object_get_property API doc.
+	* src/planner-property-dialog.c: Implemented recovering properties
+	values for tasks and resources when you undo a remove custom
+	property operation. Fixes #143609.
+
 2004-06-25  Richard Hult  <richard@imendio.com>
 
 	* src/planner-ttable-row.c: (recalc_bounds),

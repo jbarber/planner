@@ -74,14 +74,17 @@ typedef struct {
 typedef struct {
 	PlannerCmd       base;
 	
-	PlannerWindow	*window;
 	MrpProject      *project;
-	gchar	 	*name; 
+	gchar	 	*name;
+	MrpProperty	*property;
 	MrpPropertyType	 type;
 	gchar	 	*label_text;
 	gchar	 	*description;
 	GType		 owner;
 	gboolean	 user_defined;   
+
+	GHashTable      *tasks;
+	GHashTable      *resources;	
 } PropertyCmdRemove;
 
 typedef struct {
@@ -626,12 +629,9 @@ property_cmd_add_undo (PlannerCmd *cmd_base)
 		
 	cmd = (PropertyCmdAdd*) cmd_base;
 
-	/* FIXME: why is the NULL check here? */
-	if (cmd->name != NULL) {
-		mrp_project_remove_property (cmd->project, 
-				  	     cmd->owner,
-				  	     cmd->name);
-	}	
+	mrp_project_remove_property (cmd->project, 
+				     cmd->owner,
+				     cmd->name);
 }
 
 
@@ -695,6 +695,31 @@ property_cmd_remove_do (PlannerCmd *cmd_base)
 		return FALSE;
 	}
 
+	/* First we need to save the value of the property */
+	if (cmd->owner == MRP_TYPE_TASK && g_hash_table_size (cmd->tasks) == 0) {
+		GList *l, *tasks = mrp_project_get_all_tasks (cmd->project);
+
+		/* ref tasks */
+		for (l = tasks; l; l = l->next) {
+			GValue *value = g_new0 (GValue, 1);
+			g_value_init (value, G_PARAM_SPEC_VALUE_TYPE (cmd->property));
+			mrp_object_get_property (l->data, cmd->property, value);
+			g_hash_table_insert (cmd->tasks, g_object_ref (l->data), value);
+		}
+		
+	}	
+	else if (cmd->owner == MRP_TYPE_RESOURCE && g_hash_table_size (cmd->resources) == 0) {
+		GList *l, *resources = mrp_project_get_resources (cmd->project);
+
+		for (l = resources; l; l = l->next) {
+			GValue *value = g_new0 (GValue, 1);
+			g_value_init (value, G_PARAM_SPEC_VALUE_TYPE (cmd->property));
+			mrp_object_get_property (l->data, cmd->property, value); 
+			g_hash_table_insert (cmd->resources, g_object_ref (l->data), value);
+		}
+		
+	}
+
 	mrp_project_remove_property (cmd->project,
 				     cmd->owner,
 				     cmd->name);
@@ -703,26 +728,50 @@ property_cmd_remove_do (PlannerCmd *cmd_base)
 }
 
 static void
+property_hash_recover  (gpointer key,
+			gpointer value,
+			gpointer user_data)
+{
+	PropertyCmdRemove *cmd = (PropertyCmdRemove*) user_data;
+
+	g_assert (MRP_IS_TASK (key) || MRP_IS_RESOURCE (key));
+	g_assert (G_IS_VALUE (value));
+
+	mrp_object_set_property (key, cmd->property, value);
+
+}
+
+static void
 property_cmd_remove_undo (PlannerCmd *cmd_base)
 {
 	PropertyCmdRemove *cmd;
-	MrpProperty       *property;
 	
 	cmd = (PropertyCmdRemove*) cmd_base;
 
-	/* FIXME: why is this check here? */
-	if (cmd->name != NULL) {
-		property = mrp_property_new (cmd->name, 
-					     cmd->type,
-					     cmd->label_text,
-					     cmd->description,
-					     cmd->user_defined);
-		
-		mrp_project_add_property (cmd->project, 
-					  cmd->owner,
-					  property,
+	mrp_property_unref (cmd->property);
+
+	cmd->property = mrp_property_new (cmd->name, 
+					  cmd->type,
+					  cmd->label_text,
+					  cmd->description,
 					  cmd->user_defined);
-	}	
+	
+	mrp_project_add_property (cmd->project, 
+				  cmd->owner,
+				  cmd->property,
+				  cmd->user_defined);
+
+	g_hash_table_foreach (cmd->tasks, property_hash_recover, cmd);
+	g_hash_table_foreach (cmd->resources, property_hash_recover, cmd);	
+}
+
+static void
+property_hash_free  (gpointer key,
+		     gpointer value,
+		     gpointer user_data) 
+{
+	g_object_unref (key);
+	g_value_unset ((GValue *) value);	
 }
 
 static void
@@ -732,9 +781,18 @@ property_cmd_remove_free (PlannerCmd *cmd_base)
 
 	cmd = (PropertyCmdRemove*) cmd_base;
 
+	mrp_property_unref (cmd->property);
+
+	g_hash_table_foreach (cmd->tasks, property_hash_free, NULL);
+	g_hash_table_destroy (cmd->tasks);
+	g_hash_table_foreach (cmd->resources, property_hash_free, NULL);
+	g_hash_table_destroy (cmd->resources);
+
 	g_free (cmd->name);
 	g_free (cmd->label_text);
 	g_free (cmd->description);
+
+	g_object_unref (cmd->project);
 }
 
 static PlannerCmd *
@@ -755,19 +813,22 @@ property_cmd_remove (PlannerWindow *window,
 
 	cmd = (PropertyCmdRemove *) cmd_base;
 	
-	cmd->window = window;
-	cmd->project = project;
+	cmd->project = g_object_ref (project);
 	cmd->owner = owner;
 	cmd->name = g_strdup (name);
 
 	property = mrp_project_get_property (project,
 					     name,
 					     owner);
-					     
+
+	cmd->property = mrp_property_ref (property);
 	cmd->type = mrp_property_get_property_type (property);
 	cmd->description = g_strdup (mrp_property_get_description (property));
 	cmd->label_text = g_strdup ( mrp_property_get_label (property));
 	cmd->user_defined = mrp_property_get_user_defined (property);
+
+	cmd->tasks = g_hash_table_new (NULL, NULL);
+	cmd->resources = g_hash_table_new (NULL, NULL);
 
 	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager (window),
 					   cmd_base);
