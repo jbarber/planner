@@ -1,5 +1,9 @@
 2004-05-10  Richard Hult  <richard@imendio.com>
 
+	* src/planner-ttable-view.c (ttable_view_update_zoom_sensitivity) 
+	(activate, ttable_view_zoom_out_cb, ttable_view_zoom_in_cb) 
+	(ttable_view_zoom_to_fit_cb): Fix bug #141116, patch from Lincoln.
+
 	* data/ui/time-table-view.ui: Fix the weird edit menu.
 	* src/planner-ttable-model.c: Start cleaning up coding style.
 

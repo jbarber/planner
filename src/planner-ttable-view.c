@@ -85,6 +85,7 @@ static void        ttable_view_collapse_all          (PlannerTtableTree         
 static void        ttable_view_ttable_status_updated (PlannerTtableChart           *chart,
 						      const gchar                  *message,
 						      PlannerView                  *view);
+static void	   ttable_view_update_zoom_sensitivity (PlannerView                *view);
 void               activate                          (PlannerView                  *view);
 void               deactivate                        (PlannerView                  *view);
 void               init                              (PlannerView                  *view,
@@ -113,6 +114,8 @@ activate (PlannerView *view)
 				"/planner/ui/time-table-view.ui",
 				"timetableview",
 				verbs);
+	
+	ttable_view_update_zoom_sensitivity (view);
 }
 
 G_MODULE_EXPORT void
@@ -237,6 +240,7 @@ ttable_view_zoom_out_cb (BonoboUIComponent *component,
 	view = PLANNER_VIEW (data);
 
 	planner_ttable_chart_zoom_out (view->priv->chart);
+	ttable_view_update_zoom_sensitivity (view);
 }
 
 static void
@@ -249,6 +253,7 @@ ttable_view_zoom_in_cb (BonoboUIComponent *component,
 	view = PLANNER_VIEW (data);
 	
 	planner_ttable_chart_zoom_in (view->priv->chart);
+	ttable_view_update_zoom_sensitivity (view);
 }
 
 static void
@@ -256,9 +261,12 @@ ttable_view_zoom_to_fit_cb	(BonoboUIComponent	*component,
 				 gpointer		 data,
 				 const char		*cname)
 {
-	PlannerView		*view;
-	view = PLANNER_VIEW(data);
-	planner_ttable_chart_zoom_to_fit(view->priv->chart);
+	PlannerView *view;
+
+	view = PLANNER_VIEW (data);
+
+	planner_ttable_chart_zoom_to_fit (view->priv->chart);
+	ttable_view_update_zoom_sensitivity (view);
 }
 
 static void
@@ -271,7 +279,6 @@ ttable_view_ui_component_event	(BonoboUIComponent	*component,
 	PlannerViewPriv *priv;
 
 	priv = view->priv;
-	g_message("ttable_view_ui_component_event");
 }
 
 static void
@@ -494,6 +501,31 @@ ttable_view_collapse_all	(PlannerTtableTree	*tree,
 					  ttable_view_row_collapsed,
 					  chart);
 }
+
+static void
+ttable_view_update_zoom_sensitivity (PlannerView *view)
+{
+	gboolean in, out;
+	
+	planner_ttable_chart_can_zoom (view->priv->chart,
+				       &in,
+				       &out);
+	
+	bonobo_ui_component_freeze (view->ui_component, NULL);
+	
+	bonobo_ui_component_set_prop (view->ui_component, 
+				      "/commands/ZoomIn",
+				      "sensitive", in ? "1" : "0", 
+				      NULL);
+	
+	bonobo_ui_component_set_prop (view->ui_component, 
+				      "/commands/ZoomOut",
+				      "sensitive", out ? "1" : "0", 
+				      NULL);
+	
+	bonobo_ui_component_thaw (view->ui_component, NULL);
+}
+
 
 /*
 TODO:
