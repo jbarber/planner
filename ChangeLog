@@ -1,3 +1,13 @@
+2004-06-17  Richard Hult  <richard@imendio.com>
+
+	* src/planner-gantt-model.c: Improve the caching scheme (AKA make
+	it work).
+
+2004-06-17  Richard Hult  <richard@imendio.com>
+
+	* libplanner/mrp-task-manager.c (task_manager_do_backward_pass):
+	Don't set critical if it hasn't changed.
+
 2004-06-17  Richard Hult,,,  <richard@imendio.com>
 
 	* src/planner-gantt-model.c: (gantt_model_task_inserted_cb),

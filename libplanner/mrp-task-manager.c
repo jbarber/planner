@@ -1497,8 +1497,12 @@ task_manager_do_backward_pass (MrpTaskManager *manager)
 	project_finish = mrp_task_get_finish (priv->root);
 	
 	for (l = tasks; l; l = l->next) {
-		MrpTask *task = l->data;
-		MrpTask *parent = mrp_task_get_parent (task);
+		MrpTask  *task;
+		MrpTask  *parent;
+		gboolean  was_critical, critical;
+
+		task = l->data;
+		parent = mrp_task_get_parent (task);
 
 		if ((NULL == parent) || (parent == manager->priv->root)) {
 			t1 = project_finish;
@@ -1531,7 +1535,11 @@ task_manager_do_backward_pass (MrpTaskManager *manager)
 			
 		t2 = mrp_task_get_start (task);
 
-		g_object_set (task, "critical", t1 == t2, NULL);
+		was_critical = mrp_task_get_critical (task);
+		critical = (t1 == t2);
+		if (was_critical != critical) {
+			g_object_set (task, "critical", critical, NULL);
+		}
 	}
 
 	g_slist_free (tasks);
