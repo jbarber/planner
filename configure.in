@@ -1,5 +1,5 @@
 AC_INIT(AUTHORS)
-AM_INIT_AUTOMAKE(planner, 0.11)
+AM_INIT_AUTOMAKE(planner, 0.11.90)
 AM_CONFIG_HEADER(config.h)
 
 AM_MAINTAINER_MODE
@@ -249,6 +249,11 @@ fi
 
 AM_CONDITIONAL(HAVE_DOTNET, test x$have_dotnet = xyes)
 
+dnl This will cause the automake generated makefiles to pass the
+dnl correct flags to aclocal.
+ACLOCAL_AMFLAGS="\${ACLOCAL_FLAGS}"
+AC_SUBST(ACLOCAL_AMFLAGS)
+
 AC_CONFIG_FILES([
 Makefile
 libplanner/Makefile
@@ -276,7 +281,6 @@ planner.spec
 libplanner-1.pc
 ])
 
-#dotnet/planner/Makefile
 
 AC_OUTPUT
 

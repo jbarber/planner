@@ -15,8 +15,8 @@ DIE=0
 
 : ${AUTOCONF=autoconf}
 : ${AUTOHEADER=autoheader}
-: ${AUTOMAKE=automake}
-: ${ACLOCAL=aclocal}
+: ${AUTOMAKE=automake-1.7}
+: ${ACLOCAL=aclocal-1.7}
 : ${LIBTOOLIZE=libtoolize}
 : ${INTLTOOLIZE=intltoolize}
 : ${LIBTOOL=libtool}
