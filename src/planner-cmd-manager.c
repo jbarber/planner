@@ -252,6 +252,11 @@ cmd_manager_free_func (PlannerCmd *cmd,
 	if (cmd->free_func) {
 		cmd->free_func (cmd);
 	}
+
+	/* FIXME: Add this when the rest of the code is fixed up. */
+/*	g_free (cmd->label);
+	g_free (cmd);
+*/
 }
 
 static void

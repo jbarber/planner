@@ -3,6 +3,7 @@
  * Copyright (C) 2002 CodeFactory AB
  * Copyright (C) 2002 Richard Hult <richard@imendio.com>
  * Copyright (C) 2002 Mikael Hallendal <micke@imendio.com>
+ * Copyright (C) 2004 Imendio HB
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -40,7 +41,7 @@ enum {
 };
 
 typedef struct {
-	PlannerWindow  *main_window;
+	PlannerWindow *main_window;
 	MrpProject    *project;
 
 	GtkWidget     *dialog;
@@ -55,6 +56,24 @@ typedef struct {
 	gboolean       found;
 	GtkTreeIter    found_iter;
 } FindDayData;
+
+typedef struct {
+	PlannerCmd   base;
+
+	MrpProject  *project;
+	
+	gchar       *name;
+	MrpDay      *day;
+} DayTypeCmdAdd;
+
+typedef struct {
+	PlannerCmd   base;
+
+	MrpProject  *project;
+
+	gchar       *name;
+	MrpDay      *day;
+} DayTypeCmdRemove;
 
 #define DIALOG_GET_DATA(d) g_object_get_data ((GObject*)d, "data")
 
@@ -78,6 +97,11 @@ static void          day_type_dialog_selection_changed_cb (GtkTreeSelection *sel
 							   DialogData       *data);
 static void          day_type_dialog_new_dialog_run       (DialogData       *data);
 
+static PlannerCmd *  day_type_cmd_add                     (DialogData       *data,
+							   const char       *name);
+static PlannerCmd *  day_type_cmd_remove                  (DialogData       *data,
+							   MrpDay           *day);
+
 
 static void
 day_type_dialog_response_cb (GtkWidget  *dialog,
@@ -89,7 +113,7 @@ day_type_dialog_response_cb (GtkWidget  *dialog,
 	switch (response) {
 	case RESPONSE_REMOVE:
 		day = day_type_dialog_get_selected_day (data);
-		mrp_day_remove (data->project, day);
+		day_type_cmd_remove (data, day);
 		break;
 
 	case RESPONSE_ADD:
@@ -317,7 +341,7 @@ day_type_dialog_find_day_foreach (GtkTreeModel *model,
 			    COL_DAY, &day,
 			    -1);
 
-	if (day == data->day) {
+	if (mrp_day_get_id (day) == mrp_day_get_id (data->day)) {
 		data->found = TRUE;
 		data->found_iter = *iter;
 		return TRUE;
@@ -395,7 +419,6 @@ day_type_dialog_new_dialog_run (DialogData *data)
 	GtkWidget   *entry;
 	GtkWidget   *button;
 	const gchar *name;
-	MrpDay      *day;
 
 	glade = glade_xml_new (GLADEDIR "/calendar-dialog.glade",
 			       "new_day_dialog",
@@ -414,10 +437,7 @@ day_type_dialog_new_dialog_run (DialogData *data)
 	if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_OK) {
 		name = gtk_entry_get_text (GTK_ENTRY (entry));
 
-		day = mrp_day_add (data->project, name, "");
-
-		/* Fake a callback for now. */
-		/*day_type_dialog_type_added_cb (data->project, day, data);*/
+		day_type_cmd_add (data, name);
 	}
 
 	g_object_unref (glade);
@@ -425,3 +445,119 @@ day_type_dialog_new_dialog_run (DialogData *data)
 }
 
 
+/* Commands */
+
+static void
+day_type_cmd_add_do (PlannerCmd *cmd_base)
+{
+	DayTypeCmdAdd *cmd;
+
+	cmd = (DayTypeCmdAdd *) cmd_base;
+
+	cmd->day = mrp_day_add (cmd->project, cmd->name, "");
+}
+
+static void
+day_type_cmd_add_undo (PlannerCmd *cmd_base)
+{
+	DayTypeCmdAdd *cmd;
+
+	cmd = (DayTypeCmdAdd *) cmd_base;
+	
+	mrp_day_remove (cmd->project, cmd->day);
+	cmd->day = NULL;
+}
+
+static void
+day_type_cmd_add_free (PlannerCmd *cmd_base)
+{
+	DayTypeCmdAdd *cmd;
+
+	cmd = (DayTypeCmdAdd *) cmd_base;
+
+	g_free (cmd->name);
+}
+
+static PlannerCmd *
+day_type_cmd_add (DialogData  *data,
+		  const char  *name)
+{
+	PlannerCmd    *cmd_base;
+	DayTypeCmdAdd *cmd;
+
+	cmd = g_new0 (DayTypeCmdAdd, 1);
+
+	cmd_base = (PlannerCmd*) cmd;
+
+	cmd_base->label = g_strdup_printf (_("Add day type \"%s\""), name);
+	cmd_base->do_func = day_type_cmd_add_do;
+	cmd_base->undo_func = day_type_cmd_add_undo;
+	cmd_base->free_func = day_type_cmd_add_free;
+
+	cmd->project = data->project;
+
+	cmd->name = g_strdup (name);
+
+	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager (data->main_window),
+					   cmd_base);
+
+	return cmd_base;
+}
+
+static void
+day_type_cmd_remove_do (PlannerCmd *cmd_base)
+{
+	DayTypeCmdRemove *cmd;
+
+	cmd = (DayTypeCmdRemove *) cmd_base;
+
+	mrp_day_remove (cmd->project, cmd->day);
+	cmd->day = NULL;
+}
+
+static void
+day_type_cmd_remove_undo (PlannerCmd *cmd_base)
+{
+	DayTypeCmdRemove *cmd;
+
+	cmd = (DayTypeCmdRemove *) cmd_base;
+	
+	cmd->day = mrp_day_add (cmd->project, cmd->name, "");
+}
+
+static void
+day_type_cmd_remove_free (PlannerCmd *cmd_base)
+{
+	DayTypeCmdRemove *cmd;
+
+	cmd = (DayTypeCmdRemove *) cmd_base;
+
+	g_free (cmd->name);
+}
+
+static PlannerCmd *
+day_type_cmd_remove (DialogData *data,
+		     MrpDay     *day)
+{
+	PlannerCmd       *cmd_base;
+	DayTypeCmdRemove *cmd;
+
+	cmd = g_new0 (DayTypeCmdRemove, 1);
+
+	cmd_base = (PlannerCmd*) cmd;
+
+	cmd_base->label = g_strdup_printf (_("Remove day type \"%s\""), mrp_day_get_name (day));
+	cmd_base->do_func = day_type_cmd_remove_do;
+	cmd_base->undo_func = day_type_cmd_remove_undo;
+	cmd_base->free_func = day_type_cmd_remove_free;
+
+	cmd->project = data->project;
+
+	cmd->day = day;
+	cmd->name = g_strdup (mrp_day_get_name (day));
+
+	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager (data->main_window),
+					   cmd_base);
+	
+	return cmd_base;
+}

@@ -1,3 +1,14 @@
+2004-05-01  Richard Hult  <richard@imendio.com>
+
+	* src/planner-cmd-manager.c (cmd_manager_free_func): Add commented
+	out code to free the base command, need to add this when the rest
+	of the code is fixed.
+
+	* libplanner/mrp-day.c: (mrp_day_add): Clean a bit.
+
+	* src/planner-day-type-dialog.c: Implement undo/redo. Use the day
+	id instead of the pointer to identify day types.
+
 2004-05-01 Alvaro del Castillo  <acs@barrapunto.com>
 
 	* src/planner-resource-dialog.c: implemented undo for resource calendar 

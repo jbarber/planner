@@ -81,11 +81,10 @@ mrp_day_add (MrpProject *project, const gchar *name, const gchar *description)
 
         day = g_new0 (MrpDay, 1);
 
-        /* Weak ref? */
         day->project   = project;
         day->ref_count = 1;
-        day->name      = g_strdup (name);
-	day->id        = g_quark_from_string (name);
+        day->name = g_strdup (name);
+	day->id = g_quark_from_string (name);
 	
         if (description) {
                 day->description = g_strdup (description);
