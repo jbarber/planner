@@ -64,6 +64,7 @@ typedef struct {
 	 * off later.
 	 */
 	MrpCalendar   *selected_calendar;
+
 } DialogData;
 
 typedef struct {
@@ -81,79 +82,86 @@ enum {
 };
 
 
-static void  resource_dialog_name_changed_cb                (GtkWidget    *w,
-							     DialogData   *data);
-static void  resource_dialog_resource_name_changed_cb       (MrpResource  *resource,  
-							     GParamSpec   *pspec, 
-							     GtkWidget    *dialog);
-static void  resource_dialog_name_focus_in_cb               (GtkWidget     *w,
-							     GdkEventFocus *event,
-							     DialogData    *data);
-static void  resource_dialog_name_focus_out_cb              (GtkWidget     *w,
-							     GdkEventFocus *event,
-							     DialogData    *data);
-static void  resource_dialog_short_name_changed_cb          (GtkWidget    *w,
-							     DialogData   *data);
-static void  resource_dialog_resource_short_name_changed_cb (MrpResource  *resource,  
-							     GParamSpec   *pspec, 
-							     GtkWidget    *dialog);
-static void  resource_dialog_short_name_focus_in_cb         (GtkWidget     *w,
-							     GdkEventFocus *event,
-							     DialogData    *data);
-static void  resource_dialog_short_name_focus_out_cb        (GtkWidget     *w,
-							     GdkEventFocus *event,
-							     DialogData    *data);
-static void  resource_dialog_type_changed_cb                (GtkWidget    *w,
-							     DialogData   *data);
-static void  resource_dialog_resource_type_changed_cb       (MrpResource  *resource,  
-							     GParamSpec   *pspec, 
-							     GtkWidget    *dialog);
-static void  resource_dialog_group_changed_cb               (GtkWidget    *w,
-							     DialogData   *data);
-static void  resource_dialog_resource_group_changed_cb      (MrpResource  *resource,  
-							     GParamSpec   *pspec, 
-							     GtkWidget    *dialog);
-static void  resource_dialog_email_changed_cb               (GtkWidget    *w,
-							     DialogData   *data);
-static void  resource_dialog_resource_email_changed_cb      (MrpResource  *resource,  
-							     GParamSpec   *pspec, 
-							     GtkWidget    *dialog);
-static void  resource_dialog_email_focus_in_cb              (GtkWidget     *w,
-							     GdkEventFocus *event,
-							     DialogData    *data);
-static void  resource_dialog_email_focus_out_cb             (GtkWidget     *w,
-							     GdkEventFocus *event,
-							     DialogData    *data);
-static void  resource_dialog_resource_cost_changed_cb       (MrpResource  *resource,  
-							     MrpProperty  *property,
-							     GValue       *value,
-							     GtkWidget    *dialog);
-static void  resource_dialog_resource_calendar_changed_cb   (MrpResource  *resource,
-							     GParamSpec   *pspec,
-							     GtkWidget    *dialog);
-static void  resource_dialog_edit_calendar_clicked_cb       (GtkWidget    *button,
-							     DialogData   *data);
-static void  resource_dialog_resource_note_changed_cb       (MrpResource  *resource, 
-							     GParamSpec   *pspec, 
-							     GtkWidget    *dialog);
-static void  resource_dialog_note_changed_cb                (GtkWidget    *w,
-							     DialogData   *data);
-static void  resource_dialog_note_stamp_clicked_cb          (GtkWidget    *w,
-							     DialogData   *data);
-static void  resource_dialog_build_calendar_tree_recurse    (GtkTreeStore *store,
-							     GtkTreeIter  *parent,
-							     MrpCalendar  *calendar);
-static void  resource_dialog_build_calendar_tree            (DialogData   *data);
-static void  resource_dialog_calendar_tree_changed_cb       (MrpProject   *project,
-							     MrpCalendar  *root,
-							     GtkWidget    *dialog);
-static GtkTreeModel *resource_dialog_create_calendar_model  (DialogData   *data);
-static void  resource_dialog_setup_calendar_tree_view       (DialogData   *data);
-static void  resource_dialog_update_title                   (DialogData   *data);
-static void  resource_dialog_close_clicked_cb               (GtkWidget    *w, 
-							     DialogData   *data);
-static void  resource_dialog_resource_removed_cb            (GtkWidget    *w,
-							     DialogData   *data);
+static void     resource_dialog_name_changed_cb                (GtkWidget     *w,
+								DialogData    *data);
+static void     resource_dialog_resource_name_changed_cb       (MrpResource   *resource,  
+								GParamSpec    *pspec, 
+								GtkWidget     *dialog);
+static gboolean resource_dialog_name_focus_in_cb               (GtkWidget     *w,
+								GdkEventFocus *event,
+								DialogData    *data);
+static gboolean resource_dialog_name_focus_out_cb              (GtkWidget     *w,
+								GdkEventFocus *event,
+								DialogData    *data);
+static void     resource_dialog_short_name_changed_cb          (GtkWidget     *w,
+								DialogData    *data);
+static void     resource_dialog_resource_short_name_changed_cb (MrpResource   *resource,  
+							        GParamSpec    *pspec, 
+							        GtkWidget     *dialog);
+static gboolean resource_dialog_short_name_focus_in_cb         (GtkWidget     *w,
+								GdkEventFocus *event,
+								DialogData    *data);
+static gboolean resource_dialog_short_name_focus_out_cb        (GtkWidget     *w,
+								GdkEventFocus *event,
+								DialogData    *data);
+static void     resource_dialog_type_changed_cb                (GtkWidget     *w,
+								DialogData    *data);
+static void     resource_dialog_resource_type_changed_cb       (MrpResource   *resource,  
+								GParamSpec    *pspec, 
+								GtkWidget     *dialog);
+static void     resource_dialog_group_changed_cb               (GtkWidget     *w,
+								DialogData    *data);
+static void     resource_dialog_resource_group_changed_cb      (MrpResource   *resource,  
+								GParamSpec    *pspec, 
+								GtkWidget     *dialog);
+static void     resource_dialog_email_changed_cb               (GtkWidget     *w,
+								DialogData    *data);
+static void     resource_dialog_resource_email_changed_cb      (MrpResource   *resource,  
+								GParamSpec    *pspec, 
+								GtkWidget     *dialog);
+static gboolean resource_dialog_email_focus_in_cb              (GtkWidget     *w,
+								GdkEventFocus *event,
+								DialogData    *data);
+static gboolean resource_dialog_email_focus_out_cb             (GtkWidget     *w,
+								GdkEventFocus *event,
+								DialogData    *data);
+static void     resource_dialog_resource_cost_changed_cb       (MrpResource   *resource,  
+								MrpProperty   *property,
+								GValue        *value,
+								GtkWidget     *dialog);
+static void     resource_dialog_resource_calendar_changed_cb   (MrpResource   *resource,
+								GParamSpec    *pspec,
+								GtkWidget     *dialog);
+static void     resource_dialog_edit_calendar_clicked_cb       (GtkWidget     *button,
+								DialogData    *data);
+static void     resource_dialog_resource_note_changed_cb       (MrpResource   *resource, 
+								GParamSpec    *pspec, 
+								GtkWidget     *dialog);
+static void     resource_dialog_note_changed_cb                (GtkWidget     *w,
+								DialogData    *data);
+static gboolean resource_dialog_note_focus_in_cb               (GtkWidget     *w,
+								GdkEventFocus *event,
+								DialogData    *data);
+static gboolean resource_dialog_note_focus_out_cb              (GtkWidget     *w,
+								GdkEventFocus *event,
+								DialogData    *data);
+static void     resource_dialog_note_stamp_clicked_cb          (GtkWidget     *w,
+								DialogData    *data);
+static void     resource_dialog_build_calendar_tree_recurse    (GtkTreeStore  *store,
+								GtkTreeIter   *parent,
+								MrpCalendar   *calendar);
+static void     resource_dialog_build_calendar_tree            (DialogData    *data);
+static void     resource_dialog_calendar_tree_changed_cb       (MrpProject    *project,
+								MrpCalendar   *root,
+								GtkWidget     *dialog);
+static GtkTreeModel * 
+                resource_dialog_create_calendar_model          (DialogData    *data);
+static void     resource_dialog_setup_calendar_tree_view       (DialogData    *data);
+static void     resource_dialog_update_title                   (DialogData    *data);
+static void     resource_dialog_close_clicked_cb               (GtkWidget     *w, 
+								DialogData    *data);
+static void     resource_dialog_resource_removed_cb            (GtkWidget     *w,
+								DialogData    *data);
 
 
 /* Keep the dialogs here so that we can just raise the dialog if it's
@@ -171,6 +179,16 @@ typedef struct {
 	GValue      *value;
 	GValue      *old_value;
 } ResourceCmdEditProperty;
+
+typedef struct {
+	PlannerCmd   base;
+
+	DialogData  *data;
+	MrpResource *resource;
+	gchar       *property;  
+	gchar       *note;
+	gchar       *old_note;
+} ResourceCmdEditNote;
 
 static gboolean
 foreach_find_calendar (GtkTreeModel *model,
@@ -388,6 +406,13 @@ resource_dialog_connect_to_resource (DialogData *data)
 				 G_CALLBACK (resource_dialog_resource_calendar_changed_cb),
 				 data->dialog,
 				 0);
+
+	g_signal_connect_object (resource,
+				 "notify::note",
+				 G_CALLBACK (resource_dialog_resource_note_changed_cb),
+				 data->dialog,
+				 0);
+	
 }
 
 static void
@@ -402,6 +427,107 @@ resource_dialog_resource_removed_cb (GtkWidget  *w,
 				     DialogData *data)
 {
 	gtk_widget_destroy (data->dialog);
+}
+
+static void
+resource_cmd_note_do (PlannerCmd *cmd_base)
+{
+	ResourceCmdEditNote *cmd;
+
+	cmd = (ResourceCmdEditNote*) cmd_base;
+
+	g_signal_handlers_block_by_func (cmd->resource,
+					 resource_dialog_resource_note_changed_cb,
+					 cmd->resource);
+
+	if (g_getenv ("PLANNER_DEBUG_UNDO_RESOURCE")) {
+		g_message ("Doing the note change ... focus out: %s, focus in: %s", 
+			   cmd->note, cmd->old_note);
+	}
+
+	g_object_set (cmd->resource, "note", cmd->note, NULL);
+
+	g_signal_handlers_unblock_by_func (cmd->resource,
+					   resource_dialog_resource_note_changed_cb,
+					   cmd->resource);
+}
+
+static void
+resource_cmd_note_undo (PlannerCmd *cmd_base)
+{
+	ResourceCmdEditNote *cmd;
+
+	cmd = (ResourceCmdEditNote*) cmd_base;
+
+	g_signal_handlers_block_by_func (cmd->data->note_buffer,
+					 resource_dialog_note_changed_cb,
+					 cmd->data->dialog);
+
+	if (g_getenv ("PLANNER_DEBUG_UNDO_RESOURCE")) {
+		g_message ("Undoing the note change to \"%s\" from the new \"%s\"", 
+			   cmd->old_note, cmd->note);
+	}
+
+	g_object_set (cmd->resource, "note", cmd->old_note, NULL);
+
+	g_signal_handlers_unblock_by_func (cmd->data->note_buffer,
+					   resource_dialog_note_changed_cb,
+					   cmd->data->dialog);
+}
+
+static void
+resource_cmd_note_free (PlannerCmd *cmd_base)
+{
+	ResourceCmdEditNote *cmd;
+
+	cmd = (ResourceCmdEditNote*) cmd_base;
+
+	g_free (cmd_base->label);
+	g_free (cmd->note);
+	g_free (cmd->old_note);
+	g_free (cmd->property);
+
+	g_object_unref (cmd->resource);
+
+	g_free (cmd);
+}
+
+static PlannerCmd *
+resource_cmd_edit_note (DialogData  *data,
+			const gchar *property,
+			const gchar *focus_in_note)
+{
+	PlannerCmd          *cmd_base;
+	ResourceCmdEditNote *cmd;
+	gchar               *note;
+
+	g_object_get (data->resource, "note", &note, NULL);
+
+	if (strcmp (note, focus_in_note) == 0) {
+		g_free (note);
+		return NULL;
+	}
+
+	cmd = g_new0 (ResourceCmdEditNote, 1);
+
+	cmd_base = (PlannerCmd*) cmd;
+
+	cmd_base->label = g_strdup (_("Edit resource note from dialog"));
+	cmd_base->do_func = resource_cmd_note_do;
+	cmd_base->undo_func = resource_cmd_note_undo;
+	cmd_base->free_func = resource_cmd_note_free;
+
+	cmd->data = data;
+	cmd->property = g_strdup (property);
+	cmd->resource = g_object_ref (data->resource);
+
+	cmd->old_note = g_strdup (focus_in_note);
+	cmd->note = note;
+
+	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager (data->main_window),
+					   cmd_base);
+
+	return cmd_base;
 }
 
 static void
@@ -577,7 +703,7 @@ resource_dialog_name_changed_cb (GtkWidget  *w,
 					   data->dialog);
 }
 
-static void
+static gboolean
 resource_dialog_name_focus_out_cb (GtkWidget     *w,
 				   GdkEventFocus *event,
 				   DialogData    *data)
@@ -597,9 +723,11 @@ resource_dialog_name_focus_out_cb (GtkWidget     *w,
 						data->resource, "name", &value);
 
 	g_free (focus_in_name);
+
+	return FALSE;
 }
 
-static void
+static gboolean
 resource_dialog_name_focus_in_cb (GtkWidget     *w,
 				  GdkEventFocus *event,
 				  DialogData    *data)
@@ -610,11 +738,13 @@ resource_dialog_name_focus_in_cb (GtkWidget     *w,
 	
 	g_object_set_data (G_OBJECT (data->resource), 
 			   "focus_in_name", (gpointer) name);
+
+	return FALSE;
 }
 
 static void  
 resource_dialog_short_name_changed_cb (GtkWidget  *w,
-				  DialogData *data) 
+				       DialogData *data) 
 {
 	const gchar *short_name;
 
@@ -658,7 +788,7 @@ resource_dialog_resource_short_name_changed_cb (MrpResource *resource,
 	g_free (short_name);
 }
 
-static void  
+static gboolean  
 resource_dialog_short_name_focus_out_cb (GtkWidget     *w,
 					 GdkEventFocus *event,
 					 DialogData    *data)
@@ -679,9 +809,11 @@ resource_dialog_short_name_focus_out_cb (GtkWidget     *w,
 						data->resource, "short_name", &value);
 
 	g_free (focus_in_short_name);
+
+	return FALSE;
 }
 
-static void
+static gboolean
 resource_dialog_short_name_focus_in_cb (GtkWidget     *w,
 					GdkEventFocus *event,
 					DialogData    *data)
@@ -692,6 +824,8 @@ resource_dialog_short_name_focus_in_cb (GtkWidget     *w,
 	
 	g_object_set_data (G_OBJECT (data->resource), 
 			   "focus_in_short_name", (gpointer) name);
+
+	return FALSE;
 }
 
 static void  
@@ -846,7 +980,7 @@ resource_dialog_email_changed_cb (GtkWidget  *w,
 	g_value_unset (&value);
 }
 
-static void  
+static gboolean
 resource_dialog_email_focus_out_cb (GtkWidget     *w,
 				    GdkEventFocus *event,
 				    DialogData    *data)
@@ -866,9 +1000,11 @@ resource_dialog_email_focus_out_cb (GtkWidget     *w,
 						data->resource, "email", &value);
 
 	g_free (focus_in_email);
+	
+	return FALSE;
 }
 
-static void
+static gboolean
 resource_dialog_email_focus_in_cb (GtkWidget     *w,
 				   GdkEventFocus *event,
 				   DialogData    *data)
@@ -879,6 +1015,8 @@ resource_dialog_email_focus_in_cb (GtkWidget     *w,
 	
 	g_object_set_data (G_OBJECT (data->resource), 
 			   "focus_in_email", (gpointer) email);
+
+	return FALSE;
 }
 
 static void  
@@ -1019,6 +1157,52 @@ resource_dialog_edit_calendar_clicked_cb (GtkWidget  *button,
 	planner_window_show_calendar_dialog (data->main_window);
 }
 
+static gboolean
+resource_dialog_note_focus_out_cb (GtkWidget     *w,
+				   GdkEventFocus *event,
+				   DialogData    *data)
+{
+	gchar        *focus_in_note;
+	PlannerCmd   *cmd;
+
+	focus_in_note = g_object_get_data (G_OBJECT (data->resource),"focus_in_note");
+	
+	cmd = resource_cmd_edit_note (data, "note", focus_in_note);
+
+	if (g_getenv ("PLANNER_DEBUG_UNDO_RESOURCE")) {
+		gchar *note;
+
+		g_object_get (data->resource, "note", &note, NULL);
+		g_message ("Note focus out value: %s", note);
+		g_free (note);
+	}
+
+	g_free (focus_in_note);
+
+	return FALSE;
+}
+
+static gboolean
+resource_dialog_note_focus_in_cb (GtkWidget     *w,
+				  GdkEventFocus *event,
+				  DialogData    *data)
+{
+	gchar         *note;
+
+	g_object_get (data->resource, "note", &note, NULL);
+
+	if (g_getenv ("PLANNER_DEBUG_UNDO_RESOURCE")) {
+		g_message ("Note focus in value: %s", note);
+	}
+
+	gtk_text_buffer_set_text (data->note_buffer, note, -1);	
+
+	g_object_set_data (G_OBJECT (data->resource), 
+			   "focus_in_note", (gpointer) note);
+
+	return FALSE;
+}
+
 static void
 resource_dialog_resource_note_changed_cb (MrpResource *resource, 
 					  GParamSpec  *pspec, 
@@ -1034,15 +1218,19 @@ resource_dialog_resource_note_changed_cb (MrpResource *resource,
 	
 	g_object_get (resource, "note", &note, NULL);
 
+	if (g_getenv ("PLANNER_DEBUG_UNDO_RESOURCE")) {
+		g_message ("NOTE has changed: %s", note);
+	}
+
 	g_signal_handlers_block_by_func (data->note_buffer,
 					 resource_dialog_note_changed_cb,
-					 dialog);
+					 data);
 	
 	gtk_text_buffer_set_text (data->note_buffer, note, -1);
 
 	g_signal_handlers_unblock_by_func (data->note_buffer,
 					   resource_dialog_note_changed_cb,
-					   dialog);
+					   data);
 	
 	g_free (note);	
 }
@@ -1076,13 +1264,18 @@ static void
 resource_dialog_note_stamp_clicked_cb (GtkWidget  *w,
 				       DialogData *data)
 {
-	GtkTextIter  end;
-	time_t       t;
-	struct tm   *tm;
-	gchar        stamp[128];
-	gchar       *utf8;
-	GtkTextMark *mark;
-		
+	time_t         t;
+	struct tm     *tm;
+	gchar          stamp[128];
+	gchar         *utf8, *note, *note_old;
+	GtkTextMark   *mark;
+	GtkTextIter    start, end;
+	PlannerCmd    *cmd;
+
+	g_object_get (data->resource, "note", &note_old, NULL);
+
+	gtk_text_buffer_set_text (data->note_buffer, note_old, -1);
+
 	t = time (NULL);
 	tm = localtime (&t);
 
@@ -1111,6 +1304,19 @@ resource_dialog_note_stamp_clicked_cb (GtkWidget  *w,
 					    TRUE);
 
 	gtk_text_view_scroll_mark_onscreen (GTK_TEXT_VIEW (data->note_textview), mark);
+
+	gtk_text_buffer_get_bounds (data->note_buffer, &start, &end);	
+	note = gtk_text_buffer_get_text (data->note_buffer, &start, &end, FALSE);
+
+	if (g_getenv ("PLANNER_DEBUG_UNDO_RESOURCE")) {
+		g_message ("New note with stamp: %s", note);
+	}
+
+	g_object_set (data->resource, "note", note, NULL);
+
+	cmd = resource_cmd_edit_note (data, "note", note_old);
+
+	g_free (note_old);
 }
 
 static void
@@ -1340,7 +1546,7 @@ resource_dialog_destroy_cb (GtkWidget  *parent,
 
 GtkWidget *
 planner_resource_dialog_new (PlannerWindow *window,
-			MrpResource  *resource)
+			     MrpResource  *resource)
 {
 	GladeXML        *glade;
 	GtkWidget       *dialog;
@@ -1428,6 +1634,17 @@ planner_resource_dialog_new (PlannerWindow *window,
 			  "changed",
 			  G_CALLBACK (resource_dialog_note_changed_cb),
 			  data);
+
+	g_signal_connect (data->note_textview,
+			  "focus_out_event",
+			  G_CALLBACK (resource_dialog_note_focus_out_cb),
+			  data);
+
+	g_signal_connect (data->note_textview,
+			  "focus_in_event",
+			  G_CALLBACK (resource_dialog_note_focus_in_cb),
+			  data);
+	
 
 	w = glade_xml_get_widget (glade, "calendar_button");
 	g_signal_connect (w,
