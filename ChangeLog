@@ -1,3 +1,26 @@
+2004-04-27  Xavier Ordoquy  <xordoquy@wanadoo.fr>
+
+	* acinclude.m4:
+	Added checks for python environment (taken from pygtk)
+
+	* configure.in:
+	Updated the python binding and added the python module
+
+	* Makefile.am:
+	Added conditional python binding build
+
+	* data/ui/Makefile.am:
+	* data/ui/python-plugin.ui:
+	Added the python-plugin menu entry.
+
+	* python/Makefile.am:
+	* python/planner-arg-types.py:
+	* python/planner.defs:
+	* python/test.py:
+	* src/Makefile.am:
+	* src/planner-python-plugin.c: (window_file_is_dir),
+	(python_plugin_execute), (plugin_init), (plugin_exit):
+
 2004-04-26  Richard Hult  <richard@imendio.com>
 
 	* libplanner/mrp-task.c (mrp_task_get_cost): Commit cost

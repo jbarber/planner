@@ -15,6 +15,10 @@ INCLUDES = \
 	-DMRP_PLUGINDIR=\""$(libdir)/planner/plugins"\"		\
 	$(GNOMEUI_UNSTABLE)
 
+if HAVE_PYTHON_MOD
+INCLUDES += $(PYTHON_INCLUDES)
+endif
+
 bin_PROGRAMS = planner 
 
 planner_SOURCES = \
@@ -193,9 +197,18 @@ libsql_plugin_la_CFLAGS = $(GDA_CFLAGS)
 libsql_plugin_la_LDFLAGS = -avoid-version -module
 endif
 
+if HAVE_PYTHON_MOD
+python_plugin = libpython-plugin.la
+libpython_plugin_la_SOURCES = planner-python-plugin.c
+libpython_plugin_la_LDFLAGS = -avoid-version -module
+libpython_plugin_la_LIBADD  = $(PYTHON_LDFLAGS)
+libpython_plugin_la_CFLAGS  = $(PYGTK_CFLAGS)
+endif
+
 plugin_LTLIBRARIES = \
 	libhtml-plugin.la		\
-	$(sql_plugin)
+	$(sql_plugin)			\
+	$(python_plugin)
 
 libhtml_plugin_la_SOURCES = planner-html-plugin.c
 libhtml_plugin_la_LDFLAGS = -avoid-version -module

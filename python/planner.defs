@@ -661,8 +661,8 @@
   (c-name "mrp_project_insert_task")
   (return-type "none")
   (parameters
-    '("MrpTask*" "parent")
-    '("gint" "position")
+    '("MrpTask*" "parent" (null-ok)(default "NULL"))
+    '("gint" "position" (default "0"))
     '("MrpTask*" "task")
   )
 )

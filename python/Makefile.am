@@ -7,13 +7,15 @@ INCLUDES = 				\
 	$(LIBPLANNER_CFLAGS)		\
 	$(NULL)
 
-CFLAGS += -Wno-missing-declarations -Wno-missing-prototypes
+pkgpythondir = $(pythondir)/gtk-2.0
+pkgpyexecdir = $(pyexecdir)/gtk-2.0
 
-pyexec_LTLIBRARIES = plannermodule.la
-plannermodule_la_LDFLAGS = -module -avoid-version -export-symbols-regex initplanner
-plannermodule_la_LIBADD = $(LIBPLANNER_LIBS) ../planner/libplanner.la
-plannermodule_la_SOURCES = plannermodule.c
-nodist_plannermodule_la_SOURCES = planner.c
+pkgpyexec_LTLIBRARIES = planner.la
+planner_la_CFLAGS = -Wno-missing-declarations -Wno-missing-prototypes
+planner_la_LDFLAGS = -module -avoid-version -export-symbols-regex initplanner
+planner_la_LIBADD = $(LIBPLANNER_LIBS) $(top_builddir)/libplanner/libplanner-1.la
+planner_la_SOURCES = plannermodule.c
+nodist_planner_la_SOURCES = planner.c
 
 planner.c: planner.defs planner.override
 

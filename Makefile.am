@@ -2,6 +2,10 @@ if HAVE_DOTNET
 dotnet_DIR = dotnet
 endif
 
+if HAVE_PYTHON
+python_DIR = python
+endif
+
 SUBDIRS = \
 	po 				\
 	libplanner			\
@@ -9,6 +13,7 @@ SUBDIRS = \
 	src				\
 	data				\
 	docs				\
+	$(python_DIR)			\
 	$(dotnet_DIR)
 
 EXTRA_DIST = \
