@@ -19,9 +19,7 @@
  *
  * TODO:
  *
- * - Fix all memory issues
- * - Fix plugin destroy and reload
- * - Caching issues  
+ *  - Caching issues  
  */
 
 #include <config.h>
@@ -169,8 +167,8 @@ gboolean eds_check_query (gpointer data)
 {
 	PlannerPlugin *plugin = data;
 
-	GtkProgressBar *progress = (GtkProgressBar *) glade_xml_get_widget 
-			(plugin->priv->glade, "progressbar");
+	GtkProgressBar *progress = GTK_PROGRESS_BAR (glade_xml_get_widget 
+			(plugin->priv->glade, "progressbar"));
 
 	gtk_progress_bar_pulse (progress);
 
@@ -182,8 +180,8 @@ eds_plugin_busy (PlannerPlugin *plugin,
 		 gboolean       busy)
 {
 	GdkCursor      *cursor;
-	GtkProgressBar *progress = (GtkProgressBar *) glade_xml_get_widget 
-			(plugin->priv->glade, "progressbar");
+	GtkProgressBar *progress = GTK_PROGRESS_BAR (glade_xml_get_widget 
+			(plugin->priv->glade, "progressbar"));
 
 	if (busy) {
 		gint check_time = 300; /* ms */
@@ -246,8 +244,6 @@ eds_plugin_import (GtkAction   *action,
 	ESourceList       *source_list;
 	GSList            *groups;
 
-	g_message ("Importing ...");
-
 	plugin = PLANNER_PLUGIN (user_data);
 	priv = plugin->priv;
 
@@ -258,14 +254,14 @@ eds_plugin_import (GtkAction   *action,
 
 	gtk_window_set_transient_for (GTK_WINDOW (priv->dialog_get_resources),
 				      GTK_WINDOW (priv->main_window));
-	priv->select_group = (GtkComboBox *) glade_xml_get_widget (priv->glade,
-								   "select_group");
+	priv->select_group = GTK_COMBO_BOX (glade_xml_get_widget (priv->glade,
+								  "select_group"));
 	g_signal_connect (priv->select_group, "changed",
 			  G_CALLBACK (eds_group_selected),
 			  user_data);
 
-	priv->resources_tree_view = (GtkTreeView *) glade_xml_get_widget (priv->glade,
-									  "resources");
+	priv->resources_tree_view = GTK_TREE_VIEW (glade_xml_get_widget (priv->glade,
+									 "resources"));
 
 	g_signal_connect (glade_xml_get_widget (priv->glade, "ok_button"), 
 			  "clicked",
@@ -336,7 +332,7 @@ eds_create_groups_model (GSList        *groups,
 				    COL_GROUP_NAME, name, 
 				    COL_GROUP_OBJECT, sl->data, -1);
 	}
-	plugin->priv->groups_model = (GtkTreeModel *) model;
+	plugin->priv->groups_model = GTK_TREE_MODEL (model);
 }
 
 /* For now we show all the sources from a group in a List.
@@ -374,7 +370,7 @@ eds_load_resources (ESourceGroup  *group,
 					    GDK_TYPE_PIXBUF, /* photo */
 					    G_TYPE_OBJECT);  /* full contact */	
 
-		priv->resources_model = (GtkTreeModel *) model;
+		priv->resources_model = GTK_TREE_MODEL (model);
 
 		gtk_tree_view_set_model (priv->resources_tree_view,
 					 priv->resources_model);
@@ -387,7 +383,7 @@ eds_load_resources (ESourceGroup  *group,
 			 NULL);
 
 		column = gtk_tree_view_get_column (priv->resources_tree_view, column_pos-1);
-		gtk_tree_sortable_set_sort_func ((GtkTreeSortable *) priv->resources_model,
+		gtk_tree_sortable_set_sort_func (GTK_TREE_SORTABLE (priv->resources_model),
 						 column_pos-1,
 						 eds_compare_field,
 						 GINT_TO_POINTER (column_pos-1),
@@ -407,7 +403,7 @@ eds_load_resources (ESourceGroup  *group,
 			 NULL);
 
 		column = gtk_tree_view_get_column (priv->resources_tree_view, column_pos-1);
-		gtk_tree_sortable_set_sort_func ((GtkTreeSortable *) priv->resources_model,
+		gtk_tree_sortable_set_sort_func (GTK_TREE_SORTABLE (priv->resources_model),
 						 column_pos-1,
 						 eds_compare_field,
 						 GINT_TO_POINTER (column_pos-1),
@@ -465,7 +461,6 @@ eds_query_cancelled (PlannerPlugin *plugin,
 	GList *l;
 
 	for (l = plugin->priv->queries_cancelled; l; l = l->next) {
-		g_message ("Cancelled query: %s", (gchar *) l->data);
 		if (!strcmp (uid, l->data)) {
 			g_message ("Received answer from a cancelled query: %s (%s)", 
 				   (gchar *) l->data, uid);
@@ -484,12 +479,12 @@ eds_receive_book_cb (EBook         *client,
 		     EBookStatus    status, 
 		     gpointer       user_data)
 {
-	PlannerPlugin  *plugin;
-	EBookQuery     *query;
-	AsyncQuery     *async_query;
-	const gchar    *search;
-	const gchar    *uid;
-	const gchar    *book_uri;
+	PlannerPlugin *plugin;
+	EBookQuery    *query;
+	AsyncQuery    *async_query;
+	const gchar   *search;
+	const gchar   *uid;
+	const gchar   *book_uri;
 
 	async_query = user_data;
 	plugin = async_query->plugin;
@@ -549,7 +544,7 @@ eds_receive_contacts_cb (EBook         *book,
 	uid = async_query->uid;
 	plugin = async_query->plugin;
 	priv = plugin->priv;
-	model = (GtkListStore *) priv->resources_model;
+	model = GTK_LIST_STORE (priv->resources_model);
 
 	g_free (async_query);
 
@@ -592,7 +587,7 @@ eds_all_button_clicked (GtkButton *button,
 
 static void
 eds_none_button_clicked (GtkButton *button, 
-			PlannerPlugin *plugin)
+			 PlannerPlugin *plugin)
 {
 	eds_import_change_all (plugin, FALSE);
 }
@@ -606,13 +601,13 @@ eds_import_change_all (PlannerPlugin *plugin,
 
 	gtk_tree_model_get_iter_first (priv->resources_model, &iter);
 
-	if (!gtk_list_store_iter_is_valid ((GtkListStore *) priv->resources_model, 
+	if (!gtk_list_store_iter_is_valid (GTK_LIST_STORE (priv->resources_model), 
 					  &iter)) {
 		return;
 	}
 
 	do {
-		gtk_list_store_set ((GtkListStore *) priv->resources_model, 
+		gtk_list_store_set (GTK_LIST_STORE (priv->resources_model), 
 				    &iter, 
 				    COL_RESOURCE_SELECTED, state,
 				    -1);
@@ -627,9 +622,7 @@ eds_import_resource (gchar         *name,
 {
 	MrpResource *resource = mrp_resource_new ();	
 
-	/* mrp_project_add_resource  (plugin->priv->project, resource); */
 	planner_resource_cmd_insert (plugin->main_window, resource);
-
 	if (name) {
 		mrp_object_set (resource, "name", name, NULL);
 	}
@@ -677,7 +670,7 @@ eds_resource_selected (GtkCellRendererToggle *toggle,
 			    COL_RESOURCE_OBJECT, &contact,
 			    -1);
 
-	gtk_list_store_set ((GtkListStore *) model,
+	gtk_list_store_set (GTK_LIST_STORE (model),
 			    &iter,
 			    COL_RESOURCE_SELECTED, !selected,
 			    -1);
@@ -699,7 +692,7 @@ eds_ok_button_clicked (GtkButton     *button,
 
 	gtk_tree_model_get_iter_first (priv->resources_model, &iter);
 
-	if (!gtk_list_store_iter_is_valid ((GtkListStore *) priv->resources_model, 
+	if (!gtk_list_store_iter_is_valid (GTK_LIST_STORE (priv->resources_model), 
 					   &iter)) {
 		eds_dialog_close (plugin);
 		return;
@@ -740,8 +733,8 @@ eds_search_button_clicked (GtkButton     *button,
 	GtkTreeIter        iter;
 	ESourceGroup      *group;
 
-	search = gtk_entry_get_text ((GtkEntry *) 
-				     glade_xml_get_widget (priv->glade,"search_entry"));
+	search = gtk_entry_get_text (GTK_ENTRY  
+				     (glade_xml_get_widget (priv->glade,"search_entry")));
 
 	if (gtk_combo_box_get_active_iter (priv->select_group, &iter)) {
 		gtk_tree_model_get (priv->groups_model, &iter, COL_GROUP_OBJECT, &group, -1);
@@ -772,8 +765,8 @@ static void
 eds_stop_button_clicked (GtkButton      *button,
 			 PlannerPlugin  *plugin)
 {
-	GtkProgressBar *progress = (GtkProgressBar *) glade_xml_get_widget 
-			(plugin->priv->glade, "progressbar");
+	GtkProgressBar *progress = GTK_PROGRESS_BAR 
+		(glade_xml_get_widget (plugin->priv->glade, "progressbar"));
 
 	g_message ("Cancelling the query: %s", plugin->priv->current_query_id);
 
@@ -822,6 +815,7 @@ eds_dialog_close (PlannerPlugin *plugin)
 		g_object_unref (priv->groups_model);
 		priv->groups_model = NULL;
 	}
+	/* FIXME: We need to free the EContacts */
 	if (priv->resources_model) {
 		g_object_unref (priv->resources_model);
 		priv->resources_model = NULL;
@@ -847,7 +841,7 @@ plugin_init (PlannerPlugin *plugin,
 	priv->main_window = main_window;
 	priv->project = planner_window_get_project (plugin->main_window);
 
-	actions = gtk_action_group_new("HTML plugin actions");
+	actions = gtk_action_group_new ("EDS plugin actions");
 	gtk_action_group_set_translation_domain (actions, GETTEXT_PACKAGE);
 
 	gtk_action_group_add_actions (actions, action_entries, n_action_entries, plugin);
