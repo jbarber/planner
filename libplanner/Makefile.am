@@ -2,7 +2,8 @@ INCLUDES = \
 	-I. -I$(top_srcdir) \
 	$(LIBPLANNER_CFLAGS) $(WARN_CFLAGS) \
 	-DMRP_STORAGEMODULEDIR=\""$(libdir)/planner/storage-modules"\" \
-	-DMRP_FILE_MODULES_DIR=\""$(libdir)/planner/file-modules"\"
+	-DMRP_FILE_MODULES_DIR=\""$(libdir)/planner/file-modules"\" \
+	-DDATADIR=\""$(datadir)"\"
 
 lib_LTLIBRARIES = libplanner-1.la
 

@@ -37,7 +37,7 @@
 #define REVISION "sql-storage-revision"
 
 /* Struct to keep calendar data before we can build the tree, create the
- * calendars and insert the in the project.
+ * calendars and insert them in the project.
  */
 typedef struct {
 	gint    id;
@@ -206,7 +206,7 @@ sql_get_last_error (GdaConnection *connection)
 
 	error = (GdaError *) g_list_last (list)->data;
       
-	/* Poor user, she won't get localized messages */
+	/* FIXME: Poor user, she won't get localized messages */
 	error_txt = gda_error_get_description (error);
 
 	return error_txt;
@@ -430,7 +430,7 @@ sql_read_project (SQLData *data, gint proj_id)
 	g_free (query);
 	
 	if (res == NULL) {
-		g_warning ("Couldn't get cursor for project %s.", 
+		g_warning ("DECLARE CURSOR command failed (project) %s.", 
 				sql_get_last_error (data->con));
 		goto out;
 	}
@@ -604,7 +604,7 @@ sql_read_property_specs (SQLData *data)
 	
 
 	if (res == NULL) {
-		g_warning ("DECLARE CURSOR command failed (propecty_specs) %s.",
+		g_warning ("DECLARE CURSOR command failed (property_type) %s.",
 				sql_get_last_error (data->con));
 		goto out;
 	}
@@ -612,7 +612,7 @@ sql_read_property_specs (SQLData *data)
 
 	res = sql_execute_query (data->con, "FETCH ALL in mycursor");
 	if (res == NULL) {
-		g_warning ("FETCH ALL failed for property_specs %s.", 
+		g_warning ("FETCH ALL failed for property_type %s.", 
 				sql_get_last_error (data->con));
 		goto out;
 	}
@@ -695,9 +695,10 @@ sql_read_property_specs (SQLData *data)
 						  TRUE /* FIXME: user_defined, should 
 							  be read from the file */);
 					
-			g_hash_table_insert (data->property_type_id_hash, GINT_TO_POINTER (property_type_id), property);
+			g_hash_table_insert (data->property_type_id_hash, 
+					     GINT_TO_POINTER (property_type_id), property);
 		} else {
-			/* Properties that are already added (e.g. cost). */
+			/* FIXME: Properties that are already added (e.g. cost). */
 			property = mrp_project_get_property (data->project, name, owner);
 			g_hash_table_insert (data->property_type_id_hash, GINT_TO_POINTER (property_type_id), property);
 		}
@@ -724,9 +725,9 @@ sql_read_property_specs (SQLData *data)
 
 static gboolean
 sql_set_property_value (SQLData     *data,
-			       MrpObject   *object,
-			       MrpProperty *property,
-			       const gchar *value)
+			MrpObject   *object,
+			MrpProperty *property,
+			const gchar *value)
 {
 	const gchar     *name;
 	MrpPropertyType  type;
@@ -2145,7 +2146,8 @@ mrp_sql_load_project (MrpStorageSQL *storage,
 
 	data = g_new0 (SQLData, 1);
 
-	data->project_id = -1;
+	data->project_id = -1; 
+	/* data->project_id = project_id; */
 	data->day_id_hash = g_hash_table_new (NULL, NULL);
 	data->calendar_id_hash = g_hash_table_new (NULL, NULL);
 	data->group_id_hash = g_hash_table_new (NULL, NULL);
@@ -2182,7 +2184,7 @@ mrp_sql_load_project (MrpStorageSQL *storage,
 			sql_get_last_error (data->con));
 		goto out;
 	}
-	
+
 	res = sql_execute_query (data->con, "BEGIN");
 	if (res == NULL) {
 		g_warning (_("BEGIN command failed %s."),

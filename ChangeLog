@@ -1,3 +1,23 @@
+2004-08-02  Alvaro del Castilo  <acs@barrapunto.com>
+	
+	* data/sql/Makefile.am: new files
+	data/sql/database-0.13.sql
+	data/sql/upgrade-0.11-0.13.sql
+	added new table to store the database tables version
+	* libplanner/Makefile.am: need DATADIR to find SQL files
+	* libplanner/mrp-sql.c: fix some warnings, formatting and
+	issues with the project_id.
+	* src/Makefile.am: used planner version to locate SQL files
+	to be loaded. Also we use SQL_DIR to find SQL files.
+	* src/planner-sql-plugin.c: 
+	(sql_get_last_error) get last error from database connection
+	(is_newer_version): compare to planner versions
+	(check_database_tables): check if tables in planner database already exists
+	and create them if not.
+	(create_database): check if plannet database exists and create it if not.
+	(sql_get_tested_connection): get a connection to the database checking that
+	planner database and tables are created if they don't exist.
+	
 2004-08-02  Richard Hult  <richard@imendio.com>
 
 	* src/planner-gantt-model.h:

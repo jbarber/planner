@@ -11,7 +11,9 @@ INCLUDES = \
 	-DIMAGEDIR=\""$(datadir)/pixmaps/planner"\"		\
 	-DGLADEDIR=\""$(datadir)/planner/glade"\"		\
 	-DMRP_VIEWDIR=\""$(libdir)/planner/views"\"		\
-	-DMRP_PLUGINDIR=\""$(libdir)/planner/plugins"\"
+	-DMRP_PLUGINDIR=\""$(libdir)/planner/plugins"\"		\
+	-DSQL_DIR=\""$(datadir)/planner/sql"\"			\
+	-DVERSION=\""$(VERSION)"\"
 
 if HAVE_PYTHON_PLUGIN
 INCLUDES += $(PYTHON_INCLUDES)
