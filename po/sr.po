@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Planner\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-04-02 16:45+0200\n"
-"PO-Revision-Date: 2005-04-02 17:03+0200\n"
+"PO-Revision-Date: 2005-04-02 18:56+0200\n"
 "Last-Translator: Данило Шеган <danilo@gnome.org>\n"
 "Language-Team: Serbian (sr) <gnom@prevod.org>\n"
 "MIME-Version: 1.0\n"
@@ -125,11 +125,11 @@ msgstr "Подразумевана седмица..."
 
 #: ../data/glade/calendar-dialog.glade.h:20
 msgid "Edit Day Types"
-msgstr "Измени типове дана"
+msgstr "Уреди врсте дана"
 
 #: ../data/glade/calendar-dialog.glade.h:21
 msgid "Edit Working Time"
-msgstr "Измени радно време"
+msgstr "Уреди радно време"
 
 #: ../data/glade/calendar-dialog.glade.h:22
 msgid "From:"
@@ -157,7 +157,7 @@ msgstr "Подеси тип дана на:"
 
 #: ../data/glade/calendar-dialog.glade.h:28
 msgid "To:"
-msgstr "За:"
+msgstr "До:"
 
 #: ../data/glade/calendar-dialog.glade.h:29
 msgid "Use working time from derived calendar"
@@ -914,17 +914,17 @@ msgstr "Идентификатор коришћен у серверу подат
 #: ../src/planner-format.c:149
 #, c-format
 msgid "%dd %dh"
-msgstr "%dd %dh"
+msgstr "%dд %dч"
 
 #: ../src/planner-format.c:152
 #, c-format
 msgid "%dd"
-msgstr "%dd"
+msgstr "%dд"
 
 #: ../src/planner-format.c:155
 #, c-format
 msgid "%dh"
-msgstr "%dh"
+msgstr "%dч"
 
 #. i18n: this string is the date nr and month name, displayed
 #. * e.g. in the date cells in the task tree. See
@@ -1052,11 +1052,11 @@ msgstr "Промени рад на %s"
 #: ../src/planner-gantt-row.c:2391 ../src/planner-task-dialog.c:453
 #: ../src/planner-task-tree.c:254 ../src/planner-task-tree.c:942
 msgid "Edit task property"
-msgstr "Измени својства задатка"
+msgstr "Уреди својства задатка"
 
 #: ../src/planner-gantt-view.c:137 ../src/planner-task-view.c:119
 msgid "_Insert Task"
-msgstr "_Унеси задатак"
+msgstr "_Уметни задатак"
 
 #: ../src/planner-gantt-view.c:138 ../src/planner-task-view.c:119
 msgid "Insert a new task"
@@ -1076,7 +1076,7 @@ msgstr "Уклони изабране задатке"
 
 #: ../src/planner-gantt-view.c:146
 msgid "_Edit Task Properties..."
-msgstr "_Измени својства задатка..."
+msgstr "_Уреди својства задатка..."
 
 #: ../src/planner-gantt-view.c:149 ../src/planner-resource-view.c:246
 #: ../src/planner-task-view.c:123
@@ -1227,7 +1227,7 @@ msgstr "Подразумевана група"
 
 #: ../src/planner-group-dialog.c:641
 msgid "Edit group property"
-msgstr "Измени својство групе"
+msgstr "Уреди својство групе"
 
 #: ../src/planner-group-dialog.c:825
 msgid "Manager name"
@@ -1348,20 +1348,20 @@ msgstr "Изабери календар за употребу уз овај пр
 
 #: ../src/planner-project-properties.c:486
 msgid "Edit Project Name"
-msgstr "Измени име пројекта"
+msgstr "Уреди име пројекта"
 
 #: ../src/planner-project-properties.c:522
 msgid "Edit Organization"
-msgstr "Измени организацију"
+msgstr "Уреди организацију"
 
 #: ../src/planner-project-properties.c:558
 msgid "Edit Manager"
-msgstr "Измени руководиоца"
+msgstr "Уреди руководиоца"
 
 #: ../src/planner-project-properties.c:630
 #: ../src/planner-project-properties.c:664
 msgid "Edit Project Start"
-msgstr "Измени почетак пројекта"
+msgstr "Уреди почетак пројекта"
 
 #: ../src/planner-project-properties.c:753
 msgid "OK"
@@ -1369,7 +1369,7 @@ msgstr "У реду"
 
 #: ../src/planner-project-properties.c:841
 msgid "Edit Project Phase"
-msgstr "Измени фазе пројекта"
+msgstr "Уреди фазе пројекта"
 
 #: ../src/planner-project-properties.c:974
 msgid "Property"
@@ -1720,7 +1720,7 @@ msgstr "Одузми ресурс са задатка"
 
 #: ../src/planner-task-dialog.c:860
 msgid "Change resource units in task"
-msgstr "Измени јединице ресурса на задатку"
+msgstr "Промени јединице ресурса на задатку"
 
 #: ../src/planner-task-dialog.c:948
 msgid "Edit task predecessor"
@@ -1776,7 +1776,7 @@ msgstr "Кашњење"
 
 #: ../src/planner-task-dialog.c:2805 ../src/planner-task-dialog.c:2807
 msgid "Edit task properties"
-msgstr "Измени својства задатка"
+msgstr "Уреди својства задатка"
 
 #: ../src/planner-task-popup.c:53
 msgid "/_Insert task"
@@ -1923,7 +1923,7 @@ msgstr "Додељен коме"
 
 #: ../src/planner-task-view.c:482
 msgid "Edit custom task properties"
-msgstr "Измени произвољна својства задатка"
+msgstr "Уреди произвољна својства задатка"
 
 #: ../src/planner-ttable-print.c:189
 msgid "Task"
@@ -2091,19 +2091,19 @@ msgstr "_Руковање календарима"
 
 #: ../src/planner-window.c:279
 msgid "Edit Day _Types"
-msgstr "Измени _Типове Дана"
+msgstr "Уреди _врсте дана"
 
 #: ../src/planner-window.c:282
 msgid "Edit Project _Phases"
-msgstr "Измени _Фазе Пројекта"
+msgstr "Уреди _фазе пројекта"
 
 #: ../src/planner-window.c:285
 msgid "_Edit Project Properties"
-msgstr "Из_мени својства пројекта"
+msgstr "Уре_ди својства пројекта"
 
 #: ../src/planner-window.c:285
 msgid "Edit the project properties"
-msgstr "Измени својства пројекта"
+msgstr "Уреди својства пројекта"
 
 #: ../src/planner-window.c:293
 msgid "_Help"
@@ -2325,10 +2325,10 @@ msgstr "Извези"
 #~ msgstr "%s дан"
 
 #~ msgid "Edit resource property from dialog"
-#~ msgstr "Измени својство извора помоћу прозорчета"
+#~ msgstr "Уреди својство извора помоћу прозорчета"
 
 #~ msgid "Edit resource custom property"
-#~ msgstr "Измени произвољно својство извора"
+#~ msgstr "Уреди произвољно својство извора"
 
 #~ msgid "Finish to finish (FF)"
 #~ msgstr "Крај са крајем (КК)"
@@ -2368,7 +2368,7 @@ msgstr "Извези"
 #~ msgstr "Произвољна својства"
 
 #~ msgid "Edit Project phases"
-#~ msgstr "Измени фазе пројекта"
+#~ msgstr "Уреди фазе пројекта"
 
 #~ msgid "Enter the name of the new project phase:"
 #~ msgstr "Унеси назив нове фазе пројекта:"
