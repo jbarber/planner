@@ -207,6 +207,11 @@ static gboolean gantt_row_get_resource_by_index       (PlannerGanttRow       *ro
 						       gint                  *x1,
 						       gint                  *x2);
 
+static PlannerCmd *task_cmd_edit_property (PlannerWindow   *window,
+					   PlannerTaskTree *tree,
+					   MrpTask         *task,
+					   const gchar     *property,
+					   const GValue    *value);
 
 
 static GnomeCanvasItemClass *parent_class;
@@ -1605,9 +1610,7 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 
 				old_target_item = NULL;
 
-				/*
-				 * Start the autoscroll timeout.
-				 */
+				/* Start the autoscroll timeout. */
 				priv->scroll_timeout_id = gtk_timeout_add (
 					50,
 					(GSourceFunc) gantt_row_scroll_timeout_cb,
@@ -1751,7 +1754,6 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 					      NULL);
 
 				target_name = mrp_task_get_name (PLANNER_GANTT_ROW (target_item)->priv->task);
-
 				task_name = mrp_task_get_name (priv->task);
 				
 				if (target_name == NULL || target_name[0] == 0) {
@@ -1802,8 +1804,7 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 			gnome_canvas_item_raise_to_top (drag_item);
 			gnome_canvas_item_show (drag_item);
 
-			chart = g_object_get_data (G_OBJECT (item->canvas),
-						   "chart");
+			chart = g_object_get_data (G_OBJECT (item->canvas), "chart");
 
 			duration = MAX (0, (event->motion.x - priv->x_start) / priv->scale);
 
@@ -1816,9 +1817,8 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 				-1,
 				mrp_task_get_start (priv->task) + duration);
 
-			message = g_strdup_printf (
-				_("Change work to %s"),
-				planner_format_duration (work, hours_per_day));
+			message = g_strdup_printf (_("Change work to %s"),
+						   planner_format_duration (work, hours_per_day));
 			planner_gantt_chart_status_updated (chart, message);
 			g_free (message);
 		}
@@ -1826,9 +1826,9 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 		break;
 		
 	case GDK_BUTTON_RELEASE: {
-		PlannerTaskTree   *tree;
-		GtkTreePath       *path;
-		GtkTreeSelection  *selection;
+		PlannerTaskTree  *tree;
+		GtkTreePath      *path;
+		GtkTreeSelection *selection;
 				
 		if (event->button.button != 1) {
 			return FALSE;
@@ -1841,10 +1841,12 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 			MrpProject *project;
 			gint        duration;
 			gint        work;
+			GValue      value = { 0 };
 
 			project = mrp_object_get_project (MRP_OBJECT (priv->task));
 			
 			duration = MAX (0, (event->button.x - priv->x_start) / priv->scale);
+
 			/* Snap to quarters. */
 			duration = floor (duration / SNAP + 0.5) * SNAP;
 
@@ -1853,16 +1855,27 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 				priv->task,
 				-1,
 				mrp_task_get_start (priv->task) + duration);
+
+			// koko
+
+			chart = g_object_get_data (G_OBJECT (item->canvas), "chart");
+			tree = planner_gantt_chart_get_view (chart);
+
+			g_value_init (&value, G_TYPE_INT);
+			g_value_set_int (&value, work);
 			
-			g_object_set (priv->task,
+			task_cmd_edit_property (planner_task_tree_get_window (tree),
+						tree,
+						priv->task,
+						"work",
+						&value);
+
+			/*g_object_set (priv->task,
 				      "work", work,
 				      NULL);
-
+			*/
 			gtk_object_destroy (GTK_OBJECT (drag_item));
 			drag_item = NULL;
-
-			chart = g_object_get_data (G_OBJECT (item->canvas),
-						   "chart");
 
 			planner_gantt_chart_status_updated (chart, NULL);
 		}
@@ -1909,7 +1922,7 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 							     &error);
 				
 				if (!cmd) {
-					GtkWidget   *dialog;
+					GtkWidget *dialog;
 
 					gnome_canvas_item_ungrab (item, event->button.time);
 					
@@ -1985,10 +1998,9 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 		if (event->button.button == 1) {
 			if (IN_DRAG_RELATION_SPOT (event->button.x, event->button.y,
 						   priv->x + priv->width, priv->y, priv->height)) {
-	
-				PlannerTaskTree   *tree;
-				GtkTreePath       *path;
-				GtkTreeSelection  *selection;
+				PlannerTaskTree  *tree;
+				GtkTreePath      *path;
+				GtkTreeSelection *selection;
 				
 				chart = g_object_get_data (G_OBJECT (item->canvas), "chart");
 				tree = planner_gantt_chart_get_view (chart);
@@ -2040,14 +2052,14 @@ gantt_row_canvas_scroll (GtkWidget *widget,
 			 gint       delta_y)
 {
 	GtkAdjustment *hadj, *vadj;
-	int old_h_value, old_v_value;
+	int            old_h_value, old_v_value;
 
 	hadj = gtk_layout_get_hadjustment (GTK_LAYOUT (widget));
 	vadj = gtk_layout_get_vadjustment (GTK_LAYOUT (widget));
 
-	/* Store the old ajustment values so we can tell if we ended up actually
-	 * scrolling. We may not have in a case where the resulting value got
-	 * pinned to the adjustment min or max.
+	/* Store the old adjustment values so we can tell if we ended up
+	 * actually scrolling. We may not have in a case where the resulting
+	 * value got pinned to the adjustment min or max.
 	 */
 	old_h_value = hadj->value;
 	old_v_value = vadj->value;
@@ -2061,7 +2073,7 @@ gantt_row_canvas_scroll (GtkWidget *widget,
 
 static gint
 gantt_row_get_resource_index_at (PlannerGanttRow *row,
-				 gint        x)
+				 gint             x)
 {
 	PlannerGanttRowPriv *priv;
 	gint                 i, len;
@@ -2088,9 +2100,9 @@ gantt_row_get_resource_index_at (PlannerGanttRow *row,
 
 static gboolean
 gantt_row_get_resource_by_index (PlannerGanttRow *row,
-				 gint        index,
-				 gint       *x1,
-				 gint       *x2)
+				 gint             index,
+				 gint            *x1,
+				 gint            *x2)
 {
 	PlannerGanttRowPriv *priv;
 
@@ -2130,7 +2142,7 @@ planner_gantt_row_init_menu (PlannerGanttRow *row)
 	row->priv->popup_factory = planner_task_popup_new (tree);
 }
 
-
+/* Save this code for later. */
 #if 0
 	gdouble              wx1, wx2;
 	mrptime              t1, t2;    /* First and last exposed times */
@@ -2290,3 +2302,122 @@ planner_gantt_row_init_menu (PlannerGanttRow *row)
 		}
 
 #endif
+
+
+/* This should be ina shared file ideally, but there are some linking
+ * problems.
+ */
+
+typedef struct {
+	PlannerCmd         base;
+
+	PlannerTaskTree   *tree;
+	MrpProject        *project;
+	
+	GtkTreePath       *path;
+	
+	gchar             *property;  
+	GValue            *value;
+	GValue            *old_value;
+} TaskCmdEditProperty;
+
+static gboolean
+task_cmd_edit_property_do (PlannerCmd *cmd_base)
+{
+	TaskCmdEditProperty *cmd;
+	PlannerGanttModel   *model;
+	MrpTask             *task;
+	
+	cmd = (TaskCmdEditProperty*) cmd_base;
+
+	model = PLANNER_GANTT_MODEL (gtk_tree_view_get_model (GTK_TREE_VIEW (cmd->tree)));
+	task = planner_gantt_model_get_task_from_path (model, cmd->path);
+
+	g_object_set_property (G_OBJECT (task),
+			       cmd->property,
+			       cmd->value);
+
+	return TRUE;
+}
+
+static void
+task_cmd_edit_property_undo (PlannerCmd *cmd_base)
+{
+	TaskCmdEditProperty *cmd;
+	PlannerGanttModel   *model;
+	MrpTask             *task;
+	
+	cmd = (TaskCmdEditProperty*) cmd_base;
+
+	model = PLANNER_GANTT_MODEL (gtk_tree_view_get_model (GTK_TREE_VIEW (cmd->tree)));
+	task = planner_gantt_model_get_task_from_path (model, cmd->path);
+
+	g_object_set_property (G_OBJECT (task),
+			       cmd->property,
+			       cmd->old_value);
+}
+
+static void
+task_cmd_edit_property_free (PlannerCmd *cmd_base)
+{
+	TaskCmdEditProperty *cmd;
+	
+	cmd = (TaskCmdEditProperty*) cmd_base;
+
+	g_object_unref (cmd->project);
+	
+	g_free (cmd->property);
+	g_value_unset (cmd->value);
+	g_value_unset (cmd->old_value);
+
+	g_free (cmd->value);
+	g_free (cmd->old_value);
+}
+
+static PlannerCmd *
+task_cmd_edit_property (PlannerWindow   *window,
+			PlannerTaskTree *tree,
+			MrpTask         *task,
+			const gchar     *property,
+			const GValue    *value)
+{
+	PlannerTaskTreePriv *priv;
+	PlannerCmd          *cmd_base;
+	TaskCmdEditProperty *cmd;
+	PlannerGanttModel   *model;
+
+	priv = tree->priv;
+
+	cmd_base = planner_cmd_new (TaskCmdEditProperty,
+				    _("Edit task property"),
+				    task_cmd_edit_property_do,
+				    task_cmd_edit_property_undo,
+				    task_cmd_edit_property_free);
+
+	cmd = (TaskCmdEditProperty *) cmd_base;
+
+	cmd->tree = tree;
+	cmd->project = g_object_ref (planner_window_get_project (window));
+
+	model = PLANNER_GANTT_MODEL (gtk_tree_view_get_model (GTK_TREE_VIEW (tree)));
+	
+	cmd->path = planner_gantt_model_get_path_from_task (model, task);
+	
+	cmd->property = g_strdup (property);
+
+	cmd->value = g_new0 (GValue, 1);
+	g_value_init (cmd->value, G_VALUE_TYPE (value));
+	g_value_copy (value, cmd->value);
+
+	cmd->old_value = g_new0 (GValue, 1);
+	g_value_init (cmd->old_value, G_VALUE_TYPE (value));
+
+	g_object_get_property (G_OBJECT (task),
+			       cmd->property,
+			       cmd->old_value);
+
+	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager (window),
+					   cmd_base);
+	
+	return cmd_base;
+}

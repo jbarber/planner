@@ -1,3 +1,13 @@
+2004-10-04  Richard Hult  <richard@imendio.com>
+
+	* src/Makefile.am: Move sql define to the sql plugin flags.
+
+	* src/planner-gantt-row.c: Clean up some indentation, add missing
+	undo code for dragging a task bar. Fixes bug #149359.
+
+	* src/planner-task-tree.c: Make a bit more consistent with the
+	other undo code.
+
 2004-10-02  Richard Hult  <richard@imendio.com>
 
 	* data/ui/main-window.ui:

@@ -11,9 +11,9 @@ INCLUDES = \
 	-DIMAGEDIR=\""$(datadir)/pixmaps/planner"\"		\
 	-DGLADEDIR=\""$(datadir)/planner/glade"\"		\
 	-DMRP_VIEWDIR=\""$(libdir)/planner/views"\"		\
-	-DMRP_PLUGINDIR=\""$(libdir)/planner/plugins"\"		\
-	-DSQL_DIR=\""$(datadir)/planner/sql"\"			\
-	-DVERSION=\""$(VERSION)"\"
+	-DMRP_PLUGINDIR=\""$(libdir)/planner/plugins"\"		
+
+#	-DVERSION=\""$(VERSION)"\"
 
 if HAVE_PYTHON_PLUGIN
 INCLUDES += $(PYTHON_INCLUDES)
@@ -112,11 +112,12 @@ planner_LDFLAGS = -export-dynamic
 planner_LDADD =	\
 	$(top_builddir)/libplanner/libplanner-1.la \
 	$(top_builddir)/libegg/recent-files/libeggrecent.la \
-	libutil.la \
+	libutil.la
 	$(PLANNER_LIBS)
 
 noinst_LTLIBRARIES = libutil.la
 libutil_la_SOURCES = planner-marshal-main.c
+
 
 #
 # Views
@@ -199,7 +200,7 @@ if HAVE_GDA
 sql_plugin = libsql-plugin.la
 libsql_plugin_la_SOURCES = planner-sql-plugin.c
 libsql_plugin_la_LIBADD =  $(GDA_LIBS)
-libsql_plugin_la_CFLAGS = $(GDA_CFLAGS) 
+libsql_plugin_la_CFLAGS = $(GDA_CFLAGS) -DSQL_DIR=\""$(datadir)/planner/sql"\"
 libsql_plugin_la_LDFLAGS = -avoid-version -module
 endif
 

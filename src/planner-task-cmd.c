@@ -244,10 +244,12 @@ task_cmd_insert_free (PlannerCmd *cmd_base)
 	cmd = (TaskCmdInsert*) cmd_base;
 
 	g_object_unref (cmd->task);
+
 	if (cmd->parent != NULL) {
 		g_object_unref (cmd->parent);
 	}
 	g_object_unref (cmd->project);
+
 	cmd->task = NULL;
 }
 
@@ -287,3 +289,4 @@ planner_task_cmd_insert (PlannerWindow  *main_window,
 
 	return cmd_base;
 }
+

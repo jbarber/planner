@@ -41,12 +41,12 @@
 #include "planner-marshal.h"
 #include "planner-cell-renderer-date.h"
 #include "planner-task-dialog.h"
+#include "planner-task-cmd.h"
 #include "planner-task-input-dialog.h"
 #include "planner-property-dialog.h"
 #include "planner-task-tree.h"
 #include "planner-gantt-model.h"
 #include "planner-task-popup.h"
-#include "planner-task-cmd.h"
 
 
 #define WARN_TASK_DIALOGS 10
@@ -201,7 +201,8 @@ task_cmd_edit_property_do (PlannerCmd *cmd_base)
 	task = task_tree_get_task_from_path (cmd->tree, cmd->path);
 
 	g_object_set_property (G_OBJECT (task),
-			       cmd->property, cmd->value);
+			       cmd->property,
+			       cmd->value);
 
 	return TRUE;
 }
@@ -215,7 +216,7 @@ task_cmd_edit_property_undo (PlannerCmd *cmd_base)
 	cmd = (TaskCmdEditProperty*) cmd_base;
 
 	task = task_tree_get_task_from_path (cmd->tree, cmd->path);
-	
+
 	g_object_set_property (G_OBJECT (task),
 			       cmd->property,
 			       cmd->old_value);
@@ -228,6 +229,8 @@ task_cmd_edit_property_free (PlannerCmd *cmd_base)
 	
 	cmd = (TaskCmdEditProperty*) cmd_base;
 
+	g_object_unref (cmd->project);
+	
 	g_free (cmd->property);
 	g_value_unset (cmd->value);
 	g_value_unset (cmd->old_value);
@@ -237,15 +240,18 @@ task_cmd_edit_property_free (PlannerCmd *cmd_base)
 }
 
 static PlannerCmd *
-task_cmd_edit_property (PlannerTaskTree *tree,
+task_cmd_edit_property (PlannerWindow   *window,
+			PlannerTaskTree *tree,
 			MrpTask         *task,
 			const gchar     *property,
 			const GValue    *value)
 {
-	PlannerTaskTreePriv *priv = tree->priv;
+	PlannerTaskTreePriv *priv;
 	PlannerCmd          *cmd_base;
 	TaskCmdEditProperty *cmd;
 	PlannerGanttModel   *model;
+
+	priv = tree->priv;
 
 	cmd_base = planner_cmd_new (TaskCmdEditProperty,
 				    _("Edit task property"),
@@ -256,7 +262,7 @@ task_cmd_edit_property (PlannerTaskTree *tree,
 	cmd = (TaskCmdEditProperty *) cmd_base;
 
 	cmd->tree = tree;
-	cmd->project = task_tree_get_project (tree);
+	cmd->project = g_object_ref (planner_window_get_project (window));
 
 	model = PLANNER_GANTT_MODEL (gtk_tree_view_get_model (GTK_TREE_VIEW (tree)));
 	
@@ -275,7 +281,7 @@ task_cmd_edit_property (PlannerTaskTree *tree,
 			       cmd->property,
 			       cmd->old_value);
 
-	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager (priv->main_window),
+	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager (window),
 					   cmd_base);
 	
 	return cmd_base;
@@ -1721,7 +1727,8 @@ task_tree_name_edited (GtkCellRendererText *cell,
 		g_value_init (&value, G_TYPE_STRING);
 		g_value_set_string (&value, new_text);
 		
-		task_cmd_edit_property (task_tree,
+		task_cmd_edit_property (priv->main_window,
+					task_tree,
 					task,
 					"name",
 					&value);
@@ -1862,7 +1869,8 @@ task_tree_duration_edited (GtkCellRendererText *cell,
 		g_value_init (&value, G_TYPE_INT);
 		g_value_set_int (&value, duration);
 		
-		task_cmd_edit_property (PLANNER_TASK_TREE (view),
+		task_cmd_edit_property (tree->priv->main_window,
+					PLANNER_TASK_TREE (view),
 					task,
 					"duration",
 					&value);
@@ -1900,7 +1908,8 @@ task_tree_work_edited (GtkCellRendererText *cell,
 	g_value_init (&value, G_TYPE_INT);
 	g_value_set_int (&value, work);
 	
-	task_cmd_edit_property (PLANNER_TASK_TREE (view),
+	task_cmd_edit_property (PLANNER_TASK_TREE (view)->priv->main_window,
+				PLANNER_TASK_TREE (view),
 				task,
 				"work",
 				&value);
@@ -2600,7 +2609,7 @@ planner_task_tree_insert_subtask (PlannerTaskTree *tree)
 
 	cmd = planner_task_cmd_insert (tree->priv->main_window, 
 				       parent, position, work, work, NULL);
-
+	
 	/* cmd = planner_task_cmd_insert (tree, path, work, work); */
 
 	if (!GTK_WIDGET_HAS_FOCUS (tree)) {

@@ -24,21 +24,19 @@
 #include "planner-window.h"
 #include "planner-task-tree.h"
 
-PlannerCmd * planner_task_cmd_link   (PlannerWindow   *main_window,
-				      MrpTask         *before,
-				      MrpTask         *after,
-				      MrpRelationType  relationship,
-				      glong            lag,
-				      GError         **error);
-
-PlannerCmd * planner_task_cmd_unlink (PlannerWindow   *main_window,
-				      MrpRelation     *relation);
-
-PlannerCmd * planner_task_cmd_insert (PlannerWindow  *main_window,
-				      MrpTask        *parent,
-				      gint            position,
-				      gint            work,
-				      gint            duration,
-				      MrpTask        *new_task);
+PlannerCmd *planner_task_cmd_link          (PlannerWindow    *main_window,
+					    MrpTask          *before,
+					    MrpTask          *after,
+					    MrpRelationType   relationship,
+					    glong             lag,
+					    GError          **error);
+PlannerCmd *planner_task_cmd_unlink        (PlannerWindow    *main_window,
+					    MrpRelation      *relation);
+PlannerCmd *planner_task_cmd_insert        (PlannerWindow    *main_window,
+					    MrpTask          *parent,
+					    gint              position,
+					    gint              work,
+					    gint              duration,
+					    MrpTask          *new_task);
 
 #endif /* __PLANNER_TASK_CMD_H__ */
