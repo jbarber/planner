@@ -205,7 +205,6 @@ static gchar                 complete_stipple_pattern[] = { 0x02, 0x01 };
 static GdkBitmap            *break_stipple = NULL;
 static gchar                 break_stipple_pattern[] = { 0x03 };
 
-
 GType
 planner_gantt_row_get_type (void)
 {
@@ -1629,9 +1628,9 @@ gantt_row_scroll_timeout_cb (PlannerGanttRow *row)
 static gboolean
 gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 {
-	PlannerGanttRow               *row;
-	PlannerGanttRowPriv           *priv;
-	PlannerGanttChart             *chart;
+	PlannerGanttRow          *row;
+	PlannerGanttRowPriv      *priv;
+	PlannerGanttChart        *chart;
 	GtkWidget                *canvas_widget;
 	static gdouble            x1, y1;
 	gdouble                   wx1, wy1;
@@ -2049,17 +2048,26 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 								event->button.y);
 			
 			if (target_item && target_item != item) {
-				GError *error = NULL;
+				GError            *error = NULL;
+				PlannerCmd        *cmd;
+				PlannerGanttChart *chart;
+				PlannerTaskTree   *tree;
 				
 				task = priv->task;
 				target_task = PLANNER_GANTT_ROW (target_item)->priv->task;
+
+				chart = g_object_get_data (G_OBJECT (item->canvas), "chart");
+				tree = planner_gantt_chart_get_view (chart);
+
+				cmd = planner_task_tree_task_cmd_link (tree,
+								       task,
+								       target_task,
+								       MRP_RELATION_FS,
+								       0,
+								       &error);
 				
-				if (!mrp_task_add_predecessor (target_task,
-							       task,
-							       MRP_RELATION_FS,
-							       0,
-							       &error)) {
-					GtkWidget *dialog;
+				if (!cmd) {
+					GtkWidget   *dialog;
 
 					gnome_canvas_item_ungrab (item, event->button.time);
 					
@@ -2070,8 +2078,7 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 									 "%s", error->message);
 					gtk_dialog_run (GTK_DIALOG (dialog));
 					gtk_widget_destroy (dialog);
-					
-					g_error_free (error);
+					g_error_free (error);					
 				}
 			}
 			
@@ -2216,9 +2223,9 @@ gantt_row_get_resource_index_at (PlannerGanttRow *row,
 				 gint        x)
 {
 	PlannerGanttRowPriv *priv;
-	gint            i, len;
-	gint            left, right;
-	gint            offset;
+	gint                 i, len;
+	gint                 left, right;
+	gint                 offset;
 
 	priv = row->priv;
 

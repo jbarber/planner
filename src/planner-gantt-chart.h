@@ -62,24 +62,24 @@ GtkWidget       *planner_gantt_chart_new              (void);
 
 GtkWidget       *planner_gantt_chart_new_with_model   (GtkTreeModel  *model);
 
-PlannerTaskTree *planner_gantt_chart_get_view (PlannerGanttChart *chart);
+PlannerTaskTree *planner_gantt_chart_get_view         (PlannerGanttChart *chart);
 
-void planner_gantt_chart_set_view (PlannerGanttChart *chart,
-    PlannerTaskTree *view);
+void planner_gantt_chart_set_view                     (PlannerGanttChart *chart,
+						       PlannerTaskTree *view);
 
 GtkTreeModel    *planner_gantt_chart_get_model        (PlannerGanttChart  *tree_view);
 
 void             planner_gantt_chart_set_model        (PlannerGanttChart  *tree_view,
-						  GtkTreeModel  *model);
+						       GtkTreeModel  *model);
 
 void             planner_gantt_chart_expand_row       (PlannerGanttChart  *chart,
-						  GtkTreePath   *path);
+						       GtkTreePath   *path);
 
 void             planner_gantt_chart_collapse_row     (PlannerGanttChart  *chart,
-						  GtkTreePath   *path);
+						       GtkTreePath   *path);
 
 void             planner_gantt_chart_scroll_to        (PlannerGanttChart  *chart,
-						  time_t         t);
+						       time_t         t);
 
 void             planner_gantt_chart_zoom_in          (PlannerGanttChart  *chart);
 
@@ -90,18 +90,18 @@ void             planner_gantt_chart_zoom_to_fit      (PlannerGanttChart  *chart
 gdouble          planner_gantt_chart_get_zoom         (PlannerGanttChart  *chart);
 
 void             planner_gantt_chart_can_zoom         (PlannerGanttChart  *chart,
-						  gboolean      *in,
-						  gboolean      *out);
+						       gboolean      *in,
+						       gboolean      *out);
 
 void             planner_gantt_chart_status_updated   (PlannerGanttChart  *chart,
-						  const gchar   *message);
+						       const gchar   *message);
 
 void             planner_gantt_chart_resource_clicked (PlannerGanttChart  *chart,
-						  MrpResource   *resource);
+						       MrpResource   *resource);
 
 void
 planner_gantt_chart_set_highlight_critical_tasks      (PlannerGanttChart  *chart,
-						  gboolean       state);
+						       gboolean       state);
 
 gboolean
 planner_gantt_chart_get_highlight_critical_tasks      (PlannerGanttChart  *chart);

@@ -42,8 +42,8 @@ typedef struct _PlannerTaskTreePriv       PlannerTaskTreePriv;
 
 struct _PlannerTaskTree
 {
-	GtkTreeView       parent;
-	PlannerTaskTreePriv   *priv;
+	GtkTreeView           parent;
+	PlannerTaskTreePriv  *priv;
 };
 
 struct _PlannerTaskTreeClass
@@ -85,6 +85,13 @@ void         planner_task_tree_set_anchor             (PlannerTaskTree       *tr
 						       GtkTreePath           *anchor);
 GtkTreePath* planner_task_tree_get_anchor             (PlannerTaskTree       *tree);
 
+/* Undo support */
 
+PlannerCmd*  planner_task_tree_task_cmd_link          (PlannerTaskTree       *tree,
+						       MrpTask               *before,
+						       MrpTask               *after,
+						       MrpRelationType        relationship,
+						       glong                  lag,
+						       GError               **error);
 
 #endif /* __PLANNER_TASK_TREE_H__ */

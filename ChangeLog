@@ -1,3 +1,17 @@
+2004-05-09 Alvaro del Castillo  <acs@barrapunto.com>
+
+	* src/planner-gantt-row.c: Task link undo with new GError system.
+
+	* src/planner-task-tree.c: 
+	Clean "g_free (cmd)" and "g_free (cmd_base->label)" that it's done
+	in the command manager.
+	TaskCmdTaskMove is renamed to TaskCmdMove.
+	Clean Task Move system so we use the new GError system.
+	Undo system for link task.
+
+	* src/planner-task-tree.[ch]:
+	Export link undo method so planner-gantt-row.c can use it.
+	
 2004-05-03  Richard Hult  <richard@imendio.com>
 
 	* configure.in:

@@ -58,7 +58,7 @@ typedef enum {
 
 struct _PlannerCmd {
 	gchar              *label;
-
+	
 	PlannerCmdManager  *manager;
 	
 	PlannerCmdDoFunc    do_func;
