@@ -3521,7 +3521,7 @@ gboolean
 planner_task_tree_get_highlight_critical (PlannerTaskTree *tree)
 {
 	g_return_val_if_fail (PLANNER_IS_TASK_TREE (tree), FALSE);
-
+	
 	return tree->priv->highlight_critical;
 }
 

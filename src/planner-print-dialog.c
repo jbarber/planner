@@ -162,8 +162,7 @@ print_dialog_create_page (PlannerWindow *window,
 	g_object_set_data (G_OBJECT (dialog), "summary-button", w);
 */
 	
-	gconf_client = planner_application_get_gconf_client (
-		planner_window_get_application (window));
+	gconf_client = planner_application_get_gconf_client ();
 
 	for (l = views; l; l = l->next) {
 		w = gtk_check_button_new_with_label (planner_view_get_label (l->data));
@@ -210,8 +209,7 @@ planner_print_dialog_get_print_selection (GtkDialog *dialog,
 
 	window = g_object_get_data (G_OBJECT (dialog), "window");
 	
-	gconf_client = planner_application_get_gconf_client (
-		planner_window_get_application (window));
+	gconf_client = planner_application_get_gconf_client ();
 	
 	buttons = g_object_get_data (G_OBJECT (dialog), "buttons");
 	for (l = buttons; l; l = l->next) {

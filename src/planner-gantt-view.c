@@ -173,7 +173,7 @@ G_MODULE_EXPORT void
 activate (PlannerView *view)
 {
 	PlannerViewPriv *priv;
-	gboolean    show_critical;
+	gboolean         show_critical;
 
 	priv = view->priv;
 	
@@ -184,7 +184,7 @@ activate (PlannerView *view)
 				      verbs);
 	
 	/* Set the initial UI state. */
-
+	
 	show_critical = planner_gantt_chart_get_highlight_critical_tasks (
 		PLANNER_GANTT_CHART (priv->gantt));
 	

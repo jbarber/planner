@@ -59,7 +59,7 @@ PlannerApplication   *planner_application_new              (void);
 GtkWidget       *     planner_application_new_window       (PlannerApplication *app);
 void                  planner_application_exit             (PlannerApplication *app);
 EggRecentModel  *     planner_application_get_recent_model (PlannerApplication *app);
-GConfClient     *     planner_application_get_gconf_client (PlannerApplication *app);
+GConfClient     *     planner_application_get_gconf_client (void);
 
 
 #endif /* __PLANNER_APPLICATION_H__ */

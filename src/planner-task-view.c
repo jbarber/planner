@@ -144,11 +144,14 @@ static BonoboUIVerb verbs[] = {
 	BONOBO_UI_VERB_END
 };
 
+#define CRITICAL_PATH_KEY "/apps/planner/views/task_view/highlight_critical_path"
+
 G_MODULE_EXPORT void
 activate (PlannerView *view)
 {
 	PlannerViewPriv *priv;
 	gboolean         show_critical;
+	GConfClient     *gconf_client;
 
 	planner_view_activate_helper (view,
 				      DATADIR
@@ -160,9 +163,14 @@ activate (PlannerView *view)
 	
 	/* Set the initial UI state. */
 
-	show_critical = planner_task_tree_get_highlight_critical (
-		PLANNER_TASK_TREE (priv->tree));
-	
+	gconf_client = planner_application_get_gconf_client ();
+	show_critical = gconf_client_get_bool (gconf_client,
+					       CRITICAL_PATH_KEY,
+					       NULL);
+
+	planner_task_tree_set_highlight_critical (PLANNER_TASK_TREE (priv->tree),
+						  show_critical);
+
 	bonobo_ui_component_set_prop (view->ui_component, 
 				      "/commands/HighlightCriticalTasks",
 				      "state", show_critical ? "1" : "0",
@@ -511,6 +519,7 @@ task_view_ui_component_event (BonoboUIComponent            *comp,
 {
 	PlannerViewPriv *priv;
 	gboolean         state;
+	GConfClient     *gconf_client;
 	
 	priv = view->priv;
 
@@ -519,6 +528,12 @@ task_view_ui_component_event (BonoboUIComponent            *comp,
 
 		planner_task_tree_set_highlight_critical (PLANNER_TASK_TREE (priv->tree),
 							  state);
+
+		gconf_client = planner_application_get_gconf_client ();
+		gconf_client_set_bool (gconf_client,
+				       CRITICAL_PATH_KEY,
+				       state,
+				       NULL);
 	}
 }
 	

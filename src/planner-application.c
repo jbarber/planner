@@ -288,12 +288,10 @@ planner_application_get_recent_model (PlannerApplication *app)
 }
 
 GConfClient *
-planner_application_get_gconf_client (PlannerApplication *app)
+planner_application_get_gconf_client (void)
 {
 	static GConfClient *client;
 	
-	g_return_val_if_fail (PLANNER_IS_APPLICATION (app), NULL);
-
 	if (!client) {
 		client = gconf_client_get_default ();
 	}

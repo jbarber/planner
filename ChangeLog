@@ -1,5 +1,16 @@
 2004-06-17  Richard Hult  <richard@imendio.com>
 
+	* src/planner-application.c:
+	* src/planner-gantt-chart.c:
+	* src/planner-gantt-view.c:
+	* src/planner-print-dialog.c:
+	* src/planner-task-tree.c:
+	* src/planner-task-view.c:
+	* src/planner-window.c: Simply gconf code and add keys for
+	critical path highlighting.
+
+2004-06-17  Richard Hult  <richard@imendio.com>
+
 	* src/planner-gantt-row.c (gantt_row_notify_cb): Only redraw if
 	critical changed, don't update arrow positions.
 

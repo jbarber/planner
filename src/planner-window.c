@@ -594,7 +594,7 @@ get_last_dir (PlannerWindow *window)
 	
 	priv = window->priv;
 	
-	gconf_client = planner_application_get_gconf_client (priv->application);
+	gconf_client = planner_application_get_gconf_client ();
 	
 	last_dir = gconf_client_get_string (gconf_client,
 					    GCONF_PATH "/general/last_dir",
@@ -634,7 +634,7 @@ window_open_cb (BonoboUIComponent *component,
 	window = PLANNER_WINDOW (data);
 	priv = window->priv;
 
-	gconf_client = planner_application_get_gconf_client (priv->application);
+	gconf_client = planner_application_get_gconf_client ();
 	
 	file_sel = gtk_file_selection_new (_("Open a file"));
 
@@ -1378,7 +1378,7 @@ window_do_save_as (PlannerWindow *window)
 
 	priv = window->priv;
 
-	gconf_client = planner_application_get_gconf_client (priv->application);
+	gconf_client = planner_application_get_gconf_client ();
 
 	file_sel = gtk_file_selection_new (_("Save a file"));
 	gtk_window_set_modal (GTK_WINDOW (file_sel), TRUE);
