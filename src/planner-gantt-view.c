@@ -960,8 +960,6 @@ gantt_view_update_ui (PlannerView *view)
 	gchar      *link_value = "0";
 	gint        count_value = 0;
 
-	g_return_if_fail (PLANNER_IS_VIEW (view));
-	
 	if (!view->activated) {
 		return;
 	}
@@ -976,7 +974,6 @@ gantt_view_update_ui (PlannerView *view)
 			break;
 		}
 	}
-	
 	
 	for (l = list; l; l = l->next) {
 		count_value++;

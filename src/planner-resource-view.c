@@ -1,9 +1,9 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: nill; c-basic-offset: 8 -*- */
 /*
- * Copyright (C) 2003 Imendio HB
- * Copyright (C) 2002 CodeFactory AB
- * Copyright (C) 2002 Richard Hult <richard@imendio.com>
- * Copyright (C) 2002 Mikael Hallendal <micke@imendio.com>
+ * Copyright (C) 2003-2004 Imendio HB
+ * Copyright (C) 2002      CodeFactory AB
+ * Copyright (C) 2002      Richard Hult <richard@imendio.com>
+ * Copyright (C) 2002      Mikael Hallendal <micke@imendio.com>
  * Copyright (C) 2002-2004 Alvaro del Castillo <acs@barrapunto.com>
  *
  * This program is free software; you can redistribute it and/or
@@ -1063,6 +1063,10 @@ resource_view_update_ui (PlannerView *view)
 	list = resource_view_selection_get_list (view);	
 	value = (list != NULL) ? "1" : "0";
 	g_list_free (list);
+
+	if (!view->activated) {
+		return;
+	}
 	
 	bonobo_ui_component_freeze (view->ui_component, NULL);
 		
@@ -1074,9 +1078,9 @@ resource_view_update_ui (PlannerView *view)
 				      "/commands/EditResource",
 				      "sensitive", value, 
 				      NULL);
+
 	bonobo_ui_component_thaw (view->ui_component, NULL);	
 }
-
 
 static void 
 resource_view_selection_changed_cb (GtkTreeSelection *selection, PlannerView *view)

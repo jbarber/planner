@@ -1,3 +1,12 @@
+2004-04-16  Richard Hult  <richard@imendio.com>
+
+	* src/planner-gantt-view.c: (gantt_view_update_ui): Remove
+	whitespace.
+	
+	* src/planner-resource-view.c: (resource_view_update_ui): Fix bug
+	where we were trying to update the resource view bonobo ui while
+	it was deactivated.
+
 2004-04-15  Xavier Ordoquy  <xordoquy@wanadoo.fr>
 
 	* src/planner-ttable-row.c: (ttable_row_event): Removed the
