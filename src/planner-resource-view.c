@@ -250,13 +250,13 @@ static MrpResourceType resource_view_get_type_enum   (const gchar          *type
 #endif
 
 static GtkActionEntry entries[] = {
-	{ "InsertResource",   "planner-stock-insert-resource", N_("_Insert Resource"),             "<Control>i",        N_("Insert a new resource"),        G_CALLBACK(resource_view_insert_resource_cb) },
-	{ "InsertResources",  "planner-stock-insert-resource", N_("In_sert Resources..."),         NULL,                NULL,                               G_CALLBACK(resource_view_insert_resources_cb) },
-	{ "RemoveResource",   "planner-stock-remove-resource", N_("_Remove Resource"),             "<Control>d",        N_("Remove the selected resource"), G_CALLBACK(resource_view_remove_resource_cb) },
-	{ "EditResource",     GTK_STOCK_PROPERTIES,            N_("_Edit Resource Properties..."), "<Shift><Control>e", NULL,                               G_CALLBACK(resource_view_edit_resource_cb) },
-	{ "EditGroups",       "planner-stock-edit-groups",     N_("Edit _Groups"),                 NULL,                N_("Edit resource groups"),         G_CALLBACK(resource_view_edit_groups_cb) },
-	{ "SelectAll",        NULL,                            N_("Select _All"),                  "<Control>a",        N_("Select all tasks"),             G_CALLBACK(resource_view_select_all_cb) },
-	{ "EditCustomProps",  GTK_STOCK_PROPERTIES,            N_("Edit _Custom Properties..."),   NULL,                NULL,                               G_CALLBACK(resource_view_edit_custom_props_cb) },
+	{ "InsertResource",   "planner-stock-insert-resource", N_("_Insert Resource"),             "<Control>i",        N_("Insert a new resource"),        G_CALLBACK (resource_view_insert_resource_cb) },
+	{ "InsertResources",  "planner-stock-insert-resource", N_("In_sert Resources..."),         NULL,                NULL,                               G_CALLBACK (resource_view_insert_resources_cb) },
+	{ "RemoveResource",   "planner-stock-remove-resource", N_("_Remove Resource"),             "<Control>d",        N_("Remove the selected resource"), G_CALLBACK (resource_view_remove_resource_cb) },
+	{ "EditResource",     GTK_STOCK_PROPERTIES,            N_("_Edit Resource Properties..."), "<Shift><Control>e", NULL,                               G_CALLBACK (resource_view_edit_resource_cb) },
+	{ "EditGroups",       "planner-stock-edit-groups",     N_("Edit _Groups"),                 NULL,                N_("Edit resource groups"),         G_CALLBACK (resource_view_edit_groups_cb) },
+	{ "SelectAll",        NULL,                            N_("Select _All"),                  "<Control>a",        N_("Select all tasks"),             G_CALLBACK (resource_view_select_all_cb) },
+	{ "EditCustomProps",  GTK_STOCK_PROPERTIES,            N_("Edit _Custom Properties..."),   NULL,                NULL,                               G_CALLBACK (resource_view_edit_custom_props_cb) },
 };
 
 static guint n_entries = G_N_ELEMENTS (entries);

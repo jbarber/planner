@@ -115,23 +115,23 @@ void          print_cleanup                      (PlannerView     *view);
 
 
 static GtkActionEntry entries[] = {
-	{ "InsertTask",      "planner-stock-insert-task",      N_("_Insert Task"),               "<Control>i",        N_("Insert a new task"),                 G_CALLBACK(task_view_insert_task_cb) },
-	{ "InsertTasks",     "planner-stock-insert-task",      N_("In_sert Tasks..."),           NULL,                NULL,                                    G_CALLBACK(task_view_insert_tasks_cb) },
-	{ "RemoveTask",      "planner-stock-remove-task",      N_("_Remove Task"),               "<Control>d",        N_("Remove the selected tasks"),         G_CALLBACK(task_view_remove_task_cb) },
-	{ "EditTask",        NULL,                             N_("_Edit Task"),                 "<Shift><Control>e", NULL,                                    G_CALLBACK(task_view_edit_task_cb) },
-	{ "SelectAll",       NULL,                             N_("Select _All"),                "<Control>a",        N_("Select all tasks"),                  G_CALLBACK(task_view_select_all_cb) },
-	{ "UnlinkTask",      "planner-stock-unlink-task",      N_("_Unlink Task"),               NULL,                N_("Unlink the selected tasks"),         G_CALLBACK(task_view_unlink_task_cb) },
-	{ "LinkTasks",       "planner-stock-link-task",        N_("_Link Tasks"),                NULL,                N_("Link the selected tasks"),           G_CALLBACK(task_view_link_tasks_cb) },
-	{ "IndentTask",      "planner-stock-indent-task",      N_("I_ndent Task"),               "<Shift><Control>i", N_("Indent the selected tasks"),         G_CALLBACK(task_view_indent_task_cb) },
-	{ "UnindentTask",    "planner-stock-unindent-task",    N_("Unin_dent Task"),             "<Shift><Control>u", N_("Unindent the selected tasks"),       G_CALLBACK(task_view_unindent_task_cb) },
-	{ "MoveTaskUp",      "planner-stock-move-task-up",     N_("Move Task _Up"),              NULL,                N_("Move the selected tasks upwards"),   G_CALLBACK(task_view_move_task_up_cb) },
-	{ "MoveTaskDown",    "planner-stock-move-task-down",   N_("Move Task Do_wn"),            NULL,                N_("Move the selected tasks downwards"), G_CALLBACK(task_view_move_task_down_cb) },
-	{ "ResetConstraint", "planner-stock-reset-constraint", N_("Reset _Constraint"),          NULL,                NULL,                                    G_CALLBACK(task_view_reset_constraint_cb) },
-	{ "EditCustomProps", GTK_STOCK_PROPERTIES,             N_("_Edit Custom Properties..."), NULL,                NULL,                                    G_CALLBACK(task_view_edit_custom_props_cb) },
+	{ "InsertTask",      "planner-stock-insert-task",      N_("_Insert Task"),               "<Control>i",        N_("Insert a new task"),                 G_CALLBACK (task_view_insert_task_cb) },
+	{ "InsertTasks",     "planner-stock-insert-task",      N_("In_sert Tasks..."),           NULL,                NULL,                                    G_CALLBACK (task_view_insert_tasks_cb) },
+	{ "RemoveTask",      "planner-stock-remove-task",      N_("_Remove Task"),               "<Control>d",        N_("Remove the selected tasks"),         G_CALLBACK (task_view_remove_task_cb) },
+	{ "EditTask",        NULL,                             N_("_Edit Task"),                 "<Shift><Control>e", NULL,                                    G_CALLBACK (task_view_edit_task_cb) },
+	{ "SelectAll",       NULL,                             N_("Select _All"),                "<Control>a",        N_("Select all tasks"),                  G_CALLBACK (task_view_select_all_cb) },
+	{ "UnlinkTask",      "planner-stock-unlink-task",      N_("_Unlink Task"),               NULL,                N_("Unlink the selected tasks"),         G_CALLBACK (task_view_unlink_task_cb) },
+	{ "LinkTasks",       "planner-stock-link-task",        N_("_Link Tasks"),                NULL,                N_("Link the selected tasks"),           G_CALLBACK (task_view_link_tasks_cb) },
+	{ "IndentTask",      "planner-stock-indent-task",      N_("I_ndent Task"),               "<Shift><Control>i", N_("Indent the selected tasks"),         G_CALLBACK (task_view_indent_task_cb) },
+	{ "UnindentTask",    "planner-stock-unindent-task",    N_("Unin_dent Task"),             "<Shift><Control>u", N_("Unindent the selected tasks"),       G_CALLBACK (task_view_unindent_task_cb) },
+	{ "MoveTaskUp",      "planner-stock-move-task-up",     N_("Move Task _Up"),              NULL,                N_("Move the selected tasks upwards"),   G_CALLBACK (task_view_move_task_up_cb) },
+	{ "MoveTaskDown",    "planner-stock-move-task-down",   N_("Move Task Do_wn"),            NULL,                N_("Move the selected tasks downwards"), G_CALLBACK (task_view_move_task_down_cb) },
+	{ "ResetConstraint", "planner-stock-reset-constraint", N_("Reset _Constraint"),          NULL,                NULL,                                    G_CALLBACK (task_view_reset_constraint_cb) },
+	{ "EditCustomProps", GTK_STOCK_PROPERTIES,             N_("_Edit Custom Properties..."), NULL,                NULL,                                    G_CALLBACK (task_view_edit_custom_props_cb) },
 };
 
 static GtkToggleActionEntry toggle_entries[] = {
-	{ "HighlightCriticalTasks", NULL, "_HighlightCriticalPath", NULL, NULL, G_CALLBACK(task_view_highlight_critical_cb), FALSE },
+	{ "HighlightCriticalTasks", NULL, "_HighlightCriticalPath", NULL, NULL, G_CALLBACK (task_view_highlight_critical_cb), FALSE },
 };
 
 static guint n_entries        = G_N_ELEMENTS (entries);

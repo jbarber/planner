@@ -95,9 +95,9 @@ void             print_cleanup                       (PlannerView               
 
 
 static GtkActionEntry entries[] = {
-        { "ZoomOut",   GTK_STOCK_ZOOM_OUT, N_("Zoom out"),    NULL, N_("Zoom out"),                       G_CALLBACK(ttable_view_zoom_out_cb) },
-        { "ZoomIn",    GTK_STOCK_ZOOM_IN,  N_("Zoom in"),     NULL, N_("Zoom in"),                        G_CALLBACK(ttable_view_zoom_in_cb) },
-        { "ZoomToFit", GTK_STOCK_ZOOM_FIT, N_("Zoom to fit"), NULL, N_("Zoom to fit the entire project"), G_CALLBACK(ttable_view_zoom_to_fit_cb) },
+        { "ZoomOut",   GTK_STOCK_ZOOM_OUT, N_("Zoom out"),    NULL, N_("Zoom out"),                       G_CALLBACK (ttable_view_zoom_out_cb) },
+        { "ZoomIn",    GTK_STOCK_ZOOM_IN,  N_("Zoom in"),     NULL, N_("Zoom in"),                        G_CALLBACK (ttable_view_zoom_in_cb) },
+        { "ZoomToFit", GTK_STOCK_ZOOM_FIT, N_("Zoom to fit"), NULL, N_("Zoom to fit the entire project"), G_CALLBACK (ttable_view_zoom_to_fit_cb) },
 };
 
 static guint n_entries = G_N_ELEMENTS (entries);

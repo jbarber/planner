@@ -53,7 +53,7 @@ static GtkActionEntry action_entries[] = {
 	{ "XML Planner Export", NULL,
 	  N_("XML"), NULL,
 	  N_("Exports project to XML"),
-	  G_CALLBACK(xml_planner_plugin_export) },
+	  G_CALLBACK (xml_planner_plugin_export) },
 };
 static guint n_action_entries = G_N_ELEMENTS (action_entries);
 

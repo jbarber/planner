@@ -134,26 +134,26 @@ void              print_cleanup                           (PlannerView          
 
 
 static GtkActionEntry entries[] = {
-	{ "InsertTask",      "planner-stock-insert-task",    N_("_Insert Task"),             "<control>i",        N_("Insert a new task"),                 G_CALLBACK(gantt_view_insert_task_cb) },
-	{ "InsertTasks",     "planner-stock-insert-task",    N_("In_sert Tasks..."),         NULL,                NULL,                                    G_CALLBACK(gantt_view_insert_tasks_cb) },
-	{ "RemoveTask",      "planner-stock-remove-task",    N_("_Remove Task"),             "<control>d",        N_("Remove the selected tasks"),         G_CALLBACK(gantt_view_remove_task_cb) },      /* sensitive = 0 */
-	{ "EditTask",        NULL,                           N_("_Edit Task Properties..."), "<shift><control>e", NULL,                                    G_CALLBACK(gantt_view_edit_task_cb) },        /* sensitive = 0 */
-	{ "SelectAll",       NULL,                           N_("Select _All"),              "<control>a",        N_("Select all tasks"),                  G_CALLBACK(gantt_view_select_all_cb) },
-	{ "UnlinkTask",      "planner-stock-unlink-task",    N_("_Unlink Task"),             NULL,                N_("Unlink the selected tasks"),         G_CALLBACK(gantt_view_unlink_task_cb) },
-	{ "LinkTasks",       "planner-stock-link-task",      N_("_Link Tasks"),              NULL,                N_("Link the selected tasks"),           G_CALLBACK(gantt_view_link_tasks_cb) },
-	{ "IndentTask",      "planner-stock-indent-task",    N_("I_ndent Task"),             "<shift><control>i", N_("Indent the selected tasks"),         G_CALLBACK(gantt_view_indent_task_cb) },      /* sensitive = 0 */
-	{ "UnindentTask",    "planner-stock-unindent-task",  N_("Unin_dent Task"),           "<shift><control>u", N_("Unindent the selected tasks"),       G_CALLBACK(gantt_view_unindent_task_cb) },    /* sensitive = 0 */
-	{ "MoveTaskUp",      "planner-stock-move-task-up",   N_("Move Task _Up"),            NULL,                N_("Move the selected tasks upwards"),   G_CALLBACK(gantt_view_move_task_up_cb) },     /* sensitive = 0 */
-	{ "MoveTaskDown",    "planner-stock-move-task-down", N_("Move Task Do_wn"),          NULL,                N_("Move the selected tasks downwards"), G_CALLBACK(gantt_view_move_task_down_cb) },   /* sensitive = 0 */
-	{ "ResetConstraint", NULL,                           N_("Reset _Constraint"),        NULL,                NULL,                                    G_CALLBACK(gantt_view_reset_constraint_cb) }, /* sensitive = 0 */
-	{ "ZoomToFit",       GTK_STOCK_ZOOM_FIT,             N_("Zoom To _Fit"),             NULL,                N_("Zoom to fit the entire project"),    G_CALLBACK(gantt_view_zoom_to_fit_cb) },
-	{ "ZoomIn",          GTK_STOCK_ZOOM_IN,              N_("_Zoom In"),                 "<control>plus",     N_("Zoom in"),                           G_CALLBACK(gantt_view_zoom_in_cb) },
-	{ "ZoomOut",         GTK_STOCK_ZOOM_OUT,             N_("Zoom _Out"),                "<control>minus",    N_("Zoom out"),                          G_CALLBACK(gantt_view_zoom_out_cb) },
-	{ "Test",            GTK_STOCK_ADD,                  N_("Test"),                     NULL,                NULL,                                    G_CALLBACK(gantt_view_test_cb) },
+	{ "InsertTask",      "planner-stock-insert-task",    N_("_Insert Task"),             "<control>i",        N_("Insert a new task"),                 G_CALLBACK (gantt_view_insert_task_cb) },
+	{ "InsertTasks",     "planner-stock-insert-task",    N_("In_sert Tasks..."),         NULL,                NULL,                                    G_CALLBACK (gantt_view_insert_tasks_cb) },
+	{ "RemoveTask",      "planner-stock-remove-task",    N_("_Remove Task"),             "<control>d",        N_("Remove the selected tasks"),         G_CALLBACK (gantt_view_remove_task_cb) },      /* sensitive = 0 */
+	{ "EditTask",        NULL,                           N_("_Edit Task Properties..."), "<shift><control>e", NULL,                                    G_CALLBACK (gantt_view_edit_task_cb) },        /* sensitive = 0 */
+	{ "SelectAll",       NULL,                           N_("Select _All"),              "<control>a",        N_("Select all tasks"),                  G_CALLBACK (gantt_view_select_all_cb) },
+	{ "UnlinkTask",      "planner-stock-unlink-task",    N_("_Unlink Task"),             NULL,                N_("Unlink the selected tasks"),         G_CALLBACK (gantt_view_unlink_task_cb) },
+	{ "LinkTasks",       "planner-stock-link-task",      N_("_Link Tasks"),              NULL,                N_("Link the selected tasks"),           G_CALLBACK (gantt_view_link_tasks_cb) },
+	{ "IndentTask",      "planner-stock-indent-task",    N_("I_ndent Task"),             "<shift><control>i", N_("Indent the selected tasks"),         G_CALLBACK (gantt_view_indent_task_cb) },      /* sensitive = 0 */
+	{ "UnindentTask",    "planner-stock-unindent-task",  N_("Unin_dent Task"),           "<shift><control>u", N_("Unindent the selected tasks"),       G_CALLBACK (gantt_view_unindent_task_cb) },    /* sensitive = 0 */
+	{ "MoveTaskUp",      "planner-stock-move-task-up",   N_("Move Task _Up"),            NULL,                N_("Move the selected tasks upwards"),   G_CALLBACK (gantt_view_move_task_up_cb) },     /* sensitive = 0 */
+	{ "MoveTaskDown",    "planner-stock-move-task-down", N_("Move Task Do_wn"),          NULL,                N_("Move the selected tasks downwards"), G_CALLBACK (gantt_view_move_task_down_cb) },   /* sensitive = 0 */
+	{ "ResetConstraint", NULL,                           N_("Reset _Constraint"),        NULL,                NULL,                                    G_CALLBACK (gantt_view_reset_constraint_cb) }, /* sensitive = 0 */
+	{ "ZoomToFit",       GTK_STOCK_ZOOM_FIT,             N_("Zoom To _Fit"),             NULL,                N_("Zoom to fit the entire project"),    G_CALLBACK (gantt_view_zoom_to_fit_cb) },
+	{ "ZoomIn",          GTK_STOCK_ZOOM_IN,              N_("_Zoom In"),                 "<control>plus",     N_("Zoom in"),                           G_CALLBACK (gantt_view_zoom_in_cb) },
+	{ "ZoomOut",         GTK_STOCK_ZOOM_OUT,             N_("Zoom _Out"),                "<control>minus",    N_("Zoom out"),                          G_CALLBACK (gantt_view_zoom_out_cb) },
+	{ "Test",            GTK_STOCK_ADD,                  N_("Test"),                     NULL,                NULL,                                    G_CALLBACK (gantt_view_test_cb) },
 };
 
 static GtkToggleActionEntry toggle_entries[] = {
-	{ "HighlightCriticalTasks", NULL, N_("_Highlight Critical Tasks"), NULL, NULL, G_CALLBACK(gantt_view_highlight_critical_cb), FALSE },
+	{ "HighlightCriticalTasks", NULL, N_("_Highlight Critical Tasks"), NULL, NULL, G_CALLBACK (gantt_view_highlight_critical_cb), FALSE },
 };
 
 static guint n_entries        = G_N_ELEMENTS (entries);

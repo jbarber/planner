@@ -193,35 +193,35 @@ static guint signals[LAST_SIGNAL];
 
 static GtkActionEntry entries[] = {
 	{ "File",                       NULL,                    N_("_File"),                    NULL,                NULL,                                                 NULL },
-	{ "FileNew",                    GTK_STOCK_NEW,           N_("_New Project"),             "<Control>n",        N_("Create a new project"),                           G_CALLBACK(window_new_cb) },
-	{ "FileOpen",                   GTK_STOCK_OPEN,          N_("_Open..."),                 "F3",                N_("Open a project"),                                 G_CALLBACK(window_open_cb) },
-	{ "FileSave",                   GTK_STOCK_SAVE,          N_("_Save"),                    "<Control>s",        N_("Save the current project"),                       G_CALLBACK(window_save_cb) },
+	{ "FileNew",                    GTK_STOCK_NEW,           N_("_New Project"),             "<Control>n",        N_("Create a new project"),                           G_CALLBACK (window_new_cb) },
+	{ "FileOpen",                   GTK_STOCK_OPEN,          N_("_Open..."),                 "F3",                N_("Open a project"),                                 G_CALLBACK (window_open_cb) },
+	{ "FileSave",                   GTK_STOCK_SAVE,          N_("_Save"),                    "<Control>s",        N_("Save the current project"),                       G_CALLBACK (window_save_cb) },
 	{ "Export",                     NULL,                    N_("_Export"),                  NULL,                NULL,                                                 NULL },
-	{ "FileSaveAs",                 GTK_STOCK_SAVE_AS,       N_("Save _As..."),              "<Shift><Control>s", N_("Save the current project with a different name"), G_CALLBACK(window_save_as_cb) },
-	{ "FilePrint",                  GTK_STOCK_PRINT,         N_("_Print..."),                "<Control>p",        N_("Print the current project"),                      G_CALLBACK(window_print_cb) },
-	{ "FilePrintPreview",           GTK_STOCK_PRINT_PREVIEW, N_("Print Pre_view"),           "<Shift><Control>p", N_("Print preview of the current project"),           G_CALLBACK(window_print_preview_cb) },
-	{ "FileClose",                  GTK_STOCK_CLOSE,         N_("_Close"),                   "<Control>w",        N_("Close the current file"),                         G_CALLBACK(window_close_cb) },
-	{ "FileExit",                   GTK_STOCK_QUIT,          N_("_Quit"),                    "<Control>q",        N_("Exit the program"),                               G_CALLBACK(window_exit_cb) },
+	{ "FileSaveAs",                 GTK_STOCK_SAVE_AS,       N_("Save _As..."),              "<Shift><Control>s", N_("Save the current project with a different name"), G_CALLBACK (window_save_as_cb) },
+	{ "FilePrint",                  GTK_STOCK_PRINT,         N_("_Print..."),                "<Control>p",        N_("Print the current project"),                      G_CALLBACK (window_print_cb) },
+	{ "FilePrintPreview",           GTK_STOCK_PRINT_PREVIEW, N_("Print Pre_view"),           "<Shift><Control>p", N_("Print preview of the current project"),           G_CALLBACK (window_print_preview_cb) },
+	{ "FileClose",                  GTK_STOCK_CLOSE,         N_("_Close"),                   "<Control>w",        N_("Close the current file"),                         G_CALLBACK (window_close_cb) },
+	{ "FileExit",                   GTK_STOCK_QUIT,          N_("_Quit"),                    "<Control>q",        N_("Exit the program"),                               G_CALLBACK (window_exit_cb) },
 	
 	{ "Edit",                       NULL,                    N_("_Edit"),                    NULL,                NULL,                                                 NULL },
-	{ "EditUndo",                   GTK_STOCK_UNDO,          N_("_Undo"),                    "<Control>z",        N_("Undo the last action"),                           G_CALLBACK(window_undo_cb) },
-	{ "EditRedo",                   GTK_STOCK_REDO,          N_("_Redo"),                    "<Control>r",        N_("Redo the undone action"),                         G_CALLBACK(window_redo_cb) },
+	{ "EditUndo",                   GTK_STOCK_UNDO,          N_("_Undo"),                    "<Control>z",        N_("Undo the last action"),                           G_CALLBACK (window_undo_cb) },
+	{ "EditRedo",                   GTK_STOCK_REDO,          N_("_Redo"),                    "<Control>r",        N_("Redo the undone action"),                         G_CALLBACK (window_redo_cb) },
 	
 	{ "View",                       NULL,                    N_("_View"),                    NULL,                NULL,                                                 NULL },
 	
 	{ "Actions",                    NULL,                    N_("_Actions"),                 NULL,                NULL,                                                 NULL },
 	
 	{ "Project",                    NULL,                    N_("_Project"),                 NULL,                NULL,                                                 NULL },
-	{ "ManageCalendars",            NULL,                    N_("_Manage Calendars"),        NULL,                NULL,                                                 G_CALLBACK(window_manage_calendars_cb) },
-	{ "EditDayTypes",               NULL,                    N_("Edit Day _Types"),          NULL,                NULL,                                                 G_CALLBACK(window_edit_day_types_cb) },
-	{ "EditPhases",                 NULL,                    N_("Edit Project _Phases"),     NULL,                NULL,                                                 G_CALLBACK(window_edit_phases_cb) },
-	{ "EditProjectProps",           GTK_STOCK_PROPERTIES,    N_("_Edit Project Properties"), NULL,                N_("Edit the project properties"),                    G_CALLBACK(window_project_props_cb) },
+	{ "ManageCalendars",            NULL,                    N_("_Manage Calendars"),        NULL,                NULL,                                                 G_CALLBACK (window_manage_calendars_cb) },
+	{ "EditDayTypes",               NULL,                    N_("Edit Day _Types"),          NULL,                NULL,                                                 G_CALLBACK (window_edit_day_types_cb) },
+	{ "EditPhases",                 NULL,                    N_("Edit Project _Phases"),     NULL,                NULL,                                                 G_CALLBACK (window_edit_phases_cb) },
+	{ "EditProjectProps",           GTK_STOCK_PROPERTIES,    N_("_Edit Project Properties"), NULL,                N_("Edit the project properties"),                    G_CALLBACK (window_project_props_cb) },
 	
-	{ "PreferencesEditPreferences", NULL,                    NULL,                           NULL,                NULL,                                                 G_CALLBACK(window_preferences_cb) },
+	{ "PreferencesEditPreferences", NULL,                    NULL,                           NULL,                NULL,                                                 G_CALLBACK (window_preferences_cb) },
 	
 	{ "Help",                       NULL,                    N_("_Help"),                    NULL,                NULL,                                                 NULL },
-	{ "HelpHelp",                   GTK_STOCK_HELP,          N_("_User Guide"),              "F1",                N_("Show the Planner User Guide"),                    G_CALLBACK(window_help_cb) },
-	{ "HelpAbout",                  GNOME_STOCK_ABOUT,       N_("_About"),                   NULL,                N_("About this application"),                         G_CALLBACK(window_about_cb) },
+	{ "HelpHelp",                   GTK_STOCK_HELP,          N_("_User Guide"),              "F1",                N_("Show the Planner User Guide"),                    G_CALLBACK (window_help_cb) },
+	{ "HelpAbout",                  GNOME_STOCK_ABOUT,       N_("_About"),                   NULL,                N_("About this application"),                         G_CALLBACK (window_about_cb) },
 };
 
 static guint n_entries = G_N_ELEMENTS(entries);
@@ -501,7 +501,7 @@ window_populate (PlannerWindow *window)
 
 	gtk_action_group_add_radio_actions (priv->view_actions, r_entries,
 					    g_list_length(priv->views), 0,
-					    G_CALLBACK(window_view_cb), window);
+					    G_CALLBACK (window_view_cb), window);
 
 	xml_string_tmp = g_strdup_printf (xml_string_full,xml_string);
 	if (!gtk_ui_manager_add_ui_from_string(priv->ui_manager, xml_string_tmp, -1, &error)) {
