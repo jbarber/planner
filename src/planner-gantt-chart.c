@@ -162,33 +162,33 @@ static void        gantt_chart_rows_reordered           (GtkTreeModel       *mod
 							 gpointer            data);
 static void        gantt_chart_relation_added           (MrpTask            *task,
 							 MrpRelation        *relation,
-							 PlannerGanttChart       *chart);
+							 PlannerGanttChart  *chart);
 static void        gantt_chart_relation_removed         (MrpTask            *task,
 							 MrpRelation        *relation,
-							 PlannerGanttChart       *chart);
+							 PlannerGanttChart  *chart);
 static void        gantt_chart_task_removed             (MrpTask            *task,
 							 PlannerGanttChart  *chart);
-static void        gantt_chart_build_tree               (PlannerGanttChart       *chart);
-static void        gantt_chart_reflow                   (PlannerGanttChart       *chart,
+static void        gantt_chart_build_tree               (PlannerGanttChart  *chart);
+static void        gantt_chart_reflow                   (PlannerGanttChart  *chart,
 							 gboolean            height_changed);
-static void        gantt_chart_reflow_now               (PlannerGanttChart       *chart);
-static TreeNode *  gantt_chart_insert_task              (PlannerGanttChart       *chart,
+static void        gantt_chart_reflow_now               (PlannerGanttChart  *chart);
+static TreeNode *  gantt_chart_insert_task              (PlannerGanttChart  *chart,
 							 GtkTreePath        *path,
 							 MrpTask            *task);
 static PlannerRelationArrow *
-gantt_chart_add_relation                                (PlannerGanttChart       *chart,
+gantt_chart_add_relation                                (PlannerGanttChart  *chart,
 							 TreeNode           *task,
 							 TreeNode           *predecessor,
-							 MrpRelationType    type);
-static void        gantt_chart_set_scroll_region        (PlannerGanttChart       *chart,
+							 MrpRelationType     type);
+static void        gantt_chart_set_scroll_region        (PlannerGanttChart  *chart,
 							 gdouble             x1,
 							 gdouble             y1,
 							 gdouble             x2,
 							 gdouble             y2);
-static void        gantt_chart_set_zoom                 (PlannerGanttChart       *chart,
+static void        gantt_chart_set_zoom                 (PlannerGanttChart  *chart,
 							 gdouble             level);
-static gint        gantt_chart_get_width                (PlannerGanttChart       *chart);
-static PlannerGanttRow *gantt_chart_get_row_from_task        (PlannerGanttChart       *chart,
+static gint        gantt_chart_get_width                (PlannerGanttChart  *chart);
+static PlannerGanttRow *gantt_chart_get_row_from_task   (PlannerGanttChart  *chart,
 							 MrpTask            *task);
 static TreeNode *  gantt_chart_tree_node_new            (void);
 static void        gantt_chart_tree_node_insert_path    (TreeNode           *node,
@@ -197,7 +197,7 @@ static void        gantt_chart_tree_node_insert_path    (TreeNode           *nod
 static void        gantt_chart_tree_node_dump           (TreeNode           *node);
 static TreeNode *  gantt_chart_tree_node_at_path        (TreeNode           *root,
 							 GtkTreePath        *path);
-static void        gantt_chart_tree_node_remove         (PlannerGanttChart       *chart,
+static void        gantt_chart_tree_node_remove         (PlannerGanttChart  *chart,
 							 TreeNode           *node);
 static void        gantt_chart_tree_traverse            (TreeNode           *node,
 							 TreeFunc            func,
@@ -801,12 +801,13 @@ gantt_chart_build_relations (PlannerGanttChart *chart,
 	MrpRelationType	       rel_type;
 
 	priv = chart->priv;
-	
+
 	do {
 		task = planner_gantt_model_get_task (PLANNER_GANTT_MODEL (priv->model),
 						     iter);
 		
 		relations = mrp_task_get_predecessor_relations (task);
+
 		for (l = relations; l; l = l->next) {
 			relation = l->data;
 
@@ -1185,7 +1186,7 @@ gantt_chart_relation_added (MrpTask           *task,
 	MrpRelationType	      rel_type;
 
 	predecessor = mrp_relation_get_predecessor (relation);
-	
+
 	if (g_getenv ("PLANNER_DEBUG_UNDO_TASK")) {
 		g_message ("Adding a new relation arrow (%p): %s (%p) -> %s (%p)", 
 			   relation, 
@@ -1256,14 +1257,14 @@ gantt_chart_task_removed (MrpTask            *task,
 
 	relations = mrp_task_get_predecessor_relations (task);
 	for (l = relations; l; l = l->next) {
-		g_hash_table_remove (chart->priv->relation_hash, l->data);
+		gantt_chart_relation_removed (task, l->data, chart);
 	}
-
+	
 	relations = mrp_task_get_successor_relations (task);
 	for (l = relations; l; l = l->next) {
-		g_hash_table_remove (chart->priv->relation_hash, l->data);
-	}
-
+		gantt_chart_relation_removed (task, l->data, chart);
+	} 
+	
 	g_signal_handlers_disconnect_by_func (task, gantt_chart_relation_added, chart);
 	g_signal_handlers_disconnect_by_func (task, gantt_chart_relation_removed, chart);
 	g_signal_handlers_disconnect_by_func (task, gantt_chart_task_removed, chart);
@@ -1702,7 +1703,7 @@ gantt_chart_set_scroll_region (PlannerGanttChart *chart,
 
 static PlannerGanttRow *
 gantt_chart_get_row_from_task (PlannerGanttChart *chart,
-			       MrpTask      *task)
+			       MrpTask           *task)
 {
 	PlannerGanttModel *model;
 	GtkTreePath  *path;

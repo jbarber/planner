@@ -1,3 +1,9 @@
+2004-06-22  Alvaro del Castillo  <acs@barrapunto.com>
+
+	* src/planner-gantt-chart.c:
+	Remove the relations using gantt_chart_relation_removed
+	not just removing the relation from the hash table.
+
 2004-06-22  Richard Hult  <richard@imendio.com>
 
 	* src/planner-task-dialog.c (task_dialog_update_sensitivity):
