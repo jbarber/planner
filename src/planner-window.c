@@ -318,20 +318,21 @@ window_init (PlannerWindow *window)
 static void
 window_finalize (GObject *object)
 {
-	PlannerWindow *window = PLANNER_WINDOW (object);
+	PlannerWindow     *window = PLANNER_WINDOW (object);
+	PlannerWindowPriv *priv = window->priv;
 
 	d(g_print ("Window::Finalize\n"));
 
-	if (window->priv->application) {
-		g_object_unref (window->priv->application);
-		window->priv->application = NULL;
+	if (priv->application) {
+		g_object_unref (priv->application);
 	}
-
-	if (window->priv->last_saved) {
-		g_timer_destroy (window->priv->last_saved);
-		window->priv->last_saved = NULL;
+	if (priv->last_saved) {
+		g_timer_destroy (priv->last_saved);
 	}
-
+	if (priv->cmd_manager) {
+		g_object_unref (priv->cmd_manager);
+	}
+	
 	g_free (window->priv);
 
 	if (G_OBJECT_CLASS (parent_class)->finalize) {
@@ -1485,7 +1486,7 @@ planner_window_new (PlannerApplication *application)
 	PlannerWindowPriv *priv;
 	
 	window = g_object_new (PLANNER_TYPE_MAIN_WINDOW, NULL);
-	priv   = window->priv;
+	priv = window->priv;
 	
 	priv->application = g_object_ref (application);
 	

@@ -1,8 +1,29 @@
+2003-12-15  Richard Hult  <richard@imendio.com>
+
+	* src/planner-html-plugin.c (html_plugin_ok_button_clicked): Fix
+	bug #129375.
+
+	* src/planner-cmd-manager.c: More work.
+
+	* src/planner-task-tree.c: (task_cmd_insert_do),
+	(task_cmd_insert),
+	(planner_task_tree_insert_task): 
+	(planner_task_tree_insert_subtask): Start editing for newly
+	inserted tasks.
+	
+	* src/planner-window.c: (window_finalize): Unref the cmd manager.
+
+2003-12-14  Richard Hult  <richard@imendio.com>
+
+	* configure.in:
+	* docs/libplanner/Makefile.am: Clean up flags even more, and fix
+	bug #129321.
+
 2003-12-14  Richard Hult  <richard@imendio.com>
 
 	* libplanner/mrp-object.[ch]
 	* libplanner/mrp-private.h:
-	* libplanner/mrp-project.c: Work in prograss.
+	* libplanner/mrp-project.c: Work in progress.
 
 2003-12-14  Cédric Delfosse <cdelfosse@free.fr>
 

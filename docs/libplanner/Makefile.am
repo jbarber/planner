@@ -43,7 +43,6 @@ extra_files =
 # CFLAGS and LDFLAGS for compiling scan program. Only needed
 # if $(DOC_MODULE).types is non-empty.
 GTKDOC_CFLAGS = 					\
-	@DOC_CFLAGS@					\
 	$(LIBPLANNER_CFLAGS)				\
 	-I$(top_srcdir) 				\
 	-I$(top_builddir)/libplanner

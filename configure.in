@@ -22,7 +22,16 @@ if test x$PKG_CONFIG = xno ; then
   AC_MSG_ERROR([*** pkg-config not found. See http://www.freedesktop.org/software/pkgconfig/])
 fi
 
-GTK_DOC_CHECK
+dnl  -------------
+dnl | API docs    |--------------------------------------------
+dnl  -------------
+GTK_DOC_CHECK(1.0)
+
+dnl NOTE: We need to use a separate automake conditional for this
+dnl       to make this work with the tarballs.
+AM_CONDITIONAL(ENABLE_GTK_DOC, test x$enable_gtk_doc = xyes)
+dnl -----------------------------------------------------------
+
 
 dnl ==========================================================================
 dnl
@@ -147,65 +156,9 @@ AC_SUBST(XSLT_CFLAGS)
 AC_SUBST(XSLT_LIBS)
 dnl -----------------------------------------------------------
 
-
-dnl ================================
-dnl | API documentation            |---------------------------
-dnl ================================
-
-AC_CHECK_PROG(GTKDOC, gtkdoc-mkdb, true, false)
-
-gtk_doc_min_version=0.10
-if $GTKDOC ; then
-    gtk_doc_version=`gtkdoc-mkdb --version`
-    AC_MSG_CHECKING([gtk-doc version ($gtk_doc_version) >= $gtk_doc_min_version])
-
-    IFS="${IFS= 	}"; mrp_save_IFS="$IFS"; IFS="."
-    set $gtk_doc_version
-    for min in $gtk_doc_min_version ; do
-        cur=$1; shift
-        if test -z $min ; then break; fi
-        if test -z $cur ; then GTKDOC=false; break; fi
-        if test $cur -gt $min ; then break ; fi
-        if test $cur -lt $min ; then GTKDOC=false; break ; fi
-    done
-    IFS="$mrp_save_IFS"
-
-    if $GTKDOC ; then
-      AC_MSG_RESULT(yes)
-    else
-      AC_MSG_RESULT(no)
-    fi
-fi
-
-AC_CHECK_PROG(DB2HTML, db2html, true, false)
-AM_CONDITIONAL(HAVE_DOCBOOK, $DB2HTML)
-
-dnl Make people enable the gtk-doc stuff explicitely.
-AC_ARG_ENABLE(gtk-doc, [  --enable-gtk-doc        use gtk-doc to build documentation [default=auto]], enable_gtk_doc="$enableval", enable_gtk_doc=auto)
-
-if test x$enable_gtk_doc = xyes ; then
-  if test x$GTKDOC != xtrue ; then
-    enable_gtk_doc=no 
-  fi
-fi
-
-dnl NOTE: We need to use a separate automake conditional for this
-dnl       to make this work with the tarballs.
-AM_CONDITIONAL(ENABLE_GTK_DOC, test x$enable_gtk_doc = xyes)
-
-AC_PATH_PROG(SGML2HTML, sgml2html, no)
-AM_CONDITIONAL(HAVE_SGML2HTML, test x$SGML2HTML != xno)
-dnl -----------------------------------------------------------
-
-dnl  -------------
-dnl | Build Flags |--------------------------------------------
-dnl  -------------
-DOC_CFLAGS="$LIBPLANNER_CFLAGS"
-#CFLAGS="$CFLAGS $WARN_CFLAGS"
-AC_SUBST(DOC_CFLAGS)
-
-dnl scrollkeeper checks
-                                                                                
+dnl  ------------------
+dnl | Scrollkeeper     |---------------------------------------
+dnl  ------------------
 AC_PATH_PROG(SCROLLKEEPER_CONFIG, scrollkeeper-config,no)
 if test x$SCROLLKEEPER_CONFIG = xno; then
   AC_MSG_ERROR(Couldn't find scrollkeeper-config. Please install the scrollkeeper package)

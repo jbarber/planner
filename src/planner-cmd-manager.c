@@ -25,8 +25,12 @@
 #include "planner-marshal.h"
 
 struct _PlannerCmdManagerPriv {
+	gint   limit;
+	
 	GList *list;
 	GList *current;
+
+	/* FIXME: add transactions */
 };
 
 /* Signals */
@@ -42,7 +46,8 @@ static guint signals[LAST_SIGNAL];
 static void cmd_manager_class_init (PlannerCmdManagerClass *klass);
 static void cmd_manager_init       (PlannerCmdManager      *manager);
 static void cmd_manager_finalize   (GObject                *object);
-
+static void cmd_manager_free_func  (PlannerCmd             *cmd,
+				    gpointer                data);
 
 GType
 planner_cmd_manager_get_type (void)
@@ -105,15 +110,22 @@ cmd_manager_class_init (PlannerCmdManagerClass *klass)
 static void
 cmd_manager_init (PlannerCmdManager *manager)
 {
-	manager->priv = g_new0 (PlannerCmdManagerPriv, 1);
+	PlannerCmdManagerPriv *priv;
+	
+	priv = g_new0 (PlannerCmdManagerPriv, 1);
+	manager->priv = priv;
+
+	/* FIXME: What default to use? */
+	priv->limit = 100;
 }
 
 static void
 cmd_manager_finalize (GObject *object)
 {
-	PlannerCmdManager *manager = PLANNER_CMD_MANAGER (object);
-
-	/* FIXME: Free the list with cmds. */
+	PlannerCmdManager     *manager = PLANNER_CMD_MANAGER (object);
+	PlannerCmdManagerPriv *priv = manager->priv;;
+	
+	g_list_foreach (priv->list, (GFunc) cmd_manager_free_func, NULL);
 	
 	g_free (manager->priv);
 	
@@ -152,30 +164,32 @@ cmd_manager_dump (PlannerCmdManager *manager)
 	g_print ("\n");
 }
 
-static void
-state_changed (PlannerCmdManager *manager)
+static PlannerCmd *
+get_undo_cmd (PlannerCmdManager *manager, gboolean next)
+{
+	PlannerCmdManagerPriv *priv = manager->priv;
+	PlannerCmd            *cmd;
+	
+	if (priv->current) {
+		cmd = priv->current->data;
+
+		if (next) {
+			priv->current = priv->current->next;
+		}
+		
+		return cmd;
+	}
+
+	return NULL;
+}
+
+static PlannerCmd *
+get_redo_cmd (PlannerCmdManager *manager, gboolean next)
 {
 	PlannerCmdManagerPriv *priv = manager->priv;
 	GList                 *l;
-	gchar                 *label;
 	PlannerCmd            *cmd;
 	
-	/* Undo */
-	l = priv->current;
-
-	if (l) {
-		cmd = l->data;
-		label = g_strdup_printf (_("_Undo '%s'"), cmd->label);
-	} else {
-		label = g_strdup (_("_Undo"));
-	}
-	
-	g_signal_emit (manager, signals[UNDO_STATE_CHANGED], 0, l != NULL, label);
-
-	g_free (label);
-	
-	/* Redo */
-
 	if (!priv->current && priv->list) {
 		l = g_list_last (priv->list);
 	}
@@ -184,17 +198,58 @@ state_changed (PlannerCmdManager *manager)
 	} else {
 		l = priv->current->prev;
 	}
+
+	if (!l) {
+		return NULL;
+	}
+
+	if (next) {
+		priv->current = l;
+	}
+
+	cmd = l->data;
+
+	return cmd;
+}
+
+static void
+state_changed (PlannerCmdManager *manager)
+{
+	gchar      *label;
+	PlannerCmd *cmd;
 	
-	if (l) {
-		cmd = l->data;
+	/* Undo */
+	cmd = get_undo_cmd (manager, FALSE);
+	if (cmd) {
+		label = g_strdup_printf (_("_Undo '%s'"), cmd->label);
+	} else {
+		label = g_strdup (_("_Undo"));
+	}
+	
+	g_signal_emit (manager, signals[UNDO_STATE_CHANGED], 0, cmd != NULL, label);
+
+	g_free (label);
+	
+	/* Redo */
+	cmd = get_redo_cmd (manager, FALSE);
+	if (cmd) {
 		label = g_strdup_printf (_("_Redo '%s'"), cmd->label);
 	} else {
 		label = g_strdup (_("_Redo"));
 	}
-
-	g_signal_emit (manager, signals[REDO_STATE_CHANGED], 0, l != NULL, label);
+	
+	g_signal_emit (manager, signals[REDO_STATE_CHANGED], 0, cmd != NULL, label);
 
 	g_free (label);
+}
+
+static void
+cmd_manager_free_func (PlannerCmd *cmd,
+		       gpointer    data)
+{
+	if (cmd->free_func) {
+		cmd->free_func (cmd);
+	}
 }
 
 void
@@ -220,7 +275,7 @@ planner_cmd_manager_insert_and_do (PlannerCmdManager *manager, PlannerCmd *cmd)
 			current->prev = NULL;
 		}
 
-		/* FIXME: g_list_foreach (next, (GFunc) cmd_free); */
+		g_list_foreach (priv->list, (GFunc) cmd_manager_free_func, NULL);
 		g_list_free (priv->list);
 
 		priv->list = current;
@@ -246,15 +301,13 @@ planner_cmd_manager_undo (PlannerCmdManager *manager)
 
 	priv = manager->priv;
 
-	if (!priv->current) {
+	cmd = get_undo_cmd (manager, TRUE);
+
+	if (!cmd) {
 		return FALSE;
 	}
 
-	cmd = priv->current->data;
-
 	cmd->undo_func (cmd);
-
-	priv->current = priv->current->next;
 
 	cmd_manager_dump (manager);
 
@@ -273,16 +326,10 @@ planner_cmd_manager_redo (PlannerCmdManager *manager)
 
 	priv = manager->priv;
 
-	if (!priv->current && priv->list) {
-		priv->current = g_list_last (priv->list);
-	}
-	else if (!priv->current || !priv->current->prev) {
+	cmd = get_redo_cmd (manager, TRUE);
+	if (!cmd) {
 		return FALSE;
-	} else {
-		priv->current = priv->current->prev;
 	}
-
-	cmd = priv->current->data;
 
 	cmd->do_func (cmd);
 

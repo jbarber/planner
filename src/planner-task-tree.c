@@ -252,9 +252,9 @@ task_cmd_insert_do (PlannerCmd *cmd_base)
 	gtk_tree_path_free (path);
 	
 	task = g_object_new (MRP_TYPE_TASK,
-			     "name", cmd->name,
 			     "work", cmd->work,
 			     "duration", cmd->duration,
+			     "name", cmd->name ? cmd->name : "",
 			     NULL);
 	
 	mrp_project_insert_task (cmd->project,
@@ -287,7 +287,6 @@ task_cmd_insert (PlannerTaskTree *tree,
 	PlannerTaskTreePriv *priv = tree->priv;
 	PlannerCmd          *cmd_base;
 	TaskCmdInsert       *cmd;
-	static gint          i = 1;
 
 	cmd = g_new0 (TaskCmdInsert, 1);
 
@@ -301,8 +300,6 @@ task_cmd_insert (PlannerTaskTree *tree,
 	cmd->tree = tree;
 	cmd->project = task_tree_get_project (tree);
 
-	cmd->name = g_strdup_printf ("Foo %d", i++);
-	
 	cmd->path = gtk_tree_path_copy (path);
 	cmd->work = work;
 	cmd->duration = duration;
@@ -1823,8 +1820,8 @@ planner_task_tree_insert_subtask (PlannerTaskTree *tree)
 	
 	gtk_tree_view_set_cursor (tree_view,
 				  path,
-				  NULL,
-				  FALSE);
+				  gtk_tree_view_get_column (tree_view, 0),
+				  TRUE);
 	
 	gtk_tree_path_free (path);
 
@@ -1884,8 +1881,8 @@ planner_task_tree_insert_task (PlannerTaskTree *tree)
 	
 	gtk_tree_view_set_cursor (tree_view,
 				  path,
-				  NULL,
-				  FALSE);
+				  gtk_tree_view_get_column (tree_view, 0),
+				  TRUE);
 
 	gtk_tree_path_free (path);
 

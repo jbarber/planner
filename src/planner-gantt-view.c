@@ -858,9 +858,9 @@ idle_update_heights (PlannerView *view)
 }
 
 static void
-gantt_view_tree_style_set_cb (GtkWidget *tree,
-			      GtkStyle  *prev_style,
-			      PlannerView    *view)
+gantt_view_tree_style_set_cb (GtkWidget   *tree,
+			      GtkStyle    *prev_style,
+			      PlannerView *view)
 {
 	if (prev_style) {
 		g_idle_add ((GSourceFunc) idle_update_heights, view);
