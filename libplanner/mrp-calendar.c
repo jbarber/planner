@@ -1196,7 +1196,7 @@ imrp_calendar_replace_day (MrpCalendar *calendar,
 		/*g_print ("Got overriden day, %s\n",
 		  mrp_time_format ("%H:%M %a %e %b", date));*/
 
-		mrp_calendar_set_days (calendar, date, new_day, -1);
+		mrp_calendar_set_days (calendar, date, new_day, (mrptime) -1);
 	}		
 
 	g_list_free (data.list);

@@ -146,7 +146,7 @@ cal_cmd_day_type_do (PlannerCmd *cmd_base)
 		g_message ("Changing calendar for day ...");
 	}
 
-	mrp_calendar_set_days (cmd->calendar, cmd->time, cmd->day, -1);
+	mrp_calendar_set_days (cmd->calendar, cmd->time, cmd->day, (mrptime) -1);
 
 	return TRUE;
 }
@@ -156,7 +156,7 @@ cal_cmd_day_type_undo (PlannerCmd *cmd_base)
 {
 	CalCmdDayType *cmd = (CalCmdDayType*) cmd_base;
 
-	mrp_calendar_set_days (cmd->calendar, cmd->time, cmd->old_day, -1);
+	mrp_calendar_set_days (cmd->calendar, cmd->time, cmd->old_day, (mrptime) -1);
 }
 
 
@@ -838,7 +838,7 @@ cal_dialog_apply_clicked_cb (GtkWidget  *button,
 	
 	planner_calendar_get_date (PLANNER_CALENDAR (data->calendar), &y, &m, &d);
 	t = mrp_time_compose (y, m + 1, d, 0, 0, 0);
-	/* mrp_calendar_set_days (calendar, t, day, -1); */
+	/* mrp_calendar_set_days (calendar, t, day, (mrptime) -1); */
 	planner_cal_cmd_day_type (data->main_window, calendar, day, t);
 }
 

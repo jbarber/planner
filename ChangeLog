@@ -1,3 +1,13 @@
+2005-01-30  Richard Hult  <richard@imendio.com>
+
+	* gtk-doc.make: Updated by gtk-doc.
+
+	* libplanner/mrp-calendar.c: (imrp_calendar_replace_day):
+	* libplanner/mrp-old-xml.c: (old_xml_read_overridden_day):
+	* src/planner-calendar-dialog.c: (cal_cmd_day_type_do),
+	(cal_cmd_day_type_undo), (cal_dialog_apply_clicked_cb): Fix 64-bit
+	platform crash.
+	
 2004-11-25  Christoffer Olsen  <co@deworks.net>
 
 	* configure.in: Added data/planner.desktop.in to AC_OUTPUT

@@ -647,7 +647,7 @@ old_xml_read_overridden_day (MrpParser   *parser,
 	
 	if (sscanf (xml_str, "%04d%02d%02d", &y, &m, &d) == 3) {
 		date = mrp_time_compose (y, m, d, 0, 0, 0);
-		mrp_calendar_set_days (calendar, date, mrp_day, -1);		
+		mrp_calendar_set_days (calendar, date, mrp_day, (mrptime) -1);		
 	} else {
 		g_warning ("Invalid time format for overridden day.");
 	}
