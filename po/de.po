@@ -7,7 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: MrProject HEAD\n"
-"POT-Creation-Date: 2003-12-01 23:08+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-12-03 17:41+0100\n"
 "PO-Revision-Date: 2003-04-17 18:02+0200\n"
 "Last-Translator: Christian Neumair <chris@gnome-de.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
@@ -16,9 +17,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: data/planner.desktop.in.h:1
-#, fuzzy
 msgid "Planner Project Management"
-msgstr "MrProject Projektverwaltung"
+msgstr "Planner Projektverwaltung"
 
 #: data/planner.desktop.in.h:2
 msgid "Project Management"
@@ -101,9 +101,8 @@ msgid "Print"
 msgstr "Drucken"
 
 #: data/ui/main-window.ui.h:19
-#, fuzzy
 msgid "Print preview of the current project"
-msgstr "Das aktuelle Projekt drucken"
+msgstr "Eine Vorschau auf das momentan geöffnete Projekt drucken"
 
 #: data/ui/main-window.ui.h:20
 msgid "Print the current project"
@@ -186,9 +185,8 @@ msgid "_Paste"
 msgstr "E_infügen"
 
 #: data/ui/main-window.ui.h:40
-#, fuzzy
 msgid "_Print Preview"
-msgstr "Druckvorschau"
+msgstr "Druck_vorschau"
 
 #: data/ui/main-window.ui.h:41
 msgid "_Print..."
@@ -668,7 +666,6 @@ msgid "Custom Properties"
 msgstr "Eigenschaften anpassen"
 
 #: data/glade/resource-dialog.glade.h:2
-#, fuzzy
 msgid "C_ost:"
 msgstr "_Kosten:"
 
@@ -775,7 +772,6 @@ msgstr "%"
 
 # missing accelerator
 #: data/glade/task-dialog.glade.h:5
-#, fuzzy
 msgid "C_omplete:"
 msgstr "_Abgeschlossen:"
 
@@ -847,9 +843,8 @@ msgid "A Project Management application for the GNOME desktop"
 msgstr "Eine Anwendung zur Projektverwaltung für die GNOME-Desktop-Umgebung"
 
 #: src/planner-main-window.c:1007
-#, fuzzy
 msgid "The Planner Homepage"
-msgstr "Die MrProject-Homepage"
+msgstr "Die Planner-Homepage"
 
 #: src/planner-main-window.c:1083
 msgid "If you don't save, changes made the last minute will be discarded."
@@ -916,7 +911,7 @@ msgid ""
 "After doing this, you can remove all constraints by selecting the menu item "
 "'Remove all constraints' in the 'Edit' menu."
 msgstr ""
-"Sie haben eine Datei geöffnet, die mit einer alten MrProject-Version "
+"Sie haben eine Datei geöffnet, die mit einer alten Planner-Version "
 "gespeichert wurde.\n"
 "\n"
 "Beim Laden von alten Dateien verwenden alle Aufgaben die Einschränkung »Muss "
@@ -1510,64 +1505,3 @@ msgstr "Gruppe"
 #: src/planner-resource-view.c:1040
 msgid "Email"
 msgstr "E-Mail"
-
-#~ msgid "Contribute to MrProject"
-#~ msgstr "An MrProject mitwirken"
-
-#~ msgid "MrProject Project Management Tool"
-#~ msgstr "Werkzeug zur Koordination von Projekten"
-
-#~ msgid "Documents"
-#~ msgstr "Dokumente"
-
-#~ msgid "MrProject project file"
-#~ msgstr "MrProject-Projektdatei"
-
-#~ msgid "About"
-#~ msgstr "Info"
-
-#~ msgid "Close"
-#~ msgstr "Schließen"
-
-#~ msgid "Edit day types"
-#~ msgstr "Tagestypen bearbeiten"
-
-#~ msgid "Edit project phases"
-#~ msgstr "Projektphasen bearbeiten"
-
-#~ msgid "Quit"
-#~ msgstr "Beenden"
-
-#~ msgid "Save _As"
-#~ msgstr "Speichern _unter"
-
-#~ msgid "User Guide"
-#~ msgstr "Benutzerhandbuch"
-
-#~ msgid "_Open"
-#~ msgstr "Ö_ffnen"
-
-#~ msgid "Down"
-#~ msgstr "Unten"
-
-#~ msgid "Remove task"
-#~ msgstr "Aufgabe löschen"
-
-#~ msgid "Up"
-#~ msgstr "Oben"
-
-# Better translation for resource
-#~ msgid "Remove resource"
-#~ msgstr "Ressource löschen"
-
-#~ msgid "<no name>"
-#~ msgstr "<namenlos>"
-
-#~ msgid "Enable/disable the 8 hour working day calendar"
-#~ msgstr "Den 8-Stunden-Arbeitstag-Kalender aktivieren/deaktivieren"
-
-#~ msgid "Use calendar"
-#~ msgstr "Kalender verwenden"
-
-#~ msgid "(C) 2001 - 2002 CodeFactory AB"
-#~ msgstr "© 2001-2002 CodeFactory AB"
