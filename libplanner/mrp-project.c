@@ -767,7 +767,7 @@ project_do_save (MrpProject   *project,
 		if (!project_set_storage (project, "sql")) {
 			g_set_error (error, MRP_ERROR,
 				     MRP_ERROR_NO_FILE_MODULE,
-				     _("No support for SQL storage built into this version of MrProject."));
+				     _("No support for SQL storage built into this version of Planner."));
 			return FALSE;
 		}
 	} else {
@@ -1031,7 +1031,7 @@ project_load_from_sql (MrpProject   *project,
 	if (!project_set_storage (project, "sql")) {
 		g_set_error (error, MRP_ERROR,
 			     MRP_ERROR_NO_FILE_MODULE,
-			     _("No support for SQL storage built into this version of MrProject."));
+			     _("No support for SQL storage built into this version of Planner."));
 		return FALSE;
 	}
 
@@ -1097,7 +1097,7 @@ project_set_storage (MrpProject  *project,
 
 /**
  * mrp_project_close:
- * @project: an #MrProject
+ * @project: an #MrpProject
  * 
  * Closes a project.
  **/

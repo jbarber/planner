@@ -1,5 +1,23 @@
 2003-12-11  Richard Hult  <richard@imendio.com>
 
+	* data/glade/calendar-dialog.glade: Remove unnecessary string.
+	
+	* libplanner/mrp-project.c: (project_do_save),
+	(project_load_from_sql): Update strings.
+	
+	* src/planner-marshal.list:
+	* src/planner-cmd-manager.c: 
+	* src/planner-window.c: (window_undo_state_changed_cb),
+	(window_redo_state_changed_cb): Set the labels for undo/redo to
+	a string including the name of the command.
+
+	* src/planner-task-tree.c: (task_cmd_insert),
+	(task_cmd_edit_property), (planner_task_tree_insert_subtask),
+	(planner_task_tree_insert_task): Implement undo for insert
+	subtask.
+
+2003-12-11  Richard Hult  <richard@imendio.com>
+
 	* Makefile.am: Fix distcheck.
 	* libplanner/mrp-xsl.c: (html_write): Tweak.
 	* src/planner-html-plugin.c:

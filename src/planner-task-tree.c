@@ -168,6 +168,45 @@ static MrpTask *   task_tree_get_task_from_path        (PlannerTaskTree      *tr
 							GtkTreePath          *path);
 
 
+static GtkTreeViewClass *parent_class = NULL;
+static guint signals[LAST_SIGNAL];
+
+enum {
+	POPUP_NONE,
+	POPUP_INSERT,
+	POPUP_SUBTASK,
+	POPUP_REMOVE,
+	POPUP_UNLINK,
+	POPUP_EDIT
+};
+
+
+#define GIF_CB(x) ((GtkItemFactoryCallback)(x))
+
+static GtkItemFactoryEntry popup_menu_items[] = {
+	{ N_("/_Insert task"),       NULL, GIF_CB (task_tree_popup_insert_task_cb),
+	  POPUP_INSERT,  "<Item>",       NULL
+	},
+	{ N_("/_Insert subtask"),    NULL, GIF_CB (task_tree_popup_insert_subtask_cb),
+	  POPUP_SUBTASK, "<Item>",       NULL
+	},
+	{ N_("/_Remove task"),       NULL, GIF_CB (task_tree_popup_remove_task_cb),
+	  POPUP_REMOVE,  "<StockItem>",  GTK_STOCK_DELETE
+	},
+	{ "/sep1",                   NULL, 0,
+	  POPUP_NONE,    "<Separator>" },
+	{ N_("/_Unlink task"),       NULL, GIF_CB (task_tree_popup_unlink_task_cb),
+	  POPUP_UNLINK,  "<Item>",       NULL
+	},
+	{ "/sep2",                   NULL, 0,
+	  POPUP_NONE,    "<Separator>"
+	},
+	{ N_("/_Edit task..."),      NULL, GIF_CB (task_tree_popup_edit_task_cb),
+	  POPUP_EDIT,    "<Item>",       NULL
+	}
+};
+
+
 /*
  * Commands
  */
@@ -201,9 +240,10 @@ task_cmd_insert_do (PlannerCmd *cmd_base)
 	path = gtk_tree_path_copy (cmd->path);
 
 	depth = gtk_tree_path_get_depth (path);
-	position = gtk_tree_path_get_indices (path)[depth];
+	position = gtk_tree_path_get_indices (path)[depth - 1];
 
-	if (gtk_tree_path_up (path) && gtk_tree_path_get_depth (path) > 0) {
+	if (depth > 1) {
+		gtk_tree_path_up (path);
 		parent = task_tree_get_task_from_path (cmd->tree, path);
 	} else {
 		parent = NULL;
@@ -253,7 +293,7 @@ task_cmd_insert (PlannerTaskTree *tree,
 
 	cmd_base = (PlannerCmd*) cmd;
 
-	cmd_base->label = g_strdup ("Insert task");
+	cmd_base->label = g_strdup (_("Insert task"));
 	cmd_base->do_func = task_cmd_insert_do;
 	cmd_base->undo_func = task_cmd_insert_undo;
 	cmd_base->free_func = NULL; /* FIXME */
@@ -263,7 +303,7 @@ task_cmd_insert (PlannerTaskTree *tree,
 
 	cmd->name = g_strdup_printf ("Foo %d", i++);
 	
-	cmd->path = path;
+	cmd->path = gtk_tree_path_copy (path);
 	cmd->work = work;
 	cmd->duration = duration;
 	
@@ -330,7 +370,7 @@ task_cmd_edit_property (PlannerTaskTree *tree,
 
 	cmd_base = (PlannerCmd*) cmd;
 
-	cmd_base->label = g_strdup ("Edit task property");
+	cmd_base->label = g_strdup (_("Edit task property"));
 
 	cmd_base->do_func = task_cmd_edit_property_do;
 	cmd_base->undo_func = task_cmd_edit_property_undo;
@@ -349,9 +389,8 @@ task_cmd_edit_property (PlannerTaskTree *tree,
 	g_value_init (cmd->value, G_VALUE_TYPE (value));
 	g_value_copy (value, cmd->value);
 
-	// FIXME
 	cmd->old_value = g_new0 (GValue, 1);
-	g_value_init (cmd->old_value, G_TYPE_STRING);
+	g_value_init (cmd->old_value, G_VALUE_TYPE (value));
 
 	g_object_get_property (G_OBJECT (task),
 			       cmd->property,
@@ -362,34 +401,6 @@ task_cmd_edit_property (PlannerTaskTree *tree,
 	return cmd_base;
 }
 
-
-
-
-
-static GtkTreeViewClass *parent_class = NULL;
-static guint signals[LAST_SIGNAL];
-
-enum {
-	POPUP_NONE,
-	POPUP_INSERT,
-	POPUP_SUBTASK,
-	POPUP_REMOVE,
-	POPUP_UNLINK,
-	POPUP_EDIT
-};
-
-
-#define GIF_CB(x) ((GtkItemFactoryCallback)(x))
-
-static GtkItemFactoryEntry popup_menu_items[] = {
-	{ N_("/_Insert task"),       NULL, GIF_CB (task_tree_popup_insert_task_cb),    POPUP_INSERT,  "<Item>",       NULL },
-	{ N_("/_Insert subtask"),    NULL, GIF_CB (task_tree_popup_insert_subtask_cb), POPUP_SUBTASK, "<Item>",       NULL },
-	{ N_("/_Remove task"),       NULL, GIF_CB (task_tree_popup_remove_task_cb),    POPUP_REMOVE,  "<StockItem>",  GTK_STOCK_DELETE },
-	{ "/sep1",                   NULL, 0,                                          POPUP_NONE,    "<Separator>" },
-	{ N_("/_Unlink task"),       NULL, GIF_CB (task_tree_popup_unlink_task_cb),    POPUP_UNLINK,  "<Item>",       NULL },
-	{ "/sep2",                   NULL, 0,                                          POPUP_NONE,    "<Separator>" },
-	{ N_("/_Edit task..."),      NULL, GIF_CB (task_tree_popup_edit_task_cb),      POPUP_EDIT,    "<Item>",       NULL }, 
-};
 
 
 GType
@@ -1749,12 +1760,15 @@ planner_task_tree_new (PlannerWindow *main_window,
 void
 planner_task_tree_insert_subtask (PlannerTaskTree *tree)
 {
-	GtkTreeView  *tree_view;
+	GtkTreeView       *tree_view;
 	PlannerGanttModel *model;
-	GtkTreePath  *path;
-	MrpTask      *task, *parent;
-	GList        *list;
-	gint          work;
+	GtkTreePath       *path;
+	MrpTask           *parent;
+	GList             *list;
+	gint               work;
+	gint               position;
+	TaskCmdInsert     *cmd;
+	GtkTreeIter        iter;
 
 	list = planner_task_tree_get_selected_tasks (tree);
 	if (list == NULL) {
@@ -1763,29 +1777,31 @@ planner_task_tree_insert_subtask (PlannerTaskTree *tree)
 
 	parent = list->data;
 
+	model = PLANNER_GANTT_MODEL (gtk_tree_view_get_model (GTK_TREE_VIEW (tree)));
+
+	path = planner_gantt_model_get_path_from_task (model, parent);
+
+	if (gtk_tree_model_get_iter (GTK_TREE_MODEL (model), &iter, path)) {
+		position = gtk_tree_model_iter_n_children (GTK_TREE_MODEL (model), &iter);
+	} else {
+		position = 0;
+	}
+	
+	gtk_tree_path_append_index (path, position);
+	
 	work = mrp_calendar_day_get_total_work (
 		mrp_project_get_calendar (tree->priv->project),
 		mrp_day_get_work ());
-	
-	task = g_object_new (MRP_TYPE_TASK,
-			     "work", work,
-			     "duration", work,
-			     NULL);
+
+	cmd = (TaskCmdInsert*) task_cmd_insert (tree, path, work, work);
 
 	if (!GTK_WIDGET_HAS_FOCUS (tree)) {
 		gtk_widget_grab_focus (GTK_WIDGET (tree));
 	}
-	
-	mrp_project_insert_task (tree->priv->project,
-				 parent,
-				 -1,
-				 task);
 
 	tree_view = GTK_TREE_VIEW (tree);
 	
 	model = PLANNER_GANTT_MODEL (gtk_tree_view_get_model (tree_view));
-	
-	path = planner_gantt_model_get_path_from_task (model, task);
 	
 	gtk_tree_view_set_cursor (tree_view,
 				  path,
@@ -1800,23 +1816,26 @@ planner_task_tree_insert_subtask (PlannerTaskTree *tree)
 void
 planner_task_tree_insert_task (PlannerTaskTree *tree)
 {
-	GtkTreeView   *tree_view;
-	PlannerGanttModel  *model;
-	GtkTreePath   *path;
-	MrpTask       *parent;
-	GList         *list;
-	gint           work;
-	gint           position;
-	TaskCmdInsert *cmd;
+	GtkTreeView       *tree_view;
+	PlannerGanttModel *model;
+	GtkTreePath       *path;
+	MrpTask           *parent;
+	GList             *list;
+	gint               work;
+	gint               position;
+	TaskCmdInsert     *cmd;
 
 	list = planner_task_tree_get_selected_tasks (tree);
 	if (list == NULL) {
 		parent = NULL;
 		position = -1;
-	}
-	else {
+	} else {
 		parent = mrp_task_get_parent (list->data);
 		position = mrp_task_get_position (list->data) + 1;
+
+		if (mrp_task_get_parent (parent) == NULL) {
+			parent = NULL;
+		}
 	}
 
 	if (parent) {
@@ -1825,7 +1844,12 @@ planner_task_tree_insert_task (PlannerTaskTree *tree)
 		path = planner_gantt_model_get_path_from_task (model, parent);
 		gtk_tree_path_append_index (path, position);
 	} else {
-		path = gtk_tree_path_new_first ();
+		path = gtk_tree_path_new ();
+		if (position != -1) {
+			gtk_tree_path_append_index (path, position);
+		} else {
+			gtk_tree_path_append_index (path, 0);
+		}
 	}
 
 	work = mrp_calendar_day_get_total_work (
@@ -1840,12 +1864,12 @@ planner_task_tree_insert_task (PlannerTaskTree *tree)
 
 	tree_view = GTK_TREE_VIEW (tree);
 	
-/*	gtk_tree_view_set_cursor (tree_view,
+	gtk_tree_view_set_cursor (tree_view,
 				  path,
 				  NULL,
 				  FALSE);
-*/
-	//gtk_tree_path_free (path);
+
+	gtk_tree_path_free (path);
 
 	g_list_free (list);
 }

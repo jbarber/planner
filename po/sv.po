@@ -1,6 +1,6 @@
-# Swedish messages for MrProject.
+# Swedish messages for Planner.
 # Copyright (C) 2001, 2002, 2003 Free Software Foundation, Inc.
-# Richard Hult <rhult@codefactory.se>, 2001, 2002.
+# Richard Hult <richard@imendio.com>, 2001, 2002.
 # Christian Rose <menthos@menthos.com>, 2002, 2003.
 #
 # $Id$
@@ -9,386 +9,15 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: MrProject\n"
-"POT-Creation-Date: 2003-12-08 12:32+0100\n"
+"Project-Id-Version: Planner\n"
+"POT-Creation-Date: 2003-12-11 21:29+0100\n"
 "PO-Revision-Date: 2003-02-07 12:32+0100\n"
-"Last-Translator: Christian Rose <menthos@menthos.com>\n"
+"Last-Translator: Richard Hult <richard@imendio.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8-bit\n"
 "Report-Msgid-Bugs-To: \n"
-
-#: data/planner.desktop.in.h:1
-msgid "Planner Project Management"
-msgstr "Planner projekthantering"
-
-#: data/planner.desktop.in.h:2
-msgid "Project Management"
-msgstr "Projekthantering"
-
-#: libegg/recent-files/egg-recent-vfs-utils.c:90
-msgid " (invalid Unicode)"
-msgstr " (ogiltig Unicode)"
-
-#: data/ui/main-window.ui.h:1
-msgid "About this application"
-msgstr "Om detta program"
-
-#: data/ui/main-window.ui.h:2
-msgid "C_ut"
-msgstr "Klipp ut"
-
-#: data/ui/main-window.ui.h:3
-msgid "Clear"
-msgstr "Töm"
-
-#: data/ui/main-window.ui.h:4
-msgid "Clear the selection"
-msgstr "Töm markeringen"
-
-#: data/ui/main-window.ui.h:5
-msgid "Close the current file"
-msgstr "Stäng aktuell fil"
-
-#: data/ui/main-window.ui.h:6
-msgid "Copy the selection"
-msgstr "Kopiera markeringen"
-
-#: data/ui/main-window.ui.h:7
-msgid "Create a new project"
-msgstr "Skapa ett nytt projekt"
-
-#: data/ui/main-window.ui.h:8
-msgid "Cut the selection"
-msgstr "Klipp ut markeringen"
-
-#: data/ui/main-window.ui.h:9
-msgid "Edit Day _Types"
-msgstr "Redigera dag_typer"
-
-#: data/ui/main-window.ui.h:10
-msgid "Edit Project _Phases"
-msgstr "Redigera projekt_faser"
-
-#: data/ui/main-window.ui.h:11
-msgid "Edit the project properties"
-msgstr "Redigera projektegenskaperna"
-
-#: data/ui/main-window.ui.h:12
-msgid "Exit the program"
-msgstr "Avsluta programmet"
-
-#: data/ui/main-window.ui.h:13
-msgid "New"
-msgstr "Ny"
-
-#: data/ui/main-window.ui.h:14
-msgid "New..."
-msgstr "Ny..."
-
-#: data/ui/main-window.ui.h:15
-msgid "Open"
-msgstr "Öppna"
-
-#: data/ui/main-window.ui.h:16
-msgid "Open a project"
-msgstr "Öppna ett projekt"
-
-#: data/ui/main-window.ui.h:17
-msgid "Paste the clipboard"
-msgstr "Klistra in från urklipp"
-
-#: data/ui/main-window.ui.h:18
-msgid "Print"
-msgstr "Skriv"
-
-#: data/ui/main-window.ui.h:19
-msgid "Print preview of the current project"
-msgstr "Förhandsgranska aktuellt projekt"
-
-#: data/ui/main-window.ui.h:20
-msgid "Print the current project"
-msgstr "Skriv ut aktuellt projekt"
-
-#: data/ui/main-window.ui.h:21
-msgid "Redo the undone action"
-msgstr "Gör om den ångrade åtgärden"
-
-#: data/ui/main-window.ui.h:22
-msgid "Save"
-msgstr "Spara"
-
-#: data/ui/main-window.ui.h:23
-msgid "Save _As..."
-msgstr "Spara s_om..."
-
-#: data/ui/main-window.ui.h:24
-msgid "Save the current project"
-msgstr "Spara det aktuella projekt"
-
-#: data/ui/main-window.ui.h:25
-msgid "Save the current project with a different name"
-msgstr "Spara det aktuella projektet med ett annat namn"
-
-#: data/ui/main-window.ui.h:26
-msgid "Show the MrProject User Guide"
-msgstr "Visa MrProjects användarmanual"
-
-#: data/ui/main-window.ui.h:27
-msgid "Undo the last action"
-msgstr "Ångra den senaste åtgärden"
-
-#: data/ui/main-window.ui.h:28
-msgid "_About"
-msgstr "_Om"
-
-#: data/ui/main-window.ui.h:29
-msgid "_Actions"
-msgstr "_Åtgärder"
-
-#: data/ui/main-window.ui.h:30
-msgid "_Close"
-msgstr "S_täng"
-
-#: data/ui/main-window.ui.h:31
-msgid "_Copy"
-msgstr "_Kopiera"
-
-#: data/ui/main-window.ui.h:32
-msgid "_Edit"
-msgstr "_Redigera"
-
-#: data/ui/main-window.ui.h:33
-msgid "_Edit Project Properties"
-msgstr "_Redigera projektegenskaper"
-
-#: data/ui/main-window.ui.h:34
-msgid "_File"
-msgstr "_Arkiv"
-
-#: data/ui/main-window.ui.h:35
-msgid "_Help"
-msgstr "_Hjälp"
-
-#: data/ui/main-window.ui.h:36
-msgid "_Manage Calendars"
-msgstr "_Hantera kalendrar"
-
-#: data/ui/main-window.ui.h:37
-msgid "_New Project"
-msgstr "_Nytt projekt"
-
-#: data/ui/main-window.ui.h:38
-msgid "_Open..."
-msgstr "_Öppna..."
-
-#: data/ui/main-window.ui.h:39
-msgid "_Paste"
-msgstr "K_listra in"
-
-#: data/ui/main-window.ui.h:40
-msgid "_Print Preview"
-msgstr "_Förhandsgranskning"
-
-#: data/ui/main-window.ui.h:41
-msgid "_Print..."
-msgstr "S_kriv ut..."
-
-#: data/ui/main-window.ui.h:42
-msgid "_Project"
-msgstr "_Projekt"
-
-#: data/ui/main-window.ui.h:43
-msgid "_Quit"
-msgstr "_Avsluta"
-
-#: data/ui/main-window.ui.h:44
-msgid "_Redo"
-msgstr "_Gör om"
-
-#: data/ui/main-window.ui.h:45 src/planner-main-window.c:1127
-msgid "_Save"
-msgstr "_Spara"
-
-#: data/ui/main-window.ui.h:46
-msgid "_Undo"
-msgstr "_Ångra"
-
-#: data/ui/main-window.ui.h:47
-msgid "_User Guide"
-msgstr "_Användarmanual"
-
-#: data/ui/main-window.ui.h:48
-msgid "_View"
-msgstr "_Visa"
-
-#: data/ui/gantt-view.ui.h:1 data/ui/task-view.ui.h:1
-msgid "I_ndent Task"
-msgstr "_Drag in aktivitet"
-
-#: data/ui/gantt-view.ui.h:2 data/ui/task-view.ui.h:2
-msgid "In_sert Tasks..."
-msgstr "In_foga aktiviteter..."
-
-#: data/ui/gantt-view.ui.h:3 data/ui/task-view.ui.h:3
-#: src/planner-application.c:75
-msgid "Indent"
-msgstr "Dra in"
-
-#: data/ui/gantt-view.ui.h:4 data/ui/task-view.ui.h:4
-#: data/ui/resource-view.ui.h:5 src/planner-application.c:54
-#: src/planner-application.c:103
-msgid "Insert"
-msgstr "Infoga"
-
-#: data/ui/gantt-view.ui.h:5 data/ui/task-view.ui.h:5
-msgid "Move Task Do_wn"
-msgstr "Flytta _nedåt"
-
-#: data/ui/gantt-view.ui.h:6 data/ui/task-view.ui.h:6
-msgid "Move Task _Up"
-msgstr "Flytta _uppåt"
-
-#: data/ui/gantt-view.ui.h:7 data/ui/task-view.ui.h:7
-#: src/planner-application.c:96
-msgid "Move down"
-msgstr "Flytta nedåt"
-
-#: data/ui/gantt-view.ui.h:8 data/ui/task-view.ui.h:8
-#: src/planner-application.c:89
-msgid "Move up"
-msgstr "Flytta uppåt"
-
-#: data/ui/gantt-view.ui.h:9 data/ui/task-view.ui.h:9
-#: data/ui/resource-view.ui.h:6 src/planner-application.c:61
-#: src/planner-application.c:110
-msgid "Remove"
-msgstr "Ta bort"
-
-#: data/ui/gantt-view.ui.h:10 data/ui/task-view.ui.h:10
-msgid "Reset _All Constraints"
-msgstr "Återställ _alla restriktioner"
-
-#: data/ui/gantt-view.ui.h:11 data/ui/task-view.ui.h:11
-msgid "Reset _Constraint"
-msgstr "Återställ _restriktion"
-
-#: data/ui/gantt-view.ui.h:12 data/ui/task-view.ui.h:12
-#: data/ui/resource-view.ui.h:7
-msgid "Select _All"
-msgstr "Markera _alla"
-
-#: data/ui/gantt-view.ui.h:13 data/ui/task-view.ui.h:13
-#: data/ui/resource-view.ui.h:8
-msgid "Select all tasks"
-msgstr "Markera alla aktiviteter"
-
-#: data/ui/gantt-view.ui.h:14
-msgid "Test"
-msgstr "Test"
-
-#: data/ui/gantt-view.ui.h:15 data/ui/task-view.ui.h:14
-msgid "Un_link Task"
-msgstr "Av_länka aktivitet"
-
-#: data/ui/gantt-view.ui.h:16 data/ui/task-view.ui.h:15
-msgid "Unin_dent Task"
-msgstr "Dra _ut aktivitet"
-
-#: data/ui/gantt-view.ui.h:17 data/ui/task-view.ui.h:16
-#: src/planner-application.c:82
-msgid "Unindent"
-msgstr "Dra ut"
-
-#: data/ui/gantt-view.ui.h:18 data/ui/task-view.ui.h:17
-#: src/planner-application.c:68
-msgid "Unlink"
-msgstr "Avlänka"
-
-#: data/ui/gantt-view.ui.h:19
-msgid "Zoom In"
-msgstr "Zooma in"
-
-#: data/ui/gantt-view.ui.h:20
-msgid "Zoom Out"
-msgstr "Zooma ut"
-
-#: data/ui/gantt-view.ui.h:21
-msgid "Zoom To Fit"
-msgstr "Zooma hela"
-
-#: data/ui/gantt-view.ui.h:22
-msgid "Zoom To _Fit"
-msgstr "Zooma _hela"
-
-#: data/ui/gantt-view.ui.h:23
-msgid "Zoom _Out"
-msgstr "Zooma _ut"
-
-#: data/ui/gantt-view.ui.h:24 data/ui/task-view.ui.h:19
-msgid "_Edit Task Properties..."
-msgstr "_Redigera aktivitetsegenskaper..."
-
-#: data/ui/gantt-view.ui.h:25
-msgid "_Highlight Critical Tasks"
-msgstr "_Visa kritiska aktiviteter"
-
-#: data/ui/gantt-view.ui.h:26 data/ui/task-view.ui.h:20
-msgid "_Insert Task"
-msgstr "_Infoga aktivitet"
-
-#: data/ui/gantt-view.ui.h:27 data/ui/task-view.ui.h:21
-msgid "_Remove Task"
-msgstr "_Ta bort aktivitet"
-
-#: data/ui/gantt-view.ui.h:28
-msgid "_Zoom In"
-msgstr "_Zooma in"
-
-#: data/ui/task-view.ui.h:18
-msgid "_Edit Custom Properties..."
-msgstr "_Redigera egna egenskaper..."
-
-#: data/ui/html-plugin.ui.h:1 data/glade/html-output.glade.h:4
-msgid "Export to HTML"
-msgstr "Exportera till HTML"
-
-#: data/ui/sql-plugin.ui.h:1
-msgid "Open from Database..."
-msgstr "Öppna från databas..."
-
-#: data/ui/sql-plugin.ui.h:2
-msgid "Save to Database..."
-msgstr "Spara till databas..."
-
-#: data/ui/resource-view.ui.h:1
-msgid "Edit _Custom Properties..."
-msgstr "Redigera _egna egenskaper..."
-
-#: data/ui/resource-view.ui.h:2
-msgid "Edit _Groups"
-msgstr "Redigera _grupper"
-
-#: data/ui/resource-view.ui.h:3
-msgid "Groups"
-msgstr "Grupper"
-
-#: data/ui/resource-view.ui.h:4
-msgid "In_sert Resources..."
-msgstr "_Infoga resurser..."
-
-#: data/ui/resource-view.ui.h:9
-msgid "_Edit Resource Properties..."
-msgstr "_Redigera resursegenskaper..."
-
-#: data/ui/resource-view.ui.h:10
-msgid "_Insert Resource"
-msgstr "_Infoga resurs"
-
-#: data/ui/resource-view.ui.h:11
-msgid "_Remove Resource"
-msgstr "_Ta bort resurs"
 
 #: data/glade/add-predecessor.glade.h:1 data/glade/calendar-dialog.glade.h:4
 #: data/glade/html-output.glade.h:2 data/glade/new-property.glade.h:1
@@ -505,22 +134,18 @@ msgid "From:"
 msgstr "Från:"
 
 #: data/glade/calendar-dialog.glade.h:24
-msgid "MrProject Team"
-msgstr "MrProject-teamet"
-
-#: data/glade/calendar-dialog.glade.h:25
 msgid "New Calendar"
 msgstr "Ny kalender"
 
-#: data/glade/calendar-dialog.glade.h:26
+#: data/glade/calendar-dialog.glade.h:25
 msgid "New Day Type"
 msgstr "Ny dagtyp"
 
-#: data/glade/calendar-dialog.glade.h:27
+#: data/glade/calendar-dialog.glade.h:26
 msgid "Select a calendar"
 msgstr "Välj en kalender"
 
-#: data/glade/calendar-dialog.glade.h:28
+#: data/glade/calendar-dialog.glade.h:27
 msgid ""
 "Select a weekday and the day type to use for that day in the default week "
 "for this calendar.\n"
@@ -528,35 +153,35 @@ msgstr ""
 "Välj en veckodag och dagtypen att använda i standardveckan för denna "
 "kalendern.\n"
 
-#: data/glade/calendar-dialog.glade.h:30
+#: data/glade/calendar-dialog.glade.h:29
 msgid "Set day type to:"
 msgstr "Ställ in typ av dag till:"
 
-#: data/glade/calendar-dialog.glade.h:31
+#: data/glade/calendar-dialog.glade.h:30
 msgid "To:"
 msgstr "Till:"
 
-#: data/glade/calendar-dialog.glade.h:32
+#: data/glade/calendar-dialog.glade.h:31
 msgid "Use working time from derived calendar"
 msgstr "Använd arbetstid från deriverad kalender"
 
-#: data/glade/calendar-dialog.glade.h:33
+#: data/glade/calendar-dialog.glade.h:32
 msgid "Week day:"
 msgstr "Veckodag:"
 
-#: data/glade/calendar-dialog.glade.h:34
+#: data/glade/calendar-dialog.glade.h:33
 msgid "Working time..."
 msgstr "Arbetstid..."
 
-#: data/glade/calendar-dialog.glade.h:35
+#: data/glade/calendar-dialog.glade.h:34
 msgid "_Derive from a calendar"
 msgstr "Derivera från en kalender"
 
-#: data/glade/calendar-dialog.glade.h:36
+#: data/glade/calendar-dialog.glade.h:35
 msgid "_Name of the new calendar:"
 msgstr "_Namn på ny kalender:"
 
-#: data/glade/calendar-dialog.glade.h:37
+#: data/glade/calendar-dialog.glade.h:36
 msgid "_New..."
 msgstr "_Ny..."
 
@@ -567,6 +192,10 @@ msgstr "Gruppredigerare"
 #: data/glade/html-output.glade.h:3
 msgid "<b>Save to</b>"
 msgstr "<b>Spara till</b>"
+
+#: data/glade/html-output.glade.h:4 data/ui/html-plugin.ui.h:1
+msgid "Export to HTML"
+msgstr "Exportera till HTML"
 
 #: data/glade/html-output.glade.h:5
 msgid "Local file"
@@ -801,17 +430,416 @@ msgid "_Work:"
 msgstr "_Arbete:"
 
 #. day unit variant accepted in input
-#: data/glade/task-dialog.glade.h:17 src/planner-task-tree.c:2120
+#: data/glade/task-dialog.glade.h:17 src/planner-task-tree.c:2343
 msgid "days"
 msgstr "dagar"
 
-#: data/glade/task-input-dialog.glade.h:2
+#: data/glade/task-input-dialog.glade.h:2 src/planner-task-tree.c:295
 msgid "Insert task"
 msgstr "Infoga aktivitet"
 
 #: data/glade/task-input-dialog.glade.h:4
 msgid "Work:"
 msgstr "Arbete:"
+
+#: data/planner.desktop.in.h:1
+msgid "Planner Project Management"
+msgstr "Planner projekthantering"
+
+#: data/planner.desktop.in.h:2
+msgid "Project Management"
+msgstr "Projekthantering"
+
+#: data/ui/gantt-view.ui.h:1 data/ui/task-view.ui.h:1
+msgid "I_ndent Task"
+msgstr "_Drag in aktivitet"
+
+#: data/ui/gantt-view.ui.h:2 data/ui/task-view.ui.h:2
+msgid "In_sert Tasks..."
+msgstr "In_foga aktiviteter..."
+
+#: data/ui/gantt-view.ui.h:3 data/ui/task-view.ui.h:3
+#: src/planner-application.c:76
+msgid "Indent"
+msgstr "Dra in"
+
+#: data/ui/gantt-view.ui.h:4 data/ui/resource-view.ui.h:5
+#: data/ui/task-view.ui.h:4 src/planner-application.c:55
+#: src/planner-application.c:104
+msgid "Insert"
+msgstr "Infoga"
+
+#: data/ui/gantt-view.ui.h:5 data/ui/task-view.ui.h:5
+msgid "Move Task Do_wn"
+msgstr "Flytta _nedåt"
+
+#: data/ui/gantt-view.ui.h:6 data/ui/task-view.ui.h:6
+msgid "Move Task _Up"
+msgstr "Flytta _uppåt"
+
+#: data/ui/gantt-view.ui.h:7 data/ui/task-view.ui.h:7
+#: src/planner-application.c:97
+msgid "Move down"
+msgstr "Flytta nedåt"
+
+#: data/ui/gantt-view.ui.h:8 data/ui/task-view.ui.h:8
+#: src/planner-application.c:90
+msgid "Move up"
+msgstr "Flytta uppåt"
+
+#: data/ui/gantt-view.ui.h:9 data/ui/resource-view.ui.h:6
+#: data/ui/task-view.ui.h:9 src/planner-application.c:62
+#: src/planner-application.c:111
+msgid "Remove"
+msgstr "Ta bort"
+
+#: data/ui/gantt-view.ui.h:10 data/ui/task-view.ui.h:10
+msgid "Reset _All Constraints"
+msgstr "Återställ _alla restriktioner"
+
+#: data/ui/gantt-view.ui.h:11 data/ui/task-view.ui.h:11
+msgid "Reset _Constraint"
+msgstr "Återställ _restriktion"
+
+#: data/ui/gantt-view.ui.h:12 data/ui/resource-view.ui.h:7
+#: data/ui/task-view.ui.h:12
+msgid "Select _All"
+msgstr "Markera _alla"
+
+#: data/ui/gantt-view.ui.h:13 data/ui/resource-view.ui.h:8
+#: data/ui/task-view.ui.h:13
+msgid "Select all tasks"
+msgstr "Markera alla aktiviteter"
+
+#: data/ui/gantt-view.ui.h:14
+msgid "Test"
+msgstr "Test"
+
+#: data/ui/gantt-view.ui.h:15 data/ui/task-view.ui.h:14
+msgid "Un_link Task"
+msgstr "Av_länka aktivitet"
+
+#: data/ui/gantt-view.ui.h:16 data/ui/task-view.ui.h:15
+msgid "Unin_dent Task"
+msgstr "Dra _ut aktivitet"
+
+#: data/ui/gantt-view.ui.h:17 data/ui/task-view.ui.h:16
+#: src/planner-application.c:83
+msgid "Unindent"
+msgstr "Dra ut"
+
+#: data/ui/gantt-view.ui.h:18 data/ui/task-view.ui.h:17
+#: src/planner-application.c:69
+msgid "Unlink"
+msgstr "Avlänka"
+
+#: data/ui/gantt-view.ui.h:19
+msgid "Zoom In"
+msgstr "Zooma in"
+
+#: data/ui/gantt-view.ui.h:20
+msgid "Zoom Out"
+msgstr "Zooma ut"
+
+#: data/ui/gantt-view.ui.h:21
+msgid "Zoom To Fit"
+msgstr "Zooma hela"
+
+#: data/ui/gantt-view.ui.h:22
+msgid "Zoom To _Fit"
+msgstr "Zooma _hela"
+
+#: data/ui/gantt-view.ui.h:23
+msgid "Zoom _Out"
+msgstr "Zooma _ut"
+
+#: data/ui/gantt-view.ui.h:24 data/ui/task-view.ui.h:19
+msgid "_Edit Task Properties..."
+msgstr "_Redigera aktivitetsegenskaper..."
+
+#: data/ui/gantt-view.ui.h:25
+msgid "_Highlight Critical Tasks"
+msgstr "_Visa kritiska aktiviteter"
+
+#: data/ui/gantt-view.ui.h:26 data/ui/task-view.ui.h:20
+msgid "_Insert Task"
+msgstr "_Infoga aktivitet"
+
+#: data/ui/gantt-view.ui.h:27 data/ui/task-view.ui.h:21
+msgid "_Remove Task"
+msgstr "_Ta bort aktivitet"
+
+#: data/ui/gantt-view.ui.h:28
+msgid "_Zoom In"
+msgstr "_Zooma in"
+
+#: data/ui/main-window.ui.h:1
+msgid "About this application"
+msgstr "Om detta program"
+
+#: data/ui/main-window.ui.h:2
+msgid "C_ut"
+msgstr "Klipp ut"
+
+#: data/ui/main-window.ui.h:3
+msgid "Clear"
+msgstr "Töm"
+
+#: data/ui/main-window.ui.h:4
+msgid "Clear the selection"
+msgstr "Töm markeringen"
+
+#: data/ui/main-window.ui.h:5
+msgid "Close the current file"
+msgstr "Stäng aktuell fil"
+
+#: data/ui/main-window.ui.h:6
+msgid "Copy the selection"
+msgstr "Kopiera markeringen"
+
+#: data/ui/main-window.ui.h:7
+msgid "Create a new project"
+msgstr "Skapa ett nytt projekt"
+
+#: data/ui/main-window.ui.h:8
+msgid "Cut the selection"
+msgstr "Klipp ut markeringen"
+
+#: data/ui/main-window.ui.h:9
+msgid "Edit Day _Types"
+msgstr "Redigera dag_typer"
+
+#: data/ui/main-window.ui.h:10
+msgid "Edit Project _Phases"
+msgstr "Redigera projekt_faser"
+
+#: data/ui/main-window.ui.h:11
+msgid "Edit the project properties"
+msgstr "Redigera projektegenskaperna"
+
+#: data/ui/main-window.ui.h:12
+msgid "Exit the program"
+msgstr "Avsluta programmet"
+
+#: data/ui/main-window.ui.h:13
+msgid "New"
+msgstr "Ny"
+
+#: data/ui/main-window.ui.h:14
+msgid "New..."
+msgstr "Ny..."
+
+#: data/ui/main-window.ui.h:15
+msgid "Open"
+msgstr "Öppna"
+
+#: data/ui/main-window.ui.h:16
+msgid "Open a project"
+msgstr "Öppna ett projekt"
+
+#: data/ui/main-window.ui.h:17
+msgid "Paste the clipboard"
+msgstr "Klistra in från urklipp"
+
+#: data/ui/main-window.ui.h:18
+msgid "Print"
+msgstr "Skriv"
+
+#: data/ui/main-window.ui.h:19
+msgid "Print preview of the current project"
+msgstr "Förhandsgranska aktuellt projekt"
+
+#: data/ui/main-window.ui.h:20
+msgid "Print the current project"
+msgstr "Skriv ut aktuellt projekt"
+
+#: data/ui/main-window.ui.h:21
+msgid "Redo the undone action"
+msgstr "Gör om den ångrade åtgärden"
+
+#: data/ui/main-window.ui.h:22
+msgid "Save"
+msgstr "Spara"
+
+#: data/ui/main-window.ui.h:23
+msgid "Save _As..."
+msgstr "Spara s_om..."
+
+#: data/ui/main-window.ui.h:24
+msgid "Save the current project"
+msgstr "Spara det aktuella projekt"
+
+#: data/ui/main-window.ui.h:25
+msgid "Save the current project with a different name"
+msgstr "Spara det aktuella projektet med ett annat namn"
+
+#: data/ui/main-window.ui.h:26
+msgid "Show the Planner User Guide"
+msgstr "Visa Planner användarmanual"
+
+#: data/ui/main-window.ui.h:27
+msgid "Undo the last action"
+msgstr "Ångra den senaste åtgärden"
+
+#: data/ui/main-window.ui.h:28
+msgid "_About"
+msgstr "_Om"
+
+#: data/ui/main-window.ui.h:29
+msgid "_Actions"
+msgstr "_Åtgärder"
+
+#: data/ui/main-window.ui.h:30
+msgid "_Close"
+msgstr "S_täng"
+
+#: data/ui/main-window.ui.h:31
+msgid "_Copy"
+msgstr "_Kopiera"
+
+#: data/ui/main-window.ui.h:32
+msgid "_Edit"
+msgstr "_Redigera"
+
+#: data/ui/main-window.ui.h:33
+msgid "_Edit Project Properties"
+msgstr "_Redigera projektegenskaper"
+
+#: data/ui/main-window.ui.h:34
+msgid "_File"
+msgstr "_Arkiv"
+
+#: data/ui/main-window.ui.h:35
+msgid "_Help"
+msgstr "_Hjälp"
+
+#: data/ui/main-window.ui.h:36
+msgid "_Manage Calendars"
+msgstr "_Hantera kalendrar"
+
+#: data/ui/main-window.ui.h:37
+msgid "_New Project"
+msgstr "_Nytt projekt"
+
+#: data/ui/main-window.ui.h:38
+msgid "_Open..."
+msgstr "_Öppna..."
+
+#: data/ui/main-window.ui.h:39
+msgid "_Paste"
+msgstr "K_listra in"
+
+#: data/ui/main-window.ui.h:40
+msgid "_Print Preview"
+msgstr "_Förhandsgranskning"
+
+#: data/ui/main-window.ui.h:41
+msgid "_Print..."
+msgstr "S_kriv ut..."
+
+#: data/ui/main-window.ui.h:42
+msgid "_Project"
+msgstr "_Projekt"
+
+#: data/ui/main-window.ui.h:43
+msgid "_Quit"
+msgstr "_Avsluta"
+
+#: data/ui/main-window.ui.h:44 src/planner-cmd-manager.c:192
+msgid "_Redo"
+msgstr "_Gör om"
+
+#: data/ui/main-window.ui.h:45 src/planner-window.c:1249
+msgid "_Save"
+msgstr "_Spara"
+
+#: data/ui/main-window.ui.h:46 src/planner-cmd-manager.c:170
+msgid "_Undo"
+msgstr "_Ångra"
+
+#: data/ui/main-window.ui.h:47
+msgid "_User Guide"
+msgstr "_Användarmanual"
+
+#: data/ui/main-window.ui.h:48
+msgid "_View"
+msgstr "_Visa"
+
+#: data/ui/resource-view.ui.h:1
+msgid "Edit _Custom Properties..."
+msgstr "Redigera _egna egenskaper..."
+
+#: data/ui/resource-view.ui.h:2
+msgid "Edit _Groups"
+msgstr "Redigera _grupper"
+
+#: data/ui/resource-view.ui.h:3
+msgid "Groups"
+msgstr "Grupper"
+
+#: data/ui/resource-view.ui.h:4
+msgid "In_sert Resources..."
+msgstr "_Infoga resurser..."
+
+#: data/ui/resource-view.ui.h:9
+msgid "_Edit Resource Properties..."
+msgstr "_Redigera resursegenskaper..."
+
+#: data/ui/resource-view.ui.h:10
+msgid "_Insert Resource"
+msgstr "_Infoga resurs"
+
+#: data/ui/resource-view.ui.h:11
+msgid "_Remove Resource"
+msgstr "_Ta bort resurs"
+
+#: data/ui/sql-plugin.ui.h:1
+msgid "Open from Database..."
+msgstr "Öppna från databas..."
+
+#: data/ui/sql-plugin.ui.h:2
+msgid "Save to Database..."
+msgstr "Spara till databas..."
+
+#: data/ui/task-view.ui.h:18
+msgid "_Edit Custom Properties..."
+msgstr "_Redigera egna egenskaper..."
+
+#: libegg/recent-files/egg-recent-vfs-utils.c:90
+msgid " (invalid Unicode)"
+msgstr " (ogiltig Unicode)"
+
+#: libplanner/mrp-day.c:54
+msgid "Working"
+msgstr "Arbete"
+
+#: libplanner/mrp-day.c:55
+msgid "A default working day"
+msgstr "En standardarbetsdag"
+
+#: libplanner/mrp-day.c:57
+msgid "Nonworking"
+msgstr "Ledigt"
+
+#: libplanner/mrp-day.c:58
+msgid "A default non working day"
+msgstr "En ledig standarddag"
+
+#: libplanner/mrp-day.c:60
+msgid "Use base"
+msgstr "Använd bas"
+
+#: libplanner/mrp-day.c:61
+msgid "Use day from base calendar"
+msgstr "Använd dag från baskalender"
+
+#: libplanner/mrp-parser.c:1043 libplanner/mrp-parser.c:1138
+msgid "Could not create XML tree"
+msgstr "Kunde inte skapa XML-träd"
+
+#: libplanner/mrp-parser.c:1104
+msgid "Could not write XML file"
+msgstr "Kunde inte skriva XML-fil"
 
 #: libplanner/mrp-project.c:441 src/planner-group-dialog.c:411
 msgid "Default"
@@ -823,8 +851,8 @@ msgid "Couldn't find a suitable file module for loading '%s'"
 msgstr "Kunde inte hitta en lämplig filmodul för inläsning av \"%s\""
 
 #: libplanner/mrp-project.c:770 libplanner/mrp-project.c:1034
-msgid "No support for SQL storage built into this version of MrProject."
-msgstr "Inget stöd för SQL-lager är inbyggt i denna version av MrProject."
+msgid "No support for SQL storage built into this version of Planner."
+msgstr "Inget stöd för SQL-lager är inbyggt i denna version av Planner."
 
 #: libplanner/mrp-project.c:807
 msgid "Invalid URI."
@@ -871,62 +899,8 @@ msgstr "Kostnad"
 msgid "None"
 msgstr "Ingen"
 
-#: libplanner/mrp-task-manager.c:1769
-msgid "Can not add a predecessor relation between a task and its ancestor."
-msgstr ""
-"Kan inte lägga till en föregångarrelation mellan en aktivitet och dess "
-"förfader."
-
-#: libplanner/mrp-task-manager.c:1778 libplanner/mrp-task-manager.c:1786
-msgid "Can not add a predecessor, because it would result in a loop."
-msgstr ""
-"Kan inte lägga till en föregångare eftersom det skulle resultera i en slinga."
-
-#: libplanner/mrp-task-manager.c:1821
-msgid "Can not move the task, since it would result in a loop."
-msgstr "Kan inte flytta aktiviteten eftersom det skulle resultera i en slinga."
-
-#: libplanner/mrp-task.c:1016
-msgid ""
-"Could not add a predecessor relation, because the tasks are already related."
-msgstr ""
-"Kan inte lägga till en föregångarrelation, eftersom aktiviteterna redan är "
-"släkt."
-
-#: libplanner/mrp-day.c:54
-msgid "Working"
-msgstr "Arbete"
-
-#: libplanner/mrp-day.c:55
-msgid "A default working day"
-msgstr "En standardarbetsdag"
-
-#: libplanner/mrp-day.c:57
-msgid "Nonworking"
-msgstr "Ledigt"
-
-#: libplanner/mrp-day.c:58
-msgid "A default non working day"
-msgstr "En ledig standarddag"
-
-#: libplanner/mrp-day.c:60
-msgid "Use base"
-msgstr "Använd bas"
-
-#: libplanner/mrp-day.c:61
-msgid "Use day from base calendar"
-msgstr "Använd dag från baskalender"
-
-#: libplanner/mrp-parser.c:1043 libplanner/mrp-parser.c:1138
-msgid "Could not create XML tree"
-msgstr "Kunde inte skapa XML-träd"
-
-#: libplanner/mrp-parser.c:1104
-msgid "Could not write XML file"
-msgstr "Kunde inte skriva XML-fil"
-
 #. Give up.
-#: libplanner/mrp-sql.c:229 src/planner-sql-plugin.c:127
+#: libplanner/mrp-sql.c:229 src/planner-sql-plugin.c:131
 msgid "Invalid Unicode"
 msgstr "Ogiltig Unicode"
 
@@ -940,6 +914,7 @@ msgstr ""
 "du spara ändå?"
 
 #: libplanner/mrp-sql.c:3443
+#, c-format
 msgid ""
 "Connection to database '%s' failed.\n"
 "%s"
@@ -959,135 +934,35 @@ msgstr "Ogiltig SQL-URI (ogiltigt projektid)."
 msgid "Invalid SQL URI (no database name specified)."
 msgstr "Ogiltig SQL-URI (inget databasnamn angivet)."
 
-#: src/planner-application.c:117
+#: libplanner/mrp-task.c:1016
+msgid ""
+"Could not add a predecessor relation, because the tasks are already related."
+msgstr ""
+"Kan inte lägga till en föregångarrelation, eftersom aktiviteterna redan är "
+"släkt."
+
+#: libplanner/mrp-task-manager.c:1769
+msgid "Can not add a predecessor relation between a task and its ancestor."
+msgstr ""
+"Kan inte lägga till en föregångarrelation mellan en aktivitet och dess "
+"förfader."
+
+#: libplanner/mrp-task-manager.c:1778 libplanner/mrp-task-manager.c:1786
+msgid "Can not add a predecessor, because it would result in a loop."
+msgstr ""
+"Kan inte lägga till en föregångare eftersom det skulle resultera i en slinga."
+
+#: libplanner/mrp-task-manager.c:1821
+msgid "Can not move the task, since it would result in a loop."
+msgstr "Kan inte flytta aktiviteten eftersom det skulle resultera i en slinga."
+
+#: libplanner/mrp-xsl.c:96
+msgid "HTML export failed"
+msgstr "HTML-export misslyckades"
+
+#: src/planner-application.c:118
 msgid "Edit"
 msgstr "Redigera"
-
-#: src/planner-main-window.c:584
-msgid "Open a file"
-msgstr "Öppna en fil"
-
-#. I18n: Translators, list your names here, newline separated if there
-#. * are more than one, to appear in the about box.
-#.
-#: src/planner-main-window.c:993 src/planner-main-window.c:1000
-msgid "translator_credits"
-msgstr ""
-"Richard Hult\n"
-"Christian Rose\n"
-"Skicka synpunkter på översättningen till sv@li.org"
-
-#. "Copyright \xc2\xa9 2001-2002 CodeFactory AB",
-#: src/planner-main-window.c:997
-msgid "A Project Management application for the GNOME desktop"
-msgstr "Ett projekthanteringsprogram för GNOME-skrivbordet"
-
-#: src/planner-main-window.c:1007
-msgid "The Planner Homepage"
-msgstr "Planners hemsida"
-
-#: src/planner-main-window.c:1083
-msgid "If you don't save, changes made the last minute will be discarded."
-msgstr ""
-"Om du inte sparar kommer ändringarna gjorda den senaste minuten att gå "
-"förlorade."
-
-#: src/planner-main-window.c:1088
-#, c-format
-msgid "If you don't save, changes made the last %d minutes will be discarded."
-msgstr ""
-"Om du inte sparar kommer ändringarna gjorda de senaste %d minuterna att gå "
-"förlorade."
-
-#: src/planner-main-window.c:1093
-msgid "If you don't save, changes made the last hour will be discarded."
-msgstr ""
-"Om du inte sparar kommer ändringarna gjorda den senaste timmen att gå "
-"förlorade."
-
-#: src/planner-main-window.c:1098
-#, c-format
-msgid "If you don't save, changes made the last %d hours will be discarded."
-msgstr ""
-"Om du inte sparar kommer ändringarna gjorda de senaste %d timmarna att gå "
-"förlorade."
-
-#: src/planner-main-window.c:1105
-#, c-format
-msgid "Save changes to document '%s' before closing?"
-msgstr "Spara ändringarna i dokumentet \"%s\" innan det stängs?"
-
-#: src/planner-main-window.c:1123
-msgid "C_lose without saving"
-msgstr "S_täng utan att spara"
-
-#: src/planner-main-window.c:1125
-msgid "_Cancel"
-msgstr "_Avbryt"
-
-#: src/planner-main-window.c:1232
-msgid "Save a file"
-msgstr "Spara en fil"
-
-#: src/planner-main-window.c:1264 src/planner-html-plugin.c:146
-#, c-format
-msgid "File \"%s\" exists, do you want to overwrite it?"
-msgstr "Filen \"%s\" finns redan, vill du skriva över den?"
-
-#: src/planner-main-window.c:1452
-msgid ""
-"You have opened a file that was saved with an old version of Planner.\n"
-"\n"
-"When loading old files, all tasks will use the constraint 'Must Start On', "
-"since the old version did not fully support automatic rescheduling. To take "
-"advantage of this new feature, you should add predecessor relations between "
-"tasks that are dependant on each other.\n"
-"\n"
-"You can add a predecessor relation by clicking on the predecessor and "
-"dragging to the successor.\n"
-"\n"
-"After doing this, you can remove all constraints by selecting the menu item "
-"'Remove all constraints' in the 'Edit' menu."
-msgstr ""
-"Du har öppnat en fil som sparades med en gammal version av Planner.\n"
-"\n"
-"När gamla projekt läses in, sätts restriktionen \"Måste starta\", eftersom "
-"den gamla versionen inte fullt ut stödde automatiskt schemaläggning. För att "
-"utnyttja denna nya funktion, rekommenderar vi att du lägger till relationer "
-"mellan aktiveter som beror på varandra.\n"
-"\n"
-"Du kan göra det genom att klicka på föregångaren och dra till "
-"efterföljaren.\n"
-"\n"
-"När du gjort det, kan du ta bort alla restriktioner genom att välja "
-"\"Återställ alla restriktioner\" i \"Redigera\"-menyn."
-
-#: src/planner-main-window.c:1489 src/planner-gantt-row.c:656
-#: src/planner-gantt-row.c:658 src/planner-gantt-print.c:513
-#: src/planner-gantt-print.c:515
-msgid "Unnamed"
-msgstr "Namnlös"
-
-#: src/planner-main.c:61
-msgid "Create the initial window with the given geometry."
-msgstr "Skapa det första fönstret med den angivna geometrin."
-
-#: src/planner-main.c:61
-msgid "GEOMETRY"
-msgstr "GEOMETRI"
-
-#: src/planner-main.c:98
-msgid "mrproject: --geometry cannot be used with more than one file."
-msgstr "mrproject: --geometry kan bara användas med en fil."
-
-#: src/planner-plugin-loader.c:40
-msgid "Could not open plugin file '%s'\n"
-msgstr "Kunde inte öppna insticksfilen \"%s\"\n"
-
-#: src/planner-view-loader.c:40
-#, c-format
-msgid "Could not open view plugin file '%s'\n"
-msgstr "Kunde inte öppna vyinsticksfilen \"%s\"\n"
 
 #: src/planner-cell-renderer-date.c:147
 msgid "Constraint type"
@@ -1120,6 +995,16 @@ msgstr "Avbryt"
 #: src/planner-cell-renderer-date.c:187
 msgid "OK"
 msgstr "OK"
+
+#: src/planner-cmd-manager.c:168
+#, c-format
+msgid "_Undo '%s'"
+msgstr "_Ångra \"%s\""
+
+#: src/planner-cmd-manager.c:190
+#, c-format
+msgid "_Redo '%s'"
+msgstr "_Gör om \"%s\""
 
 #: src/planner-default-week-dialog.c:40
 msgid "Monday"
@@ -1156,189 +1041,6 @@ msgstr "Ingen arbetstid"
 #: src/planner-default-week-dialog.c:277 src/planner-default-week-dialog.c:281
 msgid "%H:%M"
 msgstr "%H.%M"
-
-#: src/planner-group-dialog.c:387 src/planner-property-dialog.c:378
-#: src/planner-task-dialog.c:1311 src/planner-task-dialog.c:1397
-#: src/planner-task-view.c:227 src/planner-gantt-print.c:190
-#: src/planner-resource-view.c:966
-msgid "Name"
-msgstr "Namn"
-
-#: src/planner-group-dialog.c:393
-msgid "Manager name"
-msgstr "Ledares namn"
-
-#: src/planner-group-dialog.c:399
-msgid "Manager phone"
-msgstr "Ledares tel"
-
-#: src/planner-group-dialog.c:405
-msgid "Manager email"
-msgstr "Ledares e-post"
-
-#: src/planner-project-properties.c:146
-msgid "Select a calendar to use for this project:"
-msgstr "Välj en kalender att använda för projektet:"
-
-#: src/planner-project-properties.c:606
-msgid "Property"
-msgstr "Egenskap"
-
-#: src/planner-project-properties.c:617 src/planner-property-dialog.c:431
-msgid "Value"
-msgstr "Värde"
-
-#: src/planner-project-properties.c:993 src/planner-property-dialog.c:229
-msgid "The name of the custom property needs to start with a letter."
-msgstr "Egenskapsnamnet måste börja med en bokstav."
-
-#: src/planner-project-properties.c:1065 src/planner-property-dialog.c:300
-#, c-format
-msgid "Do you really want to remove the property '%s' from the project?"
-msgstr "Vill du verkligen ta bort egenskaper \"%s\" från projektet?"
-
-#: src/planner-project-properties.c:1194
-msgid "Could not create properties dialog."
-msgstr "Kunde inte skapa egenskapsdialog."
-
-#: src/planner-property-dialog.c:397
-msgid "Label"
-msgstr "Etikett"
-
-#: src/planner-property-dialog.c:411 src/planner-task-dialog.c:1429
-#: src/planner-resource-view.c:987
-msgid "Type"
-msgstr "Typ"
-
-#: src/planner-print-dialog.c:49
-msgid "Print Project"
-msgstr "Skriv ut projekt"
-
-#: src/planner-print-dialog.c:56
-msgid "Select views"
-msgstr "Välj vyer"
-
-#: src/planner-print-dialog.c:74
-msgid "Select the views to print:"
-msgstr "Välj de vyer som ska skrivas ut:"
-
-#. Put "no group" at the top.
-#: src/planner-resource-dialog.c:248 src/planner-resource-input-dialog.c:96
-#: src/planner-resource-view.c:1375
-msgid "(None)"
-msgstr "(Ingen)"
-
-#: src/planner-resource-dialog.c:258 src/planner-resource-input-dialog.c:106
-#: src/planner-task-dialog.c:249
-msgid "(No name)"
-msgstr "(Inget namn)"
-
-#. i18n: time stamp format for notes in task dialog, see strftime(3) for
-#. * a detailed description.
-#: src/planner-resource-dialog.c:728 src/planner-task-dialog.c:679
-msgid "%a %d %b %Y, %H:%M\n"
-msgstr "%a %d %b %Y, %H.%M\n"
-
-#: src/planner-resource-dialog.c:826
-msgid "None (use project default)"
-msgstr "Ingen (använd projektstandard)"
-
-#: src/planner-resource-dialog.c:953 src/planner-resource-dialog.c:955
-msgid "Edit resource properties"
-msgstr "Redigera resursegenskaper"
-
-#: src/planner-resource-dialog.c:1101 src/planner-task-view.c:230
-#: src/planner-gantt-print.c:198 src/planner-resource-view.c:629
-#: src/planner-resource-view.c:645 src/planner-resource-view.c:1187
-msgid "Work"
-msgstr "Arbete"
-
-#: src/planner-resource-dialog.c:1102 src/planner-resource-view.c:632
-#: src/planner-resource-view.c:646 src/planner-resource-view.c:1188
-msgid "Material"
-msgstr "Material"
-
-#: src/planner-predecessor-model.c:191 src/planner-task-dialog.c:1039
-msgid "FS"
-msgstr "FS"
-
-#: src/planner-predecessor-model.c:194 src/planner-task-dialog.c:1040
-msgid "FF"
-msgstr "FF"
-
-#: src/planner-predecessor-model.c:197 src/planner-task-dialog.c:1041
-msgid "SS"
-msgstr "SS"
-
-#: src/planner-predecessor-model.c:200 src/planner-task-dialog.c:1042
-msgid "SF"
-msgstr "SF"
-
-#: src/planner-task-dialog.c:745
-msgid "Finish to start (FS)"
-msgstr "Slut till start (FS)"
-
-#: src/planner-task-dialog.c:746
-msgid "Finish to finish (FF)"
-msgstr "Slut till slut (FF)"
-
-#: src/planner-task-dialog.c:747
-msgid "Start to start (SS)"
-msgstr "Start till start (SS)"
-
-#: src/planner-task-dialog.c:748
-msgid "Start to finish (SF)"
-msgstr "Start till slut (SF)"
-
-#: src/planner-task-dialog.c:798
-msgid "Can't add new predecessor. No task selected!"
-msgstr "Kan inte lägga till föregångare, ingen aktivitet markerad."
-
-#: src/planner-task-dialog.c:1330
-msgid "Assigned"
-msgstr "Tilldelad"
-
-#: src/planner-task-dialog.c:1347
-msgid "Units"
-msgstr "Enheter"
-
-#: src/planner-task-dialog.c:1451
-msgid "Lag"
-msgstr "Fördröjning"
-
-#: src/planner-task-dialog.c:1584 src/planner-task-dialog.c:1586
-msgid "Edit task properties"
-msgstr "Redigera aktivitetsegenskaper"
-
-#: src/planner-html-plugin.c:133
-#, c-format
-msgid ""
-"\"%s\" is a directory.\n"
-"Enter a filename and try again."
-msgstr ""
-"\"%s\" är en katalog.\n"
-"Ange ett filnamn och försök igen."
-
-#: src/planner-sql-plugin.c:269
-#, c-format
-msgid ""
-"Connection to database '%s' failed:\n"
-"%s"
-msgstr ""
-"Anslutning till databas \"%s\" misslyckades:\n"
-"%s"
-
-#: src/planner-sql-plugin.c:318
-msgid "Project"
-msgstr "Projekt"
-
-#: src/planner-sql-plugin.c:466
-msgid "Open from Database"
-msgstr "Öppna från databas"
-
-#: src/planner-sql-plugin.c:573
-msgid "Save to Database"
-msgstr "Spara till databas"
 
 #: src/planner-format.c:141
 #, c-format
@@ -1387,6 +1089,25 @@ msgstr "%d %b %Y"
 msgid "Project start"
 msgstr "Projektstart"
 
+#: src/planner-gantt-print.c:190 src/planner-group-dialog.c:387
+#: src/planner-property-dialog.c:378 src/planner-resource-view.c:966
+#: src/planner-task-dialog.c:1311 src/planner-task-dialog.c:1397
+#: src/planner-task-view.c:227
+msgid "Name"
+msgstr "Namn"
+
+#: src/planner-gantt-print.c:198 src/planner-resource-dialog.c:1101
+#: src/planner-resource-view.c:629 src/planner-resource-view.c:645
+#: src/planner-resource-view.c:1187 src/planner-task-view.c:230
+msgid "Work"
+msgstr "Arbete"
+
+#: src/planner-gantt-print.c:513 src/planner-gantt-print.c:515
+#: src/planner-gantt-row.c:656 src/planner-gantt-row.c:658
+#: src/planner-window.c:1626
+msgid "Unnamed"
+msgstr "Namnlös"
+
 #: src/planner-gantt-row.c:1841 src/planner-gantt-row.c:1844
 msgid "No name"
 msgstr "Inget namn"
@@ -1425,6 +1146,169 @@ msgid ""
 msgstr ""
 "\n"
 "Arbete"
+
+#: src/planner-group-dialog.c:393
+msgid "Manager name"
+msgstr "Ledares namn"
+
+#: src/planner-group-dialog.c:399
+msgid "Manager phone"
+msgstr "Ledares tel"
+
+#: src/planner-group-dialog.c:405
+msgid "Manager email"
+msgstr "Ledares e-post"
+
+#: src/planner-html-plugin.c:133
+#, c-format
+msgid ""
+"\"%s\" is a directory.\n"
+"Enter a filename and try again."
+msgstr ""
+"\"%s\" är en katalog.\n"
+"Ange ett filnamn och försök igen."
+
+#: src/planner-html-plugin.c:143 src/planner-window.c:1394
+#, c-format
+msgid "File \"%s\" exists, do you want to overwrite it?"
+msgstr "Filen \"%s\" finns redan, vill du skriva över den?"
+
+#: src/planner-main.c:50
+msgid "Create the initial window with the given geometry."
+msgstr "Skapa det första fönstret med den angivna geometrin."
+
+#: src/planner-main.c:50
+msgid "GEOMETRY"
+msgstr "GEOMETRI"
+
+#: src/planner-main.c:76
+msgid "planner: --geometry cannot be used with more than one file."
+msgstr "planner: --geometry kan bara användas med en fil."
+
+#: src/planner-plugin-loader.c:40
+#, c-format
+msgid "Could not open plugin file '%s'\n"
+msgstr "Kunde inte öppna insticksfilen \"%s\"\n"
+
+#: src/planner-predecessor-model.c:191 src/planner-task-dialog.c:1039
+msgid "FS"
+msgstr "FS"
+
+#: src/planner-predecessor-model.c:194 src/planner-task-dialog.c:1040
+msgid "FF"
+msgstr "FF"
+
+#: src/planner-predecessor-model.c:197 src/planner-task-dialog.c:1041
+msgid "SS"
+msgstr "SS"
+
+#: src/planner-predecessor-model.c:200 src/planner-task-dialog.c:1042
+msgid "SF"
+msgstr "SF"
+
+#: src/planner-print-dialog.c:49
+msgid "Print Project"
+msgstr "Skriv ut projekt"
+
+#: src/planner-print-dialog.c:56
+msgid "Select views"
+msgstr "Välj vyer"
+
+#: src/planner-print-dialog.c:74
+msgid "Select the views to print:"
+msgstr "Välj de vyer som ska skrivas ut:"
+
+#: src/planner-project-properties.c:146
+msgid "Select a calendar to use for this project:"
+msgstr "Välj en kalender att använda för projektet:"
+
+#: src/planner-project-properties.c:606
+msgid "Property"
+msgstr "Egenskap"
+
+#: src/planner-project-properties.c:617 src/planner-property-dialog.c:431
+msgid "Value"
+msgstr "Värde"
+
+#: src/planner-project-properties.c:993 src/planner-property-dialog.c:229
+msgid "The name of the custom property needs to start with a letter."
+msgstr "Egenskapsnamnet måste börja med en bokstav."
+
+#: src/planner-project-properties.c:1065 src/planner-property-dialog.c:300
+#, c-format
+msgid "Do you really want to remove the property '%s' from the project?"
+msgstr "Vill du verkligen ta bort egenskaper \"%s\" från projektet?"
+
+#: src/planner-project-properties.c:1194
+msgid "Could not create properties dialog."
+msgstr "Kunde inte skapa egenskapsdialog."
+
+#: src/planner-property-dialog.c:397
+msgid "Label"
+msgstr "Etikett"
+
+#: src/planner-property-dialog.c:411 src/planner-resource-view.c:987
+#: src/planner-task-dialog.c:1429
+msgid "Type"
+msgstr "Typ"
+
+#. Put "no group" at the top.
+#: src/planner-resource-dialog.c:248 src/planner-resource-input-dialog.c:96
+#: src/planner-resource-view.c:1375
+msgid "(None)"
+msgstr "(Ingen)"
+
+#: src/planner-resource-dialog.c:258 src/planner-resource-input-dialog.c:106
+#: src/planner-task-dialog.c:249
+msgid "(No name)"
+msgstr "(Inget namn)"
+
+#. i18n: time stamp format for notes in task dialog, see strftime(3) for
+#. * a detailed description.
+#: src/planner-resource-dialog.c:728 src/planner-task-dialog.c:679
+msgid "%a %d %b %Y, %H:%M\n"
+msgstr "%a %d %b %Y, %H.%M\n"
+
+#: src/planner-resource-dialog.c:826
+msgid "None (use project default)"
+msgstr "Ingen (använd projektstandard)"
+
+#: src/planner-resource-dialog.c:953 src/planner-resource-dialog.c:955
+msgid "Edit resource properties"
+msgstr "Redigera resursegenskaper"
+
+#: src/planner-resource-dialog.c:1102 src/planner-resource-view.c:632
+#: src/planner-resource-view.c:646 src/planner-resource-view.c:1188
+msgid "Material"
+msgstr "Material"
+
+#: src/planner-resource-view.c:248
+msgid "/_Insert resource"
+msgstr "/_Infoga resurs"
+
+#: src/planner-resource-view.c:249
+msgid "/_Remove resource"
+msgstr "/_Ta bort resurs"
+
+#: src/planner-resource-view.c:250
+msgid "/_Edit resource..."
+msgstr "/_Redigera resurs..."
+
+#: src/planner-resource-view.c:350
+msgid "_Resources"
+msgstr "_Resurser"
+
+#: src/planner-resource-view.c:849
+msgid "Edit custom resource properties"
+msgstr "Redigera egenskaper för egen resurs"
+
+#: src/planner-resource-view.c:1011
+msgid "Group"
+msgstr "Grupp"
+
+#: src/planner-resource-view.c:1040
+msgid "Email"
+msgstr "E-post"
 
 #. i18n: Short "Week", preferably 2 letters.
 #: src/planner-scale-utils.c:325
@@ -1473,92 +1357,153 @@ msgstr "H%d"
 msgid "%04d, H%d"
 msgstr "%04d, H%d"
 
-#: src/planner-task-tree.c:184
+#: src/planner-sql-plugin.c:273
+#, c-format
+msgid ""
+"Connection to database '%s' failed:\n"
+"%s"
+msgstr ""
+"Anslutning till databas \"%s\" misslyckades:\n"
+"%s"
+
+#: src/planner-sql-plugin.c:322
+msgid "Project"
+msgstr "Projekt"
+
+#: src/planner-sql-plugin.c:498
+msgid "Open from Database"
+msgstr "Öppna från databas"
+
+#: src/planner-sql-plugin.c:605
+msgid "Save to Database"
+msgstr "Spara till databas"
+
+#: src/planner-task-dialog.c:745
+msgid "Finish to start (FS)"
+msgstr "Slut till start (FS)"
+
+#: src/planner-task-dialog.c:746
+msgid "Finish to finish (FF)"
+msgstr "Slut till slut (FF)"
+
+#: src/planner-task-dialog.c:747
+msgid "Start to start (SS)"
+msgstr "Start till start (SS)"
+
+#: src/planner-task-dialog.c:748
+msgid "Start to finish (SF)"
+msgstr "Start till slut (SF)"
+
+#: src/planner-task-dialog.c:798
+msgid "Can't add new predecessor. No task selected!"
+msgstr "Kan inte lägga till föregångare, ingen aktivitet markerad."
+
+#: src/planner-task-dialog.c:1330
+msgid "Assigned"
+msgstr "Tilldelad"
+
+#: src/planner-task-dialog.c:1347
+msgid "Units"
+msgstr "Enheter"
+
+#: src/planner-task-dialog.c:1451
+msgid "Lag"
+msgstr "Fördröjning"
+
+#: src/planner-task-dialog.c:1584 src/planner-task-dialog.c:1586
+msgid "Edit task properties"
+msgstr "Redigera aktivitetsegenskaper"
+
+#: src/planner-task-tree.c:187
 msgid "/_Insert task"
 msgstr "/_Infoga aktivitet"
 
-#: src/planner-task-tree.c:185
+#: src/planner-task-tree.c:190
 msgid "/_Insert subtask"
 msgstr "/_Infoga underaktivitet"
 
-#: src/planner-task-tree.c:186
+#: src/planner-task-tree.c:193
 msgid "/_Remove task"
 msgstr "/_Ta bort aktivitet"
 
-#: src/planner-task-tree.c:188
+#: src/planner-task-tree.c:198
 msgid "/_Unlink task"
 msgstr "_Avlänka aktivitet"
 
-#: src/planner-task-tree.c:190
+#: src/planner-task-tree.c:204
 msgid "/_Edit task..."
 msgstr "/_Redigera aktivitet..."
 
-#: src/planner-task-tree.c:2112
+#: src/planner-task-tree.c:372
+msgid "Edit task property"
+msgstr "Redigera aktivitetsegenskap"
+
+#: src/planner-task-tree.c:2335
 msgid "mon"
 msgstr "mån"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:2113
+#: src/planner-task-tree.c:2336
 msgid "month"
 msgstr "månad"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:2114
+#: src/planner-task-tree.c:2337
 msgid "months"
 msgstr "månader"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:2115
+#: src/planner-task-tree.c:2338
 msgid "w"
 msgstr "v"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:2116
+#: src/planner-task-tree.c:2339
 msgid "week"
 msgstr "vecka"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:2117
+#: src/planner-task-tree.c:2340
 msgid "weeks"
 msgstr "veckor"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:2118
+#: src/planner-task-tree.c:2341
 msgid "d"
 msgstr "d"
 
 #. day unit variant accepted in input
-#: src/planner-task-tree.c:2119
+#: src/planner-task-tree.c:2342
 msgid "day"
 msgstr "dag"
 
 #. day unit variant accepted in input
-#: src/planner-task-tree.c:2121
+#: src/planner-task-tree.c:2344
 msgid "h"
 msgstr "t"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:2122
+#: src/planner-task-tree.c:2345
 msgid "hour"
 msgstr "timme"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:2123
+#: src/planner-task-tree.c:2346
 msgid "hours"
 msgstr "timmar"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:2124
+#: src/planner-task-tree.c:2347
 msgid "min"
 msgstr "min"
 
 #. minute unit variant accepted in input
-#: src/planner-task-tree.c:2125
+#: src/planner-task-tree.c:2348
 msgid "minute"
 msgstr "minut"
 
 #. minute unit variant accepted in input
-#: src/planner-task-tree.c:2126
+#: src/planner-task-tree.c:2349
 msgid "minutes"
 msgstr "minuter"
 
@@ -1586,188 +1531,110 @@ msgstr "Glapp"
 msgid "Edit custom task properties"
 msgstr "Redigera egenskaper för egen aktivitet"
 
-#: src/planner-resource-view.c:248
-msgid "/_Insert resource"
-msgstr "/_Infoga resurs"
+#: src/planner-view-loader.c:40
+#, c-format
+msgid "Could not open view plugin file '%s'\n"
+msgstr "Kunde inte öppna vyinsticksfilen \"%s\"\n"
 
-#: src/planner-resource-view.c:249
-msgid "/_Remove resource"
-msgstr "/_Ta bort resurs"
+#: src/planner-window.c:638
+msgid "Open a file"
+msgstr "Öppna en fil"
 
-#: src/planner-resource-view.c:250
-msgid "/_Edit resource..."
-msgstr "/_Redigera resurs..."
+#. I18n: Translators, list your names here, newline separated if there
+#. * are more than one, to appear in the about box.
+#.
+#: src/planner-window.c:1075 src/planner-window.c:1082
+msgid "translator_credits"
+msgstr ""
+"Richard Hult\n"
+"Christian Rose\n"
+"Skicka synpunkter på översättningen till sv@li.org"
 
-#: src/planner-resource-view.c:350
-msgid "_Resources"
-msgstr "_Resurser"
+#. "Copyright \xc2\xa9"
+#: src/planner-window.c:1079
+msgid "A Project Management application for the GNOME desktop"
+msgstr "Ett projekthanteringsprogram för GNOME-skrivbordet"
 
-#: src/planner-resource-view.c:849
-msgid "Edit custom resource properties"
-msgstr "Redigera egenskaper för egen resurs"
+#: src/planner-window.c:1089
+msgid "The Planner Homepage"
+msgstr "Planners hemsida"
 
-#: src/planner-resource-view.c:1011
-msgid "Group"
-msgstr "Grupp"
+#: src/planner-window.c:1205
+msgid "If you don't save, changes made the last minute will be discarded."
+msgstr ""
+"Om du inte sparar kommer ändringarna gjorda den senaste minuten att gå "
+"förlorade."
 
-#: src/planner-resource-view.c:1040
-msgid "Email"
-msgstr "E-post"
+#: src/planner-window.c:1210
+#, c-format
+msgid "If you don't save, changes made the last %d minutes will be discarded."
+msgstr ""
+"Om du inte sparar kommer ändringarna gjorda de senaste %d minuterna att gå "
+"förlorade."
 
-#~ msgid "No support for SQL storage built in this version of MrProject."
-#~ msgstr "Inget stöd för SQL-lager är byggt i denna version av MrProject."
+#: src/planner-window.c:1215
+msgid "If you don't save, changes made the last hour will be discarded."
+msgstr ""
+"Om du inte sparar kommer ändringarna gjorda den senaste timmen att gå "
+"förlorade."
 
-#, fuzzy
-#~ msgid "Invalid URI"
-#~ msgstr "Ogiltig Unicode"
+#: src/planner-window.c:1220
+#, c-format
+msgid "If you don't save, changes made the last %d hours will be discarded."
+msgstr ""
+"Om du inte sparar kommer ändringarna gjorda de senaste %d timmarna att gå "
+"förlorade."
 
-#~ msgid ""
-#~ "Could not load file.\n"
-#~ "Error was: \"%s\""
-#~ msgstr ""
-#~ "Kunde inte läsa in fil.\n"
-#~ "Felet var: \"%s\""
+#: src/planner-window.c:1227
+#, c-format
+msgid "Save changes to document '%s' before closing?"
+msgstr "Spara ändringarna i dokumentet \"%s\" innan det stängs?"
 
-#~ msgid "No MPX header"
-#~ msgstr "Inget MPX-huvud"
+#: src/planner-window.c:1245
+msgid "C_lose without saving"
+msgstr "S_täng utan att spara"
 
-#~ msgid "Not an mpx '%s'"
-#~ msgstr "Inte ett mpx \"%s\""
+#: src/planner-window.c:1247
+msgid "_Cancel"
+msgstr "_Avbryt"
 
-#~ msgid "Jan"
-#~ msgstr "jan"
+#: src/planner-window.c:1358
+msgid "Save a file"
+msgstr "Spara en fil"
 
-#~ msgid "Feb"
-#~ msgstr "feb"
-
-#~ msgid "Mar"
-#~ msgstr "mar"
-
-#~ msgid "Apr"
-#~ msgstr "apr"
-
-#, fuzzy
-#~ msgid "May"
-#~ msgstr "dag"
-
-#~ msgid "Jun"
-#~ msgstr "jun"
-
-#~ msgid "Jul"
-#~ msgstr "jul"
-
-#~ msgid "Aug"
-#~ msgstr "aug"
-
-#~ msgid "Sep"
-#~ msgstr "sep"
-
-#~ msgid "Oct"
-#~ msgstr "okt"
-
-#~ msgid "Nov"
-#~ msgstr "nov"
-
-#~ msgid "Dec"
-#~ msgstr "dec"
-
-#~ msgid "January"
-#~ msgstr "januari"
-
-#~ msgid "February"
-#~ msgstr "februari"
-
-#~ msgid "March"
-#~ msgstr "mars"
-
-#~ msgid "June"
-#~ msgstr "juni"
-
-#~ msgid "July"
-#~ msgstr "juli"
-
-#~ msgid "August"
-#~ msgstr "augusti"
-
-#~ msgid "September"
-#~ msgstr "september"
-
-#~ msgid "October"
-#~ msgstr "oktober"
-
-#~ msgid "November"
-#~ msgstr "november"
-
-#~ msgid "December"
-#~ msgstr "december"
-
-#~ msgid "J 1"
-#~ msgstr "J"
-
-#~ msgid "F 2"
-#~ msgstr "F"
-
-#~ msgid "M 3"
-#~ msgstr "M"
-
-#~ msgid "A 4"
-#~ msgstr "A"
-
-#~ msgid "M 5"
-#~ msgstr "M"
-
-#~ msgid "J 6"
-#~ msgstr "J"
-
-#~ msgid "J 7"
-#~ msgstr "J"
-
-#~ msgid "A 8"
-#~ msgstr "A"
-
-#~ msgid "S 9"
-#~ msgstr "S"
-
-#~ msgid "O 10"
-#~ msgstr "O"
-
-#~ msgid "N 11"
-#~ msgstr "N"
-
-#~ msgid "D 12"
-#~ msgstr "D"
-
-#, fuzzy
-#~ msgid "Sun"
-#~ msgstr "Söndag"
-
-#, fuzzy
-#~ msgid "Mon"
-#~ msgstr "mån"
-
-#, fuzzy
-#~ msgid "Tue"
-#~ msgstr "Tisdag"
-
-#, fuzzy
-#~ msgid "Wed"
-#~ msgstr "vecka %d"
-
-#~ msgid "Thu"
-#~ msgstr "tor"
-
-#, fuzzy
-#~ msgid "Fri"
-#~ msgstr "Fredag"
+#: src/planner-window.c:1589
+msgid ""
+"You have opened a file that was saved with an old version of Planner.\n"
+"\n"
+"When loading old files, all tasks will use the constraint 'Must Start On', "
+"since the old version did not fully support automatic rescheduling. To take "
+"advantage of this new feature, you should add predecessor relations between "
+"tasks that are dependant on each other.\n"
+"\n"
+"You can add a predecessor relation by clicking on the predecessor and "
+"dragging to the successor.\n"
+"\n"
+"After doing this, you can remove all constraints by selecting the menu item "
+"'Remove all constraints' in the 'Edit' menu."
+msgstr ""
+"Du har öppnat en fil som sparades med en gammal version av Planner.\n"
+"\n"
+"När gamla projekt läses in, sätts restriktionen \"Måste starta\", eftersom "
+"den gamla versionen inte fullt ut stödde automatiskt schemaläggning. För att "
+"utnyttja denna nya funktion, rekommenderar vi att du lägger till relationer "
+"mellan aktiveter som beror på varandra.\n"
+"\n"
+"Du kan göra det genom att klicka på föregångaren och dra till "
+"efterföljaren.\n"
+"\n"
+"När du gjort det, kan du ta bort alla restriktioner genom att välja "
+"\"Återställ alla restriktioner\" i \"Redigera\"-menyn."
 
 #~ msgid "Failed to load file %s."
 #~ msgstr "Misslyckades med att läsa in filen %s."
 
 #~ msgid "%s is not valid XML."
 #~ msgstr "%s är inte giltig XML."
-
-#~ msgid "\"%s\" is not a valid MrProject file"
-#~ msgstr "\"%s\" är inte en giltig MrProject-fil"
 
 #, fuzzy
 #~ msgid "Group Name"
@@ -1883,11 +1750,11 @@ msgstr "E-post"
 #~ msgid "The primary storage module to use for the project"
 #~ msgstr "Välj en kalender att använda för projektet:"
 
-#~ msgid "Contribute to MrProject"
-#~ msgstr "Bidra till MrProject"
+#~ msgid "Contribute to Planner"
+#~ msgstr "Bidra till Planner"
 
-#~ msgid "MrProject Project Management Tool"
-#~ msgstr "Projekthanteringsverktyget MrProject"
+#~ msgid "Planner Project Management Tool"
+#~ msgstr "Projekthanteringsverktyget Planner"
 
 #~ msgid "About"
 #~ msgstr "Om"

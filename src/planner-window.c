@@ -171,9 +171,11 @@ static gboolean   window_delete_event_cb                 (PlannerWindow         
 							  gpointer                      user_data);
 static void       window_undo_state_changed_cb           (PlannerCmdManager            *manager,
 							  gboolean                      state,
+							  const gchar                  *label,
 							  PlannerWindow                *window);
 static void       window_redo_state_changed_cb           (PlannerCmdManager            *manager,
 							  gboolean                      state,
+							  const gchar                  *label,
 							  PlannerWindow                *window);
 static void       window_project_needs_saving_changed_cb (MrpProject                   *project,
 							  gboolean                      needs_saving,
@@ -1108,6 +1110,7 @@ window_delete_event_cb (PlannerWindow *window,
 static void
 window_undo_state_changed_cb (PlannerCmdManager *manager,
 			      gboolean           state,
+			      const gchar       *label,
 			      PlannerWindow     *window)
 {
 	PlannerWindowPriv *priv;
@@ -1116,13 +1119,18 @@ window_undo_state_changed_cb (PlannerCmdManager *manager,
 
 	bonobo_ui_component_set_prop (priv->ui_component, 
 				      "/commands/EditUndo",
-				      "sensitive", state ? "1" : "0", 
+				      "sensitive", state ? "1" : "0",
+				      NULL);
+	bonobo_ui_component_set_prop (priv->ui_component, 
+				      "/commands/EditUndo",
+				      "label", label,
 				      NULL);	
 }
 
 static void
 window_redo_state_changed_cb (PlannerCmdManager *manager,
 			      gboolean           state,
+			      const gchar       *label,
 			      PlannerWindow     *window)
 {
 	PlannerWindowPriv *priv;
@@ -1132,6 +1140,10 @@ window_redo_state_changed_cb (PlannerCmdManager *manager,
 	bonobo_ui_component_set_prop (priv->ui_component, 
 				      "/commands/EditRedo",
 				      "sensitive", state ? "1" : "0", 
+				      NULL);	
+	bonobo_ui_component_set_prop (priv->ui_component, 
+				      "/commands/EditRedo",
+				      "label", label,
 				      NULL);	
 }
 

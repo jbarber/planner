@@ -20,6 +20,7 @@
 
 #include <config.h>
 #include <glib.h>
+#include <libgnome/gnome-i18n.h>
 #include "planner-cmd-manager.h"
 #include "planner-marshal.h"
 
@@ -88,8 +89,8 @@ cmd_manager_class_init (PlannerCmdManagerClass *klass)
 		G_SIGNAL_RUN_LAST,
 		0,
 		NULL, NULL,
-		planner_marshal_VOID__BOOLEAN,
-		G_TYPE_NONE, 1, G_TYPE_BOOLEAN);
+		planner_marshal_VOID__BOOLEAN_STRING,
+		G_TYPE_NONE, 2, G_TYPE_BOOLEAN, G_TYPE_STRING);
 
 	signals[REDO_STATE_CHANGED] = g_signal_new (
 		"redo_state_changed",
@@ -97,8 +98,8 @@ cmd_manager_class_init (PlannerCmdManagerClass *klass)
 		G_SIGNAL_RUN_LAST,
 		0,
 		NULL, NULL,
-		planner_marshal_VOID__BOOLEAN,
-		G_TYPE_NONE, 1, G_TYPE_BOOLEAN);
+		planner_marshal_VOID__BOOLEAN_STRING,
+		G_TYPE_NONE, 2, G_TYPE_BOOLEAN, G_TYPE_STRING);
 }
 
 static void
@@ -147,8 +148,53 @@ cmd_manager_dump (PlannerCmdManager *manager)
 		
 		g_print (" %s\n", cmd->label);
 	}
-
+	
 	g_print ("\n");
+}
+
+static void
+state_changed (PlannerCmdManager *manager)
+{
+	PlannerCmdManagerPriv *priv = manager->priv;
+	GList                 *l;
+	gchar                 *label;
+	PlannerCmd            *cmd;
+	
+	/* Undo */
+	l = priv->current;
+
+	if (l) {
+		cmd = l->data;
+		label = g_strdup_printf (_("_Undo '%s'"), cmd->label);
+	} else {
+		label = g_strdup (_("_Undo"));
+	}
+	
+	g_signal_emit (manager, signals[UNDO_STATE_CHANGED], 0, l != NULL, label);
+
+	g_free (label);
+	
+	/* Redo */
+
+	if (!priv->current && priv->list) {
+		l = g_list_last (priv->list);
+	}
+	else if (!priv->current || !priv->current->prev) {
+		l = NULL;
+	} else {
+		l = priv->current->prev;
+	}
+	
+	if (l) {
+		cmd = l->data;
+		label = g_strdup_printf (_("_Redo '%s'"), cmd->label);
+	} else {
+		label = g_strdup (_("_Redo"));
+	}
+
+	g_signal_emit (manager, signals[REDO_STATE_CHANGED], 0, l != NULL, label);
+
+	g_free (label);
 }
 
 void
@@ -156,15 +202,11 @@ planner_cmd_manager_insert_and_do (PlannerCmdManager *manager, PlannerCmd *cmd)
 {
 	PlannerCmdManagerPriv *priv;
 	GList                 *current;
-	gboolean               undo, redo;
 
 	g_return_if_fail (PLANNER_IS_CMD_MANAGER (manager));
 	g_return_if_fail (cmd != NULL);
 
 	priv = manager->priv;
-
-	undo = (priv->current != NULL);
-	redo = (priv->current != priv->list);
 
 	if (priv->current != priv->list) {
 		/* Need to wipe the cmd history added after the current
@@ -191,12 +233,7 @@ planner_cmd_manager_insert_and_do (PlannerCmdManager *manager, PlannerCmd *cmd)
 
 	cmd_manager_dump (manager);
 
-	if (!undo) {
-		g_signal_emit (manager, signals[UNDO_STATE_CHANGED], 0, TRUE);
-	}
-	if (redo) {
-		g_signal_emit (manager, signals[REDO_STATE_CHANGED], 0, FALSE);
-	}
+	state_changed (manager);
 }
 
 gboolean
@@ -204,8 +241,6 @@ planner_cmd_manager_undo (PlannerCmdManager *manager)
 {
 	PlannerCmdManagerPriv *priv;
 	PlannerCmd            *cmd;
-	gboolean               undo_before, redo_before;
-	gboolean               undo_after, redo_after;
 
 	g_return_val_if_fail (PLANNER_IS_CMD_MANAGER (manager), FALSE);
 
@@ -215,9 +250,6 @@ planner_cmd_manager_undo (PlannerCmdManager *manager)
 		return FALSE;
 	}
 
-	undo_before = (priv->current != NULL);
-	redo_before = (priv->current != priv->list);
-	
 	cmd = priv->current->data;
 
 	cmd->undo_func (cmd);
@@ -226,16 +258,8 @@ planner_cmd_manager_undo (PlannerCmdManager *manager)
 
 	cmd_manager_dump (manager);
 
-	undo_after = (priv->current != NULL);
-	redo_after = (priv->current != priv->list);
+	state_changed (manager);
 
-	if (undo_before != undo_after) {
-		g_signal_emit (manager, signals[UNDO_STATE_CHANGED], 0, undo_after);
-	}
-	if (redo_before != redo_after) {
-		g_signal_emit (manager, signals[REDO_STATE_CHANGED], 0, redo_after);
-	}
-	
 	return TRUE;
 }
 
@@ -244,16 +268,11 @@ planner_cmd_manager_redo (PlannerCmdManager *manager)
 {
 	PlannerCmdManagerPriv *priv;
 	PlannerCmd            *cmd;
-	gboolean               undo_before, redo_before;
-	gboolean               undo_after, redo_after;
 
 	g_return_val_if_fail (PLANNER_IS_CMD_MANAGER (manager), FALSE);
 
 	priv = manager->priv;
 
-	undo_before = (priv->current != NULL);
-	redo_before = (priv->current != priv->list);
-	
 	if (!priv->current && priv->list) {
 		priv->current = g_list_last (priv->list);
 	}
@@ -269,15 +288,7 @@ planner_cmd_manager_redo (PlannerCmdManager *manager)
 
 	cmd_manager_dump (manager);
 
-	undo_after = (priv->current != NULL);
-	redo_after = (priv->current != priv->list);
-
-	if (undo_before != undo_after) {
-		g_signal_emit (manager, signals[UNDO_STATE_CHANGED], 0, undo_after);
-	}
-	if (redo_before != redo_after) {
-		g_signal_emit (manager, signals[REDO_STATE_CHANGED], 0, redo_after);
-	}
+	state_changed (manager);
 
 	return TRUE;
 }
