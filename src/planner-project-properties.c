@@ -577,6 +577,7 @@ mpp_set_start (GtkWidget *dialog, mrptime start)
 	data = DIALOG_GET_DATA (dialog);
 
 	str = mrp_time_format_locale (start);
+
 	gtk_entry_set_text (GTK_ENTRY (data->start_entry), str);
 	g_free (str);
 }
@@ -602,23 +603,26 @@ mpp_start_set_from_widget (GtkWidget *dialog)
 	const gchar *str;
 	mrptime      start;
 	GDate       *date;
-	struct tm    tm;
+	gint         year, month, day;
 
 	data = DIALOG_GET_DATA (dialog);
 
 	str = gtk_entry_get_text (GTK_ENTRY (data->start_entry));
-
+	
 	date = g_date_new ();
 	g_date_set_parse (date, str);
-
+	
 	if (!g_date_valid (date)) {
 		return;
 	}
-
-	g_date_to_struct_tm (date, &tm);
-	g_date_free (date);
 	
-	start = mrp_time_from_tm (&tm);
+	year = g_date_get_year (date);
+	month = g_date_get_month (date);
+	day = g_date_get_day (date);
+	
+	g_date_free (date);
+
+	start = mrp_time_compose (year, month, day, 0, 0, 0);
 	if (start < 0) {
 		return;
 	}

@@ -1,5 +1,10 @@
 2005-02-20  Richard Hult  <richard@imendio.com>
 
+	* src/planner-project-properties.c: (mpp_set_start),
+	(mpp_start_set_from_widget): Try to fix bug #156615.
+
+2005-02-20  Richard Hult  <richard@imendio.com>
+
 	* src/planner-ttable-row.c: (recalc_bounds),
 	(ttable_row_ensure_layout), (ttable_row_update_resources),
 	(ttable_row_draw_assignment), (ttable_row_point),
