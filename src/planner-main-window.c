@@ -39,6 +39,7 @@
 #include <gtk/gtklabel.h>
 #include <gtk/gtkfilesel.h>
 #include <glade/glade.h>
+#include <gconf/gconf-client.h>
 #include <libgnome/gnome-help.h>
 #include <libgnome/gnome-i18n.h>
 #include <libgnomeui/gnome-about.h>
@@ -62,6 +63,7 @@
 #include "planner-view.h"
 
 #define d(x)
+#define GCONF_PATH "/apps/planner"
 
 struct _MgMainWindowPriv {
 	MgApplication       *application;
@@ -564,6 +566,36 @@ main_window_file_is_dir (const gchar *file)
 	return FALSE;
 }
 
+static gchar *
+get_last_dir (MgMainWindow *window)
+{
+	MgMainWindowPriv *priv;
+	GConfClient      *gconf_client;
+	gchar            *last_dir;
+	
+	priv = window->priv;
+	
+	gconf_client = planner_application_get_gconf_client (priv->application);
+	
+	last_dir = gconf_client_get_string (gconf_client,
+					    GCONF_PATH "/general/last_dir",
+					    NULL);
+	
+	if (last_dir == NULL) {
+		last_dir = g_strdup (g_get_home_dir ());
+	}
+	
+	if (last_dir[strlen (last_dir)] != G_DIR_SEPARATOR) {
+		gchar *tmp;
+		
+		tmp = g_strconcat (last_dir, G_DIR_SEPARATOR_S, NULL);
+		g_free (last_dir);
+		last_dir = tmp;
+	}
+
+	return last_dir;
+}
+
 static void
 main_window_open_cb (BonoboUIComponent *component,
 		     gpointer           data,
@@ -574,14 +606,22 @@ main_window_open_cb (BonoboUIComponent *component,
 	GtkWidget        *file_sel;
 	gint              response;
 	const gchar      *filename = NULL;
+	gchar            *last_dir;
 	GtkWidget        *new_window;
+	GConfClient      *gconf_client;
 
 	g_return_if_fail (MG_IS_MAIN_WINDOW (data));
 
 	window = MG_MAIN_WINDOW (data);
 	priv = window->priv;
+
+	gconf_client = planner_application_get_gconf_client (priv->application);
 	
 	file_sel = gtk_file_selection_new (_("Open a file"));
+
+	last_dir = get_last_dir (window);
+	gtk_file_selection_set_filename (GTK_FILE_SELECTION (file_sel), last_dir);
+	g_free (last_dir);
 
 	gtk_window_set_modal (GTK_WINDOW (file_sel), TRUE);
 
@@ -592,7 +632,7 @@ main_window_open_cb (BonoboUIComponent *component,
 	if (response == GTK_RESPONSE_OK) {
 		filename = gtk_file_selection_get_filename (
 			GTK_FILE_SELECTION (file_sel));
-
+		
 		if (main_window_file_is_dir (filename)) {
 			filename = NULL;
 		}
@@ -616,6 +656,13 @@ main_window_open_cb (BonoboUIComponent *component,
 				gtk_widget_destroy (new_window);
 			}
 		}
+		
+		last_dir = g_path_get_dirname (filename);
+		gconf_client_set_string (gconf_client,
+					 GCONF_PATH "/general/last_dir",
+					 last_dir,
+					 NULL);
+		g_free (last_dir);
 	}
 }
 
@@ -1224,14 +1271,22 @@ main_window_do_save_as (MgMainWindow *window)
 	GtkWidget        *file_sel;
 	gint              response;
 	const gchar      *filename = NULL;
-
+	gchar            *last_dir;
+	GConfClient      *gconf_client;
+	
 	g_return_val_if_fail (MG_IS_MAIN_WINDOW (window), FALSE);
 	
 	priv = window->priv;
-	
+
+	gconf_client = planner_application_get_gconf_client (priv->application);
+
 	file_sel = gtk_file_selection_new (_("Save a file"));
 	gtk_window_set_modal (GTK_WINDOW (file_sel), TRUE);
 
+	last_dir = get_last_dir (window);
+	gtk_file_selection_set_filename (GTK_FILE_SELECTION (file_sel), last_dir);
+	g_free (last_dir);
+	
 	response = gtk_dialog_run (GTK_DIALOG (file_sel));
 	if (response == GTK_RESPONSE_OK) {
 		filename = gtk_file_selection_get_filename (
@@ -1295,6 +1350,13 @@ main_window_do_save_as (MgMainWindow *window)
 
 			return FALSE;
 		}
+
+		last_dir = g_path_get_dirname (filename);
+		gconf_client_set_string (gconf_client,
+					 GCONF_PATH "/general/last_dir",
+					 last_dir,
+					 NULL);
+		g_free (last_dir);
 		
 		return TRUE;
 	} else {

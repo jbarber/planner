@@ -1,3 +1,11 @@
+2003-12-09  Richard Hult  <richard@imendio.com>
+
+	* Makefile.am: Update for new intltool.
+
+	* src/planner-main-window.c: (get_last_dir), (main_window_open_cb),
+	(main_window_do_save_as): Patch from Bernardo Silveira to remember
+	the last used dir.
+
 2003-12-08  Xavier Ordoquy <xordoquy@wanadoo.fr>
 
 	* libplanner/Makefile.am: removed a tab.
