@@ -1,10 +1,15 @@
+if HAVE_DOTNET
+dotnet_DIR = dotnet
+endif
+
 SUBDIRS = \
 	po 				\
 	libplanner			\
 	libegg				\
 	src				\
 	data				\
-	docs
+	docs				\
+	$(dotnet_DIR)
 
 EXTRA_DIST = \
 	libplanner-1.pc			\
