@@ -32,7 +32,9 @@
       <separator/>
       <menuitem    name="FileSave"         verb=""  accel="*Control*s"/>
       <menuitem    name="FileSaveAs"       verb=""  accel="*Shift**Control*s"/>
-      <placeholder name="Export placeholder" delimit="top"/>
+      <submenu     name="Export" _label="E_xport To">
+      <placeholder name="Export placeholder"/>
+      </submenu>
       <separator/>
       <menuitem    name="FilePrint"        verb=""  accel="*Control*p"/>
       <menuitem    name="FilePrintPreview" verb=""  accel="*Shift**Control*p"/>

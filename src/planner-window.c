@@ -415,8 +415,6 @@ window_populate (PlannerWindow *window)
 	PlannerView           *view;
 	gint              view_num;
 
-	g_return_if_fail (PLANNER_IS_MAIN_WINDOW (window));
-	
 	priv = window->priv;
 
 	bonobo_ui_component_freeze (priv->ui_component, NULL);
@@ -562,9 +560,7 @@ window_new_cb (BonoboUIComponent *component,
 {
 	PlannerWindow     *window;
 	PlannerWindowPriv *priv;
-	GtkWidget        *new_window;
-	
-	g_return_if_fail (PLANNER_IS_MAIN_WINDOW (data));
+	GtkWidget         *new_window;
 	
 	window = PLANNER_WINDOW (data);
 	priv   = window->priv;
@@ -589,8 +585,8 @@ static gchar *
 get_last_dir (PlannerWindow *window)
 {
 	PlannerWindowPriv *priv;
-	GConfClient      *gconf_client;
-	gchar            *last_dir;
+	GConfClient       *gconf_client;
+	gchar             *last_dir;
 	
 	priv = window->priv;
 	
@@ -622,14 +618,12 @@ window_open_cb (BonoboUIComponent *component,
 {
 	PlannerWindow     *window;
 	PlannerWindowPriv *priv;
-	GtkWidget        *file_sel;
-	gint              response;
-	const gchar      *filename = NULL;
-	gchar            *last_dir;
-	GtkWidget        *new_window;
-	GConfClient      *gconf_client;
-
-	g_return_if_fail (PLANNER_IS_MAIN_WINDOW (data));
+	GtkWidget         *file_sel;
+	gint               response;
+	const gchar       *filename = NULL;
+	gchar             *last_dir;
+	GtkWidget         *new_window;
+	GConfClient       *gconf_client;
 
 	window = PLANNER_WINDOW (data);
 	priv = window->priv;
@@ -692,8 +686,6 @@ window_save_as_cb (BonoboUIComponent *component,
 {
 	PlannerWindow *window;
 
-	g_return_if_fail (PLANNER_IS_MAIN_WINDOW(data));
-	
 	window = PLANNER_WINDOW (data);
 
         window_do_save_as (window);
@@ -705,8 +697,6 @@ window_save_cb (BonoboUIComponent *component,
 		const char        *cname)
 {
 	PlannerWindow     *window;
-
-	g_return_if_fail (PLANNER_IS_MAIN_WINDOW (data));
 
 	window = PLANNER_WINDOW (data);
 
@@ -726,8 +716,6 @@ window_print_preview_cb (BonoboUIComponent *component,
 	PlannerView           *view;
 	PlannerPrintJob       *job;
 	gint              n_pages;
-
-	g_return_if_fail (PLANNER_IS_MAIN_WINDOW (data));
 
 	window = PLANNER_WINDOW (data);
 	priv = window->priv;
@@ -780,8 +768,6 @@ window_print_cb (BonoboUIComponent *component,
 	PlannerPrintJob   *job;
 	gint               n_pages;
 	
-	g_return_if_fail (PLANNER_IS_MAIN_WINDOW (data));
-
 	window = PLANNER_WINDOW (data);
 	priv = window->priv;
 
@@ -858,7 +844,6 @@ window_properties_cb (BonoboUIComponent *component,
 		      gpointer           data, 
 		      const char        *cname)
 {
-	g_return_if_fail (PLANNER_IS_MAIN_WINDOW (data));
 }
 
 static void
@@ -866,8 +851,6 @@ window_close_cb (BonoboUIComponent *component,
 		 gpointer           data,
 		 const char        *cname)
 {
-	g_return_if_fail (PLANNER_IS_MAIN_WINDOW (data));
-
 	planner_window_close (PLANNER_WINDOW (data));
 }
 
@@ -878,8 +861,6 @@ window_exit_cb (BonoboUIComponent *component,
 {
 	PlannerWindow     *window;
 	PlannerWindowPriv *priv;
-	
-	g_return_if_fail (PLANNER_IS_MAIN_WINDOW (data));
 	
 	window = PLANNER_WINDOW (data);
 	priv   = window->priv;
@@ -894,8 +875,6 @@ window_redo_cb (BonoboUIComponent *component,
 {
 	PlannerWindow     *window;
 	PlannerWindowPriv *priv;
-
-	g_return_if_fail (PLANNER_IS_MAIN_WINDOW (data));
 
 	window = PLANNER_WINDOW (data);
 
@@ -912,8 +891,6 @@ window_undo_cb (BonoboUIComponent *component,
 	PlannerWindow     *window;
 	PlannerWindowPriv *priv;
 
-	g_return_if_fail (PLANNER_IS_MAIN_WINDOW (data));
-
 	window = PLANNER_WINDOW (data);
 
 	priv = window->priv;
@@ -929,8 +906,6 @@ window_project_props_cb (BonoboUIComponent *component,
 	PlannerWindow     *window;
 	PlannerWindowPriv *priv;
 	
-	g_return_if_fail (PLANNER_IS_MAIN_WINDOW (data));
-
 	window = PLANNER_WINDOW (data);
 	priv = window->priv;
 	
@@ -953,8 +928,6 @@ window_manage_calendars_cb (BonoboUIComponent *component,
 {
 	PlannerWindow *window;
 	
-	g_return_if_fail (PLANNER_IS_MAIN_WINDOW (data));
-
 	window = PLANNER_WINDOW (data);
 
 	planner_window_show_calendar_dialog (window);
@@ -967,8 +940,6 @@ window_edit_day_types_cb (BonoboUIComponent *component,
 {
 	PlannerWindow *window;
 	
-	g_return_if_fail (PLANNER_IS_MAIN_WINDOW (data));
-
 	window = PLANNER_WINDOW (data);
 
 	planner_window_show_day_type_dialog (window);
@@ -982,8 +953,6 @@ window_edit_phases_cb (BonoboUIComponent *component,
 	PlannerWindow     *window;
 	PlannerWindowPriv *priv;
 	
-	g_return_if_fail (PLANNER_IS_MAIN_WINDOW (data));
-
 	window = PLANNER_WINDOW (data);
 	priv = window->priv;
 	
@@ -1004,8 +973,6 @@ window_preferences_cb (BonoboUIComponent *component,
 		       gpointer           data,
 		       const char        *cname)
 {
-	g_return_if_fail (PLANNER_IS_MAIN_WINDOW (data));
-
 }
 
 static void
@@ -1039,8 +1006,6 @@ window_help_cb (BonoboUIComponent *component,
 	GError    *error = NULL;
 	GtkWidget *dialog;
 	
-	g_return_if_fail (PLANNER_IS_MAIN_WINDOW (data));
-
 	if (!gnome_help_display ("planner.xml", NULL, &error)) {
 		dialog = gtk_message_dialog_new (GTK_WINDOW (data),
 						 GTK_DIALOG_MODAL |
@@ -1110,8 +1075,6 @@ static gboolean
 window_delete_event_cb (PlannerWindow *window,
 			gpointer      user_data)
 {
-	g_return_val_if_fail (PLANNER_IS_MAIN_WINDOW (window), FALSE);
-
 	planner_window_close (window);
 
 	return TRUE;
@@ -1175,9 +1138,6 @@ window_project_needs_saving_changed_cb (MrpProject   *project,
 	PlannerWindowPriv *priv;
 	gchar            *value;
 	
-	g_return_if_fail (MRP_IS_PROJECT (project));
-	g_return_if_fail (PLANNER_IS_MAIN_WINDOW (window));
-
 	priv = window->priv;
 	
 	if (needs_saving) {
@@ -1320,8 +1280,6 @@ window_do_save (PlannerWindow *window, gboolean force)
 	GError           *error = NULL;
 	gint              response;
 	
-	g_return_val_if_fail (PLANNER_IS_MAIN_WINDOW (window), FALSE);
-
 	priv = window->priv;
 	
 	uri = mrp_project_get_uri (priv->project);

@@ -27,6 +27,7 @@ ui_DATA = \
 	resource-view.ui	\
 	sql-plugin.ui		\
 	task-view.ui		\
+	xml-planner-plugin.ui	\
 	$(python_script_ui)	\
 	$(timetable_view_ui)
 

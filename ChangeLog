@@ -1,3 +1,20 @@
+2004-06-21  Richard Hult  <richard@imendio.com>
+
+	* data/stylesheets/Makefile.am:
+	* data/stylesheets/planner2plannerv011.xsl:
+	* data/ui/Makefile.am:
+	* data/ui/html-plugin.ui:
+	* data/ui/main-window.ui:
+	* data/ui/xml-planner-plugin.ui:
+	* libplanner/mrp-xsl.c: (xml_planner_pre012_write), (init):
+	* src/planner-html-plugin.c:
+	* src/planner-xml-planner-plugin.c: (get_last_dir),
+	(xml_planner_plugin_export), (plugin_init), (plugin_exit): Based
+	on patch from Lincoln, fixes bug #141257: export as older planner
+	version.
+
+	* src/planner-window.c: Remove stray precondition tests.
+
 2004-06-21 Alvaro del Castillo  <acs@barrapunto.com>
 
 	* libplanner/mrp-calendar.[ch] (mrp_calendar_add): new function

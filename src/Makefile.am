@@ -215,11 +215,15 @@ endif
 
 plugin_LTLIBRARIES = \
 	libhtml-plugin.la		\
+	libxmlplanner-plugin.la		\
 	$(sql_plugin)			\
 	$(python_plugin)
 
 libhtml_plugin_la_SOURCES = planner-html-plugin.c
 libhtml_plugin_la_LDFLAGS = -avoid-version -module
+
+libxmlplanner_plugin_la_SOURCES = planner-xml-planner-plugin.c
+libxmlplanner_plugin_la_LDFLAGS = -avoid-version -module
 
 planner-marshal.h: Makefile.am planner-marshal.list
 	(cd $(srcdir) && \

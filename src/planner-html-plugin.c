@@ -66,7 +66,7 @@ void        plugin_exit                       (PlannerPlugin     *plugin);
 
 
 static BonoboUIVerb verbs[] = {
-	BONOBO_UI_VERB ("Html Export", html_plugin_export),
+	BONOBO_UI_VERB ("HTML Export", html_plugin_export),
 	BONOBO_UI_VERB_END
 };
 

@@ -917,11 +917,11 @@ static gboolean
 gantt_chart_reflow_idle (PlannerGanttChart *chart)
 {
 	PlannerGanttChartPriv *priv;
-	mrptime               t1, t2;
-	gdouble               x1, y1, x2, y2;
-	gdouble               width, height;
-	gdouble               bx1, bx2;
-	GtkAllocation         allocation;
+	mrptime                t1, t2;
+	gdouble                x1, y1, x2, y2;
+	gdouble                width, height;
+	gdouble                bx1, bx2;
+	GtkAllocation          allocation;
 
 	priv = chart->priv;
 	

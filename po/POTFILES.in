@@ -26,6 +26,7 @@ data/ui/resource-view.ui
 data/ui/sql-plugin.ui
 data/ui/task-view.ui
 data/ui/time-table-view.ui
+data/ui/xml-planner-plugin.ui
 
 libegg/recent-files/egg-recent-vfs-utils.c
 
@@ -51,6 +52,7 @@ libplanner/mrp-xsl.c
 
 src/planner-application.c
 src/planner-assignment-model.c
+src/planner-calendar-dialog.c
 src/planner-canvas-line.c
 src/planner-cell-renderer-date.c
 src/planner-cell-renderer-list.c
@@ -99,8 +101,7 @@ src/planner-ttable-view.c
 src/planner-view.c
 src/planner-view-loader.c
 src/planner-window.c
-
-
-
+src/planner-working-time-dialog.c
+src/planner-xml-planner-plugin.c
 
 

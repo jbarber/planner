@@ -41,6 +41,12 @@ static gboolean   html_write    (MrpFileWriter    *writer,
 				 gboolean          force,
 				 GError          **error);
 
+static gboolean   xml_planner_pre012_write    (MrpFileWriter    *writer,
+				 MrpProject       *project,
+				 const gchar      *uri,
+				 gboolean          force,
+				 GError          **error);
+				 
 static gboolean
 html_write (MrpFileWriter  *writer,
 	    MrpProject     *project,
@@ -104,12 +110,80 @@ html_write (MrpFileWriter  *writer,
 	return ret;
 }
 
+				 
+static gboolean
+xml_planner_pre012_write (MrpFileWriter  *writer,
+	    MrpProject     *project,
+	    const gchar    *uri,
+	    gboolean        force,
+	    GError        **error)
+{
+        gchar          *xml_project;
+        xsltStylesheet *stylesheet;
+        xmlDoc         *doc;
+        xmlDoc         *final_doc;
+	GnomeVFSHandle *handle;
+	xmlChar        *buffer;
+	gint            len;
+	GnomeVFSResult  result;
+	gboolean        ret;
+
+	mrp_project_save_to_xml (project, &xml_project, NULL);
+
+        /* libxml housekeeping */
+        xmlSubstituteEntitiesDefault(1);
+        xmlLoadExtDtdDefaultValue = 1;
+        exsltRegisterAll ();
+
+        stylesheet = xsltParseStylesheetFile (STYLESHEETDIR "/planner2plannerv011.xsl");
+
+        doc = xmlParseMemory (xml_project, strlen (xml_project));
+                                                                                
+        final_doc = xsltApplyStylesheet (stylesheet, doc, NULL);
+                                                                                
+	ret = TRUE;
+
+	if (xsltSaveResultToString (&buffer, &len, final_doc, stylesheet) != -1) {
+		result = gnome_vfs_create (&handle, uri, GNOME_VFS_OPEN_WRITE,
+					   FALSE, 0644);
+		
+		if (result == GNOME_VFS_OK) { 
+			gnome_vfs_write (handle, buffer, (GnomeVFSFileSize) len, NULL);
+			gnome_vfs_close (handle);
+		} else {
+		  	g_set_error (error,
+				     MRP_ERROR,
+				     MRP_ERROR_EXPORT_FAILED,
+				     gnome_vfs_result_to_string (result));
+			ret = FALSE;
+		}
+		
+		xmlFree (buffer);
+	} else {
+		g_set_error (error,
+			     MRP_ERROR,
+			     MRP_ERROR_EXPORT_FAILED,
+			     _("Planner pre 0.12 export failed"));
+		ret = FALSE;
+	}
+	
+	xsltFreeStylesheet (stylesheet);
+        xmlFree (final_doc);
+        xmlFree (doc);
+
+	return ret;
+}
+
+
 G_MODULE_EXPORT void
 init (MrpFileModule *module, MrpApplication *application)
 {
         MrpFileWriter *writer;
         
         writer             = g_new0 (MrpFileWriter, 1);
+	
+	/* The HTML writer registration */
+
         writer->module     = module;
 	writer->identifier = "Planner HTML";
 	writer->mime_type  = "text/html";
@@ -118,5 +192,19 @@ init (MrpFileModule *module, MrpApplication *application)
         writer->write      = html_write;
 
         imrp_application_register_writer (application, writer);
+
+	/* The older Planner/Mrproject writer registration */
+
+	writer             = g_new0 (MrpFileWriter, 1);
+	
+	writer->module     = module;
+	writer->identifier = "Planner XML pre-0.12";  /* Don't change unless you change plugin to match */
+	writer->mime_type  = "text/xml";
+        writer->priv       = NULL;
+	
+        writer->write      = xml_planner_pre012_write;
+
+        imrp_application_register_writer (application, writer);
+	
 }
 
