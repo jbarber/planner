@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2004-02-08 23:26+0100\n"
-"PO-Revision-Date: 2004-02-08 23:27+0100\n"
+"PO-Revision-Date: 2004-02-23 02:24+0100\n"
 "Last-Translator: Francisco Javier F. Serrador <serrador@cvs.gnome.org>\n"
 "Language-Team: Spanish <traductores@es.gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -479,12 +479,12 @@ msgstr "Desen_lazar tarea"
 
 #: data/ui/gantt-view.ui.h:16 data/ui/task-view.ui.h:15
 msgid "Unin_dent Task"
-msgstr "No sa_ngrar la tarea"
+msgstr "Decrementar sa_ngría de la tarea"
 
 #: data/ui/gantt-view.ui.h:17 data/ui/task-view.ui.h:16
 #: src/planner-application.c:83
 msgid "Unindent"
-msgstr "Quitar sangrado"
+msgstr "Decrementar sangría"
 
 #: data/ui/gantt-view.ui.h:18 data/ui/task-view.ui.h:17
 #: src/planner-application.c:69
@@ -493,23 +493,23 @@ msgstr "Desenlazar"
 
 #: data/ui/gantt-view.ui.h:19
 msgid "Zoom In"
-msgstr "Acercar"
+msgstr "Ampliar"
 
 #: data/ui/gantt-view.ui.h:20
 msgid "Zoom Out"
-msgstr "Alejar"
+msgstr "Reducir"
 
 #: data/ui/gantt-view.ui.h:21
 msgid "Zoom To Fit"
-msgstr "Ajustar"
+msgstr "Ampliar hasta ajustar"
 
 #: data/ui/gantt-view.ui.h:22
 msgid "Zoom To _Fit"
-msgstr "A_justar"
+msgstr "Ampliar hasta a_justar"
 
 #: data/ui/gantt-view.ui.h:23
 msgid "Zoom _Out"
-msgstr "_Alejar"
+msgstr "_Reducir"
 
 #: data/ui/gantt-view.ui.h:24 data/ui/task-view.ui.h:19
 msgid "_Edit Task Properties..."
@@ -529,7 +529,7 @@ msgstr "_Eliminar tarea"
 
 #: data/ui/gantt-view.ui.h:28
 msgid "_Zoom In"
-msgstr "_Acercar"
+msgstr "_Ampliar"
 
 #: data/ui/main-window.ui.h:1
 msgid "About this application"
@@ -810,8 +810,7 @@ msgstr "No se pudo encontrar un módulo para cargar «%s»"
 
 #: libplanner/mrp-project.c:769 libplanner/mrp-project.c:1033
 msgid "No support for SQL storage built into this version of Planner."
-msgstr ""
-"No hay soporte para almacenes SQL compilado en esta versión de Planner."
+msgstr "No hay soporte para almacenes SQL compilado en esta versión de Planner."
 
 #: libplanner/mrp-project.c:806
 msgid "Invalid URI."
@@ -824,8 +823,7 @@ msgstr "No es posible encontrar el escritor de archivos identificado por «%s»"
 
 #: libplanner/mrp-project.c:990
 msgid "Couldn't find a suitable file module for loading project"
-msgstr ""
-"No se pudo encontrar un módulo de archivo adecuado para cargar el proyecto"
+msgstr "No se pudo encontrar un módulo de archivo adecuado para cargar el proyecto"
 
 #: libplanner/mrp-property.c:365
 msgid "Text"
@@ -905,16 +903,14 @@ msgid "Invalid SQL URI (no database name specified)."
 msgstr "URI SQL inválida (no hay especificado un nombre de base de datos)."
 
 #: libplanner/mrp-task.c:1016
-msgid ""
-"Could not add a predecessor relation, because the tasks are already related."
+msgid "Could not add a predecessor relation, because the tasks are already related."
 msgstr ""
 "No se puede añadir una relación predecesora, debido a que las tareas ya se "
 "encuentran relacionadas."
 
 #: libplanner/mrp-task-manager.c:1769
 msgid "Can not add a predecessor relation between a task and its ancestor."
-msgstr ""
-"No se puede añadir una relación predecesora entre una tarea y sus ancestros."
+msgstr "No se puede añadir una relación predecesora entre una tarea y sus ancestros."
 
 #: libplanner/mrp-task-manager.c:1778 libplanner/mrp-task-manager.c:1786
 msgid "Can not add a predecessor, because it would result in a loop."
@@ -1409,8 +1405,7 @@ msgstr "Empezar para finalizar (EF)"
 
 #: src/planner-task-dialog.c:798
 msgid "Can't add new predecessor. No task selected!"
-msgstr ""
-"No se puede añadir un predecesor nuevo. No ha seleccionado ninguna tarea."
+msgstr "No se puede añadir un predecesor nuevo. No ha seleccionado ninguna tarea."
 
 #: src/planner-task-dialog.c:1330
 msgid "Assigned"
@@ -1576,14 +1571,12 @@ msgstr "La página web de Planner"
 
 #: src/planner-window.c:1223
 msgid "If you don't save, changes made the last minute will be discarded."
-msgstr ""
-"Si no guarda, los cambios hechos en el último minuto serán descartados."
+msgstr "Si no guarda, los cambios hechos en el último minuto serán descartados."
 
 #: src/planner-window.c:1228
 #, c-format
 msgid "If you don't save, changes made the last %d minutes will be discarded."
-msgstr ""
-"Si no guarda, los cambios hechos en los últimos %d minutos serán descartados."
+msgstr "Si no guarda, los cambios hechos en los últimos %d minutos serán descartados."
 
 #: src/planner-window.c:1233
 msgid "If you don't save, changes made the last hour will be discarded."
@@ -1592,8 +1585,7 @@ msgstr "Si no guarda, los cambios hechos en la última hora serán descartados."
 #: src/planner-window.c:1238
 #, c-format
 msgid "If you don't save, changes made the last %d hours will be discarded."
-msgstr ""
-"Si no guarda, los cambios hechos en las últimas %d horas serán descartados."
+msgstr "Si no guarda, los cambios hechos en las últimas %d horas serán descartados."
 
 #: src/planner-window.c:1245
 #, c-format
@@ -1883,3 +1875,4 @@ msgstr ""
 
 #~ msgid "Up"
 #~ msgstr "Arriba"
+
