@@ -7,19 +7,19 @@
 # Duarte Loreto <happyguy_pt@hotmail.com>, 2001-2003.
 # Alexandre Folle de Menezes <afmenez@terra.com.br>, 2004.
 # Afonso Celso Medina <medina@maua.br>, 2004.
-#
-#
+# 
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: planner.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-06-25 14:16-0400\n"
-"PO-Revision-Date: 2004-06-24 20:11-0300\n"
+"POT-Creation-Date: 2004-07-01 05:28+0200\n"
+"PO-Revision-Date: 2004-07-01 12:19-0300\n"
 "Last-Translator: Afonso Celso Medina <medina@maua.br>\n"
 "Language-Team: Portuguese/Brazil <gnome-l10n-br@listas.cipsga.org.br>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: 8bit"
 
 #: data/glade/add-predecessor.glade.h:1 data/glade/calendar-dialog.glade.h:4
 #: data/glade/html-output.glade.h:2 data/glade/new-property.glade.h:1
@@ -877,8 +877,8 @@ msgid "Zoom to fit"
 msgstr "Ajustar"
 
 #: data/ui/xml-planner-plugin.ui.h:1
-msgid "Planner File pre 0.12"
-msgstr "Arquivo Planner pré 0.12"
+msgid "Planner 0.11 Format"
+msgstr "Formato do Planner 0.11"
 
 #: libegg/recent-files/egg-recent-vfs-utils.c:90
 msgid " (invalid Unicode)"
@@ -1211,7 +1211,7 @@ msgid "Project start"
 msgstr "Início do projeto"
 
 #: src/planner-gantt-print.c:189 src/planner-group-dialog.c:816
-#: src/planner-property-dialog.c:478 src/planner-resource-view.c:1152
+#: src/planner-property-dialog.c:481 src/planner-resource-view.c:1152
 #: src/planner-task-dialog.c:2542 src/planner-task-dialog.c:2631
 #: src/planner-task-view.c:274 src/planner-ttable-print.c:108
 msgid "Name"
@@ -1317,7 +1317,7 @@ msgstr ""
 "Entre com um nome de arquivo e tente novamente."
 
 #: src/planner-html-plugin.c:148 src/planner-window.c:1378
-#: src/planner-xml-planner-plugin.c:125
+#: src/planner-xml-planner-plugin.c:133
 #, c-format
 msgid "File \"%s\" exists, do you want to overwrite it?"
 msgstr "O arquivo \"%s\" existe, deseja sobrescrevê-lo?"
@@ -1332,8 +1332,7 @@ msgstr "GEOMETRIA"
 
 #: src/planner-main.c:76
 msgid "planner: --geometry cannot be used with more than one file."
-msgstr ""
-"planner: --a geometria não pode ser utilizada com mais do que um arquivo."
+msgstr "planner: --a geometria não pode ser utilizada com mais do que um arquivo."
 
 #: src/planner-phase-dialog.c:532
 msgid "Insert phase"
@@ -1409,11 +1408,11 @@ msgstr "Propriedade"
 msgid "Value"
 msgstr "Valor"
 
-#: src/planner-project-properties.c:1247 src/planner-property-dialog.c:326
+#: src/planner-project-properties.c:1247 src/planner-property-dialog.c:329
 msgid "The name of the custom property needs to start with a letter."
 msgstr "O nome da propriedade customizada deve começar com uma letra."
 
-#: src/planner-project-properties.c:1318 src/planner-property-dialog.c:396
+#: src/planner-project-properties.c:1318 src/planner-property-dialog.c:399
 #, c-format
 msgid "Do you really want to remove the property '%s' from the project?"
 msgstr "Deseja mesmo remover a propriedade '%s' do projeto?"
@@ -1434,11 +1433,11 @@ msgstr "Remove propriedades do projeto"
 msgid "Edit project property value"
 msgstr "Edita o valor das propriedades do projeto"
 
-#: src/planner-property-dialog.c:495
+#: src/planner-property-dialog.c:498
 msgid "Label"
 msgstr "Rótulo"
 
-#: src/planner-property-dialog.c:507 src/planner-resource-view.c:1194
+#: src/planner-property-dialog.c:510 src/planner-resource-view.c:1194
 #: src/planner-task-dialog.c:2663
 msgid "Type"
 msgstr "Tipo"
@@ -1447,11 +1446,11 @@ msgstr "Tipo"
 msgid "Add property"
 msgstr "Adiciona uma propriedade"
 
-#: src/planner-property-dialog.c:751
+#: src/planner-property-dialog.c:809
 msgid "Remove property"
 msgstr "Remove a propriedade"
 
-#: src/planner-property-dialog.c:841
+#: src/planner-property-dialog.c:902
 msgid "Edit property label"
 msgstr "Edita as propriedades do rótulo"
 
@@ -1733,7 +1732,7 @@ msgstr "Reinicializar a restrição da tarefa"
 
 #: src/planner-task-tree.c:886
 msgid "Move task"
-msgstr "Move tarefa"
+msgstr "Move a tarefa"
 
 #: src/planner-task-tree.c:995
 msgid "Edit task custom property"
@@ -1914,8 +1913,7 @@ msgstr "A Página Web do Planner"
 
 #: src/planner-window.c:1188
 msgid "If you don't save, changes made the last minute will be discarded."
-msgstr ""
-"Se você não salvar, as alterações efetuadas no último minuto serão perdidas."
+msgstr "Se você não salvar, as alterações efetuadas no último minuto serão perdidas."
 
 #: src/planner-window.c:1193
 #, c-format
@@ -1926,8 +1924,7 @@ msgstr ""
 
 #: src/planner-window.c:1198
 msgid "If you don't save, changes made the last hour will be discarded."
-msgstr ""
-"Se você não salvar, as alterações efetuadas na última hora serão perdidas."
+msgstr "Se você não salvar, as alterações efetuadas na última hora serão perdidas."
 
 #: src/planner-window.c:1203
 #, c-format
@@ -1968,7 +1965,7 @@ msgid ""
 "After doing this, you can remove all constraints by selecting the menu item "
 "'Remove all constraints' in the 'Edit' menu."
 msgstr ""
-"Foi aberto um arquivo salvo com uma versão antiga do Planner.\n"
+"Você abriu um arquivo que foi salvo com uma versão antiga do Planner.\n"
 "\n"
 "Ao carregar arquivos antigos, todas as tarefas usarão a restrição 'Deve "
 "Começar Em', já que a versão antiga não suporta completamente a "
@@ -1991,9 +1988,12 @@ msgstr "Banco de dados de projeto Sem Nome"
 msgid "Edit working time"
 msgstr "Edita os horários de trabalho"
 
-#: src/planner-xml-planner-plugin.c:101
+#: src/planner-xml-planner-plugin.c:102
 msgid "Export"
 msgstr "Exportar"
+
+#~ msgid "Planner File pre 0.12"
+#~ msgstr "Arquivo Planner pré 0.12"
 
 #~ msgid "HTML export failed"
 #~ msgstr "Exportar como HTML falhou"
