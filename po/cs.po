@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mrproject VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-03-18 04:15+0100\n"
-"PO-Revision-Date: 2004-03-18 19:34+0100\n"
+"POT-Creation-Date: 2004-03-29 15:26+0200\n"
+"PO-Revision-Date: 2004-03-29 16:31+0200\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -401,7 +401,7 @@ msgid "_Work:"
 msgstr "_Práce:"
 
 #. day unit variant accepted in input
-#: data/glade/task-dialog.glade.h:17 src/planner-task-tree.c:2308
+#: data/glade/task-dialog.glade.h:17 src/planner-task-tree.c:2355
 msgid "days"
 msgstr "dní"
 
@@ -817,7 +817,7 @@ msgstr "Nemohu vytvořit strom XML"
 msgid "Could not write XML file"
 msgstr "Nemohu zapsat soubor XML"
 
-#: libplanner/mrp-project.c:440 src/planner-group-dialog.c:829
+#: libplanner/mrp-project.c:440 src/planner-group-dialog.c:830
 msgid "Default"
 msgstr "Implicitní"
 
@@ -867,7 +867,7 @@ msgstr "Datum"
 msgid "Duration"
 msgstr "Trvání"
 
-#: libplanner/mrp-property.c:377 src/planner-task-view.c:270
+#: libplanner/mrp-property.c:377 src/planner-task-view.c:271
 msgid "Cost"
 msgstr "Cena"
 
@@ -1079,16 +1079,16 @@ msgstr "%e. %b %Y"
 msgid "Project start"
 msgstr "Začátek projektu"
 
-#: src/planner-gantt-print.c:191 src/planner-group-dialog.c:805
+#: src/planner-gantt-print.c:191 src/planner-group-dialog.c:806
 #: src/planner-property-dialog.c:378 src/planner-resource-view.c:1168
 #: src/planner-task-dialog.c:1319 src/planner-task-dialog.c:1405
-#: src/planner-task-view.c:265
+#: src/planner-task-view.c:266
 msgid "Name"
 msgstr "Jméno"
 
 #: src/planner-gantt-print.c:199 src/planner-resource-dialog.c:1298
 #: src/planner-resource-view.c:691 src/planner-resource-view.c:707
-#: src/planner-resource-view.c:1595 src/planner-task-view.c:268
+#: src/planner-resource-view.c:1595 src/planner-task-view.c:269
 msgid "Work"
 msgstr "Práce"
 
@@ -1097,16 +1097,16 @@ msgstr "Práce"
 msgid "Unnamed"
 msgstr "Nepojmenovaný"
 
-#: src/planner-gantt-row.c:1907 src/planner-gantt-row.c:1910
+#: src/planner-gantt-row.c:1903 src/planner-gantt-row.c:1906
 msgid "No name"
 msgstr "Beze jména"
 
-#: src/planner-gantt-row.c:1913
+#: src/planner-gantt-row.c:1909
 #, c-format
 msgid "Make task '%s' a predecessor of '%s'"
 msgstr "Učinit úlohu '%s' předchůdcem '%s'"
 
-#: src/planner-gantt-row.c:1971
+#: src/planner-gantt-row.c:1967
 #, c-format
 msgid "Change work to %s"
 msgstr "Změnit práci na %s"
@@ -1122,13 +1122,19 @@ msgstr "_Ganttův diagram"
 #: src/planner-gantt-view.c:492
 msgid ""
 "\n"
+"WBS"
+msgstr "\nWBS"
+
+#: src/planner-gantt-view.c:493
+msgid ""
+"\n"
 "Name"
 msgstr ""
 "\n"
 "Jméno"
 
 #. COL_START,    _("\nStart"),
-#: src/planner-gantt-view.c:494
+#: src/planner-gantt-view.c:495
 msgid ""
 "\n"
 "Work"
@@ -1144,23 +1150,23 @@ msgstr "Vložit skupinu"
 msgid "Remove group"
 msgstr "Odstranit skupinu"
 
-#: src/planner-group-dialog.c:517
+#: src/planner-group-dialog.c:518
 msgid "Default group"
 msgstr "Implicitní skupina"
 
-#: src/planner-group-dialog.c:633
+#: src/planner-group-dialog.c:634
 msgid "Edit group property"
 msgstr "Upravit vlastnost skupiny"
 
-#: src/planner-group-dialog.c:811
+#: src/planner-group-dialog.c:812
 msgid "Manager name"
 msgstr "Jméno manažera"
 
-#: src/planner-group-dialog.c:817
+#: src/planner-group-dialog.c:818
 msgid "Manager phone"
 msgstr "Telefon manažera"
 
-#: src/planner-group-dialog.c:823
+#: src/planner-group-dialog.c:824
 msgid "Manager email"
 msgstr "E-mail manažera"
 
@@ -1482,72 +1488,72 @@ msgstr "Vložit úlohu"
 msgid "Edit task property"
 msgstr "Upravit vlastnosti úlohy"
 
-#: src/planner-task-tree.c:2300
+#: src/planner-task-tree.c:2347
 msgid "mon"
 msgstr "měs"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:2301
+#: src/planner-task-tree.c:2348
 msgid "month"
 msgstr "měsíc"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:2302
+#: src/planner-task-tree.c:2349
 msgid "months"
 msgstr "měsíců"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:2303
+#: src/planner-task-tree.c:2350
 msgid "w"
 msgstr "t"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:2304
+#: src/planner-task-tree.c:2351
 msgid "week"
 msgstr "týden"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:2305
+#: src/planner-task-tree.c:2352
 msgid "weeks"
 msgstr "týdnů"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:2306
+#: src/planner-task-tree.c:2353
 msgid "d"
 msgstr "d"
 
 #. day unit variant accepted in input
-#: src/planner-task-tree.c:2307
+#: src/planner-task-tree.c:2354
 msgid "day"
 msgstr "den"
 
 #. day unit variant accepted in input
-#: src/planner-task-tree.c:2309
+#: src/planner-task-tree.c:2356
 msgid "h"
 msgstr "h"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:2310
+#: src/planner-task-tree.c:2357
 msgid "hour"
 msgstr "hodina"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:2311
+#: src/planner-task-tree.c:2358
 msgid "hours"
 msgstr "hodin"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:2312
+#: src/planner-task-tree.c:2359
 msgid "min"
 msgstr "min"
 
 #. minute unit variant accepted in input
-#: src/planner-task-tree.c:2313
+#: src/planner-task-tree.c:2360
 msgid "minute"
 msgstr "minuta"
 
 #. minute unit variant accepted in input
-#: src/planner-task-tree.c:2314
+#: src/planner-task-tree.c:2361
 msgid "minutes"
 msgstr "minut"
 
@@ -1559,19 +1565,23 @@ msgstr "Úlohy"
 msgid "_Tasks"
 msgstr "_Úlohy"
 
-#: src/planner-task-view.c:266
+#: src/planner-task-view.c:265
+msgid "WBS"
+msgstr "WBS"
+
+#: src/planner-task-view.c:267
 msgid "Start"
 msgstr "Začátek"
 
-#: src/planner-task-view.c:267
+#: src/planner-task-view.c:268
 msgid "Finish"
 msgstr "Konec"
 
-#: src/planner-task-view.c:269
+#: src/planner-task-view.c:270
 msgid "Slack"
 msgstr "Rezerva"
 
-#: src/planner-task-view.c:488
+#: src/planner-task-view.c:489
 msgid "Edit custom task properties"
 msgstr "Upravit vlastní vlastnosti úlohy"
 
