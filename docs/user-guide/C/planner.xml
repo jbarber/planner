@@ -2,10 +2,11 @@
 <!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
 "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
   <!ENTITY legal SYSTEM "legal.xml">
-  <!ENTITY appversion "0.12">
-  <!ENTITY manrevision "0.12">
-  <!ENTITY date "24 Apr 2004">
+  <!ENTITY appversion "0.13">
+  <!ENTITY manrevision "0.13">
+  <!ENTITY date "17 Nov 2004">
   <!ENTITY app "Planner">
+  <!ENTITY cmd "planner">
   <!-- Information about the entities
        The legal.xml file contains legal information, there is no need to edit the file. 
        Use the appversion entity to specify the version of the application.
@@ -26,7 +27,6 @@
 <!-- appropriate code -->
   <articleinfo> 
     <title>&app; User Guide V&manrevision;</title>       
-    <subtitle>for &app; v&appversion;</subtitle>
 
     <copyright> 
       <year>2002</year> 
@@ -121,9 +121,28 @@
 <!-- to V3.0, and so on. -->  
     <revhistory>
       <revision> 
+	<revnumber>&app; User Guide V0.13 
+	</revnumber> 
+	<date>17 Nov 2004</date> 
+	<authorinitials>kmm</authorinitials>
+	<revdescription> 
+	  <para>Changed revision to match Planner revision</para>
+	  <para>Misc menu and navigation changes</para>
+	  <para>
+	    Additions for new features:  
+	    <itemizedlist>
+	      <listitem>
+		<para>Better database support including db creation</para>
+	      </listitem>
+	      <listitem><para>EDS plugin (way cool)</para></listitem>
+	    </itemizedlist>
+	  </para>
+	</revdescription> 
+      </revision> 
+      <revision> 
 	<revnumber>&app; User Guide V1.6 for &app; V0.12
 	</revnumber> 
-	<date>&date;</date> 
+	<date>24 Apr 2004</date> 
 	<authorinitials>kmm</authorinitials>
 	<revdescription> 
 	  <para>
@@ -292,11 +311,6 @@
 		it will cost to complete the tasks
 	  </para> 
   	</listitem> 
-<!-- 	<listitem> 
-    	<para>Scheduling - develop the timeline based on the steps above,
-		plus resource availability</para> 
-	</listitem>
--->
 	</itemizedlist> 
     </sect2>
     <sect2 id="mrp-gantt-view">
@@ -422,7 +436,7 @@
     		<para>Choose 
     		<menuchoice>
     		<guisubmenu>Office</guisubmenu>
-    		<guimenuitem>&app;</guimenuitem>
+    		<guimenuitem>Project Planner</guimenuitem>
     		</menuchoice>. </para>
     		</listitem>
     	</varlistentry>
@@ -432,7 +446,7 @@
     		<para>To start <application>&app;</application> from a command line,
 		 type the following command, then press <keycap>Return</keycap>:</para>
     		<para> 
-			<command>&app;</command> 
+			<command>&cmd;</command> 
     		</para> 
     		<para> there are no command line parameters at this time.
     		</para> 
@@ -443,7 +457,7 @@
 
     <sect2 id="mrp-when-start">
     <title>When You Start &app;</title>
-    <para>When you start <application>&app;</application>, the following window is 
+    <para>When you start &app;, the following window is 
 	displayed.  As you can see, the Gantt Chart view is the default.</para>
 
     <!-- ==== Figure ==== -->
@@ -484,8 +498,7 @@
 	<varlistentry>
 	<term>Statusbar. </term>
 	<listitem>
-	  <para>The statusbar displays information about current 
-	  <application>&app;</application> 
+	  <para>The statusbar displays information about current &app;
 	  activity and contextual information about the menu items. </para>
 	</listitem>
 	</varlistentry>
@@ -562,11 +575,10 @@
 	<menuchoice> 
 	  <guimenu>File</guimenu> 
 	  <guimenuitem>Open</guimenuitem> 
-	</menuchoice>. The 
-	<guilabel>Open File</guilabel> dialog is displayed. Select the &app; file
-	that you want to open, then click 
+	</menuchoice>. The <guilabel>Open File</guilabel> dialog is displayed. 
+	Select the &app; file that you want to open, then click 
 	<guibutton>OK</guibutton>. &app; files are stored with the extension 
-	<filename>.&app;</filename>.
+	<filename>.&cmd;</filename>.
       </para>
       <para>To save a project, choose
 	<menuchoice> 
@@ -587,8 +599,9 @@
       <caution>
       <para>It is prudent to save your work periodically.
 	&app; does not currently have a recovery feature,
-	so if your editing session is interrupted by a power outage or other reason, you
-	would lose any work done since your last <guimenuitem>save</guimenuitem>.</para>
+	so if your editing session is interrupted by a power outage or other 
+	reason, you would lose any work done since your last 
+	<guimenuitem>save</guimenuitem>.</para>
       </caution>
     </sect2> 
     <sect2 id="mrp-opensave-database" xreflabel="Open from and Save to Database"> 
@@ -596,6 +609,7 @@
       <para>To open an project from a database, choose 
 	<menuchoice> 
 	  <guimenu>File</guimenu> 
+	  <guimenuitem>Import</guimenuitem> 
 	  <guimenuitem>Open From Database...</guimenuitem> 
 	</menuchoice>. The 
 	<guilabel>Open from Database</guilabel> dialog is displayed. Enter the <guilabel>
@@ -614,6 +628,7 @@
       <para>To save a project to a database, choose
 	<menuchoice> 
 	  <guimenu>File</guimenu> 
+	  <guimenuitem>Export</guimenuitem> 
 	  <guimenuitem>Save to Database...</guimenuitem> 
 	</menuchoice>.  The
 	<guilabel>Save to Database</guilabel> dialog is displayed. Enter the <guilabel>
@@ -622,6 +637,9 @@
 	If the database is on the same machine you're running &app; on, then you
 	can leave that blank.  You can also leave the password field blank if no
 	password is required for the database user.
+      </para>
+      <para>If the database you're saving your file to doesn't exist, &app; will
+	offer you the option to automatically create it.
       </para>
     </sect2> 
     <!-- ================ Usage Subsection ================================ -->
@@ -643,7 +661,8 @@
 	  Redo puts back the change that you reversed by using the Undo option.
 	</para>
 	<caution><title>Caution:</title>
-	  <para>Undo and Redo are new features, and while the implementation is
+	  <para>Undo and Redo are relatively new features, and while the
+	    implementation is
 	    quite good, there are still some actions that cannot be undone.  Its
 	    always a good idea to save your work before making any modifications
 	    that you're not sure you'll want to keep.
@@ -655,8 +674,8 @@
       <title>Edit Project Properties</title> 
         <para> To edit the project properties, choose
 	<menuchoice> 
-	  <guimenu>File</guimenu> 
-	  <guimenuitem>Project Properties</guimenuitem> 
+	  <guimenu>Project</guimenu> 
+	  <guimenuitem>Edit Project Properties</guimenuitem> 
 	</menuchoice> 
           .  In this dialog box you can edit the name of the project,
           its start date, the name of the project manager, the organization
@@ -933,7 +952,7 @@
 	  main menu:
 	  <menuchoice> 
 	    <guimenu>Actions</guimenu> 
-	    <guimenuitem>Edit Task Properties</guimenuitem> 
+	    <guimenuitem>Edit Task</guimenuitem> 
 	  </menuchoice>.
 	  There are several tabs to modify the properties.
           <itemizedlist>
@@ -944,41 +963,50 @@
 	      <para><guilabel>Name</guilabel> - the name of the task</para>
 	    </listitem>
 	    <listitem>
-	      <para><guilabel>Milestone</guilabel> - the milestone check box flags the task
-		as a milestone, which disables the ability to modify the <guilabel>Work, Duration, 
-		Complete, and Priority</guilabel> fields, since a milestone signifies a significant
-		event in the timeline of a project that has no duration or work activity of its own.
+	      <para><guilabel>Milestone</guilabel> - the milestone check box 
+		flags the task as a milestone, which disables the ability to 
+		modify the <guilabel>Work, Duration, Complete, and Priority
+		</guilabel> fields, since a milestone signifies a significant
+		event in the timeline of a project that has no duration or work
+		activity of its own.
 	      </para>
 	    </listitem>
 	    <listitem>
-	      <para><guilabel>Fixed duration</guilabel> - the fixed duration option is used when
-		the duration of a task will take a fixed amount of time regardless of the resources
-		devoted to achieving it.  For instance, the gestation period for a human baby is
-		nine months.  It cannot be sped up by addition additional resources.
+	      <para><guilabel>Fixed duration</guilabel> - the fixed duration 
+		option is used when the duration of a task will take a fixed 
+		amount of time regardless of the resources devoted to achieving
+		it.  For instance, the gestation period for a human baby is
+		nine months.  It cannot be sped up by adding more resources.
 	      </para>
-	      <para>Choosing Fixed duration for a task will unlock the <guilabel>Duration</guilabel>
-		 field and allow you to enter a value for the fixed duration.
-	      </para>
-	    </listitem>
-	    <listitem>
-	      <para><guilabel>Work</guilabel> - this is the amount of effort required to complete
-		the task</para>
-	    </listitem>
-	    <listitem>
-	      <para><guilabel>Duration</guilabel> - the amount of calendar time required to 
-		complete the task.  Duration is normally calculated based on the amount of work
-		and the resources assigned to the task.  The calculation also takes calendars 
-		into account.  See the section <xref linkend="mrp-calendars"/> for more information.
+	      <para>Choosing Fixed duration for a task will unlock the 
+		<guilabel>Duration</guilabel>
+		field and allow you to enter a value for the fixed duration.
 	      </para>
 	    </listitem>
 	    <listitem>
-	      <para><guilabel>Complete</guilabel> - allows tracking of the amount of work done 
+	      <para><guilabel>Work</guilabel> - this is the amount of effort 
+		required to complete the task
+	      </para>
+	    </listitem>
+	    <listitem>
+	      <para><guilabel>Duration</guilabel> - the amount of calendar time
+		required to complete the task.  Duration is normally calculated
+		based on the amount of work and the resources assigned to the 
+		task.  The calculation also takes calendars 
+		into account.  See the section <xref linkend="mrp-calendars"/>
+		for more information.
+	      </para>
+	    </listitem>
+	    <listitem>
+	      <para><guilabel>Complete</guilabel> - allows tracking of the 
+		amount of work done 
 		for the task, entered as a percent of total work</para>
 	    </listitem>
 	    <listitem>
-	      <para><guilabel>Priority</guilabel> - sets a priority for the task.  There is no
-		specific functionality tied to this field at the moment.  It is informational
-		only</para>
+	      <para><guilabel>Priority</guilabel> - sets a priority for the 
+		task.  There is no specific functionality tied to this field at
+		the moment.  It is informational only
+	      </para>
 	    </listitem>
 	    </itemizedlist>
                 <figure>
@@ -989,10 +1017,11 @@
             </listitem>
             <listitem>
               <para>
-                The <guilabel>Resources</guilabel> tab allows you to assign resources to
-		a task. Remember that resources can include materials as well as people.
-                Click the check box in the <guilabel>Assigned</guilabel> column to allocate
-		the resource to the current task.  Use the Units field to enter the percent
+                The <guilabel>Resources</guilabel> tab allows you to assign 
+		resources to a task. Remember that resources can include 
+		materials as well as people.  Click the check box in the 
+		<guilabel>Assigned</guilabel> column to allocate the resource 
+		to the current task.  Use the Units field to enter the percent
 		of the resource that is allocated to the task.
                 <figure>
                   <title>Task resources dialog</title>
@@ -1010,19 +1039,20 @@
             </listitem>
             <listitem>
               <para>
-                You can see in the <guilabel>Predecessors</guilabel> tab the tasks 
-		that need to be
-                finished before the task being edited can start. In this example,
-                we have three tasks.  In <xref linkend="predecessors"/>, the third task,
-		 t3, requires that t2 be complete before it can start.
+                You can see in the <guilabel>Predecessors</guilabel> tab the 
+		tasks that need to be finished before the task being edited can
+		start. In this example, we have three tasks.  In 
+		<xref linkend="predecessors"/>, the third task, t3, requires 
+		that t2 be complete before it can start.
                 <figure id="predecessors">
                   <title>Task predecessors dialog</title>
                   <graphic fileref="figures/task-edit-predecessors.png" format="PNG"></graphic>
                 </figure>
-                From this dialog, you can change the task predecessor, the predecessor
-                type, and edit the lag between the task and the predecessor.
-                To add or remove predecessors from this dialog by clicking
-		the <guibutton>Add</guibutton> or <guibutton>Remove</guibutton> button.
+                From this dialog, you can change the task predecessor, the 
+		predecessor type, and edit the lag between the task and the 
+		predecessor.  To add or remove predecessors from this dialog 
+		by clicking the <guibutton>Add</guibutton> or 
+		<guibutton>Remove</guibutton> button.
 		</para>
 <!--                <figure>
                   <title>Add/Remove predecessors dialog</title>
@@ -1031,17 +1061,18 @@
                 </figure>
 -->
 		<para>
-                When you add a new predecessor you need to choose the task predecessor,
-		which you can select from the drop down list box.  The next field is the 
-		Relationship type.  You can choose 
+                When you add a new predecessor you need to choose the task 
+		predecessor, which you can select from the drop down list box. 
+		The next field is the Relationship type.  You can choose 
 		<guimenuitem>Finish to Start (FS)</guimenuitem>,
 		<guimenuitem>Finish to Finish (FF)</guimenuitem>,
 		<guimenuitem>Start to Start (SS)</guimenuitem>, or
-		<guimenuitem>Start to Finish (SF)</guimenuitem>.  Finally, you can enter a lag
-		time for the relationship, which represents the number of days after the 
-		relationship has been satisfied.  For example, if you enter a lag time of 1
-		in a Finish to Start relationship, it means that the current task may begin
-		1 day after the predecessor task has completed.
+		<guimenuitem>Start to Finish (SF)</guimenuitem>.  Finally, you 
+		can enter a lag time for the relationship, which represents the
+		number of days after the relationship has been satisfied.  For 
+		example, if you enter a lag time of 1 in a Finish to Start 
+		relationship, it means that the current task may begin 1 day 
+		after the predecessor task has completed.
                 <figure>
                   <title>Add predecessors dialog</title>
                   <graphic fileref="figures/task-edit-predecessors-add.png" format="PNG"></graphic>
@@ -1059,20 +1090,6 @@
                 </figure>
               </para>
             </listitem>
-<!--
-            <listitem>
-              <para>
-                The last tab from the task dialog editor is the 
-                <guilabel>Advanced</guilabel> tab. Currently it isn't
-                implemented, but here you will find additional properties
-                that will be added in future releases.
-                <figure>
-                  <title>Task advanced properties dialog</title>
-                  <graphic fileref="figures/task-edit-advanced.png" format="PNG"></graphic>
-                </figure>
-              </para>
-            </listitem>            
--->
           </itemizedlist>          
 	</para>
       </sect3>
@@ -1116,27 +1133,16 @@
 	  of the two tasks and delete the link by clicking the <guiicon>Unlink
 	  </guiicon>icon on the toolbar, or by right clicking either task and 
 	  selecting <guimenuitem>Unlink</guimenuitem> from the pop up.
-<!-- we have too many screen shots - lets see if anyone misses this one...
-	  <figure>
-	    <title>A dependency has been created</title>
-	    <graphic fileref="figures/group1-task-linked.png" format="PNG"></graphic>
-	  </figure>
--->
 	</para>
       </sect3>
       <sect3 id="mrp-moving-tasks">
         <title>Moving tasks</title>
         <para>
-	  If you need to rearrange the order that tasks are displayed in the task view, 
-	  you can do so by selecting the task you want to move, and utilizing the 
+	  If you need to rearrange the order that tasks are displayed in the 
+	  task view, you can do so by selecting the task you want to move, and 
+	  utilizing the 
 	  <guiicon>Move Up</guiicon> and <guiicon>Move Down</guiicon> icons on
 	  the toolbar.
-<!-- we have too many screen shots - lets see if anyone misses this one...
-          <figure>
-	    <title>Moving task up and down</title>
-	    <graphic fileref="figures/task-up.png" format="PNG"></graphic>
-	  </figure>
--->
         </para>
       </sect3>
       <sect3 id="mrp-zooming-gantt">
@@ -1154,12 +1160,6 @@
         <para>
           <guibutton>Zoom to fit</guibutton> shows the entire project duration 
 	  in the Gantt view.
-<!--
-          <figure>
-	    <title>Zoom to fit the project</title>
-	    <graphic fileref="figures/project-zoom-fit.png" format="PNG"></graphic>
-	  </figure>
--->
         </para>
         <para>
           You can use the <guibutton>Zoom in</guibutton> and 
@@ -1167,12 +1167,6 @@
           time line in which you want to work.  When the view is
 	  zoomed to a detailed level, nonworking hours are shown for each day
 	  in addition to weekends.
-<!--
-          <figure>
-	    <title>Zoom in a zone of the project</title>
-	    <graphic fileref="figures/project-zoom-up.png" format="PNG"></graphic>
-	  </figure>
--->
         </para>
       </sect3>
       
@@ -1213,16 +1207,10 @@
 	    <graphic fileref="figures/task-custom-properties.png" format="PNG"></graphic>
 	  </figure>
 	</para>
-	<para>In the New Property dialog, you can give your new property a label, a name,
-	  description, and set the property type to either text, integer number, or floating point
-	  number.  Once you have added your new property, it will show as a new column in the 
-	  Task view.  
-<!--
-	  <figure id="task-custom-properties-add">
-	    <title>Task constraints</title>
-	    <graphic fileref="figures/task-custom-properties-add.png" format="PNG"></graphic>
-	  </figure>
--->
+	<para>In the New Property dialog, you can give your new property a 
+	  label, a name, description, and set the property type to either text,
+	  integer number, or floating point number.  Once you have added your 
+	  new property, it will show as a new column in the Task view.  
 	</para>
       </sect3>
     </sect2>
@@ -1244,7 +1232,7 @@
               </para>
             </listitem>
             <listitem>
-              <para><emphasis>Type:</emphasis> Currently available types are 
+              <para><emphasis>Type:</emphasis> Available types are 
 		<guimenuitem>Work</guimenuitem>
 		and <guimenuitem>Material</guimenuitem>.
                 Work is for human resources working in the project, and Material
@@ -1252,7 +1240,7 @@
               </para>
             </listitem>
             <listitem>
-              <para><emphasis>Group:</emphasis> the group that the resource is 
+              <para><emphasis>Group:</emphasis> The group that the resource is 
 		assigned.  This column offers
 		a dropdown list of defined groups.  You must use the Group 
 		Editor to define groups before assigning them in the Resource
@@ -1260,7 +1248,7 @@
               </para>
             </listitem>
             <listitem>
-              <para><emphasis>Email:</emphasis> the electronic mail to contact
+              <para><emphasis>Email:</emphasis> The electronic mail to contact
 		the resource.
               </para>
             </listitem>
@@ -1311,6 +1299,40 @@
 	    <graphic fileref="figures/resource-insert.png" format="PNG"></graphic>
 	  </figure>
 	</para>
+	<para>
+	  If Planner's EDS (Evolution Data Server) interface is enabled, you 
+	  can also import resources from your Evolution contacts or an LDAP 
+	  server.  The EDS interface is an experimental feature and requires
+	  <ulink url="http://www.gnome.org/projects/evolution/" type="http">
+	  Evolution</ulink> version 2.0 or higher.  
+	</para>
+	<para>To import contacts using the EDS interface, choose
+	  <menuchoice>
+	    <guimenu>File</guimenu>
+	    <guimenuitem>Import</guimenuitem>
+	    <guimenuitem>EDS</guimenuitem>
+	  </menuchoice>. You will be presented with the following dialog: 
+	  <figure>
+	    <title>EDS Import</title>
+	    <graphic fileref="figures/eds1.png" format="PNG"></graphic>
+	  </figure>
+	</para>
+	<para>
+	  From the <guilabel>Select group</guilabel> dropdown, select 
+	  <guimenuitem>On This Computer</guimenuitem> to choose from 
+	  resources in your Evolution contacts list, or  
+	  <guimenuitem>On LDAP Servers</guimenuitem> to choose from
+	  resources on an LDAP server.  If the resulting list is long, then you
+	  can use the search function to find the ones you want, and then 
+	  select them by checking the appropriate boxes in the import column.  
+	  You can also
+	  use <guibutton>Select All</guibutton> or <guibutton>Unselect All
+	  </guibutton> to get everyone or start fresh with no one selected.
+	</para>
+	<para>
+	  When finished, click <guibutton>OK</guibutton>, and your selections
+	  will be imported into your project resource list.
+	</para>
       </sect3>
 
       <sect3 id="mrp-resource-properties-general">
@@ -1326,21 +1348,20 @@
 	  </figure>
 	</para>
 	<para>
-	  The Calendar tab allows us to assign a calendar to a specific resource if the 
-	  project default calendar is not appropriate.  See 
+	  The Calendar tab allows us to assign a calendar to a specific resource	  if the project default calendar is not appropriate.  See 
 	  <xref linkend="mrp-properties"/> for more information on setting the 
 	  project default calendar.
-	  To change the calendar assigned to a resource, simply select it from the list.
-	  If you would like to create a new calendar for this resource, you can do so from
-	  this dialog by clicking the <guibutton>Edit calendars</guibutton> button.  See 
+	  To change the calendar assigned to a resource, simply select it from 
+	  the list. If you would like to create a new calendar for this 
+	  resource, you can do so from this dialog by clicking the 
+	  <guibutton>Edit calendars</guibutton> button.  See 
 	  the section <xref linkend="mrp-calendars"/> for more information.
 	</para>
 	<para>
-	  Any tasks
-	  assigned to a resource with a specific calendar will use the calendar assigned 
-	  to the resource to schedule the work to be done.  Therefore, if a task appears
-	  to be scheduled for a longer than expected time period, it is likely that the
-	  resource is using a calendar that is different from the project default.
+	  Any tasks assigned to a resource with a specific calendar will use 
+	  the calendar assigned to the resource to schedule the work to be done.	  Therefore, if a task appears to be scheduled for a longer than 
+	  expected time period, it is likely that the resource is using a 
+	  calendar that is different from the project default.
 	  <figure>
 	    <title>Resource Properties Dialog - Calendar Tab</title>
 	    <graphic fileref="figures/resource-properties-calendar.png" format="PNG"></graphic>
@@ -1365,11 +1386,11 @@
       <sect3 id="mrp-group-editor">
         <title>Group editor</title>
         <para>
-          With the group editor you can define groups to be used to classify your resources.
-          A group has a name, a manager, telephone, email, and
-          finally, an option to specify the default group.   If you specify a default group,
-	  every new resource that you add will placed in this group.  Of course, you can still
-	  change the group to another as needed.
+          With the group editor you can define groups to be used to classify 
+	  your resources. A group has a name, a manager, telephone, email, and 
+	  an option to specify the default group.   If you specify a default 
+	  group, every new resource that you add will placed in this group.  
+	  Of course, you can still change the group to another as needed.
 	  <figure>
 	    <title>Group editor</title>
 	    <graphic fileref="figures/resource-group-editor.png" format="PNG"></graphic>
@@ -1379,18 +1400,23 @@
 
       <sect3 id="mrp-print" xreflabel="Print">
         <title>Printing</title>
-        <para>You can print your project information by choosing <guimenuitem>File->Print
-	  </guimenuitem> or clicking the <guilabel>Print</guilabel> button on the task bar.
+        <para>You can print your project information by choosing 
+	  <menuchoice> 
+	    <guimenu>File</guimenu> 
+	    <guimenuitem>Print</guimenuitem> 
+	  </menuchoice>, or clicking the 
+	  <guilabel>Print</guilabel> button on the task bar.
 	  <note><title>Note</title>
-	    <para>The <guibutton>Print Preview</guibutton> button is available in the Print
-		  dialog regardless of what tab is currently visible.
+	    <para>The <guibutton>Print Preview</guibutton> button is available 
+	      in the Print dialog regardless of what tab is currently visible.
 	    </para>
 	  </note>
 	<itemizedlist>
 	<listitem>
-	  <para>The Print Project dialog allows you to choose between printing on available
-	    printers, or to a PDF file.  If you choose to print to a PDF file, your location
-	    options will change so that you can specify the path and filename of the output file.
+	  <para>The Print Project dialog allows you to choose between printing 
+	    on available printers, or to a PDF file.  If you choose to print to
+	    a PDF file, your location options will change so that you can 
+	    specify the path and filename of the output file.
 	    <figure>
 	    <title>Printer Tab</title>
 	    <graphic fileref="figures/print-project.png" format="PNG"></graphic>
@@ -1398,8 +1424,7 @@
 	  </para>
 	</listitem>
 	<listitem>
-	  <para>In the Select Views tab, you can choose to print the Gantt, Task, or Resource
-		views, or all of them.  The default is all.
+	  <para>In the Select Views tab, you can choose to print the Gantt, 		    Task, or Resource views, or all of them.  The default is all.
 	    <figure>
 	    <title>Select Views Tab</title>
 	    <graphic fileref="figures/print-project-selectviews.png" format="PNG"></graphic>
@@ -1430,8 +1455,12 @@
 	  project status information.
 	</para>
 	<para>
-	  You can create the HTML page by choosing <guimenuitem>File->Export 
-	  to HTML</guimenuitem>.  
+	  You can create the HTML page by choosing 
+	  <menuchoice> 
+	    <guimenu>File</guimenu> 
+	    <guimenuitem>Export</guimenuitem> 
+	    <guimenuitem>HTML</guimenuitem> 
+	  </menuchoice>.
 <!-- web is disabled in v0.12
 	  The <guilabel>Export to HTML</guilabel> dialog will allow you
 	  to send the output either to a file or directly to a web location.
@@ -1820,23 +1849,30 @@
       section is optional: primary place for this info is "About.." box of
       the program. However, if you do wish to include this info in the
       manual, this is the place to put it. Alternatively, you can put this information in the title page.-->
- <sect1 id="&app;-about"> 
+ <sect1 id="planner-about"> 
     <title>About &app;</title> 
     <para> &app; is maintained by Imendio and GNOME community volunteers.
       To find more information about
-      &app;, please visit the 
-      <ulink url="http://planner.imendio.org/" type="http">&app; Web
-      site</ulink>. </para>
+      &app;, please visit Imendio's 
+      <ulink url="http://www.imendio.com/projects/planner" type="http">&app; 
+      Web site</ulink> or 
+      <ulink url="http://www.planetplanner.org" type="http"> Planet &app;
+      </ulink>.  </para>
     <para>
       To report a bug or make a suggestion regarding this application or
       this manual, you can submit them using 
-      <ulink url="http://bugzilla.gnome.org"   type="help">bugzilla</ulink>.
+      <ulink url="http://bugzilla.gnome.org/enter_bug.cgi?product=planner" 
+	type="http">bugzilla</ulink>.
     </para>
 
     <para>
       Another excellent source of information are the &app; 
-      <ulink url="http://planner.imendio.org/contact/" type="http">mailing lists</ulink>.
-      There are separate lists for users and developers.  Subscribe to whatever interests you.
+      <ulink url="http://lists.imendio.com/mailman/listinfo/planner" 
+	type="http">user</ulink> and 
+      <ulink url="http://lists.imendio.com/mailman/listinfo/planner-dev" 
+	type="http">developer</ulink> mailing lists.  In addition to 
+      subscribing, you might also want to browse the list archives, available
+      via these same links.
     </para>
 
     <para> This program is distributed under the terms of the GNU
@@ -1849,7 +1885,7 @@
 
   <sect1 id="mrp-database-config">
   <title>Configuring a &app; database</title>
-   <section id="postgresql-database-config">
+   <sect2 id="postgresql-database-config">
    <title>Configuring a Postgresql database for use with &app;</title>
 
    <caution>
@@ -1876,7 +1912,7 @@
 	later. Assuming the &app; folder is in the root directory, you would 
 	do the following:
       <screen>
-	<prompt>root#</prompt><userinput> cp &app;/docs/sql/database-0.11.sql /tmp</userinput>
+	<prompt>root#</prompt><userinput> cp &cmd;/docs/sql/database-0.13.sql /tmp</userinput>
       </screen>
     </para>
     <para>If you're running Red Hat and you chose to install the PostgreSQL 
@@ -1917,13 +1953,22 @@
 	than use the default account.
     </para>
 
+    <note>
+	<title>Note</title>
+	<para>
+	  As of v0.13, &app; can now create the database for you when you save
+	  your project, so you no longer need to perform the remaining steps 
+	  in this section manually.
+	</para>
+    </note>
+
     <para>
 	You can now create the database and group from your own account:
       <screen>
 	<prompt>kurt#</prompt><userinput> createdb -U kurt plannerdb</userinput>
 	CREATE DATABASE
-	<prompt>kurt#</prompt><userinput> echo 'create group &app; with user kurt;' | psql -e -U kurt -d plannerdb</userinput>
-	create group &app; with user kurt;
+	<prompt>kurt#</prompt><userinput> echo 'create group &cmd; with user kurt;' | psql -e -U kurt -d plannerdb</userinput>
+	create group &cmd; with user kurt;
 	CREATE GROUP
       </screen>
     </para>
@@ -1952,12 +1997,12 @@
 	the group and database and recreating them:
       <screen>
 	<prompt>kurt#</prompt><userinput> dropdb plannerdb</userinput>
-	<prompt>kurt#</prompt><userinput> echo 'DROP GROUP &app;;' | psql -e -U kurt -d plannerdb
+	<prompt>kurt#</prompt><userinput> echo 'DROP GROUP &cmd;;' | psql -e -U kurt -d plannerdb
 	</userinput>
       </screen>
     </para>
-   </section>
-   <section id="postgresql-remote-config">
+   </sect2>
+   <sect2 id="postgresql-remote-config">
    <title>Configuring a Postgresql database for remote connection</title>
     <para>
 	Now that you've set up your postgresql database, you'll probably want
@@ -2015,14 +2060,15 @@
     </para>
     <warning>
       <para>
-	Once again, you are strongly advised to PostgreSQL documentation,
+	Once again, you are strongly advised to consult the PostgreSQL 
+	documentation,
 	Client Authentication section to fully understand the levels of 
 	security that can be implemented to suit your needs.  The level of
 	trust that is granted in this example is not suitable for most
 	production environments.
       </para>
     </warning>
-   </section>
+   </sect2>
   </sect1>
 
   <!--sect1 id="mrp-web-resources">
