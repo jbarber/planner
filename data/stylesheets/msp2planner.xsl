@@ -126,6 +126,11 @@
       <xsl:with-param name="dur" select="ms:Work"/>
     </xsl:call-template>
   </xsl:attribute>
+  <xsl:attribute name="duration">
+    <xsl:call-template name="ms2pduration">
+      <xsl:with-param name="dur" select="ms:Duration"/>
+    </xsl:call-template>
+  </xsl:attribute>
   <xsl:attribute name="start">
     <xsl:call-template name="ms2pdate">
       <xsl:with-param name="thedate" select="ms:Start"/>
