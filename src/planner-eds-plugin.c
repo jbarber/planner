@@ -355,13 +355,18 @@ eds_load_resources (ESourceGroup  *group,
 
 	g_return_if_fail (E_IS_SOURCE_GROUP (group));
 	sources = e_source_group_peek_sources (group);
-	if (sources == NULL) {
-		return;
-	}
 
 	priv = plugin->priv;
-
 	model = GTK_LIST_STORE (priv->resources_model);
+
+	if (sources == NULL) {
+		if (model) {
+			gtk_list_store_clear (model);
+		}
+		gtk_widget_set_sensitive (glade_xml_get_widget (priv->glade, 
+								"search_box"), FALSE);
+		return;
+	}
 
 	if (model) {
 		gtk_list_store_clear (model);
@@ -492,23 +497,32 @@ eds_receive_book_cb (EBook         *client,
 	const gchar   *search;
 	const gchar   *uid;
 	const gchar   *book_uri;
+	GtkListStore  *model;
 
 	async_query = user_data;
 	plugin = async_query->plugin;
 	search = async_query->search;
 	uid = async_query->uid;
+	model = GTK_LIST_STORE (plugin->priv->resources_model);
 
+	gtk_list_store_clear (model);
 	g_free (async_query);
 
 	book_uri = e_book_get_uri (client);
 
 	if (eds_query_cancelled (plugin, uid)) {
 		g_message ("Open book query cancelled: %s (%s)", book_uri, uid);
+		gtk_widget_set_sensitive (glade_xml_get_widget (plugin->priv->glade, 
+								"search_box"), TRUE);
+		eds_plugin_busy (plugin, FALSE);
 		return;		
 	}
 
 	if (status != E_BOOK_ERROR_OK) {
 		g_warning ("Problems opening: %s", book_uri);
+		gtk_widget_set_sensitive (glade_xml_get_widget (plugin->priv->glade, 
+								"search_box"), TRUE);
+		eds_plugin_busy (plugin, FALSE);		
 		return;
 	}
 
@@ -567,7 +581,8 @@ eds_receive_contacts_cb (EBook         *book,
 		pixbuf = gdk_pixbuf_new_from_file (IMAGEDIR"/resources.png", NULL);
 		for (l = contacts; l; l = l->next) {
 			gchar *name, *email;
-			name = e_contact_get (l->data, E_CONTACT_GIVEN_NAME);
+			name = e_contact_get (l->data, E_CONTACT_FULL_NAME);
+			g_message ("Resource name: %s\n", name);
 			email = e_contact_get (l->data, E_CONTACT_EMAIL_1);
 			gtk_list_store_append (model, &iter);
 			gtk_list_store_set (model, &iter, 
@@ -769,7 +784,7 @@ eds_ok_button_clicked (GtkButton     *button,
 				    -1);
 
 		if (selected) {
-			gchar *name = e_contact_get (contact, E_CONTACT_GIVEN_NAME);
+			gchar *name = e_contact_get (contact, E_CONTACT_FULL_NAME);
 			gchar *email = e_contact_get (contact, E_CONTACT_EMAIL_1);
 			gchar *eds_uid = e_contact_get (contact, E_CONTACT_UID);
 			eds_import_resource (name, email, eds_uid, plugin, resources_orig);

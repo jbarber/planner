@@ -247,6 +247,7 @@ lookup_task (ECalBackendPlanner *backend,
 		}
 		g_free (task_uid);
 	}
+	g_message ("Task not found: %s", uid);
 	return NULL;
 }
 
@@ -266,7 +267,7 @@ task_replace (MrpProject *project,
 		mrp_project_remove_resource (project, l->data);
 	}
 	mrp_project_remove_task (project, task);
-	g_object_unref (task);
+	/* g_object_unref (task); */
 	mrp_project_insert_task (project, NULL, -1, task_new);
 }
 
@@ -631,9 +632,9 @@ comp_desc_as_char (ECalComponent *comp)
 
 static MrpTask *
 comp_to_task (MrpProject    *project,
-		       ECalComponent *comp)
+	      ECalComponent *comp)
 {
-	/* Task data to be filled*/
+	/* Task data to be filled */
 	MrpTask                     *task;
 	mrptime                      start, end;
 	/* ECalComp data */
@@ -650,8 +651,10 @@ comp_to_task (MrpProject    *project,
 	g_return_val_if_fail (MRP_IS_PROJECT (project), NULL);
 		
 	task = mrp_task_new ();
+
 	mrp_project_insert_task (project, NULL, -1, task);
 	e_cal_component_get_uid (comp, &uid);
+	g_message ("UID for new task: %s", uid);
 	e_cal_component_get_summary (comp, &summary);
 	g_message ("Summary: %s", summary.value);
 	e_cal_component_get_url (comp, &url);
@@ -673,19 +676,19 @@ comp_to_task (MrpProject    *project,
 			"note", note ? note : "",
 			"eds-categories", categories ? categories : "",
 			"eds-classification", classification,
-			/*
-			   "start", &start,
+			/* "start", &start,
 			   "finish", &end, */
 			NULL);
 	if (!priority) {
-		mrp_object_set (task,"priority", 0); 
+		mrp_object_set (task, "priority", 0, NULL); 
 	} else {
-		mrp_object_set (task,"priority", *priority);	
+		mrp_object_set (task, "priority", *priority, NULL);	
+		
 	}
 	if (!complete) {
-		mrp_object_set (task,"percent-complete", 0); 
+		mrp_object_set (task,"percent-complete", 0, NULL); 
 	} else {
-		mrp_object_set (task,"percent-complete", *complete);	
+		mrp_object_set (task,"percent-complete", *complete, NULL);	
 	}
 	/* Time to save the resources */
 	if (e_cal_component_has_attendees (comp)) {
@@ -1317,15 +1320,25 @@ cbp_modify_object (ECalBackendSync *backend,
 		icalcomponent_free (icalcomp);
 		return GNOME_Evolution_Calendar_ObjectNotFound;
 	} else {
-		g_message ("Cache object found ... modifying it");
+		g_message ("Cache object found %s... modifying it", comp_uid);
 	}
 
 	comp = e_cal_component_new ();
 	e_cal_component_set_icalcomponent (comp, icalcomp);
 
-	g_hash_table_replace (priv->tasks_comp, (gpointer) comp_uid, comp);
 	task = lookup_task (cbplanner, comp_uid);
+	if (task == NULL) {
+		g_message ("Cache fail: can't find task for component %s", comp_uid);
+		g_object_unref (cache_comp);
+		return GNOME_Evolution_Calendar_InvalidObject;
+	}
 	task_new = comp_to_task (priv->project, comp);
+	if (task_new == NULL) {
+		g_message ("Can't create a task from %s", comp_uid);
+		g_object_unref (cache_comp);
+		return GNOME_Evolution_Calendar_InvalidObject;
+	}
+	g_hash_table_replace (priv->tasks_comp, (gpointer) comp_uid, comp);
 	task_replace (priv->project, task, task_new);
 	mrp_project_save (priv->project, TRUE, &error);
 	

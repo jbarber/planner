@@ -3,7 +3,7 @@ INCLUDES =						\
 	-I$(top_builddir)				\
 	$(EDS_BACKEND_CFLAGS)				
 
-SUBDIRS = utils
+SUBDIRS = utils planner-source
 
 extension_LTLIBRARIES = libecalbackendplanner.la
 

@@ -1,3 +1,20 @@
+2005-01-30 Alvaro del Castillo  <acs@barrapunto.com>
+
+	* configure.in: support for evolution plugin library.
+	* eds-backend/planner-source: Evolution plugin in order to add easily
+	Planner files as Task Sources to Evolution.
+	* eds-backend/e-cal-backend-planner.c:
+	fix some bugs in the backend that make it crash and add some
+	test code in order to be more robust.
+
+2005-01-30 Alvaro del Castillo  <acs@barrapunto.com>
+
+	* src/planner-eds-plugin.c: love care
+	- If getting contacts fails, activate the import resource 
+	dialog control, clean the old resources in the list  and 
+	deactivate the search control.
+	- Import resource name with E_CONTACT_FULL_NAME.
+	
 2005-01-30  Richard Hult  <richard@imendio.com>
 
 	* gtk-doc.make: Updated by gtk-doc.
