@@ -1919,6 +1919,8 @@ planner_task_tree_link_tasks (PlannerTaskTree *tree,
 		return;
 	}
 
+	list = g_list_reverse (list);
+	
 	target_task = list->data;
 	for (l = list->next; l; l = l->next) {
 		GError *error = NULL;

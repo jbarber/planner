@@ -1,5 +1,9 @@
 2004-03-15  Richard Hult  <richard@imendio.com>
 
+	* src/planner-task-tree.c (planner_task_tree_link_tasks): Hm, I
+	could have sworn that this worked before. Reverse the list to get
+	the right order when linking.
+
 	* data/glade/add-predecessor.glade: Up the limits to very low/high
 	numbers.
 
