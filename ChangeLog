@@ -1,3 +1,12 @@
+2004-01-23  Xavier Ordoquy   <xordoquy@wanadoo.fr>
+
+	* data/images/resources_usage.png:
+	* data/images/Makefile.am:
+	Created resource usage (timetable) icon
+
+	* src/planner-ttable-view.c:
+	Included the new icon and changed timetable name to resource usage.
+
 2004-01-22  Xavier Ordoquy   <xordoquy@wanadoo.fr>
 
 	* src/planner-ttable-model.c: resources are removed from the ttable.

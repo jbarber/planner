@@ -138,21 +138,21 @@ G_MODULE_EXPORT gchar *
 get_label (PlannerView *view)
 {
 	g_return_val_if_fail (PLANNER_IS_VIEW (view), NULL);
-	return _("Time Table");
+	return _("Resource usage");
 }
 
 G_MODULE_EXPORT gchar*
 get_menu_label (PlannerView *view)
 {
 	g_return_val_if_fail (PLANNER_IS_VIEW(view),NULL);
-	return _("_Time Table");
+	return _("_Resource usage");
 }
 
 G_MODULE_EXPORT gchar *
 get_icon (PlannerView *view)
 {       
 	g_return_val_if_fail (PLANNER_IS_VIEW (view), NULL);
-	return IMAGEDIR "/time-table.png";
+	return IMAGEDIR "/resources_usage.png";
 }
 
 G_MODULE_EXPORT GtkWidget *
@@ -483,15 +483,3 @@ planner_ttable_print_data_new
 planner_ttable_print_do
 planner_ttable_print_get_n_pages
 */
-
-
-
-
-
-
-
-
-
-
-
-

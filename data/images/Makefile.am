@@ -6,6 +6,7 @@ images_DATA = \
 	tasks.png			\
 	gantt.png			\
 	resources.png			\
+	resources_usage.png		\
 	24_insert_task.png		\
 	24_remove_task.png		\
 	24_unlink_task.png		\
