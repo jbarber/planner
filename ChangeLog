@@ -1,5 +1,16 @@
 2005-02-18  Richard Hult  <richard@imendio.com>
 
+	* libplanner/mrp-task.c: (mrp_task_get_prev_sibling): Implement.
+
+	* src/planner-task-tree.c: (task_cmd_move_undo),
+	(task_cmd_move_free), (task_cmd_move),
+	(planner_task_tree_unindent_task): Fix the behavior of undo/redo
+	of indenting tasks. Fixes bug #158973 and more.
+	
+	* src/planner-window.c (window_do_save_as): Make "yes" the default.
+
+2005-02-18  Richard Hult  <richard@imendio.com>
+
 	* src/planner-format.c:
 	* src/planner-format.h: New functions to parse an int and float
 	that handles thousands separators.

@@ -1433,6 +1433,9 @@ window_do_save_as (PlannerWindow *window)
 							 GTK_BUTTONS_YES_NO,
 							 _("File \"%s\" exists, do you want to overwrite it?"),
 							 error->message);
+
+			gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_YES);
+			
 			ret = gtk_dialog_run (GTK_DIALOG (dialog));
 			gtk_widget_destroy (dialog);
 			

@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
- * Copyright (C) 2004 Imendio AB
+ * Copyright (C) 2004-2005 Imendio AB
  * Copyright (C) 2001-2002 CodeFactory AB
  * Copyright (C) 2001-2002 Richard Hult <richard@imendio.com>
  * Copyright (C) 2001-2002 Mikael Hallendal <micke@imendio.com>
@@ -83,6 +83,7 @@ gboolean         mrp_task_has_relation              (MrpTask          *task);
 MrpTask         *mrp_task_get_parent                (MrpTask          *task);
 MrpTask         *mrp_task_get_first_child           (MrpTask          *task);
 MrpTask         *mrp_task_get_next_sibling          (MrpTask          *task);
+MrpTask         *mrp_task_get_prev_sibling          (MrpTask          *task);
 guint            mrp_task_get_n_children            (MrpTask          *task);
 MrpTask         *mrp_task_get_nth_child             (MrpTask          *task,
 						     guint             n);

@@ -708,7 +708,7 @@ gantt_model_get_path_from_node (PlannerGanttModel *model,
 	if (parent == NULL && node == model->priv->tree) {
 		return gtk_tree_path_new_root ();
 	}
-	
+
 	g_assert (parent != NULL);
 
 	if (parent == model->priv->tree) {

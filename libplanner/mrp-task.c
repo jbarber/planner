@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
- * Copyright (C) 2004 Imendio AB
+ * Copyright (C) 2004-2005 Imendio AB
  * Copyright (C) 2001-2002 CodeFactory AB
  * Copyright (C) 2001-2002 Richard Hult <richard@imendio.com>
  * Copyright (C) 2001-2002 Mikael Hallendal <micke@imendio.com>
@@ -1261,6 +1261,25 @@ mrp_task_get_next_sibling (MrpTask *task)
 	g_return_val_if_fail (MRP_IS_TASK (task), NULL);
 
 	node = g_node_next_sibling (task->priv->node);
+	return node ? node->data : NULL;
+}
+
+/**
+ * mrp_task_get_prev_sibling:
+ * @task: an #MrpTask
+ * 
+ * Fetches the previous sibling of @task.
+ * 
+ * Return value: the previous sibling of @task, or %NULL if there is none.
+ **/
+MrpTask *
+mrp_task_get_prev_sibling (MrpTask *task)
+{
+	GNode *node;
+
+	g_return_val_if_fail (MRP_IS_TASK (task), NULL);
+
+	node = g_node_prev_sibling (task->priv->node);
 	return node ? node->data : NULL;
 }
 
