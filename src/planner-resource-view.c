@@ -27,6 +27,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <glib.h>
+#include <gobject/gvaluecollector.h>
 #include <gmodule.h>
 #include <bonobo/bonobo-ui-component.h>
 #include <bonobo/bonobo-ui-util.h>
@@ -64,7 +65,7 @@ struct _PlannerViewPriv {
 };
 
 typedef struct {
-	GtkTreeView *tree;
+	PlannerView *view;
 	MrpProperty *property;
 } ColPropertyData;
 
@@ -97,15 +98,15 @@ static void    resource_view_popup_edit_resource_cb   (gpointer             call
 static void    resource_view_select_all_cb            (BonoboUIComponent   *component, 
 						       gpointer             data, 
 						       const char          *cname);
-static void    resource_view_edit_custom_props_cb     (BonoboUIComponent *component, 
-						       gpointer           data, 
-						       const char        *cname);
+static void    resource_view_edit_custom_props_cb     (BonoboUIComponent   *component, 
+						       gpointer             data, 
+						       const char          *cname);
 
 static void    resource_view_selection_changed_cb     (GtkTreeSelection    *selection, 
-						       PlannerView              *view);
+						       PlannerView         *view);
 static void    resource_view_group_dialog_closed      (GtkWidget           *widget,
 						       gpointer             data);
-static void    resource_view_setup_tree_view          (PlannerView              *view);
+static void    resource_view_setup_tree_view          (PlannerView         *view);
 static void    resource_view_cell_name_edited         (GtkCellRendererText *cell,
 						       gchar               *path_string,
 						       gchar               *new_text,
@@ -117,11 +118,11 @@ static void    resource_view_cell_email_edited        (GtkCellRendererText *cell
 static void    resource_view_cell_type_edited         (PlannerCellRendererList  *cell,
 						       gchar               *path_string,
 						       gchar               *new_text,
-						       GtkTreeView         *tree_view);
+						       gpointer             user_data);
 static void    resource_view_cell_group_edited        (PlannerCellRendererList  *cell,
 						       gchar               *path_string,
 						       gchar               *new_text,
-						       GtkTreeView         *tree_view);
+						       gpointer             user_data);
 static void    resource_view_property_value_edited    (GtkCellRendererText *cell,
 						       gchar               *path_string,
 						       gchar               *new_text,
@@ -132,34 +133,34 @@ static void    resource_view_cell_type_show_popup     (PlannerCellRendererList  
 						       gint                 y1,
 						       gint                 x2,
 						       gint                 y2,
-						       PlannerView              *view);
+						       PlannerView         *view);
 static void    resource_view_cell_group_show_popup   (PlannerCellRendererList  *cell,
-						      const gchar         *path_string,
-						      gint                 x1,
-						      gint                 y1,
-						      gint                 x2,
-						      gint                 y2,
-						      PlannerView              *view);
+						      const gchar          *path_string,
+						      gint                  x1,
+						      gint                  y1,
+						      gint                  x2,
+						      gint                  y2,
+						      PlannerView          *view);
 static void    resource_view_cell_group_hide_popup   (PlannerCellRendererList  *cell,
-						      PlannerView              *view);
-static void    resource_view_edit_groups_cb          (BonoboUIComponent   *component, 
-						      gpointer             data, 
-						      const char          *cname);
-static void    resource_view_project_loaded_cb       (MrpProject          *project,
-						      PlannerView              *view);
+						      PlannerView          *view);
+static void    resource_view_edit_groups_cb          (BonoboUIComponent    *component, 
+						      gpointer              data, 
+						      const char           *cname);
+static void    resource_view_project_loaded_cb       (MrpProject           *project,
+						      PlannerView          *view);
 
-static GList * resource_view_selection_get_list      (PlannerView              *view);
+static GList * resource_view_selection_get_list      (PlannerView          *view);
 
-static void    resource_view_update_ui               (PlannerView              *view);
+static void    resource_view_update_ui               (PlannerView          *view);
 
 static void    resource_view_property_added          (MrpProject           *project, 
 						      GType                 object_type,
 						      MrpProperty          *property,
-						      PlannerView               *view);
+						      PlannerView          *view);
 
 static void    resource_view_property_removed        (MrpProject           *project, 
 						      MrpProperty          *property,
-						      PlannerView               *view);
+						      PlannerView          *view);
 
 static void    resource_view_name_data_func          (GtkTreeViewColumn    *tree_column,
 						      GtkCellRenderer      *cell,
@@ -171,19 +172,19 @@ static void    resource_view_type_data_func          (GtkTreeViewColumn    *tree
 						      GtkTreeModel         *tree_model,
 						      GtkTreeIter          *iter,
 						      gpointer              data);
-static void    resource_view_group_data_func          (GtkTreeViewColumn    *tree_column,
+static void    resource_view_group_data_func          (GtkTreeViewColumn   *tree_column,
 						      GtkCellRenderer      *cell,
 						      GtkTreeModel         *tree_model,
 						      GtkTreeIter          *iter,
 						      gpointer              data);
-static void    resource_view_email_data_func          (GtkTreeViewColumn    *tree_column,
+static void    resource_view_email_data_func          (GtkTreeViewColumn   *tree_column,
 						      GtkCellRenderer      *cell,
 						      GtkTreeModel         *tree_model,
 						      GtkTreeIter          *iter,
 						      gpointer              data);
 
 static void    resource_view_popup_menu              (GtkWidget            *widget,
-						      PlannerView               *view);
+						      PlannerView          *view);
 static void    resource_view_edit_resource_cb        (BonoboUIComponent    *component, 
 						      gpointer              data, 
 						      const char           *cname);
@@ -192,38 +193,38 @@ static void    resource_view_property_data_func      (GtkTreeViewColumn    *tree
 						      GtkTreeModel         *tree_model,
 						      GtkTreeIter          *iter,
 						      gpointer              data);
-void           activate                              (PlannerView               *view);
-void           deactivate                            (PlannerView               *view);
-void           init                                  (PlannerView               *view,
-						      PlannerWindow         *main_window);
-const gchar   *get_label                             (PlannerView               *view);
-const gchar   *get_menu_label                        (PlannerView               *view);
-const gchar   *get_icon                              (PlannerView               *view);
-const gchar   *get_name                              (PlannerView               *view);
-GtkWidget     *get_widget                            (PlannerView               *view);
-void           print_init                            (PlannerView            *view,
-						      PlannerPrintJob        *job);
-void           print                                 (PlannerView            *view);
-gint           print_get_n_pages                     (PlannerView            *view);
-void           print_cleanup                         (PlannerView            *view);
+void           activate                              (PlannerView          *view);
+void           deactivate                            (PlannerView          *view);
+void           init                                  (PlannerView          *view,
+						      PlannerWindow        *main_window);
+const gchar   *get_label                             (PlannerView          *view);
+const gchar   *get_menu_label                        (PlannerView          *view);
+const gchar   *get_icon                              (PlannerView          *view);
+const gchar   *get_name                              (PlannerView          *view);
+GtkWidget     *get_widget                            (PlannerView          *view);
+void           print_init                            (PlannerView          *view,
+						      PlannerPrintJob      *job);
+void           print                                 (PlannerView          *view);
+gint           print_get_n_pages                     (PlannerView          *view);
+void           print_cleanup                         (PlannerView          *view);
 
 static void
-resource_view_resource_notify_cb                  (MrpResource       *resource,
-						   GParamSpec        *pspec,
-						   PlannerView            *view);
+resource_view_resource_notify_cb                     (MrpResource          *resource,
+						      GParamSpec           *pspec,
+						      PlannerView          *view);
 
 static void
-resource_view_resource_added_cb                   (MrpProject        *project, 
-						   MrpResource       *resource,
-						   PlannerView            *view);
+resource_view_resource_added_cb                      (MrpProject           *project, 
+						      MrpResource          *resource,
+						      PlannerView          *view);
 static void
-resource_view_resource_removed_cb                 (MrpProject        *project, 
-						   MrpResource       *resource,
-						   PlannerView            *view);
+resource_view_resource_removed_cb                    (MrpProject           *project, 
+						      MrpResource          *resource,
+						      PlannerView          *view);
 
-static const gchar * resource_view_get_type_string   (MrpResourceType type);
+static const gchar * resource_view_get_type_string   (MrpResourceType       type);
 #if 0
-static MrpResourceType resource_view_get_type_enum   (const gchar *type_str);
+static MrpResourceType resource_view_get_type_enum   (const gchar          *type_str);
 #endif
 
 static BonoboUIVerb verbs[] = {
@@ -262,6 +263,7 @@ typedef struct {
 	MrpProject  *project;
 	const gchar *name;
 	MrpResource *resource; /* The inserted resource */
+	MrpGroup    *group;
 } ResourceCmdInsert;
 
 typedef struct {
@@ -272,6 +274,15 @@ typedef struct {
 	GValue      *value;
 	GValue      *old_value;
 } ResourceCmdEditProperty;
+
+typedef struct {
+	PlannerCmd   base;
+
+	MrpResource  *resource;
+	MrpProperty  *property;  
+	GValue       *value;
+	GValue       *old_value;
+} ResourceCmdEditCustomProperty;
 
 
 G_MODULE_EXPORT void
@@ -1079,7 +1090,7 @@ resource_view_setup_tree_view (PlannerView *view)
 	g_signal_connect (cell,
 			  "edited",
 			  G_CALLBACK (resource_view_cell_type_edited),
-			  tree_view);
+			  view);
 	g_signal_connect (cell,
 			  "show-popup",
 			  G_CALLBACK (resource_view_cell_type_show_popup),
@@ -1104,7 +1115,7 @@ resource_view_setup_tree_view (PlannerView *view)
 	g_signal_connect (cell,
 			  "edited",
 			  G_CALLBACK (resource_view_cell_group_edited),
-			  tree_view);
+			  view);
 	g_signal_connect (cell,
 			  "show-popup",
 			  G_CALLBACK (resource_view_cell_group_show_popup),
@@ -1134,7 +1145,7 @@ resource_view_setup_tree_view (PlannerView *view)
 	g_signal_connect (cell,
 			  "edited",
 			  G_CALLBACK (resource_view_cell_email_edited),
-			  tree_view);
+			  view);
 
 	/* Custom property for cost added by default */
 	project = planner_window_get_project (view->main_window);
@@ -1167,7 +1178,7 @@ resource_cmd_edit_property_undo (PlannerCmd *cmd_base)
 
 	g_object_set_property (G_OBJECT (cmd->resource),
 			       cmd->property,
-			       cmd->old_value);	
+			       cmd->old_value);
 }
 
 static PlannerCmd *
@@ -1201,6 +1212,68 @@ resource_cmd_edit_property (PlannerView  *view,
 	g_object_get_property (G_OBJECT (cmd->resource),
 			       cmd->property,
 			       cmd->old_value);
+
+	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager (view->main_window),
+					   cmd_base);
+
+	return cmd_base;
+}
+
+static void
+resource_cmd_edit_custom_property_do (PlannerCmd *cmd_base)
+{
+	ResourceCmdEditCustomProperty *cmd;
+	cmd = (ResourceCmdEditCustomProperty*) cmd_base;
+
+	mrp_object_set_property (MRP_OBJECT (cmd->resource),
+				 cmd->property,
+				 cmd->value);
+}
+
+static void
+resource_cmd_edit_custom_property_undo (PlannerCmd *cmd_base)
+{
+	ResourceCmdEditCustomProperty *cmd;
+
+	cmd = (ResourceCmdEditCustomProperty*) cmd_base;
+
+	mrp_object_set_property (MRP_OBJECT (cmd->resource),
+				 cmd->property,
+				 cmd->old_value);
+
+}
+
+static PlannerCmd *
+resource_cmd_edit_custom_property (PlannerView  *view,
+				   MrpResource  *resource,
+				   MrpProperty  *property,
+				   const GValue *value)
+{
+	PlannerCmd                    *cmd_base;
+	ResourceCmdEditCustomProperty *cmd;
+
+	cmd = g_new0 (ResourceCmdEditCustomProperty, 1);
+
+	cmd_base = (PlannerCmd*) cmd;
+
+	cmd_base->label = g_strdup (_("Edit resource custom property"));
+	cmd_base->do_func = resource_cmd_edit_custom_property_do;
+	cmd_base->undo_func = resource_cmd_edit_custom_property_undo;
+	cmd_base->free_func = NULL; /* FIXME */
+
+	cmd->property = property;
+	cmd->resource = resource;
+
+	cmd->value = g_new0 (GValue, 1);
+	g_value_init (cmd->value, G_VALUE_TYPE (value));
+	g_value_copy (value, cmd->value);
+
+	cmd->old_value = g_new0 (GValue, 1);
+	g_value_init (cmd->old_value, G_VALUE_TYPE (value));
+
+	mrp_object_get_property (MRP_OBJECT (cmd->resource),
+				 cmd->property,
+				 cmd->old_value);
 
 	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager (view->main_window),
 					   cmd_base);
@@ -1250,15 +1323,20 @@ resource_view_cell_email_edited (GtkCellRendererText *cell,
 				 gchar               *new_text,
 				 gpointer             user_data)
 {
+	PlannerView      *view;
+	PlannerCmd       *cmd;
+	MrpResource      *resource;
 	GtkTreeView      *tree_view;
 	GtkTreeModel     *model;
 	GtkTreePath      *path;
 	GtkTreeIter       iter;
-	MrpResource      *resource;
+	GValue            value = { 0 };
 	
-	g_return_if_fail (GTK_IS_TREE_VIEW (user_data));
+	g_return_if_fail (PLANNER_IS_VIEW (user_data));
+	view = PLANNER_VIEW (user_data);
 	
-	tree_view = GTK_TREE_VIEW (user_data);
+	tree_view = view->priv->tree_view;
+	
 	model = gtk_tree_view_get_model (tree_view);
 
 	path = gtk_tree_path_new_from_string (path_string);
@@ -1267,24 +1345,35 @@ resource_view_cell_email_edited (GtkCellRendererText *cell,
 
 	gtk_tree_model_get (model, &iter, COL_RESOURCE, &resource, -1);
 	
-	mrp_object_set (resource, "email", new_text, NULL);
+	// mrp_object_set (resource, "email", new_text, NULL);
+	g_value_init (&value, G_TYPE_STRING);
+	g_value_set_string (&value, new_text);
+	cmd = resource_cmd_edit_property (view, resource, "email", &value);
+	g_value_unset (&value);
 
 	gtk_tree_path_free (path);
 }
 
 static void
 resource_view_cell_type_edited (PlannerCellRendererList *cell,
-				gchar              *path_string,
-				gchar              *new_text,
-				GtkTreeView        *tree_view)
+				gchar                   *path_string,
+				gchar                   *new_text,
+				gpointer                 user_data)
 {
+	PlannerView      *view;
+	PlannerCmd       *cmd;
+	MrpResource      *resource;
+	MrpResourceType   type;
+	GtkTreeView      *tree_view;
 	GtkTreeModel     *model;
 	GtkTreePath      *path;
 	GtkTreeIter       iter;
-	MrpResource      *resource;
-	MrpResourceType   type;
+	GValue            value = { 0 };
+
+	g_return_if_fail (PLANNER_IS_VIEW (user_data));
+	view = PLANNER_VIEW (user_data);
 	
-	g_return_if_fail (GTK_IS_TREE_VIEW (tree_view));
+	tree_view = view->priv->tree_view;
 	
 	model = gtk_tree_view_get_model (tree_view);
 
@@ -1300,7 +1389,11 @@ resource_view_cell_type_edited (PlannerCellRendererList *cell,
 		type = MRP_RESOURCE_TYPE_MATERIAL;
 	}		
 
-	mrp_object_set (resource, "type", type, NULL);
+	// mrp_object_set (resource, "type", type, NULL);
+	g_value_init (&value, G_TYPE_INT);
+	g_value_set_int (&value, type);
+	cmd = resource_cmd_edit_property (view, resource, "type", &value);
+	g_value_unset (&value);
 
 	gtk_tree_path_free (path);
 }
@@ -1352,18 +1445,26 @@ resource_view_cell_type_show_popup (PlannerCellRendererList *cell,
 
 static void
 resource_view_cell_group_edited (PlannerCellRendererList *cell,
-				 gchar              *path_string,
-				 gchar              *new_text,
-				 GtkTreeView        *tree_view)
+				 gchar                   *path_string,
+				 gchar                   *new_text,
+				 gpointer                 user_data)
 {
+	PlannerView      *view;
+	PlannerCmd       *cmd;
+	MrpResource      *resource;
+	MrpGroup         *group;
+	GtkTreeView      *tree_view;
 	GtkTreeModel     *model;
 	GtkTreePath      *path;
 	GtkTreeIter       iter;
-	MrpResource      *resource;
-	MrpGroup         *group;
 	GList            *list;
+	GValue            value = { 0 };
+
 	
-	g_return_if_fail (GTK_IS_TREE_VIEW (tree_view));
+	g_return_if_fail (PLANNER_IS_VIEW (user_data));
+	view = PLANNER_VIEW (user_data);
+	
+	tree_view = view->priv->tree_view;
 	
 	model = gtk_tree_view_get_model (tree_view);
 
@@ -1383,7 +1484,13 @@ resource_view_cell_group_edited (PlannerCellRendererList *cell,
 	
 	group = list->data; 
 
-	mrp_object_set (resource, "group", group, NULL);
+	// mrp_object_set (resource, "group", group, NULL);
+
+	g_value_init (&value, MRP_TYPE_GROUP);
+	g_value_set_object (&value, group);
+	
+	cmd = resource_cmd_edit_property (view, resource, "group", &value);
+	g_value_unset (&value);
 		
 	gtk_tree_path_free (path);
 }
@@ -1394,6 +1501,8 @@ resource_view_property_value_edited (GtkCellRendererText *cell,
 				     gchar               *new_text,
 				     ColPropertyData     *data)
 {
+	PlannerView        *view;
+	PlannerCmd         *cmd;
 	GtkTreePath        *path;
 	GtkTreeIter         iter;
 	GtkTreeModel       *model;
@@ -1401,8 +1510,10 @@ resource_view_property_value_edited (GtkCellRendererText *cell,
 	MrpPropertyType     type;
 	MrpResource        *resource;
 	gfloat              fvalue;
-	
-	model = gtk_tree_view_get_model (data->tree);
+	GValue              value = { 0 };
+
+	view = data->view;
+	model = gtk_tree_view_get_model (view->priv->tree_view);
 	property = data->property;
 
 	path = gtk_tree_path_new_from_string (path_str);
@@ -1419,31 +1530,55 @@ resource_view_property_value_edited (GtkCellRendererText *cell,
 
 	switch (type) {
 	case MRP_PROPERTY_TYPE_STRING:
-		mrp_object_set (MRP_OBJECT (resource),
+		g_value_init (&value, G_TYPE_STRING);
+		g_value_set_string (&value, new_text);
+		cmd = resource_cmd_edit_custom_property (view, resource,
+							 property, 
+							 &value);
+		g_value_unset (&value);
+		/* mrp_object_set (MRP_OBJECT (resource),
 				mrp_property_get_name (property), 
 				new_text,
-				NULL);
+				NULL); */
 		break;
 	case MRP_PROPERTY_TYPE_INT:
-		mrp_object_set (MRP_OBJECT (resource),
+		g_value_init (&value, G_TYPE_INT);
+		g_value_set_int (&value, atoi (new_text));
+		cmd = resource_cmd_edit_custom_property (view, resource,
+							 property, 
+							 &value);
+		g_value_unset (&value);
+		/* mrp_object_set (MRP_OBJECT (resource),
 				mrp_property_get_name (property), 
 				atoi (new_text),
-				NULL);
+				NULL); */
 		break;
 	case MRP_PROPERTY_TYPE_FLOAT:
 		fvalue = g_ascii_strtod (new_text, NULL);
-		mrp_object_set (MRP_OBJECT (resource),
+		g_value_init (&value, G_TYPE_FLOAT);
+		g_value_set_float (&value, fvalue);
+		cmd = resource_cmd_edit_custom_property (view, resource,
+							 property, 
+							 &value);
+		g_value_unset (&value);
+		/* mrp_object_set (MRP_OBJECT (resource),
 				mrp_property_get_name (property), 
 				fvalue,
-				NULL);
+				NULL); */
 		break;
 
 	case MRP_PROPERTY_TYPE_DURATION:
 		/* FIXME: support reading units etc... */
-		mrp_object_set (MRP_OBJECT (resource),
+		g_value_init (&value, G_TYPE_INT);
+		g_value_set_int (&value, atoi (new_text) *8*60*60);
+		cmd = resource_cmd_edit_custom_property (view, resource,
+							 property, 
+							 &value);
+		g_value_unset (&value);
+		/* mrp_object_set (MRP_OBJECT (resource),
 				mrp_property_get_name (property), 
 				atoi (new_text) *8*60*60,
-				NULL);
+				NULL); */
 		break;
 		
 
@@ -1456,10 +1591,16 @@ resource_view_property_value_edited (GtkCellRendererText *cell,
 		break;
 	case MRP_PROPERTY_TYPE_COST:
 		fvalue = g_ascii_strtod (new_text, NULL);
-		mrp_object_set (MRP_OBJECT (resource),
+		g_value_init (&value, G_TYPE_FLOAT);
+		g_value_set_float (&value, fvalue);
+		cmd = resource_cmd_edit_custom_property (view, resource,
+							 property, 
+							 &value);
+		g_value_unset (&value);
+		/* mrp_object_set (MRP_OBJECT (resource),
 				mrp_property_get_name (property), 
 				fvalue,
-				NULL);
+				NULL); */
 		break;	
 				
 	default:
@@ -1613,7 +1754,7 @@ static void
 resource_view_property_added (MrpProject  *project, 
 			      GType        object_type,
 			      MrpProperty *property,
-			      PlannerView      *view)
+			      PlannerView *view)
 {
 	PlannerViewPriv   *priv;
 	MrpPropertyType    type;
@@ -1655,7 +1796,7 @@ resource_view_property_added (MrpProject  *project,
 	g_hash_table_insert (priv->property_to_column, property, col);
 	
 	data->property = property;
-	data->tree = priv->tree_view;
+	data->view = view;
 
 	gtk_tree_view_column_pack_start (col, cell, TRUE);
 
