@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: planner HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-10-06 19:45+0100\n"
-"PO-Revision-Date: 2004-10-06 19:45+0100\n"
+"POT-Creation-Date: 2004-10-13 22:42+0100\n"
+"PO-Revision-Date: 2004-10-13 22:42+0100\n"
 "Last-Translator: David Lodge <dave@cirt.net>\n"
 "Language-Team: English (British) <en_gb@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -21,7 +21,6 @@ msgstr ""
 #: data/glade/add-predecessor.glade.h:1
 #: data/glade/calendar-dialog.glade.h:4
 #: data/glade/eds.glade.h:1
-#: data/glade/html-output.glade.h:2
 #: data/glade/new-property.glade.h:1
 #: data/glade/project-properties.glade.h:1
 #: data/glade/resource-dialog.glade.h:1
@@ -217,23 +216,23 @@ msgstr "dialog1"
 msgid "Group Editor"
 msgstr "Group Editor"
 
-#: data/glade/html-output.glade.h:3
+#: data/glade/html-output.glade.h:2
 msgid "<b>Save to file</b>"
 msgstr "<b>Save to file</b>"
 
-#: data/glade/html-output.glade.h:4
+#: data/glade/html-output.glade.h:3
 msgid "Export to HTML"
 msgstr "Export to HTML"
 
-#: data/glade/html-output.glade.h:5
+#: data/glade/html-output.glade.h:4
 msgid "Local file:"
 msgstr "Local file:"
 
-#: data/glade/html-output.glade.h:6
+#: data/glade/html-output.glade.h:5
 msgid "Save to HTML File"
 msgstr "Save to HTML File"
 
-#: data/glade/html-output.glade.h:7
+#: data/glade/html-output.glade.h:6
 msgid "Web location:"
 msgstr "Web location:"
 
@@ -403,7 +402,7 @@ msgid "Predecessors"
 msgstr "Predecessors"
 
 #: data/glade/task-dialog.glade.h:9
-#: src/planner-resource-view.c:429
+#: src/planner-resource-view.c:431
 msgid "Resources"
 msgstr "Resources"
 
@@ -434,7 +433,7 @@ msgstr "_Work:"
 
 #. day unit variant accepted in input
 #: data/glade/task-dialog.glade.h:17
-#: src/planner-task-tree.c:3327
+#: src/planner-task-tree.c:3328
 msgid "days"
 msgstr "days"
 
@@ -491,8 +490,8 @@ msgid "Use day from base calendar"
 msgstr "Use day from base calendar"
 
 #: libplanner/mrp-file-module.c:115
-msgid "This format is does support reading"
-msgstr "This format supports reading"
+msgid "This format does not support reading"
+msgstr "This format does not support reading"
 
 #: libplanner/mrp-parser.c:1062
 #: libplanner/mrp-parser.c:1157
@@ -561,8 +560,8 @@ msgid "Duration"
 msgstr "Duration"
 
 #: libplanner/mrp-property.c:377
-#: src/planner-resource-view.c:1285
-#: src/planner-task-view.c:280
+#: src/planner-resource-view.c:1287
+#: src/planner-task-view.c:283
 msgid "Cost"
 msgstr "Cost"
 
@@ -602,7 +601,7 @@ msgid "The project '%s' has been changed by the user '%s' since you opened it. D
 msgstr "The project '%s' has been changed by the user '%s' since you opened it. Do you want to save anyway?"
 
 #: libplanner/mrp-sql.c:3622
-#: src/planner-sql-plugin.c:664
+#: src/planner-sql-plugin.c:663
 #, c-format
 msgid "Connection to database '%s' failed."
 msgstr "Connection to database '%s' failed."
@@ -631,11 +630,11 @@ msgstr "Cannot add a predecessor, because it would result in a loop."
 msgid "Cannot move the task, because it would result in a loop."
 msgstr "Cannot move the task, because it would result in a loop."
 
-#: libplanner/mrp-xsl.c:103
+#: libplanner/mrp-xsl.c:106
 msgid "Export to HTML failed"
 msgstr "Export to HTML failed"
 
-#: libplanner/mrp-xsl.c:167
+#: libplanner/mrp-xsl.c:172
 msgid "Export to Planner pre-0.12 format failed"
 msgstr "Export to Planner pre-0.12 format failed"
 
@@ -800,16 +799,16 @@ msgstr "Import resources from Evolution Data Server"
 #: src/planner-gantt-print.c:190
 #: src/planner-group-dialog.c:813
 #: src/planner-property-dialog.c:481
-#: src/planner-resource-view.c:1168
+#: src/planner-resource-view.c:1170
 #: src/planner-task-dialog.c:2536
 #: src/planner-task-dialog.c:2625
-#: src/planner-task-view.c:275
+#: src/planner-task-view.c:278
 #: src/planner-ttable-print.c:108
 msgid "Name"
 msgstr "Name"
 
 #: src/planner-eds-plugin.c:408
-#: src/planner-resource-view.c:1263
+#: src/planner-resource-view.c:1265
 msgid "Email"
 msgstr "Email"
 
@@ -887,16 +886,16 @@ msgstr "Project start"
 
 #: src/planner-gantt-print.c:198
 #: src/planner-resource-dialog.c:1869
-#: src/planner-resource-view.c:757
-#: src/planner-resource-view.c:773
-#: src/planner-resource-view.c:1696
-#: src/planner-task-view.c:278
+#: src/planner-resource-view.c:759
+#: src/planner-resource-view.c:775
+#: src/planner-resource-view.c:1698
+#: src/planner-task-view.c:281
 msgid "Work"
 msgstr "Work"
 
 #: src/planner-gantt-print.c:542
 #: src/planner-gantt-row.c:690
-#: src/planner-task-tree.c:1514
+#: src/planner-task-tree.c:1512
 #: src/planner-window.c:1660
 msgid "Unnamed"
 msgstr "Unnamed"
@@ -919,7 +918,7 @@ msgstr "Change work to %s"
 #: src/planner-gantt-row.c:2392
 #: src/planner-task-dialog.c:449
 #: src/planner-task-tree.c:257
-#: src/planner-task-tree.c:936
+#: src/planner-task-tree.c:934
 msgid "Edit task property"
 msgstr "Edit task property"
 
@@ -1071,17 +1070,17 @@ msgstr "Test"
 msgid "_Highlight Critical Tasks"
 msgstr "_Highlight Critical Tasks"
 
-#: src/planner-gantt-view.c:294
+#: src/planner-gantt-view.c:298
 msgid "Gantt Chart"
 msgstr "Gantt Chart"
 
-#: src/planner-gantt-view.c:302
+#: src/planner-gantt-view.c:306
 msgid "_Gantt Chart"
 msgstr "_Gantt Chart"
 
 #. i18n: WBS is short for work breakdown structure, and is a
 #. * untranslated unless there is a localized term for it.
-#: src/planner-gantt-view.c:503
+#: src/planner-gantt-view.c:507
 msgid ""
 "\n"
 "WBS"
@@ -1089,7 +1088,7 @@ msgstr ""
 "\n"
 "WBS"
 
-#: src/planner-gantt-view.c:504
+#: src/planner-gantt-view.c:508
 #: src/planner-ttable-tree.c:343
 msgid ""
 "\n"
@@ -1099,7 +1098,7 @@ msgstr ""
 "Name"
 
 #. COL_START,    _("\nStart"),
-#: src/planner-gantt-view.c:506
+#: src/planner-gantt-view.c:510
 msgid ""
 "\n"
 "Work"
@@ -1135,15 +1134,15 @@ msgstr "Manager phone"
 msgid "Manager email"
 msgstr "Manager email"
 
-#: src/planner-html-plugin.c:67
+#: src/planner-html-plugin.c:69
 msgid "HTML"
 msgstr "HTML"
 
-#: src/planner-html-plugin.c:68
+#: src/planner-html-plugin.c:70
 msgid "Export project to HTML"
 msgstr "Export project to HTML"
 
-#: src/planner-html-plugin.c:138
+#: src/planner-html-plugin.c:147
 #, c-format
 msgid ""
 "\"%s\" is a directory.\n"
@@ -1152,7 +1151,7 @@ msgstr ""
 "\"%s\" is a directory.\n"
 "Enter a filename and try again."
 
-#: src/planner-html-plugin.c:148
+#: src/planner-html-plugin.c:157
 #: src/planner-window.c:1417
 #: src/planner-xml-planner-plugin.c:125
 #, c-format
@@ -1279,7 +1278,7 @@ msgid "Label"
 msgstr "Label"
 
 #: src/planner-property-dialog.c:510
-#: src/planner-resource-view.c:1210
+#: src/planner-resource-view.c:1212
 #: src/planner-task-dialog.c:2657
 msgid "Type"
 msgstr "Type"
@@ -1303,7 +1302,7 @@ msgstr "Insert resource"
 #. Put "no group" at the top.
 #: src/planner-resource-dialog.c:325
 #: src/planner-resource-input-dialog.c:99
-#: src/planner-resource-view.c:1907
+#: src/planner-resource-view.c:1909
 msgid "(None)"
 msgstr "(None)"
 
@@ -1327,8 +1326,8 @@ msgstr "Edit resource cost"
 
 #: src/planner-resource-dialog.c:731
 #: src/planner-resource-dialog.c:772
-#: src/planner-resource-view.c:1367
-#: src/planner-resource-view.c:1448
+#: src/planner-resource-view.c:1369
+#: src/planner-resource-view.c:1450
 msgid "Edit resource property"
 msgstr "Edit resource property"
 
@@ -1348,9 +1347,9 @@ msgid "Edit resource properties"
 msgstr "Edit resource properties"
 
 #: src/planner-resource-dialog.c:1870
-#: src/planner-resource-view.c:760
-#: src/planner-resource-view.c:774
-#: src/planner-resource-view.c:1697
+#: src/planner-resource-view.c:762
+#: src/planner-resource-view.c:776
+#: src/planner-resource-view.c:1699
 msgid "Material"
 msgstr "Material"
 
@@ -1403,23 +1402,23 @@ msgstr "/_Remove resource"
 msgid "/_Edit resource..."
 msgstr "/_Edit resource..."
 
-#: src/planner-resource-view.c:437
+#: src/planner-resource-view.c:439
 msgid "_Resources"
 msgstr "_Resources"
 
-#: src/planner-resource-view.c:950
+#: src/planner-resource-view.c:952
 msgid "Remove resource"
 msgstr "Remove resource"
 
-#: src/planner-resource-view.c:1050
+#: src/planner-resource-view.c:1052
 msgid "Edit custom resource properties"
 msgstr "Edit custom resource properties"
 
-#: src/planner-resource-view.c:1189
+#: src/planner-resource-view.c:1191
 msgid "Short name"
 msgstr "Short name"
 
-#: src/planner-resource-view.c:1234
+#: src/planner-resource-view.c:1236
 msgid "Group"
 msgstr "Group"
 
@@ -1440,31 +1439,31 @@ msgstr "Week %d"
 msgid "Week %d, %d"
 msgstr "Week %d, %d"
 
-#. i18n: Short "Quarter", preferrably 1 letter.
+#. i18n: Short "Quarter", preferably 1 letter.
 #: src/planner-scale-utils.c:365
 #, c-format
 msgid "Q%d"
 msgstr "Q%d"
 
-#. i18n: Short "Quarter", preferrably 2-3 letters.
+#. i18n: Short "Quarter", preferably 2-3 letters.
 #: src/planner-scale-utils.c:369
 #, c-format
 msgid "Qtr %d"
 msgstr "Qtr %d"
 
-#. i18n: Year, short "Quarter", preferrably 2-3 letters.
+#. i18n: Year, short "Quarter", preferably 2-3 letters.
 #: src/planner-scale-utils.c:373
 #, c-format
 msgid "%d, Qtr %d"
 msgstr "%d, Qtr %d"
 
-#. i18n: Short "Half year", prefferably 1 letter.
+#. i18n: Short "Half year", preferably 1 letter.
 #: src/planner-scale-utils.c:386
 #, c-format
 msgid "H%d"
 msgstr "H%d"
 
-#. i18n: Year, short "Half year", prefferably 1 letter.
+#. i18n: Year, short "Half year", preferably 1 letter.
 #: src/planner-scale-utils.c:391
 #, c-format
 msgid "%04d, H%d"
@@ -1479,7 +1478,7 @@ msgid "Open a project from a database"
 msgstr "Open a project from a database"
 
 #: src/planner-sql-plugin.c:97
-#: src/planner-sql-plugin.c:1100
+#: src/planner-sql-plugin.c:1099
 msgid "Save to Database"
 msgstr "Save to Database"
 
@@ -1491,7 +1490,7 @@ msgstr "Save the current project to a database"
 msgid "No errors reported."
 msgstr "No errors reported."
 
-#: src/planner-sql-plugin.c:495
+#: src/planner-sql-plugin.c:494
 #, c-format
 msgid ""
 "Database %s needs to be upgraded from version %s to version %s.\n"
@@ -1500,11 +1499,11 @@ msgstr ""
 "Database %s needs to be upgraded from version %s to version %s.\n"
 "Please backup database before the upgrade."
 
-#: src/planner-sql-plugin.c:502
+#: src/planner-sql-plugin.c:501
 msgid "Upgrade"
 msgstr "Upgrade"
 
-#: src/planner-sql-plugin.c:516
+#: src/planner-sql-plugin.c:515
 #, c-format
 msgid ""
 "Could not upgrade database %s.\n"
@@ -1519,38 +1518,38 @@ msgstr ""
 "Database error: \n"
 "%s"
 
-#: src/planner-sql-plugin.c:557
+#: src/planner-sql-plugin.c:556
 #, c-format
 msgid "Can't create tables in database %s"
 msgstr "Can't create tables in database %s"
 
-#: src/planner-sql-plugin.c:618
+#: src/planner-sql-plugin.c:617
 #, c-format
 msgid "Database %s is not setup for Planner. Do you want to do that?"
 msgstr "Database %s is not setup for Planner. Do you want to do that?"
 
-#: src/planner-sql-plugin.c:675
+#: src/planner-sql-plugin.c:674
 #, c-format
 msgid "Test to tables in database '%s' failed."
 msgstr "Test to tables in database '%s' failed."
 
-#: src/planner-sql-plugin.c:768
+#: src/planner-sql-plugin.c:767
 msgid "ID"
 msgstr "ID"
 
-#: src/planner-sql-plugin.c:776
+#: src/planner-sql-plugin.c:775
 msgid "Project"
 msgstr "Project"
 
-#: src/planner-sql-plugin.c:784
+#: src/planner-sql-plugin.c:783
 msgid "Phase"
 msgstr "Phase"
 
-#: src/planner-sql-plugin.c:792
+#: src/planner-sql-plugin.c:791
 msgid "Revision"
 msgstr "Revision"
 
-#: src/planner-sql-plugin.c:988
+#: src/planner-sql-plugin.c:987
 msgid "Open from Database"
 msgstr "Open from Database"
 
@@ -1665,81 +1664,81 @@ msgstr "Apply constraint to task"
 msgid "Reset task constraint"
 msgstr "Reset task constraint"
 
-#: src/planner-task-tree.c:823
+#: src/planner-task-tree.c:821
 msgid "Move task"
 msgstr "Move task"
 
-#: src/planner-task-tree.c:2708
+#: src/planner-task-tree.c:2709
 #, c-format
 msgid "You are about to open an edit dialog each for %i tasks. Are you sure that you want to do that?"
 msgstr "You are about to open %i edit dialogues, one for each task. Are you sure that you want to do that?"
 
-#: src/planner-task-tree.c:3319
+#: src/planner-task-tree.c:3320
 msgid "mon"
 msgstr "mon"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:3320
+#: src/planner-task-tree.c:3321
 msgid "month"
 msgstr "month"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:3321
+#: src/planner-task-tree.c:3322
 msgid "months"
 msgstr "months"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:3322
+#: src/planner-task-tree.c:3323
 msgid "w"
 msgstr "w"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:3323
+#: src/planner-task-tree.c:3324
 msgid "week"
 msgstr "week"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:3324
+#: src/planner-task-tree.c:3325
 msgid "weeks"
 msgstr "weeks"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:3325
+#: src/planner-task-tree.c:3326
 msgid "d"
 msgstr "d"
 
 #. day unit variant accepted in input
-#: src/planner-task-tree.c:3326
+#: src/planner-task-tree.c:3327
 msgid "day"
 msgstr "day"
 
 #. day unit variant accepted in input
-#: src/planner-task-tree.c:3328
+#: src/planner-task-tree.c:3329
 msgid "h"
 msgstr "h"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:3329
+#: src/planner-task-tree.c:3330
 msgid "hour"
 msgstr "hour"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:3330
+#: src/planner-task-tree.c:3331
 msgid "hours"
 msgstr "hours"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:3331
+#: src/planner-task-tree.c:3332
 msgid "min"
 msgstr "min"
 
 #. minute unit variant accepted in input
-#: src/planner-task-tree.c:3332
+#: src/planner-task-tree.c:3333
 msgid "minute"
 msgstr "minute"
 
 #. minute unit variant accepted in input
-#: src/planner-task-tree.c:3333
+#: src/planner-task-tree.c:3334
 msgid "minutes"
 msgstr "minutes"
 
@@ -1751,37 +1750,37 @@ msgstr "_Edit Task"
 msgid "_Edit Custom Properties..."
 msgstr "_Edit Custom Properties..."
 
-#: src/planner-task-view.c:208
+#: src/planner-task-view.c:211
 msgid "Tasks"
 msgstr "Tasks"
 
-#: src/planner-task-view.c:216
+#: src/planner-task-view.c:219
 msgid "_Tasks"
 msgstr "_Tasks"
 
 #. i18n: WBS is sort for work breakdown structure, and is a
 #. * untranslated unless there is a localized term for it.
-#: src/planner-task-view.c:274
+#: src/planner-task-view.c:277
 msgid "WBS"
 msgstr "WBS"
 
-#: src/planner-task-view.c:276
+#: src/planner-task-view.c:279
 msgid "Start"
 msgstr "Start"
 
-#: src/planner-task-view.c:277
+#: src/planner-task-view.c:280
 msgid "Finish"
 msgstr "Finish"
 
-#: src/planner-task-view.c:279
+#: src/planner-task-view.c:282
 msgid "Slack"
 msgstr "Slack"
 
-#: src/planner-task-view.c:281
+#: src/planner-task-view.c:284
 msgid "Assigned to"
 msgstr "Assigned to"
 
-#: src/planner-task-view.c:477
+#: src/planner-task-view.c:480
 msgid "Edit custom task properties"
 msgstr "Edit custom task properties"
 
@@ -1819,11 +1818,11 @@ msgstr ""
 msgid "Zoom to fit"
 msgstr "Zoom to fit"
 
-#: src/planner-ttable-view.c:157
+#: src/planner-ttable-view.c:159
 msgid "Resource Usage"
 msgstr "Resource Usage"
 
-#: src/planner-ttable-view.c:164
+#: src/planner-ttable-view.c:166
 msgid "Resource _Usage"
 msgstr "Resource _Usage"
 
