@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: planner\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-07-04 16:54+0200\n"
+"POT-Creation-Date: 2004-07-05 11:04+0200\n"
 "PO-Revision-Date: 2004-07-04 16:55+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -1209,7 +1209,7 @@ msgstr "Projektstart"
 
 #: src/planner-gantt-print.c:189 src/planner-group-dialog.c:816
 #: src/planner-property-dialog.c:481 src/planner-resource-view.c:1152
-#: src/planner-task-dialog.c:2542 src/planner-task-dialog.c:2631
+#: src/planner-task-dialog.c:2534 src/planner-task-dialog.c:2623
 #: src/planner-task-view.c:274 src/planner-ttable-print.c:108
 msgid "Name"
 msgstr "Namn"
@@ -1344,7 +1344,7 @@ msgstr "Ta bort fas"
 msgid "Could not open plugin file '%s'\n"
 msgstr "Kunde inte öppna insticksfilen \"%s\"\n"
 
-#: src/planner-predecessor-model.c:191 src/planner-task-dialog.c:2203
+#: src/planner-predecessor-model.c:191 src/planner-task-dialog.c:2195
 msgid "FS"
 msgstr "FS"
 
@@ -1353,7 +1353,7 @@ msgid "FF"
 msgstr "FF"
 
 #. list = g_list_append (list, g_strdup (_("FF")));
-#: src/planner-predecessor-model.c:197 src/planner-task-dialog.c:2205
+#: src/planner-predecessor-model.c:197 src/planner-task-dialog.c:2197
 msgid "SS"
 msgstr "SS"
 
@@ -1435,7 +1435,7 @@ msgid "Label"
 msgstr "Etikett"
 
 #: src/planner-property-dialog.c:510 src/planner-resource-view.c:1194
-#: src/planner-task-dialog.c:2663
+#: src/planner-task-dialog.c:2655
 msgid "Type"
 msgstr "Typ"
 
@@ -1479,13 +1479,13 @@ msgid "Edit resource note"
 msgstr "Redigera resursanteckning"
 
 #: src/planner-resource-dialog.c:733 src/planner-resource-dialog.c:774
-#: src/planner-resource-view.c:1328
+#: src/planner-resource-view.c:1328 src/planner-resource-view.c:1412
 msgid "Edit resource property"
 msgstr "Redigera resursegenskap"
 
 #. i18n: time stamp format for notes in task dialog, see strftime(3) for
 #. * a detailed description.
-#: src/planner-resource-dialog.c:1453 src/planner-task-dialog.c:1792
+#: src/planner-resource-dialog.c:1453 src/planner-task-dialog.c:1784
 msgid "%a %d %b %Y, %H:%M\n"
 msgstr "%a %d %b %Y, %H.%M\n"
 
@@ -1537,10 +1537,6 @@ msgstr "Grupp"
 #: src/planner-resource-view.c:1247
 msgid "Email"
 msgstr "E-post"
-
-#: src/planner-resource-view.c:1412
-msgid "Edit resource custom property"
-msgstr "Redigera egenskap för egen resurs"
 
 #. i18n: Short "Week", preferably 2 letters.
 #: src/planner-scale-utils.c:325
@@ -1626,6 +1622,7 @@ msgid "Insert task"
 msgstr "Infoga aktivitet"
 
 #: src/planner-task-dialog.c:449 src/planner-task-tree.c:241
+#: src/planner-task-tree.c:995
 msgid "Edit task property"
 msgstr "Redigera aktivitetsegenskap"
 
@@ -1634,61 +1631,61 @@ msgid "Edit task type"
 msgstr "Redigera aktivitetstyp"
 
 #: src/planner-task-dialog.c:590
-msgid "Edit task schedule"
-msgstr "Redigera aktivitetsschema"
+msgid "Toggle fixed duration"
+msgstr "Växla fast varaktighet"
 
 #: src/planner-task-dialog.c:668
-msgid "Add resource to task"
-msgstr "Lägg till resurs till aktivitet"
+msgid "Assign resource to task"
+msgstr "Tilldela resurs till aktivitet"
 
 #: src/planner-task-dialog.c:728
-msgid "Remove resource from task"
+msgid "Unassign resource from task"
 msgstr "Ta bort resurs från aktivitet"
 
 #: src/planner-task-dialog.c:787
 msgid "Change resource units in task"
 msgstr "Ändra resursenheter i aktivitet"
 
-# Osäker. /Christian
-#: src/planner-task-dialog.c:883
+# Stämmer /richard :) (lite dum originalsträng kanske)
+#: src/planner-task-dialog.c:875
 msgid "Edit task predecessor"
 msgstr "Redigera aktivitetsföregångare"
 
 # Osäker. /Christian
-#: src/planner-task-dialog.c:954
+#: src/planner-task-dialog.c:946
 msgid "Edit lag predecessor"
 msgstr "Redigera fördröjningsföregångare"
 
-#: src/planner-task-dialog.c:1020
+#: src/planner-task-dialog.c:1012
 msgid "Edit task note"
 msgstr "Redigera aktivitetsanteckning"
 
-#: src/planner-task-dialog.c:1864
+#: src/planner-task-dialog.c:1856
 msgid "Finish to start (FS)"
 msgstr "Slut till start (FS)"
 
 #. _("Finish to finish (FF)"), MRP_RELATION_FF,
-#: src/planner-task-dialog.c:1866
+#: src/planner-task-dialog.c:1858
 msgid "Start to start (SS)"
 msgstr "Start till start (SS)"
 
-#: src/planner-task-dialog.c:1921
+#: src/planner-task-dialog.c:1913
 msgid "Can't add new predecessor. No task selected!"
 msgstr "Kan inte lägga till föregångare, ingen aktivitet markerad."
 
-#: src/planner-task-dialog.c:2563
+#: src/planner-task-dialog.c:2555
 msgid "Assigned"
 msgstr "Tilldelad"
 
-#: src/planner-task-dialog.c:2580
+#: src/planner-task-dialog.c:2572
 msgid "Units"
 msgstr "Enheter"
 
-#: src/planner-task-dialog.c:2685
+#: src/planner-task-dialog.c:2677
 msgid "Lag"
 msgstr "Fördröjning"
 
-#: src/planner-task-dialog.c:2823 src/planner-task-dialog.c:2825
+#: src/planner-task-dialog.c:2815 src/planner-task-dialog.c:2817
 msgid "Edit task properties"
 msgstr "Redigera aktivitetsegenskaper"
 
@@ -1731,10 +1728,6 @@ msgstr "Återställ aktivitetsrestriktion"
 #: src/planner-task-tree.c:886
 msgid "Move task"
 msgstr "Flytta aktivitet"
-
-#: src/planner-task-tree.c:995
-msgid "Edit task custom property"
-msgstr "Redigera anpassad egenskap för aktivitet"
 
 #: src/planner-task-tree.c:2675
 #, c-format
@@ -1996,6 +1989,16 @@ msgstr "Redigera arbetstid"
 #: src/planner-xml-planner-plugin.c:102
 msgid "Export"
 msgstr "Exportera"
+
+#, fuzzy
+#~ msgid "Edit task scheduling type"
+#~ msgstr "Redigera aktivitetsschema"
+
+#~ msgid "Edit resource custom property"
+#~ msgstr "Redigera egenskap för egen resurs"
+
+#~ msgid "Edit task custom property"
+#~ msgstr "Redigera anpassad egenskap för aktivitet"
 
 #~ msgid "Planner File pre 0.12"
 #~ msgstr "Planner-fil före 0.12"

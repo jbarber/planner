@@ -1,3 +1,17 @@
+2004-07-05  Richard Hult  <richard@imendio.com>
+
+	* configure.in: Bump.
+
+	* src/planner-resource-view.c:
+	(resource_cmd_edit_custom_property): Remove string.
+
+	* src/planner-task-dialog.c: (task_cmd_edit_sched): Change string
+	that was completely wrong. Sorry translators, but this is better
+	to have fuzzy than the wrong meaning.
+
+	* src/planner-task-tree.c: (task_cmd_edit_custom_property): Remove
+	string.
+
 2004-07-02  Richard Hult  <richard@imendio.com>
 
 	* src/planner-ttable-row.c: (ttable_row_realize),

@@ -992,7 +992,7 @@ task_cmd_edit_custom_property (PlannerTaskTree  *tree,
 	TaskCmdEditCustomProperty *cmd;
 
 	cmd_base = planner_cmd_new (TaskCmdEditCustomProperty,
-				    _("Edit task custom property"),
+				    _("Edit task property"),
 				    task_cmd_edit_custom_property_do,
 				    task_cmd_edit_custom_property_undo,
 				    task_cmd_edit_custom_property_free);

@@ -1409,7 +1409,7 @@ resource_cmd_edit_custom_property (PlannerView  *view,
 	ResourceCmdEditCustomProperty *cmd;
 
 	cmd_base = planner_cmd_new (ResourceCmdEditCustomProperty,
-				    _("Edit resource custom property"),
+				    _("Edit resource property"),
 				    resource_cmd_edit_custom_property_do,
 				    resource_cmd_edit_custom_property_undo,
 				    resource_cmd_edit_custom_property_free);

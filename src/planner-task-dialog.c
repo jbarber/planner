@@ -587,7 +587,7 @@ task_cmd_edit_sched (PlannerWindow *main_window,
 	}
 
 	cmd_base = planner_cmd_new (TaskCmdEditSchedule,
-				    _("Edit task schedule"),
+				    _("Toggle fixed duration"),
 				    task_cmd_edit_sched_do,
 				    task_cmd_edit_sched_undo,
 				    task_cmd_edit_sched_free);
@@ -665,7 +665,7 @@ task_cmd_assign_add (PlannerWindow *main_window,
 	}
 
 	cmd_base = planner_cmd_new (TaskCmdEditAssignment,
-				    _("Add resource to task"),
+				    _("Assign resource to task"),
 				    task_cmd_assign_add_do,
 				    task_cmd_assign_add_undo,
 				    task_cmd_assign_add_free);
@@ -725,7 +725,7 @@ task_cmd_assign_remove (PlannerWindow *main_window,
 	TaskCmdEditAssignment  *cmd;
 
 	cmd_base = planner_cmd_new (TaskCmdEditAssignment,
-				    _("Remove resource from task"),
+				    _("Unassign resource from task"),
 				    task_cmd_assign_remove_do,
 				    task_cmd_assign_remove_undo,
 				    task_cmd_assign_remove_free);
@@ -809,10 +809,6 @@ task_cmd_edit_pred_do (PlannerCmd *cmd_base)
 	gboolean                retval;
 	TaskCmdEditPredecessor *cmd = (TaskCmdEditPredecessor*) cmd_base;
 	
-	if (g_getenv ("PLANNER_DEBUG_UNDO_TASK")) {
-		g_message ("Editing predecessor from dialog ...");
-	}
-	
 	mrp_task_remove_predecessor (cmd->task, cmd->old_predecessor);
 
 	mrp_task_add_predecessor (cmd->task,
@@ -836,10 +832,6 @@ task_cmd_edit_pred_undo (PlannerCmd *cmd_base)
 {
 	GError                 *error = NULL;
 	TaskCmdEditPredecessor *cmd = (TaskCmdEditPredecessor*) cmd_base;
-	
-	if (g_getenv ("PLANNER_DEBUG_UNDO_TASK")) {
-		g_message ("UNDO Editing predecessor from dialog ...");
-	}
 	
 	mrp_task_remove_predecessor (cmd->task, cmd->predecessor);
 
