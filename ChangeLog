@@ -1,3 +1,16 @@
+2004-10-05  Richard Hult  <richard@imendio.com>
+
+	* src/planner-task-tree.c: (task_cmd_save_assignments),
+	(task_cmd_restore_assignments), (task_cmd_save_relations),
+	(task_cmd_restore_relations), (task_cmd_save_children),
+	(task_cmd_move_do), (task_cmd_move_undo), (task_cmd_move_free),
+	(task_cmd_move), (planner_task_tree_indent_task),
+	(planner_task_tree_unindent_task),
+	(planner_task_tree_move_task_up),
+	(planner_task_tree_move_task_down): Clean up undo code, remove
+	debugging output and fix bug #151731, restore duration of parent
+	task when undoing indent.
+
 2004-10-04  Richard Hult  <richard@imendio.com>
 
 	* src/planner-ttable-view.c: (ttable_view_create_widget),
