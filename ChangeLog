@@ -1,5 +1,11 @@
 2004-04-15  Richard Hult  <richard@imendio.com>
 
+	* src/planner-task-dialog.c: (task_dialog_task_removed_cb),
+	(planner_task_dialog_new): Use connect_object and fix the callback
+	signature, fixes bug #140208.
+
+2004-04-15  Richard Hult  <richard@imendio.com>
+
 	* data/glade/html-output.glade:
 	* src/planner-html-plugin.c: (html_plugin_export): Hide the remote
 	saving for now since it doesn't really work.
