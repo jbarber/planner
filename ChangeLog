@@ -1,3 +1,10 @@
+2004-07-08  Anders Carlsson  <andersca@gnome.org>
+
+	* configure.in:
+	* data/glade/html-output.glade:
+	* src/planner-window.c: (window_open_cb), (window_do_save_as):
+	Use GtkFileChooser.
+	
 2004-07-08  Richard Hult  <richard@imendio.com>
 
 	* Release 0.12.

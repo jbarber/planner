@@ -38,7 +38,7 @@
 #include <gtk/gtkhbox.h>
 #include <gtk/gtkimage.h>
 #include <gtk/gtklabel.h>
-#include <gtk/gtkfilesel.h>
+#include <gtk/gtkfilechooserdialog.h>
 #include <glade/glade.h>
 #include <gconf/gconf-client.h>
 #include <libgnome/gnome-help.h>
@@ -624,9 +624,9 @@ window_open_cb (BonoboUIComponent *component,
 {
 	PlannerWindow     *window;
 	PlannerWindowPriv *priv;
-	GtkWidget         *file_sel;
+	GtkWidget         *file_chooser;
 	gint               response;
-	const gchar       *filename = NULL;
+	gchar             *filename = NULL;
 	gchar             *last_dir;
 	GtkWidget         *new_window;
 	GConfClient       *gconf_client;
@@ -635,29 +635,35 @@ window_open_cb (BonoboUIComponent *component,
 	priv = window->priv;
 
 	gconf_client = planner_application_get_gconf_client ();
-	
-	file_sel = gtk_file_selection_new (_("Open a file"));
 
+	file_chooser = gtk_file_chooser_dialog_new (_("Open a file"),
+						    GTK_WINDOW (window),
+						    GTK_FILE_CHOOSER_ACTION_OPEN,
+						    GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+						    GTK_STOCK_OPEN, GTK_RESPONSE_OK,
+						    NULL);
+	
 	last_dir = get_last_dir (window);
-	gtk_file_selection_set_filename (GTK_FILE_SELECTION (file_sel), last_dir);
+	gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (file_chooser), last_dir);
 	g_free (last_dir);
 
-	gtk_window_set_modal (GTK_WINDOW (file_sel), TRUE);
+	gtk_window_set_modal (GTK_WINDOW (file_chooser), TRUE);
 
-	gtk_widget_show (file_sel);
+	gtk_widget_show (file_chooser);
 
-	response = gtk_dialog_run (GTK_DIALOG (file_sel));
+	response = gtk_dialog_run (GTK_DIALOG (file_chooser));
 
 	if (response == GTK_RESPONSE_OK) {
-		filename = gtk_file_selection_get_filename (
-			GTK_FILE_SELECTION (file_sel));
+		filename = gtk_file_chooser_get_filename (
+			GTK_FILE_CHOOSER (file_chooser));
 		
 		if (window_file_is_dir (filename)) {
+			g_free (filename);
 			filename = NULL;
 		}
 	}
 	
-	gtk_widget_destroy (file_sel);
+	gtk_widget_destroy (file_chooser);
 
 	if (filename != NULL) {
 		if (mrp_project_is_empty (priv->project)) {
@@ -682,6 +688,7 @@ window_open_cb (BonoboUIComponent *component,
 					 last_dir,
 					 NULL);
 		g_free (last_dir);
+		g_free (filename);		
 	}
 }
 
@@ -1328,9 +1335,9 @@ static gboolean
 window_do_save_as (PlannerWindow *window)
 {
 	PlannerWindowPriv *priv;
-	GtkWidget        *file_sel;
+	GtkWidget        *file_chooser;
 	gint              response;
-	const gchar      *filename = NULL;
+	gchar            *filename = NULL;
 	gchar            *last_dir;
 	GConfClient      *gconf_client;
 	EggRecentItem    *item;
@@ -1339,24 +1346,30 @@ window_do_save_as (PlannerWindow *window)
 
 	gconf_client = planner_application_get_gconf_client ();
 
-	file_sel = gtk_file_selection_new (_("Save a file"));
-	gtk_window_set_modal (GTK_WINDOW (file_sel), TRUE);
+	file_chooser = gtk_file_chooser_dialog_new (_("Save a file"),
+						    GTK_WINDOW (window),
+						    GTK_FILE_CHOOSER_ACTION_SAVE,
+						    GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+						    GTK_STOCK_SAVE, GTK_RESPONSE_ACCEPT,
+						    NULL);
+	gtk_window_set_modal (GTK_WINDOW (file_chooser), TRUE);
 
 	last_dir = get_last_dir (window);
-	gtk_file_selection_set_filename (GTK_FILE_SELECTION (file_sel), last_dir);
+	gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (file_chooser), last_dir);
 	g_free (last_dir);
 	
-	response = gtk_dialog_run (GTK_DIALOG (file_sel));
+	response = gtk_dialog_run (GTK_DIALOG (file_chooser));
 	if (response == GTK_RESPONSE_OK) {
-		filename = gtk_file_selection_get_filename (
-			GTK_FILE_SELECTION (file_sel));
+		filename = gtk_file_chooser_get_filename (
+			GTK_FILE_CHOOSER (file_chooser));
 
 		if (window_file_is_dir (filename)) {
+			g_free (filename);
 			filename = NULL;
 		}
 	}
 	
-	gtk_widget_destroy (file_sel);
+	gtk_widget_destroy (file_chooser);
 
 	if (filename != NULL) {
 		gboolean  success;
@@ -1422,6 +1435,7 @@ window_do_save_as (PlannerWindow *window)
 					 last_dir,
 					 NULL);
 		g_free (last_dir);
+		g_free (filename);
 		
 		return TRUE;
 	} else {
