@@ -1992,6 +1992,7 @@ task_dialog_resource_units_cell_edited (GtkCellRendererText *cell,
 	GtkTreeIter    iter;
 	MrpResource   *resource;
 	MrpAssignment *assignment;
+	int            value;
 
 	tree = GTK_TREE_VIEW (data->resource_list);
 	
@@ -2005,10 +2006,11 @@ task_dialog_resource_units_cell_edited (GtkCellRendererText *cell,
 		
 	assignment = mrp_task_get_assignment (data->task, resource);
 	if (assignment) {
-		task_cmd_assign_units (data->main_window, assignment, atoi (new_text));
-		/* g_object_set (assignment,
-			      "units", atoi (new_text),
-			      NULL);*/
+		value = atoi (new_text);
+
+		if (value != mrp_assignment_get_units (assignment)) {
+			task_cmd_assign_units (data->main_window, assignment, atoi (new_text));
+		}
 	}
 }
 
