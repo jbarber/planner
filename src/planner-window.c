@@ -65,7 +65,6 @@
 #include "planner-cmd-manager.h"
 
 #define d(x)
-#define GCONF_PATH "/apps/planner"
 
 struct _PlannerWindowPriv {
 	PlannerApplication  *application;
@@ -193,9 +192,16 @@ static GtkWidget *window_create_dialog_button            (const gchar           
 							  const gchar                  *text);
 static gchar *    window_recent_tooltip_func             (EggRecentItem                *item,
 							  gpointer                      user_data);
+static void       window_save_state                      (PlannerWindow *window);
+static void       window_restore_state                   (PlannerWindow *window);
 
-
-
+#define GCONF_PATH                  "/apps/planner"
+#define GCONF_MAIN_WINDOW_DIR       "/apps/planner/ui"
+#define GCONF_MAIN_WINDOW_MAXIMIZED "/apps/planner/ui/main_window_maximized"
+#define GCONF_MAIN_WINDOW_WIDTH     "/apps/planner/ui/main_window_width"
+#define GCONF_MAIN_WINDOW_HEIGHT    "/apps/planner/ui/main_window_height"
+#define GCONF_MAIN_WINDOW_POS_X     "/apps/planner/ui/main_window_position_x"
+#define GCONF_MAIN_WINDOW_POS_Y     "/apps/planner/ui/main_window_position_y"
 
 #define VIEW_PATH "/menu/View/Views placeholder"
 #define VIEW_GROUP "view group"
@@ -1064,10 +1070,6 @@ window_about_cb (BonoboUIComponent *component,
 			       _("The Planner Homepage"));
 	gtk_box_pack_start (GTK_BOX (hbox), href, TRUE, FALSE, 0);
 
-	/*href= gnome_href_new ("http://planner.imendio.org/contribute/",
-	  _("Contribute to Planner"));
-	  gtk_box_pack_start (GTK_BOX (hbox), href, TRUE, FALSE, 0);
-	*/
 	gtk_widget_show_all (about);
 }
 
@@ -1076,7 +1078,6 @@ window_delete_event_cb (PlannerWindow *window,
 			gpointer      user_data)
 {
 	planner_window_close (window);
-
 	return TRUE;
 }
 
@@ -1481,7 +1482,7 @@ planner_window_new (PlannerApplication *application)
 			  G_CALLBACK (window_project_notify_name_cb),
 			  window);
 	
-	gtk_window_set_default_size (GTK_WINDOW (window), 800, 600);
+	window_restore_state (window);
 
 	g_signal_connect (window, "delete_event", 
 			  G_CALLBACK (window_delete_event_cb),
@@ -1633,8 +1634,8 @@ static void
 window_update_title (PlannerWindow *window)
 {
  	PlannerWindowPriv *priv;
-	gchar            *name;
-	gchar            *title;
+	gchar             *name;
+	gchar             *title;
 
 	priv = window->priv;
 
@@ -1652,7 +1653,7 @@ void
 planner_window_close (PlannerWindow *window)
 {
 	PlannerWindowPriv *priv;
-        gboolean          close = TRUE;
+        gboolean           close = TRUE;
         
 	g_return_if_fail (PLANNER_IS_MAIN_WINDOW (window));
 
@@ -1663,6 +1664,8 @@ planner_window_close (PlannerWindow *window)
 	}
 
         if (close) {
+		window_save_state (window);
+
                 g_signal_emit (window, signals[CLOSED], 0, NULL);
                 
                 gtk_widget_destroy (GTK_WIDGET (window));
@@ -1726,3 +1729,98 @@ planner_window_get_cmd_manager (PlannerWindow *window)
 	return window->priv->cmd_manager;
 }
 
+static void
+window_save_state (PlannerWindow *window)
+{
+	GConfClient       *gconf_client;
+	PlannerWindowPriv *priv;
+	GdkWindowState     state;
+	gboolean           maximized;
+
+	priv = window->priv;
+
+	gconf_client = planner_application_get_gconf_client ();
+
+	state = gdk_window_get_state (GTK_WIDGET (window)->window);
+	if (state & GDK_WINDOW_STATE_MAXIMIZED) {
+		maximized = TRUE;
+	} else {
+		maximized = FALSE;
+	}
+
+	gconf_client_set_bool (gconf_client,
+			       GCONF_MAIN_WINDOW_MAXIMIZED,
+			       maximized, NULL);
+
+	/* If maximized don't save the size and position */
+	if (!maximized) {
+		int width, height;
+		int x, y;
+
+		gtk_window_get_size (GTK_WINDOW (window), &width, &height);
+		gconf_client_set_int (gconf_client,
+				      GCONF_MAIN_WINDOW_WIDTH,
+				      width, NULL);
+		gconf_client_set_int (gconf_client,
+				      GCONF_MAIN_WINDOW_HEIGHT,
+				      height, NULL);
+
+		gtk_window_get_position (GTK_WINDOW (window), &x, &y);
+		gconf_client_set_int (gconf_client,
+				      GCONF_MAIN_WINDOW_POS_X,
+				      x, NULL);
+		gconf_client_set_int (gconf_client,
+				      GCONF_MAIN_WINDOW_POS_Y,
+				      y, NULL);
+	}
+}
+
+static void
+window_restore_state (PlannerWindow *window)
+{
+	GConfClient *gconf_client;
+	PlannerWindowPriv *priv;
+	gboolean exists;
+	gboolean maximized;
+	int      width, height;
+	int      x, y;
+
+	priv = window->priv;
+	gconf_client = planner_application_get_gconf_client ();
+
+	exists = gconf_client_dir_exists (gconf_client,
+					  GCONF_MAIN_WINDOW_DIR,
+					  NULL);
+	
+	if (exists) {	
+		maximized = gconf_client_get_bool (gconf_client,
+						   GCONF_MAIN_WINDOW_MAXIMIZED,
+						   NULL);
+	
+		if (maximized) {
+			gtk_window_maximize (GTK_WINDOW (window));
+		} else {
+			width = gconf_client_get_int (gconf_client,
+						      GCONF_MAIN_WINDOW_WIDTH,
+						      NULL);
+		
+			height = gconf_client_get_int (gconf_client,
+						       GCONF_MAIN_WINDOW_HEIGHT,
+						       NULL);
+		
+			gtk_window_set_default_size (GTK_WINDOW (window), 
+						     width, height);
+
+			x = gconf_client_get_int (gconf_client,
+						  GCONF_MAIN_WINDOW_POS_X,
+						  NULL);
+			y = gconf_client_get_int (gconf_client,
+						  GCONF_MAIN_WINDOW_POS_Y,
+						  NULL);
+
+			gtk_window_move (GTK_WINDOW (window), x, y);
+		}
+	} else {
+		gtk_window_set_default_size (GTK_WINDOW (window), 800, 600);
+	}
+}
