@@ -69,7 +69,7 @@
         <!-- Make a proper XSL date value from the start-date attribute -->
         <xsl:variable name="start_date">
           <xsl:call-template name="mrproj-parse-date">
-            <xsl:with-param name="thedate" select="@start"/>
+            <xsl:with-param name="thedate" select="@work-start"/>
           </xsl:call-template>
         </xsl:variable>
         <xsl:variable name="end_date">
