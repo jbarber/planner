@@ -1445,7 +1445,6 @@ gantt_row_resource_short_name_changed (MrpResource     *resource,
 				       GParamSpec      *pspec,
 				       PlannerGanttRow *row)
 {
-	g_print ("koko %p\n", row);
 	gantt_row_update_assignment_string (row);
 }
 

@@ -26,7 +26,8 @@ BuildRequires:	libglade2-devel >= @LIBGLADE_REQUIRED@
 BuildRequires:	libplanner-devel = %{ver}
 BuildRequires:  gnome-vfs2-devel >= 2.0.2
 BuildRequires:  libgnomeprintui22-devel >= 2.2.0
-BuildRequires:  libxslt-devel >= 1.0
+BuildRequires:  libxml-devel >= @LIBXML_REQUIRED@
+BuildRequires:  libxslt-devel >= @LIBXSLT_REQUIRED@
 BuildRequires:	intltool
 
 %description
@@ -41,8 +42,8 @@ resources, and track the progress of your projects.
 Summary:	Planner SQL plugin
 Group:          Applications/Productivity
 Requires:       %name = %{PACKAGE_VERSION}
-Requires:       postgresql-libs
-BuildRequires:  postgresql-devel
+Requires:       libgda
+BuildRequires:  libgda-devel
 
 %description sql
 SQL plugin for Planner, this plugin can be used to store projects in a PostgreSQL database.
@@ -53,7 +54,7 @@ SQL plugin for Planner, this plugin can be used to store projects in a PostgreSQ
 %build
 
 intltoolize
-%configure --disable-timetable --enable-postgres
+%configure --enable-gda
 
 make
 

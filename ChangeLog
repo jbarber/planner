@@ -1,3 +1,13 @@
+2004-03-16  Richard Hult  <richard@imendio.com>
+
+	* src/planner-gantt-print.c: Fix bug #134969, to fix printing
+	problems with gantt chart. Patch from Heath Wilkinson again.
+	
+	* planner.spec.in (BuildRequires): Bring a bit more up to date.
+
+	* configure.in: Up libxml and libxslt requirement, to fix bug
+	#136752. Thanks to Jared Jones.
+
 2004-03-15  Richard Hult  <richard@imendio.com>
 
 	* data/glade/task-dialog.glade: Use better step/page sizes. Fixes
