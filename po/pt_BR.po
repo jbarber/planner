@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: planner.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-06-24 10:31-0400\n"
-"PO-Revision-Date: 2004-06-22 01:21-0300\n"
+"POT-Creation-Date: 2004-06-25 14:16-0400\n"
+"PO-Revision-Date: 2004-06-24 20:11-0300\n"
 "Last-Translator: Afonso Celso Medina <medina@maua.br>\n"
 "Language-Team: Portuguese/Brazil <gnome-l10n-br@listas.cipsga.org.br>\n"
 "MIME-Version: 1.0\n"
@@ -417,9 +417,8 @@ msgid "Insert Task"
 msgstr "Insere uma Tarefa"
 
 #: data/mime/planner.xml.in.h:1
-#, fuzzy
 msgid "Planner project plan"
-msgstr "Gerenciador de Projetos Planner"
+msgstr "Plano de projeto do planner"
 
 #: data/planner.desktop.in.h:1
 msgid "Planner Project Management"
@@ -603,7 +602,7 @@ msgstr "A_proximar"
 
 #: data/ui/html-plugin.ui.h:1
 msgid "HTML"
-msgstr ""
+msgstr "HTML"
 
 #: data/ui/main-window.ui.h:1
 msgid "About this application"
@@ -638,9 +637,8 @@ msgid "Cut the selection"
 msgstr "Corta a seleção"
 
 #: data/ui/main-window.ui.h:9
-#, fuzzy
 msgid "E_xport To"
-msgstr "Exportar como HTML"
+msgstr "E_xportar Para"
 
 #: data/ui/main-window.ui.h:10
 msgid "Edit Day _Types"
@@ -880,7 +878,7 @@ msgstr "Ajustar"
 
 #: data/ui/xml-planner-plugin.ui.h:1
 msgid "Planner File pre 0.12"
-msgstr ""
+msgstr "Arquivo Planner pré 0.12"
 
 #: libegg/recent-files/egg-recent-vfs-utils.c:90
 msgid " (invalid Unicode)"
@@ -978,16 +976,16 @@ msgid "None"
 msgstr "Nenhum"
 
 #. Give up.
-#: libplanner/mrp-sql.c:286 src/planner-sql-plugin.c:173
+#: libplanner/mrp-sql.c:294 src/planner-sql-plugin.c:173
 msgid "Invalid Unicode"
 msgstr "Unicode Inválido"
 
-#: libplanner/mrp-sql.c:2161
+#: libplanner/mrp-sql.c:2175
 #, c-format
 msgid "Connection to database '%s' failed.\n"
 msgstr "A conexão ao banco de dados '%s' falhou.\n"
 
-#: libplanner/mrp-sql.c:2166
+#: libplanner/mrp-sql.c:2180
 #, c-format
 msgid ""
 "Connection to database '%s' failed.\n"
@@ -996,12 +994,12 @@ msgstr ""
 "A conexão ao banco de dados '%s' falhou.\n"
 "%s"
 
-#: libplanner/mrp-sql.c:2174
+#: libplanner/mrp-sql.c:2188
 #, c-format
 msgid "BEGIN command failed %s."
 msgstr "O comando BEGIN falhou %s."
 
-#: libplanner/mrp-sql.c:2340
+#: libplanner/mrp-sql.c:2354
 #, c-format
 msgid ""
 "The project '%s' has been changed by the user '%s' since you opened it. Do "
@@ -1010,7 +1008,7 @@ msgstr ""
 "O projeto '%s' foi alterado pelo usuário '%s' desde que você o abriu. Deseja "
 "salvá-lo mesmo assim?"
 
-#: libplanner/mrp-sql.c:3606 src/planner-sql-plugin.c:336
+#: libplanner/mrp-sql.c:3620 src/planner-sql-plugin.c:338
 #, c-format
 msgid "Connection to database '%s' failed."
 msgstr "A conexão ao banco de dados '%s' falhou."
@@ -1050,32 +1048,28 @@ msgid "Can not move the task, since it would result in a loop."
 msgstr "Impossível mover a tarefa, porque resultaria em um loop fechado."
 
 #: libplanner/mrp-xsl.c:102
-#, fuzzy
 msgid "Export to HTML failed"
-msgstr "Exportar como HTML"
+msgstr "Exportar para HTML falhou"
 
 #: libplanner/mrp-xsl.c:166
 msgid "Export to Planner pre-0.12 format failed"
-msgstr ""
+msgstr "Exportar para o Planner o formato pré-0.12 falhou"
 
 #: src/planner-application.c:125
 msgid "Edit"
 msgstr "Edita"
 
 #: src/planner-calendar-dialog.c:183
-#, fuzzy
 msgid "Change day type"
-msgstr "Definir tipo dia como:"
+msgstr "Alterar o tipo do dia"
 
 #: src/planner-calendar-dialog.c:305
-#, fuzzy
 msgid "Remove calendar"
-msgstr "Remove a fase"
+msgstr "Remove o calendário"
 
 #: src/planner-calendar-dialog.c:397
-#, fuzzy
 msgid "Add new calendar"
-msgstr "Novo Calendário"
+msgstr "Adiciona um novo calendário"
 
 #: src/planner-cell-renderer-date.c:147
 msgid "Constraint type"
@@ -1218,8 +1212,8 @@ msgstr "Início do projeto"
 
 #: src/planner-gantt-print.c:189 src/planner-group-dialog.c:816
 #: src/planner-property-dialog.c:478 src/planner-resource-view.c:1152
-#: src/planner-task-dialog.c:2540 src/planner-task-dialog.c:2629
-#: src/planner-task-view.c:274 src/planner-ttable-print.c:97
+#: src/planner-task-dialog.c:2542 src/planner-task-dialog.c:2631
+#: src/planner-task-view.c:274 src/planner-ttable-print.c:108
 msgid "Name"
 msgstr "Nome"
 
@@ -1229,21 +1223,21 @@ msgstr "Nome"
 msgid "Work"
 msgstr "Trabalho"
 
-#: src/planner-gantt-print.c:541 src/planner-gantt-row.c:682
+#: src/planner-gantt-print.c:541 src/planner-gantt-row.c:685
 #: src/planner-window.c:1622
 msgid "Unnamed"
 msgstr "Sem Nome"
 
-#: src/planner-gantt-row.c:1755 src/planner-gantt-row.c:1758
+#: src/planner-gantt-row.c:1758 src/planner-gantt-row.c:1761
 msgid "No name"
 msgstr "Sem nome"
 
-#: src/planner-gantt-row.c:1761
+#: src/planner-gantt-row.c:1764
 #, c-format
 msgid "Make task '%s' a predecessor of '%s'"
 msgstr "Tornar a tarefa '%s' uma predecessora de '%s'"
 
-#: src/planner-gantt-row.c:1817
+#: src/planner-gantt-row.c:1820
 #, c-format
 msgid "Change work to %s"
 msgstr "Alterar trabalho para %s"
@@ -1268,7 +1262,7 @@ msgstr ""
 "\n"
 "WBS"
 
-#: src/planner-gantt-view.c:493 src/planner-ttable-tree.c:344
+#: src/planner-gantt-view.c:493 src/planner-ttable-tree.c:343
 msgid ""
 "\n"
 "Name"
@@ -1354,7 +1348,7 @@ msgstr "Remove a fase"
 msgid "Could not open plugin file '%s'\n"
 msgstr "Impossível abrir arquivo de plugin '%s'\n"
 
-#: src/planner-predecessor-model.c:191 src/planner-task-dialog.c:2201
+#: src/planner-predecessor-model.c:191 src/planner-task-dialog.c:2203
 msgid "FS"
 msgstr "FI"
 
@@ -1363,7 +1357,7 @@ msgid "FF"
 msgstr "FF"
 
 #. list = g_list_append (list, g_strdup (_("FF")));
-#: src/planner-predecessor-model.c:197 src/planner-task-dialog.c:2203
+#: src/planner-predecessor-model.c:197 src/planner-task-dialog.c:2205
 msgid "SS"
 msgstr "II"
 
@@ -1445,7 +1439,7 @@ msgid "Label"
 msgstr "Rótulo"
 
 #: src/planner-property-dialog.c:507 src/planner-resource-view.c:1194
-#: src/planner-task-dialog.c:2661
+#: src/planner-task-dialog.c:2663
 msgid "Type"
 msgstr "Tipo"
 
@@ -1476,19 +1470,17 @@ msgid "(None)"
 msgstr "(Nenhum)"
 
 #: src/planner-resource-dialog.c:336 src/planner-resource-input-dialog.c:109
-#: src/planner-task-dialog.c:373
+#: src/planner-task-dialog.c:375
 msgid "(No name)"
 msgstr "(Sem nome)"
 
 #: src/planner-resource-dialog.c:510
-#, fuzzy
 msgid "Edit resource calendar"
-msgstr "Edita o calendário de recursos a partir da caixa de diálogo"
+msgstr "Edita o calendário de recursos"
 
 #: src/planner-resource-dialog.c:591 src/planner-resource-dialog.c:664
-#, fuzzy
 msgid "Edit resource note"
-msgstr "Edita as propriedades do recurso"
+msgstr "Edita as anotações do recurso"
 
 #: src/planner-resource-dialog.c:733 src/planner-resource-dialog.c:774
 #: src/planner-resource-view.c:1328
@@ -1497,7 +1489,7 @@ msgstr "Editar propriedades do recurso"
 
 #. i18n: time stamp format for notes in task dialog, see strftime(3) for
 #. * a detailed description.
-#: src/planner-resource-dialog.c:1453 src/planner-task-dialog.c:1790
+#: src/planner-resource-dialog.c:1453 src/planner-task-dialog.c:1792
 msgid "%a %d %b %Y, %H:%M\n"
 msgstr "%a %d %b %Y, %H:%M\n"
 
@@ -1522,7 +1514,7 @@ msgstr "/_Inserir recurso"
 msgid "/_Remove resource"
 msgstr "/_Remover recurso"
 
-#: src/planner-resource-view.c:270 src/planner-ttable-tree.c:105
+#: src/planner-resource-view.c:270 src/planner-ttable-tree.c:107
 msgid "/_Edit resource..."
 msgstr "/_Editar recurso..."
 
@@ -1601,27 +1593,27 @@ msgstr "S%d"
 msgid "%04d, H%d"
 msgstr "%04d, S%d"
 
-#: src/planner-sql-plugin.c:379
+#: src/planner-sql-plugin.c:381
 msgid "ID"
 msgstr "ID"
 
-#: src/planner-sql-plugin.c:387
+#: src/planner-sql-plugin.c:389
 msgid "Project"
 msgstr "Projeto"
 
-#: src/planner-sql-plugin.c:395
+#: src/planner-sql-plugin.c:397
 msgid "Phase"
 msgstr "Fase"
 
-#: src/planner-sql-plugin.c:403
+#: src/planner-sql-plugin.c:405
 msgid "Revision"
 msgstr "Revisão"
 
-#: src/planner-sql-plugin.c:602
+#: src/planner-sql-plugin.c:604
 msgid "Open from Database"
 msgstr "Abre do Banco de Dados"
 
-#: src/planner-sql-plugin.c:709
+#: src/planner-sql-plugin.c:711
 msgid "Save to Database"
 msgstr "Salva no Banco de Dados"
 
@@ -1637,77 +1629,69 @@ msgstr "Desvincular tarefa"
 msgid "Insert task"
 msgstr "Inserir tarefa"
 
-#: src/planner-task-dialog.c:447 src/planner-task-tree.c:241
+#: src/planner-task-dialog.c:449 src/planner-task-tree.c:241
 msgid "Edit task property"
 msgstr "Editar as propriedades da tarefa"
 
-#: src/planner-task-dialog.c:521
-#, fuzzy
+#: src/planner-task-dialog.c:523
 msgid "Edit task type"
-msgstr "Editar as propriedades da tarefa"
+msgstr "Edita ao tipo de tarefa"
 
-#: src/planner-task-dialog.c:588
-#, fuzzy
+#: src/planner-task-dialog.c:590
 msgid "Edit task schedule"
-msgstr "Edita o cronograma de tarefas a partir de uma caixa de diálogo"
+msgstr "Edita o cronograma de tarefas"
 
-#: src/planner-task-dialog.c:666
-#, fuzzy
+#: src/planner-task-dialog.c:668
 msgid "Add resource to task"
-msgstr "Adiciona um recurso para uma tarefa a partir de uma caixa de diálogo"
+msgstr "Adiciona um recurso para uma tarefa"
 
-#: src/planner-task-dialog.c:726
-#, fuzzy
+#: src/planner-task-dialog.c:728
 msgid "Remove resource from task"
-msgstr "Remove um recurso de uma tarefa a partir de uma caixa de diálogo"
+msgstr "Remove um recurso de uma tarefa"
 
-#: src/planner-task-dialog.c:785
-#, fuzzy
+#: src/planner-task-dialog.c:787
 msgid "Change resource units in task"
-msgstr ""
-"Muda as unidades do recurso de uma tarefa a partir de uma caixa de diálogo"
+msgstr "Muda as unidades do recurso de uma tarefa"
 
-#: src/planner-task-dialog.c:881
+#: src/planner-task-dialog.c:883
 msgid "Edit task predecessor"
 msgstr "Edita o predecessor da tarefa"
 
-#: src/planner-task-dialog.c:952
-#, fuzzy
+#: src/planner-task-dialog.c:954
 msgid "Edit lag predecessor"
-msgstr "Edita o predecessor da tarefa"
+msgstr "Edita a folga do predecessor"
 
-#: src/planner-task-dialog.c:1018
-#, fuzzy
+#: src/planner-task-dialog.c:1020
 msgid "Edit task note"
-msgstr "Editar as propriedades da tarefa"
+msgstr "Editar as anotações da tarefa"
 
-#: src/planner-task-dialog.c:1862
+#: src/planner-task-dialog.c:1864
 msgid "Finish to start (FS)"
 msgstr "Final para início (FI)"
 
 #. _("Finish to finish (FF)"), MRP_RELATION_FF,
-#: src/planner-task-dialog.c:1864
+#: src/planner-task-dialog.c:1866
 msgid "Start to start (SS)"
 msgstr "Início para início (II)"
 
-#: src/planner-task-dialog.c:1919
+#: src/planner-task-dialog.c:1921
 msgid "Can't add new predecessor. No task selected!"
 msgstr ""
 "Impossível adicionar um novo predecessor. Nenhuma tarefa foi selecionada!"
 
-#: src/planner-task-dialog.c:2561
+#: src/planner-task-dialog.c:2563
 msgid "Assigned"
 msgstr "Atribuído"
 
-#: src/planner-task-dialog.c:2578
+#: src/planner-task-dialog.c:2580
 msgid "Units"
 msgstr "Unidades"
 
-#: src/planner-task-dialog.c:2683
+#: src/planner-task-dialog.c:2685
 msgid "Lag"
 msgstr "Atraso"
 
-#: src/planner-task-dialog.c:2821 src/planner-task-dialog.c:2823
+#: src/planner-task-dialog.c:2823 src/planner-task-dialog.c:2825
 msgid "Edit task properties"
 msgstr "Editar as propriedades da tarefa"
 
@@ -1731,7 +1715,7 @@ msgstr "/_Desvincular tarefa"
 msgid "/Assign _resources..."
 msgstr "/Atribuir _recursos..."
 
-#: src/planner-task-popup.c:70 src/planner-ttable-tree.c:106
+#: src/planner-task-popup.c:70 src/planner-ttable-tree.c:110
 msgid "/_Edit task..."
 msgstr "/_Editar tarefa..."
 
@@ -1740,14 +1724,12 @@ msgid "Remove task"
 msgstr "Remover tarefa"
 
 #: src/planner-task-tree.c:690
-#, fuzzy
 msgid "Apply constraint to task"
-msgstr "Restrição da tarefa"
+msgstr "Aplica uma restrição à tarefa"
 
 #: src/planner-task-tree.c:752
-#, fuzzy
 msgid "Reset task constraint"
-msgstr "Reinicializar a _Restrição"
+msgstr "Reinicializar a restrição da tarefa"
 
 #: src/planner-task-tree.c:886
 msgid "Move task"
@@ -1867,25 +1849,25 @@ msgstr "Folga"
 msgid "Edit custom task properties"
 msgstr "Editar propriedades customizadas da tarefa"
 
-#: src/planner-ttable-print.c:134
+#: src/planner-ttable-print.c:189
 msgid "Task"
 msgstr "Tarefa"
 
-#: src/planner-ttable-row.c:2112
+#: src/planner-ttable-row.c:2016
 #, c-format
 msgid "Make task '%s' start on %s"
 msgstr "Faz a tarefa '%s'iniciar em '%s'"
 
-#: src/planner-ttable-row.c:2181
+#: src/planner-ttable-row.c:2090
 #, c-format
 msgid "Change task '%s' work to %s, duration to %s (%d)"
 msgstr "Altera a tarefa '%s' trabalha até '%s', duração até %s (%d)"
 
-#: src/planner-ttable-tree.c:108
+#: src/planner-ttable-tree.c:113
 msgid "/_Expand all resources"
 msgstr "/_Expandir todos os recursos"
 
-#: src/planner-ttable-tree.c:109
+#: src/planner-ttable-tree.c:116
 msgid "/_Collapse all resources"
 msgstr "/_Ocultar todos os recursos"
 
@@ -2006,14 +1988,12 @@ msgid "Unnamed database project"
 msgstr "Banco de dados de projeto Sem Nome"
 
 #: src/planner-working-time-dialog.c:143
-#, fuzzy
 msgid "Edit working time"
-msgstr "Editar Horários de Trabalho"
+msgstr "Edita os horários de trabalho"
 
 #: src/planner-xml-planner-plugin.c:101
-#, fuzzy
 msgid "Export"
-msgstr "Exportar como HTML"
+msgstr "Exportar"
 
 #~ msgid "HTML export failed"
 #~ msgstr "Exportar como HTML falhou"
