@@ -2237,26 +2237,27 @@ planner_task_tree_insert_task (PlannerTaskTree *tree)
 void
 planner_task_tree_remove_task (PlannerTaskTree *tree)
 {
-	GList         *list, *l;
-	TaskCmdRemove *cmd;
+	GList             *list, *l;
+	TaskCmdRemove     *cmd;
+	PlannerGanttModel *model;
 	
-
 	list = planner_task_tree_get_selected_tasks (tree);
 	if (list == NULL) {
 		return;
 	}
 
-	for (l = list; l; l = l->next) {
-		MrpTask             *task = l->data;
-		PlannerGanttModel   *model;
-		GtkTreePath         *path;
+	model = PLANNER_GANTT_MODEL (gtk_tree_view_get_model (GTK_TREE_VIEW (tree)));
 
-		model = PLANNER_GANTT_MODEL (gtk_tree_view_get_model (GTK_TREE_VIEW (tree)));
+	for (l = list; l; l = l->next) {
+		MrpTask     *task = l->data;
+		GtkTreePath *path;
+
 		path = planner_gantt_model_get_path_from_task (model, task);
 
-		/* children are removed with the parent */
-		if (path != NULL)
+		/* Children are removed with the parent. */
+		if (path != NULL) {
 			cmd = (TaskCmdRemove*) task_cmd_remove (tree, path, task);
+		}
 		gtk_tree_path_free (path);
 		/* mrp_project_remove_task (tree->priv->project, l->data); */
 	}
@@ -2590,47 +2591,96 @@ planner_task_tree_unindent_task (PlannerTaskTree *tree)
 void 
 planner_task_tree_move_task_up (PlannerTaskTree *tree)
 {
-	GtkTreeSelection *selection;
-	GtkTreeModel	 *model;
-	GtkTreePath	 *path;
-	MrpProject  	 *project;
-	MrpTask	    	 *task, *parent, *sibling;
-	GList	    	 *list;
-	guint	    	  position;
+	GtkTreeSelection  *selection;
+	PlannerGanttModel *model;
+	GtkTreePath	  *path;
+	MrpProject  	  *project;
+	MrpTask	    	  *task, *parent, *sibling;
+	GList	    	  *list, *l, *m;
+	guint	    	   position;
+	gboolean	   proceed, skip;
+	gint		   count;
+	MrpTask           *anchor_task;
 
 	/* FIXME: undo */
 	
 	project = tree->priv->project;
 
-	task_tree_block_selection_changed (tree);
-	
 	list = planner_task_tree_get_selected_tasks (tree);
-
 	if (list == NULL) {
 		/* Nothing selected */
 		return;
 	} 
 
-	task = list->data;
-	position = mrp_task_get_position (task);
-	parent = mrp_task_get_parent (task);
-	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (tree));
-	model = gtk_tree_view_get_model (GTK_TREE_VIEW (tree));
+	task_tree_block_selection_changed (tree);
 	
-	if (position == 0) {
-		/* Task on the top of the list */
+	model = PLANNER_GANTT_MODEL (gtk_tree_view_get_model (GTK_TREE_VIEW (tree)));
+
+	path = planner_task_tree_get_anchor (tree);
+	if (path) {
+		anchor_task = planner_gantt_model_get_task_from_path (model, path);
 	} else {
-		sibling = mrp_task_get_nth_child (parent, 
-						  position - 1);
+		anchor_task = NULL;
+	}
+
+ 	proceed = TRUE;
+ 	count = 0 ;
+ 
+	for (l = list; l; l = l->next) {
+ 		count++;
+
+ 		task = l->data;
+ 		position = mrp_task_get_position (task);
+ 		parent = mrp_task_get_parent (task);
+  	
+		/* We now check if the parent is selected as well me. If it is
+		 * then we skip checks on our position and skip moving because
+		 * its just not relevant.
+		 */
+
+		/* FIXME: This checking isn't enough, we need to check if any
+		 * ancestor of the task is selected.
+		 */
+ 		skip = FALSE;
+ 		for (m = list; m; m = m->next) {
+ 			if (m->data == parent ) {
+ 				skip = TRUE;
+				break;
+ 			}
+ 		}
+  		
+ 		if (position == 0 && count == 1) {
+			/* We stop everything if at top of list and first task
+			 * else just stop moving this one task.
+			 */
+ 			proceed = FALSE;
+ 		}
 		
-		/* Move task from 'position' to 'position-1' */
-		mrp_project_move_task (project, task, sibling, 
-				       parent, TRUE, NULL);
-		path = planner_gantt_model_get_path_from_task (
-			PLANNER_GANTT_MODEL (model), task);
+ 		if (!skip && position != 0 && proceed) {
+			/* Move task from position to position - 1. */
+ 			sibling = mrp_task_get_nth_child (parent, position - 1);
+ 			mrp_project_move_task (project, task, sibling, 
+ 					       parent, TRUE, NULL);
+ 		}
+	}
+
+	/* Reselect all the previous selected tasks. */
+	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (tree));
+	for (l = list; l; l = l->next) {
+		task = l->data;
+
+		path = planner_gantt_model_get_path_from_task (model, task);
 		gtk_tree_selection_select_path (selection, path);
+		gtk_tree_path_free (path);
+	}
+
+	/* Restore anchor to the path of the original anchor task. */
+	if (anchor_task) {
+		path = planner_gantt_model_get_path_from_task (model, anchor_task);
 		planner_task_tree_set_anchor (tree, path);
 	}
+	
+	g_list_free (list);
 
 	task_tree_unblock_selection_changed (tree);
 }
@@ -2638,47 +2688,108 @@ planner_task_tree_move_task_up (PlannerTaskTree *tree)
 void 
 planner_task_tree_move_task_down (PlannerTaskTree *tree)
 {
-	GtkTreeSelection *selection;
-	GtkTreeModel	 *model;
-	GtkTreePath	 *path;
-	MrpProject 	 *project;
-	MrpTask	   	 *task, *parent, *sibling;
-	GList		 *list;
-	guint		  position;
+	GtkTreeSelection  *selection;
+	PlannerGanttModel *model;
+	GtkTreePath	  *path;
+	MrpProject 	  *project;
+	MrpTask	   	  *task, *parent, *sibling;
+	GList		  *list, *l, *m;
+	guint		   position;
+	gboolean	   proceed, skip;
+	gint		   count;
+	MrpTask           *anchor_task;
 
 	/* FIXME: undo */
 
 	project = tree->priv->project;
 
-	task_tree_block_selection_changed (tree);
-
 	list = planner_task_tree_get_selected_tasks (tree);
-
 	if (list == NULL) {
 		/* Nothing selected */
 		return;
+	}
+
+	task_tree_block_selection_changed (tree);
+
+	model = PLANNER_GANTT_MODEL (gtk_tree_view_get_model (GTK_TREE_VIEW (tree)));
+
+	path = planner_task_tree_get_anchor (tree);
+	if (path) {
+		anchor_task = planner_gantt_model_get_task_from_path (model, path);
 	} else {
-		task = list->data;
+		anchor_task = NULL;
+	}
+	
+	list = g_list_reverse (list);
+
+	proceed = TRUE;
+	count = 0 ;
+
+	for (l = list; l; l = l->next) {
+		count++;
+
+		task = l->data;
 		position = mrp_task_get_position (task);
 		parent = mrp_task_get_parent (task);
-		selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (tree));
-		model = gtk_tree_view_get_model (GTK_TREE_VIEW (tree));
 
-		if (position == (mrp_task_get_n_children (parent) - 1) ) {
-			/* The task is in the bottom of the list */
-		} else {
+		/* We now check if parent is selected also. If so then we skip
+		 * checks on our position as its not relevant.
+		 */
+		
+		/* FIXME: This checking isn't enough, we need to check if any
+		 * ancestor of the task is selected.
+		 */
+		skip = FALSE;
+		for (m = list; m; m = m->next) {
+			if (m->data == parent) {
+				skip = TRUE;
+				break;
+			}
+		}
+
+		/* FIXME: This looks a bit suspicious, position might not be a
+		 * child of the root so comparing their positions isn't
+		 * correct.
+		 */
+		if (position == mrp_task_get_n_children (mrp_project_get_root_task (project)) - 1 && count == 1) {
+			/* We stop if at bottom of project and first attempt at
+			 * moving stuff else just stop moving this one task.
+			 */
+			proceed = FALSE;
+		}
+		else if (!skip && position == mrp_task_get_n_children (parent) - 1 && count == 1) {
+			/* If the parent task is selected then we don't care if
+			 * we are at the bottom of our particular position.
+			 */ 
+			proceed = FALSE;
+		}
+		
+		if (!skip && position <= mrp_task_get_n_children (parent) - 1 && proceed) {
+			/* Move task from position to position + 1. */
 			sibling = mrp_task_get_nth_child (parent, position + 1);
-			/* Moving task from 'position' to 'position + 1' */
 			mrp_project_move_task (project, task, sibling, 
 					       parent, FALSE, NULL);
-
-			path = planner_gantt_model_get_path_from_task (PLANNER_GANTT_MODEL (model), task);
-			gtk_tree_selection_select_path (selection, path);
-			planner_task_tree_set_anchor (tree, path);
 		}
 	}
 
+	/* Reselect all the previous selected tasks. */
+	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (tree));
+	for (l = list; l; l = l->next) {
+		task = l->data;
+		
+		path = planner_gantt_model_get_path_from_task (model, task);
+		gtk_tree_selection_select_path (selection, path);
+		gtk_tree_path_free (path);
+	}
+
+	/* Restore anchor to the path of the original anchor task. */
+	if (anchor_task) {
+		path = planner_gantt_model_get_path_from_task (model, anchor_task);
+		planner_task_tree_set_anchor (tree, path);
+	}
+	
 	task_tree_unblock_selection_changed (tree);
+	g_list_free (list);
 }
 
 void
@@ -2997,7 +3108,7 @@ planner_task_tree_get_highlight_critical (PlannerTaskTree *tree)
 }
 
 void
-planner_task_tree_set_anchor (PlannerTaskTree *tree, GtkTreePath* anchor)
+planner_task_tree_set_anchor (PlannerTaskTree *tree, GtkTreePath *anchor)
 {
 	g_return_if_fail (PLANNER_IS_TASK_TREE (tree));
 	

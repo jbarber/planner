@@ -1,3 +1,21 @@
+2004-04-08  Richard Hult  <richard@imendio.com>
+
+	* src/planner-gantt-model.c:
+	(planner_gantt_model_get_path_from_task):
+	* src/planner-task-tree.c: (planner_task_tree_remove_task),
+	(planner_task_tree_move_task_up),
+	(planner_task_tree_move_task_down),
+	(planner_task_tree_set_anchor): Commit patch for bug #138595 from
+	Lincoln Phipps. Also clean up task removal a bit and add anchor
+	handling to Lincoln's patch.
+
+2004-04-07  Richard Hult  <richard@imendio.com>
+
+	* src/planner-gantt-model.c
+	(planner_gantt_model_get_path_from_task): Return NULL if the task
+	is not in the tree. Gets rid of warning when removing tasks with
+	the undo code.
+
 2004-04-08  Adam Weinberger  <adamw@gnome.org>
 
 	* configure.in: Added en_CA to ALL_LINGUAS.

@@ -718,8 +718,9 @@ planner_gantt_model_get_path_from_task (PlannerGanttModel *model,
 
 	node = g_hash_table_lookup (model->priv->task2node_hash, task);
 
-	/* Help debugging. */
-	g_return_val_if_fail (node != NULL, NULL);
+	if (!node) {
+		return NULL;
+	}
 	
 	return gantt_model_get_path_from_node (model, node);
 }
