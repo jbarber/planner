@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-09-04 21:37+0200\n"
-"PO-Revision-Date: 2004-09-04 21:43+0200\n"
+"POT-Creation-Date: 2004-09-15 23:09+0200\n"
+"PO-Revision-Date: 2004-09-15 23:10+0200\n"
 "Last-Translator: Francisco Javier F. Serrador <serrador@cvs.gnome.org>\n"
 "Language-Team: Spanish <traductores@es.gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -483,7 +483,8 @@ msgstr "No se pudo encontrar un módulo para cargar «%s»"
 
 #: libplanner/mrp-project.c:776 libplanner/mrp-project.c:1060
 msgid "No support for SQL storage built into this version of Planner."
-msgstr "No hay soporte para almacenes SQL compilado en esta versión de Planner."
+msgstr ""
+"No hay soporte para almacenes SQL compilado en esta versión de Planner."
 
 #: libplanner/mrp-project.c:813
 msgid "Invalid URI."
@@ -496,7 +497,8 @@ msgstr "No es posible encontrar el escritor de archivos identificado por «%s»"
 
 #: libplanner/mrp-project.c:1017
 msgid "Couldn't find a suitable file module for loading project"
-msgstr "No se pudo encontrar un módulo de archivo adecuado para cargar el proyecto"
+msgstr ""
+"No se pudo encontrar un módulo de archivo adecuado para cargar el proyecto"
 
 #: libplanner/mrp-property.c:365
 msgid "Text"
@@ -582,7 +584,8 @@ msgid "Invalid SQL URI (no database name specified)."
 msgstr "URI SQL inválida (no hay especificado un nombre de base de datos)."
 
 #: libplanner/mrp-task.c:1047
-msgid "Could not add a predecessor relation, because the tasks are already related."
+msgid ""
+"Could not add a predecessor relation, because the tasks are already related."
 msgstr ""
 "No se puede añadir una relación predecesora, debido a que las tareas ya se "
 "encuentran relacionadas."
@@ -798,21 +801,21 @@ msgstr "%Y %b %d"
 msgid "Project start"
 msgstr "Comienzo del proyecto:"
 
-#: src/planner-gantt-print.c:189 src/planner-group-dialog.c:816
+#: src/planner-gantt-print.c:190 src/planner-group-dialog.c:816
 #: src/planner-property-dialog.c:481 src/planner-resource-view.c:1171
 #: src/planner-task-dialog.c:2536 src/planner-task-dialog.c:2625
 #: src/planner-task-view.c:275 src/planner-ttable-print.c:108
 msgid "Name"
 msgstr "Nombre"
 
-#: src/planner-gantt-print.c:197 src/planner-resource-dialog.c:1869
+#: src/planner-gantt-print.c:198 src/planner-resource-dialog.c:1869
 #: src/planner-resource-view.c:757 src/planner-resource-view.c:773
 #: src/planner-resource-view.c:1702 src/planner-task-view.c:278
 msgid "Work"
 msgstr "Obra"
 
-#: src/planner-gantt-print.c:541 src/planner-gantt-row.c:685
-#: src/planner-task-tree.c:1583 src/planner-window.c:1624
+#: src/planner-gantt-print.c:542 src/planner-gantt-row.c:685
+#: src/planner-task-tree.c:1583 src/planner-window.c:1668
 msgid "Unnamed"
 msgstr "Sin nombre"
 
@@ -1037,7 +1040,7 @@ msgstr ""
 "«%s» es un directorio.\n"
 "Introduzca un nombre de archivo e intente de nuevo."
 
-#: src/planner-html-plugin.c:148 src/planner-window.c:1381
+#: src/planner-html-plugin.c:148 src/planner-window.c:1425
 #: src/planner-xml-planner-plugin.c:130
 #, c-format
 msgid "File \"%s\" exists, do you want to overwrite it?"
@@ -1371,8 +1374,10 @@ msgid ""
 "Database %s needs to be upgraded from version %s to version %s.\n"
 "Please backup database before the upgrade."
 msgstr ""
-"La base de datos %s necesita modernizarse desde la versión %s a la versión %s.\n"
-"Por favor haga una copia de resguardo de la base de datos antes de la modernización."
+"La base de datos %s necesita modernizarse desde la versión %s a la versión %"
+"s.\n"
+"Por favor haga una copia de resguardo de la base de datos antes de la "
+"modernización."
 
 #: src/planner-sql-plugin.c:502
 msgid "Upgrade"
@@ -1401,7 +1406,8 @@ msgstr "No se pueden crear tablas en la base de datos %s"
 #: src/planner-sql-plugin.c:618
 #, c-format
 msgid "Database %s is not setup for Planner. Do you want to do that?"
-msgstr "La base de datos %s no está preparada para Planner. ¿Qué quiere hacer ahora?"
+msgstr ""
+"La base de datos %s no está preparada para Planner. ¿Qué quiere hacer ahora?"
 
 #: src/planner-sql-plugin.c:675
 #, c-format
@@ -1488,7 +1494,8 @@ msgstr "Empezar para empezar (EE)"
 
 #: src/planner-task-dialog.c:1913
 msgid "Can't add new predecessor. No task selected!"
-msgstr "No se puede añadir un predecesor nuevo. No ha seleccionado ninguna tarea."
+msgstr ""
+"No se puede añadir un predecesor nuevo. No ha seleccionado ninguna tarea."
 
 #: src/planner-task-dialog.c:2557
 msgid "Assigned"
@@ -1658,7 +1665,7 @@ msgstr "Fin"
 
 #: src/planner-task-view.c:279
 msgid "Slack"
-msgstr "Desperdicio"
+msgstr "Retraso"
 
 #: src/planner-task-view.c:281
 msgid "Assigned to"
@@ -1739,7 +1746,7 @@ msgstr "Abre un proyecto"
 msgid "_Import"
 msgstr "_Importar"
 
-#: src/planner-window.c:222 src/planner-window.c:1252
+#: src/planner-window.c:222 src/planner-window.c:1296
 msgid "_Save"
 msgstr "_Guardar"
 
@@ -1876,55 +1883,58 @@ msgstr "Abrir un archivo"
 #. I18n: Translators, list your names here, newline separated if there
 #. * are more than one, to appear in the about box.
 #.
-#: src/planner-window.c:1073 src/planner-window.c:1080
+#: src/planner-window.c:1117 src/planner-window.c:1124
 msgid "translator-credits"
 msgstr "Francisco Javier F. Serrador"
 
 #. "Copyright \xc2\xa9"
-#: src/planner-window.c:1077
+#: src/planner-window.c:1121
 msgid "A Project Management application for the GNOME desktop"
 msgstr "Una aplicación de gestión de proyectos para el escritorio GNOME"
 
-#: src/planner-window.c:1087
+#: src/planner-window.c:1131
 msgid "The Planner Homepage"
 msgstr "La página web de Planner"
 
-#: src/planner-window.c:1193
+#: src/planner-window.c:1237
 msgid "If you don't save, changes made the last minute will be discarded."
-msgstr "Si no guarda, los cambios hechos en el último minuto serán descartados."
+msgstr ""
+"Si no guarda, los cambios hechos en el último minuto serán descartados."
 
-#: src/planner-window.c:1198
+#: src/planner-window.c:1242
 #, c-format
 msgid "If you don't save, changes made the last %d minutes will be discarded."
-msgstr "Si no guarda, los cambios hechos en los últimos %d minutos serán descartados."
+msgstr ""
+"Si no guarda, los cambios hechos en los últimos %d minutos serán descartados."
 
-#: src/planner-window.c:1203
+#: src/planner-window.c:1247
 msgid "If you don't save, changes made the last hour will be discarded."
 msgstr "Si no guarda, los cambios hechos en la última hora serán descartados."
 
-#: src/planner-window.c:1208
+#: src/planner-window.c:1252
 #, c-format
 msgid "If you don't save, changes made the last %d hours will be discarded."
-msgstr "Si no guarda, los cambios hechos en las últimas %d horas serán descartados."
+msgstr ""
+"Si no guarda, los cambios hechos en las últimas %d horas serán descartados."
 
-#: src/planner-window.c:1215
+#: src/planner-window.c:1259
 #, c-format
 msgid "Save changes to document '%s' before closing?"
 msgstr "¿Desea guardar los cambios del documento «%s» antes de cerrar?"
 
-#: src/planner-window.c:1239
+#: src/planner-window.c:1283
 msgid "C_lose without saving"
 msgstr "C_errar sin guardar"
 
-#: src/planner-window.c:1245
+#: src/planner-window.c:1289
 msgid "_Cancel"
 msgstr "_Cancelar"
 
-#: src/planner-window.c:1344
+#: src/planner-window.c:1388
 msgid "Save a file"
 msgstr "Guardar un archivo"
 
-#: src/planner-window.c:1581
+#: src/planner-window.c:1625
 msgid ""
 "You have opened a file that was saved with an old version of Planner.\n"
 "\n"
@@ -1954,7 +1964,7 @@ msgstr ""
 "el elemento del menú «Eliminar todos los impedimentos» en el menú «Editar»."
 
 #. Hack.
-#: src/planner-window.c:1616
+#: src/planner-window.c:1660
 msgid "Unnamed database project"
 msgstr "Base de datos del proyecto sin nombre"
 
@@ -2311,4 +2321,3 @@ msgstr "Exportar"
 
 #~ msgid "Up"
 #~ msgstr "Arriba"
-
