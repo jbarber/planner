@@ -738,9 +738,9 @@ ttable_model_resource_assignment_removed_cb	(MrpResource	*res,
 }
 
 static void
-ttable_model_resource_added_cb			(MrpProject	*project,
-						 MrpResource	*resource,
-						 PlannerTtableModel	*model)
+ttable_model_resource_added_cb	(MrpProject         *project,
+				 MrpResource        *resource,
+				 PlannerTtableModel *model)
 {
 	PlannerTtableModelPriv	*priv;
 	GList			*tasks, *t;
@@ -756,15 +756,15 @@ ttable_model_resource_added_cb			(MrpProject	*project,
 	priv = model->priv;
 	
 	g_signal_connect_object(resource,
-			     "assignment_added",
-			     G_CALLBACK(ttable_model_resource_assignment_added_cb),
-			     model,
-			     0);
+				"assignment_added",
+				G_CALLBACK(ttable_model_resource_assignment_added_cb),
+				model,
+				0);
 	g_signal_connect_object(resource,
-			     "assignment_removed",
-			     G_CALLBACK(ttable_model_resource_assignment_removed_cb),
-			     model,
-			     0);
+				"assignment_removed",
+				G_CALLBACK(ttable_model_resource_assignment_removed_cb),
+				model,
+				0);
 	rnode = g_node_new(resource);
 	g_node_append(priv->tree,rnode);
 	g_hash_table_insert (priv->resource2node, resource, rnode);
@@ -789,13 +789,35 @@ ttable_model_resource_added_cb			(MrpProject	*project,
 }
 
 static void
-ttable_model_resource_removed_cb		(MrpProject	*project,
-						 MrpResource	*resource,
-						 PlannerTtableModel	*model)
+ttable_model_resource_removed_cb (MrpProject         *project,
+				  MrpResource        *resource,
+				  PlannerTtableModel *model)
 {
+	PlannerTtableModelPriv	*priv;
+	GNode                   *node;
+	GtkTreePath		*path;
+	/* GtkTreeIter		 iter; */
+
 	g_return_if_fail(MRP_IS_PROJECT(project));
 	g_return_if_fail(MRP_IS_RESOURCE(resource));
 	g_return_if_fail(PLANNER_IS_TTABLE_MODEL(model));
+
+	priv = model->priv;
+
+	/*
+	 * Look the resource in the tree
+	 */
+	node = g_hash_table_lookup(priv->resource2node, resource);
+	g_hash_table_remove(priv->resource2node, resource);
+
+	/*
+	 * Remove the resource.
+	 */
+	path = ttable_model_get_path_from_node(model,node);
+	g_node_destroy(node);
+	/* ttable_model_get_iter(GTK_TREE_MODEL(model),&iter,path); */
+	gtk_tree_model_row_deleted(GTK_TREE_MODEL (model), path);
+	gtk_tree_path_free (path);
 }
 
 /*
