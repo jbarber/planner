@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mrproject VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-06-07 04:16+0200\n"
-"PO-Revision-Date: 2004-06-07 11:15+0200\n"
+"POT-Creation-Date: 2004-06-08 04:19+0200\n"
+"PO-Revision-Date: 2004-06-08 13:26+0200\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -1168,7 +1168,7 @@ msgstr "Začátek projektu"
 
 #: src/planner-gantt-print.c:191 src/planner-group-dialog.c:820
 #: src/planner-property-dialog.c:509 src/planner-resource-view.c:1182
-#: src/planner-task-dialog.c:2000 src/planner-task-dialog.c:2089
+#: src/planner-task-dialog.c:2208 src/planner-task-dialog.c:2297
 #: src/planner-task-view.c:266 src/planner-ttable-print.c:97
 msgid "Name"
 msgstr "Jméno"
@@ -1302,19 +1302,19 @@ msgstr "Odstranit fázi"
 msgid "Could not open plugin file '%s'\n"
 msgstr "Nemohu otevřít soubor zásuvného modulu '%s'\n"
 
-#: src/planner-predecessor-model.c:191 src/planner-task-dialog.c:1675
+#: src/planner-predecessor-model.c:191 src/planner-task-dialog.c:1879
 msgid "FS"
 msgstr "KZ"
 
-#: src/planner-predecessor-model.c:194 src/planner-task-dialog.c:1676
+#: src/planner-predecessor-model.c:194 src/planner-task-dialog.c:1880
 msgid "FF"
 msgstr "KK"
 
-#: src/planner-predecessor-model.c:197 src/planner-task-dialog.c:1677
+#: src/planner-predecessor-model.c:197 src/planner-task-dialog.c:1881
 msgid "SS"
 msgstr "ZZ"
 
-#: src/planner-predecessor-model.c:200 src/planner-task-dialog.c:1678
+#: src/planner-predecessor-model.c:200 src/planner-task-dialog.c:1882
 msgid "SF"
 msgstr "ZK"
 
@@ -1392,7 +1392,7 @@ msgid "Label"
 msgstr "Jmenovka"
 
 #: src/planner-property-dialog.c:542 src/planner-resource-view.c:1224
-#: src/planner-task-dialog.c:2121
+#: src/planner-task-dialog.c:2329
 msgid "Type"
 msgstr "Typ"
 
@@ -1412,7 +1412,7 @@ msgid "(None)"
 msgstr "(žádná)"
 
 #: src/planner-resource-dialog.c:336 src/planner-resource-input-dialog.c:107
-#: src/planner-task-dialog.c:312
+#: src/planner-task-dialog.c:322
 msgid "(No name)"
 msgstr "(beze jména)"
 
@@ -1434,7 +1434,7 @@ msgstr "Upravit vlastnost zdroje v dialogu"
 
 #. i18n: time stamp format for notes in task dialog, see strftime(3) for
 #. * a detailed description.
-#: src/planner-resource-dialog.c:1458 src/planner-task-dialog.c:1281
+#: src/planner-resource-dialog.c:1458 src/planner-task-dialog.c:1484
 msgid "%a %d %b %Y, %H:%M\n"
 msgstr "%a %d. %b %Y, %H:%M\n"
 
@@ -1570,51 +1570,63 @@ msgstr "Otevřít z databáze"
 msgid "Save to Database"
 msgstr "Uložit do databáze"
 
-#: src/planner-task-dialog.c:394
+#: src/planner-task-dialog.c:401
 msgid "Edit task property from dialog"
 msgstr "Upravit vlastnost úlohy v dialogu"
 
-#: src/planner-task-dialog.c:469
-msgid "Edit type task from dialog"
+#: src/planner-task-dialog.c:475
+msgid "Edit task type from dialog"
 msgstr "Upravit typ úlohy v dialogu"
 
-#: src/planner-task-dialog.c:536
+#: src/planner-task-dialog.c:542
 msgid "Edit task schedule from dialog"
 msgstr "Upravit plánování úlohy v dialogu"
 
-#: src/planner-task-dialog.c:1347
+#: src/planner-task-dialog.c:620
+msgid "Add a resource for a task from dialog"
+msgstr "Přidat zdroj pro úlohu v dialogu"
+
+#: src/planner-task-dialog.c:680
+msgid "Remove a resource from a task from dialog"
+msgstr "Odstranit zdroj z úlohy v dialogu"
+
+#: src/planner-task-dialog.c:739
+msgid "Change resource units for a task from dialog"
+msgstr "Změnit jednotky zdroje pro úlohu v dialogu"
+
+#: src/planner-task-dialog.c:1550
 msgid "Finish to start (FS)"
 msgstr "Konec před začátkem (KZ)"
 
-#: src/planner-task-dialog.c:1348
+#: src/planner-task-dialog.c:1551
 msgid "Finish to finish (FF)"
 msgstr "Konec před koncem (KK)"
 
-#: src/planner-task-dialog.c:1349
+#: src/planner-task-dialog.c:1552
 msgid "Start to start (SS)"
 msgstr "Začátek před začátkem (ZZ)"
 
-#: src/planner-task-dialog.c:1350
+#: src/planner-task-dialog.c:1553
 msgid "Start to finish (SF)"
 msgstr "Začátek před koncem (ZK)"
 
-#: src/planner-task-dialog.c:1400
+#: src/planner-task-dialog.c:1603
 msgid "Can't add new predecessor. No task selected!"
 msgstr "Nemohu přidat nového předchůdce. Nevybrána žádná úloha!"
 
-#: src/planner-task-dialog.c:2021
+#: src/planner-task-dialog.c:2229
 msgid "Assigned"
 msgstr "Přiřazeno"
 
-#: src/planner-task-dialog.c:2038
+#: src/planner-task-dialog.c:2246
 msgid "Units"
 msgstr "Jednotky"
 
-#: src/planner-task-dialog.c:2143
+#: src/planner-task-dialog.c:2351
 msgid "Lag"
 msgstr "Zpoždění"
 
-#: src/planner-task-dialog.c:2282 src/planner-task-dialog.c:2284
+#: src/planner-task-dialog.c:2490 src/planner-task-dialog.c:2492
 msgid "Edit task properties"
 msgstr "Upravit vlastnosti úlohy"
 
@@ -1916,6 +1928,9 @@ msgstr ""
 #: src/planner-window.c:1655
 msgid "Unnamed database project"
 msgstr "Nepojmenovaný projekt v databázi"
+
+#~ msgid "Edit type task from dialog"
+#~ msgstr "Upravit typ úlohy v dialogu"
 
 #~ msgid "Reset _All Constraints"
 #~ msgstr "Odstranit _všechna omezení"
