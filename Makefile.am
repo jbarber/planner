@@ -15,8 +15,7 @@ EXTRA_DIST = \
 	xmldocs.make			\
 	omf.make			\
 	planner.spec.in			\
-	planner.spec			\
-	intltool-modules/XML/Parser/Style/OrigTree.pm
+	planner.spec
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = libplanner-1.pc
