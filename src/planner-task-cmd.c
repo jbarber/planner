@@ -82,7 +82,6 @@ task_cmd_link_free (PlannerCmd *cmd_base)
 	g_object_unref (cmd->after);
 }
 
-
 PlannerCmd *
 planner_task_cmd_link (PlannerWindow   *main_window,
 		       MrpTask         *before,

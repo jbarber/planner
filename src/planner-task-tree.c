@@ -2678,17 +2678,33 @@ planner_task_tree_insert_task (PlannerTaskTree *tree)
 void
 planner_task_tree_remove_task (PlannerTaskTree *tree)
 {
-	GList             *list, *l;
-	TaskCmdRemove     *cmd;
-	PlannerGanttModel *model;
+	PlannerTaskTreePriv *priv;
+	GList               *list, *l;
+	TaskCmdRemove       *cmd;
+	PlannerGanttModel   *model;
+	gboolean             many;
+
+	priv = tree->priv;
 	
 	list = planner_task_tree_get_selected_tasks (tree);
 	if (list == NULL) {
 		return;
 	}
 
+	if (list->next) {
+		many = TRUE;
+	} else {
+		many = FALSE;
+	}
+	
 	model = PLANNER_GANTT_MODEL (gtk_tree_view_get_model (GTK_TREE_VIEW (tree)));
 
+	if (many) {
+		planner_cmd_manager_begin_transaction (
+			planner_window_get_cmd_manager (priv->main_window),
+			_("Remove Tasks"));
+	}
+	
 	for (l = list; l; l = l->next) {
 		MrpTask     *task = l->data;
 		GtkTreePath *path;
@@ -2700,10 +2716,14 @@ planner_task_tree_remove_task (PlannerTaskTree *tree)
 			cmd = (TaskCmdRemove*) task_cmd_remove (tree, path, task);
 		}
 		gtk_tree_path_free (path);
-		/* mrp_project_remove_task (tree->priv->project, l->data); */
 	}
 	
 	g_list_free (list);
+
+	if (many) {
+		planner_cmd_manager_end_transaction (
+			planner_window_get_cmd_manager (priv->main_window));
+	}
 	
 	planner_task_tree_set_anchor (tree, NULL);
 }

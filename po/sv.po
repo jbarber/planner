@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: planner\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-02-20 18:55+0100\n"
+"POT-Creation-Date: 2005-03-03 19:56+0100\n"
 "PO-Revision-Date: 2004-07-04 16:55+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -232,6 +232,10 @@ msgid "Save to HTML File"
 msgstr "Spara till HTML-fil"
 
 #: ../data/glade/html-output.glade.h:6
+msgid "View the result in browser"
+msgstr "Visa resultatet i webbläsare"
+
+#: ../data/glade/html-output.glade.h:7
 msgid "Web location:"
 msgstr "Webbplats:"
 
@@ -402,7 +406,7 @@ msgstr ""
 
 #: ../data/glade/task-date-widget.glade.h:4
 #: ../src/planner-cell-renderer-date.c:182
-#: ../src/planner-project-properties.c:742
+#: ../src/planner-project-properties.c:746
 msgid "Cancel"
 msgstr "Avbryt"
 
@@ -416,12 +420,13 @@ msgid "Schedule:"
 msgstr "Schemalägg:"
 
 #: ../data/glade/task-date-widget.glade.h:7
+#: ../src/planner-cell-renderer-date.c:189
 msgid "Select"
 msgstr "Välj"
 
 #: ../data/glade/task-date-widget.glade.h:8
 #: ../src/planner-cell-renderer-date.c:176
-#: ../src/planner-project-properties.c:735
+#: ../src/planner-project-properties.c:739
 msgid "Today"
 msgstr "Idag"
 
@@ -650,21 +655,25 @@ msgstr "Varaktighet"
 msgid "Cost"
 msgstr "Kostnad"
 
-#: ../libplanner/mrp-property.c:380 ../src/planner-project-properties.c:877
+#: ../libplanner/mrp-property.c:380 ../src/planner-project-properties.c:881
 msgid "None"
 msgstr "Ingen"
 
+#: ../libplanner/mrp-sql.c:206
+msgid "Can't connect to database server"
+msgstr "Kan inte ansluta till databasserver"
+
 #. Give up.
-#: ../libplanner/mrp-sql.c:294 ../src/planner-sql-plugin.c:198
+#: ../libplanner/mrp-sql.c:297 ../src/planner-sql-plugin.c:198
 msgid "Invalid Unicode"
 msgstr "Ogiltig Unicode"
 
-#: ../libplanner/mrp-sql.c:2177
+#: ../libplanner/mrp-sql.c:2180
 #, c-format
 msgid "Connection to database '%s' failed.\n"
 msgstr "Anslutning till databas \"%s\" misslyckades.\n"
 
-#: ../libplanner/mrp-sql.c:2182
+#: ../libplanner/mrp-sql.c:2185
 #, c-format
 msgid ""
 "Connection to database '%s' failed.\n"
@@ -673,12 +682,12 @@ msgstr ""
 "Anslutning till databas \"%s\" misslyckades.\n"
 "%s"
 
-#: ../libplanner/mrp-sql.c:2190
+#: ../libplanner/mrp-sql.c:2193
 #, c-format
 msgid "BEGIN command failed %s."
 msgstr "BEGIN-kommando misslyckades %s."
 
-#: ../libplanner/mrp-sql.c:2356
+#: ../libplanner/mrp-sql.c:2361
 #, c-format
 msgid ""
 "The project '%s' has been changed by the user '%s' since you opened it. Do "
@@ -687,7 +696,7 @@ msgstr ""
 "Projektet \"%s\" har ändrats av användaren \"%s\" sedan du öppnade det. Vill "
 "du spara ändå?"
 
-#: ../libplanner/mrp-sql.c:3624 ../src/planner-sql-plugin.c:657
+#: ../libplanner/mrp-sql.c:3630
 #, c-format
 msgid "Connection to database '%s' failed."
 msgstr "Anslutning till databasen \"%s\" misslyckades."
@@ -711,13 +720,13 @@ msgstr ""
 "Kan inte lägga till en föregångarrelation, eftersom aktiviteterna redan är "
 "släkt."
 
-#: ../libplanner/mrp-task-manager.c:2139
+#: ../libplanner/mrp-task-manager.c:2152
 msgid "Cannot add a predecessor, because it would result in a loop."
 msgstr ""
 "Kan inte lägga till en föregångare, eftersom det skulle resultera i en "
 "slinga."
 
-#: ../libplanner/mrp-task-manager.c:2185
+#: ../libplanner/mrp-task-manager.c:2198
 msgid "Cannot move the task, because it would result in a loop."
 msgstr ""
 "Kan inte flytta aktiviteten, eftersom det skulle resultera i en slinga."
@@ -779,7 +788,7 @@ msgstr "Ta bort kalender"
 msgid "Add new calendar"
 msgstr "Skapa ny kalender"
 
-#: ../src/planner-cell-renderer-date.c:161 ../src/planner-task-dialog.c:1418
+#: ../src/planner-cell-renderer-date.c:161 ../src/planner-task-dialog.c:1490
 msgid "As soon as possible"
 msgstr "Så tidigt som möjligt"
 
@@ -790,11 +799,6 @@ msgstr "Inte tidigare än"
 #: ../src/planner-cell-renderer-date.c:163
 msgid "On fixed date"
 msgstr "På fast datum"
-
-#: ../src/planner-cell-renderer-date.c:189
-#: ../src/planner-project-properties.c:749
-msgid "OK"
-msgstr "OK"
 
 #: ../src/planner-cmd-manager.c:225
 #, c-format
@@ -875,8 +879,8 @@ msgstr "Importera resurser från Evolution dataserver"
 
 #: ../src/planner-eds-plugin.c:393 ../src/planner-gantt-print.c:190
 #: ../src/planner-group-dialog.c:819 ../src/planner-property-dialog.c:481
-#: ../src/planner-resource-view.c:1156 ../src/planner-task-dialog.c:2552
-#: ../src/planner-task-dialog.c:2641 ../src/planner-task-view.c:279
+#: ../src/planner-resource-view.c:1156 ../src/planner-task-dialog.c:2533
+#: ../src/planner-task-dialog.c:2607 ../src/planner-task-view.c:279
 #: ../src/planner-ttable-print.c:108
 msgid "Name"
 msgstr "Namn"
@@ -1027,8 +1031,8 @@ msgid "Work"
 msgstr "Arbete"
 
 #: ../src/planner-gantt-print.c:542 ../src/planner-gantt-row.c:692
-#: ../src/planner-html-plugin.c:130 ../src/planner-task-tree.c:1564
-#: ../src/planner-window.c:1864
+#: ../src/planner-html-plugin.c:140 ../src/planner-task-tree.c:1564
+#: ../src/planner-window.c:1872
 msgid "Unnamed"
 msgstr "Namnlös"
 
@@ -1046,7 +1050,7 @@ msgstr "Gör aktivitet \"%s\" till föregångare till \"%s\""
 msgid "Change work to %s"
 msgstr "Ändra arbete till %s"
 
-#: ../src/planner-gantt-row.c:2391 ../src/planner-task-dialog.c:450
+#: ../src/planner-gantt-row.c:2391 ../src/planner-task-dialog.c:453
 #: ../src/planner-task-tree.c:254 ../src/planner-task-tree.c:939
 msgid "Edit task property"
 msgstr "Redigera aktivitetsegenskap"
@@ -1234,15 +1238,15 @@ msgstr "Ledares tel"
 msgid "Manager email"
 msgstr "Ledares e-post"
 
-#: ../src/planner-html-plugin.c:69
+#: ../src/planner-html-plugin.c:75
 msgid "HTML"
 msgstr "HTML"
 
-#: ../src/planner-html-plugin.c:70
+#: ../src/planner-html-plugin.c:76
 msgid "Export project to HTML"
 msgstr "Exportera projektet till HTML"
 
-#: ../src/planner-html-plugin.c:178
+#: ../src/planner-html-plugin.c:226
 #, c-format
 msgid ""
 "\"%s\" is a directory.\n"
@@ -1251,7 +1255,7 @@ msgstr ""
 "\"%s\" är en katalog.\n"
 "Ange ett filnamn och försök igen."
 
-#: ../src/planner-html-plugin.c:188 ../src/planner-window.c:1572
+#: ../src/planner-html-plugin.c:236 ../src/planner-window.c:1580
 #: ../src/planner-xml-planner-plugin.c:125
 #, c-format
 msgid "File \"%s\" exists, do you want to overwrite it?"
@@ -1306,7 +1310,7 @@ msgstr "Ta bort fas"
 msgid "Could not open plugin file '%s'\n"
 msgstr "Kunde inte öppna insticksfilen \"%s\"\n"
 
-#: ../src/planner-predecessor-model.c:191 ../src/planner-task-dialog.c:2142
+#: ../src/planner-predecessor-model.c:191 ../src/planner-task-dialog.c:2173
 msgid "FS"
 msgstr "FS"
 
@@ -1315,7 +1319,7 @@ msgid "FF"
 msgstr "FF"
 
 #. list = g_list_append (list, g_strdup (_("FF")));
-#: ../src/planner-predecessor-model.c:197 ../src/planner-task-dialog.c:2144
+#: ../src/planner-predecessor-model.c:197 ../src/planner-task-dialog.c:2175
 msgid "SS"
 msgstr "SS"
 
@@ -1323,15 +1327,15 @@ msgstr "SS"
 msgid "SF"
 msgstr "SF"
 
-#: ../src/planner-print-dialog.c:157
+#: ../src/planner-print-dialog.c:163
 msgid "Print Project"
 msgstr "Skriv ut projekt"
 
-#: ../src/planner-print-dialog.c:164
+#: ../src/planner-print-dialog.c:170
 msgid "Select views"
 msgstr "Välj vyer"
 
-#: ../src/planner-print-dialog.c:187
+#: ../src/planner-print-dialog.c:193
 msgid "Select the views to print:"
 msgstr "Välj de vyer som ska skrivas ut:"
 
@@ -1351,51 +1355,55 @@ msgstr "Redigera organisation"
 msgid "Edit Manager"
 msgstr "Redigera ledare"
 
-#: ../src/planner-project-properties.c:626
-#: ../src/planner-project-properties.c:660
+#: ../src/planner-project-properties.c:630
+#: ../src/planner-project-properties.c:664
 msgid "Edit Project Start"
 msgstr "Redigera projektstart"
 
-#: ../src/planner-project-properties.c:837
+#: ../src/planner-project-properties.c:753
+msgid "OK"
+msgstr "OK"
+
+#: ../src/planner-project-properties.c:841
 msgid "Edit Project Phase"
 msgstr "Redigera projektfas"
 
-#: ../src/planner-project-properties.c:970
+#: ../src/planner-project-properties.c:974
 msgid "Property"
 msgstr "Egenskap"
 
-#: ../src/planner-project-properties.c:981
+#: ../src/planner-project-properties.c:985
 msgid "Value"
 msgstr "Värde"
 
-#: ../src/planner-project-properties.c:1382
+#: ../src/planner-project-properties.c:1386
 #: ../src/planner-property-dialog.c:329
 msgid "The name of the custom property needs to start with a letter."
 msgstr "Egenskapsnamnet måste börja med en bokstav."
 
-#: ../src/planner-project-properties.c:1453
+#: ../src/planner-project-properties.c:1457
 #: ../src/planner-property-dialog.c:399
 #, c-format
 msgid "Do you really want to remove the property '%s' from the project?"
 msgstr "Vill du verkligen ta bort egenskaper \"%s\" från projektet?"
 
-#: ../src/planner-project-properties.c:1544
+#: ../src/planner-project-properties.c:1548
 msgid "Could not create properties dialog."
 msgstr "Kunde inte skapa egenskapsdialog."
 
-#: ../src/planner-project-properties.c:1578
+#: ../src/planner-project-properties.c:1582
 msgid "Date..."
 msgstr "Datum..."
 
-#: ../src/planner-project-properties.c:1921
+#: ../src/planner-project-properties.c:1925
 msgid "Add project property"
 msgstr "Lägg till projektegenskap"
 
-#: ../src/planner-project-properties.c:2031
+#: ../src/planner-project-properties.c:2035
 msgid "Remove project property"
 msgstr "Ta bort projektegenskap"
 
-#: ../src/planner-project-properties.c:2124
+#: ../src/planner-project-properties.c:2128
 msgid "Edit project property value"
 msgstr "Redigera projektegenskapsvärde"
 
@@ -1404,7 +1412,7 @@ msgid "Label"
 msgstr "Etikett"
 
 #: ../src/planner-property-dialog.c:510 ../src/planner-resource-view.c:1200
-#: ../src/planner-task-dialog.c:2673
+#: ../src/planner-task-dialog.c:2639
 msgid "Type"
 msgstr "Typ"
 
@@ -1432,7 +1440,7 @@ msgid "(None)"
 msgstr "(Ingen)"
 
 #: ../src/planner-resource-dialog.c:321
-#: ../src/planner-resource-input-dialog.c:109 ../src/planner-task-dialog.c:376
+#: ../src/planner-resource-input-dialog.c:109 ../src/planner-task-dialog.c:379
 msgid "(No name)"
 msgstr "(Inget namn)"
 
@@ -1455,7 +1463,7 @@ msgstr "Redigera resursegenskap"
 
 #. i18n: time stamp format for notes in task dialog, see strftime(3) for
 #. * a detailed description.
-#: ../src/planner-resource-dialog.c:1403 ../src/planner-task-dialog.c:1732
+#: ../src/planner-resource-dialog.c:1403 ../src/planner-task-dialog.c:1805
 msgid "%a %d %b %Y, %H:%M\n"
 msgstr "%a %d %b %Y, %H.%M\n"
 
@@ -1595,7 +1603,7 @@ msgstr "Öppna från databas..."
 msgid "Open a project from a database"
 msgstr "Öppna ett projekt från en databas"
 
-#: ../src/planner-sql-plugin.c:97 ../src/planner-sql-plugin.c:1093
+#: ../src/planner-sql-plugin.c:97 ../src/planner-sql-plugin.c:1096
 msgid "Save to Database"
 msgstr "Spara till databas"
 
@@ -1640,122 +1648,131 @@ msgstr ""
 msgid "Can't create tables in database %s"
 msgstr "Kan inte skapa tabeller i databasen %s"
 
-#: ../src/planner-sql-plugin.c:617
+#: ../src/planner-sql-plugin.c:618
 #, c-format
 msgid "Database %s is not setup for Planner. Do you want to do that?"
 msgstr "Databasen %s är inte förberedd för Planner. Vill du göra det?"
 
-#: ../src/planner-sql-plugin.c:668
+#: ../src/planner-sql-plugin.c:659
+#, c-format
+msgid "Connection to database '%s@%s' failed."
+msgstr "Anslutning till databasen \"%s@%s\" misslyckades."
+
+#: ../src/planner-sql-plugin.c:670
 #, c-format
 msgid "Test to tables in database '%s' failed."
 msgstr "Anslutning till databasen \"%s\" misslyckades."
 
-#: ../src/planner-sql-plugin.c:761
+#: ../src/planner-sql-plugin.c:764
 msgid "ID"
 msgstr "ID"
 
-#: ../src/planner-sql-plugin.c:769
+#: ../src/planner-sql-plugin.c:772
 msgid "Project"
 msgstr "Projekt"
 
-#: ../src/planner-sql-plugin.c:777
+#: ../src/planner-sql-plugin.c:780
 msgid "Phase"
 msgstr "Fas"
 
-#: ../src/planner-sql-plugin.c:785
+#: ../src/planner-sql-plugin.c:788
 msgid "Revision"
 msgstr "Revision"
 
-#: ../src/planner-sql-plugin.c:981
+#: ../src/planner-sql-plugin.c:984
 msgid "Open from Database"
 msgstr "Öppna från databas"
 
-#: ../src/planner-task-cmd.c:98
+#: ../src/planner-task-cmd.c:97
 msgid "Link task"
 msgstr "Länka aktivitet"
 
-#: ../src/planner-task-cmd.c:174
+#: ../src/planner-task-cmd.c:173
 msgid "Unlink task"
 msgstr "Avlänka aktivitet"
 
-#: ../src/planner-task-cmd.c:269
+#: ../src/planner-task-cmd.c:268
 msgid "Insert task"
 msgstr "Infoga aktivitet"
 
-#: ../src/planner-task-dialog.c:524
+#: ../src/planner-task-dialog.c:527
 msgid "Edit task type"
 msgstr "Redigera aktivitetstyp"
 
-#: ../src/planner-task-dialog.c:591
+#: ../src/planner-task-dialog.c:594
 msgid "Toggle fixed duration"
 msgstr "Växla fast varaktighet"
 
-#: ../src/planner-task-dialog.c:669
+#: ../src/planner-task-dialog.c:661
+msgid "Edit task scheduling"
+msgstr "Redigera aktivitetsschemaläggning"
+
+#: ../src/planner-task-dialog.c:741
 msgid "Assign resource to task"
 msgstr "Tilldela resurs till aktivitet"
 
-#: ../src/planner-task-dialog.c:729
+#: ../src/planner-task-dialog.c:801
 msgid "Unassign resource from task"
 msgstr "Ta bort resurs från aktivitet"
 
-#: ../src/planner-task-dialog.c:788
+#: ../src/planner-task-dialog.c:860
 msgid "Change resource units in task"
 msgstr "Ändra resursenheter i aktivitet"
 
 # Stämmer /richard :) (lite dum originalsträng kanske)
-#: ../src/planner-task-dialog.c:876
+#: ../src/planner-task-dialog.c:948
 msgid "Edit task predecessor"
 msgstr "Redigera aktivitetsföregångare"
 
 # Osäker. /Christian
-#: ../src/planner-task-dialog.c:947
+#: ../src/planner-task-dialog.c:1019
 msgid "Edit lag predecessor"
 msgstr "Redigera fördröjningsföregångare"
 
-#: ../src/planner-task-dialog.c:1013
+#: ../src/planner-task-dialog.c:1085
 msgid "Edit task note"
 msgstr "Redigera aktivitetsanteckning"
 
-#: ../src/planner-task-dialog.c:1421
+#: ../src/planner-task-dialog.c:1493
 #, c-format
 msgid "No earlier than %s"
 msgstr "Inte tidigare än %s"
 
-#: ../src/planner-task-dialog.c:1424
+#: ../src/planner-task-dialog.c:1496
 #, c-format
 msgid "On fixed date %s"
 msgstr "På fast datum %s"
 
-#: ../src/planner-task-dialog.c:1804
+#: ../src/planner-task-dialog.c:1877
 msgid "Finish to start (FS)"
 msgstr "Slut till start (FS)"
 
 #. _("Finish to finish (FF)"), MRP_RELATION_FF,
-#: ../src/planner-task-dialog.c:1806
+#: ../src/planner-task-dialog.c:1879
 msgid "Start to start (SS)"
 msgstr "Start till start (SS)"
 
-#: ../src/planner-task-dialog.c:1862
+#: ../src/planner-task-dialog.c:1935
 msgid "Can't add new predecessor. No task selected!"
 msgstr "Kan inte lägga till föregångare, ingen aktivitet markerad."
 
-#: ../src/planner-task-dialog.c:2399
+#: ../src/planner-task-dialog.c:2380
 msgid "Change..."
 msgstr "Ändra..."
 
-#: ../src/planner-task-dialog.c:2573
+#: ../src/planner-task-dialog.c:2554
 msgid "Assigned"
 msgstr "Tilldelad"
 
-#: ../src/planner-task-dialog.c:2590
+#: ../src/planner-task-dialog.c:2571
 msgid "Units"
 msgstr "Enheter"
 
-#: ../src/planner-task-dialog.c:2695
+#: ../src/planner-task-dialog.c:2661
 msgid "Lag"
 msgstr "Fördröjning"
 
-#: ../src/planner-task-dialog.c:2869 ../src/planner-task-dialog.c:2871
+#: ../src/planner-task-dialog.c:2835 ../src/planner-task-dialog.c:2837
 msgid "Edit task properties"
 msgstr "Redigera aktivitetsegenskaper"
 
@@ -1803,7 +1820,11 @@ msgstr "Flytta aktivitet"
 msgid "N/A"
 msgstr "-"
 
-#: ../src/planner-task-tree.c:2747
+#: ../src/planner-task-tree.c:2705
+msgid "Remove Tasks"
+msgstr "Ta bort aktiviteter"
+
+#: ../src/planner-task-tree.c:2767
 #, c-format
 msgid ""
 "You are about to open an edit dialog each for %i tasks. Are you sure that "
@@ -1863,12 +1884,12 @@ msgstr "Redigera egenskaper för egen aktivitet"
 msgid "Task"
 msgstr "Aktivitet"
 
-#: ../src/planner-ttable-row.c:2011
+#: ../src/planner-ttable-row.c:1964
 #, c-format
 msgid "Make task '%s' start on %s"
 msgstr "Gör att aktivitet \"%s\" startar %s"
 
-#: ../src/planner-ttable-row.c:2076
+#: ../src/planner-ttable-row.c:2029
 #, c-format
 msgid "Change task '%s' work to %s, duration to %s (%d)"
 msgstr "Ändra arbetet på aktivitet \"%s\" till %s, varaktigheten till %s (%d)"
@@ -1932,7 +1953,7 @@ msgstr "Öppna ett projekt"
 msgid "_Import"
 msgstr "_Importera"
 
-#: ../src/planner-window.c:233 ../src/planner-window.c:1441
+#: ../src/planner-window.c:233 ../src/planner-window.c:1449
 msgid "_Save"
 msgstr "_Spara"
 
@@ -2089,50 +2110,50 @@ msgstr "Ett projekthanteringsprogram för GNOME-skrivbordet"
 msgid "The Planner Homepage"
 msgstr "Planners hemsida"
 
-#: ../src/planner-window.c:1381
+#: ../src/planner-window.c:1389
 msgid "If you don't save, changes made the last minute will be discarded."
 msgstr ""
 "Om du inte sparar kommer ändringarna gjorda den senaste minuten att gå "
 "förlorade."
 
-#: ../src/planner-window.c:1386
+#: ../src/planner-window.c:1394
 #, c-format
 msgid "If you don't save, changes made the last %d minutes will be discarded."
 msgstr ""
 "Om du inte sparar kommer ändringarna gjorda de senaste %d minuterna att gå "
 "förlorade."
 
-#: ../src/planner-window.c:1391
+#: ../src/planner-window.c:1399
 msgid "If you don't save, changes made the last hour will be discarded."
 msgstr ""
 "Om du inte sparar kommer ändringarna gjorda den senaste timmen att gå "
 "förlorade."
 
-#: ../src/planner-window.c:1396
+#: ../src/planner-window.c:1404
 #, c-format
 msgid "If you don't save, changes made the last %d hours will be discarded."
 msgstr ""
 "Om du inte sparar kommer ändringarna gjorda de senaste %d timmarna att gå "
 "förlorade."
 
-#: ../src/planner-window.c:1403
+#: ../src/planner-window.c:1411
 #, c-format
 msgid "Save changes to document '%s' before closing?"
 msgstr "Spara ändringarna i dokumentet \"%s\" innan det stängs?"
 
-#: ../src/planner-window.c:1428
+#: ../src/planner-window.c:1436
 msgid "C_lose without saving"
 msgstr "S_täng utan att spara"
 
-#: ../src/planner-window.c:1434
+#: ../src/planner-window.c:1442
 msgid "_Cancel"
 msgstr "_Avbryt"
 
-#: ../src/planner-window.c:1533
+#: ../src/planner-window.c:1541
 msgid "Save a File"
 msgstr "Spara en fil"
 
-#: ../src/planner-window.c:1821
+#: ../src/planner-window.c:1829
 msgid ""
 "You have opened a file that was saved with an old version of Planner.\n"
 "\n"
@@ -2161,11 +2182,11 @@ msgstr ""
 "\"Återställ alla restriktioner\" i \"Redigera\"-menyn."
 
 #. Hack.
-#: ../src/planner-window.c:1856
+#: ../src/planner-window.c:1864
 msgid "Unnamed database project"
 msgstr "Namnlöst databasprojekt"
 
-#: ../src/planner-window.c:1970
+#: ../src/planner-window.c:1978
 #, c-format
 msgid "Open '%s'"
 msgstr "Öppna \"%s\""
@@ -2278,10 +2299,6 @@ msgstr "Exportera"
 #~ "Kan inte lägga till en föregångarrelation mellan en aktivitet och dess "
 #~ "förfader."
 
-#, fuzzy
-#~ msgid "Edit task scheduling type"
-#~ msgstr "Redigera aktivitetsschema"
-
 #~ msgid "Edit resource custom property"
 #~ msgstr "Redigera egenskap för egen resurs"
 
@@ -2359,9 +2376,6 @@ msgstr "Exportera"
 
 #~ msgid "Remove the selected task"
 #~ msgstr "Ta bort den markerade aktiviteten"
-
-#~ msgid "Remove tasks"
-#~ msgstr "Ta bort aktiviteter"
 
 #~ msgid "Remove the selected resources"
 #~ msgstr "Ta bort de markerade resurserna"

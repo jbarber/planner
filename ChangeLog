@@ -1,3 +1,13 @@
+2005-03-03  Richard Hult  <richard@imendio.com>
+
+	* src/planner-cmd-manager.c: (transaction_cmd_do),
+	(transaction_cmd_undo), (planner_cmd_manager_begin_transaction),
+	(planner_cmd_manager_end_transaction):
+	* src/planner-task-cmd.c:
+	* src/planner-task-tree.c: (planner_task_tree_remove_task): Finish
+	the implementation of undo transactions and use them for deleting
+	many tasks. Also apply patch from fmoraes@nc.rr.com.
+
 2005-03-02  Richard Hult  <richard@imendio.com>
 
 	* src/planner-window.c (window_redo_state_changed_cb)

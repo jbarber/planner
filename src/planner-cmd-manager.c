@@ -406,8 +406,6 @@ transaction_cmd_do (PlannerCmd *cmd)
 {
 	PlannerCmd *cmd_sub;
 	
-	g_print ("Transaction do: %s\n", cmd->name);
-	
 	while (1) {
 		cmd_sub = get_redo_cmd (cmd->manager, TRUE);
 
@@ -436,8 +434,6 @@ transaction_cmd_undo (PlannerCmd *cmd)
 {
 	PlannerCmd *cmd_sub;
 
-	g_print ("Transaction undo: %s\n", cmd->name);
-
 	while (1) {
 		cmd_sub = get_undo_cmd (cmd->manager, TRUE);
 
@@ -445,14 +441,14 @@ transaction_cmd_undo (PlannerCmd *cmd)
 			break;
 		}
 		
-		if (cmd_sub->undo_func) {
-			cmd_sub->undo_func (cmd_sub);
-		}
-		
 		if (cmd_sub->type == PLANNER_CMD_TYPE_BEGIN_TRANSACTION) {
 			break;
 		}
 
+		if (cmd_sub->undo_func) {
+			cmd_sub->undo_func (cmd_sub);
+		}
+		
 		g_assert (cmd_sub->type == PLANNER_CMD_TYPE_NORMAL);
 	}
 }
@@ -474,14 +470,13 @@ planner_cmd_manager_begin_transaction (PlannerCmdManager *manager,
 	}
 
 	priv->inside_transaction = TRUE;
-
-	cmd = g_new0 (PlannerCmd, 1);
-
-	cmd->do_func = transaction_cmd_do;
-	cmd->undo_func = transaction_cmd_undo;
-	cmd->free_func = (PlannerCmdFreeFunc) g_free;
 	
-	cmd->name = g_strdup (name);
+	cmd = planner_cmd_new (PlannerCmd,
+			       name,
+			       transaction_cmd_do,
+			       transaction_cmd_undo,
+			       NULL);
+
 	cmd->type = PLANNER_CMD_TYPE_BEGIN_TRANSACTION;
 		
 	cmd_manager_insert (manager, cmd, FALSE);
@@ -521,14 +516,13 @@ planner_cmd_manager_end_transaction (PlannerCmdManager *manager)
 		g_warning ("Can't find beginning of transaction.");
 		return FALSE;
 	}
+
+	cmd = planner_cmd_new (PlannerCmd,
+			       begin_cmd->name,
+			       transaction_cmd_do,
+			       transaction_cmd_undo,
+			       NULL);
 	
-	cmd = g_new0 (PlannerCmd, 1);
-		
-	cmd->do_func = transaction_cmd_do;
-	cmd->undo_func = transaction_cmd_undo;
-	cmd->free_func = (PlannerCmdFreeFunc) g_free;
-	
-	cmd->name = g_strdup (begin_cmd->name);
 	cmd->type = PLANNER_CMD_TYPE_END_TRANSACTION;
 	
 	cmd_manager_insert (manager, cmd, FALSE);
