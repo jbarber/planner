@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mrproject VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-01-30 04:25+0100\n"
-"PO-Revision-Date: 2004-01-30 12:40+0100\n"
+"POT-Creation-Date: 2004-02-10 15:44+0100\n"
+"PO-Revision-Date: 2004-02-10 20:21+0100\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -795,7 +795,7 @@ msgstr "Nemohu vytvořit strom XML"
 msgid "Could not write XML file"
 msgstr "Nemohu zapsat soubor XML"
 
-#: libplanner/mrp-project.c:440 src/planner-group-dialog.c:491
+#: libplanner/mrp-project.c:440 src/planner-group-dialog.c:833
 msgid "Default"
 msgstr "Implicitní"
 
@@ -1057,8 +1057,8 @@ msgstr "%e. %b %Y"
 msgid "Project start"
 msgstr "Začátek projektu"
 
-#: src/planner-gantt-print.c:190 src/planner-group-dialog.c:467
-#: src/planner-property-dialog.c:378 src/planner-resource-view.c:1137
+#: src/planner-gantt-print.c:190 src/planner-group-dialog.c:809
+#: src/planner-property-dialog.c:378 src/planner-resource-view.c:1147
 #: src/planner-task-dialog.c:1311 src/planner-task-dialog.c:1397
 #: src/planner-task-view.c:261
 msgid "Name"
@@ -1066,7 +1066,7 @@ msgstr "Jméno"
 
 #: src/planner-gantt-print.c:198 src/planner-resource-dialog.c:1101
 #: src/planner-resource-view.c:686 src/planner-resource-view.c:702
-#: src/planner-resource-view.c:1509 src/planner-task-view.c:264
+#: src/planner-resource-view.c:1516 src/planner-task-view.c:264
 msgid "Work"
 msgstr "Práce"
 
@@ -1115,15 +1115,31 @@ msgstr ""
 "\n"
 "Práce"
 
-#: src/planner-group-dialog.c:473
+#: src/planner-group-dialog.c:304
+msgid "Insert group"
+msgstr "Vložit skupinu"
+
+#: src/planner-group-dialog.c:429
+msgid "Remove group"
+msgstr "Odstranit skupinu"
+
+#: src/planner-group-dialog.c:521
+msgid "Default group"
+msgstr "Implicitní skupina"
+
+#: src/planner-group-dialog.c:637
+msgid "Edit group property"
+msgstr "Upravit vlastnost skupiny"
+
+#: src/planner-group-dialog.c:815
 msgid "Manager name"
 msgstr "Jméno manažera"
 
-#: src/planner-group-dialog.c:479
+#: src/planner-group-dialog.c:821
 msgid "Manager phone"
 msgstr "Telefon manažera"
 
-#: src/planner-group-dialog.c:485
+#: src/planner-group-dialog.c:827
 msgid "Manager email"
 msgstr "E-mail manažera"
 
@@ -1235,14 +1251,14 @@ msgstr "Nemohu vytvořit dialog vlastností."
 msgid "Label"
 msgstr "Jmenovka"
 
-#: src/planner-property-dialog.c:411 src/planner-resource-view.c:1158
+#: src/planner-property-dialog.c:411 src/planner-resource-view.c:1168
 #: src/planner-task-dialog.c:1429
 msgid "Type"
 msgstr "Typ"
 
 #. Put "no group" at the top.
 #: src/planner-resource-dialog.c:248 src/planner-resource-input-dialog.c:96
-#: src/planner-resource-view.c:1745
+#: src/planner-resource-view.c:1727
 msgid "(None)"
 msgstr "(žádná)"
 
@@ -1266,7 +1282,7 @@ msgid "Edit resource properties"
 msgstr "Upravit vlastnosti zdroje"
 
 #: src/planner-resource-dialog.c:1102 src/planner-resource-view.c:689
-#: src/planner-resource-view.c:703 src/planner-resource-view.c:1510
+#: src/planner-resource-view.c:703 src/planner-resource-view.c:1517
 msgid "Material"
 msgstr "Materiál"
 
@@ -1290,27 +1306,27 @@ msgstr "_Zdroje"
 msgid "Insert resource"
 msgstr "Vložit zdroj"
 
-#: src/planner-resource-view.c:918
+#: src/planner-resource-view.c:929
 msgid "Remove resource"
 msgstr "Odstranit zdroj"
 
-#: src/planner-resource-view.c:1020
+#: src/planner-resource-view.c:1030
 msgid "Edit custom resource properties"
 msgstr "Upravit vlastní vlastnosti zdroje"
 
-#: src/planner-resource-view.c:1182
+#: src/planner-resource-view.c:1192
 msgid "Group"
 msgstr "Skupina"
 
-#: src/planner-resource-view.c:1211
+#: src/planner-resource-view.c:1221
 msgid "Email"
 msgstr "E-mail"
 
-#: src/planner-resource-view.c:1276
+#: src/planner-resource-view.c:1286
 msgid "Edit resource property"
 msgstr "Upravit vlastnost zdroje"
 
-#: src/planner-resource-view.c:1338
+#: src/planner-resource-view.c:1348
 msgid "Edit resource custom property"
 msgstr "Upravit vlastní vlastnost zdroje"
 
@@ -1628,9 +1644,6 @@ msgstr ""
 
 #~ msgid "<b>Open Database</b>"
 #~ msgstr "<b>Otevřít databázi</b>"
-
-#~ msgid "Na_me:"
-#~ msgstr "J_méno:"
 
 #~ msgid "Work:"
 #~ msgstr "Práce:"
