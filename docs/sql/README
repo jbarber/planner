@@ -25,21 +25,20 @@ A very brief getting started howto (change username etc to use...):
   echo 'CREATE GROUP planner WITH USER rhult;' | psql -e -U rhult -d plannerdb
 
 * Create tables from new. This depends upon the schema that you are up to 
-  in your code. Look in libplanner/dtd and identify the highest DTD version 
-  shown. This corresponds to the SQL file in this directory.
+  in your code. Use the highest versioned SQL file.
 
   e.g.
   cat database.sql | psql -e -U rhult -d plannerdb
 
   or e.g.
-  cat database-0.7.sql | psql -e -U rhult -d plannerdb
+  cat database-0.11.sql | psql -e -U rhult -d plannerdb
 
 * Update Tables (in existing database). If you already have a database then 
-  just update this to the new schema. Use the appropriate update file based
+  just update this to the new schema. Use the appropriate upgrade file based
   on your old and new schema,
   
   e.g.
-  cat update-0.6.x-0.7.sql | psql -e -U rhult -d plannerdb
+  cat upgrade-0.6.x-0.11.sql | psql -e -U rhult -d plannerdb
   
 * Drop database and group to start over:
 
