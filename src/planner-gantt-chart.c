@@ -3,6 +3,7 @@
  * Copyright (C) 2001-2002 CodeFactory AB
  * Copyright (C) 2001-2002 Richard Hult <richard@imendio.com>
  * Copyright (C) 2001-2002 Mikael Hallendal <micke@imendio.com>
+ * Copyright (C) 2004      Alvaro del Castillo <acs@barrapunto.com>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -165,6 +166,8 @@ static void        gantt_chart_relation_added           (MrpTask            *tas
 static void        gantt_chart_relation_removed         (MrpTask            *task,
 							 MrpRelation        *relation,
 							 PlannerGanttChart       *chart);
+static void        gantt_chart_task_removed             (MrpTask            *task,
+							 PlannerGanttChart  *chart);
 static void        gantt_chart_build_tree               (PlannerGanttChart       *chart);
 static void        gantt_chart_reflow                   (PlannerGanttChart       *chart,
 							 gboolean            height_changed);
@@ -1043,6 +1046,11 @@ gantt_chart_insert_task (PlannerGanttChart *chart,
 			  G_CALLBACK (gantt_chart_relation_removed),
 			  chart);
 
+	g_signal_connect (task,
+			  "removed",
+			  G_CALLBACK (gantt_chart_task_removed),
+			  chart);
+
 	return tree_node;
 }
 
@@ -1178,6 +1186,13 @@ gantt_chart_relation_added (MrpTask           *task,
 
 	predecessor = mrp_relation_get_predecessor (relation);
 	
+	if (g_getenv ("PLANNER_DEBUG_UNDO_TASK")) {
+		g_message ("Adding a new relation arrow (%p): %s (%p) -> %s (%p)", 
+			   relation, 
+			   mrp_task_get_name (predecessor), predecessor,
+			   mrp_task_get_name (task), task);
+	}
+	
 	if (task == predecessor) {
 		/* We are only interested in the successor task. */
 		return;
@@ -1226,6 +1241,32 @@ gantt_chart_relation_removed (MrpTask           *task,
 		gtk_object_destroy (GTK_OBJECT (arrow));
 		gantt_chart_reflow (chart, FALSE);
 	}
+}
+
+static void
+gantt_chart_task_removed (MrpTask            *task,
+			  PlannerGanttChart  *chart)
+{
+	GList *l, *relations;
+
+	if (g_getenv ("PLANNER_DEBUG_UNDO_TASK")) {
+		g_message ("Task removed: %s", mrp_task_get_name (task));
+		g_message ("Cleaning signals for task: %s", mrp_task_get_name (task));
+	}
+
+	relations = mrp_task_get_predecessor_relations (task);
+	for (l = relations; l; l = l->next) {
+		g_hash_table_remove (chart->priv->relation_hash, l->data);
+	}
+
+	relations = mrp_task_get_successor_relations (task);
+	for (l = relations; l; l = l->next) {
+		g_hash_table_remove (chart->priv->relation_hash, l->data);
+	}
+
+	g_signal_handlers_disconnect_by_func (task, gantt_chart_relation_added, chart);
+	g_signal_handlers_disconnect_by_func (task, gantt_chart_relation_removed, chart);
+	g_signal_handlers_disconnect_by_func (task, gantt_chart_task_removed, chart);
 }
 
 static gboolean
@@ -1513,8 +1554,13 @@ gantt_chart_tree_node_remove (PlannerGanttChart *chart, TreeNode *node)
 	parent->num_children--;
 	parent->children = g_realloc (parent->children, sizeof (gpointer) * parent->num_children);
 
+	if (g_getenv ("PLANNER_DEBUG_UNDO_TASK")) {
+		g_message ("Cleaning signals for: %s", mrp_task_get_name (node->task));
+	}
+
 	g_signal_handlers_disconnect_by_func (node->task, gantt_chart_relation_added, chart);
 	g_signal_handlers_disconnect_by_func (node->task, gantt_chart_relation_removed, chart);
+	g_signal_handlers_disconnect_by_func (node->task, gantt_chart_task_removed, chart);
 	
 	node->parent = NULL;
 }

@@ -754,6 +754,8 @@ task_remove_subtree_cb (GNode *node, gpointer data)
 	g_node_unlink (priv->node);
 	g_node_unlink (priv->sorted_node);
 
+	mrp_object_removed (MRP_OBJECT (task));
+
 	g_object_unref (task);
 	
 	return FALSE;
