@@ -240,7 +240,7 @@ planner-marshal-main.c: $(built_sources)
 built_sources = planner-marshal.h planner-marshal.c
 
 # an explicit dependency here so all generated files get built
-$(OBJECTS): $(built_sources)
+$(SOURCES): $(built_sources)
 
 EXTRA_DIST = planner-marshal.list
 
