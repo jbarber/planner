@@ -1,3 +1,8 @@
+2004-06-23  Richard Hult  <richard@imendio.com>
+
+	* src/planner-ttable-model.c (ttable_model_resource_removed_cb):
+	Disconnect signals when resources are removed. Fixes bug #141120.
+
 2004-06-22  Richard Hult  <richard@imendio.com>
 
 	* src/planner-window.c: Fix bug #140335, save UI state, based on

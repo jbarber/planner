@@ -745,7 +745,7 @@ ttable_model_resource_assignment_added_cb	(MrpResource	*res,
 	GtkTreeIter		 iter;
 
 	priv = model->priv;
-	
+
 	res_node = g_hash_table_lookup(model->priv->resource2node,res);
 	assign_node = g_node_new(assign);
 	g_node_append(res_node,assign_node);
@@ -808,12 +808,8 @@ ttable_model_resource_added_cb	(MrpProject         *project,
 	GtkTreePath		*path;
 	GtkTreeIter		 iter;
 	
-	g_return_if_fail(MRP_IS_PROJECT(project));
-	g_return_if_fail(MRP_IS_RESOURCE(resource));
-	g_return_if_fail(PLANNER_IS_TTABLE_MODEL(model));
-
 	priv = model->priv;
-	
+
 	g_signal_connect_object(resource,
 				"assignment_added",
 				G_CALLBACK(ttable_model_resource_assignment_added_cb),
@@ -857,11 +853,14 @@ ttable_model_resource_removed_cb (MrpProject         *project,
 	GtkTreePath		*path;
 	/* GtkTreeIter		 iter; */
 
-	g_return_if_fail(MRP_IS_PROJECT(project));
-	g_return_if_fail(MRP_IS_RESOURCE(resource));
-	g_return_if_fail(PLANNER_IS_TTABLE_MODEL(model));
-
 	priv = model->priv;
+
+	g_signal_handlers_disconnect_by_func (resource,
+					      ttable_model_resource_assignment_added_cb,
+					      model);
+	g_signal_handlers_disconnect_by_func (resource,
+					      ttable_model_resource_assignment_removed_cb,
+					      model);
 
 	/*
 	 * Look the resource in the tree
