@@ -31,13 +31,21 @@
 
 static void
 property_model_property_added_cb (MrpProject   *project,
-				  GType         object_type,
+				  GType         owner_type,
 				  MrpProperty  *property,
-				  GtkListStore *store)
+				  MrpPropertyStore  *shop)
 {
 	GtkTreeIter     iter;
 	MrpPropertyType type;
+	GtkListStore    *store;
 
+	if (owner_type != shop->owner_type) {  
+		return;
+	}
+
+	store = shop->store;
+
+	if (store) {
 	type = mrp_property_get_property_type (property);
 	
 	gtk_list_store_append (store, &iter);
@@ -48,6 +56,7 @@ property_model_property_added_cb (MrpProject   *project,
 			    COL_TYPE, mrp_property_type_as_string (type),
 			    COL_PROPERTY, property,
 			    -1);
+	}
 }
 
 static gboolean
@@ -126,7 +135,8 @@ property_model_property_changed_cb (MrpProject   *project,
 
 GtkTreeModel *
 planner_property_model_new (MrpProject *project,
-		       GType       owner_type)
+		            GType      		owner_type,
+			    MrpPropertyStore	*shop)
 {
 	GtkListStore    *store;
 	GList           *properties, *l;
@@ -141,6 +151,9 @@ planner_property_model_new (MrpProject *project,
 				    G_TYPE_POINTER,
 				    G_TYPE_POINTER);
 	
+	shop->store = store;
+	shop->owner_type = owner_type;
+
 	properties = mrp_project_get_properties_from_type (project, 
 							   owner_type);
 
@@ -159,10 +172,15 @@ planner_property_model_new (MrpProject *project,
 				    -1);
 	}
 
+	/* We need to know which store to add the property so we pass the shop 
+	*  reference not the store. The shop is a structure that correlates 
+	*  which store currently holds which owner. We don't have to bother with
+	*  this when changing or removing - just adding.
+	*/ 
 	g_signal_connect (project,
 			  "property_added",
 			  G_CALLBACK (property_model_property_added_cb),
-			  store);
+			  shop);
 	
 	g_signal_connect (project,
 			  "property_removed",

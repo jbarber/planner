@@ -166,6 +166,10 @@ static void    resource_view_property_removed        (MrpProject           *proj
 						      MrpProperty          *property,
 						      PlannerView          *view);
 
+static void    resource_view_property_changed        (MrpProject           *project, 
+						      MrpProperty          *property,
+						      PlannerView          *view);
+
 static void    resource_view_name_data_func          (GtkTreeViewColumn    *tree_column,
 						      GtkCellRenderer      *cell,
 						      GtkTreeModel         *tree_model,
@@ -449,6 +453,11 @@ get_widget (PlannerView *view)
 			  G_CALLBACK (resource_view_property_removed),
 			  view);
 	
+	g_signal_connect (project, 
+			  "property_changed",
+			  G_CALLBACK (resource_view_property_changed),
+			  view);
+
 	g_signal_connect (project, 
 			  "resource_added",
 			  G_CALLBACK (resource_view_resource_added_cb), 
@@ -1046,7 +1055,8 @@ resource_view_edit_custom_props_cb (BonoboUIComponent *component,
 	
 	project = planner_window_get_project (view->main_window);
 	
-	dialog = planner_property_dialog_new (project,
+	dialog = planner_property_dialog_new (view->main_window,
+						project,
 					      MRP_TYPE_RESOURCE,
 					      _("Edit custom resource properties"));
 	
@@ -2016,6 +2026,23 @@ resource_view_property_removed (MrpProject  *project,
 		g_hash_table_remove (priv->property_to_column, property);
 		
 		gtk_tree_view_remove_column (GTK_TREE_VIEW (priv->tree_view), col);
+	}
+}
+
+static void
+resource_view_property_changed (MrpProject  *project, 
+			      MrpProperty *property,
+			      PlannerView *view)
+{
+	PlannerViewPriv   *priv;
+	GtkTreeViewColumn *col;
+
+	priv = view->priv;
+	
+	col = g_hash_table_lookup (priv->property_to_column, property);
+	if (col) {
+		gtk_tree_view_column_set_title (col, 
+					mrp_property_get_label (property));
 	}
 }
 

@@ -4,6 +4,7 @@
  * Copyright (C) 2002 Richard Hult <richard@imendio.com>
  * Copyright (C) 2002 Mikael Hallendal <micke@imendio.com>
  * Copyright (C) 2002 Alvaro del Castillo <acs@barrapunto.com>
+ * Copyright (C) 2004 Lincoln Phipps <lincoln.phipps@openmutual.net>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -48,11 +49,131 @@
 
 
 typedef struct {
-	GtkWidget    *tree;
-	GtkTreeModel *model;
+	PlannerWindow  *main_window;
 	MrpProject   *project;
-	GType         type;
+	GtkTreeModel   *model;
+	GtkWidget      *tree;
+	GType          owner;
+	MrpPropertyStore *shop;
 } PlannerPropertyDialogPriv;
+
+/* Start of REDO/UNDO structures */
+
+typedef struct {
+	PlannerCmd   base;
+	
+	PlannerWindow	  *window;
+	MrpProject        *project;
+	gchar	 	 *name; 
+	MrpPropertyType	  type;
+	gchar	 	 *label_text;
+	gchar	 	 *description;
+	GType		  owner;
+	gboolean	  user_defined;   
+} ProjectPropertyCmdAdd;
+
+typedef struct {
+	PlannerCmd   base;
+	
+	PlannerWindow	  *window;
+	MrpProject        *project;
+	gchar	 	 *name; 
+	MrpPropertyType	  type;
+	gchar	 	 *label_text;
+	gchar	 	 *description;
+	GType		  owner;
+	gboolean	  user_defined;   
+} ProjectPropertyCmdRemove;
+
+typedef struct {
+	PlannerCmd        base;
+
+	PlannerWindow	  *window;
+	MrpProperty	 *property;
+	gchar            *old_text;
+	gchar  	     	 *new_text;
+} ProjectPropertyCmdLabelEdited;
+
+
+/* End of REDO/UNDO structures */
+
+static void	property_dialog_setup_option_menu 	(GtkWidget     *option_menu,
+				   			GCallback      func,
+				   			gpointer       user_data,
+				   			gconstpointer  str1, ...);
+						
+
+static gint	property_dialog_get_selected 		(GtkWidget *option_menu);
+
+static void	property_dialog_close_cb 		(GtkWidget *button,
+							GtkWidget *dialog);
+static void	property_dialog_type_selected_cb 	(GtkWidget *widget,
+							GtkWidget *dialog);
+static gboolean	property_dialog_label_changed_cb 	(GtkWidget *label_entry,
+							GdkEvent  *event,
+							GtkWidget *name_entry);
+				  
+static void	property_dialog_add_cb 			(GtkWidget *button,
+							GtkWidget *dialog);
+
+static void	property_dialog_remove_cb 		(GtkWidget *button, 
+							GtkWidget *dialog);
+
+static void  	property_dialog_label_edited 		(GtkCellRendererText *cell, 
+						      	gchar               *path_str,
+						      	gchar               *new_text, 
+			      				GtkWidget           *dialog);
+     
+
+static void	property_dialog_setup_list 		(GtkWidget *dialog,
+							guint      cols);
+	
+static void	property_dialog_setup_widgets 		(GtkWidget *dialog,
+						       GladeXML  *glade);
+			       
+GtkWidget 	*planner_property_dialog_new 		(PlannerWindow *main_window,
+							MrpProject     *project,
+							GType          owner,
+							const gchar    *title);
+
+void  		planner_property_dialog_value_edited 	(GtkCellRendererText *cell, 
+							 gchar               *path_str,
+							 gchar               *new_text, 
+				 			gpointer             data);
+				 							
+/* Start of UNDO/REDO Proptotypes */
+
+static PlannerCmd *project_property_cmd_add 		(PlannerWindow *window,
+							MrpProject	*project,
+							GType		owner,
+							const gchar 	*name,
+							MrpPropertyType type,
+							const gchar     *label_text,
+							const gchar     *description,
+							gboolean	user_defined);
+
+static gboolean	project_property_cmd_add_do 		(PlannerCmd *cmd_base);
+static void	project_property_cmd_add_undo 		(PlannerCmd *cmd_base);
+static void	project_property_cmd_add_free 		(PlannerCmd *cmd_base);
+
+
+static PlannerCmd *project_property_cmd_remove 		(PlannerWindow *window,
+							MrpProject	*project,
+							GType		owner,
+							const gchar 	*name);
+static gboolean	project_property_cmd_remove_do 		(PlannerCmd *cmd_base);
+static void	project_property_cmd_remove_undo 	(PlannerCmd *cmd_base);
+static void	project_property_cmd_remove_free 	(PlannerCmd *cmd_base);
+
+
+static PlannerCmd *project_property_cmd_label_edited 	(PlannerWindow *window,
+							MrpProperty	*property,
+							const gchar 	*new_text);
+static gboolean	project_property_cmd_label_edited_do 	(PlannerCmd *cmd_base);
+static void	project_property_cmd_label_edited_undo 	(PlannerCmd *cmd_base);
+static void	project_property_cmd_label_edited_free 	(PlannerCmd *cmd_base);
+
+/* End of UNDO/REDO Prototypes */
 
 static void
 property_dialog_setup_option_menu (GtkWidget     *option_menu,
@@ -132,6 +253,7 @@ property_dialog_type_selected_cb (GtkWidget *widget,
 	g_object_set_data (G_OBJECT (dialog), "type", GINT_TO_POINTER (type));
 }
 
+/* Note used for UNDO/REDO just for intra dialog work before the CLOSE button hit */
 static gboolean
 property_dialog_label_changed_cb (GtkWidget *label_entry,
 				  GdkEvent  *event,
@@ -155,7 +277,6 @@ property_dialog_add_cb (GtkWidget *button,
 			GtkWidget *dialog)
 {
 	PlannerPropertyDialogPriv *priv;
-	MrpProperty          *property;
 	MrpPropertyType       type;
 	const gchar          *label;
 	const gchar          *name;
@@ -167,6 +288,8 @@ property_dialog_add_cb (GtkWidget *button,
 	GtkWidget            *w;
 	gint                  response;
 	gboolean              finished = FALSE;
+	
+	ProjectPropertyCmdAdd *cmd;
 	
 	priv = GET_PRIV (dialog);
 
@@ -241,17 +364,17 @@ property_dialog_add_cb (GtkWidget *button,
 			
 			type = property_dialog_get_selected (w);
 
+			/* Intercept property addition for undo/redo here */
 			if (type != MRP_PROPERTY_TYPE_NONE) {
-				property = mrp_property_new (name, 
+
+				cmd = (ProjectPropertyCmdAdd*) project_property_cmd_add (priv->main_window,
+											 priv->project, 
+											priv->owner, 
+											name, 
 							     type,
 							     label,
 							     description,
 							     TRUE);
-
-				mrp_project_add_property (priv->project, 
-							  priv->type,
-							  property,
-							  TRUE);	
 			}
 
 			finished = TRUE;
@@ -280,6 +403,8 @@ property_dialog_remove_cb (GtkWidget *button, GtkWidget *dialog)
 	GtkWidget            *remove_dialog;
 	gint                  response;
 
+	ProjectPropertyCmdRemove *cmd;
+		
 	priv = GET_PRIV (dialog);
 
 	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (priv->tree));
@@ -305,9 +430,12 @@ property_dialog_remove_cb (GtkWidget *button, GtkWidget *dialog)
 
 	switch (response) {
 	case GTK_RESPONSE_YES:
-		mrp_project_remove_property (priv->project,
-					     priv->type,
+
+		cmd = (ProjectPropertyCmdRemove*) project_property_cmd_remove (priv->main_window,
+										priv->project, 
+										priv->owner, 
 					     name);
+
 		break;
 
 	case GTK_RESPONSE_DELETE_EVENT:
@@ -334,6 +462,7 @@ property_dialog_label_edited (GtkCellRendererText *cell,
 	GtkTreeIter           iter;
 	GtkTreeModel         *model;
 	MrpProperty          *property;
+	ProjectPropertyCmdLabelEdited *cmd;
 	
 	priv = GET_PRIV (dialog);
 
@@ -346,7 +475,9 @@ property_dialog_label_edited (GtkCellRendererText *cell,
 			    COL_PROPERTY, &property,
 			    -1);
 
-	mrp_property_set_label (property, new_text);
+	cmd = (ProjectPropertyCmdLabelEdited*) project_property_cmd_label_edited (priv->main_window, 
+										property, 
+										new_text);
 
 	gtk_tree_path_free (path);
 }
@@ -442,8 +573,10 @@ property_dialog_setup_list (GtkWidget *dialog,
 #endif
 	}
 
+	/* Create the shop (a type of store) */
+	priv->shop = g_new0 (MrpPropertyStore, 1);
 	
-	model = planner_property_model_new (priv->project, priv->type);
+	model = planner_property_model_new (priv->project, priv->owner, priv->shop);
 	priv->model = model;
 	
 	gtk_tree_view_set_model (tree, model);
@@ -483,8 +616,9 @@ property_dialog_setup_widgets (GtkWidget *dialog,
 }
 
 GtkWidget *
-planner_property_dialog_new (MrpProject  *project,
-			GType        owner_type,
+planner_property_dialog_new 	(PlannerWindow   *main_window,
+				MrpProject       *project,
+				GType            owner,
 			const gchar *title)
 {
 	GladeXML             *glade;
@@ -504,8 +638,9 @@ planner_property_dialog_new (MrpProject  *project,
 	
 	g_object_set_data (G_OBJECT (dialog), "priv", priv);
 
-	priv->type = owner_type;
+	priv->main_window = main_window;
 	priv->project = project;
+	priv->owner = owner;
 	
 	property_dialog_setup_widgets (dialog, glade);
 
@@ -545,3 +680,303 @@ planner_property_dialog_value_edited (GtkCellRendererText *cell,
 
 	gtk_tree_path_free (path);
 }
+
+
+/* Start of UNDO/REDO routines */
+
+static gboolean
+project_property_cmd_add_do (PlannerCmd *cmd_base)
+{
+	ProjectPropertyCmdAdd   *cmd;
+	MrpProperty		*property;
+		
+	cmd = (ProjectPropertyCmdAdd*) cmd_base;
+
+	if (cmd->name == NULL) {
+		return FALSE;
+	}
+
+	property = mrp_property_new (cmd->name, 
+				     cmd->type,
+				     cmd->label_text,
+				     cmd->description,
+				     cmd->user_defined);
+			
+	mrp_project_add_property (cmd->project, 
+				  cmd->owner,
+				  property,
+				  cmd->user_defined);	
+		
+	/* This functions as a simple success check for the REDO/UNDO stuff. Check if its added. */
+	if (!mrp_project_has_property (cmd->project, cmd->owner, cmd->name)) {
+ 		g_warning ("%s: object of type '%s' still has no property named '%s'",
+			   G_STRLOC,
+			   g_type_name (cmd->owner),
+			   cmd->name);
+		return FALSE;
+	}
+	
+	return TRUE; 
+	
+}
+
+static void
+project_property_cmd_add_undo (PlannerCmd *cmd_base)
+{
+	ProjectPropertyCmdAdd *cmd;
+		
+	cmd = (ProjectPropertyCmdAdd*) cmd_base;
+
+	if (cmd->name != NULL) {
+	
+		mrp_project_remove_property (cmd->project, 
+				  	     cmd->owner,
+				  	     cmd->name);
+			
+	/* This functions as a simple success check for the REDO/UNDO stuff. Check if its removed. */
+		if (mrp_project_has_property (cmd->project, cmd->owner, cmd->name)) {
+ 			g_warning ("%s: object of type '%s' still has the property named '%s'",
+				   G_STRLOC,
+			   	   g_type_name (cmd->owner),
+			   	   cmd->name);
+		}
+	}	
+}
+
+
+static void
+project_property_cmd_add_free (PlannerCmd *cmd_base)
+{
+	ProjectPropertyCmdAdd  *cmd;
+
+	cmd = (ProjectPropertyCmdAdd*) cmd_base;	
+
+	g_free (cmd->name);
+	g_free (cmd->label_text);
+	g_free (cmd->description);
+	cmd->project = NULL;
+	cmd->window = NULL;
+}
+
+static 
+PlannerCmd *
+project_property_cmd_add 	(PlannerWindow *window,
+				MrpProject	*project,
+				GType		owner,
+				const gchar 	*name,
+				MrpPropertyType type,
+				const gchar     *label_text,
+				const gchar     *description,
+				gboolean	user_defined)
+{
+	PlannerCmd      *cmd_base;
+	ProjectPropertyCmdAdd  *cmd;
+
+	cmd_base = planner_cmd_new (ProjectPropertyCmdAdd,
+				   _("Add property"),
+				   project_property_cmd_add_do,
+				   project_property_cmd_add_undo,
+				   project_property_cmd_add_free);
+
+	cmd = (ProjectPropertyCmdAdd *) cmd_base;
+
+	cmd->window = window;
+	cmd->project = project;
+	cmd->owner = owner;
+	cmd->name = g_strdup (name);
+	cmd->type = type;
+	cmd->label_text = g_strdup (label_text);
+	cmd->description = g_strdup (description);
+	cmd->user_defined = user_defined;
+
+	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager (window),
+					   cmd_base);
+
+	return cmd_base;
+}
+
+
+static gboolean
+project_property_cmd_remove_do (PlannerCmd *cmd_base)
+{
+	ProjectPropertyCmdRemove *cmd;
+
+	cmd = (ProjectPropertyCmdRemove*) cmd_base;
+	
+	if (!mrp_project_has_property (cmd->project, cmd->owner, cmd->name)) {
+ 		g_warning ("%s: object of type '%s' has no property named '%s' to remove",
+			   G_STRLOC,
+			   g_type_name (cmd->owner),
+			   cmd->name);
+		return FALSE;
+	}
+
+	mrp_project_remove_property (cmd->project,
+				     cmd->owner,
+				     cmd->name);
+
+	return TRUE;
+}
+
+
+static void
+project_property_cmd_remove_undo (PlannerCmd *cmd_base)
+{
+	ProjectPropertyCmdRemove *cmd;
+	MrpProperty  *property;
+	
+	cmd = (ProjectPropertyCmdRemove*) cmd_base;
+
+	if (cmd->name != NULL) {
+	
+		property = mrp_property_new (cmd->name, 
+				     cmd->type,
+				     cmd->label_text,
+				     cmd->description,
+				     cmd->user_defined);
+			
+		mrp_project_add_property (cmd->project, 
+				  cmd->owner,
+				  property,
+				  cmd->user_defined);
+				  
+			
+	/* This functions as a simple success check for the REDO/UNDO stuff. Check if its removed. */
+		if (!mrp_project_has_property (cmd->project, cmd->owner, cmd->name)) {
+ 			g_warning ("%s: object of type '%s' property named '%s' not restored.",
+				   G_STRLOC,
+			   	   g_type_name (cmd->owner),
+			   	   cmd->name);
+		}
+	}	
+}
+
+static void
+project_property_cmd_remove_free (PlannerCmd *cmd_base)
+{
+	ProjectPropertyCmdRemove *cmd;
+
+	cmd = (ProjectPropertyCmdRemove*) cmd_base;
+
+	g_free (cmd->name);
+	g_free (cmd->label_text);
+	g_free (cmd->description);
+	cmd->project = NULL;
+	cmd->window = NULL;
+}
+
+static PlannerCmd *
+project_property_cmd_remove 	(PlannerWindow *window,
+				MrpProject	*project,
+				GType		owner,
+				const gchar 	*name)
+{
+	PlannerCmd      *cmd_base;
+	ProjectPropertyCmdRemove  *cmd;
+	MrpProperty     *property;
+
+	cmd_base = planner_cmd_new (ProjectPropertyCmdRemove,
+				   _("Add property"),
+				   project_property_cmd_remove_do,
+				   project_property_cmd_remove_undo,
+				   project_property_cmd_remove_free);
+
+	cmd = (ProjectPropertyCmdRemove *) cmd_base;
+
+	cmd->window = window;
+	cmd->project = project;
+	cmd->owner   = owner;
+	cmd->name = g_strdup (name);
+	/* Now remember also the old data so we can undo the remove */
+	property = mrp_project_get_property (project,
+					     name,
+					     owner);
+					     
+	cmd->type = mrp_property_get_property_type (property);
+	cmd->description = g_strdup (mrp_property_get_description (property));
+	cmd->label_text = g_strdup ( mrp_property_get_label (property));
+	cmd->user_defined = mrp_property_get_user_defined (property);
+
+	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager (window),
+					   cmd_base);
+
+	return cmd_base;
+}
+
+/* Label Edited Routine */
+
+static gboolean
+project_property_cmd_label_edited_do (PlannerCmd *cmd_base)
+{
+	ProjectPropertyCmdLabelEdited *cmd;
+
+	cmd = (ProjectPropertyCmdLabelEdited*) cmd_base;
+	
+	if (!cmd->property) {
+		return FALSE;
+	}
+	
+	mrp_property_set_label (cmd->property, cmd->new_text);
+		
+	return TRUE;
+}
+
+
+static void
+project_property_cmd_label_edited_undo (PlannerCmd *cmd_base)
+{
+	ProjectPropertyCmdLabelEdited *cmd;
+		
+	cmd = (ProjectPropertyCmdLabelEdited*) cmd_base;
+
+	if (cmd->property != NULL) {
+
+	mrp_property_set_label (cmd->property, cmd->old_text);	
+	
+	}
+}
+
+static void
+project_property_cmd_label_edited_free (PlannerCmd *cmd_base)
+{
+	ProjectPropertyCmdLabelEdited *cmd;
+
+	cmd = (ProjectPropertyCmdLabelEdited*) cmd_base;
+
+	g_free (cmd->old_text);
+	g_free (cmd->new_text);
+	cmd->property = NULL;  
+	cmd->window = NULL;
+}
+
+static PlannerCmd *
+project_property_cmd_label_edited 	(PlannerWindow *window,
+					MrpProperty	*property,
+					const gchar 	*new_text)
+{
+	PlannerCmd      *cmd_base;
+	ProjectPropertyCmdLabelEdited  *cmd;
+
+	cmd_base = planner_cmd_new (ProjectPropertyCmdLabelEdited,
+				   _("Add property"),
+				   project_property_cmd_label_edited_do,
+				   project_property_cmd_label_edited_undo,
+				   project_property_cmd_label_edited_free);
+
+	cmd = (ProjectPropertyCmdLabelEdited *) cmd_base;
+
+	cmd->window = window;
+	cmd->property = property;
+	cmd->new_text = g_strdup (new_text);
+		
+	/* Now remember also the old data so we can undo the label edit */
+
+	cmd->old_text = g_strdup ( mrp_property_get_label (property));
+	
+	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager (window),
+					   cmd_base);
+
+	return cmd_base;
+}
+
+/* end of UNDO/REDO routines */

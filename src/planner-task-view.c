@@ -474,7 +474,8 @@ task_view_edit_custom_props_cb (BonoboUIComponent *component,
 	
 	project = planner_window_get_project (view->main_window);
 	
-	dialog = planner_property_dialog_new (project,
+	dialog = planner_property_dialog_new (view->main_window,
+					 project,
 					 MRP_TYPE_TASK,
 					 _("Edit custom task properties"));
 	

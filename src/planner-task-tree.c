@@ -2376,6 +2376,23 @@ task_tree_property_removed (MrpProject       *project,
 	}
 }
 
+static void
+task_tree_property_changed (MrpProject  *project,
+			    MrpProperty *property,
+			    PlannerTaskTree  *task_tree)
+{
+	PlannerTaskTreePriv *priv;
+	GtkTreeViewColumn   *col;
+
+	priv = task_tree->priv;
+	
+	col = g_hash_table_lookup (priv->property_to_column, property);
+	if (col) {
+		gtk_tree_view_column_set_title (col, 
+				mrp_property_get_label (property));
+	}
+}
+
 void
 planner_task_tree_set_model (PlannerTaskTree   *tree,
 			     PlannerGanttModel *model)
@@ -2446,6 +2463,11 @@ task_tree_setup_tree_view (GtkTreeView       *tree,
 		g_signal_connect (project,
 				  "property_removed",
 				  G_CALLBACK (task_tree_property_removed),
+				  tree);
+
+		g_signal_connect (project,
+				  "property_changed",
+				  G_CALLBACK (task_tree_property_changed),
 				  tree);
 	}
 }

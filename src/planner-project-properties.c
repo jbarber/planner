@@ -1,10 +1,11 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
- * Copyright (C) 2003      Imendio HB
  * Copyright (C) 2001-2002 CodeFactory AB
  * Copyright (C) 2001-2002 Richard Hult <richard@imendio.com>
  * Copyright (C) 2001-2002 Mikael Hallendal <micke@imendio.com>
  * Copyright (C) 2001-2002 Alvaro del Castillo <acs@barrapunto.com>
+ * Copyright (C) 2003-2004 Imendio HB
+ * Copyright (C) 2004      Lincoln Phipps <lincoln.phipps@openmutual.net>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -52,6 +53,41 @@ typedef struct {
 	GtkWidget     *remove_property_button;
 } DialogData;
 
+typedef struct {
+	PlannerCmd       base;
+	
+	MrpProject      *project;
+	gchar	 	*name; 
+	MrpPropertyType	 type;
+	gchar	 	*label;
+	gchar	 	*description;
+	GType		 owner;
+	gboolean	 user_defined;   
+} PropertyCmdAdd;
+
+typedef struct {
+	PlannerCmd       base;
+	
+	MrpProject      *project;
+	gchar	 	*name; 
+	MrpPropertyType	 type;
+	gchar	 	*label;
+	gchar	 	*description;
+	GType		 owner;
+	gboolean	 user_defined; 
+	gchar           *old_text;  
+} PropertyCmdRemove;
+
+typedef struct {
+	PlannerCmd       base;
+
+	MrpProject      *project;
+	MrpProperty	*property;
+	gchar           *old_text;
+	gchar  	     	*new_text;
+} PropertyCmdValueEdited;
+
+
 #define DIALOG_GET_DATA(d) g_object_get_data ((GObject*)d, "data")
 
 static void     mpp_select_calendar_clicked_cb        (GtkWidget           *button,
@@ -95,11 +131,11 @@ static void     mpp_phase_option_menu_changed_cb      (GtkOptionMenu       *opti
 static void     mpp_project_phases_notify_cb          (MrpProject          *project,
 						       GParamSpec          *pspec,
 						       GtkWidget           *dialog);
-static void     mpp_phase_set_from_widget             (GtkWidget *dialog);
+static void     mpp_phase_set_from_widget             (GtkWidget           *dialog);
 
-static void     mpp_project_phase_notify_cb          (MrpProject          *project,
-						      GParamSpec          *pspec,
-						      GtkWidget           *dialog);
+static void     mpp_project_phase_notify_cb           (MrpProject          *project,
+						       GParamSpec          *pspec,
+						       GtkWidget           *dialog);
 static void     mpp_setup_phases                      (DialogData          *data);
 static void     mpp_set_phase                         (DialogData          *data,
 						       const gchar         *phase);
@@ -121,6 +157,10 @@ static void     mpp_property_added                    (MrpProject          *proj
 static void     mpp_property_removed                  (MrpProject          *project,
 						       MrpProperty         *property,
 						       GtkWidget           *dialog);
+static void     mpp_property_changed                  (MrpProject          *project,
+						       GType               object_type,
+						       MrpProperty         *property,
+						       GtkWidget           *dialog);
 static void     mpp_add_property_button_clicked_cb    (GtkButton           *button,
 						       GtkWidget           *dialog);
 static void     mpp_remove_property_button_clicked_cb (GtkButton           *button,
@@ -129,7 +169,37 @@ static void     mpp_property_value_edited             (GtkCellRendererText *cell
 						       gchar               *path_string,
 						       gchar               *new_text,
 						       GtkWidget           *dialog);
+const char     *mpp_project_property_get_value_string (MrpProject  	   *project,
+						       MrpProperty 	   *property);
+static gboolean	mpp_project_property_set_value_string (MrpProject  	   *project,
+						       MrpProperty  	   *property,
+						       gchar  		   *text);
 
+static PlannerCmd *property_cmd_add               (PlannerWindow   *window,
+						   MrpProject      *project,
+						   GType            owner,
+						   const gchar     *name,
+						   MrpPropertyType  type,
+						   const gchar     *label,
+						   const gchar     *description,
+						   gboolean         user_defined);
+static gboolean    property_cmd_add_do            (PlannerCmd      *cmd_base);
+static void        property_cmd_add_undo          (PlannerCmd      *cmd_base);
+static void        property_cmd_add_free          (PlannerCmd      *cmd_base);
+static PlannerCmd *property_cmd_remove            (PlannerWindow   *window,
+						   MrpProject      *project,
+						   GType            owner,
+						   const gchar     *name);
+static gboolean    property_cmd_remove_do         (PlannerCmd      *cmd_base);
+static void        property_cmd_remove_undo       (PlannerCmd      *cmd_base);
+static void        property_cmd_remove_free       (PlannerCmd      *cmd_base);
+static PlannerCmd *property_cmd_value_edited      (PlannerWindow   *window,
+						   MrpProject      *project,
+						   MrpProperty     *property,
+						   const gchar     *new_text);
+static gboolean    property_cmd_value_edited_do   (PlannerCmd      *cmd_base);
+static void        property_cmd_value_edited_undo (PlannerCmd      *cmd_base);
+static void        property_cmd_value_edited_free (PlannerCmd      *cmd_base);
 
 
 enum {
@@ -379,6 +449,11 @@ mpp_connect_to_project (MrpProject *project, GtkWidget *dialog)
 				 G_CALLBACK (mpp_property_removed),
 				 dialog,
 				 0);
+	g_signal_connect_object (project,
+				 "property_changed",
+				 G_CALLBACK (mpp_property_changed),
+				 dialog,
+				 0);
 }
 
 static void  
@@ -420,8 +495,8 @@ mpp_name_focus_out_event_cb (GtkWidget *widget,
 
 static void  
 mpp_project_org_notify_cb (MrpProject *project,  
-				    GParamSpec *pspec, 
-				    GtkWidget *dialog)
+			   GParamSpec *pspec, 
+			   GtkWidget *dialog)
 {
 	DialogData *data;
 	gchar      *org;
@@ -854,8 +929,8 @@ mpp_property_value_data_func (GtkTreeViewColumn *tree_column,
 				NULL); 
 
 /*		work = mrp_calendar_day_get_total_work (
-			mrp_project_get_calendar (tree->priv->project),
-			mrp_day_get_work ());
+		mrp_project_get_calendar (tree->priv->project),
+		mrp_day_get_work ());
 */
 		work = 8*60*60;
 
@@ -889,8 +964,6 @@ mpp_property_added (MrpProject  *project,
 	GtkTreeModel *model;
 	GtkTreeIter   iter;
 	
-	g_return_if_fail (GTK_IS_DIALOG (dialog));
-	
 	model = gtk_tree_view_get_model (data->properties_tree);
 
 	if (object_type != MRP_TYPE_PROJECT ||
@@ -898,9 +971,9 @@ mpp_property_added (MrpProject  *project,
  		return;
 	}
 /*	
-	if (gtk_tree_view_get_model (data->properties_tree) != model) {
-		return;
-	}
+  if (gtk_tree_view_get_model (data->properties_tree) != model) {
+  return;
+  }
 */
 	gtk_list_store_append (GTK_LIST_STORE (model), &iter);
 	gtk_list_store_set (GTK_LIST_STORE (model),
@@ -969,6 +1042,46 @@ mpp_property_removed (MrpProject  *project,
 	}
 	
 	g_free (find_data);
+}
+
+static void
+mpp_property_changed (MrpProject   *project, 
+		      GType          object_type,
+		      MrpProperty    *property,
+		      GtkWidget      *dialog)
+{
+	DialogData       *data;
+	GtkTreeModel     *model;
+	PropertyFindData *find_data;
+	
+	/* Check for NULL here and shift the check for GTK_IS_DIALOG further in.
+	 * The problem is with property_changed due to the way that there are 
+	 *  3 types of properties so if you have different dialogs opened the 
+	 *  wrong data can upset the open dialogs.
+	 */ 
+	
+	if (object_type == MRP_TYPE_PROJECT) {
+		data = DIALOG_GET_DATA (dialog);
+		model = gtk_tree_view_get_model (data->properties_tree);
+	
+		find_data = g_new0 (PropertyFindData, 1);
+		find_data->property = property;
+		find_data->found_path = NULL;
+		find_data->found_iter = NULL;
+	
+		gtk_tree_model_foreach (model,
+					(GtkTreeModelForeachFunc) mpp_property_find,
+					find_data);
+
+		if (find_data->found_path) {
+			gtk_tree_model_row_changed (model,
+						    find_data->found_path,
+						    find_data->found_iter);
+		}
+		if (find_data) {
+			g_free (find_data);
+		}
+	}
 }
 
 static gboolean
@@ -1063,7 +1176,6 @@ static void
 mpp_add_property_button_clicked_cb (GtkButton *button, GtkWidget *dialog)
 {
 	DialogData      *data = DIALOG_GET_DATA (dialog);
-	MrpProperty     *property;
 	MrpPropertyType  type;
 	const gchar     *label;
 	const gchar     *name;
@@ -1124,7 +1236,8 @@ mpp_add_property_button_clicked_cb (GtkButton *button, GtkWidget *dialog)
 				finished = FALSE;
 				break;
 			}
-			
+
+			/* FIXME: This is broken wrt UTF-8. */
 			if (!isalpha(name[0])) {
 				GtkWidget *dialog;
 				
@@ -1132,7 +1245,8 @@ mpp_add_property_button_clicked_cb (GtkButton *button, GtkWidget *dialog)
 								 GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
 								 GTK_MESSAGE_WARNING,
 								 GTK_BUTTONS_OK,
-								 _("The name of the custom property needs to start with a letter."));
+								 _("The name of the custom property needs to "
+								   "start with a letter."));
 				gtk_dialog_run (GTK_DIALOG (dialog));
 				gtk_widget_destroy (dialog);
 				
@@ -1148,18 +1262,16 @@ mpp_add_property_button_clicked_cb (GtkButton *button, GtkWidget *dialog)
 			type = mpp_property_dialog_get_selected (w);
 
 			if (type != MRP_PROPERTY_TYPE_NONE) {
-				property = mrp_property_new (name, 
-							     type,
-							     label,
-							     description,
-							     TRUE);
-
-				mrp_project_add_property (data->project, 
-							  MRP_TYPE_PROJECT,
-							  property,
-							  TRUE);	
+				property_cmd_add (data->main_window,
+						  data->project, 
+						  MRP_TYPE_PROJECT, 
+						  name, 
+						  type,
+						  label,
+						  description,
+						  TRUE);
 			}
-
+			
 			finished = TRUE;
 			break;
 			
@@ -1212,11 +1324,12 @@ mpp_remove_property_button_clicked_cb (GtkButton *button, GtkWidget *dialog)
 
 	switch (response) {
 	case GTK_RESPONSE_YES:
-		mrp_project_remove_property (data->project,
-					     MRP_TYPE_PROJECT,
-					     mrp_property_get_name (property));
+		property_cmd_remove (data->main_window,
+				     data->project,  
+				     MRP_TYPE_PROJECT,
+				     mrp_property_get_name (property));
 		break;
-
+		
 	case GTK_RESPONSE_DELETE_EVENT:
 	case GTK_RESPONSE_CANCEL:
 		break;
@@ -1240,8 +1353,6 @@ mpp_property_value_edited (GtkCellRendererText *cell,
 	GtkTreeModel    *model;
 	MrpProperty     *property;
 	MrpProject      *project;
-	MrpPropertyType  type;
-	gfloat           fvalue;
 	
 	model = gtk_tree_view_get_model (data->properties_tree);
 	project = data->project;
@@ -1253,59 +1364,11 @@ mpp_property_value_edited (GtkCellRendererText *cell,
 			    COL_PROPERTY, &property,
 			    -1);
 	
-	type = mrp_property_get_property_type (property);
-	switch (type) {
-	case MRP_PROPERTY_TYPE_STRING:
-		mrp_object_set (MRP_OBJECT (project),
-				mrp_property_get_name (property), 
-				new_text,
-				NULL);
-		break;
-	case MRP_PROPERTY_TYPE_INT:
-		mrp_object_set (MRP_OBJECT (project),
-				mrp_property_get_name (property), 
-				atoi (new_text),
-				NULL);
-		break;
-	case MRP_PROPERTY_TYPE_FLOAT:
-		fvalue = g_ascii_strtod (new_text, NULL);
-		mrp_object_set (MRP_OBJECT (project),
-				mrp_property_get_name (property), 
-				fvalue,
-				NULL);
-		break;
-
-	case MRP_PROPERTY_TYPE_DURATION:
-		/* FIXME: support reading units etc... */
-		mrp_object_set (MRP_OBJECT (project),
-				mrp_property_get_name (property), 
-				atoi (new_text) *8*60*60,
-				NULL);
-		break;
-		
-
-	case MRP_PROPERTY_TYPE_DATE:
-/* 		date = PLANNER_CELL_RENDERER_DATE (cell); */
-/* 		mrp_object_set (MRP_OBJECT (project), */
-/* 				mrp_property_get_name (property),  */
-/* 				&(date->time), */
-/* 				NULL); */
-		break;
-	case MRP_PROPERTY_TYPE_COST:
-		fvalue = g_ascii_strtod (new_text, NULL);
-		mrp_object_set (MRP_OBJECT (project),
-				mrp_property_get_name (property), 
-				fvalue,
-				NULL);
-		break;
-	case MRP_PROPERTY_TYPE_STRING_LIST:
-		/* FIXME: Should string-list still be around? */
-		break;
-	default:
-		g_assert_not_reached ();
-		break;
-	}
-
+	property_cmd_value_edited (data->main_window, 
+				   project,
+				   property, 
+				   new_text);
+	
 	gtk_tree_path_free (path);
 }
 
@@ -1464,4 +1527,473 @@ planner_project_properties_new (PlannerWindow *window)
 
 	return dialog;
 }
+
+
+
+/*
+ * Gets the value of a MrpProperty and converts to a string.
+ * 
+ * Return value: A const char *, if found, otherwise NULL.
+ * NOTES: This can't be made part of mrp-project.c as it uses planner-format.h 
+ * and thats not in libplanner so a bit messy. Its obviously not able to be in
+ * mrp-properties.c as thats common to all projects and not just one. So this'll
+ * have to stay here for now.
+ *
+ */
+ 
+const char *
+mpp_project_property_get_value_string (MrpProject  *project,
+				       MrpProperty *property)
+{
+	MrpPropertyType  type;
+	gchar           *svalue;
+	gint             ivalue;
+	gfloat           fvalue;
+	gint             work;
+	
+	g_return_val_if_fail (MRP_IS_PROJECT (project), NULL);
+	g_return_val_if_fail (property != NULL, NULL);
+
+	type = mrp_property_get_property_type (property);
+
+	switch (type) {
+	case MRP_PROPERTY_TYPE_STRING:
+		mrp_object_get (project,
+				mrp_property_get_name (property), &svalue,
+				NULL);
+		
+		if (svalue == NULL) {
+			svalue = g_strdup ("");
+		}		
+
+		break;
+	case MRP_PROPERTY_TYPE_INT:
+		mrp_object_get (project,
+				mrp_property_get_name (property), &ivalue,
+				NULL);
+		svalue = g_strdup_printf ("%d", ivalue);
+		break;
+
+	case MRP_PROPERTY_TYPE_FLOAT:
+		mrp_object_get (project,
+				mrp_property_get_name (property), &fvalue,
+				NULL);
+
+		svalue = planner_format_float (fvalue, 4, FALSE);
+		break;
+
+	case MRP_PROPERTY_TYPE_DATE:
+		svalue = g_strdup ("");
+		
+		
+/* 		mrp_object_get (data->project, */
+/* 				mrp_property_get_name (property), &tvalue, */
+/* 				NULL);  */
+/* 		svalue = planner_format_date (tvalue); */
+		break;
+		
+	case MRP_PROPERTY_TYPE_DURATION:
+		mrp_object_get (project,
+				mrp_property_get_name (property), &ivalue,
+				NULL); 
+
+/*		work = mrp_calendar_day_get_total_work (
+		mrp_project_get_calendar (tree->priv->project),
+		mrp_day_get_work ());
+*/
+		work = 8*60*60;
+
+		svalue = planner_format_duration (ivalue, work / (60*60));
+		break;
+		
+	case MRP_PROPERTY_TYPE_COST:
+		mrp_object_get (project,
+				mrp_property_get_name (property), &fvalue,
+				NULL); 
+
+		svalue = planner_format_float (fvalue, 2, FALSE);
+		break;
+				
+	default:
+		g_warning ("Property type not implemented.");
+		break;
+	}
+	return ((const char *) svalue);
+}
+
+static gboolean
+mpp_project_property_set_value_string (MrpProject  *project,
+			  	       MrpProperty *property,
+				       gchar  	   *text)
+{
+	MrpPropertyType type;
+	gfloat		fvalue;
+	
+	type = mrp_property_get_property_type (property);
+	switch (type) {
+	case MRP_PROPERTY_TYPE_STRING:
+		mrp_object_set (MRP_OBJECT (project),
+				mrp_property_get_name (property), 
+				text,
+				NULL);
+		break;
+	case MRP_PROPERTY_TYPE_INT:
+		mrp_object_set (MRP_OBJECT (project),
+				mrp_property_get_name (property), 
+				atoi (text),
+				NULL);
+		break;
+	case MRP_PROPERTY_TYPE_FLOAT:
+		fvalue = g_ascii_strtod (text, NULL);
+		mrp_object_set (MRP_OBJECT (project),
+				mrp_property_get_name (property), 
+				fvalue,
+				NULL);
+		break;
+
+	case MRP_PROPERTY_TYPE_DURATION:
+		/* FIXME: support reading units etc... */
+		mrp_object_set (MRP_OBJECT (project),
+				mrp_property_get_name (property), 
+				atoi (text) *8*60*60,
+				NULL);
+		break;
+		
+	case MRP_PROPERTY_TYPE_DATE:
+		/* 		date = PLANNER_CELL_RENDERER_DATE (cell); */
+		/* 		mrp_object_set (MRP_OBJECT (project), */
+		/* 				mrp_property_get_name (property),  */
+		/* 				&(date->time), */
+		/* 				NULL); */
+		break;
+	case MRP_PROPERTY_TYPE_COST:
+		fvalue = g_ascii_strtod (text, NULL);
+		mrp_object_set (MRP_OBJECT (project),
+				mrp_property_get_name (property), 
+				fvalue,
+				NULL);
+		break;
+	case MRP_PROPERTY_TYPE_STRING_LIST:
+		/* FIXME: Should string-list still be around? */
+		break;
+	default:
+		g_assert_not_reached ();
+		return (FALSE);
+		break;
+	}
+	return (TRUE);
+}
+		
+
+/* Start of UNDO/REDO routines */
+
+static gboolean
+property_cmd_add_do (PlannerCmd *cmd_base)
+{
+	PropertyCmdAdd   *cmd;
+	MrpProperty		*property;
+		
+	cmd = (PropertyCmdAdd*) cmd_base;
+
+	if (cmd->name == NULL) {
+		return FALSE;
+	}
+
+	property = mrp_property_new (cmd->name, 
+				     cmd->type,
+				     cmd->label,
+				     cmd->description,
+				     cmd->user_defined);
+			
+	mrp_project_add_property (cmd->project, 
+				  cmd->owner,
+				  property,
+				  cmd->user_defined);	
+		
+	/* This functions as a simple success check for the REDO/UNDO stuff. Check if its added. */
+	if (!mrp_project_has_property (cmd->project, cmd->owner, cmd->name)) {
+ 		g_warning ("%s: object of type '%s' still has no property named '%s'",
+			   G_STRLOC,
+			   g_type_name (cmd->owner),
+			   cmd->name);
+		return FALSE;
+	}
+	
+	return TRUE; 
+	
+}
+
+static void
+property_cmd_add_undo (PlannerCmd *cmd_base)
+{
+	PropertyCmdAdd *cmd;
+		
+	cmd = (PropertyCmdAdd*) cmd_base;
+
+	if (cmd->name != NULL) {
+		mrp_project_remove_property (cmd->project, 
+				  	     cmd->owner,
+				  	     cmd->name);
+		/* This functions as a simple success check for the REDO/UNDO stuff. Check if its removed. */
+		if (mrp_project_has_property (cmd->project, cmd->owner, cmd->name)) {
+ 			g_warning ("%s: object of type '%s' still has the property named '%s'",
+				   G_STRLOC,
+			   	   g_type_name (cmd->owner),
+			   	   cmd->name);
+		}
+	}	
+}
+
+
+static void
+property_cmd_add_free (PlannerCmd *cmd_base)
+{
+	PropertyCmdAdd  *cmd;
+
+	cmd = (PropertyCmdAdd*) cmd_base;	
+
+	g_free (cmd->name);
+	g_free (cmd->label);
+	g_free (cmd->description);
+	cmd->project = NULL;
+}
+
+static 
+PlannerCmd *
+property_cmd_add 	(PlannerWindow *window,
+			 MrpProject	*project,
+			 GType		owner,
+			 const gchar 	*name,
+			 MrpPropertyType type,
+			 const gchar     *label,
+			 const gchar     *description,
+			 gboolean	user_defined)
+{
+	PlannerCmd      *cmd_base;
+	PropertyCmdAdd  *cmd;
+
+	
+	cmd_base = planner_cmd_new (PropertyCmdAdd,
+				    _("Add project property"),
+ 				    property_cmd_add_do,
+				    property_cmd_add_undo,
+				    property_cmd_add_free);
+
+	cmd = (PropertyCmdAdd *) cmd_base;
+	
+	cmd->project = project;
+	cmd->owner = owner;
+	cmd->name = g_strdup (name);
+	cmd->type = type;
+	cmd->label = g_strdup (label);
+	cmd->description = g_strdup (description);
+	cmd->user_defined = user_defined;
+
+	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager (window),
+					   cmd_base);
+
+	return cmd_base;
+}
+
+
+static gboolean
+property_cmd_remove_do (PlannerCmd *cmd_base)
+{
+	PropertyCmdRemove *cmd;
+
+	cmd = (PropertyCmdRemove*) cmd_base;
+	
+	if (!mrp_project_has_property (cmd->project, cmd->owner, cmd->name)) {
+ 		g_warning ("%s: object of type '%s' has no property named '%s' to remove",
+			   G_STRLOC,
+			   g_type_name (cmd->owner),
+			   cmd->name);
+		return FALSE;
+	}
+	
+	mrp_project_remove_property (cmd->project,
+				     cmd->owner,
+				     cmd->name);
+
+	return TRUE;
+}
+
+
+static void
+property_cmd_remove_undo (PlannerCmd *cmd_base)
+{
+	PropertyCmdRemove *cmd;
+	MrpProperty  *property;
+	MrpProject   *project;
+	gchar			*new_text;
+	
+	cmd = (PropertyCmdRemove*) cmd_base;
+	
+	if (cmd->name != NULL) {
+	
+		project = cmd->project;
+		new_text = cmd->old_text;
+	
+		property = mrp_property_new (cmd->name, 
+					     cmd->type,
+					     cmd->label,
+					     cmd->description,
+					     cmd->user_defined);
+			
+		mrp_project_add_property (project, 
+					  cmd->owner,
+					  property,
+					  cmd->user_defined);
+				  
+		/* Now restore the previous text value We've kept it as new_text so it was easy to cut+paste code */	
+	
+		mpp_project_property_set_value_string (project, property, new_text);
+			
+		/* This functions as a simple success check for the REDO/UNDO stuff. Check if its removed. */
+		if (!mrp_project_has_property (project, cmd->owner, cmd->name)) {
+ 			g_warning ("%s: object of type '%s' property named '%s' not restored.",
+				   G_STRLOC,
+			   	   g_type_name (cmd->owner),
+			   	   cmd->name);
+		}
+	}	
+}
+
+static void
+property_cmd_remove_free (PlannerCmd *cmd_base)
+{
+	PropertyCmdRemove *cmd;
+
+	cmd = (PropertyCmdRemove*) cmd_base;
+
+	g_free (cmd->name);
+	g_free (cmd->label);
+	g_free (cmd->description);
+	g_free (cmd->old_text);
+	cmd->project = NULL;
+}
+
+static PlannerCmd *
+property_cmd_remove 	(PlannerWindow *window,
+			 MrpProject	*project,
+			 GType		owner,
+			 const gchar 	*name)
+{
+	PlannerCmd      *cmd_base;
+	PropertyCmdRemove  *cmd;
+	MrpProperty     *property;
+	
+	cmd_base = planner_cmd_new (PropertyCmdRemove,
+				    _("Remove project property"),
+ 				    property_cmd_remove_do,
+				    property_cmd_remove_undo,
+				    property_cmd_remove_free);
+
+	cmd = (PropertyCmdRemove *) cmd_base;
+		
+	cmd->project = project;
+	cmd->owner   = owner;
+	cmd->name = g_strdup (name);
+
+	property = mrp_project_get_property (project,
+					     name,
+					     owner);
+					     
+	cmd->type = mrp_property_get_property_type (property);
+	cmd->description = g_strdup (mrp_property_get_description (property));
+	cmd->label = g_strdup ( mrp_property_get_label (property));
+	cmd->user_defined = mrp_property_get_user_defined (property);
+
+	cmd->old_text = (gchar *) mpp_project_property_get_value_string (project, property);
+		
+	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager (window),
+					   cmd_base);
+
+	return cmd_base;
+}
+
+/* Label Edited Routine */
+
+static gboolean
+property_cmd_value_edited_do (PlannerCmd *cmd_base)
+{
+	PropertyCmdValueEdited *cmd;
+	MrpProject  		*project;
+	MrpProperty		*property;
+	gchar			*new_text;
+	
+	cmd = (PropertyCmdValueEdited*) cmd_base;
+	
+	project = cmd->project;
+	property = cmd->property;
+	new_text = cmd->new_text;
+	
+	if (!cmd->property) {
+		return FALSE;
+	}
+	
+	return (mpp_project_property_set_value_string (project, property, new_text));
+}
+
+static void
+property_cmd_value_edited_undo (PlannerCmd *cmd_base)
+{
+	PropertyCmdValueEdited *cmd;
+	MrpProject		*project;
+	MrpProperty		*property;
+	gchar			*new_text;
+	
+	cmd = (PropertyCmdValueEdited*) cmd_base;
+
+	property = cmd->property;
+	project = cmd->project;
+	new_text = cmd->old_text;
+	
+	if (cmd->property != NULL) {
+		mpp_project_property_set_value_string (project, property, new_text);
+	}
+}
+
+static void
+property_cmd_value_edited_free (PlannerCmd *cmd_base)
+{
+	PropertyCmdValueEdited *cmd;
+
+	cmd = (PropertyCmdValueEdited*) cmd_base;
+
+	g_free (cmd->old_text);
+	g_free (cmd->new_text);
+	cmd->property = NULL;  
+	cmd->project = NULL;
+}
+
+static PlannerCmd *
+property_cmd_value_edited 	(PlannerWindow *window,
+				 MrpProject	*project,
+				 MrpProperty	*property,
+				 const gchar 	*new_text)
+{
+	PlannerCmd      *cmd_base;
+	PropertyCmdValueEdited  *cmd;
+	
+	cmd_base = planner_cmd_new (PropertyCmdValueEdited,
+				    _("Edit project property value"),
+ 				    property_cmd_value_edited_do,
+				    property_cmd_value_edited_undo,
+				    property_cmd_value_edited_free);
+
+	cmd = (PropertyCmdValueEdited *) cmd_base;
+	
+	cmd->property = property;
+	cmd->project = project;
+	cmd->new_text = g_strdup (new_text);
+		
+	cmd->old_text = (gchar *) mpp_project_property_get_value_string (project, property);
+	
+	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager (window),
+					   cmd_base);
+
+	return cmd_base;
+}
+
 
