@@ -1655,12 +1655,10 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 		case 3:
 			if (IN_DRAG_RELATION_SPOT (event->button.x, event->button.y,
 						   priv->x + priv->width, priv->y, priv->height)) {
-
 				PlannerGanttChart *chart;
 				PlannerTaskTree   *tree;
 				GtkTreePath       *path;
 				GtkTreeSelection  *selection;
-				gint               x, y;
 				
 				chart = g_object_get_data (G_OBJECT (item->canvas), "chart");
 				tree = planner_gantt_chart_get_view (chart);
@@ -1674,11 +1672,9 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 				gtk_tree_selection_unselect_all (selection);
 				gtk_tree_selection_select_path (selection, path);
 				
-				gdk_window_get_origin (event->button.window, &x, &y);
-				
 				gtk_item_factory_popup (priv->popup_factory,
-							event->button.x_root - wx1,
-							event->button.y_root - wy1,
+							event->button.x_root,
+							event->button.y_root,
 							0,
 							gtk_get_current_event_time ());
 			}
