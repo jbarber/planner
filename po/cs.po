@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mrproject VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-09-25 12:16+0200\n"
-"PO-Revision-Date: 2004-09-25 14:49+0200\n"
+"POT-Creation-Date: 2004-10-04 11:58+0200\n"
+"PO-Revision-Date: 2004-10-04 15:34+0200\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -871,7 +871,7 @@ msgid "Work"
 msgstr "Práce"
 
 #: src/planner-gantt-print.c:542 src/planner-gantt-row.c:685
-#: src/planner-task-tree.c:1583 src/planner-window.c:1660
+#: src/planner-task-tree.c:1583 src/planner-window.c:1648
 msgid "Unnamed"
 msgstr "Nepojmenovaný"
 
@@ -1096,7 +1096,7 @@ msgstr ""
 "\"%s\" je adresář.\n"
 "Zadejte název souboru a zkuste to znovu."
 
-#: src/planner-html-plugin.c:148 src/planner-window.c:1417
+#: src/planner-html-plugin.c:148 src/planner-window.c:1405
 #: src/planner-xml-planner-plugin.c:125
 #, c-format
 msgid "File \"%s\" exists, do you want to overwrite it?"
@@ -1770,218 +1770,218 @@ msgstr "_Využití zdroje"
 msgid "Could not open view plugin file '%s'\n"
 msgstr "Nemohu otevřít soubor zásuvného modulu pohledu '%s'\n"
 
-#: src/planner-window.c:199
+#: src/planner-window.c:197
 msgid "_File"
 msgstr "_Soubor"
 
-#: src/planner-window.c:203
+#: src/planner-window.c:201
 msgid "_New Project"
 msgstr "_Nový projekt"
 
-#: src/planner-window.c:203
+#: src/planner-window.c:201
 msgid "Create a new project"
 msgstr "Vytvořit nový projekt"
 
-#: src/planner-window.c:207
+#: src/planner-window.c:205
 msgid "_Open..."
 msgstr "_Otevřít..."
 
-#: src/planner-window.c:207
+#: src/planner-window.c:205
 msgid "Open a project"
 msgstr "Otevřít projekt"
 
-#: src/planner-window.c:210
+#: src/planner-window.c:208
 msgid "_Import"
 msgstr "_Importovat"
 
-#: src/planner-window.c:214 src/planner-window.c:1288
+#: src/planner-window.c:212 src/planner-window.c:1276
 msgid "_Save"
 msgstr "_Uložit"
 
-#: src/planner-window.c:214
+#: src/planner-window.c:212
 msgid "Save the current project"
 msgstr "Uložit aktuální projekt"
 
-#: src/planner-window.c:217
+#: src/planner-window.c:215
 msgid "_Export"
 msgstr "_Exportovat"
 
-#: src/planner-window.c:220
+#: src/planner-window.c:218
 msgid "Save _As..."
 msgstr "Uložit _jako..."
 
-#: src/planner-window.c:220
+#: src/planner-window.c:218
 msgid "Save the current project with a different name"
 msgstr "Uložit aktuální projekt pod jiným jménem"
 
-#: src/planner-window.c:223
+#: src/planner-window.c:221
 msgid "_Print..."
 msgstr "_Tisk..."
 
-#: src/planner-window.c:223
+#: src/planner-window.c:221
 msgid "Print the current project"
 msgstr "Vytisknout aktuální projekt"
 
-#: src/planner-window.c:226
+#: src/planner-window.c:224
 msgid "Print Pre_view"
 msgstr "_Náhled před tiskem"
 
-#: src/planner-window.c:226
+#: src/planner-window.c:224
 msgid "Print preview of the current project"
 msgstr "Náhled aktuálního projektu před tiskem"
 
-#: src/planner-window.c:229
+#: src/planner-window.c:227
 msgid "_Close"
 msgstr "_Zavřít"
 
-#: src/planner-window.c:229
+#: src/planner-window.c:227
 msgid "Close the current file"
 msgstr "Zavřít aktuální soubor"
 
-#: src/planner-window.c:232
+#: src/planner-window.c:230
 msgid "_Quit"
 msgstr "_Konec"
 
-#: src/planner-window.c:232
+#: src/planner-window.c:230
 msgid "Exit the program"
 msgstr "Ukončit program"
 
-#: src/planner-window.c:236
+#: src/planner-window.c:234
 msgid "_Edit"
 msgstr "_Úpravy"
 
-#: src/planner-window.c:239
+#: src/planner-window.c:237
 msgid "_Undo"
 msgstr "_Zpět"
 
-#: src/planner-window.c:239
+#: src/planner-window.c:237
 msgid "Undo the last action"
 msgstr "Vrátit poslední akci"
 
-#: src/planner-window.c:242
+#: src/planner-window.c:240
 msgid "_Redo"
 msgstr "Z_novu"
 
-#: src/planner-window.c:242
+#: src/planner-window.c:240
 msgid "Redo the undone action"
 msgstr "Zrušit poslední akci zpět"
 
-#: src/planner-window.c:246
+#: src/planner-window.c:244
 msgid "_View"
 msgstr "_Zobrazit"
 
-#: src/planner-window.c:250
+#: src/planner-window.c:248
 msgid "_Actions"
 msgstr "_Akce"
 
-#: src/planner-window.c:254
+#: src/planner-window.c:252
 msgid "_Project"
 msgstr "_Projekt"
 
-#: src/planner-window.c:257
+#: src/planner-window.c:255
 msgid "_Manage Calendars"
 msgstr "_Spravovat kalendáře"
 
-#: src/planner-window.c:260
+#: src/planner-window.c:258
 msgid "Edit Day _Types"
 msgstr "Upravit _typy dnů"
 
-#: src/planner-window.c:263
+#: src/planner-window.c:261
 msgid "Edit Project _Phases"
 msgstr "Upravit _fáze projektu"
 
-#: src/planner-window.c:266
+#: src/planner-window.c:264
 msgid "_Edit Project Properties"
 msgstr "Upravit _vlastnosti projektu"
 
-#: src/planner-window.c:266
+#: src/planner-window.c:264
 msgid "Edit the project properties"
 msgstr "Upravit vlastnosti projektu"
 
-#: src/planner-window.c:274
+#: src/planner-window.c:272
 msgid "_Help"
 msgstr "_Nápověda"
 
-#: src/planner-window.c:277
+#: src/planner-window.c:275
 msgid "_User Guide"
 msgstr "_Příručka uživatele"
 
-#: src/planner-window.c:277
+#: src/planner-window.c:275
 msgid "Show the Planner User Guide"
 msgstr "Zobrazit příručku uživatele Planneru"
 
-#: src/planner-window.c:280
+#: src/planner-window.c:278
 msgid "_About"
 msgstr "_O programu"
 
-#: src/planner-window.c:280
+#: src/planner-window.c:278
 msgid "About this application"
 msgstr "O této aplikaci"
 
 #. Note: these strings are leaked.
-#: src/planner-window.c:554
+#: src/planner-window.c:542
 #, c-format
 msgid "Switch to the view \"%s\""
 msgstr "Přepnout na pohled \"%s\""
 
-#: src/planner-window.c:699
+#: src/planner-window.c:687
 msgid "Open a file"
 msgstr "Otevřít soubor"
 
 #. I18n: Translators, list your names here, newline separated if there
 #. * are more than one, to appear in the about box.
 #.
-#: src/planner-window.c:1109 src/planner-window.c:1116
+#: src/planner-window.c:1097 src/planner-window.c:1104
 msgid "translator-credits"
 msgstr "Miloslav Trmač <mitr@volny.cz>"
 
 #. "Copyright \xc2\xa9"
-#: src/planner-window.c:1113
+#: src/planner-window.c:1101
 msgid "A Project Management application for the GNOME desktop"
 msgstr "Aplikace pro správu projektů pro prostředí pracovní plochy GNOME"
 
-#: src/planner-window.c:1123
+#: src/planner-window.c:1111
 msgid "The Planner Homepage"
 msgstr "Domácí stránka Planneru"
 
-#: src/planner-window.c:1229
+#: src/planner-window.c:1217
 msgid "If you don't save, changes made the last minute will be discarded."
 msgstr "Pokud je neuložíte, budou změny provedené za poslední minutu ztraceny."
 
-#: src/planner-window.c:1234
+#: src/planner-window.c:1222
 #, c-format
 msgid "If you don't save, changes made the last %d minutes will be discarded."
 msgstr ""
 "Pokud je neuložíte, budou změny provedené za posledních %d minut ztraceny."
 
-#: src/planner-window.c:1239
+#: src/planner-window.c:1227
 msgid "If you don't save, changes made the last hour will be discarded."
 msgstr "Pokud je neuložíte, budou změny provedené za poslední hodinu ztraceny."
 
-#: src/planner-window.c:1244
+#: src/planner-window.c:1232
 #, c-format
 msgid "If you don't save, changes made the last %d hours will be discarded."
 msgstr ""
 "Pokud je neuložíte, budou změny provedené za posledních %d hodin ztraceny."
 
-#: src/planner-window.c:1251
+#: src/planner-window.c:1239
 #, c-format
 msgid "Save changes to document '%s' before closing?"
 msgstr "Uložit před zavřením změny do dokumentu '%s'?"
 
-#: src/planner-window.c:1275
+#: src/planner-window.c:1263
 msgid "C_lose without saving"
 msgstr "Z_avřít bez uložení"
 
-#: src/planner-window.c:1281
+#: src/planner-window.c:1269
 msgid "_Cancel"
 msgstr "_Zrušit"
 
-#: src/planner-window.c:1380
+#: src/planner-window.c:1368
 msgid "Save a file"
 msgstr "Uložit soubor"
 
-#: src/planner-window.c:1617
+#: src/planner-window.c:1605
 msgid ""
 "You have opened a file that was saved with an old version of Planner.\n"
 "\n"
@@ -2010,9 +2010,14 @@ msgstr ""
 "omezení' menu 'Úpravy'."
 
 #. Hack.
-#: src/planner-window.c:1652
+#: src/planner-window.c:1640
 msgid "Unnamed database project"
 msgstr "Nepojmenovaný projekt v databázi"
+
+#: src/planner-window.c:1754
+#, c-format
+msgid "Open '%s'"
+msgstr "Otevřít '%s'"
 
 #: src/planner-working-time-dialog.c:144
 msgid "Edit working time"
