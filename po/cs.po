@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mrproject VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-06-14 15:30+0200\n"
-"PO-Revision-Date: 2004-06-14 19:40+0200\n"
+"POT-Creation-Date: 2004-06-20 15:40+0200\n"
+"PO-Revision-Date: 2004-06-20 18:44+0200\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -372,7 +372,7 @@ msgstr "_Hotovo:"
 msgid "Predecessors"
 msgstr "Předchůdci"
 
-#: data/glade/task-dialog.glade.h:9 src/planner-resource-view.c:397
+#: data/glade/task-dialog.glade.h:9 src/planner-resource-view.c:401
 msgid "Resources"
 msgstr "Zdroje"
 
@@ -401,7 +401,7 @@ msgid "_Work:"
 msgstr "_Práce:"
 
 #. day unit variant accepted in input
-#: data/glade/task-dialog.glade.h:17 src/planner-task-tree.c:3401
+#: data/glade/task-dialog.glade.h:17 src/planner-task-tree.c:3319
 msgid "days"
 msgstr "dní"
 
@@ -943,7 +943,7 @@ msgstr "Datum"
 msgid "Duration"
 msgstr "Trvání"
 
-#: libplanner/mrp-property.c:377 src/planner-task-view.c:271
+#: libplanner/mrp-property.c:377 src/planner-task-view.c:279
 msgid "Cost"
 msgstr "Cena"
 
@@ -1001,21 +1001,21 @@ msgstr "Neplatné SQL URI (neplatné id projektu)."
 msgid "Invalid SQL URI (no database name specified)."
 msgstr "Neplatné SQL URI (neurčen název databáze)."
 
-#: libplanner/mrp-task.c:1043
+#: libplanner/mrp-task.c:1045
 msgid ""
 "Could not add a predecessor relation, because the tasks are already related."
 msgstr ""
 "Nemohu přidat vztah předchůdce, protože mezi úlohami již existuje vztah."
 
-#: libplanner/mrp-task-manager.c:1822
+#: libplanner/mrp-task-manager.c:1851
 msgid "Can not add a predecessor relation between a task and its ancestor."
 msgstr "Nemohu přidat vztah předchůdce mezi úlohou a jejím předchůdcem."
 
-#: libplanner/mrp-task-manager.c:1831 libplanner/mrp-task-manager.c:1839
+#: libplanner/mrp-task-manager.c:1860 libplanner/mrp-task-manager.c:1868
 msgid "Can not add a predecessor, because it would result in a loop."
 msgstr "Nemohu přidat předchůdce, protože by tím vznikla smyčka."
 
-#: libplanner/mrp-task-manager.c:1874
+#: libplanner/mrp-task-manager.c:1903
 msgid "Can not move the task, since it would result in a loop."
 msgstr "Nemohu přesunout úlohu, protože by tím vznikla smyčka."
 
@@ -1166,34 +1166,34 @@ msgstr "%e. %b %Y"
 msgid "Project start"
 msgstr "Začátek projektu"
 
-#: src/planner-gantt-print.c:191 src/planner-group-dialog.c:820
-#: src/planner-property-dialog.c:509 src/planner-resource-view.c:1182
-#: src/planner-task-dialog.c:2736 src/planner-task-dialog.c:2825
-#: src/planner-task-view.c:266 src/planner-ttable-print.c:97
+#: src/planner-gantt-print.c:189 src/planner-group-dialog.c:820
+#: src/planner-property-dialog.c:509 src/planner-resource-view.c:1153
+#: src/planner-task-dialog.c:2563 src/planner-task-dialog.c:2652
+#: src/planner-task-view.c:274 src/planner-ttable-print.c:97
 msgid "Name"
 msgstr "Jméno"
 
-#: src/planner-gantt-print.c:199 src/planner-resource-dialog.c:1900
-#: src/planner-resource-view.c:700 src/planner-resource-view.c:716
-#: src/planner-resource-view.c:1655 src/planner-task-view.c:269
+#: src/planner-gantt-print.c:197 src/planner-resource-dialog.c:1900
+#: src/planner-resource-view.c:729 src/planner-resource-view.c:745
+#: src/planner-resource-view.c:1626 src/planner-task-view.c:277
 msgid "Work"
 msgstr "Práce"
 
-#: src/planner-gantt-print.c:523 src/planner-gantt-row.c:671
+#: src/planner-gantt-print.c:541 src/planner-gantt-row.c:682
 #: src/planner-window.c:1663
 msgid "Unnamed"
 msgstr "Nepojmenovaný"
 
-#: src/planner-gantt-row.c:1921 src/planner-gantt-row.c:1924
+#: src/planner-gantt-row.c:1755 src/planner-gantt-row.c:1758
 msgid "No name"
 msgstr "Beze jména"
 
-#: src/planner-gantt-row.c:1927
+#: src/planner-gantt-row.c:1761
 #, c-format
 msgid "Make task '%s' a predecessor of '%s'"
 msgstr "Učinit úlohu '%s' předchůdcem '%s'"
 
-#: src/planner-gantt-row.c:1985
+#: src/planner-gantt-row.c:1817
 #, c-format
 msgid "Change work to %s"
 msgstr "Změnit práci na %s"
@@ -1218,7 +1218,7 @@ msgstr ""
 "\n"
 "WBS"
 
-#: src/planner-gantt-view.c:493 src/planner-ttable-tree.c:332
+#: src/planner-gantt-view.c:493 src/planner-ttable-tree.c:344
 msgid ""
 "\n"
 "Name"
@@ -1302,19 +1302,20 @@ msgstr "Odstranit fázi"
 msgid "Could not open plugin file '%s'\n"
 msgstr "Nemohu otevřít soubor zásuvného modulu '%s'\n"
 
-#: src/planner-predecessor-model.c:191 src/planner-task-dialog.c:2398
+#: src/planner-predecessor-model.c:191 src/planner-task-dialog.c:2221
 msgid "FS"
 msgstr "KZ"
 
-#: src/planner-predecessor-model.c:194 src/planner-task-dialog.c:2399
+#: src/planner-predecessor-model.c:194
 msgid "FF"
 msgstr "KK"
 
-#: src/planner-predecessor-model.c:197 src/planner-task-dialog.c:2400
+#. list = g_list_append (list, g_strdup (_("FF")));
+#: src/planner-predecessor-model.c:197 src/planner-task-dialog.c:2223
 msgid "SS"
 msgstr "ZZ"
 
-#: src/planner-predecessor-model.c:200 src/planner-task-dialog.c:2401
+#: src/planner-predecessor-model.c:200
 msgid "SF"
 msgstr "ZK"
 
@@ -1391,8 +1392,8 @@ msgstr "Upravit hodnotu vlastnosti projektu"
 msgid "Label"
 msgstr "Jmenovka"
 
-#: src/planner-property-dialog.c:542 src/planner-resource-view.c:1224
-#: src/planner-task-dialog.c:2857
+#: src/planner-property-dialog.c:542 src/planner-resource-view.c:1195
+#: src/planner-task-dialog.c:2684
 msgid "Type"
 msgstr "Typ"
 
@@ -1405,14 +1406,18 @@ msgstr "Přidat vlastnost"
 msgid "Open a file"
 msgstr "Otevřít soubor"
 
+#: src/planner-resource-cmd.c:77
+msgid "Insert resource"
+msgstr "Vložit zdroj"
+
 #. Put "no group" at the top.
-#: src/planner-resource-dialog.c:326 src/planner-resource-input-dialog.c:97
-#: src/planner-resource-view.c:1866
+#: src/planner-resource-dialog.c:326 src/planner-resource-input-dialog.c:99
+#: src/planner-resource-view.c:1837
 msgid "(None)"
 msgstr "(žádná)"
 
-#: src/planner-resource-dialog.c:336 src/planner-resource-input-dialog.c:107
-#: src/planner-task-dialog.c:369
+#: src/planner-resource-dialog.c:336 src/planner-resource-input-dialog.c:109
+#: src/planner-task-dialog.c:373
 msgid "(No name)"
 msgstr "(beze jména)"
 
@@ -1434,7 +1439,7 @@ msgstr "Upravit vlastnost zdroje v dialogu"
 
 #. i18n: time stamp format for notes in task dialog, see strftime(3) for
 #. * a detailed description.
-#: src/planner-resource-dialog.c:1458 src/planner-task-dialog.c:1975
+#: src/planner-resource-dialog.c:1458 src/planner-task-dialog.c:1808
 msgid "%a %d %b %Y, %H:%M\n"
 msgstr "%a %d. %b %Y, %H:%M\n"
 
@@ -1446,56 +1451,52 @@ msgstr "Žádný (použít implicitní pro projekt)"
 msgid "Edit resource properties"
 msgstr "Upravit vlastnosti zdroje"
 
-#: src/planner-resource-dialog.c:1901 src/planner-resource-view.c:703
-#: src/planner-resource-view.c:717 src/planner-resource-view.c:1656
+#: src/planner-resource-dialog.c:1901 src/planner-resource-view.c:732
+#: src/planner-resource-view.c:746 src/planner-resource-view.c:1627
 msgid "Material"
 msgstr "Materiál"
 
-#: src/planner-resource-view.c:264
+#: src/planner-resource-view.c:268
 msgid "/_Insert resource"
 msgstr "/_Vložit zdroj"
 
-#: src/planner-resource-view.c:265
+#: src/planner-resource-view.c:269
 msgid "/_Remove resource"
 msgstr "/_Odstranit zdroj"
 
-#: src/planner-resource-view.c:266 src/planner-ttable-tree.c:98
+#: src/planner-resource-view.c:270 src/planner-ttable-tree.c:105
 msgid "/_Edit resource..."
 msgstr "/_Upravit zdroj..."
 
-#: src/planner-resource-view.c:405
+#: src/planner-resource-view.c:409
 msgid "_Resources"
 msgstr "_Zdroje"
 
-#: src/planner-resource-view.c:806
-msgid "Insert resource"
-msgstr "Vložit zdroj"
-
-#: src/planner-resource-view.c:959
+#: src/planner-resource-view.c:930
 msgid "Remove resource"
 msgstr "Odstranit zdroj"
 
-#: src/planner-resource-view.c:1061
+#: src/planner-resource-view.c:1032
 msgid "Edit custom resource properties"
 msgstr "Upravit vlastní vlastnosti zdroje"
 
-#: src/planner-resource-view.c:1203
+#: src/planner-resource-view.c:1174
 msgid "Short name"
 msgstr "Krátký název"
 
-#: src/planner-resource-view.c:1248
+#: src/planner-resource-view.c:1219
 msgid "Group"
 msgstr "Skupina"
 
-#: src/planner-resource-view.c:1277
+#: src/planner-resource-view.c:1248
 msgid "Email"
 msgstr "E-mail"
 
-#: src/planner-resource-view.c:1361
+#: src/planner-resource-view.c:1332
 msgid "Edit resource property"
 msgstr "Upravit vlastnost zdroje"
 
-#: src/planner-resource-view.c:1446
+#: src/planner-resource-view.c:1417
 msgid "Edit resource custom property"
 msgstr "Upravit vlastní vlastnost zdroje"
 
@@ -1570,84 +1571,80 @@ msgstr "Otevřít z databáze"
 msgid "Save to Database"
 msgstr "Uložit do databáze"
 
-#: src/planner-task-dialog.c:448
-msgid "Edit task property from dialog"
-msgstr "Upravit vlastnost úlohy v dialogu"
-
-#: src/planner-task-dialog.c:522
-msgid "Edit task type from dialog"
-msgstr "Upravit typ úlohy v dialogu"
-
-#: src/planner-task-dialog.c:589
-msgid "Edit task schedule from dialog"
-msgstr "Upravit plánování úlohy v dialogu"
-
-#: src/planner-task-dialog.c:667
-msgid "Add a resource for a task from dialog"
-msgstr "Přidat zdroj pro úlohu v dialogu"
-
-#: src/planner-task-dialog.c:727
-msgid "Remove a resource from a task from dialog"
-msgstr "Odstranit zdroj z úlohy v dialogu"
-
-#: src/planner-task-dialog.c:786
-msgid "Change resource units for a task from dialog"
-msgstr "Změnit jednotky zdroje pro úlohu v dialogu"
-
-#: src/planner-task-dialog.c:865
+#: src/planner-task-cmd.c:96
 msgid "Link task"
 msgstr "Připojit úlohu"
 
-# FIXME: s/Unkink/Unlink/
-#: src/planner-task-dialog.c:945
-msgid "Unkink task"
+#: src/planner-task-cmd.c:176
+msgid "Unlink task"
 msgstr "Odpojit úlohu"
 
-#: src/planner-task-dialog.c:1043
+#: src/planner-task-cmd.c:269
+msgid "Insert task"
+msgstr "Vložit úlohu"
+
+#: src/planner-task-dialog.c:447
+msgid "Edit task property from dialog"
+msgstr "Upravit vlastnost úlohy v dialogu"
+
+#: src/planner-task-dialog.c:521
+msgid "Edit task type from dialog"
+msgstr "Upravit typ úlohy v dialogu"
+
+#: src/planner-task-dialog.c:588
+msgid "Edit task schedule from dialog"
+msgstr "Upravit plánování úlohy v dialogu"
+
+#: src/planner-task-dialog.c:666
+msgid "Add a resource for a task from dialog"
+msgstr "Přidat zdroj pro úlohu v dialogu"
+
+#: src/planner-task-dialog.c:726
+msgid "Remove a resource from a task from dialog"
+msgstr "Odstranit zdroj z úlohy v dialogu"
+
+#: src/planner-task-dialog.c:785
+msgid "Change resource units for a task from dialog"
+msgstr "Změnit jednotky zdroje pro úlohu v dialogu"
+
+#: src/planner-task-dialog.c:881
 msgid "Edit task predecessor"
 msgstr "Upravit předchůdce úlohy"
 
-#: src/planner-task-dialog.c:1116
+#: src/planner-task-dialog.c:952
 msgid "Edit lag predecessor from dialog"
 msgstr "Upravit předchůdce zpoždění v dialogu"
 
-#: src/planner-task-dialog.c:1182
+#: src/planner-task-dialog.c:1018
 msgid "Edit task note from dialog"
 msgstr "Upravit poznámku úlohy v dialogu"
 
-#: src/planner-task-dialog.c:2043
+#: src/planner-task-dialog.c:1880
 msgid "Finish to start (FS)"
 msgstr "Konec před začátkem (KZ)"
 
-#: src/planner-task-dialog.c:2044
-msgid "Finish to finish (FF)"
-msgstr "Konec před koncem (KK)"
-
-#: src/planner-task-dialog.c:2045
+#. _("Finish to finish (FF)"), MRP_RELATION_FF,
+#: src/planner-task-dialog.c:1882
 msgid "Start to start (SS)"
 msgstr "Začátek před začátkem (ZZ)"
 
-#: src/planner-task-dialog.c:2046
-msgid "Start to finish (SF)"
-msgstr "Začátek před koncem (ZK)"
-
-#: src/planner-task-dialog.c:2100
+#: src/planner-task-dialog.c:1937
 msgid "Can't add new predecessor. No task selected!"
 msgstr "Nemohu přidat nového předchůdce. Nevybrána žádná úloha!"
 
-#: src/planner-task-dialog.c:2757
+#: src/planner-task-dialog.c:2584
 msgid "Assigned"
 msgstr "Přiřazeno"
 
-#: src/planner-task-dialog.c:2774
+#: src/planner-task-dialog.c:2601
 msgid "Units"
 msgstr "Jednotky"
 
-#: src/planner-task-dialog.c:2879
+#: src/planner-task-dialog.c:2706
 msgid "Lag"
 msgstr "Zpoždění"
 
-#: src/planner-task-dialog.c:3018 src/planner-task-dialog.c:3020
+#: src/planner-task-dialog.c:2845 src/planner-task-dialog.c:2847
 msgid "Edit task properties"
 msgstr "Upravit vlastnosti úlohy"
 
@@ -1671,39 +1668,35 @@ msgstr "/Od_pojit úlohu"
 msgid "/Assign _resources..."
 msgstr "/_Přiřadit zdroje..."
 
-#: src/planner-task-popup.c:70 src/planner-ttable-tree.c:99
+#: src/planner-task-popup.c:70 src/planner-ttable-tree.c:106
 msgid "/_Edit task..."
 msgstr "/_Upravit úlohu..."
 
-#: src/planner-task-tree.c:259
-msgid "Insert task"
-msgstr "Vložit úlohu"
-
-#: src/planner-task-tree.c:351
+#: src/planner-task-tree.c:244
 msgid "Edit task property"
 msgstr "Upravit vlastnosti úlohy"
 
-#: src/planner-task-tree.c:722
+#: src/planner-task-tree.c:615
 msgid "Remove task"
 msgstr "Odstranit úlohu"
 
-#: src/planner-task-tree.c:801
+#: src/planner-task-tree.c:694
 msgid "Constraint task"
 msgstr "Omezit úlohu"
 
-#: src/planner-task-tree.c:864
+#: src/planner-task-tree.c:757
 msgid "Constraint task reset"
 msgstr "Zrušit omezení úlohy"
 
-#: src/planner-task-tree.c:998
+#: src/planner-task-tree.c:891
 msgid "Move task"
 msgstr "Přesunout úlohu"
 
-#: src/planner-task-tree.c:1108
+#: src/planner-task-tree.c:1001
 msgid "Edit task custom property"
 msgstr "Upravit vlastní vlastnost úlohy"
 
-#: src/planner-task-tree.c:2762
+#: src/planner-task-tree.c:2680
 #, c-format
 msgid ""
 "You are about to open an edit dialog each for %i tasks. Are you sure that "
@@ -1712,80 +1705,80 @@ msgstr ""
 "Hodláte otevřít dialog úprav pro každou z %i úloh. Jste si jisti, že to "
 "chcete udělat?"
 
-#: src/planner-task-tree.c:3393
+#: src/planner-task-tree.c:3311
 msgid "mon"
 msgstr "měs"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:3394
+#: src/planner-task-tree.c:3312
 msgid "month"
 msgstr "měsíc"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:3395
+#: src/planner-task-tree.c:3313
 msgid "months"
 msgstr "měsíců"
 
 #. month unit variant accepted in input
-#: src/planner-task-tree.c:3396
+#: src/planner-task-tree.c:3314
 msgid "w"
 msgstr "t"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:3397
+#: src/planner-task-tree.c:3315
 msgid "week"
 msgstr "týden"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:3398
+#: src/planner-task-tree.c:3316
 msgid "weeks"
 msgstr "týdnů"
 
 #. week unit variant accepted in input
-#: src/planner-task-tree.c:3399
+#: src/planner-task-tree.c:3317
 msgid "d"
 msgstr "d"
 
 #. day unit variant accepted in input
-#: src/planner-task-tree.c:3400
+#: src/planner-task-tree.c:3318
 msgid "day"
 msgstr "den"
 
 #. day unit variant accepted in input
-#: src/planner-task-tree.c:3402
+#: src/planner-task-tree.c:3320
 msgid "h"
 msgstr "h"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:3403
+#: src/planner-task-tree.c:3321
 msgid "hour"
 msgstr "hodina"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:3404
+#: src/planner-task-tree.c:3322
 msgid "hours"
 msgstr "hodin"
 
 #. hour unit variant accepted in input
-#: src/planner-task-tree.c:3405
+#: src/planner-task-tree.c:3323
 msgid "min"
 msgstr "min"
 
 #. minute unit variant accepted in input
-#: src/planner-task-tree.c:3406
+#: src/planner-task-tree.c:3324
 msgid "minute"
 msgstr "minuta"
 
 #. minute unit variant accepted in input
-#: src/planner-task-tree.c:3407
+#: src/planner-task-tree.c:3325
 msgid "minutes"
 msgstr "minut"
 
-#: src/planner-task-view.c:199
+#: src/planner-task-view.c:207
 msgid "Tasks"
 msgstr "Úlohy"
 
-#: src/planner-task-view.c:207
+#: src/planner-task-view.c:215
 msgid "_Tasks"
 msgstr "_Úlohy"
 
@@ -1793,23 +1786,23 @@ msgstr "_Úlohy"
 #. * project management term. You might want to leave it
 #. * untranslated unless there is a localized term for it.
 #.
-#: src/planner-task-view.c:265
+#: src/planner-task-view.c:273
 msgid "WBS"
 msgstr "WBS"
 
-#: src/planner-task-view.c:267
+#: src/planner-task-view.c:275
 msgid "Start"
 msgstr "Začátek"
 
-#: src/planner-task-view.c:268
+#: src/planner-task-view.c:276
 msgid "Finish"
 msgstr "Konec"
 
-#: src/planner-task-view.c:270
+#: src/planner-task-view.c:278
 msgid "Slack"
 msgstr "Rezerva"
 
-#: src/planner-task-view.c:480
+#: src/planner-task-view.c:488
 msgid "Edit custom task properties"
 msgstr "Upravit vlastní vlastnosti úlohy"
 
@@ -1817,25 +1810,25 @@ msgstr "Upravit vlastní vlastnosti úlohy"
 msgid "Task"
 msgstr "Úloha"
 
-#: src/planner-ttable-row.c:2111
+#: src/planner-ttable-row.c:2112
 #, c-format
 msgid "Make task '%s' start on %s"
 msgstr "Změnit začátek úlohy '%s' na %s"
 
-#: src/planner-ttable-row.c:2180
+#: src/planner-ttable-row.c:2181
 #, c-format
 msgid "Change task '%s' work to %s, duration to %s (%d)"
 msgstr "Změnit práci úlohy '%s' na %s a trvání na %s (%d)"
 
-#: src/planner-ttable-tree.c:101
+#: src/planner-ttable-tree.c:108
 msgid "/_Expand all resources"
 msgstr "/_Rozbalit všechny zdroje"
 
-#: src/planner-ttable-tree.c:102
+#: src/planner-ttable-tree.c:109
 msgid "/_Collapse all resources"
 msgstr "/_Sbalit všechny zdroje"
 
-#: src/planner-ttable-tree.c:333
+#: src/planner-ttable-tree.c:345
 msgid ""
 "\n"
 "Task"
@@ -1843,11 +1836,11 @@ msgstr ""
 "\n"
 "Úloha"
 
-#: src/planner-ttable-view.c:144
+#: src/planner-ttable-view.c:147
 msgid "Resource Usage"
 msgstr "Využití zdroje"
 
-#: src/planner-ttable-view.c:151
+#: src/planner-ttable-view.c:154
 msgid "Resource _Usage"
 msgstr "_Využití zdroje"
 
@@ -1941,6 +1934,12 @@ msgstr ""
 #: src/planner-window.c:1655
 msgid "Unnamed database project"
 msgstr "Nepojmenovaný projekt v databázi"
+
+#~ msgid "Finish to finish (FF)"
+#~ msgstr "Konec před koncem (KK)"
+
+#~ msgid "Start to finish (SF)"
+#~ msgstr "Začátek před koncem (ZK)"
 
 #~ msgid "Edit type task from dialog"
 #~ msgstr "Upravit typ úlohy v dialogu"
