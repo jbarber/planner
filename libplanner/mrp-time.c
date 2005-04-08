@@ -912,7 +912,7 @@ mrp_time2_set_date (MrpTime *t,
 	g_return_if_fail (t != NULL);
 	g_return_if_fail (year >= 1 && year <= 9999);
 	g_return_if_fail (month >= 1 && month <= 12);
-	g_return_if_fail (day >= 1 && day < 31);
+	g_return_if_fail (day >= 1 && day <= 31);
 	
 	g_date_set_dmy (&t->date, day, month, year);
 }

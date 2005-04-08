@@ -1,3 +1,8 @@
+2005-04-08  Richard Hult  <richard@imendio.com>
+
+	* libplanner/mrp-time.c (mrp_time2_set_date): Fix the precondition
+	check. Thanks to fmoraes@nc.rr.com for noticing.
+
 2005-04-03  Pedro Villavicencio Garrido  <pvillavi@gnome.org>
 
 	* src/planner-window.c (window_about_cb): port to GtkAboutDialog.
