@@ -34,7 +34,6 @@
 #include <libgnome/gnome-help.h>
 #include <libgnome/gnome-url.h>
 #include <glib/gi18n.h>
-#include <libgnomeui/gnome-stock-icons.h>
 #include <libgnomeprintui/gnome-print-dialog.h>
 #include <libgnomeprintui/gnome-print-job-preview.h>
 #include <libplanner/mrp-error.h>
@@ -305,7 +304,7 @@ static GtkActionEntry entries[] = {
 	  GTK_STOCK_HELP,          N_("_User Guide"),              "F1",                N_("Show the Planner User Guide"),
 	  G_CALLBACK (window_help_cb) },
 	{ "HelpAbout",
-	  GNOME_STOCK_ABOUT,       N_("_About"),                   NULL,                N_("About this application"),
+	  GTK_STOCK_ABOUT,         N_("_About"),                   NULL,                N_("About this application"),
 	  G_CALLBACK (window_about_cb) },
 };
 
@@ -366,10 +365,6 @@ window_init (PlannerWindow *window)
 
 	priv = g_new0 (PlannerWindowPriv, 1);
 	window->priv = priv;
-
-	gtk_window_set_icon_from_file (GTK_WINDOW (window),
-				       DATADIR "/pixmaps/gnome-planner.png",
-				       NULL);
 
 	/* Setup drag-n-drop. */
 	gtk_drag_dest_set (GTK_WIDGET (window),
@@ -1718,7 +1713,6 @@ planner_window_new (PlannerApplication *application)
 			  NULL);
 
 	window_populate (window);
-	
 	window_update_title (window);
 
 	return GTK_WIDGET (window);

@@ -3,6 +3,7 @@ gladedir = $(datadir)/planner/glade
 glade_DATA = \
 	add-predecessor.glade		\
 	calendar-dialog.glade		\
+	column-dialog.glade		\
 	group-dialog.glade		\
 	html-output.glade		\
 	new-property.glade		\

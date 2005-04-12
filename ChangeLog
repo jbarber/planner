@@ -1,3 +1,32 @@
+2005-04-12  Richard Hult  <richard@imendio.com>
+
+	* data/glade/Makefile.am:
+	* data/glade/column-dialog.glade:
+	* src/Makefile.am:
+	* src/planner-column-dialog.c:
+	* src/planner-column-dialog.h: Add new dialog for editing the
+	visible columns in the views.
+	
+	* data/ui/gantt-view.ui:
+	* data/ui/task-view.ui: Add columns editor.
+
+	* src/planner-gantt-view.c: 
+	* src/planner-task-view.c: Implement loading and saving of column
+	visibility and widths.  Use the new dialog in the task and gantt
+	views. Mark custom property columns and exclude them from the
+	editor at least for now.
+
+	* src/planner-resource-view.c: Mark custom property columns as
+	such.
+
+	* src/planner-task-tree.c: Make all the columns fixed width, set
+	the id user data on them for column saving/loading. Also set min
+	widths on all columns.
+
+	* src/planner-window.c:
+	* src/planner-main.c: Set the window icon by setting a default one
+	instead of for each window.
+
 2005-04-08  Richard Hult  <richard@imendio.com>
 
 	* libplanner/mrp-time.c (mrp_time2_set_date): Fix the precondition

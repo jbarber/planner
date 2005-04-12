@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
- * Copyright (C) 2003-2004 Imendio AB
+ * Copyright (C) 2003-2005 Imendio AB
  * Copyright (C) 2002 CodeFactory AB
  * Copyright (C) 2002 Richard Hult <richard@imendio.com>
  * Copyright (C) 2002 Mikael Hallendal <micke@imendio.com>
@@ -49,6 +49,7 @@
 #include "planner-gantt-model.h"
 #include "planner-task-tree.h"
 #include "planner-table-print-sheet.h"
+#include "planner-column-dialog.h"
 
 
 struct _PlannerViewPriv {
@@ -60,79 +61,115 @@ struct _PlannerViewPriv {
 	guint                   merged_id;
 };
 
-void          activate                           (PlannerView     *view);
-void          deactivate                         (PlannerView     *view);
-void          init                               (PlannerView     *view,
-						  PlannerWindow   *main_window);
-const gchar  *get_label                          (PlannerView     *view);
-const gchar  *get_menu_label                     (PlannerView     *view);
-const gchar  *get_icon                           (PlannerView     *view);
-const gchar  *get_name                           (PlannerView     *view);
-GtkWidget    *get_widget                         (PlannerView     *view);
-static void   task_view_project_loaded_cb        (MrpProject      *project,
-						  PlannerView     *view);
-static void   task_view_insert_task_cb           (GtkAction       *action,
-						  gpointer         data);
-static void   task_view_insert_tasks_cb          (GtkAction       *action,
-						  gpointer         data);
-static void   task_view_remove_task_cb           (GtkAction       *action,
-						  gpointer         data);
-static void   task_view_edit_task_cb             (GtkAction       *action,
-						  gpointer         data);
-static void   task_view_select_all_cb            (GtkAction       *action,
-						  gpointer         data);
-static void   task_view_unlink_task_cb           (GtkAction       *action,
-						  gpointer         data);
-static void   task_view_link_tasks_cb            (GtkAction       *action,
-						  gpointer         data);
-static void   task_view_indent_task_cb           (GtkAction       *action,
-						  gpointer         data);
-static void   task_view_move_task_up_cb          (GtkAction       *action,
-						  gpointer         data);
-static void   task_view_move_task_down_cb        (GtkAction       *action,
-						  gpointer         data);
-static void   task_view_unindent_task_cb         (GtkAction       *action,
-						  gpointer         data);
-static void   task_view_reset_constraint_cb      (GtkAction       *action,
-						  gpointer         data);
-static void   task_view_edit_custom_props_cb     (GtkAction       *action,
-						  gpointer         data);
-static void   task_view_highlight_critical_cb    (GtkAction       *action,
-						  gpointer         data);
+void          activate                               (PlannerView     *view);
+void          deactivate                             (PlannerView     *view);
+void          init                                   (PlannerView     *view,
+						      PlannerWindow   *main_window);
+const gchar  *get_label                              (PlannerView     *view);
+const gchar  *get_menu_label                         (PlannerView     *view);
+const gchar  *get_icon                               (PlannerView     *view);
+const gchar  *get_name                               (PlannerView     *view);
+GtkWidget    *get_widget                             (PlannerView     *view);
+static void   task_view_tree_view_columns_changed_cb (GtkTreeView     *tree_view,
+						      PlannerView     *view);
+static void   task_view_tree_view_destroy_cb         (GtkTreeView     *tree_view,
+						      PlannerView     *view);
+static void   task_view_project_loaded_cb            (MrpProject      *project,
+						      PlannerView     *view);
+static void   task_view_insert_task_cb               (GtkAction       *action,
+						      gpointer         data);
+static void   task_view_insert_tasks_cb              (GtkAction       *action,
+						      gpointer         data);
+static void   task_view_remove_task_cb               (GtkAction       *action,
+						      gpointer         data);
+static void   task_view_edit_task_cb                 (GtkAction       *action,
+						      gpointer         data);
+static void   task_view_select_all_cb                (GtkAction       *action,
+						      gpointer         data);
+static void   task_view_unlink_task_cb               (GtkAction       *action,
+						      gpointer         data);
+static void   task_view_link_tasks_cb                (GtkAction       *action,
+						      gpointer         data);
+static void   task_view_indent_task_cb               (GtkAction       *action,
+						      gpointer         data);
+static void   task_view_move_task_up_cb              (GtkAction       *action,
+						      gpointer         data);
+static void   task_view_move_task_down_cb            (GtkAction       *action,
+						      gpointer         data);
+static void   task_view_unindent_task_cb             (GtkAction       *action,
+						      gpointer         data);
+static void   task_view_reset_constraint_cb          (GtkAction       *action,
+						      gpointer         data);
+static void   task_view_edit_custom_props_cb         (GtkAction       *action,
+						      gpointer         data);
+static void   task_view_highlight_critical_cb        (GtkAction       *action,
+						      gpointer         data);
+static void   task_view_edit_columns_cb              (GtkAction       *action,
+						      gpointer         data);
+static void   task_view_selection_changed_cb         (PlannerTaskTree *tree,
+						      PlannerView     *view);
+static void   task_view_relations_changed_cb         (PlannerTaskTree *tree,
+						      MrpTask         *task,
+						      MrpRelation     *relation,
+						      PlannerView     *view);
+static void   task_view_update_ui                    (PlannerView     *view);
+static void   task_view_save_columns                 (PlannerView     *view);
+static void   task_view_load_columns                 (PlannerView     *view);
 
-static void   task_view_selection_changed_cb     (PlannerTaskTree *tree,
-						  PlannerView     *view);
-static void   task_view_relations_changed_cb     (PlannerTaskTree *tree,
-						  MrpTask         *task,
-						  MrpRelation     *relation,
-						  PlannerView     *view);
-
-static void   task_view_update_ui                (PlannerView     *view);
-void          print_init                         (PlannerView     *view,
-						  PlannerPrintJob *job);
-void          print                              (PlannerView     *view);
-gint          print_get_n_pages                  (PlannerView     *view);
-void          print_cleanup                      (PlannerView     *view);
+void          print_init                             (PlannerView     *view,
+						      PlannerPrintJob *job);
+void          print                                  (PlannerView     *view);
+gint          print_get_n_pages                      (PlannerView     *view);
+void          print_cleanup                          (PlannerView     *view);
 
 
 static GtkActionEntry entries[] = {
-	{ "InsertTask",      "planner-stock-insert-task",      N_("_Insert Task"),               "<Control>i",        N_("Insert a new task"),                 G_CALLBACK (task_view_insert_task_cb) },
-	{ "InsertTasks",     "planner-stock-insert-task",      N_("In_sert Tasks..."),           NULL,                NULL,                                    G_CALLBACK (task_view_insert_tasks_cb) },
-	{ "RemoveTask",      "planner-stock-remove-task",      N_("_Remove Task"),               "<Control>d",        N_("Remove the selected tasks"),         G_CALLBACK (task_view_remove_task_cb) },
-	{ "EditTask",        NULL,                             N_("_Edit Task"),                 "<Shift><Control>e", NULL,                                    G_CALLBACK (task_view_edit_task_cb) },
-	{ "SelectAll",       NULL,                             N_("Select _All"),                "<Control>a",        N_("Select all tasks"),                  G_CALLBACK (task_view_select_all_cb) },
-	{ "UnlinkTask",      "planner-stock-unlink-task",      N_("_Unlink Task"),               NULL,                N_("Unlink the selected tasks"),         G_CALLBACK (task_view_unlink_task_cb) },
-	{ "LinkTasks",       "planner-stock-link-task",        N_("_Link Tasks"),                NULL,                N_("Link the selected tasks"),           G_CALLBACK (task_view_link_tasks_cb) },
-	{ "IndentTask",      "planner-stock-indent-task",      N_("I_ndent Task"),               "<Shift><Control>i", N_("Indent the selected tasks"),         G_CALLBACK (task_view_indent_task_cb) },
-	{ "UnindentTask",    "planner-stock-unindent-task",    N_("Unin_dent Task"),             "<Shift><Control>u", N_("Unindent the selected tasks"),       G_CALLBACK (task_view_unindent_task_cb) },
-	{ "MoveTaskUp",      "planner-stock-move-task-up",     N_("Move Task _Up"),              NULL,                N_("Move the selected tasks upwards"),   G_CALLBACK (task_view_move_task_up_cb) },
-	{ "MoveTaskDown",    "planner-stock-move-task-down",   N_("Move Task Do_wn"),            NULL,                N_("Move the selected tasks downwards"), G_CALLBACK (task_view_move_task_down_cb) },
-	{ "ResetConstraint", "planner-stock-reset-constraint", N_("Reset _Constraint"),          NULL,                NULL,                                    G_CALLBACK (task_view_reset_constraint_cb) },
-	{ "EditCustomProps", GTK_STOCK_PROPERTIES,             N_("_Edit Custom Properties..."), NULL,                NULL,                                    G_CALLBACK (task_view_edit_custom_props_cb) },
+	{ "InsertTask",      "planner-stock-insert-task",      N_("_Insert Task"),
+	  "<Control>i",        N_("Insert a new task"),
+          G_CALLBACK (task_view_insert_task_cb) },
+	{ "InsertTasks",     "planner-stock-insert-task",      N_("In_sert Tasks..."),
+	  NULL,                NULL,
+	  G_CALLBACK (task_view_insert_tasks_cb) },
+	{ "RemoveTask",      "planner-stock-remove-task",      N_("_Remove Task"),
+	  "<Control>d",        N_("Remove the selected tasks"),
+	  G_CALLBACK (task_view_remove_task_cb) },
+	{ "EditTask",        NULL,                             N_("_Edit Task"),
+	  "<Shift><Control>e", NULL,
+	  G_CALLBACK (task_view_edit_task_cb) },
+	{ "SelectAll",       NULL,                             N_("Select _All"),
+	  "<Control>a",        N_("Select all tasks"),
+	  G_CALLBACK (task_view_select_all_cb) },
+	{ "UnlinkTask",      "planner-stock-unlink-task",      N_("_Unlink Task"),
+	  NULL,                N_("Unlink the selected tasks"),
+	  G_CALLBACK (task_view_unlink_task_cb) },
+	{ "LinkTasks",       "planner-stock-link-task",        N_("_Link Tasks"),
+	  NULL,                N_("Link the selected tasks"),
+	  G_CALLBACK (task_view_link_tasks_cb) },
+	{ "IndentTask",      "planner-stock-indent-task",      N_("I_ndent Task"),
+	  "<Shift><Control>i", N_("Indent the selected tasks"),
+	  G_CALLBACK (task_view_indent_task_cb) },
+	{ "UnindentTask",    "planner-stock-unindent-task",    N_("Unin_dent Task"),
+	  "<Shift><Control>u", N_("Unindent the selected tasks"),
+	  G_CALLBACK (task_view_unindent_task_cb) },
+	{ "MoveTaskUp",      "planner-stock-move-task-up",     N_("Move Task _Up"),
+	  NULL,                N_("Move the selected tasks upwards"),
+	  G_CALLBACK (task_view_move_task_up_cb) },
+	{ "MoveTaskDown",    "planner-stock-move-task-down",   N_("Move Task Do_wn"),
+	  NULL,                N_("Move the selected tasks downwards"),
+	  G_CALLBACK (task_view_move_task_down_cb) },
+	{ "ResetConstraint", "planner-stock-reset-constraint", N_("Reset _Constraint"),
+          NULL,                NULL,
+	  G_CALLBACK (task_view_reset_constraint_cb) },
+	{ "EditCustomProps", GTK_STOCK_PROPERTIES,             N_("_Edit Custom Properties..."),
+	  NULL,                NULL,
+	  G_CALLBACK (task_view_edit_custom_props_cb) },
+	{ "EditColumns",       NULL,                           N_("Edit _Visible Columns"),
+	  NULL,                N_("Edit visible columns"),
+	  G_CALLBACK (task_view_edit_columns_cb) }
 };
 
 static GtkToggleActionEntry toggle_entries[] = {
-	{ "HighlightCriticalTasks", NULL, "_Highlight Critical Path", NULL, NULL,
+	{ "HighlightCriticalTasks", NULL, N_("_Highlight Critical Tasks"), NULL, NULL,
 	  G_CALLBACK (task_view_highlight_critical_cb), FALSE },
 };
 
@@ -271,6 +308,7 @@ get_widget (PlannerView *view)
 		priv->tree = planner_task_tree_new (view->main_window,
 						    model,
 						    TRUE,
+						    FALSE,
 						    /* i18n: WBS is sort for work breakdown structure, and is a
 						     * project management term. You might want to leave it
 						     * untranslated unless there is a localized term for it.
@@ -288,7 +326,19 @@ get_widget (PlannerView *view)
 
 		g_object_unref (model);
 
+		task_view_load_columns (view);
+	
 		gtk_container_add (GTK_CONTAINER (sw), priv->tree);
+		
+		g_signal_connect (priv->tree,
+				  "columns-changed",
+				  G_CALLBACK (task_view_tree_view_columns_changed_cb),
+				  view);
+
+		g_signal_connect (priv->tree,
+				  "destroy",
+				  G_CALLBACK (task_view_tree_view_destroy_cb),
+				  view);
 
 		g_signal_connect (priv->tree,
 				  "selection-changed",
@@ -311,6 +361,25 @@ get_widget (PlannerView *view)
 	}
 
 	return priv->frame;
+}
+
+static void
+task_view_tree_view_columns_changed_cb (GtkTreeView *tree_view,
+					PlannerView *view)
+{
+	task_view_save_columns (view);
+}
+
+static void
+task_view_tree_view_destroy_cb (GtkTreeView *tree_view,
+				PlannerView *view)
+{
+	/* Block, we don't want to save the column configuration when they are
+	 * removed by the destruction.
+	 */
+	g_signal_handlers_block_by_func (tree_view,
+					 task_view_tree_view_columns_changed_cb,
+					 view);
 }
 
 static void
@@ -477,9 +546,9 @@ task_view_edit_custom_props_cb (GtkAction *action,
 	project = planner_window_get_project (view->main_window);
 	
 	dialog = planner_property_dialog_new (view->main_window,
-					 project,
-					 MRP_TYPE_TASK,
-					 _("Edit custom task properties"));
+					      project,
+					      MRP_TYPE_TASK,
+					      _("Edit custom task properties"));
 	
 	gtk_window_set_default_size (GTK_WINDOW (dialog), 500, 300);
 	gtk_widget_show (dialog);
@@ -501,6 +570,21 @@ task_view_highlight_critical_cb (GtkAction *action,
 		state);
 
 	planner_conf_set_bool (CRITICAL_PATH_KEY, state, NULL);
+}
+
+static void
+task_view_edit_columns_cb (GtkAction *action,
+			   gpointer   data)
+{
+	PlannerView     *view;
+	PlannerViewPriv *priv;
+	
+	view = PLANNER_VIEW (data);
+	priv = view->priv;
+	
+	planner_column_dialog_show (view->main_window,
+				    _("Edit Task Columns"),
+				    GTK_TREE_VIEW (priv->tree));
 }
 
 static void 
@@ -537,7 +621,7 @@ print_init (PlannerView     *view,
 	g_assert (priv->print_sheet == NULL);
 
 	priv->print_sheet = planner_table_print_sheet_new (PLANNER_VIEW (view), job, 
-						      GTK_TREE_VIEW (priv->tree));
+							   GTK_TREE_VIEW (priv->tree));
 }
 
 G_MODULE_EXPORT void
@@ -577,11 +661,11 @@ static void
 task_view_update_ui (PlannerView *view)
 {
 	PlannerViewPriv *priv;
-	GList      *list, *l;
-	gboolean    value;
-	gboolean    rel_value  = FALSE;
-	gboolean    link_value = FALSE;
-	gint	    count_value = 0;
+	GList           *list, *l;
+	gboolean         value;
+	gboolean         rel_value  = FALSE;
+	gboolean         link_value = FALSE;
+	gint	         count = 0;
 	
 	if (!view->activated) {
 		return;
@@ -599,50 +683,115 @@ task_view_update_ui (PlannerView *view)
 	}
 
 	for (l = list; l; l = l->next) {
-		count_value++;
+		count++;
 	}
 
 	value = (list != NULL);
-	link_value = (count_value >= 2);
-
+	link_value = (count >= 2);
 
 	g_object_set (gtk_action_group_get_action (priv->actions, "EditTask"),
 		      "sensitive", value, 
 		      NULL);
-
 	g_object_set (gtk_action_group_get_action (priv->actions, "RemoveTask"),
 		      "sensitive", value, 
 		      NULL);
-
 	g_object_set (gtk_action_group_get_action (priv->actions, "UnlinkTask"),
 		      "sensitive", rel_value, 
 		      NULL);
-
 	g_object_set (gtk_action_group_get_action (priv->actions, "LinkTasks"),
 		      "sensitive", link_value, 
 		      NULL);
-
 	g_object_set (gtk_action_group_get_action (priv->actions, "IndentTask"),
 		      "sensitive", value, 
 		      NULL);
-
 	g_object_set (gtk_action_group_get_action (priv->actions, "UnindentTask"),
 		      "sensitive", value, 
 		      NULL);
-
 	g_object_set (gtk_action_group_get_action (priv->actions, "MoveTaskUp"),
 		      "sensitive", value, 
 		      NULL);
-
 	g_object_set (gtk_action_group_get_action (priv->actions, "MoveTaskDown"),
 		      "sensitive", value, 
 		      NULL);
-
 	g_object_set (gtk_action_group_get_action (priv->actions, "ResetConstraint"),
 		      "sensitive", value, 
 		      NULL);
 
 	g_list_free (list);
+}
+
+static void
+task_view_save_columns (PlannerView *view)
+{
+	PlannerViewPriv *priv;
+
+	priv = view->priv;
+	
+	planner_view_column_save_helper (view, GTK_TREE_VIEW (priv->tree));
+}
+
+static void
+task_view_load_columns (PlannerView *view)
+{
+	PlannerViewPriv   *priv;
+	GList             *columns, *l;
+	GtkTreeViewColumn *column;
+	const gchar       *id;
+	gint               i;
+
+	priv = view->priv;
+
+	/* Load the columns. */
+	planner_view_column_load_helper (view, GTK_TREE_VIEW (priv->tree));
+	
+	/* Make things a bit more robust by setting defaults if we don't get any
+	 * visible columns. Should be done through a schema instead (but we'll
+	 * keep this since a lot of people get bad installations when installing
+	 * themselves).
+	 */
+	columns = gtk_tree_view_get_columns (GTK_TREE_VIEW (priv->tree));
+	i = 0;
+	for (l = columns; l; l = l->next) {
+		if (gtk_tree_view_column_get_visible (l->data)) {
+			i++;
+		}
+	}
+
+	if (i == 0) {
+		for (l = columns; l; l = l->next) {
+			column = l->data;
+
+			if (g_object_get_data (G_OBJECT (column), "custom")) {
+				continue;
+			}
+
+			id = g_object_get_data (G_OBJECT (column), "id");
+
+			g_print ("%s\n", id);
+			
+			if (!id) {
+				continue;
+			}
+
+			
+			if (strcmp (id, "wbs") == 0 ||
+			    strcmp (id, "name") == 0 ||
+			    strcmp (id, "start") == 0 ||
+			    strcmp (id, "finish") == 0 ||
+			    strcmp (id, "work") == 0 ||
+			    strcmp (id, "duration") == 0 ||
+			    strcmp (id, "duration") == 0 ||
+			    strcmp (id, "slack") == 0 ||
+			    strcmp (id, "cost") == 0 ||
+			    strcmp (id, "assigned-to")) {
+				gtk_tree_view_column_set_visible (column, TRUE);
+			} else {
+				gtk_tree_view_column_set_visible (column, FALSE);
+			}
+		}
+	}
+	
+	g_list_free (columns);
 }
 
 	

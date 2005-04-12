@@ -22,7 +22,6 @@
  */
 
 #include <config.h>
-#include <signal.h>
 #include <string.h>
 #include <popt.h>
 #include <gtk/gtkwidget.h>
@@ -30,12 +29,10 @@
 #include <glib/gi18n.h>
 #include <libgnome/gnome-program.h>
 #include <libgnomeui/gnome-ui-init.h>
-#include <libgnomeui/gnome-window-icon.h>
 #include "planner-application.h"
 #include "planner-window.h"
 
 static PlannerApplication *application;
-
 
 int
 main (int argc, char **argv)
@@ -58,6 +55,8 @@ main (int argc, char **argv)
 
 	geometry = NULL;
 
+	g_set_application_name ("Planner");
+
 	program = gnome_program_init (PACKAGE, VERSION,
 				      LIBGNOMEUI_MODULE,
 				      argc, argv,
@@ -78,10 +77,8 @@ main (int argc, char **argv)
 		return (1);
 	}
 
-	if (g_getenv ("MRP_G_FATAL_WARNINGS") != NULL) {
-		g_log_set_always_fatal (G_LOG_LEVEL_MASK);
-	}
-	
+	gtk_window_set_default_icon_from_file (DATADIR "/pixmaps/gnome-planner.png", NULL);
+
 	application = planner_application_new ();
 
 	main_window = planner_application_new_window (application);

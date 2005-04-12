@@ -1,5 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
+ * Copyright (C) 2005 Imendio AB
  * Copyright (C) 2002 CodeFactory AB
  * Copyright (C) 2002 Richard Hult <richard@imendio.com>
  * Copyright (C) 2002 Mikael Hallendal <micke@imendio.com>
@@ -25,6 +26,7 @@
 
 #include <gmodule.h>
 #include <gtk/gtkwidget.h>
+#include <gtk/gtktreeview.h>
 #include "planner-window.h"
 #include "planner-print-job.h"
 
@@ -71,27 +73,29 @@ struct _PlannerViewClass {
 	GObjectClass parent_class;
 };
 
-GType        planner_view_get_type          (void) G_GNUC_CONST;
-const gchar *planner_view_get_label         (PlannerView     *view);
-const gchar *planner_view_get_menu_label    (PlannerView     *view);
-const gchar *planner_view_get_icon          (PlannerView     *view);
-const gchar *planner_view_get_name          (PlannerView     *view);
-GtkWidget   *planner_view_get_widget        (PlannerView     *view);
-void         planner_view_init              (PlannerView     *view,
-					     PlannerWindow   *window);
-void         planner_view_activate_helper   (PlannerView     *view,
-					     const gchar     *ui_filename,
-					     const gchar     *name
-					     /*BonoboUIVerb    *verbs*/);
-void         planner_view_deactivate_helper (PlannerView     *view);
-void         planner_view_activate          (PlannerView     *view);
-void         planner_view_deactivate        (PlannerView     *view);
-void         planner_view_print_init        (PlannerView     *view,
-					     PlannerPrintJob *job);
-gint         planner_view_print_get_n_pages (PlannerView     *view);
-void         planner_view_print             (PlannerView     *view);
-void         planner_view_print_cleanup     (PlannerView     *view);
-
+GType        planner_view_get_type           (void) G_GNUC_CONST;
+const gchar *planner_view_get_label          (PlannerView     *view);
+const gchar *planner_view_get_menu_label     (PlannerView     *view);
+const gchar *planner_view_get_icon           (PlannerView     *view);
+const gchar *planner_view_get_name           (PlannerView     *view);
+GtkWidget   *planner_view_get_widget         (PlannerView     *view);
+void         planner_view_init               (PlannerView     *view,
+					      PlannerWindow   *window);
+void         planner_view_activate_helper    (PlannerView     *view,
+					      const gchar     *ui_filename,
+					      const gchar     *name);
+void         planner_view_deactivate_helper  (PlannerView     *view);
+void         planner_view_activate           (PlannerView     *view);
+void         planner_view_deactivate         (PlannerView     *view);
+void         planner_view_print_init         (PlannerView     *view,
+					      PlannerPrintJob *job);
+gint         planner_view_print_get_n_pages  (PlannerView     *view);
+void         planner_view_print              (PlannerView     *view);
+void         planner_view_print_cleanup      (PlannerView     *view);
+void         planner_view_column_load_helper (PlannerView     *view,
+					      GtkTreeView     *tree);
+void         planner_view_column_save_helper (PlannerView     *view,
+					      GtkTreeView     *tree);
 
 #endif /* __PLANNER_VIEW_H__ */
 

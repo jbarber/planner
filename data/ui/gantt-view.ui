@@ -4,6 +4,7 @@
       <placeholder name="Selection placeholder"/>
       <menuitem    action="SelectAll"/>
     </menu>
+
     <menu          action="View">
       <placeholder name="View specific placeholder"/>
       <separator/>
@@ -11,8 +12,10 @@
       <menuitem    action="ZoomOut"/>
       <menuitem    action="ZoomToFit"/>
       <separator/>
+      <menuitem    action="EditColumns"/>
       <menuitem    action="HighlightCriticalTasks"/>
     </menu>
+
     <menu          action="Actions">
       <placeholder name="View specific actions placeholder"/>
       <menuitem    action="InsertTask"/>
@@ -32,6 +35,7 @@
       <menuitem    action="EditTask"/>
     </menu>
   </menubar>
+
   <toolbar         name="ToolBar">
     <toolitem      action="InsertTask"/>
     <toolitem      action="RemoveTask"/>

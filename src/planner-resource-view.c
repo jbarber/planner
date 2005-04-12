@@ -2021,6 +2021,8 @@ resource_view_property_added (MrpProject  *project,
 	gtk_tree_view_column_set_title (col, 
 					mrp_property_get_label (property));
 
+	g_object_set_data (G_OBJECT (col), "custom", GINT_TO_POINTER (TRUE));
+		
 	g_hash_table_insert (priv->property_to_column, property, col);
 	
 	data->property = property;

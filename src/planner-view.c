@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
- * Copyright (C) 2003 Imendio AB
+ * Copyright (C) 2003, 2005 Imendio AB
  * Copyright (C) 2002 CodeFactory AB
  * Copyright (C) 2002 Richard Hult <richard@imendio.com>
  * Copyright (C) 2002 Mikael Hallendal <micke@imendio.com>
@@ -26,6 +26,7 @@
 #include <time.h>
 #include <glib.h>
 #include "planner-view.h"
+#include "planner-conf.h"
 
 static void mv_init       (PlannerView      *view);
 static void mv_class_init (PlannerViewClass *class);
@@ -222,4 +223,129 @@ planner_view_print_cleanup (PlannerView *view)
 	if (view->print_cleanup) {
 		view->print_cleanup (view);
 	}
+}
+
+static gint
+column_sort_func (gconstpointer a,
+		  gconstpointer b)
+{
+	gint   order_a, order_b;
+
+	order_a = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (a), "order"));
+	order_b = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (b), "order"));
+
+	if (order_a < order_b) {
+		return -1;
+	}
+	else if (order_a > order_b) {
+		return 1;
+	} else {
+		return 0;
+	}
+}
+
+void
+planner_view_column_load_helper (PlannerView *view,
+				 GtkTreeView *tree)
+{
+	GList             *columns, *l;
+	GtkTreeViewColumn *column;
+	const gchar       *id;
+	gchar             *key;
+	gboolean           visible, order;
+	gint               width;
+
+	columns = gtk_tree_view_get_columns (tree);
+	for (l = columns; l; l = l->next) {
+		column = l->data;
+
+		if (g_object_get_data (G_OBJECT (column), "custom")) {
+			continue;
+		}
+
+		id = g_object_get_data (G_OBJECT (column), "id");
+		if (!id) {
+			continue;
+		}
+
+		key = g_strdup_printf ("/%s/columns/%s/visible",
+				       planner_view_get_name (view), id);
+		visible = planner_conf_get_bool (key, NULL);
+		gtk_tree_view_column_set_visible (column, visible);
+		g_free (key);
+
+		key = g_strdup_printf ("/%s/columns/%s/order",
+				       planner_view_get_name (view), id);
+		order = planner_conf_get_int (key, NULL);
+		g_object_set_data (G_OBJECT (column), "order", GINT_TO_POINTER (order));
+		g_free (key);
+
+		key = g_strdup_printf ("/%s/columns/%s/width",
+				       planner_view_get_name (view),
+				       id);
+		width = planner_conf_get_int (key, NULL);
+		if (width > 0) {
+			gtk_tree_view_column_set_fixed_width (column, width);
+		}
+		g_free (key);
+	}
+
+	/* Sort the list of columns in the right order. */
+	columns = g_list_sort (columns, column_sort_func);
+
+	for (l = columns; l; l = l->next) {
+		column = l->data;
+
+		gtk_tree_view_move_column_after (tree,
+						 column,
+						 l->prev ? l->prev->data : NULL);
+	}
+		
+	g_list_free (columns);
+}
+
+void
+planner_view_column_save_helper (PlannerView *view,
+				 GtkTreeView *tree)
+{
+	GList             *columns, *l;
+	GtkTreeViewColumn *column;
+	const gchar       *id;
+	gchar             *key;
+	gint               i;
+	
+	columns = gtk_tree_view_get_columns (tree);
+	for (i = 0, l = columns; l; i++, l = l->next) {
+		column = l->data;
+
+		if (g_object_get_data (G_OBJECT (column), "custom")) {
+			continue;
+		}
+
+		id = g_object_get_data (G_OBJECT (column), "id");
+		if (!id) {
+			continue;
+		}
+
+		key = g_strdup_printf ("/%s/columns/%s/visible",
+				       planner_view_get_name (view), id);
+		planner_conf_set_bool (key,
+				       gtk_tree_view_column_get_visible (column),
+				       NULL);
+		g_free (key);
+
+		key = g_strdup_printf ("/%s/columns/%s/order",
+				       planner_view_get_name (view), id);
+		planner_conf_set_int (key, i, NULL);
+		g_free (key);
+		
+		key = g_strdup_printf ("/%s/columns/%s/width",
+				       planner_view_get_name (view), id);
+		planner_conf_set_int (key,
+				      gtk_tree_view_column_get_width (column),
+				      NULL);
+		g_free (key);
+	}
+
+	g_list_free (columns);
 }

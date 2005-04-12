@@ -45,6 +45,8 @@ planner_SOURCES = \
 	planner-cell-renderer-popup.h	\
 	planner-cmd-manager.c		\
 	planner-cmd-manager.h		\
+	planner-column-dialog.c		\
+	planner-column-dialog.h		\
 	planner-day-type-dialog.c	\
 	planner-day-type-dialog.h	\
 	planner-default-week-dialog.c	\

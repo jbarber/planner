@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
- * Copyright (C) 2003-2004 Imendio AB
+ * Copyright (C) 2003-2005 Imendio AB
  * Copyright (C) 2002 CodeFactory AB
  * Copyright (C) 2002 Richard Hult <richard@imendio.com>
  * Copyright (C) 2002 Mikael Hallendal <micke@imendio.com>
@@ -27,20 +27,8 @@
 #include <math.h>
 #include <glib.h>
 #include <gmodule.h>
-#include <gtk/gtkmain.h>
-#include <gtk/gtkiconfactory.h>
-#include <gtk/gtkitemfactory.h>
-#include <gtk/gtkstock.h>
-#include <gtk/gtkhpaned.h>
-#include <gtk/gtkframe.h>
-#include <gtk/gtktreeview.h>
-#include <gtk/gtkcellrenderertext.h>
-#include <gtk/gtktreeselection.h>
-#include <gtk/gtktreemodel.h>
-#include <gtk/gtkscrolledwindow.h>
-#include <gtk/gtkmessagedialog.h>
-#include <gtk/gtktoggleaction.h>
 #include <glib/gi18n.h>
+#include <gtk/gtk.h>
 #include <libplanner/mrp-task.h>
 #include "planner-view.h"
 #include "planner-cell-renderer-date.h"
@@ -50,6 +38,8 @@
 #include "planner-task-tree.h"
 #include "planner-gantt-chart.h"
 #include "planner-gantt-print.h"
+#include "planner-column-dialog.h"
+#include "planner-conf.h"
 
 struct _PlannerViewPriv {
 	GtkWidget             *paned;
@@ -62,74 +52,77 @@ struct _PlannerViewPriv {
 	guint                  merged_id;
 };
 
-static GtkWidget *gantt_view_create_widget                (PlannerView                  *view);
-static void       gantt_view_insert_task_cb               (GtkAction                    *action,
-							   gpointer                      data);
-static void       gantt_view_insert_tasks_cb              (GtkAction                    *action,
-							   gpointer                      data);
-static void       gantt_view_remove_task_cb               (GtkAction                    *action,
-							   gpointer                      data);
-static void       gantt_view_edit_task_cb                 (GtkAction                    *action,
-							   gpointer                      data);
-static void       gantt_view_select_all_cb                (GtkAction                    *action,
-							   gpointer                      data);
-static void       gantt_view_unlink_task_cb               (GtkAction                    *action,
-							   gpointer                      data);
-static void       gantt_view_link_tasks_cb                (GtkAction                    *action,
-							   gpointer                      data);
-static void       gantt_view_indent_task_cb               (GtkAction                    *action,
-							   gpointer                      data);
-static void       gantt_view_unindent_task_cb             (GtkAction                    *action,
-							   gpointer                      data);
-static void       gantt_view_move_task_up_cb              (GtkAction                    *action,
-							   gpointer                      data);
-static void       gantt_view_move_task_down_cb            (GtkAction                    *action,
-							   gpointer                      data);
-static void       gantt_view_reset_constraint_cb          (GtkAction                    *action,
-							   gpointer                      data);
-static void       gantt_view_zoom_to_fit_cb               (GtkAction                    *action,
-							   gpointer                      data);
-static void       gantt_view_zoom_in_cb                   (GtkAction                    *action,
-							   gpointer                      data);
-static void       gantt_view_zoom_out_cb                  (GtkAction                    *action,
-							   gpointer                      data);
-static void       gantt_view_test_cb                      (GtkAction                    *action,
-							   gpointer                      data);
-static void       gantt_view_highlight_critical_cb        (GtkAction                    *action,
-							   gpointer                      data);
+static GtkWidget *gantt_view_create_widget             (PlannerView       *view);
+static void       gantt_view_insert_task_cb            (GtkAction         *action,
+							gpointer           data);
+static void       gantt_view_insert_tasks_cb           (GtkAction         *action,
+							gpointer           data);
+static void       gantt_view_remove_task_cb            (GtkAction         *action,
+							gpointer           data);
+static void       gantt_view_edit_task_cb              (GtkAction         *action,
+							gpointer           data);
+static void       gantt_view_select_all_cb             (GtkAction         *action,
+							gpointer           data);
+static void       gantt_view_unlink_task_cb            (GtkAction         *action,
+							gpointer           data);
+static void       gantt_view_link_tasks_cb             (GtkAction         *action,
+							gpointer           data);
+static void       gantt_view_indent_task_cb            (GtkAction         *action,
+							gpointer           data);
+static void       gantt_view_unindent_task_cb          (GtkAction         *action,
+							gpointer           data);
+static void       gantt_view_move_task_up_cb           (GtkAction         *action,
+							gpointer           data);
+static void       gantt_view_move_task_down_cb         (GtkAction         *action,
+							gpointer           data);
+static void       gantt_view_reset_constraint_cb       (GtkAction         *action,
+							gpointer           data);
+static void       gantt_view_zoom_to_fit_cb            (GtkAction         *action,
+							gpointer           data);
+static void       gantt_view_zoom_in_cb                (GtkAction         *action,
+							gpointer           data);
+static void       gantt_view_zoom_out_cb               (GtkAction         *action,
+							gpointer           data);
+static void       gantt_view_highlight_critical_cb     (GtkAction         *action,
+							gpointer           data);
+static void       gantt_view_edit_columns_cb           (GtkAction         *action,
+							gpointer           data);
+static void       gantt_view_update_row_height         (PlannerView       *view);
+static void       gantt_view_tree_style_set_cb         (GtkWidget         *tree,
+							GtkStyle          *prev_style,
+							PlannerView       *view);
+static void       gantt_view_selection_changed_cb      (PlannerTaskTree   *tree,
+							PlannerView       *view);
+static void       gantt_view_update_zoom_sensitivity   (PlannerView       *view);
+static void       gantt_view_gantt_status_updated_cb   (PlannerGanttChart *gantt,
+							const gchar       *message,
+							PlannerView       *view);
+static void       gantt_view_relations_changed_cb      (PlannerTaskTree   *tree,
+							MrpTask           *task,
+							MrpRelation       *relation,
+							PlannerView       *view);
+static void       gantt_view_gantt_resource_clicked_cb (PlannerGanttChart *chart,
+							MrpResource       *resource,
+							PlannerView       *view);
+static void       gantt_view_update_ui                 (PlannerView       *view);
+static void       gantt_view_save_columns              (PlannerView       *view);
+static void       gantt_view_load_columns              (PlannerView       *view);
 
-static void       gantt_view_update_row_and_header_height (PlannerView                  *view);
-static void       gantt_view_tree_style_set_cb            (GtkWidget                    *tree,
-							   GtkStyle                     *prev_style,
-							   PlannerView                  *view);
-static void       gantt_view_selection_changed_cb         (PlannerTaskTree              *tree,
-							   PlannerView                  *view);
-static void       gantt_view_update_zoom_sensitivity      (PlannerView                  *view);
-static void       gantt_view_gantt_status_updated_cb      (PlannerGanttChart            *gantt,
-							   const gchar                  *message,
-							   PlannerView                  *view);
-static void       gantt_view_relations_changed_cb         (PlannerTaskTree              *tree,
-							   MrpTask                      *task,
-							   MrpRelation                  *relation,
-							   PlannerView                  *view);
-static void       gantt_view_gantt_resource_clicked_cb    (PlannerGanttChart            *chart,
-							   MrpResource                  *resource,
-							   PlannerView                  *view);
-static void       gantt_view_update_ui                    (PlannerView                  *view);
-void              activate                                (PlannerView                  *view);
-void              deactivate                              (PlannerView                  *view);
-void              init                                    (PlannerView                  *view,
-							   PlannerWindow                *main_window);
-const gchar  *    get_label                               (PlannerView                  *view);
-const gchar  *    get_menu_label                          (PlannerView                  *view);
-const gchar  *    get_icon                                (PlannerView                  *view);
-const gchar  *    get_name                                (PlannerView                  *view);
-GtkWidget    *    get_widget                              (PlannerView                  *view);
-void              print_init                              (PlannerView                  *view,
-							   PlannerPrintJob              *job);
-void              print                                   (PlannerView                  *view);
-gint              print_get_n_pages                       (PlannerView                  *view);
-void              print_cleanup                           (PlannerView                  *view);
+
+void              activate                             (PlannerView       *view);
+void              deactivate                           (PlannerView       *view);
+void              init                                 (PlannerView       *view,
+							PlannerWindow     *main_window);
+const gchar  *    get_label                            (PlannerView       *view);
+const gchar  *    get_menu_label                       (PlannerView       *view);
+const gchar  *    get_icon                             (PlannerView       *view);
+const gchar  *    get_name                             (PlannerView       *view);
+GtkWidget    *    get_widget                           (PlannerView       *view);
+void              print_init                           (PlannerView       *view,
+							PlannerPrintJob   *job);
+void              print                                (PlannerView       *view);
+gint              print_get_n_pages                    (PlannerView       *view);
+void              print_cleanup                        (PlannerView       *view);
 
 
 
@@ -179,13 +172,15 @@ static GtkActionEntry entries[] = {
 	{ "ZoomOut",         GTK_STOCK_ZOOM_OUT,             N_("Zoom _Out"),
 	  "<control>minus",    N_("Zoom out"),
 	  G_CALLBACK (gantt_view_zoom_out_cb) },
-	{ "Test",            GTK_STOCK_ADD,                  N_("Test"),
-	  NULL,                NULL,
-	  G_CALLBACK (gantt_view_test_cb) },
+	{ "EditColumns",     NULL,                           N_("Edit _Visible Columns"),
+	  NULL,                N_("Edit visible columns"),
+	  G_CALLBACK (gantt_view_edit_columns_cb) }
 };
 
 static GtkToggleActionEntry toggle_entries[] = {
-	{ "HighlightCriticalTasks", NULL, N_("_Highlight Critical Tasks"), NULL, NULL, G_CALLBACK (gantt_view_highlight_critical_cb), FALSE },
+	{ "HighlightCriticalTasks", NULL, N_("_Highlight Critical Tasks"),
+	  NULL, NULL,
+	  G_CALLBACK (gantt_view_highlight_critical_cb), FALSE }
 };
 
 static guint n_entries        = G_N_ELEMENTS (entries);
@@ -197,7 +192,6 @@ activate (PlannerView *view)
 {
 	PlannerViewPriv *priv;
 	gboolean         show_critical;
-	GError          *error = NULL;
 
 	priv = view->priv;
 
@@ -210,12 +204,7 @@ activate (PlannerView *view)
 	gtk_ui_manager_insert_action_group (priv->ui_manager, priv->actions, 0);
 	priv->merged_id = gtk_ui_manager_add_ui_from_file (priv->ui_manager,
 							   DATADIR "/planner/ui/gantt-view.ui",
-							   &error);
-	if (error != NULL) {
-		g_message ("Building menu failed: %s", error->message);
-		g_message ("Couldn't load: %s", DATADIR "/planner/ui/gantt-view.ui");
-                g_error_free (error);
-	}
+							   NULL);
 
 	gtk_ui_manager_ensure_update (priv->ui_manager);
 
@@ -316,10 +305,7 @@ init (PlannerView *view, PlannerWindow *main_window)
 			      "planner-stock-move-task-down",
 			      icon_set);
 
-	/*
-	 * Build the UI
-	 */
-	priv->ui_manager = planner_window_get_ui_manager(main_window);
+	priv->ui_manager = planner_window_get_ui_manager (main_window);
 }
 
 G_MODULE_EXPORT const gchar *
@@ -507,6 +493,25 @@ gantt_view_tree_view_scroll_event_cb (GtkWidget      *widget,
 	return TRUE;
 }
 
+static void
+gantt_view_tree_view_columns_changed_cb (GtkTreeView *tree_view,
+					 PlannerView *view)
+{
+	gantt_view_save_columns (view);
+}
+
+static void
+gantt_view_tree_view_destroy_cb (GtkTreeView *tree_view,
+				 PlannerView *view)
+{
+	/* Block, we don't want to save the column configuration when they are
+	 * removed by the destruction.
+	 */
+	g_signal_handlers_block_by_func (tree_view,
+					 gantt_view_tree_view_columns_changed_cb,
+					 view);
+}
+
 static GtkWidget *
 gantt_view_create_widget (PlannerView *view)
 {
@@ -535,23 +540,41 @@ gantt_view_create_widget (PlannerView *view)
 	tree = planner_task_tree_new (view->main_window,
 				      PLANNER_GANTT_MODEL (model),
 				      FALSE,
+				      TRUE,
 				      /* i18n: WBS is short for work breakdown structure, and is a
 				       * project management term. You might want to leave it
 				       * untranslated unless there is a localized term for it.
 				       */
-				      COL_WBS,        _("\nWBS"),
-				      COL_NAME,       _("\nName"),
-				      /*COL_START,    _("\nStart"),*/
-				      COL_WORK,       _("\nWork"), 
-				      /*COL_DURATION, _("\nDuration"),*/
+				      COL_WBS, _("WBS"),
+				      COL_NAME, _("Name"), 
+				      COL_START, _("Start"), 
+				      COL_FINISH, _("Finish"),
+				      COL_WORK, _("Work"),
+				      COL_DURATION, _("Duration"),
+				      COL_SLACK, _("Slack"),
+				      COL_COST, _("Cost"),
+				      COL_ASSIGNED_TO, _("Assigned to"),
 				      -1);
-	
+
 	priv->tree = tree;
+
+	gantt_view_load_columns (view);
+	
 	priv->gantt = planner_gantt_chart_new_with_model (model);
 	planner_gantt_chart_set_view (PLANNER_GANTT_CHART (priv->gantt),
 				      PLANNER_TASK_TREE (tree));
 	
 	g_object_unref (model);
+
+	g_signal_connect (tree,
+			  "columns-changed",
+			  G_CALLBACK (gantt_view_tree_view_columns_changed_cb),
+			  view);
+	
+	g_signal_connect (tree,
+			  "destroy",
+			  G_CALLBACK (gantt_view_tree_view_destroy_cb),
+			  view);
 
 	g_signal_connect (priv->gantt,
 			  "status_updated",
@@ -824,34 +847,6 @@ gantt_view_zoom_out_cb (GtkAction *action,
 }
 
 static void
-gantt_view_test_cb (GtkAction *action, 
-		    gpointer   data)
-{
-	PlannerView       *view;
-	PlannerViewPriv   *priv;
-	PlannerGanttModel *model;
-	MrpTask           *task;
-	MrpProject        *project;
-	GList             *list;
-	
-	view = PLANNER_VIEW (data);
-	priv = view->priv;
-	project = planner_window_get_project (view->main_window);
-
-	model = PLANNER_GANTT_MODEL (gtk_tree_view_get_model (
-					     GTK_TREE_VIEW (priv->tree)));
-	
-	list = planner_task_tree_get_selected_tasks (PLANNER_TASK_TREE (priv->tree));
-	if (list == NULL) {
-		return;
-	}
-
-	task = list->data;
-
-	g_list_free (list);
-}
-
-static void
 gantt_view_highlight_critical_cb (GtkAction *action,
 				  gpointer   data)
 {
@@ -874,7 +869,22 @@ gantt_view_highlight_critical_cb (GtkAction *action,
 }
 
 static void
-gantt_view_update_row_and_header_height (PlannerView *view)
+gantt_view_edit_columns_cb (GtkAction *action,
+			    gpointer   data)
+{
+	PlannerView     *view;
+	PlannerViewPriv *priv;
+	
+	view = PLANNER_VIEW (data);
+	priv = view->priv;
+
+	planner_column_dialog_show (view->main_window,
+				    _("Edit Gantt Columns"),
+				    GTK_TREE_VIEW (priv->tree));
+}
+
+static void
+gantt_view_update_row_height (PlannerView *view)
 {
 	GtkTreeView       *tv = GTK_TREE_VIEW (view->priv->tree);
 	GtkWidget         *gantt = view->priv->gantt;
@@ -915,7 +925,7 @@ gantt_view_update_row_and_header_height (PlannerView *view)
 static gboolean
 idle_update_heights (PlannerView *view)
 {
-	gantt_view_update_row_and_header_height (view);
+	gantt_view_update_row_height (view);
 	return FALSE;
 }
 
@@ -1057,3 +1067,67 @@ gantt_view_update_zoom_sensitivity (PlannerView *view)
 		      "sensitive", out,
 		      NULL);
 }
+
+static void
+gantt_view_save_columns (PlannerView *view)
+{
+	PlannerViewPriv *priv;
+
+	priv = view->priv;
+	
+	planner_view_column_save_helper (view, GTK_TREE_VIEW (priv->tree));
+}
+
+static void
+gantt_view_load_columns (PlannerView *view)
+{
+	PlannerViewPriv   *priv;
+	GList             *columns, *l;
+	GtkTreeViewColumn *column;
+	const gchar       *id;
+	gint               i;
+		
+	priv = view->priv;
+
+	/* Load the columns. */
+	planner_view_column_load_helper (view, GTK_TREE_VIEW (priv->tree));
+	
+	/* Make things a bit more robust by setting defaults if we don't get any
+	 * visible columns. Should be done through a schema instead (but we'll
+	 * keep this since a lot of people get bad installations when installing
+	 * themselves).
+	 */
+	columns = gtk_tree_view_get_columns (GTK_TREE_VIEW (priv->tree));
+	i = 0;
+	for (l = columns; l; l = l->next) {
+		if (gtk_tree_view_column_get_visible (l->data)) {
+			i++;
+		}
+	}
+	
+	if (i == 0) {
+		for (l = columns; l; l = l->next) {
+			column = l->data;
+
+			if (g_object_get_data (G_OBJECT (column), "custom")) {
+				continue;
+			}
+
+			id = g_object_get_data (G_OBJECT (column), "id");
+			if (!id) {
+				continue;
+			}
+			
+			if (strcmp (id, "wbs") == 0 ||
+			    strcmp (id, "name") == 0 ||
+			    strcmp (id, "work") == 0) {
+				gtk_tree_view_column_set_visible (column, TRUE);
+			} else {
+				gtk_tree_view_column_set_visible (column, FALSE);
+			}
+		}
+	}
+	
+	g_list_free (columns);
+}
+

@@ -2115,6 +2115,8 @@ task_tree_property_added (MrpProject      *project,
 	gtk_tree_view_column_set_title (col, 
 					mrp_property_get_label (property));
 
+	g_object_set_data (G_OBJECT (col), "custom", GINT_TO_POINTER (TRUE));
+	
 	g_hash_table_insert (priv->property_to_column, property, col);
 	
 	data->property = property;
@@ -2249,6 +2251,19 @@ task_tree_setup_tree_view (GtkTreeView       *tree,
 	}
 }
 
+/* Note: this is not ideal, it emits the signal as soon as the width is changed
+ * during the resize. We should only emit it when the resizing is done.
+ */
+static void
+task_tree_column_notify_width_cb (GtkWidget       *column,
+				  GParamSpec      *spec,
+				  PlannerTaskTree *tree)
+{
+	if (GTK_WIDGET_REALIZED (tree)) {
+		g_signal_emit_by_name (tree, "columns-changed");
+	}
+}
+
 static void
 task_tree_add_column (GtkTreeView *tree,
 		      gint         column,
@@ -2256,11 +2271,11 @@ task_tree_add_column (GtkTreeView *tree,
 {
 	GtkTreeViewColumn *col;
 	GtkCellRenderer   *cell;
+	gboolean           expander = FALSE;
 
 	switch (column) {
 	case COL_WBS:
 		cell = gtk_cell_renderer_text_new ();
-
 		col = gtk_tree_view_column_new_with_attributes (title,
 								cell,
 								NULL);
@@ -2270,12 +2285,9 @@ task_tree_add_column (GtkTreeView *tree,
 							 tree, NULL);
 		g_object_set_data (G_OBJECT (col),
 				   "data-func", task_tree_wbs_data_func);
-		g_object_set_data (G_OBJECT (col),
-				   "user-data", tree);
-		
+		g_object_set_data (G_OBJECT (col), "id", "wbs");
 		gtk_tree_view_column_set_resizable (col, TRUE);
 		gtk_tree_view_column_set_min_width (col, 50);
-		gtk_tree_view_append_column (tree, col);
 		break;
 
 	case COL_NAME:
@@ -2296,15 +2308,11 @@ task_tree_add_column (GtkTreeView *tree,
 							 tree, NULL);
 		g_object_set_data (G_OBJECT (col),
 				   "data-func", task_tree_name_data_func);
-		g_object_set_data (G_OBJECT (col),
-				   "user-data", tree);
+		g_object_set_data (G_OBJECT (col), "id", "name");
 		
 		gtk_tree_view_column_set_resizable (col, TRUE);
 		gtk_tree_view_column_set_min_width (col, 100);
-		gtk_tree_view_append_column (tree, col);
-		gtk_tree_view_column_set_sizing (col, GTK_TREE_VIEW_COLUMN_FIXED);
-		gtk_tree_view_set_expander_column (tree, col);
-                                             
+		expander = TRUE;
 		break;
 
 	case COL_START:
@@ -2329,10 +2337,7 @@ task_tree_add_column (GtkTreeView *tree,
 							 tree, NULL);
 		g_object_set_data (G_OBJECT (col),
 				   "data-func", task_tree_start_data_func);
-		g_object_set_data (G_OBJECT (col),
-				   "user-data", tree);
-		
-		gtk_tree_view_append_column (tree, col);
+		g_object_set_data (G_OBJECT (col), "id", "start");
 		break;
 		
 	case COL_DURATION:
@@ -2341,6 +2346,7 @@ task_tree_add_column (GtkTreeView *tree,
 								cell,
 								NULL);
 		gtk_tree_view_column_set_resizable (col, TRUE);
+		gtk_tree_view_column_set_min_width (col, 70);
 		gtk_tree_view_column_set_cell_data_func (col,
 							 cell,
 							 task_tree_duration_data_func,
@@ -2348,14 +2354,12 @@ task_tree_add_column (GtkTreeView *tree,
 							 NULL);
 		g_object_set_data (G_OBJECT (col),
 				   "data-func", task_tree_duration_data_func);
-		g_object_set_data (G_OBJECT (col),
-				   "user-data", tree);
+		g_object_set_data (G_OBJECT (col), "id", "duration");
+
 		g_signal_connect (cell,
 				  "edited",
 				  G_CALLBACK (task_tree_duration_edited),
 				  tree);
-		
-		gtk_tree_view_append_column (tree, col);
 		break;
 
 	case COL_WORK:
@@ -2364,6 +2368,7 @@ task_tree_add_column (GtkTreeView *tree,
 								cell,
 								NULL);
 		gtk_tree_view_column_set_resizable (col, TRUE);
+		gtk_tree_view_column_set_min_width (col, 70);
 		gtk_tree_view_column_set_cell_data_func (col,
 							 cell,
 							 task_tree_work_data_func,
@@ -2371,15 +2376,12 @@ task_tree_add_column (GtkTreeView *tree,
 							 NULL);
 		g_object_set_data (G_OBJECT (col),
 				   "data-func", task_tree_work_data_func);
-		g_object_set_data (G_OBJECT (col),
-				   "user-data", tree);
+		g_object_set_data (G_OBJECT (col), "id", "work");
 
 		g_signal_connect (cell,
 				  "edited",
 				  G_CALLBACK (task_tree_work_edited),
 				  tree);
-		
-		gtk_tree_view_append_column (tree, col);
 		break;
 		
 	case COL_SLACK:
@@ -2388,6 +2390,7 @@ task_tree_add_column (GtkTreeView *tree,
 								cell,
 								NULL);
 		gtk_tree_view_column_set_resizable (col, TRUE);
+		gtk_tree_view_column_set_min_width (col, 70);
 		gtk_tree_view_column_set_cell_data_func (col,
 							 cell,
 							 task_tree_slack_data_func,
@@ -2395,18 +2398,11 @@ task_tree_add_column (GtkTreeView *tree,
 							 NULL);
 		g_object_set_data (G_OBJECT (col),
 				   "data-func", task_tree_slack_data_func);
-		g_object_set_data (G_OBJECT (col),
-				   "user-data", tree);
-		
-		gtk_tree_view_append_column (tree, col);
+		g_object_set_data (G_OBJECT (col), "id", "slack");
 		break;
 		
 	case COL_FINISH:
 		cell = planner_cell_renderer_date_new (FALSE);
-		/*g_signal_connect (cell,
-		  "edited",
-		  G_CALLBACK (task_tree_start_edited),
-		  tree);*/
 		g_signal_connect (cell,
 				  "show-popup",
 				  G_CALLBACK (task_tree_start_show_popup),
@@ -2423,10 +2419,7 @@ task_tree_add_column (GtkTreeView *tree,
 							 tree, NULL);
 		g_object_set_data (G_OBJECT (col),
 				   "data-func", task_tree_finish_data_func);
-		g_object_set_data (G_OBJECT (col),
-				   "user-data", tree);
-
-		gtk_tree_view_append_column (tree, col);
+		g_object_set_data (G_OBJECT (col), "id", "finish");
 		break;
 
 	case COL_COST:
@@ -2435,6 +2428,7 @@ task_tree_add_column (GtkTreeView *tree,
 								cell,
 								NULL);
 		gtk_tree_view_column_set_resizable (col, TRUE);
+		gtk_tree_view_column_set_min_width (col, 70);
 		gtk_tree_view_column_set_cell_data_func (col,
 							 cell,
 							 task_tree_cost_data_func,
@@ -2442,10 +2436,7 @@ task_tree_add_column (GtkTreeView *tree,
 							 NULL);
 		g_object_set_data (G_OBJECT (col),
 				   "data-func", task_tree_cost_data_func);
-		g_object_set_data (G_OBJECT (col),
-				   "user-data", tree);
-
-		gtk_tree_view_append_column (tree, col);
+		g_object_set_data (G_OBJECT (col), "id", "cost");
 		break;
 
 	case COL_ASSIGNED_TO:
@@ -2454,6 +2445,7 @@ task_tree_add_column (GtkTreeView *tree,
 								cell,
 								NULL);
 		gtk_tree_view_column_set_resizable (col, TRUE);
+		gtk_tree_view_column_set_min_width (col, 70);
 		gtk_tree_view_column_set_cell_data_func (col,
 							 cell,
 							 task_tree_assigned_to_data_func,
@@ -2461,21 +2453,33 @@ task_tree_add_column (GtkTreeView *tree,
 							 NULL);
 		g_object_set_data (G_OBJECT (col),
 				   "data-func", task_tree_assigned_to_data_func);
-		g_object_set_data (G_OBJECT (col),
-				   "user-data", tree);
-
-		gtk_tree_view_append_column (tree, col);
+		g_object_set_data (G_OBJECT (col), "id", "assigned_to");
 		break;
 
 	default:
 		g_assert_not_reached ();
 	}
+
+	gtk_tree_view_column_set_sizing (col, GTK_TREE_VIEW_COLUMN_FIXED);
+	
+	g_object_set_data (G_OBJECT (col), "user-data", tree);
+	gtk_tree_view_append_column (tree, col);
+
+	if (expander) {
+		gtk_tree_view_set_expander_column (tree, col);
+	}
+
+	g_signal_connect (col,
+			  "notify::width",
+			  G_CALLBACK (task_tree_column_notify_width_cb),
+			  tree);
 }
 
 GtkWidget *
 planner_task_tree_new (PlannerWindow     *main_window,
 		       PlannerGanttModel *model, 
 		       gboolean           custom_properties,
+		       gboolean           add_newline,
 		       gint               first_column,
 		       ...)
 {
@@ -2483,8 +2487,9 @@ planner_task_tree_new (PlannerWindow     *main_window,
 	PlannerTaskTree     *tree;
 	PlannerTaskTreePriv *priv;
 	va_list              args;
-	gpointer             str;
+	const gchar         *title;
 	gint                 col;
+	gchar               *tmp;
 	
 	tree = g_object_new (PLANNER_TYPE_TASK_TREE, NULL);
 
@@ -2502,9 +2507,15 @@ planner_task_tree_new (PlannerWindow     *main_window,
 
 	col = first_column;
 	while (col != -1) {
-		str = va_arg (args, gpointer);
+		title = va_arg (args, gchar *);
 
-		task_tree_add_column (GTK_TREE_VIEW (tree), col, str);
+		if (add_newline) {
+			tmp = g_strdup_printf ("\n%s", (gchar *) title);
+			task_tree_add_column (GTK_TREE_VIEW (tree), col, tmp);
+			g_free (tmp);
+		} else {
+			task_tree_add_column (GTK_TREE_VIEW (tree), col, title);
+		}
 		
 		col = va_arg (args, gint);
 	}

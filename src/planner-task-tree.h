@@ -56,6 +56,7 @@ GType        planner_task_tree_get_type               (void) G_GNUC_CONST;
 GtkWidget *  planner_task_tree_new                    (PlannerWindow         *window,
 						       PlannerGanttModel     *model,
 						       gboolean               custom_properties,
+						       gboolean               add_newline,
 						       gint                   first_column,
 						       ...);
 void         planner_task_tree_set_model              (PlannerTaskTree       *tree,

@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: planner\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-03-18 23:41+0100\n"
+"POT-Creation-Date: 2005-04-12 23:28+0200\n"
 "PO-Revision-Date: 2004-07-04 16:55+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -50,7 +50,8 @@ msgstr ""
 "\n"
 "Den valda dagtypen har följande arbetstid:"
 
-#: ../data/glade/calendar-dialog.glade.h:3 ../data/glade/html-output.glade.h:1
+#: ../data/glade/calendar-dialog.glade.h:3
+#: ../data/glade/column-dialog.glade.h:1 ../data/glade/html-output.glade.h:1
 #: ../data/glade/task-dialog.glade.h:2
 msgid "    "
 msgstr "    "
@@ -186,6 +187,22 @@ msgstr "_Namn på ny kalender:"
 #: ../data/glade/calendar-dialog.glade.h:36
 msgid "_New..."
 msgstr "_Ny..."
+
+#: ../data/glade/column-dialog.glade.h:2
+msgid "Hidden columns:"
+msgstr "Gömda kolumner:"
+
+#: ../data/glade/column-dialog.glade.h:3
+msgid "Visible columns:"
+msgstr "Synliga kolumner:"
+
+#: ../data/glade/column-dialog.glade.h:4
+msgid "_Hide"
+msgstr "_Göm"
+
+#: ../data/glade/column-dialog.glade.h:5
+msgid "_Show"
+msgstr "_Visa"
 
 #: ../data/glade/eds.glade.h:2
 msgid "Loading resource data"
@@ -646,12 +663,13 @@ msgstr "Flyttal"
 msgid "Date"
 msgstr "Datum"
 
-#: ../libplanner/mrp-property.c:375 ../src/planner-task-view.c:283
+#: ../libplanner/mrp-property.c:375 ../src/planner-gantt-view.c:553
+#: ../src/planner-task-view.c:321
 msgid "Duration"
 msgstr "Varaktighet"
 
-#: ../libplanner/mrp-property.c:377 ../src/planner-resource-view.c:1275
-#: ../src/planner-task-view.c:285
+#: ../libplanner/mrp-property.c:377 ../src/planner-gantt-view.c:555
+#: ../src/planner-resource-view.c:1275 ../src/planner-task-view.c:323
 msgid "Cost"
 msgstr "Kostnad"
 
@@ -878,10 +896,10 @@ msgid "Import resources from Evolution Data Server"
 msgstr "Importera resurser från Evolution dataserver"
 
 #: ../src/planner-eds-plugin.c:393 ../src/planner-gantt-print.c:190
-#: ../src/planner-group-dialog.c:819 ../src/planner-property-dialog.c:481
-#: ../src/planner-resource-view.c:1156 ../src/planner-task-dialog.c:2534
-#: ../src/planner-task-dialog.c:2608 ../src/planner-task-view.c:279
-#: ../src/planner-ttable-print.c:108
+#: ../src/planner-gantt-view.c:549 ../src/planner-group-dialog.c:819
+#: ../src/planner-property-dialog.c:481 ../src/planner-resource-view.c:1156
+#: ../src/planner-task-dialog.c:2534 ../src/planner-task-dialog.c:2608
+#: ../src/planner-task-view.c:317 ../src/planner-ttable-print.c:108
 msgid "Name"
 msgstr "Namn"
 
@@ -1028,15 +1046,16 @@ msgstr "Projektstart"
 msgid "%e %b %Y"
 msgstr "%d %b %Y"
 
-#: ../src/planner-gantt-print.c:198 ../src/planner-resource-dialog.c:1845
-#: ../src/planner-resource-view.c:747 ../src/planner-resource-view.c:763
-#: ../src/planner-resource-view.c:1686 ../src/planner-task-view.c:282
+#: ../src/planner-gantt-print.c:198 ../src/planner-gantt-view.c:552
+#: ../src/planner-resource-dialog.c:1845 ../src/planner-resource-view.c:747
+#: ../src/planner-resource-view.c:763 ../src/planner-resource-view.c:1686
+#: ../src/planner-task-view.c:320
 msgid "Work"
 msgstr "Arbete"
 
 #: ../src/planner-gantt-print.c:542 ../src/planner-gantt-row.c:692
 #: ../src/planner-html-plugin.c:140 ../src/planner-task-tree.c:1567
-#: ../src/planner-window.c:1872
+#: ../src/planner-window.c:1891
 msgid "Unnamed"
 msgstr "Namnlös"
 
@@ -1059,132 +1078,136 @@ msgstr "Ändra arbete till %s"
 msgid "Edit task property"
 msgstr "Redigera aktivitetsegenskap"
 
-#: ../src/planner-gantt-view.c:137 ../src/planner-task-view.c:119
+#: ../src/planner-gantt-view.c:130 ../src/planner-task-view.c:127
 msgid "_Insert Task"
 msgstr "_Infoga aktivitet"
 
-#: ../src/planner-gantt-view.c:138 ../src/planner-task-view.c:119
+#: ../src/planner-gantt-view.c:131 ../src/planner-task-view.c:128
 msgid "Insert a new task"
 msgstr "Infoga en ny aktivitet"
 
-#: ../src/planner-gantt-view.c:140 ../src/planner-task-view.c:120
+#: ../src/planner-gantt-view.c:133 ../src/planner-task-view.c:130
 msgid "In_sert Tasks..."
 msgstr "In_foga aktiviteter..."
 
-#: ../src/planner-gantt-view.c:143 ../src/planner-task-view.c:121
+#: ../src/planner-gantt-view.c:136 ../src/planner-task-view.c:133
 msgid "_Remove Task"
 msgstr "_Ta bort aktivitet"
 
-#: ../src/planner-gantt-view.c:144 ../src/planner-task-view.c:121
+#: ../src/planner-gantt-view.c:137 ../src/planner-task-view.c:134
 msgid "Remove the selected tasks"
 msgstr "Ta bort de markerade aktiviteterna"
 
-#: ../src/planner-gantt-view.c:146
+#: ../src/planner-gantt-view.c:139
 msgid "_Edit Task Properties..."
 msgstr "_Redigera aktivitetsegenskaper..."
 
-#: ../src/planner-gantt-view.c:149 ../src/planner-resource-view.c:246
-#: ../src/planner-task-view.c:123
+#: ../src/planner-gantt-view.c:142 ../src/planner-resource-view.c:246
+#: ../src/planner-task-view.c:139
 msgid "Select _All"
 msgstr "Markera _alla"
 
-#: ../src/planner-gantt-view.c:150 ../src/planner-resource-view.c:246
-#: ../src/planner-task-view.c:123
+#: ../src/planner-gantt-view.c:143 ../src/planner-resource-view.c:246
+#: ../src/planner-task-view.c:140
 msgid "Select all tasks"
 msgstr "Markera alla aktiviteter"
 
-#: ../src/planner-gantt-view.c:152 ../src/planner-task-view.c:124
+#: ../src/planner-gantt-view.c:145 ../src/planner-task-view.c:142
 msgid "_Unlink Task"
 msgstr "_Avlänka aktivitet"
 
-#: ../src/planner-gantt-view.c:153 ../src/planner-task-view.c:124
+#: ../src/planner-gantt-view.c:146 ../src/planner-task-view.c:143
 msgid "Unlink the selected tasks"
 msgstr "Avlänka de markerade aktiviteterna"
 
-#: ../src/planner-gantt-view.c:155 ../src/planner-task-view.c:125
+#: ../src/planner-gantt-view.c:148 ../src/planner-task-view.c:145
 msgid "_Link Tasks"
 msgstr "_Länka aktiviteter"
 
-#: ../src/planner-gantt-view.c:156 ../src/planner-task-view.c:125
+#: ../src/planner-gantt-view.c:149 ../src/planner-task-view.c:146
 msgid "Link the selected tasks"
 msgstr "Länka de markerade aktiviteterna"
 
-#: ../src/planner-gantt-view.c:158 ../src/planner-task-view.c:126
+#: ../src/planner-gantt-view.c:151 ../src/planner-task-view.c:148
 msgid "I_ndent Task"
 msgstr "_Drag in aktivitet"
 
-#: ../src/planner-gantt-view.c:159 ../src/planner-task-view.c:126
+#: ../src/planner-gantt-view.c:152 ../src/planner-task-view.c:149
 msgid "Indent the selected tasks"
 msgstr "Dra in de markerade aktiviteterna"
 
-#: ../src/planner-gantt-view.c:161 ../src/planner-task-view.c:127
+#: ../src/planner-gantt-view.c:154 ../src/planner-task-view.c:151
 msgid "Unin_dent Task"
 msgstr "Dra _ut aktivitet"
 
-#: ../src/planner-gantt-view.c:162 ../src/planner-task-view.c:127
+#: ../src/planner-gantt-view.c:155 ../src/planner-task-view.c:152
 msgid "Unindent the selected tasks"
 msgstr "Dra ut de markerade aktiviteterna"
 
-#: ../src/planner-gantt-view.c:164 ../src/planner-task-view.c:128
+#: ../src/planner-gantt-view.c:157 ../src/planner-task-view.c:154
 msgid "Move Task _Up"
 msgstr "Flytta _uppåt"
 
-#: ../src/planner-gantt-view.c:165 ../src/planner-task-view.c:128
+#: ../src/planner-gantt-view.c:158 ../src/planner-task-view.c:155
 msgid "Move the selected tasks upwards"
 msgstr "Flytta de markerade aktiviteterna uppåt"
 
-#: ../src/planner-gantt-view.c:167 ../src/planner-task-view.c:129
+#: ../src/planner-gantt-view.c:160 ../src/planner-task-view.c:157
 msgid "Move Task Do_wn"
 msgstr "Flytta _nedåt"
 
-#: ../src/planner-gantt-view.c:168 ../src/planner-task-view.c:129
+#: ../src/planner-gantt-view.c:161 ../src/planner-task-view.c:158
 msgid "Move the selected tasks downwards"
 msgstr "Flytta de markerade aktiviteterna nedåt"
 
-#: ../src/planner-gantt-view.c:170 ../src/planner-task-view.c:130
+#: ../src/planner-gantt-view.c:163 ../src/planner-task-view.c:160
 msgid "Reset _Constraint"
 msgstr "Återställ _restriktion"
 
-#: ../src/planner-gantt-view.c:173
+#: ../src/planner-gantt-view.c:166
 msgid "Zoom To _Fit"
 msgstr "Zooma _hela"
 
-#: ../src/planner-gantt-view.c:174 ../src/planner-ttable-view.c:100
+#: ../src/planner-gantt-view.c:167 ../src/planner-ttable-view.c:100
 msgid "Zoom to fit the entire project"
 msgstr "Zooma så att hela projektet passar"
 
-#: ../src/planner-gantt-view.c:176
+#: ../src/planner-gantt-view.c:169
 msgid "_Zoom In"
 msgstr "_Zooma in"
 
-#: ../src/planner-gantt-view.c:177 ../src/planner-ttable-view.c:99
+#: ../src/planner-gantt-view.c:170 ../src/planner-ttable-view.c:99
 msgid "Zoom in"
 msgstr "Zooma in"
 
-#: ../src/planner-gantt-view.c:179
+#: ../src/planner-gantt-view.c:172
 msgid "Zoom _Out"
 msgstr "Zooma _ut"
 
-#: ../src/planner-gantt-view.c:180 ../src/planner-ttable-view.c:98
+#: ../src/planner-gantt-view.c:173 ../src/planner-ttable-view.c:98
 msgid "Zoom out"
 msgstr "Zooma ut"
 
-#: ../src/planner-gantt-view.c:182
-msgid "Test"
-msgstr "Test"
+#: ../src/planner-gantt-view.c:175 ../src/planner-task-view.c:166
+msgid "Edit _Visible Columns"
+msgstr "Redigera _synliga kolumner"
 
-#: ../src/planner-gantt-view.c:188
+#: ../src/planner-gantt-view.c:176 ../src/planner-task-view.c:167
+msgid "Edit visible columns"
+msgstr "Redigera synliga kolumner"
+
+#: ../src/planner-gantt-view.c:181 ../src/planner-task-view.c:172
 msgid "_Highlight Critical Tasks"
 msgstr "_Visa kritiska aktiviteter"
 
 #. i18n: Label used for the sidebar. Please try to make it short and use
 #. * a linebreak if necessary/possible.
 #.
-#: ../src/planner-gantt-view.c:333
+#: ../src/planner-gantt-view.c:319
 msgid "Gantt"
 msgstr "Gantt"
 
-#: ../src/planner-gantt-view.c:341
+#: ../src/planner-gantt-view.c:327
 msgid "_Gantt Chart"
 msgstr "_Ganttschema"
 
@@ -1192,30 +1215,36 @@ msgstr "_Ganttschema"
 #. * project management term. You might want to leave it
 #. * untranslated unless there is a localized term for it.
 #.
-#: ../src/planner-gantt-view.c:542
-msgid ""
-"\n"
-"WBS"
-msgstr ""
-"\n"
-"WBS"
+#. i18n: WBS is sort for work breakdown structure, and is a
+#. * project management term. You might want to leave it
+#. * untranslated unless there is a localized term for it.
+#.
+#: ../src/planner-gantt-view.c:548 ../src/planner-task-view.c:316
+msgid "WBS"
+msgstr "WBS"
 
-#: ../src/planner-gantt-view.c:543 ../src/planner-ttable-tree.c:367
-msgid ""
-"\n"
-"Name"
-msgstr ""
-"\n"
-"Namn"
+#: ../src/planner-gantt-view.c:550 ../src/planner-task-view.c:318
+msgid "Start"
+msgstr "Start"
 
-#. COL_START,    _("\nStart"),
-#: ../src/planner-gantt-view.c:545
-msgid ""
-"\n"
-"Work"
-msgstr ""
-"\n"
-"Arbete"
+#: ../src/planner-gantt-view.c:551 ../src/planner-task-view.c:319
+msgid "Finish"
+msgstr "Slut"
+
+# Slack brukar kallas slack på svenska inom projekthantering (av det jag
+# sett i litteratur iaf). Glapp kallas ibland det som vi kallar
+# fördröjning (lag).
+#: ../src/planner-gantt-view.c:554 ../src/planner-task-view.c:322
+msgid "Slack"
+msgstr "Slack"
+
+#: ../src/planner-gantt-view.c:556 ../src/planner-task-view.c:324
+msgid "Assigned to"
+msgstr "Tilldelad till"
+
+#: ../src/planner-gantt-view.c:882
+msgid "Edit Gantt Columns"
+msgstr "Redigera ganttkolumner"
 
 #: ../src/planner-group-dialog.c:301
 msgid "Insert group"
@@ -1262,21 +1291,21 @@ msgstr ""
 "\"%s\" är en katalog.\n"
 "Ange ett filnamn och försök igen."
 
-#: ../src/planner-html-plugin.c:236 ../src/planner-window.c:1580
+#: ../src/planner-html-plugin.c:236 ../src/planner-window.c:1600
 #: ../src/planner-xml-planner-plugin.c:125
 #, c-format
 msgid "File \"%s\" exists, do you want to overwrite it?"
 msgstr "Filen \"%s\" finns redan, vill du skriva över den?"
 
-#: ../src/planner-main.c:51
+#: ../src/planner-main.c:48
 msgid "Create the initial window with the given geometry."
 msgstr "Skapa det första fönstret med den angivna geometrin."
 
-#: ../src/planner-main.c:51
+#: ../src/planner-main.c:48
 msgid "GEOMETRY"
 msgstr "GEOMETRI"
 
-#: ../src/planner-main.c:77
+#: ../src/planner-main.c:76
 msgid "planner: --geometry cannot be used with more than one file."
 msgstr "planner: --geometry kan bara användas med en fil."
 
@@ -1300,7 +1329,7 @@ msgstr "Importera en fil"
 msgid "XML Files"
 msgstr "XML-filer"
 
-#: ../src/planner-msp-plugin.c:210 ../src/planner-window.c:748
+#: ../src/planner-msp-plugin.c:210 ../src/planner-window.c:752
 msgid "All Files"
 msgstr "Alla filer"
 
@@ -1823,11 +1852,11 @@ msgstr "Återställ aktivitetsrestriktion"
 msgid "N/A"
 msgstr "-"
 
-#: ../src/planner-task-tree.c:2708
+#: ../src/planner-task-tree.c:2719
 msgid "Remove tasks"
 msgstr "Ta bort aktiviteter"
 
-#: ../src/planner-task-tree.c:2770
+#: ../src/planner-task-tree.c:2781
 #, c-format
 msgid ""
 "You are about to open an edit dialog each for %i tasks. Are you sure that "
@@ -1836,101 +1865,78 @@ msgstr ""
 "En dialog kommer att öppnas för var och en av %d aktiviteter. Är du säger på "
 "att du vill det?"
 
-#: ../src/planner-task-tree.c:2872
+#: ../src/planner-task-tree.c:2883
 msgid "Unlink tasks"
 msgstr "Avlänka aktiviteter"
 
-#: ../src/planner-task-tree.c:2924
+#: ../src/planner-task-tree.c:2935
 msgid "Link tasks"
 msgstr "Länka aktiviteter"
 
-#: ../src/planner-task-tree.c:3015
+#: ../src/planner-task-tree.c:3026
 msgid "Indent tasks"
 msgstr "Drag in aktiviteter"
 
-#: ../src/planner-task-tree.c:3024
+#: ../src/planner-task-tree.c:3035
 msgid "Indent task"
 msgstr "Drag in aktivitet"
 
-#: ../src/planner-task-tree.c:3117
+#: ../src/planner-task-tree.c:3128
 msgid "Unindent tasks"
 msgstr "Dra ut aktiviteter"
 
-#: ../src/planner-task-tree.c:3133
+#: ../src/planner-task-tree.c:3144
 msgid "Unindent task"
 msgstr "Dra ut aktiviteter"
 
-#: ../src/planner-task-tree.c:3210
+#: ../src/planner-task-tree.c:3221
 msgid "Move tasks up"
 msgstr "Flytta aktiviteter uppåt"
 
-#: ../src/planner-task-tree.c:3248
+#: ../src/planner-task-tree.c:3259
 msgid "Move task up"
 msgstr "Flytta aktivitet uppåt"
 
-#: ../src/planner-task-tree.c:3337
+#: ../src/planner-task-tree.c:3348
 msgid "Move tasks down"
 msgstr "Flytta aktiviteter nedåt"
 
 #. Moving task from 'position' to 'position + 1'
-#: ../src/planner-task-tree.c:3383
+#: ../src/planner-task-tree.c:3394
 msgid "Move task down"
 msgstr "Flytta aktiviteter nedåt"
 
-#: ../src/planner-task-tree.c:3439
+#: ../src/planner-task-tree.c:3450
 msgid "Reset task constraints"
 msgstr "Återställ aktivitetsrestriktioner"
 
-#: ../src/planner-task-tree.c:3471
+#: ../src/planner-task-tree.c:3482
 msgid "Reset all task constraints"
 msgstr "Återställ alla aktivitetsrestriktioner"
 
-#: ../src/planner-task-view.c:122
+#: ../src/planner-task-view.c:136
 msgid "_Edit Task"
 msgstr "_Redigera aktivitet"
 
-#: ../src/planner-task-view.c:131
+#: ../src/planner-task-view.c:163
 msgid "_Edit Custom Properties..."
 msgstr "_Redigera egna egenskaper..."
 
-#: ../src/planner-task-view.c:212
+#: ../src/planner-task-view.c:249
 msgid "Tasks"
 msgstr "Aktiviteter"
 
-#: ../src/planner-task-view.c:220
+#: ../src/planner-task-view.c:257
 msgid "_Tasks"
 msgstr "_Aktiviteter"
 
-#. i18n: WBS is sort for work breakdown structure, and is a
-#. * project management term. You might want to leave it
-#. * untranslated unless there is a localized term for it.
-#.
-#: ../src/planner-task-view.c:278
-msgid "WBS"
-msgstr "WBS"
-
-#: ../src/planner-task-view.c:280
-msgid "Start"
-msgstr "Start"
-
-#: ../src/planner-task-view.c:281
-msgid "Finish"
-msgstr "Slut"
-
-# Slack brukar kallas slack på svenska inom projekthantering (av det jag
-# sett i litteratur iaf). Glapp kallas ibland det som vi kallar
-# fördröjning (lag).
-#: ../src/planner-task-view.c:284
-msgid "Slack"
-msgstr "Slack"
-
-#: ../src/planner-task-view.c:286
-msgid "Assigned to"
-msgstr "Tilldelad till"
-
-#: ../src/planner-task-view.c:482
+#: ../src/planner-task-view.c:551
 msgid "Edit custom task properties"
 msgstr "Redigera egenskaper för egen aktivitet"
+
+#: ../src/planner-task-view.c:586
+msgid "Edit Task Columns"
+msgstr "Redigera aktivitetskolumner"
 
 #: ../src/planner-ttable-print.c:189
 msgid "Task"
@@ -1955,6 +1961,14 @@ msgstr "/_Expandera alla resurser"
 #: ../src/planner-ttable-tree.c:121
 msgid "/_Collapse all resources"
 msgstr "/_Fäll in alla resurser"
+
+#: ../src/planner-ttable-tree.c:367
+msgid ""
+"\n"
+"Name"
+msgstr ""
+"\n"
+"Namn"
 
 #: ../src/planner-ttable-tree.c:369
 msgid ""
@@ -1988,231 +2002,230 @@ msgstr "Resurs_utnyttjande"
 msgid "Could not open view plugin file '%s'\n"
 msgstr "Kunde inte öppna vyinsticksfilen \"%s\"\n"
 
-#: ../src/planner-window.c:218
+#: ../src/planner-window.c:226
 msgid "_File"
 msgstr "_Arkiv"
 
-#: ../src/planner-window.c:222
+#: ../src/planner-window.c:230
 msgid "_New Project"
 msgstr "_Nytt projekt"
 
-#: ../src/planner-window.c:222
+#: ../src/planner-window.c:230
 msgid "Create a new project"
 msgstr "Skapa ett nytt projekt"
 
-#: ../src/planner-window.c:226
+#: ../src/planner-window.c:234
 msgid "_Open..."
 msgstr "_Öppna..."
 
-#: ../src/planner-window.c:226
+#: ../src/planner-window.c:234
 msgid "Open a project"
 msgstr "Öppna ett projekt"
 
-#: ../src/planner-window.c:229
+#: ../src/planner-window.c:237
 msgid "_Import"
 msgstr "_Importera"
 
-#: ../src/planner-window.c:233 ../src/planner-window.c:1449
+#: ../src/planner-window.c:241 ../src/planner-window.c:1469
 msgid "_Save"
 msgstr "_Spara"
 
-#: ../src/planner-window.c:233
+#: ../src/planner-window.c:241
 msgid "Save the current project"
 msgstr "Spara det aktuella projekt"
 
-#: ../src/planner-window.c:236
+#: ../src/planner-window.c:244
 msgid "_Export"
 msgstr "_Exportera"
 
-#: ../src/planner-window.c:239
+#: ../src/planner-window.c:247
 msgid "Save _As..."
 msgstr "Spara s_om..."
 
-#: ../src/planner-window.c:239
+#: ../src/planner-window.c:247
 msgid "Save the current project with a different name"
 msgstr "Spara det aktuella projektet med ett annat namn"
 
-#: ../src/planner-window.c:242
+#: ../src/planner-window.c:250
 msgid "_Print..."
 msgstr "S_kriv ut..."
 
-#: ../src/planner-window.c:242
+#: ../src/planner-window.c:250
 msgid "Print the current project"
 msgstr "Skriv ut aktuellt projekt"
 
-#: ../src/planner-window.c:245
+#: ../src/planner-window.c:253
 msgid "Print Pre_view"
 msgstr "_Förhandsgranskning"
 
-#: ../src/planner-window.c:245
+#: ../src/planner-window.c:253
 msgid "Print preview of the current project"
 msgstr "Förhandsgranska aktuellt projekt"
 
-#: ../src/planner-window.c:248
+#: ../src/planner-window.c:256
 msgid "_Close"
 msgstr "S_täng"
 
-#: ../src/planner-window.c:248
+#: ../src/planner-window.c:256
 msgid "Close the current file"
 msgstr "Stäng aktuell fil"
 
-#: ../src/planner-window.c:251
+#: ../src/planner-window.c:259
 msgid "_Quit"
 msgstr "_Avsluta"
 
-#: ../src/planner-window.c:251
+#: ../src/planner-window.c:259
 msgid "Exit the program"
 msgstr "Avsluta programmet"
 
-#: ../src/planner-window.c:255
+#: ../src/planner-window.c:263
 msgid "_Edit"
 msgstr "_Redigera"
 
-#: ../src/planner-window.c:258
+#: ../src/planner-window.c:266
 msgid "_Undo"
 msgstr "_Ångra"
 
-#: ../src/planner-window.c:258
+#: ../src/planner-window.c:266
 msgid "Undo the last action"
 msgstr "Ångra den senaste åtgärden"
 
-#: ../src/planner-window.c:261
+#: ../src/planner-window.c:269
 msgid "_Redo"
 msgstr "_Gör om"
 
-#: ../src/planner-window.c:261
+#: ../src/planner-window.c:269
 msgid "Redo the undone action"
 msgstr "Gör om den ångrade åtgärden"
 
-#: ../src/planner-window.c:265
+#: ../src/planner-window.c:273
 msgid "_View"
 msgstr "_Visa"
 
-#: ../src/planner-window.c:269
+#: ../src/planner-window.c:277
 msgid "_Actions"
 msgstr "_Åtgärder"
 
-#: ../src/planner-window.c:273
+#: ../src/planner-window.c:281
 msgid "_Project"
 msgstr "_Projekt"
 
-#: ../src/planner-window.c:276
+#: ../src/planner-window.c:284
 msgid "_Manage Calendars"
 msgstr "_Hantera kalendrar"
 
-#: ../src/planner-window.c:279
+#: ../src/planner-window.c:287
 msgid "Edit Day _Types"
 msgstr "Redigera dag_typer"
 
-#: ../src/planner-window.c:282
+#: ../src/planner-window.c:290
 msgid "Edit Project _Phases"
 msgstr "Redigera projekt_faser"
 
-#: ../src/planner-window.c:285
+#: ../src/planner-window.c:293
 msgid "_Edit Project Properties"
 msgstr "_Redigera projektegenskaper"
 
-#: ../src/planner-window.c:285
+#: ../src/planner-window.c:293
 msgid "Edit the project properties"
 msgstr "Redigera projektegenskaperna"
 
-#: ../src/planner-window.c:293
+#: ../src/planner-window.c:301
 msgid "_Help"
 msgstr "_Hjälp"
 
-#: ../src/planner-window.c:296
+#: ../src/planner-window.c:304
 msgid "_User Guide"
 msgstr "_Användarmanual"
 
-#: ../src/planner-window.c:296
+#: ../src/planner-window.c:304
 msgid "Show the Planner User Guide"
 msgstr "Visa Planner användarmanual"
 
-#: ../src/planner-window.c:299
+#: ../src/planner-window.c:307
 msgid "_About"
 msgstr "_Om"
 
-#: ../src/planner-window.c:299
+#: ../src/planner-window.c:307
 msgid "About this application"
 msgstr "Om detta program"
 
 #. Note: these strings are leaked.
-#: ../src/planner-window.c:565
+#: ../src/planner-window.c:569
 #, c-format
 msgid "Switch to the view \"%s\""
 msgstr "Växla till vyn \"%s\""
 
-#: ../src/planner-window.c:732
+#: ../src/planner-window.c:736
 msgid "Open a File"
 msgstr "Öppna en fil"
 
-#: ../src/planner-window.c:742
+#: ../src/planner-window.c:746
 msgid "Planner Files"
 msgstr "Planner-filer"
 
 #. I18n: Translators, list your names here, newline separated if there
 #. * are more than one, to appear in the about box.
 #.
-#: ../src/planner-window.c:1152 ../src/planner-window.c:1164
+#: ../src/planner-window.c:1179 ../src/planner-window.c:1195
 msgid "translator-credits"
 msgstr ""
 "Christian Rose\n"
 "Richard Hult\n"
 "Skicka synpunkter på översättningen till sv@li.org"
 
-#. "Copyright \xc2\xa9"
-#: ../src/planner-window.c:1161
+#: ../src/planner-window.c:1192
 msgid "A Project Management application for the GNOME desktop"
 msgstr "Ett projekthanteringsprogram för GNOME-skrivbordet"
 
-#: ../src/planner-window.c:1180
+#: ../src/planner-window.c:1197
 msgid "The Planner Homepage"
 msgstr "Planners hemsida"
 
-#: ../src/planner-window.c:1389
+#: ../src/planner-window.c:1409
 msgid "If you don't save, changes made the last minute will be discarded."
 msgstr ""
 "Om du inte sparar kommer ändringarna gjorda den senaste minuten att gå "
 "förlorade."
 
-#: ../src/planner-window.c:1394
+#: ../src/planner-window.c:1414
 #, c-format
 msgid "If you don't save, changes made the last %d minutes will be discarded."
 msgstr ""
 "Om du inte sparar kommer ändringarna gjorda de senaste %d minuterna att gå "
 "förlorade."
 
-#: ../src/planner-window.c:1399
+#: ../src/planner-window.c:1419
 msgid "If you don't save, changes made the last hour will be discarded."
 msgstr ""
 "Om du inte sparar kommer ändringarna gjorda den senaste timmen att gå "
 "förlorade."
 
-#: ../src/planner-window.c:1404
+#: ../src/planner-window.c:1424
 #, c-format
 msgid "If you don't save, changes made the last %d hours will be discarded."
 msgstr ""
 "Om du inte sparar kommer ändringarna gjorda de senaste %d timmarna att gå "
 "förlorade."
 
-#: ../src/planner-window.c:1411
+#: ../src/planner-window.c:1431
 #, c-format
 msgid "Save changes to document '%s' before closing?"
 msgstr "Spara ändringarna i dokumentet \"%s\" innan det stängs?"
 
-#: ../src/planner-window.c:1436
+#: ../src/planner-window.c:1456
 msgid "C_lose without saving"
 msgstr "S_täng utan att spara"
 
-#: ../src/planner-window.c:1442
+#: ../src/planner-window.c:1462
 msgid "_Cancel"
 msgstr "_Avbryt"
 
-#: ../src/planner-window.c:1541
+#: ../src/planner-window.c:1561
 msgid "Save a File"
 msgstr "Spara en fil"
 
-#: ../src/planner-window.c:1829
+#: ../src/planner-window.c:1848
 msgid ""
 "You have opened a file that was saved with an old version of Planner.\n"
 "\n"
@@ -2241,11 +2254,11 @@ msgstr ""
 "\"Återställ alla restriktioner\" i \"Redigera\"-menyn."
 
 #. Hack.
-#: ../src/planner-window.c:1864
+#: ../src/planner-window.c:1883
 msgid "Unnamed database project"
 msgstr "Namnlöst databasprojekt"
 
-#: ../src/planner-window.c:1978
+#: ../src/planner-window.c:1997
 #, c-format
 msgid "Open '%s'"
 msgstr "Öppna \"%s\""
@@ -2265,6 +2278,26 @@ msgstr "Exportera projekt till en fil som passar Planner 0.11"
 #: ../src/planner-xml-planner-plugin.c:91
 msgid "Export"
 msgstr "Exportera"
+
+#~ msgid "_Highlight Critical Path"
+#~ msgstr "_Visa kritiska aktiviteter"
+
+#~ msgid "Test"
+#~ msgstr "Test"
+
+#~ msgid ""
+#~ "\n"
+#~ "WBS"
+#~ msgstr ""
+#~ "\n"
+#~ "WBS"
+
+#~ msgid ""
+#~ "\n"
+#~ "Work"
+#~ msgstr ""
+#~ "\n"
+#~ "Arbete"
 
 #~ msgid "Remove Tasks"
 #~ msgstr "Ta bort aktiviteter"
