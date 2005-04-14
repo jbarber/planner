@@ -743,9 +743,13 @@ mrp_project_load (MrpProject *project, const gchar *uri, GError **error)
 			mrp_task_manager_set_block_scheduling (priv->task_manager, FALSE);
 			imrp_project_set_needs_saving (project, FALSE);
 			
+			g_free (file_str);
+			
 			return TRUE;
 		}
 	}
+
+	g_free (file_str);
 
 	mrp_task_manager_set_block_scheduling (priv->task_manager, FALSE);
 

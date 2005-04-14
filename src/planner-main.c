@@ -23,7 +23,6 @@
 
 #include <config.h>
 #include <string.h>
-#include <popt.h>
 #include <gtk/gtkwidget.h>
 #include <gtk/gtkmain.h>
 #include <glib/gi18n.h>
@@ -34,21 +33,23 @@
 
 static PlannerApplication *application;
 
+
+
 int
 main (int argc, char **argv)
 {
-        GtkWidget          *main_window;
-        GnomeProgram       *program;
-	gchar              *geometry;
-	poptContext         popt_context;
-	const gchar       **args;
-	gint                i;
-	struct poptOption   options[] = {
-		{ "geometry", 'g', POPT_ARG_STRING, &geometry, 0,
-		  N_("Create the initial window with the given geometry."), N_("GEOMETRY") },
-		{ NULL, '\0', 0, NULL, 0, NULL, NULL }
+        GtkWidget       *main_window;
+        GnomeProgram    *program;
+	gchar           *geometry;
+	GOptionContext  *context;
+	gint             i;
+	GOptionEntry     options[] = {
+		{ "geometry", 'g', 0, G_OPTION_ARG_STRING, &geometry,
+		  N_("Create the initial window with the given geometry."), N_("GEOMETRY")
+		},
+		{ NULL }
 	};
-
+	
 	bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);  
         bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 	textdomain (GETTEXT_PACKAGE);
@@ -57,25 +58,18 @@ main (int argc, char **argv)
 
 	g_set_application_name ("Planner");
 
+	context = g_option_context_new (_("[FILE...]"));
+	g_option_context_add_main_entries (context, options, GETTEXT_PACKAGE);
+	g_option_context_add_group (context, gtk_get_option_group (TRUE));
+	g_option_context_parse (context, &argc, &argv, NULL);
+	g_option_context_free (context);
+
 	program = gnome_program_init (PACKAGE, VERSION,
 				      LIBGNOMEUI_MODULE,
 				      argc, argv,
 				      GNOME_PROGRAM_STANDARD_PROPERTIES,
-				      GNOME_PARAM_POPT_TABLE, options,
 				      GNOME_PARAM_HUMAN_READABLE_NAME, "Planner",
 				      NULL);
-
-	g_object_get (program,
-		      GNOME_PARAM_POPT_CONTEXT,
-		      &popt_context,
-		      NULL);
-
-	/* Check for argument consistency. */
-	args = poptGetArgs (popt_context);
-	if (geometry != NULL && args != NULL && args[0] != NULL && args[1] != NULL) {
-		g_warning (_("planner: --geometry cannot be used with more than one file."));
-		return (1);
-	}
 
 	gtk_window_set_default_icon_from_file (DATADIR "/pixmaps/gnome-planner.png", NULL);
 
@@ -88,26 +82,26 @@ main (int argc, char **argv)
 		
 	gtk_widget_show_all (main_window);
 
-	if (args != NULL) {
-		i = 0;
-		while (args[i]) {
-			if (g_str_has_prefix (args[i], "file:")) {
+	if (argc > 1) {
+		i = 1;
+		while (argv[i]) {
+			if (g_str_has_prefix (argv[i], "file:")) {
 				planner_window_open_in_existing_or_new (
-					PLANNER_WINDOW (main_window), args[i], FALSE);
+					PLANNER_WINDOW (main_window), argv[i], FALSE);
 			} else {
 				gchar *uri;
 
-				if (args[i][0] != '/') {
+				if (!g_path_is_absolute (argv[i])) {
 					/* Relative path. */
 					gchar *cwd, *tmp;
 
 					cwd = g_get_current_dir ();
-					tmp = g_build_filename (cwd, args[i], NULL);
+					tmp = g_build_filename (cwd, argv[i], NULL);
 					uri = g_filename_to_uri (tmp, NULL, NULL);
 					g_free (tmp);
 					g_free (cwd);
 				} else {
-					uri = g_filename_to_uri (args[i], NULL, NULL);
+					uri = g_filename_to_uri (argv[i], NULL, NULL);
 				}
 				
 				if (uri) {
@@ -125,7 +119,5 @@ main (int argc, char **argv)
 
 	g_object_unref (application);
 	
-	poptFreeContext (popt_context);
-
         return 0;
 }

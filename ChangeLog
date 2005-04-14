@@ -1,5 +1,13 @@
 2005-04-14  Richard Hult  <richard@imendio.com>
 
+	* src/planner-main.c: (main): Use goption, another patch from
+	Francisco.
+
+	* libplanner/mrp-project.c: (mrp_project_load): Fix leak, patch
+	from Francisco.
+
+2005-04-14  Richard Hult  <richard@imendio.com>
+
 	* src/planner-window.c (window_about_cb): Patch from Francisco to
 	set the main window as parent.
 
