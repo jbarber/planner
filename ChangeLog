@@ -1,3 +1,13 @@
+2005-04-14  Richard Hult  <richard@imendio.com>
+
+	* src/planner-window.c (window_about_cb): Patch from Francisco to
+	set the main window as parent.
+
+	* data/glade/Makefile.am (glade_DATA): Remove html-output.glade.
+
+	* src/planner-html-plugin.c: Rewrite, use a filechooser directly
+	instead of a GnomeEntry.
+
 2005-04-12  Richard Hult  <richard@imendio.com>
 
 	* data/glade/Makefile.am:

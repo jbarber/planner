@@ -5,7 +5,6 @@ glade_DATA = \
 	calendar-dialog.glade		\
 	column-dialog.glade		\
 	group-dialog.glade		\
-	html-output.glade		\
 	new-property.glade		\
 	project-properties.glade	\
 	property-dialog.glade		\

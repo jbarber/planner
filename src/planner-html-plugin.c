@@ -1,9 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
- * Copyright (C) 2003-2005 Imendio AB
- * Copyright (C) 2003 CodeFactory AB
- * Copyright (C) 2003 Richard Hult <richard@imendio.com>
- * Copyright (C) 2003 Mikael Hallendal <micke@imendio.com>
+ * Copyright (C) 2005 Imendio AB
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -24,150 +21,39 @@
 #include <config.h>
 #include <glib.h> 
 #include <string.h>
-#include <glade/glade.h>
-#include <gtk/gtkradiobutton.h>
-#include <gtk/gtkmessagedialog.h>
-#include <gtk/gtkentry.h>
-#include <gtk/gtkstock.h>
+#include <gtk/gtk.h>
 #include <glib/gi18n.h>
-#include <libgnomeui/gnome-file-entry.h>
 #include <libgnomevfs/gnome-vfs-utils.h>
-#include <gconf/gconf-client.h>
 
 #include "planner-window.h"
 #include "planner-plugin.h"
 
 struct _PlannerPluginPriv {
 	PlannerWindow *main_window;
-	GtkWidget     *dialog;
-	GtkWidget     *local_button;
-	GtkWidget     *local_fileentry;
-	GtkWidget     *server_button;
-	GtkWidget     *server_entry;
-
-	GtkWidget     *browser_button;
 };
 
 
-static void html_plugin_export                (GtkAction         *action,
-					       gpointer           user_data);
-static void html_plugin_ok_button_clicked     (GtkButton         *button,
-					       PlannerPlugin     *plugin);
-static void html_plugin_cancel_button_clicked (GtkButton         *button,
-					       PlannerPlugin     *plugin);
-static void html_plugin_activated             (GtkEntry          *entry,
-					       GtkWidget         *ok_button);
-static void html_plugin_local_toggled         (GtkToggleButton   *button,
-					       PlannerPlugin     *plugin);
-static void html_plugin_server_toggled        (GtkToggleButton   *button,
-					       PlannerPlugin     *plugin);
-static void html_plugin_do_local_export       (PlannerPlugin     *plugin,
-					       const gchar       *path);
+static void html_plugin_export (GtkAction     *action,
+				gpointer       user_data);
+void        plugin_init        (PlannerPlugin *plugin,
+				PlannerWindow *main_window);
+void        plugin_exit        (PlannerPlugin *plugin);
 
-
-void        plugin_init                       (PlannerPlugin     *plugin,
-					       PlannerWindow     *main_window);
-void        plugin_exit                       (PlannerPlugin     *plugin);
 
 
 static GtkActionEntry action_entries[] = {
 	{ "HTML Export", NULL,
 	  N_("HTML"), NULL,
 	  N_("Export project to HTML"),
-	  G_CALLBACK (html_plugin_export) },
+	  G_CALLBACK (html_plugin_export)
+	},
 };
-static guint n_action_entries = G_N_ELEMENTS (action_entries);
 
 
+/* Really ugly hack here... :) */
+#include <gconf/gconf-client.h>
 static void
-html_plugin_export (GtkAction *action,
-		    gpointer   user_data)
-{
-	PlannerPluginPriv *priv = PLANNER_PLUGIN (user_data)->priv;
-	GladeXML          *glade;
-	GtkWidget         *ok_button;
-	GtkWidget         *cancel_button;
-	MrpProject        *project;
-	gchar             *filename, *tmp;
-	gchar             *basename;
-	const gchar       *uri;
-
-	glade = glade_xml_new (GLADEDIR"/html-output.glade",
-			       NULL, NULL);
-
-	priv->dialog = glade_xml_get_widget (glade, "html_dialog");
-
-	gtk_window_set_transient_for (GTK_WINDOW (priv->dialog),
-				      GTK_WINDOW (priv->main_window));
-	priv->local_button = glade_xml_get_widget (glade,
-						     "local_radiobutton");
-	priv->local_fileentry = glade_xml_get_widget (glade, 
-						      "local_fileentry");
-	priv->server_button = glade_xml_get_widget (glade,
-						     "server_radiobutton");
-	priv->server_entry = glade_xml_get_widget (glade, "server_entry");
-
-	priv->browser_button = glade_xml_get_widget (glade,
-						     "browser_button");
-	
-	ok_button = glade_xml_get_widget (glade, "ok_button");
-	cancel_button = glade_xml_get_widget (glade, "cancel_button");
-
-	g_signal_connect (ok_button, "clicked",
-			  G_CALLBACK (html_plugin_ok_button_clicked),
-			  user_data);
-	
-	g_signal_connect (cancel_button, "clicked",
-			  G_CALLBACK (html_plugin_cancel_button_clicked),
-			  user_data);
-	
-	g_signal_connect (priv->local_button, "toggled",
-			  G_CALLBACK (html_plugin_local_toggled),
-			  user_data);
-	g_signal_connect (priv->server_button, "toggled",
-			  G_CALLBACK (html_plugin_server_toggled),
-			  user_data);
-
-	g_signal_connect (gnome_file_entry_gtk_entry (GNOME_FILE_ENTRY (priv->local_fileentry)),
-			  "activate",
-			  G_CALLBACK (html_plugin_activated),
-			  ok_button);
-
-	project = planner_window_get_project (priv->main_window);
-	uri = mrp_project_get_uri (project);
-
-	if (!uri) {
-		uri = _("Unnamed");
-	}
-
-	basename = g_path_get_basename (uri);
-	
-	if (g_str_has_suffix (basename, ".planner")) {
-		tmp = g_strndup (basename,  strlen (basename) - strlen (".planner"));
-	}
-	else if (g_str_has_suffix (basename, ".mrproject")) {
-		tmp = g_strndup (basename,  strlen (basename) - strlen (".mrproject"));
-	} else {
-		tmp = g_strdup (basename);
-	}
-
-	filename = g_strdup_printf ("%s.html", tmp);
-	
-	gnome_file_entry_set_filename (GNOME_FILE_ENTRY (priv->local_fileentry),
-				       filename);
-
-	g_free (tmp);
-	g_free (basename);
-	g_free (filename);
-
-	gtk_widget_show (priv->dialog);
-
-	g_object_unref (glade);
-}
-
-/* Really ugly... */
-static void
-show_url (PlannerPlugin *plugin, const char *url)
+html_plugin_show_url (PlannerPlugin *plugin, const char *url)
 {
 	GConfClient *gconf_client;
 	gchar       *cmd, *tmp;
@@ -198,176 +84,176 @@ show_url (PlannerPlugin *plugin, const char *url)
 	g_free (cmd);
 }
 
-static void 
-html_plugin_ok_button_clicked (GtkButton *button, PlannerPlugin *plugin)
+static void
+html_plugin_export_do (PlannerPlugin *plugin,
+		       const gchar   *path,
+		       gboolean       show_in_browser)
 {
 	PlannerPluginPriv *priv;
-	gboolean           view;
+	MrpProject        *project;
 	GtkWidget         *dialog;
-	gint               res;
-	const gchar       *path;
 
 	priv = plugin->priv;
+	project = planner_window_get_project (priv->main_window);
 	
-	view = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (priv->browser_button));
-	
-	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (priv->local_button))) {
-		path = gnome_file_entry_get_full_path (GNOME_FILE_ENTRY (priv->local_fileentry), FALSE);
+	if (!mrp_project_export (project, path, "Planner HTML", TRUE, NULL)) {
+		dialog = gtk_message_dialog_new (GTK_WINDOW (priv->main_window),
+						 GTK_DIALOG_MODAL |
+						 GTK_DIALOG_DESTROY_WITH_PARENT,
+						 GTK_MESSAGE_ERROR,
+						 GTK_BUTTONS_OK,
+						 _("Could not export to HTML"));
+		gtk_dialog_run (GTK_DIALOG (dialog));
+		gtk_widget_destroy (dialog);
+	}
+	else if (show_in_browser) {
+		html_plugin_show_url (plugin, path);
+	}
+}
 
-		if (!path || strlen (path) == 0) {
-			return;
-		}
+static void
+html_plugin_export (GtkAction *action,
+		    gpointer   user_data)
+{
+	PlannerPlugin     *plugin;
+	PlannerPluginPriv *priv;
+	MrpProject        *project;
+	const gchar       *uri;
+	gchar             *filename;
+	gchar             *basename;
+	gint               res;
+	GtkWidget         *filechooser;
+	GtkWidget         *dialog;
+	GtkWidget         *show_button;
+	gboolean           show;
+
+	plugin = PLANNER_PLUGIN (user_data);
+	priv = plugin->priv;
+
+	filechooser = gtk_file_chooser_dialog_new (_("Export to HTML"),
+						   GTK_WINDOW (priv->main_window),
+						   GTK_FILE_CHOOSER_ACTION_SAVE,
+						   GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+						   GTK_STOCK_SAVE, GTK_RESPONSE_OK,
+						   NULL);
+	
+	project = planner_window_get_project (priv->main_window);
+	uri = mrp_project_get_uri (project);
+	if (!uri) {
+		gchar *cwd, *tmp;
 		
-		if (g_file_test (path, G_FILE_TEST_IS_DIR)) {
-			dialog = gtk_message_dialog_new (GTK_WINDOW (priv->dialog),
-							 GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-							 GTK_MESSAGE_WARNING,
-							 GTK_BUTTONS_CLOSE,
-							 _("\"%s\" is a directory.\nEnter a filename and try again."),
-							 path);
-			res = gtk_dialog_run (GTK_DIALOG (dialog));
-			gtk_widget_destroy (dialog);
+		cwd = g_get_current_dir ();
+		tmp = g_strconcat (_("Unnamed"), ".html", NULL);
+		
+		filename = g_build_filename (cwd, tmp, NULL);
+
+		g_free (cwd);
+		g_free (tmp);
+	} else {
+		gchar *tmp;
+
+		if (g_str_has_suffix (uri, ".planner")) {
+			tmp = g_strndup (uri,  strlen (uri) - strlen (".planner"));
 		}
-		else if (g_file_test (path, G_FILE_TEST_EXISTS)) {
-			dialog = gtk_message_dialog_new (GTK_WINDOW (priv->dialog),
-							 GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+		else if (g_str_has_suffix (uri, ".mrproject")) {
+			tmp = g_strndup (uri,  strlen (uri) - strlen (".mrproject"));
+		} else {
+			tmp = g_strdup (uri);
+		}
+
+		filename = g_strconcat (tmp, ".html", NULL);
+		g_free (tmp);
+	}		
+
+	gtk_file_chooser_set_filename (GTK_FILE_CHOOSER (filechooser),
+				       filename);
+
+	basename = g_path_get_basename (filename);
+
+	gtk_file_chooser_set_current_name (GTK_FILE_CHOOSER (filechooser), basename);
+
+	show_button = gtk_check_button_new_with_label (_("Show result in browser"));
+	gtk_file_chooser_set_extra_widget (GTK_FILE_CHOOSER (filechooser), show_button);
+	
+	g_free (basename);
+	g_free (filename);
+
+ try_again:
+
+	res = gtk_dialog_run (GTK_DIALOG (filechooser));
+	switch (res) {
+	case GTK_RESPONSE_OK:
+		filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (filechooser));
+
+		if (g_file_test (filename, G_FILE_TEST_EXISTS)) {
+			dialog = gtk_message_dialog_new (GTK_WINDOW (filechooser),
+							 GTK_DIALOG_MODAL |
+							 GTK_DIALOG_DESTROY_WITH_PARENT,
 							 GTK_MESSAGE_WARNING,
 							 GTK_BUTTONS_YES_NO,
 							 _("File \"%s\" exists, do you want to overwrite it?"),
-							 path);
+							 filename);
+			gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_YES);
 			res = gtk_dialog_run (GTK_DIALOG (dialog));
 			gtk_widget_destroy (dialog);
-
+		
 			switch (res) {
 			case GTK_RESPONSE_YES:
-				html_plugin_do_local_export (plugin, path);
-				goto done;
-
+				break;
+				
 			case GTK_RESPONSE_NO:
 			case GTK_RESPONSE_DELETE_EVENT:
-				break;
+				g_free (filename);
+				goto try_again;
+				
 			default:
 				g_assert_not_reached ();
 			}
-		} else {
-			html_plugin_do_local_export (plugin, path);
-			goto done;
 		}
-	} else {
-		GtkEntry *entry;
+
+		show = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (show_button));
+		gtk_widget_destroy (filechooser);
 		
-		entry = GTK_ENTRY (gnome_entry_gtk_entry (GNOME_ENTRY (priv->server_entry)));
-			
-		path = gtk_entry_get_text (entry);
-		if (strlen (path) > 0) {
-			html_plugin_do_local_export (plugin, path);
-			goto done;
-		}
-	}
+		html_plugin_export_do (plugin, filename, show);
+		g_free (filename);
 
-	gtk_widget_destroy (priv->dialog);
-	return;
-	
- done:
-	if (view) {
-		gchar *url;
-		
-		url = gnome_vfs_get_uri_from_local_path (path);
-
-		show_url (plugin, url);
-		g_free (url);
-	}
-
-	gtk_widget_destroy (priv->dialog);
-}
-
-static void
-html_plugin_cancel_button_clicked (GtkButton *button, PlannerPlugin *plugin)
-{
-	PlannerPluginPriv *priv = plugin->priv;
-	
-	gtk_widget_destroy (priv->dialog);
-}
-
-static void
-html_plugin_activated (GtkEntry *entry, GtkWidget *ok_button)
-{
-	gtk_widget_activate (ok_button);
-}
-
-static void
-html_plugin_local_toggled (GtkToggleButton *button, PlannerPlugin *plugin)
-{
-	PlannerPluginPriv *priv   = plugin->priv;
-	gboolean           active = FALSE;
-	
-	if (gtk_toggle_button_get_active (button)) {
-		active = TRUE;
-	}
-	
-	gtk_widget_set_sensitive (priv->local_fileentry, active);
-}
-
-static void
-html_plugin_server_toggled (GtkToggleButton *button, PlannerPlugin *plugin)
-{
-	PlannerPluginPriv *priv   = plugin->priv;
-	gboolean           active = FALSE;
-	
-	if (gtk_toggle_button_get_active (button)) {
-		active = TRUE;
-	}
-	
-	gtk_widget_set_sensitive (priv->server_entry, active);
-}
-
-static void
-html_plugin_do_local_export (PlannerPlugin *plugin, const gchar *path)
-{
-	PlannerPluginPriv *priv = plugin->priv;
-	MrpProject        *project;
-	GError            *error = NULL;
-
-	project = planner_window_get_project (priv->main_window);
-	
-	if (!mrp_project_export (project, path,
-				 "Planner HTML",
-				 TRUE,
-				 &error)) {
-		g_warning ("Error while export to HTML: %s", error->message);
+		break;
+	case GTK_RESPONSE_CANCEL:
+		g_free (filename);
+		gtk_widget_destroy (filechooser);
+		break;
 	}
 }
 
 G_MODULE_EXPORT void 
-plugin_init (PlannerPlugin *plugin, PlannerWindow *main_window)
+plugin_init (PlannerPlugin *plugin,
+	     PlannerWindow *main_window)
 {
 	PlannerPluginPriv *priv;
 	GtkUIManager      *ui;
 	GtkActionGroup    *actions;
-	GError            *error = NULL;
 	
 	priv = g_new0 (PlannerPluginPriv, 1);
+
 	plugin->priv = priv;
 	priv->main_window = main_window;
 	
-	/* Create the actions, get the ui manager and merge the whole */
-	actions = gtk_action_group_new("HTML plugin actions");
+	actions = gtk_action_group_new ("HTML plugin actions");
 	gtk_action_group_set_translation_domain (actions, GETTEXT_PACKAGE);
 
-	gtk_action_group_add_actions (actions, action_entries, n_action_entries, plugin);
+	gtk_action_group_add_actions (actions,
+				      action_entries,
+				      G_N_ELEMENTS (action_entries),
+				      plugin);
 
 	ui = planner_window_get_ui_manager (main_window);
 	gtk_ui_manager_insert_action_group (ui, actions, 0);
-	if (!gtk_ui_manager_add_ui_from_file(ui, DATADIR"/planner/ui/html-plugin.ui", &error)) {
-		g_message("Building menu failed: %s", error->message);
-		g_message ("Couldn't load: %s",DATADIR"/planner/ui/html-plugin.ui");
-		g_error_free(error);
-	}
-	gtk_ui_manager_ensure_update(ui);
+	gtk_ui_manager_add_ui_from_file (ui, DATADIR "/planner/ui/html-plugin.ui", NULL);
+
+	gtk_ui_manager_ensure_update (ui);
 }
 
 G_MODULE_EXPORT void 
 plugin_exit (PlannerPlugin *plugin) 
 {
-	/*g_message ("Test exit");*/
 }

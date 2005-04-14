@@ -1157,26 +1157,26 @@ static void
 window_about_cb (GtkAction *action, 
 		 gpointer   data)
 {
-	GdkPixbuf *pixbuf = NULL;
-
-	const gchar *authors[] = {
+	PlannerWindow *window;
+	GdkPixbuf     *pixbuf;
+	const gchar   *authors[] = {
 		"Richard Hult <richard@imendio.com>",
 		"Mikael Hallendal <micke@imendio.com>",
 		"Alvaro del Castillo <acs@barrapunto.com>",
 		NULL
 	};
-
-	const gchar *documenters[] = {
+	const gchar   *documenters[] = {
 		"Kurt Maute <kmaute@yahoo.com>",
 		"Alvaro del Castillo <acs@barrapunto.com>",
 		"Pedro Soria-Rodriguez <sorrodp@alum.wpi.edu>",
 		NULL
 	};
-
 	/* I18n: Translators, list your names here, newline separated if there
 	 * are more than one, to appear in the about box.
 	 */
-	const gchar *translator_credits = N_("translator-credits");
+	const gchar   *translator_credits = N_("translator-credits");
+	
+	window = PLANNER_WINDOW (data);
 	
 	pixbuf = gdk_pixbuf_new_from_file (DATADIR "/pixmaps/gnome-planner.png", NULL);
 	
@@ -1186,7 +1186,7 @@ window_about_cb (GtkAction *action,
 	gtk_about_dialog_set_url_hook ((GtkAboutDialogActivateLinkFunc) handle_links, 
 				       GINT_TO_POINTER (LINK_TYPE_URL), NULL);
 	
-	gtk_show_about_dialog (NULL,
+	gtk_show_about_dialog (GTK_WINDOW (window),
 			       "name", "Imendio Planner", 
 			       "version", VERSION,
 			       "comments", _("A Project Management application for the GNOME desktop"),
