@@ -152,7 +152,7 @@ div.gantt-empty-begin, div.gantt-empty-end, div.gantt-complete-done, div.gantt-c
 
 div.gantt-complete-done {
  background-color: #495f6b;
- height: 0.5em;
+ height: 0.75em;
  margin-top: 0;
  margin-bottom: 0;
 }
