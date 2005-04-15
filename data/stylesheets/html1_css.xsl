@@ -80,26 +80,31 @@ a:hover[href] {
 /*
  * Tables
  */
-
 .scroll-div {
  overflow: auto;
  border-style: solid;
  border-width: 1px;
- border-color: #aaaaaa;
+ border-color: #aaa;
+}
+
+.no-scroll-div {
+ border-style: solid;
+ border-color: #aaa;
+ border-width: 1px 0px 1px 1px;
 }
 
 table {
  width: 100%;
  border-collapse: collapse;	
  border-style: none;
- border-color: white;
+ border-color: #fff;
  white-space: nowrap;
  margin: 0;
 }
 
 tr, td, th {
  white-space: nowrap;
- vertical-align: middle;
+ vertical-align: top;
  padding-top: 1px;
  padding-bottom: 1px;
 }
@@ -108,17 +113,21 @@ th {
  vertical-align: top;
 }
 
+tr {
+ height: 1.5em;
+}
+
 tr.header {
- background-color: #aaaaaa;
- color: #ffffff;
+ background-color: #aaa;
+ color: #fff;
 }
 
 tr.even {
- background-color: #eeeeee;
+ background-color: #eee;
 }
 
 tr.odd {
- background-color: #ffffff;
+ background-color: #fff;
 }
 
 th span, td span {
@@ -136,15 +145,16 @@ span.note {
 div.gantt-empty-begin, div.gantt-empty-end, div.gantt-complete-done, div.gantt-complete-notdone, div.gantt-summary {
  clear: none;
  float: left; 
- height: 13px;
- margin-top: 1px;
- margin-bottom: 1px;
+ height: 0.75em;
+ margin-top: 0.15em;
+ margin-bottom: 0;
 }
 
 div.gantt-complete-done {
  background-color: #495f6b;
- height: 7px;
- margin-top: 3px
+ height: 0.5em;
+ margin-top: 0;
+ margin-bottom: 0;
 }
 
 div.gantt-complete-notdone {
@@ -154,9 +164,9 @@ div.gantt-complete-notdone {
 }
 
 div.gantt-summary {
- height: 3px;
- margin-top: 3px;
- border-bottom: 2px dashed black;
+ height: 0.3em;
+ margin-top: 0.25em;
+ border-bottom: 2px dashed #000;
 }
 
 div.gantt-empty-end {
@@ -164,16 +174,15 @@ div.gantt-empty-end {
 }
 
 span.gantt-milestone {
- font-size: 9px;
+ font-size: 0.8em;
  color: #000000;
- vertical-align: middle;
  position: relative;
  margin-left: 0;
- padding-left: 0;
+ margin-right: 0;
 }
 
 span.gantt-resources {
- margin-left: 4px;
+ margin-left: 0.5em;
 }
 
 th.gantt-day-header {

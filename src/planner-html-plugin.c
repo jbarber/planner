@@ -23,7 +23,6 @@
 #include <string.h>
 #include <gtk/gtk.h>
 #include <glib/gi18n.h>
-#include <libgnomevfs/gnome-vfs-utils.h>
 
 #include "planner-window.h"
 #include "planner-plugin.h"
@@ -136,6 +135,8 @@ html_plugin_export (GtkAction *action,
 						   GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
 						   GTK_STOCK_SAVE, GTK_RESPONSE_OK,
 						   NULL);
+
+	gtk_dialog_set_default_response (GTK_DIALOG (filechooser), GTK_RESPONSE_OK);
 	
 	project = planner_window_get_project (priv->main_window);
 	uri = mrp_project_get_uri (project);

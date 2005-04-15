@@ -76,25 +76,22 @@
     </xsl:choose>
   </xsl:variable>
 
-  <div class="scroll-div">
+  <table cellspacing="0" cellpadding="0" border="0">
+  <tr>
+  <td>
+
+  <div class="no-scroll-div">
   <table cellspacing="0" cellpadding="0" border="1">
     <tr class="header" align="left">
-      <th rowspan="2"><span>WBS</span></th>
-      <th rowspan="2"><span>Name</span></th>
-      <th rowspan="2"><span>Work</span></th>
-      <xsl:call-template name="create-week-row">
-        <xsl:with-param name="days" select="$days"/>
-	<xsl:with-param name="date" select="$projstart"/>
-      </xsl:call-template>
+      <th><span>WBS</span></th>
+      <th><span>Name</span></th>
+      <th><span>Work</span></th>
     </tr>
-
-    <tr class="header" align="left">
-      <xsl:call-template name="create-day-row">
-        <xsl:with-param name="days" select="$days"/>
-	<xsl:with-param name="date" select="$projstart"/>
-      </xsl:call-template>
+    <tr class="header">
+      <th>&nbsp;</th>
+      <th>&nbsp;</th>
+      <th>&nbsp;</th>
     </tr>
-
     <xsl:for-each select="//project//task">
       <xsl:variable name="rowclass">
         <xsl:choose>
@@ -173,6 +170,56 @@
 	    </xsl:otherwise>
 	  </xsl:choose>
 	</td>
+      </tr>
+    </xsl:for-each>
+  </table>
+  </div>
+
+  </td>
+  <td>
+
+  <div class="scroll-div" style="border-color: #aaa #aaa #aaa #fff;">
+  <table cellspacing="0" cellpadding="0" border="1">
+    <tr class="header" align="left">
+      <xsl:call-template name="create-week-row">
+        <xsl:with-param name="days" select="$days"/>
+	<xsl:with-param name="date" select="$projstart"/>
+      </xsl:call-template>
+    </tr>
+
+    <tr class="header" align="left">
+      <xsl:call-template name="create-day-row">
+        <xsl:with-param name="days" select="$days"/>
+	<xsl:with-param name="date" select="$projstart"/>
+      </xsl:call-template>
+    </tr>
+
+    <xsl:for-each select="//project//task">
+      <xsl:variable name="rowclass">
+        <xsl:choose>
+          <xsl:when test="(position() mod 2) = 0">even</xsl:when>
+          <xsl:otherwise>odd</xsl:otherwise>
+        </xsl:choose>
+      </xsl:variable>
+      
+      <xsl:variable name="indent" select="count(ancestor::task)"/>
+      <xsl:variable name="start">
+        <xsl:call-template name="mrproj-parse-date">
+          <xsl:with-param name="thedate" select="@work-start"/>
+        </xsl:call-template>
+      </xsl:variable>
+
+      <xsl:variable name="end">
+        <xsl:call-template name="mrproj-parse-date">
+          <xsl:with-param name="thedate" select="@end"/>
+        </xsl:call-template>
+      </xsl:variable>
+
+      <xsl:variable name="task-start" select="floor(20 * date:seconds(date:difference($projstart, $start)) div 86400)"/>
+      <xsl:variable name="task-end" select="floor(20 * date:seconds(date:difference($projstart, $end)) div 86400) - $task-start"/>
+      <xsl:variable name="task-complete" select="floor($task-end * (@percent-complete div 100))"/>
+      
+      <tr class="{$rowclass}">
 	<td colspan="{$days}">
 	  <div style="width: {$days * 20 + 1}px; white-space: nowrap;">
 	    <xsl:if test="not (task)">
@@ -225,6 +272,7 @@
                   </span>
 		</xsl:otherwise>
 	      </xsl:choose>
+
             </xsl:if>
 	  </div>
         </td>
@@ -232,5 +280,12 @@
     </xsl:for-each>
   </table>
   </div>
+
+
+  </td>
+  </tr>
+  </table>
+
+
 </xsl:template>
 </xsl:stylesheet>

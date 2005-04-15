@@ -1,3 +1,12 @@
+2005-04-15  Richard Hult  <richard@imendio.com>
+
+	* data/stylesheets/html1_css.xsl:
+	* data/stylesheets/html1_gantt.xsl: Update style a bit and make
+	only the gantt part of the chart scrollable, fixes bug #300609.
+
+	* src/planner-html-plugin.c (html_plugin_export): Set default
+	response. Remove unused include.
+
 2005-04-14  Richard Hult  <richard@imendio.com>
 
 	* src/planner-main.c: (main): Use goption, another patch from
