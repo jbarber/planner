@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: planner\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-04-13 01:48-0400\n"
-"PO-Revision-Date: 2005-04-13 19:47-0400\n"
+"POT-Creation-Date: 2005-04-14 22:36-0400\n"
+"PO-Revision-Date: 2005-04-14 19:47-0400\n"
 "Last-Translator: Adam Weinberger <adamw@gnome.org>\n"
 "Language-Team: Canadian English <adamw@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -48,8 +48,7 @@ msgstr ""
 "The selected day type has the following working hours:"
 
 #: ../data/glade/calendar-dialog.glade.h:3
-#: ../data/glade/column-dialog.glade.h:1 ../data/glade/html-output.glade.h:1
-#: ../data/glade/task-dialog.glade.h:2
+#: ../data/glade/column-dialog.glade.h:1 ../data/glade/task-dialog.glade.h:2
 msgid "    "
 msgstr "    "
 
@@ -228,30 +227,6 @@ msgstr "dialogue1"
 #: ../data/glade/group-dialog.glade.h:1
 msgid "Group Editor"
 msgstr "Group Editor"
-
-#: ../data/glade/html-output.glade.h:2
-msgid "<b>Save to file</b>"
-msgstr "<b>Save to file</b>"
-
-#: ../data/glade/html-output.glade.h:3
-msgid "Export to HTML"
-msgstr "Export to HTML"
-
-#: ../data/glade/html-output.glade.h:4
-msgid "Local file:"
-msgstr "Local file:"
-
-#: ../data/glade/html-output.glade.h:5
-msgid "Save to HTML File"
-msgstr "Save to HTML File"
-
-#: ../data/glade/html-output.glade.h:6
-msgid "View the result in browser"
-msgstr "View the result in browser"
-
-#: ../data/glade/html-output.glade.h:7
-msgid "Web location:"
-msgstr "Web location:"
 
 #: ../data/glade/new-property.glade.h:2
 msgid "Add Property"
@@ -619,25 +594,25 @@ msgstr "Default"
 msgid "Invalid URI: '%s'"
 msgstr "Invalid URI: '%s'"
 
-#: ../libplanner/mrp-project.c:755
+#: ../libplanner/mrp-project.c:759
 #, c-format
 msgid "Couldn't find a suitable file module for loading '%s'"
 msgstr "Couldn't find a suitable file module for loading '%s'"
 
-#: ../libplanner/mrp-project.c:776 ../libplanner/mrp-project.c:1060
+#: ../libplanner/mrp-project.c:780 ../libplanner/mrp-project.c:1064
 msgid "No support for SQL storage built into this version of Planner."
 msgstr "No support for SQL storage built into this version of Planner."
 
-#: ../libplanner/mrp-project.c:813
+#: ../libplanner/mrp-project.c:817
 msgid "Invalid URI."
 msgstr "Invalid URI."
 
-#: ../libplanner/mrp-project.c:954
+#: ../libplanner/mrp-project.c:958
 #, c-format
 msgid "Unable to find file writer identified by '%s'"
 msgstr "Unable to find file writer identified by '%s'"
 
-#: ../libplanner/mrp-project.c:1017
+#: ../libplanner/mrp-project.c:1021
 msgid "Couldn't find a suitable file module for loading project"
 msgstr "Couldn't find a suitable file module for loading project"
 
@@ -1047,7 +1022,7 @@ msgid "Work"
 msgstr "Work"
 
 #: ../src/planner-gantt-print.c:542 ../src/planner-gantt-row.c:692
-#: ../src/planner-html-plugin.c:140 ../src/planner-task-tree.c:1567
+#: ../src/planner-html-plugin.c:146 ../src/planner-task-tree.c:1567
 #: ../src/planner-window.c:1891
 msgid "Unnamed"
 msgstr "Unnamed"
@@ -1264,24 +1239,27 @@ msgstr "Manager phone"
 msgid "Manager email"
 msgstr "Manager email"
 
-#: ../src/planner-html-plugin.c:75
+#: ../src/planner-html-plugin.c:46
 msgid "HTML"
 msgstr "HTML"
 
-#: ../src/planner-html-plugin.c:76
+#: ../src/planner-html-plugin.c:47
 msgid "Export project to HTML"
 msgstr "Export project to HTML"
 
-#: ../src/planner-html-plugin.c:226
-#, c-format
-msgid ""
-"\"%s\" is a directory.\n"
-"Enter a filename and try again."
-msgstr ""
-"\"%s\" is a directory.\n"
-"Enter a filename and try again."
+#: ../src/planner-html-plugin.c:105
+msgid "Could not export to HTML"
+msgstr "Could not export to HTML"
 
-#: ../src/planner-html-plugin.c:236 ../src/planner-window.c:1600
+#: ../src/planner-html-plugin.c:133
+msgid "Export to HTML"
+msgstr "Export to HTML"
+
+#: ../src/planner-html-plugin.c:175
+msgid "Show result in browser"
+msgstr "Show result in browser"
+
+#: ../src/planner-html-plugin.c:194 ../src/planner-window.c:1600
 #: ../src/planner-xml-planner-plugin.c:125
 #, c-format
 msgid "File \"%s\" exists, do you want to overwrite it?"
@@ -1295,9 +1273,9 @@ msgstr "Create the initial window with the given geometry."
 msgid "GEOMETRY"
 msgstr "GEOMETRY"
 
-#: ../src/planner-main.c:76
-msgid "planner: --geometry cannot be used with more than one file."
-msgstr "planner: --geometry cannot be used with more than one file."
+#: ../src/planner-main.c:61
+msgid "[FILE...]"
+msgstr "[FILE...]"
 
 #: ../src/planner-msp-plugin.c:49
 msgid "MS Project XML..."
@@ -2153,7 +2131,7 @@ msgstr "Planner Files"
 #. I18n: Translators, list your names here, newline separated if there
 #. * are more than one, to appear in the about box.
 #.
-#: ../src/planner-window.c:1179 ../src/planner-window.c:1195
+#: ../src/planner-window.c:1177 ../src/planner-window.c:1195
 msgid "translator-credits"
 msgstr ""
 "Maintainer: Adam Weinberger <adamw@gnome.org>\n"
