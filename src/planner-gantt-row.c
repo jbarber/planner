@@ -94,9 +94,12 @@ struct _PlannerGanttRowPriv {
 
 	/* FIXME: Don't need those per gantt row. */
 	GdkColor     color_normal;
+	GdkColor     color_normal_light;
+	GdkColor     color_normal_dark;
+
 	GdkColor     color_critical;
-	GdkColor     color_frame_light;
-	GdkColor     color_frame_shadow;
+	GdkColor     color_critical_light;
+	GdkColor     color_critical_dark;
 
 	/* FIXME: Don't need this per gantt row? */
 	PangoLayout *layout;
@@ -131,7 +134,8 @@ struct _PlannerGanttRowPriv {
 
 	/* Cached positions of each assigned resource. */
 	GArray      *resource_widths;
-	
+
+	/* FIXME: Don't need this per row. */
 	GtkItemFactory *popup_factory;
 };
 
@@ -807,14 +811,21 @@ gantt_row_realize (GnomeCanvasItem *item)
 				"LightSkyBlue3",
 				&priv->color_normal);
 	gnome_canvas_get_color (item->canvas,
+				"#9ac7e0",
+				&priv->color_normal_light);
+	gnome_canvas_get_color (item->canvas,
+				"#7da1b5",
+				&priv->color_normal_dark);
+
+	gnome_canvas_get_color (item->canvas,
 				"indian red",
 				&priv->color_critical);
 	gnome_canvas_get_color (item->canvas,
-				"gray75",
-				&priv->color_frame_light);
+				"#de6464",
+				&priv->color_critical_light);
 	gnome_canvas_get_color (item->canvas,
-				"gray40",
-				&priv->color_frame_shadow);
+				"#ba5454",
+				&priv->color_critical_dark);
 }
 
 static void
@@ -983,7 +994,12 @@ gantt_row_draw (GnomeCanvasItem *item,
 		gdk_draw_line (drawable, priv->frame_gc, rx1, cy1, rx2, cy1);
 		gdk_draw_line (drawable, priv->frame_gc, rx1, cy2, rx2, cy2);
 
-		gdk_gc_set_foreground (priv->fill_gc, &priv->color_frame_light);
+		if (!highlight_critical || !critical) {
+			gdk_gc_set_foreground (priv->fill_gc, &priv->color_normal_light);
+		} else {
+			gdk_gc_set_foreground (priv->fill_gc, &priv->color_critical_light);
+		}
+
 		gdk_draw_line (drawable,
 			       priv->fill_gc,
 			       rx1 + 0,
@@ -1000,7 +1016,12 @@ gantt_row_draw (GnomeCanvasItem *item,
 				       cy2 - 1);
 		}
 		
-		gdk_gc_set_foreground (priv->fill_gc, &priv->color_frame_shadow);
+		if (!highlight_critical || !critical) {
+			gdk_gc_set_foreground (priv->fill_gc, &priv->color_normal_dark);
+		} else {
+			gdk_gc_set_foreground (priv->fill_gc, &priv->color_critical_dark);
+		}
+
 		gdk_draw_line (drawable,
 			       priv->fill_gc,
 			       rx1 + 0,

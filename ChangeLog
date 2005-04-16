@@ -1,3 +1,35 @@
+2005-04-16  Richard Hult  <richard@imendio.com>
+
+	* src/Makefile.am: Reorganize views and make them
+	builtin. Simplify a lot.
+
+	* src/planner-gantt-view.[ch]:
+	* src/planner-resource-view.[ch]:
+	* src/planner-ttable-view.[ch]:
+	* src/planner-task-view.[ch]: Adapt to the new view interface.
+
+	* src/planner-ttable-*: s/ttable/usage/.
+
+	* src/planner-view-loader.[ch]:
+	* src/planner-view.[ch]: Remove module loading.
+	* src/planner-window.c: (window_populate): Create the builtin
+	views.
+
+2005-04-16  Richard Hult  <richard@imendio.com>
+
+	* src/planner-gantt-row.c: Make the shadow and highlight colors to
+	be a bit less pronounced, use separate colors for the critical
+	path shadow and highlight.
+
+	* src/planner-ttable-row.c: As above + use separate shadow and
+	highlight colors for free/overuse/underuse. Also remove lots of
+	code that's been commented out.
+
+2005-04-16  Richard Hult  <richard@imendio.com>
+
+	* src/planner-html-plugin.c (html_plugin_show_url): Patch from
+	Francisco to use gnome_url_show.
+
 2005-04-15  Richard Hult  <richard@imendio.com>
 
 	* data/stylesheets/html1_css.xsl:

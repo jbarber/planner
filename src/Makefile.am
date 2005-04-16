@@ -10,7 +10,6 @@ INCLUDES = \
 	-DIMAGEDIR=\""$(datadir)/pixmaps/planner"\"		\
 	-DGLADEDIR=\""$(datadir)/planner/glade"\"		\
 	-DVIEWDIR=\""$(libdir)/planner/views"\"			\
-	-DPLUGINDIR=\""$(libdir)/planner/plugins"\"		\
 	-DSTYLESHEETDIR=\""$(datadir)/planner/stylesheets"\"	\
 	-DDTDDIR=\""$(datadir)/planner/dtd"\"
 
@@ -60,6 +59,7 @@ planner_SOURCES = \
 	planner-list-model.c		\
 	planner-list-model.h		\
 	planner-main.c			\
+	planner-marshal-main.c		\
 	planner-phase-dialog.c		\
 	planner-phase-dialog.h		\
 	planner-plugin.c		\
@@ -104,85 +104,16 @@ planner_SOURCES = \
 	planner-task-input-dialog.h	\
 	planner-view.c			\
 	planner-view.h			\
-	planner-view-loader.c		\
-	planner-view-loader.h		\
 	planner-window.c		\
 	planner-window.h		\
 	planner-working-time-dialog.c	\
-	planner-working-time-dialog.h	
+	planner-working-time-dialog.h	\
+	$(gantt_task_source)		\
+	$(task_source)			\
+	$(resource_source)		\
+	$(usage_source)
 
-
-planner_LDFLAGS = -export-dynamic
-
-planner_LDADD =	\
-	$(top_builddir)/libplanner/libplanner-1.la \
-	$(top_builddir)/libegg/recent-files/libeggrecent.la \
-	libutil.la
-	$(PLANNER_LIBS)
-
-noinst_LTLIBRARIES = libutil.la
-libutil_la_SOURCES = planner-marshal-main.c
-
-
-#
-# Views
-#
-
-viewdir = $(libdir)/planner/views
-view_LTLIBRARIES = libgantt-view.la libtask-view.la libresource-view.la libtimetable-view.la
-
-libgantt_view_la_SOURCES = \
-	planner-relation-arrow.c	\
-	planner-relation-arrow.h	\
-	planner-gantt-chart.c		\
-	planner-gantt-chart.h		\
-	planner-gantt-print.c		\
-	planner-gantt-print.h		\
-	planner-gantt-row.c		\
-	planner-gantt-row.h		\
-	planner-gantt-view.c
-
-libgantt_view_la_LDFLAGS = -avoid-version -module
-libgantt_view_la_LIBADD = libgantt-task.la
-
-
-libtask_view_la_SOURCES = \
-	planner-task-view.c
-
-libtask_view_la_LDFLAGS = -avoid-version -module
-libtask_view_la_LIBADD = libgantt-task.la
-
-
-libresource_view_la_SOURCES = \
-	planner-resource-view.c		
-
-libresource_view_la_LDFLAGS = -avoid-version -module
-libresource_view_la_LIBADD = libutil.la
-
-libtimetable_view_la_SOURCES = \
-	planner-ttable-view.c		\
-	planner-ttable-chart.c		\
-	planner-ttable-chart.h		\
-	planner-ttable-model.c		\
-	planner-ttable-model.h		\
-	planner-ttable-print.c		\
-	planner-ttable-print.h		\
-	planner-ttable-row.c		\
-	planner-ttable-row.h		\
-	planner-ttable-tree.c		\
-	planner-ttable-tree.h
-
-libtimetable_view_la_LDFLAGS = -avoid-version -module
-libtimetable_view_la_LIBADD = libgantt-task.la
-
-
-# Small shared lib for the task, gantt, and resource usage views
-gantt_taskdir = $(libdir)/planner
-gantt_task_LTLIBRARIES = libgantt-task.la
-libgantt_task_la_LIBADD = libutil.la
-libgantt_task_la_LDFLAGS = -avoid-version
-
-libgantt_task_la_SOURCES = \
+gantt_task_source = 			\
 	planner-gantt-background.c	\
 	planner-gantt-background.h	\
 	planner-gantt-header.c		\
@@ -192,7 +123,39 @@ libgantt_task_la_SOURCES = \
 	planner-task-tree.c		\
 	planner-task-tree.h		\
 	planner-task-popup.c 		\
-	planner-task-popup.h
+	planner-task-popup.h		\
+	planner-relation-arrow.c	\
+	planner-relation-arrow.h	\
+	planner-gantt-chart.c		\
+	planner-gantt-chart.h		\
+	planner-gantt-print.c		\
+	planner-gantt-print.h		\
+	planner-gantt-row.c		\
+	planner-gantt-row.h		\
+	planner-gantt-view.c		\
+	planner-gantt-view.h		\
+	planner-task-view.c		\
+	planner-task-view.h
+
+resource_source = 			\
+	planner-resource-view.c		\
+	planner-resource-view.h
+
+usage_source = 				\
+	planner-ttable-view.c		\
+	planner-ttable-chart.c		\
+	planner-ttable-chart.h		\
+	planner-ttable-model.c		\
+	planner-ttable-model.h		\
+	planner-ttable-row.c		\
+	planner-ttable-row.h		\
+	planner-ttable-tree.c		\
+	planner-ttable-tree.h
+
+planner_LDADD =	\
+	$(top_builddir)/libplanner/libplanner-1.la \
+	$(top_builddir)/libegg/recent-files/libeggrecent.la \
+	$(PLANNER_LIBS)
 
 
 #

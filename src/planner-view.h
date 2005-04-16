@@ -1,9 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
  * Copyright (C) 2005 Imendio AB
- * Copyright (C) 2002 CodeFactory AB
- * Copyright (C) 2002 Richard Hult <richard@imendio.com>
- * Copyright (C) 2002 Mikael Hallendal <micke@imendio.com>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -24,40 +21,36 @@
 #ifndef __PLANNER_VIEW_H__
 #define __PLANNER_VIEW_H__
 
-#include <gmodule.h>
-#include <gtk/gtkwidget.h>
-#include <gtk/gtktreeview.h>
+#include <gtk/gtk.h>
 #include "planner-window.h"
 #include "planner-print-job.h"
 
-
-#define PLANNER_TYPE_VIEW		 (planner_view_get_type ())
-#define PLANNER_VIEW(obj)		 (G_TYPE_CHECK_INSTANCE_CAST ((obj), PLANNER_TYPE_VIEW, PlannerView))
-#define PLANNER_VIEW_CLASS(klass)     (G_TYPE_CHECK_CLASS_CAST((klass), PLANNER_TYPE_VIEW, PlannerViewClass))
-#define PLANNER_IS_VIEW(obj)		 (G_TYPE_CHECK_INSTANCE_TYPE ((obj), PLANNER_TYPE_VIEW))
-#define PLANNER_IS_VIEW_CLASS(klass)  (G_TYPE_CHECK_CLASS_TYPE ((klass), PLANNER_TYPE_VIEW))
-#define PLANNER_VIEW_GET_CLASS(obj)   (G_TYPE_INSTANCE_GET_CLASS ((obj), PLANNER_TYPE_VIEW, PlannerViewClass))
+#define PLANNER_TYPE_VIEW	     (planner_view_get_type ())
+#define PLANNER_VIEW(obj)	     (G_TYPE_CHECK_INSTANCE_CAST ((obj), PLANNER_TYPE_VIEW, PlannerView))
+#define PLANNER_VIEW_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST((klass), PLANNER_TYPE_VIEW, PlannerViewClass))
+#define PLANNER_IS_VIEW(obj)	     (G_TYPE_CHECK_INSTANCE_TYPE ((obj), PLANNER_TYPE_VIEW))
+#define PLANNER_IS_VIEW_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), PLANNER_TYPE_VIEW))
+#define PLANNER_VIEW_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), PLANNER_TYPE_VIEW, PlannerViewClass))
 
 typedef struct _PlannerView       PlannerView;
 typedef struct _PlannerViewClass  PlannerViewClass;
-typedef struct _PlannerViewPriv   PlannerViewPriv;
 
 struct _PlannerView {
 	GObject            parent;
-
-	GModule           *handle;
 	PlannerWindow     *main_window;
-
-	PlannerViewPriv   *priv;
 	gboolean           activated;
-	
-	/* Methods. */
+};
+
+struct _PlannerViewClass {
+	GObjectClass parent_class;
+
+	/* Methods */
 	const gchar *(*get_label)         (PlannerView       *view);
 	const gchar *(*get_menu_label)    (PlannerView       *view);
 	const gchar *(*get_icon)          (PlannerView       *view);
 	const gchar *(*get_name)          (PlannerView       *view);
 	GtkWidget   *(*get_widget)        (PlannerView       *view);
-	void         (*init)              (PlannerView       *view,
+	void         (*setup)              (PlannerView       *view,
 					   PlannerWindow     *window);
 	void         (*activate)          (PlannerView       *view);
 	void         (*deactivate)        (PlannerView       *view);
@@ -67,10 +60,7 @@ struct _PlannerView {
 	gint         (*print_get_n_pages) (PlannerView       *view);
 	void         (*print)             (PlannerView       *view);
 	void         (*print_cleanup)     (PlannerView       *view);
-};
 
-struct _PlannerViewClass {
-	GObjectClass parent_class;
 };
 
 GType        planner_view_get_type           (void) G_GNUC_CONST;
@@ -79,7 +69,7 @@ const gchar *planner_view_get_menu_label     (PlannerView     *view);
 const gchar *planner_view_get_icon           (PlannerView     *view);
 const gchar *planner_view_get_name           (PlannerView     *view);
 GtkWidget   *planner_view_get_widget         (PlannerView     *view);
-void         planner_view_init               (PlannerView     *view,
+void         planner_view_setup              (PlannerView     *view,
 					      PlannerWindow   *window);
 void         planner_view_activate_helper    (PlannerView     *view,
 					      const gchar     *ui_filename,

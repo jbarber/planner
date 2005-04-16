@@ -1,7 +1,6 @@
-
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-
 /*
+ * Copyright (C) 2005 Imendio AB
  * Copyright (C) 2003 Benjamin BAYART <benjamin@sitadelle.com>
  * Copyright (C) 2003 Xavier Ordoquy <xordoquy@wanadoo.fr>
  *
@@ -24,41 +23,41 @@
 #include <config.h>
 #include <math.h>
 #include <string.h>
+#include <glib/gi18n.h>
 #include <libplanner/mrp-project.h>
 #include <libplanner/mrp-task.h>
 #include <libplanner/mrp-resource.h>
-#include <glib/gi18n.h>
 #include <libgnomeprint/gnome-print.h>
 #include "planner-print-job.h"
 #include "planner-format.h"
 #include "planner-ttable-print.h"
 
 typedef struct {
-        MrpResource *resource;
+        MrpResource   *resource;
         MrpAssignment *assignment;
-} Ligne;
+} Line;
 
 typedef struct {
-        gboolean has_resource;
-        gboolean has_task;
-        GList *lines;
-        gint n_lines;
+        gboolean  has_resource;
+        gboolean  has_task;
+        GList    *lines;
+        gint      n_lines;
 } Page;
 
 
-struct _PlannerTtablePrintData {
-        MrpProject *project;
-        PlannerView *view;
+struct _PlannerUsagePrintData {
+        MrpProject      *project;
+        PlannerView     *view;
         PlannerPrintJob *job;
-        Page *pages;
+        Page            *pages;
 
-        gint pages_x;
-        gint pages_y;
-        gint n_pages;
-        gint lines;
-        gint lines_per_page;
+        gint             pages_x;
+        gint             pages_y;
+        gint             n_pages;
+        gint             lines;
+        gint             lines_per_page;
 
-        gboolean task_on_first;
+        gboolean         task_on_first;
 
         gdouble res_width;
         gdouble task_width;
@@ -72,7 +71,7 @@ struct _PlannerTtablePrintData {
 #define TEXT_PAD 15.0
 
 void
-planner_ttable_print_do (PlannerTtablePrintData * data)
+planner_usage_print_do (PlannerUsagePrintData * data)
 {
         int i, j;
         gdouble cur_x;
@@ -118,8 +117,8 @@ planner_ttable_print_do (PlannerTtablePrintData * data)
                         j++;
                         planner_print_job_set_font_regular (data->job);
                         for (l = page->lines; l; l = l->next) {
-                                Ligne *line;
-                                line = (Ligne *) l->data;
+                                Line *line;
+                                line = (Line *) l->data;
                                 j++;
                                 planner_print_job_moveto (data->job, 0,
                                                           j *
@@ -199,8 +198,8 @@ planner_ttable_print_do (PlannerTtablePrintData * data)
                         j++;
                         planner_print_job_set_font_regular (data->job);
                         for (l = page->lines; l; l = l->next) {
-                                Ligne *line;
-                                line = (Ligne *) l->data;
+                                Line *line;
+                                line = (Line *) l->data;
                                 j++;
                                 planner_print_job_moveto (data->job, 0,
                                                           j *
@@ -263,12 +262,12 @@ planner_ttable_print_do (PlannerTtablePrintData * data)
          */
 }
 
-PlannerTtablePrintData *
-planner_ttable_print_data_new (PlannerView * view, PlannerPrintJob * job)
+PlannerUsagePrintData *
+planner_usage_print_data_new (PlannerView * view, PlannerPrintJob * job)
 {
-        PlannerTtablePrintData *data;
+        PlannerUsagePrintData *data;
 
-        data = g_new0 (PlannerTtablePrintData, 1);
+        data = g_new0 (PlannerUsagePrintData, 1);
         data->view = view;
         data->job = job;
         data->project = planner_window_get_project (view->main_window);
@@ -276,14 +275,14 @@ planner_ttable_print_data_new (PlannerView * view, PlannerPrintJob * job)
 }
 
 void
-planner_ttable_print_data_free (PlannerTtablePrintData * data)
+planner_usage_print_data_free (PlannerUsagePrintData * data)
 {
         g_return_if_fail (data != NULL);
         g_free (data);
 }
 
 gint
-planner_ttable_print_get_n_pages (PlannerTtablePrintData * data)
+planner_usage_print_get_n_pages (PlannerUsagePrintData * data)
 {
         GnomeFont *font;
         GList *r, *a;
@@ -367,10 +366,10 @@ planner_ttable_print_get_n_pages (PlannerTtablePrintData * data)
         }
         for (; r; r = r->next) {
                 MrpResource *res;
-                Ligne *line;
+                Line *line;
                 res = MRP_RESOURCE (r->data);
                 a = mrp_resource_get_assignments (res);
-                line = g_new0 (Ligne, 1);
+                line = g_new0 (Line, 1);
                 line->assignment = NULL;
                 line->resource = res;
                 for (i = 0; i < data->pages_x; i++) {
@@ -382,7 +381,7 @@ planner_ttable_print_get_n_pages (PlannerTtablePrintData * data)
                 for (; a; a = a->next) {
                         MrpAssignment *assign;
                         assign = MRP_ASSIGNMENT (a->data);
-                        line = g_new0 (Ligne, 1);
+                        line = g_new0 (Line, 1);
                         line->assignment = assign;
                         line->resource = NULL;
                         for (i = 0; i < data->pages_x; i++) {

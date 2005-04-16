@@ -19,41 +19,42 @@
  * Boston, MA 02111-1307, USA.
  */
 
-#ifndef __PLANNER_TTABLE_ROW_H__
-#define __PLANNER_TTABLE_ROW_H__
+#ifndef __PLANNER_USAGE_ROW_H__
+#define __PLANNER_USAGE_ROW_H__
 
 #include <gtk/gtk.h>
 #include <libgnomecanvas/gnome-canvas.h>
 
-#define PLANNER_TYPE_TTABLE_ROW            (planner_ttable_row_get_type ())
-#define PLANNER_TTABLE_ROW(obj)            (GTK_CHECK_CAST ((obj), PLANNER_TYPE_TTABLE_ROW, PlannerTtableRow))
-#define PLANNER_TTABLE_ROW_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), PLANNER_TYPE_TTABLE_ROW, PlannerTtableRowClass))
-#define PLANNER_IS_TTABLE_ROW(obj)         (GTK_CHECK_TYPE ((obj), PLANNER_TYPE_TTABLE_ROW))
-#define PLANNER_IS_TTABLE_ROW_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), PLANNER_TYPE_TTABLE_ROW))
-#define PLANNER_TTABLE_ROW_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), PLANNER_TYPE_TTABLE_ROW, PlannerTtableRowClass))
+#define PLANNER_TYPE_USAGE_ROW            (planner_usage_row_get_type ())
+#define PLANNER_USAGE_ROW(obj)            (GTK_CHECK_CAST ((obj), PLANNER_TYPE_USAGE_ROW, PlannerUsageRow))
+#define PLANNER_USAGE_ROW_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), PLANNER_TYPE_USAGE_ROW, PlannerUsageRowClass))
+#define PLANNER_IS_USAGE_ROW(obj)         (GTK_CHECK_TYPE ((obj), PLANNER_TYPE_USAGE_ROW))
+#define PLANNER_IS_USAGE_ROW_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), PLANNER_TYPE_USAGE_ROW))
+#define PLANNER_USAGE_ROW_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), PLANNER_TYPE_USAGE_ROW, PlannerUsageRowClass))
 
 
-typedef struct _PlannerTtableRow PlannerTtableRow;
-typedef struct _PlannerTtableRowClass PlannerTtableRowClass;
-typedef struct _PlannerTtableRowPriv PlannerTtableRowPriv;
+typedef struct _PlannerUsageRow PlannerUsageRow;
+typedef struct _PlannerUsageRowClass PlannerUsageRowClass;
+typedef struct _PlannerUsageRowPriv PlannerUsageRowPriv;
 
-struct _PlannerTtableRow {
+struct _PlannerUsageRow {
         GnomeCanvasItem       parent;
-        PlannerTtableRowPriv *priv;
+        PlannerUsageRowPriv *priv;
 };
 
-struct _PlannerTtableRowClass {
+struct _PlannerUsageRowClass {
         GnomeCanvasItemClass parent_class;
 };
 
-GType planner_ttable_row_get_type     (void) G_GNUC_CONST;
-void  planner_ttable_row_get_geometry (PlannerTtableRow *row,
-				       gdouble          *x1,
-				       gdouble          *y1,
-				       gdouble          *x2,
-				       gdouble          *y2);
-void  planner_ttable_row_set_visible  (PlannerTtableRow *row,
-				       gboolean          is_visible);
+GType planner_usage_row_get_type     (void) G_GNUC_CONST;
+void planner_usage_row_get_geometry (PlannerUsageRow *row,
+				     gdouble         *x1,
+				     gdouble         *y1,
+				     gdouble         *x2,
+				     gdouble         *y2);
+void planner_usage_row_set_visible  (PlannerUsageRow *row,
+				     gboolean         is_visible);
 
-#endif /* __PLANNER_TTABLE_ROW_H__ */
+
+#endif /* __PLANNER_USAGE_ROW_H__ */
  

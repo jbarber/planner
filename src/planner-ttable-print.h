@@ -1,6 +1,4 @@
-
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-
 /*
  * Copyright (C) 2003 Benjamin BAYART <benjamin@sitadelle.com>
  * Copyright (C) 2003 Xavier Ordoquy <xordoquy@wanadoo.fr>
@@ -21,19 +19,20 @@
  * Boston, MA 02111-1307, USA.
  */
 
-#ifndef __PLANNER_TTABLE_PRINT_JOB_H__
-#define __PLANNER_TTABLE_PRINT_JOB_H__
+#ifndef __PLANNER_USAGE_PRINT_JOB_H__
+#define __PLANNER_USAGE_PRINT_JOB_H__
 
 #include <gtk/gtktreeview.h>
 #include "planner-print-job.h"
 #include "planner-view.h"
 
-typedef struct _PlannerTtablePrintData PlannerTtablePrintData;
+typedef struct _PlannerUsagePrintData PlannerUsagePrintData;
 
-void planner_ttable_print_do (PlannerTtablePrintData * print_data);
-gint planner_ttable_print_get_n_pages (PlannerTtablePrintData * print_data);
-PlannerTtablePrintData *planner_ttable_print_data_new (PlannerView * view,
-                                                       PlannerPrintJob * job);
-void planner_ttable_print_data_free (PlannerTtablePrintData * print_data);
+void                   planner_usage_print_do          (PlannerUsagePrintData *print_data);
+gint                   planner_usage_print_get_n_pages (PlannerUsagePrintData *print_data);
+PlannerUsagePrintData *planner_usage_print_data_new    (PlannerView           *view,
+							PlannerPrintJob       *job);
+void                   planner_usage_print_data_free   (PlannerUsagePrintData *print_data);
 
-#endif
+
+#endif /* __PLANNER_USAGE_PRINT_JOB_H__ */

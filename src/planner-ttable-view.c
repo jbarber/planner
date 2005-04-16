@@ -1,5 +1,4 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-
 /*
  * Copyright (C) 2003-2004 Imendio AB
  * Copyright (C) 2003 Benjamin BAYART <benjamin@sitadelle.com>
@@ -22,279 +21,278 @@
  */
 
 #include <config.h>
-#include <glib.h>
-#include <gmodule.h>
-#include <gtk/gtk.h>
-#include <gtk/gtkmain.h>
-#include <gtk/gtkhpaned.h>
 #include <glib/gi18n.h>
+#include <gtk/gtk.h>
 #include <libplanner/mrp-task.h>
 #include <libplanner/mrp-resource.h>
-#include "planner-view.h"
+#include "planner-usage-view.h"
 #include "planner-ttable-print.h"
 #include "planner-ttable-model.h"
 #include "planner-ttable-tree.h"
 #include "planner-ttable-chart.h"
 
-struct _PlannerViewPriv {
+struct _PlannerUsageViewPriv {
         GtkWidget              *paned;
         GtkWidget              *tree;
         MrpProject             *project;
 
-        PlannerTtableChart     *chart;
-        PlannerTtablePrintData *print_data;
-
+        PlannerUsageChart     *chart;
+        PlannerUsagePrintData *print_data;
+	
 	GtkUIManager           *ui_manager;
 	GtkActionGroup         *actions;
 	guint                   merged_id;
 };
 
-static void       ttable_view_zoom_out_cb             (GtkAction                    *action,
-						       gpointer                      data);
-static void       ttable_view_zoom_in_cb              (GtkAction                    *action,
-						       gpointer                      data);
-static void       ttable_view_zoom_to_fit_cb          (GtkAction                    *action,
-						       gpointer                      data);
-static GtkWidget *ttable_view_create_widget           (PlannerView                  *view);
-static void       ttable_view_project_loaded_cb       (MrpProject                   *project,
-						       PlannerView                  *view);
-static void       ttable_view_tree_style_set_cb       (GtkWidget                    *tree,
-						       GtkStyle                     *prev_style,
-						       PlannerView                  *view);
-static void       ttable_view_row_expanded            (GtkTreeView                  *tree_view,
-						       GtkTreeIter                  *iter,
-						       GtkTreePath                  *path,
-						       gpointer                      data);
-static void       ttable_view_row_collapsed           (GtkTreeView                  *tree_view,
-						       GtkTreeIter                  *iter,
-						       GtkTreePath                  *path,
-						       gpointer                      data);
-static void       ttable_view_expand_all              (PlannerTtableTree            *tree,
-						       PlannerTtableChart           *chart);
-static void       ttable_view_collapse_all            (PlannerTtableTree            *tree,
-						       PlannerTtableChart           *chart);
-static void       ttable_view_ttable_status_updated   (PlannerTtableChart           *chart,
-						       const gchar                  *message,
-						       PlannerView                  *view);
-static void       ttable_view_update_zoom_sensitivity (PlannerView                  *view);
-void              activate                            (PlannerView                  *view);
-void              deactivate                          (PlannerView                  *view);
-void              init                                (PlannerView                  *view,
+static void       usage_view_zoom_out_cb             (GtkAction                    *action,
+						      gpointer                      data);
+static void       usage_view_zoom_in_cb              (GtkAction                    *action,
+						      gpointer                      data);
+static void       usage_view_zoom_to_fit_cb          (GtkAction                    *action,
+						      gpointer                      data);
+static GtkWidget *usage_view_create_widget           (PlannerView                  *view);
+static void       usage_view_project_loaded_cb       (MrpProject                   *project,
+						      PlannerView                  *view);
+static void       usage_view_tree_style_set_cb       (GtkWidget                    *tree,
+						      GtkStyle                     *prev_style,
+						      PlannerView                  *view);
+static void       usage_view_row_expanded            (GtkTreeView                  *tree_view,
+						      GtkTreeIter                  *iter,
+						      GtkTreePath                  *path,
+						      gpointer                      data);
+static void       usage_view_row_collapsed           (GtkTreeView                  *tree_view,
+						      GtkTreeIter                  *iter,
+						      GtkTreePath                  *path,
+						      gpointer                      data);
+static void       usage_view_expand_all              (PlannerUsageTree            *tree,
+						      PlannerUsageChart           *chart);
+static void       usage_view_collapse_all            (PlannerUsageTree            *tree,
+						      PlannerUsageChart           *chart);
+static void       usage_view_usage_status_updated   (PlannerUsageChart           *chart,
+						     const gchar                  *message,
+						     PlannerView                  *view);
+static void       usage_view_update_zoom_sensitivity (PlannerView                  *view);
+static void              usage_view_activate                            (PlannerView                  *view);
+static void              usage_view_deactivate                          (PlannerView                  *view);
+static void              usage_view_setup                                (PlannerView                  *view,
 						       PlannerWindow                *window);
-gchar *          get_label                           (PlannerView                  *view);
-gchar *          get_menu_label                      (PlannerView                  *view);
-gchar *          get_icon                            (PlannerView                  *view);
-const gchar *    get_name                            (PlannerView                  *view);
-GtkWidget *      get_widget                          (PlannerView                  *view);
-void             print_init                          (PlannerView                  *view,
+static const gchar *          usage_view_get_label                           (PlannerView                  *view);
+static const gchar *          usage_view_get_menu_label                      (PlannerView                  *view);
+static const gchar *          usage_view_get_icon                            (PlannerView                  *view);
+static const gchar *    usage_view_get_name                            (PlannerView                  *view);
+static GtkWidget *      usage_view_get_widget                          (PlannerView                  *view);
+static void             usage_view_print_init                          (PlannerView                  *view,
 						      PlannerPrintJob              *job);
-void             print                               (PlannerView                  *view);
-gint             print_get_n_pages                   (PlannerView                  *view);
-void             print_cleanup                       (PlannerView                  *view);
+static void             usage_view_print                               (PlannerView                  *view);
+static gint             usage_view_print_get_n_pages                   (PlannerView                  *view);
+static void             usage_view_print_cleanup                       (PlannerView                  *view);
 
 
 
 static GtkActionEntry entries[] = {
-        { "ZoomOut",   GTK_STOCK_ZOOM_OUT, N_("Zoom out"),    NULL, N_("Zoom out"),                       G_CALLBACK (ttable_view_zoom_out_cb) },
-        { "ZoomIn",    GTK_STOCK_ZOOM_IN,  N_("Zoom in"),     NULL, N_("Zoom in"),                        G_CALLBACK (ttable_view_zoom_in_cb) },
-        { "ZoomToFit", GTK_STOCK_ZOOM_FIT, N_("Zoom to fit"), NULL, N_("Zoom to fit the entire project"), G_CALLBACK (ttable_view_zoom_to_fit_cb) },
+        { "ZoomOut",   GTK_STOCK_ZOOM_OUT, N_("Zoom out"),
+	  NULL, N_("Zoom out"),
+	  G_CALLBACK (usage_view_zoom_out_cb) },
+        { "ZoomIn",    GTK_STOCK_ZOOM_IN,  N_("Zoom in"),
+	  NULL, N_("Zoom in"),
+	  G_CALLBACK (usage_view_zoom_in_cb) },
+        { "ZoomToFit", GTK_STOCK_ZOOM_FIT, N_("Zoom to fit"),
+	  NULL, N_("Zoom to fit the entire project"),
+	  G_CALLBACK (usage_view_zoom_to_fit_cb) }
 };
 
-static guint n_entries = G_N_ELEMENTS (entries);
+G_DEFINE_TYPE (PlannerUsageView, planner_usage_view, PLANNER_TYPE_VIEW);
 
 
-G_MODULE_EXPORT void
-activate (PlannerView *view)
+static void
+planner_usage_view_class_init (PlannerUsageViewClass *klass)
 {
-	PlannerViewPriv *priv;
-	GError          *error = NULL;
+	PlannerViewClass *view_class;
 
-	priv = view->priv;
+	view_class = PLANNER_VIEW_CLASS (klass);
+
+	view_class->setup = usage_view_setup;
+	view_class->get_label = usage_view_get_label;
+	view_class->get_menu_label = usage_view_get_menu_label;
+	view_class->get_icon = usage_view_get_icon;
+	view_class->get_name = usage_view_get_name;
+	view_class->get_widget = usage_view_get_widget;
+	view_class->activate = usage_view_activate;
+	view_class->deactivate = usage_view_deactivate;
+	view_class->print_init = usage_view_print_init;
+	view_class->print_get_n_pages = usage_view_print_get_n_pages;
+	view_class->print = usage_view_print;
+	view_class->print_cleanup = usage_view_print_cleanup;
+}
+
+static void
+planner_usage_view_init (PlannerUsageView *view)
+{
+	view->priv = g_new0 (PlannerUsageViewPriv, 1);
+}
+
+static void
+usage_view_activate (PlannerView *view)
+{
+	PlannerUsageViewPriv *priv;
+
+	priv = PLANNER_USAGE_VIEW (view)->priv;
 
 	priv->actions = gtk_action_group_new ("TimeTableView");
 	gtk_action_group_set_translation_domain (priv->actions, GETTEXT_PACKAGE);
 
-	gtk_action_group_add_actions (priv->actions, entries, n_entries, view);
+	gtk_action_group_add_actions (priv->actions, entries, G_N_ELEMENTS (entries), view);
 
 	gtk_ui_manager_insert_action_group (priv->ui_manager, priv->actions, 0);
 	priv->merged_id = gtk_ui_manager_add_ui_from_file (priv->ui_manager,
 							   DATADIR "/planner/ui/time-table-view.ui",
-							   &error);
-	if (error != NULL) {
-		g_message ("Building menu failed: %s", error->message);
-		g_message ("Couldn't load: %s", DATADIR "/planner/ui/time-table-view.ui");
-                g_error_free (error);
-	}
+							   NULL);
 	gtk_ui_manager_ensure_update (priv->ui_manager);
 
-        ttable_view_update_zoom_sensitivity (view);
+        usage_view_update_zoom_sensitivity (view);
 
 	gtk_widget_grab_focus (priv->tree);
 }
 
-G_MODULE_EXPORT void
-deactivate (PlannerView *view)
+static void
+usage_view_deactivate (PlannerView *view)
 {
-	PlannerViewPriv *priv;
+	PlannerUsageViewPriv *priv;
 
-	priv = view->priv;
+	priv = PLANNER_USAGE_VIEW (view)->priv;
 	gtk_ui_manager_remove_ui (priv->ui_manager, priv->merged_id);
 }
 
-G_MODULE_EXPORT void
-init (PlannerView *view, PlannerWindow *main_window)
+static void
+usage_view_setup (PlannerView *view, PlannerWindow *main_window)
 {
-        PlannerViewPriv *priv;
+        PlannerUsageViewPriv *priv;
 
-        priv = g_new0 (PlannerViewPriv, 1);
+        priv = g_new0 (PlannerUsageViewPriv, 1);
 
-        view->priv = priv;
+        PLANNER_USAGE_VIEW (view)->priv = priv;
 	priv->ui_manager = planner_window_get_ui_manager(main_window);
 }
 
-G_MODULE_EXPORT gchar *
-get_label (PlannerView *view)
+static const gchar *
+usage_view_get_label (PlannerView *view)
 {
-        g_return_val_if_fail (PLANNER_IS_VIEW (view), NULL);
 	/* i18n: Label used for the sidebar. Please try to make it short and use
 	 * a linebreak if necessary/possible.
 	 */
         return _("Resource\nUsage");
 }
 
-G_MODULE_EXPORT gchar *
-get_menu_label (PlannerView *view)
+static const gchar *
+usage_view_get_menu_label (PlannerView *view)
 {
-        g_return_val_if_fail (PLANNER_IS_VIEW (view), NULL);
         return _("Resource _Usage");
 }
 
-G_MODULE_EXPORT gchar *
-get_icon (PlannerView *view)
+static const gchar *
+usage_view_get_icon (PlannerView *view)
 {
-        g_return_val_if_fail (PLANNER_IS_VIEW (view), NULL);
         return IMAGEDIR "/resources_usage.png";
 }
 
-G_MODULE_EXPORT const gchar *
-get_name (PlannerView *view)
+static const gchar *
+usage_view_get_name (PlannerView *view)
 {
-        g_return_val_if_fail (PLANNER_IS_VIEW (view), NULL);
-
         return "resource_usage_view";
 }
 
-G_MODULE_EXPORT GtkWidget *
-get_widget (PlannerView *view)
+static GtkWidget *
+usage_view_get_widget (PlannerView *view)
 {
-        PlannerViewPriv *priv;
+        PlannerUsageViewPriv *priv;
 
-        g_return_val_if_fail (PLANNER_IS_VIEW (view), NULL);
-
-        priv = view->priv;
+        priv = PLANNER_USAGE_VIEW (view)->priv;
         if (priv->paned == NULL) {
-                priv->paned = ttable_view_create_widget (view);
+                priv->paned = usage_view_create_widget (view);
                 gtk_widget_show_all (priv->paned);
         }
 
-        return view->priv->paned;
-}
-
-G_MODULE_EXPORT void
-print_init (PlannerView *view, PlannerPrintJob *job)
-{
-        PlannerViewPriv *priv;
-
-        g_return_if_fail (PLANNER_IS_VIEW (view));
-        g_return_if_fail (PLANNER_IS_PRINT_JOB (job));
-
-        priv = view->priv;
-
-        g_assert (priv->print_data == NULL);
-
-        priv->print_data = planner_ttable_print_data_new (view, job);
-}
-
-G_MODULE_EXPORT void
-print (PlannerView *view)
-{
-        g_return_if_fail (PLANNER_IS_VIEW (view));
-
-        g_assert (view->priv->print_data);
-
-        planner_ttable_print_do (view->priv->print_data);
-}
-
-G_MODULE_EXPORT gint
-print_get_n_pages (PlannerView *view)
-{
-        g_return_val_if_fail (PLANNER_IS_VIEW (view), 0);
-
-        g_assert (view->priv->print_data);
-
-        return planner_ttable_print_get_n_pages (view->priv->print_data);
-}
-
-G_MODULE_EXPORT void
-print_cleanup (PlannerView *view)
-{
-        g_return_if_fail (PLANNER_IS_VIEW (view));
-
-        g_assert (view->priv->print_data);
-
-        planner_ttable_print_data_free (view->priv->print_data);
-
-        view->priv->print_data = NULL;
+        return PLANNER_USAGE_VIEW (view)->priv->paned;
 }
 
 static void
-ttable_view_zoom_out_cb (GtkAction *action,
-                         gpointer   data)
+usage_view_print_init (PlannerView *view, PlannerPrintJob *job)
+{
+        PlannerUsageViewPriv *priv;
+
+        priv = PLANNER_USAGE_VIEW (view)->priv;
+
+        /*priv->print_data = planner_usage_print_data_new (view, job);*/
+}
+
+static void
+usage_view_print (PlannerView *view)
+{
+        /*planner_usage_print_do (PLANNER_USAGE_VIEW (view)->priv->print_data);*/
+}
+
+static gint
+usage_view_print_get_n_pages (PlannerView *view)
+{
+        return 0; /*planner_usage_print_get_n_pages (PLANNER_USAGE_VIEW (view)->priv->print_data);*/
+}
+
+static void
+usage_view_print_cleanup (PlannerView *view)
+{
+        /*planner_usage_print_data_free (PLANNER_USAGE_VIEW (view)->priv->print_data);*/
+
+        PLANNER_USAGE_VIEW (view)->priv->print_data = NULL;
+}
+
+static void
+usage_view_zoom_out_cb (GtkAction *action,
+			gpointer   data)
 {
         PlannerView *view;
 
         view = PLANNER_VIEW (data);
 
-        planner_ttable_chart_zoom_out (view->priv->chart);
-        ttable_view_update_zoom_sensitivity (view);
+        planner_usage_chart_zoom_out (PLANNER_USAGE_VIEW (view)->priv->chart);
+        usage_view_update_zoom_sensitivity (view);
 }
 
 static void
-ttable_view_zoom_in_cb (GtkAction *action,
-                        gpointer   data)
+usage_view_zoom_in_cb (GtkAction *action,
+		       gpointer   data)
 {
         PlannerView *view;
 
         view = PLANNER_VIEW (data);
 
-        planner_ttable_chart_zoom_in (view->priv->chart);
-        ttable_view_update_zoom_sensitivity (view);
+        planner_usage_chart_zoom_in (PLANNER_USAGE_VIEW (view)->priv->chart);
+        usage_view_update_zoom_sensitivity (view);
 }
 
 static void
-ttable_view_zoom_to_fit_cb (GtkAction *action,
-                            gpointer   data)
+usage_view_zoom_to_fit_cb (GtkAction *action,
+			   gpointer   data)
 {
         PlannerView *view;
 
         view = PLANNER_VIEW (data);
 
-        planner_ttable_chart_zoom_to_fit (view->priv->chart);
-        ttable_view_update_zoom_sensitivity (view);
+        planner_usage_chart_zoom_to_fit (PLANNER_USAGE_VIEW (view)->priv->chart);
+        usage_view_update_zoom_sensitivity (view);
 }
 
 static void
-ttable_view_tree_view_size_request_cb (GtkWidget      *widget,
-                                       GtkRequisition *req,
-				       gpointer        data)
+usage_view_tree_view_size_request_cb (GtkWidget      *widget,
+				      GtkRequisition *req,
+				      gpointer        data)
 {
         req->height = -1;
 }
 
 static gboolean
-ttable_view_tree_view_scroll_event_cb (GtkWidget      *widget,
-                                       GdkEventScroll *event,
-				       gpointer        data)
+usage_view_tree_view_scroll_event_cb (GtkWidget      *widget,
+				      GdkEventScroll *event,
+				      gpointer        data)
 {
         GtkAdjustment *adj;
         GtkTreeView *tv = GTK_TREE_VIEW (widget);
@@ -316,31 +314,31 @@ ttable_view_tree_view_scroll_event_cb (GtkWidget      *widget,
 }
 
 static GtkWidget *
-ttable_view_create_widget (PlannerView *view)
+usage_view_create_widget (PlannerView *view)
 {
-        PlannerViewPriv    *priv;
-        MrpProject         *project;
-        GtkWidget          *hpaned;
-        GtkWidget          *left_frame;
-        GtkWidget          *right_frame;
-        PlannerTtableModel *model;
-        GtkWidget          *tree;
-        GtkWidget          *vbox;
-        GtkWidget          *sw;
-        GtkWidget          *chart;
-	GtkAdjustment      *hadj, *vadj;
+        PlannerUsageViewPriv *priv;
+        MrpProject           *project;
+        GtkWidget            *hpaned;
+        GtkWidget            *left_frame;
+        GtkWidget            *right_frame;
+        PlannerUsageModel    *model;
+        GtkWidget            *tree;
+        GtkWidget            *vbox;
+        GtkWidget            *sw;
+        GtkWidget            *chart;
+	GtkAdjustment        *hadj, *vadj;
 
         project = planner_window_get_project (view->main_window);
-        priv = view->priv;
+        priv = PLANNER_USAGE_VIEW (view)->priv;
         priv->project = project;
 
         g_signal_connect (project,
                           "loaded",
-                          G_CALLBACK (ttable_view_project_loaded_cb),
+                          G_CALLBACK (usage_view_project_loaded_cb),
 			  view);
 
-        model = planner_ttable_model_new (project);
-        tree = planner_ttable_tree_new (view->main_window, model);
+        model = planner_usage_model_new (project);
+        tree = planner_usage_tree_new (view->main_window, model);
         priv->tree = tree;
         left_frame = gtk_frame_new (NULL);
         right_frame = gtk_frame_new (NULL);
@@ -355,8 +353,8 @@ ttable_view_create_widget (PlannerView *view)
         hadj = GTK_ADJUSTMENT (gtk_adjustment_new (0, 0, 0, 90, 250, 2000));
         vadj = gtk_tree_view_get_vadjustment (GTK_TREE_VIEW (tree));
 
-        chart = planner_ttable_chart_new_with_model (GTK_TREE_MODEL (model));
-        priv->chart = PLANNER_TTABLE_CHART (chart);
+        chart = planner_usage_chart_new_with_model (GTK_TREE_MODEL (model));
+        priv->chart = PLANNER_USAGE_CHART (chart);
         sw = gtk_scrolled_window_new (hadj, vadj);
         gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw),
                                         GTK_POLICY_ALWAYS,
@@ -372,38 +370,38 @@ ttable_view_create_widget (PlannerView *view)
 
         g_signal_connect (tree,
 			  "row_expanded",
-                          G_CALLBACK (ttable_view_row_expanded), chart);
+                          G_CALLBACK (usage_view_row_expanded), chart);
         g_signal_connect (tree,
 			  "row_collapsed",
-                          G_CALLBACK (ttable_view_row_collapsed), chart);
+                          G_CALLBACK (usage_view_row_collapsed), chart);
         g_signal_connect (tree,
 			  "expand_all",
-                          G_CALLBACK (ttable_view_expand_all), chart);
+                          G_CALLBACK (usage_view_expand_all), chart);
         g_signal_connect (tree,
 			  "collapse_all",
-                          G_CALLBACK (ttable_view_collapse_all), chart);
+                          G_CALLBACK (usage_view_collapse_all), chart);
         g_signal_connect (chart,
 			  "status_updated",
-                          G_CALLBACK (ttable_view_ttable_status_updated),
+                          G_CALLBACK (usage_view_usage_status_updated),
                           view);
         g_signal_connect_after (tree,
 				"size_request",
                                 G_CALLBACK
-                                (ttable_view_tree_view_size_request_cb),
+                                (usage_view_tree_view_size_request_cb),
                                 NULL);
         g_signal_connect_after (tree,
 				"scroll_event",
                                 G_CALLBACK
-                                (ttable_view_tree_view_scroll_event_cb),
+                                (usage_view_tree_view_scroll_event_cb),
                                 view);
 	g_signal_connect (tree,
 			  "style_set",
-			  G_CALLBACK (ttable_view_tree_style_set_cb),
+			  G_CALLBACK (usage_view_tree_style_set_cb),
 			  view);
 	
         gtk_tree_view_expand_all (GTK_TREE_VIEW (tree));
 
-	planner_ttable_chart_expand_all (PLANNER_TTABLE_CHART (chart));
+	planner_usage_chart_expand_all (PLANNER_USAGE_CHART (chart));
 
 	g_object_unref (model);
 
@@ -411,18 +409,18 @@ ttable_view_create_widget (PlannerView *view)
 }
 
 static void
-ttable_view_ttable_status_updated (PlannerTtableChart *chart,
-                                   const gchar        *message,
-				   PlannerView        *view)
+usage_view_usage_status_updated (PlannerUsageChart *chart,
+				 const gchar        *message,
+				 PlannerView        *view)
 {
 	planner_window_set_status (view->main_window, message);
 }
 
 static void
-ttable_view_update_row_and_header_height (PlannerView *view)
+usage_view_update_row_and_header_height (PlannerView *view)
 {
-	GtkTreeView        *tv = GTK_TREE_VIEW (view->priv->tree);
-	PlannerTtableChart *chart = view->priv->chart;
+	GtkTreeView        *tv;
+	PlannerUsageChart  *chart;
 	gint                row_height;
 	gint                header_height;
 	gint                height;
@@ -430,6 +428,9 @@ ttable_view_update_row_and_header_height (PlannerView *view)
 	GtkTreeViewColumn  *col;
 	GtkRequisition      req;
 
+	tv = GTK_TREE_VIEW (PLANNER_USAGE_VIEW (view)->priv->tree);
+	chart = PLANNER_USAGE_VIEW (view)->priv->chart;
+	
 	/* Get the row and header heights. */
 	cols = gtk_tree_view_get_columns (tv);
 	row_height = 0;
@@ -460,14 +461,14 @@ ttable_view_update_row_and_header_height (PlannerView *view)
 static gboolean
 idle_update_heights (PlannerView *view)
 {
-	ttable_view_update_row_and_header_height (view);
+	usage_view_update_row_and_header_height (view);
 	return FALSE;
 }
 
 static void
-ttable_view_tree_style_set_cb (GtkWidget   *tree,
-			       GtkStyle    *prev_style,
-			       PlannerView *view)
+usage_view_tree_style_set_cb (GtkWidget   *tree,
+			      GtkStyle    *prev_style,
+			      PlannerView *view)
 {
 	if (prev_style) {
 		g_idle_add ((GSourceFunc) idle_update_heights, view);
@@ -477,108 +478,125 @@ ttable_view_tree_style_set_cb (GtkWidget   *tree,
 }
 
 static void
-ttable_view_project_loaded_cb (MrpProject *project, PlannerView *view)
+usage_view_project_loaded_cb (MrpProject *project, PlannerView *view)
 {
-        GtkTreeModel *model;
+	PlannerUsageViewPriv *priv;
+        GtkTreeModel         *model;
 
+	priv = PLANNER_USAGE_VIEW (view)->priv;
+	
 	/* FIXME: This is not working so well. Look at how the gantt view
 	 * handles this. (The crux is that the root task for example might
 	 * change when a project is loaded, so we need to rconnect signals
 	 * etc.)
 	 */
-        if (project == view->priv->project) {
+        if (project == priv->project) {
 		/* FIXME: Due to the above, we have this hack. */
-		planner_ttable_chart_setup_root_task (view->priv->chart);
+		planner_usage_chart_setup_root_task (priv->chart);
 		
-                gtk_tree_view_expand_all (GTK_TREE_VIEW (view->priv->tree));
-                planner_ttable_chart_expand_all (view->priv->chart);
+                gtk_tree_view_expand_all (GTK_TREE_VIEW (priv->tree));
+                planner_usage_chart_expand_all (priv->chart);
                 return;
         }
 
-	model = GTK_TREE_MODEL (planner_ttable_model_new (project));
+	model = GTK_TREE_MODEL (planner_usage_model_new (project));
 
-	planner_ttable_tree_set_model (PLANNER_TTABLE_TREE (view->priv->tree),
-                                       PLANNER_TTABLE_MODEL (model));
-        planner_ttable_chart_set_model (PLANNER_TTABLE_CHART
-                                        (view->priv->chart), model);
-
+	planner_usage_tree_set_model (PLANNER_USAGE_TREE (priv->tree),
+				      PLANNER_USAGE_MODEL (model));
+        planner_usage_chart_set_model (PLANNER_USAGE_CHART (priv->chart), model);
+	
 	g_object_unref (model);
 
-	gtk_tree_view_expand_all (GTK_TREE_VIEW (view->priv->tree));
-        planner_ttable_chart_expand_all (view->priv->chart);
+	gtk_tree_view_expand_all (GTK_TREE_VIEW (priv->tree));
+        planner_usage_chart_expand_all (priv->chart);
 }
 
 static void
-ttable_view_row_expanded (GtkTreeView *tree_view,
-                          GtkTreeIter *iter,
-                          GtkTreePath *path,
+usage_view_row_expanded (GtkTreeView *tree_view,
+			 GtkTreeIter *iter,
+			 GtkTreePath *path,
+			 gpointer     data)
+{
+        PlannerUsageChart *chart = data;
+
+        planner_usage_chart_expand_row (chart, path);
+}
+
+static void
+usage_view_row_collapsed (GtkTreeView *tree_view,
+			  GtkTreeIter *iter,
+			  GtkTreePath *path,
 			  gpointer     data)
 {
-        PlannerTtableChart *chart = data;
+        PlannerUsageChart *chart = data;
 
-        planner_ttable_chart_expand_row (chart, path);
+	planner_usage_chart_collapse_row (chart, path);
 }
 
 static void
-ttable_view_row_collapsed (GtkTreeView *tree_view,
-                           GtkTreeIter *iter,
-                           GtkTreePath *path,
-			   gpointer     data)
-{
-        PlannerTtableChart *chart = data;
-
-	planner_ttable_chart_collapse_row (chart, path);
-}
-
-static void
-ttable_view_expand_all (PlannerTtableTree *tree, PlannerTtableChart *chart)
+usage_view_expand_all (PlannerUsageTree *tree, PlannerUsageChart *chart)
 {
         g_signal_handlers_block_by_func (tree,
-                                         ttable_view_row_expanded, chart);
+                                         usage_view_row_expanded, chart);
 
-        planner_ttable_tree_expand_all (tree);
-        planner_ttable_chart_expand_all (chart);
+        planner_usage_tree_expand_all (tree);
+        planner_usage_chart_expand_all (chart);
 
         g_signal_handlers_unblock_by_func (tree,
-                                           ttable_view_row_expanded, chart);
+                                           usage_view_row_expanded, chart);
 }
 
 static void
-ttable_view_collapse_all (PlannerTtableTree  *tree,
-                          PlannerTtableChart *chart)
+usage_view_collapse_all (PlannerUsageTree  *tree,
+			 PlannerUsageChart *chart)
 {
         g_signal_handlers_block_by_func (tree,
-                                         ttable_view_row_collapsed, chart);
+                                         usage_view_row_collapsed, chart);
 
-        planner_ttable_tree_collapse_all (tree);
-        planner_ttable_chart_collapse_all (chart);
+        planner_usage_tree_collapse_all (tree);
+        planner_usage_chart_collapse_all (chart);
 
         g_signal_handlers_unblock_by_func (tree,
-                                           ttable_view_row_collapsed, chart);
+                                           usage_view_row_collapsed, chart);
 }
 
 static void
-ttable_view_update_zoom_sensitivity (PlannerView *view)
+usage_view_update_zoom_sensitivity (PlannerView *view)
 {
-        gboolean in, out;
+	PlannerUsageViewPriv *priv;
+        gboolean              in, out;
 
-        planner_ttable_chart_can_zoom (view->priv->chart, &in, &out);
+	priv = PLANNER_USAGE_VIEW (view)->priv;
+	
+        planner_usage_chart_can_zoom (priv->chart, &in, &out);
 
-	g_object_set (gtk_action_group_get_action (GTK_ACTION_GROUP(view->priv->actions),
-						   "ZoomIn"),
+	g_object_set (gtk_action_group_get_action (
+			      GTK_ACTION_GROUP (priv->actions),
+			      "ZoomIn"),
 		      "sensitive", in, 
 		      NULL);
 
-	g_object_set (gtk_action_group_get_action (GTK_ACTION_GROUP(view->priv->actions),
-						   "ZoomOut"),
+	g_object_set (gtk_action_group_get_action (
+			      GTK_ACTION_GROUP (priv->actions),
+			      "ZoomOut"),
 		      "sensitive", out,
 		      NULL);
 }
 
+PlannerView *
+planner_usage_view_new (void)
+{
+	PlannerView *view;
+
+	view = g_object_new (PLANNER_TYPE_USAGE_VIEW, NULL);
+
+	return view;
+}
+
 
 /*
-TODO:
-planner_ttable_print_data_new
-planner_ttable_print_do
-planner_ttable_print_get_n_pages
+  TODO:
+  planner_usage_print_data_new
+  planner_usage_print_do
+  planner_usage_print_get_n_pages
 */

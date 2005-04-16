@@ -20,31 +20,31 @@
  * Boston, MA 02111-1307, USA.
  */
 
-#ifndef __PLANNER_TTABLE_MODEL_H__
-#define __PLANNER_TTABLE_MODEL_H__
+#ifndef __PLANNER_USAGE_MODEL_H__
+#define __PLANNER_USAGE_MODEL_H__
 
+#include <gtk/gtktreemodel.h>
 #include <libplanner/mrp-project.h>
 #include <libplanner/mrp-task.h>
 #include <libplanner/mrp-resource.h>
-#include <gtk/gtktreemodel.h>
 
-#define PLANNER_TYPE_TTABLE_MODEL             (planner_ttable_model_get_type ())
-#define PLANNER_TTABLE_MODEL(obj)             (GTK_CHECK_CAST ((obj), PLANNER_TYPE_TTABLE_MODEL, PlannerTtableModel))
-#define PLANNER_TTABLE_MODEL_CLASS(klass)     (GTK_CHECK_CLASS_CAST ((klass), PLANNER_TYPE_TTABLE_MODEL, PlannerTtableModelClass))
-#define PLANNER_IS_TTABLE_MODEL(obj)          (GTK_CHECK_TYPE ((obj), PLANNER_TYPE_TTABLE_MODEL))
-#define PLANNER_IS_TTABLE_MODEL_CLASS(klass)  (GTK_CHECK_CLASS_TYPE ((obj), PLANNER_TYPE_TTABLE_MODEL))
+#define PLANNER_TYPE_USAGE_MODEL             (planner_usage_model_get_type ())
+#define PLANNER_USAGE_MODEL(obj)             (GTK_CHECK_CAST ((obj), PLANNER_TYPE_USAGE_MODEL, PlannerUsageModel))
+#define PLANNER_USAGE_MODEL_CLASS(klass)     (GTK_CHECK_CLASS_CAST ((klass), PLANNER_TYPE_USAGE_MODEL, PlannerUsageModelClass))
+#define PLANNER_IS_USAGE_MODEL(obj)          (GTK_CHECK_TYPE ((obj), PLANNER_TYPE_USAGE_MODEL))
+#define PLANNER_IS_USAGE_MODEL_CLASS(klass)  (GTK_CHECK_CLASS_TYPE ((obj), PLANNER_TYPE_USAGE_MODEL))
 
-typedef struct _PlannerTtableModel PlannerTtableModel;
-typedef struct _PlannerTtableModelClass PlannerTtableModelClass;
-typedef struct _PlannerTtableModelPriv PlannerTtableModelPriv;
+typedef struct _PlannerUsageModel PlannerUsageModel;
+typedef struct _PlannerUsageModelClass PlannerUsageModelClass;
+typedef struct _PlannerUsageModelPriv PlannerUsageModelPriv;
 
-struct _PlannerTtableModel {
-        GObject                 parent;
-        gint                    stamp;
-        PlannerTtableModelPriv *priv;
+struct _PlannerUsageModel {
+        GObject                parent;
+        gint                   stamp;
+        PlannerUsageModelPriv *priv;
 };
 
-struct _PlannerTtableModelClass {
+struct _PlannerUsageModelClass {
         GObjectClass parent_class;
 };
 
@@ -56,27 +56,27 @@ enum {
         NUM_COLS
 };
 
-GType               planner_ttable_model_get_type               (void) G_GNUC_CONST;
-PlannerTtableModel *planner_ttable_model_new                    (MrpProject         *project);
-GtkTreePath *       planner_ttable_model_get_path_from_resource (PlannerTtableModel *model,
+GType               planner_usage_model_get_type               (void) G_GNUC_CONST;
+PlannerUsageModel *planner_usage_model_new                    (MrpProject         *project);
+GtkTreePath *       planner_usage_model_get_path_from_resource (PlannerUsageModel *model,
 								 MrpResource        *resource);
-MrpProject *        planner_ttable_model_get_project            (PlannerTtableModel *model);
-MrpAssignment *     planner_ttable_model_get_assignment         (PlannerTtableModel *model,
+MrpProject *        planner_usage_model_get_project            (PlannerUsageModel *model);
+MrpAssignment *     planner_usage_model_get_assignment         (PlannerUsageModel *model,
 								 GtkTreeIter        *iter);
-MrpResource *       planner_ttable_model_get_resource           (PlannerTtableModel *model,
+MrpResource *       planner_usage_model_get_resource           (PlannerUsageModel *model,
 								 GtkTreeIter        *iter);
-gboolean            planner_ttable_model_is_resource            (PlannerTtableModel *model,
+gboolean            planner_usage_model_is_resource            (PlannerUsageModel *model,
 								 GtkTreeIter        *iter);
-gboolean            planner_ttable_model_is_assignment          (PlannerTtableModel *model,
+gboolean            planner_usage_model_is_assignment          (PlannerUsageModel *model,
 								 GtkTreeIter        *iter);
-MrpAssignment *     planner_ttable_model_path_get_assignment    (PlannerTtableModel *model,
+MrpAssignment *     planner_usage_model_path_get_assignment    (PlannerUsageModel *model,
 								 GtkTreePath        *path);
-MrpResource *       planner_ttable_model_path_get_resource      (PlannerTtableModel *model,
+MrpResource *       planner_usage_model_path_get_resource      (PlannerUsageModel *model,
 								 GtkTreePath        *path);
-gboolean            planner_ttable_model_path_is_resource       (PlannerTtableModel *model,
+gboolean            planner_usage_model_path_is_resource       (PlannerUsageModel *model,
 								 GtkTreePath        *path);
-gboolean            planner_ttable_model_path_is_assignment     (PlannerTtableModel *model,
+gboolean            planner_usage_model_path_is_assignment     (PlannerUsageModel *model,
 								 GtkTreePath        *Path);
 
 
-#endif /* __PLANNER_TTABLE_MODEL_H__ */
+#endif /* __PLANNER_USAGE_MODEL_H__ */

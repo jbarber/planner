@@ -23,6 +23,7 @@
 #include <string.h>
 #include <gtk/gtk.h>
 #include <glib/gi18n.h>
+#include <libgnome/gnome-url.h>
 
 #include "planner-window.h"
 #include "planner-plugin.h"
@@ -49,38 +50,18 @@ static GtkActionEntry action_entries[] = {
 };
 
 
-/* Really ugly hack here... :) */
-#include <gconf/gconf-client.h>
 static void
-html_plugin_show_url (PlannerPlugin *plugin, const char *url)
+html_plugin_show_url (PlannerPlugin *plugin, const char *path)
 {
-	GConfClient *gconf_client;
-	gchar       *cmd, *tmp;
-	gchar       *cmdline;
+	gchar *url;
 
-	gconf_client = gconf_client_get_default ();
-	cmd = gconf_client_get_string (gconf_client,
-				       "/desktop/gnome/url-handlers/http/command",
-				       NULL);
-	g_object_unref (gconf_client);
+	url = g_filename_to_uri (path, NULL, NULL);
 
-	if (!cmd) {
-		return;
+	if (!gnome_url_show (url, NULL)) {
+		/*g_warning ("Unable to follow link %s\n", link);*/
 	}
 
-	tmp = strchr (cmd, ' ');
-	if (tmp) {
-		tmp[0] = '\0';
-	}
-
-	cmdline = g_strconcat (cmd, " ", url, NULL);
-	
-	gdk_spawn_command_line_on_screen (gtk_widget_get_screen (GTK_WIDGET (plugin->priv->main_window)),
-					  cmdline,
-					  NULL);
-
-	g_free (cmdline);
-	g_free (cmd);
+	g_free (url);
 }
 
 static void

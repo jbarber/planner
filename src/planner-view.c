@@ -1,9 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
- * Copyright (C) 2003, 2005 Imendio AB
- * Copyright (C) 2002 CodeFactory AB
- * Copyright (C) 2002 Richard Hult <richard@imendio.com>
- * Copyright (C) 2002 Mikael Hallendal <micke@imendio.com>
+ * Copyright (C) 2005 Imendio AB
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -22,66 +19,20 @@
  */
 
 #include <config.h>
-#include <string.h>
-#include <time.h>
 #include <glib.h>
 #include "planner-view.h"
 #include "planner-conf.h"
 
-static void mv_init       (PlannerView      *view);
-static void mv_class_init (PlannerViewClass *class);
+G_DEFINE_TYPE (PlannerView, planner_view, G_TYPE_OBJECT);
 
-
-static GObjectClass *parent_class;
-
-
-GType
-planner_view_get_type (void)
+static void
+planner_view_class_init (PlannerViewClass *klass)
 {
-	static GType type = 0;
-
-	if (!type) {
-		static const GTypeInfo info = {
-			sizeof (PlannerViewClass),
-			NULL,		/* base_init */
-			NULL,		/* base_finalize */
-			(GClassInitFunc) mv_class_init,
-			NULL,		/* class_finalize */
-			NULL,		/* class_data */
-			sizeof (PlannerView),
-			0,
-			(GInstanceInitFunc) mv_init
-		};
-
-		type = g_type_register_static (G_TYPE_OBJECT,
-					       "PlannerView", &info, 0);
-	}
-
-	return type;
 }
 
 static void
-mv_finalize (GObject *object)
+planner_view_init (PlannerView *view)
 {
-	(* parent_class->finalize) (object);
-}
-
-static void
-mv_class_init (PlannerViewClass *klass)
-{
-	GObjectClass *object_class;
-
-	object_class = (GObjectClass *) klass;
-
-	parent_class = g_type_class_peek_parent (klass);
-	
-	object_class->finalize = mv_finalize;
-}
-
-static void
-mv_init (PlannerView *view)
-{
-
 }
 
 const gchar *
@@ -89,10 +40,10 @@ planner_view_get_label (PlannerView *view)
 {
 	g_return_val_if_fail (PLANNER_IS_VIEW (view), NULL);
 
-	if (view->get_label) {
-		return view->get_label (view);
+	if (PLANNER_VIEW_GET_CLASS (view)->get_label) {
+		return PLANNER_VIEW_GET_CLASS (view)->get_label (view);
 	}
-
+	
 	return NULL;
 }
 
@@ -101,8 +52,8 @@ planner_view_get_menu_label (PlannerView *view)
 {
 	g_return_val_if_fail (PLANNER_IS_VIEW (view), NULL);
 
-	if (view->get_menu_label) {
-		return view->get_menu_label (view);
+	if (PLANNER_VIEW_GET_CLASS (view)->get_menu_label) {
+		return PLANNER_VIEW_GET_CLASS (view)->get_menu_label (view);
 	}
 
 	return NULL;
@@ -113,8 +64,8 @@ planner_view_get_icon (PlannerView *view)
 {
 	g_return_val_if_fail (PLANNER_IS_VIEW (view), NULL);
 
-	if (view->get_icon) {
-		return view->get_icon (view);
+	if (PLANNER_VIEW_GET_CLASS (view)->get_icon) {
+		return PLANNER_VIEW_GET_CLASS (view)->get_icon (view);
 	}
 
 	return NULL;
@@ -125,8 +76,8 @@ planner_view_get_name (PlannerView *view)
 {
 	g_return_val_if_fail (PLANNER_IS_VIEW (view), NULL);
 
-	if (view->get_name) {
-		return view->get_name (view);
+	if (PLANNER_VIEW_GET_CLASS (view)->get_name) {
+		return PLANNER_VIEW_GET_CLASS (view)->get_name (view);
 	}
 
 	return NULL;
@@ -137,23 +88,23 @@ planner_view_get_widget (PlannerView *view)
 {
 	g_return_val_if_fail (PLANNER_IS_VIEW (view), NULL);
 
-	if (view->get_widget) {
-		return view->get_widget (view);
+	if (PLANNER_VIEW_GET_CLASS (view)->get_widget) {
+		return PLANNER_VIEW_GET_CLASS (view)->get_widget (view);
 	}
 
 	return NULL;
 }
 
 void
-planner_view_init (PlannerView   *view,
+planner_view_setup (PlannerView   *view,
 		   PlannerWindow *main_window)
 {
 	g_return_if_fail (PLANNER_IS_VIEW (view));
 
 	view->main_window = main_window;
 
-	if (view->init) {
-		view->init (view, main_window);
+	if (PLANNER_VIEW_GET_CLASS (view)->setup) {
+		PLANNER_VIEW_GET_CLASS (view)->setup (view, main_window);
 	}
 }
 
@@ -164,8 +115,8 @@ planner_view_activate (PlannerView *view)
 
 	view->activated = TRUE;
 	
-	if (view->activate) {
-		view->activate (view);
+	if (PLANNER_VIEW_GET_CLASS (view)->activate) {
+		PLANNER_VIEW_GET_CLASS (view)->activate (view);
 	}
 }
 
@@ -176,20 +127,20 @@ planner_view_deactivate (PlannerView *view)
 
 	view->activated = FALSE;
 
-	if (view->deactivate) {
-		view->deactivate (view);
+	if (PLANNER_VIEW_GET_CLASS (view)->deactivate) {
+		PLANNER_VIEW_GET_CLASS (view)->deactivate (view);
 	}
 }
 
 void
 planner_view_print_init (PlannerView     *view,
-		    PlannerPrintJob *job)
+			 PlannerPrintJob *job)
 {
 	g_return_if_fail (PLANNER_IS_VIEW (view));
 	g_return_if_fail (PLANNER_IS_PRINT_JOB (job));
 
-	if (view->print_init) {
-		view->print_init (view, job);
+	if (PLANNER_VIEW_GET_CLASS (view)->print_init) {
+		PLANNER_VIEW_GET_CLASS (view)->print_init (view, job);
 	}
 }
 
@@ -198,8 +149,8 @@ planner_view_print_get_n_pages (PlannerView *view)
 {
 	g_return_val_if_fail (PLANNER_IS_VIEW (view), 0);
 	
-	if (view->print_get_n_pages) {
-		return view->print_get_n_pages (view);
+	if (PLANNER_VIEW_GET_CLASS (view)->print_get_n_pages) {
+		return PLANNER_VIEW_GET_CLASS (view)->print_get_n_pages (view);
 	}
 	
 	return 0;
@@ -210,8 +161,8 @@ planner_view_print (PlannerView *view)
 {
 	g_return_if_fail (PLANNER_IS_VIEW (view));
 
-	if (view->print) {
-		view->print (view);
+	if (PLANNER_VIEW_GET_CLASS (view)->print) {
+		PLANNER_VIEW_GET_CLASS (view)->print (view);
 	}
 }
 
@@ -220,8 +171,8 @@ planner_view_print_cleanup (PlannerView *view)
 {
 	g_return_if_fail (PLANNER_IS_VIEW (view));
 
-	if (view->print_cleanup) {
-		view->print_cleanup (view);
+	if (PLANNER_VIEW_GET_CLASS (view)->print_cleanup) {
+		PLANNER_VIEW_GET_CLASS (view)->print_cleanup (view);
 	}
 }
 

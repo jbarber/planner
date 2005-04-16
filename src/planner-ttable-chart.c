@@ -72,7 +72,7 @@ typedef struct {
         gpointer instance;
 } ConnectData;
 
-struct _PlannerTtableChartPriv {
+struct _PlannerUsageChartPriv {
         GtkWidget       *header;
         GnomeCanvas     *canvas;
 
@@ -108,91 +108,91 @@ enum {
 };
 
 
-static void      ttable_chart_class_init            (PlannerTtableChartClass *klass);
-static void      ttable_chart_init                  (PlannerTtableChart      *chart);
-static void      ttable_chart_finalize              (GObject                 *object);
-static void      ttable_chart_set_property          (GObject                 *object,
+static void      usage_chart_class_init            (PlannerUsageChartClass *klass);
+static void      usage_chart_init                  (PlannerUsageChart      *chart);
+static void      usage_chart_finalize              (GObject                 *object);
+static void      usage_chart_set_property          (GObject                 *object,
 						     guint                    prop_id,
 						     const GValue            *value,
 						     GParamSpec              *spec);
-static void      ttable_chart_get_property          (GObject                 *object,
+static void      usage_chart_get_property          (GObject                 *object,
 						     guint                    prop_id,
 						     GValue                  *value,
 						     GParamSpec              *spec);
-static void      ttable_chart_set_zoom              (PlannerTtableChart      *chart,
+static void      usage_chart_set_zoom              (PlannerUsageChart      *chart,
 						     gdouble                  level);
-static void      ttable_chart_destroy               (GtkObject               *object);
-static void      ttable_chart_style_set             (GtkWidget               *widget,
+static void      usage_chart_destroy               (GtkObject               *object);
+static void      usage_chart_style_set             (GtkWidget               *widget,
 						     GtkStyle                *prev_style);
-static void      ttable_chart_realize               (GtkWidget               *widget);
-static void      ttable_chart_map                   (GtkWidget               *widget);
-static void      ttable_chart_unrealize             (GtkWidget               *widget);
-static void      ttable_chart_size_allocate         (GtkWidget               *widget,
+static void      usage_chart_realize               (GtkWidget               *widget);
+static void      usage_chart_map                   (GtkWidget               *widget);
+static void      usage_chart_unrealize             (GtkWidget               *widget);
+static void      usage_chart_size_allocate         (GtkWidget               *widget,
 						     GtkAllocation           *allocation);
-static void      ttable_chart_set_adjustments       (PlannerTtableChart      *chart,
+static void      usage_chart_set_adjustments       (PlannerUsageChart      *chart,
 						     GtkAdjustment           *hadj,
 						     GtkAdjustment           *vadj);
-static void      ttable_chart_reflow_now            (PlannerTtableChart      *chart);
-static void      ttable_chart_reflow                (PlannerTtableChart      *chart,
+static void      usage_chart_reflow_now            (PlannerUsageChart      *chart);
+static void      usage_chart_reflow                (PlannerUsageChart      *chart,
 						     gboolean                 height_changed);
-static gdouble   ttable_chart_reflow_do             (PlannerTtableChart      *chart,
+static gdouble   usage_chart_reflow_do             (PlannerUsageChart      *chart,
 						     TreeNode                *root,
 						     gdouble                  start_y);
-static gboolean  ttable_chart_reflow_idle           (PlannerTtableChart      *chart);
-static gint      ttable_chart_get_width             (PlannerTtableChart      *chart);
-static TreeNode *ttable_chart_tree_node_new         (void);
-static void      ttable_chart_tree_node_remove      (TreeNode                *node);
-static void      ttable_chart_remove_children       (PlannerTtableChart      *chart,
+static gboolean  usage_chart_reflow_idle           (PlannerUsageChart      *chart);
+static gint      usage_chart_get_width             (PlannerUsageChart      *chart);
+static TreeNode *usage_chart_tree_node_new         (void);
+static void      usage_chart_tree_node_remove      (TreeNode                *node);
+static void      usage_chart_remove_children       (PlannerUsageChart      *chart,
 						     TreeNode                *node);
-static void      ttable_chart_tree_traverse         (TreeNode                *node,
+static void      usage_chart_tree_traverse         (TreeNode                *node,
 						     TreeFunc                 func,
 						     gpointer                 data);
 static void      scale_func                         (TreeNode                *node,
 						     gpointer                 data);
-static void      ttable_chart_set_scroll_region     (PlannerTtableChart      *chart,
+static void      usage_chart_set_scroll_region     (PlannerUsageChart      *chart,
 						     gdouble                  x1,
 						     gdouble                  y1,
 						     gdouble                  x2,
 						     gdouble                  y2);
-static void      ttable_chart_build_tree            (PlannerTtableChart      *chart);
-static TreeNode *ttable_chart_insert_resource       (PlannerTtableChart      *chart,
+static void      usage_chart_build_tree            (PlannerUsageChart      *chart);
+static TreeNode *usage_chart_insert_resource       (PlannerUsageChart      *chart,
 						     GtkTreePath             *path,
 						     MrpResource             *resource);
-static TreeNode *ttable_chart_insert_assignment     (PlannerTtableChart      *chart,
+static TreeNode *usage_chart_insert_assignment     (PlannerUsageChart      *chart,
 						     GtkTreePath             *path,
 						     MrpAssignment           *assign);
-static TreeNode *ttable_chart_insert_row            (PlannerTtableChart      *chart,
+static TreeNode *usage_chart_insert_row            (PlannerUsageChart      *chart,
 						     GtkTreePath             *path,
 						     MrpResource             *resource,
 						     MrpAssignment           *assign);
-static void      ttable_chart_tree_node_insert_path (TreeNode                *node,
+static void      usage_chart_tree_node_insert_path (TreeNode                *node,
 						     GtkTreePath             *path,
 						     TreeNode                *new_node);
-static void      ttable_chart_add_signal            (PlannerTtableChart      *chart,
+static void      usage_chart_add_signal            (PlannerUsageChart      *chart,
 						     gpointer                 instance,
 						     gulong                   sig_id,
 						     char                    *sig_name);
-static void      ttable_chart_disconnect_signals    (PlannerTtableChart      *chart);
-static void      ttable_chart_project_start_changed (MrpProject              *project,
+static void      usage_chart_disconnect_signals    (PlannerUsageChart      *chart);
+static void      usage_chart_project_start_changed (MrpProject              *project,
 						     GParamSpec              *spec,
-						     PlannerTtableChart      *chart);
-static void      ttable_chart_root_finish_changed   (MrpTask                 *root,
+						     PlannerUsageChart      *chart);
+static void      usage_chart_root_finish_changed   (MrpTask                 *root,
 						     GParamSpec              *spec,
-						     PlannerTtableChart      *chart);
+						     PlannerUsageChart      *chart);
 static void      show_hide_descendants              (TreeNode                *node,
 						     gboolean                 show);
 static void      collapse_descendants               (TreeNode                *node);
-static TreeNode *ttable_chart_tree_node_at_path     (TreeNode                *node,
+static TreeNode *usage_chart_tree_node_at_path     (TreeNode                *node,
 						     GtkTreePath             *path);
-static void      ttable_chart_row_changed           (GtkTreeModel            *model,
+static void      usage_chart_row_changed           (GtkTreeModel            *model,
 						     GtkTreePath             *path,
 						     GtkTreeIter             *iter,
 						     gpointer                 data);
-static void      ttable_chart_row_inserted          (GtkTreeModel            *model,
+static void      usage_chart_row_inserted          (GtkTreeModel            *model,
 						     GtkTreePath             *path,
 						     GtkTreeIter             *iter,
 						     gpointer                 data);
-static void      ttable_chart_row_deleted           (GtkTreeModel            *model,
+static void      usage_chart_row_deleted           (GtkTreeModel            *model,
 						     GtkTreePath             *path,
 						     gpointer                 data);
 
@@ -201,31 +201,31 @@ static guint signals[LAST_SIGNAL];
 static GtkVBoxClass *parent_class = NULL;
 
 GType
-planner_ttable_chart_get_type (void)
+planner_usage_chart_get_type (void)
 {
         static GType type = 0;
 
         if (!type) {
                 static const GTypeInfo info = {
-                        sizeof (PlannerTtableChartClass),
+                        sizeof (PlannerUsageChartClass),
                         NULL,   /* base_init */
                         NULL,   /* base_finalize */
-                        (GClassInitFunc) ttable_chart_class_init,
+                        (GClassInitFunc) usage_chart_class_init,
                         NULL,   /* class_finalize */
                         NULL,   /* class_data */
-                        sizeof (PlannerTtableChart),
+                        sizeof (PlannerUsageChart),
                         0,      /* n_preallocs */
-                        (GInstanceInitFunc) ttable_chart_init
+                        (GInstanceInitFunc) usage_chart_init
                 };
                 type = g_type_register_static (GTK_TYPE_VBOX,
-                                               "PlannerTtableChart", &info,
+                                               "PlannerUsageChart", &info,
                                                0);
         }
         return type;
 }
 
 static void
-ttable_chart_class_init (PlannerTtableChartClass * class)
+usage_chart_class_init (PlannerUsageChartClass * class)
 {
         GObjectClass      *o_class;
         GtkObjectClass    *object_class;
@@ -239,25 +239,25 @@ ttable_chart_class_init (PlannerTtableChartClass * class)
         widget_class = (GtkWidgetClass *) class;
         container_class = (GtkContainerClass *) class;
 
-        o_class->set_property = ttable_chart_set_property;
-        o_class->get_property = ttable_chart_get_property;
-        o_class->finalize = ttable_chart_finalize;
+        o_class->set_property = usage_chart_set_property;
+        o_class->get_property = usage_chart_get_property;
+        o_class->finalize = usage_chart_finalize;
 
-        object_class->destroy = ttable_chart_destroy;
+        object_class->destroy = usage_chart_destroy;
 
-        widget_class->style_set = ttable_chart_style_set;
-        widget_class->realize = ttable_chart_realize;
-        widget_class->map = ttable_chart_map;
-        widget_class->unrealize = ttable_chart_unrealize;
-        widget_class->size_allocate = ttable_chart_size_allocate;
+        widget_class->style_set = usage_chart_style_set;
+        widget_class->realize = usage_chart_realize;
+        widget_class->map = usage_chart_map;
+        widget_class->unrealize = usage_chart_unrealize;
+        widget_class->size_allocate = usage_chart_size_allocate;
 
-        class->set_scroll_adjustments = ttable_chart_set_adjustments;
+        class->set_scroll_adjustments = usage_chart_set_adjustments;
 
         widget_class->set_scroll_adjustments_signal =
                 g_signal_new ("set_scroll_adjustments",
                               G_TYPE_FROM_CLASS (object_class),
                               G_SIGNAL_RUN_LAST,
-                              G_STRUCT_OFFSET (PlannerTtableChartClass,
+                              G_STRUCT_OFFSET (PlannerUsageChartClass,
                                                set_scroll_adjustments), NULL,
                               NULL, planner_marshal_VOID__OBJECT_OBJECT,
                               G_TYPE_NONE, 2, GTK_TYPE_ADJUSTMENT,
@@ -299,16 +299,16 @@ ttable_chart_class_init (PlannerTtableChartClass * class)
 }
 
 static void
-ttable_chart_init (PlannerTtableChart * chart)
+usage_chart_init (PlannerUsageChart * chart)
 {
-        PlannerTtableChartPriv *priv;
+        PlannerUsageChartPriv *priv;
 
         gtk_widget_set_redraw_on_allocate (GTK_WIDGET (chart), FALSE);
 
-        priv = g_new0 (PlannerTtableChartPriv, 1);
+        priv = g_new0 (PlannerUsageChartPriv, 1);
         chart->priv = priv;
 
-        priv->tree = ttable_chart_tree_node_new ();
+        priv->tree = usage_chart_tree_node_new ();
 
         priv->zoom = DEFAULT_ZOOM_LEVEL;
 
@@ -347,7 +347,7 @@ ttable_chart_init (PlannerTtableChart * chart)
 }
 
 static TreeNode *
-ttable_chart_tree_node_new (void)
+usage_chart_tree_node_new (void)
 {
         TreeNode *node;
         node = g_new0 (TreeNode, 1);
@@ -356,17 +356,17 @@ ttable_chart_tree_node_new (void)
 }
 
 static void
-ttable_chart_set_property (GObject * object,
+usage_chart_set_property (GObject * object,
                            guint prop_id,
                            const GValue * value, GParamSpec * spec)
 {
-        PlannerTtableChart *chart;
+        PlannerUsageChart *chart;
 
-        chart = PLANNER_TTABLE_CHART (object);
+        chart = PLANNER_USAGE_CHART (object);
 
         switch (prop_id) {
         case PROP_MODEL:
-                planner_ttable_chart_set_model (chart,
+                planner_usage_chart_set_model (chart,
                                                 g_value_get_object (value));
                 break;
         case PROP_HEADER_HEIGHT:
@@ -375,7 +375,7 @@ ttable_chart_set_property (GObject * object,
                 break;
         case PROP_ROW_HEIGHT:
                 chart->priv->row_height = g_value_get_int (value);
-                ttable_chart_reflow (chart, TRUE);
+                usage_chart_reflow (chart, TRUE);
                 break;
         default:
                 break;
@@ -383,12 +383,12 @@ ttable_chart_set_property (GObject * object,
 }
 
 static void
-ttable_chart_get_property (GObject * object,
+usage_chart_get_property (GObject * object,
                            guint prop_id, GValue * value, GParamSpec * spec)
 {
-        PlannerTtableChart *chart;
+        PlannerUsageChart *chart;
 
-        chart = PLANNER_TTABLE_CHART (object);
+        chart = PLANNER_USAGE_CHART (object);
 
         switch (prop_id) {
         case PROP_MODEL:
@@ -401,14 +401,14 @@ ttable_chart_get_property (GObject * object,
 }
 
 static void
-ttable_chart_set_zoom (PlannerTtableChart * chart, gdouble level)
+usage_chart_set_zoom (PlannerUsageChart * chart, gdouble level)
 {
-        PlannerTtableChartPriv *priv;
+        PlannerUsageChartPriv *priv;
 
         priv = chart->priv;
         priv->zoom = level;
 	
-        ttable_chart_tree_traverse (priv->tree, scale_func, chart);
+        usage_chart_tree_traverse (priv->tree, scale_func, chart);
 
 	g_object_set (priv->header,
                       "scale", SCALE (priv->zoom),
@@ -420,13 +420,13 @@ ttable_chart_set_zoom (PlannerTtableChart * chart, gdouble level)
                                "zoom", priv->zoom,
 			       NULL);
 
-	ttable_chart_reflow_now (chart);
+	usage_chart_reflow_now (chart);
 }
 
 static mrptime
-ttable_chart_get_center (PlannerTtableChart * chart)
+usage_chart_get_center (PlannerUsageChart * chart)
 {
-        PlannerTtableChartPriv *priv;
+        PlannerUsageChartPriv *priv;
         gint                    x1, width, x;
 
         priv = chart->priv;
@@ -442,9 +442,9 @@ ttable_chart_get_center (PlannerTtableChart * chart)
 }
 
 static void
-ttable_chart_set_center (PlannerTtableChart *chart, mrptime t)
+usage_chart_set_center (PlannerUsageChart *chart, mrptime t)
 {
-        PlannerTtableChartPriv *priv;
+        PlannerUsageChartPriv *priv;
         gint                    x1, width, x;
 
         priv = chart->priv;
@@ -460,52 +460,52 @@ ttable_chart_set_center (PlannerTtableChart *chart, mrptime t)
 }
 
 void
-planner_ttable_chart_status_updated (PlannerTtableChart *chart,
+planner_usage_chart_status_updated (PlannerUsageChart *chart,
                                      gchar              *message)
 {
-        g_return_if_fail (PLANNER_IS_TTABLE_CHART (chart));
+        g_return_if_fail (PLANNER_IS_USAGE_CHART (chart));
 
         g_signal_emit (chart, signals[STATUS_UPDATED], 0, message);
 }
 
 void
-planner_ttable_chart_zoom_in (PlannerTtableChart *chart)
+planner_usage_chart_zoom_in (PlannerUsageChart *chart)
 {
-        PlannerTtableChartPriv *priv;
+        PlannerUsageChartPriv *priv;
         mrptime                 mt;
 
-        g_return_if_fail (PLANNER_IS_TTABLE_CHART (chart));
+        g_return_if_fail (PLANNER_IS_USAGE_CHART (chart));
 
 	priv = chart->priv;
 
-	mt = ttable_chart_get_center (chart);
-        ttable_chart_set_zoom (chart, priv->zoom + 1);
-        ttable_chart_set_center (chart, mt);
+	mt = usage_chart_get_center (chart);
+        usage_chart_set_zoom (chart, priv->zoom + 1);
+        usage_chart_set_center (chart, mt);
 }
 
 void
-planner_ttable_chart_zoom_out (PlannerTtableChart *chart)
+planner_usage_chart_zoom_out (PlannerUsageChart *chart)
 {
-        PlannerTtableChartPriv *priv;
+        PlannerUsageChartPriv *priv;
         mrptime                 mt;
 
-	g_return_if_fail (PLANNER_IS_TTABLE_CHART (chart));
+	g_return_if_fail (PLANNER_IS_USAGE_CHART (chart));
 
 	priv = chart->priv;
 
-	mt = ttable_chart_get_center (chart);
-        ttable_chart_set_zoom (chart, priv->zoom - 1);
-        ttable_chart_set_center (chart, mt);
+	mt = usage_chart_get_center (chart);
+        usage_chart_set_zoom (chart, priv->zoom - 1);
+        usage_chart_set_center (chart, mt);
 }
 
 void
-planner_ttable_chart_can_zoom (PlannerTtableChart *chart,
+planner_usage_chart_can_zoom (PlannerUsageChart *chart,
                                gboolean           *in,
 			       gboolean           *out)
 {
-        PlannerTtableChartPriv *priv;
+        PlannerUsageChartPriv *priv;
 
-        g_return_if_fail (PLANNER_IS_TTABLE_CHART (chart));
+        g_return_if_fail (PLANNER_IS_USAGE_CHART (chart));
 
 	priv = chart->priv;
         if (in) {
@@ -518,18 +518,18 @@ planner_ttable_chart_can_zoom (PlannerTtableChart *chart,
 }
 
 void
-planner_ttable_chart_zoom_to_fit (PlannerTtableChart *chart)
+planner_usage_chart_zoom_to_fit (PlannerUsageChart *chart)
 {
-        PlannerTtableChartPriv *priv;
+        PlannerUsageChartPriv *priv;
         gdouble                 t;
         gdouble                 zoom;
         gdouble                 alloc;
 
-	g_return_if_fail (PLANNER_IS_TTABLE_CHART (chart));
+	g_return_if_fail (PLANNER_IS_USAGE_CHART (chart));
 
 	priv = chart->priv;
 
-	t = ttable_chart_get_width (chart);
+	t = usage_chart_get_width (chart);
         if (t == -1) {
                 return;
 	}
@@ -537,19 +537,19 @@ planner_ttable_chart_zoom_to_fit (PlannerTtableChart *chart)
         alloc = GTK_WIDGET (chart)->allocation.width - PADDING * 2;
 
         zoom = planner_scale_clamp_zoom (ZOOM (alloc / t));
-        ttable_chart_set_zoom (chart, zoom);
+        usage_chart_set_zoom (chart, zoom);
 }
 
 gdouble
-planner_ttable_chart_get_zoom (PlannerTtableChart *chart)
+planner_usage_chart_get_zoom (PlannerUsageChart *chart)
 {
-        g_return_val_if_fail (PLANNER_IS_TTABLE_CHART (chart), 0);
+        g_return_val_if_fail (PLANNER_IS_USAGE_CHART (chart), 0);
 
         return chart->priv->zoom;
 }
 
 static gint
-ttable_chart_get_width (PlannerTtableChart *chart)
+usage_chart_get_width (PlannerUsageChart *chart)
 {
 	if (chart->priv->project_start == MRP_TIME_INVALID ||
             chart->priv->last_time == MRP_TIME_INVALID) {
@@ -560,11 +560,11 @@ ttable_chart_get_width (PlannerTtableChart *chart)
 }
 
 static void
-ttable_chart_finalize (GObject *object)
+usage_chart_finalize (GObject *object)
 {
-        PlannerTtableChart *chart;
+        PlannerUsageChart *chart;
 
-        chart = PLANNER_TTABLE_CHART (object);
+        chart = PLANNER_USAGE_CHART (object);
 
         g_free (chart->priv);
 
@@ -574,11 +574,11 @@ ttable_chart_finalize (GObject *object)
 }
 
 static void
-ttable_chart_destroy (GtkObject *object)
+usage_chart_destroy (GtkObject *object)
 {
-        PlannerTtableChart *chart;
+        PlannerUsageChart *chart;
 
-        chart = PLANNER_TTABLE_CHART (object);
+        chart = PLANNER_USAGE_CHART (object);
 
         if (chart->priv->model != NULL) {
                 g_object_unref (chart->priv->model);
@@ -591,10 +591,10 @@ ttable_chart_destroy (GtkObject *object)
 }
 
 static void
-ttable_chart_style_set (GtkWidget *widget, GtkStyle *prev_style)
+usage_chart_style_set (GtkWidget *widget, GtkStyle *prev_style)
 {
-        PlannerTtableChart     *chart;
-        PlannerTtableChartPriv *priv;
+        PlannerUsageChart     *chart;
+        PlannerUsageChartPriv *priv;
         GtkWidget              *canvas;
         PangoContext           *context;
         PangoFontMetrics       *metrics;
@@ -604,7 +604,7 @@ ttable_chart_style_set (GtkWidget *widget, GtkStyle *prev_style)
                                                             prev_style);
         }
 	
-        chart = PLANNER_TTABLE_CHART (widget);
+        chart = PLANNER_USAGE_CHART (widget);
         priv = chart->priv;
 
         canvas = GTK_WIDGET (priv->canvas);
@@ -617,15 +617,15 @@ ttable_chart_style_set (GtkWidget *widget, GtkStyle *prev_style)
 }
 
 static void
-ttable_chart_realize (GtkWidget *widget)
+usage_chart_realize (GtkWidget *widget)
 {
-        PlannerTtableChart     *chart;
-        PlannerTtableChartPriv *priv;
+        PlannerUsageChart     *chart;
+        PlannerUsageChartPriv *priv;
         GtkWidget              *canvas;
         GtkStyle               *style;
         GdkColormap            *colormap;
 
-        chart = PLANNER_TTABLE_CHART (widget);
+        chart = PLANNER_USAGE_CHART (widget);
         priv = chart->priv;
 
         canvas = GTK_WIDGET (priv->canvas);
@@ -641,15 +641,15 @@ ttable_chart_realize (GtkWidget *widget)
         gtk_widget_set_style (canvas, style);
         gtk_style_unref (style);
 
-        ttable_chart_set_zoom (chart, priv->zoom);
+        usage_chart_set_zoom (chart, priv->zoom);
 }
 
 static void
-ttable_chart_unrealize (GtkWidget *widget)
+usage_chart_unrealize (GtkWidget *widget)
 {
-        PlannerTtableChart *chart;
+        PlannerUsageChart *chart;
 
-        chart = PLANNER_TTABLE_CHART (widget);
+        chart = PLANNER_USAGE_CHART (widget);
 
 	if (GTK_WIDGET_CLASS (parent_class)->unrealize) {
                 GTK_WIDGET_CLASS (parent_class)->unrealize (widget);
@@ -657,11 +657,11 @@ ttable_chart_unrealize (GtkWidget *widget)
 }
 
 static void
-ttable_chart_map (GtkWidget * widget)
+usage_chart_map (GtkWidget * widget)
 {
-        PlannerTtableChart *chart;
+        PlannerUsageChart *chart;
 
-        chart = PLANNER_TTABLE_CHART (widget);
+        chart = PLANNER_USAGE_CHART (widget);
 
         if (GTK_WIDGET_CLASS (parent_class)->map) {
                 GTK_WIDGET_CLASS (parent_class)->map (widget);
@@ -670,35 +670,35 @@ ttable_chart_map (GtkWidget * widget)
 	/* FIXME: Workaround for problem when changing the project length from
 	 * other views. Need to fix this for real.
 	 */
-	ttable_chart_set_zoom (chart, chart->priv->zoom);
+	usage_chart_set_zoom (chart, chart->priv->zoom);
 
 	chart->priv->height_changed = TRUE;
-        ttable_chart_reflow_now (chart);
+        usage_chart_reflow_now (chart);
 }
 
 static void
-ttable_chart_size_allocate (GtkWidget *widget, GtkAllocation *allocation)
+usage_chart_size_allocate (GtkWidget *widget, GtkAllocation *allocation)
 {
-	PlannerTtableChart *chart;
+	PlannerUsageChart *chart;
         gboolean            height_changed;
 
         height_changed = widget->allocation.height != allocation->height;
 
         GTK_WIDGET_CLASS (parent_class)->size_allocate (widget, allocation);
 
-	chart = PLANNER_TTABLE_CHART (widget);
+	chart = PLANNER_USAGE_CHART (widget);
 
         if (GTK_WIDGET_MAPPED (chart)) {
-                ttable_chart_reflow_now (chart);
+                usage_chart_reflow_now (chart);
         }
 }
 
 static void
-ttable_chart_set_adjustments (PlannerTtableChart *chart,
+usage_chart_set_adjustments (PlannerUsageChart *chart,
                               GtkAdjustment      *hadj,
 			      GtkAdjustment      *vadj)
 {
-        PlannerTtableChartPriv *priv;
+        PlannerUsageChartPriv *priv;
 
         gboolean need_adjust = FALSE;
 
@@ -756,7 +756,7 @@ node_is_visible (TreeNode *node)
 }
 
 static gdouble
-ttable_chart_reflow_do (PlannerTtableChart *chart,
+usage_chart_reflow_do (PlannerUsageChart *chart,
 			TreeNode           *root,
                         gdouble             start_y)
 {
@@ -785,7 +785,7 @@ ttable_chart_reflow_do (PlannerTtableChart *chart,
                         row_y += row_height;
 
                         if (node->children != NULL) {
-                                row_y += ttable_chart_reflow_do (chart, node,
+                                row_y += usage_chart_reflow_do (chart, node,
                                                                  row_y);
                         }
                 }
@@ -795,9 +795,9 @@ ttable_chart_reflow_do (PlannerTtableChart *chart,
 }
 
 static gboolean
-ttable_chart_reflow_idle (PlannerTtableChart *chart)
+usage_chart_reflow_idle (PlannerUsageChart *chart)
 {
-        PlannerTtableChartPriv *priv;
+        PlannerUsageChartPriv *priv;
         mrptime                 t1, t2;
         gdouble                 x1, y1, x2, y2;
         gdouble                 height, width;
@@ -807,7 +807,7 @@ ttable_chart_reflow_idle (PlannerTtableChart *chart)
         priv = chart->priv;
 
         if (priv->height_changed || priv->height == -1) {
-                height = ttable_chart_reflow_do (chart, priv->tree, 0);
+                height = usage_chart_reflow_do (chart, priv->tree, 0);
                 priv->height = height;
         } else {
                 height = priv->height;
@@ -837,7 +837,7 @@ ttable_chart_reflow_idle (PlannerTtableChart *chart)
 
         x2 = x1 + width;
 
-        ttable_chart_set_scroll_region (chart,
+        usage_chart_set_scroll_region (chart,
 					x1,
 					y1,
 					x2,
@@ -857,17 +857,17 @@ ttable_chart_reflow_idle (PlannerTtableChart *chart)
 }
 
 static void
-ttable_chart_reflow_now (PlannerTtableChart *chart)
+usage_chart_reflow_now (PlannerUsageChart *chart)
 {
         if (!GTK_WIDGET_MAPPED (chart)) {
                 return;
         }
 
-        ttable_chart_reflow_idle (chart);
+        usage_chart_reflow_idle (chart);
 }
 
 static void
-ttable_chart_reflow (PlannerTtableChart *chart, gboolean height_changed)
+usage_chart_reflow (PlannerUsageChart *chart, gboolean height_changed)
 {
         if (!GTK_WIDGET_MAPPED (chart)) {
                 return;
@@ -879,18 +879,18 @@ ttable_chart_reflow (PlannerTtableChart *chart, gboolean height_changed)
         }
 
 	chart->priv->reflow_idle_id =
-                g_idle_add ((GSourceFunc) ttable_chart_reflow_idle, chart);
+                g_idle_add ((GSourceFunc) usage_chart_reflow_idle, chart);
 }
 
 static void
-ttable_chart_tree_traverse (TreeNode *node, TreeFunc func, gpointer data)
+usage_chart_tree_traverse (TreeNode *node, TreeFunc func, gpointer data)
 {
         gint      i;
         TreeNode *child;
 
         for (i = 0; i < node->num_children; i++) {
                 child = node->children[i];
-                ttable_chart_tree_traverse (child, func, data);
+                usage_chart_tree_traverse (child, func, data);
         }
 
         func (node, data);
@@ -899,10 +899,10 @@ ttable_chart_tree_traverse (TreeNode *node, TreeFunc func, gpointer data)
 static void
 scale_func (TreeNode *node, gpointer data)
 {
-        PlannerTtableChart     *chart;
-        PlannerTtableChartPriv *priv;
+        PlannerUsageChart     *chart;
+        PlannerUsageChartPriv *priv;
 
-        chart = PLANNER_TTABLE_CHART (data);
+        chart = PLANNER_USAGE_CHART (data);
         priv = chart->priv;
 
         if (node->item) {
@@ -914,7 +914,7 @@ scale_func (TreeNode *node, gpointer data)
 }
 
 static void
-ttable_chart_set_scroll_region (PlannerTtableChart *chart,
+usage_chart_set_scroll_region (PlannerUsageChart *chart,
                                 gdouble             x1,
                                 gdouble             y1,
 				gdouble             x2,
@@ -934,35 +934,35 @@ ttable_chart_set_scroll_region (PlannerTtableChart *chart,
 }
 
 GtkWidget *
-planner_ttable_chart_new (void)
+planner_usage_chart_new (void)
 {
-        return planner_ttable_chart_new_with_model (NULL);
+        return planner_usage_chart_new_with_model (NULL);
 }
 
 GtkWidget *
-planner_ttable_chart_new_with_model (GtkTreeModel *model)
+planner_usage_chart_new_with_model (GtkTreeModel *model)
 {
-        PlannerTtableChart *chart;
+        PlannerUsageChart *chart;
 
-        chart = PLANNER_TTABLE_CHART (gtk_type_new
-                                      (planner_ttable_chart_get_type ()));
+        chart = PLANNER_USAGE_CHART (gtk_type_new
+                                      (planner_usage_chart_get_type ()));
         if (model) {
-                planner_ttable_chart_set_model (chart, model);
+                planner_usage_chart_set_model (chart, model);
         }
 
         return GTK_WIDGET (chart);
 }
 
 void
-planner_ttable_chart_set_model (PlannerTtableChart *chart,
+planner_usage_chart_set_model (PlannerUsageChart *chart,
                                 GtkTreeModel       *model)
 {
-        PlannerTtableChartPriv *priv;
+        PlannerUsageChartPriv *priv;
         MrpProject             *project;
         MrpTask                *root;
         gulong                  signal_id;
 
-        g_return_if_fail (PLANNER_IS_TTABLE_CHART (chart));
+        g_return_if_fail (PLANNER_IS_USAGE_CHART (chart));
 
         priv = chart->priv;
 
@@ -971,16 +971,16 @@ planner_ttable_chart_set_model (PlannerTtableChart *chart,
         }
 
         if (priv->model) {
-                ttable_chart_disconnect_signals (chart);
+                usage_chart_disconnect_signals (chart);
                 g_object_unref (priv->model);
         }
 	
         priv->model = model;
         if (model) {
                 g_object_ref (model);
-                ttable_chart_build_tree (chart);
+                usage_chart_build_tree (chart);
                 project =
-                        planner_ttable_model_get_project (PLANNER_TTABLE_MODEL
+                        planner_usage_model_get_project (PLANNER_USAGE_MODEL
                                                           (model));
                 root = mrp_project_get_root_task (project);
                 g_object_set (priv->background, "project", project, NULL);
@@ -988,47 +988,47 @@ planner_ttable_chart_set_model (PlannerTtableChart *chart,
                 signal_id = g_signal_connect (project,
                                               "notify::project-start",
                                               G_CALLBACK
-                                              (ttable_chart_project_start_changed),
+                                              (usage_chart_project_start_changed),
                                               chart);
-                ttable_chart_add_signal (chart, project, signal_id,
+                usage_chart_add_signal (chart, project, signal_id,
                                          "notify::project-start");
 		
                 g_signal_connect (root,
 				  "notify::finish",
 				  G_CALLBACK
-				  (ttable_chart_root_finish_changed),
+				  (usage_chart_root_finish_changed),
 				  chart);
 		
                 signal_id = g_signal_connect (model,
                                               "row-changed",
                                               G_CALLBACK
-                                              (ttable_chart_row_changed),
+                                              (usage_chart_row_changed),
                                               chart);
-                ttable_chart_add_signal (chart, model, signal_id,
+                usage_chart_add_signal (chart, model, signal_id,
                                          "row-changed");
 
                 signal_id = g_signal_connect (model,
                                               "row-inserted",
                                               G_CALLBACK
-                                              (ttable_chart_row_inserted),
+                                              (usage_chart_row_inserted),
                                               chart);
-                ttable_chart_add_signal (chart, model, signal_id,
+                usage_chart_add_signal (chart, model, signal_id,
                                          "row-inserted");
 
                 signal_id = g_signal_connect (model,
                                               "row-deleted",
                                               G_CALLBACK
-                                              (ttable_chart_row_deleted),
+                                              (usage_chart_row_deleted),
                                               chart);
-                ttable_chart_add_signal (chart, model, signal_id,
+                usage_chart_add_signal (chart, model, signal_id,
                                          "row-deleted");
 
                 /*
                  * signal_id = g_signal_connect(model,
                  * "row-reordered",
-                 * G_CALLBACK (ttable_chart_row_reordered),
+                 * G_CALLBACK (usage_chart_row_reordered),
                  * chart);
-                 * ttable_chart_add_signal (chart, model, signal_id,"row-reordered");
+                 * usage_chart_add_signal (chart, model, signal_id,"row-reordered");
                  */
 
                 priv->project_start = mrp_project_get_project_start (project);
@@ -1039,16 +1039,16 @@ planner_ttable_chart_set_model (PlannerTtableChart *chart,
                 priv->last_time = mrp_task_get_finish (root);
 
                 priv->height_changed = TRUE;
-                ttable_chart_reflow_now (chart);
+                usage_chart_reflow_now (chart);
 
         }
         g_object_notify (G_OBJECT (chart), "model");
 }
 
 static void
-ttable_chart_build_tree (PlannerTtableChart * chart)
+usage_chart_build_tree (PlannerUsageChart * chart)
 {
-        PlannerTtableChartPriv *priv;
+        PlannerUsageChartPriv *priv;
         GtkTreeIter             iter;
         GtkTreePath            *path;
         TreeNode               *node;
@@ -1067,22 +1067,22 @@ ttable_chart_build_tree (PlannerTtableChart * chart)
         do {
                 MrpResource *res;
 
-                res = planner_ttable_model_get_resource (PLANNER_TTABLE_MODEL
+                res = planner_usage_model_get_resource (PLANNER_USAGE_MODEL
                                                          (priv->model),
                                                          &iter);
 
 		path = gtk_tree_model_get_path (priv->model, &iter);
-                node = ttable_chart_insert_resource (chart, path, res);
+                node = usage_chart_insert_resource (chart, path, res);
                 gtk_tree_path_free (path);
                 if (gtk_tree_model_iter_children (priv->model, &child, &iter)) {
                         do {
                                 MrpAssignment *assign;
-                                assign = planner_ttable_model_get_assignment
-                                        (PLANNER_TTABLE_MODEL (priv->model),
+                                assign = planner_usage_model_get_assignment
+                                        (PLANNER_USAGE_MODEL (priv->model),
                                          &child);
                                 path = gtk_tree_model_get_path (priv->model,
                                                                 &child);
-                                node = ttable_chart_insert_assignment (chart,
+                                node = usage_chart_insert_assignment (chart,
                                                                        path,
                                                                        assign);
                                 gtk_tree_path_free (path);
@@ -1095,56 +1095,56 @@ ttable_chart_build_tree (PlannerTtableChart * chart)
 }
 
 static TreeNode *
-ttable_chart_insert_row (PlannerTtableChart *chart,
+usage_chart_insert_row (PlannerUsageChart *chart,
                          GtkTreePath        *path,
                          MrpResource        *resource,
 			 MrpAssignment      *assign)
 {
-        PlannerTtableChartPriv *priv;
+        PlannerUsageChartPriv *priv;
         GnomeCanvasItem        *item;
         TreeNode               *tree_node;
 
         priv = chart->priv;
 
         item = gnome_canvas_item_new (gnome_canvas_root (priv->canvas),
-                                      PLANNER_TYPE_TTABLE_ROW,
+                                      PLANNER_TYPE_USAGE_ROW,
                                       "resource", resource,
                                       "assignment", assign,
                                       "scale", SCALE (priv->zoom),
                                       "zoom", priv->zoom,
 				      NULL);
 
-        tree_node = ttable_chart_tree_node_new ();
+        tree_node = usage_chart_tree_node_new ();
         tree_node->item = item;
         tree_node->resource = resource;
         tree_node->assignment = assign;
-        ttable_chart_tree_node_insert_path (priv->tree, path, tree_node);
+        usage_chart_tree_node_insert_path (priv->tree, path, tree_node);
         return tree_node;
 }
 
 static TreeNode *
-ttable_chart_insert_resource (PlannerTtableChart *chart,
+usage_chart_insert_resource (PlannerUsageChart *chart,
                               GtkTreePath        *path,
 			      MrpResource        *resource)
 {
         TreeNode *node;
 
-        node = ttable_chart_insert_row (chart, path, resource, NULL);
+        node = usage_chart_insert_row (chart, path, resource, NULL);
         node->expanded = 0;
 
 	return node;
 }
 
 static TreeNode *
-ttable_chart_insert_assignment (PlannerTtableChart *chart,
+usage_chart_insert_assignment (PlannerUsageChart *chart,
                                 GtkTreePath        *path,
 				MrpAssignment      *assign)
 {
-        return ttable_chart_insert_row (chart, path, NULL, assign);
+        return usage_chart_insert_row (chart, path, NULL, assign);
 }
 
 static void
-ttable_chart_tree_node_insert_path (TreeNode    *node,
+usage_chart_tree_node_insert_path (TreeNode    *node,
                                     GtkTreePath *path,
 				    TreeNode    *new_node)
 {
@@ -1176,9 +1176,9 @@ ttable_chart_tree_node_insert_path (TreeNode    *node,
 }
 
 static void
-ttable_chart_project_start_changed (MrpProject         *project,
+usage_chart_project_start_changed (MrpProject         *project,
                                     GParamSpec         *spec,
-                                    PlannerTtableChart *chart)
+                                    PlannerUsageChart *chart)
 {
         mrptime t;
 
@@ -1187,20 +1187,20 @@ ttable_chart_project_start_changed (MrpProject         *project,
 	chart->priv->project_start = t;
         g_object_set (chart->priv->background, "project-start", t, NULL);
 
-	ttable_chart_reflow_now (chart);
+	usage_chart_reflow_now (chart);
 }
 
 static void
-ttable_chart_root_finish_changed (MrpTask            *root,
+usage_chart_root_finish_changed (MrpTask            *root,
                                   GParamSpec         *spec,
-                                  PlannerTtableChart *chart)
+                                  PlannerUsageChart *chart)
 {
 	chart->priv->last_time = mrp_task_get_finish (root);
-	ttable_chart_reflow (chart, FALSE);
+	usage_chart_reflow (chart, FALSE);
 }
 
 static void
-ttable_chart_add_signal (PlannerTtableChart *chart,
+usage_chart_add_signal (PlannerUsageChart *chart,
                          gpointer            instance,
 			 gulong              sig_id,
 			 gchar              *sig_name)
@@ -1214,7 +1214,7 @@ ttable_chart_add_signal (PlannerTtableChart *chart,
 }
 
 static void
-ttable_chart_disconnect_signals (PlannerTtableChart *chart)
+usage_chart_disconnect_signals (PlannerUsageChart *chart)
 {
         GList       *l;
         ConnectData *data;
@@ -1235,7 +1235,7 @@ show_hide_descendants (TreeNode *node, gboolean show)
         gint i;
 
         for (i = 0; i < node->num_children; i++) {
-                planner_ttable_row_set_visible (PLANNER_TTABLE_ROW
+                planner_usage_row_set_visible (PLANNER_USAGE_ROW
                                                 (node->children[i]->item),
                                                 show);
                 if (!show || (show && node->children[i]->expanded)) {
@@ -1267,55 +1267,55 @@ collapse_descendants (TreeNode *node)
 }
 
 void
-planner_ttable_chart_expand_row (PlannerTtableChart *chart,
+planner_usage_chart_expand_row (PlannerUsageChart *chart,
                                  GtkTreePath        *path)
 {
         TreeNode *node;
 
-        g_return_if_fail (PLANNER_IS_TTABLE_CHART (chart));
+        g_return_if_fail (PLANNER_IS_USAGE_CHART (chart));
 
-	node = ttable_chart_tree_node_at_path (chart->priv->tree, path);
+	node = usage_chart_tree_node_at_path (chart->priv->tree, path);
         if (node) {
                 node->expanded = TRUE;
                 show_hide_descendants (node, TRUE);
-                ttable_chart_reflow (chart, TRUE);
+                usage_chart_reflow (chart, TRUE);
         }
 }
 
 void
-planner_ttable_chart_collapse_row (PlannerTtableChart *chart,
+planner_usage_chart_collapse_row (PlannerUsageChart *chart,
                                    GtkTreePath        *path)
 {
         TreeNode *node;
 
-        g_return_if_fail (PLANNER_IS_TTABLE_CHART (chart));
+        g_return_if_fail (PLANNER_IS_USAGE_CHART (chart));
 
-        node = ttable_chart_tree_node_at_path (chart->priv->tree, path);
+        node = usage_chart_tree_node_at_path (chart->priv->tree, path);
         if (node) {
                 node->expanded = FALSE;
                 collapse_descendants (node);
                 show_hide_descendants (node, FALSE);
-                ttable_chart_reflow (chart, TRUE);
+                usage_chart_reflow (chart, TRUE);
         }
 }
 
 void
-planner_ttable_chart_expand_all (PlannerTtableChart *chart)
+planner_usage_chart_expand_all (PlannerUsageChart *chart)
 {
-        g_return_if_fail (PLANNER_IS_TTABLE_CHART (chart));
+        g_return_if_fail (PLANNER_IS_USAGE_CHART (chart));
 
         expand_descendants (chart->priv->tree);
         show_hide_descendants (chart->priv->tree, TRUE);
-        ttable_chart_reflow (chart, TRUE);
+        usage_chart_reflow (chart, TRUE);
 }
 
 void
-planner_ttable_chart_collapse_all (PlannerTtableChart *chart)
+planner_usage_chart_collapse_all (PlannerUsageChart *chart)
 {
         TreeNode *node;
         int       i;
 	
-        g_return_if_fail (PLANNER_IS_TTABLE_CHART (chart));
+        g_return_if_fail (PLANNER_IS_USAGE_CHART (chart));
 
         node = chart->priv->tree;
         for (i = 0; i < node->num_children; i++) {
@@ -1324,11 +1324,11 @@ planner_ttable_chart_collapse_all (PlannerTtableChart *chart)
                 show_hide_descendants (node->children[i], FALSE);
         }
 
-        ttable_chart_reflow (chart, TRUE);
+        usage_chart_reflow (chart, TRUE);
 }
 
 static TreeNode *
-ttable_chart_tree_node_at_path (TreeNode *node, GtkTreePath *path)
+usage_chart_tree_node_at_path (TreeNode *node, GtkTreePath *path)
 {
         gint *indices, i, depth;
 
@@ -1342,7 +1342,7 @@ ttable_chart_tree_node_at_path (TreeNode *node, GtkTreePath *path)
 }
 
 static void
-ttable_chart_row_changed (GtkTreeModel *model,
+usage_chart_row_changed (GtkTreeModel *model,
                           GtkTreePath  *path,
                           GtkTreeIter  *iter,
 			  gpointer      data)
@@ -1350,13 +1350,13 @@ ttable_chart_row_changed (GtkTreeModel *model,
 }
 
 static void
-ttable_chart_row_inserted (GtkTreeModel *model,
+usage_chart_row_inserted (GtkTreeModel *model,
                            GtkTreePath  *path,
                            GtkTreeIter  *iter,
 			   gpointer      data)
 {
-        PlannerTtableChart     *chart;
-        PlannerTtableChartPriv *priv;
+        PlannerUsageChart     *chart;
+        PlannerUsageChartPriv *priv;
         gboolean                free_path = FALSE;
         gboolean                free_iter = FALSE;
         MrpResource            *res;
@@ -1376,19 +1376,19 @@ ttable_chart_row_inserted (GtkTreeModel *model,
                 gtk_tree_model_get_iter (model, iter, path);
         }
 
-	res = planner_ttable_model_get_resource (PLANNER_TTABLE_MODEL (model),
+	res = planner_usage_model_get_resource (PLANNER_USAGE_MODEL (model),
                                                  iter);
-        assign = planner_ttable_model_get_assignment (PLANNER_TTABLE_MODEL
+        assign = planner_usage_model_get_assignment (PLANNER_USAGE_MODEL
                                                       (model), iter);
         if (res) {
-                node = ttable_chart_insert_resource (chart, path, res);
+                node = usage_chart_insert_resource (chart, path, res);
         }
 
 	if (assign && !node) {
-                node = ttable_chart_insert_assignment (chart, path, assign);
+                node = usage_chart_insert_assignment (chart, path, assign);
 	}
 
-        ttable_chart_reflow (chart, TRUE);
+        usage_chart_reflow (chart, TRUE);
 
 	if (free_path) {
                 gtk_tree_path_free (path);
@@ -1400,20 +1400,20 @@ ttable_chart_row_inserted (GtkTreeModel *model,
 
 }
 static void
-ttable_chart_row_deleted (GtkTreeModel *model,
+usage_chart_row_deleted (GtkTreeModel *model,
                           GtkTreePath  *path,
 			  gpointer      data)
 {
-        PlannerTtableChart     *chart;
-        PlannerTtableChartPriv *priv;
+        PlannerUsageChart     *chart;
+        PlannerUsageChartPriv *priv;
         TreeNode               *node;
 
-        chart = PLANNER_TTABLE_CHART (data);
+        chart = PLANNER_USAGE_CHART (data);
         priv = chart->priv;
 
-        node = ttable_chart_tree_node_at_path (priv->tree, path);
-        ttable_chart_tree_node_remove (node);
-        ttable_chart_remove_children (chart, node);
+        node = usage_chart_tree_node_at_path (priv->tree, path);
+        usage_chart_tree_node_remove (node);
+        usage_chart_remove_children (chart, node);
         /*
          * g_return_if_fail (path != NULL || iter != NULL);
          * fprintf(stderr,"On degage une ligne\n");
@@ -1425,16 +1425,16 @@ ttable_chart_row_deleted (GtkTreeModel *model,
          * free_iter = TRUE;
          * gtk_tree_model_get_iter(model,iter,path);
          * }
-         * res = planner_ttable_model_get_resource(PLANNER_TTABLE_MODEL(model),iter);
-         * assign = planner_ttable_model_get_assignment(PLANNER_TTABLE_MODEL(model),iter);
+         * res = planner_usage_model_get_resource(PLANNER_USAGE_MODEL(model),iter);
+         * assign = planner_usage_model_get_assignment(PLANNER_USAGE_MODEL(model),iter);
          * if (res) {
-         * ttable_chart_remove_resource(chart,path,res);
+         * usage_chart_remove_resource(chart,path,res);
          * }
          * if (assign) {
-         * ttable_chart_remove_assignment(chart,path,assign);
+         * usage_chart_remove_assignment(chart,path,assign);
          * }
          */
-        ttable_chart_reflow (chart, TRUE);
+        usage_chart_reflow (chart, TRUE);
         /*
          * if (free_path) {
          * gt_tree_path_free(path);
@@ -1446,26 +1446,26 @@ ttable_chart_row_deleted (GtkTreeModel *model,
 }
 
 /*
-static void	ttable_chart_row_reordered		(GtkTreeModel	*model,
+static void	usage_chart_row_reordered		(GtkTreeModel	*model,
 							 GtkTreePath	*path,
 							 GtkTreeIter	*iter,
 							 gpointer	 data)
 {}
 
 static void
-ttable_chart_resource_assignment_added			(MrpResource	*res,
+usage_chart_resource_assignment_added			(MrpResource	*res,
 							 MrpAssignment	*assign,
-							 PlannerTtableChart	*chart)
+							 PlannerUsageChart	*chart)
 {
 	g_return_if_fail(MRP_IS_RESOURCE(res));
 	g_return_if_fail(MRP_IS_ASSIGNMENT(assign));
-	g_return_if_fail(PLANNER_IS_TTABLE_CHART(chart));
+	g_return_if_fail(PLANNER_IS_USAGE_CHART(chart));
 	// So, res is added an assignment...
 }
 */
 
 static void
-ttable_chart_tree_node_remove (TreeNode *node)
+usage_chart_tree_node_remove (TreeNode *node)
 {
         TreeNode *parent;
         gint      i, pos;
@@ -1491,12 +1491,12 @@ ttable_chart_tree_node_remove (TreeNode *node)
 }
 
 static void
-ttable_chart_remove_children (PlannerTtableChart *chart, TreeNode *node)
+usage_chart_remove_children (PlannerUsageChart *chart, TreeNode *node)
 {
         gint i;
 
         for (i = 0; i < node->num_children; i++) {
-                ttable_chart_remove_children (chart, node->children[i]);
+                usage_chart_remove_children (chart, node->children[i]);
         }
 
 	gtk_object_destroy (GTK_OBJECT (node->item));
@@ -1512,23 +1512,23 @@ ttable_chart_remove_children (PlannerTtableChart *chart, TreeNode *node)
 }
 
 void
-planner_ttable_chart_setup_root_task (PlannerTtableChart *chart)
+planner_usage_chart_setup_root_task (PlannerUsageChart *chart)
 {
-        PlannerTtableChartPriv *priv;
+        PlannerUsageChartPriv *priv;
         MrpProject             *project;
         MrpTask                *root;
 
-        g_return_if_fail (PLANNER_IS_TTABLE_CHART (chart));
+        g_return_if_fail (PLANNER_IS_USAGE_CHART (chart));
 
         priv = chart->priv;
 
-	project = planner_ttable_model_get_project (PLANNER_TTABLE_MODEL (priv->model));
+	project = planner_usage_model_get_project (PLANNER_USAGE_MODEL (priv->model));
 	root = mrp_project_get_root_task (project);
 	
 	g_signal_connect (root,
 			  "notify::finish",
 			  G_CALLBACK
-			  (ttable_chart_root_finish_changed),
+			  (usage_chart_root_finish_changed),
 			  chart);
 }
 

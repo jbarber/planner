@@ -25,15 +25,14 @@
 #include <string.h>
 #include <math.h>
 #include <locale.h>
-#include <sys/types.h>
-#include <sys/stat.h>
+//#include <sys/types.h>
+//#include <sys/stat.h>
+#include <glib/gi18n.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
 #include <gtk/gtk.h>
-#include <gtk/gtkaboutdialog.h>
 #include <glade/glade.h>
 #include <libgnome/gnome-help.h>
 #include <libgnome/gnome-url.h>
-#include <glib/gi18n.h>
 #include <libgnomeprintui/gnome-print-dialog.h>
 #include <libgnomeprintui/gnome-print-job-preview.h>
 #include <libplanner/mrp-error.h>
@@ -45,7 +44,6 @@
 #include "planner-conf.h"
 #include "planner-sidebar.h"
 #include "planner-window.h"
-#include "planner-view-loader.h"
 #include "planner-plugin-loader.h"
 #include "planner-project-properties.h"
 #include "planner-phase-dialog.h"
@@ -53,7 +51,10 @@
 #include "planner-day-type-dialog.h"
 #include "planner-print-dialog.h"
 #include "planner-view.h"
-#include "planner-cmd-manager.h"
+#include "planner-gantt-view.h"
+#include "planner-task-view.h"
+#include "planner-resource-view.h"
+#include "planner-usage-view.h"
 
 #define d(x)
 
@@ -543,16 +544,23 @@ window_populate (PlannerWindow *window)
 
 	gtk_box_pack_end (GTK_BOX (priv->ui_box), hbox, TRUE, TRUE, 0);
 
-	/* Load views. */
+	/* Create views. */
 	priv->view_actions = gtk_action_group_new ("View Actions");
 	gtk_ui_manager_insert_action_group (priv->ui_manager, priv->view_actions, 0);
-	priv->views = planner_view_loader_load (window);
 
+	priv->views = NULL;
+	priv->views = g_list_append (priv->views, planner_gantt_view_new ());
+	priv->views = g_list_append (priv->views, planner_task_view_new ());
+	priv->views = g_list_append (priv->views, planner_resource_view_new ());
+	priv->views = g_list_append (priv->views, planner_usage_view_new ());
+	
 	view_num = 0;
 	xml_string = g_strdup ("");
 	r_entries  = g_new0 (GtkRadioActionEntry, g_list_length (priv->views));
 	for (l = priv->views; l; l = l->next, view_num++ ) {
 		view = l->data;
+
+		planner_view_setup (view, window);
 		
 		view_widget = planner_view_get_widget (view);
 		gtk_widget_show (view_widget);

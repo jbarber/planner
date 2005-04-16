@@ -1,5 +1,4 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-
 /*
  * Copyright (C) 2003-2004 Imendio AB
  * Copyright (C) 2003 Benjamin BAYART <benjamin@sitadelle.com>
@@ -21,44 +20,44 @@
  * Boston, MA 02111-1307, USA.
  */
 
-#ifndef __PLANNER_TTABLE_TREE__
-#define __PLANNER_TTABLE_TREE__
+#ifndef __PLANNER_USAGE_TREE__
+#define __PLANNER_USAGE_TREE__
 
 #include <gtk/gtktreeview.h>
 #include <libplanner/mrp-project.h>
 #include "planner-ttable-model.h"
 #include "planner-window.h"
 
-#define PLANNER_TYPE_TTABLE_TREE               (planner_ttable_tree_get_type ())
-#define PLANNER_TTABLE_TREE(obj)               (GTK_CHECK_CAST ((obj), PLANNER_TYPE_TTABLE_TREE, PlannerTtableTree))
-#define PLANNER_TTABLE_TREE_CLASS(klass)       (GTK_CHECK_CLASS_CAST ((klass), PLANNER_TYPE_TTABLE_TREE, PlannerTtableTreeClass))
-#define PLANNER_IS_TTABLE_TREE(obj)            (GTK_CHECK_TYPE ((obj), PLANNER_TYPE_TTABLE_TREE))
-#define PLANNER_IS_TTABLE_TREE_CLASS(klass)    (GTK_CHECK_CLASS_TYPE ((obj), PLANNER_TYPE_TTABLE_TREE))
-#define PLANNER_TTABLE_TREE_GET_CLASS(obj)     (GTK_CHECK_GET_CLASS ((obj), PLANNER_TYPE_TTABLE_TREE, PlannerTtableTreeClass))
+#define PLANNER_TYPE_USAGE_TREE               (planner_usage_tree_get_type ())
+#define PLANNER_USAGE_TREE(obj)               (GTK_CHECK_CAST ((obj), PLANNER_TYPE_USAGE_TREE, PlannerUsageTree))
+#define PLANNER_USAGE_TREE_CLASS(klass)       (GTK_CHECK_CLASS_CAST ((klass), PLANNER_TYPE_USAGE_TREE, PlannerUsageTreeClass))
+#define PLANNER_IS_USAGE_TREE(obj)            (GTK_CHECK_TYPE ((obj), PLANNER_TYPE_USAGE_TREE))
+#define PLANNER_IS_USAGE_TREE_CLASS(klass)    (GTK_CHECK_CLASS_TYPE ((obj), PLANNER_TYPE_USAGE_TREE))
+#define PLANNER_USAGE_TREE_GET_CLASS(obj)     (GTK_CHECK_GET_CLASS ((obj), PLANNER_TYPE_USAGE_TREE, PlannerUsageTreeClass))
 
-typedef struct _PlannerTtableTree PlannerTtableTree;
-typedef struct _PlannerTtableTreeClass PlannerTtableTreeClass;
-typedef struct _PlannerTtableTreePriv PlannerTtableTreePriv;
+typedef struct _PlannerUsageTree PlannerUsageTree;
+typedef struct _PlannerUsageTreeClass PlannerUsageTreeClass;
+typedef struct _PlannerUsageTreePriv PlannerUsageTreePriv;
 
-struct _PlannerTtableTree {
+struct _PlannerUsageTree {
         GtkTreeView            parent;
-        PlannerTtableTreePriv *priv;
+        PlannerUsageTreePriv *priv;
 };
 
-struct _PlannerTtableTreeClass {
+struct _PlannerUsageTreeClass {
         GtkTreeViewClass parent_class;
 };
 
-GType      planner_ttable_tree_get_type           (void) G_GNUC_CONST;
-GtkWidget *planner_ttable_tree_new                (PlannerWindow      *window,
-						   PlannerTtableModel *model);
-void       planner_ttable_tree_set_model          (PlannerTtableTree  *tree,
-						   PlannerTtableModel *model);
-void       planner_ttable_tree_edit_task          (PlannerTtableTree  *tree);
-void       planner_ttable_tree_edit_resource      (PlannerTtableTree  *tree);
-GList *    planner_ttable_tree_get_selected_items (PlannerTtableTree  *tree);
-void       planner_ttable_tree_expand_all         (PlannerTtableTree  *tree);
-void       planner_ttable_tree_collapse_all       (PlannerTtableTree  *tree);
+GType      planner_usage_tree_get_type           (void) G_GNUC_CONST;
+GtkWidget *planner_usage_tree_new                (PlannerWindow      *window,
+						  PlannerUsageModel *model);
+void       planner_usage_tree_set_model          (PlannerUsageTree  *tree,
+						  PlannerUsageModel *model);
+void       planner_usage_tree_edit_task          (PlannerUsageTree  *tree);
+void       planner_usage_tree_edit_resource      (PlannerUsageTree  *tree);
+GList *    planner_usage_tree_get_selected_items (PlannerUsageTree  *tree);
+void       planner_usage_tree_expand_all         (PlannerUsageTree  *tree);
+void       planner_usage_tree_collapse_all       (PlannerUsageTree  *tree);
 
 
-#endif /* __PLANNER_TTABLE_TREE__ */
+#endif /* __PLANNER_USAGE_TREE__ */

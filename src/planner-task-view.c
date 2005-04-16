@@ -24,24 +24,10 @@
 #include <config.h>
 #include <string.h>
 #include <time.h>
-#include <glib.h>
-#include <gmodule.h>
-#include <gtk/gtkmain.h>
-#include <gtk/gtkiconfactory.h>
-#include <gtk/gtkitemfactory.h>
-#include <gtk/gtkstock.h>
-#include <gtk/gtkhpaned.h>
-#include <gtk/gtkframe.h>
-#include <gtk/gtktreeview.h>
-#include <gtk/gtkcellrenderertext.h>
-#include <gtk/gtktreeselection.h>
-#include <gtk/gtktreemodel.h>
-#include <gtk/gtkscrolledwindow.h>
-#include <gtk/gtkmessagedialog.h>
-#include <gtk/gtktoggleaction.h>
 #include <glib/gi18n.h>
+#include <gtk/gtk.h>
 #include <libplanner/mrp-task.h>
-#include "planner-view.h"
+#include "planner-task-view.h"
 #include "planner-conf.h"
 #include "planner-cell-renderer-date.h"
 #include "planner-task-dialog.h"
@@ -52,7 +38,7 @@
 #include "planner-column-dialog.h"
 
 
-struct _PlannerViewPriv {
+struct _PlannerTaskViewPriv {
 	GtkWidget              *tree;
 	GtkWidget              *frame;
 	PlannerTablePrintSheet *print_sheet;
@@ -61,15 +47,21 @@ struct _PlannerViewPriv {
 	guint                   merged_id;
 };
 
-void          activate                               (PlannerView     *view);
-void          deactivate                             (PlannerView     *view);
-void          init                                   (PlannerView     *view,
-						      PlannerWindow   *main_window);
-const gchar  *get_label                              (PlannerView     *view);
-const gchar  *get_menu_label                         (PlannerView     *view);
-const gchar  *get_icon                               (PlannerView     *view);
-const gchar  *get_name                               (PlannerView     *view);
-GtkWidget    *get_widget                             (PlannerView     *view);
+static void          task_view_activate                               (PlannerView     *view);
+static void          task_view_deactivate                             (PlannerView     *view);
+static void          task_view_setup                                   (PlannerView     *view,
+							     PlannerWindow   *main_window);
+static const gchar  *task_view_get_label                              (PlannerView     *view);
+static const gchar  *task_view_get_menu_label                         (PlannerView     *view);
+static const gchar  *task_view_get_icon                               (PlannerView     *view);
+static const gchar  *task_view_get_name                               (PlannerView     *view);
+static GtkWidget    *task_view_get_widget                             (PlannerView     *view);
+static void          task_view_print_init                             (PlannerView     *view,
+						      PlannerPrintJob *job);
+static void          task_view_print                                  (PlannerView     *view);
+static gint          task_view_print_get_n_pages                      (PlannerView     *view);
+static void          task_view_print_cleanup                          (PlannerView     *view);
+
 static void   task_view_tree_view_columns_changed_cb (GtkTreeView     *tree_view,
 						      PlannerView     *view);
 static void   task_view_tree_view_destroy_cb         (GtkTreeView     *tree_view,
@@ -116,11 +108,6 @@ static void   task_view_update_ui                    (PlannerView     *view);
 static void   task_view_save_columns                 (PlannerView     *view);
 static void   task_view_load_columns                 (PlannerView     *view);
 
-void          print_init                             (PlannerView     *view,
-						      PlannerPrintJob *job);
-void          print                                  (PlannerView     *view);
-gint          print_get_n_pages                      (PlannerView     *view);
-void          print_cleanup                          (PlannerView     *view);
 
 
 static GtkActionEntry entries[] = {
@@ -179,14 +166,43 @@ static guint n_toggle_entries = G_N_ELEMENTS (toggle_entries);
 
 #define CRITICAL_PATH_KEY "/views/task_view/highlight_critical_path"
 
-G_MODULE_EXPORT void
-activate (PlannerView *view)
-{
-	PlannerViewPriv *priv;
-	gboolean         show_critical;
-	GError          *error = NULL;
+G_DEFINE_TYPE (PlannerTaskView, planner_task_view, PLANNER_TYPE_VIEW);
 
-	priv = view->priv;
+
+static void
+planner_task_view_class_init (PlannerTaskViewClass *klass)
+{
+	PlannerViewClass *view_class;
+
+	view_class = PLANNER_VIEW_CLASS (klass);
+
+	view_class->setup = task_view_setup;
+	view_class->get_label = task_view_get_label;
+	view_class->get_menu_label = task_view_get_menu_label;
+	view_class->get_icon = task_view_get_icon;
+	view_class->get_name = task_view_get_name;
+	view_class->get_widget = task_view_get_widget;
+	view_class->activate = task_view_activate;
+	view_class->deactivate = task_view_deactivate;
+	view_class->print_init = task_view_print_init;
+	view_class->print_get_n_pages = task_view_print_get_n_pages;
+	view_class->print = task_view_print;
+	view_class->print_cleanup = task_view_print_cleanup;
+}
+
+static void
+planner_task_view_init (PlannerTaskView *view)
+{
+	view->priv = g_new0 (PlannerTaskViewPriv, 1);
+}
+
+static void
+task_view_activate (PlannerView *view)
+{
+	PlannerTaskViewPriv *priv;
+	gboolean             show_critical;
+
+	priv = PLANNER_TASK_VIEW (view)->priv;
 	
 	priv->actions = gtk_action_group_new ("TaskView");
 	gtk_action_group_set_translation_domain (priv->actions, GETTEXT_PACKAGE);
@@ -197,16 +213,11 @@ activate (PlannerView *view)
 	gtk_ui_manager_insert_action_group (priv->ui_manager, priv->actions, 0);
 	priv->merged_id = gtk_ui_manager_add_ui_from_file (priv->ui_manager,
 							   DATADIR "/planner/ui/task-view.ui",
-							   &error);
-	if (error != NULL) {
-		g_message ("Building menu failed: %s", error->message);
-		g_message ("Couldn't load: %s", DATADIR "/planner/ui/task-view.ui");
-                g_error_free(error);
-	}
+							   NULL);
+
 	gtk_ui_manager_ensure_update (priv->ui_manager);
 
 	/* Set the initial UI state. */
-
 	show_critical = planner_conf_get_bool (CRITICAL_PATH_KEY, NULL);
 
 	planner_task_tree_set_highlight_critical (PLANNER_TASK_TREE (priv->tree),
@@ -221,69 +232,58 @@ activate (PlannerView *view)
 	gtk_widget_grab_focus (priv->tree);
 }
 
-G_MODULE_EXPORT void
-deactivate (PlannerView *view)
+static void
+task_view_deactivate (PlannerView *view)
 {
-	PlannerViewPriv *priv;
+	PlannerTaskViewPriv *priv;
 
-	priv = view->priv;
+	priv = PLANNER_TASK_VIEW (view)->priv;
 	gtk_ui_manager_remove_ui (priv->ui_manager, priv->merged_id);
 }
 
-G_MODULE_EXPORT void
-init (PlannerView *view, PlannerWindow *main_window)
+static void
+task_view_setup (PlannerView *view, PlannerWindow *main_window)
 {
-	PlannerViewPriv *priv;
+	PlannerTaskViewPriv *priv;
 	
-	priv = g_new0 (PlannerViewPriv, 1);
-	view->priv = priv;
+	priv = PLANNER_TASK_VIEW (view)->priv;
 
-	priv->ui_manager = planner_window_get_ui_manager(main_window);
+	priv->ui_manager = planner_window_get_ui_manager (main_window);
 }
 
-G_MODULE_EXPORT const gchar *
-get_label (PlannerView *view)
+static const gchar *
+task_view_get_label (PlannerView *view)
 {
-	g_return_val_if_fail (PLANNER_IS_VIEW (view), NULL);
-
 	return _("Tasks");
 }
 
-G_MODULE_EXPORT const gchar *
-get_menu_label (PlannerView *view)
+static const gchar *
+task_view_get_menu_label (PlannerView *view)
 {
-	g_return_val_if_fail (PLANNER_IS_VIEW (view), NULL);
-
 	return _("_Tasks");
 }
 
-G_MODULE_EXPORT const gchar *
-get_icon (PlannerView *view)
+static const gchar *
+task_view_get_icon (PlannerView *view)
 {
-	g_return_val_if_fail (PLANNER_IS_VIEW (view), NULL);
-
 	return IMAGEDIR "/tasks.png";
 }
 
-G_MODULE_EXPORT const gchar *
-get_name (PlannerView *view)
+static const gchar *
+task_view_get_name (PlannerView *view)
 {
-	g_return_val_if_fail (PLANNER_IS_VIEW (view), NULL);
-
 	return "task_view";
 }
 
-G_MODULE_EXPORT GtkWidget *
-get_widget (PlannerView *view)
+static GtkWidget *
+task_view_get_widget (PlannerView *view)
 {
-	PlannerViewPriv   *priv;
-	MrpProject   *project;
-	GtkWidget    *sw;
-	PlannerGanttModel *model;
+	PlannerTaskViewPriv *priv;
+	MrpProject          *project;
+	GtkWidget           *sw;
+	PlannerGanttModel   *model;
 
-	g_return_val_if_fail (PLANNER_IS_VIEW (view), NULL);
-
-	priv = view->priv;
+	priv = PLANNER_TASK_VIEW (view)->priv;
 	
 	if (priv->tree == NULL) {
 		project = planner_window_get_project (view->main_window);
@@ -383,18 +383,18 @@ task_view_tree_view_destroy_cb (GtkTreeView *tree_view,
 }
 
 static void
-task_view_project_loaded_cb (MrpProject *project,
-			     PlannerView     *view)
+task_view_project_loaded_cb (MrpProject  *project,
+			     PlannerView *view)
 {
-	GtkTreeModel *model;
-	PlannerViewPriv   *priv;
+	PlannerTaskViewPriv *priv;
+	GtkTreeModel        *model;
 
- 	priv = view->priv;
+ 	priv = PLANNER_TASK_VIEW (view)->priv;
 
 	model = GTK_TREE_MODEL (planner_gantt_model_new (project));
 
 	planner_task_tree_set_model (PLANNER_TASK_TREE (priv->tree),
-				PLANNER_GANTT_MODEL (model));
+				     PLANNER_GANTT_MODEL (model));
 
 	g_object_unref (model);
 }
@@ -405,9 +405,9 @@ static void
 task_view_insert_task_cb (GtkAction *action,
 			  gpointer   data)
 {
-	PlannerView *view;
+	PlannerTaskView *view;
 
-	view = PLANNER_VIEW (data);
+	view = PLANNER_TASK_VIEW (data);
 
 	planner_task_tree_insert_task (PLANNER_TASK_TREE (view->priv->tree));
 }
@@ -416,7 +416,9 @@ static void
 task_view_insert_tasks_cb (GtkAction *action,
 			   gpointer   data)
 {
-	PlannerView *view = PLANNER_VIEW (data);
+	PlannerTaskView *view;
+
+	view = PLANNER_TASK_VIEW (data);
 
 	planner_task_tree_insert_tasks (PLANNER_TASK_TREE (view->priv->tree));
 }
@@ -425,9 +427,9 @@ static void
 task_view_remove_task_cb (GtkAction *action, 
 			  gpointer   data)
 {
-	PlannerView *view;
+	PlannerTaskView *view;
 
-	view = PLANNER_VIEW (data);
+	view = PLANNER_TASK_VIEW (data);
 
 	planner_task_tree_remove_task (PLANNER_TASK_TREE (view->priv->tree));
 }
@@ -436,9 +438,9 @@ static void
 task_view_edit_task_cb (GtkAction *action, 
 			gpointer   data)
 {
-	PlannerView *view;
+	PlannerTaskView *view;
 
-	view = PLANNER_VIEW (data);
+	view = PLANNER_TASK_VIEW (data);
 
 	planner_task_tree_edit_task (PLANNER_TASK_TREE (view->priv->tree),
 				     PLANNER_TASK_DIALOG_PAGE_GENERAL);
@@ -448,9 +450,9 @@ static void
 task_view_select_all_cb (GtkAction *action, 
 			 gpointer   data)
 {
-	PlannerView *view;
+	PlannerTaskView *view;
 	
-	view = PLANNER_VIEW (data);
+	view = PLANNER_TASK_VIEW (data);
 	
 	planner_task_tree_select_all (PLANNER_TASK_TREE (view->priv->tree));
 }
@@ -459,9 +461,9 @@ static void
 task_view_unlink_task_cb (GtkAction *action, 
 			  gpointer   data)
 {
-	PlannerView *view;
+	PlannerTaskView *view;
 
-	view = PLANNER_VIEW (data);
+	view = PLANNER_TASK_VIEW (data);
 
 	planner_task_tree_unlink_task (PLANNER_TASK_TREE (view->priv->tree));
 }
@@ -470,9 +472,9 @@ static void
 task_view_link_tasks_cb (GtkAction *action,
 			 gpointer   data)
 {
-	PlannerView *view;
+	PlannerTaskView *view;
 
-	view = PLANNER_VIEW (data);
+	view = PLANNER_TASK_VIEW (data);
 
 	planner_task_tree_link_tasks (PLANNER_TASK_TREE (view->priv->tree),
 				      MRP_RELATION_FS);
@@ -482,9 +484,9 @@ static void
 task_view_indent_task_cb (GtkAction *action, 
 			  gpointer   data)
 {
-	PlannerView *view;
+	PlannerTaskView *view;
 
-	view = PLANNER_VIEW (data);
+	view = PLANNER_TASK_VIEW (data);
 
 	planner_task_tree_indent_task (PLANNER_TASK_TREE (view->priv->tree));
 }
@@ -493,9 +495,9 @@ static void
 task_view_move_task_up_cb (GtkAction *action,
 			   gpointer   data)
 {
-	PlannerView *view;
+	PlannerTaskView *view;
 
-	view = PLANNER_VIEW (data);
+	view = PLANNER_TASK_VIEW (data);
 	
 	planner_task_tree_move_task_up (PLANNER_TASK_TREE (view->priv->tree));
 }
@@ -504,9 +506,9 @@ static void
 task_view_move_task_down_cb (GtkAction *action,
 			     gpointer   data)
 {
-	PlannerView *view;
+	PlannerTaskView *view;
 	
-	view = PLANNER_VIEW (data);
+	view = PLANNER_TASK_VIEW (data);
 
 	planner_task_tree_move_task_down (PLANNER_TASK_TREE (view->priv->tree));
 }
@@ -515,9 +517,9 @@ static void
 task_view_unindent_task_cb (GtkAction *action, 
 			    gpointer   data)
 {
-	PlannerView *view;
+	PlannerTaskView *view;
 
-	view = PLANNER_VIEW (data);
+	view = PLANNER_TASK_VIEW (data);
 
 	planner_task_tree_unindent_task (PLANNER_TASK_TREE (view->priv->tree));
 }
@@ -526,9 +528,9 @@ static void
 task_view_reset_constraint_cb (GtkAction *action, 
 			       gpointer   data)
 {
-	PlannerView *view;
+	PlannerTaskView *view;
 
-	view = PLANNER_VIEW (data);
+	view = PLANNER_TASK_VIEW (data);
 
 	planner_task_tree_reset_constraint (PLANNER_TASK_TREE (view->priv->tree));
 }
@@ -537,15 +539,15 @@ static void
 task_view_edit_custom_props_cb (GtkAction *action, 
 				gpointer   data)
 {
-	PlannerView     *view;
-	GtkWidget  *dialog;
-	MrpProject *project;
+	PlannerTaskView *view;
+	GtkWidget       *dialog;
+	MrpProject      *project;
 
-	view = PLANNER_VIEW (data);
+	view = PLANNER_TASK_VIEW (data);
 	
-	project = planner_window_get_project (view->main_window);
+	project = planner_window_get_project (PLANNER_VIEW (view)->main_window);
 	
-	dialog = planner_property_dialog_new (view->main_window,
+	dialog = planner_property_dialog_new (PLANNER_VIEW (view)->main_window,
 					      project,
 					      MRP_TYPE_TASK,
 					      _("Edit custom task properties"));
@@ -558,12 +560,12 @@ static void
 task_view_highlight_critical_cb (GtkAction *action,
 				 gpointer   data)
 {
-	PlannerViewPriv *priv;
-	gboolean         state;
+	PlannerTaskViewPriv *priv;
+	gboolean             state;
 	
-	priv = PLANNER_VIEW (data)->priv;
+	priv = PLANNER_TASK_VIEW (data)->priv;
 
-	state = gtk_toggle_action_get_active (GTK_TOGGLE_ACTION(action));
+	state = gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action));
 
 	planner_task_tree_set_highlight_critical (
 		PLANNER_TASK_TREE (priv->tree),
@@ -576,13 +578,13 @@ static void
 task_view_edit_columns_cb (GtkAction *action,
 			   gpointer   data)
 {
-	PlannerView     *view;
-	PlannerViewPriv *priv;
+	PlannerTaskView     *view;
+	PlannerTaskViewPriv *priv;
 	
-	view = PLANNER_VIEW (data);
+	view = PLANNER_TASK_VIEW (data);
 	priv = view->priv;
 	
-	planner_column_dialog_show (view->main_window,
+	planner_column_dialog_show (PLANNER_VIEW (view)->main_window,
 				    _("Edit Task Columns"),
 				    GTK_TREE_VIEW (priv->tree));
 }
@@ -590,8 +592,6 @@ task_view_edit_columns_cb (GtkAction *action,
 static void 
 task_view_selection_changed_cb (PlannerTaskTree *tree, PlannerView *view)
 {
-	g_return_if_fail (PLANNER_IS_VIEW (view));
-
 	task_view_update_ui (view);
 }
 
@@ -601,66 +601,59 @@ task_view_relations_changed_cb (PlannerTaskTree  *tree,
 				MrpRelation *relation,
 				PlannerView      *view)
 {
-	g_return_if_fail (PLANNER_IS_VIEW (view));
-
 	task_view_update_ui (view);
 }
 
 	
-G_MODULE_EXPORT void
-print_init (PlannerView     *view,
-	    PlannerPrintJob *job)
+static void
+task_view_print_init (PlannerView     *view,
+		      PlannerPrintJob *job)
 {
-	PlannerViewPriv *priv;
+	PlannerTaskViewPriv *priv;
 	
-	g_return_if_fail (PLANNER_IS_VIEW (view));
-	g_return_if_fail (PLANNER_IS_PRINT_JOB (job));
-
-	priv = view->priv;
-	
-	g_assert (priv->print_sheet == NULL);
+	priv = PLANNER_TASK_VIEW (view)->priv;
 
 	priv->print_sheet = planner_table_print_sheet_new (PLANNER_VIEW (view), job, 
 							   GTK_TREE_VIEW (priv->tree));
 }
 
-G_MODULE_EXPORT void
-print (PlannerView *view)
+static void
+task_view_print (PlannerView *view)
 
 {
-	g_return_if_fail (PLANNER_IS_VIEW (view));
+	PlannerTaskViewPriv *priv;
 
-	g_assert (view->priv->print_sheet);
+	priv = PLANNER_TASK_VIEW (view)->priv;
 	
-	planner_table_print_sheet_output (view->priv->print_sheet);
+	planner_table_print_sheet_output (priv->print_sheet);
 }
 
-G_MODULE_EXPORT gint
-print_get_n_pages (PlannerView *view)
+static gint
+task_view_print_get_n_pages (PlannerView *view)
 {
-	g_return_val_if_fail (PLANNER_IS_VIEW (view), 0);
+	PlannerTaskViewPriv *priv;
 
-	g_assert (view->priv->print_sheet);
+	priv = PLANNER_TASK_VIEW (view)->priv;
 	
-	return planner_table_print_sheet_get_n_pages (view->priv->print_sheet);
+	return planner_table_print_sheet_get_n_pages (priv->print_sheet);
 }
 
-G_MODULE_EXPORT void
-print_cleanup (PlannerView *view)
+static void
+task_view_print_cleanup (PlannerView *view)
 
 {
-	g_return_if_fail (PLANNER_IS_VIEW (view));
+	PlannerTaskViewPriv *priv;
 
-	g_assert (view->priv->print_sheet);
+	priv = PLANNER_TASK_VIEW (view)->priv;
 	
-	planner_table_print_sheet_free (view->priv->print_sheet);
-	view->priv->print_sheet = NULL;
+	planner_table_print_sheet_free (priv->print_sheet);
+	priv->print_sheet = NULL;
 }
 
 static void
 task_view_update_ui (PlannerView *view)
 {
-	PlannerViewPriv *priv;
+	PlannerTaskViewPriv *priv;
 	GList           *list, *l;
 	gboolean         value;
 	gboolean         rel_value  = FALSE;
@@ -671,7 +664,7 @@ task_view_update_ui (PlannerView *view)
 		return;
 	}
 	
-	priv = view->priv;
+	priv = PLANNER_TASK_VIEW (view)->priv;
 
 	list = planner_task_tree_get_selected_tasks (PLANNER_TASK_TREE (priv->tree));
 
@@ -723,9 +716,9 @@ task_view_update_ui (PlannerView *view)
 static void
 task_view_save_columns (PlannerView *view)
 {
-	PlannerViewPriv *priv;
+	PlannerTaskViewPriv *priv;
 
-	priv = view->priv;
+	priv = PLANNER_TASK_VIEW (view)->priv;
 	
 	planner_view_column_save_helper (view, GTK_TREE_VIEW (priv->tree));
 }
@@ -733,13 +726,13 @@ task_view_save_columns (PlannerView *view)
 static void
 task_view_load_columns (PlannerView *view)
 {
-	PlannerViewPriv   *priv;
-	GList             *columns, *l;
-	GtkTreeViewColumn *column;
-	const gchar       *id;
-	gint               i;
+	PlannerTaskViewPriv *priv;
+	GList               *columns, *l;
+	GtkTreeViewColumn   *column;
+	const gchar         *id;
+	gint                 i;
 
-	priv = view->priv;
+	priv = PLANNER_TASK_VIEW (view)->priv;
 
 	/* Load the columns. */
 	planner_view_column_load_helper (view, GTK_TREE_VIEW (priv->tree));
@@ -794,4 +787,13 @@ task_view_load_columns (PlannerView *view)
 	g_list_free (columns);
 }
 
+PlannerView *
+planner_task_view_new (void)
+{
+	PlannerView *view;
+
+	view = g_object_new (PLANNER_TYPE_TASK_VIEW, NULL);
+
+	return view;
+}
 	

@@ -20,60 +20,60 @@
  * Boston, MA 02111-1307, USA.
  */
 
-#ifndef __PLANNER_TTABLE_CHART_H__
-#define __PLANNER_TTABLE_CHART_H__
+#ifndef __PLANNER_USAGE_CHART_H__
+#define __PLANNER_USAGE_CHART_H__
 
 #include <gtk/gtkwidget.h>
 #include <gtk/gtkvbox.h>
 #include <gtk/gtktreemodel.h>
 #include <libgnomecanvas/gnome-canvas.h>
 
-#define PLANNER_TYPE_TTABLE_CHART             (planner_ttable_chart_get_type ())
-#define PLANNER_TTABLE_CHART(obj)             (GTK_CHECK_CAST ((obj), PLANNER_TYPE_TTABLE_CHART, PlannerTtableChart))
-#define PLANNER_TTABLE_CHART_CLASS(klass)     (GTK_CHECK_CLASS_CAST ((klass), PLANNER_TYPE_TTABLE_CHART, PlannerTtableChartClass))
-#define PLANNER_IS_TTABLE_CHART(obj)          (GTK_CHECK_TYPE ((obj), PLANNER_TYPE_TTABLE_CHART))
-#define PLANNER_IS_TTABLE_CHART_CLASS(klass)  (GTK_CHECK_CLASS_TYPE ((obj), PLANNER_TYPE_TTABLE_CHART))
-#define PLANNER_TTABLE_CHART_GET_CLASS(obj)   (GTK_CHECK_GET_CLASS ((obj), PLANNER_TYPE_TTABLE_CHART, PlannerTtableChartClass))
+#define PLANNER_TYPE_USAGE_CHART             (planner_usage_chart_get_type ())
+#define PLANNER_USAGE_CHART(obj)             (GTK_CHECK_CAST ((obj), PLANNER_TYPE_USAGE_CHART, PlannerUsageChart))
+#define PLANNER_USAGE_CHART_CLASS(klass)     (GTK_CHECK_CLASS_CAST ((klass), PLANNER_TYPE_USAGE_CHART, PlannerUsageChartClass))
+#define PLANNER_IS_USAGE_CHART(obj)          (GTK_CHECK_TYPE ((obj), PLANNER_TYPE_USAGE_CHART))
+#define PLANNER_IS_USAGE_CHART_CLASS(klass)  (GTK_CHECK_CLASS_TYPE ((obj), PLANNER_TYPE_USAGE_CHART))
+#define PLANNER_USAGE_CHART_GET_CLASS(obj)   (GTK_CHECK_GET_CLASS ((obj), PLANNER_TYPE_USAGE_CHART, PlannerUsageChartClass))
 
-typedef struct _PlannerTtableChart PlannerTtableChart;
-typedef struct _PlannerTtableChartClass PlannerTtableChartClass;
-typedef struct _PlannerTtableChartPriv PlannerTtableChartPriv;
+typedef struct _PlannerUsageChart PlannerUsageChart;
+typedef struct _PlannerUsageChartClass PlannerUsageChartClass;
+typedef struct _PlannerUsageChartPriv PlannerUsageChartPriv;
 
-struct _PlannerTtableChart {
+struct _PlannerUsageChart {
         GtkVBox                 parent_class;
-        PlannerTtableChartPriv *priv;
+        PlannerUsageChartPriv *priv;
 };
 
-struct _PlannerTtableChartClass {
+struct _PlannerUsageChartClass {
         GtkVBoxClass           parent_class;
 
-        void (*set_scroll_adjustments) (PlannerTtableChart *chart,
+        void (*set_scroll_adjustments) (PlannerUsageChart *chart,
                                         GtkAdjustment      *hadj,
                                         GtkAdjustment      *vadj);
 };
 
-GType         planner_ttable_chart_get_type         (void) G_GNUC_CONST;
-GtkWidget *   planner_ttable_chart_new              (void);
-GtkWidget *   planner_ttable_chart_new_with_model   (GtkTreeModel       *model);
-GtkTreeModel *planner_ttable_chart_get_model        (PlannerTtableChart *chart);
-void          planner_ttable_chart_set_model        (PlannerTtableChart *chart,
+GType         planner_usage_chart_get_type         (void) G_GNUC_CONST;
+GtkWidget *   planner_usage_chart_new              (void);
+GtkWidget *   planner_usage_chart_new_with_model   (GtkTreeModel       *model);
+GtkTreeModel *planner_usage_chart_get_model        (PlannerUsageChart *chart);
+void          planner_usage_chart_set_model        (PlannerUsageChart *chart,
 						     GtkTreeModel       *model);
-void          planner_ttable_chart_expand_row       (PlannerTtableChart *chart,
+void          planner_usage_chart_expand_row       (PlannerUsageChart *chart,
 						     GtkTreePath        *path);
-void          planner_ttable_chart_collapse_row     (PlannerTtableChart *chart,
+void          planner_usage_chart_collapse_row     (PlannerUsageChart *chart,
 						     GtkTreePath        *path);
-void          planner_ttable_chart_expand_all       (PlannerTtableChart *chart);
-void          planner_ttable_chart_collapse_all     (PlannerTtableChart *chart);
-void          planner_ttable_chart_zoom_in          (PlannerTtableChart *chart);
-void          planner_ttable_chart_zoom_out         (PlannerTtableChart *chart);
-void          planner_ttable_chart_can_zoom         (PlannerTtableChart *chart,
+void          planner_usage_chart_expand_all       (PlannerUsageChart *chart);
+void          planner_usage_chart_collapse_all     (PlannerUsageChart *chart);
+void          planner_usage_chart_zoom_in          (PlannerUsageChart *chart);
+void          planner_usage_chart_zoom_out         (PlannerUsageChart *chart);
+void          planner_usage_chart_can_zoom         (PlannerUsageChart *chart,
 						     gboolean           *in,
 						     gboolean           *out);
-void          planner_ttable_chart_zoom_to_fit      (PlannerTtableChart *chart);
-gdouble       planner_ttable_chart_get_zoom         (PlannerTtableChart *chart);
-void          planner_ttable_chart_status_updated   (PlannerTtableChart *chart,
+void          planner_usage_chart_zoom_to_fit      (PlannerUsageChart *chart);
+gdouble       planner_usage_chart_get_zoom         (PlannerUsageChart *chart);
+void          planner_usage_chart_status_updated   (PlannerUsageChart *chart,
 						     gchar              *message);
 
-void planner_ttable_chart_setup_root_task (PlannerTtableChart *chart);
+void planner_usage_chart_setup_root_task (PlannerUsageChart *chart);
 
-#endif /* __PLANNER_TTABLE_CHART_H__ */
+#endif /* __PLANNER_USAGE_CHART_H__ */
