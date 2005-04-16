@@ -19,7 +19,7 @@ endif
 
 EXTRA_DIST = 				\
 	planner.desktop.in		\
-	$(schema_DATA)
+	$(schema_in_files)
 
 CLEANFILES = $(desktop_DATA)
-
+DISTCLEANFILES = $(schema_DATA)

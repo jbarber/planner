@@ -1,5 +1,8 @@
 INCLUDES = \
-	-I. -I$(top_srcdir) \
+	-I$(top_srcdir) \
+	-I$(top_srcdir)/libplanner \
+	-I$(top_builddir) \
+	-I$(top_builddir)/libplanner \
 	$(LIBPLANNER_CFLAGS) $(WARN_CFLAGS) \
 	-DMRP_STORAGEMODULEDIR=\""$(libdir)/planner/storage-modules"\" \
 	-DMRP_FILE_MODULES_DIR=\""$(libdir)/planner/file-modules"\" \
@@ -7,8 +10,8 @@ INCLUDES = \
 
 lib_LTLIBRARIES = libplanner-1.la
 
-libplanner_1_la_SOURCES = \
-	mrp-marshal-main.c			\
+libplanner_1_la_SOURCES = 			\
+	$(built_sources)			\
 	mrp-application.c			\
 	mrp-assignment.c			\
 	mrp-calendar.c				\
@@ -32,7 +35,7 @@ libplanner_1_la_SOURCES = \
 	mrp-time.c				\
 	mrp-error.c
 
-libplannerinclude_HEADERS = \
+libplannerinclude_HEADERS = 			\
 	planner.h				\
 	mrp-application.h			\
 	mrp-assignment.h			\
@@ -52,8 +55,6 @@ libplannerinclude_HEADERS = \
 
 libplanner_1_la_LIBADD = $(LIBPLANNER_LIBS)
 
-# -export-symbols-regex "^[^_].*"
-
 libplannerincludedir = $(includedir)/planner-1.0/libplanner
 
 #
@@ -66,23 +67,23 @@ if HAVE_GDA
 sql_library = libstorage-sql.la
 endif
 
-storagemodule_LTLIBRARIES = \
-	libstorage-mrproject-1.la			\
+storagemodule_LTLIBRARIES = 			\
+	libstorage-mrproject-1.la		\
 	$(sql_library)
 
-libstorage_mrproject_1_la_SOURCES = \
-	mrp-storage-mrproject.c				\
-	mrp-storage-mrproject.h				\
-	mrp-parser.c					\
+libstorage_mrproject_1_la_SOURCES = 		\
+	mrp-storage-mrproject.c			\
+	mrp-storage-mrproject.h			\
+	mrp-parser.c				\
 	mrp-parser.h
 
 libstorage_mrproject_1_la_LDFLAGS =  -avoid-version -module
 
 if HAVE_GDA
-libstorage_sql_la_SOURCES = \
-	mrp-storage-sql.c				\
-	mrp-storage-sql.h				\
-	mrp-sql.c					\
+libstorage_sql_la_SOURCES = 			\
+	mrp-storage-sql.c			\
+	mrp-storage-sql.h			\
+	mrp-sql.c				\
 	mrp-sql.h
 
 libstorage_sql_la_LDFLAGS =  -avoid-version -module
@@ -96,49 +97,47 @@ endif
 
 filemoduledir = $(libdir)/planner/file-modules
 
-filemodule_LTLIBRARIES = \
-	libmrp-xml.la					\
+filemodule_LTLIBRARIES = 			\
+	libmrp-xml.la				\
 	libmrp-xsl.la
 
-#	libmrp-mpx.la
-
-libmrp_xml_la_SOURCES = \
-	mrp-xml.c					\
-	mrp-old-xml.c					\
+libmrp_xml_la_SOURCES = 			\
+	mrp-xml.c				\
+	mrp-old-xml.c				\
 	mrp-old-xml.h
 
 libmrp_xml_la_CFLAGS = -DDTDDIR=\""$(datadir)/planner/dtd"\"
 libmrp_xml_la_LDFLAGS = -avoid-version -module
 
-
-libmrp_xsl_la_SOURCES = \
-	mrp-xsl.c
-
-libmrp_xsl_la_CFLAGS = \
-	$(XSLT_CFLAGS)					\
-	-DSTYLESHEETDIR=\""$(datadir)/planner/stylesheets"\"
+libmrp_xsl_la_SOURCES = mrp-xsl.c
+libmrp_xsl_la_CFLAGS = 	$(XSLT_CFLAGS) -DSTYLESHEETDIR=\""$(datadir)/planner/stylesheets"\"
 
 libmrp_xsl_la_LIBADD = $(XSLT_LIBS)
 libmrp_xsl_la_LDFLAGS = -avoid-version -module
 
+#mrp-marshal.h: Makefile.am mrp-marshal.list
+#	(cd $(srcdir) && \
+#	@GLIB_GENMARSHAL@ --prefix=mrp_marshal mrp-marshal.list --header) > xgen-gmh \
+#	&& (cmp -s xgen-gmh mrp-marshal.h || cp xgen-gmh mrp-marshal.h) \
+#	&& rm -f xgen-gmh xgen-gmh~
 
-#libmrp_mpx_la_SOURCES = \
-#	mrp-mpx.c
-#libmrp_mpx_la_LDFLAGS = -avoid-version -module
+#mrp-marshal.c: Makefile.am mrp-marshal.list
+#	(cd $(srcdir) && \
+#	@GLIB_GENMARSHAL@ --prefix=mrp_marshal mrp-marshal.list --body) > xgen-gmc \
+#	&& cp xgen-gmc mrp-marshal.c \
+#	&& rm -f xgen-gmc xgen-gmc~
 
 mrp-marshal.h: Makefile.am mrp-marshal.list
-	(cd $(srcdir) && \
-	@GLIB_GENMARSHAL@ --prefix=mrp_marshal mrp-marshal.list --header) > xgen-gmh \
+	$(GLIB_GENMARSHAL) --prefix=mrp_marshal $(srcdir)/mrp-marshal.list --header > xgen-gmh \
 	&& (cmp -s xgen-gmh mrp-marshal.h || cp xgen-gmh mrp-marshal.h) \
 	&& rm -f xgen-gmh xgen-gmh~
 
 mrp-marshal.c: Makefile.am mrp-marshal.list
-	(cd $(srcdir) && \
-	@GLIB_GENMARSHAL@ --prefix=mrp_marshal mrp-marshal.list --body) > xgen-gmc \
+	(echo "#include \"mrp-marshal.h\""; $(GLIB_GENMARSHAL) --prefix=mrp_marshal $(srcdir)/mrp-marshal.list --body) > xgen-gmc \
 	&& cp xgen-gmc mrp-marshal.c \
 	&& rm -f xgen-gmc xgen-gmc~
 
-mrp-marshal-main.c: mrp-marshal.c mrp-marshal.h
+#$(top_srcdir)/mrp-marshal-main.c: $(built_sources)
 
 # do not use BUILT_SOURCES because of weird semantics
 # i *think* these should actually be stamp-* files

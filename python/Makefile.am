@@ -1,12 +1,9 @@
-NULL =
-
 INCLUDES = 				\
-	-I../src/			\
 	-I$(top_srcdir)			\
+	-I$(top_srcdir)/src/		
 	$(PYTHON_INCLUDES)		\
 	$(PYGTK_CFLAGS)			\
-	$(PLANNER_CFLAGS)		\
-	$(NULL)
+	$(PLANNER_CFLAGS)
 
 pkgpythondir = $(pythondir)/gtk-2.0
 pkgpyexecdir = $(pyexecdir)/gtk-2.0

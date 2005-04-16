@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
- * Copyright (C) 2003-2004 Imendio AB
+ * Copyright (C) 2003-2005 Imendio AB
  * Copyright (C) 2003 Benjamin BAYART <benjamin@sitadelle.com>
  * Copyright (C) 2003 Xavier Ordoquy <xordoquy@wanadoo.fr>
  *
@@ -26,7 +26,7 @@
 #include <libplanner/mrp-task.h>
 #include <libplanner/mrp-resource.h>
 #include "planner-usage-view.h"
-#include "planner-usage-print.h"
+/*#include "planner-usage-print.h"*/
 #include "planner-usage-model.h"
 #include "planner-usage-tree.h"
 #include "planner-usage-chart.h"
@@ -37,55 +37,56 @@ struct _PlannerUsageViewPriv {
         MrpProject             *project;
 
         PlannerUsageChart     *chart;
-        PlannerUsagePrintData *print_data;
+        /*PlannerUsagePrintData *print_data;*/
 	
 	GtkUIManager           *ui_manager;
 	GtkActionGroup         *actions;
 	guint                   merged_id;
 };
 
-static void       usage_view_zoom_out_cb             (GtkAction                    *action,
-						      gpointer                      data);
-static void       usage_view_zoom_in_cb              (GtkAction                    *action,
-						      gpointer                      data);
-static void       usage_view_zoom_to_fit_cb          (GtkAction                    *action,
-						      gpointer                      data);
-static GtkWidget *usage_view_create_widget           (PlannerView                  *view);
-static void       usage_view_project_loaded_cb       (MrpProject                   *project,
-						      PlannerView                  *view);
-static void       usage_view_tree_style_set_cb       (GtkWidget                    *tree,
-						      GtkStyle                     *prev_style,
-						      PlannerView                  *view);
-static void       usage_view_row_expanded            (GtkTreeView                  *tree_view,
-						      GtkTreeIter                  *iter,
-						      GtkTreePath                  *path,
-						      gpointer                      data);
-static void       usage_view_row_collapsed           (GtkTreeView                  *tree_view,
-						      GtkTreeIter                  *iter,
-						      GtkTreePath                  *path,
-						      gpointer                      data);
-static void       usage_view_expand_all              (PlannerUsageTree            *tree,
-						      PlannerUsageChart           *chart);
-static void       usage_view_collapse_all            (PlannerUsageTree            *tree,
-						      PlannerUsageChart           *chart);
-static void       usage_view_usage_status_updated   (PlannerUsageChart           *chart,
-						     const gchar                  *message,
-						     PlannerView                  *view);
-static void       usage_view_update_zoom_sensitivity (PlannerView                  *view);
-static void              usage_view_activate                            (PlannerView                  *view);
-static void              usage_view_deactivate                          (PlannerView                  *view);
-static void              usage_view_setup                                (PlannerView                  *view,
-						       PlannerWindow                *window);
-static const gchar *          usage_view_get_label                           (PlannerView                  *view);
-static const gchar *          usage_view_get_menu_label                      (PlannerView                  *view);
-static const gchar *          usage_view_get_icon                            (PlannerView                  *view);
-static const gchar *    usage_view_get_name                            (PlannerView                  *view);
-static GtkWidget *      usage_view_get_widget                          (PlannerView                  *view);
-static void             usage_view_print_init                          (PlannerView                  *view,
-						      PlannerPrintJob              *job);
-static void             usage_view_print                               (PlannerView                  *view);
-static gint             usage_view_print_get_n_pages                   (PlannerView                  *view);
-static void             usage_view_print_cleanup                       (PlannerView                  *view);
+static void         usage_view_zoom_out_cb             (GtkAction         *action,
+							gpointer           data);
+static void         usage_view_zoom_in_cb              (GtkAction         *action,
+							gpointer           data);
+static void         usage_view_zoom_to_fit_cb          (GtkAction         *action,
+							gpointer           data);
+static GtkWidget *  usage_view_create_widget           (PlannerView       *view);
+static void         usage_view_project_loaded_cb       (MrpProject        *project,
+							PlannerView       *view);
+static void         usage_view_tree_style_set_cb       (GtkWidget         *tree,
+							GtkStyle          *prev_style,
+							PlannerView       *view);
+static void         usage_view_row_expanded            (GtkTreeView       *tree_view,
+							GtkTreeIter       *iter,
+							GtkTreePath       *path,
+							gpointer           data);
+static void         usage_view_row_collapsed           (GtkTreeView       *tree_view,
+							GtkTreeIter       *iter,
+							GtkTreePath       *path,
+							gpointer           data);
+static void         usage_view_expand_all              (PlannerUsageTree  *tree,
+							PlannerUsageChart *chart);
+static void         usage_view_collapse_all            (PlannerUsageTree  *tree,
+							PlannerUsageChart *chart);
+static void         usage_view_usage_status_updated    (PlannerUsageChart *chart,
+							const gchar       *message,
+							PlannerView       *view);
+static void         usage_view_update_zoom_sensitivity (PlannerView       *view);
+static void         usage_view_activate                (PlannerView       *view);
+static void         usage_view_deactivate              (PlannerView       *view);
+static void         usage_view_setup                   (PlannerView       *view,
+							PlannerWindow     *window);
+static const gchar *usage_view_get_label               (PlannerView       *view);
+static const gchar *usage_view_get_menu_label          (PlannerView       *view);
+static const gchar *usage_view_get_icon                (PlannerView       *view);
+static const gchar *usage_view_get_name                (PlannerView       *view);
+static GtkWidget *  usage_view_get_widget              (PlannerView       *view);
+static void         usage_view_print_init              (PlannerView       *view,
+							PlannerPrintJob   *job);
+static void         usage_view_print                   (PlannerView       *view);
+static gint         usage_view_print_get_n_pages       (PlannerView       *view);
+static void         usage_view_print_cleanup           (PlannerView       *view);
+
 
 
 
@@ -241,8 +242,7 @@ static void
 usage_view_print_cleanup (PlannerView *view)
 {
         /*planner_usage_print_data_free (PLANNER_USAGE_VIEW (view)->priv->print_data);*/
-
-        PLANNER_USAGE_VIEW (view)->priv->print_data = NULL;
+        /*PLANNER_USAGE_VIEW (view)->priv->print_data = NULL;*/
 }
 
 static void

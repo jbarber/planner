@@ -1,6 +1,8 @@
-INCLUDES = \
+INCLUDES = 							\
 	-I$(top_srcdir)						\
 	-I$(top_srcdir)/src					\
+	-I$(top_builddir)					\
+	-I$(top_builddir)/src					\
 	$(PLANNER_CFLAGS) $(WARN_CFLAGS)			\
 	-DG_LOG_DOMAIN=\"Planner\"				\
 	-DPREFIX=\""$(prefix)"\"				\
@@ -9,7 +11,7 @@ INCLUDES = \
 	-DDATADIR=\""$(datadir)"\"				\
 	-DIMAGEDIR=\""$(datadir)/pixmaps/planner"\"		\
 	-DGLADEDIR=\""$(datadir)/planner/glade"\"		\
-	-DVIEWDIR=\""$(libdir)/planner/views"\"			\
+	-DPLUGINDIR=\""$(libdir)/planner/plugins"\"		\
 	-DSTYLESHEETDIR=\""$(datadir)/planner/stylesheets"\"	\
 	-DDTDDIR=\""$(datadir)/planner/dtd"\"
 
@@ -19,7 +21,8 @@ endif
 
 bin_PROGRAMS = planner 
 
-planner_SOURCES = \
+planner_SOURCES = 			\
+	$(built_sources)		\
 	eel-canvas-rect.c		\
 	eel-canvas-rect.h		\
 	planner-application.c		\
@@ -59,7 +62,6 @@ planner_SOURCES = \
 	planner-list-model.c		\
 	planner-list-model.h		\
 	planner-main.c			\
-	planner-marshal-main.c		\
 	planner-phase-dialog.c		\
 	planner-phase-dialog.h		\
 	planner-plugin.c		\
@@ -143,6 +145,7 @@ resource_source = 			\
 
 usage_source = 				\
 	planner-usage-view.c		\
+	planner-usage-view.h		\
 	planner-usage-chart.c		\
 	planner-usage-chart.h		\
 	planner-usage-model.c		\
@@ -188,7 +191,7 @@ libeds_plugin_la_LIBADD  = $(EDS_LIBS)
 libeds_plugin_la_CFLAGS  = $(EDS_CFLAGS)
 endif
 
-plugin_LTLIBRARIES = \
+plugin_LTLIBRARIES = 			\
 	libhtml-plugin.la		\
 	libxmlplanner-plugin.la		\
 	libmsp-plugin.la		\
@@ -206,25 +209,18 @@ libmsp_plugin_la_SOURCES = planner-msp-plugin.c
 libmsp_plugin_la_LDFLAGS = -avoid-version -module
 
 planner-marshal.h: Makefile.am planner-marshal.list
-	(cd $(srcdir) && \
-	@GLIB_GENMARSHAL@ --prefix=planner_marshal planner-marshal.list --header) > xgen-gmh \
+	$(GLIB_GENMARSHAL) --prefix=planner_marshal $(srcdir)/planner-marshal.list --header > xgen-gmh \
 	&& (cmp -s xgen-gmh planner-marshal.h || cp xgen-gmh planner-marshal.h) \
 	&& rm -f xgen-gmh xgen-gmh~
 
 planner-marshal.c: Makefile.am planner-marshal.list
-	(cd $(srcdir) && \
-	@GLIB_GENMARSHAL@ --prefix=planner_marshal planner-marshal.list --body) > xgen-gmc \
+	(echo "#include \"planner-marshal.h\""; $(GLIB_GENMARSHAL) --prefix=planner_marshal $(srcdir)/planner-marshal.list --body) > xgen-gmc \
 	&& cp xgen-gmc planner-marshal.c \
 	&& rm -f xgen-gmc xgen-gmc~
-
-planner-marshal-main.c: $(built_sources)
 
 # do not use BUILT_SOURCES because of weird semantics
 # i *think* these should actually be stamp-* files
 built_sources = planner-marshal.h planner-marshal.c
-
-# an explicit dependency here so all generated files get built
-$(SOURCES): $(built_sources)
 
 EXTRA_DIST = planner-marshal.list
 
