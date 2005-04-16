@@ -969,7 +969,6 @@ planner_gantt_print_do (PlannerGanttPrintData *data)
 
 	/* Third pass, add background shading for non-work intervals. */
 	for (row = 0; row < data->rows_of_pages; row++) {
-
 		t0 = mrp_time_align_day (data->start);
 
 		if (row == 0) {

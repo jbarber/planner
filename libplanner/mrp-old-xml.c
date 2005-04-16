@@ -1499,6 +1499,8 @@ mrp_old_xml_parse (MrpProject *project, xmlDoc *doc, GError **error)
         task_manager = imrp_project_get_task_manager (project);
         mrp_task_manager_set_root (task_manager, parser.root_task);
 
+	parser.project_start = mrp_time_align_day (parser.project_start);
+	
 	g_object_set (project,
                       "project-start", parser.project_start,
                       "default-group", parser.default_group,
@@ -1526,8 +1528,6 @@ mrp_old_xml_parse (MrpProject *project, xmlDoc *doc, GError **error)
 
         g_list_free (parser.assignments);
         g_list_free (parser.resources);
-	
-/* 	module->resources = parser.resources; */
 	
 	return TRUE;
 }
