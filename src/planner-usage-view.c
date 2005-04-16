@@ -26,10 +26,10 @@
 #include <libplanner/mrp-task.h>
 #include <libplanner/mrp-resource.h>
 #include "planner-usage-view.h"
-#include "planner-ttable-print.h"
-#include "planner-ttable-model.h"
-#include "planner-ttable-tree.h"
-#include "planner-ttable-chart.h"
+#include "planner-usage-print.h"
+#include "planner-usage-model.h"
+#include "planner-usage-tree.h"
+#include "planner-usage-chart.h"
 
 struct _PlannerUsageViewPriv {
         GtkWidget              *paned;

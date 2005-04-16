@@ -33,8 +33,8 @@
 #include "planner-cell-renderer-date.h"
 #include "planner-task-dialog.h"
 #include "planner-resource-dialog.h"
-#include "planner-ttable-tree.h"
-#include "planner-ttable-model.h"
+#include "planner-usage-tree.h"
+#include "planner-usage-model.h"
 
 enum {
         SELECTION_CHANGED,

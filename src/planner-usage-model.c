@@ -32,7 +32,7 @@
 #include <glib/gi18n.h>
 #include <libplanner/mrp-task.h>
 #include "planner-marshal.h"
-#include "planner-ttable-model.h"
+#include "planner-usage-model.h"
 
 enum {
         RESOURCE_ADDED,

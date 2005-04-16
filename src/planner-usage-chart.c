@@ -34,11 +34,11 @@
 #include <libplanner/mrp-resource.h>
 #include <libplanner/mrp-assignment.h>
 #include "planner-marshal.h"
-#include "planner-ttable-chart.h"
+#include "planner-usage-chart.h"
 #include "planner-gantt-header.h"
 #include "planner-gantt-background.h"
-#include "planner-ttable-model.h"
-#include "planner-ttable-row.h"
+#include "planner-usage-model.h"
+#include "planner-usage-row.h"
 #include "planner-scale-utils.h"
 
 /* Padding to the left and right of the contents of the gantt chart. */

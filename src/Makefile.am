@@ -142,15 +142,15 @@ resource_source = 			\
 	planner-resource-view.h
 
 usage_source = 				\
-	planner-ttable-view.c		\
-	planner-ttable-chart.c		\
-	planner-ttable-chart.h		\
-	planner-ttable-model.c		\
-	planner-ttable-model.h		\
-	planner-ttable-row.c		\
-	planner-ttable-row.h		\
-	planner-ttable-tree.c		\
-	planner-ttable-tree.h
+	planner-usage-view.c		\
+	planner-usage-chart.c		\
+	planner-usage-chart.h		\
+	planner-usage-model.c		\
+	planner-usage-model.h		\
+	planner-usage-row.c		\
+	planner-usage-row.h		\
+	planner-usage-tree.c		\
+	planner-usage-tree.h
 
 planner_LDADD =	\
 	$(top_builddir)/libplanner/libplanner-1.la \

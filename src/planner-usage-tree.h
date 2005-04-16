@@ -25,7 +25,7 @@
 
 #include <gtk/gtktreeview.h>
 #include <libplanner/mrp-project.h>
-#include "planner-ttable-model.h"
+#include "planner-usage-model.h"
 #include "planner-window.h"
 
 #define PLANNER_TYPE_USAGE_TREE               (planner_usage_tree_get_type ())

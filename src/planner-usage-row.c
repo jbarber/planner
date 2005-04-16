@@ -34,8 +34,8 @@
 #include <libgnomecanvas/gnome-canvas-util.h>
 #include "planner-marshal.h"
 #include "planner-format.h"
-#include "planner-ttable-row.h"
-#include "planner-ttable-chart.h"
+#include "planner-usage-row.h"
+#include "planner-usage-chart.h"
 #include "planner-canvas-line.h"
 #include "eel-canvas-rect.h"
 #include "planner-scale-utils.h"
