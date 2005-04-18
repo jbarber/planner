@@ -1690,7 +1690,7 @@ planner_resource_dialog_new (PlannerWindow *window,
 	gint             index = 0;
 	gchar           *note;
 
-	g_return_val_if_fail (PLANNER_IS_MAIN_WINDOW (window), NULL);
+	g_return_val_if_fail (PLANNER_IS_WINDOW (window), NULL);
 	g_return_val_if_fail (MRP_IS_RESOURCE (resource), NULL);
 
 	if (!dialogs) {

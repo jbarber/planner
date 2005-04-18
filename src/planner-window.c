@@ -206,14 +206,14 @@ static void handle_links (GtkAboutDialog *about G_GNUC_UNUSED,
 			  const gchar *link,
 			  gpointer data);
 
-#define CONF_MAIN_WINDOW_DIR       "/ui"
-#define CONF_MAIN_WINDOW_MAXIMIZED "/ui/main_window_maximized"
-#define CONF_MAIN_WINDOW_WIDTH     "/ui/main_window_width"
-#define CONF_MAIN_WINDOW_HEIGHT    "/ui/main_window_height"
-#define CONF_MAIN_WINDOW_POS_X     "/ui/main_window_position_x"
-#define CONF_MAIN_WINDOW_POS_Y     "/ui/main_window_position_y"
+#define CONF_WINDOW_DIR       "/ui"
+#define CONF_WINDOW_MAXIMIZED "/ui/main_window_maximized"
+#define CONF_WINDOW_WIDTH     "/ui/main_window_width"
+#define CONF_WINDOW_HEIGHT    "/ui/main_window_height"
+#define CONF_WINDOW_POS_X     "/ui/main_window_position_x"
+#define CONF_WINDOW_POS_Y     "/ui/main_window_position_y"
 #define CONF_ACTIVE_VIEW           "/ui/active_view"
-#define CONF_MAIN_LAST_DIR         "/general/last_dir"
+#define CONF_LAST_DIR         "/general/last_dir"
 
 #define VIEW_PATH "/menu/View/Views placeholder"
 #define VIEW_GROUP "view group"
@@ -513,6 +513,11 @@ window_populate (PlannerWindow *window)
 		      "sensitive", FALSE, 
 		      NULL);
 
+	/* Make the Actions menu always visible even when empty. */
+	g_object_set (gtk_action_group_get_action (priv->actions, "Actions"),
+		      "hide-if-empty", FALSE, 
+		      NULL);
+
 	/* Handle recent file stuff. */
 	priv->recent_view = egg_recent_view_uimanager_new (priv->ui_manager,
 							   "/MenuBar/File/OpenRecent",
@@ -718,7 +723,7 @@ get_last_dir (PlannerWindow *window)
 	
 	priv = window->priv;
 	
-	last_dir = planner_conf_get_string (CONF_MAIN_LAST_DIR, NULL);
+	last_dir = planner_conf_get_string (CONF_LAST_DIR, NULL);
 	
 	if (last_dir == NULL) {
 		last_dir = g_strdup (g_get_home_dir ());
@@ -784,7 +789,7 @@ window_open_cb (GtkAction *action,
 			if (filename) {
 				last_dir = g_path_get_dirname (filename);
 				g_free (filename);
-				planner_conf_set_string (CONF_MAIN_LAST_DIR, last_dir, NULL);
+				planner_conf_set_string (CONF_LAST_DIR, last_dir, NULL);
 				g_free (last_dir);
 			}
 		}
@@ -1650,7 +1655,7 @@ window_do_save_as (PlannerWindow *window)
 		}
 
 		last_dir = g_path_get_dirname (filename);
-		planner_conf_set_string (CONF_MAIN_LAST_DIR, last_dir, NULL);
+		planner_conf_set_string (CONF_LAST_DIR, last_dir, NULL);
 		g_free (last_dir);
 
 		g_free (filename);
@@ -1697,7 +1702,7 @@ planner_window_new (PlannerApplication *application)
 	PlannerWindow     *window;
 	PlannerWindowPriv *priv;
 	
-	window = g_object_new (PLANNER_TYPE_MAIN_WINDOW, NULL);
+	window = g_object_new (PLANNER_TYPE_WINDOW, NULL);
 	priv = window->priv;
 
 	priv->application = g_object_ref (application);
@@ -1736,7 +1741,7 @@ planner_window_open (PlannerWindow *window,
 	GtkWidget        *dialog;
 	EggRecentItem    *item;
 	
-	g_return_val_if_fail (PLANNER_IS_MAIN_WINDOW (window), FALSE);
+	g_return_val_if_fail (PLANNER_IS_WINDOW (window), FALSE);
 	g_return_val_if_fail (uri != NULL, FALSE);
 
 	priv = window->priv;
@@ -1812,7 +1817,7 @@ planner_window_open_in_existing_or_new (PlannerWindow *window,
 GtkUIManager *
 planner_window_get_ui_manager (PlannerWindow *window)
 {
-	g_return_val_if_fail (PLANNER_IS_MAIN_WINDOW (window), NULL);
+	g_return_val_if_fail (PLANNER_IS_WINDOW (window), NULL);
 	
 	return window->priv->ui_manager;
 }
@@ -1820,7 +1825,7 @@ planner_window_get_ui_manager (PlannerWindow *window)
 MrpProject *
 planner_window_get_project (PlannerWindow *window)
 {
-	g_return_val_if_fail (PLANNER_IS_MAIN_WINDOW (window), NULL);
+	g_return_val_if_fail (PLANNER_IS_WINDOW (window), NULL);
 	
 	return window->priv->project;
 }
@@ -1828,7 +1833,7 @@ planner_window_get_project (PlannerWindow *window)
 PlannerApplication *
 planner_window_get_application (PlannerWindow  *window)
 {
-	g_return_val_if_fail (PLANNER_IS_MAIN_WINDOW (window), NULL);
+	g_return_val_if_fail (PLANNER_IS_WINDOW (window), NULL);
 	
 	return window->priv->application;
 }
@@ -1840,7 +1845,7 @@ planner_window_check_version (PlannerWindow *window)
 	GtkWidget        *dialog;
 	gint              version;
 
-	g_return_if_fail (PLANNER_IS_MAIN_WINDOW (window));
+	g_return_if_fail (PLANNER_IS_WINDOW (window));
 
 	priv = window->priv;
 	
@@ -1932,7 +1937,7 @@ planner_window_close (PlannerWindow *window)
 	PlannerWindowPriv *priv;
         gboolean           close = TRUE;
         
-	g_return_if_fail (PLANNER_IS_MAIN_WINDOW (window));
+	g_return_if_fail (PLANNER_IS_WINDOW (window));
 
 	priv = window->priv;
 
@@ -1954,7 +1959,7 @@ planner_window_show_day_type_dialog (PlannerWindow *window)
 {
 	PlannerWindowPriv *priv;
 	
-	g_return_if_fail (PLANNER_IS_MAIN_WINDOW (window));
+	g_return_if_fail (PLANNER_IS_WINDOW (window));
 
 	priv = window->priv;
 	
@@ -1975,7 +1980,7 @@ planner_window_show_calendar_dialog (PlannerWindow *window)
 {
 	PlannerWindowPriv *priv;
 	
-	g_return_if_fail (PLANNER_IS_MAIN_WINDOW (window));
+	g_return_if_fail (PLANNER_IS_WINDOW (window));
 
 	priv = window->priv;
 	
@@ -2013,7 +2018,7 @@ window_recent_tooltip_func (EggRecentItem *item,
 PlannerCmdManager *
 planner_window_get_cmd_manager (PlannerWindow *window)
 {
-	g_return_val_if_fail (PLANNER_IS_MAIN_WINDOW (window), NULL);
+	g_return_val_if_fail (PLANNER_IS_WINDOW (window), NULL);
 	
 	return window->priv->cmd_manager;
 }
@@ -2034,7 +2039,7 @@ window_save_state (PlannerWindow *window)
 		maximized = FALSE;
 	}
 
-	planner_conf_set_bool (CONF_MAIN_WINDOW_MAXIMIZED, maximized, NULL);
+	planner_conf_set_bool (CONF_WINDOW_MAXIMIZED, maximized, NULL);
 
 	/* If maximized don't save the size and position */
 	if (!maximized) {
@@ -2042,12 +2047,12 @@ window_save_state (PlannerWindow *window)
 		int x, y;
 
 		gtk_window_get_size (GTK_WINDOW (window), &width, &height);
-		planner_conf_set_int (CONF_MAIN_WINDOW_WIDTH, width, NULL);
-		planner_conf_set_int (CONF_MAIN_WINDOW_HEIGHT, height, NULL);
+		planner_conf_set_int (CONF_WINDOW_WIDTH, width, NULL);
+		planner_conf_set_int (CONF_WINDOW_HEIGHT, height, NULL);
 
 		gtk_window_get_position (GTK_WINDOW (window), &x, &y);
-		planner_conf_set_int (CONF_MAIN_WINDOW_POS_X, x, NULL);
-		planner_conf_set_int (CONF_MAIN_WINDOW_POS_Y, y, NULL);
+		planner_conf_set_int (CONF_WINDOW_POS_X, x, NULL);
+		planner_conf_set_int (CONF_WINDOW_POS_Y, y, NULL);
 	}
 }
 
@@ -2055,34 +2060,34 @@ static void
 window_restore_state (PlannerWindow *window)
 {
 	PlannerWindowPriv *priv;
-	gboolean exists;
-	gboolean maximized;
-	int      width, height;
-	int      x, y;
+	gboolean           exists;
+	gboolean           maximized;
+	int                width, height;
+	int                x, y;
 
 	priv = window->priv;
 
-	exists = planner_conf_dir_exists (CONF_MAIN_WINDOW_DIR, NULL);
+	exists = planner_conf_dir_exists (CONF_WINDOW_DIR, NULL);
 	
 	if (exists) {	
-		maximized = planner_conf_get_bool (CONF_MAIN_WINDOW_MAXIMIZED,
+		maximized = planner_conf_get_bool (CONF_WINDOW_MAXIMIZED,
 						   NULL);
 	
 		if (maximized) {
 			gtk_window_maximize (GTK_WINDOW (window));
 		} else {
-			width = planner_conf_get_int (CONF_MAIN_WINDOW_WIDTH,
+			width = planner_conf_get_int (CONF_WINDOW_WIDTH,
 						      NULL);
 		
-			height = planner_conf_get_int (CONF_MAIN_WINDOW_HEIGHT,
+			height = planner_conf_get_int (CONF_WINDOW_HEIGHT,
 						       NULL);
 		
 			gtk_window_set_default_size (GTK_WINDOW (window), 
 						     width, height);
 
-			x = planner_conf_get_int (CONF_MAIN_WINDOW_POS_X,
+			x = planner_conf_get_int (CONF_WINDOW_POS_X,
 						  NULL);
-			y = planner_conf_get_int (CONF_MAIN_WINDOW_POS_Y,
+			y = planner_conf_get_int (CONF_WINDOW_POS_Y,
 						  NULL);
 
 			gtk_window_move (GTK_WINDOW (window), x, y);
@@ -2109,9 +2114,8 @@ window_menu_item_select_cb (GtkMenuItem   *proxy,
 			    PlannerWindow *window)
 {
 	PlannerWindowPriv *priv;
-
-	GtkAction *action;
-	gchar     *message;
+	GtkAction         *action;
+	gchar             *message;
 
 	priv = window->priv;
 

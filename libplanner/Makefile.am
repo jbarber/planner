@@ -57,10 +57,10 @@ libplanner_1_la_LIBADD = $(LIBPLANNER_LIBS)
 
 libplannerincludedir = $(includedir)/planner-1.0/libplanner
 
+
 #
 # Storage modules
 #
-
 storagemoduledir = $(libdir)/planner/storage-modules
 
 if HAVE_GDA
@@ -78,6 +78,7 @@ libstorage_mrproject_1_la_SOURCES = 		\
 	mrp-parser.h
 
 libstorage_mrproject_1_la_LDFLAGS =  -avoid-version -module
+libstorage_mrproject_1_la_LIBADD = libplanner-1.la
 
 if HAVE_GDA
 libstorage_sql_la_SOURCES = 			\
@@ -87,14 +88,13 @@ libstorage_sql_la_SOURCES = 			\
 	mrp-sql.h
 
 libstorage_sql_la_LDFLAGS =  -avoid-version -module
-libstorage_sql_la_LIBADD =  $(GDA_LIBS)
 libstorage_sql_la_CFLAGS = $(GDA_CFLAGS) 
+libstorage_sql_la_LIBADD =  $(GDA_LIBS) libplanner-1.la
 endif
 
 #
 # File modules
 #
-
 filemoduledir = $(libdir)/planner/file-modules
 
 filemodule_LTLIBRARIES = 			\
@@ -108,12 +108,12 @@ libmrp_xml_la_SOURCES = 			\
 
 libmrp_xml_la_CFLAGS = -DDTDDIR=\""$(datadir)/planner/dtd"\"
 libmrp_xml_la_LDFLAGS = -avoid-version -module
+libmrp_xml_la_LIBADD = libplanner-1.la
 
 libmrp_xsl_la_SOURCES = mrp-xsl.c
 libmrp_xsl_la_CFLAGS = 	$(XSLT_CFLAGS) -DSTYLESHEETDIR=\""$(datadir)/planner/stylesheets"\"
-
-libmrp_xsl_la_LIBADD = $(XSLT_LIBS)
 libmrp_xsl_la_LDFLAGS = -avoid-version -module
+libmrp_xsl_la_LIBADD = $(XSLT_LIBS) libplanner-1.la
 
 mrp-marshal.h: Makefile.am mrp-marshal.list
 	$(GLIB_GENMARSHAL) --prefix=mrp_marshal $(srcdir)/mrp-marshal.list --header > xgen-gmh \

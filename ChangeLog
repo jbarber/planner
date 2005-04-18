@@ -1,5 +1,30 @@
 2005-04-18  Richard Hult  <richard@imendio.com>
 
+	* src/planner-window.c (window_populate): Don't hide the Actions
+	menu when its's empty.
+
+	* data/ui/*.ui: Clean up some.
+
+2005-04-17  Richard Hult  <richard@imendio.com>
+
+	Work on getting the Python bindings uptodate.
+	
+	* libplanner/Makefile.am: Link the modules with libplanner.
+
+	* python/Makefile.am: Split up the module in one for libplanner
+	and one for the UI plugins.
+
+	* python/test.py: Make it work.
+	* python/python-demo.py: Likewise.
+
+	* src/*.[ch]: Fix type macro for PlannerWindow.
+
+	* src/planner-python-plugin.c: Clean up coding style and import
+	the new ui module. Set the application as a global for scripts to
+	use.
+
+2005-04-18  Richard Hult  <richard@imendio.com>
+
 	* libplanner/Makefile.am:
 	* src/Makefile.am: Fix build.
 

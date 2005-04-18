@@ -155,11 +155,12 @@ usage_source = 				\
 	planner-usage-tree.c		\
 	planner-usage-tree.h
 
-planner_LDADD =	\
+planner_LDADD =				\
 	$(top_builddir)/libplanner/libplanner-1.la \
 	$(top_builddir)/libegg/recent-files/libeggrecent.la \
 	$(PLANNER_LIBS)
 
+planner_LDFLAGS = -export-dynamic
 
 #
 # Plugins

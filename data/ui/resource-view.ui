@@ -7,6 +7,13 @@
       <placeholder name="View specific placeholder">
       </placeholder>
     </menu>
+
+    <menu action="View">
+      <placeholder name="View specific placeholder">
+        <menuitem action="EditColumns"/>
+      </placeholder>
+    </menu>
+
     <menu action="Actions">
       <placeholder name="View specific actions placeholder">
         <menuitem action="InsertResource"/>
@@ -14,9 +21,7 @@
 	<menuitem action="RemoveResource"/>
         <separator/>
         <menuitem action="EditResource"/>
-	<separator/>
 	<menuitem action="EditGroups"/>
-	<separator/>
         <menuitem action="EditCustomProps"/>
       </placeholder>
     </menu>

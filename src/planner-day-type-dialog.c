@@ -149,7 +149,7 @@ planner_day_type_dialog_new (PlannerWindow *window)
 	GtkTreeViewColumn *col;
 	GtkTreeSelection  *selection;
 	
-	g_return_val_if_fail (PLANNER_IS_MAIN_WINDOW (window), NULL);
+	g_return_val_if_fail (PLANNER_IS_WINDOW (window), NULL);
 	
 	glade = glade_xml_new (GLADEDIR "/calendar-dialog.glade",
 			       "day_type_dialog",

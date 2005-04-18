@@ -30,6 +30,7 @@
 #include "planner-usage-model.h"
 #include "planner-usage-tree.h"
 #include "planner-usage-chart.h"
+#include "planner-column-dialog.h"
 
 struct _PlannerUsageViewPriv {
         GtkWidget              *paned;
@@ -49,6 +50,8 @@ static void         usage_view_zoom_out_cb             (GtkAction         *actio
 static void         usage_view_zoom_in_cb              (GtkAction         *action,
 							gpointer           data);
 static void         usage_view_zoom_to_fit_cb          (GtkAction         *action,
+							gpointer           data);
+static void         usage_view_edit_columns_cb         (GtkAction         *action,
 							gpointer           data);
 static GtkWidget *  usage_view_create_widget           (PlannerView       *view);
 static void         usage_view_project_loaded_cb       (MrpProject        *project,
@@ -86,11 +89,11 @@ static void         usage_view_print_init              (PlannerView       *view,
 static void         usage_view_print                   (PlannerView       *view);
 static gint         usage_view_print_get_n_pages       (PlannerView       *view);
 static void         usage_view_print_cleanup           (PlannerView       *view);
+static void         usage_view_save_columns            (PlannerUsageView  *view);
+static void         usage_view_load_columns            (PlannerUsageView  *view);
 
 
-
-
-static GtkActionEntry entries[] = {
+static const GtkActionEntry entries[] = {
         { "ZoomOut",   GTK_STOCK_ZOOM_OUT, N_("Zoom out"),
 	  NULL, N_("Zoom out"),
 	  G_CALLBACK (usage_view_zoom_out_cb) },
@@ -99,7 +102,10 @@ static GtkActionEntry entries[] = {
 	  G_CALLBACK (usage_view_zoom_in_cb) },
         { "ZoomToFit", GTK_STOCK_ZOOM_FIT, N_("Zoom to fit"),
 	  NULL, N_("Zoom to fit the entire project"),
-	  G_CALLBACK (usage_view_zoom_to_fit_cb) }
+	  G_CALLBACK (usage_view_zoom_to_fit_cb) },
+	{ "EditColumns", NULL, N_("Edit _Visible Columns"),
+	  NULL, N_("Edit visible columns"),
+	  G_CALLBACK (usage_view_edit_columns_cb) }
 };
 
 G_DEFINE_TYPE (PlannerUsageView, planner_usage_view, PLANNER_TYPE_VIEW);
@@ -282,6 +288,21 @@ usage_view_zoom_to_fit_cb (GtkAction *action,
 }
 
 static void
+usage_view_edit_columns_cb (GtkAction *action,
+			    gpointer   data)
+{
+	PlannerUsageView     *view;
+	PlannerUsageViewPriv *priv;
+	
+	view = PLANNER_USAGE_VIEW (data);
+	priv = view->priv;
+
+	planner_column_dialog_show (PLANNER_VIEW (view)->main_window,
+				    _("Edit Resource Usage Columns"),
+				    GTK_TREE_VIEW (priv->tree));
+}
+
+static void
 usage_view_tree_view_size_request_cb (GtkWidget      *widget,
 				      GtkRequisition *req,
 				      gpointer        data)
@@ -311,6 +332,25 @@ usage_view_tree_view_scroll_event_cb (GtkWidget      *widget,
                 CLAMP (new_value, adj->lower, adj->upper - adj->page_size);
         gtk_adjustment_set_value (adj, new_value);
         return TRUE;
+}
+
+static void
+usage_view_tree_view_columns_changed_cb (GtkTreeView      *tree_view,
+					 PlannerUsageView *view)
+{
+	usage_view_save_columns (view);
+}
+
+static void
+usage_view_tree_view_destroy_cb (GtkTreeView      *tree_view,
+				 PlannerUsageView *view)
+{
+	/* Block, we don't want to save the column configuration when they are
+	 * removed by the destruction.
+	 */
+	g_signal_handlers_block_by_func (tree_view,
+					 usage_view_tree_view_columns_changed_cb,
+					 view);
 }
 
 static GtkWidget *
@@ -367,6 +407,18 @@ usage_view_create_widget (PlannerView *view)
         gtk_frame_set_shadow_type (GTK_FRAME (right_frame), GTK_SHADOW_IN);
         gtk_paned_add1 (GTK_PANED (hpaned), left_frame);
         gtk_paned_add2 (GTK_PANED (hpaned), right_frame);
+
+	usage_view_load_columns (PLANNER_USAGE_VIEW (view));
+	
+	g_signal_connect (tree,
+			  "columns-changed",
+			  G_CALLBACK (usage_view_tree_view_columns_changed_cb),
+			  view);
+	
+	g_signal_connect (tree,
+			  "destroy",
+			  G_CALLBACK (usage_view_tree_view_destroy_cb),
+			  view);
 
         g_signal_connect (tree,
 			  "row_expanded",
@@ -581,6 +633,65 @@ usage_view_update_zoom_sensitivity (PlannerView *view)
 			      "ZoomOut"),
 		      "sensitive", out,
 		      NULL);
+}
+
+static void
+usage_view_save_columns (PlannerUsageView *view)
+{
+	PlannerUsageViewPriv *priv;
+
+	priv = view->priv;
+	
+	planner_view_column_save_helper (PLANNER_VIEW (view),
+					 GTK_TREE_VIEW (priv->tree));
+}
+
+static void
+usage_view_load_columns (PlannerUsageView *view)
+{
+	PlannerUsageViewPriv *priv;
+	GList                *columns, *l;
+	GtkTreeViewColumn    *column;
+	const gchar          *id;
+	gint                  i;
+		
+	priv = view->priv;
+
+	/* Load the columns. */
+	planner_view_column_load_helper (PLANNER_VIEW (view),
+					 GTK_TREE_VIEW (priv->tree));
+	
+	/* Make things a bit more robust by setting defaults if we don't get any
+	 * visible columns. Should be done through a schema instead (but we'll
+	 * keep this since a lot of people get bad installations when installing
+	 * themselves).
+	 */
+	columns = gtk_tree_view_get_columns (GTK_TREE_VIEW (priv->tree));
+	i = 0;
+	for (l = columns; l; l = l->next) {
+		if (gtk_tree_view_column_get_visible (l->data)) {
+			i++;
+		}
+	}
+	
+	if (i == 0) {
+		for (l = columns; l; l = l->next) {
+			column = l->data;
+
+			if (g_object_get_data (G_OBJECT (column), "custom")) {
+				continue;
+			}
+
+			id = g_object_get_data (G_OBJECT (column), "id");
+			if (!id) {
+				continue;
+			}
+			
+			gtk_tree_view_column_set_visible (column, TRUE);
+		}
+	}
+	
+	g_list_free (columns);
 }
 
 PlannerView *

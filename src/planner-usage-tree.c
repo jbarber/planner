@@ -292,6 +292,19 @@ usage_tree_taskname_data_func (GtkTreeViewColumn *tree_column,
         g_free (name);
 }
 
+/* Note: this is not ideal, it emits the signal as soon as the width is changed
+ * during the resize. We should only emit it when the resizing is done.
+ */
+static void
+usage_tree_column_notify_width_cb (GtkWidget        *column,
+				   GParamSpec       *spec,
+				   PlannerUsageTree *tree)
+{
+	if (GTK_WIDGET_REALIZED (tree)) {
+		g_signal_emit_by_name (tree, "columns-changed");
+	}
+}
+
 static void
 usage_tree_add_column (GtkTreeView *tree, gint column, const gchar *title)
 {
@@ -309,6 +322,7 @@ usage_tree_add_column (GtkTreeView *tree, gint column, const gchar *title)
                                                          NULL, NULL);
                 g_object_set_data (G_OBJECT (col), "data-func",
                                    usage_tree_resname_data_func);
+		g_object_set_data (G_OBJECT (col), "id", "resource_name");
                 gtk_tree_view_column_set_resizable (col, TRUE);
                 gtk_tree_view_column_set_min_width (col, 100);
                 gtk_tree_view_append_column (tree, col);
@@ -323,6 +337,7 @@ usage_tree_add_column (GtkTreeView *tree, gint column, const gchar *title)
                                                          NULL, NULL);
                 g_object_set_data (G_OBJECT (col), "data-func",
                                    usage_tree_taskname_data_func);
+		g_object_set_data (G_OBJECT (col), "id", "task_name");
                 gtk_tree_view_column_set_resizable (col, TRUE);
                 gtk_tree_view_column_set_min_width (col, 100);
                 gtk_tree_view_append_column (tree, col);
@@ -330,8 +345,15 @@ usage_tree_add_column (GtkTreeView *tree, gint column, const gchar *title)
         case COL_RESOURCE:
         case COL_ASSIGNMENT:
         default:
+		col = NULL;
+		g_assert_not_reached ();
                 break;
         }
+
+	g_signal_connect (col,
+			  "notify::width",
+			  G_CALLBACK (usage_tree_column_notify_width_cb),
+			  tree);
 }
 
 GtkWidget *

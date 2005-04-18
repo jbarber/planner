@@ -213,7 +213,7 @@ application_window_closed_cb (PlannerWindow  *window,
 {
 	PlannerApplicationPriv *priv;
 	
-	g_return_if_fail (PLANNER_IS_MAIN_WINDOW (window));
+	g_return_if_fail (PLANNER_IS_WINDOW (window));
 	g_return_if_fail (PLANNER_IS_APPLICATION (application));
 	
 	priv = application->priv;

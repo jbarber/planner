@@ -6,14 +6,14 @@
     </menu>
 
     <menu          action="View">
-      <placeholder name="View specific placeholder"/>
-      <separator/>
-      <menuitem    action="ZoomIn"/>
-      <menuitem    action="ZoomOut"/>
-      <menuitem    action="ZoomToFit"/>
-      <separator/>
-      <menuitem    action="EditColumns"/>
-      <menuitem    action="HighlightCriticalTasks"/>
+      <placeholder name="View specific placeholder">
+        <menuitem    action="ZoomIn"/>
+        <menuitem    action="ZoomOut"/>
+        <menuitem    action="ZoomToFit"/>
+        <separator/>
+        <menuitem    action="EditColumns"/>
+        <menuitem    action="HighlightCriticalTasks"/>
+      </placeholder>
     </menu>
 
     <menu          action="Actions">

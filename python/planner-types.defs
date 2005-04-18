@@ -70,20 +70,6 @@
   (gtype-id "MRP_TYPE_TASK")
 )
 
-(define-object Application
-  (in-module "Planner")
-  (parent "MrpApplication")
-  (c-name "PlannerApplication")
-  (gtype-id "PLANNER_TYPE_APPLICATION")
-)
-
-(define-object Window
-  (in-module "Planner")
-  (parent "GtkWindow")
-  (c-name "PlannerWindow")
-  (gtype-id "PLANNER_TYPE_MAIN_WINDOW")
-)
-
 
 ;; Enumerations and flags ...
 

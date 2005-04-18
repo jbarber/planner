@@ -30,47 +30,44 @@
 #include "planner-application.h"
 #include "planner-cmd-manager.h"
 
-#define PLANNER_TYPE_MAIN_WINDOW           (planner_window_get_type ())
-#define PLANNER_WINDOW(obj)                (G_TYPE_CHECK_INSTANCE_CAST ((obj), PLANNER_TYPE_MAIN_WINDOW, PlannerWindow))
-#define PLANNER_WINDOW_CLASS(klass)        (G_TYPE_CHECK_CLASS_CAST ((klass), PLANNER_TYPE_MAIN_WINDOW, PlannerWindowClass))
-#define PLANNER_IS_MAIN_WINDOW(obj)        (G_TYPE_CHECK_INSTANCE_TYPE ((obj), PLANNER_TYPE_MAIN_WINDOW))
-#define PLANNER_IS_MAIN_WINDOW_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), PLANNER_TYPE_MAIN_WINDOW))
-#define PLANNER_WINDOW_GET_CLASS(obj)      (G_TYPE_INSTANCE_GET_CLASS ((obj), PLANNER_TYPE_MAIN_WINDOW, PlannerWindowClass))
+#define PLANNER_TYPE_WINDOW            (planner_window_get_type ())
+#define PLANNER_WINDOW(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), PLANNER_TYPE_WINDOW, PlannerWindow))
+#define PLANNER_WINDOW_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), PLANNER_TYPE_WINDOW, PlannerWindowClass))
+#define PLANNER_IS_WINDOW(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), PLANNER_TYPE_WINDOW))
+#define PLANNER_IS_WINDOW_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), PLANNER_TYPE_WINDOW))
+#define PLANNER_WINDOW_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), PLANNER_TYPE_WINDOW, PlannerWindowClass))
 
 typedef struct _PlannerWindow        PlannerWindow;
 typedef struct _PlannerWindowClass   PlannerWindowClass;
 typedef struct _PlannerWindowPriv    PlannerWindowPriv;
 
-struct _PlannerWindow
-{
+struct _PlannerWindow {
         GtkWindow           parent;
         
         PlannerWindowPriv  *priv;
 };
 
-struct _PlannerWindowClass
-{
+struct _PlannerWindowClass {
         GtkWindowClass      parent_class;
 };
 
-
-GType                   planner_window_get_type                (void) G_GNUC_CONST;
-GtkWidget *             planner_window_new                     (PlannerApplication *app);
-gboolean                planner_window_open                    (PlannerWindow      *window,
-								const gchar        *uri,
-								gboolean            internal);
-gboolean                planner_window_open_in_existing_or_new (PlannerWindow      *window,
-								const gchar        *uri,
-								gboolean            internal);
-GtkUIManager *          planner_window_get_ui_manager          (PlannerWindow      *window);
-MrpProject *            planner_window_get_project             (PlannerWindow      *window);
-PlannerApplication *    planner_window_get_application         (PlannerWindow      *window);
-void                    planner_window_check_version           (PlannerWindow      *window);
-void                    planner_window_close                   (PlannerWindow      *window);
-void                    planner_window_show_day_type_dialog    (PlannerWindow      *window);
-void                    planner_window_show_calendar_dialog    (PlannerWindow      *window);
-PlannerCmdManager *     planner_window_get_cmd_manager         (PlannerWindow      *window);
-void                    planner_window_set_status              (PlannerWindow      *window,
-								const gchar        *message);
+GType               planner_window_get_type                (void) G_GNUC_CONST;
+GtkWidget *         planner_window_new                     (PlannerApplication *app);
+gboolean            planner_window_open                    (PlannerWindow      *window,
+							    const gchar        *uri,
+							    gboolean            internal);
+gboolean            planner_window_open_in_existing_or_new (PlannerWindow      *window,
+							    const gchar        *uri,
+							    gboolean            internal);
+GtkUIManager *      planner_window_get_ui_manager          (PlannerWindow      *window);
+MrpProject *        planner_window_get_project             (PlannerWindow      *window);
+PlannerApplication *planner_window_get_application         (PlannerWindow      *window);
+void                planner_window_check_version           (PlannerWindow      *window);
+void                planner_window_close                   (PlannerWindow      *window);
+void                planner_window_show_day_type_dialog    (PlannerWindow      *window);
+void                planner_window_show_calendar_dialog    (PlannerWindow      *window);
+PlannerCmdManager * planner_window_get_cmd_manager         (PlannerWindow      *window);
+void                planner_window_set_status              (PlannerWindow      *window,
+							    const gchar        *message);
 
 #endif /* __PLANNER_WINDOW_H__ */

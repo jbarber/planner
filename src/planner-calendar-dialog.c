@@ -588,7 +588,7 @@ planner_calendar_dialog_new (PlannerWindow *window)
 	GtkTreeSelection *selection;
 	gint              i;
 	
-	g_return_val_if_fail (PLANNER_IS_MAIN_WINDOW (window), NULL);
+	g_return_val_if_fail (PLANNER_IS_WINDOW (window), NULL);
 	
 	glade = glade_xml_new (GLADEDIR "/calendar-dialog.glade",
 			       "calendar_dialog",

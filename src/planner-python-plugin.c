@@ -18,61 +18,44 @@
  * Boston, MA 02111-1307, USA.
  */
 
-#include <Python.h>
-
 #include <config.h>
+#include <Python.h>
 #include <glib.h> 
-#include <string.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <glade/glade.h>
-#include <gtk/gtkradiobutton.h>
-#include <gtk/gtkmessagedialog.h>
-#include <gtk/gtkentry.h>
-#include <gtk/gtkstock.h>
-#include <gtk/gtkfilesel.h>
-#include <libgnome/libgnome.h>
+#include <gtk/gtk.h>
 #include <glib/gi18n.h>
-#include <libgnomeui/gnome-file-entry.h>
+#include <pygobject.h>
 #include "planner-window.h"
 #include "planner-plugin.h"
 
-#include "pygobject.h"
-
-
-
-typedef struct _PlannerPythonEnv PlannerPythonEnv;
-
 struct _PlannerPluginPriv {
-	PlannerWindow	*main_window;
-	GHashTable	*scripts;
+	PlannerWindow *main_window;
+	GHashTable    *scripts;
 };
 
-struct _PlannerPythonEnv {
-	char		*name;
-	PyObject	*globals;
-};
+typedef struct {
+	gchar    *filename;
+	PyObject *globals;
+} PlannerPythonEnv;
 
-static PlannerPythonEnv *planner_python_env_new (const gchar       *name);
-static void planner_python_env_free             (PlannerPythonEnv  *env);
+static PlannerPythonEnv *planner_python_env_new  (const gchar      *name);
+static void              planner_python_env_free (PlannerPythonEnv *env);
+static void              python_plugin_execute   (const gchar      *filename,
+						  PlannerWindow    *window,
+						  GHashTable       *scripts);
+void                     plugin_init             (PlannerPlugin    *plugin,
+						  PlannerWindow    *main_window);
+void                     plugin_exit             (PlannerPlugin    *plugin);
 
-static void python_plugin_execute               (const gchar       *filename,
-						 PlannerWindow     *window,
-						 GHashTable        *scripts);
-
-void        plugin_init                         (PlannerPlugin     *plugin,
-					         PlannerWindow     *main_window);
-void        plugin_exit                         (PlannerPlugin     *plugin);
 
 
 static PlannerPythonEnv *
-planner_python_env_new (const gchar *name)
+planner_python_env_new (const gchar *filename)
 {
 	PlannerPythonEnv *env;
 	PyObject         *pDict, *pMain;
 
 	env = g_new0 (PlannerPythonEnv,1);
-	env->name = g_strdup(name);
+	env->filename = g_strdup (filename);
 
 	pDict = PyImport_GetModuleDict ();
 	pMain = PyDict_GetItemString (pDict, "__main__");
@@ -85,7 +68,7 @@ planner_python_env_new (const gchar *name)
 static void
 planner_python_env_free (PlannerPythonEnv *env)
 {
-	g_free (env->name);
+	g_free (env->filename);
 	PyDict_Clear (env->globals);
 	Py_DECREF (env->globals);
 	g_free (env);
@@ -96,94 +79,95 @@ python_plugin_execute (const gchar   *filename,
 		       PlannerWindow *window,
 		       GHashTable    *scripts)
 {
-	PlannerPythonEnv  *env;
-	/* MrpProject        *project; */
-
-	FILE              *fp;
-	PyObject          *pModule;
-	PyObject          *py_widget;
+	PlannerPythonEnv *env;
+	FILE             *fp;
+	PyObject         *pModule;
+	PyObject         *py_object;
 
 	env = planner_python_env_new (filename);
 
-	/* Import pygtk */
 	pModule = PyRun_String ("import pygtk\n"
 				"pygtk.require('2.0')\n"
 				"import gtk\n"
-				"import gnome\n",
+				"import planner\n",
 				Py_file_input, env->globals, env->globals);
-	if (pModule == NULL) {
+	if (!pModule) {
 		PyErr_Print ();
 		planner_python_env_free (env);
 		return;
 	}
 
-	/* Import planner */
-	pModule = PyImport_ImportModuleEx ("planner", env->globals, env->globals, Py_None);
-
-	if (pModule == NULL) {
+	pModule = PyImport_ImportModuleEx ("plannerui", env->globals, env->globals, Py_None);
+	if (!pModule) {
 		PyErr_Print ();
 		planner_python_env_free (env);
 		return;
 	}
 
-	py_widget = pygobject_new ((GObject *) window);
-	PyDict_SetItemString (env->globals, "window", py_widget);
-	Py_DECREF (py_widget);
+	py_object = pygobject_new (G_OBJECT (window));
+	PyDict_SetItemString (env->globals, "window", py_object);
+	Py_DECREF (py_object);
+
+	py_object = pygobject_new (G_OBJECT (planner_window_get_application (window)));
+	PyDict_SetItemString (env->globals, "application", py_object);
+	Py_DECREF (py_object);
 
 	fp = fopen (filename,"r");
-	if (fp != NULL) {
-		if (PyRun_File (fp, (char *) filename, Py_file_input, env->globals, env->globals) == NULL) {
+	if (fp) {
+		if (PyRun_File (fp, (gchar *) filename, Py_file_input, env->globals, env->globals) == NULL) {
 			PyErr_Print ();
 		}
 		fclose (fp);
-		g_hash_table_insert (scripts,(gpointer)filename,env);
+		g_hash_table_insert (scripts, env->filename, env);
 	} else {
+		planner_python_env_free (env);
+
 		/* FIXME: do the free */
-		g_message("Could not open file: %s",filename);
+		g_warning ("Could not open python script: %s", filename);
 	}
 }
-
 
 G_MODULE_EXPORT void 
 plugin_init (PlannerPlugin *plugin, PlannerWindow *main_window)
 {
 	PlannerPluginPriv *priv;
 	GDir              *dir;
-	gchar             *dirname, *fullfilename;
+	gchar             *dirname, *full_filename;
 	const gchar       *filename;
 	
 	priv = g_new0 (PlannerPluginPriv, 1);
 	plugin->priv = priv;
+
 	priv->main_window = main_window;
 	priv->scripts = g_hash_table_new (g_str_hash, g_str_equal);
 	
 	Py_Initialize ();
 	
 	/* Look in ~/.gnome2/planner/python/  and run the scripts that we find */
-	dirname = g_build_path(G_DIR_SEPARATOR_S,g_get_home_dir(),GNOME_DOT_GNOME,"planner","python",NULL);
-	dir = g_dir_open(dirname,0,NULL);
+	dirname = g_build_filename (g_get_home_dir(), ".gnome2", "planner", "python", NULL);
+	dir = g_dir_open (dirname, 0, NULL);
 	if (dir == NULL) {
-		g_free(dirname);
+		g_free (dirname);
 		return;
 	}
 
-	filename = g_dir_read_name(dir);
+	filename = g_dir_read_name (dir);
 	while (filename != NULL) {
-		fullfilename = g_build_filename(dirname,filename,NULL);
-		python_plugin_execute(fullfilename,main_window,priv->scripts);
-		g_free(fullfilename);
-		filename = g_dir_read_name(dir);
+		if (g_str_has_suffix (filename, ".py")) {
+			full_filename = g_build_filename (dirname, filename, NULL);
+			python_plugin_execute (full_filename, main_window, priv->scripts);
+			g_free (full_filename);
+		}
+		
+		filename = g_dir_read_name (dir);
 	}
-	g_free(dirname);
-	g_dir_close(dir);
+	
+	g_free (dirname);
+	g_dir_close (dir);
 }
 
 G_MODULE_EXPORT void 
 plugin_exit (PlannerPlugin *plugin) 
 {
-	g_message ("%s(%i) FIXME: free the Python plugin priv structure !!!",__FILE__,__LINE__);
-	if (plugin != NULL) {
-		/*planner_python_env_free (NULL);*/
-	}
 	Py_Finalize ();
 }

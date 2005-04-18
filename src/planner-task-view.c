@@ -47,70 +47,68 @@ struct _PlannerTaskViewPriv {
 	guint                   merged_id;
 };
 
-static void          task_view_activate                               (PlannerView     *view);
-static void          task_view_deactivate                             (PlannerView     *view);
-static void          task_view_setup                                   (PlannerView     *view,
+static void          task_view_activate                     (PlannerView     *view);
+static void          task_view_deactivate                   (PlannerView     *view);
+static void          task_view_setup                        (PlannerView     *view,
 							     PlannerWindow   *main_window);
-static const gchar  *task_view_get_label                              (PlannerView     *view);
-static const gchar  *task_view_get_menu_label                         (PlannerView     *view);
-static const gchar  *task_view_get_icon                               (PlannerView     *view);
-static const gchar  *task_view_get_name                               (PlannerView     *view);
-static GtkWidget    *task_view_get_widget                             (PlannerView     *view);
-static void          task_view_print_init                             (PlannerView     *view,
-						      PlannerPrintJob *job);
-static void          task_view_print                                  (PlannerView     *view);
-static gint          task_view_print_get_n_pages                      (PlannerView     *view);
-static void          task_view_print_cleanup                          (PlannerView     *view);
-
-static void   task_view_tree_view_columns_changed_cb (GtkTreeView     *tree_view,
-						      PlannerView     *view);
-static void   task_view_tree_view_destroy_cb         (GtkTreeView     *tree_view,
-						      PlannerView     *view);
-static void   task_view_project_loaded_cb            (MrpProject      *project,
-						      PlannerView     *view);
-static void   task_view_insert_task_cb               (GtkAction       *action,
-						      gpointer         data);
-static void   task_view_insert_tasks_cb              (GtkAction       *action,
-						      gpointer         data);
-static void   task_view_remove_task_cb               (GtkAction       *action,
-						      gpointer         data);
-static void   task_view_edit_task_cb                 (GtkAction       *action,
-						      gpointer         data);
-static void   task_view_select_all_cb                (GtkAction       *action,
-						      gpointer         data);
-static void   task_view_unlink_task_cb               (GtkAction       *action,
-						      gpointer         data);
-static void   task_view_link_tasks_cb                (GtkAction       *action,
-						      gpointer         data);
-static void   task_view_indent_task_cb               (GtkAction       *action,
-						      gpointer         data);
-static void   task_view_move_task_up_cb              (GtkAction       *action,
-						      gpointer         data);
-static void   task_view_move_task_down_cb            (GtkAction       *action,
-						      gpointer         data);
-static void   task_view_unindent_task_cb             (GtkAction       *action,
-						      gpointer         data);
-static void   task_view_reset_constraint_cb          (GtkAction       *action,
-						      gpointer         data);
-static void   task_view_edit_custom_props_cb         (GtkAction       *action,
-						      gpointer         data);
-static void   task_view_highlight_critical_cb        (GtkAction       *action,
-						      gpointer         data);
-static void   task_view_edit_columns_cb              (GtkAction       *action,
-						      gpointer         data);
-static void   task_view_selection_changed_cb         (PlannerTaskTree *tree,
-						      PlannerView     *view);
-static void   task_view_relations_changed_cb         (PlannerTaskTree *tree,
-						      MrpTask         *task,
-						      MrpRelation     *relation,
-						      PlannerView     *view);
-static void   task_view_update_ui                    (PlannerView     *view);
-static void   task_view_save_columns                 (PlannerView     *view);
-static void   task_view_load_columns                 (PlannerView     *view);
-
+static const gchar  *task_view_get_label                    (PlannerView     *view);
+static const gchar  *task_view_get_menu_label               (PlannerView     *view);
+static const gchar  *task_view_get_icon                     (PlannerView     *view);
+static const gchar  *task_view_get_name                     (PlannerView     *view);
+static GtkWidget    *task_view_get_widget                   (PlannerView     *view);
+static void          task_view_print_init                   (PlannerView     *view,
+							     PlannerPrintJob *job);
+static void          task_view_print                        (PlannerView     *view);
+static gint          task_view_print_get_n_pages            (PlannerView     *view);
+static void          task_view_print_cleanup                (PlannerView     *view);
+static void          task_view_tree_view_columns_changed_cb (GtkTreeView     *tree_view,
+							     PlannerView     *view);
+static void          task_view_tree_view_destroy_cb         (GtkTreeView     *tree_view,
+							     PlannerView     *view);
+static void          task_view_project_loaded_cb            (MrpProject      *project,
+							     PlannerView     *view);
+static void          task_view_insert_task_cb               (GtkAction       *action,
+							     gpointer         data);
+static void          task_view_insert_tasks_cb              (GtkAction       *action,
+							     gpointer         data);
+static void          task_view_remove_task_cb               (GtkAction       *action,
+							     gpointer         data);
+static void          task_view_edit_task_cb                 (GtkAction       *action,
+							     gpointer         data);
+static void          task_view_select_all_cb                (GtkAction       *action,
+							     gpointer         data);
+static void          task_view_unlink_task_cb               (GtkAction       *action,
+							     gpointer         data);
+static void          task_view_link_tasks_cb                (GtkAction       *action,
+							     gpointer         data);
+static void          task_view_indent_task_cb               (GtkAction       *action,
+							     gpointer         data);
+static void          task_view_move_task_up_cb              (GtkAction       *action,
+							     gpointer         data);
+static void          task_view_move_task_down_cb            (GtkAction       *action,
+							     gpointer         data);
+static void          task_view_unindent_task_cb             (GtkAction       *action,
+							     gpointer         data);
+static void          task_view_reset_constraint_cb          (GtkAction       *action,
+							     gpointer         data);
+static void          task_view_edit_custom_props_cb         (GtkAction       *action,
+							     gpointer         data);
+static void          task_view_highlight_critical_cb        (GtkAction       *action,
+							     gpointer         data);
+static void          task_view_edit_columns_cb              (GtkAction       *action,
+							     gpointer         data);
+static void          task_view_selection_changed_cb         (PlannerTaskTree *tree,
+							     PlannerView     *view);
+static void          task_view_relations_changed_cb         (PlannerTaskTree *tree,
+							     MrpTask         *task,
+							     MrpRelation     *relation,
+							     PlannerView     *view);
+static void          task_view_update_ui                    (PlannerView     *view);
+static void          task_view_save_columns                 (PlannerView     *view);
+static void          task_view_load_columns                 (PlannerView     *view);
 
 
-static GtkActionEntry entries[] = {
+static const GtkActionEntry entries[] = {
 	{ "InsertTask",      "planner-stock-insert-task",      N_("_Insert Task"),
 	  "<Control>i",        N_("Insert a new task"),
           G_CALLBACK (task_view_insert_task_cb) },
@@ -155,14 +153,10 @@ static GtkActionEntry entries[] = {
 	  G_CALLBACK (task_view_edit_columns_cb) }
 };
 
-static GtkToggleActionEntry toggle_entries[] = {
+static const GtkToggleActionEntry toggle_entries[] = {
 	{ "HighlightCriticalTasks", NULL, N_("_Highlight Critical Tasks"), NULL, NULL,
-	  G_CALLBACK (task_view_highlight_critical_cb), FALSE },
+	  G_CALLBACK (task_view_highlight_critical_cb), FALSE }
 };
-
-static guint n_entries        = G_N_ELEMENTS (entries);
-static guint n_toggle_entries = G_N_ELEMENTS (toggle_entries);
-
 
 #define CRITICAL_PATH_KEY "/views/task_view/highlight_critical_path"
 
@@ -207,8 +201,12 @@ task_view_activate (PlannerView *view)
 	priv->actions = gtk_action_group_new ("TaskView");
 	gtk_action_group_set_translation_domain (priv->actions, GETTEXT_PACKAGE);
 
-	gtk_action_group_add_actions (priv->actions, entries, n_entries, view);
-	gtk_action_group_add_toggle_actions (priv->actions, toggle_entries, n_toggle_entries, view);
+	gtk_action_group_add_actions (priv->actions, entries,
+				      G_N_ELEMENTS (entries),
+				      view);
+	gtk_action_group_add_toggle_actions (priv->actions, toggle_entries,
+					     G_N_ELEMENTS (toggle_entries),
+					     view);
 
 	gtk_ui_manager_insert_action_group (priv->ui_manager, priv->actions, 0);
 	priv->merged_id = gtk_ui_manager_add_ui_from_file (priv->ui_manager,

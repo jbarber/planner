@@ -177,7 +177,7 @@ planner_phase_dialog_new (PlannerWindow *window)
 	GtkWidget        *dialog;
 	GtkTreeSelection *selection;	
 
-	g_return_val_if_fail (PLANNER_IS_MAIN_WINDOW (window), NULL);
+	g_return_val_if_fail (PLANNER_IS_WINDOW (window), NULL);
 	
 	glade = glade_xml_new (GLADEDIR "/project-properties.glade",
 			       "phase_dialog",

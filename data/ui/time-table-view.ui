@@ -1,5 +1,6 @@
 <ui>
   <menubar name="MenuBar">
+
     <menu action="Edit">
       <placeholder name="Selection placeholder">
         <!--menuitem name="SelectAll"         verb=""   accel="*Control*a"/-->
@@ -14,13 +15,11 @@
         <menuitem action="ZoomIn"/>
         <menuitem action="ZoomOut"/>
         <menuitem action="ZoomToFit"/>
+        <separator/>
+        <menuitem action="EditColumns"/>
       </placeholder>
     </menu>
 
-    <menu action="Actions">
-      <placeholder name="View specific actions placeholder">
-      </placeholder>
-    </menu>
   </menubar>
 
   <toolbar name="ToolBar">

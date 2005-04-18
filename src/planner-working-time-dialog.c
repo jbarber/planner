@@ -206,7 +206,7 @@ planner_working_time_dialog_new (PlannerWindow *window,
 	GtkTreeViewColumn *col;
 	GtkTreeSelection  *selection;
 	
-	g_return_val_if_fail (PLANNER_IS_MAIN_WINDOW (window), NULL);
+	g_return_val_if_fail (PLANNER_IS_WINDOW (window), NULL);
 	
 	glade = glade_xml_new (GLADEDIR "/calendar-dialog.glade",
 			       "working_time_dialog",

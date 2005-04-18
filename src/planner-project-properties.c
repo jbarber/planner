@@ -1539,7 +1539,7 @@ planner_project_properties_new (PlannerWindow *window)
 	MrpCalendar *calendar;
 	GtkWidget   *hbox;
 	
-	g_return_val_if_fail (PLANNER_IS_MAIN_WINDOW (window), NULL);
+	g_return_val_if_fail (PLANNER_IS_WINDOW (window), NULL);
 	
 	glade = glade_xml_new (GLADEDIR "/project-properties.glade",
 			       "project_properties",

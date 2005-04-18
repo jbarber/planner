@@ -39,6 +39,7 @@
 #include "planner-table-print-sheet.h"
 #include "planner-property-dialog.h"
 #include "planner-resource-cmd.h"
+#include "planner-column-dialog.h"
 
 struct _PlannerResourceViewPriv {
 	GtkItemFactory         *popup_factory;
@@ -82,6 +83,8 @@ static void           resource_view_popup_remove_resource_cb (gpointer          
 static void           resource_view_popup_edit_resource_cb   (gpointer                 callback_data,
 							      guint                    action,
 							      GtkWidget               *widget);
+static void           resource_view_edit_columns_cb           (GtkAction              *action,
+							       gpointer                data);
 static void           resource_view_select_all_cb            (GtkAction               *action,
 							      gpointer                 data);
 static void           resource_view_edit_custom_props_cb     (GtkAction               *action,
@@ -218,10 +221,11 @@ static void           resource_view_resource_removed_cb      (MrpProject        
 							      MrpResource             *resource,
 							      PlannerView             *view);
 static const gchar *  resource_view_get_type_string          (MrpResourceType          type);
+static void           resource_view_save_columns             (PlannerResourceView     *view);
+static void           resource_view_load_columns             (PlannerResourceView     *view);
 
 
-
-static GtkActionEntry entries[] = {
+static const GtkActionEntry entries[] = {
 	{ "InsertResource",   "planner-stock-insert-resource", N_("_Insert Resource"),
 	  "<Control>i",        N_("Insert a new resource"),
 	  G_CALLBACK (resource_view_insert_resource_cb) },
@@ -242,7 +246,10 @@ static GtkActionEntry entries[] = {
 	  G_CALLBACK (resource_view_select_all_cb) },
 	{ "EditCustomProps",  GTK_STOCK_PROPERTIES,            N_("Edit _Custom Properties..."),
 	  NULL,                NULL,
-	  G_CALLBACK (resource_view_edit_custom_props_cb) }
+	  G_CALLBACK (resource_view_edit_custom_props_cb) },
+	{ "EditColumns",     NULL,                           N_("Edit _Visible Columns"),
+	  NULL,                N_("Edit visible columns"),
+	  G_CALLBACK (resource_view_edit_columns_cb) }
 };
 
 enum {
@@ -456,6 +463,38 @@ static const gchar *
 resource_view_get_name (PlannerView *view)
 {
 	return "resource_view";
+}
+
+static void
+resource_view_tree_view_columns_changed_cb (GtkTreeView         *tree_view,
+					    PlannerResourceView *view)
+{
+	resource_view_save_columns (view);
+}
+
+static void
+resource_view_tree_view_destroy_cb (GtkTreeView         *tree_view,
+				    PlannerResourceView *view)
+{
+	/* Block, we don't want to save the column configuration when they are
+	 * removed by the destruction.
+	 */
+	g_signal_handlers_block_by_func (tree_view,
+					 resource_view_tree_view_columns_changed_cb,
+					 view);
+}
+
+/* Note: this is not ideal, it emits the signal as soon as the width is changed
+ * during the resize. We should only emit it when the resizing is done.
+ */
+static void
+resource_view_column_notify_width_cb (GtkWidget           *column,
+				      GParamSpec          *spec,
+				      PlannerResourceView *view)
+{
+	if (GTK_WIDGET_REALIZED (view->priv->tree_view)) {
+		g_signal_emit_by_name (view->priv->tree_view, "columns-changed");
+	}
 }
 
 static GtkWidget *
@@ -992,6 +1031,21 @@ resource_view_edit_resource_cb (GtkAction *action,
 }
 
 static void
+resource_view_edit_columns_cb (GtkAction *action,
+			       gpointer   data)
+{
+	PlannerView             *view;
+	PlannerResourceViewPriv *priv;
+
+	view = PLANNER_VIEW (data);
+	priv = PLANNER_RESOURCE_VIEW (view)->priv;
+
+	planner_column_dialog_show (PLANNER_VIEW (view)->main_window,
+				    _("Edit Resoruce Columns"),
+				    GTK_TREE_VIEW (priv->tree_view));
+}
+
+static void
 resource_view_select_all_cb (GtkAction *action,
 			     gpointer   data)
 {
@@ -1148,12 +1202,16 @@ resource_view_setup_tree_view (PlannerView *view)
 						 NULL, NULL);
 	g_object_set_data (G_OBJECT (col),
 			   "data-func", resource_view_name_data_func);
+	g_object_set_data (G_OBJECT (col), "id", "name");
 	
 	g_signal_connect (cell,
 			  "edited",
 			  G_CALLBACK (resource_view_cell_name_edited),
 			  view);
-
+	g_signal_connect (col,
+			  "notify::width",
+			  G_CALLBACK (resource_view_column_notify_width_cb),
+			  view);
 	gtk_tree_view_append_column (tree_view, col);
 
 	/* Short name. */
@@ -1170,8 +1228,13 @@ resource_view_setup_tree_view (PlannerView *view)
 						 NULL, NULL);
 	g_object_set_data (G_OBJECT (col),
 			   "data-func", resource_view_short_name_data_func);
-	
+	g_object_set_data (G_OBJECT (col), "id", "short_name");
+
 	gtk_tree_view_append_column (tree_view, col);
+	g_signal_connect (col,
+			  "notify::width",
+			  G_CALLBACK (resource_view_column_notify_width_cb),
+			  view);
 	
 	g_signal_connect (cell,
 			  "edited",
@@ -1190,9 +1253,14 @@ resource_view_setup_tree_view (PlannerView *view)
 						 NULL, NULL);
 	g_object_set_data (G_OBJECT (col),
 			   "data-func", resource_view_type_data_func);
+	g_object_set_data (G_OBJECT (col), "id", "type");
 	
 	gtk_tree_view_append_column (tree_view, col);
-	
+	g_signal_connect (col,
+			  "notify::width",
+			  G_CALLBACK (resource_view_column_notify_width_cb),
+			  view);
+
 	g_signal_connect (cell,
 			  "edited",
 			  G_CALLBACK (resource_view_cell_type_edited),
@@ -1215,9 +1283,14 @@ resource_view_setup_tree_view (PlannerView *view)
 						 NULL, NULL);
 	g_object_set_data (G_OBJECT (col),
 			   "data-func", resource_view_group_data_func);
-	
+	g_object_set_data (G_OBJECT (col), "id", "group");
+
 	gtk_tree_view_append_column (tree_view, col);
-	
+	g_signal_connect (col,
+			  "notify::width",
+			  G_CALLBACK (resource_view_column_notify_width_cb),
+			  view);
+
 	g_signal_connect (cell,
 			  "edited",
 			  G_CALLBACK (resource_view_cell_group_edited),
@@ -1245,8 +1318,13 @@ resource_view_setup_tree_view (PlannerView *view)
 						 NULL, NULL);
 	g_object_set_data (G_OBJECT (col),
 			   "data-func", resource_view_email_data_func);
-	
+	g_object_set_data (G_OBJECT (col), "id", "email");
+
 	gtk_tree_view_append_column (tree_view, col);
+	g_signal_connect (col,
+			  "notify::width",
+			  G_CALLBACK (resource_view_column_notify_width_cb),
+			  view);
 	
 	g_signal_connect (cell,
 			  "edited",
@@ -1267,8 +1345,13 @@ resource_view_setup_tree_view (PlannerView *view)
 						 NULL, NULL);
 	g_object_set_data (G_OBJECT (col),
 			   "data-func", resource_view_cost_data_func);
+	g_object_set_data (G_OBJECT (col), "id", "cost");
 	
 	gtk_tree_view_append_column (tree_view, col);
+	g_signal_connect (col,
+			  "notify::width",
+			  G_CALLBACK (resource_view_column_notify_width_cb),
+			  view);
 	
 	g_signal_connect (cell,
 			  "edited",
@@ -1284,6 +1367,18 @@ resource_view_setup_tree_view (PlannerView *view)
 		resource_view_property_added (project, MRP_TYPE_RESOURCE, l->data, view);
 	}
 	*/
+
+	resource_view_load_columns (PLANNER_RESOURCE_VIEW (view));
+
+	g_signal_connect (tree_view,
+			  "columns-changed",
+			  G_CALLBACK (resource_view_tree_view_columns_changed_cb),
+			  view);
+	
+	g_signal_connect (tree_view,
+			  "destroy",
+			  G_CALLBACK (resource_view_tree_view_destroy_cb),
+			  view);
 }
 
 static gboolean
@@ -2329,6 +2424,66 @@ resource_view_selection_get_list (PlannerView *view)
 					     (GtkTreeSelectionForeachFunc) resource_view_selection_foreach, 
 					     &ret_list);
 	return ret_list;
+}
+
+
+static void
+resource_view_save_columns (PlannerResourceView *view)
+{
+	PlannerResourceViewPriv *priv;
+
+	priv = view->priv;
+	
+	planner_view_column_save_helper (PLANNER_VIEW (view),
+					 GTK_TREE_VIEW (priv->tree_view));
+}
+
+static void
+resource_view_load_columns (PlannerResourceView *view)
+{
+	PlannerResourceViewPriv *priv;
+	GList                   *columns, *l;
+	GtkTreeViewColumn       *column;
+	const gchar             *id;
+	gint                     i;
+		
+	priv = view->priv;
+
+	/* Load the columns. */
+	planner_view_column_load_helper (PLANNER_VIEW (view),
+					 GTK_TREE_VIEW (priv->tree_view));
+	
+	/* Make things a bit more robust by setting defaults if we don't get any
+	 * visible columns. Should be done through a schema instead (but we'll
+	 * keep this since a lot of people get bad installations when installing
+	 * themselves).
+	 */
+	columns = gtk_tree_view_get_columns (GTK_TREE_VIEW (priv->tree_view));
+	i = 0;
+	for (l = columns; l; l = l->next) {
+		if (gtk_tree_view_column_get_visible (l->data)) {
+			i++;
+		}
+	}
+	
+	if (i == 0) {
+		for (l = columns; l; l = l->next) {
+			column = l->data;
+
+			if (g_object_get_data (G_OBJECT (column), "custom")) {
+				continue;
+			}
+
+			id = g_object_get_data (G_OBJECT (column), "id");
+			if (!id) {
+				continue;
+			}
+			
+			gtk_tree_view_column_set_visible (column, TRUE);
+		}
+	}
+	
+	g_list_free (columns);
 }
 
 PlannerView *
