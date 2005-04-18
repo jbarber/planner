@@ -115,18 +115,6 @@ libmrp_xsl_la_CFLAGS = 	$(XSLT_CFLAGS) -DSTYLESHEETDIR=\""$(datadir)/planner/sty
 libmrp_xsl_la_LIBADD = $(XSLT_LIBS)
 libmrp_xsl_la_LDFLAGS = -avoid-version -module
 
-#mrp-marshal.h: Makefile.am mrp-marshal.list
-#	(cd $(srcdir) && \
-#	@GLIB_GENMARSHAL@ --prefix=mrp_marshal mrp-marshal.list --header) > xgen-gmh \
-#	&& (cmp -s xgen-gmh mrp-marshal.h || cp xgen-gmh mrp-marshal.h) \
-#	&& rm -f xgen-gmh xgen-gmh~
-
-#mrp-marshal.c: Makefile.am mrp-marshal.list
-#	(cd $(srcdir) && \
-#	@GLIB_GENMARSHAL@ --prefix=mrp_marshal mrp-marshal.list --body) > xgen-gmc \
-#	&& cp xgen-gmc mrp-marshal.c \
-#	&& rm -f xgen-gmc xgen-gmc~
-
 mrp-marshal.h: Makefile.am mrp-marshal.list
 	$(GLIB_GENMARSHAL) --prefix=mrp_marshal $(srcdir)/mrp-marshal.list --header > xgen-gmh \
 	&& (cmp -s xgen-gmh mrp-marshal.h || cp xgen-gmh mrp-marshal.h) \
@@ -137,13 +125,11 @@ mrp-marshal.c: Makefile.am mrp-marshal.list
 	&& cp xgen-gmc mrp-marshal.c \
 	&& rm -f xgen-gmc xgen-gmc~
 
-#$(top_srcdir)/mrp-marshal-main.c: $(built_sources)
-
 # do not use BUILT_SOURCES because of weird semantics
 # i *think* these should actually be stamp-* files
-built_sources =	 mrp-marshal.h  mrp-marshal.c
+built_sources = mrp-marshal.h  mrp-marshal.c
 
-$(libplanner_OBJECTS): $(built_sources)
+$(libplanner_1_la_OBJECTS): $(built_sources)
 
 EXTRA_DIST = mrp-marshal.list
 

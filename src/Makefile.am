@@ -222,6 +222,8 @@ planner-marshal.c: Makefile.am planner-marshal.list
 # i *think* these should actually be stamp-* files
 built_sources = planner-marshal.h planner-marshal.c
 
+$(planner_OBJECTS): $(built_sources)
+
 EXTRA_DIST = planner-marshal.list
 
 CLEANFILES = $(built_sources)
