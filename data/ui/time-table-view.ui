@@ -11,11 +11,11 @@
 
     <menu action="View">
       <placeholder name="View specific placeholder">
-        <separator/>
         <menuitem action="ZoomIn"/>
         <menuitem action="ZoomOut"/>
         <menuitem action="ZoomToFit"/>
-        <separator/>
+      </placeholder>
+      <placeholder name="View specific placeholder bottom">
         <menuitem action="EditColumns"/>
       </placeholder>
     </menu>

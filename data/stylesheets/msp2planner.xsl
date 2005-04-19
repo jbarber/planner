@@ -155,6 +155,7 @@
   </xsl:attribute>
   <xsl:attribute name="scheduling">
     <xsl:choose>
+      <xsl:when test="ms:Type=0">fixed-duration</xsl:when> <!-- should be fixed-units but we don't have that -->
       <xsl:when test="ms:Type=1">fixed-duration</xsl:when>
       <xsl:otherwise>fixed-work</xsl:otherwise>
     </xsl:choose>
