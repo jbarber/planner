@@ -24,7 +24,7 @@
 
 #include <gtk/gtkwidget.h>
 #include <libplanner/mrp-project.h>
-#include <planner-window.h>
+#include "planner-window.h"
 
 GtkWidget *planner_property_dialog_new          (PlannerWindow       *main_window,
 						 MrpProject          *project,
