@@ -1,5 +1,7 @@
 2005-04-21  Richard Hult  <richard@imendio.com>
 
+	* src/eel-canvas-rect.c: Remove gdkx.h include.
+
 	* libplanner/mrp-xsl.c (xml_planner_pre012_write, html_write): Use
 	libxslt for saving directly instead of GnomeVFS.
 

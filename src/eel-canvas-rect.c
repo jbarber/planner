@@ -30,7 +30,6 @@
 
 #include <glib/gstring.h>
 #include <libgnomecanvas/gnome-canvas-util.h>
-#include <gdk/gdkx.h>
 
 /* FIXME: check for this in configure and use it. */
 #ifdef HAVE_RENDER
