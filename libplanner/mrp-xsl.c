@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: nill; c-basic-offset: 8 -*- */
 /*
- * Copyright (C) 2004 Imendio AB
+ * Copyright (C) 2004-2005 Imendio AB
  * Copyright (C) 2002-2003 CodeFactory AB
  * Copyright (C) 2002-2003 Richard Hult <richard@imendio.com>
  * Copyright (C) 2002 Mikael Hallendal <micke@imendio.com>
@@ -25,7 +25,6 @@
 #include <glib.h>
 #include <glib/gi18n.h>
 #include <gmodule.h>
-#include <libgnomevfs/gnome-vfs.h>
 #include <libxslt/xslt.h>
 #include <libxslt/transform.h>
 #include <libxslt/xsltutils.h>
@@ -60,10 +59,6 @@ html_write (MrpFileWriter  *writer,
         xsltStylesheet *stylesheet;
         xmlDoc         *doc;
         xmlDoc         *final_doc;
-	GnomeVFSHandle *handle;
-	xmlChar        *buffer;
-	gint            len;
-	GnomeVFSResult  result;
 	gboolean        ret;
 
 	if (!mrp_project_save_to_xml (project, &xml_project, error)) {
@@ -78,30 +73,13 @@ html_write (MrpFileWriter  *writer,
         stylesheet = xsltParseStylesheetFile (STYLESHEETDIR "/planner2html.xsl");
 
         doc = xmlParseMemory (xml_project, strlen (xml_project));
-
         final_doc = xsltApplyStylesheet (stylesheet, doc, NULL);
         xmlFree (doc);
 
 	ret = TRUE;
 
-	if (final_doc &&
-	    xsltSaveResultToString (&buffer, &len, final_doc, stylesheet) != -1) {
-		result = gnome_vfs_create (&handle, uri, GNOME_VFS_OPEN_WRITE,
-					   FALSE, 0644);
-		
-		if (result == GNOME_VFS_OK) { 
-			gnome_vfs_write (handle, buffer, (GnomeVFSFileSize) len, NULL);
-			gnome_vfs_close (handle);
-		} else {
-		  	g_set_error (error,
-				     MRP_ERROR,
-				     MRP_ERROR_EXPORT_FAILED,
-				     gnome_vfs_result_to_string (result));
-			ret = FALSE;
-		}
-		
-		xmlFree (buffer);
-	} else {
+	if (!final_doc ||
+	    xsltSaveResultToFilename (uri, final_doc, stylesheet, 0) == -1) {
 		g_set_error (error,
 			     MRP_ERROR,
 			     MRP_ERROR_EXPORT_FAILED,
@@ -111,10 +89,9 @@ html_write (MrpFileWriter  *writer,
 	
 	xsltFreeStylesheet (stylesheet);
         xmlFree (final_doc);
-
+	
 	return ret;
 }
-
 				 
 static gboolean
 xml_planner_pre012_write (MrpFileWriter  *writer,
@@ -127,10 +104,6 @@ xml_planner_pre012_write (MrpFileWriter  *writer,
         xsltStylesheet *stylesheet;
         xmlDoc         *doc;
         xmlDoc         *final_doc;
-	GnomeVFSHandle *handle;
-	xmlChar        *buffer;
-	gint            len;
-	GnomeVFSResult  result;
 	gboolean        ret;
 
 	if (!mrp_project_save_to_xml (project, &xml_project, error)) {
@@ -145,38 +118,22 @@ xml_planner_pre012_write (MrpFileWriter  *writer,
         stylesheet = xsltParseStylesheetFile (STYLESHEETDIR "/planner2plannerv011.xsl");
 
         doc = xmlParseMemory (xml_project, strlen (xml_project));
-                                                                                
         final_doc = xsltApplyStylesheet (stylesheet, doc, NULL);
+        xmlFree (doc);
                                                                                 
 	ret = TRUE;
 
-	if (xsltSaveResultToString (&buffer, &len, final_doc, stylesheet) != -1) {
-		result = gnome_vfs_create (&handle, uri, GNOME_VFS_OPEN_WRITE,
-					   FALSE, 0644);
-		
-		if (result == GNOME_VFS_OK) { 
-			gnome_vfs_write (handle, buffer, (GnomeVFSFileSize) len, NULL);
-			gnome_vfs_close (handle);
-		} else {
-		  	g_set_error (error,
-				     MRP_ERROR,
-				     MRP_ERROR_EXPORT_FAILED,
-				     gnome_vfs_result_to_string (result));
-			ret = FALSE;
-		}
-		
-		xmlFree (buffer);
-	} else {
+	if (!final_doc ||
+	    xsltSaveResultToFilename (uri, final_doc, stylesheet, 0) == -1) {
 		g_set_error (error,
 			     MRP_ERROR,
 			     MRP_ERROR_EXPORT_FAILED,
-			     _("Export to Planner pre-0.12 format failed"));
+			     _("Export to HTML failed"));
 		ret = FALSE;
 	}
 	
 	xsltFreeStylesheet (stylesheet);
         xmlFree (final_doc);
-        xmlFree (doc);
 
 	return ret;
 }

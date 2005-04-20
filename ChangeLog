@@ -1,3 +1,8 @@
+2005-04-21  Richard Hult  <richard@imendio.com>
+
+	* libplanner/mrp-xsl.c (xml_planner_pre012_write, html_write): Use
+	libxslt for saving directly instead of GnomeVFS.
+
 2005-04-20  Francisco Moraes  <fmoraes@nc.rr.com>
 
 	* src/planner-print-dialog.c (ensure_dir): Use g_mkdir.
