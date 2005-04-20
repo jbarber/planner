@@ -871,8 +871,9 @@ cal_dialog_update_calendar_widgets (DialogData *data)
 	MrpCalendar *calendar;
 	PlannerCalendar  *calendar_widget;
 	guint        y, m, d;
-	mrptime      t;
 	MrpDay      *day;
+	MrpTime      *t;
+	mrptime      time;
 	
 	calendar = cal_dialog_get_selected_calendar (GTK_TREE_VIEW (data->tree_view));
 	if (!calendar) {
@@ -890,10 +891,14 @@ cal_dialog_update_calendar_widgets (DialogData *data)
 
 	planner_calendar_get_date (calendar_widget, &y, &m, &d);
 
+	t = mrp_time2_new ();
+	mrp_time2_set_date (t, y, m+1, 1);
+	mrp_time2_set_time (t, 0, 0, 0);
+
 	for (d = 1; d <= 31; d++) {
-		t = mrp_time_compose (y, m + 1, d, 0, 0, 0);
-		
-		day = mrp_calendar_get_day (calendar, t, TRUE);
+		time = mrp_time2_get_epoch (t);
+
+		day = mrp_calendar_get_day (calendar, time, TRUE);
 
 		if (day == mrp_day_get_nonwork ()) {
 			planner_calendar_mark_day (calendar_widget,
@@ -905,7 +910,10 @@ cal_dialog_update_calendar_widgets (DialogData *data)
 						   d,
 						   PLANNER_CALENDAR_MARK_NONE);
 		}
+
+		mrp_time2_add_days (t, 1);
 	}
+	mrp_time2_free (t);
 }
 
 static void

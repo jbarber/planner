@@ -1,3 +1,9 @@
+2005-04-20  Francisco Moraes  <fmoraes@nc.rr.com>
+
+	* src/planner-calendar-dialog.c:
+	(cal_dialog_update_calendar_widgets): Use the new time API, fixes
+	assertion.
+
 2005-04-19  Richard Hult  <richard@imendio.com>
 
 	* data/ui/gantt-view.ui:
