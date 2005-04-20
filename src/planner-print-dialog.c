@@ -29,6 +29,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <glib/gi18n.h>
+#include <glib/gstdio.h>
 #include <gtk/gtk.h>
 #include <libgnomeprint/gnome-print.h>
 #include <libgnomeprint/gnome-print-job.h>
@@ -55,7 +56,7 @@ ensure_dir (void)
 	dir = g_build_filename (g_get_home_dir (), ".gnome2", NULL);
 	
 	if (!g_file_test (dir, G_FILE_TEST_EXISTS | G_FILE_TEST_IS_DIR)) {
-		if (mkdir (dir, 0755) != 0) {
+		if (g_mkdir (dir, 0755) != 0) {
 			g_free (dir);
 			return FALSE;
 		}
@@ -66,7 +67,7 @@ ensure_dir (void)
 	dir = g_build_filename (g_get_home_dir (), ".gnome2", "planner", NULL);
 	
 	if (!g_file_test (dir, G_FILE_TEST_EXISTS | G_FILE_TEST_IS_DIR)) {
-		if (mkdir (dir, 0755) != 0) {
+		if (g_mkdir (dir, 0755) != 0) {
 			g_free (dir);
 			return FALSE;
 		}

@@ -1,5 +1,7 @@
 2005-04-20  Francisco Moraes  <fmoraes@nc.rr.com>
 
+	* src/planner-print-dialog.c (ensure_dir): Use g_mkdir.
+
 	* src/planner-calendar-dialog.c:
 	(cal_dialog_update_calendar_widgets): Use the new time API, fixes
 	assertion.
