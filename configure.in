@@ -111,6 +111,8 @@ PKG_CHECK_MODULES(PLANNER,
 	gconf-2.0 >= $GCONF_REQUIRED
 ])
 
+AC_DEFINE(WITH_GNOME, 1, [Define to 1 to indicate presence of GNOME libraries])
+
 AC_SUBST(PLANNER_CFLAGS)
 AC_SUBST(PLANNER_LIBS)
 dnl -----------------------------------------------------------

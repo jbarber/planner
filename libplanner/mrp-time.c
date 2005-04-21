@@ -26,7 +26,11 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#ifndef WIN32
 #include <langinfo.h>
+#else
+#include <windows.h>
+#endif
 #include "mrp-time.h"
 #include "mrp-types.h"
 #include <glib/gi18n.h>
@@ -41,6 +45,7 @@ struct _MrpTime {
 
 static const gchar *short_month_names[12];
 static const gchar *month_names[12];
+
 
 static const gchar *month_names_initial[12];
 static const gchar *short_day_names[7];
@@ -166,7 +171,7 @@ mrp_time_from_tm (struct tm *tm)
 
 	/* This is a hack. Set the timezone to UTC temporarily. */
 	old_tz = g_strdup (g_getenv ("TZ"));
-	putenv ("TZ=UTC");
+	g_setenv ("TZ", "UTC", TRUE);
 	
 	t = mktime (tm);
 
@@ -176,7 +181,7 @@ mrp_time_from_tm (struct tm *tm)
 		putenv (tmp);
 		g_free (tmp);
 	} else {
-		unsetenv ("TZ");
+		g_unsetenv ("TZ");
 	}
 
 	g_free (old_tz);
@@ -513,6 +518,7 @@ imrp_time_init (void)
 	
 	/* Get month and day names. */
 	
+#ifndef WIN32
 	for (i = 0; i < 12; i++) {
 		gunichar c;
 		
@@ -534,6 +540,77 @@ imrp_time_init (void)
 		day_names[i] = g_locale_to_utf8 (nl_langinfo (DAY_1 + i),
 						 -1, NULL, NULL, NULL);
 	}
+#else
+	for (i = 0; i < 12; i++) {
+		gunichar c;
+		int len;
+		gchar *buffer;
+
+		len = GetLocaleInfo(LOCALE_USER_DEFAULT,
+				    LOCALE_SABBREVMONTHNAME1+i,
+				    NULL,
+				    0);
+		buffer = g_malloc(len);
+
+		GetLocaleInfo(LOCALE_USER_DEFAULT,
+			      LOCALE_SABBREVMONTHNAME1+i,
+			      buffer,
+			      len);
+		short_month_names[i] = g_locale_to_utf8(buffer, -1, NULL, NULL,
+							NULL);
+		
+		len = GetLocaleInfo(LOCALE_USER_DEFAULT,
+				    LOCALE_SMONTHNAME1+i,
+				    NULL,
+				    0);
+		buffer = g_realloc(buffer, len);
+		
+		GetLocaleInfo(LOCALE_USER_DEFAULT,
+			      LOCALE_SMONTHNAME1+i,
+			      buffer,
+			      len);
+		month_names[i] = g_locale_to_utf8(buffer, -1, NULL, NULL,
+						  NULL);
+		g_free(buffer);
+		
+		c = g_utf8_get_char (month_names[i]);
+		month_names_initial[i] = g_malloc0 (7);
+		g_unichar_to_utf8 (c, (char *)month_names_initial[i]);
+		
+	}
+
+	for (i = 0; i < 7; i++) {
+		int len;
+		gchar *buffer;
+		
+		len = GetLocaleInfo(LOCALE_USER_DEFAULT,
+				    LOCALE_SABBREVDAYNAME1+i,
+				    NULL,
+				    0);
+		buffer = g_malloc(len);
+
+		GetLocaleInfo(LOCALE_USER_DEFAULT,
+			      LOCALE_SABBREVDAYNAME1+i,
+			      buffer,
+			      len);
+		short_day_names[i] = g_locale_to_utf8(buffer, -1, NULL, NULL,
+						      NULL);
+		
+		len = GetLocaleInfo(LOCALE_USER_DEFAULT,
+				    LOCALE_SDAYNAME1+i,
+				    NULL,
+				    0);
+		buffer = g_realloc(buffer, len);
+
+		GetLocaleInfo(LOCALE_USER_DEFAULT,
+			      LOCALE_SABBREVDAYNAME1+i,
+			      buffer,
+			      len);
+		day_names[i] = g_locale_to_utf8(buffer, -1, NULL, NULL,
+						NULL);
+		g_free(buffer);
+	}
+#endif
 }
 
 static gint

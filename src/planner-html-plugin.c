@@ -23,10 +23,10 @@
 #include <string.h>
 #include <gtk/gtk.h>
 #include <glib/gi18n.h>
-#include <libgnome/gnome-url.h>
 
 #include "planner-window.h"
 #include "planner-plugin.h"
+#include "planner-util.h"
 
 struct _PlannerPluginPriv {
 	PlannerWindow *main_window;
@@ -56,11 +56,7 @@ html_plugin_show_url (PlannerPlugin *plugin, const char *path)
 	gchar *url;
 
 	url = g_filename_to_uri (path, NULL, NULL);
-
-	if (!gnome_url_show (url, NULL)) {
-		/*g_warning ("Unable to follow link %s\n", link);*/
-	}
-
+	planner_util_show_url (url, NULL);
 	g_free (url);
 }
 

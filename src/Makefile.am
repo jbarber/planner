@@ -104,6 +104,8 @@ planner_SOURCES = 			\
 	planner-task-dialog.h		\
 	planner-task-input-dialog.c	\
 	planner-task-input-dialog.h	\
+	planner-util.c			\
+	planner-util.h			\
 	planner-view.c			\
 	planner-view.h			\
 	planner-window.c		\

@@ -25,14 +25,10 @@
 #include <string.h>
 #include <math.h>
 #include <locale.h>
-//#include <sys/types.h>
-//#include <sys/stat.h>
 #include <glib/gi18n.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
 #include <gtk/gtk.h>
 #include <glade/glade.h>
-#include <libgnome/gnome-help.h>
-#include <libgnome/gnome-url.h>
 #include <libgnomeprintui/gnome-print-dialog.h>
 #include <libgnomeprintui/gnome-print-job-preview.h>
 #include <libplanner/mrp-error.h>
@@ -55,6 +51,7 @@
 #include "planner-task-view.h"
 #include "planner-resource-view.h"
 #include "planner-usage-view.h"
+#include "planner-util.h"
 
 #define d(x)
 
@@ -1126,7 +1123,7 @@ window_help_cb (GtkAction *action,
 	GError    *error = NULL;
 	GtkWidget *dialog;
 	
-	if (!gnome_help_display ("planner.xml", NULL, &error)) {
+	if (!planner_util_show_help (&error)) {
 		dialog = gtk_message_dialog_new (GTK_WINDOW (data),
 						 GTK_DIALOG_MODAL |
 						 GTK_DIALOG_DESTROY_WITH_PARENT,
@@ -1148,7 +1145,7 @@ handle_links (GtkAboutDialog *about,
 {
 	gchar *newlink;
 
-	switch (GPOINTER_TO_INT (data)){
+	switch (GPOINTER_TO_INT (data)) {
 	case LINK_TYPE_EMAIL:
 		newlink = g_strdup_printf ("mailto:%s", link);
 		break;
@@ -1159,10 +1156,7 @@ handle_links (GtkAboutDialog *about,
 		g_assert_not_reached ();
 	}
 	
-	if (!gnome_url_show (newlink, NULL)) {
-		/*g_warning ("Unable to follow link %s\n", link);*/
-	}
-	
+	planner_util_show_url (newlink, NULL);
 	g_free (newlink);
 }
 
@@ -1205,7 +1199,9 @@ window_about_cb (GtkAction *action,
 			       "comments", _("A Project Management application for the GNOME desktop"),
 			       "authors", authors,
 			       "documenters", documenters,
-			       "translator-credits", strcmp (translator_credits, _("translator-credits")) != 0 ? _(translator_credits) : NULL,
+			       "translator-credits",
+			       strcmp (translator_credits,
+				       _("translator-credits")) != 0 ? _(translator_credits) : NULL,
 			       "website", "http://www.imendio.com/projects/planner/",
 			       "website-label", _("The Planner Homepage"),
 			       "logo", pixbuf,
@@ -1222,66 +1218,6 @@ window_delete_event_cb (PlannerWindow *window,
 {
 	planner_window_close (window);
 	return TRUE;
-}
-
-/* Stolen from GLib 2.6: g_uri_list_extract_uris (const gchar *uri_list) */
-static gchar **
-uri_list_extract_uris (const gchar *uri_list)
-{
-  GSList *uris, *u;
-  const gchar *p, *q;
-  gchar **result;
-  gint n_uris = 0;
-
-  uris = NULL;
-
-  p = uri_list;
-
-  /* We don't actually try to validate the URI according to RFC
-   * 2396, or even check for allowed characters - we just ignore
-   * comments and trim whitespace off the ends.  We also
-   * allow LF delimination as well as the specified CRLF.
-   *
-   * We do allow comments like specified in RFC 2483.
-   */
-  while (p)
-    {
-      if (*p != '#')
-	{
-	  while (g_ascii_isspace (*p))
-	    p++;
-
-	  q = p;
-	  while (*q && (*q != '\n') && (*q != '\r'))
-	    q++;
-
-	  if (q > p)
-	    {
-	      q--;
-	      while (q > p && g_ascii_isspace (*q))
-		q--;
-
-	      if (q > p)
-		{
-		  uris = g_slist_prepend (uris, g_strndup (p, q - p + 1));
-		  n_uris++;
-		}
-	    }
-	}
-      p = strchr (p, '\n');
-      if (p)
-	p++;
-    }
-
-  result = g_new (gchar *, n_uris + 1);
-
-  result[n_uris--] = NULL;
-  for (u = uris; u; u = u->next)
-    result[n_uris--] = u->data;
-
-  g_slist_free (uris);
-
-  return result;
 }
 
 static void
@@ -1306,7 +1242,7 @@ window_drag_data_received_cb (GtkWidget        *widget,
 		return;
 	}
 	
-	uris = uri_list_extract_uris (data->data);
+	uris = g_uri_list_extract_uris (data->data);
 
 	i = 0;
 	while (uris[i]) {

@@ -33,8 +33,8 @@ planner_conf_dir_exists (const gchar *dir, GError **error)
 	gboolean     ret_val;
 	HKEY hKey;
     
-	ret_val = RegOpenKeyEx(HKEY_CURRENT_USER, WIN32_KEYNAME, 0, KEY_READ, &hKey);
-	RegCloseKey(hKey);
+	ret_val = RegOpenKeyEx (HKEY_CURRENT_USER, WIN32_KEYNAME, 0, KEY_READ, &hKey);
+	RegCloseKey (hKey);
 	
 	return ret_val == ERROR_SUCCESS;
 }
@@ -45,16 +45,16 @@ static gboolean planner_conf_create()
 	DWORD disp = 0;
 	HKEY hKey;
 	
-	ret_val = RegOpenKeyEx(HKEY_CURRENT_USER, WIN32_KEYNAME, 0, KEY_READ, &hKey);
-	RegCloseKey(hKey);
+	ret_val = RegOpenKeyEx (HKEY_CURRENT_USER, WIN32_KEYNAME, 0, KEY_READ, &hKey);
+	RegCloseKey (hKey);
 	if(ret_val == ERROR_SUCCESS)
 		return TRUE;
 
-	ret_val = RegCreateKeyEx(HKEY_CURRENT_USER, WIN32_KEYNAME, 0, "",
+	ret_val = RegCreateKeyEx (HKEY_CURRENT_USER, WIN32_KEYNAME, 0, "",
 				 REG_OPTION_NON_VOLATILE, KEY_WRITE, NULL,
 				 &hKey,
 				 &disp);
-	RegCloseKey(hKey);
+	RegCloseKey (hKey);
 
 	return ret_val == ERROR_SUCCESS;
 }
@@ -67,14 +67,14 @@ planner_conf_get_bool (const gchar *key, GError **error)
 	glong keyLen;
 	HKEY hKey;
 	
-	RegOpenKeyEx(HKEY_CURRENT_USER, WIN32_KEYNAME, 0, KEY_READ, &hKey);
-	if (RegQueryValueEx(hKey, key, 0, NULL, NULL,  &keyLen) == ERROR_SUCCESS) {
-		keyBuffer = g_malloc(keyLen + 1);
-		RegQueryValueEx(hKey, key, 0, NULL, keyBuffer,  &keyLen);
-		RegCloseKey(hKey);
+	RegOpenKeyEx (HKEY_CURRENT_USER, WIN32_KEYNAME, 0, KEY_READ, &hKey);
+	if (RegQueryValueEx (hKey, key, 0, NULL, NULL,  &keyLen) == ERROR_SUCCESS) {
+		keyBuffer = g_malloc (keyLen + 1);
+		RegQueryValueEx (hKey, key, 0, NULL, keyBuffer,  &keyLen);
+		RegCloseKey (hKey);
 
-		ret_val = g_ascii_strncasecmp(keyBuffer, "TRUE", 4) == 0 ? TRUE : FALSE;
-		g_free(keyBuffer);
+		ret_val = g_ascii_strncasecmp (keyBuffer, "TRUE", 4) == 0 ? TRUE : FALSE;
+		g_free (keyBuffer);
 	}
 
 	return ret_val;
@@ -87,11 +87,11 @@ planner_conf_get_string (const gchar *key, GError **error)
 	glong keyLen;
 	HKEY hKey;
 
-	RegOpenKeyEx(HKEY_CURRENT_USER, WIN32_KEYNAME, 0, KEY_READ, &hKey);
-	if(RegQueryValueEx(hKey, key, 0, NULL, NULL,  &keyLen) == ERROR_SUCCESS) {
-		keyBuffer = g_malloc(keyLen + 1);
-		RegQueryValueEx(hKey, key, 0, NULL, keyBuffer,  &keyLen);
-		RegCloseKey(hKey);
+	RegOpenKeyEx (HKEY_CURRENT_USER, WIN32_KEYNAME, 0, KEY_READ, &hKey);
+	if(RegQueryValueEx (hKey, key, 0, NULL, NULL,  &keyLen) == ERROR_SUCCESS) {
+		keyBuffer = g_malloc (keyLen + 1);
+		RegQueryValueEx (hKey, key, 0, NULL, keyBuffer,  &keyLen);
+		RegCloseKey (hKey);
 	}
 
 	return keyBuffer;
@@ -105,16 +105,16 @@ planner_conf_get_int (const gchar *key, GError **error)
 	glong keyLen;
 	HKEY hKey;
 
-	RegOpenKeyEx(HKEY_CURRENT_USER, WIN32_KEYNAME, 0, KEY_READ, &hKey);
-	if(RegQueryValueEx(hKey, key, 0, NULL, NULL,  &keyLen) == ERROR_SUCCESS) {
-		keyBuffer = g_malloc(keyLen + 1);
-		RegQueryValueEx(hKey, key, 0, NULL, keyBuffer,  &keyLen);
+	RegOpenKeyEx (HKEY_CURRENT_USER, WIN32_KEYNAME, 0, KEY_READ, &hKey);
+	if(RegQueryValueEx (hKey, key, 0, NULL, NULL,  &keyLen) == ERROR_SUCCESS) {
+		keyBuffer = g_malloc (keyLen + 1);
+		RegQueryValueEx (hKey, key, 0, NULL, keyBuffer,  &keyLen);
 		
-		ret_val = g_ascii_strtoull(keyBuffer, NULL, 10);
+		ret_val = g_ascii_strtoull (keyBuffer, NULL, 10);
 		
-		g_free(keyBuffer);
+		g_free (keyBuffer);
 		
-		RegCloseKey(hKey);
+		RegCloseKey (hKey);
 	}
 
 	return ret_val;
@@ -124,16 +124,16 @@ gboolean
 planner_conf_set_bool (const gchar *key, gboolean value, GError **error)
 {
 	gboolean     ret_val = 0;
-
 	gchar keyBuffer[10];
 	gint keyType = REG_SZ;
 	HKEY hKey;
-	g_return_if_fail(planner_conf_create());
-	RegOpenKeyEx(HKEY_CURRENT_USER, WIN32_KEYNAME, 0, KEY_WRITE, &hKey);
+	g_return_val_if_fail (planner_conf_create (), FALSE);
 
-	g_stpcpy(keyBuffer, value == TRUE ? "TRUE" : "FALSE");
-	ret_val = RegSetValueEx(hKey, key, 0, keyType, keyBuffer,  sizeof(keyBuffer));
-	RegCloseKey(hKey);
+	RegOpenKeyEx (HKEY_CURRENT_USER, WIN32_KEYNAME, 0, KEY_WRITE, &hKey);
+
+	g_stpcpy (keyBuffer, value == TRUE ? "TRUE" : "FALSE");
+	ret_val = RegSetValueEx (hKey, key, 0, keyType, keyBuffer,  sizeof(keyBuffer));
+	RegCloseKey (hKey);
 
 	return ret_val;
 }
@@ -142,15 +142,15 @@ gboolean
 planner_conf_set_string (const gchar *key, const gchar *value, GError **error)
 {
 	gboolean     ret_val = 0;
-
 	gint keyType = REG_SZ;
 	HKEY hKey;
-	g_return_if_fail(planner_conf_create());
-	RegOpenKeyEx(HKEY_CURRENT_USER, WIN32_KEYNAME, 0, KEY_WRITE, &hKey);
+	g_return_val_if_fail (planner_conf_create (), FALSE);
 
-	ret_val = RegSetValueEx(hKey, key, 0, keyType, value,  strlen(value) + 1);
+	RegOpenKeyEx (HKEY_CURRENT_USER, WIN32_KEYNAME, 0, KEY_WRITE, &hKey);
 
-	RegCloseKey(hKey);
+	ret_val = RegSetValueEx (hKey, key, 0, keyType, value,  strlen(value) + 1);
+
+	RegCloseKey (hKey);
 
 	return ret_val;
 }
@@ -162,14 +162,13 @@ planner_conf_set_int (const gchar *key, gint value, GError **error)
 	gint keyType = REG_SZ;
 	gchar keyBuffer[20];
 	HKEY hKey;
-	g_return_if_fail(planner_conf_create());
-	RegOpenKeyEx(HKEY_CURRENT_USER, WIN32_KEYNAME, 0, KEY_WRITE, &hKey);
+	g_return_val_if_fail (planner_conf_create (), FALSE);
+	RegOpenKeyEx (HKEY_CURRENT_USER, WIN32_KEYNAME, 0, KEY_WRITE, &hKey);
 
-	g_snprintf(keyBuffer, sizeof(keyBuffer), "%d", value);
-	ret_val = RegSetValueEx(hKey, key, 0, keyType, keyBuffer,  strlen(keyBuffer) + 1);
+	g_snprintf (keyBuffer, sizeof(keyBuffer), "%d", value);
+	ret_val = RegSetValueEx (hKey, key, 0, keyType, keyBuffer,  strlen(keyBuffer) + 1);
 
-	RegCloseKey(hKey);
-
+	RegCloseKey (hKey);
 
 	return ret_val;
 }

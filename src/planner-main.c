@@ -26,8 +26,10 @@
 #include <gtk/gtkwidget.h>
 #include <gtk/gtkmain.h>
 #include <glib/gi18n.h>
+#ifdef WITH_GNOME
 #include <libgnome/gnome-program.h>
 #include <libgnomeui/gnome-ui-init.h>
+#endif
 #include "planner-application.h"
 #include "planner-window.h"
 
@@ -39,11 +41,13 @@ int
 main (int argc, char **argv)
 {
         GtkWidget       *main_window;
+#ifdef WITH_GNOME
         GnomeProgram    *program;
+#endif
 	gchar           *geometry;
 	GOptionContext  *context;
 	gint             i;
-	GOptionEntry     options[] = {
+	GOptionEntry     entries[] = {
 		{ "geometry", 'g', 0, G_OPTION_ARG_STRING, &geometry,
 		  N_("Create the initial window with the given geometry."), N_("GEOMETRY")
 		},
@@ -59,17 +63,19 @@ main (int argc, char **argv)
 	g_set_application_name ("Planner");
 
 	context = g_option_context_new (_("[FILE...]"));
-	g_option_context_add_main_entries (context, options, GETTEXT_PACKAGE);
+	g_option_context_add_main_entries (context, entries, GETTEXT_PACKAGE);
 	g_option_context_add_group (context, gtk_get_option_group (TRUE));
 	g_option_context_parse (context, &argc, &argv, NULL);
 	g_option_context_free (context);
 
+#ifdef WITH_GNOME
 	program = gnome_program_init (PACKAGE, VERSION,
 				      LIBGNOMEUI_MODULE,
 				      argc, argv,
 				      GNOME_PROGRAM_STANDARD_PROPERTIES,
 				      GNOME_PARAM_HUMAN_READABLE_NAME, "Planner",
 				      NULL);
+#endif
 
 	gtk_window_set_default_icon_from_file (DATADIR "/pixmaps/gnome-planner.png", NULL);
 

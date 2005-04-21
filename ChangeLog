@@ -1,3 +1,19 @@
+2005-04-21  Francisco Moraes  <fmoraes@nc.rr.com>
+
+	* configure.in:
+	* libplanner/mrp-time.c:
+	* src/Makefile.am:
+	* src/planner-conf-win32.c:
+	* src/planner-html-plugin.c: (html_plugin_show_url):
+	* src/planner-main.c: (main):
+	* src/planner-util.c:
+	* src/planner-util-win32.c: More windows patches.
+
+2005-04-21  Richard Hult  <richard@imendio.com>
+
+	* src/planner-window.c: Remove copy of URI drag and drop list code
+	from glib now that we depend on 2.6.
+
 2005-04-21  Richard Hult  <richard@imendio.com>
 
 	* src/eel-canvas-rect.c: Remove gdkx.h include.
