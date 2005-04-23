@@ -21,11 +21,10 @@ images_DATA = 				\
 mimeiconsdir = $(datadir)/icons/hicolor/48x48/mimetypes
 mimeicons_DATA = gnome-mime-application-x-planner.png
 
-# Install the mime icon for the old system as well
-#pixmapdir = $(datadir)/pixmaps
-#pixmap_DATA = gnome-planner.png gnome-mime-application-x-planner.png
-#$(pixmap_DATA)			
+pixmapdir = $(datadir)/pixmaps
+pixmap_DATA = gnome-planner.png
 
 EXTRA_DIST = 				\
 	$(images_DATA)			\
 	$(mimeicons_DATA)
+
