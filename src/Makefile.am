@@ -8,12 +8,7 @@ INCLUDES = 							\
 	-DPREFIX=\""$(prefix)"\"				\
 	-DSYSCONFDIR=\""$(sysconfdir)"\"			\
 	-DLIBDIR=\""$(libdir)"\"				\
-	-DDATADIR=\""$(datadir)"\"				\
-	-DIMAGEDIR=\""$(datadir)/pixmaps/planner"\"		\
-	-DGLADEDIR=\""$(datadir)/planner/glade"\"		\
-	-DPLUGINDIR=\""$(libdir)/planner/plugins"\"		\
-	-DSTYLESHEETDIR=\""$(datadir)/planner/stylesheets"\"	\
-	-DDTDDIR=\""$(datadir)/planner/dtd"\"
+	-DDATADIR=\""$(datadir)"\"
 
 if HAVE_PYTHON_PLUGIN
 INCLUDES += $(PYTHON_INCLUDES)

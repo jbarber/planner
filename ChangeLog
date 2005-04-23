@@ -1,3 +1,27 @@
+2005-04-23  Richard Hult  <richard@imendio.com>
+
+	* configure.in:
+	* data/images/Makefile.am:
+	* data/mime/Makefile.am: Remove some old pre-GNOME 2.10 cruft.
+
+	* libplanner/Makefile.am:
+	* src/Makefile.am:
+	* libplanner/mrp-paths.h:
+	* libplanner/mrp-paths-gnome.c:
+	* libplanner/mrp-paths-win32.c: 
+	* libplanner/*.[c]:
+	* src/*.[c]: Implement path handling for the data files in a cross
+	platform way, based on patch from Jani Tiainen.
+
+	* src/planner-gantt-view.c:
+	* src/planner-task-popup.c:
+	* src/planner-task-view.c:
+	* src/planner-usage-view.c:
+	* src/planner-resource-view.c:
+	* src/planner-window.c: (window_add_stock_icon),
+	(window_add_stock_icons), (window_populate): Add all the stock
+	icons we're using once, instead of in all the views etc.
+
 2005-04-21  Francisco Moraes  <fmoraes@nc.rr.com>
 
 	* configure.in:

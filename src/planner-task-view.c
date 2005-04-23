@@ -28,6 +28,7 @@
 #include <gtk/gtk.h>
 #include <libplanner/mrp-task.h>
 #include "planner-task-view.h"
+#include "libplanner/mrp-paths.h"
 #include "planner-conf.h"
 #include "planner-cell-renderer-date.h"
 #include "planner-task-dialog.h"
@@ -195,6 +196,7 @@ task_view_activate (PlannerView *view)
 {
 	PlannerTaskViewPriv *priv;
 	gboolean             show_critical;
+	gchar           *filename;
 
 	priv = PLANNER_TASK_VIEW (view)->priv;
 	
@@ -209,10 +211,11 @@ task_view_activate (PlannerView *view)
 					     view);
 
 	gtk_ui_manager_insert_action_group (priv->ui_manager, priv->actions, 0);
+	filename = mrp_paths_get_ui_dir ("task-view.ui");
 	priv->merged_id = gtk_ui_manager_add_ui_from_file (priv->ui_manager,
-							   DATADIR "/planner/ui/task-view.ui",
+							   filename,
 							   NULL);
-
+	g_free (filename);
 	gtk_ui_manager_ensure_update (priv->ui_manager);
 
 	/* Set the initial UI state. */
@@ -264,7 +267,13 @@ task_view_get_menu_label (PlannerView *view)
 static const gchar *
 task_view_get_icon (PlannerView *view)
 {
-	return IMAGEDIR "/tasks.png";
+	static gchar *filename = NULL;
+	
+	if (!filename) {
+		filename = mrp_paths_get_image_dir ("tasks.png");
+	}
+	
+	return filename;
 }
 
 static const gchar *

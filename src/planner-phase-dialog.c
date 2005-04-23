@@ -27,6 +27,7 @@
 #include <glade/glade.h>
 #include <gtk/gtk.h>
 #include <libplanner/mrp-project.h>
+#include "libplanner/mrp-paths.h"
 #include "planner-phase-dialog.h"
 
 #define RESPONSE_ADD    1
@@ -176,12 +177,16 @@ planner_phase_dialog_new (PlannerWindow *window)
 	GladeXML         *glade;
 	GtkWidget        *dialog;
 	GtkTreeSelection *selection;	
+	gchar            *filename;
 
 	g_return_val_if_fail (PLANNER_IS_WINDOW (window), NULL);
 	
-	glade = glade_xml_new (GLADEDIR "/project-properties.glade",
+	filename = mrp_paths_get_glade_dir ("project-properties.glade");
+	glade = glade_xml_new (filename,
 			       "phase_dialog",
 			       GETTEXT_PACKAGE);
+	g_free (filename);
+	
 	if (!glade) {
 		g_warning ("Could not create phase dialog.");
 		return NULL;
@@ -422,10 +427,13 @@ phase_dialog_new_dialog_run (DialogData *data)
 	GtkWidget   *dialog;
 	GtkWidget   *entry;
 	const gchar *name;
+	gchar       *filename;
 	
-	glade = glade_xml_new (GLADEDIR "/project-properties.glade",
+	filename = mrp_paths_get_glade_dir ("project-properties.glade");
+	glade = glade_xml_new (filename,
 			       "new_phase_dialog",
 			       GETTEXT_PACKAGE);
+	g_free (filename);
 	
 	dialog = glade_xml_get_widget (glade, "new_phase_dialog");
 

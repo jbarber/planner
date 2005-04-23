@@ -24,6 +24,7 @@
 #include <gtk/gtk.h>
 #include <glib/gi18n.h>
 
+#include "libplanner/mrp-paths.h"
 #include "planner-window.h"
 #include "planner-plugin.h"
 #include "planner-util.h"
@@ -41,12 +42,12 @@ void        plugin_exit        (PlannerPlugin *plugin);
 
 
 
-static GtkActionEntry action_entries[] = {
+static const GtkActionEntry action_entries[] = {
 	{ "HTML Export", NULL,
 	  N_("HTML"), NULL,
 	  N_("Export project to HTML"),
 	  G_CALLBACK (html_plugin_export)
-	},
+	}
 };
 
 
@@ -210,6 +211,7 @@ plugin_init (PlannerPlugin *plugin,
 	PlannerPluginPriv *priv;
 	GtkUIManager      *ui;
 	GtkActionGroup    *actions;
+	gchar             *filename;
 	
 	priv = g_new0 (PlannerPluginPriv, 1);
 
@@ -226,7 +228,10 @@ plugin_init (PlannerPlugin *plugin,
 
 	ui = planner_window_get_ui_manager (main_window);
 	gtk_ui_manager_insert_action_group (ui, actions, 0);
-	gtk_ui_manager_add_ui_from_file (ui, DATADIR "/planner/ui/html-plugin.ui", NULL);
+
+	filename = mrp_paths_get_ui_dir ("html-plugin.ui");
+	gtk_ui_manager_add_ui_from_file (ui, filename, NULL);
+	g_free (filename);
 
 	gtk_ui_manager_ensure_update (ui);
 }

@@ -31,6 +31,7 @@
 #include <gtk/gtk.h>
 #include <libplanner/mrp-object.h>
 #include <libplanner/mrp-project.h>
+#include "libplanner/mrp-paths.h"
 #include "planner-cell-renderer-list.h"
 #include "planner-assignment-model.h"
 #include "planner-predecessor-model.h"
@@ -1848,12 +1849,13 @@ task_dialog_predecessor_dialog_new (MrpTask       *task,
 	GtkWidget  *dialog;
 	GtkWidget  *w;
 	GList      *tasks;
+	gchar      *filename;
 	
 	mrp_object_get (task, "project", &project, NULL);
 	
-	glade = glade_xml_new (GLADEDIR "/add-predecessor.glade",
-			       NULL,
-			       NULL);
+	filename = mrp_paths_get_glade_dir ("add-predecessor.glade");
+	glade = glade_xml_new (filename, NULL, NULL);
+	g_free (filename);
 
 	dialog = glade_xml_get_widget (glade, "add_predecessor_dialog");
 	
@@ -2836,6 +2838,7 @@ planner_task_dialog_new (PlannerWindow *window,
 	GtkSizeGroup *size_group;
 	MrpProject   *project;
 	MrpCalendar  *calendar;
+	gchar        *filename;
 	
 	g_return_val_if_fail (MRP_IS_TASK (task), NULL);
 
@@ -2849,9 +2852,10 @@ planner_task_dialog_new (PlannerWindow *window,
 		return dialog;
 	}
 
-	glade = glade_xml_new (GLADEDIR "/task-dialog.glade",
-			       NULL,
-			       GETTEXT_PACKAGE);
+	filename = mrp_paths_get_glade_dir ("task-dialog.glade");
+	glade = glade_xml_new (filename, NULL, NULL);
+	g_free (filename);
+
 	if (!glade) {
 		g_warning ("Could not create task dialog.");
 		return NULL;

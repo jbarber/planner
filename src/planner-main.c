@@ -30,6 +30,7 @@
 #include <libgnome/gnome-program.h>
 #include <libgnomeui/gnome-ui-init.h>
 #endif
+#include "libplanner/mrp-paths.h"
 #include "planner-application.h"
 #include "planner-window.h"
 
@@ -47,12 +48,13 @@ main (int argc, char **argv)
 	gchar           *geometry;
 	GOptionContext  *context;
 	gint             i;
-	GOptionEntry     entries[] = {
+	const GOptionEntry     entries[] = {
 		{ "geometry", 'g', 0, G_OPTION_ARG_STRING, &geometry,
 		  N_("Create the initial window with the given geometry."), N_("GEOMETRY")
 		},
 		{ NULL }
 	};
+	gchar           *filename;
 	
 	bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);  
         bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
@@ -77,7 +79,9 @@ main (int argc, char **argv)
 				      NULL);
 #endif
 
-	gtk_window_set_default_icon_from_file (DATADIR "/pixmaps/gnome-planner.png", NULL);
+	filename = mrp_paths_get_image_dir ("gnome-planner.png");
+	gtk_window_set_default_icon_from_file (filename, NULL);
+	g_free (filename);
 
 	application = planner_application_new ();
 

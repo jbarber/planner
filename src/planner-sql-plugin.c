@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
- * Copyright (C) 2003-2004 Imendio AB
+ * Copyright (C) 2003-2005 Imendio AB
  * Copyright (C) 2003 CodeFactory AB
  * Copyright (C) 2003 Richard Hult <richard@imendio.com>
  * Copyright (C) 2003 Mikael Hallendal <micke@imendio.com>
@@ -31,6 +31,8 @@
 #include <glade/glade.h>
 #include <gtk/gtk.h>
 #include <libgda/libgda.h>
+#include <libplanner/mrp-paths.h>
+
 #include "planner-conf.h"
 #include "planner-window.h"
 #include "planner-application.h"
@@ -55,34 +57,29 @@ typedef struct {
 	GtkWidget *open_dialog;
 } SQLPluginPriv; 
 
-static gint     sql_plugin_retrieve_project_id (PlannerPlugin      *plugin,
-						gchar              *server,
-						gchar              *port,
-						gchar              *database,
-						gchar              *login,
-						gchar              *password);
-static gboolean sql_plugin_retrieve_db_values  (PlannerPlugin      *plugin,
-						const gchar        *title,
-						gchar             **server,
-						gchar             **port,
-						gchar             **db,
-						gchar             **user,
-						gchar             **password);
-static void     sql_plugin_open                (GtkAction          *action,
-						gpointer            user_data);
-static void     sql_plugin_save                (GtkAction          *action,
-						gpointer            user_data);
-static GdaDataModel * 
-                sql_execute_query              (GdaConnection      *con, 
-					        gchar              *query);
-
-/* FIXME: The same in mrp-sql.c. Create a SQL API in libplanner? */ 
-static const gchar * sql_get_last_error        (GdaConnection      *connection);
-
-void            plugin_init                    (PlannerPlugin      *plugin,
-						PlannerWindow      *main_window);
-void            plugin_exit                    (void);
-
+static gint          sql_plugin_retrieve_project_id (PlannerPlugin  *plugin,
+						     gchar          *server,
+						     gchar          *port,
+						     gchar          *database,
+						     gchar          *login,
+						     gchar          *password);
+static gboolean      sql_plugin_retrieve_db_values  (PlannerPlugin  *plugin,
+						     const gchar    *title,
+						     gchar         **server,
+						     gchar         **port,
+						     gchar         **db,
+						     gchar         **user,
+						     gchar         **password);
+static void          sql_plugin_open                (GtkAction      *action,
+						     gpointer        user_data);
+static void          sql_plugin_save                (GtkAction      *action,
+						     gpointer        user_data);
+static GdaDataModel *sql_execute_query              (GdaConnection  *con,
+						     gchar          *query);
+static const gchar * sql_get_last_error             (GdaConnection  *connection);
+void                 plugin_init                    (PlannerPlugin  *plugin,
+						     PlannerWindow  *main_window);
+void                 plugin_exit                    (void);
 
 
 enum {
@@ -92,13 +89,14 @@ enum {
 	COL_REVISION
 };
 
-static GtkActionEntry entries[] = {
-	{ "Open",  NULL,  N_("Open from Database..."), NULL, N_("Open a project from a database"), G_CALLBACK (sql_plugin_open) },
-	{ "Save",  NULL,  N_("Save to Database"), NULL, N_("Save the current project to a database"), G_CALLBACK (sql_plugin_save) },
+static const GtkActionEntry entries[] = {
+	{ "Open",  NULL,  N_("Open from Database..."),
+	  NULL, N_("Open a project from a database"),
+	  G_CALLBACK (sql_plugin_open) },
+	{ "Save",  NULL,  N_("Save to Database"),
+	  NULL, N_("Save the current project to a database"),
+	  G_CALLBACK (sql_plugin_save) }
 };
-
-static guint n_entries = G_N_ELEMENTS (entries);
-
 
 /**
  * Helper to execute a SQL query using GDA
@@ -710,6 +708,7 @@ sql_plugin_retrieve_project_id (PlannerPlugin *plugin,
 	gchar             *db_txt;
 	const gchar       *dsn_name = "planner-auto";
 	const gchar       *provider = "PostgreSQL";
+	gchar             *filename;
 
 	db_txt = g_strdup_printf ("HOST=%s;DATABASE=%s",server,database);
 	gda_config_save_data_source (dsn_name, 
@@ -750,7 +749,10 @@ sql_plugin_retrieve_project_id (PlannerPlugin *plugin,
 		return -1;
 	}
 
-	gui = glade_xml_new (GLADEDIR"/sql.glade", "select_dialog", NULL);
+	filename = mrp_paths_get_glade_dir ("sql.glade");
+	gui = glade_xml_new (filename, "select_dialog", NULL);
+	g_free (filename);
+	
 	dialog = glade_xml_get_widget (gui, "select_dialog");
 	treeview = glade_xml_get_widget (gui, "project_treeview");
 	ok_button = glade_xml_get_widget (gui, "ok_button");
@@ -883,6 +885,8 @@ sql_plugin_retrieve_db_values (PlannerPlugin  *plugin,
 			       gchar         **login,
 			       gchar         **password)
 {
+	PlannerApplication *application;
+	gchar              *filename;
 	GladeXML           *gui;
 	GtkWidget          *dialog;
 	gchar              *str;
@@ -892,11 +896,13 @@ sql_plugin_retrieve_db_values (PlannerPlugin  *plugin,
 	GtkWidget          *user_entry;
 	GtkWidget          *password_entry;
 	gboolean            ret;
-	PlannerApplication *application;
 
 	application = planner_window_get_application (plugin->main_window);
 	
-	gui = glade_xml_new (GLADEDIR"/sql.glade", "open_dialog" , NULL);
+	filename = mrp_paths_get_glade_dir ("sql.glade");
+	gui = glade_xml_new (filename, "open_dialog" , NULL);
+	g_free (filename);
+
 	dialog = glade_xml_get_widget (gui, "open_dialog");
 
 	gtk_window_set_title (GTK_WINDOW (dialog), title);
@@ -1184,7 +1190,7 @@ plugin_init (PlannerPlugin *plugin,
 	GtkActionGroup *actions;
 	GtkUIManager   *ui;
 	gint            i = -1;
-	GError         *error = NULL;
+	gchar          *filename;
 	
 	priv = g_new0 (SQLPluginPriv, 1);
 
@@ -1203,16 +1209,17 @@ plugin_init (PlannerPlugin *plugin,
 	actions = gtk_action_group_new ("SQL plugin actions");
 	gtk_action_group_set_translation_domain (actions, GETTEXT_PACKAGE);
 
-	gtk_action_group_add_actions (actions, entries, n_entries, plugin);
+	gtk_action_group_add_actions (actions,
+				      entries,
+				      G_N_ELEMENTS (entries),
+				      plugin);
 
 	ui = planner_window_get_ui_manager (main_window);
 	gtk_ui_manager_insert_action_group (ui, actions, 0);
 
-	if (!gtk_ui_manager_add_ui_from_file (ui, DATADIR"/planner/ui/sql-plugin.ui", &error)) {
-		g_message ("Building menu failed: %s", error->message);
-		g_message ("Couldn't load: %s",DATADIR"/planner/ui/sql-plugin.ui");
-		g_error_free (error);
-	}
+	filename = mrp_paths_get_ui_dir ("sql-plugin.ui");
+	gtk_ui_manager_add_ui_from_file (ui, filename, NULL);
+	g_free (filename);
 	
 	gtk_ui_manager_ensure_update (ui);
 }

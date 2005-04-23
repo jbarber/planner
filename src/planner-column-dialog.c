@@ -22,6 +22,7 @@
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
 #include <glade/glade.h>
+#include "libplanner/mrp-paths.h"
 #include "planner-column-dialog.h"
 
 typedef struct {
@@ -476,8 +477,12 @@ planner_column_dialog_show (PlannerWindow *window,
 	DialogData *data;
 	GladeXML   *glade;
 	GtkWidget  *close_button;
+	gchar      *filename;
 	
-	glade = glade_xml_new (GLADEDIR "/column-dialog.glade", NULL, NULL);
+	filename = mrp_paths_get_glade_dir ("column-dialog.glade");
+	glade = glade_xml_new (filename, NULL, NULL);
+	g_free (filename);
+	
 	if (!glade) {
 		g_warning ("Could not create column dialog.");
 		return;

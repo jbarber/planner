@@ -24,6 +24,7 @@
 #include <config.h>
 #include <string.h>
 #include <glib/gi18n.h>
+#include "libplanner/mrp-paths.h"
 #include "mrp-file-module.h"
 
 static MrpFileModule *
@@ -53,10 +54,14 @@ mrp_file_module_load_all (MrpApplication *app)
 	GDir*          dir;
 	const gchar   *name;
 	MrpFileModule *module;
+	gchar         *path;
 
-	dir = g_dir_open (MRP_FILE_MODULES_DIR, 0, NULL);
+	path = mrp_paths_get_file_modules_dir (NULL);
+	
+	dir = g_dir_open (path, 0, NULL);
 
-	if (dir == NULL) {		
+	if (dir == NULL) {
+		g_free (path);
 		return;
 	}
 
@@ -64,7 +69,7 @@ mrp_file_module_load_all (MrpApplication *app)
 		if (g_str_has_suffix (name, G_MODULE_SUFFIX)) {
 			gchar *plugin;
 			
-			plugin = g_build_filename (MRP_FILE_MODULES_DIR,
+			plugin = g_build_filename (path,
 						   name,
 						   NULL);
 			
@@ -72,11 +77,12 @@ mrp_file_module_load_all (MrpApplication *app)
 			if (module) {
 				mrp_file_module_init (module, app);
 			}
-
+			
 			g_free (plugin);
 		}
 	}
 
+	g_free (path);
 	g_dir_close (dir);
 }
 

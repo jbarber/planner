@@ -33,6 +33,7 @@
 #include <libgnomeprintui/gnome-print-job-preview.h>
 #include <libplanner/mrp-error.h>
 #include <libplanner/mrp-project.h>
+#include <libplanner/mrp-paths.h>
 #include <libegg/recent-files/egg-recent-view.h>
 #include <libegg/recent-files/egg-recent-view-uimanager.h>
 #include <libegg/recent-files/egg-recent-util.h>
@@ -446,6 +447,86 @@ window_add_widget (GtkUIManager  *merge,
 }
 
 static void
+window_add_stock_icon (GtkIconFactory *icon_factory,
+		       const gchar    *stock_id,
+		       const gchar    *filename)
+{
+	gchar      *path;
+	GdkPixbuf  *pixbuf;
+	GtkIconSet *icon_set;
+	
+	path = mrp_paths_get_image_dir (filename);
+	pixbuf = gdk_pixbuf_new_from_file (path, NULL);
+	icon_set = gtk_icon_set_new_from_pixbuf (pixbuf);
+	g_object_unref (pixbuf);
+	gtk_icon_factory_add (icon_factory, stock_id, icon_set);
+	g_free (path);
+}
+
+static void
+window_add_stock_icons (void)
+{
+	static GtkIconFactory *icon_factory = NULL;
+
+	if (icon_factory) {
+		return;
+	}
+	
+	icon_factory = gtk_icon_factory_new ();
+	gtk_icon_factory_add_default (icon_factory);
+
+	/* Task/Gantt icons. */
+	window_add_stock_icon (icon_factory, 
+			       "planner-stock-insert-task",
+			       "24_insert_task.png");
+	
+	window_add_stock_icon (icon_factory, 
+			       "planner-stock-remove-task",
+			       "24_remove_task.png");
+	
+	window_add_stock_icon (icon_factory, 
+			       "planner-stock-unlink-task",
+			       "24_unlink_task.png");
+	
+	window_add_stock_icon (icon_factory, 
+			       "planner-stock-link-task",
+			       "24_link_task.png");
+	
+	window_add_stock_icon (icon_factory, 
+			       "planner-stock-indent-task",
+			       "24_indent_task.png");
+	
+	window_add_stock_icon (icon_factory, 
+			       "planner-stock-unindent-task",
+			       "24_unindent_task.png");
+	
+	window_add_stock_icon (icon_factory, 
+			       "planner-stock-move-task-up",
+			       "24_task_up.png");
+	
+	window_add_stock_icon (icon_factory, 
+			       "planner-stock-move-task-down",
+			       "24_task_down.png");
+
+	/* Resource icons. */
+	window_add_stock_icon (icon_factory,
+			       "planner-stock-insert-resource",
+			       "/24_insert_resource.png");
+	
+	window_add_stock_icon (icon_factory,
+			       "planner-stock-remove-resource",
+			       "24_remove_resource.png");
+
+	window_add_stock_icon (icon_factory,
+			       "planner-stock-edit-resource",
+			       "24_edit_resource.png");
+	
+	window_add_stock_icon (icon_factory,
+			       "planner-stock-edit-groups",
+			       "24_groups.png");
+}
+
+static void
 window_populate (PlannerWindow *window)
 {
 	PlannerWindowPriv    *priv;
@@ -457,6 +538,7 @@ window_populate (PlannerWindow *window)
 	GtkRadioActionEntry  *r_entries;
 	gchar                *xml_string_tmp, *xml_string;
 	gchar                *str;
+	gchar                *filename;
 	const gchar          *xml_string_full =
 		"<ui>"
 		"<menubar name='MenuBar'>"
@@ -469,7 +551,9 @@ window_populate (PlannerWindow *window)
 		"</ui>";
 
 	priv = window->priv;
-
+	
+	window_add_stock_icons ();
+	
 	priv->ui_box = gtk_vbox_new (FALSE, 0);
 	gtk_container_add (GTK_CONTAINER (window), priv->ui_box);
 
@@ -496,9 +580,11 @@ window_populate (PlannerWindow *window)
 	gtk_window_add_accel_group (GTK_WINDOW (window),
 				    gtk_ui_manager_get_accel_group (priv->ui_manager));
 
+	filename = mrp_paths_get_ui_dir ("main-window.ui");
 	gtk_ui_manager_add_ui_from_file (priv->ui_manager,
-					 DATADIR "/planner/ui/main-window.ui",
+					 filename ,
 					 NULL);
+	g_free (filename);
 
 	g_object_set (gtk_action_group_get_action (priv->actions, "EditUndo"),
 		      "sensitive", FALSE, 
@@ -1165,6 +1251,7 @@ window_about_cb (GtkAction *action,
 		 gpointer   data)
 {
 	PlannerWindow *window;
+	gchar         *filename;
 	GdkPixbuf     *pixbuf;
 	const gchar   *authors[] = {
 		"Richard Hult <richard@imendio.com>",
@@ -1185,7 +1272,9 @@ window_about_cb (GtkAction *action,
 	
 	window = PLANNER_WINDOW (data);
 	
-	pixbuf = gdk_pixbuf_new_from_file (DATADIR "/pixmaps/gnome-planner.png", NULL);
+	filename = mrp_paths_get_image_dir ("gnome-planner.png");
+	pixbuf = gdk_pixbuf_new_from_file (filename, NULL);
+	g_free (filename);
 	
 	gtk_about_dialog_set_email_hook ((GtkAboutDialogActivateLinkFunc) handle_links, 
 					 GINT_TO_POINTER (LINK_TYPE_EMAIL), NULL);

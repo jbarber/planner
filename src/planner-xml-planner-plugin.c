@@ -25,6 +25,7 @@
 #include <glade/glade.h>
 #include <gtk/gtk.h>
 #include <glib/gi18n.h>
+#include <libplanner/mrp-paths.h>
 #include "planner-conf.h"
 #include "planner-window.h"
 #include "planner-plugin.h"
@@ -48,14 +49,12 @@ void        plugin_init               (PlannerPlugin     *plugin,
 void        plugin_exit               (PlannerPlugin     *plugin);
 
 
-static GtkActionEntry action_entries[] = {
+static const GtkActionEntry entries[] = {
 	{ "XML Planner Export", NULL,
 	  N_("Planner 0.11 Format"), NULL,
 	  N_("Export project to a file suitable for Planner 0.11"),
-	  G_CALLBACK (xml_planner_plugin_export) },
+	  G_CALLBACK (xml_planner_plugin_export) }
 };
-static guint n_action_entries = G_N_ELEMENTS (action_entries);
-
 
 static gchar *
 get_last_dir (void)
@@ -166,7 +165,7 @@ plugin_init (PlannerPlugin *plugin, PlannerWindow *main_window)
 	PlannerPluginPriv *priv;
 	GtkUIManager      *ui;
 	GtkActionGroup    *actions;
-	GError            *error = NULL;
+	gchar		  *filename;
 	
 	priv = g_new0 (PlannerPluginPriv, 1);
 	plugin->priv = priv;
@@ -176,16 +175,18 @@ plugin_init (PlannerPlugin *plugin, PlannerWindow *main_window)
 	actions = gtk_action_group_new ("XML plugin actions");
 	gtk_action_group_set_translation_domain (actions, GETTEXT_PACKAGE);
 
-	gtk_action_group_add_actions (actions, action_entries, n_action_entries, plugin);
+	gtk_action_group_add_actions (actions,
+				      entries,
+				      G_N_ELEMENTS (entries),
+				      plugin);
 
 	ui = planner_window_get_ui_manager (main_window);
 	gtk_ui_manager_insert_action_group (ui, actions, 0);
 
-	if (!gtk_ui_manager_add_ui_from_file (ui, DATADIR"/planner/ui/xml-planner-plugin.ui", &error)) {
-		g_message ("Building menu failed: %s", error->message);
-		g_message ("Couldn't load: %s",DATADIR"/planner/ui/xml-planner-plugin.ui");
-		g_error_free (error);
-	}
+	filename = mrp_paths_get_ui_dir ("xml-planner-plugin.ui");
+	gtk_ui_manager_add_ui_from_file (ui, filename, NULL);
+	g_free (filename);
+
 	gtk_ui_manager_ensure_update(ui);
 }
 

@@ -33,6 +33,7 @@
 #include <glib/gi18n.h>
 #include <libplanner/mrp-project.h>
 #include <libplanner/mrp-time.h>
+#include "libplanner/mrp-paths.h"
 #include "planner-calendar-selector.h"
 #include "planner-format.h"
 #include "planner-popup-button.h"
@@ -1325,10 +1326,13 @@ mpp_add_property_button_clicked_cb (GtkButton *button, GtkWidget *dialog)
 	GtkWidget       *w;
 	gint             response;
 	gboolean         finished = FALSE;
+	gchar           *filename;
 	
-	glade = glade_xml_new (GLADEDIR "/new-property.glade",
+	filename = mrp_paths_get_glade_dir ("new-property.glade");
+	glade = glade_xml_new (filename,
 			       NULL,
 			       NULL);
+	g_free (filename);
 		
 	add_dialog = glade_xml_get_widget (glade, "add_dialog");
 
@@ -1538,12 +1542,16 @@ planner_project_properties_new (PlannerWindow *window)
 	gchar       *name, *org, *manager;
 	MrpCalendar *calendar;
 	GtkWidget   *hbox;
+	gchar       *filename;
 	
 	g_return_val_if_fail (PLANNER_IS_WINDOW (window), NULL);
 	
-	glade = glade_xml_new (GLADEDIR "/project-properties.glade",
+	filename = mrp_paths_get_glade_dir ("project-properties.glade");
+	glade = glade_xml_new (filename,
 			       "project_properties",
 			       GETTEXT_PACKAGE);
+	g_free (filename);
+	
 	if (!glade) {
 		g_warning (_("Could not create properties dialog."));
 		return NULL;

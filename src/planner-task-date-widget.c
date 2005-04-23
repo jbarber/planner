@@ -25,6 +25,7 @@
 #include "planner-marshal.h"
 #include "libplanner/mrp-time.h"
 #include "libplanner/mrp-task.h"
+#include "libplanner/mrp-paths.h"
 #include "planner-task-date-widget.h"
 
 typedef struct {
@@ -175,15 +176,18 @@ task_date_widget_setup (PlannerTaskDateWidget *widget)
 	GtkWidget                 *vbox;
 	GtkWidget                 *root_vbox;
 	GtkWidget                 *button;
+	gchar                     *filename;
 
 	priv = GET_PRIV (widget);
 
 	vbox = gtk_vbox_new (FALSE, 0);
 	gtk_container_add (GTK_CONTAINER (widget), vbox);
 
-	glade = glade_xml_new (GLADEDIR "/task-date-widget.glade",
+	filename = mrp_paths_get_glade_dir ("task-date-widget.glade");
+	glade = glade_xml_new (filename,
 			       "root_vbox",
 			       GETTEXT_PACKAGE);
+	g_free (filename);
 	if (!glade) {
 		g_assert_not_reached ();
 	}

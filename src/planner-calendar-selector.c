@@ -27,6 +27,7 @@
 #include <libplanner/mrp-day.h>
 #include <libplanner/mrp-object.h>
 #include <libplanner/mrp-project.h>
+#include "libplanner/mrp-paths.h"
 #include "planner-calendar.h"
 #include "planner-calendar-selector.h"
 
@@ -68,19 +69,22 @@ static void          cal_selector_selection_changed_cb  (GtkTreeSelection *selec
 
 GtkWidget *
 planner_calendar_selector_new (PlannerWindow *window,
-			  const gchar  *caption)
+			       const gchar  *caption)
 {
 	DialogData       *data;
 	GladeXML         *glade;
 	GtkWidget        *selector;
 	GtkWidget        *w;
 	GtkTreeSelection *selection;
+	gchar		 *filename;
 	
 	g_return_val_if_fail (PLANNER_IS_WINDOW (window), NULL);
 	
-	glade = glade_xml_new (GLADEDIR "/calendar-dialog.glade",
+	filename = mrp_paths_get_glade_dir ("calendar-dialog.glade");
+	glade = glade_xml_new (filename,
 			       "calendar_selector",
 			       GETTEXT_PACKAGE);
+	g_free (filename);
 	if (!glade) {
 		g_warning ("Could not create calendar selector.");
 		return NULL;

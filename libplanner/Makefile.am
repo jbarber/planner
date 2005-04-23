@@ -4,8 +4,9 @@ INCLUDES = \
 	-I$(top_builddir) \
 	-I$(top_builddir)/libplanner \
 	$(LIBPLANNER_CFLAGS) $(WARN_CFLAGS) \
-	-DMRP_STORAGEMODULEDIR=\""$(libdir)/planner/storage-modules"\" \
-	-DMRP_FILE_MODULES_DIR=\""$(libdir)/planner/file-modules"\" \
+	-DSTORAGEMODULEDIR=\""$(libdir)/planner/storage-modules"\" \
+	-DFILEMODULEDIR=\""$(libdir)/planner/file-modules"\" \
+	-DPLUGINDIR=\""$(libdir)/planner/plugins"\"		\
 	-DDATADIR=\""$(datadir)"\"
 
 lib_LTLIBRARIES = libplanner-1.la
@@ -33,7 +34,8 @@ libplanner_1_la_SOURCES = 			\
 	mrp-private.h				\
 	mrp-property.c				\
 	mrp-time.c				\
-	mrp-error.c
+	mrp-error.c				\
+	mrp-paths-gnome.c
 
 libplannerinclude_HEADERS = 			\
 	planner.h				\
@@ -51,7 +53,8 @@ libplannerinclude_HEADERS = 			\
 	mrp-relation.h				\
 	mrp-types.h				\
 	mrp-time.h				\
-	mrp-error.h
+	mrp-error.h				\
+	mrp-paths.h
 
 libplanner_1_la_LIBADD = $(LIBPLANNER_LIBS)
 

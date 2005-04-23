@@ -23,6 +23,7 @@
 #include <gtk/gtkstock.h>
 #include <gtk/gtkmenu.h>
 #include <glib/gi18n.h>
+#include "libplanner/mrp-paths.h"
 #include "planner-task-tree.h"
 #include "planner-task-popup.h"
 
@@ -133,9 +134,6 @@ GtkItemFactory *
 planner_task_popup_new (PlannerTaskTree *tree)
 {
 	GtkItemFactory *item_factory;
-	GtkIconFactory *icon_factory;
-	GtkIconSet     *icon_set;
-	GdkPixbuf      *pixbuf;
 	
 	item_factory = gtk_item_factory_new (GTK_TYPE_MENU, "<main>", NULL);
 	gtk_item_factory_set_translate_func (item_factory,
@@ -146,52 +144,6 @@ planner_task_popup_new (PlannerTaskTree *tree)
 				       G_N_ELEMENTS (popup_menu_items),
 				       popup_menu_items, tree);
 
-	/* Add stock icons. */
-	icon_factory = gtk_icon_factory_new ();
-	gtk_icon_factory_add_default (icon_factory);
-
-	pixbuf = gdk_pixbuf_new_from_file (IMAGEDIR "/24_insert_task.png", NULL);
-	icon_set = gtk_icon_set_new_from_pixbuf (pixbuf);
-	g_object_unref (pixbuf);
-	gtk_icon_factory_add (icon_factory, "planner-stock-insert-task", icon_set);
-	
-	pixbuf = gdk_pixbuf_new_from_file (IMAGEDIR "/24_remove_task.png", NULL);
-	icon_set = gtk_icon_set_new_from_pixbuf (pixbuf);
-	g_object_unref (pixbuf);
-	gtk_icon_factory_add (icon_factory, "planner-stock-remove-task", icon_set);
-
-	pixbuf = gdk_pixbuf_new_from_file (IMAGEDIR "/24_unlink_task.png", NULL);
-	icon_set = gtk_icon_set_new_from_pixbuf (pixbuf);
-	g_object_unref (pixbuf);
-	gtk_icon_factory_add (icon_factory, "planner-stock-unlink-task", icon_set);
-
-	pixbuf = gdk_pixbuf_new_from_file (IMAGEDIR "/24_link_task.png", NULL);
-	icon_set = gtk_icon_set_new_from_pixbuf (pixbuf);
-	g_object_unref (pixbuf);
-	gtk_icon_factory_add (icon_factory, "planner-stock-link-task", icon_set);
-
-	pixbuf = gdk_pixbuf_new_from_file (IMAGEDIR "/24_indent_task.png", NULL);
-	icon_set = gtk_icon_set_new_from_pixbuf (pixbuf);
-	g_object_unref (pixbuf);
-	gtk_icon_factory_add (icon_factory, "planner-stock-indent-task", icon_set);
-
-	pixbuf = gdk_pixbuf_new_from_file (IMAGEDIR "/24_unindent_task.png", NULL);
-	icon_set = gtk_icon_set_new_from_pixbuf (pixbuf);
-	g_object_unref (pixbuf);
-	gtk_icon_factory_add (icon_factory, "planner-stock-unindent-task",
-			      icon_set);
-
-	pixbuf = gdk_pixbuf_new_from_file (IMAGEDIR "/24_task_up.png", NULL);
-	icon_set = gtk_icon_set_new_from_pixbuf (pixbuf);
-	g_object_unref (pixbuf);
-	gtk_icon_factory_add (icon_factory, "planner-stock-move-task-up", icon_set);
-
-	pixbuf = gdk_pixbuf_new_from_file (IMAGEDIR "/24_task_down.png", NULL);
-	icon_set = gtk_icon_set_new_from_pixbuf (pixbuf);
-	g_object_unref (pixbuf);
-	gtk_icon_factory_add (icon_factory, "planner-stock-move-task-down",
-			      icon_set);
-    
 	return item_factory;
 }
 

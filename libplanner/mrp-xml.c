@@ -28,6 +28,7 @@
 
 #include <libplanner/mrp-file-module.h>
 #include <libplanner/mrp-private.h>
+#include "mrp-paths.h"
 #include "mrp-old-xml.h"
 
 typedef enum {
@@ -121,13 +122,20 @@ static XmlType
 xml_locate_type (xmlDoc *doc)
 {
 	XmlType  ret_val = XML_TYPE_UNKNOWN;
+	gchar   *filename;
 	
-	if (xml_validate (doc, DTDDIR "/mrproject-0.6.dtd")) {
+	filename = mrp_paths_get_dtd_dir ("mrproject-0.6.dtd");
+	if (xml_validate (doc, filename)) {
 		ret_val = XML_TYPE_MRP_0_6;
+	} else {
+		g_free (filename);
+		filename = mrp_paths_get_dtd_dir ("mrproject-0.5.1.dtd");
+		if (xml_validate (doc, filename)) {
+			ret_val = XML_TYPE_MRP_0_5_1;
+		}
 	}
-	else if (xml_validate (doc, DTDDIR "/mrproject-0.5.1.dtd")) {
-		ret_val = XML_TYPE_MRP_0_5_1;
-	}
+	
+	g_free (filename);
 
 	return ret_val;
 }

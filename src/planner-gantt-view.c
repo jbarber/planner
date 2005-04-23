@@ -28,6 +28,7 @@
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
 #include <libplanner/mrp-task.h>
+#include "libplanner/mrp-paths.h"
 #include "planner-gantt-view.h"
 #include "planner-cell-renderer-date.h"
 #include "planner-task-dialog.h"
@@ -213,6 +214,7 @@ gantt_view_activate (PlannerView *view)
 {
 	PlannerGanttViewPriv *priv;
 	gboolean              show_critical;
+	gchar                *filename;
 
 	priv = PLANNER_GANTT_VIEW (view)->priv;
 
@@ -229,10 +231,11 @@ gantt_view_activate (PlannerView *view)
 					     view);
 
 	gtk_ui_manager_insert_action_group (priv->ui_manager, priv->actions, 0);
+	filename = mrp_paths_get_ui_dir ("gantt-view.ui");
 	priv->merged_id = gtk_ui_manager_add_ui_from_file (priv->ui_manager,
-							   DATADIR "/planner/ui/gantt-view.ui",
+							   filename,
 							   NULL);
-
+	g_free (filename);
 	gtk_ui_manager_ensure_update (priv->ui_manager);
 
 	/* Set the initial UI state. */
@@ -267,73 +270,8 @@ static void
 gantt_view_setup (PlannerView *view, PlannerWindow *main_window)
 {
 	PlannerGanttViewPriv *priv;
-	GtkIconFactory       *icon_factory;
-	GtkIconSet           *icon_set;
-	GdkPixbuf            *pixbuf;
 
 	priv = PLANNER_GANTT_VIEW (view)->priv;
-
-	//priv = g_new0 (PlannerGanttViewPriv, 1);
-	//view->priv = priv;
-
-	icon_factory = gtk_icon_factory_new ();
-	gtk_icon_factory_add_default (icon_factory);
-
-	pixbuf = gdk_pixbuf_new_from_file (IMAGEDIR "/24_insert_task.png", NULL);
-	icon_set = gtk_icon_set_new_from_pixbuf (pixbuf);
-	g_object_unref (pixbuf);
-	gtk_icon_factory_add (icon_factory,
-			      "planner-stock-insert-task",
-			      icon_set);
-	
-	pixbuf = gdk_pixbuf_new_from_file (IMAGEDIR "/24_remove_task.png", NULL);
-	icon_set = gtk_icon_set_new_from_pixbuf (pixbuf);
-	g_object_unref (pixbuf);
-	gtk_icon_factory_add (icon_factory,
-			      "planner-stock-remove-task",
-			      icon_set);
-
-	pixbuf = gdk_pixbuf_new_from_file (IMAGEDIR "/24_unlink_task.png", NULL);
-	icon_set = gtk_icon_set_new_from_pixbuf (pixbuf);
-	g_object_unref (pixbuf);
-	gtk_icon_factory_add (icon_factory,
-			      "planner-stock-unlink-task",
-			      icon_set);
-
-	pixbuf = gdk_pixbuf_new_from_file (IMAGEDIR "/24_link_task.png", NULL);
-	icon_set = gtk_icon_set_new_from_pixbuf (pixbuf);
-	g_object_unref (pixbuf);
-	gtk_icon_factory_add (icon_factory,
-			      "planner-stock-link-task",
-			      icon_set);
-
-	pixbuf = gdk_pixbuf_new_from_file (IMAGEDIR "/24_indent_task.png", NULL);
-	icon_set = gtk_icon_set_new_from_pixbuf (pixbuf);
-	g_object_unref (pixbuf);
-	gtk_icon_factory_add (icon_factory,
-			      "planner-stock-indent-task",
-			      icon_set);
-
-	pixbuf = gdk_pixbuf_new_from_file (IMAGEDIR "/24_unindent_task.png", NULL);
-	icon_set = gtk_icon_set_new_from_pixbuf (pixbuf);
-	g_object_unref (pixbuf);
-	gtk_icon_factory_add (icon_factory,
-			      "planner-stock-unindent-task",
-			      icon_set);
-
-	pixbuf = gdk_pixbuf_new_from_file (IMAGEDIR "/24_task_up.png", NULL);
-	icon_set = gtk_icon_set_new_from_pixbuf (pixbuf);
-	g_object_unref (pixbuf);
-	gtk_icon_factory_add (icon_factory,
-			      "planner-stock-move-task-up",
-			      icon_set);
-
-	pixbuf = gdk_pixbuf_new_from_file (IMAGEDIR "/24_task_down.png", NULL);
-	icon_set = gtk_icon_set_new_from_pixbuf (pixbuf);
-	g_object_unref (pixbuf);
-	gtk_icon_factory_add (icon_factory,
-			      "planner-stock-move-task-down",
-			      icon_set);
 
 	priv->ui_manager = planner_window_get_ui_manager (main_window);
 }
@@ -356,7 +294,13 @@ gantt_view_get_menu_label (PlannerView *view)
 static const gchar *
 gantt_view_get_icon (PlannerView *view)
 {
-	return IMAGEDIR "/gantt.png";
+	static gchar *filename = NULL;
+	
+	if (!filename) {
+		filename = mrp_paths_get_image_dir ("gantt.png");
+	}
+	
+	return filename;
 }
 
 static const gchar *

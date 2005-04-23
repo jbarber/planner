@@ -22,7 +22,7 @@
 
 #include <config.h>
 #include <gmodule.h>
-
+#include "mrp-paths.h"
 #include "mrp-storage-module-factory.h"
 #include "mrp-storage-module.h"
 
@@ -131,11 +131,14 @@ mrp_storage_module_factory_get (const gchar *name)
 {
 	MrpStorageModuleFactory *factory;
 	gchar                   *fullname, *libname;
+	gchar                   *path;
 
 	fullname = g_strconcat ("storage-", name, NULL);
 
-	libname = g_module_build_path (MRP_STORAGEMODULEDIR, fullname);
-
+	path = mrp_paths_get_storagemodule_dir (NULL);
+	libname = g_module_build_path (path, fullname);
+	g_free (path);
+	
 	if (!module_hash) {
 		module_hash = g_hash_table_new (g_str_hash, g_str_equal);
 	}

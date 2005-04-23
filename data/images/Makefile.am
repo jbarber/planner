@@ -1,5 +1,5 @@
-imagesdir = $(datadir)/pixmaps/planner
-images_DATA = \
+imagesdir = $(datadir)/planner/images
+images_DATA = 				\
 	tasks.png			\
 	gantt.png			\
 	resources.png			\
@@ -15,18 +15,17 @@ images_DATA = \
 	24_edit_resource.png		\
 	24_groups.png			\
 	24_task_down.png		\
-	24_task_up.png
+	24_task_up.png			\
+	gnome-planner.png
 
 mimeiconsdir = $(datadir)/icons/hicolor/48x48/mimetypes
 mimeicons_DATA = gnome-mime-application-x-planner.png
 
 # Install the mime icon for the old system as well
-pixmapdir = $(datadir)/pixmaps
-pixmap_DATA = gnome-planner.png gnome-mime-application-x-planner.png
+#pixmapdir = $(datadir)/pixmaps
+#pixmap_DATA = gnome-planner.png gnome-mime-application-x-planner.png
+#$(pixmap_DATA)			
 
-
-EXTRA_DIST = \
-	$(pixmap_DATA)			\
+EXTRA_DIST = 				\
 	$(images_DATA)			\
 	$(mimeicons_DATA)
-

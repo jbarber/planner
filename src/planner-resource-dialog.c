@@ -31,6 +31,7 @@
 #include <libplanner/mrp-resource.h>
 #include <libplanner/mrp-calendar.h>
 #include <libplanner/mrp-time.h>
+#include "libplanner/mrp-paths.h"
 
 #include "planner-format.h"
 #include "planner-resource-dialog.h"
@@ -1689,6 +1690,7 @@ planner_resource_dialog_new (PlannerWindow *window,
 	GList           *groups;
 	gint             index = 0;
 	gchar           *note;
+	gchar           *filename;
 
 	g_return_val_if_fail (PLANNER_IS_WINDOW (window), NULL);
 	g_return_val_if_fail (MRP_IS_RESOURCE (resource), NULL);
@@ -1705,9 +1707,12 @@ planner_resource_dialog_new (PlannerWindow *window,
 	
 	g_object_get (resource, "project", &project, NULL);
 	
-	glade = glade_xml_new (GLADEDIR "/resource-dialog.glade",
+	filename = mrp_paths_get_glade_dir ("resource-dialog.glade");
+	glade = glade_xml_new (filename,
 			       NULL,
 			       GETTEXT_PACKAGE);
+	g_free (filename);
+
 	if (!glade) {
 		g_warning ("Could not create resource dialog.");
 		return NULL;

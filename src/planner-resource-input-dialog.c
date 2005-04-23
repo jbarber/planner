@@ -24,6 +24,7 @@
 #include <glade/glade.h>
 #include <gtk/gtk.h>
 #include <glib/gi18n.h>
+#include "libplanner/mrp-paths.h"
 #include "planner-marshal.h"
 #include "planner-resource-input-dialog.h"
 #include "planner-resource-cmd.h"
@@ -222,6 +223,7 @@ planner_resource_input_dialog_new (PlannerWindow *main_window)
 	DialogData *data;
 	GladeXML   *gui;
 	MrpProject *project;
+	gchar      *filename;
 
 	project = planner_window_get_project (main_window);
 	
@@ -230,8 +232,9 @@ planner_resource_input_dialog_new (PlannerWindow *main_window)
 	data->project = g_object_ref (project);
 	data->main_window = g_object_ref (main_window);
 	
-	gui = glade_xml_new (GLADEDIR "/resource-input-dialog.glade",
-			     NULL , NULL);
+	filename = mrp_paths_get_glade_dir ("resource-input-dialog.glade");
+	gui = glade_xml_new (filename, NULL, NULL);
+	g_free (filename);
 	
 	dialog = glade_xml_get_widget (gui, "resource_input_dialog"); 
 	g_signal_connect (dialog,

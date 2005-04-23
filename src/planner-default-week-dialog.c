@@ -26,6 +26,7 @@
 #include <glade/glade.h>
 #include <gtk/gtk.h>
 #include <libplanner/mrp-project.h>
+#include "libplanner/mrp-paths.h"
 #include "planner-default-week-dialog.h"
 
 #define RESPONSE_ADD    1
@@ -157,12 +158,17 @@ planner_default_week_dialog_new (PlannerWindow *window,
 	GtkWidget  *dialog;
 	GtkWidget  *w;
 	gint        i;
+	gchar	   *filename;
 	
 	g_return_val_if_fail (PLANNER_IS_WINDOW (window), NULL);
 	
-	glade = glade_xml_new (GLADEDIR "/calendar-dialog.glade",
+	filename = mrp_paths_get_glade_dir ("calendar-dialog.glade");
+	glade = glade_xml_new (filename ,
 			       "default_week_dialog",
 			       GETTEXT_PACKAGE);
+	
+	g_free (filename);
+		
 	if (!glade) {
 		g_warning ("Could not create default_week dialog.");
 		return NULL;

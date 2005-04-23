@@ -30,6 +30,7 @@
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
 #include <libplanner/mrp-project.h>
+#include "libplanner/mrp-paths.h"
 #include "planner-resource-view.h"
 #include "planner-cell-renderer-list.h"
 #include "planner-group-dialog.h"
@@ -345,6 +346,7 @@ static void
 resource_view_activate (PlannerView *view)
 {
 	PlannerResourceViewPriv *priv;
+	gchar                   *filename;
 
 	priv = PLANNER_RESOURCE_VIEW (view)->priv;
 
@@ -354,9 +356,11 @@ resource_view_activate (PlannerView *view)
 	gtk_action_group_add_actions (priv->actions, entries, G_N_ELEMENTS (entries), view);
 
 	gtk_ui_manager_insert_action_group (priv->ui_manager, priv->actions, 0);
+	filename = mrp_paths_get_ui_dir ("resource-view.ui");
 	priv->merged_id = gtk_ui_manager_add_ui_from_file (priv->ui_manager,
-							   DATADIR "/planner/ui/resource-view.ui",
+							   filename,
 							   NULL);
+	g_free (filename);
 	gtk_ui_manager_ensure_update (priv->ui_manager);
 
 	/* Set the initial UI state. */
@@ -385,9 +389,6 @@ static void
 resource_view_setup (PlannerView *view, PlannerWindow *main_window)
 {
 	PlannerResourceViewPriv *priv;
-	GtkIconFactory          *icon_factory;
-	GtkIconSet              *icon_set;
-	GdkPixbuf               *pixbuf;
 	
 	priv = PLANNER_RESOURCE_VIEW (view)->priv;
 
@@ -407,38 +408,7 @@ resource_view_setup (PlannerView *view, PlannerWindow *main_window)
 				       popup_menu_items,
 				       view);
 
-	icon_factory = gtk_icon_factory_new ();
-	gtk_icon_factory_add_default (icon_factory);
-
-	pixbuf = gdk_pixbuf_new_from_file (IMAGEDIR "/24_insert_resource.png", NULL);
-	icon_set = gtk_icon_set_new_from_pixbuf (pixbuf);
-	g_object_unref (pixbuf);
-	gtk_icon_factory_add (icon_factory,
-			      "planner-stock-insert-resource",
-			      icon_set); 
-	
-	pixbuf = gdk_pixbuf_new_from_file (IMAGEDIR "/24_remove_resource.png", NULL);
-	icon_set = gtk_icon_set_new_from_pixbuf (pixbuf);
-	g_object_unref (pixbuf);
-	gtk_icon_factory_add (icon_factory,
-			      "planner-stock-remove-resource",
-			      icon_set);
-
-	pixbuf = gdk_pixbuf_new_from_file (IMAGEDIR "/24_edit_resource.png", NULL);
-	icon_set = gtk_icon_set_new_from_pixbuf (pixbuf);
-	g_object_unref (pixbuf);
-	gtk_icon_factory_add (icon_factory,
-			      "planner-stock-edit-resource",
-			      icon_set);
-	
-	pixbuf = gdk_pixbuf_new_from_file (IMAGEDIR "/24_groups.png", NULL);
-	icon_set = gtk_icon_set_new_from_pixbuf (pixbuf);
-	g_object_unref (pixbuf);
-	gtk_icon_factory_add (icon_factory,
-			      "planner-stock-edit-groups",
-			      icon_set);	
-
-	priv->ui_manager = planner_window_get_ui_manager(main_window);
+	priv->ui_manager = planner_window_get_ui_manager (main_window);
 }
 
 static const gchar *
@@ -456,7 +426,13 @@ resource_view_get_menu_label (PlannerView *view)
 static const gchar *
 resource_view_get_icon (PlannerView *view)
 {
-	return IMAGEDIR "/resources.png";
+	static gchar *filename = NULL;
+	
+	if (!filename) {
+		filename = mrp_paths_get_image_dir ("resources.png");
+	}
+	
+	return filename;
 }
 
 static const gchar *
@@ -1041,7 +1017,7 @@ resource_view_edit_columns_cb (GtkAction *action,
 	priv = PLANNER_RESOURCE_VIEW (view)->priv;
 
 	planner_column_dialog_show (PLANNER_VIEW (view)->main_window,
-				    _("Edit Resource Columns"),
+				    _("Edit Resoruce Columns"),
 				    GTK_TREE_VIEW (priv->tree_view));
 }
 

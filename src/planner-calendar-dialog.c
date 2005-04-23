@@ -29,6 +29,7 @@
 #include <libplanner/mrp-day.h>
 #include <libplanner/mrp-object.h>
 #include <libplanner/mrp-project.h>
+#include <libplanner/mrp-paths.h>
 #include "planner-calendar.h"
 #include "planner-working-time-dialog.h"
 #include "planner-default-week-dialog.h"
@@ -587,12 +588,17 @@ planner_calendar_dialog_new (PlannerWindow *window)
 	GtkWidget        *w;
 	GtkTreeSelection *selection;
 	gint              i;
+	gchar		*filename;
 	
 	g_return_val_if_fail (PLANNER_IS_WINDOW (window), NULL);
 	
-	glade = glade_xml_new (GLADEDIR "/calendar-dialog.glade",
+	filename = mrp_paths_get_glade_dir ("calendar-dialog.glade");
+	glade = glade_xml_new (filename ,
 			       "calendar_dialog",
 			       GETTEXT_PACKAGE);
+	
+	g_free (filename);
+	
 	if (!glade) {
 		g_warning ("Could not create calendar dialog.");
 		return NULL;
@@ -1254,10 +1260,13 @@ cal_dialog_new_dialog_run (DialogData *data)
 	GtkWidget        *tree_view;
 	const gchar      *name;
 	GtkTreePath      *path;
+	gchar            *filename;
 	
-	glade = glade_xml_new (GLADEDIR "/calendar-dialog.glade",
+	filename = mrp_paths_get_glade_dir ("calendar-dialog.glade");
+	glade = glade_xml_new (filename,
 			       "new_calendar_dialog",
 			       GETTEXT_PACKAGE);
+	g_free (filename);
 
 	dialog = glade_xml_get_widget (glade, "new_calendar_dialog");
 

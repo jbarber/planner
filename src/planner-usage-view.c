@@ -25,6 +25,7 @@
 #include <gtk/gtk.h>
 #include <libplanner/mrp-task.h>
 #include <libplanner/mrp-resource.h>
+#include "libplanner/mrp-paths.h"
 #include "planner-usage-view.h"
 /*#include "planner-usage-print.h"*/
 #include "planner-usage-model.h"
@@ -142,6 +143,7 @@ static void
 usage_view_activate (PlannerView *view)
 {
 	PlannerUsageViewPriv *priv;
+	gchar		     *filename;
 
 	priv = PLANNER_USAGE_VIEW (view)->priv;
 
@@ -151,9 +153,11 @@ usage_view_activate (PlannerView *view)
 	gtk_action_group_add_actions (priv->actions, entries, G_N_ELEMENTS (entries), view);
 
 	gtk_ui_manager_insert_action_group (priv->ui_manager, priv->actions, 0);
+	filename = mrp_paths_get_ui_dir ("time-table-view.ui");
 	priv->merged_id = gtk_ui_manager_add_ui_from_file (priv->ui_manager,
-							   DATADIR "/planner/ui/time-table-view.ui",
+							   filename,
 							   NULL);
+	g_free (filename);
 	gtk_ui_manager_ensure_update (priv->ui_manager);
 
         usage_view_update_zoom_sensitivity (view);
@@ -199,7 +203,13 @@ usage_view_get_menu_label (PlannerView *view)
 static const gchar *
 usage_view_get_icon (PlannerView *view)
 {
-        return IMAGEDIR "/resources_usage.png";
+	static gchar *filename = NULL;
+	
+	if (!filename) {
+		filename = mrp_paths_get_image_dir ("resources_usage.png");
+	}
+	
+        return filename;
 }
 
 static const gchar *

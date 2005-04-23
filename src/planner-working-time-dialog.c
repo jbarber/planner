@@ -27,6 +27,7 @@
 #include <glade/glade.h>
 #include <gtk/gtk.h>
 #include <libplanner/mrp-project.h>
+#include "libplanner/mrp-paths.h"
 #include "planner-working-time-dialog.h"
 
 #define RESPONSE_CLOSE  GTK_RESPONSE_CLOSE
@@ -195,7 +196,7 @@ working_time_dialog_parent_destroy_cb (GtkWidget *window, GtkWidget *dialog)
 
 GtkWidget *
 planner_working_time_dialog_new (PlannerWindow *window,
-			    MrpCalendar  *calendar)
+				 MrpCalendar   *calendar)
 {
 	DialogData        *data;
 	GladeXML          *glade;
@@ -205,12 +206,16 @@ planner_working_time_dialog_new (PlannerWindow *window,
 	GtkCellRenderer   *cell;
 	GtkTreeViewColumn *col;
 	GtkTreeSelection  *selection;
+	gchar             *filename;
 	
 	g_return_val_if_fail (PLANNER_IS_WINDOW (window), NULL);
 	
-	glade = glade_xml_new (GLADEDIR "/calendar-dialog.glade",
+	filename = mrp_paths_get_glade_dir ("calendar-dialog.glade");
+	glade = glade_xml_new (filename,
 			       "working_time_dialog",
-			       GETTEXT_PACKAGE);
+			       NULL);
+	g_free (filename);
+
 	if (!glade) {
 		g_warning ("Could not create working_time dialog.");
 		return NULL;

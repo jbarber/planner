@@ -26,6 +26,7 @@
 #include <glib/gi18n.h>
 #include <glade/glade.h>
 #include <gtk/gtk.h>
+#include "libplanner/mrp-paths.h"
 #include "planner-marshal.h"
 #include "planner-group-model.h"
 #include "planner-group-dialog.h"
@@ -182,6 +183,7 @@ group_dialog_create (PlannerView *view)
 	GtkWidget  *dialog;
 	GtkWidget  *button;
 	MrpProject *project;
+	gchar      *filename;
 
 	data = g_new0 (DialogData, 1);
 
@@ -190,8 +192,9 @@ group_dialog_create (PlannerView *view)
 
 	data->project = g_object_ref (project);
 	
-	gui = glade_xml_new (
-		GLADEDIR"/group-dialog.glade", NULL , NULL);
+	filename = mrp_paths_get_glade_dir ( "group-dialog.glade");
+	gui = glade_xml_new (filename, NULL, NULL);
+	g_free (filename);
 		
 	dialog = glade_xml_get_widget (gui, "dialog_group_editor"); 
 	

@@ -32,7 +32,7 @@
 #include <string.h>
 #include <libplanner/mrp-file-module.h>
 #include <libplanner/mrp-private.h>
-
+#include "libplanner/mrp-paths.h"
 
 void            init                     (MrpFileModule   *module,
 					  MrpApplication  *application);
@@ -60,6 +60,7 @@ html_write (MrpFileWriter  *writer,
         xmlDoc         *doc;
         xmlDoc         *final_doc;
 	gboolean        ret;
+	gchar          *filename;
 
 	if (!mrp_project_save_to_xml (project, &xml_project, error)) {
 		return FALSE;
@@ -70,7 +71,9 @@ html_write (MrpFileWriter  *writer,
         xmlLoadExtDtdDefaultValue = 1;
         exsltRegisterAll ();
 
-        stylesheet = xsltParseStylesheetFile (STYLESHEETDIR "/planner2html.xsl");
+	filename = mrp_paths_get_stylesheet_dir ("planner2html.xsl");
+        stylesheet = xsltParseStylesheetFile (filename);
+	g_free (filename);
 
         doc = xmlParseMemory (xml_project, strlen (xml_project));
         final_doc = xsltApplyStylesheet (stylesheet, doc, NULL);
@@ -105,6 +108,7 @@ xml_planner_pre012_write (MrpFileWriter  *writer,
         xmlDoc         *doc;
         xmlDoc         *final_doc;
 	gboolean        ret;
+        gchar          *filename;
 
 	if (!mrp_project_save_to_xml (project, &xml_project, error)) {
 		return FALSE;
@@ -115,7 +119,9 @@ xml_planner_pre012_write (MrpFileWriter  *writer,
         xmlLoadExtDtdDefaultValue = 1;
         exsltRegisterAll ();
 
-        stylesheet = xsltParseStylesheetFile (STYLESHEETDIR "/planner2plannerv011.xsl");
+	filename = mrp_paths_get_stylesheet_dir ("planner2plannerv011.xsl");
+        stylesheet = xsltParseStylesheetFile (filename);
+	g_free (filename);
 
         doc = xmlParseMemory (xml_project, strlen (xml_project));
         final_doc = xsltApplyStylesheet (stylesheet, doc, NULL);

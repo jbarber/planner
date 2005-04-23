@@ -24,6 +24,7 @@
 #include <string.h>
 #include <glib.h>
 #include <glib/gi18n.h>
+#include "libplanner/mrp-paths.h"
 #include "planner-plugin.h"
 #include "planner-plugin-loader.h"
 
@@ -88,5 +89,12 @@ mpl_load_dir (const gchar *path, PlannerWindow *window)
 GList *
 planner_plugin_loader_load (PlannerWindow *window)
 {
-	return mpl_load_dir (PLUGINDIR, window);
+	gchar  *path;
+	GList  *list;
+	
+	path = mrp_paths_get_plugin_dir (NULL);
+	list = mpl_load_dir (path, window);
+	g_free (path);
+	
+	return list;
 }

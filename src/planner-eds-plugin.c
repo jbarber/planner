@@ -45,6 +45,7 @@
 #include <gconf/gconf-client.h>
 #include <libplanner/mrp-object.h>
 #include <libplanner/mrp-property.h>
+#include "libplanner/mrp-paths.h"
 #include "planner-window.h"
 #include "planner-plugin.h"
 #include "planner-resource-cmd.h"
@@ -250,12 +251,14 @@ eds_plugin_import (GtkAction   *action,
 	GConfClient       *gconf_client;
 	ESourceList       *source_list;
 	GSList            *groups;
+	gchar             *filename;
 
 	plugin = PLANNER_PLUGIN (user_data);
 	priv = plugin->priv;
 
-	priv->glade = glade_xml_new (GLADEDIR"/eds.glade",
-				     NULL, NULL);
+	filename = mrp_paths_get_glade_dir ("/eds.glade");
+	priv->glade = glade_xml_new (filename, NULL, NULL);
+	g_free (filename);
 
 	priv->dialog_get_resources = glade_xml_get_widget (priv->glade, "resources_get");
 
@@ -558,6 +561,7 @@ eds_receive_contacts_cb (EBook         *book,
 	GdkPixbuf         *pixbuf;
 	AsyncQuery        *async_query;
 	const gchar       *uid;
+	gchar             *filename;
 
 	async_query = (AsyncQuery *) user_data;
 
@@ -578,7 +582,9 @@ eds_receive_contacts_cb (EBook         *book,
 
 	/* Exceed limit is E_BOOK_ERROR_OTHER_ERROR :( */
 	if (status == E_BOOK_ERROR_OK || status == E_BOOK_ERROR_OTHER_ERROR) {
-		pixbuf = gdk_pixbuf_new_from_file (IMAGEDIR"/resources.png", NULL);
+		filename = mrp_paths_get_image_dir ("/resources.png");
+		pixbuf = gdk_pixbuf_new_from_file (filename, NULL);
+		g_free (filename);
 		for (l = contacts; l; l = l->next) {
 			gchar *name, *email;
 			name = e_contact_get (l->data, E_CONTACT_FULL_NAME);
@@ -938,6 +944,7 @@ plugin_init (PlannerPlugin *plugin,
 	GtkUIManager      *ui;
 	GtkActionGroup    *actions;
 	GError            *error = NULL;
+	gchar		  *filename;
 	
 	priv = g_new0 (PlannerPluginPriv, 1);
 	plugin->priv = priv;
@@ -951,11 +958,14 @@ plugin_init (PlannerPlugin *plugin,
 
 	ui = planner_window_get_ui_manager (main_window);
 	gtk_ui_manager_insert_action_group (ui, actions, 0);
-	if (!gtk_ui_manager_add_ui_from_file(ui, DATADIR"/planner/ui/eds-plugin.ui", &error)) {
+	
+	filename = mrp_paths_get_data_dir ("/planner/ui/eds-plugin.ui");
+	if (!gtk_ui_manager_add_ui_from_file(ui, filename, &error)) {
 		g_message("Building menu failed: %s", error->message);
-		g_message ("Couldn't load: %s",DATADIR"/planner/ui/eds-plugin.ui");
+		g_message ("Couldn't load: %s",filename);
 		g_error_free(error);
 	}
+	g_free (filename);
 	gtk_ui_manager_ensure_update (ui);
 }
 

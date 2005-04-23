@@ -23,6 +23,7 @@
 #include <config.h>
 #include <glade/glade.h>
 #include <gtk/gtk.h>
+#include "libplanner/mrp-paths.h"
 #include "planner-marshal.h"
 #include "planner-task-input-dialog.h"
 #include "planner-task-cmd.h"
@@ -105,6 +106,7 @@ planner_task_input_dialog_new (PlannerWindow *main_window)
 	DialogData *data;
 	GladeXML   *gui;
 	MrpProject *project;
+	gchar      *filename;
 
 	data = g_new0 (DialogData, 1);
 
@@ -113,8 +115,9 @@ planner_task_input_dialog_new (PlannerWindow *main_window)
 	data->project = g_object_ref (project);
 	data->main_window = g_object_ref (main_window);
 	
-	gui = glade_xml_new (GLADEDIR "/task-input-dialog.glade",
-			     NULL , NULL);
+	filename = mrp_paths_get_glade_dir ("task-input-dialog.glade");
+	gui = glade_xml_new (filename, NULL, NULL);
+	g_free (filename);
 	
 	dialog = glade_xml_get_widget (gui, "task_input_dialog"); 
 	g_signal_connect (dialog,

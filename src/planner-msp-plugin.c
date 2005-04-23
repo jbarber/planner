@@ -27,6 +27,7 @@
 #include <glib.h>
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
+#include "libplanner/mrp-paths.h"
 #include "planner-conf.h"
 #include "planner-window.h"
 #include "planner-application.h"
@@ -45,7 +46,7 @@ void        plugin_init     (PlannerPlugin *plugin,
 void        plugin_exit     (void);
 
 
-static GtkActionEntry entries[] = {
+static const GtkActionEntry entries[] = {
 	{ "MspOpen",  NULL,  N_("MS Project XML..."), NULL, N_("Import an MS Project XML file"),
 	  G_CALLBACK (msp_plugin_open)
 	}
@@ -77,13 +78,16 @@ msp_plugin_transform (PlannerPlugin *plugin,
 	FILE           *file;
 	gchar          *tmp_name, *uri;
 	MrpProject     *project;
+	gchar          *filename;
 
         /* libxml housekeeping */
         xmlSubstituteEntitiesDefault (1);
         xmlLoadExtDtdDefaultValue = 1;
         exsltRegisterAll ();
 
-        stylesheet = xsltParseStylesheetFile (STYLESHEETDIR "/msp2planner.xsl");
+	filename = mrp_paths_get_stylesheet_dir ("msp2planner.xsl");
+        stylesheet = xsltParseStylesheetFile (filename);
+	g_free (filename);
 
 	doc = xmlParseFile (input_filename);
 	if (!doc) {
@@ -99,7 +103,8 @@ msp_plugin_transform (PlannerPlugin *plugin,
 		return FALSE;
 	}
 
-	if (!xml_validate (final_doc, DTDDIR "/mrproject-0.6.dtd")) {
+	filename = mrp_paths_get_dtd_dir ("mrproject-0.6.dtd");
+	if (!xml_validate (final_doc, filename)) {
 		GtkWidget *dialog;
 
 		xsltFreeStylesheet (stylesheet);
@@ -115,9 +120,13 @@ msp_plugin_transform (PlannerPlugin *plugin,
 
 		gtk_dialog_run (GTK_DIALOG (dialog));
 		gtk_widget_destroy (dialog);
+		g_free (filename);
+
 		return FALSE;
 	}
 
+	g_free (filename);
+	
 	fd = g_file_open_tmp ("planner-msp-XXXXXX", &tmp_name, NULL);
 	if (fd == -1) {
 		xsltFreeStylesheet (stylesheet);
@@ -263,7 +272,7 @@ plugin_init (PlannerPlugin *plugin,
 	MspPluginPriv  *priv;
 	GtkActionGroup *actions;
 	GtkUIManager   *ui;
-	GError         *error = NULL;
+	gchar          *filename;
 	
 	priv = g_new0 (MspPluginPriv, 1);
 
@@ -278,9 +287,9 @@ plugin_init (PlannerPlugin *plugin,
 	ui = planner_window_get_ui_manager (main_window);
 	gtk_ui_manager_insert_action_group (ui, actions, 0);
 
-	if (!gtk_ui_manager_add_ui_from_file (ui, DATADIR"/planner/ui/msp-plugin.ui", &error)) {
-		g_error_free (error);
-	}
+	filename = mrp_paths_get_ui_dir ("msp-plugin.ui");
+	gtk_ui_manager_add_ui_from_file (ui, filename, NULL);
+	g_free (filename);
 	
 	gtk_ui_manager_ensure_update (ui);
 }

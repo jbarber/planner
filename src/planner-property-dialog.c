@@ -42,6 +42,7 @@
 #include <gtk/gtkmain.h>
 #include <libplanner/mrp-object.h>
 #include <libplanner/mrp-property.h>
+#include "libplanner/mrp-paths.h"
 #include "planner-cell-renderer-list.h"
 #include "planner-property-dialog.h"
 #include "planner-property-model.h"
@@ -264,12 +265,15 @@ property_dialog_add_cb (GtkWidget *button,
 	gint                       response;
 	gboolean                   finished = FALSE;
 	gunichar                   c;
+	gchar                     *filename;
 				
 	priv = GET_PRIV (dialog);
 
-	glade = glade_xml_new (GLADEDIR "/new-property.glade",
+	filename = mrp_paths_get_glade_dir ("new-property.glade");
+	glade = glade_xml_new (filename,
 			       NULL,
 			       NULL);
+	g_free (filename);
 		
 	add_dialog = glade_xml_get_widget (glade, "add_dialog");
 
@@ -566,13 +570,16 @@ planner_property_dialog_new (PlannerWindow *main_window,
 	GladeXML                  *glade;
 	GtkWidget                 *dialog;
 	PlannerPropertyDialogPriv *priv;
+	gchar                     *filename;
 
 	g_return_val_if_fail (MRP_IS_PROJECT (project), NULL);
 
 	priv = g_new0 (PlannerPropertyDialogPriv, 1);
 	
-	glade = glade_xml_new (GLADEDIR"/property-dialog.glade",
+	filename = mrp_paths_get_glade_dir ("property-dialog.glade");
+	glade = glade_xml_new (filename,
 			       NULL, NULL);
+	g_free (filename);
 		
 	dialog = glade_xml_get_widget (glade, "dialog");
 
