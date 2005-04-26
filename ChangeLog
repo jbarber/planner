@@ -1,3 +1,17 @@
+2005-04-26  Richard Hult  <richard@imendio.com>
+
+	* libplanner/mrp-application.c: (application_init_gettext):
+	* libplanner/mrp-paths-gnome.c: (mrp_paths_get_sql_dir),
+	(mrp_paths_get_locale_dir):
+	* libplanner/mrp-paths-win32.c: (mrp_paths_get_file_modules_dir),
+	(mrp_paths_get_sql_dir), (mrp_paths_get_locale_dir):
+	* src/Makefile.am:
+	* src/planner-main.c: (main):
+	* src/planner-sql-plugin.c: (check_database_tables):
+	* src/planner-util-win32.c: (planner_util_show_url),
+	(planner_util_show_help): Modified patch from Francisco to fix up
+	the path stuff, and adding the sql and locale paths.
+
 2005-04-23  Richard Hult  <richard@imendio.com>
 
 	* configure.in:

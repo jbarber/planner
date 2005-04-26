@@ -33,6 +33,19 @@ static gchar *stylesheet_dir 	= NULL;
 static gchar *ui_dir		= NULL;
 static gchar *storagemodule_dir = NULL;
 static gchar *file_modules_dir 	= NULL;
+static gchar *sql_dir           = NULL;
+static gchar *locale_dir        = NULL;
+
+#define STORAGEMODULEDIR "lib/planner/storage-modules"
+#define FILEMODULEDIR    "lib/planner/file-modules"
+#define PLUGINDIR        "lib/planner/plugins"
+#define DTDDIR           "share/planner/dtd"
+#define STYLESHEETDIR    "share/planner/stylesheets"
+#define GLADEDIR         "share/planner/glade"
+#define IMAGEDIR         "share/pixmaps/planner"
+#define UIDIR            "share/planner/ui"
+#define SQLDIR           "share/planner/sql"
+#define GNOMELOCALEDIR   "share/locale"
 
 gchar *
 mrp_paths_get_glade_dir (const gchar *filename)
@@ -112,4 +125,24 @@ mrp_paths_get_file_modules_dir (const gchar *filename)
 	}
 	
 	return g_build_filename (file_modules_dir, filename, NULL);
+}
+
+gchar *
+mrp_paths_get_sql_dir (void)
+{
+	if (!sql_dir) {
+		sql_dir = g_win32_get_package_installation_subdirectory (NULL, NULL, SQLDIR);
+	}
+	
+	return sql_dir;
+}
+
+gchar *
+mrp_paths_get_locale_dir (void)
+{
+	if (!locale_dir) {
+		locale_dir = g_win32_get_package_installation_subdirectory (NULL, NULL, GNOMELOCALEDIR);
+	}
+	
+	return locale_dir;
 }

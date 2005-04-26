@@ -376,6 +376,7 @@ check_database_tables (GdaConnection *conn,
 	gchar        *database_version = VERSION;
 	const gchar  *database_name;
 	gboolean      retval = FALSE;
+	gchar        *sql_dir = mrp_paths_get_sql_dir ();
 
 	max_version_database = g_strdup ("0.0");
 	max_version_upgrade = g_strdup ("0.0");
@@ -398,17 +399,17 @@ check_database_tables (GdaConnection *conn,
 	}
 
 	/* Check for tables */
-	dir = g_dir_open (SQL_DIR, 0, NULL);
+	dir = g_dir_open (sql_dir, 0, NULL);
 	while ((name = g_dir_read_name (dir)) != NULL) {
 		gchar **namev = NULL, **versionv = NULL;
 		gchar  *version;
-		gchar  *sql_file = g_build_filename (SQL_DIR, name, NULL);
-
-		if (strncmp (name + strlen (name) - 4, ".sql", 4) != 0) {
-			g_warning ("Strange file in SQL data Planner directory: %s%s", 
-				   SQL_DIR, name);
+		gchar  *sql_file;
+		
+		if (!g_str_has_suffix (name, ".sql")) {
 			continue;
 		}
+
+		sql_file = g_build_filename (sql_dir, name, NULL);
 
 		/* Find version between "-" and ".sql" */
 		namev = g_strsplit (sql_file,"-",-1);

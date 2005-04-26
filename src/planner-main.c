@@ -56,7 +56,7 @@ main (int argc, char **argv)
 	};
 	gchar           *filename;
 	
-	bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);  
+	bindtextdomain (GETTEXT_PACKAGE, mrp_paths_get_locale_dir ());  
         bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 	textdomain (GETTEXT_PACKAGE);
 

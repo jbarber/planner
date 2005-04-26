@@ -34,19 +34,30 @@ planner_win32_get_quark ()
 	return quark;
 }
 
-void
-planner_util_show_url (const gchar *url)
+gboolean
+planner_util_show_url (const gchar *url,
+		       GError     **error)
 {
 	ShellExecute (NULL, "open", url, NULL, NULL, SW_SHOWNORMAL);
+
+	// Fix me later
+	return TRUE;
 }
 
 gboolean
 planner_util_show_help (GError      **error)
 {
 	int    res;
+	gchar *path;
+	gchar *file;
 
 	// should use HtmlHelp but it is not part of MingW yet
-	res = (int) ShellExecute (NULL, "open", "planner.chm", NULL, NULL, SW_SHOWNORMAL);
+	path = g_win32_get_package_installation_subdirectory (NULL, NULL, ".");
+	file = g_build_filename (path, "planner.chm", NULL);
+
+	res = (int) ShellExecute (NULL, "open", file, NULL, NULL, SW_SHOWNORMAL);
+	g_free (file);
+	g_free (path);
 	
 	if (res <= 32) {
 		g_set_error (error,

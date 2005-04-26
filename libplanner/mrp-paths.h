@@ -36,5 +36,7 @@ gchar *mrp_paths_get_image_dir         (const gchar *filename);
 gchar *mrp_paths_get_dtd_dir           (const gchar *filename);
 gchar *mrp_paths_get_stylesheet_dir    (const gchar *filename);
 gchar *mrp_paths_get_ui_dir            (const gchar *filename);
+gchar *mrp_paths_get_sql_dir           (void);
+gchar *mrp_paths_get_locale_dir        (void);
 
 #endif /* __MRP_PATHS_H__ */

@@ -36,6 +36,8 @@ static const gchar *image_dir         = DATADIR "/planner/images";
 static const gchar *dtd_dir           = DATADIR "/planner/dtd";
 static const gchar *stylesheet_dir    = DATADIR "/planner/stylesheets";
 static const gchar *ui_dir            = DATADIR "/planner/ui";
+static const gchar *sql_dir           = DATADIR "/planner/sql";
+static const gchar *locale_dir        = GNOMELOCALEDIR;
 
 gchar *
 mrp_paths_get_glade_dir (const gchar *filename)
@@ -85,3 +87,14 @@ mrp_paths_get_ui_dir (const gchar *filename)
 	return g_build_filename (ui_dir, filename, NULL);
 }
 
+gchar *
+mrp_paths_get_sql_dir ()
+{
+	return g_strdup (sql_dir);
+}
+
+gchar *
+mrp_paths_get_locale_dir ()
+{
+	return g_strdup (locale_dir);
+}

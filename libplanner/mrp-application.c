@@ -29,6 +29,7 @@
 #include "mrp-file-module.h"
 #include "mrp-private.h"
 #include "mrp-application.h"
+#include "mrp-paths.h"
 
 struct _MrpApplicationPriv {
 	GList *file_readers;
@@ -123,7 +124,7 @@ application_finalize (GObject *object)
 static void
 application_init_gettext (void)
 {
-	bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
+	bindtextdomain (GETTEXT_PACKAGE, mrp_paths_get_locale_dir ());
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 
 	imrp_time_init ();
