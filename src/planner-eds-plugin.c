@@ -943,7 +943,6 @@ plugin_init (PlannerPlugin *plugin,
 	PlannerPluginPriv *priv;
 	GtkUIManager      *ui;
 	GtkActionGroup    *actions;
-	GError            *error = NULL;
 	gchar		  *filename;
 	
 	priv = g_new0 (PlannerPluginPriv, 1);
@@ -959,12 +958,8 @@ plugin_init (PlannerPlugin *plugin,
 	ui = planner_window_get_ui_manager (main_window);
 	gtk_ui_manager_insert_action_group (ui, actions, 0);
 	
-	filename = mrp_paths_get_data_dir ("/planner/ui/eds-plugin.ui");
-	if (!gtk_ui_manager_add_ui_from_file(ui, filename, &error)) {
-		g_message("Building menu failed: %s", error->message);
-		g_message ("Couldn't load: %s",filename);
-		g_error_free(error);
-	}
+	filename = mrp_paths_get_ui_dir ("eds-plugin.ui");
+	gtk_ui_manager_add_ui_from_file (ui, filename, NULL);
 	g_free (filename);
 	gtk_ui_manager_ensure_update (ui);
 }
