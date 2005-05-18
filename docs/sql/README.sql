@@ -12,17 +12,22 @@ A very brief getting started howto (change username etc to use...):
 
   postmaster -D /tmp/test-db
 
+
+-- This is usualy done by a database administrator  
+
 * Enable access to another user than the default:
 
   echo 'CREATE USER rhult CREATEDB;' | psql -e template1
 
+* Create database group:
+
+  echo 'CREATE GROUP planner WITH USER rhult;' | psql -e -d plannerdb
+
+-- This is done by the user
+
 * Create a UNICODE database:
 
   createdb -E UNICODE -U rhult plannerdb
-
-* Create database group:
-
-  echo 'CREATE GROUP planner WITH USER rhult;' | psql -e -U rhult -d plannerdb
 
 * Create tables from new. This depends upon the schema that you are up to 
   in your code. Use the highest versioned SQL file.
@@ -39,10 +44,21 @@ A very brief getting started howto (change username etc to use...):
   
   e.g.
   cat upgrade-0.6.x-0.11.sql | psql -e -U rhult -d plannerdb
+
+-- How to start over
   
 * Drop database and group to start over:
 
   echo 'DROP GROUP planner;' | psql -e -U rhult -d plannerdb
   dropdb plannerdb
  
+
+
+-- And then...
+
+Start planner
+Add some items to a project
+Export to a database
+
+Import from the database next time you use planner.
 
