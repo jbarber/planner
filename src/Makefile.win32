@@ -1,0 +1,280 @@
+#
+# Makefile.win32
+#
+
+#
+# PATHS
+#
+
+# Compiler Options
+
+SUBSYTEM = -mwindows
+
+DLL_LD_FLAGS += -mms-bitfields -mno-cygwin -Wl,--enable-auto-image-base --no-undefined -Wl,--export-all -mwin32
+
+DEPS = libgnomecanvas-2.0,libglade-2.0,libgnomeprint-2.2,libgnomeprintui-2.2
+
+ifdef HAVE_GDA
+DEPS := $(DEPS),libgda
+endif
+
+ifeq ($(DESTDIR),)
+export DESTDIR=$(HOME)
+endif
+
+ifeq ($(PREFIX),)
+export PREFIX=$(HOME)/dev
+endif
+
+export CFLAGS := $(CFLAGS) -mms-bitfields -mno-cygwin -I.. `pkg-config --cflags $(DEPS)` -I/usr/include -I../libplanner -I$(PREFIX)/include
+
+SUBSYSTEM = -mwindows
+
+ifdef HAVE_PYTHON
+CFLAGS := $(CFLAGS) -I$(PYTHON_DIR)/include -I$(PYTHON_DIR)/include/pygtk-2.0
+endif
+
+DEFINES = -DWIN32 \
+	-DWIN32_LEAN_AND_MEAN \
+	-DUSE_STABLE_LIBGNOMEUI \
+	-DVERSION=\""$(VERSION)\""
+
+C_SRC = \
+	planner-marshal.c		\
+	eel-canvas-rect.c		\
+	planner-application.c		\
+	planner-assignment-model.c	\
+	planner-calendar.c		\
+	planner-calendar-dialog.c	\
+	planner-calendar-selector.c	\
+	planner-canvas-line.c		\
+	planner-cell-renderer-date.c	\
+	planner-cell-renderer-list.c	\
+	planner-cell-renderer-popup.c	\
+	planner-cmd-manager.c		\
+	planner-column-dialog.c		\
+	planner-conf-win32.c		\
+	planner-day-type-dialog.c	\
+	planner-default-week-dialog.c	\
+	planner-format.c		\
+	planner-group-dialog.c		\
+	planner-group-model.c		\
+	planner-list-model.c		\
+	planner-main.c			\
+	planner-phase-dialog.c		\
+	planner-plugin.c		\
+	planner-plugin-loader.c		\
+	planner-popup-button.c		\
+	planner-popup-entry.c		\
+	planner-predecessor-model.c	\
+	planner-print-dialog.c		\
+	planner-print-job.c		\
+	planner-project-properties.c	\
+	planner-property-dialog.c	\
+	planner-property-model.c	\
+	planner-resource-cmd.c		\
+	planner-resource-dialog.c	\
+	planner-resource-input-dialog.c	\
+	planner-scale-utils.c		\
+	planner-sidebar.c		\
+	planner-table-print-sheet.c	\
+	planner-task-cmd.c		\
+	planner-task-date-widget.c	\
+	planner-task-dialog.c		\
+	planner-task-input-dialog.c	\
+	planner-util-win32.c		\
+	planner-view.c			\
+	planner-window.c		\
+	planner-working-time-dialog.c	\
+	$(gantt_task_source)		\
+	$(task_source)			\
+	$(resource_source)		\
+	$(usage_source)
+
+RC =	../data/planner.rc
+
+gantt_task_source = 			\
+	planner-gantt-background.c	\
+	planner-gantt-header.c		\
+	planner-gantt-model.c		\
+	planner-task-tree.c		\
+	planner-task-popup.c 		\
+	planner-relation-arrow.c	\
+	planner-gantt-chart.c		\
+	planner-gantt-print.c		\
+	planner-gantt-row.c		\
+	planner-gantt-view.c		\
+	planner-task-view.c
+
+resource_source = 			\
+	planner-resource-view.c
+
+usage_source = 				\
+	planner-usage-view.c		\
+	planner-usage-chart.c		\
+	planner-usage-model.c		\
+	planner-usage-row.c		\
+	planner-usage-tree.c
+
+#
+# Plugins
+#
+
+ifdef HAVE_GDA
+libsql_plugin_la_SOURCES = planner-sql-plugin.c
+libsql_plugin_la_LDFLAGS = -avoid-version -module `pkg-config --libs libgda`
+libsql_plugin_la_CFLAGS = `pkg-config --cflags libgda`
+endif
+
+libhtml_plugin_la_SOURCES = planner-html-plugin.c
+libhtml_plugin_la_LDFLAGS = -avoid-version -module
+
+libxmlplanner_plugin_la_SOURCES = planner-xml-planner-plugin.c
+libxmlplanner_plugin_la_LDFLAGS = -avoid-version -module
+
+libmsp_plugin_la_SOURCES = planner-msp-plugin.c
+libmsp_plugin_la_LDFLAGS = -avoid-version -module `pkg-config --libs libxml-2.0,libexslt`
+
+ifdef HAVE_PYTHON
+libpython_plugin_la_SOURCES = planner-python-plugin.c
+libpython_plugin_la_LDFLAGS = -avoid-version -module -L$(PYTHON_DIR)/libs -l python24
+endif
+
+OBJECTS = $(C_SRC:%.c=%.o) $(RC:%.rc=%.o)
+
+OBJECTS_libsql_plugin_la = $(libsql_plugin_la_SOURCES:%.c=%.o)
+
+OBJECTS_libhtml_plugin_la = $(libhtml_plugin_la_SOURCES:%.c=%.o)
+
+OBJECTS_libxmlplanner_plugin_la = $(libxmlplanner_plugin_la_SOURCES:%.c=%.o)
+
+OBJECTS_libmsp_plugin_la = $(libmsp_plugin_la_SOURCES:%.c=%.o)
+
+OBJECTS_libpython_plugin_la = $(libpython_plugin_la_SOURCES:%.c=%.o)
+
+
+##
+## LIBRARIES
+##
+
+LIBS = -L$(PREFIX)/lib -leggrecent `pkg-config --libs libgnomecanvas-2.0,libglade-2.0,libgnomeprint-2.2,libgnomeprintui-2.2` -lplanner-1 -L../libplanner
+
+##
+## RULES
+##
+
+# How to make a C file
+
+%.o: %.c
+	$(CC) $(CFLAGS) $(DEFINES) $(INCLUDE_PATHS) -o $@ -c $<
+
+%.o: %.rc
+	windres -i $< -o $@
+
+##
+## TARGET DEFINITIONS
+##
+
+.PHONY: all clean
+
+TARGETS = \
+	planner-marshal.h \
+	planner.exe \
+	libxmlplanner-plugin.dll \
+	libmsp-plugin.dll \
+	libhtml-plugin.dll
+
+ifdef HAVE_GDA
+TARGETS := $(TARGETS) \
+	libsql-plugin.dll
+endif
+
+ifdef HAVE_PYTHON
+TARGETS := $(TARGETS) \
+	libpython-plugin.dll
+endif
+
+all: \
+	../config.h \
+	$(TARGETS)
+
+planner-marshal.h: planner-marshal.list
+	glib-genmarshal --prefix=planner_marshal planner-marshal.list --header > xgen-gmh \
+	&& (cmp -s xgen-gmh planner-marshal.h || cp xgen-gmh planner-marshal.h) \
+	&& rm -f xgen-gmh xgen-gmh~
+
+planner-marshal.c: planner-marshal.list
+	(echo "#include \"planner-marshal.h\""; glib-genmarshal --prefix=planner_marshal planner-marshal.list --body) > xgen-gmc \
+	&& cp xgen-gmc planner-marshal.c \
+	&& rm -f xgen-gmc xgen-gmc~
+
+../config.h: ../config.h.win32
+	cp ../config.h.win32 ../config.h
+
+##
+## BUILD EXE
+##
+
+planner.exe: $(OBJECTS)
+	$(CC) $(OBJECTS) $(LIBS) $(SUBSYSTEM) -Wl,-Map -Wl,planner.map -Wl,--cref --no-undefined -export-all -Wl,--output-def -Wl,planner.def -Wl,--out-implib=planner.a -o planner.exe
+
+libsql-plugin.dll: $(OBJECTS_libsql_plugin_la)
+	$(CC) -shared $(OBJECTS_libsql_plugin_la) planner.a $(LIBS) $(libsql_plugin_la_LDFLAGS) $(DLL_LD_FLAGS) -Wl,-Map -Wl,libsql-plugin.map -Wl,--cref -o libsql-plugin.dll
+
+libhtml-plugin.dll: $(OBJECTS_libhtml_plugin_la)
+	$(CC) -shared $(OBJECTS_libhtml_plugin_la) planner.a $(LIBS) $(libhtml_plugin_la_LDFLAGS) $(DLL_LD_FLAGS) -Wl,-Map -Wl,libhtml-plugin.map -Wl,--cref -o libhtml-plugin.dll
+
+libxmlplanner-plugin.dll: $(OBJECTS_libxmlplanner_plugin_la)
+	$(CC) -shared $(OBJECTS_libxmlplanner_plugin_la) planner.a $(LIBS) $(libxmlplanner_plugin_la_LDFLAGS) $(DLL_LD_FLAGS) -Wl,-Map -Wl,libxmlplanner-plugin.map -Wl,--cref -o libxmlplanner-plugin.dll
+
+libmsp-plugin.dll: $(OBJECTS_libmsp_plugin_la)
+	$(CC) -shared $(OBJECTS_libmsp_plugin_la) planner.a $(LIBS) $(libmsp_plugin_la_LDFLAGS) $(DLL_LD_FLAGS) -Wl,-Map -Wl,libmsp-plugin.map -Wl,--cref -o libmsp-plugin.dll
+
+libpython-plugin.dll: $(OBJECTS_libpython_plugin_la)
+	$(CC) -shared $(OBJECTS_libpython_plugin_la) planner.a $(LIBS) $(libpython_plugin_la_LDFLAGS) $(DLL_LD_FLAGS) -Wl,-Map -Wl,libpython-plugin.map -Wl,--cref -o libpython-plugin.dll
+
+../data/planner.rc: ../data/planner.rc.in
+	version1=`echo $(VERSION) | cut -d. -f1`; \
+	version2=`echo $(VERSION) | cut -d. -f2`; \
+	version3=`echo $(VERSION) | cut -d. -f3`; \
+	version4=`echo $(VERSION) | cut -d. -f4`; \
+	if test "$$version1" = ""; then \
+		version1=0; \
+	fi; \
+	if test "$$version2" = ""; then \
+		version2=0; \
+	fi; \
+	if test "$$version3" = ""; then \
+		version3=0; \
+	fi; \
+	if test "$$version4" = ""; then \
+		version4=0; \
+	fi; \
+	FILEVERSION=`echo $$version1,$$version2,$$version3,$$version4`; \
+	sed -e "s/@VERSION@/$(VERSION)/; s/@FILEVERSION@/$$FILEVERSION/" ../data/planner.rc.in >../data/planner.rc
+	
+##
+## CLEAN RULES
+##
+
+clean:
+	rm -f *.o
+	rm -f planner.exe
+	rm -f planner-marshal.c planner-marshal.h
+	rm -f *.dll
+	rm -f *.map
+	rm -f *.a
+	rm -f *.def
+	rm -f ../data/planner.rc
+	rm -f ../data/planner.o
+
+install: all
+	-mkdir -p $(DESTDIR)/planner
+	cp planner.exe $(DESTDIR)/planner
+	-mkdir -p $(DESTDIR)/planner/lib/planner/plugins
+	cp lib*-plugin.dll $(DESTDIR)/planner/lib/planner/plugins
+
+uninstall:
+	rm -f $(DESTDIR)/planner/planner.exe
+	rm -f $(DESTDIR)/planner/libgantt-task.dll
+	rm -f $(DESTDIR)/planner/lib/planner/plugins/lib*-plugin.dll

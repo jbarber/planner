@@ -1,0 +1,159 @@
+#
+# Makefile.win32
+#
+
+SUBDIRS=libplanner src po
+
+VERSION := `sed <configure.in -n 's/AM_INIT_AUTOMAKE[^,]*, *\([^)]*\))/\1/p'`
+
+ifeq ($(DESTDIR),)
+export DESTDIR=$(HOME)
+endif
+
+ifeq ($(PREFIX),)
+export PREFIX=$(HOME)/dev
+endif
+
+export CFLAGS := $(CFLAGS) -Wall -Wunused -Wchar-subscripts -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wpointer-arith -Wno-sign-compare -Werror
+
+RECURSIVE_TARGETS = all-recursive clean-recursive install-recursive uninstall-recursive
+
+$(RECURSIVE_TARGETS):
+	@set fnord $$MAKEFLAGS; version=$(VERSION); amf=$$2; \
+	dot_seen=no; \
+	target=`echo $@ | sed s/-recursive//`; \
+	list='$(SUBDIRS)'; for subdir in $$list; do \
+	  echo "Making $$target in $$subdir"; \
+	  if test "$$subdir" = "."; then \
+	    dot_seen=yes; \
+	    local_target="$$target-am"; \
+	  else \
+	    local_target="$$target"; \
+	  fi; \
+	  (cd $$subdir && $(MAKE) -f Makefile.win32 $$local_target VERSION=$$version) \
+	   || case "$$amf" in *=*) exit 1;; *k*) fail=yes;; *) exit 1;; esac; \
+	done; \
+	if test "$$dot_seen" = "no"; then \
+	  $(MAKE) -f Makefile.win32 "$$target-am" || exit 1; \
+	fi; test -z "$$fail"
+
+all: all-recursive
+all-am:
+
+clean: clean-recursive
+
+clean-am:
+	rm -f config.h
+
+DTD = \
+	mrproject-0.5.1.dtd		\
+	mrproject-0.6.dtd
+
+GLADE = \
+	add-predecessor.glade		\
+	calendar-dialog.glade		\
+	column-dialog.glade		\
+	group-dialog.glade		\
+	new-property.glade		\
+	project-properties.glade	\
+	property-dialog.glade		\
+	resource-dialog.glade		\
+	resource-input-dialog.glade	\
+	sql.glade			\
+	task-dialog.glade		\
+	task-input-dialog.glade		\
+	task-date-widget.glade		\
+	eds.glade
+
+IMAGES = 				\
+	tasks.png			\
+	gantt.png			\
+	resources.png			\
+	resources_usage.png		\
+	24_insert_task.png		\
+	24_remove_task.png		\
+	24_unlink_task.png		\
+	24_link_task.png		\
+	24_indent_task.png		\
+	24_unindent_task.png		\
+	24_insert_resource.png		\
+	24_remove_resource.png		\
+	24_edit_resource.png		\
+	24_groups.png			\
+	24_task_down.png		\
+	24_task_up.png			\
+	gnome-planner.png
+
+SQL = \
+	database-0.13.sql		\
+	database-0.11.sql		\
+	database.sql			\
+	upgrade-0.11-0.13.sql		\
+	upgrade-0.6.x-0.11.sql
+
+STYLESHEETS = \
+	planner2html.xsl		\
+	html1_css.xsl			\
+        html1_gantt.xsl			\
+        html1_resources.xsl		\
+        html1_tasks.xsl			\
+	planner2plannerv011.xsl		\
+	msp2planner.xsl
+
+UI = \
+	gantt-view.ui		\
+	task-view.ui		\
+	gantt-view.ui		\
+	html-plugin.ui		\
+	main-window.ui		\
+	resource-view.ui	\
+	sql-plugin.ui		\
+	task-view.ui		\
+	xml-planner-plugin.ui	\
+	time-table-view.ui	\
+	eds-plugin.ui		\
+	msp-plugin.ui
+
+COPYFILES = \
+	mkdir -p $$dest; \
+	for file in $$list; do \
+	  cp $$src/$$file $$dest; \
+	done
+
+RMFILES = \
+	for file in $$list; do \
+	  rm -f $$dest/$$file; \
+	done
+
+install: install-recursive
+install-am:
+	-mkdir -p $(DESTDIR)/planner
+	cp COPYING $(DESTDIR)/planner
+	dest=$(DESTDIR)/planner/share/planner/dtd; list='$(DTD)'; src=data/dtd; \
+	$(COPYFILES)
+	dest=$(DESTDIR)/planner/share/planner/glade; list='$(GLADE)'; src=data/glade; \
+	$(COPYFILES)
+	dest=$(DESTDIR)/planner/share/pixmaps/planner; list='$(IMAGES)'; src=data/images; \
+	$(COPYFILES)
+	dest=$(DESTDIR)/planner/share/planner/sql; list='$(SQL)'; src=data/sql; \
+	$(COPYFILES)
+	dest=$(DESTDIR)/planner/share/planner/stylesheets; list='$(STYLESHEETS)'; src=data/stylesheets; \
+	$(COPYFILES)
+	dest=$(DESTDIR)/planner/share/planner/ui; list='$(UI)'; src=data/ui; \
+	$(COPYFILES)
+
+uninstall: uninstall-recursive
+uninstall-am:
+	rm -f $(DESTDIR)/planner/COPYING
+	dest=$(DESTDIR)/planner/share/planner/dtd; list='$(DTD)'; \
+	$(RMFILES)
+	dest=$(DESTDIR)/planner/share/planner/glade; list='$(GLADE)'; \
+	$(RMFILES)
+	dest=$(DESTDIR)/planner/share/pixmaps/planner; list='$(IMAGES)'; \
+	$(RMFILES)
+	dest=$(DESTDIR)/planner/share/planner/sql; list='$(SQL)'; \
+	$(RMFILES)
+	dest=$(DESTDIR)/planner/share/planner/stylesheets; list='$(STYLESHEETS)'; \
+	$(RMFILES)
+	dest=$(DESTDIR)/planner/share/planner/ui; list='$(UI)'; \
+	$(RMFILES)

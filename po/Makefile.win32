@@ -1,0 +1,53 @@
+#
+# Makefile.win32
+#
+
+MSGFMT=msgfmt
+
+ifeq ($(DESTDIR),)
+DESTDIR=$(HOME)
+endif
+
+CATALOGS=$(wildcard *.po)
+
+OBJECTS=$(CATALOGS:%.po=%.mo)
+
+##
+## RULES
+##
+
+# How to make a MO file
+
+%.mo: %.po
+	$(MSGFMT) -o $@ $<
+
+##
+## TARGET DEFINITIONS
+##
+
+.PHONY: all clean
+
+all: \
+	$(OBJECTS)
+
+##
+## CLEAN RULES
+##
+
+clean:
+	rm -f *.mo
+
+install: all
+	list='$(OBJECTS)'; for catalog in $$list; do \
+	  dest=$(DESTDIR)/planner/share/locale/`basename $$catalog .mo`/LC_MESSAGES; \
+	  echo "Installing $$catalog as $$dest/planner.mo"; \
+	  mkdir -p $$dest; \
+	  cp $$catalog $$dest/planner.mo; \
+	done;
+
+uninstall:
+	list='$(OBJECTS)'; for catalog in $$list; do \
+	  dest=$(DESTDIR)/planner/share/locale/`basename $$catalog .mo`/LC_MESSAGES; \
+	  echo "Uninstalling $$dest/planner.mo"; \
+	  rm -f $$dest/planner.mo; \
+	done;

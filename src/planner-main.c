@@ -30,6 +30,9 @@
 #include <libgnome/gnome-program.h>
 #include <libgnomeui/gnome-ui-init.h>
 #endif
+#ifdef WIN32
+#include <gtk/gtkicontheme.h>
+#endif
 #include "libplanner/mrp-paths.h"
 #include "planner-application.h"
 #include "planner-window.h"
@@ -79,9 +82,17 @@ main (int argc, char **argv)
 				      NULL);
 #endif
 
+
 	filename = mrp_paths_get_image_dir ("gnome-planner.png");
 	gtk_window_set_default_icon_from_file (filename, NULL);
 	g_free (filename);
+
+#ifdef WIN32
+	filename = g_win32_get_package_installation_subdirectory (NULL, NULL, "share/icons");
+	gtk_icon_theme_append_search_path (gtk_icon_theme_get_default(),
+					   filename);
+	g_free (filename);
+#endif
 
 	application = planner_application_new ();
 

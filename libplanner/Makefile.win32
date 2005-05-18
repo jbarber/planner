@@ -1,0 +1,191 @@
+#
+# Makefile.win32
+#
+
+#
+# PATHS
+#
+
+# Compiler Options
+
+ifeq ($(DESTDIR),)
+DESTDIR=$(HOME)
+endif
+
+DLL_LD_FLAGS += -Wl,--enable-auto-image-base
+
+ifeq ($(PREFIX),)
+export PREFIX=$(HOME)/dev
+endif
+
+DEPS = gtk+-2.0
+
+ifdef HAVE_GDA
+DEPS := $(DEPS),libgda
+endif
+
+CFLAGS := $(CFLAGS) -mms-bitfields -mno-cygwin -I.. `pkg-config --cflags $(DEPS)` -I/usr/include -I$(PREFIX)/include
+
+DEFINES = -DWIN32 \
+	-DWIN32_LEAN_AND_MEAN
+
+C_SRC = \
+	mrp-marshal.c				\
+	mrp-application.c			\
+	mrp-assignment.c			\
+	mrp-calendar.c				\
+	mrp-day.c				\
+	mrp-group.c				\
+	mrp-object.c				\
+	mrp-file-module.c			\
+	mrp-project.c				\
+	mrp-resource.c				\
+	mrp-storage-module.c			\
+	mrp-storage-module-factory.c		\
+	mrp-task-manager.c			\
+	mrp-task.c				\
+	mrp-relation.c				\
+	mrp-types.c				\
+	mrp-property.c				\
+	mrp-time.c				\
+	mrp-error.c				\
+	mrp-paths-win32.c
+
+#
+# Storage modules
+#
+
+libstorage_mrproject_1_la_SOURCES =			\
+	mrp-storage-mrproject.c				\
+	mrp-parser.c
+
+libstorage_mrproject_1_la_CFLAGS = `pkg-config --cflags libxml-2.0`
+
+libstorage_mrproject_1_la_LDFLAGS =  -avoid-version -module `pkg-config --libs libxml-2.0` -lplanner-1 -L.
+
+ifdef HAVE_GDA
+libstorage_sql_la_SOURCES = 			\
+	mrp-storage-sql.c			\
+	mrp-sql.c
+
+libstorage_sql_la_CFLAGS = `pkg-config --cflags libgda`
+libstorage_sql_la_LDFLAGS =  -avoid-version -module `pkg-config --libs libgda` -lplanner-1 -L.
+endif
+
+libmrp_xml_la_SOURCES =					\
+	mrp-xml.c					\
+	mrp-old-xml.c
+
+libmrp_xml_la_CFLAGS =
+libmrp_xml_la_LDFLAGS = -avoid-version -module `pkg-config --libs libxml-2.0` -lplanner-1 -L.
+
+libmrp_xsl_la_SOURCES = \
+	mrp-xsl.c
+
+libmrp_xsl_la_CFLAGS = \
+	`pkg-config --cflags libxslt`
+
+libmrp_xsl_la_LIBADD = `pkg-config --libs libxslt`
+libmrp_xsl_la_LDFLAGS = -avoid-version -module `pkg-config --libs libexslt` -lplanner-1 -L.
+
+OBJECTS_XSL = $(libmrp_xsl_la_SOURCES:%.c=%.o)
+
+OBJECTS_STORAGE = $(libstorage_mrproject_1_la_SOURCES:%.c=%.o)
+
+OBJECTS_FILE = $(libmrp_xml_la_SOURCES:%.c=%.o)
+
+OBJECTS_SQL = $(libstorage_sql_la_SOURCES:%.c=%.o)
+
+OBJECTS = $(C_SRC:%.c=%.o)
+
+
+##
+## LIBRARIES
+##
+
+LIBS = `pkg-config --libs gtk+-2.0`
+
+##
+## RULES
+##
+
+# How to make a C file
+
+%.o: %.c
+	$(CC) $(CFLAGS) $(libstorage_mrproject_1_la_CFLAGS) $(DEFINES) $(INCLUDE_PATHS) -o $@ -c $<
+
+##
+## TARGET DEFINITIONS
+##
+
+.PHONY: all clean
+
+TARGETS = \
+	libplanner-1.dll \
+	libstorage-mrproject-1.dll \
+	libmrp-xml.dll \
+	libmrp-xsl.dll
+
+ifdef HAVE_GDA
+TARGETS := $(TARGETS) \
+	libstorage-sql-1.dll
+endif
+
+all: \
+	../config.h \
+	mrp-marshal.h \
+	$(TARGETS)
+
+mrp-marshal.h: Makefile.win32 mrp-marshal.list
+	glib-genmarshal --prefix=mrp_marshal mrp-marshal.list --header > xgen-gmh \
+	&& (cmp -s xgen-gmh mrp-marshal.h || cp xgen-gmh mrp-marshal.h) \
+	&& rm -f xgen-gmh xgen-gmh~
+
+mrp-marshal.c: Makefile.win32 mrp-marshal.list
+	(echo "#include \"mrp-marshal.h\""; glib-genmarshal --prefix=mrp_marshal mrp-marshal.list --body) > xgen-gmc \
+	&& cp xgen-gmc mrp-marshal.c \
+	&& rm -f xgen-gmc xgen-gmc~
+
+../config.h: ../config.h.win32
+	cp ../config.h.win32 ../config.h
+
+##
+## BUILD DLL
+##
+
+libplanner-1.dll: $(OBJECTS)
+	$(CC) -shared $(OBJECTS) $(LIB_PATHS) $(LIBS) $(DLL_LD_FLAGS) --out-implib,libplanner-1.dll.a -Wl,-Map -Wl,libplanner-1.map -Wl,--cref -o libplanner-1.dll
+
+libstorage-mrproject-1.dll: $(OBJECTS_STORAGE)
+	$(CC) -shared $(OBJECTS_STORAGE) $(LIB_PATHS) $(LIBS) $(libstorage_mrproject_1_la_LDFLAGS) $(DLL_LD_FLAGS) -Wl,-Map -Wl,libstorage-mrproject-1.map -Wl,--cref -o libstorage-mrproject-1.dll
+
+libmrp-xml.dll: $(OBJECTS_FILE)
+	$(CC) -shared $(OBJECTS_FILE) $(LIB_PATHS) $(LIBS) $(libmrp_xml_la_LDFLAGS) $(DLL_LD_FLAGS) -Wl,-Map -Wl,libmrp-xml.map -Wl,--cref -o libmrp-xml.dll
+
+libmrp-xsl.dll: $(OBJECTS_XSL)
+	$(CC) -shared $(OBJECTS_XSL) $(LIB_PATHS) $(LIBS) $(libmrp_xsl_la_LDFLAGS) $(DLL_LD_FLAGS) -Wl,-Map -Wl,libmrp-xsl.map -Wl,--cref -o libmrp-xsl.dll
+
+libstorage-sql-1.dll: $(OBJECTS_SQL)
+	$(CC) -shared $(OBJECTS_SQL) $(LIB_PATHS) $(LIBS) $(libstorage_sql_la_LDFLAGS) $(DLL_LD_FLAGS) -Wl,-Map -Wl,libstorage-sql-1.map -Wl,--cref -o libstorage-sql-1.dll
+
+##
+## CLEAN RULES
+##
+
+clean:
+	rm -f *.o
+	rm -f *.dll
+	rm -f *.map
+	rm -f mrp-marshal.c mrp-marshal.h
+	rm -f *.a	
+install: all
+	-mkdir -p $(DESTDIR)/planner/lib/planner/file-modules
+	-mkdir -p $(DESTDIR)/planner/lib/planner/storage-modules
+	cp libplanner-1.dll $(DESTDIR)/planner
+	cp libmrp-*.dll $(DESTDIR)/planner/lib/planner/file-modules
+	cp libstorage-*.dll $(DESTDIR)/planner/lib/planner/storage-modules
+
+uninstall:
+	rm -f $(DESTDIR)/planner/libplanner-1.dll
+	rm -f $(DESTDIR)/planner/lib/planner/file-modules/libmrp-*.dll
+	rm -f $(DESTDIR)/planner/lib/planner/storage-modules/libstorage-*.dll
