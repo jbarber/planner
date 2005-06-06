@@ -1017,7 +1017,7 @@ resource_view_edit_columns_cb (GtkAction *action,
 	priv = PLANNER_RESOURCE_VIEW (view)->priv;
 
 	planner_column_dialog_show (PLANNER_VIEW (view)->main_window,
-				    _("Edit Resoruce Columns"),
+				    _("Edit Resource Columns"),
 				    GTK_TREE_VIEW (priv->tree_view));
 }
 
