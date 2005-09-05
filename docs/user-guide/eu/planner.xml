@@ -1,0 +1,2283 @@
+<?xml version="1.0"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+  <!ENTITY legal SYSTEM "legal.xml">
+  <!ENTITY appversion "0.12">
+  <!ENTITY manrevision "1.6">
+  <!ENTITY date "24 Apr 2004">
+  <!ENTITY app "Planner">
+  <!-- Information about the entities
+       The legal.xml file contains legal information, there is no need to edit the file. 
+       Use the appversion entity to specify the version of the application.
+       Use the manrevision entity to specify the revision number of this manual.
+       Use the date entity to specify the release date of this manual.
+       Use the app entity to specify the name of the application. -->
+]>
+<!-- 
+      (Do not remove this comment block.)
+  Maintained by the GNOME Documentation Project
+  http://developer.gnome.org/projects/gdp
+  Template version: 2.0 beta
+  Template last modified Apr 11, 2002
+-->
+<!-- =============Document Header ============================= -->
+<article id="index" lang="eu">
+<!-- please do not change the id; for translations, change lang to --> 
+<!-- appropriate code --> 
+<articleinfo> 
+    <subtitle> &app; &appversion;rako</subtitle>
+    <title>&app;-en erabiltzailearen gida, &manrevision; bertsioa </title>       
+
+    <copyright>
+         <year>2002</year> <year>2003</year> <year>2004</year> 
+         <holder>Kurt Maute, PMP</holder>
+    </copyright> 
+   <copyright>
+         <year>2000</year> <year>2001</year> 
+         <holder>Alvaro Del Castillo</holder>
+   </copyright> 
+<copyright>
+         <year>2000</year> <year>2001</year> 
+         <holder>Pedro Soria-Rodriguez</holder>
+</copyright> 
+
+<!-- translators: uncomment this:-->
+
+  <copyright>
+   <year>2005</year>
+   <holder>Hizkuntza Politikarako Sailburuordetza 
+      <email>hizkpol@ej-gv.es</email> 
+      (euskarazko itzulpena)
+   </holder>
+
+  </copyright>
+
+<!-- An address can be added to the publisher information.  If a role is 
+     not specified, the publisher/author is the same for all versions of the 
+     document.  --> 
+<publisher>
+<publishername> GNOME dokumentazio-proiektua</publishername>
+</publisher> 
+
+   &legal; 
+<!-- This file  contains link to license for the documentation (GNU FDL), and 
+        other legal stuff such as "NO WARRANTY" statement. Please do not change 
+	any of this. -->
+
+    <authorgroup>
+	<author>
+		<firstname>Kurt</firstname> 
+		<surname>Maute, PMP</surname> 
+		<affiliation>
+			<orgname>GNOME dokumentazio-proiektua</orgname> 
+			<address> <email>Kurt@Maute.us</email> </address> 
+		</affiliation>
+	</author> 
+	<author>
+		<firstname>Alvaro</firstname> 
+		<surname>Del Castillo</surname> 
+		<affiliation>
+			<orgname>GNOME dokumentazio-proiektua</orgname> 
+	  		<address> <email>acs@barrapunto.com</email> </address> 
+		</affiliation>
+	</author> 
+	<author>
+		<firstname>Pedro</firstname> 
+		<surname>Soria-Rodriguez</surname> 
+		<affiliation>
+			<orgname>GNOME dokumentazio-proiektua</orgname> 
+			<address> <email>sorrodp@alum.wpi.edu</email></address> 
+		</affiliation>
+	</author> 
+      
+<!-- This is appropriate place for other contributors: translators,
+     maintainers,  etc. Commented out by default.
+     
+      <othercredit role="translator">
+		<firstname>Latin</firstname> 
+		<surname>Translator 1</surname> 
+		<affiliation> 
+	  		<orgname>Latin Translation Team</orgname> 
+	  		<address> <email>translator@gnome.org</email> </address> 
+		</affiliation>
+		<contrib>Latin translation</contrib>
+      </othercredit>
+--></authorgroup>
+
+<!-- According to GNU FDL, revision history is mandatory if you are --> 
+<!-- modifying/reusing someone else's document.  If not, you can omit it. --> 
+<!-- Remember to remove the &manrevision; entity from the revision entries other
+--> 
+<!-- than the current revision. --> 
+<!-- The revision numbering system for GNOME manuals is as follows: --> 
+<!-- * the revision number consists of two components --> 
+<!-- * the first component of the revision number reflects the release version 
+of the GNOME desktop. --> 
+<!-- * the second component of the revision number is a decimal unit that is 
+incremented with each revision of the manual. --> 
+<!-- For example, if the GNOME desktop release is V2.x, the first version 
+of the manual that --> 
+<!-- is written in that desktop timeframe is V2.0, the second version of the 
+manual is V2.1, etc. --> 
+<!-- When the desktop release version changes to V3.x, the revision number of 
+the manual changes --> <!-- to V3.0, and so on. --> 
+<revhistory>
+<revision>
+	<revnumber>&app;-en erabiltzailearen gida 1.6 &app; 0.12rako</revnumber> 
+	<date>&date;</date> 
+	<authorinitials>kmm</authorinitials> 
+ <revdescription> 
+  
+<para>
+    Eginbide berriak: 
+  <itemizedlist>
+   <listitem>     
+<para>
+Desegin/Berregin
+</para>
+   </listitem>
+  </itemizedlist>   
+</para>  
+<para>
+Urruneko konexiorako PostgreeSQL konfiguratzea gehitu da  
+</para>
+ </revdescription>
+</revision> 
+<revision>
+<revnumber>&app;-en erabiltzailearen gida 1.5.3; &app; 0.12ren garapenerako</revnumber> 
+<date>2004 mar 29</date> 
+<authorinitials>kmm</authorinitials> 
+<revdescription>   
+<para>
+    Eginbide berriak: 
+<itemizedlist>
+<listitem>
+<para>
+Baliabide-erabileraren ikuspegia
+</para>
+</listitem> 
+<listitem>
+<para>
+Baliabidearen izen laburra
+</para>
+</listitem>
+</itemizedlist>  
+</para>  
+<para>
+MrProject-eko izenak Planner-ekoekin aldatu dira
+</para>  
+<para>
+Menu-elementuetako aukerak aldatu egin dira, Ekintzak menu berria jasotzeko
+</para>  
+<para>
+Pantaila-argazki guztiak birmoldatzeaz gain, tamaina jatorrizkoaren % 60ra 
+murriztu da  
+</para>  
+<para>
+Pantaila-argazkien kopurua murriztu egin da.  Pantaila-argazkien balio 
+erantsia ebaluatu behar da Planner hazten joan ahala, eta, oraingoz, ondorengoak 
+kendu dira: 
+<itemizedlist>
+<listitem>
+<para>
+  <emphasis>group1-subtasks.png</emphasis> - task-view.png jarri da horren 
+  ordez, laburpenen eta azpizereginen hierarkia erakusten baitu.
+</para>      
+</listitem> 
+<listitem>
+<para>
+group1-task-linked.png
+</para>      
+</listitem> 
+<listitem>
+<para>
+task-up.png
+</para>      
+</listitem> 
+<listitem>
+<para>
+project-zoom-up.png
+</para>      
+</listitem> 
+<listitem>
+<para>
+project-zoom-fit.png
+</para>      
+</listitem> 
+<listitem>
+<para>
+task-custom-properties-add.png
+</para>      
+</listitem>
+</itemizedlist>  
+</para>
+</revdescription>
+</revision> 
+<revision>
+<revnumber>&app;-en erabiltzailearen gida 1.5.2; MrProject V0.10erako;</revnumber> 
+<date>2003 aza 13</date> 
+<authorinitials>kmm</authorinitials> 
+<revdescription>   
+<para>
+    Eginbide berriak: 
+<itemizedlist>
+<listitem>
+<para>
+Ireki datu-basetik/Gorde datu-basean
+</para>
+</listitem> 
+<listitem>
+<para>
+Datu-basea nola konfiguratu azaltzen duen eranskina
+</para>      
+</listitem> 
+<listitem>
+<para>
+Gorde HTML gisa
+</para>
+</listitem>
+</itemizedlist>  
+</para>
+</revdescription>
+</revision> 
+<revision>
+<revnumber>&app;-en erabiltzailearen gida V1.4 MrProject V0.9rako</revnumber> 
+<date>2003 ots 23</date> 
+<authorinitials>kmm</authorinitials> <revdescription>   
+<para>
+      Eginbide berriak: 
+<itemizedlist>
+<listitem>
+<para>
+Proiektuen, zereginen eta baliabideen propietate pertsonalizatuak
+</para>
+</listitem> 
+<listitem>
+<para>
+Iraupen Finkoa modua Zereginentzat
+</para>
+</listitem> 
+<listitem>
+<para>
+Mugarriak
+</para>
+</listitem> 
+<listitem>
+<para>
+Baliabide-esleipenak unitateka
+</para>
+</listitem> 
+<listitem>
+<para>
+INPRIMATZEA!
+</para>
+</listitem>
+</itemizedlist>
+ Gehitze azkarraren elkarrizketa-koadroak Zereginetarako eta Baliabideetarako  
+</para>
+</revdescription>
+</revision> 
+<revision>
+<revnumber>&app;-en erabiltzailearen gida 1.3 MrProject 0.8rako</revnumber> 
+<date>2002 abe 29</date> 
+<authorinitials>kmm</authorinitials> 
+<revdescription>   
+<para>
+      Eginbide berriak: 
+<itemizedlist>
+<listitem>
+<para>
+Egutegiak
+</para>
+</listitem> 
+<listitem>
+<para>
+Kostu-zutabea Baliabide-ikuspegian
+</para>
+</listitem>
+</itemizedlist>
+ Pantaila-argazki berri batzuk  
+</para>
+</revdescription>
+</revision>
+</revhistory>     
+<releaseinfo> Eskuliburu hau &app;-en &appversion; bertsioari dagokio</releaseinfo> 
+<legalnotice> 
+      <title>Ohar-bidaltzea</title>       
+<para>
+Programa-erroreen berri emateak edo &app;-i edo eskuliburu honi buruzko oharrak 
+<ulink url="http://bugzilla.gnome.org" type="http">GNOME Bugzilla</ulink> 
+gunera bidal daitezke, &app; produktuaren atalera. Mesedez, zerbait bidali 
+aurretik, begira ezazu bugzillan, lehendik ez dela bidali egiaztatzeko.      
+</para>
+
+<!-- Translators may also add here feedback address for translations -->
+</legalnotice>
+</articleinfo> 
+
+  <indexterm zone="index">
+<primary>MY-GNOME-APP</primary>
+</indexterm> 
+<indexterm zone="index">
+<primary>mygnomeapp</primary></indexterm>
+
+<!-- ============= Document Body ============================= --> 
+<!-- ============= Introduction ============================== --> 
+<!-- Use the Introduction section to give a brief overview of what
+     the application is and what it does. --> 
+<sect1 id="mrp-introduction"> 
+    <title>Sarrera</title> 
+    
+<para>
+&app; proiektuak kudeatzeko tresna orokor bat da, hainbat eginbide eskaintzen 
+dituena. Ikuspegi izeneko 4 pantaila-diseinu eskaintzen ditu.  Ikus dezakezunez, 
+&app; leihoaren ezkerreko tresna-barrako ikonoetan klik eginez ireki daitezke 
+ikuspegiak.
+</para>
+ 
+    <sect2 id="mrp-task-view">
+<title>Zereginen ikuspegia:</title> 
+        
+<para>
+  Gantt ikuspegian ere erakusten dira zereginak, baina bakoitzaren xehetasun 
+gehiago ematen da Zereginen ikuspegian. 
+<figure id="task-view" float="1">
+            <title>&app;-eko Zereginen ikuspegia</title>
+            <screenshot>
+<graphic fileref="figures/task-view.png" format="PNG"></graphic>
+</screenshot>
+</figure>          
+</para>
+<para>
+Ondorengoetarako erabiltzen da Zereginen ikuspegia:
+</para>
+<itemizedlist>
+<listitem>    	  
+<para>
+<emphasis>Zereginak definitzeko</emphasis> - proiektu-elementuak zeregin 
+txikiago eta maneiagarriago bihurtzeko  
+</para>  	
+</listitem> 
+<listitem>
+<para>
+<emphasis>Zereginak sekuentziatzeko</emphasis> - zereginen arteko mendekotasunak 
+eta bestelako murriztapenak identifikatzeko
+</para>
+</listitem>
+<listitem>
+<para>
+<emphasis>Zereginen iraupena kalkulatzeko</emphasis> - zereginak egiteko 
+beharko den denbora kalkulatzeko
+</para>
+</listitem>
+<listitem>
+<para>
+<emphasis>Zereginen kostua kalkulatzeko</emphasis> - zereginak egitea kostatuko 
+dena kalkulatzeko
+</para>
+</listitem>
+ <!--
+<listitem>
+<para>
+Scheduling - develop the timeline based on the steps above,
+	plus resource availability
+</para>
+</listitem>
+--></itemizedlist>
+</sect2> <sect2 id="mrp-gantt-view">
+<title>Gantt ikuspegia:</title>
+<para>
+Gantt diagrama eta Zereginen ikuspegiaren bertsio murriztu bat konbinatzen 
+dira Gantt ikuspegian.
+</para>
+<para>
+          Proiektu bateko zeregin guztiak grafikoki bistaratzen dira Gantt 
+diagrametan. Diagramako barra bakoitza zeregin bat egiteko beharko den 
+denboraren adierazpen grafikoa da.  Gantt diagramak ez du eskaintzen beste 
+ikuspegietan erabilgarri ez dagoen eginbiderik, baina proiektuak kudeatzeko 
+tresna oso baliagarria da, proiektuaren datuak ikusteko aukera ematen baitio 
+erabiltzaileari. 
+<figure id="gantt-view" float="1">
+            <title>&app; Gantt ikuspegia</title>
+         <screenshot>
+<graphic fileref="figures/gantt-view.png" format="PNG"></graphic>
+         </screenshot>
+</figure>
+</para>
+<para>
+Ondorengoak egin ditzakezu Gantt ikuspegian:
+</para>
+<itemizedlist>
+<listitem>
+<para>
+Proiektuaren antolaketa grafikoki ikusi
+</para>
+</listitem>
+<listitem>
+<para>
+Zereginen arteko harremanak kudeatu, arrastatu eta jareginez
+</para>
+</listitem>
+<listitem>
+<para>
+Zooma txikiagotu edo handiagotu, hainbat xehetasun-mailatan ikusteko
+</para>
+</listitem>
+<listitem>
+<para>
+Zeregin bakoitzari esleitutako baliabideak ikusi
+</para>
+</listitem>
+</itemizedlist>
+</sect2> <sect2 id="mrp-resource-view">
+<title>Baliabideen ikuspegia:</title>
+          <figure id="resource-view" float="1">
+            <title>&app;-en Baliabideen ikuspegia</title>
+            <screenshot>
+              <graphic fileref="figures/resource-editor.png" format="PNG"></graphic>
+            </screenshot>
+          </figure>
+<para>
+Baliabideen ikuspegiak ondorengo eginbideak eskaintzen dizkizu:
+</para>
+<itemizedlist>
+<listitem>
+<para>
+Baliabide-zerrendaren kudeaketa, giza baliabideak zein materialak barne hartuta
+</para>
+</listitem>
+<listitem>
+<para>
+Baliabide-taldeen kudeaketa
+</para>
+</listitem>
+<listitem>
+<para>
+Baliabide-kostuen kudeaketa
+</para>
+</listitem>
+</itemizedlist>
+</sect2> <sect2 id="mrp-resource-usage-view">
+<title>Baliabide-erabileraren ikuspegia:</title>
+          <figure id="resource-usage-view" float="1">
+            <title>&app;-en Baliabide-erabileraren ikuspegia</title>
+            <screenshot>
+<graphic fileref="figures/resource-usage-view.png" format="PNG">
+</graphic>
+</screenshot>
+</figure>
+<para>
+Baliabide-erabileraren ikuspegiak baliabideen baliagarritasuna erakusten du, 
+esleituta dituzten zereginetan oinarrituta.  Diseinuz Gantt diagramen antzekoa 
+da, baina hau baliabideka antolatzen da.
+</para>
+<para>
+Laburpenaren lerroak baliabidearen erabilgarritasuna erakusten du.  Baliabide 
+bakoitzaren erabilgarritasuna ezkuta daiteke. Baliabide-izenaren ondoko 
+hirukian klik eginez gero, laburpenaren lerroa bakarrik bistaratuko da.
+</para>
+<para>
+Baliabidea zein zeregini esleituta dagoen erakusten du xehetasunak, eta 
+zeregina egiteko beharko den denbora diagramako barra bidez adierazten da. 
+Gehiegizko esleipenak gorriz agertzen dira laburpen-barran, eta oso erraz 
+ikus daiteke zeregin-esleipenak non gurutzatzen diren gehiegizko esleipena sortuz.
+</para>
+<para>
+Kolore-kodeketa honelakoa da:
+</para>
+<itemizedlist>
+<listitem>
+<para>
+<emphasis>Berdea</emphasis>: baliabidea ez dagoela zereginen bati esleituta 
+adierazten du
+</para>
+</listitem>
+<listitem>
+<para>
+<emphasis>Urdina</emphasis>: baliabidea zeregin bati partzialki edo erabat 
+esleitu zaiola adierazten du
+</para>
+</listitem>
+<listitem>
+<para>
+<emphasis>Gorria</emphasis>: baliabideak gehiegizko esleipena duela adierazten du
+</para>
+</listitem>
+</itemizedlist>
+</sect2>
+</sect1>
+<!-- =========== Getting Started ============================== --> 
+<!-- Use the Getting Started section to describe the steps required
+     to start the application and to describe the user interface components
+     of the application. If there is other information that it is important
+     for readers to know before they start using the application, you should
+     also include this information here.
+     If the information about how to get started is very short, you can
+     include it in the Introduction and omit this section. -->
+  <sect1 id="mrp-getting-started">
+    <title>Erabiltzen hasteko</title>
+    <sect2 id="mrp-start">
+    <title>&app; abiaraztea</title>
+<para>
+Aukera hauek dituzu <application>&app;</application> abiarazteko:
+</para>
+    <variablelist>
+<varlistentry>
+<term><guimenu>Aplikazioak</guimenu> menua</term>
+<listitem>
+<para>
+Aukeratu <menuchoice>
+<guisubmenu>Bulegoa</guisubmenu> <guimenuitem>&app;</guimenuitem>
+</menuchoice>.
+</para>
+</listitem>
+</varlistentry> 
+<varlistentry>
+<term>Komando-lerroa</term>
+<listitem>
+    		
+<para>
+<application>&app;</application> komando-lerrotik abiarazteko, idatzi ondorengo 
+komandoa, eta sakatu <keycap>Sartu</keycap>:
+</para>
+    		
+<para>
+		<command>&app;</command>
+    		
+</para>
+    		
+<para>
+ ez dago komando-lerroko parametrorik oraingoz.
+    		
+</para>
+    		
+</listitem>
+</varlistentry></variablelist></sect2>
+    <sect2 id="mrp-when-start">
+    <title>&app; abiaraztean</title>
+<para>
+<application>&app;</application> abiarazten duzunean, leiho hau bistaratuko da. 
+Ikus dezakezunez, Gantt Diagramen ikuspegia da lehenetsia.
+</para>
+    <!-- ==== Figure ==== --> 
+<figure id="newproject">
+<title>&app;-en hasierako leihoa</title>
+<screenshot>
+ <mediaobject>
+  <imageobject>
+<imagedata fileref="figures/new-project.png" format="PNG"/>
+  </imageobject> 
+  <textobject>
+   <phrase>&app;-en leiho nagusia erakusten du. Titulu-barra, 
+menu-barra, tresna-barra, bistaratze-area eta korritze-barrak erakusten ditu. 
+Menu-barrak menu hauek ditu: Fitxategia, Editatu, Ikusi eta Laguntza.</phrase>
+  </textobject>
+ </mediaobject>
+</screenshot>
+</figure> 
+<!-- ==== End of Figure ==== -->
+<para>
+&app;-en leihoak elementu hauek ditu:
+</para>
+      <variablelist><varlistentry><term>Menu-barra. </term>
+<listitem>
+<para>
+Menu-barrako menuek <application>&app;</application>-en fitxategiak lantzeko 
+behar diren komando guztiak dituzte.
+</para>
+</listitem>
+</varlistentry> <varlistentry><term>Tresna-barra. </term>
+<listitem>
+<para>
+ Menu-barrako komando erabilienak izaten ditu tresna-barrak.
+</para>
+</listitem>
+</varlistentry> <varlistentry><term>Egoera-barra. </term>
+<listitem>
+<para>
+<application>&app;</application> unean egiten ari dena eta menu-elementuei 
+buruzko testuinguru-informazioa erakusten ditu egoera-barrak.
+</para>
+</listitem>
+</varlistentry></variablelist></sect2> <sect2 id="mrp-several-start">
+    <title>Hainbat proiektu editatzea</title>
+<para>
+          Proiektu bat baino gehiago ireki ditzakezu aldi berean. Proiektu 
+bakoitzak bere &app; leihoa izango du. Sakatu &quot;KTRL-N&quot; hainbat aldiz. 
+Honen antzeko zerbait lortuko duzu: <xref linkend="several-projects"/>. 
+<figure float="1" id="several-projects">
+       <title>Hainbat proiektu aldi berean</title>
+        <screenshot>
+<mediaobject>
+<imageobject>
+<imagedata fileref="figures/several-projects.png" format="PNG"></imagedata>
+</imageobject> 
+<textobject>
+<phrase>Gnome 2 mahaigaina erakusten du, hiru &app; leiho irekita dituela.</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+</figure>
+</para>
+    </sect2>
+</sect1> 
+<!-- ================ Usage ================================ --> 
+<!-- Use this section to describe how to use the application to perform the tasks for
+  which the application is designed. --> 
+<sect1 id="mrp-usage">
+    <title>Erabilera</title>
+<para>
+<itemizedlist>
+<listitem>
+<para>
+    <xref linkend="mrp-open-project"/>
+</para>
+</listitem>
+<listitem>
+<para>
+    <xref linkend="mrp-undo-redo"/>
+</para>
+</listitem>
+<listitem>
+<para>
+    <xref linkend="mrp-properties"/>
+</para>
+</listitem>
+<listitem>
+<para>
+    <xref linkend="mrp-calendars"/>
+</para>
+</listitem>
+<listitem>
+<para>
+    <xref linkend="mrp-tasks"/>
+</para>
+</listitem>
+<listitem>
+<para>
+    <xref linkend="mrp-resources"/>
+</para>
+</listitem>
+<listitem>
+<para>
+    <xref linkend="mrp-print"/>
+</para>
+</listitem>
+<listitem>
+<para>
+    <xref linkend="mrp-export-html"/>
+</para>
+</listitem>
+</itemizedlist>
+</para>
+    <!-- ================ Usage Subsection ================================ --> 
+<sect2 id="mrp-open-project" xreflabel="Proiektuak irekitzea eta gordetzea">
+      <title>Proiektuak irekitzea eta gordetzea</title>
+<para>
+Proiektu bat irekitzeko, aukeratu <menuchoice> <guimenu>Fitxategia</guimenu> 
+<guimenuitem>Ireki</guimenuitem> </menuchoice>. <guilabel>Fitxategia 
+irekitzeko</guilabel> elkarrizketa-koadroa bistaratuko da. Hautatu ireki 
+nahi duzun &app; fitxategia, eta egin klik <guibutton>Ados</guibutton> 
+botoian. &app; fitxategiak <filename>.&app;</filename> luzapenarekin 
+gordetzen dira.
+</para>
+<para>
+Proiektu bat gordetzeko: proiektu berri bat gorde nahi baduzu, edo lehendik 
+dagoen proiektu bat baina beste fitxategi-izen batekin, aukeratu 
+<menuchoice><guimenu>Fitxategia</guimenu> <guimenuitem>Gorde 
+honela</guimenuitem></menuchoice>. Lehendik dagoen proiektu bat izen bera 
+mantenduz gorde nahi baduzu, hautatu <menuchoice><guimenu>Fitxategia</guimenu> 
+<guimenuitem>Gorde</guimenuitem></menuchoice>.
+</para>
+<para>
+&app;-ek ezagutzen ez duen formatu bateko proiektu-fitxategi bat irekitzen 
+saiatzen bazara, aplikazioak errore-mezu bat bistaratuko du.
+</para>
+      <caution>
+<para>
+Komeni da egindako lana noizean behin gordetzea. &app;-ek oraingoz behintzat 
+ez dauka fitxategiak berreskuratzeko eginbiderik, eta, beraz, edizio-saioa 
+eteten bada (argindarra eten delako, adibidez), azkenekoz 
+<guimenuitem>gorde</guimenuitem> ondoren egindako lana galdu egingo da.
+</para>
+      </caution>
+</sect2> 
+<sect2 id="mrp-opensave-database" xreflabel="Datu-basetik irekitzea/Datu-basean gordetzea">
+      <title>Datu-basetik irekitzea/Datu-basean gordetzea</title>
+<para>
+Proiektu bat datu-basetik irekitzeko, aukeratu <menuchoice> 
+<guimenu>Fitxategia</guimenu> <guimenuitem>Ireki datu-basetik...</guimenuitem> 
+</menuchoice>. <guilabel>Ireki datu-basetik</guilabel> elkarrizketa-koadroa 
+bistaratuko da. Sartu <guilabel>zerbitzaria, datu-basearen izena, 
+erabiltzaile-izena</guilabel> eta <guilabel>pasahitza</guilabel>, eta egin 
+klik <guibutton>Ados</guibutton> botoian. Datu basea &app; erabiltzen ari 
+zaren ordenagailuan bertan badago, hutsik utz dezakezu.  Pasahitzaren eremua 
+ere hutsik utz dezakezu, datu-basearen erabiltzaileak ez badu pasahitzik behar.
+</para>
+<para>
+&app; datu-basera konektatzen denean, <guilabel>Hautatu proiektu bat</guilabel> 
+elkarrizketa-koadroa irekiko da. Datu-basean gordetako proiektuen zerrenda bat 
+ikusiko duzu elkarrizketa-koadro horretan.  Hautatu ireki nahi duzun proiektua, 
+eta sakatu <guibutton>Ados</guibutton>.
+</para>
+<para>
+Proiektua datu-base batean gordetzeko, aukeratu <menuchoice> 
+<guimenu>Fitxategia</guimenu> <guimenuitem>Gorde datu-basean...</guimenuitem> </menuchoice>.  
+<guilabel>Gorde datu-basean</guilabel> elkarrizketa-koadroa bistaratuko da. 
+Sartu <guilabel>zerbitzaria, datu-basearen</guilabel> izena,<guilabel> 
+erabiltzaile-izena,</guilabel> eta <guilabel>pasahitza</guilabel>, eta sakatu 
+<guibutton>Ados</guibutton>. Datu basea &app; erabiltzen ari zaren ordenagailuan 
+bertan badago, hutsik utz dezakezu.  Pasahitzaren eremua ere hutsik utz dezakezu, 
+datu-basearen erabiltzaileak ez badu pasahitzik behar.
+</para>
+    </sect2> 
+<!-- ================ Usage Subsection ================================ --> 
+<sect2 id="mrp-undo-redo" xreflabel="Desegin/Berregin">
+      <title>Desegin/Berregin</title>
+<para>
+ Akats bat desegiteko, bi aukera dituzu: tresna-barrako 
+<guibutton>Desegin</guibutton> botoian egin klik, edo 
+<menuchoice><guimenu>Editatu</guimenu> 
+<guimenuitem>Desegin</guimenuitem></menuchoice> aukeratu.
+</para>
+<para>
+Ekintza bat berregiteko, bi aukera dituzu: tresna-barrako 
+<guibutton>Berregin</guibutton> botoian egin klik, edo 
+<menuchoice><guimenu>Editatu</guimenu> 
+<guimenuitem>Berregin</guimenuitem></menuchoice> aukeratu. Berregiteko 
+aukerak berriro aplikatzen du Desegin aukerarekin baliogabetutako aldaketa.
+</para>
+<caution><title>Kontuz:</title>
+<para>
+Desegin eta Berregin eginbide berriak dira, eta inplementazioa nahiko ona bada 
+ere, oraindik badaude desegin ezin diren ekintza batzuk.  Beti ondo etortzen 
+da lana gordetzea aldaketak egin aurretik.
+</para>
+</caution>
+</sect2> 
+<!-- ================ Usage Subsection ================================ --> 
+<sect2 id="mrp-properties" xreflabel="Proiektuaren propietateak editatzea">
+      <title>Proiektuaren propietateak editatzea</title>
+<para>
+ Proiektuaren propietateak editatzeko, aukeratu 
+<menuchoice>
+ <guimenu>Fitxategia</guimenu> 
+  <guimenuitem>Proiektuaren propietateak</guimenuitem>
+  </menuchoice>. Elkarrizketa-koadro honetan honako hauek edita ditzakezu: 
+hasierako data, proiektu-kudeatzailearen izena, proiektuaren erakundea, 
+proiektuaren fasea eta egutegi lehenetsia.
+</para>
+<itemizedlist>
+<listitem>
+<para>
+<guilabel>Orokorra</guilabel> fitxa
+</para>
+<para>
+  Kontuan izan behar da zeregin guztien hasiera-data lehenetsia proiektuaren 
+hasiera-data izaten dela.  Horregatik, proiektuaren hasiera-data ezarri beharko 
+zenuke zereginak sartu aurretik.  Proiektuaren hasiera-data aldatzen baduzu 
+zereginak sartu ondoren, hasiera-data berria ezarriko zaie haiei ere, 
+murriztapenen bati lotuta egon ezean behintzat (aurreko zereginari, edo 
+&quot;ez hasi hau baino lehenago&quot; murriztapenari lotuta, esate baterako).
+</para>
+<para>
+  Elkarrizketa-koadro honetan fase bat eslei diezaiokezu proiektuari. Faseak 
+gehitzeko, aukeratu <menuchoice><guimenu>Proiektua</guimenu> 
+<guimenuitem>Editatu Proiektuaren faseak</guimenuitem></menuchoice>. 
+Elkarrizketa-koadro bat irekiko da, proiektu-faseen zerrenda soil bat eta 
+faseak <guibutton>Gehitzeko</guibutton> eta <guibutton>Kentzeko</guibutton> 
+botoiak dituena. Proiektuei faseak esleitzeak informazio gisa balio du soilik. 
+Oraingoz ez du bestelako funtziorik.
+</para>
+<para>
+  Proiektu bakoitzak bere egutegi lehenetsia du.  Egutegi lehenetsia proiektuko 
+baliabide guztiei aplikatzen zaie, baliabide-editorean besterik zehaztu ezean. 
+Proiektuaren egutegi lehenetsia aldatzeko, erabili elkarrizketa-koadroko 
+Hautatu botoia.  Egutegiei buruzko informazio gehiago nahi izanez gero, ikus 
+<xref linkend="mrp-calendars"/> atala. <figure id="project-properties" float="1">
+            <title>Proiektuaren propietateak</title>
+            <screenshot>
+             <graphic fileref="figures/project-properties.png" format="PNG"></graphic>
+            </screenshot></figure>
+</para>
+</listitem>
+<listitem>
+<para>
+<guilabel>Propietate pertsonalizatuak</guilabel> fitxa
+</para>
+<para>
+Proiektuari propietate pertsonalizatuak gehitzeko, egin klik 
+<guibutton>Gehitu</guibutton> botoian. 
+<figure id="project-properties-custom" float="1">
+            <title>Propietate pertsonalizatuak</title>
+            <screenshot>
+              <graphic fileref="figures/project-properties-custom.png" format="PNG"></graphic>
+            </screenshot></figure>
+</para>
+<para>
+Propietate pertsonalizatuak gehitzeko elkarrizketa-koadroan, propietate berriari 
+etiketa, izen edo azalpen berri bat ezar diezaiokezu, propietate-mota testua, 
+osoko zenbakia edo koma higikorreko zenbakia den zehazteaz gainera.  Propietate 
+berria gehitutakoan, propietatearen balioa ezar dezakezu. Horretarako, egin klik 
+proiektu propietate pertsonalizatuen elkarrizketa-koadroko balio-eremuan. 
+<figure id="project-properties-custom-add" float="1">
+            <title>Proiektuaren propietate pertsonalizatuak gehitzeko elkarrizketa-koadroa</title>
+            <screenshot>
+              <graphic fileref="figures/project-properties-custom-add.png" format="PNG"></graphic>
+            </screenshot></figure>
+</para>
+</listitem>
+</itemizedlist>
+</sect2> 
+<!-- ================ Usage Subsection ================================ --> 
+<sect2 id="mrp-calendars" xreflabel="Egutegiak">
+      <title>Editatu proiektuaren egutegiak</title>
+<para>
+ Proiektuaren egutegiak editatzeko, aukeratu 
+<menuchoice><guimenu>Proiektua</guimenu> 
+<guimenuitem>Kudeatu egutegiak</guimenuitem></menuchoice>. 
+Proiektu-egutegiek proiektua antolatzen laguntzen digute, zein baliabide 
+erabil ditzakegun zehaztuz, laneguna edo jaieguna den edo lanegunetan 
+erabilgarri dauden orduak kontuan hartuta.  Bistaratutako egutegiaren izena 
+agertzen da ezkerraldean, erdian egutegia, eta eskuinaldean, aldiz, hautatutako 
+eguneko lan-orduen bitarteak ikus daitezke.  Behean agertzen den egutegi 
+lehenetsia laneko hilabete arrunt bat da; asteburuak grisez markatuta daude, 
+ez direla lanegunak adierazteko.
+</para>
+<note>
+<title>Oharra</title>
+<para>
+  Gantt diagraman ere jaiegunak grisez agertzen dira.  Proiektuaren egutegi 
+lehenetsian egindako aldaketak Gantt diagraman ere agertuko dira.
+</para>
+</note>
+<para>
+  Egutegi batean aldaketak egiteko, hautatu aldatu nahi duzun eguna, eta 
+ondoren erabili hiru aukera-botoietako bat:
+<itemizedlist>
+<listitem>
+<para>
+<emphasis>Erabili egutegi eratorriko lanaldia</emphasis> - egutegi gurasoa 
+erabiltzen du egun horretako lanaldia zehazteko.  Informazio gehiago nahi 
+izanez gero, ikus <xref linkend="mrp-calendar-new"/>.
+</para>
+</listitem>
+<listitem>
+<para>
+<emphasis>Ezarri egun-mota:</emphasis> - hautatutako egun-mota erabiltzen du 
+egun horretako lanaldia zehazteko.  Informazio gehiago nahi izanez gero, 
+ikus <xref linkend="mrp-working-time"/>.
+</para>
+</listitem>
+<listitem>
+<para>
+<emphasis>Lanaldi pertsonalizatua</emphasis> - egun jakin bateko berariazko 
+lanaldia zehazten du.
+</para>
+</listitem>
+</itemizedlist>
+          <figure id="calendar" float="1">
+            <title>Proiektuaren egutegien editorea</title>
+            <screenshot>
+             <graphic fileref="figures/calendar.png" format="PNG"></graphic>
+           </screenshot></figure>
+</para>
+<sect3 id="mrp-calendar-new" xreflabel="Egutegi berria sortzea">
+<title>Egutegi berria sortzea</title>
+<para>
+    Egutegi berriak gehi ditzakezu <guibutton>Berria</guibutton> botoian klik 
+eginez. Egutegi Berriaren elkarrizketa-koadroa irekiko da.  Egutegi Berriaren 
+elkarrizketa-koadroan egutegi-zerrenda bat agertuko da ezkerraldean, eta 
+eskuinaldean testu-koadro bat ikusiko duzu, egutegi berriari izena jartzeko 
+balio duena.  Testu-koadroaren azpian, berriz, egutegia sortzeko hiru aukera 
+dituzu erabilgarri:
+<itemizedlist>
+<listitem>
+<para>
+<emphasis>Eratorri egutegi batetik</emphasis> - egutegi ume bat sortzen du. 
+Egutegi berriak ezkerrean hautatutako egutegi gurasoaren ezarpenak hartuko 
+ditu.  Egutegi gurasoan egindako aldaketak egutegi umean ere agertuko dira. 
+Beheko adibidean, egutegi umeen adibideak dira &quot;Americas&quot; eta 
+&quot;USA&quot;.
+</para>
+</listitem>
+<listitem>
+<para>
+<emphasis>Kopiatu lehendik dagoen egutegi bat</emphasis> - ezkerrean 
+hautatutako egutegiaren kopia bat sortzen du.  Kopia egindakoan, jatorrizko 
+egutegian edo haren gurasoetan egindako aldaketak ez dira kopian agertuko. 
+Beheko adibidean, aukera hori erabiliz sortutako egutegi baten adibidea da 
+&quot;USA - Copy&quot;.
+</para>
+</listitem>
+<listitem>
+<para>
+<emphasis>Sortu egutegi huts bat</emphasis> - egutegi berri bat sortzen du. 
+Ez da ezarpenik heredatzen edo kopiatzen.  Beheko adibidean, aukera hau 
+erabiliz sortutako egutegi bat da &quot;Empty&quot;.
+</para>
+</listitem>
+</itemizedlist>
+ <figure id="calendar-new" float="1">
+            <title>Egutegi Berriaren elkarrizketa-koadroa</title>
+            <screenshot>
+              <graphic fileref="figures/calendar-new.png" format="PNG"></graphic>
+            </screenshot></figure>
+</para>
+</sect3> <sect3 id="mrp-default-week">
+<title>Aste lehenetsia aldatzea</title>
+<para>
+    Aste lehenetsia aldatzeko, <guibutton>Aste lehenetsia</guibutton> botoia 
+sakatu behar duzu, aste-editorearen elkarrizketa-koadroa irekitzeko.  Aste-editore 
+horretan, besteak beste, asteko eguna hautatzeko goitibeherako zerrenda bat 
+ikusiko duzu, eta egun-mota hautatzeko beste bat ere bai.  Horrez gain, 
+hautatutako egun-motarentzat antolatutako lanaldia ere bistaratuko da 
+elkarrizketa-koadroan.  Gogoan izan <guibutton>Aplikatu</guibutton> sakatu 
+behar duzula <guibutton>Itxi</guibutton> aurretik, aldaketak gordetzeko. 
+<figure id="calendar-week" float="1">
+            <title>Aste lehenetsiaren elkarrizketa-koadroa</title>
+            <screenshot>
+             <graphic fileref="figures/calendar-week.png" format="PNG"></graphic>
+            </screenshot></figure>
+</para>
+</sect3> 
+<sect3 id="mrp-working-time" xreflabel="Lanaldia eta egun-motak">
+<title>Lanaldia eta egun-motak</title>
+<para>
+    Egun-mota bakoitzaren lanaldiak alda daitezke <guibutton>Lanaldia</guibutton> 
+botoia sakatuz, eta orduan lanaldiaren elkarrizketa-koadroa irekiko da. 
+Lanaldiaren elkarrizketa-koadroak egun-mota erabilgarrien zerrenda erakusten 
+du ezkerrean, eta unean hautatutako motaren lan-orduak eskuinean. Ordua 24 
+orduko formatuan eman behar da, am/pm adierazleak ez baitira onartzen 
+(adib., 5:00 PM 17:00 formatuarekin sartuko litzateke). 
+<figure id="calendar-working-time" float="1">
+            <title>Lanaldiaren elkarrizketa-koadroa</title>
+            <screenshot>
+<graphic fileref="figures/calendar-working-time.png" format="PNG"></graphic>
+</screenshot></figure>
+</para>
+<para>
+    <menuchoice><guimenu>Proiektua</guimenu> <guimenuitem>Editatu 
+egun-motak</guimenuitem></menuchoice> aukeratuz edita daitezke egun-motak. 
+Elkarrizketa-koadro honek egun-moten zerrenda soil bat erakusten du.  
+Zerrenda kudeatzeko, erabili <guibutton>Gehitu</guibutton> eta 
+<guibutton>Kendu</guibutton> botoiak.  Kontuan izan direla kendu 
+&quot;Laneguna&quot; eta &quot;Jaieguna&quot; egun-mota lehenetsiak. 
+<figure id="day-types" float="1">
+            <title>Egun-moten elkarrizketa-koadroa</title>
+            <screenshot>
+<graphic fileref="figures/day-types.png" format="PNG"></graphic>
+</screenshot></figure>
+</para>
+</sect3>
+</sect2> 
+<!-- ================ Usage Subsection ================================ --> 
+<sect2 id="mrp-tasks" xreflabel="Zereginak">
+      <title>Zereginak</title>
+      <sect3 id="mrp-task-add" xreflabel="Zereginak gehitzea">
+<title>Zereginak gehitzea</title>
+<para>
+Zeregin bat gehitzeko, bi aukera dituzu: sakatu tresna-barrako 
+<guibutton>Txertatu</guibutton> botoia, sakatu edo, bestela, egin klik zereginen arean 
+eskuineko botoiarekin eta <guimenuitem>Txertatu zeregina</guimenuitem> 
+aukeratu.  Aukera horiek berdin funtzionatzen dute Gantt ikuspegian nahiz 
+Zereginen ikuspegian.
+</para>
+<para>
+Hainbat zeregin azkar gehitzeko, aukeratu <menuchoice><guimenu>Ekintzak</guimenu> 
+<guimenuitem>Txertatu zeregina</guimenuitem></menuchoice>, eta zereginak 
+txertatzeko elkarrizketa-koadroa irekiko da. Elkarrizketa-koadro horretan 
+hainbat zeregin sartu ahal izango dituzu bizkor-bizkor.  Besterik gabe, 
+sartu zereginaren izena eta zenbat denborako lana izango duen, eta sakatu 
+<keycap>Sartu</keycap>.  Zeregin berria gehitu egingo da, eta 
+elkarrizketa-koadroak irekita jarraituko du, hurrengo zeregina sartzeko prest. 
+Xehetasunak geroago sar ditzakezu. <figure>
+            <title>Txertatu zeregina</title>
+            <graphic fileref="figures/task-insert.png" format="PNG"></graphic>
+</figure>
+</para>
+<note>
+  <title>Oharra</title>
+<para>
+<guimenu>Ekintzak</guimenu> menuan eragin handia du uneko ikuspegiak, eta, 
+beraz, zereginak txertatzeko elkarrizketa-koadroa erabili nahi baduzu, 
+Zereginen ikuspegian edo Gantt ikuspegian egon behar duzu.  Beste ikuspegietan 
+ez da egoten erabilgarri.
+</para>
+</note></sect3> <sect3 id="mrp-task-properties">
+        <title>Zereginaren propietateak</title>
+<para>
+  Zenbait zeregin-propietate zuzenean edita daitezke Gantt zereginen 
+ikuspegitik: zereginaren izena eta lan-esfortzua. Zeregin-propietateen 
+elkarrizketa-koadroa irekitzeko beste modu bat, zeregin baten gainean 
+eskuineko botoiarekin klik egin, eta ondoren <guimenuitem>Editatu 
+zeregina</guimenuitem> aukeratzea da. <figure>
+            <title>Gantt ikuspegia</title>
+            <graphic fileref="figures/gantt-view.png" format="PNG"></graphic>
+</figure>
+</para>
+<para>
+          Zereginen ikuspegian zereginen eremu gehiago edita ditzakezu Gantt 
+ikuspegian baino, eta proiektu batean zereginak gehitzen hasteko ikuspegirik 
+egokiena da. <figure>
+            <title>Zereginen ikuspegia</title>
+            <graphic fileref="figures/task-view.png" format="PNG"></graphic>
+</figure>
+</para>
+<para>
+  Zereginaren propietate guztiak editatzeko, egin klik eskuineko botoiaz 
+zereginaren gainean, eta hautatu <guimenuitem>Editatu zeregina</guimenuitem> 
+elkarrizketa-koadroan.  Bestela, zeregina hautatu eta menu nagusia erabil 
+dezakezu: <menuchoice><guimenu>Ekintzak</guimenu> <guimenuitem>Editatu zereginaren propietateak</guimenuitem></menuchoice>. Propietateak aldatzeko hainbat 
+fitxa daude.
+<itemizedlist>
+<listitem>
+<para>
+<guilabel>Orokorra</guilabel> fitxan eremu hauek aurkituko dituzu:
+<itemizedlist>
+<listitem>
+<para>
+<guilabel>Izena</guilabel> - zereginaren izena
+</para>
+</listitem>
+<listitem>
+<para>
+<guilabel>Mugarria</guilabel> - Mugarriaren kontrol-laukia hautatzen baduzu, 
+zereginak mugarriaren marka izango du, eta <guilabel>Lana, Iraupena, Osatuta 
+eta Lehentasuna</guilabel> eremuak aldatzeko aukera desgaitu egingo da, hau 
+baita mugarrien ezaugarri nagusia: proiektu batek dirauen bitartean gauzatzen 
+den gertaera aipagarri bat dela, iraupenik edo lan-jarduerarik ez duena.
+</para>
+</listitem>
+<listitem>
+<para>
+<guilabel>Iraupen finkoa</guilabel> - burutzeko beharko diren baliabideak alde 
+batera utzita, zeregin baten iraupena finkoa izango denean erabiltzen da aukera 
+hau.  Esate baterako, ume baten ernaldia bederatzi hilabetekoa izaten da.  
+Ezin da baliabide gehiago erabiliz laburtu.
+</para>
+<para>
+Zeregin baten propietateetan Iraupen finkoa aukeratzean, 
+<guilabel>Iraupena</guilabel> eremua desblokeatu egingo da, eta iraupen 
+finkoaren balio bat sartu ahal izango duzu.
+</para>
+</listitem>
+<listitem>
+<para>
+<guilabel>Lana</guilabel> - zeregin bat egiteko behar den esfortzua
+</para>
+</listitem>
+<listitem>
+<para>
+<guilabel>Iraupena</guilabel> - zeregina egiteko behar den egutegi-denbora. 
+Normalean lan-kopuruan eta zereginari esleitutako baliabideetan oinarrituta 
+zehazten da iraupena.  Kalkuluak egutegiak ere hartzen ditu kontuan. Informazio 
+gehiago nahi izanez gero, ikus <xref linkend="mrp-calendars"/>.
+</para>
+</listitem>
+<listitem>
+<para>
+<guilabel>Osatuta</guilabel> - zereginari dagokionez egindako lana kontrolatzen 
+du, lan osoaren ehuneko gisa adierazita
+</para>
+</listitem>
+<listitem>
+<para>
+<guilabel>Lehentasuna</guilabel> - zereginaren lehentasuna ezartzen du. 
+Oraingoz eremu honek ez du berariazko funtzionalitaterik.  Informazio-gisa 
+soilik erabiltzen da
+</para>
+</listitem>
+</itemizedlist>
+ <figure>
+       <title>Zereginaren propietateen elkarrizketa-koadroa</title>
+        <graphic fileref="figures/task-properties-dialog.png" format="PNG"></graphic>
+</figure>
+</para>
+</listitem>
+<listitem>
+<para>
+                <guilabel>Baliabideak</guilabel> fitxaren bidez baliabideak 
+eslei dakizkieke zereginei. Gogoan izan baliabideetan materiala nahiz pertsonak 
+sar daitezkeela. Baliabidea uneko zereginari esleitzeko, egin klik 
+<guilabel>Esleitua</guilabel> zutabeko kontrol-laukian.  Zereginari esleitutako 
+baliabidearen ehunekoa sartzeko, erabili Unitateak eremua. 
+<figure>
+                  <title>Zereginaren baliabideen elkarrizketa-koadroa</title>
+                  <graphic fileref="figures/task-edit-resources.png" format="PNG"></graphic>
+</figure> 
+Gantt ikuspegian, zereginari esleitutako baliabideen zerrenda bat agertzen da 
+barraren eskuinaldean.  Izen labur bat sartu bazen baliabide-ikuspegian, orduan 
+izen laburra bistaratuko da Gantt ikuspegian; bestela, izen osoa agertuko da. 
+<figure>
+                  <title>Baliabide bat esleitu zaio zereginari</title>
+                  <graphic fileref="figures/task-edit-resource-assigned.png" format="PNG"></graphic>
+</figure>
+</para>
+</listitem>
+<listitem>
+<para>
+                <guilabel>Aurrekoak</guilabel> fitxan, editatzen ari zaren 
+zeregina hasi aurretik amaitu behar diren zereginak agertzen dira. Adibide 
+honetan, hiru zeregin ditugu.  <xref linkend="predecessors"/> irudian, 
+hirugarren zeregina, t3, hasi aurretik t2 amaitu behar da. 
+<figure id="predecessors">
+                  <title>Zereginaren aurrekarien elkarrizketa-koadroa</title>
+                  <graphic fileref="figures/task-edit-predecessors.png" format="PNG"></graphic>
+</figure> 
+Elkarrizketa-koadro honetan, aurreko zeregina alda dezakezu, edo aurrekoaren 
+mota, eta zereginaren eta aurrekoaren arteko tartea editatu ahal izango duzu. 
+Elkarrizketa-koadro honetan aurrekoak gehitzeko edo kentzeko, egin klik 
+<guibutton>Gehitu</guibutton> edo <guibutton>Kendu</guibutton> botoian.
+</para>
+<!--                <figure>
+                  <title>Add/Remove predecessors dialog</title>
+                  <graphic fileref="figures/task-edit-predecessors-add-remove.png"
+		   format="PNG"></graphic>
+                </figure>
+-->
+	
+<para>
+                Aurreko berri bat gehitzeko, aurreko zeregin bat aukeratu behar 
+duzu. Goitibeherako zerrendan hauta dezakezu.  Hurrengo eremua Erlazio-motarena 
+da.  Aukerak: <guimenuitem>Amaieratik hasierara (AH)</guimenuitem>, 
+<guimenuitem>Amaieratik amaierara (AA)</guimenuitem>, <guimenuitem>Hasieratik 
+hasierara (HH)</guimenuitem>, edo <guimenuitem>Hasieratik 
+amaierara (HA)</guimenuitem>.  Azkenik, erlazioaren atzerapena sar dezakezu, 
+hau da, erlazioa bete ondorengo egun-kopurua.  Adibidez, 1 balioko atzerapena 
+sartzen baduzu Amaieratik Hasierarako erlazio batean, aurreko zeregina amaitu 
+ondoren egun bat iragandakoan hasi ahal izango da uneko zeregina. 
+<figure>
+                  <title>Aurrekoak gehitzeko elkarrizketa-koadroa</title>
+                  <graphic fileref="figures/task-edit-predecessors-add.png" format="PNG"></graphic>
+</figure>
+</para>
+</listitem>
+<listitem>
+<para>
+                Zereginari oharrak gehitu nahi izanez gero, 
+<guilabel>Oharrak</guilabel> fitxako editorea erabil dezakezu.  Gainera, 
+uneko ordua ere txerta dezakezu oharrean, elkarrizketa-koadroko botoia 
+erabiliz. 
+<figure>
+                  <title>Zereginaren oharren elkarrizketa-koadroa</title>
+                  <graphic fileref="figures/task-edit-note.png" format="PNG"></graphic>
+</figure>
+</para>
+</listitem>
+ <!--
+<listitem>
+<para>
+                The last tab from the task dialog editor is the
+                <guilabel>Advanced</guilabel> tab. Currently it isn't
+                implemented, but here you will find additional properties
+                that will be added in future releases.
+                <figure>
+                  <title>Task advanced properties dialog</title>
+                  <graphic fileref="figures/task-edit-advanced.png" format="PNG"></graphic>
+                </figure>
+</para>
+</listitem>
+-->
+</itemizedlist>
+</para>
+      </sect3> 
+<sect3 id="mrp-creating-subtasks">
+        <title>Azpizereginak sortzea</title>
+<para>
+  Zeregin konplexuak azpizereginetan antola daitezke, errazago kudeatu ahal 
+izateko.  Azpizereginetan antolatutako zereginari laburpen-zeregina esaten 
+zaio.  Laburpen-zereginaren hasiera-data eta iraupena ezin dira editatu, 
+azpizereginetan oinarrituta kalkulatzen baita. 
+<figure>
+    <title>Azpizereginak dituen zeregina</title>
+    <graphic fileref="figures/task-view.png" format="PNG"></graphic>
+</figure>
+</para>
+      </sect3> 
+<sect3 id="mrp-task-deps">
+        <title>Aurrekoak berriro bisitatzea</title>
+<subtitle>Zereginen arteko mendekotasunak Gantt ikuspegian sortzea</subtitle>
+<para>
+  Zeregin bat hasi aurretik beste zeregin batzuk amaitu behar izaten dira 
+sarritan. Mendekotasunak konfiguratzeko, zereginak editatzeko elkarrizketa-koadroko 
+<guilabel>Aurrekoak</guilabel> fitxa erabil dezakezu, edo, bestela, grafikoki ere 
+egin dezakezu Gantt diagraman.  Aurrekoa adierazten duen barran klik egiten baduzu 
+(eta saguaren botoia sakatuta mantendu), gezi bat agertuko da.  Gezi hori mendeko 
+zereginaren barrara arrastatzean, mendekotasuna sortuko duzu.  Gantt diagramak 
+berehala adieraziko du erlazio berria, mendeko zeregina hasierara eramanez aurrekoa 
+amaitzeko programatuta dagoenean.  Horrela mendekotasun-erlazio bat sortzean, 
+&app;-ek beti zerotzat jotzen du Amaieratik Hasierarako erlazioaren atzerapena. 
+Erlazio hori aldatzeko, mendeko zeregina editatzeko elkarrizketa-koadroa ireki 
+dezakezu, eta han <guilabel>Aurrekoak</guilabel> fitxa hautatu. 
+<figure>
+    <title>Zeregin-mendekotasun bat sortzea</title>
+    <graphic fileref="figures/group1-task-linking.png" format="PNG"></graphic>
+</figure> 
+Mendekotasuna kendu nahi izanez gero, hautatu bi zereginetako bat, eta ezabatu 
+esteka tresna-barrako <guiicon>Desestekatu</guiicon> ikonoa hautatuz, edo egin 
+klik eskuineko botoiarekin zereginetako batean, eta hautatu 
+<guimenuitem>Desestekatu</guimenuitem> laster-menuan. 
+<!-- we have too many screen shots - lets see if anyone misses this one...
+  <figure>
+    <title>A dependency has been created</title>
+    <graphic fileref="figures/group1-task-linked.png" format="PNG"></graphic>
+  </figure>
+-->
+</para>
+      </sect3> 
+<sect3 id="mrp-moving-tasks">
+        <title>Zereginak lekuz aldatzea</title>
+<para>
+  Zereginak zereginen ikuspegian bistaratzeko ordena berrantolatu nahi izanez 
+gero, lekuz aldatu nahi duzun zeregina hauta dezakezu, eta ondoren 
+tresna-barrako <guiicon>Eraman gora</guiicon> eta <guiicon>Eraman 
+behera</guiicon> ikonoak hautatu. 
+<!-- we have too many screen shots - lets see if anyone misses this one...
+          <figure>
+    <title>Moving task up and down</title>
+    <graphic fileref="figures/task-up.png" format="PNG"></graphic>
+  </figure>
+-->
+</para>
+      </sect3> <sect3 id="mrp-zooming-gantt">
+        <title>Gantt ikuspegian zooma erabiltzea</title>
+<para>
+          Proiektu bateko zereginek iraupen oso desberdinak izan ditzakete, 
+eta batzuetan denbora-lerroa gertutik ikusi beharko duzu zeregin-mendekotasun 
+batzuen xehetasunak ikusteko, baina beste batzuetan, aldiz, proiektu osoa 
+hartzen duen ikuspegia beharko duzu. Bi beharrei erantzuteko, ahalmen handiko 
+zoom-sistema dauka &app;-ek; horrela, bada, proiektu osoa ikus dezakezu, edo 
+ikuspegia txikiagotu edo handiagotu, nahi duzun tamainara (orduak gutxienez 
+eta urteak gehienez).
+</para>
+<para>
+          <guibutton>Doitzeko zooma</guibutton> aukerak proiektu osoaren 
+iraupena erakusten du Gantt ikuspegian. <!--
+          <figure>
+    <title>Zoom to fit the project</title>
+    <graphic fileref="figures/project-zoom-fit.png" format="PNG"></graphic>
+  </figure>
+-->
+</para>
+<para>
+          <guibutton>Zooma handiagotu</guibutton> eta <guibutton>Zooma 
+txikiagotu</guibutton> ikonoak balia ditzakezu, erabili nahi duzun 
+denbora-lerroaren tamaina hautatzeko.  Ikuspegia maila xehean jartzen 
+denean, egun bakoitzeko lanik gabeko orduak ere erakusten dira asteburuez gain. 
+<!--
+          <figure>
+    <title>Zoom in a zone of the project</title>
+    <graphic fileref="figures/project-zoom-up.png" format="PNG"></graphic>
+  </figure>
+-->
+</para>
+      </sect3>
+      <sect3 id="mrp-task-constraints">
+<title>Zereginen murriztapenak</title>
+<para>
+  Zeregin guztiak proiektuaren hasiera-datan hasten dira lehenespenez. 
+Salbuespena: mendekotasunen bat ezartzen denean.  Nolanahi ere, batzuetan 
+ez da mendekotasunik egoten, baina zereginak data jakin batean edo 
+beranduago hasi behar izaten du.  Murriztapen horiek hasiera-dataren 
+elkarrizketa-koadroan zehatz ditzakezu. 
+<figure id="constraints">
+    <title>Zereginen murriztapenak</title>
+    <graphic fileref="figures/task-constraints.png" format="PNG"></graphic>
+</figure> 
+Uneko zereginaren murriztapena ezabatu nahi izanez gero, erabili 
+<menuchoice><guimenu>Ekintzak</guimenu> <guimenuitem>Berrezarri 
+murriztapena</guimenuitem></menuchoice>. Zeregin guztien murriztapenak 
+ezabatzeko, <menuchoice><guimenu>Ekintzak</guimenu> <guimenuitem>Berrezarri 
+murriztapen guztiak</guimenuitem></menuchoice>.
+</para>
+      </sect3>
+      <sect3 id="mrp-task-custom-properties" xreflabel="Zeregin-propietate pertsonalizatuak">
+      <title>Zeregin-propietate pertsonalizatuak</title>
+<para>
+Propietate pertsonalizatuak zereginen ikuspegian gehi daitezke, 
+<menuchoice><guimenu>Ekintzak</guimenu> <guimenuitem>Editatu propietate 
+pertsonalizatuak</guimenuitem></menuchoice> hautatuz.  
+<guibutton>Gehitu</guibutton> botoia sakatzean, Propietate berriaren 
+elkarrizketa-koadroa irekiko da. 
+<figure id="task-custom-properties">
+    <title>Zereginen murriztapenak</title>
+    <graphic fileref="figures/task-custom-properties.png" format="PNG"></graphic>
+</figure>
+</para>
+<para>
+Propietate berriaren elkarrizketa-koadroan, propietate berriari etiketa, 
+izen edo azalpen berri bat ezar diezaiokezu, propietate-mota testua, osoko 
+zenbakia edo koma higikorreko zenbakia den zehazteaz gainera.  Propietate 
+berria gehitutakoan, zutabe berri gisa agertuko da Zereginen ikuspegian. 
+<!--
+  <figure id="task-custom-properties-add">
+    <title>Task constraints</title>
+    <graphic fileref="figures/task-custom-properties-add.png" format="PNG"></graphic>
+</figure>
+-->
+</para>
+      </sect3>
+</sect2> 
+<!-- ================ Usage Subsection ================================ --> 
+<sect2 id="mrp-resources" xreflabel="Baliabideak">
+      <title>Baliabideak</title>
+      <sect3 id="mrp-resource-props">
+        <title>Baliabidearen propietateak</title>
+<para>
+          &app;-eko Baliabideen ikuspegiak propietate hauek erakusten ditu:
+<itemizedlist>
+<listitem>
+<para>
+<emphasis>Izena:</emphasis> baliabidearen izena
+</para>
+</listitem>
+<listitem>
+<para>
+<emphasis>Izen laburra:</emphasis> Gantt diagraman agertuko den izen laburra 
+edo inizialak
+</para>
+</listitem>
+<listitem>
+<para>
+<emphasis>Mota:</emphasis> une honetan erabilgarri dauden motak 
+<guimenuitem>Lana</guimenuitem> eta <guimenuitem>Materiala</guimenuitem> 
+dira. Lana kategorian, proiektuan lan egiten duten giza baliabideak sartzen 
+dira, eta Materiala kategorian, berriz, proiektuan behar diren baliabide 
+materialak.
+</para>
+</listitem>
+<listitem>
+<para>
+<emphasis>Taldea:</emphasis> baliabidea zein taldetakoa den zehazten du. 
+Definitutako taldeen goitibeherako zerrenda bat ikus daiteke zutabe honetan. 
+Taldeen editorea erabili behar da taldeak Baliabideen ikuspegian esleitu 
+aurretik definitzeko.
+</para>
+</listitem>
+<listitem>
+<para>
+<emphasis>Helb. el.:</emphasis> baliabidea kontaktatzeko helbide elektronikoa.
+</para>
+</listitem>
+<listitem>
+<para>
+<emphasis>Kostua:</emphasis> baliabidea erabiltzeak orduko duen kostua.  
+Baliabideek ez dute monetarik bereizten, eta, beraz, nazioarteko proiektuetan 
+moneta jakin bat erabaki beharko da kostua kontrolatzeko.
+</para>
+</listitem>
+</itemizedlist>
+  <figure>
+    <title>Baliabideen ikuspegia</title>
+    <graphic fileref="figures/resource-editor.png" format="PNG"></graphic>
+</figure>
+</para>
+<!--
+<para>
+          As with the columns from other &app; views, you can sort the columns by
+          clicking on the column name. The following figure is an example of the
+          resource view sorted by the name column.
+  <figure>
+    <title>Sorting in the resources editor</title>
+    <graphic fileref="figures/resource-editor-sorted.png" format="PNG"></graphic>
+  
+</figure>
+</para>
+--></sect3>
+      <sect3 id="mrp-resource-add">
+        <title>Baliabideak gehitzea</title>
+<para>
+Baliabideak gehitzeko, sakatu <guibutton>Txertatu</guibutton> botoia, edo 
+aukeratu <menuchoice><guimenu>Ekintzak</guimenu> <guimenuitem>Txertatu 
+Baliabideak</guimenuitem></menuchoice>.  Hainbat baliabide azkar gehitzeko, 
+aukeratu <menuchoice><guimenu>Ekintzak</guimenu> <guimenuitem>Txertatu 
+baliabideak</guimenuitem></menuchoice>, eta baliabideak txertatzeko 
+elkarrizketa-koadroa irekiko da.  <xref linkend="mrp-task-add"/>-en bezala, 
+hainbat baliabide sar ditzakezu bizkor-bizkor, eta geroago xehetasunak 
+gehitu. 
+<figure>
+    <title>Txertatu baliabidea</title>
+    <graphic fileref="figures/resource-insert.png" format="PNG"></graphic>
+</figure>
+</para>
+      </sect3>
+      <sect3 id="mrp-resource-properties-general">
+        <title>Baliabidearen propietateen elkarrizketa-koadroa</title>
+<para>
+  Baliabideen ikuspegian agertzen ez diren baliabide-propietateak editatzeko, 
+egin klik eskuineko botoiaz baliabidean, eta aukeratu <guimenuitem>Editatu 
+baliabidea</guimenuitem>. Orokorra fitxak baliabideen ikuspegiko elementu 
+berak erakusten ditu. <figure>
+    <title>Baliabidearen propietateen elkarrizketa-koadroa - Orokorra fitxa</title>
+    <graphic fileref="figures/resource-properties-general.png" format="PNG"></graphic>
+</figure>
+</para>
+<para>
+  Egutegiaren fitxan, egutegi bat esleitu ahal izango diogu baliabide jakin 
+bati, proiektuaren egutegi lehenetsia egokia ez bada.  Proiektuaren egutegi 
+lehenetsia ezartzeari buruzko informazio gehiago nahi izanez gero, ikus 
+<xref linkend="mrp-properties"/>. Baliabide bati esleitutako egutegia 
+aldatzeko, hautatu zerrendan. Baliabide honentzat egutegi berri bat sortu 
+nahi izanez gero, egin klik elkarrizketa-koadroko <guibutton>Editatu 
+egutegiak</guibutton> botoian.  Informazio gehiago nahi izanez gero, 
+ikus <xref linkend="mrp-calendars"/>.
+</para>
+<para>
+  Berariazko egutegia duen baliabide bati esleitutako zereginek, baliabideari 
+esleitutako egutegia erabiliko dute lana antolatzeko.  Horregatik, zeregin 
+bat espero baino denbora luzeagorako antolatu bada, seguru asko proiektuko 
+lehenetsia ez den beste egutegi bat erabiliko du baliabideak. <figure>
+    <title>Baliabidearen propietateen elkarrizketa-koadroa - Egutegia fitxa</title>
+    <graphic fileref="figures/resource-properties-calendar.png" format="PNG"></graphic>
+</figure>
+</para>
+      </sect3>
+      <sect3 id="mrp-resource-custom-properties">
+      <title>Baliabidearen propietate pertsonalizatuak</title>
+<para>
+Propietate pertsonalizatuak Zereginen ikuspegian bezalaxe egoten dira 
+erabilgarri Baliabideen ikuspegian, eta funtzionalitate bera dute.  
+Baliabideei propietate pertsonalizatuak gehitzeko, aukeratu 
+<menuchoice><guimenu>Ekintzak</guimenu> <guimenuitem>Editatu 
+propietate pertsonalizatuak</guimenuitem></menuchoice>.  Informazio gehiago 
+nahi izanez gero, ikus <xref linkend="mrp-task-custom-properties"/>.
+</para>
+      </sect3>
+      <sect3 id="mrp-group-editor">
+        <title>Taldeen editorea</title>
+<para>
+          Baliabideak sailkatzeko taldeak definitu ahal izango dituzu taldeen 
+editorearekin. Taldeek izena, kudeatzailea, telefonoa, helbide elektronikoa 
+eta talde lehenetsia zehazteko aukera bat izaten dituzte.   Talde lehenetsi 
+bat zehazten baduzu, gehitzen duzun baliabide berri bakoitza talde horretan 
+kokatuko da.  Bistakoa denez, taldez aldatzeko aukera ere izango duzu. 
+<figure>
+    <title>Taldeen editorea</title>
+    <graphic fileref="figures/resource-group-editor.png" format="PNG"></graphic>
+</figure>
+</para>
+      </sect3>
+      <sect3 id="mrp-print" xreflabel="Inprimatzea">
+        <title>Inprimatzea</title>
+<para>
+Proiektuaren informazioa inprimatzeko, aukeratu 
+<guimenuitem>Fitxategia-&gt;Inprimatu</guimenuitem>, edo egin klik 
+tresna-barrako <guilabel>Inprimatu</guilabel> botoian. 
+<note>
+<title>Oharra</title>
+<para>
+<guibutton>Inprimatzeko aurrebista</guibutton> botoia erabilgarri egoten da 
+inprimatzeko elkarrizketa-koadroan, unean ikusgai dagoen fitxa edozein dela ere.
+</para>
+  </note>
+<itemizedlist>
+<listitem>
+<para>
+Proiektua inprimatzeko elkarrizketa-koadroan, besteak beste, erabilgarri 
+dauden inprimagailuetan nahiz PDF fitxategi batean inprimatzeko aukera 
+eskainiko zaizu.  PDF fitxategi batean inprimatzea aukeratzen baduzu, 
+kokapen-aukerak aldatu egingo dira, irteerako fitxategiaren bide-izena eta 
+fitxategi-izena zehazteko. <figure>
+    <title>Inprimagailuaren fitxa</title>
+    <graphic fileref="figures/print-project.png" format="PNG"></graphic>
+</figure>
+</para>
+</listitem>
+<listitem>
+<para>
+Hautatu ikuspegiak fitxan, Gantt ikuspegia, Zereginen ikuspegia, Baliabideen 
+ikuspegia edo denak inprimatzea aukeratu ahal izango duzu.  Balio lehenetsia 
+denak izaten da. <figure>
+    <title>Hautatu ikuspegiak fitxa</title>
+    <graphic fileref="figures/print-project-selectviews.png" format="PNG"></graphic>
+</figure>
+</para>
+</listitem>
+<listitem>
+<para>
+Papera fitxan, besteak beste, inprimatzeko paperaren tamaina, orientazioa 
+eta diseinua zehatz ditzakezu inprimatu aurretik. <figure>
+    <title>Papera fitxa</title>
+    <graphic fileref="figures/print-project-paper.png" format="PNG"></graphic>
+</figure>
+</para>
+</listitem>
+</itemizedlist>
+</para>
+      </sect3>
+      <sect3 id="mrp-export-html" xreflabel="Esportatu HTMLra">
+        <title>Esportatu HTMLra</title>
+<para>
+HTMLra  esportatzeko funtzioak proiektua HTML formatuan bistaratzeko ikuspegia 
+sortzen du. Horrela, proiektua web gune batean argitaratu ahal izango duzu, 
+edo posta elektronikoz bidali &app; ez duten interesdunei.  HTML dokumentuan 
+elementu hauek sartzen dira: Gantt diagrama soildu bat, zereginen zerrenda 
+(zutabe hauekin: egindako ehunekoa, hasiera, amaiera, lana, eta baliabideak), 
+eta baliabideen esleipenaren taula. Jendeari proiektuaren egoerari buruzko 
+informazioa emateko baliabide bikaina da.
+</para>
+<para>
+  HTML orria sortzeko, aukeratu <guimenuitem>Fitxategia-&gt;Esportatu 
+HTMLra</guimenuitem>. 
+<!-- web is disabled in v0.12
+  The <guilabel>Export to HTML</guilabel> dialog will allow you
+  to send the output either to a file or directly to a web location.
+-->
+</para>
+      </sect3>
+</sect2>
+</sect1> 
+
+<!-- Customization/Settings not yet implemented...
+  <- ============= Customization ============================= ->
+  <- Use this section to describe how to customize the application. ->
+  <sect1 id="myapp-prefs">
+    <title>Settings</title>
+<para>
+To configure &app;, choose
+      <menuchoice>
+<guimenu>Settings</guimenu>
+<guimenuitem>Preferences</guimenuitem>
+      </menuchoice>. The
+      <guilabel>Preferences</guilabel> dialog contains the following tabbed
+      sections:
+</para>
+<itemizedlist>
+<listitem>
+<para>
+  <xref linkend="myapp-prefs-display"/>
+</para>
+</listitem>
+<listitem>
+<para>
+  <xref linkend="myapp-prefs-viewers"/>
+</para>
+</listitem>
+    </itemizedlist>
+<- =============== Customization Subsection ================ ->
+<- Use a new section to describe different tabbed sections on the Settings or Preferences
+     dialog. ->
+    <sect2 id="myapp-prefs-display">
+      <title>Display</title>
+      <variablelist>
+<varlistentry>
+  <term>
+    <guilabel>Interpolation type</guilabel> </term>
+<listitem>
+<para>
+Use this drop-down list box to specify the
+      interpolation method that
+      &app; uses when the
+      application resizes images. Select one of the following
+      options:
+</para>
+<itemizedlist>
+<listitem>
+	
+<para>
+	  <guilabel>Nearest neighbor</guilabel>
+</para>
+	
+<para>
+This method of interpolation takes a location in the
+	  original image and replicates the pixel that is
+	  nearest to this location. When
+	  you zoom in on an image, the pixels are
+	  replicated. When you zoom out of an
+	  image, the image loses some of its detail.
+</para>
+</listitem>
+<listitem>
+	
+<para>
+	  <guilabel>Bilinear</guilabel>
+</para>
+	
+<para>
+This is a simple and fast method of interpolation. When
+	  you zoom in on an image, &app; uses up to four
+	  adjacent pixels to compute the colors of the new
+	  pixels. When you zoom out of
+	  an image, &app; averages regions of color in the
+	  existing image to compute the colors of the pixels.
+</para>
+</listitem>
+<listitem>
+	
+<para>
+	  <guilabel>Hyperbolic</guilabel>
+</para>
+	
+<para>
+This is a high-quality, slow method of interpolation. The
+	  application performs interpolation on the image in
+	  the manner described in
+	  Digital Image Warping by George Wolberg.
+</para>
+</listitem>
+    </itemizedlist>
+<para>
+Default:
+      <guilabel>Nearest neighbor</guilabel>.
+</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+  <term>
+    <guilabel>Transparency type</guilabel> </term>
+<listitem>
+<para>
+Use this drop-down list box to specify how
+      &app; displays transparent or partially opaque
+      backgrounds in images. Select one of the following options:
+</para>
+<itemizedlist>
+<listitem>
+	
+<para>
+	  <guilabel>Dark checks</guilabel>
+</para>
+	
+<para>
+This option displays black and dark gray checks.
+</para>
+</listitem>
+<listitem>
+	
+<para>
+	  <guilabel>Midtone checks</guilabel>
+</para>
+	
+<para>
+This option displays dark gray and light gray
+	  checks.
+</para>
+</listitem>
+<listitem>
+	
+<para>
+	  <guilabel>Light checks</guilabel>
+</para>
+	
+<para>
+This option displays light gray and white checks.
+</para>
+</listitem>
+<listitem>
+	
+<para>
+	  <guilabel>Black only</guilabel>
+</para>
+	
+<para>
+This option displays solid black.
+</para>
+</listitem>
+<listitem>
+	
+<para>
+	  <guilabel>Gray only</guilabel>
+</para>
+	
+<para>
+This option displays solid gray.
+</para>
+</listitem>
+<listitem>
+	
+<para>
+	  <guilabel>White only</guilabel>
+</para>
+	
+<para>
+This option displays solid white.
+</para>
+</listitem>
+    </itemizedlist>
+<para>
+Default:
+      <guilabel>Dark checks</guilabel>.
+</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+  <term>
+    <guilabel>Check size</guilabel> </term>
+<listitem>
+<para>
+Use this drop-down list box to specify the size of the checks
+      to use to display transparent or partially opaque
+      backgrounds in images. This
+      option is only relevant if you choose
+      <guilabel>Dark checks</guilabel>,
+      <guilabel>Midtone checks</guilabel>, or
+      <guilabel>Light checks</guilabel> from the
+      <guilabel>Transparency type</guilabel> drop-down list box.
+      Select one of the following options:
+</para>
+<itemizedlist>
+<listitem>
+	
+<para>
+	  <guilabel>Small</guilabel>
+</para>
+</listitem>
+<listitem>
+	
+<para>
+	  <guilabel>Medium</guilabel>
+</para>
+</listitem>
+<listitem>
+	
+<para>
+	  <guilabel>Large</guilabel>
+</para>
+</listitem>
+    </itemizedlist>
+<para>
+Default:
+      <guilabel>Small</guilabel>.
+</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+  <term>
+    <guilabel>Dither type</guilabel> </term>
+<listitem>
+<para>
+Use this drop-down list box to specify the dithering method
+      to use to display images. Dithering is a technique that
+      is used to simulate
+      colors in the original image file but that your system
+      can not display. Select
+      one of the following options:
+</para>
+<itemizedlist>
+<listitem>
+	
+<para>
+	  <guilabel>None</guilabel>
+</para>
+	
+<para>
+This option does not use dithering.
+</para>
+</listitem>
+<listitem>
+	
+<para>
+	  <guilabel>Normal (pseudocolor)</guilabel>
+</para>
+	
+<para>
+This option performs dithering on pseudocolor displays,
+	  which use a limited palette of colors.
+</para>
+</listitem>
+<listitem>
+	
+<para>
+	  <guilabel>Maximum (high color)</guilabel>
+</para>
+	
+<para>
+This option performs dithering on pseudocolor and high
+	  color displays.
+</para>
+</listitem>
+    </itemizedlist>
+<para>
+Default:
+      <guilabel>None</guilabel>.
+</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+  <term>
+    <guilabel>Two-pass scrolling</guilabel> </term>
+<listitem>
+<para>
+Select this option to render an image in two passes
+      when you scroll the image quickly. The first pass
+      renders a low quality version of the image. The second
+      pass renders a full quality version of the image over
+      the low quality version. Two-pass scrolling enables you
+      to view at least a low quality version of the image at
+      all times regardless of how quickly you scroll the
+      image.
+</para>
+<para>
+Default: unselected.
+</para>
+</listitem>
+</varlistentry>
+      </variablelist>
+    </sect2>
+    <- ============= Customization Subsection ===================== ->
+    <- Another tabbed section on the Preferences dialog. ->
+    <sect2 id="myapp-prefs-viewers">
+      <title>Viewers</title>
+<para>
+You can set the following viewer preferences:
+<itemizedlist>
+<listitem>
+<para>
+      <xref linkend="myapp-viewer-prefs-image-window"/>
+</para>
+</listitem>
+<listitem>
+<para>
+      <xref linkend="myapp-viewer-prefs-full-screen"/>
+</para>
+</listitem>
+</itemizedlist>
+</para>
+      <sect3 id="myapp-viewer-prefs-image-window">
+<title>Image Windows</title>
+<para>
+The
+  <guilabel>Image Windows</guilabel> group contains the preferences
+  that you can set to view images in image windows.
+</para>
+<variablelist>
+  <varlistentry>
+    <term>
+      <guilabel>Use scrollbars</guilabel> </term>
+<listitem>
+<para>
+Use this drop-down list box to specify when to use
+	scrollbars to scroll through an image. Select one of
+	the following options:
+</para>
+<itemizedlist>
+	
+<listitem>
+	
+<para>
+	    <guilabel>Never</guilabel>
+</para>
+	
+<para>
+This option never displays scrollbars. You can use the
+	    arrow keys on the keyboard or the mouse to scroll
+	    through the image.
+</para>
+	
+</listitem>
+	
+<listitem>
+	
+<para>
+	    <guilabel>Only if image does not fit</guilabel>
+</para>
+	
+<para>
+This option displays scrollbars when the image is
+	    larger than the image window.
+</para>
+	
+</listitem>
+      </itemizedlist>
+<para>
+Default:
+	<guilabel>Never</guilabel>.
+</para>
+</listitem>
+  </varlistentry>
+  <varlistentry>
+    <term>
+      <guilabel>Pick window size and zoom factor
+	automatically</guilabel> </term>
+<listitem>
+<para>
+Select this option to resize the image window to fit the
+	image or to resize the image to fit the image
+	window. If the image is small,
+	&app; resizes the image window to fit the image. If
+	the image is large, &app; resizes the image to fit
+	the image window.
+</para>
+<para>
+Default: unselected.
+</para>
+</listitem>
+  </varlistentry>
+  <varlistentry>
+    <term>
+      <guilabel>Open images in a new window</guilabel> </term>
+<listitem>
+<para>
+Select this option to open a new
+	&app; window each time you open an image. If you do
+	not select this option, &app; replaces the existing
+	image with the new image when you open an image.
+</para>
+<para>
+Default: unselected.
+</para>
+</listitem>
+  </varlistentry>
+</variablelist>
+      </sect3>
+      <sect3 id="myapp-viewer-prefs-full-screen">
+<title>Full Screen</title>
+<para>
+The
+  <guilabel>Full Screen</guilabel> group contains the preferences that
+  you can set to view images in full screen mode.
+</para>
+<variablelist>
+  <varlistentry>
+    <term>
+      <guilabel>Use scrollbars</guilabel> </term>
+<listitem>
+<para>
+Use this drop-down list box to specify when to use
+	scrollbars to scroll through an image. Select one of the following
+	options:
+</para>
+<itemizedlist>
+	
+<listitem>
+	
+<para>
+	    <guilabel>Never</guilabel>
+</para>
+	
+<para>
+This option never displays scrollbars. You can use the
+	    arrow keys on the keyboard or the mouse to scroll
+	    through the image.
+</para>
+	
+</listitem>
+	
+<listitem>
+	
+<para>
+	    <guilabel>Only if image does not fit</guilabel>
+</para>
+	
+<para>
+This option displays scrollbars when the image is
+	    larger than the full screen.
+</para>
+	
+</listitem>
+      </itemizedlist>
+<para>
+Default:
+	<guilabel>Never</guilabel>.
+</para>
+</listitem>
+  </varlistentry>
+  <varlistentry>
+    <term>
+      <guilabel>Use 1:1 zoom factor</guilabel> </term>
+<listitem>
+<para>
+Select this option to use the 1:1 zoom factor when you open
+	an image. The 1:1 zoom factor displays the image at
+	its actual size.
+</para>
+<para>
+Default: selected.
+</para>
+</listitem>
+  </varlistentry>
+  <varlistentry>
+    <term>
+      <guilabel>Use same zoom factor as image window</guilabel> </term>
+<listitem>
+<para>
+Select this option to use the same zoom factor that the
+	application uses to display the image in an image
+      window.
+</para>
+<para>
+Default: unselected.
+</para>
+</listitem>
+  </varlistentry>
+  <varlistentry>
+    <term>
+      <guilabel>Fit all images to screen</guilabel> </term>
+<listitem>
+<para>
+Select this option to resize images to fill the full screen
+	when you open the images in full screen mode.
+</para>
+<para>
+Default: unselected.
+</para>
+</listitem>
+  </varlistentry>
+  <varlistentry>
+    <term>
+      <guilabel>Fit standard-sized images to screen</guilabel> </term>
+<listitem>
+<para>
+Select this option to automatically resize images
+	that are the same size as standard screens so that the
+	images fill the full screen when you open them in full
+	screen mode. If you select this option, &app; ignores
+	the settings for the previous three options when you
+	open an image that is the same size as a standard
+	screen.  Examples of standard screen sizes are 640 x
+	480 pixels, 1024 x 768 pixels, and so on.
+</para>
+<para>
+Default: unselected.
+</para>
+</listitem>
+  </varlistentry>
+  <varlistentry>
+    <term>
+      <guilabel>Put a bevel around the edge of the screen</guilabel>
+    </term>
+<listitem>
+<para>
+Select this option to display a 3D beveled border around
+	the full screen view of an image.
+</para>
+<para>
+Default: unselected.
+</para>
+</listitem>
+  </varlistentry>
+</variablelist>
+      </sect3>
+    </sect2>
+  </sect1>
+--> 
+<!-- ============= Bugs ================================== --> 
+<!-- This section is optional and is commented out by default.
+     You can use it to describe known bugs and limitations of the
+  program if there are any - please be frank and list all
+     problems you know of.
+  <sect1 id="mayapp-bugs">
+  <title>Known Bugs and Limitations</title>
+<para>
+</para>
+ </sect1>
+--> 
+<!-- ============= About ================================== --> 
+<!-- This section contains info about the program (not docs), such as
+      author's name(s), web page, license, feedback address. This
+      section is optional: primary place for this info is "About.." box of
+      the program. However, if you do wish to include this info in the
+      manual, this is the place to put it. Alternatively, you can put this information in the title page.--> 
+<sect1 id="&app;-about">
+    <title>&app;-i buruz</title>
+<para>
+ &app; Imendio-k eta GNOME komunitateko boluntarioek mantentzen dute. 
+&app;-i buruzko informazio gehiago nahi izanez gero, 
+bisitatu <ulink url="http://planner.imendio.org/" type="http">&app;-en web 
+gunea</ulink>.
+</para>
+<para>
+      Programa-erroreen berri emateko, edo aplikazioari nahiz eskuliburuari 
+buruzko iradokizunak egiteko, erabili 
+<ulink url="http://bugzilla.gnome.org" type="help">bugzilla</ulink>.
+</para>
+<para>
+      Informazioa lortzeko beste baliabide erabilgarri bat: 
+&app; <ulink url="http://planner.imendio.org/contact/" type="http">posta-zerrendak</ulink>. 
+Posta-zerrenda desberdinak daude erabiltzaileentzat eta garatzaileentzat.  
+Harpidetu zure interesaren arabera.
+</para>
+<para>
+ Programa hau Free Software Foundation-ek argitaratutako GNU Lizentzia Publiko 
+Orokorraren 2. bertsioan, edo (nahiago baduzu) bertsio berriago batean, jasotako 
+baldintzen arabera banatzen da. Lizentzia horren kopia 
+<ulink url="ghelp:gpl" type="help">esteka</ulink> honetan, edo programa honen 
+iturburu-kodean sartutako COPYING fitxategian aurkituko duzu.
+</para>
+  </sect1>
+  <sect1 id="mrp-database-config">
+  <title>&app;-eko datu-base bat konfiguratzea</title>
+   <section id="postgresql-database-config">
+   <title>Postgresql datu-base bat &app;-ekin erabiltzeko konfiguratzea</title>
+   <caution>
+<para>
+         Datu-baseak onartzea oraindik aurrerapen teknologikotzat jotzen da, 
+eta Postgresql eta datu-baseak konfiguratzen jakitea eskatzen du. Gainera, 
+Planner-en iturburuak behar dira datu-basearen eskema-fitxategia atzitzeko.
+</para>
+   </caution>
+<para>
+&app;-ek PostgreSQL datu-base batean gorde ditzake proiektuak.  Horretarako, 
+proiektu-datuak onartzeko instalatuta eta konfiguratuta eduki behar duzu 
+PostgreSQL.  Hori lortzeko jarraitu beharreko urratsak azaltzea da jarraibide 
+hauen xedea.  PostgreSQL administrazioari eta erabilerari buruzko informazio 
+gehiago nahi izanez gero, kontsultatu PostgreSQLren dokumentazioa 
+<ulink url="http://www.postgresql.org">PostgreSQLren web gunean</ulink>.  
+PostgreSQL dokumentazioan, besteak beste, iturburuko tarball-etatik 
+instalatzeko jarraibideak aurkituko dituzu. RPMak ere erabilgarri daude 
+gunean, metodo hori erabili nahi duenak eskuragarri izateko.
+</para>
+<para>
+Hasi saioa root gisa, eta kopiatu database.sql fitxategia /tmp direktorioan. 
+Fitxategi hori prozesuko azken urratsean erabiliko duzu, baina hobe izaten da 
+hasieran kopiatzea, gero bila ibili beharrean. &app; karpeta erro-direktorioan 
+daukazula suposatuz, hau egin behar duzu orain: 
+<screen>
+<prompt>root#</prompt><userinput> cp &app;/docs/sql/database-0.11.sql /tmp</userinput>
+</screen>
+</para>
+<para>
+Red Hat erabiltzen baduzu, eta PostgreSQL paketeak sistemako gainerakoekin 
+batera instalatzea aukeratzen baduzu, dagoeneko antolatuta izango dituzu 
+datu-base cluster bat eta erabiltzaile lehenetsiaren konfigurazioa.  
+Datu-base cluster-a /var/lib/pgsql/data izango da, eta erabiltzaile 
+lehenetsia postgres.
+</para>
+<para>
+Erabiltzaile lehenetsiaren konfiguraziorik ez badago, sortu postgres 
+erabiltzailea /var/lib/pgsql direktorio nagusiarekin.
+</para>
+<para>
+Sortu datu-base cluster bat postgres kontuan sartuz eta initdb komandoa 
+exekutatuz: <screen><prompt>root#</prompt><userinput> su - postgres</userinput> 
+<prompt>bash$</prompt><userinput> initdb -D data</userinput></screen>
+</para>
+<para>
+Ondoren, abiarazi datu-basearen zerbitzaria: 
+<screen>
+<prompt>bash$</prompt><userinput> pg_ctl -D data -l logfile start</userinput>
+</screen>
+</para>
+<para>
+Sortu lehenetsia ez den erabiltzaile bat, postgres kontuan sartuz eta createuser
+ komandoa exekutatuz (erabili zure erabiltzaile-izena hemen - kurt da nirea): 
+<screen><prompt>root#</prompt><userinput> su - postgres</userinput> <prompt>bash$</prompt><userinput> createuser</userinput> Sartu gehitzeko erabiltzailearen izena:
+<userinput> kurt</userinput> Erabiltzaile berriari datu-baseak sortzeko 
+baimenik ematen zaio? (b/e)<userinput> b </userinput> Erabiltzaile berriari 
+erabiltzaile berri gehiago sortzeko baimenik ematen zaio? 
+(b/e)<userinput> b</userinput> CREATE USER</screen> Kontu lehenetsia erabili 
+beharrean zure kontutik komandoak exekutatzeko aukera emango dizu.
+</para>
+<para>
+Orain zure kontutik sor ditzakezu datu-basea eta taldea: 
+<screen><prompt>kurt#</prompt><userinput> createdb -U kurt plannerdb</userinput> 
+CREATE DATABASE <prompt>kurt#</prompt><userinput> echo 'create group &app; 
+with user kurt;' | psql -e -U kurt -d plannerdb</userinput> create group 
+&app; with user kurt; CREATE GROUP</screen>
+</para>
+<para>
+Proiektuari buruzko informazioa plannerdb datu-basean 
+gordetzeko behar diren taulak sortuko ditu azken komando horrek.  <filename>database.sql</filename> 
+fitxategia &app;-en banaketaren  <filename class="directory">docs/sql</filename> 
+azpikarpetan egoten da. 
+<screen>
+<prompt>kurt#</prompt>
+<userinput> cat /tmp/database.sql | psql -e -U kurt -d plannerdb</userinput>
+</screen> Lerro horrek irteera asko sortzen du.  Amaitutakoan, atzera joan eta 
+irteera berrikusi beharko zenuke, eta errore-mezurik dagoen begiratu 
+(begiratu ERROR hitzarekin hasten diren lerroak).  Halakorik ez baduzu 
+aurkitzen, taula guztiak behar bezala sortu dira.
+</para>
+<para>
+Eta hori da dena.  Orain gai izan beharko zenuke PostgreSQL datu-basea 
+erabiliz proiektuak gordetzeko eta irekitzeko.
+</para>
+<para>
+Arazorik badaukazu edo errorerik aurkitzen baduzu, kendu taldea eta datu-basea, 
+eta sortu berriro: <screen><prompt>kurt#</prompt><userinput> dropdb 
+plannerdb</userinput> 
+<prompt>kurt#</prompt>
+<userinput> echo 'DROP GROUP &app;;' | psql -e -U kurt -d plannerdb</userinput>
+</screen>
+</para>
+   </section> <section id="postgresql-remote-config">
+   <title>Postgresql datu-base bat urruneko konexiorako konfiguratzea</title>
+<para>
+Postgresql datu-basea konfiguratu ondoren, seguru asko erabilgarri jarri 
+nahiko duzu, &app;-en erabiltzaileek euren makinetatik atzitu ahal izan 
+dezaten.  Ingurune fidagarri batean sareko beste makinetatik konektatu ahal 
+izateko jarraitu beharreko oinarrizko urratsak azalduko ditugu atal honetan.  
+Konexioa seguruagoa izan dadin, PostgreSQL dokumentazioa irakurri beharko 
+zenuke. <ulink url="http://www.postgresql.org">PostgreSQLren web gunean</ulink> 
+dago erabilgarri, eta &quot;Client Authentication&quot; duzu atalik 
+interesgarriena.
+</para>
+<para>
+Egin nahiko duzun lehen gauza izango da aldatu behar dituzun konfigurazio-fitxategiak 
+aurkitzea izango da.  Fitxategiak <filename>postgresql.conf</filename> eta 
+<filename>pg_hba.conf</filename> dira; PostgreSQLren eskuliburuaren arabera, 
+<filename class="directory">/usr/local/pgsql/data/</filename> direktorioan 
+egon beharko lukete, baina Red Hat eta Fedora Core-ren banaketetan <filename class="directory">/var/lib/pgsql/data/</filename> direktorioan egoten dira. 
+Aurkitzeko arazoak badituzu, erabili <command>lokalizatu</command> komandoa. 
+<screen><prompt>root#</prompt><userinput> locate postgresql.conf</userinput> 
+/var/lib/pgsql/data/postgresql.conf</screen>
+</para>
+<para>
+Ondoren, esan PostgreSQLri onartzen dituzula TCP/IP bidezko konexioak. Hasi 
+saioa root gisa, eta aldatu <filename>postgresql.conf</filename> fitxategia,
+ aldatu tcpip_socket-en balioa egiazkora, eta, behar izanez gero, kendu 
+iruzkinaren markak lerroari. Ondoren, gorde fitxategia.
+</para>
+<para>
+Jarraian, esan PostgreSQLri onar ditzala sare lokaleko Ip helbideetako 
+konexioak, ostalari-lerro bat gehituz pg_hba.conf-i: 
+<screen># TYPE  DATABASE USER   IP-ADDRESS        IP-MASK       METHOD local    all 
+	 all    ident                           sameuser 
+<userinput>	host    all   all   192.168.1.0  255.255.255.0  trust</userinput>
+</screen> 
+Lerro horri esker, 192.168.1.1 eta 192.168.1.254 arteko IP barrutiko makina 
+guztiek zerbitzariko edozein PostgreSQL datu-base atzitu ahal izango dute.  
+Beharbada IP helbidea eta maskara aldatu beharko dituzu, sare lokalaren 
+arabera.  Gai horri buruzko laguntzarik behar izanez gero, galdetu 
+sare-administratzaileari.
+</para>
+<para>
+Azkenik, berrabiarazi PostgreSQL zerbitzua: 
+<screen>
+<prompt>bash$</prompt><userinput> pg_ctl -D data -l logfile start</userinput>
+</screen>
+</para>
+<para>
+Orain gai izan beharko zenuke sareko beste edozein makinatatik &app;-eko 
+planak irekitzeko eta gordetzeko, &app;-eko 'Ireki datu-basetik' edo 
+'Gorde datu-basean' elkarrizketa-koadroetako Zerbitzariaren laukian 
+ostalari-izen edo IP helbide bat sartuz.
+</para>
+    <warning>
+<para>
+Oraingoan ere, PostgreSQL dokumentazioa irakurtzea gomendatzen da, bereziki 
+Client Authentication izeneko atala, ondo ulertzeko zein segurtasun-maila 
+ezartzea komeni zaizun.  Adibide honetan esleitutako fidagarritasun-maila 
+ez da egokia produkzio-ingurune gehienetarako.
+</para>
+    </warning></section></sect1>
+  <!--sect1 id="mrp-web-resources">
+  <title>Project Management Web Resources</title>
+<para>
+This list doesn't represent any sort of endorsement or anything.
+Its just a list of sites that you might find helpful.
+</para>
+<para>
+<ulink url="http://www.pmi.org">The PMI Web Site</ulink>
+<ulink url="http://www.projectconnections.com">Project Connections
+</ulink>
+</para>
+  </sect1-->
+  <bibliography>
+  <title>Bibliografia</title>
+      <biblioentry><abbrev>PMBOK</abbrev> 
+<authorgroup>
+<author>
+<firstname>Project Management Institute</firstname>
+</author>
+</authorgroup> 
+<copyright>
+<year>2000</year> 
+<holder>Project Management Institute, Inc.</holder>
+</copyright> 
+<isbn>1-880410-23-0</isbn> 
+<publisher>
+<publishername>Project Management Institute, Inc.</publishername>
+</publisher>
+<title>A Guide to the Project Management Body of Knowledge (PMBOK Guide)</title>
+      </biblioentry></bibliography></article>
