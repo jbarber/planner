@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-04-24 03:05+0200\n"
-"PO-Revision-Date: 2005-04-24 03:07+0200\n"
+"POT-Creation-Date: 2005-10-02 00:18+0200\n"
+"PO-Revision-Date: 2005-10-02 00:18+0200\n"
 "Last-Translator: Francisco Javier F. Serrador <serrador@cvs.gnome.org>\n"
 "Language-Team: Spanish <traductores@es.gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -1276,15 +1276,15 @@ msgstr "Mostrar el resultado en un navegador"
 msgid "File \"%s\" exists, do you want to overwrite it?"
 msgstr "El archivo «%s» ya existe, ¿desea sobreescribirlo?"
 
-#: ../src/planner-main.c:53
+#: ../src/planner-main.c:56
 msgid "Create the initial window with the given geometry."
 msgstr "Crear la ventana inicial con la geometría indicada."
 
-#: ../src/planner-main.c:53
+#: ../src/planner-main.c:56
 msgid "GEOMETRY"
 msgstr "GEOMETRY"
 
-#: ../src/planner-main.c:67
+#: ../src/planner-main.c:70
 msgid "[FILE...]"
 msgstr "[ARCHIVO...]"
 
@@ -1552,7 +1552,7 @@ msgid "Remove resource"
 msgstr "Eliminar recurso"
 
 #: ../src/planner-resource-view.c:1020
-msgid "Edit Resoruce Columns"
+msgid "Edit Resource Columns"
 msgstr "Editar columnas de recursos"
 
 #: ../src/planner-resource-view.c:1055
@@ -1622,7 +1622,7 @@ msgstr "Abrir desde base de datos...."
 msgid "Open a project from a database"
 msgstr "Abre un proyecto desde una base de datos"
 
-#: ../src/planner-sql-plugin.c:96 ../src/planner-sql-plugin.c:1102
+#: ../src/planner-sql-plugin.c:96 ../src/planner-sql-plugin.c:1103
 msgid "Save to Database"
 msgstr "Guardar a base de datos"
 
@@ -1634,7 +1634,7 @@ msgstr "Guarda el proyecto actual en una base de datos"
 msgid "No errors reported."
 msgstr "No se informó de errores."
 
-#: ../src/planner-sql-plugin.c:492
+#: ../src/planner-sql-plugin.c:493
 #, c-format
 msgid ""
 "Database %s needs to be upgraded from version %s to version %s.\n"
@@ -1645,11 +1645,11 @@ msgstr ""
 "Por favor haga una copia de resguardo de la base de datos antes de la "
 "modernización."
 
-#: ../src/planner-sql-plugin.c:499
+#: ../src/planner-sql-plugin.c:500
 msgid "Upgrade"
 msgstr "Modernizar"
 
-#: ../src/planner-sql-plugin.c:513
+#: ../src/planner-sql-plugin.c:514
 #, c-format
 msgid ""
 "Could not upgrade database %s.\n"
@@ -1664,44 +1664,44 @@ msgstr ""
 "Error de la base de datos: \n"
 "%s"
 
-#: ../src/planner-sql-plugin.c:554
+#: ../src/planner-sql-plugin.c:555
 #, c-format
 msgid "Can't create tables in database %s"
 msgstr "No se pueden crear tablas en la base de datos %s"
 
-#: ../src/planner-sql-plugin.c:616
+#: ../src/planner-sql-plugin.c:617
 #, c-format
 msgid "Database %s is not setup for Planner. Do you want to do that?"
 msgstr ""
 "La base de datos %s no está preparada para Planner. ¿Qué quiere hacer ahora?"
 
-#: ../src/planner-sql-plugin.c:657
+#: ../src/planner-sql-plugin.c:658
 #, c-format
 msgid "Connection to database '%s@%s' failed."
 msgstr "La conexión con la base de datos «%s@%s» falló."
 
-#: ../src/planner-sql-plugin.c:668
+#: ../src/planner-sql-plugin.c:669
 #, c-format
 msgid "Test to tables in database '%s' failed."
 msgstr "La prueba de tablas en la base de datos «%s» falló."
 
-#: ../src/planner-sql-plugin.c:766
+#: ../src/planner-sql-plugin.c:767
 msgid "ID"
 msgstr "ID"
 
-#: ../src/planner-sql-plugin.c:774
+#: ../src/planner-sql-plugin.c:775
 msgid "Project"
 msgstr "Proyecto"
 
-#: ../src/planner-sql-plugin.c:782
+#: ../src/planner-sql-plugin.c:783
 msgid "Phase"
 msgstr "Fase"
 
-#: ../src/planner-sql-plugin.c:790
+#: ../src/planner-sql-plugin.c:791
 msgid "Revision"
 msgstr "Revisión"
 
-#: ../src/planner-sql-plugin.c:990
+#: ../src/planner-sql-plugin.c:991
 msgid "Open from Database"
 msgstr "Abrir desde base de datos"
 
