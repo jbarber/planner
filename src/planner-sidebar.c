@@ -339,7 +339,7 @@ sidebar_darken_color (GdkColor *color,
 		      gint      darken_count)
 {
 	GdkColor src = *color;
-	GdkColor shaded;
+	GdkColor shaded = { 0 };
 	
 	while (darken_count) {
 		sidebar_style_shade (&src, &shaded, 0.93);

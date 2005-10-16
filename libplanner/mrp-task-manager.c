@@ -1638,6 +1638,7 @@ task_manager_do_forward_pass_helper (MrpTaskManager *manager,
 	old_start = mrp_task_get_start (task);
 	old_finish = mrp_task_get_finish (task);
 	old_duration = old_finish - old_start;
+	duration = 0;
 	
 	if (mrp_task_get_n_children (task) > 0) {
 		MrpTask *child;

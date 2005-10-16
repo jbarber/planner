@@ -1147,6 +1147,9 @@ gantt_row_draw (GnomeCanvasItem *item,
 		if (priv->mouse_over_index != -1) {
 			gint x1, x2;
 
+			x1 = 0;
+			x2 = 0;
+
 			gantt_row_get_resource_by_index (row,
 							 priv->mouse_over_index,
 							 &x1, &x2);
