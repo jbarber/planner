@@ -1646,6 +1646,7 @@ task_manager_do_forward_pass_helper (MrpTaskManager *manager,
 		sub_start = -1;
 		sub_work_start = -1;
 		sub_finish = -1;
+		work = 0;
 				
 		child = mrp_task_get_first_child (task);
 		while (child) {
@@ -1670,6 +1671,7 @@ task_manager_do_forward_pass_helper (MrpTaskManager *manager,
 				sub_work_start = MIN (sub_work_start, t2);
 			}
 
+			work += mrp_task_get_work (child);
 			child = mrp_task_get_next_sibling (child);
 		}
 
@@ -1677,18 +1679,12 @@ task_manager_do_forward_pass_helper (MrpTaskManager *manager,
 		imrp_task_set_work_start (task, sub_work_start);
 		imrp_task_set_finish (task, sub_finish);
 
-		/* FIXME: should work be the sum of the work of the children
-		 * here? The problem is that summary tasks really display
-		 * duration in the work field. That's why we set duration to the
-		 * same value as work below.
-		 */
-		
-		work = mrp_task_manager_calculate_task_work (manager,
+		duration = mrp_task_manager_calculate_summary_duration (manager,
 							     task,
 							     sub_start,
 							     sub_finish);
 		imrp_task_set_work (task, work);
-		imrp_task_set_duration (task, work);
+		imrp_task_set_duration (task, duration);
 	} else {
 		/* Non-summary task. */
 		t1 = task_manager_calculate_task_start (manager, task);
@@ -2324,5 +2320,78 @@ mrp_task_manager_calculate_task_work (MrpTaskManager *manager,
 	}
 
 	return work;
+}
+
+/* Calculate summary duration using the project calendar,
+   ignoring assignments' calendars
+ */
+gint
+mrp_task_manager_calculate_summary_duration (MrpTaskManager *manager,
+				      MrpTask        *task,
+				      mrptime         start,
+				      mrptime         finish)
+{
+	MrpTaskManagerPriv *priv;
+	mrptime             t;
+	mrptime             t1, t2;
+	gint                duration = 0;
+	MrpCalendar        *calendar;
+	MrpDay             *day;
+	GList              *ivals, *l;
+	MrpInterval        *ival;
+
+	priv = manager->priv;
+
+	if (task == priv->root) {
+		return 0;
+	}
+
+	if (start == -1) {
+		start = mrp_task_get_start (task);
+	}
+
+	if (finish <= start) {
+		return 0;
+	}
+	
+	calendar = mrp_project_get_calendar (priv->project);
+
+	duration = 0;
+
+	/* Loop through the intervals of the calendar and add up the working time, until
+	 * the finish time is hit.
+	 */
+	t = mrp_time_align_day (start);
+
+	while (t < finish) {
+		day = mrp_calendar_get_day (calendar, t, TRUE);
+		ivals = mrp_calendar_day_get_intervals (calendar, day, TRUE);
+
+		for (l = ivals; l; l = l->next) {
+			ival = l->data;
+			
+			mrp_interval_get_absolute (ival, t, &t1, &t2);
+			
+			/* Skip intervals that are before the task. */
+			if (t2 < start) {
+				continue;
+			}
+			
+			/* Stop if the interval starts after the task. */
+			if (t1 >= finish) {
+				break;
+			}
+			
+			/* Don't add time outside the task. */
+			t1 = MAX (t1, start);
+			t2 = MIN (t2, finish);
+			
+			duration += t2 - t1;
+		}
+		
+		t += 24*60*60;
+	}
+
+	return duration;
 }
 

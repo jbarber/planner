@@ -81,6 +81,10 @@ gint            mrp_task_manager_calculate_task_work  (MrpTaskManager       *man
 						       MrpTask              *task,
 						       mrptime               start,
 						       mrptime               finish);
+gint            mrp_task_manager_calculate_summary_duration  (MrpTaskManager       *manager,
+						       MrpTask              *task,
+						       mrptime               start,
+						       mrptime               finish);
 void            mrp_task_manager_dump_task_tree       (MrpTaskManager       *manager);
 void            mrp_task_manager_dump_task_list       (MrpTaskManager       *manager);
 
