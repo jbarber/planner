@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: planner\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-09-14 07:00+0300\n"
+"POT-Creation-Date: 2005-11-20 10:11+0200\n"
 "PO-Revision-Date: 2005-09-14 07:10+0300\n"
 "Last-Translator: Ilkka Tuohela <hile@iki.fi>\n"
 "Language-Team: Finnish <gnome-fi-laatu@lists.sourceforge.net>\n"
@@ -20,7 +20,7 @@ msgstr ""
 
 #: ../data/glade/add-predecessor.glade.h:1
 msgid "Add Predecessor"
-msgstr ""
+msgstr "Lisää edeltäjä"
 
 #: ../data/glade/add-predecessor.glade.h:2
 msgid "_Lag:"
@@ -46,6 +46,8 @@ msgid ""
 "\n"
 "The selected day type has the following working hours:"
 msgstr ""
+"\n"
+"Valitun tyyppisenä päivänä on määritelty seuraavat työtunnit:"
 
 #: ../data/glade/calendar-dialog.glade.h:3
 #: ../data/glade/column-dialog.glade.h:1 ../data/glade/task-dialog.glade.h:2
@@ -106,7 +108,7 @@ msgstr "Luo _tyhjä kalenteri"
 
 #: ../data/glade/calendar-dialog.glade.h:16
 msgid "Custom working time"
-msgstr ""
+msgstr "Itse määritelty työaika"
 
 #: ../data/glade/calendar-dialog.glade.h:17
 msgid "Day type:"
@@ -145,6 +147,8 @@ msgid ""
 "Select a weekday and the day type to use for that day in the default week "
 "for this calendar.\n"
 msgstr ""
+"Valitse viikonpäivä ja käytettävä päivän tyyppi käytettäväksi oletusviikossa "
+"tässä kalenterissa.\n"
 
 #: ../data/glade/calendar-dialog.glade.h:27
 msgid "Set day type to:"
@@ -310,7 +314,7 @@ msgstr "Huomiot"
 
 #: ../data/glade/resource-dialog.glade.h:7
 msgid "Optional - overrides resource name in Gantt view."
-msgstr ""
+msgstr "Vapaaehtoinen - ohittaa resurssin nimen Gantt-näkymässä."
 
 #: ../data/glade/resource-dialog.glade.h:8
 msgid ""
@@ -335,7 +339,7 @@ msgstr "_Lisää aikaleima"
 #: ../data/glade/resource-dialog.glade.h:13
 #: ../data/glade/resource-input-dialog.glade.h:8
 msgid "_Short name:"
-msgstr ""
+msgstr "_Lyhyt nimi:"
 
 #: ../data/glade/resource-input-dialog.glade.h:2
 msgid "Insert Resource"
@@ -343,7 +347,7 @@ msgstr "Lisää resurssi"
 
 #: ../data/glade/resource-input-dialog.glade.h:3
 msgid "Optional - overrides resource name in gantt view."
-msgstr ""
+msgstr "Vapaaehtoinen - ohittaa resurssin nimen gantt-näkymässä."
 
 #: ../data/glade/resource-input-dialog.glade.h:6
 #: ../data/glade/task-input-dialog.glade.h:3
@@ -360,7 +364,7 @@ msgstr "Valitse projekti"
 
 #: ../data/glade/sql.glade.h:4
 msgid "The database contains the following projects. Select a project to open:"
-msgstr ""
+msgstr "Tietokanta sisältää seuraavat projektit. Valitse avattava projekti:"
 
 #: ../data/glade/sql.glade.h:5
 msgid "_Database:"
@@ -429,7 +433,7 @@ msgstr "%"
 
 #: ../data/glade/task-dialog.glade.h:5
 msgid "C_omplete:"
-msgstr ""
+msgstr "_Valmiiina:"
 
 #: ../data/glade/task-dialog.glade.h:8
 msgid "Predecessors"
@@ -514,25 +518,27 @@ msgstr "Aktiivinen näkymä"
 
 #: ../data/planner.schemas.in.h:7
 msgid "Whether printing of the Gantt view is enabled."
-msgstr ""
+msgstr "Onko Gantt-näkymä tulostus käytössä."
 
 #: ../data/planner.schemas.in.h:8
 msgid "Whether printing of the Resource view is enabled."
-msgstr ""
+msgstr "Onko resurssinäkymän tulostus käytössä."
 
 #: ../data/planner.schemas.in.h:9
 msgid "Whether printing of the Task view is enabled."
-msgstr ""
+msgstr "Onko tehtävänäkymän tulostus käytössä."
 
 #: ../data/planner.schemas.in.h:10
 msgid ""
 "Whether to highlight the tasks along the cricital path in the Gantt view."
 msgstr ""
+"Korostetaanko tehtävät kriittisen polun varrella Gantt-näkymässä."
 
 #: ../data/planner.schemas.in.h:11
 msgid ""
 "Whether to highlight the tasks along the cricital path in the Task view."
 msgstr ""
+"Korostetaanko tehtävät kriittisen polun varrella tehtävänäkymässä."
 
 #: ../data/planner.schemas.in.h:12
 msgid "Which view to display in the user interface."
@@ -590,11 +596,11 @@ msgstr "Virheellinen URI: \"%s\""
 #: ../libplanner/mrp-project.c:759
 #, c-format
 msgid "Couldn't find a suitable file module for loading '%s'"
-msgstr ""
+msgstr "Sopivaa tiedostomodulia tiedoston \"%s\" lataamiseen ei löytynyt"
 
 #: ../libplanner/mrp-project.c:780 ../libplanner/mrp-project.c:1064
 msgid "No support for SQL storage built into this version of Planner."
-msgstr ""
+msgstr "SQL-tallennuksen tukea ei ole käännetty mukaan tähän Plannerin versioon."
 
 #: ../libplanner/mrp-project.c:817
 msgid "Invalid URI."
@@ -603,11 +609,11 @@ msgstr "Virheellinen URI."
 #: ../libplanner/mrp-project.c:958
 #, c-format
 msgid "Unable to find file writer identified by '%s'"
-msgstr ""
+msgstr "Tyypin \"%s\" määrittelemää tiedoston kirjoittajaa ei löydy"
 
 #: ../libplanner/mrp-project.c:1021
 msgid "Couldn't find a suitable file module for loading project"
-msgstr ""
+msgstr "Sopivaa tiedostomodulia projektin lataamiseksi ei löytynyt"
 
 #: ../libplanner/mrp-property.c:365
 msgid "Text"
@@ -685,32 +691,32 @@ msgstr "Yhteys tietokantaan \"%s\" epäonnistui."
 
 #: ../libplanner/mrp-storage-sql.c:205
 msgid "Invalid SQL URI (must start with 'sql://' and contain '#')."
-msgstr ""
+msgstr "Virheellinen SQL-URI (täytyy alkaa 'sql://' ja sisältää merkin '#')."
 
 #: ../libplanner/mrp-storage-sql.c:274
 msgid "Invalid SQL URI (invalid project id)."
-msgstr ""
+msgstr "Virheelline SQL-URI (virheellinen projektin tunniste)."
 
 #: ../libplanner/mrp-storage-sql.c:282
 msgid "Invalid SQL URI (no database name specified)."
-msgstr ""
+msgstr "Virheellinen SQL-URI (tietokannan nimeä ei ole määritelty)."
 
 #: ../libplanner/mrp-task.c:1062
 msgid ""
 "Could not add a predecessor relation, because the tasks are already related."
 msgstr ""
 
-#: ../libplanner/mrp-task-manager.c:2152
+#: ../libplanner/mrp-task-manager.c:2149
 msgid "Cannot add a predecessor, because it would result in a loop."
 msgstr ""
 
-#: ../libplanner/mrp-task-manager.c:2198
+#: ../libplanner/mrp-task-manager.c:2195
 msgid "Cannot move the task, because it would result in a loop."
-msgstr ""
+msgstr "Tehtävää ei voida siirtää, koska siirrosta seuraisi silmukka."
 
 #: ../libplanner/mrp-xsl.c:89 ../libplanner/mrp-xsl.c:137
 msgid "Export to HTML failed"
-msgstr ""
+msgstr "Vienti HTML-muotoon epäonnistui"
 
 #: ../src/planner-application.c:55 ../src/planner-application.c:111
 msgid "Insert"
@@ -730,11 +736,11 @@ msgstr ""
 
 #: ../src/planner-application.c:83
 msgid "Indent"
-msgstr ""
+msgstr "Sisennä"
 
 #: ../src/planner-application.c:90
 msgid "Unindent"
-msgstr ""
+msgstr "Vähennä sisennystä"
 
 #: ../src/planner-application.c:97
 msgid "Move up"
@@ -830,7 +836,7 @@ msgstr "Sunnuntai"
 
 #: ../src/planner-default-week-dialog.c:288
 msgid "No working time"
-msgstr ""
+msgstr "Ei työaikaa"
 
 #: ../src/planner-default-week-dialog.c:299
 #: ../src/planner-default-week-dialog.c:303
@@ -892,17 +898,17 @@ msgstr ""
 #: ../src/planner-format.c:149
 #, c-format
 msgid "%dd %dh"
-msgstr ""
+msgstr "%dpv %dh"
 
 #: ../src/planner-format.c:152
 #, c-format
 msgid "%dd"
-msgstr ""
+msgstr "%dpv"
 
 #: ../src/planner-format.c:155
 #, c-format
 msgid "%dh"
-msgstr ""
+msgstr "%dh"
 
 #. i18n: this string is the date nr and month name, displayed
 #. * e.g. in the date cells in the task tree. See
@@ -1013,58 +1019,58 @@ msgstr "Työ"
 msgid "Unnamed"
 msgstr "Nimeämätön"
 
-#: ../src/planner-gantt-row.c:1788 ../src/planner-gantt-row.c:1791
+#: ../src/planner-gantt-row.c:1791 ../src/planner-gantt-row.c:1794
 msgid "No name"
 msgstr "Ei nimeä"
 
-#: ../src/planner-gantt-row.c:1794
+#: ../src/planner-gantt-row.c:1797
 #, c-format
 msgid "Make task '%s' a predecessor of '%s'"
-msgstr ""
+msgstr "Merkitse tehtävä \"%s\" tehtävän \"%s\" edeltäjäksi"
 
-#: ../src/planner-gantt-row.c:1842
+#: ../src/planner-gantt-row.c:1845
 #, c-format
 msgid "Change work to %s"
-msgstr ""
+msgstr "Muuta työ kohtaan %s"
 
-#: ../src/planner-gantt-row.c:2412 ../src/planner-task-dialog.c:454
+#: ../src/planner-gantt-row.c:2415 ../src/planner-task-dialog.c:454
 #: ../src/planner-task-tree.c:254 ../src/planner-task-tree.c:942
 msgid "Edit task property"
-msgstr ""
+msgstr "Muokkaa tehtävän ominaisuuksia"
 
 #: ../src/planner-gantt-view.c:125 ../src/planner-task-view.c:113
 msgid "_Insert Task"
-msgstr ""
+msgstr "_Liitä tehtävä"
 
 #: ../src/planner-gantt-view.c:126 ../src/planner-task-view.c:114
 msgid "Insert a new task"
-msgstr ""
+msgstr "Liitä uusi tehtävä"
 
 #: ../src/planner-gantt-view.c:128 ../src/planner-task-view.c:116
 msgid "In_sert Tasks..."
-msgstr ""
+msgstr "Lii_tä tehtäviä..."
 
 #: ../src/planner-gantt-view.c:131 ../src/planner-task-view.c:119
 msgid "_Remove Task"
-msgstr ""
+msgstr "_Poista tehtävä"
 
 #: ../src/planner-gantt-view.c:132 ../src/planner-task-view.c:120
 msgid "Remove the selected tasks"
-msgstr ""
+msgstr "Poista valitut tehtävät"
 
 #: ../src/planner-gantt-view.c:134
 msgid "_Edit Task Properties..."
-msgstr ""
+msgstr "_Muokkaa tehtävän ominaisuuksia..."
 
 #: ../src/planner-gantt-view.c:137 ../src/planner-resource-view.c:245
 #: ../src/planner-task-view.c:125
 msgid "Select _All"
-msgstr ""
+msgstr "Valitse k_aikki"
 
 #: ../src/planner-gantt-view.c:138 ../src/planner-resource-view.c:246
 #: ../src/planner-task-view.c:126
 msgid "Select all tasks"
-msgstr ""
+msgstr "Valitse kaikki tehtävät"
 
 #: ../src/planner-gantt-view.c:140 ../src/planner-task-view.c:128
 msgid "_Unlink Task"
@@ -1084,11 +1090,11 @@ msgstr ""
 
 #: ../src/planner-gantt-view.c:146 ../src/planner-task-view.c:134
 msgid "I_ndent Task"
-msgstr ""
+msgstr "Sise_nnä tehtävä"
 
 #: ../src/planner-gantt-view.c:147 ../src/planner-task-view.c:135
 msgid "Indent the selected tasks"
-msgstr ""
+msgstr "Sisennä valitut tehtävät"
 
 #: ../src/planner-gantt-view.c:149 ../src/planner-task-view.c:137
 msgid "Unin_dent Task"
@@ -1100,19 +1106,19 @@ msgstr ""
 
 #: ../src/planner-gantt-view.c:152 ../src/planner-task-view.c:140
 msgid "Move Task _Up"
-msgstr ""
+msgstr "Siirrä tehtävää _ylöspäin"
 
 #: ../src/planner-gantt-view.c:153 ../src/planner-task-view.c:141
 msgid "Move the selected tasks upwards"
-msgstr ""
+msgstr "Siirrä valittuja tehtäviä ylöspäin"
 
 #: ../src/planner-gantt-view.c:155 ../src/planner-task-view.c:143
 msgid "Move Task Do_wn"
-msgstr ""
+msgstr "Siirrä tehtävää _alaspäin"
 
 #: ../src/planner-gantt-view.c:156 ../src/planner-task-view.c:144
 msgid "Move the selected tasks downwards"
-msgstr ""
+msgstr "Siirrä valittuja tehtäviä alaspäin"
 
 #: ../src/planner-gantt-view.c:158 ../src/planner-task-view.c:146
 msgid "Reset _Constraint"
@@ -1128,46 +1134,46 @@ msgstr ""
 
 #: ../src/planner-gantt-view.c:164
 msgid "_Zoom In"
-msgstr ""
+msgstr "_Lähennä"
 
 #: ../src/planner-gantt-view.c:165 ../src/planner-usage-view.c:101
 #: ../src/planner-usage-view.c:102
 msgid "Zoom in"
-msgstr ""
+msgstr "Lähennä näkymää"
 
 #: ../src/planner-gantt-view.c:167
 msgid "Zoom _Out"
-msgstr ""
+msgstr "L_oitonna"
 
 #: ../src/planner-gantt-view.c:168 ../src/planner-usage-view.c:98
 #: ../src/planner-usage-view.c:99
 msgid "Zoom out"
-msgstr ""
+msgstr "Loitonna näkymää"
 
 #: ../src/planner-gantt-view.c:170 ../src/planner-resource-view.c:251
 #: ../src/planner-task-view.c:152 ../src/planner-usage-view.c:107
 msgid "Edit _Visible Columns"
-msgstr ""
+msgstr "Muokkaa _näkyviä sarakkeita"
 
 #: ../src/planner-gantt-view.c:171 ../src/planner-resource-view.c:252
 #: ../src/planner-task-view.c:153 ../src/planner-usage-view.c:108
 msgid "Edit visible columns"
-msgstr ""
+msgstr "Muokkaa näkyviä sarakkeita"
 
 #: ../src/planner-gantt-view.c:176 ../src/planner-task-view.c:158
 msgid "_Highlight Critical Tasks"
-msgstr ""
+msgstr "_Korosta kriittiset tehtävät"
 
 #. i18n: Label used for the sidebar. Please try to make it short and use
 #. * a linebreak if necessary/possible.
 #.
 #: ../src/planner-gantt-view.c:285
 msgid "Gantt"
-msgstr ""
+msgstr "Gantt"
 
 #: ../src/planner-gantt-view.c:291
 msgid "_Gantt Chart"
-msgstr ""
+msgstr "_Gantt-kaavio"
 
 #. i18n: WBS is short for work breakdown structure, and is a
 #. * project management term. You might want to leave it
@@ -1179,15 +1185,15 @@ msgstr ""
 #.
 #: ../src/planner-gantt-view.c:507 ../src/planner-task-view.c:323
 msgid "WBS"
-msgstr ""
+msgstr "WBS"
 
 #: ../src/planner-gantt-view.c:509 ../src/planner-task-view.c:325
 msgid "Start"
-msgstr ""
+msgstr "Aloitus"
 
 #: ../src/planner-gantt-view.c:510 ../src/planner-task-view.c:326
 msgid "Finish"
-msgstr ""
+msgstr "Päättyminen"
 
 #: ../src/planner-gantt-view.c:513 ../src/planner-task-view.c:329
 msgid "Slack"
@@ -1203,19 +1209,19 @@ msgstr ""
 
 #: ../src/planner-group-dialog.c:304
 msgid "Insert group"
-msgstr ""
+msgstr "Lisää ryhmä"
 
 #: ../src/planner-group-dialog.c:431
 msgid "Remove group"
-msgstr ""
+msgstr "Poista ryhmä"
 
 #: ../src/planner-group-dialog.c:526
 msgid "Default group"
-msgstr ""
+msgstr "Oletusryhmä"
 
 #: ../src/planner-group-dialog.c:644
 msgid "Edit group property"
-msgstr ""
+msgstr "Muokkaa ryhmän ominaisuutta"
 
 #: ../src/planner-group-dialog.c:828
 msgid "Manager name"
@@ -1231,119 +1237,119 @@ msgstr ""
 
 #: ../src/planner-html-plugin.c:47
 msgid "HTML"
-msgstr ""
+msgstr "HTML"
 
 #: ../src/planner-html-plugin.c:48
 msgid "Export project to HTML"
-msgstr ""
+msgstr "Vie projekti HTML-muodossa"
 
 #: ../src/planner-html-plugin.c:82
 msgid "Could not export to HTML"
-msgstr ""
+msgstr "HTML-muotoon vienti epäonnistui"
 
 #: ../src/planner-html-plugin.c:110
 msgid "Export to HTML"
-msgstr ""
+msgstr "Vie HTML-muodossa"
 
 #: ../src/planner-html-plugin.c:154
 msgid "Show result in browser"
-msgstr ""
+msgstr "Näytä tulos selaimessa"
 
 #: ../src/planner-html-plugin.c:173 ../src/planner-window.c:1638
 #: ../src/planner-xml-planner-plugin.c:124
 #, c-format
 msgid "File \"%s\" exists, do you want to overwrite it?"
-msgstr ""
+msgstr "Tiedosto \"%s\" on olemassa, haluatko ylikirjoittaa sen?"
 
 #: ../src/planner-main.c:56
 msgid "Create the initial window with the given geometry."
-msgstr ""
+msgstr "Luo alkuikkana annetussa muodossa."
 
 #: ../src/planner-main.c:56
 msgid "GEOMETRY"
-msgstr ""
+msgstr "GEOMETRIA"
 
 #: ../src/planner-main.c:70
 msgid "[FILE...]"
-msgstr ""
+msgstr "[TIEDOSTO...]"
 
 #: ../src/planner-msp-plugin.c:50
 msgid "MS Project XML..."
-msgstr ""
+msgstr "MS Project XML..."
 
 #: ../src/planner-msp-plugin.c:50
 msgid "Import an MS Project XML file"
-msgstr ""
+msgstr "Tuo MS Projectin XML-tiedosto"
 
 #: ../src/planner-msp-plugin.c:118
 msgid "Couldn't import file."
-msgstr ""
+msgstr "Tiedosto ei voitu tuoda."
 
 #: ../src/planner-msp-plugin.c:206
 msgid "Import a File"
-msgstr ""
+msgstr "Tuo tiedosto"
 
 #: ../src/planner-msp-plugin.c:214
 msgid "XML Files"
-msgstr ""
+msgstr "XMl-tiedostot"
 
 #: ../src/planner-msp-plugin.c:219 ../src/planner-window.c:848
 msgid "All Files"
-msgstr ""
+msgstr "Kaikki tiedostot"
 
 #: ../src/planner-phase-dialog.c:540
 msgid "Insert phase"
-msgstr ""
+msgstr "Lisää vaihe"
 
 #: ../src/planner-phase-dialog.c:639
 msgid "Remove phase"
-msgstr ""
+msgstr "Poista vaihe"
 
 #: ../src/planner-plugin-loader.c:41
 #, c-format
 msgid "Could not open plugin file '%s'\n"
-msgstr ""
+msgstr "Liitännäistiedostoa \"%s\" ei voitu avata\n"
 
 #: ../src/planner-predecessor-model.c:191 ../src/planner-task-dialog.c:2176
 msgid "FS"
-msgstr ""
+msgstr "FS"
 
 #: ../src/planner-predecessor-model.c:194
 msgid "FF"
-msgstr ""
+msgstr "FF"
 
 #. list = g_list_append (list, g_strdup (_("FF")));
 #: ../src/planner-predecessor-model.c:197 ../src/planner-task-dialog.c:2178
 msgid "SS"
-msgstr ""
+msgstr "SS"
 
 #: ../src/planner-predecessor-model.c:200
 msgid "SF"
-msgstr ""
+msgstr "SF"
 
 #: ../src/planner-print-dialog.c:164
 msgid "Print Project"
-msgstr ""
+msgstr "Tulosta projekti"
 
 #: ../src/planner-print-dialog.c:171
 msgid "Select views"
-msgstr ""
+msgstr "Valitse näkymät"
 
 #: ../src/planner-print-dialog.c:194
 msgid "Select the views to print:"
-msgstr ""
+msgstr "Valitse tulostettavat näkymät:"
 
 #: ../src/planner-project-properties.c:387
 msgid "Select a calendar to use for this project:"
-msgstr ""
+msgstr "Valitse projektissa käytettävä kalenteri:"
 
 #: ../src/planner-project-properties.c:487
 msgid "Edit Project Name"
-msgstr ""
+msgstr "Muokkaa projektin nimeä"
 
 #: ../src/planner-project-properties.c:523
 msgid "Edit Organization"
-msgstr ""
+msgstr "Muokkaa organisaatiota"
 
 #: ../src/planner-project-properties.c:559
 msgid "Edit Manager"
@@ -1352,23 +1358,23 @@ msgstr ""
 #: ../src/planner-project-properties.c:631
 #: ../src/planner-project-properties.c:665
 msgid "Edit Project Start"
-msgstr ""
+msgstr "Muokkaa projektin alkuajankohtaa"
 
 #: ../src/planner-project-properties.c:754
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 #: ../src/planner-project-properties.c:842
 msgid "Edit Project Phase"
-msgstr ""
+msgstr "Muokkaa projektin vaihetta"
 
 #: ../src/planner-project-properties.c:975
 msgid "Property"
-msgstr ""
+msgstr "Ominaisuus"
 
 #: ../src/planner-project-properties.c:986
 msgid "Value"
-msgstr ""
+msgstr "Arvo"
 
 #: ../src/planner-project-properties.c:1390
 #: ../src/planner-property-dialog.c:333
@@ -1387,73 +1393,73 @@ msgstr ""
 
 #: ../src/planner-project-properties.c:1590
 msgid "Date..."
-msgstr ""
+msgstr "Päiväys..."
 
 #: ../src/planner-project-properties.c:1933
 msgid "Add project property"
-msgstr ""
+msgstr "Lisää projektin ominaisuus"
 
 #: ../src/planner-project-properties.c:2043
 msgid "Remove project property"
-msgstr ""
+msgstr "Poista projektin ominaisuus"
 
 #: ../src/planner-project-properties.c:2136
 msgid "Edit project property value"
-msgstr ""
+msgstr "Muokkaa projektin ominaisuuden arvoa"
 
 #: ../src/planner-property-dialog.c:502
 msgid "Label"
-msgstr ""
+msgstr "Otsikko"
 
 #: ../src/planner-property-dialog.c:514 ../src/planner-resource-view.c:1224
 #: ../src/planner-task-dialog.c:2642
 msgid "Type"
-msgstr ""
+msgstr "Tyyppi"
 
 #: ../src/planner-property-dialog.c:671
 msgid "Add property"
-msgstr ""
+msgstr "Lisää ominaisuus"
 
 #: ../src/planner-property-dialog.c:816
 msgid "Remove property"
-msgstr ""
+msgstr "Poista ominaisuus"
 
 #: ../src/planner-property-dialog.c:909
 msgid "Edit property label"
-msgstr ""
+msgstr "Muokkaa ominaisuuden otsikkoa"
 
 #: ../src/planner-resource-cmd.c:75
 msgid "Insert resource"
-msgstr ""
+msgstr "Lisää resurssi"
 
 #. Put "no group" at the top.
 #: ../src/planner-resource-dialog.c:312
 #: ../src/planner-resource-input-dialog.c:100
 #: ../src/planner-resource-view.c:1945
 msgid "(None)"
-msgstr ""
+msgstr "(Ei mitään)"
 
 #: ../src/planner-resource-dialog.c:322
 #: ../src/planner-resource-input-dialog.c:110 ../src/planner-task-dialog.c:380
 msgid "(No name)"
-msgstr ""
+msgstr "(Ei nimeä)"
 
 #: ../src/planner-resource-dialog.c:495
 msgid "Edit resource calendar"
-msgstr ""
+msgstr "Muokkaa resurssin kalenteria"
 
 #: ../src/planner-resource-dialog.c:576
 msgid "Edit resource note"
-msgstr ""
+msgstr "Muokkaa resurssin huomautusta"
 
 #: ../src/planner-resource-dialog.c:643
 msgid "Edit resource cost"
-msgstr ""
+msgstr "Muokkaa resurssin hintaa"
 
 #: ../src/planner-resource-dialog.c:711 ../src/planner-resource-dialog.c:752
 #: ../src/planner-resource-view.c:1413 ../src/planner-resource-view.c:1494
 msgid "Edit resource property"
-msgstr ""
+msgstr "Muokkaa resurssin ominaisuutta"
 
 #. i18n: time stamp format for notes in task dialog, see strftime(3) for
 #. * a detailed description.
@@ -1463,155 +1469,155 @@ msgstr ""
 
 #: ../src/planner-resource-dialog.c:1521
 msgid "None (use project default)"
-msgstr ""
+msgstr "Ei mitään (käytetään projektin oletusta)"
 
 #: ../src/planner-resource-dialog.c:1648 ../src/planner-resource-dialog.c:1650
 msgid "Edit resource properties"
-msgstr ""
+msgstr "Muokkaa resurssin ominaisuuksia"
 
 #: ../src/planner-resource-dialog.c:1851 ../src/planner-resource-view.c:753
 #: ../src/planner-resource-view.c:767 ../src/planner-resource-view.c:1737
 msgid "Material"
-msgstr ""
+msgstr "Materiaalit"
 
 #: ../src/planner-resource-view.c:230
 msgid "_Insert Resource"
-msgstr ""
+msgstr "_Lisää resurssi"
 
 #: ../src/planner-resource-view.c:231
 msgid "Insert a new resource"
-msgstr ""
+msgstr "Lisää uusi resurssi"
 
 #: ../src/planner-resource-view.c:233
 msgid "In_sert Resources..."
-msgstr ""
+msgstr "Li_sää resurssit..."
 
 #: ../src/planner-resource-view.c:236
 msgid "_Remove Resource"
-msgstr ""
+msgstr "_Poista resurssi"
 
 #: ../src/planner-resource-view.c:237
 msgid "Remove the selected resource"
-msgstr ""
+msgstr "Poista valitut resurssit"
 
 #: ../src/planner-resource-view.c:239
 msgid "_Edit Resource Properties..."
-msgstr ""
+msgstr "_Muokkaa resurssin ominaisuuksia..."
 
 #: ../src/planner-resource-view.c:242
 msgid "Edit _Groups"
-msgstr ""
+msgstr "Muokkaa _ryhmiä"
 
 #: ../src/planner-resource-view.c:243
 msgid "Edit resource groups"
-msgstr ""
+msgstr "Muokkaa resurssin ryhmiä"
 
 #: ../src/planner-resource-view.c:248
 msgid "Edit _Custom Properties..."
-msgstr ""
+msgstr "Muokkka _itsemääriteltyjä ominaisuuksia..."
 
 #: ../src/planner-resource-view.c:266
 msgid "/_Insert resource"
-msgstr ""
+msgstr "/_Lisää resurssi"
 
 #: ../src/planner-resource-view.c:269
 msgid "/_Remove resource"
-msgstr ""
+msgstr "/_Poista resurssi"
 
 #: ../src/planner-resource-view.c:272 ../src/planner-usage-tree.c:102
 msgid "/_Edit resource..."
-msgstr ""
+msgstr "/_Muokkaa resurssia..."
 
 #: ../src/planner-resource-view.c:423
 msgid "_Resources"
-msgstr ""
+msgstr "_Resurssit"
 
 #: ../src/planner-resource-view.c:943
 msgid "Remove resource"
-msgstr ""
+msgstr "Poista resurssi"
 
 #: ../src/planner-resource-view.c:1020
 msgid "Edit Resource Columns"
-msgstr ""
+msgstr "Muokkaa resurssin sarakkeita"
 
 #: ../src/planner-resource-view.c:1055
 msgid "Edit custom resource properties"
-msgstr ""
+msgstr "Muokkaa resurssin itsemääriteltyjä ominaisuuksia"
 
 #: ../src/planner-resource-view.c:1197
 msgid "Short name"
-msgstr ""
+msgstr "Lyhyt nimi"
 
 #: ../src/planner-resource-view.c:1253
 msgid "Group"
-msgstr ""
+msgstr "Ryhmä"
 
 #. i18n: Short "Week", preferably 2 letters.
 #: ../src/planner-scale-utils.c:129
 #, c-format
 msgid "Wk %d"
-msgstr ""
+msgstr "Vk %d"
 
 #: ../src/planner-scale-utils.c:133
 #, c-format
 msgid "Week %d"
-msgstr ""
+msgstr "Viikko %d"
 
 #. i18n: Week, year.
 #: ../src/planner-scale-utils.c:138
 #, c-format
 msgid "Week %d, %d"
-msgstr ""
+msgstr "Viikko %d, %d"
 
 #. i18n: Short "Quarter", preferably 1 letter.
 #: ../src/planner-scale-utils.c:169
 #, c-format
 msgid "Q%d"
-msgstr ""
+msgstr "Q%d"
 
 #. i18n: Short "Quarter", preferably 2-3 letters.
 #: ../src/planner-scale-utils.c:173
 #, c-format
 msgid "Qtr %d"
-msgstr ""
+msgstr "Qtr %d"
 
 #. i18n: Year, short "Quarter", preferably 2-3 letters.
 #: ../src/planner-scale-utils.c:177
 #, c-format
 msgid "%d, Qtr %d"
-msgstr ""
+msgstr "%d, Qtr %d"
 
 #. i18n: Short "Half year", preferably 1 letter.
 #: ../src/planner-scale-utils.c:190
 #, c-format
 msgid "H%d"
-msgstr ""
+msgstr "H%d"
 
 #. i18n: Year, short "Half year", preferably 1 letter.
 #: ../src/planner-scale-utils.c:195
 #, c-format
 msgid "%04d, H%d"
-msgstr ""
+msgstr "%04d, H%d"
 
 #: ../src/planner-sql-plugin.c:93
 msgid "Open from Database..."
-msgstr ""
+msgstr "Avaa tietokannasta..."
 
 #: ../src/planner-sql-plugin.c:94
 msgid "Open a project from a database"
-msgstr ""
+msgstr "Avaa projekti tietokannasta"
 
 #: ../src/planner-sql-plugin.c:96 ../src/planner-sql-plugin.c:1103
 msgid "Save to Database"
-msgstr ""
+msgstr "Tallenna tietokantaan"
 
 #: ../src/planner-sql-plugin.c:97
 msgid "Save the current project to a database"
-msgstr ""
+msgstr "Tallenna valittu projekti tietokantaan"
 
 #: ../src/planner-sql-plugin.c:127
 msgid "No errors reported."
-msgstr ""
+msgstr "Ei havaittuja virheitä."
 
 #: ../src/planner-sql-plugin.c:493
 #, c-format
@@ -1622,7 +1628,7 @@ msgstr ""
 
 #: ../src/planner-sql-plugin.c:500
 msgid "Upgrade"
-msgstr ""
+msgstr "Päivitä"
 
 #: ../src/planner-sql-plugin.c:514
 #, c-format
@@ -1633,11 +1639,16 @@ msgid ""
 "Database error: \n"
 "%s"
 msgstr ""
+"Tietokantaa %s ei voitu päivittää.\n"
+"Käytetty päivitystiedosto: %s\n"
+"\n"
+"Tietokantavirhe: \n"
+"%s"
 
 #: ../src/planner-sql-plugin.c:555
 #, c-format
 msgid "Can't create tables in database %s"
-msgstr ""
+msgstr "Tauluja ei voida luoda tietokantaan %s"
 
 #: ../src/planner-sql-plugin.c:617
 #, c-format
@@ -1647,48 +1658,48 @@ msgstr ""
 #: ../src/planner-sql-plugin.c:658
 #, c-format
 msgid "Connection to database '%s@%s' failed."
-msgstr ""
+msgstr "Yhteys tietokantaan \"%s@%s\" epäonnistui."
 
 #: ../src/planner-sql-plugin.c:669
 #, c-format
 msgid "Test to tables in database '%s' failed."
-msgstr ""
+msgstr "Taulujen testaus tietokannassa \"%s\" epäonnistui."
 
 #: ../src/planner-sql-plugin.c:767
 msgid "ID"
-msgstr ""
+msgstr "Tunniste"
 
 #: ../src/planner-sql-plugin.c:775
 msgid "Project"
-msgstr ""
+msgstr "Projekti"
 
 #: ../src/planner-sql-plugin.c:783
 msgid "Phase"
-msgstr ""
+msgstr "Vaihe"
 
 #: ../src/planner-sql-plugin.c:791
 msgid "Revision"
-msgstr ""
+msgstr "Revisio"
 
 #: ../src/planner-sql-plugin.c:991
 msgid "Open from Database"
-msgstr ""
+msgstr "Avaa tietokannasta"
 
 #: ../src/planner-task-cmd.c:97
 msgid "Link task"
-msgstr ""
+msgstr "Linkitä tehtävä"
 
 #: ../src/planner-task-cmd.c:173
 msgid "Unlink task"
-msgstr ""
+msgstr "Poista tehtävän linkitys"
 
 #: ../src/planner-task-cmd.c:268
 msgid "Insert task"
-msgstr ""
+msgstr "Lisää tehtävä"
 
 #: ../src/planner-task-dialog.c:528
 msgid "Edit task type"
-msgstr ""
+msgstr "Muokkaa tehtävän tyyppiä"
 
 #: ../src/planner-task-dialog.c:595
 msgid "Toggle fixed duration"
@@ -1700,19 +1711,19 @@ msgstr ""
 
 #: ../src/planner-task-dialog.c:742
 msgid "Assign resource to task"
-msgstr ""
+msgstr "Liitä resurssi tehtävään"
 
 #: ../src/planner-task-dialog.c:802
 msgid "Unassign resource from task"
-msgstr ""
+msgstr "Poista resurssi tehtävästä"
 
 #: ../src/planner-task-dialog.c:861
 msgid "Change resource units in task"
-msgstr ""
+msgstr "Muuta resurssin yksiköitä tehtävässä"
 
 #: ../src/planner-task-dialog.c:949
 msgid "Edit task predecessor"
-msgstr ""
+msgstr "Muokkaa tehtävän edeltäjää"
 
 #: ../src/planner-task-dialog.c:1020
 msgid "Edit lag predecessor"
@@ -1720,34 +1731,34 @@ msgstr ""
 
 #: ../src/planner-task-dialog.c:1086
 msgid "Edit task note"
-msgstr ""
+msgstr "Muokkaa tehtävän huomautusta"
 
 #: ../src/planner-task-dialog.c:1494
 #, c-format
 msgid "No earlier than %s"
-msgstr ""
+msgstr "Ei aiemmin kuin %s"
 
 #: ../src/planner-task-dialog.c:1498
 #, c-format
 msgid "On fixed date %s"
-msgstr ""
+msgstr "Tarkalleen päivänä %s"
 
 #: ../src/planner-task-dialog.c:1880
 msgid "Finish to start (FS)"
-msgstr ""
+msgstr "Lopusta alkuun (FS)"
 
 #. _("Finish to finish (FF)"), MRP_RELATION_FF,
 #: ../src/planner-task-dialog.c:1882
 msgid "Start to start (SS)"
-msgstr ""
+msgstr "Alusta alkuun (SS)"
 
 #: ../src/planner-task-dialog.c:1938
 msgid "Can't add new predecessor. No task selected!"
-msgstr ""
+msgstr "Edeltäjää ei voida lisätä. Tehtävää ei ole valittu!"
 
 #: ../src/planner-task-dialog.c:2383
 msgid "Change..."
-msgstr ""
+msgstr "Muuta..."
 
 #: ../src/planner-task-dialog.c:2557
 msgid "Assigned"
@@ -1755,7 +1766,7 @@ msgstr ""
 
 #: ../src/planner-task-dialog.c:2574
 msgid "Units"
-msgstr ""
+msgstr "Yksikköjä"
 
 #: ../src/planner-task-dialog.c:2664
 msgid "Lag"
@@ -1763,51 +1774,51 @@ msgstr ""
 
 #: ../src/planner-task-dialog.c:2807 ../src/planner-task-dialog.c:2809
 msgid "Edit task properties"
-msgstr ""
+msgstr "Muokkaa tehtävän ominaisuuksia"
 
 #: ../src/planner-task-popup.c:54
 msgid "/_Insert task"
-msgstr ""
+msgstr "/_Lisää tehtävä"
 
 #: ../src/planner-task-popup.c:57
 msgid "/Insert _subtask"
-msgstr ""
+msgstr "/Lisää _alitehtävä"
 
 #: ../src/planner-task-popup.c:60
 msgid "/_Remove task"
-msgstr ""
+msgstr "/_Poista tehtävä"
 
 #: ../src/planner-task-popup.c:65
 msgid "/_Unlink task"
-msgstr ""
+msgstr "/P_oista tehtävän linkitys"
 
 #: ../src/planner-task-popup.c:70
 msgid "/Assign _resources..."
-msgstr ""
+msgstr "/Liitä _resursseja..."
 
 #: ../src/planner-task-popup.c:73 ../src/planner-usage-tree.c:105
 msgid "/_Edit task..."
-msgstr ""
+msgstr "/_Muokkaa tehtävää..."
 
 #: ../src/planner-task-tree.c:562
 msgid "Remove task"
-msgstr ""
+msgstr "Poista tehtävä"
 
 #: ../src/planner-task-tree.c:639
 msgid "Apply constraint to task"
-msgstr ""
+msgstr "Määrittele rajoite tehtävälle"
 
 #: ../src/planner-task-tree.c:701
 msgid "Reset task constraint"
-msgstr ""
+msgstr "Tyhjennä tehtävän rajoite"
 
 #: ../src/planner-task-tree.c:1488 ../src/planner-task-tree.c:1620
 msgid "N/A"
-msgstr ""
+msgstr "N/A"
 
 #: ../src/planner-task-tree.c:2719
 msgid "Remove tasks"
-msgstr ""
+msgstr "Poista tehtäviä"
 
 #: ../src/planner-task-tree.c:2781
 #, c-format
