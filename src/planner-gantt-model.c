@@ -844,9 +844,11 @@ gantt_model_get_value (GtkTreeModel *tree_model,
 		t2 = mrp_task_get_latest_finish (task);
 		project = mrp_object_get_project (MRP_OBJECT (task));
 		
-		/* We don't support negative slack yet. */
+		/* We don't support negative slack */
 		if (t2 >= t1) {
-			duration = mrp_project_calculate_task_work (
+			/* use summary duration calc since we want to use 
+			 * the project calendar and ignore resource assignments */
+			duration = mrp_project_calculate_summary_duration (
 				project, task, t1, t2);
 		} else {
 			duration = 0;

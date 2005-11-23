@@ -121,6 +121,10 @@ void             mrp_project_task_traverse            (MrpProject           *pro
 						       MrpTaskTraverseFunc   func,
 						       gpointer              user_data);
 void             mrp_project_reschedule               (MrpProject           *project);
+gint             mrp_project_calculate_summary_duration (MrpProject           *project,
+						       MrpTask              *task,
+						       mrptime               start,
+						       mrptime               finish);
 gint             mrp_project_calculate_task_work      (MrpProject           *project,
 						       MrpTask              *task,
 						       mrptime               start,

@@ -1630,18 +1630,22 @@ mrp_task_get_cost (MrpTask *task)
 		return priv->cost;
 	}
 
+	/* summary task cost calc */
 	child = mrp_task_get_first_child (task);
-	while (child) {
-		total += mrp_task_get_cost (child);
-		child = mrp_task_get_next_sibling (child);
-	}
+	if (child) {
+		while (child) {
+			total += mrp_task_get_cost (child);
+			child = mrp_task_get_next_sibling (child);
+		}
+	} else {
+	/* non summary task cost calc */
+		assignments = mrp_task_get_assignments (task);
+		for (l = assignments; l; l = l->next) {
+			resource = mrp_assignment_get_resource (l->data);
 
-	assignments = mrp_task_get_assignments (task);
-	for (l = assignments; l; l = l->next) {
-		resource = mrp_assignment_get_resource (l->data);
-
-		mrp_object_get (resource, "cost", &cost, NULL);
-		total += mrp_assignment_get_units (l->data) * priv->duration * cost / (3600.0 * 100);
+			mrp_object_get (resource, "cost", &cost, NULL);
+			total += mrp_assignment_get_units (l->data) * priv->duration * cost / (3600.0 * 100);
+		}
 	}
 
 	priv->cost = total;

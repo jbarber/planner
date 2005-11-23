@@ -1918,6 +1918,35 @@ mrp_project_reschedule (MrpProject *project)
 }
 
 /**
+ * mrp_project_calculate_summary_duration:
+ * @project: an #MrpProject
+ * @task: an #MrpTask
+ * @start: a start time, or if %-1, the task start time is to be used 
+ * @finish: a finish time
+ * 
+ * Calculates the time needed to achieve the given start and finish time, 
+ * ignoring allocated resources' calendars (summary tasks should ignore
+ * their own resource assignments)
+ * 
+ * Return value: The calculated duration.
+ **/
+gint
+mrp_project_calculate_summary_duration (MrpProject *project, 
+				 MrpTask    *task, 
+				 mrptime     start,
+				 mrptime     finish)
+{
+	g_return_val_if_fail (MRP_IS_PROJECT (project), 0);
+	g_return_val_if_fail (MRP_IS_TASK (task), 0);
+	g_return_val_if_fail (start == -1 || start <= finish, 0);
+	g_return_val_if_fail (finish >= 0, 0);
+
+	return mrp_task_manager_calculate_summary_duration (
+		project->priv->task_manager,
+		task, start, finish);
+}
+
+/**
  * mrp_project_calculate_task_work:
  * @project: an #MrpProject
  * @task: an #MrpTask
