@@ -593,8 +593,10 @@ imrp_time_init (void)
 			      LOCALE_SABBREVDAYNAME1+i,
 			      buffer,
 			      len);
-		short_day_names[i] = g_locale_to_utf8(buffer, -1, NULL, NULL,
-						      NULL);
+		// days in MS start with Monday like in GLIB, so we
+		// we need to offset Mon-Sat and fix Sunday
+		short_day_names[i < 6 ? i + 1 : 0] = g_locale_to_utf8(buffer, -1, NULL, NULL,
+								      NULL);
 		
 		len = GetLocaleInfo(LOCALE_USER_DEFAULT,
 				    LOCALE_SDAYNAME1+i,
@@ -606,8 +608,10 @@ imrp_time_init (void)
 			      LOCALE_SABBREVDAYNAME1+i,
 			      buffer,
 			      len);
-		day_names[i] = g_locale_to_utf8(buffer, -1, NULL, NULL,
-						NULL);
+		// days in MS start with Monday like in GLIB, so we
+		// we need to offset Mon-Sat and fix Sunday
+		day_names[i < 6 ? i + 1 : 0] = g_locale_to_utf8(buffer, -1, NULL, NULL,
+								NULL);
 		g_free(buffer);
 	}
 #endif
