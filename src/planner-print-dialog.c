@@ -154,6 +154,29 @@ planner_print_dialog_save_config (GnomePrintConfig *config)
 }
 
 GtkWidget *
+planner_print_views_dialog_new (PlannerWindow  *window,
+			  GList          *views)
+{
+	GtkWidget *dialog;
+	GtkWidget *page;
+	
+	dialog = gtk_dialog_new_with_buttons ("Select Views",
+						GTK_WINDOW (window),
+						GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+						GTK_STOCK_OK,
+						GTK_RESPONSE_OK,
+						GTK_STOCK_CANCEL,
+						GTK_RESPONSE_CANCEL,
+						NULL); 
+	page = print_dialog_create_page (window, dialog, views);
+
+	gtk_container_add (GTK_CONTAINER (GTK_DIALOG(dialog)->vbox), page);
+
+	gtk_widget_show_all (dialog);
+
+	return dialog;
+}	
+GtkWidget *
 planner_print_dialog_new (PlannerWindow  *window,
 			  GnomePrintJob  *job,
 			  GList          *views)
@@ -169,6 +192,7 @@ planner_print_dialog_new (PlannerWindow  *window,
 	gtk_notebook_prepend_page (print_dialog_get_notebook (dialog),
 				   page,
 				   gtk_label_new (_("Select views")));
+	gtk_notebook_set_current_page (print_dialog_get_notebook (dialog), 0);
 
 	g_object_set_data (G_OBJECT (dialog), "window", window);
 

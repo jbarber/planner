@@ -27,6 +27,8 @@
 GtkWidget *       planner_print_dialog_new                 (PlannerWindow    *window,
 							    GnomePrintJob    *job,
 							    GList            *views);
+GtkWidget *       planner_print_views_dialog_new           (PlannerWindow    *window,
+							    GList            *views);
 GList *           planner_print_dialog_get_print_selection (GtkDialog        *dialog,
 							    gboolean         *summary);
 void              planner_print_dialog_save_config         (GnomePrintConfig *config);

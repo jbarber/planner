@@ -943,11 +943,14 @@ window_print_preview_cb (GtkAction *action,
 	PlannerWindowPriv *priv;
 	GnomePrintConfig  *config;
 	GnomePrintJob     *gpj;
+	GtkWidget         *dialog;
 	GtkWidget         *preview;
 	GList             *views, *l;
 	PlannerView       *view;
 	PlannerPrintJob   *job;
-	gint               n_pages;
+	gboolean           summary;
+	gint               n_pages, n_views;
+	gint               response;
 
 	window = PLANNER_WINDOW (data);
 	priv = window->priv;
@@ -961,6 +964,35 @@ window_print_preview_cb (GtkAction *action,
 
 	views = window_get_print_selection (window);
 	
+	/* Check to be sure there are some views selected */
+	n_views = g_list_length (views);
+	if (n_views == 0) {
+		dialog = planner_print_views_dialog_new (window, priv->views); 
+
+		while (n_views == 0) {
+
+			response = gtk_dialog_run (GTK_DIALOG (dialog));
+
+			if (response == GTK_RESPONSE_CANCEL) {
+				gtk_widget_destroy (dialog);
+				g_object_unref (gpj);
+				return;
+			}
+			else if (response == GTK_RESPONSE_DELETE_EVENT) {
+				gtk_widget_destroy (dialog);
+				g_object_unref (gpj);
+				return;
+			}
+			
+			/* Save printer settings. */
+			planner_print_dialog_save_config (config);
+
+			views = planner_print_dialog_get_print_selection (GTK_DIALOG (dialog), &summary);
+			n_views = g_list_length (views);
+		}
+		gtk_widget_destroy (dialog);
+	}
+
 	n_pages = 0;
 	for (l = views; l; l = l->next) {
 		view = l->data;
@@ -998,13 +1030,13 @@ window_print_cb (GtkAction *action,
 	PlannerWindowPriv *priv;
 	GnomePrintJob     *gpj;
 	GnomePrintConfig  *config;
-	GtkWidget         *dialog;
+	GtkWidget         *dialog, *message;
 	gint               response;
 	gboolean           summary;
 	GList             *views, *l;
 	PlannerView       *view;
 	PlannerPrintJob   *job;
-	gint               n_pages;
+	gint               n_pages, n_views;
 	
 	window = PLANNER_WINDOW (data);
 	priv = window->priv;
@@ -1016,22 +1048,43 @@ window_print_cb (GtkAction *action,
 
 	dialog = planner_print_dialog_new (data, gpj, priv->views);
 
-	response = gtk_dialog_run (GTK_DIALOG (dialog));
+	/* n_views is the number of views selected. */
+	n_views = 0;
+	while (n_views == 0) {
 
-	if (response == GTK_RESPONSE_CANCEL) {
-		gtk_widget_destroy (dialog);
-		g_object_unref (gpj);
-		return;
-	}
-	else if (response == GTK_RESPONSE_DELETE_EVENT) {
-		g_object_unref (gpj);
-		return;
-	}
+		response = gtk_dialog_run (GTK_DIALOG (dialog));
+
+		if (response == GTK_RESPONSE_CANCEL) {
+			gtk_widget_destroy (dialog);
+			g_object_unref (gpj);
+			return;
+		}
+		else if (response == GTK_RESPONSE_DELETE_EVENT) {
+			g_object_unref (gpj);
+			return;
+		}
+		
+		/* Save printer settings. */
+		planner_print_dialog_save_config (config);
+
+		views = planner_print_dialog_get_print_selection (GTK_DIALOG (dialog), &summary);
+		n_views = g_list_length (views);
+
+		if (n_views == 0) {
 	
-	/* Save printer settings. */
-	planner_print_dialog_save_config (config);
+			message = gtk_message_dialog_new (GTK_WINDOW (dialog),
+							 GTK_DIALOG_MODAL |
+							 GTK_DIALOG_DESTROY_WITH_PARENT,
+							 GTK_MESSAGE_INFO,
+							 GTK_BUTTONS_OK,
+							 "%s", "Please choose one or more views to print.");
 
-	views = planner_print_dialog_get_print_selection (GTK_DIALOG (dialog), &summary);
+			gtk_dialog_run (GTK_DIALOG (message));
+			gtk_widget_destroy (message);
+
+		}
+	}
+
 	if (summary) {
 		/*g_print ("Print summary\n");*/
 	}
@@ -1041,7 +1094,6 @@ window_print_cb (GtkAction *action,
 	n_pages = 0;
 	for (l = views; l; l = l->next) {
 		view = l->data;
-
 		planner_view_print_init (view, job);
 		
 		n_pages += planner_view_print_get_n_pages (view);
