@@ -1678,8 +1678,7 @@ window_do_save_as (PlannerWindow *window)
 		success = mrp_project_save_as (window->priv->project, filename, 
 					       FALSE, &error);
 
-		if (!success && error && 
-		    error->code == MRP_ERROR_SAVE_FILE_EXIST) {
+		if (!success && error->code == MRP_ERROR_SAVE_FILE_EXIST) {
 			GtkWidget *dialog;
 			gint       ret;
 			
