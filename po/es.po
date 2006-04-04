@@ -4,20 +4,20 @@
 # This file is distributed under the same license as the mrproject package.
 # Copyright © 2002,2003 Free Software Foundation, Inc.
 # Juan Jesus Ojeda Croissier <juanjesus.ojeda@hispalinux.es>, 2002.
-# Francisco Javier F. Serrador <serrador@cvs.gnome.org>, 2003, 2004.
+# Francisco Javier F. Serrador <serrador@cvs.gnome.org>, 2003, 2004, 2006.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-02 00:18+0200\n"
-"PO-Revision-Date: 2005-10-02 00:18+0200\n"
+"POT-Creation-Date: 2006-04-04 10:40+0200\n"
+"PO-Revision-Date: 2006-04-04 10:42+0200\n"
 "Last-Translator: Francisco Javier F. Serrador <serrador@cvs.gnome.org>\n"
 "Language-Team: Spanish <traductores@es.gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.3.1\n"
+"X-Generator: KBabel 1.9.1\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 
 #: ../data/glade/add-predecessor.glade.h:1
@@ -528,22 +528,20 @@ msgstr "Indica si la impresión de la vista de Gantt está activada."
 
 #: ../data/planner.schemas.in.h:8
 msgid "Whether printing of the Resource view is enabled."
-msgstr "Indica si laimpresión de la vista de recursos está activada."
+msgstr "Indica si la impresión de la vista de recursos está activada."
 
 #: ../data/planner.schemas.in.h:9
 msgid "Whether printing of the Task view is enabled."
 msgstr "Indica si la impresión de la vista de tareas está activada."
 
 #: ../data/planner.schemas.in.h:10
-msgid ""
-"Whether to highlight the tasks along the cricital path in the Gantt view."
+msgid "Whether to highlight the tasks along the cricital path in the Gantt view."
 msgstr ""
 "Indica si se deben resaltar las tareas junto con la ruta crítica en la vista "
 "de Gantt."
 
 #: ../data/planner.schemas.in.h:11
-msgid ""
-"Whether to highlight the tasks along the cricital path in the Task view."
+msgid "Whether to highlight the tasks along the cricital path in the Task view."
 msgstr ""
 "Indica si se debe resaltar las tareas a lo largo de la ruta crítica en la "
 "vista de tareas."
@@ -608,8 +606,7 @@ msgstr "No se pudo encontrar un módulo para cargar «%s»"
 
 #: ../libplanner/mrp-project.c:780 ../libplanner/mrp-project.c:1064
 msgid "No support for SQL storage built into this version of Planner."
-msgstr ""
-"No hay soporte para almacenes SQL compilado en esta versión de Planner."
+msgstr "No hay soporte para almacenes SQL compilado en esta versión de Planner."
 
 #: ../libplanner/mrp-project.c:817
 msgid "Invalid URI."
@@ -622,8 +619,7 @@ msgstr "No es posible encontrar el escritor de archivos identificado por «%s»"
 
 #: ../libplanner/mrp-project.c:1021
 msgid "Couldn't find a suitable file module for loading project"
-msgstr ""
-"No se pudo encontrar un módulo de archivo adecuado para cargar el proyecto"
+msgstr "No se pudo encontrar un módulo de archivo adecuado para cargar el proyecto"
 
 #: ../libplanner/mrp-property.c:365
 msgid "Text"
@@ -714,17 +710,16 @@ msgid "Invalid SQL URI (no database name specified)."
 msgstr "URI SQL inválida (no hay especificado un nombre de base de datos)."
 
 #: ../libplanner/mrp-task.c:1062
-msgid ""
-"Could not add a predecessor relation, because the tasks are already related."
+msgid "Could not add a predecessor relation, because the tasks are already related."
 msgstr ""
 "No se puede añadir una relación predecesora, debido a que las tareas ya se "
 "encuentran relacionadas."
 
-#: ../libplanner/mrp-task-manager.c:2152
+#: ../libplanner/mrp-task-manager.c:2149
 msgid "Cannot add a predecessor, because it would result in a loop."
 msgstr "No se puede añadir un predecesor, debido a que formaría un ciclo."
 
-#: ../libplanner/mrp-task-manager.c:2198
+#: ../libplanner/mrp-task-manager.c:2195
 msgid "Cannot move the task, because it would result in a loop."
 msgstr "No se puede mover la tarea, porque se formaría un ciclo."
 
@@ -867,7 +862,7 @@ msgstr "EDS"
 
 #: ../src/planner-eds-plugin.c:168
 msgid "Import resources from Evolution Data Server"
-msgstr "Importar resursos desde el Servidor de Datos de Evolution"
+msgstr "Importar recursos desde el Servidor de Datos de Evolution"
 
 #: ../src/planner-eds-plugin.c:396 ../src/planner-gantt-print.c:190
 #: ../src/planner-gantt-view.c:508 ../src/planner-group-dialog.c:822
@@ -891,7 +886,7 @@ msgstr "Foto"
 
 #: ../src/planner-eds-plugin.c:676
 msgid "Imported from Evolution Data Server"
-msgstr "Impotado desde el Servidor de Datos de Evolution"
+msgstr "Importado desde el Servidor de Datos de Evolution"
 
 #: ../src/planner-eds-plugin.c:677
 msgid "Updated from Evolution Data Server"
@@ -907,8 +902,7 @@ msgstr "UID del Servidor de Datos de Evolution"
 
 #: ../src/planner-eds-plugin.c:924
 msgid "Identifier used by Evolution Data Server for resources"
-msgstr ""
-"Identificador que usa el Servidor de Datos de Evolution para los recursos"
+msgstr "Identificador que usa el Servidor de Datos de Evolution para los recursos"
 
 #: ../src/planner-format.c:149
 #, c-format
@@ -1030,25 +1024,25 @@ msgstr "Trabajo"
 
 #: ../src/planner-gantt-print.c:542 ../src/planner-gantt-row.c:696
 #: ../src/planner-html-plugin.c:125 ../src/planner-task-tree.c:1567
-#: ../src/planner-window.c:1929
+#: ../src/planner-window.c:1980
 msgid "Unnamed"
 msgstr "Sin nombre"
 
-#: ../src/planner-gantt-row.c:1788 ../src/planner-gantt-row.c:1791
+#: ../src/planner-gantt-row.c:1791 ../src/planner-gantt-row.c:1794
 msgid "No name"
 msgstr "Sin nombre"
 
-#: ../src/planner-gantt-row.c:1794
+#: ../src/planner-gantt-row.c:1797
 #, c-format
 msgid "Make task '%s' a predecessor of '%s'"
 msgstr "Hacer la tarea «%s» predecesora de «%s»"
 
-#: ../src/planner-gantt-row.c:1842
+#: ../src/planner-gantt-row.c:1845
 #, c-format
 msgid "Change work to %s"
 msgstr "Cambiar obra a %s"
 
-#: ../src/planner-gantt-row.c:2412 ../src/planner-task-dialog.c:454
+#: ../src/planner-gantt-row.c:2415 ../src/planner-task-dialog.c:454
 #: ../src/planner-task-tree.c:254 ../src/planner-task-tree.c:942
 msgid "Edit task property"
 msgstr "Editar propiedad de la tarea"
@@ -1270,7 +1264,7 @@ msgstr "Exportar a HTML"
 msgid "Show result in browser"
 msgstr "Mostrar el resultado en un navegador"
 
-#: ../src/planner-html-plugin.c:173 ../src/planner-window.c:1638
+#: ../src/planner-html-plugin.c:173 ../src/planner-window.c:1689
 #: ../src/planner-xml-planner-plugin.c:124
 #, c-format
 msgid "File \"%s\" exists, do you want to overwrite it?"
@@ -1342,15 +1336,15 @@ msgstr "EE"
 msgid "SF"
 msgstr "EF"
 
-#: ../src/planner-print-dialog.c:164
+#: ../src/planner-print-dialog.c:187
 msgid "Print Project"
 msgstr "_Imprimir proyecto"
 
-#: ../src/planner-print-dialog.c:171
+#: ../src/planner-print-dialog.c:194
 msgid "Select views"
 msgstr "Seleccionar vistas"
 
-#: ../src/planner-print-dialog.c:194
+#: ../src/planner-print-dialog.c:218
 msgid "Select the views to print:"
 msgstr "Seleccionar las vistas a imprimir"
 
@@ -1672,8 +1666,7 @@ msgstr "No se pueden crear tablas en la base de datos %s"
 #: ../src/planner-sql-plugin.c:617
 #, c-format
 msgid "Database %s is not setup for Planner. Do you want to do that?"
-msgstr ""
-"La base de datos %s no está preparada para Planner. ¿Qué quiere hacer ahora?"
+msgstr "La base de datos %s no está preparada para Planner. ¿Qué quiere hacer ahora?"
 
 #: ../src/planner-sql-plugin.c:658
 #, c-format
@@ -1774,8 +1767,7 @@ msgstr "Empezar para empezar (EE)"
 
 #: ../src/planner-task-dialog.c:1938
 msgid "Can't add new predecessor. No task selected!"
-msgstr ""
-"No se puede añadir un predecesor nuevo. No ha seleccionado ninguna tarea."
+msgstr "No se puede añadir un predecesor nuevo. No ha seleccionado ninguna tarea."
 
 #: ../src/planner-task-dialog.c:2383
 msgid "Change..."
@@ -1994,7 +1986,7 @@ msgstr "Abre un proyecto"
 msgid "_Import"
 msgstr "_Importar"
 
-#: ../src/planner-window.c:240 ../src/planner-window.c:1507
+#: ../src/planner-window.c:240 ../src/planner-window.c:1559
 msgid "_Save"
 msgstr "_Guardar"
 
@@ -2072,7 +2064,7 @@ msgstr "_Vista"
 
 #: ../src/planner-window.c:276
 msgid "_Actions"
-msgstr "_Acciones"
+msgstr "A_cciones"
 
 #: ../src/planner-window.c:280
 msgid "_Project"
@@ -2135,57 +2127,54 @@ msgstr "Archivos de Planner"
 #. I18n: Translators, list your names here, newline separated if there
 #. * are more than one, to appear in the about box.
 #.
-#: ../src/planner-window.c:1271 ../src/planner-window.c:1293
+#: ../src/planner-window.c:1323 ../src/planner-window.c:1345
 msgid "translator-credits"
 msgstr "Francisco Javier F. Serrador"
 
-#: ../src/planner-window.c:1288
+#: ../src/planner-window.c:1340
 msgid "A Project Management application for the GNOME desktop"
 msgstr "Una aplicación de gestión de proyectos para el escritorio GNOME"
 
-#: ../src/planner-window.c:1295
+#: ../src/planner-window.c:1347
 msgid "The Planner Homepage"
 msgstr "La página web de Planner"
 
-#: ../src/planner-window.c:1447
+#: ../src/planner-window.c:1499
 msgid "If you don't save, changes made the last minute will be discarded."
-msgstr ""
-"Si no guarda, los cambios hechos en el último minuto serán descartados."
+msgstr "Si no guarda, los cambios hechos en el último minuto serán descartados."
 
-#: ../src/planner-window.c:1452
+#: ../src/planner-window.c:1504
 #, c-format
 msgid "If you don't save, changes made the last %d minutes will be discarded."
-msgstr ""
-"Si no guarda, los cambios hechos en los últimos %d minutos serán descartados."
+msgstr "Si no guarda, los cambios hechos en los últimos %d minutos serán descartados."
 
-#: ../src/planner-window.c:1457
+#: ../src/planner-window.c:1509
 msgid "If you don't save, changes made the last hour will be discarded."
 msgstr "Si no guarda, los cambios hechos en la última hora serán descartados."
 
-#: ../src/planner-window.c:1462
+#: ../src/planner-window.c:1514
 #, c-format
 msgid "If you don't save, changes made the last %d hours will be discarded."
-msgstr ""
-"Si no guarda, los cambios hechos en las últimas %d horas serán descartados."
+msgstr "Si no guarda, los cambios hechos en las últimas %d horas serán descartados."
 
-#: ../src/planner-window.c:1469
+#: ../src/planner-window.c:1521
 #, c-format
 msgid "Save changes to document '%s' before closing?"
 msgstr "¿Desea guardar los cambios del documento «%s» antes de cerrar?"
 
-#: ../src/planner-window.c:1494
+#: ../src/planner-window.c:1546
 msgid "C_lose without saving"
 msgstr "C_errar sin guardar"
 
-#: ../src/planner-window.c:1500
+#: ../src/planner-window.c:1552
 msgid "_Cancel"
 msgstr "_Cancelar"
 
-#: ../src/planner-window.c:1599
+#: ../src/planner-window.c:1651
 msgid "Save a File"
 msgstr "Guardar un archivo"
 
-#: ../src/planner-window.c:1886
+#: ../src/planner-window.c:1937
 msgid ""
 "You have opened a file that was saved with an old version of Planner.\n"
 "\n"
@@ -2215,11 +2204,11 @@ msgstr ""
 "el elemento del menú «Eliminar todos los impedimentos» en el menú «Editar»."
 
 #. Hack.
-#: ../src/planner-window.c:1921
+#: ../src/planner-window.c:1972
 msgid "Unnamed database project"
 msgstr "Base de datos del proyecto sin nombre"
 
-#: ../src/planner-window.c:2035
+#: ../src/planner-window.c:2086
 #, c-format
 msgid "Open '%s'"
 msgstr "Abrir «%s»"
@@ -2234,410 +2223,9 @@ msgstr "Formato de Planner 0.11"
 
 #: ../src/planner-xml-planner-plugin.c:55
 msgid "Export project to a file suitable for Planner 0.11"
-msgstr "Exportar projecto a un archivo apropiado para Planner 0.11"
+msgstr "Exportar proyecto a un archivo apropiado para Planner 0.11"
 
 #: ../src/planner-xml-planner-plugin.c:90
 msgid "Export"
 msgstr "Exportar"
 
-#~ msgid "<b>Save to file</b>"
-#~ msgstr "<b>Guardar en archivo</b>"
-
-#~ msgid "Local file:"
-#~ msgstr "Archivo local:"
-
-#~ msgid "Save to HTML File"
-#~ msgstr "Guardar a un archivo HTML"
-
-#~ msgid "Web location:"
-#~ msgstr "Dirección web:"
-
-#~ msgid "Export to Planner pre-0.12 format failed"
-#~ msgstr "Ha fallado la exportación al formato Planner pre-0.12"
-
-#~ msgid "Test"
-#~ msgstr "Prueba"
-
-#~ msgid ""
-#~ "\n"
-#~ "WBS"
-#~ msgstr ""
-#~ "\n"
-#~ "WBS"
-
-#~ msgid ""
-#~ "\n"
-#~ "Work"
-#~ msgstr ""
-#~ "\n"
-#~ "Trabajo"
-
-#~ msgid ""
-#~ "\"%s\" is a directory.\n"
-#~ "Enter a filename and try again."
-#~ msgstr ""
-#~ "«%s» es un directorio.\n"
-#~ "Introduzca un nombre de archivo e intente de nuevo."
-
-#~ msgid "planner: --geometry cannot be used with more than one file."
-#~ msgstr "planner: --geometry no se puede usar con más de un archivo."
-
-#~ msgid "Task"
-#~ msgstr "Tarea"
-
-#~ msgid "Make task '%s' start on %s"
-#~ msgstr "Hacer que la tarea «%s» empiece el «%s»"
-
-#~ msgid "Change task '%s' work to %s, duration to %s (%d)"
-#~ msgstr "Cambiar el trabajo la tarea «%s» a %s, duración a %s (%d)"
-
-#~ msgid "Could not open view plugin file '%s'\n"
-#~ msgstr ""
-#~ "No se pudo abrir la vista del archivo la vista del complemento «%s»\n"
-
-#~ msgid "Constraint type"
-#~ msgstr "Tipo de impedimento"
-
-#~ msgid "Must start on"
-#~ msgstr "Debe empezar en"
-
-#~ msgid "%s days"
-#~ msgstr "%s días"
-
-#~ msgid "0 days"
-#~ msgstr "0 días"
-
-#~ msgid "%s day"
-#~ msgstr "%s día"
-
-#~ msgid "Zoom In"
-#~ msgstr "Ampliar"
-
-#~ msgid "Zoom Out"
-#~ msgstr "Reducir"
-
-#~ msgid "Zoom To Fit"
-#~ msgstr "Ampliar hasta ajustar"
-
-#~ msgid "C_ut"
-#~ msgstr "Cor_tar"
-
-#~ msgid "Clear"
-#~ msgstr "Limpiar"
-
-#~ msgid "Clear the selection"
-#~ msgstr "Limpiar la selección"
-
-#~ msgid "Copy the selection"
-#~ msgstr "Copiar la selección"
-
-#~ msgid "Cut the selection"
-#~ msgstr "Cortar la selección"
-
-#~ msgid "E_xport To"
-#~ msgstr "E_xportar a"
-
-#~ msgid "New"
-#~ msgstr "Nuevo"
-
-#~ msgid "New..."
-#~ msgstr "Nuevo..."
-
-#~ msgid "Open"
-#~ msgstr "Abrir"
-
-#~ msgid "Paste the clipboard"
-#~ msgstr "Pega el contenido del portapapeles"
-
-#~ msgid "Print"
-#~ msgstr "Imprimir"
-
-#~ msgid "Save"
-#~ msgstr "Guardar"
-
-#~ msgid "_Copy"
-#~ msgstr "_Copiar"
-
-#~ msgid "_Paste"
-#~ msgstr "_Pegar"
-
-#~ msgid "Execute a Python script"
-#~ msgstr "Ejecutar un script de Python"
-
-#~ msgid "Groups"
-#~ msgstr "Grupos"
-
-#~ msgid "Save to Database..."
-#~ msgstr "Guardar en base de datos..."
-
-#~ msgid "Can not add a predecessor relation between a task and its ancestor."
-#~ msgstr ""
-#~ "No se puede añadir una relación predecesora entre una tarea y sus "
-#~ "ancestros."
-
-#~ msgid "HTML export failed"
-#~ msgstr "Ha fallado la exportación HTML"
-
-#~ msgid "Edit resource note from dialog"
-#~ msgstr "Edita la nota de recursos desde el diálogo"
-
-#~ msgid "Edit resource cost from dialog"
-#~ msgstr "Edita el coste del recurso desde el diálogo"
-
-#~ msgid "Edit resource property from dialog"
-#~ msgstr "Edita propiedad del recurso del diálogo"
-
-#~ msgid "Edit resource custom property"
-#~ msgstr "Editar propiedad personalizada del recurso"
-
-#~ msgid "Edit task property from dialog"
-#~ msgstr "Edita propiedad de la tarea desde el diálogo"
-
-#~ msgid "Finish to finish (FF)"
-#~ msgstr "Terminar para terminar (TT)"
-
-#~ msgid "Start to finish (SF)"
-#~ msgstr "Empezar para finalizar (EF)"
-
-#~ msgid "Constraint task reset"
-#~ msgstr "Restablecer restricción de tarea"
-
-#~ msgid "Edit task custom property"
-#~ msgstr "Editar propiedad personalizada de la tarea"
-
-#~ msgid "Reset _All Constraints"
-#~ msgstr "Reiniciar _todos los impedimentos"
-
-#~ msgid ""
-#~ "Connection to database '%s' failed:\n"
-#~ "%s"
-#~ msgstr ""
-#~ "La conexión con la base de datos «%s» falló:\n"
-#~ "%s"
-
-#~ msgid "New predecessor"
-#~ msgstr "Crea un predecesor nuevo"
-
-#~ msgid "Predecessor: "
-#~ msgstr "Predecesor: "
-
-#~ msgid "Enter the name of the new day type:"
-#~ msgstr "Introduzca el nombre del tipo de día nuevo:"
-
-#~ msgid "New Day Type"
-#~ msgstr "Crea un tipo de día nuevo"
-
-#~ msgid "Name: "
-#~ msgstr "Nombre: "
-
-#~ msgid "New Property"
-#~ msgstr "Crea una propiedad nueva"
-
-#~ msgid "Type: "
-#~ msgstr "Tipo: "
-
-#~ msgid "Custom properties"
-#~ msgstr "Propiedades personalizadas"
-
-#~ msgid "Edit Project phases"
-#~ msgstr "Edita las fases del proyecto"
-
-#~ msgid "Enter the name of the new project phase:"
-#~ msgstr "Introduzca el nombre de la fase de proyecto nueva:"
-
-#~ msgid "Project _name:"
-#~ msgstr "_Nombre del proyecto:"
-
-#~ msgid "Project _phase:"
-#~ msgstr "_Fase del proyecto:"
-
-#~ msgid "Project _start:"
-#~ msgstr "_Comienzo del proyecto:"
-
-#~ msgid "Project phases"
-#~ msgstr "Fases del proyecto:"
-
-#~ msgid "Email:"
-#~ msgstr "Email:"
-
-#~ msgid "Group:"
-#~ msgstr "Grupo:"
-
-#~ msgid "Name:"
-#~ msgstr "Nombre:"
-
-#~ msgid "<b>Open Database</b>"
-#~ msgstr "<b>Abrir base de datos</b>"
-
-#~ msgid "Na_me:"
-#~ msgstr "No_mbre:"
-
-#~ msgid "Work:"
-#~ msgstr "Obra:"
-
-#~ msgid "MrProject Team"
-#~ msgstr "El equipo de MrProject"
-
-#~ msgid "<b>Project phases</b>"
-#~ msgstr "<b>Fases del proyecto</b>"
-
-#~ msgid ""
-#~ "Could not load file.\n"
-#~ "Error was: \"%s\""
-#~ msgstr "No se pudo cargar el archivo. El error fue: «%s»"
-
-#~ msgid "No MPX header"
-#~ msgstr "Sin encabezado MPX"
-
-#~ msgid "Not an mpx '%s'"
-#~ msgstr "«%s» no es mpx"
-
-#~ msgid "Jan"
-#~ msgstr "ene"
-
-#~ msgid "Feb"
-#~ msgstr "feb"
-
-#~ msgid "Mar"
-#~ msgstr "mar"
-
-#~ msgid "Apr"
-#~ msgstr "abr"
-
-#~ msgid "May"
-#~ msgstr "May"
-
-#~ msgid "Jun"
-#~ msgstr "jun"
-
-#~ msgid "Jul"
-#~ msgstr "jul"
-
-#~ msgid "Aug"
-#~ msgstr "ago"
-
-#~ msgid "Sep"
-#~ msgstr "sep"
-
-#~ msgid "Oct"
-#~ msgstr "oct"
-
-#~ msgid "Nov"
-#~ msgstr "nov"
-
-#~ msgid "Dec"
-#~ msgstr "dic"
-
-#~ msgid "January"
-#~ msgstr "enero"
-
-#~ msgid "February"
-#~ msgstr "febrero"
-
-#~ msgid "June"
-#~ msgstr "junio"
-
-#~ msgid "July"
-#~ msgstr "julio"
-
-#~ msgid "August"
-#~ msgstr "agosto"
-
-#~ msgid "September"
-#~ msgstr "septiembre"
-
-#~ msgid "October"
-#~ msgstr "octubre"
-
-#~ msgid "November"
-#~ msgstr "noviembre"
-
-#~ msgid "December"
-#~ msgstr "diciembre"
-
-#~ msgid "J 1"
-#~ msgstr "E"
-
-#~ msgid "F 2"
-#~ msgstr "F"
-
-#~ msgid "M 3"
-#~ msgstr "M"
-
-#~ msgid "A 4"
-#~ msgstr "A"
-
-#~ msgid "M 5"
-#~ msgstr "M"
-
-#~ msgid "J 6"
-#~ msgstr "J"
-
-#~ msgid "J 7"
-#~ msgstr "J"
-
-#~ msgid "A 8"
-#~ msgstr "A"
-
-#~ msgid "S 9"
-#~ msgstr "S"
-
-#~ msgid "O 10"
-#~ msgstr "O"
-
-#~ msgid "N 11"
-#~ msgstr "N"
-
-#~ msgid "D 12"
-#~ msgstr "D"
-
-#~ msgid "Sun"
-#~ msgstr "dom"
-
-#~ msgid "Mon"
-#~ msgstr "lun"
-
-#~ msgid "Tue"
-#~ msgstr "mar"
-
-#~ msgid "Wed"
-#~ msgstr "mié"
-
-#~ msgid "Thu"
-#~ msgstr "jue"
-
-#~ msgid "Fri"
-#~ msgstr "vie"
-
-#~ msgid "Failed to load file %s."
-#~ msgstr "Ha ocurrido un error al cargar el archivo %s."
-
-#~ msgid "%s is not valid XML."
-#~ msgstr "%s no es XML válido."
-
-#~ msgid "About"
-#~ msgstr "Acerca de..."
-
-#~ msgid "Close"
-#~ msgstr "Cerrar"
-
-#~ msgid "Edit project phases"
-#~ msgstr "Edita las fases del proyecto"
-
-#~ msgid "Quit"
-#~ msgstr "Salir"
-
-#~ msgid "Save _As"
-#~ msgstr "Guardar _como"
-
-#~ msgid "User Guide"
-#~ msgstr "Guía del usuario"
-
-#~ msgid "_Open"
-#~ msgstr "_Abrir"
-
-#~ msgid "Down"
-#~ msgstr "Abajo"
-
-#~ msgid "Up"
-#~ msgstr "Arriba"
