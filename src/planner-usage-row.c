@@ -39,6 +39,8 @@
 #include "planner-canvas-line.h"
 #include "eel-canvas-rect.h"
 #include "planner-scale-utils.h"
+#include "planner-usage-chart.h"
+#include "planner-usage-model.h"
 
 /* The padding between the gantt bar and the text. */
 #define TEXT_PADDING 10.0
@@ -144,6 +146,8 @@ static void     usage_row_bounds                       (GnomeCanvasItem        *
 							 double                 *y1,
 							 double                 *x2,
 							 double                 *y2);
+static gboolean usage_row_event                       (GnomeCanvasItem          *item,
+						       GdkEvent                 *event);
 static void     usage_row_ensure_layout               (PlannerUsageRow       *row);
 static void     usage_row_update_resources            (PlannerUsageRow       *row);
 static void     usage_row_geometry_changed             (PlannerUsageRow       *row);
@@ -224,6 +228,8 @@ usage_row_class_init (PlannerUsageRowClass * class)
 
         gobject_class->set_property = usage_row_set_property;
         gobject_class->get_property = usage_row_get_property;
+
+	item_class->event = usage_row_event;
 
         signals[GEOMETRY_CHANGED] =
                 g_signal_new ("geometry-changed",
@@ -1557,4 +1563,75 @@ usage_row_geometry_changed (PlannerUsageRow * row)
         y2 = y1 + row->priv->height;
 
         g_signal_emit (row, signals[GEOMETRY_CHANGED], 0, x1, y1, x2, y2);
+}
+
+static gboolean
+usage_row_event (GnomeCanvasItem *item, GdkEvent *event)
+{
+	PlannerUsageRow     *row;
+	PlannerUsageRowPriv *priv;
+	PlannerUsageChart   *chart;
+	GtkTreePath         *path;
+	GtkTreeSelection    *selection;
+	PlannerUsageTree    *tree;
+	GtkTreeView         *tree_view;
+	GtkTreeIter          iter;
+	GtkWidget           *canvas_widget;
+
+	row = PLANNER_USAGE_ROW (item);
+	priv = row->priv;
+	canvas_widget = GTK_WIDGET (item->canvas);
+	
+	switch (event->type) {
+	case GDK_BUTTON_PRESS:
+		chart = g_object_get_data (G_OBJECT (item->canvas), "chart");
+
+		if (priv->assignment != NULL) {
+			path = planner_usage_model_get_path_from_assignment
+				(PLANNER_USAGE_MODEL (planner_usage_chart_get_model (chart)),
+				 priv->assignment);
+		}
+		else if (priv->resource != NULL) {
+			path = planner_usage_model_get_path_from_resource
+				(PLANNER_USAGE_MODEL (planner_usage_chart_get_model (chart)),
+				 priv->resource);
+		}
+		else {
+			break;
+		}
+
+		tree = planner_usage_chart_get_view (chart);
+		tree_view = GTK_TREE_VIEW (tree);
+		selection = gtk_tree_view_get_selection (tree_view);
+		
+		gtk_tree_model_get_iter (gtk_tree_view_get_model (tree_view), 
+					 &iter, path);
+		
+		if (!gtk_tree_selection_iter_is_selected (selection, &iter)) {
+			gtk_tree_selection_unselect_all (selection);
+			gtk_tree_selection_select_path (selection, path);
+		}
+
+		if (event->button.button == 3) {
+			if (priv->assignment != NULL) {
+				planner_usage_tree_edit_task (tree);
+			}
+			else if (priv->resource != NULL) {
+				planner_usage_tree_edit_resource (tree);
+			}			
+		}
+
+		break;
+
+	default:
+		break;
+	}
+	
+			
+
+	if (TRUE) {
+		return TRUE;
+	}
+
+	return FALSE;
 }

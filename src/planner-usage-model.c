@@ -323,6 +323,21 @@ planner_usage_model_get_path_from_resource (PlannerUsageModel *model,
                                                 node);
 }
 
+GtkTreePath *       
+planner_usage_model_get_path_from_assignment (PlannerUsageModel *model,
+					      MrpAssignment     *assignment) 
+{
+        GNode *node;
+	
+        g_return_val_if_fail (PLANNER_IS_USAGE_MODEL (model), NULL);
+        g_return_val_if_fail (MRP_IS_ASSIGNMENT (assignment), NULL);
+	
+        node = g_hash_table_lookup (model->priv->assign2node, assignment);
+	
+        return usage_model_get_path_from_node (PLANNER_USAGE_MODEL (model),
+					       node);
+}
+
 static GtkTreePath *
 usage_model_get_path (GtkTreeModel *tree_model, GtkTreeIter *iter)
 {

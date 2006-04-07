@@ -27,6 +27,7 @@
 #include <libplanner/mrp-project.h>
 #include "planner-usage-model.h"
 #include "planner-window.h"
+#include "planner-task-dialog.h"
 
 #define PLANNER_TYPE_USAGE_TREE               (planner_usage_tree_get_type ())
 #define PLANNER_USAGE_TREE(obj)               (GTK_CHECK_CAST ((obj), PLANNER_TYPE_USAGE_TREE, PlannerUsageTree))

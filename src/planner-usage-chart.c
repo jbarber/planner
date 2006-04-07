@@ -81,6 +81,7 @@ struct _PlannerUsageChartPriv {
 
         GtkTreeModel    *model;
         TreeNode        *tree;
+	PlannerUsageTree *view;
 
         GnomeCanvasItem *background;
         gdouble          zoom;
@@ -1045,6 +1046,15 @@ planner_usage_chart_set_model (PlannerUsageChart *chart,
         g_object_notify (G_OBJECT (chart), "model");
 }
 
+GtkTreeModel *
+planner_usage_chart_get_model (PlannerUsageChart *chart)
+{
+	g_return_val_if_fail (PLANNER_IS_USAGE_CHART (chart), NULL);
+
+	return chart->priv->model;
+}
+
+
 static void
 usage_chart_build_tree (PlannerUsageChart * chart)
 {
@@ -1532,3 +1542,21 @@ planner_usage_chart_setup_root_task (PlannerUsageChart *chart)
 			  chart);
 }
 
+PlannerUsageTree *  
+planner_usage_chart_get_view (PlannerUsageChart *chart) 
+{
+	g_return_val_if_fail (PLANNER_IS_USAGE_CHART (chart), NULL);	
+
+	return chart->priv->view;
+}
+
+void          
+planner_usage_chart_set_view (PlannerUsageChart *chart,
+			      PlannerUsageTree  *view) 
+{
+	g_return_if_fail (PLANNER_IS_USAGE_TREE (view));
+	
+	g_print ("View for Usage configured\n");
+
+	chart->priv->view = view;
+}

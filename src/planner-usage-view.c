@@ -405,6 +405,10 @@ usage_view_create_widget (PlannerView *view)
 
         chart = planner_usage_chart_new_with_model (GTK_TREE_MODEL (model));
         priv->chart = PLANNER_USAGE_CHART (chart);
+
+	planner_usage_chart_set_view (PLANNER_USAGE_CHART (priv->chart), 
+				      PLANNER_USAGE_TREE  (priv->tree));
+
         sw = gtk_scrolled_window_new (hadj, vadj);
         gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw),
                                         GTK_POLICY_ALWAYS,

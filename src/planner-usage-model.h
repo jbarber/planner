@@ -60,6 +60,9 @@ GType               planner_usage_model_get_type               (void) G_GNUC_CON
 PlannerUsageModel *planner_usage_model_new                    (MrpProject         *project);
 GtkTreePath *       planner_usage_model_get_path_from_resource (PlannerUsageModel *model,
 								 MrpResource        *resource);
+GtkTreePath *       planner_usage_model_get_path_from_assignment 
+                                                               (PlannerUsageModel *model,
+								MrpAssignment     *assignment);
 MrpProject *        planner_usage_model_get_project            (PlannerUsageModel *model);
 MrpAssignment *     planner_usage_model_get_assignment         (PlannerUsageModel *model,
 								 GtkTreeIter        *iter);

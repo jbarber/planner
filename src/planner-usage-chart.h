@@ -27,6 +27,7 @@
 #include <gtk/gtkvbox.h>
 #include <gtk/gtktreemodel.h>
 #include <libgnomecanvas/gnome-canvas.h>
+#include "planner-usage-tree.h"
 
 #define PLANNER_TYPE_USAGE_CHART             (planner_usage_chart_get_type ())
 #define PLANNER_USAGE_CHART(obj)             (GTK_CHECK_CAST ((obj), PLANNER_TYPE_USAGE_CHART, PlannerUsageChart))
@@ -58,6 +59,10 @@ GtkWidget *   planner_usage_chart_new_with_model   (GtkTreeModel       *model);
 GtkTreeModel *planner_usage_chart_get_model        (PlannerUsageChart *chart);
 void          planner_usage_chart_set_model        (PlannerUsageChart *chart,
 						     GtkTreeModel       *model);
+PlannerUsageTree *  
+              planner_usage_chart_get_view         (PlannerUsageChart *chart);
+void          planner_usage_chart_set_view         (PlannerUsageChart *chart,
+						    PlannerUsageTree  *view);
 void          planner_usage_chart_expand_row       (PlannerUsageChart *chart,
 						     GtkTreePath        *path);
 void          planner_usage_chart_collapse_row     (PlannerUsageChart *chart,
