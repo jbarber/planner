@@ -3,6 +3,7 @@
  * Copyright (C) 2003-2004 Imendio AB
  * Copyright (C) 2003 Benjamin BAYART <benjamin@sitadelle.com>
  * Copyright (C) 2003 Xavier Ordoquy <xordoquy@wanadoo.fr>
+ * Copyright (C) 2006 Alvaro del Castillo <acs@barrapunto.com>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -1581,11 +1582,11 @@ usage_row_event (GnomeCanvasItem *item, GdkEvent *event)
 	row = PLANNER_USAGE_ROW (item);
 	priv = row->priv;
 	canvas_widget = GTK_WIDGET (item->canvas);
+	chart = g_object_get_data (G_OBJECT (item->canvas), "chart");
+	tree = planner_usage_chart_get_view (chart);
 	
 	switch (event->type) {
 	case GDK_BUTTON_PRESS:
-		chart = g_object_get_data (G_OBJECT (item->canvas), "chart");
-
 		if (priv->assignment != NULL) {
 			path = planner_usage_model_get_path_from_assignment
 				(PLANNER_USAGE_MODEL (planner_usage_chart_get_model (chart)),
@@ -1600,7 +1601,6 @@ usage_row_event (GnomeCanvasItem *item, GdkEvent *event)
 			break;
 		}
 
-		tree = planner_usage_chart_get_view (chart);
 		tree_view = GTK_TREE_VIEW (tree);
 		selection = gtk_tree_view_get_selection (tree_view);
 		
@@ -1612,17 +1612,20 @@ usage_row_event (GnomeCanvasItem *item, GdkEvent *event)
 			gtk_tree_selection_select_path (selection, path);
 		}
 
-		if (event->button.button == 3) {
+		break;
+
+	case GDK_2BUTTON_PRESS:
+		if (event->button.button == 1) {
 			if (priv->assignment != NULL) {
 				planner_usage_tree_edit_task (tree);
 			}
 			else if (priv->resource != NULL) {
 				planner_usage_tree_edit_resource (tree);
-			}			
+			}	
 		}
 
 		break;
-
+		
 	default:
 		break;
 	}
