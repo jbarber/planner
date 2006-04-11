@@ -127,6 +127,10 @@ void         mrp_interval_get_absolute             (MrpInterval *interval,
 						    mrptime      offset,
 						    mrptime     *start,
 						    mrptime     *end);
+void         mrp_interval_set_absolute             (MrpInterval *interval,
+						    mrptime      offset,
+						    mrptime      start,
+						    mrptime      end);
 
 
 #endif /* __MRP_CALENDAR_H__ */

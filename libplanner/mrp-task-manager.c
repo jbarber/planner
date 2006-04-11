@@ -76,6 +76,12 @@ static void
 task_manager_task_duration_notify_cb      (MrpTask             *task,
 					   GParamSpec          *spec,
 					   MrpTaskManager      *manager);
+#ifdef WITH_SIMPLE_PRIORITY_SCHEDULING
+static void
+task_manager_task_priority_notify_cb      (MrpTask             *task,
+					   GParamSpec          *spec,
+					   MrpTaskManager      *manager);
+#endif
 static void
 task_manager_task_constraint_notify_cb    (MrpTask             *task,
 					   GParamSpec          *spec,
@@ -261,6 +267,13 @@ task_manager_task_connect_signals (MrpTaskManager *manager,
 			  "notify::duration",
 			  G_CALLBACK (task_manager_task_duration_notify_cb),
 			  manager);
+#ifdef WITH_SIMPLE_PRIORITY_SCHEDULING
+	/* Added to manage the transaction from normal to dominant. */
+	g_signal_connect (task,
+			  "notify::priority",
+			  G_CALLBACK (task_manager_task_priority_notify_cb),
+			  manager);
+#endif
 	g_signal_connect (task,
 			  "notify::constraint",
 			  G_CALLBACK (task_manager_task_constraint_notify_cb),
@@ -1222,20 +1235,13 @@ task_manager_calculate_task_start (MrpTaskManager *manager,
 	return start;
 }
 
-typedef struct {
-	gboolean is_start;
-	mrptime  start;
-	mrptime  end;
-	gint     units;
-} UnitsInterval;
-
-#define UNIT_IVAL_GET_TIME(R) ((R->is_start?R->start:R->end))
-
+/* NOTE: MrpUnitsInterval moved in mrp-task.h to enable
+         other objects to use it. */
 static gint                                         
 units_interval_sort_func (gconstpointer a, gconstpointer b)
 {
-	UnitsInterval *ai = *(UnitsInterval **) a;
-	UnitsInterval *bi = *(UnitsInterval **) b;
+	MrpUnitsInterval *ai = *(MrpUnitsInterval **) a;
+	MrpUnitsInterval *bi = *(MrpUnitsInterval **) b;
 	mrptime       at, bt;
 
 	if (ai->is_start) {
@@ -1260,12 +1266,12 @@ units_interval_sort_func (gconstpointer a, gconstpointer b)
 	}
 }
 
-static UnitsInterval *
+static MrpUnitsInterval *
 units_interval_new (MrpInterval *ival, gint units, gboolean is_start)
 {
-	UnitsInterval *unit_ival;
+	MrpUnitsInterval *unit_ival;
 
-	unit_ival = g_new (UnitsInterval, 1);
+	unit_ival = g_new (MrpUnitsInterval, 1);
 	unit_ival->is_start = is_start;
 	unit_ival->units = units;
 
@@ -1292,50 +1298,184 @@ task_manager_get_task_units_intervals (MrpTaskManager *manager,
 	MrpDay             *day;
 	GList              *ivals, *l;
 	MrpInterval        *ival;
-	UnitsInterval      *unit_ival, *new_unit_ival;
+
+	MrpUnitsInterval   *unit_ival, *new_unit_ival;
+	MrpUnitsInterval   *unit_ival_start, *unit_ival_end;
 	GList              *unit_ivals = NULL;
 	MrpAssignment      *assignment;
 	MrpResource        *resource;
 	GList              *assignments, *a;
-	gint                units;
+	gint                units, units_full, units_orig, priority;
+	mrptime             i_start, i_end;
+
 	mrptime             t;
 	mrptime             poc;
 	GPtrArray          *array;
 	guint               len;
 	gint                i;
 
+	mrptime             diffe;
+
+	gint     res_n;
+
+#ifdef WITH_SIMPLE_PRIORITY_SCHEDULING
+	MrpInterval        *ival_split;
+	MrpUnitsInterval   *unit_ival_start_cmp;
+	MrpUnitsInterval   *split_unit_ival;
+	MrpAssignment      *v_assignment;
+	MrpResource        *v_resource;
+	GList              *v_assignments, *v_a;
+	gint                v_units;
+	GList              *v_tasks, *v_l;
+	GPtrArray          *array_split;
+	gint                e, lastct;
+	mrptime             v_start, v_end;
+	mrptime             i_start_post, i_end_post, i_start_cmp, i_end_cmp;
+#endif
+
 	priv = manager->priv;
 
 	assignments = mrp_task_get_assignments (task);
 
 	array = g_ptr_array_new ();
+	priority    = mrp_task_get_priority (task);
+	
+#ifdef WITH_SIMPLE_PRIORITY_SCHEDULING
+	v_tasks = mrp_task_manager_get_all_tasks (manager);
+#endif
 	
 	for (a = assignments; a; a = a->next) {
 		assignment = a->data;
 		
 		resource = mrp_assignment_get_resource (assignment);
-		units = mrp_assignment_get_units (assignment);
+		units_orig = mrp_assignment_get_units (assignment);
 
 		calendar = mrp_resource_get_calendar (resource);
 		if (!calendar) {
 			calendar = mrp_project_get_calendar (priv->project);
 		}
-
 		day = mrp_calendar_get_day (calendar, date, TRUE);
 		ivals = mrp_calendar_day_get_intervals (calendar, day, TRUE);
 
 		for (l = ivals; l; l = l->next) {
 			ival = l->data;
+			mrp_interval_get_absolute (ival, date, &i_start, &i_end);
+			units = units_orig;
+			diffe = i_end - i_start;
+			
+#ifdef WITH_SIMPLE_PRIORITY_SCHEDULING
+			for (v_l = v_tasks; v_l; v_l = v_l->next) {
+				MrpTask *v_task;
+				
+				v_task =  v_l->data;
+				
+				if (v_task == task) {
+					continue;
+				}
 
+				if (mrp_task_is_dominant (v_task) == FALSE) {
+					continue;
+				}
+
+				/* If intervals not overlapped -> contine. */
+				v_start = mrp_task_get_work_start (v_task);
+				v_end = mrp_task_get_finish (v_task);
+					
+				if (i_start > v_end || i_end < v_start) {
+					continue;
+				}
+
+				/* Compare resources task with resources of dominant task. */
+				v_assignments = mrp_task_get_assignments (v_task);
+
+				for (v_a = v_assignments; v_a; v_a = v_a->next) {
+					v_assignment = v_a->data;
+		
+					v_resource = mrp_assignment_get_resource (v_assignment);
+					if (v_resource == resource) {
+						v_units = mrp_assignment_get_units (v_assignment);
+						/* 
+						   If the dominant cost is compatible with the task
+						   request -> break. 
+
+						   FIXME - tasks that share the vampirised resource not work!
+						*/
+						if (100 - v_units > units) {
+							break;
+						}
+
+						/* Trim the interval of the dominant task. */
+						v_start = (v_start < i_start ? 
+								   i_start : v_start);
+						v_end = (v_end > i_end ?
+								 i_end : v_end);
+						
+						if (i_start < v_start) {
+							/*
+							     ----...
+							   ------...
+							   ival len from start to dominant
+							*/
+							ival = mrp_interval_new (i_start-date, v_start-date);
+
+							unit_ival_start = units_interval_new (ival, units, TRUE);
+							unit_ival_start->units_full = units;
+							unit_ival_end = units_interval_new (ival, units, FALSE);
+							unit_ival_end->units_full = units;
+							g_ptr_array_add (array, unit_ival_start);
+							g_ptr_array_add (array, unit_ival_end);
+						}
+						
+						ival = mrp_interval_new (v_start-date, v_end-date);
+
+						unit_ival_start = units_interval_new (ival, (100 - v_units), TRUE);
+						unit_ival_start->units_full = units;
+						unit_ival_end = units_interval_new (ival, (100 - v_units), FALSE);
+						unit_ival_end->units_full = units;						
+						g_ptr_array_add (array, unit_ival_start);
+						g_ptr_array_add (array, unit_ival_end);
+
+						if (v_end < i_end) {
+							/*
+							   ----  ...
+							   ------...
+							   ival len from end to dominant
+							*/
+							ival = mrp_interval_new (v_end-date, i_end-date);
+
+							unit_ival_start = units_interval_new (ival, units, TRUE);
+							unit_ival_start->units_full = units;
+							unit_ival_end = units_interval_new (ival, units, FALSE);
+							unit_ival_end->units_full = units;
+							g_ptr_array_add (array, unit_ival_start);
+							g_ptr_array_add (array, unit_ival_end);
+						}
+						break;
+					}
+				} /* for (v_a = v_assignments; v_a; ... */
+				if (v_a != NULL) {
+					break;
+				}
+			} /* for (v_l = v_tasks; v_l; ... */
+			
+	
+			if (v_l == NULL) {
+#endif /* ifdef WITH_SIMPLE_PRIORITY_SCHEDULING */
 			/* Start of the interval. */
-			unit_ival = units_interval_new (ival, units, TRUE);
-			g_ptr_array_add (array, unit_ival);
+				unit_ival_start = units_interval_new (ival, units, TRUE);
+				unit_ival_start->units_full = units;
 
 			/* End of the interval. */
-			unit_ival = units_interval_new (ival, units, FALSE);
-			g_ptr_array_add (array, unit_ival);
-		}
-	}
+				unit_ival_end = units_interval_new (ival, units, FALSE);
+				unit_ival_end->units_full = units;
+
+				g_ptr_array_add (array, unit_ival_start);
+				g_ptr_array_add (array, unit_ival_end);
+#ifdef WITH_SIMPLE_PRIORITY_SCHEDULING
+			}
+#endif
+		} /* for (l = ivals; l; ... */
+	} /* for (a = assignments; a; ... */
 
 	/* If the task is not allocated, we handle it as if we have one resource
 	 * assigned to it, 100%, using the project calendar.
@@ -1351,20 +1491,82 @@ task_manager_get_task_units_intervals (MrpTaskManager *manager,
 			
 			/* Start of the interval. */
 			unit_ival = units_interval_new (ival, 100, TRUE);
+			unit_ival->units_full = 100;
 			g_ptr_array_add (array, unit_ival);
 
 			/* End of the interval. */
 			unit_ival = units_interval_new (ival, 100, FALSE);
+			unit_ival->units_full = 100;
 			g_ptr_array_add (array, unit_ival);
 		}
 	}
 	
+#ifdef WITH_SIMPLE_PRIORITY_SCHEDULING
+	/* Requantize the time intervals. */
+	array_split = g_ptr_array_new ();
+	len = array->len;
+	poc = -1;
+	units = 0;
+	/* += 2 because start and end are strictly joined. */
+	for (i = 0; i < len; i+= 2) {
+		unit_ival_start = g_ptr_array_index (array, i);
+
+		i_start = unit_ival_start->start;
+		i_end = unit_ival_start->end;
+
+		lastct = 1;
+		i_end_post = i_end;
+		for (i_start_post = i_start; i_start_post < i_end && lastct > 0;) {
+			lastct = 0;
+			i_end_post = i_end;
+			for (e = 0 ; e < len ; e+= 2) {
+				unit_ival_start_cmp = g_ptr_array_index (array, e);
+				
+				i_start_cmp = unit_ival_start_cmp->start;
+				i_end_cmp = unit_ival_start_cmp->end;
+
+				/* If not overlapped intervals. */
+				if (i_start_post >= i_end_cmp || i_end_post <= i_start_cmp) {
+					continue;
+				}
+				if (i_start_post < i_start_cmp && i_start_cmp < i_end_post) {
+					i_end_post = i_start_cmp;
+					lastct++;
+					continue;
+				}
+				if (i_start_post < i_end_cmp && i_end_cmp < i_end_post) {
+					i_end_post = i_end_cmp;
+					lastct++;
+					continue;
+				}
+			}
+			ival_split = mrp_interval_new (i_start_post, i_end_post);
+			split_unit_ival = units_interval_new (ival_split, unit_ival_start->units, TRUE);
+			split_unit_ival->units_full = unit_ival_start->units_full;
+			g_ptr_array_add (array_split, split_unit_ival);
+			split_unit_ival = units_interval_new (ival_split, unit_ival_start->units, FALSE);
+			split_unit_ival->units_full = unit_ival_start->units_full;
+			g_ptr_array_add (array_split, split_unit_ival);
+			i_start_post = i_end_post;
+		}
+	}
+	for (i = 0; i < array->len; i++) {
+		g_free (array->pdata[i]);
+	}
+	
+	g_ptr_array_free (array, TRUE);
+	array = array_split;
+#endif /* ifdef WITH_SIMPLE_PRIORITY_SCHEDULING */
+	/* Clean and reassign the split_array ptr to the array */
 	g_ptr_array_sort (array, units_interval_sort_func);
 
 	len = array->len;
 
+
 	poc = -1;
 	units = 0;
+	units_full = 0;
+	res_n = 0;
 	for (i = 0; i < len; i++) {
 		unit_ival = g_ptr_array_index (array, i);		
 
@@ -1376,23 +1578,28 @@ task_manager_get_task_units_intervals (MrpTaskManager *manager,
 			 * determined by now.
 			 */
 			if (poc != -1) {
-				if (units > 0) {
-					new_unit_ival = g_new (UnitsInterval, 1);
-					new_unit_ival->units = units;
-					new_unit_ival->start = poc;
-					new_unit_ival->end = t;
-					
-					unit_ivals = g_list_prepend (unit_ivals, new_unit_ival);
-				}
+				new_unit_ival = g_new (MrpUnitsInterval, 1);
+				new_unit_ival->units = units;
+				new_unit_ival->units_full = units_full;
+				new_unit_ival->start = poc;
+				new_unit_ival->end = t;
+				new_unit_ival->res_n = res_n;
+				res_n = 0;
+				unit_ivals = g_list_prepend (unit_ivals, new_unit_ival);
 			}
-				
+			
 			poc = t;
 		}
-
+		
 		if (unit_ival->is_start) {
 			units += unit_ival->units;
+			units_full += unit_ival->units_full;
+			if (assignments) {
+				res_n++;
+			}
 		} else {
 			units -= unit_ival->units;
+			units_full -= unit_ival->units_full;
 		}
 	}
 
@@ -1416,7 +1623,7 @@ task_manager_calculate_milestone_work_start (MrpTaskManager *manager,
 	mrptime             t1, t2;
 	mrptime             work_start;
 	GList              *unit_ivals, *l;
-	UnitsInterval      *unit_ival;
+	MrpUnitsInterval   *unit_ival;
 	MrpTaskType         type;
 	
 	priv = manager->priv;
@@ -1499,11 +1706,12 @@ task_manager_calculate_task_finish (MrpTaskManager *manager,
 	gint                work;
 	gint                effort;
 	gint                delta;
-	GList              *unit_ivals, *l;
-	UnitsInterval      *unit_ival;
+	GList              *unit_ivals, *unit_ivals_tot = NULL, *l = NULL;
+	MrpUnitsInterval   *unit_ival;
 	MrpTaskType         type;
 	MrpTaskSched        sched;
 	
+   
 	priv = manager->priv;
 
 	if (task == priv->root) {
@@ -1547,6 +1755,7 @@ task_manager_calculate_task_finish (MrpTaskManager *manager,
 		}
 
 		if (!unit_ivals) {
+			/* Holidays for all. */
 			t += 60*60*24;
 			continue;
 		}
@@ -1556,7 +1765,6 @@ task_manager_calculate_task_finish (MrpTaskManager *manager,
 
 			t1 = t + unit_ival->start;
 			t2 = t + unit_ival->end;
-			
 			/* Skip any intervals before the task starts. */
 			if (t2 < start) {
 				continue;
@@ -1577,15 +1785,23 @@ task_manager_calculate_task_finish (MrpTaskManager *manager,
 			if (sched == MRP_TASK_SCHED_FIXED_WORK) {
 				delta = floor (0.5 + (double) unit_ival->units * (t2 - t1) / 100.0);
 
-				*duration += (t2 - t1);
-				
+				if (unit_ival->units_full > 0) {
+					*duration += (t2 - t1);
+				}
+
 				if (effort + delta >= work) {
 					finish = t1 + floor (0.5 + (work - effort) / unit_ival->units * 100.0);
 
 					/* Subtract the spill. */
 					*duration -= floor (0.5 + (effort + delta - work) / unit_ival->units * 100.0);
+					unit_ival->start = t1;
+					unit_ival->end = finish;
+					unit_ivals_tot = g_list_prepend (unit_ivals_tot, unit_ival);
 					goto done;
 				}
+				unit_ival->start = t1;
+				unit_ival->end = t2;
+				unit_ivals_tot = g_list_prepend (unit_ivals_tot, unit_ival);
 			}
 			else if (sched == MRP_TASK_SCHED_FIXED_DURATION) {
 				delta = t2 - t1;
@@ -1602,7 +1818,6 @@ task_manager_calculate_task_finish (MrpTaskManager *manager,
 			
 			effort += delta;
 		}
-		
 		t += 60*60*24;
 	}
 
@@ -1613,8 +1828,17 @@ task_manager_calculate_task_finish (MrpTaskManager *manager,
 	}
 	imrp_task_set_work_start (task, work_start);
 
-	g_list_foreach (unit_ivals, (GFunc) g_free, NULL);
+	/* clean the tail of the list before exit of function. */
+	if (l) {
+		for (l = l->next ; l; l = l->next) { 
+			unit_ival = l->data;
+		g_free (unit_ival);
+		}
+	}
 	g_list_free (unit_ivals);
+
+	unit_ivals_tot = g_list_reverse (unit_ivals_tot);
+	mrp_task_set_unit_ivals (task, unit_ivals_tot);
 
 	return finish;
 }
@@ -1976,6 +2200,15 @@ task_manager_task_duration_notify_cb (MrpTask        *task,
 	mrp_task_manager_recalc (manager, TRUE);
 }
 
+#ifdef WITH_SIMPLE_PRIORITY_SCHEDULING
+static void
+task_manager_task_priority_notify_cb (MrpTask        *task,
+									  GParamSpec     *spec,
+									  MrpTaskManager *manager)
+{
+	mrp_task_manager_recalc (manager, TRUE);
+}
+#endif
 static void
 task_manager_task_constraint_notify_cb (MrpTask        *task,
 					GParamSpec     *spec,
@@ -2100,8 +2333,9 @@ check_predecessor_traverse (MrpTaskManager *manager,
 	
 	node = imrp_task_get_graph_node (task);
 	for (l = node->next; l; l = l->next) {
-		if (!check_predecessor_traverse (manager, l->data, end, length + 1))
+		if (!check_predecessor_traverse (manager, l->data, end, length + 1)) {
 			return FALSE;
+		}
 	}
 	
 	return TRUE;
@@ -2254,6 +2488,80 @@ task_manager_get_work_for_calendar (MrpTaskManager *manager,
 	return work;
 }
 
+static gint
+task_manager_get_work_for_task_with_assignments (MrpTaskManager *manager,
+									   MrpTask        *task,
+									   mrptime         start,
+									   mrptime         finish)
+{
+	MrpTaskManagerPriv *priv;
+	mrptime             t;
+	mrptime             t1, t2;
+	gint                work, delta;
+	GList              *ivals, *l;
+	MrpUnitsInterval   *ival;
+
+	priv = manager->priv;
+
+	work = 0;
+
+	/* Loop through the intervals of the calendar and add up the work, until
+	 * the finish time is hit.
+	 */
+	t = mrp_time_align_day (start);
+
+
+	while (t < finish) {
+		ivals = task_manager_get_task_units_intervals (manager, task, t);
+
+		/* If we don't get anywhere in 100 days, then the calendar must
+		 * be broken, so we abort the scheduling of this task. It's not
+		 * the best solution but fixes the issue for now.
+		 */
+		if (work == 0 && t - start > (60*60*24*100)) {
+			break;
+		}
+
+		if (!ivals) {
+			/* Holidays for all. */
+			t += 60*60*24;
+			continue;
+		}
+		
+		for (l = ivals; l; l = l->next) { 
+			ival = l->data;
+
+			t1 = t + ival->start;
+			t2 = t + ival->end;
+			/* Skip any intervals before the task starts. */
+			if (t2 < start) {
+				continue;
+			}
+
+			/* Don't add time before the start of the task. */
+			t1 = MAX (t1, start);
+			if (t1 == t2) {
+				continue;
+			}
+
+			/* Resize the too long interval */
+			t2 = MIN (t2, finish);
+			if (t1 >= t2) {
+				break;
+			}
+
+			delta = floor (0.5 + (double) ival->units * (t2 - t1) / 100.0);
+			
+			work += delta;
+		}
+	
+
+		t += 24*60*60;
+	}
+
+	return (work);
+}
+
 /* Calculate the work needed to achieve the specified start and finish, with the
  * allocated resources' calendars in consideration.
  */
@@ -2265,9 +2573,7 @@ mrp_task_manager_calculate_task_work (MrpTaskManager *manager,
 {
 	MrpTaskManagerPriv *priv;
 	gint                work = 0;
-	MrpAssignment      *assignment;
-	MrpResource        *resource;
-	GList              *assignments, *a;
+	GList              *assignments;
 	MrpCalendar        *calendar;
 
 	priv = manager->priv;
@@ -2293,24 +2599,13 @@ mrp_task_manager_calculate_task_work (MrpTaskManager *manager,
 	 */
 
 	assignments = mrp_task_get_assignments (task);
-	for (a = assignments; a; a = a->next) {
-		assignment = a->data;
-
-		resource = mrp_assignment_get_resource (assignment);
-
-		calendar = mrp_resource_get_calendar (resource);
-		if (!calendar) {
-			calendar = mrp_project_get_calendar (priv->project);
-		}
-
-		work += task_manager_get_work_for_calendar (manager,
-							    calendar,
-							    start,
-							    finish) *
-			mrp_assignment_get_units (assignment) / 100;
+	if (assignments) {
+		work = task_manager_get_work_for_task_with_assignments (manager,
+													  task,
+													  start,
+													  finish);
 	}
-	
-	if (!assignments) {
+	else {
 		calendar = mrp_project_get_calendar (priv->project);
 
 		work = task_manager_get_work_for_calendar (manager,

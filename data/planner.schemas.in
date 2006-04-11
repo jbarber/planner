@@ -14,6 +14,18 @@
     </schema>
 
     <schema>
+      <key>/schemas/apps/planner/views/gantt_view/display_nonstandard_days</key>
+      <applyto>/apps/planner/views/gantt_view/display_nonstandard_days</applyto>
+      <owner>planner</owner>
+      <type>bool</type>
+      <default>false</default>
+      <locale name="C">
+        <short>Display nonstandard days in Gantt view</short>
+        <long>Whether to display nonstandard days in the Gantt view.</long>
+      </locale>
+    </schema>
+ 
+    <schema>
       <key>/schemas/apps/planner/views/task_view/highlight_critical_path</key>
       <applyto>/apps/planner/views/task_view/highlight_critical_path</applyto>
       <owner>planner</owner>

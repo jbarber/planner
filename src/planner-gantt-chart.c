@@ -53,7 +53,8 @@
 /* Font width factor. */
 static gdouble f = 1.0;
 
-#define CRITICAL_PATH_KEY "/views/gantt_view/highlight_critical_path"
+#define CRITICAL_PATH_KEY  "/views/gantt_view/highlight_critical_path"
+#define NOSTDDAYS_PATH_KEY "/views/gantt_view/display_nonstandard_days"
 
 
 typedef struct _TreeNode TreeNode; 
@@ -103,6 +104,9 @@ struct _PlannerGanttChartPriv {
 
 	/* Critical path. */
 	gboolean         highlight_critical;
+	
+	/* Nonstandard days visualization */
+	gboolean         nonstandard_days;
 
 	/* Keep a list of signal connection ids, so we can remove them
 	 * easily.
@@ -383,6 +387,8 @@ gantt_chart_init (PlannerGanttChart *chart)
 	priv->relation_hash = g_hash_table_new (NULL, NULL);
 
 	priv->highlight_critical = planner_conf_get_bool (CRITICAL_PATH_KEY,
+							  NULL);
+	priv->nonstandard_days   = planner_conf_get_bool (NOSTDDAYS_PATH_KEY,
 							  NULL);
 }
 
@@ -1916,4 +1922,33 @@ planner_gantt_chart_get_highlight_critical_tasks (PlannerGanttChart *chart)
 	g_return_val_if_fail (PLANNER_IS_GANTT_CHART (chart), FALSE);
 
 	return chart->priv->highlight_critical;
+}
+
+void
+planner_gantt_chart_set_nonstandard_days (PlannerGanttChart *chart,
+						  gboolean           state)
+{
+	PlannerGanttChartPriv *priv;
+	
+	g_return_if_fail (PLANNER_IS_GANTT_CHART (chart));
+
+	priv = chart->priv;
+
+	if (priv->nonstandard_days == state) {
+		return;
+	}
+	
+	priv->nonstandard_days = state;
+	
+	gtk_widget_queue_draw (GTK_WIDGET (priv->canvas));
+
+	planner_conf_set_bool (NOSTDDAYS_PATH_KEY, state, NULL);
+}
+
+gboolean
+planner_gantt_chart_get_nonstandard_days (PlannerGanttChart *chart)
+{
+	g_return_val_if_fail (PLANNER_IS_GANTT_CHART (chart), FALSE);
+
+	return chart->priv->nonstandard_days;
 }

@@ -1063,6 +1063,29 @@ mrp_interval_get_absolute (MrpInterval *interval,
 	}
 }
 
+/**
+ * mrp_interval_set_absolute:
+ * @interval: an #MrpInterval
+ * @offset: the offset to subtract to start and end
+ * @start: value of start time
+ * @end: value of end time
+ *
+ * Set the start and end time of #interval, with an optional @offset.
+ * 
+ **/
+void
+mrp_interval_set_absolute (MrpInterval *interval,
+			   mrptime     offset,
+			   mrptime     start,
+			   mrptime     end)
+{
+	g_return_if_fail (interval != NULL);
+	
+	interval->start = start - offset;
+
+	interval->end = end - offset;
+}
+
 static void
 foreach_day_interval_add_to_list (MrpDay  *day,
 				  GList  *intervals, 

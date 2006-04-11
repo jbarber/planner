@@ -96,6 +96,8 @@ static void          task_view_edit_custom_props_cb         (GtkAction       *ac
 							     gpointer         data);
 static void          task_view_highlight_critical_cb        (GtkAction       *action,
 							     gpointer         data);
+static void          task_view_nonstandard_days_cb          (GtkAction       *action,
+							     gpointer         data);
 static void          task_view_edit_columns_cb              (GtkAction       *action,
 							     gpointer         data);
 static void          task_view_selection_changed_cb         (PlannerTaskTree *tree,
@@ -156,10 +158,13 @@ static const GtkActionEntry entries[] = {
 
 static const GtkToggleActionEntry toggle_entries[] = {
 	{ "HighlightCriticalTasks", NULL, N_("_Highlight Critical Tasks"), NULL, NULL,
-	  G_CALLBACK (task_view_highlight_critical_cb), FALSE }
+	  G_CALLBACK (task_view_highlight_critical_cb), FALSE },
+	{ "NonstandardDays", NULL, N_("_Nonstandard Days"), NULL, NULL,
+	  G_CALLBACK (task_view_nonstandard_days_cb), FALSE }
 };
 
-#define CRITICAL_PATH_KEY "/views/task_view/highlight_critical_path"
+#define CRITICAL_PATH_KEY  "/views/task_view/highlight_critical_path"
+#define NOSTDDAYS_PATH_KEY "/views/task_view/display_nonstandard_days"
 
 G_DEFINE_TYPE (PlannerTaskView, planner_task_view, PLANNER_TYPE_VIEW);
 
@@ -196,7 +201,8 @@ task_view_activate (PlannerView *view)
 {
 	PlannerTaskViewPriv *priv;
 	gboolean             show_critical;
-	gchar           *filename;
+	gboolean             show_nostd_days;
+	gchar               *filename;
 
 	priv = PLANNER_TASK_VIEW (view)->priv;
 	
@@ -219,14 +225,20 @@ task_view_activate (PlannerView *view)
 	gtk_ui_manager_ensure_update (priv->ui_manager);
 
 	/* Set the initial UI state. */
-	show_critical = planner_conf_get_bool (CRITICAL_PATH_KEY, NULL);
-
+	show_critical =   planner_conf_get_bool (CRITICAL_PATH_KEY, NULL);
+	show_nostd_days = planner_conf_get_bool (NOSTDDAYS_PATH_KEY, NULL);
 	planner_task_tree_set_highlight_critical (PLANNER_TASK_TREE (priv->tree),
 						  show_critical);
+	planner_task_tree_set_nonstandard_days (PLANNER_TASK_TREE (priv->tree),
+						show_nostd_days);
 
 	gtk_toggle_action_set_active (
 		GTK_TOGGLE_ACTION (gtk_action_group_get_action (priv->actions, "HighlightCriticalTasks")),
 		show_critical);
+
+	gtk_toggle_action_set_active (
+		GTK_TOGGLE_ACTION (gtk_action_group_get_action (priv->actions, "NonstandardDays")),
+		show_nostd_days);
 	
 	task_view_selection_changed_cb (PLANNER_TASK_TREE (priv->tree), view);
 
@@ -579,6 +591,25 @@ task_view_highlight_critical_cb (GtkAction *action,
 		state);
 
 	planner_conf_set_bool (CRITICAL_PATH_KEY, state, NULL);
+}
+
+static void
+task_view_nonstandard_days_cb (GtkAction *action,
+				 gpointer   data)
+{
+	PlannerTaskViewPriv *priv;
+	gboolean             state;
+	
+	priv = PLANNER_TASK_VIEW (data)->priv;
+
+	state = gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action));
+
+	planner_task_tree_set_nonstandard_days (
+		PLANNER_TASK_TREE (priv->tree),
+		state);
+
+
+	planner_conf_set_bool (NOSTDDAYS_PATH_KEY, state, NULL);
 }
 
 static void

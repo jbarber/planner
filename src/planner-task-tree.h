@@ -82,6 +82,9 @@ gboolean     planner_task_tree_has_relation           (GList                 *li
 void         planner_task_tree_set_highlight_critical (PlannerTaskTree       *tree,
 						       gboolean               highlight);
 gboolean     planner_task_tree_get_highlight_critical (PlannerTaskTree       *tree);
+void         planner_task_tree_set_nonstandard_days   (PlannerTaskTree *tree,
+					               gboolean              nonstandard_days);
+gboolean     planner_task_tree_get_nonstandard_days   (PlannerTaskTree *tree);
 void         planner_task_tree_set_anchor             (PlannerTaskTree       *tree,
 						       GtkTreePath           *anchor);
 GtkTreePath* planner_task_tree_get_anchor             (PlannerTaskTree       *tree);

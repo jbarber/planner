@@ -28,6 +28,7 @@
 #include <libplanner/mrp-project.h>
 #include <libplanner/mrp-resource.h>
 #include <libplanner/mrp-task.h>
+#include <libplanner/mrp-calendar.h>
 #include <glib/gi18n.h>
 #include <libgnomecanvas/gnome-canvas.h>
 #include "planner-marshal.h"
@@ -56,6 +57,21 @@
 
 /* Minimum width for a task to keep it visible. */
 #define MIN_WIDTH 2
+
+/* Trim the value to short int work space. */
+#define TRSH(a) ((int)((a) < SHRT_MIN ? (short int)SHRT_MIN : ((a) > SHRT_MAX ? (short int)SHRT_MAX : (a))))
+
+/* Same gdk_draw_rectangle but with trimmed x,y,w,h args. */
+#define draw_cut_rectangle(a,b,c,d,e,f,g)		\
+		gdk_draw_rectangle ((a), (b), (c), TRSH (d), TRSH (e), TRSH (f), TRSH (g))
+
+/* Same gdk_draw_line but with trimmed x1,y1,x2,y2 args. */
+#define draw_cut_line(a,b,c,d,e,f)		 \
+		gdk_draw_line ((a), (b), TRSH (c), TRSH (d), TRSH (e), TRSH (f))  
+
+/* Same gdk_draw_layout but with trimmed x,y args. */
+#define draw_cut_layout(a,b,c,d,e)		         \
+		gdk_draw_layout ((a), (b), TRSH (c), TRSH (d), (e))
 
 enum {
 	PROP_0,
@@ -91,6 +107,8 @@ struct _PlannerGanttRowPriv {
 	GdkGC       *break_gc;
 	GdkGC       *fill_gc;
 	GdkGC       *frame_gc;
+	GdkGC       *ttask_gc;
+
 
 	/* FIXME: Don't need those per gantt row. */
 	GdkColor     color_normal;
@@ -130,6 +148,8 @@ struct _PlannerGanttRowPriv {
 	/* Cached values for the geometry of the bar. */
 	gdouble      width;
 	gdouble      height;
+	gdouble      bar_top; /* Top y position of the bar. */
+	gdouble      bar_bot; /* Bottom y position of the bar. */
 	gdouble      text_width;
 
 	/* Cached positions of each assigned resource. */
@@ -211,13 +231,35 @@ static gboolean gantt_row_get_resource_by_index       (PlannerGanttRow       *ro
 						       gint                  *x1,
 						       gint                  *x2);
 
-static PlannerCmd *task_cmd_edit_property (PlannerWindow   *window,
-					   PlannerTaskTree *tree,
-					   MrpTask         *task,
-					   const gchar     *property,
-					   const GValue    *value);
+static PlannerCmd *task_cmd_edit_property             (PlannerWindow   *window,
+					               PlannerTaskTree *tree,
+						       MrpTask         *task,
+						       const gchar     *property,
+						       const GValue    *value);
 
-static GList *  gantt_row_get_selected_tasks (GtkTreeSelection *selection);
+static GList *  gantt_row_get_selected_tasks          (GtkTreeSelection      *selection);
+
+static MrpUnitsInterval * mop_get_next_ival           (GList                **cur, 
+						       gint                  *is_a_gap, 
+                                                       GList                 *start, 
+                                                       MrpUnitsInterval      *buf);
+static MrpInterval *      mop_get_next_mrp_ival       (GList                **cur, 
+                                                       gint                  *is_a_gap, 
+                                                       GList                 *start, 
+                                                       MrpInterval           *buf);
+static gboolean gantt_draw_tasktime                   (GdkDrawable           *drawable,
+						       GdkGC                 *gc,
+						       GnomeCanvas           *canvas,
+						       gdouble                start_wx, 
+						       gdouble                start_wy, 
+						       gdouble                end_wx, 
+						       gdouble                end_wy, 
+						       gint                   cy1, 
+						       gint                   cy2,
+						       gint                   x,
+                                                       gint                   y, 
+						       gboolean               is_up, 
+						       gchar                 *colorname);
 
 
 static GnomeCanvasItemClass *parent_class;
@@ -365,6 +407,8 @@ gantt_row_init (PlannerGanttRow *row)
 	priv->y = 0.0;
 	priv->width = 0.0;
 	priv->height = 0.0;
+	priv->bar_top = 0.0;
+	priv->bar_bot = 0.0;
 	priv->scale = 1.0;
 	priv->visible = TRUE;
 	priv->highlight = FALSE;
@@ -529,7 +573,19 @@ gantt_row_set_property (GObject      *object,
 	case PROP_HEIGHT:
 		tmp_dbl = g_value_get_double (value);
 		if (tmp_dbl != priv->height) {
+			gboolean             nonstd_days;
+			PlannerGanttChart   *chart;
+			double               htask;
+
+			chart = g_object_get_data (G_OBJECT (item->canvas), "chart");
+			nonstd_days = planner_gantt_chart_get_nonstandard_days (chart);
+
 			priv->height = tmp_dbl;
+
+			htask = priv->height / 2.0;
+			priv->bar_top = ((priv->height - htask) / 2.0);
+			priv->bar_bot = ((priv->height + htask) / 2.0);
+
 			changed = TRUE;
 		}
 		break;
@@ -807,6 +863,8 @@ gantt_row_realize (GnomeCanvasItem *item)
 
 	priv->frame_gc = gdk_gc_new (item->canvas->layout.bin_window);
 
+	priv->ttask_gc = gdk_gc_new (item->canvas->layout.bin_window);
+
 	gnome_canvas_get_color (item->canvas,
 				"LightSkyBlue3",
 				&priv->color_normal);
@@ -847,6 +905,9 @@ gantt_row_unrealize (GnomeCanvasItem *item)
 	gdk_gc_unref (row->priv->frame_gc);
 	row->priv->frame_gc = NULL;
 
+	gdk_gc_unref (row->priv->ttask_gc);
+	row->priv->ttask_gc = NULL;
+
 	if (break_stipple) {
 		g_object_unref (break_stipple);
 	}
@@ -868,6 +929,221 @@ gantt_row_setup_frame_gc (PlannerGanttRow *row, gboolean highlight)
 				    GDK_JOIN_MITER);
 }
 
+
+static MrpUnitsInterval *mop_get_next_ival(GList **cur, gint *is_a_gap, GList *start, MrpUnitsInterval *buf)
+{
+	MrpUnitsInterval *cur_ival;
+	gint last_end, md;
+	
+	if (start) {
+		*cur = start;
+		cur_ival = start->data;
+		md = cur_ival->start % (24*60*60);
+		if (md > 0) {
+			buf->start = cur_ival->start - md;
+			buf->end = cur_ival->start;
+			buf->units = 0;
+			buf->units_full = 0;
+			buf->res_n = 0;
+	
+			*is_a_gap = 1;
+			
+			return (buf);
+		}
+		else {
+			*is_a_gap = 0;
+			return (cur_ival);
+		}
+	}
+	if ((*cur) == NULL) {
+		return (NULL);
+	}
+
+	cur_ival = (*cur)->data;
+
+	if (*is_a_gap == 1) { /* last was a gap */
+			*is_a_gap = 0;
+			return (cur_ival);		
+	}
+	else {
+		if ((*cur)->next != NULL) {
+			last_end = cur_ival->end;
+			*cur = (*cur)->next;
+			cur_ival = (*cur)->data;
+			
+			if (last_end < cur_ival->start) { /* another gap */
+				buf->start = last_end;
+				buf->end = cur_ival->start;
+				buf->units = 0;
+				buf->units_full = 0;
+				buf->res_n = 0;
+
+				*is_a_gap = 1;
+				return (buf);
+			}
+			else {
+				*is_a_gap = 0;
+				return (cur_ival);
+			}
+		}
+		else {
+			md = cur_ival->end % (24*60*60);
+			if (md > 0) {
+				buf->start      = cur_ival->end;
+				buf->end        = cur_ival->end - md + (24*60*60);
+				buf->units = 0;
+				buf->units_full = 0;
+				buf->res_n = 0;
+
+				*is_a_gap = 1;
+				*cur = NULL;
+				return (buf);
+			}
+			else {
+				return (NULL);
+			}
+		}
+	}
+
+	return (NULL);
+}
+
+
+
+static MrpInterval *mop_get_next_mrp_ival(GList **cur, gint *is_a_gap, GList *start, MrpInterval *buf)
+{
+	MrpInterval *cur_ival;
+	gint last_end, md;
+	mrptime cur_start, cur_end; 
+	
+	if (start) {
+		*cur = start;
+		cur_ival = start->data;
+
+		mrp_interval_get_absolute (cur_ival, 0, &cur_start, &cur_end);
+		md = cur_start % (24*60*60);
+		if (md > 0) {
+			mrp_interval_set_absolute (buf, 0, 0, cur_start);
+			*is_a_gap = 1;
+			
+			return (buf);
+		}
+		else {
+			*is_a_gap = 0;
+			return (cur_ival);
+		}
+	}
+	if ((*cur) == NULL) {
+		return (NULL);
+	}
+
+	cur_ival = (*cur)->data;
+	mrp_interval_get_absolute (cur_ival, 0, &cur_start, &cur_end);
+
+	if (*is_a_gap == 1) { /* last was a gap */
+			*is_a_gap = 0;
+			return (cur_ival);		
+	}
+	else {
+		if ((*cur)->next != NULL) {
+			last_end = cur_end;
+			*cur = (*cur)->next;
+			cur_ival = (*cur)->data;
+			mrp_interval_get_absolute (cur_ival, 0, &cur_start, &cur_end);
+			
+			if (last_end < cur_start) { /* another gap */
+				mrp_interval_set_absolute (buf, 0, last_end, cur_start);
+
+				*is_a_gap = 1;
+				return (buf);
+			}
+			else {
+				*is_a_gap = 0;
+				return (cur_ival);
+			}
+		}
+		else {
+			md = cur_end % (24*60*60);
+			if (md > 0) {
+				mrp_interval_set_absolute (buf, 0, cur_end, cur_end - md + (24*60*60));
+	
+				*is_a_gap = 1;
+				*cur = NULL;
+				return (buf);
+			}
+			else {
+				return (NULL);
+			}
+		}
+	}
+
+	return (NULL);
+}
+
+
+static gboolean gantt_draw_tasktime(GdkDrawable *drawable,
+							 GdkGC *gc,
+							 GnomeCanvas *canvas,
+							 gdouble start_wx, gdouble start_wy, 
+							 gdouble end_wx, gdouble end_wy, 
+							 gint cy1, gint cy2,
+							 gint x, gint y, 
+							 gboolean is_up, 
+							 gchar *colorname)
+{
+	GdkColor color;
+	gint ttime_x1, ttime_y1, ttime_x2, ttime_y2;
+
+	gnome_canvas_w2c (canvas, start_wx,  start_wy, &ttime_x1, &ttime_y1);
+	gnome_canvas_w2c (canvas,   end_wx,    end_wy, &ttime_x2, &ttime_y2);
+	ttime_x1 -= x;  ttime_y1 -= y;
+	ttime_x2 -= x;  ttime_y2 -= y;
+	
+	if (ttime_x2 > ttime_x1) {
+		gnome_canvas_get_color (canvas, colorname, &color);
+		gdk_gc_set_foreground (gc, &color);
+
+		if (is_up) {
+			draw_cut_rectangle (drawable,
+								gc,
+								TRUE,
+								ttime_x1,
+								ttime_y1,
+								ttime_x2 - ttime_x1,
+								cy1 - ttime_y1);
+			
+			gnome_canvas_get_color (canvas, "gray40", &color);
+			gdk_gc_set_foreground (gc, &color);
+		
+		draw_cut_line (drawable, gc, ttime_x1, ttime_y1,
+					   ttime_x2-1, ttime_y1);
+		draw_cut_line (drawable, gc, ttime_x1, ttime_y1,
+					   ttime_x1, cy1-1);
+		}
+		else {
+			draw_cut_rectangle (drawable,
+								gc,
+								TRUE,
+								ttime_x1, cy2+1,
+								ttime_x2 - ttime_x1,
+								ttime_y2 - cy2 - 1);
+			
+			gnome_canvas_get_color (canvas, "gray40", &color);
+			gdk_gc_set_foreground (gc, &color);
+			
+			draw_cut_line (drawable, gc, ttime_x1, ttime_y2,
+						   ttime_x2-1, ttime_y2);
+			draw_cut_line (drawable, gc, ttime_x1, cy2+1,
+						   ttime_x1, ttime_y2);
+		}
+		
+		return (TRUE);
+	}
+	else {
+		return (FALSE);
+	}
+}
+	
 static void
 gantt_row_draw (GnomeCanvasItem *item,
 		GdkDrawable     *drawable,
@@ -881,7 +1157,7 @@ gantt_row_draw (GnomeCanvasItem *item,
 	PlannerGanttChart   *chart;
 	gdouble              i2w_dx; 
 	gdouble              i2w_dy;
-	gdouble              dx1, dy1, dx2, dy2;
+	gdouble              dx1, dy1, dx2, dy2, dshay1, dshay2;
 	gint                 level;
 	MrpTaskType          type;
 	gboolean             summary;
@@ -890,32 +1166,98 @@ gantt_row_draw (GnomeCanvasItem *item,
 	gint                 percent_complete;
 	gint                 complete_x2, complete_width;
 	gboolean             highlight_critical;
+	gboolean             display_nonstandard_days;
 	gboolean             critical;
-
+#ifdef WITH_SIMPLE_PRIORITY_SCHEDULING
+	gboolean             is_dominant;
+#endif
 	gint                 rx1, ry1;
 	gint                 rx2, ry2;
 	gint                 cx1, cy1, cx2, cy2; 
-	
+
+	GList               *unit_ivals, *cal_ivals, *cur_unit, *cur_cal;
+	GdkColor             color;
+	gint                 x_start, x_end, y_dumb, is_a_gap, is_a_subgap;
+	MrpUnitsInterval    *unit_ival, ival_buf;
+        MrpInterval         *ival_subbuf = NULL, *cal_ival;
+	gint                 i, day_cur, cur_start, cur_end;
+
+	MrpProject          *project;
+	MrpDay              *day;
+	MrpCalendar         *calendar;
+	mrptime              cal_start, cal_end; 
+	gboolean             is_before_work;
+	gboolean             shadup_is_cached, shadup_draw_it;
+	gboolean             shaddo_is_cached, shaddo_draw_it;
+	gint                 shadup_start, shadup_end;
+	gint                 shaddo_start, shaddo_end;
+
+	gboolean             workup_is_cached, workup_draw_it;
+	gboolean             workdo_is_cached, workdo_draw_it;
+	gint                 workup_start, workup_end;
+	gint                 workdo_start, workdo_end;
+
+	gboolean             wunits_is_first, wunits_is_cached, wunits_draw_it;
+	gint                 wunits_x_start;
+
+	gint                 last_end;
+
+	gint                 topy,  nres, finish;
+	gdouble              delta;
+	GList               *assignments;
+
+	shadup_start = -1;
+	shadup_end = -1;
+	shaddo_start = -1;
+	shaddo_end = -1;
+	workup_start = -1;
+	workup_end = -1;
+	workdo_start = -1;
+	workdo_end = -1;
+	wunits_is_first = FALSE;
+	wunits_is_cached = FALSE;
+	wunits_x_start = -1;
+	last_end = 0;
+	delta = -1.0;
+
 	row = PLANNER_GANTT_ROW (item);
 	priv = row->priv;
+	project = mrp_object_get_project (MRP_OBJECT (priv->task));
+	calendar = mrp_project_get_calendar (project);
+
 
 	chart = g_object_get_data (G_OBJECT (item->canvas), "chart");
 	highlight_critical = planner_gantt_chart_get_highlight_critical_tasks (chart);
-
+	display_nonstandard_days = planner_gantt_chart_get_nonstandard_days (chart);
 	level = planner_scale_clamp_zoom (priv->zoom);
 
+
+	/*
+	  NOTES
+	  
+	  w -> world
+	  i -> item
+	  c -> canvas 
+	  
+	  priv->x = t * scale
+	*/
+	
 	/* Get item area in canvas coordinates. */
 	i2w_dx = 0.0;
 	i2w_dy = 0.0;
+
 	gnome_canvas_item_i2w (item, &i2w_dx, &i2w_dy);
 
-	dx1 = priv->x;
-	dy1 = priv->y + 0.15 * priv->height;
+	dx1 = priv->x;	
+	
+	dy1 = priv->y + priv->bar_top;
 	dx2 = priv->x + priv->width;
-	dy2 = priv->y + 0.70 * priv->height;
+	dy2 = priv->y + priv->bar_bot;
 
 	dx2 = MAX (dx2, dx1 + MIN_WIDTH);
 	
+	dshay1 = priv->y + 0.08 * priv->height;
+	dshay2 = priv->y + 0.92 * priv->height;
 	gnome_canvas_w2c (item->canvas,
 			  dx1 + i2w_dx,
 			  dy1 + i2w_dy,
@@ -932,12 +1274,12 @@ gantt_row_draw (GnomeCanvasItem *item,
 	cy1 -= y;
 	cx2 -= x;
 	cy2 -= y;
-
+	
 	if (cy1 >= cy2 || cx1 >= cx2) {
 		return;
 	}
 
-	summary_y = floor (priv->y + 2 * 0.15 * priv->height + 0.5) - y;
+	summary_y = floor (priv->y + 2 * priv->bar_top + 0.5) - y;
 
 	/* "Clip" the expose area. */
 	rx1 = MAX (cx1, 0);
@@ -953,7 +1295,12 @@ gantt_row_draw (GnomeCanvasItem *item,
 	percent_complete = mrp_task_get_percent_complete (priv->task);
 	critical = mrp_task_get_critical (priv->task);
 	type = mrp_task_get_task_type (priv->task);
-	
+	finish = mrp_task_get_finish (priv->task);
+	nres = mrp_task_get_nres (priv->task);
+	assignments = mrp_task_get_assignments (priv->task);
+#ifdef WITH_SIMPLE_PRIORITY_SCHEDULING
+	is_dominant = mrp_task_is_dominant (priv->task);
+#endif
 	if (!summary) {
 		complete_width = floor ((cx2 - cx1) * (percent_complete / 100.0) + 0.5);
 		complete_x2 = MIN (cx1 + complete_width, rx2);
@@ -967,22 +1314,442 @@ gantt_row_draw (GnomeCanvasItem *item,
 							 priv->complete_gc);
 		}
 
+		if (assignments) {
+			/* #define DRAW_BACKGROUND_CHECK 1 */
+#ifdef DRAW_BACKGROUND_CHECK
+			gnome_canvas_get_color (item->canvas, "indian red", &color);
+			gdk_gc_set_foreground (priv->fill_gc, &color);
+			draw_cut_rectangle (drawable,
+								priv->fill_gc,
+								TRUE,
+								rx1,
+								cy1,
+								rx2 - rx1,
+								cy2 - cy1);
+#endif
+			
+			/* Start slices drawer */
+			unit_ivals = mrp_task_get_unit_ivals (priv->task);
+			ival_subbuf = mrp_interval_new (0,0);
+			
+			is_before_work = TRUE;
+			shadup_is_cached = FALSE;
+			shaddo_is_cached = FALSE;
+			workup_is_cached = FALSE;
+			workdo_is_cached = FALSE;
+			for (i = 0, unit_ival = mop_get_next_ival (&cur_unit, &is_a_gap, 
+								  unit_ivals, &ival_buf)
+					 ; unit_ival && (i == 0 || cur_start < finish) ; i++) {
+				if (i == 0) {
+					/* first iteration: read the day when start the task */
+					day_cur = mrp_time_align_day (unit_ival->start);
+					
+					/* extract the intervals of the day */
+					day = mrp_calendar_get_day (calendar, day_cur, TRUE);
+					cal_ivals = mrp_calendar_day_get_intervals (calendar, day, TRUE);
+					
+					if (cal_ivals == NULL) {
+						mrp_interval_set_absolute (ival_subbuf, 0, 0, (24*60*60));
+						is_a_subgap = 1;
+						cal_ival = ival_subbuf;
+					}
+					else {
+						for (cal_ival = mop_get_next_mrp_ival (&cur_cal, &is_a_subgap, 
+										       cal_ivals, ival_subbuf) ;
+						   cal_ival ;
+						   cal_ival = mop_get_next_mrp_ival (&cur_cal, &is_a_subgap, 
+											NULL, ival_subbuf)) {
+							mrp_interval_get_absolute (cal_ival, day_cur, &cal_start, &cal_end);
+						
+							if (cal_end > unit_ival->start) {
+								break;
+							}
+						}
+					}
+					cur_start = MAX (unit_ival->start, cal_start);
+					cur_end   = MIN (unit_ival->end  , cal_end  );
+					wunits_is_first = TRUE;
+				}
+				g_assert (cal_ival != NULL);
+			
+				gnome_canvas_w2c (item->canvas, (cur_start * priv->scale)
+								  + i2w_dx, i2w_dy, &x_start, &y_dumb);
+				gnome_canvas_w2c (item->canvas, (cur_end * priv->scale)
+								  + i2w_dx, i2w_dy, &x_end, &y_dumb);
+				x_start -= x;
+				x_end   -= x;
+			
+				if (is_before_work) {
+					if (unit_ival->units_full == 0) {
+						goto cont_shadowloop;
+					}
+					else {
+						is_before_work = FALSE;
+					}
+					
+				}
+				if (display_nonstandard_days) {
+					shadup_draw_it = FALSE;
+					shaddo_draw_it = FALSE;
+					workup_draw_it = FALSE;
+					workdo_draw_it = FALSE;
+					
+					if (unit_ival->res_n == 0 && (!is_a_subgap || 
+								  (is_a_subgap && planner_scale_conf[level].nonworking_limit 
+								   > cal_end - cal_start))) {
+						if (shadup_is_cached == FALSE) {
+							shadup_start = cur_start;
+							shadup_is_cached = TRUE;
+						}
+					}
+					else {
+						if (shadup_is_cached == TRUE) {
+							if (planner_scale_conf[level].nonworking_limit <= 
+								cur_start - shadup_start) {
+								shadup_end = cur_start;
+								shadup_draw_it = TRUE;
+							}
+							shadup_is_cached = FALSE;
+						}
+					}
+					
+					if (unit_ival->res_n < nres && (!is_a_subgap || 
+									(is_a_subgap && planner_scale_conf[level].nonworking_limit 
+									 > cal_end - cal_start))) {
+						
+						if (shaddo_is_cached == FALSE) {
+							shaddo_start = cur_start;
+							shaddo_is_cached = TRUE;
+						}
+					}
+					else {
+						if (shaddo_is_cached == TRUE) {
+							if (planner_scale_conf[level].nonworking_limit <= 
+								cur_start - shaddo_start) {
+								shaddo_end = cur_start;
+								shaddo_draw_it = TRUE;
+							}
+							shaddo_is_cached = FALSE;
+						}
+					}
+					
+					if ((unit_ival->res_n == nres && is_a_subgap) ||
+						(unit_ival->res_n == 0 && 
+						 (cal_start % (24*60*60) == 0) && (cal_end % (24*60*60) == 0) &&
+						 planner_scale_conf[level].nonworking_limit > cur_end - cur_start)) {
+						if (workup_is_cached == FALSE) {
+							workup_start = cur_start;
+							workup_is_cached = TRUE;
+						}
+					}
+					else {
+						if (workup_is_cached == TRUE) {
+							if (planner_scale_conf[level].nonworking_limit <= 
+								cur_start - workup_start) {
+								workup_end = cur_start;
+								workup_draw_it = TRUE;
+							}
+							workup_is_cached = FALSE;
+						}
+					}
+					
+					if ((unit_ival->res_n > 0 && is_a_subgap) ||
+						(unit_ival->res_n == 0 && 
+						 (cal_start % (24*60*60) == 0) && (cal_end % (24*60*60) == 0) &&
+						 planner_scale_conf[level].nonworking_limit > cur_end - cur_start)) {
+						
+						if (workdo_is_cached == FALSE) {
+							workdo_start = cur_start;
+							workdo_is_cached = TRUE;
+						}
+					}
+					else {
+						if (workdo_is_cached == TRUE) {
+							if (planner_scale_conf[level].nonworking_limit <= 
+								cur_start - workdo_start) {
+								workdo_end = cur_start;
+								workdo_draw_it = TRUE;
+							}
+							workdo_is_cached = FALSE;
+						}
+					}
+					
+					/* Show shadow up. */
+					if (shadup_draw_it ||
+						(shadup_is_cached && 
+						 ((cur_end % (24*60*60)) == 0))) {
+						if (!shadup_draw_it && ((cur_end % (24*60*60)) == 0)) {
+							shadup_end = cur_end;
+						}
+						if (planner_scale_conf[level].nonworking_limit <= 
+							shadup_end - shadup_start) {
+							
+							gantt_draw_tasktime (drawable, priv->ttask_gc, item->canvas,
+										(shadup_start * priv->scale) + i2w_dx,
+										dshay1 + i2w_dy,
+										(shadup_end * priv->scale) + i2w_dx,
+										dshay2 + i2w_dy,
+										cy1, cy2, x, y,  TRUE, "grey96");
+						}
+						shadup_draw_it = FALSE;
+						shadup_is_cached = FALSE;
+					}
+					
+					/* Show shadow down. */
+					if (shaddo_draw_it ||
+						(shaddo_is_cached && 
+						 ((cur_end % (24*60*60)) == 0))) {
+						if (!shaddo_draw_it && ((cur_end % (24*60*60)) == 0)) {
+							shaddo_end = cur_end;
+						}
+						if (planner_scale_conf[level].nonworking_limit <= 
+							shaddo_end - shaddo_start) {
+							
+							gantt_draw_tasktime (drawable, priv->ttask_gc, item->canvas,
+									     (shaddo_start * priv->scale) + i2w_dx,
+									     dshay1 + i2w_dy,
+									     (shaddo_end * priv->scale) + i2w_dx,
+									     dshay2 + i2w_dy,
+									     cy1, cy2, x, y,  FALSE, "grey96");
+						}
+						shaddo_draw_it = FALSE;
+						shaddo_is_cached = FALSE;
+					}
+					
+					/* Show work up. */
+					if (workup_draw_it ||
+						(workup_is_cached && 
+						 ((cur_end % (24*60*60)) == 0))) {
+						if (!workup_draw_it && ((cur_end % (24*60*60)) == 0)) {
+							workup_end = cur_end;
+						}
+						if (planner_scale_conf[level].nonworking_limit <= 
+							workup_end - workup_start) {
+							
+							gantt_draw_tasktime (drawable, priv->ttask_gc, item->canvas,
+									     (workup_start * priv->scale) + i2w_dx,
+									     dshay1 + i2w_dy,
+									     (workup_end * priv->scale) + i2w_dx,
+									     dshay2 + i2w_dy,
+									     cy1, cy2, x, y,  TRUE, "white");
+						}
+						workup_draw_it = FALSE;
+						workup_is_cached = FALSE;
+					}
+				
+					/* Show work down. */
+					if (workdo_draw_it ||
+						(workdo_is_cached && 
+						 ((cur_end % (24*60*60)) == 0))) {
+						if (!workdo_draw_it && ((cur_end % (24*60*60)) == 0)) {
+							workdo_end = cur_end;
+						}
+						if (planner_scale_conf[level].nonworking_limit <= 
+							workdo_end - workdo_start) {
+
+							gantt_draw_tasktime (drawable, priv->ttask_gc, item->canvas,
+									     (workdo_start * priv->scale) + i2w_dx,
+									     dshay1 + i2w_dy,
+									     (workdo_end * priv->scale) + i2w_dx,
+									     dshay2 + i2w_dy,
+									     cy1, cy2, x, y,  FALSE, "white");
+
+							workdo_draw_it = FALSE;
+							workdo_is_cached = FALSE;
+						}
+					}
+				}
+				/* Draw area. */
+				wunits_draw_it = TRUE;
+				if (unit_ival->res_n > 0 && unit_ival->units_full > 0) {
+					delta = (double)unit_ival->units / (double)unit_ival->units_full;
+				}
+				else {
+					if (unit_ival->res_n == 0) {  /* It is a nonworking interval. */
+						if (planner_scale_conf[level].nonworking_limit <= 
+						    cur_end - cur_start) {  
+							delta = 1.0;
+						}   /* else it use the last selected value */
+					}
+					/* It isn't a nonworking interval. */
+					else if (planner_scale_conf[level].nonworking_limit <= 
+						cur_end - cur_start) { /* Visible non working interval. */		
+						delta = 1.0;
+					}
+					else {  /* use the last selected value */
+						if (wunits_is_first == TRUE) {
+							wunits_is_cached = TRUE;
+							wunits_x_start = x_start;
+							wunits_draw_it = FALSE;
+						} 
+					}
+				}
+				
+				topy = floor ((cy1 + ((1.0 - (double)delta) * (double)(cy2 - cy1 - 3))) + 0.5);
+				if (!highlight_critical || !critical) {
+					gdk_gc_set_foreground (priv->fill_gc, &priv->color_normal);
+				} else {
+					gdk_gc_set_foreground (priv->fill_gc, &priv->color_critical);
+				}
+			
+				if (wunits_draw_it) {
+					if (wunits_is_cached) {
+						wunits_is_cached = FALSE;
+					}
+					else {
+						wunits_x_start = x_start;
+					}
+				
+					if ((cy2 - topy - 3) > 0) {
+						draw_cut_rectangle (drawable,
+							            	priv->fill_gc,
+									TRUE,
+									wunits_x_start,
+									topy + 2,
+									x_end - wunits_x_start,
+									cy2 - topy - 3);
+					}
+					if (topy  - cy1 > 0) {
+						gnome_canvas_get_color (item->canvas, "white", &color);
+						gdk_gc_set_foreground (priv->fill_gc, &color);
+						draw_cut_rectangle (drawable,
+									priv->fill_gc,
+									TRUE,
+									wunits_x_start,
+									cy1+2,
+									x_end - wunits_x_start,
+									topy - cy1);
+					}
+				}
+			
+			cont_shadowloop:
+				if (display_nonstandard_days) {
+					last_end = cur_end;
+				}
+				wunits_is_first = FALSE;
+			
+				if (cur_end == unit_ival->end) {
+					if ((unit_ival = mop_get_next_ival (&cur_unit, &is_a_gap, 
+									    NULL, &ival_buf)) == NULL) {
+						break;	
+					}
+				}
+				if (cur_end == cal_end) {
+					if ((cal_ival = mop_get_next_mrp_ival (&cur_cal, &is_a_subgap, 
+									       NULL, ival_subbuf)) == NULL) {
+						/* End of the day intervals, read next. */
+						day_cur += (24*60*60);
+						day = mrp_calendar_get_day (calendar, day_cur, TRUE);
+						cal_ivals = mrp_calendar_day_get_intervals (calendar, day, TRUE);
+						if (cal_ivals) {
+							/* Not empty day. */
+							cal_ival = mop_get_next_mrp_ival (&cur_cal, &is_a_subgap, 
+											  cal_ivals, ival_subbuf);
+						}
+						else {
+							/* Empty day. */
+							mrp_interval_set_absolute (ival_subbuf, 0, 0, (24*60*60));
+							is_a_subgap = 1;
+							cal_ival = ival_subbuf;
+						}
+						wunits_is_first = TRUE;
+					}
+					mrp_interval_get_absolute (cal_ival, day_cur, &cal_start, &cal_end);
+				}
+
+				cur_start = MAX (unit_ival->start, cal_start);
+				cur_end   = MIN (unit_ival->end  , cal_end  );
+			}
+
+			if (display_nonstandard_days) {
+				/*
+				  H O L Y D A Y S
+				*/ 
+
+				/* Show shad up. */
+				if (shadup_is_cached) {
+					shadup_end = last_end;
+			
+					gantt_draw_tasktime (drawable, priv->ttask_gc, item->canvas,
+								(shadup_start * priv->scale) + i2w_dx,
+								dshay1 + i2w_dy,
+								(shadup_end * priv->scale) + i2w_dx,
+								dshay2 + i2w_dy,
+								cy1, cy2, x, y,  TRUE, "grey96");
+				}
+
+				/* Show shad down. */
+				if (shaddo_is_cached) {
+					shaddo_end = last_end;
+
+					gantt_draw_tasktime (drawable, priv->ttask_gc, item->canvas,
+								(shaddo_start * priv->scale) + i2w_dx,
+								dshay1 + i2w_dy,
+								(shaddo_end * priv->scale) + i2w_dx,
+								dshay2 + i2w_dy,
+								cy1, cy2, x, y,  FALSE, "grey96");
+				}
+
+				/*
+				  W O R K 
+				*/  
+
+				/* Show work up. */
+				if (workup_is_cached) {
+					workup_end = last_end;
+			
+					gantt_draw_tasktime (drawable, priv->ttask_gc, item->canvas,
+								(workup_start * priv->scale) + i2w_dx,
+								dshay1 + i2w_dy,
+								(workup_end * priv->scale) + i2w_dx,
+								dshay2 + i2w_dy,
+								cy1, cy2, x, y,	 TRUE, "white");
+				}
+
+				/* Show work down. */
+				if (workdo_is_cached) {
+					workdo_end = last_end;
+
+					gantt_draw_tasktime (drawable, priv->ttask_gc, item->canvas,
+								(workdo_start * priv->scale) + i2w_dx,
+								dshay1 + i2w_dy,
+								(workdo_end * priv->scale) + i2w_dx,
+								dshay2 + i2w_dy,
+								cy1, cy2, x, y,  FALSE, "white");
+				}
+			}
+		}
+		else { /* if (assignments) ... */
+			if (!highlight_critical || !critical) {
+				gdk_gc_set_foreground (priv->fill_gc, &priv->color_normal);
+			} else {
+				gdk_gc_set_foreground (priv->fill_gc, &priv->color_critical);
+			}
+			draw_cut_rectangle (drawable,
+						priv->fill_gc,
+						TRUE,
+						rx1,
+						cy1,
+						rx2 - rx1,
+						cy2 - cy1);
+		}
+
+
+		gnome_canvas_get_color (item->canvas, "black", &color);
+		gdk_gc_set_foreground (priv->frame_gc, &color);
+		
+		if (ival_subbuf) {
+			mrp_interval_unref (ival_subbuf);
+		}
+
 		if (!highlight_critical || !critical) {
 			gdk_gc_set_foreground (priv->fill_gc, &priv->color_normal);
 		} else {
 			gdk_gc_set_foreground (priv->fill_gc, &priv->color_critical);
 		}
-		
-		gdk_draw_rectangle (drawable,
-				    priv->fill_gc,
-				    TRUE,
-				    rx1,
-				    cy1 + 1,
-				    rx2 - rx1,
-				    cy2 - cy1 - 1);
-		
+
 		if (rx1 <= complete_x2) {
-			gdk_draw_rectangle (drawable,
+			draw_cut_rectangle (drawable,
 					    priv->complete_gc,
 					    TRUE,
 					    rx1,
@@ -991,8 +1758,31 @@ gantt_row_draw (GnomeCanvasItem *item,
 					    cy2 - cy1 - 7);
 		}
 
-		gdk_draw_line (drawable, priv->frame_gc, rx1, cy1, rx2, cy1);
-		gdk_draw_line (drawable, priv->frame_gc, rx1, cy2, rx2, cy2);
+#ifdef WITH_SIMPLE_PRIORITY_SCHEDULING
+ 		for (i = 0 ; i < (is_dominant && !(!summary && priv->highlight) ? 2 : 1) ; ++i) {
+ 			if (i == 1) {
+ 				gnome_canvas_get_color (item->canvas, "indian red", &color);
+ 				gdk_gc_set_foreground (priv->frame_gc, &color);
+ 				
+ 				gdk_gc_set_line_attributes (priv->frame_gc,
+ 								0,
+ 								GDK_LINE_ON_OFF_DASH,
+ 								GDK_CAP_BUTT,
+ 								GDK_JOIN_MITER);
+ 				draw_cut_line (drawable, priv->frame_gc, cx1, cy1, cx2, cy1);
+ 				draw_cut_line (drawable, priv->frame_gc, cx1, cy2, cx2, cy2);
+ 				gantt_row_setup_frame_gc (row, !summary && priv->highlight);
+ 				gnome_canvas_get_color (item->canvas, "black", &color);
+ 				gdk_gc_set_foreground (priv->frame_gc, &color);
+ 			}
+ 			else {
+#endif
+ 				draw_cut_line (drawable, priv->frame_gc, rx1, cy1, rx2, cy1);
+ 				draw_cut_line (drawable, priv->frame_gc, rx1, cy2, rx2, cy2);
+#ifdef WITH_SIMPLE_PRIORITY_SCHEDULING
+ 			}
+ 		}
+#endif
 
 		if (!highlight_critical || !critical) {
 			gdk_gc_set_foreground (priv->fill_gc, &priv->color_normal_light);
@@ -1000,7 +1790,7 @@ gantt_row_draw (GnomeCanvasItem *item,
 			gdk_gc_set_foreground (priv->fill_gc, &priv->color_critical_light);
 		}
 
-		gdk_draw_line (drawable,
+		draw_cut_line (drawable,
 			       priv->fill_gc,
 			       rx1 + 0,
 			       cy1 + 1,
@@ -1008,7 +1798,7 @@ gantt_row_draw (GnomeCanvasItem *item,
 			       cy1 + 1);
 
 		if (cx1 == rx1) {
-			gdk_draw_line (drawable,
+			draw_cut_line (drawable,
 				       priv->fill_gc,
 				       rx1 + 1,
 				       cy1 + 1,
@@ -1022,7 +1812,7 @@ gantt_row_draw (GnomeCanvasItem *item,
 			gdk_gc_set_foreground (priv->fill_gc, &priv->color_critical_dark);
 		}
 
-		gdk_draw_line (drawable,
+		draw_cut_line (drawable,
 			       priv->fill_gc,
 			       rx1 + 0,
 			       cy2 - 1,
@@ -1030,33 +1820,43 @@ gantt_row_draw (GnomeCanvasItem *item,
 			       cy2 - 1);
 		
 		if (cx2 == rx2) {
-			gdk_draw_line (drawable,
+			draw_cut_line (drawable,
 				       priv->fill_gc,
 				       rx2 - 1,
 				       cy1 + 1,
 				       rx2 - 1,
 				       cy2 - 1);
 		}
-
-		/* FIXME: Drawing of shadows on non-working time should go here. */
-		
-		if (cx1 == rx1) {
-			gdk_draw_line (drawable,
-				       priv->frame_gc,
-				       rx1,
-				       cy1,
-				       rx1,
-				       cy2);
+#ifdef WITH_SIMPLE_PRIORITY_SCHEDULING
+		for (i = 0 ; i < (is_dominant && !(!summary && priv->highlight) ? 2 : 1) ; ++i) {
+			if (i == 1) {
+				gnome_canvas_get_color (item->canvas, "red", &color);
+				gdk_gc_set_foreground (priv->frame_gc, &color);
+				
+				gdk_gc_set_line_attributes (priv->frame_gc,
+								0,
+								GDK_LINE_ON_OFF_DASH,
+								GDK_CAP_BUTT,
+								GDK_JOIN_MITER);
+			}
+#endif			
+			if (cx1 == rx1) {
+				draw_cut_line (drawable, priv->frame_gc,
+						cx1, cy1, cx1, cy2);
+			}
+			if (cx2 == rx2) {
+				draw_cut_line (drawable, priv->frame_gc,
+						cx2, cy1, cx2, cy2);
+			}
+			
+#ifdef WITH_SIMPLE_PRIORITY_SCHEDULING
+			if (i == 1) {
+				gantt_row_setup_frame_gc (row, !summary && priv->highlight);
+				gnome_canvas_get_color (item->canvas, "black", &color);
+				gdk_gc_set_foreground (priv->frame_gc, &color);
+			}
 		}
-		
-		if (cx2 == rx2) {
-			gdk_draw_line (drawable,
-				       priv->frame_gc,
-				       rx2,
-				       cy1,
-				       rx2,
-				       cy2);
-		}
+#endif
 	}
 	else if (type == MRP_TASK_TYPE_MILESTONE && !summary && rx1 <= rx2) {
 		points[0].x = cx1;
@@ -1081,7 +1881,7 @@ gantt_row_draw (GnomeCanvasItem *item,
 		/* FIXME: Maybe we should try and make the summary be thicker
 		 * for larger heights and always centered vertically?
 		 */
-		gdk_draw_rectangle (drawable,
+		draw_cut_rectangle (drawable,
 				    priv->frame_gc,
 				    TRUE,
 				    rx1,
@@ -1137,11 +1937,14 @@ gantt_row_draw (GnomeCanvasItem *item,
 	rx2 = MIN (cx2 + TEXT_PADDING + priv->text_width, width);
 
 	if (priv->layout != NULL && rx1 < rx2) {
-		/* FIXME: Center the text vertically? */
-		gdk_draw_layout (drawable,
+		/* NOTE: cy1 - priv->bar_top: report to the top of the cell,
+		         + 3: is an empirical value to realign with task-tree result of the
+		         default gtkcellrenderertext ypad property (2) + 1 ??? ;). */
+		   
+		draw_cut_layout (drawable,
 				 GTK_WIDGET (item->canvas)->style->text_gc[GTK_STATE_NORMAL],
 				 cx2 + TEXT_PADDING,
-				 cy1,
+				 cy1 - priv->bar_top + 3, 
 				 priv->layout);
 
 		if (priv->mouse_over_index != -1) {
@@ -1157,7 +1960,7 @@ gantt_row_draw (GnomeCanvasItem *item,
 			x1 += cx2 + TEXT_PADDING;
 			x2 += cx2 + TEXT_PADDING;
 				
-			gdk_draw_line (drawable,
+			draw_cut_line (drawable,
 				       GTK_WIDGET (item->canvas)->style->text_gc[GTK_STATE_NORMAL],
 				       x1,
 				       cy2 + 2,
@@ -1250,7 +2053,8 @@ gantt_row_notify_cb (MrpTask *task, GParamSpec *pspec, PlannerGanttRow *row)
 	 * it since it's a good optimization.
 	 */
 	else if (strcmp (pspec->name, "critical") != 0 &&
-		 strcmp (pspec->name, "percent-complete")) {
+			 strcmp (pspec->name, "priority") != 0 &&
+			 strcmp (pspec->name, "percent-complete")) {
 		return;
 	}
 	
@@ -1361,10 +2165,12 @@ planner_gantt_row_get_geometry (PlannerGanttRow *row,
 		*x2 = priv->x + priv->width;
 	}
 	if (y1) {
-		*y1 = priv->y + 0.15 * priv->height;
+		/* preMOP *y1 = priv->y + 0.15 * priv->height; */
+		*y1 = priv->y;
 	}
 	if (y2) {
-		*y2 = priv->y + 0.70 * priv->height;
+		/* preMOP *y2 = priv->y + 0.70 * priv->height; */
+		*y2 = priv->y + priv->height;
 	}
 }
 
@@ -1492,13 +2298,13 @@ gantt_row_scroll_timeout_cb (PlannerGanttRow *row)
 	return TRUE;
 }
 
-#define IN_DRAG_DURATION_SPOT(x,y,right,top,height) \
-	((abs(x - (right)) <= 3) && \
-	(y > top + 0.15 * height) && (y < top + 0.70 * height))
+#define IN_DRAG_DURATION_SPOT(x,y,right,top,ymin,ymax)	\
+	((abs (x - (right)) <= 3) && \
+	 (y > top + ymin) && (y < top + ymax))
 
-#define IN_DRAG_RELATION_SPOT(x,y,right,top,height) \
+#define IN_DRAG_RELATION_SPOT(x,y,right,top,ymin,ymax)	\
 	((x <= right) && \
-	(y > top + 0.15 * height) && (y < top + 0.70 * height))
+	 (y > top + ymin) && (y < top + ymax))
 
 static gboolean
 gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
@@ -1533,7 +2339,8 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 		switch (event->button.button) {
 		case 3:
 			if (IN_DRAG_RELATION_SPOT (event->button.x, event->button.y,
-						   priv->x + priv->width, priv->y, priv->height)) {
+						   priv->x + priv->width, priv->y, 
+						   priv->bar_top, priv->bar_bot)) {
 				PlannerGanttChart *chart;
 				PlannerTaskTree   *tree;
 				GtkTreePath       *path;
@@ -1586,15 +2393,16 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 							       event->button.y,
 							       priv->x + priv->width,
 							       priv->y,
-							       priv->height)) {
+							       priv->bar_top, 
+							       priv->bar_bot)) {
 				guint rgba;
 				
 				priv->state = STATE_DRAG_DURATION;
 
 				wx1 = priv->x;
-				wy1 = priv->y + 0.15 * priv->height;
+				wy1 = priv->y + priv->bar_top;
 				wx2 = event->button.x;
-				wy2 = priv->y + 0.70 * priv->height;
+				wy2 = priv->y + priv->bar_bot;
 
 				gnome_canvas_item_i2w (item, &wx1, &wy1);
 				gnome_canvas_item_i2w (item, &wx2, &wy2);
@@ -1619,9 +2427,9 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 							  event->button.y,
 							  priv->x + priv->width,
 							  priv->y,
-							  priv->height)) {
+							  priv->bar_top, 
+							  priv->bar_bot)) {
 				priv->state = STATE_DRAG_LINK;
-				
 				if (drag_points == NULL) {
 					drag_points = gnome_canvas_points_new (2);
 				}
@@ -1721,7 +2529,8 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 							       event->button.y,
 							       priv->x + priv->width,
 							       priv->y,
-							       priv->height)) {
+							       priv->bar_top, 
+							       priv->bar_bot)) {
 				cursor = gdk_cursor_new (GDK_RIGHT_SIDE);
 				gdk_window_set_cursor (canvas_widget->window, cursor);
 				if (cursor) {
@@ -1817,7 +2626,7 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 			project = mrp_object_get_project (MRP_OBJECT (priv->task));
 
 			wx2 = event->motion.x;
-			wy2 = priv->y + 0.70 * priv->height;
+			wy2 = priv->y + priv->bar_bot;
 			
 			gnome_canvas_item_i2w (item, &wx2, &wy2);
 
@@ -2020,7 +2829,8 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 	case GDK_2BUTTON_PRESS:
 		if (event->button.button == 1) {
 			if (IN_DRAG_RELATION_SPOT (event->button.x, event->button.y,
-						   priv->x + priv->width, priv->y, priv->height)) {
+						   priv->x + priv->width, priv->y, 
+						   priv->bar_top, priv->bar_bot)) {
 				PlannerTaskTree  *tree;
 				GtkTreePath      *path;
 				GtkTreeSelection *selection;
@@ -2255,7 +3065,7 @@ planner_gantt_row_init_menu (PlannerGanttRow *row)
 					tx2 = MIN (tx2, rx2);
 
 					if (tx1 < tx2) {
-						gdk_draw_rectangle (drawable,
+						draw_cut_rectangle (drawable,
 								    priv->fill_gc,
 								    TRUE,
 								    tx1,
@@ -2265,14 +3075,14 @@ planner_gantt_row_init_menu (PlannerGanttRow *row)
 					}
 					
 					/*gdk_gc_set_foreground (priv->fill_gc, &color_high);
-					gdk_draw_line (drawable,
+					draw_cut_line (drawable,
 						       priv->fill_gc,
 						       tx1,
 						       cy1 + 1,
 						       tx1,
 						       cy2 - 1);
 					
-					gdk_draw_line (drawable,
+					draw_cut_line (drawable,
 						       priv->fill_gc,
 						       tx2 - 1,
 						       cy1 + 1,
@@ -2312,7 +3122,7 @@ planner_gantt_row_init_menu (PlannerGanttRow *row)
 				tx2 = MIN (tx2, rx2);
 
 				if (tx1 < tx2) {
-					gdk_draw_rectangle (drawable,
+					draw_cut_rectangle (drawable,
 							    priv->fill_gc,
 							    TRUE,
 							    tx1,

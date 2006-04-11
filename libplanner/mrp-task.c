@@ -125,6 +125,9 @@ struct _MrpTaskPriv {
 	/* List of assignments. */
 	GList            *assignments;
 
+	/* Intervals to build graphical view of the task */
+	GList            *unit_ivals;
+
 	gfloat            cost;
 	gboolean          cost_cached;
 };
@@ -195,6 +198,7 @@ task_init (MrpTask *task)
 
 	priv->cost = 0.0;
  	priv->cost_cached = FALSE;
+	priv->unit_ivals = NULL;
 }
 
 static void
@@ -1499,6 +1503,89 @@ mrp_task_get_work (MrpTask *task)
 }
 
 /**
+ * mrp_task_get_priority:
+ * @task: an #MrpTask
+ * 
+ * Retrieves the priority of @task.
+ * 
+ * Return value: The priority of @task.
+ **/
+gint
+mrp_task_get_priority (MrpTask *task)
+{
+	g_return_val_if_fail (MRP_IS_TASK (task), 0);
+	
+	return task->priv->priority;
+}
+
+#ifdef WITH_SIMPLE_PRIORITY_SCHEDULING
+/**
+ * mrp_task_is_dominant:
+ * @task: an #MrpTask
+ * 
+ * Retrieves if @task is a dominant task.
+ * 
+ * Return value: if @task is a dominant task.
+ **/
+gboolean
+mrp_task_is_dominant (MrpTask *task)
+{
+	MrpConstraint constraint;
+
+	g_return_val_if_fail (MRP_IS_TASK (task), 0);
+	
+	constraint = impr_task_get_constraint (task);
+	if (constraint.type  != MRP_CONSTRAINT_MSO) {
+		return (FALSE);
+	}
+
+	if (task->priv->priority != MRP_DOMINANT_PRIORITY) {
+		return (FALSE);
+	}
+
+	return (TRUE);
+}
+#endif
+/**
+ * mrp_task_get_unit_ivals:
+ * @task: an #MrpTask
+ * 
+ * Retrieves the list of intervals of @task.
+ * 
+ * Return value: Intervals of @task.
+ **/
+GList *
+mrp_task_get_unit_ivals (MrpTask *task)
+{
+	g_return_val_if_fail (MRP_IS_TASK (task), 0);
+
+	return task->priv->unit_ivals;
+}
+
+/**
+ * mrp_task_set_unit_ivals:
+ * @task: an #MrpTask
+ * 
+ * Set the list of intervals of @task.
+ * 
+ * Return value: Intervals of @task.
+ **/
+GList *
+mrp_task_set_unit_ivals (MrpTask *task, GList *ivals)
+{
+	g_return_val_if_fail (MRP_IS_TASK (task), 0);
+
+	if (task->priv->unit_ivals) {
+		g_list_foreach (task->priv->unit_ivals, (GFunc) g_free, NULL);
+		g_list_free (task->priv->unit_ivals);
+		task->priv->unit_ivals = NULL;
+	}
+	task->priv->unit_ivals = ivals;
+
+	return task->priv->unit_ivals;
+}
+
+/**
  * mrp_task_get_assignments:
  * @task: an #MrpTask
  * 
@@ -1512,6 +1599,28 @@ mrp_task_get_assignments (MrpTask *task)
 	g_return_val_if_fail (MRP_IS_TASK (task), NULL);
 	
 	return task->priv->assignments;
+}
+
+/**
+ * mrp_task_get_nres:
+ * @task: an #MrpTask
+ * 
+ * Calculate the number of resources assigned to task.
+ * 
+ * Return value: the number of resources.
+ **/
+gint mrp_task_get_nres (MrpTask *task)
+{
+	GList *assignments, *a;
+	gint nres = 0;
+
+	assignments = mrp_task_get_assignments (task);
+
+	for (a = assignments; a; a = a->next) {
+		nres++;
+	}
+	
+	return (nres);
 }
 
 /**

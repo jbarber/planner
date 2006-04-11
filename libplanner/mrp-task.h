@@ -42,6 +42,33 @@
 typedef struct _MrpTaskClass MrpTaskClass;
 typedef struct _MrpTaskPriv  MrpTaskPriv;
 
+/*
+  NOTE: moved from libplanner/mrp-task-manager.c to use 
+         the structure in the src/planner-gantt-row.c
+         new fields are:
+           units      . worked units in the interval
+           units_full . expected worked units in the interval 
+                        all resources that are working in the
+                        interval in the right percentage
+           res_n      . number of expected resources working
+                        at the task in the interval
+*/
+typedef struct {
+	gboolean is_start;
+	mrptime  start;
+	mrptime  end;
+	gint     units;
+	gint     units_full;
+	gint     res_n;	
+} MrpUnitsInterval;
+
+#define UNIT_IVAL_GET_TIME(R) ((R->is_start?R->start:R->end))
+
+#ifdef WITH_SIMPLE_PRIORITY_SCHEDULING
+/* Value of the magic priority of a dominant task. */
+#define MRP_DOMINANT_PRIORITY           9999
+#endif
+
 #include <libplanner/mrp-relation.h>
 
 struct _MrpTask
@@ -95,7 +122,17 @@ mrptime          mrp_task_get_latest_start          (MrpTask          *task);
 mrptime          mrp_task_get_latest_finish         (MrpTask          *task);
 gint             mrp_task_get_duration              (MrpTask          *task);
 gint             mrp_task_get_work                  (MrpTask          *task);
+gint             mrp_task_get_priority              (MrpTask          *task);
+#ifdef WITH_SIMPLE_PRIORITY_SCHEDULING
+gboolean         mrp_task_is_dominant               (MrpTask          *task);
+#endif
+GList *          mrp_task_get_unit_ivals            (MrpTask          *task);
+GList *          mrp_task_set_unit_ivals            (MrpTask          *task,
+						     GList *ivals);
 GList           *mrp_task_get_assignments           (MrpTask          *task);
+gint             mrp_task_get_nres                  (MrpTask          *task);
+
+gint             mrp_task_get_fullwork              (MrpTask          *task);
 MrpAssignment   *mrp_task_get_assignment            (MrpTask          *task,
 						     MrpResource      *resource);
 void             mrp_task_reset_constraint          (MrpTask          *task);

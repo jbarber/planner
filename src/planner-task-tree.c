@@ -60,7 +60,10 @@ struct _PlannerTaskTreePriv {
 	PlannerWindow  *main_window;
 
 	gboolean        highlight_critical;
-	
+
+	/* Nonstandard days visualization */
+	gboolean        nonstandard_days;
+
 	/* Keep the dialogs here so that we can just raise the dialog if it's
 	 * opened twice for the same task.
 	 */
@@ -95,7 +98,7 @@ static void        task_tree_finalize                  (GObject              *ob
 static void        task_tree_setup_tree_view           (GtkTreeView          *tree,
 							MrpProject           *project,
 							PlannerGanttModel    *model);
-static void        task_tree_add_column                (GtkTreeView          *tree,
+static void        task_tree_add_column                (PlannerTaskTree      *tree,
 							gint                  column,
 							const gchar          *title);
 static void        task_tree_name_data_func            (GtkTreeViewColumn    *tree_column,
@@ -515,7 +518,9 @@ task_cmd_remove_undo (PlannerCmd *cmd_base)
 
 	child_parent = planner_gantt_model_get_indent_task_target (model, cmd->task);
 
-	if (cmd->children != NULL) task_cmd_restore_children (cmd);
+	if (cmd->children != NULL) {
+		task_cmd_restore_children (cmd);
+	}
 
 	task_cmd_restore_relations (cmd);
 	task_cmd_restore_assignments (cmd);
@@ -1356,7 +1361,6 @@ task_tree_wbs_data_func (GtkTreeViewColumn *tree_column,
 			    iter,
 			    COL_WBS, &str,
 			    -1);
-
 	g_object_set (cell,
 		      "text", str,
 		      NULL);
@@ -2265,7 +2269,7 @@ task_tree_column_notify_width_cb (GtkWidget       *column,
 }
 
 static void
-task_tree_add_column (GtkTreeView *tree,
+task_tree_add_column (PlannerTaskTree *tree,
 		      gint         column,
 		      const gchar *title)
 {
@@ -2276,13 +2280,14 @@ task_tree_add_column (GtkTreeView *tree,
 	switch (column) {
 	case COL_WBS:
 		cell = gtk_cell_renderer_text_new ();
+		
 		col = gtk_tree_view_column_new_with_attributes (title,
 								cell,
 								NULL);
 		gtk_tree_view_column_set_cell_data_func (col,
 							 cell,
 							 task_tree_wbs_data_func,
-							 tree, NULL);
+							 GTK_TREE_VIEW (tree), NULL);
 		g_object_set_data (G_OBJECT (col),
 				   "data-func", task_tree_wbs_data_func);
 		g_object_set_data (G_OBJECT (col), "id", "wbs");
@@ -2297,7 +2302,7 @@ task_tree_add_column (GtkTreeView *tree,
 		g_signal_connect (cell,
 				  "edited",
 				  G_CALLBACK (task_tree_name_edited),
-				  tree);
+				  GTK_TREE_VIEW (tree));
 
 		col = gtk_tree_view_column_new_with_attributes (title,
 								cell,
@@ -2305,7 +2310,7 @@ task_tree_add_column (GtkTreeView *tree,
 		gtk_tree_view_column_set_cell_data_func (col,
 							 cell,
 							 task_tree_name_data_func,
-							 tree, NULL);
+							 GTK_TREE_VIEW (tree), NULL);
 		g_object_set_data (G_OBJECT (col),
 				   "data-func", task_tree_name_data_func);
 		g_object_set_data (G_OBJECT (col), "id", "name");
@@ -2320,11 +2325,11 @@ task_tree_add_column (GtkTreeView *tree,
 		g_signal_connect (cell,
 				  "edited",
 				  G_CALLBACK (task_tree_start_edited),
-				  tree);
+				  GTK_TREE_VIEW (tree));
 		g_signal_connect (cell,
 				  "show-popup",
 				  G_CALLBACK (task_tree_start_show_popup),
-				  tree);
+				  GTK_TREE_VIEW (tree));
 		
 		col = gtk_tree_view_column_new_with_attributes (title,
 								cell,
@@ -2334,7 +2339,7 @@ task_tree_add_column (GtkTreeView *tree,
 		gtk_tree_view_column_set_cell_data_func (col,
 							 cell,
 							 task_tree_start_data_func,
-							 tree, NULL);
+							 GTK_TREE_VIEW (tree), NULL);
 		g_object_set_data (G_OBJECT (col),
 				   "data-func", task_tree_start_data_func);
 		g_object_set_data (G_OBJECT (col), "id", "start");
@@ -2350,7 +2355,7 @@ task_tree_add_column (GtkTreeView *tree,
 		gtk_tree_view_column_set_cell_data_func (col,
 							 cell,
 							 task_tree_duration_data_func,
-							 tree,
+							 GTK_TREE_VIEW (tree),
 							 NULL);
 		g_object_set_data (G_OBJECT (col),
 				   "data-func", task_tree_duration_data_func);
@@ -2359,7 +2364,7 @@ task_tree_add_column (GtkTreeView *tree,
 		g_signal_connect (cell,
 				  "edited",
 				  G_CALLBACK (task_tree_duration_edited),
-				  tree);
+				  GTK_TREE_VIEW (tree));
 		break;
 
 	case COL_WORK:
@@ -2372,7 +2377,7 @@ task_tree_add_column (GtkTreeView *tree,
 		gtk_tree_view_column_set_cell_data_func (col,
 							 cell,
 							 task_tree_work_data_func,
-							 tree,
+							 GTK_TREE_VIEW (tree),
 							 NULL);
 		g_object_set_data (G_OBJECT (col),
 				   "data-func", task_tree_work_data_func);
@@ -2381,7 +2386,7 @@ task_tree_add_column (GtkTreeView *tree,
 		g_signal_connect (cell,
 				  "edited",
 				  G_CALLBACK (task_tree_work_edited),
-				  tree);
+				  GTK_TREE_VIEW (tree));
 		break;
 		
 	case COL_SLACK:
@@ -2394,7 +2399,7 @@ task_tree_add_column (GtkTreeView *tree,
 		gtk_tree_view_column_set_cell_data_func (col,
 							 cell,
 							 task_tree_slack_data_func,
-							 tree,
+							 GTK_TREE_VIEW (tree),
 							 NULL);
 		g_object_set_data (G_OBJECT (col),
 				   "data-func", task_tree_slack_data_func);
@@ -2406,7 +2411,7 @@ task_tree_add_column (GtkTreeView *tree,
 		g_signal_connect (cell,
 				  "show-popup",
 				  G_CALLBACK (task_tree_start_show_popup),
-				  tree);
+				  GTK_TREE_VIEW (tree));
 		
 		col = gtk_tree_view_column_new_with_attributes (title,
 								cell,
@@ -2416,7 +2421,7 @@ task_tree_add_column (GtkTreeView *tree,
 		gtk_tree_view_column_set_cell_data_func (col,
 							 cell,
 							 task_tree_finish_data_func,
-							 tree, NULL);
+							 GTK_TREE_VIEW (tree), NULL);
 		g_object_set_data (G_OBJECT (col),
 				   "data-func", task_tree_finish_data_func);
 		g_object_set_data (G_OBJECT (col), "id", "finish");
@@ -2432,7 +2437,7 @@ task_tree_add_column (GtkTreeView *tree,
 		gtk_tree_view_column_set_cell_data_func (col,
 							 cell,
 							 task_tree_cost_data_func,
-							 tree,
+							 GTK_TREE_VIEW (tree),
 							 NULL);
 		g_object_set_data (G_OBJECT (col),
 				   "data-func", task_tree_cost_data_func);
@@ -2449,7 +2454,7 @@ task_tree_add_column (GtkTreeView *tree,
 		gtk_tree_view_column_set_cell_data_func (col,
 							 cell,
 							 task_tree_assigned_to_data_func,
-							 tree,
+							 GTK_TREE_VIEW (tree),
 							 NULL);
 		g_object_set_data (G_OBJECT (col),
 				   "data-func", task_tree_assigned_to_data_func);
@@ -2462,17 +2467,17 @@ task_tree_add_column (GtkTreeView *tree,
 
 	gtk_tree_view_column_set_sizing (col, GTK_TREE_VIEW_COLUMN_FIXED);
 	
-	g_object_set_data (G_OBJECT (col), "user-data", tree);
-	gtk_tree_view_append_column (tree, col);
+	g_object_set_data (G_OBJECT (col), "user-data", GTK_TREE_VIEW (tree));
+	gtk_tree_view_append_column (GTK_TREE_VIEW (tree), col);
 
 	if (expander) {
-		gtk_tree_view_set_expander_column (tree, col);
+		gtk_tree_view_set_expander_column (GTK_TREE_VIEW (tree), col);
 	}
 
 	g_signal_connect (col,
 			  "notify::width",
 			  G_CALLBACK (task_tree_column_notify_width_cb),
-			  tree);
+			  GTK_TREE_VIEW (tree));
 }
 
 GtkWidget *
@@ -2511,10 +2516,10 @@ planner_task_tree_new (PlannerWindow     *main_window,
 
 		if (add_newline) {
 			tmp = g_strdup_printf ("\n%s", (gchar *) title);
-			task_tree_add_column (GTK_TREE_VIEW (tree), col, tmp);
+			task_tree_add_column (tree, col, tmp);
 			g_free (tmp);
 		} else {
-			task_tree_add_column (GTK_TREE_VIEW (tree), col, title);
+			task_tree_add_column (tree, col, title);
 		}
 		
 		col = va_arg (args, gint);
@@ -3579,6 +3584,19 @@ planner_task_tree_set_highlight_critical (PlannerTaskTree *tree,
 	gtk_widget_queue_draw (GTK_WIDGET (tree));
 }
 
+void
+planner_task_tree_set_nonstandard_days (PlannerTaskTree *tree,
+					  gboolean         nonstandard_days)
+{
+	g_return_if_fail (PLANNER_IS_TASK_TREE (tree));
+
+	if (tree->priv->nonstandard_days == nonstandard_days) {
+		return;
+	}
+	tree->priv->nonstandard_days = nonstandard_days;
+	gtk_widget_queue_draw (GTK_WIDGET (tree));
+}
+
 gboolean
 planner_task_tree_get_highlight_critical (PlannerTaskTree *tree)
 {
@@ -3586,6 +3604,15 @@ planner_task_tree_get_highlight_critical (PlannerTaskTree *tree)
 	
 	return tree->priv->highlight_critical;
 }
+
+gboolean
+planner_task_tree_get_nonstandard_days (PlannerTaskTree *tree)
+{
+	g_return_val_if_fail (PLANNER_IS_TASK_TREE (tree), FALSE);
+	
+	return tree->priv->nonstandard_days;
+}
+
 
 void
 planner_task_tree_set_anchor (PlannerTaskTree *tree, GtkTreePath *anchor)
