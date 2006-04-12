@@ -1556,7 +1556,7 @@ planner_usage_chart_set_view (PlannerUsageChart *chart,
 {
 	g_return_if_fail (PLANNER_IS_USAGE_TREE (view));
 	
-	g_print ("View for Usage configured\n");
+/*	g_print ("View for Usage configured\n");  */
 
 	chart->priv->view = view;
 }
