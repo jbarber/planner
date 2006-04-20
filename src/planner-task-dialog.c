@@ -31,6 +31,7 @@
 #include <gtk/gtk.h>
 #include <libplanner/mrp-object.h>
 #include <libplanner/mrp-project.h>
+#include <libplanner/mrp-private.h>
 #include "libplanner/mrp-paths.h"
 #include "planner-cell-renderer-list.h"
 #include "planner-assignment-model.h"
@@ -1844,13 +1845,52 @@ static GtkWidget *
 task_dialog_predecessor_dialog_new (MrpTask       *task,
 				    PlannerWindow *main_window)
 {
-	MrpProject *project;
-	GladeXML   *glade;
-	GtkWidget  *dialog;
-	GtkWidget  *w;
-	GList      *tasks;
-	gchar      *filename;
+	MrpProject		*project;
+	GladeXML		*glade;
+	GtkWidget		*dialog;
+	GtkWidget  		*w;
+	GList      		*tasks;
+	gchar      		*filename;
+	GList			*relations, *l;
+	MrpRelationType		 rel_type;
+	MrpConstraint		 constraint;
 	
+	/* check for attempt to add relation when Must Start On constraint is present */
+	constraint = imrp_task_get_constraint (task);
+	if (constraint.type == MRP_CONSTRAINT_MSO) {
+		dialog = gtk_message_dialog_new (GTK_WINDOW (main_window),
+						 GTK_DIALOG_DESTROY_WITH_PARENT,
+						 GTK_MESSAGE_ERROR,
+						 GTK_BUTTONS_CLOSE,
+						 "You cannot add a relationship to a task with a Must Start On constraint.");
+		
+		gtk_dialog_run (GTK_DIALOG (dialog));
+		gtk_widget_destroy (dialog);
+
+		return NULL;
+	}
+		
+
+	/* check for attempt to add relation when SF or FF already present */
+	relations = mrp_task_get_predecessor_relations (task);
+	for (l = relations; l; l = l->next) {
+
+		rel_type = mrp_relation_get_relation_type (l->data);
+		if (rel_type == MRP_RELATION_SF || rel_type == MRP_RELATION_FF) {
+ 			dialog = gtk_message_dialog_new (GTK_WINDOW (main_window),
+							 GTK_DIALOG_DESTROY_WITH_PARENT,
+							 GTK_MESSAGE_ERROR,
+							 GTK_BUTTONS_CLOSE,
+				     			 "You cannot add a relationship if a Start to Finish or Finish to Finish relationship already exists.");
+			
+			gtk_dialog_run (GTK_DIALOG (dialog));
+			gtk_widget_destroy (dialog);
+
+			return NULL;
+		}
+	}
+
+
 	mrp_object_get (task, "project", &project, NULL);
 	
 	filename = mrp_paths_get_glade_dir ("add-predecessor.glade");
@@ -1871,16 +1911,13 @@ task_dialog_predecessor_dialog_new (MrpTask       *task,
 	w = glade_xml_get_widget (glade, "type_optionmenu");
 	g_object_set_data (G_OBJECT (dialog), "type_optionmenu", w);
 
-	/* FIXME: FF and SF are disabled for now, since the scheduler doesn't
-	 * handle them.
-	 */
 	task_dialog_setup_option_menu (w,
 				       NULL,
 				       NULL,
 				       _("Finish to start (FS)"), MRP_RELATION_FS,
-				       /*_("Finish to finish (FF)"), MRP_RELATION_FF,*/
+				       _("Finish to finish (FF)"), MRP_RELATION_FF,
 				       _("Start to start (SS)"), MRP_RELATION_SS,
-				       /*_("Start to finish (SF)"), MRP_RELATION_SF,*/
+				       _("Start to finish (SF)"), MRP_RELATION_SF,
 				       NULL);
 
 	w = glade_xml_get_widget (glade, "lag_entry");
@@ -1973,7 +2010,9 @@ task_dialog_add_predecessor_cb (GtkWidget  *widget,
 	GtkWidget *dialog;
 	
 	dialog = task_dialog_predecessor_dialog_new (data->task, data->main_window);
-	gtk_widget_show (dialog);
+	if (dialog) {
+		gtk_widget_show (dialog);
+	}
 }
 
 static void  
@@ -2134,7 +2173,11 @@ cell_index_to_relation_type (gint i)
 	case 0:
 		return MRP_RELATION_FS;
 	case 1:
+		return MRP_RELATION_FF;
+	case 2:
 		return MRP_RELATION_SS;
+	case 3:
+		return MRP_RELATION_SF;
 	default:
 		g_warning ("Unknown relation type index");
 		return MRP_RELATION_FS;
@@ -2170,13 +2213,11 @@ task_dialog_cell_type_show_popup (PlannerCellRendererList *cell,
 
 	relation = mrp_task_get_relation (data->task, predecessor);
 
-	/* FIXME: FF and SF are disabled for now. */
-	
 	list = NULL;
 	list = g_list_append (list, g_strdup (_("FS")));
-	/*list = g_list_append (list, g_strdup (_("FF")));*/
+	list = g_list_append (list, g_strdup (_("FF")));
 	list = g_list_append (list, g_strdup (_("SS")));
-	/*list = g_list_append (list, g_strdup (_("SF")));*/
+	list = g_list_append (list, g_strdup (_("SF")));
 	
 	cell->list = list;
 
@@ -2184,18 +2225,15 @@ task_dialog_cell_type_show_popup (PlannerCellRendererList *cell,
 	case MRP_RELATION_FS:
 		cell->selected_index = 0;
 		break;
-	case MRP_RELATION_SS:
-		cell->selected_index = 1;
-		break;
-#if 0
-		/* FIXME: FF and SF disabled. Renumber indices when enabling. */
 	case MRP_RELATION_FF:
 		cell->selected_index = 1;
+		break;
+	case MRP_RELATION_SS:
+		cell->selected_index = 2;
 		break;
 	case MRP_RELATION_SF:
 		cell->selected_index = 3;
 		break;
-#endif
 	default:
 		cell->selected_index = 0;
 		break;
@@ -2271,12 +2309,54 @@ task_dialog_schedule_popdown_cb (PlannerPopupButton *popup_button,
 				 gboolean            ok,
 				 DialogData         *data)
 {
-	MrpConstraint constraint;
+	MrpConstraint	 constraint;
+	GList		*relations, *l;
+	GtkWidget	*dialog;
+	MrpRelationType  rel_type;
 	
 	if (ok) {
 		constraint.time = planner_task_date_widget_get_date (PLANNER_TASK_DATE_WIDGET (widget));
 		constraint.type = planner_task_date_widget_get_constraint_type (PLANNER_TASK_DATE_WIDGET (widget));
 		
+		relations = mrp_task_get_predecessor_relations (data->task);
+
+		/* check for attempt to add MSO constraint when relations are present */
+		if (constraint.type == MRP_CONSTRAINT_MSO && relations) {
+			
+			dialog = gtk_message_dialog_new (GTK_WINDOW (data->main_window),
+							 GTK_DIALOG_DESTROY_WITH_PARENT,
+							 GTK_MESSAGE_ERROR,
+							 GTK_BUTTONS_CLOSE,
+							 "You cannot add a Must Start On constraint with predecessor relations defined for this task.");
+			
+			gtk_dialog_run (GTK_DIALOG (dialog));
+			gtk_widget_destroy (dialog);
+			gtk_widget_destroy (widget);
+
+			return;
+		}
+
+		/* check for attempt to add MSO constraint when relations are present */
+		if (constraint.type == MRP_CONSTRAINT_SNET && relations) {
+			for (l = relations; l; l = l->next) {
+
+				rel_type = mrp_relation_get_relation_type (l->data);
+				if (rel_type == MRP_RELATION_SF || rel_type == MRP_RELATION_FF) {
+					dialog = gtk_message_dialog_new (GTK_WINDOW (data->main_window),
+									 GTK_DIALOG_DESTROY_WITH_PARENT,
+									 GTK_MESSAGE_ERROR,
+									 GTK_BUTTONS_CLOSE,
+									 "You cannot add a Start No Earlier Than constraint because a Start to Finish or Finish to Finish predecessor relationship exists for this task.");
+					
+					gtk_dialog_run (GTK_DIALOG (dialog));
+					gtk_widget_destroy (dialog);
+					gtk_widget_destroy (widget);
+
+					return;
+				}
+			}
+		}
+
 		task_cmd_edit_constraint (data->main_window,
 					  data->task,
 					  &constraint);

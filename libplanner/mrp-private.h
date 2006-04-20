@@ -89,8 +89,8 @@ void              imrp_task_set_duration             (MrpTask         *task,
 void              imrp_task_set_work                 (MrpTask         *task,
 						      gint             work);
 MrpTaskGraphNode *imrp_task_get_graph_node           (MrpTask         *task);
-MrpConstraint     impr_task_get_constraint           (MrpTask         *task);
-void              impr_task_set_constraint           (MrpTask         *task,
+MrpConstraint     imrp_task_get_constraint           (MrpTask         *task);
+void              imrp_task_set_constraint           (MrpTask         *task,
 						      MrpConstraint    constraint);
 gint              imrp_task_get_depth                (MrpTask         *task);
 GNode *           imrp_task_get_node                 (MrpTask         *task);

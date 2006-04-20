@@ -121,6 +121,12 @@ task_manager_dump_task_tree               (GNode               *node);
 
 static GObjectClass *parent_class;
 
+static mrptime
+task_manager_calculate_task_start_from_finish (MrpTaskManager *manager,
+				    		MrpTask        *task,
+						mrptime         finish,
+						gint           *duration);
+
 
 GType
 mrp_task_manager_get_type (void)
@@ -1111,78 +1117,23 @@ task_manager_build_dependency_graph (MrpTaskManager *manager)
 	manager->priv->needs_recalc = TRUE;
 }
 
-/* Calcluate the earliest start time that a particular predesessor relation
- * allows given.
- */
-static mrptime
-task_manager_calc_relation (MrpTask	*task,
-			    MrpRelation	*relation,
-			    MrpTask	*predecessor)
-{
-	MrpRelationType type;
-	mrptime         time;
-	/*mrptime         start, finish;*/
-	
-	/* FIXME: This does not work correctly for FF and SF. The problem is
-	 * that the start and finish times of task is not known at this stage,
-	 * so we can't really use them.
-	 */
-
-	type = mrp_relation_get_relation_type (relation);
-	
-	switch (type) {
-#if 0
-	case MRP_RELATION_FF:
-		/* finish-to-finish */
-		start =  mrp_task_get_start (task);
-		finish =  mrp_task_get_finish (task);
-
-		time = mrp_task_get_finish (predecessor) +
-			mrp_relation_get_lag (relation) - (finish - start);
-
-		break;
-		
-	case MRP_RELATION_SF:
-		/* start-to-finish */
-		start = mrp_task_get_start (task);
-		finish = mrp_task_get_finish (task);
-
-		time = mrp_task_get_start (predecessor) +
-			mrp_relation_get_lag (relation) - (finish - start);
-		break;
-#endif	
-	case MRP_RELATION_SS:
-		/* start-to-start */
-		time = mrp_task_get_start (predecessor) +
-			mrp_relation_get_lag (relation);
-		break;
-			
-	case MRP_RELATION_FS:
-	case MRP_RELATION_NONE:
-	default:
-		/* finish-to-start */
-		time = mrp_task_get_finish (predecessor) +
-			mrp_relation_get_lag (relation);
-		break;
-	}
-
-	return time;
-}
-
 /* Calculate the start time of the task by finding the latest finish of it's
  * predecessors (plus any lag). Also take constraints into consideration.
  */
 static mrptime
 task_manager_calculate_task_start (MrpTaskManager *manager,
-				   MrpTask        *task)
+				   MrpTask        *task, 
+				   gint           *duration)
 {
 	MrpTaskManagerPriv *priv;
 	MrpTask            *tmp_task;
 	GList              *predecessors, *l;
 	MrpRelation        *relation;
+	MrpRelationType     type;
 	MrpTask            *predecessor;
 	mrptime             project_start;
 	mrptime             start;
+	mrptime             finish;
 	mrptime             dep_start;
 	MrpConstraint       constraint;
 
@@ -1198,10 +1149,51 @@ task_manager_calculate_task_start (MrpTaskManager *manager,
 			relation = l->data;
 			predecessor = mrp_relation_get_predecessor (relation);
 
-			dep_start = task_manager_calc_relation (task,
-								relation,
-								predecessor);
+			type = mrp_relation_get_relation_type (relation);
 			
+			switch (type) {
+			case MRP_RELATION_FF:
+				/* finish-to-finish */
+				/* predecessor must finish before successor can finish */
+				finish = mrp_task_get_finish (predecessor) + mrp_relation_get_lag (relation);
+				start =  task_manager_calculate_task_start_from_finish (manager,
+											task,
+											finish,
+											duration);
+				dep_start = start;
+
+				break;
+				
+			case MRP_RELATION_SF:
+				/* start-to-finish */
+				/* predecessor must start before successor can finish */
+				finish = mrp_task_get_start (predecessor);
+				start =  task_manager_calculate_task_start_from_finish (manager,
+											task,
+											finish,
+											duration);
+
+				dep_start = mrp_task_get_start (predecessor) +
+					    mrp_relation_get_lag (relation) - (finish - start);
+				break;
+
+			case MRP_RELATION_SS:
+				/* start-to-start */
+				/* predecessor must start before successor can start */
+				dep_start = mrp_task_get_start (predecessor) +
+					    mrp_relation_get_lag (relation);
+				break;
+
+			case MRP_RELATION_FS:
+			case MRP_RELATION_NONE:
+			default:
+				/* finish-to-start */
+				/* predecessor must finish before successor can start */
+				dep_start = mrp_task_get_finish (predecessor) +
+					mrp_relation_get_lag (relation);
+				break;
+			}
+
 			start = MAX (start, dep_start);
 		}
 
@@ -1209,7 +1201,7 @@ task_manager_calculate_task_start (MrpTaskManager *manager,
 	}
 
 	/* Take constraint types in consideration. */
-	constraint = impr_task_get_constraint (task);
+	constraint = imrp_task_get_constraint (task);
 	switch (constraint.type) {
 	case MRP_CONSTRAINT_SNET:
 		/* Start-no-earlier-than. */
@@ -1843,6 +1835,149 @@ task_manager_calculate_task_finish (MrpTaskManager *manager,
 	return finish;
 }
 
+/* Calculate the start time from the work needed for the task, and the effort
+ * that the allocated resources add to the task. Uses the project calendar if no
+ * resources are allocated. This function also sets the work_start property of
+ * the task, which is the first time that actually has work scheduled, this can
+ * differ from the start if start is inside a non-work period.
+ */
+static mrptime
+task_manager_calculate_task_start_from_finish (MrpTaskManager *manager,
+				    MrpTask        *task,
+				    mrptime         finish,
+				    gint           *duration)
+{
+	MrpTaskManagerPriv *priv;
+	mrptime             start;
+	mrptime             t;
+	mrptime             t1, t2;
+	mrptime             work_start;
+	mrptime             project_start;
+	gint                work;
+	gint                effort;
+	gint                delta;
+	GList              *unit_ivals, *l;
+	MrpUnitsInterval   *unit_ival;
+	MrpTaskType         type;
+	MrpTaskSched        sched;
+	
+	priv = manager->priv;
+
+	if (task == priv->root) {
+		g_warning ("Tried to get duration of root task.");
+		return 0;
+	}
+
+	effort = 0;
+	start = finish;
+	work_start = -1;
+	t = mrp_time_align_day (start);
+	project_start = mrp_project_get_project_start (priv->project);
+
+
+	/* Milestone tasks can be special cased, no duration. */
+	type = mrp_task_get_task_type (task);
+	if (type == MRP_TASK_TYPE_MILESTONE) {
+		*duration = 0;
+		task_manager_calculate_milestone_work_start (manager, task, start);
+		return start;
+	}
+	
+	work = mrp_task_get_work (task);
+	sched = mrp_task_get_sched (task);
+
+	if (sched == MRP_TASK_SCHED_FIXED_WORK) {
+		*duration = 0;
+	} else {
+		*duration = mrp_task_get_duration (task);
+	}
+
+	while (1) {
+		unit_ivals = g_list_reverse (task_manager_get_task_units_intervals (manager, task, t));
+
+		/* If we don't get anywhere in 100 days, then the calendar must
+		 * be broken, so we abort the scheduling of this task. It's not
+		 * the best solution but fixes the issue for now.
+		 */
+		if (effort == 0 && finish - t > (60*60*24*100)) {
+			break;
+		}
+
+		if (!unit_ivals) {
+			t -= 60*60*24;
+			continue;
+		}
+		
+		for (l = unit_ivals; l; l = l->next) { 
+			unit_ival = l->data;
+
+			t1 = t + unit_ival->start;
+			t2 = t + unit_ival->end;
+			
+			/* Skip any intervals after the task ends. */
+			if (t1 > finish) {
+				continue;
+			}
+
+			/* Don't add time after the finish time of the task. */
+			t2 = MIN (t2, finish);
+
+			if (t1 == t2) {
+				continue;
+			}
+			
+			if (work_start == -1) {
+				work_start = t1;
+			}
+
+			/* Effort added by this interval. */
+			if (sched == MRP_TASK_SCHED_FIXED_WORK) {
+				delta = floor (0.5 + (double) unit_ival->units * (t2 - t1) / 100.0);
+
+				*duration += (t2 - t1);
+				
+				if (effort + delta >= work) {
+					start = t2 - floor (0.5 + (work - effort) / unit_ival->units * 100.0);
+
+					/* Subtract the spill. */
+					*duration -= floor (0.5 + (effort + delta - work) / unit_ival->units * 100.0);
+					goto done;
+				}
+			}
+			else if (sched == MRP_TASK_SCHED_FIXED_DURATION) {
+				delta = t2 - t1;
+				
+				if (effort + delta >= *duration) {
+					/* Done, make sure we don't spill. */
+					start = t2 - (*duration - effort);
+					goto done;
+				}
+			} else {
+				/* Schedule is either fixed work of fixed duration - we should never get here */
+				delta = 0;
+				g_assert_not_reached ();
+			}
+			
+			effort += delta;
+		}
+		
+		t -= 60*60*24;
+	}
+
+ done:
+
+	start = MAX (start, project_start);
+	if (work_start == -1) {
+		work_start = start;
+	}
+	imrp_task_set_work_start (task, work_start);
+
+	g_list_foreach (unit_ivals, (GFunc) g_free, NULL);
+	g_list_free (unit_ivals);
+
+	return start;
+}
+
 static void
 task_manager_do_forward_pass_helper (MrpTaskManager *manager,
 				     MrpTask        *task)
@@ -1911,7 +2046,7 @@ task_manager_do_forward_pass_helper (MrpTaskManager *manager,
 		imrp_task_set_duration (task, duration);
 	} else {
 		/* Non-summary task. */
-		t1 = task_manager_calculate_task_start (manager, task);
+		t1 = task_manager_calculate_task_start (manager, task, &duration);
 		t2 = task_manager_calculate_task_finish (manager, task, t1, &duration);
 		
 		imrp_task_set_start (task, t1);

@@ -1,13 +1,49 @@
+2006-04-19 Kurt Maute <Kurt@Maute.us>
+
+	* docs/libplanner/tmpl/mrp-relation.sgml
+	* libplanner/mrp-private.h
+	* libplanner/mrp-task-manager.c
+	* libplanner/mrp-task.c
+	* src/planner-task-dialog.c
+	Add support for FF and SF relationships
+
 2006-04-18  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* configure.in: Remove obsolete entry for no_NO
 	* po/no.po: And the translation.
+
+2006-04-11 Kurt Maute <Kurt@Maute.us>
+
+	* src/planner-usage-chart.c
+	Comment out 'View for Usage configured' message
 
 2006-04-11 Alvaro del Castillo  <acs@barrapunto.com>
 
 	* src/planner-usage-row.c
 	Disable right click edit dialogs. Enable edit dialogs with
 	double left click. 
+
+2006-04-11 Kurt Maute <Kurt@Maute.us>
+
+	*  libplanner/mrp-task.h
+	*  libplanner/mrp-task.c
+	*  src/planner-task-tree.c
+	*  configure.in
+	*  src/planner-gantt-chart.c
+	*  autogen.sh
+	*  data/ui/gantt-view.ui
+	*  libplanner/mrp-task-manager.c
+	*  src/planner-task-tree.h
+	*  src/planner-gantt-chart.h
+	*  libplanner/mrp-calendar.c
+	*  libplanner/mrp-calendar.h
+	*  src/planner-gantt-view.c
+	*  src/planner-task-view.c
+	*  src/planner-gantt-row.c
+	*  data/planner.schemas.in
+	Matteo Nastasi's patch to add:
+	* Gantt chart visualization of nonstandard working times
+	* Simple priority scheduling (previously known as vampire tasks)
 
 2006-04-07 Alvaro del Castillo  <acs@barrapunto.com>
 

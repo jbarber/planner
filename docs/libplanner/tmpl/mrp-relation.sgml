@@ -7,8 +7,7 @@ represents a task predecessor relation in the project.
 <!-- ##### SECTION Long_Description ##### -->
 <para>
 A predecessor relation is used to affect the scheduling of a task
-relative another task. The only type supported yet is "Finish to Start"
-(%MRP_RELATION_FS). A relation may have a lag time associated to it,
+relative another task.  A relation may have a lag time associated to it,
 so that a task can be scheduled to start after another task has
 finished, plus a lag time.
 </para>
@@ -38,7 +37,7 @@ Object representing a predecessor relation between two tasks.
 
 <!-- ##### ENUM MrpRelationType ##### -->
 <para>
-The type of relation. Only finish to start is implemented yet.
+The type of relation. 
 </para>
 
 @MRP_RELATION_NONE: invalid relation type (unset)

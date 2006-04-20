@@ -1051,9 +1051,13 @@ mrp_task_add_predecessor (MrpTask          *task,
 			  glong             lag,
 			  GError          **error)
 {
-	MrpRelation    *relation;
-	MrpProject     *project;
-	MrpTaskManager *manager;
+	MrpRelation		*relation;
+	MrpProject		*project;
+	MrpTaskManager		*manager;
+	GList			*relations;
+	gchar			*tmp;
+	MrpConstraint		 constraint;
+	mrptime			 pred_start;
 	
 	g_return_val_if_fail (MRP_IS_TASK (task), NULL);
 	g_return_val_if_fail (MRP_IS_TASK (predecessor), NULL);
@@ -1068,7 +1072,60 @@ mrp_task_add_predecessor (MrpTask          *task,
 		return NULL;
 	}
 	
+	relations = mrp_task_get_predecessor_relations (task);
+
+	/* check for attempt to add SF or FF relation when other relation types already present */
+	if ((type == MRP_RELATION_SF || type == MRP_RELATION_FF) && relations) {
+
+		if (type == MRP_RELATION_SF) {
+			tmp = _("Start to Finish relation type cannot be combined with other relations.");
+		} else {
+			tmp = _("Finish to Finish relation type cannot be combined with other relations.");
+		}
+
+		g_set_error (error,
+			     MRP_ERROR,
+			     MRP_ERROR_TASK_RELATION_FAILED,
+			     tmp);
+		
+		return NULL;
+	}
+
+	/* check for attempt to add SF or FF when a Start No Earlier Than constraint exists */
+	constraint = imrp_task_get_constraint (task);
+	if ((type == MRP_RELATION_SF || type == MRP_RELATION_FF) && 
+	    constraint.type == MRP_CONSTRAINT_SNET) {
+		if (type == MRP_RELATION_SF) {
+			tmp = _("Start to Finish relation type cannot be combined with Start No Earlier Than constraint.");
+		} else {
+			tmp = _("Finish to Finish relation type cannot be combined with Start No Earlier Than constraint.");
+		}
+
+		g_set_error (error,
+			     MRP_ERROR,
+			     MRP_ERROR_TASK_RELATION_FAILED,
+			     tmp);
+		
+		return NULL;
+	}
+
+	/* check for attempt to add SF when predecessor starts on project start date
+	   this would of course cause the task to be scheduled before project start */
+
 	project = mrp_object_get_project (MRP_OBJECT (task));
+	pred_start = mrp_time_align_day (mrp_task_get_work_start (predecessor));
+
+	if ((type == MRP_RELATION_SF) && 
+	    pred_start == mrp_project_get_project_start (project)) {
+
+		g_set_error (error,
+			     MRP_ERROR,
+			     MRP_ERROR_TASK_RELATION_FAILED,
+			     _("Start to Finish relation cannot be set. Predecessor starts on project start date."));
+		
+		return NULL;
+	}
+
 	manager = imrp_project_get_task_manager (project);
 	if (!mrp_task_manager_check_predecessor (manager, task, predecessor, error)) {
 		return NULL;
@@ -1875,7 +1932,7 @@ imrp_task_set_latest_finish (MrpTask *task,
 }
 
 MrpConstraint
-impr_task_get_constraint (MrpTask *task)
+imrp_task_get_constraint (MrpTask *task)
 {
 	MrpConstraint c = { 0 };
 	
@@ -1885,7 +1942,7 @@ impr_task_get_constraint (MrpTask *task)
 }
 
 void
-impr_task_set_constraint (MrpTask *task, MrpConstraint constraint)
+imrp_task_set_constraint (MrpTask *task, MrpConstraint constraint)
 {
 	g_return_if_fail (MRP_IS_TASK (task));
 
