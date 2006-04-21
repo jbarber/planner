@@ -3030,6 +3030,8 @@ planner_task_tree_indent_task (PlannerTaskTree *tree)
 			planner_window_get_cmd_manager (priv->main_window),
 			_("Indent tasks"));
 	}
+
+	task_tree_block_selection_changed (tree);
 		
 	for (l = indent_tasks; l; l = l->next) {
 		TaskCmdMove *cmd;
@@ -3057,7 +3059,6 @@ planner_task_tree_indent_task (PlannerTaskTree *tree)
 	path = planner_gantt_model_get_path_from_task (PLANNER_GANTT_MODEL (model), 
 						       indent_tasks->data);
 
-	task_tree_block_selection_changed (tree);
 	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (tree));
 	gtk_tree_selection_select_path (selection, path);
 	task_tree_unblock_selection_changed (tree);
