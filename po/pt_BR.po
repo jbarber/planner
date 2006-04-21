@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: planner.HEAD.pt_BR\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-12 04:16+0200\n"
-"PO-Revision-Date: 2006-04-11 23:31-0300\n"
+"POT-Creation-Date: 2006-04-21 12:19+0200\n"
+"PO-Revision-Date: 2006-04-21 09:03-0300\n"
 "Last-Translator: Afonso Celso Medina <medina@maua.br>\n"
 "Language-Team: Portuguese/Brazil <gnome-l10n-br@listas.cipsga.org.br>\n"
 "MIME-Version: 1.0\n"
@@ -543,8 +543,8 @@ msgstr "Se a impressão da vista de Tarefas está habilitada."
 
 #: ../data/planner.schemas.in.h:11
 msgid "Whether to display nonstandard days in the Gantt view."
-msgstr "Se devem ser mostrados os dias não padronizados na visão do Gráfico de "
-"Gantt."
+msgstr ""
+"Se devem ser mostrados os dias não padronizados na visão do Gráfico de Gantt."
 
 #: ../data/planner.schemas.in.h:12
 msgid ""
@@ -724,19 +724,50 @@ msgstr "URI SQL inválida (id de projeto inválido)."
 msgid "Invalid SQL URI (no database name specified)."
 msgstr "URI SQL inválida (nenhum nome de banco de dados especificado)."
 
-#: ../libplanner/mrp-task.c:1066
+#: ../libplanner/mrp-task.c:1070
 msgid ""
 "Could not add a predecessor relation, because the tasks are already related."
 msgstr ""
 "Impossível adicionar uma relação de precedência, porque as tarefas já estão "
 "relacionadas."
 
-#: ../libplanner/mrp-task-manager.c:2383
+#: ../libplanner/mrp-task.c:1081
+msgid "Start to Finish relation type cannot be combined with other relations."
+msgstr "A relação do tipo Início para Final não pode ser combinada com outras relações."
+
+#: ../libplanner/mrp-task.c:1083
+msgid "Finish to Finish relation type cannot be combined with other relations."
+msgstr "A relação Final para Final não pode ser combinada com outras relações."
+
+#: ../libplanner/mrp-task.c:1099
+msgid ""
+"Start to Finish relation type cannot be combined with Start No Earlier Than "
+"constraint."
+msgstr ""
+"A relação do tipo Início para Final não pode ser combinada com a restrição "
+"Não Iniciar Antes De."
+
+#: ../libplanner/mrp-task.c:1101
+msgid ""
+"Finish to Finish relation type cannot be combined with Start No Earlier Than "
+"constraint."
+msgstr ""
+"A relação do tipo Final para Final não pode ser combinada com a restrição Não Iniciar Antes De."
+
+#: ../libplanner/mrp-task.c:1124
+msgid ""
+"Start to Finish relation cannot be set. Predecessor starts on project start "
+"date."
+msgstr ""
+"A relação Início para Final não pode ser definida. O predecessor começa na "
+"data de início do projeto."
+
+#: ../libplanner/mrp-task-manager.c:2518
 msgid "Cannot add a predecessor, because it would result in a loop."
 msgstr ""
 "Impossível adicionar um predecessor, pois resultaria em um laço fechado."
 
-#: ../libplanner/mrp-task-manager.c:2429
+#: ../libplanner/mrp-task-manager.c:2564
 msgid "Cannot move the task, because it would result in a loop."
 msgstr "Impossível mover a tarefa, pois resultaria em um laço fechado."
 
@@ -792,7 +823,7 @@ msgstr "Remove o calendário"
 msgid "Add new calendar"
 msgstr "Adiciona um novo calendário"
 
-#: ../src/planner-cell-renderer-date.c:161 ../src/planner-task-dialog.c:1490
+#: ../src/planner-cell-renderer-date.c:161 ../src/planner-task-dialog.c:1491
 msgid "As soon as possible"
 msgstr "Assim que possível"
 
@@ -884,7 +915,7 @@ msgstr "Importa os recursos a partir do Servidor de Dados do Evolution"
 #: ../src/planner-eds-plugin.c:396 ../src/planner-gantt-print.c:190
 #: ../src/planner-gantt-view.c:524 ../src/planner-group-dialog.c:822
 #: ../src/planner-property-dialog.c:485 ../src/planner-resource-view.c:1171
-#: ../src/planner-task-dialog.c:2536 ../src/planner-task-dialog.c:2610
+#: ../src/planner-task-dialog.c:2616 ../src/planner-task-dialog.c:2690
 #: ../src/planner-task-view.c:336
 msgid "Name"
 msgstr "Nome"
@@ -1060,7 +1091,7 @@ msgstr "Tornar a tarefa '%s' uma predecessora de '%s'"
 msgid "Change work to %s"
 msgstr "Alterar trabalho para %s"
 
-#: ../src/planner-gantt-row.c:3225 ../src/planner-task-dialog.c:454
+#: ../src/planner-gantt-row.c:3225 ../src/planner-task-dialog.c:455
 #: ../src/planner-task-tree.c:257 ../src/planner-task-tree.c:947
 msgid "Edit task property"
 msgstr "Editar as propriedades da tarefa"
@@ -1341,20 +1372,19 @@ msgstr "Remove a fase"
 msgid "Could not open plugin file '%s'\n"
 msgstr "Impossível abrir arquivo de plugin '%s'\n"
 
-#: ../src/planner-predecessor-model.c:191 ../src/planner-task-dialog.c:2176
+#: ../src/planner-predecessor-model.c:191 ../src/planner-task-dialog.c:2217
 msgid "FS"
 msgstr "FI"
 
-#: ../src/planner-predecessor-model.c:194
+#: ../src/planner-predecessor-model.c:194 ../src/planner-task-dialog.c:2218
 msgid "FF"
 msgstr "FF"
 
-#. list = g_list_append (list, g_strdup (_("FF")));
-#: ../src/planner-predecessor-model.c:197 ../src/planner-task-dialog.c:2178
+#: ../src/planner-predecessor-model.c:197 ../src/planner-task-dialog.c:2219
 msgid "SS"
 msgstr "II"
 
-#: ../src/planner-predecessor-model.c:200
+#: ../src/planner-predecessor-model.c:200 ../src/planner-task-dialog.c:2220
 msgid "SF"
 msgstr "IF"
 
@@ -1443,7 +1473,7 @@ msgid "Label"
 msgstr "Rótulo"
 
 #: ../src/planner-property-dialog.c:514 ../src/planner-resource-view.c:1224
-#: ../src/planner-task-dialog.c:2642
+#: ../src/planner-task-dialog.c:2722
 msgid "Type"
 msgstr "Tipo"
 
@@ -1471,7 +1501,7 @@ msgid "(None)"
 msgstr "(Nenhum)"
 
 #: ../src/planner-resource-dialog.c:322
-#: ../src/planner-resource-input-dialog.c:110 ../src/planner-task-dialog.c:380
+#: ../src/planner-resource-input-dialog.c:110 ../src/planner-task-dialog.c:381
 msgid "(No name)"
 msgstr "(Sem nome)"
 
@@ -1494,7 +1524,7 @@ msgstr "Editar propriedades do recurso"
 
 #. i18n: time stamp format for notes in task dialog, see strftime(3) for
 #. * a detailed description.
-#: ../src/planner-resource-dialog.c:1404 ../src/planner-task-dialog.c:1807
+#: ../src/planner-resource-dialog.c:1404 ../src/planner-task-dialog.c:1808
 msgid "%a %d %b %Y, %H:%M\n"
 msgstr "%a %d %b %Y, %H:%M\n"
 
@@ -1732,83 +1762,90 @@ msgstr "Desvincular tarefa"
 msgid "Insert task"
 msgstr "Inserir tarefa"
 
-#: ../src/planner-task-dialog.c:528
+#: ../src/planner-task-dialog.c:529
 msgid "Edit task type"
 msgstr "Edita ao tipo de tarefa"
 
-#: ../src/planner-task-dialog.c:595
+#: ../src/planner-task-dialog.c:596
 msgid "Toggle fixed duration"
 msgstr "Alterar a duração fixa"
 
-#: ../src/planner-task-dialog.c:662
+#: ../src/planner-task-dialog.c:663
 msgid "Edit task scheduling"
 msgstr "Edita a programação da tarefa"
 
-#: ../src/planner-task-dialog.c:742
+#: ../src/planner-task-dialog.c:743
 msgid "Assign resource to task"
 msgstr "Atribui um recurso para uma tarefa"
 
-#: ../src/planner-task-dialog.c:802
+#: ../src/planner-task-dialog.c:803
 msgid "Unassign resource from task"
 msgstr "Remove um recurso de uma tarefa"
 
-#: ../src/planner-task-dialog.c:861
+#: ../src/planner-task-dialog.c:862
 msgid "Change resource units in task"
 msgstr "Muda as unidades do recurso de uma tarefa"
 
-#: ../src/planner-task-dialog.c:949
+#: ../src/planner-task-dialog.c:950
 msgid "Edit task predecessor"
 msgstr "Edita o predecessor da tarefa"
 
-#: ../src/planner-task-dialog.c:1020
+#: ../src/planner-task-dialog.c:1021
 msgid "Edit lag predecessor"
 msgstr "Edita a folga do predecessor"
 
-#: ../src/planner-task-dialog.c:1086
+#: ../src/planner-task-dialog.c:1087
 msgid "Edit task note"
 msgstr "Editar as anotações da tarefa"
 
-#: ../src/planner-task-dialog.c:1494
+#: ../src/planner-task-dialog.c:1495
 #, c-format
 msgid "No earlier than %s"
 msgstr "Não antes de %s"
 
-#: ../src/planner-task-dialog.c:1498
+#: ../src/planner-task-dialog.c:1499
 #, c-format
 msgid "On fixed date %s"
 msgstr "Na data fixada %s"
 
-#: ../src/planner-task-dialog.c:1880
+#: ../src/planner-task-dialog.c:1917
 msgid "Finish to start (FS)"
 msgstr "Final para início (FI)"
 
-#. _("Finish to finish (FF)"), MRP_RELATION_FF,
-#: ../src/planner-task-dialog.c:1882
+#: ../src/planner-task-dialog.c:1918
+msgid "Finish to finish (FF)"
+msgstr "Final para final (FF)"
+
+#: ../src/planner-task-dialog.c:1919
 msgid "Start to start (SS)"
 msgstr "Início para início (II)"
 
-#: ../src/planner-task-dialog.c:1938
+#: ../src/planner-task-dialog.c:1920
+msgid "Start to finish (SF)"
+msgstr "Início para final (IF)"
+
+#: ../src/planner-task-dialog.c:1975
 msgid "Can't add new predecessor. No task selected!"
 msgstr ""
 "Impossível adicionar um novo predecessor. Nenhuma tarefa foi selecionada!"
 
-#: ../src/planner-task-dialog.c:2383
+#: ../src/planner-task-dialog.c:2463
 msgid "Change..."
 msgstr "Mudar..."
 
-#: ../src/planner-task-dialog.c:2557
+#: ../src/planner-task-dialog.c:2637
 msgid "Assigned"
 msgstr "Atribuído"
 
-#: ../src/planner-task-dialog.c:2574
+#: ../src/planner-task-dialog.c:2654
 msgid "Units"
 msgstr "Unidades"
 
-#: ../src/planner-task-dialog.c:2664
+#: ../src/planner-task-dialog.c:2744
 msgid "Lag"
 msgstr "Atraso"
 
-#: ../src/planner-task-dialog.c:2807 ../src/planner-task-dialog.c:2809
+#: ../src/planner-task-dialog.c:2887 ../src/planner-task-dialog.c:2889
 msgid "Edit task properties"
 msgstr "Editar as propriedades da tarefa"
 
