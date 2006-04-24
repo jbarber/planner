@@ -913,7 +913,7 @@ gantt_chart_reflow_do (PlannerGanttChart *chart, TreeNode *root, gdouble start_y
 	gint      row_height;
 
 	if (root->children == NULL) {
-		return start_y;
+		return 0;
 	}
 	
 	node = root->children[0];
