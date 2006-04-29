@@ -49,6 +49,7 @@ struct _PlannerGanttViewPriv {
 	GtkUIManager          *ui_manager;
 	GtkActionGroup        *actions;
 	guint                  merged_id;
+	gulong                 expose_id;
 };
 
 static GtkWidget *   gantt_view_create_widget             (PlannerGanttView  *view);
@@ -88,6 +89,9 @@ static void          gantt_view_nonstandard_days_cb       (GtkAction         *ac
 							   gpointer           data);
 static void          gantt_view_edit_columns_cb           (GtkAction         *action,
 							   gpointer           data);
+static gboolean      gantt_view_expose_cb                 (GtkWidget         *widget,
+							   GdkEventExpose    *event,
+							   gpointer           user_data);
 static void          gantt_view_update_row_height         (PlannerGanttView  *view);
 static void          gantt_view_tree_style_set_cb         (GtkWidget         *tree,
 							   GtkStyle          *prev_style,
@@ -416,6 +420,19 @@ gantt_view_row_collapsed (GtkTreeView *tree_view,
 }
 
 static void
+gantt_view_task_inserted_cb (MrpProject   *project,
+			     MrpTask      *task,
+			     PlannerGanttView *view)
+{
+	if(view->priv->expose_id == 0) {
+		view->priv->expose_id = g_signal_connect_after (view->priv->tree,
+								"expose_event",
+								G_CALLBACK (gantt_view_expose_cb),
+								view);
+	}
+}
+
+static void
 gantt_view_project_loaded_cb (MrpProject  *project,
 			      PlannerGanttView *view)
 {
@@ -428,7 +445,12 @@ gantt_view_project_loaded_cb (MrpProject  *project,
 	
 	planner_gantt_chart_set_model (PLANNER_GANTT_CHART (view->priv->gantt),
 				       model);
-	
+
+	view->priv->expose_id = g_signal_connect_after (view->priv->tree,
+							"expose_event",
+							G_CALLBACK (gantt_view_expose_cb),
+							view);
+
 	g_object_unref (model);
 }
 
@@ -508,6 +530,10 @@ gantt_view_create_widget (PlannerGanttView *view)
 	g_signal_connect (project,
 			  "loaded",
 			  G_CALLBACK (gantt_view_project_loaded_cb),
+			  view);
+
+	g_signal_connect (project, "task_inserted",
+			  G_CALLBACK (gantt_view_task_inserted_cb),
 			  view);
 
 	model = GTK_TREE_MODEL (planner_gantt_model_new (project));
@@ -892,11 +918,15 @@ gantt_view_update_row_height (PlannerGanttView *view)
 	GList             *cols, *l;
 	GtkTreeViewColumn *col;
 	GtkRequisition     req;
+	GtkTreePath       *path;
+	GdkRectangle       rect;
 
 	/* Get the row and header heights. */
 	cols = gtk_tree_view_get_columns (tv);
 	row_height = 0;
 	header_height = 0;
+
+	path = gtk_tree_path_new_first ();
 
 	for (l = cols; l; l = l->next) {
 		col = l->data;
@@ -911,13 +941,37 @@ gantt_view_update_row_height (PlannerGanttView *view)
 						    NULL,
 						    &height);
 		row_height = MAX (row_height, height);
+		
+		gtk_tree_view_get_background_area (tv,
+						   path,
+						   col,
+						   &rect);
+
+		row_height = MAX (row_height, rect.height);
 	}
+	if (path)
+		gtk_tree_path_free (path);
 
 	/* Sync with the gantt widget. */
 	g_object_set (gantt,
 		      "header_height", header_height,
 		      "row_height", row_height,
 		      NULL);
+}
+
+static gboolean
+gantt_view_expose_cb (GtkWidget      *widget,
+		      GdkEventExpose *event,
+		      gpointer        data)
+{
+	PlannerGanttView     *view = PLANNER_GANTT_VIEW (data);
+
+	gantt_view_update_row_height (view);
+
+	g_signal_handler_disconnect (view->priv->tree,
+				     view->priv->expose_id);
+	
+	return FALSE;
 }
 
 static gboolean

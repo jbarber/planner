@@ -44,6 +44,7 @@ struct _PlannerUsageViewPriv {
 	GtkUIManager           *ui_manager;
 	GtkActionGroup         *actions;
 	guint                   merged_id;
+	gulong                  expose_id;
 };
 
 static void         usage_view_zoom_out_cb             (GtkAction         *action,
@@ -55,8 +56,14 @@ static void         usage_view_zoom_to_fit_cb          (GtkAction         *actio
 static void         usage_view_edit_columns_cb         (GtkAction         *action,
 							gpointer           data);
 static GtkWidget *  usage_view_create_widget           (PlannerView       *view);
+static void         usage_view_resource_added_cb       (MrpProject        *project,
+							MrpResource       *resource,
+							PlannerView       *view);
 static void         usage_view_project_loaded_cb       (MrpProject        *project,
 							PlannerView       *view);
+static gboolean     usage_view_expose_cb               (GtkWidget         *widget,
+							GdkEventExpose    *event,
+							gpointer           user_data);
 static void         usage_view_tree_style_set_cb       (GtkWidget         *tree,
 							GtkStyle          *prev_style,
 							PlannerView       *view);
@@ -387,6 +394,11 @@ usage_view_create_widget (PlannerView *view)
                           G_CALLBACK (usage_view_project_loaded_cb),
 			  view);
 
+	g_signal_connect (project,
+			  "resource_added",
+			  G_CALLBACK (usage_view_resource_added_cb),
+			  view);
+
         model = planner_usage_model_new (project);
         tree = planner_usage_tree_new (view->main_window, model);
         priv->tree = tree;
@@ -493,6 +505,8 @@ usage_view_update_row_and_header_height (PlannerView *view)
 	GList              *cols, *l;
 	GtkTreeViewColumn  *col;
 	GtkRequisition      req;
+	GtkTreePath       *path;
+	GdkRectangle       rect;
 
 	tv = GTK_TREE_VIEW (PLANNER_USAGE_VIEW (view)->priv->tree);
 	chart = PLANNER_USAGE_VIEW (view)->priv->chart;
@@ -501,6 +515,8 @@ usage_view_update_row_and_header_height (PlannerView *view)
 	cols = gtk_tree_view_get_columns (tv);
 	row_height = 0;
 	header_height = 0;
+
+	path = gtk_tree_path_new_first ();
 
 	for (l = cols; l; l = l->next) {
 		col = l->data;
@@ -515,13 +531,38 @@ usage_view_update_row_and_header_height (PlannerView *view)
 						    NULL,
 						    &height);
 		row_height = MAX (row_height, height);
+
+		gtk_tree_view_get_background_area (tv,
+						   path,
+						   col,
+						   &rect);
+
+		row_height = MAX (row_height, rect.height);
 	}
+
+	if (path)
+		gtk_tree_path_free (path);
 
 	/* Sync with the chart widget. */
 	g_object_set (chart,
 		      "header_height", header_height,
 		      "row_height", row_height,
 		      NULL);
+}
+
+static gboolean
+usage_view_expose_cb (GtkWidget      *widget,
+		      GdkEventExpose *event,
+		      gpointer        data)
+{
+	PlannerUsageView     *view = PLANNER_USAGE_VIEW (data);
+
+	usage_view_update_row_and_header_height (PLANNER_VIEW(view));
+
+	g_signal_handler_disconnect (view->priv->tree,
+				     view->priv->expose_id);
+	
+	return FALSE;
 }
 
 static gboolean
@@ -544,13 +585,30 @@ usage_view_tree_style_set_cb (GtkWidget   *tree,
 }
 
 static void
+usage_view_resource_added_cb (MrpProject  *project,
+			      MrpResource *resource,
+			      PlannerView *view)
+{
+	PlannerUsageViewPriv *priv;
+
+	priv = PLANNER_USAGE_VIEW (view)->priv;
+
+	if (priv->expose_id == 0) {
+		priv->expose_id = g_signal_connect_after (priv->tree,
+							  "expose_event",
+							  G_CALLBACK (usage_view_expose_cb),
+							  view);
+	}
+}
+
+static void
 usage_view_project_loaded_cb (MrpProject *project, PlannerView *view)
 {
 	PlannerUsageViewPriv *priv;
         GtkTreeModel         *model;
 
 	priv = PLANNER_USAGE_VIEW (view)->priv;
-	
+
 	/* FIXME: This is not working so well. Look at how the gantt view
 	 * handles this. (The crux is that the root task for example might
 	 * change when a project is loaded, so we need to rconnect signals
@@ -570,6 +628,11 @@ usage_view_project_loaded_cb (MrpProject *project, PlannerView *view)
 	planner_usage_tree_set_model (PLANNER_USAGE_TREE (priv->tree),
 				      PLANNER_USAGE_MODEL (model));
         planner_usage_chart_set_model (PLANNER_USAGE_CHART (priv->chart), model);
+
+	priv->expose_id = g_signal_connect_after (priv->tree,
+						  "expose_event",
+						  G_CALLBACK (usage_view_expose_cb),
+						  view);
 	
 	g_object_unref (model);
 
