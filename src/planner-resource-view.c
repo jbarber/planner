@@ -873,7 +873,7 @@ resource_view_insert_resources_cb (GtkAction *action,
 	gtk_widget_show (priv->resource_input_dialog);
 
 	g_object_add_weak_pointer (G_OBJECT (priv->resource_input_dialog),
-				   (gpointer *) &priv->resource_input_dialog);
+				   (gpointer) &priv->resource_input_dialog);
 }
 
 static gboolean

@@ -1204,7 +1204,7 @@ window_project_props_cb (GtkAction *action,
 		priv->properties_dialog = planner_project_properties_new (window);
 
 		g_object_add_weak_pointer (G_OBJECT (priv->properties_dialog),
-					   (gpointer *) &priv->properties_dialog);
+					   (gpointer) &priv->properties_dialog);
 
 		gtk_widget_show (priv->properties_dialog);
 	}
@@ -1248,7 +1248,7 @@ window_edit_phases_cb (GtkAction *action,
 		priv->phase_dialog = planner_phase_dialog_new (window);
 		
 		g_object_add_weak_pointer (G_OBJECT (priv->phase_dialog),
-					   (gpointer *) &priv->phase_dialog);
+					   (gpointer) &priv->phase_dialog);
 		
 		gtk_widget_show (priv->phase_dialog);
 	}
@@ -2045,7 +2045,7 @@ planner_window_show_day_type_dialog (PlannerWindow *window)
 		priv->day_type_dialog = planner_day_type_dialog_new (window);
 
 		g_object_add_weak_pointer (G_OBJECT (priv->day_type_dialog),
-					   (gpointer *) &priv->day_type_dialog);
+					   (gpointer) &priv->day_type_dialog);
 
 		gtk_widget_show (priv->day_type_dialog);
 	}
@@ -2066,7 +2066,7 @@ planner_window_show_calendar_dialog (PlannerWindow *window)
 		priv->calendar_dialog = planner_calendar_dialog_new (window);
 		
 		g_object_add_weak_pointer (G_OBJECT (priv->calendar_dialog),
-					   (gpointer *) &priv->calendar_dialog);
+					   (gpointer) &priv->calendar_dialog);
 		
 		gtk_widget_show (priv->calendar_dialog);
 	}

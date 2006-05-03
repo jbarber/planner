@@ -396,7 +396,7 @@ mcrp_start_editing (GtkCellRenderer      *cell,
 	popup->editable = editable;
 
 	g_object_add_weak_pointer (G_OBJECT (popup->editable),
-				   (gpointer *) &popup->editable);
+				   (gpointer) &popup->editable);
 	
 	return GTK_CELL_EDITABLE (editable);
 }

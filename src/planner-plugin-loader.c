@@ -44,8 +44,8 @@ mpl_load (const gchar *file)
 		return NULL;
 	}
 	
-	g_module_symbol (plugin->handle, "plugin_init", (gpointer*)&plugin->init);
-	g_module_symbol (plugin->handle, "plugin_exit", (gpointer*)&plugin->exit);
+	g_module_symbol (plugin->handle, "plugin_init", (gpointer)&plugin->init);
+	g_module_symbol (plugin->handle, "plugin_exit", (gpointer)&plugin->exit);
 
 	return plugin;
 }

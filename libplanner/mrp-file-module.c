@@ -43,7 +43,7 @@ file_module_load (const gchar *file)
 		return NULL;
 	}
 	
-	g_module_symbol (module->handle, "init", (gpointer*)&module->init);
+	g_module_symbol (module->handle, "init", (gpointer)&module->init);
 
 	return module;
 }

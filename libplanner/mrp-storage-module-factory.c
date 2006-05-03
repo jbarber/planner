@@ -95,9 +95,9 @@ storage_module_factory_load (GTypeModule *module)
 	}
   
 	/* These must be implemented by all storage modules. */
-	if (!g_module_symbol (factory->library, "module_init", (gpointer *)&factory->init) ||
-	    !g_module_symbol (factory->library, "module_new", (gpointer *)&factory->new) ||
-	    !g_module_symbol (factory->library, "module_exit", (gpointer *)&factory->exit)) {
+	if (!g_module_symbol (factory->library, "module_init", (gpointer)&factory->init) ||
+	    !g_module_symbol (factory->library, "module_new", (gpointer)&factory->new) ||
+	    !g_module_symbol (factory->library, "module_exit", (gpointer)&factory->exit)) {
 		g_warning (g_module_error ());
 		g_module_close (factory->library);
 		
