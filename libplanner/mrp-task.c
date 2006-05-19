@@ -1591,7 +1591,7 @@ mrp_task_is_dominant (MrpTask *task)
 
 	g_return_val_if_fail (MRP_IS_TASK (task), 0);
 	
-	constraint = impr_task_get_constraint (task);
+	constraint = imrp_task_get_constraint (task);
 	if (constraint.type  != MRP_CONSTRAINT_MSO) {
 		return (FALSE);
 	}
