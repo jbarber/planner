@@ -413,6 +413,9 @@ gantt_chart_set_property (GObject      *object,
 		break;
 	case PROP_ROW_HEIGHT:
 		chart->priv->row_height = g_value_get_int (value);
+		g_object_set (G_OBJECT(chart->priv->background),
+			      "row_height",chart->priv->row_height,
+			      NULL);
 		gantt_chart_reflow (chart, TRUE);
 		break;
 	default:
@@ -1914,6 +1917,24 @@ planner_gantt_chart_set_highlight_critical_tasks (PlannerGanttChart *chart,
 	gtk_widget_queue_draw (GTK_WIDGET (priv->canvas));
 
 	planner_conf_set_bool (CRITICAL_PATH_KEY, state, NULL);
+}
+
+void
+planner_gantt_chart_set_show_hint (PlannerGanttChart *chart,
+				    gboolean           state)
+{
+	PlannerGanttChartPriv *priv;
+
+	g_return_if_fail (PLANNER_IS_GANTT_CHART (chart));
+
+	priv = chart->priv;
+
+	g_object_set (G_OBJECT(chart->priv->background),
+		      "show_hint",
+		      state,
+		      NULL);
+
+	gtk_widget_queue_draw (GTK_WIDGET (priv->canvas));
 }
 
 gboolean

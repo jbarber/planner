@@ -85,6 +85,8 @@ static void          gantt_view_zoom_out_cb               (GtkAction         *ac
 							   gpointer           data);
 static void          gantt_view_highlight_critical_cb     (GtkAction         *action,
 							   gpointer           data);
+static void          gantt_view_show_hint_cb		  (GtkAction         *action,
+							   gpointer           data);
 static void          gantt_view_nonstandard_days_cb       (GtkAction         *action,
 							   gpointer           data);
 static void          gantt_view_edit_columns_cb           (GtkAction         *action,
@@ -182,6 +184,9 @@ static const GtkToggleActionEntry toggle_entries[] = {
 	{ "HighlightCriticalTasks", NULL, N_("_Highlight Critical Tasks"),
 	  NULL, NULL,
 	  G_CALLBACK (gantt_view_highlight_critical_cb), FALSE },
+	{ "ShowHintLines", NULL, N_("_Show hint lines"),
+	  NULL, NULL, 
+	  G_CALLBACK (gantt_view_show_hint_cb), FALSE },
 	{ "NonstandardDays", NULL, N_("_Nonstandard Days"),
 	  NULL, NULL,
 	  G_CALLBACK (gantt_view_nonstandard_days_cb), FALSE }
@@ -1098,6 +1103,24 @@ gantt_view_update_ui (PlannerGanttView *view)
 		      NULL);
 
 	g_list_free (list);
+}
+
+static void
+gantt_view_show_hint_cb (GtkAction *action,
+				  gpointer   data)
+{
+	PlannerGanttView     *view;
+	PlannerGanttViewPriv *priv;
+	gboolean              state;
+	
+	view = PLANNER_GANTT_VIEW (data);
+	priv = view->priv;
+
+	state = gtk_toggle_action_get_active (GTK_TOGGLE_ACTION(action));
+
+	planner_gantt_chart_set_show_hint (
+		PLANNER_GANTT_CHART (priv->gantt),
+ 		state);
 }
 
 static void

@@ -1,4 +1,15 @@
 2006-05-19 Kurt Maute <Kurt@Maute.us>
+	* data/ui/gantt-view.ui
+	* src/planner-gantt-background.c
+	* src/planner-gantt-chart.c
+	* src/planner-gantt-chart.h
+	* src/planner-gantt-view.c
+
+	Hint lines patch courtesy of Nguyễn Thái Ngọc Duy
+	Shows horizontal lines on Gantt to help line up task tree with chart
+	Closes Bug # 303374
+
+2006-05-19 Kurt Maute <Kurt@Maute.us>
 	* libplanner/mrp-task.c
 	Fix typo impr_task_get_constraint when compiling with simple priority scheduling
 

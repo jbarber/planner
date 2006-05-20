@@ -37,7 +37,9 @@ enum {
 	PROP_PROJECT,
 	PROP_PROJECT_START,
 	PROP_SCALE,
-	PROP_ZOOM
+	PROP_ZOOM,
+	PROP_ROW_HEIGHT,
+	PROP_SHOW_HINT
 };
 
 struct _PlannerGanttBackgroundPriv {
@@ -45,6 +47,7 @@ struct _PlannerGanttBackgroundPriv {
 	GdkGC       *fill_gc;
 	GdkGC       *timeline_gc;
 	GdkGC       *start_gc;
+	GdkGC       *hint_gc;
 
 	PangoLayout *layout;
 
@@ -57,6 +60,8 @@ struct _PlannerGanttBackgroundPriv {
 	
 	gdouble      hscale;
 	gdouble      zoom;
+	gint	     row_height;
+	gboolean     show_hint;
 };
 
 
@@ -183,6 +188,23 @@ gantt_background_class_init (PlannerGanttBackgroundClass *class)
 				     -G_MAXDOUBLE, G_MAXDOUBLE,
 				     7,
 				     G_PARAM_WRITABLE));
+	g_object_class_install_property (
+		gobject_class,
+		PROP_ROW_HEIGHT,
+		g_param_spec_int ("row-height",
+				  NULL,
+				  NULL,
+				  0, G_MAXINT, 0,
+				  G_PARAM_WRITABLE));
+
+	g_object_class_install_property (
+		gobject_class,
+		PROP_SHOW_HINT,
+		g_param_spec_boolean ("show-hint",
+				      NULL,
+				      NULL,
+				      FALSE,
+				      G_PARAM_WRITABLE));
 }
 
 static void
@@ -196,6 +218,8 @@ gantt_background_init (PlannerGanttBackground *background)
 	priv->hscale = 1.0;
 	priv->project_start = MRP_TIME_INVALID;
 	priv->timeline = mrp_time_current_time ();
+	priv->row_height = 0;
+	priv->show_hint = FALSE;
 }
 
 static void
@@ -303,6 +327,14 @@ gantt_background_set_property (GObject      *object,
 		priv->zoom = g_value_get_double (value);
 		break;
 
+	case PROP_ROW_HEIGHT:
+		priv->row_height = g_value_get_int (value);
+		break;
+
+	case PROP_SHOW_HINT:
+		priv->show_hint = g_value_get_boolean (value);
+		break;
+
 	default:
 		G_OBJECT_WARN_INVALID_PROPERTY_ID (object, param_id, pspec);
 		break;
@@ -375,6 +407,15 @@ gantt_background_realize (GnomeCanvasItem *item)
 				    GDK_CAP_BUTT,
 				    GDK_JOIN_MITER);
 
+	gnome_canvas_get_color (item->canvas, "grey80", &color);
+	priv->hint_gc = gdk_gc_new (item->canvas->layout.bin_window);
+	gdk_gc_set_foreground (priv->hint_gc, &color);
+	gdk_gc_set_line_attributes (priv->hint_gc,
+				    0,
+				    GDK_LINE_SOLID,
+				    GDK_CAP_BUTT,
+				    GDK_JOIN_MITER);
+
 	priv->layout = gtk_widget_create_pango_layout (GTK_WIDGET (item->canvas),
 						       NULL);
 
@@ -403,6 +444,9 @@ gantt_background_unrealize (GnomeCanvasItem *item)
 
 	gdk_gc_unref (background->priv->start_gc);
 	background->priv->start_gc = NULL;
+
+	gdk_gc_unref (background->priv->hint_gc);
+	background->priv->hint_gc = NULL;
 
 	GNOME_CANVAS_ITEM_CLASS (parent_class)->unrealize (item);
 }
@@ -445,6 +489,8 @@ gantt_background_draw (GnomeCanvasItem *item,
 	GList                 *ivals, *l;
 	MrpInterval           *ival;
 	gint                   level;
+	gdouble                i2w_dx,i2w_dy;
+	gint                   xx,yy;
 
 	background = PLANNER_GANTT_BACKGROUND (item);
 	priv = background->priv;
@@ -609,6 +655,23 @@ gantt_background_draw (GnomeCanvasItem *item,
 			       cy1 - snap - DASH_LENGTH - y,
 			       cx1 - x,
 			       cy2 + DASH_LENGTH - y);
+	}
+	if (priv->show_hint) {
+		i2w_dx = 0.0;
+		i2w_dy = 0.0;
+		gnome_canvas_item_i2w (item, &i2w_dx, &i2w_dy);
+		gnome_canvas_w2c (item->canvas,
+				  0 + i2w_dx,
+			  0 + i2w_dy,
+				  &xx,
+				  &yy);
+		while (yy < height+y)
+		{
+			if (yy >= y)
+				gdk_draw_line (drawable,priv->hint_gc,0,yy-y,width,yy-y);
+			yy += priv->row_height;
+		}
+
 	}
 }
 

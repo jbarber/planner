@@ -91,6 +91,10 @@ gboolean
 planner_gantt_chart_get_highlight_critical_tasks      (PlannerGanttChart  *chart);
 
 void
+planner_gantt_chart_set_show_hint			(PlannerGanttChart  *chart,
+							 gboolean       state);
+
+void
 planner_gantt_chart_set_nonstandard_days             (PlannerGanttChart *chart,
 							   gboolean           state);
 gboolean
