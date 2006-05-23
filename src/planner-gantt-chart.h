@@ -91,7 +91,7 @@ gboolean
 planner_gantt_chart_get_highlight_critical_tasks      (PlannerGanttChart  *chart);
 
 void
-planner_gantt_chart_set_show_hint			(PlannerGanttChart  *chart,
+planner_gantt_chart_set_show_guidelines			(PlannerGanttChart  *chart,
 							 gboolean       state);
 
 void

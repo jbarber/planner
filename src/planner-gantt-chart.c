@@ -1920,7 +1920,7 @@ planner_gantt_chart_set_highlight_critical_tasks (PlannerGanttChart *chart,
 }
 
 void
-planner_gantt_chart_set_show_hint (PlannerGanttChart *chart,
+planner_gantt_chart_set_show_guidelines (PlannerGanttChart *chart,
 				    gboolean           state)
 {
 	PlannerGanttChartPriv *priv;
@@ -1930,7 +1930,7 @@ planner_gantt_chart_set_show_hint (PlannerGanttChart *chart,
 	priv = chart->priv;
 
 	g_object_set (G_OBJECT(chart->priv->background),
-		      "show_hint",
+		      "show_guidelines",
 		      state,
 		      NULL);
 

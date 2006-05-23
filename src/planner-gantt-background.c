@@ -39,7 +39,7 @@ enum {
 	PROP_SCALE,
 	PROP_ZOOM,
 	PROP_ROW_HEIGHT,
-	PROP_SHOW_HINT
+	PROP_SHOW_GUIDELINES
 };
 
 struct _PlannerGanttBackgroundPriv {
@@ -47,7 +47,7 @@ struct _PlannerGanttBackgroundPriv {
 	GdkGC       *fill_gc;
 	GdkGC       *timeline_gc;
 	GdkGC       *start_gc;
-	GdkGC       *hint_gc;
+	GdkGC       *guidelines_gc;
 
 	PangoLayout *layout;
 
@@ -61,7 +61,7 @@ struct _PlannerGanttBackgroundPriv {
 	gdouble      hscale;
 	gdouble      zoom;
 	gint	     row_height;
-	gboolean     show_hint;
+	gboolean     show_guidelines;
 };
 
 
@@ -199,8 +199,8 @@ gantt_background_class_init (PlannerGanttBackgroundClass *class)
 
 	g_object_class_install_property (
 		gobject_class,
-		PROP_SHOW_HINT,
-		g_param_spec_boolean ("show-hint",
+		PROP_SHOW_GUIDELINES,
+		g_param_spec_boolean ("show-guidelines",
 				      NULL,
 				      NULL,
 				      FALSE,
@@ -219,7 +219,7 @@ gantt_background_init (PlannerGanttBackground *background)
 	priv->project_start = MRP_TIME_INVALID;
 	priv->timeline = mrp_time_current_time ();
 	priv->row_height = 0;
-	priv->show_hint = FALSE;
+	priv->show_guidelines = FALSE;
 }
 
 static void
@@ -331,8 +331,8 @@ gantt_background_set_property (GObject      *object,
 		priv->row_height = g_value_get_int (value);
 		break;
 
-	case PROP_SHOW_HINT:
-		priv->show_hint = g_value_get_boolean (value);
+	case PROP_SHOW_GUIDELINES:
+		priv->show_guidelines = g_value_get_boolean (value);
 		break;
 
 	default:
@@ -408,9 +408,9 @@ gantt_background_realize (GnomeCanvasItem *item)
 				    GDK_JOIN_MITER);
 
 	gnome_canvas_get_color (item->canvas, "grey80", &color);
-	priv->hint_gc = gdk_gc_new (item->canvas->layout.bin_window);
-	gdk_gc_set_foreground (priv->hint_gc, &color);
-	gdk_gc_set_line_attributes (priv->hint_gc,
+	priv->guidelines_gc = gdk_gc_new (item->canvas->layout.bin_window);
+	gdk_gc_set_foreground (priv->guidelines_gc, &color);
+	gdk_gc_set_line_attributes (priv->guidelines_gc,
 				    0,
 				    GDK_LINE_SOLID,
 				    GDK_CAP_BUTT,
@@ -445,8 +445,8 @@ gantt_background_unrealize (GnomeCanvasItem *item)
 	gdk_gc_unref (background->priv->start_gc);
 	background->priv->start_gc = NULL;
 
-	gdk_gc_unref (background->priv->hint_gc);
-	background->priv->hint_gc = NULL;
+	gdk_gc_unref (background->priv->guidelines_gc);
+	background->priv->guidelines_gc = NULL;
 
 	GNOME_CANVAS_ITEM_CLASS (parent_class)->unrealize (item);
 }
@@ -656,7 +656,7 @@ gantt_background_draw (GnomeCanvasItem *item,
 			       cx1 - x,
 			       cy2 + DASH_LENGTH - y);
 	}
-	if (priv->show_hint) {
+	if (priv->show_guidelines) {
 		i2w_dx = 0.0;
 		i2w_dy = 0.0;
 		gnome_canvas_item_i2w (item, &i2w_dx, &i2w_dy);
@@ -668,7 +668,7 @@ gantt_background_draw (GnomeCanvasItem *item,
 		while (yy < height+y)
 		{
 			if (yy >= y)
-				gdk_draw_line (drawable,priv->hint_gc,0,yy-y,width,yy-y);
+				gdk_draw_line (drawable,priv->guidelines_gc,0,yy-y,width,yy-y);
 			yy += priv->row_height;
 		}
 
