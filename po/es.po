@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-05-08 14:29+0200\n"
-"PO-Revision-Date: 2006-05-08 14:34+0200\n"
+"POT-Creation-Date: 2006-05-24 23:46+0200\n"
+"PO-Revision-Date: 2006-05-24 23:46+0200\n"
 "Last-Translator: Francisco Javier F. Serrador <serrador@cvs.gnome.org>\n"
 "Language-Team: Spanish <traductores@es.gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -648,12 +648,12 @@ msgstr "Número de coma flotante"
 msgid "Date"
 msgstr "Fecha"
 
-#: ../libplanner/mrp-property.c:375 ../src/planner-gantt-view.c:554
+#: ../libplanner/mrp-property.c:375 ../src/planner-gantt-view.c:559
 #: ../src/planner-task-view.c:340
 msgid "Duration"
 msgstr "Duración"
 
-#: ../libplanner/mrp-property.c:377 ../src/planner-gantt-view.c:556
+#: ../libplanner/mrp-property.c:377 ../src/planner-gantt-view.c:561
 #: ../src/planner-resource-view.c:1314 ../src/planner-task-view.c:342
 msgid "Cost"
 msgstr "Coste"
@@ -724,29 +724,39 @@ msgstr ""
 
 #: ../libplanner/mrp-task.c:1081
 msgid "Start to Finish relation type cannot be combined with other relations."
-msgstr "Una relación de tipo «inicio a fin» no se puede combinar con otras relaciones."
+msgstr ""
+"Una relación de tipo «inicio a fin» no se puede combinar con otras "
+"relaciones."
 
 #: ../libplanner/mrp-task.c:1083
 msgid "Finish to Finish relation type cannot be combined with other relations."
-msgstr "Una relación de tipo «final a final» no se puede combinar con otras relaciones."
+msgstr ""
+"Una relación de tipo «final a final» no se puede combinar con otras "
+"relaciones."
 
 #: ../libplanner/mrp-task.c:1099
 msgid ""
 "Start to Finish relation type cannot be combined with Start No Earlier Than "
 "constraint."
-msgstr "Una relación de tipo «inicio a fin» no se puede combinar con una restricción «Iniciar no antes que»."
+msgstr ""
+"Una relación de tipo «inicio a fin» no se puede combinar con una restricción "
+"«Iniciar no antes que»."
 
 #: ../libplanner/mrp-task.c:1101
 msgid ""
 "Finish to Finish relation type cannot be combined with Start No Earlier Than "
 "constraint."
-msgstr "Una relación de tipo «final a final» no se puede combinar con una restricción «Empezar no antes que»."
+msgstr ""
+"Una relación de tipo «final a final» no se puede combinar con una "
+"restricción «Empezar no antes que»."
 
 #: ../libplanner/mrp-task.c:1124
 msgid ""
 "Start to Finish relation cannot be set. Predecessor starts on project start "
 "date."
-msgstr "No se puede establecer una relación «inicio a fin». El predecesor se inicia en la fecha de inicio del proyecto."
+msgstr ""
+"No se puede establecer una relación «inicio a fin». El predecesor se inicia "
+"en la fecha de inicio del proyecto."
 
 #: ../libplanner/mrp-task-manager.c:2518
 msgid "Cannot add a predecessor, because it would result in a loop."
@@ -898,7 +908,7 @@ msgid "Import resources from Evolution Data Server"
 msgstr "Importar recursos desde el Servidor de Datos de Evolution"
 
 #: ../src/planner-eds-plugin.c:396 ../src/planner-gantt-print.c:190
-#: ../src/planner-gantt-view.c:550 ../src/planner-group-dialog.c:822
+#: ../src/planner-gantt-view.c:555 ../src/planner-group-dialog.c:822
 #: ../src/planner-property-dialog.c:485 ../src/planner-resource-view.c:1171
 #: ../src/planner-task-dialog.c:2616 ../src/planner-task-dialog.c:2690
 #: ../src/planner-task-view.c:336
@@ -1036,11 +1046,11 @@ msgstr "minutos"
 
 #. i18n: project start, the date format is described in
 #. * libmrproject/docs/DateFormat.
-#: ../src/planner-gantt-background.c:579
+#: ../src/planner-gantt-background.c:625
 msgid "%Y %b %d"
 msgstr "%Y %b %d"
 
-#: ../src/planner-gantt-background.c:581
+#: ../src/planner-gantt-background.c:627
 msgid "Project start"
 msgstr "Comienzo del proyecto:"
 
@@ -1048,7 +1058,7 @@ msgstr "Comienzo del proyecto:"
 msgid "%e %b %Y"
 msgstr "%Y %b %d"
 
-#: ../src/planner-gantt-print.c:198 ../src/planner-gantt-view.c:553
+#: ../src/planner-gantt-print.c:198 ../src/planner-gantt-view.c:558
 #: ../src/planner-resource-dialog.c:1850 ../src/planner-resource-view.c:750
 #: ../src/planner-resource-view.c:766 ../src/planner-resource-view.c:1736
 #: ../src/planner-task-view.c:339
@@ -1080,144 +1090,148 @@ msgstr "Cambiar obra a %s"
 msgid "Edit task property"
 msgstr "Editar propiedad de la tarea"
 
-#: ../src/planner-gantt-view.c:131 ../src/planner-task-view.c:115
+#: ../src/planner-gantt-view.c:133 ../src/planner-task-view.c:115
 msgid "_Insert Task"
 msgstr "_Introducir tarea"
 
-#: ../src/planner-gantt-view.c:132 ../src/planner-task-view.c:116
+#: ../src/planner-gantt-view.c:134 ../src/planner-task-view.c:116
 msgid "Insert a new task"
 msgstr "Introducir una tarea nueva"
 
-#: ../src/planner-gantt-view.c:134 ../src/planner-task-view.c:118
+#: ../src/planner-gantt-view.c:136 ../src/planner-task-view.c:118
 msgid "In_sert Tasks..."
 msgstr "Introducir t_areas..."
 
-#: ../src/planner-gantt-view.c:137 ../src/planner-task-view.c:121
+#: ../src/planner-gantt-view.c:139 ../src/planner-task-view.c:121
 msgid "_Remove Task"
 msgstr "_Eliminar tarea"
 
-#: ../src/planner-gantt-view.c:138 ../src/planner-task-view.c:122
+#: ../src/planner-gantt-view.c:140 ../src/planner-task-view.c:122
 msgid "Remove the selected tasks"
 msgstr "Elimina las tareas seleccionadas"
 
-#: ../src/planner-gantt-view.c:140
+#: ../src/planner-gantt-view.c:142
 msgid "_Edit Task Properties..."
 msgstr "_Editar propiedades de la tarea..."
 
-#: ../src/planner-gantt-view.c:143 ../src/planner-resource-view.c:245
+#: ../src/planner-gantt-view.c:145 ../src/planner-resource-view.c:245
 #: ../src/planner-task-view.c:127
 msgid "Select _All"
 msgstr "Seleccionar _todo"
 
-#: ../src/planner-gantt-view.c:144 ../src/planner-resource-view.c:246
+#: ../src/planner-gantt-view.c:146 ../src/planner-resource-view.c:246
 #: ../src/planner-task-view.c:128
 msgid "Select all tasks"
 msgstr "Seleccionar todas las tareas"
 
-#: ../src/planner-gantt-view.c:146 ../src/planner-task-view.c:130
+#: ../src/planner-gantt-view.c:148 ../src/planner-task-view.c:130
 msgid "_Unlink Task"
 msgstr "Desen_lazar tarea"
 
-#: ../src/planner-gantt-view.c:147 ../src/planner-task-view.c:131
+#: ../src/planner-gantt-view.c:149 ../src/planner-task-view.c:131
 msgid "Unlink the selected tasks"
 msgstr "Desenlaza las tareas seleccionadas"
 
-#: ../src/planner-gantt-view.c:149 ../src/planner-task-view.c:133
+#: ../src/planner-gantt-view.c:151 ../src/planner-task-view.c:133
 msgid "_Link Tasks"
 msgstr "En_lazar tareas"
 
-#: ../src/planner-gantt-view.c:150 ../src/planner-task-view.c:134
+#: ../src/planner-gantt-view.c:152 ../src/planner-task-view.c:134
 msgid "Link the selected tasks"
 msgstr "Enlazar las tareas seleccionadas"
 
-#: ../src/planner-gantt-view.c:152 ../src/planner-task-view.c:136
+#: ../src/planner-gantt-view.c:154 ../src/planner-task-view.c:136
 msgid "I_ndent Task"
 msgstr "Sa_ngrar tarea"
 
-#: ../src/planner-gantt-view.c:153 ../src/planner-task-view.c:137
+#: ../src/planner-gantt-view.c:155 ../src/planner-task-view.c:137
 msgid "Indent the selected tasks"
 msgstr "Sangría de las tareas seleccionadas"
 
-#: ../src/planner-gantt-view.c:155 ../src/planner-task-view.c:139
+#: ../src/planner-gantt-view.c:157 ../src/planner-task-view.c:139
 msgid "Unin_dent Task"
 msgstr "Decrementar sa_ngría de la tarea"
 
-#: ../src/planner-gantt-view.c:156 ../src/planner-task-view.c:140
+#: ../src/planner-gantt-view.c:158 ../src/planner-task-view.c:140
 msgid "Unindent the selected tasks"
 msgstr "Reduce el sangrado de las tareas seleccionadas"
 
-#: ../src/planner-gantt-view.c:158 ../src/planner-task-view.c:142
+#: ../src/planner-gantt-view.c:160 ../src/planner-task-view.c:142
 msgid "Move Task _Up"
 msgstr "_Subir tarea"
 
-#: ../src/planner-gantt-view.c:159 ../src/planner-task-view.c:143
+#: ../src/planner-gantt-view.c:161 ../src/planner-task-view.c:143
 msgid "Move the selected tasks upwards"
 msgstr "Sube las tareas seleccionadas"
 
-#: ../src/planner-gantt-view.c:161 ../src/planner-task-view.c:145
+#: ../src/planner-gantt-view.c:163 ../src/planner-task-view.c:145
 msgid "Move Task Do_wn"
 msgstr "_Bajar tarea"
 
-#: ../src/planner-gantt-view.c:162 ../src/planner-task-view.c:146
+#: ../src/planner-gantt-view.c:164 ../src/planner-task-view.c:146
 msgid "Move the selected tasks downwards"
 msgstr "Baja las tareas seleccionadas"
 
-#: ../src/planner-gantt-view.c:164 ../src/planner-task-view.c:148
+#: ../src/planner-gantt-view.c:166 ../src/planner-task-view.c:148
 msgid "Reset _Constraint"
 msgstr "Reiniciar _impedimento"
 
-#: ../src/planner-gantt-view.c:167
+#: ../src/planner-gantt-view.c:169
 msgid "Zoom To _Fit"
 msgstr "Ampliar hasta a_justar"
 
-#: ../src/planner-gantt-view.c:168 ../src/planner-usage-view.c:112
+#: ../src/planner-gantt-view.c:170 ../src/planner-usage-view.c:112
 msgid "Zoom to fit the entire project"
 msgstr "Ampliar hasta ajustar el proyecto completo"
 
-#: ../src/planner-gantt-view.c:170
+#: ../src/planner-gantt-view.c:172
 msgid "_Zoom In"
 msgstr "_Ampliar"
 
-#: ../src/planner-gantt-view.c:171 ../src/planner-usage-view.c:108
+#: ../src/planner-gantt-view.c:173 ../src/planner-usage-view.c:108
 #: ../src/planner-usage-view.c:109
 msgid "Zoom in"
 msgstr "Ampliar"
 
-#: ../src/planner-gantt-view.c:173
+#: ../src/planner-gantt-view.c:175
 msgid "Zoom _Out"
 msgstr "_Reducir"
 
-#: ../src/planner-gantt-view.c:174 ../src/planner-usage-view.c:105
+#: ../src/planner-gantt-view.c:176 ../src/planner-usage-view.c:105
 #: ../src/planner-usage-view.c:106
 msgid "Zoom out"
 msgstr "Reducir"
 
-#: ../src/planner-gantt-view.c:176 ../src/planner-resource-view.c:251
+#: ../src/planner-gantt-view.c:178 ../src/planner-resource-view.c:251
 #: ../src/planner-task-view.c:154 ../src/planner-usage-view.c:114
 msgid "Edit _Visible Columns"
 msgstr "Editar columnas _visibles"
 
-#: ../src/planner-gantt-view.c:177 ../src/planner-resource-view.c:252
+#: ../src/planner-gantt-view.c:179 ../src/planner-resource-view.c:252
 #: ../src/planner-task-view.c:155 ../src/planner-usage-view.c:115
 msgid "Edit visible columns"
 msgstr "Editar columnas visibles"
 
-#: ../src/planner-gantt-view.c:182 ../src/planner-task-view.c:160
+#: ../src/planner-gantt-view.c:184 ../src/planner-task-view.c:160
 msgid "_Highlight Critical Tasks"
 msgstr "_Resaltar tareas críticas"
 
-#: ../src/planner-gantt-view.c:185 ../src/planner-task-view.c:162
+#: ../src/planner-gantt-view.c:187
+msgid "_Show Guide Lines"
+msgstr "_Mostrar líneas de guía"
+
+#: ../src/planner-gantt-view.c:190 ../src/planner-task-view.c:162
 msgid "_Nonstandard Days"
 msgstr "_Días no estándar"
 
 #. i18n: Label used for the sidebar. Please try to make it short and use
 #. * a linebreak if necessary/possible.
 #.
-#: ../src/planner-gantt-view.c:305
+#: ../src/planner-gantt-view.c:310
 msgid "Gantt"
 msgstr "Gantt"
 
-#: ../src/planner-gantt-view.c:311
+#: ../src/planner-gantt-view.c:316
 msgid "_Gantt Chart"
 msgstr "_Gráfico Gantt"
 
@@ -1229,27 +1243,27 @@ msgstr "_Gráfico Gantt"
 #. * project management term. You might want to leave it
 #. * untranslated unless there is a localized term for it.
 #.
-#: ../src/planner-gantt-view.c:549 ../src/planner-task-view.c:335
+#: ../src/planner-gantt-view.c:554 ../src/planner-task-view.c:335
 msgid "WBS"
 msgstr "WBS"
 
-#: ../src/planner-gantt-view.c:551 ../src/planner-task-view.c:337
+#: ../src/planner-gantt-view.c:556 ../src/planner-task-view.c:337
 msgid "Start"
 msgstr "Inicio"
 
-#: ../src/planner-gantt-view.c:552 ../src/planner-task-view.c:338
+#: ../src/planner-gantt-view.c:557 ../src/planner-task-view.c:338
 msgid "Finish"
 msgstr "Fin"
 
-#: ../src/planner-gantt-view.c:555 ../src/planner-task-view.c:341
+#: ../src/planner-gantt-view.c:560 ../src/planner-task-view.c:341
 msgid "Slack"
 msgstr "Retraso"
 
-#: ../src/planner-gantt-view.c:557 ../src/planner-task-view.c:343
+#: ../src/planner-gantt-view.c:562 ../src/planner-task-view.c:343
 msgid "Assigned to"
 msgstr "Asignado a"
 
-#: ../src/planner-gantt-view.c:906
+#: ../src/planner-gantt-view.c:911
 msgid "Edit Gantt Columns"
 msgstr "Editar _columnas de Gantt"
 
