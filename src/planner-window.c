@@ -1306,13 +1306,14 @@ window_about_cb (GtkAction *action,
 	gchar         *filename;
 	GdkPixbuf     *pixbuf;
 	const gchar   *authors[] = {
+		"Kurt Maute <kurt@maute.us>",
 		"Richard Hult <richard@imendio.com>",
 		"Mikael Hallendal <micke@imendio.com>",
 		"Alvaro del Castillo <acs@barrapunto.com>",
 		NULL
 	};
 	const gchar   *documenters[] = {
-		"Kurt Maute <kmaute@yahoo.com>",
+		"Kurt Maute <kurt@maute.us>",
 		"Alvaro del Castillo <acs@barrapunto.com>",
 		"Pedro Soria-Rodriguez <sorrodp@alum.wpi.edu>",
 		NULL
@@ -1335,7 +1336,7 @@ window_about_cb (GtkAction *action,
 				       GINT_TO_POINTER (LINK_TYPE_URL), NULL);
 	
 	gtk_show_about_dialog (GTK_WINDOW (window),
-			       "name", "Imendio Planner", 
+			       "name", "Planner", 
 			       "version", VERSION,
 			       "comments", _("A Project Management application for the GNOME desktop"),
 			       "authors", authors,
