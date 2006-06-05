@@ -1,21 +1,21 @@
 # Hungarian translation of planner.
-# Copyright (C) 2002, 2003, 2004, 2005 Free Software Foundation, Inc.
+# Copyright (C) 2002, 2003, 2004, 2005, 2006 Free Software Foundation, Inc.
 # This file is distributed under the same license as the planner package.
-# Andras Timar <timar@gnome.hu>, 2002, 2003.
-# Gabor Kelemen <kelemeng@gnome.hu>, 2004, 2005.
 #
+# Andras Timar <timar@gnome.hu>, 2002, 2003.
+# Gabor Kelemen <kelemeng@gnome.hu>, 2004, 2005, 2006.
 msgid ""
 msgstr ""
 "Project-Id-Version: planner.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-04-23 11:56+0000\n"
-"PO-Revision-Date: 2005-04-24 00:14+0200\n"
+"POT-Creation-Date: 2006-06-03 05:13+0200\n"
+"PO-Revision-Date: 2006-06-05 02:30+0200\n"
 "Last-Translator: Gabor Kelemen <kelemeng@gnome.hu>\n"
 "Language-Team: Hungarian <gnome@gnome.hu>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.3.1\n"
+"X-Generator: KBabel 1.11.2\n"
 "Plural-Forms:  nplurals=1; plural=0;\n"
 
 #: ../data/glade/add-predecessor.glade.h:1
@@ -497,50 +497,58 @@ msgid "Project Management"
 msgstr "Projektmenedzsment"
 
 #: ../data/planner.schemas.in.h:1
+msgid "Display nonstandard days in Gantt view"
+msgstr "Nem szabványos napok megjelenítése a Gantt nézetben"
+
+#: ../data/planner.schemas.in.h:2
 msgid "Highlight critical path in Gantt view"
 msgstr "Kritikus útvonalak kiemelése a Gantt-nézetben"
 
-#: ../data/planner.schemas.in.h:2
+#: ../data/planner.schemas.in.h:3
 msgid "Highlight critical path in Task view"
 msgstr "Kritikus útvonalak kiemelése a Feladatok nézetben"
 
-#: ../data/planner.schemas.in.h:3
+#: ../data/planner.schemas.in.h:4
 msgid "Print the Gantt view"
 msgstr "A Gantt-nézet nyomtatása"
 
-#: ../data/planner.schemas.in.h:4
+#: ../data/planner.schemas.in.h:5
 msgid "Print the Resource view"
 msgstr "Az Erőforrások nézet nyomtatása"
 
-#: ../data/planner.schemas.in.h:5
+#: ../data/planner.schemas.in.h:6
 msgid "Print the Task view"
 msgstr "A Feladatok nézet nyomtatása"
 
-#: ../data/planner.schemas.in.h:6
+#: ../data/planner.schemas.in.h:7
 msgid "The active view"
 msgstr "Az aktív nézet"
 
-#: ../data/planner.schemas.in.h:7
+#: ../data/planner.schemas.in.h:8
 msgid "Whether printing of the Gantt view is enabled."
 msgstr "A Gantt-nézet nyomtatása engedélyezve van-e?"
 
-#: ../data/planner.schemas.in.h:8
+#: ../data/planner.schemas.in.h:9
 msgid "Whether printing of the Resource view is enabled."
 msgstr "Az Erőforrások nézet nyomtatása engedélyezve van-e?"
 
-#: ../data/planner.schemas.in.h:9
+#: ../data/planner.schemas.in.h:10
 msgid "Whether printing of the Task view is enabled."
 msgstr "A Feladatok nézet nyomtatása engedélyezve van-e?"
 
-#: ../data/planner.schemas.in.h:10
+#: ../data/planner.schemas.in.h:11
+msgid "Whether to display nonstandard days in the Gantt view."
+msgstr "Megjelenjenek-e nem szabványos napok a Gantt-nézetben?"
+
+#: ../data/planner.schemas.in.h:12
 msgid "Whether to highlight the tasks along the cricital path in the Gantt view."
 msgstr "Kiemelje-e a kritikus útvonal mentén lévő feladatokat a Gantt-nézetben?"
 
-#: ../data/planner.schemas.in.h:11
+#: ../data/planner.schemas.in.h:13
 msgid "Whether to highlight the tasks along the cricital path in the Task view."
 msgstr "Kiemelje-e a kritikus útvonal mentén lévő feladatokat a Feladatok nézetben?"
 
-#: ../data/planner.schemas.in.h:12
+#: ../data/planner.schemas.in.h:14
 msgid "Which view to display in the user interface."
 msgstr "Mely nézet jelenjen meg a felhasználói felületen?"
 
@@ -635,13 +643,13 @@ msgstr "Lebegőpontos szám"
 msgid "Date"
 msgstr "Dátum"
 
-#: ../libplanner/mrp-property.c:375 ../src/planner-gantt-view.c:512
-#: ../src/planner-task-view.c:328
+#: ../libplanner/mrp-property.c:375 ../src/planner-gantt-view.c:559
+#: ../src/planner-task-view.c:340
 msgid "Duration"
 msgstr "Időtartam"
 
-#: ../libplanner/mrp-property.c:377 ../src/planner-gantt-view.c:514
-#: ../src/planner-resource-view.c:1314 ../src/planner-task-view.c:330
+#: ../libplanner/mrp-property.c:377 ../src/planner-gantt-view.c:561
+#: ../src/planner-resource-view.c:1314 ../src/planner-task-view.c:342
 msgid "Cost"
 msgstr "Költség"
 
@@ -705,23 +713,49 @@ msgstr "Érvénytelen SQL URI (érvénytelen projektazonosító)."
 msgid "Invalid SQL URI (no database name specified)."
 msgstr "Érvénytelen SQL URI (nincs megadva adatbázisnév)."
 
-#: ../libplanner/mrp-task.c:1062
+#: ../libplanner/mrp-task.c:1070
 msgid "Could not add a predecessor relation, because the tasks are already related."
 msgstr ""
 "Nem lehet hozzáadni egy előzményrelációt, mert a feladatok már relációban "
 "vannak."
 
-#: ../libplanner/mrp-task-manager.c:2152
+#: ../libplanner/mrp-task.c:1081
+msgid "Start to Finish relation type cannot be combined with other relations."
+msgstr "A vég - kezdet kapcsolattípus nem kombinálható más kapcsolatokkal."
+
+#: ../libplanner/mrp-task.c:1083
+msgid "Finish to Finish relation type cannot be combined with other relations."
+msgstr "A vég - vég kapcsolattípus nem kombinálható más kapcsolatokkal."
+
+#: ../libplanner/mrp-task.c:1099
+msgid ""
+"Start to Finish relation type cannot be combined with Start No Earlier Than "
+"constraint."
+msgstr "A kezdet - vég kapcsolattípus nem kombinálható a \"ne kezdődjön korábban mint\" megszorítással."
+
+#: ../libplanner/mrp-task.c:1101
+msgid ""
+"Finish to Finish relation type cannot be combined with Start No Earlier Than "
+"constraint."
+msgstr "A vég - vég kapcsolattípus nem kombinálható a \"ne kezdődjön korábban mint\" megszorítással."
+
+#: ../libplanner/mrp-task.c:1124
+msgid ""
+"Start to Finish relation cannot be set. Predecessor starts on project start "
+"date."
+msgstr "A kezdet - vég kapcsolat nem állítható be. Az előzmény a projekt kezdőnapján indul."
+
+#: ../libplanner/mrp-task-manager.c:2518
 msgid "Cannot add a predecessor, because it would result in a loop."
 msgstr "Nem lehet előzményt hozzáadni, mert hurok alakulna ki."
 
-#: ../libplanner/mrp-task-manager.c:2198
+#: ../libplanner/mrp-task-manager.c:2564
 msgid "Cannot move the task, because it would result in a loop."
 msgstr "Nem lehet áthelyezni a feladatot, mert hurok alakulna ki."
 
 #: ../libplanner/mrp-xsl.c:89 ../libplanner/mrp-xsl.c:137
 msgid "Export to HTML failed"
-msgstr "Exportálás HTML-be sikertelen"
+msgstr "A HTML-be exportálás meghiúsult"
 
 #: ../src/planner-application.c:55 ../src/planner-application.c:111
 msgid "Insert"
@@ -771,7 +805,7 @@ msgstr "Naptár eltávolítása"
 msgid "Add new calendar"
 msgstr "Új naptár hozzáadása"
 
-#: ../src/planner-cell-renderer-date.c:161 ../src/planner-task-dialog.c:1490
+#: ../src/planner-cell-renderer-date.c:161 ../src/planner-task-dialog.c:1491
 msgid "As soon as possible"
 msgstr "Amilyen hamar csak lehet"
 
@@ -861,10 +895,10 @@ msgid "Import resources from Evolution Data Server"
 msgstr "Erőforrások importálása az Evolution adatkiszolgálótól"
 
 #: ../src/planner-eds-plugin.c:396 ../src/planner-gantt-print.c:190
-#: ../src/planner-gantt-view.c:508 ../src/planner-group-dialog.c:822
+#: ../src/planner-gantt-view.c:555 ../src/planner-group-dialog.c:822
 #: ../src/planner-property-dialog.c:485 ../src/planner-resource-view.c:1171
-#: ../src/planner-task-dialog.c:2536 ../src/planner-task-dialog.c:2610
-#: ../src/planner-task-view.c:324
+#: ../src/planner-task-dialog.c:2616 ../src/planner-task-dialog.c:2690
+#: ../src/planner-task-view.c:336
 msgid "Name"
 msgstr "Név"
 
@@ -999,11 +1033,11 @@ msgstr "perc"
 
 #. i18n: project start, the date format is described in
 #. * libmrproject/docs/DateFormat.
-#: ../src/planner-gantt-background.c:579
+#: ../src/planner-gantt-background.c:625
 msgid "%Y %b %d"
 msgstr "%Y. %b. %e."
 
-#: ../src/planner-gantt-background.c:581
+#: ../src/planner-gantt-background.c:627
 msgid "Project start"
 msgstr "Projekt kezdete"
 
@@ -1011,172 +1045,180 @@ msgstr "Projekt kezdete"
 msgid "%e %b %Y"
 msgstr "%Y. %b. %e."
 
-#: ../src/planner-gantt-print.c:198 ../src/planner-gantt-view.c:511
+#: ../src/planner-gantt-print.c:198 ../src/planner-gantt-view.c:558
 #: ../src/planner-resource-dialog.c:1850 ../src/planner-resource-view.c:750
 #: ../src/planner-resource-view.c:766 ../src/planner-resource-view.c:1736
-#: ../src/planner-task-view.c:327
+#: ../src/planner-task-view.c:339
 msgid "Work"
 msgstr "Munka"
 
-#: ../src/planner-gantt-print.c:542 ../src/planner-gantt-row.c:696
-#: ../src/planner-html-plugin.c:125 ../src/planner-task-tree.c:1567
-#: ../src/planner-window.c:1929
+#: ../src/planner-gantt-print.c:542 ../src/planner-gantt-row.c:752
+#: ../src/planner-html-plugin.c:125 ../src/planner-task-tree.c:1571
+#: ../src/planner-window.c:1981
 msgid "Unnamed"
 msgstr "Névtelen"
 
-#: ../src/planner-gantt-row.c:1788 ../src/planner-gantt-row.c:1791
+#: ../src/planner-gantt-row.c:2603 ../src/planner-gantt-row.c:2606
 msgid "No name"
 msgstr "Névtelen"
 
-#: ../src/planner-gantt-row.c:1794
+#: ../src/planner-gantt-row.c:2609
 #, c-format
 msgid "Make task '%s' a predecessor of '%s'"
 msgstr "Legyen '%s' feladat a(z) '%s' előzménye"
 
-#: ../src/planner-gantt-row.c:1842
+#: ../src/planner-gantt-row.c:2657
 #, c-format
 msgid "Change work to %s"
 msgstr "Munka megváltoztatása erre: %s"
 
-#: ../src/planner-gantt-row.c:2412 ../src/planner-task-dialog.c:454
-#: ../src/planner-task-tree.c:254 ../src/planner-task-tree.c:942
+#: ../src/planner-gantt-row.c:3228 ../src/planner-task-dialog.c:455
+#: ../src/planner-task-tree.c:257 ../src/planner-task-tree.c:947
 msgid "Edit task property"
 msgstr "Feladat tulajdonságainak szerkesztése"
 
-#: ../src/planner-gantt-view.c:125 ../src/planner-task-view.c:113
+#: ../src/planner-gantt-view.c:133 ../src/planner-task-view.c:115
 msgid "_Insert Task"
 msgstr "_Feladat beszúrása"
 
-#: ../src/planner-gantt-view.c:126 ../src/planner-task-view.c:114
+#: ../src/planner-gantt-view.c:134 ../src/planner-task-view.c:116
 msgid "Insert a new task"
 msgstr "Új feladat beszúrása"
 
-#: ../src/planner-gantt-view.c:128 ../src/planner-task-view.c:116
+#: ../src/planner-gantt-view.c:136 ../src/planner-task-view.c:118
 msgid "In_sert Tasks..."
 msgstr "F_eladatok beszúrása..."
 
-#: ../src/planner-gantt-view.c:131 ../src/planner-task-view.c:119
+#: ../src/planner-gantt-view.c:139 ../src/planner-task-view.c:121
 msgid "_Remove Task"
 msgstr "Feladat _eltávolítása"
 
-#: ../src/planner-gantt-view.c:132 ../src/planner-task-view.c:120
+#: ../src/planner-gantt-view.c:140 ../src/planner-task-view.c:122
 msgid "Remove the selected tasks"
 msgstr "Kiválasztott feladat eltávolítása"
 
-#: ../src/planner-gantt-view.c:134
+#: ../src/planner-gantt-view.c:142
 msgid "_Edit Task Properties..."
 msgstr "_Feladat tulajdonságainak szerkesztése..."
 
-#: ../src/planner-gantt-view.c:137 ../src/planner-resource-view.c:245
-#: ../src/planner-task-view.c:125
+#: ../src/planner-gantt-view.c:145 ../src/planner-resource-view.c:245
+#: ../src/planner-task-view.c:127
 msgid "Select _All"
 msgstr "_Mindent kijelöl"
 
-#: ../src/planner-gantt-view.c:138 ../src/planner-resource-view.c:246
-#: ../src/planner-task-view.c:126
+#: ../src/planner-gantt-view.c:146 ../src/planner-resource-view.c:246
+#: ../src/planner-task-view.c:128
 msgid "Select all tasks"
 msgstr "Az összes feladat kijelölése"
 
-#: ../src/planner-gantt-view.c:140 ../src/planner-task-view.c:128
+#: ../src/planner-gantt-view.c:148 ../src/planner-task-view.c:130
 msgid "_Unlink Task"
 msgstr "Feladat _szétválasztása"
 
-#: ../src/planner-gantt-view.c:141 ../src/planner-task-view.c:129
+#: ../src/planner-gantt-view.c:149 ../src/planner-task-view.c:131
 msgid "Unlink the selected tasks"
 msgstr "A kiválasztott feladatok szétválasztása"
 
-#: ../src/planner-gantt-view.c:143 ../src/planner-task-view.c:131
+#: ../src/planner-gantt-view.c:151 ../src/planner-task-view.c:133
 msgid "_Link Tasks"
 msgstr "Feladatok ö_sszekapcsolása"
 
-#: ../src/planner-gantt-view.c:144 ../src/planner-task-view.c:132
+#: ../src/planner-gantt-view.c:152 ../src/planner-task-view.c:134
 msgid "Link the selected tasks"
 msgstr "A kiválasztott feladatok összekapcsolása"
 
-#: ../src/planner-gantt-view.c:146 ../src/planner-task-view.c:134
+#: ../src/planner-gantt-view.c:154 ../src/planner-task-view.c:136
 msgid "I_ndent Task"
 msgstr "Feladat _behúzása"
 
-#: ../src/planner-gantt-view.c:147 ../src/planner-task-view.c:135
+#: ../src/planner-gantt-view.c:155 ../src/planner-task-view.c:137
 msgid "Indent the selected tasks"
 msgstr "Kiválasztott feladatok behúzása"
 
-#: ../src/planner-gantt-view.c:149 ../src/planner-task-view.c:137
+#: ../src/planner-gantt-view.c:157 ../src/planner-task-view.c:139
 msgid "Unin_dent Task"
 msgstr "Feladat behúzásának _csökkentése"
 
-#: ../src/planner-gantt-view.c:150 ../src/planner-task-view.c:138
+#: ../src/planner-gantt-view.c:158 ../src/planner-task-view.c:140
 msgid "Unindent the selected tasks"
 msgstr "Kiválasztott feladatok behúzásának csökkentése"
 
-#: ../src/planner-gantt-view.c:152 ../src/planner-task-view.c:140
+#: ../src/planner-gantt-view.c:160 ../src/planner-task-view.c:142
 msgid "Move Task _Up"
 msgstr "Feladat mozgatása _fel"
 
-#: ../src/planner-gantt-view.c:153 ../src/planner-task-view.c:141
+#: ../src/planner-gantt-view.c:161 ../src/planner-task-view.c:143
 msgid "Move the selected tasks upwards"
 msgstr "Kiválasztott feladat mozgatása fel"
 
-#: ../src/planner-gantt-view.c:155 ../src/planner-task-view.c:143
+#: ../src/planner-gantt-view.c:163 ../src/planner-task-view.c:145
 msgid "Move Task Do_wn"
 msgstr "Feladat mozgatása _le"
 
-#: ../src/planner-gantt-view.c:156 ../src/planner-task-view.c:144
+#: ../src/planner-gantt-view.c:164 ../src/planner-task-view.c:146
 msgid "Move the selected tasks downwards"
 msgstr "Kiválasztott feladat mozgatása le"
 
-#: ../src/planner-gantt-view.c:158 ../src/planner-task-view.c:146
+#: ../src/planner-gantt-view.c:166 ../src/planner-task-view.c:148
 msgid "Reset _Constraint"
 msgstr "_Megszorítás visszaállítása"
 
-#: ../src/planner-gantt-view.c:161
+#: ../src/planner-gantt-view.c:169
 msgid "Zoom To _Fit"
 msgstr "Ablakmérethez _igazítás"
 
-#: ../src/planner-gantt-view.c:162 ../src/planner-usage-view.c:105
+#: ../src/planner-gantt-view.c:170 ../src/planner-usage-view.c:112
 msgid "Zoom to fit the entire project"
 msgstr "Az egész projekt látszódjon"
 
-#: ../src/planner-gantt-view.c:164
+#: ../src/planner-gantt-view.c:172
 msgid "_Zoom In"
 msgstr "_Nagyítás"
 
-#: ../src/planner-gantt-view.c:165 ../src/planner-usage-view.c:101
-#: ../src/planner-usage-view.c:102
+#: ../src/planner-gantt-view.c:173 ../src/planner-usage-view.c:108
+#: ../src/planner-usage-view.c:109
 msgid "Zoom in"
 msgstr "Nagyítás"
 
-#: ../src/planner-gantt-view.c:167
+#: ../src/planner-gantt-view.c:175
 msgid "Zoom _Out"
 msgstr "_Kicsinyítés"
 
-#: ../src/planner-gantt-view.c:168 ../src/planner-usage-view.c:98
-#: ../src/planner-usage-view.c:99
+#: ../src/planner-gantt-view.c:176 ../src/planner-usage-view.c:105
+#: ../src/planner-usage-view.c:106
 msgid "Zoom out"
 msgstr "Kicsinyítés"
 
-#: ../src/planner-gantt-view.c:170 ../src/planner-resource-view.c:251
-#: ../src/planner-task-view.c:152 ../src/planner-usage-view.c:107
+#: ../src/planner-gantt-view.c:178 ../src/planner-resource-view.c:251
+#: ../src/planner-task-view.c:154 ../src/planner-usage-view.c:114
 msgid "Edit _Visible Columns"
 msgstr "Látható _oszlopok szerkesztése"
 
-#: ../src/planner-gantt-view.c:171 ../src/planner-resource-view.c:252
-#: ../src/planner-task-view.c:153 ../src/planner-usage-view.c:108
+#: ../src/planner-gantt-view.c:179 ../src/planner-resource-view.c:252
+#: ../src/planner-task-view.c:155 ../src/planner-usage-view.c:115
 msgid "Edit visible columns"
 msgstr "Látható oszlopok szerkesztése"
 
-#: ../src/planner-gantt-view.c:176 ../src/planner-task-view.c:158
+#: ../src/planner-gantt-view.c:184 ../src/planner-task-view.c:160
 msgid "_Highlight Critical Tasks"
 msgstr "_Kritikus feladatok kiemelése"
+
+#: ../src/planner-gantt-view.c:187
+msgid "_Show Guide Lines"
+msgstr "_Irányvonalak megjelenítése"
+
+#: ../src/planner-gantt-view.c:190 ../src/planner-task-view.c:162
+msgid "_Nonstandard Days"
+msgstr "_Nem szabványos napok"
 
 #. i18n: Label used for the sidebar. Please try to make it short and use
 #. * a linebreak if necessary/possible.
 #.
-#: ../src/planner-gantt-view.c:285
+#: ../src/planner-gantt-view.c:310
 msgid "Gantt"
 msgstr "Gantt"
 
-#: ../src/planner-gantt-view.c:291
+#: ../src/planner-gantt-view.c:316
 msgid "_Gantt Chart"
 msgstr "_Gantt-diagram"
 
@@ -1188,27 +1230,27 @@ msgstr "_Gantt-diagram"
 #. * project management term. You might want to leave it
 #. * untranslated unless there is a localized term for it.
 #.
-#: ../src/planner-gantt-view.c:507 ../src/planner-task-view.c:323
+#: ../src/planner-gantt-view.c:554 ../src/planner-task-view.c:335
 msgid "WBS"
 msgstr "WBS"
 
-#: ../src/planner-gantt-view.c:509 ../src/planner-task-view.c:325
+#: ../src/planner-gantt-view.c:556 ../src/planner-task-view.c:337
 msgid "Start"
 msgstr "Kezdet"
 
-#: ../src/planner-gantt-view.c:510 ../src/planner-task-view.c:326
+#: ../src/planner-gantt-view.c:557 ../src/planner-task-view.c:338
 msgid "Finish"
 msgstr "Vége"
 
-#: ../src/planner-gantt-view.c:513 ../src/planner-task-view.c:329
+#: ../src/planner-gantt-view.c:560 ../src/planner-task-view.c:341
 msgid "Slack"
 msgstr "Marad"
 
-#: ../src/planner-gantt-view.c:515 ../src/planner-task-view.c:331
+#: ../src/planner-gantt-view.c:562 ../src/planner-task-view.c:343
 msgid "Assigned to"
 msgstr "Hozzárendelve"
 
-#: ../src/planner-gantt-view.c:841
+#: ../src/planner-gantt-view.c:911
 msgid "Edit Gantt Columns"
 msgstr "Gantt oszlopok szerkesztése"
 
@@ -1260,21 +1302,21 @@ msgstr "Exportálás HTML-be"
 msgid "Show result in browser"
 msgstr "Eredmény megjelenítése böngészőben"
 
-#: ../src/planner-html-plugin.c:173 ../src/planner-window.c:1638
+#: ../src/planner-html-plugin.c:173 ../src/planner-window.c:1690
 #: ../src/planner-xml-planner-plugin.c:124
 #, c-format
 msgid "File \"%s\" exists, do you want to overwrite it?"
 msgstr "A(z) \"%s\" fájl létezik, felülírja?"
 
-#: ../src/planner-main.c:53
+#: ../src/planner-main.c:56
 msgid "Create the initial window with the given geometry."
 msgstr "Az indulóablak létrehozása adott méretekkel."
 
-#: ../src/planner-main.c:53
+#: ../src/planner-main.c:56
 msgid "GEOMETRY"
 msgstr "GEOMETRY"
 
-#: ../src/planner-main.c:67
+#: ../src/planner-main.c:70
 msgid "[FILE...]"
 msgstr "[FÁJL...]"
 
@@ -1315,32 +1357,31 @@ msgstr "Fázis eltávolítása"
 msgid "Could not open plugin file '%s'\n"
 msgstr "Nem lehet megnyitni a(z) '%s' bővítményfájlt\n"
 
-#: ../src/planner-predecessor-model.c:191 ../src/planner-task-dialog.c:2176
+#: ../src/planner-predecessor-model.c:191 ../src/planner-task-dialog.c:2217
 msgid "FS"
 msgstr "FS"
 
-#: ../src/planner-predecessor-model.c:194
+#: ../src/planner-predecessor-model.c:194 ../src/planner-task-dialog.c:2218
 msgid "FF"
 msgstr "FF"
 
-#. list = g_list_append (list, g_strdup (_("FF")));
-#: ../src/planner-predecessor-model.c:197 ../src/planner-task-dialog.c:2178
+#: ../src/planner-predecessor-model.c:197 ../src/planner-task-dialog.c:2219
 msgid "SS"
 msgstr "SS"
 
-#: ../src/planner-predecessor-model.c:200
+#: ../src/planner-predecessor-model.c:200 ../src/planner-task-dialog.c:2220
 msgid "SF"
 msgstr "SF"
 
-#: ../src/planner-print-dialog.c:164
+#: ../src/planner-print-dialog.c:187
 msgid "Print Project"
 msgstr "Projekt nyomtatása"
 
-#: ../src/planner-print-dialog.c:171
+#: ../src/planner-print-dialog.c:194
 msgid "Select views"
 msgstr "Nézetek kiválasztása"
 
-#: ../src/planner-print-dialog.c:194
+#: ../src/planner-print-dialog.c:218
 msgid "Select the views to print:"
 msgstr "Válassza ki a nyomtatandó nézeteket:"
 
@@ -1417,7 +1458,7 @@ msgid "Label"
 msgstr "Címke"
 
 #: ../src/planner-property-dialog.c:514 ../src/planner-resource-view.c:1224
-#: ../src/planner-task-dialog.c:2642
+#: ../src/planner-task-dialog.c:2722
 msgid "Type"
 msgstr "Típus"
 
@@ -1445,7 +1486,7 @@ msgid "(None)"
 msgstr "(Nincs)"
 
 #: ../src/planner-resource-dialog.c:322
-#: ../src/planner-resource-input-dialog.c:110 ../src/planner-task-dialog.c:380
+#: ../src/planner-resource-input-dialog.c:110 ../src/planner-task-dialog.c:381
 msgid "(No name)"
 msgstr "(Névtelen)"
 
@@ -1468,7 +1509,7 @@ msgstr "Erőforrás tulajdonságainak szerkesztése"
 
 #. i18n: time stamp format for notes in task dialog, see strftime(3) for
 #. * a detailed description.
-#: ../src/planner-resource-dialog.c:1404 ../src/planner-task-dialog.c:1807
+#: ../src/planner-resource-dialog.c:1404 ../src/planner-task-dialog.c:1808
 msgid "%a %d %b %Y, %H:%M\n"
 msgstr "%Y. %b. %e., %a., %H.%M\n"
 
@@ -1542,7 +1583,7 @@ msgid "Remove resource"
 msgstr "Erőforrás eltávolítása"
 
 #: ../src/planner-resource-view.c:1020
-msgid "Edit Resoruce Columns"
+msgid "Edit Resource Columns"
 msgstr "Erőforrásoszlopok szerkesztése"
 
 #: ../src/planner-resource-view.c:1055
@@ -1612,7 +1653,7 @@ msgstr "Megnyitás adatbázisból..."
 msgid "Open a project from a database"
 msgstr "Projekt megnyitása adatbázisból"
 
-#: ../src/planner-sql-plugin.c:96 ../src/planner-sql-plugin.c:1102
+#: ../src/planner-sql-plugin.c:96 ../src/planner-sql-plugin.c:1103
 msgid "Save to Database"
 msgstr "Mentés adatbázisba"
 
@@ -1624,7 +1665,7 @@ msgstr "A jelenlegi projekt mentése egy adatbázisba"
 msgid "No errors reported."
 msgstr "Nem történt hiba."
 
-#: ../src/planner-sql-plugin.c:492
+#: ../src/planner-sql-plugin.c:493
 #, c-format
 msgid ""
 "Database %s needs to be upgraded from version %s to version %s.\n"
@@ -1633,11 +1674,11 @@ msgstr ""
 "A(z) %s adatbázist frissíteni kell %s verzióról %s verzióra.\n"
 "Kérem a frissítés előtt készítsen biztonsági másolatot az adatbázisról."
 
-#: ../src/planner-sql-plugin.c:499
+#: ../src/planner-sql-plugin.c:500
 msgid "Upgrade"
 msgstr "Frissítés"
 
-#: ../src/planner-sql-plugin.c:513
+#: ../src/planner-sql-plugin.c:514
 #, c-format
 msgid ""
 "Could not upgrade database %s.\n"
@@ -1652,43 +1693,43 @@ msgstr ""
 "Adatbázishiba:\n"
 "%s"
 
-#: ../src/planner-sql-plugin.c:554
+#: ../src/planner-sql-plugin.c:555
 #, c-format
 msgid "Can't create tables in database %s"
 msgstr "Nem lehet táblákat létrehozni a(z) %s adatbázisban"
 
-#: ../src/planner-sql-plugin.c:616
+#: ../src/planner-sql-plugin.c:617
 #, c-format
 msgid "Database %s is not setup for Planner. Do you want to do that?"
 msgstr "A(z) %s adatbázis nincs beállítva a Planner-hez. Meg szeretné ezt tenni?"
 
-#: ../src/planner-sql-plugin.c:657
+#: ../src/planner-sql-plugin.c:658
 #, c-format
 msgid "Connection to database '%s@%s' failed."
 msgstr "A(z) '%s@%s' adatbázishoz való kapcsolódás sikertelen."
 
-#: ../src/planner-sql-plugin.c:668
+#: ../src/planner-sql-plugin.c:669
 #, c-format
 msgid "Test to tables in database '%s' failed."
 msgstr "A(z) '%s' adatbázis tábláinak tesztelése sikertelen."
 
-#: ../src/planner-sql-plugin.c:766
+#: ../src/planner-sql-plugin.c:767
 msgid "ID"
 msgstr "Azonosító"
 
-#: ../src/planner-sql-plugin.c:774
+#: ../src/planner-sql-plugin.c:775
 msgid "Project"
 msgstr "Projekt"
 
-#: ../src/planner-sql-plugin.c:782
+#: ../src/planner-sql-plugin.c:783
 msgid "Phase"
 msgstr "Fázis"
 
-#: ../src/planner-sql-plugin.c:790
+#: ../src/planner-sql-plugin.c:791
 msgid "Revision"
 msgstr "Revízió"
 
-#: ../src/planner-sql-plugin.c:990
+#: ../src/planner-sql-plugin.c:991
 msgid "Open from Database"
 msgstr "Megnyitás adatbázisból"
 
@@ -1704,82 +1745,89 @@ msgstr "Feladat szétválasztása"
 msgid "Insert task"
 msgstr "Feladat beszúrása"
 
-#: ../src/planner-task-dialog.c:528
+#: ../src/planner-task-dialog.c:529
 msgid "Edit task type"
 msgstr "Feladat típusának szerkesztése"
 
-#: ../src/planner-task-dialog.c:595
+#: ../src/planner-task-dialog.c:596
 msgid "Toggle fixed duration"
 msgstr "Rögzített időtartam átváltása"
 
-#: ../src/planner-task-dialog.c:662
+#: ../src/planner-task-dialog.c:663
 msgid "Edit task scheduling"
 msgstr "Feladat ütemezésének szerkesztése"
 
-#: ../src/planner-task-dialog.c:742
+#: ../src/planner-task-dialog.c:743
 msgid "Assign resource to task"
 msgstr "Erőforrás feladathoz rendelése"
 
-#: ../src/planner-task-dialog.c:802
+#: ../src/planner-task-dialog.c:803
 msgid "Unassign resource from task"
 msgstr "Erőforrás elvétele a feladattól"
 
-#: ../src/planner-task-dialog.c:861
+#: ../src/planner-task-dialog.c:862
 msgid "Change resource units in task"
 msgstr "Erőforrásegységek megváltoztatása a feladatban"
 
-#: ../src/planner-task-dialog.c:949
+#: ../src/planner-task-dialog.c:950
 msgid "Edit task predecessor"
 msgstr "Feladat előzményének szerkesztése"
 
-#: ../src/planner-task-dialog.c:1020
+#: ../src/planner-task-dialog.c:1021
 msgid "Edit lag predecessor"
 msgstr "Késés előzményének szerkesztése"
 
-#: ../src/planner-task-dialog.c:1086
+#: ../src/planner-task-dialog.c:1087
 msgid "Edit task note"
 msgstr "Feladat megjegyzésének szerkesztése"
 
-#: ../src/planner-task-dialog.c:1494
+#: ../src/planner-task-dialog.c:1495
 #, c-format
 msgid "No earlier than %s"
 msgstr "Nem előbb, mint %s"
 
-#: ../src/planner-task-dialog.c:1498
+#: ../src/planner-task-dialog.c:1499
 #, c-format
 msgid "On fixed date %s"
 msgstr "Adott napon: %s"
 
-#: ../src/planner-task-dialog.c:1880
+#: ../src/planner-task-dialog.c:1917
 msgid "Finish to start (FS)"
 msgstr "Vég - kezdet (FS)"
 
-#. _("Finish to finish (FF)"), MRP_RELATION_FF,
-#: ../src/planner-task-dialog.c:1882
+#: ../src/planner-task-dialog.c:1918
+msgid "Finish to finish (FF)"
+msgstr "Vég - vég (FF)"
+
+#: ../src/planner-task-dialog.c:1919
 msgid "Start to start (SS)"
 msgstr "Kezdet - kezdet (SS)"
 
-#: ../src/planner-task-dialog.c:1938
+#: ../src/planner-task-dialog.c:1920
+msgid "Start to finish (SF)"
+msgstr "Kezdet - vég (SF)"
+
+#: ../src/planner-task-dialog.c:1975
 msgid "Can't add new predecessor. No task selected!"
 msgstr "Nem lehet előzményt hozzáadni. Nincs kiválasztva feladat!"
 
-#: ../src/planner-task-dialog.c:2383
+#: ../src/planner-task-dialog.c:2463
 msgid "Change..."
 msgstr "Módosítás..."
 
-#: ../src/planner-task-dialog.c:2557
+#: ../src/planner-task-dialog.c:2637
 msgid "Assigned"
 msgstr "Hozzárendelve"
 
-#: ../src/planner-task-dialog.c:2574
+#: ../src/planner-task-dialog.c:2654
 msgid "Units"
 msgstr "Egységek"
 
-#: ../src/planner-task-dialog.c:2664
+#: ../src/planner-task-dialog.c:2744
 msgid "Lag"
 msgstr "Késés"
 
-#: ../src/planner-task-dialog.c:2807 ../src/planner-task-dialog.c:2809
+#: ../src/planner-task-dialog.c:2887 ../src/planner-task-dialog.c:2889
 msgid "Edit task properties"
 msgstr "Feladat tulajdonságainak szerkesztése"
 
@@ -1807,27 +1855,27 @@ msgstr "/Erő_forrás hozzárendelése..."
 msgid "/_Edit task..."
 msgstr "/_Feladat szerkesztése..."
 
-#: ../src/planner-task-tree.c:562
+#: ../src/planner-task-tree.c:567
 msgid "Remove task"
 msgstr "Feladat eltávolítása"
 
-#: ../src/planner-task-tree.c:639
+#: ../src/planner-task-tree.c:644
 msgid "Apply constraint to task"
 msgstr "Megszorítás hozzáadása a feladathoz"
 
-#: ../src/planner-task-tree.c:701
+#: ../src/planner-task-tree.c:706
 msgid "Reset task constraint"
 msgstr "Feladat megszorításának visszaállítása"
 
-#: ../src/planner-task-tree.c:1488 ../src/planner-task-tree.c:1620
+#: ../src/planner-task-tree.c:1492 ../src/planner-task-tree.c:1624
 msgid "N/A"
 msgstr "---"
 
-#: ../src/planner-task-tree.c:2719
+#: ../src/planner-task-tree.c:2724
 msgid "Remove tasks"
 msgstr "Feladatok eltávolítása"
 
-#: ../src/planner-task-tree.c:2781
+#: ../src/planner-task-tree.c:2786
 #, c-format
 msgid ""
 "You are about to open an edit dialog each for %i tasks. Are you sure that "
@@ -1836,76 +1884,76 @@ msgstr ""
 "Szerkesztési párbeszédablakot próbált nyitni mind a(z) %i feladathoz. "
 "Valóban ezt akarja tenni?"
 
-#: ../src/planner-task-tree.c:2883
+#: ../src/planner-task-tree.c:2888
 msgid "Unlink tasks"
 msgstr "Feladatok szétválasztása"
 
-#: ../src/planner-task-tree.c:2935
+#: ../src/planner-task-tree.c:2940
 msgid "Link tasks"
 msgstr "Feladatok összekapcsolása"
 
-#: ../src/planner-task-tree.c:3026
+#: ../src/planner-task-tree.c:3031
 msgid "Indent tasks"
 msgstr "Feladatok behúzása"
 
-#: ../src/planner-task-tree.c:3035
+#: ../src/planner-task-tree.c:3042
 msgid "Indent task"
 msgstr "Feladat behúzása"
 
-#: ../src/planner-task-tree.c:3128
+#: ../src/planner-task-tree.c:3134
 msgid "Unindent tasks"
 msgstr "Feladatok behúzásának csökkentése"
 
-#: ../src/planner-task-tree.c:3144
+#: ../src/planner-task-tree.c:3150
 msgid "Unindent task"
 msgstr "Feladat behúzásának csökkentése"
 
-#: ../src/planner-task-tree.c:3221
+#: ../src/planner-task-tree.c:3227
 msgid "Move tasks up"
 msgstr "Feladatok mozgatása fel"
 
-#: ../src/planner-task-tree.c:3259
+#: ../src/planner-task-tree.c:3265
 msgid "Move task up"
 msgstr "Feladat mozgatása fel"
 
-#: ../src/planner-task-tree.c:3348
+#: ../src/planner-task-tree.c:3354
 msgid "Move tasks down"
 msgstr "Feladatok mozgatása le"
 
 #. Moving task from 'position' to 'position + 1'
-#: ../src/planner-task-tree.c:3394
+#: ../src/planner-task-tree.c:3400
 msgid "Move task down"
 msgstr "Feladat megszorításának visszaállítása"
 
-#: ../src/planner-task-tree.c:3450
+#: ../src/planner-task-tree.c:3456
 msgid "Reset task constraints"
 msgstr "Feladat megszorításának visszaállítása"
 
-#: ../src/planner-task-tree.c:3482
+#: ../src/planner-task-tree.c:3488
 msgid "Reset all task constraints"
 msgstr "Összes feladat megszorításának visszaállítása"
 
-#: ../src/planner-task-view.c:122
+#: ../src/planner-task-view.c:124
 msgid "_Edit Task"
 msgstr "_Feladat szerkesztése"
 
-#: ../src/planner-task-view.c:149
+#: ../src/planner-task-view.c:151
 msgid "_Edit Custom Properties..."
 msgstr "_Egyéni tulajdonságok szerkesztése..."
 
-#: ../src/planner-task-view.c:258
+#: ../src/planner-task-view.c:270
 msgid "Tasks"
 msgstr "Feladatok"
 
-#: ../src/planner-task-view.c:264
+#: ../src/planner-task-view.c:276
 msgid "_Tasks"
 msgstr "_Feladatok"
 
-#: ../src/planner-task-view.c:560
+#: ../src/planner-task-view.c:572
 msgid "Edit custom task properties"
 msgstr "Egyéni feladat tulajdonságainak szerkesztése"
 
-#: ../src/planner-task-view.c:595
+#: ../src/planner-task-view.c:626
 msgid "Edit Task Columns"
 msgstr "Feladatoszlopok szerkesztése"
 
@@ -1933,14 +1981,14 @@ msgstr ""
 "\n"
 "Feladat"
 
-#: ../src/planner-usage-view.c:104
+#: ../src/planner-usage-view.c:111
 msgid "Zoom to fit"
 msgstr "Ablakmérethez igazítás"
 
 #. i18n: Label used for the sidebar. Please try to make it short and use
 #. * a linebreak if necessary/possible.
 #.
-#: ../src/planner-usage-view.c:194
+#: ../src/planner-usage-view.c:201
 msgid ""
 "Resource\n"
 "Usage"
@@ -1948,11 +1996,11 @@ msgstr ""
 "Erőforrás\n"
 "Használat"
 
-#: ../src/planner-usage-view.c:200
+#: ../src/planner-usage-view.c:207
 msgid "Resource _Usage"
 msgstr "Erőforrás_használat"
 
-#: ../src/planner-usage-view.c:311
+#: ../src/planner-usage-view.c:318
 msgid "Edit Resource Usage Columns"
 msgstr "Erőforráshasználat oszlopok szerkesztése"
 
@@ -1980,7 +2028,7 @@ msgstr "Projekt megnyitása"
 msgid "_Import"
 msgstr "_Importálás"
 
-#: ../src/planner-window.c:240 ../src/planner-window.c:1507
+#: ../src/planner-window.c:240 ../src/planner-window.c:1560
 msgid "_Save"
 msgstr "M_entés"
 
@@ -2121,57 +2169,57 @@ msgstr "Planner-fájlok"
 #. I18n: Translators, list your names here, newline separated if there
 #. * are more than one, to appear in the about box.
 #.
-#: ../src/planner-window.c:1271 ../src/planner-window.c:1293
+#: ../src/planner-window.c:1324 ../src/planner-window.c:1346
 msgid "translator-credits"
 msgstr ""
 "Kelemen Gábor <kelemeng@gnome.hu>\n"
 "Kéménczy Kálmán <kkemenczy@novell.com>\n"
 "Tímár András <timar@gnome.hu>"
 
-#: ../src/planner-window.c:1288
+#: ../src/planner-window.c:1341
 msgid "A Project Management application for the GNOME desktop"
 msgstr "Projektmenedzsment alkalmazás a GNOME munkaasztalhoz"
 
-#: ../src/planner-window.c:1295
+#: ../src/planner-window.c:1348
 msgid "The Planner Homepage"
 msgstr "A Planner honlapja"
 
-#: ../src/planner-window.c:1447
+#: ../src/planner-window.c:1500
 msgid "If you don't save, changes made the last minute will be discarded."
 msgstr "Ha nem menti, az utolsó perc módosításai elvesznek."
 
-#: ../src/planner-window.c:1452
+#: ../src/planner-window.c:1505
 #, c-format
 msgid "If you don't save, changes made the last %d minutes will be discarded."
 msgstr "Ha nem menti, az utolsó %d perc módosításai elvesznek."
 
-#: ../src/planner-window.c:1457
+#: ../src/planner-window.c:1510
 msgid "If you don't save, changes made the last hour will be discarded."
 msgstr "Ha nem menti, az utolsó óra módosításai elvesznek."
 
-#: ../src/planner-window.c:1462
+#: ../src/planner-window.c:1515
 #, c-format
 msgid "If you don't save, changes made the last %d hours will be discarded."
 msgstr "Ha nem menti, az utolsó %d óra módosításai elvesznek."
 
-#: ../src/planner-window.c:1469
+#: ../src/planner-window.c:1522
 #, c-format
 msgid "Save changes to document '%s' before closing?"
 msgstr "Menti a(z) '%s' dokumentumot bezárás előtt?"
 
-#: ../src/planner-window.c:1494
+#: ../src/planner-window.c:1547
 msgid "C_lose without saving"
 msgstr "_Bezárás mentés nélkül"
 
-#: ../src/planner-window.c:1500
+#: ../src/planner-window.c:1553
 msgid "_Cancel"
 msgstr "_Mégsem"
 
-#: ../src/planner-window.c:1599
+#: ../src/planner-window.c:1652
 msgid "Save a File"
 msgstr "Fájl mentése"
 
-#: ../src/planner-window.c:1886
+#: ../src/planner-window.c:1938
 msgid ""
 "You have opened a file that was saved with an old version of Planner.\n"
 "\n"
@@ -2200,11 +2248,11 @@ msgstr ""
 "megszorítás eltávolítása' pontjával."
 
 #. Hack.
-#: ../src/planner-window.c:1921
+#: ../src/planner-window.c:1973
 msgid "Unnamed database project"
 msgstr "Névtelen adatbázisprojekt"
 
-#: ../src/planner-window.c:2035
+#: ../src/planner-window.c:2087
 #, c-format
 msgid "Open '%s'"
 msgstr "'%s' megnyitása"
