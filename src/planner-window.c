@@ -1344,7 +1344,7 @@ window_about_cb (GtkAction *action,
 			       "translator-credits",
 			       strcmp (translator_credits,
 				       _("translator-credits")) != 0 ? _(translator_credits) : NULL,
-			       "website", "http://www.imendio.com/projects/planner/",
+			       "website", "http://live.gnome.org/Planner",
 			       "website-label", _("The Planner Homepage"),
 			       "logo", pixbuf,
 			       NULL);

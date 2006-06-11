@@ -1,3 +1,11 @@
+2006-06-11 Kurt Maute <Kurt@Maute.us>
+	* configure.in:  Version 0.14
+	* po/POTFILES.in: Removed referece to planner.keys.in
+	* python/Makefile.am: Correct error when builddir != srcdir
+	* src/planner-window.c: Change planner homepage in about box to live.gnome.org/Planner
+
+	Correct distcheck errors and cut v0.14
+
 2006-05-23 Kurt Maute <Kurt@Maute.us>
 	* src/planner-window.c
 
