@@ -35,20 +35,20 @@ EXTRA_DIST = 				\
 	plannerui-types.defs
 
 planner.c: planner.defs planner-types.defs planner.override
-	$(PYGTK_CODEGEN) \
+	( cd $(srcdir) && $(PYGTK_CODEGEN) \
 	    --override $*.override \
             --load-types planner-arg-types.py \
             --register $(PYGTK_DEFSDIR)/gtk-types.defs \
-	    --prefix $* $*.defs > gen-$*.c \
+	    --prefix $* $*.defs ) > gen-$*.c \
 	&& cp gen-$*.c $*.c \
 	&& rm -f gen-$*.c
 
 plannerui.c: plannerui.defs plannerui-types.defs plannerui.override
-	$(PYGTK_CODEGEN) \
+	( cd $(srcdir) && $(PYGTK_CODEGEN) \
 	    --override $*.override \
             --load-types planner-arg-types.py \
             --register $(PYGTK_DEFSDIR)/gtk-types.defs \
             --register planner-types.defs \
-	    --prefix $* $*.defs > gen-$*.c \
+	    --prefix $* $*.defs ) > gen-$*.c \
 	&& cp gen-$*.c $*.c \
 	&& rm -f gen-$*.c
