@@ -1,13 +1,13 @@
 # Russian translation of planner
-# Copyright (C) 2002,2003 Free Software Foundation, Inc.
+# Copyright (C) 2002-2006 Free Software Foundation, Inc.
 # Vitaly Lipatov <lav@altlinux.ru>, 2002,2003.
 # Sergey Kvyato <kvantos@plotinka.ru> 2006
 msgid ""
 msgstr ""
-"Project-Id-Version: MrProject 0.9.1\n"
-"Report-Msgid-Bugs-To: \n"
+"Project-Id-Version: Planner 0.14\n"
+"Report-Msgid-Bugs-To: gnome-cyr@gnome.org\n"
 "POT-Creation-Date: 2006-06-14 01:18+0400\n"
-"PO-Revision-Date: 2003-06-28 16:51+0400\n"
+"PO-Revision-Date: 2006-06-14 16:51+0400\n"
 "Last-Translator: Sergey Kvyato <kvantos@plotinka.ru>\n"
 "Language-Team: Russian <gnome-cyr@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -88,7 +88,7 @@ msgstr "Применить"
 
 #: ../data/glade/calendar-dialog.glade.h:12
 msgid "C_opy an existing calendar"
-msgstr "Скопировать существующий календарь"
+msgstr "К_опировать существующий календарь"
 
 #: ../data/glade/calendar-dialog.glade.h:13
 msgid "C_reate"
@@ -120,11 +120,11 @@ msgstr "Типовая неделя..."
 
 #: ../data/glade/calendar-dialog.glade.h:20
 msgid "Edit Day Types"
-msgstr "Правка видов дней"
+msgstr "Изменить виды дней"
 
 #: ../data/glade/calendar-dialog.glade.h:21
 msgid "Edit Working Time"
-msgstr "Правка рабочего времени"
+msgstr "Изменить рабочее времени"
 
 #: ../data/glade/calendar-dialog.glade.h:22
 msgid "From:"
@@ -172,7 +172,7 @@ msgstr "_Извлечь из календаря"
 
 #: ../data/glade/calendar-dialog.glade.h:33
 msgid "_Existing calendars:"
-msgstr "Имеющиеся календари:"
+msgstr "_Имеющиеся календари:"
 
 #: ../data/glade/calendar-dialog.glade.h:34
 msgid "_Name of the new calendar:"
@@ -184,11 +184,11 @@ msgstr "_Создать..."
 
 #: ../data/glade/column-dialog.glade.h:2
 msgid "Hidden columns:"
-msgstr "Невидимые столбцы"
+msgstr "Невидимые столбцы:"
 
 #: ../data/glade/column-dialog.glade.h:3
 msgid "Visible columns:"
-msgstr "Видимые столбцы"
+msgstr "Видимые столбцы:"
 
 #: ../data/glade/column-dialog.glade.h:4
 msgid "_Hide"
@@ -200,7 +200,7 @@ msgstr "_Показать"
 
 #: ../data/glade/eds.glade.h:2
 msgid "Loading resource data"
-msgstr "Загружаются данные о ресурсе"
+msgstr "Загружаются данные ресурса"
 
 #: ../data/glade/eds.glade.h:3
 msgid "Search"
@@ -216,7 +216,7 @@ msgstr "Выделить группу"
 
 #: ../data/glade/eds.glade.h:6
 msgid "Unselect All"
-msgstr "Снять все выделения"
+msgstr "Снять выделение"
 
 #: ../data/glade/eds.glade.h:7
 msgid "dialog1"
@@ -249,7 +249,7 @@ msgstr "Дополнительно"
 
 #: ../data/glade/project-properties.glade.h:2
 msgid "Edit Project Phases"
-msgstr "Правка фаз проекта"
+msgstr "Изменить фазы проекта"
 
 #: ../data/glade/project-properties.glade.h:3
 #: ../data/glade/resource-dialog.glade.h:5 ../data/glade/task-dialog.glade.h:6
@@ -302,7 +302,7 @@ msgstr "Календарь"
 
 #: ../data/glade/resource-dialog.glade.h:4
 msgid "Edit Calendars..."
-msgstr "Правка календарей..."
+msgstr "Изменить календари..."
 
 #: ../data/glade/resource-dialog.glade.h:6 ../data/glade/task-dialog.glade.h:7
 msgid "Notes"
@@ -367,7 +367,7 @@ msgstr "Выбрать проект"
 #: ../data/glade/sql.glade.h:4
 msgid "The database contains the following projects. Select a project to open:"
 msgstr ""
-"База данных содержит перечисленные проекты. Выберите какой из них открыть:"
+"База данных содержит следующие проекты. Выберите, какой из них открыть:"
 
 #: ../data/glade/sql.glade.h:5
 msgid "_Database:"
@@ -493,11 +493,11 @@ msgstr "Показать нестандартные дни в диаграмме
 
 #: ../data/planner.schemas.in.h:2
 msgid "Highlight critical path in Gantt view"
-msgstr "Подсветить важные задачи в диаграмме Ганта"
+msgstr "Подсветить критические пути в диаграмме Ганта"
 
 #: ../data/planner.schemas.in.h:3
 msgid "Highlight critical path in Task view"
-msgstr "Подсветить важные задачи во вкладке Задачи"
+msgstr "Подсветить критические пути во вкладке Задачи"
 
 #: ../data/planner.schemas.in.h:4
 msgid "Print the Gantt view"
@@ -505,45 +505,45 @@ msgstr "Распечатать диаграмму Ганта"
 
 #: ../data/planner.schemas.in.h:5
 msgid "Print the Resource view"
-msgstr "Распечатать вкладку Ресурсы"
+msgstr "Распечатать вид ресурсов"
 
 #: ../data/planner.schemas.in.h:6
 msgid "Print the Task view"
-msgstr "Распечатать вкладку Задачи"
+msgstr "Распечатать вид задач"
 
 #: ../data/planner.schemas.in.h:7
 msgid "The active view"
-msgstr "Активный просмотр"
+msgstr "Активный вид"
 
 #: ../data/planner.schemas.in.h:8
 msgid "Whether printing of the Gantt view is enabled."
-msgstr "Включена ли печать диаграммы Ганта."
+msgstr "Возможна ли печать диаграммы Ганта."
 
 #: ../data/planner.schemas.in.h:9
 msgid "Whether printing of the Resource view is enabled."
-msgstr "Включена ли печать вкладки Ресурсы."
+msgstr "Возможна ли печать вида ресурсов."
 
 #: ../data/planner.schemas.in.h:10
 msgid "Whether printing of the Task view is enabled."
-msgstr "Включена ли печать вкладки Задачи."
+msgstr "Возможна ли печать вида задач."
 
 #: ../data/planner.schemas.in.h:11
 msgid "Whether to display nonstandard days in the Gantt view."
-msgstr "Показывать ли нестандартные дни в Gantt диаграмме."
+msgstr "Показывать ли нестандартные дни в диаграмме Ганта."
 
 #: ../data/planner.schemas.in.h:12
 msgid ""
 "Whether to highlight the tasks along the cricital path in the Gantt view."
-msgstr "Выделять ли задачи по признаку критичности в диаграмме Ганта."
+msgstr "Выделять ли задачи на критическом пути в диаграмме Ганта."
 
 #: ../data/planner.schemas.in.h:13
 msgid ""
 "Whether to highlight the tasks along the cricital path in the Task view."
-msgstr "Выделять ли задачи по признаку критичности во вкладке Задачи."
+msgstr "Выделять ли задачи на критическом пути при отображении задач."
 
 #: ../data/planner.schemas.in.h:14
 msgid "Which view to display in the user interface."
-msgstr "Какие вкладки показывать в пользовательском интерфейсе"
+msgstr "Какие возможности показывать в пользовательском интерфейсе"
 
 #: ../libegg/recent-files/egg-recent-vfs-utils.c:90
 msgid " (invalid Unicode)"
@@ -592,7 +592,7 @@ msgstr "По умолчанию"
 #: ../libplanner/mrp-project.c:716
 #, c-format
 msgid "Invalid URI: '%s'"
-msgstr "Кривой-косой URI: «%s»"
+msgstr "Некорректный URI: «%s»"
 
 #: ../libplanner/mrp-project.c:759
 #, c-format
@@ -601,11 +601,11 @@ msgstr "Невозможно найти подходящий файл модул
 
 #: ../libplanner/mrp-project.c:780 ../libplanner/mrp-project.c:1064
 msgid "No support for SQL storage built into this version of Planner."
-msgstr "В этой версии Planner нет поддержки SQL базы данных."
+msgstr "В этой версии Planner нет поддержки базы данных SQL."
 
 #: ../libplanner/mrp-project.c:817
 msgid "Invalid URI."
-msgstr "Недопустимый URI."
+msgstr "Некорректный URI."
 
 #: ../libplanner/mrp-project.c:958
 #, c-format
@@ -652,7 +652,7 @@ msgstr "Ничего"
 
 #: ../libplanner/mrp-sql.c:206
 msgid "Can't connect to database server"
-msgstr "Немогу подключится к серверу баз данных"
+msgstr "Не удалось подключится к серверу баз данных"
 
 #. Give up.
 #: ../libplanner/mrp-sql.c:297 ../src/planner-sql-plugin.c:196
@@ -676,7 +676,7 @@ msgstr ""
 #: ../libplanner/mrp-sql.c:2193
 #, c-format
 msgid "BEGIN command failed %s."
-msgstr "Комманда BEGIN сбоит %s."
+msgstr "Комманда BEGIN завершилась ошибкой %s."
 
 #: ../libplanner/mrp-sql.c:2361
 #, c-format
@@ -714,29 +714,29 @@ msgstr ""
 
 #: ../libplanner/mrp-task.c:1081
 msgid "Start to Finish relation type cannot be combined with other relations."
-msgstr "Отношение \"Начать с концом\" не может применяться вместе с другими отношениями."
+msgstr "Отношение «Начать с концом\" не может применяться вместе с другими отношениями."
 
 #: ../libplanner/mrp-task.c:1083
 msgid "Finish to Finish relation type cannot be combined with other relations."
-msgstr "Отношение \"Закончить с концом\" не может применяться вместе с другими отношениями."
+msgstr "Отношение «Закончить с концом\" не может применяться вместе с другими отношениями."
 
 #: ../libplanner/mrp-task.c:1099
 msgid ""
 "Start to Finish relation type cannot be combined with Start No Earlier Than "
 "constraint."
-msgstr "Отношение \"Начать с концом\" не может применяться вместе с \"Начать не раньше, чем\""
+msgstr "Отношение «Начать с концом» не может применяться вместе с «Начать не раньше, чем»"
 
 #: ../libplanner/mrp-task.c:1101
 msgid ""
 "Finish to Finish relation type cannot be combined with Start No Earlier Than "
 "constraint."
-msgstr "Отношение \"Начать с концом\" не может применяться вместе с \"Начать не раньше, чем\""
+msgstr "Отношение «Начать с концом» не может применяться вместе с «Начать не раньше, чем»"
 
 #: ../libplanner/mrp-task.c:1124
 msgid ""
 "Start to Finish relation cannot be set. Predecessor starts on project start "
 "date."
-msgstr "Не удалось установить \"Начать с концом\". Предшествующая задача начинается со стартом проекта."
+msgstr "Не удалось установить «Начать с концом». Предшествующая задача начинается со стартом проекта."
 
 #: ../libplanner/mrp-task-manager.c:2518
 msgid "Cannot add a predecessor, because it would result in a loop."
@@ -868,7 +868,7 @@ msgstr "Воскресенье"
 
 #: ../src/planner-default-week-dialog.c:288
 msgid "No working time"
-msgstr "Не рабочее время"
+msgstr "Нет рабочего времени"
 
 #: ../src/planner-default-week-dialog.c:299
 #: ../src/planner-default-week-dialog.c:303
@@ -877,7 +877,7 @@ msgstr "%H:%M"
 
 #: ../src/planner-default-week-dialog.c:553
 msgid "Edit default week"
-msgstr "Правка стандартной недели"
+msgstr "Изменить неделю по умолчанию"
 
 #: ../src/planner-eds-plugin.c:167
 msgid "EDS"
@@ -885,7 +885,7 @@ msgstr "EDS"
 
 #: ../src/planner-eds-plugin.c:168
 msgid "Import resources from Evolution Data Server"
-msgstr "Имортировать ресурсы из сервера данных Evolution (EDS)"
+msgstr "Импортировать ресурсы из сервера данных Evolution (EDS)"
 
 #: ../src/planner-eds-plugin.c:396 ../src/planner-gantt-print.c:190
 #: ../src/planner-gantt-view.c:555 ../src/planner-group-dialog.c:822
@@ -909,7 +909,7 @@ msgstr "Фото"
 
 #: ../src/planner-eds-plugin.c:676
 msgid "Imported from Evolution Data Server"
-msgstr "Имортировано из сервера данных Evolution (EDS)"
+msgstr "Импортировано из сервера данных Evolution (EDS)"
 
 #: ../src/planner-eds-plugin.c:677
 msgid "Updated from Evolution Data Server"
@@ -993,7 +993,7 @@ msgstr "день"
 #. day unit variant accepted in input
 #: ../src/planner-format.c:382
 msgid "days"
-msgstr "дней"
+msgstr "дни"
 
 #. day unit variant accepted in input
 #: ../src/planner-format.c:383
@@ -1069,7 +1069,7 @@ msgstr "Изменить продолжительность на %s"
 #: ../src/planner-gantt-row.c:3228 ../src/planner-task-dialog.c:455
 #: ../src/planner-task-tree.c:257 ../src/planner-task-tree.c:947
 msgid "Edit task property"
-msgstr "Правка свойств задачи"
+msgstr "Изменить свойства задачи"
 
 #: ../src/planner-gantt-view.c:133 ../src/planner-task-view.c:115
 msgid "_Insert Task"
@@ -1081,11 +1081,11 @@ msgstr "Добавить новую задачу"
 
 #: ../src/planner-gantt-view.c:136 ../src/planner-task-view.c:118
 msgid "In_sert Tasks..."
-msgstr "Вставить задачи..."
+msgstr "В_ставить задачи..."
 
 #: ../src/planner-gantt-view.c:139 ../src/planner-task-view.c:121
 msgid "_Remove Task"
-msgstr "Удалить задачу"
+msgstr "_Удалить задачу"
 
 #: ../src/planner-gantt-view.c:140 ../src/planner-task-view.c:122
 msgid "Remove the selected tasks"
@@ -1093,7 +1093,7 @@ msgstr "Удалить выделенные задачи"
 
 #: ../src/planner-gantt-view.c:142
 msgid "_Edit Task Properties..."
-msgstr "Правка _свойств задачи..."
+msgstr "Изменить _свойства задачи..."
 
 #: ../src/planner-gantt-view.c:145 ../src/planner-resource-view.c:245
 #: ../src/planner-task-view.c:127
@@ -1123,19 +1123,19 @@ msgstr "Связать выделенные задачи"
 
 #: ../src/planner-gantt-view.c:154 ../src/planner-task-view.c:136
 msgid "I_ndent Task"
-msgstr "_Выровнять задачу"
+msgstr "Сдвинуть задачу _правее"
 
 #: ../src/planner-gantt-view.c:155 ../src/planner-task-view.c:137
 msgid "Indent the selected tasks"
-msgstr "Выровнять выделенные задачи"
+msgstr "Сдвинуть выделенные задачи правее"
 
 #: ../src/planner-gantt-view.c:157 ../src/planner-task-view.c:139
 msgid "Unin_dent Task"
-msgstr "_Разложить задачи"
+msgstr "Сдвинуть задачу _левее"
 
 #: ../src/planner-gantt-view.c:158 ../src/planner-task-view.c:140
 msgid "Unindent the selected tasks"
-msgstr "Разложить выделенные задачи"
+msgstr "Сдвинуть выделенные задачи левее"
 
 #: ../src/planner-gantt-view.c:160 ../src/planner-task-view.c:142
 msgid "Move Task _Up"
@@ -1186,24 +1186,24 @@ msgstr "Уменьшить"
 #: ../src/planner-gantt-view.c:178 ../src/planner-resource-view.c:251
 #: ../src/planner-task-view.c:154 ../src/planner-usage-view.c:114
 msgid "Edit _Visible Columns"
-msgstr "Правка _видимых столбцов"
+msgstr "Изменить отобра_жаемые столбцы"
 
 #: ../src/planner-gantt-view.c:179 ../src/planner-resource-view.c:252
 #: ../src/planner-task-view.c:155 ../src/planner-usage-view.c:115
 msgid "Edit visible columns"
-msgstr "Правка видимых столбцов"
+msgstr "Изменить отображаемые столбцы"
 
 #: ../src/planner-gantt-view.c:184 ../src/planner-task-view.c:160
 msgid "_Highlight Critical Tasks"
-msgstr "_Подсветить критические задачи"
+msgstr "Подсветить _критические задачи"
 
 #: ../src/planner-gantt-view.c:187
 msgid "_Show Guide Lines"
-msgstr "_Показывать направляющие линии"
+msgstr "Показывать направляющие _линии"
 
 #: ../src/planner-gantt-view.c:190 ../src/planner-task-view.c:162
 msgid "_Nonstandard Days"
-msgstr "Не_стандартные даты"
+msgstr "Не_стандартные дни"
 
 #. i18n: Label used for the sidebar. Please try to make it short and use
 #. * a linebreak if necessary/possible.
@@ -1246,7 +1246,7 @@ msgstr "Назначить на"
 
 #: ../src/planner-gantt-view.c:911
 msgid "Edit Gantt Columns"
-msgstr "Правка столбцов Ганта"
+msgstr "Изменить столбцы диаграммы Ганта"
 
 #: ../src/planner-group-dialog.c:304
 msgid "Insert group"
@@ -1262,19 +1262,19 @@ msgstr "Стандартная группа"
 
 #: ../src/planner-group-dialog.c:644
 msgid "Edit group property"
-msgstr "Править свойства группы"
+msgstr "Изменить свойства группы"
 
 #: ../src/planner-group-dialog.c:828
 msgid "Manager name"
-msgstr "Имя менеджера"
+msgstr "Имя руководителя"
 
 #: ../src/planner-group-dialog.c:834
 msgid "Manager phone"
-msgstr "Телефон менеджера"
+msgstr "Телефон руководителя"
 
 #: ../src/planner-group-dialog.c:840
 msgid "Manager email"
-msgstr "Эл. почта менеджера"
+msgstr "Эл. почта руководителя"
 
 #: ../src/planner-html-plugin.c:47
 msgid "HTML"
@@ -1385,20 +1385,20 @@ msgstr "Выбрать календарь для использования дл
 
 #: ../src/planner-project-properties.c:487
 msgid "Edit Project Name"
-msgstr "Править название проекта"
+msgstr "Изменить название проекта"
 
 #: ../src/planner-project-properties.c:523
 msgid "Edit Organization"
-msgstr "Править организацию"
+msgstr "Изменить организацию"
 
 #: ../src/planner-project-properties.c:559
 msgid "Edit Manager"
-msgstr "Править менеджера"
+msgstr "Изменить руководителя"
 
 #: ../src/planner-project-properties.c:631
 #: ../src/planner-project-properties.c:665
 msgid "Edit Project Start"
-msgstr "Править начало проекта"
+msgstr "Изменить начало проекта"
 
 #: ../src/planner-project-properties.c:754
 msgid "OK"
@@ -1406,7 +1406,7 @@ msgstr "OK"
 
 #: ../src/planner-project-properties.c:842
 msgid "Edit Project Phase"
-msgstr "Править фазы проекта"
+msgstr "Изменить фазы проекта"
 
 #: ../src/planner-project-properties.c:975
 msgid "Property"
@@ -1446,7 +1446,7 @@ msgstr "Удалить свойство проекта"
 
 #: ../src/planner-project-properties.c:2136
 msgid "Edit project property value"
-msgstr "Правка значения свойства проекта"
+msgstr "Изменить свойства проекта"
 
 #: ../src/planner-property-dialog.c:502
 msgid "Label"
@@ -1467,7 +1467,7 @@ msgstr "Удалить свойство"
 
 #: ../src/planner-property-dialog.c:909
 msgid "Edit property label"
-msgstr "Правка метки свойства"
+msgstr "Изменить метку свойства"
 
 #: ../src/planner-resource-cmd.c:75
 msgid "Insert resource"
@@ -1487,20 +1487,20 @@ msgstr "(Нет имени)"
 
 #: ../src/planner-resource-dialog.c:495
 msgid "Edit resource calendar"
-msgstr "Правка календаря ресурса"
+msgstr "Изменить календарь ресурса"
 
 #: ../src/planner-resource-dialog.c:576
 msgid "Edit resource note"
-msgstr "Правка заметок ресурса"
+msgstr "Изменить заметоку ресурса"
 
 #: ../src/planner-resource-dialog.c:643
 msgid "Edit resource cost"
-msgstr "Правка стоимости ресурса"
+msgstr "Изменить стоимость ресурса"
 
 #: ../src/planner-resource-dialog.c:711 ../src/planner-resource-dialog.c:752
 #: ../src/planner-resource-view.c:1413 ../src/planner-resource-view.c:1494
 msgid "Edit resource property"
-msgstr "Правка свойств ресурса"
+msgstr "Изменить свойство ресурса"
 
 #. i18n: time stamp format for notes in task dialog, see strftime(3) for
 #. * a detailed description.
@@ -1514,7 +1514,7 @@ msgstr "Ничего (использовать умолчания проекта
 
 #: ../src/planner-resource-dialog.c:1648 ../src/planner-resource-dialog.c:1650
 msgid "Edit resource properties"
-msgstr "Правка свойств ресурса"
+msgstr "Изменить свойства ресурса"
 
 #: ../src/planner-resource-dialog.c:1851 ../src/planner-resource-view.c:753
 #: ../src/planner-resource-view.c:767 ../src/planner-resource-view.c:1737
@@ -1531,7 +1531,7 @@ msgstr "Добавить новый ресурс"
 
 #: ../src/planner-resource-view.c:233
 msgid "In_sert Resources..."
-msgstr "Вставить ресурсы..."
+msgstr "В_ставить ресурсы..."
 
 #: ../src/planner-resource-view.c:236
 msgid "_Remove Resource"
@@ -1543,19 +1543,19 @@ msgstr "Удалить выбранный ресурс"
 
 #: ../src/planner-resource-view.c:239
 msgid "_Edit Resource Properties..."
-msgstr "Правка свойств _ресурса..."
+msgstr "Изменить свойства _ресурса..."
 
 #: ../src/planner-resource-view.c:242
 msgid "Edit _Groups"
-msgstr "Правка _групп"
+msgstr "Изменить _группы"
 
 #: ../src/planner-resource-view.c:243
 msgid "Edit resource groups"
-msgstr "Правка групп ресурса"
+msgstr "Изменить группы ресурсов"
 
 #: ../src/planner-resource-view.c:248
 msgid "Edit _Custom Properties..."
-msgstr "Правка _дополнительных свойств..."
+msgstr "Изменить _дополнительные свойства..."
 
 #: ../src/planner-resource-view.c:266
 msgid "/_Insert resource"
@@ -1579,11 +1579,11 @@ msgstr "Удалить ресурс"
 
 #: ../src/planner-resource-view.c:1020
 msgid "Edit Resource Columns"
-msgstr "Правка столбца ресурса"
+msgstr "Изменить столбцы ресурсов"
 
 #: ../src/planner-resource-view.c:1055
 msgid "Edit custom resource properties"
-msgstr "Правка свойств ресурса"
+msgstr "Изменить дополнительные свойства ресурсов"
 
 #: ../src/planner-resource-view.c:1197
 msgid "Short name"
@@ -1597,12 +1597,12 @@ msgstr "Группа"
 #: ../src/planner-scale-utils.c:129
 #, c-format
 msgid "Wk %d"
-msgstr "Wk %d"
+msgstr "Нд %d"
 
 #: ../src/planner-scale-utils.c:133
 #, c-format
 msgid "Week %d"
-msgstr "Нед.%d"
+msgstr "Нед. %d"
 
 #. i18n: Week, year.
 #: ../src/planner-scale-utils.c:138
@@ -1632,7 +1632,7 @@ msgstr "%d, Кв %d"
 #: ../src/planner-scale-utils.c:190
 #, c-format
 msgid "H%d"
-msgstr "К%d"
+msgstr "П%d"
 
 #. i18n: Year, short "Half year", preferably 1 letter.
 #: ../src/planner-scale-utils.c:195
@@ -1691,7 +1691,7 @@ msgstr ""
 #: ../src/planner-sql-plugin.c:555
 #, c-format
 msgid "Can't create tables in database %s"
-msgstr "Немогу создать таблицы в базе данных %s"
+msgstr "Не удалось создать таблицы в базе данных %s"
 
 #: ../src/planner-sql-plugin.c:617
 #, c-format
@@ -1742,7 +1742,7 @@ msgstr "Добавить задачу"
 
 #: ../src/planner-task-dialog.c:529
 msgid "Edit task type"
-msgstr "Правка типа задачи"
+msgstr "Изменить тип задачи"
 
 #: ../src/planner-task-dialog.c:596
 msgid "Toggle fixed duration"
@@ -1750,7 +1750,7 @@ msgstr "Переключить фиксированную длительност
 
 #: ../src/planner-task-dialog.c:663
 msgid "Edit task scheduling"
-msgstr "Правка планирования задачи"
+msgstr "Изменить планирование задачи"
 
 #: ../src/planner-task-dialog.c:743
 msgid "Assign resource to task"
@@ -1762,19 +1762,19 @@ msgstr "Открепить ресурс от задачи"
 
 #: ../src/planner-task-dialog.c:862
 msgid "Change resource units in task"
-msgstr "Правка единиц ресурса в задаче"
+msgstr "Изменить единицы ресурса в задаче"
 
 #: ../src/planner-task-dialog.c:950
 msgid "Edit task predecessor"
-msgstr "Правка предшествующей задачи"
+msgstr "Изменить предшествующую задачу"
 
 #: ../src/planner-task-dialog.c:1021
 msgid "Edit lag predecessor"
-msgstr "Правка задержки предшествующей задачи"
+msgstr "Изменить задержку предшествующей задачи"
 
 #: ../src/planner-task-dialog.c:1087
 msgid "Edit task note"
-msgstr "Правка записок задачи"
+msgstr "Изменить заметку задачи"
 
 #: ../src/planner-task-dialog.c:1495
 #, c-format
@@ -1824,7 +1824,7 @@ msgstr "Задержка"
 
 #: ../src/planner-task-dialog.c:2887 ../src/planner-task-dialog.c:2889
 msgid "Edit task properties"
-msgstr "Правка свойств задачи"
+msgstr "Изменить свойства задачи"
 
 #: ../src/planner-task-popup.c:54
 msgid "/_Insert task"
@@ -1848,7 +1848,7 @@ msgstr "/Назначить _ресурсы..."
 
 #: ../src/planner-task-popup.c:73 ../src/planner-usage-tree.c:105
 msgid "/_Edit task..."
-msgstr "_Правка задачи..."
+msgstr "/_Правка задачи..."
 
 #: ../src/planner-task-tree.c:567
 msgid "Remove task"
@@ -1876,7 +1876,7 @@ msgid ""
 "You are about to open an edit dialog each for %i tasks. Are you sure that "
 "you want to do that?"
 msgstr ""
-"Вы собрались открыть диалоги правки для %i задач. Вы уверены что хотите этого?"
+"Вы собрались открыть диалоги изменения свойств для %i задач. Вы уверены что хотите этого?"
 
 #: ../src/planner-task-tree.c:2888
 msgid "Unlink tasks"
@@ -1888,19 +1888,19 @@ msgstr "Связать задачи"
 
 #: ../src/planner-task-tree.c:3031
 msgid "Indent tasks"
-msgstr "Выровнять задачи"
+msgstr "Сдвинуть задачи правее"
 
 #: ../src/planner-task-tree.c:3042
 msgid "Indent task"
-msgstr "Выровнять задачу"
+msgstr "Сдвинуть задачу правее"
 
 #: ../src/planner-task-tree.c:3134
 msgid "Unindent tasks"
-msgstr "Разложить задачи"
+msgstr "Сдвинуть задачи левее"
 
 #: ../src/planner-task-tree.c:3150
 msgid "Unindent task"
-msgstr "Разложить задачу"
+msgstr "Сдвинуть задачу левее"
 
 #: ../src/planner-task-tree.c:3227
 msgid "Move tasks up"
@@ -1933,7 +1933,7 @@ msgstr "_Правка задачи"
 
 #: ../src/planner-task-view.c:151
 msgid "_Edit Custom Properties..."
-msgstr "Правка _дополнительных свойств..."
+msgstr "Изменить _дополнительные свойства..."
 
 #: ../src/planner-task-view.c:270
 msgid "Tasks"
@@ -1945,11 +1945,11 @@ msgstr "_Задачи"
 
 #: ../src/planner-task-view.c:572
 msgid "Edit custom task properties"
-msgstr "Правка дополнительных свойств задачи"
+msgstr "Изменить дополнительные свойства задачи"
 
 #: ../src/planner-task-view.c:626
 msgid "Edit Task Columns"
-msgstr "Правка столбцов задач"
+msgstr "Изменить столбцы задач"
 
 #: ../src/planner-usage-tree.c:108
 msgid "/_Expand all resources"
@@ -1996,7 +1996,7 @@ msgstr "_Использование ресурсов"
 
 #: ../src/planner-usage-view.c:318
 msgid "Edit Resource Usage Columns"
-msgstr "Правка столбца использования ресурсов"
+msgstr "Изменить столбцы использования ресурсов"
 
 #: ../src/planner-window.c:225
 msgid "_File"
@@ -2012,7 +2012,7 @@ msgstr "Создать новый проект"
 
 #: ../src/planner-window.c:233
 msgid "_Open..."
-msgstr "Открыть..."
+msgstr "_Открыть..."
 
 #: ../src/planner-window.c:233
 msgid "Open a project"
@@ -2044,7 +2044,7 @@ msgstr "Сохранить текущий проект под другим им�
 
 #: ../src/planner-window.c:249
 msgid "_Print..."
-msgstr "Печать..."
+msgstr "_Печать..."
 
 #: ../src/planner-window.c:249
 msgid "Print the current project"
@@ -2052,7 +2052,7 @@ msgstr "Напечатать текущий проект"
 
 #: ../src/planner-window.c:252
 msgid "Print Pre_view"
-msgstr "Просмотр _печати"
+msgstr "Просмотр п_ечати"
 
 #: ../src/planner-window.c:252
 msgid "Print preview of the current project"
@@ -2100,7 +2100,7 @@ msgstr "_Вид"
 
 #: ../src/planner-window.c:276
 msgid "_Actions"
-msgstr "Действия"
+msgstr "_Действия"
 
 #: ../src/planner-window.c:280
 msgid "_Project"
@@ -2112,19 +2112,19 @@ msgstr "Управление _календарями"
 
 #: ../src/planner-window.c:286
 msgid "Edit Day _Types"
-msgstr "Правка видов _дней"
+msgstr "Изменить виды _дней"
 
 #: ../src/planner-window.c:289
 msgid "Edit Project _Phases"
-msgstr "Правка _фаз проекта"
+msgstr "Изменить _фазы проекта"
 
 #: ../src/planner-window.c:292
 msgid "_Edit Project Properties"
-msgstr "Правка _свойств проекта"
+msgstr "Изменить _свойства проекта"
 
 #: ../src/planner-window.c:292
 msgid "Edit the project properties"
-msgstr "Правка свойств проекта"
+msgstr "Изменить свойства проекта"
 
 #: ../src/planner-window.c:300
 msgid "_Help"
@@ -2132,7 +2132,7 @@ msgstr "_Справка"
 
 #: ../src/planner-window.c:303
 msgid "_User Guide"
-msgstr "_Руководство пользователя"
+msgstr "_Содержание"
 
 #: ../src/planner-window.c:303
 msgid "Show the Planner User Guide"
@@ -2262,7 +2262,7 @@ msgstr "Открыть «%s»"
 
 #: ../src/planner-working-time-dialog.c:145
 msgid "Edit working time"
-msgstr "Правка рабочего времени"
+msgstr "Изменить рабочее время"
 
 #: ../src/planner-xml-planner-plugin.c:54
 msgid "Planner 0.11 Format"
