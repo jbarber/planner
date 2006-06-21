@@ -1,0 +1,52 @@
+============
+Planner 0.14
+============
+
+New features and fixes
+======================
+ * FF and SF Predecessors 140561 (Kurt Maute)
+ * Simple priority scheduling (Matteo Nastasi): 
+   Use the --enable-simple-priority-scheduling option when building. 
+   This feature will allow a high priority task to steal resources from a 
+   lower priority task.
+ * View Non-standard working/nonworking days (Matteo Nastasi): 
+   In the Gantt view, this feature shows where resources have differences 
+   in working and nonworking days when compared to the default calendar.
+ * Resource Usage view canvas interactivity (Alvaro del Castillo):
+   Right clicking on a usage bar or resource pops up an option menu.
+ * Gantt chart misalignment with tree view 128983 (Francisco Moraes)
+ * Summary tasks: work now equals sum of child tasks 305801 (Kurt Maute)
+ * Eliminate effects of resource assignments on summary tasks 151604 
+   (Kurt Maute): 
+   Assigning a resource to a summary task now has no effect.
+ * Updated user guide: (Kurt Maute)
+ * View Grid Lines in Gantt view 303374 (Nguyễn Thái Ngọc Duy):
+   Shows horizontal lines in Gantt to help visually line up tasks with 
+   Gantt bars. 
+
+New and Updated Translations
+============================
+Vladimir "Kaladan" Petkov (bg)
+Miloslav Trmac (cs)
+Hendrik Richter (de)
+Kostas Papadimas (el)
+Adam Weinberger (en_CA)
+David Lodge (en_GB)
+Francisco Javier F. Serrador (es)
+Ivar Smolin (et)
+Larra Murgoitio (eu)
+Meelad Zakaria (fa)
+Ilkka Tuohela (fi)
+Gabor Kelemen (hu)
+Takeshi AIHANA (ja)
+Kjartan Maraas (nb)
+"Last-Translator: \n" (ne)
+Jan-Willem Harmanny (nl)
+Afonso Celso Medina (pt_BR)
+Steve Murphy (rw)
+Marcel Telka (sk)
+Данило Шеган (sr)
+Daniel Nylander (sv)
+Maxim V. Dziumanenko (uk)
+Clytie Siddall (vi)
+Woodman Tuen (zh_TW)

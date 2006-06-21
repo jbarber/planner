@@ -45,7 +45,7 @@
   <copyright>
    <year>2005</year>
    <holder>Hizkuntza Politikarako Sailburuordetza 
-      <email>hizkpol@ej-gv.es</email> 
+   <!-- km: email cannot be a child of the holder tag   <email>hizkpol@ej-gv.es</email> -->
       (euskarazko itzulpena)
    </holder>
 
@@ -461,8 +461,7 @@ Baliabide-kostuen kudeaketa
           <figure id="resource-usage-view" float="1">
             <title>&app;-en Baliabide-erabileraren ikuspegia</title>
             <screenshot>
-<graphic fileref="figures/resource-usage-view.png" format="PNG">
-</graphic>
+<graphic fileref="figures/resource-usage-view.png" format="PNG"></graphic>
 </screenshot>
 </figure>
 <para>
@@ -2068,7 +2067,7 @@ Default: unselected.
       section is optional: primary place for this info is "About.." box of
       the program. However, if you do wish to include this info in the
       manual, this is the place to put it. Alternatively, you can put this information in the title page.--> 
-<sect1 id="&app;-about">
+<sect1 id="planner-about">
     <title>&app;-i buruz</title>
 <para>
  &app; Imendio-k eta GNOME komunitateko boluntarioek mantentzen dute. 
@@ -2097,7 +2096,7 @@ iturburu-kodean sartutako COPYING fitxategian aurkituko duzu.
   </sect1>
   <sect1 id="mrp-database-config">
   <title>&app;-eko datu-base bat konfiguratzea</title>
-   <section id="postgresql-database-config">
+   <sect2 id="postgresql-database-config">
    <title>Postgresql datu-base bat &app;-ekin erabiltzeko konfiguratzea</title>
    <caution>
 <para>
@@ -2190,7 +2189,7 @@ plannerdb</userinput>
 <userinput> echo 'DROP GROUP &app;;' | psql -e -U kurt -d plannerdb</userinput>
 </screen>
 </para>
-   </section> <section id="postgresql-remote-config">
+   </sect2> <sect2 id="postgresql-remote-config">
    <title>Postgresql datu-base bat urruneko konexiorako konfiguratzea</title>
 <para>
 Postgresql datu-basea konfiguratu ondoren, seguru asko erabilgarri jarri 
@@ -2250,7 +2249,7 @@ Client Authentication izeneko atala, ondo ulertzeko zein segurtasun-maila
 ezartzea komeni zaizun.  Adibide honetan esleitutako fidagarritasun-maila 
 ez da egokia produkzio-ingurune gehienetarako.
 </para>
-    </warning></section></sect1>
+    </warning></sect2></sect1>
   <!--sect1 id="mrp-web-resources">
   <title>Project Management Web Resources</title>
 <para>
