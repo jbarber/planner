@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-05-24 23:46+0200\n"
-"PO-Revision-Date: 2006-05-24 23:46+0200\n"
+"POT-Creation-Date: 2006-06-28 19:58+0200\n"
+"PO-Revision-Date: 2006-06-28 20:18+0200\n"
 "Last-Translator: Francisco Javier F. Serrador <serrador@cvs.gnome.org>\n"
 "Language-Team: Spanish <traductores@es.gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -337,7 +337,7 @@ msgstr "_Grupo:"
 
 #: ../data/glade/resource-dialog.glade.h:11
 msgid "_Insert time stamp"
-msgstr "_Introducir marcha de fecha"
+msgstr "_Introducir marca de fecha"
 
 #: ../data/glade/resource-dialog.glade.h:13
 #: ../data/glade/resource-input-dialog.glade.h:8
@@ -471,19 +471,11 @@ msgstr "_Prioridad:"
 #: ../data/glade/task-dialog.glade.h:18
 #: ../data/glade/task-input-dialog.glade.h:5
 msgid "_Work:"
-msgstr "_Obra:"
+msgstr "_Trabajo:"
 
 #: ../data/glade/task-input-dialog.glade.h:2
 msgid "Insert Task"
 msgstr "Introducir tarea"
-
-#: ../data/mime/planner.keys.in.h:1
-msgid "Documents/Project Management"
-msgstr "Documentos/Gestión de proyectos"
-
-#: ../data/mime/planner.keys.in.h:2
-msgid "Project Plan"
-msgstr "Plan del proyecto"
 
 #: ../data/mime/planner.xml.in.h:1
 msgid "Planner project plan"
@@ -499,15 +491,15 @@ msgstr "Gestión de proyectos"
 
 #: ../data/planner.schemas.in.h:1
 msgid "Display nonstandard days in Gantt view"
-msgstr "Mostrar días no estándar en la vista de Gantt"
+msgstr "Muestra días no estándar en la vista de Gantt"
 
 #: ../data/planner.schemas.in.h:2
 msgid "Highlight critical path in Gantt view"
-msgstr "Resaltar ruta crítica en la vista de Gantt"
+msgstr "Resalta la ruta crítica en la vista de Gantt"
 
 #: ../data/planner.schemas.in.h:3
 msgid "Highlight critical path in Task view"
-msgstr "Resaltar ruta crítica en la vista de tareas"
+msgstr "Resalta la ruta crítica en la vista de tareas"
 
 #: ../data/planner.schemas.in.h:4
 msgid "Print the Gantt view"
@@ -543,9 +535,7 @@ msgstr "Indica si se deben mostrar los días no estándar en la vista de Gantt."
 
 #: ../data/planner.schemas.in.h:12
 msgid "Whether to highlight the tasks along the cricital path in the Gantt view."
-msgstr ""
-"Indica si se deben resaltar las tareas junto con la ruta crítica en la vista "
-"de Gantt."
+msgstr "Indica si se deben resaltar las tareas junto con la ruta crítica en la vista de Gantt."
 
 #: ../data/planner.schemas.in.h:13
 msgid "Whether to highlight the tasks along the cricital path in the Task view."
@@ -563,7 +553,7 @@ msgstr " (Unicode inválido)"
 
 #: ../libplanner/mrp-day.c:54
 msgid "Working"
-msgstr "Obra realizándose"
+msgstr "Jornada laboral"
 
 #: ../libplanner/mrp-day.c:55
 msgid "A default working day"
@@ -575,7 +565,7 @@ msgstr "Jornada de descanso"
 
 #: ../libplanner/mrp-day.c:58
 msgid "A default non working day"
-msgstr "Un día predeterminado de descanso"
+msgstr "Un día de descanso predeterminado"
 
 #: ../libplanner/mrp-day.c:60
 msgid "Use base"
@@ -609,11 +599,11 @@ msgstr "URI inválida: «%s»"
 #: ../libplanner/mrp-project.c:759
 #, c-format
 msgid "Couldn't find a suitable file module for loading '%s'"
-msgstr "No se pudo encontrar un módulo para cargar «%s»"
+msgstr "No se pudo encontrar un módulo apropiado para cargar «%s»"
 
 #: ../libplanner/mrp-project.c:780 ../libplanner/mrp-project.c:1064
 msgid "No support for SQL storage built into this version of Planner."
-msgstr "No hay soporte para almacenes SQL compilado en esta versión de Planner."
+msgstr "No hay soporte para almacenamiento SQL compilado en esta versión de Planner."
 
 #: ../libplanner/mrp-project.c:817
 msgid "Invalid URI."
@@ -696,7 +686,7 @@ msgid ""
 "The project '%s' has been changed by the user '%s' since you opened it. Do "
 "you want to save anyway?"
 msgstr ""
-"El proyecto «%s» ha sido modificado por el usuario «%s» desde la última vez "
+"El proyecto «%s» lo ha modificado el usuario «%s» desde la última vez "
 "que lo abrió. ¿Quiere guardarlo de todas formas?"
 
 #: ../libplanner/mrp-sql.c:3630
@@ -710,7 +700,7 @@ msgstr "URI SQL inválida (debe empezar con 'sql://' y contener '#'),"
 
 #: ../libplanner/mrp-storage-sql.c:274
 msgid "Invalid SQL URI (invalid project id)."
-msgstr "URI SQL Inválida (id de proyecto inválido)"
+msgstr "URI SQL inválida (id de proyecto inválido)."
 
 #: ../libplanner/mrp-storage-sql.c:282
 msgid "Invalid SQL URI (no database name specified)."
@@ -1067,7 +1057,7 @@ msgstr "Trabajo"
 
 #: ../src/planner-gantt-print.c:542 ../src/planner-gantt-row.c:752
 #: ../src/planner-html-plugin.c:125 ../src/planner-task-tree.c:1571
-#: ../src/planner-window.c:1980
+#: ../src/planner-window.c:1981
 msgid "Unnamed"
 msgstr "Sin nombre"
 
@@ -1083,7 +1073,7 @@ msgstr "Hacer la tarea «%s» predecesora de «%s»"
 #: ../src/planner-gantt-row.c:2657
 #, c-format
 msgid "Change work to %s"
-msgstr "Cambiar obra a %s"
+msgstr "Cambiar trabajo a %s"
 
 #: ../src/planner-gantt-row.c:3228 ../src/planner-task-dialog.c:455
 #: ../src/planner-task-tree.c:257 ../src/planner-task-tree.c:947
@@ -1096,11 +1086,11 @@ msgstr "_Introducir tarea"
 
 #: ../src/planner-gantt-view.c:134 ../src/planner-task-view.c:116
 msgid "Insert a new task"
-msgstr "Introducir una tarea nueva"
+msgstr "Introduce una tarea nueva"
 
 #: ../src/planner-gantt-view.c:136 ../src/planner-task-view.c:118
 msgid "In_sert Tasks..."
-msgstr "Introducir t_areas..."
+msgstr "Introducir _tareas..."
 
 #: ../src/planner-gantt-view.c:139 ../src/planner-task-view.c:121
 msgid "_Remove Task"
@@ -1315,7 +1305,7 @@ msgstr "Exportar a HTML"
 msgid "Show result in browser"
 msgstr "Mostrar el resultado en un navegador"
 
-#: ../src/planner-html-plugin.c:173 ../src/planner-window.c:1689
+#: ../src/planner-html-plugin.c:173 ../src/planner-window.c:1690
 #: ../src/planner-xml-planner-plugin.c:124
 #, c-format
 msgid "File \"%s\" exists, do you want to overwrite it?"
@@ -2043,7 +2033,7 @@ msgstr "Abre un proyecto"
 msgid "_Import"
 msgstr "_Importar"
 
-#: ../src/planner-window.c:240 ../src/planner-window.c:1559
+#: ../src/planner-window.c:240 ../src/planner-window.c:1560
 msgid "_Save"
 msgstr "_Guardar"
 
@@ -2184,54 +2174,54 @@ msgstr "Archivos de Planner"
 #. I18n: Translators, list your names here, newline separated if there
 #. * are more than one, to appear in the about box.
 #.
-#: ../src/planner-window.c:1323 ../src/planner-window.c:1345
+#: ../src/planner-window.c:1324 ../src/planner-window.c:1346
 msgid "translator-credits"
 msgstr "Francisco Javier F. Serrador"
 
-#: ../src/planner-window.c:1340
+#: ../src/planner-window.c:1341
 msgid "A Project Management application for the GNOME desktop"
 msgstr "Una aplicación de gestión de proyectos para el escritorio GNOME"
 
-#: ../src/planner-window.c:1347
+#: ../src/planner-window.c:1348
 msgid "The Planner Homepage"
 msgstr "La página web de Planner"
 
-#: ../src/planner-window.c:1499
+#: ../src/planner-window.c:1500
 msgid "If you don't save, changes made the last minute will be discarded."
 msgstr "Si no guarda, los cambios hechos en el último minuto serán descartados."
 
-#: ../src/planner-window.c:1504
+#: ../src/planner-window.c:1505
 #, c-format
 msgid "If you don't save, changes made the last %d minutes will be discarded."
 msgstr "Si no guarda, los cambios hechos en los últimos %d minutos serán descartados."
 
-#: ../src/planner-window.c:1509
+#: ../src/planner-window.c:1510
 msgid "If you don't save, changes made the last hour will be discarded."
 msgstr "Si no guarda, los cambios hechos en la última hora serán descartados."
 
-#: ../src/planner-window.c:1514
+#: ../src/planner-window.c:1515
 #, c-format
 msgid "If you don't save, changes made the last %d hours will be discarded."
 msgstr "Si no guarda, los cambios hechos en las últimas %d horas serán descartados."
 
-#: ../src/planner-window.c:1521
+#: ../src/planner-window.c:1522
 #, c-format
 msgid "Save changes to document '%s' before closing?"
 msgstr "¿Desea guardar los cambios del documento «%s» antes de cerrar?"
 
-#: ../src/planner-window.c:1546
+#: ../src/planner-window.c:1547
 msgid "C_lose without saving"
 msgstr "C_errar sin guardar"
 
-#: ../src/planner-window.c:1552
+#: ../src/planner-window.c:1553
 msgid "_Cancel"
 msgstr "_Cancelar"
 
-#: ../src/planner-window.c:1651
+#: ../src/planner-window.c:1652
 msgid "Save a File"
 msgstr "Guardar un archivo"
 
-#: ../src/planner-window.c:1937
+#: ../src/planner-window.c:1938
 msgid ""
 "You have opened a file that was saved with an old version of Planner.\n"
 "\n"
@@ -2261,11 +2251,11 @@ msgstr ""
 "el elemento del menú «Eliminar todos los impedimentos» en el menú «Editar»."
 
 #. Hack.
-#: ../src/planner-window.c:1972
+#: ../src/planner-window.c:1973
 msgid "Unnamed database project"
 msgstr "Base de datos del proyecto sin nombre"
 
-#: ../src/planner-window.c:2086
+#: ../src/planner-window.c:2087
 #, c-format
 msgid "Open '%s'"
 msgstr "Abrir «%s»"
@@ -2285,4 +2275,53 @@ msgstr "Exportar proyecto a un archivo apropiado para Planner 0.11"
 #: ../src/planner-xml-planner-plugin.c:90
 msgid "Export"
 msgstr "Exportar"
+
+#: ../eds-backend/e-cal-backend-planner.c:289
+msgid "EDS UID"
+msgstr "UID de EDS"
+
+#: ../eds-backend/e-cal-backend-planner.c:290
+msgid "Identifier used by Evolution Data Server for tasks"
+msgstr "Identificador que usa el Servidor de Datos de Evolution para las tareas"
+
+#: ../eds-backend/e-cal-backend-planner.c:299
+msgid "EDS Categories"
+msgstr "Categorías de EDS"
+
+#: ../eds-backend/e-cal-backend-planner.c:300
+msgid "Categories for a task used by Evolution Data Server"
+msgstr "Categorías para una tarea que usa el Servidor de Datos de Evolution"
+
+#: ../eds-backend/e-cal-backend-planner.c:309
+msgid "EDS Classification"
+msgstr "Clasificación de EDS"
+
+#: ../eds-backend/e-cal-backend-planner.c:310
+msgid "Task access classification used by Evolution Data Server"
+msgstr "Clasificación de acceso a tareas usa el Servidor de Datos de Evolution"
+
+#: ../eds-backend/e-cal-backend-planner.c:319
+msgid "EDS URL"
+msgstr "URL de EDS"
+
+#: ../eds-backend/e-cal-backend-planner.c:320
+msgid "URL for a Task used by Evolution Data Server"
+msgstr "URL para una tarea que usa el Servidor de Datos de Evolution"
+
+#: ../eds-backend/e-cal-backend-planner.c:829
+msgid "Invalid server URI"
+msgstr "URI del servidor inválida."
+
+#. book_target = (EABConfigTargetSource *) data->target;
+#. source = book_target->source;
+#: ../eds-backend/planner-source/planner-source.c:125
+msgid "Select planner file"
+msgstr "Seleccione el archivo de Planner"
+
+#: ../eds-backend/planner-source/planner-source.c:157
+#, c-format
+msgid ""
+"The filename extension of this file isn't the planner usual file extension (%"
+"s) Do you want to continue?"
+msgstr "La extensión del nombre de archivo no es la extensión usual de Planner (%s). ¿Quiere continuar?"
 
