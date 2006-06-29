@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: planner\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-06-14 22:20+0200\n"
-"PO-Revision-Date: 2006-06-14 22:34+0200\n"
+"POT-Creation-Date: 2006-06-29 20:37+0200\n"
+"PO-Revision-Date: 2006-06-29 20:45+0200\n"
 "Last-Translator: Marcel Telka <marcel@telka.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
 "MIME-Version: 1.0\n"
@@ -713,32 +713,37 @@ msgstr ""
 
 #: ../libplanner/mrp-task.c:1081
 msgid "Start to Finish relation type cannot be combined with other relations."
-msgstr "Vzťah typu 'Začiatok pred koncom' nemôže byť kombinovaný s ostatnými vzťahmi."
+msgstr ""
+"Vzťah typu 'Začiatok pred koncom' nemôže byť kombinovaný s ostatnými vzťahmi."
 
 #: ../libplanner/mrp-task.c:1083
 msgid "Finish to Finish relation type cannot be combined with other relations."
-msgstr "Vzťah typu 'Koniec pred koncom' nemôže byť kombinovaný s ostatnými vzťahmi."
+msgstr ""
+"Vzťah typu 'Koniec pred koncom' nemôže byť kombinovaný s ostatnými vzťahmi."
 
 #: ../libplanner/mrp-task.c:1099
 msgid ""
 "Start to Finish relation type cannot be combined with Start No Earlier Than "
 "constraint."
 msgstr ""
-"Vzťah typu 'Začiatok pred koncom' nemôže byť kombinovaný s obmedzením 'Nezačať skôr ako'."
+"Vzťah typu 'Začiatok pred koncom' nemôže byť kombinovaný s obmedzením "
+"'Nezačať skôr ako'."
 
 #: ../libplanner/mrp-task.c:1101
 msgid ""
 "Finish to Finish relation type cannot be combined with Start No Earlier Than "
 "constraint."
 msgstr ""
-"Vzťah typu 'Koniec pred koncom' nemôže byť kombinovaný s obmedzením 'Nezačať skôr ako.'"
+"Vzťah typu 'Koniec pred koncom' nemôže byť kombinovaný s obmedzením 'Nezačať "
+"skôr ako.'"
 
 #: ../libplanner/mrp-task.c:1124
 msgid ""
 "Start to Finish relation cannot be set. Predecessor starts on project start "
 "date."
 msgstr ""
-"Vzťah 'Začiatok pred koncom' nemôže byť nastavený. Predchodca začína v deň začiatku projektu."
+"Vzťah 'Začiatok pred koncom' nemôže byť nastavený. Predchodca začína v deň "
+"začiatku projektu."
 
 #: ../libplanner/mrp-task-manager.c:2518
 msgid "Cannot add a predecessor, because it would result in a loop."
@@ -2268,3 +2273,54 @@ msgstr "Exportovať projekt do súboru použiteľného pre Planner 0.11"
 #: ../src/planner-xml-planner-plugin.c:90
 msgid "Export"
 msgstr "Exportovať"
+
+#: ../eds-backend/e-cal-backend-planner.c:289
+msgid "EDS UID"
+msgstr "DSE UID"
+
+#: ../eds-backend/e-cal-backend-planner.c:290
+msgid "Identifier used by Evolution Data Server for tasks"
+msgstr "Identifikátor používaný Dátovým serverom Evolution pre úlohy"
+
+#: ../eds-backend/e-cal-backend-planner.c:299
+msgid "EDS Categories"
+msgstr "Kategóriei DSE"
+
+#: ../eds-backend/e-cal-backend-planner.c:300
+msgid "Categories for a task used by Evolution Data Server"
+msgstr "Kategórie pre úlohy použité Dátovým serverom Evolution"
+
+#: ../eds-backend/e-cal-backend-planner.c:309
+msgid "EDS Classification"
+msgstr "Klasifikácia DSE"
+
+#: ../eds-backend/e-cal-backend-planner.c:310
+msgid "Task access classification used by Evolution Data Server"
+msgstr "Klasifikácia prístupu k úlohe používaná Dátovým serverom Evolution"
+
+#: ../eds-backend/e-cal-backend-planner.c:319
+msgid "EDS URL"
+msgstr "DSE URL"
+
+#: ../eds-backend/e-cal-backend-planner.c:320
+msgid "URL for a Task used by Evolution Data Server"
+msgstr "URL pre úlohu používané Dátovým serverom Evolution"
+
+#: ../eds-backend/e-cal-backend-planner.c:829
+msgid "Invalid server URI"
+msgstr "Neplatné URI servera."
+
+#. book_target = (EABConfigTargetSource *) data->target;
+#. source = book_target->source;
+#: ../eds-backend/planner-source/planner-source.c:125
+msgid "Select planner file"
+msgstr "Vybrať súbor planner"
+
+#: ../eds-backend/planner-source/planner-source.c:157
+#, c-format
+msgid ""
+"The filename extension of this file isn't the planner usual file extension (%"
+"s) Do you want to continue?"
+msgstr ""
+"Prípona názvu tohoto súboru nie je bežnou príponou súboru re planner (%s) "
+"Chcete pokračovať?"
