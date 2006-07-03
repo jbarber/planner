@@ -5,9 +5,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Planner 0.14\n"
-"Report-Msgid-Bugs-To: gnome-cyr@gnome.org\n"
-"POT-Creation-Date: 2006-06-14 01:18+0400\n"
-"PO-Revision-Date: 2006-06-14 16:51+0400\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2006-07-03 23:53+0400\n"
+"PO-Revision-Date: 2006-07-03 11:05+0400\n"
 "Last-Translator: Sergey Kvyato <kvantos@plotinka.ru>\n"
 "Language-Team: Russian <gnome-cyr@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -143,8 +143,8 @@ msgid ""
 "Select a weekday and the day type to use for that day in the default week "
 "for this calendar.\n"
 msgstr ""
-"Выбрать день недели и назначить для него тип, который будет использоваться для "
-"этого дня по умолчанию в данном календаре.\n"
+"Выбрать день недели и назначить для него тип, который будет использоваться "
+"для этого дня по умолчанию в данном календаре.\n"
 
 #: ../data/glade/calendar-dialog.glade.h:27
 msgid "Set day type to:"
@@ -684,8 +684,8 @@ msgid ""
 "The project '%s' has been changed by the user '%s' since you opened it. Do "
 "you want to save anyway?"
 msgstr ""
-"Проект «%s» был изменён пользователем «%s» после того как вы открыли "
-"его. Хотите сохранить?"
+"Проект «%s» был изменён пользователем «%s» после того как вы открыли его. "
+"Хотите сохранить?"
 
 #: ../libplanner/mrp-sql.c:3630
 #, c-format
@@ -709,38 +709,50 @@ msgstr "Недопустмый SQL URI (не указано название б�
 msgid ""
 "Could not add a predecessor relation, because the tasks are already related."
 msgstr ""
-"Невозможно добавить взаимосвязь между задачей и её предшествующей задачей, поскольку задачи "
-"уже соотносятся."
+"Невозможно добавить взаимосвязь между задачей и её предшествующей задачей, "
+"поскольку задачи уже соотносятся."
 
 #: ../libplanner/mrp-task.c:1081
 msgid "Start to Finish relation type cannot be combined with other relations."
-msgstr "Отношение «Начать с концом\" не может применяться вместе с другими отношениями."
+msgstr ""
+"Отношение «Начать с концом\" не может применяться вместе с другими "
+"отношениями."
 
 #: ../libplanner/mrp-task.c:1083
 msgid "Finish to Finish relation type cannot be combined with other relations."
-msgstr "Отношение «Закончить с концом\" не может применяться вместе с другими отношениями."
+msgstr ""
+"Отношение «Закончить с концом\" не может применяться вместе с другими "
+"отношениями."
 
 #: ../libplanner/mrp-task.c:1099
 msgid ""
 "Start to Finish relation type cannot be combined with Start No Earlier Than "
 "constraint."
-msgstr "Отношение «Начать с концом» не может применяться вместе с «Начать не раньше, чем»"
+msgstr ""
+"Отношение «Начать с концом» не может применяться вместе с «Начать не раньше, "
+"чем»"
 
 #: ../libplanner/mrp-task.c:1101
 msgid ""
 "Finish to Finish relation type cannot be combined with Start No Earlier Than "
 "constraint."
-msgstr "Отношение «Начать с концом» не может применяться вместе с «Начать не раньше, чем»"
+msgstr ""
+"Отношение «Начать с концом» не может применяться вместе с «Начать не раньше, "
+"чем»"
 
 #: ../libplanner/mrp-task.c:1124
 msgid ""
 "Start to Finish relation cannot be set. Predecessor starts on project start "
 "date."
-msgstr "Не удалось установить «Начать с концом». Предшествующая задача начинается со стартом проекта."
+msgstr ""
+"Не удалось установить «Начать с концом». Предшествующая задача начинается со "
+"стартом проекта."
 
 #: ../libplanner/mrp-task-manager.c:2518
 msgid "Cannot add a predecessor, because it would result in a loop."
-msgstr "Невозможно добавить предшествующую задачу, потому что это вызовет зацикливание."
+msgstr ""
+"Невозможно добавить предшествующую задачу, потому что это вызовет "
+"зацикливание."
 
 #: ../libplanner/mrp-task-manager.c:2564
 msgid "Cannot move the task, because it would result in a loop."
@@ -1210,7 +1222,9 @@ msgstr "Не_стандартные дни"
 #.
 #: ../src/planner-gantt-view.c:310
 msgid "Gantt"
-msgstr "Диаграмма\nГанта"
+msgstr ""
+"Диаграмма\n"
+"Ганта"
 
 #: ../src/planner-gantt-view.c:316
 msgid "_Gantt Chart"
@@ -1876,7 +1890,8 @@ msgid ""
 "You are about to open an edit dialog each for %i tasks. Are you sure that "
 "you want to do that?"
 msgstr ""
-"Вы собрались открыть диалоги изменения свойств для %i задач. Вы уверены что хотите этого?"
+"Вы собрались открыть диалоги изменения свойств для %i задач. Вы уверены что "
+"хотите этого?"
 
 #: ../src/planner-task-tree.c:2888
 msgid "Unlink tasks"
@@ -2275,3 +2290,55 @@ msgstr "Экспортировать проект в файл совместим
 #: ../src/planner-xml-planner-plugin.c:90
 msgid "Export"
 msgstr "Экспорт"
+
+#: ../eds-backend/e-cal-backend-planner.c:289
+msgid "EDS UID"
+msgstr "Идентификатор EDS"
+
+#: ../eds-backend/e-cal-backend-planner.c:290
+msgid "Identifier used by Evolution Data Server for tasks"
+msgstr "Идентификатор используемый сервером данных Evolution (EDS) для задач"
+
+#: ../eds-backend/e-cal-backend-planner.c:299
+msgid "EDS Categories"
+msgstr "Категории EDS"
+
+#: ../eds-backend/e-cal-backend-planner.c:300
+msgid "Categories for a task used by Evolution Data Server"
+msgstr "Категории для задач используемые сервером данных Evolution (EDS)"
+
+#: ../eds-backend/e-cal-backend-planner.c:309
+msgid "EDS Classification"
+msgstr "Классификация EDS"
+
+#: ../eds-backend/e-cal-backend-planner.c:310
+msgid "Task access classification used by Evolution Data Server"
+msgstr ""
+"Классификация доступа к задачам используемая сервером данных Evolution (EDS)"
+
+#: ../eds-backend/e-cal-backend-planner.c:319
+msgid "EDS URL"
+msgstr "EDS URL"
+
+#: ../eds-backend/e-cal-backend-planner.c:320
+msgid "URL for a Task used by Evolution Data Server"
+msgstr "URL для задач используемый сервером данных Evolution (EDS)"
+
+#: ../eds-backend/e-cal-backend-planner.c:829
+msgid "Invalid server URI"
+msgstr "Некорректный URL сервера"
+
+#. book_target = (EABConfigTargetSource *) data->target;
+#. source = book_target->source;
+#: ../eds-backend/planner-source/planner-source.c:125
+msgid "Select planner file"
+msgstr "Выбрать файл planner"
+
+#: ../eds-backend/planner-source/planner-source.c:157
+#, c-format
+msgid ""
+"The filename extension of this file isn't the planner usual file extension (%"
+"s) Do you want to continue?"
+msgstr ""
+"Расширение имени для этого файла не совпадает с обычным для файла planner (%"
+"s). Продолжить?"
