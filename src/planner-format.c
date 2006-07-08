@@ -518,7 +518,7 @@ planner_parse_duration_with_day_length (const gchar *input,
 							    day_length);
 		}
 
-		if (*end_ptr == 0) {
+		if (end_ptr && *end_ptr == 0) {
 			break;
 		}
 		

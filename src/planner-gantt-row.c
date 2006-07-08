@@ -1223,6 +1223,8 @@ gantt_row_draw (GnomeCanvasItem *item,
 	cur_end = 0;
 	day_cur = 0;
 
+	cur_unit = (GList *)NULL;
+
 	row = PLANNER_GANTT_ROW (item);
 	priv = row->priv;
 	project = mrp_object_get_project (MRP_OBJECT (priv->task));
