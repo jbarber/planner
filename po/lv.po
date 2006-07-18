@@ -1,1051 +1,2223 @@
+# translation of lv.po to Latvian
+# translation of planner.HEAD.lv.po to
 # mrproject for Latvian.
 # Copyright (C) 2002 THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# Peteris Krisjanis <peteris.krisjanis@os.lv>, 2002.
 #
+# Peteris Krisjanis <peteris.krisjanis@os.lv>, 2002.
+# Raivis Dejus <orvils@gmail.com>, 2006.
 msgid ""
 msgstr ""
-"Project-Id-Version: mrproject\n"
+"Project-Id-Version: lv\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-12-04 16:40+0100\n"
-"PO-Revision-Date: 2003-03-16 11:56+0200\n"
-"Last-Translator: Artis Trops  <hornet@navigator.lv>\n"
-"Language-Team: Latvian <ll10nt@os.lv>\n"
+"POT-Creation-Date: 2006-07-18 11:41+0300\n"
+"PO-Revision-Date: 2006-07-18 11:46+0300\n"
+"Last-Translator: Raivis Dejus <orvils@gmail.com>\n"
+"Language-Team: Latvian <locale@laka.lv>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-
-#: data/planner.desktop.in.h:1
-#, fuzzy
-msgid "Planner Project Management"
-msgstr "Projektu Pārvaldība"
-
-#: data/planner.desktop.in.h:2
-msgid "Project Management"
-msgstr "Projektu Pārvaldība"
-
-#: libegg/recent-files/egg-recent-vfs-utils.c:90
-msgid " (invalid Unicode)"
-msgstr " (nederīgs Unicode)"
-
-#: data/ui/main-window.ui.h:1
-msgid "About this application"
-msgstr "Par šo aplikāciju"
-
-#: data/ui/main-window.ui.h:2
-msgid "C_ut"
-msgstr "Iz_griezt"
-
-#: data/ui/main-window.ui.h:3
-msgid "Clear"
-msgstr "Attīrīt"
-
-#: data/ui/main-window.ui.h:4
-msgid "Clear the selection"
-msgstr "Attīrīt izvēli"
-
-#: data/ui/main-window.ui.h:5
-msgid "Close the current file"
-msgstr "Aizvērt pašreizējo failu"
-
-#: data/ui/main-window.ui.h:6
-msgid "Copy the selection"
-msgstr "Kopēt izvēli"
-
-#: data/ui/main-window.ui.h:7
-msgid "Create a new project"
-msgstr "Izveidot jaunu projektu"
-
-#: data/ui/main-window.ui.h:8
-msgid "Cut the selection"
-msgstr "Izgriezt izvēli"
-
-#: data/ui/main-window.ui.h:9
-msgid "Edit Day _Types"
-msgstr "Rediģēt Dienas _Tipus"
-
-#: data/ui/main-window.ui.h:10
-msgid "Edit Project _Phases"
-msgstr "Rediģēt Projekta _Fāzes"
-
-#: data/ui/main-window.ui.h:11
-msgid "Edit the project properties"
-msgstr "Rediģēt projekta rekvizītus"
-
-#: data/ui/main-window.ui.h:12
-msgid "Exit the program"
-msgstr "Iziet no programmas"
-
-#: data/ui/main-window.ui.h:13
-msgid "New"
-msgstr "Jauns"
-
-#: data/ui/main-window.ui.h:14
-msgid "New..."
-msgstr "Jauns..."
-
-#: data/ui/main-window.ui.h:15
-msgid "Open"
-msgstr "Atvērt"
-
-#: data/ui/main-window.ui.h:16
-msgid "Open a project"
-msgstr "Atvērt projektu"
-
-#: data/ui/main-window.ui.h:17
-msgid "Paste the clipboard"
-msgstr "Ievietot starpliktuvi"
-
-#: data/ui/main-window.ui.h:18
-msgid "Print"
-msgstr "Drukāt"
-
-#: data/ui/main-window.ui.h:19
-#, fuzzy
-msgid "Print preview of the current project"
-msgstr "Drukāt pašreizējo projektu"
-
-#: data/ui/main-window.ui.h:20
-msgid "Print the current project"
-msgstr "Drukāt pašreizējo projektu"
-
-#: data/ui/main-window.ui.h:21
-msgid "Redo the undone action"
-msgstr "Pāratsaukt atsaukto darbību"
-
-#: data/ui/main-window.ui.h:22
-msgid "Save"
-msgstr "Saglabāt"
-
-#: data/ui/main-window.ui.h:23
-msgid "Save _As..."
-msgstr "Saglabāt _Kā..."
-
-#: data/ui/main-window.ui.h:24
-msgid "Save the current project"
-msgstr "Saglabāt pašreizējo projektu"
-
-#: data/ui/main-window.ui.h:25
-msgid "Save the current project with a different name"
-msgstr "Saglabāt pašreizējo projektu ar atšķirīgu nosaukumu"
-
-#: data/ui/main-window.ui.h:26
-msgid "Show the MrProject User Guide"
-msgstr "Parādīt MrProject lietotāja ceļvedi"
-
-#: data/ui/main-window.ui.h:27
-msgid "Undo the last action"
-msgstr "Atsaukt pēdējo darbību"
-
-#: data/ui/main-window.ui.h:28
-msgid "_About"
-msgstr "_Par"
-
-#: data/ui/main-window.ui.h:29
-msgid "_Actions"
-msgstr "_Darbības"
-
-#: data/ui/main-window.ui.h:30
-msgid "_Close"
-msgstr "_Aizvērt"
-
-#: data/ui/main-window.ui.h:31
-msgid "_Copy"
-msgstr "_Kopēt"
-
-#: data/ui/main-window.ui.h:32
-msgid "_Edit"
-msgstr "_Rediģēt"
-
-#: data/ui/main-window.ui.h:33
-msgid "_Edit Project Properties"
-msgstr "_Rediģēt Projekta Rekvizīti"
-
-#: data/ui/main-window.ui.h:34
-msgid "_File"
-msgstr "_Fails"
-
-#: data/ui/main-window.ui.h:35
-msgid "_Help"
-msgstr "Pa_līdzība"
-
-#: data/ui/main-window.ui.h:36
-msgid "_Manage Calendars"
-msgstr "_Pārvaldīt Kalendārus"
-
-#: data/ui/main-window.ui.h:37
-msgid "_New Project"
-msgstr "_Jauns projekts"
-
-#: data/ui/main-window.ui.h:38
-msgid "_Open..."
-msgstr "_Atvērt..."
-
-#: data/ui/main-window.ui.h:39
-msgid "_Paste"
-msgstr "_Ievietot"
-
-#: data/ui/main-window.ui.h:40
-#, fuzzy
-msgid "_Print Preview"
-msgstr "Drukāt Projektu"
-
-#: data/ui/main-window.ui.h:41
-msgid "_Print..."
-msgstr "_Drukāt..."
-
-#: data/ui/main-window.ui.h:42
-msgid "_Project"
-msgstr "_Projekts"
-
-#: data/ui/main-window.ui.h:43
-msgid "_Quit"
-msgstr "_Iziet"
-
-#: data/ui/main-window.ui.h:44
-msgid "_Redo"
-msgstr "_Pāratsaukt"
-
-#: data/ui/main-window.ui.h:45 src/planner-main-window.c:1127
-msgid "_Save"
-msgstr "_Saglabāt"
-
-#: data/ui/main-window.ui.h:46
-msgid "_Undo"
-msgstr "_Atsaukt"
-
-#: data/ui/main-window.ui.h:47
-msgid "_User Guide"
-msgstr "Lietotāja _Ceļvedis"
-
-#: data/ui/main-window.ui.h:48
-msgid "_View"
-msgstr "_Skats"
-
-#: data/ui/gantt-view.ui.h:1 data/ui/task-view.ui.h:1
-msgid "I_ndent Task"
-msgstr "U_zdevuma Atkāpe"
-
-#: data/ui/gantt-view.ui.h:2 data/ui/task-view.ui.h:2
-msgid "In_sert Tasks..."
-msgstr "Ie_vietot Uzdevumus..."
-
-#: data/ui/gantt-view.ui.h:3 data/ui/task-view.ui.h:3
-#: src/planner-application.c:75
-msgid "Indent"
-msgstr "Atkāpe"
-
-#: data/ui/gantt-view.ui.h:4 data/ui/task-view.ui.h:4
-#: data/ui/resource-view.ui.h:5 src/planner-application.c:54
-#: src/planner-application.c:103
-msgid "Insert"
-msgstr "Ievietot"
-
-#: data/ui/gantt-view.ui.h:5 data/ui/task-view.ui.h:5
-msgid "Move Task Do_wn"
-msgstr "Pārvietot Uzdevumu leju_p"
-
-#: data/ui/gantt-view.ui.h:6 data/ui/task-view.ui.h:6
-msgid "Move Task _Up"
-msgstr "Pārvietot Uzdevumu _Augšup"
-
-#: data/ui/gantt-view.ui.h:7 data/ui/task-view.ui.h:7
-#: src/planner-application.c:96
-msgid "Move down"
-msgstr "Pārvietot lejup"
-
-#: data/ui/gantt-view.ui.h:8 data/ui/task-view.ui.h:8
-#: src/planner-application.c:89
-msgid "Move up"
-msgstr "Pārvietot augšup"
-
-#: data/ui/gantt-view.ui.h:9 data/ui/task-view.ui.h:9
-#: data/ui/resource-view.ui.h:6 src/planner-application.c:61
-#: src/planner-application.c:110
-msgid "Remove"
-msgstr "Izņemt"
-
-#: data/ui/gantt-view.ui.h:10 data/ui/task-view.ui.h:10
-msgid "Reset _All Constraints"
-msgstr "Pārstatīt _Visas Piespiešanas"
-
-#: data/ui/gantt-view.ui.h:11 data/ui/task-view.ui.h:11
-msgid "Reset _Constraint"
-msgstr "Pārstatīt _Piespiešanu"
-
-#: data/ui/gantt-view.ui.h:12 data/ui/task-view.ui.h:12
-#: data/ui/resource-view.ui.h:7
-msgid "Select _All"
-msgstr "Izvēlēties _Visu"
-
-#: data/ui/gantt-view.ui.h:13 data/ui/task-view.ui.h:13
-#: data/ui/resource-view.ui.h:8
-msgid "Select all tasks"
-msgstr "Izvēlēties visus uzdevumus"
-
-#: data/ui/gantt-view.ui.h:14
-#, fuzzy
-msgid "Test"
-msgstr "Tests"
-
-#: data/ui/gantt-view.ui.h:15 data/ui/task-view.ui.h:14
-msgid "Un_link Task"
-msgstr "At_saitēt Uzdevumu"
-
-#: data/ui/gantt-view.ui.h:16 data/ui/task-view.ui.h:15
-msgid "Unin_dent Task"
-msgstr "Uzdevumu Neat_kāpe"
-
-#: data/ui/gantt-view.ui.h:17 data/ui/task-view.ui.h:16
-#: src/planner-application.c:82
-msgid "Unindent"
-msgstr "Neatkāpe"
-
-#: data/ui/gantt-view.ui.h:18 data/ui/task-view.ui.h:17
-#: src/planner-application.c:68
-msgid "Unlink"
-msgstr "Atsaitēt"
-
-#: data/ui/gantt-view.ui.h:19
-msgid "Zoom In"
-msgstr "Tuvināt"
-
-#: data/ui/gantt-view.ui.h:20
-msgid "Zoom Out"
-msgstr "Tālināt"
-
-#: data/ui/gantt-view.ui.h:21
-msgid "Zoom To Fit"
-msgstr "Tālummaiņa, Lai Ietilptu"
-
-#: data/ui/gantt-view.ui.h:22
-msgid "Zoom To _Fit"
-msgstr "_Tālummaiņa, Lai Ietilptu"
-
-#: data/ui/gantt-view.ui.h:23
-msgid "Zoom _Out"
-msgstr "_Tālināt"
-
-#: data/ui/gantt-view.ui.h:24 data/ui/task-view.ui.h:19
-msgid "_Edit Task Properties..."
-msgstr "_Rediģēt Uzdevuma Rekvizītus..."
-
-#: data/ui/gantt-view.ui.h:25
-msgid "_Highlight Critical Tasks"
-msgstr "_Izgaismot Kritiskos Uzdevumus"
-
-#: data/ui/gantt-view.ui.h:26 data/ui/task-view.ui.h:20
-msgid "_Insert Task"
-msgstr "_Ievietot Uzdevumu"
-
-#: data/ui/gantt-view.ui.h:27 data/ui/task-view.ui.h:21
-msgid "_Remove Task"
-msgstr "_Izņemt Uzdevumu"
-
-#: data/ui/gantt-view.ui.h:28
-msgid "_Zoom In"
-msgstr "_Tuvināt"
-
-#: data/ui/task-view.ui.h:18
-msgid "_Edit Custom Properties..."
-msgstr "_Rediģēt Pašizvēles Rekvizītus..."
-
-#: data/ui/html-plugin.ui.h:1 data/glade/html-output.glade.h:4
-msgid "Export to HTML"
-msgstr ""
-
-#: data/ui/sql-plugin.ui.h:1
-#, fuzzy
-msgid "Open from Database..."
-msgstr "Saglabāt _Kā..."
-
-#: data/ui/sql-plugin.ui.h:2
-#, fuzzy
-msgid "Save to Database..."
-msgstr "Saglabāt _Kā..."
-
-#: data/ui/resource-view.ui.h:1
-msgid "Edit _Custom Properties..."
-msgstr "Rediģēt _Pašizvēles Rekvizītus..."
-
-#: data/ui/resource-view.ui.h:2
-msgid "Edit _Groups"
-msgstr "Rediģēt _Grupas"
-
-#: data/ui/resource-view.ui.h:3
-msgid "Groups"
-msgstr "Grupas"
-
-#: data/ui/resource-view.ui.h:4
-msgid "In_sert Resources..."
-msgstr "Ie_vietot Resursus..."
-
-#: data/ui/resource-view.ui.h:9
-msgid "_Edit Resource Properties..."
-msgstr "_Rediģēt Resursa Rekvizītus..."
-
-#: data/ui/resource-view.ui.h:10
-msgid "_Insert Resource"
-msgstr "_Ievietot Resursu"
-
-#: data/ui/resource-view.ui.h:11
-msgid "_Remove Resource"
-msgstr "_Izņemt Resursu"
-
-#: data/glade/add-predecessor.glade.h:1 data/glade/calendar-dialog.glade.h:4
-#: data/glade/html-output.glade.h:2 data/glade/new-property.glade.h:1
-#: data/glade/project-properties.glade.h:1
-#: data/glade/resource-dialog.glade.h:1
-#: data/glade/resource-input-dialog.glade.h:1 data/glade/sql.glade.h:2
-#: data/glade/task-dialog.glade.h:4 data/glade/task-input-dialog.glade.h:1
-msgid "*"
-msgstr "*"
-
-#: data/glade/add-predecessor.glade.h:2
-msgid "Lag: "
-msgstr "Kavēšanās: "
-
-#: data/glade/add-predecessor.glade.h:3
-msgid "New predecessor"
-msgstr "Jauns priekštecis"
-
-#: data/glade/add-predecessor.glade.h:4
-msgid "Predecessor: "
-msgstr "Priekštecis: "
-
-#: data/glade/add-predecessor.glade.h:5
-msgid "Relation type: "
-msgstr "Attiecību tips: "
-
-#: data/glade/calendar-dialog.glade.h:1
+"X-Generator: KBabel 1.11.2\n"
+"Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : 2);\n"
+
+#: ../data/glade/add-predecessor.glade.h:1
+msgid "Add Predecessor"
+msgstr "Pievienot priekšteci"
+
+#: ../data/glade/add-predecessor.glade.h:2
+msgid "_Lag:"
+msgstr "_Atpalicis:"
+
+#: ../data/glade/add-predecessor.glade.h:3
+#: ../data/glade/calendar-dialog.glade.h:35
+#: ../data/glade/new-property.glade.h:5
+#: ../data/glade/project-properties.glade.h:9
+#: ../data/glade/resource-dialog.glade.h:12
+#: ../data/glade/resource-input-dialog.glade.h:7
+#: ../data/glade/task-dialog.glade.h:16
+#: ../data/glade/task-input-dialog.glade.h:4
+msgid "_Name:"
+msgstr "_Nosaukums:"
+
+#: ../data/glade/add-predecessor.glade.h:4
+msgid "_Relation type:"
+msgstr "_Attiecības tips:"
+
+#: ../data/glade/calendar-dialog.glade.h:1
 msgid ""
 "\n"
 "The selected day type has the following working hours:"
 msgstr ""
 "\n"
-"Izvēlētajam dienas tipam ir sekojošās darba stundas:"
+"Izvēlētajam dienas tipam ir sekojošas darba stundas:"
 
-#: data/glade/calendar-dialog.glade.h:3 data/glade/html-output.glade.h:1
-#: data/glade/sql.glade.h:1 data/glade/task-dialog.glade.h:1
+#: ../data/glade/calendar-dialog.glade.h:3
+#: ../data/glade/column-dialog.glade.h:1 ../data/glade/task-dialog.glade.h:2
 msgid "    "
 msgstr "    "
 
-#: data/glade/calendar-dialog.glade.h:5
+#: ../data/glade/calendar-dialog.glade.h:4 ../data/glade/eds.glade.h:1
+#: ../data/glade/new-property.glade.h:1
+#: ../data/glade/resource-dialog.glade.h:1
+#: ../data/glade/resource-input-dialog.glade.h:1 ../data/glade/sql.glade.h:1
+#: ../data/glade/task-input-dialog.glade.h:1
+msgid "*"
+msgstr "*"
+
+#: ../data/glade/calendar-dialog.glade.h:5
 msgid "-"
 msgstr "-"
 
-#: data/glade/calendar-dialog.glade.h:6
+#: ../data/glade/calendar-dialog.glade.h:6
 msgid "<b>Calendar:</b>"
 msgstr "<b>Kalendārs:</b>"
 
-#: data/glade/calendar-dialog.glade.h:7
+#: ../data/glade/calendar-dialog.glade.h:7
 msgid "<b>Day types</b>"
 msgstr "<b>Dienas tipi</b>"
 
-#: data/glade/calendar-dialog.glade.h:8
+#: ../data/glade/calendar-dialog.glade.h:8
 msgid "<b>Working hours</b>"
 msgstr "<b>Darba stundas</b>"
 
-#: data/glade/calendar-dialog.glade.h:9
+#: ../data/glade/calendar-dialog.glade.h:9
 msgid "<b>Working time</b>"
 msgstr "<b>Darba laiks</b>"
 
-#: data/glade/calendar-dialog.glade.h:10
+#: ../data/glade/calendar-dialog.glade.h:10
+msgid "Add Day Type"
+msgstr "Pievienot dienas tipu"
+
+#: ../data/glade/calendar-dialog.glade.h:11
 msgid "Apply"
 msgstr "Pielietot"
 
-#: data/glade/calendar-dialog.glade.h:11
+#: ../data/glade/calendar-dialog.glade.h:12
 msgid "C_opy an existing calendar"
-msgstr "_Kopēt eksistējošu kalendāru"
+msgstr "K_opēt eksistējošu kalendāru"
 
-#: data/glade/calendar-dialog.glade.h:12
+#: ../data/glade/calendar-dialog.glade.h:13
 msgid "C_reate"
 msgstr "I_zveidot"
 
-#: data/glade/calendar-dialog.glade.h:13
+#: ../data/glade/calendar-dialog.glade.h:14
 msgid "Calendar Editor"
-msgstr "Kalendāra Redaktors"
+msgstr "Kalendāra redaktors"
 
-#: data/glade/calendar-dialog.glade.h:14
+#: ../data/glade/calendar-dialog.glade.h:15
 msgid "Create an _empty calendar"
 msgstr "Izveidot _tukšu kalendāru"
 
-#: data/glade/calendar-dialog.glade.h:15
+#: ../data/glade/calendar-dialog.glade.h:16
 msgid "Custom working time"
-msgstr "Pašnoteikts darba laiks"
+msgstr "Uzstādīt darba laiku"
 
-#: data/glade/calendar-dialog.glade.h:16
-#, fuzzy
+#: ../data/glade/calendar-dialog.glade.h:17
 msgid "Day type:"
-msgstr "Jauns Dienas Tips"
+msgstr "Dienas tips:"
 
-#: data/glade/calendar-dialog.glade.h:17
+#: ../data/glade/calendar-dialog.glade.h:18
 msgid "Default Week"
-msgstr "Noklusētā Nedēļa"
+msgstr "Nedēļa pēc noklusējuma"
 
-#: data/glade/calendar-dialog.glade.h:18
+#: ../data/glade/calendar-dialog.glade.h:19
 msgid "Default week..."
-msgstr "Noklusētā nedēļa..."
+msgstr "Nedēļa pēc noklusējuma..."
 
-#: data/glade/calendar-dialog.glade.h:19
+#: ../data/glade/calendar-dialog.glade.h:20
 msgid "Edit Day Types"
-msgstr "Rediģēt Dienas Tipus"
+msgstr "Rediģēt dienas tipus"
 
-#: data/glade/calendar-dialog.glade.h:20
+#: ../data/glade/calendar-dialog.glade.h:21
 msgid "Edit Working Time"
-msgstr "Rediģēt Darba Laiku"
+msgstr "Rediģēt darba laiku"
 
-#: data/glade/calendar-dialog.glade.h:21
-msgid "Enter the name of the new day type:"
-msgstr "Ievadiet jaunā dienas tipa nosaukumu:"
-
-#: data/glade/calendar-dialog.glade.h:22
-msgid "Existing calendars:"
-msgstr "Eksistējošie kalendāri:"
-
-#: data/glade/calendar-dialog.glade.h:23
+#: ../data/glade/calendar-dialog.glade.h:22
 msgid "From:"
 msgstr "No:"
 
-#: data/glade/calendar-dialog.glade.h:24
-msgid "MrProject Team"
-msgstr "MrProject Komanda"
-
-#: data/glade/calendar-dialog.glade.h:25
+#: ../data/glade/calendar-dialog.glade.h:23
 msgid "New Calendar"
-msgstr "Jauns Kalendārs"
+msgstr "Jauns kalendārs"
 
-#: data/glade/calendar-dialog.glade.h:26
-msgid "New Day Type"
-msgstr "Jauns Dienas Tips"
-
-#: data/glade/calendar-dialog.glade.h:27
-msgid "Select a calendar"
+#: ../data/glade/calendar-dialog.glade.h:24
+msgid "Select a Calendar"
 msgstr "Izvēlieties kalendāru"
 
-#: data/glade/calendar-dialog.glade.h:28
+#: ../data/glade/calendar-dialog.glade.h:25
 msgid ""
 "Select a weekday and the day type to use for that day in the default week "
 "for this calendar.\n"
 msgstr ""
-"Izvēlaties nedēļas dienu un noklusēto dienas tipu, ko lietot tai dienai "
-"noklusētajā šā kalendāra nedēļā.\n"
+"Izvēlieties nedēļas dienu un dienas tipu, ko lietot šai dienai noklusētajā "
+"šī kalendāra nedēļā.\n"
 
-#: data/glade/calendar-dialog.glade.h:30
+#: ../data/glade/calendar-dialog.glade.h:27
 msgid "Set day type to:"
 msgstr "Iestatīt dienas tipu uz:"
 
-#: data/glade/calendar-dialog.glade.h:31
+#: ../data/glade/calendar-dialog.glade.h:28
 msgid "To:"
-msgstr "Līdz:"
+msgstr "Uz:"
 
-#: data/glade/calendar-dialog.glade.h:32
+#: ../data/glade/calendar-dialog.glade.h:29
 msgid "Use working time from derived calendar"
-msgstr "Lietot darba laiku no mantotā kalendāra"
+msgstr "Lietot darba laiku no iegūtā kalendāra"
 
-#: data/glade/calendar-dialog.glade.h:33
+#: ../data/glade/calendar-dialog.glade.h:30
 msgid "Week day:"
 msgstr "Nedēļas diena:"
 
-#: data/glade/calendar-dialog.glade.h:34
+#: ../data/glade/calendar-dialog.glade.h:31
 msgid "Working time..."
 msgstr "Darba laiks..."
 
-#: data/glade/calendar-dialog.glade.h:35
-#, fuzzy
+#: ../data/glade/calendar-dialog.glade.h:32
 msgid "_Derive from a calendar"
-msgstr "_Mantot no kalendāra"
+msgstr "_Iegūt no kalendāra"
 
-#: data/glade/calendar-dialog.glade.h:36
+#: ../data/glade/calendar-dialog.glade.h:33
+msgid "_Existing calendars:"
+msgstr "_Eksistējošie kalendāri:"
+
+#: ../data/glade/calendar-dialog.glade.h:34
 msgid "_Name of the new calendar:"
 msgstr "_Jaunā kalendāra nosaukums:"
 
-#: data/glade/calendar-dialog.glade.h:37
+#: ../data/glade/calendar-dialog.glade.h:36
 msgid "_New..."
 msgstr "_Jauns..."
 
-#: data/glade/group-dialog.glade.h:1
+#: ../data/glade/column-dialog.glade.h:2
+msgid "Hidden columns:"
+msgstr "Slēptās kolonnas:"
+
+#: ../data/glade/column-dialog.glade.h:3
+msgid "Visible columns:"
+msgstr "Redzamās kolonnas:"
+
+#: ../data/glade/column-dialog.glade.h:4
+msgid "_Hide"
+msgstr "_Slēpt"
+
+#: ../data/glade/column-dialog.glade.h:5
+msgid "_Show"
+msgstr "_Rādīt"
+
+#: ../data/glade/eds.glade.h:2
+msgid "Loading resource data"
+msgstr "Ielādē resursu datus"
+
+#: ../data/glade/eds.glade.h:3
+msgid "Search"
+msgstr "Meklēt"
+
+#: ../data/glade/eds.glade.h:4
+msgid "Select All"
+msgstr "Atlasīt visu"
+
+#: ../data/glade/eds.glade.h:5
+msgid "Select group"
+msgstr "Atlasīt grupu"
+
+#: ../data/glade/eds.glade.h:6
+msgid "Unselect All"
+msgstr "Noņemt visu"
+
+#: ../data/glade/eds.glade.h:7
+msgid "dialog1"
+msgstr "dialogs1"
+
+#: ../data/glade/group-dialog.glade.h:1
 msgid "Group Editor"
-msgstr "Grupas Redaktors"
+msgstr "Grupas redaktors"
 
-#: data/glade/html-output.glade.h:3
-#, fuzzy
-msgid "<b>Save to</b>"
-msgstr "<b>Dienas tipi</b>"
+#: ../data/glade/new-property.glade.h:2
+msgid "Add Property"
+msgstr "Pievienot īpašību"
 
-#: data/glade/html-output.glade.h:5
-msgid "Local file"
-msgstr ""
+#: ../data/glade/new-property.glade.h:3
+msgid "_Description:"
+msgstr "_Apraksts:"
 
-#: data/glade/html-output.glade.h:6
-#, fuzzy
-msgid "Save to HTML File"
-msgstr "Saglabāt failu"
+#: ../data/glade/new-property.glade.h:4
+msgid "_Label:"
+msgstr "_Etiķete:"
 
-#: data/glade/html-output.glade.h:7
-msgid "Web location"
-msgstr ""
+#: ../data/glade/new-property.glade.h:6
+#: ../data/glade/resource-dialog.glade.h:14
+msgid "_Type:"
+msgstr "_Tips:"
 
-#: data/glade/new-property.glade.h:2
-msgid "Description: "
-msgstr "Apraksts:"
+#: ../data/glade/project-properties.glade.h:1
+msgid "Custom"
+msgstr "Uzstādīt"
 
-#: data/glade/new-property.glade.h:3
-msgid "Label: "
-msgstr "Etiķete: "
+#: ../data/glade/project-properties.glade.h:2
+msgid "Edit Project Phases"
+msgstr "Rediģēt projekta fāzes"
 
-#: data/glade/new-property.glade.h:4
-msgid "Name: "
-msgstr "Nosaukums:"
-
-#: data/glade/new-property.glade.h:5
-msgid "New Property"
-msgstr "Jauns Rekvizīts"
-
-#: data/glade/new-property.glade.h:6
-msgid "Type: "
-msgstr "Tips:"
-
-#: data/glade/project-properties.glade.h:2
-msgid "<b>Project phases</b>"
-msgstr "<b>Projekta fāzes</b>"
-
-#: data/glade/project-properties.glade.h:3
-msgid "Calendar:"
-msgstr "Kalendārs:"
-
-#: data/glade/project-properties.glade.h:4
-msgid "Custom properties"
-msgstr "Pašizvēles rekvizīti"
-
-#: data/glade/project-properties.glade.h:5
-msgid "Edit Project phases"
-msgstr "Rediģēt Projekta fāzes"
-
-#: data/glade/project-properties.glade.h:6
-msgid "Enter the name of the new project phase:"
-msgstr "Ievadiet jaunās projekta fāzes nosaukumu:"
-
-#: data/glade/project-properties.glade.h:7
-#: data/glade/resource-dialog.glade.h:5 data/glade/task-dialog.glade.h:6
+#: ../data/glade/project-properties.glade.h:3
+#: ../data/glade/resource-dialog.glade.h:5 ../data/glade/task-dialog.glade.h:6
 msgid "General"
 msgstr "Vispārēji"
 
-#: data/glade/project-properties.glade.h:8
+#: ../data/glade/project-properties.glade.h:4
 msgid "New Project Phase"
-msgstr "Jauna projekta Fāze"
+msgstr "Jauna projekta fāze"
 
-#: data/glade/project-properties.glade.h:9
-msgid "Project _name:"
-msgstr "Projekta _nosaukums:"
+#: ../data/glade/project-properties.glade.h:5
+msgid "Project Properties"
+msgstr "Projekta īpašības"
 
-#: data/glade/project-properties.glade.h:10
-msgid "Project _start:"
-msgstr "Projekta _sākums:"
-
-#: data/glade/project-properties.glade.h:11
-msgid "Project phase:"
-msgstr "Projekta fāze:"
-
-#: data/glade/project-properties.glade.h:12
-msgid "Project properties"
-msgstr "Projekta rekvizīti"
-
-#: data/glade/project-properties.glade.h:13
+#: ../data/glade/project-properties.glade.h:6
 msgid "Select..."
-msgstr "Izvēlēties..."
+msgstr "Atlasīt..."
 
-#: data/glade/project-properties.glade.h:14
+#: ../data/glade/project-properties.glade.h:7
+msgid "_Calendar:"
+msgstr "_Kalendārs:"
+
+#: ../data/glade/project-properties.glade.h:8
 msgid "_Manager:"
-msgstr "_Vadītājs:"
+msgstr "_Redaktors:"
 
-#: data/glade/project-properties.glade.h:15
+#: ../data/glade/project-properties.glade.h:10
 msgid "_Organization:"
 msgstr "_Organizācija:"
 
-#: data/glade/property-dialog.glade.h:1
+#: ../data/glade/project-properties.glade.h:11
+msgid "_Phase:"
+msgstr "_Fāze:"
+
+#: ../data/glade/project-properties.glade.h:12
+msgid "_Start:"
+msgstr "_Sākums:"
+
+#: ../data/glade/property-dialog.glade.h:1
 msgid "Custom Properties"
-msgstr "Pašizvēles Rekvizīti"
+msgstr "Ustādītās īpašības"
 
-#: data/glade/resource-dialog.glade.h:2
-#, fuzzy
+#: ../data/glade/resource-dialog.glade.h:2
 msgid "C_ost:"
-msgstr "_Maksa:"
+msgstr "I_zmaksas:"
 
-#: data/glade/resource-dialog.glade.h:3
+#: ../data/glade/resource-dialog.glade.h:3
 msgid "Calendar"
 msgstr "Kalendārs"
 
-#: data/glade/resource-dialog.glade.h:4
-msgid "Edit calendars..."
+#: ../data/glade/resource-dialog.glade.h:4
+msgid "Edit Calendars..."
 msgstr "Rediģēt kalendārus..."
 
-#: data/glade/resource-dialog.glade.h:6 data/glade/task-dialog.glade.h:7
-msgid "Insert time stamp"
-msgstr "Ievietot laika zīmogu"
-
-#: data/glade/resource-dialog.glade.h:7 data/glade/task-dialog.glade.h:9
+#: ../data/glade/resource-dialog.glade.h:6 ../data/glade/task-dialog.glade.h:7
 msgid "Notes"
 msgstr "Piezīmes"
 
-#: data/glade/resource-dialog.glade.h:8
+#: ../data/glade/resource-dialog.glade.h:7
+msgid "Optional - overrides resource name in Gantt view."
+msgstr "Pēc izvēles - aizstāj resursa vārdu Gantt skatā."
+
+#: ../data/glade/resource-dialog.glade.h:8
 msgid ""
 "Select the calendar to use for this resource. If you want to use the default "
 "calendar of the project, select 'None'. "
 msgstr ""
 "Izvēlieties kalendāru, kuru lietot šim resursam. Ja vēlaties lietot "
-"noklusēto projekta kalendāru, izvēlieties 'Nekas'. "
+"noklusēto projekta kalendāru, izvēlieties 'Nekāds'. "
 
-#: data/glade/resource-dialog.glade.h:9
+#: ../data/glade/resource-dialog.glade.h:9
+#: ../data/glade/resource-input-dialog.glade.h:4
 msgid "_Email:"
-msgstr "_Epasts:"
+msgstr "_E-pasts:"
 
-#: data/glade/resource-dialog.glade.h:10
+#: ../data/glade/resource-dialog.glade.h:10
+#: ../data/glade/resource-input-dialog.glade.h:5
 msgid "_Group:"
 msgstr "_Grupa:"
 
-#: data/glade/resource-dialog.glade.h:11
-msgid "_Name:"
-msgstr "_Nosaukums:"
+#: ../data/glade/resource-dialog.glade.h:11
+msgid "_Insert time stamp"
+msgstr "_Ievietot laika zīmogu"
 
-#: data/glade/resource-dialog.glade.h:12
-msgid "_Type:"
-msgstr "_Tips:"
+#: ../data/glade/resource-dialog.glade.h:13
+#: ../data/glade/resource-input-dialog.glade.h:8
+msgid "_Short name:"
+msgstr "_Īsais nosaukums:"
 
-#: data/glade/resource-input-dialog.glade.h:2
-msgid "Email:"
-msgstr "Epasts:"
-
-#: data/glade/resource-input-dialog.glade.h:3
-msgid "Group:"
-msgstr "Grupa:"
-
-#: data/glade/resource-input-dialog.glade.h:4
-msgid "Insert resource"
+#: ../data/glade/resource-input-dialog.glade.h:2
+msgid "Insert Resource"
 msgstr "Ievietot resursu"
 
-#: data/glade/resource-input-dialog.glade.h:5
-#: data/glade/task-input-dialog.glade.h:3
-msgid "Name:"
-msgstr "Vārds:"
+#: ../data/glade/resource-input-dialog.glade.h:3
+msgid "Optional - overrides resource name in gantt view."
+msgstr "Pēc izvēles - aizstāj resursa vārdu Gantt skatā."
 
-#: data/glade/resource-input-dialog.glade.h:6
-#: data/glade/task-input-dialog.glade.h:5
+#: ../data/glade/resource-input-dialog.glade.h:6
+#: ../data/glade/task-input-dialog.glade.h:3
 msgid "_Insert"
 msgstr "_Ievietot"
 
-#: data/glade/sql.glade.h:3
-#, fuzzy
-msgid "<b>Open Database</b>"
-msgstr "<b>Dienas tipi</b>"
-
-#: data/glade/sql.glade.h:4
-#, fuzzy
-msgid "Database:"
-msgstr "Dienas tips:"
-
-#: data/glade/sql.glade.h:5
-#, fuzzy
+#: ../data/glade/sql.glade.h:2
 msgid "Open Database"
-msgstr "<b>Dienas tipi</b>"
+msgstr "Atvērt datubāzi"
 
-#: data/glade/sql.glade.h:6
-msgid "Password:"
-msgstr ""
-
-#: data/glade/sql.glade.h:7
-#, fuzzy
+#: ../data/glade/sql.glade.h:3
 msgid "Select a Project"
-msgstr "Atvērt projektu"
+msgstr "Izvēlieties projektu"
 
-#: data/glade/sql.glade.h:8
-msgid "Server:"
-msgstr ""
-
-#: data/glade/sql.glade.h:9
+#: ../data/glade/sql.glade.h:4
 msgid "The database contains the following projects. Select a project to open:"
+msgstr "Datubāze satur sekojošus projektus. Izvēlēties projektu, ko atvērt:"
+
+#: ../data/glade/sql.glade.h:5
+msgid "_Database:"
+msgstr "_Datubāze:"
+
+#: ../data/glade/sql.glade.h:6
+msgid "_Password:"
+msgstr "_Parole:"
+
+#: ../data/glade/sql.glade.h:7
+msgid "_Server:"
+msgstr "_Serveris:"
+
+#: ../data/glade/sql.glade.h:8
+msgid "_Username:"
+msgstr "_Leitotājvārds:"
+
+#: ../data/glade/task-date-widget.glade.h:1
+msgid ""
+"As soon as possible\n"
+"No earlier than\n"
+"On fixed date"
 msgstr ""
+"Pēc iespējas ārtāk\n"
+"Ne agrāk par\n"
+"Noteiktā datumā"
 
-#: data/glade/sql.glade.h:10
-#, fuzzy
-msgid "Username:"
-msgstr "Nenosaukts"
+#: ../data/glade/task-date-widget.glade.h:4
+#: ../src/planner-cell-renderer-date.c:182
+#: ../src/planner-project-properties.c:747
+msgid "Cancel"
+msgstr "Atsaukt"
 
-#: data/glade/task-dialog.glade.h:3
+#. The verb "schedule".
+#. This is the verb "schedule"
+#. I18n: the verb "schedule" here.
+#: ../data/glade/task-date-widget.glade.h:6
+#: ../data/glade/task-dialog.glade.h:11
+#: ../src/planner-cell-renderer-date.c:154
+msgid "Schedule:"
+msgstr "Grafiks:"
+
+#: ../data/glade/task-date-widget.glade.h:7
+#: ../src/planner-cell-renderer-date.c:189
+msgid "Select"
+msgstr "Izvēlēties"
+
+#: ../data/glade/task-date-widget.glade.h:8
+#: ../src/planner-cell-renderer-date.c:176
+#: ../src/planner-project-properties.c:740
+msgid "Today"
+msgstr "Šodien"
+
+#: ../data/glade/task-date-widget.glade.h:9
+msgid "window"
+msgstr "logs"
+
+#: ../data/glade/task-dialog.glade.h:1
+msgid "  "
+msgstr "  "
+
+#: ../data/glade/task-dialog.glade.h:4
 #, no-c-format
 msgid "%"
 msgstr "%"
 
-#: data/glade/task-dialog.glade.h:5
-#, fuzzy
+#: ../data/glade/task-dialog.glade.h:5
 msgid "C_omplete:"
-msgstr "_Izpildīts:"
+msgstr "I_zpildīts:"
 
-#: data/glade/task-dialog.glade.h:8
-msgid "Na_me:"
-msgstr "Nosauku_ms:"
-
-#: data/glade/task-dialog.glade.h:10
-msgid "Pr_iority:"
-msgstr "Pr_ioritāte:"
-
-#: data/glade/task-dialog.glade.h:11
+#: ../data/glade/task-dialog.glade.h:8
 msgid "Predecessors"
 msgstr "Priekšteči"
 
-#: data/glade/task-dialog.glade.h:12 src/planner-resource-view.c:342
+#: ../data/glade/task-dialog.glade.h:9 ../src/planner-resource-view.c:417
 msgid "Resources"
 msgstr "Resursi"
 
-#: data/glade/task-dialog.glade.h:13
-#, fuzzy
+#: ../data/glade/task-dialog.glade.h:12
 msgid "_Duration:"
 msgstr "_Ilgums:"
 
-#: data/glade/task-dialog.glade.h:14
+#: ../data/glade/task-dialog.glade.h:13
 msgid "_Fixed duration"
-msgstr "_Fiksēts ilgums"
+msgstr "_Noteikts ilgums"
 
-#: data/glade/task-dialog.glade.h:15
+#: ../data/glade/task-dialog.glade.h:14
+msgid "_Insert Time Stamp"
+msgstr "_Ievietot laika zīmogu"
+
+#: ../data/glade/task-dialog.glade.h:15
 msgid "_Milestone"
-msgstr "Pa_vērsiens"
+msgstr "_Notikums"
 
-#: data/glade/task-dialog.glade.h:16
+#: ../data/glade/task-dialog.glade.h:17
+msgid "_Priority:"
+msgstr "_Prioritāte:"
+
+#: ../data/glade/task-dialog.glade.h:18
+#: ../data/glade/task-input-dialog.glade.h:5
 msgid "_Work:"
 msgstr "_Darbs:"
 
-#. day unit variant accepted in input
-#: data/glade/task-dialog.glade.h:17 src/planner-task-tree.c:2120
-msgid "days"
-msgstr "dienas"
-
-#: data/glade/task-input-dialog.glade.h:2
-msgid "Insert task"
+#: ../data/glade/task-input-dialog.glade.h:2
+msgid "Insert Task"
 msgstr "Ievietot uzdevumu"
 
-#: data/glade/task-input-dialog.glade.h:4
-msgid "Work:"
-msgstr "Darbs:"
+#: ../data/mime/planner.xml.in.h:1
+msgid "Planner project plan"
+msgstr "Plānotaja projekta plāns"
 
-#: libplanner/mrp-project.c:441 src/planner-group-dialog.c:411
-msgid "Default"
-msgstr "Noklusētais"
+#: ../data/planner.desktop.in.in.h:1
+msgid "Planner Project Management"
+msgstr "Plānotaja projekta pārvaldība"
 
-#: libplanner/mrp-project.c:749
-#, c-format
-msgid "Couldn't find a suitable file module for loading '%s'"
-msgstr "Nevarēju atrast piemērotu faila moduli, lai ielādētu '%s'"
+#: ../data/planner.desktop.in.in.h:2
+msgid "Project Management"
+msgstr "Projekta pārvaldība"
 
-#: libplanner/mrp-project.c:770 libplanner/mrp-project.c:1034
-msgid "No support for SQL storage built into this version of MrProject."
-msgstr ""
+#: ../data/planner.schemas.in.h:1
+msgid "Display nonstandard days in Gantt view"
+msgstr "Rādīt nestandarta dienas Gantt skatā"
 
-#: libplanner/mrp-project.c:807
-#, fuzzy
-msgid "Invalid URI."
-msgstr " (nederīgs Unicode)"
+#: ../data/planner.schemas.in.h:2
+msgid "Highlight critical path in Gantt view"
+msgstr "Izgaismot kritiskos ceļus Gantt skatā"
 
-#: libplanner/mrp-project.c:928
-#, c-format
-msgid "Unable to find file writer identified by '%s'"
-msgstr ""
+#: ../data/planner.schemas.in.h:3
+msgid "Highlight critical path in Task view"
+msgstr "Izgaismot kritiskos ceļus uzdevuma skatā"
 
-#: libplanner/mrp-project.c:991
-msgid "Couldn't find a suitable file module for loading project"
-msgstr "Nevarēju atrast piemērotu faila moduli, lai ielādētu projektu"
+#: ../data/planner.schemas.in.h:4
+msgid "Print the Gantt view"
+msgstr "Drukāt Gantt skatu"
 
-#: libplanner/mrp-property.c:365
-#, fuzzy
-msgid "Text"
-msgstr "Tests"
+#: ../data/planner.schemas.in.h:5
+msgid "Print the Resource view"
+msgstr "Drukāt resursa skatu"
 
-#: libplanner/mrp-property.c:367
-msgid "String list"
-msgstr "Virkņu saraksts"
+#: ../data/planner.schemas.in.h:6
+msgid "Print the Task view"
+msgstr "Drukāt uzdevuma skatu"
 
-#: libplanner/mrp-property.c:369
-#, fuzzy
-msgid "Integer number"
-msgstr "Vadītāja vārds"
+#: ../data/planner.schemas.in.h:7
+msgid "The active view"
+msgstr "Aktīvais skats"
 
-#: libplanner/mrp-property.c:371
-msgid "Floating-point number"
-msgstr "Pūstošā-punkta numurs"
+#: ../data/planner.schemas.in.h:8
+msgid "Whether printing of the Gantt view is enabled."
+msgstr "Vai Gantt skata drukāšana ir aktivizēta."
 
-#: libplanner/mrp-property.c:373
-#, fuzzy
-msgid "Date"
-msgstr "Dienas tips:"
+#: ../data/planner.schemas.in.h:9
+msgid "Whether printing of the Resource view is enabled."
+msgstr "Vai resursa skata drukāšana ir aktivizēta."
 
-#: libplanner/mrp-property.c:375
-#, fuzzy
-msgid "Duration"
-msgstr "_Ilgums:"
+#: ../data/planner.schemas.in.h:10
+msgid "Whether printing of the Task view is enabled."
+msgstr "Vai uzdevuma skata drukāšana ir aktivizēta."
 
-#: libplanner/mrp-property.c:377 src/planner-task-view.c:232
-msgid "Cost"
-msgstr "Maksa"
+#: ../data/planner.schemas.in.h:11
+msgid "Whether to display nonstandard days in the Gantt view."
+msgstr "Vai rādīt nestandarta dienas Gantt skatā."
 
-#: libplanner/mrp-property.c:380 src/planner-project-properties.c:505
-msgid "None"
-msgstr "Nekas"
+#: ../data/planner.schemas.in.h:12
+msgid "Whether to highlight the tasks along the cricital path in the Gantt view."
+msgstr "Vai izcelt uzdevumus pie kritiska ceļa Gantt skatā."
 
-#: libplanner/mrp-task-manager.c:1769
-msgid "Can not add a predecessor relation between a task and its ancestor."
-msgstr "Nevaru pievienot priekšteča attiecību starp uzdevumu un tā priekšteci."
+#: ../data/planner.schemas.in.h:13
+msgid "Whether to highlight the tasks along the cricital path in the Task view."
+msgstr "Vai izcelt uzdevumus pie kritiska ceļa uzdevuma skatā."
 
-#: libplanner/mrp-task-manager.c:1778 libplanner/mrp-task-manager.c:1786
-msgid "Can not add a predecessor, because it would result in a loop."
-msgstr "Nevaru pievienot priekšteci tāpēc, ka tas novestu pie cilpas."
+#: ../data/planner.schemas.in.h:14
+msgid "Which view to display in the user interface."
+msgstr "Kuru skatu rādīt šajā saskarnē."
 
-#: libplanner/mrp-task-manager.c:1821
-msgid "Can not move the task, since it would result in a loop."
-msgstr "Nevaru pārvietot uzdevumu, jo tas novestu pie cilpas."
+#: ../libegg/recent-files/egg-recent-vfs-utils.c:90
+msgid " (invalid Unicode)"
+msgstr " (nepareizs Unicode)"
 
-#: libplanner/mrp-task.c:1016
-msgid ""
-"Could not add a predecessor relation, because the tasks are already related."
-msgstr ""
-"Nevaru pievienot priekšteča attiecību tāpēc, ka uzdevumi jau ir saistīti."
-
-#: libplanner/mrp-day.c:54
-#, fuzzy
+#: ../libplanner/mrp-day.c:54
 msgid "Working"
-msgstr "Darbs"
+msgstr "Strādā"
 
-#: libplanner/mrp-day.c:55
+#: ../libplanner/mrp-day.c:55
 msgid "A default working day"
 msgstr "Noklusētā darba diena"
 
-#: libplanner/mrp-day.c:57
-#, fuzzy
+#: ../libplanner/mrp-day.c:57
 msgid "Nonworking"
-msgstr "Nav darba laiks"
+msgstr "Nestrādā"
 
-#: libplanner/mrp-day.c:58
+#: ../libplanner/mrp-day.c:58
 msgid "A default non working day"
-msgstr "Noklusētā brīvdiena"
+msgstr "Noklusētā ne darba diena"
 
-#: libplanner/mrp-day.c:60
+#: ../libplanner/mrp-day.c:60
 msgid "Use base"
-msgstr "Lirtot bāzi"
+msgstr "Lietot bāzi"
 
-#: libplanner/mrp-day.c:61
-#, fuzzy
+#: ../libplanner/mrp-day.c:61
 msgid "Use day from base calendar"
-msgstr "_Mantot no kalendāra"
+msgstr "Lietot dienu no bāzes kalendāra"
 
-#: libplanner/mrp-parser.c:1043 libplanner/mrp-parser.c:1138
-#, fuzzy
+#: ../libplanner/mrp-file-module.c:121
+msgid "This format does not support reading"
+msgstr "Šis formāts neatbalsta lasīšanu"
+
+#: ../libplanner/mrp-parser.c:1064 ../libplanner/mrp-parser.c:1159
 msgid "Could not create XML tree"
-msgstr "Nevarēju izveidot rekvizītu logu."
+msgstr "Nevarēja izveidot XML koku"
 
-#: libplanner/mrp-parser.c:1104
-#, fuzzy
+#: ../libplanner/mrp-parser.c:1125
 msgid "Could not write XML file"
-msgstr "Nevarēju atvērt iespraudņa failu '%s'\n"
+msgstr "Nevarēja ierakstīt XML failu"
+
+#: ../libplanner/mrp-project.c:437 ../src/planner-group-dialog.c:846
+msgid "Default"
+msgstr "Noklusētais"
+
+#: ../libplanner/mrp-project.c:716
+#, c-format
+msgid "Invalid URI: '%s'"
+msgstr "Nepareizs URI: '%s'"
+
+#: ../libplanner/mrp-project.c:759
+#, c-format
+msgid "Couldn't find a suitable file module for loading '%s'"
+msgstr "Nevarēja atrast piemērotu faila moduli '%s' ielādei "
+
+#: ../libplanner/mrp-project.c:780 ../libplanner/mrp-project.c:1064
+msgid "No support for SQL storage built into this version of Planner."
+msgstr "Šajā Planner versijā nav iebūvēts atbalsts SQL atmiņai."
+
+#: ../libplanner/mrp-project.c:817
+msgid "Invalid URI."
+msgstr "Nepareizs URI."
+
+#: ../libplanner/mrp-project.c:958
+#, c-format
+msgid "Unable to find file writer identified by '%s'"
+msgstr "Nevar atrast faila rakstītāju, ko atpazītu '%s'"
+
+#: ../libplanner/mrp-project.c:1021
+msgid "Couldn't find a suitable file module for loading project"
+msgstr "Nevarēju atrast piemērotu faila moduli projekta ielādei"
+
+#: ../libplanner/mrp-property.c:365
+msgid "Text"
+msgstr "Teksts"
+
+#: ../libplanner/mrp-property.c:367
+msgid "String list"
+msgstr "Virkņu saraksts"
+
+#: ../libplanner/mrp-property.c:369
+msgid "Integer number"
+msgstr "Vesels skaitlis"
+
+#: ../libplanner/mrp-property.c:371
+msgid "Floating-point number"
+msgstr "Skaitlis ar peldošo punktu"
+
+#: ../libplanner/mrp-property.c:373
+msgid "Date"
+msgstr "Datums"
+
+#: ../libplanner/mrp-property.c:375 ../src/planner-gantt-view.c:559
+#: ../src/planner-task-view.c:340
+msgid "Duration"
+msgstr "Ilgums"
+
+#: ../libplanner/mrp-property.c:377 ../src/planner-gantt-view.c:561
+#: ../src/planner-resource-view.c:1314 ../src/planner-task-view.c:342
+msgid "Cost"
+msgstr "Izmaksas"
+
+#: ../libplanner/mrp-property.c:380 ../src/planner-project-properties.c:882
+msgid "None"
+msgstr "Nekas"
+
+#: ../libplanner/mrp-sql.c:206
+msgid "Can't connect to database server"
+msgstr "Nevar pieslēgties datubāzes serverim"
 
 #. Give up.
-#: libplanner/mrp-sql.c:229 src/planner-sql-plugin.c:127
-#, fuzzy
+#: ../libplanner/mrp-sql.c:297 ../src/planner-sql-plugin.c:196
 msgid "Invalid Unicode"
-msgstr " (nederīgs Unicode)"
+msgstr "Nepareizs Unicode"
 
-#: libplanner/mrp-sql.c:2205
+#: ../libplanner/mrp-sql.c:2180
 #, c-format
-msgid ""
-"The project '%s' has been changed by the user '%s' since you opened it. Do "
-"you want to save anyway?"
-msgstr ""
+msgid "Connection to database '%s' failed.\n"
+msgstr "Savienojums ar datubāzi '%s' nav izdevies.\n"
 
-#: libplanner/mrp-sql.c:3443
+#: ../libplanner/mrp-sql.c:2185
 #, c-format
 msgid ""
 "Connection to database '%s' failed.\n"
 "%s"
 msgstr ""
+"Savienojums ar datubāzi '%s' nav izdevies.\n"
+"%s"
 
-#: libplanner/mrp-storage-sql.c:205
+#: ../libplanner/mrp-sql.c:2193
+#, c-format
+msgid "BEGIN command failed %s."
+msgstr "SĀKT komanda nav izdevusies %s."
+
+#: ../libplanner/mrp-sql.c:2361
+#, c-format
+msgid ""
+"The project '%s' has been changed by the user '%s' since you opened it. Do "
+"you want to save anyway?"
+msgstr ""
+"Litotājs '%s' izmainījis projektu '%s' kopš jūs to atvērāt. Vai vēlaties "
+"tomēr saglabāt?"
+
+#: ../libplanner/mrp-sql.c:3630
+#, c-format
+msgid "Connection to database '%s' failed."
+msgstr "Savienojums ar datubāzi '%s 'nav izdevies."
+
+#: ../libplanner/mrp-storage-sql.c:205
 msgid "Invalid SQL URI (must start with 'sql://' and contain '#')."
-msgstr ""
+msgstr "Nepareizs SQL URI (jāsākas ar 'sql://' un jāsatur '#')."
 
-#: libplanner/mrp-storage-sql.c:274
+#: ../libplanner/mrp-storage-sql.c:274
 msgid "Invalid SQL URI (invalid project id)."
-msgstr ""
+msgstr "Nepareizs SQL URI (nepareizs projekta id)."
 
-#: libplanner/mrp-storage-sql.c:282
+#: ../libplanner/mrp-storage-sql.c:282
 msgid "Invalid SQL URI (no database name specified)."
-msgstr ""
+msgstr "Nepareizs SQL URI (nav norādīts datu bāzes nosaukums)."
 
-#: src/planner-application.c:117
+#: ../libplanner/mrp-task.c:1070
+msgid "Could not add a predecessor relation, because the tasks are already related."
+msgstr "Nevarēja pievienot priekšteča attiecību, jo uzdevumi jau ir saistīti."
+
+#: ../libplanner/mrp-task.c:1081
+msgid "Start to Finish relation type cannot be combined with other relations."
+msgstr ""
+"'No sākuma uz beigām' attiecību tips nevar tikt kombinēts ar citām "
+"attiecībām."
+
+#: ../libplanner/mrp-task.c:1083
+msgid "Finish to Finish relation type cannot be combined with other relations."
+msgstr ""
+"'No beigām uz beigām' attiecību tips nevar tikt kombinēts ar citām "
+"attiecībām."
+
+#: ../libplanner/mrp-task.c:1099
+msgid ""
+"Start to Finish relation type cannot be combined with Start No Earlier Than "
+"constraint."
+msgstr ""
+"'No sākuma uz beigām' attiecību tips nevar tikt kombinēts ar attiecībām "
+"'Nesākt  ātrāk par'."
+
+#: ../libplanner/mrp-task.c:1101
+msgid ""
+"Finish to Finish relation type cannot be combined with Start No Earlier Than "
+"constraint."
+msgstr ""
+" 'No beigām uz beigām' attiecību tips nevar tikt kombinēts ar attiecībām "
+"'Nesākt  ātrāk par'."
+
+#: ../libplanner/mrp-task.c:1124
+msgid ""
+"Start to Finish relation cannot be set. Predecessor starts on project start "
+"date."
+msgstr ""
+"Nav iespējams pievienot atiecību ar tipu 'No sākuma uz beigām, jo "
+"priekštecis sākas projekta pirmajā dienā."
+
+#: ../libplanner/mrp-task-manager.c:2518
+msgid "Cannot add a predecessor, because it would result in a loop."
+msgstr "Nevar pievienot priekšteci, jo tas radītu ciklu."
+
+#: ../libplanner/mrp-task-manager.c:2564
+msgid "Cannot move the task, because it would result in a loop."
+msgstr "Nevar pārvietot uzdevumu, jo veidotos cikls."
+
+#: ../libplanner/mrp-xsl.c:89 ../libplanner/mrp-xsl.c:137
+msgid "Export to HTML failed"
+msgstr "Neizdevās eksportēt uz HTML"
+
+#: ../src/planner-application.c:55 ../src/planner-application.c:111
+msgid "Insert"
+msgstr "Ievietot"
+
+#: ../src/planner-application.c:62 ../src/planner-application.c:118
+msgid "Remove"
+msgstr "Izņemt"
+
+#: ../src/planner-application.c:69
+msgid "Unlink"
+msgstr "Atvienot"
+
+#: ../src/planner-application.c:76
+msgid "Link"
+msgstr "Savienot"
+
+#: ../src/planner-application.c:83
+msgid "Indent"
+msgstr "Atkāpe"
+
+#: ../src/planner-application.c:90
+msgid "Unindent"
+msgstr "Noņemt atkāpi"
+
+#: ../src/planner-application.c:97
+msgid "Move up"
+msgstr "Pārvietot augšup"
+
+#: ../src/planner-application.c:104
+msgid "Move down"
+msgstr "Pārvietot lejup"
+
+#: ../src/planner-application.c:125
 msgid "Edit"
 msgstr "Rediģēt"
 
-#: src/planner-main-window.c:584
-msgid "Open a file"
-msgstr "Atvērt failu"
+#: ../src/planner-calendar-dialog.c:184
+msgid "Change day type"
+msgstr "Mainīt dienas tipu"
 
-#. I18n: Translators, list your names here, newline separated if there
-#. * are more than one, to appear in the about box.
+#: ../src/planner-calendar-dialog.c:306
+msgid "Remove calendar"
+msgstr "Dzēst kalendāru"
+
+#: ../src/planner-calendar-dialog.c:398
+msgid "Add new calendar"
+msgstr "Pievienot jaunu kalendāru"
+
+#: ../src/planner-cell-renderer-date.c:161 ../src/planner-task-dialog.c:1491
+msgid "As soon as possible"
+msgstr "Cik ātri vien iespējams"
+
+#: ../src/planner-cell-renderer-date.c:162
+msgid "No earlier than"
+msgstr "Ne agrāk kā"
+
+#: ../src/planner-cell-renderer-date.c:163
+msgid "On fixed date"
+msgstr "Noteiktā datumā"
+
+#: ../src/planner-cmd-manager.c:227
+#, c-format
+msgid "Undo '%s'"
+msgstr "Atsaukt '%s'"
+
+#: ../src/planner-cmd-manager.c:229
+msgid "Undo"
+msgstr "Atsaukt"
+
+#: ../src/planner-cmd-manager.c:239
+#, c-format
+msgid "Redo '%s'"
+msgstr "Atkārtot atsaukto darbību '%s'"
+
+#: ../src/planner-cmd-manager.c:241
+msgid "Redo"
+msgstr "Atkārtot atsaukto darbību"
+
+#: ../src/planner-day-type-dialog.c:499
+#, c-format
+msgid "Add day type \"%s\""
+msgstr "Pievienot dienas tipu \"%s\""
+
+#: ../src/planner-day-type-dialog.c:560
+#, c-format
+msgid "Remove day type \"%s\""
+msgstr "Noņemt dienas tipu \"%s\""
+
+#: ../src/planner-default-week-dialog.c:42
+msgid "Monday"
+msgstr "Pirmdiena"
+
+#: ../src/planner-default-week-dialog.c:43
+msgid "Tuesday"
+msgstr "Otrdiena"
+
+#: ../src/planner-default-week-dialog.c:44
+msgid "Wednesday"
+msgstr "Trešdiena"
+
+#: ../src/planner-default-week-dialog.c:45
+msgid "Thursday"
+msgstr "Ceturtdiena"
+
+#: ../src/planner-default-week-dialog.c:46
+msgid "Friday"
+msgstr "Piektdiena"
+
+#: ../src/planner-default-week-dialog.c:47
+msgid "Saturday"
+msgstr "Sestdiena"
+
+#: ../src/planner-default-week-dialog.c:48
+msgid "Sunday"
+msgstr "Svētdiena"
+
+#: ../src/planner-default-week-dialog.c:288
+msgid "No working time"
+msgstr "Ne darba laiks"
+
+#: ../src/planner-default-week-dialog.c:299
+#: ../src/planner-default-week-dialog.c:303
+msgid "%H:%M"
+msgstr "%S:%M"
+
+#: ../src/planner-default-week-dialog.c:553
+msgid "Edit default week"
+msgstr "Rediģēt noklusēto nedēļu"
+
+#: ../src/planner-eds-plugin.c:167
+msgid "EDS"
+msgstr "EDS"
+
+#: ../src/planner-eds-plugin.c:168
+msgid "Import resources from Evolution Data Server"
+msgstr "Ieviestt resursus no Evolution datu servera"
+
+#: ../src/planner-eds-plugin.c:396 ../src/planner-gantt-print.c:190
+#: ../src/planner-gantt-view.c:555 ../src/planner-group-dialog.c:822
+#: ../src/planner-property-dialog.c:485 ../src/planner-resource-view.c:1171
+#: ../src/planner-task-dialog.c:2616 ../src/planner-task-dialog.c:2690
+#: ../src/planner-task-view.c:336
+msgid "Name"
+msgstr "Nosaukums"
+
+#: ../src/planner-eds-plugin.c:416 ../src/planner-resource-view.c:1287
+msgid "Email"
+msgstr "E-pasts"
+
+#: ../src/planner-eds-plugin.c:437
+msgid "Import"
+msgstr "Ieviest"
+
+#: ../src/planner-eds-plugin.c:447
+msgid "Photo"
+msgstr "Foto"
+
+#: ../src/planner-eds-plugin.c:676
+msgid "Imported from Evolution Data Server"
+msgstr "Ieviests no Evolution datu servera"
+
+#: ../src/planner-eds-plugin.c:677
+msgid "Updated from Evolution Data Server"
+msgstr "Atjaunināts no Evolution datu servera"
+
+#: ../src/planner-eds-plugin.c:862
+msgid "Query cancelled."
+msgstr "Vaicājums atcelts."
+
+#: ../src/planner-eds-plugin.c:923
+msgid "Evolution Data Server UID"
+msgstr "Evolution datu servera UID"
+
+#: ../src/planner-eds-plugin.c:924
+msgid "Identifier used by Evolution Data Server for resources"
+msgstr "Evolution datu servera resursu identifikators"
+
+#: ../src/planner-format.c:149
+#, c-format
+msgid "%dd %dh"
+msgstr "%dd %dh"
+
+#: ../src/planner-format.c:152
+#, c-format
+msgid "%dd"
+msgstr "%dd"
+
+#: ../src/planner-format.c:155
+#, c-format
+msgid "%dh"
+msgstr "%dh"
+
+#. i18n: this string is the date nr and month name, displayed
+#. * e.g. in the date cells in the task tree. See
+#. * libmrproject/docs/DateFormat.
 #.
-#: src/planner-main-window.c:993 src/planner-main-window.c:1000
-msgid "translator_credits"
-msgstr "Artis Trops <hornet@navigator.lv>"
+#: ../src/planner-format.c:190
+msgid "%b %e"
+msgstr "%b %e"
 
-#. "Copyright \xc2\xa9 2001-2002 CodeFactory AB",
-#: src/planner-main-window.c:997
-msgid "A Project Management application for the GNOME desktop"
-msgstr "Projektu pārvaldības aplikācija GNOME darbvirsmai"
+#: ../src/planner-format.c:374
+msgid "mon"
+msgstr "mēn"
 
-#: src/planner-main-window.c:1007
-#, fuzzy
-msgid "The Planner Homepage"
-msgstr "MrProject Mājaslapa"
+#. month unit variant accepted in input
+#: ../src/planner-format.c:375
+msgid "month"
+msgstr "mēnesis"
 
-#: src/planner-main-window.c:1083
-msgid "If you don't save, changes made the last minute will be discarded."
-msgstr "Ja jūs nesaglabājiet, pēdējā minūtē izdarītās izmaiņas tiks atmestas."
+#. month unit variant accepted in input
+#: ../src/planner-format.c:376
+msgid "months"
+msgstr "mēneši"
 
-#: src/planner-main-window.c:1088
+#. month unit variant accepted in input
+#: ../src/planner-format.c:377
+msgid "w"
+msgstr "n"
+
+#. week unit variant accepted in input
+#: ../src/planner-format.c:378
+msgid "week"
+msgstr "nedēļa"
+
+#. week unit variant accepted in input
+#: ../src/planner-format.c:379
+msgid "weeks"
+msgstr "nedēļas"
+
+#. week unit variant accepted in input
+#: ../src/planner-format.c:380
+msgid "d"
+msgstr "d"
+
+#. day unit variant accepted in input
+#: ../src/planner-format.c:381
+msgid "day"
+msgstr "diena"
+
+#. day unit variant accepted in input
+#: ../src/planner-format.c:382
+msgid "days"
+msgstr "dienas"
+
+#. day unit variant accepted in input
+#: ../src/planner-format.c:383
+msgid "h"
+msgstr "s"
+
+#. hour unit variant accepted in input
+#: ../src/planner-format.c:384
+msgid "hour"
+msgstr "stunda"
+
+#. hour unit variant accepted in input
+#: ../src/planner-format.c:385
+msgid "hours"
+msgstr "stundas"
+
+#. hour unit variant accepted in input
+#: ../src/planner-format.c:386
+msgid "min"
+msgstr "min"
+
+#. minute unit variant accepted in input
+#: ../src/planner-format.c:387
+msgid "minute"
+msgstr "minūte"
+
+#. minute unit variant accepted in input
+#: ../src/planner-format.c:388
+msgid "minutes"
+msgstr "minūtes"
+
+#. i18n: project start, the date format is described in
+#. * libmrproject/docs/DateFormat.
+#: ../src/planner-gantt-background.c:625
+msgid "%Y %b %d"
+msgstr "%Y %b %d"
+
+#: ../src/planner-gantt-background.c:627
+msgid "Project start"
+msgstr "Projekta sākums"
+
+#: ../src/planner-gantt-header.c:671
+msgid "%e %b %Y"
+msgstr "%e %b %Y"
+
+#: ../src/planner-gantt-print.c:198 ../src/planner-gantt-view.c:558
+#: ../src/planner-resource-dialog.c:1850 ../src/planner-resource-view.c:750
+#: ../src/planner-resource-view.c:766 ../src/planner-resource-view.c:1736
+#: ../src/planner-task-view.c:339
+msgid "Work"
+msgstr "Darbs"
+
+#: ../src/planner-gantt-print.c:542 ../src/planner-gantt-row.c:752
+#: ../src/planner-html-plugin.c:125 ../src/planner-task-tree.c:1571
+#: ../src/planner-window.c:1981
+msgid "Unnamed"
+msgstr "Nenosaukts"
+
+#: ../src/planner-gantt-row.c:2605 ../src/planner-gantt-row.c:2608
+msgid "No name"
+msgstr "Nav nosaukuma"
+
+#: ../src/planner-gantt-row.c:2611
 #, c-format
-msgid "If you don't save, changes made the last %d minutes will be discarded."
-msgstr ""
-"Ja jūs nesaglabājiet, pēdējās %d minūtēs izdarītās izmaiņas tiks atmestas."
+msgid "Make task '%s' a predecessor of '%s'"
+msgstr "Pildīt uzdevumu '%s' priekšteci '%s'"
 
-#: src/planner-main-window.c:1093
-msgid "If you don't save, changes made the last hour will be discarded."
-msgstr "Ja jūs nesaglabājiet, pēdējā stundā izdarītās izmaiņas tiks atmestas."
-
-#: src/planner-main-window.c:1098
+#: ../src/planner-gantt-row.c:2659
 #, c-format
-msgid "If you don't save, changes made the last %d hours will be discarded."
-msgstr ""
-"Ja jūs nesaglabājiet, pēdējās %d stundās izdarītās izmaiņas tiks atmestas."
+msgid "Change work to %s"
+msgstr "Mainīt darbu uz %s"
 
-#: src/planner-main-window.c:1105
-#, c-format
-msgid "Save changes to document '%s' before closing?"
-msgstr "Saglabāt izmaiņas dokumentā '%s' pirms aizvēršanas?"
+#: ../src/planner-gantt-row.c:3230 ../src/planner-task-dialog.c:455
+#: ../src/planner-task-tree.c:257 ../src/planner-task-tree.c:947
+msgid "Edit task property"
+msgstr "Rediģēt uzdevuma īpašību"
 
-#: src/planner-main-window.c:1123
-msgid "C_lose without saving"
-msgstr "_Aizvērt bez saglabāšanas"
+#: ../src/planner-gantt-view.c:133 ../src/planner-task-view.c:115
+msgid "_Insert Task"
+msgstr "_Ievietot uzdevumu"
 
-#: src/planner-main-window.c:1125
-msgid "_Cancel"
-msgstr "_Atsaukt"
+#: ../src/planner-gantt-view.c:134 ../src/planner-task-view.c:116
+msgid "Insert a new task"
+msgstr "Ievietot jaunu uzdevumu"
 
-#: src/planner-main-window.c:1232
-msgid "Save a file"
-msgstr "Saglabāt failu"
+#: ../src/planner-gantt-view.c:136 ../src/planner-task-view.c:118
+msgid "In_sert Tasks..."
+msgstr "Ie_vietot uzdevumus..."
 
-#: src/planner-main-window.c:1264 src/planner-html-plugin.c:146
+#: ../src/planner-gantt-view.c:139 ../src/planner-task-view.c:121
+msgid "_Remove Task"
+msgstr "_Noņemt uzdevumu"
+
+#: ../src/planner-gantt-view.c:140 ../src/planner-task-view.c:122
+msgid "Remove the selected tasks"
+msgstr "Noņemt izvēlētos uzdevumus"
+
+#: ../src/planner-gantt-view.c:142
+msgid "_Edit Task Properties..."
+msgstr "_Rediģēt uzdevuma īpašības..."
+
+#: ../src/planner-gantt-view.c:145 ../src/planner-resource-view.c:245
+#: ../src/planner-task-view.c:127
+msgid "Select _All"
+msgstr "Atlasīt _visu"
+
+#: ../src/planner-gantt-view.c:146 ../src/planner-resource-view.c:246
+#: ../src/planner-task-view.c:128
+msgid "Select all tasks"
+msgstr "Atlasīt visus uzdevumus"
+
+#: ../src/planner-gantt-view.c:148 ../src/planner-task-view.c:130
+msgid "_Unlink Task"
+msgstr "_Atvienot uzdevumu"
+
+#: ../src/planner-gantt-view.c:149 ../src/planner-task-view.c:131
+msgid "Unlink the selected tasks"
+msgstr "Atvienot izvēlētos uzdevumus"
+
+#: ../src/planner-gantt-view.c:151 ../src/planner-task-view.c:133
+msgid "_Link Tasks"
+msgstr "_Savienot uzdevumus"
+
+#: ../src/planner-gantt-view.c:152 ../src/planner-task-view.c:134
+msgid "Link the selected tasks"
+msgstr "Savienot izvēlētos uzdevumus"
+
+#: ../src/planner-gantt-view.c:154 ../src/planner-task-view.c:136
+msgid "I_ndent Task"
+msgstr "N_obīdīt uzdevumu"
+
+#: ../src/planner-gantt-view.c:155 ../src/planner-task-view.c:137
+msgid "Indent the selected tasks"
+msgstr "Nobīdīt izvēlētos uzdevumus"
+
+#: ../src/planner-gantt-view.c:157 ../src/planner-task-view.c:139
+msgid "Unin_dent Task"
+msgstr "Atcelt uzdevuma _nobīdi"
+
+#: ../src/planner-gantt-view.c:158 ../src/planner-task-view.c:140
+msgid "Unindent the selected tasks"
+msgstr "Atcelt nobīdi izvēlētajiem uzdevumiem"
+
+#: ../src/planner-gantt-view.c:160 ../src/planner-task-view.c:142
+msgid "Move Task _Up"
+msgstr "Pārvietot uzdevumu _augšup"
+
+#: ../src/planner-gantt-view.c:161 ../src/planner-task-view.c:143
+msgid "Move the selected tasks upwards"
+msgstr "Pārvietot izvēlētos uzdevumus augšup"
+
+#: ../src/planner-gantt-view.c:163 ../src/planner-task-view.c:145
+msgid "Move Task Do_wn"
+msgstr "Pārvietot uzdevumu le_jup"
+
+#: ../src/planner-gantt-view.c:164 ../src/planner-task-view.c:146
+msgid "Move the selected tasks downwards"
+msgstr "Pārvietot izvēlētos uzdevumus lejup"
+
+#: ../src/planner-gantt-view.c:166 ../src/planner-task-view.c:148
+msgid "Reset _Constraint"
+msgstr "Atstatīt _ierobežojumus"
+
+#: ../src/planner-gantt-view.c:169
+msgid "Zoom To _Fit"
+msgstr "Fokusēt _ietilpšanai"
+
+#: ../src/planner-gantt-view.c:170 ../src/planner-usage-view.c:112
+msgid "Zoom to fit the entire project"
+msgstr "Fokusēt, lai ietilptu viss projekts"
+
+#: ../src/planner-gantt-view.c:172
+msgid "_Zoom In"
+msgstr "_Tuvināt"
+
+#: ../src/planner-gantt-view.c:173 ../src/planner-usage-view.c:108
+#: ../src/planner-usage-view.c:109
+msgid "Zoom in"
+msgstr "Tuvināt"
+
+#: ../src/planner-gantt-view.c:175
+msgid "Zoom _Out"
+msgstr "_Attālināt"
+
+#: ../src/planner-gantt-view.c:176 ../src/planner-usage-view.c:105
+#: ../src/planner-usage-view.c:106
+msgid "Zoom out"
+msgstr "Attālinat"
+
+#: ../src/planner-gantt-view.c:178 ../src/planner-resource-view.c:251
+#: ../src/planner-task-view.c:154 ../src/planner-usage-view.c:114
+msgid "Edit _Visible Columns"
+msgstr "Rediģēt _redzamās kolonnas"
+
+#: ../src/planner-gantt-view.c:179 ../src/planner-resource-view.c:252
+#: ../src/planner-task-view.c:155 ../src/planner-usage-view.c:115
+msgid "Edit visible columns"
+msgstr "Rediģēt redzamās kolonnas"
+
+#: ../src/planner-gantt-view.c:184 ../src/planner-task-view.c:160
+msgid "_Highlight Critical Tasks"
+msgstr "_Izgaismot kritiskos uzdevumus"
+
+#: ../src/planner-gantt-view.c:187
+msgid "_Show Guide Lines"
+msgstr "Rādīt palīglīnija_s"
+
+#: ../src/planner-gantt-view.c:190 ../src/planner-task-view.c:162
+msgid "_Nonstandard Days"
+msgstr "_Nestandarta dienas"
+
+#. i18n: Label used for the sidebar. Please try to make it short and use
+#. * a linebreak if necessary/possible.
+#.
+#: ../src/planner-gantt-view.c:310
+msgid "Gantt"
+msgstr "Gantt"
+
+#: ../src/planner-gantt-view.c:316
+msgid "_Gantt Chart"
+msgstr "_Gantt grafs"
+
+#. i18n: WBS is short for work breakdown structure, and is a
+#. * project management term. You might want to leave it
+#. * untranslated unless there is a localized term for it.
+#.
+#. i18n: WBS is sort for work breakdown structure, and is a
+#. * project management term. You might want to leave it
+#. * untranslated unless there is a localized term for it.
+#.
+#: ../src/planner-gantt-view.c:554 ../src/planner-task-view.c:335
+msgid "WBS"
+msgstr "WBS"
+
+#: ../src/planner-gantt-view.c:556 ../src/planner-task-view.c:337
+msgid "Start"
+msgstr "Sākums"
+
+#: ../src/planner-gantt-view.c:557 ../src/planner-task-view.c:338
+msgid "Finish"
+msgstr "Beigas"
+
+#: ../src/planner-gantt-view.c:560 ../src/planner-task-view.c:341
+msgid "Slack"
+msgstr "Atslābums"
+
+#: ../src/planner-gantt-view.c:562 ../src/planner-task-view.c:343
+msgid "Assigned to"
+msgstr "Piešķirts"
+
+#: ../src/planner-gantt-view.c:911
+msgid "Edit Gantt Columns"
+msgstr "Rediģēt Gantt kolonnas"
+
+#: ../src/planner-group-dialog.c:304
+msgid "Insert group"
+msgstr "Ievietot grupu"
+
+#: ../src/planner-group-dialog.c:431
+msgid "Remove group"
+msgstr "Noņemt grupu"
+
+#: ../src/planner-group-dialog.c:526
+msgid "Default group"
+msgstr "Noklusētā grupa"
+
+#: ../src/planner-group-dialog.c:644
+msgid "Edit group property"
+msgstr "Rediģēt grupas īpašības"
+
+#: ../src/planner-group-dialog.c:828
+msgid "Manager name"
+msgstr "Vadītāja vārds"
+
+#: ../src/planner-group-dialog.c:834
+msgid "Manager phone"
+msgstr "Vadītāja tālrunis"
+
+#: ../src/planner-group-dialog.c:840
+msgid "Manager email"
+msgstr "Vadītāja e-pasts"
+
+#: ../src/planner-html-plugin.c:47
+msgid "HTML"
+msgstr "HTML"
+
+#: ../src/planner-html-plugin.c:48
+msgid "Export project to HTML"
+msgstr "Izvest projektu uz HTML"
+
+#: ../src/planner-html-plugin.c:82
+msgid "Could not export to HTML"
+msgstr "Nevarēja izvest uz HTML"
+
+#: ../src/planner-html-plugin.c:110
+msgid "Export to HTML"
+msgstr "Izvest uz HTML"
+
+#: ../src/planner-html-plugin.c:154
+msgid "Show result in browser"
+msgstr "Rādīt rezultātu pārlūkā"
+
+#: ../src/planner-html-plugin.c:173 ../src/planner-window.c:1690
+#: ../src/planner-xml-planner-plugin.c:124
 #, c-format
 msgid "File \"%s\" exists, do you want to overwrite it?"
 msgstr "Fails \"%s\" eksistē, vai jūs vēlaties to pārrakstīt?"
 
-#: src/planner-main-window.c:1452
-#, fuzzy
+#: ../src/planner-main.c:56
+msgid "Create the initial window with the given geometry."
+msgstr "Izveidot jaunu sākotnējo logu ar doto ģeometriju."
+
+#: ../src/planner-main.c:56
+msgid "GEOMETRY"
+msgstr "ĢEOMETRIJA"
+
+#: ../src/planner-main.c:70
+msgid "[FILE...]"
+msgstr "[FAILS...]"
+
+#: ../src/planner-msp-plugin.c:50
+msgid "MS Project XML..."
+msgstr "MS Project XML..."
+
+#: ../src/planner-msp-plugin.c:50
+msgid "Import an MS Project XML file"
+msgstr "Ieviest MS Projekta XML failu"
+
+#: ../src/planner-msp-plugin.c:118
+msgid "Couldn't import file."
+msgstr "Nevarēja ieviest failu."
+
+#: ../src/planner-msp-plugin.c:206
+msgid "Import a File"
+msgstr "Ieviest failu"
+
+#: ../src/planner-msp-plugin.c:214
+msgid "XML Files"
+msgstr "XML faili"
+
+#: ../src/planner-msp-plugin.c:219 ../src/planner-window.c:848
+msgid "All Files"
+msgstr "Visi faili"
+
+#: ../src/planner-phase-dialog.c:540
+msgid "Insert phase"
+msgstr "Ievietot fāzi"
+
+#: ../src/planner-phase-dialog.c:639
+msgid "Remove phase"
+msgstr "Noņemt fāzi"
+
+#: ../src/planner-plugin-loader.c:41
+#, c-format
+msgid "Could not open plugin file '%s'\n"
+msgstr "Nevarēja atvērt spraudņa failu '%s'\n"
+
+#: ../src/planner-predecessor-model.c:191 ../src/planner-task-dialog.c:2217
+msgid "FS"
+msgstr "FS"
+
+#: ../src/planner-predecessor-model.c:194 ../src/planner-task-dialog.c:2218
+msgid "FF"
+msgstr "FF"
+
+#: ../src/planner-predecessor-model.c:197 ../src/planner-task-dialog.c:2219
+msgid "SS"
+msgstr "SS"
+
+#: ../src/planner-predecessor-model.c:200 ../src/planner-task-dialog.c:2220
+msgid "SF"
+msgstr "SF"
+
+#: ../src/planner-print-dialog.c:187
+msgid "Print Project"
+msgstr "Drukāt projektu"
+
+#: ../src/planner-print-dialog.c:194
+msgid "Select views"
+msgstr "Izvēlieties skatus"
+
+#: ../src/planner-print-dialog.c:218
+msgid "Select the views to print:"
+msgstr "Izvēlieties drukājamos skatus:"
+
+#: ../src/planner-project-properties.c:387
+msgid "Select a calendar to use for this project:"
+msgstr "Izvēlieties kalendāru šim projektam:"
+
+#: ../src/planner-project-properties.c:487
+msgid "Edit Project Name"
+msgstr "Rediģēt projekta nosaukumu"
+
+#: ../src/planner-project-properties.c:523
+msgid "Edit Organization"
+msgstr "Rediģēt organizāciju"
+
+#: ../src/planner-project-properties.c:559
+msgid "Edit Manager"
+msgstr "Rediģēt vadītāju"
+
+#: ../src/planner-project-properties.c:631
+#: ../src/planner-project-properties.c:665
+msgid "Edit Project Start"
+msgstr "Rediģēt projekta sākumu"
+
+#: ../src/planner-project-properties.c:754
+msgid "OK"
+msgstr "Labi"
+
+#: ../src/planner-project-properties.c:842
+msgid "Edit Project Phase"
+msgstr "Rediģēt projekta fāzi"
+
+#: ../src/planner-project-properties.c:975
+msgid "Property"
+msgstr "Īpašība"
+
+#: ../src/planner-project-properties.c:986
+msgid "Value"
+msgstr "Vērtība"
+
+#: ../src/planner-project-properties.c:1390
+#: ../src/planner-property-dialog.c:333
+msgid "The name of the custom property needs to start with a letter."
+msgstr "Pielāgotajam rekvizīta nosaukumam jāsākas ar burtu."
+
+#: ../src/planner-project-properties.c:1461
+#: ../src/planner-property-dialog.c:403
+#, c-format
+msgid "Do you really want to remove the property '%s' from the project?"
+msgstr "Vai tiešām vēlaties izņemt īpašību '%s' no projekta?"
+
+#: ../src/planner-project-properties.c:1556
+msgid "Could not create properties dialog."
+msgstr "Nevarēja izveidot īpašību dialogu."
+
+#: ../src/planner-project-properties.c:1590
+msgid "Date..."
+msgstr "Datums..."
+
+#: ../src/planner-project-properties.c:1933
+msgid "Add project property"
+msgstr "Pievienot projekta īpašību"
+
+#: ../src/planner-project-properties.c:2043
+msgid "Remove project property"
+msgstr "Noņemt projekta īpašību"
+
+#: ../src/planner-project-properties.c:2136
+msgid "Edit project property value"
+msgstr "Rediģēt projekta īpašības vērtību"
+
+#: ../src/planner-property-dialog.c:502
+msgid "Label"
+msgstr "Etiķete"
+
+#: ../src/planner-property-dialog.c:514 ../src/planner-resource-view.c:1224
+#: ../src/planner-task-dialog.c:2722
+msgid "Type"
+msgstr "Tips"
+
+#: ../src/planner-property-dialog.c:671
+msgid "Add property"
+msgstr "Pievienot īpašību"
+
+#: ../src/planner-property-dialog.c:816
+msgid "Remove property"
+msgstr "Noņemt īpašību"
+
+#: ../src/planner-property-dialog.c:909
+msgid "Edit property label"
+msgstr "Rediģēt īpašības etiķeti"
+
+#: ../src/planner-resource-cmd.c:75
+msgid "Insert resource"
+msgstr "Ievietot resursu"
+
+#. Put "no group" at the top.
+#: ../src/planner-resource-dialog.c:312
+#: ../src/planner-resource-input-dialog.c:100
+#: ../src/planner-resource-view.c:1945
+msgid "(None)"
+msgstr "(Nekas)"
+
+#: ../src/planner-resource-dialog.c:322
+#: ../src/planner-resource-input-dialog.c:110 ../src/planner-task-dialog.c:381
+msgid "(No name)"
+msgstr "(Nav nosaukuma)"
+
+#: ../src/planner-resource-dialog.c:495
+msgid "Edit resource calendar"
+msgstr "Rediģēt resursa kalendāru"
+
+#: ../src/planner-resource-dialog.c:576
+msgid "Edit resource note"
+msgstr "Rediģēt resursa piezīmes"
+
+#: ../src/planner-resource-dialog.c:643
+msgid "Edit resource cost"
+msgstr "Rediģēt resursa izmaksas"
+
+#: ../src/planner-resource-dialog.c:711 ../src/planner-resource-dialog.c:752
+#: ../src/planner-resource-view.c:1413 ../src/planner-resource-view.c:1494
+msgid "Edit resource property"
+msgstr "Rediģēt resursa piederību"
+
+#. i18n: time stamp format for notes in task dialog, see strftime(3) for
+#. * a detailed description.
+#: ../src/planner-resource-dialog.c:1404 ../src/planner-task-dialog.c:1808
+msgid "%a %d %b %Y, %H:%M\n"
+msgstr "%a %d %b %Y, %H:%M\n"
+
+#: ../src/planner-resource-dialog.c:1521
+msgid "None (use project default)"
+msgstr "Nekāds (lietot projekta noklusēto)"
+
+#: ../src/planner-resource-dialog.c:1648 ../src/planner-resource-dialog.c:1650
+msgid "Edit resource properties"
+msgstr "Rediģēt resursa īpašības"
+
+#: ../src/planner-resource-dialog.c:1851 ../src/planner-resource-view.c:753
+#: ../src/planner-resource-view.c:767 ../src/planner-resource-view.c:1737
+msgid "Material"
+msgstr "Materiāls"
+
+#: ../src/planner-resource-view.c:230
+msgid "_Insert Resource"
+msgstr "_Ievietot resursu"
+
+#: ../src/planner-resource-view.c:231
+msgid "Insert a new resource"
+msgstr "Ievietot jaunu resursu"
+
+#: ../src/planner-resource-view.c:233
+msgid "In_sert Resources..."
+msgstr "Ie_vietot resursus..."
+
+#: ../src/planner-resource-view.c:236
+msgid "_Remove Resource"
+msgstr "_Noņemt resursu"
+
+#: ../src/planner-resource-view.c:237
+msgid "Remove the selected resource"
+msgstr "Noņemt izvēlēto resursu"
+
+#: ../src/planner-resource-view.c:239
+msgid "_Edit Resource Properties..."
+msgstr "_Rediģēt resursa īpašības..."
+
+#: ../src/planner-resource-view.c:242
+msgid "Edit _Groups"
+msgstr "Rediģēt _grupas"
+
+#: ../src/planner-resource-view.c:243
+msgid "Edit resource groups"
+msgstr "Rediģēt resursa grupas"
+
+#: ../src/planner-resource-view.c:248
+msgid "Edit _Custom Properties..."
+msgstr "Rediģēt _pielāgotās īpašības..."
+
+#: ../src/planner-resource-view.c:266
+msgid "/_Insert resource"
+msgstr "/_Ievietot resursu"
+
+#: ../src/planner-resource-view.c:269
+msgid "/_Remove resource"
+msgstr "/_Noņemt resursu"
+
+#: ../src/planner-resource-view.c:272 ../src/planner-usage-tree.c:102
+msgid "/_Edit resource..."
+msgstr "/_Rediģēt resursu..."
+
+#: ../src/planner-resource-view.c:423
+msgid "_Resources"
+msgstr "_Resursi"
+
+#: ../src/planner-resource-view.c:943
+msgid "Remove resource"
+msgstr "Noņemt resursu"
+
+#: ../src/planner-resource-view.c:1020
+msgid "Edit Resource Columns"
+msgstr "Rediģēt resursu kolonnas"
+
+#: ../src/planner-resource-view.c:1055
+msgid "Edit custom resource properties"
+msgstr "Rediģēt pielāgotās resursu īpašības"
+
+#: ../src/planner-resource-view.c:1197
+msgid "Short name"
+msgstr "Īss nosaukums"
+
+#: ../src/planner-resource-view.c:1253
+msgid "Group"
+msgstr "Grupa"
+
+#. i18n: Short "Week", preferably 2 letters.
+#: ../src/planner-scale-utils.c:129
+#, c-format
+msgid "Wk %d"
+msgstr "Nd %d"
+
+#: ../src/planner-scale-utils.c:133
+#, c-format
+msgid "Week %d"
+msgstr "Nedēļa %d"
+
+#. i18n: Week, year.
+#: ../src/planner-scale-utils.c:138
+#, c-format
+msgid "Week %d, %d"
+msgstr "Nedēļa %d, %d"
+
+#. i18n: Short "Quarter", preferably 1 letter.
+#: ../src/planner-scale-utils.c:169
+#, c-format
+msgid "Q%d"
+msgstr "C%d"
+
+#. i18n: Short "Quarter", preferably 2-3 letters.
+#: ../src/planner-scale-utils.c:173
+#, c-format
+msgid "Qtr %d"
+msgstr "Ctr %d"
+
+#. i18n: Year, short "Quarter", preferably 2-3 letters.
+#: ../src/planner-scale-utils.c:177
+#, c-format
+msgid "%d, Qtr %d"
+msgstr "%d, Ctr %d"
+
+#. i18n: Short "Half year", preferably 1 letter.
+#: ../src/planner-scale-utils.c:190
+#, c-format
+msgid "H%d"
+msgstr "H%d"
+
+#. i18n: Year, short "Half year", preferably 1 letter.
+#: ../src/planner-scale-utils.c:195
+#, c-format
+msgid "%04d, H%d"
+msgstr "%04d, H%d"
+
+#: ../src/planner-sql-plugin.c:93
+msgid "Open from Database..."
+msgstr "Atvērt no datu bāzes..."
+
+#: ../src/planner-sql-plugin.c:94
+msgid "Open a project from a database"
+msgstr "Atvērt projektu no datu bāzes"
+
+#: ../src/planner-sql-plugin.c:96 ../src/planner-sql-plugin.c:1103
+msgid "Save to Database"
+msgstr "Saglabāt datu bāzē"
+
+#: ../src/planner-sql-plugin.c:97
+msgid "Save the current project to a database"
+msgstr "Saglabāt pašreizējo projektu datu bāzē"
+
+#: ../src/planner-sql-plugin.c:127
+msgid "No errors reported."
+msgstr "Nav ziņojumu par kļūdām."
+
+#: ../src/planner-sql-plugin.c:493
+#, c-format
+msgid ""
+"Database %s needs to be upgraded from version %s to version %s.\n"
+"Please backup database before the upgrade."
+msgstr ""
+"Datu bāze %s ir jāuzlabo no versijas %s uz versiju %s.\n"
+"Lūdzu izveidojiet rezerves kopiju šai datu bāzei pirms uzlabošanas."
+
+#: ../src/planner-sql-plugin.c:500
+msgid "Upgrade"
+msgstr "Uzlabojums"
+
+#: ../src/planner-sql-plugin.c:514
+#, c-format
+msgid ""
+"Could not upgrade database %s.\n"
+" Upgrade file used: %s.\n"
+"\n"
+"Database error: \n"
+"%s"
+msgstr ""
+"Neizdevās uzlabot datu bāzi %s.\n"
+"Tika lietots uzlabošanas fails: %s.\n"
+"\n"
+"Datu bāzes kļūda: \n"
+"%s"
+
+#: ../src/planner-sql-plugin.c:555
+#, c-format
+msgid "Can't create tables in database %s"
+msgstr "Nevar izveidot tabulas datubāzē %s"
+
+#: ../src/planner-sql-plugin.c:617
+#, c-format
+msgid "Database %s is not setup for Planner. Do you want to do that?"
+msgstr "Datubāze %s nav pielāgota Planner programmai. Vai vēlaties to izdarīt?"
+
+#: ../src/planner-sql-plugin.c:658
+#, c-format
+msgid "Connection to database '%s@%s' failed."
+msgstr "Savienojums ar datubāzi '%s@%s' nav izdevies."
+
+#: ../src/planner-sql-plugin.c:669
+#, c-format
+msgid "Test to tables in database '%s' failed."
+msgstr "Nav izdevis pārbaudīt tabulas datubāzē '%s'."
+
+#: ../src/planner-sql-plugin.c:767
+msgid "ID"
+msgstr "ID"
+
+#: ../src/planner-sql-plugin.c:775
+msgid "Project"
+msgstr "Projekts"
+
+#: ../src/planner-sql-plugin.c:783
+msgid "Phase"
+msgstr "Fāze"
+
+#: ../src/planner-sql-plugin.c:791
+msgid "Revision"
+msgstr "Pārskats"
+
+#: ../src/planner-sql-plugin.c:991
+msgid "Open from Database"
+msgstr "Atvērt no datu bāzes"
+
+#: ../src/planner-task-cmd.c:97
+msgid "Link task"
+msgstr "Savienot uzdevumu"
+
+#: ../src/planner-task-cmd.c:173
+msgid "Unlink task"
+msgstr "Atvienot uzdevumu"
+
+#: ../src/planner-task-cmd.c:268
+msgid "Insert task"
+msgstr "Ievietot uzdevumu"
+
+#: ../src/planner-task-dialog.c:529
+msgid "Edit task type"
+msgstr "Rediģēt uzdevuma tipu"
+
+#: ../src/planner-task-dialog.c:596
+msgid "Toggle fixed duration"
+msgstr "Pārslēgt noteikto ilgumu"
+
+#: ../src/planner-task-dialog.c:663
+msgid "Edit task scheduling"
+msgstr "Rediģēt uzdevuma plānošanu"
+
+#: ../src/planner-task-dialog.c:743
+msgid "Assign resource to task"
+msgstr "Piešķirt resursus uzdevumam"
+
+#: ../src/planner-task-dialog.c:803
+msgid "Unassign resource from task"
+msgstr "Noņemt resursus no uzdevuma"
+
+#: ../src/planner-task-dialog.c:862
+msgid "Change resource units in task"
+msgstr "Mainīt resursu vienības uzdevumā"
+
+#: ../src/planner-task-dialog.c:950
+msgid "Edit task predecessor"
+msgstr "Rediģēt uzdevuma priekšteci"
+
+#: ../src/planner-task-dialog.c:1021
+msgid "Edit lag predecessor"
+msgstr "Rediģēt priekšteci ar kavējumu"
+
+#: ../src/planner-task-dialog.c:1087
+msgid "Edit task note"
+msgstr "Rediģēt uzdevuma piezīmes"
+
+#: ../src/planner-task-dialog.c:1495
+#, c-format
+msgid "No earlier than %s"
+msgstr "Ne agrāk par %s"
+
+#: ../src/planner-task-dialog.c:1499
+#, c-format
+msgid "On fixed date %s"
+msgstr "Noteiktā datumā %s"
+
+#: ../src/planner-task-dialog.c:1917
+msgid "Finish to start (FS)"
+msgstr "No beigām uz sākumu (BS)"
+
+#: ../src/planner-task-dialog.c:1918
+msgid "Finish to finish (FF)"
+msgstr "No beigām uz beigām (BB)"
+
+#: ../src/planner-task-dialog.c:1919
+msgid "Start to start (SS)"
+msgstr "No sākuma uz sākumu (SS)"
+
+#: ../src/planner-task-dialog.c:1920
+msgid "Start to finish (SF)"
+msgstr "No sākuma uz beigām (SF)"
+
+#: ../src/planner-task-dialog.c:1975
+msgid "Can't add new predecessor. No task selected!"
+msgstr "Nevaru pievienot jaunu priekšteci. Neviens uzdevums nav izvēlēts!"
+
+#: ../src/planner-task-dialog.c:2463
+msgid "Change..."
+msgstr "Mainīt..."
+
+#: ../src/planner-task-dialog.c:2637
+msgid "Assigned"
+msgstr "Piešķirts"
+
+#: ../src/planner-task-dialog.c:2654
+msgid "Units"
+msgstr "Vienības"
+
+#: ../src/planner-task-dialog.c:2744
+msgid "Lag"
+msgstr "Latence"
+
+#: ../src/planner-task-dialog.c:2887 ../src/planner-task-dialog.c:2889
+msgid "Edit task properties"
+msgstr "Rediģēt uzdevuma īpašības"
+
+#: ../src/planner-task-popup.c:54
+msgid "/_Insert task"
+msgstr "/_Ievietot uzdevumu"
+
+#: ../src/planner-task-popup.c:57
+msgid "/Insert _subtask"
+msgstr "/Ievietot apakšuzdevumu"
+
+#: ../src/planner-task-popup.c:60
+msgid "/_Remove task"
+msgstr "/_Noņemt uzdevumu"
+
+#: ../src/planner-task-popup.c:65
+msgid "/_Unlink task"
+msgstr "/_Atvienot uzdevumu"
+
+#: ../src/planner-task-popup.c:70
+msgid "/Assign _resources..."
+msgstr "/Piesaistīt _resursus..."
+
+#: ../src/planner-task-popup.c:73 ../src/planner-usage-tree.c:105
+msgid "/_Edit task..."
+msgstr "/_Rediģēt uzdevumu..."
+
+#: ../src/planner-task-tree.c:567
+msgid "Remove task"
+msgstr "Noņemt uzdevumu"
+
+#: ../src/planner-task-tree.c:644
+msgid "Apply constraint to task"
+msgstr "Piesaistīt uzdevumam ierobežojumu"
+
+#: ../src/planner-task-tree.c:706
+msgid "Reset task constraint"
+msgstr "Atstatīt uzdevuma ierobežojumu"
+
+#: ../src/planner-task-tree.c:1492 ../src/planner-task-tree.c:1624
+msgid "N/A"
+msgstr "N/P"
+
+#: ../src/planner-task-tree.c:2724
+msgid "Remove tasks"
+msgstr "Noņemt uzdevumus"
+
+#: ../src/planner-task-tree.c:2786
+#, c-format
+msgid ""
+"You are about to open an edit dialog each for %i tasks. Are you sure that "
+"you want to do that?"
+msgstr ""
+"Jūs tūdaļ atvērsiet rediģēšanas dialoglogu %i uzdevumiem. Vai tiešām "
+"vēlaties to darīt?"
+
+#: ../src/planner-task-tree.c:2888
+msgid "Unlink tasks"
+msgstr "Atvienot uzdevumus"
+
+#: ../src/planner-task-tree.c:2940
+msgid "Link tasks"
+msgstr "Savienot uzdevumus"
+
+#: ../src/planner-task-tree.c:3031
+msgid "Indent tasks"
+msgstr "Uzdevumu atkāpe"
+
+#: ../src/planner-task-tree.c:3042
+msgid "Indent task"
+msgstr "Pielikt atkāpi uzdevumam"
+
+#: ../src/planner-task-tree.c:3134
+msgid "Unindent tasks"
+msgstr "Noņemt atkāpi uzdevumiem"
+
+#: ../src/planner-task-tree.c:3150
+msgid "Unindent task"
+msgstr "Noņemt atkāpi uzdevumam"
+
+#: ../src/planner-task-tree.c:3227
+msgid "Move tasks up"
+msgstr "Pārvietot uzdevumus augšup"
+
+#: ../src/planner-task-tree.c:3265
+msgid "Move task up"
+msgstr "Pārvietot uzdevumu augšup"
+
+#: ../src/planner-task-tree.c:3354
+msgid "Move tasks down"
+msgstr "Pārvietot uzdevumus lejup"
+
+#. Moving task from 'position' to 'position + 1'
+#: ../src/planner-task-tree.c:3400
+msgid "Move task down"
+msgstr "Pārvietot uzdevumu lejup"
+
+#: ../src/planner-task-tree.c:3456
+msgid "Reset task constraints"
+msgstr "Atstatīt uzdevuma ierobežojumus"
+
+#: ../src/planner-task-tree.c:3488
+msgid "Reset all task constraints"
+msgstr "Atstatīt visus uzdevuma ierobežojumus"
+
+#: ../src/planner-task-view.c:124
+msgid "_Edit Task"
+msgstr "_Rediģēt uzdevumu"
+
+#: ../src/planner-task-view.c:151
+msgid "_Edit Custom Properties..."
+msgstr "_Rediģēt pielāgotās īpašības..."
+
+#: ../src/planner-task-view.c:270
+msgid "Tasks"
+msgstr "Uzdevumi"
+
+#: ../src/planner-task-view.c:276
+msgid "_Tasks"
+msgstr "_Uzdevumi"
+
+#: ../src/planner-task-view.c:572
+msgid "Edit custom task properties"
+msgstr "Rediģēt pielāgotās uzdevuma īpašības"
+
+#: ../src/planner-task-view.c:626
+msgid "Edit Task Columns"
+msgstr "Rediģēt uzdevuma kolonnas"
+
+#: ../src/planner-usage-tree.c:108
+msgid "/_Expand all resources"
+msgstr "/_Izvērst visus resursus"
+
+#: ../src/planner-usage-tree.c:111
+msgid "/_Collapse all resources"
+msgstr "/_Sakļaut visus resursus"
+
+#: ../src/planner-usage-tree.c:379
+msgid ""
+"\n"
+"Name"
+msgstr ""
+"\n"
+"Nosaukums"
+
+#: ../src/planner-usage-tree.c:381
+msgid ""
+"\n"
+"Task"
+msgstr ""
+"\n"
+"Uzdevums"
+
+#: ../src/planner-usage-view.c:111
+msgid "Zoom to fit"
+msgstr "Pietuvināt, lai ietilptu"
+
+#. i18n: Label used for the sidebar. Please try to make it short and use
+#. * a linebreak if necessary/possible.
+#.
+#: ../src/planner-usage-view.c:201
+msgid ""
+"Resource\n"
+"Usage"
+msgstr ""
+"Resursi\n"
+"Izmantošana"
+
+#: ../src/planner-usage-view.c:207
+msgid "Resource _Usage"
+msgstr "Resursu _izmantošana"
+
+#: ../src/planner-usage-view.c:318
+msgid "Edit Resource Usage Columns"
+msgstr "Rediģēt resursu izmantošanas kolonnas"
+
+#: ../src/planner-window.c:225
+msgid "_File"
+msgstr "_Fails"
+
+#: ../src/planner-window.c:229
+msgid "_New Project"
+msgstr "_Jauns projekts"
+
+#: ../src/planner-window.c:229
+msgid "Create a new project"
+msgstr "Izveidot jaunu projektu"
+
+#: ../src/planner-window.c:233
+msgid "_Open..."
+msgstr "_Atvērt..."
+
+#: ../src/planner-window.c:233
+msgid "Open a project"
+msgstr "Atvērt projektu"
+
+#: ../src/planner-window.c:236
+msgid "_Import"
+msgstr "_Ieviest"
+
+#: ../src/planner-window.c:240 ../src/planner-window.c:1560
+msgid "_Save"
+msgstr "_Saglabāt"
+
+#: ../src/planner-window.c:240
+msgid "Save the current project"
+msgstr "Saglabāt pašreizējo projektu"
+
+#: ../src/planner-window.c:243
+msgid "_Export"
+msgstr "_Izvest"
+
+#: ../src/planner-window.c:246
+msgid "Save _As..."
+msgstr "Saglabāt _kā..."
+
+#: ../src/planner-window.c:246
+msgid "Save the current project with a different name"
+msgstr "Saglabāt pašreizējo projektu ar citu nosaukumu"
+
+#: ../src/planner-window.c:249
+msgid "_Print..."
+msgstr "_Drukāt..."
+
+#: ../src/planner-window.c:249
+msgid "Print the current project"
+msgstr "Drukāt pašreizējo projektu"
+
+#: ../src/planner-window.c:252
+msgid "Print Pre_view"
+msgstr "Drukāšanas Priekš_apskats"
+
+#: ../src/planner-window.c:252
+msgid "Print preview of the current project"
+msgstr "Pašreizēja projekta priekšapskats"
+
+#: ../src/planner-window.c:255
+msgid "_Close"
+msgstr "_Aizvērt"
+
+#: ../src/planner-window.c:255
+msgid "Close the current file"
+msgstr "Aizvērt pašreizējo failu"
+
+#: ../src/planner-window.c:258
+msgid "_Quit"
+msgstr "_Iziet"
+
+#: ../src/planner-window.c:258
+msgid "Exit the program"
+msgstr "Iziet no programmas"
+
+#: ../src/planner-window.c:262
+msgid "_Edit"
+msgstr "_Rediģēt"
+
+#: ../src/planner-window.c:265
+msgid "_Undo"
+msgstr "_Atsaukt"
+
+#: ../src/planner-window.c:265
+msgid "Undo the last action"
+msgstr "Atsaukt pēdējo darbību"
+
+#: ../src/planner-window.c:268
+msgid "_Redo"
+msgstr "_Atkārtot atsaukto darbību"
+
+#: ../src/planner-window.c:268
+msgid "Redo the undone action"
+msgstr "Atkārtot atsaukto darbību"
+
+#: ../src/planner-window.c:272
+msgid "_View"
+msgstr "_Skats"
+
+#: ../src/planner-window.c:276
+msgid "_Actions"
+msgstr "_Darbības"
+
+#: ../src/planner-window.c:280
+msgid "_Project"
+msgstr "_Projekts"
+
+#: ../src/planner-window.c:283
+msgid "_Manage Calendars"
+msgstr "_Pārvaldīt kalendārus"
+
+#: ../src/planner-window.c:286
+msgid "Edit Day _Types"
+msgstr "Rediģēt dienas _tipus"
+
+#: ../src/planner-window.c:289
+msgid "Edit Project _Phases"
+msgstr "Rediģēt projekta _fāzes"
+
+#: ../src/planner-window.c:292
+msgid "_Edit Project Properties"
+msgstr "_Rediģēt projekta rekvizītus"
+
+#: ../src/planner-window.c:292
+msgid "Edit the project properties"
+msgstr "Rediģēt projekta īpašības"
+
+#: ../src/planner-window.c:300
+msgid "_Help"
+msgstr "_Palīdzība"
+
+#: ../src/planner-window.c:303
+msgid "_User Guide"
+msgstr "_Lietotāja ceļvedis"
+
+#: ../src/planner-window.c:303
+msgid "Show the Planner User Guide"
+msgstr "Rādīt Planner lietotāja ceļvedi"
+
+#: ../src/planner-window.c:306
+msgid "_About"
+msgstr "_Par"
+
+#: ../src/planner-window.c:306
+msgid "About this application"
+msgstr "Par šo aplikāciju"
+
+#. Note: these strings are leaked.
+#: ../src/planner-window.c:665
+#, c-format
+msgid "Switch to the view \"%s\""
+msgstr "Pārslēgties uz skatu \"%s\""
+
+#: ../src/planner-window.c:832
+msgid "Open a File"
+msgstr "Atvērt failu"
+
+#: ../src/planner-window.c:842
+msgid "Planner Files"
+msgstr "Planner faili"
+
+#. I18n: Translators, list your names here, newline separated if there
+#. * are more than one, to appear in the about box.
+#.
+#: ../src/planner-window.c:1324 ../src/planner-window.c:1346
+msgid "translator-credits"
+msgstr ""
+"Artis Trops <hornet@navigator.lv>\n"
+"Kaspars Rinkevics <kaspars.rinkevics@gmail.com>\n"
+"Ingrīda Irguļska <Ingrida.Irgulska@gmail.com>"
+
+#: ../src/planner-window.c:1341
+msgid "A Project Management application for the GNOME desktop"
+msgstr "Projektu pārvaldības aplikācija GNOME darba virsmai"
+
+#: ../src/planner-window.c:1348
+msgid "The Planner Homepage"
+msgstr "Planner mājas lapa"
+
+#: ../src/planner-window.c:1500
+msgid "If you don't save, changes made the last minute will be discarded."
+msgstr "Ja jūs nesaglabāsiet, pēdējā minūtē veiktās izmaiņas tiks atceltas."
+
+#: ../src/planner-window.c:1505
+#, c-format
+msgid "If you don't save, changes made the last %d minutes will be discarded."
+msgstr "Ja jūs nesaglabāsiet, pēdējās %d minūtēs veiktās izmaiņas tiks atceltas."
+
+#: ../src/planner-window.c:1510
+msgid "If you don't save, changes made the last hour will be discarded."
+msgstr "Ja jūs nesaglabāsiet, pēdējā stundā veiktās izmaiņas tiks atceltas."
+
+#: ../src/planner-window.c:1515
+#, c-format
+msgid "If you don't save, changes made the last %d hours will be discarded."
+msgstr "Ja jūs nesaglabāsiet, pēdējās %d stundās veiktās izmaiņas tiks atceltas."
+
+#: ../src/planner-window.c:1522
+#, c-format
+msgid "Save changes to document '%s' before closing?"
+msgstr "Saglabāt izmaiņas dokumentā '%s' pirms aizvēršanas?"
+
+#: ../src/planner-window.c:1547
+msgid "C_lose without saving"
+msgstr "A_izvērt bez saglabāšanas"
+
+#: ../src/planner-window.c:1553
+msgid "_Cancel"
+msgstr "_Atsaukt"
+
+#: ../src/planner-window.c:1652
+msgid "Save a File"
+msgstr "Saglabāt failu"
+
+#: ../src/planner-window.c:1938
 msgid ""
 "You have opened a file that was saved with an old version of Planner.\n"
 "\n"
@@ -1060,592 +2232,91 @@ msgid ""
 "After doing this, you can remove all constraints by selecting the menu item "
 "'Remove all constraints' in the 'Edit' menu."
 msgstr ""
-"Jūs esat atvēris failu, kurš ticis saglabāts ar vecu MrProject versiju.\n"
+"Jūs esat atvēris failu, kas ticis saglabāts ar vecu Planner versiju.\n"
 "\n"
-"Kad ielādē vecus failus, visi uzdevumi lietos piespiešanu 'Jāsākas', jo vecā "
-"versija pilnībā neatbalstīja automātisko pārplānošanu. Lai gūtu labumu no "
-"šīs jaunās iespējas, jums vajadzētu pievienot priekšteču attiecības starp "
+"Kad tiek ielādēti veci faili, visi uzdevumi lietos piespiedu 'Jāsākas ar', "
+"jo vecā versija pilnībā neatbalsta automātisko pārplānošanu. Lai gūtu labumu "
+"no šīs jaunās iespējas, jums vajadzētu pievienot priekšteču attiecības starp "
 "uzdevumiem, kas ir viens no otra atkarīgi.\n"
 "\n"
 "Jūs varat pievienot priekšteča attiecību, klikšķinot uz priekšteča un velkot "
 "līdz pēctecim.\n"
 "\n"
-"Kad būsit to izdarījis, jūs varat noņemt visas piespiešanas, izvēloties "
-"izvēlnes priekšmetu 'Noņemt visas piešpiešanas' izvēlnē 'Rediģēt'."
+"Kad būsiet to izdarījis, jūs varat noņemt visas piespiešanas, izvēloties "
+"'Noņemt visas piešpiešanas' izvēlnē 'Rediģēt'."
 
-#: src/planner-main-window.c:1489 src/planner-gantt-row.c:656
-#: src/planner-gantt-row.c:658 src/planner-gantt-print.c:513
-#: src/planner-gantt-print.c:515
-msgid "Unnamed"
-msgstr "Nenosaukts"
+#. Hack.
+#: ../src/planner-window.c:1973
+msgid "Unnamed database project"
+msgstr "Nenosaukts datubāzes projekts"
 
-#: src/planner-main.c:61
-msgid "Create the initial window with the given geometry."
-msgstr "Izveidot jaunu sākotnējo logu ar doto ģeometriju."
-
-#: src/planner-main.c:61
-msgid "GEOMETRY"
-msgstr "GEOMETRY"
-
-#: src/planner-main.c:98
-msgid "mrproject: --geometry cannot be used with more than one file."
-msgstr "mrproject: --geometry nevar tikt lietota ar vairāk kā vienu failu."
-
-#: src/planner-plugin-loader.c:40
-#, fuzzy, c-format
-msgid "Could not open plugin file '%s'\n"
-msgstr "Nevarēju atvērt skata iespraudņa failu '%s'\n"
-
-#: src/planner-view-loader.c:40
+#: ../src/planner-window.c:2087
 #, c-format
-msgid "Could not open view plugin file '%s'\n"
-msgstr "Nevarēju atvērt skata iespraudņa failu '%s'\n"
+msgid "Open '%s'"
+msgstr "Atvērt '%s'"
 
-#: src/planner-cell-renderer-date.c:147
-msgid "Constraint type"
-msgstr "Piespiešanas tips"
+#: ../src/planner-working-time-dialog.c:145
+msgid "Edit working time"
+msgstr "Rediģēt darba laiku"
 
-#: src/planner-cell-renderer-date.c:154
-msgid "As soon as possible"
-msgstr "Cik drīz vien iespējams"
+#: ../src/planner-xml-planner-plugin.c:54
+msgid "Planner 0.11 Format"
+msgstr "Planner 0.11 formāts"
 
-#: src/planner-cell-renderer-date.c:155
-msgid "Start no earlier than"
-msgstr "Sākt ne agrāk kā"
+#: ../src/planner-xml-planner-plugin.c:55
+msgid "Export project to a file suitable for Planner 0.11"
+msgstr "Izvest projektu uz failu, kas der Planner 0.11"
 
-#: src/planner-cell-renderer-date.c:156
-msgid "Must start on"
-msgstr "Jāsākas"
+#: ../src/planner-xml-planner-plugin.c:90
+msgid "Export"
+msgstr "Izvest"
 
-#: src/planner-cell-renderer-date.c:171
-msgid "Today"
-msgstr "Šodien"
+#: ../eds-backend/e-cal-backend-planner.c:289
+msgid "EDS UID"
+msgstr "EDS UID"
 
-#. gtk_signal_connect (GTK_OBJECT (button), "clicked",
-#. GTK_SIGNAL_FUNC (m_cell_date_today_clicked),
-#. date);
-#.
-#: src/planner-cell-renderer-date.c:179
-msgid "Cancel"
-msgstr "Atsaukt"
+#: ../eds-backend/e-cal-backend-planner.c:290
+msgid "Identifier used by Evolution Data Server for tasks"
+msgstr "Evolution datu servera uzdevumiem izmantotais identifikators"
 
-#: src/planner-cell-renderer-date.c:187
-msgid "OK"
-msgstr "Labi"
+#: ../eds-backend/e-cal-backend-planner.c:299
+msgid "EDS Categories"
+msgstr "EDS kategorijas"
 
-#: src/planner-default-week-dialog.c:40
-msgid "Monday"
-msgstr "Pirmdiena"
+#: ../eds-backend/e-cal-backend-planner.c:300
+msgid "Categories for a task used by Evolution Data Server"
+msgstr "Uzdevumu kategorijas, kuras izmanto Evolution datu serveris"
 
-#: src/planner-default-week-dialog.c:41
-msgid "Tuesday"
-msgstr "Otrdiena"
+#: ../eds-backend/e-cal-backend-planner.c:309
+msgid "EDS Classification"
+msgstr "EDS klasifikācija"
 
-#: src/planner-default-week-dialog.c:42
-msgid "Wednesday"
-msgstr "Trešdiena"
+#: ../eds-backend/e-cal-backend-planner.c:310
+msgid "Task access classification used by Evolution Data Server"
+msgstr "Uzdevumu piekļuves klasifikācija, ko izmanto Evolution datu serveris"
 
-#: src/planner-default-week-dialog.c:43
-msgid "Thursday"
-msgstr "Ceturtdiena"
+#: ../eds-backend/e-cal-backend-planner.c:319
+msgid "EDS URL"
+msgstr "EDS URL"
 
-#: src/planner-default-week-dialog.c:44
-msgid "Friday"
-msgstr "Piektdiena"
+#: ../eds-backend/e-cal-backend-planner.c:320
+msgid "URL for a Task used by Evolution Data Server"
+msgstr "Uzdevumu URL, ko izmanti Evolution datu serveris"
 
-#: src/planner-default-week-dialog.c:45
-msgid "Saturday"
-msgstr "Sestdiena"
+#: ../eds-backend/e-cal-backend-planner.c:829
+msgid "Invalid server URI"
+msgstr "Nepareizs servera URI"
 
-#: src/planner-default-week-dialog.c:46
-msgid "Sunday"
-msgstr "Svētdiena"
+#. book_target = (EABConfigTargetSource *) data->target;
+#. source = book_target->source;
+#: ../eds-backend/planner-source/planner-source.c:125
+msgid "Select planner file"
+msgstr "Izvēlieties planner failu"
 
-#: src/planner-default-week-dialog.c:266
-#, fuzzy
-msgid "No working time"
-msgstr "Pašnoteikts darba laiks"
-
-#: src/planner-default-week-dialog.c:277 src/planner-default-week-dialog.c:281
-msgid "%H:%M"
-msgstr "%H:%M"
-
-#: src/planner-group-dialog.c:387 src/planner-property-dialog.c:378
-#: src/planner-task-dialog.c:1311 src/planner-task-dialog.c:1397
-#: src/planner-task-view.c:227 src/planner-gantt-print.c:190
-#: src/planner-resource-view.c:966
-msgid "Name"
-msgstr "Nosaukums"
-
-#: src/planner-group-dialog.c:393
-#, fuzzy
-msgid "Manager name"
-msgstr "Vadītāja tālrunis"
-
-#: src/planner-group-dialog.c:399
-msgid "Manager phone"
-msgstr "Vadītāja tālrunis"
-
-#: src/planner-group-dialog.c:405
-msgid "Manager email"
-msgstr "Vadītāja epasts"
-
-#: src/planner-project-properties.c:146
-msgid "Select a calendar to use for this project:"
-msgstr "Izvēlieties šajā projektā lietojamo kalendāru:"
-
-#: src/planner-project-properties.c:606
-msgid "Property"
-msgstr "Rekvizīts"
-
-#: src/planner-project-properties.c:617 src/planner-property-dialog.c:431
-msgid "Value"
-msgstr "Vērtība"
-
-#: src/planner-project-properties.c:993 src/planner-property-dialog.c:229
-msgid "The name of the custom property needs to start with a letter."
-msgstr "Pašizvēles rekvizītam jāsākas ar burtu."
-
-#: src/planner-project-properties.c:1065 src/planner-property-dialog.c:300
-#, c-format
-msgid "Do you really want to remove the property '%s' from the project?"
-msgstr "Vai patiesi vēlaties izņemt rekvizītu '%s' no projekta?"
-
-#: src/planner-project-properties.c:1194
-#, fuzzy
-msgid "Could not create properties dialog."
-msgstr "Nevarēju izveidot rekvizītu logu."
-
-#: src/planner-property-dialog.c:397
-msgid "Label"
-msgstr "Etiķete"
-
-#: src/planner-property-dialog.c:411 src/planner-task-dialog.c:1429
-#: src/planner-resource-view.c:987
-msgid "Type"
-msgstr "Tips"
-
-#: src/planner-print-dialog.c:49
-msgid "Print Project"
-msgstr "Drukāt Projektu"
-
-#: src/planner-print-dialog.c:56
-msgid "Select views"
-msgstr "Izvēlētieties skatus"
-
-#: src/planner-print-dialog.c:74
-msgid "Select the views to print:"
-msgstr "Izvēlaties drukājamos skatus:"
-
-#. Put "no group" at the top.
-#: src/planner-resource-dialog.c:248 src/planner-resource-input-dialog.c:96
-#: src/planner-resource-view.c:1375
-msgid "(None)"
-msgstr "(Nekas)"
-
-#: src/planner-resource-dialog.c:258 src/planner-resource-input-dialog.c:106
-#: src/planner-task-dialog.c:249
-msgid "(No name)"
-msgstr "(Nav nosaukuma)"
-
-#. i18n: time stamp format for notes in task dialog, see strftime(3) for
-#. * a detailed description.
-#: src/planner-resource-dialog.c:728 src/planner-task-dialog.c:679
-msgid "%a %d %b %Y, %H:%M\n"
-msgstr "%a %d %b %Y, %H:%M\n"
-
-#: src/planner-resource-dialog.c:826
-msgid "None (use project default)"
-msgstr "Nekas (lietot projekta noklusēto)"
-
-#: src/planner-resource-dialog.c:953 src/planner-resource-dialog.c:955
-msgid "Edit resource properties"
-msgstr "Rediģēt resursa rekvizītus"
-
-#: src/planner-resource-dialog.c:1101 src/planner-task-view.c:230
-#: src/planner-gantt-print.c:198 src/planner-resource-view.c:629
-#: src/planner-resource-view.c:645 src/planner-resource-view.c:1187
-#, fuzzy
-msgid "Work"
-msgstr ""
-"\n"
-"Darbs"
-
-#: src/planner-resource-dialog.c:1102 src/planner-resource-view.c:632
-#: src/planner-resource-view.c:646 src/planner-resource-view.c:1188
-msgid "Material"
-msgstr "Materiāli"
-
-#: src/planner-predecessor-model.c:191 src/planner-task-dialog.c:1039
-msgid "FS"
-msgstr "FS"
-
-#: src/planner-predecessor-model.c:194 src/planner-task-dialog.c:1040
-msgid "FF"
-msgstr "FF"
-
-#: src/planner-predecessor-model.c:197 src/planner-task-dialog.c:1041
-msgid "SS"
-msgstr "SS"
-
-#: src/planner-predecessor-model.c:200 src/planner-task-dialog.c:1042
-msgid "SF"
-msgstr "SF"
-
-#: src/planner-task-dialog.c:745
-msgid "Finish to start (FS)"
-msgstr "No finiša uz startu (FS)"
-
-#: src/planner-task-dialog.c:746
-msgid "Finish to finish (FF)"
-msgstr "No finiša uz finišu (FF)"
-
-#: src/planner-task-dialog.c:747
-msgid "Start to start (SS)"
-msgstr "No starta uz startu (SS)"
-
-#: src/planner-task-dialog.c:748
-msgid "Start to finish (SF)"
-msgstr "No starta uz finišu (SF)"
-
-#: src/planner-task-dialog.c:798
-msgid "Can't add new predecessor. No task selected!"
-msgstr "Nevaru pievienot jaunu priekšteci. Neviens uzdevums nav izvēlēts!"
-
-#: src/planner-task-dialog.c:1330
-msgid "Assigned"
-msgstr "Piešķirts"
-
-#: src/planner-task-dialog.c:1347
-msgid "Units"
-msgstr "Vienības"
-
-#: src/planner-task-dialog.c:1451
-msgid "Lag"
-msgstr "Kavēšanās"
-
-#: src/planner-task-dialog.c:1584 src/planner-task-dialog.c:1586
-msgid "Edit task properties"
-msgstr "Rediģēt uzdevuma rekvizītus"
-
-#: src/planner-html-plugin.c:133
+#: ../eds-backend/planner-source/planner-source.c:157
 #, c-format
 msgid ""
-"\"%s\" is a directory.\n"
-"Enter a filename and try again."
-msgstr ""
+"The filename extension of this file isn't the planner usual file extension (%"
+"s) Do you want to continue?"
+msgstr "Šī faila paplašinājums nav noklusētais planner paplašinājums (%s) Vai vēlaties turpināt?"
 
-#: src/planner-sql-plugin.c:269
-#, c-format
-msgid ""
-"Connection to database '%s' failed:\n"
-"%s"
-msgstr ""
-
-#: src/planner-sql-plugin.c:318
-#, fuzzy
-msgid "Project"
-msgstr "_Projekts"
-
-#: src/planner-sql-plugin.c:466
-#, fuzzy
-msgid "Open from Database"
-msgstr "<b>Dienas tipi</b>"
-
-#: src/planner-sql-plugin.c:573
-#, fuzzy
-msgid "Save to Database"
-msgstr "Saglabāt _Kā..."
-
-#: src/planner-format.c:141
-#, c-format
-msgid "%dd %dh"
-msgstr "%dd %dh"
-
-#: src/planner-format.c:144
-#, c-format
-msgid "%dd"
-msgstr "%dd"
-
-#: src/planner-format.c:147
-#, c-format
-msgid "%dh"
-msgstr "%dh"
-
-#: src/planner-format.c:171
-#, c-format
-msgid "%s days"
-msgstr "%s dienas"
-
-#: src/planner-format.c:174
-msgid "0 days"
-msgstr "0 dienas"
-
-#: src/planner-format.c:177
-#, c-format
-msgid "%s day"
-msgstr "%s diena"
-
-#. i18n: this string is the date nr and month name, displayed
-#. * e.g. in the date cells in the task tree. See
-#. * libmrproject/docs/DateFormat.
-#.
-#: src/planner-format.c:197
-msgid "%b %e"
-msgstr "%b %e"
-
-#. i18n: project start, the date format is described in
-#. * libmrproject/docs/DateFormat.
-#: src/planner-gantt-background.c:579
-msgid "%Y %b %d"
-msgstr "%Y %b %d"
-
-#: src/planner-gantt-background.c:581
-msgid "Project start"
-msgstr "Projekta sākums"
-
-#: src/planner-gantt-row.c:1841 src/planner-gantt-row.c:1844
-msgid "No name"
-msgstr "Nav nosaukuma"
-
-#: src/planner-gantt-row.c:1847
-#, c-format
-msgid "Make task '%s' a predecessor of '%s'"
-msgstr "Padarīt uzdevumu '%s' par priekšteci '%s'"
-
-#: src/planner-gantt-row.c:1905
-#, c-format
-msgid "Change work to %s"
-msgstr "Pārmainīt darbu uz %s"
-
-#: src/planner-gantt-view.c:273
-msgid "Gantt Chart"
-msgstr "Gantt Tabula"
-
-#: src/planner-gantt-view.c:281
-msgid "_Gantt Chart"
-msgstr "_Gantt Tabula"
-
-#: src/planner-gantt-view.c:470
-msgid ""
-"\n"
-"Name"
-msgstr ""
-"\n"
-"Nosaukums"
-
-#. COL_START,    _("\nStart"),
-#: src/planner-gantt-view.c:472
-msgid ""
-"\n"
-"Work"
-msgstr ""
-"\n"
-"Darbs"
-
-#. i18n: Short "Week", preferably 2 letters.
-#: src/planner-scale-utils.c:325
-#, c-format
-msgid "Wk %d"
-msgstr "Nd %d"
-
-#: src/planner-scale-utils.c:329
-#, c-format
-msgid "Week %d"
-msgstr "Nedēļa %d"
-
-#. i18n: Week, year.
-#: src/planner-scale-utils.c:334
-#, c-format
-msgid "Week %d, %d"
-msgstr "Nedēļa %d, %d"
-
-#. i18n: Short "Quarter", preferrably 1 letter.
-#: src/planner-scale-utils.c:365
-#, c-format
-msgid "Q%d"
-msgstr "C%d"
-
-#. i18n: Short "Quarter", preferrably 2-3 letters.
-#: src/planner-scale-utils.c:369
-#, c-format
-msgid "Qtr %d"
-msgstr "Ctr %d"
-
-#. i18n: Year, short "Quarter", preferrably 2-3 letters.
-#: src/planner-scale-utils.c:373
-#, c-format
-msgid "%d, Qtr %d"
-msgstr "%d, Ctr %d"
-
-#. i18n: Short "Half year", prefferably 1 letter.
-#: src/planner-scale-utils.c:386
-#, c-format
-msgid "H%d"
-msgstr "H%d"
-
-#. i18n: Year, short "Half year", prefferably 1 letter.
-#: src/planner-scale-utils.c:391
-#, c-format
-msgid "%04d, H%d"
-msgstr "%04d, H%d"
-
-#: src/planner-task-tree.c:184
-msgid "/_Insert task"
-msgstr "/_Ievietot uzdevumu"
-
-#: src/planner-task-tree.c:185
-msgid "/_Insert subtask"
-msgstr "/_Ievietot apakšuzdevumu"
-
-#: src/planner-task-tree.c:186
-msgid "/_Remove task"
-msgstr "/_Izņemt uzdevumu"
-
-#: src/planner-task-tree.c:188
-msgid "/_Unlink task"
-msgstr "/_Atvienot uzdevumu"
-
-#: src/planner-task-tree.c:190
-msgid "/_Edit task..."
-msgstr "/_Rediģēt uzdevumu..."
-
-#: src/planner-task-tree.c:2112
-msgid "mon"
-msgstr "mēn"
-
-#. month unit variant accepted in input
-#: src/planner-task-tree.c:2113
-msgid "month"
-msgstr "mēnesis"
-
-#. month unit variant accepted in input
-#: src/planner-task-tree.c:2114
-msgid "months"
-msgstr "mēneši"
-
-#. month unit variant accepted in input
-#: src/planner-task-tree.c:2115
-msgid "w"
-msgstr "n"
-
-#. week unit variant accepted in input
-#: src/planner-task-tree.c:2116
-msgid "week"
-msgstr "nedēļa"
-
-#. week unit variant accepted in input
-#: src/planner-task-tree.c:2117
-msgid "weeks"
-msgstr "nedēļas"
-
-#. week unit variant accepted in input
-#: src/planner-task-tree.c:2118
-msgid "d"
-msgstr "d"
-
-#. day unit variant accepted in input
-#: src/planner-task-tree.c:2119
-msgid "day"
-msgstr "diena"
-
-#. day unit variant accepted in input
-#: src/planner-task-tree.c:2121
-msgid "h"
-msgstr "s"
-
-#. hour unit variant accepted in input
-#: src/planner-task-tree.c:2122
-msgid "hour"
-msgstr "stunda"
-
-#. hour unit variant accepted in input
-#: src/planner-task-tree.c:2123
-msgid "hours"
-msgstr "stundas"
-
-#. hour unit variant accepted in input
-#: src/planner-task-tree.c:2124
-msgid "min"
-msgstr "min"
-
-#. minute unit variant accepted in input
-#: src/planner-task-tree.c:2125
-msgid "minute"
-msgstr "minūte"
-
-#. minute unit variant accepted in input
-#: src/planner-task-tree.c:2126
-msgid "minutes"
-msgstr "minūtes"
-
-#: src/planner-task-view.c:173
-msgid "Tasks"
-msgstr "Uzdevumi"
-
-#: src/planner-task-view.c:181
-msgid "_Tasks"
-msgstr "_Uzdevumi"
-
-#: src/planner-task-view.c:228
-msgid "Start"
-msgstr "Sākums"
-
-#: src/planner-task-view.c:229
-msgid "Finish"
-msgstr "Beigas"
-
-#: src/planner-task-view.c:231
-msgid "Slack"
-msgstr "Atslābums"
-
-#: src/planner-task-view.c:438
-msgid "Edit custom task properties"
-msgstr "Rediģēt pašizvēles uzdevuma rekvizītus"
-
-#: src/planner-resource-view.c:248
-msgid "/_Insert resource"
-msgstr "/_Ievietot resursu"
-
-#: src/planner-resource-view.c:249
-msgid "/_Remove resource"
-msgstr "/_Izņemt resursu"
-
-#: src/planner-resource-view.c:250
-msgid "/_Edit resource..."
-msgstr "/_Rediģēt resursu..."
-
-#: src/planner-resource-view.c:350
-msgid "_Resources"
-msgstr "_Resursi"
-
-#: src/planner-resource-view.c:849
-msgid "Edit custom resource properties"
-msgstr "Rediģēt pašizvēles resursa rekvizītus"
-
-#: src/planner-resource-view.c:1011
-msgid "Group"
-msgstr "Grupa"
-
-#: src/planner-resource-view.c:1040
-msgid "Email"
-msgstr "Epasts"
-
-#~ msgid ""
-#~ "Could not load file.\n"
-#~ "Error was: \"%s\""
-#~ msgstr ""
-#~ "Nevarēju ielādēt failu.\n"
-#~ "Kļūda bija: \"%s\""
-
-#~ msgid "No MPX header"
-#~ msgstr "Nav MPX gavene"
-
-#~ msgid "Not an mpx '%s'"
-#~ msgstr "Nav mpx '%s'"
-
-#~ msgid "Contribute to MrProject"
-#~ msgstr "Līdzdarbojieties MrProject"
-
-#~ msgid "MrProject Project Management Tool"
-#~ msgstr "MrProject Projektu Pārvaldības Rīks"
