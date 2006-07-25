@@ -1,19 +1,19 @@
 # Plaanija eesti keele tõlge.
 # Estonian translation of Planner
 # 
-# Copyright (C) 2002-2005 The Free Software Foundation
+# Copyright (C) 2002-2006 The Free Software Foundation
 # This file is distributed under the same license as the planner package.
 # 
 # Ilmar Kerm <ikerm@hot.ee>, 2002.
-# Priit Laes <amd@tt.ee>, 2003
-# Ivar Smolin <okul@linux.ee>, 2005
+# Priit Laes <amd@tt.ee>, 2003.
+# Ivar Smolin <okul@linux.ee>, 2005, 2006.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Planner 0.13\n"
+"Project-Id-Version: Planner 0.14\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-06-22 20:06+0000\n"
-"PO-Revision-Date: 2005-09-09 09:31+0300\n"
+"POT-Creation-Date: 2006-07-15 13:16+0200\n"
+"PO-Revision-Date: 2006-07-15 14:50+0300\n"
 "Last-Translator: Ivar Smolin <okul@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
@@ -476,14 +476,6 @@ msgstr "_Töö:"
 msgid "Insert Task"
 msgstr "Ülesande lisamine"
 
-#: ../data/mime/planner.keys.in.h:1
-msgid "Documents/Project Management"
-msgstr "Dokumendid/Projektihaldus"
-
-#: ../data/mime/planner.keys.in.h:2
-msgid "Project Plan"
-msgstr "Projektiplaan"
-
 #: ../data/mime/planner.xml.in.h:1
 msgid "Planner project plan"
 msgstr "Plaanija projektiplaan"
@@ -497,52 +489,60 @@ msgid "Project Management"
 msgstr "Projektihaldus"
 
 #: ../data/planner.schemas.in.h:1
-msgid "Highlight critical path in Gantt view"
-msgstr "Tõsta esile kriitiline rada Gantt'i vaates"
+msgid "Display nonstandard days in Gantt view"
+msgstr "Mittestandardsete päevade kuvamine Gantt'i vaates"
 
 #: ../data/planner.schemas.in.h:2
-msgid "Highlight critical path in Task view"
-msgstr "Tõsta esile kriitiline rada ülesannete vaates"
+msgid "Highlight critical path in Gantt view"
+msgstr "Kriitilise raja esiletõstmine Gantt'i vaates"
 
 #: ../data/planner.schemas.in.h:3
+msgid "Highlight critical path in Task view"
+msgstr "Kriitilise raja esiletõstmine ülesannete vaates"
+
+#: ../data/planner.schemas.in.h:4
 msgid "Print the Gantt view"
 msgstr "Gantt'i vaate trükkimine"
 
-#: ../data/planner.schemas.in.h:4
+#: ../data/planner.schemas.in.h:5
 msgid "Print the Resource view"
 msgstr "Vahendite vaate trükkimine"
 
-#: ../data/planner.schemas.in.h:5
+#: ../data/planner.schemas.in.h:6
 msgid "Print the Task view"
 msgstr "Ülesannete vaate trükkimine"
 
-#: ../data/planner.schemas.in.h:6
+#: ../data/planner.schemas.in.h:7
 msgid "The active view"
 msgstr "Aktiivne vaade"
 
-#: ../data/planner.schemas.in.h:7
+#: ../data/planner.schemas.in.h:8
 msgid "Whether printing of the Gantt view is enabled."
 msgstr "Kas Gantt'i vaate trükkimine on lubatud."
 
-#: ../data/planner.schemas.in.h:8
+#: ../data/planner.schemas.in.h:9
 msgid "Whether printing of the Resource view is enabled."
 msgstr "Kas vahendite vaate trükkimine on lubatud."
 
-#: ../data/planner.schemas.in.h:9
+#: ../data/planner.schemas.in.h:10
 msgid "Whether printing of the Task view is enabled."
 msgstr "Kas ülesannete vaate trükkimine on lubatud."
 
-#: ../data/planner.schemas.in.h:10
+#: ../data/planner.schemas.in.h:11
+msgid "Whether to display nonstandard days in the Gantt view."
+msgstr "Kas tõsta esile mittestandardseid päevi Gantt'i vaates."
+
+#: ../data/planner.schemas.in.h:12
 msgid ""
 "Whether to highlight the tasks along the cricital path in the Gantt view."
 msgstr "Kas tõsta esile Gantt'i vaates olevat kriitilist rada või mitte."
 
-#: ../data/planner.schemas.in.h:11
+#: ../data/planner.schemas.in.h:13
 msgid ""
 "Whether to highlight the tasks along the cricital path in the Task view."
 msgstr "Kas tõsta esile ülesannete vaates olevat kriitilist rada või mitte."
 
-#: ../data/planner.schemas.in.h:12
+#: ../data/planner.schemas.in.h:14
 msgid "Which view to display in the user interface."
 msgstr "Mis vaadet kuvatakse kasutajaliideses"
 
@@ -637,13 +637,13 @@ msgstr "Reaalarv"
 msgid "Date"
 msgstr "Kuupäev"
 
-#: ../libplanner/mrp-property.c:375 ../src/planner-gantt-view.c:512
-#: ../src/planner-task-view.c:328
+#: ../libplanner/mrp-property.c:375 ../src/planner-gantt-view.c:559
+#: ../src/planner-task-view.c:340
 msgid "Duration"
 msgstr "Kestus"
 
-#: ../libplanner/mrp-property.c:377 ../src/planner-gantt-view.c:514
-#: ../src/planner-resource-view.c:1314 ../src/planner-task-view.c:330
+#: ../libplanner/mrp-property.c:377 ../src/planner-gantt-view.c:561
+#: ../src/planner-resource-view.c:1314 ../src/planner-task-view.c:342
 msgid "Cost"
 msgstr "Maksumus"
 
@@ -706,16 +706,49 @@ msgstr "Vigane SQL'i URI (vigane projekti ID)."
 msgid "Invalid SQL URI (no database name specified)."
 msgstr "Vigane SQL'i URI (andmebaasi nime pole kirjeldatud)."
 
-#: ../libplanner/mrp-task.c:1062
+#: ../libplanner/mrp-task.c:1070
 msgid ""
 "Could not add a predecessor relation, because the tasks are already related."
-msgstr "Eelkäijasuhet pole võimalik lisada kuna ülesannetele on juba suhe määratud."
+msgstr ""
+"Eelkäijasuhet pole võimalik lisada kuna ülesannetele on juba suhe määratud."
 
-#: ../libplanner/mrp-task-manager.c:2152
+#: ../libplanner/mrp-task.c:1081
+msgid "Start to Finish relation type cannot be combined with other relations."
+msgstr "Algusest-lõpuni suhet pole võimalik teiste suhetega kombineerida"
+
+#: ../libplanner/mrp-task.c:1083
+msgid "Finish to Finish relation type cannot be combined with other relations."
+msgstr "Lõpust-lõpuni suhet pole võimalik teiste suhetega kombineerida"
+
+#: ../libplanner/mrp-task.c:1099
+msgid ""
+"Start to Finish relation type cannot be combined with Start No Earlier Than "
+"constraint."
+msgstr ""
+"Algusest-lõpuni suhet pole võimalik kombineerida Alusta-mitte-varem-kui "
+"piiranguga"
+
+#: ../libplanner/mrp-task.c:1101
+msgid ""
+"Finish to Finish relation type cannot be combined with Start No Earlier Than "
+"constraint."
+msgstr ""
+"Lõpust-lõpuni suhet pole võimalik kombineerida Alusta-mitte-varem-kui "
+"piiranguga"
+
+#: ../libplanner/mrp-task.c:1124
+msgid ""
+"Start to Finish relation cannot be set. Predecessor starts on project start "
+"date."
+msgstr ""
+"Algusest-lõpuni suhet pole võimalik määrata. Eelkäija alustab projekti "
+"alguskuupäeval."
+
+#: ../libplanner/mrp-task-manager.c:2518
 msgid "Cannot add a predecessor, because it would result in a loop."
 msgstr "Eelkäijat pole võimalik lisada kuna see võib põhjustada tsükli."
 
-#: ../libplanner/mrp-task-manager.c:2198
+#: ../libplanner/mrp-task-manager.c:2564
 msgid "Cannot move the task, because it would result in a loop."
 msgstr "Ülesannet pole võimalik ringi tõsta kuna see võib põhjustada tsükli."
 
@@ -771,7 +804,7 @@ msgstr "Eemalda kalender"
 msgid "Add new calendar"
 msgstr "Lisa uus kalender"
 
-#: ../src/planner-cell-renderer-date.c:161 ../src/planner-task-dialog.c:1490
+#: ../src/planner-cell-renderer-date.c:161 ../src/planner-task-dialog.c:1491
 msgid "As soon as possible"
 msgstr "Nii vara, kui võimalik"
 
@@ -858,13 +891,13 @@ msgstr "EDS"
 
 #: ../src/planner-eds-plugin.c:168
 msgid "Import resources from Evolution Data Server"
-msgstr "Vahendite importimine Evolution'i andmeserverist"
+msgstr "Vahendite importimine Evolution andmeserverist"
 
 #: ../src/planner-eds-plugin.c:396 ../src/planner-gantt-print.c:190
-#: ../src/planner-gantt-view.c:508 ../src/planner-group-dialog.c:822
+#: ../src/planner-gantt-view.c:555 ../src/planner-group-dialog.c:822
 #: ../src/planner-property-dialog.c:485 ../src/planner-resource-view.c:1171
-#: ../src/planner-task-dialog.c:2536 ../src/planner-task-dialog.c:2610
-#: ../src/planner-task-view.c:324
+#: ../src/planner-task-dialog.c:2616 ../src/planner-task-dialog.c:2690
+#: ../src/planner-task-view.c:336
 msgid "Name"
 msgstr "Nimi"
 
@@ -882,11 +915,11 @@ msgstr "Foto"
 
 #: ../src/planner-eds-plugin.c:676
 msgid "Imported from Evolution Data Server"
-msgstr "Imporditud Evolution'i andmeserverist"
+msgstr "Imporditud Evolution andmeserverist"
 
 #: ../src/planner-eds-plugin.c:677
 msgid "Updated from Evolution Data Server"
-msgstr "Uuendatud Evolution'i andmeserverist"
+msgstr "Uuendatud Evolution andmeserverist"
 
 #: ../src/planner-eds-plugin.c:862
 msgid "Query cancelled."
@@ -894,12 +927,12 @@ msgstr "Päring tühistati."
 
 #: ../src/planner-eds-plugin.c:923
 msgid "Evolution Data Server UID"
-msgstr "Evolution'i andmeserveri UID"
+msgstr "Evolutioni andmeserveri UID"
 
 #: ../src/planner-eds-plugin.c:924
 msgid "Identifier used by Evolution Data Server for resources"
 msgstr ""
-"Evolution'i andmeserveri poolt vahendite jaoks kasutatav identifikaator"
+"Evolutioni andmeserveri poolt vahendite jaoks kasutatav identifikaator"
 
 #: ../src/planner-format.c:149
 #, c-format
@@ -1000,11 +1033,11 @@ msgstr "minutit"
 
 #. i18n: project start, the date format is described in
 #. * libmrproject/docs/DateFormat.
-#: ../src/planner-gantt-background.c:579
+#: ../src/planner-gantt-background.c:625
 msgid "%Y %b %d"
 msgstr "%d. %b %Y"
 
-#: ../src/planner-gantt-background.c:581
+#: ../src/planner-gantt-background.c:627
 msgid "Project start"
 msgstr "Projekti algus"
 
@@ -1012,172 +1045,180 @@ msgstr "Projekti algus"
 msgid "%e %b %Y"
 msgstr "%e. %b %Y"
 
-#: ../src/planner-gantt-print.c:198 ../src/planner-gantt-view.c:511
+#: ../src/planner-gantt-print.c:198 ../src/planner-gantt-view.c:558
 #: ../src/planner-resource-dialog.c:1850 ../src/planner-resource-view.c:750
 #: ../src/planner-resource-view.c:766 ../src/planner-resource-view.c:1736
-#: ../src/planner-task-view.c:327
+#: ../src/planner-task-view.c:339
 msgid "Work"
 msgstr "Töö"
 
-#: ../src/planner-gantt-print.c:542 ../src/planner-gantt-row.c:696
-#: ../src/planner-html-plugin.c:125 ../src/planner-task-tree.c:1567
-#: ../src/planner-window.c:1929
+#: ../src/planner-gantt-print.c:542 ../src/planner-gantt-row.c:752
+#: ../src/planner-html-plugin.c:125 ../src/planner-task-tree.c:1571
+#: ../src/planner-window.c:1981
 msgid "Unnamed"
 msgstr "Nimetu"
 
-#: ../src/planner-gantt-row.c:1788 ../src/planner-gantt-row.c:1791
+#: ../src/planner-gantt-row.c:2605 ../src/planner-gantt-row.c:2608
 msgid "No name"
 msgstr "Nimi puudub"
 
-#: ../src/planner-gantt-row.c:1794
+#: ../src/planner-gantt-row.c:2611
 #, c-format
 msgid "Make task '%s' a predecessor of '%s'"
 msgstr "Määra ülesanne '%s eelkäijaks ülesandele '%s'"
 
-#: ../src/planner-gantt-row.c:1842
+#: ../src/planner-gantt-row.c:2659
 #, c-format
 msgid "Change work to %s"
 msgstr "Muuda töö %s-ks"
 
-#: ../src/planner-gantt-row.c:2412 ../src/planner-task-dialog.c:454
-#: ../src/planner-task-tree.c:254 ../src/planner-task-tree.c:942
+#: ../src/planner-gantt-row.c:3230 ../src/planner-task-dialog.c:455
+#: ../src/planner-task-tree.c:257 ../src/planner-task-tree.c:947
 msgid "Edit task property"
 msgstr "Muuda ülesande omadusi"
 
-#: ../src/planner-gantt-view.c:125 ../src/planner-task-view.c:113
+#: ../src/planner-gantt-view.c:133 ../src/planner-task-view.c:115
 msgid "_Insert Task"
 msgstr "_Lisa ülesanne"
 
-#: ../src/planner-gantt-view.c:126 ../src/planner-task-view.c:114
+#: ../src/planner-gantt-view.c:134 ../src/planner-task-view.c:116
 msgid "Insert a new task"
 msgstr "Uue ülesande lisamine"
 
-#: ../src/planner-gantt-view.c:128 ../src/planner-task-view.c:116
+#: ../src/planner-gantt-view.c:136 ../src/planner-task-view.c:118
 msgid "In_sert Tasks..."
 msgstr "L_isa ülesanded..."
 
-#: ../src/planner-gantt-view.c:131 ../src/planner-task-view.c:119
+#: ../src/planner-gantt-view.c:139 ../src/planner-task-view.c:121
 msgid "_Remove Task"
 msgstr "_Eemalda ülesanne"
 
-#: ../src/planner-gantt-view.c:132 ../src/planner-task-view.c:120
+#: ../src/planner-gantt-view.c:140 ../src/planner-task-view.c:122
 msgid "Remove the selected tasks"
 msgstr "Valitud ülesande eemaldamine"
 
-#: ../src/planner-gantt-view.c:134
+#: ../src/planner-gantt-view.c:142
 msgid "_Edit Task Properties..."
 msgstr "_Muuda ülesande omadusi..."
 
-#: ../src/planner-gantt-view.c:137 ../src/planner-resource-view.c:245
-#: ../src/planner-task-view.c:125
+#: ../src/planner-gantt-view.c:145 ../src/planner-resource-view.c:245
+#: ../src/planner-task-view.c:127
 msgid "Select _All"
 msgstr "Vali _kõik"
 
-#: ../src/planner-gantt-view.c:138 ../src/planner-resource-view.c:246
-#: ../src/planner-task-view.c:126
+#: ../src/planner-gantt-view.c:146 ../src/planner-resource-view.c:246
+#: ../src/planner-task-view.c:128
 msgid "Select all tasks"
 msgstr "Vali kõik ülesanded"
 
-#: ../src/planner-gantt-view.c:140 ../src/planner-task-view.c:128
+#: ../src/planner-gantt-view.c:148 ../src/planner-task-view.c:130
 msgid "_Unlink Task"
 msgstr "Ühenda ülesanded la_hti"
 
-#: ../src/planner-gantt-view.c:141 ../src/planner-task-view.c:129
+#: ../src/planner-gantt-view.c:149 ../src/planner-task-view.c:131
 msgid "Unlink the selected tasks"
 msgstr "Valitud ülesannete lahtiühendamine"
 
-#: ../src/planner-gantt-view.c:143 ../src/planner-task-view.c:131
+#: ../src/planner-gantt-view.c:151 ../src/planner-task-view.c:133
 msgid "_Link Tasks"
 msgstr "_Ühenda ülesanded"
 
-#: ../src/planner-gantt-view.c:144 ../src/planner-task-view.c:132
+#: ../src/planner-gantt-view.c:152 ../src/planner-task-view.c:134
 msgid "Link the selected tasks"
 msgstr "Valitud ülesannete ühendamine"
 
-#: ../src/planner-gantt-view.c:146 ../src/planner-task-view.c:134
+#: ../src/planner-gantt-view.c:154 ../src/planner-task-view.c:136
 msgid "I_ndent Task"
 msgstr "_Taanda ülesanne"
 
-#: ../src/planner-gantt-view.c:147 ../src/planner-task-view.c:135
+#: ../src/planner-gantt-view.c:155 ../src/planner-task-view.c:137
 msgid "Indent the selected tasks"
 msgstr "Valitud ülesande taandamine"
 
-#: ../src/planner-gantt-view.c:149 ../src/planner-task-view.c:137
+#: ../src/planner-gantt-view.c:157 ../src/planner-task-view.c:139
 msgid "Unin_dent Task"
 msgstr "_Eemalda ülesande taane"
 
-#: ../src/planner-gantt-view.c:150 ../src/planner-task-view.c:138
+#: ../src/planner-gantt-view.c:158 ../src/planner-task-view.c:140
 msgid "Unindent the selected tasks"
 msgstr "Taande eemaldamine valitud ülesandelt"
 
-#: ../src/planner-gantt-view.c:152 ../src/planner-task-view.c:140
+#: ../src/planner-gantt-view.c:160 ../src/planner-task-view.c:142
 msgid "Move Task _Up"
 msgstr "Liiguta ülesanne _üles"
 
-#: ../src/planner-gantt-view.c:153 ../src/planner-task-view.c:141
+#: ../src/planner-gantt-view.c:161 ../src/planner-task-view.c:143
 msgid "Move the selected tasks upwards"
 msgstr "Valitud ülesande liigutamine ülespoole"
 
-#: ../src/planner-gantt-view.c:155 ../src/planner-task-view.c:143
+#: ../src/planner-gantt-view.c:163 ../src/planner-task-view.c:145
 msgid "Move Task Do_wn"
 msgstr "Liiguta ülesanne _alla"
 
-#: ../src/planner-gantt-view.c:156 ../src/planner-task-view.c:144
+#: ../src/planner-gantt-view.c:164 ../src/planner-task-view.c:146
 msgid "Move the selected tasks downwards"
 msgstr "Valitud ülesande liigutamine allapoole"
 
-#: ../src/planner-gantt-view.c:158 ../src/planner-task-view.c:146
+#: ../src/planner-gantt-view.c:166 ../src/planner-task-view.c:148
 msgid "Reset _Constraint"
 msgstr "Lähtesta _piirang"
 
-#: ../src/planner-gantt-view.c:161
+#: ../src/planner-gantt-view.c:169
 msgid "Zoom To _Fit"
 msgstr "_Mahuta"
 
-#: ../src/planner-gantt-view.c:162 ../src/planner-usage-view.c:105
+#: ../src/planner-gantt-view.c:170 ../src/planner-usage-view.c:112
 msgid "Zoom to fit the entire project"
 msgstr "Suurendamine või vähendamine kogu projekti mahutamiseks"
 
-#: ../src/planner-gantt-view.c:164
+#: ../src/planner-gantt-view.c:172
 msgid "_Zoom In"
 msgstr "_Suurenda"
 
-#: ../src/planner-gantt-view.c:165 ../src/planner-usage-view.c:101
-#: ../src/planner-usage-view.c:102
+#: ../src/planner-gantt-view.c:173 ../src/planner-usage-view.c:108
+#: ../src/planner-usage-view.c:109
 msgid "Zoom in"
 msgstr "Suurendamine"
 
-#: ../src/planner-gantt-view.c:167
+#: ../src/planner-gantt-view.c:175
 msgid "Zoom _Out"
 msgstr "_Vähenda"
 
-#: ../src/planner-gantt-view.c:168 ../src/planner-usage-view.c:98
-#: ../src/planner-usage-view.c:99
+#: ../src/planner-gantt-view.c:176 ../src/planner-usage-view.c:105
+#: ../src/planner-usage-view.c:106
 msgid "Zoom out"
 msgstr "Vähendamine"
 
-#: ../src/planner-gantt-view.c:170 ../src/planner-resource-view.c:251
-#: ../src/planner-task-view.c:152 ../src/planner-usage-view.c:107
+#: ../src/planner-gantt-view.c:178 ../src/planner-resource-view.c:251
+#: ../src/planner-task-view.c:154 ../src/planner-usage-view.c:114
 msgid "Edit _Visible Columns"
 msgstr "Redigeeri _nähtavaid veerge"
 
-#: ../src/planner-gantt-view.c:171 ../src/planner-resource-view.c:252
-#: ../src/planner-task-view.c:153 ../src/planner-usage-view.c:108
+#: ../src/planner-gantt-view.c:179 ../src/planner-resource-view.c:252
+#: ../src/planner-task-view.c:155 ../src/planner-usage-view.c:115
 msgid "Edit visible columns"
 msgstr "Nähtavate veergude redigeerimine"
 
-#: ../src/planner-gantt-view.c:176 ../src/planner-task-view.c:158
+#: ../src/planner-gantt-view.c:184 ../src/planner-task-view.c:160
 msgid "_Highlight Critical Tasks"
 msgstr "_Tõsta esile kriitilised ülesanded"
+
+#: ../src/planner-gantt-view.c:187
+msgid "_Show Guide Lines"
+msgstr "_Näita abijooni"
+
+#: ../src/planner-gantt-view.c:190 ../src/planner-task-view.c:162
+msgid "_Nonstandard Days"
+msgstr "_Mittestandardsed päevad"
 
 #. i18n: Label used for the sidebar. Please try to make it short and use
 #. * a linebreak if necessary/possible.
 #.
-#: ../src/planner-gantt-view.c:285
+#: ../src/planner-gantt-view.c:310
 msgid "Gantt"
 msgstr "Gantt"
 
-#: ../src/planner-gantt-view.c:291
+#: ../src/planner-gantt-view.c:316
 msgid "_Gantt Chart"
 msgstr "_Gantti kaart"
 
@@ -1189,27 +1230,27 @@ msgstr "_Gantti kaart"
 #. * project management term. You might want to leave it
 #. * untranslated unless there is a localized term for it.
 #.
-#: ../src/planner-gantt-view.c:507 ../src/planner-task-view.c:323
+#: ../src/planner-gantt-view.c:554 ../src/planner-task-view.c:335
 msgid "WBS"
 msgstr "WBS"
 
-#: ../src/planner-gantt-view.c:509 ../src/planner-task-view.c:325
+#: ../src/planner-gantt-view.c:556 ../src/planner-task-view.c:337
 msgid "Start"
 msgstr "Algus"
 
-#: ../src/planner-gantt-view.c:510 ../src/planner-task-view.c:326
+#: ../src/planner-gantt-view.c:557 ../src/planner-task-view.c:338
 msgid "Finish"
 msgstr "Lõpp"
 
-#: ../src/planner-gantt-view.c:513 ../src/planner-task-view.c:329
+#: ../src/planner-gantt-view.c:560 ../src/planner-task-view.c:341
 msgid "Slack"
 msgstr "Lõtv"
 
-#: ../src/planner-gantt-view.c:515 ../src/planner-task-view.c:331
+#: ../src/planner-gantt-view.c:562 ../src/planner-task-view.c:343
 msgid "Assigned to"
 msgstr "Kellele määratud"
 
-#: ../src/planner-gantt-view.c:841
+#: ../src/planner-gantt-view.c:911
 msgid "Edit Gantt Columns"
 msgstr "Muuda Gantti veerge"
 
@@ -1261,7 +1302,7 @@ msgstr "Eksport HTML-ks"
 msgid "Show result in browser"
 msgstr "Tulemuse näitamine veebilehitsejas"
 
-#: ../src/planner-html-plugin.c:173 ../src/planner-window.c:1638
+#: ../src/planner-html-plugin.c:173 ../src/planner-window.c:1690
 #: ../src/planner-xml-planner-plugin.c:124
 #, c-format
 msgid "File \"%s\" exists, do you want to overwrite it?"
@@ -1316,32 +1357,31 @@ msgstr "Eemalda faas"
 msgid "Could not open plugin file '%s'\n"
 msgstr "Plugina faili '%s' pole võimalik avada\n"
 
-#: ../src/planner-predecessor-model.c:191 ../src/planner-task-dialog.c:2176
+#: ../src/planner-predecessor-model.c:191 ../src/planner-task-dialog.c:2217
 msgid "FS"
 msgstr "LA"
 
-#: ../src/planner-predecessor-model.c:194
+#: ../src/planner-predecessor-model.c:194 ../src/planner-task-dialog.c:2218
 msgid "FF"
 msgstr "LL"
 
-#. list = g_list_append (list, g_strdup (_("FF")));
-#: ../src/planner-predecessor-model.c:197 ../src/planner-task-dialog.c:2178
+#: ../src/planner-predecessor-model.c:197 ../src/planner-task-dialog.c:2219
 msgid "SS"
 msgstr "AA"
 
-#: ../src/planner-predecessor-model.c:200
+#: ../src/planner-predecessor-model.c:200 ../src/planner-task-dialog.c:2220
 msgid "SF"
 msgstr "AL"
 
-#: ../src/planner-print-dialog.c:164
+#: ../src/planner-print-dialog.c:187
 msgid "Print Project"
 msgstr "Projekti trükkimine"
 
-#: ../src/planner-print-dialog.c:171
+#: ../src/planner-print-dialog.c:194
 msgid "Select views"
 msgstr "Vaadete valimine"
 
-#: ../src/planner-print-dialog.c:194
+#: ../src/planner-print-dialog.c:218
 msgid "Select the views to print:"
 msgstr "Vali vaated, mida trükkida:"
 
@@ -1418,7 +1458,7 @@ msgid "Label"
 msgstr "Silt"
 
 #: ../src/planner-property-dialog.c:514 ../src/planner-resource-view.c:1224
-#: ../src/planner-task-dialog.c:2642
+#: ../src/planner-task-dialog.c:2722
 msgid "Type"
 msgstr "Tüüp"
 
@@ -1446,7 +1486,7 @@ msgid "(None)"
 msgstr "(Puudub)"
 
 #: ../src/planner-resource-dialog.c:322
-#: ../src/planner-resource-input-dialog.c:110 ../src/planner-task-dialog.c:380
+#: ../src/planner-resource-input-dialog.c:110 ../src/planner-task-dialog.c:381
 msgid "(No name)"
 msgstr "(nimetu)"
 
@@ -1469,7 +1509,7 @@ msgstr "Muuda vahendi omadusi"
 
 #. i18n: time stamp format for notes in task dialog, see strftime(3) for
 #. * a detailed description.
-#: ../src/planner-resource-dialog.c:1404 ../src/planner-task-dialog.c:1807
+#: ../src/planner-resource-dialog.c:1404 ../src/planner-task-dialog.c:1808
 msgid "%a %d %b %Y, %H:%M\n"
 msgstr "%a %d %b %Y, %H:%M\n"
 
@@ -1706,82 +1746,89 @@ msgstr "Ühenda ülesanne lahti"
 msgid "Insert task"
 msgstr "Lisa ülesanne"
 
-#: ../src/planner-task-dialog.c:528
+#: ../src/planner-task-dialog.c:529
 msgid "Edit task type"
 msgstr "Muuda ülesande tüüpi"
 
-#: ../src/planner-task-dialog.c:595
+#: ../src/planner-task-dialog.c:596
 msgid "Toggle fixed duration"
 msgstr "Säti määratud kestus"
 
-#: ../src/planner-task-dialog.c:662
+#: ../src/planner-task-dialog.c:663
 msgid "Edit task scheduling"
 msgstr "Muuda ülesande ajastust"
 
-#: ../src/planner-task-dialog.c:742
+#: ../src/planner-task-dialog.c:743
 msgid "Assign resource to task"
 msgstr "Seo ülesanne vahendiga"
 
-#: ../src/planner-task-dialog.c:802
+#: ../src/planner-task-dialog.c:803
 msgid "Unassign resource from task"
 msgstr "Eemdalda ülesadne ja vahendi sidu"
 
-#: ../src/planner-task-dialog.c:861
+#: ../src/planner-task-dialog.c:862
 msgid "Change resource units in task"
 msgstr "Muuda ülesandes vahendi ühikuid"
 
-#: ../src/planner-task-dialog.c:949
+#: ../src/planner-task-dialog.c:950
 msgid "Edit task predecessor"
 msgstr "Muuda ülesande eelkäijat"
 
-#: ../src/planner-task-dialog.c:1020
+#: ../src/planner-task-dialog.c:1021
 msgid "Edit lag predecessor"
 msgstr "Muuda viivituse eelkäijat"
 
-#: ../src/planner-task-dialog.c:1086
+#: ../src/planner-task-dialog.c:1087
 msgid "Edit task note"
 msgstr "Muuda ülesande märkust"
 
-#: ../src/planner-task-dialog.c:1494
+#: ../src/planner-task-dialog.c:1495
 #, c-format
 msgid "No earlier than %s"
 msgstr "Mitte varem kui %s"
 
-#: ../src/planner-task-dialog.c:1498
+#: ../src/planner-task-dialog.c:1499
 #, c-format
 msgid "On fixed date %s"
 msgstr "Määratud ajal %s"
 
-#: ../src/planner-task-dialog.c:1880
+#: ../src/planner-task-dialog.c:1917
 msgid "Finish to start (FS)"
 msgstr "Lõpust algusesse (LA)"
 
-#. _("Finish to finish (FF)"), MRP_RELATION_FF,
-#: ../src/planner-task-dialog.c:1882
+#: ../src/planner-task-dialog.c:1918
+msgid "Finish to finish (FF)"
+msgstr "Lõpust lõppu (LL)"
+
+#: ../src/planner-task-dialog.c:1919
 msgid "Start to start (SS)"
 msgstr "Algusest algusesse (AA)"
 
-#: ../src/planner-task-dialog.c:1938
+#: ../src/planner-task-dialog.c:1920
+msgid "Start to finish (SF)"
+msgstr "Algusest lõpuni (AL)"
+
+#: ../src/planner-task-dialog.c:1975
 msgid "Can't add new predecessor. No task selected!"
 msgstr "Uut eelkäijat pole võimalik lisada. Ülesannet pole valitud!"
 
-#: ../src/planner-task-dialog.c:2383
+#: ../src/planner-task-dialog.c:2463
 msgid "Change..."
 msgstr "Muuda..."
 
-#: ../src/planner-task-dialog.c:2557
+#: ../src/planner-task-dialog.c:2637
 msgid "Assigned"
 msgstr "Omistatud"
 
-#: ../src/planner-task-dialog.c:2574
+#: ../src/planner-task-dialog.c:2654
 msgid "Units"
 msgstr "Ühikud"
 
-#: ../src/planner-task-dialog.c:2664
+#: ../src/planner-task-dialog.c:2744
 msgid "Lag"
 msgstr "Viivitus"
 
-#: ../src/planner-task-dialog.c:2807 ../src/planner-task-dialog.c:2809
+#: ../src/planner-task-dialog.c:2887 ../src/planner-task-dialog.c:2889
 msgid "Edit task properties"
 msgstr "Ülesande omaduste muutmine"
 
@@ -1809,27 +1856,27 @@ msgstr "/Määra _vahendid..."
 msgid "/_Edit task..."
 msgstr "/_Muuda ülesannet..."
 
-#: ../src/planner-task-tree.c:562
+#: ../src/planner-task-tree.c:567
 msgid "Remove task"
 msgstr "Eemalda ülesanne"
 
-#: ../src/planner-task-tree.c:639
+#: ../src/planner-task-tree.c:644
 msgid "Apply constraint to task"
 msgstr "Rakenda ülesandele piirang"
 
-#: ../src/planner-task-tree.c:701
+#: ../src/planner-task-tree.c:706
 msgid "Reset task constraint"
 msgstr "Lähtestab ülesande piirang"
 
-#: ../src/planner-task-tree.c:1488 ../src/planner-task-tree.c:1620
+#: ../src/planner-task-tree.c:1492 ../src/planner-task-tree.c:1624
 msgid "N/A"
 msgstr "POLE"
 
-#: ../src/planner-task-tree.c:2719
+#: ../src/planner-task-tree.c:2724
 msgid "Remove tasks"
 msgstr "Eemalda ülesanded"
 
-#: ../src/planner-task-tree.c:2781
+#: ../src/planner-task-tree.c:2786
 #, c-format
 msgid ""
 "You are about to open an edit dialog each for %i tasks. Are you sure that "
@@ -1838,76 +1885,76 @@ msgstr ""
 "Sul on käsil eraldi dialoogide avamine %i ülesande jaoks. Oled sa kindel, et "
 "sa soovid seda teha?"
 
-#: ../src/planner-task-tree.c:2883
+#: ../src/planner-task-tree.c:2888
 msgid "Unlink tasks"
 msgstr "Ühenda ülesanded lahti"
 
-#: ../src/planner-task-tree.c:2935
+#: ../src/planner-task-tree.c:2940
 msgid "Link tasks"
 msgstr "Ühenda ülesanded"
 
-#: ../src/planner-task-tree.c:3026
+#: ../src/planner-task-tree.c:3031
 msgid "Indent tasks"
 msgstr "Taanda ülesanded"
 
-#: ../src/planner-task-tree.c:3035
+#: ../src/planner-task-tree.c:3042
 msgid "Indent task"
 msgstr "Taanda ülesanne"
 
-#: ../src/planner-task-tree.c:3128
+#: ../src/planner-task-tree.c:3134
 msgid "Unindent tasks"
 msgstr "Eemalda ülesandelt taane"
 
-#: ../src/planner-task-tree.c:3144
+#: ../src/planner-task-tree.c:3150
 msgid "Unindent task"
 msgstr "Eemalda ülesandelt taane"
 
-#: ../src/planner-task-tree.c:3221
+#: ../src/planner-task-tree.c:3227
 msgid "Move tasks up"
 msgstr "Liiguta ülesanded üles"
 
-#: ../src/planner-task-tree.c:3259
+#: ../src/planner-task-tree.c:3265
 msgid "Move task up"
 msgstr "Liiguta ülesanne üles"
 
-#: ../src/planner-task-tree.c:3348
+#: ../src/planner-task-tree.c:3354
 msgid "Move tasks down"
 msgstr "Liiguta ülesanded alla"
 
 #. Moving task from 'position' to 'position + 1'
-#: ../src/planner-task-tree.c:3394
+#: ../src/planner-task-tree.c:3400
 msgid "Move task down"
 msgstr "Liiguta ülesanne alla"
 
-#: ../src/planner-task-tree.c:3450
+#: ../src/planner-task-tree.c:3456
 msgid "Reset task constraints"
 msgstr "Lähtesta ülesande piirangud"
 
-#: ../src/planner-task-tree.c:3482
+#: ../src/planner-task-tree.c:3488
 msgid "Reset all task constraints"
 msgstr "Lähtesta kõigi ülesannete piirangud"
 
-#: ../src/planner-task-view.c:122
+#: ../src/planner-task-view.c:124
 msgid "_Edit Task"
 msgstr "_Muuda ülesannet"
 
-#: ../src/planner-task-view.c:149
+#: ../src/planner-task-view.c:151
 msgid "_Edit Custom Properties..."
 msgstr "_Muuda kohandatud omadusi..."
 
-#: ../src/planner-task-view.c:258
+#: ../src/planner-task-view.c:270
 msgid "Tasks"
 msgstr "Ülesanded"
 
-#: ../src/planner-task-view.c:264
+#: ../src/planner-task-view.c:276
 msgid "_Tasks"
 msgstr "_Ülesanded"
 
-#: ../src/planner-task-view.c:560
+#: ../src/planner-task-view.c:572
 msgid "Edit custom task properties"
 msgstr "Muuda ülesande kohandatud omadusi"
 
-#: ../src/planner-task-view.c:595
+#: ../src/planner-task-view.c:626
 msgid "Edit Task Columns"
 msgstr "Muuda ülesande veerge"
 
@@ -1935,14 +1982,14 @@ msgstr ""
 "\n"
 "Ülesanne"
 
-#: ../src/planner-usage-view.c:104
+#: ../src/planner-usage-view.c:111
 msgid "Zoom to fit"
 msgstr "Mahuta"
 
 #. i18n: Label used for the sidebar. Please try to make it short and use
 #. * a linebreak if necessary/possible.
 #.
-#: ../src/planner-usage-view.c:194
+#: ../src/planner-usage-view.c:201
 msgid ""
 "Resource\n"
 "Usage"
@@ -1950,11 +1997,11 @@ msgstr ""
 "Vahend\n"
 "Kasutus"
 
-#: ../src/planner-usage-view.c:200
+#: ../src/planner-usage-view.c:207
 msgid "Resource _Usage"
 msgstr "Vahendite _kasutus"
 
-#: ../src/planner-usage-view.c:311
+#: ../src/planner-usage-view.c:318
 msgid "Edit Resource Usage Columns"
 msgstr "Vahendite kasutusveergude muutmine"
 
@@ -1982,7 +2029,7 @@ msgstr "Projekti avamine"
 msgid "_Import"
 msgstr "_Impordi"
 
-#: ../src/planner-window.c:240 ../src/planner-window.c:1507
+#: ../src/planner-window.c:240 ../src/planner-window.c:1560
 msgid "_Save"
 msgstr "_Salvesta"
 
@@ -2123,65 +2170,65 @@ msgstr "Plaanija failid"
 #. I18n: Translators, list your names here, newline separated if there
 #. * are more than one, to appear in the about box.
 #.
-#: ../src/planner-window.c:1271 ../src/planner-window.c:1293
+#: ../src/planner-window.c:1324 ../src/planner-window.c:1346
 msgid "translator-credits"
 msgstr ""
-"Ilmar Kerm <ikerm@hot.ee>, 2002,\n"
-"Priit Laes <amd@tt.ee>, 2003\n"
-"Ivar Smolin <okul@linux.ee>, 2005"
+"Ilmar Kerm <ikerm@hot.ee>, 2002.\n"
+"Priit Laes <amd@tt.ee>, 2003.\n"
+"Ivar Smolin <okul@linux.ee>, 2005, 2006."
 
-#: ../src/planner-window.c:1288
+#: ../src/planner-window.c:1341
 msgid "A Project Management application for the GNOME desktop"
 msgstr "Projektihaldustarkvara GNOME töölauale"
 
-#: ../src/planner-window.c:1295
+#: ../src/planner-window.c:1348
 msgid "The Planner Homepage"
 msgstr "Plaanija koduleht"
 
-#: ../src/planner-window.c:1447
+#: ../src/planner-window.c:1500
 msgid "If you don't save, changes made the last minute will be discarded."
 msgstr ""
 "Kui te ei salvesta, siis viimase minuti jooksul tehtud muudatused "
 "tühistatakse."
 
-#: ../src/planner-window.c:1452
+#: ../src/planner-window.c:1505
 #, c-format
 msgid "If you don't save, changes made the last %d minutes will be discarded."
 msgstr ""
 "Kui te ei salvesta, siis viimase %d minuti jooksul tehtud muudatused "
 "tühistatakse."
 
-#: ../src/planner-window.c:1457
+#: ../src/planner-window.c:1510
 msgid "If you don't save, changes made the last hour will be discarded."
 msgstr ""
 "Kui te ei salvesta, siis viimase tunni jooksul tehtud muudatused "
 "tühistatakse."
 
-#: ../src/planner-window.c:1462
+#: ../src/planner-window.c:1515
 #, c-format
 msgid "If you don't save, changes made the last %d hours will be discarded."
 msgstr ""
 "Kui te ei salvesta, siis viimase %d tunni jooksul tehtud muudatused "
 "tühistatakse."
 
-#: ../src/planner-window.c:1469
+#: ../src/planner-window.c:1522
 #, c-format
 msgid "Save changes to document '%s' before closing?"
 msgstr "Kas salvestada dokumenti '%s' tehtud muudatused enne sulgemist?"
 
-#: ../src/planner-window.c:1494
+#: ../src/planner-window.c:1547
 msgid "C_lose without saving"
 msgstr "S_ulge salvestamata"
 
-#: ../src/planner-window.c:1500
+#: ../src/planner-window.c:1553
 msgid "_Cancel"
 msgstr "_Loobu"
 
-#: ../src/planner-window.c:1599
+#: ../src/planner-window.c:1652
 msgid "Save a File"
 msgstr "Faili salvestamine"
 
-#: ../src/planner-window.c:1886
+#: ../src/planner-window.c:1938
 msgid ""
 "You have opened a file that was saved with an old version of Planner.\n"
 "\n"
@@ -2210,11 +2257,11 @@ msgstr ""
 "kirje 'Lähtesta piirang'."
 
 #. Hack.
-#: ../src/planner-window.c:1921
+#: ../src/planner-window.c:1973
 msgid "Unnamed database project"
 msgstr "Nimetu andmebaasiprojekt"
 
-#: ../src/planner-window.c:2035
+#: ../src/planner-window.c:2087
 #, c-format
 msgid "Open '%s'"
 msgstr "'%s' avamine"
@@ -2235,56 +2282,56 @@ msgstr "Projekti eksportimine Plaanija 0.11 jaoks sobilikku faili"
 msgid "Export"
 msgstr "Ekspordi"
 
-msgid "<b>Save to file</b>"
-msgstr "<b>Salvestamine faili</b>"
+#: ../eds-backend/e-cal-backend-planner.c:289
+msgid "EDS UID"
+msgstr "EDS UID"
 
-msgid "Local file:"
-msgstr "Kohalik fail:"
-
-msgid "Save to HTML File"
-msgstr "Salvesta HTML faili"
-
-msgid "Web location:"
-msgstr "Asukoht veebis:"
-
-msgid "Export to Planner pre-0.12 format failed"
-msgstr "Tõrge eksportimisel Plaanija 0.12'le eelnenud vormingusse"
-
-msgid "Test"
-msgstr "Proovi"
-
-msgid ""
-"\n"
-"WBS"
+#: ../eds-backend/e-cal-backend-planner.c:290
+msgid "Identifier used by Evolution Data Server for tasks"
 msgstr ""
-"\n"
-"WBS"
+"Evolutioni andmeserveri poolt ülesannete jaoks kasutatav identifikaator"
 
-msgid ""
-"\n"
-"Work"
+#: ../eds-backend/e-cal-backend-planner.c:299
+msgid "EDS Categories"
+msgstr "EDS kategooriad"
+
+#: ../eds-backend/e-cal-backend-planner.c:300
+msgid "Categories for a task used by Evolution Data Server"
+msgstr "Ülesannete kategooriad Evolutioni andmeserveri jaoks"
+
+#: ../eds-backend/e-cal-backend-planner.c:309
+msgid "EDS Classification"
+msgstr "EDS klassifitseerimine"
+
+#: ../eds-backend/e-cal-backend-planner.c:310
+msgid "Task access classification used by Evolution Data Server"
 msgstr ""
-"\n"
-"Töö"
+"Evolutioni andmeserveri poolt ülesannete ligipääsu jaoks kasutatav "
+"klassifikaator"
 
+#: ../eds-backend/e-cal-backend-planner.c:319
+msgid "EDS URL"
+msgstr "EDS URL"
+
+#: ../eds-backend/e-cal-backend-planner.c:320
+msgid "URL for a Task used by Evolution Data Server"
+msgstr "Ülesannete URL Evolutioni andmeserveri jaoks"
+
+#: ../eds-backend/e-cal-backend-planner.c:829
+msgid "Invalid server URI"
+msgstr "Vigane serveri URI"
+
+#. book_target = (EABConfigTargetSource *) data->target;
+#. source = book_target->source;
+#: ../eds-backend/planner-source/planner-source.c:125
+msgid "Select planner file"
+msgstr "Plaanija faili valimine"
+
+#: ../eds-backend/planner-source/planner-source.c:157
+#, c-format
 msgid ""
-"\"%s\" is a directory.\n"
-"Enter a filename and try again."
+"The filename extension of this file isn't the planner usual file extension (%"
+"s) Do you want to continue?"
 msgstr ""
-"\"%s\" on kataloog.\n"
-"Sisesta failinimi ja proovi uuesti."
-
-msgid "planner: --geometry cannot be used with more than one file."
-msgstr "planner: --geometry võtit pole võimalik kasutada rohkem kui ühe faili puhul."
-
-msgid "Task"
-msgstr "Ülesanne"
-
-msgid "Make task '%s' start on %s"
-msgstr "Määra ülesande '%s' alguseks '%s'"
-
-msgid "Change task '%s' work to %s, duration to %s (%d)"
-msgstr "Määra ülesande '%s' %s'le, kestuseks %s (%d)"
-
-msgid "Could not open view plugin file '%s'\n"
-msgstr "Vaate pluginafaili '%s' pole võimalik avada\n"
+"Selle faili nime laiend pole Plaanija tavapärane laiend (%s). Kas soovid "
+"jätkata?"
