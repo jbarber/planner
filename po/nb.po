@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: planner 0.15\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-07-01 14:19+0200\n"
-"PO-Revision-Date: 2006-07-01 14:21+0200\n"
+"POT-Creation-Date: 2006-08-03 17:10+0200\n"
+"PO-Revision-Date: 2006-08-03 17:13+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian/Bokmål <i18n-nb@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
@@ -485,7 +485,7 @@ msgstr "Prosjektstyring"
 
 #: ../data/planner.schemas.in.h:1
 msgid "Display nonstandard days in Gantt view"
-msgstr ""
+msgstr "Vis ikke-standard dager i Gantt visning"
 
 #: ../data/planner.schemas.in.h:2
 msgid "Highlight critical path in Gantt view"
@@ -524,9 +524,8 @@ msgid "Whether printing of the Task view is enabled."
 msgstr "Om utskrift av oppgavevisningen er slått på."
 
 #: ../data/planner.schemas.in.h:11
-#, fuzzy
 msgid "Whether to display nonstandard days in the Gantt view."
-msgstr "Om oppgaver langs kritisk bane skal utheves i Gantt-visningen."
+msgstr "Om ikke-standard dager skal vises i Gantt-visningen."
 
 #: ../data/planner.schemas.in.h:12
 msgid ""
@@ -710,29 +709,29 @@ msgstr ""
 
 #: ../libplanner/mrp-task.c:1081
 msgid "Start to Finish relation type cannot be combined with other relations."
-msgstr ""
+msgstr "Start til slutt relasjonstype kan ikke kombineres med andre relasjoner."
 
 #: ../libplanner/mrp-task.c:1083
 msgid "Finish to Finish relation type cannot be combined with other relations."
-msgstr ""
+msgstr "Slutt til slutt relasjonstype kan ikke kombineres med andre relasjoner."
 
 #: ../libplanner/mrp-task.c:1099
 msgid ""
 "Start to Finish relation type cannot be combined with Start No Earlier Than "
 "constraint."
-msgstr ""
+msgstr "Start til slutt relasjonstype kan ikke kombineres med Start ikke tidligere enn begrensning."
 
 #: ../libplanner/mrp-task.c:1101
 msgid ""
 "Finish to Finish relation type cannot be combined with Start No Earlier Than "
 "constraint."
-msgstr ""
+msgstr "Slutt til slutt relasjonstype kan ikke kombineres med Start ikke tidligere enn begresning."
 
 #: ../libplanner/mrp-task.c:1124
 msgid ""
 "Start to Finish relation cannot be set. Predecessor starts on project start "
 "date."
-msgstr ""
+msgstr "Start til slutt relasjon kan ikke settes. Forløper starter på prosjektets startdato."
 
 #: ../libplanner/mrp-task-manager.c:2518
 msgid "Cannot add a predecessor, because it would result in a loop."
@@ -1047,21 +1046,21 @@ msgstr "Arbeid"
 msgid "Unnamed"
 msgstr "Uten navn"
 
-#: ../src/planner-gantt-row.c:2603 ../src/planner-gantt-row.c:2606
+#: ../src/planner-gantt-row.c:2605 ../src/planner-gantt-row.c:2608
 msgid "No name"
 msgstr "Uten navn"
 
-#: ../src/planner-gantt-row.c:2609
+#: ../src/planner-gantt-row.c:2611
 #, c-format
 msgid "Make task '%s' a predecessor of '%s'"
 msgstr "Gjør oppgave «%s» til en forgjenger av «%s»"
 
-#: ../src/planner-gantt-row.c:2657
+#: ../src/planner-gantt-row.c:2659
 #, c-format
 msgid "Change work to %s"
 msgstr "Endre arbeid til %s"
 
-#: ../src/planner-gantt-row.c:3228 ../src/planner-task-dialog.c:455
+#: ../src/planner-gantt-row.c:3230 ../src/planner-task-dialog.c:455
 #: ../src/planner-task-tree.c:257 ../src/planner-task-tree.c:947
 msgid "Edit task property"
 msgstr "Rediger egenskap for oppgave"
@@ -1198,7 +1197,7 @@ msgstr "Vi_s retningslinjer"
 
 #: ../src/planner-gantt-view.c:190 ../src/planner-task-view.c:162
 msgid "_Nonstandard Days"
-msgstr ""
+msgstr "_Ikke-standard dager"
 
 #. i18n: Label used for the sidebar. Please try to make it short and use
 #. * a linebreak if necessary/possible.
@@ -2283,18 +2282,16 @@ msgid "EDS Classification"
 msgstr "EDS-klassifisering"
 
 #: ../eds-backend/e-cal-backend-planner.c:310
-#, fuzzy
 msgid "Task access classification used by Evolution Data Server"
-msgstr "Identifikator brukt av Evolution Data Server til ressurser"
+msgstr "Klassifisering for tilgang til oppgaver brukt av Evolution Data Server"
 
 #: ../eds-backend/e-cal-backend-planner.c:319
 msgid "EDS URL"
 msgstr "EDS URL"
 
 #: ../eds-backend/e-cal-backend-planner.c:320
-#, fuzzy
 msgid "URL for a Task used by Evolution Data Server"
-msgstr "Oppdatert fra Evolution Data Server"
+msgstr "URL for en oppgave brukt av Evolution Data Server"
 
 #: ../eds-backend/e-cal-backend-planner.c:829
 msgid "Invalid server URI"
@@ -2311,4 +2308,4 @@ msgstr "Velg  Planner-fil"
 msgid ""
 "The filename extension of this file isn't the planner usual file extension (%"
 "s) Do you want to continue?"
-msgstr ""
+msgstr "Filtypen for denne filen er ikke den vanlige planner filtypen (%s). Vil du fortsette?"
