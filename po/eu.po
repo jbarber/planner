@@ -1,4 +1,3 @@
-# translation of eu.po to Basque
 # translation of planner.HEAD.po to Basque
 # This file is distributed under the same license as the PACKAGE package.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER.
@@ -9,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-07-11 12:13+0000\n"
+"POT-Creation-Date: 2006-08-08 16:23+0000\n"
 "PO-Revision-Date: 2006-07-11 12:20+0000\n"
 "Last-Translator: Iñaki Larrañaga Murgoitio <dooteo@euskalgnu.org>\n"
 "Language-Team: Basque <itzulpena@euskalgnu.org>\n"
@@ -17,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=ISO-8859-15\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.10.2\n"
-"Plural-Forms: Plural-Forms: Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "\n"
 
 #: ../data/glade/add-predecessor.glade.h:1
@@ -368,7 +367,8 @@ msgstr "Hautatu proiektu bat"
 
 #: ../data/glade/sql.glade.h:4
 msgid "The database contains the following projects. Select a project to open:"
-msgstr "Datu-baseak ondorengo proiektuak ditu. Hautatu proiektu bat irekitzeko:"
+msgstr ""
+"Datu-baseak ondorengo proiektuak ditu. Hautatu proiektu bat irekitzeko:"
 
 #: ../data/glade/sql.glade.h:5
 msgid "_Database:"
@@ -533,11 +533,13 @@ msgid "Whether to display nonstandard days in the Gantt view."
 msgstr "Egun ez-estandarrak Gantt ikuspegian bistaratu edo ez."
 
 #: ../data/planner.schemas.in.h:12
-msgid "Whether to highlight the tasks along the cricital path in the Gantt view."
+msgid ""
+"Whether to highlight the tasks along the cricital path in the Gantt view."
 msgstr "Zereginak Gantt ikuspegiko bide kritikoan zehaz nabarmendu edo ez."
 
 #: ../data/planner.schemas.in.h:13
-msgid "Whether to highlight the tasks along the cricital path in the Task view."
+msgid ""
+"Whether to highlight the tasks along the cricital path in the Task view."
 msgstr "Zereginak zereginen ikuspegiko bide kritikoan zehaz nabarmendu edo ez."
 
 #: ../data/planner.schemas.in.h:14
@@ -693,7 +695,8 @@ msgstr "'%s' datu-baserako konexioak huts egin du."
 
 #: ../libplanner/mrp-storage-sql.c:205
 msgid "Invalid SQL URI (must start with 'sql://' and contain '#')."
-msgstr "SQL URI baliogabea (honela hasi behar du: 'sql://', eta '#' eduki behar du)."
+msgstr ""
+"SQL URI baliogabea (honela hasi behar du: 'sql://', eta '#' eduki behar du)."
 
 #: ../libplanner/mrp-storage-sql.c:274
 msgid "Invalid SQL URI (invalid project id)."
@@ -704,7 +707,8 @@ msgid "Invalid SQL URI (no database name specified)."
 msgstr "SQL URI baliogabea (ez da datu-base izenik zehaztu)."
 
 #: ../libplanner/mrp-task.c:1070
-msgid "Could not add a predecessor relation, because the tasks are already related."
+msgid ""
+"Could not add a predecessor relation, because the tasks are already related."
 msgstr ""
 "Ezin izan da aurreko-erlaziorik gehitu; zereginak dagoeneko erlazionatuta "
 "daude."
@@ -1703,7 +1707,8 @@ msgstr "Ezin da %s datu-basean taularik sortu"
 #: ../src/planner-sql-plugin.c:617
 #, c-format
 msgid "Database %s is not setup for Planner. Do you want to do that?"
-msgstr "%s datu-basea ez dago Planner-entzako konfiguratua. Hori egitea nahi duzu?"
+msgstr ""
+"%s datu-basea ez dago Planner-entzako konfiguratua. Hori egitea nahi duzu?"
 
 #: ../src/planner-sql-plugin.c:658
 #, c-format
@@ -2187,7 +2192,8 @@ msgstr "Planner-en etxeko orria"
 
 #: ../src/planner-window.c:1500
 msgid "If you don't save, changes made the last minute will be discarded."
-msgstr "Ez baduzu gordetzen, azken minutuan egindako aldaketak galdu egingo dira."
+msgstr ""
+"Ez baduzu gordetzen, azken minutuan egindako aldaketak galdu egingo dira."
 
 #: ../src/planner-window.c:1505
 #, c-format
@@ -2198,12 +2204,14 @@ msgstr ""
 
 #: ../src/planner-window.c:1510
 msgid "If you don't save, changes made the last hour will be discarded."
-msgstr "Ez baduzu gordetzen, azken orduan egindako aldaketak galdu egingo dira."
+msgstr ""
+"Ez baduzu gordetzen, azken orduan egindako aldaketak galdu egingo dira."
 
 #: ../src/planner-window.c:1515
 #, c-format
 msgid "If you don't save, changes made the last %d hours will be discarded."
-msgstr "Ez baduzu gordetzen, azken %d orduetan egindako aldaketak galdu egingo dira."
+msgstr ""
+"Ez baduzu gordetzen, azken %d orduetan egindako aldaketak galdu egingo dira."
 
 #: ../src/planner-window.c:1522
 #, c-format
@@ -2283,8 +2291,7 @@ msgstr "EDS UID"
 #: ../eds-backend/e-cal-backend-planner.c:290
 msgid "Identifier used by Evolution Data Server for tasks"
 msgstr ""
-"Identifikatzailea Evolution Datu-Zerbitzariak zereginentzako erabiltzen "
-"duena"
+"Identifikatzailea Evolution Datu-Zerbitzariak zereginentzako erabiltzen duena"
 
 #: ../eds-backend/e-cal-backend-planner.c:299
 msgid "EDS Categories"
@@ -2300,7 +2307,9 @@ msgstr "EDS sailkapena"
 
 #: ../eds-backend/e-cal-backend-planner.c:310
 msgid "Task access classification used by Evolution Data Server"
-msgstr "Evolution Datu-Zerbitzariak erabiltzen duen sailkapena zereginetara sarbidetzeko"
+msgstr ""
+"Evolution Datu-Zerbitzariak erabiltzen duen sailkapena zereginetara "
+"sarbidetzeko"
 
 #: ../eds-backend/e-cal-backend-planner.c:319
 msgid "EDS URL"
@@ -2326,6 +2335,5 @@ msgid ""
 "The filename extension of this file isn't the planner usual file extension (%"
 "s) Do you want to continue?"
 msgstr ""
-"Fitxategiaren luzapena ez da planner-ek erabili ohi duena (%s). "
-"Jarraitzea nahi duzu?"
-
+"Fitxategiaren luzapena ez da planner-ek erabili ohi duena (%s). Jarraitzea "
+"nahi duzu?"
