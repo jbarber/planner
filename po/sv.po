@@ -1,8 +1,8 @@
 # Swedish messages for Planner.
 # Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 Free Software Foundation, Inc.
+# Daniel Nylander <po@danielnylander.se>, 2006.
 # Richard Hult <richard@imendio.com>, 2001, 2002, 2004.
 # Christian Rose <menthos@menthos.com>, 2002, 2003, 2004, 2005.
-# Daniel Nylander <po@danielnylander.se>, 2006.
 #
 # $Id$
 #
@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: planner\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-06-17 04:34+0200\n"
-"PO-Revision-Date: 2006-06-17 14:25+0100\n"
+"POT-Creation-Date: 2006-08-14 04:55+0200\n"
+"PO-Revision-Date: 2006-08-14 11:25+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
@@ -1058,22 +1058,22 @@ msgstr "Arbete"
 msgid "Unnamed"
 msgstr "Namnlös"
 
-#: ../src/planner-gantt-row.c:2603
-#: ../src/planner-gantt-row.c:2606
+#: ../src/planner-gantt-row.c:2605
+#: ../src/planner-gantt-row.c:2608
 msgid "No name"
 msgstr "Inget namn"
 
-#: ../src/planner-gantt-row.c:2609
+#: ../src/planner-gantt-row.c:2611
 #, c-format
 msgid "Make task '%s' a predecessor of '%s'"
 msgstr "Gör aktivitet \"%s\" till föregångare till \"%s\""
 
-#: ../src/planner-gantt-row.c:2657
+#: ../src/planner-gantt-row.c:2659
 #, c-format
 msgid "Change work to %s"
 msgstr "Ändra arbete till %s"
 
-#: ../src/planner-gantt-row.c:3228
+#: ../src/planner-gantt-row.c:3230
 #: ../src/planner-task-dialog.c:455
 #: ../src/planner-task-tree.c:257
 #: ../src/planner-task-tree.c:947
@@ -2324,6 +2324,53 @@ msgstr "Exportera projekt till en fil som passar Planner 0.11"
 #: ../src/planner-xml-planner-plugin.c:90
 msgid "Export"
 msgstr "Exportera"
+
+#: ../eds-backend/e-cal-backend-planner.c:289
+msgid "EDS UID"
+msgstr "EDS UID"
+
+#: ../eds-backend/e-cal-backend-planner.c:290
+msgid "Identifier used by Evolution Data Server for tasks"
+msgstr "Identifierare använd av Evolution dataserver för aktiviteter"
+
+#: ../eds-backend/e-cal-backend-planner.c:299
+msgid "EDS Categories"
+msgstr "EDS-kategorier"
+
+#: ../eds-backend/e-cal-backend-planner.c:300
+msgid "Categories for a task used by Evolution Data Server"
+msgstr "Kategorier för en aktivitet använd av Evolution dataserver"
+
+#: ../eds-backend/e-cal-backend-planner.c:309
+msgid "EDS Classification"
+msgstr "EDS-klassificering"
+
+#: ../eds-backend/e-cal-backend-planner.c:310
+msgid "Task access classification used by Evolution Data Server"
+msgstr "Aktivitetsåtkomstklassificering använd av Evolution dataserver"
+
+#: ../eds-backend/e-cal-backend-planner.c:319
+msgid "EDS URL"
+msgstr "EDS URL"
+
+#: ../eds-backend/e-cal-backend-planner.c:320
+msgid "URL for a Task used by Evolution Data Server"
+msgstr "URL för en aktivitet använd av Evolution dataserver"
+
+#: ../eds-backend/e-cal-backend-planner.c:829
+msgid "Invalid server URI"
+msgstr "Ogiltig server-URI"
+
+#. book_target = (EABConfigTargetSource *) data->target;
+#. source = book_target->source;
+#: ../eds-backend/planner-source/planner-source.c:125
+msgid "Select planner file"
+msgstr "Välj Planner-fil"
+
+#: ../eds-backend/planner-source/planner-source.c:157
+#, c-format
+msgid "The filename extension of this file isn't the planner usual file extension (%s) Do you want to continue?"
+msgstr "Filnamnsändelsen för denna fil är inte en vanlig filändelse i Planner (%s). Vill du fortsätta?"
 
 #~ msgid "Documents/Project Management"
 #~ msgstr "Dokument/Projekthantering"
