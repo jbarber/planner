@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: planner\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-07-27 08:05+0300\n"
-"PO-Revision-Date: 2006-07-27 08:07+0300\n"
+"POT-Creation-Date: 2006-09-15 16:13+0300\n"
+"PO-Revision-Date: 2006-09-15 16:17+0300\n"
 "Last-Translator: Ilkka Tuohela <hile@iki.fi>\n"
 "Language-Team: Finnish <gnome-fi-laatu@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -712,29 +712,35 @@ msgstr "Edeltäjäsuhdetta ei voi lisätä, koska tehtävät ovat jo yhteydessä
 
 #: ../libplanner/mrp-task.c:1081
 msgid "Start to Finish relation type cannot be combined with other relations."
-msgstr ""
+msgstr "Alusta-loppuun relaatiotyyppiä ei voi yhdistää muihin relaatioihin"
 
 #: ../libplanner/mrp-task.c:1083
 msgid "Finish to Finish relation type cannot be combined with other relations."
-msgstr ""
+msgstr "Lopusta-loppuun relaatiotyyppiä ei voi yhdistää muihin relaatioihin"
 
 #: ../libplanner/mrp-task.c:1099
 msgid ""
 "Start to Finish relation type cannot be combined with Start No Earlier Than "
 "constraint."
 msgstr ""
+"Alusta-loppuun relaatiotyyppiä ei voi yhdistää rajoitteeseen "
+"\"Älä aloita aikaisemmin kuin\""
 
 #: ../libplanner/mrp-task.c:1101
 msgid ""
 "Finish to Finish relation type cannot be combined with Start No Earlier Than "
 "constraint."
 msgstr ""
+"Lopusta-loppuun relaatiotyyppiä ei voi yhdistää rajoitteeseen "
+"\"Älä aloita aikaisemmin kuin\""
 
 #: ../libplanner/mrp-task.c:1124
 msgid ""
 "Start to Finish relation cannot be set. Predecessor starts on project start "
 "date."
 msgstr ""
+"Alusta loppuun-relaatiota ei voi asettaa. Edeltäjä alkaa projektin "
+"alkupäivänä."
 
 #: ../libplanner/mrp-task-manager.c:2518
 msgid "Cannot add a predecessor, because it would result in a loop."
@@ -1787,18 +1793,16 @@ msgid "Finish to start (FS)"
 msgstr "Lopusta alkuun (FS)"
 
 #: ../src/planner-task-dialog.c:1918
-#, fuzzy
 msgid "Finish to finish (FF)"
-msgstr "Lopusta alkuun (FS)"
+msgstr "Lopusta loppuun (FF)"
 
 #: ../src/planner-task-dialog.c:1919
 msgid "Start to start (SS)"
 msgstr "Alusta alkuun (SS)"
 
 #: ../src/planner-task-dialog.c:1920
-#, fuzzy
 msgid "Start to finish (SF)"
-msgstr "Alusta alkuun (SS)"
+msgstr "Alusta loppuun (SF)"
 
 #: ../src/planner-task-dialog.c:1975
 msgid "Can't add new predecessor. No task selected!"
@@ -2274,9 +2278,8 @@ msgid "EDS UID"
 msgstr "EDS UID"
 
 #: ../eds-backend/e-cal-backend-planner.c:290
-#, fuzzy
 msgid "Identifier used by Evolution Data Server for tasks"
-msgstr "Evolution Data Serverin käyttämä tunniste resursseille"
+msgstr "Evolution Data Serverin käyttämä tunniste tehtäville"
 
 #: ../eds-backend/e-cal-backend-planner.c:299
 msgid "EDS Categories"
@@ -2291,9 +2294,8 @@ msgid "EDS Classification"
 msgstr "EDS-luokittelu"
 
 #: ../eds-backend/e-cal-backend-planner.c:310
-#, fuzzy
 msgid "Task access classification used by Evolution Data Server"
-msgstr "Evolution Data Serverin käyttämä tunniste resursseille"
+msgstr "Evolution Data Serverin käyttämä luokittelu tehtäville"
 
 #: ../eds-backend/e-cal-backend-planner.c:319
 msgid "EDS URL"
@@ -2319,6 +2321,8 @@ msgid ""
 "The filename extension of this file isn't the planner usual file extension (%"
 "s) Do you want to continue?"
 msgstr ""
+"Tämän tiedoston tiedostopääte ei ole plannerin normaali päääte (%s). "
+"Haluatko jatkaa?"
 
 #~ msgid "Documents/Project Management"
 #~ msgstr "Asiakirjat/Projektinhallinta"
