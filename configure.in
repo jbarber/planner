@@ -83,7 +83,7 @@ dnl  -----------
 AC_ARG_ENABLE(database, [  --enable-database=[no/yes]      enable database support [default=no]], enable_database="$enableval", enable_database=no)
 
 if test "x$enable_database" = "xyes" ; then
-    PKG_CHECK_MODULES(GDA, libgda >= 1.0)
+    PKG_CHECK_MODULES(GDA, libgda-2.0 >= 1.0)
     use_gda=yes
 else
     use_gda=no

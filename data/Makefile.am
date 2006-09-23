@@ -10,6 +10,8 @@ schema_in_files = planner.schemas.in
 schema_DATA = $(schema_in_files:.schemas.in=.schemas)
 @INTLTOOL_SCHEMAS_RULE@
 
+man_MANS = planner.1
+
 if GCONF_SCHEMAS_INSTALL
 install-data-local:
 	GCONF_CONFIG_SOURCE=$(GCONF_SCHEMA_CONFIG_SOURCE) $(GCONFTOOL) --makefile-install-rule $(schema_DATA)
@@ -19,7 +21,8 @@ endif
 
 EXTRA_DIST = 				\
 	planner.desktop.in		\
-	$(schema_in_files)
+	$(schema_in_files)		\
+	$(man_MANS)
 
 CLEANFILES = $(desktop_DATA)
 DISTCLEANFILES = $(schema_DATA)

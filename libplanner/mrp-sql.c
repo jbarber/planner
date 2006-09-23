@@ -188,9 +188,10 @@ sql_execute_query (GdaConnection *con, gchar *query)
 {
 	GdaCommand   *cmd;
 	GdaDataModel *res;
+	GError       *error;
 
 	cmd = gda_command_new (query, GDA_COMMAND_TYPE_SQL, STOP_ON_ERR);
-	res = gda_connection_execute_single_command  (con, cmd, NULL);
+	res = gda_connection_execute_single_command  (con, cmd, NULL, &error);
 	gda_command_free (cmd);
 	return res;
 }
@@ -199,18 +200,18 @@ static const gchar *
 sql_get_last_error (GdaConnection *connection)
 {
 	GList       *list;
-	GdaError    *error;
+	GdaConnectionEvent   *error;
 	const gchar *error_txt;
 
 	g_return_val_if_fail (GDA_IS_CONNECTION (connection), 
 			      _("Can't connect to database server"));
 
-	list = (GList *) gda_connection_get_errors (connection);
+	list = (GList *) gda_connection_get_events (connection);
 
-	error = (GdaError *) g_list_last (list)->data;
+	error = (GdaConnectionEvent *) g_list_last (list)->data;
       
 	/* FIXME: Poor user, she won't get localized messages */
-	error_txt = gda_error_get_description (error);
+	error_txt = gda_connection_event_get_description (error);
 
 	return error_txt;
 }
@@ -2169,12 +2170,12 @@ mrp_sql_load_project (MrpStorageSQL *storage,
 	gda_config_save_data_source (dsn_name, 
                                      provider, 
                                      db_txt,
-                                     "planner project", login, password);
+                                     "planner project", login, password, FALSE);
 	g_free (db_txt);
 
 	client = gda_client_new ();
 
-	data->con = gda_client_open_connection (client, dsn_name, NULL, NULL, 0);
+	data->con = gda_client_open_connection (client, dsn_name, NULL, NULL, 0, error);
 
 	if (!GDA_IS_CONNECTION (data->con)) {
 		g_warning (_("Connection to database '%s' failed.\n"), database);
@@ -3613,12 +3614,12 @@ mrp_sql_save_project (MrpStorageSQL  *storage,
 	gda_config_save_data_source (dsn_name, 
                                      provider,
 				     db_txt,
-                                     "planner project", user, password);
+                                     "planner project", user, password, FALSE);
 	g_free (db_txt);
 
 	client = gda_client_new ();
 
-	data->con = gda_client_open_connection (client, dsn_name, NULL, NULL, 0);
+	data->con = gda_client_open_connection (client, dsn_name, NULL, NULL, 0, error);
 	
 	data->revision = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (data->project), 
 							     REVISION));

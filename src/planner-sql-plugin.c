@@ -106,9 +106,10 @@ sql_execute_query (GdaConnection *con, gchar *query)
 {
 	GdaCommand   *cmd;
 	GdaDataModel *res;
+	GError       *error;
 
 	cmd = gda_command_new (query, GDA_COMMAND_TYPE_SQL, STOP_ON_ERR);
-	res = gda_connection_execute_single_command  (con, cmd, NULL);
+	res = gda_connection_execute_single_command  (con, cmd, NULL, &error);
 	gda_command_free (cmd);
 	
 	return res;
@@ -118,19 +119,19 @@ static const gchar *
 sql_get_last_error (GdaConnection *connection)
 {
 	GList       *list;
-	GdaError    *error;
+	GdaConnectionEvent    *error;
 	const gchar *error_txt;
 
-	list = (GList *) gda_connection_get_errors (connection);
+	list = (GList *) gda_connection_get_events (connection);
 
 	if (list == NULL) {
 		return _("No errors reported.");
 	}
 
-	error = (GdaError *) g_list_last (list)->data;
+	error = (GdaConnectionEvent *) g_list_last (list)->data;
       
 	/* FIXME: Poor user, she won't get localized messages */
-	error_txt = gda_error_get_description (error);
+	error_txt = gda_connection_event_get_description (error);
 
 	return error_txt;
 }
@@ -594,6 +595,7 @@ create_database (const gchar   *dsn_name,
 	/* FIXME: In postgresql we use template1 as the connection database */
 	gchar             *init_database = "template1";
 	gchar             *query;
+	GError            *error;
 
 	dsn = gda_config_find_data_source (dsn_name);
 	cnc_string_orig = dsn->cnc_string;
@@ -606,7 +608,7 @@ create_database (const gchar   *dsn_name,
 	gda_config_save_data_source_info (dsn);
 
 	client = gda_client_new ();
-	conn = gda_client_open_connection (client, dsn_name, NULL, NULL, 0);
+	conn = gda_client_open_connection (client, dsn_name, NULL, NULL, 0, &error);
 	if (conn == NULL) {
 		g_warning ("Can't connect to database server in order to check/create the database: %s", cnc_string_orig);
 	} else {
@@ -650,8 +652,9 @@ sql_get_tested_connection (const gchar   *dsn_name,
 {
 	GdaConnection *conn;
 	gchar         *str;
+	GError        *error;
 
-	conn = gda_client_open_connection (client, dsn_name, NULL, NULL, 0);
+	conn = gda_client_open_connection (client, dsn_name, NULL, NULL, 0, &error);
 
 	if (conn == NULL) {
 		if (!create_database (dsn_name, host, db_name, plugin)) {
@@ -660,7 +663,7 @@ sql_get_tested_connection (const gchar   *dsn_name,
 			show_error_dialog (plugin, str);
 			conn = NULL;
 		} else {
-			conn = gda_client_open_connection (client, dsn_name, NULL, NULL, 0);
+			conn = gda_client_open_connection (client, dsn_name, NULL, NULL, 0, &error);
 		}
 	}
 
@@ -715,7 +718,7 @@ sql_plugin_retrieve_project_id (PlannerPlugin *plugin,
 	gda_config_save_data_source (dsn_name, 
                                      provider, 
                                      db_txt,
-                                     "planner project", login, password);
+                                     "planner project", login, password, FALSE);
 	g_free (db_txt);
 
 	client = gda_client_new ();
@@ -1113,7 +1116,7 @@ sql_plugin_save (GtkAction *action,
 	gda_config_save_data_source (dsn_name, 
                                      provider, 
                                      db_txt,
-                                     "planner project", login, password);
+                                     "planner project", login, password, FALSE);
 	g_free (db_txt);
 	client = gda_client_new ();
 	conn = sql_get_tested_connection (dsn_name, server, database, client, plugin);
