@@ -187,7 +187,7 @@ static GdaDataModel *
 sql_execute_query (GdaConnection *con, gchar *query)
 {
 	GdaCommand   *cmd;
-	GdaDataModel *res;
+	GdaDataModel *res = NULL;
 	GError       *error;
 
 	cmd = gda_command_new (query, GDA_COMMAND_TYPE_SQL, STOP_ON_ERR);
@@ -3325,7 +3325,7 @@ sql_write_resources (SQLData *data)
 static gboolean
 sql_write_tasks (SQLData *data)
 {
-	GdaDataModel    *res;
+	GdaDataModel    *res = NULL;
 	gchar           *query;	
 	GList           *tasks, *l;
 	gchar           *name, *note;	       
