@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: planner HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-05-31 00:35+0900\n"
-"PO-Revision-Date: 2006-05-31 00:32+0900\n"
+"POT-Creation-Date: 2006-09-30 00:10+0900\n"
+"PO-Revision-Date: 2006-09-30 00:10+0900\n"
 "Last-Translator: Takeshi AIHANA <aihana@gnome.gr.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "MIME-Version: 1.0\n"
@@ -44,7 +44,7 @@ msgid ""
 "The selected day type has the following working hours:"
 msgstr ""
 "\n"
-"選択した日には以下の作業時間帯があります:"
+"選択した日には次の時間帯が割り当てられています:"
 
 #: ../data/glade/calendar-dialog.glade.h:3
 #: ../data/glade/column-dialog.glade.h:1 ../data/glade/task-dialog.glade.h:2
@@ -245,7 +245,7 @@ msgstr "種類(_T):"
 
 #: ../data/glade/project-properties.glade.h:1
 msgid "Custom"
-msgstr "カスタム"
+msgstr "その他"
 
 #: ../data/glade/project-properties.glade.h:2
 msgid "Edit Project Phases"
@@ -472,14 +472,6 @@ msgstr "作業(_W):"
 msgid "Insert Task"
 msgstr "タスクの挿入"
 
-#: ../data/mime/planner.keys.in.h:1
-msgid "Documents/Project Management"
-msgstr "ドキュメント/プロジェクト管理"
-
-#: ../data/mime/planner.keys.in.h:2
-msgid "Project Plan"
-msgstr "プロジェクトの計画"
-
 #: ../data/mime/planner.xml.in.h:1
 msgid "Planner project plan"
 msgstr "Planner プロジェクト計画"
@@ -554,7 +546,7 @@ msgstr "ユーザ・インタフェースでどのビューを表示するかで
 
 #: ../libegg/recent-files/egg-recent-vfs-utils.c:90
 msgid " (invalid Unicode)"
-msgstr " (不正な Unicode)"
+msgstr " (Unicode が間違っています)"
 
 #: ../libplanner/mrp-day.c:54
 msgid "Working"
@@ -599,7 +591,7 @@ msgstr "デフォルト"
 #: ../libplanner/mrp-project.c:716
 #, c-format
 msgid "Invalid URI: '%s'"
-msgstr "不正な URI : '%s'"
+msgstr "正しくない URI : '%s'"
 
 #: ../libplanner/mrp-project.c:759
 #, c-format
@@ -612,7 +604,7 @@ msgstr "このバージョンの Planner は SQL ストレージをサポート�
 
 #: ../libplanner/mrp-project.c:817
 msgid "Invalid URI."
-msgstr "URI が不正です。"
+msgstr "URI が間違っています。"
 
 #: ../libplanner/mrp-project.c:958
 #, c-format
@@ -658,21 +650,21 @@ msgstr "コスト"
 msgid "None"
 msgstr "なし"
 
-#: ../libplanner/mrp-sql.c:206
+#: ../libplanner/mrp-sql.c:207
 msgid "Can't connect to database server"
 msgstr "データベース・サーバへ接続できません"
 
 #. Give up.
-#: ../libplanner/mrp-sql.c:297 ../src/planner-sql-plugin.c:196
+#: ../libplanner/mrp-sql.c:298 ../src/planner-sql-plugin.c:197
 msgid "Invalid Unicode"
-msgstr "不正な Unicode"
+msgstr "Unicode が間違っています"
 
-#: ../libplanner/mrp-sql.c:2180
+#: ../libplanner/mrp-sql.c:2181
 #, c-format
 msgid "Connection to database '%s' failed.\n"
 msgstr "データベース '%s' への接続に失敗しました。\n"
 
-#: ../libplanner/mrp-sql.c:2185
+#: ../libplanner/mrp-sql.c:2186
 #, c-format
 msgid ""
 "Connection to database '%s' failed.\n"
@@ -681,12 +673,12 @@ msgstr ""
 "データベース '%s' への接続に失敗しました。\n"
 "%s"
 
-#: ../libplanner/mrp-sql.c:2193
+#: ../libplanner/mrp-sql.c:2194
 #, c-format
 msgid "BEGIN command failed %s."
 msgstr "BEGIN コマンドに失敗しました %s"
 
-#: ../libplanner/mrp-sql.c:2361
+#: ../libplanner/mrp-sql.c:2362
 #, c-format
 msgid ""
 "The project '%s' has been changed by the user '%s' since you opened it. Do "
@@ -695,7 +687,7 @@ msgstr ""
 "プロジェクト '%s' はあなたがオープンした以降, ユーザ '%s' によって変更されて"
 "います. それでも保存しますか?"
 
-#: ../libplanner/mrp-sql.c:3630
+#: ../libplanner/mrp-sql.c:3631
 #, c-format
 msgid "Connection to database '%s' failed."
 msgstr "データベース '%s' への接続に失敗しました。"
@@ -1063,21 +1055,21 @@ msgstr "作業"
 msgid "Unnamed"
 msgstr "名前なし"
 
-#: ../src/planner-gantt-row.c:2603 ../src/planner-gantt-row.c:2606
+#: ../src/planner-gantt-row.c:2605 ../src/planner-gantt-row.c:2608
 msgid "No name"
 msgstr "名前なし"
 
-#: ../src/planner-gantt-row.c:2609
+#: ../src/planner-gantt-row.c:2611
 #, c-format
 msgid "Make task '%s' a predecessor of '%s'"
 msgstr "Make task '%s' a predecessor of '%s'"
 
-#: ../src/planner-gantt-row.c:2657
+#: ../src/planner-gantt-row.c:2659
 #, c-format
 msgid "Change work to %s"
 msgstr "作業を %s に変更"
 
-#: ../src/planner-gantt-row.c:3228 ../src/planner-task-dialog.c:455
+#: ../src/planner-gantt-row.c:3230 ../src/planner-task-dialog.c:455
 #: ../src/planner-task-tree.c:257 ../src/planner-task-tree.c:947
 msgid "Edit task property"
 msgstr "タスク・プロパティの編集"
@@ -1658,7 +1650,7 @@ msgstr "データベースから開く..."
 msgid "Open a project from a database"
 msgstr "データベースからプロジェクトを開きます"
 
-#: ../src/planner-sql-plugin.c:96 ../src/planner-sql-plugin.c:1103
+#: ../src/planner-sql-plugin.c:96 ../src/planner-sql-plugin.c:1106
 msgid "Save to Database"
 msgstr "データベースへ保存"
 
@@ -1666,11 +1658,11 @@ msgstr "データベースへ保存"
 msgid "Save the current project to a database"
 msgstr "現在編集中のプロジェクトをデータベースへ保存します"
 
-#: ../src/planner-sql-plugin.c:127
+#: ../src/planner-sql-plugin.c:128
 msgid "No errors reported."
 msgstr "エラーは報告されませんでした。"
 
-#: ../src/planner-sql-plugin.c:493
+#: ../src/planner-sql-plugin.c:494
 #, c-format
 msgid ""
 "Database %s needs to be upgraded from version %s to version %s.\n"
@@ -1680,11 +1672,11 @@ msgstr ""
 "す。\n"
 "アップグレードする前にバックアップを作成しておいて下さい。"
 
-#: ../src/planner-sql-plugin.c:500
+#: ../src/planner-sql-plugin.c:501
 msgid "Upgrade"
 msgstr "アップグレード"
 
-#: ../src/planner-sql-plugin.c:514
+#: ../src/planner-sql-plugin.c:515
 #, c-format
 msgid ""
 "Could not upgrade database %s.\n"
@@ -1699,44 +1691,44 @@ msgstr ""
 "データベースのエラー: \n"
 "%s"
 
-#: ../src/planner-sql-plugin.c:555
+#: ../src/planner-sql-plugin.c:556
 #, c-format
 msgid "Can't create tables in database %s"
 msgstr "データベース %s の中にテーブルを生成できません"
 
-#: ../src/planner-sql-plugin.c:617
+#: ../src/planner-sql-plugin.c:619
 #, c-format
 msgid "Database %s is not setup for Planner. Do you want to do that?"
 msgstr ""
 "データベース %s は Planner 用ではありません。Planner 向けに設定しますか？"
 
-#: ../src/planner-sql-plugin.c:658
+#: ../src/planner-sql-plugin.c:661
 #, c-format
 msgid "Connection to database '%s@%s' failed."
 msgstr "データベース '%s@%s' への接続に失敗しました。"
 
-#: ../src/planner-sql-plugin.c:669
+#: ../src/planner-sql-plugin.c:672
 #, c-format
 msgid "Test to tables in database '%s' failed."
 msgstr "データベース '%s' 内のテーブルのチェックに失敗しました。"
 
-#: ../src/planner-sql-plugin.c:767
+#: ../src/planner-sql-plugin.c:770
 msgid "ID"
 msgstr "ID"
 
-#: ../src/planner-sql-plugin.c:775
+#: ../src/planner-sql-plugin.c:778
 msgid "Project"
 msgstr "プロジェクト"
 
-#: ../src/planner-sql-plugin.c:783
+#: ../src/planner-sql-plugin.c:786
 msgid "Phase"
 msgstr "フェーズ"
 
-#: ../src/planner-sql-plugin.c:791
+#: ../src/planner-sql-plugin.c:794
 msgid "Revision"
 msgstr "リビジョン"
 
-#: ../src/planner-sql-plugin.c:991
+#: ../src/planner-sql-plugin.c:994
 msgid "Open from Database"
 msgstr "データベースから開く"
 
@@ -2279,3 +2271,54 @@ msgstr "プロジェクトを Planner 0.11 系に対応したファイルへ出�
 #: ../src/planner-xml-planner-plugin.c:90
 msgid "Export"
 msgstr "エキスポート"
+
+#: ../eds-backend/e-cal-backend-planner.c:289
+msgid "EDS UID"
+msgstr "EDS の UID"
+
+#: ../eds-backend/e-cal-backend-planner.c:290
+msgid "Identifier used by Evolution Data Server for tasks"
+msgstr "Evolution データ・サーバがタスクに付与する識別子です"
+
+#: ../eds-backend/e-cal-backend-planner.c:299
+msgid "EDS Categories"
+msgstr "EDS のカテゴリ"
+
+#: ../eds-backend/e-cal-backend-planner.c:300
+msgid "Categories for a task used by Evolution Data Server"
+msgstr "Evolution データ・サーバが使用するタスクのカテゴリです"
+
+#: ../eds-backend/e-cal-backend-planner.c:309
+msgid "EDS Classification"
+msgstr "EDS の区分"
+
+#: ../eds-backend/e-cal-backend-planner.c:310
+msgid "Task access classification used by Evolution Data Server"
+msgstr "Evolution データ・サーバが使用するタスクへアクセスするための区分です"
+
+#: ../eds-backend/e-cal-backend-planner.c:319
+msgid "EDS URL"
+msgstr "EDS の URL"
+
+#: ../eds-backend/e-cal-backend-planner.c:320
+msgid "URL for a Task used by Evolution Data Server"
+msgstr "Evolution データ・サーバが使用するタスクの URL です"
+
+#: ../eds-backend/e-cal-backend-planner.c:829
+msgid "Invalid server URI"
+msgstr "URI が間違っています"
+
+#. book_target = (EABConfigTargetSource *) data->target;
+#. source = book_target->source;
+#: ../eds-backend/planner-source/planner-source.c:125
+msgid "Select planner file"
+msgstr "Planner ファイルの選択"
+
+#: ../eds-backend/planner-source/planner-source.c:157
+#, c-format
+msgid ""
+"The filename extension of this file isn't the planner usual file extension (%"
+"s) Do you want to continue?"
+msgstr ""
+"このファイルの拡張子が Planner で使用するもの (%s) ではありませんが、続行しま"
+"すか？"
