@@ -8,15 +8,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: planner.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-08-15 05:59+0200\n"
-"PO-Revision-Date: 2006-06-05 02:48+0200\n"
+"POT-Creation-Date: 2006-10-19 06:31+0200\n"
+"PO-Revision-Date: 2006-10-22 00:22+0200\n"
 "Last-Translator: Gabor Kelemen <kelemeng@gnome.hu>\n"
 "Language-Team: Hungarian <gnome@gnome.hu>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.2\n"
-"Plural-Forms:   nplurals=2; plural=(n != 1);\n"
+"Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 
 #: ../data/glade/add-predecessor.glade.h:1
 msgid "Add Predecessor"
@@ -533,16 +533,12 @@ msgid "Whether to display nonstandard days in the Gantt view."
 msgstr "Megjelenjenek-e nem szabványos napok a Gantt-nézetben?"
 
 #: ../data/planner.schemas.in.h:12
-msgid ""
-"Whether to highlight the tasks along the cricital path in the Gantt view."
-msgstr ""
-"Kiemelje-e a kritikus útvonal mentén lévő feladatokat a Gantt-nézetben?"
+msgid "Whether to highlight the tasks along the cricital path in the Gantt view."
+msgstr "Kiemelje-e a kritikus útvonal mentén lévő feladatokat a Gantt-nézetben?"
 
 #: ../data/planner.schemas.in.h:13
-msgid ""
-"Whether to highlight the tasks along the cricital path in the Task view."
-msgstr ""
-"Kiemelje-e a kritikus útvonal mentén lévő feladatokat a Feladatok nézetben?"
+msgid "Whether to highlight the tasks along the cricital path in the Task view."
+msgstr "Kiemelje-e a kritikus útvonal mentén lévő feladatokat a Feladatok nézetben?"
 
 #: ../data/planner.schemas.in.h:14
 msgid "Which view to display in the user interface."
@@ -653,21 +649,21 @@ msgstr "Költség"
 msgid "None"
 msgstr "Nincs"
 
-#: ../libplanner/mrp-sql.c:206
+#: ../libplanner/mrp-sql.c:207
 msgid "Can't connect to database server"
 msgstr "Nem lehetséges a kapcsolódás az adatbázis kiszolgálóhoz."
 
 #. Give up.
-#: ../libplanner/mrp-sql.c:297 ../src/planner-sql-plugin.c:196
+#: ../libplanner/mrp-sql.c:298 ../src/planner-sql-plugin.c:197
 msgid "Invalid Unicode"
 msgstr "Érvénytelen Unicode"
 
-#: ../libplanner/mrp-sql.c:2180
+#: ../libplanner/mrp-sql.c:2181
 #, c-format
 msgid "Connection to database '%s' failed.\n"
 msgstr "A(z) '%s' adatbázishoz való kapcsolódás sikertelen.\n"
 
-#: ../libplanner/mrp-sql.c:2185
+#: ../libplanner/mrp-sql.c:2186
 #, c-format
 msgid ""
 "Connection to database '%s' failed.\n"
@@ -676,12 +672,12 @@ msgstr ""
 "A(z) '%s' adatbázishoz való kapcsolódás sikertelen.\n"
 "%s"
 
-#: ../libplanner/mrp-sql.c:2193
+#: ../libplanner/mrp-sql.c:2194
 #, c-format
 msgid "BEGIN command failed %s."
 msgstr "A BEGIN parancs elhibázta %s-t."
 
-#: ../libplanner/mrp-sql.c:2361
+#: ../libplanner/mrp-sql.c:2362
 #, c-format
 msgid ""
 "The project '%s' has been changed by the user '%s' since you opened it. Do "
@@ -690,7 +686,7 @@ msgstr ""
 "A(z) '%s' projektet '%s' felhasználó megváltoztatta, mióta Ön megnyitotta. "
 "Mindenképpen menti?"
 
-#: ../libplanner/mrp-sql.c:3630
+#: ../libplanner/mrp-sql.c:3631
 #, c-format
 msgid "Connection to database '%s' failed."
 msgstr "A(z) '%s' adatbázishoz való kapcsolódás sikertelen."
@@ -710,8 +706,7 @@ msgid "Invalid SQL URI (no database name specified)."
 msgstr "Érvénytelen SQL URI (nincs megadva adatbázisnév)."
 
 #: ../libplanner/mrp-task.c:1070
-msgid ""
-"Could not add a predecessor relation, because the tasks are already related."
+msgid "Could not add a predecessor relation, because the tasks are already related."
 msgstr ""
 "Nem lehet hozzáadni egy előzményrelációt, mert a feladatok már relációban "
 "vannak."
@@ -1499,7 +1494,7 @@ msgstr "Erőforrásnaptár szerkesztése"
 
 #: ../src/planner-resource-dialog.c:576
 msgid "Edit resource note"
-msgstr "Erőforrásmegjegyzés szerkesztése"
+msgstr "Erőforrás-megjegyzés szerkesztése"
 
 #: ../src/planner-resource-dialog.c:643
 msgid "Edit resource cost"
@@ -1656,7 +1651,7 @@ msgstr "Megnyitás adatbázisból..."
 msgid "Open a project from a database"
 msgstr "Projekt megnyitása adatbázisból"
 
-#: ../src/planner-sql-plugin.c:96 ../src/planner-sql-plugin.c:1103
+#: ../src/planner-sql-plugin.c:96 ../src/planner-sql-plugin.c:1106
 msgid "Save to Database"
 msgstr "Mentés adatbázisba"
 
@@ -1664,11 +1659,11 @@ msgstr "Mentés adatbázisba"
 msgid "Save the current project to a database"
 msgstr "A jelenlegi projekt mentése egy adatbázisba"
 
-#: ../src/planner-sql-plugin.c:127
+#: ../src/planner-sql-plugin.c:128
 msgid "No errors reported."
 msgstr "Nem történt hiba."
 
-#: ../src/planner-sql-plugin.c:493
+#: ../src/planner-sql-plugin.c:494
 #, c-format
 msgid ""
 "Database %s needs to be upgraded from version %s to version %s.\n"
@@ -1677,11 +1672,11 @@ msgstr ""
 "A(z) %s adatbázist frissíteni kell %s verzióról %s verzióra.\n"
 "Kérem a frissítés előtt készítsen biztonsági másolatot az adatbázisról."
 
-#: ../src/planner-sql-plugin.c:500
+#: ../src/planner-sql-plugin.c:501
 msgid "Upgrade"
 msgstr "Frissítés"
 
-#: ../src/planner-sql-plugin.c:514
+#: ../src/planner-sql-plugin.c:515
 #, c-format
 msgid ""
 "Could not upgrade database %s.\n"
@@ -1696,44 +1691,43 @@ msgstr ""
 "Adatbázishiba:\n"
 "%s"
 
-#: ../src/planner-sql-plugin.c:555
+#: ../src/planner-sql-plugin.c:556
 #, c-format
 msgid "Can't create tables in database %s"
 msgstr "Nem lehet táblákat létrehozni a(z) %s adatbázisban"
 
-#: ../src/planner-sql-plugin.c:617
+#: ../src/planner-sql-plugin.c:619
 #, c-format
 msgid "Database %s is not setup for Planner. Do you want to do that?"
-msgstr ""
-"A(z) %s adatbázis nincs beállítva a Planner-hez. Meg szeretné ezt tenni?"
+msgstr "A(z) %s adatbázis nincs beállítva a Planner-hez. Meg szeretné ezt tenni?"
 
-#: ../src/planner-sql-plugin.c:658
+#: ../src/planner-sql-plugin.c:661
 #, c-format
 msgid "Connection to database '%s@%s' failed."
 msgstr "A(z) '%s@%s' adatbázishoz való kapcsolódás sikertelen."
 
-#: ../src/planner-sql-plugin.c:669
+#: ../src/planner-sql-plugin.c:672
 #, c-format
 msgid "Test to tables in database '%s' failed."
 msgstr "A(z) '%s' adatbázis tábláinak tesztelése sikertelen."
 
-#: ../src/planner-sql-plugin.c:767
+#: ../src/planner-sql-plugin.c:770
 msgid "ID"
 msgstr "Azonosító"
 
-#: ../src/planner-sql-plugin.c:775
+#: ../src/planner-sql-plugin.c:778
 msgid "Project"
 msgstr "Projekt"
 
-#: ../src/planner-sql-plugin.c:783
+#: ../src/planner-sql-plugin.c:786
 msgid "Phase"
 msgstr "Fázis"
 
-#: ../src/planner-sql-plugin.c:791
+#: ../src/planner-sql-plugin.c:794
 msgid "Revision"
 msgstr "Revízió"
 
-#: ../src/planner-sql-plugin.c:991
+#: ../src/planner-sql-plugin.c:994
 msgid "Open from Database"
 msgstr "Megnyitás adatbázisból"
 
@@ -2278,64 +2272,51 @@ msgid "Export"
 msgstr "Exportálás"
 
 #: ../eds-backend/e-cal-backend-planner.c:289
-#, fuzzy
 msgid "EDS UID"
-msgstr "EDS"
+msgstr "EDS UID"
 
 #: ../eds-backend/e-cal-backend-planner.c:290
-#, fuzzy
 msgid "Identifier used by Evolution Data Server for tasks"
-msgstr "Az Evolution adatkiszolgáló által erőforrásokhoz használt azonosító"
+msgstr "Az Evolution adatkiszolgáló által feladatokhoz használt azonosító"
 
 #: ../eds-backend/e-cal-backend-planner.c:299
 msgid "EDS Categories"
-msgstr ""
+msgstr "EDS kategóriák"
 
 #: ../eds-backend/e-cal-backend-planner.c:300
-#, fuzzy
 msgid "Categories for a task used by Evolution Data Server"
-msgstr "Erőforrások importálása az Evolution adatkiszolgálótól"
+msgstr "Az Evolution adatkiszolgáló által feladatra használt kategóriák"
 
 #: ../eds-backend/e-cal-backend-planner.c:309
 msgid "EDS Classification"
-msgstr ""
+msgstr "EDS osztályozás"
 
 #: ../eds-backend/e-cal-backend-planner.c:310
-#, fuzzy
 msgid "Task access classification used by Evolution Data Server"
-msgstr "Az Evolution adatkiszolgáló által erőforrásokhoz használt azonosító"
+msgstr "Az Evolution adatkiszolgáló által feladat elérési osztályozáshoz használt azonosító"
 
 #: ../eds-backend/e-cal-backend-planner.c:319
-#, fuzzy
 msgid "EDS URL"
-msgstr "EDS"
+msgstr "EDS URL"
 
 #: ../eds-backend/e-cal-backend-planner.c:320
-#, fuzzy
 msgid "URL for a Task used by Evolution Data Server"
-msgstr "Frissítve az Evolution adatkiszolgálótól"
+msgstr "Az Evolution adatkiszolgáló által feladathoz használt URL"
 
 #: ../eds-backend/e-cal-backend-planner.c:829
-#, fuzzy
 msgid "Invalid server URI"
-msgstr "Érvénytelen URI."
+msgstr "Érvénytelen kiszolgáló URI"
 
 #. book_target = (EABConfigTargetSource *) data->target;
 #. source = book_target->source;
 #: ../eds-backend/planner-source/planner-source.c:125
-#, fuzzy
 msgid "Select planner file"
-msgstr "Planner-fájlok"
+msgstr "Planner fájl kiválasztása"
 
 #: ../eds-backend/planner-source/planner-source.c:157
 #, c-format
 msgid ""
 "The filename extension of this file isn't the planner usual file extension (%"
 "s) Do you want to continue?"
-msgstr ""
+msgstr "A fájl fájlnév-kiterjesztése nem azonos a Planner szokásos fájlnév-kiterjesztésével (%s). Folytatni kívánja?"
 
-#~ msgid "Documents/Project Management"
-#~ msgstr "Dokumentum/Projektmenedzsment"
-
-#~ msgid "Project Plan"
-#~ msgstr "Projektterv"
