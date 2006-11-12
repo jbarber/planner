@@ -1175,7 +1175,8 @@ gantt_row_draw (GnomeCanvasItem *item,
 	gint                 rx2, ry2;
 	gint                 cx1, cy1, cx2, cy2; 
 
-	GList               *unit_ivals, *cal_ivals, *cur_unit, *cur_cal;
+	GList               *unit_ivals, *cal_ivals, *cur_unit;
+	GList		    *cur_cal = NULL;
 	GdkColor             color;
 	gint                 x_start, x_end, y_dumb, is_a_gap, is_a_subgap;
 	MrpUnitsInterval    *unit_ival, ival_buf;
@@ -1224,6 +1225,7 @@ gantt_row_draw (GnomeCanvasItem *item,
 	day_cur = 0;
 
 	cur_unit = (GList *)NULL;
+	cur_cal = (GList *)NULL;
 
 	row = PLANNER_GANTT_ROW (item);
 	priv = row->priv;
