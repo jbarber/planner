@@ -594,6 +594,25 @@ gantt_background_draw (GnomeCanvasItem *item,
 		}
 	}
 
+	/* Guidelines */
+	if (priv->show_guidelines) {
+		i2w_dx = 0.0;
+		i2w_dy = 0.0;
+		gnome_canvas_item_i2w (item, &i2w_dx, &i2w_dy);
+		gnome_canvas_w2c (item->canvas,
+				  0 + i2w_dx,
+			  0 + i2w_dy,
+				  &xx,
+				  &yy);
+		while (yy < height+y)
+		{
+			if (yy >= y)
+				gdk_draw_line (drawable,priv->guidelines_gc,0,yy-y,width,yy-y);
+			yy += priv->row_height;
+		}
+
+	}
+	
 	/* Time line for project start .*/
 	wx1 = priv->project_start * hscale;
 	gnome_canvas_w2c (item->canvas, wx1, 0, &cx1, NULL);
@@ -655,23 +674,6 @@ gantt_background_draw (GnomeCanvasItem *item,
 			       cy1 - snap - DASH_LENGTH - y,
 			       cx1 - x,
 			       cy2 + DASH_LENGTH - y);
-	}
-	if (priv->show_guidelines) {
-		i2w_dx = 0.0;
-		i2w_dy = 0.0;
-		gnome_canvas_item_i2w (item, &i2w_dx, &i2w_dy);
-		gnome_canvas_w2c (item->canvas,
-				  0 + i2w_dx,
-			  0 + i2w_dy,
-				  &xx,
-				  &yy);
-		while (yy < height+y)
-		{
-			if (yy >= y)
-				gdk_draw_line (drawable,priv->guidelines_gc,0,yy-y,width,yy-y);
-			yy += priv->row_height;
-		}
-
 	}
 }
 
