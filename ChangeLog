@@ -1,3 +1,12 @@
+2006-11-25 Kurt Maute <Kurt@Maute.us>
+	* acinclude.m4:  added -Wno-return-type for compile with database
+	enabled
+	* configure.in
+	* libplanner/mrp-sql.c
+	* src/planner-sql-plugin.c:
+	  patch related to bug #353213 - added #ifdefs to allow compile with
+	  libgda 1 or 2, up to libgda-1.9.102
+
 2006-11-18  Djihed Afifi  <djihed@gmail.com>
 
 	* configure.in: Added Arabic.

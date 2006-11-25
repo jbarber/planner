@@ -188,10 +188,16 @@ sql_execute_query (GdaConnection *con, gchar *query)
 {
 	GdaCommand   *cmd;
 	GdaDataModel *res = NULL;
+#ifdef HAVE_GDA2
 	GError       *error;
+#endif
 
 	cmd = gda_command_new (query, GDA_COMMAND_TYPE_SQL, STOP_ON_ERR);
-	res = gda_connection_execute_single_command  (con, cmd, NULL, &error);
+#ifdef HAVE_GDA2
+       	res = gda_connection_execute_single_command  (con, cmd, NULL, &error);
+#else
+       	res = gda_connection_execute_single_command  (con, cmd, NULL);
+#endif
 	gda_command_free (cmd);
 	return res;
 }
@@ -199,6 +205,7 @@ sql_execute_query (GdaConnection *con, gchar *query)
 static const gchar *
 sql_get_last_error (GdaConnection *connection)
 {
+#ifdef HAVE_GDA2
 	GList       *list;
 	GdaConnectionEvent   *error;
 	const gchar *error_txt;
@@ -212,7 +219,21 @@ sql_get_last_error (GdaConnection *connection)
       
 	/* FIXME: Poor user, she won't get localized messages */
 	error_txt = gda_connection_event_get_description (error);
+#else
+	GList       *list;
+	GdaError    *error;
+	const gchar *error_txt;
 
+	g_return_val_if_fail (GDA_IS_CONNECTION (connection), 
+			      _("Can't connect to database server"));
+
+	list = (GList *) gda_connection_get_errors (connection);
+
+	error = (GdaError *) g_list_last (list)->data;
+      
+	/* FIXME: Poor user, she won't get localized messages */
+	error_txt = gda_error_get_description (error);
+#endif
 	return error_txt;
 }
 
@@ -2167,15 +2188,26 @@ mrp_sql_load_project (MrpStorageSQL *storage,
 	data->root_task = mrp_task_new ();
 
 	db_txt = g_strdup_printf ("HOST=%s;DATABASE=%s", host, database);
+#ifdef HAVE_GDA2
 	gda_config_save_data_source (dsn_name, 
                                      provider, 
                                      db_txt,
                                      "planner project", login, password, FALSE);
+#else
+	gda_config_save_data_source (dsn_name, 
+                                     provider, 
+                                     db_txt,
+                                     "planner project", login, password);
+#endif
 	g_free (db_txt);
 
 	client = gda_client_new ();
 
+#ifdef HAVE_GDA2
 	data->con = gda_client_open_connection (client, dsn_name, NULL, NULL, 0, error);
+#else
+	data->con = gda_client_open_connection (client, dsn_name, NULL, NULL, 0);
+#endif
 
 	if (!GDA_IS_CONNECTION (data->con)) {
 		g_warning (_("Connection to database '%s' failed.\n"), database);
@@ -3611,15 +3643,26 @@ mrp_sql_save_project (MrpStorageSQL  *storage,
 	data->project = storage->project;
 
 	db_txt = g_strdup_printf ("HOST=%s;DATABASE=%s", host, database);
+#ifdef HAVE_GDA2
 	gda_config_save_data_source (dsn_name, 
                                      provider,
 				     db_txt,
                                      "planner project", user, password, FALSE);
+#else
+	gda_config_save_data_source (dsn_name, 
+                                     provider,
+				     db_txt,
+                                     "planner project", user, password);
+#endif
 	g_free (db_txt);
 
 	client = gda_client_new ();
 
-	data->con = gda_client_open_connection (client, dsn_name, NULL, NULL, 0, error);
+#ifdef HAVE_GDA2
+       	data->con = gda_client_open_connection (client, dsn_name, NULL, NULL, 0, error);
+#else
+       	data->con = gda_client_open_connection (client, dsn_name, NULL, NULL, 0);
+#endif
 	
 	data->revision = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (data->project), 
 							     REVISION));
