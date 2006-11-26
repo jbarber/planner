@@ -1,4 +1,18 @@
 ==============
+Planner 0.14.2
+==============
+
+New features and fixes
+======================
+* fix bug #353232 - patch to raise majic priority, fixing nautilus behavior when clicking on a planner file
+* fix bug #368186 - patch to paint guide lines behind project start date rather than on top - contributed by Arthur Petitpierre
+* added -Wno-return-type for compile with database enabled
+* patch related to bug #353213 - added #ifdefs to allow compile with libgda 1 or 2, up to libgda-1.9.102
+* Added Arabic - contributed by Djihed Afifi
+* fix for bug 358415 crash in gantt view, contributed by Arthur Petitpierre and mdpoole trolius org.
+
+
+==============
 Planner 0.14.1
 ==============
 
