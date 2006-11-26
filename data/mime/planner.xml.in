@@ -2,7 +2,7 @@
 <mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
    <mime-type type="application/x-planner">
      <_comment>Planner project plan</_comment>
-     <magic priority="50">
+     <magic priority="60">
        <match type="string" value="mrproject-version" offset="20:140"/>
      </magic>
      <glob pattern="*.planner"/>
