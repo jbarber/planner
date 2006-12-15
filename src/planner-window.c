@@ -1502,9 +1502,13 @@ window_confirm_exit_run (PlannerWindow *window)
 	}
 	else if (hours == 0) {
 		time_str = 
-			g_strdup_printf (_("If you don't save, changes made "
+			g_strdup_printf (ngettext(
+					   "If you don't save, changes made "
+					   "the last %d minute will be "
+					   "discarded.",
+					   "If you don't save, changes made "
 					   "the last %d minutes will be "
-					   "discarded."), minutes);
+					   "discarded.", minutes), minutes);
 	}
 	else if (hours == 1) {
 		time_str = g_strdup (_("If you don't save, changes made "
@@ -1512,9 +1516,12 @@ window_confirm_exit_run (PlannerWindow *window)
 				       "discarded."));
 	} else {
 		time_str = 
-			g_strdup_printf (_("If you don't save, changes made "
+			g_strdup_printf (ngettext("If you don't save, changes made "
+					   "the last %d hour will be "
+					   "discarded.",
+					   "If you don't save, changes made "
 					   "the last %d hours will be "
-					   "discarded."), hours);
+					   "discarded.", hours), hours);
 	}
 
 	name = window_get_name (window);
