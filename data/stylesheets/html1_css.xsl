@@ -143,6 +143,7 @@ span.note {
  * Gantt
  */
 div.gantt-empty-begin, div.gantt-empty-end, div.gantt-complete-done, div.gantt-complete-notdone, div.gantt-summary {
+ overflow: hidden;
  clear: none;
  float: left; 
  height: 0.75em;
