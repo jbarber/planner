@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-08-07 13:24+0200\n"
-"PO-Revision-Date: 2006-08-07 13:29+0200\n"
+"POT-Creation-Date: 2006-12-22 12:28+0100\n"
+"PO-Revision-Date: 2006-12-22 12:29+0100\n"
 "Last-Translator: Francisco Javier F. Serrador <serrador@cvs.gnome.org>\n"
 "Language-Team: Spanish <traductores@es.gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -533,13 +533,15 @@ msgid "Whether to display nonstandard days in the Gantt view."
 msgstr "Indica si se deben mostrar los días no estándar en la vista de Gantt."
 
 #: ../data/planner.schemas.in.h:12
-msgid "Whether to highlight the tasks along the cricital path in the Gantt view."
+msgid ""
+"Whether to highlight the tasks along the cricital path in the Gantt view."
 msgstr ""
 "Indica si se deben resaltar las tareas junto con la ruta crítica en la vista "
 "de Gantt."
 
 #: ../data/planner.schemas.in.h:13
-msgid "Whether to highlight the tasks along the cricital path in the Task view."
+msgid ""
+"Whether to highlight the tasks along the cricital path in the Task view."
 msgstr ""
 "Indica si se debe resaltar las tareas a lo largo de la ruta crítica en la "
 "vista de tareas."
@@ -604,7 +606,8 @@ msgstr "No se pudo encontrar un módulo apropiado para cargar «%s»"
 
 #: ../libplanner/mrp-project.c:780 ../libplanner/mrp-project.c:1064
 msgid "No support for SQL storage built into this version of Planner."
-msgstr "No hay soporte para almacenamiento SQL compilado en esta versión de Planner."
+msgstr ""
+"No hay soporte para almacenamiento SQL compilado en esta versión de Planner."
 
 #: ../libplanner/mrp-project.c:817
 msgid "Invalid URI."
@@ -617,7 +620,8 @@ msgstr "No es posible encontrar el escritor de archivos identificado por «%s»"
 
 #: ../libplanner/mrp-project.c:1021
 msgid "Couldn't find a suitable file module for loading project"
-msgstr "No se pudo encontrar un módulo de archivo adecuado para cargar el proyecto"
+msgstr ""
+"No se pudo encontrar un módulo de archivo adecuado para cargar el proyecto"
 
 #: ../libplanner/mrp-property.c:365
 msgid "Text"
@@ -653,21 +657,21 @@ msgstr "Coste"
 msgid "None"
 msgstr "Nada"
 
-#: ../libplanner/mrp-sql.c:206
+#: ../libplanner/mrp-sql.c:214 ../libplanner/mrp-sql.c:228
 msgid "Can't connect to database server"
 msgstr "No se puede conectar con el servidor de la base de datos"
 
 #. Give up.
-#: ../libplanner/mrp-sql.c:297 ../src/planner-sql-plugin.c:196
+#: ../libplanner/mrp-sql.c:319 ../src/planner-sql-plugin.c:220
 msgid "Invalid Unicode"
 msgstr "Unicode inválido"
 
-#: ../libplanner/mrp-sql.c:2180
+#: ../libplanner/mrp-sql.c:2213
 #, c-format
 msgid "Connection to database '%s' failed.\n"
 msgstr "No es posible conectar con la base de datos «%s».\n"
 
-#: ../libplanner/mrp-sql.c:2185
+#: ../libplanner/mrp-sql.c:2218
 #, c-format
 msgid ""
 "Connection to database '%s' failed.\n"
@@ -676,12 +680,12 @@ msgstr ""
 "No es posible conectar con la base de datos «%s».\n"
 "%s"
 
-#: ../libplanner/mrp-sql.c:2193
+#: ../libplanner/mrp-sql.c:2226
 #, c-format
 msgid "BEGIN command failed %s."
 msgstr "Ha fallado el comando BEGIN %s."
 
-#: ../libplanner/mrp-sql.c:2361
+#: ../libplanner/mrp-sql.c:2394
 #, c-format
 msgid ""
 "The project '%s' has been changed by the user '%s' since you opened it. Do "
@@ -690,7 +694,7 @@ msgstr ""
 "El proyecto «%s» lo ha modificado el usuario «%s» desde la última vez que "
 "usted lo abrió. ¿Quiere guardarlo de todas formas?"
 
-#: ../libplanner/mrp-sql.c:3630
+#: ../libplanner/mrp-sql.c:3674
 #, c-format
 msgid "Connection to database '%s' failed."
 msgstr "Ha fallado la conexión con la base de datos «%s»."
@@ -708,7 +712,8 @@ msgid "Invalid SQL URI (no database name specified)."
 msgstr "URI SQL inválida (no hay especificado un nombre de base de datos)."
 
 #: ../libplanner/mrp-task.c:1070
-msgid "Could not add a predecessor relation, because the tasks are already related."
+msgid ""
+"Could not add a predecessor relation, because the tasks are already related."
 msgstr ""
 "No se puede añadir una relación predecesora, debido a que las tareas ya se "
 "encuentran relacionadas."
@@ -936,7 +941,8 @@ msgstr "UID del Servidor de Datos de Evolution"
 
 #: ../src/planner-eds-plugin.c:924
 msgid "Identifier used by Evolution Data Server for resources"
-msgstr "Identificador que usa el Servidor de Datos de Evolution para los recursos"
+msgstr ""
+"Identificador que usa el Servidor de Datos de Evolution para los recursos"
 
 #: ../src/planner-format.c:149
 #, c-format
@@ -1037,11 +1043,11 @@ msgstr "minutos"
 
 #. i18n: project start, the date format is described in
 #. * libmrproject/docs/DateFormat.
-#: ../src/planner-gantt-background.c:625
+#: ../src/planner-gantt-background.c:644
 msgid "%Y %b %d"
 msgstr "%d %b %Y"
 
-#: ../src/planner-gantt-background.c:627
+#: ../src/planner-gantt-background.c:646
 msgid "Project start"
 msgstr "Comienzo del proyecto"
 
@@ -1058,25 +1064,25 @@ msgstr "Trabajo"
 
 #: ../src/planner-gantt-print.c:542 ../src/planner-gantt-row.c:752
 #: ../src/planner-html-plugin.c:125 ../src/planner-task-tree.c:1571
-#: ../src/planner-window.c:1981
+#: ../src/planner-window.c:1988
 msgid "Unnamed"
 msgstr "Sin nombre"
 
-#: ../src/planner-gantt-row.c:2605 ../src/planner-gantt-row.c:2608
+#: ../src/planner-gantt-row.c:2607 ../src/planner-gantt-row.c:2610
 msgid "No name"
 msgstr "Sin nombre"
 
-#: ../src/planner-gantt-row.c:2611
+#: ../src/planner-gantt-row.c:2613
 #, c-format
 msgid "Make task '%s' a predecessor of '%s'"
 msgstr "Hacer la tarea «%s» predecesora de «%s»"
 
-#: ../src/planner-gantt-row.c:2659
+#: ../src/planner-gantt-row.c:2661
 #, c-format
 msgid "Change work to %s"
 msgstr "Cambiar trabajo a %s"
 
-#: ../src/planner-gantt-row.c:3230 ../src/planner-task-dialog.c:455
+#: ../src/planner-gantt-row.c:3232 ../src/planner-task-dialog.c:455
 #: ../src/planner-task-tree.c:257 ../src/planner-task-tree.c:947
 msgid "Edit task property"
 msgstr "Editar propiedad de la tarea"
@@ -1306,7 +1312,7 @@ msgstr "Exportar a HTML"
 msgid "Show result in browser"
 msgstr "Mostrar el resultado en un navegador"
 
-#: ../src/planner-html-plugin.c:173 ../src/planner-window.c:1690
+#: ../src/planner-html-plugin.c:173 ../src/planner-window.c:1697
 #: ../src/planner-xml-planner-plugin.c:124
 #, c-format
 msgid "File \"%s\" exists, do you want to overwrite it?"
@@ -1657,7 +1663,7 @@ msgstr "Abrir desde base de datos…"
 msgid "Open a project from a database"
 msgstr "Abre un proyecto desde una base de datos"
 
-#: ../src/planner-sql-plugin.c:96 ../src/planner-sql-plugin.c:1103
+#: ../src/planner-sql-plugin.c:96 ../src/planner-sql-plugin.c:1152
 msgid "Save to Database"
 msgstr "Guardar a base de datos"
 
@@ -1665,11 +1671,11 @@ msgstr "Guardar a base de datos"
 msgid "Save the current project to a database"
 msgstr "Guarda el proyecto actual en una base de datos"
 
-#: ../src/planner-sql-plugin.c:127
+#: ../src/planner-sql-plugin.c:135 ../src/planner-sql-plugin.c:150
 msgid "No errors reported."
 msgstr "No se informó de errores."
 
-#: ../src/planner-sql-plugin.c:493
+#: ../src/planner-sql-plugin.c:517
 #, c-format
 msgid ""
 "Database %s needs to be upgraded from version %s to version %s.\n"
@@ -1679,11 +1685,11 @@ msgstr ""
 "s.\n"
 "Haga una copia de resguardo de la base de datos antes de la modernización."
 
-#: ../src/planner-sql-plugin.c:500
+#: ../src/planner-sql-plugin.c:524
 msgid "Upgrade"
 msgstr "Modernizar"
 
-#: ../src/planner-sql-plugin.c:514
+#: ../src/planner-sql-plugin.c:538
 #, c-format
 msgid ""
 "Could not upgrade database %s.\n"
@@ -1698,43 +1704,44 @@ msgstr ""
 "Error de la base de datos: \n"
 "%s"
 
-#: ../src/planner-sql-plugin.c:555
+#: ../src/planner-sql-plugin.c:579
 #, c-format
 msgid "Can't create tables in database %s"
 msgstr "No se pueden crear tablas en la base de datos %s"
 
-#: ../src/planner-sql-plugin.c:617
+#: ../src/planner-sql-plugin.c:648
 #, c-format
 msgid "Database %s is not setup for Planner. Do you want to do that?"
-msgstr "La base de datos %s no está preparada para Planner. ¿Qué quiere hacer ahora?"
+msgstr ""
+"La base de datos %s no está preparada para Planner. ¿Qué quiere hacer ahora?"
 
-#: ../src/planner-sql-plugin.c:658
+#: ../src/planner-sql-plugin.c:696
 #, c-format
 msgid "Connection to database '%s@%s' failed."
 msgstr "La conexión con la base de datos «%s@%s» falló."
 
-#: ../src/planner-sql-plugin.c:669
+#: ../src/planner-sql-plugin.c:711
 #, c-format
 msgid "Test to tables in database '%s' failed."
 msgstr "La prueba de tablas en la base de datos «%s» falló."
 
-#: ../src/planner-sql-plugin.c:767
+#: ../src/planner-sql-plugin.c:816
 msgid "ID"
 msgstr "ID"
 
-#: ../src/planner-sql-plugin.c:775
+#: ../src/planner-sql-plugin.c:824
 msgid "Project"
 msgstr "Proyecto"
 
-#: ../src/planner-sql-plugin.c:783
+#: ../src/planner-sql-plugin.c:832
 msgid "Phase"
 msgstr "Fase"
 
-#: ../src/planner-sql-plugin.c:791
+#: ../src/planner-sql-plugin.c:840
 msgid "Revision"
 msgstr "Revisión"
 
-#: ../src/planner-sql-plugin.c:991
+#: ../src/planner-sql-plugin.c:1040
 msgid "Open from Database"
 msgstr "Abrir desde base de datos"
 
@@ -1814,7 +1821,8 @@ msgstr "Empezar para terminar (ET)"
 
 #: ../src/planner-task-dialog.c:1975
 msgid "Can't add new predecessor. No task selected!"
-msgstr "No se puede añadir un predecesor nuevo. No ha seleccionado ninguna tarea."
+msgstr ""
+"No se puede añadir un predecesor nuevo. No ha seleccionado ninguna tarea."
 
 #: ../src/planner-task-dialog.c:2463
 msgid "Change..."
@@ -2033,7 +2041,7 @@ msgstr "Abre un proyecto"
 msgid "_Import"
 msgstr "_Importar"
 
-#: ../src/planner-window.c:240 ../src/planner-window.c:1560
+#: ../src/planner-window.c:240 ../src/planner-window.c:1567
 msgid "_Save"
 msgstr "_Guardar"
 
@@ -2190,38 +2198,46 @@ msgstr "La página web de Planner"
 msgid "If you don't save, changes made the last minute will be discarded."
 msgstr "Si no guarda, los cambios hechos en el último minuto se descartarán."
 
-#: ../src/planner-window.c:1505
+#: ../src/planner-window.c:1506
 #, c-format
-msgid "If you don't save, changes made the last %d minutes will be discarded."
-msgstr "Si no guarda, los cambios hechos en los últimos %d minutos se descartarán."
+msgid "If you don't save, changes made the last %d minute will be discarded."
+msgid_plural ""
+"If you don't save, changes made the last %d minutes will be discarded."
+msgstr[0] "Si no guarda, los cambios hechos en el último %d minuto se descartarán."
+msgstr[1] ""
+"Si no guarda, los cambios hechos en los últimos %d minutos se descartarán."
 
-#: ../src/planner-window.c:1510
+#: ../src/planner-window.c:1514
 msgid "If you don't save, changes made the last hour will be discarded."
 msgstr "Si no guarda, los cambios hechos en la última hora se descartarán."
 
-#: ../src/planner-window.c:1515
+#: ../src/planner-window.c:1519
 #, c-format
-msgid "If you don't save, changes made the last %d hours will be discarded."
-msgstr "Si no guarda, los cambios hechos en las últimas %d horas se descartarán."
+msgid "If you don't save, changes made the last %d hour will be discarded."
+msgid_plural ""
+"If you don't save, changes made the last %d hours will be discarded."
+msgstr[0] "Si no guarda, los cambios hechos en la última %d hora se descartarán."
+msgstr[1] ""
+"Si no guarda, los cambios hechos en las últimas %d horas se descartarán."
 
-#: ../src/planner-window.c:1522
+#: ../src/planner-window.c:1529
 #, c-format
 msgid "Save changes to document '%s' before closing?"
 msgstr "¿Desea guardar los cambios del documento «%s» antes de cerrar?"
 
-#: ../src/planner-window.c:1547
+#: ../src/planner-window.c:1554
 msgid "C_lose without saving"
 msgstr "C_errar sin guardar"
 
-#: ../src/planner-window.c:1553
+#: ../src/planner-window.c:1560
 msgid "_Cancel"
 msgstr "_Cancelar"
 
-#: ../src/planner-window.c:1652
+#: ../src/planner-window.c:1659
 msgid "Save a File"
 msgstr "Guardar un archivo"
 
-#: ../src/planner-window.c:1938
+#: ../src/planner-window.c:1945
 msgid ""
 "You have opened a file that was saved with an old version of Planner.\n"
 "\n"
@@ -2251,11 +2267,11 @@ msgstr ""
 "el elemento del menú «Eliminar todos los impedimentos» en el menú «Editar»."
 
 #. Hack.
-#: ../src/planner-window.c:1973
+#: ../src/planner-window.c:1980
 msgid "Unnamed database project"
 msgstr "Base de datos del proyecto sin nombre"
 
-#: ../src/planner-window.c:2087
+#: ../src/planner-window.c:2094
 #, c-format
 msgid "Open '%s'"
 msgstr "Abrir «%s»"
@@ -2282,7 +2298,8 @@ msgstr "UID de EDS"
 
 #: ../eds-backend/e-cal-backend-planner.c:290
 msgid "Identifier used by Evolution Data Server for tasks"
-msgstr "Identificador que usa el Servidor de Datos de Evolution para las tareas"
+msgstr ""
+"Identificador que usa el Servidor de Datos de Evolution para las tareas"
 
 #: ../eds-backend/e-cal-backend-planner.c:299
 msgid "EDS Categories"
@@ -2326,4 +2343,3 @@ msgid ""
 msgstr ""
 "La extensión del nombre de archivo no es la extensión usual de Planner (%s). "
 "¿Quiere continuar?"
-
