@@ -1,5 +1,10 @@
 2006-12-27 Jordi Mas i Hernàndez <jordimash@gmail.com>
 
+	*  planner-html-plugin.c: fixes bug #388454. We were freeing a 
+	memory block that was already free.
+
+2006-12-27 Jordi Mas i Hernàndez <jordimash@gmail.com>
+
 	* data/stylesheets/html1_gantt.xsl: I18N for strings and dates 
 	* data/stylesheets/html1_resources.xsl: I18N for strings and dates
 	* data/stylesheets/html1_tasks.xsl: I18N for strings and dates

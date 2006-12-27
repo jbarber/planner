@@ -198,7 +198,6 @@ html_plugin_export (GtkAction *action,
 
 		break;
 	case GTK_RESPONSE_CANCEL:
-		g_free (filename);
 		gtk_widget_destroy (filechooser);
 		break;
 	}
