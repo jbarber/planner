@@ -30,9 +30,13 @@
 #include <libxslt/xsltutils.h>
 #include <libexslt/exslt.h>
 #include <string.h>
+#include <libxslt/extensions.h>
+#include <libxml/xpath.h>
+#include <libxml/xpathInternals.h>
 #include <libplanner/mrp-file-module.h>
 #include <libplanner/mrp-private.h>
 #include "libplanner/mrp-paths.h"
+#include <libplanner/mrp-time.h>
 
 void            init                     (MrpFileModule   *module,
 					  MrpApplication  *application);
@@ -46,6 +50,67 @@ static gboolean xml_planner_pre012_write (MrpFileWriter   *writer,
 					  const gchar     *uri,
 					  gboolean         force,
 					  GError         **error);
+
+
+static void xslt_module_gettext		(xmlXPathParserContextPtr ctxt,	
+					int argc);
+
+static void xslt_module_getdate		(xmlXPathParserContextPtr ctxt,	
+					int argc);
+
+static void xslt_module_shutdown	(xsltTransformContextPtr ctxt, 
+					const xmlChar *uri, 
+					void *data);
+
+static void * xslt_module_init		(xsltTransformContextPtr ctxt, 
+					const xmlChar *uri);
+
+extern mrptime    			mrp_time_from_tm (struct tm *tm);
+
+
+void
+xslt_module_gettext (xmlXPathParserContextPtr ctxt, int argc)
+{
+	xmlXPathObjectPtr name = valuePop(ctxt);
+	name = xmlXPathConvertString(name);
+	valuePush (ctxt, xmlXPathNewString ((const xmlChar *) gettext (name->stringval)));
+}
+
+void
+xslt_module_getdate (xmlXPathParserContextPtr ctxt, int argc)
+{
+	gchar *svalue;
+	struct tm ts;
+	mrptime time;
+
+	xmlXPathObjectPtr name = valuePop (ctxt);
+	time_t t = name->floatval;
+
+	ts = *localtime(&t);
+	time = mrp_time_from_tm (&ts);
+
+	/* Translators: Example output: October 9, 2006 */
+	svalue = mrp_time_format (gettext("%B %e, %Y"), time);
+	valuePush (ctxt, xmlXPathNewString ((const xmlChar *)svalue));
+	g_free (svalue);
+}
+
+void
+xslt_module_shutdown (xsltTransformContextPtr ctxt, const xmlChar *uri, void *data)
+{
+}
+
+void  *
+xslt_module_init (xsltTransformContextPtr ctxt, const xmlChar *uri)
+{
+	xsltRegisterExtFunction (ctxt, (const xmlChar *)"gettext", uri,
+		xslt_module_gettext);
+
+	xsltRegisterExtFunction (ctxt, (const xmlChar *)"getdate", uri,
+		xslt_module_getdate);
+
+	return NULL;    
+}
 
 				 
 static gboolean
@@ -71,6 +136,9 @@ html_write (MrpFileWriter  *writer,
         xmlLoadExtDtdDefaultValue = 1;
         exsltRegisterAll ();
 
+	xsltRegisterExtModule((const xmlChar *)"http://www.gnu.org/software/gettext/",	
+                                 xslt_module_init, xslt_module_shutdown);
+	
 	filename = mrp_paths_get_stylesheet_dir ("planner2html.xsl");
         stylesheet = xsltParseStylesheetFile (filename);
 	g_free (filename);

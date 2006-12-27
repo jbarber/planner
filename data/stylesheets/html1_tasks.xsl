@@ -3,7 +3,8 @@
 <xsl:stylesheet version="1.0"
               xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                   xmlns="http://www.w3.org/1999/xhtml"
-             xmlns:date="http://exslt.org/dates-and-times">
+             xmlns:date="http://exslt.org/dates-and-times"
+	     xmlns:I18N="http://www.gnu.org/software/gettext/" extension-element-prefixes="I18N">
 
 <!--
   Copyright (C) 2004-2005 Imendio AB
@@ -40,19 +41,19 @@
 <xsl:template match="tasks">
   <xsl:variable name="hasproperties" select="boolean (count(//task/properties/property[@value!='']))"/>
   <xsl:variable name="hasnotes" select="boolean (count(//task[@note!='']))"/>
-  <h2><a name="tasks">Tasks</a></h2>
+  <h2><a name="tasks"><xsl:value-of select="I18N:gettext('Tasks')"/></a></h2>
 
   <div class="scroll-div">
   <table cellspacing="0" cellpadding="0" border="1">
     <tr class="header" align="left">
-      <th><span>WBS</span></th>
-      <th><span>Name</span></th>
-      <th><span>Start</span></th>
-      <th><span>Finish</span></th>
-      <th><span>Work</span></th>
-      <th><span>Priority</span></th>
-      <th><span>Complete</span></th>
-      <th><span>Cost</span></th>
+      <th><span><xsl:value-of select="I18N:gettext('WBS')"/></span></th>
+      <th><span><xsl:value-of select="I18N:gettext('Name')"/></span></th>
+      <th><span><xsl:value-of select="I18N:gettext('Start')"/></span></th>
+      <th><span><xsl:value-of select="I18N:gettext('Finish')"/></span></th>
+      <th><span><xsl:value-of select="I18N:gettext('Work')"/></span></th>
+      <th><span><xsl:value-of select="I18N:gettext('Priority')"/></span></th>
+      <th><span><xsl:value-of select="I18N:gettext('Complete')"/></span></th>
+      <th><span><xsl:value-of select="I18N:gettext('Cost')"/></span></th>
       <xsl:if test="$hasnotes">
         <th><span>Notes</span></th>
       </xsl:if>

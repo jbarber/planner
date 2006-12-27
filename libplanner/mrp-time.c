@@ -52,7 +52,6 @@ static const gchar *short_day_names[7];
 static const gchar *day_names[7];
 
 static struct tm *mrp_time_to_tm   (mrptime    t);
-static mrptime    mrp_time_from_tm (struct tm *tm);
 
 
 
@@ -162,7 +161,7 @@ mrp_time_debug_print (mrptime t)
  * 
  * Return value: #mrptime value.
  **/
-static mrptime
+mrptime
 mrp_time_from_tm (struct tm *tm)
 {
 	gchar   *old_tz;

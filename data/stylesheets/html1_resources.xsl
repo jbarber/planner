@@ -3,7 +3,8 @@
 <xsl:stylesheet version="1.0"
               xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                   xmlns="http://www.w3.org/1999/xhtml"
-             xmlns:date="http://exslt.org/dates-and-times">
+             xmlns:date="http://exslt.org/dates-and-times"
+	     xmlns:I18N="http://www.gnu.org/software/gettext/" extension-element-prefixes="I18N">	
 
 <!--**************************************************************************
     *
@@ -22,17 +23,17 @@
   <xsl:variable name="hasnotes"
     select="boolean (count(//resource[@note!='']))"/>
   
-  <h2><a name="resources">Resources</a></h2>
+  <h2><a name="resources"><xsl:value-of select="I18N:gettext('Resources')"/></a></h2>
 
   <div class="scroll-div">
   <table cellspacing="0" cellpadding="0" border="1" width="100%">
     <tr class="header" align="left">
-      <th><span>Name</span></th>
-      <th><span>Short name</span></th>
-      <th><span>Type</span></th>
-      <th><span>Group</span></th>
-      <th><span>Email</span></th>
-      <th><span>Cost</span></th>
+      <th><span><xsl:value-of select="I18N:gettext('Name')"/></span></th>
+      <th><span><xsl:value-of select="I18N:gettext('Short name')"/></span></th>
+      <th><span><xsl:value-of select="I18N:gettext('Type')"/></span></th>
+      <th><span><xsl:value-of select="I18N:gettext('Group')"/></span></th>
+      <th><span><xsl:value-of select="I18N:gettext('Email')"/></span></th>
+      <th><span><xsl:value-of select="I18N:gettext('Cost')"/></span></th>
       <xsl:if test="$hasnotes">
         <th><span>Notes</span></th>
       </xsl:if>
@@ -80,8 +81,8 @@
           <td>
             <span>
 			  <xsl:choose>
-                <xsl:when test="@type = 1">Work</xsl:when>
-                <xsl:otherwise>Material</xsl:otherwise>
+                <xsl:when test="@type = 1"><xsl:value-of select="I18N:gettext('Work')"/></xsl:when>
+                <xsl:otherwise><xsl:value-of select="I18N:gettext('Material')"/></xsl:otherwise>
               </xsl:choose>
 			</span> 
           </td>

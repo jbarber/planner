@@ -84,6 +84,7 @@ GParamSpec * mrp_param_spec_time         (const gchar  *name,
 					  const gchar  *nick,
 					  const gchar  *blurb,
 					  GParamFlags   flags);
+mrptime      mrp_time_from_tm 		 (struct tm *tm);
 
 
 /*

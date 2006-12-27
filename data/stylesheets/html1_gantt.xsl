@@ -3,7 +3,8 @@
 <xsl:stylesheet version="1.0"
               xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                   xmlns="http://www.w3.org/1999/xhtml"
-             xmlns:date="http://exslt.org/dates-and-times">
+             xmlns:date="http://exslt.org/dates-and-times"
+	     xmlns:I18N="http://www.gnu.org/software/gettext/" extension-element-prefixes="I18N">	
 
 <!--
   Copyright (c) 2004-2005 Imendio AB
@@ -18,7 +19,7 @@
   <xsl:choose>
     <xsl:when test="date:day-in-week($date) = 2 and $days >= 7">
       <th align="center" colspan="7">
-	Week <xsl:value-of select="date:week-in-year($date) + 1"/>, <xsl:value-of select="date:year($date)"/>
+	<xsl:value-of select="I18N:gettext('Week')"/>&nbsp;<xsl:value-of select="date:week-in-year($date) + 1"/>, <xsl:value-of select="date:year($date)"/>
       </th>
       <xsl:if test="not($days = 7)">
         <xsl:call-template name="create-week-row">
@@ -65,7 +66,7 @@
 </xsl:template>
 
 <xsl:template name="gantt">
-  <h2><a name="gantt">Gantt Chart</a></h2>
+  <h2><a name="gantt"><xsl:value-of select="I18N:gettext('Gantt Chart')"/></a></h2>
  
   <xsl:variable name="tmpdays" select="ceiling($projlength div 86400)"/>
 
@@ -83,9 +84,9 @@
   <div class="no-scroll-div">
   <table cellspacing="0" cellpadding="0" border="1">
     <tr class="header" align="left">
-      <th><span>WBS</span></th>
-      <th><span>Name</span></th>
-      <th><span>Work</span></th>
+      <th><span><xsl:value-of select="I18N:gettext('WBS')"/></span></th>
+      <th><span><xsl:value-of select="I18N:gettext('Name')"/></span></th>
+      <th><span><xsl:value-of select="I18N:gettext('Work')"/></span></th>
     </tr>
     <tr class="header">
       <th>&nbsp;</th>
