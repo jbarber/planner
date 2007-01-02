@@ -1782,10 +1782,15 @@ task_manager_calculate_task_finish (MrpTaskManager *manager,
 				}
 
 				if (effort + delta >= work) {
-					finish = t1 + floor (0.5 + (work - effort) / unit_ival->units * 100.0);
-
-					/* Subtract the spill. */
-					*duration -= floor (0.5 + (effort + delta - work) / unit_ival->units * 100.0);
+					/* Subtract the spill to duration. */
+					if (unit_ival->units) {
+						finish = t1 + floor (0.5 + (work - effort) / unit_ival->units * 100.0);
+						*duration -= floor (0.5 + (effort + delta - work) / unit_ival->units * 100.0);
+					} else {
+						finish = t1 + floor (work - effort);
+						*duration -= floor (0.5 + (effort + delta - work));
+					}
+					
 					unit_ival->start = t1;
 					unit_ival->end = finish;
 					unit_ivals_tot = g_list_prepend (unit_ivals_tot, unit_ival);
@@ -1937,10 +1942,14 @@ task_manager_calculate_task_start_from_finish (MrpTaskManager *manager,
 				*duration += (t2 - t1);
 				
 				if (effort + delta >= work) {
-					start = t2 - floor (0.5 + (work - effort) / unit_ival->units * 100.0);
-
-					/* Subtract the spill. */
-					*duration -= floor (0.5 + (effort + delta - work) / unit_ival->units * 100.0);
+					/* Subtract the spill to duration. */
+					if (unit_ival->units) {
+						start = t2 - floor (0.5 + (work - effort) / unit_ival->units * 100.0);
+						*duration -= floor (0.5 + (effort + delta - work) / unit_ival->units * 100.0);
+					} else {
+						start = t2 - floor (0.5 + (work - effort));
+						*duration -= floor (0.5 + (effort + delta - work));
+					}						
 					goto done;
 				}
 			}
