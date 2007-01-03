@@ -197,6 +197,33 @@ static const GtkToggleActionEntry toggle_entries[] = {
 G_DEFINE_TYPE (PlannerGanttView, planner_gantt_view, PLANNER_TYPE_VIEW);
 
 
+static gboolean
+gantt_view_chart_scroll_event (GtkWidget * gki, GdkEventScroll * event, PlannerGanttView *view)
+{
+	gboolean can_in, can_out;
+	PlannerGanttViewPriv *priv;
+	
+	if (event->state & GDK_CONTROL_MASK) {
+		priv = view->priv;
+		planner_gantt_chart_can_zoom (PLANNER_GANTT_CHART (priv->gantt), &can_in, &can_out);
+		switch (event->direction) {
+      			case GDK_SCROLL_UP: {
+				if (can_in)
+					gantt_view_zoom_in_cb  (NULL, view);
+	        		break;
+			}
+			case GDK_SCROLL_DOWN:
+				if (can_out)
+					gantt_view_zoom_out_cb  (NULL, view);
+			        break;
+		      default:
+        		break;
+		}
+    	}
+
+	return TRUE;
+}
+
 static void
 planner_gantt_view_class_init (PlannerGanttViewClass *klass)
 {
@@ -569,6 +596,11 @@ gantt_view_create_widget (PlannerGanttView *view)
 	priv->gantt = planner_gantt_chart_new_with_model (model);
 	planner_gantt_chart_set_view (PLANNER_GANTT_CHART (priv->gantt),
 				      PLANNER_TASK_TREE (tree));
+
+	gtk_widget_set_events (GTK_WIDGET (priv->gantt), GDK_SCROLL_MASK);
+
+	g_signal_connect (priv->gantt, "scroll-event",
+                    G_CALLBACK (gantt_view_chart_scroll_event), view);
 	
 	g_object_unref (model);
 

@@ -118,6 +118,33 @@ static const GtkActionEntry entries[] = {
 
 G_DEFINE_TYPE (PlannerUsageView, planner_usage_view, PLANNER_TYPE_VIEW);
 
+static gboolean
+usage_view_chart_scroll_event (GtkWidget * gki, GdkEventScroll * event, PlannerView *view)
+{
+	gboolean can_in, can_out;
+	PlannerUsageViewPriv *priv;
+	
+	if (event->state & GDK_CONTROL_MASK) {
+		priv = PLANNER_USAGE_VIEW (view)->priv;
+		planner_usage_chart_can_zoom (priv->chart, &can_in, &can_out);
+		switch (event->direction) {
+      			case GDK_SCROLL_UP: {
+				if (can_in)
+					usage_view_zoom_in_cb  (NULL, view);
+	        		break;
+			}
+			case GDK_SCROLL_DOWN:
+				if (can_out)
+					usage_view_zoom_out_cb  (NULL, view);
+			        break;
+		      default:
+        		break;
+		}
+    	}
+
+	return TRUE;
+}
+
 
 static void
 planner_usage_view_class_init (PlannerUsageViewClass *klass)
@@ -420,6 +447,11 @@ usage_view_create_widget (PlannerView *view)
 
 	planner_usage_chart_set_view (PLANNER_USAGE_CHART (priv->chart), 
 				      PLANNER_USAGE_TREE  (priv->tree));
+
+	gtk_widget_set_events (GTK_WIDGET (priv->chart), GDK_SCROLL_MASK);
+
+	g_signal_connect (priv->chart, "scroll-event",
+                    G_CALLBACK (usage_view_chart_scroll_event), view);
 
         sw = gtk_scrolled_window_new (hadj, vadj);
         gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw),
