@@ -13,15 +13,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: planner 0.14\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-02-17 15:29+0100\n"
-"PO-Revision-Date: 2007-02-17 17:38+0100\n"
+"POT-Creation-Date: 2007-02-17 21:55+0100\n"
+"PO-Revision-Date: 2007-02-17 21:55+0100\n"
 "Last-Translator: Stéphane Raimbault <stephane.raimbault@gmail.com>\n"
 "Language-Team: GNOME French Team <gnomefr@traduc.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n>1;\n"
-"X-Poedit-Language: French\n"
 
 #: ../data/glade/add-predecessor.glade.h:1
 msgid "Add Predecessor"
@@ -283,7 +281,7 @@ msgstr "_Calendrier :"
 
 #: ../data/glade/project-properties.glade.h:8
 msgid "_Manager:"
-msgstr "D_irecteur :"
+msgstr "_Responsable :"
 
 #: ../data/glade/project-properties.glade.h:10
 msgid "_Organization:"
@@ -442,7 +440,7 @@ msgstr "%"
 
 #: ../data/glade/task-dialog.glade.h:5
 msgid "C_omplete:"
-msgstr "_Terminé :"
+msgstr "État d'_avancement :"
 
 #: ../data/glade/task-dialog.glade.h:8
 msgid "Predecessors"
@@ -507,7 +505,8 @@ msgstr "Afficher les jours non standards dans la vue du diagramme de Gantt"
 
 #: ../data/planner.schemas.in.h:2
 msgid "Highlight critical path in Gantt view"
-msgstr "Mettre en évidence le chemin critique dans la vue du diagramme de Gantt"
+msgstr ""
+"Mettre en évidence le chemin critique dans la vue du diagramme de Gantt"
 
 #: ../data/planner.schemas.in.h:3
 msgid "Highlight critical path in Task view"
@@ -550,12 +549,16 @@ msgstr ""
 #: ../data/planner.schemas.in.h:12
 msgid ""
 "Whether to highlight the tasks along the cricital path in the Gantt view."
-msgstr "Indique s'il faut mettre en évidence les tâches du chemin critique dans la vue du diagramme de Gantt."
+msgstr ""
+"Indique s'il faut mettre en évidence les tâches du chemin critique dans la "
+"vue du diagramme de Gantt."
 
 #: ../data/planner.schemas.in.h:13
 msgid ""
 "Whether to highlight the tasks along the cricital path in the Task view."
-msgstr "Indique s'il faut mettre en évidence les tâches du chemin critique dans la vue des tâches."
+msgstr ""
+"Indique s'il faut mettre en évidence les tâches du chemin critique dans la "
+"vue des tâches."
 
 #: ../data/planner.schemas.in.h:14
 msgid "Which view to display in the user interface."
@@ -620,7 +623,7 @@ msgstr "Travaillé"
 
 #: ../libplanner/mrp-day.c:55
 msgid "A default working day"
-msgstr "Un jour de travail habituel"
+msgstr "Un jour de travail normal"
 
 #: ../libplanner/mrp-day.c:57
 msgid "Nonworking"
@@ -628,7 +631,7 @@ msgstr "Chômé"
 
 #: ../libplanner/mrp-day.c:58
 msgid "A default non working day"
-msgstr "Un jour chômé habituel"
+msgstr "Un jour chômé normal"
 
 #: ../libplanner/mrp-day.c:60
 msgid "Use base"
@@ -636,7 +639,7 @@ msgstr "Utiliser la base"
 
 #: ../libplanner/mrp-day.c:61
 msgid "Use day from base calendar"
-msgstr "Utilise un jour du calendrier habituel"
+msgstr "Utilise un jour du calendrier de base"
 
 #: ../libplanner/mrp-file-module.c:121
 msgid "This format does not support reading"
@@ -828,7 +831,7 @@ msgstr "%e %b %Y"
 
 #: ../libplanner/mrp-xsl.c:157 ../libplanner/mrp-xsl.c:205
 msgid "Export to HTML failed"
-msgstr "L'export en HTML a échoué"
+msgstr "L'exportation en HTML a échoué"
 
 #: ../src/planner-application.c:55 ../src/planner-application.c:111
 msgid "Insert"
@@ -977,7 +980,7 @@ msgstr "Nom"
 
 #: ../src/planner-eds-plugin.c:416 ../src/planner-resource-view.c:1287
 msgid "Email"
-msgstr "Courrier électronique"
+msgstr "Adresse électronique"
 
 #: ../src/planner-eds-plugin.c:437
 msgid "Import"
@@ -1251,7 +1254,7 @@ msgstr "Zoom a_vant"
 #: ../src/planner-gantt-view.c:173 ../src/planner-usage-view.c:108
 #: ../src/planner-usage-view.c:109
 msgid "Zoom in"
-msgstr "Zoom vers avant"
+msgstr "Zoom vers l'avant"
 
 #: ../src/planner-gantt-view.c:175
 msgid "Zoom _Out"
@@ -1309,15 +1312,15 @@ msgstr "TPÉ"
 
 #: ../src/planner-gantt-view.c:583 ../src/planner-task-view.c:337
 msgid "Start"
-msgstr "Démarrer"
+msgstr "Démarré"
 
 #: ../src/planner-gantt-view.c:584 ../src/planner-task-view.c:338
 msgid "Finish"
-msgstr "Terminer"
+msgstr "Terminé"
 
 #: ../src/planner-gantt-view.c:587 ../src/planner-task-view.c:341
 msgid "Slack"
-msgstr "Mou"
+msgstr "Latitude"
 
 #: ../src/planner-gantt-view.c:589 ../src/planner-task-view.c:343
 msgid "Assigned to"
@@ -1528,7 +1531,7 @@ msgstr "Éditer la valeur des propriétés du projet"
 
 #: ../src/planner-property-dialog.c:502
 msgid "Label"
-msgstr "Label"
+msgstr "Intitulé"
 
 #: ../src/planner-property-dialog.c:514 ../src/planner-resource-view.c:1224
 #: ../src/planner-task-dialog.c:2722
@@ -1545,7 +1548,7 @@ msgstr "Supprimer une propriété"
 
 #: ../src/planner-property-dialog.c:909
 msgid "Edit property label"
-msgstr "Éditer le libellé de la propriété"
+msgstr "Éditer l'intitulé de la propriété"
 
 #: ../src/planner-resource-cmd.c:75
 msgid "Insert resource"
@@ -1657,7 +1660,7 @@ msgstr "Supprimer la ressource"
 
 #: ../src/planner-resource-view.c:1020
 msgid "Edit Resource Columns"
-msgstr "Edition des colonnes de ressources"
+msgstr "Édition des colonnes de ressources"
 
 #: ../src/planner-resource-view.c:1055
 msgid "Edit custom resource properties"
@@ -1827,7 +1830,7 @@ msgstr "Éditer le type de la tâche"
 
 #: ../src/planner-task-dialog.c:596
 msgid "Toggle fixed duration"
-msgstr "Changer la durée fixe"
+msgstr "Utiliser une durée fixe"
 
 #: ../src/planner-task-dialog.c:663
 msgid "Edit task scheduling"
@@ -1843,7 +1846,7 @@ msgstr "Retirer une ressource d'une tâche"
 
 #: ../src/planner-task-dialog.c:862
 msgid "Change resource units in task"
-msgstr "Changer les unités de ressource de la tâche"
+msgstr "Modifier les unités de ressource de la tâche"
 
 #: ../src/planner-task-dialog.c:950
 msgid "Edit task predecessor"
@@ -1938,7 +1941,7 @@ msgstr "Supprimer la tâche"
 
 #: ../src/planner-task-tree.c:644
 msgid "Apply constraint to task"
-msgstr "Appliquer la contrainte à la tâche"
+msgstr "Appliquer une contrainte à la tâche"
 
 #: ../src/planner-task-tree.c:706
 msgid "Reset task constraint"
@@ -2266,7 +2269,7 @@ msgstr "Un gestionnaire de projets pour le bureau GNOME"
 
 #: ../src/planner-window.c:1348
 msgid "The Planner Homepage"
-msgstr "La page Web de Planner"
+msgstr "La page d'accueil de Planner"
 
 #: ../src/planner-window.c:1500
 msgid "If you don't save, changes made the last minute will be discarded."
@@ -2298,8 +2301,8 @@ msgid "If you don't save, changes made the last %d hour will be discarded."
 msgid_plural ""
 "If you don't save, changes made the last %d hours will be discarded."
 msgstr[0] ""
-"Si vous n'enregistrez pas, les modifications effectuées depuis la%0d "
-"dernière heure seront perdues."
+"Si vous n'enregistrez pas, les modifications effectuées depuis la%0ddernière "
+"heure seront perdues."
 msgstr[1] ""
 "Si vous n'enregistrez pas, les modifications effectuées depuis %d heures "
 "seront perdues."
@@ -2350,7 +2353,7 @@ msgstr ""
 "Vous pouvez ajouter une relation de prédécesseur en cliquant sur le "
 "prédécesseur et en le déposant sur le successeur.\n"
 "\n"
-"Par la suite, vous pouvez supprimer toutes les contraintes en choisissant "
+"Par la suite, vous pourrez supprimer toutes les contraintes en choisissant "
 "l'entrée « Supprimer toutes les contraintes » dans le menu « Édition »."
 
 #. Hack.
@@ -2373,7 +2376,7 @@ msgstr "Format Planner 0.11"
 
 #: ../src/planner-xml-planner-plugin.c:55
 msgid "Export project to a file suitable for Planner 0.11"
-msgstr "Exporter le projet dans une format adapté à Planner 0.11"
+msgstr "Exporte le projet dans une format adapté à Planner 0.11"
 
 #: ../src/planner-xml-planner-plugin.c:90
 msgid "Export"
