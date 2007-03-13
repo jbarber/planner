@@ -55,6 +55,7 @@ static gdouble f = 1.0;
 
 #define CRITICAL_PATH_KEY  "/views/gantt_view/highlight_critical_path"
 #define NOSTDDAYS_PATH_KEY "/views/gantt_view/display_nonstandard_days"
+#define GUIDELINES_PATH_KEY "/views/gantt_view/show_guidelines"
 
 
 typedef struct _TreeNode TreeNode; 
@@ -107,6 +108,9 @@ struct _PlannerGanttChartPriv {
 	
 	/* Nonstandard days visualization */
 	gboolean         nonstandard_days;
+
+	/* GuideLines . */
+	gboolean 		 guidelines;
 
 	/* Keep a list of signal connection ids, so we can remove them
 	 * easily.
@@ -390,6 +394,12 @@ gantt_chart_init (PlannerGanttChart *chart)
 							  NULL);
 	priv->nonstandard_days   = planner_conf_get_bool (NOSTDDAYS_PATH_KEY,
 							  NULL);
+	priv->guidelines = planner_conf_get_bool (GUIDELINES_PATH_KEY, NULL);
+
+	g_object_set (G_OBJECT(chart->priv->background),
+			"show_guidelines",
+			priv->guidelines,
+			NULL);
 }
 
 static void
@@ -1929,12 +1939,28 @@ planner_gantt_chart_set_show_guidelines (PlannerGanttChart *chart,
 
 	priv = chart->priv;
 
+	if (priv->guidelines == state) {
+		return;
+	}
+
+	priv->guidelines = state;
+
 	g_object_set (G_OBJECT(chart->priv->background),
 		      "show_guidelines",
 		      state,
 		      NULL);
 
 	gtk_widget_queue_draw (GTK_WIDGET (priv->canvas));
+	
+	planner_conf_set_bool (GUIDELINES_PATH_KEY, state, NULL);
+}
+
+gboolean
+planner_gantt_chart_get_show_guidelines (PlannerGanttChart *chart)
+{
+	g_return_val_if_fail (PLANNER_IS_GANTT_CHART (chart), FALSE);
+
+	return chart->priv->guidelines;
 }
 
 gboolean

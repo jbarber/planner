@@ -255,7 +255,7 @@ static void
 gantt_view_activate (PlannerView *view)
 {
 	PlannerGanttViewPriv *priv;
-	gboolean              show_critical, show_nostd_days;
+	gboolean              show_critical, show_nostd_days, show_guidelines;
 	gchar                *filename;
 
 	priv = PLANNER_GANTT_VIEW (view)->priv;
@@ -287,6 +287,9 @@ gantt_view_activate (PlannerView *view)
 	show_nostd_days = planner_gantt_chart_get_nonstandard_days (
 		PLANNER_GANTT_CHART (priv->gantt));
 
+	show_guidelines = planner_gantt_chart_get_show_guidelines (
+			PLANNER_GANTT_CHART (priv->gantt));
+
 	planner_task_tree_set_highlight_critical (PLANNER_TASK_TREE (priv->tree),
 						  show_critical);
 
@@ -300,6 +303,10 @@ gantt_view_activate (PlannerView *view)
 	gtk_toggle_action_set_active (
 		GTK_TOGGLE_ACTION (gtk_action_group_get_action (priv->actions, "NonstandardDays")),
 		show_nostd_days);
+
+	gtk_toggle_action_set_active (
+		GTK_TOGGLE_ACTION (gtk_action_group_get_action (priv->actions, "ShowGuideLines")),
+		show_guidelines);
 
 	gantt_view_selection_changed_cb (PLANNER_TASK_TREE (priv->tree),
 					 PLANNER_GANTT_VIEW (view));

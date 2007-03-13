@@ -94,6 +94,9 @@ void
 planner_gantt_chart_set_show_guidelines			(PlannerGanttChart  *chart,
 							 gboolean       state);
 
+gboolean
+planner_gantt_chart_get_show_guidelines 		(PlannerGanttChart *chart);
+
 void
 planner_gantt_chart_set_nonstandard_days             (PlannerGanttChart *chart,
 							   gboolean           state);
