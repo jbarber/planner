@@ -1,20 +1,3 @@
-#: ../data/glade/calendar-dialog.glade.h:3
-#: ../data/glade/column-dialog.glade.h:1
-#: ../data/glade/task-dialog.glade.h:2
-#, fuzzy
-msgid "    "
-msgstr "    "
-
-#: ../data/glade/task-dialog.glade.h:1
-#, fuzzy
-msgid "  "
-msgstr ""
-
-#: ../libegg/recent-files/egg-recent-vfs-utils.c:90
-#, fuzzy
-msgid " (invalid Unicode)"
-msgstr " (يونيكود غير صحيح)"
-
 # Arabic translations for PACKAGE package.
 # Copyright (C) 2006 THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
@@ -24,99 +7,59 @@ msgid ""
 msgstr ""
 "Project-Id-Version: planner\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-11-17 21:15+0000\n"
+"POT-Creation-Date: 2007-02-22 19:00+0000\n"
 "PO-Revision-Date: 2006-11-17 22:30+0100\n"
 "Last-Translator: Djihed Afifi <djihed@gmail.com>\n"
 "Language-Team: Arabic <doc@arabeyes.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=6; plural=n == 0 ? 0 : n == 1 ? 1 : n == 2 ? 2 : n >= 3 && n <= 10 ? 3 : n >= 11 && n <= 99 ? 4 : 5;\n"
+"Plural-Forms: nplurals=6; plural=n == 0 ? 0 : n == 1 ? 1 : n == 2 ? 2 : n >= "
+"3 && n <= 10 ? 3 : n >= 11 && n <= 99 ? 4 : 5;\n"
 "X-Poedit-Language: Arabic\n"
 
-#: ../data/glade/task-dialog.glade.h:4
-#, fuzzy, no-c-format
-msgid "%"
-msgstr "%"
-
-#. i18n: Year, short "Half year", preferably 1 letter.
-#: ../src/planner-scale-utils.c:195
-#, c-format
-msgid "%04d, H%d"
-msgstr ""
-
-#: ../src/planner-default-week-dialog.c:299
-#: ../src/planner-default-week-dialog.c:303
+#: ../data/glade/add-predecessor.glade.h:1
 #, fuzzy
-msgid "%H:%M"
-msgstr "%H:%M"
+msgid "Add Predecessor"
+msgstr "إضافة تطبيق"
 
-#. i18n: project start, the date format is described in
-#. * libmrproject/docs/DateFormat.
-#: ../src/planner-gantt-background.c:625
-msgid "%Y %b %d"
+#: ../data/glade/add-predecessor.glade.h:2
+msgid "_Lag:"
 msgstr ""
 
-#. i18n: time stamp format for notes in task dialog, see strftime(3) for
-#. * a detailed description.
-#: ../src/planner-resource-dialog.c:1404
-#: ../src/planner-task-dialog.c:1808
-msgid "%a %d %b %Y, %H:%M\n"
-msgstr ""
-
-#. i18n: this string is the date nr and month name, displayed
-#. * e.g. in the date cells in the task tree. See
-#. * libmrproject/docs/DateFormat.
-#: ../src/planner-format.c:190
-msgid "%b %e"
-msgstr ""
-
-#. i18n: Year, short "Quarter", preferably 2-3 letters.
-#: ../src/planner-scale-utils.c:177
-#, c-format
-msgid "%d, Qtr %d"
-msgstr ""
-
-#: ../src/planner-format.c:149
-#, fuzzy, c-format
-msgid "%dd %dh"
-msgstr "أضِ_ف مستضيف: "
-
-#: ../src/planner-format.c:152
-#, fuzzy, c-format
-msgid "%dd"
-msgstr "إ_ضافة"
-
-#: ../src/planner-format.c:155
-#, c-format
-msgid "%dh"
-msgstr ""
-
-#: ../src/planner-gantt-header.c:671
-msgid "%e %b %Y"
-msgstr ""
-
-#: ../src/planner-resource-dialog.c:322
-#: ../src/planner-resource-input-dialog.c:110
-#: ../src/planner-task-dialog.c:381
+#: ../data/glade/add-predecessor.glade.h:3
+#: ../data/glade/calendar-dialog.glade.h:35
+#: ../data/glade/new-property.glade.h:5
+#: ../data/glade/project-properties.glade.h:9
+#: ../data/glade/resource-dialog.glade.h:12
+#: ../data/glade/resource-input-dialog.glade.h:7
+#: ../data/glade/task-dialog.glade.h:16
+#: ../data/glade/task-input-dialog.glade.h:4
 #, fuzzy
-msgid "(No name)"
-msgstr "لا يوجد اسم"
+msgid "_Name:"
+msgstr "الإ_سم:"
 
-#. Put "no group" at the top.
-#: ../src/planner-resource-dialog.c:312
-#: ../src/planner-resource-input-dialog.c:100
-#: ../src/planner-resource-view.c:1945
+#: ../data/glade/add-predecessor.glade.h:4
 #, fuzzy
-msgid "(None)"
-msgstr "(لا شيء)"
+msgid "_Relation type:"
+msgstr "نوع التّنبيه"
 
-#: ../data/glade/calendar-dialog.glade.h:4
-#: ../data/glade/eds.glade.h:1
+#: ../data/glade/calendar-dialog.glade.h:1
+msgid ""
+"\n"
+"The selected day type has the following working hours:"
+msgstr ""
+
+#: ../data/glade/calendar-dialog.glade.h:3
+#: ../data/glade/column-dialog.glade.h:1 ../data/glade/task-dialog.glade.h:2
+#, fuzzy
+msgid "    "
+msgstr "    "
+
+#: ../data/glade/calendar-dialog.glade.h:4 ../data/glade/eds.glade.h:1
 #: ../data/glade/new-property.glade.h:1
 #: ../data/glade/resource-dialog.glade.h:1
-#: ../data/glade/resource-input-dialog.glade.h:1
-#: ../data/glade/sql.glade.h:1
+#: ../data/glade/resource-input-dialog.glade.h:1 ../data/glade/sql.glade.h:1
 #: ../data/glade/task-input-dialog.glade.h:1
 #, fuzzy
 msgid "*"
@@ -126,63 +69,6 @@ msgstr "*"
 #, fuzzy
 msgid "-"
 msgstr "-"
-
-#: ../src/planner-task-popup.c:70
-#, fuzzy
-msgid "/Assign _resources..."
-msgstr "الموارد المراقَبة"
-
-#: ../src/planner-task-popup.c:57
-#, fuzzy
-msgid "/Insert _subtask"
-msgstr "إدرج فضاءات"
-
-#: ../src/planner-usage-tree.c:111
-#, fuzzy
-msgid "/_Collapse all resources"
-msgstr "إنهيار كل الأعمدة"
-
-#: ../src/planner-resource-view.c:272
-#: ../src/planner-usage-tree.c:102
-#, fuzzy
-msgid "/_Edit resource..."
-msgstr "ت_حرير الخط"
-
-#: ../src/planner-task-popup.c:73
-#: ../src/planner-usage-tree.c:105
-#, fuzzy
-msgid "/_Edit task..."
-msgstr "ت_كليف بالمهمّة"
-
-#: ../src/planner-usage-tree.c:108
-#, fuzzy
-msgid "/_Expand all resources"
-msgstr "أظهر كل المكونات"
-
-#: ../src/planner-resource-view.c:266
-#, fuzzy
-msgid "/_Insert resource"
-msgstr "إدرج فضاءات"
-
-#: ../src/planner-task-popup.c:54
-#, fuzzy
-msgid "/_Insert task"
-msgstr "ت_كليف بالمهمّة"
-
-#: ../src/planner-resource-view.c:269
-#, fuzzy
-msgid "/_Remove resource"
-msgstr "هل أحذف السمة \"%s\" ؟"
-
-#: ../src/planner-task-popup.c:60
-#, fuzzy
-msgid "/_Remove task"
-msgstr "ت_كليف بالمهمّة"
-
-#: ../src/planner-task-popup.c:65
-#, fuzzy
-msgid "/_Unlink task"
-msgstr "ت_كليف بالمهمّة"
 
 #: ../data/glade/calendar-dialog.glade.h:6
 #, fuzzy
@@ -204,127 +90,20 @@ msgstr "إظهار أسبوع العمل"
 msgid "<b>Working time</b>"
 msgstr "وقت غير سليم"
 
-#: ../src/planner-window.c:1341
-msgid "A Project Management application for the GNOME desktop"
-msgstr ""
-
-#: ../libplanner/mrp-day.c:58
-#, fuzzy
-msgid "A default non working day"
-msgstr "--default-working-directories إثنان معطيان\n"
-
-#: ../libplanner/mrp-day.c:55
-#, fuzzy
-msgid "A default working day"
-msgstr "--default-working-directories إثنان معطيان\n"
-
-#: ../src/planner-window.c:306
-#, fuzzy
-msgid "About this application"
-msgstr "حول هذا التّطبيق"
-
 #: ../data/glade/calendar-dialog.glade.h:10
 #, fuzzy
 msgid "Add Day Type"
 msgstr "نوع جهاز الخرج"
-
-#: ../data/glade/add-predecessor.glade.h:1
-#, fuzzy
-msgid "Add Predecessor"
-msgstr "إضافة تطبيق"
-
-#: ../data/glade/new-property.glade.h:2
-#, fuzzy
-msgid "Add Property"
-msgstr "أسماء الخصائص"
-
-#: ../src/planner-day-type-dialog.c:499
-#, fuzzy, c-format
-msgid "Add day type \"%s\""
-msgstr "نوع جهاز الخرج"
-
-#: ../src/planner-calendar-dialog.c:398
-#, fuzzy
-msgid "Add new calendar"
-msgstr "إضافة رزنامةً جديدة"
-
-#: ../src/planner-project-properties.c:1933
-#, fuzzy
-msgid "Add project property"
-msgstr "قيمة خاصية مسماة"
-
-#: ../src/planner-property-dialog.c:671
-#, fuzzy
-msgid "Add property"
-msgstr "أسماء الخصائص"
-
-#: ../src/planner-msp-plugin.c:219
-#: ../src/planner-window.c:848
-#, fuzzy
-msgid "All Files"
-msgstr "كل الملفّات"
-
-#: ../src/planner-task-tree.c:644
-#, fuzzy
-msgid "Apply constraint to task"
-msgstr "نقر لإضافة مهمّة"
 
 #: ../data/glade/calendar-dialog.glade.h:11
 #, fuzzy
 msgid "Apply"
 msgstr "_طبّق"
 
-#: ../src/planner-cell-renderer-date.c:161
-#: ../src/planner-task-dialog.c:1491
-#, fuzzy
-msgid "As soon as possible"
-msgstr "القيمة القصوى الممكنة لـ س"
-
-#: ../data/glade/task-date-widget.glade.h:1
-msgid ""
-"As soon as possible\n"
-"No earlier than\n"
-"On fixed date"
-msgstr ""
-
-#: ../src/planner-task-dialog.c:743
-#, fuzzy
-msgid "Assign resource to task"
-msgstr "نقر لإضافة مهمّة"
-
-#: ../src/planner-gantt-view.c:562
-#: ../src/planner-task-view.c:343
-#, fuzzy
-msgid "Assigned to"
-msgstr "مسجل ل %s"
-
-#: ../src/planner-task-dialog.c:2637
-#, fuzzy
-msgid "Assigned"
-msgstr "مكلّف"
-
-#: ../libplanner/mrp-sql.c:2194
-#, fuzzy, c-format
-msgid "BEGIN command failed %s."
-msgstr "فشل أمر IMAP: %s"
-
-#: ../src/planner-window.c:1547
-#, fuzzy
-msgid "C_lose without saving"
-msgstr "خروج _دون حفظ"
-
-#: ../data/glade/task-dialog.glade.h:5
-msgid "C_omplete:"
-msgstr ""
-
 #: ../data/glade/calendar-dialog.glade.h:12
 #, fuzzy
 msgid "C_opy an existing calendar"
 msgstr "الرُّزنامة و المهام"
-
-#: ../data/glade/resource-dialog.glade.h:2
-msgid "C_ost:"
-msgstr ""
 
 #: ../data/glade/calendar-dialog.glade.h:13
 #, fuzzy
@@ -336,202 +115,15 @@ msgstr "إن_شاء"
 msgid "Calendar Editor"
 msgstr "رُزنامة إيفُليوشِن/محرّر المهام"
 
-#: ../data/glade/resource-dialog.glade.h:3
-#, fuzzy
-msgid "Calendar"
-msgstr "الرُّزنامة"
-
-#: ../src/planner-task-dialog.c:1975
-msgid "Can't add new predecessor. No task selected!"
-msgstr ""
-
-#: ../libplanner/mrp-sql.c:207
-#, fuzzy
-msgid "Can't connect to database server"
-msgstr "لا يمكن الإتصال بالخادم عن بعد"
-
-#: ../src/planner-sql-plugin.c:556
-#, c-format
-msgid "Can't create tables in database %s"
-msgstr ""
-
-#: ../data/glade/task-date-widget.glade.h:4
-#: ../src/planner-cell-renderer-date.c:182
-#: ../src/planner-project-properties.c:747
-#, fuzzy
-msgid "Cancel"
-msgstr "إلغاء"
-
-#: ../libplanner/mrp-task-manager.c:2518
-msgid "Cannot add a predecessor, because it would result in a loop."
-msgstr ""
-
-#: ../libplanner/mrp-task-manager.c:2564
-msgid "Cannot move the task, because it would result in a loop."
-msgstr ""
-
-#: ../eds-backend/e-cal-backend-planner.c:300
-msgid "Categories for a task used by Evolution Data Server"
-msgstr ""
-
-#: ../src/planner-calendar-dialog.c:184
-#, fuzzy
-msgid "Change day type"
-msgstr "نوع جهاز الخرج"
-
-#: ../src/planner-task-dialog.c:862
-msgid "Change resource units in task"
-msgstr ""
-
-#: ../src/planner-gantt-row.c:2661
-#, fuzzy, c-format
-msgid "Change work to %s"
-msgstr "ت_غيير الجهاز إلى %s"
-
-#: ../src/planner-task-dialog.c:2463
-#, fuzzy
-msgid "Change..."
-msgstr "تغيير كلمة المرور"
-
-#: ../src/planner-window.c:255
-#, fuzzy
-msgid "Close the current file"
-msgstr "غلق الملف الحالي"
-
-#: ../libplanner/mrp-sql.c:3631
-#, fuzzy, c-format
-msgid "Connection to database '%s' failed."
-msgstr "فشل الاتصال بخادم القواميس %s:%d"
-
-#: ../libplanner/mrp-sql.c:2181
-#, fuzzy, c-format
-msgid "Connection to database '%s' failed.\n"
-msgstr "فشل الاتصال بخادم القواميس %s:%d"
-
-#: ../libplanner/mrp-sql.c:2186
-#, fuzzy, c-format
-msgid ""
-"Connection to database '%s' failed.\n"
-"%s"
-msgstr "فشل الاتصال بخادم القواميس %s:%d"
-
-#: ../src/planner-sql-plugin.c:661
-#, fuzzy, c-format
-msgid "Connection to database '%s@%s' failed."
-msgstr "فشل الاتصال بخادم القواميس %s:%d"
-
-#: ../libplanner/mrp-property.c:377
-#: ../src/planner-gantt-view.c:561
-#: ../src/planner-resource-view.c:1314
-#: ../src/planner-task-view.c:342
-msgid "Cost"
-msgstr ""
-
-#: ../libplanner/mrp-task.c:1070
-msgid "Could not add a predecessor relation, because the tasks are already related."
-msgstr ""
-
-#: ../libplanner/mrp-parser.c:1064
-#: ../libplanner/mrp-parser.c:1159
-#, fuzzy
-msgid "Could not create XML tree"
-msgstr "لم أستطع إنشاء ذاكرة مخبئيّة لـ%s"
-
-#: ../src/planner-project-properties.c:1556
-#, fuzzy
-msgid "Could not create properties dialog."
-msgstr "لم يمكن عرض حوار الخصائص"
-
-#: ../src/planner-html-plugin.c:82
-#, fuzzy
-msgid "Could not export to HTML"
-msgstr "لم يمكن إعادة تسمية المجلّد %s إلى %s: %s"
-
-#: ../src/planner-plugin-loader.c:41
-#, fuzzy, c-format
-msgid "Could not open plugin file '%s'\n"
-msgstr "لم يمكن فتح ملف البريد %s: %s"
-
-#: ../src/planner-sql-plugin.c:515
-#, c-format
-msgid ""
-"Could not upgrade database %s.\n"
-" Upgrade file used: %s.\n"
-"\n"
-"Database error: \n"
-"%s"
-msgstr ""
-
-#: ../libplanner/mrp-parser.c:1125
-#, fuzzy
-msgid "Could not write XML file"
-msgstr "لا يمكن الكتابة على ملف الحالة المحفوظ '%s' fd: %d: %s"
-
-#: ../libplanner/mrp-project.c:759
-#, c-format
-msgid "Couldn't find a suitable file module for loading '%s'"
-msgstr ""
-
-#: ../libplanner/mrp-project.c:1021
-msgid "Couldn't find a suitable file module for loading project"
-msgstr ""
-
-#: ../src/planner-msp-plugin.c:118
-#, fuzzy
-msgid "Couldn't import file."
-msgstr "إستيراد ملف _وحيد"
-
-#: ../src/planner-window.c:229
-#, fuzzy
-msgid "Create a new project"
-msgstr "انشاء موضوع جديد"
-
 #: ../data/glade/calendar-dialog.glade.h:15
 #, fuzzy
 msgid "Create an _empty calendar"
 msgstr "إنشاء رزنامة جديدة"
 
-#: ../src/planner-main.c:56
-#, fuzzy
-msgid "Create the initial window with the given geometry."
-msgstr "انشيء النافذة الاولية بالأبعاد المعطاة."
-
-#: ../data/glade/property-dialog.glade.h:1
-#, fuzzy
-msgid "Custom Properties"
-msgstr "خصائص القائمة"
-
 #: ../data/glade/calendar-dialog.glade.h:16
 #, fuzzy
 msgid "Custom working time"
 msgstr "الوقت الذي تحدّده أنت"
-
-#: ../data/glade/project-properties.glade.h:1
-#, fuzzy
-msgid "Custom"
-msgstr "مخصص"
-
-#: ../src/planner-sql-plugin.c:619
-#, c-format
-msgid "Database %s is not setup for Planner. Do you want to do that?"
-msgstr ""
-
-#: ../src/planner-sql-plugin.c:494
-#, c-format
-msgid ""
-"Database %s needs to be upgraded from version %s to version %s.\n"
-"Please backup database before the upgrade."
-msgstr ""
-
-#: ../libplanner/mrp-property.c:373
-#, fuzzy
-msgid "Date"
-msgstr "التاريخ"
-
-#: ../src/planner-project-properties.c:1590
-#, fuzzy
-msgid "Date..."
-msgstr "التاريخ"
 
 #: ../data/glade/calendar-dialog.glade.h:17
 #, fuzzy
@@ -543,418 +135,448 @@ msgstr "نوع التّنبيه"
 msgid "Default Week"
 msgstr "مشهد الأسبوع"
 
-#: ../src/planner-group-dialog.c:526
-#, fuzzy
-msgid "Default group"
-msgstr "ال_مجموعة الافتراضيّة:"
-
 #: ../data/glade/calendar-dialog.glade.h:19
 #, fuzzy
 msgid "Default week..."
 msgstr "مشهد الأسبوع"
-
-#: ../libplanner/mrp-project.c:437
-#: ../src/planner-group-dialog.c:846
-#, fuzzy
-msgid "Default"
-msgstr "الافتراضي"
-
-#: ../data/planner.schemas.in.h:1
-msgid "Display nonstandard days in Gantt view"
-msgstr ""
-
-#: ../src/planner-project-properties.c:1461
-#: ../src/planner-property-dialog.c:403
-#, c-format
-msgid "Do you really want to remove the property '%s' from the project?"
-msgstr ""
-
-#: ../libplanner/mrp-property.c:375
-#: ../src/planner-gantt-view.c:559
-#: ../src/planner-task-view.c:340
-#, fuzzy
-msgid "Duration"
-msgstr "المدّة"
-
-#: ../eds-backend/e-cal-backend-planner.c:299
-#, fuzzy
-msgid "EDS Categories"
-msgstr "أصناف المزامنة:"
-
-#: ../eds-backend/e-cal-backend-planner.c:309
-msgid "EDS Classification"
-msgstr ""
-
-#: ../eds-backend/e-cal-backend-planner.c:289
-#, fuzzy
-msgid "EDS UID"
-msgstr "أقصى UID:"
-
-#: ../eds-backend/e-cal-backend-planner.c:319
-#, fuzzy
-msgid "EDS URL"
-msgstr "عنوان VoIP"
-
-#: ../src/planner-eds-plugin.c:167
-msgid "EDS"
-msgstr ""
-
-#: ../data/glade/resource-dialog.glade.h:4
-#, fuzzy
-msgid "Edit Calendars..."
-msgstr "ت_حرير الخط"
 
 #: ../data/glade/calendar-dialog.glade.h:20
 #, fuzzy
 msgid "Edit Day Types"
 msgstr "كل الفئات المدعومة"
 
-#: ../src/planner-window.c:286
-#, fuzzy
-msgid "Edit Day _Types"
-msgstr "كل الفئات المدعومة"
-
-#: ../src/planner-gantt-view.c:911
-#, fuzzy
-msgid "Edit Gantt Columns"
-msgstr "عدد خلايا اﻷعمدة"
-
-#: ../src/planner-project-properties.c:559
-#, fuzzy
-msgid "Edit Manager"
-msgstr "مدير المحفوظات"
-
-#: ../src/planner-project-properties.c:523
-#, fuzzy
-msgid "Edit Organization"
-msgstr "ت_حرير الخط"
-
-#: ../src/planner-project-properties.c:487
-#, fuzzy
-msgid "Edit Project Name"
-msgstr "تحرير اسم الجلسة"
-
-#: ../src/planner-project-properties.c:842
-#, fuzzy
-msgid "Edit Project Phase"
-msgstr "عدّل معلومات الحساب"
-
-#: ../data/glade/project-properties.glade.h:2
-#, fuzzy
-msgid "Edit Project Phases"
-msgstr "عدّل معلومات الحساب"
-
-#: ../src/planner-project-properties.c:631
-#: ../src/planner-project-properties.c:665
-#, fuzzy
-msgid "Edit Project Start"
-msgstr "بدأ خادم بيجل؟"
-
-#: ../src/planner-window.c:289
-#, fuzzy
-msgid "Edit Project _Phases"
-msgstr "عدّل معلومات الحساب"
-
-#: ../src/planner-resource-view.c:1020
-#, fuzzy
-msgid "Edit Resource Columns"
-msgstr "عدد خلايا اﻷعمدة"
-
-#: ../src/planner-usage-view.c:318
-msgid "Edit Resource Usage Columns"
-msgstr ""
-
-#: ../src/planner-task-view.c:626
-#, fuzzy
-msgid "Edit Task Columns"
-msgstr "عدد خلايا اﻷعمدة"
-
 #: ../data/glade/calendar-dialog.glade.h:21
 #, fuzzy
 msgid "Edit Working Time"
 msgstr "الوقت الذي تحدّده أنت"
-
-#: ../src/planner-resource-view.c:248
-#, fuzzy
-msgid "Edit _Custom Properties..."
-msgstr "خصائص عنصر القائمة"
-
-#: ../src/planner-resource-view.c:242
-#, fuzzy
-msgid "Edit _Groups"
-msgstr "_تحرير المستخدمين و المجموعات"
-
-#: ../src/planner-gantt-view.c:178
-#: ../src/planner-resource-view.c:251
-#: ../src/planner-task-view.c:154
-#: ../src/planner-usage-view.c:114
-#, fuzzy
-msgid "Edit _Visible Columns"
-msgstr "عدد خلايا اﻷعمدة"
-
-#: ../src/planner-resource-view.c:1055
-msgid "Edit custom resource properties"
-msgstr ""
-
-#: ../src/planner-task-view.c:572
-msgid "Edit custom task properties"
-msgstr ""
-
-#: ../src/planner-default-week-dialog.c:553
-#, fuzzy
-msgid "Edit default week"
-msgstr "مشهد أسبوع العمل"
-
-#: ../src/planner-group-dialog.c:644
-#, fuzzy
-msgid "Edit group property"
-msgstr "قيمة خاصية مسماة"
-
-#: ../src/planner-task-dialog.c:1021
-#, fuzzy
-msgid "Edit lag predecessor"
-msgstr "عدّل معلومات الحساب"
-
-#: ../src/planner-project-properties.c:2136
-#, fuzzy
-msgid "Edit project property value"
-msgstr "الخاصية '%s' ليس لها قيمة"
-
-#: ../src/planner-property-dialog.c:909
-#, fuzzy
-msgid "Edit property label"
-msgstr "حدود الصّورة/العلامة"
-
-#: ../src/planner-resource-dialog.c:495
-#, fuzzy
-msgid "Edit resource calendar"
-msgstr "الرُّزنامة و المهام"
-
-#: ../src/planner-resource-dialog.c:643
-#, fuzzy
-msgid "Edit resource cost"
-msgstr "المورد مقفل"
-
-#: ../src/planner-resource-view.c:243
-#, fuzzy
-msgid "Edit resource groups"
-msgstr "_تحرير المستخدمين و المجموعات"
-
-#: ../src/planner-resource-dialog.c:576
-#, fuzzy
-msgid "Edit resource note"
-msgstr "<b>خصائص المذكرة الافتراضية</b>"
-
-#: ../src/planner-resource-dialog.c:1648
-#: ../src/planner-resource-dialog.c:1650
-#, fuzzy
-msgid "Edit resource properties"
-msgstr "خصائص عنصر القائمة"
-
-#: ../src/planner-resource-dialog.c:711
-#: ../src/planner-resource-dialog.c:752
-#: ../src/planner-resource-view.c:1413
-#: ../src/planner-resource-view.c:1494
-#, fuzzy
-msgid "Edit resource property"
-msgstr "قيمة خاصية مسماة"
-
-#: ../src/planner-task-dialog.c:1087
-#, fuzzy
-msgid "Edit task note"
-msgstr "<b>خصائص المذكرة الافتراضية</b>"
-
-#: ../src/planner-task-dialog.c:950
-#, fuzzy
-msgid "Edit task predecessor"
-msgstr "<b>خيارات قائمة المهام</b>"
-
-#: ../src/planner-task-dialog.c:2887
-#: ../src/planner-task-dialog.c:2889
-#, fuzzy
-msgid "Edit task properties"
-msgstr "خصائص عنصر القائمة"
-
-#: ../src/planner-gantt-row.c:3232
-#: ../src/planner-task-dialog.c:455
-#: ../src/planner-task-tree.c:257
-#: ../src/planner-task-tree.c:947
-#, fuzzy
-msgid "Edit task property"
-msgstr "قيمة خاصية مسماة"
-
-#: ../src/planner-task-dialog.c:663
-#, fuzzy
-msgid "Edit task scheduling"
-msgstr "<b>خيارات قائمة المهام</b>"
-
-#: ../src/planner-task-dialog.c:529
-#, fuzzy
-msgid "Edit task type"
-msgstr "نوع جهاز الخرج"
-
-#: ../src/planner-window.c:292
-#, fuzzy
-msgid "Edit the project properties"
-msgstr "خصائص عنصر القائمة"
-
-#: ../src/planner-gantt-view.c:179
-#: ../src/planner-resource-view.c:252
-#: ../src/planner-task-view.c:155
-#: ../src/planner-usage-view.c:115
-#, fuzzy
-msgid "Edit visible columns"
-msgstr "عدد خلايا اﻷعمدة"
-
-#: ../src/planner-working-time-dialog.c:145
-#, fuzzy
-msgid "Edit working time"
-msgstr "الوقت الذي تحدّده أنت"
-
-#: ../src/planner-application.c:125
-#, fuzzy
-msgid "Edit"
-msgstr "تحرير"
-
-#: ../src/planner-eds-plugin.c:416
-#: ../src/planner-resource-view.c:1287
-#, fuzzy
-msgid "Email"
-msgstr "البريد الإلكتروني"
-
-#: ../src/planner-eds-plugin.c:923
-msgid "Evolution Data Server UID"
-msgstr ""
-
-#: ../src/planner-window.c:258
-#, fuzzy
-msgid "Exit the program"
-msgstr "إنهاء البرنامج"
-
-#: ../src/planner-html-plugin.c:48
-#, fuzzy
-msgid "Export project to HTML"
-msgstr "تصدير بصيغة HTML لآخر مجلد"
-
-#: ../src/planner-xml-planner-plugin.c:55
-msgid "Export project to a file suitable for Planner 0.11"
-msgstr ""
-
-#: ../libplanner/mrp-xsl.c:89
-#: ../libplanner/mrp-xsl.c:137
-#, fuzzy
-msgid "Export to HTML failed"
-msgstr "فشل فتح الجهاز"
-
-#: ../src/planner-html-plugin.c:110
-#, fuzzy
-msgid "Export to HTML"
-msgstr "تصدير بصيغة HTML"
-
-#: ../src/planner-xml-planner-plugin.c:90
-#, fuzzy
-msgid "Export"
-msgstr "تصدير علامات المواقع"
-
-#: ../src/planner-predecessor-model.c:194
-#: ../src/planner-task-dialog.c:2218
-msgid "FF"
-msgstr ""
-
-#: ../src/planner-predecessor-model.c:191
-#: ../src/planner-task-dialog.c:2217
-msgid "FS"
-msgstr ""
-
-#: ../src/planner-html-plugin.c:173
-#: ../src/planner-window.c:1690
-#: ../src/planner-xml-planner-plugin.c:124
-#, fuzzy, c-format
-msgid "File \"%s\" exists, do you want to overwrite it?"
-msgstr "الملف موجود. هل تريد تنميقه؟"
-
-#: ../libplanner/mrp-task.c:1101
-msgid "Finish to Finish relation type cannot be combined with Start No Earlier Than constraint."
-msgstr ""
-
-#: ../libplanner/mrp-task.c:1083
-msgid "Finish to Finish relation type cannot be combined with other relations."
-msgstr ""
-
-#: ../src/planner-task-dialog.c:1918
-#, fuzzy
-msgid "Finish to finish (FF)"
-msgstr "انقر موافق للإنهاء."
-
-#: ../src/planner-task-dialog.c:1917
-#, fuzzy
-msgid "Finish to start (FS)"
-msgstr "اختر خادم X للتشغيل"
-
-#: ../src/planner-gantt-view.c:557
-#: ../src/planner-task-view.c:338
-#, fuzzy
-msgid "Finish"
-msgstr "إ_نهاء"
-
-#: ../libplanner/mrp-property.c:371
-#, fuzzy
-msgid "Floating-point number"
-msgstr "عدد عشري"
-
-#: ../src/planner-default-week-dialog.c:46
-#, fuzzy
-msgid "Friday"
-msgstr "الجمعة"
 
 #: ../data/glade/calendar-dialog.glade.h:22
 #, fuzzy
 msgid "From:"
 msgstr "من:"
 
-#: ../src/planner-main.c:56
+#: ../data/glade/calendar-dialog.glade.h:23
 #, fuzzy
-msgid "GEOMETRY"
-msgstr "هندسة"
+msgid "New Calendar"
+msgstr "رُزنامة جديدة"
 
-#. i18n: Label used for the sidebar. Please try to make it short and use
-#. * a linebreak if necessary/possible.
-#: ../src/planner-gantt-view.c:310
-msgid "Gantt"
+#: ../data/glade/calendar-dialog.glade.h:24
+#, fuzzy
+msgid "Select a Calendar"
+msgstr "انتقِ تاريخاً من التقويم"
+
+#: ../data/glade/calendar-dialog.glade.h:25
+msgid ""
+"Select a weekday and the day type to use for that day in the default week "
+"for this calendar.\n"
 msgstr ""
 
-#: ../data/glade/project-properties.glade.h:3
-#: ../data/glade/resource-dialog.glade.h:5
-#: ../data/glade/task-dialog.glade.h:6
+#: ../data/glade/calendar-dialog.glade.h:27
 #, fuzzy
-msgid "General"
-msgstr "عامّ"
+msgid "Set day type to:"
+msgstr "اضبط النوع المثلثاتي كدرجات"
+
+#: ../data/glade/calendar-dialog.glade.h:28
+#, fuzzy
+msgid "To:"
+msgstr "إلى:"
+
+#: ../data/glade/calendar-dialog.glade.h:29
+msgid "Use working time from derived calendar"
+msgstr ""
+
+#: ../data/glade/calendar-dialog.glade.h:30
+#, fuzzy
+msgid "Week day:"
+msgstr "آخر يوم"
+
+#: ../data/glade/calendar-dialog.glade.h:31
+#, fuzzy
+msgid "Working time..."
+msgstr "وقت غير سليم"
+
+#: ../data/glade/calendar-dialog.glade.h:32
+#, fuzzy
+msgid "_Derive from a calendar"
+msgstr "انتقِ تاريخاً من التقويم"
+
+#: ../data/glade/calendar-dialog.glade.h:33
+#, fuzzy
+msgid "_Existing calendars:"
+msgstr "فتح مستند مسبق"
+
+#: ../data/glade/calendar-dialog.glade.h:34
+#, fuzzy
+msgid "_Name of the new calendar:"
+msgstr "إنشاء رزنامة جديدة"
+
+#: ../data/glade/calendar-dialog.glade.h:36
+#, fuzzy
+msgid "_New..."
+msgstr "جديد"
+
+#: ../data/glade/column-dialog.glade.h:2
+#, fuzzy
+msgid "Hidden columns:"
+msgstr "عدد الأعمدة:"
+
+#: ../data/glade/column-dialog.glade.h:3
+#, fuzzy
+msgid "Visible columns:"
+msgstr "%s أعمدة مرئية"
+
+#: ../data/glade/column-dialog.glade.h:4
+#, fuzzy
+msgid "_Hide"
+msgstr "إ_خفاء"
+
+#: ../data/glade/column-dialog.glade.h:5
+#, fuzzy
+msgid "_Show"
+msgstr "ا_عرض"
+
+#: ../data/glade/eds.glade.h:2
+#, fuzzy
+msgid "Loading resource data"
+msgstr "مرجع بيانات كائن"
+
+#: ../data/glade/eds.glade.h:3
+#, fuzzy
+msgid "Search"
+msgstr "بحث"
+
+#: ../data/glade/eds.glade.h:4
+#, fuzzy
+msgid "Select All"
+msgstr "انتقاء الكل"
+
+#: ../data/glade/eds.glade.h:5
+#, fuzzy
+msgid "Select group"
+msgstr "مجموعة الرُّزنامة"
+
+#: ../data/glade/eds.glade.h:6
+#, fuzzy
+msgid "Unselect All"
+msgstr "نسخ ال_كل"
+
+#: ../data/glade/eds.glade.h:7
+msgid "dialog1"
+msgstr ""
 
 #: ../data/glade/group-dialog.glade.h:1
 #, fuzzy
 msgid "Group Editor"
 msgstr "<b>خط المحرر:</b>"
 
-#: ../src/planner-resource-view.c:1253
+#: ../data/glade/new-property.glade.h:2
 #, fuzzy
-msgid "Group"
-msgstr "مجموعة"
+msgid "Add Property"
+msgstr "أسماء الخصائص"
 
-#. i18n: Short "Half year", preferably 1 letter.
-#: ../src/planner-scale-utils.c:190
-#, c-format
-msgid "H%d"
+#: ../data/glade/new-property.glade.h:3
+#, fuzzy
+msgid "_Description:"
+msgstr "ال_وصف:"
+
+#: ../data/glade/new-property.glade.h:4
+#, fuzzy
+msgid "_Label:"
+msgstr "علامة"
+
+#: ../data/glade/new-property.glade.h:6
+#: ../data/glade/resource-dialog.glade.h:14
+#, fuzzy
+msgid "_Type:"
+msgstr "ال_نوع:"
+
+#: ../data/glade/project-properties.glade.h:1
+#, fuzzy
+msgid "Custom"
+msgstr "مخصص"
+
+#: ../data/glade/project-properties.glade.h:2
+#, fuzzy
+msgid "Edit Project Phases"
+msgstr "عدّل معلومات الحساب"
+
+#: ../data/glade/project-properties.glade.h:3
+#: ../data/glade/resource-dialog.glade.h:5 ../data/glade/task-dialog.glade.h:6
+#, fuzzy
+msgid "General"
+msgstr "عامّ"
+
+#: ../data/glade/project-properties.glade.h:4
+#, fuzzy
+msgid "New Project Phase"
+msgstr "خواتم وقتية للملفات الجديدة"
+
+#: ../data/glade/project-properties.glade.h:5
+#, fuzzy
+msgid "Project Properties"
+msgstr "خصائص القائمة"
+
+#: ../data/glade/project-properties.glade.h:6
+#, fuzzy
+msgid "Select..."
+msgstr "_إختار"
+
+#: ../data/glade/project-properties.glade.h:7
+#, fuzzy
+msgid "_Calendar:"
+msgstr "تقويم: %s"
+
+#: ../data/glade/project-properties.glade.h:8
+#, fuzzy
+msgid "_Manager:"
+msgstr "الم_دير:"
+
+#: ../data/glade/project-properties.glade.h:10
+#, fuzzy
+msgid "_Organization:"
+msgstr "المؤسسة:"
+
+#: ../data/glade/project-properties.glade.h:11
+msgid "_Phase:"
 msgstr ""
 
-#: ../src/planner-html-plugin.c:47
+#: ../data/glade/project-properties.glade.h:12
 #, fuzzy
-msgid "HTML"
-msgstr "HTML"
+msgid "_Start:"
+msgstr "إبدأ"
 
-#: ../data/glade/column-dialog.glade.h:2
+#: ../data/glade/property-dialog.glade.h:1
 #, fuzzy
-msgid "Hidden columns:"
-msgstr "عدد الأعمدة:"
+msgid "Custom Properties"
+msgstr "خصائص القائمة"
+
+#: ../data/glade/resource-dialog.glade.h:2
+msgid "C_ost:"
+msgstr ""
+
+#: ../data/glade/resource-dialog.glade.h:3
+#, fuzzy
+msgid "Calendar"
+msgstr "الرُّزنامة"
+
+#: ../data/glade/resource-dialog.glade.h:4
+#, fuzzy
+msgid "Edit Calendars..."
+msgstr "ت_حرير الخط"
+
+#: ../data/glade/resource-dialog.glade.h:6 ../data/glade/task-dialog.glade.h:7
+#, fuzzy
+msgid "Notes"
+msgstr "ملاحظات"
+
+#: ../data/glade/resource-dialog.glade.h:7
+msgid "Optional - overrides resource name in Gantt view."
+msgstr ""
+
+#: ../data/glade/resource-dialog.glade.h:8
+msgid ""
+"Select the calendar to use for this resource. If you want to use the default "
+"calendar of the project, select 'None'. "
+msgstr ""
+
+#: ../data/glade/resource-dialog.glade.h:9
+#: ../data/glade/resource-input-dialog.glade.h:4
+#, fuzzy
+msgid "_Email:"
+msgstr "البريد اﻻلكتروني"
+
+#: ../data/glade/resource-dialog.glade.h:10
+#: ../data/glade/resource-input-dialog.glade.h:5
+#, fuzzy
+msgid "_Group:"
+msgstr "الم_جموعة:"
+
+#: ../data/glade/resource-dialog.glade.h:11
+#, fuzzy
+msgid "_Insert time stamp"
+msgstr "إدراج التاريخ/الوقت"
+
+#: ../data/glade/resource-dialog.glade.h:13
+#: ../data/glade/resource-input-dialog.glade.h:8
+#, fuzzy
+msgid "_Short name:"
+msgstr "اسم الموصول"
+
+#: ../data/glade/resource-input-dialog.glade.h:2
+#, fuzzy
+msgid "Insert Resource"
+msgstr "إدرج فضاءات"
+
+#: ../data/glade/resource-input-dialog.glade.h:3
+msgid "Optional - overrides resource name in gantt view."
+msgstr ""
+
+#: ../data/glade/resource-input-dialog.glade.h:6
+#: ../data/glade/task-input-dialog.glade.h:3
+#, fuzzy
+msgid "_Insert"
+msgstr "_ادرج"
+
+#: ../data/glade/sql.glade.h:2
+#, fuzzy
+msgid "Open Database"
+msgstr "خادم قاعدة بيانات"
+
+#: ../data/glade/sql.glade.h:3
+#, fuzzy
+msgid "Select a Project"
+msgstr "إنتقاء ملف"
+
+#: ../data/glade/sql.glade.h:4
+msgid "The database contains the following projects. Select a project to open:"
+msgstr ""
+
+#: ../data/glade/sql.glade.h:5
+#, fuzzy
+msgid "_Database:"
+msgstr "قاعدة بيانات"
+
+#: ../data/glade/sql.glade.h:6
+#, fuzzy
+msgid "_Password:"
+msgstr "_كلمة السر:"
+
+#: ../data/glade/sql.glade.h:7
+#, fuzzy
+msgid "_Server:"
+msgstr "ال_خادم:"
+
+#: ../data/glade/sql.glade.h:8
+#, fuzzy
+msgid "_Username:"
+msgstr "إ_سم المستخدم:"
+
+#: ../data/glade/task-date-widget.glade.h:1
+msgid ""
+"As soon as possible\n"
+"No earlier than\n"
+"On fixed date"
+msgstr ""
+
+#: ../data/glade/task-date-widget.glade.h:4
+#: ../src/planner-cell-renderer-date.c:182
+#: ../src/planner-project-properties.c:747
+#, fuzzy
+msgid "Cancel"
+msgstr "إلغاء"
+
+#. The verb "schedule".
+#. This is the verb "schedule"
+#. I18n: the verb "schedule" here.
+#: ../data/glade/task-date-widget.glade.h:6
+#: ../data/glade/task-dialog.glade.h:11
+#: ../src/planner-cell-renderer-date.c:154
+#, fuzzy
+msgid "Schedule:"
+msgstr "_جدوِلة الأجتماع"
+
+#: ../data/glade/task-date-widget.glade.h:7
+#: ../src/planner-cell-renderer-date.c:189
+#, fuzzy
+msgid "Select"
+msgstr "انتقاء"
+
+#: ../data/glade/task-date-widget.glade.h:8
+#: ../src/planner-cell-renderer-date.c:176
+#: ../src/planner-project-properties.c:740
+#, fuzzy
+msgid "Today"
+msgstr "اليوم"
+
+#: ../data/glade/task-date-widget.glade.h:9
+#, fuzzy
+msgid "window"
+msgstr "نافذة"
+
+#: ../data/glade/task-dialog.glade.h:1
+msgid "  "
+msgstr ""
+
+#: ../data/glade/task-dialog.glade.h:4
+#, fuzzy, no-c-format
+msgid "%"
+msgstr "%"
+
+#: ../data/glade/task-dialog.glade.h:5
+msgid "C_omplete:"
+msgstr ""
+
+#: ../data/glade/task-dialog.glade.h:8
+msgid "Predecessors"
+msgstr ""
+
+#: ../data/glade/task-dialog.glade.h:9 ../src/planner-resource-view.c:417
+#, fuzzy
+msgid "Resources"
+msgstr "الموارد"
+
+#: ../data/glade/task-dialog.glade.h:12
+#, fuzzy
+msgid "_Duration:"
+msgstr "<b>المدة:</b>"
+
+#: ../data/glade/task-dialog.glade.h:13
+#, fuzzy
+msgid "_Fixed duration"
+msgstr "مدة المكالمة"
+
+#: ../data/glade/task-dialog.glade.h:14
+#, fuzzy
+msgid "_Insert Time Stamp"
+msgstr "إدراج التاريخ/الوقت"
+
+#: ../data/glade/task-dialog.glade.h:15
+msgid "_Milestone"
+msgstr ""
+
+#: ../data/glade/task-dialog.glade.h:17
+#, fuzzy
+msgid "_Priority:"
+msgstr "الأ_ولويّة:"
+
+#: ../data/glade/task-dialog.glade.h:18
+#: ../data/glade/task-input-dialog.glade.h:5
+#, fuzzy
+msgid "_Work:"
+msgstr "_عمل:"
+
+#: ../data/glade/task-input-dialog.glade.h:2
+#, fuzzy
+msgid "Insert Task"
+msgstr "ت_كليف بالمهمّة"
+
+#: ../data/mime/planner.keys.in.h:1
+#, fuzzy
+msgid "Documents/Project Management"
+msgstr "إدارة الحسابات"
+
+#: ../data/mime/planner.keys.in.h:2
+#, fuzzy
+msgid "Project Plan"
+msgstr "إبدأ مخفياً"
+
+#: ../data/mime/planner.xml.in.h:1
+msgid "Planner project plan"
+msgstr ""
+
+#: ../data/planner.desktop.in.in.h:1
+#, fuzzy
+msgid "Planner Project Management"
+msgstr "رقيب إدارة الطاقة"
+
+#: ../data/planner.desktop.in.in.h:2
+#, fuzzy
+msgid "Project Management"
+msgstr "إدارة الحسابات"
+
+#: ../data/planner.schemas.in.h:1
+msgid "Display nonstandard days in Gantt view"
+msgstr ""
 
 #: ../data/planner.schemas.in.h:2
 msgid "Highlight critical path in Gantt view"
@@ -963,497 +585,6 @@ msgstr ""
 #: ../data/planner.schemas.in.h:3
 msgid "Highlight critical path in Task view"
 msgstr ""
-
-#: ../src/planner-sql-plugin.c:770
-#, fuzzy
-msgid "ID"
-msgstr "الهوية"
-
-#: ../src/planner-gantt-view.c:154
-#: ../src/planner-task-view.c:136
-#, fuzzy
-msgid "I_ndent Task"
-msgstr "ت_كليف بالمهمّة"
-
-#: ../src/planner-eds-plugin.c:924
-msgid "Identifier used by Evolution Data Server for resources"
-msgstr ""
-
-#: ../eds-backend/e-cal-backend-planner.c:290
-msgid "Identifier used by Evolution Data Server for tasks"
-msgstr ""
-
-#: ../src/planner-window.c:1515
-#, c-format
-msgid "If you don't save, changes made the last %d hours will be discarded."
-msgstr ""
-
-#: ../src/planner-window.c:1505
-#, c-format
-msgid "If you don't save, changes made the last %d minutes will be discarded."
-msgstr ""
-
-#: ../src/planner-window.c:1510
-#, fuzzy
-msgid "If you don't save, changes made the last hour will be discarded."
-msgstr "ستضيع تغييرات السّاعة الأخيرة نهائيّا إذا لم تحفظ."
-
-#: ../src/planner-window.c:1500
-#, fuzzy
-msgid "If you don't save, changes made the last minute will be discarded."
-msgstr "ستضيع تغييرات الدّقيقة الأخيرة نهائيّاً إذا لم تحفظ."
-
-#: ../src/planner-msp-plugin.c:206
-#, fuzzy
-msgid "Import a File"
-msgstr "إستيراد ملف"
-
-#: ../src/planner-msp-plugin.c:50
-msgid "Import an MS Project XML file"
-msgstr ""
-
-#: ../src/planner-eds-plugin.c:168
-msgid "Import resources from Evolution Data Server"
-msgstr ""
-
-#: ../src/planner-eds-plugin.c:437
-#, fuzzy
-msgid "Import"
-msgstr "استيراد"
-
-#: ../src/planner-eds-plugin.c:676
-msgid "Imported from Evolution Data Server"
-msgstr ""
-
-#: ../src/planner-resource-view.c:233
-#, fuzzy
-msgid "In_sert Resources..."
-msgstr "أد_خل التاريخ و الوقت..."
-
-#: ../src/planner-gantt-view.c:136
-#: ../src/planner-task-view.c:118
-#, fuzzy
-msgid "In_sert Tasks..."
-msgstr "أد_خل التاريخ و الوقت..."
-
-#: ../src/planner-task-tree.c:3042
-#, fuzzy
-msgid "Indent task"
-msgstr "ت_كليف بالمهمّة"
-
-#: ../src/planner-task-tree.c:3031
-#, fuzzy
-msgid "Indent tasks"
-msgstr "المهام ال_فائت موعدها:"
-
-#: ../src/planner-gantt-view.c:155
-#: ../src/planner-task-view.c:137
-#, fuzzy
-msgid "Indent the selected tasks"
-msgstr "_حذف المهام المنتقاة"
-
-#: ../src/planner-application.c:83
-#, fuzzy
-msgid "Indent"
-msgstr "إزاحة"
-
-#: ../data/glade/resource-input-dialog.glade.h:2
-#, fuzzy
-msgid "Insert Resource"
-msgstr "إدرج فضاءات"
-
-#: ../data/glade/task-input-dialog.glade.h:2
-#, fuzzy
-msgid "Insert Task"
-msgstr "ت_كليف بالمهمّة"
-
-#: ../src/planner-resource-view.c:231
-#, fuzzy
-msgid "Insert a new resource"
-msgstr "المورد مقفل"
-
-#: ../src/planner-gantt-view.c:134
-#: ../src/planner-task-view.c:116
-#, fuzzy
-msgid "Insert a new task"
-msgstr "إنشاء مهمّةً جديدة"
-
-#: ../src/planner-group-dialog.c:304
-#, fuzzy
-msgid "Insert group"
-msgstr "مجموعة الرُّزنامة"
-
-#: ../src/planner-phase-dialog.c:540
-#, fuzzy
-msgid "Insert phase"
-msgstr "إدرج فضاءات"
-
-#: ../src/planner-resource-cmd.c:75
-#, fuzzy
-msgid "Insert resource"
-msgstr "إدرج فضاءات"
-
-#: ../src/planner-task-cmd.c:268
-#, fuzzy
-msgid "Insert task"
-msgstr "ت_كليف بالمهمّة"
-
-#: ../src/planner-application.c:55
-#: ../src/planner-application.c:111
-#, fuzzy
-msgid "Insert"
-msgstr "أدرج"
-
-#: ../libplanner/mrp-property.c:369
-#, fuzzy
-msgid "Integer number"
-msgstr "عدد صحيح"
-
-#: ../libplanner/mrp-storage-sql.c:274
-msgid "Invalid SQL URI (invalid project id)."
-msgstr ""
-
-#: ../libplanner/mrp-storage-sql.c:205
-msgid "Invalid SQL URI (must start with 'sql://' and contain '#')."
-msgstr ""
-
-#: ../libplanner/mrp-storage-sql.c:282
-msgid "Invalid SQL URI (no database name specified)."
-msgstr ""
-
-#: ../libplanner/mrp-project.c:817
-#, fuzzy
-msgid "Invalid URI."
-msgstr "عنوان غير صحيح"
-
-#: ../libplanner/mrp-project.c:716
-#, fuzzy, c-format
-msgid "Invalid URI: '%s'"
-msgstr "عنوان غير صحيح"
-
-#. Give up.
-#: ../libplanner/mrp-sql.c:298
-#: ../src/planner-sql-plugin.c:197
-#, fuzzy
-msgid "Invalid Unicode"
-msgstr " (يونيكود غير صحيح)"
-
-#: ../eds-backend/e-cal-backend-planner.c:829
-#, fuzzy
-msgid "Invalid server URI"
-msgstr "العنوان \"%s\" غير سليم."
-
-#: ../src/planner-property-dialog.c:502
-#, fuzzy
-msgid "Label"
-msgstr "علامة"
-
-#: ../src/planner-task-dialog.c:2744
-msgid "Lag"
-msgstr ""
-
-#: ../src/planner-task-cmd.c:97
-#, fuzzy
-msgid "Link task"
-msgstr "ت_كليف بالمهمّة"
-
-#: ../src/planner-task-tree.c:2940
-#, fuzzy
-msgid "Link tasks"
-msgstr "المهام ال_فائت موعدها:"
-
-#: ../src/planner-gantt-view.c:152
-#: ../src/planner-task-view.c:134
-#, fuzzy
-msgid "Link the selected tasks"
-msgstr "_حذف المهام المنتقاة"
-
-#: ../src/planner-application.c:76
-#, fuzzy
-msgid "Link"
-msgstr "وصلة"
-
-#: ../data/glade/eds.glade.h:2
-#, fuzzy
-msgid "Loading resource data"
-msgstr "مرجع بيانات كائن"
-
-#: ../src/planner-msp-plugin.c:50
-#, fuzzy
-msgid "MS Project XML..."
-msgstr "عدد عشري ل XML"
-
-#: ../src/planner-gantt-row.c:2613
-#, fuzzy, c-format
-msgid "Make task '%s' a predecessor of '%s'"
-msgstr "<b>خيارات قائمة المهام</b>"
-
-#: ../src/planner-group-dialog.c:840
-#, fuzzy
-msgid "Manager email"
-msgstr "عنوان البريد الإلكتروني"
-
-#: ../src/planner-group-dialog.c:828
-#, fuzzy
-msgid "Manager name"
-msgstr "اسم الموصول"
-
-#: ../src/planner-group-dialog.c:834
-#, fuzzy
-msgid "Manager phone"
-msgstr "هاتف المساعد"
-
-#: ../src/planner-resource-dialog.c:1851
-#: ../src/planner-resource-view.c:753
-#: ../src/planner-resource-view.c:767
-#: ../src/planner-resource-view.c:1737
-msgid "Material"
-msgstr ""
-
-#: ../src/planner-default-week-dialog.c:42
-#, fuzzy
-msgid "Monday"
-msgstr "الإثنين"
-
-#: ../src/planner-gantt-view.c:163
-#: ../src/planner-task-view.c:145
-msgid "Move Task Do_wn"
-msgstr ""
-
-#: ../src/planner-gantt-view.c:160
-#: ../src/planner-task-view.c:142
-#, fuzzy
-msgid "Move Task _Up"
-msgstr "نقل القطع إلى الأعلى"
-
-#: ../src/planner-application.c:104
-#, fuzzy
-msgid "Move down"
-msgstr "تحرّك للأسفل"
-
-#. Moving task from 'position' to 'position + 1'
-#: ../src/planner-task-tree.c:3400
-#, fuzzy
-msgid "Move task down"
-msgstr "نقل القطع إلى الأسفل"
-
-#: ../src/planner-task-tree.c:3265
-#, fuzzy
-msgid "Move task up"
-msgstr "نقل القطع إلى الأعلى"
-
-#: ../src/planner-task-tree.c:3354
-#, fuzzy
-msgid "Move tasks down"
-msgstr "نقل القطع إلى الأسفل"
-
-#: ../src/planner-task-tree.c:3227
-#, fuzzy
-msgid "Move tasks up"
-msgstr "نقل القطع إلى الأعلى"
-
-#: ../src/planner-gantt-view.c:164
-#: ../src/planner-task-view.c:146
-#, fuzzy
-msgid "Move the selected tasks downwards"
-msgstr "_تعليم المهام المنتقاة كمكتملة"
-
-#: ../src/planner-gantt-view.c:161
-#: ../src/planner-task-view.c:143
-#, fuzzy
-msgid "Move the selected tasks upwards"
-msgstr "_تعليم المهام المنتقاة كمكتملة"
-
-#: ../src/planner-application.c:97
-#, fuzzy
-msgid "Move up"
-msgstr "تحرّك للأعلى"
-
-#: ../src/planner-task-tree.c:1492
-#: ../src/planner-task-tree.c:1624
-#, fuzzy
-msgid "N/A"
-msgstr "غير متوفر"
-
-#: ../src/planner-eds-plugin.c:396
-#: ../src/planner-gantt-print.c:190
-#: ../src/planner-gantt-view.c:555
-#: ../src/planner-group-dialog.c:822
-#: ../src/planner-property-dialog.c:485
-#: ../src/planner-resource-view.c:1171
-#: ../src/planner-task-dialog.c:2616
-#: ../src/planner-task-dialog.c:2690
-#: ../src/planner-task-view.c:336
-#, fuzzy
-msgid "Name"
-msgstr "اسم"
-
-#: ../data/glade/calendar-dialog.glade.h:23
-#, fuzzy
-msgid "New Calendar"
-msgstr "رُزنامة جديدة"
-
-#: ../data/glade/project-properties.glade.h:4
-#, fuzzy
-msgid "New Project Phase"
-msgstr "خواتم وقتية للملفات الجديدة"
-
-#: ../src/planner-task-dialog.c:1495
-#, fuzzy, c-format
-msgid "No earlier than %s"
-msgstr "أكبر من"
-
-#: ../src/planner-cell-renderer-date.c:162
-#, fuzzy
-msgid "No earlier than"
-msgstr "أكبر من"
-
-#: ../src/planner-sql-plugin.c:128
-#, fuzzy
-msgid "No errors reported."
-msgstr "اظهار أخطاء التشغيل"
-
-#: ../src/planner-gantt-row.c:2607
-#: ../src/planner-gantt-row.c:2610
-#, fuzzy
-msgid "No name"
-msgstr "لا يوجد اسم"
-
-#: ../libplanner/mrp-project.c:780
-#: ../libplanner/mrp-project.c:1064
-msgid "No support for SQL storage built into this version of Planner."
-msgstr ""
-
-#: ../src/planner-default-week-dialog.c:288
-#, fuzzy
-msgid "No working time"
-msgstr "الوقت الذي تحدّده أنت"
-
-#: ../src/planner-resource-dialog.c:1521
-#, fuzzy
-msgid "None (use project default)"
-msgstr "_استخدام تيمة الخط الإفتراضية"
-
-#: ../libplanner/mrp-property.c:380
-#: ../src/planner-project-properties.c:882
-#, fuzzy
-msgid "None"
-msgstr "لا شيء"
-
-#: ../libplanner/mrp-day.c:57
-msgid "Nonworking"
-msgstr ""
-
-#: ../data/glade/resource-dialog.glade.h:6
-#: ../data/glade/task-dialog.glade.h:7
-#, fuzzy
-msgid "Notes"
-msgstr "ملاحظات"
-
-#: ../src/planner-project-properties.c:754
-#, fuzzy
-msgid "OK"
-msgstr "موافق"
-
-#: ../src/planner-task-dialog.c:1499
-#, fuzzy, c-format
-msgid "On fixed date %s"
-msgstr "بحسب _تاريخ التعديل"
-
-#: ../src/planner-cell-renderer-date.c:163
-#, fuzzy
-msgid "On fixed date"
-msgstr "بحسب _تاريخ التعديل"
-
-#: ../src/planner-window.c:2087
-#, fuzzy, c-format
-msgid "Open '%s'"
-msgstr "فتح '%s'"
-
-#: ../data/glade/sql.glade.h:2
-#, fuzzy
-msgid "Open Database"
-msgstr "خادم قاعدة بيانات"
-
-#: ../src/planner-window.c:832
-#, fuzzy
-msgid "Open a File"
-msgstr "فتح ملف"
-
-#: ../src/planner-sql-plugin.c:94
-#, fuzzy
-msgid "Open a project from a database"
-msgstr "افتح سجل من ملف"
-
-#: ../src/planner-window.c:233
-#, fuzzy
-msgid "Open a project"
-msgstr "فتح ملف"
-
-#: ../src/planner-sql-plugin.c:994
-#, fuzzy
-msgid "Open from Database"
-msgstr "افتح سجل من ملف"
-
-#: ../src/planner-sql-plugin.c:93
-#, fuzzy
-msgid "Open from Database..."
-msgstr "افتح سجل من ملف"
-
-#: ../data/glade/resource-dialog.glade.h:7
-msgid "Optional - overrides resource name in Gantt view."
-msgstr ""
-
-#: ../data/glade/resource-input-dialog.glade.h:3
-msgid "Optional - overrides resource name in gantt view."
-msgstr ""
-
-#: ../src/planner-sql-plugin.c:786
-msgid "Phase"
-msgstr ""
-
-#: ../src/planner-eds-plugin.c:447
-#, fuzzy
-msgid "Photo"
-msgstr "صورة تسجيل الدخول"
-
-#: ../src/planner-xml-planner-plugin.c:54
-#, fuzzy
-msgid "Planner 0.11 Format"
-msgstr "تهيئة توقيع غير مدعومة"
-
-#: ../src/planner-window.c:842
-#, fuzzy
-msgid "Planner Files"
-msgstr "كل الملفّات"
-
-#: ../data/planner.desktop.in.in.h:1
-#, fuzzy
-msgid "Planner Project Management"
-msgstr "رقيب إدارة الطاقة"
-
-#: ../data/mime/planner.xml.in.h:1
-msgid "Planner project plan"
-msgstr ""
-
-#: ../data/glade/task-dialog.glade.h:8
-msgid "Predecessors"
-msgstr ""
-
-#: ../src/planner-window.c:252
-#, fuzzy
-msgid "Print Pre_view"
-msgstr "لمحة ال_طباعة"
-
-#: ../src/planner-print-dialog.c:187
-#, fuzzy
-msgid "Print Project"
-msgstr "معاينة الطّباعة."
-
-#: ../src/planner-window.c:252
-#, fuzzy
-msgid "Print preview of the current project"
-msgstr "يغلق نافذة لمحة المطبوعة"
 
 #: ../data/planner.schemas.in.h:4
 #, fuzzy
@@ -1470,632 +601,10 @@ msgstr "لمحة ال_طباعة"
 msgid "Print the Task view"
 msgstr "لمحة ال_طباعة"
 
-#: ../src/planner-window.c:249
-#, fuzzy
-msgid "Print the current project"
-msgstr "طبع الصفحة الحالية"
-
-#: ../data/planner.desktop.in.in.h:2
-#, fuzzy
-msgid "Project Management"
-msgstr "إدارة الحسابات"
-
-#: ../data/glade/project-properties.glade.h:5
-#, fuzzy
-msgid "Project Properties"
-msgstr "خصائص القائمة"
-
-#: ../src/planner-gantt-background.c:627
-#, fuzzy
-msgid "Project start"
-msgstr "إبدأ مخفياً"
-
-#: ../src/planner-sql-plugin.c:778
-msgid "Project"
-msgstr ""
-
-#: ../src/planner-project-properties.c:975
-#, fuzzy
-msgid "Property"
-msgstr "أسماء الخصائص"
-
-#. i18n: Short "Quarter", preferably 1 letter.
-#: ../src/planner-scale-utils.c:169
-#, c-format
-msgid "Q%d"
-msgstr ""
-
-#. i18n: Short "Quarter", preferably 2-3 letters.
-#: ../src/planner-scale-utils.c:173
-#, c-format
-msgid "Qtr %d"
-msgstr ""
-
-#: ../src/planner-eds-plugin.c:862
-#, fuzzy
-msgid "Query cancelled."
-msgstr "أُلغيت العملية"
-
-#: ../src/planner-cmd-manager.c:239
-#, fuzzy, c-format
-msgid "Redo '%s'"
-msgstr "تكرار"
-
-#: ../src/planner-window.c:268
-#, fuzzy
-msgid "Redo the undone action"
-msgstr "كرّر الفعل المتراجع عنه"
-
-#: ../src/planner-cmd-manager.c:241
-#, fuzzy
-msgid "Redo"
-msgstr "تكرار"
-
-#: ../src/planner-calendar-dialog.c:306
-#, fuzzy
-msgid "Remove calendar"
-msgstr "رزنامة جنوم"
-
-#: ../src/planner-day-type-dialog.c:560
-#, fuzzy, c-format
-msgid "Remove day type \"%s\""
-msgstr "نوع جهاز الخرج"
-
-#: ../src/planner-group-dialog.c:431
-#, fuzzy
-msgid "Remove group"
-msgstr "مجموعة الرُّزنامة"
-
-#: ../src/planner-phase-dialog.c:639
-#, fuzzy
-msgid "Remove phase"
-msgstr "هل أحذف السمة \"%s\" ؟"
-
-#: ../src/planner-project-properties.c:2043
-#, fuzzy
-msgid "Remove project property"
-msgstr "قيمة خاصية مسماة"
-
-#: ../src/planner-property-dialog.c:816
-#, fuzzy
-msgid "Remove property"
-msgstr "أسماء الخصائص"
-
-#: ../src/planner-resource-view.c:943
-#, fuzzy
-msgid "Remove resource"
-msgstr "هل أحذف السمة \"%s\" ؟"
-
-#: ../src/planner-task-tree.c:567
-#, fuzzy
-msgid "Remove task"
-msgstr "ت_كليف بالمهمّة"
-
-#: ../src/planner-task-tree.c:2724
-#, fuzzy
-msgid "Remove tasks"
-msgstr "المهام ال_فائت موعدها:"
-
-#: ../src/planner-resource-view.c:237
-#, fuzzy
-msgid "Remove the selected resource"
-msgstr "حذف شريط الأدوات المحدد"
-
-#: ../src/planner-gantt-view.c:140
-#: ../src/planner-task-view.c:122
-#, fuzzy
-msgid "Remove the selected tasks"
-msgstr "_حذف المهام المنتقاة"
-
-#: ../src/planner-application.c:62
-#: ../src/planner-application.c:118
-#, fuzzy
-msgid "Remove"
-msgstr "احذف"
-
-#: ../src/planner-gantt-view.c:166
-#: ../src/planner-task-view.c:148
-#, fuzzy
-msgid "Reset _Constraint"
-msgstr "إعا_دة ضبط الخطوط"
-
-#: ../src/planner-task-tree.c:3488
-msgid "Reset all task constraints"
-msgstr ""
-
-#: ../src/planner-task-tree.c:706
-#, fuzzy
-msgid "Reset task constraint"
-msgstr "<b>خيارات قائمة المهام</b>"
-
-#: ../src/planner-task-tree.c:3456
-#, fuzzy
-msgid "Reset task constraints"
-msgstr "<b>خيارات قائمة المهام</b>"
-
-#: ../src/planner-usage-view.c:207
-#, fuzzy
-msgid "Resource _Usage"
-msgstr "الاستعمال:·%s:·[-D]·[-E]·[-a·accuracy]·"
-
-#. i18n: Label used for the sidebar. Please try to make it short and use
-#. * a linebreak if necessary/possible.
-#: ../src/planner-usage-view.c:201
-#, fuzzy
-msgid ""
-"Resource\n"
-"Usage"
-msgstr "المورد مقفل"
-
-#: ../data/glade/task-dialog.glade.h:9
-#: ../src/planner-resource-view.c:417
-#, fuzzy
-msgid "Resources"
-msgstr "الموارد"
-
-#: ../src/planner-sql-plugin.c:794
-#, fuzzy
-msgid "Revision"
-msgstr "تاريخ التنقيح"
-
-#: ../src/planner-predecessor-model.c:200
-#: ../src/planner-task-dialog.c:2220
-msgid "SF"
-msgstr ""
-
-#: ../src/planner-predecessor-model.c:197
-#: ../src/planner-task-dialog.c:2219
-msgid "SS"
-msgstr ""
-
-#: ../src/planner-default-week-dialog.c:47
-#, fuzzy
-msgid "Saturday"
-msgstr "السّبت"
-
-#: ../src/planner-window.c:246
-#, fuzzy
-msgid "Save _As..."
-msgstr "حفظ _بإسم..."
-
-#: ../src/planner-window.c:1652
-#, fuzzy
-msgid "Save a File"
-msgstr "حفظ الملف"
-
-#: ../src/planner-window.c:1522
-#, fuzzy, c-format
-msgid "Save changes to document '%s' before closing?"
-msgstr "هل تريد حفظ التّغييرات في المستند \"%s\" قبل غلقه؟"
-
-#: ../src/planner-sql-plugin.c:97
-#, fuzzy
-msgid "Save the current project to a database"
-msgstr "لا وجود لقاعدة بيانات لحفظ اعداداتك"
-
-#: ../src/planner-window.c:246
-#, fuzzy
-msgid "Save the current project with a different name"
-msgstr "حفظ الملف الحالي بإسم مغاير"
-
-#: ../src/planner-window.c:240
-#, fuzzy
-msgid "Save the current project"
-msgstr "إ_حفظ الصورة الحالية"
-
-#: ../src/planner-sql-plugin.c:96
-#: ../src/planner-sql-plugin.c:1106
-#, fuzzy
-msgid "Save to Database"
-msgstr "قاعدة البيانات المستعملة"
-
-#. The verb "schedule".
-#. This is the verb "schedule"
-#. I18n: the verb "schedule" here.
-#: ../data/glade/task-date-widget.glade.h:6
-#: ../data/glade/task-dialog.glade.h:11
-#: ../src/planner-cell-renderer-date.c:154
-#, fuzzy
-msgid "Schedule:"
-msgstr "_جدوِلة الأجتماع"
-
-#: ../data/glade/eds.glade.h:3
-#, fuzzy
-msgid "Search"
-msgstr "بحث"
-
-#: ../data/glade/eds.glade.h:4
-#, fuzzy
-msgid "Select All"
-msgstr "انتقاء الكل"
-
-#: ../src/planner-gantt-view.c:145
-#: ../src/planner-resource-view.c:245
-#: ../src/planner-task-view.c:127
-#, fuzzy
-msgid "Select _All"
-msgstr "اختيا_ر الكل"
-
-#: ../data/glade/calendar-dialog.glade.h:24
-#, fuzzy
-msgid "Select a Calendar"
-msgstr "انتقِ تاريخاً من التقويم"
-
-#: ../data/glade/sql.glade.h:3
-#, fuzzy
-msgid "Select a Project"
-msgstr "إنتقاء ملف"
-
-#: ../src/planner-project-properties.c:387
-msgid "Select a calendar to use for this project:"
-msgstr ""
-
-#: ../data/glade/calendar-dialog.glade.h:25
-msgid "Select a weekday and the day type to use for that day in the default week for this calendar.\n"
-msgstr ""
-
-#: ../src/planner-gantt-view.c:146
-#: ../src/planner-resource-view.c:246
-#: ../src/planner-task-view.c:128
-#, fuzzy
-msgid "Select all tasks"
-msgstr "إنتقاء جميع المراسَلين"
-
-#: ../data/glade/eds.glade.h:5
-#, fuzzy
-msgid "Select group"
-msgstr "مجموعة الرُّزنامة"
-
-#. book_target = (EABConfigTargetSource *) data->target;
-#. source = book_target->source;
-#: ../eds-backend/planner-source/planner-source.c:125
-#, fuzzy
-msgid "Select planner file"
-msgstr "انتقي ملف صوت"
-
-#: ../data/glade/resource-dialog.glade.h:8
-msgid "Select the calendar to use for this resource. If you want to use the default calendar of the project, select 'None'. "
-msgstr ""
-
-#: ../src/planner-print-dialog.c:218
-#, fuzzy
-msgid "Select the views to print:"
-msgstr "كيف تطبع إطارات"
-
-#: ../src/planner-print-dialog.c:194
-#, fuzzy
-msgid "Select views"
-msgstr "تعريف المشاهد..."
-
-#: ../data/glade/task-date-widget.glade.h:7
-#: ../src/planner-cell-renderer-date.c:189
-#, fuzzy
-msgid "Select"
-msgstr "انتقاء"
-
-#: ../data/glade/project-properties.glade.h:6
-#, fuzzy
-msgid "Select..."
-msgstr "_إختار"
-
-#: ../data/glade/calendar-dialog.glade.h:27
-#, fuzzy
-msgid "Set day type to:"
-msgstr "اضبط النوع المثلثاتي كدرجات"
-
-#: ../src/planner-resource-view.c:1197
-#, fuzzy
-msgid "Short name"
-msgstr "اسم الموصول"
-
-#: ../src/planner-html-plugin.c:154
-#, fuzzy
-msgid "Show result in browser"
-msgstr "_فتح الوصلة في المتصفّح"
-
-#: ../src/planner-window.c:303
-#, fuzzy
-msgid "Show the Planner User Guide"
-msgstr "أظهر زر تغيير المستخدم"
-
-#: ../src/planner-gantt-view.c:560
-#: ../src/planner-task-view.c:341
-msgid "Slack"
-msgstr ""
-
-#: ../libplanner/mrp-task.c:1124
-msgid "Start to Finish relation cannot be set. Predecessor starts on project start date."
-msgstr ""
-
-#: ../libplanner/mrp-task.c:1099
-msgid "Start to Finish relation type cannot be combined with Start No Earlier Than constraint."
-msgstr ""
-
-#: ../libplanner/mrp-task.c:1081
-msgid "Start to Finish relation type cannot be combined with other relations."
-msgstr ""
-
-#: ../src/planner-task-dialog.c:1920
-#, fuzzy
-msgid "Start to finish (SF)"
-msgstr "انقر موافق للإنهاء."
-
-#: ../src/planner-task-dialog.c:1919
-#, fuzzy
-msgid "Start to start (SS)"
-msgstr "الخوادم الواجب تشغيلها"
-
-#: ../src/planner-gantt-view.c:556
-#: ../src/planner-task-view.c:337
-#, fuzzy
-msgid "Start"
-msgstr "إبدأ"
-
-#: ../libplanner/mrp-property.c:367
-#, fuzzy
-msgid "String list"
-msgstr "قائمة الحسابات"
-
-#: ../src/planner-default-week-dialog.c:48
-#, fuzzy
-msgid "Sunday"
-msgstr "الأحد"
-
-#. Note: these strings are leaked.
-#: ../src/planner-window.c:665
-#, fuzzy, c-format
-msgid "Switch to the view \"%s\""
-msgstr "بدّل إلى <b>%(name)s</b>"
-
-#: ../eds-backend/e-cal-backend-planner.c:310
-msgid "Task access classification used by Evolution Data Server"
-msgstr ""
-
-#: ../src/planner-task-view.c:270
-#, fuzzy
-msgid "Tasks"
-msgstr "المهام"
-
-#: ../src/planner-sql-plugin.c:672
-#, c-format
-msgid "Test to tables in database '%s' failed."
-msgstr ""
-
-#: ../libplanner/mrp-property.c:365
-#, fuzzy
-msgid "Text"
-msgstr "النّص"
-
-#: ../src/planner-window.c:1348
-#, fuzzy
-msgid "The Planner Homepage"
-msgstr "صفحة الإنترنت و التبرعات"
-
 #: ../data/planner.schemas.in.h:7
 #, fuzzy
 msgid "The active view"
 msgstr "وضعية _ العرض"
-
-#: ../data/glade/sql.glade.h:4
-msgid "The database contains the following projects. Select a project to open:"
-msgstr ""
-
-#: ../eds-backend/planner-source/planner-source.c:157
-#, c-format
-msgid "The filename extension of this file isn't the planner usual file extension (%s) Do you want to continue?"
-msgstr ""
-
-#: ../src/planner-project-properties.c:1390
-#: ../src/planner-property-dialog.c:333
-msgid "The name of the custom property needs to start with a letter."
-msgstr ""
-
-#: ../libplanner/mrp-sql.c:2362
-#, c-format
-msgid "The project '%s' has been changed by the user '%s' since you opened it. Do you want to save anyway?"
-msgstr ""
-
-#: ../libplanner/mrp-file-module.c:121
-#, fuzzy
-msgid "This format does not support reading"
-msgstr "هذه اللّعبة لا تدعم التّلميحات بعد."
-
-#: ../src/planner-default-week-dialog.c:45
-#, fuzzy
-msgid "Thursday"
-msgstr "الخميس"
-
-#: ../data/glade/calendar-dialog.glade.h:28
-#, fuzzy
-msgid "To:"
-msgstr "إلى:"
-
-#: ../data/glade/task-date-widget.glade.h:8
-#: ../src/planner-cell-renderer-date.c:176
-#: ../src/planner-project-properties.c:740
-#, fuzzy
-msgid "Today"
-msgstr "اليوم"
-
-#: ../src/planner-task-dialog.c:596
-#, fuzzy
-msgid "Toggle fixed duration"
-msgstr "خط _ثابت العرض:"
-
-#: ../src/planner-default-week-dialog.c:43
-#, fuzzy
-msgid "Tuesday"
-msgstr "الثّلاثاء"
-
-#: ../src/planner-property-dialog.c:514
-#: ../src/planner-resource-view.c:1224
-#: ../src/planner-task-dialog.c:2722
-#, fuzzy
-msgid "Type"
-msgstr "النّوع"
-
-#: ../eds-backend/e-cal-backend-planner.c:320
-msgid "URL for a Task used by Evolution Data Server"
-msgstr ""
-
-#: ../libplanner/mrp-project.c:958
-#, c-format
-msgid "Unable to find file writer identified by '%s'"
-msgstr ""
-
-#: ../src/planner-task-dialog.c:803
-msgid "Unassign resource from task"
-msgstr ""
-
-#: ../src/planner-cmd-manager.c:227
-#, fuzzy, c-format
-msgid "Undo '%s'"
-msgstr "إ_لغاء"
-
-#: ../src/planner-window.c:265
-#, fuzzy
-msgid "Undo the last action"
-msgstr "تراجع عن العمل الأخير"
-
-#: ../src/planner-cmd-manager.c:229
-#, fuzzy
-msgid "Undo"
-msgstr "تراجع"
-
-#: ../src/planner-gantt-view.c:157
-#: ../src/planner-task-view.c:139
-#, fuzzy
-msgid "Unin_dent Task"
-msgstr "<b>خيارات قائمة المهام</b>"
-
-#: ../src/planner-task-tree.c:3150
-#, fuzzy
-msgid "Unindent task"
-msgstr "ت_كليف بالمهمّة"
-
-#: ../src/planner-task-tree.c:3134
-#, fuzzy
-msgid "Unindent tasks"
-msgstr "المهام ال_فائت موعدها:"
-
-#: ../src/planner-gantt-view.c:158
-#: ../src/planner-task-view.c:140
-#, fuzzy
-msgid "Unindent the selected tasks"
-msgstr "_حذف المهام المنتقاة"
-
-#: ../src/planner-application.c:90
-#, fuzzy
-msgid "Unindent"
-msgstr "عدم ازاحة"
-
-#: ../src/planner-task-dialog.c:2654
-#, fuzzy
-msgid "Units"
-msgstr "الوحدات"
-
-#: ../src/planner-task-cmd.c:173
-#, fuzzy
-msgid "Unlink task"
-msgstr "ت_كليف بالمهمّة"
-
-#: ../src/planner-task-tree.c:2888
-#, fuzzy
-msgid "Unlink tasks"
-msgstr "المهام ال_فائت موعدها:"
-
-#: ../src/planner-gantt-view.c:149
-#: ../src/planner-task-view.c:131
-#, fuzzy
-msgid "Unlink the selected tasks"
-msgstr "_حذف المهام المنتقاة"
-
-#: ../src/planner-application.c:69
-msgid "Unlink"
-msgstr ""
-
-#. Hack.
-#: ../src/planner-window.c:1973
-#, fuzzy
-msgid "Unnamed database project"
-msgstr "تفضيلات قاعدة بيانات القرص المدمج"
-
-#: ../src/planner-gantt-print.c:542
-#: ../src/planner-gantt-row.c:752
-#: ../src/planner-html-plugin.c:125
-#: ../src/planner-task-tree.c:1571
-#: ../src/planner-window.c:1981
-#, fuzzy
-msgid "Unnamed"
-msgstr "غير مسمّى"
-
-#: ../data/glade/eds.glade.h:6
-#, fuzzy
-msgid "Unselect All"
-msgstr "نسخ ال_كل"
-
-#: ../src/planner-eds-plugin.c:677
-msgid "Updated from Evolution Data Server"
-msgstr ""
-
-#: ../src/planner-sql-plugin.c:501
-msgid "Upgrade"
-msgstr ""
-
-#: ../libplanner/mrp-day.c:60
-#, fuzzy
-msgid "Use base"
-msgstr "أساس DN:"
-
-#: ../libplanner/mrp-day.c:61
-msgid "Use day from base calendar"
-msgstr ""
-
-#: ../data/glade/calendar-dialog.glade.h:29
-msgid "Use working time from derived calendar"
-msgstr ""
-
-#: ../src/planner-project-properties.c:986
-#, fuzzy
-msgid "Value"
-msgstr "القيمة"
-
-#: ../data/glade/column-dialog.glade.h:3
-#, fuzzy
-msgid "Visible columns:"
-msgstr "%s أعمدة مرئية"
-
-#. i18n: WBS is short for work breakdown structure, and is a
-#. * project management term. You might want to leave it
-#. * untranslated unless there is a localized term for it.
-#. i18n: WBS is sort for work breakdown structure, and is a
-#. * project management term. You might want to leave it
-#. * untranslated unless there is a localized term for it.
-#: ../src/planner-gantt-view.c:554
-#: ../src/planner-task-view.c:335
-msgid "WBS"
-msgstr ""
-
-#: ../src/planner-default-week-dialog.c:44
-#, fuzzy
-msgid "Wednesday"
-msgstr "الأربعاء"
-
-#: ../src/planner-scale-utils.c:133
-#, fuzzy, c-format
-msgid "Week %d"
-msgstr "أسابيع"
-
-#. i18n: Week, year.
-#: ../src/planner-scale-utils.c:138
-#, fuzzy, c-format
-msgid "Week %d, %d"
-msgstr "أسابيع"
-
-#: ../data/glade/calendar-dialog.glade.h:30
-#, fuzzy
-msgid "Week day:"
-msgstr "آخر يوم"
 
 #: ../data/planner.schemas.in.h:8
 msgid "Whether printing of the Gantt view is enabled."
@@ -2114,487 +623,560 @@ msgid "Whether to display nonstandard days in the Gantt view."
 msgstr ""
 
 #: ../data/planner.schemas.in.h:12
-msgid "Whether to highlight the tasks along the cricital path in the Gantt view."
+msgid ""
+"Whether to highlight the tasks along the cricital path in the Gantt view."
 msgstr ""
 
 #: ../data/planner.schemas.in.h:13
-msgid "Whether to highlight the tasks along the cricital path in the Task view."
+msgid ""
+"Whether to highlight the tasks along the cricital path in the Task view."
 msgstr ""
 
 #: ../data/planner.schemas.in.h:14
 msgid "Which view to display in the user interface."
 msgstr ""
 
-#. i18n: Short "Week", preferably 2 letters.
-#: ../src/planner-scale-utils.c:129
-#, c-format
-msgid "Wk %d"
+#: ../data/stylesheets/localizable.xml.h:1
+msgid "Company:"
 msgstr ""
 
-#: ../src/planner-gantt-print.c:198
-#: ../src/planner-gantt-view.c:558
-#: ../src/planner-resource-dialog.c:1850
-#: ../src/planner-resource-view.c:750
-#: ../src/planner-resource-view.c:766
-#: ../src/planner-resource-view.c:1736
-#: ../src/planner-task-view.c:339
-#, fuzzy
-msgid "Work"
-msgstr "عمل"
+#: ../data/stylesheets/localizable.xml.h:2
+msgid "Complete"
+msgstr ""
 
-#: ../data/glade/calendar-dialog.glade.h:31
+#: ../data/stylesheets/localizable.xml.h:3
 #, fuzzy
-msgid "Working time..."
-msgstr "وقت غير سليم"
+msgid "Finish:"
+msgstr "إ_نهاء"
+
+#: ../data/stylesheets/localizable.xml.h:4
+msgid "Gantt Chart"
+msgstr ""
+
+#: ../data/stylesheets/localizable.xml.h:5
+#, fuzzy
+msgid "Manager:"
+msgstr "الم_دير:"
+
+#: ../data/stylesheets/localizable.xml.h:6
+msgid "Phase:"
+msgstr ""
+
+#: ../data/stylesheets/localizable.xml.h:7
+#, fuzzy
+msgid "Priority"
+msgstr "الأ_ولويّة:"
+
+#: ../data/stylesheets/localizable.xml.h:8
+msgid "Report Date:"
+msgstr ""
+
+#: ../data/stylesheets/localizable.xml.h:9
+#, fuzzy
+msgid "Start:"
+msgstr "إبدأ"
+
+#: ../data/stylesheets/localizable.xml.h:10
+msgid "This file was generated by"
+msgstr ""
+
+#: ../data/stylesheets/localizable.xml.h:11
+#, fuzzy
+msgid "Unnamed Project"
+msgstr "تفضيلات قاعدة بيانات القرص المدمج"
+
+#: ../data/stylesheets/localizable.xml.h:12
+#, fuzzy
+msgid "Week"
+msgstr "أسابيع"
+
+#: ../libegg/recent-files/egg-recent-vfs-utils.c:90
+#, fuzzy
+msgid " (invalid Unicode)"
+msgstr " (يونيكود غير صحيح)"
 
 #: ../libplanner/mrp-day.c:54
 #, fuzzy
 msgid "Working"
 msgstr "إظهار أسبوع العمل"
 
-#: ../src/planner-msp-plugin.c:214
+#: ../libplanner/mrp-day.c:55
 #, fuzzy
-msgid "XML Files"
-msgstr "ملفات XML"
+msgid "A default working day"
+msgstr "--default-working-directories إثنان معطيان\n"
 
-#: ../src/planner-task-tree.c:2786
+#: ../libplanner/mrp-day.c:57
+msgid "Nonworking"
+msgstr ""
+
+#: ../libplanner/mrp-day.c:58
+#, fuzzy
+msgid "A default non working day"
+msgstr "--default-working-directories إثنان معطيان\n"
+
+#: ../libplanner/mrp-day.c:60
+#, fuzzy
+msgid "Use base"
+msgstr "أساس DN:"
+
+#: ../libplanner/mrp-day.c:61
+msgid "Use day from base calendar"
+msgstr ""
+
+#: ../libplanner/mrp-file-module.c:121
+#, fuzzy
+msgid "This format does not support reading"
+msgstr "هذه اللّعبة لا تدعم التّلميحات بعد."
+
+#: ../libplanner/mrp-parser.c:1064 ../libplanner/mrp-parser.c:1159
+#, fuzzy
+msgid "Could not create XML tree"
+msgstr "لم أستطع إنشاء ذاكرة مخبئيّة لـ%s"
+
+#: ../libplanner/mrp-parser.c:1125
+#, fuzzy
+msgid "Could not write XML file"
+msgstr "لا يمكن الكتابة على ملف الحالة المحفوظ '%s' fd: %d: %s"
+
+#: ../libplanner/mrp-project.c:437 ../src/planner-group-dialog.c:846
+#, fuzzy
+msgid "Default"
+msgstr "الافتراضي"
+
+#: ../libplanner/mrp-project.c:716
+#, fuzzy, c-format
+msgid "Invalid URI: '%s'"
+msgstr "عنوان غير صحيح"
+
+#: ../libplanner/mrp-project.c:759
 #, c-format
-msgid "You are about to open an edit dialog each for %i tasks. Are you sure that you want to do that?"
+msgid "Couldn't find a suitable file module for loading '%s'"
 msgstr ""
 
-#: ../src/planner-window.c:1938
+#: ../libplanner/mrp-project.c:780 ../libplanner/mrp-project.c:1064
+msgid "No support for SQL storage built into this version of Planner."
+msgstr ""
+
+#: ../libplanner/mrp-project.c:817
+#, fuzzy
+msgid "Invalid URI."
+msgstr "عنوان غير صحيح"
+
+#: ../libplanner/mrp-project.c:958
+#, c-format
+msgid "Unable to find file writer identified by '%s'"
+msgstr ""
+
+#: ../libplanner/mrp-project.c:1021
+msgid "Couldn't find a suitable file module for loading project"
+msgstr ""
+
+#: ../libplanner/mrp-property.c:365
+#, fuzzy
+msgid "Text"
+msgstr "النّص"
+
+#: ../libplanner/mrp-property.c:367
+#, fuzzy
+msgid "String list"
+msgstr "قائمة الحسابات"
+
+#: ../libplanner/mrp-property.c:369
+#, fuzzy
+msgid "Integer number"
+msgstr "عدد صحيح"
+
+#: ../libplanner/mrp-property.c:371
+#, fuzzy
+msgid "Floating-point number"
+msgstr "عدد عشري"
+
+#: ../libplanner/mrp-property.c:373
+#, fuzzy
+msgid "Date"
+msgstr "التاريخ"
+
+#: ../libplanner/mrp-property.c:375 ../src/planner-gantt-view.c:586
+#: ../src/planner-task-view.c:340
+#, fuzzy
+msgid "Duration"
+msgstr "المدّة"
+
+#: ../libplanner/mrp-property.c:377 ../src/planner-gantt-view.c:588
+#: ../src/planner-resource-view.c:1314 ../src/planner-task-view.c:342
+msgid "Cost"
+msgstr ""
+
+#: ../libplanner/mrp-property.c:380 ../src/planner-project-properties.c:882
+#, fuzzy
+msgid "None"
+msgstr "لا شيء"
+
+#: ../libplanner/mrp-sql.c:214 ../libplanner/mrp-sql.c:228
+#, fuzzy
+msgid "Can't connect to database server"
+msgstr "لا يمكن الإتصال بالخادم عن بعد"
+
+#. Give up.
+#: ../libplanner/mrp-sql.c:319 ../src/planner-sql-plugin.c:220
+#, fuzzy
+msgid "Invalid Unicode"
+msgstr " (يونيكود غير صحيح)"
+
+#: ../libplanner/mrp-sql.c:2213
+#, fuzzy, c-format
+msgid "Connection to database '%s' failed.\n"
+msgstr "فشل الاتصال بخادم القواميس %s:%d"
+
+#: ../libplanner/mrp-sql.c:2218
+#, fuzzy, c-format
 msgid ""
-"You have opened a file that was saved with an old version of Planner.\n"
-"\n"
-"When loading old files, all tasks will use the constraint 'Must Start On', since the old version did not fully support automatic rescheduling. To take advantage of this new feature, you should add predecessor relations between tasks that are dependant on each other.\n"
-"\n"
-"You can add a predecessor relation by clicking on the predecessor and dragging to the successor.\n"
-"\n"
-"After doing this, you can remove all constraints by selecting the menu item 'Remove all constraints' in the 'Edit' menu."
-msgstr ""
+"Connection to database '%s' failed.\n"
+"%s"
+msgstr "فشل الاتصال بخادم القواميس %s:%d"
 
-#: ../src/planner-gantt-view.c:169
-#, fuzzy
-msgid "Zoom To _Fit"
-msgstr "تكبير حتى الملاءمة"
+#: ../libplanner/mrp-sql.c:2226
+#, fuzzy, c-format
+msgid "BEGIN command failed %s."
+msgstr "فشل أمر IMAP: %s"
 
-#: ../src/planner-gantt-view.c:175
-#, fuzzy
-msgid "Zoom _Out"
-msgstr "ت_صغير"
-
-#: ../src/planner-gantt-view.c:173
-#: ../src/planner-usage-view.c:108
-#: ../src/planner-usage-view.c:109
-#, fuzzy
-msgid "Zoom in"
-msgstr "تكبير"
-
-#: ../src/planner-gantt-view.c:176
-#: ../src/planner-usage-view.c:105
-#: ../src/planner-usage-view.c:106
-#, fuzzy
-msgid "Zoom out"
-msgstr "تصغير"
-
-#: ../src/planner-gantt-view.c:170
-#: ../src/planner-usage-view.c:112
-#, fuzzy
-msgid "Zoom to fit the entire project"
-msgstr "ضبط الحجم لملائمة الصفحة بكاملها"
-
-#: ../src/planner-usage-view.c:111
-#, fuzzy
-msgid "Zoom to fit"
-msgstr "تكبير حتى الملاءمة"
-
-#: ../src/planner-main.c:70
-#, fuzzy
-msgid "[FILE...]"
-msgstr "[ملف...]"
-
-#: ../src/planner-usage-tree.c:379
+#: ../libplanner/mrp-sql.c:2394
+#, c-format
 msgid ""
-"\n"
-"Name"
+"The project '%s' has been changed by the user '%s' since you opened it. Do "
+"you want to save anyway?"
 msgstr ""
 
-#: ../src/planner-usage-tree.c:381
+#: ../libplanner/mrp-sql.c:3674
+#, fuzzy, c-format
+msgid "Connection to database '%s' failed."
+msgstr "فشل الاتصال بخادم القواميس %s:%d"
+
+#: ../libplanner/mrp-storage-sql.c:205
+msgid "Invalid SQL URI (must start with 'sql://' and contain '#')."
+msgstr ""
+
+#: ../libplanner/mrp-storage-sql.c:274
+msgid "Invalid SQL URI (invalid project id)."
+msgstr ""
+
+#: ../libplanner/mrp-storage-sql.c:282
+msgid "Invalid SQL URI (no database name specified)."
+msgstr ""
+
+#: ../libplanner/mrp-task.c:1070
 msgid ""
-"\n"
-"Task"
+"Could not add a predecessor relation, because the tasks are already related."
 msgstr ""
 
-#: ../data/glade/calendar-dialog.glade.h:1
+#: ../libplanner/mrp-task.c:1081
+msgid "Start to Finish relation type cannot be combined with other relations."
+msgstr ""
+
+#: ../libplanner/mrp-task.c:1083
+msgid "Finish to Finish relation type cannot be combined with other relations."
+msgstr ""
+
+#: ../libplanner/mrp-task.c:1099
 msgid ""
-"\n"
-"The selected day type has the following working hours:"
+"Start to Finish relation type cannot be combined with Start No Earlier Than "
+"constraint."
 msgstr ""
 
-#: ../src/planner-window.c:306
-#, fuzzy
-msgid "_About"
-msgstr "_حول"
-
-#: ../src/planner-window.c:276
-#, fuzzy
-msgid "_Actions"
-msgstr "إ_جراءات"
-
-#: ../data/glade/project-properties.glade.h:7
-#, fuzzy
-msgid "_Calendar:"
-msgstr "تقويم: %s"
-
-#: ../src/planner-window.c:1553
-#, fuzzy
-msgid "_Cancel"
-msgstr "إل_غاء"
-
-#: ../src/planner-window.c:255
-#, fuzzy
-msgid "_Close"
-msgstr "أ_غلق"
-
-#: ../data/glade/sql.glade.h:5
-#, fuzzy
-msgid "_Database:"
-msgstr "قاعدة بيانات"
-
-#: ../data/glade/calendar-dialog.glade.h:32
-#, fuzzy
-msgid "_Derive from a calendar"
-msgstr "انتقِ تاريخاً من التقويم"
-
-#: ../data/glade/new-property.glade.h:3
-#, fuzzy
-msgid "_Description:"
-msgstr "ال_وصف:"
-
-#: ../data/glade/task-dialog.glade.h:12
-#, fuzzy
-msgid "_Duration:"
-msgstr "<b>المدة:</b>"
-
-#: ../src/planner-task-view.c:151
-#, fuzzy
-msgid "_Edit Custom Properties..."
-msgstr "خصائص عنصر القائمة"
-
-#: ../src/planner-window.c:292
-#, fuzzy
-msgid "_Edit Project Properties"
-msgstr "خصائص عنصر القائمة"
-
-#: ../src/planner-resource-view.c:239
-#, fuzzy
-msgid "_Edit Resource Properties..."
-msgstr "خصائص عنصر القائمة"
-
-#: ../src/planner-gantt-view.c:142
-#, fuzzy
-msgid "_Edit Task Properties..."
-msgstr "خصائص عنصر القائمة"
-
-#: ../src/planner-task-view.c:124
-#, fuzzy
-msgid "_Edit Task"
-msgstr "ت_كليف بالمهمّة"
-
-#: ../src/planner-window.c:262
-#, fuzzy
-msgid "_Edit"
-msgstr "_تحرير"
-
-#: ../data/glade/resource-dialog.glade.h:9
-#: ../data/glade/resource-input-dialog.glade.h:4
-#, fuzzy
-msgid "_Email:"
-msgstr "البريد اﻻلكتروني"
-
-#: ../data/glade/calendar-dialog.glade.h:33
-#, fuzzy
-msgid "_Existing calendars:"
-msgstr "فتح مستند مسبق"
-
-#: ../src/planner-window.c:243
-#, fuzzy
-msgid "_Export"
-msgstr "تصدير علامات المواقع"
-
-#: ../src/planner-window.c:225
-#, fuzzy
-msgid "_File"
-msgstr "_ملف"
-
-#: ../data/glade/task-dialog.glade.h:13
-#, fuzzy
-msgid "_Fixed duration"
-msgstr "مدة المكالمة"
-
-#: ../src/planner-gantt-view.c:316
-msgid "_Gantt Chart"
+#: ../libplanner/mrp-task.c:1101
+msgid ""
+"Finish to Finish relation type cannot be combined with Start No Earlier Than "
+"constraint."
 msgstr ""
 
-#: ../data/glade/resource-dialog.glade.h:10
-#: ../data/glade/resource-input-dialog.glade.h:5
-#, fuzzy
-msgid "_Group:"
-msgstr "الم_جموعة:"
-
-#: ../src/planner-window.c:300
-#, fuzzy
-msgid "_Help"
-msgstr "م_ساعدة"
-
-#: ../data/glade/column-dialog.glade.h:4
-#, fuzzy
-msgid "_Hide"
-msgstr "إ_خفاء"
-
-#: ../src/planner-gantt-view.c:184
-#: ../src/planner-task-view.c:160
-#, fuzzy
-msgid "_Highlight Critical Tasks"
-msgstr "الرُّزنامة و المهام"
-
-#: ../src/planner-window.c:236
-#, fuzzy
-msgid "_Import"
-msgstr "إ_ستيراد"
-
-#: ../src/planner-resource-view.c:230
-#, fuzzy
-msgid "_Insert Resource"
-msgstr "إدرج فضاءات"
-
-#: ../src/planner-gantt-view.c:133
-#: ../src/planner-task-view.c:115
-#, fuzzy
-msgid "_Insert Task"
-msgstr "ت_كليف بالمهمّة"
-
-#: ../data/glade/task-dialog.glade.h:14
-#, fuzzy
-msgid "_Insert Time Stamp"
-msgstr "إدراج التاريخ/الوقت"
-
-#: ../data/glade/resource-dialog.glade.h:11
-#, fuzzy
-msgid "_Insert time stamp"
-msgstr "إدراج التاريخ/الوقت"
-
-#: ../data/glade/resource-input-dialog.glade.h:6
-#: ../data/glade/task-input-dialog.glade.h:3
-#, fuzzy
-msgid "_Insert"
-msgstr "_ادرج"
-
-#: ../data/glade/new-property.glade.h:4
-#, fuzzy
-msgid "_Label:"
-msgstr "علامة"
-
-#: ../data/glade/add-predecessor.glade.h:2
-msgid "_Lag:"
+#: ../libplanner/mrp-task.c:1124
+msgid ""
+"Start to Finish relation cannot be set. Predecessor starts on project start "
+"date."
 msgstr ""
 
-#: ../src/planner-gantt-view.c:151
-#: ../src/planner-task-view.c:133
-#, fuzzy
-msgid "_Link Tasks"
-msgstr "المهام ال_فائت موعدها:"
-
-#: ../src/planner-window.c:283
-#, fuzzy
-msgid "_Manage Calendars"
-msgstr "إدارة الشهادات"
-
-#: ../data/glade/project-properties.glade.h:8
-#, fuzzy
-msgid "_Manager:"
-msgstr "الم_دير:"
-
-#: ../data/glade/task-dialog.glade.h:15
-msgid "_Milestone"
+#: ../libplanner/mrp-task-manager.c:2527
+msgid "Cannot add a predecessor, because it would result in a loop."
 msgstr ""
 
-#: ../data/glade/calendar-dialog.glade.h:34
-#, fuzzy
-msgid "_Name of the new calendar:"
-msgstr "إنشاء رزنامة جديدة"
-
-#: ../data/glade/add-predecessor.glade.h:3
-#: ../data/glade/calendar-dialog.glade.h:35
-#: ../data/glade/new-property.glade.h:5
-#: ../data/glade/project-properties.glade.h:9
-#: ../data/glade/resource-dialog.glade.h:12
-#: ../data/glade/resource-input-dialog.glade.h:7
-#: ../data/glade/task-dialog.glade.h:16
-#: ../data/glade/task-input-dialog.glade.h:4
-#, fuzzy
-msgid "_Name:"
-msgstr "الإ_سم:"
-
-#: ../src/planner-window.c:229
-#, fuzzy
-msgid "_New Project"
-msgstr "فا_صل جديد"
-
-#: ../data/glade/calendar-dialog.glade.h:36
-#, fuzzy
-msgid "_New..."
-msgstr "جديد"
-
-#: ../src/planner-gantt-view.c:190
-#: ../src/planner-task-view.c:162
-#, fuzzy
-msgid "_Nonstandard Days"
-msgstr "أيّام العمل:"
-
-#: ../src/planner-window.c:233
-#, fuzzy
-msgid "_Open..."
-msgstr "_فتح..."
-
-#: ../data/glade/project-properties.glade.h:10
-#, fuzzy
-msgid "_Organization:"
-msgstr "المؤسسة:"
-
-#: ../data/glade/sql.glade.h:6
-#, fuzzy
-msgid "_Password:"
-msgstr "_كلمة المرور:"
-
-#: ../data/glade/project-properties.glade.h:11
-msgid "_Phase:"
+#: ../libplanner/mrp-task-manager.c:2573
+msgid "Cannot move the task, because it would result in a loop."
 msgstr ""
 
-#: ../src/planner-window.c:249
-#, fuzzy
-msgid "_Print..."
-msgstr "_طبع..."
-
-#: ../data/glade/task-dialog.glade.h:17
-#, fuzzy
-msgid "_Priority:"
-msgstr "الأ_ولويّة:"
-
-#: ../src/planner-window.c:280
-msgid "_Project"
+#. Translators: Example output: October 9, 2006
+#: ../libplanner/mrp-xsl.c:93
+msgid "%B %e, %Y"
 msgstr ""
 
-#: ../src/planner-window.c:258
+#: ../libplanner/mrp-xsl.c:157 ../libplanner/mrp-xsl.c:205
 #, fuzzy
-msgid "_Quit"
-msgstr "إ_نهي"
+msgid "Export to HTML failed"
+msgstr "فشل فتح الجهاز"
 
-#: ../src/planner-window.c:268
+#: ../src/planner-application.c:55 ../src/planner-application.c:111
 #, fuzzy
-msgid "_Redo"
-msgstr "_إعادة"
+msgid "Insert"
+msgstr "أدرج"
 
-#: ../data/glade/add-predecessor.glade.h:4
+#: ../src/planner-application.c:62 ../src/planner-application.c:118
 #, fuzzy
-msgid "_Relation type:"
-msgstr "نوع التّنبيه"
+msgid "Remove"
+msgstr "احذف"
 
-#: ../src/planner-resource-view.c:236
-#, fuzzy
-msgid "_Remove Resource"
-msgstr "هل أحذف السمة \"%s\" ؟"
+#: ../src/planner-application.c:69
+msgid "Unlink"
+msgstr ""
 
-#: ../src/planner-gantt-view.c:139
-#: ../src/planner-task-view.c:121
+#: ../src/planner-application.c:76
 #, fuzzy
-msgid "_Remove Task"
-msgstr "ت_كليف بالمهمّة"
+msgid "Link"
+msgstr "وصلة"
 
-#: ../src/planner-resource-view.c:423
+#: ../src/planner-application.c:83
 #, fuzzy
-msgid "_Resources"
-msgstr "الموارد"
+msgid "Indent"
+msgstr "إزاحة"
 
-#: ../src/planner-window.c:240
-#: ../src/planner-window.c:1560
+#: ../src/planner-application.c:90
 #, fuzzy
-msgid "_Save"
-msgstr "_حفظ"
+msgid "Unindent"
+msgstr "عدم ازاحة"
 
-#: ../data/glade/sql.glade.h:7
+#: ../src/planner-application.c:97
 #, fuzzy
-msgid "_Server:"
-msgstr "ال_خادم:"
+msgid "Move up"
+msgstr "تحرّك للأعلى"
 
-#: ../data/glade/resource-dialog.glade.h:13
-#: ../data/glade/resource-input-dialog.glade.h:8
+#: ../src/planner-application.c:104
 #, fuzzy
-msgid "_Short name:"
-msgstr "اسم الموصول"
+msgid "Move down"
+msgstr "تحرّك للأسفل"
 
-#: ../src/planner-gantt-view.c:187
+#: ../src/planner-application.c:125
 #, fuzzy
-msgid "_Show Guide Lines"
-msgstr "نسخ السّطور المنتقاة"
+msgid "Edit"
+msgstr "تحرير"
 
-#: ../data/glade/column-dialog.glade.h:5
+#: ../src/planner-calendar-dialog.c:184
 #, fuzzy
-msgid "_Show"
-msgstr "ا_عرض"
+msgid "Change day type"
+msgstr "نوع جهاز الخرج"
 
-#: ../data/glade/project-properties.glade.h:12
+#: ../src/planner-calendar-dialog.c:306
 #, fuzzy
-msgid "_Start:"
-msgstr "إبدأ"
+msgid "Remove calendar"
+msgstr "رزنامة جنوم"
 
-#: ../src/planner-task-view.c:276
+#: ../src/planner-calendar-dialog.c:398
 #, fuzzy
-msgid "_Tasks"
-msgstr "_مهام"
+msgid "Add new calendar"
+msgstr "إضافة رزنامةً جديدة"
 
-#: ../data/glade/new-property.glade.h:6
-#: ../data/glade/resource-dialog.glade.h:14
+#: ../src/planner-cell-renderer-date.c:161 ../src/planner-task-dialog.c:1491
 #, fuzzy
-msgid "_Type:"
-msgstr "ال_نوع:"
+msgid "As soon as possible"
+msgstr "القيمة القصوى الممكنة لـ س"
 
-#: ../src/planner-window.c:265
+#: ../src/planner-cell-renderer-date.c:162
 #, fuzzy
-msgid "_Undo"
+msgid "No earlier than"
+msgstr "أكبر من"
+
+#: ../src/planner-cell-renderer-date.c:163
+#, fuzzy
+msgid "On fixed date"
+msgstr "بحسب _تاريخ التعديل"
+
+#: ../src/planner-cmd-manager.c:227
+#, fuzzy, c-format
+msgid "Undo '%s'"
 msgstr "إ_لغاء"
 
-#: ../src/planner-gantt-view.c:148
-#: ../src/planner-task-view.c:130
+#: ../src/planner-cmd-manager.c:229
 #, fuzzy
-msgid "_Unlink Task"
-msgstr "ت_كليف بالمهمّة"
+msgid "Undo"
+msgstr "تراجع"
 
-#: ../src/planner-window.c:303
-#, fuzzy
-msgid "_User Guide"
-msgstr "بدّل المستخدم"
+#: ../src/planner-cmd-manager.c:239
+#, fuzzy, c-format
+msgid "Redo '%s'"
+msgstr "تكرار"
 
-#: ../data/glade/sql.glade.h:8
+#: ../src/planner-cmd-manager.c:241
 #, fuzzy
-msgid "_Username:"
-msgstr "إ_سم المستخدم:"
+msgid "Redo"
+msgstr "تكرار"
 
-#: ../src/planner-window.c:272
-#, fuzzy
-msgid "_View"
-msgstr "_اعرض"
+#: ../src/planner-day-type-dialog.c:499
+#, fuzzy, c-format
+msgid "Add day type \"%s\""
+msgstr "نوع جهاز الخرج"
 
-#: ../data/glade/task-dialog.glade.h:18
-#: ../data/glade/task-input-dialog.glade.h:5
-#, fuzzy
-msgid "_Work:"
-msgstr "_عمل:"
+#: ../src/planner-day-type-dialog.c:560
+#, fuzzy, c-format
+msgid "Remove day type \"%s\""
+msgstr "نوع جهاز الخرج"
 
-#: ../src/planner-gantt-view.c:172
+#: ../src/planner-default-week-dialog.c:42
 #, fuzzy
-msgid "_Zoom In"
-msgstr "ت_كبير"
+msgid "Monday"
+msgstr "الإثنين"
+
+#: ../src/planner-default-week-dialog.c:43
+#, fuzzy
+msgid "Tuesday"
+msgstr "الثّلاثاء"
+
+#: ../src/planner-default-week-dialog.c:44
+#, fuzzy
+msgid "Wednesday"
+msgstr "الأربعاء"
+
+#: ../src/planner-default-week-dialog.c:45
+#, fuzzy
+msgid "Thursday"
+msgstr "الخميس"
+
+#: ../src/planner-default-week-dialog.c:46
+#, fuzzy
+msgid "Friday"
+msgstr "الجمعة"
+
+#: ../src/planner-default-week-dialog.c:47
+#, fuzzy
+msgid "Saturday"
+msgstr "السّبت"
+
+#: ../src/planner-default-week-dialog.c:48
+#, fuzzy
+msgid "Sunday"
+msgstr "الأحد"
+
+#: ../src/planner-default-week-dialog.c:288
+#, fuzzy
+msgid "No working time"
+msgstr "الوقت الذي تحدّده أنت"
+
+#: ../src/planner-default-week-dialog.c:299
+#: ../src/planner-default-week-dialog.c:303
+#, fuzzy
+msgid "%H:%M"
+msgstr "%H:%M"
+
+#: ../src/planner-default-week-dialog.c:553
+#, fuzzy
+msgid "Edit default week"
+msgstr "مشهد أسبوع العمل"
+
+#: ../src/planner-eds-plugin.c:167
+msgid "EDS"
+msgstr ""
+
+#: ../src/planner-eds-plugin.c:168
+msgid "Import resources from Evolution Data Server"
+msgstr ""
+
+#: ../src/planner-eds-plugin.c:396 ../src/planner-gantt-print.c:190
+#: ../src/planner-gantt-view.c:582 ../src/planner-group-dialog.c:822
+#: ../src/planner-property-dialog.c:485 ../src/planner-resource-view.c:1171
+#: ../src/planner-task-dialog.c:2616 ../src/planner-task-dialog.c:2690
+#: ../src/planner-task-view.c:336
+#, fuzzy
+msgid "Name"
+msgstr "اسم"
+
+#: ../src/planner-eds-plugin.c:416 ../src/planner-resource-view.c:1287
+#, fuzzy
+msgid "Email"
+msgstr "البريد الإلكتروني"
+
+#: ../src/planner-eds-plugin.c:437
+#, fuzzy
+msgid "Import"
+msgstr "استيراد"
+
+#: ../src/planner-eds-plugin.c:447
+#, fuzzy
+msgid "Photo"
+msgstr "صورة تسجيل الدخول"
+
+#: ../src/planner-eds-plugin.c:676
+msgid "Imported from Evolution Data Server"
+msgstr ""
+
+#: ../src/planner-eds-plugin.c:677
+msgid "Updated from Evolution Data Server"
+msgstr ""
+
+#: ../src/planner-eds-plugin.c:862
+#, fuzzy
+msgid "Query cancelled."
+msgstr "أُلغيت العملية"
+
+#: ../src/planner-eds-plugin.c:923
+msgid "Evolution Data Server UID"
+msgstr ""
+
+#: ../src/planner-eds-plugin.c:924
+msgid "Identifier used by Evolution Data Server for resources"
+msgstr ""
+
+#: ../src/planner-format.c:149
+#, fuzzy, c-format
+msgid "%dd %dh"
+msgstr "أضِ_ف مستضيف: "
+
+#: ../src/planner-format.c:152
+#, fuzzy, c-format
+msgid "%dd"
+msgstr "إ_ضافة"
+
+#: ../src/planner-format.c:155
+#, c-format
+msgid "%dh"
+msgstr ""
+
+#. i18n: this string is the date nr and month name, displayed
+#. * e.g. in the date cells in the task tree. See
+#. * libmrproject/docs/DateFormat.
+#.
+#: ../src/planner-format.c:190
+msgid "%b %e"
+msgstr ""
+
+#: ../src/planner-format.c:374
+#, fuzzy
+msgid "mon"
+msgstr "الإ_ثنين"
+
+#. month unit variant accepted in input
+#: ../src/planner-format.c:375
+#, fuzzy
+msgid "month"
+msgstr "الشّهر"
+
+#. month unit variant accepted in input
+#: ../src/planner-format.c:376
+#, fuzzy
+msgid "months"
+msgstr "أشهر"
+
+#. month unit variant accepted in input
+#: ../src/planner-format.c:377
+msgid "w"
+msgstr ""
+
+#. week unit variant accepted in input
+#: ../src/planner-format.c:378
+#, fuzzy
+msgid "week"
+msgstr "أسابيع"
+
+#. week unit variant accepted in input
+#: ../src/planner-format.c:379
+#, fuzzy
+msgid "weeks"
+msgstr "أسابيع"
 
 #. week unit variant accepted in input
 #: ../src/planner-format.c:380
@@ -2612,10 +1194,6 @@ msgstr "اليوم"
 #, fuzzy
 msgid "days"
 msgstr "الأيّام"
-
-#: ../data/glade/eds.glade.h:7
-msgid "dialog1"
-msgstr ""
 
 #. day unit variant accepted in input
 #: ../src/planner-format.c:383
@@ -2652,50 +1230,1498 @@ msgstr "دقيقة"
 msgid "minutes"
 msgstr "دقائق"
 
-#: ../src/planner-format.c:374
-#, fuzzy
-msgid "mon"
-msgstr "الإ_ثنين"
+#. i18n: project start, the date format is described in
+#. * libmrproject/docs/DateFormat.
+#: ../src/planner-gantt-background.c:644
+msgid "%Y %b %d"
+msgstr ""
 
-#. month unit variant accepted in input
-#: ../src/planner-format.c:375
+#: ../src/planner-gantt-background.c:646
 #, fuzzy
-msgid "month"
-msgstr "الشّهر"
+msgid "Project start"
+msgstr "إبدأ مخفياً"
 
-#. month unit variant accepted in input
-#: ../src/planner-format.c:376
+#: ../src/planner-gantt-header.c:671
+msgid "%e %b %Y"
+msgstr ""
+
+#: ../src/planner-gantt-print.c:198 ../src/planner-gantt-view.c:585
+#: ../src/planner-resource-dialog.c:1850 ../src/planner-resource-view.c:750
+#: ../src/planner-resource-view.c:766 ../src/planner-resource-view.c:1736
+#: ../src/planner-task-view.c:339
 #, fuzzy
-msgid "months"
-msgstr "أشهر"
+msgid "Work"
+msgstr "عمل"
+
+#: ../src/planner-gantt-print.c:542 ../src/planner-gantt-row.c:752
+#: ../src/planner-html-plugin.c:125 ../src/planner-task-tree.c:1571
+#: ../src/planner-window.c:1988
+#, fuzzy
+msgid "Unnamed"
+msgstr "غير مسمّى"
+
+#: ../src/planner-gantt-row.c:2607 ../src/planner-gantt-row.c:2610
+#, fuzzy
+msgid "No name"
+msgstr "لا يوجد اسم"
+
+#: ../src/planner-gantt-row.c:2613
+#, fuzzy, c-format
+msgid "Make task '%s' a predecessor of '%s'"
+msgstr "<b>خيارات قائمة المهام</b>"
+
+#: ../src/planner-gantt-row.c:2661
+#, fuzzy, c-format
+msgid "Change work to %s"
+msgstr "ت_غيير الجهاز إلى %s"
+
+#: ../src/planner-gantt-row.c:3232 ../src/planner-task-dialog.c:455
+#: ../src/planner-task-tree.c:257 ../src/planner-task-tree.c:947
+#, fuzzy
+msgid "Edit task property"
+msgstr "قيمة خاصية مسماة"
+
+#: ../src/planner-gantt-view.c:133 ../src/planner-task-view.c:115
+#, fuzzy
+msgid "_Insert Task"
+msgstr "ت_كليف بالمهمّة"
+
+#: ../src/planner-gantt-view.c:134 ../src/planner-task-view.c:116
+#, fuzzy
+msgid "Insert a new task"
+msgstr "إنشاء مهمّةً جديدة"
+
+#: ../src/planner-gantt-view.c:136 ../src/planner-task-view.c:118
+#, fuzzy
+msgid "In_sert Tasks..."
+msgstr "أد_خل التاريخ و الوقت..."
+
+#: ../src/planner-gantt-view.c:139 ../src/planner-task-view.c:121
+#, fuzzy
+msgid "_Remove Task"
+msgstr "ت_كليف بالمهمّة"
+
+#: ../src/planner-gantt-view.c:140 ../src/planner-task-view.c:122
+#, fuzzy
+msgid "Remove the selected tasks"
+msgstr "_حذف المهام المنتقاة"
+
+#: ../src/planner-gantt-view.c:142
+#, fuzzy
+msgid "_Edit Task Properties..."
+msgstr "خصائص عنصر القائمة"
+
+#: ../src/planner-gantt-view.c:145 ../src/planner-resource-view.c:245
+#: ../src/planner-task-view.c:127
+#, fuzzy
+msgid "Select _All"
+msgstr "اختيا_ر الكل"
+
+#: ../src/planner-gantt-view.c:146 ../src/planner-resource-view.c:246
+#: ../src/planner-task-view.c:128
+#, fuzzy
+msgid "Select all tasks"
+msgstr "إنتقاء جميع المراسَلين"
+
+#: ../src/planner-gantt-view.c:148 ../src/planner-task-view.c:130
+#, fuzzy
+msgid "_Unlink Task"
+msgstr "ت_كليف بالمهمّة"
+
+#: ../src/planner-gantt-view.c:149 ../src/planner-task-view.c:131
+#, fuzzy
+msgid "Unlink the selected tasks"
+msgstr "_حذف المهام المنتقاة"
+
+#: ../src/planner-gantt-view.c:151 ../src/planner-task-view.c:133
+#, fuzzy
+msgid "_Link Tasks"
+msgstr "المهام ال_فائت موعدها:"
+
+#: ../src/planner-gantt-view.c:152 ../src/planner-task-view.c:134
+#, fuzzy
+msgid "Link the selected tasks"
+msgstr "_حذف المهام المنتقاة"
+
+#: ../src/planner-gantt-view.c:154 ../src/planner-task-view.c:136
+#, fuzzy
+msgid "I_ndent Task"
+msgstr "ت_كليف بالمهمّة"
+
+#: ../src/planner-gantt-view.c:155 ../src/planner-task-view.c:137
+#, fuzzy
+msgid "Indent the selected tasks"
+msgstr "_حذف المهام المنتقاة"
+
+#: ../src/planner-gantt-view.c:157 ../src/planner-task-view.c:139
+#, fuzzy
+msgid "Unin_dent Task"
+msgstr "<b>خيارات قائمة المهام</b>"
+
+#: ../src/planner-gantt-view.c:158 ../src/planner-task-view.c:140
+#, fuzzy
+msgid "Unindent the selected tasks"
+msgstr "_حذف المهام المنتقاة"
+
+#: ../src/planner-gantt-view.c:160 ../src/planner-task-view.c:142
+#, fuzzy
+msgid "Move Task _Up"
+msgstr "نقل القطع إلى الأعلى"
+
+#: ../src/planner-gantt-view.c:161 ../src/planner-task-view.c:143
+#, fuzzy
+msgid "Move the selected tasks upwards"
+msgstr "_تعليم المهام المنتقاة كمكتملة"
+
+#: ../src/planner-gantt-view.c:163 ../src/planner-task-view.c:145
+msgid "Move Task Do_wn"
+msgstr ""
+
+#: ../src/planner-gantt-view.c:164 ../src/planner-task-view.c:146
+#, fuzzy
+msgid "Move the selected tasks downwards"
+msgstr "_تعليم المهام المنتقاة كمكتملة"
+
+#: ../src/planner-gantt-view.c:166 ../src/planner-task-view.c:148
+#, fuzzy
+msgid "Reset _Constraint"
+msgstr "إعا_دة ضبط الخطوط"
+
+#: ../src/planner-gantt-view.c:169
+#, fuzzy
+msgid "Zoom To _Fit"
+msgstr "تكبير حتى الملاءمة"
+
+#: ../src/planner-gantt-view.c:170 ../src/planner-usage-view.c:112
+#, fuzzy
+msgid "Zoom to fit the entire project"
+msgstr "ضبط الحجم لملائمة الصفحة بكاملها"
+
+#: ../src/planner-gantt-view.c:172
+#, fuzzy
+msgid "_Zoom In"
+msgstr "ت_كبير"
+
+#: ../src/planner-gantt-view.c:173 ../src/planner-usage-view.c:108
+#: ../src/planner-usage-view.c:109
+#, fuzzy
+msgid "Zoom in"
+msgstr "تكبير"
+
+#: ../src/planner-gantt-view.c:175
+#, fuzzy
+msgid "Zoom _Out"
+msgstr "ت_صغير"
+
+#: ../src/planner-gantt-view.c:176 ../src/planner-usage-view.c:105
+#: ../src/planner-usage-view.c:106
+#, fuzzy
+msgid "Zoom out"
+msgstr "تصغير"
+
+#: ../src/planner-gantt-view.c:178 ../src/planner-resource-view.c:251
+#: ../src/planner-task-view.c:154 ../src/planner-usage-view.c:114
+#, fuzzy
+msgid "Edit _Visible Columns"
+msgstr "عدد خلايا اﻷعمدة"
+
+#: ../src/planner-gantt-view.c:179 ../src/planner-resource-view.c:252
+#: ../src/planner-task-view.c:155 ../src/planner-usage-view.c:115
+#, fuzzy
+msgid "Edit visible columns"
+msgstr "عدد خلايا اﻷعمدة"
+
+#: ../src/planner-gantt-view.c:184 ../src/planner-task-view.c:160
+#, fuzzy
+msgid "_Highlight Critical Tasks"
+msgstr "الرُّزنامة و المهام"
+
+#: ../src/planner-gantt-view.c:187
+#, fuzzy
+msgid "_Show Guide Lines"
+msgstr "نسخ السّطور المنتقاة"
+
+#: ../src/planner-gantt-view.c:190 ../src/planner-task-view.c:162
+#, fuzzy
+msgid "_Nonstandard Days"
+msgstr "أيّام العمل:"
+
+#. i18n: Label used for the sidebar. Please try to make it short and use
+#. * a linebreak if necessary/possible.
+#.
+#: ../src/planner-gantt-view.c:337
+msgid "Gantt"
+msgstr ""
+
+#: ../src/planner-gantt-view.c:343
+msgid "_Gantt Chart"
+msgstr ""
+
+#. i18n: WBS is short for work breakdown structure, and is a
+#. * project management term. You might want to leave it
+#. * untranslated unless there is a localized term for it.
+#.
+#. i18n: WBS is sort for work breakdown structure, and is a
+#. * project management term. You might want to leave it
+#. * untranslated unless there is a localized term for it.
+#.
+#: ../src/planner-gantt-view.c:581 ../src/planner-task-view.c:335
+msgid "WBS"
+msgstr ""
+
+#: ../src/planner-gantt-view.c:583 ../src/planner-task-view.c:337
+#, fuzzy
+msgid "Start"
+msgstr "إبدأ"
+
+#: ../src/planner-gantt-view.c:584 ../src/planner-task-view.c:338
+#, fuzzy
+msgid "Finish"
+msgstr "إ_نهاء"
+
+#: ../src/planner-gantt-view.c:587 ../src/planner-task-view.c:341
+msgid "Slack"
+msgstr ""
+
+#: ../src/planner-gantt-view.c:589 ../src/planner-task-view.c:343
+#, fuzzy
+msgid "Assigned to"
+msgstr "مسجل ل %s"
+
+#: ../src/planner-gantt-view.c:943
+#, fuzzy
+msgid "Edit Gantt Columns"
+msgstr "عدد خلايا اﻷعمدة"
+
+#: ../src/planner-group-dialog.c:304
+#, fuzzy
+msgid "Insert group"
+msgstr "مجموعة الرُّزنامة"
+
+#: ../src/planner-group-dialog.c:431
+#, fuzzy
+msgid "Remove group"
+msgstr "مجموعة الرُّزنامة"
+
+#: ../src/planner-group-dialog.c:526
+#, fuzzy
+msgid "Default group"
+msgstr "ال_مجموعة الافتراضيّة:"
+
+#: ../src/planner-group-dialog.c:644
+#, fuzzy
+msgid "Edit group property"
+msgstr "قيمة خاصية مسماة"
+
+#: ../src/planner-group-dialog.c:828
+#, fuzzy
+msgid "Manager name"
+msgstr "اسم الموصول"
+
+#: ../src/planner-group-dialog.c:834
+#, fuzzy
+msgid "Manager phone"
+msgstr "هاتف المساعد"
+
+#: ../src/planner-group-dialog.c:840
+#, fuzzy
+msgid "Manager email"
+msgstr "عنوان البريد الإلكتروني"
+
+#: ../src/planner-html-plugin.c:47
+#, fuzzy
+msgid "HTML"
+msgstr "HTML"
+
+#: ../src/planner-html-plugin.c:48
+#, fuzzy
+msgid "Export project to HTML"
+msgstr "تصدير بصيغة HTML لآخر مجلد"
+
+#: ../src/planner-html-plugin.c:82
+#, fuzzy
+msgid "Could not export to HTML"
+msgstr "لم يمكن إعادة تسمية المجلّد %s إلى %s: %s"
+
+#: ../src/planner-html-plugin.c:110
+#, fuzzy
+msgid "Export to HTML"
+msgstr "تصدير بصيغة HTML"
+
+#: ../src/planner-html-plugin.c:154
+#, fuzzy
+msgid "Show result in browser"
+msgstr "_فتح الوصلة في المتصفّح"
+
+#: ../src/planner-html-plugin.c:173 ../src/planner-window.c:1697
+#: ../src/planner-xml-planner-plugin.c:124
+#, fuzzy, c-format
+msgid "File \"%s\" exists, do you want to overwrite it?"
+msgstr "الملف موجود. هل تريد تنميقه؟"
+
+#: ../src/planner-main.c:56
+#, fuzzy
+msgid "Create the initial window with the given geometry."
+msgstr "انشيء النافذة الاولية بالأبعاد المعطاة."
+
+#: ../src/planner-main.c:56
+#, fuzzy
+msgid "GEOMETRY"
+msgstr "هندسة"
+
+#: ../src/planner-main.c:70
+#, fuzzy
+msgid "[FILE...]"
+msgstr "[ملف...]"
+
+#: ../src/planner-msp-plugin.c:50
+#, fuzzy
+msgid "MS Project XML..."
+msgstr "عدد عشري ل XML"
+
+#: ../src/planner-msp-plugin.c:50
+msgid "Import an MS Project XML file"
+msgstr ""
+
+#: ../src/planner-msp-plugin.c:118
+#, fuzzy
+msgid "Couldn't import file."
+msgstr "إستيراد ملف _وحيد"
+
+#: ../src/planner-msp-plugin.c:206
+#, fuzzy
+msgid "Import a File"
+msgstr "إستيراد ملف"
+
+#: ../src/planner-msp-plugin.c:214
+#, fuzzy
+msgid "XML Files"
+msgstr "ملفات XML"
+
+#: ../src/planner-msp-plugin.c:219 ../src/planner-window.c:848
+#, fuzzy
+msgid "All Files"
+msgstr "كل الملفّات"
+
+#: ../src/planner-phase-dialog.c:540
+#, fuzzy
+msgid "Insert phase"
+msgstr "إدرج فضاءات"
+
+#: ../src/planner-phase-dialog.c:639
+#, fuzzy
+msgid "Remove phase"
+msgstr "هل أحذف السمة \"%s\" ؟"
+
+#: ../src/planner-plugin-loader.c:41
+#, fuzzy, c-format
+msgid "Could not open plugin file '%s'\n"
+msgstr "لم يمكن فتح ملف البريد %s: %s"
+
+#: ../src/planner-predecessor-model.c:191 ../src/planner-task-dialog.c:2217
+msgid "FS"
+msgstr ""
+
+#: ../src/planner-predecessor-model.c:194 ../src/planner-task-dialog.c:2218
+msgid "FF"
+msgstr ""
+
+#: ../src/planner-predecessor-model.c:197 ../src/planner-task-dialog.c:2219
+msgid "SS"
+msgstr ""
+
+#: ../src/planner-predecessor-model.c:200 ../src/planner-task-dialog.c:2220
+msgid "SF"
+msgstr ""
+
+#: ../src/planner-print-dialog.c:187
+#, fuzzy
+msgid "Print Project"
+msgstr "معاينة الطّباعة."
+
+#: ../src/planner-print-dialog.c:194
+#, fuzzy
+msgid "Select views"
+msgstr "تعريف المشاهد..."
+
+#: ../src/planner-print-dialog.c:218
+#, fuzzy
+msgid "Select the views to print:"
+msgstr "كيف تطبع إطارات"
+
+#: ../src/planner-project-properties.c:387
+msgid "Select a calendar to use for this project:"
+msgstr ""
+
+#: ../src/planner-project-properties.c:487
+#, fuzzy
+msgid "Edit Project Name"
+msgstr "تحرير اسم الجلسة"
+
+#: ../src/planner-project-properties.c:523
+#, fuzzy
+msgid "Edit Organization"
+msgstr "ت_حرير الخط"
+
+#: ../src/planner-project-properties.c:559
+#, fuzzy
+msgid "Edit Manager"
+msgstr "مدير المحفوظات"
+
+#: ../src/planner-project-properties.c:631
+#: ../src/planner-project-properties.c:665
+#, fuzzy
+msgid "Edit Project Start"
+msgstr "بدأ خادم بيجل؟"
+
+#: ../src/planner-project-properties.c:754
+#, fuzzy
+msgid "OK"
+msgstr "موافق"
+
+#: ../src/planner-project-properties.c:842
+#, fuzzy
+msgid "Edit Project Phase"
+msgstr "عدّل معلومات الحساب"
+
+#: ../src/planner-project-properties.c:975
+#, fuzzy
+msgid "Property"
+msgstr "أسماء الخصائص"
+
+#: ../src/planner-project-properties.c:986
+#, fuzzy
+msgid "Value"
+msgstr "القيمة"
+
+#: ../src/planner-project-properties.c:1390
+#: ../src/planner-property-dialog.c:333
+msgid "The name of the custom property needs to start with a letter."
+msgstr ""
+
+#: ../src/planner-project-properties.c:1461
+#: ../src/planner-property-dialog.c:403
+#, c-format
+msgid "Do you really want to remove the property '%s' from the project?"
+msgstr ""
+
+#: ../src/planner-project-properties.c:1556
+#, fuzzy
+msgid "Could not create properties dialog."
+msgstr "لم يمكن عرض حوار الخصائص"
+
+#: ../src/planner-project-properties.c:1590
+#, fuzzy
+msgid "Date..."
+msgstr "التاريخ"
+
+#: ../src/planner-project-properties.c:1933
+#, fuzzy
+msgid "Add project property"
+msgstr "قيمة خاصية مسماة"
+
+#: ../src/planner-project-properties.c:2043
+#, fuzzy
+msgid "Remove project property"
+msgstr "قيمة خاصية مسماة"
+
+#: ../src/planner-project-properties.c:2136
+#, fuzzy
+msgid "Edit project property value"
+msgstr "الخاصية '%s' ليس لها قيمة"
+
+#: ../src/planner-property-dialog.c:502
+#, fuzzy
+msgid "Label"
+msgstr "علامة"
+
+#: ../src/planner-property-dialog.c:514 ../src/planner-resource-view.c:1224
+#: ../src/planner-task-dialog.c:2722
+#, fuzzy
+msgid "Type"
+msgstr "النّوع"
+
+#: ../src/planner-property-dialog.c:671
+#, fuzzy
+msgid "Add property"
+msgstr "أسماء الخصائص"
+
+#: ../src/planner-property-dialog.c:816
+#, fuzzy
+msgid "Remove property"
+msgstr "أسماء الخصائص"
+
+#: ../src/planner-property-dialog.c:909
+#, fuzzy
+msgid "Edit property label"
+msgstr "حدود الصّورة/العلامة"
+
+#: ../src/planner-resource-cmd.c:75
+#, fuzzy
+msgid "Insert resource"
+msgstr "إدرج فضاءات"
+
+#. Put "no group" at the top.
+#: ../src/planner-resource-dialog.c:312
+#: ../src/planner-resource-input-dialog.c:100
+#: ../src/planner-resource-view.c:1945
+#, fuzzy
+msgid "(None)"
+msgstr "(لا شيء)"
+
+#: ../src/planner-resource-dialog.c:322
+#: ../src/planner-resource-input-dialog.c:110 ../src/planner-task-dialog.c:381
+#, fuzzy
+msgid "(No name)"
+msgstr "لا يوجد اسم"
+
+#: ../src/planner-resource-dialog.c:495
+#, fuzzy
+msgid "Edit resource calendar"
+msgstr "الرُّزنامة و المهام"
+
+#: ../src/planner-resource-dialog.c:576
+#, fuzzy
+msgid "Edit resource note"
+msgstr "<b>خصائص المذكرة الافتراضية</b>"
+
+#: ../src/planner-resource-dialog.c:643
+#, fuzzy
+msgid "Edit resource cost"
+msgstr "المورد مقفل"
+
+#: ../src/planner-resource-dialog.c:711 ../src/planner-resource-dialog.c:752
+#: ../src/planner-resource-view.c:1413 ../src/planner-resource-view.c:1494
+#, fuzzy
+msgid "Edit resource property"
+msgstr "قيمة خاصية مسماة"
+
+#. i18n: time stamp format for notes in task dialog, see strftime(3) for
+#. * a detailed description.
+#: ../src/planner-resource-dialog.c:1404 ../src/planner-task-dialog.c:1808
+msgid "%a %d %b %Y, %H:%M\n"
+msgstr ""
+
+#: ../src/planner-resource-dialog.c:1521
+#, fuzzy
+msgid "None (use project default)"
+msgstr "_استخدام تيمة الخط الإفتراضية"
+
+#: ../src/planner-resource-dialog.c:1648 ../src/planner-resource-dialog.c:1650
+#, fuzzy
+msgid "Edit resource properties"
+msgstr "خصائص عنصر القائمة"
+
+#: ../src/planner-resource-dialog.c:1851 ../src/planner-resource-view.c:753
+#: ../src/planner-resource-view.c:767 ../src/planner-resource-view.c:1737
+msgid "Material"
+msgstr ""
+
+#: ../src/planner-resource-view.c:230
+#, fuzzy
+msgid "_Insert Resource"
+msgstr "إدرج فضاءات"
+
+#: ../src/planner-resource-view.c:231
+#, fuzzy
+msgid "Insert a new resource"
+msgstr "المورد مقفل"
+
+#: ../src/planner-resource-view.c:233
+#, fuzzy
+msgid "In_sert Resources..."
+msgstr "أد_خل التاريخ و الوقت..."
+
+#: ../src/planner-resource-view.c:236
+#, fuzzy
+msgid "_Remove Resource"
+msgstr "هل أحذف السمة \"%s\" ؟"
+
+#: ../src/planner-resource-view.c:237
+#, fuzzy
+msgid "Remove the selected resource"
+msgstr "حذف شريط الأدوات المحدد"
+
+#: ../src/planner-resource-view.c:239
+#, fuzzy
+msgid "_Edit Resource Properties..."
+msgstr "خصائص عنصر القائمة"
+
+#: ../src/planner-resource-view.c:242
+#, fuzzy
+msgid "Edit _Groups"
+msgstr "_تحرير المستخدمين و المجموعات"
+
+#: ../src/planner-resource-view.c:243
+#, fuzzy
+msgid "Edit resource groups"
+msgstr "_تحرير المستخدمين و المجموعات"
+
+#: ../src/planner-resource-view.c:248
+#, fuzzy
+msgid "Edit _Custom Properties..."
+msgstr "خصائص عنصر القائمة"
+
+#: ../src/planner-resource-view.c:266
+#, fuzzy
+msgid "/_Insert resource"
+msgstr "إدرج فضاءات"
+
+#: ../src/planner-resource-view.c:269
+#, fuzzy
+msgid "/_Remove resource"
+msgstr "هل أحذف السمة \"%s\" ؟"
+
+#: ../src/planner-resource-view.c:272 ../src/planner-usage-tree.c:102
+#, fuzzy
+msgid "/_Edit resource..."
+msgstr "ت_حرير الخط"
+
+#: ../src/planner-resource-view.c:423
+#, fuzzy
+msgid "_Resources"
+msgstr "الموارد"
+
+#: ../src/planner-resource-view.c:943
+#, fuzzy
+msgid "Remove resource"
+msgstr "هل أحذف السمة \"%s\" ؟"
+
+#: ../src/planner-resource-view.c:1020
+#, fuzzy
+msgid "Edit Resource Columns"
+msgstr "عدد خلايا اﻷعمدة"
+
+#: ../src/planner-resource-view.c:1055
+msgid "Edit custom resource properties"
+msgstr ""
+
+#: ../src/planner-resource-view.c:1197
+#, fuzzy
+msgid "Short name"
+msgstr "اسم الموصول"
+
+#: ../src/planner-resource-view.c:1253
+#, fuzzy
+msgid "Group"
+msgstr "مجموعة"
+
+#. i18n: Short "Week", preferably 2 letters.
+#: ../src/planner-scale-utils.c:129
+#, c-format
+msgid "Wk %d"
+msgstr ""
+
+#: ../src/planner-scale-utils.c:133
+#, fuzzy, c-format
+msgid "Week %d"
+msgstr "أسابيع"
+
+#. i18n: Week, year.
+#: ../src/planner-scale-utils.c:138
+#, fuzzy, c-format
+msgid "Week %d, %d"
+msgstr "أسابيع"
+
+#. i18n: Short "Quarter", preferably 1 letter.
+#: ../src/planner-scale-utils.c:169
+#, c-format
+msgid "Q%d"
+msgstr ""
+
+#. i18n: Short "Quarter", preferably 2-3 letters.
+#: ../src/planner-scale-utils.c:173
+#, c-format
+msgid "Qtr %d"
+msgstr ""
+
+#. i18n: Year, short "Quarter", preferably 2-3 letters.
+#: ../src/planner-scale-utils.c:177
+#, c-format
+msgid "%d, Qtr %d"
+msgstr ""
+
+#. i18n: Short "Half year", preferably 1 letter.
+#: ../src/planner-scale-utils.c:190
+#, c-format
+msgid "H%d"
+msgstr ""
+
+#. i18n: Year, short "Half year", preferably 1 letter.
+#: ../src/planner-scale-utils.c:195
+#, c-format
+msgid "%04d, H%d"
+msgstr ""
+
+#: ../src/planner-sql-plugin.c:93
+#, fuzzy
+msgid "Open from Database..."
+msgstr "افتح سجل من ملف"
+
+#: ../src/planner-sql-plugin.c:94
+#, fuzzy
+msgid "Open a project from a database"
+msgstr "افتح سجل من ملف"
+
+#: ../src/planner-sql-plugin.c:96 ../src/planner-sql-plugin.c:1152
+#, fuzzy
+msgid "Save to Database"
+msgstr "قاعدة البيانات المستعملة"
+
+#: ../src/planner-sql-plugin.c:97
+#, fuzzy
+msgid "Save the current project to a database"
+msgstr "لا وجود لقاعدة بيانات لحفظ اعداداتك"
+
+#: ../src/planner-sql-plugin.c:135 ../src/planner-sql-plugin.c:150
+#, fuzzy
+msgid "No errors reported."
+msgstr "اظهار أخطاء التشغيل"
+
+#: ../src/planner-sql-plugin.c:517
+#, c-format
+msgid ""
+"Database %s needs to be upgraded from version %s to version %s.\n"
+"Please backup database before the upgrade."
+msgstr ""
+
+#: ../src/planner-sql-plugin.c:524
+msgid "Upgrade"
+msgstr ""
+
+#: ../src/planner-sql-plugin.c:538
+#, c-format
+msgid ""
+"Could not upgrade database %s.\n"
+" Upgrade file used: %s.\n"
+"\n"
+"Database error: \n"
+"%s"
+msgstr ""
+
+#: ../src/planner-sql-plugin.c:579
+#, c-format
+msgid "Can't create tables in database %s"
+msgstr ""
+
+#: ../src/planner-sql-plugin.c:648
+#, c-format
+msgid "Database %s is not setup for Planner. Do you want to do that?"
+msgstr ""
+
+#: ../src/planner-sql-plugin.c:696
+#, fuzzy, c-format
+msgid "Connection to database '%s@%s' failed."
+msgstr "فشل الاتصال بخادم القواميس %s:%d"
+
+#: ../src/planner-sql-plugin.c:711
+#, c-format
+msgid "Test to tables in database '%s' failed."
+msgstr ""
+
+#: ../src/planner-sql-plugin.c:816
+#, fuzzy
+msgid "ID"
+msgstr "الهوية"
+
+#: ../src/planner-sql-plugin.c:824
+msgid "Project"
+msgstr ""
+
+#: ../src/planner-sql-plugin.c:832
+msgid "Phase"
+msgstr ""
+
+#: ../src/planner-sql-plugin.c:840
+#, fuzzy
+msgid "Revision"
+msgstr "تاريخ التنقيح"
+
+#: ../src/planner-sql-plugin.c:1040
+#, fuzzy
+msgid "Open from Database"
+msgstr "افتح سجل من ملف"
+
+#: ../src/planner-task-cmd.c:97
+#, fuzzy
+msgid "Link task"
+msgstr "ت_كليف بالمهمّة"
+
+#: ../src/planner-task-cmd.c:173
+#, fuzzy
+msgid "Unlink task"
+msgstr "ت_كليف بالمهمّة"
+
+#: ../src/planner-task-cmd.c:268
+#, fuzzy
+msgid "Insert task"
+msgstr "ت_كليف بالمهمّة"
+
+#: ../src/planner-task-dialog.c:529
+#, fuzzy
+msgid "Edit task type"
+msgstr "نوع جهاز الخرج"
+
+#: ../src/planner-task-dialog.c:596
+#, fuzzy
+msgid "Toggle fixed duration"
+msgstr "خط _ثابت العرض:"
+
+#: ../src/planner-task-dialog.c:663
+#, fuzzy
+msgid "Edit task scheduling"
+msgstr "<b>خيارات قائمة المهام</b>"
+
+#: ../src/planner-task-dialog.c:743
+#, fuzzy
+msgid "Assign resource to task"
+msgstr "نقر لإضافة مهمّة"
+
+#: ../src/planner-task-dialog.c:803
+msgid "Unassign resource from task"
+msgstr ""
+
+#: ../src/planner-task-dialog.c:862
+msgid "Change resource units in task"
+msgstr ""
+
+#: ../src/planner-task-dialog.c:950
+#, fuzzy
+msgid "Edit task predecessor"
+msgstr "<b>خيارات قائمة المهام</b>"
+
+#: ../src/planner-task-dialog.c:1021
+#, fuzzy
+msgid "Edit lag predecessor"
+msgstr "عدّل معلومات الحساب"
+
+#: ../src/planner-task-dialog.c:1087
+#, fuzzy
+msgid "Edit task note"
+msgstr "<b>خصائص المذكرة الافتراضية</b>"
+
+#: ../src/planner-task-dialog.c:1495
+#, fuzzy, c-format
+msgid "No earlier than %s"
+msgstr "أكبر من"
+
+#: ../src/planner-task-dialog.c:1499
+#, fuzzy, c-format
+msgid "On fixed date %s"
+msgstr "بحسب _تاريخ التعديل"
+
+#: ../src/planner-task-dialog.c:1917
+#, fuzzy
+msgid "Finish to start (FS)"
+msgstr "اختر خادم X للتشغيل"
+
+#: ../src/planner-task-dialog.c:1918
+#, fuzzy
+msgid "Finish to finish (FF)"
+msgstr "انقر موافق للإنهاء."
+
+#: ../src/planner-task-dialog.c:1919
+#, fuzzy
+msgid "Start to start (SS)"
+msgstr "الخوادم الواجب تشغيلها"
+
+#: ../src/planner-task-dialog.c:1920
+#, fuzzy
+msgid "Start to finish (SF)"
+msgstr "انقر موافق للإنهاء."
+
+#: ../src/planner-task-dialog.c:1975
+msgid "Can't add new predecessor. No task selected!"
+msgstr ""
+
+#: ../src/planner-task-dialog.c:2463
+#, fuzzy
+msgid "Change..."
+msgstr "تغيير كلمة السر"
+
+#: ../src/planner-task-dialog.c:2637
+#, fuzzy
+msgid "Assigned"
+msgstr "مكلّف"
+
+#: ../src/planner-task-dialog.c:2654
+#, fuzzy
+msgid "Units"
+msgstr "الوحدات"
+
+#: ../src/planner-task-dialog.c:2744
+msgid "Lag"
+msgstr ""
+
+#: ../src/planner-task-dialog.c:2887 ../src/planner-task-dialog.c:2889
+#, fuzzy
+msgid "Edit task properties"
+msgstr "خصائص عنصر القائمة"
+
+#: ../src/planner-task-popup.c:54
+#, fuzzy
+msgid "/_Insert task"
+msgstr "ت_كليف بالمهمّة"
+
+#: ../src/planner-task-popup.c:57
+#, fuzzy
+msgid "/Insert _subtask"
+msgstr "إدرج فضاءات"
+
+#: ../src/planner-task-popup.c:60
+#, fuzzy
+msgid "/_Remove task"
+msgstr "ت_كليف بالمهمّة"
+
+#: ../src/planner-task-popup.c:65
+#, fuzzy
+msgid "/_Unlink task"
+msgstr "ت_كليف بالمهمّة"
+
+#: ../src/planner-task-popup.c:70
+#, fuzzy
+msgid "/Assign _resources..."
+msgstr "الموارد المراقَبة"
+
+#: ../src/planner-task-popup.c:73 ../src/planner-usage-tree.c:105
+#, fuzzy
+msgid "/_Edit task..."
+msgstr "ت_كليف بالمهمّة"
+
+#: ../src/planner-task-tree.c:567
+#, fuzzy
+msgid "Remove task"
+msgstr "ت_كليف بالمهمّة"
+
+#: ../src/planner-task-tree.c:644
+#, fuzzy
+msgid "Apply constraint to task"
+msgstr "نقر لإضافة مهمّة"
+
+#: ../src/planner-task-tree.c:706
+#, fuzzy
+msgid "Reset task constraint"
+msgstr "<b>خيارات قائمة المهام</b>"
+
+#: ../src/planner-task-tree.c:1492 ../src/planner-task-tree.c:1624
+#, fuzzy
+msgid "N/A"
+msgstr "غير متوفر"
+
+#: ../src/planner-task-tree.c:2724
+#, fuzzy
+msgid "Remove tasks"
+msgstr "المهام ال_فائت موعدها:"
+
+#: ../src/planner-task-tree.c:2786
+#, c-format
+msgid ""
+"You are about to open an edit dialog each for %i tasks. Are you sure that "
+"you want to do that?"
+msgstr ""
+
+#: ../src/planner-task-tree.c:2888
+#, fuzzy
+msgid "Unlink tasks"
+msgstr "المهام ال_فائت موعدها:"
+
+#: ../src/planner-task-tree.c:2940
+#, fuzzy
+msgid "Link tasks"
+msgstr "المهام ال_فائت موعدها:"
+
+#: ../src/planner-task-tree.c:3031
+#, fuzzy
+msgid "Indent tasks"
+msgstr "المهام ال_فائت موعدها:"
+
+#: ../src/planner-task-tree.c:3042
+#, fuzzy
+msgid "Indent task"
+msgstr "ت_كليف بالمهمّة"
+
+#: ../src/planner-task-tree.c:3134
+#, fuzzy
+msgid "Unindent tasks"
+msgstr "المهام ال_فائت موعدها:"
+
+#: ../src/planner-task-tree.c:3150
+#, fuzzy
+msgid "Unindent task"
+msgstr "ت_كليف بالمهمّة"
+
+#: ../src/planner-task-tree.c:3227
+#, fuzzy
+msgid "Move tasks up"
+msgstr "نقل القطع إلى الأعلى"
+
+#: ../src/planner-task-tree.c:3265
+#, fuzzy
+msgid "Move task up"
+msgstr "نقل القطع إلى الأعلى"
+
+#: ../src/planner-task-tree.c:3354
+#, fuzzy
+msgid "Move tasks down"
+msgstr "نقل القطع إلى الأسفل"
+
+#. Moving task from 'position' to 'position + 1'
+#: ../src/planner-task-tree.c:3400
+#, fuzzy
+msgid "Move task down"
+msgstr "نقل القطع إلى الأسفل"
+
+#: ../src/planner-task-tree.c:3456
+#, fuzzy
+msgid "Reset task constraints"
+msgstr "<b>خيارات قائمة المهام</b>"
+
+#: ../src/planner-task-tree.c:3488
+msgid "Reset all task constraints"
+msgstr ""
+
+#: ../src/planner-task-view.c:124
+#, fuzzy
+msgid "_Edit Task"
+msgstr "ت_كليف بالمهمّة"
+
+#: ../src/planner-task-view.c:151
+#, fuzzy
+msgid "_Edit Custom Properties..."
+msgstr "خصائص عنصر القائمة"
+
+#: ../src/planner-task-view.c:270
+#, fuzzy
+msgid "Tasks"
+msgstr "المهام"
+
+#: ../src/planner-task-view.c:276
+#, fuzzy
+msgid "_Tasks"
+msgstr "_مهام"
+
+#: ../src/planner-task-view.c:572
+msgid "Edit custom task properties"
+msgstr ""
+
+#: ../src/planner-task-view.c:626
+#, fuzzy
+msgid "Edit Task Columns"
+msgstr "عدد خلايا اﻷعمدة"
+
+#: ../src/planner-usage-tree.c:108
+#, fuzzy
+msgid "/_Expand all resources"
+msgstr "أظهر كل المكونات"
+
+#: ../src/planner-usage-tree.c:111
+#, fuzzy
+msgid "/_Collapse all resources"
+msgstr "إنهيار كل الأعمدة"
+
+#: ../src/planner-usage-tree.c:379
+msgid ""
+"\n"
+"Name"
+msgstr ""
+
+#: ../src/planner-usage-tree.c:381
+msgid ""
+"\n"
+"Task"
+msgstr ""
+
+#: ../src/planner-usage-view.c:111
+#, fuzzy
+msgid "Zoom to fit"
+msgstr "تكبير حتى الملاءمة"
+
+#. i18n: Label used for the sidebar. Please try to make it short and use
+#. * a linebreak if necessary/possible.
+#.
+#: ../src/planner-usage-view.c:228
+#, fuzzy
+msgid ""
+"Resource\n"
+"Usage"
+msgstr "المورد مقفل"
+
+#: ../src/planner-usage-view.c:234
+#, fuzzy
+msgid "Resource _Usage"
+msgstr "الاستعمال:·%s:·[-D]·[-E]·[-a·accuracy]·"
+
+#: ../src/planner-usage-view.c:345
+msgid "Edit Resource Usage Columns"
+msgstr ""
+
+#: ../src/planner-window.c:225
+#, fuzzy
+msgid "_File"
+msgstr "_ملف"
+
+#: ../src/planner-window.c:229
+#, fuzzy
+msgid "_New Project"
+msgstr "فا_صل جديد"
+
+#: ../src/planner-window.c:229
+#, fuzzy
+msgid "Create a new project"
+msgstr "انشاء موضوع جديد"
+
+#: ../src/planner-window.c:233
+#, fuzzy
+msgid "_Open..."
+msgstr "_فتح..."
+
+#: ../src/planner-window.c:233
+#, fuzzy
+msgid "Open a project"
+msgstr "فتح ملف"
+
+#: ../src/planner-window.c:236
+#, fuzzy
+msgid "_Import"
+msgstr "إ_ستيراد"
+
+#: ../src/planner-window.c:240 ../src/planner-window.c:1567
+#, fuzzy
+msgid "_Save"
+msgstr "_حفظ"
+
+#: ../src/planner-window.c:240
+#, fuzzy
+msgid "Save the current project"
+msgstr "إ_حفظ الصورة الحالية"
+
+#: ../src/planner-window.c:243
+#, fuzzy
+msgid "_Export"
+msgstr "تصدير علامات المواقع"
+
+#: ../src/planner-window.c:246
+#, fuzzy
+msgid "Save _As..."
+msgstr "حفظ _بإسم..."
+
+#: ../src/planner-window.c:246
+#, fuzzy
+msgid "Save the current project with a different name"
+msgstr "حفظ الملف الحالي بإسم مغاير"
+
+#: ../src/planner-window.c:249
+#, fuzzy
+msgid "_Print..."
+msgstr "_طبع..."
+
+#: ../src/planner-window.c:249
+#, fuzzy
+msgid "Print the current project"
+msgstr "طبع الصفحة الحالية"
+
+#: ../src/planner-window.c:252
+#, fuzzy
+msgid "Print Pre_view"
+msgstr "لمحة ال_طباعة"
+
+#: ../src/planner-window.c:252
+#, fuzzy
+msgid "Print preview of the current project"
+msgstr "يغلق نافذة لمحة المطبوعة"
+
+#: ../src/planner-window.c:255
+#, fuzzy
+msgid "_Close"
+msgstr "أ_غلق"
+
+#: ../src/planner-window.c:255
+#, fuzzy
+msgid "Close the current file"
+msgstr "غلق الملف الحالي"
+
+#: ../src/planner-window.c:258
+#, fuzzy
+msgid "_Quit"
+msgstr "إ_نهي"
+
+#: ../src/planner-window.c:258
+#, fuzzy
+msgid "Exit the program"
+msgstr "إنهاء البرنامج"
+
+#: ../src/planner-window.c:262
+#, fuzzy
+msgid "_Edit"
+msgstr "_تحرير"
+
+#: ../src/planner-window.c:265
+#, fuzzy
+msgid "_Undo"
+msgstr "إ_لغاء"
+
+#: ../src/planner-window.c:265
+#, fuzzy
+msgid "Undo the last action"
+msgstr "تراجع عن العمل الأخير"
+
+#: ../src/planner-window.c:268
+#, fuzzy
+msgid "_Redo"
+msgstr "_إعادة"
+
+#: ../src/planner-window.c:268
+#, fuzzy
+msgid "Redo the undone action"
+msgstr "كرّر الفعل المتراجع عنه"
+
+#: ../src/planner-window.c:272
+#, fuzzy
+msgid "_View"
+msgstr "_اعرض"
+
+#: ../src/planner-window.c:276
+#, fuzzy
+msgid "_Actions"
+msgstr "إ_جراءات"
+
+#: ../src/planner-window.c:280
+msgid "_Project"
+msgstr ""
+
+#: ../src/planner-window.c:283
+#, fuzzy
+msgid "_Manage Calendars"
+msgstr "إدارة الشهادات"
+
+#: ../src/planner-window.c:286
+#, fuzzy
+msgid "Edit Day _Types"
+msgstr "كل الفئات المدعومة"
+
+#: ../src/planner-window.c:289
+#, fuzzy
+msgid "Edit Project _Phases"
+msgstr "عدّل معلومات الحساب"
+
+#: ../src/planner-window.c:292
+#, fuzzy
+msgid "_Edit Project Properties"
+msgstr "خصائص عنصر القائمة"
+
+#: ../src/planner-window.c:292
+#, fuzzy
+msgid "Edit the project properties"
+msgstr "خصائص عنصر القائمة"
+
+#: ../src/planner-window.c:300
+#, fuzzy
+msgid "_Help"
+msgstr "م_ساعدة"
+
+#: ../src/planner-window.c:303
+#, fuzzy
+msgid "_User Guide"
+msgstr "بدّل المستخدم"
+
+#: ../src/planner-window.c:303
+#, fuzzy
+msgid "Show the Planner User Guide"
+msgstr "أظهر زر تغيير المستخدم"
+
+#: ../src/planner-window.c:306
+#, fuzzy
+msgid "_About"
+msgstr "_حول"
+
+#: ../src/planner-window.c:306
+#, fuzzy
+msgid "About this application"
+msgstr "حول هذا التّطبيق"
+
+#. Note: these strings are leaked.
+#: ../src/planner-window.c:665
+#, fuzzy, c-format
+msgid "Switch to the view \"%s\""
+msgstr "بدّل إلى <b>%(name)s</b>"
+
+#: ../src/planner-window.c:832
+#, fuzzy
+msgid "Open a File"
+msgstr "فتح ملف"
+
+#: ../src/planner-window.c:842
+#, fuzzy
+msgid "Planner Files"
+msgstr "كل الملفّات"
 
 #. I18n: Translators, list your names here, newline separated if there
 #. * are more than one, to appear in the about box.
-#: ../src/planner-window.c:1324
-#: ../src/planner-window.c:1346
+#.
+#: ../src/planner-window.c:1324 ../src/planner-window.c:1346
 #, fuzzy
 msgid "translator-credits"
 msgstr "Yousef Raffah يوسف رفه (yousef@raffah.com)"
 
-#. month unit variant accepted in input
-#: ../src/planner-format.c:377
-msgid "w"
+#: ../src/planner-window.c:1341
+msgid "A Project Management application for the GNOME desktop"
 msgstr ""
 
-#. week unit variant accepted in input
-#: ../src/planner-format.c:378
+#: ../src/planner-window.c:1348
 #, fuzzy
-msgid "week"
-msgstr "أسابيع"
+msgid "The Planner Homepage"
+msgstr "صفحة الإنترنت و التبرعات"
 
-#. week unit variant accepted in input
-#: ../src/planner-format.c:379
+#: ../src/planner-window.c:1500
 #, fuzzy
-msgid "weeks"
-msgstr "أسابيع"
+msgid "If you don't save, changes made the last minute will be discarded."
+msgstr "ستضيع تغييرات الدّقيقة الأخيرة نهائيّاً إذا لم تحفظ."
 
-#: ../data/glade/task-date-widget.glade.h:9
+#: ../src/planner-window.c:1506
+#, fuzzy, c-format
+msgid "If you don't save, changes made the last %d minute will be discarded."
+msgid_plural ""
+"If you don't save, changes made the last %d minutes will be discarded."
+msgstr[0] "ستضيع تغييرات الدّقيقة الأخيرة نهائيّاً إذا لم تحفظ."
+msgstr[1] "ستضيع تغييرات الدّقيقة الأخيرة نهائيّاً إذا لم تحفظ."
+msgstr[2] "ستضيع تغييرات الدّقيقة الأخيرة نهائيّاً إذا لم تحفظ."
+msgstr[3] "ستضيع تغييرات الدّقيقة الأخيرة نهائيّاً إذا لم تحفظ."
+msgstr[4] "ستضيع تغييرات الدّقيقة الأخيرة نهائيّاً إذا لم تحفظ."
+msgstr[5] "ستضيع تغييرات الدّقيقة الأخيرة نهائيّاً إذا لم تحفظ."
+
+#: ../src/planner-window.c:1514
 #, fuzzy
-msgid "window"
-msgstr "نافذة"
+msgid "If you don't save, changes made the last hour will be discarded."
+msgstr "ستضيع تغييرات السّاعة الأخيرة نهائيّا إذا لم تحفظ."
 
+#: ../src/planner-window.c:1519
+#, fuzzy, c-format
+msgid "If you don't save, changes made the last %d hour will be discarded."
+msgid_plural ""
+"If you don't save, changes made the last %d hours will be discarded."
+msgstr[0] "ستضيع تغييرات السّاعة الأخيرة نهائيّا إذا لم تحفظ."
+msgstr[1] "ستضيع تغييرات السّاعة الأخيرة نهائيّا إذا لم تحفظ."
+msgstr[2] "ستضيع تغييرات السّاعة الأخيرة نهائيّا إذا لم تحفظ."
+msgstr[3] "ستضيع تغييرات السّاعة الأخيرة نهائيّا إذا لم تحفظ."
+msgstr[4] "ستضيع تغييرات السّاعة الأخيرة نهائيّا إذا لم تحفظ."
+msgstr[5] "ستضيع تغييرات السّاعة الأخيرة نهائيّا إذا لم تحفظ."
+
+#: ../src/planner-window.c:1529
+#, fuzzy, c-format
+msgid "Save changes to document '%s' before closing?"
+msgstr "هل تريد حفظ التّغييرات في المستند \"%s\" قبل غلقه؟"
+
+#: ../src/planner-window.c:1554
+#, fuzzy
+msgid "C_lose without saving"
+msgstr "خروج _دون حفظ"
+
+#: ../src/planner-window.c:1560
+#, fuzzy
+msgid "_Cancel"
+msgstr "إل_غاء"
+
+#: ../src/planner-window.c:1659
+#, fuzzy
+msgid "Save a File"
+msgstr "حفظ الملف"
+
+#: ../src/planner-window.c:1945
+msgid ""
+"You have opened a file that was saved with an old version of Planner.\n"
+"\n"
+"When loading old files, all tasks will use the constraint 'Must Start On', "
+"since the old version did not fully support automatic rescheduling. To take "
+"advantage of this new feature, you should add predecessor relations between "
+"tasks that are dependant on each other.\n"
+"\n"
+"You can add a predecessor relation by clicking on the predecessor and "
+"dragging to the successor.\n"
+"\n"
+"After doing this, you can remove all constraints by selecting the menu item "
+"'Remove all constraints' in the 'Edit' menu."
+msgstr ""
+
+#. Hack.
+#: ../src/planner-window.c:1980
+#, fuzzy
+msgid "Unnamed database project"
+msgstr "تفضيلات قاعدة بيانات القرص المدمج"
+
+#: ../src/planner-window.c:2094
+#, fuzzy, c-format
+msgid "Open '%s'"
+msgstr "فتح '%s'"
+
+#: ../src/planner-working-time-dialog.c:145
+#, fuzzy
+msgid "Edit working time"
+msgstr "الوقت الذي تحدّده أنت"
+
+#: ../src/planner-xml-planner-plugin.c:54
+#, fuzzy
+msgid "Planner 0.11 Format"
+msgstr "تهيئة توقيع غير مدعومة"
+
+#: ../src/planner-xml-planner-plugin.c:55
+msgid "Export project to a file suitable for Planner 0.11"
+msgstr ""
+
+#: ../src/planner-xml-planner-plugin.c:90
+#, fuzzy
+msgid "Export"
+msgstr "تصدير علامات المواقع"
+
+#: ../eds-backend/e-cal-backend-planner.c:289
+#, fuzzy
+msgid "EDS UID"
+msgstr "أقصى UID:"
+
+#: ../eds-backend/e-cal-backend-planner.c:290
+msgid "Identifier used by Evolution Data Server for tasks"
+msgstr ""
+
+#: ../eds-backend/e-cal-backend-planner.c:299
+#, fuzzy
+msgid "EDS Categories"
+msgstr "أصناف المزامنة:"
+
+#: ../eds-backend/e-cal-backend-planner.c:300
+msgid "Categories for a task used by Evolution Data Server"
+msgstr ""
+
+#: ../eds-backend/e-cal-backend-planner.c:309
+msgid "EDS Classification"
+msgstr ""
+
+#: ../eds-backend/e-cal-backend-planner.c:310
+msgid "Task access classification used by Evolution Data Server"
+msgstr ""
+
+#: ../eds-backend/e-cal-backend-planner.c:319
+#, fuzzy
+msgid "EDS URL"
+msgstr "عنوان VoIP"
+
+#: ../eds-backend/e-cal-backend-planner.c:320
+msgid "URL for a Task used by Evolution Data Server"
+msgstr ""
+
+#: ../eds-backend/e-cal-backend-planner.c:829
+#, fuzzy
+msgid "Invalid server URI"
+msgstr "العنوان \"%s\" غير سليم."
+
+#. book_target = (EABConfigTargetSource *) data->target;
+#. source = book_target->source;
+#: ../eds-backend/planner-source/planner-source.c:125
+#, fuzzy
+msgid "Select planner file"
+msgstr "انتقي ملف صوت"
+
+#: ../eds-backend/planner-source/planner-source.c:157
+#, c-format
+msgid ""
+"The filename extension of this file isn't the planner usual file extension (%"
+"s) Do you want to continue?"
+msgstr ""
