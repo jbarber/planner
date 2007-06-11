@@ -1,4 +1,4 @@
-# Traditional Chinese translation of planner.
+# Chinese (Hong Kong) translation of planner.
 # Copyright (C) 2004 Free Software Foundation, Inc.
 # This file is distributed under the same license as the planner package.
 # Woodman Tuen <woodman@cultirecom.com.hk>, 2004
@@ -9,9 +9,9 @@ msgstr ""
 "Project-Id-Version: planner 0.12.90\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-06-11 21:26+0800\n"
-"PO-Revision-Date: 2007-03-20 19:58+0800\n"
+"PO-Revision-Date: 2007-06-11 21:29+0800\n"
 "Last-Translator: Walter Cheuk <wwycheuk@gmail.com>\n"
-"Language-Team: Chinese/Traditional <community@linuxhall.org>\n"
+"Language-Team: Chinese (Hong Kong) <community@linuxhall.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -213,7 +213,7 @@ msgstr "全部選取"
 
 #: ../data/glade/eds.glade.h:5
 msgid "Select group"
-msgstr "選取群組"
+msgstr "選取羣組"
 
 #: ../data/glade/eds.glade.h:6
 msgid "Unselect All"
@@ -225,7 +225,7 @@ msgstr ""
 
 #: ../data/glade/group-dialog.glade.h:1
 msgid "Group Editor"
-msgstr "群組編輯器"
+msgstr "羣組編輯器"
 
 #: ../data/glade/new-property.glade.h:2
 msgid "Add Property"
@@ -317,7 +317,7 @@ msgstr "可選 -- 覆蓋甘特圖的資源名稱。"
 msgid ""
 "Select the calendar to use for this resource. If you want to use the default "
 "calendar of the project, select 'None'. "
-msgstr "選取這資源使用的行事曆。如果您想使用專案預設的行事曆，請選取「沒有」。"
+msgstr "選取這資源使用的行事曆。如果你想使用專案預設的行事曆，請選取「沒有」。"
 
 #: ../data/glade/resource-dialog.glade.h:9
 #: ../data/glade/resource-input-dialog.glade.h:4
@@ -327,7 +327,7 @@ msgstr "電郵(_E)："
 #: ../data/glade/resource-dialog.glade.h:10
 #: ../data/glade/resource-input-dialog.glade.h:5
 msgid "_Group:"
-msgstr "群組(_G)："
+msgstr "羣組(_G)："
 
 #: ../data/glade/resource-dialog.glade.h:11
 msgid "_Insert time stamp"
@@ -503,15 +503,15 @@ msgstr "於工作檢視中重點標示關鍵路徑 (Critical path)"
 
 #: ../data/planner.schemas.in.h:4
 msgid "Print the Gantt view"
-msgstr "列印甘特圖"
+msgstr "打印甘特圖"
 
 #: ../data/planner.schemas.in.h:5
 msgid "Print the Resource view"
-msgstr "列印資源檢視"
+msgstr "打印資源檢視"
 
 #: ../data/planner.schemas.in.h:6
 msgid "Print the Task view"
-msgstr "列印工作檢視"
+msgstr "打印工作檢視"
 
 #: ../data/planner.schemas.in.h:7
 msgid "The active view"
@@ -519,15 +519,15 @@ msgstr "作用中的檢視"
 
 #: ../data/planner.schemas.in.h:8
 msgid "Whether printing of the Gantt view is enabled."
-msgstr "是否已啟動列印甘特圖。"
+msgstr "是否已啟動打印甘特圖。"
 
 #: ../data/planner.schemas.in.h:9
 msgid "Whether printing of the Resource view is enabled."
-msgstr "是否已啟動列印資源檢視。"
+msgstr "是否已啟動打印資源檢視。"
 
 #: ../data/planner.schemas.in.h:10
 msgid "Whether printing of the Task view is enabled."
-msgstr "是否已啟動列印工作檢視。"
+msgstr "是否已啟動打印工作檢視。"
 
 #: ../data/planner.schemas.in.h:11
 msgid "Whether to display nonstandard days in the Gantt view."
@@ -654,7 +654,7 @@ msgstr "找不到合適模組載入‘%s’"
 
 #: ../libplanner/mrp-project.c:780 ../libplanner/mrp-project.c:1064
 msgid "No support for SQL storage built into this version of Planner."
-msgstr "這一版本的 Planner 未有內建支援 SQL 儲存。"
+msgstr "這一版本的 Planner 未有內置支援 SQL 儲存。"
 
 #: ../libplanner/mrp-project.c:817
 msgid "Invalid URI."
@@ -736,7 +736,7 @@ msgstr "BEGIN 指令失敗 %s。"
 msgid ""
 "The project '%s' has been changed by the user '%s' since you opened it. Do "
 "you want to save anyway?"
-msgstr "專案‘%s’於您開啟後被使用者‘%s’修改過。您還要儲存它嗎？"
+msgstr "專案‘%s’於你開啟後被使用者‘%s’修改過。你還要儲存它嗎？"
 
 #: ../libplanner/mrp-sql.c:3674
 #, c-format
@@ -841,7 +841,7 @@ msgstr "編輯"
 
 #: ../src/planner-calendar-dialog.c:184
 msgid "Change day type"
-msgstr "變更日子類型"
+msgstr "更改日子類型"
 
 #: ../src/planner-calendar-dialog.c:306
 msgid "Remove calendar"
@@ -1116,7 +1116,7 @@ msgstr "將任務『%s』作為『%s』的先決條件"
 #: ../src/planner-gantt-row.c:2661
 #, c-format
 msgid "Change work to %s"
-msgstr "變更工作為 %s"
+msgstr "更改工作為 %s"
 
 #: ../src/planner-gantt-row.c:3232 ../src/planner-task-dialog.c:455
 #: ../src/planner-task-tree.c:257 ../src/planner-task-tree.c:947
@@ -1302,19 +1302,19 @@ msgstr "編輯甘特圖欄目"
 
 #: ../src/planner-group-dialog.c:304
 msgid "Insert group"
-msgstr "加入群組"
+msgstr "加入羣組"
 
 #: ../src/planner-group-dialog.c:431
 msgid "Remove group"
-msgstr "移除群組"
+msgstr "移除羣組"
 
 #: ../src/planner-group-dialog.c:526
 msgid "Default group"
-msgstr "預設群組"
+msgstr "預設羣組"
 
 #: ../src/planner-group-dialog.c:644
 msgid "Edit group property"
-msgstr "編輯群組屬性"
+msgstr "編輯羣組屬性"
 
 #: ../src/planner-group-dialog.c:828
 msgid "Manager name"
@@ -1421,7 +1421,7 @@ msgstr "SF"
 
 #: ../src/planner-print-dialog.c:187
 msgid "Print Project"
-msgstr "列印專案"
+msgstr "打印專案"
 
 #: ../src/planner-print-dialog.c:194
 msgid "Select views"
@@ -1429,7 +1429,7 @@ msgstr "選取檢視"
 
 #: ../src/planner-print-dialog.c:218
 msgid "Select the views to print:"
-msgstr "選取要列印的檢視："
+msgstr "選取要打印的檢視："
 
 #: ../src/planner-project-properties.c:387
 msgid "Select a calendar to use for this project:"
@@ -1598,11 +1598,11 @@ msgstr "編輯資源屬性(_E)..."
 
 #: ../src/planner-resource-view.c:242
 msgid "Edit _Groups"
-msgstr "編輯群組(_G)"
+msgstr "編輯羣組(_G)"
 
 #: ../src/planner-resource-view.c:243
 msgid "Edit resource groups"
-msgstr "編輯資源群組"
+msgstr "編輯資源羣組"
 
 #: ../src/planner-resource-view.c:248
 msgid "Edit _Custom Properties..."
@@ -1642,7 +1642,7 @@ msgstr "簡稱"
 
 #: ../src/planner-resource-view.c:1253
 msgid "Group"
-msgstr "群組"
+msgstr "羣組"
 
 #. i18n: Short "Week", preferably 2 letters.
 #: ../src/planner-scale-utils.c:129
@@ -1813,7 +1813,7 @@ msgstr "取消分配資源至工作"
 
 #: ../src/planner-task-dialog.c:862
 msgid "Change resource units in task"
-msgstr "變更工作中的資源單位"
+msgstr "更改工作中的資源單位"
 
 #: ../src/planner-task-dialog.c:950
 msgid "Edit task predecessor"
@@ -1859,7 +1859,7 @@ msgstr "無法加入先決條件。沒有選取工作！"
 
 #: ../src/planner-task-dialog.c:2463
 msgid "Change..."
-msgstr "變更..."
+msgstr "更改..."
 
 #: ../src/planner-task-dialog.c:2637
 msgid "Assigned"
@@ -1926,7 +1926,7 @@ msgstr "移除工作"
 msgid ""
 "You are about to open an edit dialog each for %i tasks. Are you sure that "
 "you want to do that?"
-msgstr "您現在要為 %i 個工作開啟編輯對話視窗。確定要這樣做嗎？"
+msgstr "你現在要為 %i 個工作開啟編輯對話視窗。確定要這樣做嗎？"
 
 #: ../src/planner-task-tree.c:2888
 msgid "Unlink tasks"
@@ -2094,19 +2094,19 @@ msgstr "將目前的專案以另一個名字儲存"
 
 #: ../src/planner-window.c:249
 msgid "_Print..."
-msgstr "列印(_P)..."
+msgstr "打印(_P)..."
 
 #: ../src/planner-window.c:249
 msgid "Print the current project"
-msgstr "列印目前的專案"
+msgstr "打印目前的專案"
 
 #: ../src/planner-window.c:252
 msgid "Print Pre_view"
-msgstr "預覽列印(_V)"
+msgstr "預覽打印(_V)"
 
 #: ../src/planner-window.c:252
 msgid "Print preview of the current project"
-msgstr "目前專案的預覽列印"
+msgstr "目前專案的預覽打印"
 
 #: ../src/planner-window.c:255
 msgid "_Close"
@@ -2218,7 +2218,7 @@ msgstr "Planner 檔案"
 msgid "translator-credits"
 msgstr ""
 "如對翻譯有任何意見，請送一封電子郵件給\n"
-"以下地址，GNOME 翻譯團隊會盡快回覆您：\n"
+"以下地址，GNOME 翻譯隊伍會盡快回覆你：\n"
 "community@linuxhall.org\n"
 "\n"
 "Walter Cheuk <wwycheuk@gmail.com>, 2007.\n"
@@ -2234,27 +2234,27 @@ msgstr "Planner 的網頁"
 
 #: ../src/planner-window.c:1500
 msgid "If you don't save, changes made the last minute will be discarded."
-msgstr "如果您不儲存，將失去之前一分鐘的變更。"
+msgstr "如果你不儲存，將失去之前一分鐘的更改。"
 
 #: ../src/planner-window.c:1506
 #, c-format
 msgid "If you don't save, changes made the last %d minute will be discarded."
 msgid_plural ""
 "If you don't save, changes made the last %d minutes will be discarded."
-msgstr[0] "如果您不儲存，將失去之前 %d 分鐘的變更。"
-msgstr[1] "如果您不儲存，將失去之前 %d 分鐘的變更。"
+msgstr[0] "如果你不儲存，將失去之前 %d 分鐘的更改。"
+msgstr[1] "如果你不儲存，將失去之前 %d 分鐘的更改。"
 
 #: ../src/planner-window.c:1514
 msgid "If you don't save, changes made the last hour will be discarded."
-msgstr "如果您不儲存，將失去之前一小時的變更。"
+msgstr "如果你不儲存，將失去之前一小時的更改。"
 
 #: ../src/planner-window.c:1519
 #, fuzzy, c-format
 msgid "If you don't save, changes made the last %d hour will be discarded."
 msgid_plural ""
 "If you don't save, changes made the last %d hours will be discarded."
-msgstr[0] "如果您不儲存，將失去之前 %d 小時的變更。"
-msgstr[1] "如果您不儲存，將失去之前 %d 小時的變更。"
+msgstr[0] "如果你不儲存，將失去之前 %d 小時的更改。"
+msgstr[1] "如果你不儲存，將失去之前 %d 小時的更改。"
 
 #: ../src/planner-window.c:1529
 #, c-format
@@ -2288,14 +2288,13 @@ msgid ""
 "After doing this, you can remove all constraints by selecting the menu item "
 "'Remove all constraints' in the 'Edit' menu."
 msgstr ""
-"您開啟了舊版本 Planner 儲存的檔案。\n"
+"你開啟了舊版本 Planner 儲存的檔案。\n"
 "\n"
-"載入舊檔案時，所有工作必定會使用「必須開始於」的限制，因為舊版本不完全支援自"
-"動重新排程。要充份利用此新功能，您要為有相依性的任務中加入先決條件關係。\n"
+"載入舊檔案時，所有工作必定會使用「必須開始於」的限制，因為舊版本不完全支援自動重新排程。要充份利用此新功能，你要為有相依性的任務中加入先決條件關係。\n"
 "\n"
 "要加入先決條件關係，可以先點選首先要完成的工作，然後將其拖曳至其後繼工作。\n"
 "\n"
-"完成此動作後，您可以在選單的「編輯」中選取「移除所有限制」來移除。"
+"完成此動作後，你可以在選單的「編輯」中選取「移除所有限制」來移除。"
 
 #. Hack.
 #: ../src/planner-window.c:1980
