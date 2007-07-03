@@ -186,9 +186,38 @@ span.gantt-resources {
  margin-left: 0.5em;
 }
 
+th.gantt-1day-header {
+  width: 19px;
+}
+
+th.gantt-2day-header {
+  width: 38px;
+}
+
+th.gantt-3day-header {
+  width: 57px;
+}
+
+th.gantt-4day-header {
+  width: 76px;
+}
+
+th.gantt-5day-header {
+  width: 95px;
+}
+
+th.gantt-6day-header {
+  width: 114px;
+}
+
+th.gantt-week-header {
+ width: 133px;
+}
+
 th.gantt-day-header {
  margin: 0;
  padding: 0;
+ width: 19px;
 }
 
 </xsl:comment>

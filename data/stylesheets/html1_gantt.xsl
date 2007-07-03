@@ -18,7 +18,7 @@
   <xsl:param name="date"/>
   <xsl:choose>
     <xsl:when test="date:day-in-week($date) = 2 and $days >= 7">
-      <th align="center" colspan="7">
+      <th class="gantt-week-header" align="center" colspan="7">
 	<xsl:value-of select="I18N:gettext('Week')"/>&nbsp;<xsl:value-of select="date:week-in-year($date) + 1"/>, <xsl:value-of select="date:year($date)"/>
       </th>
       <xsl:if test="not($days = 7)">
@@ -29,7 +29,8 @@
       </xsl:if>
     </xsl:when>
     <xsl:when test="not($days >= 7)">
-      <th colspan="{$days}"></th>
+      <th class="gantt-{$days}day-header" colspan="{$days}"></th>
+      <th></th>
 	</xsl:when>
 	<xsl:otherwise> 
       <xsl:variable name="colspan">
@@ -40,7 +41,7 @@
 	  </xsl:otherwise>
 	</xsl:choose>
       </xsl:variable>
-      <th colspan="{$colspan}"></th>
+      <th class="gantt-{$colspan}day-header" colspan="{$colspan}"></th>
       <xsl:if test="$days > 1">
         <xsl:call-template name="create-week-row">
           <xsl:with-param name="days" select="$days - $colspan"/>
@@ -54,15 +55,21 @@
 <xsl:template name="create-day-row">
   <xsl:param name="days"/>
   <xsl:param name="date"/>
-  <th class="gantt-day-header" align="center" width="19px">
+  <th class="gantt-day-header" align="center">
   <xsl:value-of select="date:day-in-month($date)"/>
   </th>
-  <xsl:if test="$days > 1">
+  <xsl:choose>
+    <xsl:when test="$days > 1">
     <xsl:call-template name="create-day-row">
       <xsl:with-param name="days" select="$days - 1"/>
 	<xsl:with-param name="date" select="date:add($date, date:duration(86400))"/>
       </xsl:call-template>
-  </xsl:if>
+    </xsl:when>
+    <xsl:otherwise>
+      <th align="center">
+      </th>
+    </xsl:otherwise>
+  </xsl:choose>
 </xsl:template>
 
 <xsl:template name="gantt">
@@ -180,7 +187,7 @@
   <td>
 
   <div class="scroll-div" style="border-color: #aaa #aaa #aaa #fff;">
-  <table cellspacing="0" cellpadding="0" border="1">
+  <table cellspacing="0" cellpadding="0" border="1" style="table-layout: fixed;">
     <tr class="header" align="left">
       <xsl:call-template name="create-week-row">
         <xsl:with-param name="days" select="$days"/>
@@ -221,7 +228,7 @@
       <xsl:variable name="task-complete" select="floor($task-end * (@percent-complete div 100))"/>
       
       <tr class="{$rowclass}">
-	<td colspan="{$days}">
+	<td colspan="{$days + 1}">
 	  <div style="width: {$days * 20 + 1}px; white-space: nowrap;">
 	    <xsl:if test="not (task)">
 	      <xsl:if test="$task-start > 0">
@@ -265,7 +272,15 @@
 		    <xsl:for-each select="/project/allocations/allocation[@task-id=$task-id]">
 		      <xsl:sort data-type="number" select="@resource-id" order="descending"/>
 		      <xsl:variable name="resource-id" select="@resource-id"/>
-		      <xsl:value-of select="/project/resources/resource[@id=$resource-id]/@short-name"/>
+
+		      <xsl:choose>
+			<xsl:when test="/project/resources/resource[@id=$resource-id]/@short-name = ''">
+			  <xsl:value-of select="/project/resources/resource[@id=$resource-id]/@name"/>
+			</xsl:when>
+			<xsl:otherwise>
+			  <xsl:value-of select="/project/resources/resource[@id=$resource-id]/@short-name"/>
+			</xsl:otherwise>
+		      </xsl:choose>
 		      <xsl:if test="not(position() = last())">
 		        <xsl:text>, </xsl:text>
 		      </xsl:if>

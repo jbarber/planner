@@ -1,3 +1,13 @@
+2007-07-02  Kurt Maute	<kurt@maute.us>
+	The following updated provided by Maurice van der Pot <griffon26@kfk4ever.com>
+	* configure.in:  escape newlines in ALL_LINGUAS
+	* data/stylesheets/html1_css_ie.xsl
+	* data/stylesheets/html1_css.xsl
+	* data/stylesheets/html1_gantt.xsl
+	* data/stylesheets/Makefile.am
+	* data/stylesheets/planner2html.xsl - fix layout of gantt chart in
+	HTML export (headers not aligned with gantt bars) per bug #393620
+
 2007-06-11  Chao-Hsiung Liao  <j_h_liau@yahoo.com.tw>
 
         * configure.in: Added 'zh_HK' to ALL_LINGUAS.

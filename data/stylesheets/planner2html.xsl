@@ -33,6 +33,7 @@
 
 <!-- CSS file to be included in XHTML output -->
 <xsl:variable name="css-stylesheet-local" select="'html1_css.xsl'"/>
+<xsl:variable name="css-stylesheet-local-ie" select="'html1_css_ie.xsl'"/>
 
 
 <!-- Current date/time at UTC/GMT -->
@@ -145,6 +146,11 @@
     <style type="text/css">
       <xsl:value-of select="document($css-stylesheet-local)"/>
     </style>
+      <xsl:comment>
+        <xsl:text>[if lte IE 6]&gt;&lt;style type="text/css"&gt;</xsl:text>
+        <xsl:value-of select="document($css-stylesheet-local-ie)"/>
+        <xsl:text>&lt;/style&gt;&lt;![endif]</xsl:text>
+      </xsl:comment>
   </head>
 </xsl:template>
 
