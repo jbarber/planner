@@ -55,6 +55,8 @@
 
 #define MILESTONE_SIZE 5
 
+#define FUZZ  3
+
 /* Minimum width for a task to keep it visible. */
 #define MIN_WIDTH 2
 
@@ -97,9 +99,18 @@ typedef enum {
 	STATE_NONE          = 0,
 	STATE_DRAG_LINK     = 1 << 0,
 	STATE_DRAG_DURATION = 1 << 1,
+	STATE_DRAG_COMPLETE = 1 << 2,
 
-	STATE_DRAG_ANY = STATE_DRAG_LINK | STATE_DRAG_DURATION
+	STATE_DRAG_ANY = STATE_DRAG_LINK | STATE_DRAG_DURATION | STATE_DRAG_COMPLETE
 } State;
+
+typedef enum
+{
+	DRAG_NONE_SPOT,
+	DRAG_DURATION_SPOT,
+	DRAG_COMPLETE_SPOT,
+	DRAG_RELATION_SPOT
+} DragSpot;
 
 struct _PlannerGanttRowPriv {
 	/* FIXME: Don't need those per gantt row. */
@@ -2305,13 +2316,48 @@ gantt_row_scroll_timeout_cb (PlannerGanttRow *row)
 	return TRUE;
 }
 
-#define IN_DRAG_DURATION_SPOT(x,y,right,top,ymin,ymax)	\
-	((abs (x - (right)) <= 3) && \
-	 (y > top + ymin) && (y < top + ymax))
+static DragSpot get_drag_spot(gdouble x, gdouble y, PlannerGanttRowPriv *priv)
+{
+	gdouble x2 = priv->x + priv->width;
+	if( (y > priv->y + priv->bar_top) &&
+	    (y < priv->y + priv->bar_bot) &&
+	    (x < x2 + FUZZ) ) {
+		gdouble complete_x2 = priv->x + floor(priv->width * (mrp_task_get_percent_complete (priv->task) / 100.0) + 0.5);
 
-#define IN_DRAG_RELATION_SPOT(x,y,right,top,ymin,ymax)	\
-	((x <= right) && \
-	 (y > top + ymin) && (y < top + ymax))
+		/* if not way left of end of completion bar */
+		if(x > complete_x2 - FUZZ) {
+
+			/* if end of completion bar and end of task bar are not very close together */
+			if(x2 - complete_x2 > 2 * FUZZ) {
+
+				/* if not way right of the completion bar */
+				if(x < complete_x2 + FUZZ) {
+					return DRAG_COMPLETE_SPOT;
+				} else { /* if way right of completion bar and ... */
+
+					/* if less than FUZZ from the end of the task bar */
+					if(x > x2 - FUZZ) {
+						return DRAG_DURATION_SPOT;
+					} else { /* if more than FUZZ left of the end of the task bar */
+						return DRAG_RELATION_SPOT;
+					}
+				}
+			} else { /* if DRAG_DURATION_SPOT and DRAG_COMPLETE_SPOT are connected and ... */
+
+				/* if closer to the end of the task bar than to the end of the completion bar */
+				if(x > complete_x2 + (x2 - complete_x2) / 2) {
+					return DRAG_DURATION_SPOT;
+				} else {
+					return DRAG_COMPLETE_SPOT;
+				}
+			}
+		} else { /* if way left of end of completion bar */
+			return DRAG_RELATION_SPOT;
+		}
+	} else { /* above, below or too far to the right of bar */
+		return DRAG_NONE_SPOT;
+	}
+}
 
 static gboolean
 gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
@@ -2333,6 +2379,7 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 	gboolean                  summary;
 	MrpTaskType               type;
 	gchar                    *message;
+	DragSpot                  drag_spot;
 	
 	row = PLANNER_GANTT_ROW (item);
 	priv = row->priv;
@@ -2345,9 +2392,9 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 	case GDK_BUTTON_PRESS:
 		switch (event->button.button) {
 		case 3:
-			if (IN_DRAG_RELATION_SPOT (event->button.x, event->button.y,
-						   priv->x + priv->width, priv->y, 
-						   priv->bar_top, priv->bar_bot)) {
+			drag_spot = get_drag_spot(event->button.x, event->button.y, priv);
+
+			if (drag_spot == DRAG_RELATION_SPOT) {
 				PlannerGanttChart *chart;
 				PlannerTaskTree   *tree;
 				GtkTreePath       *path;
@@ -2395,13 +2442,10 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 				break;
 			}
 
+			drag_spot = get_drag_spot(event->button.x, event->button.y, priv);
+
 			if (type != MRP_TASK_TYPE_MILESTONE &&
-			    !summary && IN_DRAG_DURATION_SPOT (event->button.x,
-							       event->button.y,
-							       priv->x + priv->width,
-							       priv->y,
-							       priv->bar_top, 
-							       priv->bar_bot)) {
+			    !summary && drag_spot == DRAG_DURATION_SPOT) {
 				guint rgba;
 				
 				priv->state = STATE_DRAG_DURATION;
@@ -2430,12 +2474,49 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 									   NULL);
 					gnome_canvas_item_hide (drag_item);
 				}
-			} else if (IN_DRAG_RELATION_SPOT (event->button.x,
-							  event->button.y,
-							  priv->x + priv->width,
-							  priv->y,
-							  priv->bar_top, 
-							  priv->bar_bot)) {
+
+				/* Start the autoscroll timeout. */
+				priv->scroll_timeout_id = gtk_timeout_add (
+					50,
+					(GSourceFunc) gantt_row_scroll_timeout_cb,
+					row);
+			} else if (type != MRP_TASK_TYPE_MILESTONE &&
+			    !summary && drag_spot == DRAG_COMPLETE_SPOT) {
+				guint rgba;
+
+				priv->state = STATE_DRAG_COMPLETE;
+
+				wx1 = priv->x;
+				wy1 = priv->y + priv->bar_top + 4;
+				wx2 = event->button.x;
+				wy2 = priv->y + priv->bar_bot - 4;
+
+				gnome_canvas_item_i2w (item, &wx1, &wy1);
+				gnome_canvas_item_i2w (item, &wx2, &wy2);
+
+				/*      red            green          blue          alpha */
+				rgba = (0xb7 << 24) | (0xc3 << 16) | (0xc9 << 8) | (127 << 0);
+				
+				if (drag_item == NULL) {
+					drag_item = gnome_canvas_item_new (gnome_canvas_root (item->canvas),
+									   EEL_TYPE_CANVAS_RECT,
+									   "x1", wx1,
+									   "y1", wy1,
+									   "x2", wx2,
+									   "y2", wy2,
+									   "fill_color_rgba", rgba,
+									   "outline_color_rgba", 0,
+									   "width_pixels", 1,
+									   NULL);
+					gnome_canvas_item_hide (drag_item);
+				}
+
+				/* Start the autoscroll timeout. */
+				priv->scroll_timeout_id = gtk_timeout_add (
+					50,
+					(GSourceFunc) gantt_row_scroll_timeout_cb,
+					row);
+			} else if (drag_spot == DRAG_RELATION_SPOT) {
 				priv->state = STATE_DRAG_LINK;
 				if (drag_points == NULL) {
 					drag_points = gnome_canvas_points_new (2);
@@ -2531,17 +2612,23 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 		}
 
 		if (!(priv->state & STATE_DRAG_ANY)) {
-			if (type != MRP_TASK_TYPE_MILESTONE &&
-			    !summary && IN_DRAG_DURATION_SPOT (event->button.x,
-							       event->button.y,
-							       priv->x + priv->width,
-							       priv->y,
-							       priv->bar_top, 
-							       priv->bar_bot)) {
-				cursor = gdk_cursor_new (GDK_RIGHT_SIDE);
-				gdk_window_set_cursor (canvas_widget->window, cursor);
-				if (cursor) {
-					gdk_cursor_unref (cursor);
+			drag_spot = get_drag_spot(event->button.x, event->button.y, priv);
+
+			if (type != MRP_TASK_TYPE_MILESTONE && !summary && 
+			    ( (drag_spot == DRAG_DURATION_SPOT) || (drag_spot == DRAG_COMPLETE_SPOT) ) ) {
+				if(drag_spot == DRAG_DURATION_SPOT) {
+					cursor = gdk_cursor_new (GDK_RIGHT_SIDE);
+					gdk_window_set_cursor (canvas_widget->window, cursor);
+					if (cursor) {
+						gdk_cursor_unref (cursor);
+					}
+				}
+				else { /* DRAG_COMPLETE_SPOT */
+					cursor = gdk_cursor_new (GDK_HAND2);
+					gdk_window_set_cursor (canvas_widget->window, cursor);
+					if (cursor) {
+						gdk_cursor_unref (cursor);
+					}
 				}
 			} else { /* Mouse over resource names (or short_name) ? */
  				gint res_index;
@@ -2624,6 +2711,24 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 			}
 			
 			old_target_item = target_item;
+		}
+		else if (priv->state == STATE_DRAG_COMPLETE) {
+			chart = g_object_get_data (G_OBJECT (item->canvas), "chart");
+
+			wx2 = MIN(event->motion.x, priv->x + priv->width);
+			wy2 = priv->y + priv->bar_bot - 4;
+			
+			gnome_canvas_item_i2w (item, &wx2, &wy2);
+
+			gnome_canvas_item_set (drag_item,
+					       "x2", wx2,
+					       "y2", wy2,
+					       NULL);
+			
+			gnome_canvas_item_raise_to_top (drag_item);
+			gnome_canvas_item_show (drag_item);
+
+			planner_gantt_chart_status_updated (chart, NULL);
 		}
 		else if (priv->state == STATE_DRAG_DURATION) {
 			gint         duration;
@@ -2709,10 +2814,41 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 						"work",
 						&value);
 
+			if (priv->scroll_timeout_id) {
+				g_source_remove (priv->scroll_timeout_id);
+				priv->scroll_timeout_id = 0;
+			}
+
 			/*g_object_set (priv->task,
 				      "work", work,
 				      NULL);
 			*/
+			gtk_object_destroy (GTK_OBJECT (drag_item));
+			drag_item = NULL;
+
+			planner_gantt_chart_status_updated (chart, NULL);
+		}
+		else if (priv->state == STATE_DRAG_COMPLETE) {
+			GValue      value = { 0 };
+			gint        percent_complete = floor((MIN(MAX(0, event->button.x - priv->x), priv->width) * 100.0) / priv->width + 0.5);
+
+			chart = g_object_get_data (G_OBJECT (item->canvas), "chart");
+			tree = planner_gantt_chart_get_view (chart);
+
+			g_value_init (&value, G_TYPE_INT);
+			g_value_set_int (&value, percent_complete);
+
+			task_cmd_edit_property (planner_task_tree_get_window (tree),
+						tree,
+						priv->task,
+						"percent_complete", 
+						&value);
+
+			if (priv->scroll_timeout_id) {
+				g_source_remove (priv->scroll_timeout_id);
+				priv->scroll_timeout_id = 0;
+			}
+
 			gtk_object_destroy (GTK_OBJECT (drag_item));
 			drag_item = NULL;
 
@@ -2835,9 +2971,8 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 		
 	case GDK_2BUTTON_PRESS:
 		if (event->button.button == 1) {
-			if (IN_DRAG_RELATION_SPOT (event->button.x, event->button.y,
-						   priv->x + priv->width, priv->y, 
-						   priv->bar_top, priv->bar_bot)) {
+			drag_spot = get_drag_spot(event->button.x, event->button.y, priv);
+			if (drag_spot == DRAG_RELATION_SPOT) {
 				PlannerTaskTree  *tree;
 				GtkTreePath      *path;
 				GtkTreeSelection *selection;
