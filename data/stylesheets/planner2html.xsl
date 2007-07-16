@@ -4,7 +4,7 @@
               xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                   xmlns="http://www.w3.org/1999/xhtml"
              xmlns:date="http://exslt.org/dates-and-times"
-	     xmlns:I18N="http://www.gnu.org/software/gettext/" extension-element-prefixes="I18N">
+             xmlns:I18N="http://www.gnu.org/software/gettext/" extension-element-prefixes="I18N">
 
 <!--
   Copyright (C) 2004-2005 Imendio AB
@@ -226,7 +226,7 @@
 <tr>
   <td class="header"><xsl:value-of select="I18N:gettext('Start:')"/></td>
   <td>
-    <xsl:value-of select="I18N:getdate(date:seconds($projstart))"/>	
+    <xsl:value-of select="I18N:getdate(date:seconds($projstart))"/>
   </td>
 </tr>
 

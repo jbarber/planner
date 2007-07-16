@@ -4,7 +4,7 @@
               xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                   xmlns="http://www.w3.org/1999/xhtml"
              xmlns:date="http://exslt.org/dates-and-times"
-	     xmlns:I18N="http://www.gnu.org/software/gettext/" extension-element-prefixes="I18N">	
+             xmlns:I18N="http://www.gnu.org/software/gettext/" extension-element-prefixes="I18N">
 
 <!--**************************************************************************
     *
@@ -40,14 +40,14 @@
     </tr>
 
     <xsl:for-each select="../resources/resource">
-	  <xsl:sort select="@type"/>
-	  <xsl:sort select="@name"/>
+      <xsl:sort select="@type"/>
+      <xsl:sort select="@name"/>
           
       <xsl:call-template name="resource-row">
         <xsl:with-param name="hasnotes" select="$hasnotes"/>
-	  </xsl:call-template>
+      </xsl:call-template>
           
-	</xsl:for-each>
+    </xsl:for-each>
   </table>
   </div>
 </xsl:template>
@@ -58,56 +58,56 @@
         <xsl:variable name="rid" select="@id"/>
         <xsl:variable name="gid" select="@group"/>
         
-		<xsl:variable name="rowclass">
+        <xsl:variable name="rowclass">
           <xsl:choose>
             <xsl:when test="(position() mod 2) = 0">even</xsl:when>
             <xsl:otherwise>odd</xsl:otherwise>
           </xsl:choose>
         </xsl:variable>
       
-	    <tr class="{$rowclass}">
+        <tr class="{$rowclass}">
           <td>
             <a name="res-{@id}">
-			  <span>
-			    <xsl:value-of select="@name"/>
-			  </span>
-			</a>
-          </td>
-	      <td>
-            <span>
-			  <xsl:value-of select="@short-name"/>
-			</span>
+              <span>
+                <xsl:value-of select="@name"/>
+              </span>
+            </a>
           </td>
           <td>
             <span>
-			  <xsl:choose>
+              <xsl:value-of select="@short-name"/>
+            </span>
+          </td>
+          <td>
+            <span>
+              <xsl:choose>
                 <xsl:when test="@type = 1"><xsl:value-of select="I18N:gettext('Work')"/></xsl:when>
                 <xsl:otherwise><xsl:value-of select="I18N:gettext('Material')"/></xsl:otherwise>
               </xsl:choose>
-			</span> 
+            </span> 
           </td>
           <td>
-		    <span>
-			  <xsl:value-of select="../../resource-groups/group[@id=$gid]/@name"/>
-		    </span>
-		  </td>
-		  <td>
+            <span>
+              <xsl:value-of select="../../resource-groups/group[@id=$gid]/@name"/>
+            </span>
+          </td>
+          <td>
             <a href="mailto:{@email}">
               <span>
-			    <xsl:value-of select="@email"/>
-			  </span>
+                <xsl:value-of select="@email"/>
+              </span>
             </a>
           </td>
          <td align="right">
            <span>
-		     <xsl:value-of select="@std-rate"/>
-		   </span>
+             <xsl:value-of select="@std-rate"/>
+           </span>
          </td>
          <xsl:if test="$hasnotes">
            <td>
              <span>
-			   <xsl:value-of select="@note"/>
-			 </span>
+               <xsl:value-of select="@note"/>
+             </span>
            </td>
          </xsl:if>
        </tr>

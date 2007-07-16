@@ -1,21 +1,21 @@
 <?xml version="1.0"?> 
 <xsl:stylesheet version="1.0"
-	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-	xmlns:ms="http://schemas.microsoft.com/project"
-	exclude-result-prefixes="ms">
+        xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+        xmlns:ms="http://schemas.microsoft.com/project"
+        exclude-result-prefixes="ms">
 
 <!-- ===============================================================
-	msp2planner.xsl
+        msp2planner.xsl
 
-	Conversion between Microsoft Project and Planner XML files
+        Conversion between Microsoft Project and Planner XML files
 
-	Copyright (c) 2004 Kurt Maute (kurt@maute.us)
+        Copyright (c) 2004 Kurt Maute (kurt@maute.us)
      ===============================================================-->
 
 <xsl:output method="xml" indent="yes"/>
 
 <!-- ===============================================================
-	Main  -->
+        Main  -->
 
 <xsl:template match="ms:Project">
 
@@ -38,7 +38,7 @@
 <!--  Phases  - not implemented  -->
 
 <!--  Calendars  - only writing standard Planner calendar right now,
-	since the MS Project implementation is painfully dissimilar  -->
+        since the MS Project implementation is painfully dissimilar  -->
   <calendars>
     <day-types>
       <day-type id="0" name="Working" description="A default working day"/>
@@ -70,7 +70,7 @@
 </xsl:template>
 
 <!-- ===============================================================
-	Task Handling Templates  -->
+        Task Handling Templates  -->
 
 <!-- Main Task loop 
      This template loops thru the 1st outline level of task elements
@@ -85,8 +85,8 @@
     <xsl:call-template name="write-task"/>
     <xsl:if test="ms:OutlineLevel &lt; following::ms:Task/ms:OutlineLevel">
       <xsl:call-template name="task">
-	<xsl:with-param name="wbs" select="ms:WBS"/>
-	<xsl:with-param name="lvl" select="ms:OutlineLevel+1"/>
+        <xsl:with-param name="wbs" select="ms:WBS"/>
+        <xsl:with-param name="lvl" select="ms:OutlineLevel+1"/>
       </xsl:call-template>
     </xsl:if>
     </task>
@@ -106,8 +106,8 @@
     <!-- recursion implemented here:  -->
     <xsl:if test="ms:OutlineLevel &lt; following::ms:Task/ms:OutlineLevel">
       <xsl:call-template name="task">
-	<xsl:with-param name="wbs" select="ms:WBS"/>
-	<xsl:with-param name="lvl" select="ms:OutlineLevel+1"/>
+        <xsl:with-param name="wbs" select="ms:WBS"/>
+        <xsl:with-param name="lvl" select="ms:OutlineLevel+1"/>
       </xsl:call-template>
     </xsl:if>
     </task>
@@ -172,7 +172,7 @@
     </xsl:attribute>
     <xsl:attribute name="time">
       <xsl:call-template name="ms2pdate">
-	<xsl:with-param name="thedate" select="ms:ConstraintDate"/>
+        <xsl:with-param name="thedate" select="ms:ConstraintDate"/>
       </xsl:call-template>
     </xsl:attribute>
     </constraint>  
@@ -183,23 +183,23 @@
   <xsl:for-each select="ms:PredecessorLink">
     <predecessor id="{position()}">
       <xsl:attribute name="predecessor-id">
-	<xsl:call-template name="get-task-id">
-	  <xsl:with-param name="uid" select="ms:PredecessorUID"/>
-	</xsl:call-template>
+        <xsl:call-template name="get-task-id">
+          <xsl:with-param name="uid" select="ms:PredecessorUID"/>
+        </xsl:call-template>
       </xsl:attribute>
       <xsl:attribute name="type">
-	<xsl:choose>
-	  <xsl:when test="ms:Type=0">FF</xsl:when>
-	  <xsl:when test="ms:Type=1">FS</xsl:when>
-	  <xsl:when test="ms:Type=2">SF</xsl:when>
-	  <xsl:otherwise>SS</xsl:otherwise>
-	</xsl:choose>
+        <xsl:choose>
+          <xsl:when test="ms:Type=0">FF</xsl:when>
+          <xsl:when test="ms:Type=1">FS</xsl:when>
+          <xsl:when test="ms:Type=2">SF</xsl:when>
+          <xsl:otherwise>SS</xsl:otherwise>
+        </xsl:choose>
       </xsl:attribute>
       <xsl:attribute name="lag">
-	<xsl:value-of select="ms:LinkLag*6"/>
+        <xsl:value-of select="ms:LinkLag*6"/>
       </xsl:attribute>
     </predecessor>
-  </xsl:for-each>	
+  </xsl:for-each>
   </predecessors>
 </xsl:template>
 
@@ -210,7 +210,7 @@
 </xsl:template>
 
 <!-- ===============================================================
-	Resource Handling Template  -->
+        Resource Handling Template  -->
 
 <!-- Resource loop   -->
 <xsl:template match="ms:Resources">
@@ -218,36 +218,36 @@
     <xsl:for-each select="ms:Resource[ms:ID>0]">
       <resource id="{ms:ID}" name="{ms:Name}" short-name="{ms:Initials}">
         <xsl:attribute name="type">
-	  <xsl:choose>
-	    <xsl:when test='ms:Type=0'>2</xsl:when>
-	    <xsl:otherwise>1</xsl:otherwise>
-	  </xsl:choose>
-	</xsl:attribute>
+          <xsl:choose>
+            <xsl:when test='ms:Type=0'>2</xsl:when>
+            <xsl:otherwise>1</xsl:otherwise>
+          </xsl:choose>
+        </xsl:attribute>
         <xsl:attribute name="units">
-	  <xsl:value-of select='ms:MaxUnits'/>
-	</xsl:attribute>
+          <xsl:value-of select='ms:MaxUnits'/>
+        </xsl:attribute>
         <xsl:attribute name="email">
-	  <xsl:value-of select='ms:EmailAddress'/>
-	</xsl:attribute>
+          <xsl:value-of select='ms:EmailAddress'/>
+        </xsl:attribute>
         <xsl:attribute name="note">
-	  <xsl:value-of select='ms:Notes'/>
-	</xsl:attribute>
+          <xsl:value-of select='ms:Notes'/>
+        </xsl:attribute>
         <xsl:attribute name="std-rate">
-	  <xsl:value-of select='ms:StandardRate'/>
-	</xsl:attribute>
+          <xsl:value-of select='ms:StandardRate'/>
+        </xsl:attribute>
         <xsl:attribute name="ovt-rate">
-	  <xsl:value-of select='ms:OvertimeRate'/>
-	</xsl:attribute>
+          <xsl:value-of select='ms:OvertimeRate'/>
+        </xsl:attribute>
         <properties>
-	  <property name="cost" value="{ms:Cost}"/>
-	</properties>
+          <property name="cost" value="{ms:Cost}"/>
+        </properties>
       </resource>
     </xsl:for-each>
   </resources>
 </xsl:template>
 
 <!-- ===============================================================
-	Allocations Handling Template  -->
+        Allocations Handling Template  -->
 
 <!-- Allocations loop   -->
 <xsl:template match="ms:Assignments">
@@ -255,17 +255,17 @@
     <xsl:for-each select="ms:Assignment[ms:ResourceUID>0]">
       <allocation>
       <xsl:attribute name="task-id">
-	<xsl:call-template name="get-task-id">
-	  <xsl:with-param name="uid" select="ms:TaskUID"/>
-	</xsl:call-template>
+        <xsl:call-template name="get-task-id">
+          <xsl:with-param name="uid" select="ms:TaskUID"/>
+        </xsl:call-template>
       </xsl:attribute>
       <xsl:attribute name="resource-id">
-	<xsl:call-template name="get-resource-id">
-	  <xsl:with-param name="uid" select="ms:ResourceUID"/>
-	</xsl:call-template>
+        <xsl:call-template name="get-resource-id">
+          <xsl:with-param name="uid" select="ms:ResourceUID"/>
+        </xsl:call-template>
       </xsl:attribute>
       <xsl:attribute name="units">
-	<xsl:value-of select="ms:Units*100"/>
+        <xsl:value-of select="ms:Units*100"/>
       </xsl:attribute>
       </allocation>
     </xsl:for-each>
@@ -279,7 +279,7 @@
 </xsl:template>
 
 <!-- ===============================================================
-	Global Functions  -->
+        Global Functions  -->
 
 <!-- Convert date from MSP to Planner format -->
 <xsl:template name="ms2pdate">
@@ -301,6 +301,6 @@
 
 
 <!-- ===============================================================
-	End  -->
+        End  -->
 
 </xsl:stylesheet>

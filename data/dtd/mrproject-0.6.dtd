@@ -6,8 +6,8 @@
                   company           CDATA #IMPLIED
                   manager           CDATA #IMPLIED
                   project-start     CDATA #REQUIRED
-		  calendar          CDATA #IMPLIED
-		  phase             CDATA #IMPLIED>
+                  calendar          CDATA #IMPLIED
+                  phase             CDATA #IMPLIED>
 
 <!ELEMENT properties (property*)>
 
@@ -56,7 +56,7 @@ Note: A mistake in the format design led to this suboptimality. A
                effort               CDATA #IMPLIED
                start                CDATA #REQUIRED
                end                  CDATA #REQUIRED
-	       work-start           CDATA #IMPLIED
+               work-start           CDATA #IMPLIED
                duration             CDATA #IMPLIED
                work                 CDATA #IMPLIED
                percent-complete     CDATA #IMPLIED
@@ -111,7 +111,7 @@ Note: A mistake in the format design led to this suboptimality. A
 
 <!ELEMENT calendar (default-week,overridden-day-types?,days?,calendar*)>
 <!ATTLIST calendar     name           CDATA #REQUIRED
-		       id             CDATA #REQUIRED>
+                       id             CDATA #REQUIRED>
 
 <!ELEMENT default-week EMPTY>
 <!ATTLIST default-week mon            CDATA #IMPLIED

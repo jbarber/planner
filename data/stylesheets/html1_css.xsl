@@ -95,7 +95,7 @@ a:hover[href] {
 
 table {
  width: 100%;
- border-collapse: collapse;	
+ border-collapse: collapse;
  border-style: none;
  border-color: #fff;
  white-space: nowrap;
