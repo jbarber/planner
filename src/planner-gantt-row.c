@@ -162,6 +162,7 @@ struct _PlannerGanttRowPriv {
 	gdouble      bar_top; /* Top y position of the bar. */
 	gdouble      bar_bot; /* Bottom y position of the bar. */
 	gdouble      text_width;
+	gdouble      text_height;
 
 	/* Cached positions of each assigned resource. */
 	GArray      *resource_widths;
@@ -493,7 +494,7 @@ recalc_bounds (PlannerGanttRow *row)
 {
 	PlannerGanttRowPriv *priv;
 	GnomeCanvasItem     *item;
-	gint                 width;
+	gint                 width, height;
 	mrptime              t;
 	MrpTaskType          type;
 	gdouble              old_x, old_x_start, old_width;
@@ -511,13 +512,14 @@ recalc_bounds (PlannerGanttRow *row)
 
 	pango_layout_get_pixel_size (priv->layout,
 				     &width,
-				     NULL);
-		
+				     &height);
+
 	if (width > 0) {
 		width += TEXT_PADDING;
 	}
 
 	priv->text_width = width;
+	priv->text_height = height;
 
 	t = mrp_task_get_work_start (priv->task);
 	priv->x = t * priv->scale;
@@ -742,7 +744,7 @@ gantt_row_update_resources (PlannerGanttRow *row)
 	pango_layout_set_text (priv->layout, ", ", 2);
 	pango_layout_get_extents (priv->layout, NULL, &rect);
 	spacing = rect.width / PANGO_SCALE;
-	
+
 	x = 0;
 	resources = mrp_task_get_assigned_resources (priv->task);
 		
@@ -1955,14 +1957,15 @@ gantt_row_draw (GnomeCanvasItem *item,
 	rx2 = MIN (cx2 + TEXT_PADDING + priv->text_width, width);
 
 	if (priv->layout != NULL && rx1 < rx2) {
-		/* NOTE: cy1 - priv->bar_top: report to the top of the cell,
-		         + 3: is an empirical value to realign with task-tree result of the
-		         default gtkcellrenderertext ypad property (2) + 1 ??? ;). */
+		/* NOTE: cy1 is the pixel coordinate of the top of the bar. 
+			 subtract round(priv->bar_top) to bring us to the top of the row
+			 add priv->height / 2 to get to the center of the row
+			 subtract priv->text_height / 2 to get to the top of the text */
 		   
 		draw_cut_layout (drawable,
 				 GTK_WIDGET (item->canvas)->style->text_gc[GTK_STATE_NORMAL],
 				 cx2 + TEXT_PADDING,
-				 cy1 - priv->bar_top + 3, 
+				 cy1 - (gint)(priv->bar_top + 0.5) + (priv->height - priv->text_height) / 2,
 				 priv->layout);
 
 		if (priv->mouse_over_index != -1) {

@@ -3134,6 +3134,8 @@ planner_task_tree_unindent_task (PlannerTaskTree *tree)
 			_("Unindent tasks"));
 	}
 	
+	task_tree_block_selection_changed (tree);
+
 	for (l = unindent_tasks; l; l = l->next) {
 		MrpTask  *sibling;
 		gboolean  before;
@@ -3157,7 +3159,6 @@ planner_task_tree_unindent_task (PlannerTaskTree *tree)
 	path = planner_gantt_model_get_path_from_task (PLANNER_GANTT_MODEL (model), 
 						       unindent_tasks->data);
 
-	task_tree_block_selection_changed (tree);
 	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (tree));
 	gtk_tree_selection_select_path (selection, path);
 	task_tree_unblock_selection_changed (tree);

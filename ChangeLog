@@ -1,3 +1,12 @@
+2007-07-28  Kurt Maute  <kurt@maute.us>
+	Two patches from Maurice van der Pot:
+	* src/planner-task-tree.c - disable selection updates before manipulating
+	tasks (works for single selection, but not multiple - bug 436263)
+	* src/planner-gantt-row.c - fix resource name redraw in gantt chart when
+	dragging relation arrow over it
+	* MAINTAINERS - added Maurice
+	* AUTHORS - added Maurice
+
 2007-07-15  Kurt Maute  <kurt@maute.us>
 	The following update provided by Maurice van der Pot <griffon26@kfk4ever.com>
 	* src/planner-gantt-row.c  - allow dragging the completion bar in the
