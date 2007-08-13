@@ -1,4 +1,11 @@
 2007-07-28  Kurt Maute  <kurt@maute.us>
+	Patch to correct week number by Maurice van der Pot <griffon26@kfk4ever.com>
+	*libplanner/mrp-time.c
+	*libplanner/mrp-time.h
+	*src/planner-scale-utils.c
+	*data/stylesheets/html1_gantt.xsl
+
+2007-07-28  Kurt Maute  <kurt@maute.us>
 	Two patches from Maurice van der Pot:
 	* src/planner-task-tree.c - disable selection updates before manipulating
 	tasks (works for single selection, but not multiple - bug 436263)

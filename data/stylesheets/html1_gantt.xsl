@@ -19,7 +19,10 @@
   <xsl:choose>
     <xsl:when test="date:day-in-week($date) = 2 and $days >= 7">
       <th class="gantt-week-header" align="center" colspan="7">
-        <xsl:value-of select="I18N:gettext('Week')"/>&nbsp;<xsl:value-of select="date:week-in-year($date) + 1"/>, <xsl:value-of select="date:year($date)"/>
+        <!-- A week that crosses a year boundary is associated with the year that its thursday is in.
+             This means that the year of any thursday date is always equal to the year of the week number.
+             Because the date at this point is always a monday, we can add 3 days to get to the year for this week. -->
+        <xsl:value-of select="I18N:gettext('Week')"/>&nbsp;<xsl:value-of select="date:week-in-year($date)"/>, <xsl:value-of select="date:year(date:add($date, date:duration(86400 * 3)))"/>
       </th>
       <xsl:if test="not($days = 7)">
         <xsl:call-template name="create-week-row">

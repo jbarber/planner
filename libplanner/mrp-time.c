@@ -415,7 +415,7 @@ mrp_time_week_number (mrptime t)
 	
 	mrp_time2_set_epoch (&t2, t);
 	
-	return mrp_time2_get_week_number (&t2);
+	return mrp_time2_get_week_number (&t2, NULL);
 }
 
 /**
@@ -839,7 +839,7 @@ time_format_helper (const gchar *format,
 			/* The week number, (1 - 53), starting with the first
 			 *  Monday as the first day of week 1.
 			 */
-			snprintf (str, sizeof (str), "%d", mrp_time2_get_week_number (t));
+			snprintf (str, sizeof (str), "%d", mrp_time2_get_week_number (t, NULL));
 			if (buffer) {
 				strcpy (buffer + len, str);
 			}
@@ -1348,11 +1348,39 @@ stolen_g_date_get_iso8601_week_of_year (const GDate *d)
 }
 
 gint
-mrp_time2_get_week_number (MrpTime *t)
+mrp_time2_get_week_number (MrpTime *t, gint *y)
 {
+	gint week;
+	gint year;
+
 	g_return_val_if_fail (t != NULL, 0);
 
-	return stolen_g_date_get_iso8601_week_of_year (&t->date);
+	week = stolen_g_date_get_iso8601_week_of_year (&t->date);
+
+	/* Calculate the year this week belongs to as it can be different than 
+	 * the year of the date (e.g. December 31 2002 is in week 1 of 2003).
+	 */
+	if(y != NULL) {
+		year = g_date_get_year (&t->date);
+  
+		switch(g_date_get_month (&t->date)) {
+		case G_DATE_JANUARY:
+			if(week > 50) {
+				year--;
+			}
+			break;
+		case G_DATE_DECEMBER:
+			if(week == 1) {
+				year++;
+			}
+			break;
+		default:
+			break;
+		}
+
+		*y = year;
+	}
+	return week;
 }
 
 void

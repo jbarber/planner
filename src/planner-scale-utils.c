@@ -69,7 +69,7 @@ planner_scale_format_time (mrptime            t,
 	MrpTime *t2;
 	gchar   *str = NULL;
 	gint     num;
-	gint     year, month, day;
+	gint     year, month, week, day;
 	gint     hour, min, sec;
 
 	t2 = mrp_time2_new ();
@@ -127,16 +127,17 @@ planner_scale_format_time (mrptime            t,
 		case PLANNER_SCALE_FORMAT_SHORT:
 			/* i18n: Short "Week", preferably 2 letters. */
 			str = g_strdup_printf (_("Wk %d"),
-					       mrp_time2_get_week_number (t2));
+					       mrp_time2_get_week_number (t2, NULL));
 			break;
 		case PLANNER_SCALE_FORMAT_MEDIUM:
 			str = g_strdup_printf (_("Week %d"),
-					       mrp_time2_get_week_number (t2));
+					       mrp_time2_get_week_number (t2, NULL));
 			break; 
 		case PLANNER_SCALE_FORMAT_LONG:
 			/* i18n: Week, year. */
+			week = mrp_time2_get_week_number (t2, &year),
 			str = g_strdup_printf (_("Week %d, %d"),
-					       mrp_time2_get_week_number (t2),
+					       week,
 					       year);
 			break;
 		}
