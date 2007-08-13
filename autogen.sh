@@ -35,7 +35,7 @@ fi
 	DIE=1
 }
 
-(grep "^AC_PROG_INTLTOOL" $srcdir/configure.in >/dev/null) && {
+(grep "^IT_PROG_INTLTOOL" $srcdir/configure.in >/dev/null) && {
   ($INTLTOOLIZE --version) < /dev/null > /dev/null 2>&1 || {
     echo
     echo "You must have \`intltoolize' installed to compile $PROJECT."
@@ -138,7 +138,7 @@ do
 	  test -r $dr/aclocal.m4 && chmod u+w $dr/aclocal.m4
         #fi
       fi
-      if grep "^AC_PROG_INTLTOOL" configure.in >/dev/null; then
+      if grep "^IT_PROG_INTLTOOL" configure.in >/dev/null; then
         echo "Running intltoolize..."
 	intltoolize --copy --force --automake
       fi
