@@ -6,14 +6,15 @@
 # Josep Puigdemont <baldrick@terra.es>, 	2003.
 # Jordi Mallach <jordi@sindominio.net>, 	2004.
 # Jordi Mas i Hernàndez <jmas@softcatala.org>,	2006.
+# Gil Forcada <gilforcada@guifi.net>, 2007.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: planner\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-12-27 19:55+0100\n"
-"PO-Revision-Date: 2006-11-22 14:32+0100\n"
-"Last-Translator: Jordi Mas i Hernàndez <jmas@softcatala.org>\n"
+"POT-Creation-Date: 2007-10-08 22:00+0200\n"
+"PO-Revision-Date: 2007-09-26 14:32+0100\n"
+"Last-Translator: Gil Forcada <gilforcada@guifi.net>\n"
 "Language-Team: Catalan <tradgnome@softcatala.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -121,11 +122,11 @@ msgstr "Tipus de dia:"
 
 #: ../data/glade/calendar-dialog.glade.h:18
 msgid "Default Week"
-msgstr "Setmana per defecte"
+msgstr "Setmana predeterminada"
 
 #: ../data/glade/calendar-dialog.glade.h:19
 msgid "Default week..."
-msgstr "Setmana per defecte..."
+msgstr "Setmana predeterminada..."
 
 #: ../data/glade/calendar-dialog.glade.h:20
 msgid "Edit Day Types"
@@ -142,7 +143,7 @@ msgstr "De:"
 #
 #: ../data/glade/calendar-dialog.glade.h:23
 msgid "New Calendar"
-msgstr "Nou calendari"
+msgstr "Calendari nou"
 
 #
 #: ../data/glade/calendar-dialog.glade.h:24
@@ -154,8 +155,8 @@ msgid ""
 "Select a weekday and the day type to use for that day in the default week "
 "for this calendar.\n"
 msgstr ""
-"Seleccioneu el dia de la setmana i el tipus de dia per a usar per aquest dia "
-"en la setmana per defecte d'aquest calendari.\n"
+"Seleccioneu un dia de la setmana i un tipus de dia per a aquest dia en la "
+"setmana predeterminada d'aquest calendari.\n"
 
 #: ../data/glade/calendar-dialog.glade.h:27
 msgid "Set day type to:"
@@ -191,7 +192,7 @@ msgstr "Calendaris e_xistents:"
 
 #: ../data/glade/calendar-dialog.glade.h:34
 msgid "_Name of the new calendar:"
-msgstr "_Nom del nou calendari:"
+msgstr "_Nom del calendari nou:"
 
 #: ../data/glade/calendar-dialog.glade.h:36
 msgid "_New..."
@@ -199,7 +200,7 @@ msgstr "_Nou..."
 
 #: ../data/glade/column-dialog.glade.h:2
 msgid "Hidden columns:"
-msgstr "Columnes amagades:"
+msgstr "Columnes ocultes:"
 
 #: ../data/glade/column-dialog.glade.h:3
 msgid "Visible columns:"
@@ -208,7 +209,7 @@ msgstr "Columnes visibles:"
 #
 #: ../data/glade/column-dialog.glade.h:4
 msgid "_Hide"
-msgstr "_Amaga"
+msgstr "_Oculta"
 
 #: ../data/glade/column-dialog.glade.h:5
 msgid "_Show"
@@ -231,12 +232,12 @@ msgstr "Selecciona-ho tot"
 #
 #: ../data/glade/eds.glade.h:5
 msgid "Select group"
-msgstr "Selecciona el grup"
+msgstr "Selecciona un grup"
 
 #
 #: ../data/glade/eds.glade.h:6
 msgid "Unselect All"
-msgstr "Desselecciona-ho tot"
+msgstr "No seleccionis res"
 
 #: ../data/glade/eds.glade.h:7
 msgid "dialog1"
@@ -278,7 +279,7 @@ msgstr "General"
 
 #: ../data/glade/project-properties.glade.h:4
 msgid "New Project Phase"
-msgstr "Nova fase del projecte"
+msgstr "Fase del projecte nova"
 
 #
 #: ../data/glade/project-properties.glade.h:5
@@ -338,8 +339,8 @@ msgid ""
 "Select the calendar to use for this resource. If you want to use the default "
 "calendar of the project, select 'None'. "
 msgstr ""
-"Seleccioneu el calendari per a utilitzar per aquest recurs. Si voleu utilitzar el "
-"calendari per defecte del projecte, seleccioneu 'Cap'. "
+"Seleccioneu el calendari per a utilitzar per aquest recurs. Si voleu "
+"utilitzar el calendari predeterminat del projecte, seleccioneu «Cap». "
 
 #: ../data/glade/resource-dialog.glade.h:9
 #: ../data/glade/resource-input-dialog.glade.h:4
@@ -354,7 +355,7 @@ msgstr "_Grup:"
 #
 #: ../data/glade/resource-dialog.glade.h:11
 msgid "_Insert time stamp"
-msgstr "_Insereix marca horària"
+msgstr "_Insereix una marca horària"
 
 #
 #: ../data/glade/resource-dialog.glade.h:13
@@ -389,7 +390,7 @@ msgstr "Seleccioneu un projecte"
 #: ../data/glade/sql.glade.h:4
 msgid "The database contains the following projects. Select a project to open:"
 msgstr ""
-"La base de dades conté els següents projectes. Seleccioneu un project a "
+"La base de dades conté els projectes següents. Seleccioneu un project a "
 "obrir:"
 
 #: ../data/glade/sql.glade.h:5
@@ -453,7 +454,7 @@ msgstr "finestra"
 #
 #: ../data/glade/task-dialog.glade.h:1
 msgid "  "
-msgstr "    "
+msgstr "  "
 
 #: ../data/glade/task-dialog.glade.h:4
 #, no-c-format
@@ -485,7 +486,7 @@ msgstr "_Duració fixada"
 #
 #: ../data/glade/task-dialog.glade.h:14
 msgid "_Insert Time Stamp"
-msgstr "_Insereix la marca horària"
+msgstr "_Insereix una marca horària"
 
 # 
 #: ../data/glade/task-dialog.glade.h:15
@@ -504,7 +505,15 @@ msgstr "_Feina:"
 #
 #: ../data/glade/task-input-dialog.glade.h:2
 msgid "Insert Task"
-msgstr "Insereix tasca"
+msgstr "Insereix una tasca"
+
+#: ../data/mime/planner.keys.in.h:1
+msgid "Documents/Project Management"
+msgstr "Gestió de documents/projectes"
+
+#: ../data/mime/planner.keys.in.h:2
+msgid "Project Plan"
+msgstr "Pla del projecte"
 
 #
 #: ../data/mime/planner.xml.in.h:1
@@ -514,7 +523,7 @@ msgstr "Gestor de plans del Planner"
 #
 #: ../data/planner.desktop.in.in.h:1
 msgid "Planner Project Management"
-msgstr "Gestor de Projectes del Planner"
+msgstr "Gestor de projectes del Planner"
 
 #: ../data/planner.desktop.in.in.h:2
 msgid "Project Management"
@@ -584,7 +593,7 @@ msgstr ""
 
 #: ../data/planner.schemas.in.h:14
 msgid "Which view to display in the user interface."
-msgstr "Quina vista es mostra a la interfície d'usuari."
+msgstr "La vista que s'ha de mostrar a la interfície d'usuari."
 
 #: ../data/stylesheets/localizable.xml.h:1
 msgid "Company:"
@@ -603,7 +612,7 @@ msgstr "Finalitza:"
 #
 #: ../data/stylesheets/localizable.xml.h:4
 msgid "Gantt Chart"
-msgstr "Gràfic Gantt"
+msgstr "Gràfic de Gantt"
 
 #
 #: ../data/stylesheets/localizable.xml.h:5
@@ -653,7 +662,7 @@ msgstr "Laborable"
 
 #: ../libplanner/mrp-day.c:55
 msgid "A default working day"
-msgstr "Un dia laborable per defecte"
+msgstr "Un dia laborable predeterminat"
 
 #: ../libplanner/mrp-day.c:57
 msgid "Nonworking"
@@ -661,7 +670,7 @@ msgstr "Festiu"
 
 #: ../libplanner/mrp-day.c:58
 msgid "A default non working day"
-msgstr "Un dia festiu per defecte"
+msgstr "Un dia festiu predeterminat"
 
 #: ../libplanner/mrp-day.c:60
 msgid "Use base"
@@ -672,48 +681,54 @@ msgid "Use day from base calendar"
 msgstr "Fes servir un dia del calendari base"
 
 #: ../libplanner/mrp-file-module.c:121
+#, c-format
 msgid "This format does not support reading"
-msgstr "Aquest format no permet lectura"
+msgstr "Aquest format no permet la lectura"
 
 #: ../libplanner/mrp-parser.c:1064 ../libplanner/mrp-parser.c:1159
+#, c-format
 msgid "Could not create XML tree"
-msgstr "No s'ha pogut crear l'àrbre XML"
+msgstr "No s'ha pogut crear l'arbre XML"
 
 #: ../libplanner/mrp-parser.c:1125
+#, c-format
 msgid "Could not write XML file"
 msgstr "No s'ha pogut escriure el fitxer XML"
 
 #: ../libplanner/mrp-project.c:437 ../src/planner-group-dialog.c:846
 msgid "Default"
-msgstr "Defecte"
+msgstr "Predeterminat"
 
 #: ../libplanner/mrp-project.c:716
 #, c-format
 msgid "Invalid URI: '%s'"
-msgstr "URI invàlida: '%s'"
+msgstr "URI invàlida: «%s»"
 
 #: ../libplanner/mrp-project.c:759
 #, c-format
 msgid "Couldn't find a suitable file module for loading '%s'"
-msgstr "No s'ha pogut trobar cap mòdul per carregar '%s'"
+msgstr "No s'ha pogut trobar cap fitxer de mòdul per a carregar «%s»"
 
 #
 #: ../libplanner/mrp-project.c:780 ../libplanner/mrp-project.c:1064
+#, c-format
 msgid "No support for SQL storage built into this version of Planner."
-msgstr "Aquesta versió del Planner no implementa emmagatzemament SQL."
+msgstr "Aquesta versió del Planner no permet emmagatzemar SQL."
 
 #: ../libplanner/mrp-project.c:817
+#, c-format
 msgid "Invalid URI."
 msgstr "URI invàlida."
 
 #: ../libplanner/mrp-project.c:958
 #, c-format
 msgid "Unable to find file writer identified by '%s'"
-msgstr "No s'ha pogut trobar cap escriptor de fitxer identificat per '%s'"
+msgstr "No s'ha pogut trobar cap escriptor de fitxer identificat per «%s»"
 
 #: ../libplanner/mrp-project.c:1021
+#, c-format
 msgid "Couldn't find a suitable file module for loading project"
-msgstr "No s'ha pogut trobar cap mòdul per carregar el projecte"
+msgstr "No s'ha pogut trobar cap mòdul per a carregar el projecte"
 
 #: ../libplanner/mrp-property.c:365
 msgid "Text"
@@ -735,12 +750,12 @@ msgstr "Nombre de coma flotant"
 msgid "Date"
 msgstr "Data"
 
-#: ../libplanner/mrp-property.c:375 ../src/planner-gantt-view.c:559
+#: ../libplanner/mrp-property.c:375 ../src/planner-gantt-view.c:593
 #: ../src/planner-task-view.c:340
 msgid "Duration"
 msgstr "Durada"
 
-#: ../libplanner/mrp-property.c:377 ../src/planner-gantt-view.c:561
+#: ../libplanner/mrp-property.c:377 ../src/planner-gantt-view.c:595
 #: ../src/planner-resource-view.c:1314 ../src/planner-task-view.c:342
 msgid "Cost"
 msgstr "Cost"
@@ -752,7 +767,7 @@ msgstr "Cap"
 #
 #: ../libplanner/mrp-sql.c:214 ../libplanner/mrp-sql.c:228
 msgid "Can't connect to database server"
-msgstr "No s'ha pogut connectar a la base de dades"
+msgstr "No s'ha pogut connectar al servidor de la base de dades"
 
 #. Give up.
 #: ../libplanner/mrp-sql.c:319 ../src/planner-sql-plugin.c:220
@@ -762,7 +777,7 @@ msgstr "Unicode invàlid"
 #: ../libplanner/mrp-sql.c:2213
 #, c-format
 msgid "Connection to database '%s' failed.\n"
-msgstr "La connexió a la base de dades '%s' ha fallat.\n"
+msgstr "Ha fallat la connexió a la base de dades «%s».\n"
 
 #: ../libplanner/mrp-sql.c:2218
 #, c-format
@@ -770,7 +785,7 @@ msgid ""
 "Connection to database '%s' failed.\n"
 "%s"
 msgstr ""
-"La connexió a la base de dades '%s' ha fallat.\n"
+"Ha fallat la connexió a la base de dades «%s».\n"
 "%s"
 
 #: ../libplanner/mrp-sql.c:2226
@@ -784,27 +799,31 @@ msgid ""
 "The project '%s' has been changed by the user '%s' since you opened it. Do "
 "you want to save anyway?"
 msgstr ""
-"El projecte '%s' ha estat modificat per l'usuari '%s' des que l'heu obert. "
-"Voleu desar-lo de totes maneres?"
+"El projecte «%s» ha estat modificat per l'usuari «%s» des que l'heu obert. "
+"Voleu desar-lo igualment?"
 
 #: ../libplanner/mrp-sql.c:3674
 #, c-format
 msgid "Connection to database '%s' failed."
-msgstr "La connexió a la base de dades '%s' ha fallat."
+msgstr "Ha fallat la connexió a la base de dades «%s»."
 
 #: ../libplanner/mrp-storage-sql.c:205
+#, c-format
 msgid "Invalid SQL URI (must start with 'sql://' and contain '#')."
-msgstr "URI d'SQL invàlida (ha de començar amb 'sql://' i contenir '#')."
+msgstr "URI d'SQL invàlida (ha de començar amb «sql://» i contenir «#»)."
 
 #: ../libplanner/mrp-storage-sql.c:274
+#, c-format
 msgid "Invalid SQL URI (invalid project id)."
 msgstr "URI d'SQL invàlida (id del projecte invàlid)"
 
 #: ../libplanner/mrp-storage-sql.c:282
+#, c-format
 msgid "Invalid SQL URI (no database name specified)."
-msgstr "URI d'SQL invàlida (no s'ha especificat cap base de dades)."
+msgstr "URI d'SQL invàlida (no s'ha especificat cap nom de base de dades)."
 
 #: ../libplanner/mrp-task.c:1070
+#, c-format
 msgid ""
 "Could not add a predecessor relation, because the tasks are already related."
 msgstr ""
@@ -813,7 +832,8 @@ msgstr ""
 
 #: ../libplanner/mrp-task.c:1081
 msgid "Start to Finish relation type cannot be combined with other relations."
-msgstr "El tipus de relació Inici a Fi no pot combinar-se amb altres relacions."
+msgstr ""
+"El tipus de relació Inici a Fi no pot combinar-se amb altres relacions."
 
 #: ../libplanner/mrp-task.c:1083
 msgid "Finish to Finish relation type cannot be combined with other relations."
@@ -824,34 +844,37 @@ msgid ""
 "Start to Finish relation type cannot be combined with Start No Earlier Than "
 "constraint."
 msgstr ""
-"El tipus de relació Inici a Fi no pot combinar-se amb Inici no "
-"abans d'una restricció."
+"El tipus de relació Inici a Fi no pot combinar-se amb una restricció Inici "
+"no abans restricció."
 
 #: ../libplanner/mrp-task.c:1101
 msgid ""
 "Finish to Finish relation type cannot be combined with Start No Earlier Than "
 "constraint."
 msgstr ""
-"El tipus de relació Fi a Fi no pot utilitzar-se combinada amb Inici no "
-"abans d'una restricció."
-
+"El tipus de relació Fi a Fi no pot utilitzar-se combinada amb una restricció "
+"Inici no abans."
 
 #: ../libplanner/mrp-task.c:1124
+#, c-format
 msgid ""
 "Start to Finish relation cannot be set. Predecessor starts on project start "
 "date."
 msgstr ""
-"El tipus de relació Inici a Fi no pot establir-se. El predecessor comença en "
-"la data d'inici del projecte"
+"No es pot establir el tipus de relació Inici a Fi. El predecessor comença en "
+"la data d'inici del projecte."
 
 #
-#: ../libplanner/mrp-task-manager.c:2518
+#: ../libplanner/mrp-task-manager.c:2527
+#, c-format
 msgid "Cannot add a predecessor, because it would result in a loop."
 msgstr ""
-"No s'ha pogut afegir cap predecessor, atès que resultaria un bucle infinit."
+"No s'ha pogut afegir cap predecessor, atès que resultaria en un bucle "
+"infinit."
 
 #
-#: ../libplanner/mrp-task-manager.c:2564
+#: ../libplanner/mrp-task-manager.c:2573
+#, c-format
 msgid "Cannot move the task, because it would result in a loop."
 msgstr "No s'ha pogut moure la tasca, atès que resultaria en un bucle infinit."
 
@@ -864,8 +887,9 @@ msgstr "%e %B del %Y"
 
 #
 #: ../libplanner/mrp-xsl.c:157 ../libplanner/mrp-xsl.c:205
+#, c-format
 msgid "Export to HTML failed"
-msgstr "L'exportació a HTML ha fallat"
+msgstr "Ha fallat l'exportació a HTML"
 
 #: ../src/planner-application.c:55 ../src/planner-application.c:111
 msgid "Insert"
@@ -921,7 +945,7 @@ msgstr "Afegeix un calendari nou"
 
 #: ../src/planner-cell-renderer-date.c:161 ../src/planner-task-dialog.c:1491
 msgid "As soon as possible"
-msgstr "Al més aviat possible"
+msgstr "El més aviat possible"
 
 #
 #: ../src/planner-cell-renderer-date.c:162
@@ -935,7 +959,7 @@ msgstr "En una data fixa"
 #: ../src/planner-cmd-manager.c:227
 #, c-format
 msgid "Undo '%s'"
-msgstr "Desfés '%s'"
+msgstr "Desfés «%s»"
 
 #: ../src/planner-cmd-manager.c:229
 msgid "Undo"
@@ -953,12 +977,12 @@ msgstr "Refés"
 #: ../src/planner-day-type-dialog.c:499
 #, c-format
 msgid "Add day type \"%s\""
-msgstr "Afegeix un tipus de dia \"%s\""
+msgstr "Afegeix un tipus de dia «%s»"
 
 #: ../src/planner-day-type-dialog.c:560
 #, c-format
 msgid "Remove day type \"%s\""
-msgstr "Sumprimeix el tipus de dia  \"%s\""
+msgstr "Suprimeix el tipus de dia  «%s»"
 
 #: ../src/planner-default-week-dialog.c:42
 msgid "Monday"
@@ -1001,7 +1025,7 @@ msgstr "%H:%M"
 #
 #: ../src/planner-default-week-dialog.c:553
 msgid "Edit default week"
-msgstr "Edita la setmana per defecte"
+msgstr "Edita la setmana predeterminada"
 
 #: ../src/planner-eds-plugin.c:167
 msgid "EDS"
@@ -1012,7 +1036,7 @@ msgid "Import resources from Evolution Data Server"
 msgstr "Importa recursos de l'Evolution Data Server"
 
 #: ../src/planner-eds-plugin.c:396 ../src/planner-gantt-print.c:190
-#: ../src/planner-gantt-view.c:555 ../src/planner-group-dialog.c:822
+#: ../src/planner-gantt-view.c:589 ../src/planner-group-dialog.c:822
 #: ../src/planner-property-dialog.c:485 ../src/planner-resource-view.c:1171
 #: ../src/planner-task-dialog.c:2616 ../src/planner-task-dialog.c:2690
 #: ../src/planner-task-view.c:336
@@ -1163,35 +1187,35 @@ msgstr "Inici projecte"
 msgid "%e %b %Y"
 msgstr "%e %b %Y"
 
-#: ../src/planner-gantt-print.c:198 ../src/planner-gantt-view.c:558
+#: ../src/planner-gantt-print.c:198 ../src/planner-gantt-view.c:592
 #: ../src/planner-resource-dialog.c:1850 ../src/planner-resource-view.c:750
 #: ../src/planner-resource-view.c:766 ../src/planner-resource-view.c:1736
 #: ../src/planner-task-view.c:339
 msgid "Work"
 msgstr "Feina"
 
-#: ../src/planner-gantt-print.c:542 ../src/planner-gantt-row.c:752
+#: ../src/planner-gantt-print.c:542 ../src/planner-gantt-row.c:765
 #: ../src/planner-html-plugin.c:125 ../src/planner-task-tree.c:1571
 #: ../src/planner-window.c:1988
 msgid "Unnamed"
 msgstr "Sense nom"
 
-#: ../src/planner-gantt-row.c:2607 ../src/planner-gantt-row.c:2610
+#: ../src/planner-gantt-row.c:2697 ../src/planner-gantt-row.c:2700
 msgid "No name"
 msgstr "Sense nom"
 
-#: ../src/planner-gantt-row.c:2613
+#: ../src/planner-gantt-row.c:2703
 #, c-format
 msgid "Make task '%s' a predecessor of '%s'"
-msgstr "Crea la tasca '%s' predecessora de '%s'"
+msgstr "Fes que la tasca «%s» sigui predecessora de «%s»"
 
-#: ../src/planner-gantt-row.c:2661
+#: ../src/planner-gantt-row.c:2769
 #, c-format
 msgid "Change work to %s"
 msgstr "Canvia la feina a %s"
 
 #
-#: ../src/planner-gantt-row.c:3232 ../src/planner-task-dialog.c:455
+#: ../src/planner-gantt-row.c:3370 ../src/planner-task-dialog.c:455
 #: ../src/planner-task-tree.c:257 ../src/planner-task-tree.c:947
 msgid "Edit task property"
 msgstr "Edita la propietat de la tasca"
@@ -1275,7 +1299,7 @@ msgstr "Desfés el sagnat de les tasques seleccionades"
 #
 #: ../src/planner-gantt-view.c:160 ../src/planner-task-view.c:142
 msgid "Move Task _Up"
-msgstr "Mo_u cap amunt"
+msgstr "Mo_u la tasca cap amunt"
 
 #: ../src/planner-gantt-view.c:161 ../src/planner-task-view.c:143
 msgid "Move the selected tasks upwards"
@@ -1284,7 +1308,7 @@ msgstr "Mou les tasques seleccionades cap amunt"
 #
 #: ../src/planner-gantt-view.c:163 ../src/planner-task-view.c:145
 msgid "Move Task Do_wn"
-msgstr "Mou cap a _baix"
+msgstr "Mou la tasca cap a _baix"
 
 #: ../src/planner-gantt-view.c:164 ../src/planner-task-view.c:146
 msgid "Move the selected tasks downwards"
@@ -1298,12 +1322,12 @@ msgstr "Re_inicia la restricció"
 #
 #: ../src/planner-gantt-view.c:169
 msgid "Zoom To _Fit"
-msgstr "Es_cala per encabir-ho"
+msgstr "Es_cala per a encabir-ho"
 
 #
 #: ../src/planner-gantt-view.c:170 ../src/planner-usage-view.c:112
 msgid "Zoom to fit the entire project"
-msgstr "Escala per encabir tot el projecte"
+msgstr "Escala per a encabir tot el projecte"
 
 #
 #: ../src/planner-gantt-view.c:172
@@ -1354,13 +1378,13 @@ msgstr "_Dies no estàndard"
 #. i18n: Label used for the sidebar. Please try to make it short and use
 #. * a linebreak if necessary/possible.
 #.
-#: ../src/planner-gantt-view.c:310
+#: ../src/planner-gantt-view.c:344
 msgid "Gantt"
-msgstr "Gràfic Gantt"
+msgstr "Gràfic de Gantt"
 
-#: ../src/planner-gantt-view.c:316
+#: ../src/planner-gantt-view.c:350
 msgid "_Gantt Chart"
-msgstr "Gràfic _Gantt"
+msgstr "Gràfic de _Gantt"
 
 # TODO
 #. i18n: WBS is short for work breakdown structure, and is a
@@ -1371,29 +1395,29 @@ msgstr "Gràfic _Gantt"
 #. * project management term. You might want to leave it
 #. * untranslated unless there is a localized term for it.
 #.
-#: ../src/planner-gantt-view.c:554 ../src/planner-task-view.c:335
+#: ../src/planner-gantt-view.c:588 ../src/planner-task-view.c:335
 msgid "WBS"
 msgstr "WBS"
 
-#: ../src/planner-gantt-view.c:556 ../src/planner-task-view.c:337
+#: ../src/planner-gantt-view.c:590 ../src/planner-task-view.c:337
 msgid "Start"
 msgstr "Comença"
 
-#: ../src/planner-gantt-view.c:557 ../src/planner-task-view.c:338
+#: ../src/planner-gantt-view.c:591 ../src/planner-task-view.c:338
 msgid "Finish"
 msgstr "Acaba"
 
-#: ../src/planner-gantt-view.c:560 ../src/planner-task-view.c:341
+#: ../src/planner-gantt-view.c:594 ../src/planner-task-view.c:341
 msgid "Slack"
 msgstr "Fluix"
 
 #
-#: ../src/planner-gantt-view.c:562 ../src/planner-task-view.c:343
+#: ../src/planner-gantt-view.c:596 ../src/planner-task-view.c:343
 msgid "Assigned to"
 msgstr "Assignat a"
 
 #
-#: ../src/planner-gantt-view.c:911
+#: ../src/planner-gantt-view.c:950
 msgid "Edit Gantt Columns"
 msgstr "Edita les columnes de Gantt"
 
@@ -1407,7 +1431,7 @@ msgstr "Suprimeix el grup"
 
 #: ../src/planner-group-dialog.c:526
 msgid "Default group"
-msgstr "Grup per defecte"
+msgstr "Grup predeterminat"
 
 #: ../src/planner-group-dialog.c:644
 msgid "Edit group property"
@@ -1451,7 +1475,7 @@ msgstr "Mostra el resultat en el navegador"
 #: ../src/planner-xml-planner-plugin.c:124
 #, c-format
 msgid "File \"%s\" exists, do you want to overwrite it?"
-msgstr "El fitxer \"%s\" existeix, el voleu sobreescriure?"
+msgstr "Existeix el fitxer «%s», el voleu sobreescriure?"
 
 #: ../src/planner-main.c:56
 msgid "Create the initial window with the given geometry."
@@ -1493,7 +1517,7 @@ msgstr "Tots els fitxers"
 #
 #: ../src/planner-phase-dialog.c:540
 msgid "Insert phase"
-msgstr "Insereix la fase"
+msgstr "Insereix una fase"
 
 #
 #: ../src/planner-phase-dialog.c:639
@@ -1503,7 +1527,7 @@ msgstr "Suprimeix la fase"
 #: ../src/planner-plugin-loader.c:41
 #, c-format
 msgid "Could not open plugin file '%s'\n"
-msgstr "No s'ha pogut obrir el fitxer '%s' del connector\n"
+msgstr "No s'ha pogut obrir el fitxer «%s» del connector\n"
 
 #: ../src/planner-predecessor-model.c:191 ../src/planner-task-dialog.c:2217
 msgid "FS"
@@ -1533,7 +1557,7 @@ msgstr "Selecciona les vistes"
 #
 #: ../src/planner-print-dialog.c:218
 msgid "Select the views to print:"
-msgstr "Selecciona les vistes a imprimir:"
+msgstr "Seleccioneu les vistes a imprimir:"
 
 #: ../src/planner-project-properties.c:387
 msgid "Select a calendar to use for this project:"
@@ -1567,7 +1591,7 @@ msgstr "D'acord"
 #
 #: ../src/planner-project-properties.c:842
 msgid "Edit Project Phase"
-msgstr "Edita fase del projecte"
+msgstr "Edita la fase del projecte"
 
 #
 #: ../src/planner-project-properties.c:975
@@ -1581,14 +1605,13 @@ msgstr "Valor"
 #: ../src/planner-project-properties.c:1390
 #: ../src/planner-property-dialog.c:333
 msgid "The name of the custom property needs to start with a letter."
-msgstr ""
-"El nom de la propietat personalitada necessita començar amb una lletra."
+msgstr "El nom de la propietat personalitzada s'ha de començar amb una lletra."
 
 #: ../src/planner-project-properties.c:1461
 #: ../src/planner-property-dialog.c:403
 #, c-format
 msgid "Do you really want to remove the property '%s' from the project?"
-msgstr "Esteu segur de suprimir la propietat '%s' del projecte?"
+msgstr "Segur que voleu suprimir la propietat «%s» del projecte?"
 
 #
 #: ../src/planner-project-properties.c:1556
@@ -1608,7 +1631,7 @@ msgstr "Afegeix una propietat del projecte"
 #
 #: ../src/planner-project-properties.c:2043
 msgid "Remove project property"
-msgstr "Suprimeix una propietat del projecte"
+msgstr "Suprimeix la propietat del projecte"
 
 #
 #: ../src/planner-project-properties.c:2136
@@ -1632,7 +1655,7 @@ msgstr "Afegeix una propietat"
 #
 #: ../src/planner-property-dialog.c:816
 msgid "Remove property"
-msgstr "Suprimeix una propietat"
+msgstr "Suprimeix la propietat"
 
 #
 #: ../src/planner-property-dialog.c:909
@@ -1684,7 +1707,7 @@ msgstr "%a %d %b %Y, %H:%M\n"
 
 #: ../src/planner-resource-dialog.c:1521
 msgid "None (use project default)"
-msgstr "Cap (usa el del projecte per defecte)"
+msgstr "Cap (utilitza el del projecte predeterminat)"
 
 #: ../src/planner-resource-dialog.c:1648 ../src/planner-resource-dialog.c:1650
 msgid "Edit resource properties"
@@ -1703,7 +1726,7 @@ msgstr "_Insereix el recurs"
 #
 #: ../src/planner-resource-view.c:231
 msgid "Insert a new resource"
-msgstr "Insereix un nou recurs"
+msgstr "Insereix un recurs nou"
 
 #
 #: ../src/planner-resource-view.c:233
@@ -1742,7 +1765,7 @@ msgstr "Edit_a les propietats personalitzades..."
 
 #: ../src/planner-resource-view.c:266
 msgid "/_Insert resource"
-msgstr "/_Insereix el recurs"
+msgstr "/_Insereix un recurs"
 
 #: ../src/planner-resource-view.c:269
 msgid "/_Remove resource"
@@ -1791,38 +1814,37 @@ msgstr "Sm. %d"
 msgid "Week %d"
 msgstr "Setmana %d"
 
-#. i18n: Week, year.
-#: ../src/planner-scale-utils.c:138
+#: ../src/planner-scale-utils.c:139
 #, c-format
 msgid "Week %d, %d"
 msgstr "Setmana %d, %d"
 
 #. i18n: Short "Quarter", preferably 1 letter.
-#: ../src/planner-scale-utils.c:169
+#: ../src/planner-scale-utils.c:170
 #, c-format
 msgid "Q%d"
 msgstr "Q%d"
 
 #. i18n: Short "Quarter", preferably 2-3 letters.
-#: ../src/planner-scale-utils.c:173
+#: ../src/planner-scale-utils.c:174
 #, c-format
 msgid "Qtr %d"
 msgstr "Qtr %d"
 
 #. i18n: Year, short "Quarter", preferably 2-3 letters.
-#: ../src/planner-scale-utils.c:177
+#: ../src/planner-scale-utils.c:178
 #, c-format
 msgid "%d, Qtr %d"
 msgstr "%d, Qtr %d"
 
 #. i18n: Short "Half year", preferably 1 letter.
-#: ../src/planner-scale-utils.c:190
+#: ../src/planner-scale-utils.c:191
 #, c-format
 msgid "H%d"
 msgstr "H%d"
 
 #. i18n: Year, short "Half year", preferably 1 letter.
-#: ../src/planner-scale-utils.c:195
+#: ../src/planner-scale-utils.c:196
 #, c-format
 msgid "%04d, H%d"
 msgstr "%04d, H%d"
@@ -1835,7 +1857,7 @@ msgstr "Obre des d'una base de dades..."
 #
 #: ../src/planner-sql-plugin.c:94
 msgid "Open a project from a database"
-msgstr "Obre d'un projecte des d'un base de dades"
+msgstr "Obre un projecte des d'una base de dades"
 
 #: ../src/planner-sql-plugin.c:96 ../src/planner-sql-plugin.c:1152
 msgid "Save to Database"
@@ -1848,7 +1870,7 @@ msgstr "Desa el projecte actual a una base de dades"
 
 #: ../src/planner-sql-plugin.c:135 ../src/planner-sql-plugin.c:150
 msgid "No errors reported."
-msgstr "No s'han reportat errors."
+msgstr "No s'ha informat de cap error."
 
 #: ../src/planner-sql-plugin.c:517
 #, c-format
@@ -1856,10 +1878,12 @@ msgid ""
 "Database %s needs to be upgraded from version %s to version %s.\n"
 "Please backup database before the upgrade."
 msgstr ""
+"La base de dades %s necessita actualitzar-se de la versió %s a la %s.\n"
+"Feu una còpia de seguretat abans d'actualitzar."
 
 #: ../src/planner-sql-plugin.c:524
 msgid "Upgrade"
-msgstr "Actualiza"
+msgstr "Actualitza"
 
 #: ../src/planner-sql-plugin.c:538
 #, c-format
@@ -1889,12 +1913,12 @@ msgstr "La base de dades %s no està configurada per al Planner. Voleu fer-ho?"
 #: ../src/planner-sql-plugin.c:696
 #, c-format
 msgid "Connection to database '%s@%s' failed."
-msgstr "La connexió a la base de dades '%s@%s' ha fallat."
+msgstr "Ha fallat la connexió a la base de dades «%s@%s»."
 
 #: ../src/planner-sql-plugin.c:711
 #, c-format
 msgid "Test to tables in database '%s' failed."
-msgstr "S'ha produït un error en provar les taules a la base de dades '%s'."
+msgstr "S'ha produït un error en provar les taules a la base de dades «%s»."
 
 #: ../src/planner-sql-plugin.c:816
 msgid "ID"
@@ -1939,7 +1963,7 @@ msgstr "Edita el tipus de tasca"
 #
 #: ../src/planner-task-dialog.c:596
 msgid "Toggle fixed duration"
-msgstr "Canvia a duració fixada"
+msgstr "Canvia a durada fixa"
 
 #
 #: ../src/planner-task-dialog.c:663
@@ -1952,7 +1976,7 @@ msgstr "Assigna un recurs a la tasca"
 
 #: ../src/planner-task-dialog.c:803
 msgid "Unassign resource from task"
-msgstr "Desassigna un recurs d'una tasca"
+msgstr "Desfés l'assignació del recurs de la tasca"
 
 #: ../src/planner-task-dialog.c:862
 msgid "Change resource units in task"
@@ -1961,7 +1985,7 @@ msgstr "Canvia les unitats del recurs en la tasca"
 #
 #: ../src/planner-task-dialog.c:950
 msgid "Edit task predecessor"
-msgstr "Edita la tasca predecessora"
+msgstr "Edita el predecessor de la tasca"
 
 #
 #: ../src/planner-task-dialog.c:1021
@@ -1989,15 +2013,15 @@ msgstr "Acaba la tasca per començar (AC)"
 
 #: ../src/planner-task-dialog.c:1918
 msgid "Finish to finish (FF)"
-msgstr "Acaba la tasca per acabar (AA)"
+msgstr "Acaba la tasca per a acabar (AA)"
 
 #: ../src/planner-task-dialog.c:1919
 msgid "Start to start (SS)"
-msgstr "Comença la tasca per començar (CC)"
+msgstr "Comença la tasca per a començar (CC)"
 
 #: ../src/planner-task-dialog.c:1920
 msgid "Start to finish (SF)"
-msgstr "Comença la tasca per acabar (CA)"
+msgstr "Comença la tasca per a acabar (CA)"
 
 #: ../src/planner-task-dialog.c:1975
 msgid "Can't add new predecessor. No task selected!"
@@ -2032,7 +2056,7 @@ msgstr "/_Insereix una tasca"
 #
 #: ../src/planner-task-popup.c:57
 msgid "/Insert _subtask"
-msgstr "/_Insereix una subtasca"
+msgstr "/Insereix una subtasca"
 
 #: ../src/planner-task-popup.c:60
 msgid "/_Remove task"
@@ -2054,11 +2078,11 @@ msgstr "/_Edita la tasca..."
 #
 #: ../src/planner-task-tree.c:567
 msgid "Remove task"
-msgstr "Suprimeix tasca"
+msgstr "Suprimeix la tasca"
 
 #: ../src/planner-task-tree.c:644
 msgid "Apply constraint to task"
-msgstr "Aplica la restricció a la tasca"
+msgstr "Aplica una restricció a la tasca"
 
 #
 #: ../src/planner-task-tree.c:706
@@ -2080,29 +2104,28 @@ msgid ""
 "You are about to open an edit dialog each for %i tasks. Are you sure that "
 "you want to do that?"
 msgstr ""
-"Esteu a punt d'obrir una capsa de diàleg d'edició per %i tasques. Segur que "
-"ho voleu fer?"
-
+"Esteu a punt d'obrir un diàleg d'edició per a %i tasques. Segur que ho voleu "
+"fer?"
 
 #
 #: ../src/planner-task-tree.c:2888
 msgid "Unlink tasks"
-msgstr "Desenllaça tasques"
+msgstr "Desenllaça les tasques"
 
 #
 #: ../src/planner-task-tree.c:2940
 msgid "Link tasks"
-msgstr "Enllaça tasques"
+msgstr "Enllaça les tasques"
 
 #
 #: ../src/planner-task-tree.c:3031
 msgid "Indent tasks"
-msgstr "Sagna tasques"
+msgstr "Sagna les tasques"
 
 #
 #: ../src/planner-task-tree.c:3042
 msgid "Indent task"
-msgstr "Sagna tasca"
+msgstr "Sagna la tasca"
 
 #
 #: ../src/planner-task-tree.c:3134
@@ -2110,38 +2133,38 @@ msgid "Unindent tasks"
 msgstr "Desfés el sagnat de les tasques"
 
 #
-#: ../src/planner-task-tree.c:3150
+#: ../src/planner-task-tree.c:3152
 msgid "Unindent task"
 msgstr "Desfés el sagnat de la tasca"
 
 #
-#: ../src/planner-task-tree.c:3227
+#: ../src/planner-task-tree.c:3228
 msgid "Move tasks up"
 msgstr "Mou les tasques cap amunt"
 
 #
-#: ../src/planner-task-tree.c:3265
+#: ../src/planner-task-tree.c:3266
 msgid "Move task up"
 msgstr "Mou la tasca cap amunt"
 
 #
-#: ../src/planner-task-tree.c:3354
+#: ../src/planner-task-tree.c:3355
 msgid "Move tasks down"
 msgstr "Mou les tasques cap a baix"
 
 #
 #. Moving task from 'position' to 'position + 1'
-#: ../src/planner-task-tree.c:3400
+#: ../src/planner-task-tree.c:3401
 msgid "Move task down"
 msgstr "Mou la tasca cap a baix"
 
 #
-#: ../src/planner-task-tree.c:3456
+#: ../src/planner-task-tree.c:3457
 msgid "Reset task constraints"
 msgstr "Reinicia les restriccions de la tasca"
 
 #
-#: ../src/planner-task-tree.c:3488
+#: ../src/planner-task-tree.c:3489
 msgid "Reset all task constraints"
 msgstr "Reinicia totes les restriccions de la tasca"
 
@@ -2202,13 +2225,13 @@ msgstr ""
 #
 #: ../src/planner-usage-view.c:111
 msgid "Zoom to fit"
-msgstr "Escala per encabir"
+msgstr "Escala per a encabir"
 
 #
 #. i18n: Label used for the sidebar. Please try to make it short and use
 #. * a linebreak if necessary/possible.
 #.
-#: ../src/planner-usage-view.c:201
+#: ../src/planner-usage-view.c:228
 msgid ""
 "Resource\n"
 "Usage"
@@ -2217,11 +2240,11 @@ msgstr ""
 "recursos"
 
 #
-#: ../src/planner-usage-view.c:207
+#: ../src/planner-usage-view.c:234
 msgid "Resource _Usage"
 msgstr "_Ús dels recursos"
 
-#: ../src/planner-usage-view.c:318
+#: ../src/planner-usage-view.c:345
 msgid "Edit Resource Usage Columns"
 msgstr "Edita les columnes d'ús dels recursos"
 
@@ -2330,7 +2353,7 @@ msgstr "_Refés"
 
 #: ../src/planner-window.c:268
 msgid "Redo the undone action"
-msgstr "Refés l'acció sense fer"
+msgstr "Torna a fer l'acció prèviament desfeta"
 
 #: ../src/planner-window.c:272
 msgid "_View"
@@ -2357,7 +2380,7 @@ msgstr "E_dita els tipus de dies"
 #
 #: ../src/planner-window.c:289
 msgid "Edit Project _Phases"
-msgstr "Edi_ta les fases de projecte"
+msgstr "Edi_ta les fases del projecte"
 
 #
 #: ../src/planner-window.c:292
@@ -2379,7 +2402,7 @@ msgstr "_Guia d'usuari"
 #
 #: ../src/planner-window.c:303
 msgid "Show the Planner User Guide"
-msgstr "Mostra la guia de l'usuari del Planner"
+msgstr "Mostra la guia d'usuari del Planner"
 
 #: ../src/planner-window.c:306
 msgid "_About"
@@ -2393,7 +2416,7 @@ msgstr "Quant a aquesta aplicació"
 #: ../src/planner-window.c:665
 #, c-format
 msgid "Switch to the view \"%s\""
-msgstr "Commuta a la vista \"%s\""
+msgstr "Canvia a la vista «%s»"
 
 #
 #: ../src/planner-window.c:832
@@ -2414,11 +2437,12 @@ msgstr ""
 "Enric Balletbó <eballetbo@km103.com>\n"
 "Josep Puigdemont <baldrick@terra.es>\n"
 "Jordi Mallach <jordi@sindominio.net>\n"
-"Jordi Mas i Hernàndez <jmas@softcatala.org>"
+"Jordi Mas i Hernàndez <jmas@softcatala.org>\n"
+"Gil Forcada <gilforcada@guifi.net>"
 
 #: ../src/planner-window.c:1341
 msgid "A Project Management application for the GNOME desktop"
-msgstr "Gestor de projectes per a l'escriptori GNOME"
+msgstr "Una aplicació de gestió de projectes per a l'escriptori GNOME"
 
 #: ../src/planner-window.c:1348
 msgid "The Planner Homepage"
@@ -2426,34 +2450,34 @@ msgstr "Pàgina web del Planner"
 
 #: ../src/planner-window.c:1500
 msgid "If you don't save, changes made the last minute will be discarded."
-msgstr "Si no ho deseu, els canvis fets l'últim minut seran descartats."
+msgstr "Si no ho deseu, es descartaran els últims canvis fets."
 
 #: ../src/planner-window.c:1506
 #, c-format
 msgid "If you don't save, changes made the last %d minute will be discarded."
 msgid_plural ""
 "If you don't save, changes made the last %d minutes will be discarded."
-msgstr[0] "Si no ho deseu, els canvis fets l'últim %d minut seran descartats."
+msgstr[0] "Si no ho deseu, es descartaran els canvis fets en l'últim minut."
 msgstr[1] ""
-"Si no ho deseu, els canvis fets els últims %d minuts seran descartats."
+"Si no ho deseu, es descartaran els canvis fets en els últims %d minuts."
 
 #: ../src/planner-window.c:1514
 msgid "If you don't save, changes made the last hour will be discarded."
-msgstr "Si no ho deseu, els canvis fets l'última hora seran descartats."
+msgstr "Si no ho deseu, es descartaran els canvis fets en l'última hora."
 
 #: ../src/planner-window.c:1519
 #, c-format
 msgid "If you don't save, changes made the last %d hour will be discarded."
 msgid_plural ""
 "If you don't save, changes made the last %d hours will be discarded."
-msgstr[0] "Si no ho deseu, els canvis fets l'última %d hora seran descartats."
+msgstr[0] "Si no ho deseu, es descartaran els canvis fets en l'última hora."
 msgstr[1] ""
-"Si no ho deseu, els canvis fets les últimes %d hores seran descartats."
+"Si no ho deseu, es descartaran els canvis fets en les últimes %d hores."
 
 #: ../src/planner-window.c:1529
 #, c-format
 msgid "Save changes to document '%s' before closing?"
-msgstr "Voleu desar els canvis del document '%s' abans de tancar-lo?"
+msgstr "Voleu desar els canvis del document «%s» abans de tancar-lo?"
 
 #: ../src/planner-window.c:1554
 msgid "C_lose without saving"
@@ -2486,16 +2510,17 @@ msgid ""
 msgstr ""
 "Heu obert un fitxer que ha estat desat amb una versió antiga del Planner.\n"
 "\n"
-"Quan es carreguen fitxers antics, totes les tasques utilitzen la limitació "
-"'S'ha de començar', donat que la versió antiga no suporta completament la "
-"planificació automàtica. Per aprofitar aquesta nova característica, heu "
-"d'afegir relacions predecessores entre tasques que són dependents l'una amb "
+"Quan es carreguen fitxers antics, totes les tasques utilitzen la restricció "
+"«S'ha de començar», ja que la versió antiga no implementa completament la "
+"planificació automàtica. Per a aprofitar aquesta característica nova, heu "
+"d'afegir relacions predecessores entre tasques que són dependents l'una de "
 "l'altra.\n"
 "\n"
-"Podeu afegir una relació predecessora fent un clic sobre el predecessor i "
+"Podeu afegir una relació predecessora fent clic sobre el predecessor i "
 "arrossegar-lo al successor.\n"
-"Després de fer això, podeu suprimir totes les limitacions seleccionant "
-"l'element del menú 'Esborra totes les limitacions' dins del menú 'Edita'."
+"\n"
+"Després de fer això, podeu suprimir totes les restriccions si seleccioneu "
+"l'element del menú «Esborra totes les restriccions» dins del menú «Edita»."
 
 #. Hack.
 #: ../src/planner-window.c:1980
@@ -2505,7 +2530,7 @@ msgstr "Base de dades del projecte sense nom"
 #: ../src/planner-window.c:2094
 #, c-format
 msgid "Open '%s'"
-msgstr "Obre '%s'"
+msgstr "Obre «%s»"
 
 #
 #: ../src/planner-working-time-dialog.c:145
@@ -2531,23 +2556,25 @@ msgstr "EDS UID"
 
 #: ../eds-backend/e-cal-backend-planner.c:290
 msgid "Identifier used by Evolution Data Server for tasks"
-msgstr "Identificador emprat per l'Evolution Data Server per a tasques"
+msgstr "Identificador que utilitza l'Evolution Data Server per a les tasques"
 
 #: ../eds-backend/e-cal-backend-planner.c:299
 msgid "EDS Categories"
-msgstr "Categories EDS"
+msgstr "Categories de l'EDS"
 
 #: ../eds-backend/e-cal-backend-planner.c:300
 msgid "Categories for a task used by Evolution Data Server"
-msgstr "Categories per a una tasca usada per l'Evolution Data Server"
+msgstr ""
+"Les categories utilitzades per l'Evolution Data Server per a les tasques"
 
 #: ../eds-backend/e-cal-backend-planner.c:309
 msgid "EDS Classification"
-msgstr "Classificació EDS"
+msgstr "Classificació de l'EDS"
 
 #: ../eds-backend/e-cal-backend-planner.c:310
 msgid "Task access classification used by Evolution Data Server"
-msgstr "Classificació d'accés de la tasca emprat per l'Evolution Data Server"
+msgstr ""
+"La classificació d'accés de la tasca que utilitza l'Evolution Data Server"
 
 #: ../eds-backend/e-cal-backend-planner.c:319
 msgid "EDS URL"
@@ -2555,7 +2582,7 @@ msgstr "URL de l'EDS"
 
 #: ../eds-backend/e-cal-backend-planner.c:320
 msgid "URL for a Task used by Evolution Data Server"
-msgstr "URL per a una tasca usada per l'Evolution Data Server"
+msgstr "URL per a una tasca que utilitza l'Evolution Data Server"
 
 #
 #: ../eds-backend/e-cal-backend-planner.c:829
@@ -2567,7 +2594,7 @@ msgstr "URI del servidor invàlid"
 #. source = book_target->source;
 #: ../eds-backend/planner-source/planner-source.c:125
 msgid "Select planner file"
-msgstr "Selecciona un fitxer del Planner"
+msgstr "Seleccioneu un fitxer del Planner"
 
 #: ../eds-backend/planner-source/planner-source.c:157
 #, c-format
@@ -2575,3 +2602,5 @@ msgid ""
 "The filename extension of this file isn't the planner usual file extension (%"
 "s) Do you want to continue?"
 msgstr ""
+"L'extensió del nom de fitxer d'aquest fitxer no és l'extensió de fitxer "
+"normal del Planner (%s). Voleu continuar?"
