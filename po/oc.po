@@ -1,21 +1,24 @@
+# translation of oc.po to Occitan
 # Occitan translation of planner.
 # Copyright (C) 2002-2007 Free Software Foundation, Inc.
 # This file is distributed under the same license as the planner package.
 #
 # Yannig MARCHEGAY (yannig@marchegay.org) - 2006-2007
 #
+# Yannig Marchegay (Kokoyaya) <yannig@marchegay.org>, 2007.
 msgid ""
 msgstr ""
-"Project-Id-Version: planner 0.14\n"
+"Project-Id-Version: oc\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-02-17 21:55+0100\n"
-"PO-Revision-Date: 2007-08-20 19:34+0200\n"
-"Last-Translator: Yannig MARCHEGAY (Kokoyaya) <yannig@marchegay.org>\n"
-"Language-Team: Occitan (post 1500) <ubuntu-l10n-oci@lists.ubuntu.com>\n"
+"PO-Revision-Date: 2007-11-20 14:32+0100\n"
+"Last-Translator: Yannig Marchegay (Kokoyaya) <yannig@marchegay.org>\n"
+"Language-Team: Occitan <ubuntu-l10n-oci@lists.ubuntu.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);"
+"X-Generator: KBabel 1.11.4\n"
 
 #: ../data/glade/add-predecessor.glade.h:1
 msgid "Add Predecessor"
@@ -529,13 +532,11 @@ msgid "Whether to display nonstandard days in the Gantt view."
 msgstr ""
 
 #: ../data/planner.schemas.in.h:12
-msgid ""
-"Whether to highlight the tasks along the cricital path in the Gantt view."
+msgid "Whether to highlight the tasks along the cricital path in the Gantt view."
 msgstr ""
 
 #: ../data/planner.schemas.in.h:13
-msgid ""
-"Whether to highlight the tasks along the cricital path in the Task view."
+msgid "Whether to highlight the tasks along the cricital path in the Task view."
 msgstr ""
 
 #: ../data/planner.schemas.in.h:14
@@ -747,8 +748,7 @@ msgid "Invalid SQL URI (no database name specified)."
 msgstr ""
 
 #: ../libplanner/mrp-task.c:1070
-msgid ""
-"Could not add a predecessor relation, because the tasks are already related."
+msgid "Could not add a predecessor relation, because the tasks are already related."
 msgstr ""
 
 #: ../libplanner/mrp-task.c:1081
@@ -1011,12 +1011,12 @@ msgstr "meses"
 #. month unit variant accepted in input
 #: ../src/planner-format.c:377
 msgid "w"
-msgstr ""
+msgstr "w"
 
 #. week unit variant accepted in input
 #: ../src/planner-format.c:378
 msgid "week"
-msgstr ""
+msgstr "setmana"
 
 #. week unit variant accepted in input
 #: ../src/planner-format.c:379
@@ -1026,7 +1026,7 @@ msgstr "setmanas"
 #. week unit variant accepted in input
 #: ../src/planner-format.c:380
 msgid "d"
-msgstr ""
+msgstr "d"
 
 #. day unit variant accepted in input
 #: ../src/planner-format.c:381
@@ -1041,7 +1041,7 @@ msgstr "jorn"
 #. day unit variant accepted in input
 #: ../src/planner-format.c:383
 msgid "h"
-msgstr ""
+msgstr "h"
 
 #. hour unit variant accepted in input
 #: ../src/planner-format.c:384
@@ -1056,7 +1056,7 @@ msgstr "oras"
 #. hour unit variant accepted in input
 #: ../src/planner-format.c:386
 msgid "min"
-msgstr ""
+msgstr "minuta"
 
 #. minute unit variant accepted in input
 #: ../src/planner-format.c:387
@@ -1141,7 +1141,7 @@ msgstr ""
 #: ../src/planner-gantt-view.c:145 ../src/planner-resource-view.c:245
 #: ../src/planner-task-view.c:127
 msgid "Select _All"
-msgstr "_Tot seleccionar"
+msgstr "Seleccionar un fichièr"
 
 #: ../src/planner-gantt-view.c:146 ../src/planner-resource-view.c:246
 #: ../src/planner-task-view.c:128
@@ -1333,7 +1333,7 @@ msgstr ""
 
 #: ../src/planner-html-plugin.c:110
 msgid "Export to HTML"
-msgstr ""
+msgstr "Exportar en HTML"
 
 #: ../src/planner-html-plugin.c:154
 msgid "Show result in browser"
@@ -2092,7 +2092,7 @@ msgstr "_Tampar"
 
 #: ../src/planner-window.c:255
 msgid "Close the current file"
-msgstr "Tampar lo fichièr actual"
+msgstr "Tampar lo fichièr actiu"
 
 #: ../src/planner-window.c:258
 msgid "_Quit"
@@ -2209,7 +2209,8 @@ msgstr ""
 
 #: ../src/planner-window.c:1506
 #, c-format
-msgid "If you don't save, changes made the last %d minute will be discarded."
+msgid ""
+"If you don't save, changes made the last %d minute will be discarded."
 "If you don't save, changes made the last %d minutes will be discarded."
 msgstr ""
 
@@ -2219,7 +2220,8 @@ msgstr ""
 
 #: ../src/planner-window.c:1519
 #, c-format
-msgid "If you don't save, changes made the last %d hour will be discarded."
+msgid ""
+"If you don't save, changes made the last %d hour will be discarded."
 "If you don't save, changes made the last %d hours will be discarded."
 msgstr ""
 
