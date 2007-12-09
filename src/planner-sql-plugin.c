@@ -589,7 +589,7 @@ check_database_tables (GdaConnection *conn,
 			
 			sql_execute_query (conn, query);
 			g_free (query);
-			g_free (res);
+			g_object_unref (res);
 			retval = TRUE;
 		}
 		g_free (database_file);

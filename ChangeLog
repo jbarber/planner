@@ -1,3 +1,10 @@
+2007-12-09  Maurice van der Pot  <griffon26@kfk4ever.com>
+
+	* configure.in: don't fail on make install if update-mime-database or
+	update-desktop-database weren't found.
+	* src/planner-sql-plugin.c: (check_database_tables): call g_object_unref
+	instead of g_free on results from sql_execute_query. Should fix bug #397132.
+
 2007-07-28  Kurt Maute  <kurt@maute.us>
 	Patch to correct week number by Maurice van der Pot <griffon26@kfk4ever.com>
 	*libplanner/mrp-time.c
