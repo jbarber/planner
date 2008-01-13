@@ -33,7 +33,8 @@
       
       <xsl:variable name="std-rate" select="$std-rates[position()=$level]"/>
       <xsl:variable name="unit" select="$units[position()=$level] div 100"/>
-      <xsl:value-of select="($std-rate * $unit * $work) + $cost"/>
+      <xsl:variable name="totalunits" select="sum($units) div 100"/>
+      <xsl:value-of select="($std-rate * $unit * $work) div $totalunits + $cost"/>
     </xsl:otherwise>
   </xsl:choose>
 </xsl:template>
