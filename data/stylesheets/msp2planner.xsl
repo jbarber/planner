@@ -85,7 +85,7 @@
     <xsl:call-template name="write-task"/>
     <xsl:if test="ms:OutlineLevel &lt; following::ms:Task/ms:OutlineLevel">
       <xsl:call-template name="task">
-        <xsl:with-param name="wbs" select="ms:WBS"/>
+        <xsl:with-param name="wbs" select="ms:OutlineNumber"/>
         <xsl:with-param name="lvl" select="ms:OutlineLevel+1"/>
       </xsl:call-template>
     </xsl:if>
@@ -100,13 +100,13 @@
 <xsl:template name="task">
   <xsl:param name="wbs"/>
   <xsl:param name="lvl"/>
-  <xsl:for-each select="//ms:Tasks/ms:Task[starts-with(ms:WBS,$wbs)][ms:OutlineLevel=$lvl]">
+  <xsl:for-each select="//ms:Tasks/ms:Task[starts-with(ms:OutlineNumber,$wbs)][ms:OutlineLevel=$lvl]">
     <task>
     <xsl:call-template name="write-task"/>
     <!-- recursion implemented here:  -->
     <xsl:if test="ms:OutlineLevel &lt; following::ms:Task/ms:OutlineLevel">
       <xsl:call-template name="task">
-        <xsl:with-param name="wbs" select="ms:WBS"/>
+        <xsl:with-param name="wbs" select="ms:OutlineNumber"/>
         <xsl:with-param name="lvl" select="ms:OutlineLevel+1"/>
       </xsl:call-template>
     </xsl:if>
