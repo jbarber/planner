@@ -1,3 +1,12 @@
+2008-01-29  Kurt Maute  <kurt@maute.us>
+	Patch to correct distcheck error, courtesy of Gilles Dartiguelongue
+	(bug #464359)
+	* data/mime/Makefile.am
+	* data/Makefile.am
+	* data/stylesheets/Makefile.am
+	* Makefile.am
+
+
 2008-01-23  Maurice van der Pot  <griffon26@kfk4ever.com>
 
 	* data/stylesheets/msp2planner.xsl: Now using OutlineNumber instead of WBS

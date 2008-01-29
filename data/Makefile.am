@@ -20,7 +20,7 @@ install-data-local:
 endif
 
 EXTRA_DIST = 				\
-	planner.desktop.in		\
+	$(desktop_in_files)		\
 	$(schema_in_files)		\
 	$(man_MANS)
 

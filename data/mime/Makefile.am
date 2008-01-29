@@ -5,7 +5,10 @@ xml_files = $(xml_in_files:.xml.in=.xml)
 mimedir = $(datadir)/mime/packages
 mime_DATA = $(xml_files)
 
-EXTRA_DIST = $(xml_in_files)
+EXTRA_DIST = 		\
+	$(xml_in_files)	\
+	planner.keys.in
+
 CLEANFILES = $(xml_files)
 
 install-data-hook:
