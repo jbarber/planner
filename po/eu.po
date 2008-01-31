@@ -1,17 +1,17 @@
-# translation of eu.po to Basque
+# translation of planner.HEAD.po to Basque
 # This file is distributed under the same license as the PACKAGE package.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER.
 #
 # Hizkuntza Politikarako Sailburuordetza <hizkpol@ej-gv.es>, 2005.
-# Iñaki Larrañaga Murgoitio <dooteo@euskalgnu.org>, 2006.
+# Iñaki Larrañaga Murgoitio <dooteo@euskalgnu.org>, 2006, 2008.
 # Iñaki Larrañaga Murgoitio <dooteo@zundan.com>, 2007.
 msgid ""
 msgstr ""
-"Project-Id-Version: eu\n"
+"Project-Id-Version: planner.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-16 18:30+0200\n"
-"PO-Revision-Date: 2007-08-16 18:37+0200\n"
-"Last-Translator: Iñaki Larrañaga Murgoitio <dooteo@zundan.com>\n"
+"POT-Creation-Date: 2008-01-31 17:38+0100\n"
+"PO-Revision-Date: 2008-01-29 23:31+0100\n"
+"Last-Translator: Iñaki Larrañaga Murgoitio <dooteo@euskalgnu.org>\n"
 "Language-Team: Basque <itzulpena@euskalgnu.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -206,7 +206,7 @@ msgstr "E_rakutsi"
 
 #: ../data/glade/eds.glade.h:2
 msgid "Loading resource data"
-msgstr "baliabide-datuak kargatzen"
+msgstr "Baliabide-datuak kargatzen"
 
 #: ../data/glade/eds.glade.h:3
 msgid "Search"
@@ -315,6 +315,7 @@ msgid "Notes"
 msgstr "Oharrak"
 
 #: ../data/glade/resource-dialog.glade.h:7
+#: ../data/glade/resource-input-dialog.glade.h:3
 msgid "Optional - overrides resource name in Gantt view."
 msgstr "Aukerakoa - gainidatzi baliabide-izena Gantt ikuspegian."
 
@@ -349,10 +350,6 @@ msgstr "_Izen laburra:"
 msgid "Insert Resource"
 msgstr "Txertatu baliabidea"
 
-#: ../data/glade/resource-input-dialog.glade.h:3
-msgid "Optional - overrides resource name in gantt view."
-msgstr "Aukerakoa - gainidatzi baliabide-izena gantt ikuspegian."
-
 #: ../data/glade/resource-input-dialog.glade.h:6
 #: ../data/glade/task-input-dialog.glade.h:3
 msgid "_Insert"
@@ -368,7 +365,8 @@ msgstr "Hautatu proiektu bat"
 
 #: ../data/glade/sql.glade.h:4
 msgid "The database contains the following projects. Select a project to open:"
-msgstr "Datu-baseak ondorengo proiektuak ditu. Hautatu proiektu bat irekitzeko:"
+msgstr ""
+"Datu-baseak ondorengo proiektuak ditu. Hautatu proiektu bat irekitzeko:"
 
 #: ../data/glade/sql.glade.h:5
 msgid "_Database:"
@@ -510,7 +508,7 @@ msgstr "Nabarmendu bide kritikoak zereginen ikuspegian"
 
 #: ../data/planner.schemas.in.h:4
 msgid "Print the Gantt view"
-msgstr "Inprimatu Gantten ikuspegia"
+msgstr "Inprimatu Gantt-en ikuspegia"
 
 #: ../data/planner.schemas.in.h:5
 msgid "Print the Resource view"
@@ -541,12 +539,14 @@ msgid "Whether to display nonstandard days in the Gantt view."
 msgstr "Egun ez-estandarrak Gantt ikuspegian bistaratu edo ez."
 
 #: ../data/planner.schemas.in.h:12
-msgid "Whether to highlight the tasks along the cricital path in the Gantt view."
+msgid ""
+"Whether to highlight the tasks along the cricital path in the Gantt view."
 msgstr "Zereginak Gantt ikuspegiko bide kritikoan zehaz nabarmendu edo ez."
 
 #: ../data/planner.schemas.in.h:13
-msgid "Whether to highlight the tasks along the cricital path in the Task view."
-msgstr "Zereginak zereginen ikuspegiko bide kritikoan zehaz nabarmendu edo ez."
+msgid ""
+"Whether to highlight the tasks along the cricital path in the Task view."
+msgstr "Zereginak zereginen ikuspegiko bide kritikoan zehar nabarmendu edo ez."
 
 #: ../data/planner.schemas.in.h:14
 msgid "Which view to display in the user interface."
@@ -707,7 +707,7 @@ msgstr "Bat ere ez"
 
 #: ../libplanner/mrp-sql.c:214 ../libplanner/mrp-sql.c:228
 msgid "Can't connect to database server"
-msgstr " Ezin da datu-base zerbitzariarekin konektatu"
+msgstr "Ezin da datu-basearen zerbitzariarekin konektatu"
 
 #. Give up.
 #: ../libplanner/mrp-sql.c:319 ../src/planner-sql-plugin.c:220
@@ -749,7 +749,8 @@ msgstr "'%s' datu-baserako konexioak huts egin du."
 
 #: ../libplanner/mrp-storage-sql.c:205
 msgid "Invalid SQL URI (must start with 'sql://' and contain '#')."
-msgstr "SQL URI baliogabea (honela hasi behar du: 'sql://', eta '#' eduki behar du)."
+msgstr ""
+"SQL URI baliogabea (honela hasi behar du: 'sql://', eta '#' eduki behar du)."
 
 #: ../libplanner/mrp-storage-sql.c:274
 msgid "Invalid SQL URI (invalid project id)."
@@ -760,7 +761,8 @@ msgid "Invalid SQL URI (no database name specified)."
 msgstr "SQL URI baliogabea (ez da datu-base izenik zehaztu)."
 
 #: ../libplanner/mrp-task.c:1070
-msgid "Could not add a predecessor relation, because the tasks are already related."
+msgid ""
+"Could not add a predecessor relation, because the tasks are already related."
 msgstr ""
 "Ezin izan da aurreko-erlaziorik gehitu; zereginak dagoeneko erlazionatuta "
 "daude."
@@ -1102,7 +1104,7 @@ msgstr "%Y %b %d"
 
 #: ../src/planner-gantt-background.c:646
 msgid "Project start"
-msgstr "Proiektuaren hasiera"
+msgstr "Proiektu-hasiera"
 
 #: ../src/planner-gantt-header.c:671
 msgid "%e %b %Y"
@@ -1245,7 +1247,7 @@ msgstr "Handiagotu zooma"
 
 #: ../src/planner-gantt-view.c:175
 msgid "Zoom _Out"
-msgstr "Zooma _txikiagotu"
+msgstr "_Txikiagotu"
 
 #: ../src/planner-gantt-view.c:176 ../src/planner-usage-view.c:105
 #: ../src/planner-usage-view.c:106
@@ -1295,7 +1297,7 @@ msgstr "_Gantt diagrama"
 #.
 #: ../src/planner-gantt-view.c:588 ../src/planner-task-view.c:335
 msgid "WBS"
-msgstr "WBS"
+msgstr "LDE"
 
 #: ../src/planner-gantt-view.c:590 ../src/planner-task-view.c:337
 msgid "Start"
@@ -1307,7 +1309,7 @@ msgstr "Amaitu"
 
 #: ../src/planner-gantt-view.c:594 ../src/planner-task-view.c:341
 msgid "Slack"
-msgstr "Slack"
+msgstr "Lasaiera"
 
 #: ../src/planner-gantt-view.c:596 ../src/planner-task-view.c:343
 msgid "Assigned to"
@@ -1377,11 +1379,11 @@ msgstr "Sortu hasierako leihoa emandako geometriarekin."
 
 #: ../src/planner-main.c:56
 msgid "GEOMETRY"
-msgstr "GEOMETRY"
+msgstr "GEOMETRIA"
 
 #: ../src/planner-main.c:70
 msgid "[FILE...]"
-msgstr "[Fitxategia...]"
+msgstr "[FITXATEGIA...]"
 
 #: ../src/planner-msp-plugin.c:50
 msgid "MS Project XML..."
@@ -1502,7 +1504,7 @@ msgstr "Ezin izan da sortu propietateen elkarrizketa-koadroa."
 
 #: ../src/planner-project-properties.c:1590
 msgid "Date..."
-msgstr "Data.."
+msgstr "Data..."
 
 #: ../src/planner-project-properties.c:1933
 msgid "Add project property"
@@ -1546,7 +1548,7 @@ msgstr "Txertatu baliabidea"
 #: ../src/planner-resource-input-dialog.c:100
 #: ../src/planner-resource-view.c:1945
 msgid "(None)"
-msgstr "(bat ere ez)"
+msgstr "(Bat ere ez)"
 
 #: ../src/planner-resource-dialog.c:322
 #: ../src/planner-resource-input-dialog.c:110 ../src/planner-task-dialog.c:381
@@ -1599,7 +1601,7 @@ msgstr "Txertatu baliabide berria"
 
 #: ../src/planner-resource-view.c:233
 msgid "In_sert Resources..."
-msgstr "T_xertatu baliabideak..."
+msgstr "Txertatu _baliabideak..."
 
 #: ../src/planner-resource-view.c:236
 msgid "_Remove Resource"
@@ -1705,7 +1707,7 @@ msgstr "%dSh"
 #: ../src/planner-scale-utils.c:196
 #, c-format
 msgid "%04d, H%d"
-msgstr "%04d, H%d"
+msgstr "%04d, %dSh"
 
 #: ../src/planner-sql-plugin.c:93
 msgid "Open from Database..."
@@ -1733,8 +1735,8 @@ msgid ""
 "Database %s needs to be upgraded from version %s to version %s.\n"
 "Please backup database before the upgrade."
 msgstr ""
-"%s datu-baseak bertsio-berritzea eskatzen du (%s bertsiotik %s bertsiora)\n"
-".Datu-basearen babeskopia egin bertsio-berritu aurretik."
+"%s datu-baseak bertsio-berritzea eskatzen du (%s bertsiotik %s bertsiora).\n"
+"Datu-basearen babeskopia egin bertsio-berritu aurretik."
 
 #: ../src/planner-sql-plugin.c:524
 msgid "Upgrade"
@@ -1750,7 +1752,7 @@ msgid ""
 "%s"
 msgstr ""
 "Ezin izan da %s datu-basea bertsio-berritu.\n"
-"Erabilitako fitxategia bertsio-berritzeko:  %s.\n"
+"Erabilitako fitxategia bertsio-berritzeko: %s.\n"
 "\n"
 "Datu-baseko errorea:\n"
 "%s"
@@ -1763,7 +1765,8 @@ msgstr "Ezin da %s datu-basean taularik sortu"
 #: ../src/planner-sql-plugin.c:648
 #, c-format
 msgid "Database %s is not setup for Planner. Do you want to do that?"
-msgstr "%s datu-basea ez dago Planner-entzako konfiguratua. Hori egitea nahi duzu?"
+msgstr ""
+"%s datu-basea ez dago Planner-entzako konfiguratua. Hori egitea nahi duzu?"
 
 #: ../src/planner-sql-plugin.c:696
 #, c-format
@@ -1972,11 +1975,11 @@ msgstr "Kendu koska zereginari"
 
 #: ../src/planner-task-tree.c:3228
 msgid "Move tasks up"
-msgstr "Eraman zereginak  gora"
+msgstr "Eraman zereginak gora"
 
 #: ../src/planner-task-tree.c:3266
 msgid "Move task up"
-msgstr "Eraman zeregina  gora"
+msgstr "Eraman zeregina gora"
 
 #: ../src/planner-task-tree.c:3355
 msgid "Move tasks down"
@@ -2136,7 +2139,7 @@ msgstr "Itxi uneko fitxategia"
 
 #: ../src/planner-window.c:258
 msgid "_Quit"
-msgstr "Irte_n"
+msgstr "I_rten"
 
 #: ../src/planner-window.c:258
 msgid "Exit the program"
@@ -2180,7 +2183,7 @@ msgstr "_Kudeatu egutegiak"
 
 #: ../src/planner-window.c:286
 msgid "Edit Day _Types"
-msgstr "Editatu Egun-mo_tak"
+msgstr "Editatu egun-mo_tak"
 
 #: ../src/planner-window.c:289
 msgid "Edit Project _Phases"
@@ -2196,11 +2199,11 @@ msgstr "Proiektuaren propietateak editatzen ditu"
 
 #: ../src/planner-window.c:300
 msgid "_Help"
-msgstr "Lag_untza"
+msgstr "_Laguntza"
 
 #: ../src/planner-window.c:303
 msgid "_User Guide"
-msgstr "_Erabiltzailean gida"
+msgstr "_Erabiltzailearen gida"
 
 #: ../src/planner-window.c:303
 msgid "Show the Planner User Guide"
@@ -2234,46 +2237,48 @@ msgstr "Planner fitxategiak"
 #: ../src/planner-window.c:1324 ../src/planner-window.c:1346
 msgid "translator-credits"
 msgstr ""
-"Hizkuntza Politikarako Sailburuordetza\n"
-"(<hizkpol@ej-gv.es>)"
+"Hizkuntza Politikarako Sailburuordetza <hizkpol@ej-gv.es>\n"
+"Iñaki Larrañaga Murgoitio <dooteo@euskalgnu.org>"
 
 #: ../src/planner-window.c:1341
 msgid "A Project Management application for the GNOME desktop"
-msgstr "GNOME mahaigainerako Proiektu Kudeaketako aplikazioa"
+msgstr "Proiektuak kudeaketzeko aplikazioa GNOME mahaigainerako"
 
 #: ../src/planner-window.c:1348
 msgid "The Planner Homepage"
-msgstr "Planner-en etxeko orria"
+msgstr "Planner-en gune nagusia"
 
 #: ../src/planner-window.c:1500
 msgid "If you don't save, changes made the last minute will be discarded."
-msgstr "Ez baduzu gordetzen, azken minutuan egindako aldaketak galdu egingo dira."
+msgstr ""
+"Ez baduzu gordetzen, azken minutuan egindako aldaketak galdu egingo dira."
 
 #: ../src/planner-window.c:1506
 #, c-format
 msgid "If you don't save, changes made the last %d minute will be discarded."
-msgid_plural "If you don't save, changes made the last %d minutes will be discarded."
+msgid_plural ""
+"If you don't save, changes made the last %d minutes will be discarded."
 msgstr[0] ""
-"Ez baduzu gordetzen, azken minutuan (%d) egindako aldaketak galdu "
-"egingo dira."
+"Ez baduzu gordetzen, azken minutuan (%d) egindako aldaketak galdu egingo "
+"dira."
 msgstr[1] ""
-"Ez baduzu gordetzen, azken %d minutuetan egindako aldaketak "
-"galdu egingo dira."
+"Ez baduzu gordetzen, azken %d minutuetan egindako aldaketak galdu egingo "
+"dira."
 
 #: ../src/planner-window.c:1514
 msgid "If you don't save, changes made the last hour will be discarded."
-msgstr "Ez baduzu gordetzen, azken orduan egindako aldaketak galdu egingo dira."
+msgstr ""
+"Ez baduzu gordetzen, azken orduan egindako aldaketak galdu egingo dira."
 
 #: ../src/planner-window.c:1519
 #, c-format
 msgid "If you don't save, changes made the last %d hour will be discarded."
-msgid_plural "If you don't save, changes made the last %d hours will be discarded."
+msgid_plural ""
+"If you don't save, changes made the last %d hours will be discarded."
 msgstr[0] ""
-"Ez baduzu gordetzen, azken orduan (%d) egindako aldaketak "
-"galdu egingo dira."
+"Ez baduzu gordetzen, azken orduan (%d) egindako aldaketak galdu egingo dira."
 msgstr[1] ""
-"Ez baduzu gordetzen, azken %d orduetan egindako aldaketak "
-"galdu egingo dira."
+"Ez baduzu gordetzen, azken %d orduetan egindako aldaketak galdu egingo dira."
 
 #: ../src/planner-window.c:1529
 #, c-format
@@ -2323,7 +2328,7 @@ msgstr ""
 #. Hack.
 #: ../src/planner-window.c:1980
 msgid "Unnamed database project"
-msgstr "Datu-base proiektu izengabea"
+msgstr "Proiektuaren datu-base izengabea"
 
 #: ../src/planner-window.c:2094
 #, c-format
@@ -2348,15 +2353,16 @@ msgstr "Esportatu"
 
 #: ../eds-backend/e-cal-backend-planner.c:289
 msgid "EDS UID"
-msgstr "EDS UID"
+msgstr "EDZ UIDa"
 
 #: ../eds-backend/e-cal-backend-planner.c:290
 msgid "Identifier used by Evolution Data Server for tasks"
-msgstr "Identifikatzailea Evolution Datu-Zerbitzariak zereginentzako erabiltzen duena"
+msgstr ""
+"Identifikatzailea Evolution Datu-Zerbitzariak zereginentzako erabiltzen duena"
 
 #: ../eds-backend/e-cal-backend-planner.c:299
 msgid "EDS Categories"
-msgstr "EDS kategoriak"
+msgstr "EDZ kategoriak"
 
 #: ../eds-backend/e-cal-backend-planner.c:300
 msgid "Categories for a task used by Evolution Data Server"
@@ -2364,7 +2370,7 @@ msgstr "Evolution Datu-Zerbitzariak erabiltzen duen zeregin baten kategoriak"
 
 #: ../eds-backend/e-cal-backend-planner.c:309
 msgid "EDS Classification"
-msgstr "EDS sailkapena"
+msgstr "EDZ sailkapena"
 
 #: ../eds-backend/e-cal-backend-planner.c:310
 msgid "Task access classification used by Evolution Data Server"
@@ -2399,3 +2405,5 @@ msgstr ""
 "Fitxategiaren luzapena ez da planner-ek erabili ohi duena (%s). Jarraitzea "
 "nahi duzu?"
 
+#~ msgid "Optional - overrides resource name in gantt view."
+#~ msgstr "Aukerakoa - gainidatzi baliabide-izena Gantt ikuspegian."
