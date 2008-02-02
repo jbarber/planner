@@ -679,7 +679,8 @@ sql_get_tested_connection (const gchar   *dsn_name,
 			   GdaClient     *client,
 			   PlannerPlugin *plugin) 
 {
-	GdaConnection *conn;
+	GdaConnection *conn = NULL;
+	GdaDataModel  *res = NULL;
 	gchar         *str;
 #ifdef HAVE_GDA2
 	GError        *error;
@@ -707,18 +708,38 @@ sql_get_tested_connection (const gchar   *dsn_name,
 	}
 
 	if (conn != NULL) {
+
+		res = sql_execute_query (conn, "SET TIME ZONE UTC"); 
+		if (res == NULL) {
+			g_warning ("SET TIME ZONE command failed: %s.",
+					sql_get_last_error (conn));
+			goto out;
+		}
+		g_object_unref (res);
+		res = NULL;
+
 		if (!check_database_tables (conn, plugin)) {		
 			str = g_strdup_printf (_("Test to tables in database '%s' failed."), 
 					       db_name);
 			show_error_dialog (plugin, str);
 			g_free (str);
-			gda_connection_close (conn);
-			conn = NULL;	
+			goto out;
 		}
 	}
 
 	/* g_object_unref (client); */
 	return conn;
+
+out:
+	if (res) {
+		g_object_unref (res);
+	}
+
+	if (conn) {
+		gda_connection_close (conn);
+	}
+
+	return NULL;
 }
 
 /**

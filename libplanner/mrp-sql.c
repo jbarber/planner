@@ -2221,6 +2221,15 @@ mrp_sql_load_project (MrpStorageSQL *storage,
 		goto out;
 	}
 
+	res = sql_execute_query (data->con, "SET TIME ZONE UTC"); 
+	if (res == NULL) {
+		g_warning ("SET TIME ZONE command failed: %s.",
+				sql_get_last_error (data->con));
+		goto out;
+	}
+	g_object_unref (res);
+	res = NULL;
+
 	res = sql_execute_query (data->con, "BEGIN");
 	if (res == NULL) {
 		g_warning (_("BEGIN command failed %s."),
@@ -3659,9 +3668,9 @@ mrp_sql_save_project (MrpStorageSQL  *storage,
 	client = gda_client_new ();
 
 #ifdef HAVE_GDA2
-       	data->con = gda_client_open_connection (client, dsn_name, NULL, NULL, 0, error);
+	data->con = gda_client_open_connection (client, dsn_name, NULL, NULL, 0, error);
 #else
-       	data->con = gda_client_open_connection (client, dsn_name, NULL, NULL, 0);
+	data->con = gda_client_open_connection (client, dsn_name, NULL, NULL, 0);
 #endif
 	
 	data->revision = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (data->project), 
@@ -3674,6 +3683,16 @@ mrp_sql_save_project (MrpStorageSQL  *storage,
 			     _("Connection to database '%s' failed."), database);
 		goto out;
 	}
+
+	res = sql_execute_query (data->con, "SET TIME ZONE UTC"); 
+
+	if (res == NULL) {
+		g_warning ("SET TIME ZONE command failed: %s.",
+				sql_get_last_error (data->con));
+		goto out;
+	}
+	g_object_unref (res);
+	res = NULL;
 
 	res = sql_execute_query (data->con, "BEGIN");
 

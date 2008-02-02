@@ -1,3 +1,13 @@
+2008-02-02  Maurice van der Pot  <griffon26@kfk4ever.com>
+
+	* libplanner/mrp-sql.c: (mrp_sql_load_project),
+	(mrp_sql_save_project):
+	* src/planner-sql-plugin.c: (sql_get_tested_connection):
+	Now setting time zone to UTC in all connections to the database, otherwise
+	the database will assume date fields are in local time and mess up the
+	conversion to seconds since epoch. This caused a shift in project_start each
+	time a project was read from the database.
+
 2008-01-29  Kurt Maute  <kurt@maute.us>
 	Patch to correct distcheck error, courtesy of Gilles Dartiguelongue
 	(bug #464359)
