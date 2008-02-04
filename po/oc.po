@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: oc\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-12-27 13:29+0100\n"
+"POT-Creation-Date: 2008-02-02 21:55+0100\n"
 "PO-Revision-Date: 2007-12-29 15:27+0100\n"
 "Last-Translator: Yannig Marchegay (Kokoyaya) <yannig@marchegay.org>\n"
 "Language-Team: Occitan <ubuntu-l10n-oci@lists.ubuntu.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: ../data/glade/add-predecessor.glade.h:1
 msgid "Add Predecessor"
@@ -308,6 +308,7 @@ msgid "Notes"
 msgstr "Nòtas"
 
 #: ../data/glade/resource-dialog.glade.h:7
+#: ../data/glade/resource-input-dialog.glade.h:3
 msgid "Optional - overrides resource name in Gantt view."
 msgstr ""
 
@@ -338,10 +339,6 @@ msgstr ""
 
 #: ../data/glade/resource-input-dialog.glade.h:2
 msgid "Insert Resource"
-msgstr ""
-
-#: ../data/glade/resource-input-dialog.glade.h:3
-msgid "Optional - overrides resource name in gantt view."
 msgstr ""
 
 #: ../data/glade/resource-input-dialog.glade.h:6
@@ -725,19 +722,19 @@ msgstr ""
 "Impossible de se connectar a la basa de donadas '%s'.\n"
 "%s"
 
-#: ../libplanner/mrp-sql.c:2226
+#: ../libplanner/mrp-sql.c:2235
 #, c-format
 msgid "BEGIN command failed %s."
 msgstr ""
 
-#: ../libplanner/mrp-sql.c:2394
+#: ../libplanner/mrp-sql.c:2403
 #, c-format
 msgid ""
 "The project '%s' has been changed by the user '%s' since you opened it. Do "
 "you want to save anyway?"
 msgstr ""
 
-#: ../libplanner/mrp-sql.c:3674
+#: ../libplanner/mrp-sql.c:3683
 #, c-format
 msgid "Connection to database '%s' failed."
 msgstr "Impossible de se connectar a la basa de donadas '%s'."
@@ -924,7 +921,7 @@ msgstr "Disabte"
 
 #: ../src/planner-default-week-dialog.c:48
 msgid "Sunday"
-msgstr "Dimenje"
+msgstr "Dimenge"
 
 #: ../src/planner-default-week-dialog.c:288
 msgid "No working time"
@@ -1705,7 +1702,7 @@ msgstr "Dobrir a partir de la basa de donadas..."
 msgid "Open a project from a database"
 msgstr ""
 
-#: ../src/planner-sql-plugin.c:96 ../src/planner-sql-plugin.c:1152
+#: ../src/planner-sql-plugin.c:96 ../src/planner-sql-plugin.c:1173
 msgid "Save to Database"
 msgstr "Enregistrar dins la basa de donadas"
 
@@ -1748,33 +1745,33 @@ msgstr ""
 msgid "Database %s is not setup for Planner. Do you want to do that?"
 msgstr ""
 
-#: ../src/planner-sql-plugin.c:696
+#: ../src/planner-sql-plugin.c:697
 #, c-format
 msgid "Connection to database '%s@%s' failed."
 msgstr "Impossible de se connectar a la basa de donadas '%s@%s' ."
 
-#: ../src/planner-sql-plugin.c:711
+#: ../src/planner-sql-plugin.c:722
 #, c-format
 msgid "Test to tables in database '%s' failed."
 msgstr ""
 
-#: ../src/planner-sql-plugin.c:816
+#: ../src/planner-sql-plugin.c:837
 msgid "ID"
 msgstr "ID"
 
-#: ../src/planner-sql-plugin.c:824
+#: ../src/planner-sql-plugin.c:845
 msgid "Project"
 msgstr "Projècte"
 
-#: ../src/planner-sql-plugin.c:832
+#: ../src/planner-sql-plugin.c:853
 msgid "Phase"
 msgstr ""
 
-#: ../src/planner-sql-plugin.c:840
+#: ../src/planner-sql-plugin.c:861
 msgid "Revision"
 msgstr "Revision"
 
-#: ../src/planner-sql-plugin.c:1040
+#: ../src/planner-sql-plugin.c:1061
 msgid "Open from Database"
 msgstr "Dobrir a partir de la basa de donadas"
 
@@ -2224,25 +2221,33 @@ msgstr ""
 
 #: ../src/planner-window.c:1500
 msgid "If you don't save, changes made the last minute will be discarded."
-msgstr "S'enregistratz pas, las modificacions de la darrièra minuta seràn anulladas."
+msgstr ""
+"S'enregistratz pas, las modificacions de la darrièra minuta seràn anulladas."
 
 #: ../src/planner-window.c:1506
-#, c-format
+#, fuzzy, c-format
 msgid "If you don't save, changes made the last %d minute will be discarded."
+msgid_plural ""
 "If you don't save, changes made the last %d minutes will be discarded."
-msgstr "S'enregistratz pas, las modificacions de la darrièra %d minuta seràn anulladas."
-"S'enregistratz pas, las modificacions de las darrièras %d minutas seràn anulladas."
+msgstr[0] ""
+"S'enregistratz pas, las modificacions de la darrièra minuta seràn anulladas."
+msgstr[1] ""
+"S'enregistratz pas, las modificacions de la darrièra minuta seràn anulladas."
 
 #: ../src/planner-window.c:1514
 msgid "If you don't save, changes made the last hour will be discarded."
-msgstr "S'enregistratz pas, las modificacions de la darrièra ora seràn anulladas."
+msgstr ""
+"S'enregistratz pas, las modificacions de la darrièra ora seràn anulladas."
 
 #: ../src/planner-window.c:1519
-#, c-format
+#, fuzzy, c-format
 msgid "If you don't save, changes made the last %d hour will be discarded."
+msgid_plural ""
 "If you don't save, changes made the last %d hours will be discarded."
-msgstr "S'enregistratz pas, las modificacions de la darrièra %d ora seràn anulladas."
-"S'enregistratz pas, las modificacions de las darrièras %d oras seràn anulladas."
+msgstr[0] ""
+"S'enregistratz pas, las modificacions de la darrièra ora seràn anulladas."
+msgstr[1] ""
+"S'enregistratz pas, las modificacions de la darrièra ora seràn anulladas."
 
 #: ../src/planner-window.c:1529
 #, c-format
@@ -2352,3 +2357,18 @@ msgid ""
 "s) Do you want to continue?"
 msgstr ""
 
+#~ msgid ""
+#~ "If you don't save, changes made the last %d minute will be discarded.If "
+#~ "you don't save, changes made the last %d minutes will be discarded."
+#~ msgstr ""
+#~ "S'enregistratz pas, las modificacions de la darrièra %d minuta seràn "
+#~ "anulladas.S'enregistratz pas, las modificacions de las darrièras %d "
+#~ "minutas seràn anulladas."
+
+#~ msgid ""
+#~ "If you don't save, changes made the last %d hour will be discarded.If you "
+#~ "don't save, changes made the last %d hours will be discarded."
+#~ msgstr ""
+#~ "S'enregistratz pas, las modificacions de la darrièra %d ora seràn "
+#~ "anulladas.S'enregistratz pas, las modificacions de las darrièras %d oras "
+#~ "seràn anulladas."
