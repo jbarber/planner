@@ -371,7 +371,7 @@ task_class_init (MrpTaskClass *klass)
 		object_class,
 		PROP_SCHED,
 		g_param_spec_enum ("sched",
-				   "Sceduling type",
+				   "Scheduling type",
 				   "Task scheduling type",
 				   MRP_TYPE_TASK_SCHED,
 				   MRP_TASK_SCHED_FIXED_WORK,

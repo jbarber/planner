@@ -1,3 +1,18 @@
+2008-02-09  Maurice van der Pot  <griffon26@kfk4ever.com>
+
+	* libplanner/mrp-task-manager.c:
+	(task_manager_calculate_task_finish),
+	(task_manager_calculate_task_start_from_finish):
+	Don't let fixed duration tasks run during non-working intervals on a working
+	day (such as lunch time). This fixes the incorrect duration of fixed duration 
+	tasks as reported in bug #486990 by Sebastien Roy <sebastien.roy@sun.com>.
+
+	* libplanner/mrp-task.c: (task_class_init): 
+	Fixed typo in property description.
+
+	* src/planner-gantt-row.c: (gantt_row_notify_cb):
+	Allow changes in scheduling mode to update the gantt bar appearance.
+
 2008-02-02  Maurice van der Pot  <griffon26@kfk4ever.com>
 
 	* libplanner/mrp-sql.c: (mrp_sql_load_project),

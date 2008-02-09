@@ -2074,8 +2074,9 @@ gantt_row_notify_cb (MrpTask *task, GParamSpec *pspec, PlannerGanttRow *row)
 	 * it since it's a good optimization.
 	 */
 	else if (strcmp (pspec->name, "critical") != 0 &&
-			 strcmp (pspec->name, "priority") != 0 &&
-			 strcmp (pspec->name, "percent-complete")) {
+		 strcmp (pspec->name, "sched") != 0 &&
+		 strcmp (pspec->name, "priority") != 0 &&
+		 strcmp (pspec->name, "percent-complete")) {
 		return;
 	}
 	

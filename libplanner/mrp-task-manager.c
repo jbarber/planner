@@ -1702,8 +1702,7 @@ task_manager_calculate_task_finish (MrpTaskManager *manager,
 	MrpUnitsInterval   *unit_ival;
 	MrpTaskType         type;
 	MrpTaskSched        sched;
-	
-   
+
 	priv = manager->priv;
 
 	if (task == priv->root) {
@@ -1802,8 +1801,10 @@ task_manager_calculate_task_finish (MrpTaskManager *manager,
 			}
 			else if (sched == MRP_TASK_SCHED_FIXED_DURATION) {
 				delta = t2 - t1;
-				
-				if (effort + delta >= *duration) {
+
+				if (unit_ival->units_full == 0) {
+					delta = 0;
+				} else if (effort + delta >= *duration) {
 					/* Done, make sure we don't spill. */
 					finish = t1 + *duration - effort;
 					goto done;
@@ -1865,7 +1866,7 @@ task_manager_calculate_task_start_from_finish (MrpTaskManager *manager,
 	MrpUnitsInterval   *unit_ival;
 	MrpTaskType         type;
 	MrpTaskSched        sched;
-	
+
 	priv = manager->priv;
 
 	if (task == priv->root) {
@@ -1956,7 +1957,9 @@ task_manager_calculate_task_start_from_finish (MrpTaskManager *manager,
 			else if (sched == MRP_TASK_SCHED_FIXED_DURATION) {
 				delta = t2 - t1;
 				
-				if (effort + delta >= *duration) {
+				if (unit_ival->units_full == 0) {
+					delta = 0;
+				} else if (effort + delta >= *duration) {
 					/* Done, make sure we don't spill. */
 					start = t2 - (*duration - effort);
 					goto done;
