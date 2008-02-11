@@ -452,6 +452,11 @@ planner_sidebar_append (PlannerSidebar *sidebar,
 	GtkWidget          *vbox;
 	GtkWidget          *image;
 
+	AtkObject          *atk_label;
+	AtkRelationSet     *relation_set;
+	AtkRelation        *relation;
+	AtkObject          *targets[1];
+
 	g_return_if_fail (PLANNER_IS_SIDEBAR (sidebar));
 
 	priv = sidebar->priv;
@@ -497,6 +502,16 @@ planner_sidebar_append (PlannerSidebar *sidebar,
 			    FALSE,
 			    TRUE,
 			    6);
+
+	/* Set a LABEL_FOR relation between the label and the button for accessibility */
+	atk_label = gtk_widget_get_accessible (GTK_WIDGET (entry->label));
+	relation_set = atk_object_ref_relation_set (atk_label);
+
+	targets[0] = gtk_widget_get_accessible (GTK_WIDGET (entry->button));
+	relation = atk_relation_new (targets, 1, ATK_RELATION_LABEL_FOR);
+
+	atk_relation_set_add (relation_set, relation);
+	g_object_unref (G_OBJECT (relation));
 }
 
 void
