@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
    <mime-type type="application/x-planner">
+     <sub-class-of type="application/xml"/>
      <_comment>Planner project plan</_comment>
      <magic priority="60">
        <match type="string" value="mrproject-version" offset="20:140"/>
