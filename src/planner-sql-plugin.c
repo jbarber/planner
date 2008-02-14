@@ -51,7 +51,13 @@
 #define CONF_DATABASE "/plugins/sql/database"
 #define CONF_USERNAME "/plugins/sql/username"
 
-#define STOP_ON_ERR GDA_COMMAND_OPTION_STOP_ON_ERRORS
+#if GDA_VERSION >= 30
+#define GDAVALUE GValue
+#define CONNECTION_FORMAT_STRING "HOST=%s;DB_NAME=%s"
+#else
+#define GDAVALUE GdaValue
+#define CONNECTION_FORMAT_STRING "HOST=%s;DATABASE=%s"
+#endif
 
 typedef struct {
 	GtkWidget *open_dialog;
@@ -76,6 +82,8 @@ static void          sql_plugin_save                (GtkAction      *action,
 						     gpointer        user_data);
 static GdaDataModel *sql_execute_query              (GdaConnection  *con,
 						     gchar          *query);
+static gboolean      sql_execute_command            (GdaConnection  *con,
+						     gchar          *command);
 static const gchar * sql_get_last_error             (GdaConnection  *connection);
 void                 plugin_init                    (PlannerPlugin  *plugin,
 						     PlannerWindow  *main_window);
@@ -98,20 +106,84 @@ static const GtkActionEntry entries[] = {
 	  G_CALLBACK (sql_plugin_save) }
 };
 
-/**
- * Helper to execute a SQL query using GDA
+#if GDA_VERSION >= 30
+
+static gboolean 
+sql_execute_command (GdaConnection *con, gchar *command)
+{
+	GdaCommand *cmd;
+	GList      *list;
+	GError     *error = NULL;
+	
+	cmd = gda_command_new (command, GDA_COMMAND_TYPE_SQL, GDA_COMMAND_OPTION_STOP_ON_ERRORS);
+	list = gda_connection_execute_command (con, cmd, NULL, &error);
+	gda_command_free (cmd);
+
+	while (list) {
+		if (list->data) {
+			g_object_unref (list->data);
+		}
+		list = list->next;
+	}
+	g_list_free (list);
+
+	if(error != NULL) {
+		g_error_free (error);
+		return FALSE;
+	}
+	else
+	{
+		return TRUE;
+	}
+}
+
+static GdaDataModel *
+sql_execute_query (GdaConnection *con, gchar *query)
+{
+	GdaCommand    *cmd;
+	GdaDataModel  *result;
+
+	cmd = gda_command_new (query, GDA_COMMAND_TYPE_SQL, GDA_COMMAND_OPTION_STOP_ON_ERRORS);
+	result = gda_connection_execute_select_command (con, cmd, NULL, NULL);
+	gda_command_free (cmd);
+
+	return result;
+}
+
+#else 
+
+/* The two functions below support libgda older than 3.0.  
+ * Once older libgda versions have been phased out, we should 
+ * remove the #if..#else and just use the ones above.
  */
+
+static gboolean 
+sql_execute_command (GdaConnection *con, gchar *command)
+{
+	GdaDataModel *res;
+
+	res = sql_execute_query (con, command);
+
+	if(res != NULL)	{
+		g_object_unref (res);
+		res = NULL;
+		return TRUE;
+	} else {
+		return FALSE;
+	}
+}
+
 static GdaDataModel *
 sql_execute_query (GdaConnection *con, gchar *query)
 {
 	GdaCommand   *cmd;
 	GdaDataModel *res;
-#ifdef HAVE_GDA2
+#if GDA_VERSION >= 20
        	GError       *error; 
 #endif
 
-	cmd = gda_command_new (query, GDA_COMMAND_TYPE_SQL, STOP_ON_ERR);
-#ifdef HAVE_GDA2
+	cmd = gda_command_new (query, GDA_COMMAND_TYPE_SQL, GDA_COMMAND_OPTION_STOP_ON_ERRORS);
+#if GDA_VERSION >=20
 	res = gda_connection_execute_single_command  (con, cmd, NULL, &error);
 #else
 	res = gda_connection_execute_single_command  (con, cmd, NULL);
@@ -121,13 +193,18 @@ sql_execute_query (GdaConnection *con, gchar *query)
 	return res;
 }
 
+#endif
+
 static const gchar *
 sql_get_last_error (GdaConnection *connection)
 {
-#ifdef HAVE_GDA2
-	GList       *list;
-	GdaConnectionEvent    *error;
-	const gchar *error_txt;
+#if GDA_VERSION >= 20
+	GList              *list;
+	GdaConnectionEvent *error;
+	const gchar        *error_txt;
+
+	g_return_val_if_fail (GDA_IS_CONNECTION (connection), 
+			      _("Can't connect to database server"));
 
 	list = (GList *) gda_connection_get_events (connection);
 
@@ -143,6 +220,9 @@ sql_get_last_error (GdaConnection *connection)
 	GList       *list;
 	GdaError    *error;
 	const gchar *error_txt;
+
+	g_return_val_if_fail (GDA_IS_CONNECTION (connection), 
+			      _("Can't connect to database server"));
 
 	list = (GList *) gda_connection_get_errors (connection);
 
@@ -167,10 +247,10 @@ static gint
 get_int (GdaDataModel *res, gint row, gint column)
 {
 	gchar    *str;
-	GdaValue *value;
+	GDAVALUE *value;
 	gint      i;
 
-	value = (GdaValue *) gda_data_model_get_value_at (res, column, row);
+	value = (GDAVALUE *) gda_data_model_get_value_at (res, column, row);
 	if (value == NULL) {
 		g_warning ("Failed to get a value: (%d,%d)", column, row);
 		return INT_MAX;
@@ -192,9 +272,9 @@ get_string (GdaDataModel *res, gint row, gint column)
 	gchar    *str;
 	gchar    *ret;
 	gsize     len;
-	GdaValue *value;
+	GDAVALUE *value;
 	
-	value = (GdaValue *) gda_data_model_get_value_at (res, column, row);
+	value = (GDAVALUE *) gda_data_model_get_value_at (res, column, row);
 	if (value == NULL) {
 		g_warning ("Failed to get a value: (%d,%d)", column, row);
 		return "";
@@ -385,9 +465,10 @@ check_database_tables (GdaConnection *conn,
 		       PlannerPlugin *plugin)
 {
 	GtkWindow    *window;
-	GdaDataModel *res;
+	GdaDataModel *model;
 	GtkWidget    *dialog;
 	gint          result;
+	gboolean      success;
 	GDir*         dir;
 	const gchar  *name;
 	gboolean      upgradable = FALSE;
@@ -409,17 +490,17 @@ check_database_tables (GdaConnection *conn,
 	window = GTK_WINDOW (plugin->main_window);
 
 	/* Try to get the database version */
-	res = sql_execute_query (conn, "SELECT value FROM property_global WHERE prop_name='database_version'");		
-	if (res == NULL) {
+	model = sql_execute_query (conn, "SELECT value FROM property_global WHERE prop_name='database_version'");		
+	if (model == NULL) {
 		create_tables = TRUE;
 	} else {
 		create_tables = FALSE;
-		database_version = get_string (res, 0, 0);
+		database_version = get_string (model, 0, 0);
 		g_message ("Database version : %s", database_version);
 		if (database_version == NULL) {
 			database_version = VERSION;
 		}
-		g_object_unref (res);
+		g_object_unref (model);
 	}
 
 	/* Check for tables */
@@ -528,9 +609,9 @@ check_database_tables (GdaConnection *conn,
 		gtk_widget_destroy (dialog);
 		if (result == GTK_RESPONSE_YES) {
 			g_file_get_contents (upgrade_file, &contents, NULL, NULL);
-			res = sql_execute_query (conn, contents);
+			success = sql_execute_command (conn, contents);
 			g_free (contents);
-			if (res == NULL) {
+			if (!success) {
 				dialog = gtk_message_dialog_new (window,
 								 GTK_DIALOG_DESTROY_WITH_PARENT,
 								 GTK_MESSAGE_WARNING,
@@ -546,12 +627,11 @@ check_database_tables (GdaConnection *conn,
 			} else {
 				gchar *query;
 
-				sql_execute_query (conn, "DELETE * FROM property_global WHERE prop_name='database_version'");
+				sql_execute_command (conn, "DELETE * FROM property_global WHERE prop_name='database_version'");
 				query = g_strdup_printf ("INSERT INTO property_global (prop_name, value) VALUES ('database_version','%s')", max_version_upgrade); 
 
-				sql_execute_query (conn, query);
+				sql_execute_command (conn, query);
 				g_free (query);
-				g_object_unref (res);
 				retval = TRUE;
 			}
 		} else {
@@ -569,9 +649,9 @@ check_database_tables (GdaConnection *conn,
 		gchar  *contents;
 
 		g_file_get_contents (database_file, &contents, NULL, NULL);
-		res = sql_execute_query (conn, contents);
+		success = sql_execute_command (conn, contents);
 		g_free (contents);
-		if (res == NULL) {
+		if (!success) {
 			dialog = gtk_message_dialog_new (window,
 							 GTK_DIALOG_DESTROY_WITH_PARENT,
 							 GTK_MESSAGE_WARNING,
@@ -587,9 +667,8 @@ check_database_tables (GdaConnection *conn,
 			
 			query = g_strdup_printf ("INSERT INTO property_global (prop_name, value) VALUES ('database_version','%s')", max_version_database); 
 			
-			sql_execute_query (conn, query);
+			sql_execute_command (conn, query);
 			g_free (query);
-			g_object_unref (res);
 			retval = TRUE;
 		}
 		g_free (database_file);
@@ -618,7 +697,7 @@ create_database (const gchar   *dsn_name,
 	/* FIXME: In postgresql we use template1 as the connection database */
 	gchar             *init_database = "template1";
 	gchar             *query;
-#ifdef HAVE_GDA2
+#if GDA_VERSION >= 20
 	GError            *error;
 #endif
 
@@ -629,11 +708,11 @@ create_database (const gchar   *dsn_name,
 	window = GTK_WINDOW (plugin->main_window);
 
 	/* Use same data but changing the database */
-	dsn->cnc_string = g_strdup_printf ("HOST=%s;DATABASE=%s", host, init_database); 
+	dsn->cnc_string = g_strdup_printf (CONNECTION_FORMAT_STRING, host, init_database); 
 	gda_config_save_data_source_info (dsn);
 
 	client = gda_client_new ();
-#ifdef HAVE_GDA2
+#if GDA_VERSION >= 20
 	conn = gda_client_open_connection (client, dsn_name, NULL, NULL, 0, &error);
 #else
 	conn = gda_client_open_connection (client, dsn_name, NULL, NULL, 0);
@@ -655,7 +734,7 @@ create_database (const gchar   *dsn_name,
 		if (result == GTK_RESPONSE_YES) {
 			query = g_strdup_printf ("CREATE DATABASE %s WITH ENCODING = 'UTF8'", 
 						 db_name); 
-			sql_execute_query (conn, query);
+			sql_execute_command (conn, query);
 			g_free (query);
 			retval = TRUE;
 		} else {
@@ -680,13 +759,13 @@ sql_get_tested_connection (const gchar   *dsn_name,
 			   PlannerPlugin *plugin) 
 {
 	GdaConnection *conn = NULL;
-	GdaDataModel  *res = NULL;
+	gboolean       success;
 	gchar         *str;
-#ifdef HAVE_GDA2
+#if GDA_VERSION >= 20
 	GError        *error;
 #endif
 
-#ifdef HAVE_GDA2
+#if GDA_VERSION >= 20
 	conn = gda_client_open_connection (client, dsn_name, NULL, NULL, 0, &error);
 #else
 	conn = gda_client_open_connection (client, dsn_name, NULL, NULL, 0 );
@@ -699,7 +778,7 @@ sql_get_tested_connection (const gchar   *dsn_name,
 			show_error_dialog (plugin, str);
 			conn = NULL;
 		} else {
-#ifdef HAVE_GDA2
+#if GDA_VERSION >= 20
 			conn = gda_client_open_connection (client, dsn_name, NULL, NULL, 0, &error);
 #else
 			conn = gda_client_open_connection (client, dsn_name, NULL, NULL, 0 );
@@ -709,14 +788,12 @@ sql_get_tested_connection (const gchar   *dsn_name,
 
 	if (conn != NULL) {
 
-		res = sql_execute_query (conn, "SET TIME ZONE UTC"); 
-		if (res == NULL) {
+		success = sql_execute_command (conn, "SET TIME ZONE UTC"); 
+		if (!success) {
 			g_warning ("SET TIME ZONE command failed: %s.",
 					sql_get_last_error (conn));
 			goto out;
 		}
-		g_object_unref (res);
-		res = NULL;
 
 		if (!check_database_tables (conn, plugin)) {		
 			str = g_strdup_printf (_("Test to tables in database '%s' failed."), 
@@ -731,10 +808,6 @@ sql_get_tested_connection (const gchar   *dsn_name,
 	return conn;
 
 out:
-	if (res) {
-		g_object_unref (res);
-	}
-
 	if (conn) {
 		gda_connection_close (conn);
 	}
@@ -755,7 +828,8 @@ sql_plugin_retrieve_project_id (PlannerPlugin *plugin,
 				gchar         *password)
 {
 	GdaConnection     *conn;
-	GdaDataModel      *res;
+	GdaDataModel      *model;
+	gboolean           success;
 	GdaClient         *client;
 	GladeXML          *gui;
 	GtkWidget         *dialog;
@@ -774,8 +848,8 @@ sql_plugin_retrieve_project_id (PlannerPlugin *plugin,
 	const gchar       *provider = "PostgreSQL";
 	gchar             *filename;
 
-	db_txt = g_strdup_printf ("HOST=%s;DATABASE=%s",server,database);
-#ifdef HAVE_GDA2
+	db_txt = g_strdup_printf (CONNECTION_FORMAT_STRING,server,database);
+#if GDA_VERSION >= 20
 	gda_config_save_data_source (dsn_name, 
                                      provider, 
                                      db_txt,
@@ -795,27 +869,24 @@ sql_plugin_retrieve_project_id (PlannerPlugin *plugin,
 		return -1;
 	}
 
-	res = sql_execute_query (conn, "BEGIN");
-	if (res == NULL) {
+	success = sql_execute_command (conn, "BEGIN");
+	if (!success) {
 		g_warning ("BEGIN command failed.");
 		return -1;
 	}
-	g_object_unref (res);
 
-	res = sql_execute_query (conn,
-				 "DECLARE mycursor CURSOR FOR SELECT proj_id, name,"
-				 "phase, revision FROM project ORDER by proj_id ASC");
+	success = sql_execute_command (conn,
+				       "DECLARE mycursor CURSOR FOR SELECT proj_id, name,"
+				       "phase, revision FROM project ORDER by proj_id ASC");
 
-	if (res == NULL) {
+	if (!success) {
 		g_warning ("DECLARE CURSOR command failed (project).");
 		return -1;
 	}
-	g_object_unref (res);
-	
 
-	res = sql_execute_query (conn, "FETCH ALL in mycursor");
+	model = sql_execute_query (conn, "FETCH ALL in mycursor");
 
-	if (res == NULL) {
+	if (model == NULL) {
 		g_warning ("FETCH ALL failed.");
 		return -1;
 	}
@@ -880,16 +951,16 @@ sql_plugin_retrieve_project_id (PlannerPlugin *plugin,
 			  G_CALLBACK (row_activated_cb),
 			  ok_button);
 	
-	for (i = 0; i < gda_data_model_get_n_rows (res); i++) {
+	for (i = 0; i < gda_data_model_get_n_rows (model); i++) {
 		gint   id;
 		gchar *name;
 		gchar *phase;
 		gint   revision;
 		
-		id = get_int (res, i, 0);
-		name = get_string (res, i, 1);
-		phase = get_string (res, i, 2);
-		revision = get_int (res, i, 3);
+		id = get_int (model, i, 0);
+		name = get_string (model, i, 1);
+		phase = get_string (model, i, 2);
+		revision = get_int (model, i, 3);
 
 		/* FIXME: needs fixing in the database backend. */
 		if (strcmp (phase, "NULL") == 0) {
@@ -910,15 +981,13 @@ sql_plugin_retrieve_project_id (PlannerPlugin *plugin,
 		g_free (phase);
 	}
 
-	if (gda_data_model_get_n_columns (res) == 0) {
+	if (gda_data_model_get_n_columns (model) == 0) {
 		gtk_widget_set_sensitive (ok_button, FALSE);
 	}
 	
-	g_object_unref (res);
+	g_object_unref (model);
 
-	res = sql_execute_query (conn,"CLOSE mycursor");
-	
-	g_object_unref (res);
+	sql_execute_command (conn,"CLOSE mycursor");
 	
 	gtk_widget_show_all (dialog);
 	response = gtk_dialog_run (GTK_DIALOG (dialog));
@@ -1179,8 +1248,8 @@ sql_plugin_save (GtkAction *action,
 		return;
 	}
 
-	db_txt = g_strdup_printf ("HOST=%s;DATABASE=%s",server,database);
-#ifdef HAVE_GDA2
+	db_txt = g_strdup_printf (CONNECTION_FORMAT_STRING,server,database);
+#if GDA_VERSION >= 20
 	gda_config_save_data_source (dsn_name, 
                                      provider, 
                                      db_txt,
@@ -1269,6 +1338,8 @@ plugin_init (PlannerPlugin *plugin,
 	GtkUIManager   *ui;
 	gint            i = -1;
 	gchar          *filename;
+
+	gda_init (PACKAGE, VERSION, 0, NULL);
 	
 	priv = g_new0 (SQLPluginPriv, 1);
 

@@ -91,7 +91,7 @@ libstorage_sql_la_SOURCES = 			\
 	mrp-sql.h
 
 libstorage_sql_la_LDFLAGS =  -avoid-version -module
-libstorage_sql_la_CFLAGS = $(GDA_CFLAGS) 
+libstorage_sql_la_CFLAGS = $(GDA_CFLAGS) -DGDA_VERSION=@GDA_VER@
 libstorage_sql_la_LIBADD =  $(GDA_LIBS) libplanner-1.la
 endif
 

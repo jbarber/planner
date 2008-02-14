@@ -169,7 +169,7 @@ if HAVE_GDA
 sql_plugin = libsql-plugin.la
 libsql_plugin_la_SOURCES = planner-sql-plugin.c
 libsql_plugin_la_LIBADD =  $(GDA_LIBS)
-libsql_plugin_la_CFLAGS = $(GDA_CFLAGS)
+libsql_plugin_la_CFLAGS = $(GDA_CFLAGS) -DGDA_VERSION=@GDA_VER@
 libsql_plugin_la_LDFLAGS = -avoid-version -module
 endif
 

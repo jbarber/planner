@@ -1,3 +1,33 @@
+2008-02-14  Maurice van der Pot  <griffon26@kfk4ever.com>
+
+	* configure.in:
+	* libplanner/Makefile.am:
+	* libplanner/mrp-sql.c: (sql_execute_command), (sql_execute_query),
+	(sql_get_last_error), (get_int), (get_id), (get_string),
+	(get_boolean), (get_float), (is_field), (get_inserted_id),
+	(mrp_sql_init), (sql_read_project), (sql_read_phases),
+	(sql_read_property_specs), (sql_read_property_values),
+	(sql_read_overriden_day_types), (sql_read_overriden_days),
+	(sql_read_day_types), (sql_read_calendars), (sql_read_groups),
+	(sql_read_resources), (sql_read_assignments), (sql_read_relations),
+	(sql_read_tasks), (mrp_sql_load_project), (sql_write_project),
+	(sql_write_phases), (sql_write_phase), (sql_write_property_specs),
+	(sql_write_property_values), (sql_write_day_types),
+	(sql_write_overridden_day_type), (sql_write_overridden_dates),
+	(sql_write_calendars_recurse), (sql_write_calendar_id),
+	(sql_write_groups), (sql_write_default_group_id),
+	(sql_write_resources), (sql_write_tasks), (mrp_sql_save_project):
+	* libplanner/mrp-sql.h:
+	* libplanner/mrp-storage-sql.c: (storage_sql_init):
+	* src/Makefile.am:
+	* src/planner-sql-plugin.c: (sql_execute_command),
+	(sql_execute_query), (sql_get_last_error), (get_int), (get_string),
+	(check_database_tables), (create_database),
+	(sql_get_tested_connection), (sql_plugin_retrieve_project_id),
+	(sql_plugin_save), (plugin_init):
+	Added support for libgda 3 as requested by Martin-Éric Racine
+	<q-funk@iki.fi> in bug #511833.
+
 2008-02-11  Maurice van der Pot  <griffon26@kfk4ever.com>
 
 	* src/planner-sidebar.c: (planner_sidebar_append):

@@ -25,6 +25,8 @@
 
 #include "mrp-storage-sql.h"
 
+void     mrp_sql_init         (void);
+
 gboolean mrp_sql_load_project (MrpStorageSQL  *storage,
 			       const gchar    *host,
 			       const gchar    *port,

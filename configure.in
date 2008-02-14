@@ -83,22 +83,27 @@ dnl  -----------
 AC_ARG_ENABLE(database, [  --enable-database=[no/yes]      enable database support [default=no]], enable_database="$enableval", enable_database=no)
 
 if test "x$enable_database" = "xyes" ; then
-    PKG_CHECK_MODULES(GDA, libgda >= 1.0)
+
+    PKG_CHECK_MODULES(GDA, libgda-3.0 >= 1.0,
+    [
+      GDA_VER=30
+    ],
+    [
+      PKG_CHECK_MODULES(GDA, libgda-2.0 >= 1.0,
+      [
+        GDA_VER=20
+      ],
+      [
+        PKG_CHECK_MODULES(GDA, libgda >= 1.0)
+        GDA_VER=10
+      ])
+    ])
     use_gda=yes
 else
     use_gda=no
 fi
-
+AC_SUBST(GDA_VER)
 AM_CONDITIONAL(HAVE_GDA, test x$use_gda = xyes)
-
-if test "x$enable_database" = "xyes" ; then
-    PKG_CHECK_MODULES(GDA, libgda-2.0 >= 1.0)
-    have_gda2=yes
-else
-    have_gda2=no
-fi
-
-AM_CONDITIONAL(HAVE_GDA2, test x$have_gda2 = xyes)
 dnl -----------------------------------------------------------
 
 

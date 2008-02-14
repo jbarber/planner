@@ -77,6 +77,7 @@ mrp_storage_sql_register_type (GTypeModule *module)
 static void
 storage_sql_init (MrpStorageSQL *storage)
 {
+	mrp_sql_init();
 }
 
 static void
