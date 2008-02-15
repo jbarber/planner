@@ -1,5 +1,12 @@
 2008-02-15  Maurice van der Pot  <griffon26@kfk4ever.com>
 
+	* src/planner-task-tree.c: (planner_task_tree_indent_task),
+	(planner_task_tree_unindent_task),
+	(planner_task_tree_move_task_up):
+	Keep selection as much as possible when indenting and unindenting.
+
+2008-02-15  Maurice van der Pot  <griffon26@kfk4ever.com>
+
 	* src/eel-canvas-rect.c: (eel_canvas_rect_bounds):
 	* src/planner-gantt-chart.c: (gantt_chart_map),
 	(gantt_chart_size_allocate), (gantt_chart_reflow_idle),

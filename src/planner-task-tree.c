@@ -3056,20 +3056,22 @@ planner_task_tree_indent_task (PlannerTaskTree *tree)
 		}
 	}
 
-	path = planner_gantt_model_get_path_from_task (PLANNER_GANTT_MODEL (model), 
-						       indent_tasks->data);
-
 	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (tree));
-	gtk_tree_selection_select_path (selection, path);
-	task_tree_unblock_selection_changed (tree);
+	gtk_tree_selection_unselect_all(selection);
+	for (l = indent_tasks; l; l = l->next) {
+		task = l->data;
 
-	gtk_tree_path_free (path);
+		path = planner_gantt_model_get_path_from_task (model, task);
+		gtk_tree_selection_select_path (selection, path);
+		gtk_tree_path_free (path);
+	}
 
 	if (many) {
 		planner_cmd_manager_end_transaction (
 			planner_window_get_cmd_manager (priv->main_window));
 	}
 	
+	task_tree_unblock_selection_changed (tree);
 	g_list_free (indent_tasks);
 }
 
@@ -3156,20 +3158,22 @@ planner_task_tree_unindent_task (PlannerTaskTree *tree)
 			       NULL);
 	}
 
-	path = planner_gantt_model_get_path_from_task (PLANNER_GANTT_MODEL (model), 
-						       unindent_tasks->data);
-
 	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (tree));
-	gtk_tree_selection_select_path (selection, path);
-	task_tree_unblock_selection_changed (tree);
+	gtk_tree_selection_unselect_all(selection);
+	for (l = unindent_tasks; l; l = l->next) {
+		task = l->data;
 
-	gtk_tree_path_free (path);
+		path = planner_gantt_model_get_path_from_task (model, task);
+		gtk_tree_selection_select_path (selection, path);
+		gtk_tree_path_free (path);
+	}
 
 	if (many) {
 		planner_cmd_manager_end_transaction (
 			planner_window_get_cmd_manager (priv->main_window));
 	}
-	
+
+	task_tree_unblock_selection_changed (tree);
 	g_list_free (unindent_tasks);
 }
 
@@ -3290,9 +3294,8 @@ planner_task_tree_move_task_up (PlannerTaskTree *tree)
 			planner_window_get_cmd_manager (priv->main_window));
 	}
 	
-	g_list_free (list);
-
 	task_tree_unblock_selection_changed (tree);
+	g_list_free (list);
 }
 
 void 
