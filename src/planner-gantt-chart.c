@@ -181,7 +181,6 @@ static void        gantt_chart_task_removed             (MrpTask            *tas
 static void        gantt_chart_build_tree               (PlannerGanttChart  *chart);
 static void        gantt_chart_reflow                   (PlannerGanttChart  *chart,
 							 gboolean            height_changed);
-static void        gantt_chart_reflow_now               (PlannerGanttChart  *chart);
 static TreeNode *  gantt_chart_insert_task              (PlannerGanttChart  *chart,
 							 GtkTreePath        *path,
 							 MrpTask            *task);
@@ -190,6 +189,11 @@ gantt_chart_add_relation                                (PlannerGanttChart  *cha
 							 TreeNode           *task,
 							 TreeNode           *predecessor,
 							 MrpRelationType     type);
+static void        gantt_chart_get_visible_region       (PlannerGanttChart *chart,
+							 gdouble            *x1,
+							 gdouble            *y1,
+							 gdouble            *x2,
+							 gdouble            *y2);
 static void        gantt_chart_set_scroll_region        (PlannerGanttChart  *chart,
 							 gdouble             x1,
 							 gdouble             y1,
@@ -572,7 +576,7 @@ gantt_chart_map (GtkWidget *widget)
 	}
 
 	chart->priv->height_changed = TRUE;
-	gantt_chart_reflow_now (chart);
+	planner_gantt_chart_reflow_now (chart);
 }
 
 static void
@@ -592,7 +596,7 @@ gantt_chart_size_allocate (GtkWidget     *widget,
 	 * jumping around.
 	 */
 	if (GTK_WIDGET_MAPPED (chart)) {
-		gantt_chart_reflow_now (chart);
+		planner_gantt_chart_reflow_now (chart);
 	}
 }
 
@@ -963,6 +967,7 @@ gantt_chart_reflow_idle (PlannerGanttChart *chart)
 	PlannerGanttChartPriv *priv;
 	mrptime                t1, t2;
 	gdouble                x1, y1, x2, y2;
+	gdouble                vx1, vy1, vx2, vy2;
 	gdouble                width, height;
 	gdouble                bx1, bx2;
 	GtkAllocation          allocation;
@@ -1001,11 +1006,16 @@ gantt_chart_reflow_idle (PlannerGanttChart *chart)
 
 	/* Put some padding after the right-most coordinate. */
 	bx2 += PADDING;
-		
+
 	width = MAX (width, bx2 - bx1);
 
 	x2 = x1 + width;
-	
+
+	gantt_chart_get_visible_region(chart, &vx1, &vy1, &vx2, &vy2);
+
+	x2 = MAX (x2, vx2);
+	y2 = MAX (y2, vy2);
+
 	gantt_chart_set_scroll_region (chart,
 				       x1,
 				       y1,
@@ -1025,8 +1035,8 @@ gantt_chart_reflow_idle (PlannerGanttChart *chart)
 	return FALSE;
 }
 
-static void
-gantt_chart_reflow_now (PlannerGanttChart *chart)
+void
+planner_gantt_chart_reflow_now (PlannerGanttChart *chart)
 {
 	if (!GTK_WIDGET_MAPPED (chart)) {
 		return;
@@ -1199,7 +1209,7 @@ gantt_chart_project_start_changed (MrpProject   *project,
 		      "project-start", t,
 		      NULL);
 	
-	gantt_chart_reflow_now (chart);
+	planner_gantt_chart_reflow_now (chart);
 }
 
 static void
@@ -1521,7 +1531,7 @@ planner_gantt_chart_set_model (PlannerGanttChart *chart,
 		 * start-up .
 		 */
 		priv->height_changed = TRUE;
-		gantt_chart_reflow_now (chart);
+		planner_gantt_chart_reflow_now (chart);
 	}
 	
 	g_object_notify (G_OBJECT (chart), "model");
@@ -1661,6 +1671,25 @@ gantt_chart_tree_traverse (TreeNode *node, TreeFunc func, gpointer data)
 }
 
 static void
+gantt_chart_get_visible_region (PlannerGanttChart *chart,
+			       gdouble            *x1,
+			       gdouble            *y1,
+			       gdouble            *x2,
+			       gdouble            *y2)
+{
+	GnomeCanvas *canvas;
+	gint cx, cy;
+	
+	canvas = chart->priv->canvas;
+
+	gnome_canvas_get_scroll_offsets(canvas, &cx, &cy);
+	gnome_canvas_c2w(canvas, cx, cy, x1, y1);
+
+	*x2 = *x1 + GTK_WIDGET(canvas)->allocation.width;
+	*y2 = *y1 + GTK_WIDGET(canvas)->allocation.height;
+}
+
+static void
 gantt_chart_set_scroll_region (PlannerGanttChart *chart,
 			       gdouble            x1,
 			       gdouble            y1,
@@ -1750,7 +1779,7 @@ gantt_chart_set_zoom (PlannerGanttChart *chart, gdouble zoom)
 			       "zoom", priv->zoom,
 			       NULL);
 
-	gantt_chart_reflow_now (chart);
+	planner_gantt_chart_reflow_now (chart);
 }
 
 static mrptime 

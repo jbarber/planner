@@ -82,6 +82,7 @@ void             planner_gantt_chart_status_updated   (PlannerGanttChart *chart,
 						       const gchar       *message);
 void             planner_gantt_chart_resource_clicked (PlannerGanttChart *chart,
 						       MrpResource       *resource);
+void             planner_gantt_chart_reflow_now       (PlannerGanttChart *chart);
 
 void
 planner_gantt_chart_set_highlight_critical_tasks      (PlannerGanttChart  *chart,

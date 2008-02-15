@@ -281,6 +281,17 @@ static gchar                 complete_stipple_pattern[] = { 0x02, 0x01 };
 static GdkBitmap            *break_stipple = NULL;
 static gchar                 break_stipple_pattern[] = { 0x03 };
 
+/* Data related to dragging items */
+static GnomeCanvasItem   *drag_item;
+static gdouble            drag_item_wx_min;
+static gdouble            drag_item_wx_max;
+static gdouble            drag_item_wy_min;
+static gdouble            drag_item_wy_max;
+static gdouble            drag_wx1, drag_wy1;
+static GnomeCanvasPoints *drag_points = NULL;
+static GnomeCanvasItem   *target_item;
+static GnomeCanvasItem   *old_target_item;
+
 GType
 planner_gantt_row_get_type (void)
 {
@@ -2282,45 +2293,197 @@ gantt_row_disconnect_all_resources (MrpTask *task, PlannerGanttRow *row)
 	g_list_free (resources);
 }
 
-static gboolean
-gantt_row_scroll_timeout_cb (PlannerGanttRow *row)
+static gboolean 
+gantt_row_drag_item_to_pointer (PlannerGanttRow *row, gboolean scroll)
 {
-	GtkWidget *widget;
+	PlannerGanttChart *chart;
+	GnomeCanvas *canvas;
 	gint       width, height;
-	gint       x, y, dx = 0, dy = 0;
+	gint       x, y, item_cx, item_cy;
+	gint       cx, cy;
+	gdouble    wx2, wy2;
+	gint dx, dy;
 
-	widget = GTK_WIDGET (GNOME_CANVAS_ITEM (row)->canvas);
+	gint         duration;
+	gint         work;
+	MrpProject  *project;
+	gchar       *message;
+
+	gint        percent_complete;
+
+	canvas = GNOME_CANVAS_ITEM (row)->canvas;
+	chart = g_object_get_data (G_OBJECT (GNOME_CANVAS_ITEM (row)->canvas), "chart");
+
 	
 	/* Get the current mouse position so that we can decide if the pointer
 	 * is inside the viewport.
 	 */
-	gdk_window_get_pointer (widget->window, &x, &y, NULL);
+	gdk_window_get_pointer (GTK_WIDGET(canvas)->window, &x, &y, NULL);
 
-	width = widget->allocation.width;
-	height = widget->allocation.height;
+	gnome_canvas_get_scroll_offsets (canvas, &cx, &cy);
+
+	width = GTK_WIDGET(canvas)->allocation.width;
+	height = GTK_WIDGET(canvas)->allocation.height;
+
+	if(!scroll)
+	{
+		x = CLAMP(x, 0, width - 1);
+		y = CLAMP(y, 0, height - 1);
+	}
+
+	gnome_canvas_c2w (canvas, cx + x, cy + y, &wx2, &wy2);
+
+  	if(drag_item_wx_min != -1.0) wx2 = MAX(wx2, drag_item_wx_min);
+  	if(drag_item_wx_max != -1.0) wx2 = MIN(wx2, drag_item_wx_max);
+  	if(drag_item_wy_min != -1.0) wy2 = MAX(wy2, drag_item_wy_min);
+  	if(drag_item_wy_max != -1.0) wy2 = MIN(wy2, drag_item_wy_max);
+
+	switch(row->priv->state)
+	{
+	case STATE_DRAG_DURATION:
+
+		project = mrp_object_get_project (MRP_OBJECT (row->priv->task));
+
+		duration = MAX (0, (wx2 - row->priv->x_start) / row->priv->scale);
+
+		/* Snap to quarters. */
+		duration = floor (duration / SNAP + 0.5) * SNAP;
+
+		work = mrp_project_calculate_task_work (
+			project,
+			row->priv->task,
+			-1,
+			mrp_task_get_start (row->priv->task) + duration);
+
+		message = g_strdup_printf (_("Change work to %s"),
+					   planner_format_duration (project, work));
+		planner_gantt_chart_status_updated (chart, message);
+		g_free (message);
+
+		gnome_canvas_item_set (drag_item,
+				       "x2", wx2,
+				       NULL);
+		break;
+
+	case STATE_DRAG_COMPLETE:
+		percent_complete = floor ((CLAMP(wx2 - row->priv->x, 0, row->priv->width) * 100.0) / row->priv->width + 0.5);
+		message = g_strdup_printf (_("Change progress to %u%% complete"), percent_complete);
+		planner_gantt_chart_status_updated (chart, message);
+		g_free (message);
+
+		gnome_canvas_item_set (drag_item,
+				       "x2", wx2,
+				       NULL);
+		break;
+	case STATE_DRAG_LINK:
+		target_item = gnome_canvas_get_item_at (canvas, wx2, wy2);
+		
+		drag_points->coords[0] = drag_wx1;
+		drag_points->coords[1] = drag_wy1;
+		drag_points->coords[2] = wx2;
+		drag_points->coords[3] = wy2;
+	
+		gnome_canvas_item_set (drag_item,
+				       "points", drag_points,
+				       NULL);
+		
+		if (old_target_item && old_target_item != target_item) {
+			g_object_set (old_target_item,
+				      "highlight",
+				      FALSE,
+				      NULL);
+		}
+		
+		if (target_item && target_item != GNOME_CANVAS_ITEM(row)) {
+			const gchar *task_name, *target_name;
+			
+			g_object_set (target_item,
+				      "highlight",
+				      TRUE,
+				      NULL);
+
+			target_name = mrp_task_get_name (PLANNER_GANTT_ROW (target_item)->priv->task);
+			task_name = mrp_task_get_name (row->priv->task);
+			
+			if (target_name == NULL || target_name[0] == 0) {
+				target_name = _("No name");
+			}
+			if (task_name == NULL || task_name[0] == 0) {
+				task_name = _("No name");
+			}
+			
+			message = g_strdup_printf (_("Make task '%s' a predecessor of '%s'"),
+						   task_name,
+						   target_name);
+
+			planner_gantt_chart_status_updated (chart, message);
+
+			g_free (message);
+		}
+
+		if (target_item == NULL) {
+			planner_gantt_chart_status_updated (chart, NULL);
+		}
+		
+		old_target_item = target_item;
+		break;
+	default:
+		g_assert (FALSE);
+		break;
+	}
+
+	if(!scroll) return TRUE;
+
+	gnome_canvas_w2c (canvas, wx2, wy2, &item_cx, &item_cy);
 
 	if (x < 0) {
-		dx = x;
-	} else if (x >= widget->allocation.width) {
-		dx = x - widget->allocation.width + 1;
+		dx = MAX(x, (item_cx - cx) - width / 2);
+		dx = MIN(dx, 0);
+	} else if (x >= width) {
+		dx = MIN(x - width + 1, (item_cx - cx) - width/2);
+		dx = MAX(dx, 0);
 	} else {
 		dx = 0;
 	}
 
 	if (y < 0) {
 		dy = y;
-	} else if (y >= widget->allocation.height) {
-		dy = y - widget->allocation.height + 1;
+	} else if (y >= height) {
+		dy = y - height + 1;
 	} else {
 		dy = 0;
 	}
 	
-	gantt_row_canvas_scroll (widget, dx, dy);
-	
+	if(dx > 0)
+	{
+		planner_gantt_chart_reflow_now(chart);
+		gantt_row_canvas_scroll (GTK_WIDGET(canvas), dx, dy);
+	}
+	else if(dx < 0)
+	{
+		gantt_row_canvas_scroll (GTK_WIDGET(canvas), dx, dy);
+		planner_gantt_chart_reflow_now(chart);
+	}
+	else
+	{
+		if(dy != 0)
+		{
+			gantt_row_canvas_scroll (GTK_WIDGET(canvas), dx, dy);
+		}
+		planner_gantt_chart_reflow_now(chart);
+	}
+
 	return TRUE;
 }
 
-static DragSpot get_drag_spot(gdouble x, gdouble y, PlannerGanttRowPriv *priv)
+static gboolean
+gantt_row_scroll_timeout_cb (PlannerGanttRow *row)
+{
+	return gantt_row_drag_item_to_pointer(row, TRUE);
+}
+
+static DragSpot 
+get_drag_spot(gdouble x, gdouble y, PlannerGanttRowPriv *priv)
 {
 	gdouble x2 = priv->x + priv->width;
 	if( (y > priv->y + priv->bar_top) &&
@@ -2370,19 +2533,13 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 	PlannerGanttRowPriv      *priv;
 	PlannerGanttChart        *chart;
 	GtkWidget                *canvas_widget;
-	static gdouble            x1, y1;
 	gdouble                   wx1, wy1;
 	gdouble                   wx2, wy2;
-	static GnomeCanvasItem   *target_item;
-	static GnomeCanvasItem   *old_target_item;
-	static GnomeCanvasItem   *drag_item = NULL;
-	static GnomeCanvasPoints *drag_points = NULL;
 	MrpTask                  *task;
 	MrpTask                  *target_task;
 	GdkCursor                *cursor;
 	gboolean                  summary;
 	MrpTaskType               type;
-	gchar                    *message;
 	DragSpot                  drag_spot;
 	
 	row = PLANNER_GANTT_ROW (item);
@@ -2477,6 +2634,12 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 									   "width_pixels", 1,
 									   NULL);
 					gnome_canvas_item_hide (drag_item);
+
+					/* set limits */
+					drag_item_wx_min = wx1;
+					drag_item_wx_max = -1.0;
+					drag_item_wy_min = wy1;
+					drag_item_wy_max = wy2;
 				}
 
 				/* Start the autoscroll timeout. */
@@ -2513,6 +2676,12 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 									   "width_pixels", 1,
 									   NULL);
 					gnome_canvas_item_hide (drag_item);
+
+					/* set limits */
+					drag_item_wx_min = wx1;
+					drag_item_wx_max = priv->x + priv->width;
+					drag_item_wy_min = wy1;
+					drag_item_wy_max = wy2;
 				}
 
 				/* Start the autoscroll timeout. */
@@ -2538,6 +2707,12 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 								   "join_style", GDK_JOIN_MITER,
 								   NULL);
 				gnome_canvas_item_hide (drag_item);
+
+				/* set limits */
+				gnome_canvas_get_scroll_region(item->canvas, &drag_item_wx_min, 
+									     &drag_item_wy_min,
+									     &drag_item_wx_max,
+									     &drag_item_wy_max);
 
 				old_target_item = NULL;
 
@@ -2581,8 +2756,8 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 						NULL,
 						event->button.time);
 
-			x1 = event->button.x;
-			y1 = event->button.y;
+			drag_wx1 = event->button.x;
+			drag_wy1 = event->button.y;
 
 			return TRUE;
 
@@ -2612,7 +2787,7 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 			gint x, y;
 
 			gdk_window_get_pointer (event->motion.window, &x, &y, NULL);
-			gnome_canvas_c2w (item->canvas, x, y, &event->motion.x, &event->motion.y);
+			gnome_canvas_window_to_world(item->canvas, x, y, &event->motion.x, &event->motion.y);
 		}
 
 		if (!(priv->state & STATE_DRAG_ANY)) {
@@ -2656,121 +2831,11 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 			}
 			return TRUE;
 		}
-		else if (priv->state == STATE_DRAG_LINK) {
-			target_item = gnome_canvas_get_item_at (item->canvas,
-								event->motion.x,
-								event->motion.y);
-			
-			gnome_canvas_item_raise_to_top (drag_item);
-			gnome_canvas_item_show (drag_item);
-			
-			drag_points->coords[0] = x1;
-			drag_points->coords[1] = y1;
-			drag_points->coords[2] = event->motion.x;
-			drag_points->coords[3] = event->motion.y;
-		
-			gnome_canvas_item_set (drag_item,
-					       "points", drag_points,
-					       NULL);
-			
-			chart = g_object_get_data (G_OBJECT (item->canvas),
-						   "chart");
-			
-			if (old_target_item && old_target_item != target_item) {
-				g_object_set (old_target_item,
-					      "highlight",
-					      FALSE,
-					      NULL);
-			}
-			
-			if (target_item && target_item != item) {
-				const gchar *task_name, *target_name;
-				
-				g_object_set (target_item,
-					      "highlight",
-					      TRUE,
-					      NULL);
-
-				target_name = mrp_task_get_name (PLANNER_GANTT_ROW (target_item)->priv->task);
-				task_name = mrp_task_get_name (priv->task);
-				
-				if (target_name == NULL || target_name[0] == 0) {
-					target_name = _("No name");
-				}
-				if (task_name == NULL || task_name[0] == 0) {
-					task_name = _("No name");
-				}
-				
-				message = g_strdup_printf (_("Make task '%s' a predecessor of '%s'"),
-							   task_name,
-							   target_name);
-
-				planner_gantt_chart_status_updated (chart, message);
-
-				g_free (message);
-			}
-
-			if (target_item == NULL) {
-				planner_gantt_chart_status_updated (chart, NULL);
-			}
-			
-			old_target_item = target_item;
-		}
-		else if (priv->state == STATE_DRAG_COMPLETE) {
-			chart = g_object_get_data (G_OBJECT (item->canvas), "chart");
-
-			wx2 = MIN(event->motion.x, priv->x + priv->width);
-			wy2 = priv->y + priv->bar_bot - 4;
-			
-			gnome_canvas_item_i2w (item, &wx2, &wy2);
-
-			gnome_canvas_item_set (drag_item,
-					       "x2", wx2,
-					       "y2", wy2,
-					       NULL);
-			
+		else {
 			gnome_canvas_item_raise_to_top (drag_item);
 			gnome_canvas_item_show (drag_item);
 
-			planner_gantt_chart_status_updated (chart, NULL);
-		}
-		else if (priv->state == STATE_DRAG_DURATION) {
-			gint         duration;
-			gint         work;
-			MrpProject  *project;
-
-			project = mrp_object_get_project (MRP_OBJECT (priv->task));
-
-			wx2 = event->motion.x;
-			wy2 = priv->y + priv->bar_bot;
-			
-			gnome_canvas_item_i2w (item, &wx2, &wy2);
-
-			gnome_canvas_item_set (drag_item,
-					       "x2", wx2,
-					       "y2", wy2,
-					       NULL);
-			
-			gnome_canvas_item_raise_to_top (drag_item);
-			gnome_canvas_item_show (drag_item);
-
-			chart = g_object_get_data (G_OBJECT (item->canvas), "chart");
-
-			duration = MAX (0, (event->motion.x - priv->x_start) / priv->scale);
-
-			/* Snap to quarters. */
-			duration = floor (duration / SNAP + 0.5) * SNAP;
-
-			work = mrp_project_calculate_task_work (
-				project,
-				priv->task,
-				-1,
-				mrp_task_get_start (priv->task) + duration);
-
-			message = g_strdup_printf (_("Change work to %s"),
-						   planner_format_duration (project, work));
-			planner_gantt_chart_status_updated (chart, message);
-			g_free (message);
+			gantt_row_drag_item_to_pointer (row, FALSE);
 		}
 			
 		break;

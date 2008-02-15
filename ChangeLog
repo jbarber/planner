@@ -1,3 +1,18 @@
+2008-02-15  Maurice van der Pot  <griffon26@kfk4ever.com>
+
+	* src/eel-canvas-rect.c: (eel_canvas_rect_bounds):
+	* src/planner-gantt-chart.c: (gantt_chart_map),
+	(gantt_chart_size_allocate), (gantt_chart_reflow_idle),
+	(planner_gantt_chart_reflow_now),
+	(gantt_chart_project_start_changed),
+	(planner_gantt_chart_set_model), (gantt_chart_get_visible_region),
+	(gantt_chart_set_zoom):
+	* src/planner-gantt-chart.h:
+	* src/planner-gantt-row.c: (gantt_row_drag_item_to_pointer),
+	(gantt_row_scroll_timeout_cb), (get_drag_spot), (gantt_row_event):
+	Allow dragging of duration beyond the window size and show the percentage in
+	the status bar when dragging progress.
+
 2008-02-14  Maurice van der Pot  <griffon26@kfk4ever.com>
 
 	* data/mime/planner.xml.in: Added indication that mime-type

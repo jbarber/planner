@@ -636,17 +636,18 @@ eel_canvas_rect_bounds (GnomeCanvasItem *item,
 {
 	EelCanvasRect *rect;
 	EelCanvasRectDetails *details;
-	double hwidth;
+	gint cx, cy;
 
 	rect = EEL_CANVAS_RECT (item);
 	details = rect->details;
 
-	hwidth = (details->width_pixels / item->canvas->pixels_per_unit) / 2.0;
-	
-	*x1 = details->x1 - hwidth;
-	*y1 = details->y1 - hwidth;
-	*x2 = details->x2 + hwidth;
-	*y2 = details->y2 + hwidth;
+	gnome_canvas_w2c (item->canvas, details->x1, details->y1, &cx, &cy);
+	*x1 = cx;
+	*y1 = cy;
+
+	gnome_canvas_w2c (item->canvas, details->x2, details->y2, &cx, &cy);
+	*x2 = cx;
+	*y2 = cy;
 }
 
 static void
