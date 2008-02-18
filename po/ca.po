@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: planner\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-10-08 22:00+0200\n"
-"PO-Revision-Date: 2007-09-26 14:32+0100\n"
+"POT-Creation-Date: 2008-02-18 19:20+0100\n"
+"PO-Revision-Date: 2008-02-18 19:20+0100\n"
 "Last-Translator: Gil Forcada <gilforcada@guifi.net>\n"
 "Language-Team: Catalan <tradgnome@softcatala.org>\n"
 "MIME-Version: 1.0\n"
@@ -331,6 +331,7 @@ msgid "Notes"
 msgstr "Notes"
 
 #: ../data/glade/resource-dialog.glade.h:7
+#: ../data/glade/resource-input-dialog.glade.h:3
 msgid "Optional - overrides resource name in Gantt view."
 msgstr "Opcional - substitueix el nom del recurs a la vista de Gannt."
 
@@ -367,10 +368,6 @@ msgstr "_Nom curt:"
 #: ../data/glade/resource-input-dialog.glade.h:2
 msgid "Insert Resource"
 msgstr "Insereix el recurs"
-
-#: ../data/glade/resource-input-dialog.glade.h:3
-msgid "Optional - overrides resource name in gantt view."
-msgstr "Opcional - substitueix el nom del recurs a la vista de Gannt."
 
 #: ../data/glade/resource-input-dialog.glade.h:6
 #: ../data/glade/task-input-dialog.glade.h:3
@@ -765,21 +762,27 @@ msgid "None"
 msgstr "Cap"
 
 #
-#: ../libplanner/mrp-sql.c:214 ../libplanner/mrp-sql.c:228
+#: ../libplanner/mrp-sql.c:292 ../libplanner/mrp-sql.c:310
+#: ../src/planner-sql-plugin.c:207 ../src/planner-sql-plugin.c:225
 msgid "Can't connect to database server"
 msgstr "No s'ha pogut connectar al servidor de la base de dades"
 
+#: ../libplanner/mrp-sql.c:297 ../libplanner/mrp-sql.c:315
+#: ../src/planner-sql-plugin.c:212 ../src/planner-sql-plugin.c:230
+msgid "No errors reported."
+msgstr "No s'ha informat de cap error."
+
 #. Give up.
-#: ../libplanner/mrp-sql.c:319 ../src/planner-sql-plugin.c:220
+#: ../libplanner/mrp-sql.c:405 ../src/planner-sql-plugin.c:300
 msgid "Invalid Unicode"
 msgstr "Unicode invàlid"
 
-#: ../libplanner/mrp-sql.c:2213
+#: ../libplanner/mrp-sql.c:2306
 #, c-format
 msgid "Connection to database '%s' failed.\n"
 msgstr "Ha fallat la connexió a la base de dades «%s».\n"
 
-#: ../libplanner/mrp-sql.c:2218
+#: ../libplanner/mrp-sql.c:2311
 #, c-format
 msgid ""
 "Connection to database '%s' failed.\n"
@@ -788,12 +791,12 @@ msgstr ""
 "Ha fallat la connexió a la base de dades «%s».\n"
 "%s"
 
-#: ../libplanner/mrp-sql.c:2226
+#: ../libplanner/mrp-sql.c:2326
 #, c-format
 msgid "BEGIN command failed %s."
 msgstr "L'ordre BEGIN ha fallat %s."
 
-#: ../libplanner/mrp-sql.c:2394
+#: ../libplanner/mrp-sql.c:2486
 #, c-format
 msgid ""
 "The project '%s' has been changed by the user '%s' since you opened it. Do "
@@ -802,22 +805,22 @@ msgstr ""
 "El projecte «%s» ha estat modificat per l'usuari «%s» des que l'heu obert. "
 "Voleu desar-lo igualment?"
 
-#: ../libplanner/mrp-sql.c:3674
+#: ../libplanner/mrp-sql.c:3711
 #, c-format
 msgid "Connection to database '%s' failed."
 msgstr "Ha fallat la connexió a la base de dades «%s»."
 
-#: ../libplanner/mrp-storage-sql.c:205
+#: ../libplanner/mrp-storage-sql.c:206
 #, c-format
 msgid "Invalid SQL URI (must start with 'sql://' and contain '#')."
 msgstr "URI d'SQL invàlida (ha de començar amb «sql://» i contenir «#»)."
 
-#: ../libplanner/mrp-storage-sql.c:274
+#: ../libplanner/mrp-storage-sql.c:275
 #, c-format
 msgid "Invalid SQL URI (invalid project id)."
 msgstr "URI d'SQL invàlida (id del projecte invàlid)"
 
-#: ../libplanner/mrp-storage-sql.c:282
+#: ../libplanner/mrp-storage-sql.c:283
 #, c-format
 msgid "Invalid SQL URI (no database name specified)."
 msgstr "URI d'SQL invàlida (no s'ha especificat cap nom de base de dades)."
@@ -865,7 +868,7 @@ msgstr ""
 "la data d'inici del projecte."
 
 #
-#: ../libplanner/mrp-task-manager.c:2527
+#: ../libplanner/mrp-task-manager.c:2530
 #, c-format
 msgid "Cannot add a predecessor, because it would result in a loop."
 msgstr ""
@@ -873,7 +876,7 @@ msgstr ""
 "infinit."
 
 #
-#: ../libplanner/mrp-task-manager.c:2573
+#: ../libplanner/mrp-task-manager.c:2576
 #, c-format
 msgid "Cannot move the task, because it would result in a loop."
 msgstr "No s'ha pogut moure la tasca, atès que resultaria en un bucle infinit."
@@ -1194,28 +1197,33 @@ msgstr "%e %b %Y"
 msgid "Work"
 msgstr "Feina"
 
-#: ../src/planner-gantt-print.c:542 ../src/planner-gantt-row.c:765
+#: ../src/planner-gantt-print.c:542 ../src/planner-gantt-row.c:776
 #: ../src/planner-html-plugin.c:125 ../src/planner-task-tree.c:1571
 #: ../src/planner-window.c:1988
 msgid "Unnamed"
 msgstr "Sense nom"
 
-#: ../src/planner-gantt-row.c:2697 ../src/planner-gantt-row.c:2700
-msgid "No name"
-msgstr "Sense nom"
-
-#: ../src/planner-gantt-row.c:2703
-#, c-format
-msgid "Make task '%s' a predecessor of '%s'"
-msgstr "Fes que la tasca «%s» sigui predecessora de «%s»"
-
-#: ../src/planner-gantt-row.c:2769
+#: ../src/planner-gantt-row.c:2358
 #, c-format
 msgid "Change work to %s"
 msgstr "Canvia la feina a %s"
 
+#: ../src/planner-gantt-row.c:2370
+#, c-format
+msgid "Change progress to %u%% complete"
+msgstr "Canvia el progrés a %u%% completat"
+
+#: ../src/planner-gantt-row.c:2409 ../src/planner-gantt-row.c:2412
+msgid "No name"
+msgstr "Sense nom"
+
+#: ../src/planner-gantt-row.c:2415
+#, c-format
+msgid "Make task '%s' a predecessor of '%s'"
+msgstr "Fes que la tasca «%s» sigui predecessora de «%s»"
+
 #
-#: ../src/planner-gantt-row.c:3370 ../src/planner-task-dialog.c:455
+#: ../src/planner-gantt-row.c:3436 ../src/planner-task-dialog.c:455
 #: ../src/planner-task-tree.c:257 ../src/planner-task-tree.c:947
 msgid "Edit task property"
 msgstr "Edita la propietat de la tasca"
@@ -1850,29 +1858,25 @@ msgid "%04d, H%d"
 msgstr "%04d, H%d"
 
 #
-#: ../src/planner-sql-plugin.c:93
+#: ../src/planner-sql-plugin.c:101
 msgid "Open from Database..."
 msgstr "Obre des d'una base de dades..."
 
 #
-#: ../src/planner-sql-plugin.c:94
+#: ../src/planner-sql-plugin.c:102
 msgid "Open a project from a database"
 msgstr "Obre un projecte des d'una base de dades"
 
-#: ../src/planner-sql-plugin.c:96 ../src/planner-sql-plugin.c:1152
+#: ../src/planner-sql-plugin.c:104 ../src/planner-sql-plugin.c:1242
 msgid "Save to Database"
 msgstr "Desa a la base de dades"
 
 #
-#: ../src/planner-sql-plugin.c:97
+#: ../src/planner-sql-plugin.c:105
 msgid "Save the current project to a database"
 msgstr "Desa el projecte actual a una base de dades"
 
-#: ../src/planner-sql-plugin.c:135 ../src/planner-sql-plugin.c:150
-msgid "No errors reported."
-msgstr "No s'ha informat de cap error."
-
-#: ../src/planner-sql-plugin.c:517
+#: ../src/planner-sql-plugin.c:598
 #, c-format
 msgid ""
 "Database %s needs to be upgraded from version %s to version %s.\n"
@@ -1881,11 +1885,11 @@ msgstr ""
 "La base de dades %s necessita actualitzar-se de la versió %s a la %s.\n"
 "Feu una còpia de seguretat abans d'actualitzar."
 
-#: ../src/planner-sql-plugin.c:524
+#: ../src/planner-sql-plugin.c:605
 msgid "Upgrade"
 msgstr "Actualitza"
 
-#: ../src/planner-sql-plugin.c:538
+#: ../src/planner-sql-plugin.c:619
 #, c-format
 msgid ""
 "Could not upgrade database %s.\n"
@@ -1900,44 +1904,44 @@ msgstr ""
 "Error de la base de dades: \n"
 "%s"
 
-#: ../src/planner-sql-plugin.c:579
+#: ../src/planner-sql-plugin.c:659
 #, c-format
 msgid "Can't create tables in database %s"
 msgstr "No s'han pogut crear les taules a la base de dades %s"
 
-#: ../src/planner-sql-plugin.c:648
+#: ../src/planner-sql-plugin.c:727
 #, c-format
 msgid "Database %s is not setup for Planner. Do you want to do that?"
 msgstr "La base de dades %s no està configurada per al Planner. Voleu fer-ho?"
 
-#: ../src/planner-sql-plugin.c:696
+#: ../src/planner-sql-plugin.c:776
 #, c-format
 msgid "Connection to database '%s@%s' failed."
 msgstr "Ha fallat la connexió a la base de dades «%s@%s»."
 
-#: ../src/planner-sql-plugin.c:711
+#: ../src/planner-sql-plugin.c:799
 #, c-format
 msgid "Test to tables in database '%s' failed."
 msgstr "S'ha produït un error en provar les taules a la base de dades «%s»."
 
-#: ../src/planner-sql-plugin.c:816
+#: ../src/planner-sql-plugin.c:908
 msgid "ID"
 msgstr "ID"
 
-#: ../src/planner-sql-plugin.c:824
+#: ../src/planner-sql-plugin.c:916
 msgid "Project"
 msgstr "Projecte"
 
 #
-#: ../src/planner-sql-plugin.c:832
+#: ../src/planner-sql-plugin.c:924
 msgid "Phase"
 msgstr "Fase"
 
-#: ../src/planner-sql-plugin.c:840
+#: ../src/planner-sql-plugin.c:932
 msgid "Revision"
 msgstr "Revisió"
 
-#: ../src/planner-sql-plugin.c:1040
+#: ../src/planner-sql-plugin.c:1130
 msgid "Open from Database"
 msgstr "Obre d'una base de dades"
 
@@ -2128,43 +2132,43 @@ msgid "Indent task"
 msgstr "Sagna la tasca"
 
 #
-#: ../src/planner-task-tree.c:3134
+#: ../src/planner-task-tree.c:3136
 msgid "Unindent tasks"
 msgstr "Desfés el sagnat de les tasques"
 
 #
-#: ../src/planner-task-tree.c:3152
+#: ../src/planner-task-tree.c:3154
 msgid "Unindent task"
 msgstr "Desfés el sagnat de la tasca"
 
 #
-#: ../src/planner-task-tree.c:3228
+#: ../src/planner-task-tree.c:3232
 msgid "Move tasks up"
 msgstr "Mou les tasques cap amunt"
 
 #
-#: ../src/planner-task-tree.c:3266
+#: ../src/planner-task-tree.c:3270
 msgid "Move task up"
 msgstr "Mou la tasca cap amunt"
 
 #
-#: ../src/planner-task-tree.c:3355
+#: ../src/planner-task-tree.c:3358
 msgid "Move tasks down"
 msgstr "Mou les tasques cap a baix"
 
 #
 #. Moving task from 'position' to 'position + 1'
-#: ../src/planner-task-tree.c:3401
+#: ../src/planner-task-tree.c:3404
 msgid "Move task down"
 msgstr "Mou la tasca cap a baix"
 
 #
-#: ../src/planner-task-tree.c:3457
+#: ../src/planner-task-tree.c:3460
 msgid "Reset task constraints"
 msgstr "Reinicia les restriccions de la tasca"
 
 #
-#: ../src/planner-task-tree.c:3489
+#: ../src/planner-task-tree.c:3492
 msgid "Reset all task constraints"
 msgstr "Reinicia totes les restriccions de la tasca"
 
@@ -2604,3 +2608,6 @@ msgid ""
 msgstr ""
 "L'extensió del nom de fitxer d'aquest fitxer no és l'extensió de fitxer "
 "normal del Planner (%s). Voleu continuar?"
+
+#~ msgid "Optional - overrides resource name in gantt view."
+#~ msgstr "Opcional - substitueix el nom del recurs a la vista de Gannt."
