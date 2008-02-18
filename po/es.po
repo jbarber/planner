@@ -1,18 +1,19 @@
+# translation of planner.HEAD.po to Español
 # translation of planner to Spanish
 # This file is distributed under the same license as the Planner package.
-# Copyright © 2002,2003,2006, 2007 Free Software Foundation, Inc.
+# Copyright © 2002,2003,2006, 2007, 2008 Free Software Foundation, Inc.
 #
 # Juan Jesus Ojeda Croissier <juanjesus.ojeda@hispalinux.es>, 2002.
 # Francisco Javier F. Serrador <serrador@cvs.gnome.org>, 2003, 2004, 2006.
-# Jorge González <jorgegonz@svn.gnome.org>, 2007.
+# Jorge González <jorgegonz@svn.gnome.org>, 2007, 2008.
 msgid ""
 msgstr ""
-"Project-Id-Version: planner.HEAD.es\n"
+"Project-Id-Version: planner.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-02-13 12:58+0000\n"
-"PO-Revision-Date: 2007-04-24 23:09+0200\n"
+"POT-Creation-Date: 2008-02-15 21:37+0000\n"
+"PO-Revision-Date: 2008-02-18 23:22+0100\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
-"Language-Team: Spanish <traductores@es.gnome.org>\n"
+"Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -314,6 +315,7 @@ msgid "Notes"
 msgstr "Notas"
 
 #: ../data/glade/resource-dialog.glade.h:7
+#: ../data/glade/resource-input-dialog.glade.h:3
 msgid "Optional - overrides resource name in Gantt view."
 msgstr "Opcional -  prevalece sobre el nombre de recurso en la vista Gantt."
 
@@ -347,10 +349,6 @@ msgstr "Nombre _corto:"
 #: ../data/glade/resource-input-dialog.glade.h:2
 msgid "Insert Resource"
 msgstr "Introducir recurso"
-
-#: ../data/glade/resource-input-dialog.glade.h:3
-msgid "Optional - overrides resource name in gantt view."
-msgstr "Opcional: prevalece el nombre del recurso en la vista Gantt."
 
 #: ../data/glade/resource-input-dialog.glade.h:6
 #: ../data/glade/task-input-dialog.glade.h:3
@@ -696,12 +694,12 @@ msgstr "Número de coma flotante"
 msgid "Date"
 msgstr "Fecha"
 
-#: ../libplanner/mrp-property.c:375 ../src/planner-gantt-view.c:586
+#: ../libplanner/mrp-property.c:375 ../src/planner-gantt-view.c:593
 #: ../src/planner-task-view.c:340
 msgid "Duration"
 msgstr "Duración"
 
-#: ../libplanner/mrp-property.c:377 ../src/planner-gantt-view.c:588
+#: ../libplanner/mrp-property.c:377 ../src/planner-gantt-view.c:595
 #: ../src/planner-resource-view.c:1314 ../src/planner-task-view.c:342
 msgid "Cost"
 msgstr "Coste"
@@ -710,21 +708,27 @@ msgstr "Coste"
 msgid "None"
 msgstr "Nada"
 
-#: ../libplanner/mrp-sql.c:214 ../libplanner/mrp-sql.c:228
+#: ../libplanner/mrp-sql.c:292 ../libplanner/mrp-sql.c:310
+#: ../src/planner-sql-plugin.c:207 ../src/planner-sql-plugin.c:225
 msgid "Can't connect to database server"
 msgstr "No se puede conectar con el servidor de la base de datos"
 
+#: ../libplanner/mrp-sql.c:297 ../libplanner/mrp-sql.c:315
+#: ../src/planner-sql-plugin.c:212 ../src/planner-sql-plugin.c:230
+msgid "No errors reported."
+msgstr "No se informó de errores."
+
 #. Give up.
-#: ../libplanner/mrp-sql.c:319 ../src/planner-sql-plugin.c:220
+#: ../libplanner/mrp-sql.c:405 ../src/planner-sql-plugin.c:300
 msgid "Invalid Unicode"
 msgstr "Unicode inválido"
 
-#: ../libplanner/mrp-sql.c:2213
+#: ../libplanner/mrp-sql.c:2306
 #, c-format
 msgid "Connection to database '%s' failed.\n"
 msgstr "No es posible conectar con la base de datos «%s».\n"
 
-#: ../libplanner/mrp-sql.c:2218
+#: ../libplanner/mrp-sql.c:2311
 #, c-format
 msgid ""
 "Connection to database '%s' failed.\n"
@@ -733,12 +737,12 @@ msgstr ""
 "No es posible conectar con la base de datos «%s».\n"
 "%s"
 
-#: ../libplanner/mrp-sql.c:2226
+#: ../libplanner/mrp-sql.c:2326
 #, c-format
 msgid "BEGIN command failed %s."
 msgstr "Ha fallado el comando BEGIN %s."
 
-#: ../libplanner/mrp-sql.c:2394
+#: ../libplanner/mrp-sql.c:2486
 #, c-format
 msgid ""
 "The project '%s' has been changed by the user '%s' since you opened it. Do "
@@ -747,20 +751,20 @@ msgstr ""
 "El proyecto «%s» lo ha modificado el usuario «%s» desde la última vez que "
 "usted lo abrió. ¿Quiere guardarlo de todas formas?"
 
-#: ../libplanner/mrp-sql.c:3674
+#: ../libplanner/mrp-sql.c:3711
 #, c-format
 msgid "Connection to database '%s' failed."
 msgstr "Ha fallado la conexión con la base de datos «%s»."
 
-#: ../libplanner/mrp-storage-sql.c:205
+#: ../libplanner/mrp-storage-sql.c:206
 msgid "Invalid SQL URI (must start with 'sql://' and contain '#')."
 msgstr "URI SQL inválida (debe empezar con 'sql://' y contener '#')."
 
-#: ../libplanner/mrp-storage-sql.c:274
+#: ../libplanner/mrp-storage-sql.c:275
 msgid "Invalid SQL URI (invalid project id)."
 msgstr "URI SQL inválida (id de proyecto inválido)."
 
-#: ../libplanner/mrp-storage-sql.c:282
+#: ../libplanner/mrp-storage-sql.c:283
 msgid "Invalid SQL URI (no database name specified)."
 msgstr "URI SQL inválida (no hay especificado un nombre de base de datos)."
 
@@ -806,11 +810,11 @@ msgstr ""
 "No se puede establecer una relación «inicio a fin». El predecesor se inicia "
 "en la fecha de inicio del proyecto."
 
-#: ../libplanner/mrp-task-manager.c:2527
+#: ../libplanner/mrp-task-manager.c:2530
 msgid "Cannot add a predecessor, because it would result in a loop."
 msgstr "No se puede añadir un predecesor, debido a que formaría un bucle."
 
-#: ../libplanner/mrp-task-manager.c:2573
+#: ../libplanner/mrp-task-manager.c:2576
 msgid "Cannot move the task, because it would result in a loop."
 msgstr "No se puede mover la tarea, porque se formaría un bucle."
 
@@ -961,7 +965,7 @@ msgid "Import resources from Evolution Data Server"
 msgstr "Importar recursos desde el Servidor de Datos de Evolution"
 
 #: ../src/planner-eds-plugin.c:396 ../src/planner-gantt-print.c:190
-#: ../src/planner-gantt-view.c:582 ../src/planner-group-dialog.c:822
+#: ../src/planner-gantt-view.c:589 ../src/planner-group-dialog.c:822
 #: ../src/planner-property-dialog.c:485 ../src/planner-resource-view.c:1171
 #: ../src/planner-task-dialog.c:2616 ../src/planner-task-dialog.c:2690
 #: ../src/planner-task-view.c:336
@@ -1111,34 +1115,39 @@ msgstr "Comienzo del proyecto"
 msgid "%e %b %Y"
 msgstr "%e %b %Y"
 
-#: ../src/planner-gantt-print.c:198 ../src/planner-gantt-view.c:585
+#: ../src/planner-gantt-print.c:198 ../src/planner-gantt-view.c:592
 #: ../src/planner-resource-dialog.c:1850 ../src/planner-resource-view.c:750
 #: ../src/planner-resource-view.c:766 ../src/planner-resource-view.c:1736
 #: ../src/planner-task-view.c:339
 msgid "Work"
 msgstr "Trabajo"
 
-#: ../src/planner-gantt-print.c:542 ../src/planner-gantt-row.c:752
+#: ../src/planner-gantt-print.c:542 ../src/planner-gantt-row.c:776
 #: ../src/planner-html-plugin.c:125 ../src/planner-task-tree.c:1571
 #: ../src/planner-window.c:1988
 msgid "Unnamed"
 msgstr "Sin nombre"
 
-#: ../src/planner-gantt-row.c:2607 ../src/planner-gantt-row.c:2610
-msgid "No name"
-msgstr "Sin nombre"
-
-#: ../src/planner-gantt-row.c:2613
-#, c-format
-msgid "Make task '%s' a predecessor of '%s'"
-msgstr "Hacer la tarea «%s» predecesora de «%s»"
-
-#: ../src/planner-gantt-row.c:2661
+#: ../src/planner-gantt-row.c:2358
 #, c-format
 msgid "Change work to %s"
 msgstr "Cambiar trabajo a %s"
 
-#: ../src/planner-gantt-row.c:3232 ../src/planner-task-dialog.c:455
+#: ../src/planner-gantt-row.c:2370
+#, c-format
+msgid "Change progress to %u%% complete"
+msgstr "Cambiar el progreso a %u%% completado"
+
+#: ../src/planner-gantt-row.c:2409 ../src/planner-gantt-row.c:2412
+msgid "No name"
+msgstr "Sin nombre"
+
+#: ../src/planner-gantt-row.c:2415
+#, c-format
+msgid "Make task '%s' a predecessor of '%s'"
+msgstr "Hacer la tarea «%s» predecesora de «%s»"
+
+#: ../src/planner-gantt-row.c:3436 ../src/planner-task-dialog.c:455
 #: ../src/planner-task-tree.c:257 ../src/planner-task-tree.c:947
 msgid "Edit task property"
 msgstr "Editar propiedad de la tarea"
@@ -1280,11 +1289,11 @@ msgstr "_Días no estándar"
 #. i18n: Label used for the sidebar. Please try to make it short and use
 #. * a linebreak if necessary/possible.
 #.
-#: ../src/planner-gantt-view.c:337
+#: ../src/planner-gantt-view.c:344
 msgid "Gantt"
 msgstr "Gantt"
 
-#: ../src/planner-gantt-view.c:343
+#: ../src/planner-gantt-view.c:350
 msgid "_Gantt Chart"
 msgstr "_Gráfica Gantt"
 
@@ -1296,27 +1305,27 @@ msgstr "_Gráfica Gantt"
 #. * project management term. You might want to leave it
 #. * untranslated unless there is a localized term for it.
 #.
-#: ../src/planner-gantt-view.c:581 ../src/planner-task-view.c:335
+#: ../src/planner-gantt-view.c:588 ../src/planner-task-view.c:335
 msgid "WBS"
 msgstr "WBS"
 
-#: ../src/planner-gantt-view.c:583 ../src/planner-task-view.c:337
+#: ../src/planner-gantt-view.c:590 ../src/planner-task-view.c:337
 msgid "Start"
 msgstr "Inicio"
 
-#: ../src/planner-gantt-view.c:584 ../src/planner-task-view.c:338
+#: ../src/planner-gantt-view.c:591 ../src/planner-task-view.c:338
 msgid "Finish"
 msgstr "Fin"
 
-#: ../src/planner-gantt-view.c:587 ../src/planner-task-view.c:341
+#: ../src/planner-gantt-view.c:594 ../src/planner-task-view.c:341
 msgid "Slack"
 msgstr "Desperdicio"
 
-#: ../src/planner-gantt-view.c:589 ../src/planner-task-view.c:343
+#: ../src/planner-gantt-view.c:596 ../src/planner-task-view.c:343
 msgid "Assigned to"
 msgstr "Asignado a"
 
-#: ../src/planner-gantt-view.c:943
+#: ../src/planner-gantt-view.c:950
 msgid "Edit Gantt Columns"
 msgstr "Editar columnas de Gantt"
 
@@ -1675,63 +1684,58 @@ msgstr "Sm %d"
 msgid "Week %d"
 msgstr "Semana %d"
 
-#. i18n: Week, year.
-#: ../src/planner-scale-utils.c:138
+#: ../src/planner-scale-utils.c:139
 #, c-format
 msgid "Week %d, %d"
 msgstr "Semana %d, %d"
 
 #. i18n: Short "Quarter", preferably 1 letter.
-#: ../src/planner-scale-utils.c:169
+#: ../src/planner-scale-utils.c:170
 #, c-format
 msgid "Q%d"
 msgstr "Q%d"
 
 #. i18n: Short "Quarter", preferably 2-3 letters.
-#: ../src/planner-scale-utils.c:173
+#: ../src/planner-scale-utils.c:174
 #, c-format
 msgid "Qtr %d"
 msgstr "Ctr %d"
 
 #. i18n: Year, short "Quarter", preferably 2-3 letters.
-#: ../src/planner-scale-utils.c:177
+#: ../src/planner-scale-utils.c:178
 #, c-format
 msgid "%d, Qtr %d"
 msgstr "%d, Ctr %d"
 
 #. i18n: Short "Half year", preferably 1 letter.
-#: ../src/planner-scale-utils.c:190
+#: ../src/planner-scale-utils.c:191
 #, c-format
 msgid "H%d"
 msgstr "M%d"
 
 #. i18n: Year, short "Half year", preferably 1 letter.
-#: ../src/planner-scale-utils.c:195
+#: ../src/planner-scale-utils.c:196
 #, c-format
 msgid "%04d, H%d"
 msgstr "%04d, M%d"
 
-#: ../src/planner-sql-plugin.c:93
+#: ../src/planner-sql-plugin.c:101
 msgid "Open from Database..."
 msgstr "Abrir desde base de datos…"
 
-#: ../src/planner-sql-plugin.c:94
+#: ../src/planner-sql-plugin.c:102
 msgid "Open a project from a database"
 msgstr "Abre un proyecto desde una base de datos"
 
-#: ../src/planner-sql-plugin.c:96 ../src/planner-sql-plugin.c:1152
+#: ../src/planner-sql-plugin.c:104 ../src/planner-sql-plugin.c:1242
 msgid "Save to Database"
 msgstr "Guardar a base de datos"
 
-#: ../src/planner-sql-plugin.c:97
+#: ../src/planner-sql-plugin.c:105
 msgid "Save the current project to a database"
 msgstr "Guarda el proyecto actual en una base de datos"
 
-#: ../src/planner-sql-plugin.c:135 ../src/planner-sql-plugin.c:150
-msgid "No errors reported."
-msgstr "No se informó de errores."
-
-#: ../src/planner-sql-plugin.c:517
+#: ../src/planner-sql-plugin.c:598
 #, c-format
 msgid ""
 "Database %s needs to be upgraded from version %s to version %s.\n"
@@ -1741,11 +1745,11 @@ msgstr ""
 "s.\n"
 "Haga una copia de resguardo de la base de datos antes de la modernización."
 
-#: ../src/planner-sql-plugin.c:524
+#: ../src/planner-sql-plugin.c:605
 msgid "Upgrade"
 msgstr "Modernizar"
 
-#: ../src/planner-sql-plugin.c:538
+#: ../src/planner-sql-plugin.c:619
 #, c-format
 msgid ""
 "Could not upgrade database %s.\n"
@@ -1760,43 +1764,43 @@ msgstr ""
 "Error de la base de datos: \n"
 "%s"
 
-#: ../src/planner-sql-plugin.c:579
+#: ../src/planner-sql-plugin.c:659
 #, c-format
 msgid "Can't create tables in database %s"
 msgstr "No se pueden crear tablas en la base de datos %s"
 
-#: ../src/planner-sql-plugin.c:648
+#: ../src/planner-sql-plugin.c:727
 #, c-format
 msgid "Database %s is not setup for Planner. Do you want to do that?"
 msgstr "La base de datos %s no está preparada para Planner. ¿Qué quiere hacer ahora?"
 
-#: ../src/planner-sql-plugin.c:696
+#: ../src/planner-sql-plugin.c:776
 #, c-format
 msgid "Connection to database '%s@%s' failed."
 msgstr "La conexión con la base de datos «%s@%s» falló."
 
-#: ../src/planner-sql-plugin.c:711
+#: ../src/planner-sql-plugin.c:799
 #, c-format
 msgid "Test to tables in database '%s' failed."
 msgstr "La prueba de tablas en la base de datos «%s» falló."
 
-#: ../src/planner-sql-plugin.c:816
+#: ../src/planner-sql-plugin.c:908
 msgid "ID"
 msgstr "ID"
 
-#: ../src/planner-sql-plugin.c:824
+#: ../src/planner-sql-plugin.c:916
 msgid "Project"
 msgstr "Proyecto"
 
-#: ../src/planner-sql-plugin.c:832
+#: ../src/planner-sql-plugin.c:924
 msgid "Phase"
 msgstr "Fase"
 
-#: ../src/planner-sql-plugin.c:840
+#: ../src/planner-sql-plugin.c:932
 msgid "Revision"
 msgstr "Revisión"
 
-#: ../src/planner-sql-plugin.c:1040
+#: ../src/planner-sql-plugin.c:1130
 msgid "Open from Database"
 msgstr "Abrir desde base de datos"
 
@@ -1971,32 +1975,32 @@ msgstr "Sangrar tarea"
 msgid "Unindent tasks"
 msgstr "Reducir sangría de las tareas"
 
-#: ../src/planner-task-tree.c:3150
+#: ../src/planner-task-tree.c:3152
 msgid "Unindent task"
 msgstr "Reducir sangría de la tarea"
 
-#: ../src/planner-task-tree.c:3227
+#: ../src/planner-task-tree.c:3228
 msgid "Move tasks up"
 msgstr "Subir tareas"
 
-#: ../src/planner-task-tree.c:3265
+#: ../src/planner-task-tree.c:3266
 msgid "Move task up"
 msgstr "Subir tarea"
 
-#: ../src/planner-task-tree.c:3354
+#: ../src/planner-task-tree.c:3355
 msgid "Move tasks down"
 msgstr "Bajar tareas"
 
 #. Moving task from 'position' to 'position + 1'
-#: ../src/planner-task-tree.c:3400
+#: ../src/planner-task-tree.c:3401
 msgid "Move task down"
 msgstr "Bajar tarea"
 
-#: ../src/planner-task-tree.c:3456
+#: ../src/planner-task-tree.c:3457
 msgid "Reset task constraints"
 msgstr "Restablecer impedimentos de la tarea"
 
-#: ../src/planner-task-tree.c:3488
+#: ../src/planner-task-tree.c:3489
 msgid "Reset all task constraints"
 msgstr "Reiniciar todos los impedimentos de la tarea"
 
@@ -2239,8 +2243,8 @@ msgstr "Archivos de Planner"
 #: ../src/planner-window.c:1324 ../src/planner-window.c:1346
 msgid "translator-credits"
 msgstr ""
-"Jorge González <jorgegonz@svn.gnome.org>, 2007\n"
-"Francisco Javier F. Serrador"
+"Jorge González <jorgegonz@svn.gnome.org>, 2007-2008.\n"
+"Francisco Javier F. Serrador <serrador@cvs.gnome.org>, 2003-2006."
 
 #: ../src/planner-window.c:1341
 msgid "A Project Management application for the GNOME desktop"
