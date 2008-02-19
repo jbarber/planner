@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: oc\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-02-02 21:55+0100\n"
+"POT-Creation-Date: 2008-02-19 20:27+0100\n"
 "PO-Revision-Date: 2007-12-29 15:27+0100\n"
 "Last-Translator: Yannig Marchegay (Kokoyaya) <yannig@marchegay.org>\n"
 "Language-Team: Occitan <ubuntu-l10n-oci@lists.ubuntu.com>\n"
@@ -699,21 +699,27 @@ msgstr "Còst"
 msgid "None"
 msgstr "Pas cap"
 
-#: ../libplanner/mrp-sql.c:214 ../libplanner/mrp-sql.c:228
+#: ../libplanner/mrp-sql.c:292 ../libplanner/mrp-sql.c:310
+#: ../src/planner-sql-plugin.c:207 ../src/planner-sql-plugin.c:225
 msgid "Can't connect to database server"
 msgstr "Impossible de se connectar al servidor de la basa de donadas"
 
+#: ../libplanner/mrp-sql.c:297 ../libplanner/mrp-sql.c:315
+#: ../src/planner-sql-plugin.c:212 ../src/planner-sql-plugin.c:230
+msgid "No errors reported."
+msgstr ""
+
 #. Give up.
-#: ../libplanner/mrp-sql.c:319 ../src/planner-sql-plugin.c:220
+#: ../libplanner/mrp-sql.c:405 ../src/planner-sql-plugin.c:300
 msgid "Invalid Unicode"
 msgstr ""
 
-#: ../libplanner/mrp-sql.c:2213
+#: ../libplanner/mrp-sql.c:2306
 #, c-format
 msgid "Connection to database '%s' failed.\n"
 msgstr "Impossible de se connectar a la basa de donadas '%s'.\n"
 
-#: ../libplanner/mrp-sql.c:2218
+#: ../libplanner/mrp-sql.c:2311
 #, c-format
 msgid ""
 "Connection to database '%s' failed.\n"
@@ -722,34 +728,34 @@ msgstr ""
 "Impossible de se connectar a la basa de donadas '%s'.\n"
 "%s"
 
-#: ../libplanner/mrp-sql.c:2235
+#: ../libplanner/mrp-sql.c:2326
 #, c-format
 msgid "BEGIN command failed %s."
 msgstr ""
 
-#: ../libplanner/mrp-sql.c:2403
+#: ../libplanner/mrp-sql.c:2486
 #, c-format
 msgid ""
 "The project '%s' has been changed by the user '%s' since you opened it. Do "
 "you want to save anyway?"
 msgstr ""
 
-#: ../libplanner/mrp-sql.c:3683
+#: ../libplanner/mrp-sql.c:3711
 #, c-format
 msgid "Connection to database '%s' failed."
 msgstr "Impossible de se connectar a la basa de donadas '%s'."
 
-#: ../libplanner/mrp-storage-sql.c:205
+#: ../libplanner/mrp-storage-sql.c:206
 #, c-format
 msgid "Invalid SQL URI (must start with 'sql://' and contain '#')."
 msgstr ""
 
-#: ../libplanner/mrp-storage-sql.c:274
+#: ../libplanner/mrp-storage-sql.c:275
 #, c-format
 msgid "Invalid SQL URI (invalid project id)."
 msgstr ""
 
-#: ../libplanner/mrp-storage-sql.c:282
+#: ../libplanner/mrp-storage-sql.c:283
 #, c-format
 msgid "Invalid SQL URI (no database name specified)."
 msgstr ""
@@ -787,12 +793,12 @@ msgid ""
 "date."
 msgstr ""
 
-#: ../libplanner/mrp-task-manager.c:2527
+#: ../libplanner/mrp-task-manager.c:2530
 #, c-format
 msgid "Cannot add a predecessor, because it would result in a loop."
 msgstr ""
 
-#: ../libplanner/mrp-task-manager.c:2573
+#: ../libplanner/mrp-task-manager.c:2576
 #, c-format
 msgid "Cannot move the task, because it would result in a loop."
 msgstr ""
@@ -1102,27 +1108,32 @@ msgstr "%e %b %Y"
 msgid "Work"
 msgstr "Trabalh"
 
-#: ../src/planner-gantt-print.c:542 ../src/planner-gantt-row.c:765
+#: ../src/planner-gantt-print.c:542 ../src/planner-gantt-row.c:776
 #: ../src/planner-html-plugin.c:125 ../src/planner-task-tree.c:1571
 #: ../src/planner-window.c:1988
 msgid "Unnamed"
 msgstr "Sens nom"
 
-#: ../src/planner-gantt-row.c:2697 ../src/planner-gantt-row.c:2700
-msgid "No name"
-msgstr "Pas de nom"
-
-#: ../src/planner-gantt-row.c:2703
-#, c-format
-msgid "Make task '%s' a predecessor of '%s'"
-msgstr ""
-
-#: ../src/planner-gantt-row.c:2769
+#: ../src/planner-gantt-row.c:2358
 #, c-format
 msgid "Change work to %s"
 msgstr ""
 
-#: ../src/planner-gantt-row.c:3370 ../src/planner-task-dialog.c:455
+#: ../src/planner-gantt-row.c:2370
+#, c-format
+msgid "Change progress to %u%% complete"
+msgstr ""
+
+#: ../src/planner-gantt-row.c:2409 ../src/planner-gantt-row.c:2412
+msgid "No name"
+msgstr "Pas de nom"
+
+#: ../src/planner-gantt-row.c:2415
+#, c-format
+msgid "Make task '%s' a predecessor of '%s'"
+msgstr ""
+
+#: ../src/planner-gantt-row.c:3436 ../src/planner-task-dialog.c:455
 #: ../src/planner-task-tree.c:257 ../src/planner-task-tree.c:947
 msgid "Edit task property"
 msgstr ""
@@ -1694,38 +1705,34 @@ msgstr "S %d"
 msgid "%04d, H%d"
 msgstr "%04d, S %d"
 
-#: ../src/planner-sql-plugin.c:93
+#: ../src/planner-sql-plugin.c:101
 msgid "Open from Database..."
 msgstr "Dobrir a partir de la basa de donadas..."
 
-#: ../src/planner-sql-plugin.c:94
+#: ../src/planner-sql-plugin.c:102
 msgid "Open a project from a database"
 msgstr ""
 
-#: ../src/planner-sql-plugin.c:96 ../src/planner-sql-plugin.c:1173
+#: ../src/planner-sql-plugin.c:104 ../src/planner-sql-plugin.c:1242
 msgid "Save to Database"
 msgstr "Enregistrar dins la basa de donadas"
 
-#: ../src/planner-sql-plugin.c:97
+#: ../src/planner-sql-plugin.c:105
 msgid "Save the current project to a database"
 msgstr "Enregistrar lo projècte actual dins una basa de donadas"
 
-#: ../src/planner-sql-plugin.c:135 ../src/planner-sql-plugin.c:150
-msgid "No errors reported."
-msgstr ""
-
-#: ../src/planner-sql-plugin.c:517
+#: ../src/planner-sql-plugin.c:598
 #, c-format
 msgid ""
 "Database %s needs to be upgraded from version %s to version %s.\n"
 "Please backup database before the upgrade."
 msgstr ""
 
-#: ../src/planner-sql-plugin.c:524
+#: ../src/planner-sql-plugin.c:605
 msgid "Upgrade"
 msgstr "Metre a jorn"
 
-#: ../src/planner-sql-plugin.c:538
+#: ../src/planner-sql-plugin.c:619
 #, c-format
 msgid ""
 "Could not upgrade database %s.\n"
@@ -1735,43 +1742,43 @@ msgid ""
 "%s"
 msgstr ""
 
-#: ../src/planner-sql-plugin.c:579
+#: ../src/planner-sql-plugin.c:659
 #, c-format
 msgid "Can't create tables in database %s"
 msgstr ""
 
-#: ../src/planner-sql-plugin.c:648
+#: ../src/planner-sql-plugin.c:727
 #, c-format
 msgid "Database %s is not setup for Planner. Do you want to do that?"
 msgstr ""
 
-#: ../src/planner-sql-plugin.c:697
+#: ../src/planner-sql-plugin.c:776
 #, c-format
 msgid "Connection to database '%s@%s' failed."
 msgstr "Impossible de se connectar a la basa de donadas '%s@%s' ."
 
-#: ../src/planner-sql-plugin.c:722
+#: ../src/planner-sql-plugin.c:799
 #, c-format
 msgid "Test to tables in database '%s' failed."
 msgstr ""
 
-#: ../src/planner-sql-plugin.c:837
+#: ../src/planner-sql-plugin.c:908
 msgid "ID"
 msgstr "ID"
 
-#: ../src/planner-sql-plugin.c:845
+#: ../src/planner-sql-plugin.c:916
 msgid "Project"
 msgstr "Projècte"
 
-#: ../src/planner-sql-plugin.c:853
+#: ../src/planner-sql-plugin.c:924
 msgid "Phase"
 msgstr ""
 
-#: ../src/planner-sql-plugin.c:861
+#: ../src/planner-sql-plugin.c:932
 msgid "Revision"
 msgstr "Revision"
 
-#: ../src/planner-sql-plugin.c:1061
+#: ../src/planner-sql-plugin.c:1130
 msgid "Open from Database"
 msgstr "Dobrir a partir de la basa de donadas"
 
@@ -1940,36 +1947,36 @@ msgstr ""
 msgid "Indent task"
 msgstr ""
 
-#: ../src/planner-task-tree.c:3134
+#: ../src/planner-task-tree.c:3136
 msgid "Unindent tasks"
 msgstr ""
 
-#: ../src/planner-task-tree.c:3152
+#: ../src/planner-task-tree.c:3154
 msgid "Unindent task"
 msgstr ""
 
-#: ../src/planner-task-tree.c:3228
+#: ../src/planner-task-tree.c:3232
 msgid "Move tasks up"
 msgstr ""
 
-#: ../src/planner-task-tree.c:3266
+#: ../src/planner-task-tree.c:3270
 msgid "Move task up"
 msgstr ""
 
-#: ../src/planner-task-tree.c:3355
+#: ../src/planner-task-tree.c:3358
 msgid "Move tasks down"
 msgstr ""
 
 #. Moving task from 'position' to 'position + 1'
-#: ../src/planner-task-tree.c:3401
+#: ../src/planner-task-tree.c:3404
 msgid "Move task down"
 msgstr ""
 
-#: ../src/planner-task-tree.c:3457
+#: ../src/planner-task-tree.c:3460
 msgid "Reset task constraints"
 msgstr ""
 
-#: ../src/planner-task-tree.c:3489
+#: ../src/planner-task-tree.c:3492
 msgid "Reset all task constraints"
 msgstr ""
 
@@ -2225,14 +2232,14 @@ msgstr ""
 "S'enregistratz pas, las modificacions de la darrièra minuta seràn anulladas."
 
 #: ../src/planner-window.c:1506
-#, fuzzy, c-format
+#, c-format
 msgid "If you don't save, changes made the last %d minute will be discarded."
 msgid_plural ""
 "If you don't save, changes made the last %d minutes will be discarded."
 msgstr[0] ""
-"S'enregistratz pas, las modificacions de la darrièra minuta seràn anulladas."
+"S'enregistratz pas, las modificacions de la darrièra %d minuta seràn anulladas."
 msgstr[1] ""
-"S'enregistratz pas, las modificacions de la darrièra minuta seràn anulladas."
+"S'enregistratz pas, las modificacions de las darrièras %d minutas seràn anulladas."
 
 #: ../src/planner-window.c:1514
 msgid "If you don't save, changes made the last hour will be discarded."
@@ -2240,14 +2247,14 @@ msgstr ""
 "S'enregistratz pas, las modificacions de la darrièra ora seràn anulladas."
 
 #: ../src/planner-window.c:1519
-#, fuzzy, c-format
+#, c-format
 msgid "If you don't save, changes made the last %d hour will be discarded."
 msgid_plural ""
 "If you don't save, changes made the last %d hours will be discarded."
 msgstr[0] ""
-"S'enregistratz pas, las modificacions de la darrièra ora seràn anulladas."
+"S'enregistratz pas, las modificacions de la darrièra %d ora seràn anulladas."
 msgstr[1] ""
-"S'enregistratz pas, las modificacions de la darrièra ora seràn anulladas."
+"S'enregistratz pas, las modificacions de las darrièras %d oras seràn anulladas."
 
 #: ../src/planner-window.c:1529
 #, c-format
