@@ -341,6 +341,7 @@ task_view_get_widget (PlannerView *view)
 						    COL_SLACK, _("Slack"),
 						    COL_COST, _("Cost"),
 						    COL_ASSIGNED_TO, _("Assigned to"),
+						    COL_COMPLETE, _("% Complete"),
 						    -1);
 
 		g_object_unref (model);
@@ -814,6 +815,7 @@ task_view_load_columns (PlannerView *view)
 			    strcmp (id, "duration") == 0 ||
 			    strcmp (id, "slack") == 0 ||
 			    strcmp (id, "cost") == 0 ||
+			    strcmp (id, "complete") == 0 ||
 			    strcmp (id, "assigned-to")) {
 				gtk_tree_view_column_set_visible (column, TRUE);
 			} else {

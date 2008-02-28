@@ -652,6 +652,8 @@ gantt_model_get_column_type (GtkTreeModel *tree_model,
 		return MRP_TYPE_TASK;
 	case COL_COST:
 		return G_TYPE_LONG;	
+	case COL_COMPLETE:
+		return G_TYPE_INT;
 	default:
 		return G_TYPE_INVALID;
 	}
@@ -887,6 +889,12 @@ gantt_model_get_value (GtkTreeModel *tree_model,
 	case COL_COST:
 		g_value_init (value, G_TYPE_FLOAT);
 		g_value_set_float (value, mrp_task_get_cost (task));
+
+		break;
+
+	case COL_COMPLETE:
+		g_value_init (value, G_TYPE_INT);
+		g_value_set_int (value, mrp_task_get_percent_complete (task));
 
 		break;
 

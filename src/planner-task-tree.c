@@ -126,6 +126,11 @@ static void        task_tree_cost_data_func            (GtkTreeViewColumn    *tr
 							GtkTreeModel         *tree_model,
 							GtkTreeIter          *iter,
 							gpointer              data);
+static void        task_tree_complete_data_func        (GtkTreeViewColumn    *tree_column,
+							GtkCellRenderer      *cell,
+							GtkTreeModel         *tree_model,
+							GtkTreeIter          *iter,
+							gpointer              data);
 static void        task_tree_assigned_to_data_func     (GtkTreeViewColumn    *tree_column,
 							GtkCellRenderer      *cell,
 							GtkTreeModel         *tree_model,
@@ -1534,6 +1539,31 @@ task_tree_cost_data_func (GtkTreeViewColumn *tree_column,
 }
 
 static void
+task_tree_complete_data_func (GtkTreeViewColumn *tree_column,
+			  GtkCellRenderer   *cell,
+			  GtkTreeModel      *tree_model,
+			  GtkTreeIter       *iter,
+			  gpointer           data)
+{
+	gchar  *str;
+	gint    complete;
+
+	gtk_tree_model_get (tree_model,
+			    iter,
+			    COL_COMPLETE, &complete,
+			    -1);
+
+	str = planner_format_int (complete);
+
+	g_object_set (cell,
+		      "text", str,
+		      NULL);
+
+	g_free (str);
+}
+
+
+static void
 task_tree_assigned_to_data_func (GtkTreeViewColumn *tree_column,
 			  GtkCellRenderer   *cell,
 			  GtkTreeModel      *tree_model,
@@ -1707,6 +1737,46 @@ task_tree_name_edited (GtkCellRendererText *cell,
 	
 	/*planner_cmd_manager_end_transaction (planner_window_get_cmd_manager (priv->main_window));*/
 		
+	gtk_tree_path_free (path);
+}
+
+static void
+task_tree_complete_edited (GtkCellRendererText *cell,
+		       gchar               *path_string,
+		       gchar               *new_text,
+		       gpointer             data)
+{
+	PlannerTaskTree     *tree = data;
+	GtkTreeView         *view = data;
+	GtkTreeModel        *model;
+	GtkTreePath         *path;
+	GtkTreeIter          iter;
+	MrpTask             *task;
+	GValue               value = { 0 };
+        gint		     complete;
+
+	model = gtk_tree_view_get_model (view);
+	path = gtk_tree_path_new_from_string (path_string);	
+	gtk_tree_model_get_iter (model, &iter, path);
+
+	gtk_tree_model_get (model, &iter, 
+			    COL_TASK, &task,
+			    -1);
+
+        complete = atoi(new_text);
+	if (mrp_task_get_percent_complete (MRP_TASK (task)) != complete) {
+		g_value_init (&value, G_TYPE_INT);
+		g_value_set_int (&value, complete);
+		
+		task_cmd_edit_property (tree->priv->main_window,
+					PLANNER_TASK_TREE (view),
+					task,
+					"percent_complete",
+					&value);
+
+		g_value_unset (&value);
+	}
+	
 	gtk_tree_path_free (path);
 }
 
@@ -2442,6 +2512,32 @@ task_tree_add_column (PlannerTaskTree *tree,
 		g_object_set_data (G_OBJECT (col),
 				   "data-func", task_tree_cost_data_func);
 		g_object_set_data (G_OBJECT (col), "id", "cost");
+		break;
+
+	case COL_COMPLETE:
+		cell = gtk_cell_renderer_text_new ();
+		g_object_set (cell, "editable", TRUE, NULL);
+
+		col = gtk_tree_view_column_new_with_attributes (title,
+								cell,
+								NULL);
+
+		gtk_tree_view_column_set_resizable (col, TRUE);
+		gtk_tree_view_column_set_min_width (col, 70);
+		gtk_tree_view_column_set_cell_data_func (col,
+							 cell,
+							 task_tree_complete_data_func,
+							 GTK_TREE_VIEW (tree),
+							 NULL);
+		g_object_set_data (G_OBJECT (col),
+				   "data-func", task_tree_complete_data_func);
+		g_object_set_data (G_OBJECT (col), "id", "complete");
+
+		g_signal_connect (cell,
+				  "edited",
+				  G_CALLBACK (task_tree_complete_edited),
+				  GTK_TREE_VIEW (tree));
+
 		break;
 
 	case COL_ASSIGNED_TO:
