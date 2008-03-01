@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: planner.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-02-15 21:37+0000\n"
-"PO-Revision-Date: 2008-02-18 23:22+0100\n"
+"POT-Creation-Date: 2008-02-28 01:07+0000\n"
+"PO-Revision-Date: 2008-03-01 17:40+0100\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -581,7 +581,7 @@ msgstr "Fase:"
 
 #: ../data/stylesheets/localizable.xml.h:7
 msgid "Priority"
-msgstr "Prioridad:"
+msgstr "Prioridad"
 
 #: ../data/stylesheets/localizable.xml.h:8
 msgid "Report Date:"
@@ -632,14 +632,17 @@ msgid "Use day from base calendar"
 msgstr "Usar día del calendario base"
 
 #: ../libplanner/mrp-file-module.c:121
+#, c-format
 msgid "This format does not support reading"
 msgstr "Este formato no soporta lectura"
 
 #: ../libplanner/mrp-parser.c:1064 ../libplanner/mrp-parser.c:1159
+#, c-format
 msgid "Could not create XML tree"
 msgstr "No se pudo crear el árbol XML"
 
 #: ../libplanner/mrp-parser.c:1125
+#, c-format
 msgid "Could not write XML file"
 msgstr "No se pudo escribir el archivo XML"
 
@@ -658,10 +661,12 @@ msgid "Couldn't find a suitable file module for loading '%s'"
 msgstr "No se pudo encontrar un módulo apropiado para cargar «%s»"
 
 #: ../libplanner/mrp-project.c:780 ../libplanner/mrp-project.c:1064
+#, c-format
 msgid "No support for SQL storage built into this version of Planner."
 msgstr "No hay soporte para almacenamiento SQL compilado en esta versión de Planner."
 
 #: ../libplanner/mrp-project.c:817
+#, c-format
 msgid "Invalid URI."
 msgstr "URI inválida."
 
@@ -671,6 +676,7 @@ msgid "Unable to find file writer identified by '%s'"
 msgstr "No es posible encontrar el escritor de archivos identificado por «%s»"
 
 #: ../libplanner/mrp-project.c:1021
+#, c-format
 msgid "Couldn't find a suitable file module for loading project"
 msgstr "No se pudo encontrar un módulo de archivo adecuado para cargar el proyecto"
 
@@ -757,18 +763,22 @@ msgid "Connection to database '%s' failed."
 msgstr "Ha fallado la conexión con la base de datos «%s»."
 
 #: ../libplanner/mrp-storage-sql.c:206
+#, c-format
 msgid "Invalid SQL URI (must start with 'sql://' and contain '#')."
 msgstr "URI SQL inválida (debe empezar con 'sql://' y contener '#')."
 
 #: ../libplanner/mrp-storage-sql.c:275
+#, c-format
 msgid "Invalid SQL URI (invalid project id)."
 msgstr "URI SQL inválida (id de proyecto inválido)."
 
 #: ../libplanner/mrp-storage-sql.c:283
+#, c-format
 msgid "Invalid SQL URI (no database name specified)."
 msgstr "URI SQL inválida (no hay especificado un nombre de base de datos)."
 
 #: ../libplanner/mrp-task.c:1070
+#, c-format
 msgid "Could not add a predecessor relation, because the tasks are already related."
 msgstr ""
 "No se puede añadir una relación predecesora, debido a que las tareas ya se "
@@ -803,6 +813,7 @@ msgstr ""
 "«Empezar no antes que»."
 
 #: ../libplanner/mrp-task.c:1124
+#, c-format
 msgid ""
 "Start to Finish relation cannot be set. Predecessor starts on project start "
 "date."
@@ -811,10 +822,12 @@ msgstr ""
 "en la fecha de inicio del proyecto."
 
 #: ../libplanner/mrp-task-manager.c:2530
+#, c-format
 msgid "Cannot add a predecessor, because it would result in a loop."
 msgstr "No se puede añadir un predecesor, debido a que formaría un bucle."
 
 #: ../libplanner/mrp-task-manager.c:2576
+#, c-format
 msgid "Cannot move the task, because it would result in a loop."
 msgstr "No se puede mover la tarea, porque se formaría un bucle."
 
@@ -824,6 +837,7 @@ msgid "%B %e, %Y"
 msgstr "%e %B, %Y"
 
 #: ../libplanner/mrp-xsl.c:157 ../libplanner/mrp-xsl.c:205
+#, c-format
 msgid "Export to HTML failed"
 msgstr "Ha fallado la exportación a HTML"
 
@@ -1123,7 +1137,7 @@ msgid "Work"
 msgstr "Trabajo"
 
 #: ../src/planner-gantt-print.c:542 ../src/planner-gantt-row.c:776
-#: ../src/planner-html-plugin.c:125 ../src/planner-task-tree.c:1571
+#: ../src/planner-html-plugin.c:125 ../src/planner-task-tree.c:1601
 #: ../src/planner-window.c:1988
 msgid "Unnamed"
 msgstr "Sin nombre"
@@ -1148,7 +1162,7 @@ msgid "Make task '%s' a predecessor of '%s'"
 msgstr "Hacer la tarea «%s» predecesora de «%s»"
 
 #: ../src/planner-gantt-row.c:3436 ../src/planner-task-dialog.c:455
-#: ../src/planner-task-tree.c:257 ../src/planner-task-tree.c:947
+#: ../src/planner-task-tree.c:262 ../src/planner-task-tree.c:952
 msgid "Edit task property"
 msgstr "Editar propiedad de la tarea"
 
@@ -1926,27 +1940,27 @@ msgstr "/Asignar _recursos…"
 msgid "/_Edit task..."
 msgstr "/_Editar tarea…"
 
-#: ../src/planner-task-tree.c:567
+#: ../src/planner-task-tree.c:572
 msgid "Remove task"
 msgstr "Eliminar tarea"
 
-#: ../src/planner-task-tree.c:644
+#: ../src/planner-task-tree.c:649
 msgid "Apply constraint to task"
 msgstr "Aplicar impedimento a la tarea"
 
-#: ../src/planner-task-tree.c:706
+#: ../src/planner-task-tree.c:711
 msgid "Reset task constraint"
 msgstr "Restablecer impedimento de la tarea"
 
-#: ../src/planner-task-tree.c:1492 ../src/planner-task-tree.c:1624
+#: ../src/planner-task-tree.c:1497 ../src/planner-task-tree.c:1654
 msgid "N/A"
 msgstr "N/D"
 
-#: ../src/planner-task-tree.c:2724
+#: ../src/planner-task-tree.c:2820
 msgid "Remove tasks"
 msgstr "Eliminar tareas"
 
-#: ../src/planner-task-tree.c:2786
+#: ../src/planner-task-tree.c:2882
 #, c-format
 msgid ""
 "You are about to open an edit dialog each for %i tasks. Are you sure that "
@@ -1955,52 +1969,52 @@ msgstr ""
 "Va a abrir un diálogo de edición por cada una de las %i tareas. ¿Seguro que "
 "quiere hacer esto?"
 
-#: ../src/planner-task-tree.c:2888
+#: ../src/planner-task-tree.c:2984
 msgid "Unlink tasks"
 msgstr "Desenlazar tareas"
 
-#: ../src/planner-task-tree.c:2940
+#: ../src/planner-task-tree.c:3036
 msgid "Link tasks"
 msgstr "Enlazar tareas"
 
-#: ../src/planner-task-tree.c:3031
+#: ../src/planner-task-tree.c:3127
 msgid "Indent tasks"
 msgstr "Sangrar tareas"
 
-#: ../src/planner-task-tree.c:3042
+#: ../src/planner-task-tree.c:3138
 msgid "Indent task"
 msgstr "Sangrar tarea"
 
-#: ../src/planner-task-tree.c:3134
+#: ../src/planner-task-tree.c:3232
 msgid "Unindent tasks"
 msgstr "Reducir sangría de las tareas"
 
-#: ../src/planner-task-tree.c:3152
+#: ../src/planner-task-tree.c:3250
 msgid "Unindent task"
 msgstr "Reducir sangría de la tarea"
 
-#: ../src/planner-task-tree.c:3228
+#: ../src/planner-task-tree.c:3328
 msgid "Move tasks up"
 msgstr "Subir tareas"
 
-#: ../src/planner-task-tree.c:3266
+#: ../src/planner-task-tree.c:3366
 msgid "Move task up"
 msgstr "Subir tarea"
 
-#: ../src/planner-task-tree.c:3355
+#: ../src/planner-task-tree.c:3454
 msgid "Move tasks down"
 msgstr "Bajar tareas"
 
 #. Moving task from 'position' to 'position + 1'
-#: ../src/planner-task-tree.c:3401
+#: ../src/planner-task-tree.c:3500
 msgid "Move task down"
 msgstr "Bajar tarea"
 
-#: ../src/planner-task-tree.c:3457
+#: ../src/planner-task-tree.c:3556
 msgid "Reset task constraints"
 msgstr "Restablecer impedimentos de la tarea"
 
-#: ../src/planner-task-tree.c:3489
+#: ../src/planner-task-tree.c:3588
 msgid "Reset all task constraints"
 msgstr "Reiniciar todos los impedimentos de la tarea"
 
@@ -2020,11 +2034,16 @@ msgstr "Tareas"
 msgid "_Tasks"
 msgstr "_Tareas"
 
-#: ../src/planner-task-view.c:572
+#: ../src/planner-task-view.c:344
+#, c-format
+msgid "% Complete"
+msgstr "% Completado"
+
+#: ../src/planner-task-view.c:573
 msgid "Edit custom task properties"
 msgstr "Editar propiedades personalizadas de la tarea"
 
-#: ../src/planner-task-view.c:626
+#: ../src/planner-task-view.c:627
 msgid "Edit Task Columns"
 msgstr "Editar columnas de tareas"
 
@@ -2382,7 +2401,7 @@ msgstr "URL para una tarea que usa el Servidor de Datos de Evolution"
 
 #: ../eds-backend/e-cal-backend-planner.c:829
 msgid "Invalid server URI"
-msgstr "URI del servidor inválida."
+msgstr "URI del servidor inválida"
 
 #. book_target = (EABConfigTargetSource *) data->target;
 #. source = book_target->source;
