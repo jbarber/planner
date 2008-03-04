@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-02-16 18:58+0100\n"
-"PO-Revision-Date: 2008-02-16 18:59+0100\n"
+"POT-Creation-Date: 2008-03-04 18:48+0100\n"
+"PO-Revision-Date: 2008-03-04 18:50+0100\n"
 "Last-Translator: Iñaki Larrañaga Murgoitio <dooteo@euskalgnu.org>\n"
 "Language-Team: Basque <itzulpena@euskalgnu.org>\n"
 "MIME-Version: 1.0\n"
@@ -626,14 +626,17 @@ msgid "Use day from base calendar"
 msgstr "Hartu eguna egutegitik"
 
 #: ../libplanner/mrp-file-module.c:121
+#, c-format
 msgid "This format does not support reading"
 msgstr "Formatu honek ez du irakurketa onartzen"
 
 #: ../libplanner/mrp-parser.c:1064 ../libplanner/mrp-parser.c:1159
+#, c-format
 msgid "Could not create XML tree"
 msgstr "Ezin izan da XML zuhaitza sortu"
 
 #: ../libplanner/mrp-parser.c:1125
+#, c-format
 msgid "Could not write XML file"
 msgstr "Ezin izan da idatzi XML fitxategian"
 
@@ -652,10 +655,12 @@ msgid "Couldn't find a suitable file module for loading '%s'"
 msgstr "Ezin izan da aurkitu '%s' kargatzeko fitxategi-modulu egokirik"
 
 #: ../libplanner/mrp-project.c:780 ../libplanner/mrp-project.c:1064
+#, c-format
 msgid "No support for SQL storage built into this version of Planner."
 msgstr "SQL biltegiratzeen euskarririk ez du Planner-en bertsio honek."
 
 #: ../libplanner/mrp-project.c:817
+#, c-format
 msgid "Invalid URI."
 msgstr "URI baliogabea."
 
@@ -665,6 +670,7 @@ msgid "Unable to find file writer identified by '%s'"
 msgstr "Ezin da aurkitu '%s' gisa identifikatutako fitxategi-idazlerik"
 
 #: ../libplanner/mrp-project.c:1021
+#, c-format
 msgid "Couldn't find a suitable file module for loading project"
 msgstr "Ezin izan da aurkitu proiektua kargatzeko fitxategi-modulu egokirik"
 
@@ -751,18 +757,22 @@ msgid "Connection to database '%s' failed."
 msgstr "'%s' datu-baserako konexioak huts egin du."
 
 #: ../libplanner/mrp-storage-sql.c:206
+#, c-format
 msgid "Invalid SQL URI (must start with 'sql://' and contain '#')."
 msgstr "SQL URI baliogabea (honela hasi behar du: 'sql://', eta '#' eduki behar du)."
 
 #: ../libplanner/mrp-storage-sql.c:275
+#, c-format
 msgid "Invalid SQL URI (invalid project id)."
 msgstr "SQL URI baliogabea (proiektu-id baliogabea)."
 
 #: ../libplanner/mrp-storage-sql.c:283
+#, c-format
 msgid "Invalid SQL URI (no database name specified)."
 msgstr "SQL URI baliogabea (ez da datu-base izenik zehaztu)."
 
 #: ../libplanner/mrp-task.c:1070
+#, c-format
 msgid "Could not add a predecessor relation, because the tasks are already related."
 msgstr ""
 "Ezin izan da aurreko-erlaziorik gehitu; zereginak dagoeneko erlazionatuta "
@@ -797,6 +807,7 @@ msgstr ""
 "murriztapenekin konbinatu."
 
 #: ../libplanner/mrp-task.c:1124
+#, c-format
 msgid ""
 "Start to Finish relation cannot be set. Predecessor starts on project start "
 "date."
@@ -805,10 +816,12 @@ msgstr ""
 "proiektuaren hasierako data baita."
 
 #: ../libplanner/mrp-task-manager.c:2530
+#, c-format
 msgid "Cannot add a predecessor, because it would result in a loop."
 msgstr "Ezin da gehitu aurrekorik, begizta eragingo bailuke."
 
 #: ../libplanner/mrp-task-manager.c:2576
+#, c-format
 msgid "Cannot move the task, because it would result in a loop."
 msgstr "Ezin da lekuz aldatu zeregina, begizta eragingo bailuke."
 
@@ -818,6 +831,7 @@ msgid "%B %e, %Y"
 msgstr "%Y %B %e"
 
 #: ../libplanner/mrp-xsl.c:157 ../libplanner/mrp-xsl.c:205
+#, c-format
 msgid "Export to HTML failed"
 msgstr "Huts egin du HTMLra esportatzean"
 
@@ -1119,7 +1133,7 @@ msgid "Work"
 msgstr "Lanekoa"
 
 #: ../src/planner-gantt-print.c:542 ../src/planner-gantt-row.c:776
-#: ../src/planner-html-plugin.c:125 ../src/planner-task-tree.c:1571
+#: ../src/planner-html-plugin.c:125 ../src/planner-task-tree.c:1601
 #: ../src/planner-window.c:1988
 msgid "Unnamed"
 msgstr "Izengabea"
@@ -1144,7 +1158,7 @@ msgid "Make task '%s' a predecessor of '%s'"
 msgstr "Egin '%s' zeregina '%s'(r)en aurreko"
 
 #: ../src/planner-gantt-row.c:3436 ../src/planner-task-dialog.c:455
-#: ../src/planner-task-tree.c:257 ../src/planner-task-tree.c:947
+#: ../src/planner-task-tree.c:262 ../src/planner-task-tree.c:952
 msgid "Edit task property"
 msgstr "Editatu zeregin-propietatea"
 
@@ -1921,27 +1935,27 @@ msgstr "/Esleitu _baliabideak..."
 msgid "/_Edit task..."
 msgstr "/_Editatu zeregina..."
 
-#: ../src/planner-task-tree.c:567
+#: ../src/planner-task-tree.c:572
 msgid "Remove task"
 msgstr "Kendu zeregina"
 
-#: ../src/planner-task-tree.c:644
+#: ../src/planner-task-tree.c:649
 msgid "Apply constraint to task"
 msgstr "Aplikatu murriztapena zereginari"
 
-#: ../src/planner-task-tree.c:706
+#: ../src/planner-task-tree.c:711
 msgid "Reset task constraint"
 msgstr "Berrezarri zereginaren murriztapena"
 
-#: ../src/planner-task-tree.c:1492 ../src/planner-task-tree.c:1624
+#: ../src/planner-task-tree.c:1497 ../src/planner-task-tree.c:1654
 msgid "N/A"
 msgstr "E/E"
 
-#: ../src/planner-task-tree.c:2724
+#: ../src/planner-task-tree.c:2820
 msgid "Remove tasks"
 msgstr "Kendu zereginak"
 
-#: ../src/planner-task-tree.c:2786
+#: ../src/planner-task-tree.c:2882
 #, c-format
 msgid ""
 "You are about to open an edit dialog each for %i tasks. Are you sure that "
@@ -1950,52 +1964,52 @@ msgstr ""
 "%i zeregin bakoitzarentzat edizio-koadro bat irekitzera zoaz. Ziur zaude "
 "hori egin nahi duzula?"
 
-#: ../src/planner-task-tree.c:2888
+#: ../src/planner-task-tree.c:2984
 msgid "Unlink tasks"
 msgstr "Desestekatu zereginak"
 
-#: ../src/planner-task-tree.c:2940
+#: ../src/planner-task-tree.c:3036
 msgid "Link tasks"
 msgstr "Estekatu zereginak"
 
-#: ../src/planner-task-tree.c:3031
+#: ../src/planner-task-tree.c:3127
 msgid "Indent tasks"
 msgstr "Koskatu zereginak"
 
-#: ../src/planner-task-tree.c:3042
+#: ../src/planner-task-tree.c:3138
 msgid "Indent task"
 msgstr "Koskatu zeregina"
 
-#: ../src/planner-task-tree.c:3136
+#: ../src/planner-task-tree.c:3232
 msgid "Unindent tasks"
 msgstr "Kendu koska zereginei"
 
-#: ../src/planner-task-tree.c:3154
+#: ../src/planner-task-tree.c:3250
 msgid "Unindent task"
 msgstr "Kendu koska zereginari"
 
-#: ../src/planner-task-tree.c:3232
+#: ../src/planner-task-tree.c:3328
 msgid "Move tasks up"
 msgstr "Eraman zereginak gora"
 
-#: ../src/planner-task-tree.c:3270
+#: ../src/planner-task-tree.c:3366
 msgid "Move task up"
 msgstr "Eraman zeregina gora"
 
-#: ../src/planner-task-tree.c:3358
+#: ../src/planner-task-tree.c:3454
 msgid "Move tasks down"
 msgstr "Eraman zereginak behera"
 
 #. Moving task from 'position' to 'position + 1'
-#: ../src/planner-task-tree.c:3404
+#: ../src/planner-task-tree.c:3500
 msgid "Move task down"
 msgstr "Eraman zeregina behera"
 
-#: ../src/planner-task-tree.c:3460
+#: ../src/planner-task-tree.c:3556
 msgid "Reset task constraints"
 msgstr "Berrezarri zereginaren murriztapenak"
 
-#: ../src/planner-task-tree.c:3492
+#: ../src/planner-task-tree.c:3588
 msgid "Reset all task constraints"
 msgstr "Berrezarri zeregin guztien murriztapenak"
 
@@ -2015,11 +2029,20 @@ msgstr "Zereginak"
 msgid "_Tasks"
 msgstr "_Zereginak"
 
-#: ../src/planner-task-view.c:572
+#. i18n: The string "% Complete" will be used in the header
+#. * of a column containing values from 0 upto 100, indicating
+#. * what part of a task has been completed.
+#.
+#: ../src/planner-task-view.c:349
+#, no-c-format
+msgid "% Complete"
+msgstr "Osatuta (%)"
+
+#: ../src/planner-task-view.c:578
 msgid "Edit custom task properties"
 msgstr "Editatu zereginaren propietate pertsonalizatuak"
 
-#: ../src/planner-task-view.c:626
+#: ../src/planner-task-view.c:632
 msgid "Edit Task Columns"
 msgstr "Editatu zereginen zutabea"
 
