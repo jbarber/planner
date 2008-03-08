@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: oc\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-02-19 20:27+0100\n"
+"POT-Creation-Date: 2008-03-07 10:23+0100\n"
 "PO-Revision-Date: 2007-12-29 15:27+0100\n"
 "Last-Translator: Yannig Marchegay (Kokoyaya) <yannig@marchegay.org>\n"
 "Language-Team: Occitan <ubuntu-l10n-oci@lists.ubuntu.com>\n"
@@ -1109,7 +1109,7 @@ msgid "Work"
 msgstr "Trabalh"
 
 #: ../src/planner-gantt-print.c:542 ../src/planner-gantt-row.c:776
-#: ../src/planner-html-plugin.c:125 ../src/planner-task-tree.c:1571
+#: ../src/planner-html-plugin.c:125 ../src/planner-task-tree.c:1601
 #: ../src/planner-window.c:1988
 msgid "Unnamed"
 msgstr "Sens nom"
@@ -1134,7 +1134,7 @@ msgid "Make task '%s' a predecessor of '%s'"
 msgstr ""
 
 #: ../src/planner-gantt-row.c:3436 ../src/planner-task-dialog.c:455
-#: ../src/planner-task-tree.c:257 ../src/planner-task-tree.c:947
+#: ../src/planner-task-tree.c:262 ../src/planner-task-tree.c:952
 msgid "Edit task property"
 msgstr ""
 
@@ -1904,79 +1904,79 @@ msgstr ""
 msgid "/_Edit task..."
 msgstr "/_Modificar un prètzfach..."
 
-#: ../src/planner-task-tree.c:567
+#: ../src/planner-task-tree.c:572
 msgid "Remove task"
 msgstr "Suprimir un prètzfach"
 
-#: ../src/planner-task-tree.c:644
+#: ../src/planner-task-tree.c:649
 msgid "Apply constraint to task"
 msgstr ""
 
-#: ../src/planner-task-tree.c:706
+#: ../src/planner-task-tree.c:711
 msgid "Reset task constraint"
 msgstr ""
 
-#: ../src/planner-task-tree.c:1492 ../src/planner-task-tree.c:1624
+#: ../src/planner-task-tree.c:1497 ../src/planner-task-tree.c:1654
 msgid "N/A"
 msgstr "N/A"
 
-#: ../src/planner-task-tree.c:2724
+#: ../src/planner-task-tree.c:2820
 msgid "Remove tasks"
 msgstr "Suprimir de prètzfaches"
 
-#: ../src/planner-task-tree.c:2786
+#: ../src/planner-task-tree.c:2882
 #, c-format
 msgid ""
 "You are about to open an edit dialog each for %i tasks. Are you sure that "
 "you want to do that?"
 msgstr ""
 
-#: ../src/planner-task-tree.c:2888
+#: ../src/planner-task-tree.c:2984
 msgid "Unlink tasks"
 msgstr ""
 
-#: ../src/planner-task-tree.c:2940
+#: ../src/planner-task-tree.c:3036
 msgid "Link tasks"
 msgstr ""
 
-#: ../src/planner-task-tree.c:3031
+#: ../src/planner-task-tree.c:3127
 msgid "Indent tasks"
 msgstr ""
 
-#: ../src/planner-task-tree.c:3042
+#: ../src/planner-task-tree.c:3138
 msgid "Indent task"
 msgstr ""
 
-#: ../src/planner-task-tree.c:3136
+#: ../src/planner-task-tree.c:3232
 msgid "Unindent tasks"
 msgstr ""
 
-#: ../src/planner-task-tree.c:3154
+#: ../src/planner-task-tree.c:3250
 msgid "Unindent task"
 msgstr ""
 
-#: ../src/planner-task-tree.c:3232
+#: ../src/planner-task-tree.c:3328
 msgid "Move tasks up"
 msgstr ""
 
-#: ../src/planner-task-tree.c:3270
+#: ../src/planner-task-tree.c:3366
 msgid "Move task up"
 msgstr ""
 
-#: ../src/planner-task-tree.c:3358
+#: ../src/planner-task-tree.c:3454
 msgid "Move tasks down"
 msgstr ""
 
 #. Moving task from 'position' to 'position + 1'
-#: ../src/planner-task-tree.c:3404
+#: ../src/planner-task-tree.c:3500
 msgid "Move task down"
 msgstr ""
 
-#: ../src/planner-task-tree.c:3460
+#: ../src/planner-task-tree.c:3556
 msgid "Reset task constraints"
 msgstr ""
 
-#: ../src/planner-task-tree.c:3492
+#: ../src/planner-task-tree.c:3588
 msgid "Reset all task constraints"
 msgstr ""
 
@@ -1996,11 +1996,21 @@ msgstr "Prètzfaches"
 msgid "_Tasks"
 msgstr "_Prètzfaches"
 
-#: ../src/planner-task-view.c:572
+# Contexte important (à confirmer)
+#. i18n: The string "% Complete" will be used in the header
+#. * of a column containing values from 0 upto 100, indicating
+#. * what part of a task has been completed.
+#.
+#: ../src/planner-task-view.c:349
+#, no-c-format
+msgid "% Complete"
+msgstr ""
+
+#: ../src/planner-task-view.c:578
 msgid "Edit custom task properties"
 msgstr ""
 
-#: ../src/planner-task-view.c:626
+#: ../src/planner-task-view.c:632
 msgid "Edit Task Columns"
 msgstr "Modificar las colomnas de prètzfaches"
 
@@ -2237,9 +2247,11 @@ msgid "If you don't save, changes made the last %d minute will be discarded."
 msgid_plural ""
 "If you don't save, changes made the last %d minutes will be discarded."
 msgstr[0] ""
-"S'enregistratz pas, las modificacions de la darrièra %d minuta seràn anulladas."
+"S'enregistratz pas, las modificacions de la darrièra %d minuta seràn "
+"anulladas."
 msgstr[1] ""
-"S'enregistratz pas, las modificacions de las darrièras %d minutas seràn anulladas."
+"S'enregistratz pas, las modificacions de las darrièras %d minutas seràn "
+"anulladas."
 
 #: ../src/planner-window.c:1514
 msgid "If you don't save, changes made the last hour will be discarded."
@@ -2254,7 +2266,8 @@ msgid_plural ""
 msgstr[0] ""
 "S'enregistratz pas, las modificacions de la darrièra %d ora seràn anulladas."
 msgstr[1] ""
-"S'enregistratz pas, las modificacions de las darrièras %d oras seràn anulladas."
+"S'enregistratz pas, las modificacions de las darrièras %d oras seràn "
+"anulladas."
 
 #: ../src/planner-window.c:1529
 #, c-format
