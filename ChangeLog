@@ -1,5 +1,11 @@
 2008-03-15  Maurice van der Pot  <griffon26@kfk4ever.com>
 
+	* data/stylesheets/html1_gantt.xsl:
+	Use long resource name in exported HTML if no short resource name is given,
+	also for milestone tasks (bug #439180).
+
+2008-03-15  Maurice van der Pot  <griffon26@kfk4ever.com>
+
 	* libplanner/mrp-task-manager.c:
 	(remove_parent_predecessors_from_dependency_graph),
 	(remove_parent_from_dependency_graph),

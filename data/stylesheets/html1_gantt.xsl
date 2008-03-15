@@ -261,7 +261,16 @@
                     <xsl:for-each select="/project/allocations/allocation[@task-id=$task-id]">
                       <xsl:sort data-type="number" select="@resource-id" order="descending"/>
                       <xsl:variable name="resource-id" select="@resource-id"/>
-                      <xsl:value-of select="/project/resources/resource[@id=$resource-id]/@short-name"/>
+
+                      <xsl:choose>
+                        <xsl:when test="/project/resources/resource[@id=$resource-id]/@short-name = ''">
+                          <xsl:value-of select="/project/resources/resource[@id=$resource-id]/@name"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                          <xsl:value-of select="/project/resources/resource[@id=$resource-id]/@short-name"/>
+                        </xsl:otherwise>
+                      </xsl:choose>
+
                       <xsl:if test="not(position() = last())">
                         <xsl:text>, </xsl:text>
                       </xsl:if>
@@ -284,6 +293,7 @@
                           <xsl:value-of select="/project/resources/resource[@id=$resource-id]/@short-name"/>
                         </xsl:otherwise>
                       </xsl:choose>
+
                       <xsl:if test="not(position() = last())">
                         <xsl:text>, </xsl:text>
                       </xsl:if>
