@@ -47,7 +47,7 @@ struct _MrpTaskManagerPriv {
 	gboolean    needs_recalc;
 	gboolean    in_recalc;
 
-	GList      *depencency_list;
+	GList      *dependency_list;
 };
 
 typedef struct {
@@ -903,6 +903,35 @@ remove_predecessor_from_dependency_graph (MrpTaskManager *manager,
 }
 
 static void
+remove_parent_predecessors_from_dependency_graph (MrpTask *task,
+						  MrpTask *parent)
+{
+	MrpTask            *predecessor;
+	MrpTaskGraphNode   *predecessor_node;
+	MrpTaskGraphNode   *task_node;
+	GList              *list, *l;
+	MrpRelation        *relation;
+	
+	/* Remove parent's predecessors from task and all of its children. */
+	list = imrp_task_peek_predecessors (parent);
+	for (l = list; l; l = l->next) {
+		relation = l->data;
+		predecessor = mrp_relation_get_predecessor (relation);
+
+		/* Remove predecessor from task */
+		predecessor_node = imrp_task_get_graph_node (predecessor);
+		predecessor_node->next = g_list_remove (predecessor_node->next, task);
+		task_node = imrp_task_get_graph_node (task);
+		task_node->prev = g_list_remove (task_node->prev, predecessor);
+			
+		/* Remove predecessor from all its children */
+		if (mrp_task_get_n_children (task) > 0) {
+			remove_predecessor_from_dependency_graph_recursive (task, predecessor);
+		}
+	}
+}
+
+static void
 remove_parent_from_dependency_graph (MrpTaskManager *manager,
 				     MrpTask        *task,
 				     MrpTask        *parent)
@@ -918,6 +947,40 @@ remove_parent_from_dependency_graph (MrpTaskManager *manager,
 
 	task_node->next = g_list_remove (task_node->next, parent);
 	parent_node->prev = g_list_remove (parent_node->prev, task);
+
+	/* Remove dependencies from the parent's predecessors from the task and all
+	 * its children.
+	 */
+	remove_parent_predecessors_from_dependency_graph (task, parent);
+}
+
+static void
+add_parent_predecessors_to_dependency_graph (MrpTask *task,
+					     MrpTask *parent)
+{
+	MrpTask            *predecessor;
+	MrpTaskGraphNode   *predecessor_node;
+	MrpTaskGraphNode   *task_node;
+	GList              *list, *l;
+	MrpRelation        *relation;
+
+	/* Add parent's predecessors to task and all of its children. */
+	list = imrp_task_peek_predecessors (parent);
+	for (l = list; l; l = l->next) {
+		relation = l->data;
+		predecessor = mrp_relation_get_predecessor (relation);
+
+		/* Add predecessor to task */
+		predecessor_node = imrp_task_get_graph_node (predecessor);
+		predecessor_node->next = g_list_append (predecessor_node->next, task);
+		task_node = imrp_task_get_graph_node (task);
+		task_node->prev = g_list_append (task_node->prev, predecessor);
+
+		/* Add predecessor to all its children */
+		if (mrp_task_get_n_children (task) > 0) {
+			add_predecessor_to_dependency_graph_recursive (task, predecessor);
+		}
+	}
 }
 
 static void
@@ -936,6 +999,11 @@ add_parent_to_dependency_graph (MrpTaskManager *manager,
 
 	task_node->next = g_list_append (task_node->next, parent);
 	parent_node->prev = g_list_append (parent_node->prev, task);
+
+	/* Add dependencies from the parent's predecessors to the task and all
+	 * its children.
+	 */
+	add_parent_predecessors_to_dependency_graph (task, parent);
 }
 
 static void
@@ -1102,8 +1170,8 @@ task_manager_build_dependency_graph (MrpTaskManager *manager)
 		}
 	}
 
-	g_list_free (priv->depencency_list);
-	priv->depencency_list = g_list_reverse (deps);
+	g_list_free (priv->dependency_list);
+	priv->dependency_list = g_list_reverse (deps);
 
 	g_list_free (queue);
 	g_list_free (tasks);
@@ -2129,9 +2197,9 @@ task_manager_do_forward_pass (MrpTaskManager *manager,
 	*/
 
 	if (start_task) {
-		l = g_list_find (priv->depencency_list, start_task);
+		l = g_list_find (priv->dependency_list, start_task);
 	} else {
-		l = priv->depencency_list;
+		l = priv->dependency_list;
 	}
 	
 	while (l) {
@@ -2161,7 +2229,7 @@ task_manager_do_backward_pass (MrpTaskManager *manager)
 
 	project_finish = mrp_task_get_finish (priv->root);
 
-	tasks = g_list_reverse (g_list_copy (priv->depencency_list));
+	tasks = g_list_reverse (g_list_copy (priv->dependency_list));
 
 	for (l = tasks; l; l = l->next) {
 		MrpTask *task, *parent;
@@ -2488,6 +2556,35 @@ check_predecessor_traverse (MrpTaskManager *manager,
 	return TRUE;
 }
 
+static gboolean
+check_move_traverse_recursive (MrpTaskManager *manager,
+			       MrpTask *task)
+{
+	MrpTask          *child;
+	gboolean          retval = TRUE;
+	
+	child = mrp_task_get_first_child (task);
+	while (retval && child) {
+		retval = check_predecessor_traverse (manager, child, child, 1);
+
+		if (retval && mrp_task_get_n_children (child) > 0) {
+			retval = check_move_traverse_recursive (manager, child);
+		}
+		
+		child = mrp_task_get_next_sibling (child);
+	}
+
+	return retval;
+}
+
+static gboolean
+check_move_traverse (MrpTaskManager *manager,
+		     MrpTask        *task)
+{
+	return check_predecessor_traverse (manager, task, task, 1) &&
+		check_move_traverse_recursive (manager, task);
+}
+
 gboolean
 mrp_task_manager_check_predecessor (MrpTaskManager  *manager,
 				    MrpTask         *task,
@@ -2546,8 +2643,6 @@ mrp_task_manager_check_move (MrpTaskManager  *manager,
 	g_return_val_if_fail (MRP_IS_TASK (task), FALSE);
 	g_return_val_if_fail (MRP_IS_TASK (parent), FALSE);
 
-	/* FIXME: Check this. */
-
 	/* Remove the task from the old parent and add it to its new parent. */
 	remove_task_from_dependency_graph (manager, task, mrp_task_get_parent (task));
 	add_task_to_dependency_graph (manager, task, parent);
@@ -2563,7 +2658,7 @@ mrp_task_manager_check_move (MrpTaskManager  *manager,
 				   task_manager_unset_visited_func,
 				   NULL);
 	
-	retval = check_predecessor_traverse (manager, task, task, 1);
+	retval = check_move_traverse (manager, task);
 
 	/* Put the task back again. */
 	remove_task_from_dependency_graph (manager, task, parent);

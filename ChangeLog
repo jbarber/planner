@@ -1,3 +1,20 @@
+2008-03-15  Maurice van der Pot  <griffon26@kfk4ever.com>
+
+	* libplanner/mrp-task-manager.c:
+	(remove_parent_predecessors_from_dependency_graph),
+	(remove_parent_from_dependency_graph),
+	(add_parent_predecessors_to_dependency_graph),
+	(add_parent_to_dependency_graph),
+	(task_manager_build_dependency_graph),
+	(task_manager_do_forward_pass), (task_manager_do_backward_pass),
+	(check_move_traverse_recursive), (check_move_traverse),
+	(mrp_task_manager_check_move):
+	Fixed bug #382548. Planner now correctly detects loops that would be created
+	by indenting a task that is a predecessor of the task that would become its
+	parent, so it will no longer crash trying to undo an invalid action.
+	* tests/task-test.c: (main):
+	Added regression tests for bug #382548 and related issues.
+
 2008-03-03  Kurt Maute  <kurt@maute.us>
 	* src/planner-task-view.c
 	Patch to correct L10N error per bug # 520064

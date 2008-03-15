@@ -1,3 +1,4 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 #include <config.h>
 #include <locale.h>
 #include <string.h>
@@ -12,10 +13,11 @@ main (gint argc, gchar **argv)
 {
 	MrpApplication *app;
 	MrpProject     *project;
-	MrpTask        *task1, *task2;
+	MrpTask        *task1, *task2, *task3, *task4;
 	mrptime         project_start, t1;
 	gint            work, duration;
 	gboolean        critical;
+	gboolean	success;
 	MrpTask        *root;
 	MrpRelation    *relation;
 	
@@ -48,7 +50,7 @@ main (gint argc, gchar **argv)
 	/* Check that we don't mess with work, it should be as set above. */
 	CHECK_INTEGER_RESULT (work, DAY);
 
-	/* Check that duration is calculated correctly. Duration == work if on
+	/* Check that duration is calculated correctly. Duration == work if no
 	 * resources are assigned.
 	 */
         CHECK_INTEGER_RESULT (duration, DAY);
@@ -109,6 +111,89 @@ main (gint argc, gchar **argv)
 					     NULL);
 
 	CHECK_POINTER_RESULT (relation, NULL);
+
+	/* Check that we can't make task2 the parent of task1 with the
+	 * predecessor relation in place
+	 */
+	success = mrp_project_move_task (project, 
+					 task1, 
+					 NULL, 
+					 task2, 
+					 FALSE, 
+					 NULL);
+
+	CHECK_BOOLEAN_RESULT (success, FALSE);
+
+	/* Check that we can't make task1 the parent of task2 with the
+	 * predecessor relation in place (bug #382548).
+	 * This test verifies that a loop is created in the dependency graph by
+	 * this action and that it is detected.
+	 */
+	success = mrp_project_move_task (project, 
+					 task2, 
+					 NULL, 
+					 task1, 
+					 FALSE, 
+					 NULL);
+
+	CHECK_BOOLEAN_RESULT (success, FALSE);
+
+	/* Add task3 as parent of task2 and see if we can't make task1 the
+	 * parent of task3. This test verifies that loops that include direct 
+	 * children but not the parent, are detected.
+	 */
+	task3 = g_object_new (MRP_TYPE_TASK,
+			      "name", "T3",
+			      "work", 10*DAY,
+			      NULL);
+
+	mrp_project_insert_task (project, NULL, -1, task3);
+
+	success = mrp_project_move_task (project,
+					 task2,
+					 NULL,
+					 task3,
+					 FALSE,
+					 NULL);
+	CHECK_BOOLEAN_RESULT (success, TRUE);
+
+	success = mrp_project_move_task (project, 
+					 task3, 
+					 NULL, 
+					 task1, 
+					 FALSE, 
+					 NULL);
+
+	CHECK_BOOLEAN_RESULT (success, FALSE);
+
+	/* Add task4 as parent of task3 and see if we can't make task1 the
+	 * parent of task3. This test verifies that loops that include indirect
+	 * children but not the parent or a direct child, are detected. If this
+	 * works, we'll assume detection is recursive as it should be.
+	 */
+	task4 = g_object_new (MRP_TYPE_TASK,
+			      "name", "T4",
+			      "work", 10*DAY,
+			      NULL);
+
+	mrp_project_insert_task (project, NULL, -1, task4);
+
+	success = mrp_project_move_task (project,
+					 task3,
+					 NULL,
+					 task4,
+					 FALSE,
+					 NULL);
+	CHECK_BOOLEAN_RESULT (success, TRUE);
+
+	success = mrp_project_move_task (project, 
+					 task4, 
+					 NULL, 
+					 task1, 
+					 FALSE, 
+					 NULL);
+
+	CHECK_BOOLEAN_RESULT (success, FALSE);
 
 	/* Retrieve a relation and see that it's correct. */
 	relation = mrp_task_get_relation (task1, task2);
