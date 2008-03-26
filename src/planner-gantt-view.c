@@ -594,6 +594,12 @@ gantt_view_create_widget (PlannerGanttView *view)
 				      COL_SLACK, _("Slack"),
 				      COL_COST, _("Cost"),
 				      COL_ASSIGNED_TO, _("Assigned to"),
+				      /* i18n: The string "% Complete" will be used in the header
+				       * of a column containing values from 0 upto 100, indicating
+				       * what part of a task has been completed. 
+				       * xgettext:no-c-format
+				       */
+				      COL_COMPLETE, _("% Complete"),
 				      -1);
 
 	priv->tree = tree;

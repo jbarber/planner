@@ -1753,7 +1753,7 @@ task_tree_complete_edited (GtkCellRendererText *cell,
 	GtkTreeIter          iter;
 	MrpTask             *task;
 	GValue               value = { 0 };
-        gint		     complete;
+	gint		     complete;
 
 	model = gtk_tree_view_get_model (view);
 	path = gtk_tree_path_new_from_string (path_string);	
@@ -1763,7 +1763,11 @@ task_tree_complete_edited (GtkCellRendererText *cell,
 			    COL_TASK, &task,
 			    -1);
 
-        complete = atoi(new_text);
+	complete = atoi(new_text);
+
+	if (complete < 0)   complete = 0;
+	if (complete > 100) complete = 100;
+
 	if (mrp_task_get_percent_complete (MRP_TASK (task)) != complete) {
 		g_value_init (&value, G_TYPE_INT);
 		g_value_set_int (&value, complete);
@@ -2523,7 +2527,7 @@ task_tree_add_column (PlannerTaskTree *tree,
 								NULL);
 
 		gtk_tree_view_column_set_resizable (col, TRUE);
-		gtk_tree_view_column_set_min_width (col, 70);
+		gtk_tree_view_column_set_min_width (col, 100);
 		gtk_tree_view_column_set_cell_data_func (col,
 							 cell,
 							 task_tree_complete_data_func,
