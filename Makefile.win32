@@ -11,7 +11,7 @@ export DESTDIR=$(HOME)
 endif
 
 ifeq ($(PREFIX),)
-export PREFIX=$(HOME)/dev
+export PREFIX=/dev
 endif
 
 export CFLAGS := $(CFLAGS) -Wall -Wunused -Wchar-subscripts -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wpointer-arith -Wno-sign-compare -Werror
