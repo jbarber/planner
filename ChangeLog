@@ -1,3 +1,9 @@
+2008-04-08  Maurice van der Pot  <griffon26@kfk4ever.com>
+
+	* configure.in: Now requiring libxml-2.6.23 and libxslt-1.1.23, because the
+	latter is the first release containing the week-in-year fix (bug	#452876),
+	which we need for our changes in html1_gantt.xsl committed in revision 850.
+
 2008-04-05  Maurice van der Pot  <griffon26@kfk4ever.com>
 
 	* Makefile.win32: Add better default PREFIX for build on Windows.

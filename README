@@ -57,14 +57,14 @@ LIBGLADE 2.3.0
 LIBGNOMEPRINTUI 2.10.0
 GNOME_VFS 2.10.0
 GCONF 2.10.0
-LIBXML 2.6.0
-LIBXSLT 1.1.0
+LIBXML 2.6.27
+LIBXSLT 1.1.23
 PYGTK 2.6.0
 
 Simple install procedure:
 
-  $ tar xzvf planner-0.14.1.tar.gz 	# unpack the sources
-  $ cd planner-0.14.1			# change to the toplevel directory
+  $ tar xzvf planner-0.14.3.tar.gz 	# unpack the sources
+  $ cd planner-0.14.3			# change to the toplevel directory
   $ ./configure				# run the `configure' script
   $ make				# build planner
   [ Become root if necessary ]
