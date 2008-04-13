@@ -14,12 +14,12 @@ CLEANFILES = $(xml_files)
 install-data-hook:
 if ENABLE_UPDATE_MIMEDB
 	$(UPDATE_MIME_DATABASE) "$(DESTDIR)$(datadir)/mime"
-	$(UPDATE_DESKTOP_DATABASE) 
+	$(UPDATE_DESKTOP_DATABASE) "$(DESTDIR)$(datadir)"
 endif
 
 uninstall-hook:
 if ENABLE_UPDATE_MIMEDB
 	$(UPDATE_MIME_DATABASE) "$(DESTDIR)$(datadir)/mime"
-	$(UPDATE_DESKTOP_DATABASE) 
+	$(UPDATE_DESKTOP_DATABASE) "$(DESTDIR)$(datadir)"
 endif
 
