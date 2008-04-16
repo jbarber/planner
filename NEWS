@@ -1,4 +1,61 @@
 ==============
+Planner 0.14.3
+==============
+
+New features and fixes
+======================
+* Added support for version 3 of libgda, the database access library
+* Added internationalization (I18N) support for HTML export
+* Allow dragging of completion bar in Gantt chart
+* Allow dragging of task duration in Gantt beyond the window size
+* % Complete column added to task and Gantt view
+* New Tango icon set contributed by Frédéric Bellaiche
+* Show guide lines setting is now persistent thanks to Marie Durand
+
+* Fixed bug: Incorrect week numbers were sometimes shown both in the UI and in exported HTML.
+             This fix requires a dependency on libxslt-1.1.23 or higher (see bug #452876).
+* Fixed bug: Project start time shifts each time a project is read from a database
+* Fixed bug: Toggling fixed duration state does not immediately update task appearance in Gantt chart
+* Fixed bug #332748: Row height in exported HTML is incorrect in Internet Explorer (patch by Nico de Groot)
+* Fixed bug #337382: Sidebar buttons are not accessible for things like screen readers
+* Fixed bug #345163: ngettext should be used to get proper translation of plural
+* Fixed bug #373008: Crash when importing MS project XML
+* Fixed bug #382548: Crash when undoing indent
+* Fixed bug #388454: Planner hangs when cancelling HTML export
+* Fixed bug #393620: Gantt header width in exported HTML is incorrect
+* Fixed bug #397132: Crash on export to database
+* Fixed bug #436263: Keep task selection when (un)indenting
+* Fixed bug #464359: Make distcheck fails (patch by Gilles Dartiguelongue)
+* Fixed bug #486990: Fixed duration tasks have incorrect duration 
+* Fixed bug #499090: Incorrect task cost calculation in exported HTML for tasks worked on by multiple people.
+
+New and Updated Translations
+============================
+Khaled Hosny (ar)
+Yavor Doganov (bg)
+Gil Forcada (ca)
+yangka (dz)
+nikosCharonitakis (el)
+David Lodge (en_GB)
+Jorge González (es)
+Iñaki Larrañaga Murgoitio (eu)
+Ilkka Tuohela (fi)
+Claude Paroz (fr)
+Iván Méndez López (gl)
+Gabor Kelemen (hu)
+Milo Casagrande (it)
+Tomas Kuliavas (lt)
+Yannig Marchegay (Kokoyaya) (oc)
+Leonardo Ferreira Fontenelle (pt_BR)
+Matej Urbančič (sl)
+Daniel Nylander (sv)
+I. Felix (ta)
+Clytie Siddall (vi)
+Walter Cheuk (zh_HK)
+Walter Cheuk (zh_TW)
+
+
+==============
 Planner 0.14.2
 ==============
 
