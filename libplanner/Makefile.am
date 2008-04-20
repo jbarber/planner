@@ -56,7 +56,7 @@ libplannerinclude_HEADERS = 			\
 	mrp-error.h				\
 	mrp-paths.h
 
-libplanner_1_la_LIBADD = $(LIBPLANNER_LIBS)
+libplanner_1_la_LIBADD = $(LIBPLANNER_LIBS) -lm
 
 libplannerincludedir = $(includedir)/planner-1.0/libplanner
 

@@ -1,3 +1,12 @@
+2008-04-20  Maurice van der Pot  <griffon26@kfk4ever.com>
+
+	* configure.in: Enabling evolution data server backend support caused
+	configure to fail (bug #528971). Thanks to Robin Cook <rcook@wyrms.net> for
+	noticing and providing a patch.
+	* libplanner/Makefile.am: Adding -lm to LIBADD for libplanner as suggested
+	by Marcin Banasiak <megabajt@pld-linux.org>, hopefully fixing bug #528582
+	reported by Patryk Zawadzki <patrys@pld-linux.org>.
+
 2008-04-16  Maurice van der Pot  <griffon26@kfk4ever.com>
 
 	* NEWS:
