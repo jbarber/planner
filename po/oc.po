@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: oc\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-03-07 10:23+0100\n"
+"POT-Creation-Date: 2008-06-09 15:21+0200\n"
 "PO-Revision-Date: 2007-12-29 15:27+0100\n"
 "Last-Translator: Yannig Marchegay (Kokoyaya) <yannig@marchegay.org>\n"
 "Language-Team: Occitan <ubuntu-l10n-oci@lists.ubuntu.com>\n"
@@ -793,12 +793,12 @@ msgid ""
 "date."
 msgstr ""
 
-#: ../libplanner/mrp-task-manager.c:2530
+#: ../libplanner/mrp-task-manager.c:2627
 #, c-format
 msgid "Cannot add a predecessor, because it would result in a loop."
 msgstr ""
 
-#: ../libplanner/mrp-task-manager.c:2576
+#: ../libplanner/mrp-task-manager.c:2671
 #, c-format
 msgid "Cannot move the task, because it would result in a loop."
 msgstr ""
@@ -1311,7 +1311,17 @@ msgstr ""
 msgid "Assigned to"
 msgstr "Fa referéncia a"
 
-#: ../src/planner-gantt-view.c:950
+# Contexte important (à confirmer)
+#. i18n: The string "% Complete" will be used in the header
+#. * of a column containing values from 0 upto 100, indicating
+#. * what part of a task has been completed.
+#.
+#: ../src/planner-gantt-view.c:602 ../src/planner-task-view.c:349
+#, no-c-format
+msgid "% Complete"
+msgstr ""
+
+#: ../src/planner-gantt-view.c:956
 msgid "Edit Gantt Columns"
 msgstr ""
 
@@ -1920,63 +1930,63 @@ msgstr ""
 msgid "N/A"
 msgstr "N/A"
 
-#: ../src/planner-task-tree.c:2820
+#: ../src/planner-task-tree.c:2824
 msgid "Remove tasks"
 msgstr "Suprimir de prètzfaches"
 
-#: ../src/planner-task-tree.c:2882
+#: ../src/planner-task-tree.c:2886
 #, c-format
 msgid ""
 "You are about to open an edit dialog each for %i tasks. Are you sure that "
 "you want to do that?"
 msgstr ""
 
-#: ../src/planner-task-tree.c:2984
+#: ../src/planner-task-tree.c:2988
 msgid "Unlink tasks"
 msgstr ""
 
-#: ../src/planner-task-tree.c:3036
+#: ../src/planner-task-tree.c:3040
 msgid "Link tasks"
 msgstr ""
 
-#: ../src/planner-task-tree.c:3127
+#: ../src/planner-task-tree.c:3131
 msgid "Indent tasks"
 msgstr ""
 
-#: ../src/planner-task-tree.c:3138
+#: ../src/planner-task-tree.c:3142
 msgid "Indent task"
 msgstr ""
 
-#: ../src/planner-task-tree.c:3232
+#: ../src/planner-task-tree.c:3236
 msgid "Unindent tasks"
 msgstr ""
 
-#: ../src/planner-task-tree.c:3250
+#: ../src/planner-task-tree.c:3254
 msgid "Unindent task"
 msgstr ""
 
-#: ../src/planner-task-tree.c:3328
+#: ../src/planner-task-tree.c:3332
 msgid "Move tasks up"
 msgstr ""
 
-#: ../src/planner-task-tree.c:3366
+#: ../src/planner-task-tree.c:3370
 msgid "Move task up"
 msgstr ""
 
-#: ../src/planner-task-tree.c:3454
+#: ../src/planner-task-tree.c:3458
 msgid "Move tasks down"
 msgstr ""
 
 #. Moving task from 'position' to 'position + 1'
-#: ../src/planner-task-tree.c:3500
+#: ../src/planner-task-tree.c:3504
 msgid "Move task down"
 msgstr ""
 
-#: ../src/planner-task-tree.c:3556
+#: ../src/planner-task-tree.c:3560
 msgid "Reset task constraints"
 msgstr ""
 
-#: ../src/planner-task-tree.c:3588
+#: ../src/planner-task-tree.c:3592
 msgid "Reset all task constraints"
 msgstr ""
 
@@ -1995,16 +2005,6 @@ msgstr "Prètzfaches"
 #: ../src/planner-task-view.c:276
 msgid "_Tasks"
 msgstr "_Prètzfaches"
-
-# Contexte important (à confirmer)
-#. i18n: The string "% Complete" will be used in the header
-#. * of a column containing values from 0 upto 100, indicating
-#. * what part of a task has been completed.
-#.
-#: ../src/planner-task-view.c:349
-#, no-c-format
-msgid "% Complete"
-msgstr ""
 
 #: ../src/planner-task-view.c:578
 msgid "Edit custom task properties"
