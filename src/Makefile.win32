@@ -269,12 +269,11 @@ clean:
 	rm -f ../data/planner.o
 
 install: all
-	-mkdir -p $(DESTDIR)/planner
-	cp planner.exe $(DESTDIR)/planner
+	-mkdir -p $(DESTDIR)/planner/bin
+	cp planner.exe $(DESTDIR)/planner/bin
 	-mkdir -p $(DESTDIR)/planner/lib/planner/plugins
 	cp lib*-plugin.dll $(DESTDIR)/planner/lib/planner/plugins
 
 uninstall:
-	rm -f $(DESTDIR)/planner/planner.exe
-	rm -f $(DESTDIR)/planner/libgantt-task.dll
+	rm -f $(DESTDIR)/planner/bin/planner.exe
 	rm -f $(DESTDIR)/planner/lib/planner/plugins/lib*-plugin.dll

@@ -125,6 +125,71 @@ RMFILES = \
 	  rm -f $$dest/$$file; \
 	done
 
+INSTALLERTMP = installer/tmp
+GTK_BINFILES = \
+	freetype6.dll			\
+	iconv.dll			\
+	intl.dll			\
+	libart_lgpl_2-2.dll		\
+	libatk-1.0-0.dll		\
+	libcairo-2.dll			\
+	libeggrecent.dll		\
+	libexpat.dll			\
+	libexslt.dll			\
+	libfontconfig-1.dll		\
+	libgailutil-18.dll		\
+	libgdk-win32-2.0-0.dll		\
+	libgdk_pixbuf-2.0-0.dll		\
+	libglade-2.0-0.dll		\
+	libglib-2.0-0.dll		\
+	libgmodule-2.0-0.dll		\
+	libgnomecanvas-2-0.dll		\
+	libgnomeprint-2-2-0.dll		\
+	libgnomeprintui-2-2-0.dll	\
+	libgobject-2.0-0.dll		\
+	libgtk-win32-2.0-0.dll		\
+	libpango-1.0-0.dll		\
+	libpangocairo-1.0-0.dll		\
+	libpangoft2-1.0-0.dll		\
+	libpangowin32-1.0-0.dll		\
+	libpng13.dll			\
+	libxml2.dll			\
+	libxslt.dll			\
+	zlib1.dll
+
+GTK_ICONFILES = \
+	16x16/mimetypes/gnome-mime-application-pdf.png			\
+	16x16/mimetypes/gnome-mime-application-postscript.png		\
+	22x22/mimetypes/gnome-mime-application-pdf.png			\
+	22x22/mimetypes/gnome-mime-application-postscript.png		\
+	24x24/mimetypes/gnome-mime-application-pdf.png			\
+	24x24/mimetypes/gnome-mime-application-postscript.png		\
+	32x32/mimetypes/gnome-mime-application-pdf.png			\
+	32x32/mimetypes/gnome-mime-application-postscript.png		\
+	48x48/stock/io/stock_print-duplex-no-tumble.png			\
+	48x48/stock/io/stock_print-duplex-tumble.png			\
+	48x48/stock/io/stock_print-duplex.png				\
+	48x48/stock/io/stock_print-non-duplex.png			\
+	index.theme
+
+createinstaller:
+	DESTDIR=$$(pwd)/$(INSTALLERTMP) $(MAKE) -f Makefile.win32 install
+	LOADERSPATH=`grep "loaders/libpixbufloader" $(PREFIX)/etc/gtk-2.0/gdk-pixbuf.loaders|head -n1|sed -e 's#.*/\(lib/gtk-2.0/[^/]*/loaders\)/.*#\1#'`; \
+	GTK_FILES="/etc/gtk-2.0/gdk-pixbuf.loaders \
+	         /etc/gtk-2.0/gtkrc \
+	         /lib/libgnomeprint \
+	         /share/libgnomeprint \
+	         /share/icons/gnome \
+	         $(addprefix /bin/,$(GTK_BINFILES)) \
+	         $(addprefix /share/icons/gnome/,$(GTK_ICONFILES)) \
+	         $${LOADERSPATH}/*.dll"; \
+	mkdir -p $(INSTALLERTMP)/planner; \
+	for file in $${GTK_FILES}; do \
+		mkdir -p $(INSTALLERTMP)/planner/$$(dirname $${file}); \
+		cp -r $(PREFIX)/$${file} $(INSTALLERTMP)/planner/$$(dirname $${file})/; \
+	done
+	/c/Program\ Files/NSIS/makensis -DPLANNER_VERSION=$(VERSION) -DSTAGING_DIR=.\\tmp\\planner installer/planner-installer.nsi
+
 install: install-recursive
 install-am:
 	-mkdir -p $(DESTDIR)/planner

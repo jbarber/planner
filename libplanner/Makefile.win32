@@ -179,13 +179,14 @@ clean:
 	rm -f mrp-marshal.c mrp-marshal.h
 	rm -f *.a	
 install: all
+	-mkdir -p $(DESTDIR)/planner/bin
 	-mkdir -p $(DESTDIR)/planner/lib/planner/file-modules
 	-mkdir -p $(DESTDIR)/planner/lib/planner/storage-modules
-	cp libplanner-1.dll $(DESTDIR)/planner
+	cp libplanner-1.dll $(DESTDIR)/planner/bin
 	cp libmrp-*.dll $(DESTDIR)/planner/lib/planner/file-modules
 	cp libstorage-*.dll $(DESTDIR)/planner/lib/planner/storage-modules
 
 uninstall:
-	rm -f $(DESTDIR)/planner/libplanner-1.dll
+	rm -f $(DESTDIR)/planner/bin/libplanner-1.dll
 	rm -f $(DESTDIR)/planner/lib/planner/file-modules/libmrp-*.dll
 	rm -f $(DESTDIR)/planner/lib/planner/storage-modules/libstorage-*.dll
