@@ -59,7 +59,7 @@ SetDateSave on
   !define MUI_ABORTWARNING
 
   ;Finish Page config
-  !define MUI_FINISHPAGE_RUN			"$INSTDIR\planner.exe"
+  !define MUI_FINISHPAGE_RUN			"$INSTDIR\bin\planner.exe"
   !define MUI_FINISHPAGE_RUN_NOTCHECKED
   !define MUI_FINISHPAGE_LINK			$(PLANNER_FINISH_VISIT_WEB_SITE)
   !define MUI_FINISHPAGE_LINK_LOCATION          "http://live.gnome.org/Planner/"
@@ -210,7 +210,7 @@ Section $(PLANNER_SECTION_TITLE) SecPlanner
   StrCmp $R0 "HKLM" planner_hklm planner_hkcu
 
   planner_hklm:
-    WriteRegStr HKLM "${HKLM_APP_PATHS_KEY}" "" "$INSTDIR\planner.exe"
+    WriteRegStr HKLM "${HKLM_APP_PATHS_KEY}" "" "$INSTDIR\bin\planner.exe"
     WriteRegStr HKLM ${PLANNER_REG_KEY} "" "$INSTDIR"
     WriteRegStr HKLM ${PLANNER_REG_KEY} "Version" "${PLANNER_VERSION}"
     WriteRegStr HKLM "${PLANNER_UNINSTALL_KEY}" "DisplayName" $(PLANNER_UNINSTALL_DESC)
@@ -233,8 +233,8 @@ Section $(PLANNER_SECTION_TITLE) SecPlanner
     File /r /x locale ${STAGING_DIR}\*.*
 
     CreateDirectory "$SMPROGRAMS\Planner"
-    CreateShortCut "$SMPROGRAMS\Planner\Planner.lnk" "$INSTDIR\planner.exe"
-    CreateShortCut "$DESKTOP\Planner.lnk" "$INSTDIR\planner.exe"
+    CreateShortCut "$SMPROGRAMS\Planner\Planner.lnk" "$INSTDIR\bin\planner.exe"
+    CreateShortCut "$DESKTOP\Planner.lnk" "$INSTDIR\bin\planner.exe"
     SetOutPath "$INSTDIR"
 
     ; If we don't have install rights.. we're done
@@ -253,9 +253,9 @@ Section $(PLANNER_SECTION_TITLE) SecPlanner
 
     ; If we previously had planner setup to run on startup, make it do so again
     StrCmp $STARTUP_RUN_KEY "HKCU" +1 +2
-    WriteRegStr HKCU "${PLANNER_STARTUP_RUN_KEY}" "Planner" "$INSTDIR\planner.exe"
+    WriteRegStr HKCU "${PLANNER_STARTUP_RUN_KEY}" "Planner" "$INSTDIR\bin\planner.exe"
     StrCmp $STARTUP_RUN_KEY "HKLM" +1 +2
-    WriteRegStr HKLM "${PLANNER_STARTUP_RUN_KEY}" "Planner" "$INSTDIR\planner.exe"
+    WriteRegStr HKLM "${PLANNER_STARTUP_RUN_KEY}" "Planner" "$INSTDIR\bin\planner.exe"
 
   done:
 SectionEnd ; end of default Planner section

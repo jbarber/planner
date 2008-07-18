@@ -3,6 +3,7 @@
 #
 
 SUBDIRS=libplanner src po
+INSTALLERTMP = installer/tmp
 
 VERSION := `sed <configure.in -n 's/AM_INIT_AUTOMAKE[^,]*, *\([^)]*\))/\1/p'`
 
@@ -44,6 +45,7 @@ clean: clean-recursive
 
 clean-am:
 	rm -f config.h
+	rm -rf $(INSTALLERTMP)
 
 DTD = \
 	mrproject-0.5.1.dtd		\
@@ -125,7 +127,6 @@ RMFILES = \
 	  rm -f $$dest/$$file; \
 	done
 
-INSTALLERTMP = installer/tmp
 GTK_BINFILES = \
 	freetype6.dll			\
 	iconv.dll			\
@@ -174,17 +175,23 @@ GTK_ICONFILES = \
 
 createinstaller:
 	DESTDIR=$$(pwd)/$(INSTALLERTMP) $(MAKE) -f Makefile.win32 install
-	LOADERSPATH=`grep "loaders/libpixbufloader" $(PREFIX)/etc/gtk-2.0/gdk-pixbuf.loaders|head -n1|sed -e 's#.*/\(lib/gtk-2.0/[^/]*/loaders\)/.*#\1#'`; \
+	@LOADERSPATH=`grep "loaders/libpixbufloader" $(PREFIX)/etc/gtk-2.0/gdk-pixbuf.loaders|head -n1|sed -e 's#.*/\(lib/gtk-2.0/[^/]*/loaders\)/.*#\1#'`; \
+	GTK_TRANSLATIONS=`echo $(INSTALLERTMP)/planner/share/locale/*|sed -e "s#$(INSTALLERTMP)/planner##g"`; \
 	GTK_FILES="/etc/gtk-2.0/gdk-pixbuf.loaders \
 	         /etc/gtk-2.0/gtkrc \
 	         /lib/libgnomeprint \
 	         /share/libgnomeprint \
-	         /share/icons/gnome \
+	         $${GTK_TRANSLATIONS} \
 	         $(addprefix /bin/,$(GTK_BINFILES)) \
 	         $(addprefix /share/icons/gnome/,$(GTK_ICONFILES)) \
-	         $${LOADERSPATH}/*.dll"; \
+	         $${LOADERSPATH}"; \
 	mkdir -p $(INSTALLERTMP)/planner; \
 	for file in $${GTK_FILES}; do \
+		echo "Copying $(PREFIX)/$${file}..."; \
+		if [ ! -e $(PREFIX)/$${file} ]; then \
+			echo "Failed to locate '$(PREFIX)/$${file}' while gathering files for installer!"; \
+			exit -1; \
+		fi; \
 		mkdir -p $(INSTALLERTMP)/planner/$$(dirname $${file}); \
 		cp -r $(PREFIX)/$${file} $(INSTALLERTMP)/planner/$$(dirname $${file})/; \
 	done
