@@ -35,7 +35,7 @@ fi
 	DIE=1
 }
 
-(grep "^IT_PROG_INTLTOOL" $srcdir/configure.in >/dev/null) && {
+(grep "^IT_PROG_INTLTOOL" $srcdir/$CONFIGURE >/dev/null) && {
   ($INTLTOOLIZE --version) < /dev/null > /dev/null 2>&1 || {
     echo
     echo "You must have \`intltoolize' installed to compile $PROJECT."
@@ -53,7 +53,7 @@ fi
     DIE=1
 }
 
-(grep "^AM_PROG_LIBTOOL" configure.in >/dev/null) && {
+(grep "^AM_PROG_LIBTOOL" $CONFIGURE >/dev/null) && {
   ($LIBTOOL --version) < /dev/null > /dev/null 2>&1 || {
     echo
     echo "You must have libtool 1.5 installed to compile $PROJECT."
@@ -109,7 +109,7 @@ case $CC in
 *xlc | *xlc\ * | *lcc | *lcc\ *) am_opt=--include-deps;;
 esac
 
-for coin in .
+for coin in $CONFIGURE
 do 
   dr=`dirname $coin`
   if test -f $dr/NO-AUTO-GEN; then
@@ -126,7 +126,7 @@ do
 	##  echo "**Warning**: No such directory \`$k'.  Ignored."
         fi
       done
-      if grep "^AM_GLIB_GNU_GETTEXT" configure.in >/dev/null; then
+      if grep "^AM_GLIB_GNU_GETTEXT" $CONFIGURE >/dev/null; then
 	#if grep "sed.*POTFILES" configure.in >/dev/null; then
 	#  : do nothing -- we still have an old unmodified configure.in
 	#else
@@ -138,11 +138,11 @@ do
 	  test -r $dr/aclocal.m4 && chmod u+w $dr/aclocal.m4
         #fi
       fi
-      if grep "^IT_PROG_INTLTOOL" configure.in >/dev/null; then
+      if grep "^IT_PROG_INTLTOOL" $CONFIGURE >/dev/null; then
         echo "Running intltoolize..."
 	intltoolize --copy --force --automake
       fi
-      if grep "^AM_PROG_LIBTOOL" configure.in >/dev/null; then
+      if grep "^AM_PROG_LIBTOOL" $CONFIGURE >/dev/null; then
 	echo "Running $LIBTOOLIZE..."
 	$LIBTOOLIZE --force --copy
       fi
@@ -151,7 +151,7 @@ do
 
       echo "Running $ACLOCAL $aclocalinclude ..."
       $ACLOCAL $aclocalinclude
-      if grep "^AM_CONFIG_HEADER" configure.in >/dev/null; then
+      if grep "^AM_CONFIG_HEADER" $CONFIGURE >/dev/null; then
 	echo "Running $AUTOHEADER..."
 	$AUTOHEADER
       fi

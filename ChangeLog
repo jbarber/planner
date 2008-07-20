@@ -1,3 +1,12 @@
+2008-07-20  Maurice van der Pot  <griffon26@kfk4ever.com>
+
+	* acinclude.m4: change --with-compile-warnings to --enable-compile-warnings
+	* autogen.sh: fix error from sed when running autogen.sh
+	* libplanner/mrp-sql.c: Fix missing semicolon in database support code,
+	fixing bug #539993 (patch by Mirco Müller <mirco.mueller@ubuntu.com>).
+	* src/planner-window.c: (window_restore_state): Use a reasonable default
+	window size if no previous window size is known.
+
 2008-07-18  Maurice van der Pot  <griffon26@kfk4ever.com>
 
 	* Makefile.win32:

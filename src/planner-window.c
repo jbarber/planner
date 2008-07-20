@@ -213,6 +213,9 @@ static void handle_links (GtkAboutDialog *about G_GNUC_UNUSED,
 #define CONF_ACTIVE_VIEW           "/ui/active_view"
 #define CONF_LAST_DIR         "/general/last_dir"
 
+#define DEFAULT_WINDOW_WIDTH  800
+#define DEFAULT_WINDOW_HEIGHT 550
+
 #define VIEW_PATH "/menu/View/Views placeholder"
 #define VIEW_GROUP "view group"
 	
@@ -2162,10 +2165,16 @@ window_restore_state (PlannerWindow *window)
 		} else {
 			width = planner_conf_get_int (CONF_WINDOW_WIDTH,
 						      NULL);
-		
 			height = planner_conf_get_int (CONF_WINDOW_HEIGHT,
 						       NULL);
-		
+
+			if (width == 0) {
+				width = DEFAULT_WINDOW_WIDTH;
+			}
+			if (height == 0) {
+				height = DEFAULT_WINDOW_HEIGHT;
+			}
+
 			gtk_window_set_default_size (GTK_WINDOW (window), 
 						     width, height);
 
