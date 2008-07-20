@@ -1,5 +1,9 @@
 2008-07-20  Maurice van der Pot  <griffon26@kfk4ever.com>
 
+	* libplanner/mrp-sql.c: Properly fixed bug #539993.
+
+2008-07-20  Maurice van der Pot  <griffon26@kfk4ever.com>
+
 	* acinclude.m4: change --with-compile-warnings to --enable-compile-warnings
 	* autogen.sh: fix error from sed when running autogen.sh
 	* libplanner/mrp-sql.c: Fix missing semicolon in database support code,
