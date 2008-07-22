@@ -1,5 +1,25 @@
 2008-07-22  Maurice van der Pot  <griffon26@kfk4ever.com>
 
+	* src/Makefile.am:
+	Now building everything in src/ except planner_main.c into a convenience
+	library that can be used for testing.
+
+	* src/planner-cmd-manager.c (transaction_cmd_do): Abort redo-ing as soon as
+	the end of the transaction is encountered. Fixes bug #420443 reported by
+	Lincoln Phipps <lincoln.phipps@openmutual.net>.
+
+	* tests/Makefile.am:
+	* tests/cmd-manager-test.c (test_cmd_do), (test_cmd_undo),
+	(test_cmd_free), (test_cmd), (main):
+	Added test for PlannerCmdManager, including regression test for bug #420443.
+
+2008-07-22  Maurice van der Pot  <griffon26@kfk4ever.com>
+
+	* libplanner/mrp-paths-gnome.c (mrp_paths_get_image_dir):
+	Fix path to images, which was incorrectly set to "glade" in previous commit.
+
+2008-07-22  Maurice van der Pot  <griffon26@kfk4ever.com>
+
 	* libplanner/mrp-calendar.c (mrp_calendar_copy):
 	Fix a bug in copying default day types when copying a calendar on 64-bit
 	platforms.

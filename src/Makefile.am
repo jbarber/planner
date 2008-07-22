@@ -15,8 +15,20 @@ INCLUDES += $(PYTHON_INCLUDES)
 endif
 
 bin_PROGRAMS = planner 
+planner_SOURCES = \
+	planner-main.c
+planner_LDFLAGS = -export-dynamic
+planner_LDADD = \
+	libplannerapp.la \
+	$(top_builddir)/libplanner/libplanner-1.la \
+	$(top_builddir)/libegg/recent-files/libeggrecent.la \
+	$(PLANNER_LIBS)
 
-planner_SOURCES = 			\
+
+# Create a convenience library to link our tests against
+noinst_LTLIBRARIES = libplannerapp.la
+
+libplannerapp_la_SOURCES = 			\
 	$(built_sources)		\
 	eel-canvas-rect.c		\
 	eel-canvas-rect.h		\
@@ -56,7 +68,6 @@ planner_SOURCES = 			\
 	planner-group-model.h		\
 	planner-list-model.c		\
 	planner-list-model.h		\
-	planner-main.c			\
 	planner-phase-dialog.c		\
 	planner-phase-dialog.h		\
 	planner-plugin.c		\
@@ -152,12 +163,6 @@ usage_source = 				\
 	planner-usage-tree.c		\
 	planner-usage-tree.h
 
-planner_LDADD =				\
-	$(top_builddir)/libplanner/libplanner-1.la \
-	$(top_builddir)/libegg/recent-files/libeggrecent.la \
-	$(PLANNER_LIBS)
-
-planner_LDFLAGS = -export-dynamic
 
 #
 # Plugins
@@ -220,7 +225,7 @@ planner-marshal.c: Makefile.am planner-marshal.list
 # i *think* these should actually be stamp-* files
 built_sources = planner-marshal.h planner-marshal.c
 
-$(planner_OBJECTS): $(built_sources)
+$(libplannerapp_la_OBJECTS): $(built_sources)
 
 EXTRA_DIST = planner-marshal.list
 

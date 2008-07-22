@@ -398,6 +398,11 @@ planner_cmd_manager_undo (PlannerCmdManager *manager)
 	return TRUE;
 }
 
+/* This function redoes a single command by calling its do_func function.  In
+ * case of a transaction the command will be of type BEGIN_TRANSACTION and its
+ * do_func will point to transaction_cmd_do, which will take care of all other
+ * commands upto END_TRANSACTION.
+ */
 gboolean
 planner_cmd_manager_redo (PlannerCmdManager *manager)
 {
@@ -439,6 +444,10 @@ planner_cmd_manager_new (void)
  * Transaction commands
  */
 
+/* This function is used for the do_func of a BEGIN_TRANSACTION command. It
+ * loops through all subcommands of a transaction and executes their functions
+ * until it encounters an END_TRANSACTION command.
+ */
 static gboolean
 transaction_cmd_do (PlannerCmd *cmd)
 {
@@ -451,14 +460,14 @@ transaction_cmd_do (PlannerCmd *cmd)
 			break;
 		}
 		
-		if (cmd_sub->do_func) {
-			cmd_sub->do_func (cmd_sub);
-		}
-		
 		if (cmd_sub->type == PLANNER_CMD_TYPE_END_TRANSACTION) {
 			break;
 		}
 
+		if (cmd_sub->do_func) {
+			cmd_sub->do_func (cmd_sub);
+		}
+		
 		g_assert (cmd_sub->type == PLANNER_CMD_TYPE_NORMAL);
 	}
 
