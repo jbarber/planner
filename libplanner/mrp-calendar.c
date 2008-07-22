@@ -440,7 +440,7 @@ mrp_calendar_copy (const gchar *name, MrpCalendar *calendar)
 
  	memcpy (ret_val->priv->default_days,
  		calendar->priv->default_days,
- 		7 * sizeof (gint));
+ 		7 * sizeof (MrpDay *));
 
 	g_hash_table_foreach (calendar->priv->day_intervals,
 			      (GHFunc) foreach_copy_day_intervals,

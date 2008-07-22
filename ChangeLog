@@ -1,3 +1,25 @@
+2008-07-22  Maurice van der Pot  <griffon26@kfk4ever.com>
+
+	* libplanner/mrp-calendar.c (mrp_calendar_copy):
+	Fix a bug in copying default day types when copying a calendar on 64-bit
+	platforms.
+
+	* tests/calendar-test.c (main):
+	Fixed a bug in the tests that only showed up on 64-bit platforms.
+
+	* libplanner/Makefile.am:
+	* libplanner/mrp-paths-gnome.c (mrp_paths_get_glade_dir),
+	(mrp_paths_get_image_dir), (mrp_paths_get_plugin_dir),
+	(mrp_paths_get_dtd_dir), (mrp_paths_get_stylesheet_dir),
+	(mrp_paths_get_storagemodule_dir),
+	(mrp_paths_get_file_modules_dir), (mrp_paths_get_ui_dir),
+	(mrp_paths_get_sql_dir):
+	* tests/Makefile.am:
+	* tests/files/Makefile.am:
+	Allow various paths to be overridden through environment variables, so the
+	tests can be run before planner (and its plugins) have been installed.
+	Now tests are run successfully in make check and make distcheck.
+
 2008-07-20  Maurice van der Pot  <griffon26@kfk4ever.com>
 
 	* libplanner/mrp-sql.c: Properly fixed bug #539993.

@@ -55,7 +55,7 @@ main (gint argc, gchar **argv)
         time_sun   = mrp_time_from_string ("20021117", NULL);
         time_27nov = mrp_time_from_string ("20021127", NULL);
         time_28nov = mrp_time_from_string ("20021128", NULL);
-        
+
         /****************************************************/
         /** Check one: Base calendars default week         **/
         /****************************************************/
@@ -142,10 +142,10 @@ main (gint argc, gchar **argv)
         /******************************************************/
         mrp_calendar_set_days (base,
                                time_27nov, def_1_id,
-                               -1);
+                               (mrptime) -1);
         mrp_calendar_set_days (derive,
                                time_28nov, mrp_day_get_nonwork (),
-                               -1);
+                               (mrptime) -1);
 
         day_a = mrp_calendar_get_day (base,   time_27nov, TRUE);
         day_b = mrp_calendar_get_day (derive, time_27nov, TRUE);
@@ -156,14 +156,14 @@ main (gint argc, gchar **argv)
 
         mrp_calendar_set_days (derive,
                                time_27nov, mrp_day_get_nonwork (),
-                               -1);
+                               (mrptime) -1);
         day_b = mrp_calendar_get_day (derive, time_27nov, TRUE);
         CHECK_INTEGER_RESULT (mrp_day_get_id (day_b),
                               mrp_day_get_id (mrp_day_get_nonwork ()));
         
         mrp_calendar_set_days (derive,
                                time_27nov, mrp_day_get_use_base (),
-                               -1);
+                               (mrptime) -1);
         day_b = mrp_calendar_get_day (derive, time_27nov, TRUE);
         CHECK_INTEGER_RESULT (mrp_day_get_id (day_a),
                               mrp_day_get_id (day_b));

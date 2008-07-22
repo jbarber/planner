@@ -5,9 +5,9 @@ INCLUDES = \
 	-I$(top_builddir)/libplanner \
 	$(LIBPLANNER_CFLAGS) $(WARN_CFLAGS) \
 	-DSTORAGEMODULEDIR=\""$(libdir)/planner/storage-modules"\" \
-	-DFILEMODULEDIR=\""$(libdir)/planner/file-modules"\" \
+	-DFILEMODULESDIR=\""$(libdir)/planner/file-modules"\" \
 	-DPLUGINDIR=\""$(libdir)/planner/plugins"\"		\
-	-DDATADIR=\""$(datadir)"\"
+	-DDATADIR=\""$(datadir)/planner"\"
 
 lib_LTLIBRARIES = libplanner-1.la
 

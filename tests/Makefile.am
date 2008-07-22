@@ -11,13 +11,13 @@ LDADD =	\
 	$(top_builddir)/libplanner/libplanner-1.la 	\
 	$(PLANNER_LIBS)
 
-noinst_LTLIBRARIES = libselfcheck.la
+check_LTLIBRARIES = libselfcheck.la
 
 libselfcheck_la_SOURCES =                              \
        self-check.c                                    \
        self-check.h
 
-noinst_PROGRAMS = scheduler-test time-test calendar-test task-test
+check_PROGRAMS = scheduler-test time-test calendar-test task-test
 
 scheduler_test_SOURCES = scheduler-test.c
 scheduler_test_LDADD = $(LDADD) libselfcheck.la
@@ -31,6 +31,10 @@ calendar_test_LDADD = $(LDADD) libselfcheck.la
 task_test_SOURCES = task-test.c
 task_test_LDADD = $(LDADD) libselfcheck.la
 
-# The loadable modules can't be found at distcheck time so disable the
-# tests for distcheck.
-#TESTS = scheduler-test time-test calendar-test task-test
+TESTS_ENVIRONMENT = \
+	PLANNER_STORAGEMODULEDIR=$(top_builddir)/libplanner/.libs \
+	PLANNER_FILEMODULESDIR=$(top_builddir)/libplanner/.libs \
+	PLANNER_PLUGINDIR=$(top_builddir)/src/.libs \
+	PLANNER_DATADIR=$(top_srcdir)/data
+
+TESTS = scheduler-test time-test calendar-test task-test
