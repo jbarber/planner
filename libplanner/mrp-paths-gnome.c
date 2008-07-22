@@ -52,7 +52,7 @@ mrp_paths_get_image_dir (const gchar *filename)
 	const gchar *env_data_dir = g_getenv ("PLANNER_DATADIR");
 	return g_build_filename (env_data_dir ? env_data_dir
 					      : default_data_dir,
-				 "glade",
+				 "images",
 				 filename,
 				 NULL);
 }
