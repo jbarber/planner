@@ -1,5 +1,11 @@
 2008-07-29  Maurice van der Pot  <griffon26@kfk4ever.com>
 
+	* Makefile.win32: Fix makefile for Windows to work with both libpng <=
+	1.2.8, where the dll was named libpng13.dll, and libpng >= 1.2.29, where it
+	is named libpng12-0.dll.
+
+2008-07-29  Maurice van der Pot  <griffon26@kfk4ever.com>
+
 	* Makefile.win32: Added font description files needed for printing on
 	Windows (fixes crashes or lock-ups when trying to print). Also added a
 	printer icon that was missing and the menu description for the print preview

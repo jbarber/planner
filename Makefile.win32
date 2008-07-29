@@ -153,7 +153,6 @@ GTK_BINFILES = \
 	libpangocairo-1.0-0.dll		\
 	libpangoft2-1.0-0.dll		\
 	libpangowin32-1.0-0.dll		\
-	libpng13.dll			\
 	libxml2.dll			\
 	libxslt.dll			\
 	zlib1.dll
@@ -179,8 +178,17 @@ GTK_ICONFILES = \
 
 createinstaller:
 	DESTDIR=$$(pwd)/$(INSTALLERTMP) $(MAKE) -f Makefile.win32 install
-	@LOADERSPATH=`grep "loaders/libpixbufloader" $(PREFIX)/etc/gtk-2.0/gdk-pixbuf.loaders|head -n1|sed -e 's#.*/\(lib/gtk-2.0/[^/]*/loaders\)/.*#\1#'`; \
-	GTK_TRANSLATIONS=`echo $(INSTALLERTMP)/planner/share/locale/*|sed -e "s#$(INSTALLERTMP)/planner##g"`; \
+	@LOADERSPATH=`grep "loaders/libpixbufloader" $(PREFIX)/etc/gtk-2.0/gdk-pixbuf.loaders | \
+		head -n1 | \
+		sed -e 's#.*/\(lib/gtk-2.0/[^/]*/loaders\)/.*#\1#'`; \
+	case `grep libpng $(PREFIX)/lib/pkgconfig/cairo.pc | \
+		sed -e 's/.*\(libpng[0-9]*\).*/\1/'` in \
+		libpng12) LIBPNG=/bin/libpng12-0.dll ;; \
+		libpng13) LIBPNG=/bin/libpng13.dll ;; \
+		*) echo "Unable to find libpng"; exit -1 ;; \
+	esac; \
+	GTK_TRANSLATIONS=`echo $(INSTALLERTMP)/planner/share/locale/* | \
+		sed -e "s#$(INSTALLERTMP)/planner##g"`; \
 	GTK_FILES="/etc/gtk-2.0/gdk-pixbuf.loaders \
 	         $${LOADERSPATH} \
 	         /etc/gtk-2.0/gtkrc \
@@ -189,6 +197,7 @@ createinstaller:
 	         /share/libgnomeprint \
 	         /share/libgnomeprintui \
 	         $(addprefix /bin/,$(GTK_BINFILES)) \
+	         $${LIBPNG} \
 	         $(addprefix /share/icons/gnome/,$(GTK_ICONFILES)) \
 	         $${GTK_TRANSLATIONS}"; \
 	mkdir -p $(INSTALLERTMP)/planner; \
