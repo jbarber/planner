@@ -159,17 +159,21 @@ GTK_BINFILES = \
 	zlib1.dll
 
 GTK_ICONFILES = \
+	16x16/devices/gnome-dev-printer.png				\
+	22x22/devices/gnome-dev-printer.png				\
+	24x24/devices/gnome-dev-printer.png				\
+	32x32/devices/gnome-dev-printer.png				\
 	16x16/mimetypes/gnome-mime-application-pdf.png			\
-	16x16/mimetypes/gnome-mime-application-postscript.png		\
 	22x22/mimetypes/gnome-mime-application-pdf.png			\
-	22x22/mimetypes/gnome-mime-application-postscript.png		\
 	24x24/mimetypes/gnome-mime-application-pdf.png			\
-	24x24/mimetypes/gnome-mime-application-postscript.png		\
 	32x32/mimetypes/gnome-mime-application-pdf.png			\
+	16x16/mimetypes/gnome-mime-application-postscript.png		\
+	22x22/mimetypes/gnome-mime-application-postscript.png		\
+	24x24/mimetypes/gnome-mime-application-postscript.png		\
 	32x32/mimetypes/gnome-mime-application-postscript.png		\
+	48x48/stock/io/stock_print-duplex.png				\
 	48x48/stock/io/stock_print-duplex-no-tumble.png			\
 	48x48/stock/io/stock_print-duplex-tumble.png			\
-	48x48/stock/io/stock_print-duplex.png				\
 	48x48/stock/io/stock_print-non-duplex.png			\
 	index.theme
 
@@ -178,13 +182,15 @@ createinstaller:
 	@LOADERSPATH=`grep "loaders/libpixbufloader" $(PREFIX)/etc/gtk-2.0/gdk-pixbuf.loaders|head -n1|sed -e 's#.*/\(lib/gtk-2.0/[^/]*/loaders\)/.*#\1#'`; \
 	GTK_TRANSLATIONS=`echo $(INSTALLERTMP)/planner/share/locale/*|sed -e "s#$(INSTALLERTMP)/planner##g"`; \
 	GTK_FILES="/etc/gtk-2.0/gdk-pixbuf.loaders \
+	         $${LOADERSPATH} \
 	         /etc/gtk-2.0/gtkrc \
+	         /etc/fonts \
 	         /lib/libgnomeprint \
 	         /share/libgnomeprint \
-	         $${GTK_TRANSLATIONS} \
+	         /share/libgnomeprintui \
 	         $(addprefix /bin/,$(GTK_BINFILES)) \
 	         $(addprefix /share/icons/gnome/,$(GTK_ICONFILES)) \
-	         $${LOADERSPATH}"; \
+	         $${GTK_TRANSLATIONS}"; \
 	mkdir -p $(INSTALLERTMP)/planner; \
 	for file in $${GTK_FILES}; do \
 		echo "Copying $(PREFIX)/$${file}..."; \

@@ -15,12 +15,13 @@ BEGIN
     BEGIN
         BLOCK "040904E4"
         BEGIN
-            VALUE "CompanyName",         "Imendio\0"
-            VALUE "FileDescription",     "Imendio Planner for Windows\0"
+            VALUE "CompanyName",         "Gnome\0"
+            VALUE "FileDescription",     "Gnome Planner for Windows\0"
             VALUE "FileVersion",         "@VERSION@\0"
-            VALUE "InternalName",        "PLANNER" "\0"
-            VALUE "ProductName",         "Imendion Planner\0"
-            VALUE "ProuctVersion",       "@VERSION@\0"
+            VALUE "InternalName",        "planner" "\0"
+            VALUE "OriginalFilename",    "planner.exe\0"
+            VALUE "ProductName",         "Gnome Planner\0"
+            VALUE "ProductVersion",       "@VERSION@\0"
         END
     END
 END

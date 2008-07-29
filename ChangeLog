@@ -1,3 +1,12 @@
+2008-07-29  Maurice van der Pot  <griffon26@kfk4ever.com>
+
+	* Makefile.win32: Added font description files needed for printing on
+	Windows (fixes crashes or lock-ups when trying to print). Also added a
+	printer icon that was missing and the menu description for the print preview
+	window.
+	* data/planner.rc.in: Removed a few references to "Imendio Planner"	that
+	would end up in the executable for Windows.
+
 2008-07-22  Maurice van der Pot  <griffon26@kfk4ever.com>
 
 	* src/Makefile.am:
