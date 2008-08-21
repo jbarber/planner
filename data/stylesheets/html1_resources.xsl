@@ -23,9 +23,10 @@
   <xsl:variable name="hasnotes"
     select="boolean (count(//resource[@note!='']))"/>
   
+  <div class="resourcelist">
   <h2><a name="resources"><xsl:value-of select="I18N:gettext('Resources')"/></a></h2>
 
-  <div class="scroll-div">
+  <div class="resourcelist-table">
   <table cellspacing="0" cellpadding="0" border="1" width="100%">
     <tr class="header" align="left">
       <th><span><xsl:value-of select="I18N:gettext('Name')"/></span></th>
@@ -35,7 +36,7 @@
       <th><span><xsl:value-of select="I18N:gettext('Email')"/></span></th>
       <th><span><xsl:value-of select="I18N:gettext('Cost')"/></span></th>
       <xsl:if test="$hasnotes">
-        <th><span>Notes</span></th>
+        <th class="note"><span>Notes</span></th>
       </xsl:if>
     </tr>
 
@@ -49,6 +50,7 @@
           
     </xsl:for-each>
   </table>
+  </div>
   </div>
 </xsl:template>
 
@@ -104,7 +106,7 @@
            </span>
          </td>
          <xsl:if test="$hasnotes">
-           <td>
+           <td class="note">
              <span>
                <xsl:value-of select="@note"/>
              </span>

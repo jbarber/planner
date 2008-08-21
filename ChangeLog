@@ -1,3 +1,19 @@
+2008-08-21  Maurice van der Pot  <griffon26@kfk4ever.com>
+
+	* data/stylesheets/Makefile.am:
+	* data/stylesheets/html1_css.xsl:
+	* data/stylesheets/html1_css_ie.xsl:
+	* data/stylesheets/html1_css_ie7.xsl:
+	* data/stylesheets/html1_gantt.xsl:
+	* data/stylesheets/html1_resources.xsl:
+	* data/stylesheets/html1_tasks.xsl:
+	* data/stylesheets/planner2html.xsl:
+	Switched over from tables to divs for layout. Markup and CSS was validated
+	and tested with Firefox 3.0.1 (perfect), Firefox 2.0.0.16 (minor issue with
+	scrollbars), Opera 9.51 (perfect), Internet Explorer 6.0 & 7.0 (gantt
+	scrollbars always visible, milestone diamond is shown as a square).
+	Should fix bugs #471218 and #478027.
+
 2008-07-29  Maurice van der Pot  <griffon26@kfk4ever.com>
 
 	* Makefile.win32: Fix makefile for Windows to work with both libpng <=

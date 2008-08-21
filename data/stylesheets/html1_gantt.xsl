@@ -76,9 +76,12 @@
 </xsl:template>
 
 <xsl:template name="gantt">
+  <div class="gantt">
   <h2><a name="gantt"><xsl:value-of select="I18N:gettext('Gantt Chart')"/></a></h2>
  
-  <xsl:variable name="tmpdays" select="ceiling($projlength div 86400)"/>
+  <!-- add 7 days to make room for at least part of the resource names of tasks
+       that end close to the end of the project -->
+  <xsl:variable name="tmpdays" select="ceiling($projlength div 86400) + 7"/>
 
   <xsl:variable name="days">
     <xsl:choose>
@@ -87,11 +90,7 @@
     </xsl:choose>
   </xsl:variable>
 
-  <table cellspacing="0" cellpadding="0" border="0">
-  <tr>
-  <td>
-
-  <div class="no-scroll-div">
+  <div class="gantt-tasklist">
   <table cellspacing="0" cellpadding="0" border="1">
     <tr class="header" align="left">
       <th><span><xsl:value-of select="I18N:gettext('WBS')"/></span></th>
@@ -186,10 +185,7 @@
   </table>
   </div>
 
-  </td>
-  <td>
-
-  <div class="scroll-div" style="border-color: #aaa #aaa #aaa #fff;">
+  <div class="gantt-chart">
   <table cellspacing="0" cellpadding="0" border="1" style="table-layout: fixed;">
     <tr class="header" align="left">
       <xsl:call-template name="create-week-row">
@@ -255,8 +251,8 @@
                   
               <xsl:choose>
                 <xsl:when test="@type = 'milestone'">
-                  <span class="gantt-milestone">&#9670;</span>
-                  <span class="gantt-resources">
+                  <div class="gantt-milestone">&#9670;</div>
+                  <div class="gantt-resources">
                     <xsl:variable name="task-id" select="@id"/>
                     <xsl:for-each select="/project/allocations/allocation[@task-id=$task-id]">
                       <xsl:sort data-type="number" select="@resource-id" order="descending"/>
@@ -275,11 +271,11 @@
                         <xsl:text>, </xsl:text>
                       </xsl:if>
                     </xsl:for-each>
-                  </span>
+                  </div>
                 </xsl:when>
                 <xsl:otherwise>
                   <div class="gantt-empty-end"></div>
-                  <span class="gantt-resources">
+                  <div class="gantt-resources">
                     <xsl:variable name="task-id" select="@id"/>
                     <xsl:for-each select="/project/allocations/allocation[@task-id=$task-id]">
                       <xsl:sort data-type="number" select="@resource-id" order="descending"/>
@@ -298,7 +294,7 @@
                         <xsl:text>, </xsl:text>
                       </xsl:if>
                     </xsl:for-each>
-                  </span>
+                  </div>
                 </xsl:otherwise>
               </xsl:choose>
 
@@ -309,11 +305,7 @@
     </xsl:for-each>
   </table>
   </div>
-
-
-  </td>
-  </tr>
-  </table>
+  </div>
 
 
 </xsl:template>

@@ -42,9 +42,11 @@
 <xsl:template match="tasks">
   <xsl:variable name="hasproperties" select="boolean (count(//task/properties/property[@value!='']))"/>
   <xsl:variable name="hasnotes" select="boolean (count(//task[@note!='']))"/>
+
+  <div class="tasklist">
   <h2><a name="tasks"><xsl:value-of select="I18N:gettext('Tasks')"/></a></h2>
 
-  <div class="scroll-div">
+  <div class="tasklist-table">
   <table cellspacing="0" cellpadding="0" border="1">
     <tr class="header" align="left">
       <th><span><xsl:value-of select="I18N:gettext('WBS')"/></span></th>
@@ -56,7 +58,7 @@
       <th><span><xsl:value-of select="I18N:gettext('Complete')"/></span></th>
       <th><span><xsl:value-of select="I18N:gettext('Cost')"/></span></th>
       <xsl:if test="$hasnotes">
-        <th><span>Notes</span></th>
+        <th class="note"><span>Notes</span></th>
       </xsl:if>
     </tr>
     <xsl:for-each select="//task">
@@ -152,10 +154,10 @@
                 </span>
               </td>
               <xsl:if test="$hasnotes">
-                <td>
-                  <span class="note">
+                <td class="note">
+                  <span>
                     <xsl:value-of select="@note"/>
-          </span>
+                  </span>
                 </td>
               </xsl:if>
             </tr>
@@ -217,8 +219,8 @@
                 </span>
               </td>
               <xsl:if test="$hasnotes">
-                <td>
-                  <span class="note">
+                <td class="note">
+                  <span>
                     <xsl:value-of select="@note"/>
                   </span>
                 </td>
@@ -295,8 +297,8 @@
                 </span>
               </td>
               <xsl:if test="$hasnotes">
-                <td>
-                  <span class="note">
+                <td class="note">
+                  <span>
                     <xsl:value-of select="@note"/>
                   </span>
                 </td>
@@ -306,6 +308,7 @@
         </xsl:choose>
     </xsl:for-each>
   </table>
+  </div>
   </div>
 </xsl:template>
 </xsl:stylesheet>

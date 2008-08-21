@@ -17,13 +17,13 @@
  * Fonts 
  */
 html,body,table { 
- font-family: Bitstream Vera Sans, helvetica, Arial, sans-serif;
+ font-family: "Bitstream Vera Sans", helvetica, Arial, sans-serif;
  font-size: 12px;
  white-space: nowrap;
 }
 
 tr,td,th,table,font,span,div,h1,h2,h3 {
- font-family: Bitstream Vera Sans, helvetica, Arial, sans-serif;
+ font-family: "Bitstream Vera Sans", helvetica, Arial, sans-serif;
 }
 
 h1 {
@@ -56,6 +56,8 @@ table.proj-header .header {
  * Footer
  */
 .footer {
+ float: left;
+ width: 100%;
  margin-top: 50px;  
  padding-top: 2px;
  border-style: dotted;
@@ -78,19 +80,40 @@ a:hover[href] {
 
 
 /*
- * Tables
+ * Layout
  */
-.scroll-div {
- overflow: auto;
+
+.gantt, .gantt-tasklist, .gantt-chart, .tasklist, .resourcelist {
+ float: left;
+}
+
+.gantt-tasklist, .gantt-chart, .tasklist-table, .resourcelist-table {
  border-style: solid;
  border-width: 1px;
  border-color: #aaa;
 }
 
-.no-scroll-div {
- border-style: solid;
- border-color: #aaa;
+.gantt-tasklist, .gantt-chart, .tasklist, .resourcelist {
+ overflow: auto;
+}
+
+.gantt, .tasklist, .resourcelist {
+  clear: both;
+  width: 100%;
+}
+
+.gantt-tasklist {
  border-width: 1px 0px 1px 1px;
+ width: 30%;
+}
+
+.gantt-chart {
+ border-color: #aaa #aaa #aaa #fff;
+ width: 69.5%;
+}
+
+.tasklist, .resourcelist {
+ clear: left;
 }
 
 table {
@@ -135,7 +158,11 @@ th span, td span {
  margin-right: 6px;
 }
 
-span.note {
+th.note {
+ min-width: 20em;
+}
+
+td.note {
  white-space: normal;
 }
 
@@ -174,16 +201,19 @@ div.gantt-empty-end {
  margin-left: 0;
 }
 
-span.gantt-milestone {
- font-size: 0.8em;
+div.gantt-milestone {
+ float: left;
+ font-size: 0.9em;
  color: #000000;
  position: relative;
  margin-left: 0;
  margin-right: 0;
 }
 
-span.gantt-resources {
+div.gantt-resources {
+ float: left;
  margin-left: 0.5em;
+ white-space: nowrap;
 }
 
 th.gantt-1day-header {
@@ -191,32 +221,33 @@ th.gantt-1day-header {
 }
 
 th.gantt-2day-header {
-  width: 38px;
+  width: 39px;
 }
 
 th.gantt-3day-header {
-  width: 57px;
+  width: 59px;
 }
 
 th.gantt-4day-header {
-  width: 76px;
+  width: 79px;
 }
 
 th.gantt-5day-header {
-  width: 95px;
+  width: 99px;
 }
 
 th.gantt-6day-header {
-  width: 114px;
+  width: 119px;
 }
 
-th.gantt-week-header {
- width: 133px;
+th.gantt-week-header, .gantt-resources {
+ width: 139px;
 }
 
 th.gantt-day-header {
  margin: 0;
- padding: 0;
+ padding-top: 1px;
+ padding-bottom: 1px;
  width: 19px;
 }
 

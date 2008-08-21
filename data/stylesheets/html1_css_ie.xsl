@@ -9,6 +9,37 @@
  * (see http://en.wikipedia.org/wiki/Internet_Explorer_box_model_bug)
  */
 
+.gantt-resources {
+  overflow: hidden;
+}
+
+<!-- to prevent overlapping part of the content with the horizontal scrollbar
+     and to turn off the vertical scrollbar -->
+.tasklist, .resourcelist {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 1em;
+}
+
+<!-- the padding in the above fix is visible (and ugly) in the gantt, so there
+     it's nicer to just have a disabled scrollbar -->
+.gantt-tasklist, .gantt-chart {
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+
+<!-- fix a misalignment with the gantt-tasklist -->
+.gantt-chart {
+  padding-bottom: 1px;
+}
+
+
+<!-- to prevent IE from showing scrollbars because the border of the table does
+     not fit within the container -->
+.tasklist-table, .resourcelist-table {
+  width: 99.8%;
+}
+
 /*
 div.gantt-empty-begin, div.gantt-empty-end, div.gantt-complete-done, div.gantt-complete-notdone, div.gantt-summary {
  height: 1.75em;

@@ -4,6 +4,7 @@ stylesheet_DATA = \
 	planner2html.xsl		\
 	html1_css.xsl			\
 	html1_css_ie.xsl		\
+	html1_css_ie7.xsl		\
 	html1_gantt.xsl			\
 	html1_resources.xsl		\
 	html1_tasks.xsl			\
