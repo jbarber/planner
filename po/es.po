@@ -10,12 +10,12 @@ msgid ""
 msgstr ""
 "Project-Id-Version: planner.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-02-28 01:07+0000\n"
-"PO-Revision-Date: 2008-03-01 17:40+0100\n"
+"POT-Creation-Date: 2008-03-02 03:49+0000\n"
+"PO-Revision-Date: 2008-08-29 10:37+0200\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type:  text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
@@ -540,13 +540,15 @@ msgid "Whether to display nonstandard days in the Gantt view."
 msgstr "Indica si se deben mostrar los días no estándar en la vista de Gantt."
 
 #: ../data/planner.schemas.in.h:12
-msgid "Whether to highlight the tasks along the cricital path in the Gantt view."
+msgid ""
+"Whether to highlight the tasks along the cricital path in the Gantt view."
 msgstr ""
 "Indica si se deben resaltar las tareas junto con la ruta crítica en la vista "
 "de Gantt."
 
 #: ../data/planner.schemas.in.h:13
-msgid "Whether to highlight the tasks along the cricital path in the Task view."
+msgid ""
+"Whether to highlight the tasks along the cricital path in the Task view."
 msgstr ""
 "Indica si se debe resaltar las tareas a lo largo de la ruta crítica en la "
 "vista de tareas."
@@ -663,7 +665,8 @@ msgstr "No se pudo encontrar un módulo apropiado para cargar «%s»"
 #: ../libplanner/mrp-project.c:780 ../libplanner/mrp-project.c:1064
 #, c-format
 msgid "No support for SQL storage built into this version of Planner."
-msgstr "No hay soporte para almacenamiento SQL compilado en esta versión de Planner."
+msgstr ""
+"No hay soporte para almacenamiento SQL compilado en esta versión de Planner."
 
 #: ../libplanner/mrp-project.c:817
 #, c-format
@@ -678,7 +681,8 @@ msgstr "No es posible encontrar el escritor de archivos identificado por «%s»"
 #: ../libplanner/mrp-project.c:1021
 #, c-format
 msgid "Couldn't find a suitable file module for loading project"
-msgstr "No se pudo encontrar un módulo de archivo adecuado para cargar el proyecto"
+msgstr ""
+"No se pudo encontrar un módulo de archivo adecuado para cargar el proyecto"
 
 #: ../libplanner/mrp-property.c:365
 msgid "Text"
@@ -779,7 +783,8 @@ msgstr "URI SQL inválida (no hay especificado un nombre de base de datos)."
 
 #: ../libplanner/mrp-task.c:1070
 #, c-format
-msgid "Could not add a predecessor relation, because the tasks are already related."
+msgid ""
+"Could not add a predecessor relation, because the tasks are already related."
 msgstr ""
 "No se puede añadir una relación predecesora, debido a que las tareas ya se "
 "encuentran relacionadas."
@@ -787,8 +792,7 @@ msgstr ""
 #: ../libplanner/mrp-task.c:1081
 msgid "Start to Finish relation type cannot be combined with other relations."
 msgstr ""
-"Una relación de tipo «inicio a fin» no se puede combinar con otras "
-"relaciones."
+"Una relación de tipo «inicio a fin» no se puede combinar con otras relaciones."
 
 #: ../libplanner/mrp-task.c:1083
 msgid "Finish to Finish relation type cannot be combined with other relations."
@@ -1016,7 +1020,8 @@ msgstr "UID del Servidor de Datos de Evolution"
 
 #: ../src/planner-eds-plugin.c:924
 msgid "Identifier used by Evolution Data Server for resources"
-msgstr "Identificador que usa el Servidor de Datos de Evolution para los recursos"
+msgstr ""
+"Identificador que usa el Servidor de Datos de Evolution para los recursos"
 
 #: ../src/planner-format.c:149
 #, c-format
@@ -1786,7 +1791,8 @@ msgstr "No se pueden crear tablas en la base de datos %s"
 #: ../src/planner-sql-plugin.c:727
 #, c-format
 msgid "Database %s is not setup for Planner. Do you want to do that?"
-msgstr "La base de datos %s no está preparada para Planner. ¿Qué quiere hacer ahora?"
+msgstr ""
+"La base de datos %s no está preparada para Planner. ¿Qué quiere hacer ahora?"
 
 #: ../src/planner-sql-plugin.c:776
 #, c-format
@@ -1894,7 +1900,8 @@ msgstr "Empezar para terminar (ET)"
 
 #: ../src/planner-task-dialog.c:1975
 msgid "Can't add new predecessor. No task selected!"
-msgstr "No se puede añadir un predecesor nuevo. No ha seleccionado ninguna tarea."
+msgstr ""
+"No se puede añadir un predecesor nuevo. No ha seleccionado ninguna tarea."
 
 #: ../src/planner-task-dialog.c:2463
 msgid "Change..."
@@ -2236,7 +2243,7 @@ msgstr "Mostrar la guía del usuario de Planner"
 
 #: ../src/planner-window.c:306
 msgid "_About"
-msgstr "_Acerca de…"
+msgstr "Acerca _de"
 
 #: ../src/planner-window.c:306
 msgid "About this application"
@@ -2262,8 +2269,8 @@ msgstr "Archivos de Planner"
 #: ../src/planner-window.c:1324 ../src/planner-window.c:1346
 msgid "translator-credits"
 msgstr ""
-"Jorge González <jorgegonz@svn.gnome.org>, 2007-2008.\n"
-"Francisco Javier F. Serrador <serrador@cvs.gnome.org>, 2003-2006."
+"Jorge González <jorgegonz@svn.gnome.org>, 2007-2008\n"
+"Francisco Javier F. Serrador <serrador@cvs.gnome.org>, 2003-2006"
 
 #: ../src/planner-window.c:1341
 msgid "A Project Management application for the GNOME desktop"
@@ -2280,9 +2287,12 @@ msgstr "Si no guarda, los cambios hechos en el último minuto se descartarán."
 #: ../src/planner-window.c:1506
 #, c-format
 msgid "If you don't save, changes made the last %d minute will be discarded."
-msgid_plural "If you don't save, changes made the last %d minutes will be discarded."
-msgstr[0] "Si no guarda, los cambios hechos en el último %d minuto se descartarán."
-msgstr[1] "Si no guarda, los cambios hechos en los últimos %d minutos se descartarán."
+msgid_plural ""
+"If you don't save, changes made the last %d minutes will be discarded."
+msgstr[0] ""
+"Si no guarda, los cambios hechos en el último %d minuto se descartarán."
+msgstr[1] ""
+"Si no guarda, los cambios hechos en los últimos %d minutos se descartarán."
 
 #: ../src/planner-window.c:1514
 msgid "If you don't save, changes made the last hour will be discarded."
@@ -2291,9 +2301,12 @@ msgstr "Si no guarda, los cambios hechos en la última hora se descartarán."
 #: ../src/planner-window.c:1519
 #, c-format
 msgid "If you don't save, changes made the last %d hour will be discarded."
-msgid_plural "If you don't save, changes made the last %d hours will be discarded."
-msgstr[0] "Si no guarda, los cambios hechos en la última %d hora se descartarán."
-msgstr[1] "Si no guarda, los cambios hechos en las últimas %d horas se descartarán."
+msgid_plural ""
+"If you don't save, changes made the last %d hours will be discarded."
+msgstr[0] ""
+"Si no guarda, los cambios hechos en la última %d hora se descartarán."
+msgstr[1] ""
+"Si no guarda, los cambios hechos en las últimas %d horas se descartarán."
 
 #: ../src/planner-window.c:1529
 #, c-format
@@ -2329,11 +2342,11 @@ msgid ""
 msgstr ""
 "Ha abierto un archivo que se guardó con una versión antigua de Planner.\n"
 "\n"
-"Cuando cargue archivos antiguos, todas las tareas usarán el impedimento "
-"«Debe empezar en», debido a que la versión antigua no soportaba "
-"completamente la replanificación automática. Para aprovechar las ventajas de "
-"esta característica nueva debería añadir relaciones de precedencia entre "
-"tareas que sean dependientes de otras.\n"
+"Cuando cargue archivos antiguos, todas las tareas usarán el impedimento «Debe "
+"empezar en», debido a que la versión antigua no soportaba completamente la "
+"replanificación automática. Para aprovechar las ventajas de esta "
+"característica nueva debería añadir relaciones de precedencia entre tareas "
+"que sean dependientes de otras.\n"
 "\n"
 "Puede añadir una relación de predecesión pulsando en el predecesor y "
 "arrastrando hasta el sucesor.\n"
@@ -2373,7 +2386,8 @@ msgstr "UID de EDS"
 
 #: ../eds-backend/e-cal-backend-planner.c:290
 msgid "Identifier used by Evolution Data Server for tasks"
-msgstr "Identificador que usa el Servidor de Datos de Evolution para las tareas"
+msgstr ""
+"Identificador que usa el Servidor de Datos de Evolution para las tareas"
 
 #: ../eds-backend/e-cal-backend-planner.c:299
 msgid "EDS Categories"
@@ -2417,4 +2431,3 @@ msgid ""
 msgstr ""
 "La extensión del nombre de archivo no es la extensión usual de Planner (%s). "
 "¿Quiere continuar?"
-
