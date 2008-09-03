@@ -4,6 +4,7 @@
  * Copyright (C) 2003 Benjamin BAYART <benjamin@sitadelle.com>
  * Copyright (C) 2003 Xavier Ordoquy <xordoquy@wanadoo.fr>
  * Copyright (C) 2006 Alvaro del Castillo <acs@barrapunto.com>
+ * Copyright (C) 2008 Lee Baylis <lee@leebaylis.co.uk>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -867,9 +868,10 @@ usage_row_date_compare (gconstpointer date1,
 }
 
 typedef enum {
-        ROW_START,
-        ROW_MIDDLE,
-        ROW_END
+        ROW_MIDDLE = 0,
+        ROW_START  = 1 << 0,
+        ROW_END    = 1 << 1,
+        ROW_WHOLE  = ROW_START | ROW_END
 } RowChunk;
 
 static void
@@ -1012,7 +1014,7 @@ usage_row_draw_resource_ival (mrptime          start,
         }
 	
         /* Left of the shadow. */
-        if (chunk == ROW_START && cs_xstart == rs_xstart) {
+        if (chunk & ROW_START && cs_xstart == rs_xstart) {
                 gdk_draw_line (drawable, priv->fill_gc, rs_xstart, rs_ystart,
                                rs_xstart, cs_yend);
         }
@@ -1038,13 +1040,13 @@ usage_row_draw_resource_ival (mrptime          start,
         }
 	
         /* Right of the shadow. */
-        if (chunk == ROW_END && cs_xend == rs_xend) {
+        if (chunk & ROW_END && cs_xend == rs_xend) {
                 gdk_draw_line (drawable, priv->fill_gc, rs_xend, rs_ystart,
                                rs_xend, cs_yend);
         }
 
 	/* Interval separator. */
-	if (chunk != ROW_START) {
+	if (!(chunk & ROW_START)) {
 		gdk_gc_set_foreground (priv->fill_gc, &GTK_WIDGET (item->canvas)->style->white);
 		gdk_draw_line (drawable, priv->fill_gc, c_xstart, rs_ystart, c_xstart,
                                rr_yend);
@@ -1063,13 +1065,13 @@ usage_row_draw_resource_ival (mrptime          start,
 	}
 	
         /* Left frame. */
-        if (chunk == ROW_START && c_xstart == r_xstart) {
+        if (chunk & ROW_START && c_xstart == r_xstart) {
                 gdk_draw_line (drawable, priv->frame_gc, r_xstart, r_ystart,
                                r_xstart, r_yend);
 	}
 	
         /* Right frame. */
-        if (chunk == ROW_END && c_xend == r_xend) {
+        if (chunk & ROW_END && c_xend == r_xend) {
                 gdk_draw_line (drawable, priv->frame_gc, r_xend, r_ystart, r_xend,
                                r_yend);
 	}
@@ -1130,10 +1132,6 @@ usage_row_draw_resource (PlannerUsageRow *row,
                 dates = g_list_insert_sorted (dates, date1, usage_row_date_compare);
         }
 
-	/* FIXME: This should be changed to draw the rectangle frame in one
-	 * piece, then fill the different colors.
-	 */
-	
         units = 0;
         previous_time = mrp_project_get_project_start (project);
 
@@ -1145,12 +1143,9 @@ usage_row_draw_resource (PlannerUsageRow *row,
         for (d = dates; d; d = d->next) {
                 date = d->data;
 
-		/* FIXME: This code is broken, it never paints the leftmost part
-		 * of the frame for bars that start at the project start.
-		 */
                 if (date->time != previous_time) {
                         if (date->time == finish) {
-                                chunk = ROW_END;
+				chunk |= ROW_END;
 			}
 
                         usage_row_draw_resource_ival (previous_time,
@@ -1159,9 +1154,8 @@ usage_row_draw_resource (PlannerUsageRow *row,
                                                        chunk,
                                                        drawable, item,
                                                        x, y, width, height);
-                        if (chunk == ROW_START) {
-                                chunk = ROW_MIDDLE;
-			}
+
+                        chunk &= ~ROW_START;
                         previous_time = date->time;
                 }
 
@@ -1174,8 +1168,8 @@ usage_row_draw_resource (PlannerUsageRow *row,
         }
         g_list_free (dates);
 
-        if (chunk != ROW_END) {
-                chunk = ROW_END;
+        if (!(chunk & ROW_END)) {
+		chunk |= ROW_END;	
                 usage_row_draw_resource_ival (previous_time,
                                                finish,
                                                units,
