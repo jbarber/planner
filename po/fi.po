@@ -1,8 +1,8 @@
 # Finnish messages for planner 
-# Copyright (C) 2005 Ilkka Tuohela
+# Copyright (C) 2005-2008 Free Software Foundation.
 # This file is distributed under the same license as the planner package.
 #
-# Ilkka Tuohela <hile@iki.fi>, 2005-2006.
+# Ilkka Tuohela <hile@iki.fi>, 2005-2008.
 #
 # Suomennos: http://gnome.fi/
 #
@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: planner\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-16 11:54+0300\n"
-"PO-Revision-Date: 2006-09-15 16:17+0300\n"
+"POT-Creation-Date: 2008-10-04 20:33+0300\n"
+"PO-Revision-Date: 2008-10-04 20:30+0300\n"
 "Last-Translator: Ilkka Tuohela <hile@iki.fi>\n"
 "Language-Team: Finnish <gnome-fi-laatu@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -314,6 +314,7 @@ msgid "Notes"
 msgstr "Huomiot"
 
 #: ../data/glade/resource-dialog.glade.h:7
+#: ../data/glade/resource-input-dialog.glade.h:3
 msgid "Optional - overrides resource name in Gantt view."
 msgstr "Vapaaehtoinen - ohittaa resurssin nimen Gantt-näkymässä."
 
@@ -347,10 +348,6 @@ msgstr "_Lyhyt nimi:"
 #: ../data/glade/resource-input-dialog.glade.h:2
 msgid "Insert Resource"
 msgstr "Lisää resurssi"
-
-#: ../data/glade/resource-input-dialog.glade.h:3
-msgid "Optional - overrides resource name in gantt view."
-msgstr "Vapaaehtoinen - ohittaa resurssin nimen gantt-näkymässä."
 
 #: ../data/glade/resource-input-dialog.glade.h:6
 #: ../data/glade/task-input-dialog.glade.h:3
@@ -713,21 +710,27 @@ msgstr "Kulut"
 msgid "None"
 msgstr "Ei mitään"
 
-#: ../libplanner/mrp-sql.c:214 ../libplanner/mrp-sql.c:228
+#: ../libplanner/mrp-sql.c:292 ../libplanner/mrp-sql.c:310
+#: ../src/planner-sql-plugin.c:207 ../src/planner-sql-plugin.c:225
 msgid "Can't connect to database server"
 msgstr "Tietokantapalvelimeen ei saada yhteyttä"
 
+#: ../libplanner/mrp-sql.c:297 ../libplanner/mrp-sql.c:315
+#: ../src/planner-sql-plugin.c:212 ../src/planner-sql-plugin.c:230
+msgid "No errors reported."
+msgstr "Ei havaittuja virheitä."
+
 #. Give up.
-#: ../libplanner/mrp-sql.c:319 ../src/planner-sql-plugin.c:220
+#: ../libplanner/mrp-sql.c:405 ../src/planner-sql-plugin.c:300
 msgid "Invalid Unicode"
 msgstr "Virheellinen Unicode"
 
-#: ../libplanner/mrp-sql.c:2213
+#: ../libplanner/mrp-sql.c:2306
 #, c-format
 msgid "Connection to database '%s' failed.\n"
 msgstr "Yhteys tietokantaan \"%s\" epäonnistui.\n"
 
-#: ../libplanner/mrp-sql.c:2218
+#: ../libplanner/mrp-sql.c:2311
 #, c-format
 msgid ""
 "Connection to database '%s' failed.\n"
@@ -736,12 +739,12 @@ msgstr ""
 "Yhteys tietokantaan \"%s\" epäonnistui.\n"
 "%s"
 
-#: ../libplanner/mrp-sql.c:2226
+#: ../libplanner/mrp-sql.c:2326
 #, c-format
 msgid "BEGIN command failed %s."
 msgstr "BEGIN-komento epäonnistui %s."
 
-#: ../libplanner/mrp-sql.c:2394
+#: ../libplanner/mrp-sql.c:2486
 #, c-format
 msgid ""
 "The project '%s' has been changed by the user '%s' since you opened it. Do "
@@ -750,22 +753,22 @@ msgstr ""
 "Projekti \"%s\" on muuttunut käyttäjän \"%s\" toimesta sen jälkeen, kun "
 "avasit sen. Haluatko tallentaa siitä huolimatta?"
 
-#: ../libplanner/mrp-sql.c:3674
+#: ../libplanner/mrp-sql.c:3711
 #, c-format
 msgid "Connection to database '%s' failed."
 msgstr "Yhteys tietokantaan \"%s\" epäonnistui."
 
-#: ../libplanner/mrp-storage-sql.c:205
+#: ../libplanner/mrp-storage-sql.c:206
 #, c-format
 msgid "Invalid SQL URI (must start with 'sql://' and contain '#')."
 msgstr "Virheellinen SQL-URI (täytyy alkaa 'sql://' ja sisältää merkin '#')."
 
-#: ../libplanner/mrp-storage-sql.c:274
+#: ../libplanner/mrp-storage-sql.c:275
 #, c-format
 msgid "Invalid SQL URI (invalid project id)."
 msgstr "Virheelline SQL-URI (virheellinen projektin tunniste)."
 
-#: ../libplanner/mrp-storage-sql.c:282
+#: ../libplanner/mrp-storage-sql.c:283
 #, c-format
 msgid "Invalid SQL URI (no database name specified)."
 msgstr "Virheellinen SQL-URI (tietokannan nimeä ei ole määritelty)."
@@ -809,12 +812,12 @@ msgstr ""
 "Alusta loppuun-relaatiota ei voi asettaa. Edeltäjä alkaa projektin "
 "alkupäivänä."
 
-#: ../libplanner/mrp-task-manager.c:2527
+#: ../libplanner/mrp-task-manager.c:2627
 #, c-format
 msgid "Cannot add a predecessor, because it would result in a loop."
 msgstr "Edeltäjää ei voi lisätä, koska tästä seuraisi silmukka."
 
-#: ../libplanner/mrp-task-manager.c:2573
+#: ../libplanner/mrp-task-manager.c:2671
 #, c-format
 msgid "Cannot move the task, because it would result in a loop."
 msgstr "Tehtävää ei voi siirtää, koska siirrosta seuraisi silmukka."
@@ -1124,28 +1127,33 @@ msgstr "%e %b %Y"
 msgid "Work"
 msgstr "Työ"
 
-#: ../src/planner-gantt-print.c:542 ../src/planner-gantt-row.c:765
-#: ../src/planner-html-plugin.c:125 ../src/planner-task-tree.c:1571
-#: ../src/planner-window.c:1988
+#: ../src/planner-gantt-print.c:542 ../src/planner-gantt-row.c:776
+#: ../src/planner-html-plugin.c:125 ../src/planner-task-tree.c:1601
+#: ../src/planner-window.c:1991
 msgid "Unnamed"
 msgstr "Nimeämätön"
 
-#: ../src/planner-gantt-row.c:2697 ../src/planner-gantt-row.c:2700
-msgid "No name"
-msgstr "Ei nimeä"
-
-#: ../src/planner-gantt-row.c:2703
-#, c-format
-msgid "Make task '%s' a predecessor of '%s'"
-msgstr "Merkitse tehtävä \"%s\" tehtävän \"%s\" edeltäjäksi"
-
-#: ../src/planner-gantt-row.c:2769
+#: ../src/planner-gantt-row.c:2358
 #, c-format
 msgid "Change work to %s"
 msgstr "Muuta työ kohtaan %s"
 
-#: ../src/planner-gantt-row.c:3370 ../src/planner-task-dialog.c:455
-#: ../src/planner-task-tree.c:257 ../src/planner-task-tree.c:947
+#: ../src/planner-gantt-row.c:2370
+#, c-format
+msgid "Change progress to %u%% complete"
+msgstr "Aseta valmistuminen %u %% valmiiksi"
+
+#: ../src/planner-gantt-row.c:2409 ../src/planner-gantt-row.c:2412
+msgid "No name"
+msgstr "Ei nimeä"
+
+#: ../src/planner-gantt-row.c:2415
+#, c-format
+msgid "Make task '%s' a predecessor of '%s'"
+msgstr "Merkitse tehtävä \"%s\" tehtävän \"%s\" edeltäjäksi"
+
+#: ../src/planner-gantt-row.c:3436 ../src/planner-task-dialog.c:455
+#: ../src/planner-task-tree.c:262 ../src/planner-task-tree.c:952
 msgid "Edit task property"
 msgstr "Muokkaa tehtävän ominaisuuksia"
 
@@ -1322,7 +1330,16 @@ msgstr "Liikkumavara"
 msgid "Assigned to"
 msgstr "Annettu tehtäväksi"
 
-#: ../src/planner-gantt-view.c:950
+#. i18n: The string "% Complete" will be used in the header
+#. * of a column containing values from 0 upto 100, indicating
+#. * what part of a task has been completed.
+#.
+#: ../src/planner-gantt-view.c:602 ../src/planner-task-view.c:349
+#, no-c-format
+msgid "% Complete"
+msgstr "%s valmis"
+
+#: ../src/planner-gantt-view.c:956
 msgid "Edit Gantt Columns"
 msgstr "Muokkaa Gantt-kaavion sarakkeita"
 
@@ -1374,7 +1391,7 @@ msgstr "Vie HTML-muodossa"
 msgid "Show result in browser"
 msgstr "Näytä tulos selaimessa"
 
-#: ../src/planner-html-plugin.c:173 ../src/planner-window.c:1697
+#: ../src/planner-html-plugin.c:173 ../src/planner-window.c:1700
 #: ../src/planner-xml-planner-plugin.c:124
 #, c-format
 msgid "File \"%s\" exists, do you want to overwrite it?"
@@ -1412,7 +1429,7 @@ msgstr "Tuo tiedosto"
 msgid "XML Files"
 msgstr "XMl-tiedostot"
 
-#: ../src/planner-msp-plugin.c:219 ../src/planner-window.c:848
+#: ../src/planner-msp-plugin.c:219 ../src/planner-window.c:851
 msgid "All Files"
 msgstr "Kaikki tiedostot"
 
@@ -1716,27 +1733,23 @@ msgstr "H%d"
 msgid "%04d, H%d"
 msgstr "%04d, H%d"
 
-#: ../src/planner-sql-plugin.c:93
+#: ../src/planner-sql-plugin.c:101
 msgid "Open from Database..."
 msgstr "Avaa tietokannasta..."
 
-#: ../src/planner-sql-plugin.c:94
+#: ../src/planner-sql-plugin.c:102
 msgid "Open a project from a database"
 msgstr "Avaa projekti tietokannasta"
 
-#: ../src/planner-sql-plugin.c:96 ../src/planner-sql-plugin.c:1152
+#: ../src/planner-sql-plugin.c:104 ../src/planner-sql-plugin.c:1242
 msgid "Save to Database"
 msgstr "Tallenna tietokantaan"
 
-#: ../src/planner-sql-plugin.c:97
+#: ../src/planner-sql-plugin.c:105
 msgid "Save the current project to a database"
 msgstr "Tallenna valittu projekti tietokantaan"
 
-#: ../src/planner-sql-plugin.c:135 ../src/planner-sql-plugin.c:150
-msgid "No errors reported."
-msgstr "Ei havaittuja virheitä."
-
-#: ../src/planner-sql-plugin.c:517
+#: ../src/planner-sql-plugin.c:598
 #, c-format
 msgid ""
 "Database %s needs to be upgraded from version %s to version %s.\n"
@@ -1745,11 +1758,11 @@ msgstr ""
 "Tietokanta %s täytyy päivittää versiosta %s versioon %s.\n"
 "Muista ottaa tietokannasta varmuuskopio ennen päivittämistä."
 
-#: ../src/planner-sql-plugin.c:524
+#: ../src/planner-sql-plugin.c:605
 msgid "Upgrade"
 msgstr "Päivitä"
 
-#: ../src/planner-sql-plugin.c:538
+#: ../src/planner-sql-plugin.c:619
 #, c-format
 msgid ""
 "Could not upgrade database %s.\n"
@@ -1764,43 +1777,43 @@ msgstr ""
 "Tietokantavirhe: \n"
 "%s"
 
-#: ../src/planner-sql-plugin.c:579
+#: ../src/planner-sql-plugin.c:659
 #, c-format
 msgid "Can't create tables in database %s"
 msgstr "Tauluja ei voi luoda tietokantaan %s"
 
-#: ../src/planner-sql-plugin.c:648
+#: ../src/planner-sql-plugin.c:727
 #, c-format
 msgid "Database %s is not setup for Planner. Do you want to do that?"
 msgstr "Tietokanta %s ei ole alustettu Plannerille. Haluatko alustaa sen?"
 
-#: ../src/planner-sql-plugin.c:696
+#: ../src/planner-sql-plugin.c:776
 #, c-format
 msgid "Connection to database '%s@%s' failed."
 msgstr "Yhteys tietokantaan \"%s@%s\" epäonnistui."
 
-#: ../src/planner-sql-plugin.c:711
+#: ../src/planner-sql-plugin.c:799
 #, c-format
 msgid "Test to tables in database '%s' failed."
 msgstr "Taulujen testaus tietokannassa \"%s\" epäonnistui."
 
-#: ../src/planner-sql-plugin.c:816
+#: ../src/planner-sql-plugin.c:908
 msgid "ID"
 msgstr "Tunniste"
 
-#: ../src/planner-sql-plugin.c:824
+#: ../src/planner-sql-plugin.c:916
 msgid "Project"
 msgstr "Projekti"
 
-#: ../src/planner-sql-plugin.c:832
+#: ../src/planner-sql-plugin.c:924
 msgid "Phase"
 msgstr "Vaihe"
 
-#: ../src/planner-sql-plugin.c:840
+#: ../src/planner-sql-plugin.c:932
 msgid "Revision"
 msgstr "Revisio"
 
-#: ../src/planner-sql-plugin.c:1040
+#: ../src/planner-sql-plugin.c:1130
 msgid "Open from Database"
 msgstr "Avaa tietokannasta"
 
@@ -1926,27 +1939,27 @@ msgstr "/Liitä _resursseja..."
 msgid "/_Edit task..."
 msgstr "/_Muokkaa tehtävää..."
 
-#: ../src/planner-task-tree.c:567
+#: ../src/planner-task-tree.c:572
 msgid "Remove task"
 msgstr "Poista tehtävä"
 
-#: ../src/planner-task-tree.c:644
+#: ../src/planner-task-tree.c:649
 msgid "Apply constraint to task"
 msgstr "Määrittele rajoite tehtävälle"
 
-#: ../src/planner-task-tree.c:706
+#: ../src/planner-task-tree.c:711
 msgid "Reset task constraint"
 msgstr "Poista tehtävän rajoite"
 
-#: ../src/planner-task-tree.c:1492 ../src/planner-task-tree.c:1624
+#: ../src/planner-task-tree.c:1497 ../src/planner-task-tree.c:1654
 msgid "N/A"
 msgstr "N/A"
 
-#: ../src/planner-task-tree.c:2724
+#: ../src/planner-task-tree.c:2824
 msgid "Remove tasks"
 msgstr "Poista tehtäviä"
 
-#: ../src/planner-task-tree.c:2786
+#: ../src/planner-task-tree.c:2886
 #, c-format
 msgid ""
 "You are about to open an edit dialog each for %i tasks. Are you sure that "
@@ -1955,52 +1968,52 @@ msgstr ""
 "Olet avaamassa muokkausikkunaa jokaiselle %i tehtävälle. Haluatko varmasti "
 "tehdä tämän?"
 
-#: ../src/planner-task-tree.c:2888
+#: ../src/planner-task-tree.c:2988
 msgid "Unlink tasks"
 msgstr "Poista tehtävien linkitys"
 
-#: ../src/planner-task-tree.c:2940
+#: ../src/planner-task-tree.c:3040
 msgid "Link tasks"
 msgstr "Linkitä tehtäviä"
 
-#: ../src/planner-task-tree.c:3031
+#: ../src/planner-task-tree.c:3131
 msgid "Indent tasks"
 msgstr "Sisennä tehtäviä"
 
-#: ../src/planner-task-tree.c:3042
+#: ../src/planner-task-tree.c:3142
 msgid "Indent task"
 msgstr "Sisennä tehtävä"
 
-#: ../src/planner-task-tree.c:3134
+#: ../src/planner-task-tree.c:3236
 msgid "Unindent tasks"
 msgstr "Pienennä tehtävien sisennystä"
 
-#: ../src/planner-task-tree.c:3152
+#: ../src/planner-task-tree.c:3254
 msgid "Unindent task"
 msgstr "Pienennä tehtävän sisennystä"
 
-#: ../src/planner-task-tree.c:3228
+#: ../src/planner-task-tree.c:3332
 msgid "Move tasks up"
 msgstr "Siirrä tehtäviä ylös"
 
-#: ../src/planner-task-tree.c:3266
+#: ../src/planner-task-tree.c:3370
 msgid "Move task up"
 msgstr "Siirrä tehtävää ylös"
 
-#: ../src/planner-task-tree.c:3355
+#: ../src/planner-task-tree.c:3458
 msgid "Move tasks down"
 msgstr "Siirrä tehtäviä alas"
 
 #. Moving task from 'position' to 'position + 1'
-#: ../src/planner-task-tree.c:3401
+#: ../src/planner-task-tree.c:3504
 msgid "Move task down"
 msgstr "Siirrä tehtävää alas"
 
-#: ../src/planner-task-tree.c:3457
+#: ../src/planner-task-tree.c:3560
 msgid "Reset task constraints"
 msgstr "Poista kaikki rajoitteet"
 
-#: ../src/planner-task-tree.c:3489
+#: ../src/planner-task-tree.c:3592
 msgid "Reset all task constraints"
 msgstr "Poista kaikki tehtävään liittyvät rajoitukset"
 
@@ -2020,11 +2033,11 @@ msgstr "Tehtävät"
 msgid "_Tasks"
 msgstr "_Tehtävät"
 
-#: ../src/planner-task-view.c:572
+#: ../src/planner-task-view.c:578
 msgid "Edit custom task properties"
 msgstr "Muokkaa itsemääriteltyjä ominaisuuksia"
 
-#: ../src/planner-task-view.c:626
+#: ../src/planner-task-view.c:632
 msgid "Edit Task Columns"
 msgstr "Muokkaa tehtävän sarakkeita"
 
@@ -2075,191 +2088,191 @@ msgstr "Resurssin _käyttö"
 msgid "Edit Resource Usage Columns"
 msgstr "Muokkaa resurssikäytön sarakkeita"
 
-#: ../src/planner-window.c:225
+#: ../src/planner-window.c:228
 msgid "_File"
 msgstr "_Tiedosto"
 
-#: ../src/planner-window.c:229
+#: ../src/planner-window.c:232
 msgid "_New Project"
 msgstr "_Uusi projekti"
 
-#: ../src/planner-window.c:229
+#: ../src/planner-window.c:232
 msgid "Create a new project"
 msgstr "Luo uusi projekti"
 
-#: ../src/planner-window.c:233
+#: ../src/planner-window.c:236
 msgid "_Open..."
 msgstr "_Avaa..."
 
-#: ../src/planner-window.c:233
+#: ../src/planner-window.c:236
 msgid "Open a project"
 msgstr "Avaa projekti"
 
-#: ../src/planner-window.c:236
+#: ../src/planner-window.c:239
 msgid "_Import"
 msgstr "T_uo"
 
-#: ../src/planner-window.c:240 ../src/planner-window.c:1567
+#: ../src/planner-window.c:243 ../src/planner-window.c:1570
 msgid "_Save"
 msgstr "_Tallenna"
 
-#: ../src/planner-window.c:240
+#: ../src/planner-window.c:243
 msgid "Save the current project"
 msgstr "Tallenna nykyinen projekti"
 
-#: ../src/planner-window.c:243
+#: ../src/planner-window.c:246
 msgid "_Export"
 msgstr "_Vie"
 
-#: ../src/planner-window.c:246
+#: ../src/planner-window.c:249
 msgid "Save _As..."
 msgstr "Tallenna _nimellä..."
 
-#: ../src/planner-window.c:246
+#: ../src/planner-window.c:249
 msgid "Save the current project with a different name"
 msgstr "Tallenna nykyinen projekti toisella nimellä"
 
-#: ../src/planner-window.c:249
+#: ../src/planner-window.c:252
 msgid "_Print..."
 msgstr "_Tulosta..."
 
-#: ../src/planner-window.c:249
+#: ../src/planner-window.c:252
 msgid "Print the current project"
 msgstr "Tulosta nykyinen projekti"
 
-#: ../src/planner-window.c:252
+#: ../src/planner-window.c:255
 msgid "Print Pre_view"
 msgstr "Tulostuksen _esikatselu"
 
-#: ../src/planner-window.c:252
+#: ../src/planner-window.c:255
 msgid "Print preview of the current project"
 msgstr "Tulosta esikatselu nykyisestä projektista"
 
-#: ../src/planner-window.c:255
+#: ../src/planner-window.c:258
 msgid "_Close"
 msgstr "_Sulje"
 
-#: ../src/planner-window.c:255
+#: ../src/planner-window.c:258
 msgid "Close the current file"
 msgstr "Sulje nykyinen tiedosto"
 
-#: ../src/planner-window.c:258
+#: ../src/planner-window.c:261
 msgid "_Quit"
 msgstr "_Lopeta"
 
-#: ../src/planner-window.c:258
+#: ../src/planner-window.c:261
 msgid "Exit the program"
 msgstr "Lopeta ohjelma"
 
-#: ../src/planner-window.c:262
+#: ../src/planner-window.c:265
 msgid "_Edit"
 msgstr "_Muokkaa"
 
-#: ../src/planner-window.c:265
+#: ../src/planner-window.c:268
 msgid "_Undo"
 msgstr "_Peru"
 
-#: ../src/planner-window.c:265
+#: ../src/planner-window.c:268
 msgid "Undo the last action"
 msgstr "Peru viimeisin toimenpide"
 
-#: ../src/planner-window.c:268
+#: ../src/planner-window.c:271
 msgid "_Redo"
 msgstr "Tee _uudestaan"
 
-#: ../src/planner-window.c:268
+#: ../src/planner-window.c:271
 msgid "Redo the undone action"
 msgstr "Tee viimeisin peruttu toimenpide uudestaan"
 
-#: ../src/planner-window.c:272
+#: ../src/planner-window.c:275
 msgid "_View"
 msgstr "_Näytä"
 
-#: ../src/planner-window.c:276
+#: ../src/planner-window.c:279
 msgid "_Actions"
 msgstr "_Toiminnot"
 
-#: ../src/planner-window.c:280
+#: ../src/planner-window.c:283
 msgid "_Project"
 msgstr "_Projekti"
 
-#: ../src/planner-window.c:283
+#: ../src/planner-window.c:286
 msgid "_Manage Calendars"
 msgstr "_Hallitse kalentereita"
 
-#: ../src/planner-window.c:286
+#: ../src/planner-window.c:289
 msgid "Edit Day _Types"
 msgstr "Muokkaa päivien _tyyppejä"
 
-#: ../src/planner-window.c:289
+#: ../src/planner-window.c:292
 msgid "Edit Project _Phases"
 msgstr "Muokkaa projektien _vaiheita"
 
-#: ../src/planner-window.c:292
+#: ../src/planner-window.c:295
 msgid "_Edit Project Properties"
 msgstr "Muokkaa projektin ominaisuuksia"
 
-#: ../src/planner-window.c:292
+#: ../src/planner-window.c:295
 msgid "Edit the project properties"
 msgstr "Muokkaa projektin ominaisuuksia"
 
-#: ../src/planner-window.c:300
+#: ../src/planner-window.c:303
 msgid "_Help"
 msgstr "O_hje"
 
-#: ../src/planner-window.c:303
+#: ../src/planner-window.c:306
 msgid "_User Guide"
 msgstr "_Käyttöohje"
 
-#: ../src/planner-window.c:303
+#: ../src/planner-window.c:306
 msgid "Show the Planner User Guide"
 msgstr "Näytä Plannerin käyttöohje"
 
-#: ../src/planner-window.c:306
+#: ../src/planner-window.c:309
 msgid "_About"
 msgstr "_Tietoja"
 
-#: ../src/planner-window.c:306
+#: ../src/planner-window.c:309
 msgid "About this application"
 msgstr "Tietoja tästä sovelluksesta"
 
 #. Note: these strings are leaked.
-#: ../src/planner-window.c:665
+#: ../src/planner-window.c:668
 #, c-format
 msgid "Switch to the view \"%s\""
 msgstr "Siirry näkymään \"%s\""
 
-#: ../src/planner-window.c:832
+#: ../src/planner-window.c:835
 msgid "Open a File"
 msgstr "Avaa tiedosto"
 
-#: ../src/planner-window.c:842
+#: ../src/planner-window.c:845
 msgid "Planner Files"
 msgstr "Planner-tiedostot"
 
 #. I18n: Translators, list your names here, newline separated if there
 #. * are more than one, to appear in the about box.
 #.
-#: ../src/planner-window.c:1324 ../src/planner-window.c:1346
+#: ../src/planner-window.c:1327 ../src/planner-window.c:1349
 msgid "translator-credits"
 msgstr ""
 "Ilkka Tuohela, 2004-2005\n"
 "\n"
 "http://www.gnome.fi"
 
-#: ../src/planner-window.c:1341
+#: ../src/planner-window.c:1344
 msgid "A Project Management application for the GNOME desktop"
 msgstr "Projektihallintaohjelma Gnome-työpöydälle"
 
-#: ../src/planner-window.c:1348
+#: ../src/planner-window.c:1351
 msgid "The Planner Homepage"
 msgstr "Plannerin kotisivu"
 
-#: ../src/planner-window.c:1500
+#: ../src/planner-window.c:1503
 msgid "If you don't save, changes made the last minute will be discarded."
 msgstr "Jos et tallenna, hukataan viimeisen minuutin aikana tehdyt muutokset."
 
-#: ../src/planner-window.c:1506
+#: ../src/planner-window.c:1509
 #, c-format
 msgid "If you don't save, changes made the last %d minute will be discarded."
 msgid_plural ""
@@ -2269,11 +2282,11 @@ msgstr[0] ""
 msgstr[1] ""
 "Jos et tallenna, hukataan viimeisten %d minuutin aikana tehdyt muutokset."
 
-#: ../src/planner-window.c:1514
+#: ../src/planner-window.c:1517
 msgid "If you don't save, changes made the last hour will be discarded."
 msgstr "Jos et tallenna, hukataan viimeisen tunnin aikana tehdyt muutokset."
 
-#: ../src/planner-window.c:1519
+#: ../src/planner-window.c:1522
 #, c-format
 msgid "If you don't save, changes made the last %d hour will be discarded."
 msgid_plural ""
@@ -2283,24 +2296,24 @@ msgstr[0] ""
 msgstr[1] ""
 "Jos et tallenna, hukataan viimeisten %d tunnin aikana tehdyt muutokset."
 
-#: ../src/planner-window.c:1529
+#: ../src/planner-window.c:1532
 #, c-format
 msgid "Save changes to document '%s' before closing?"
 msgstr "Tallennetaanko muutokset asiakirjaan \"%s\" ennen sulkemista?"
 
-#: ../src/planner-window.c:1554
+#: ../src/planner-window.c:1557
 msgid "C_lose without saving"
 msgstr "Sulje t_allentamatta"
 
-#: ../src/planner-window.c:1560
+#: ../src/planner-window.c:1563
 msgid "_Cancel"
 msgstr "_Peru"
 
-#: ../src/planner-window.c:1659
+#: ../src/planner-window.c:1662
 msgid "Save a File"
 msgstr "Tallenna tiedosto"
 
-#: ../src/planner-window.c:1945
+#: ../src/planner-window.c:1948
 msgid ""
 "You have opened a file that was saved with an old version of Planner.\n"
 "\n"
@@ -2330,11 +2343,11 @@ msgstr ""
 "valikosta kohdan \"Poista kaikki rajoitteet\"."
 
 #. Hack.
-#: ../src/planner-window.c:1980
+#: ../src/planner-window.c:1983
 msgid "Unnamed database project"
 msgstr "Nimeämätön tietokantaprojekti"
 
-#: ../src/planner-window.c:2094
+#: ../src/planner-window.c:2097
 #, c-format
 msgid "Open '%s'"
 msgstr "Avaa \"%s\""
@@ -2405,3 +2418,6 @@ msgid ""
 msgstr ""
 "Tämän tiedoston tiedostopääte ei ole plannerin normaali päääte (%s). "
 "Haluatko jatkaa?"
+
+#~ msgid "Optional - overrides resource name in gantt view."
+#~ msgstr "Vapaaehtoinen - ohittaa resurssin nimen gantt-näkymässä."
