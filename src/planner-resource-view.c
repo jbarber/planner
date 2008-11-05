@@ -205,7 +205,8 @@ static const gchar   *resource_view_get_name                 (PlannerView       
 static GtkWidget     *resource_view_get_widget               (PlannerView             *view);
 static void           resource_view_print_init               (PlannerView             *view,
 							      PlannerPrintJob         *job);
-static void           resource_view_print                    (PlannerView             *view);
+static void           resource_view_print                    (PlannerView             *view,
+							      gint                     page_nr);
 static gint           resource_view_print_get_n_pages        (PlannerView             *view);
 static void           resource_view_print_cleanup            (PlannerView             *view);
 static void           resource_view_resource_notify_cb       (MrpResource             *resource,
@@ -560,10 +561,10 @@ resource_view_print_init (PlannerView *view, PlannerPrintJob *job)
 }
 
 static void
-resource_view_print (PlannerView *view)
+resource_view_print (PlannerView *view, gint page_nr)
 
 {
-	planner_table_print_sheet_output (PLANNER_RESOURCE_VIEW (view)->priv->print_sheet);
+	planner_table_print_sheet_output (PLANNER_RESOURCE_VIEW (view)->priv->print_sheet, page_nr);
 }
 
 static gint
@@ -2282,6 +2283,7 @@ resource_view_cost_data_func (GtkTreeViewColumn    *tree_column,
 	cost_text = planner_format_float (cost, 2, FALSE);
 	
 	g_object_set (cell, "text", cost_text, NULL);
+	g_free (cost_text);
 }
 
 static void    

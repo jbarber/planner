@@ -25,14 +25,17 @@
 #include "planner-window.h"
 
 GtkWidget *       planner_print_dialog_new                 (PlannerWindow    *window,
-							    GnomePrintJob    *job,
+							    GtkPrintOperation *job,
 							    GList            *views);
-GtkWidget *       planner_print_views_dialog_new           (PlannerWindow    *window,
-							    GList            *views);
-GList *           planner_print_dialog_get_print_selection (GtkDialog        *dialog,
+GtkWidget *       print_dialog_create_page                 (PlannerWindow *window,
+							    GtkWidget     *dialog,
+							    GList         *views);
+GList *           planner_print_dialog_get_print_selection (GtkWidget        *widget,
 							    gboolean         *summary);
-void              planner_print_dialog_save_config         (GnomePrintConfig *config);
-GnomePrintConfig *planner_print_dialog_load_config         (void);
+void              planner_print_dialog_save_page_setup     (GtkPageSetup *page_setup);
+GtkPageSetup     *planner_print_dialog_load_page_setup     (void);
+void              planner_print_dialog_save_print_settings (GtkPrintSettings *settings);
+GtkPrintSettings *planner_print_dialog_load_print_settings (void);
 
 
 #endif /* __PLANNER_PRINT_DIALOG_H__ */

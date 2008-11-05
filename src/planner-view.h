@@ -50,7 +50,7 @@ struct _PlannerViewClass {
 	const gchar *(*get_icon)          (PlannerView       *view);
 	const gchar *(*get_name)          (PlannerView       *view);
 	GtkWidget   *(*get_widget)        (PlannerView       *view);
-	void         (*setup)              (PlannerView       *view,
+	void         (*setup)             (PlannerView       *view,
 					   PlannerWindow     *window);
 	void         (*activate)          (PlannerView       *view);
 	void         (*deactivate)        (PlannerView       *view);
@@ -58,7 +58,8 @@ struct _PlannerViewClass {
 	void         (*print_init)        (PlannerView       *view,
 					   PlannerPrintJob   *job);
 	gint         (*print_get_n_pages) (PlannerView       *view);
-	void         (*print)             (PlannerView       *view);
+	void         (*print)             (PlannerView       *view, 
+					   gint               page_nr);
 	void         (*print_cleanup)     (PlannerView       *view);
 
 };
@@ -80,7 +81,8 @@ void         planner_view_deactivate         (PlannerView     *view);
 void         planner_view_print_init         (PlannerView     *view,
 					      PlannerPrintJob *job);
 gint         planner_view_print_get_n_pages  (PlannerView     *view);
-void         planner_view_print              (PlannerView     *view);
+void         planner_view_print              (PlannerView     *view,
+					      gint             page_nr);
 void         planner_view_print_cleanup      (PlannerView     *view);
 void         planner_view_column_load_helper (PlannerView     *view,
 					      GtkTreeView     *tree);

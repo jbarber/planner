@@ -157,12 +157,12 @@ planner_view_print_get_n_pages (PlannerView *view)
 }
 
 void
-planner_view_print (PlannerView *view)
+planner_view_print (PlannerView *view, gint page_nr)
 {
 	g_return_if_fail (PLANNER_IS_VIEW (view));
 
 	if (PLANNER_VIEW_GET_CLASS (view)->print) {
-		PLANNER_VIEW_GET_CLASS (view)->print (view);
+		PLANNER_VIEW_GET_CLASS (view)->print (view, page_nr);
 	}
 }
 

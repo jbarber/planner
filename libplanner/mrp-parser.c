@@ -96,8 +96,6 @@ static void             mpp_xml_set_task_type         (xmlNodePtr   node,
 static void             mpp_xml_set_task_sched        (xmlNodePtr   node,
 						       const gchar *prop,
 						       MrpTaskSched sched);
-static xmlNodePtr       mpp_xml_search_child          (xmlNodePtr   node, 
-						       const gchar *name);
 static gchar           *mpp_property_to_string        (MrpObject   *object,
 						       MrpProperty *property);
 
@@ -1178,31 +1176,6 @@ mrp_parser_from_xml (MrpStorageMrproject  *module,
 /***************
  * XML helpers.
  */
-
-
-/* Search a child by name, if needed go down the tree to find it.
- */
-static xmlNodePtr
-mpp_xml_search_child (xmlNodePtr node, const gchar *name)
-{
-	xmlNodePtr ret;
-	xmlNodePtr child;
-
-	child = node->children;
-	while (child != NULL) {
-		if (!strcmp (child->name, name))
-			return child;
-		child = child->next;
-	}
-	child = node->children;
-	while (child != NULL) {
-		ret = mpp_xml_search_child (child, name);
-		if (ret != NULL)
-			return ret;
-		child = child->next;
-	}
-	return NULL;
-}
 
 static void
 mpp_xml_set_date (xmlNodePtr node, const gchar *prop, mrptime time)

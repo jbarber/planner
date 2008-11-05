@@ -23,8 +23,7 @@
 #ifndef __PLANNER_PRINT_JOB_H__
 #define __PLANNER_PRINT_JOB_H__
 
-#include <libgnomeprint/gnome-print.h>
-#include <libgnomeprint/gnome-print-job.h>
+#include <gtk/gtk.h>
 
 #define PLANNER_TYPE_PRINT_JOB                (planner_print_job_get_type ())
 #define PLANNER_PRINT_JOB(obj)                (G_TYPE_CHECK_INSTANCE_CAST ((obj), PLANNER_TYPE_PRINT_JOB, PlannerPrintJob))
@@ -33,14 +32,19 @@
 #define PLANNER_IS_PRINT_JOB_CLASS(klass)     (G_TYPE_CHECK_CLASS_TYPE ((klass), PLANNER_TYPE_PRINT_JOB))
 #define PLANNER_PRINT_JOB_GET_CLASS(obj)      (G_TYPE_INSTANCE_GET_CLASS ((obj), PLANNER_TYPE_PRINT_JOB, PlannerPrintJobClass))
 
+/* See http://lists.freedesktop.org/archives/cairo/2006-January/005979.html */
+#define THIN_LINE_WIDTH	(72.0 / 300.0)
+
 typedef struct _PlannerPrintJob        PlannerPrintJob;
 typedef struct _PlannerPrintJobClass   PlannerPrintJobClass;
 typedef struct _PlannerPrintJobPriv    PlannerPrintJobPriv;
 
 struct _PlannerPrintJob {
 	GObject            parent;
-        GnomePrintContext *pc;
-	GnomePrintJob     *pj;
+	GtkPrintOperation *operation;
+	GtkPrintContext   *pc;
+	cairo_t           *cr;
+	PangoLayout       *layout;
 
 	/* Printable area */
 	gdouble            width;
@@ -57,14 +61,15 @@ struct _PlannerPrintJobClass {
 };
 
 GType        planner_print_job_get_type         (void) G_GNUC_CONST;
-PlannerPrintJob * planner_print_job_new              (GnomePrintJob *gpj);
+PlannerPrintJob * planner_print_job_new         (GtkPrintOperation *gpo, 
+					    GList *views);
 void         planner_print_job_set_header       (PlannerPrintJob    *job,
 					    const gchar   *header);
 void         planner_print_job_set_footer       (PlannerPrintJob    *job,
 					    const gchar   *footer);
 void         planner_print_job_set_total_pages  (PlannerPrintJob    *job,
 					    gint           total_pages);
-GnomeFont *  planner_print_job_get_font         (PlannerPrintJob    *job);
+PangoFontDescription *  planner_print_job_get_font (PlannerPrintJob    *job);
 gdouble      planner_print_job_get_font_height  (PlannerPrintJob    *job);
 
 /* These functions use 0,0 as the top left of printable area. Use these
@@ -96,7 +101,8 @@ void         planner_print_job_finish_page      (PlannerPrintJob    *job,
 void         planner_print_job_set_font_regular (PlannerPrintJob    *job);
 void         planner_print_job_set_font_bold    (PlannerPrintJob    *job);
 void         planner_print_job_set_font_italic  (PlannerPrintJob    *job);
-
+gdouble      planner_print_job_get_extents      (PlannerPrintJob    *job,
+					    char *text);
 
 
 

@@ -679,6 +679,8 @@ mrp_task_manager_dump_task_list (MrpTaskManager *manager)
 
 /* ------------------------------------------------------------------------ */
 
+/* Functions have not been used since revision 417 */
+#if 0
 
 /* Get the ancestor of task_a, that has the same parent as an ancestor or
  * task_b.
@@ -771,6 +773,7 @@ task_manager_traverse_dependency_graph (MrpTaskManager  *manager,
 		*output = g_list_prepend (*output, task);
 	}
 }
+#endif
 
 static void
 dump_task_node (MrpTask *task)

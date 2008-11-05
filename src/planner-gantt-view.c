@@ -125,7 +125,8 @@ static const gchar  *gantt_view_get_name                  (PlannerView       *vi
 static GtkWidget    *gantt_view_get_widget                (PlannerView       *view);
 static void          gantt_view_print_init                (PlannerView       *view,
 							   PlannerPrintJob   *job);
-static void          gantt_view_print                     (PlannerView       *view);
+static void          gantt_view_print                     (PlannerView       *view,
+							   gint               page_nr);
 static gint          gantt_view_print_get_n_pages         (PlannerView       *view);
 static void          gantt_view_print_cleanup             (PlannerView       *view);
 
@@ -404,14 +405,14 @@ gantt_view_print_init (PlannerView     *view,
 }
 
 static void
-gantt_view_print (PlannerView *view)
+gantt_view_print (PlannerView *view, gint page_nr)
 
 {
 	PlannerGanttViewPriv *priv;
 	
 	priv = PLANNER_GANTT_VIEW (view)->priv;
 
-	planner_gantt_print_do (priv->print_data);
+	planner_gantt_print_do (priv->print_data, page_nr);
 }
 
 static gint

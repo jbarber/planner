@@ -31,21 +31,11 @@
 #include <glib/gi18n.h>
 #include <glib/gstdio.h>
 #include <gtk/gtk.h>
-#include <libgnomeprint/gnome-print.h>
-#include <libgnomeprint/gnome-print-job.h>
-#include <libgnomeprintui/gnome-print-job-preview.h>
-#include <libgnomeprintui/gnome-print-paper-selector.h>
-#include <libgnomeprintui/gnome-print-dialog.h>
 #include "planner-view.h"
 #include "planner-conf.h"
 #include "planner-print-dialog.h"
 
 #define PLANNER_PRINT_CONFIG_FILE "planner-print-config"
-
-static GtkWidget *   print_dialog_create_page  (PlannerWindow *window,
-						GtkWidget     *dialog,
-						GList         *views);
-static GtkNotebook * print_dialog_get_notebook (GtkWidget     *dialog);
 
 
 static gboolean
@@ -91,48 +81,133 @@ get_config_filename (void)
 				 NULL);
 }
 
-/*
- * Load printer configuration from a file.
- * Return a GnomePrintConfig object containing the configuration.
- */
-GnomePrintConfig *
-planner_print_dialog_load_config (void)
+
+GtkPageSetup *
+planner_print_dialog_load_page_setup (void)
 {
+	gboolean          success;
 	gchar            *filename;
-	gboolean          res;
-	gchar            *contents;
-	GnomePrintConfig *config;
+	GKeyFile         *key_file;
+	GtkPageSetup     *page_setup = NULL;
 
 	filename = get_config_filename ();
-	res = g_file_get_contents (filename, &contents, NULL, NULL);
-	g_free (filename);
+	if(filename) {
+		key_file = g_key_file_new();
 	
-	if (res) {
-		config = gnome_print_config_from_string (contents, 0);
-		g_free (contents);
-	} else {
-		config = gnome_print_config_default ();
+		success = g_key_file_load_from_file (key_file,
+						     filename,
+						     G_KEY_FILE_KEEP_COMMENTS|G_KEY_FILE_KEEP_TRANSLATIONS,
+						     NULL);
+		g_free (filename);
+
+		if (success) {
+			page_setup = gtk_page_setup_new_from_key_file (key_file, NULL, NULL);
+		}
+
+		if (page_setup == NULL) {
+			page_setup = gtk_page_setup_new ();
+		}
+
+		g_key_file_free (key_file);
 	}
 	
-	return config;
+	return page_setup;
 }
 
-/*
- * Save printer configuration into a file in the .gnome2 user directory
- */
 void
-planner_print_dialog_save_config (GnomePrintConfig *config)
+planner_print_dialog_save_page_setup (GtkPageSetup *page_setup)
 {
-	gint   fd;
-	gchar *str;
-	gint   bytes, bytes_written;
-	gchar *filename;
-	
-	g_return_if_fail (config != NULL);
-	
+	gint      fd;
+	gchar    *str;
+	gint      bytes, bytes_written;
+	gchar    *filename;
+	GKeyFile *key_file;
+
+	g_return_if_fail (page_setup != NULL);
+
 	filename = get_config_filename ();
 	if (filename) {
-		str = gnome_print_config_to_string (config, 0);
+		key_file = g_key_file_new ();
+		g_key_file_load_from_file (key_file,
+					   filename,
+					   G_KEY_FILE_KEEP_COMMENTS|G_KEY_FILE_KEEP_TRANSLATIONS,
+					   NULL);
+		gtk_page_setup_to_key_file (page_setup, key_file, NULL);
+		str = g_key_file_to_data (key_file, NULL, NULL);
+		g_key_file_free (key_file);
+	
+		fd = open (filename, O_WRONLY | O_CREAT | O_TRUNC, 0600);
+		g_free (filename);
+	
+		if (fd >= 0) {
+			bytes = strlen (str);
+			
+		again:
+			bytes_written = write (fd, str, bytes);
+			if (bytes_written < 0 && errno == EINTR) {
+				goto again;
+			}
+
+			close (fd);
+		}
+		
+		g_free (str);
+	}
+}
+
+GtkPrintSettings *
+planner_print_dialog_load_print_settings (void)
+{
+	gboolean          success;
+	gchar            *filename;
+	GKeyFile         *key_file;
+	GtkPrintSettings *settings = NULL;
+
+	filename = get_config_filename ();
+	if(filename) {
+		key_file = g_key_file_new();
+	
+		success = g_key_file_load_from_file (key_file,
+						     filename,
+						     G_KEY_FILE_KEEP_COMMENTS|G_KEY_FILE_KEEP_TRANSLATIONS,
+						     NULL);
+		g_free (filename);
+
+		if (success) {
+			settings = gtk_print_settings_new_from_key_file (key_file, NULL, NULL);
+		}
+
+		if (settings == NULL) {
+			settings = gtk_print_settings_new ();
+		}
+
+		g_key_file_free (key_file);
+	}
+	
+	return settings;
+}
+
+void
+planner_print_dialog_save_print_settings (GtkPrintSettings *settings)
+{
+	gint      fd;
+	gchar    *str;
+	gint      bytes, bytes_written;
+	gchar    *filename;
+	GKeyFile *key_file;
+
+	g_return_if_fail (settings != NULL);
+
+	filename = get_config_filename ();
+	if (filename) {
+		key_file = g_key_file_new ();
+		g_key_file_load_from_file (key_file,
+					   filename,
+					   G_KEY_FILE_KEEP_COMMENTS|G_KEY_FILE_KEEP_TRANSLATIONS,
+					   NULL);
+		gtk_print_settings_to_key_file (settings, key_file, NULL);
+		str = g_key_file_to_data (key_file, NULL, NULL);
+		g_key_file_free (key_file);
 	
 		fd = open (filename, O_WRONLY | O_CREAT | O_TRUNC, 0600);
 		g_free (filename);
@@ -154,52 +229,6 @@ planner_print_dialog_save_config (GnomePrintConfig *config)
 }
 
 GtkWidget *
-planner_print_views_dialog_new (PlannerWindow  *window,
-			  GList          *views)
-{
-	GtkWidget *dialog;
-	GtkWidget *page;
-	
-	dialog = gtk_dialog_new_with_buttons ("Select Views",
-						GTK_WINDOW (window),
-						GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-						GTK_STOCK_OK,
-						GTK_RESPONSE_OK,
-						GTK_STOCK_CANCEL,
-						GTK_RESPONSE_CANCEL,
-						NULL); 
-	page = print_dialog_create_page (window, dialog, views);
-
-	gtk_container_add (GTK_CONTAINER (GTK_DIALOG(dialog)->vbox), page);
-
-	gtk_widget_show_all (dialog);
-
-	return dialog;
-}	
-GtkWidget *
-planner_print_dialog_new (PlannerWindow  *window,
-			  GnomePrintJob  *job,
-			  GList          *views)
-{
-	GtkWidget *dialog;
-	GtkWidget *page;
-	
-	dialog = gnome_print_dialog_new (job, _("Print Project"), 0);
-
-	page = print_dialog_create_page (window, dialog, views);
-	gtk_widget_show (page);
-
-	gtk_notebook_prepend_page (print_dialog_get_notebook (dialog),
-				   page,
-				   gtk_label_new (_("Select views")));
-	gtk_notebook_set_current_page (print_dialog_get_notebook (dialog), 0);
-
-	g_object_set_data (G_OBJECT (dialog), "window", window);
-
-	return dialog;
-}	
-
-static GtkWidget *
 print_dialog_create_page (PlannerWindow *window,
 			  GtkWidget     *dialog,
 			  GList         *views)
@@ -211,7 +240,7 @@ print_dialog_create_page (PlannerWindow *window,
 	GList     *buttons = NULL;
 	gchar     *str;
 	gboolean   state;
-	
+
 	outer_vbox = gtk_vbox_new (FALSE, 4);
 	gtk_container_set_border_width (GTK_CONTAINER (outer_vbox), 8);
 	
@@ -256,8 +285,7 @@ print_dialog_create_page (PlannerWindow *window,
 		buttons = g_list_prepend (buttons, w);
 	}
 
-	buttons = g_list_reverse (buttons);
-	g_object_set_data (G_OBJECT (dialog), "buttons", buttons);
+	g_object_set_data (G_OBJECT (outer_vbox), "buttons", buttons);
 	
 	gtk_widget_show_all (outer_vbox);
 	
@@ -265,7 +293,7 @@ print_dialog_create_page (PlannerWindow *window,
 }
 
 GList *
-planner_print_dialog_get_print_selection (GtkDialog *dialog,
+planner_print_dialog_get_print_selection (GtkWidget *widget,
 					  gboolean  *summary)
 {
 	GtkToggleButton *button;
@@ -273,19 +301,16 @@ planner_print_dialog_get_print_selection (GtkDialog *dialog,
 	GList           *views = NULL;
 	PlannerView     *view;
 	gchar           *str;
-	PlannerWindow   *window;
 
-	g_return_val_if_fail (GTK_IS_DIALOG (dialog), NULL);
+	g_return_val_if_fail (GTK_IS_WIDGET (widget), NULL);
 	
 /*	button = g_object_get_data (G_OBJECT (dialog), "summary-button");
 	if (summary) {
 		*summary = gtk_toggle_button_get_active (button);
 	}
 */
-
-	window = g_object_get_data (G_OBJECT (dialog), "window");
 	
-	buttons = g_object_get_data (G_OBJECT (dialog), "buttons");
+	buttons = g_object_get_data (G_OBJECT (widget), "buttons");
 	for (l = buttons; l; l = l->next) {
 		button = l->data;
 
@@ -304,37 +329,5 @@ planner_print_dialog_get_print_selection (GtkDialog *dialog,
 	}
 
 	return views;
-}
-
-/*
- * Eek! Hack alert! Hopefully we'll get custom pages in libgnomeprintui soon.
- */
-static GtkNotebook *
-print_dialog_get_notebook (GtkWidget *container)
-{
-	GList       *children, *l;
-	GtkNotebook *notebook;
-
-	children = gtk_container_get_children (GTK_CONTAINER (container));
-
-	for (l = children; l; l = l->next) {
-		if (GTK_IS_NOTEBOOK (l->data)) {
-			notebook = l->data;
-
-			g_list_free (children);
-
-			return notebook;
-		}
-		else if (GTK_IS_CONTAINER (l->data)) {
-			notebook = print_dialog_get_notebook (l->data);
-			if (notebook) {
-				return notebook;
-			}
-		}
-	}
-
-	g_list_free (children);
-	
-	return NULL;
 }
 

@@ -1,3 +1,28 @@
+2008-11-05  Maurice van der Pot  <griffon26@kfk4ever.com>
+
+	* libplanner/mrp-parser.c: Removed unused function.
+	* libplanner/mrp-task-manager.c: Commented out unused functions.
+	* configure.in:
+	* data/ui/main-window.ui:
+	* src/planner-gantt-print.c:
+	* src/planner-gantt-print.h:
+	* src/planner-gantt-view.c (gantt_view_print):
+	* src/planner-print-dialog.c:
+	* src/planner-print-dialog.h:
+	* src/planner-print-job.c:
+	* src/planner-print-job.h:
+	* src/planner-resource-view.c (resource_view_print),
+	(resource_view_cost_data_func):
+	* src/planner-table-print-sheet.c:
+	* src/planner-table-print-sheet.h:
+	* src/planner-task-view.c (task_view_print),
+	(task_view_print_cleanup):
+	* src/planner-usage-view.c (usage_view_print):
+	* src/planner-view.c (planner_view_print):
+	* src/planner-view.h:
+	* src/planner-window.c: Rewrote printing to use the GTK printing API. Thanks
+	to Francisco Moraes for an initial patch. Also fixed a few memory leaks.
+
 2008-09-01  Maurice van der Pot  <griffon26@kfk4ever.com>
 
 	* src/planner-usage-row.c (usage_row_draw_resource_ival),

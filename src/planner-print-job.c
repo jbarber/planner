@@ -24,13 +24,11 @@
 #include <string.h>
 #include <glib-object.h>
 #include <glib/gi18n.h>
-#include <libgnomeprint/gnome-print-config.h>
-#include <libgnomeprint/gnome-print-job.h>
-#include <libgnomeprint/gnome-print-pango.h>
-#include <libart_lgpl/libart.h>
 #include "planner-print-job.h"
+#include "planner-print-dialog.h"
+#include "planner-view.h"
 
-#define MARGIN 30
+#define MARGIN 0
 
 struct _PlannerPrintJobPriv {
         gchar         *header;
@@ -42,18 +40,18 @@ struct _PlannerPrintJobPriv {
 	gdouble        header_height;
 	gdouble        footer_height;
 
-	GnomeFont     *font;
+	PangoFontDescription     *font;
 	gdouble        font_height;
 
-	GnomeFont     *bold_font;
+	PangoFontDescription     *bold_font;
 
 	/* The font in use, one of the above. */
-	GnomeFont     *current_font;
+	PangoFontDescription     *current_font;
 
 	gint           active_page;
 	gint           total_pages;
 
-	gboolean       upside_down;
+	GList         *views;
 };
 
 static void     print_job_class_init          (PlannerPrintJobClass *klass);
@@ -118,10 +116,9 @@ print_job_finalize (GObject *object)
         PlannerPrintJob     *job = PLANNER_PRINT_JOB (object);
 	PlannerPrintJobPriv *priv = job->priv;
 
-	g_object_unref (job->pj);
-	gnome_print_context_close (job->pc);
-	g_object_unref (job->pc);
-	g_object_unref (priv->font);
+	g_object_unref (job->operation);
+	pango_font_description_free (priv->font);
+	pango_font_description_free (priv->bold_font);
 
         g_free (job->priv);
 
@@ -142,7 +139,7 @@ print_job_transform (PlannerPrintJob *job, gdouble *x, gdouble *y)
 	}
 
 	if (y) {
-		*y = job->height - *y + MARGIN;
+		*y += MARGIN;
 	}
 }
 
@@ -162,59 +159,169 @@ print_job_update_size (PlannerPrintJob *job)
 		      2 * MARGIN);
 }
 
+static GObject *
+print_job_create_custom_widget(GtkPrintOperation *operation,
+			       gpointer           user_data)
+{
+	PlannerPrintJob *job;
+	PlannerPrintJobPriv *priv;
+
+	job = (PlannerPrintJob *)user_data;
+	priv = job->priv;
+
+	gtk_print_operation_set_custom_tab_label(operation, _("Select views"));
+
+	return G_OBJECT(print_dialog_create_page (NULL, NULL, priv->views));
+}
+
+static void
+print_job_custom_widget_apply(GtkPrintOperation *operation,
+			      GtkWidget         *widget,
+			      gpointer           user_data)
+{
+	gboolean summary;
+	PlannerPrintJob *job;
+	PlannerPrintJobPriv *priv;
+
+	job = (PlannerPrintJob *)user_data;
+	priv = job->priv;
+
+	priv->views = planner_print_dialog_get_print_selection(widget, &summary);
+}
+
+static void
+print_job_begin_print(GtkPrintOperation *operation,
+		      GtkPrintContext   *context,
+		      gpointer           user_data)
+{
+	PlannerPrintJob *job;
+	PlannerPrintJobPriv *priv;
+	GList *l;
+	PlannerView *view;
+	int n_pages = 0;
+
+	job = (PlannerPrintJob *)user_data;
+	priv = job->priv;
+
+	job->cr = gtk_print_context_get_cairo_context (context);
+	job->pc = context;
+
+	priv->paper_height = gtk_print_context_get_height (context);
+	priv->paper_width = gtk_print_context_get_width (context);
+
+	print_job_update_size (job);
+	
+	planner_print_job_set_font_regular (job);
+	job->x_pad = planner_print_job_get_extents (job, "#") / 2;
+
+	for (l = priv->views; l; l = l->next) {
+		view = l->data;
+		planner_view_print_init (view, job);
+		
+		n_pages += planner_view_print_get_n_pages (view);
+	}
+	gtk_print_operation_set_n_pages (operation, (n_pages > 0) ? n_pages : 1);
+}
+
+static void
+print_job_draw_page (GtkPrintOperation *operation,
+		     GtkPrintContext   *context,
+		     gint               page_nr,
+		     gpointer           user_data)
+{
+	PlannerPrintJob     *job;
+	PlannerPrintJobPriv *priv;
+	PlannerView         *v;
+	GList               *l;
+	gboolean             page_found = FALSE;
+	gint                 pages_in_view;
+
+	job = (PlannerPrintJob *)user_data;
+	priv = job->priv;
+
+	l = priv->views;
+
+	/* Abort if there is nothing to print.
+	 * 
+	 * A better solution would be to set the number of pages to print to 0
+	 * in print_job_begin_print, but 0 is not a valid value for
+	 * gtk_print_operation_set_n_pages. 
+	 */
+	if(!l) {
+		return;
+	}
+
+	while (!page_found) {
+		v = PLANNER_VIEW (l->data);
+
+		pages_in_view = planner_view_print_get_n_pages (v);
+
+		if (page_nr < pages_in_view) {
+			planner_view_print (v, page_nr);
+			page_found = TRUE;
+		} else {
+			page_nr -= pages_in_view;
+			l = l->next;
+
+			g_assert (l != NULL);
+		}
+	}
+}
+
+static void
+print_job_end_print (GtkPrintOperation *operation, 
+		     GtkPrintContext   *context,
+		     gpointer           user_data)
+{
+	PlannerPrintJob *job;
+	PlannerPrintJobPriv *priv;
+	GList *l;
+
+	job = (PlannerPrintJob *)user_data;
+	priv = job->priv;
+
+	for (l = priv->views; l; l = l->next) {
+		planner_view_print_cleanup (PLANNER_VIEW(l->data));
+	}
+}
+
+
 PlannerPrintJob *
-planner_print_job_new (GnomePrintJob *gpj)
+planner_print_job_new (GtkPrintOperation *gpo, GList *views)
 {
         PlannerPrintJob     *job;
 	PlannerPrintJobPriv *priv;
-	GnomePrintConfig    *config;
-	gchar               *orientation;
-        
+
         job = g_object_new (PLANNER_TYPE_PRINT_JOB, NULL);
 	
 	priv = job->priv;
 
-	job->pj = gpj;
-	job->pc = gnome_print_job_get_context (job->pj);
+	job->operation = g_object_ref (gpo);
+	gtk_print_operation_set_unit (gpo, GTK_UNIT_POINTS);
 
-        config = gnome_print_job_get_config (job->pj);
-
-	/* Useful for testing, so we leave it here. */
-#if 0
-	if (!gnome_print_config_set (config, "Settings.Transport.Backend", "file")) {
-		g_warning ("Could not set the backend to file.");
-	}
-#endif
-
-	gnome_print_job_get_page_size_from_config (config,
-						   &priv->paper_width,
-						   &priv->paper_height);
-	
-	orientation= gnome_print_config_get (config,
-					     GNOME_PRINT_KEY_PAGE_ORIENTATION);
-
-	if (strcmp (orientation, "R270") == 0 || strcmp (orientation, "R180") == 0) {
-		priv->upside_down = TRUE;
-	}
-	
-	g_free (orientation);
-	
 	priv->header = NULL;
 	priv->footer = NULL;
 	
-	priv->font = gnome_font_find_closest ("Sans Regular", 6.0);
-	priv->font_height = (gnome_font_get_ascender (priv->font) + 
-			     gnome_font_get_descender (priv->font));
+	priv->font = pango_font_description_from_string ("Sans Regular 6");
+	priv->font_height = pango_font_description_get_size (priv->font) / PANGO_SCALE;
 
-	priv->bold_font = gnome_font_find_closest ("Sans Bold", 6.0);
+	priv->bold_font = pango_font_description_from_string ("Sans Bold 6");
 
 	priv->header_height = 0;
 	priv->footer_height = 0;
+	priv->views = views;
 
-	print_job_update_size (job);
+	g_signal_connect (G_OBJECT (gpo), "create-custom-widget",
+			  G_CALLBACK (print_job_create_custom_widget), job);
+	g_signal_connect (G_OBJECT (gpo), "custom-widget-apply",
+			  G_CALLBACK (print_job_custom_widget_apply), job);
+	g_signal_connect (G_OBJECT (gpo), "begin-print", 
+			  G_CALLBACK (print_job_begin_print), job);
+	g_signal_connect (G_OBJECT (gpo), "draw-page", 
+			  G_CALLBACK (print_job_draw_page), job);
+	g_signal_connect (G_OBJECT (gpo), "end-print", 
+			  G_CALLBACK (print_job_end_print), job);
 
-	job->x_pad = gnome_font_get_width_utf8 (priv->font, "#") / 2;
-        
         return job;
 }
 
@@ -277,7 +384,7 @@ planner_print_job_moveto (PlannerPrintJob *job, gdouble x, gdouble y)
 
 	print_job_transform (job, &x, &y);
 	
-	gnome_print_moveto (job->pc, x, y);
+	cairo_move_to (job->cr, x, y);
 }
 
 void
@@ -287,7 +394,7 @@ planner_print_job_lineto (PlannerPrintJob *job, gdouble x, gdouble y)
 
 	print_job_transform (job, &x, &y);
 
-	gnome_print_lineto (job->pc, x, y);
+	cairo_line_to (job->cr, x, y);
 }
 
 void
@@ -299,23 +406,19 @@ planner_print_job_text (PlannerPrintJob *job,
 	g_return_if_fail (job != NULL);
 	g_return_if_fail (str != NULL);
 
-	PangoLayout *layout = gnome_print_pango_create_layout (job->pc);
+	PangoLayout *layout = gtk_print_context_create_pango_layout (job->pc);
 	PlannerPrintJobPriv *priv;
 
 	priv = job->priv;
 
-	pango_layout_set_text (layout, str, strlen(str));
+	pango_layout_set_font_description (layout, priv->current_font);
+	pango_layout_set_text (layout, str, -1);
 
-	PangoFontDescription *fd = gnome_font_get_pango_description (priv->current_font, 72);
-	pango_layout_set_font_description (layout, fd);
-	
 	pango_layout_context_changed (layout);
 
-	planner_print_job_moveto (job, x, y-gnome_font_get_ascender (priv->current_font)-gnome_font_get_descender (priv->current_font));
+	planner_print_job_moveto (job, x, y - priv->font_height);
 
-	gnome_print_pango_layout (job->pc, layout);
-
-	pango_font_description_free (fd);
+	pango_cairo_show_layout (job->cr, layout);
 
 	g_object_unref (layout);
 }
@@ -331,6 +434,7 @@ planner_print_job_show_clipped (PlannerPrintJob *job,
 				gdouble          y2)
 {
 	PlannerPrintJobPriv *priv;
+	gint height;
 
 	priv = job->priv;
 	
@@ -343,46 +447,45 @@ planner_print_job_show_clipped (PlannerPrintJob *job,
 	if (x < x1 || x > x2) {
 		return;
 	}
-	
-	gnome_print_gsave (job->pc);
 
-	gnome_print_setlinewidth (job->pc, 0);
+	cairo_save (job->cr);
 
-        gnome_print_newpath (job->pc);
+	cairo_set_line_width (job->cr, 1);
+
+	cairo_new_path (job->cr);
 	planner_print_job_moveto (job, x1, y1);
 	planner_print_job_lineto (job, x1, y2);
 	planner_print_job_lineto (job, x2, y2);
 	planner_print_job_lineto (job, x2, y1);
-	gnome_print_closepath (job->pc);
 
-	gnome_print_clip (job->pc);
+	cairo_close_path (job->cr);
 
-	PangoLayout *layout = gnome_print_pango_create_layout (job->pc);
+	cairo_clip (job->cr);
+
+	PangoLayout *layout = gtk_print_context_create_pango_layout (job->pc);
 
 	pango_layout_set_text (layout, str, strlen(str));
 	pango_layout_set_ellipsize (layout, PANGO_ELLIPSIZE_END);
 	pango_layout_set_width (layout, (x2 - x1) * PANGO_SCALE);
 		
-	PangoFontDescription *fd = gnome_font_get_pango_description (priv->current_font, 72);
-	pango_layout_set_font_description (layout, fd);
+	pango_layout_set_font_description (layout, priv->current_font);
 	pango_layout_context_changed (layout);
-			
-	planner_print_job_moveto (job, x, y-gnome_font_get_ascender (priv->current_font)-gnome_font_get_descender (priv->current_font));
-			
-	gnome_print_pango_layout (job->pc, layout);
-		
-	pango_font_description_free (fd);
+
+	pango_layout_get_pixel_size (layout, NULL, &height);
+
+	planner_print_job_moveto (job, x, y - priv->font_height);
+	
+	pango_cairo_show_layout (job->cr, layout);
 
 	g_object_unref (layout);
-	
-	gnome_print_grestore (job->pc);
+
+	cairo_restore (job->cr);
 }
 
 gboolean
 planner_print_job_begin_next_page (PlannerPrintJob *job)
 {
 	PlannerPrintJobPriv *priv;
-	gchar               *job_name;
 	
 	g_return_val_if_fail (PLANNER_IS_PRINT_JOB (job), FALSE);
 	
@@ -394,45 +497,28 @@ planner_print_job_begin_next_page (PlannerPrintJob *job)
 
 	priv->active_page++;
 
-	job_name = g_strdup_printf ("%d", priv->active_page);
-	gnome_print_beginpage (job->pc, job_name);
-	g_free (job_name);
-
-	if (priv->upside_down) {
-		gdouble affine[6];
-		
-		art_affine_rotate (affine, 180.0);
-		gnome_print_concat (job->pc, affine);
-
-		art_affine_translate (affine,
-				      -job->width - 2 * MARGIN,
-				      -job->height - 2 * MARGIN);
-		gnome_print_concat (job->pc, affine);
-	}
-	
 	/* Draw header and footer, FIXME: implement. */
-
-	gnome_print_newpath (job->pc);
+/*
+	cairo_new_path (job->cr);
 
 	planner_print_job_set_font_regular (job);
 
-	gnome_print_setlinewidth (job->pc, 0);
-	
+	cairo_set_line_width (job->cr, THIN_LINE_WIDTH);
+
 	planner_print_job_moveto (job, 0, 0);
 	planner_print_job_lineto (job, job->width, 0);
 	planner_print_job_lineto (job, job->width, job->height);
 	planner_print_job_lineto (job, 0, job->height);
-	gnome_print_closepath (job->pc);
+	cairo_close_path (job->cr);
 
 #if 0
-	gnome_print_gsave (job->pc);
-	gnome_print_setlinewidth (job->pc, 3);
-	gnome_print_stroke (job->pc);
-	gnome_print_grestore (job->pc);
+	cairo_save (job->cr);
+	cairo_set_line_width (job->cr, 3);
+	cairo_stroke (job->cr);
+	cairo_restore (job->cr);
 #endif
-
-	gnome_print_clip (job->pc);
-
+	cairo_clip (job->cr);
+	*/
 	return TRUE;
 }
 
@@ -442,20 +528,22 @@ planner_print_job_finish_page (PlannerPrintJob *job, gboolean draw_border)
 	g_return_if_fail (PLANNER_IS_PRINT_JOB (job));
 
 	if (draw_border) {
-		gnome_print_setlinewidth (job->pc, 0);
+		cairo_new_path (job->cr);
+
+		cairo_set_line_width (job->cr, THIN_LINE_WIDTH);
 		
 		planner_print_job_moveto (job, 0, 0);
 		planner_print_job_lineto (job, job->width, 0);
 		planner_print_job_lineto (job, job->width, job->height);
 		planner_print_job_lineto (job, 0, job->height);
-		gnome_print_closepath (job->pc);
-		gnome_print_stroke (job->pc);
+		planner_print_job_lineto (job, 0, 0);
+		cairo_close_path (job->cr);
+
+		cairo_stroke (job->cr);
 	}
-	
-	gnome_print_showpage (job->pc);
 }
 
-GnomeFont *
+PangoFontDescription *
 planner_print_job_get_font (PlannerPrintJob *job)
 {
 	g_return_val_if_fail (PLANNER_IS_PRINT_JOB (job), NULL);
@@ -481,7 +569,6 @@ planner_print_job_set_font_regular (PlannerPrintJob *job)
 	priv = job->priv;
 	
 	priv->current_font = priv->font;
-	gnome_print_setfont (job->pc, priv->font);
 }
 
 void
@@ -494,7 +581,6 @@ planner_print_job_set_font_bold (PlannerPrintJob *job)
 	priv = job->priv;
 	
 	priv->current_font = priv->bold_font;
-	gnome_print_setfont (job->pc, priv->bold_font);
 }
 
 void
@@ -509,5 +595,27 @@ planner_print_job_set_font_italic (PlannerPrintJob *job)
 	/* FIXME: use italic. */
 	
 	priv->current_font = priv->bold_font;
-	gnome_print_setfont (job->pc, priv->bold_font);
 }
+
+gdouble
+planner_print_job_get_extents (PlannerPrintJob *job, char *text)
+{
+	PangoLayout *layout = gtk_print_context_create_pango_layout (job->pc);
+	PlannerPrintJobPriv *priv;
+	PangoRectangle ink;
+
+	priv = job->priv;
+
+	pango_layout_set_font_description (layout, priv->current_font);
+	pango_layout_set_text (layout, text, -1);
+
+        pango_cairo_update_layout (gtk_print_context_get_cairo_context(job->pc), layout);
+	pango_layout_context_changed (layout);
+
+	pango_layout_get_extents (layout, &ink, NULL);
+	
+	g_object_unref (layout);
+
+	return ((gdouble)ink.width / PANGO_SCALE);
+}
+

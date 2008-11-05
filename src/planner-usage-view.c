@@ -94,7 +94,8 @@ static const gchar *usage_view_get_name                (PlannerView       *view)
 static GtkWidget *  usage_view_get_widget              (PlannerView       *view);
 static void         usage_view_print_init              (PlannerView       *view,
 							PlannerPrintJob   *job);
-static void         usage_view_print                   (PlannerView       *view);
+static void         usage_view_print                   (PlannerView       *view,
+							gint               page_nr);
 static gint         usage_view_print_get_n_pages       (PlannerView       *view);
 static void         usage_view_print_cleanup           (PlannerView       *view);
 static void         usage_view_save_columns            (PlannerUsageView  *view);
@@ -277,7 +278,7 @@ usage_view_print_init (PlannerView *view, PlannerPrintJob *job)
 }
 
 static void
-usage_view_print (PlannerView *view)
+usage_view_print (PlannerView *view, gint page_nr)
 {
         /*planner_usage_print_do (PLANNER_USAGE_VIEW (view)->priv->print_data);*/
 }

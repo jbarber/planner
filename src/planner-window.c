@@ -29,8 +29,6 @@
 #include <gdk-pixbuf/gdk-pixbuf.h>
 #include <gtk/gtk.h>
 #include <glade/glade.h>
-#include <libgnomeprintui/gnome-print-dialog.h>
-#include <libgnomeprintui/gnome-print-job-preview.h>
 #include <libplanner/mrp-error.h>
 #include <libplanner/mrp-project.h>
 #include <libplanner/mrp-paths.h>
@@ -129,9 +127,9 @@ static void       window_save_as_cb                      (GtkAction             
 							  gpointer                      data);
 static void       window_save_cb                         (GtkAction                    *action,
 							  gpointer                      data);
-static void       window_print_cb                        (GtkAction                    *action,
+static void       window_page_setup_cb                   (GtkAction                    *action,
 							  gpointer                      data);
-static void       window_print_preview_cb                (GtkAction                    *action,
+static void       window_print_cb                        (GtkAction                    *action,
 							  gpointer                      data);
 static void       window_close_cb                        (GtkAction                    *action,
 							  gpointer                      data);
@@ -248,12 +246,15 @@ static GtkActionEntry entries[] = {
 	{ "FileSaveAs",
 	  GTK_STOCK_SAVE_AS,       N_("Save _As..."),              "<Shift><Control>s", N_("Save the current project with a different name"),
 	  G_CALLBACK (window_save_as_cb) },
+	{ "FilePageSetup",
+	  NULL,                    N_("Page Set_up..."),           NULL,                N_("Setup the page settings for your current printer"),
+	  G_CALLBACK (window_page_setup_cb) },
 	{ "FilePrint",
 	  GTK_STOCK_PRINT,         N_("_Print..."),                "<Control>p",        N_("Print the current project"),
 	  G_CALLBACK (window_print_cb) },
 	{ "FilePrintPreview",
 	  GTK_STOCK_PRINT_PREVIEW, N_("Print Pre_view"),           "<Shift><Control>p", N_("Print preview of the current project"),
-	  G_CALLBACK (window_print_preview_cb) },
+	  G_CALLBACK (window_print_cb) },
 	{ "FileClose",
 	  GTK_STOCK_CLOSE,         N_("_Close"),                   "<Control>w",        N_("Close the current file"),
 	  G_CALLBACK (window_close_cb) },
@@ -913,234 +914,93 @@ window_save_cb (GtkAction *action,
 	window_do_save (window, FALSE);
 }
 
-static GList *
-window_get_print_selection (PlannerWindow *window)
-{
-	PlannerWindowPriv *priv;
-	GList             *views = NULL, *l;
-	PlannerView       *view;
-	gchar             *str;
-
-	priv = window->priv;
-	
-	for (l = priv->views; l; l = l->next) {
-		view = l->data;
-
-		str = g_strdup_printf ("/views/%s/print_enabled", 
-				       planner_view_get_name (view));
-		if (planner_conf_get_bool (str, NULL)) {
-			views = g_list_append (views, view);
-		}
-		
-		g_free (str);
-	}
-
-	return views;
-}
-
 static void
-window_print_preview_cb (GtkAction *action,
-			 gpointer   data)
+window_page_setup_cb (GtkAction *action,
+		      gpointer   data)
 {
 	PlannerWindow     *window;
 	PlannerWindowPriv *priv;
-	GnomePrintConfig  *config;
-	GnomePrintJob     *gpj;
-	GtkWidget         *dialog;
-	GtkWidget         *preview;
-	GList             *views, *l;
-	PlannerView       *view;
-	PlannerPrintJob   *job;
-	gboolean           summary;
-	gint               n_pages, n_views;
-	gint               response;
-
+	GtkPageSetup      *old_page_setup, *new_page_setup;
+	GtkPrintSettings  *settings;
+	
 	window = PLANNER_WINDOW (data);
 	priv = window->priv;
 
-	/* Load printer settings */
-	config = planner_print_dialog_load_config ();
-	gpj = gnome_print_job_new (config);
-	gnome_print_config_unref (config);
-	
-	job = planner_print_job_new (gpj);
+	settings = planner_print_dialog_load_print_settings ();
+	old_page_setup = planner_print_dialog_load_page_setup ();
 
-	views = window_get_print_selection (window);
-	
-	/* Check to be sure there are some views selected */
-	n_views = g_list_length (views);
-	if (n_views == 0) {
-		dialog = planner_print_views_dialog_new (window, priv->views); 
+	new_page_setup = gtk_print_run_page_setup_dialog (GTK_WINDOW (window), old_page_setup, settings);
 
-		while (n_views == 0) {
+	g_object_unref (old_page_setup);
 
-			response = gtk_dialog_run (GTK_DIALOG (dialog));
+	planner_print_dialog_save_page_setup (new_page_setup);
+	planner_print_dialog_save_print_settings (settings);
 
-			if (response == GTK_RESPONSE_CANCEL) {
-				gtk_widget_destroy (dialog);
-				g_object_unref (gpj);
-				return;
-			}
-			else if (response == GTK_RESPONSE_DELETE_EVENT) {
-				gtk_widget_destroy (dialog);
-				g_object_unref (gpj);
-				return;
-			}
-			
-			/* Save printer settings. */
-			planner_print_dialog_save_config (config);
-
-			views = planner_print_dialog_get_print_selection (GTK_DIALOG (dialog), &summary);
-			n_views = g_list_length (views);
-		}
-		gtk_widget_destroy (dialog);
-	}
-
-	n_pages = 0;
-	for (l = views; l; l = l->next) {
-		view = l->data;
-
-		planner_view_print_init (view, job);
-		
-		n_pages += planner_view_print_get_n_pages (view);
-	}
-
-	planner_print_job_set_total_pages (job, n_pages);
-	
-	for (l = views; l; l = l->next) {
-		view = l->data;
-		
-		planner_view_print (view);
-
-		planner_view_print_cleanup (view);
-	}
-
-	gnome_print_job_close (job->pj);
-	
-	preview = gnome_print_job_preview_new (job->pj, "Planner");
-	gtk_widget_show (preview);
-
-	g_list_free (views);
-
-	g_object_unref (job);
+	g_object_unref (new_page_setup);
+	g_object_unref (settings);
 }
 
 static void
 window_print_cb (GtkAction *action,
 		 gpointer   data)
 {
-	PlannerWindow     *window;
-	PlannerWindowPriv *priv;
-	GnomePrintJob     *gpj;
-	GnomePrintConfig  *config;
-	GtkWidget         *dialog, *message;
-	gint               response;
-	gboolean           summary;
-	GList             *views, *l;
-	PlannerView       *view;
-	PlannerPrintJob   *job;
-	gint               n_pages, n_views;
-	
+	PlannerWindow           *window;
+	PlannerWindowPriv       *priv;
+	GtkPrintOperation       *print;
+	GtkPrintSettings        *settings;
+	GtkPageSetup            *page_setup;
+	PlannerPrintJob         *job;
+	GError                  *error = NULL;
+	GtkPrintOperationResult  res;
+	GtkPrintOperationAction  print_action;
+
 	window = PLANNER_WINDOW (data);
 	priv = window->priv;
 
 	/* Load printer settings */
-	config = planner_print_dialog_load_config ();
-	gpj = gnome_print_job_new (config);
-	gnome_print_config_unref (config);
+	print = gtk_print_operation_new ();
 
-	dialog = planner_print_dialog_new (data, gpj, priv->views);
+	settings = planner_print_dialog_load_print_settings ();
+	gtk_print_operation_set_print_settings (print, settings);
+	g_object_unref (settings);
+	settings = NULL;
 
-	/* n_views is the number of views selected. */
-	n_views = 0;
-	while (n_views == 0) {
+	page_setup = planner_print_dialog_load_page_setup ();
+	gtk_print_operation_set_default_page_setup (print, page_setup);
+	g_object_unref (page_setup);
+	page_setup = NULL;
 
-		response = gtk_dialog_run (GTK_DIALOG (dialog));
+	job = planner_print_job_new (print, priv->views);
 
-		if (response == GTK_RESPONSE_CANCEL) {
-			gtk_widget_destroy (dialog);
-			g_object_unref (gpj);
-			return;
-		}
-		else if (response == GTK_RESPONSE_DELETE_EVENT) {
-			g_object_unref (gpj);
-			return;
-		}
-		
-		/* Save printer settings. */
-		planner_print_dialog_save_config (config);
-
-		views = planner_print_dialog_get_print_selection (GTK_DIALOG (dialog), &summary);
-		n_views = g_list_length (views);
-
-		if (n_views == 0) {
+	if (!strcmp (gtk_action_get_name (action), "FilePrint")) {
+		print_action = GTK_PRINT_OPERATION_ACTION_PRINT_DIALOG;
+	} else {
+		print_action = GTK_PRINT_OPERATION_ACTION_PREVIEW;
+	}	
 	
-			message = gtk_message_dialog_new (GTK_WINDOW (dialog),
-							 GTK_DIALOG_MODAL |
-							 GTK_DIALOG_DESTROY_WITH_PARENT,
-							 GTK_MESSAGE_INFO,
-							 GTK_BUTTONS_OK,
-							 "%s", "Please choose one or more views to print.");
+	res = gtk_print_operation_run (print, print_action, GTK_WINDOW (window), &error);
 
-			gtk_dialog_run (GTK_DIALOG (message));
-			gtk_widget_destroy (message);
-
-		}
-	}
-
-	if (summary) {
-		/*g_print ("Print summary\n");*/
-	}
-
-	job = planner_print_job_new (gpj);
-	
-	n_pages = 0;
-	for (l = views; l; l = l->next) {
-		view = l->data;
-		planner_view_print_init (view, job);
+	if (res == GTK_PRINT_OPERATION_RESULT_ERROR) {
+		GtkWidget *dialog;
 		
-		n_pages += planner_view_print_get_n_pages (view);
-	}
-
-	planner_print_job_set_total_pages (job, n_pages);
-	
-	for (l = views; l; l = l->next) {
-		view = l->data;
+		dialog = gtk_message_dialog_new (GTK_WINDOW (window),
+						 GTK_DIALOG_DESTROY_WITH_PARENT,
+						 GTK_MESSAGE_ERROR,
+						 GTK_BUTTONS_CLOSE,
+						 "%s", error->message);
+		g_error_free (error);
 		
-		planner_view_print (view);
-		planner_view_print_cleanup (view);
-	}
-
-	gtk_widget_destroy (dialog);
-
-	gnome_print_job_close (job->pj);
-
-	if (response == GNOME_PRINT_DIALOG_RESPONSE_PREVIEW) {
-		GtkWidget *preview;
+		g_signal_connect (dialog, "response",
+				  G_CALLBACK (gtk_widget_destroy), NULL);
 		
-		preview = gnome_print_job_preview_new (job->pj, "Planner");
-		gtk_widget_show (preview);
+		gtk_widget_show (dialog);      
 	}
-	else if (response == GNOME_PRINT_DIALOG_RESPONSE_PRINT) {
-		gchar *tmp;
-
-		/* This seems to be needed for now to stop older versions of
-		 * gnome-print from outputting locale dependent floats. Remove
-		 * this later.
-		 */
-		tmp = g_strdup (setlocale (LC_NUMERIC, NULL));
-		setlocale (LC_NUMERIC, "C");
-		
-		gnome_print_job_print (job->pj);
-		
-		setlocale (LC_NUMERIC, tmp);
-		g_free (tmp);
+	else if (res == GTK_PRINT_OPERATION_RESULT_APPLY) {
+		settings = gtk_print_operation_get_print_settings (print);
+		planner_print_dialog_save_print_settings (settings);
 	}
-	
-	g_list_free (views);
-
+	g_object_unref (print);
 	g_object_unref (job);
-	g_object_unref (config);
 }
 
 static void

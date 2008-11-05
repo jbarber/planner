@@ -20,8 +20,8 @@
  * Boston, MA 02111-1307, USA.
  */
 
-#ifndef __PLANNER_GANTT_PRINT_JOB_H__
-#define __PLANNER_GANTT_PRINT_JOB_H__
+#ifndef __PLANNER_GANTT_PRINT_H__
+#define __PLANNER_GANTT_PRINT_H__
 
 #include <gtk/gtktreeview.h>
 #include "planner-print-job.h"
@@ -30,7 +30,8 @@
 typedef struct _PlannerGanttPrintData PlannerGanttPrintData;
 
 
-void                planner_gantt_print_do             (PlannerGanttPrintData *data);
+void                planner_gantt_print_do             (PlannerGanttPrintData *data,
+							gint                   page_nr);
 
 gint                planner_gantt_print_get_n_pages    (PlannerGanttPrintData *data);
 
@@ -43,5 +44,5 @@ PlannerGanttPrintData *  planner_gantt_print_data_new       (PlannerView        
 void                planner_gantt_print_data_free      (PlannerGanttPrintData *data);
 
 
-#endif /* __PLANNER_GANTT_PRINT_JOB_H__ */
+#endif /* __PLANNER_GANTT_PRINT_H__ */
 

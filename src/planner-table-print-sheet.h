@@ -29,11 +29,12 @@
 
 typedef struct _PlannerTablePrintSheet PlannerTablePrintSheet;
 
-void               planner_table_print_sheet_output      (PlannerTablePrintSheet *sheet);
-gint               planner_table_print_sheet_get_n_pages (PlannerTablePrintSheet *sheet);
+void                    planner_table_print_sheet_output      (PlannerTablePrintSheet *sheet,
+							       gint                    page_nr);
+gint                    planner_table_print_sheet_get_n_pages (PlannerTablePrintSheet *sheet);
 PlannerTablePrintSheet *planner_table_print_sheet_new         (PlannerView            *view,
-						     PlannerPrintJob        *job,
-						     GtkTreeView       *tree);
-void               planner_table_print_sheet_free        (PlannerTablePrintSheet *sheet);
+							       PlannerPrintJob        *job,
+							       GtkTreeView            *tree);
+void                    planner_table_print_sheet_free        (PlannerTablePrintSheet *sheet);
 
 #endif /* __PLANNER_TABLE_PRINT_SHEET_H__ */

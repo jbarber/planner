@@ -26,13 +26,12 @@
 #include <gtk/gtk.h>
 #include <libplanner/planner.h>
 #include <glib/gi18n.h>
-#include <libgnomeprint/gnome-print.h>
 #include "planner-print-job.h"
 #include "planner-table-print-sheet.h"
 
 #define d(x)
 
-#define TEXT_IN_CELL_MULTI 0.67
+#define TEXT_IN_CELL_MULTI 0.75
 #define INDENT_FACTOR 4
 
 #define PRINT_ROW(o)  ((PrintRow *) o)
@@ -75,7 +74,7 @@ struct _PlannerTablePrintSheet {
 	GSList          *pages;
 
 	/* Used during creation */
-	GnomeFont       *font;
+	PangoFontDescription *font;
 	GSList          *columns;
 	GSList          *rows;
 	gdouble          row_height;
@@ -146,7 +145,7 @@ table_print_sheet_print_cell (PlannerTablePrintSheet *sheet,
 	GtkCellRenderer *cell;
 	PangoWeight      weight;
 	gint             depth = 0; 
-	
+
 	if (row->header) {
 		table_print_sheet_print_header_cell (sheet, column, row, x, y);
 		return;
@@ -170,6 +169,8 @@ table_print_sheet_print_cell (PlannerTablePrintSheet *sheet,
 		      "text", &str, 
 		      "weight", &weight,
 		      NULL);
+	g_object_ref_sink (cell);
+	g_object_unref (cell);
 
 	if (!str) {
 		return;
@@ -198,6 +199,8 @@ table_print_sheet_print_page (PlannerTablePrintSheet *sheet, PrintPage *page)
 	
 	planner_print_job_begin_next_page (sheet->job);
 
+	cairo_set_line_width (sheet->job->cr, THIN_LINE_WIDTH);
+
 	for (r = page->rows; r; r = r->next) {
 		for (c = page->columns; c; c = c->next) {
 			table_print_sheet_print_cell (sheet,
@@ -210,14 +213,14 @@ table_print_sheet_print_page (PlannerTablePrintSheet *sheet, PrintPage *page)
 			planner_print_job_lineto (sheet->job, 
 					     x,
 					     y + PRINT_ROW (r->data)->height);
-			gnome_print_stroke (sheet->job->pc);
+			cairo_stroke (sheet->job->cr);
 		}
 
 		
 		y += PRINT_ROW (r->data)->height;
 		planner_print_job_moveto (sheet->job, 0, y);
 		planner_print_job_lineto (sheet->job, x, y);
-		gnome_print_stroke (sheet->job->pc);
+		cairo_stroke (sheet->job->cr);
 
 		x = 0;
 	}
@@ -231,13 +234,16 @@ table_print_sheet_create_column (PlannerTablePrintSheet *sheet,
 				 gboolean                expander_column)
 {
 	PrintColumn *column;
+	gdouble ext;
 	
 	column = g_new0 (PrintColumn, 1);
 	
 	column->tree_column = tree_column;
 	column->expander_column = expander_column;
 	column->name = g_strdup (gtk_tree_view_column_get_title (tree_column));
-	column->width = gnome_font_get_width_utf8 (sheet->font, column->name) + 3 * sheet->x_pad;
+	planner_print_job_set_font_bold (sheet->job);
+	ext = planner_print_job_get_extents (sheet->job, column->name);
+	column->width = ext + 3 * sheet->x_pad;
 	
 	column->data_func = g_object_get_data (G_OBJECT (tree_column),
 					       "data-func");
@@ -260,6 +266,7 @@ table_print_sheet_foreach_row (GtkTreeModel *model,
 	gint                    depth;
 	GtkTreeIter             parent_iter;
 	GtkTreePath            *parent_path = NULL;
+	gdouble                 ext;
 	
 	d(g_print ("%s\n", gtk_tree_path_to_string (path)));
 	
@@ -280,7 +287,7 @@ table_print_sheet_foreach_row (GtkTreeModel *model,
 		sheet->rows = g_slist_prepend (sheet->rows, row);
 	
 		cell  = gtk_cell_renderer_text_new ();
-	
+
 		/* Loop through the columns to update widths */
 		for (l = sheet->columns; l; l = l->next) {
 			PrintColumn *column = PRINT_COL (l->data);
@@ -300,14 +307,19 @@ table_print_sheet_foreach_row (GtkTreeModel *model,
 				extra += depth * INDENT_FACTOR * sheet->x_pad;
  			}
 
-			
+			ext = 0;
+			if(str) {
+				ext = planner_print_job_get_extents (sheet->job, str);
+			}
 			column->width = MAX (column->width, 
-					     (str ? gnome_font_get_width_utf8 (sheet->font, str) : 0)
+					     ext
 					     + extra);
 /* 		d(g_print ("New width: %f\n", column->width)); */
-			
 			g_free (str);
 		}
+
+		g_object_ref_sink (cell);
+		g_object_unref (cell);
 	}
 	if (parent_path) {
 		gtk_tree_path_free (parent_path);
@@ -357,7 +369,7 @@ table_print_sheet_create_pages (PlannerTablePrintSheet *sheet)
 			d(g_print ("sheet_create_pages (in loop): Adding a page\n"));
 			sheet->pages  = g_slist_prepend (sheet->pages, page);
 		}
-		
+
 		page->width   += column->width;
 		page->columns  = g_slist_append (page->columns, column);
 		p = l;
@@ -528,13 +540,12 @@ planner_table_print_sheet_new (PlannerView     *view,
 }
 
 void
-planner_table_print_sheet_output (PlannerTablePrintSheet *sheet) 
+planner_table_print_sheet_output (PlannerTablePrintSheet *sheet, 
+				  gint page_nr) 
 {
-	GSList *p;
-	
-	for (p = sheet->pages; p; p = p->next) {
-		table_print_sheet_print_page (sheet, PRINT_PAGE (p->data));
-	}
+	PrintPage *page = PRINT_PAGE(g_slist_nth_data (sheet->pages, page_nr));
+	g_assert(page != NULL);
+	table_print_sheet_print_page(sheet, page);
 }
 
 gint
@@ -550,13 +561,10 @@ planner_table_print_sheet_free (PlannerTablePrintSheet *sheet)
 {
 	GSList *l;
 
-	/* This won't work since several pages will have pointers to the */
-	/* same columns/rows                                             */
-	
 	for (l = sheet->pages; l; l = l->next) {
 		PrintPage *page = PRINT_PAGE (l->data);
 
-		/* The sheet holds the a list with all the structs and */
+		/* The sheet holds a list with all the structs and */
 		/* is responsible for freeing those */
 		g_slist_free (page->columns);
 		g_slist_free (page->rows);

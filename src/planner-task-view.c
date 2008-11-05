@@ -59,7 +59,8 @@ static const gchar  *task_view_get_name                     (PlannerView     *vi
 static GtkWidget    *task_view_get_widget                   (PlannerView     *view);
 static void          task_view_print_init                   (PlannerView     *view,
 							     PlannerPrintJob *job);
-static void          task_view_print                        (PlannerView     *view);
+static void          task_view_print                        (PlannerView     *view,
+							     gint             page_nr);
 static gint          task_view_print_get_n_pages            (PlannerView     *view);
 static void          task_view_print_cleanup                (PlannerView     *view);
 static void          task_view_tree_view_columns_changed_cb (GtkTreeView     *tree_view,
@@ -662,14 +663,14 @@ task_view_print_init (PlannerView     *view,
 }
 
 static void
-task_view_print (PlannerView *view)
-
+task_view_print (PlannerView *view,
+		 gint         page_nr)
 {
 	PlannerTaskViewPriv *priv;
 
 	priv = PLANNER_TASK_VIEW (view)->priv;
 	
-	planner_table_print_sheet_output (priv->print_sheet);
+	planner_table_print_sheet_output (priv->print_sheet, page_nr);
 }
 
 static gint
@@ -684,7 +685,6 @@ task_view_print_get_n_pages (PlannerView *view)
 
 static void
 task_view_print_cleanup (PlannerView *view)
-
 {
 	PlannerTaskViewPriv *priv;
 
