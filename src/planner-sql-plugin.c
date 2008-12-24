@@ -51,13 +51,7 @@
 #define CONF_DATABASE "/plugins/sql/database"
 #define CONF_USERNAME "/plugins/sql/username"
 
-#if GDA_VERSION >= 30
-#define GDAVALUE GValue
 #define CONNECTION_FORMAT_STRING "HOST=%s;DB_NAME=%s"
-#else
-#define GDAVALUE GdaValue
-#define CONNECTION_FORMAT_STRING "HOST=%s;DATABASE=%s"
-#endif
 
 typedef struct {
 	GtkWidget *open_dialog;
@@ -106,8 +100,6 @@ static const GtkActionEntry entries[] = {
 	  G_CALLBACK (sql_plugin_save) }
 };
 
-#if GDA_VERSION >= 30
-
 static gboolean 
 sql_execute_command (GdaConnection *con, gchar *command)
 {
@@ -150,55 +142,9 @@ sql_execute_query (GdaConnection *con, gchar *query)
 	return result;
 }
 
-#else 
-
-/* The two functions below support libgda older than 3.0.  
- * Once older libgda versions have been phased out, we should 
- * remove the #if..#else and just use the ones above.
- */
-
-static gboolean 
-sql_execute_command (GdaConnection *con, gchar *command)
-{
-	GdaDataModel *res;
-
-	res = sql_execute_query (con, command);
-
-	if(res != NULL)	{
-		g_object_unref (res);
-		res = NULL;
-		return TRUE;
-	} else {
-		return FALSE;
-	}
-}
-
-static GdaDataModel *
-sql_execute_query (GdaConnection *con, gchar *query)
-{
-	GdaCommand   *cmd;
-	GdaDataModel *res;
-#if GDA_VERSION >= 20
-       	GError       *error; 
-#endif
-
-	cmd = gda_command_new (query, GDA_COMMAND_TYPE_SQL, GDA_COMMAND_OPTION_STOP_ON_ERRORS);
-#if GDA_VERSION >=20
-	res = gda_connection_execute_single_command  (con, cmd, NULL, &error);
-#else
-	res = gda_connection_execute_single_command  (con, cmd, NULL);
-#endif
-	gda_command_free (cmd);
-	
-	return res;
-}
-
-#endif
-
 static const gchar *
 sql_get_last_error (GdaConnection *connection)
 {
-#if GDA_VERSION >= 20
 	GList              *list;
 	GdaConnectionEvent *error;
 	const gchar        *error_txt;
@@ -216,25 +162,6 @@ sql_get_last_error (GdaConnection *connection)
       
 	/* FIXME: Poor user, she won't get localized messages */
 	error_txt = gda_connection_event_get_description (error);
-#else
-	GList       *list;
-	GdaError    *error;
-	const gchar *error_txt;
-
-	g_return_val_if_fail (GDA_IS_CONNECTION (connection), 
-			      _("Can't connect to database server"));
-
-	list = (GList *) gda_connection_get_errors (connection);
-
-	if (list == NULL) {
-		return _("No errors reported.");
-	}
-
-	error = (GdaError *) g_list_last (list)->data;
-      
-	/* FIXME: Poor user, she won't get localized messages */
-	error_txt = gda_error_get_description (error);
-#endif
 
 	return error_txt;
 }
@@ -247,10 +174,10 @@ static gint
 get_int (GdaDataModel *res, gint row, gint column)
 {
 	gchar    *str;
-	GDAVALUE *value;
+	GValue   *value;
 	gint      i;
 
-	value = (GDAVALUE *) gda_data_model_get_value_at (res, column, row);
+	value = (GValue *) gda_data_model_get_value_at (res, column, row);
 	if (value == NULL) {
 		g_warning ("Failed to get a value: (%d,%d)", column, row);
 		return INT_MAX;
@@ -272,9 +199,9 @@ get_string (GdaDataModel *res, gint row, gint column)
 	gchar    *str;
 	gchar    *ret;
 	gsize     len;
-	GDAVALUE *value;
+	GValue   *value;
 	
-	value = (GDAVALUE *) gda_data_model_get_value_at (res, column, row);
+	value = (GValue *) gda_data_model_get_value_at (res, column, row);
 	if (value == NULL) {
 		g_warning ("Failed to get a value: (%d,%d)", column, row);
 		return "";
@@ -697,9 +624,7 @@ create_database (const gchar   *dsn_name,
 	/* FIXME: In postgresql we use template1 as the connection database */
 	gchar             *init_database = "template1";
 	gchar             *query;
-#if GDA_VERSION >= 20
 	GError            *error;
-#endif
 
 	dsn = gda_config_find_data_source (dsn_name);
 	cnc_string_orig = dsn->cnc_string;
@@ -712,11 +637,7 @@ create_database (const gchar   *dsn_name,
 	gda_config_save_data_source_info (dsn);
 
 	client = gda_client_new ();
-#if GDA_VERSION >= 20
 	conn = gda_client_open_connection (client, dsn_name, NULL, NULL, 0, &error);
-#else
-	conn = gda_client_open_connection (client, dsn_name, NULL, NULL, 0);
-#endif
 	if (conn == NULL) {
 		g_warning ("Can't connect to database server in order to check/create the database: %s", cnc_string_orig);
 	} else {
@@ -761,15 +682,9 @@ sql_get_tested_connection (const gchar   *dsn_name,
 	GdaConnection *conn = NULL;
 	gboolean       success;
 	gchar         *str;
-#if GDA_VERSION >= 20
 	GError        *error;
-#endif
 
-#if GDA_VERSION >= 20
 	conn = gda_client_open_connection (client, dsn_name, NULL, NULL, 0, &error);
-#else
-	conn = gda_client_open_connection (client, dsn_name, NULL, NULL, 0 );
-#endif
 
 	if (conn == NULL) {
 		if (!create_database (dsn_name, host, db_name, plugin)) {
@@ -778,11 +693,7 @@ sql_get_tested_connection (const gchar   *dsn_name,
 			show_error_dialog (plugin, str);
 			conn = NULL;
 		} else {
-#if GDA_VERSION >= 20
 			conn = gda_client_open_connection (client, dsn_name, NULL, NULL, 0, &error);
-#else
-			conn = gda_client_open_connection (client, dsn_name, NULL, NULL, 0 );
-#endif
 		}
 	}
 
@@ -849,17 +760,10 @@ sql_plugin_retrieve_project_id (PlannerPlugin *plugin,
 	gchar             *filename;
 
 	db_txt = g_strdup_printf (CONNECTION_FORMAT_STRING,server,database);
-#if GDA_VERSION >= 20
 	gda_config_save_data_source (dsn_name, 
                                      provider, 
                                      db_txt,
                                      "planner project", login, password, FALSE);
-#else
-	gda_config_save_data_source (dsn_name, 
-                                     provider, 
-                                     db_txt,
-                                     "planner project", login, password);
-#endif
 	g_free (db_txt);
 
 	client = gda_client_new ();
@@ -1249,17 +1153,10 @@ sql_plugin_save (GtkAction *action,
 	}
 
 	db_txt = g_strdup_printf (CONNECTION_FORMAT_STRING,server,database);
-#if GDA_VERSION >= 20
 	gda_config_save_data_source (dsn_name, 
                                      provider, 
                                      db_txt,
                                      "planner project", login, password, FALSE);
-#else
-	gda_config_save_data_source (dsn_name, 
-                                     provider, 
-                                     db_txt,
-                                     "planner project", login, password);
-#endif
 	g_free (db_txt);
 	client = gda_client_new ();
 	conn = sql_get_tested_connection (dsn_name, server, database, client, plugin);

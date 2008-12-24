@@ -1,3 +1,28 @@
+2008-12-24  Maurice van der Pot  <griffon26@kfk4ever.com>
+
+	* configure.in: Replaced --enable-database with --with-database to
+	allow selection of libgda version (patch by Gilles Dartiguelongue
+	<gilles.dartiguelongue@esiee.org> in bug #562984). This will become
+	useful again when we start supporting libgda 4.0.
+
+	* libplanner/mrp-sql.c (sql_quote_and_escape_const_string),
+	(sql_quote_and_escape_string), (sql_get_last_error), (get_int),
+	(get_id), (get_string), (get_boolean), (get_float),
+	(sql_read_property_specs), (mrp_sql_load_project),
+	(sql_write_project), (sql_write_phases), (sql_write_phase),
+	(sql_write_specific_property_specs), (sql_write_property_specs),
+	(sql_write_property_values), (sql_write_day_types),
+	(sql_write_overridden_day_type), (sql_write_overridden_dates),
+	(sql_write_calendars_recurse), (sql_write_groups),
+	(sql_write_resources), (sql_write_tasks), (mrp_sql_save_project):
+	* src/planner-sql-plugin.c (sql_get_last_error), (get_int),
+	(get_string), (create_database), (sql_get_tested_connection),
+	(sql_plugin_retrieve_project_id), (sql_plugin_save):
+	- Added escaping of strings used in SQL statements (fixing bug #168147
+	reported by Iain Rae <iainr@zathras.org>)
+	- Dropped support for libgda < 3.0
+	- Fixed error in sql_read_property_specs introduced in revision 881.
+
 2008-11-05  Maurice van der Pot  <griffon26@kfk4ever.com>
 
 	* libplanner/mrp-parser.c: Removed unused function.
