@@ -9,9 +9,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: planner.HEAD\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-11-07 15:32+0100\n"
-"PO-Revision-Date: 2008-11-08 14:50+0100\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"product=planner&amp;component=general\n"
+"POT-Creation-Date: 2008-12-24 15:08+0000\n"
+"PO-Revision-Date: 2008-12-27 13:13+0100\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -718,27 +719,25 @@ msgstr "Coste"
 msgid "None"
 msgstr "Nada"
 
-#: ../libplanner/mrp-sql.c:292 ../libplanner/mrp-sql.c:310
-#: ../src/planner-sql-plugin.c:207 ../src/planner-sql-plugin.c:225
+#: ../libplanner/mrp-sql.c:280 ../src/planner-sql-plugin.c:153
 msgid "Can't connect to database server"
 msgstr "No se puede conectar con el servidor de la base de datos"
 
-#: ../libplanner/mrp-sql.c:297 ../libplanner/mrp-sql.c:315
-#: ../src/planner-sql-plugin.c:212 ../src/planner-sql-plugin.c:230
+#: ../libplanner/mrp-sql.c:285 ../src/planner-sql-plugin.c:158
 msgid "No errors reported."
 msgstr "No se informó de errores."
 
 #. Give up.
-#: ../libplanner/mrp-sql.c:405 ../src/planner-sql-plugin.c:300
+#: ../libplanner/mrp-sql.c:374 ../src/planner-sql-plugin.c:227
 msgid "Invalid Unicode"
 msgstr "Unicode inválido"
 
-#: ../libplanner/mrp-sql.c:2306
+#: ../libplanner/mrp-sql.c:2260
 #, c-format
 msgid "Connection to database '%s' failed.\n"
 msgstr "No es posible conectar con la base de datos «%s».\n"
 
-#: ../libplanner/mrp-sql.c:2311
+#: ../libplanner/mrp-sql.c:2265
 #, c-format
 msgid ""
 "Connection to database '%s' failed.\n"
@@ -747,12 +746,16 @@ msgstr ""
 "No es posible conectar con la base de datos «%s».\n"
 "%s"
 
-#: ../libplanner/mrp-sql.c:2326
+#: ../libplanner/mrp-sql.c:2274 ../libplanner/mrp-sql.c:3713
+msgid "Failed to create a dictionary for the database connection.\n"
+msgstr "Falló al crear un diccionario para la conexión con la base de datos.\n"
+
+#: ../libplanner/mrp-sql.c:2288
 #, c-format
 msgid "BEGIN command failed %s."
 msgstr "Ha fallado el comando BEGIN %s."
 
-#: ../libplanner/mrp-sql.c:2486
+#: ../libplanner/mrp-sql.c:2457
 #, c-format
 msgid ""
 "The project '%s' has been changed by the user '%s' since you opened it. Do "
@@ -761,7 +764,7 @@ msgstr ""
 "El proyecto «%s» lo ha modificado el usuario «%s» desde la última vez que "
 "usted lo abrió. ¿Quiere guardarlo de todas formas?"
 
-#: ../libplanner/mrp-sql.c:3711
+#: ../libplanner/mrp-sql.c:3706
 #, c-format
 msgid "Connection to database '%s' failed."
 msgstr "Ha fallado la conexión con la base de datos «%s»."
@@ -1739,23 +1742,23 @@ msgstr "M%d"
 msgid "%04d, H%d"
 msgstr "%04d, M%d"
 
-#: ../src/planner-sql-plugin.c:101
+#: ../src/planner-sql-plugin.c:95
 msgid "Open from Database..."
 msgstr "Abrir desde base de datos…"
 
-#: ../src/planner-sql-plugin.c:102
+#: ../src/planner-sql-plugin.c:96
 msgid "Open a project from a database"
 msgstr "Abre un proyecto desde una base de datos"
 
-#: ../src/planner-sql-plugin.c:104 ../src/planner-sql-plugin.c:1242
+#: ../src/planner-sql-plugin.c:98 ../src/planner-sql-plugin.c:1146
 msgid "Save to Database"
 msgstr "Guardar a base de datos"
 
-#: ../src/planner-sql-plugin.c:105
+#: ../src/planner-sql-plugin.c:99
 msgid "Save the current project to a database"
 msgstr "Guarda el proyecto actual en una base de datos"
 
-#: ../src/planner-sql-plugin.c:598
+#: ../src/planner-sql-plugin.c:525
 #, c-format
 msgid ""
 "Database %s needs to be upgraded from version %s to version %s.\n"
@@ -1765,11 +1768,11 @@ msgstr ""
 "s.\n"
 "Haga una copia de resguardo de la base de datos antes de la modernización."
 
-#: ../src/planner-sql-plugin.c:605
+#: ../src/planner-sql-plugin.c:532
 msgid "Upgrade"
 msgstr "Modernizar"
 
-#: ../src/planner-sql-plugin.c:619
+#: ../src/planner-sql-plugin.c:546
 #, c-format
 msgid ""
 "Could not upgrade database %s.\n"
@@ -1784,44 +1787,44 @@ msgstr ""
 "Error de la base de datos: \n"
 "%s"
 
-#: ../src/planner-sql-plugin.c:659
+#: ../src/planner-sql-plugin.c:586
 #, c-format
 msgid "Can't create tables in database %s"
 msgstr "No se pueden crear tablas en la base de datos %s"
 
-#: ../src/planner-sql-plugin.c:727
+#: ../src/planner-sql-plugin.c:648
 #, c-format
 msgid "Database %s is not setup for Planner. Do you want to do that?"
 msgstr ""
 "La base de datos %s no está preparada para Planner. ¿Qué quiere hacer ahora?"
 
-#: ../src/planner-sql-plugin.c:776
+#: ../src/planner-sql-plugin.c:691
 #, c-format
 msgid "Connection to database '%s@%s' failed."
 msgstr "La conexión con la base de datos «%s@%s» falló."
 
-#: ../src/planner-sql-plugin.c:799
+#: ../src/planner-sql-plugin.c:710
 #, c-format
 msgid "Test to tables in database '%s' failed."
 msgstr "La prueba de tablas en la base de datos «%s» falló."
 
-#: ../src/planner-sql-plugin.c:908
+#: ../src/planner-sql-plugin.c:812
 msgid "ID"
 msgstr "ID"
 
-#: ../src/planner-sql-plugin.c:916
+#: ../src/planner-sql-plugin.c:820
 msgid "Project"
 msgstr "Proyecto"
 
-#: ../src/planner-sql-plugin.c:924
+#: ../src/planner-sql-plugin.c:828
 msgid "Phase"
 msgstr "Fase"
 
-#: ../src/planner-sql-plugin.c:932
+#: ../src/planner-sql-plugin.c:836
 msgid "Revision"
 msgstr "Revisión"
 
-#: ../src/planner-sql-plugin.c:1130
+#: ../src/planner-sql-plugin.c:1034
 msgid "Open from Database"
 msgstr "Abrir desde base de datos"
 
