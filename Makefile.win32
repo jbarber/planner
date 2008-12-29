@@ -145,8 +145,6 @@ GTK_BINFILES = \
 	libglib-2.0-0.dll		\
 	libgmodule-2.0-0.dll		\
 	libgnomecanvas-2-0.dll		\
-	libgnomeprint-2-2-0.dll		\
-	libgnomeprintui-2-2-0.dll	\
 	libgobject-2.0-0.dll		\
 	libgtk-win32-2.0-0.dll		\
 	libpango-1.0-0.dll		\
@@ -193,9 +191,6 @@ createinstaller:
 	         $${LOADERSPATH} \
 	         /etc/gtk-2.0/gtkrc \
 	         /etc/fonts \
-	         /lib/libgnomeprint \
-	         /share/libgnomeprint \
-	         /share/libgnomeprintui \
 	         $(addprefix /bin/,$(GTK_BINFILES)) \
 	         $${LIBPNG} \
 	         $(addprefix /share/icons/gnome/,$(GTK_ICONFILES)) \
@@ -210,7 +205,7 @@ createinstaller:
 		mkdir -p $(INSTALLERTMP)/planner/$$(dirname $${file}); \
 		cp -r $(PREFIX)/$${file} $(INSTALLERTMP)/planner/$$(dirname $${file})/; \
 	done
-	/c/Program\ Files/NSIS/makensis -DPLANNER_VERSION=$(VERSION) -DSTAGING_DIR=.\\tmp\\planner installer/planner-installer.nsi
+	/c/Program\ Files/NSIS/makensis -v3 -DPLANNER_VERSION=$(VERSION) -DSTAGING_DIR=.\\tmp\\planner installer/planner-installer.nsi
 
 install: install-recursive
 install-am:

@@ -2,11 +2,17 @@
 ;; Windows Planner NSIS installer language macros
 ;;
 
-!macro PLANNER_MACRO_DEFAULT_STRING LABEL VALUE
+!macro PLANNER_MACRO_ADD_LANGUAGE LANGUAGE
+  !ifndef INSERT_DEFAULT
+    !insertmacro MUI_LANGUAGE ${LANGUAGE}
+  !endif
+!macroend
+
+!macro PLANNER_MACRO_DEFINE_STRING LABEL VALUE
   !ifndef "${LABEL}"
     !define "${LABEL}" "${VALUE}"
     !ifdef INSERT_DEFAULT
-      !warning "${LANG} lang file mising ${LABEL}, using default.."
+      !warning "${LANG} lang file missing ${LABEL}, using default.."
     !endif
   !endif
 !macroend

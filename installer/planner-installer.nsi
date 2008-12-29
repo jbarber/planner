@@ -9,7 +9,6 @@
 ;Global Variables
 Var name
 Var LANG_IS_SET
-Var ISSILENT
 Var STARTUP_RUN_KEY
 
 ;--------------------------------
@@ -83,22 +82,19 @@ SetDateSave on
   !insertmacro MUI_UNPAGE_FINISH
 
 ;--------------------------------
-;Languages
+;Languages & Translations
  
   ;; English goes first because its the default. The rest are
   ;; in alphabetical order (at least the strings actually displayed
   ;; will be).
 
-  !insertmacro MUI_LANGUAGE "English"
-
-;--------------------------------
-;Translations
-
-  !define PLANNER_DEFAULT_LANGFILE ".\english.nsh"
+  !define PLANNER_DEFAULT_LANGFILE "languages\english.nsh"
 
   !include ".\langmacros.nsh"
 
-  !insertmacro PLANNER_MACRO_INCLUDE_LANGFILE "ENGLISH"		".\english.nsh"
+  !insertmacro PLANNER_MACRO_INCLUDE_LANGFILE "ENGLISH"		"languages\english.nsh"
+  !insertmacro PLANNER_MACRO_INCLUDE_LANGFILE "DUTCH"		"languages\dutch.nsh"
+
 ;--------------------------------
 ;Reserve Files
   ; Only need this if using bzip2 compression
@@ -528,26 +524,18 @@ Function .onInit
     Abort
   Call RunCheck
   StrCpy $name "Planner ${PLANNER_VERSION}"
-  StrCpy $ISSILENT "/NOUI"
-
-  ; GTK installer has two silent states.. one with Message boxes, one without
-  ; If planner installer was run silently, we want to supress gtk installer msg boxes.
-  IfSilent 0 set_gtk_normal
-      StrCpy $ISSILENT "/S"
-  set_gtk_normal:
-
   Call ParseParameters
 
   ; Select Language
   IntCmp $LANG_IS_SET 1 skip_lang
     ; Display Language selection dialog
     !insertmacro MUI_LANGDLL_DISPLAY
-    skip_lang:
+  skip_lang:
 
   ; If install path was set on the command, use it.
   StrCmp $INSTDIR "" 0 instdir_done
 
-  ;  If planner is currently intalled, we should default to where it is currently installed
+  ;  If planner is currently installed, we should default to where it is currently installed
   ClearErrors
   ReadRegStr $INSTDIR HKCU "${PLANNER_REG_KEY}" ""
   IfErrors +2

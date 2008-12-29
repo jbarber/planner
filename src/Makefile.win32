@@ -12,7 +12,7 @@ SUBSYTEM = -mwindows
 
 DLL_LD_FLAGS += -mms-bitfields -mno-cygwin -Wl,--enable-auto-image-base --no-undefined -Wl,--export-all -mwin32
 
-DEPS = libgnomecanvas-2.0,libglade-2.0,libgnomeprint-2.2,libgnomeprintui-2.2
+DEPS = libgnomecanvas-2.0,libglade-2.0
 
 ifdef HAVE_GDA
 DEPS := $(DEPS),libgda
@@ -157,7 +157,7 @@ OBJECTS_libpython_plugin_la = $(libpython_plugin_la_SOURCES:%.c=%.o)
 ## LIBRARIES
 ##
 
-LIBS = -L$(PREFIX)/lib -leggrecent `pkg-config --libs libgnomecanvas-2.0,libglade-2.0,libgnomeprint-2.2,libgnomeprintui-2.2` -lplanner-1 -L../libplanner
+LIBS = -L$(PREFIX)/lib -leggrecent `pkg-config --libs libgnomecanvas-2.0,libglade-2.0` -lplanner-1 -L../libplanner
 
 ##
 ## RULES
