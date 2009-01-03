@@ -1,8 +1,8 @@
 # Swedish messages for Planner.
-# Copyright (C) 2001-2008 Free Software Foundation, Inc.
-# Daniel Nylander <po@danielnylander.se>, 2006, 2007, 2008.
+# Copyright (C) 2001-2009 Free Software Foundation, Inc.
 # Richard Hult <richard@imendio.com>, 2001, 2002, 2004.
 # Christian Rose <menthos@menthos.com>, 2002, 2003, 2004, 2005.
+# Daniel Nylander <po@danielnylander.se>, 2006, 2007, 2008, 2009.
 #
 # $Id: sv.po,v 1.48 2006/08/14 09:26:39 dnylande Exp $
 #
@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: planner\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-11-11 09:28+0100\n"
-"PO-Revision-Date: 2008-11-11 09:29+0100\n"
+"POT-Creation-Date: 2009-01-03 09:50+0100\n"
+"PO-Revision-Date: 2009-01-03 09:51+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
@@ -715,32 +715,28 @@ msgstr "Kostnad"
 msgid "None"
 msgstr "Ingen"
 
-#: ../libplanner/mrp-sql.c:292
-#: ../libplanner/mrp-sql.c:310
-#: ../src/planner-sql-plugin.c:207
-#: ../src/planner-sql-plugin.c:225
+#: ../libplanner/mrp-sql.c:280
+#: ../src/planner-sql-plugin.c:153
 msgid "Can't connect to database server"
 msgstr "Kan inte ansluta till databasserver"
 
-#: ../libplanner/mrp-sql.c:297
-#: ../libplanner/mrp-sql.c:315
-#: ../src/planner-sql-plugin.c:212
-#: ../src/planner-sql-plugin.c:230
+#: ../libplanner/mrp-sql.c:285
+#: ../src/planner-sql-plugin.c:158
 msgid "No errors reported."
 msgstr "Inga fel rapporterade."
 
 #. Give up.
-#: ../libplanner/mrp-sql.c:405
-#: ../src/planner-sql-plugin.c:300
+#: ../libplanner/mrp-sql.c:374
+#: ../src/planner-sql-plugin.c:227
 msgid "Invalid Unicode"
 msgstr "Ogiltig Unicode"
 
-#: ../libplanner/mrp-sql.c:2306
+#: ../libplanner/mrp-sql.c:2260
 #, c-format
 msgid "Connection to database '%s' failed.\n"
 msgstr "Anslutning till databas \"%s\" misslyckades.\n"
 
-#: ../libplanner/mrp-sql.c:2311
+#: ../libplanner/mrp-sql.c:2265
 #, c-format
 msgid ""
 "Connection to database '%s' failed.\n"
@@ -749,17 +745,22 @@ msgstr ""
 "Anslutning till databas \"%s\" misslyckades.\n"
 "%s"
 
-#: ../libplanner/mrp-sql.c:2326
+#: ../libplanner/mrp-sql.c:2274
+#: ../libplanner/mrp-sql.c:3713
+msgid "Failed to create a dictionary for the database connection.\n"
+msgstr "Misslyckades med att skapa en ordbok för databasanslutningen.\n"
+
+#: ../libplanner/mrp-sql.c:2288
 #, c-format
 msgid "BEGIN command failed %s."
 msgstr "BEGIN-kommando misslyckades %s."
 
-#: ../libplanner/mrp-sql.c:2486
+#: ../libplanner/mrp-sql.c:2457
 #, c-format
 msgid "The project '%s' has been changed by the user '%s' since you opened it. Do you want to save anyway?"
 msgstr "Projektet \"%s\" har ändrats av användaren \"%s\" sedan du öppnade det. Vill du spara ändå?"
 
-#: ../libplanner/mrp-sql.c:3711
+#: ../libplanner/mrp-sql.c:3706
 #, c-format
 msgid "Connection to database '%s' failed."
 msgstr "Anslutning till databasen \"%s\" misslyckades."
@@ -1789,24 +1790,24 @@ msgstr "H%d"
 msgid "%04d, H%d"
 msgstr "%04d, H%d"
 
-#: ../src/planner-sql-plugin.c:101
+#: ../src/planner-sql-plugin.c:95
 msgid "Open from Database..."
 msgstr "Öppna från databas..."
 
-#: ../src/planner-sql-plugin.c:102
+#: ../src/planner-sql-plugin.c:96
 msgid "Open a project from a database"
 msgstr "Öppna ett projekt från en databas"
 
-#: ../src/planner-sql-plugin.c:104
-#: ../src/planner-sql-plugin.c:1242
+#: ../src/planner-sql-plugin.c:98
+#: ../src/planner-sql-plugin.c:1146
 msgid "Save to Database"
 msgstr "Spara till databas"
 
-#: ../src/planner-sql-plugin.c:105
+#: ../src/planner-sql-plugin.c:99
 msgid "Save the current project to a database"
 msgstr "Spara det aktuella projektet till en databas"
 
-#: ../src/planner-sql-plugin.c:598
+#: ../src/planner-sql-plugin.c:525
 #, c-format
 msgid ""
 "Database %s needs to be upgraded from version %s to version %s.\n"
@@ -1815,11 +1816,11 @@ msgstr ""
 "Databasen %s behöver uppgraderas från version %s till version %s.\n"
 "Tag en säkerhetskopia på databasen innan uppgraderingen görs."
 
-#: ../src/planner-sql-plugin.c:605
+#: ../src/planner-sql-plugin.c:532
 msgid "Upgrade"
 msgstr "Uppgradera"
 
-#: ../src/planner-sql-plugin.c:619
+#: ../src/planner-sql-plugin.c:546
 #, c-format
 msgid ""
 "Could not upgrade database %s.\n"
@@ -1834,43 +1835,43 @@ msgstr ""
 "Databassfel: \n"
 "%s"
 
-#: ../src/planner-sql-plugin.c:659
+#: ../src/planner-sql-plugin.c:586
 #, c-format
 msgid "Can't create tables in database %s"
 msgstr "Kan inte skapa tabeller i databasen %s"
 
-#: ../src/planner-sql-plugin.c:727
+#: ../src/planner-sql-plugin.c:648
 #, c-format
 msgid "Database %s is not setup for Planner. Do you want to do that?"
 msgstr "Databasen %s är inte förberedd för Planner. Vill du göra det?"
 
-#: ../src/planner-sql-plugin.c:776
+#: ../src/planner-sql-plugin.c:691
 #, c-format
 msgid "Connection to database '%s@%s' failed."
 msgstr "Anslutning till databasen \"%s@%s\" misslyckades."
 
-#: ../src/planner-sql-plugin.c:799
+#: ../src/planner-sql-plugin.c:710
 #, c-format
 msgid "Test to tables in database '%s' failed."
 msgstr "Anslutning till databasen \"%s\" misslyckades."
 
-#: ../src/planner-sql-plugin.c:908
+#: ../src/planner-sql-plugin.c:812
 msgid "ID"
 msgstr "ID"
 
-#: ../src/planner-sql-plugin.c:916
+#: ../src/planner-sql-plugin.c:820
 msgid "Project"
 msgstr "Projekt"
 
-#: ../src/planner-sql-plugin.c:924
+#: ../src/planner-sql-plugin.c:828
 msgid "Phase"
 msgstr "Fas"
 
-#: ../src/planner-sql-plugin.c:932
+#: ../src/planner-sql-plugin.c:836
 msgid "Revision"
 msgstr "Revision"
 
-#: ../src/planner-sql-plugin.c:1130
+#: ../src/planner-sql-plugin.c:1034
 msgid "Open from Database"
 msgstr "Öppna från databas"
 
