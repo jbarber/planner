@@ -1,0 +1,2390 @@
+# translation of planner.HEAD.po to marathi
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Sandeep Shedmake <sandeep.shedmake@gmail.com>, 2009.
+msgid ""
+msgstr ""
+"Project-Id-Version: planner.HEAD\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=planner&component=general\n"
+"POT-Creation-Date: 2009-02-19 19:38+0000\n"
+"PO-Revision-Date: 2009-03-23 15:42+0530\n"
+"Last-Translator: Sandeep Shedmake <sandeep.shedmake@gmail.com>\n"
+"Language-Team: marathi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+"X-Generator: KBabel 1.11.4\n"
+
+#: ../data/glade/add-predecessor.glade.h:1
+msgid "Add Predecessor"
+msgstr "पूर्वाधिकारी समावेष करा"
+
+#: ../data/glade/add-predecessor.glade.h:2
+msgid "_Lag:"
+msgstr "मागे पडले (_L):"
+
+#: ../data/glade/add-predecessor.glade.h:3
+#: ../data/glade/calendar-dialog.glade.h:35
+#: ../data/glade/new-property.glade.h:5
+#: ../data/glade/project-properties.glade.h:9
+#: ../data/glade/resource-dialog.glade.h:12
+#: ../data/glade/resource-input-dialog.glade.h:7
+#: ../data/glade/task-dialog.glade.h:16
+#: ../data/glade/task-input-dialog.glade.h:4
+msgid "_Name:"
+msgstr "नाव (_N):"
+
+#: ../data/glade/add-predecessor.glade.h:4
+msgid "_Relation type:"
+msgstr "नाते प्रकार (_R):"
+
+#: ../data/glade/calendar-dialog.glade.h:1
+msgid ""
+"\n"
+"The selected day type has the following working hours:"
+msgstr ""
+"\n"
+"निवडलेल्या दिवस प्रकाराचे खालिल नुरूप कामाचे तास आहेत:"
+
+#: ../data/glade/calendar-dialog.glade.h:3
+#: ../data/glade/column-dialog.glade.h:1 ../data/glade/task-dialog.glade.h:2
+msgid "    "
+msgstr "    "
+
+#: ../data/glade/calendar-dialog.glade.h:4 ../data/glade/eds.glade.h:1
+#: ../data/glade/new-property.glade.h:1
+#: ../data/glade/resource-dialog.glade.h:1
+#: ../data/glade/resource-input-dialog.glade.h:1 ../data/glade/sql.glade.h:1
+#: ../data/glade/task-input-dialog.glade.h:1
+msgid "*"
+msgstr "*"
+
+#: ../data/glade/calendar-dialog.glade.h:5
+msgid "-"
+msgstr "-"
+
+#: ../data/glade/calendar-dialog.glade.h:6
+msgid "<b>Calendar:</b>"
+msgstr "<b>दिनदर्शिका:</b>"
+
+#: ../data/glade/calendar-dialog.glade.h:7
+msgid "<b>Day types</b>"
+msgstr "<b>दिवसांचे प्रकार</b>"
+
+#: ../data/glade/calendar-dialog.glade.h:8
+msgid "<b>Working hours</b>"
+msgstr "<b>कामाचे तास</b>"
+
+#: ../data/glade/calendar-dialog.glade.h:9
+msgid "<b>Working time</b>"
+msgstr "<b>कामाची वेळ</b>"
+
+#: ../data/glade/calendar-dialog.glade.h:10
+msgid "Add Day Type"
+msgstr "दिवस प्रकार समावेष करा"
+
+#: ../data/glade/calendar-dialog.glade.h:11
+msgid "Apply"
+msgstr "लागू करा"
+
+#: ../data/glade/calendar-dialog.glade.h:12
+msgid "C_opy an existing calendar"
+msgstr "अस्तित्वातील दिनदर्शिका प्रतिकृत करा (_o)"
+
+#: ../data/glade/calendar-dialog.glade.h:13
+msgid "C_reate"
+msgstr "बनवा (_r)"
+
+#: ../data/glade/calendar-dialog.glade.h:14
+msgid "Calendar Editor"
+msgstr "दिनदर्शिका संपादक"
+
+#: ../data/glade/calendar-dialog.glade.h:15
+msgid "Create an _empty calendar"
+msgstr "रिकामी दिनदर्शिका बनवा (_e)"
+
+#: ../data/glade/calendar-dialog.glade.h:16
+msgid "Custom working time"
+msgstr "स्वपसंत कामाचा वेळ"
+
+#: ../data/glade/calendar-dialog.glade.h:17
+msgid "Day type:"
+msgstr "दिवस प्रकार:"
+
+#: ../data/glade/calendar-dialog.glade.h:18
+msgid "Default Week"
+msgstr "मुलभूत सप्ताह"
+
+#: ../data/glade/calendar-dialog.glade.h:19
+msgid "Default week..."
+msgstr "मुलभूत सप्ताह..."
+
+#: ../data/glade/calendar-dialog.glade.h:20
+msgid "Edit Day Types"
+msgstr "दिवसाचे प्रकार संपादीत करा"
+
+#: ../data/glade/calendar-dialog.glade.h:21
+msgid "Edit Working Time"
+msgstr "कामाची वेळ संपादीत करा"
+
+#: ../data/glade/calendar-dialog.glade.h:22
+msgid "From:"
+msgstr "पासून:"
+
+#: ../data/glade/calendar-dialog.glade.h:23
+msgid "New Calendar"
+msgstr "नवीन दिनदर्शिका"
+
+#: ../data/glade/calendar-dialog.glade.h:24
+msgid "Select a Calendar"
+msgstr "दिनदर्शिका निवडा"
+
+#: ../data/glade/calendar-dialog.glade.h:25
+msgid ""
+"Select a weekday and the day type to use for that day in the default week "
+"for this calendar.\n"
+msgstr ""
+"या दिनदर्शिकेसाठी सप्ताहदिवस व मुलभूत सप्ताहात त्या दिवसासाठी वापरण्याजोगी "
+"दिवस प्रकार निवडा.\n"
+
+#: ../data/glade/calendar-dialog.glade.h:27
+msgid "Set day type to:"
+msgstr "दिवस प्रकार निश्चित करा:"
+
+#: ../data/glade/calendar-dialog.glade.h:28
+msgid "To:"
+msgstr "प्रती:"
+
+#: ../data/glade/calendar-dialog.glade.h:29
+msgid "Use working time from derived calendar"
+msgstr "प्राप्त दिनदर्शिकेपासून कामाची वेळ वापरा"
+
+#: ../data/glade/calendar-dialog.glade.h:30
+msgid "Week day:"
+msgstr "सप्ताह दिवस:"
+
+#: ../data/glade/calendar-dialog.glade.h:31
+msgid "Working time..."
+msgstr "कामाची वेळ..."
+
+#: ../data/glade/calendar-dialog.glade.h:32
+msgid "_Derive from a calendar"
+msgstr "दिनदर्शिकेतून प्राप्त झाले (_D)"
+
+#: ../data/glade/calendar-dialog.glade.h:33
+msgid "_Existing calendars:"
+msgstr "वर्तमान दिनदर्शिका (_E):"
+
+#: ../data/glade/calendar-dialog.glade.h:34
+msgid "_Name of the new calendar:"
+msgstr "नवीन दिनदर्शिकेचे नांव (_N):"
+
+#: ../data/glade/calendar-dialog.glade.h:36
+msgid "_New..."
+msgstr "नवीन (_N)..."
+
+#: ../data/glade/column-dialog.glade.h:2
+msgid "Hidden columns:"
+msgstr "लपवलेले स्तंभ:"
+
+#: ../data/glade/column-dialog.glade.h:3
+msgid "Visible columns:"
+msgstr "दृष्यास्पद स्तंभ:"
+
+#: ../data/glade/column-dialog.glade.h:4
+msgid "_Hide"
+msgstr "लपवा (_H)"
+
+#: ../data/glade/column-dialog.glade.h:5
+msgid "_Show"
+msgstr "दाखवा  (_S)"
+
+#: ../data/glade/eds.glade.h:2
+msgid "Loading resource data"
+msgstr "संसाधन डेटा दाखल करत आहे"
+
+#: ../data/glade/eds.glade.h:3
+msgid "Search"
+msgstr "शोध"
+
+#: ../data/glade/eds.glade.h:4
+msgid "Select All"
+msgstr "सर्व निवडा"
+
+#: ../data/glade/eds.glade.h:5
+msgid "Select group"
+msgstr "गट निवडा"
+
+#: ../data/glade/eds.glade.h:6
+msgid "Unselect All"
+msgstr "निवडलेले अशक्य करा"
+
+#: ../data/glade/eds.glade.h:7
+msgid "dialog1"
+msgstr "dialog1"
+
+#: ../data/glade/group-dialog.glade.h:1
+msgid "Group Editor"
+msgstr "गट संपादक"
+
+#: ../data/glade/new-property.glade.h:2
+msgid "Add Property"
+msgstr "गुणधर्म समावेष करा"
+
+#: ../data/glade/new-property.glade.h:3
+msgid "_Description:"
+msgstr "वर्णन (_D):"
+
+#: ../data/glade/new-property.glade.h:4
+msgid "_Label:"
+msgstr "लेबल (_L):"
+
+#: ../data/glade/new-property.glade.h:6
+#: ../data/glade/resource-dialog.glade.h:14
+msgid "_Type:"
+msgstr "प्रकार (_T):"
+
+#: ../data/glade/project-properties.glade.h:1
+msgid "Custom"
+msgstr "स्वपसंत"
+
+#: ../data/glade/project-properties.glade.h:2
+msgid "Edit Project Phases"
+msgstr "प्रकल्प टप्पा संपादीत करा"
+
+#: ../data/glade/project-properties.glade.h:3
+#: ../data/glade/resource-dialog.glade.h:5 ../data/glade/task-dialog.glade.h:6
+msgid "General"
+msgstr "सर्वसाधारण"
+
+#: ../data/glade/project-properties.glade.h:4
+msgid "New Project Phase"
+msgstr "नवीन प्रकल्प टप्पा"
+
+#: ../data/glade/project-properties.glade.h:5
+msgid "Project Properties"
+msgstr "प्रकल्प गुणधर्म"
+
+#: ../data/glade/project-properties.glade.h:6
+msgid "Select..."
+msgstr "निवडा..."
+
+#: ../data/glade/project-properties.glade.h:7
+msgid "_Calendar:"
+msgstr "दिनदर्शिका (_C):"
+
+#: ../data/glade/project-properties.glade.h:8
+msgid "_Manager:"
+msgstr "व्यवस्थापक (_M):"
+
+#: ../data/glade/project-properties.glade.h:10
+msgid "_Organization:"
+msgstr "संस्था (_O):"
+
+#: ../data/glade/project-properties.glade.h:11
+msgid "_Phase:"
+msgstr "टप्पा (_P):"
+
+#: ../data/glade/project-properties.glade.h:12
+msgid "_Start:"
+msgstr "सुरू करा (_S):"
+
+#: ../data/glade/property-dialog.glade.h:1
+msgid "Custom Properties"
+msgstr "स्वपसंत गुणधर्म"
+
+#: ../data/glade/resource-dialog.glade.h:2
+msgid "C_ost:"
+msgstr "किंमत (_o):"
+
+#: ../data/glade/resource-dialog.glade.h:3
+msgid "Calendar"
+msgstr "दिनदर्शिका"
+
+#: ../data/glade/resource-dialog.glade.h:4
+msgid "Edit Calendars..."
+msgstr "दिनदर्शिका संपादीत करा..."
+
+#: ../data/glade/resource-dialog.glade.h:6 ../data/glade/task-dialog.glade.h:7
+msgid "Notes"
+msgstr "टिप"
+
+#: ../data/glade/resource-dialog.glade.h:7
+#: ../data/glade/resource-input-dialog.glade.h:3
+msgid "Optional - overrides resource name in Gantt view."
+msgstr "वैकल्पिक - Gantt दृष्यातील संसाधन नाव खोडून पुन्हा लिहीतो."
+
+#: ../data/glade/resource-dialog.glade.h:8
+msgid ""
+"Select the calendar to use for this resource. If you want to use the default "
+"calendar of the project, select 'None'. "
+msgstr ""
+"या संसाधनासाठी वापरण्याजोगी दिनदर्शिका निवडा. आपणांस जर प्रकल्पाच्या मुलभूत "
+"दिनदर्शिकेचा वापर करायचा असेल, तर 'None' निवडा. "
+
+#: ../data/glade/resource-dialog.glade.h:9
+#: ../data/glade/resource-input-dialog.glade.h:4
+msgid "_Email:"
+msgstr "ईमेल (_E):"
+
+#: ../data/glade/resource-dialog.glade.h:10
+#: ../data/glade/resource-input-dialog.glade.h:5
+msgid "_Group:"
+msgstr "गट (_G):"
+
+#: ../data/glade/resource-dialog.glade.h:11
+msgid "_Insert time stamp"
+msgstr "समयांकन अंतर्भूत करा (_I)"
+
+#: ../data/glade/resource-dialog.glade.h:13
+#: ../data/glade/resource-input-dialog.glade.h:8
+msgid "_Short name:"
+msgstr "टोपण नांव (_S):"
+
+#: ../data/glade/resource-input-dialog.glade.h:2
+msgid "Insert Resource"
+msgstr "संसाधन अंतर्भूत करा"
+
+#: ../data/glade/resource-input-dialog.glade.h:6
+#: ../data/glade/task-input-dialog.glade.h:3
+msgid "_Insert"
+msgstr "अंतर्भूत करा (_I)"
+
+#: ../data/glade/sql.glade.h:2
+msgid "Open Database"
+msgstr "खुल्ला माहितीकोश"
+
+#: ../data/glade/sql.glade.h:3
+msgid "Select a Project"
+msgstr "प्रकल्प निवडा"
+
+#: ../data/glade/sql.glade.h:4
+msgid "The database contains the following projects. Select a project to open:"
+msgstr "माहितीकोशांत खालिल प्रकल्पांचा समावेष आहे. उघडण्यासाठी प्रकल्प निवडा:"
+
+#: ../data/glade/sql.glade.h:5
+msgid "_Database:"
+msgstr "माहितीकोश (_D):"
+
+#: ../data/glade/sql.glade.h:6
+msgid "_Password:"
+msgstr "परवलीचा शब्द (_P):"
+
+#: ../data/glade/sql.glade.h:7
+msgid "_Server:"
+msgstr "सर्वर (_S):"
+
+#: ../data/glade/sql.glade.h:8
+msgid "_Username:"
+msgstr "वापरकर्ता नाव (_U):"
+
+#: ../data/glade/task-date-widget.glade.h:1
+msgid ""
+"As soon as possible\n"
+"No earlier than\n"
+"On fixed date"
+msgstr ""
+"शक्य तितक्या लवकर\n"
+"पेक्षा लवकर नाही\n"
+"निश्चित तारखेला"
+
+#: ../data/glade/task-date-widget.glade.h:4
+#: ../src/planner-cell-renderer-date.c:182
+#: ../src/planner-project-properties.c:747
+msgid "Cancel"
+msgstr "रद्द करा"
+
+#. The verb "schedule".
+#. This is the verb "schedule"
+#. I18n: the verb "schedule" here.
+#: ../data/glade/task-date-widget.glade.h:6
+#: ../data/glade/task-dialog.glade.h:11
+#: ../src/planner-cell-renderer-date.c:154
+msgid "Schedule:"
+msgstr "वेळपत्रक:"
+
+#: ../data/glade/task-date-widget.glade.h:7
+#: ../src/planner-cell-renderer-date.c:189
+msgid "Select"
+msgstr "निवडा"
+
+#: ../data/glade/task-date-widget.glade.h:8
+#: ../src/planner-cell-renderer-date.c:176
+#: ../src/planner-project-properties.c:740
+msgid "Today"
+msgstr "आज"
+
+#: ../data/glade/task-date-widget.glade.h:9
+msgid "window"
+msgstr "चौकट"
+
+#: ../data/glade/task-dialog.glade.h:1
+msgid "  "
+msgstr "  "
+
+#: ../data/glade/task-dialog.glade.h:4
+#, no-c-format
+msgid "%"
+msgstr "%"
+
+#: ../data/glade/task-dialog.glade.h:5
+msgid "C_omplete:"
+msgstr "संपूर्ण (_o):"
+
+#: ../data/glade/task-dialog.glade.h:8
+msgid "Predecessors"
+msgstr "पूर्वाधिकारी"
+
+#: ../data/glade/task-dialog.glade.h:9 ../src/planner-resource-view.c:418
+msgid "Resources"
+msgstr "स्त्रोत"
+
+#: ../data/glade/task-dialog.glade.h:12
+msgid "_Duration:"
+msgstr "कालावधी (_D):"
+
+#: ../data/glade/task-dialog.glade.h:13
+msgid "_Fixed duration"
+msgstr "निश्चित कालावधी (_F)"
+
+#: ../data/glade/task-dialog.glade.h:14
+msgid "_Insert Time Stamp"
+msgstr "समयांकन अंतर्भूत करा (_I)"
+
+#: ../data/glade/task-dialog.glade.h:15
+msgid "_Milestone"
+msgstr "प्रगतिदर्शक (_M)"
+
+#: ../data/glade/task-dialog.glade.h:17
+msgid "_Priority:"
+msgstr "प्राधान्यक्रम (_P):"
+
+#: ../data/glade/task-dialog.glade.h:18
+#: ../data/glade/task-input-dialog.glade.h:5
+msgid "_Work:"
+msgstr "कार्य (_W):"
+
+#: ../data/glade/task-input-dialog.glade.h:2
+msgid "Insert Task"
+msgstr "कार्य अंतर्भूत करा"
+
+#: ../data/mime/planner.keys.in.h:1
+msgid "Documents/Project Management"
+msgstr "दस्तऐवज/प्रकल्प व्यवस्थापक"
+
+#: ../data/mime/planner.keys.in.h:2
+msgid "Project Plan"
+msgstr "प्रकल्प योजना"
+
+#: ../data/mime/planner.xml.in.h:1
+msgid "Planner project plan"
+msgstr "Planner प्रकल्प योजना"
+
+#: ../data/planner.desktop.in.in.h:1
+msgid "Planner Project Management"
+msgstr "Planner प्रकल्प व्यवस्थापन"
+
+#: ../data/planner.desktop.in.in.h:2
+msgid "Project Management"
+msgstr "प्रकल्प व्यवस्थापन"
+
+#: ../data/planner.schemas.in.h:1
+msgid "Display nonstandard days in Gantt view"
+msgstr "Gantt दृष्यात अमानक दिवस प्रदर्शित करा"
+
+#: ../data/planner.schemas.in.h:2
+msgid "Highlight critical path in Gantt view"
+msgstr "Gantt दृष्यांतील निर्णायक मार्ग ठळक करा"
+
+#: ../data/planner.schemas.in.h:3
+msgid "Highlight critical path in Task view"
+msgstr "कार्य दृष्यांतील निर्णायक मार्ग ठळक करा"
+
+#: ../data/planner.schemas.in.h:4
+msgid "Print the Gantt view"
+msgstr "Gantt दृष्य छपाई करा"
+
+#: ../data/planner.schemas.in.h:5
+msgid "Print the Resource view"
+msgstr "संसाधन दृष्य छपाई करा"
+
+#: ../data/planner.schemas.in.h:6
+msgid "Print the Task view"
+msgstr "कार्य दृष्य छपाई करा"
+
+#: ../data/planner.schemas.in.h:7
+msgid "The active view"
+msgstr "सक्रिय दृष्य"
+
+#: ../data/planner.schemas.in.h:8
+msgid "Whether printing of the Gantt view is enabled."
+msgstr "Gantt दृष्याचे छपाई सक्षम केलेले आहे का."
+
+#: ../data/planner.schemas.in.h:9
+msgid "Whether printing of the Resource view is enabled."
+msgstr "संसाधन दृष्याचे छपाई सक्षम केलेले आहे का."
+
+#: ../data/planner.schemas.in.h:10
+msgid "Whether printing of the Task view is enabled."
+msgstr "कार्य दृष्याचे छपाई सक्षम केलेले आहे का."
+
+#: ../data/planner.schemas.in.h:11
+msgid "Whether to display nonstandard days in the Gantt view."
+msgstr "Gantt दृष्यांत अमानक दिवस दाखवायचे."
+
+#: ../data/planner.schemas.in.h:12
+msgid "Whether to highlight the tasks along the cricital path in the Gantt view."
+msgstr "Gantt दृष्यांतील निर्णायक मार्गावरील कार्य ठळक करायचे."
+
+#: ../data/planner.schemas.in.h:13
+msgid "Whether to highlight the tasks along the cricital path in the Task view."
+msgstr "कार्य दृष्यांतील निर्णायक मार्गावरील कार्य ठळक करायचे."
+
+#: ../data/planner.schemas.in.h:14
+msgid "Which view to display in the user interface."
+msgstr "वापरकर्ता संवाद मध्ये कोणते दृष्य दाखवायचे."
+
+#: ../data/stylesheets/localizable.xml.h:1
+msgid "Company:"
+msgstr "कंपनी:"
+
+#: ../data/stylesheets/localizable.xml.h:2
+msgid "Complete"
+msgstr "पूर्ण"
+
+#: ../data/stylesheets/localizable.xml.h:3
+msgid "Finish:"
+msgstr "समाप्त:"
+
+#: ../data/stylesheets/localizable.xml.h:4
+msgid "Gantt Chart"
+msgstr "Gantt Chart"
+
+#: ../data/stylesheets/localizable.xml.h:5
+msgid "Manager:"
+msgstr "व्यवस्थापक:"
+
+#: ../data/stylesheets/localizable.xml.h:6
+msgid "Phase:"
+msgstr "टप्पा:"
+
+#: ../data/stylesheets/localizable.xml.h:7
+msgid "Priority"
+msgstr "प्राधान्यक्रम"
+
+#: ../data/stylesheets/localizable.xml.h:8
+msgid "Report Date:"
+msgstr "अहवाल दिनांक:"
+
+#: ../data/stylesheets/localizable.xml.h:9
+msgid "Start:"
+msgstr "प्रारंभ:"
+
+#: ../data/stylesheets/localizable.xml.h:10
+msgid "This file was generated by"
+msgstr "ही फाइल बनवले गेले"
+
+#: ../data/stylesheets/localizable.xml.h:11
+msgid "Unnamed Project"
+msgstr "निनावी प्रकल्प"
+
+#: ../data/stylesheets/localizable.xml.h:12
+msgid "Week"
+msgstr "सप्ताह"
+
+#: ../libegg/recent-files/egg-recent-vfs-utils.c:90
+msgid " (invalid Unicode)"
+msgstr " (अवैध Unicode)"
+
+#: ../libplanner/mrp-day.c:54
+msgid "Working"
+msgstr "कार्यरत"
+
+#: ../libplanner/mrp-day.c:55
+msgid "A default working day"
+msgstr "मुलभूत कार्यकारी दिवस"
+
+#: ../libplanner/mrp-day.c:57
+msgid "Nonworking"
+msgstr "सुट्टी"
+
+#: ../libplanner/mrp-day.c:58
+msgid "A default non working day"
+msgstr "मुलभूत सुट्टीचा दिवस"
+
+#: ../libplanner/mrp-day.c:60
+msgid "Use base"
+msgstr "मूळ वापरा"
+
+#: ../libplanner/mrp-day.c:61
+msgid "Use day from base calendar"
+msgstr "मूळ दिनदर्शिकेमधील दिवसाचा वापरा "
+
+#: ../libplanner/mrp-file-module.c:121
+#, c-format
+msgid "This format does not support reading"
+msgstr "हे स्वरूप वाचन करीता समर्थन पुरवत नाही"
+
+#: ../libplanner/mrp-parser.c:1062 ../libplanner/mrp-parser.c:1157
+#, c-format
+msgid "Could not create XML tree"
+msgstr "XML वृक्ष बनवणे अशक्य"
+
+#: ../libplanner/mrp-parser.c:1123
+#, c-format
+msgid "Could not write XML file"
+msgstr "XML फाइल लिहिता येत नाही"
+
+#: ../libplanner/mrp-project.c:437 ../src/planner-group-dialog.c:846
+msgid "Default"
+msgstr "मुलभूत"
+
+#: ../libplanner/mrp-project.c:716
+#, c-format
+msgid "Invalid URI: '%s'"
+msgstr "अवैध URI: '%s'"
+
+#: ../libplanner/mrp-project.c:759
+#, c-format
+msgid "Couldn't find a suitable file module for loading '%s'"
+msgstr "'%s' दाखल करण्यासाठी अनुकूल फाइल घटक आढळले नाही"
+
+#: ../libplanner/mrp-project.c:780 ../libplanner/mrp-project.c:1064
+#, c-format
+msgid "No support for SQL storage built into this version of Planner."
+msgstr "Planner च्या या आवृत्तीत SQL संग्रहासाठी कोणतेही समर्थन अंतर्भूत नाही."
+
+#: ../libplanner/mrp-project.c:817
+#, c-format
+msgid "Invalid URI."
+msgstr "अवैध URI."
+
+#: ../libplanner/mrp-project.c:958
+#, c-format
+msgid "Unable to find file writer identified by '%s'"
+msgstr "'%s' द्वारे ओळखले गेलेले फाइल रायटर शोधणे अशक्य"
+
+#: ../libplanner/mrp-project.c:1021
+#, c-format
+msgid "Couldn't find a suitable file module for loading project"
+msgstr "प्रकल्प दाखल करण्यासाठी अनुकूल फाइल घटक आढळले नाही"
+
+#: ../libplanner/mrp-property.c:365
+msgid "Text"
+msgstr "पाठ्य"
+
+#: ../libplanner/mrp-property.c:367
+msgid "String list"
+msgstr "वर्णाक्षर यादी"
+
+#: ../libplanner/mrp-property.c:369
+msgid "Integer number"
+msgstr "इंटीजर संख्या"
+
+#: ../libplanner/mrp-property.c:371
+msgid "Floating-point number"
+msgstr "फ्लोटिंग-पॉईन्ट संख्या"
+
+#: ../libplanner/mrp-property.c:373
+msgid "Date"
+msgstr "दिनांक"
+
+#: ../libplanner/mrp-property.c:375 ../src/planner-gantt-view.c:594
+#: ../src/planner-task-view.c:341
+msgid "Duration"
+msgstr "कालावधी"
+
+#: ../libplanner/mrp-property.c:377 ../src/planner-gantt-view.c:596
+#: ../src/planner-resource-view.c:1315 ../src/planner-task-view.c:343
+msgid "Cost"
+msgstr "दर"
+
+#: ../libplanner/mrp-property.c:380 ../src/planner-project-properties.c:882
+msgid "None"
+msgstr "काहिच नाही"
+
+#: ../libplanner/mrp-sql.c:280 ../src/planner-sql-plugin.c:153
+msgid "Can't connect to database server"
+msgstr "माहितीकोश सर्व्हरशी जोडणी करणे अशक्य"
+
+#: ../libplanner/mrp-sql.c:285 ../src/planner-sql-plugin.c:158
+msgid "No errors reported."
+msgstr "कोणतीही त्रुटी आढळली नाही."
+
+#. Give up.
+#: ../libplanner/mrp-sql.c:374 ../src/planner-sql-plugin.c:227
+msgid "Invalid Unicode"
+msgstr "अवैध Unicode"
+
+#: ../libplanner/mrp-sql.c:2260
+#, c-format
+msgid "Connection to database '%s' failed.\n"
+msgstr "'%s' माहितीकोशशी जोडणी करण्यात अपयशी.\n"
+
+#: ../libplanner/mrp-sql.c:2265
+#, c-format
+msgid ""
+"Connection to database '%s' failed.\n"
+"%s"
+msgstr ""
+"'%s' माहितीकोशाशी जोडणी करण्यात अयशस्वी.\n"
+"%s"
+
+#: ../libplanner/mrp-sql.c:2274 ../libplanner/mrp-sql.c:3713
+msgid "Failed to create a dictionary for the database connection.\n"
+msgstr "माहितीकोष जुळवणी करीता शब्दकोष बनविण्यास अपयशी.\n"
+
+#: ../libplanner/mrp-sql.c:2288
+#, c-format
+msgid "BEGIN command failed %s."
+msgstr "BEGIN आदेश अपयशी %s."
+
+#: ../libplanner/mrp-sql.c:2457
+#, c-format
+msgid ""
+"The project '%s' has been changed by the user '%s' since you opened it. Do "
+"you want to save anyway?"
+msgstr "आपण उघडल्यामुळे वापरकर्ता '%2$s' द्वारे प्रकल्प '%1$s' बदलण्यात आले आहे. तरीही आपणांस साठवायचे?"
+
+#: ../libplanner/mrp-sql.c:3706
+#, c-format
+msgid "Connection to database '%s' failed."
+msgstr "माहितीकोश '%s' शी जोडणी करण्यात अपयशी."
+
+#: ../libplanner/mrp-storage-sql.c:206
+#, c-format
+msgid "Invalid SQL URI (must start with 'sql://' and contain '#')."
+msgstr "अवैध SQL URI ('sql://' पासून सुरू झाले पाहिजे व '#' चा समावेश असला पाहिजे)."
+
+#: ../libplanner/mrp-storage-sql.c:275
+#, c-format
+msgid "Invalid SQL URI (invalid project id)."
+msgstr "अवैध SQL URI (अवैध प्रकल्प id)."
+
+#: ../libplanner/mrp-storage-sql.c:283
+#, c-format
+msgid "Invalid SQL URI (no database name specified)."
+msgstr "अवैध SQL URI (माहितीकोश नांव निर्देशित केलेले नाही)."
+
+#: ../libplanner/mrp-task.c:1070
+#, c-format
+msgid "Could not add a predecessor relation, because the tasks are already related."
+msgstr "कार्य आधीपासूनच संबंधित असल्याने पूर्वाधिकारी संबंध समावेष करणे अशक्य."
+
+#: ../libplanner/mrp-task.c:1081
+msgid "Start to Finish relation type cannot be combined with other relations."
+msgstr "संबंध प्रकार संपवण्याची सुरूवात इतर संबंधांशी जोडणे अशक्य."
+
+#: ../libplanner/mrp-task.c:1083
+msgid "Finish to Finish relation type cannot be combined with other relations."
+msgstr "संबंध प्रकार संपवण्याचा अंत इतर संबंधांशी जोडणे अशक्य."
+
+#: ../libplanner/mrp-task.c:1099
+msgid ""
+"Start to Finish relation type cannot be combined with Start No Earlier Than "
+"constraint."
+msgstr "संबंध प्रकार संपवण्याची सुरूवात संकोचा आधी प्रारंभ नकोशी जोडणे अशक्य."
+
+#: ../libplanner/mrp-task.c:1101
+msgid ""
+"Finish to Finish relation type cannot be combined with Start No Earlier Than "
+"constraint."
+msgstr "संबंध प्रकार संपवण्याचा अंत संकोचा आधी प्रारंभ नकोशी जोडणे अशक्य."
+
+#: ../libplanner/mrp-task.c:1124
+#, c-format
+msgid ""
+"Start to Finish relation cannot be set. Predecessor starts on project start "
+"date."
+msgstr "संबंध प्रकार संपवण्याची सुरूवात सुयोजित करणे अशक्य. प्रकल्प प्रारंभ तारखेला पूर्वाधिकारी प्रारंभ होतो."
+
+#: ../libplanner/mrp-task-manager.c:2630
+#, c-format
+msgid "Cannot add a predecessor, because it would result in a loop."
+msgstr "पूर्वाधिकारी समाविष्ट करणे अशक्य कारण त्याचा परिणाम लूप मध्ये होईल."
+
+#: ../libplanner/mrp-task-manager.c:2674
+#, c-format
+msgid "Cannot move the task, because it would result in a loop."
+msgstr "कार्य हलविता येत नाही कारण त्याचा परिणाम लूप मध्ये होईल."
+
+#. Translators: Example output: October 9, 2006
+#: ../libplanner/mrp-xsl.c:93
+msgid "%B %e, %Y"
+msgstr "%B %e, %Y"
+
+#: ../libplanner/mrp-xsl.c:157 ../libplanner/mrp-xsl.c:205
+#, c-format
+msgid "Export to HTML failed"
+msgstr "HTML नुरूप स्वरूप बदलवणे अपयशी"
+
+#: ../src/planner-application.c:55 ../src/planner-application.c:111
+msgid "Insert"
+msgstr "अंतर्भूत करा"
+
+#: ../src/planner-application.c:62 ../src/planner-application.c:118
+msgid "Remove"
+msgstr "काढून टाका"
+
+#: ../src/planner-application.c:69
+msgid "Unlink"
+msgstr "दुवा अशक्य करा"
+
+#: ../src/planner-application.c:76
+msgid "Link"
+msgstr "दुवा"
+
+#: ../src/planner-application.c:83
+msgid "Indent"
+msgstr "समास"
+
+#: ../src/planner-application.c:90
+msgid "Unindent"
+msgstr "समास अशक्य करा"
+
+#: ../src/planner-application.c:97
+msgid "Move up"
+msgstr "वर हलवा"
+
+#: ../src/planner-application.c:104
+msgid "Move down"
+msgstr "खाली हलवा"
+
+#: ../src/planner-application.c:125
+msgid "Edit"
+msgstr "संपादीत करा"
+
+#: ../src/planner-calendar-dialog.c:184
+msgid "Change day type"
+msgstr "दिवस प्रकार बदला"
+
+#: ../src/planner-calendar-dialog.c:306
+msgid "Remove calendar"
+msgstr "दिनदर्शिका काढून टाका"
+
+#: ../src/planner-calendar-dialog.c:398
+msgid "Add new calendar"
+msgstr "नवीन दिनदर्शिका समावेष करा"
+
+#: ../src/planner-cell-renderer-date.c:161 ../src/planner-task-dialog.c:1491
+msgid "As soon as possible"
+msgstr "शक्य तेवढ्या लवकर"
+
+#: ../src/planner-cell-renderer-date.c:162
+msgid "No earlier than"
+msgstr "पेक्षा आधी नाही"
+
+#: ../src/planner-cell-renderer-date.c:163
+msgid "On fixed date"
+msgstr "निश्चित तारखेस"
+
+#: ../src/planner-cmd-manager.c:227
+#, c-format
+msgid "Undo '%s'"
+msgstr "'%s' पूर्ववत करा"
+
+#: ../src/planner-cmd-manager.c:229
+msgid "Undo"
+msgstr "पूर्ववत करा"
+
+#: ../src/planner-cmd-manager.c:239
+#, c-format
+msgid "Redo '%s'"
+msgstr "'%s' पुन्हा करा"
+
+#: ../src/planner-cmd-manager.c:241
+msgid "Redo"
+msgstr "पुन्हा करा"
+
+#: ../src/planner-day-type-dialog.c:499
+#, c-format
+msgid "Add day type \"%s\""
+msgstr "दिवस प्रकार \"%s\" समावेष करा"
+
+#: ../src/planner-day-type-dialog.c:560
+#, c-format
+msgid "Remove day type \"%s\""
+msgstr "दिवस प्रकार \"%s\" काढून टाका"
+
+#: ../src/planner-default-week-dialog.c:42
+msgid "Monday"
+msgstr "सोमवार"
+
+#: ../src/planner-default-week-dialog.c:43
+msgid "Tuesday"
+msgstr "मंगळवार"
+
+#: ../src/planner-default-week-dialog.c:44
+msgid "Wednesday"
+msgstr "बुधवार"
+
+#: ../src/planner-default-week-dialog.c:45
+msgid "Thursday"
+msgstr "गुरूवार"
+
+#: ../src/planner-default-week-dialog.c:46
+msgid "Friday"
+msgstr "शुक्रवार"
+
+#: ../src/planner-default-week-dialog.c:47
+msgid "Saturday"
+msgstr "शनिवार"
+
+#: ../src/planner-default-week-dialog.c:48
+msgid "Sunday"
+msgstr "रविवार"
+
+#: ../src/planner-default-week-dialog.c:288
+msgid "No working time"
+msgstr "कामाला वेळ नाही"
+
+#: ../src/planner-default-week-dialog.c:299
+#: ../src/planner-default-week-dialog.c:303
+msgid "%H:%M"
+msgstr "%H:%M"
+
+#: ../src/planner-default-week-dialog.c:553
+msgid "Edit default week"
+msgstr "मुलभूत सप्ताह संपादीत करा"
+
+#: ../src/planner-eds-plugin.c:167
+msgid "EDS"
+msgstr "EDS"
+
+#: ../src/planner-eds-plugin.c:168
+msgid "Import resources from Evolution Data Server"
+msgstr "Evolution Data Server पासून संसाधन आयात करा"
+
+#: ../src/planner-eds-plugin.c:396 ../src/planner-gantt-print.c:191
+#: ../src/planner-gantt-view.c:590 ../src/planner-group-dialog.c:822
+#: ../src/planner-property-dialog.c:485 ../src/planner-resource-view.c:1172
+#: ../src/planner-task-dialog.c:2616 ../src/planner-task-dialog.c:2690
+#: ../src/planner-task-view.c:337
+msgid "Name"
+msgstr "नाव"
+
+#: ../src/planner-eds-plugin.c:416 ../src/planner-resource-view.c:1288
+msgid "Email"
+msgstr "ईमेल"
+
+#: ../src/planner-eds-plugin.c:437
+msgid "Import"
+msgstr "आयात करा"
+
+#: ../src/planner-eds-plugin.c:447
+msgid "Photo"
+msgstr "फोटो"
+
+#: ../src/planner-eds-plugin.c:676
+msgid "Imported from Evolution Data Server"
+msgstr "Evolution Data Server पासून आयात केलेले"
+
+#: ../src/planner-eds-plugin.c:677
+msgid "Updated from Evolution Data Server"
+msgstr "Evolution Data Server पासून अद्ययावत केलेले"
+
+#: ../src/planner-eds-plugin.c:862
+msgid "Query cancelled."
+msgstr "चौकशी रद्द केली."
+
+#: ../src/planner-eds-plugin.c:923
+msgid "Evolution Data Server UID"
+msgstr "Evolution Data Server UID"
+
+#: ../src/planner-eds-plugin.c:924
+msgid "Identifier used by Evolution Data Server for resources"
+msgstr "संसाधनांसाठी Evolution Data Server द्वारे वापरलेला ओळखकर्ता"
+
+#: ../src/planner-format.c:149
+#, c-format
+msgid "%dd %dh"
+msgstr "%dd %dh"
+
+#: ../src/planner-format.c:152
+#, c-format
+msgid "%dd"
+msgstr "%dd"
+
+#: ../src/planner-format.c:155
+#, c-format
+msgid "%dh"
+msgstr "%dh"
+
+#. i18n: this string is the date nr and month name, displayed
+#. * e.g. in the date cells in the task tree. See
+#. * libmrproject/docs/DateFormat.
+#.
+#: ../src/planner-format.c:190
+msgid "%b %e"
+msgstr "%e %b"
+
+#: ../src/planner-format.c:374
+msgid "mon"
+msgstr "सोम"
+
+#. month unit variant accepted in input
+#: ../src/planner-format.c:375
+msgid "month"
+msgstr "महिना"
+
+#. month unit variant accepted in input
+#: ../src/planner-format.c:376
+msgid "months"
+msgstr "महिने"
+
+#. month unit variant accepted in input
+#: ../src/planner-format.c:377
+msgid "w"
+msgstr "w"
+
+#. week unit variant accepted in input
+#: ../src/planner-format.c:378
+msgid "week"
+msgstr "सप्ताह"
+
+#. week unit variant accepted in input
+#: ../src/planner-format.c:379
+msgid "weeks"
+msgstr "आठवडे"
+
+#. week unit variant accepted in input
+#: ../src/planner-format.c:380
+msgid "d"
+msgstr "d"
+
+#. day unit variant accepted in input
+#: ../src/planner-format.c:381
+msgid "day"
+msgstr "दिवस"
+
+#. day unit variant accepted in input
+#: ../src/planner-format.c:382
+msgid "days"
+msgstr "दिवस"
+
+#. day unit variant accepted in input
+#: ../src/planner-format.c:383
+msgid "h"
+msgstr "h"
+
+#. hour unit variant accepted in input
+#: ../src/planner-format.c:384
+msgid "hour"
+msgstr "तास"
+
+#. hour unit variant accepted in input
+#: ../src/planner-format.c:385
+msgid "hours"
+msgstr "तास"
+
+#. hour unit variant accepted in input
+#: ../src/planner-format.c:386
+msgid "min"
+msgstr "मिनिट"
+
+#. minute unit variant accepted in input
+#: ../src/planner-format.c:387
+msgid "minute"
+msgstr "मिनिट"
+
+#. minute unit variant accepted in input
+#: ../src/planner-format.c:388
+msgid "minutes"
+msgstr "मिनिटं"
+
+#. i18n: project start, the date format is described in
+#. * libmrproject/docs/DateFormat.
+#: ../src/planner-gantt-background.c:644
+msgid "%Y %b %d"
+msgstr "%Y %b %d"
+
+#: ../src/planner-gantt-background.c:646
+msgid "Project start"
+msgstr "प्रकल्प प्रारंभ"
+
+#: ../src/planner-gantt-header.c:671
+msgid "%e %b %Y"
+msgstr "%e %b %Y"
+
+#: ../src/planner-gantt-print.c:199 ../src/planner-gantt-view.c:593
+#: ../src/planner-resource-dialog.c:1850 ../src/planner-resource-view.c:751
+#: ../src/planner-resource-view.c:767 ../src/planner-resource-view.c:1737
+#: ../src/planner-task-view.c:340
+msgid "Work"
+msgstr "काम"
+
+#: ../src/planner-gantt-print.c:546 ../src/planner-gantt-row.c:776
+#: ../src/planner-html-plugin.c:125 ../src/planner-task-tree.c:1601
+#: ../src/planner-window.c:1851
+msgid "Unnamed"
+msgstr "निनावी"
+
+#: ../src/planner-gantt-row.c:2358
+#, c-format
+msgid "Change work to %s"
+msgstr "कामाला %s मध्ये बदला"
+
+#: ../src/planner-gantt-row.c:2370
+#, c-format
+msgid "Change progress to %u%% complete"
+msgstr "प्रगतिस %u%% पूर्ण केले यानुरूप बदला"
+
+#: ../src/planner-gantt-row.c:2409 ../src/planner-gantt-row.c:2412
+msgid "No name"
+msgstr "नाव नाही"
+
+#: ../src/planner-gantt-row.c:2415
+#, c-format
+msgid "Make task '%s' a predecessor of '%s'"
+msgstr "कार्य '%s' ला '%s' चा पूर्वाधिकारी बनवा"
+
+#: ../src/planner-gantt-row.c:3436 ../src/planner-task-dialog.c:455
+#: ../src/planner-task-tree.c:262 ../src/planner-task-tree.c:952
+msgid "Edit task property"
+msgstr "कार्य गुणधर्म संपादीत करा"
+
+#: ../src/planner-gantt-view.c:134 ../src/planner-task-view.c:116
+msgid "_Insert Task"
+msgstr "कार्य अंतर्भूत करा (_I)"
+
+#: ../src/planner-gantt-view.c:135 ../src/planner-task-view.c:117
+msgid "Insert a new task"
+msgstr "नवीन कार्य अंतर्भूत करा"
+
+#: ../src/planner-gantt-view.c:137 ../src/planner-task-view.c:119
+msgid "In_sert Tasks..."
+msgstr "कार्य अंतर्भूत करा (_s)..."
+
+#: ../src/planner-gantt-view.c:140 ../src/planner-task-view.c:122
+msgid "_Remove Task"
+msgstr "कार्य काढून टाका (_R)"
+
+#: ../src/planner-gantt-view.c:141 ../src/planner-task-view.c:123
+msgid "Remove the selected tasks"
+msgstr "निवडलेली कार्य काढून टाका"
+
+#: ../src/planner-gantt-view.c:143
+msgid "_Edit Task Properties..."
+msgstr "कार्य गुणधर्म संपादीत करा (_E)..."
+
+#: ../src/planner-gantt-view.c:146 ../src/planner-resource-view.c:246
+#: ../src/planner-task-view.c:128
+msgid "Select _All"
+msgstr "सर्व निवडा (_A)"
+
+#: ../src/planner-gantt-view.c:147 ../src/planner-resource-view.c:247
+#: ../src/planner-task-view.c:129
+msgid "Select all tasks"
+msgstr "सर्व कार्य निवडा"
+
+#: ../src/planner-gantt-view.c:149 ../src/planner-task-view.c:131
+msgid "_Unlink Task"
+msgstr "कार्याची जुळवणी अशक्य करा (_U)"
+
+#: ../src/planner-gantt-view.c:150 ../src/planner-task-view.c:132
+msgid "Unlink the selected tasks"
+msgstr "निवडलेल्या कार्यांची दुवा अशक्य"
+
+#: ../src/planner-gantt-view.c:152 ../src/planner-task-view.c:134
+msgid "_Link Tasks"
+msgstr "कार्य जुळवणी अशक्य करा (_L)"
+
+#: ../src/planner-gantt-view.c:153 ../src/planner-task-view.c:135
+msgid "Link the selected tasks"
+msgstr "निवडलेली कार्य जुळवा"
+
+#: ../src/planner-gantt-view.c:155 ../src/planner-task-view.c:137
+msgid "I_ndent Task"
+msgstr "कार्य इन्डेन्ट करा (_n)"
+
+#: ../src/planner-gantt-view.c:156 ../src/planner-task-view.c:138
+msgid "Indent the selected tasks"
+msgstr "निवडलेली कार्य इन्डेन्ट करा"
+
+#: ../src/planner-gantt-view.c:158 ../src/planner-task-view.c:140
+msgid "Unin_dent Task"
+msgstr "कार्य इन्डेन्ट करणे अशक्य करा (_d)"
+
+#: ../src/planner-gantt-view.c:159 ../src/planner-task-view.c:141
+msgid "Unindent the selected tasks"
+msgstr "निवडलेले कार्य इन्डेन्ट करणे अशक्य करा"
+
+#: ../src/planner-gantt-view.c:161 ../src/planner-task-view.c:143
+msgid "Move Task _Up"
+msgstr "कार्य वर हलवा (_U)"
+
+#: ../src/planner-gantt-view.c:162 ../src/planner-task-view.c:144
+msgid "Move the selected tasks upwards"
+msgstr "निवडलेली कार्य वर हलवा"
+
+#: ../src/planner-gantt-view.c:164 ../src/planner-task-view.c:146
+msgid "Move Task Do_wn"
+msgstr "कार्य खाली हलवा (_w)"
+
+#: ../src/planner-gantt-view.c:165 ../src/planner-task-view.c:147
+msgid "Move the selected tasks downwards"
+msgstr "निवडलेली कार्य खाली हलवा"
+
+#: ../src/planner-gantt-view.c:167 ../src/planner-task-view.c:149
+msgid "Reset _Constraint"
+msgstr "व्यत्यय स्वच्छ करा (_C)"
+
+#: ../src/planner-gantt-view.c:170
+msgid "Zoom To _Fit"
+msgstr "फीट बसवण्याकरीता घट्ट बसवा (_F)"
+
+#: ../src/planner-gantt-view.c:171 ../src/planner-usage-view.c:113
+msgid "Zoom to fit the entire project"
+msgstr "संपूर्ण प्रकल्प घट्ट बसवण्याकरीता दृष्य बदल करा"
+
+#: ../src/planner-gantt-view.c:173
+msgid "_Zoom In"
+msgstr "दृष्य बदल मोठे करा (_Z)"
+
+#: ../src/planner-gantt-view.c:174 ../src/planner-usage-view.c:109
+#: ../src/planner-usage-view.c:110
+msgid "Zoom in"
+msgstr "दृष्य बदल मोठे करा"
+
+#: ../src/planner-gantt-view.c:176
+msgid "Zoom _Out"
+msgstr "दृष्य बदल लहान करा (_O)"
+
+#: ../src/planner-gantt-view.c:177 ../src/planner-usage-view.c:106
+#: ../src/planner-usage-view.c:107
+msgid "Zoom out"
+msgstr "दृष्य बदल लहान करा"
+
+#: ../src/planner-gantt-view.c:179 ../src/planner-resource-view.c:252
+#: ../src/planner-task-view.c:155 ../src/planner-usage-view.c:115
+msgid "Edit _Visible Columns"
+msgstr "दृष्यास्पद स्तंभ संपादीत करा (_V)"
+
+#: ../src/planner-gantt-view.c:180 ../src/planner-resource-view.c:253
+#: ../src/planner-task-view.c:156 ../src/planner-usage-view.c:116
+msgid "Edit visible columns"
+msgstr "दृष्यास्पद स्तंभ संपादीत करा"
+
+#: ../src/planner-gantt-view.c:185 ../src/planner-task-view.c:161
+msgid "_Highlight Critical Tasks"
+msgstr "निर्णायक कार्य ठळक करा (_H)"
+
+#: ../src/planner-gantt-view.c:188
+msgid "_Show Guide Lines"
+msgstr "मार्गदर्शक रेघ दाखवा (_)"
+
+#: ../src/planner-gantt-view.c:191 ../src/planner-task-view.c:163
+msgid "_Nonstandard Days"
+msgstr "अमानक दिवस (_N)"
+
+#. i18n: Label used for the sidebar. Please try to make it short and use
+#. * a linebreak if necessary/possible.
+#.
+#: ../src/planner-gantt-view.c:345
+msgid "Gantt"
+msgstr "Gantt"
+
+#: ../src/planner-gantt-view.c:351
+msgid "_Gantt Chart"
+msgstr "Gantt Chart (_G)"
+
+#. i18n: WBS is short for work breakdown structure, and is a
+#. * project management term. You might want to leave it
+#. * untranslated unless there is a localized term for it.
+#.
+#. i18n: WBS is sort for work breakdown structure, and is a
+#. * project management term. You might want to leave it
+#. * untranslated unless there is a localized term for it.
+#.
+#: ../src/planner-gantt-view.c:589 ../src/planner-task-view.c:336
+msgid "WBS"
+msgstr "WBS"
+
+#: ../src/planner-gantt-view.c:591 ../src/planner-task-view.c:338
+msgid "Start"
+msgstr "सुरू करा"
+
+#: ../src/planner-gantt-view.c:592 ../src/planner-task-view.c:339
+msgid "Finish"
+msgstr "समाप्त करा"
+
+#: ../src/planner-gantt-view.c:595 ../src/planner-task-view.c:342
+msgid "Slack"
+msgstr "मंद"
+
+#: ../src/planner-gantt-view.c:597 ../src/planner-task-view.c:344
+msgid "Assigned to"
+msgstr "प्रती नेमलेले"
+
+#. i18n: The string "% Complete" will be used in the header
+#. * of a column containing values from 0 upto 100, indicating
+#. * what part of a task has been completed.
+#.
+#: ../src/planner-gantt-view.c:603 ../src/planner-task-view.c:350
+#, no-c-format
+msgid "% Complete"
+msgstr "% पूर्ण झाले"
+
+#: ../src/planner-gantt-view.c:957
+msgid "Edit Gantt Columns"
+msgstr "Gantt स्तंभ संपादीत करा"
+
+#: ../src/planner-group-dialog.c:304
+msgid "Insert group"
+msgstr "गट अंतर्भूत करा"
+
+#: ../src/planner-group-dialog.c:431
+msgid "Remove group"
+msgstr "गट काढून टाका"
+
+#: ../src/planner-group-dialog.c:526
+msgid "Default group"
+msgstr "मुलभूत गट"
+
+#: ../src/planner-group-dialog.c:644
+msgid "Edit group property"
+msgstr "गट गुणधर्म संपादीत करा"
+
+#: ../src/planner-group-dialog.c:828
+msgid "Manager name"
+msgstr "व्यवस्थापकाचे नांव"
+
+#: ../src/planner-group-dialog.c:834
+msgid "Manager phone"
+msgstr "व्यवस्थापकाचे फोन"
+
+#: ../src/planner-group-dialog.c:840
+msgid "Manager email"
+msgstr "व्यवस्थापकाचे ईमेल"
+
+#: ../src/planner-html-plugin.c:47
+msgid "HTML"
+msgstr "HTML"
+
+#: ../src/planner-html-plugin.c:48
+msgid "Export project to HTML"
+msgstr "HTML नुरूप प्रकल्प निर्यात करा"
+
+#: ../src/planner-html-plugin.c:82
+msgid "Could not export to HTML"
+msgstr "HTML मध्ये प्रकल्प निर्यात करणे अशक्य"
+
+#: ../src/planner-html-plugin.c:110
+msgid "Export to HTML"
+msgstr "HTML नुरूप स्वरूप बदला"
+
+#: ../src/planner-html-plugin.c:154
+msgid "Show result in browser"
+msgstr "ब्राउजर मध्ये परिणाम दाखवा"
+
+#: ../src/planner-html-plugin.c:173 ../src/planner-window.c:1560
+#: ../src/planner-xml-planner-plugin.c:124
+#, c-format
+msgid "File \"%s\" exists, do you want to overwrite it?"
+msgstr "\"%s\" फाइल अस्तित्वात आहे. आपणांस ती अधोलेखित करायची?"
+
+#: ../src/planner-main.c:56
+msgid "Create the initial window with the given geometry."
+msgstr "प्रविष्ट भूमितीनुरूप प्राथमिक चौकट तयार करा."
+
+#: ../src/planner-main.c:56
+msgid "GEOMETRY"
+msgstr "भूमिती"
+
+#: ../src/planner-main.c:70
+msgid "[FILE...]"
+msgstr "[फाइल...]"
+
+#: ../src/planner-msp-plugin.c:50
+msgid "MS Project XML..."
+msgstr "MS Project XML..."
+
+#: ../src/planner-msp-plugin.c:50
+msgid "Import an MS Project XML file"
+msgstr "MS Project XML फाइल आयात करा"
+
+#: ../src/planner-msp-plugin.c:118
+msgid "Couldn't import file."
+msgstr "फाइल आयात करणे अशक्य."
+
+#: ../src/planner-msp-plugin.c:206
+msgid "Import a File"
+msgstr "फाइल आयात करा"
+
+#: ../src/planner-msp-plugin.c:214
+msgid "XML Files"
+msgstr "XML फाइलस्"
+
+#: ../src/planner-msp-plugin.c:219 ../src/planner-window.c:852
+msgid "All Files"
+msgstr "सर्व फाइल"
+
+#: ../src/planner-phase-dialog.c:540
+msgid "Insert phase"
+msgstr "टप्पा अंतर्भूत करा"
+
+#: ../src/planner-phase-dialog.c:639
+msgid "Remove phase"
+msgstr "टप्पा काढून टाका"
+
+#: ../src/planner-plugin-loader.c:41
+#, c-format
+msgid "Could not open plugin file '%s'\n"
+msgstr "प्लगईन फाइल '%s' उघडणे अशक्य\n"
+
+#: ../src/planner-predecessor-model.c:191 ../src/planner-task-dialog.c:2217
+msgid "FS"
+msgstr "FS"
+
+#: ../src/planner-predecessor-model.c:194 ../src/planner-task-dialog.c:2218
+msgid "FF"
+msgstr "FF"
+
+#: ../src/planner-predecessor-model.c:197 ../src/planner-task-dialog.c:2219
+msgid "SS"
+msgstr "SS"
+
+#: ../src/planner-predecessor-model.c:200 ../src/planner-task-dialog.c:2220
+msgid "SF"
+msgstr "SF"
+
+#: ../src/planner-print-dialog.c:247
+msgid "Select the views to print:"
+msgstr "छपाई करीता दृष्य निवडा:"
+
+#: ../src/planner-project-properties.c:387
+msgid "Select a calendar to use for this project:"
+msgstr "या प्रकल्पासाठी वापरण्याजोगी दिनदर्शिका निवडा:"
+
+#: ../src/planner-project-properties.c:487
+msgid "Edit Project Name"
+msgstr "प्रकल्प नांव संपादीत करा"
+
+#: ../src/planner-project-properties.c:523
+msgid "Edit Organization"
+msgstr "संस्था संपादीत करा"
+
+#: ../src/planner-project-properties.c:559
+msgid "Edit Manager"
+msgstr "व्यवस्थापक संपादीत करा"
+
+#: ../src/planner-project-properties.c:631
+#: ../src/planner-project-properties.c:665
+msgid "Edit Project Start"
+msgstr "प्रकल्प प्रारंभ संपादीत करा"
+
+#: ../src/planner-project-properties.c:754
+msgid "OK"
+msgstr "ठीक आहे"
+
+#: ../src/planner-project-properties.c:842
+msgid "Edit Project Phase"
+msgstr "प्रकल्प टप्पा संपादीत करा"
+
+#: ../src/planner-project-properties.c:975
+msgid "Property"
+msgstr "गुणधर्म"
+
+#: ../src/planner-project-properties.c:986
+msgid "Value"
+msgstr "मूल्य"
+
+#: ../src/planner-project-properties.c:1390
+#: ../src/planner-property-dialog.c:333
+msgid "The name of the custom property needs to start with a letter."
+msgstr "स्वपसंत गुणधर्माचे नाव अक्षराने सुरू होणे जरूरी आहे."
+
+#: ../src/planner-project-properties.c:1461
+#: ../src/planner-property-dialog.c:403
+#, c-format
+msgid "Do you really want to remove the property '%s' from the project?"
+msgstr "आपणांस नक्की प्रकल्पातून '%s' गुणधर्म काढून टाकायचे आहे का?"
+
+#: ../src/planner-project-properties.c:1556
+msgid "Could not create properties dialog."
+msgstr "गुणधर्म संवाद बनवणे अशक्य."
+
+#: ../src/planner-project-properties.c:1590
+msgid "Date..."
+msgstr "तारीख..."
+
+#: ../src/planner-project-properties.c:1933
+msgid "Add project property"
+msgstr "प्रकल्प गुणधर्म समावेष करा"
+
+#: ../src/planner-project-properties.c:2043
+msgid "Remove project property"
+msgstr "प्रकल्प गुणधर्म काढून टाका"
+
+#: ../src/planner-project-properties.c:2136
+msgid "Edit project property value"
+msgstr "प्रकल्प गुणधर्म मूल्य संपादीत करा"
+
+#: ../src/planner-property-dialog.c:502
+msgid "Label"
+msgstr "लेबल"
+
+#: ../src/planner-property-dialog.c:514 ../src/planner-resource-view.c:1225
+#: ../src/planner-task-dialog.c:2722
+msgid "Type"
+msgstr "प्रकार"
+
+#: ../src/planner-property-dialog.c:671
+msgid "Add property"
+msgstr "गुणधर्म समावेष करा"
+
+#: ../src/planner-property-dialog.c:816
+msgid "Remove property"
+msgstr "गुणधर्म काढून टाका"
+
+#: ../src/planner-property-dialog.c:909
+msgid "Edit property label"
+msgstr "गुणधर्म लेबल संपादीत करा"
+
+#: ../src/planner-resource-cmd.c:75
+msgid "Insert resource"
+msgstr "संसाधन अंतर्भूत करा"
+
+#. Put "no group" at the top.
+#: ../src/planner-resource-dialog.c:312
+#: ../src/planner-resource-input-dialog.c:100
+#: ../src/planner-resource-view.c:1946
+msgid "(None)"
+msgstr "(काहिच नाही)"
+
+#: ../src/planner-resource-dialog.c:322
+#: ../src/planner-resource-input-dialog.c:110 ../src/planner-task-dialog.c:381
+msgid "(No name)"
+msgstr "(नाव नाही)"
+
+#: ../src/planner-resource-dialog.c:495
+msgid "Edit resource calendar"
+msgstr "संसाधन दिनदर्शिका संपादीत करा"
+
+#: ../src/planner-resource-dialog.c:576
+msgid "Edit resource note"
+msgstr "संसाधन टिप संपादीत करा"
+
+#: ../src/planner-resource-dialog.c:643
+msgid "Edit resource cost"
+msgstr "संसाधन दर संपादीत करा"
+
+#: ../src/planner-resource-dialog.c:711 ../src/planner-resource-dialog.c:752
+#: ../src/planner-resource-view.c:1414 ../src/planner-resource-view.c:1495
+msgid "Edit resource property"
+msgstr "संसाधन गुणधर्म संपादीत करा"
+
+#. i18n: time stamp format for notes in task dialog, see strftime(3) for
+#. * a detailed description.
+#: ../src/planner-resource-dialog.c:1404 ../src/planner-task-dialog.c:1808
+msgid "%a %d %b %Y, %H:%M\n"
+msgstr "%a %d %b %Y, %H:%M\n"
+
+#: ../src/planner-resource-dialog.c:1521
+msgid "None (use project default)"
+msgstr "काहिच नाही (प्रकल्प मुलभूत वापरा)"
+
+#: ../src/planner-resource-dialog.c:1648 ../src/planner-resource-dialog.c:1650
+msgid "Edit resource properties"
+msgstr "संसाधन गुणधर्म संपादीत करा"
+
+#: ../src/planner-resource-dialog.c:1851 ../src/planner-resource-view.c:754
+#: ../src/planner-resource-view.c:768 ../src/planner-resource-view.c:1738
+msgid "Material"
+msgstr "सामग्री"
+
+#: ../src/planner-resource-view.c:231
+msgid "_Insert Resource"
+msgstr "संसाधन अंतर्भूत करा (_I)"
+
+#: ../src/planner-resource-view.c:232
+msgid "Insert a new resource"
+msgstr "नवीन संसाधन अंतर्भूत करा"
+
+#: ../src/planner-resource-view.c:234
+msgid "In_sert Resources..."
+msgstr "संसाधने अंतर्भूत करा (_s)..."
+
+#: ../src/planner-resource-view.c:237
+msgid "_Remove Resource"
+msgstr "संसाधन काढून टाका (_R)"
+
+#: ../src/planner-resource-view.c:238
+msgid "Remove the selected resource"
+msgstr "निवडलेले संसाधन अंतर्भूत करा"
+
+#: ../src/planner-resource-view.c:240
+msgid "_Edit Resource Properties..."
+msgstr "संसाधन गुणधर्म संपादीत करा (_E)..."
+
+#: ../src/planner-resource-view.c:243
+msgid "Edit _Groups"
+msgstr "गट संपादीत करा (_G)"
+
+#: ../src/planner-resource-view.c:244
+msgid "Edit resource groups"
+msgstr "संसाधन गट संपादीत करा"
+
+#: ../src/planner-resource-view.c:249
+msgid "Edit _Custom Properties..."
+msgstr "स्वपसंत गुणधर्म संपादीत करा (_C)..."
+
+#: ../src/planner-resource-view.c:267
+msgid "/_Insert resource"
+msgstr "/संसाधन अंतर्भूत करा (_I)"
+
+#: ../src/planner-resource-view.c:270
+msgid "/_Remove resource"
+msgstr "/संसाधन काढून टाका (_R)"
+
+#: ../src/planner-resource-view.c:273 ../src/planner-usage-tree.c:102
+msgid "/_Edit resource..."
+msgstr "/संसाधन संपादीत करा (_E)..."
+
+#: ../src/planner-resource-view.c:424
+msgid "_Resources"
+msgstr "संसाधन (_R)"
+
+#: ../src/planner-resource-view.c:944
+msgid "Remove resource"
+msgstr "संसाधन काढून टाका"
+
+#: ../src/planner-resource-view.c:1021
+msgid "Edit Resource Columns"
+msgstr "संसाधन स्तंभ संपादीत करा"
+
+#: ../src/planner-resource-view.c:1056
+msgid "Edit custom resource properties"
+msgstr "स्वपसंत संसाधन गुणधर्म संपादीत करा"
+
+#: ../src/planner-resource-view.c:1198
+msgid "Short name"
+msgstr "टोपण नांव"
+
+#: ../src/planner-resource-view.c:1254
+msgid "Group"
+msgstr "गट"
+
+#. i18n: Short "Week", preferably 2 letters.
+#: ../src/planner-scale-utils.c:129
+#, c-format
+msgid "Wk %d"
+msgstr "Wk %d"
+
+#: ../src/planner-scale-utils.c:133
+#, c-format
+msgid "Week %d"
+msgstr "सप्ताह %d"
+
+#: ../src/planner-scale-utils.c:139
+#, c-format
+msgid "Week %d, %d"
+msgstr "सप्ताह %d, %d"
+
+#. i18n: Short "Quarter", preferably 1 letter.
+#: ../src/planner-scale-utils.c:170
+#, c-format
+msgid "Q%d"
+msgstr "Q%d"
+
+#. i18n: Short "Quarter", preferably 2-3 letters.
+#: ../src/planner-scale-utils.c:174
+#, c-format
+msgid "Qtr %d"
+msgstr "Qtr %d"
+
+#. i18n: Year, short "Quarter", preferably 2-3 letters.
+#: ../src/planner-scale-utils.c:178
+#, c-format
+msgid "%d, Qtr %d"
+msgstr "%d, Qtr %d"
+
+#. i18n: Short "Half year", preferably 1 letter.
+#: ../src/planner-scale-utils.c:191
+#, c-format
+msgid "H%d"
+msgstr "H%d"
+
+#. i18n: Year, short "Half year", preferably 1 letter.
+#: ../src/planner-scale-utils.c:196
+#, c-format
+msgid "%04d, H%d"
+msgstr "%04d, H%d"
+
+#: ../src/planner-sql-plugin.c:95
+msgid "Open from Database..."
+msgstr "कोशातून उघडा..."
+
+#: ../src/planner-sql-plugin.c:96
+msgid "Open a project from a database"
+msgstr "कोशातून प्रकल्प उघडा"
+
+#: ../src/planner-sql-plugin.c:98 ../src/planner-sql-plugin.c:1146
+msgid "Save to Database"
+msgstr "माहितीकोशात साठवा"
+
+#: ../src/planner-sql-plugin.c:99
+msgid "Save the current project to a database"
+msgstr "वर्तमान प्रकल्प माहितीकोशात साठवा"
+
+#: ../src/planner-sql-plugin.c:525
+#, c-format
+msgid ""
+"Database %s needs to be upgraded from version %s to version %s.\n"
+"Please backup database before the upgrade."
+msgstr ""
+"माहितीकोश %s ला आवृत्ति %s मधून आवृत्ति %s मध्ये श्रेणिसुधार करण्याची आवश्यकता आह.\n"
+"श्रेणिसुधार करण्याआधी कृपया माहितीकोशाचा बॅकअप घ्या."
+
+#: ../src/planner-sql-plugin.c:532
+msgid "Upgrade"
+msgstr "सुधारा"
+
+#: ../src/planner-sql-plugin.c:546
+#, c-format
+msgid ""
+"Could not upgrade database %s.\n"
+" Upgrade file used: %s.\n"
+"\n"
+"Database error: \n"
+"%s"
+msgstr ""
+"माहितीकोश %s मध्ये श्रेणिसुधार करणे अशक्य.\n"
+"वापरण्यात आलेली श्रेणिसुधार फाइल: %s.\n"
+"\n"
+"माहितीकोश त्रुटी: \n"
+"%s"
+
+#: ../src/planner-sql-plugin.c:586
+#, c-format
+msgid "Can't create tables in database %s"
+msgstr "माहितीकोश %s मध्ये तालिका बनवणे अशक्यत"
+
+#: ../src/planner-sql-plugin.c:648
+#, c-format
+msgid "Database %s is not setup for Planner. Do you want to do that?"
+msgstr "माहितीकोश %s Plannerसाठीचा सेटअप नाही. आपणांस तसे करायचे आहे का?"
+
+#: ../src/planner-sql-plugin.c:691
+#, c-format
+msgid "Connection to database '%s@%s' failed."
+msgstr "माहितीकोश '%s@%s'शी जोडणी अपयशी."
+
+#: ../src/planner-sql-plugin.c:710
+#, c-format
+msgid "Test to tables in database '%s' failed."
+msgstr "माहितीकोश '%s' मधील तालिकांचे परिक्षण अपयशी."
+
+#: ../src/planner-sql-plugin.c:812
+msgid "ID"
+msgstr "ID"
+
+#: ../src/planner-sql-plugin.c:820
+msgid "Project"
+msgstr "प्रकल्प"
+
+#: ../src/planner-sql-plugin.c:828
+msgid "Phase"
+msgstr "टप्पा"
+
+#: ../src/planner-sql-plugin.c:836
+msgid "Revision"
+msgstr "आवृत्ती"
+
+#: ../src/planner-sql-plugin.c:1034
+msgid "Open from Database"
+msgstr "कोशातून उघडा"
+
+#: ../src/planner-task-cmd.c:97
+msgid "Link task"
+msgstr "कार्य जुळवा"
+
+#: ../src/planner-task-cmd.c:173
+msgid "Unlink task"
+msgstr "कार्याची दुवा अशक्य करा"
+
+#: ../src/planner-task-cmd.c:268
+msgid "Insert task"
+msgstr "कार्य अंतर्भूत करा"
+
+#: ../src/planner-task-dialog.c:529
+msgid "Edit task type"
+msgstr "कार्य प्रकार संपादीत करा"
+
+#: ../src/planner-task-dialog.c:596
+msgid "Toggle fixed duration"
+msgstr "निश्चित कालावधि टॉगल करा"
+
+#: ../src/planner-task-dialog.c:663
+msgid "Edit task scheduling"
+msgstr "कार्य वेळपत्रक संपादीत करा"
+
+#: ../src/planner-task-dialog.c:743
+msgid "Assign resource to task"
+msgstr "कार्याला संसाधन नेमा"
+
+#: ../src/planner-task-dialog.c:803
+msgid "Unassign resource from task"
+msgstr "कार्यातून संसाधनाची नेमणूक अशक्य करा"
+
+#: ../src/planner-task-dialog.c:862
+msgid "Change resource units in task"
+msgstr "कार्यातील संसाधन एकक बदला"
+
+#: ../src/planner-task-dialog.c:950
+msgid "Edit task predecessor"
+msgstr "कार्य पूर्वाधिकारी संपादीत करा"
+
+#: ../src/planner-task-dialog.c:1021
+msgid "Edit lag predecessor"
+msgstr "मागे राहिलेला पूर्वाधिकारी संपादीत करा"
+
+#: ../src/planner-task-dialog.c:1087
+msgid "Edit task note"
+msgstr "कार्य टिप संपादीत करा"
+
+#: ../src/planner-task-dialog.c:1495
+#, c-format
+msgid "No earlier than %s"
+msgstr "%s पेक्षा लवकर नाही"
+
+#: ../src/planner-task-dialog.c:1499
+#, c-format
+msgid "On fixed date %s"
+msgstr "निश्चित तारीख %s ला"
+
+#: ../src/planner-task-dialog.c:1917
+msgid "Finish to start (FS)"
+msgstr "Finish to start (FS)"
+
+#: ../src/planner-task-dialog.c:1918
+msgid "Finish to finish (FF)"
+msgstr "Finish to finish (FF)"
+
+#: ../src/planner-task-dialog.c:1919
+msgid "Start to start (SS)"
+msgstr "Start to start (SS)"
+
+#: ../src/planner-task-dialog.c:1920
+msgid "Start to finish (SF)"
+msgstr "Start to finish (SF)"
+
+#: ../src/planner-task-dialog.c:1975
+msgid "Can't add new predecessor. No task selected!"
+msgstr "नवीन पूर्वाधिकारी समाविष्ट करणे अशक्य: कोणतेही कार्य निवडलेले नाही!"
+
+#: ../src/planner-task-dialog.c:2463
+msgid "Change..."
+msgstr "बदला..."
+
+#: ../src/planner-task-dialog.c:2637
+msgid "Assigned"
+msgstr "सोपविलेले"
+
+#: ../src/planner-task-dialog.c:2654
+msgid "Units"
+msgstr "एकक"
+
+#: ../src/planner-task-dialog.c:2744
+msgid "Lag"
+msgstr "मागे राहिलेले"
+
+#: ../src/planner-task-dialog.c:2887 ../src/planner-task-dialog.c:2889
+msgid "Edit task properties"
+msgstr "कार्य गुणधर्म संपादीत करा"
+
+#: ../src/planner-task-popup.c:54
+msgid "/_Insert task"
+msgstr "/कार्य अंतर्भूत करा (_I)"
+
+#: ../src/planner-task-popup.c:57
+msgid "/Insert _subtask"
+msgstr "/उपकार्य अंतर्भूत करा (_s)"
+
+#: ../src/planner-task-popup.c:60
+msgid "/_Remove task"
+msgstr "/कार्य काढून टाका (_R)"
+
+#: ../src/planner-task-popup.c:65
+msgid "/_Unlink task"
+msgstr "/कार्य जुळवळी अशक्य करा (_U)"
+
+#: ../src/planner-task-popup.c:70
+msgid "/Assign _resources..."
+msgstr "/संसाधन नेमा (_r)..."
+
+#: ../src/planner-task-popup.c:73 ../src/planner-usage-tree.c:105
+msgid "/_Edit task..."
+msgstr "/कार्य संपादीत करा (_E)..."
+
+#: ../src/planner-task-tree.c:572
+msgid "Remove task"
+msgstr "कार्य काढून टाका"
+
+#: ../src/planner-task-tree.c:649
+msgid "Apply constraint to task"
+msgstr "कार्यात व्यत्यय लागू करा"
+
+#: ../src/planner-task-tree.c:711
+msgid "Reset task constraint"
+msgstr "कार्य व्यत्यय स्वच्छ करा"
+
+#: ../src/planner-task-tree.c:1497 ../src/planner-task-tree.c:1654
+msgid "N/A"
+msgstr "N/A"
+
+#: ../src/planner-task-tree.c:2824
+msgid "Remove tasks"
+msgstr "कार्य काढून टाका"
+
+#: ../src/planner-task-tree.c:2886
+#, c-format
+msgid ""
+"You are about to open an edit dialog each for %i tasks. Are you sure that "
+"you want to do that?"
+msgstr "आपण आता %i कार्यांसाठी प्रत्येकी संपादन संवाद उघडण्याच्या तैयारीत आहात. आपणांस नक्की तसे करायचे?"
+
+#: ../src/planner-task-tree.c:2988
+msgid "Unlink tasks"
+msgstr "कार्यांची दुवा अशक्य करा"
+
+#: ../src/planner-task-tree.c:3040
+msgid "Link tasks"
+msgstr "कार्य जुळवा"
+
+#: ../src/planner-task-tree.c:3131
+msgid "Indent tasks"
+msgstr "कार्य इन्डेन्ट करा"
+
+#: ../src/planner-task-tree.c:3142
+msgid "Indent task"
+msgstr "कार्य इन्डेन्ट करा"
+
+#: ../src/planner-task-tree.c:3236
+msgid "Unindent tasks"
+msgstr "कार्यांचे इन्डेन्ट अशक्य करा"
+
+#: ../src/planner-task-tree.c:3254
+msgid "Unindent task"
+msgstr "कार्याचे इन्डेन्ट अशक्य करा"
+
+#: ../src/planner-task-tree.c:3332
+msgid "Move tasks up"
+msgstr "कार्य वर हलवा"
+
+#: ../src/planner-task-tree.c:3370
+msgid "Move task up"
+msgstr "कार्य वर हलवा"
+
+#: ../src/planner-task-tree.c:3458
+msgid "Move tasks down"
+msgstr "कार्य खाली हलवा"
+
+#. Moving task from 'position' to 'position + 1'
+#: ../src/planner-task-tree.c:3504
+msgid "Move task down"
+msgstr "कार्य खाली हलवा"
+
+#: ../src/planner-task-tree.c:3560
+msgid "Reset task constraints"
+msgstr "कार्य व्यत्यय स्वच्छ करा"
+
+#: ../src/planner-task-tree.c:3592
+msgid "Reset all task constraints"
+msgstr "सर्व कार्य व्यत्यय स्वच्छ करा"
+
+#: ../src/planner-task-view.c:125
+msgid "_Edit Task"
+msgstr "कार्य संपादीत करा (_E)"
+
+#: ../src/planner-task-view.c:152
+msgid "_Edit Custom Properties..."
+msgstr "स्वपसंत गुणधर्म संपादीत करा (_E)..."
+
+#: ../src/planner-task-view.c:271
+msgid "Tasks"
+msgstr "कार्य"
+
+#: ../src/planner-task-view.c:277
+msgid "_Tasks"
+msgstr "कार्य (_T)"
+
+#: ../src/planner-task-view.c:579
+msgid "Edit custom task properties"
+msgstr "स्वपसंत कार्य गुणधर्म संपादीत करा"
+
+#: ../src/planner-task-view.c:633
+msgid "Edit Task Columns"
+msgstr "कार्य स्तंभ संपादीत करा"
+
+#: ../src/planner-usage-tree.c:108
+msgid "/_Expand all resources"
+msgstr "/सर्व संसाधने वाढवा (_E)"
+
+#: ../src/planner-usage-tree.c:111
+msgid "/_Collapse all resources"
+msgstr "/सर्व संसाधने नष्ट करा (_C)"
+
+#: ../src/planner-usage-tree.c:379
+msgid ""
+"\n"
+"Name"
+msgstr ""
+"\n"
+"नांव"
+
+#: ../src/planner-usage-tree.c:381
+msgid ""
+"\n"
+"Task"
+msgstr ""
+"\n"
+"कार्य"
+
+#: ../src/planner-usage-view.c:112
+msgid "Zoom to fit"
+msgstr "घट्ट बसवण्याकरीता दृष्य बदल करा"
+
+#. i18n: Label used for the sidebar. Please try to make it short and use
+#. * a linebreak if necessary/possible.
+#.
+#: ../src/planner-usage-view.c:229
+msgid ""
+"Resource\n"
+"Usage"
+msgstr ""
+"संसाधन\n"
+"वापर"
+
+#: ../src/planner-usage-view.c:235
+msgid "Resource _Usage"
+msgstr "संसाधन वापर (_U)"
+
+#: ../src/planner-usage-view.c:346
+msgid "Edit Resource Usage Columns"
+msgstr "संसाधन वापरणी स्तंभ संपादीत करा"
+
+#: ../src/planner-window.c:226
+msgid "_File"
+msgstr "फाइल (_F)"
+
+#: ../src/planner-window.c:230
+msgid "_New Project"
+msgstr "नवीन प्रकल्प (_N)"
+
+#: ../src/planner-window.c:230
+msgid "Create a new project"
+msgstr "नवीन प्रकल्प बनवा"
+
+#: ../src/planner-window.c:234
+msgid "_Open..."
+msgstr "उघडा (_O)..."
+
+#: ../src/planner-window.c:234
+msgid "Open a project"
+msgstr "प्रकल्प उघडा"
+
+#: ../src/planner-window.c:237
+msgid "_Import"
+msgstr "आयात करा (_I)"
+
+#: ../src/planner-window.c:241 ../src/planner-window.c:1430
+msgid "_Save"
+msgstr "साठवा (_S)"
+
+#: ../src/planner-window.c:241
+msgid "Save the current project"
+msgstr "वर्तमान प्रकल्प साठवा"
+
+#: ../src/planner-window.c:244
+msgid "_Export"
+msgstr "स्वरूप बदला (_E)"
+
+#: ../src/planner-window.c:247
+msgid "Save _As..."
+msgstr "यानुरूप साठवा (_A)..."
+
+#: ../src/planner-window.c:247
+msgid "Save the current project with a different name"
+msgstr "वर्तमान प्रकल्पास अन्य नावाने साठवा"
+
+#: ../src/planner-window.c:250
+msgid "Page Set_up..."
+msgstr "पानाची मांडणी (_u)..."
+
+#: ../src/planner-window.c:250
+msgid "Setup the page settings for your current printer"
+msgstr "आपल्या वर्तमान छपाइयंत्रासाठी पानाची मांडणी करा"
+
+#: ../src/planner-window.c:253
+msgid "_Print..."
+msgstr "छपाई करा (_P)..."
+
+#: ../src/planner-window.c:253
+msgid "Print the current project"
+msgstr "वर्तमान प्रकल्प छपाई करा"
+
+#: ../src/planner-window.c:256
+msgid "Print Pre_view"
+msgstr "मुद्रण पूर्वदृष्य (_v)"
+
+#: ../src/planner-window.c:256
+msgid "Print preview of the current project"
+msgstr "वर्तमान प्रकल्पाचे छपाई पूर्वदृष्य"
+
+#: ../src/planner-window.c:259
+msgid "_Close"
+msgstr "बंद करा (_C)"
+
+#: ../src/planner-window.c:259
+msgid "Close the current file"
+msgstr "वर्तमान फाइल बंद करा"
+
+#: ../src/planner-window.c:262
+msgid "_Quit"
+msgstr "बाहेर पडा (_Q)"
+
+#: ../src/planner-window.c:262
+msgid "Exit the program"
+msgstr "कार्यक्रमातून बाहेर पडा"
+
+#: ../src/planner-window.c:266
+msgid "_Edit"
+msgstr "संपादीत करा (_E)"
+
+#: ../src/planner-window.c:269
+msgid "_Undo"
+msgstr "पूर्ववत करा (_U)"
+
+#: ../src/planner-window.c:269
+msgid "Undo the last action"
+msgstr "शेवटची कृती पूर्ववत करा"
+
+#: ../src/planner-window.c:272
+msgid "_Redo"
+msgstr "पुनः करा (_R)"
+
+#: ../src/planner-window.c:272
+msgid "Redo the undone action"
+msgstr "पूर्ववत कृती पुन्हा करा"
+
+#: ../src/planner-window.c:276
+msgid "_View"
+msgstr "अवलोकन (_V)"
+
+#: ../src/planner-window.c:280
+msgid "_Actions"
+msgstr "कृती (_A)"
+
+#: ../src/planner-window.c:284
+msgid "_Project"
+msgstr "प्रकल्प (_P)"
+
+#: ../src/planner-window.c:287
+msgid "_Manage Calendars"
+msgstr "दिनदर्शिका व्यवस्थापीत करा (_M)"
+
+#: ../src/planner-window.c:290
+msgid "Edit Day _Types"
+msgstr "दिवस प्रकार संपादीत करा (_T)"
+
+#: ../src/planner-window.c:293
+msgid "Edit Project _Phases"
+msgstr "प्रकल्प टप्पे संपादीत करा (_P)"
+
+#: ../src/planner-window.c:296
+msgid "_Edit Project Properties"
+msgstr "प्रकल्प गुणधर्म संपादीत करा (_E)"
+
+#: ../src/planner-window.c:296
+msgid "Edit the project properties"
+msgstr "प्रकल्प गुणधर्म संपादीत करा"
+
+#: ../src/planner-window.c:304
+msgid "_Help"
+msgstr "मदत (_H)"
+
+#: ../src/planner-window.c:307
+msgid "_User Guide"
+msgstr "वापरकर्ता पुस्तिका (_U)"
+
+#: ../src/planner-window.c:307
+msgid "Show the Planner User Guide"
+msgstr "Planner वापरकर्ता पुस्तिका दाखवा"
+
+#: ../src/planner-window.c:310
+msgid "_About"
+msgstr "विषयी (_A)"
+
+#: ../src/planner-window.c:310
+msgid "About this application"
+msgstr "या ऍप्लिकेशन विषयी"
+
+#. Note: these strings are leaked.
+#: ../src/planner-window.c:669
+#, c-format
+msgid "Switch to the view \"%s\""
+msgstr "\"%s\" दृष्य वापरा"
+
+#: ../src/planner-window.c:836
+msgid "Open a File"
+msgstr "फाइल उघडा"
+
+#: ../src/planner-window.c:846
+msgid "Planner Files"
+msgstr "Planner फाइल"
+
+#. I18n: Translators, list your names here, newline separated if there
+#. * are more than one, to appear in the about box.
+#.
+#: ../src/planner-window.c:1187 ../src/planner-window.c:1209
+msgid "translator-credits"
+msgstr "संदिप शेडमाके <sandeep.shedmake@gmail.com>, 2009; http://downloads.bosslinux.in/Translated_Po_files/GNOME-Translations/po%20files/Marathi%20mr/Extra%20files/Planner.po, 2008."
+
+#: ../src/planner-window.c:1204
+msgid "A Project Management application for the GNOME desktop"
+msgstr "GNOME डेस्कटॉपसाठी प्रकल्प व्यवस्थापन ऍप्लिकेशन"
+
+#: ../src/planner-window.c:1211
+msgid "The Planner Homepage"
+msgstr "Planner मुख्यपान"
+
+#: ../src/planner-window.c:1363
+msgid "If you don't save, changes made the last minute will be discarded."
+msgstr "आपण न साठवल्यास, शेवटच्या मिनिटाला केलेले बदल काढून टाकले जातील."
+
+#: ../src/planner-window.c:1369
+#, c-format
+msgid "If you don't save, changes made the last %d minute will be discarded."
+msgid_plural "If you don't save, changes made the last %d minutes will be discarded."
+msgstr[0] "आपण न साठवल्यास, शेवटच्या %d मिनिटाला केलेले बदल काढून टाकले जातील."
+msgstr[1] "आपण न साठवल्यास, शेवटच्या %d मिनिटाला केलेले बदल काढून टाकले जातील."
+
+#: ../src/planner-window.c:1377
+msgid "If you don't save, changes made the last hour will be discarded."
+msgstr "आपण न साठवल्यास, शेवटच्या तासाला केलेले बदल काढून टाकले जातील."
+
+#: ../src/planner-window.c:1382
+#, c-format
+msgid "If you don't save, changes made the last %d hour will be discarded."
+msgid_plural "If you don't save, changes made the last %d hours will be discarded."
+msgstr[0] "आपण न साठवल्यास, शेवटच्या %d तासाला केलेले बदल काढून टाकले जातील."
+msgstr[1] "आपण न साठवल्यास, शेवटच्या %d तासाला केलेले बदल काढून टाकले जातील."
+
+#: ../src/planner-window.c:1392
+#, c-format
+msgid "Save changes to document '%s' before closing?"
+msgstr "बंद करण्यापूर्वी केलेले बदल दस्तऐवज '%s' मध्ये साठवायचे?"
+
+#: ../src/planner-window.c:1417
+msgid "C_lose without saving"
+msgstr "न साठवता बंद करा (_l)"
+
+#: ../src/planner-window.c:1423
+msgid "_Cancel"
+msgstr "रद्द करा (_C)"
+
+#: ../src/planner-window.c:1522
+msgid "Save a File"
+msgstr "फाइल साठवा"
+
+#: ../src/planner-window.c:1808
+msgid ""
+"You have opened a file that was saved with an old version of Planner.\n"
+"\n"
+"When loading old files, all tasks will use the constraint 'Must Start On', "
+"since the old version did not fully support automatic rescheduling. To take "
+"advantage of this new feature, you should add predecessor relations between "
+"tasks that are dependant on each other.\n"
+"\n"
+"You can add a predecessor relation by clicking on the predecessor and "
+"dragging to the successor.\n"
+"\n"
+"After doing this, you can remove all constraints by selecting the menu item "
+"'Remove all constraints' in the 'Edit' menu."
+msgstr ""
+"आपण ती फाइल उघडली आहे जी Planner च्या जुन्या आवृत्ति द्वारे साठवली होती.\n"
+"\n"
+"जुन्या फाइल लोड करतांना, सर्व कार्य 'Must Start On' व्यत्ययचा वापर करतील, कारण जुनी आवृत्ति स्वयं नियोजनास संपूर्णपणे समर्थित नाही. या नव्या सुविधेचा लाभ घेण्यासाठी, आपणांस एकमेकांवर अवलंबित असलेल्या कार्यांमध्ये पूर्वाधिकारी संबंध समावेष करावे लागतील. \n"
+"\n"
+"आपण पूर्वाधिकारी वर क्लिक करून व त्यास वारसापर्यंत खेचून पूर्वाधिकारी संबंध समाविष्ट करू शकता.\n"
+"\n"
+"असे केल्यानंतर, आपण 'Edit' मेन्यू मधील 'Remove all constraints' मेन्यू आयटमची निवड करून सर्व व्यत्यय काढून टाकू शकता."
+
+#. Hack.
+#: ../src/planner-window.c:1843
+msgid "Unnamed database project"
+msgstr "निनावी कोश प्रकल्प"
+
+#: ../src/planner-window.c:1957
+#, c-format
+msgid "Open '%s'"
+msgstr "'%s' उघडा"
+
+#: ../src/planner-working-time-dialog.c:145
+msgid "Edit working time"
+msgstr "कामाची वेळ संपादीत करा"
+
+#: ../src/planner-xml-planner-plugin.c:54
+msgid "Planner 0.11 Format"
+msgstr "Planner 0.11 स्वरूप"
+
+#: ../src/planner-xml-planner-plugin.c:55
+msgid "Export project to a file suitable for Planner 0.11"
+msgstr "Planner 0.11 साठी अनुकूळ फाइल करीता प्रकल्पाचे स्वरूप बदला"
+
+#: ../src/planner-xml-planner-plugin.c:90
+msgid "Export"
+msgstr "स्वरूप बदला"
+
+#: ../eds-backend/e-cal-backend-planner.c:289
+msgid "EDS UID"
+msgstr "EDS UID"
+
+#: ../eds-backend/e-cal-backend-planner.c:290
+msgid "Identifier used by Evolution Data Server for tasks"
+msgstr "Evolution Data Server द्वारे कार्यांसाठी वापरण्यात आलेला ओळखकर्ता"
+
+#: ../eds-backend/e-cal-backend-planner.c:299
+msgid "EDS Categories"
+msgstr "EDS प्रवर्ग"
+
+#: ../eds-backend/e-cal-backend-planner.c:300
+msgid "Categories for a task used by Evolution Data Server"
+msgstr "Evolution Data Server द्वारे वापरण्यात आलेल्या कार्यासाठीचे प्रवर्ग"
+
+#: ../eds-backend/e-cal-backend-planner.c:309
+msgid "EDS Classification"
+msgstr "EDS वर्गीकरण"
+
+#: ../eds-backend/e-cal-backend-planner.c:310
+msgid "Task access classification used by Evolution Data Server"
+msgstr "Evolution Data Server द्वारे वापरण्यात आलेले कार्य प्रवेश वर्गीकरण"
+
+#: ../eds-backend/e-cal-backend-planner.c:319
+msgid "EDS URL"
+msgstr "EDS URL"
+
+#: ../eds-backend/e-cal-backend-planner.c:320
+msgid "URL for a Task used by Evolution Data Server"
+msgstr "Evolution Data Server द्वारे कार्यासाठी वापरण्यात आलेले URL"
+
+#: ../eds-backend/e-cal-backend-planner.c:829
+msgid "Invalid server URI"
+msgstr "अवैध सर्वर URI"
+
+#. book_target = (EABConfigTargetSource *) data->target;
+#. source = book_target->source;
+#: ../eds-backend/planner-source/planner-source.c:125
+msgid "Select planner file"
+msgstr "प्लॅनर फाइल निवडा"
+
+#: ../eds-backend/planner-source/planner-source.c:157
+#, c-format
+msgid ""
+"The filename extension of this file isn't the planner usual file extension (%"
+"s) Do you want to continue?"
+msgstr "या फाइलेचे फाइलनाव वाढ प्लॅनरचे नहेमीचे फाइल वाढ (%s) नाही. आपणांस चालू ठेवायचे?"
+
