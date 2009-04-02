@@ -134,6 +134,7 @@ planner_format_duration_with_day_length (gint duration,
 {
 	gint days;
 	gint hours;
+	gint minutes;
 
 	day_length = day_length;
 
@@ -144,15 +145,27 @@ planner_format_duration_with_day_length (gint duration,
 	days = duration / day_length;
 	duration -= days * day_length;
 	hours = duration / (60*60);
+  duration -= hours * (60*60);
+  minutes = duration / 60;
 
-	if (days > 0 && hours > 0) {
-		return g_strdup_printf (_("%dd %dh"), days, hours);
-	}
-	else if (days > 0) {
-		return g_strdup_printf (_("%dd"), days);
+	if (days > 0) {
+    if (hours > 0) {
+      return g_strdup_printf (_("%dd %dh"), days, hours);
+    }
+    else {
+      return g_strdup_printf (_("%dd"), days);
+    }
 	}
 	else if (hours > 0) {
-		return g_strdup_printf (_("%dh"), hours);
+    if (minutes > 0) {
+      return g_strdup_printf (_("%dh %dmin"), hours, minutes);
+    }
+    else {
+      return g_strdup_printf (_("%dh"), hours);
+    }
+	}
+	else if (minutes > 0) {
+		return g_strdup_printf (_("%dmin"), minutes);
 	} else {
 		return g_strdup ("");
 	}
