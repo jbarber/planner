@@ -1,4 +1,4 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nill; c-basic-offset: 8 -*- */
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
  * Copyright (C) 2004-2005 Imendio AB
  * Copyright (C) 2002-2003 CodeFactory AB
@@ -1016,9 +1016,11 @@ old_xml_read_project (MrpParser *parser)
 				     GINT_TO_POINTER (MRP_DAY_USE_BASE),
 				     mrp_day_ref (mrp_day_get_use_base ()));
 		
-		/* Read day-types */
-		for (day = child->children; day; day = day->next) {
-			old_xml_read_day_type (parser, day);
+		if (child != NULL) {
+		        /* Read day-types */
+        		for (day = child->children; day; day = day->next) {
+        			old_xml_read_day_type (parser, day);
+        		}
 		}
 		
 		for (child = calendars->children; child; child = child->next) {

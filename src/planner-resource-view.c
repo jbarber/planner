@@ -1,4 +1,4 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nill; c-basic-offset: 8 -*- */
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
  * Copyright (C) 2003-2005 Imendio AB
  * Copyright (C) 2002      CodeFactory AB
@@ -2362,6 +2362,7 @@ resource_view_property_data_func (GtkTreeViewColumn *tree_column,
 				
 	default:
 		g_warning ("Type not implemented.");
+		svalue = g_strdup ("");
 		break;
 	}
 

@@ -1,3 +1,16 @@
+2009-04-07  Maurice van der Pot  <griffon26@kfk4ever.com>
+
+	* README: Fixed typo.
+
+	* libplanner/mrp-old-xml.c (old_xml_read_project):
+	Fixed possible NULL pointer dereference (bug #334116).
+
+	* src/planner-project-properties.c (mpp_property_value_data_func),
+	(mpp_project_property_get_value_string):
+	* src/planner-resource-view.c (resource_view_property_data_func):
+	* src/planner-task-tree.c (task_tree_property_data_func):
+	Fixed use of uninitialized variables (bug #334113).
+
 2009-04-01  Kurt Maute	<kurt@maute.us>
 	* src/planner-format.c:
 	Add minutes to duration format

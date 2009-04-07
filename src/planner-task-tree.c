@@ -2037,6 +2037,7 @@ task_tree_property_data_func (GtkTreeViewColumn *tree_column,
 				
 	default:
 		g_warning ("Type not implemented.");
+		svalue = g_strdup ("");
 		break;
 	}
 

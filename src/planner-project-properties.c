@@ -1086,6 +1086,7 @@ mpp_property_value_data_func (GtkTreeViewColumn *tree_column,
 				
 	default:
 		g_warning ("Type not implemented.");
+		svalue = g_strdup ("");
 		break;
 	}
 
@@ -1772,6 +1773,7 @@ mpp_project_property_get_value_string (MrpProject  *project,
 				
 	default:
 		g_warning ("Property type not implemented.");
+		svalue = g_strdup ("");
 		break;
 	}
 	return ((const char *) svalue);
