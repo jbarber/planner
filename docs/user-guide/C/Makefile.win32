@@ -1,0 +1,71 @@
+#
+# Makefile.win32
+#
+
+#
+# PATHS
+#
+
+TOPDIR=../../..
+
+# Compiler Options
+
+ifeq ($(DESTDIR),)
+DESTDIR=$(HOME)
+endif
+
+ifeq ($(PREFIX),)
+export PREFIX=/dev
+endif
+
+##
+## RULES
+##
+
+
+##
+## TARGET DEFINITIONS
+##
+
+.PHONY: all clean
+
+all: \
+	$(TOPDIR)/config.h \
+	planner.chm
+
+$(TOPDIR)/config.h: $(TOPDIR)/config.h.win32
+	cp $(TOPDIR)/config.h.win32 $(TOPDIR)/config.h
+
+##
+## BUILD CHM
+##
+
+planner.chm: planner.hhp
+	if hhc planner.hhp; then false; else true; fi
+
+planner.hhp: planner.xml
+	SGML_CATALOG_FILES=$(PREFIX)/src/docbkx412/docbook.cat \
+		xsltproc --noout --catalogs \
+			--stringparam htmlhelp.chm planner.chm \
+			--stringparam htmlhelp.hhp planner.hhp \
+			--nonet $(PREFIX)/src/docbook-xsl-1.74.3/htmlhelp/htmlhelp.xsl planner.xml
+
+
+##
+## CLEAN RULES
+##
+
+clean:
+	rm -f *.chm
+	rm -f *.html
+	rm -f *.hhp
+	rm -f *.hhk
+	rm -f *.hhc
+
+install: all
+	-mkdir -p $(DESTDIR)/planner
+	cp planner.chm $(DESTDIR)/planner
+
+uninstall:
+	rm -f $(DESTDIR)/planner/planner.chm
+

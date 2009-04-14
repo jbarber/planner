@@ -2,7 +2,7 @@
 # Makefile.win32
 #
 
-SUBDIRS=libplanner src po
+SUBDIRS=docs libplanner src po
 INSTALLERTMP = installer/tmp
 
 VERSION := `sed <configure.in -n 's/AM_INIT_AUTOMAKE[^,]*, *\([^)]*\))/\1/p'`
@@ -141,6 +141,7 @@ GTK_BINFILES = \
 	libgailutil-18.dll		\
 	libgdk-win32-2.0-0.dll		\
 	libgdk_pixbuf-2.0-0.dll		\
+	libgio-2.0-0.dll		\
 	libglade-2.0-0.dll		\
 	libglib-2.0-0.dll		\
 	libgmodule-2.0-0.dll		\

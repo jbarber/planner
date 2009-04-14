@@ -1,0 +1,47 @@
+#
+# Makefile.win32
+#
+
+SUBDIRS=C
+
+ifeq ($(DESTDIR),)
+export DESTDIR=$(HOME)
+endif
+
+ifeq ($(PREFIX),)
+export PREFIX=/dev
+endif
+
+RECURSIVE_TARGETS = all-recursive clean-recursive install-recursive uninstall-recursive
+
+$(RECURSIVE_TARGETS):
+	@set fnord $$MAKEFLAGS; version=$(VERSION); amf=$$2; \
+	dot_seen=no; \
+	target=`echo $@ | sed s/-recursive//`; \
+	list='$(SUBDIRS)'; for subdir in $$list; do \
+	  echo "Making $$target in $$subdir"; \
+	  if test "$$subdir" = "."; then \
+	    dot_seen=yes; \
+	    local_target="$$target-am"; \
+	  else \
+	    local_target="$$target"; \
+	  fi; \
+	  (cd $$subdir && $(MAKE) -f Makefile.win32 $$local_target VERSION=$$version) \
+	   || case "$$amf" in *=*) exit 1;; *k*) fail=yes;; *) exit 1;; esac; \
+	done; \
+	if test "$$dot_seen" = "no"; then \
+	  $(MAKE) -f Makefile.win32 "$$target-am" || exit 1; \
+	fi; test -z "$$fail"
+
+all: all-recursive
+all-am:
+
+clean: clean-recursive
+clean-am:
+
+install: install-recursive
+install-am:
+
+uninstall: uninstall-recursive
+uninstall-am:
+

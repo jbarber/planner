@@ -699,7 +699,7 @@ sql_get_tested_connection (const gchar   *dsn_name,
 
 	if (conn != NULL) {
 
-		success = sql_execute_command (conn, "SET TIME ZONE UTC"); 
+		success = sql_execute_command (conn, "SET TIME ZONE 'UTC'"); 
 		if (!success) {
 			g_warning ("SET TIME ZONE command failed: %s.",
 					sql_get_last_error (conn));

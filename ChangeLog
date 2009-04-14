@@ -1,3 +1,22 @@
+2009-04-14  Maurice van der Pot  <griffon26@kfk4ever.com>
+
+	* Makefile.win32:
+	* docs/Makefile.win32:
+	* docs/user-guide/Makefile.win32:
+	* docs/user-guide/C/Makefile.win32: Added makefiles for building and
+	installing the user	guide on Windows. This requires docbook-xml and
+	docbook-xsl to be installed under $(PREFIX)/src. There is room for
+	improvement here, because the paths are currently hardcoded.
+	Also fixed installer to include	libgio-2.0-0.dll.
+
+	* docs/user-guide/C/planner.xml: Make images non-floating again.
+
+	* libplanner/mrp-sql.c (mrp_sql_load_project),
+	(mrp_sql_save_project): 
+	* src/planner-sql-plugin.c (sql_get_tested_connection):
+	Properly quoted timezone in SQL. It was causing problems with 
+	PostgreSQL 8.0.x (bug #571801).
+
 2009-04-07  Maurice van der Pot  <griffon26@kfk4ever.com>
 
 	* README: Fixed typo.

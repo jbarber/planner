@@ -2276,7 +2276,7 @@ mrp_sql_load_project (MrpStorageSQL *storage,
 	}
 	gda_dict_set_connection (data->dict, data->con);
 
-	success = sql_execute_command (data->con, "SET TIME ZONE UTC"); 
+	success = sql_execute_command (data->con, "SET TIME ZONE 'UTC'"); 
 	if (!success) {
 		g_warning ("SET TIME ZONE command failed: %s.",
 				sql_get_last_error (data->con));
@@ -3715,7 +3715,7 @@ mrp_sql_save_project (MrpStorageSQL  *storage,
 	}
 	gda_dict_set_connection (data->dict, data->con);
 
-	success = sql_execute_command (data->con, "SET TIME ZONE UTC"); 
+	success = sql_execute_command (data->con, "SET TIME ZONE 'UTC'"); 
 
 	if (!success) {
 		g_warning ("SET TIME ZONE command failed: %s.",
