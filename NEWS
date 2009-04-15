@@ -1,4 +1,43 @@
 ==============
+Planner 0.14.4
+==============
+
+New features and fixes
+======================
+
+* Rewrote printing to use the GTK printing API, fixing most problems with
+  printing on Windows (thanks to Francisco Moraes)
+* Added display of minutes to duration format
+* Added creation of Windows installer to Makefiles
+* Dropped support for libgda < 3.0
+* Added proper quoting to SQL code (#168147, #571801)
+* Fixed alignment problems in HTML export (#471218, #478027)
+* Fixed a crash in UNDO/REDO code (#420443)
+* Fixed several issues with the build (#528582, #528971, #529045, #539993)
+
+New and Updated Translations
+============================
+Khaled Hosny (ar)
+Gil Forcada (ca)
+Petr Kovar (cs)
+Jorge González (es)
+Ivar Smolin (et)
+Iñaki Larrañaga Murgoitio (eu)
+Ilkka Tuohela (fi)
+Louis Grandjean (fr)
+Ankit Patel (gu)
+Gabor Kelemen (hu)
+Anna Jonna Ármannsdóttir (is)
+Milo Casagrande (it)
+Takeshi AIHANA (ja)
+Sandeep Shedmake (mr)
+Kjartan Maraas (nb)
+Yannig Marchegay (Kokoyaya) (oc)
+Leonardo Ferreira Fontenelle (pt_BR)
+Daniel Nylander (sv)
+
+
+==============
 Planner 0.14.3
 ==============
 
