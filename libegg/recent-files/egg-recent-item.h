@@ -25,7 +25,7 @@ struct _EggRecentItem {
 	gboolean private_data;
 
 	GList *groups;
-	
+
 	int refcount;
 };
 

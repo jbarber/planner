@@ -50,8 +50,8 @@ mrp_storage_module_get_type (void)
 			(GInstanceInitFunc) storage_module_init,
 		};
 
-		object_type = g_type_register_static (G_TYPE_OBJECT, 
-						      "MrpStorageModule", 
+		object_type = g_type_register_static (G_TYPE_OBJECT,
+						      "MrpStorageModule",
 						      &object_info, 0);
 	}
 
@@ -72,7 +72,7 @@ storage_module_class_init (MrpStorageModuleClass *klass)
 }
 
 gboolean
-mrp_storage_module_load (MrpStorageModule  *module, 
+mrp_storage_module_load (MrpStorageModule  *module,
 			 const gchar       *uri,
 			 GError           **error)
 {
@@ -89,7 +89,7 @@ mrp_storage_module_load (MrpStorageModule  *module,
 }
 
 gboolean
-mrp_storage_module_save (MrpStorageModule  *module, 
+mrp_storage_module_save (MrpStorageModule  *module,
 			 const gchar       *uri,
 			 gboolean           force,
 			 GError           **error)
@@ -98,7 +98,7 @@ mrp_storage_module_save (MrpStorageModule  *module,
 	g_return_val_if_fail (uri != NULL, FALSE);
 
 	if (MRP_STORAGE_MODULE_GET_CLASS (module)->save) {
-		return MRP_STORAGE_MODULE_GET_CLASS (module)->save (module, 
+		return MRP_STORAGE_MODULE_GET_CLASS (module)->save (module,
 								    uri,
 								    force,
 								    error);
@@ -108,14 +108,14 @@ mrp_storage_module_save (MrpStorageModule  *module,
 }
 
 gboolean
-mrp_storage_module_to_xml (MrpStorageModule  *module, 
+mrp_storage_module_to_xml (MrpStorageModule  *module,
 			   gchar            **str,
 			   GError           **error)
 {
 	g_return_val_if_fail (MRP_IS_STORAGE_MODULE (module), FALSE);
 
 	if (MRP_STORAGE_MODULE_GET_CLASS (module)->to_xml) {
-		return MRP_STORAGE_MODULE_GET_CLASS (module)->to_xml (module, 
+		return MRP_STORAGE_MODULE_GET_CLASS (module)->to_xml (module,
 								      str,
 								      error);
 	}
@@ -124,15 +124,15 @@ mrp_storage_module_to_xml (MrpStorageModule  *module,
 }
 
 gboolean
-mrp_storage_module_from_xml (MrpStorageModule  *module, 
+mrp_storage_module_from_xml (MrpStorageModule  *module,
 			     const gchar       *str,
 			     GError           **error)
 {
 	g_return_val_if_fail (MRP_IS_STORAGE_MODULE (module), FALSE);
 	g_return_val_if_fail (str != NULL, FALSE);
-	
+
 	if (MRP_STORAGE_MODULE_GET_CLASS (module)->from_xml) {
-		return MRP_STORAGE_MODULE_GET_CLASS (module)->from_xml (module, 
+		return MRP_STORAGE_MODULE_GET_CLASS (module)->from_xml (module,
 									str,
 									error);
 	}
@@ -148,7 +148,7 @@ imrp_storage_module_set_project (MrpStorageModule *module,
 	g_return_if_fail (MRP_IS_PROJECT (project));
 
 	if (MRP_STORAGE_MODULE_GET_CLASS (module)->set_project) {
-		MRP_STORAGE_MODULE_GET_CLASS (module)->set_project (module, 
+		MRP_STORAGE_MODULE_GET_CLASS (module)->set_project (module,
 								    project);
 	}
 }

@@ -58,8 +58,8 @@ main (int argc, char **argv)
 		{ NULL }
 	};
 	gchar           *filename;
-	
-	bindtextdomain (GETTEXT_PACKAGE, mrp_paths_get_locale_dir ());  
+
+	bindtextdomain (GETTEXT_PACKAGE, mrp_paths_get_locale_dir ());
         bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 	textdomain (GETTEXT_PACKAGE);
 
@@ -100,7 +100,7 @@ main (int argc, char **argv)
 	if (geometry != NULL) {
 		gtk_window_parse_geometry (GTK_WINDOW (main_window), geometry);
 	}
-		
+
 	gtk_widget_show_all (main_window);
 
 	if (argc > 1) {
@@ -124,14 +124,14 @@ main (int argc, char **argv)
 				} else {
 					uri = g_filename_to_uri (argv[i], NULL, NULL);
 				}
-				
+
 				if (uri) {
 					planner_window_open_in_existing_or_new (
 						PLANNER_WINDOW (main_window), uri, FALSE);
 					g_free (uri);
 				}
 			}
-				
+
 			i++;
 		}
 	}
@@ -139,6 +139,6 @@ main (int argc, char **argv)
         gtk_main ();
 
 	g_object_unref (application);
-	
+
         return 0;
 }

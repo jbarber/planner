@@ -52,7 +52,7 @@ typedef struct {
 
 	MrpProject  *project;
 	gchar       *phase;
-	gboolean     is_assigned; 
+	gboolean     is_assigned;
 	gint	     position;
 } PhaseCmdRemove;
 
@@ -119,13 +119,13 @@ static void        phase_cmd_remove_free             (PlannerCmd       *cmd_base
 
 
 static void
-phase_dialog_notify_phases (MrpProject  *project,  
+phase_dialog_notify_phases (MrpProject  *project,
 			    GParamSpec  *pspec,
 			    GtkWidget   *dialog)
 {
 	DialogData *data = DIALOG_GET_DATA (dialog);
 	GList      *list;
-	
+
 	g_return_if_fail (MRP_IS_PROJECT (project));
 
 	g_object_get (project, "phases", &list, NULL);
@@ -139,7 +139,7 @@ phase_dialog_response_cb (GtkWidget  *dialog,
 			  DialogData *data)
 {
 	gchar *phase;
-	
+
 	switch (response) {
 	case RESPONSE_REMOVE:
 		phase = phase_dialog_get_selected_phase (data);
@@ -150,7 +150,7 @@ phase_dialog_response_cb (GtkWidget  *dialog,
 	case RESPONSE_ADD:
 		phase_dialog_new_dialog_run (data);
 		break;
-		
+
 	case RESPONSE_CLOSE:
 		gtk_widget_destroy (data->dialog);
 		break;
@@ -176,24 +176,24 @@ planner_phase_dialog_new (PlannerWindow *window)
 	DialogData       *data;
 	GladeXML         *glade;
 	GtkWidget        *dialog;
-	GtkTreeSelection *selection;	
+	GtkTreeSelection *selection;
 	gchar            *filename;
 
 	g_return_val_if_fail (PLANNER_IS_WINDOW (window), NULL);
-	
+
 	filename = mrp_paths_get_glade_dir ("project-properties.glade");
 	glade = glade_xml_new (filename,
 			       "phase_dialog",
 			       GETTEXT_PACKAGE);
 	g_free (filename);
-	
+
 	if (!glade) {
 		g_warning ("Could not create phase dialog.");
 		return NULL;
 	}
 
 	dialog = glade_xml_get_widget (glade, "phase_dialog");
-	
+
 	data = g_new0 (DialogData, 1);
 
 	data->main_window = window;
@@ -205,13 +205,13 @@ planner_phase_dialog_new (PlannerWindow *window)
 				 G_CALLBACK (phase_dialog_parent_destroy_cb),
 				 dialog,
 				 0);
-	
+
 	data->remove_button = glade_xml_get_widget (glade, "remove_button");
 
 	data->tree_view = glade_xml_get_widget (glade, "phase_treeview");
 
 	phase_dialog_setup_tree_view (data);
-	
+
 	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (data->tree_view));
 	gtk_tree_selection_set_mode (selection, GTK_SELECTION_BROWSE);
 
@@ -219,7 +219,7 @@ planner_phase_dialog_new (PlannerWindow *window)
 			  "changed",
 			  G_CALLBACK (phase_dialog_selection_changed_cb),
 			  data);
-	
+
 	g_signal_connect (dialog,
 			  "response",
 			  G_CALLBACK (phase_dialog_response_cb),
@@ -239,16 +239,16 @@ phase_dialog_setup_tree_view (DialogData *data)
 	GtkCellRenderer   *cell;
 	GtkTreeViewColumn *col;
 	GList             *list;
-	
+
 	store = gtk_list_store_new (NUM_COLS,
 				    G_TYPE_STRING);
-	
+
 	g_signal_connect_object (data->project,
 				 "notify::phases",
 				 G_CALLBACK (phase_dialog_notify_phases),
 				 data->dialog,
 				 0);
-	
+
 	gtk_tree_view_set_model (GTK_TREE_VIEW (data->tree_view),
 				 GTK_TREE_MODEL (store));
 
@@ -263,7 +263,7 @@ phase_dialog_setup_tree_view (DialogData *data)
 	g_object_get (data->project, "phases", &list, NULL);
 	phase_dialog_rebuild_model (data, list);
 	mrp_string_list_free (list);
-	
+
 	gtk_tree_view_expand_all (GTK_TREE_VIEW (data->tree_view));
 }
 
@@ -280,11 +280,11 @@ phase_dialog_rebuild_model (DialogData  *data,
 	store = GTK_LIST_STORE (gtk_tree_view_get_model (tree_view));
 
 	gtk_list_store_clear (store);
-	
+
 	if (!list) {
 		return;
 	}
-	
+
 	for (l = list; l; l = l->next) {
 		gtk_list_store_append (store, &iter);
 		gtk_list_store_set (store, &iter,
@@ -303,7 +303,7 @@ phase_dialog_get_selected_phase (DialogData *data)
 	gchar            *phase;
 
 	tree_view = GTK_TREE_VIEW (data->tree_view);
-	
+
 	selection = gtk_tree_view_get_selection (tree_view);
 	if (gtk_tree_selection_get_selected (selection, &model, &iter)) {
 		gtk_tree_model_get (model, &iter,
@@ -324,12 +324,12 @@ phase_dialog_set_selected_phase (DialogData  *data,
 	GtkTreeIter   iter;
 	GtkTreePath  *path;
 	GtkTreeModel *model;
-	
+
 	if (phase_dialog_find (data, phase, &iter)) {
 		model = gtk_tree_view_get_model (GTK_TREE_VIEW (data->tree_view));
-		
+
 		path = gtk_tree_model_get_path (model, &iter);
-		
+
 		gtk_tree_view_set_cursor (GTK_TREE_VIEW (data->tree_view),
 					  path, NULL, FALSE);
 
@@ -355,7 +355,7 @@ phase_dialog_find_foreach (GtkTreeModel *model,
 		data->found_iter = *iter;
 		return TRUE;
 	}
-	
+
 	return FALSE;
 }
 
@@ -403,7 +403,7 @@ static void
 phase_dialog_remove_phase (DialogData  *data,
 			   const gchar *phase)
 {
-	phase_cmd_remove (data->main_window, phase); 
+	phase_cmd_remove (data->main_window, phase);
 }
 
 /* Handle the little "new phase" dialog. */
@@ -415,7 +415,7 @@ phase_dialog_new_name_changed_cb (GtkEntry   *entry,
 	gboolean     sensitive;
 
 	name = gtk_entry_get_text (entry);
-	
+
 	sensitive = name && name[0];
 	gtk_widget_set_sensitive (data->new_ok_button, sensitive);
 }
@@ -428,13 +428,13 @@ phase_dialog_new_dialog_run (DialogData *data)
 	GtkWidget   *entry;
 	const gchar *name;
 	gchar       *filename;
-	
+
 	filename = mrp_paths_get_glade_dir ("project-properties.glade");
 	glade = glade_xml_new (filename,
 			       "new_phase_dialog",
 			       GETTEXT_PACKAGE);
 	g_free (filename);
-	
+
 	dialog = glade_xml_get_widget (glade, "new_phase_dialog");
 
 	data->new_ok_button = glade_xml_get_widget (glade, "ok_button");
@@ -447,9 +447,9 @@ phase_dialog_new_dialog_run (DialogData *data)
 
 	if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_OK) {
 		name = gtk_entry_get_text (GTK_ENTRY (entry));
-		phase_cmd_insert (data->main_window, (gchar *) name ,-1);	
+		phase_cmd_insert (data->main_window, (gchar *) name ,-1);
 	}
-	
+
 	g_object_unref (glade);
 	gtk_widget_destroy (dialog);
 }
@@ -466,24 +466,24 @@ phase_cmd_insert_do (PlannerCmd *cmd_base)
 	if (cmd->phase == NULL) {
 		return FALSE;
 	}
-		
+
 	g_object_get (cmd->project, "phases", &list, NULL);
-	
+
 	found = FALSE;
-	
+
 	for (l = list; l ; l = l->next) {
-		if (strcmp (cmd->phase, (char *) l->data) == 0 ) { 
+		if (strcmp (cmd->phase, (char *) l->data) == 0 ) {
 			found = TRUE;
 		}
 	}
 
 	if (!found) {
-		list = g_list_insert (list, g_strdup (cmd->phase), cmd->position); 
+		list = g_list_insert (list, g_strdup (cmd->phase), cmd->position);
 		g_object_set (cmd->project, "phases", list, NULL);
 	}
-	
+
 	mrp_string_list_free (list);
-	
+
 	return !found;
 }
 
@@ -520,7 +520,7 @@ phase_cmd_insert_free (PlannerCmd *cmd_base)
 {
 	PhaseCmdInsert *cmd;
 
-	cmd = (PhaseCmdInsert*) cmd_base;	
+	cmd = (PhaseCmdInsert*) cmd_base;
 
 	g_free (cmd->phase);
 
@@ -529,9 +529,9 @@ phase_cmd_insert_free (PlannerCmd *cmd_base)
 }
 
 static PlannerCmd *
-phase_cmd_insert (PlannerWindow *main_window, 
+phase_cmd_insert (PlannerWindow *main_window,
 		  const gchar 	*phase,
-		  gint		position_hint) 
+		  gint		position_hint)
 {
 	PlannerCmd     *cmd_base;
 	PhaseCmdInsert *cmd;
@@ -547,7 +547,7 @@ phase_cmd_insert (PlannerWindow *main_window,
 	cmd->project = planner_window_get_project (main_window);
 
 	cmd->phase = g_strdup (phase);
-	
+
 	cmd->position = position_hint;
 
 	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager (main_window),
@@ -570,7 +570,7 @@ phase_cmd_remove_do (PlannerCmd *cmd_base)
 	if (assigned_phase == cmd->phase) {
 		cmd->is_assigned = TRUE;
 	}
-	
+
 	g_object_get (cmd->project, "phases", &list, NULL);
 
 	found = FALSE;
@@ -589,7 +589,7 @@ phase_cmd_remove_do (PlannerCmd *cmd_base)
 	}
 
 	mrp_string_list_free (list);
-	
+
 	return !found;
 }
 
@@ -598,17 +598,17 @@ phase_cmd_remove_undo (PlannerCmd *cmd_base)
 {
 	PhaseCmdRemove *cmd;
 	GList          *list;
-	
+
 	cmd = (PhaseCmdRemove*) cmd_base;
 
 	g_assert (cmd->phase);
-	
+
 	g_object_get (cmd->project, "phases", &list, NULL);
-	list = g_list_insert (list, g_strdup (cmd->phase), cmd->position); 
-	
+	list = g_list_insert (list, g_strdup (cmd->phase), cmd->position);
+
 	g_object_set (cmd->project, "phases", list, NULL);
-	mrp_string_list_free (list);	
-	
+	mrp_string_list_free (list);
+
 	if (cmd->is_assigned) {
 		mrp_object_set (cmd->project, "phase", cmd->phase, NULL);
 	}
@@ -629,7 +629,7 @@ phase_cmd_remove_free (PlannerCmd *cmd_base)
 }
 
 static PlannerCmd *
-phase_cmd_remove (PlannerWindow *window, 
+phase_cmd_remove (PlannerWindow *window,
 		  const gchar *phase)
 {
 	PlannerCmd     *cmd_base;

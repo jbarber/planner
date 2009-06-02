@@ -20,7 +20,7 @@ struct _PlannerCellRendererPopup
 
 	/* Cached width of the popup button. */
 	gint                 button_width;
-	
+
 	/* The popup window. */
 	GtkWidget           *popup_window;
 
@@ -37,14 +37,14 @@ struct _PlannerCellRendererPopup
 struct _PlannerCellRendererPopupClass
 {
 	GtkCellRendererTextClass parent_class;
-	
+
 	void   (* show_popup) (PlannerCellRendererPopup *cell,
 			       const gchar         *path,
 			       gint                 x1,
 			       gint                 y1,
 			       gint                 x2,
 			       gint                 y2);
-	
+
 	void   (* hide_popup) (PlannerCellRendererPopup *cell);
 };
 

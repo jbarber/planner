@@ -35,7 +35,7 @@
 
 struct _PlannerGanttHeaderPriv {
 	GdkWindow          *bin_window;
-	
+
 	GtkAdjustment      *hadjustment;
 
 	PangoLayout        *layout;
@@ -45,9 +45,9 @@ struct _PlannerGanttHeaderPriv {
 
 	MrpTimeUnit    minor_unit;
 	PlannerScaleFormat  minor_format;
-	
+
 	gdouble             hscale;
-	
+
 	gint                width;
 	gint                height;
 
@@ -131,7 +131,7 @@ planner_gantt_header_get_type (void)
 			&planner_gantt_header_info,
 			0);
 	}
-	
+
 	return planner_gantt_header_type;
 }
 
@@ -167,9 +167,9 @@ gantt_header_class_init (PlannerGanttHeaderClass *class)
 	widget_class->leave_notify_event = gantt_header_leave_notify_event;
 
 	widget_class->motion_notify_event = gantt_header_motion_notify_event;
-	
+
 	class->set_scroll_adjustments = gantt_header_set_adjustments;
-		
+
 	widget_class->set_scroll_adjustments_signal =
 		g_signal_new ("set_scroll_adjustments",
 			      G_TYPE_FROM_CLASS (object_class),
@@ -179,7 +179,7 @@ gantt_header_class_init (PlannerGanttHeaderClass *class)
 			      planner_marshal_VOID__OBJECT_OBJECT,
 			      G_TYPE_NONE, 2,
 			      GTK_TYPE_ADJUSTMENT, GTK_TYPE_ADJUSTMENT);
-	
+
 	/* Properties. */
 	g_object_class_install_property (
 		o_class,
@@ -271,7 +271,7 @@ gantt_header_set_zoom (PlannerGanttHeader *header, gdouble zoom)
 	priv = header->priv;
 
 	level = planner_scale_clamp_zoom (zoom);
-	
+
 	priv->major_unit = planner_scale_conf[level].major_unit;
 	priv->major_format = planner_scale_conf[level].major_format;
 
@@ -346,7 +346,7 @@ gantt_header_set_property (GObject      *object,
 
 	if (change_width || change_height) {
 		gtk_widget_set_size_request (GTK_WIDGET (header),
-					     priv->width, 
+					     priv->width,
 					     priv->height);
 	}
 
@@ -406,7 +406,7 @@ gantt_header_map (GtkWidget *widget)
 	PlannerGanttHeader *header;
 
 	header = PLANNER_GANTT_HEADER (widget);
-	
+
 	GTK_WIDGET_SET_FLAGS (widget, GTK_MAPPED);
 
 	gdk_window_show (header->priv->bin_window);
@@ -420,9 +420,9 @@ gantt_header_realize (GtkWidget *widget)
 	GdkWindowAttr       attributes;
 	GdkGCValues         values;
 	gint                attributes_mask;
-  
+
 	header = PLANNER_GANTT_HEADER (widget);
-	
+
 	GTK_WIDGET_SET_FLAGS (widget, GTK_REALIZED);
 
 	/* Create the main, clipping window. */
@@ -460,12 +460,12 @@ gantt_header_realize (GtkWidget *widget)
 						   &attributes,
 						   attributes_mask);
 	gdk_window_set_user_data (header->priv->bin_window, widget);
-	
+
 	values.foreground = (widget->style->white.pixel == 0 ?
 			     widget->style->black : widget->style->white);
 	values.function = GDK_XOR;
 	values.subwindow_mode = GDK_INCLUDE_INFERIORS;
-	
+
 	widget->style = gtk_style_attach (widget->style, widget->window);
 	gdk_window_set_background (widget->window,
 				   &widget->style->base[widget->state]);
@@ -526,7 +526,7 @@ gantt_header_expose_event (GtkWidget      *widget,
 	gint                    major_width;
 	GdkGC                  *gc;
 	GdkRectangle            rect;
-	
+
 	header = PLANNER_GANTT_HEADER (widget);
 	priv = header->priv;
 	hscale = priv->hscale;
@@ -550,7 +550,7 @@ gantt_header_expose_event (GtkWidget      *widget,
 		       0,
 		       event->area.width + 10,
 		       height);
-	
+
 	gdk_draw_line (event->window,
 		       widget->style->fg_gc[GTK_STATE_INSENSITIVE],
 		       event->area.x,
@@ -578,12 +578,12 @@ gantt_header_expose_event (GtkWidget      *widget,
 		/* Unless it's too thin to make sense. */
 		goto minor_ticks;
 	}
-	
+
 	t = mrp_time_align_prev (t0, priv->major_unit);
-	
+
 	while (t <= t1) {
 		x = floor (t * hscale - priv->x1 + 0.5);
-		
+
 		gdk_draw_line (event->window,
 			       widget->style->fg_gc[GTK_STATE_INSENSITIVE],
 			       x, 0,
@@ -606,7 +606,7 @@ gantt_header_expose_event (GtkWidget      *widget,
 				 x + 3,
 				 2,
 				 priv->layout);
-		
+
 		t = mrp_time_align_next (t, priv->major_unit);
 	}
 
@@ -617,7 +617,7 @@ gantt_header_expose_event (GtkWidget      *widget,
 		/* Unless it's too thin to make sense. */
 		goto done;
 	}
-	
+
 	t = mrp_time_align_prev (t0, priv->minor_unit);
 
 	while (t <= t1) {
@@ -635,7 +635,7 @@ gantt_header_expose_event (GtkWidget      *widget,
 				       str,
 				       -1);
 		g_free (str);
-		
+
 		rect.x = x;
 		rect.width = minor_width;
 		gdk_gc_set_clip_rectangle (gc, &rect);
@@ -651,7 +651,7 @@ gantt_header_expose_event (GtkWidget      *widget,
 
  done:
 	gdk_gc_unref (gc);
-	
+
 	return TRUE;
 }
 
@@ -663,7 +663,7 @@ gantt_header_motion_notify_event (GtkWidget	 *widget,
 	PlannerGanttHeaderPriv *priv;
 	mrptime                 t;
 	char                   *str;
-			
+
 	header = PLANNER_GANTT_HEADER (widget);
 	priv = header->priv;
 
@@ -678,7 +678,7 @@ gantt_header_motion_notify_event (GtkWidget	 *widget,
 	} else {
 		g_free (str);
 	}
-	
+
 	return FALSE;
 }
 
@@ -698,7 +698,7 @@ gantt_header_leave_notify_event (GtkWidget	  *widget,
 		g_free (priv->date_hint);
 		priv->date_hint = NULL;
 	}
-	
+
 	return FALSE;
 }
 
@@ -711,11 +711,11 @@ gantt_header_set_adjustments (PlannerGanttHeader *header,
 	if (hadj == NULL) {
 		hadj = GTK_ADJUSTMENT (gtk_adjustment_new (0.0, 0.0, 0.0, 0.0, 0.0, 0.0));
 	}
-	
+
 	if (header->priv->hadjustment && (header->priv->hadjustment != hadj)) {
 		gtk_object_unref (GTK_OBJECT (header->priv->hadjustment));
 	}
-	
+
 	if (header->priv->hadjustment != hadj) {
 		header->priv->hadjustment = hadj;
 		gtk_object_ref (GTK_OBJECT (header->priv->hadjustment));
@@ -725,7 +725,7 @@ gantt_header_set_adjustments (PlannerGanttHeader *header,
 				  "value_changed",
 				  G_CALLBACK (gantt_header_adjustment_changed),
 				  header);
-		
+
 		gtk_widget_set_scroll_adjustments (GTK_WIDGET (header),
 						   hadj,
 						   NULL);

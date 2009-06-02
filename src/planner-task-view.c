@@ -206,7 +206,7 @@ task_view_activate (PlannerView *view)
 	gchar               *filename;
 
 	priv = PLANNER_TASK_VIEW (view)->priv;
-	
+
 	priv->actions = gtk_action_group_new ("TaskView");
 	gtk_action_group_set_translation_domain (priv->actions, GETTEXT_PACKAGE);
 
@@ -240,7 +240,7 @@ task_view_activate (PlannerView *view)
 	gtk_toggle_action_set_active (
 		GTK_TOGGLE_ACTION (gtk_action_group_get_action (priv->actions, "NonstandardDays")),
 		show_nostd_days);
-	
+
 	task_view_selection_changed_cb (PLANNER_TASK_TREE (priv->tree), view);
 
 	gtk_widget_grab_focus (priv->tree);
@@ -259,7 +259,7 @@ static void
 task_view_setup (PlannerView *view, PlannerWindow *main_window)
 {
 	PlannerTaskViewPriv *priv;
-	
+
 	priv = PLANNER_TASK_VIEW (view)->priv;
 
 	priv->ui_manager = planner_window_get_ui_manager (main_window);
@@ -281,11 +281,11 @@ static const gchar *
 task_view_get_icon (PlannerView *view)
 {
 	static gchar *filename = NULL;
-	
+
 	if (!filename) {
 		filename = mrp_paths_get_image_dir ("tasks.png");
 	}
-	
+
 	return filename;
 }
 
@@ -304,7 +304,7 @@ task_view_get_widget (PlannerView *view)
 	PlannerGanttModel   *model;
 
 	priv = PLANNER_TASK_VIEW (view)->priv;
-	
+
 	if (priv->tree == NULL) {
 		project = planner_window_get_project (view->main_window);
 
@@ -317,7 +317,7 @@ task_view_get_widget (PlannerView *view)
 		gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw),
 						GTK_POLICY_AUTOMATIC,
 						GTK_POLICY_AUTOMATIC);
-		
+
 		priv->frame = gtk_frame_new (NULL);
 		gtk_frame_set_shadow_type (GTK_FRAME (priv->frame), GTK_SHADOW_IN);
 
@@ -334,8 +334,8 @@ task_view_get_widget (PlannerView *view)
 						     * untranslated unless there is a localized term for it.
 						     */
 						    COL_WBS, _("WBS"),
-						    COL_NAME, _("Name"), 
-						    COL_START, _("Start"), 
+						    COL_NAME, _("Name"),
+						    COL_START, _("Start"),
 						    COL_FINISH, _("Finish"),
 						    COL_WORK, _("Work"),
 						    COL_DURATION, _("Duration"),
@@ -344,7 +344,7 @@ task_view_get_widget (PlannerView *view)
 						    COL_ASSIGNED_TO, _("Assigned to"),
 						    /* i18n: The string "% Complete" will be used in the header
 						     * of a column containing values from 0 upto 100, indicating
-						     * what part of a task has been completed. 
+						     * what part of a task has been completed.
 						     * xgettext:no-c-format
 						     */
 						    COL_COMPLETE, _("% Complete"),
@@ -353,9 +353,9 @@ task_view_get_widget (PlannerView *view)
 		g_object_unref (model);
 
 		task_view_load_columns (view);
-	
+
 		gtk_container_add (GTK_CONTAINER (sw), priv->tree);
-		
+
 		g_signal_connect (priv->tree,
 				  "columns-changed",
 				  G_CALLBACK (task_view_tree_view_columns_changed_cb),
@@ -450,7 +450,7 @@ task_view_insert_tasks_cb (GtkAction *action,
 }
 
 static void
-task_view_remove_task_cb (GtkAction *action, 
+task_view_remove_task_cb (GtkAction *action,
 			  gpointer   data)
 {
 	PlannerTaskView *view;
@@ -461,7 +461,7 @@ task_view_remove_task_cb (GtkAction *action,
 }
 
 static void
-task_view_edit_task_cb (GtkAction *action, 
+task_view_edit_task_cb (GtkAction *action,
 			gpointer   data)
 {
 	PlannerTaskView *view;
@@ -473,18 +473,18 @@ task_view_edit_task_cb (GtkAction *action,
 }
 
 static void
-task_view_select_all_cb (GtkAction *action, 
+task_view_select_all_cb (GtkAction *action,
 			 gpointer   data)
 {
 	PlannerTaskView *view;
-	
+
 	view = PLANNER_TASK_VIEW (data);
-	
+
 	planner_task_tree_select_all (PLANNER_TASK_TREE (view->priv->tree));
 }
 
 static void
-task_view_unlink_task_cb (GtkAction *action, 
+task_view_unlink_task_cb (GtkAction *action,
 			  gpointer   data)
 {
 	PlannerTaskView *view;
@@ -507,7 +507,7 @@ task_view_link_tasks_cb (GtkAction *action,
 }
 
 static void
-task_view_indent_task_cb (GtkAction *action, 
+task_view_indent_task_cb (GtkAction *action,
 			  gpointer   data)
 {
 	PlannerTaskView *view;
@@ -517,30 +517,30 @@ task_view_indent_task_cb (GtkAction *action,
 	planner_task_tree_indent_task (PLANNER_TASK_TREE (view->priv->tree));
 }
 
-static void 
+static void
 task_view_move_task_up_cb (GtkAction *action,
 			   gpointer   data)
 {
 	PlannerTaskView *view;
 
 	view = PLANNER_TASK_VIEW (data);
-	
+
 	planner_task_tree_move_task_up (PLANNER_TASK_TREE (view->priv->tree));
 }
 
-static void 
+static void
 task_view_move_task_down_cb (GtkAction *action,
 			     gpointer   data)
 {
 	PlannerTaskView *view;
-	
+
 	view = PLANNER_TASK_VIEW (data);
 
 	planner_task_tree_move_task_down (PLANNER_TASK_TREE (view->priv->tree));
 }
 
 static void
-task_view_unindent_task_cb (GtkAction *action, 
+task_view_unindent_task_cb (GtkAction *action,
 			    gpointer   data)
 {
 	PlannerTaskView *view;
@@ -551,7 +551,7 @@ task_view_unindent_task_cb (GtkAction *action,
 }
 
 static void
-task_view_reset_constraint_cb (GtkAction *action, 
+task_view_reset_constraint_cb (GtkAction *action,
 			       gpointer   data)
 {
 	PlannerTaskView *view;
@@ -562,7 +562,7 @@ task_view_reset_constraint_cb (GtkAction *action,
 }
 
 static void
-task_view_edit_custom_props_cb (GtkAction *action, 
+task_view_edit_custom_props_cb (GtkAction *action,
 				gpointer   data)
 {
 	PlannerTaskView *view;
@@ -570,14 +570,14 @@ task_view_edit_custom_props_cb (GtkAction *action,
 	MrpProject      *project;
 
 	view = PLANNER_TASK_VIEW (data);
-	
+
 	project = planner_window_get_project (PLANNER_VIEW (view)->main_window);
-	
+
 	dialog = planner_property_dialog_new (PLANNER_VIEW (view)->main_window,
 					      project,
 					      MRP_TYPE_TASK,
 					      _("Edit custom task properties"));
-	
+
 	gtk_window_set_default_size (GTK_WINDOW (dialog), 500, 300);
 	gtk_widget_show (dialog);
 }
@@ -588,7 +588,7 @@ task_view_highlight_critical_cb (GtkAction *action,
 {
 	PlannerTaskViewPriv *priv;
 	gboolean             state;
-	
+
 	priv = PLANNER_TASK_VIEW (data)->priv;
 
 	state = gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action));
@@ -606,7 +606,7 @@ task_view_nonstandard_days_cb (GtkAction *action,
 {
 	PlannerTaskViewPriv *priv;
 	gboolean             state;
-	
+
 	priv = PLANNER_TASK_VIEW (data)->priv;
 
 	state = gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action));
@@ -625,16 +625,16 @@ task_view_edit_columns_cb (GtkAction *action,
 {
 	PlannerTaskView     *view;
 	PlannerTaskViewPriv *priv;
-	
+
 	view = PLANNER_TASK_VIEW (data);
 	priv = view->priv;
-	
+
 	planner_column_dialog_show (PLANNER_VIEW (view)->main_window,
 				    _("Edit Task Columns"),
 				    GTK_TREE_VIEW (priv->tree));
 }
 
-static void 
+static void
 task_view_selection_changed_cb (PlannerTaskTree *tree, PlannerView *view)
 {
 	task_view_update_ui (view);
@@ -649,16 +649,16 @@ task_view_relations_changed_cb (PlannerTaskTree  *tree,
 	task_view_update_ui (view);
 }
 
-	
+
 static void
 task_view_print_init (PlannerView     *view,
 		      PlannerPrintJob *job)
 {
 	PlannerTaskViewPriv *priv;
-	
+
 	priv = PLANNER_TASK_VIEW (view)->priv;
 
-	priv->print_sheet = planner_table_print_sheet_new (PLANNER_VIEW (view), job, 
+	priv->print_sheet = planner_table_print_sheet_new (PLANNER_VIEW (view), job,
 							   GTK_TREE_VIEW (priv->tree));
 }
 
@@ -669,7 +669,7 @@ task_view_print (PlannerView *view,
 	PlannerTaskViewPriv *priv;
 
 	priv = PLANNER_TASK_VIEW (view)->priv;
-	
+
 	planner_table_print_sheet_output (priv->print_sheet, page_nr);
 }
 
@@ -679,7 +679,7 @@ task_view_print_get_n_pages (PlannerView *view)
 	PlannerTaskViewPriv *priv;
 
 	priv = PLANNER_TASK_VIEW (view)->priv;
-	
+
 	return planner_table_print_sheet_get_n_pages (priv->print_sheet);
 }
 
@@ -689,7 +689,7 @@ task_view_print_cleanup (PlannerView *view)
 	PlannerTaskViewPriv *priv;
 
 	priv = PLANNER_TASK_VIEW (view)->priv;
-	
+
 	planner_table_print_sheet_free (priv->print_sheet);
 	priv->print_sheet = NULL;
 }
@@ -703,11 +703,11 @@ task_view_update_ui (PlannerView *view)
 	gboolean         rel_value  = FALSE;
 	gboolean         link_value = FALSE;
 	gint	         count = 0;
-	
+
 	if (!view->activated) {
 		return;
 	}
-	
+
 	priv = PLANNER_TASK_VIEW (view)->priv;
 
 	list = planner_task_tree_get_selected_tasks (PLANNER_TASK_TREE (priv->tree));
@@ -727,31 +727,31 @@ task_view_update_ui (PlannerView *view)
 	link_value = (count >= 2);
 
 	g_object_set (gtk_action_group_get_action (priv->actions, "EditTask"),
-		      "sensitive", value, 
+		      "sensitive", value,
 		      NULL);
 	g_object_set (gtk_action_group_get_action (priv->actions, "RemoveTask"),
-		      "sensitive", value, 
+		      "sensitive", value,
 		      NULL);
 	g_object_set (gtk_action_group_get_action (priv->actions, "UnlinkTask"),
-		      "sensitive", rel_value, 
+		      "sensitive", rel_value,
 		      NULL);
 	g_object_set (gtk_action_group_get_action (priv->actions, "LinkTasks"),
-		      "sensitive", link_value, 
+		      "sensitive", link_value,
 		      NULL);
 	g_object_set (gtk_action_group_get_action (priv->actions, "IndentTask"),
-		      "sensitive", value, 
+		      "sensitive", value,
 		      NULL);
 	g_object_set (gtk_action_group_get_action (priv->actions, "UnindentTask"),
-		      "sensitive", value, 
+		      "sensitive", value,
 		      NULL);
 	g_object_set (gtk_action_group_get_action (priv->actions, "MoveTaskUp"),
-		      "sensitive", value, 
+		      "sensitive", value,
 		      NULL);
 	g_object_set (gtk_action_group_get_action (priv->actions, "MoveTaskDown"),
-		      "sensitive", value, 
+		      "sensitive", value,
 		      NULL);
 	g_object_set (gtk_action_group_get_action (priv->actions, "ResetConstraint"),
-		      "sensitive", value, 
+		      "sensitive", value,
 		      NULL);
 
 	g_list_free (list);
@@ -763,7 +763,7 @@ task_view_save_columns (PlannerView *view)
 	PlannerTaskViewPriv *priv;
 
 	priv = PLANNER_TASK_VIEW (view)->priv;
-	
+
 	planner_view_column_save_helper (view, GTK_TREE_VIEW (priv->tree));
 }
 
@@ -780,7 +780,7 @@ task_view_load_columns (PlannerView *view)
 
 	/* Load the columns. */
 	planner_view_column_load_helper (view, GTK_TREE_VIEW (priv->tree));
-	
+
 	/* Make things a bit more robust by setting defaults if we don't get any
 	 * visible columns. Should be done through a schema instead (but we'll
 	 * keep this since a lot of people get bad installations when installing
@@ -805,12 +805,12 @@ task_view_load_columns (PlannerView *view)
 			id = g_object_get_data (G_OBJECT (column), "id");
 
 			g_print ("%s\n", id);
-			
+
 			if (!id) {
 				continue;
 			}
 
-			
+
 			if (strcmp (id, "wbs") == 0 ||
 			    strcmp (id, "name") == 0 ||
 			    strcmp (id, "start") == 0 ||
@@ -828,7 +828,7 @@ task_view_load_columns (PlannerView *view)
 			}
 		}
 	}
-	
+
 	g_list_free (columns);
 }
 
@@ -841,4 +841,3 @@ planner_task_view_new (void)
 
 	return view;
 }
-	

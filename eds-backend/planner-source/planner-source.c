@@ -38,16 +38,16 @@
 static GConfClient *conf_client;
 static GMainLoop   *main_loop;
 
-void org_gnome_planner_source_add (EPlugin                    *epl, 
+void org_gnome_planner_source_add (EPlugin                    *epl,
 				   EConfigHookItemFactoryData *data);
 
 /* From mrp-project.c */
-static const gchar * 
+static const gchar *
 uri_peek_file_name (const gchar *uri)
 {
 	const gchar *name;
 	size_t       len;
-	
+
 	len = strlen (uri);
 	if (len > 3 && !strstr (uri, ":/")) {
 		/* No protocol. */
@@ -63,7 +63,7 @@ uri_peek_file_name (const gchar *uri)
 }
 
 static void
-add_planner_file (const gchar *uri) 
+add_planner_file (const gchar *uri)
 {
 	ESourceList  *source_list;
 	ESourceGroup *group;
@@ -108,7 +108,7 @@ add_planner_file (const gchar *uri)
 }
 
 void
-org_gnome_planner_source_add (EPlugin                    *epl, 
+org_gnome_planner_source_add (EPlugin                    *epl,
 			      EConfigHookItemFactoryData *data)
 {
 	GtkWidget   *widget;
@@ -132,7 +132,7 @@ org_gnome_planner_source_add (EPlugin                    *epl,
 	gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
 
 	if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_OK) {
-		dest_uri = gtk_file_chooser_get_uri 
+		dest_uri = gtk_file_chooser_get_uri
 			(GTK_FILE_CHOOSER (dialog));
 	}
 
@@ -141,15 +141,15 @@ org_gnome_planner_source_add (EPlugin                    *epl,
 		gtk_widget_destroy (dialog);
 		return;
 	}
-	
+
 	tmp = strstr (dest_uri, planner_ext);
-	
+
 	if (tmp && *(tmp + strlen (planner_ext)) == '\0') {
 		proceed = TRUE;
 
 	} else {
-		
-		GtkWidget *warning = 
+
+		GtkWidget *warning =
 			gtk_message_dialog_new (NULL,
 						GTK_DIALOG_DESTROY_WITH_PARENT,
 						GTK_MESSAGE_QUESTION,
@@ -163,11 +163,11 @@ org_gnome_planner_source_add (EPlugin                    *epl,
 		}
 		gtk_widget_destroy (warning);
 	}
-	
+
 	/* Time to add the new source */
 	if (proceed) {
 		add_planner_file (dest_uri);
 	}
-	gtk_widget_destroy (dialog);	
-	g_free (dest_uri);	
+	gtk_widget_destroy (dialog);
+	g_free (dest_uri);
 }

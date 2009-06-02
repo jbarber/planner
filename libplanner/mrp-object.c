@@ -90,8 +90,8 @@ mrp_object_get_type (void)
 			(GInstanceInitFunc) object_init,
 		};
 
-		object_type = g_type_register_static (G_TYPE_OBJECT, 
-                                                      "MrpObject", 
+		object_type = g_type_register_static (G_TYPE_OBJECT,
+                                                      "MrpObject",
                                                       &object_info, 0);
 	}
 
@@ -102,9 +102,9 @@ static void
 object_class_init (MrpObjectClass *klass)
 {
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
-        
+
         parent_class = G_OBJECT_CLASS (g_type_class_peek_parent (klass));
-        
+
         object_class->finalize     = object_finalize;
         object_class->set_property = object_set_g_property;
         object_class->get_property = object_get_g_property;
@@ -119,7 +119,7 @@ object_class_init (MrpObjectClass *klass)
 			      G_STRUCT_OFFSET (MrpObjectClass, removed),
 			      NULL, NULL,
 			      mrp_marshal_VOID__VOID,
-			      G_TYPE_NONE, 
+			      G_TYPE_NONE,
 			      0);
 
 	signals[PROP_CHANGED] =
@@ -147,7 +147,7 @@ static void
 object_init (MrpObject *object)
 {
         MrpObjectPriv *priv;
-        
+
         priv = g_new0 (MrpObjectPriv, 1);
         object->priv = priv;
 
@@ -162,7 +162,7 @@ object_finalize (GObject *g_object)
 {
         MrpObject     *object = MRP_OBJECT (g_object);
         MrpObjectPriv *priv;
-        
+
         priv = object->priv;
 
         if (G_OBJECT_CLASS (parent_class)->finalize) {
@@ -175,7 +175,7 @@ object_finalize (GObject *g_object)
  * @object: an #MrpObject
  * @property: the property to set
  * @value: the value to set
- * 
+ *
  * Sets a custom property. This is mostly for language bindings. C programmers
  * should use mrp_object_set instead.
  **/
@@ -189,13 +189,13 @@ mrp_object_set_property (MrpObject *object, MrpProperty *property, GValue *value
 
 	priv  = object->priv;
 	pspec = G_PARAM_SPEC (property);
-	
+
 	value_cpy = g_new0 (GValue, 1);
 
 	g_value_init (value_cpy, G_PARAM_SPEC_VALUE_TYPE (pspec));
 
 	g_value_copy (value, value_cpy);
-		
+
 	tmp_value = g_hash_table_lookup (priv->property_hash,
 					 property);
 
@@ -205,11 +205,11 @@ mrp_object_set_property (MrpObject *object, MrpProperty *property, GValue *value
 	} else {
 		mrp_property_ref (property);
 	}
-		
-	g_hash_table_insert (priv->property_hash, 
+
+	g_hash_table_insert (priv->property_hash,
 			     property, value_cpy);
 
-	g_signal_emit (object, signals[PROP_CHANGED], 
+	g_signal_emit (object, signals[PROP_CHANGED],
 		       g_quark_from_string (G_PARAM_SPEC (property)->name),
 		       property, value);
 
@@ -221,7 +221,7 @@ mrp_object_set_property (MrpObject *object, MrpProperty *property, GValue *value
  * @object: an #MrpObject
  * @property: the property to get
  * @value: the value to get
- * 
+ *
  * Gets a custom property. This is mostly for language bindings. C programmers
  * should use mrp_object_get instead.
  **/
@@ -230,7 +230,7 @@ mrp_object_get_property (MrpObject *object, MrpProperty *property, GValue *value
 {
 	MrpObjectPriv *priv;
 	GValue        *tmp_value;
-	
+
 	priv = object->priv;
 
 	tmp_value = g_hash_table_lookup (priv->property_hash,
@@ -253,9 +253,9 @@ object_set_g_property (GObject        *g_object,
 {
 	MrpObject     *object;
 	MrpObjectPriv *priv;
-	
+
 	g_return_if_fail (MRP_IS_OBJECT (g_object));
-	
+
 	object = MRP_OBJECT (g_object);
 	priv   = object->priv;
 
@@ -271,7 +271,7 @@ object_set_g_property (GObject        *g_object,
 		priv->project = g_value_get_object (value);
 		if (priv->project) {
 			g_object_ref (priv->project);
-			g_signal_connect_object (priv->project, 
+			g_signal_connect_object (priv->project,
 						 "property_removed",
 						 G_CALLBACK (object_property_removed_cb),
 						 object,
@@ -294,10 +294,10 @@ object_get_g_property (GObject      *g_object,
 	MrpObjectPriv *priv;
 
 	g_return_if_fail (MRP_IS_OBJECT (g_object));
-	
+
 	object = MRP_OBJECT (g_object);
 	priv   = object->priv;
-	
+
 	switch (prop_id) {
 	case PROP_PROJECT:
 		g_value_set_object (value, priv->project);
@@ -343,7 +343,7 @@ void
 mrp_object_removed (MrpObject *object)
 {
 	g_return_if_fail (MRP_IS_OBJECT (object));
-	
+
 	g_signal_emit (object, signals[REMOVED], 0);
 }
 
@@ -358,9 +358,9 @@ void
 mrp_object_changed (MrpObject *object)
 {
 	MrpObjectPriv *priv;
-	
+
 	g_return_if_fail (MRP_IS_OBJECT (object));
-	
+
 	priv = object->priv;
 
 	if (priv->project) {
@@ -383,18 +383,18 @@ void
 mrp_object_set (gpointer     pobject,
 		const gchar *first_property_name,
 		...)
-{  
+{
 	MrpObject *object = MRP_OBJECT (pobject);
 	va_list    var_args;
 	gboolean   blocked = FALSE;
-  
+
 	g_return_if_fail (MRP_IS_OBJECT (object));
 
 	if (object->priv->project) {
 		blocked = mrp_project_get_block_scheduling (object->priv->project);
 		mrp_project_set_block_scheduling (object->priv->project, TRUE);
 	}
-	
+
 	va_start (var_args, first_property_name);
 	mrp_object_set_valist (object, first_property_name, var_args);
 	va_end (var_args);
@@ -409,7 +409,7 @@ mrp_object_set (gpointer     pobject,
  * @object: an #MrpProject
  * @first_property_name: the name of the first property to get
  * @...: first value to get, followed by additional name/value pairs to get, NULL terminated
- * 
+ *
  * Retrieves the values of a variable number of custom properties or regular
  * properties from an object. See mrp_object_set().
  **/
@@ -420,9 +420,9 @@ mrp_object_get (gpointer     pobject,
 {
 	MrpObject *object = MRP_OBJECT (pobject);
 	va_list    var_args;
-  
+
 	g_return_if_fail (MRP_IS_OBJECT (object));
-	
+
 	va_start (var_args, first_property_name);
 	mrp_object_get_valist (object, first_property_name, var_args);
 	va_end (var_args);
@@ -443,28 +443,28 @@ mrp_object_set_valist (MrpObject   *object,
 {
 	MrpObjectPriv *priv;
 	const gchar   *name;
-  
+
 	g_return_if_fail (MRP_IS_OBJECT (object));
 
 	priv = object->priv;
-	
+
 	g_object_ref (object);
-  
+
 	name = first_property_name;
 
 	while (name) {
 		GValue       value = { 0, };
 		GParamSpec  *pspec;
 		gchar       *error = NULL;
-		
+
 		pspec = g_object_class_find_property (
 			G_OBJECT_GET_CLASS (object), name);
 
 		if (pspec) {
 			/* Normal g_object property */
-			g_value_init (&value, 
+			g_value_init (&value,
 				      G_PARAM_SPEC_VALUE_TYPE (pspec));
-			
+
 			G_VALUE_COLLECT (&value, var_args, 0, &error);
 			g_object_set_property (G_OBJECT (object),
 					       name,
@@ -472,10 +472,10 @@ mrp_object_set_valist (MrpObject   *object,
 		} else {
 			/* Our custom properties */
 			pspec = G_PARAM_SPEC (
-				mrp_project_get_property (priv->project, 
+				mrp_project_get_property (priv->project,
 							  name,
 							  G_OBJECT_TYPE (object)));
-			
+
 			if (!pspec) {
 				g_warning ("%s: object class `%s' has no property named `%s'",
 					   G_STRLOC,
@@ -483,7 +483,7 @@ mrp_object_set_valist (MrpObject   *object,
 					   name);
 				break;
 			}
-			
+
 			if (!(pspec->flags & G_PARAM_WRITABLE)) {
 				g_warning ("%s: property `%s' of object class `%s' is not writable",
 					   G_STRLOC,
@@ -491,16 +491,16 @@ mrp_object_set_valist (MrpObject   *object,
 					   G_OBJECT_TYPE_NAME (object));
 				break;
 			}
-      
+
 			g_value_init (&value, G_PARAM_SPEC_VALUE_TYPE (pspec));
-			
+
 			G_VALUE_COLLECT (&value, var_args, 0, &error);
 		}
 
 		if (error) {
 			g_warning ("%s: %s", G_STRLOC, error);
 			g_free (error);
-	  
+
 			/* we purposely leak the value here, it might not be
 			 * in a sane state if an error condition occoured
 			 */
@@ -508,10 +508,10 @@ mrp_object_set_valist (MrpObject   *object,
 		}
 
 		mrp_object_set_property (object, MRP_PROPERTY (pspec), &value);
-		
+
 		/* set the property value */
 		g_value_unset (&value);
-      
+
 		name = va_arg (var_args, gchar*);
 	}
 
@@ -533,15 +533,15 @@ mrp_object_get_valist (MrpObject   *object,
 {
 	MrpObjectPriv *priv;
 	const gchar   *name;
-  
+
 	g_return_if_fail (MRP_IS_OBJECT (object));
-  
+
 	priv = object->priv;
-	
+
 	g_object_ref (object);
-  
+
 	name = first_property_name;
-  
+
 	while (name) {
 		GValue      value = { 0, };
 		GParamSpec *pspec;
@@ -550,7 +550,7 @@ mrp_object_get_valist (MrpObject   *object,
 		pspec = g_object_class_find_property (
 			G_OBJECT_GET_CLASS (object),
 			name);
-		
+
 		if (pspec) {
 			g_value_init (&value, G_PARAM_SPEC_VALUE_TYPE (pspec));
 
@@ -561,7 +561,7 @@ mrp_object_get_valist (MrpObject   *object,
 			pspec = mrp_project_get_property (priv->project,
 							  name,
 							  G_OBJECT_TYPE (object));
-			
+
 			if (!pspec) {
 				break;
 			}
@@ -573,14 +573,14 @@ mrp_object_get_valist (MrpObject   *object,
 					   G_OBJECT_TYPE_NAME (object));
 				break;
 			}
-			
+
 			g_value_init (&value, G_PARAM_SPEC_VALUE_TYPE (pspec));
-			
+
 			mrp_object_get_property (object,
-						 MRP_PROPERTY (pspec), 
+						 MRP_PROPERTY (pspec),
 						 &value);
 		}
-      
+
 		G_VALUE_LCOPY (&value, var_args, 0, &error);
 
 		if (error) {
@@ -589,21 +589,21 @@ mrp_object_get_valist (MrpObject   *object,
 			g_value_unset (&value);
 			break;
 		}
-      
+
 		g_value_unset (&value);
-		
+
 		name = va_arg (var_args, gchar *);
 	}
-	
+
 	g_object_unref (object);
 }
 
 /**
  * mrp_object_get_properties:
  * @object: an #MrpObject
- * 
+ *
  * Retrieves the list of custom properties for the type of @object.
- * 
+ *
  * Return value: A list of #MrpProperty, must not be changed or freed.
  **/
 GList *
@@ -614,26 +614,26 @@ mrp_object_get_properties (MrpObject *object)
 	g_return_val_if_fail (MRP_IS_OBJECT (object), NULL);
 
 	priv = object->priv;
-	
-	return mrp_project_get_properties_from_type (priv->project, 
+
+	return mrp_project_get_properties_from_type (priv->project,
 						     G_OBJECT_TYPE (object));
 }
 
 /**
  * mrp_object_get_id:
  * @object: an #MrpObject
- * 
+ *
  * Retrieves the unique object id in the application
- * 
+ *
  * Return value: 0 if fails, object id if everything is ok.
  **/
 guint
 mrp_object_get_id (MrpObject *object)
 {
 	MrpObjectPriv *priv;
-	
+
 	g_return_val_if_fail (MRP_IS_OBJECT (object), 0);
-	
+
 	priv = object->priv;
 
 	return priv->id;
@@ -643,10 +643,10 @@ mrp_object_get_id (MrpObject *object)
 /**
  * mrp_object_set_id:
  * @object: an #MrpObject
- * 
+ *
  * Change the unique object id in the application.
- * This function must be called only from Undo/Redo operations. 
- * 
+ * This function must be called only from Undo/Redo operations.
+ *
  * Return value: FALSE if fails, TRUE is everything is ok.
  **/
 gboolean
@@ -658,8 +658,8 @@ mrp_object_set_id (MrpObject *object,
 	g_return_val_if_fail (MRP_IS_OBJECT (object), FALSE);
 
 	priv = object->priv;
-	
-	if (imrp_application_id_set_data (object, id)) {		
+
+	if (imrp_application_id_set_data (object, id)) {
 		priv->id = id;
 		return TRUE;
 	} else {

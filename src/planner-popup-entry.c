@@ -50,7 +50,7 @@ GtkType
 planner_popup_entry_get_type (void)
 {
 	static GtkType widget_type = 0;
-	
+
 	if (!widget_type) {
 		static const GTypeInfo widget_info = {
 			sizeof (PlannerPopupEntryClass),
@@ -69,17 +69,17 @@ planner_popup_entry_get_type (void)
 			NULL,                                           /* interface_finalize */
 			NULL                                            /* interface_data */
 		};
-      
+
 		widget_type = g_type_register_static (GTK_TYPE_EVENT_BOX,
 						      "PlannerPopupEntry",
 						      &widget_info,
 						      0);
-		
+
 		g_type_add_interface_static (widget_type,
 					     GTK_TYPE_CELL_EDITABLE,
 					     &cell_editable_info);
 	}
-	
+
 	return widget_type;
 }
 
@@ -119,7 +119,7 @@ planner_popup_entry_class_init (PlannerPopupEntryClass *klass)
 	GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
 	widget_class->key_press_event = mpw_key_press_event;
-	
+
 	parent_class = GTK_EVENT_BOX_CLASS (g_type_class_peek_parent (klass));
 
 	signals[ARROW_CLICKED] = g_signal_new
@@ -137,7 +137,7 @@ mpw_arrow_clicked (GtkWidget *button, PlannerPopupEntry *widget)
 {
 	g_signal_emit (widget, signals[ARROW_CLICKED], 0);
 }
-	
+
 /* GtkCellEditable method implementations
  */
 static void
@@ -154,10 +154,10 @@ gtk_cell_editable_key_press_event (GtkEntry      *entry,
 {
 	if (key_event->keyval == GDK_Escape) {
 		widget->editing_canceled = TRUE;
-		
+
 		gtk_cell_editable_editing_done (GTK_CELL_EDITABLE (widget));
 		gtk_cell_editable_remove_widget (GTK_CELL_EDITABLE (widget));
-		
+
 		return TRUE;
 	}
 
@@ -170,13 +170,13 @@ mpw_key_press_event (GtkWidget   *box,
 {
 	PlannerPopupEntry *widget = PLANNER_POPUP_ENTRY (box);
 	GdkEvent       tmp_event;
-	
+
 	if (key_event->keyval == GDK_Escape) {
 		widget->editing_canceled = TRUE;
 
 		gtk_cell_editable_editing_done (GTK_CELL_EDITABLE (widget));
 		gtk_cell_editable_remove_widget (GTK_CELL_EDITABLE (widget));
-		
+
 		return TRUE;
 	}
 
@@ -187,10 +187,10 @@ mpw_key_press_event (GtkWidget   *box,
 
 	tmp_event.key.window = widget->entry->window;
 	tmp_event.key.send_event = TRUE;
-	
+
 	gtk_widget_event (widget->entry, &tmp_event);
 
-	return GTK_WIDGET_CLASS (parent_class)->key_press_event (GTK_WIDGET (widget), 
+	return GTK_WIDGET_CLASS (parent_class)->key_press_event (GTK_WIDGET (widget),
 								 key_event);
 }
 
@@ -245,9 +245,9 @@ planner_popup_get_button_width (void)
 	gint       width;
 
 	GtkRequisition req;
-	
+
 	window = gtk_window_new (GTK_WINDOW_POPUP);
-	
+
 	button = gtk_button_new ();
 	gtk_widget_show (button);
 	gtk_container_add (GTK_CONTAINER (window), button);
@@ -260,7 +260,7 @@ planner_popup_get_button_width (void)
 	gtk_widget_show (window);
 
 	gtk_widget_size_request (window, &req);
-	
+
 	width = req.width;
 
 	gtk_widget_destroy (window);

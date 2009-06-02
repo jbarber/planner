@@ -146,7 +146,7 @@ time_t       mrp_time2_get_epoch         (MrpTime     *t);
 const gchar *mrp_time2_get_day_name      (MrpTime     *t);
 const gchar *mrp_time2_get_month_name    (MrpTime     *t);
 const gchar *mrp_time2_get_month_initial (MrpTime     *t);
-gint         mrp_time2_get_week_number   (MrpTime     *t, 
+gint         mrp_time2_get_week_number   (MrpTime     *t,
 					  gint        *year);
 void         mrp_time2_align_prev        (MrpTime     *t,
 					  MrpTimeUnit  unit);

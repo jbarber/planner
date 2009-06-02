@@ -77,9 +77,9 @@ planner_calendar_selector_new (PlannerWindow *window,
 	GtkWidget        *w;
 	GtkTreeSelection *selection;
 	gchar		 *filename;
-	
+
 	g_return_val_if_fail (PLANNER_IS_WINDOW (window), NULL);
-	
+
 	filename = mrp_paths_get_glade_dir ("calendar-dialog.glade");
 	glade = glade_xml_new (filename,
 			       "calendar_selector",
@@ -91,7 +91,7 @@ planner_calendar_selector_new (PlannerWindow *window,
 	}
 
 	selector = glade_xml_get_widget (glade, "calendar_selector");
-	
+
 	data = g_new0 (DialogData, 1);
 
 	data->project = planner_window_get_project (window);
@@ -120,7 +120,7 @@ planner_calendar_selector_new (PlannerWindow *window,
 			  "changed",
 			  G_CALLBACK (cal_selector_selection_changed_cb),
 			  data);
-	
+
 	return selector;
 }
 
@@ -135,7 +135,7 @@ planner_calendar_selector_get_calendar (GtkWidget *dialog)
 	data = SELECTOR_GET_DATA (dialog);
 
 	calendar = cal_selector_get_selected_calendar (GTK_TREE_VIEW (data->tree_view));
-	
+
 	return calendar;
 }
 
@@ -177,7 +177,7 @@ cal_selector_setup_tree_view (GtkTreeView *tree_view,
 	GtkTreeModel      *model;
 	GtkCellRenderer   *cell;
 	GtkTreeViewColumn *col;
-	
+
 	model = cal_selector_create_model (project, tree_view);
 
 	gtk_tree_view_set_model (tree_view, model);
@@ -201,9 +201,9 @@ cal_selector_build_tree (GtkTreeStore *store,
 	GtkTreeIter  iter;
 	const gchar *name;
 	GList       *children, *l;
-		
+
 	name = mrp_calendar_get_name (calendar);
-	
+
 	gtk_tree_store_append (store, &iter, parent);
 	gtk_tree_store_set (store,
 			    &iter,
@@ -211,7 +211,7 @@ cal_selector_build_tree (GtkTreeStore *store,
 			    COL_CALENDAR, calendar,
 			    -1);
 
-	children = mrp_calendar_get_children (calendar);	
+	children = mrp_calendar_get_children (calendar);
 	for (l = children; l; l = l->next) {
 		cal_selector_build_tree (store, &iter, l->data);
 	}
@@ -228,8 +228,8 @@ cal_selector_tree_changed (MrpProject  *project,
 	store = GTK_TREE_STORE (gtk_tree_view_get_model (tree_view));
 
 	gtk_tree_store_clear (store);
-	
-	children = mrp_calendar_get_children (root);	
+
+	children = mrp_calendar_get_children (root);
 	for (l = children; l; l = l->next) {
 		cal_selector_build_tree (store, NULL, l->data);
 	}
@@ -251,7 +251,7 @@ cal_selector_create_model (MrpProject  *project,
 				    G_TYPE_OBJECT,
 				    G_TYPE_STRING);
 
-	children = mrp_calendar_get_children (root);	
+	children = mrp_calendar_get_children (root);
 	for (l = children; l; l = l->next) {
 		cal_selector_build_tree (store, NULL, l->data);
 	}
@@ -261,6 +261,6 @@ cal_selector_create_model (MrpProject  *project,
 				 G_CALLBACK (cal_selector_tree_changed),
 				 tree_view,
 				 0);
-	
+
 	return GTK_TREE_MODEL (store);
 }

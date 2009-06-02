@@ -28,9 +28,9 @@ void init (MrpFileModule  *module,
 	   MrpApplication *application);
 
 
-static gboolean 
-mpx_read_string (MrpFileReader  *reader, 
-		 const gchar    *str, 
+static gboolean
+mpx_read_string (MrpFileReader  *reader,
+		 const gchar    *str,
 		 MrpProject     *project,
 		 GError        **error)
 {
@@ -39,7 +39,7 @@ mpx_read_string (MrpFileReader  *reader,
 	g_return_val_if_fail (str != NULL, FALSE);
 
 	ret = TRUE;
-	
+
 	return ret;
 }
 
@@ -47,11 +47,11 @@ G_MODULE_EXPORT void
 init (MrpFileModule *module, MrpApplication *application)
 {
         MrpFileReader *reader;
-        
+
         reader         = g_new0 (MrpFileReader, 1);
         reader->module = module;
         reader->priv   = NULL;
-	
+
 	reader->read_string = mpx_read_string;
 
         imrp_application_register_reader (application, reader);

@@ -168,7 +168,7 @@ typedef struct {
 	PlannerCmd   base;
 
 	MrpResource *resource;
-	gchar       *property;  
+	gchar       *property;
 	GValue      *value;
 	GValue      *old_value;
 } ResourceCmdEditProperty;
@@ -217,7 +217,7 @@ foreach_find_calendar (GtkTreeModel *model,
 		data->found_iter = *iter;
 		return TRUE;
 	}
-	
+
 	return FALSE;
 }
 
@@ -264,7 +264,7 @@ resource_dialog_setup_option_menu (GtkWidget     *option_menu,
 	if (menu) {
 		gtk_widget_destroy (menu);
 	}
-	
+
 	menu = gtk_menu_new ();
 
 	va_start (args, str1);
@@ -274,7 +274,7 @@ resource_dialog_setup_option_menu (GtkWidget     *option_menu,
 		gtk_menu_append (GTK_MENU (menu), menu_item);
 
 		type = va_arg (args, gint);
-		
+
 		g_object_set_data (G_OBJECT (menu_item),
 				   "data",
 				   GINT_TO_POINTER (type));
@@ -299,7 +299,7 @@ resource_dialog_setup_option_groups (GtkWidget *menu_groups,
 	GtkWidget *menu_item;
 	gchar     *name;
 	GList     *l;
-	
+
 	menu = gtk_option_menu_get_menu (GTK_OPTION_MENU (menu_groups));
 
 	if (menu) {
@@ -341,9 +341,9 @@ resource_dialog_option_menu_get_type_selected (GtkWidget *option_menu)
 	GtkWidget *menu;
 	GtkWidget *item;
 	gint       ret;
-	
+
 	menu = gtk_option_menu_get_menu (GTK_OPTION_MENU (option_menu));
-		
+
 	item = gtk_menu_get_active (GTK_MENU (menu));
 
 	ret = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (item), "data"));
@@ -357,9 +357,9 @@ resource_dialog_option_menu_get_group_selected (GtkWidget *option_menu)
 	GtkWidget *menu;
 	GtkWidget *item;
 	MrpGroup  *ret;
-	
+
 	menu = gtk_option_menu_get_menu (GTK_OPTION_MENU (option_menu));
-		
+
 	item = gtk_menu_get_active (GTK_MENU (menu));
 
 	ret = g_object_get_data (G_OBJECT (item), "data");
@@ -448,7 +448,7 @@ resource_cmd_calendar_do (PlannerCmd *cmd_base)
 {
 	ResourceCmdCalendar *cmd;
 
-	cmd = (ResourceCmdCalendar*) cmd_base;	
+	cmd = (ResourceCmdCalendar*) cmd_base;
 
 	mrp_resource_set_calendar (cmd->resource, cmd->calendar);
 
@@ -460,7 +460,7 @@ resource_cmd_calendar_undo (PlannerCmd *cmd_base)
 {
 	ResourceCmdCalendar *cmd;
 
-	cmd = (ResourceCmdCalendar*) cmd_base;	
+	cmd = (ResourceCmdCalendar*) cmd_base;
 
 	mrp_resource_set_calendar (cmd->resource, cmd->old_calendar);
 
@@ -506,7 +506,7 @@ resource_cmd_edit_calendar (DialogData  *data,
 	if (current_calendar) {
 		cmd->old_calendar = g_object_ref (current_calendar);
 	} else {
-		cmd->old_calendar = NULL;	
+		cmd->old_calendar = NULL;
 	}
 
 	if (calendar) {
@@ -644,7 +644,7 @@ resource_cmd_edit_cost (DialogData  *data,
 				    resource_cmd_cost_do,
 				    resource_cmd_cost_undo,
 				    resource_cmd_cost_free);
-	
+
 	cmd = (ResourceCmdEditCost *) cmd_base;
 
 	cmd->resource = g_object_ref (data->resource);
@@ -735,7 +735,7 @@ resource_cmd_edit_property (PlannerWindow *main_window,
 	return cmd_base;
 }
 
-/* 
+/*
    In text entries we return to the value that exists when focus in.
    The new value is already stored in the object
 */
@@ -775,9 +775,9 @@ resource_cmd_edit_property_focus (PlannerWindow *main_window,
 	return cmd_base;
 }
 
-static void  
-resource_dialog_notify_name_cb (MrpResource *resource,  
-				GParamSpec  *pspec, 
+static void
+resource_dialog_notify_name_cb (MrpResource *resource,
+				GParamSpec  *pspec,
 				GtkWidget   *dialog)
 {
 	DialogData *data;
@@ -786,18 +786,18 @@ resource_dialog_notify_name_cb (MrpResource *resource,
 	g_return_if_fail (MRP_IS_RESOURCE (resource));
 
 	data = DIALOG_GET_DATA (dialog);
-	
+
 	g_object_get (data->resource, "name", &name, NULL);
 
 	g_signal_handlers_block_by_func (data->name_entry,
-					 resource_dialog_name_changed_cb, 
+					 resource_dialog_name_changed_cb,
 					 dialog);
 
 	gtk_entry_set_text (GTK_ENTRY (data->name_entry), name);
 
 	resource_dialog_update_title (data);
-	
-	g_signal_handlers_unblock_by_func (data->name_entry, 
+
+	g_signal_handlers_unblock_by_func (data->name_entry,
 					   resource_dialog_name_changed_cb,
 					   dialog);
 
@@ -839,11 +839,11 @@ resource_dialog_name_focus_out_cb (GtkWidget     *w,
 	g_assert (MRP_IS_RESOURCE (data->resource));
 
 	focus_in_name = g_object_get_data (G_OBJECT (data->resource),"focus_in_name");
-	
+
 	g_value_init (&value, G_TYPE_STRING);
 	g_value_set_string (&value, focus_in_name);
 
-	cmd = resource_cmd_edit_property_focus (data->main_window, 
+	cmd = resource_cmd_edit_property_focus (data->main_window,
 						data->resource, "name", &value);
 
 	g_free (focus_in_name);
@@ -857,61 +857,61 @@ resource_dialog_name_focus_in_cb (GtkWidget     *w,
 				  DialogData    *data)
 {
 	gchar  *name;
-	   
+
 	name = g_strdup (gtk_entry_get_text (GTK_ENTRY (w)));
-	
+
 	g_object_set_data (G_OBJECT (data->resource), "focus_in_name", name);
 
 	return FALSE;
 }
 
-static void  
+static void
 resource_dialog_short_name_changed_cb (GtkWidget  *w,
-				       DialogData *data) 
+				       DialogData *data)
 {
 	const gchar *short_name;
 
 	short_name = gtk_entry_get_text (GTK_ENTRY (w));
 
 	g_signal_handlers_block_by_func (data->resource,
-					 resource_dialog_notify_short_name_cb, 
+					 resource_dialog_notify_short_name_cb,
 					 data->dialog);
 
 	g_object_set (data->resource, "short_name", short_name, NULL);
 
 	g_signal_handlers_unblock_by_func (data->resource,
-					   resource_dialog_notify_short_name_cb, 
+					   resource_dialog_notify_short_name_cb,
 					   data->dialog);
 }
 
-static void  
-resource_dialog_notify_short_name_cb (MrpResource *resource,  
-				      GParamSpec  *pspec, 
+static void
+resource_dialog_notify_short_name_cb (MrpResource *resource,
+				      GParamSpec  *pspec,
 				      GtkWidget   *dialog)
 {
 	DialogData *data;
 	gchar      *short_name;
-   
+
 	g_return_if_fail (MRP_IS_RESOURCE (resource));
 
 	data = DIALOG_GET_DATA (dialog);
-	
+
 	g_object_get (data->resource, "short_name", &short_name, NULL);
 
-	g_signal_handlers_block_by_func (data->short_name_entry, 
-					 resource_dialog_short_name_changed_cb, 
+	g_signal_handlers_block_by_func (data->short_name_entry,
+					 resource_dialog_short_name_changed_cb,
 					 dialog);
 
 	gtk_entry_set_text (GTK_ENTRY (data->short_name_entry), short_name);
 
-	g_signal_handlers_unblock_by_func (data->short_name_entry, 
+	g_signal_handlers_unblock_by_func (data->short_name_entry,
 					   resource_dialog_short_name_changed_cb,
 					   dialog);
 
 	g_free (short_name);
 }
 
-static gboolean  
+static gboolean
 resource_dialog_short_name_focus_out_cb (GtkWidget     *w,
 					 GdkEventFocus *event,
 					 DialogData    *data)
@@ -924,11 +924,11 @@ resource_dialog_short_name_focus_out_cb (GtkWidget     *w,
 
 	focus_in_short_name = g_object_get_data (G_OBJECT (data->resource),
 						 "focus_in_short_name");
-	
+
 	g_value_init (&value, G_TYPE_STRING);
 	g_value_set_string (&value, focus_in_short_name);
 
-	cmd = resource_cmd_edit_property_focus (data->main_window, 
+	cmd = resource_cmd_edit_property_focus (data->main_window,
 						data->resource, "short_name", &value);
 
 	g_free (focus_in_short_name);
@@ -942,17 +942,17 @@ resource_dialog_short_name_focus_in_cb (GtkWidget     *w,
 					DialogData    *data)
 {
 	gchar *name;
-	   
+
 	name = g_strdup (gtk_entry_get_text (GTK_ENTRY (w)));
-	
+
 	g_object_set_data (G_OBJECT (data->resource), "focus_in_short_name", name);
 
 	return FALSE;
 }
 
-static void  
-resource_dialog_notify_type_cb (MrpResource *resource,  
-				GParamSpec  *pspec, 
+static void
+resource_dialog_notify_type_cb (MrpResource *resource,
+				GParamSpec  *pspec,
 				GtkWidget   *dialog)
 {
 	DialogData      *data;
@@ -962,13 +962,13 @@ resource_dialog_notify_type_cb (MrpResource *resource,
 	g_return_if_fail (MRP_IS_RESOURCE (resource));
 
 	data = DIALOG_GET_DATA (dialog);
-	
+
 	g_object_get (data->resource, "type", &type, NULL);
 
-	g_signal_handlers_block_by_func (data->type_menu, 
-					 resource_dialog_type_changed_cb, 
+	g_signal_handlers_block_by_func (data->type_menu,
+					 resource_dialog_type_changed_cb,
 					 data->dialog);
-	
+
 	switch (type) {
 	case MRP_RESOURCE_TYPE_NONE:
 	case MRP_RESOURCE_TYPE_WORK:
@@ -981,7 +981,7 @@ resource_dialog_notify_type_cb (MrpResource *resource,
 
 	gtk_option_menu_set_history (GTK_OPTION_MENU (data->type_menu), index);
 
-	g_signal_handlers_unblock_by_func (data->type_menu, 
+	g_signal_handlers_unblock_by_func (data->type_menu,
 					   resource_dialog_type_changed_cb,
 					   data->dialog);
 }
@@ -992,30 +992,30 @@ resource_dialog_type_changed_cb (GtkWidget  *w,
 {
 	MrpResourceType  type;
 	GValue           value = { 0 };
-	PlannerCmd      *cmd; 
+	PlannerCmd      *cmd;
 
 	type = resource_dialog_option_menu_get_type_selected (data->type_menu);
 
 	g_value_init (&value, G_TYPE_INT);
 	g_value_set_int (&value, type);
-	
+
 	g_signal_handlers_block_by_func (data->resource,
-					 resource_dialog_notify_type_cb, 
+					 resource_dialog_notify_type_cb,
 					 data->dialog);
 
 	cmd = resource_cmd_edit_property (data->main_window, data->resource, "type", &value);
 
 	g_signal_handlers_unblock_by_func (data->resource,
-					   resource_dialog_notify_type_cb, 
+					   resource_dialog_notify_type_cb,
 					   data->dialog);
 	g_value_unset (&value);
 }
 
-static void  
-resource_dialog_notify_group_cb (MrpResource *resource,  
-				 GParamSpec  *pspec, 
+static void
+resource_dialog_notify_group_cb (MrpResource *resource,
+				 GParamSpec  *pspec,
 				 GtkWidget   *dialog)
-{	
+{
 	DialogData *data;
 	MrpProject *project;
 	MrpGroup   *group;
@@ -1025,14 +1025,14 @@ resource_dialog_notify_group_cb (MrpResource *resource,
 	g_return_if_fail (MRP_IS_RESOURCE (resource));
 
 	data = DIALOG_GET_DATA (dialog);
-	
+
 	g_object_get (resource,
 		      "group",   &group,
 		      "project", &project,
 		      NULL);
-	
-	g_signal_handlers_block_by_func (data->group_menu, 
-					 resource_dialog_group_changed_cb, 
+
+	g_signal_handlers_block_by_func (data->group_menu,
+					 resource_dialog_group_changed_cb,
 					 dialog);
 
 	groups = mrp_project_get_groups (project);
@@ -1043,8 +1043,8 @@ resource_dialog_notify_group_cb (MrpResource *resource,
 	}
 
 	gtk_option_menu_set_history (GTK_OPTION_MENU (data->group_menu), index);
-	
-	g_signal_handlers_unblock_by_func (data->group_menu, 
+
+	g_signal_handlers_unblock_by_func (data->group_menu,
 					   resource_dialog_group_changed_cb,
 					   dialog);
 }
@@ -1056,44 +1056,44 @@ resource_dialog_group_changed_cb (GtkWidget  *w,
 	MrpGroup    *group;
 	GValue       value = { 0 };
 	PlannerCmd  *cmd;
-	
+
 	group = resource_dialog_option_menu_get_group_selected (data->group_menu);
 
 	g_value_init (&value, MRP_TYPE_GROUP);
 	g_value_set_object (&value, group);
 
 	g_signal_handlers_block_by_func (data->resource,
-					 resource_dialog_notify_group_cb, 
+					 resource_dialog_notify_group_cb,
 					 data->dialog);
 
 	cmd = resource_cmd_edit_property (data->main_window, data->resource, "group", &value);
 
 	g_signal_handlers_unblock_by_func (data->resource,
-					   resource_dialog_notify_group_cb, 
+					   resource_dialog_notify_group_cb,
 					   data->dialog);
 	g_value_unset (&value);
 }
 
-static void  
+static void
 resource_dialog_email_changed_cb (GtkWidget  *w,
-				  DialogData *data) 
+				  DialogData *data)
 {
 	const gchar *email;
 	GValue       value = { 0 };
-	
+
 	email = gtk_entry_get_text (GTK_ENTRY (w));
 
 	g_value_init (&value, G_TYPE_STRING);
 	g_value_set_string (&value, email);
 
 	g_signal_handlers_block_by_func (data->resource,
-					 resource_dialog_notify_email_cb, 
+					 resource_dialog_notify_email_cb,
 					 data->dialog);
 
 	g_object_set (data->resource, "email", email, NULL);
-	
+
 	g_signal_handlers_unblock_by_func (data->resource,
-					   resource_dialog_notify_email_cb, 
+					   resource_dialog_notify_email_cb,
 					   data->dialog);
 	g_value_unset (&value);
 }
@@ -1110,15 +1110,15 @@ resource_dialog_email_focus_out_cb (GtkWidget     *w,
 	g_assert (MRP_IS_RESOURCE (data->resource));
 
 	focus_in_email = g_object_get_data (G_OBJECT (data->resource), "focus_in_email");
-	
+
 	g_value_init (&value, G_TYPE_STRING);
 	g_value_set_string (&value, focus_in_email);
 
-	cmd = resource_cmd_edit_property_focus (data->main_window, 
+	cmd = resource_cmd_edit_property_focus (data->main_window,
 						data->resource, "email", &value);
 
 	g_free (focus_in_email);
-	
+
 	return FALSE;
 }
 
@@ -1128,35 +1128,35 @@ resource_dialog_email_focus_in_cb (GtkWidget     *w,
 				   DialogData    *data)
 {
 	gchar *email;
-	   
+
 	email = g_strdup (gtk_entry_get_text (GTK_ENTRY (w)));
-	
+
 	g_object_set_data (G_OBJECT (data->resource),  "focus_in_email", email);
 
 	return FALSE;
 }
 
-static void  
-resource_dialog_notify_email_cb (MrpResource *resource,  
-				 GParamSpec  *pspec, 
+static void
+resource_dialog_notify_email_cb (MrpResource *resource,
+				 GParamSpec  *pspec,
 				 GtkWidget   *dialog)
 {
 	DialogData *data;
 	gchar      *email;
-   
+
 	g_return_if_fail (MRP_IS_RESOURCE (resource));
 
 	data = DIALOG_GET_DATA (dialog);
-	
+
 	g_object_get (data->resource, "email", &email, NULL);
 
-	g_signal_handlers_block_by_func (data->email_entry, 
-					 resource_dialog_email_changed_cb, 
+	g_signal_handlers_block_by_func (data->email_entry,
+					 resource_dialog_email_changed_cb,
 					 dialog);
 
 	gtk_entry_set_text (GTK_ENTRY (data->email_entry), email);
 
-	g_signal_handlers_unblock_by_func (data->email_entry, 
+	g_signal_handlers_unblock_by_func (data->email_entry,
 					   resource_dialog_email_changed_cb,
 					   dialog);
 
@@ -1176,7 +1176,7 @@ resource_dialog_resource_cost_focus_out_cb (GtkWidget     *w,
 	cmd = resource_cmd_edit_cost (data, focus_in_cost);
 
 	g_free (focus_in_cost);
-	
+
 	return FALSE;
 }
 
@@ -1186,7 +1186,7 @@ resource_dialog_resource_cost_focus_in_cb (GtkWidget     *w,
 					   DialogData    *data)
 {
 	gchar *cost;
-	   
+
 	cost = g_strdup (gtk_entry_get_text (GTK_ENTRY (w)));
 
 	g_object_set_data (G_OBJECT (data->resource), "focus_in_cost", cost);
@@ -1194,9 +1194,9 @@ resource_dialog_resource_cost_focus_in_cb (GtkWidget     *w,
 	return FALSE;
 }
 
-static void  
+static void
 resource_dialog_cost_changed_cb (GtkWidget  *w,
-				 DialogData *data) 
+				 DialogData *data)
 {
 	const gchar *cost;
 	gfloat       fvalue;
@@ -1205,39 +1205,39 @@ resource_dialog_cost_changed_cb (GtkWidget  *w,
 	cost = gtk_entry_get_text (GTK_ENTRY (w));
 
 	fvalue = planner_parse_float (cost);
-	
+
 	g_value_init (&value, G_TYPE_FLOAT);
 	g_value_set_float (&value, fvalue);
-	
+
 	g_signal_handlers_block_by_func (data->resource,
-					 resource_dialog_notify_cost_cb, 
+					 resource_dialog_notify_cost_cb,
 					 data->dialog);
 
 	mrp_object_set (data->resource, "cost", fvalue, NULL);
 
 	g_signal_handlers_unblock_by_func (data->resource,
-					   resource_dialog_notify_cost_cb, 
+					   resource_dialog_notify_cost_cb,
 					   data->dialog);
 	g_value_unset (&value);
 }
 
-static void  
-resource_dialog_notify_cost_cb (MrpResource *resource,  
-				GParamSpec  *pspec, 
+static void
+resource_dialog_notify_cost_cb (MrpResource *resource,
+				GParamSpec  *pspec,
 				GtkWidget   *dialog)
 {
 	DialogData *data;
 	gfloat      cost;
 	gchar      *str;
-	
+
 	g_return_if_fail (MRP_IS_RESOURCE (resource));
 
 	data = DIALOG_GET_DATA (dialog);
-	
+
 	g_object_get (data->resource, "cost", &cost, NULL);
-	
-	g_signal_handlers_block_by_func (data->cost_entry, 
-					 resource_dialog_cost_changed_cb, 
+
+	g_signal_handlers_block_by_func (data->cost_entry,
+					 resource_dialog_cost_changed_cb,
 					 dialog);
 
 	str = planner_format_float (cost, 2, FALSE);
@@ -1245,14 +1245,14 @@ resource_dialog_notify_cost_cb (MrpResource *resource,
 	gtk_entry_set_text (GTK_ENTRY (data->cost_entry), str);
 	g_free (str);
 
-	g_signal_handlers_unblock_by_func (data->cost_entry, 
+	g_signal_handlers_unblock_by_func (data->cost_entry,
 					   resource_dialog_cost_changed_cb,
 					   dialog);
 }
 
-static void  
-resource_dialog_notify_calendar_cb (MrpResource *resource,  
-				    GParamSpec  *pspec, 
+static void
+resource_dialog_notify_calendar_cb (MrpResource *resource,
+				    GParamSpec  *pspec,
 				    GtkWidget   *dialog)
 {
 	DialogData   *data;
@@ -1265,7 +1265,7 @@ resource_dialog_notify_calendar_cb (MrpResource *resource,
 	data = DIALOG_GET_DATA (dialog);
 
 	model = gtk_tree_view_get_model (GTK_TREE_VIEW (data->calendar_tree_view));
-	
+
 	/* Toggle the old calendar off. */
 	if (resource_dialog_find_calendar (data, data->selected_calendar, &iter)) {
 		gtk_tree_store_set (GTK_TREE_STORE (model),
@@ -1273,7 +1273,7 @@ resource_dialog_notify_calendar_cb (MrpResource *resource,
 				    COL_SELECTED, FALSE,
 				    -1);
 	}
-	
+
 	calendar = mrp_resource_get_calendar (data->resource);
 
 	/* Find the iter of the new calendar so we can toggle it on. */
@@ -1282,7 +1282,7 @@ resource_dialog_notify_calendar_cb (MrpResource *resource,
 				    &iter,
 				    COL_SELECTED, TRUE,
 				    -1);
-		
+
 		data->selected_calendar = calendar;
 	}
 }
@@ -1303,7 +1303,7 @@ resource_dialog_note_focus_out_cb (GtkWidget     *w,
 	PlannerCmd *cmd;
 
 	focus_in_note = g_object_get_data (G_OBJECT (data->resource),"focus_in_note");
-	
+
 	cmd = resource_cmd_edit_note (data, focus_in_note);
 
 	g_free (focus_in_note);
@@ -1320,7 +1320,7 @@ resource_dialog_note_focus_in_cb (GtkWidget     *w,
 
 	g_object_get (data->resource, "note", &note, NULL);
 
-	gtk_text_buffer_set_text (data->note_buffer, note, -1);	
+	gtk_text_buffer_set_text (data->note_buffer, note, -1);
 
 	g_object_set_data (G_OBJECT (data->resource), "focus_in_note", note);
 
@@ -1328,31 +1328,31 @@ resource_dialog_note_focus_in_cb (GtkWidget     *w,
 }
 
 static void
-resource_dialog_notify_note_cb (MrpResource *resource, 
-				GParamSpec  *pspec, 
+resource_dialog_notify_note_cb (MrpResource *resource,
+				GParamSpec  *pspec,
 				GtkWidget   *dialog)
 {
 	DialogData *data;
 	gchar      *note;
-	
+
 	g_return_if_fail (MRP_IS_RESOURCE (resource));
 	g_return_if_fail (GTK_IS_DIALOG (dialog));
 
 	data = DIALOG_GET_DATA (dialog);
-	
+
 	g_object_get (resource, "note", &note, NULL);
 
 	g_signal_handlers_block_by_func (data->note_buffer,
 					 resource_dialog_note_changed_cb,
 					 data);
-	
+
 	gtk_text_buffer_set_text (data->note_buffer, note, -1);
 
 	g_signal_handlers_unblock_by_func (data->note_buffer,
 					   resource_dialog_note_changed_cb,
 					   data);
-	
-	g_free (note);	
+
+	g_free (note);
 }
 
 static void
@@ -1362,11 +1362,11 @@ resource_dialog_note_changed_cb (GtkWidget  *w,
 	const gchar   *note;
 	GtkTextIter    start, end;
 	GtkTextBuffer *buffer;
-	
+
 	buffer = GTK_TEXT_BUFFER (w);
-	
+
 	gtk_text_buffer_get_bounds (buffer, &start, &end);
-	
+
 	note = gtk_text_buffer_get_text (buffer, &start, &end, FALSE);
 
 	g_signal_handlers_block_by_func (data->resource,
@@ -1404,9 +1404,9 @@ resource_dialog_note_stamp_clicked_cb (GtkWidget  *w,
 	strftime (stamp, sizeof (stamp), _("%a %d %b %Y, %H:%M\n"), tm);
 
 	utf8 = g_locale_to_utf8 (stamp, -1, NULL, NULL, NULL);
-	
+
 	gtk_text_buffer_get_end_iter (data->note_buffer, &end);
-	
+
 	if (!gtk_text_iter_starts_line (&end)) {
 		gtk_text_buffer_insert (data->note_buffer, &end, "\n", 1);
 		gtk_text_buffer_get_end_iter (data->note_buffer, &end);
@@ -1425,7 +1425,7 @@ resource_dialog_note_stamp_clicked_cb (GtkWidget  *w,
 
 	gtk_text_view_scroll_mark_onscreen (GTK_TEXT_VIEW (data->note_textview), mark);
 
-	gtk_text_buffer_get_bounds (data->note_buffer, &start, &end);	
+	gtk_text_buffer_get_bounds (data->note_buffer, &start, &end);
 	note = gtk_text_buffer_get_text (data->note_buffer, &start, &end, FALSE);
 
 	if (g_getenv ("PLANNER_DEBUG_UNDO_RESOURCE")) {
@@ -1452,14 +1452,14 @@ resource_dialog_calendar_toggled_cb (GtkCellRendererToggle *cell,
 	PlannerCmd   *cmd;
 
 	if (g_getenv ("PLANNER_DEBUG_UNDO_RESOURCE")) {
-		g_message ("Changing the calendar for the resource %s", 
+		g_message ("Changing the calendar for the resource %s",
 			   mrp_resource_get_name (data->resource));
 	}
-	
+
 	path = gtk_tree_path_new_from_string (path_str);
 
 	model = gtk_tree_view_get_model (GTK_TREE_VIEW (data->calendar_tree_view));
-	
+
 	gtk_tree_model_get_iter (model, &iter, path);
 
 	gtk_tree_model_get (model,
@@ -1471,7 +1471,7 @@ resource_dialog_calendar_toggled_cb (GtkCellRendererToggle *cell,
 	if (!selected) {
 		cmd = resource_cmd_edit_calendar (data, calendar);
 	}
-	
+
 	gtk_tree_path_free (path);
 }
 
@@ -1483,9 +1483,9 @@ resource_dialog_build_calendar_tree_recurse (GtkTreeStore *store,
 	GtkTreeIter  iter;
 	const gchar *name;
 	GList       *children, *l;
-		
+
 	name = mrp_calendar_get_name (calendar);
-	
+
 	gtk_tree_store_append (store, &iter, parent);
 	gtk_tree_store_set (store,
 			    &iter,
@@ -1494,7 +1494,7 @@ resource_dialog_build_calendar_tree_recurse (GtkTreeStore *store,
 			    COL_SELECTED, FALSE,
 			    -1);
 
-	children = mrp_calendar_get_children (calendar);	
+	children = mrp_calendar_get_children (calendar);
 	for (l = children; l; l = l->next) {
 		resource_dialog_build_calendar_tree_recurse (store, &iter, l->data);
 	}
@@ -1514,7 +1514,7 @@ resource_dialog_build_calendar_tree (DialogData *data)
 	root = mrp_project_get_root_calendar (project);
 
 	store = GTK_TREE_STORE (gtk_tree_view_get_model (GTK_TREE_VIEW (data->calendar_tree_view)));
-	
+
 	gtk_tree_store_append (store, &iter, NULL);
 	gtk_tree_store_set (store,
 			    &iter,
@@ -1523,7 +1523,7 @@ resource_dialog_build_calendar_tree (DialogData *data)
 			    COL_SELECTED, FALSE,
 			    -1);
 
-	children = mrp_calendar_get_children (root);	
+	children = mrp_calendar_get_children (root);
 	for (l = children; l; l = l->next) {
 		resource_dialog_build_calendar_tree_recurse (store, NULL, l->data);
 	}
@@ -1531,14 +1531,14 @@ resource_dialog_build_calendar_tree (DialogData *data)
 	gtk_tree_view_expand_all (GTK_TREE_VIEW (data->calendar_tree_view));
 
 	calendar = mrp_resource_get_calendar (data->resource);
-	
+
 	/* Select the current calendar. */
 	if (resource_dialog_find_calendar (data, calendar, &iter)) {
 		gtk_tree_store_set (store,
 				    &iter,
 				    COL_SELECTED, TRUE,
 				    -1);
-		
+
 		data->selected_calendar = calendar;
 	}
 }
@@ -1556,9 +1556,9 @@ resource_dialog_calendar_tree_changed_cb (MrpProject  *project,
 
 	tree_view = GTK_TREE_VIEW (data->calendar_tree_view);
 	store = GTK_TREE_STORE (gtk_tree_view_get_model (tree_view));
-	
+
 	gtk_tree_store_clear (store);
-	
+
 	resource_dialog_build_calendar_tree (data);
 }
 
@@ -1583,7 +1583,7 @@ resource_dialog_create_calendar_model (DialogData *data)
 				 G_CALLBACK (resource_dialog_calendar_tree_changed_cb),
 				 data->dialog,
 				 0);
-	
+
 	return GTK_TREE_MODEL (store);
 }
 
@@ -1595,10 +1595,10 @@ resource_dialog_setup_calendar_tree_view (DialogData *data)
 	GtkTreeModel      *model;
 	GtkCellRenderer   *cell;
 	GtkTreeViewColumn *col;
-	
+
 	project = planner_window_get_project (data->main_window);
 	tree_view = GTK_TREE_VIEW (data->calendar_tree_view);
-	
+
 	model = resource_dialog_create_calendar_model (data);
 
 	gtk_tree_view_set_model (tree_view, model);
@@ -1609,20 +1609,20 @@ resource_dialog_setup_calendar_tree_view (DialogData *data)
 	g_object_set (cell,
 		      "activatable", TRUE,
 		      "radio", TRUE,
-		      NULL);		    
-	
+		      NULL);
+
 	g_signal_connect (cell,
 			  "toggled",
 			  G_CALLBACK (resource_dialog_calendar_toggled_cb),
 			  data);
-	
+
 	gtk_tree_view_column_pack_start (col, cell, FALSE);
 
 	gtk_tree_view_column_set_attributes (col,
 					     cell,
 					     "active", COL_SELECTED,
 					     NULL);
-	
+
 	cell = gtk_cell_renderer_text_new ();
 	gtk_tree_view_column_pack_start (col, cell, FALSE);
 
@@ -1630,7 +1630,7 @@ resource_dialog_setup_calendar_tree_view (DialogData *data)
 					     cell,
 					     "text", COL_NAME,
 					     NULL);
-	
+
 	gtk_tree_view_append_column (tree_view, col);
 
 	resource_dialog_build_calendar_tree (data);
@@ -1683,7 +1683,7 @@ planner_resource_dialog_new (PlannerWindow *window,
 	GtkWidget       *w;
 	DialogData      *data;
 	gchar           *name, *short_name, *email;
-	MrpProject      *project;	
+	MrpProject      *project;
 	MrpGroup        *group;
 	MrpResourceType  type;
 	gfloat           cost;
@@ -1704,9 +1704,9 @@ planner_resource_dialog_new (PlannerWindow *window,
 		gtk_window_present (GTK_WINDOW (dialog));
 		return dialog;
 	}
-	
+
 	g_object_get (resource, "project", &project, NULL);
-	
+
 	filename = mrp_paths_get_glade_dir ("resource-dialog.glade");
 	glade = glade_xml_new (filename,
 			       NULL,
@@ -1719,7 +1719,7 @@ planner_resource_dialog_new (PlannerWindow *window,
 	}
 
 	dialog = glade_xml_get_widget (glade, "resource_dialog");
-	
+
 	data = g_new0 (DialogData, 1);
 
 	data->main_window = window;
@@ -1753,17 +1753,17 @@ planner_resource_dialog_new (PlannerWindow *window,
 	data->cost_entry = glade_xml_get_widget (glade, "entry_cost");
 	data->calendar_tree_view = glade_xml_get_widget (glade, "calendar_treeview");
 	data->note_textview = glade_xml_get_widget (glade, "note_textview");
-	
+
 	data->note_buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (data->note_textview));
 
 	resource_dialog_setup_calendar_tree_view (data);
-	
+
 	g_object_get (data->resource, "note", &note, NULL);
 	if (note) {
 		gtk_text_buffer_set_text (data->note_buffer, note, -1);
 		g_free (note);
 	}
-	
+
 	g_signal_connect (data->note_buffer,
 			  "changed",
 			  G_CALLBACK (resource_dialog_note_changed_cb),
@@ -1778,7 +1778,7 @@ planner_resource_dialog_new (PlannerWindow *window,
 			  "focus_in_event",
 			  G_CALLBACK (resource_dialog_note_focus_in_cb),
 			  data);
-	
+
 
 	w = glade_xml_get_widget (glade, "calendar_button");
 	g_signal_connect (w,
@@ -1801,7 +1801,7 @@ planner_resource_dialog_new (PlannerWindow *window,
 	g_object_set_data_full (G_OBJECT (dialog),
 				"data", data,
 				g_free);
-	
+
 	mrp_object_get (MRP_OBJECT (resource),
 			"name",  &name,
 			"short_name",  &short_name,
@@ -1809,7 +1809,7 @@ planner_resource_dialog_new (PlannerWindow *window,
 			"group", &group,
 			"email", &email,
 			"cost",  &cost,
-			NULL); 
+			NULL);
 
 	gtk_entry_set_text (GTK_ENTRY (data->name_entry), name);
 	g_signal_connect (data->name_entry,
@@ -1833,7 +1833,7 @@ planner_resource_dialog_new (PlannerWindow *window,
 			  "changed",
 			  G_CALLBACK (resource_dialog_short_name_changed_cb),
 			  data);
-			  
+
 	g_signal_connect (data->short_name_entry,
 			  "focus_out_event",
 			  G_CALLBACK (resource_dialog_short_name_focus_out_cb),
@@ -1843,7 +1843,7 @@ planner_resource_dialog_new (PlannerWindow *window,
 			  "focus_in_event",
 			  G_CALLBACK (resource_dialog_short_name_focus_in_cb),
 			  data);
-			  
+
 	resource_dialog_setup_option_menu (data->type_menu,
 					   NULL,
 					   NULL,
@@ -1861,7 +1861,7 @@ planner_resource_dialog_new (PlannerWindow *window,
 		index = 1;
 		break;
 	}
-		
+
 	gtk_option_menu_set_history (GTK_OPTION_MENU (data->type_menu), index);
 
 	g_signal_connect (data->type_menu,
@@ -1878,7 +1878,7 @@ planner_resource_dialog_new (PlannerWindow *window,
 	} else {
 		index = g_list_index (groups, group) + 1;
 	}
-	
+
 	gtk_option_menu_set_history (GTK_OPTION_MENU (data->group_menu),
 				     index);
 
@@ -1904,8 +1904,8 @@ planner_resource_dialog_new (PlannerWindow *window,
 			  G_CALLBACK (resource_dialog_email_focus_in_cb),
 			  data);
 
-	gtk_entry_set_text (GTK_ENTRY (data->cost_entry), 
-			    planner_format_float (cost, 2, FALSE)); 
+	gtk_entry_set_text (GTK_ENTRY (data->cost_entry),
+			    planner_format_float (cost, 2, FALSE));
 
 	g_signal_connect (data->cost_entry,
 			  "changed",
@@ -1921,7 +1921,7 @@ planner_resource_dialog_new (PlannerWindow *window,
 			  "focus_in_event",
 			  G_CALLBACK (resource_dialog_resource_cost_focus_in_cb),
 			  data);
-	
+
 
 	g_free (name);
 	g_free (short_name);
@@ -1932,6 +1932,6 @@ planner_resource_dialog_new (PlannerWindow *window,
 	resource_dialog_update_title (data);
 
 	g_object_unref (glade);
-	
+
 	return dialog;
 }

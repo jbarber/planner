@@ -198,7 +198,7 @@ static void window_connect_proxy_cb (GtkUIManager  *manager,
 				     GtkWidget     *proxy,
 				     PlannerWindow *window);
 
-static void handle_links (GtkAboutDialog *about G_GNUC_UNUSED, 
+static void handle_links (GtkAboutDialog *about G_GNUC_UNUSED,
 			  const gchar *link,
 			  gpointer data);
 
@@ -216,14 +216,14 @@ static void handle_links (GtkAboutDialog *about G_GNUC_UNUSED,
 
 #define VIEW_PATH "/menu/View/Views placeholder"
 #define VIEW_GROUP "view group"
-	
+
 static GtkWindowClass *parent_class = NULL;
 static guint signals[LAST_SIGNAL];
 
 
 static GtkActionEntry entries[] = {
 	{ "File",
-	  NULL, N_("_File"), NULL, NULL, 
+	  NULL, N_("_File"), NULL, NULL,
 	  NULL
 	},
 	{ "FileNew",
@@ -261,7 +261,7 @@ static GtkActionEntry entries[] = {
 	{ "FileExit",
 	  GTK_STOCK_QUIT,          N_("_Quit"),                    "<Control>q",        N_("Exit the program"),
 	  G_CALLBACK (window_exit_cb) },
-	
+
 	{ "Edit",
 	  NULL,                    N_("_Edit"),                    NULL,                NULL,
 	  NULL },
@@ -271,15 +271,15 @@ static GtkActionEntry entries[] = {
 	{ "EditRedo",
 	  GTK_STOCK_REDO,          N_("_Redo"),                    "<Control>r",        N_("Redo the undone action"),
 	  G_CALLBACK (window_redo_cb) },
-	
+
 	{ "View",
 	  NULL,                    N_("_View"),                    NULL,                NULL,
 	  NULL },
-	
+
 	{ "Actions",
 	  NULL,                    N_("_Actions"),                 NULL,                NULL,
 	  NULL },
-	
+
 	{ "Project",
 	  NULL,                    N_("_Project"),                 NULL,                NULL,
 	  NULL },
@@ -295,11 +295,11 @@ static GtkActionEntry entries[] = {
 	{ "EditProjectProps",
 	  GTK_STOCK_PROPERTIES,    N_("_Edit Project Properties"), NULL,                N_("Edit the project properties"),
 	  G_CALLBACK (window_project_props_cb) },
-	
+
 /*	{ "PreferencesEditPreferences",
 	NULL,                    NULL,                           NULL,                NULL,
 	G_CALLBACK (window_preferences_cb) },*/
-	
+
 	{ "Help",
 	  NULL,                    N_("_Help"),                    NULL,                NULL,
 	  NULL },
@@ -335,7 +335,7 @@ planner_window_get_type (void)
 		type = g_type_register_static (GTK_TYPE_WINDOW,
 					       "PlannerWindow", &info, 0);
 	}
-	
+
 	return type;
 }
 
@@ -343,7 +343,7 @@ static void
 window_class_init (PlannerWindowClass *klass)
 {
 	GObjectClass *o_class;
-	
+
 	parent_class = g_type_class_peek_parent (klass);
 
 	o_class = (GObjectClass *) klass;
@@ -380,7 +380,7 @@ window_init (PlannerWindow *window)
 			  "drag_data_received",
 			  G_CALLBACK (window_drag_data_received_cb),
 			  window);
-	
+
 	priv->cmd_manager = planner_cmd_manager_new ();
 
 	g_signal_connect (priv->cmd_manager,
@@ -439,8 +439,8 @@ planner_window_open_recent_cb (GtkAction     *action,
 }
 
 static void
-window_add_widget (GtkUIManager  *merge, 
-		   GtkWidget     *widget, 
+window_add_widget (GtkUIManager  *merge,
+		   GtkWidget     *widget,
 		   PlannerWindow *window)
 {
 	PlannerWindowPriv *priv;
@@ -458,7 +458,7 @@ window_add_stock_icon (GtkIconFactory *icon_factory,
 	gchar      *path;
 	GdkPixbuf  *pixbuf;
 	GtkIconSet *icon_set;
-	
+
 	path = mrp_paths_get_image_dir (filename);
 	pixbuf = gdk_pixbuf_new_from_file (path, NULL);
 	icon_set = gtk_icon_set_new_from_pixbuf (pixbuf);
@@ -475,40 +475,40 @@ window_add_stock_icons (void)
 	if (icon_factory) {
 		return;
 	}
-	
+
 	icon_factory = gtk_icon_factory_new ();
 	gtk_icon_factory_add_default (icon_factory);
 
 	/* Task/Gantt icons. */
-	window_add_stock_icon (icon_factory, 
+	window_add_stock_icon (icon_factory,
 			       "planner-stock-insert-task",
 			       "24_insert_task.png");
-	
-	window_add_stock_icon (icon_factory, 
+
+	window_add_stock_icon (icon_factory,
 			       "planner-stock-remove-task",
 			       "24_remove_task.png");
-	
-	window_add_stock_icon (icon_factory, 
+
+	window_add_stock_icon (icon_factory,
 			       "planner-stock-unlink-task",
 			       "24_unlink_task.png");
-	
-	window_add_stock_icon (icon_factory, 
+
+	window_add_stock_icon (icon_factory,
 			       "planner-stock-link-task",
 			       "24_link_task.png");
-	
-	window_add_stock_icon (icon_factory, 
+
+	window_add_stock_icon (icon_factory,
 			       "planner-stock-indent-task",
 			       "24_indent_task.png");
-	
-	window_add_stock_icon (icon_factory, 
+
+	window_add_stock_icon (icon_factory,
 			       "planner-stock-unindent-task",
 			       "24_unindent_task.png");
-	
-	window_add_stock_icon (icon_factory, 
+
+	window_add_stock_icon (icon_factory,
 			       "planner-stock-move-task-up",
 			       "24_task_up.png");
-	
-	window_add_stock_icon (icon_factory, 
+
+	window_add_stock_icon (icon_factory,
 			       "planner-stock-move-task-down",
 			       "24_task_down.png");
 
@@ -516,7 +516,7 @@ window_add_stock_icons (void)
 	window_add_stock_icon (icon_factory,
 			       "planner-stock-insert-resource",
 			       "/24_insert_resource.png");
-	
+
 	window_add_stock_icon (icon_factory,
 			       "planner-stock-remove-resource",
 			       "24_remove_resource.png");
@@ -524,7 +524,7 @@ window_add_stock_icons (void)
 	window_add_stock_icon (icon_factory,
 			       "planner-stock-edit-resource",
 			       "24_edit_resource.png");
-	
+
 	window_add_stock_icon (icon_factory,
 			       "planner-stock-edit-groups",
 			       "24_groups.png");
@@ -555,9 +555,9 @@ window_populate (PlannerWindow *window)
 		"</ui>";
 
 	priv = window->priv;
-	
+
 	window_add_stock_icons ();
-	
+
 	priv->ui_box = gtk_vbox_new (FALSE, 0);
 	gtk_container_add (GTK_CONTAINER (window), priv->ui_box);
 
@@ -579,7 +579,7 @@ window_populate (PlannerWindow *window)
 			  "disconnect_proxy",
 			  G_CALLBACK (window_disconnect_proxy_cb),
 			  window);
-	
+
 	gtk_ui_manager_insert_action_group (priv->ui_manager, priv->actions, 0);
 	gtk_window_add_accel_group (GTK_WINDOW (window),
 				    gtk_ui_manager_get_accel_group (priv->ui_manager));
@@ -591,18 +591,18 @@ window_populate (PlannerWindow *window)
 	g_free (filename);
 
 	g_object_set (gtk_action_group_get_action (priv->actions, "EditUndo"),
-		      "sensitive", FALSE, 
+		      "sensitive", FALSE,
 		      NULL);
 	g_object_set (gtk_action_group_get_action (priv->actions, "EditRedo"),
-		      "sensitive", FALSE, 
+		      "sensitive", FALSE,
 		      NULL);
 	g_object_set (gtk_action_group_get_action (priv->actions, "FileSave"),
-		      "sensitive", FALSE, 
+		      "sensitive", FALSE,
 		      NULL);
 
 	/* Make the Actions menu always visible even when empty. */
 	g_object_set (gtk_action_group_get_action (priv->actions, "Actions"),
-		      "hide-if-empty", FALSE, 
+		      "hide-if-empty", FALSE,
 		      NULL);
 
 	/* Handle recent file stuff. */
@@ -620,15 +620,15 @@ window_populate (PlannerWindow *window)
 	hbox = gtk_hbox_new (FALSE, 0);
 
 	priv->sidebar = planner_sidebar_new ();
-	gtk_box_pack_start (GTK_BOX (hbox), priv->sidebar, FALSE, TRUE, 0); 
-	g_signal_connect (priv->sidebar, 
+	gtk_box_pack_start (GTK_BOX (hbox), priv->sidebar, FALSE, TRUE, 0);
+	g_signal_connect (priv->sidebar,
 			  "icon-selected",
 			  G_CALLBACK (window_view_selected),
 			  window);
 
 	priv->notebook = gtk_notebook_new ();
 	gtk_notebook_set_show_tabs (GTK_NOTEBOOK (priv->notebook), FALSE);
-	gtk_box_pack_start (GTK_BOX (hbox), priv->notebook, TRUE, TRUE, 0); 
+	gtk_box_pack_start (GTK_BOX (hbox), priv->notebook, TRUE, TRUE, 0);
 
 	priv->statusbar = gtk_statusbar_new ();
 	gtk_box_pack_end (GTK_BOX (priv->ui_box), priv->statusbar, FALSE, TRUE, 0);
@@ -645,7 +645,7 @@ window_populate (PlannerWindow *window)
 	priv->views = g_list_append (priv->views, planner_task_view_new ());
 	priv->views = g_list_append (priv->views, planner_resource_view_new ());
 	priv->views = g_list_append (priv->views, planner_usage_view_new ());
-	
+
 	view_num = 0;
 	xml_string = g_strdup ("");
 	r_entries  = g_new0 (GtkRadioActionEntry, g_list_length (priv->views));
@@ -653,7 +653,7 @@ window_populate (PlannerWindow *window)
 		view = l->data;
 
 		planner_view_setup (view, window);
-		
+
 		view_widget = planner_view_get_widget (view);
 		gtk_widget_show (view_widget);
 
@@ -690,7 +690,7 @@ window_populate (PlannerWindow *window)
 	gtk_ui_manager_add_ui_from_string (priv->ui_manager, xml_string_tmp, -1, NULL);
 	g_free (xml_string);
 	g_free (xml_string_tmp);
-	
+
 	gtk_ui_manager_ensure_update (priv->ui_manager);
 
 	/* Load plugins. */
@@ -704,20 +704,20 @@ window_populate (PlannerWindow *window)
 		view_num = 0;
 		for (l = priv->views; l; l = l->next, view_num++ ) {
 			view = l->data;
-			
+
 			if (strcmp (str, planner_view_get_name (view)) == 0) {
 				found = TRUE;
 				break;
-			}			
+			}
 		}
 
 		if (!found) {
 			view_num = 0;
 		}
-		
+
 		window_view_selected (PLANNER_SIDEBAR (priv->sidebar), view_num, window);
 		g_free (str);
-	} else {	
+	} else {
 		window_view_selected (PLANNER_SIDEBAR (priv->sidebar), 0, window);
 	}
 }
@@ -733,7 +733,7 @@ window_view_selected (PlannerSidebar *sidebar,
 	GtkAction         *action;
 
 	priv = window->priv;
-	
+
 	list = g_list_nth (priv->views, index);
 	if (list != NULL) {
 		view = list->data;
@@ -744,7 +744,7 @@ window_view_selected (PlannerSidebar *sidebar,
 	if (view == priv->current_view) {
 		return;
 	}
-	
+
 	if (priv->current_view != NULL) {
 		planner_view_deactivate (priv->current_view);
 	}
@@ -758,13 +758,13 @@ window_view_selected (PlannerSidebar *sidebar,
 	g_signal_handlers_block_by_func (sidebar, window_view_selected, window);
 	planner_sidebar_set_active (PLANNER_SIDEBAR (sidebar), index);
 	g_signal_handlers_unblock_by_func (sidebar, window_view_selected, window);
-	
+
 	action = gtk_action_group_get_action (priv->view_actions,
 					      planner_view_get_name (view));
 	if (!gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action)) ) {
 		gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), TRUE);
 	}
-	
+
 	priv->current_view = view;
 
 	planner_conf_set_string (CONF_ACTIVE_VIEW, planner_view_get_name (view), NULL);
@@ -794,7 +794,7 @@ window_new_cb (GtkAction *action,
 	PlannerWindow     *window;
 	PlannerWindowPriv *priv;
 	GtkWidget         *new_window;
-	
+
 	window = PLANNER_WINDOW (data);
 	priv   = window->priv;
 
@@ -807,15 +807,15 @@ get_last_dir (PlannerWindow *window)
 {
 	PlannerWindowPriv *priv;
 	gchar             *last_dir;
-	
+
 	priv = window->priv;
-	
+
 	last_dir = planner_conf_get_string (CONF_LAST_DIR, NULL);
-	
+
 	if (last_dir == NULL) {
 		last_dir = g_strdup (g_get_home_dir ());
 	}
-	
+
 	return last_dir;
 }
 
@@ -841,7 +841,7 @@ window_open_cb (GtkAction *action,
 						    NULL);
 
 	gtk_file_chooser_set_select_multiple (GTK_FILE_CHOOSER (file_chooser), TRUE);
-	
+
 	filter = gtk_file_filter_new ();
 	gtk_file_filter_set_name (filter, _("Planner Files"));
 	gtk_file_filter_add_pattern (filter, "*.planner");
@@ -880,7 +880,7 @@ window_open_cb (GtkAction *action,
 				g_free (last_dir);
 			}
 		}
-		
+
 		for (l = uris; l; l = l->next) {
 			planner_window_open_in_existing_or_new (window, l->data, FALSE);
 		}
@@ -888,7 +888,7 @@ window_open_cb (GtkAction *action,
 		g_slist_foreach (uris, (GFunc) g_free, NULL);
 		g_slist_free (uris);
 	}
-	
+
 	gtk_widget_destroy (file_chooser);
 }
 
@@ -922,7 +922,7 @@ window_page_setup_cb (GtkAction *action,
 	PlannerWindowPriv *priv;
 	GtkPageSetup      *old_page_setup, *new_page_setup;
 	GtkPrintSettings  *settings;
-	
+
 	window = PLANNER_WINDOW (data);
 	priv = window->priv;
 
@@ -976,24 +976,24 @@ window_print_cb (GtkAction *action,
 		print_action = GTK_PRINT_OPERATION_ACTION_PRINT_DIALOG;
 	} else {
 		print_action = GTK_PRINT_OPERATION_ACTION_PREVIEW;
-	}	
-	
+	}
+
 	res = gtk_print_operation_run (print, print_action, GTK_WINDOW (window), &error);
 
 	if (res == GTK_PRINT_OPERATION_RESULT_ERROR) {
 		GtkWidget *dialog;
-		
+
 		dialog = gtk_message_dialog_new (GTK_WINDOW (window),
 						 GTK_DIALOG_DESTROY_WITH_PARENT,
 						 GTK_MESSAGE_ERROR,
 						 GTK_BUTTONS_CLOSE,
 						 "%s", error->message);
 		g_error_free (error);
-		
+
 		g_signal_connect (dialog, "response",
 				  G_CALLBACK (gtk_widget_destroy), NULL);
-		
-		gtk_widget_show (dialog);      
+
+		gtk_widget_show (dialog);
 	}
 	else if (res == GTK_PRINT_OPERATION_RESULT_APPLY) {
 		settings = gtk_print_operation_get_print_settings (print);
@@ -1011,15 +1011,15 @@ window_close_cb (GtkAction *action,
 }
 
 static void
-window_exit_cb (GtkAction *action, 
+window_exit_cb (GtkAction *action,
 		gpointer   data)
 {
 	PlannerWindow     *window;
 	PlannerWindowPriv *priv;
-	
+
 	window = PLANNER_WINDOW (data);
 	priv   = window->priv;
-	
+
 	planner_application_exit (priv->application);
 }
 
@@ -1033,7 +1033,7 @@ window_redo_cb (GtkAction *action,
 	window = PLANNER_WINDOW (data);
 
 	priv = window->priv;
-	
+
 	planner_cmd_manager_redo (priv->cmd_manager);
 }
 
@@ -1057,10 +1057,10 @@ window_project_props_cb (GtkAction *action,
 {
 	PlannerWindow     *window;
 	PlannerWindowPriv *priv;
-	
+
 	window = PLANNER_WINDOW (data);
 	priv = window->priv;
-	
+
 	if (priv->properties_dialog) {
 		gtk_window_present (GTK_WINDOW (priv->properties_dialog));
 	} else {
@@ -1078,7 +1078,7 @@ window_manage_calendars_cb (GtkAction *action,
 			    gpointer           data)
 {
 	PlannerWindow *window;
-	
+
 	window = PLANNER_WINDOW (data);
 
 	planner_window_show_calendar_dialog (window);
@@ -1089,7 +1089,7 @@ window_edit_day_types_cb (GtkAction *action,
 			  gpointer           data)
 {
 	PlannerWindow *window;
-	
+
 	window = PLANNER_WINDOW (data);
 
 	planner_window_show_day_type_dialog (window);
@@ -1101,29 +1101,29 @@ window_edit_phases_cb (GtkAction *action,
 {
 	PlannerWindow     *window;
 	PlannerWindowPriv *priv;
-	
+
 	window = PLANNER_WINDOW (data);
 	priv = window->priv;
-	
+
 	if (priv->phase_dialog) {
 		gtk_window_present (GTK_WINDOW (priv->phase_dialog));
 	} else {
 		priv->phase_dialog = planner_phase_dialog_new (window);
-		
+
 		g_object_add_weak_pointer (G_OBJECT (priv->phase_dialog),
 					   (gpointer) &priv->phase_dialog);
-		
+
 		gtk_widget_show (priv->phase_dialog);
 	}
 }
 
 static void
-window_help_cb (GtkAction *action, 
+window_help_cb (GtkAction *action,
 		gpointer   data)
 {
 	GError    *error = NULL;
 	GtkWidget *dialog;
-	
+
 	if (!planner_util_show_help (&error)) {
 		dialog = gtk_message_dialog_new (GTK_WINDOW (data),
 						 GTK_DIALOG_MODAL |
@@ -1140,7 +1140,7 @@ window_help_cb (GtkAction *action,
 }
 
 static  void
-handle_links (GtkAboutDialog *about, 
+handle_links (GtkAboutDialog *about,
 	      const gchar    *link,
 	      gpointer        data)
 {
@@ -1156,13 +1156,13 @@ handle_links (GtkAboutDialog *about,
 	default:
 		g_assert_not_reached ();
 	}
-	
+
 	planner_util_show_url (newlink, NULL);
 	g_free (newlink);
 }
 
 static void
-window_about_cb (GtkAction *action, 
+window_about_cb (GtkAction *action,
 		 gpointer   data)
 {
 	PlannerWindow *window;
@@ -1185,21 +1185,21 @@ window_about_cb (GtkAction *action,
 	 * are more than one, to appear in the about box.
 	 */
 	const gchar   *translator_credits = N_("translator-credits");
-	
+
 	window = PLANNER_WINDOW (data);
-	
+
 	filename = mrp_paths_get_image_dir ("gnome-planner.png");
 	pixbuf = gdk_pixbuf_new_from_file (filename, NULL);
 	g_free (filename);
-	
-	gtk_about_dialog_set_email_hook ((GtkAboutDialogActivateLinkFunc) handle_links, 
+
+	gtk_about_dialog_set_email_hook ((GtkAboutDialogActivateLinkFunc) handle_links,
 					 GINT_TO_POINTER (LINK_TYPE_EMAIL), NULL);
-	
-	gtk_about_dialog_set_url_hook ((GtkAboutDialogActivateLinkFunc) handle_links, 
+
+	gtk_about_dialog_set_url_hook ((GtkAboutDialogActivateLinkFunc) handle_links,
 				       GINT_TO_POINTER (LINK_TYPE_URL), NULL);
-	
+
 	gtk_show_about_dialog (GTK_WINDOW (window),
-			       "name", "Planner", 
+			       "name", "Planner",
 			       "version", VERSION,
 			       "comments", _("A Project Management application for the GNOME desktop"),
 			       "authors", authors,
@@ -1211,7 +1211,7 @@ window_about_cb (GtkAction *action,
 			       "website-label", _("The Planner Homepage"),
 			       "logo", pixbuf,
 			       NULL);
-	
+
 	if (pixbuf != NULL) {
 		gdk_pixbuf_unref (pixbuf);
 	}
@@ -1238,7 +1238,7 @@ window_drag_data_received_cb (GtkWidget        *widget,
 	PlannerWindowPriv  *priv;
 	gchar             **uris;
 	gint                i;
-	
+
 	priv = window->priv;
 
 	if (data->length < 0 || data->format != 8) {
@@ -1246,7 +1246,7 @@ window_drag_data_received_cb (GtkWidget        *widget,
 		gtk_drag_finish (context, FALSE, FALSE, time);
 		return;
 	}
-	
+
 	uris = g_uri_list_extract_uris (data->data);
 
 	i = 0;
@@ -1254,7 +1254,7 @@ window_drag_data_received_cb (GtkWidget        *widget,
 		planner_window_open_in_existing_or_new (window, uris[i], FALSE);
 		i++;
 	}
-	
+
 	g_strfreev (uris);
 
 	gtk_drag_finish (context, TRUE, FALSE, time);
@@ -1294,9 +1294,9 @@ window_redo_state_changed_cb (PlannerCmdManager *manager,
 	PlannerWindowPriv *priv;
 	GtkWidget         *widget;
 	GtkWidget         *label;
-	
+
 	priv = window->priv;
-	
+
 	g_object_set (gtk_action_group_get_action (priv->actions, "EditRedo"),
 		      "sensitive", state,
 		      NULL);
@@ -1316,16 +1316,16 @@ window_project_needs_saving_changed_cb (MrpProject   *project,
 					PlannerWindow *window)
 {
 	PlannerWindowPriv *priv;
-	
+
 	priv = window->priv;
-	
+
 	if (needs_saving) {
 		g_timer_reset (priv->last_saved);
 	}
 
 	g_object_set (gtk_action_group_get_action (priv->actions, "FileSave"),
-		      "sensitive", needs_saving, 
-		      NULL);	
+		      "sensitive", needs_saving,
+		      NULL);
 }
 
 static void
@@ -1350,7 +1350,7 @@ window_confirm_exit_run (PlannerWindow *window)
 	gchar            *tmp;
 	const gchar      *uri;
 	gboolean          is_sql = FALSE;
-	
+
 	priv = window->priv;
 
 	minutes = (gint) (g_timer_elapsed (priv->last_saved, NULL) / 60);
@@ -1364,7 +1364,7 @@ window_confirm_exit_run (PlannerWindow *window)
 				       "the last minute will be discarded."));
 	}
 	else if (hours == 0) {
-		time_str = 
+		time_str =
 			g_strdup_printf (ngettext(
 					   "If you don't save, changes made "
 					   "the last %d minute will be "
@@ -1378,7 +1378,7 @@ window_confirm_exit_run (PlannerWindow *window)
 				       "the last hour will be "
 				       "discarded."));
 	} else {
-		time_str = 
+		time_str =
 			g_strdup_printf (ngettext("If you don't save, changes made "
 					   "the last %d hour will be "
 					   "discarded.",
@@ -1388,9 +1388,9 @@ window_confirm_exit_run (PlannerWindow *window)
 	}
 
 	name = window_get_name (window);
-	
+
 	tmp = g_strdup_printf (_("Save changes to document '%s' before closing?"), name);
-	
+
 	dialog = gtk_message_dialog_new (GTK_WINDOW (window),
 					 GTK_DIALOG_MODAL |
 					 GTK_DIALOG_DESTROY_WITH_PARENT,
@@ -1400,7 +1400,7 @@ window_confirm_exit_run (PlannerWindow *window)
 	g_free (name);
 	g_free (time_str);
 	g_free (tmp);
-	
+
 	g_object_set (GTK_MESSAGE_DIALOG (dialog)->label,
 		      "use-markup", TRUE,
 		      "wrap", FALSE,
@@ -1412,8 +1412,8 @@ window_confirm_exit_run (PlannerWindow *window)
 		/* Hack. */
 		is_sql = TRUE;
 	}
-	
-	quit_button = window_create_dialog_button (GTK_STOCK_QUIT, 
+
+	quit_button = window_create_dialog_button (GTK_STOCK_QUIT,
 						   _("C_lose without saving"));
 	gtk_dialog_add_action_widget (GTK_DIALOG (dialog),
 				      quit_button,
@@ -1433,11 +1433,11 @@ window_confirm_exit_run (PlannerWindow *window)
 					      GTK_RESPONSE_YES);
 		gtk_widget_grab_focus (save_button);
 	}
-	
+
 	gtk_widget_show_all (dialog);
 	ret = gtk_dialog_run (GTK_DIALOG (dialog));
         gtk_widget_destroy (dialog);
-        
+
 	switch (ret) {
 	case GTK_RESPONSE_NO: /* Don't save */
                 return TRUE;
@@ -1463,9 +1463,9 @@ window_do_save (PlannerWindow *window, gboolean force)
 	const gchar      *uri = NULL;
 	GError           *error = NULL;
 	gint              response;
-	
+
 	priv = window->priv;
-	
+
 	uri = mrp_project_get_uri (priv->project);
 
 	if (uri == NULL) {
@@ -1480,10 +1480,10 @@ window_do_save (PlannerWindow *window, gboolean force)
 								 GTK_MESSAGE_WARNING,
 								 GTK_BUTTONS_YES_NO,
 								 error->message);
-				
+
 				response = gtk_dialog_run (GTK_DIALOG (dialog));
 				gtk_widget_destroy (dialog);
-				
+
 				if (response == GTK_RESPONSE_YES) {
 					return window_do_save (window, TRUE);
 				}
@@ -1496,14 +1496,14 @@ window_do_save (PlannerWindow *window, gboolean force)
 							 GTK_MESSAGE_ERROR,
 							 GTK_BUTTONS_OK,
 							 error->message);
-			
+
 			gtk_dialog_run (GTK_DIALOG (dialog));
 			gtk_widget_destroy (dialog);
-			
+
 			return FALSE;
 		}
 	}
-	
+
 	return TRUE;
 }
 
@@ -1532,27 +1532,27 @@ window_do_save_as (PlannerWindow *window)
 	last_dir = get_last_dir (window);
 	gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (file_chooser), last_dir);
 	g_free (last_dir);
-	
+
 	response = gtk_dialog_run (GTK_DIALOG (file_chooser));
 	if (response == GTK_RESPONSE_OK) {
 		filename = gtk_file_chooser_get_filename (
 			GTK_FILE_CHOOSER (file_chooser));
 	}
-	
+
 	gtk_widget_destroy (file_chooser);
 
 	if (filename != NULL) {
 		gboolean  success;
 		GError   *error = NULL;
-		
+
 		/* Save the file. */
-		success = mrp_project_save_as (window->priv->project, filename, 
+		success = mrp_project_save_as (window->priv->project, filename,
 					       FALSE, &error);
 
 		if (!success && error->code == MRP_ERROR_SAVE_FILE_EXIST) {
 			GtkWidget *dialog;
 			gint       ret;
-			
+
 			dialog = gtk_message_dialog_new (GTK_WINDOW (window),
 							 GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
 							 GTK_MESSAGE_WARNING,
@@ -1561,15 +1561,15 @@ window_do_save_as (PlannerWindow *window)
 							 error->message);
 
 			gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_YES);
-			
+
 			ret = gtk_dialog_run (GTK_DIALOG (dialog));
 			gtk_widget_destroy (dialog);
-			
+
 			switch (ret) {
 			case GTK_RESPONSE_YES:
-				success = mrp_project_save_as (priv->project, 
+				success = mrp_project_save_as (priv->project,
 							       filename,
-							       TRUE, 
+							       TRUE,
 							       &error);
 				break;
 			case GTK_RESPONSE_NO:
@@ -1589,7 +1589,7 @@ window_do_save_as (PlannerWindow *window)
 			egg_recent_item_unref (item);
 		} else {
 			GtkWidget *dialog;
-			
+
 			dialog = gtk_message_dialog_new (GTK_WINDOW (window),
 							 GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
 							 GTK_MESSAGE_ERROR,
@@ -1606,7 +1606,7 @@ window_do_save_as (PlannerWindow *window)
 		g_free (last_dir);
 
 		g_free (filename);
-		
+
 		return TRUE;
 	} else {
 		return FALSE;
@@ -1628,14 +1628,14 @@ window_create_dialog_button (const gchar *icon_name, const gchar *text)
 	label = gtk_label_new_with_mnemonic (text);
 
 	gtk_label_set_mnemonic_widget (GTK_LABEL (label), GTK_WIDGET (button));
-      
+
 	hbox = gtk_hbox_new (FALSE, 2);
 
 	align = gtk_alignment_new (0.5, 0.5, 0.0, 0.0);
-      
+
 	gtk_box_pack_start (GTK_BOX (hbox), image, FALSE, FALSE, 0);
 	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
-      
+
 	gtk_container_add (GTK_CONTAINER (button), align);
 	gtk_container_add (GTK_CONTAINER (align), hbox);
 	gtk_widget_show_all (align);
@@ -1648,16 +1648,16 @@ planner_window_new (PlannerApplication *application)
 {
 	PlannerWindow     *window;
 	PlannerWindowPriv *priv;
-	
+
 	window = g_object_new (PLANNER_TYPE_WINDOW, NULL);
 	priv = window->priv;
 
 	priv->application = g_object_ref (application);
-	
+
 	priv->project = mrp_project_new (MRP_APPLICATION (application));
 
 	priv->last_saved = g_timer_new ();
-	
+
 	g_signal_connect (priv->project, "needs_saving_changed",
 			  G_CALLBACK (window_project_needs_saving_changed_cb),
 			  window);
@@ -1665,10 +1665,10 @@ planner_window_new (PlannerApplication *application)
 	g_signal_connect (priv->project, "notify::name",
 			  G_CALLBACK (window_project_notify_name_cb),
 			  window);
-	
+
 	window_restore_state (window);
 
-	g_signal_connect (window, "delete_event", 
+	g_signal_connect (window, "delete_event",
 			  G_CALLBACK (window_delete_event_cb),
 			  NULL);
 
@@ -1687,12 +1687,12 @@ planner_window_open (PlannerWindow *window,
 	GError           *error = NULL;
 	GtkWidget        *dialog;
 	EggRecentItem    *item;
-	
+
 	g_return_val_if_fail (PLANNER_IS_WINDOW (window), FALSE);
 	g_return_val_if_fail (uri != NULL, FALSE);
 
 	priv = window->priv;
-	
+
 	if (!mrp_project_load (priv->project, uri, &error)) {
 		dialog = gtk_message_dialog_new (
 			GTK_WINDOW (window),
@@ -1704,7 +1704,7 @@ planner_window_open (PlannerWindow *window,
 		gtk_widget_destroy (dialog);
 
 		return FALSE;
-	} 
+	}
 
 	planner_window_check_version (window);
 
@@ -1714,10 +1714,10 @@ planner_window_open (PlannerWindow *window,
 		egg_recent_item_set_mime_type (item, "application/x-planner");
 		egg_recent_model_add_full (planner_application_get_recent_model (priv->application), item);
 		egg_recent_item_unref (item);
-		
+
 		window_update_title (window);
 	}
-	
+
 	return TRUE;
 }
 
@@ -1737,7 +1737,7 @@ planner_window_open_in_existing_or_new (PlannerWindow *window,
 	if (!filename) {
 		return FALSE;
 	}
-	
+
 	if (mrp_project_is_empty (priv->project)) {
 		ret = planner_window_open (window, filename, internal);
 		g_free (filename);
@@ -1755,7 +1755,7 @@ planner_window_open_in_existing_or_new (PlannerWindow *window,
 			return FALSE;
 		}
 	}
-	
+
 	g_free (filename);
 
 	return FALSE;
@@ -1765,7 +1765,7 @@ GtkUIManager *
 planner_window_get_ui_manager (PlannerWindow *window)
 {
 	g_return_val_if_fail (PLANNER_IS_WINDOW (window), NULL);
-	
+
 	return window->priv->ui_manager;
 }
 
@@ -1773,7 +1773,7 @@ MrpProject *
 planner_window_get_project (PlannerWindow *window)
 {
 	g_return_val_if_fail (PLANNER_IS_WINDOW (window), NULL);
-	
+
 	return window->priv->project;
 }
 
@@ -1781,7 +1781,7 @@ PlannerApplication *
 planner_window_get_application (PlannerWindow  *window)
 {
 	g_return_val_if_fail (PLANNER_IS_WINDOW (window), NULL);
-	
+
 	return window->priv->application;
 }
 
@@ -1795,10 +1795,10 @@ planner_window_check_version (PlannerWindow *window)
 	g_return_if_fail (PLANNER_IS_WINDOW (window));
 
 	priv = window->priv;
-	
+
 	version = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (priv->project),
 						      "version"));
-	
+
 	if (version == 1) {
 		dialog = gtk_message_dialog_new (
 			GTK_WINDOW (window),
@@ -1846,7 +1846,7 @@ window_get_name (PlannerWindow *window)
 	g_object_get (priv->project, "name", &name, NULL);
 	if (name == NULL || name[0] == 0) {
 		g_free (name);
-		
+
 		if (uri == NULL || uri[0] == 0) {
 			name = g_strdup (_("Unnamed"));
 		} else {
@@ -1883,7 +1883,7 @@ planner_window_close (PlannerWindow *window)
 {
 	PlannerWindowPriv *priv;
         gboolean           close = TRUE;
-        
+
 	g_return_if_fail (PLANNER_IS_WINDOW (window));
 
 	priv = window->priv;
@@ -1896,7 +1896,7 @@ planner_window_close (PlannerWindow *window)
 		window_save_state (window);
 
                 g_signal_emit (window, signals[CLOSED], 0, NULL);
-                
+
                 gtk_widget_destroy (GTK_WIDGET (window));
         }
 }
@@ -1905,11 +1905,11 @@ void
 planner_window_show_day_type_dialog (PlannerWindow *window)
 {
 	PlannerWindowPriv *priv;
-	
+
 	g_return_if_fail (PLANNER_IS_WINDOW (window));
 
 	priv = window->priv;
-	
+
 	if (priv->day_type_dialog) {
 		gtk_window_present (GTK_WINDOW (priv->day_type_dialog));
 	} else {
@@ -1926,19 +1926,19 @@ void
 planner_window_show_calendar_dialog (PlannerWindow *window)
 {
 	PlannerWindowPriv *priv;
-	
+
 	g_return_if_fail (PLANNER_IS_WINDOW (window));
 
 	priv = window->priv;
-	
+
 	if (priv->calendar_dialog) {
 		gtk_window_present (GTK_WINDOW (priv->calendar_dialog));
 	} else {
 		priv->calendar_dialog = planner_calendar_dialog_new (window);
-		
+
 		g_object_add_weak_pointer (G_OBJECT (priv->calendar_dialog),
 					   (gpointer) &priv->calendar_dialog);
-		
+
 		gtk_widget_show (priv->calendar_dialog);
 	}
 }
@@ -1966,7 +1966,7 @@ PlannerCmdManager *
 planner_window_get_cmd_manager (PlannerWindow *window)
 {
 	g_return_val_if_fail (PLANNER_IS_WINDOW (window), NULL);
-	
+
 	return window->priv->cmd_manager;
 }
 
@@ -2015,11 +2015,11 @@ window_restore_state (PlannerWindow *window)
 	priv = window->priv;
 
 	exists = planner_conf_dir_exists (CONF_WINDOW_DIR, NULL);
-	
-	if (exists) {	
+
+	if (exists) {
 		maximized = planner_conf_get_bool (CONF_WINDOW_MAXIMIZED,
 						   NULL);
-	
+
 		if (maximized) {
 			gtk_window_maximize (GTK_WINDOW (window));
 		} else {
@@ -2035,7 +2035,7 @@ window_restore_state (PlannerWindow *window)
 				height = DEFAULT_WINDOW_HEIGHT;
 			}
 
-			gtk_window_set_default_size (GTK_WINDOW (window), 
+			gtk_window_set_default_size (GTK_WINDOW (window),
 						     width, height);
 
 			x = planner_conf_get_int (CONF_WINDOW_POS_X,
@@ -2074,7 +2074,7 @@ window_menu_item_select_cb (GtkMenuItem   *proxy,
 
 	action = g_object_get_data (G_OBJECT (proxy),  "gtk-action");
 	g_return_if_fail (action != NULL);
-	
+
 	g_object_get (action, "tooltip", &message, NULL);
 	if (message) {
 		gtk_statusbar_push (GTK_STATUSBAR (priv->statusbar), 0, message);

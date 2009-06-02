@@ -50,11 +50,11 @@ struct _MrpCalendarPriv {
 
 	/* This can override the default calendar */
 	MrpDay      *default_days[7];
-	
+
 	/* Tree structure */
 	MrpCalendar *parent;
 	GList       *children;
-	
+
 	/* Working time intervals set for day types in this calendar */
 	GHashTable  *day_intervals;
 
@@ -62,7 +62,7 @@ struct _MrpCalendarPriv {
 	GHashTable  *days;
 };
 
-struct _MrpInterval 
+struct _MrpInterval
 {
         mrptime         start;
         mrptime         end;
@@ -120,8 +120,8 @@ mrp_calendar_get_type (void)
 			(GInstanceInitFunc) calendar_init,
 		};
 
-		object_type = g_type_register_static (MRP_TYPE_OBJECT, 
-						      "MrpCalendar", 
+		object_type = g_type_register_static (MRP_TYPE_OBJECT,
+						      "MrpCalendar",
 						      &object_info, 0);
 	}
 
@@ -146,9 +146,9 @@ calendar_class_init (MrpCalendarClass *klass)
 			      0,
 			      NULL, NULL,
 			      mrp_marshal_VOID__VOID,
-			      G_TYPE_NONE, 
+			      G_TYPE_NONE,
 			      0);
-	
+
 	g_object_class_install_property (object_class,
 					 PROP_NAME,
 					 g_param_spec_string ("name",
@@ -171,14 +171,14 @@ static void
 calendar_init (MrpCalendar *calendar)
 {
 	MrpCalendarPriv *priv;
-	
+
 	priv = g_new0 (MrpCalendarPriv, 1);
-	
+
 	priv->name   = NULL;
 	priv->parent = NULL;
 	priv->project = NULL;
 	priv->days   = g_hash_table_new_full (NULL, NULL,
-					      NULL, 
+					      NULL,
 					      (GDestroyNotify) mrp_day_unref);
 	priv->children = NULL;
 
@@ -198,12 +198,12 @@ calendar_finalize (GObject *object)
 
 	g_hash_table_destroy (priv->days);
 	g_hash_table_destroy (priv->day_intervals);
-	
+
 	g_list_foreach (priv->children, (GFunc) g_object_unref, NULL);
 	g_list_free (priv->children);
 
 	g_free (priv->name);
-	
+
 	g_free (priv);
 
 	if (G_OBJECT_CLASS (parent_class)->finalize) {
@@ -219,10 +219,10 @@ calendar_get_property (GObject    *object,
 {
 	MrpCalendar     *calendar;
 	MrpCalendarPriv *priv;
-	
+
 	calendar = MRP_CALENDAR (object);
 	priv     = calendar->priv;
-	
+
 	switch (prop_id) {
 	case PROP_NAME:
 		g_value_set_string (value, priv->name);
@@ -245,10 +245,10 @@ calendar_set_property (GObject         *object,
 {
 	MrpCalendar     *calendar;
 	MrpCalendarPriv *priv;
-	
+
 	calendar = MRP_CALENDAR (object);
 	priv     = calendar->priv;
-	
+
 	switch (prop_id) {
 	case PROP_NAME:
 		mrp_calendar_set_name (calendar, g_value_get_string (value));
@@ -266,17 +266,17 @@ calendar_get_default_day (MrpCalendar *calendar, mrptime date, gboolean derive)
 {
 	MrpCalendarPriv *priv;
 	gint             week_day;
-	
+
 	g_return_val_if_fail (MRP_IS_CALENDAR (calendar), 0);
 
 	priv     = calendar->priv;
 	week_day = mrp_time_day_of_week (date);
-	
+
 	if (priv->default_days[week_day] == mrp_day_get_use_base ()) {
 		if (!derive) {
 			return mrp_day_get_use_base ();
 		}
-		
+
 		/* Shouldn't be possible to set MRP_DAY_TYPE_USE_BASE when
 		   priv->parent == NULL so no need to check here */
 		return mrp_calendar_get_day (priv->parent, date, TRUE);
@@ -290,12 +290,12 @@ calendar_get_day (MrpCalendar *calendar, mrptime date, gboolean derive)
 {
 	MrpCalendarPriv *priv;
 	MrpDay          *day;
-	
+
 	g_return_val_if_fail (MRP_IS_CALENDAR (calendar), 0);
 
 	priv = calendar->priv;
 
-	day = (MrpDay *) g_hash_table_lookup (priv->days, 
+	day = (MrpDay *) g_hash_table_lookup (priv->days,
 					      GINT_TO_POINTER ((int)date));
 	if (!day) {
 		if (derive && priv->parent) {
@@ -312,12 +312,12 @@ static MrpCalendar *
 calendar_new (const gchar *name, MrpCalendar *parent)
 {
 	MrpCalendar *calendar;
-	
+
 	calendar = g_object_new (MRP_TYPE_CALENDAR,
-				 "name", name, 
+				 "name", name,
 				 "project", parent->priv->project,
 				 NULL);
-	
+
 	calendar_add_child (parent, calendar);
 
 	return calendar;
@@ -331,9 +331,9 @@ calendar_add_child (MrpCalendar *parent, MrpCalendar *child)
 		return;
 	}
 
-	parent->priv->children = g_list_prepend (parent->priv->children, 
+	parent->priv->children = g_list_prepend (parent->priv->children,
 						  g_object_ref (child));
-	
+
 	child->priv->parent = parent;
 }
 
@@ -357,7 +357,7 @@ calendar_reparent (MrpCalendar *new_parent, MrpCalendar *child)
  * mrp_calendar_new:
  * @name: name of the calendar
  * @project: the #MrpProject that the new calendar will belong to
- * 
+ *
  * Creates a new #MrpCalendar. The calendar will be empty so you need to set the
  * default week and/or override days, see mrp_calendar_set_default_days() and
  * mrp_calendar_set_days().
@@ -370,7 +370,7 @@ mrp_calendar_new (const gchar *name, MrpProject *project)
 	MrpCalendar *calendar;
 
 	calendar = calendar_new (name, mrp_project_get_root_calendar (project));
-	
+
 	imrp_project_signal_calendar_tree_changed (project);
 	imrp_project_set_needs_saving (project, TRUE);
 
@@ -397,17 +397,17 @@ foreach_copy_days (gpointer     key,
 		   MrpCalendar *copy)
 {
 	MrpDay *day = value;
-	
+
 	g_hash_table_insert (copy->priv->days, key, mrp_day_ref (day));
 }
 
 /**
  * mrp_calendar_add:
  * @calendar: a #MrpCalendar to add
- * @parent: a #MrpCalendar to inherit from 
- * 
- * Add @calendar to the project 
- * 
+ * @parent: a #MrpCalendar to inherit from
+ *
+ * Add @calendar to the project
+ *
  * Return value:
  **/
 void
@@ -423,10 +423,10 @@ mrp_calendar_add (MrpCalendar *calendar, MrpCalendar *parent)
  * mrp_calendar_copy:
  * @name: the name of the new calendar
  * @calendar: a #MrpCalendar to copy
- * 
+ *
  * Copies @calendar, making the new calendar a base calendar, that does not have
  * a parent.
- * 
+ *
  * Return value: a new #MrpCalendar that is a copy of @calendar.
  **/
 MrpCalendar *
@@ -435,7 +435,7 @@ mrp_calendar_copy (const gchar *name, MrpCalendar *calendar)
 	MrpCalendar *parent, *ret_val;
 
 	parent = mrp_project_get_root_calendar (calendar->priv->project);
-	
+
 	ret_val = calendar_new (name, parent);
 
  	memcpy (ret_val->priv->default_days,
@@ -444,11 +444,11 @@ mrp_calendar_copy (const gchar *name, MrpCalendar *calendar)
 
 	g_hash_table_foreach (calendar->priv->day_intervals,
 			      (GHFunc) foreach_copy_day_intervals,
-			      ret_val);  
+			      ret_val);
 
 	g_hash_table_foreach (calendar->priv->days,
 			      (GHFunc) foreach_copy_days,
-			      ret_val);  
+			      ret_val);
 
 	imrp_project_signal_calendar_tree_changed (calendar->priv->project);
 	imrp_project_set_needs_saving (calendar->priv->project, TRUE);
@@ -460,11 +460,11 @@ mrp_calendar_copy (const gchar *name, MrpCalendar *calendar)
  * mrp_calendar_derive:
  * @name: the name of the new calendar
  * @parent: the #MrpCalendar to derive
- * 
+ *
  * Derives a new calendar from @parent. The new calendar will inherit all
  * properties from @parent, so if no days are overridden, the calendars will be
  * identical.
- * 
+ *
  * Return value: a new #MrpCalendar that is derived from @parent.
  **/
 MrpCalendar *
@@ -472,7 +472,7 @@ mrp_calendar_derive (const gchar *name, MrpCalendar *parent)
 {
 	MrpCalendar *ret_val;
 	int          i;
-	
+
 	g_return_val_if_fail (MRP_IS_CALENDAR (parent), NULL);
 
 	ret_val = calendar_new (name, parent);
@@ -494,16 +494,16 @@ mrp_calendar_derive (const gchar *name, MrpCalendar *parent)
  *
  * Changes the parent of @calendar so that it inherits @new_parent, instead of
  * its old parent.
- * 
+ *
  **/
 void
 mrp_calendar_reparent (MrpCalendar *new_parent, MrpCalendar *child)
 {
 	g_return_if_fail (MRP_IS_CALENDAR (new_parent));
 	g_return_if_fail (MRP_IS_CALENDAR (child));
-	
+
 	calendar_reparent (new_parent, child);
-	
+
 	imrp_project_signal_calendar_tree_changed (new_parent->priv->project);
 	imrp_project_set_needs_saving (new_parent->priv->project, TRUE);
 }
@@ -511,13 +511,13 @@ mrp_calendar_reparent (MrpCalendar *new_parent, MrpCalendar *child)
 /**
  * mrp_calendar_remove:
  * @calendar: an #MrpCalendar
- * 
+ *
  * Removes @calendar from the project. If the calendar is used by the project, a
  * new calendar is set for the project. If the calendar has a parent, the parent
  * is used, otherwise the first child of the root is used. For resources, the
  * calendar is exchanged for the parent if one exists, otherwise the resource
  * calendar is unset, so that the project default will be used.
- * 
+ *
  **/
 void
 mrp_calendar_remove (MrpCalendar *calendar)
@@ -535,7 +535,7 @@ mrp_calendar_remove (MrpCalendar *calendar)
 	parent = priv->parent;
 
 	root = mrp_project_get_root_calendar (priv->project);
-	
+
 	/* See if this calendar is used anywhere, if so we need to use another
 	 * calendar.
 	 *
@@ -550,19 +550,19 @@ mrp_calendar_remove (MrpCalendar *calendar)
 		list = mrp_calendar_get_children (root);
 		if (list) {
 			new_cal = list->data;
-		}	
+		}
 	}
-	
+
 	if (!new_cal) {
 		g_warning ("Couldn't find fallback calendar.");
 	}
-	
+
 	tmp_cal = mrp_project_get_calendar (priv->project);
-	
+
 	if (tmp_cal == calendar) {
 		g_object_set (priv->project, "calendar", new_cal, NULL);
 	}
-	
+
 	/* Resources. Here we try to use the parent or if that fails,
 	 * unset calendar so we get the project default.
 	 */
@@ -571,31 +571,31 @@ mrp_calendar_remove (MrpCalendar *calendar)
 	} else {
 		new_cal = NULL;
 	}
-	
+
 	resources = mrp_project_get_resources (priv->project);
 	for (r = resources; r; r = r->next) {
 		MrpResource *resource = r->data;
-		
+
 		tmp_cal = mrp_resource_get_calendar (resource);
 		if (tmp_cal == calendar) {
 			mrp_resource_set_calendar (resource, new_cal);
 		}
 	}
-	
+
 	/* FIXME: Need to check tasks when/if they get calendar
 	 * support. Do it like for the resources.
 	 */
 
-	
+
 	/* Remove it. We need to work on a copy, since the real list will be
 	 * changed in calendar_reparent. Prevents corrupt list with infinite
 	 * loops etc.
 	 */
 	list = g_list_copy (priv->children);
-	
+
 	for (l = list; l; l = l->next) {
 		MrpCalendar *child = l->data;
-		
+
 		if (parent) {
 			calendar_reparent (parent, child);
 		} else {
@@ -606,7 +606,7 @@ mrp_calendar_remove (MrpCalendar *calendar)
 	}
 
 	g_list_free (list);
-	
+
 	if (parent) {
 		parent->priv->children = g_list_remove (parent->priv->children,
 							 calendar);
@@ -615,23 +615,23 @@ mrp_calendar_remove (MrpCalendar *calendar)
 
 	imrp_project_signal_calendar_tree_changed (priv->project);
 	imrp_project_set_needs_saving (priv->project, TRUE);
-	
+
 	g_object_unref (calendar);
 }
 
 /**
  * mrp_calendar_get_name:
  * @calendar: an #MrpCalendar
- * 
+ *
  * Retrieves the name of the calendar.
- * 
+ *
  * Return value: the calendar name.
  **/
 const gchar *
 mrp_calendar_get_name (MrpCalendar *calendar)
 {
 	g_return_val_if_fail (MRP_IS_CALENDAR (calendar), "");
-	
+
 	return calendar->priv->name;
 }
 
@@ -641,18 +641,18 @@ mrp_calendar_get_name (MrpCalendar *calendar)
  * @name: the new name
  *
  * Sets the name of the calendar.
- * 
+ *
  **/
 void
 mrp_calendar_set_name (MrpCalendar *calendar, const gchar *name)
 {
 	MrpCalendarPriv *priv;
-	
+
 	g_return_if_fail (MRP_IS_CALENDAR (calendar));
 	g_return_if_fail (name != NULL);
 
 	priv = calendar->priv;
-	
+
 	g_free (priv->name);
 	priv->name = g_strdup (name);
 }
@@ -664,7 +664,7 @@ mrp_calendar_set_name (MrpCalendar *calendar, const gchar *name)
  * @intervals: list of #MrpInterval to set for the specified day
  *
  * Overrides the working time for the day type @day when used in @calendar.
- * 
+ *
  **/
 void
 mrp_calendar_day_set_intervals (MrpCalendar *calendar,
@@ -685,7 +685,7 @@ mrp_calendar_day_set_intervals (MrpCalendar *calendar,
 
 		g_hash_table_remove (priv->day_intervals, day);
 	}
-	
+
 	list = calendar_clean_intervals (intervals);
 
 	g_hash_table_insert (priv->day_intervals, day, list);
@@ -699,13 +699,13 @@ mrp_calendar_day_set_intervals (MrpCalendar *calendar,
  * @calendar: an #MrpCalendar
  * @day: an #MrpDay
  * @check_ancestors: specifies if the whole calendar hierarchy should be checked
- * 
+ *
  * Retrieves the working time for the given day/calendar combination. If
  * @check_ancestors is %TRUE, the calendar hierarchy is searched until a
  * calendar that has set the working time for this day type is found. If %FALSE,
  * the returned list will be empty if there is no explicit working time set for
  * @calendar.
- * 
+ *
  * Return value: List of #MrpInterval, specifying the working time for @day.
  **/
 GList *
@@ -715,11 +715,11 @@ mrp_calendar_day_get_intervals (MrpCalendar *calendar,
 {
 	MrpCalendarPriv *priv;
 	GList          *list = NULL;
-	
+
 	g_return_val_if_fail (MRP_IS_CALENDAR (calendar), NULL);
 
 	priv = calendar->priv;
-	
+
 	/* Look upwards in the tree structure until we find a calendar that has
 	 * defined the working time intervals for this day type.
 	 */
@@ -736,9 +736,9 @@ mrp_calendar_day_get_intervals (MrpCalendar *calendar,
  * mrp_calendar_day_get_total_work:
  * @calendar: an #MrpCalendar
  * @day: an #MrpDay
- * 
+ *
  * Calculates the total amount of work for @day in @calendar.
- * 
+ *
  * Return value: the amount of work in seconds.
  **/
 gint
@@ -750,7 +750,7 @@ mrp_calendar_day_get_total_work (MrpCalendar *calendar,
 	MrpInterval     *ival;
 	gint             total = 0;
 	mrptime          start, end;
-	
+
 	g_return_val_if_fail (MRP_IS_CALENDAR (calendar), 0);
 
 	priv = calendar->priv;
@@ -761,7 +761,7 @@ mrp_calendar_day_get_total_work (MrpCalendar *calendar,
 		ival = l->data;
 
 		mrp_interval_get_absolute (ival, 0, &start, &end);
-		
+
 		total += end - start;
 	}
 
@@ -772,9 +772,9 @@ mrp_calendar_day_get_total_work (MrpCalendar *calendar,
  * mrp_calendar_get_default_day:
  * @calendar: an #MrpCalendar
  * @week_day: integer in the range 0 - 6, where 0 is Sunday
- * 
+ *
  * Retrieves the default day for @calendar.
- * 
+ *
  * Return value: default #MrpDay.
  **/
 MrpDay *
@@ -782,7 +782,7 @@ mrp_calendar_get_default_day (MrpCalendar *calendar,
 			      gint         week_day)
 {
 	MrpCalendarPriv *priv;
-	
+
 	g_return_val_if_fail (MRP_IS_CALENDAR (calendar), NULL);
 
 	priv = calendar->priv;
@@ -795,7 +795,7 @@ mrp_calendar_get_default_day (MrpCalendar *calendar,
  * @calendar: an #MrpCalendar
  * @week_day: integer in the range 0 - 6, where 0 is Sunday
  * @...: #MrpDay followed by more week day/#MrpDay pairs, terminated by -1
- * 
+ *
  * Sets days in the default week for @calendar. Those are the days that are used
  * as fallback is a date is not overridden.
  *
@@ -807,25 +807,25 @@ mrp_calendar_set_default_days (MrpCalendar *calendar,
 {
 	MrpCalendarPriv *priv;
 	va_list          args;
-	
+
 	g_return_if_fail (MRP_IS_CALENDAR (calendar));
-	
+
 	priv = calendar->priv;
 
 	va_start (args, week_day);
-	
+
 	/* Loop the args */
 	for (; week_day != -1; week_day = va_arg (args, gint)) {
 		MrpDay *day = (MrpDay *) va_arg (args, gpointer);
-		
+
 		if (day == mrp_day_get_use_base () && !priv->parent) {
 			g_warning ("Trying to set day type to use base calendar on a base calendar");
 			continue;
 		}
-		
+
 		priv->default_days[week_day] = day;
 	}
-	
+
 	va_end (args);
 
 	calendar_emit_changed (calendar);
@@ -840,7 +840,7 @@ mrp_calendar_set_default_days (MrpCalendar *calendar,
  *
  * Overrides specific dates in @calendar, setting the type of day to use for
  * those dates.
- * 
+ *
  **/
 void
 mrp_calendar_set_days (MrpCalendar *calendar,
@@ -853,15 +853,15 @@ mrp_calendar_set_days (MrpCalendar *calendar,
 	va_list          args;
 
 	g_return_if_fail (MRP_IS_CALENDAR (calendar));
-	
+
 	priv = calendar->priv;
 	va_start (args, date);
-	
+
 	for (time = date; time != -1; time = va_arg (args, mrptime)) {
 		MrpDay *day;
-		
+
 		key = (int) mrp_time_align_day (time);
-		
+
 		day = (MrpDay *) va_arg (args, gpointer);
 		if (day == mrp_day_get_use_base ()) {
 			if (!priv->parent) {
@@ -884,34 +884,34 @@ mrp_calendar_set_days (MrpCalendar *calendar,
 /**
  * mrp_calendar_get_parent:
  * @calendar: an #MrpCalendar
- * 
+ *
  * Retrieves the parent calendar of @calendar. The parent is the calendar that a
  * calendar falls back to if a date or day type is not overridden.
- * 
+ *
  * Return value: The parent calendar.
  **/
 MrpCalendar *
 mrp_calendar_get_parent (MrpCalendar *calendar)
 {
 	g_return_val_if_fail (MRP_IS_CALENDAR (calendar), NULL);
-	
+
 	return calendar->priv->parent;
 }
 
 /**
  * mrp_calendar_get_children:
  * @calendar: an #MrpCalendar
- * 
+ *
  * Retreives a list of the children, i.e. the calenderas that are immediately
  * derived from @calendar.
- * 
+ *
  * Return value: List of @calendar's children.
  **/
 GList *
 mrp_calendar_get_children (MrpCalendar *calendar)
 {
 	g_return_val_if_fail (MRP_IS_CALENDAR (calendar), NULL);
-	
+
 	return calendar->priv->children;
 }
 
@@ -920,16 +920,16 @@ mrp_calendar_get_children (MrpCalendar *calendar)
  * @calendar: an #MrpCalendar
  * @date: an #mrptime
  * @check_ancestors: specifies if the whole calendar hierarchy should be checked
- * 
+ *
  * Retrieves the day type for the given date and calender. If @check_ancestors
  * is %TRUE, the parent and grandparent, and so on, is searched if @calendar
  * does not have an overridden day type for the specified date.
- * 
+ *
  * Return value: An #MrpDay.
  **/
 MrpDay *
-mrp_calendar_get_day (MrpCalendar *calendar, 
-		      mrptime      date, 
+mrp_calendar_get_day (MrpCalendar *calendar,
+		      mrptime      date,
 		      gboolean     check_ancestors)
 {
 	MrpCalendarPriv *priv;
@@ -937,11 +937,11 @@ mrp_calendar_get_day (MrpCalendar *calendar,
 	MrpDay          *day;
 
 	g_return_val_if_fail (MRP_IS_CALENDAR (calendar), NULL);
-	
+
 	priv         = calendar->priv;
 	aligned_date = mrp_time_align_day (date);
 	day          = calendar_get_day (calendar, aligned_date, check_ancestors);
-	
+
 	if (!day) {
 		return calendar_get_default_day (calendar,
 						 aligned_date,
@@ -955,9 +955,9 @@ mrp_calendar_get_day (MrpCalendar *calendar,
  * mrp_interval_new:
  * @start: an #mrptime specifying the start of the interval
  * @end: an #mrptime specifying the end of the interval
- * 
- * Creates a new #MrpInterval ranging from @start to @end. 
- * 
+ *
+ * Creates a new #MrpInterval ranging from @start to @end.
+ *
  * Return value: The newly created interval.
  **/
 MrpInterval *
@@ -965,9 +965,9 @@ mrp_interval_new (mrptime         start,
                   mrptime         end)
 {
         MrpInterval *ret_val;
-        
+
         ret_val = g_new0 (MrpInterval, 1);
-        
+
         ret_val->start     = start;
         ret_val->end       = end;
         ret_val->ref_count = 1;
@@ -978,9 +978,9 @@ mrp_interval_new (mrptime         start,
 /**
  * mrp_interval_copy:
  * @interval: an #MrpInterval
- * 
+ *
  * Copies @interval.
- * 
+ *
  * Return value: The copied interval.
  **/
 MrpInterval *
@@ -989,29 +989,29 @@ mrp_interval_copy (MrpInterval *interval)
         MrpInterval *ret_val;
 
         g_return_val_if_fail (interval != NULL, NULL);
-        
+
         ret_val = g_new0 (MrpInterval, 1);
-        
+
         memcpy (ret_val, interval, sizeof (MrpInterval));
 
 	ret_val->ref_count = 1;
-	
+
         return ret_val;
 }
 
 /**
  * mrp_interval_ref:
  * @interval: an #MrpInterval
- * 
+ *
  * Increases the reference count on @interval.
- * 
+ *
  * Return value: The interval.
  **/
 MrpInterval *
 mrp_interval_ref (MrpInterval *interval)
 {
         g_return_val_if_fail (interval != NULL, NULL);
-        
+
         interval->ref_count++;
 
         return interval;
@@ -1023,7 +1023,7 @@ mrp_interval_ref (MrpInterval *interval)
  *
  * Decreases the reference count on @interval. When the count goes to 0, the
  * interval is freed.
- * 
+ *
  **/
 void
 mrp_interval_unref (MrpInterval *interval)
@@ -1031,7 +1031,7 @@ mrp_interval_unref (MrpInterval *interval)
         g_return_if_fail (interval != NULL);
 
         interval->ref_count--;
-        
+
         if (interval->ref_count <= 0) {
 		g_free (interval);
 	}
@@ -1045,7 +1045,7 @@ mrp_interval_unref (MrpInterval *interval)
  * @end: location to store end time, or %NULL
  *
  * Retrieves the start and end time of #interval, with an optional @offset.
- * 
+ *
  **/
 void
 mrp_interval_get_absolute (MrpInterval *interval,
@@ -1054,7 +1054,7 @@ mrp_interval_get_absolute (MrpInterval *interval,
 			   mrptime     *end)
 {
 	g_return_if_fail (interval != NULL);
-	
+
 	if (start) {
 		*start = interval->start + offset;
 	}
@@ -1071,7 +1071,7 @@ mrp_interval_get_absolute (MrpInterval *interval,
  * @end: value of end time
  *
  * Set the start and end time of #interval, with an optional @offset.
- * 
+ *
  **/
 void
 mrp_interval_set_absolute (MrpInterval *interval,
@@ -1080,7 +1080,7 @@ mrp_interval_set_absolute (MrpInterval *interval,
 			   mrptime     end)
 {
 	g_return_if_fail (interval != NULL);
-	
+
 	interval->start = start - offset;
 
 	interval->end = end - offset;
@@ -1088,23 +1088,23 @@ mrp_interval_set_absolute (MrpInterval *interval,
 
 static void
 foreach_day_interval_add_to_list (MrpDay  *day,
-				  GList  *intervals, 
+				  GList  *intervals,
 				  GList **list)
 {
 	MrpDayWithIntervals *di = g_new0 (MrpDayWithIntervals, 1);
 	di->day = day;
 	di->intervals = intervals;
-	
+
 	*list = g_list_prepend (*list, di);
 }
 
 /**
  * mrp_calendar_get_overridden_days:
  * @calendar: an #MrpCalendar
- * 
+ *
  * Retrieves the days that are overridden in this calendar, and the intervals
  * that they are overriden with. This is mainly used when saving calendar data.
- * 
+ *
  * Return value: A list of #MrpDayWithIntervals structs, that must be freed
  * (both the list and the data).
  **/
@@ -1115,10 +1115,10 @@ mrp_calendar_get_overridden_days (MrpCalendar *calendar)
 	GList           *ret_val = NULL;
 
 	g_return_val_if_fail (MRP_IS_CALENDAR (calendar), NULL);
-	
+
 	priv = calendar->priv;
-	
-	g_hash_table_foreach (priv->day_intervals, 
+
+	g_hash_table_foreach (priv->day_intervals,
 			      (GHFunc) foreach_day_interval_add_to_list,
 			      &ret_val);
 
@@ -1131,14 +1131,14 @@ foreach_day_add_to_list (gpointer key, MrpDay *day, GList **list)
 	MrpDateWithDay *dd = g_new0 (MrpDateWithDay, 1);
 	dd->date = GPOINTER_TO_INT (key);
 	dd->day  = day;
-	
+
 	*list = g_list_prepend (*list, dd);
 }
 
 /**
  * mrp_calendar_get_all_overridden_dates:
  * @calendar: an #MrpCalendar
- * 
+ *
  * Retrieves the overridden dates of @calendar, i.e. the specific dates that
  * differ from the parent calendar.
  *
@@ -1150,11 +1150,11 @@ mrp_calendar_get_all_overridden_dates (MrpCalendar *calendar)
 {
 	MrpCalendarPriv *priv;
 	GList           *ret_val = NULL;
-	
+
 	g_return_val_if_fail (MRP_IS_CALENDAR (calendar), NULL);
-	
+
 	priv = calendar->priv;
-	
+
 	g_hash_table_foreach (priv->days,
 			      (GHFunc) foreach_day_add_to_list,
 			      &ret_val);
@@ -1192,7 +1192,7 @@ imrp_calendar_replace_day (MrpCalendar *calendar,
 	g_return_if_fail (new_day != NULL);
 
 	priv = calendar->priv;
-	
+
 	/* Default week. */
 	for (i = 0; i < 7; i++) {
 		if (priv->default_days[i] == orig_day) {
@@ -1203,19 +1203,19 @@ imrp_calendar_replace_day (MrpCalendar *calendar,
 	/* Overridden days. */
 	data.list = NULL;
 	data.day = orig_day;
-	
-	g_hash_table_foreach (priv->days, 
+
+	g_hash_table_foreach (priv->days,
 			      (GHFunc) foreach_matching_day_add_to_list,
 			      &data);
-	
+
 	for (l = data.list; l; l = l->next) {
 		mrptime date = GPOINTER_TO_INT (l->data);
-		
+
 		/*g_print ("Got overriden day, %s\n",
 		  mrp_time_format ("%H:%M %a %e %b", date));*/
 
 		mrp_calendar_set_days (calendar, date, new_day, (mrptime) -1);
-	}		
+	}
 
 	g_list_free (data.list);
 }
@@ -1229,7 +1229,7 @@ calendar_emit_changed (MrpCalendar *calendar)
 	priv = calendar->priv;
 
 	g_signal_emit (calendar, signals[CALENDAR_CHANGED], 0, NULL);
-	
+
 	for (l = priv->children; l; l = l->next) {
 		calendar_emit_changed (l->data);
 	}
@@ -1242,7 +1242,7 @@ compare_intervals_func (MrpInterval *a, MrpInterval *b)
 
 	mrp_interval_get_absolute (a, 0, &at, NULL);
 	mrp_interval_get_absolute (b, 0, &bt, NULL);
-	
+
 	if (at < bt) {
 		return -1;
 	}
@@ -1270,10 +1270,10 @@ calendar_clean_intervals (GList *list)
 		if (t1 >= t2) {
 			continue;
 		}
-		
+
 		sorted = g_list_prepend (sorted, ival);
 	}
-	
+
 	sorted = g_list_sort (sorted, (GCompareFunc) compare_intervals_func);
 
 	start = -1;
@@ -1292,14 +1292,14 @@ calendar_clean_intervals (GList *list)
 		} else {
 			/* Store the current interval and start a new one. */
 			ival = mrp_interval_new (start, end);
-			
+
 			merged = g_list_prepend (merged, ival);
 
 			start = t1;
 			end = t2;
 		}
 
-		/* Add the last interval if needed. */ 
+		/* Add the last interval if needed. */
 		if (!l->next && start != -1 && end != -1) {
 			ival = mrp_interval_new (start, end);
 			merged = g_list_prepend (merged, ival);
@@ -1318,13 +1318,13 @@ GType
 mrp_interval_get_type (void)
 {
 	static GType our_type = 0;
-  
+
 	if (our_type == 0) {
 		our_type = g_boxed_type_register_static ("MrpInterval",
 							 (GBoxedCopyFunc) mrp_interval_ref,
 							 (GBoxedFreeFunc) mrp_interval_unref);
 	}
-	
+
 	return our_type;
 }
 

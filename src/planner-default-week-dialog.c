@@ -117,14 +117,14 @@ default_week_dialog_response_cb (GtkWidget  *dialog,
 {
 	MrpDay *day;
 	gint    weekday;
-	
+
 	switch (response) {
 	case RESPONSE_APPLY:
 		weekday = default_week_dialog_get_selected_weekday (data);
 		day = default_week_dialog_get_selected_day (data);
 
 		default_week_cmd_edit (data, weekday, day);
-		
+
 /*		mrp_calendar_set_default_days (data->calendar,
 					       weekday, day,
 					       -1);
@@ -159,23 +159,23 @@ planner_default_week_dialog_new (PlannerWindow *window,
 	GtkWidget  *w;
 	gint        i;
 	gchar	   *filename;
-	
+
 	g_return_val_if_fail (PLANNER_IS_WINDOW (window), NULL);
-	
+
 	filename = mrp_paths_get_glade_dir ("calendar-dialog.glade");
 	glade = glade_xml_new (filename ,
 			       "default_week_dialog",
 			       GETTEXT_PACKAGE);
-	
+
 	g_free (filename);
-		
+
 	if (!glade) {
 		g_warning ("Could not create default_week dialog.");
 		return NULL;
 	}
 
 	dialog = glade_xml_get_widget (glade, "default_week_dialog");
-	
+
 	data = g_new0 (DialogData, 1);
 
 	data->main_window = window;
@@ -188,15 +188,15 @@ planner_default_week_dialog_new (PlannerWindow *window,
 				 G_CALLBACK (default_week_dialog_parent_destroy_cb),
 				 dialog,
 				 0);
-	
+
 	/* Get the from/to labels. */
 	for (i = 0; i < 5; i++) {
 		gchar *tmp;
-		
+
 		tmp = g_strdup_printf ("from%d_label", i + 1);
 		data->from_label[i] = glade_xml_get_widget (glade, tmp);
 		g_free (tmp);
-		
+
 		tmp = g_strdup_printf ("to%d_label", i + 1);
 		data->to_label[i] = glade_xml_get_widget (glade, tmp);
 		g_free (tmp);
@@ -208,7 +208,7 @@ planner_default_week_dialog_new (PlannerWindow *window,
 
 	w = glade_xml_get_widget (glade, "name_label");
 	gtk_label_set_text (GTK_LABEL (w), mrp_calendar_get_name (calendar));
-	
+
 	data->weekday_option_menu = glade_xml_get_widget (glade, "weekday_optionmenu");
 	data->day_option_menu = glade_xml_get_widget (glade, "day_optionmenu");
 
@@ -238,7 +238,7 @@ planner_default_week_dialog_new (PlannerWindow *window,
 				g_free);
 
 	default_week_dialog_update_labels (data);
-	
+
 	return dialog;
 }
 
@@ -260,13 +260,13 @@ default_week_dialog_update_labels (DialogData *data)
 	if (day == mrp_day_get_use_base ()) {
 		MrpCalendar *parent;
 		gint         weekday;
-				
+
 		parent = mrp_calendar_get_parent (data->calendar);
 		if (parent) {
 			weekday = default_week_dialog_get_selected_weekday (data);
-			
+
 			day = mrp_calendar_get_default_day (parent, weekday);
-			
+
 			ivals = mrp_calendar_day_get_intervals (parent, day, TRUE);
 		} else {
 			ivals = NULL;
@@ -289,13 +289,13 @@ default_week_dialog_update_labels (DialogData *data)
 		gtk_label_set_markup (GTK_LABEL (data->from_label[0]), tmp);
 		g_free (tmp);
 	}
-	
+
 	i = 0;
 	for (l = ivals; l; l = l->next) {
 		ival = l->data;
-		
+
 		mrp_interval_get_absolute (ival, 0, &start, &end);
-		
+
 		str = mrp_time_format (_("%H:%M"), start);
 		gtk_label_set_text (GTK_LABEL (data->from_label[i]), str);
 		g_free (str);
@@ -311,7 +311,7 @@ default_week_dialog_update_labels (DialogData *data)
 		}
 	}
 }
-	
+
 static void
 default_week_dialog_weekday_selected_cb (GtkOptionMenu *option_menu,
 					 DialogData    *data)
@@ -321,7 +321,7 @@ default_week_dialog_weekday_selected_cb (GtkOptionMenu *option_menu,
 
 	weekday = default_week_dialog_get_selected_weekday (data);
 	day = mrp_calendar_get_default_day (data->calendar, weekday);
-	
+
 	default_week_dialog_set_selected_day (data, day);
 
 	default_week_dialog_update_labels (data);
@@ -333,7 +333,7 @@ default_week_dialog_day_selected_cb (GtkOptionMenu *option_menu,
 {
 	default_week_dialog_update_labels (data);
 }
-	
+
 static void
 default_week_dialog_setup_day_option_menu (GtkOptionMenu *option_menu,
 					   MrpProject    *project,
@@ -353,7 +353,7 @@ default_week_dialog_setup_day_option_menu (GtkOptionMenu *option_menu,
 
 	parent = mrp_calendar_get_parent (calendar);
 	root = mrp_project_get_root_calendar (project);
-	
+
 	menu = gtk_option_menu_get_menu (option_menu);
 
 	if (menu) {
@@ -375,7 +375,7 @@ default_week_dialog_setup_day_option_menu (GtkOptionMenu *option_menu,
 		if (parent == root && day == mrp_day_get_use_base ()) {
 			gtk_widget_set_sensitive (menu_item, FALSE);
 		}
-		
+
 		g_object_set_data (G_OBJECT (menu_item),
 				   "data",
 				   l->data);
@@ -394,7 +394,7 @@ default_week_dialog_get_selected_weekday (DialogData *data)
 	GtkWidget *menu;
 	GtkWidget *item;
 	gint       id;
-	
+
 	menu = gtk_option_menu_get_menu (GTK_OPTION_MENU (data->weekday_option_menu));
 
 	item = gtk_menu_get_active (GTK_MENU (menu));
@@ -410,7 +410,7 @@ default_week_dialog_setup_weekday_option_menu (GtkOptionMenu *option_menu)
 	GtkWidget *menu;
 	GtkWidget *menu_item;
 	gint       i;
-	
+
 	menu = gtk_option_menu_get_menu (option_menu);
 	if (menu) {
 		gtk_widget_destroy (menu);
@@ -423,7 +423,7 @@ default_week_dialog_setup_weekday_option_menu (GtkOptionMenu *option_menu)
 
 		gtk_widget_show (menu_item);
 		gtk_menu_append (GTK_MENU (menu), menu_item);
-		
+
 		g_object_set_data (G_OBJECT (menu_item),
 				   "data",
 				   GINT_TO_POINTER (days[i].day));
@@ -438,7 +438,7 @@ default_week_dialog_get_selected_day (DialogData *data)
 {
 	GtkWidget *menu;
 	GtkWidget *item;
-	
+
 	menu = gtk_option_menu_get_menu (GTK_OPTION_MENU (data->day_option_menu));
 
 	item = gtk_menu_get_active (GTK_MENU (menu));
@@ -454,7 +454,7 @@ default_week_dialog_set_selected_day (DialogData *data,
 	GtkWidget *item;
 	GList     *children, *l;
 	gint       i;
-	
+
 	menu = gtk_option_menu_get_menu (GTK_OPTION_MENU (data->day_option_menu));
 
 	children = GTK_MENU_SHELL (menu)->children;
@@ -506,11 +506,11 @@ default_week_cmd_edit_do (PlannerCmd *cmd_base)
 	} else {
 		day = mrp_project_get_calendar_day_by_id (cmd->project, cmd->day_id);
 	}
-	
+
 	mrp_calendar_set_default_days (cmd->calendar,
 				       cmd->weekday, day,
 				       -1);
-	
+
 	return TRUE;
 }
 
@@ -566,9 +566,9 @@ default_week_cmd_edit (DialogData *data,
 	} else {
 		cmd->day_id = mrp_day_get_id (day);
 	}
-	
+
 	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager (data->main_window),
 					   cmd_base);
-	
+
 	return cmd_base;
 }

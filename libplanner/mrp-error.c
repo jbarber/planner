@@ -32,6 +32,6 @@ mrp_error_quark (void)
 	if (q == 0) {
 		q = g_quark_from_static_string ("mrp-error-quark");
 	}
-	
+
 	return q;
 }

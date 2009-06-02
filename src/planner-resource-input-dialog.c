@@ -36,7 +36,7 @@ typedef struct {
 	GtkWidget     *name_entry;
 	GtkWidget     *short_name_entry;
 	GtkWidget     *email_entry;
-	GtkWidget     *group_option_menu;	
+	GtkWidget     *group_option_menu;
 } DialogData;
 
 static void resource_input_dialog_setup_groups (DialogData *data);
@@ -57,12 +57,12 @@ resource_input_dialog_get_selected (GtkWidget *option_menu)
 	GtkWidget *menu;
 	GtkWidget *item;
 	MrpGroup  *ret;
-	
+
 	menu = gtk_option_menu_get_menu (GTK_OPTION_MENU (option_menu));
 	if (!menu) {
 		return NULL;
 	}
-		
+
 	item = gtk_menu_get_active (GTK_MENU (menu));
 
 	ret = g_object_get_data (G_OBJECT (item), "data");
@@ -83,11 +83,11 @@ resource_input_dialog_setup_groups (DialogData *data)
 	gint       index;
 
 	option_menu = data->group_option_menu;
-	
+
 	selected_group = resource_input_dialog_get_selected (option_menu);
 
 	groups = mrp_project_get_groups (data->project);
-	
+
 	menu = gtk_option_menu_get_menu (GTK_OPTION_MENU (option_menu));
 
 	if (menu) {
@@ -171,31 +171,31 @@ resource_input_dialog_response_cb (GtkWidget *button,
 	const gchar *short_name;
 	const gchar *email;
 	MrpGroup    *group;
-	
+
 	switch (response) {
 	case GTK_RESPONSE_OK:
 		data = g_object_get_data (G_OBJECT (dialog), "data");
-		
+
 		name = gtk_entry_get_text (GTK_ENTRY (data->name_entry));
 		short_name = gtk_entry_get_text (GTK_ENTRY (data->short_name_entry));
 		email = gtk_entry_get_text (GTK_ENTRY (data->email_entry));
 
 		group = resource_input_dialog_get_selected (data->group_option_menu);
-			
+
 		resource = g_object_new (MRP_TYPE_RESOURCE,
 					 "name", name,
 					 "short_name", short_name,
 					 "email", email,
 					 "group", group,
 					 NULL);
-		
+
 		/* mrp_project_add_resource (data->project, resource); */
 		planner_resource_cmd_insert (data->main_window, resource);
-		
+
 		gtk_entry_set_text (GTK_ENTRY (data->name_entry), "");
 		gtk_entry_set_text (GTK_ENTRY (data->short_name_entry), "");
 		gtk_entry_set_text (GTK_ENTRY (data->email_entry), "");
-		
+
 		gtk_widget_grab_focus (data->name_entry);
 		break;
 
@@ -203,7 +203,7 @@ resource_input_dialog_response_cb (GtkWidget *button,
 	case GTK_RESPONSE_CANCEL:
 		gtk_widget_destroy (dialog);
 		break;
-		
+
 	default:
 		g_assert_not_reached ();
 		break;
@@ -226,40 +226,40 @@ planner_resource_input_dialog_new (PlannerWindow *main_window)
 	gchar      *filename;
 
 	project = planner_window_get_project (main_window);
-	
+
 	data = g_new0 (DialogData, 1);
 
 	data->project = g_object_ref (project);
 	data->main_window = g_object_ref (main_window);
-	
+
 	filename = mrp_paths_get_glade_dir ("resource-input-dialog.glade");
 	gui = glade_xml_new (filename, NULL, NULL);
 	g_free (filename);
-	
-	dialog = glade_xml_get_widget (gui, "resource_input_dialog"); 
+
+	dialog = glade_xml_get_widget (gui, "resource_input_dialog");
 	g_signal_connect (dialog,
 			  "response",
 			  G_CALLBACK (resource_input_dialog_response_cb),
 			  dialog);
-	
+
 	data->name_entry = glade_xml_get_widget (gui, "name_entry");
 	g_signal_connect (data->name_entry,
 			  "activate",
 			  G_CALLBACK (resource_input_dialog_activate_cb),
 			  dialog);
-	
+
 	data->short_name_entry = glade_xml_get_widget (gui, "short_name_entry");
 	g_signal_connect (data->short_name_entry,
 			  "activate",
 			  G_CALLBACK (resource_input_dialog_activate_cb),
 			  dialog);
-			  
+
 	data->email_entry = glade_xml_get_widget (gui, "email_entry");
 	g_signal_connect (data->email_entry,
 			  "activate",
 			  G_CALLBACK (resource_input_dialog_activate_cb),
 			  dialog);
-	
+
 	data->group_option_menu = glade_xml_get_widget (gui, "group_optionmenu");
 
 	resource_input_dialog_setup_groups (data);
@@ -269,17 +269,17 @@ planner_resource_input_dialog_new (PlannerWindow *main_window)
 				 G_CALLBACK (resource_input_dialog_groups_updated),
 				 dialog,
 				 0);
-	
+
 	g_signal_connect_object (project,
 				 "group_removed",
 				 G_CALLBACK (resource_input_dialog_groups_updated),
 				 dialog,
 				 0);
-	
+
 	g_object_set_data_full (G_OBJECT (dialog),
 				"data",
 				data,
 				resource_input_dialog_free);
-	
+
         return dialog;
 }

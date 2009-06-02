@@ -49,7 +49,7 @@ typedef enum {
 typedef struct {
 	MrpTimeUnit        major_unit;
 	PlannerScaleFormat major_format;
-	
+
 	MrpTimeUnit        minor_unit;
 	PlannerScaleFormat minor_format;
 

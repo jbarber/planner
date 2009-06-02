@@ -42,27 +42,27 @@ static gboolean
 ensure_dir (void)
 {
 	char *dir;
-	
+
 	dir = g_build_filename (g_get_home_dir (), ".gnome2", NULL);
-	
+
 	if (!g_file_test (dir, G_FILE_TEST_EXISTS | G_FILE_TEST_IS_DIR)) {
 		if (g_mkdir (dir, 0755) != 0) {
 			g_free (dir);
 			return FALSE;
 		}
 	}
-	
+
 	g_free (dir);
-	
+
 	dir = g_build_filename (g_get_home_dir (), ".gnome2", "planner", NULL);
-	
+
 	if (!g_file_test (dir, G_FILE_TEST_EXISTS | G_FILE_TEST_IS_DIR)) {
 		if (g_mkdir (dir, 0755) != 0) {
 			g_free (dir);
 			return FALSE;
 		}
 	}
-	
+
 	g_free (dir);
 
 	return TRUE;
@@ -74,7 +74,7 @@ get_config_filename (void)
 	if (!ensure_dir ()) {
 		return NULL;
 	}
-	
+
 	return g_build_filename (g_get_home_dir (),
 				 ".gnome2", "planner",
 				 PLANNER_PRINT_CONFIG_FILE,
@@ -93,7 +93,7 @@ planner_print_dialog_load_page_setup (void)
 	filename = get_config_filename ();
 	if(filename) {
 		key_file = g_key_file_new();
-	
+
 		success = g_key_file_load_from_file (key_file,
 						     filename,
 						     G_KEY_FILE_KEEP_COMMENTS|G_KEY_FILE_KEEP_TRANSLATIONS,
@@ -110,7 +110,7 @@ planner_print_dialog_load_page_setup (void)
 
 		g_key_file_free (key_file);
 	}
-	
+
 	return page_setup;
 }
 
@@ -135,13 +135,13 @@ planner_print_dialog_save_page_setup (GtkPageSetup *page_setup)
 		gtk_page_setup_to_key_file (page_setup, key_file, NULL);
 		str = g_key_file_to_data (key_file, NULL, NULL);
 		g_key_file_free (key_file);
-	
+
 		fd = open (filename, O_WRONLY | O_CREAT | O_TRUNC, 0600);
 		g_free (filename);
-	
+
 		if (fd >= 0) {
 			bytes = strlen (str);
-			
+
 		again:
 			bytes_written = write (fd, str, bytes);
 			if (bytes_written < 0 && errno == EINTR) {
@@ -150,7 +150,7 @@ planner_print_dialog_save_page_setup (GtkPageSetup *page_setup)
 
 			close (fd);
 		}
-		
+
 		g_free (str);
 	}
 }
@@ -166,7 +166,7 @@ planner_print_dialog_load_print_settings (void)
 	filename = get_config_filename ();
 	if(filename) {
 		key_file = g_key_file_new();
-	
+
 		success = g_key_file_load_from_file (key_file,
 						     filename,
 						     G_KEY_FILE_KEEP_COMMENTS|G_KEY_FILE_KEEP_TRANSLATIONS,
@@ -183,7 +183,7 @@ planner_print_dialog_load_print_settings (void)
 
 		g_key_file_free (key_file);
 	}
-	
+
 	return settings;
 }
 
@@ -208,13 +208,13 @@ planner_print_dialog_save_print_settings (GtkPrintSettings *settings)
 		gtk_print_settings_to_key_file (settings, key_file, NULL);
 		str = g_key_file_to_data (key_file, NULL, NULL);
 		g_key_file_free (key_file);
-	
+
 		fd = open (filename, O_WRONLY | O_CREAT | O_TRUNC, 0600);
 		g_free (filename);
-	
+
 		if (fd >= 0) {
 			bytes = strlen (str);
-			
+
 		again:
 			bytes_written = write (fd, str, bytes);
 			if (bytes_written < 0 && errno == EINTR) {
@@ -223,7 +223,7 @@ planner_print_dialog_save_print_settings (GtkPrintSettings *settings)
 
 			close (fd);
 		}
-		
+
 		g_free (str);
 	}
 }
@@ -243,8 +243,8 @@ print_dialog_create_page (PlannerWindow *window,
 
 	outer_vbox = gtk_vbox_new (FALSE, 4);
 	gtk_container_set_border_width (GTK_CONTAINER (outer_vbox), 8);
-	
-	str = g_strconcat ("<b>", _("Select the views to print:"), "</b>", NULL); 
+
+	str = g_strconcat ("<b>", _("Select the views to print:"), "</b>", NULL);
 	w = gtk_label_new (str);
 	g_free (str);
 	gtk_box_pack_start (GTK_BOX (outer_vbox), w, FALSE, FALSE, 0);
@@ -265,30 +265,30 @@ print_dialog_create_page (PlannerWindow *window,
 	gtk_box_pack_start (GTK_BOX (vbox), w, FALSE, FALSE, 0);
 	g_object_set_data (G_OBJECT (dialog), "summary-button", w);
 */
-	
+
 	for (l = views; l; l = l->next) {
 		/* Hack. */
 		if (strcmp (planner_view_get_name (l->data), "resource_usage_view") == 0) {
 			continue;
 		}
-		
+
 		w = gtk_check_button_new_with_label (planner_view_get_label (l->data));
 		gtk_box_pack_start (GTK_BOX (vbox), w, FALSE, FALSE, 0);
 		g_object_set_data (G_OBJECT (w), "view", l->data);
 
-		str = g_strdup_printf ("/views/%s/print_enabled", 
+		str = g_strdup_printf ("/views/%s/print_enabled",
 				       planner_view_get_name (l->data));
 		state = planner_conf_get_bool (str, NULL);
 		g_free (str);
 		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (w), state);
-		
+
 		buttons = g_list_prepend (buttons, w);
 	}
 
 	g_object_set_data (G_OBJECT (outer_vbox), "buttons", buttons);
-	
+
 	gtk_widget_show_all (outer_vbox);
-	
+
 	return outer_vbox;
 }
 
@@ -303,13 +303,13 @@ planner_print_dialog_get_print_selection (GtkWidget *widget,
 	gchar           *str;
 
 	g_return_val_if_fail (GTK_IS_WIDGET (widget), NULL);
-	
+
 /*	button = g_object_get_data (G_OBJECT (dialog), "summary-button");
 	if (summary) {
 		*summary = gtk_toggle_button_get_active (button);
 	}
 */
-	
+
 	buttons = g_object_get_data (G_OBJECT (widget), "buttons");
 	for (l = buttons; l; l = l->next) {
 		button = l->data;
@@ -320,9 +320,9 @@ planner_print_dialog_get_print_selection (GtkWidget *widget,
 			views = g_list_prepend (views, view);
 		}
 
-		str = g_strdup_printf ("/views/%s/print_enabled", 
+		str = g_strdup_printf ("/views/%s/print_enabled",
 				       planner_view_get_name (view));
-		planner_conf_set_bool (str, 
+		planner_conf_set_bool (str,
 				       gtk_toggle_button_get_active (button),
 				       NULL);
 		g_free (str);

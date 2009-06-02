@@ -134,13 +134,13 @@ GtkItemFactory *
 planner_task_popup_new (PlannerTaskTree *tree)
 {
 	GtkItemFactory *item_factory;
-	
+
 	item_factory = gtk_item_factory_new (GTK_TYPE_MENU, "<main>", NULL);
 	gtk_item_factory_set_translate_func (item_factory,
 					     task_tree_item_factory_trans,
 					     NULL, NULL);
-	
-	gtk_item_factory_create_items (item_factory, 
+
+	gtk_item_factory_create_items (item_factory,
 				       G_N_ELEMENTS (popup_menu_items),
 				       popup_menu_items, tree);
 
@@ -164,12 +164,12 @@ planner_task_popup_update_sensitivity (GtkItemFactory *factory,
 	MrpTask      *task;
 	MrpTaskType   type;
 	gboolean      milestone;
-	
+
 	length = g_list_length (tasks);
 
 	/* Can always insert task. */
 	task_popup_set_sensitive (factory, PLANNER_TASK_POPUP_INSERT, TRUE);
-	
+
 	/* Nothing else when nothing is selected. */
 	if (length == 0) {
 		task_popup_set_sensitive (factory, PLANNER_TASK_POPUP_SUBTASK, FALSE);

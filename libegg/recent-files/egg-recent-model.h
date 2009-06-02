@@ -23,7 +23,7 @@ struct _EggRecentModel {
 
 struct _EggRecentModelClass {
 	GObjectClass parent_class;
-			
+
 	void (*changed) (EggRecentModel *model, GList *list);
 };
 

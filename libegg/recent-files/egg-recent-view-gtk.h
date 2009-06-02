@@ -22,7 +22,7 @@ typedef struct _EggRecentViewGtkClass EggRecentViewGtkClass;
 
 struct _EggRecentViewGtkClass {
 	GObjectClass parent_class;
-	
+
 	void (*activate) (EggRecentViewGtk *view, EggRecentItem *item);
 };
 

@@ -39,7 +39,7 @@ property_model_property_added_cb (MrpProject   *project,
 	MrpPropertyType type;
 	GtkListStore    *store;
 
-	if (owner_type != shop->owner_type) {  
+	if (owner_type != shop->owner_type) {
 		return;
 	}
 
@@ -47,7 +47,7 @@ property_model_property_added_cb (MrpProject   *project,
 
 	if (store) {
 	type = mrp_property_get_property_type (property);
-	
+
 	gtk_list_store_append (store, &iter);
 
 	gtk_list_store_set (store, &iter,
@@ -66,14 +66,14 @@ property_model_property_removed_helper (GtkTreeModel *model,
 					gpointer      data)
 {
 	gchar *name;
-	
+
 	gtk_tree_model_get (model, iter,
 			    COL_NAME, &name,
 			    -1);
-	
+
 	if (!strcmp (name, data)) {
 		gtk_list_store_remove (GTK_LIST_STORE (model), iter);
-		
+
 		g_free (name);
 		return TRUE;
 	}
@@ -93,7 +93,7 @@ property_model_property_removed_cb (MrpProject   *project,
 				(gchar *)mrp_property_get_name (property));
 }
 
-static gboolean 
+static gboolean
 property_model_property_changed_helper (GtkTreeModel *model,
 					GtkTreePath  *path,
 					GtkTreeIter  *iter,
@@ -104,14 +104,14 @@ property_model_property_changed_helper (GtkTreeModel *model,
 	gchar       *name;
 
 	g_return_val_if_fail (data != NULL, FALSE);
-	
+
 	property      = MRP_PROPERTY (data);
 	property_name = mrp_property_get_name (property);
-	
+
 	gtk_tree_model_get (model, iter,
 			    COL_NAME, &name,
 			    -1);
-	
+
 	if (!strcmp (name, property_name)) {
 		gtk_list_store_set (GTK_LIST_STORE (model), iter,
 				    COL_LABEL, mrp_property_get_label (property),
@@ -128,7 +128,7 @@ property_model_property_changed_cb (MrpProject   *project,
 				    GtkTreeModel *model)
 {
 	/* Find the iter and update it */
-	gtk_tree_model_foreach (model, 
+	gtk_tree_model_foreach (model,
 				property_model_property_changed_helper,
 				property);
 }
@@ -143,25 +143,25 @@ planner_property_model_new (MrpProject *project,
 	MrpProperty     *property;
 	MrpPropertyType  type;
 	GtkTreeIter      iter;
-	
+
 	store = gtk_list_store_new (5,
 				    G_TYPE_STRING,
 				    G_TYPE_STRING,
 				    G_TYPE_STRING,
 				    G_TYPE_POINTER,
 				    G_TYPE_POINTER);
-	
+
 	shop->store = store;
 	shop->owner_type = owner_type;
 
-	properties = mrp_project_get_properties_from_type (project, 
+	properties = mrp_project_get_properties_from_type (project,
 							   owner_type);
 
 	for (l = properties; l; l = l->next) {
 		property = l->data;
 
 		type = mrp_property_get_property_type (property);
-		
+
 		gtk_list_store_append (store, &iter);
 		gtk_list_store_set (store,
 				    &iter,
@@ -172,16 +172,16 @@ planner_property_model_new (MrpProject *project,
 				    -1);
 	}
 
-	/* We need to know which store to add the property so we pass the shop 
-	*  reference not the store. The shop is a structure that correlates 
+	/* We need to know which store to add the property so we pass the shop
+	*  reference not the store. The shop is a structure that correlates
 	*  which store currently holds which owner. We don't have to bother with
 	*  this when changing or removing - just adding.
-	*/ 
+	*/
 	g_signal_connect (project,
 			  "property_added",
 			  G_CALLBACK (property_model_property_added_cb),
 			  shop);
-	
+
 	g_signal_connect (project,
 			  "property_removed",
 			  G_CALLBACK (property_model_property_removed_cb),

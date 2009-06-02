@@ -43,7 +43,7 @@ typedef struct _PlannerListModelPriv   PlannerListModelPriv;
 struct _PlannerListModel
 {
         GObject          parent;
-	
+
         PlannerListModelPriv *priv;
 };
 
@@ -61,9 +61,9 @@ struct _PlannerListModelClass
 };
 
 GType            planner_list_model_get_type      (void) G_GNUC_CONST;
-void             planner_list_model_append        (PlannerListModel      *model, 
+void             planner_list_model_append        (PlannerListModel      *model,
 					      MrpObject        *object);
-void             planner_list_model_remove        (PlannerListModel      *model, 
+void             planner_list_model_remove        (PlannerListModel      *model,
 					      MrpObject        *object);
 void             planner_list_model_update        (PlannerListModel      *model,
 					      MrpObject        *object);

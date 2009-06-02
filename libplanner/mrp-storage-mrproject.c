@@ -69,7 +69,7 @@ mrp_storage_mrproject_register_type (GTypeModule *module)
 		0,              /* n_preallocs */
 		(GInstanceInitFunc) mpsm_init,
 	};
-	
+
 	mrp_storage_mrproject_type = g_type_module_register_type (
 		module,
 		MRP_TYPE_STORAGE_MODULE,
@@ -124,7 +124,7 @@ mpsm_process_delayed_relations (MrpStorageMrproject *sm)
 	GList           *l;
 	MrpTask         *task, *predecessor_task;
 	DelayedRelation *relation;
-	
+
 	for (l = sm->delayed_relations; l; l = l->next) {
 		relation = l->data;
 
@@ -153,13 +153,13 @@ mpsm_load (MrpStorageModule *module, const gchar *uri, GError **error)
 	MrpTaskManager      *task_manager;
 	MrpAssignment       *assignment;
 	GList               *node;
-	
+
 	g_return_val_if_fail (MRP_IS_STORAGE_MRPROJECT (module), FALSE);
 
 	sm = MRP_STORAGE_MRPROJECT (module);
-	
+
 	/* FIXME: Check that we don't load twice? Free before loading? */
-	
+
 #if 0
 	if (!mrp_parser_load (MRP_STORAGE_MRPROJECT (module), uri, error)) {
 		return FALSE;
@@ -167,7 +167,7 @@ mpsm_load (MrpStorageModule *module, const gchar *uri, GError **error)
 #endif
 
 	task_manager = imrp_project_get_task_manager (sm->project);
-	
+
 	mrp_task_manager_set_root (task_manager,
 				   sm->root_task);
 
@@ -180,7 +180,7 @@ mpsm_load (MrpStorageModule *module, const gchar *uri, GError **error)
 
 	g_hash_table_destroy (sm->task_id_hash);
 	g_list_free (sm->delayed_relations);
-	
+
 	imrp_project_set_groups (sm->project, sm->groups);
 
 	for (node = sm->assignments; node; node = node->next) {
@@ -197,7 +197,7 @@ mpsm_load (MrpStorageModule *module, const gchar *uri, GError **error)
 }
 
 static gboolean
-mpsm_save (MrpStorageModule  *module, 
+mpsm_save (MrpStorageModule  *module,
 	   const gchar       *uri,
 	   gboolean           force,
 	   GError           **error)
@@ -211,7 +211,7 @@ mpsm_save (MrpStorageModule  *module,
 }
 
 static gboolean
-mpsm_to_xml (MrpStorageModule  *module, 
+mpsm_to_xml (MrpStorageModule  *module,
 	     gchar            **str,
 	     GError           **error)
 {
@@ -223,7 +223,7 @@ mpsm_to_xml (MrpStorageModule  *module,
 }
 
 static gboolean
-mpsm_from_xml (MrpStorageModule  *module, 
+mpsm_from_xml (MrpStorageModule  *module,
 	       const gchar       *str,
 	       GError           **error)
 {

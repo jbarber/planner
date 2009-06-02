@@ -23,7 +23,7 @@
  * Modified by the GTK+ Team and others 1997-2000.  See the AUTHORS
  * file for a list of people on the GTK+ Team.  See the ChangeLog
  * files for a list of changes.  These files are distributed with
- * GTK+ at ftp://ftp.gtk.org/pub/gtk/. 
+ * GTK+ at ftp://ftp.gtk.org/pub/gtk/.
  */
 
 #ifndef __PLANNER_CALENDAR_H__
@@ -63,34 +63,34 @@ typedef enum
 struct _PlannerCalendar
 {
 	GtkWidget widget;
-	
+
 	GtkStyle  *header_style;
 	GtkStyle  *label_style;
-	
+
 	gint month;
 	gint year;
 	gint selected_day;
-	
+
 	gint day_month[6][7];
 	gint day[6][7];
-	
+
 	gint num_marked_dates;
 	gint marked_date[31];
 	PlannerCalendarDisplayOptions  display_flags;
 	GdkColor marked_date_color[31];
-	
+
 	GdkGC *gc;
 	GdkGC *xor_gc;
-	
+
 	gint focus_row;
 	gint focus_col;
-	
+
 	gint highlight_row;
 	gint highlight_col;
-	
+
 	gpointer private_data;
 	gchar grow_space [32];
-	
+
 	/* Padding for future expansion */
 	void (*_gtk_reserved1) (void);
 	void (*_gtk_reserved2) (void);
@@ -101,7 +101,7 @@ struct _PlannerCalendar
 struct _PlannerCalendarClass
 {
 	GtkWidgetClass parent_class;
-	
+
 	/* Signal handlers */
 	void (* month_changed)		(PlannerCalendar *calendar);
 	void (* day_selected)			(PlannerCalendar *calendar);
@@ -110,14 +110,14 @@ struct _PlannerCalendarClass
 	void (* next_month)			(PlannerCalendar *calendar);
 	void (* prev_year)			(PlannerCalendar *calendar);
 	void (* next_year)			(PlannerCalendar *calendar);
-	
+
 };
 
 
 GType	   planner_calendar_get_type	(void) G_GNUC_CONST;
 GtkWidget* planner_calendar_new		(void);
 
-gboolean   planner_calendar_select_month	(PlannerCalendar *calendar, 
+gboolean   planner_calendar_select_month	(PlannerCalendar *calendar,
 					 guint	      month,
 					 guint	      year);
 void	   planner_calendar_select_day	(PlannerCalendar *calendar,
@@ -130,7 +130,7 @@ void	   planner_calendar_clear_marks	(PlannerCalendar *calendar);
 void	   planner_calendar_display_options (PlannerCalendar		  *calendar,
 					 PlannerCalendarDisplayOptions flags);
 
-void	   planner_calendar_get_date	(PlannerCalendar *calendar, 
+void	   planner_calendar_get_date	(PlannerCalendar *calendar,
 				 guint	     *year,
 				 guint	     *month,
 				 guint	     *day);

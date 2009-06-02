@@ -43,11 +43,11 @@ typedef struct _MrpTaskClass MrpTaskClass;
 typedef struct _MrpTaskPriv  MrpTaskPriv;
 
 /*
-  NOTE: moved from libplanner/mrp-task-manager.c to use 
+  NOTE: moved from libplanner/mrp-task-manager.c to use
          the structure in the src/planner-gantt-row.c
          new fields are:
            units      . worked units in the interval
-           units_full . expected worked units in the interval 
+           units_full . expected worked units in the interval
                         all resources that are working in the
                         interval in the right percentage
            res_n      . number of expected resources working
@@ -59,7 +59,7 @@ typedef struct {
 	mrptime  end;
 	gint     units;
 	gint     units_full;
-	gint     res_n;	
+	gint     res_n;
 } MrpUnitsInterval;
 
 #define UNIT_IVAL_GET_TIME(R) ((R->is_start?R->start:R->end))

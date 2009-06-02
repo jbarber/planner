@@ -109,13 +109,13 @@ egg_recent_view_gtk_clear (EggRecentViewGtk *view)
 
 		menu_data = (gint *)g_object_get_data (menu_item,
 						       view->uid);
-	
+
 		if (menu_data) {
 			gtk_container_remove (GTK_CONTAINER (view->menu),
 					     GTK_WIDGET (menu_item));
 
 		}
-		
+
 		p = p->next;
 	}
 }
@@ -163,9 +163,9 @@ egg_recent_view_gtk_menu_cb (GtkWidget *menu, gpointer data)
 	g_return_if_fail (EGG_IS_RECENT_VIEW_GTK (md->view));
 
 	item = md->item;
-	
+
 	egg_recent_item_ref (item);
-	
+
 	g_signal_emit (G_OBJECT(md->view), view_signals[ACTIVATE], 0,
 		       item);
 
@@ -187,7 +187,7 @@ egg_recent_view_gtk_new_separator (EggRecentViewGtk *view)
 	GtkWidget *retval;
 
 	g_return_val_if_fail (view, NULL);
-	
+
 	retval = gtk_separator_menu_item_new ();
 
 	/**
@@ -307,7 +307,7 @@ egg_recent_view_gtk_add_to_menu (EggRecentViewGtk *view,
 {
 	GtkWidget *menu_item;
 	gint menu_offset;
-	
+
 	g_return_if_fail (view);
 	g_return_if_fail (view->menu);
 
@@ -322,7 +322,7 @@ egg_recent_view_gtk_add_to_menu (EggRecentViewGtk *view,
 		view->tooltip_func (view->tooltips, menu_item,
 				    item, view->tooltip_func_data);
 	}
-	
+
 	if (menu_item)
 		gtk_menu_shell_insert (GTK_MENU_SHELL (view->menu), menu_item,
 			       menu_offset+index);
@@ -373,7 +373,7 @@ static EggRecentModel *
 egg_recent_view_gtk_get_model (EggRecentView *view_parent)
 {
 	EggRecentViewGtk *view;
-	
+
 	g_return_val_if_fail (view_parent != NULL, NULL);
 	view = EGG_RECENT_VIEW_GTK (view_parent);
 	return view->model;
@@ -384,7 +384,7 @@ egg_recent_view_gtk_set_model (EggRecentView *view_parent,
 				 EggRecentModel *model)
 {
 	EggRecentViewGtk *view;
-	
+
 	g_return_if_fail (view_parent != NULL);
 	view = EGG_RECENT_VIEW_GTK (view_parent);
 
@@ -393,7 +393,7 @@ egg_recent_view_gtk_set_model (EggRecentView *view_parent,
 		g_signal_handler_disconnect (G_OBJECT (model),
 					     view->changed_cb_id);
 	}
-	
+
 	view->model = model;
 	g_object_ref (view->model);
 
@@ -675,7 +675,7 @@ egg_recent_view_gtk_set_tooltip_func (EggRecentViewGtk *view,
 {
 	view->tooltip_func = func;
 	view->tooltip_func_data = user_data;
-	
+
 	if (view->model)
 		egg_recent_model_changed (view->model);
 }
@@ -699,7 +699,7 @@ egg_recent_view_gtk_set_menu (EggRecentViewGtk *view,
 
 	if (view->menu != NULL)
 		g_object_unref (view->menu);
-	
+
 	view->menu = menu;
 	g_object_ref (view->menu);
 }
@@ -717,7 +717,7 @@ egg_recent_view_gtk_set_start_menu_item (EggRecentViewGtk *view,
 {
 	g_return_if_fail (view);
 	g_return_if_fail (EGG_IS_RECENT_VIEW_GTK (view));
-	
+
 	view->start_menu_item = menu_item;
 }
 
@@ -767,7 +767,7 @@ egg_recent_view_gtk_new (GtkWidget *menu, GtkWidget *start_menu_item)
 					   "show-numbers", TRUE, NULL));
 
 	g_return_val_if_fail (view, NULL);
-	
+
 	return view;
 }
 

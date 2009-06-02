@@ -96,7 +96,7 @@ gboolean mrp_storage_module_save     (MrpStorageModule  *module,
 gboolean mrp_storage_module_to_xml   (MrpStorageModule  *module,
 				      gchar            **str,
 				      GError           **error);
-gboolean mrp_storage_module_from_xml (MrpStorageModule  *module, 
+gboolean mrp_storage_module_from_xml (MrpStorageModule  *module,
 				      const gchar       *str,
 				      GError           **error);
 

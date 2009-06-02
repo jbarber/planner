@@ -58,7 +58,7 @@ planner_util_show_help (GError      **error)
 	res = (int) ShellExecute (NULL, "open", file, NULL, NULL, SW_SHOWNORMAL);
 	g_free (file);
 	g_free (path);
-	
+
 	if (res <= 32) {
 		g_set_error (error,
 			     planner_win32_get_quark (),

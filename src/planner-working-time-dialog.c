@@ -50,7 +50,7 @@ typedef struct {
 	GtkWidget     *tree_view;
 
 	GtkWidget     *apply_button;
-	
+
 	GtkWidget     *from_entry[5];
 	GtkWidget     *to_entry[5];
 } DialogData;
@@ -146,7 +146,7 @@ working_time_cmd_edit (PlannerWindow   *main_window,
 				    working_time_cmd_edit_do,
 				    working_time_cmd_edit_undo,
 				    working_time_cmd_edit_free);
-	
+
 	cmd = (WorkingTimeCmdEdit *) cmd_base;
 
 	cmd->calendar = g_object_ref (calendar);
@@ -155,11 +155,11 @@ working_time_cmd_edit (PlannerWindow   *main_window,
 	cmd->ivals = g_list_copy (ivals);
 	g_list_foreach (ivals, (GFunc) mrp_interval_ref, NULL);
 
-	cmd->old_ivals = g_list_copy (mrp_calendar_day_get_intervals 
+	cmd->old_ivals = g_list_copy (mrp_calendar_day_get_intervals
 				      (cmd->calendar, cmd->day, TRUE));
 	g_list_foreach (cmd->old_ivals, (GFunc) mrp_interval_ref, NULL);
-			
-	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager 
+
+	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager
 					   (main_window),
 					   cmd_base);
 	return cmd_base;
@@ -207,9 +207,9 @@ planner_working_time_dialog_new (PlannerWindow *window,
 	GtkTreeViewColumn *col;
 	GtkTreeSelection  *selection;
 	gchar             *filename;
-	
+
 	g_return_val_if_fail (PLANNER_IS_WINDOW (window), NULL);
-	
+
 	filename = mrp_paths_get_glade_dir ("calendar-dialog.glade");
 	glade = glade_xml_new (filename,
 			       "working_time_dialog",
@@ -222,7 +222,7 @@ planner_working_time_dialog_new (PlannerWindow *window,
 	}
 
 	dialog = glade_xml_get_widget (glade, "working_time_dialog");
-	
+
 	data = g_new0 (DialogData, 1);
 
 	data->main_window = window;
@@ -236,7 +236,7 @@ planner_working_time_dialog_new (PlannerWindow *window,
 				 G_CALLBACK (working_time_dialog_parent_destroy_cb),
 				 dialog,
 				 0);
-	
+
 	g_signal_connect_object (data->project,
 				 "day_added",
 				 G_CALLBACK (working_time_dialog_type_added_cb),
@@ -248,16 +248,16 @@ planner_working_time_dialog_new (PlannerWindow *window,
 				 G_CALLBACK (working_time_dialog_type_removed_cb),
 				 data->dialog,
 				 0);
-	
+
 	data->tree_view = glade_xml_get_widget (glade, "treeview");
 
 	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (data->tree_view));
-	
+
 	g_signal_connect (selection,
 			  "changed",
 			  G_CALLBACK (working_time_dialog_selection_changed_cb),
 			  data);
-	
+
 	/* Get the 5 from/to entries. */
 	for (i = 0; i < 5; i++) {
 		gchar *tmp;
@@ -284,12 +284,12 @@ planner_working_time_dialog_new (PlannerWindow *window,
 	g_object_set_data_full (G_OBJECT (dialog),
 				"data", data,
 				g_free);
-	
+
 	model = working_time_dialog_create_model (data);
 	gtk_tree_view_set_model (GTK_TREE_VIEW (data->tree_view), model);
 
 	working_time_dialog_build_list (data);
-	
+
 	cell = gtk_cell_renderer_text_new ();
 	col = gtk_tree_view_column_new_with_attributes (
 		NULL,
@@ -297,7 +297,7 @@ planner_working_time_dialog_new (PlannerWindow *window,
 		"text", COL_NAME,
 		NULL);
 	gtk_tree_view_append_column (GTK_TREE_VIEW (data->tree_view), col);
-	
+
 	g_signal_connect (dialog,
 			  "response",
 			  G_CALLBACK (working_time_dialog_response_cb),
@@ -314,11 +314,11 @@ working_time_dialog_build_list (DialogData *data)
 	GList        *days, *l;
 	MrpDay       *day;
 	const gchar  *name;
-	
+
 	store = GTK_LIST_STORE (gtk_tree_view_get_model (GTK_TREE_VIEW (data->tree_view)));
 
 	gtk_list_store_clear (store);
-	
+
 	day = mrp_day_get_nonwork ();
 
 	name = mrp_day_get_name (day);
@@ -341,9 +341,9 @@ working_time_dialog_build_list (DialogData *data)
 	days = mrp_day_get_all (data->project);
 	for (l = days; l; l = l->next) {
 		day = l->data;
-		
+
 		name = mrp_day_get_name (day);
-		
+
 		gtk_list_store_append (store, &iter);
 		gtk_list_store_set (store,
 				    &iter,
@@ -357,7 +357,7 @@ static GtkTreeModel *
 working_time_dialog_create_model (DialogData *data)
 {
 	GtkListStore *store;
-	
+
 	store = gtk_list_store_new (NUM_COLS,
 				    G_TYPE_STRING,
 				    G_TYPE_INT,
@@ -415,7 +415,7 @@ working_time_dialog_find_day_foreach (GtkTreeModel *model,
 		data->found_iter = *iter;
 		return TRUE;
 	}
-	
+
 	return FALSE;
 }
 
@@ -452,7 +452,7 @@ working_time_dialog_get_selected_day (DialogData *data)
 	GtkTreeModel     *model;
 	GtkTreeIter       iter;
 	MrpDay           *day;
-	
+
 	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (data->tree_view));
 
 	if (gtk_tree_selection_get_selected (selection, &model, &iter)) {
@@ -475,7 +475,7 @@ working_time_dialog_update_times (DialogData *data)
 	mrptime      start, end;
 	gint         i;
 	gchar       *str;
-	
+
 	day = working_time_dialog_get_selected_day (data);
 
 	ivals = mrp_calendar_day_get_intervals (data->calendar, day, TRUE);
@@ -484,16 +484,16 @@ working_time_dialog_update_times (DialogData *data)
 		gtk_entry_set_text (GTK_ENTRY (data->from_entry[i]), "");
 		gtk_entry_set_text (GTK_ENTRY (data->to_entry[i]), "");
 	}
-	
+
 	for (l = ivals, i = 0; l && i < 5; l = l->next, i++) {
 		ival = l->data;
-		
+
 		mrp_interval_get_absolute (ival, 0, &start, &end);
-		
+
 		str = mrp_time_format ("%R", start);
 		gtk_entry_set_text (GTK_ENTRY (data->from_entry[i]), str);
 		g_free (str);
-		
+
 		str = mrp_time_format ("%R", end);
 		gtk_entry_set_text (GTK_ENTRY (data->to_entry[i]), str);
 		g_free (str);
@@ -524,7 +524,7 @@ working_time_dialog_apply (DialogData *data)
 	day = working_time_dialog_get_selected_day (data);
 
 	/* FIXME: use locale information to get the time separator. See #412. */
-	
+
 	ivals = NULL;
 	for (i = 0; i < 5; i++) {
 		str = gtk_entry_get_text (GTK_ENTRY (data->from_entry[i]));
@@ -569,14 +569,14 @@ working_time_dialog_apply (DialogData *data)
 				 */
 				end--;
 			}
-			
+
 			ival = mrp_interval_new (start, end);
 			ivals = g_list_append (ivals, ival);
 		}
 	}
 
 	/* mrp_calendar_day_set_intervals (data->calendar, day, ivals); */
-	working_time_cmd_edit (data->main_window, data->calendar, day, ivals);		     
+	working_time_cmd_edit (data->main_window, data->calendar, day, ivals);
 
 	g_list_foreach (ivals, (GFunc) mrp_interval_unref, NULL);
 	g_list_free (ivals);

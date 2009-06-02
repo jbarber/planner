@@ -60,7 +60,7 @@ typedef struct {
 	GtkWidget     *working_time_button;
 
 	GtkWidget     *name_label;
-	
+
 	GtkWidget     *calendar;
 	GtkWidget     *option_menu;
 
@@ -70,7 +70,7 @@ typedef struct {
 
 	GtkWidget     *from_entry[5];
 	GtkWidget     *to_entry[5];
-	
+
 	/* Data for the little modal "new calendar" dialog. */
 	GtkWidget     *new_ok_button;
 	GtkWidget     *new_copy_radiobutton;
@@ -192,8 +192,8 @@ planner_cal_cmd_day_type (PlannerWindow  *main_window,
 	cmd->day = mrp_day_ref (day);
 	cmd->old_day = mrp_day_ref (mrp_calendar_get_day (calendar, time, FALSE));
 	cmd->time = time;
-			
-	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager 
+
+	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager
 					   (main_window),
 					   cmd_base);
 	return cmd_base;
@@ -226,19 +226,19 @@ cal_cmd_remove_do (PlannerCmd *cmd_base)
 	for (r = all_resources; r; r = r->next) {
 		MrpResource *resource = r->data;
 		MrpCalendar *tmp_cal;
-		
+
 		tmp_cal = mrp_resource_get_calendar (resource);
-		if (tmp_cal == cmd->calendar) {			
-			cmd->resources = g_list_append (cmd->resources, 
+		if (tmp_cal == cmd->calendar) {
+			cmd->resources = g_list_append (cmd->resources,
 							g_object_ref (resource));
-		} 
+		}
 	}
 
 	cmd->children = g_list_copy (mrp_calendar_get_children (cmd->calendar));
 	if (cmd->children) {
 		g_list_foreach (cmd->children, (GFunc) g_object_ref, NULL);
 	}
-		
+
 	mrp_calendar_remove (cmd->calendar);
 
 	return TRUE;
@@ -314,7 +314,7 @@ planner_cal_cmd_remove (PlannerWindow  *main_window,
 	cmd->calendar = g_object_ref (calendar);
 	cmd->parent = g_object_ref (mrp_calendar_get_parent (cmd->calendar));
 
-	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager 
+	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager
 					   (main_window),
 					   cmd_base);
 	return cmd_base;
@@ -344,12 +344,12 @@ cal_cmd_add_do (PlannerCmd *cmd_base)
 			cmd->calendar = mrp_calendar_derive (cmd->name, cmd->parent);
 			g_object_unref (cmd->parent);
 			cmd->parent = NULL;
-		} 
+		}
 		else if (cmd->parent == NULL && cmd->copy != NULL) {
 			cmd->calendar = mrp_calendar_copy (cmd->name, cmd->copy);
 			g_object_unref (cmd->copy);
 			cmd->copy = NULL;
-		} 
+		}
 		else if (cmd->parent == NULL && cmd->copy == NULL) {
 			cmd->calendar = mrp_calendar_new (cmd->name, cmd->project);
 			cmd->parent = g_object_ref (mrp_calendar_get_parent (cmd->calendar));
@@ -410,8 +410,8 @@ planner_cal_cmd_add (PlannerWindow  *main_window,
 	if (copy != NULL) {
 		cmd->copy = g_object_ref (copy);
 	}
-			
-	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager 
+
+	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager
 					   (main_window),
 					   cmd_base);
 	return cmd_base;
@@ -488,7 +488,7 @@ cal_dialog_option_menu_get_day (GtkWidget *option_menu)
 {
 	GtkWidget *menu;
 	GtkWidget *item;
-	
+
 	menu = gtk_option_menu_get_menu (GTK_OPTION_MENU (option_menu));
 	item = gtk_menu_get_active (GTK_MENU (menu));
 
@@ -502,9 +502,9 @@ cal_dialog_response_cb (GtkWidget  *dialog,
 {
 	MrpCalendar *calendar;
 	GtkWidget   *window;
-	
+
 	calendar = cal_dialog_get_selected_calendar (GTK_TREE_VIEW (data->tree_view));
-	
+
 	switch (response) {
 	case RESPONSE_REMOVE:
 		/* mrp_calendar_remove (calendar); */
@@ -514,7 +514,7 @@ cal_dialog_response_cb (GtkWidget  *dialog,
 	case RESPONSE_ADD:
 		cal_dialog_new_dialog_run (data);
 		break;
-		
+
 	case RESPONSE_WORKING_TIME:
 		window = planner_working_time_dialog_new (data->main_window, calendar);
 
@@ -528,7 +528,7 @@ cal_dialog_response_cb (GtkWidget  *dialog,
 		gtk_window_set_modal (GTK_WINDOW (window), TRUE);
 		gtk_widget_show (window);
 		break;
-		
+
 	case RESPONSE_DEFAULT_WEEK:
 		window = planner_default_week_dialog_new (data->main_window, calendar);
 
@@ -578,7 +578,7 @@ cal_dialog_parent_destroy_cb (GtkWidget *window, GtkWidget *dialog)
 {
 	gtk_widget_destroy (dialog);
 }
-	
+
 GtkWidget *
 planner_calendar_dialog_new (PlannerWindow *window)
 {
@@ -589,23 +589,23 @@ planner_calendar_dialog_new (PlannerWindow *window)
 	GtkTreeSelection *selection;
 	gint              i;
 	gchar		*filename;
-	
+
 	g_return_val_if_fail (PLANNER_IS_WINDOW (window), NULL);
-	
+
 	filename = mrp_paths_get_glade_dir ("calendar-dialog.glade");
 	glade = glade_xml_new (filename ,
 			       "calendar_dialog",
 			       GETTEXT_PACKAGE);
-	
+
 	g_free (filename);
-	
+
 	if (!glade) {
 		g_warning ("Could not create calendar dialog.");
 		return NULL;
 	}
 
 	dialog = glade_xml_get_widget (glade, "calendar_dialog");
-	
+
 	data = g_new0 (DialogData, 1);
 
 	data->project = planner_window_get_project (window);
@@ -617,7 +617,7 @@ planner_calendar_dialog_new (PlannerWindow *window)
 				 G_CALLBACK (cal_dialog_parent_destroy_cb),
 				 dialog,
 				 0);
-	
+
 	data->tree_view = glade_xml_get_widget (glade, "treeview");
 	data->calendar = planner_calendar_new ();
 	gtk_widget_show (data->calendar);
@@ -630,12 +630,12 @@ planner_calendar_dialog_new (PlannerWindow *window)
 	g_signal_connect (data->calendar,
 			  "month_changed",
 			  G_CALLBACK (cal_dialog_month_changed_cb),
-			  data);	
+			  data);
 
 	g_signal_connect (data->calendar,
 			  "day_selected",
 			  G_CALLBACK (cal_dialog_date_selected_cb),
-			  data);	
+			  data);
 
 	w = glade_xml_get_widget (glade, "calendar_frame");
 	gtk_container_add (GTK_CONTAINER (w), data->calendar);
@@ -647,23 +647,23 @@ planner_calendar_dialog_new (PlannerWindow *window)
 			   "clicked",
 			   G_CALLBACK (cal_dialog_apply_clicked_cb),
 			   data);
-	
+
 	data->default_week_button = glade_xml_get_widget (glade, "default_week_button");
 	data->working_time_button = glade_xml_get_widget (glade, "working_time_button");
 
 	/* Get the 5 from/to entries. */
 	for (i = 0; i < 5; i++) {
 		gchar *tmp;
-		
+
 		tmp = g_strdup_printf ("from%d_entry", i + 1);
 		data->from_entry[i] = glade_xml_get_widget (glade, tmp);
 		g_free (tmp);
-		
+
 		tmp = g_strdup_printf ("to%d_entry", i + 1);
 		data->to_entry[i] = glade_xml_get_widget (glade, tmp);
 		g_free (tmp);
 	}
-	
+
 	data->option_menu = glade_xml_get_widget (glade, "optionmenu");
 	cal_dialog_setup_option_menu (data);
 	g_signal_connect  (data->option_menu,
@@ -682,13 +682,13 @@ planner_calendar_dialog_new (PlannerWindow *window)
 			  "toggled",
 			  G_CALLBACK (cal_dialog_day_types_toggled_cb),
 			  data);
-		
+
 	data->custom_radiobutton = glade_xml_get_widget (glade, "custom_radiobutton");
 	g_signal_connect (data->custom_radiobutton,
 			  "toggled",
 			  G_CALLBACK (cal_dialog_day_types_toggled_cb),
 			  data);
-		
+
 	g_object_set_data_full (G_OBJECT (dialog),
 				"data", data,
 				g_free);
@@ -707,17 +707,17 @@ planner_calendar_dialog_new (PlannerWindow *window)
 			  "day_added",
 			  G_CALLBACK (cal_dialog_project_day_added_cb),
 			  data);
-	
+
 	g_signal_connect (data->project,
 			  "day_removed",
 			  G_CALLBACK (cal_dialog_project_day_removed_cb),
 			  data);
-	
+
 	g_signal_connect (data->project,
 			  "day_changed",
 			  G_CALLBACK (cal_dialog_project_day_changed_cb),
 			  data);
-	
+
 	/* Set the sensitivity of the option menu and entries. */
 	cal_dialog_update_day_widgets (data);
 
@@ -795,19 +795,19 @@ cal_dialog_selection_changed_cb (GtkTreeSelection *selection,
 	if (calendar && num_calendars > 1) {
 		sensitive = TRUE;
 	}
-	
+
 	gtk_widget_set_sensitive (data->remove_button, sensitive);
 
 	cal_dialog_update_calendar_widgets (data);
 	cal_dialog_update_day_widgets (data);
-	
+
 	if (data->connected_calendar) {
 		g_signal_handlers_disconnect_by_func (data->connected_calendar,
 						      cal_dialog_calendar_changed_cb,
 						      data);
 		data->connected_calendar = NULL;
 	}
-	
+
 	if (calendar) {
 		data->connected_calendar = calendar;
 
@@ -841,7 +841,7 @@ cal_dialog_apply_clicked_cb (GtkWidget  *button,
 		day = NULL;
 		return;
 	}
-	
+
 	planner_calendar_get_date (PLANNER_CALENDAR (data->calendar), &y, &m, &d);
 	t = mrp_time_compose (y, m + 1, d, 0, 0, 0);
 	/* mrp_calendar_set_days (calendar, t, day, (mrptime) -1); */
@@ -855,7 +855,7 @@ cal_dialog_setup_tree_view (GtkTreeView *tree_view,
 	GtkTreeModel      *model;
 	GtkCellRenderer   *cell;
 	GtkTreeViewColumn *col;
-	
+
 	model = cal_dialog_create_model (project, tree_view);
 
 	gtk_tree_view_set_model (tree_view, model);
@@ -880,7 +880,7 @@ cal_dialog_update_calendar_widgets (DialogData *data)
 	MrpDay      *day;
 	MrpTime      *t;
 	mrptime      time;
-	
+
 	calendar = cal_dialog_get_selected_calendar (GTK_TREE_VIEW (data->tree_view));
 	if (!calendar) {
 		gtk_widget_set_sensitive (data->calendar, FALSE);
@@ -943,7 +943,7 @@ cal_dialog_option_menu_changed_cb (GtkWidget  *option_menu,
 {
 	gtk_widget_set_sensitive (data->apply_button, TRUE);
 }
-	
+
 static void
 cal_dialog_day_types_toggled_cb (GtkWidget  *widget,
 				 DialogData *data)
@@ -1005,7 +1005,7 @@ cal_dialog_update_day_widgets (DialogData *data)
 	g_signal_handlers_block_by_func (data->custom_radiobutton,
 					 cal_dialog_day_types_toggled_cb,
 					 data);
-	
+
 	/* Only make "use base" sensitive if the calendar has a parent. */
 	root = mrp_project_get_root_calendar (data->project);
 	if (root == mrp_calendar_get_parent (calendar)) {
@@ -1015,20 +1015,20 @@ cal_dialog_update_day_widgets (DialogData *data)
 	}
 
 	calendar_widget = PLANNER_CALENDAR (data->calendar);
-	
+
 	planner_calendar_get_date (calendar_widget, &y, &m, &d);
 	t = mrp_time_compose (y, m + 1, d, 0, 0, 0);
-	
+
 	day = mrp_calendar_get_day (calendar, t, FALSE);
 
 	if (day == mrp_day_get_use_base ()) {
 		gtk_widget_set_sensitive (data->option_menu, FALSE);
-		
+
 		gtk_toggle_button_set_active (
 			GTK_TOGGLE_BUTTON (data->base_radiobutton), TRUE);
 	} else {
 		gtk_widget_set_sensitive (data->option_menu, TRUE);
-		
+
 		cal_dialog_option_menu_set_day (data->option_menu, day);
 
 		gtk_toggle_button_set_active (
@@ -1040,27 +1040,27 @@ cal_dialog_update_day_widgets (DialogData *data)
 	if (day == mrp_day_get_use_base ()) {
 		day = mrp_calendar_get_day (calendar, t, TRUE);
 	}
-	
+
 	ivals = mrp_calendar_day_get_intervals (calendar, day, TRUE);
-	
+
 	for (i = 0; i < 5; i++) {
 		gtk_entry_set_text (GTK_ENTRY (data->from_entry[i]), "");
 		gtk_entry_set_text (GTK_ENTRY (data->to_entry[i]), "");
 	}
-	
+
 	for (l = ivals, i = 0; l && i < 5; l = l->next, i++) {
 		MrpInterval *ival;
 		mrptime      start, end;
 		gchar       *str;
-		
+
 		ival = l->data;
-		
+
 		mrp_interval_get_absolute (ival, 0, &start, &end);
-		
+
 		str = mrp_time_format ("%H:%M", start);
 		gtk_entry_set_text (GTK_ENTRY (data->from_entry[i]), str);
 		g_free (str);
-		
+
 		str = mrp_time_format ("%H:%M", end);
 		gtk_entry_set_text (GTK_ENTRY (data->to_entry[i]), str);
 		g_free (str);
@@ -1088,7 +1088,7 @@ cal_dialog_project_day_added_cb (MrpProject *project,
 	MrpDay *selected_day;
 
 	selected_day = cal_dialog_option_menu_get_day (data->option_menu);
-	
+
 	cal_dialog_setup_option_menu (data);
 
 	/* Reselect the same day as before. */
@@ -1143,9 +1143,9 @@ cal_dialog_build_tree (GtkTreeStore *store,
 	GtkTreeIter  iter;
 	const gchar *name;
 	GList       *children, *l;
-		
+
 	name = mrp_calendar_get_name (calendar);
-	
+
 	gtk_tree_store_append (store, &iter, parent);
 	gtk_tree_store_set (store,
 			    &iter,
@@ -1153,7 +1153,7 @@ cal_dialog_build_tree (GtkTreeStore *store,
 			    COL_CALENDAR, calendar,
 			    -1);
 
-	children = mrp_calendar_get_children (calendar);	
+	children = mrp_calendar_get_children (calendar);
 	for (l = children; l; l = l->next) {
 		cal_dialog_build_tree (store, &iter, l->data);
 	}
@@ -1170,12 +1170,12 @@ cal_dialog_tree_changed (MrpProject  *project,
 	g_return_if_fail (MRP_IS_PROJECT (project));
 	g_return_if_fail (MRP_IS_CALENDAR (root));
 	g_return_if_fail (GTK_IS_TREE_VIEW (tree_view));
-	
+
 	store = GTK_TREE_STORE (gtk_tree_view_get_model (tree_view));
-	
+
 	gtk_tree_store_clear (store);
-	
-	children = mrp_calendar_get_children (root);	
+
+	children = mrp_calendar_get_children (root);
 	for (l = children; l; l = l->next) {
 		cal_dialog_build_tree (store, NULL, l->data);
 	}
@@ -1197,7 +1197,7 @@ cal_dialog_create_model (MrpProject  *project,
 				    G_TYPE_OBJECT,
 				    G_TYPE_STRING);
 
-	children = mrp_calendar_get_children (root);	
+	children = mrp_calendar_get_children (root);
 	for (l = children; l; l = l->next) {
 		cal_dialog_build_tree (store, NULL, l->data);
 	}
@@ -1207,7 +1207,7 @@ cal_dialog_create_model (MrpProject  *project,
 				 G_CALLBACK (cal_dialog_tree_changed),
 				 tree_view,
 				 0);
-	
+
 	return GTK_TREE_MODEL (store);
 }
 
@@ -1233,7 +1233,7 @@ cal_dialog_new_selection_changed_cb (GtkTreeSelection *selection,
 	} else {
 		gtk_widget_set_sensitive (data->new_derive_radiobutton, TRUE);
 		gtk_widget_set_sensitive (data->new_copy_radiobutton, TRUE);
-	}	
+	}
 }
 
 static void
@@ -1244,7 +1244,7 @@ cal_dialog_new_name_changed_cb (GtkEntry   *entry,
 	gboolean     sensitive;
 
 	name = gtk_entry_get_text (entry);
-	
+
 	sensitive =  name[0] != 0;
 	gtk_widget_set_sensitive (data->new_ok_button, sensitive);
 }
@@ -1261,7 +1261,7 @@ cal_dialog_new_dialog_run (DialogData *data)
 	const gchar      *name;
 	GtkTreePath      *path;
 	gchar            *filename;
-	
+
 	filename = mrp_paths_get_glade_dir ("calendar-dialog.glade");
 	glade = glade_xml_new (filename,
 			       "new_calendar_dialog",
@@ -1281,7 +1281,7 @@ cal_dialog_new_dialog_run (DialogData *data)
 	data->new_copy_radiobutton = glade_xml_get_widget (glade, "copy_radiobutton");
 	data->new_derive_radiobutton = glade_xml_get_widget (glade, "derive_radiobutton");
 	data->new_empty_radiobutton = glade_xml_get_widget (glade, "empty_radiobutton");
-	
+
 	tree_view = glade_xml_get_widget (glade, "treeview");
 	cal_dialog_setup_tree_view (GTK_TREE_VIEW (tree_view), data->project);
 
@@ -1299,13 +1299,13 @@ cal_dialog_new_dialog_run (DialogData *data)
 	path = gtk_tree_path_new_first ();
 	gtk_tree_selection_select_path (selection, path);
 	gtk_tree_path_free (path);
-	
+
 	if (!gtk_tree_selection_get_selected (selection, NULL, NULL)) {
 		gtk_widget_set_sensitive (data->new_derive_radiobutton, FALSE);
 		gtk_widget_set_sensitive (data->new_copy_radiobutton, FALSE);
 		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (data->new_empty_radiobutton), TRUE);
 	}
-		
+
 	if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_OK) {
 		name = gtk_entry_get_text (GTK_ENTRY (entry));
 
@@ -1322,7 +1322,7 @@ cal_dialog_new_dialog_run (DialogData *data)
 		else if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (data->new_empty_radiobutton))) {
 			/* calendar = mrp_calendar_new (name, data->project); */
 			planner_cal_cmd_add (data->main_window, name, NULL, NULL);
-			   
+
 		}
 	}
 

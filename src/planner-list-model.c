@@ -79,7 +79,7 @@ GType
 planner_list_model_get_type (void)
 {
         static GType type = 0;
-        
+
         if (!type) {
                 static const GTypeInfo info =
                         {
@@ -93,7 +93,7 @@ planner_list_model_get_type (void)
                                 0,
                                 (GInstanceInitFunc) mlm_init,
                         };
-                
+
                 static const GInterfaceInfo tree_model_info =
                         {
                                 (GInterfaceInitFunc) mlm_tree_model_init,
@@ -102,14 +102,14 @@ planner_list_model_get_type (void)
                         };
 
                 type = g_type_register_static (G_TYPE_OBJECT,
-					       "PlannerListModel", 
+					       "PlannerListModel",
 					       &info, 0);
-      
+
                 g_type_add_interface_static (type,
                                              GTK_TYPE_TREE_MODEL,
                                              &tree_model_info);
         }
-        
+
         return type;
 }
 
@@ -156,7 +156,7 @@ mlm_init (PlannerListModel *model)
 	do {
 		priv->stamp = g_random_int ();
 	} while (priv->stamp == 0);
-        
+
         model->priv               = priv;
 	priv->data_list           = NULL;
 }
@@ -171,10 +171,10 @@ mlm_finalize (GObject *object)
  		g_list_free (priv->data_list);
 		priv->data_list = NULL;
 	}
-                
+
 	g_free (model->priv);
 	model->priv = NULL;
-        
+
 	if (G_OBJECT_CLASS (parent_class)->finalize) {
 		(* G_OBJECT_CLASS (parent_class)->finalize) (object);
 	}
@@ -189,24 +189,24 @@ mlm_get_iter (GtkTreeModel *tree_model,
 	PlannerListModelPriv *priv;
         GList           *node;
         gint             i;
-        
+
         g_return_val_if_fail (PLANNER_IS_LIST_MODEL (tree_model), FALSE);
         g_return_val_if_fail (gtk_tree_path_get_depth (path) > 0, FALSE);
 
         model = PLANNER_LIST_MODEL (tree_model);
 	priv  = model->priv;
-	
+
         i = gtk_tree_path_get_indices (path)[0];
 
         if (i >= g_list_length (priv->data_list)) {
                 return FALSE;
         }
-        
+
         node = g_list_nth (priv->data_list, i);
-        
+
         iter->stamp     = model->priv->stamp;
         iter->user_data = node;
-        
+
         return TRUE;
 }
 
@@ -235,7 +235,7 @@ mlm_get_path (GtkTreeModel *tree_model,
         if (node == NULL) {
                 return NULL;
         }
-        
+
         path = gtk_tree_path_new ();
         gtk_tree_path_append_index (path, i);
 
@@ -247,12 +247,12 @@ mlm_iter_next (GtkTreeModel  *tree_model,
                GtkTreeIter   *iter)
 {
 	PlannerListModel *model = PLANNER_LIST_MODEL (tree_model);
-        
+
         g_return_val_if_fail (PLANNER_IS_LIST_MODEL (tree_model), FALSE);
         g_return_val_if_fail (model->priv->stamp == iter->stamp, FALSE);
 
         iter->user_data = G_LIST(iter->user_data)->next;
-        
+
         return (iter->user_data != NULL);
 }
 
@@ -263,12 +263,12 @@ mlm_iter_children (GtkTreeModel *tree_model,
 {
 	PlannerListModel     *model;
         PlannerListModelPriv *priv;
-        
+
         g_return_val_if_fail (PLANNER_IS_LIST_MODEL (tree_model), FALSE);
 
         model = PLANNER_LIST_MODEL (tree_model);
         priv  = model->priv;
-        
+
         /* this is a list, nodes have no children */
         if (parent) {
                 return FALSE;
@@ -277,13 +277,13 @@ mlm_iter_children (GtkTreeModel *tree_model,
         /* but if parent == NULL we return the list itself as children of the
          * "root"
          */
-        
+
         if (priv->data_list) {
                 iter->stamp = priv->stamp;
                 iter->user_data = priv->data_list;
                 return TRUE;
-        } 
-        
+        }
+
         return FALSE;
 }
 
@@ -300,16 +300,16 @@ mlm_iter_n_children (GtkTreeModel *tree_model,
 {
 	PlannerListModel     *model;
         PlannerListModelPriv *priv;
-        
+
         g_return_val_if_fail (PLANNER_IS_LIST_MODEL (tree_model), -1);
-	
+
 	model = PLANNER_LIST_MODEL (tree_model);
         priv  = model->priv;
 
         if (iter == NULL) {
                 return g_list_length (priv->data_list);
         }
-        
+
         g_return_val_if_fail (priv->stamp == iter->stamp, -1);
 
         return 0;
@@ -329,13 +329,13 @@ mlm_iter_nth_child (GtkTreeModel *tree_model,
 
         model = PLANNER_LIST_MODEL (tree_model);
 	priv  = model->priv;
-        
+
         if (parent) {
                 return FALSE;
         }
-        
+
         child = g_list_nth (priv->data_list, n);
-        
+
         if (child) {
                 iter->stamp     = model->priv->stamp;
                 iter->user_data = child;
@@ -357,9 +357,9 @@ static gint
 mlm_get_n_columns (GtkTreeModel *tree_model)
 {
 	PlannerListModelClass *klass;
-	
+
 	klass = PLANNER_LIST_MODEL_GET_CLASS (tree_model);
-	
+
 	if (klass->get_n_columns) {
 		return klass->get_n_columns (tree_model);
 	}
@@ -373,9 +373,9 @@ static GType
 mlm_get_column_type (GtkTreeModel *tree_model, gint column)
 {
 	PlannerListModelClass *klass;
-	
+
 	klass = PLANNER_LIST_MODEL_GET_CLASS (tree_model);
-	
+
 	if (klass->get_column_type) {
 		return klass->get_column_type (tree_model, column);
 	}
@@ -393,9 +393,9 @@ mlm_get_value (GtkTreeModel *tree_model,
 	       GValue       *value)
 {
 	PlannerListModelClass *klass;
-	
+
 	klass = PLANNER_LIST_MODEL_GET_CLASS (tree_model);
-	
+
 	if (klass->get_value) {
 		klass->get_value (tree_model, iter, column, value);
 	}
@@ -411,21 +411,21 @@ planner_list_model_append (PlannerListModel *model, MrpObject *object)
 
 	g_return_if_fail (PLANNER_IS_LIST_MODEL (model));
 	g_return_if_fail (MRP_IS_OBJECT (object));
-	
+
 	priv = model->priv;
 
  	priv->data_list = g_list_append (priv->data_list,
 					 g_object_ref (object));
-	
+
 	i = g_list_index (priv->data_list, object);
 
 	path = gtk_tree_path_new ();
 	gtk_tree_path_append_index (path, i);
 
 	gtk_tree_model_get_iter (GTK_TREE_MODEL (model), &iter, path);
-	
+
 	gtk_tree_model_row_inserted (GTK_TREE_MODEL (model), path, &iter);
-	
+
 	gtk_tree_path_free (path);
 }
 
@@ -491,9 +491,9 @@ planner_list_model_get_path (PlannerListModel *model, MrpObject *object)
 	g_return_val_if_fail (MRP_IS_OBJECT (object), NULL);
 
 	priv = model->priv;
-	
+
 	index = g_list_index (priv->data_list, object);
-	
+
 	if (index >= 0) {
 		path = gtk_tree_path_new ();
 		gtk_tree_path_append_index (path, index);
@@ -515,16 +515,16 @@ planner_list_model_set_data (PlannerListModel *model, GList *data)
 	PlannerListModelPriv *priv;
 	GList           *old_list;
 	GList           *node;
-	
+
 	g_return_if_fail (PLANNER_IS_LIST_MODEL (model));
-	
+
 	priv = model->priv;
 
 	/* Remove the old entries */
 
 	if (priv->data_list) {
 		old_list = g_list_copy (priv->data_list);
-	
+
 		for (node = old_list; node; node = node->next) {
 			planner_list_model_remove (model, MRP_OBJECT (node->data));
 		}
@@ -543,6 +543,6 @@ GList *
 planner_list_model_get_data (PlannerListModel *model)
 {
 	g_return_val_if_fail (PLANNER_IS_LIST_MODEL (model), NULL);
-	
+
 	return model->priv->data_list;
 }

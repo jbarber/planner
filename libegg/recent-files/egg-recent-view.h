@@ -23,7 +23,7 @@ typedef struct _EggRecentViewClass  EggRecentViewClass;
 struct _EggRecentViewClass
 {
 	GTypeInterface		   base_iface;
-  
+
 	/* vtable, not signals */
 	void (* do_set_model)			(EggRecentView *view,
 						 EggRecentModel *model);

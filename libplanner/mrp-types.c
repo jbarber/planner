@@ -97,18 +97,18 @@ mrp_property_type_get_type (void)
 GList *
 mrp_string_list_copy (const GList *list)
 {
-	const GList *l; 
+	const GList *l;
 	GList       *copy;
 
 	if (!list) {
 		return NULL;
 	}
-	
+
 	copy = NULL;
 	for (l = list; l; l = l->next) {
 		copy = g_list_prepend (copy, g_strdup (l->data));
 	}
-	
+
 	return g_list_reverse (copy);
 }
 
@@ -116,15 +116,15 @@ void
 mrp_string_list_free (GList *list)
 {
 	GList *l;
-	
+
 	if (!list) {
 		return;
 	}
-	
+
 	for (l = list; l; l = l->next) {
 		g_free (l->data);
 	}
-	
+
 	g_list_free (list);
 }
 

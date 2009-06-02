@@ -19,7 +19,7 @@ typedef struct _EggRecentViewBonoboClass EggRecentViewBonoboClass;
 
 struct _EggRecentViewBonoboClass {
 	GObjectClass parent_class;
-	
+
 	void (*activate) (EggRecentViewBonobo *view, EggRecentItem *item);
 };
 

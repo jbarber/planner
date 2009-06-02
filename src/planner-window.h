@@ -43,7 +43,7 @@ typedef struct _PlannerWindowPriv    PlannerWindowPriv;
 
 struct _PlannerWindow {
         GtkWindow           parent;
-        
+
         PlannerWindowPriv  *priv;
 };
 

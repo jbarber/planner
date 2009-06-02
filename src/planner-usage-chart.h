@@ -59,7 +59,7 @@ GtkWidget *   planner_usage_chart_new_with_model   (GtkTreeModel       *model);
 GtkTreeModel *planner_usage_chart_get_model        (PlannerUsageChart *chart);
 void          planner_usage_chart_set_model        (PlannerUsageChart *chart,
 						     GtkTreeModel       *model);
-PlannerUsageTree *  
+PlannerUsageTree *
               planner_usage_chart_get_view         (PlannerUsageChart *chart);
 void          planner_usage_chart_set_view         (PlannerUsageChart *chart,
 						    PlannerUsageTree  *view);

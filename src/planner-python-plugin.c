@@ -20,7 +20,7 @@
 
 #include <config.h>
 #include <Python.h>
-#include <glib.h> 
+#include <glib.h>
 #include <gtk/gtk.h>
 #include <glib/gi18n.h>
 #include <pygobject.h>
@@ -127,22 +127,22 @@ python_plugin_execute (const gchar   *filename,
 	}
 }
 
-G_MODULE_EXPORT void 
+G_MODULE_EXPORT void
 plugin_init (PlannerPlugin *plugin, PlannerWindow *main_window)
 {
 	PlannerPluginPriv *priv;
 	GDir              *dir;
 	gchar             *dirname, *full_filename;
 	const gchar       *filename;
-	
+
 	priv = g_new0 (PlannerPluginPriv, 1);
 	plugin->priv = priv;
 
 	priv->main_window = main_window;
 	priv->scripts = g_hash_table_new (g_str_hash, g_str_equal);
-	
+
 	Py_Initialize ();
-	
+
 	/* Look in ~/.gnome2/planner/python/  and run the scripts that we find */
 	dirname = g_build_filename (g_get_home_dir(), ".gnome2", "planner", "python", NULL);
 	dir = g_dir_open (dirname, 0, NULL);
@@ -158,16 +158,16 @@ plugin_init (PlannerPlugin *plugin, PlannerWindow *main_window)
 			python_plugin_execute (full_filename, main_window, priv->scripts);
 			g_free (full_filename);
 		}
-		
+
 		filename = g_dir_read_name (dir);
 	}
-	
+
 	g_free (dirname);
 	g_dir_close (dir);
 }
 
-G_MODULE_EXPORT void 
-plugin_exit (PlannerPlugin *plugin) 
+G_MODULE_EXPORT void
+plugin_exit (PlannerPlugin *plugin)
 {
 	Py_Finalize ();
 }

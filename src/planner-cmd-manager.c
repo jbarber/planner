@@ -26,7 +26,7 @@
 
 struct _PlannerCmdManagerPriv {
 	gint   limit;
-	
+
 	GList *list;
 	GList *current;
 
@@ -54,7 +54,7 @@ GType
 planner_cmd_manager_get_type (void)
 {
 	static GType type = 0;
-	
+
 	if (!type) {
 		static const GTypeInfo info = {
 			sizeof (PlannerCmdManagerClass),
@@ -72,7 +72,7 @@ planner_cmd_manager_get_type (void)
 					       "PlannerCmdManager",
 					       &info, 0);
 	}
-	
+
 	return type;
 }
 
@@ -80,14 +80,14 @@ static void
 cmd_manager_class_init (PlannerCmdManagerClass *klass)
 {
 	GObjectClass *o_class;
-	
+
 	parent_class = g_type_class_peek_parent (klass);
 
 	o_class = (GObjectClass *) klass;
-	
+
 	/* GObject functions */
 	o_class->finalize = cmd_manager_finalize;
-	
+
 	/* Signals */
 	signals[UNDO_STATE_CHANGED] = g_signal_new (
 		"undo_state_changed",
@@ -112,7 +112,7 @@ static void
 cmd_manager_init (PlannerCmdManager *manager)
 {
 	PlannerCmdManagerPriv *priv;
-	
+
 	priv = g_new0 (PlannerCmdManagerPriv, 1);
 	manager->priv = priv;
 
@@ -127,11 +127,11 @@ cmd_manager_finalize (GObject *object)
 {
 	PlannerCmdManager     *manager = PLANNER_CMD_MANAGER (object);
 	PlannerCmdManagerPriv *priv = manager->priv;;
-	
+
 	g_list_foreach (priv->list, (GFunc) cmd_manager_free_func, NULL);
-	
+
 	g_free (manager->priv);
-	
+
 	if (G_OBJECT_CLASS (parent_class)->finalize) {
 		(* G_OBJECT_CLASS (parent_class)->finalize) (object);
 	}
@@ -145,25 +145,25 @@ cmd_manager_dump (PlannerCmdManager *manager)
 	PlannerCmd            *cmd;
 
 	priv = manager->priv;
-	
+
 	if (!g_getenv ("PLANNER_DEBUG_UNDO")) {
 		return;
 	}
-	
+
 	g_print ("--------\n");
-	
+
 	for (l = priv->list; l; l = l->next) {
 		if (l == priv->current) {
 			g_print ("*");
 		} else {
 			g_print (" ");
-		}			
+		}
 
 		cmd = l->data;
-		
+
 		g_print (" %s\n", cmd->name);
 	}
-	
+
 	g_print ("\n");
 }
 
@@ -172,14 +172,14 @@ get_undo_cmd (PlannerCmdManager *manager, gboolean next)
 {
 	PlannerCmdManagerPriv *priv = manager->priv;
 	PlannerCmd            *cmd;
-	
+
 	if (priv->current) {
 		cmd = priv->current->data;
 
 		if (next) {
 			priv->current = priv->current->next;
 		}
-		
+
 		return cmd;
 	}
 
@@ -192,7 +192,7 @@ get_redo_cmd (PlannerCmdManager *manager, gboolean next)
 	PlannerCmdManagerPriv *priv = manager->priv;
 	GList                 *l;
 	PlannerCmd            *cmd;
-	
+
 	if (!priv->current && priv->list) {
 		l = g_list_last (priv->list);
 	}
@@ -220,7 +220,7 @@ state_changed (PlannerCmdManager *manager)
 {
 	gchar      *name;
 	PlannerCmd *cmd;
-	
+
 	/* Undo */
 	cmd = get_undo_cmd (manager, FALSE);
 	if (cmd) {
@@ -228,11 +228,11 @@ state_changed (PlannerCmdManager *manager)
 	} else {
 		name = g_strdup (_("Undo"));
 	}
-	
+
 	g_signal_emit (manager, signals[UNDO_STATE_CHANGED], 0, cmd != NULL, name);
 
 	g_free (name);
-	
+
 	/* Redo */
 	cmd = get_redo_cmd (manager, FALSE);
 	if (cmd) {
@@ -240,7 +240,7 @@ state_changed (PlannerCmdManager *manager)
 	} else {
 		name = g_strdup (_("Redo"));
 	}
-	
+
 	g_signal_emit (manager, signals[REDO_STATE_CHANGED], 0, cmd != NULL, name);
 
 	g_free (name);
@@ -270,7 +270,7 @@ cmd_manager_ensure_limit (PlannerCmdManager *manager)
 	priv = manager->priv;
 
 	g_return_if_fail (priv->limit > 1);
-	
+
 	/* Don't try to cut when inside a transaction to make this a bit
 	 * simpler.
 	 */
@@ -288,16 +288,16 @@ cmd_manager_ensure_limit (PlannerCmdManager *manager)
 		cmd = l->data;
 
 		if (cmd->type == PLANNER_CMD_TYPE_END_TRANSACTION) {
-			inside_transaction = TRUE; 
+			inside_transaction = TRUE;
 		}
 		else if (cmd->type == PLANNER_CMD_TYPE_BEGIN_TRANSACTION) {
-			inside_transaction = FALSE; 
+			inside_transaction = FALSE;
 			num++;
 		}
 		else if (!inside_transaction) {
 			num++;
 		}
-		
+
 		if (cmd->type != PLANNER_CMD_TYPE_BEGIN_TRANSACTION && num > priv->limit) {
 			break;
 		}
@@ -343,18 +343,18 @@ cmd_manager_insert (PlannerCmdManager *manager,
 	}
 
 	cmd_manager_ensure_limit (manager);
-	
+
 	priv->list = g_list_prepend (priv->list, cmd);
 	priv->current = priv->list;
 
 	cmd->manager = manager;
-	
+
 	if (run_do && cmd->do_func) {
 		retval = cmd->do_func (cmd);
 	} else {
 		retval = TRUE;
 	}
-	
+
 	cmd_manager_dump (manager);
 
 	state_changed (manager);
@@ -390,7 +390,7 @@ planner_cmd_manager_undo (PlannerCmdManager *manager)
 	if (cmd->undo_func) {
 		cmd->undo_func (cmd);
 	}
-	
+
 	cmd_manager_dump (manager);
 
 	state_changed (manager);
@@ -421,7 +421,7 @@ planner_cmd_manager_redo (PlannerCmdManager *manager)
 	if (cmd->do_func) {
 		cmd->do_func (cmd);
 	}
-	
+
 	cmd_manager_dump (manager);
 
 	state_changed (manager);
@@ -435,7 +435,7 @@ planner_cmd_manager_new (void)
 	PlannerCmdManager *manager;
 
 	manager = g_object_new (PLANNER_TYPE_CMD_MANAGER, NULL);
-	
+
 	return manager;
 }
 
@@ -452,14 +452,14 @@ static gboolean
 transaction_cmd_do (PlannerCmd *cmd)
 {
 	PlannerCmd *cmd_sub;
-	
+
 	while (1) {
 		cmd_sub = get_redo_cmd (cmd->manager, TRUE);
 
 		if (!cmd_sub) {
 			break;
 		}
-		
+
 		if (cmd_sub->type == PLANNER_CMD_TYPE_END_TRANSACTION) {
 			break;
 		}
@@ -467,12 +467,12 @@ transaction_cmd_do (PlannerCmd *cmd)
 		if (cmd_sub->do_func) {
 			cmd_sub->do_func (cmd_sub);
 		}
-		
+
 		g_assert (cmd_sub->type == PLANNER_CMD_TYPE_NORMAL);
 	}
 
 	/* FIXME: need to make sure we handle transactions that doesn't work. */
-	
+
 	return TRUE;
 }
 
@@ -487,7 +487,7 @@ transaction_cmd_undo (PlannerCmd *cmd)
 		if (!cmd_sub) {
 			break;
 		}
-		
+
 		if (cmd_sub->type == PLANNER_CMD_TYPE_BEGIN_TRANSACTION) {
 			break;
 		}
@@ -495,7 +495,7 @@ transaction_cmd_undo (PlannerCmd *cmd)
 		if (cmd_sub->undo_func) {
 			cmd_sub->undo_func (cmd_sub);
 		}
-		
+
 		g_assert (cmd_sub->type == PLANNER_CMD_TYPE_NORMAL);
 	}
 }
@@ -506,11 +506,11 @@ planner_cmd_manager_begin_transaction (PlannerCmdManager *manager,
 {
 	PlannerCmdManagerPriv *priv;
 	PlannerCmd            *cmd;
-	
+
 	g_return_val_if_fail (PLANNER_IS_CMD_MANAGER (manager), FALSE);
 
 	priv = manager->priv;
-	
+
 	if (priv->inside_transaction) {
 		g_warning ("Already inside transaction.");
 		return FALSE;
@@ -525,9 +525,9 @@ planner_cmd_manager_begin_transaction (PlannerCmdManager *manager,
 			       NULL);
 
 	cmd->type = PLANNER_CMD_TYPE_BEGIN_TRANSACTION;
-		
+
 	cmd_manager_insert (manager, cmd, FALSE);
-	
+
 	return TRUE;
 }
 
@@ -541,7 +541,7 @@ planner_cmd_manager_end_transaction (PlannerCmdManager *manager)
 	g_return_val_if_fail (PLANNER_IS_CMD_MANAGER (manager), FALSE);
 
 	priv = manager->priv;
-	
+
 	if (!priv->inside_transaction) {
 		g_warning ("Don't have transaction to end.");
 		return FALSE;
@@ -567,9 +567,9 @@ planner_cmd_manager_end_transaction (PlannerCmdManager *manager)
 			       transaction_cmd_do,
 			       transaction_cmd_undo,
 			       NULL);
-	
+
 	cmd->type = PLANNER_CMD_TYPE_END_TRANSACTION;
-	
+
 	cmd_manager_insert (manager, cmd, FALSE);
 
 	priv->inside_transaction = FALSE;

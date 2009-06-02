@@ -62,7 +62,7 @@ typedef struct {
 	PlannerCmd   base;
 
 	MrpProject  *project;
-	
+
 	gchar       *name;
 	MrpDay      *day;
 } DayTypeCmdAdd;
@@ -120,7 +120,7 @@ day_type_dialog_response_cb (GtkWidget  *dialog,
 	case RESPONSE_ADD:
 		day_type_dialog_new_dialog_run (data);
 		break;
-		
+
 	case RESPONSE_CLOSE:
 		gtk_widget_destroy (data->dialog);
 		break;
@@ -150,22 +150,22 @@ planner_day_type_dialog_new (PlannerWindow *window)
 	GtkTreeViewColumn *col;
 	GtkTreeSelection  *selection;
 	gchar		  *filename;
-	
+
 	g_return_val_if_fail (PLANNER_IS_WINDOW (window), NULL);
-	
+
 	filename = mrp_paths_get_glade_dir ("calendar-dialog.glade");
 	glade = glade_xml_new (filename ,
 			       "day_type_dialog",
 			       GETTEXT_PACKAGE);
 	g_free (filename);
-	
+
 	if (!glade) {
 		g_warning ("Could not create day_type dialog.");
 		return NULL;
 	}
 
 	dialog = glade_xml_get_widget (glade, "day_type_dialog");
-	
+
 	data = g_new0 (DialogData, 1);
 
 	data->main_window = window;
@@ -177,7 +177,7 @@ planner_day_type_dialog_new (PlannerWindow *window)
 				 G_CALLBACK (day_type_dialog_parent_destroy_cb),
 				 dialog,
 				 0);
-	
+
 	data->tree_view = glade_xml_get_widget (glade, "treeview");
 	data->remove_button = glade_xml_get_widget (glade, "remove_button");
 
@@ -194,7 +194,7 @@ planner_day_type_dialog_new (PlannerWindow *window)
 				 0);
 
 	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (data->tree_view));
-	
+
 	g_signal_connect (selection,
 			  "changed",
 			  G_CALLBACK (day_type_dialog_selection_changed_cb),
@@ -203,12 +203,12 @@ planner_day_type_dialog_new (PlannerWindow *window)
 	g_object_set_data_full (G_OBJECT (dialog),
 				"data", data,
 				g_free);
-	
+
 	model = day_type_dialog_create_model (data);
 	gtk_tree_view_set_model (GTK_TREE_VIEW (data->tree_view), model);
 
 	day_type_dialog_build_list (data);
-	
+
 	cell = gtk_cell_renderer_text_new ();
 	col = gtk_tree_view_column_new_with_attributes (
 		NULL,
@@ -216,7 +216,7 @@ planner_day_type_dialog_new (PlannerWindow *window)
 		"text", COL_NAME,
 		NULL);
 	gtk_tree_view_append_column (GTK_TREE_VIEW (data->tree_view), col);
-	
+
 	g_signal_connect (dialog,
 			  "response",
 			  G_CALLBACK (day_type_dialog_response_cb),
@@ -231,14 +231,14 @@ day_type_dialog_selection_changed_cb (GtkTreeSelection *selection,
 {
 	MrpDay   *day;
 	gboolean  sensitive = FALSE;
-	
+
 	day = day_type_dialog_get_selected_day (data);
-	
+
 	if (day != NULL && day != mrp_day_get_work () &&
 	    day != mrp_day_get_nonwork () && day != mrp_day_get_use_base ()) {
 		sensitive = TRUE;
 	}
-	
+
 	gtk_widget_set_sensitive (data->remove_button, sensitive);
 }
 
@@ -250,11 +250,11 @@ day_type_dialog_build_list (DialogData *data)
 	GList        *days, *l;
 	MrpDay       *day;
 	const gchar  *name;
-	
+
 	store = GTK_LIST_STORE (gtk_tree_view_get_model (GTK_TREE_VIEW (data->tree_view)));
 
 	gtk_list_store_clear (store);
-	
+
 	day = mrp_day_get_nonwork ();
 
 	name = mrp_day_get_name (day);
@@ -277,9 +277,9 @@ day_type_dialog_build_list (DialogData *data)
 	days = mrp_day_get_all (data->project);
 	for (l = days; l; l = l->next) {
 		day = l->data;
-		
+
 		name = mrp_day_get_name (day);
-		
+
 		gtk_list_store_append (store, &iter);
 		gtk_list_store_set (store,
 				    &iter,
@@ -293,7 +293,7 @@ static GtkTreeModel *
 day_type_dialog_create_model (DialogData *data)
 {
 	GtkListStore *store;
-	
+
 	store = gtk_list_store_new (NUM_COLS,
 				    G_TYPE_STRING,
 				    G_TYPE_INT,
@@ -351,7 +351,7 @@ day_type_dialog_find_day_foreach (GtkTreeModel *model,
 		data->found_iter = *iter;
 		return TRUE;
 	}
-	
+
 	return FALSE;
 }
 
@@ -388,7 +388,7 @@ day_type_dialog_get_selected_day (DialogData *data)
 	GtkTreeModel     *model;
 	GtkTreeIter       iter;
 	MrpDay           *day;
-	
+
 	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (data->tree_view));
 
 	if (gtk_tree_selection_get_selected (selection, &model, &iter)) {
@@ -411,7 +411,7 @@ day_type_dialog_new_name_changed_cb (GtkEntry  *entry,
 	gboolean     sensitive;
 
 	name = gtk_entry_get_text (entry);
-	
+
 	sensitive =  name[0] != 0;
 	gtk_widget_set_sensitive (button, sensitive);
 }
@@ -473,7 +473,7 @@ day_type_cmd_add_undo (PlannerCmd *cmd_base)
 	DayTypeCmdAdd *cmd;
 
 	cmd = (DayTypeCmdAdd *) cmd_base;
-	
+
 	mrp_day_remove (cmd->project, cmd->day);
 	cmd->day = NULL;
 }
@@ -535,7 +535,7 @@ day_type_cmd_remove_undo (PlannerCmd *cmd_base)
 	DayTypeCmdRemove *cmd;
 
 	cmd = (DayTypeCmdRemove *) cmd_base;
-	
+
 	cmd->day = mrp_day_add (cmd->project, cmd->name, "");
 }
 
@@ -576,6 +576,6 @@ day_type_cmd_remove (DialogData *data,
 
 	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager (data->main_window),
 					   cmd_base);
-	
+
 	return cmd_base;
 }

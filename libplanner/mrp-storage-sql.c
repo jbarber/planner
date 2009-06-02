@@ -66,7 +66,7 @@ mrp_storage_sql_register_type (GTypeModule *module)
 		0,              /* n_preallocs */
 		(GInstanceInitFunc) storage_sql_init,
 	};
-	
+
 	mrp_storage_sql_type = g_type_module_register_type (
 		module,
 		MRP_TYPE_STORAGE_MODULE,
@@ -125,7 +125,7 @@ strdup_null_if_empty (const gchar *str)
 		g_free (tmp);
 		return NULL;
 	}
-		
+
 	return tmp;
 }
 
@@ -141,21 +141,21 @@ create_sql_uri (const gchar *server,
 	gchar   *str;
 
 	string = g_string_new ("sql://");
-	
+
 	if (server) {
 		if (login) {
 			g_string_append (string, login);
-			
+
 			if (password) {
 				g_string_append_c (string, ':');
 				g_string_append (string, password);
 			}
-			
+
 			g_string_append_c (string, '@');
 		}
-		
+
 		g_string_append (string, server);
-		
+
 		if (port) {
 			g_string_append_c (string, ':');
 			g_string_append (string, port);
@@ -165,14 +165,14 @@ create_sql_uri (const gchar *server,
 	g_string_append_c (string, '#');
 
 	g_string_append_printf (string, "db=%s", database);
-	
+
 	if (project_id != -1) {
 		g_string_append_printf (string, "&id=%d", project_id);
 	}
-	
+
 	str = string->str;
 	g_string_free (string, FALSE);
-	
+
 	return str;
 }
 
@@ -198,7 +198,7 @@ storage_sql_parse_uri (const gchar  *uri,
 	*login = NULL;
 	*password = NULL;
 	*project_id = -1;
-	
+
 	if (strncmp (uri, "sql://", 6) != 0 || !strchr (uri, '#')) {
 		g_set_error (error,
 			     MRP_ERROR,
@@ -206,9 +206,9 @@ storage_sql_parse_uri (const gchar  *uri,
 			     _("Invalid SQL URI (must start with 'sql://' and contain '#')."));
 		return FALSE;
 	}
-	
+
 	p = uri + 6;
-	
+
 	strs = g_strsplit (p, "#", 2);
 	location = g_strdup (strs[0]);
 	args = g_strdup (strs[1]);
@@ -224,7 +224,7 @@ storage_sql_parse_uri (const gchar  *uri,
 		host = strdup_null_if_empty (location);
 	}
 	g_free (location);
-	
+
 	if (who && strchr (who, ':')) {
 		strs = g_strsplit (who, ":", 2);
 		*login = strdup_null_if_empty (strs[0]);
@@ -237,7 +237,7 @@ storage_sql_parse_uri (const gchar  *uri,
 		strs = g_strsplit (host, ":", 2);
 		*server = strdup_null_if_empty (strs[0]);
 		*port = strdup_null_if_empty (strs[1]);
-		
+
 		g_strfreev (strs);
 		g_free (host);
 	} else {
@@ -275,7 +275,7 @@ storage_sql_parse_uri (const gchar  *uri,
 			     _("Invalid SQL URI (invalid project id)."));
 		goto fail;
 	}
-		
+
 	if (*database == NULL) {
 		g_set_error (error,
 			     MRP_ERROR,
@@ -311,7 +311,7 @@ test_uri_parser (const gchar *uri)
 	gint    project_id;
 
 	g_print ("Test: '%s'\n", uri);
-	
+
 	if (storage_sql_parse_uri (uri,
 				   &server,
 				   &port,
@@ -331,7 +331,7 @@ test_uri_parser (const gchar *uri)
 		g_clear_error (&error);
 	}
 }
-	
+
 
 static gboolean
 storage_sql_load (MrpStorageModule *module, const gchar *uri, GError **error)
@@ -339,9 +339,9 @@ storage_sql_load (MrpStorageModule *module, const gchar *uri, GError **error)
 	MrpStorageSQL *sql;
 	gchar         *server, *port, *database, *login, *password;
 	gint           project_id;
-	
+
 	g_return_val_if_fail (MRP_IS_STORAGE_SQL (module), FALSE);
-	
+
 	sql = MRP_STORAGE_SQL (module);
 
 	if (0) {
@@ -354,18 +354,18 @@ storage_sql_load (MrpStorageModule *module, const gchar *uri, GError **error)
 		g_print ("==================\n");
 		test_uri_parser ("sql://rhult:sliff.sloff#id=12&db=qwerty");
 	}
-	
+
 	if (!storage_sql_parse_uri (uri, &server, &port, &database, &login, &password, &project_id, error)) {
 		return FALSE;
 	}
-	
+
 	mrp_sql_load_project (sql, server, port, database, login, password, project_id, error);
-	
+
 	return TRUE;
 }
 
 static gboolean
-storage_sql_save (MrpStorageModule  *module, 
+storage_sql_save (MrpStorageModule  *module,
 		  const gchar       *uri,
 		  gboolean           force,
 		  GError           **error)
@@ -374,9 +374,9 @@ storage_sql_save (MrpStorageModule  *module,
 	gchar         *server, *port, *database, *login, *password;
 	gint           project_id;
 	gchar         *new_uri;
-	
+
 	g_return_val_if_fail (MRP_IS_STORAGE_SQL (module), FALSE);
-	
+
 	sql = MRP_STORAGE_SQL (module);
 
 	if (!storage_sql_parse_uri (uri, &server, &port, &database, &login, &password, &project_id, error)) {
@@ -386,14 +386,14 @@ storage_sql_save (MrpStorageModule  *module,
 	if (!mrp_sql_save_project (sql, force, server, port, database, login, password, &project_id, error)) {
 		return FALSE;
 	}
-	
+
 	new_uri = create_sql_uri (server,
 				  port,
 				  database,
 				  login,
 				  password,
 				  project_id);
-	
+
 	g_object_set_data_full (G_OBJECT (sql), "uri", new_uri, g_free);
 
 	return TRUE;

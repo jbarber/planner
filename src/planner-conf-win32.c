@@ -32,10 +32,10 @@ planner_conf_dir_exists (const gchar *dir, GError **error)
 {
 	gboolean     ret_val;
 	HKEY hKey;
-    
+
 	ret_val = RegOpenKeyEx (HKEY_CURRENT_USER, WIN32_KEYNAME, 0, KEY_READ, &hKey);
 	RegCloseKey (hKey);
-	
+
 	return ret_val == ERROR_SUCCESS;
 }
 
@@ -44,7 +44,7 @@ static gboolean planner_conf_create()
 	gboolean     ret_val;
 	DWORD disp = 0;
 	HKEY hKey;
-	
+
 	ret_val = RegOpenKeyEx (HKEY_CURRENT_USER, WIN32_KEYNAME, 0, KEY_READ, &hKey);
 	RegCloseKey (hKey);
 	if(ret_val == ERROR_SUCCESS)
@@ -66,7 +66,7 @@ planner_conf_get_bool (const gchar *key, GError **error)
 	gchar *keyBuffer;
 	glong keyLen;
 	HKEY hKey;
-	
+
 	RegOpenKeyEx (HKEY_CURRENT_USER, WIN32_KEYNAME, 0, KEY_READ, &hKey);
 	if (RegQueryValueEx (hKey, key, 0, NULL, NULL,  &keyLen) == ERROR_SUCCESS) {
 		keyBuffer = g_malloc (keyLen + 1);
@@ -109,11 +109,11 @@ planner_conf_get_int (const gchar *key, GError **error)
 	if(RegQueryValueEx (hKey, key, 0, NULL, NULL,  &keyLen) == ERROR_SUCCESS) {
 		keyBuffer = g_malloc (keyLen + 1);
 		RegQueryValueEx (hKey, key, 0, NULL, keyBuffer,  &keyLen);
-		
+
 		ret_val = g_ascii_strtoull (keyBuffer, NULL, 10);
-		
+
 		g_free (keyBuffer);
-		
+
 		RegCloseKey (hKey);
 	}
 

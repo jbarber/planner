@@ -64,7 +64,7 @@ planner_task_date_widget_class_init (PlannerTaskDateWidgetClass *klass)
 					       NULL, NULL,
 					       planner_marshal_VOID__VOID,
 					       G_TYPE_NONE, 0);
-	
+
 	signals[CANCELLED] = g_signal_new ("cancelled",
 					   G_TYPE_FROM_CLASS (klass),
 					   G_SIGNAL_RUN_LAST,
@@ -72,7 +72,7 @@ planner_task_date_widget_class_init (PlannerTaskDateWidgetClass *klass)
 					   NULL, NULL,
 					   planner_marshal_VOID__VOID,
 					   G_TYPE_NONE, 0);
-	
+
 	g_type_class_add_private (klass, sizeof (PlannerTaskDateWidgetPriv));
 }
 
@@ -86,11 +86,11 @@ GtkWidget *
 planner_task_date_widget_new (void)
 {
 	GtkWidget *widget;
-	
+
 	widget = g_object_new (PLANNER_TYPE_TASK_DATE_WIDGET,
 			       "shadow_type", GTK_SHADOW_OUT,
 			       NULL);
-	
+
 	return widget;
 }
 
@@ -102,7 +102,7 @@ task_date_widget_today_clicked_cb (GtkWidget             *button,
 	mrptime                    today;
 
 	priv = GET_PRIV (widget);
-	
+
 	today = mrp_time_current_time ();
 	planner_task_date_widget_set_date (widget, today);
 }
@@ -155,7 +155,7 @@ task_date_widget_combo_changed_cb (GtkComboBox           *combo,
 	MrpConstraintType          type;
 
 	priv = GET_PRIV (widget);
-	
+
 	type = planner_task_date_widget_get_constraint_type (widget);
 	gtk_widget_set_sensitive (priv->calendar, type != MRP_CONSTRAINT_ASAP);
 
@@ -202,7 +202,7 @@ task_date_widget_setup (PlannerTaskDateWidget *widget)
 			  "changed",
 			  G_CALLBACK (task_date_widget_combo_changed_cb),
 			  widget);
-	
+
 	priv->today_button = glade_xml_get_widget (glade, "today_button");
 	g_signal_connect (priv->today_button, "clicked",
 			  G_CALLBACK (task_date_widget_today_clicked_cb),
@@ -218,7 +218,7 @@ task_date_widget_setup (PlannerTaskDateWidget *widget)
 			  G_CALLBACK (task_date_widget_select_clicked_cb),
 			  widget);
 
-	g_signal_connect (priv->calendar, "day-selected-double-click", 
+	g_signal_connect (priv->calendar, "day-selected-double-click",
 			  G_CALLBACK (task_date_day_selected_double_click_cb),
 			  widget);
 
@@ -232,7 +232,7 @@ planner_task_date_widget_set_date (PlannerTaskDateWidget *widget, mrptime t)
 	gint                       year, month, day;
 
 	priv = GET_PRIV (widget);
-	
+
 	if (!mrp_time_decompose (t, &year, &month, &day, NULL, NULL, NULL)) {
 		return;
 	}
@@ -248,10 +248,10 @@ planner_task_date_widget_get_date (PlannerTaskDateWidget *widget)
 	gint                       year, month, day;
 
 	priv = GET_PRIV (widget);
-	
+
 	gtk_calendar_get_date (GTK_CALENDAR (priv->calendar),
 			       &year, &month, &day);
-	
+
 	month++;
 	return mrp_time_compose (year, month, day, 0, 0, 0);
 }
@@ -264,7 +264,7 @@ planner_task_date_widget_set_constraint_type (PlannerTaskDateWidget *widget,
 	gint                       index;
 
 	priv = GET_PRIV (widget);
-	
+
 	switch (type) {
 	case MRP_CONSTRAINT_ASAP:
 		index = 0;
@@ -300,8 +300,8 @@ planner_task_date_widget_get_constraint_type (PlannerTaskDateWidget *widget)
 		return MRP_CONSTRAINT_SNET;
 	case 2:
 		return MRP_CONSTRAINT_MSO;
-	}	
-			
+	}
+
 	return MRP_CONSTRAINT_ASAP;
 }
 

@@ -29,7 +29,7 @@ typedef struct {
 	PlannerWindow *main_window;
 
 	GtkTreeView   *edited_tree;
-	
+
 	GtkWidget     *dialog;
 	GtkWidget     *visible_tree;
 	GtkWidget     *hidden_tree;
@@ -89,7 +89,7 @@ column_dialog_update_sensitivity (DialogData *data)
 
 			model = gtk_tree_view_get_model (GTK_TREE_VIEW (data->visible_tree));
 			num_rows = gtk_tree_model_iter_n_children (model, NULL);
-			
+
 			if (indices[0] < num_rows - 1) {
 				down_sensitive = TRUE;
 			}
@@ -106,7 +106,7 @@ column_dialog_update_sensitivity (DialogData *data)
 	if (path) {
 		gtk_tree_path_free (path);
 	}
-	
+
 	gtk_widget_set_sensitive (data->up_button, visible_sensitive && up_sensitive);
 	gtk_widget_set_sensitive (data->down_button, visible_sensitive && down_sensitive);
 	gtk_widget_set_sensitive (data->hide_button, visible_sensitive && hide_sensitive);
@@ -149,19 +149,19 @@ column_dialog_set_selected_column (DialogData        *data,
 		tree = GTK_TREE_VIEW (data->visible_tree);
 	} else {
 		tree = GTK_TREE_VIEW (data->hidden_tree);
-	}		
+	}
 
 	model = gtk_tree_view_get_model (tree);
 	found = FALSE;
-	
+
 	if (gtk_tree_model_get_iter_first (model, &iter)) {
 		GtkTreeViewColumn *tmp;
-		
+
 		do {
 			gtk_tree_model_get (model, &iter,
 					    0, &tmp,
 					    -1);
-			
+
 			if (tmp == column) {
 				found = TRUE;
 				break;
@@ -182,7 +182,7 @@ column_dialog_get_next_visible_column (DialogData *data, GtkTreeViewColumn *colu
 	GtkTreeViewColumn *next = NULL;
 
 	columns = gtk_tree_view_get_columns (data->edited_tree);
-	
+
 	for (l = columns; l; l = l->next) {
 		if (l->data == column) {
 			l = l->next;
@@ -210,7 +210,7 @@ column_dialog_get_prev_visible_column (DialogData *data, GtkTreeViewColumn *colu
 	GtkTreeViewColumn *prev = NULL;
 
 	columns = gtk_tree_view_get_columns (data->edited_tree);
-	
+
 	for (l = columns; l; l = l->next) {
 		if (l->data == column) {
 			l = l->prev;
@@ -237,7 +237,7 @@ column_dialog_down_button_clicked_cb (GtkWidget  *button,
 {
 	GtkTreeViewColumn *column;
 	GtkTreeViewColumn *base_column;
-	
+
 	column = column_dialog_get_selected_column (
 		data, GTK_TREE_VIEW (data->visible_tree));
 
@@ -251,7 +251,7 @@ column_dialog_down_button_clicked_cb (GtkWidget  *button,
 						 column,
 						 base_column);
 	}
-	
+
 	/* Note: We should probalby not be lazy here and reorder the rows
 	 * instead.
 	 */
@@ -261,12 +261,12 @@ column_dialog_down_button_clicked_cb (GtkWidget  *button,
 }
 
 static void
-column_dialog_up_button_clicked_cb (GtkWidget  *button, 
+column_dialog_up_button_clicked_cb (GtkWidget  *button,
 				    DialogData *data)
 {
 	GtkTreeViewColumn *column;
 	GtkTreeViewColumn *base_column;
-	
+
 	column = column_dialog_get_selected_column (
 		data, GTK_TREE_VIEW (data->visible_tree));
 
@@ -292,7 +292,7 @@ column_dialog_up_button_clicked_cb (GtkWidget  *button,
 }
 
 static void
-column_dialog_hide_button_clicked_cb (GtkWidget  *button, 
+column_dialog_hide_button_clicked_cb (GtkWidget  *button,
 				      DialogData *data)
 {
 	GtkTreeViewColumn *column;
@@ -308,7 +308,7 @@ column_dialog_hide_button_clicked_cb (GtkWidget  *button,
 
 	/* This is only emitted when columns are reordered, so we do it here. */
 	g_signal_emit_by_name (data->edited_tree, "columns-changed");
-	
+
 	/* Note: We should probalby not be lazy here and reorder the rows
 	 * instead.
 	 */
@@ -318,7 +318,7 @@ column_dialog_hide_button_clicked_cb (GtkWidget  *button,
 }
 
 static void
-column_dialog_show_button_clicked_cb (GtkWidget  *button, 
+column_dialog_show_button_clicked_cb (GtkWidget  *button,
 				      DialogData *data)
 {
 	GtkTreeViewColumn *column;
@@ -344,7 +344,7 @@ column_dialog_show_button_clicked_cb (GtkWidget  *button,
 }
 
 static void
-column_dialog_cursor_changed_cb (GtkTreeView *tree, 
+column_dialog_cursor_changed_cb (GtkTreeView *tree,
 				 DialogData  *data)
 {
 	column_dialog_update_sensitivity (data);
@@ -356,7 +356,7 @@ column_dialog_focus_in_event_cb (GtkTreeView *tree,
 				 DialogData  *data)
 {
 	column_dialog_update_sensitivity (data);
-	
+
 	return FALSE;
 }
 
@@ -379,7 +379,7 @@ column_dialog_label_cell_data_func (GtkTreeViewColumn *tree_column,
 	 */
 	str = g_strdup (gtk_tree_view_column_get_title (column));
 	label = g_strstrip (str);
-	
+
 	g_object_set (cell,
 		      "text", label,
 		      NULL);
@@ -410,7 +410,7 @@ column_dialog_setup_tree (DialogData *data, GtkTreeView *tree)
 	cell = gtk_cell_renderer_text_new ();
 	col = gtk_tree_view_column_new_with_attributes (NULL, cell, NULL);
 	gtk_tree_view_column_set_cell_data_func (col,
-						 cell, 
+						 cell,
 						 column_dialog_label_cell_data_func,
 						 data,
 						 NULL);
@@ -434,7 +434,7 @@ column_dialog_fill_trees (DialogData *data)
 	gtk_list_store_clear (visible_store);
 
 	columns = gtk_tree_view_get_columns (data->edited_tree);
-	
+
 	for (l = columns; l; l = l->next) {
 		GtkTreeViewColumn *column;
 
@@ -443,7 +443,7 @@ column_dialog_fill_trees (DialogData *data)
 		if (g_object_get_data (G_OBJECT (column), "custom")) {
 			continue;
 		}
-		
+
 		if (gtk_tree_view_column_get_visible (column)) {
 			gtk_list_store_append (visible_store, &iter);
 			gtk_list_store_set (visible_store,
@@ -458,7 +458,7 @@ column_dialog_fill_trees (DialogData *data)
 					    -1);
 		}
 	}
-	
+
 	g_list_free (columns);
 }
 
@@ -478,21 +478,21 @@ planner_column_dialog_show (PlannerWindow *window,
 	GladeXML   *glade;
 	GtkWidget  *close_button;
 	gchar      *filename;
-	
+
 	filename = mrp_paths_get_glade_dir ("column-dialog.glade");
 	glade = glade_xml_new (filename, NULL, NULL);
 	g_free (filename);
-	
+
 	if (!glade) {
 		g_warning ("Could not create column dialog.");
 		return;
 	}
-	
+
 	data = g_new0 (DialogData, 1);
 
 	data->main_window = window;
 	data->edited_tree = edited_tree;
-	
+
 	data->dialog = glade_xml_get_widget (glade, "column_dialog");
 
 	gtk_window_set_title (GTK_WINDOW (data->dialog), title);
@@ -506,7 +506,7 @@ planner_column_dialog_show (PlannerWindow *window,
 	data->down_button = glade_xml_get_widget (glade, "down_button");
 	data->show_button = glade_xml_get_widget (glade, "show_button");
 	data->hide_button = glade_xml_get_widget (glade, "hide_button");
-	
+
 	column_dialog_setup_tree (data, GTK_TREE_VIEW (data->hidden_tree));
 	column_dialog_setup_tree (data, GTK_TREE_VIEW (data->visible_tree));
 
@@ -520,7 +520,7 @@ planner_column_dialog_show (PlannerWindow *window,
 			  "focus-in-event",
 			  G_CALLBACK (column_dialog_focus_in_event_cb),
 			  data);
-	
+
 	g_signal_connect (data->up_button,
 			  "clicked",
 			  G_CALLBACK (column_dialog_up_button_clicked_cb),
@@ -547,10 +547,10 @@ planner_column_dialog_show (PlannerWindow *window,
 	g_object_set_data_full (G_OBJECT (data->dialog),
 				"data", data,
 				g_free);
-	
+
 	column_dialog_update_sensitivity (data);
 
 	gtk_widget_show (data->dialog);
-	
+
 	g_object_unref (glade);
 }

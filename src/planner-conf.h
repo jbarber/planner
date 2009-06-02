@@ -24,7 +24,7 @@
 gboolean      planner_conf_dir_exists    (const gchar     *dir,
 					  GError         **error);
 gboolean      planner_conf_get_bool      (const gchar     *key,
-					  GError         **error); 
+					  GError         **error);
 gchar *       planner_conf_get_string    (const gchar     *key,
 					  GError         **error);
 gint          planner_conf_get_int       (const gchar     *key,

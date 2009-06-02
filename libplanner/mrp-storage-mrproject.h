@@ -45,7 +45,7 @@ struct _MrpStorageMrproject
 	MrpStorageModule  parent;
 
 	MrpProject       *project;
-	
+
 	MrpTask    *root_task;
 	GHashTable *task_id_hash;
 	GList      *delayed_relations;

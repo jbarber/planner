@@ -60,7 +60,7 @@ planner_popup_button_class_init (PlannerPopupButtonClass *klass)
 
 	toggle_button_class = GTK_TOGGLE_BUTTON_CLASS (klass);
 	toggle_button_class->toggled = planner_popup_button_toggled;
-	
+
 	signals[POPUP] = g_signal_new ("popup",
 				       G_TYPE_FROM_CLASS (klass),
 				       G_SIGNAL_RUN_LAST,
@@ -77,7 +77,7 @@ planner_popup_button_class_init (PlannerPopupButtonClass *klass)
 					 planner_marshal_VOID__OBJECT_BOOLEAN,
 					 G_TYPE_NONE, 2,
 					 GTK_TYPE_WIDGET, G_TYPE_BOOLEAN);
-	
+
 	g_type_class_add_private (klass, sizeof (PlannerPopupButtonPriv));
 }
 
@@ -87,7 +87,7 @@ planner_popup_button_init (PlannerPopupButton *button)
 	PlannerPopupButtonPriv *priv;
 
 	priv = GET_PRIV (button);
-	
+
 	priv->popup_window = gtk_window_new (GTK_WINDOW_POPUP);
 	gtk_window_set_resizable (GTK_WINDOW (priv->popup_window), FALSE);
 	gtk_window_set_screen (GTK_WINDOW (priv->popup_window),
@@ -110,18 +110,18 @@ planner_popup_button_toggled (GtkToggleButton *toggle_button)
 		popup_button_popup (button);
 	} else {
 		popup_button_popdown (button, TRUE);
-	}	
+	}
 }
 
 GtkWidget *
 planner_popup_button_new (const gchar *label)
 {
 	GtkWidget *button;
-	
+
 	button = g_object_new (PLANNER_TYPE_POPUP_BUTTON,
 			       "label", label,
 			       NULL);
-	
+
 	return button;
 }
 
@@ -138,23 +138,23 @@ popup_button_press_event_cb (GtkWidget          *popup_window,
 	gint                    x2, y2;
 
 	priv = GET_PRIV (popup_button);
-	
+
 	/* Popdown the window if the click is outside of it. */
-	
+
 	if (event->button != 1) {
 		return FALSE;
 	}
-	
+
 	x = event->x_root;
 	y = event->y_root;
 
 	gdk_window_get_root_origin (popup_window->window,
 				    &xoffset,
 				    &yoffset);
-	
+
 	xoffset += popup_window->allocation.x;
 	yoffset += popup_window->allocation.y;
-	
+
 	alloc = popup_window->allocation;
 	x1 = alloc.x + xoffset;
 	y1 = alloc.y + yoffset;
@@ -166,7 +166,7 @@ popup_button_press_event_cb (GtkWidget          *popup_window,
 	}
 
 	planner_popup_button_popdown (popup_button, FALSE);
-	
+
 	return FALSE;
 }
 
@@ -190,8 +190,8 @@ popup_button_grab_on_window (GdkWindow *window,
 }
 
 static void
-popup_button_position (PlannerPopupButton *button, 
-		       gint               *x, 
+popup_button_position (PlannerPopupButton *button,
+		       gint               *x,
 		       gint               *y)
 {
 	PlannerPopupButtonPriv *priv;
@@ -202,16 +202,16 @@ popup_button_position (PlannerPopupButton *button,
 	GdkRectangle            monitor;
 
 	priv = GET_PRIV (button);
-	
+
 	button_widget = GTK_WIDGET (button);
-	
+
 	gdk_window_get_origin (button_widget->window, x, y);
 
 	if (GTK_WIDGET_NO_WINDOW (button_widget)) {
 		*x += button_widget->allocation.x;
 		*y += button_widget->allocation.y;
 	}
-	
+
 	/* The popup should be placed below the button, right-aligned to it. */
 	*y += button_widget->allocation.height;
 	*x += button_widget->allocation.width;
@@ -225,14 +225,14 @@ popup_button_position (PlannerPopupButton *button,
 	monitor_num = gdk_screen_get_monitor_at_window (
 		screen, GTK_WIDGET (button)->window);
 	gdk_screen_get_monitor_geometry (screen, monitor_num, &monitor);
-	
+
 	if (*x < monitor.x) {
 		*x = monitor.x;
 	}
 	else if (*x + popup_req.width > monitor.x + monitor.width) {
 		*x = monitor.x + monitor.width - popup_req.width;
 	}
-	
+
 	if (*y + popup_req.height > monitor.y + monitor.height) {
 		*y -= popup_req.height + button_widget->allocation.height;
 	}
@@ -256,7 +256,7 @@ popup_button_popup (PlannerPopupButton *button)
 	gtk_widget_show_all (priv->popup_widget);
 
 	popup_button_position (button, &x, &y);
-	
+
 	gtk_window_move (GTK_WINDOW (priv->popup_window), x, y);
 	gtk_widget_show (priv->popup_window);
 
@@ -264,7 +264,7 @@ popup_button_popup (PlannerPopupButton *button)
 
 	if (!popup_button_grab_on_window (GTK_WIDGET (priv->popup_widget)->window,
 					  gtk_get_current_event_time ())) {
-		
+
 		popup_button_popdown (button, FALSE);
 		return;
 	}
@@ -283,7 +283,7 @@ popup_button_popdown (PlannerPopupButton *button,
 	if (!priv->popup_widget) {
 		return;
 	}
-	
+
 	gtk_widget_hide (priv->popup_window);
 
 	g_object_ref (priv->popup_widget);
@@ -308,7 +308,7 @@ planner_popup_button_popup (PlannerPopupButton *button)
 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button))) {
 		return;
 	}
-	    
+
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), TRUE);
 }
 

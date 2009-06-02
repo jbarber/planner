@@ -49,10 +49,10 @@ static void       mam_get_value             (GtkTreeModel         *treemodel,
 static void       mam_assignment_changed_cb (MrpTask              *task,
 					     MrpAssignment        *assignment,
 					     PlannerAssignmentModel    *model);
-static void       mam_resource_added_cb     (MrpProject           *project, 
+static void       mam_resource_added_cb     (MrpProject           *project,
 					     MrpResource          *assignment,
 					     PlannerAssignmentModel    *model);
-static void       mam_resource_removed_cb   (MrpProject           *project, 
+static void       mam_resource_removed_cb   (MrpProject           *project,
 					     MrpResource          *resource,
 					     PlannerAssignmentModel    *model);
 static void       mam_resource_notify_cb    (MrpResource          *resource,
@@ -67,7 +67,7 @@ GType
 planner_assignment_model_get_type (void)
 {
         static GType type = 0;
-        
+
         if (!type) {
                 static const GTypeInfo info =
                         {
@@ -86,7 +86,7 @@ planner_assignment_model_get_type (void)
 					       "PlannerAssignmentModel",
 					       &info, 0);
         }
-        
+
         return type;
 }
 
@@ -95,11 +95,11 @@ mam_class_init (PlannerAssignmentModelClass *klass)
 {
         GObjectClass     *object_class;
 	PlannerListModelClass *lm_class;
-	
+
         parent_class = g_type_class_peek_parent (klass);
         object_class = G_OBJECT_CLASS (klass);
 	lm_class     = PLANNER_LIST_MODEL_CLASS (klass);
-	
+
         object_class->finalize = mam_finalize;
 
         lm_class->get_n_columns   = mam_get_n_columns;
@@ -111,9 +111,9 @@ static void
 mam_init (PlannerAssignmentModel *model)
 {
         PlannerAssignmentModelPriv *priv;
-        
+
         priv = g_new0 (PlannerAssignmentModelPriv, 1);
-        
+
 	priv->project = NULL;
 
         model->priv = priv;
@@ -135,7 +135,7 @@ mam_finalize (GObject *object)
                 g_free (model->priv);
                 model->priv = NULL;
         }
-        
+
 	if (G_OBJECT_CLASS (parent_class)->finalize) {
 		(* G_OBJECT_CLASS (parent_class)->finalize) (object);
 	}
@@ -175,14 +175,14 @@ mam_get_value (GtkTreeModel *tree_model,
                GtkTreeIter  *iter,
                gint          column,
                GValue       *value)
-{	
+{
 	PlannerAssignmentModel *model;
 	MrpAssignment     *assignment;
 	MrpResource       *resource;
         gchar             *str;
         gint               units;
         gfloat             rate;
-	
+
         g_return_if_fail (PLANNER_IS_ASSIGNMENT_MODEL (tree_model));
         g_return_if_fail (iter != NULL);
 
@@ -236,7 +236,7 @@ mam_get_value (GtkTreeModel *tree_model,
 		assignment = mrp_task_get_assignment (model->priv->task, resource);
 		if (assignment) {
 			MrpTaskSched sched;
-			
+
 			g_object_get (model->priv->task, "sched", &sched, NULL);
 			g_value_set_boolean (value, sched == MRP_TASK_SCHED_FIXED_WORK);
 		} else {
@@ -254,17 +254,17 @@ mam_assignment_changed_cb (MrpTask           *task,
 			   PlannerAssignmentModel *model)
 {
 	MrpResource *resource;
-	
+
 	g_return_if_fail (PLANNER_IS_ASSIGNMENT_MODEL (model));
 	g_return_if_fail (MRP_IS_ASSIGNMENT (assignment));
-	
+
 	resource = mrp_assignment_get_resource (assignment);
 
 	planner_list_model_update (PLANNER_LIST_MODEL (model), MRP_OBJECT (resource));
 }
 
 static void
-mam_resource_added_cb (MrpProject        *project, 
+mam_resource_added_cb (MrpProject        *project,
 		       MrpResource       *resource,
 		       PlannerAssignmentModel *model)
 {
@@ -272,15 +272,15 @@ mam_resource_added_cb (MrpProject        *project,
 	g_return_if_fail (MRP_IS_RESOURCE (resource));
 
 	planner_list_model_append (PLANNER_LIST_MODEL (model), MRP_OBJECT (resource));
-	
-	g_signal_connect_object (resource, 
+
+	g_signal_connect_object (resource,
 				 "notify",
 				 G_CALLBACK (mam_resource_notify_cb),
 				 model, 0);
 }
 
 static void
-mam_resource_removed_cb (MrpProject        *project, 
+mam_resource_removed_cb (MrpProject        *project,
 			 MrpResource       *resource,
 			 PlannerAssignmentModel *model)
 {
@@ -301,7 +301,7 @@ mam_resource_notify_cb (MrpResource       *resource,
 {
 	g_return_if_fail (PLANNER_IS_ASSIGNMENT_MODEL (model));
 	g_return_if_fail (MRP_IS_RESOURCE (resource));
-	
+
 	planner_list_model_update (PLANNER_LIST_MODEL (model), MRP_OBJECT (resource));
 }
 
@@ -312,9 +312,9 @@ planner_assignment_model_new (MrpTask *task)
         PlannerAssignmentModelPriv *priv;
 	GList                 *node;
 	GList                 *resources;
-	
+
         model = g_object_new (PLANNER_TYPE_ASSIGNMENT_MODEL, NULL);
-        
+
 	g_return_val_if_fail (PLANNER_IS_ASSIGNMENT_MODEL (model), NULL);
 
         priv = model->priv;
@@ -336,20 +336,20 @@ planner_assignment_model_new (MrpTask *task)
 				 "assignment_added",
 				 G_CALLBACK (mam_assignment_changed_cb),
 				 model, 0);
-	
+
 	g_signal_connect_object (priv->task,
 				 "assignment_removed",
 				 G_CALLBACK (mam_assignment_changed_cb),
 				 model, 0);
 
-	g_signal_connect_object (priv->project, 
-				 "resource_added", 
-				 G_CALLBACK (mam_resource_added_cb), 
+	g_signal_connect_object (priv->project,
+				 "resource_added",
+				 G_CALLBACK (mam_resource_added_cb),
 				 model, 0);
 
-	g_signal_connect_object (priv->project, 
-				 "resource_removed", 
-				 G_CALLBACK (mam_resource_removed_cb), 
+	g_signal_connect_object (priv->project,
+				 "resource_removed",
+				 G_CALLBACK (mam_resource_removed_cb),
 				 model, 0);
 
         return model;

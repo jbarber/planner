@@ -34,16 +34,16 @@ mpl_load (const gchar *file)
 	PlannerPlugin *plugin;
 
 	plugin = g_object_new (PLANNER_TYPE_PLUGIN, NULL);
-	
+
 	plugin->handle = g_module_open (file, 0);
-	
+
 	if (plugin->handle == NULL) {
 		g_warning (_("Could not open plugin file '%s'\n"),
 			   g_module_error ());
-		
+
 		return NULL;
 	}
-	
+
 	g_module_symbol (plugin->handle, "plugin_init", (gpointer)&plugin->init);
 	g_module_symbol (plugin->handle, "plugin_exit", (gpointer)&plugin->exit);
 
@@ -59,10 +59,10 @@ mpl_load_dir (const gchar *path, PlannerWindow *window)
 	GList       *list = NULL;
 
 	dir = g_dir_open (path, 0, NULL);
-	if (dir == NULL) {		
+	if (dir == NULL) {
 		return NULL;
 	}
-	
+
 	while ((name = g_dir_read_name (dir)) != NULL) {
 		if (g_str_has_suffix (name, G_MODULE_SUFFIX)) {
 			gchar *plugin_name;
@@ -76,7 +76,7 @@ mpl_load_dir (const gchar *path, PlannerWindow *window)
 
 				planner_plugin_init (plugin, window);
 			}
-			
+
 			g_free (plugin_name);
 		}
 	}
@@ -91,10 +91,10 @@ planner_plugin_loader_load (PlannerWindow *window)
 {
 	gchar  *path;
 	GList  *list;
-	
+
 	path = mrp_paths_get_plugin_dir (NULL);
 	list = mpl_load_dir (path, window);
 	g_free (path);
-	
+
 	return list;
 }

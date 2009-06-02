@@ -22,7 +22,7 @@
    Boston, MA 02111-1307, USA.
 
    Authors: Ettore Perazzoli <ettore@comm2000.it>
-   	    John Sullivan <sullivan@eazel.com> 
+            John Sullivan <sullivan@eazel.com>
             Darin Adler <darin@eazel.com>
 */
 
@@ -143,7 +143,7 @@ uri_is_local_scheme (const char *uri)
 	char *temp_scheme;
 	int i;
 	char *local_schemes[] = {"file:", "help:", "ghelp:", "gnome-help:",
-				 "trash:", "man:", "info:", 
+				 "trash:", "man:", "info:",
 				 "hardware:", "search:", "pipe:",
 				 "gnome-trash:", NULL};
 
@@ -208,7 +208,7 @@ handle_trailing_slashes (const char *uri)
 			/* go back till you remove them all but one. */
 			for (temp--; *(temp - 1) == '/'; temp--) {
 				*temp = '\0';
-			}			
+			}
 		}
 	}
 
@@ -235,7 +235,7 @@ make_uri_canonical (const char *uri)
 		return NULL;
 	}
 
-	/* FIXME bugzilla.eazel.com 648: 
+	/* FIXME bugzilla.eazel.com 648:
 	 * This currently ignores the issue of two uris that are not identical but point
 	 * to the same data except for the specific cases of trailing '/' characters,
 	 * file:/ and file:///, and "lack of file:".
@@ -256,9 +256,9 @@ make_uri_canonical (const char *uri)
 		old_uri = canonical_uri;
 
 		if (old_uri[0] != '/') {
-			/* FIXME bugzilla.eazel.com 5069: 
+			/* FIXME bugzilla.eazel.com 5069:
 			 *  bandaid alert. Is this really the right thing to do?
-			 * 
+			 *
 			 * We got what really is a relative path. We do a little bit of
 			 * a stretch here and assume it was meant to be a cryptic absolute path,
 			 * and convert it to one. Since we can't call gnome_vfs_uri_new and
@@ -291,7 +291,7 @@ make_uri_canonical (const char *uri)
 			canonical_uri = old_uri;
 		}
 	}
-	
+
 	/* FIXME bugzilla.eazel.com 2802:
 	 * Work around gnome-vfs's desire to convert file:foo into file://foo
 	 * by converting to file:///foo here. When you remove this, check that
@@ -319,7 +319,7 @@ format_uri_for_display (const char *uri, gboolean filenames_are_locale_encoded)
 
 	/* If there's no fragment and it's a local path. */
 	path = gnome_vfs_get_local_path_from_uri (canonical_uri);
-	
+
 	if (path != NULL) {
 		if (filenames_are_locale_encoded) {
 			utf8_path = g_locale_to_utf8 (path, -1, NULL, NULL, NULL);
@@ -327,7 +327,7 @@ format_uri_for_display (const char *uri, gboolean filenames_are_locale_encoded)
 				g_free (canonical_uri);
 				g_free (path);
 				return utf8_path;
-			} 
+			}
 		} else if (g_utf8_validate (path, -1, NULL)) {
 			g_free (canonical_uri);
 			return path;
@@ -348,7 +348,7 @@ char *
 egg_recent_vfs_format_uri_for_display (const char *uri)
 {
 	static gboolean broken_filenames;
-	
+
 	broken_filenames = g_getenv ("G_BROKEN_FILENAMES") != NULL;
 
 	return format_uri_for_display (uri, broken_filenames);
@@ -388,7 +388,7 @@ escape_high_chars (const guchar *string)
 	static const gchar hex[16] = "0123456789ABCDEF";
 
 #define ACCEPTABLE(a) ((a)>=32 && (a)<128)
-	
+
 	escape_count = 0;
 
 	if (string == NULL) {
@@ -400,7 +400,7 @@ escape_high_chars (const guchar *string)
 			escape_count++;
 		}
 	}
-	
+
 	if (escape_count == 0) {
 		return g_strdup (string);
 	}
@@ -414,7 +414,7 @@ escape_high_chars (const guchar *string)
 			*result_scanner++ = '%';
 			*result_scanner++ = hex[*scanner >> 4];
 			*result_scanner++ = hex[*scanner & 15];
-			
+
 		} else {
 			*result_scanner++ = *scanner;
 		}
@@ -495,7 +495,7 @@ make_uri_from_input_internal (const char *text,
 	g_free (stripped);
 
 	return uri;
-	
+
 }
 
 char *
@@ -543,7 +543,7 @@ uris_match (const char *uri_1, const char *uri_2, gboolean ignore_fragments)
 
 	g_free (canonical_1);
 	g_free (canonical_2);
-	
+
 	return result;
 }
 
@@ -561,10 +561,10 @@ egg_recent_vfs_get_uri_scheme (const char *uri)
 	g_return_val_if_fail (uri != NULL, NULL);
 
 	colon = strchr (uri, ':');
-	
+
 	if (colon == NULL) {
 		return NULL;
 	}
-	
+
 	return g_strndup (uri, colon - uri);
 }

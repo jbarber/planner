@@ -15,12 +15,12 @@ DL_EXPORT(void)
 initplannerui(void)
 {
     PyObject *m, *d;
-	
+
     init_pygobject ();
 
     m = Py_InitModule ("plannerui", plannerui_functions);
     d = PyModule_GetDict (m);
-	
+
     plannerui_register_classes (d);
 
     if (PyErr_Occurred ()) {

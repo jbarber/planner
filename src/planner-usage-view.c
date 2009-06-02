@@ -40,7 +40,7 @@ struct _PlannerUsageViewPriv {
 
         PlannerUsageChart     *chart;
         /*PlannerUsagePrintData *print_data;*/
-	
+
 	GtkUIManager           *ui_manager;
 	GtkActionGroup         *actions;
 	guint                   merged_id;
@@ -124,7 +124,7 @@ usage_view_chart_scroll_event (GtkWidget * gki, GdkEventScroll * event, PlannerV
 {
 	gboolean can_in, can_out;
 	PlannerUsageViewPriv *priv;
-	
+
 	if (event->state & GDK_CONTROL_MASK) {
 		priv = PLANNER_USAGE_VIEW (view)->priv;
 		planner_usage_chart_can_zoom (priv->chart, &can_in, &can_out);
@@ -239,11 +239,11 @@ static const gchar *
 usage_view_get_icon (PlannerView *view)
 {
 	static gchar *filename = NULL;
-	
+
 	if (!filename) {
 		filename = mrp_paths_get_image_dir ("resources_usage.png");
 	}
-	
+
         return filename;
 }
 
@@ -338,7 +338,7 @@ usage_view_edit_columns_cb (GtkAction *action,
 {
 	PlannerUsageView     *view;
 	PlannerUsageViewPriv *priv;
-	
+
 	view = PLANNER_USAGE_VIEW (data);
 	priv = view->priv;
 
@@ -446,7 +446,7 @@ usage_view_create_widget (PlannerView *view)
         chart = planner_usage_chart_new_with_model (GTK_TREE_MODEL (model));
         priv->chart = PLANNER_USAGE_CHART (chart);
 
-	planner_usage_chart_set_view (PLANNER_USAGE_CHART (priv->chart), 
+	planner_usage_chart_set_view (PLANNER_USAGE_CHART (priv->chart),
 				      PLANNER_USAGE_TREE  (priv->tree));
 
 	gtk_widget_set_events (GTK_WIDGET (priv->chart), GDK_SCROLL_MASK);
@@ -468,12 +468,12 @@ usage_view_create_widget (PlannerView *view)
         gtk_paned_add2 (GTK_PANED (hpaned), right_frame);
 
 	usage_view_load_columns (PLANNER_USAGE_VIEW (view));
-	
+
 	g_signal_connect (tree,
 			  "columns-changed",
 			  G_CALLBACK (usage_view_tree_view_columns_changed_cb),
 			  view);
-	
+
 	g_signal_connect (tree,
 			  "destroy",
 			  G_CALLBACK (usage_view_tree_view_destroy_cb),
@@ -509,7 +509,7 @@ usage_view_create_widget (PlannerView *view)
 			  "style_set",
 			  G_CALLBACK (usage_view_tree_style_set_cb),
 			  view);
-	
+
         gtk_tree_view_expand_all (GTK_TREE_VIEW (tree));
 
 	planner_usage_chart_expand_all (PLANNER_USAGE_CHART (chart));
@@ -543,7 +543,7 @@ usage_view_update_row_and_header_height (PlannerView *view)
 
 	tv = GTK_TREE_VIEW (PLANNER_USAGE_VIEW (view)->priv->tree);
 	chart = PLANNER_USAGE_VIEW (view)->priv->chart;
-	
+
 	/* Get the row and header heights. */
 	cols = gtk_tree_view_get_columns (tv);
 	row_height = 0;
@@ -594,7 +594,7 @@ usage_view_expose_cb (GtkWidget      *widget,
 
 	g_signal_handler_disconnect (view->priv->tree,
 				     view->priv->expose_id);
-	
+
 	return FALSE;
 }
 
@@ -650,7 +650,7 @@ usage_view_project_loaded_cb (MrpProject *project, PlannerView *view)
         if (project == priv->project) {
 		/* FIXME: Due to the above, we have this hack. */
 		planner_usage_chart_setup_root_task (priv->chart);
-		
+
                 gtk_tree_view_expand_all (GTK_TREE_VIEW (priv->tree));
                 planner_usage_chart_expand_all (priv->chart);
                 return;
@@ -666,7 +666,7 @@ usage_view_project_loaded_cb (MrpProject *project, PlannerView *view)
 						  "expose_event",
 						  G_CALLBACK (usage_view_expose_cb),
 						  view);
-	
+
 	g_object_unref (model);
 
 	gtk_tree_view_expand_all (GTK_TREE_VIEW (priv->tree));
@@ -729,13 +729,13 @@ usage_view_update_zoom_sensitivity (PlannerView *view)
         gboolean              in, out;
 
 	priv = PLANNER_USAGE_VIEW (view)->priv;
-	
+
         planner_usage_chart_can_zoom (priv->chart, &in, &out);
 
 	g_object_set (gtk_action_group_get_action (
 			      GTK_ACTION_GROUP (priv->actions),
 			      "ZoomIn"),
-		      "sensitive", in, 
+		      "sensitive", in,
 		      NULL);
 
 	g_object_set (gtk_action_group_get_action (
@@ -751,7 +751,7 @@ usage_view_save_columns (PlannerUsageView *view)
 	PlannerUsageViewPriv *priv;
 
 	priv = view->priv;
-	
+
 	planner_view_column_save_helper (PLANNER_VIEW (view),
 					 GTK_TREE_VIEW (priv->tree));
 }
@@ -764,13 +764,13 @@ usage_view_load_columns (PlannerUsageView *view)
 	GtkTreeViewColumn    *column;
 	const gchar          *id;
 	gint                  i;
-		
+
 	priv = view->priv;
 
 	/* Load the columns. */
 	planner_view_column_load_helper (PLANNER_VIEW (view),
 					 GTK_TREE_VIEW (priv->tree));
-	
+
 	/* Make things a bit more robust by setting defaults if we don't get any
 	 * visible columns. Should be done through a schema instead (but we'll
 	 * keep this since a lot of people get bad installations when installing
@@ -783,7 +783,7 @@ usage_view_load_columns (PlannerUsageView *view)
 			i++;
 		}
 	}
-	
+
 	if (i == 0) {
 		for (l = columns; l; l = l->next) {
 			column = l->data;
@@ -796,11 +796,11 @@ usage_view_load_columns (PlannerUsageView *view)
 			if (!id) {
 				continue;
 			}
-			
+
 			gtk_tree_view_column_set_visible (column, TRUE);
 		}
 	}
-	
+
 	g_list_free (columns);
 }
 

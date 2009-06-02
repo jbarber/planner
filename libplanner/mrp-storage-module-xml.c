@@ -49,7 +49,7 @@ mrp_storage_module_xml_register_type (GTypeModule *module)
 		0,              /* n_preallocs */
 		(GInstanceInitFunc) mpsm_xml_init,
 	};
-	
+
 	static const GInterfaceInfo project_storage_info = {
 		(GInterfaceInitFunc) mpsm_xml_ps_init,        /* interface_init */
 		NULL,                                         /* interface_finalize */
@@ -58,8 +58,8 @@ mrp_storage_module_xml_register_type (GTypeModule *module)
 
 	static const GInterfaceInfo task_storage_info = {
 		(GInterfaceInitFunc) mpsm_xml_ts_init,
-		NULL,                                 
-		NULL                                  
+		NULL,
+		NULL
 	};
 
         static const GInterfaceInfo resource_storage_info = {
@@ -73,7 +73,7 @@ mrp_storage_module_xml_register_type (GTypeModule *module)
 		MRP_TYPE_STORAGE_MODULE,
 		"MrPStorageModuleXML",
 		&object_info, 0);
-	
+
 	g_type_add_interface_static (mrp_storage_module_xml_type,
 				     MRP_TYPE_PROJECT_STORAGE,
 				     &project_storage_info);

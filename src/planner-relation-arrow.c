@@ -38,20 +38,20 @@
 
 SS:
 
-  1:      A 
+  1:      A
   	 +--XXXXXX
-       B | 
+       B |
 	 +---XXXXX
           C
-	  
+
 FF:
 
-  1:               A 
+  1:               A
   	   XXXXXX----+
 	             | B
 	     XXXXX---+
 		   C
-		   
+
 SF:
 
   1:                       A (we have a maximum value for A)
@@ -60,7 +60,7 @@ SF:
 		     XXXXX
 
 
-  2:	          A (max value)  
+  2:	          A (max value)
      	         +-XXXXXX
 	       B |        C
 	 	 +---------------+
@@ -76,11 +76,11 @@ FS:
 		     XXXXX
 
 
-  2:	                A (min value)  
+  2:	                A (min value)
      	          XXXXXX-+
 	                 | B
 	 +---------------+
-	 | D	    C	 
+	 | D	    C
 	 +-XXXXX
           E (min value)
 
@@ -99,7 +99,7 @@ typedef enum {
 	PLANNER_ARROW_RIGHT,
 	PLANNER_ARROW_LEFT
 } PlannerArrowDir;
-	
+
 struct _PlannerRelationArrowPriv {
 	PlannerGanttRow      *successor;
 	PlannerGanttRow      *predecessor;
@@ -111,7 +111,7 @@ struct _PlannerRelationArrowPriv {
 	guint            num_points;
 	PlannerPoint          points[6];
 	PlannerArrowDir       arrow_dir;
-		
+
 	gdouble          x1;
 	gdouble          y1;
 	gdouble          x2;
@@ -179,7 +179,7 @@ planner_relation_arrow_get_type (void)
 					       &info,
 					       0);
 	}
-	
+
 	return type;
 }
 
@@ -220,7 +220,7 @@ relation_arrow_init (PlannerRelationArrow *item)
 
 	priv = g_new0 (PlannerRelationArrowPriv, 1);
 	item->priv = priv;
-	
+
 	priv->successor_visible = TRUE;
 	priv->predecessor_visible = TRUE;
 
@@ -235,17 +235,17 @@ relation_arrow_finalize (GObject *object)
 	PlannerRelationArrowPriv *priv;
 
 	priv = arrow->priv;
-	
+
 	if (priv->predecessor) {
 		g_object_remove_weak_pointer (G_OBJECT (priv->predecessor),
 					      (gpointer)&priv->predecessor);
 	}
-	
+
 	if (priv->successor) {
 		g_object_remove_weak_pointer (G_OBJECT (priv->successor),
 					      (gpointer)&priv->successor);
 	}
-	
+
 	g_free (priv);
 	arrow->priv = NULL;
 
@@ -268,7 +268,7 @@ relation_arrow_set_property (GObject      *object,
 	case PROP_TYPE:
 		arrow->priv->type = g_value_get_enum (value);
 		break;
-		
+
 	default:
 		break;
 	}
@@ -291,7 +291,7 @@ relation_arrow_update_line_segments (PlannerRelationArrow *arrow)
 					&py1,
 					&px2,
 					&py2);
-	
+
 	planner_gantt_row_get_geometry (priv->successor,
 					&sx1,
 					&sy1,
@@ -300,7 +300,7 @@ relation_arrow_update_line_segments (PlannerRelationArrow *arrow)
 	if (type == MRP_RELATION_SS) {
 		priv->num_points = 4;
 		priv->arrow_dir = PLANNER_ARROW_RIGHT;
-		
+
 		/* LHS of pred */
 		priv->points[0].x = px1;
 		priv->points[0].y = py1 + (py2 - py1) / 2;
@@ -317,13 +317,13 @@ relation_arrow_update_line_segments (PlannerRelationArrow *arrow)
 			priv->points[2].x = px1 - MIN_SPACING - ARROW_SIZE;
 			priv->points[2].y = sy1 + (sy2 - sy1) / 2;
 		}
-		
+
 		priv->points[3].x = sx1;
 		priv->points[3].y = sy1 + (sy2 - sy1) / 2;
-		
+
 	}
 	else if (type == MRP_RELATION_FF) {
-		
+
 		priv->num_points = 4;
 		priv->arrow_dir = PLANNER_ARROW_LEFT;
 
@@ -343,7 +343,7 @@ relation_arrow_update_line_segments (PlannerRelationArrow *arrow)
 			priv->points[2].x = px2 + MIN_SPACING + ARROW_SIZE;
 			priv->points[2].y = sy1 + (sy2 - sy1) / 2;
 		}
-		
+
 		priv->points[3].x = sx2;
 		priv->points[3].y = sy1 + (sy2 - sy1) / 2;
 	}
@@ -351,13 +351,13 @@ relation_arrow_update_line_segments (PlannerRelationArrow *arrow)
 		/* Two cases for SF, as shown at the top of this file. */
 		if (px1 >= sx2) {
 			priv->num_points = 3;
-	
+
 			priv->points[0].x = px1;
 			priv->points[0].y = py1 + (py2 - py1) / 2;
 
 			priv->points[1].x = MIN (px1 - MIN_SPACING, sx2);
 			priv->points[1].y = py1 + (py2 - py1) / 2;
-	
+
 			priv->points[2].x = MIN (px1 - MIN_SPACING, sx2);
 			if (sy1 > py1) {
 				priv->points[2].y = sy1;
@@ -366,38 +366,38 @@ relation_arrow_update_line_segments (PlannerRelationArrow *arrow)
 				priv->points[2].y = sy2;
 				priv->arrow_dir = PLANNER_ARROW_UP;
 			}
-	
-			
+
+
 		} else {
 			priv->num_points = 6;
 			priv->arrow_dir = PLANNER_ARROW_LEFT;
-	
+
 			priv->points[0].x = px1;
 			priv->points[0].y = py1 + (py2 - py1) / 2;
-	
+
 			priv->points[1].x = px1 - MIN_SPACING;
 			priv->points[1].y = py1 + (py2 - py1) / 2;
-	
+
 	 		if (sy1 > py1) {
 				y = py2 + (py2 - py1) / 2 - 1;
 			} else {
 				y = py1 - (py2 - py1) / 2 + 2;
 			}
-			
+
 			priv->points[2].x = px1 - MIN_SPACING;
 			priv->points[2].y = y;
-	
+
 			priv->points[3].x = sx2 + ARROW_SIZE + MIN_SPACING;
 			priv->points[3].y = y;
-			
+
 			priv->points[4].x = sx2 + ARROW_SIZE + MIN_SPACING;
 			priv->points[4].y = sy1 + (sy2 - sy1) / 2;
-	
+
 			priv->points[5].x = sx2;
 			priv->points[5].y = sy1 + (sy2 - sy1) / 2;
 		}
-	
-	
+
+
 	} else {
 	/* Two cases for FS, as shown at the top of this file. */
 	if (px2 <= sx1) {
@@ -417,8 +417,8 @@ relation_arrow_update_line_segments (PlannerRelationArrow *arrow)
 			priv->points[2].y = sy2;
 			priv->arrow_dir = PLANNER_ARROW_UP;
 		}
-	
-			
+
+
 	} else {
 		priv->num_points = 6;
 		priv->arrow_dir = PLANNER_ARROW_RIGHT;
@@ -434,13 +434,13 @@ relation_arrow_update_line_segments (PlannerRelationArrow *arrow)
 		} else {
 			y = py1 - (py2 - py1) / 2 + 2;
 		}
-		
+
 		priv->points[2].x = px2 + MIN_SPACING;
 		priv->points[2].y = y;
 
 		priv->points[3].x = sx1 - ARROW_SIZE - MIN_SPACING;
 		priv->points[3].y = y;
-		
+
 		priv->points[4].x = sx1 - ARROW_SIZE - MIN_SPACING;
 		priv->points[4].y = sy1 + (sy2 - sy1) / 2;
 
@@ -469,7 +469,7 @@ relation_arrow_successor_visibility_changed (PlannerGanttRow      *row,
 					     PlannerRelationArrow *arrow)
 {
 	arrow->priv->successor_visible = visible;
-	
+
 	if (!visible) {
 		gnome_canvas_item_hide (GNOME_CANVAS_ITEM (arrow));
 	} else if (arrow->priv->predecessor_visible) {
@@ -495,23 +495,23 @@ void
 planner_relation_arrow_set_predecessor (PlannerRelationArrow *arrow,
 					PlannerGanttRow      *predecessor)
 {
-	PlannerRelationArrowPriv *priv; 
-	
+	PlannerRelationArrowPriv *priv;
+
 	g_return_if_fail (PLANNER_IS_RELATION_ARROW (arrow));
 	g_return_if_fail (PLANNER_IS_GANTT_ROW (predecessor));
 
 	priv = arrow->priv;
-	
+
 	if (priv->predecessor) {
 		g_object_remove_weak_pointer (G_OBJECT (priv->predecessor),
 					      (gpointer)&priv->predecessor);
-	}		
-	
+	}
+
 	priv->predecessor = predecessor;
 
 	g_object_add_weak_pointer (G_OBJECT (predecessor),
 				   (gpointer)&priv->predecessor);
-	
+
 	g_signal_connect_object (predecessor,
 				 "geometry-changed",
 				 G_CALLBACK (relation_arrow_geometry_changed),
@@ -533,7 +533,7 @@ void
 planner_relation_arrow_set_successor (PlannerRelationArrow *arrow,
 				      PlannerGanttRow      *successor)
 {
-	PlannerRelationArrowPriv *priv; 
+	PlannerRelationArrowPriv *priv;
 
 	g_return_if_fail (PLANNER_IS_RELATION_ARROW (arrow));
 	g_return_if_fail (PLANNER_IS_GANTT_ROW (successor));
@@ -544,7 +544,7 @@ planner_relation_arrow_set_successor (PlannerRelationArrow *arrow,
 		g_object_remove_weak_pointer (G_OBJECT (priv->successor),
 					      (gpointer)&priv->successor);
 	}
-	
+
 	priv->successor = successor;
 
 	g_object_add_weak_pointer (G_OBJECT (successor), (gpointer)&priv->successor);
@@ -554,7 +554,7 @@ planner_relation_arrow_set_successor (PlannerRelationArrow *arrow,
 				 G_CALLBACK (relation_arrow_geometry_changed),
 				 arrow,
 				 0);
-	
+
 	g_signal_connect_object (successor,
 				 "visibility-changed",
 				 G_CALLBACK (relation_arrow_successor_visibility_changed),
@@ -575,12 +575,12 @@ planner_relation_arrow_new (PlannerGanttRow *successor,
 	GnomeCanvasGroup     *root;
 
 	root = gnome_canvas_root (GNOME_CANVAS_ITEM (successor)->canvas);
-	
+
 	arrow = PLANNER_RELATION_ARROW (
 		gnome_canvas_item_new (root,
 				       PLANNER_TYPE_RELATION_ARROW,
 				       NULL));
-	
+
 	arrow->priv->type = type;
 
 	planner_relation_arrow_set_successor (arrow, successor);
@@ -604,7 +604,7 @@ relation_arrow_get_bounds (PlannerRelationArrow *arrow,
 
 	item = GNOME_CANVAS_ITEM (arrow);
 	priv = arrow->priv;
-	
+
 	/* Get the items bbox in canvas pixel coordinates. */
 
 	/* Silence warning. */
@@ -612,7 +612,7 @@ relation_arrow_get_bounds (PlannerRelationArrow *arrow,
 	wy1 = G_MAXDOUBLE;
 	wx2 = -G_MAXDOUBLE;
 	wy2 = -G_MAXDOUBLE;
-	
+
 	for (i = 0; i < priv->num_points; i++) {
 		wx1 = MIN (wx1, priv->points[i].x);
 		wy1 = MIN (wy1, priv->points[i].y);
@@ -625,7 +625,7 @@ relation_arrow_get_bounds (PlannerRelationArrow *arrow,
 	wy1 -= ARROW_SIZE / 2;
 	wx2 += ARROW_SIZE / 2;
 	wy2 += ARROW_SIZE / 2;
-	
+
 	gnome_canvas_item_i2w (item, &wx1, &wy1);
 	gnome_canvas_item_i2w (item, &wx2, &wy2);
 	gnome_canvas_w2c (item->canvas, wx1, wy1, &cx1, &cy1);
@@ -647,12 +647,12 @@ relation_arrow_update (GnomeCanvasItem *item,
 	gdouble               x1, y1, x2, y2;
 
 	arrow = PLANNER_RELATION_ARROW (item);
-	
+
 	GNOME_CANVAS_ITEM_CLASS (parent_class)->update (item,
 							affine,
 							clip_path,
 							flags);
-	
+
 	relation_arrow_get_bounds (arrow, &x1, &y1, &x2, &y2);
 
 	gnome_canvas_update_bbox (item, x1, y1, x2, y2);
@@ -735,7 +735,7 @@ relation_arrow_draw (GnomeCanvasItem *item,
 	GdkGC                    *gc;
 	GdkPoint                  points[4];
 	gint                      i;
-	
+
 	arrow = PLANNER_RELATION_ARROW (item);
 	priv = arrow->priv;
 
@@ -751,12 +751,12 @@ relation_arrow_draw (GnomeCanvasItem *item,
 	cy1 = 0;
 	cx2 = 0;
 	cy2 = 0;
-	
+
 #ifdef USE_AFFINE
 	/* Get item area in canvas coordinates. */
 	gnome_canvas_item_i2c_affine (item, i2c);
 #endif
-	
+
 	for (i = 0; i < priv->num_points - 1; i++) {
 #ifdef USE_AFFINE
 		i1.x = priv->points[i].x;
@@ -778,25 +778,25 @@ relation_arrow_draw (GnomeCanvasItem *item,
 		dy1 = priv->points[i].y;
 		dx2 = priv->points[i+1].x;
 		dy2 = priv->points[i+1].y;
-		
+
 		gnome_canvas_w2c (item->canvas,
 				  dx1 + i2w_dx,
 				  dy1 + i2w_dy,
 				  &cx1,
 				  &cy1);
-		
+
 		gnome_canvas_w2c (item->canvas,
 				  dx2 + i2w_dx,
 				  dy2 + i2w_dy,
 				  &cx2,
 				  &cy2);
-		
+
 		cx1 -= x;
 		cy1 -= y;
 		cx2 -= x;
 		cy2 -= y;
 #endif
-		
+
 		gdk_draw_line (drawable,
 			       gc,
 			       cx1,

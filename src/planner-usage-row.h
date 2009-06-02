@@ -57,4 +57,3 @@ void planner_usage_row_set_visible  (PlannerUsageRow *row,
 
 
 #endif /* __PLANNER_USAGE_ROW_H__ */
- 

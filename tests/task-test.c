@@ -20,13 +20,13 @@ main (gint argc, gchar **argv)
 	gboolean	success;
 	MrpTask        *root;
 	MrpRelation    *relation;
-	
+
         g_type_init ();
 
 	app = mrp_application_new ();
 
 	project_start = mrp_time_from_string ("20020218", NULL);
-	
+
 	project = mrp_project_new (app);
 
 	g_object_set (project, "project_start", project_start, NULL);
@@ -72,13 +72,13 @@ main (gint argc, gchar **argv)
 	g_object_get (task2,
 		      "critical", &critical,
 		      NULL);
-	
+
 	/* Task2 is now critical, task1 not. */
 	CHECK_BOOLEAN_RESULT (critical, TRUE);
 
 	/* Check that start and finish are calculated correctly. */
 	root = mrp_project_get_root_task (project);
-	
+
         CHECK_INTEGER_RESULT (mrp_task_get_start (root), project_start);
         CHECK_INTEGER_RESULT (mrp_task_get_finish (root), mrp_task_get_finish (task2));
 
@@ -115,11 +115,11 @@ main (gint argc, gchar **argv)
 	/* Check that we can't make task2 the parent of task1 with the
 	 * predecessor relation in place
 	 */
-	success = mrp_project_move_task (project, 
-					 task1, 
-					 NULL, 
-					 task2, 
-					 FALSE, 
+	success = mrp_project_move_task (project,
+					 task1,
+					 NULL,
+					 task2,
+					 FALSE,
 					 NULL);
 
 	CHECK_BOOLEAN_RESULT (success, FALSE);
@@ -129,17 +129,17 @@ main (gint argc, gchar **argv)
 	 * This test verifies that a loop is created in the dependency graph by
 	 * this action and that it is detected.
 	 */
-	success = mrp_project_move_task (project, 
-					 task2, 
-					 NULL, 
-					 task1, 
-					 FALSE, 
+	success = mrp_project_move_task (project,
+					 task2,
+					 NULL,
+					 task1,
+					 FALSE,
 					 NULL);
 
 	CHECK_BOOLEAN_RESULT (success, FALSE);
 
 	/* Add task3 as parent of task2 and see if we can't make task1 the
-	 * parent of task3. This test verifies that loops that include direct 
+	 * parent of task3. This test verifies that loops that include direct
 	 * children but not the parent, are detected.
 	 */
 	task3 = g_object_new (MRP_TYPE_TASK,
@@ -157,11 +157,11 @@ main (gint argc, gchar **argv)
 					 NULL);
 	CHECK_BOOLEAN_RESULT (success, TRUE);
 
-	success = mrp_project_move_task (project, 
-					 task3, 
-					 NULL, 
-					 task1, 
-					 FALSE, 
+	success = mrp_project_move_task (project,
+					 task3,
+					 NULL,
+					 task1,
+					 FALSE,
 					 NULL);
 
 	CHECK_BOOLEAN_RESULT (success, FALSE);
@@ -186,11 +186,11 @@ main (gint argc, gchar **argv)
 					 NULL);
 	CHECK_BOOLEAN_RESULT (success, TRUE);
 
-	success = mrp_project_move_task (project, 
-					 task4, 
-					 NULL, 
-					 task1, 
-					 FALSE, 
+	success = mrp_project_move_task (project,
+					 task4,
+					 NULL,
+					 task1,
+					 FALSE,
 					 NULL);
 
 	CHECK_BOOLEAN_RESULT (success, FALSE);
@@ -202,7 +202,7 @@ main (gint argc, gchar **argv)
 	CHECK_POINTER_RESULT (mrp_relation_get_predecessor (relation), task2);
 
 	t1 = mrp_task_get_start (task1);
-	
+
 	g_object_set (relation, "lag", DAY, NULL);
 
 	/* Check for correct lag set. */
@@ -216,10 +216,10 @@ main (gint argc, gchar **argv)
 	CHECK_INTEGER_RESULT (mrp_task_get_finish (task2) - mrp_task_get_start (task2), 0);
 	CHECK_INTEGER_RESULT (mrp_task_get_work (task2), 0);
 	CHECK_INTEGER_RESULT (mrp_task_get_duration (task2), 0);
-	
+
 	/* More tests needed... */
 
-	
+
 	return EXIT_SUCCESS;
 }
 

@@ -41,7 +41,7 @@ typedef enum {
 	MRP_ERROR_SAVE_WRITE_FAILED,
 
 	MRP_ERROR_INVALID_URI,
-	
+
 	/* General error (should avoid using this). */
         MRP_ERROR_FAILED
 } MrpError;

@@ -323,7 +323,7 @@ usage_chart_init (PlannerUsageChart * chart)
                                      "scale", SCALE (priv->zoom),
                                      "zoom", priv->zoom, NULL);
 
-        gtk_box_pack_start (GTK_BOX (chart), GTK_WIDGET (priv->header), FALSE, 
+        gtk_box_pack_start (GTK_BOX (chart), GTK_WIDGET (priv->header), FALSE,
                             TRUE,
                             0);
 
@@ -408,7 +408,7 @@ usage_chart_set_zoom (PlannerUsageChart * chart, gdouble level)
 
         priv = chart->priv;
         priv->zoom = level;
-	
+
         usage_chart_tree_traverse (priv->tree, scale_func, chart);
 
 	g_object_set (priv->header,
@@ -556,7 +556,7 @@ usage_chart_get_width (PlannerUsageChart *chart)
             chart->priv->last_time == MRP_TIME_INVALID) {
                 return -1;
         }
-	
+
         return chart->priv->last_time - chart->priv->project_start;
 }
 
@@ -604,7 +604,7 @@ usage_chart_style_set (GtkWidget *widget, GtkStyle *prev_style)
                 GTK_WIDGET_CLASS (parent_class)->style_set (widget,
                                                             prev_style);
         }
-	
+
         chart = PLANNER_USAGE_CHART (widget);
         priv = chart->priv;
 
@@ -734,7 +734,7 @@ usage_chart_set_adjustments (PlannerUsageChart *chart,
                 gtk_object_sink (GTK_OBJECT (priv->vadjustment));
                 need_adjust = TRUE;
         }
-	
+
         if (need_adjust) {
                 gtk_widget_set_scroll_adjustments (GTK_WIDGET (priv->canvas),
                                                    hadj, vadj);
@@ -850,7 +850,7 @@ usage_chart_reflow_idle (PlannerUsageChart *chart)
 			      "x2", x2,
 			      NULL);
         }
-	
+
         priv->height_changed = FALSE;
         priv->reflow_idle_id = 0;
 
@@ -975,7 +975,7 @@ planner_usage_chart_set_model (PlannerUsageChart *chart,
                 usage_chart_disconnect_signals (chart);
                 g_object_unref (priv->model);
         }
-	
+
         priv->model = model;
         if (model) {
                 g_object_ref (model);
@@ -993,13 +993,13 @@ planner_usage_chart_set_model (PlannerUsageChart *chart,
                                               chart);
                 usage_chart_add_signal (chart, project, signal_id,
                                          "notify::project-start");
-		
+
                 g_signal_connect (root,
 				  "notify::finish",
 				  G_CALLBACK
 				  (usage_chart_root_finish_changed),
 				  chart);
-		
+
                 signal_id = g_signal_connect (model,
                                               "row-changed",
                                               G_CALLBACK
@@ -1234,7 +1234,7 @@ usage_chart_disconnect_signals (PlannerUsageChart *chart)
                 g_signal_handler_disconnect (data->instance, data->id);
                 g_free (data);
         }
-	
+
         g_list_free (chart->priv->signal_ids);
 	chart->priv->signal_ids = NULL;
 }
@@ -1324,7 +1324,7 @@ planner_usage_chart_collapse_all (PlannerUsageChart *chart)
 {
         TreeNode *node;
         int       i;
-	
+
         g_return_if_fail (PLANNER_IS_USAGE_CHART (chart));
 
         node = chart->priv->tree;
@@ -1534,7 +1534,7 @@ planner_usage_chart_setup_root_task (PlannerUsageChart *chart)
 
 	project = planner_usage_model_get_project (PLANNER_USAGE_MODEL (priv->model));
 	root = mrp_project_get_root_task (project);
-	
+
 	g_signal_connect (root,
 			  "notify::finish",
 			  G_CALLBACK
@@ -1542,20 +1542,20 @@ planner_usage_chart_setup_root_task (PlannerUsageChart *chart)
 			  chart);
 }
 
-PlannerUsageTree *  
-planner_usage_chart_get_view (PlannerUsageChart *chart) 
+PlannerUsageTree *
+planner_usage_chart_get_view (PlannerUsageChart *chart)
 {
-	g_return_val_if_fail (PLANNER_IS_USAGE_CHART (chart), NULL);	
+	g_return_val_if_fail (PLANNER_IS_USAGE_CHART (chart), NULL);
 
 	return chart->priv->view;
 }
 
-void          
+void
 planner_usage_chart_set_view (PlannerUsageChart *chart,
-			      PlannerUsageTree  *view) 
+			      PlannerUsageTree  *view)
 {
 	g_return_if_fail (PLANNER_IS_USAGE_TREE (view));
-	
+
 /*	g_print ("View for Usage configured\n");  */
 
 	chart->priv->view = view;

@@ -7,7 +7,7 @@
 
 typedef struct {
 	mrptime     project_start;
-	
+
 	GHashTable *task_hash;
 } ProjectData;
 
@@ -94,7 +94,7 @@ old_xml_get_date (xmlNodePtr node, const char *name)
 	} else {
 		t = 0;
 	}
-	
+
 	return t;
 }
 
@@ -128,7 +128,7 @@ read_task (xmlNodePtr node)
 	TaskData *task_data;
 
 	task_data = g_new0 (TaskData, 1);
-	
+
 	task_data->name = old_xml_get_string (node, "name");
 
 	task_data->start = old_xml_get_date (node, "start");
@@ -148,14 +148,14 @@ read_tasks (ProjectData *data, xmlNodePtr node)
 	for (task = node->children; task; task = task->next) {
 		if (strcmp (task->name, "task") == 0){
 			task_data = read_task (task);
-		
+
 			if (g_hash_table_lookup (data->task_hash, task_data->name)) {
 				g_print ("Duplicate name %s\n", task_data->name);
 				g_assert_not_reached ();
 			}
-			
+
 			g_hash_table_insert (data->task_hash, task_data->name, task_data);
-		
+
 			read_tasks (data, task);
 		}
 	}
@@ -171,12 +171,12 @@ read_project (const gchar *filename)
 	data = g_new0 (ProjectData, 1);
 
 	data->task_hash = g_hash_table_new (g_str_hash, g_str_equal);
-	
+
 	doc = xmlParseFile (filename);
 	g_assert (doc != NULL);
-	
+
 	data->project_start = old_xml_get_date (doc->children, "project-start");
-	
+
 	tasks = old_xml_search_child (doc->children, "tasks");
 	read_tasks (data, tasks);
 
@@ -192,18 +192,18 @@ check_project (ProjectData *data, MrpProject *project)
 
 	/* Project start. */
 	CHECK_INTEGER_RESULT (mrp_project_get_project_start (project), data->project_start);
-	
+
 	tasks = mrp_project_get_all_tasks (project);
 
 	/* Sanity check. */
 	CHECK_INTEGER_RESULT (g_list_length (tasks), g_hash_table_size (data->task_hash));
-	
+
 	for (l = tasks; l; l = l->next) {
 		task = l->data;
 
 		task_data = g_hash_table_lookup (data->task_hash, mrp_task_get_name (task));
 		g_assert (task_data != NULL);
-		
+
 		/* Check start and finish. */
 		CHECK_INTEGER_RESULT (mrp_task_get_start (task), task_data->start);
 		CHECK_INTEGER_RESULT (mrp_task_get_finish (task), task_data->finish);
@@ -237,22 +237,22 @@ main (gint argc, gchar **argv)
 
 		/* Just parse the XML. */
 		data = read_project (tmp);
-		
+
 		/* Create a project from the same file. */
 		project = mrp_project_new (app);
 		g_assert (g_file_get_contents (tmp, &buf, NULL, NULL));
 		g_assert (mrp_project_load_from_xml (project, buf, NULL));
-		
+
 		g_free (buf);
 		g_free (tmp);
-		
+
 		/* Reschedule the project and check that the info is correct. */
 		mrp_project_reschedule (project);
 		check_project (data, project);
 
 		i++;
 	}
-	
+
 	return EXIT_SUCCESS;
 }
 

@@ -41,7 +41,7 @@ typedef struct _PlannerGanttRowPriv  PlannerGanttRowPriv;
 
 struct _PlannerGanttRow {
 	GnomeCanvasItem  parent;
-	PlannerGanttRowPriv  *priv;	
+	PlannerGanttRowPriv  *priv;
 };
 
 struct _PlannerGanttRowClass {

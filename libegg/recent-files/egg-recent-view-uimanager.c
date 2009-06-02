@@ -118,13 +118,13 @@ egg_recent_view_uimanager_clear (EggRecentViewUIManager *view)
 	}
 
 	gtk_ui_manager_ensure_update (view->uimanager);
-	
+
 	if (view->action_group != NULL) {
 		gtk_ui_manager_remove_action_group (view->uimanager, view->action_group);
 		g_object_unref (view->action_group);
 		view->action_group = NULL;
 	}
-	
+
 	free_item_list (view);
 }
 
@@ -146,13 +146,13 @@ egg_recent_view_uimanager_set_list (EggRecentViewUIManager *view, GList *list)
 	if (view->merge_id == 0)
 		view->merge_id = gtk_ui_manager_new_merge_id (view->uimanager);
 
-	if (view->leading_sep) 
-		gtk_ui_manager_add_ui (view->uimanager, 
-				       view->merge_id, 
+	if (view->leading_sep)
+		gtk_ui_manager_add_ui (view->uimanager,
+				       view->merge_id,
 				       view->path,
-				       "EggRecentLeadingSeparator", 
+				       "EggRecentLeadingSeparator",
 				       EGG_RECENT_SEPARATOR,
-				       GTK_UI_MANAGER_AUTO, 
+				       GTK_UI_MANAGER_AUTO,
 				       FALSE);
 
 	for (scan = list; scan; scan = scan->next, index++) {
@@ -187,7 +187,7 @@ egg_recent_view_uimanager_set_list (EggRecentViewUIManager *view, GList *list)
 			else
 				label = g_strdup_printf ("_%d.  %s", index, escaped);
 			g_free (escaped);
-		} else 
+		} else
 			label = escaped;
 
 		action = g_object_new (GTK_TYPE_ACTION,
@@ -213,12 +213,12 @@ egg_recent_view_uimanager_set_list (EggRecentViewUIManager *view, GList *list)
 		gtk_action_group_add_action (view->action_group, action);
 		g_object_unref (action);
 
-		gtk_ui_manager_add_ui (view->uimanager, 
-				       view->merge_id, 
+		gtk_ui_manager_add_ui (view->uimanager,
+				       view->merge_id,
 				       view->path,
 				       name,
 				       name,
-				       GTK_UI_MANAGER_AUTO, 
+				       GTK_UI_MANAGER_AUTO,
 				       FALSE);
 
 		g_free (name);
@@ -227,19 +227,19 @@ egg_recent_view_uimanager_set_list (EggRecentViewUIManager *view, GList *list)
 
 	view->item_list = g_list_reverse (view->item_list);
 
-	if (view->trailing_sep) 
-		gtk_ui_manager_add_ui (view->uimanager, 
-				       view->merge_id, 
+	if (view->trailing_sep)
+		gtk_ui_manager_add_ui (view->uimanager,
+				       view->merge_id,
 				       view->path,
-				       "EggRecentTrailingSeparator", 
+				       "EggRecentTrailingSeparator",
 				       EGG_RECENT_SEPARATOR,
-				       GTK_UI_MANAGER_AUTO, 
+				       GTK_UI_MANAGER_AUTO,
 				       FALSE);
 }
 
 static void
-model_changed_cb (EggRecentModel         *model,  
-		  GList                  *list, 
+model_changed_cb (EggRecentModel         *model,
+		  GList                  *list,
 		  EggRecentViewUIManager *view)
 {
 	if (list != NULL)
@@ -253,7 +253,7 @@ static EggRecentModel *
 egg_recent_view_uimanager_get_model (EggRecentView *view_parent)
 {
 	EggRecentViewUIManager *view;
-	
+
 	g_return_val_if_fail (view_parent != NULL, NULL);
 	view = EGG_RECENT_VIEW_UIMANAGER (view_parent);
 	return view->model;
@@ -264,7 +264,7 @@ egg_recent_view_uimanager_set_model (EggRecentView  *view_parent,
 				     EggRecentModel *model)
 {
 	EggRecentViewUIManager *view;
-	
+
 	g_return_if_fail (view_parent != NULL);
 	view = EGG_RECENT_VIEW_UIMANAGER (view_parent);
 
@@ -274,7 +274,7 @@ egg_recent_view_uimanager_set_model (EggRecentView  *view_parent,
 						     view->changed_cb_id);
 		g_object_unref (view->model);
 	}
-	
+
 	view->model = model;
 	g_object_ref (view->model);
 
@@ -287,7 +287,7 @@ egg_recent_view_uimanager_set_model (EggRecentView  *view_parent,
 }
 
 void
-egg_recent_view_uimanager_set_leading_sep (EggRecentViewUIManager *view, 
+egg_recent_view_uimanager_set_leading_sep (EggRecentViewUIManager *view,
 					   gboolean                val)
 {
 	view->leading_sep = val;
@@ -444,7 +444,7 @@ egg_recent_view_uimanager_class_init (EggRecentViewUIManagerClass * klass)
 							       "Whether or not to show icons",
 							       FALSE,
 							       G_PARAM_READWRITE));
-	
+
 	g_object_class_install_property (object_class,
 					 PROP_SHOW_NUMBERS,
 					 g_param_spec_boolean ("show-numbers",
@@ -479,7 +479,7 @@ show_menus_changed_cb (GConfClient            *client,
 
 #ifndef USE_STABLE_LIBGNOMEUI
 static void
-theme_changed_cb (GnomeIconTheme         *theme, 
+theme_changed_cb (GnomeIconTheme         *theme,
 		  EggRecentViewUIManager *view)
 {
 	if (view->model != NULL)
@@ -495,7 +495,7 @@ egg_recent_view_uimanager_init (EggRecentViewUIManager * view)
 	view->show_icons = gconf_client_get_bool (view->client,
 						  "/desktop/gnome/interface/menus_have_icons",
 						  NULL);
-	
+
 	gconf_client_add_dir (view->client, "/desktop/gnome/interface",
 			      GCONF_CLIENT_PRELOAD_NONE,
 			      NULL);
@@ -559,7 +559,7 @@ egg_recent_view_uimanager_show_icons (EggRecentViewUIManager *view,
 }
 
 void
-egg_recent_view_uimanager_show_numbers (EggRecentViewUIManager *view, 
+egg_recent_view_uimanager_show_numbers (EggRecentViewUIManager *view,
 					gboolean                show)
 {
 	view->show_numbers = show;
@@ -679,7 +679,7 @@ egg_recent_view_uimanager_new (GtkUIManager  *uimanager,
 			     NULL);
 
 	g_return_val_if_fail (view, NULL);
-	
+
 	egg_recent_view_uimanager_set_action_func (EGG_RECENT_VIEW_UIMANAGER (view),
 						   callback,
 						   user_data);
@@ -737,7 +737,7 @@ egg_recent_view_uimanager_get_item (EggRecentViewUIManager   *view,
 {
 	const char *name;
 	int         n;
-	
+
 	name = gtk_action_get_name (action);
 	n = atoi (name + strlen (EGG_RECENT_NAME_PREFIX));
 

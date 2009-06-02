@@ -76,8 +76,8 @@ mrp_group_get_type (void)
 			(GInstanceInitFunc) group_init,
 		};
 
-		object_type = g_type_register_static (MRP_TYPE_OBJECT, 
-                                                      "MrpGroup", 
+		object_type = g_type_register_static (MRP_TYPE_OBJECT,
+                                                      "MrpGroup",
                                                       &object_info, 0);
 	}
 
@@ -88,13 +88,13 @@ static void
 group_class_init (MrpGroupClass *klass)
 {
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
-        
+
         parent_class = MRP_OBJECT_CLASS (g_type_class_peek_parent (klass));
-        
+
         object_class->finalize     = group_finalize;
         object_class->set_property = group_set_property;
         object_class->get_property = group_get_property;
-        
+
         g_object_class_install_property (object_class,
                                          PROP_NAME,
                                          g_param_spec_string ("name",
@@ -116,7 +116,7 @@ group_class_init (MrpGroupClass *klass)
 							      "The phone number of the group manager",
 							      "empty",
 							      G_PARAM_READWRITE));
-        
+
         g_object_class_install_property (object_class,
                                          PROP_MANAGER_EMAIL,
                                          g_param_spec_string ("manager_email",
@@ -132,14 +132,14 @@ static void
 group_init (MrpGroup *group)
 {
         MrpGroupPriv *priv;
-        
+
         priv = g_new0 (MrpGroupPriv, 1);
 
 	priv->name          = g_strdup ("");
 	priv->manager_name  = g_strdup ("");
 	priv->manager_phone = g_strdup ("");
 	priv->manager_email = g_strdup ("");
-        
+
         group->priv = priv;
 }
 
@@ -150,7 +150,7 @@ group_finalize (GObject *object)
         MrpGroupPriv *priv;
 
         priv = group->priv;
-        
+
         g_free (priv->name);
         priv->name = NULL;
 
@@ -178,26 +178,26 @@ group_set_property (GObject        *object,
 	MrpGroupPriv *priv;
 	gboolean      changed = FALSE;
 	const gchar  *str;
-	
+
 	g_return_if_fail (MRP_IS_GROUP (object));
-	
+
 	group = MRP_GROUP (object);
 	priv  = group->priv;
-	
+
 	switch (prop_id) {
 	case PROP_NAME:
 		str = g_value_get_string (value);
-		
+
 		if (!priv->name || strcmp (priv->name, str)) {
 			g_free (priv->name);
 			priv->name = g_strdup (str);
 			changed = TRUE;
 		}
-		
+
 		break;
 	case PROP_MANAGER_NAME:
 		str = g_value_get_string (value);
-		
+
 		if (!priv->manager_name || strcmp (priv->manager_name, str)) {
 			g_free (priv->manager_name);
 			priv->manager_name = g_strdup (str);
@@ -213,11 +213,11 @@ group_set_property (GObject        *object,
 			priv->manager_phone = g_strdup (str);
 			changed = TRUE;
 		}
-		
+
 		break;
 	case PROP_MANAGER_EMAIL:
 		str = g_value_get_string (value);
-		
+
 		if (!priv->manager_email || strcmp (priv->manager_email, str)) {
 			g_free (priv->manager_email);
 			priv->manager_email = g_strdup (str);
@@ -227,7 +227,7 @@ group_set_property (GObject        *object,
 	default:
 		break;
 	}
-	
+
 	if (changed) {
 		mrp_object_changed (MRP_OBJECT (object));
 	}
@@ -241,9 +241,9 @@ group_get_property (GObject      *object,
 {
 	MrpGroup     *group;
 	MrpGroupPriv *priv;
-	
+
 	g_return_if_fail (MRP_IS_GROUP (object));
-	
+
 	group = MRP_GROUP (object);
 	priv  = group->priv;
 
@@ -268,29 +268,29 @@ group_get_property (GObject      *object,
 
 /**
  * mrp_group_new:
- * 
+ *
  * Creates a new end group.
- * 
+ *
  * Return value: the newly created group.
  **/
 MrpGroup *
 mrp_group_new (void)
 {
         MrpGroup *group;
-        
+
         group = g_object_new (MRP_TYPE_GROUP,
 			      "name", "",
 			      NULL);
-        
+
         return group;
 }
 
 /**
  * mrp_group_get_name:
  * @group: an #MrpGroup
- * 
+ *
  * Retrives the name of @group.
- * 
+ *
  * Return value: the name
  **/
 const gchar *
@@ -305,7 +305,7 @@ mrp_group_get_name (MrpGroup *group)
  * mrp_group_set_name:
  * @group: an #MrpGroup
  * @name: new name of @group
- * 
+ *
  * Sets the name of @group.
  **/
 void

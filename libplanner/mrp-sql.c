@@ -3,7 +3,7 @@
  * Copyright (C) 2003 CodeFactory AB
  * Copyright (C) 2003 Richard Hult <richard@imendio.com>
  * Copyright (C) 2003 Mikael Hallendal <micke@imendio.com>
- * Copyright (C) 2004 Alvaro del Castillo <acs@barrapunto.com> 
+ * Copyright (C) 2004 Alvaro del Castillo <acs@barrapunto.com>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -81,7 +81,7 @@ typedef struct {
 	gint           calendar_id;
 	gint           default_group_id;
 	gint           phase_id;
-	
+
 	GList         *calendars;
 	GList         *tasks;
 
@@ -89,7 +89,7 @@ typedef struct {
 	gchar         *last_user;
 
 	MrpTask       *root_task;
-	
+
 	/* Maps from database id to project objects. */
 	GHashTable *calendar_id_hash;
 	GHashTable *group_id_hash;
@@ -105,7 +105,7 @@ typedef struct {
 	GHashTable *task_hash;
 	GHashTable *day_hash;
 	GHashTable *property_type_hash;
-} SQLData; 
+} SQLData;
 
 static gint     get_int                       (GdaDataModel         *model,
 					       gint                  i,
@@ -180,26 +180,26 @@ static gboolean sql_write_default_group_id    (SQLData              *data);
 static gboolean sql_write_resources           (SQLData              *data);
 static gboolean sql_write_tasks               (SQLData              *data);
 
-static GdaDataModel * 
-		sql_execute_query             (GdaConnection        *con, 
+static GdaDataModel *
+		sql_execute_query             (GdaConnection        *con,
 					       gchar                *query);
-static gboolean sql_execute_command           (GdaConnection        *con, 
+static gboolean sql_execute_command           (GdaConnection        *con,
 					       gchar                *query);
-static gchar * 	sql_quote_and_escape_const_string (SQLData         *data, 
+static gchar * 	sql_quote_and_escape_const_string (SQLData         *data,
 					       const gchar         *string);
-static void     sql_quote_and_escape_string   (SQLData             *data, 
+static void     sql_quote_and_escape_string   (SQLData             *data,
 					       gchar               **string,
 					       gboolean              must_free);
 
 
 static gchar *
-sql_quote_and_escape_const_string(SQLData     *data, 
+sql_quote_and_escape_const_string(SQLData     *data,
 				  const gchar *string)
 {
 	GdaDataHandler *handler;
 	GValue         *value;
 	gchar          *quoted_string;
-		
+
 	handler = gda_dict_get_handler(data->dict, G_TYPE_STRING);
 	value = gda_data_handler_get_value_from_str(handler, string, G_TYPE_STRING);
 
@@ -210,13 +210,13 @@ sql_quote_and_escape_const_string(SQLData     *data,
 	return quoted_string;
 }
 
-static void 
-sql_quote_and_escape_string(SQLData   *data, 
+static void
+sql_quote_and_escape_string(SQLData   *data,
 			    gchar    **string,
 			    gboolean   must_free)
 {
 	gchar *quoted_string;
-	
+
 	quoted_string = sql_quote_and_escape_const_string(data, *string);
 
 	/* Only free the string we are replacing if we're requested to do so */
@@ -227,13 +227,13 @@ sql_quote_and_escape_string(SQLData   *data,
 	*string = quoted_string;
 }
 
-static gboolean 
+static gboolean
 sql_execute_command (GdaConnection *con, gchar *command)
 {
 	GdaCommand *cmd;
 	GList      *list;
 	GError     *error = NULL;
-	
+
 	cmd = gda_command_new (command, GDA_COMMAND_TYPE_SQL, GDA_COMMAND_OPTION_STOP_ON_ERRORS);
 	list = gda_connection_execute_command (con, cmd, NULL, &error);
 	gda_command_free (cmd);
@@ -276,7 +276,7 @@ sql_get_last_error (GdaConnection *connection)
 	GdaConnectionEvent *error;
 	const gchar        *error_txt;
 
-	g_return_val_if_fail (GDA_IS_CONNECTION (connection), 
+	g_return_val_if_fail (GDA_IS_CONNECTION (connection),
 			      _("Can't connect to database server"));
 
 	list = (GList *) gda_connection_get_events (connection);
@@ -299,7 +299,7 @@ get_int (GdaDataModel *model, gint row, gint column)
 	GValue   *value;
 	gchar    *str;
 	gint      i;
-	
+
 	value = (GValue *) gda_data_model_get_value_at (model, column, row);
 	if (value == NULL) {
 		g_warning ("Failed to get a value: (%d,%d)", column, row);
@@ -319,7 +319,7 @@ get_id (GdaDataModel *model, gint row, gint column)
 	GValue   *value;
 	gchar    *str;
 	gint      i;
-	
+
 	value = (GValue *) gda_data_model_get_value_at (model, column, row);
 	if (value == NULL) {
 		g_warning ("Failed to get a value: (%d,%d)", column, row);
@@ -346,17 +346,17 @@ get_string (GdaDataModel *model, gint row, gint column)
 	gsize     len;
 	gchar    *ret;
 	gchar    *str;
-	
+
 	value = (GValue *) gda_data_model_get_value_at (model, column, row);
 	if (value == NULL) {
 		g_warning ("Failed to get a value: (%d,%d)", column, row);
 		d(sql_show_result (model));
 		return g_strdup ("");
 	}
-	
+
 	str = gda_value_stringify (value);
 	len = strlen (str);
-	
+
 	if (g_utf8_validate (str, len, NULL)) {
 		return str;
 	}
@@ -375,7 +375,7 @@ get_string (GdaDataModel *model, gint row, gint column)
 	}
 
 	g_free (str);
-	
+
 	return ret;
 }
 
@@ -383,14 +383,14 @@ static gboolean
 get_boolean (GdaDataModel *model, gint row, gint column)
 {
 	GValue *value;
-	
+
 	value = (GValue *) gda_data_model_get_value_at (model, column, row);
 	if (value == NULL) {
 		g_warning ("Failed to get a value: (%d,%d)", column, row);
 		d(sql_show_result (model));
 		return FALSE;
 	}
-	
+
 	return g_value_get_boolean (value);
 }
 
@@ -400,7 +400,7 @@ get_float (GdaDataModel *model, gint row, gint column)
 	GValue   *value;
 	gchar    *str;
 	gdouble   d;
-	
+
 	value = (GValue *) gda_data_model_get_value_at (model, column, row);
 
 	if (value == NULL) {
@@ -408,7 +408,7 @@ get_float (GdaDataModel *model, gint row, gint column)
 		d(sql_show_result (model));
 		return -1;
 	}
-	
+
 	str = gda_value_stringify (value);
 	d = g_ascii_strtod (str, NULL);
 	g_free (str);
@@ -422,7 +422,7 @@ is_field (GdaDataModel *model, gint j, const gchar *name)
 	const gchar *str;
 
 	str = gda_data_model_get_column_title (model, j);
-	
+
 	return str && (strcmp (str, name) == 0);
 }
 
@@ -442,7 +442,7 @@ get_inserted_id (SQLData     *data,
 	g_free (query);
 
 	if (!success) {
-		g_warning ("Couldn't get cursor (get_inserted_id) %s.", 
+		g_warning ("Couldn't get cursor (get_inserted_id) %s.",
 				sql_get_last_error (data->con));
 		goto out;
 	}
@@ -450,11 +450,11 @@ get_inserted_id (SQLData     *data,
 	model = sql_execute_query (data->con, "FETCH ALL in idcursor");
 
 	if (model == NULL) {
-		g_warning ("FETCH ALL failed (%s) %s.", id_name, 
+		g_warning ("FETCH ALL failed (%s) %s.", id_name,
 				sql_get_last_error (data->con));
 		goto out;
 	}
-	
+
 	if (gda_data_model_get_n_rows (model) > 0) {
 		id = get_int (model, 0, 0);
 	}
@@ -462,7 +462,7 @@ get_inserted_id (SQLData     *data,
 	g_object_unref (model);
 
 	sql_execute_command (data->con, "CLOSE idcursor");
-	
+
 	return id;
 
  out:
@@ -505,7 +505,7 @@ sql_read_project (SQLData *data, gint proj_id)
 	GdaDataModel *model = NULL;
 	gboolean      success;
 	gchar        *query;
-	
+
 	gchar        *name = NULL;
 	gchar        *manager = NULL;
 	gchar        *company = NULL;
@@ -518,9 +518,9 @@ sql_read_project (SQLData *data, gint proj_id)
 				 " * FROM project WHERE proj_id=%d", proj_id);
 	success = sql_execute_command (data->con, query);
 	g_free (query);
-	
+
 	if (!success) {
-		g_warning ("DECLARE CURSOR command failed (project) %s.", 
+		g_warning ("DECLARE CURSOR command failed (project) %s.",
 				sql_get_last_error (data->con));
 		goto out;
 	}
@@ -531,13 +531,13 @@ sql_read_project (SQLData *data, gint proj_id)
 		g_warning ("FETCH ALL failed %s.", sql_get_last_error (data->con));
 		goto out;
 	}
-	
+
 
 	if (gda_data_model_get_n_rows (model) == 0) {
 		g_warning ("There is no project with the id '%d'.", proj_id);
 		goto out;
 	}
-	
+
 	n = gda_data_model_get_n_columns (model);
 	for (j = 0; j < n; j++) {
 		if (is_field (model, j, "proj_id")) {
@@ -586,7 +586,7 @@ sql_read_project (SQLData *data, gint proj_id)
 	g_free (manager);
 	g_free (company);
 	g_free (phase);
-	
+
 	sql_execute_command (data->con, "CLOSE mycursor");
 
 	return TRUE;
@@ -605,36 +605,36 @@ sql_read_phases (SQLData *data)
 	GdaDataModel *model = NULL;
 	gboolean      success;
 	gchar        *query;
-	
+
 	gchar        *name;
 	GList        *phases = NULL;
-		
+
 	/* Get phases. */
 	query = g_strdup_printf ("DECLARE mycursor CURSOR FOR SELECT * FROM phase WHERE proj_id=%d",
 				 data->project_id);
-	
+
 	success = sql_execute_command (data->con, query);
 	g_free (query);
-	
+
 
 	if (!success) {
-		g_warning ("DECLARE CURSOR command failed (phase) %s.", 
+		g_warning ("DECLARE CURSOR command failed (phase) %s.",
 				sql_get_last_error (data->con));
 		goto out;
 	}
 
 	model = sql_execute_query (data->con, "FETCH ALL in mycursor");
 	if (model == NULL) {
-		g_warning ("FETCH ALL failed for phase %s.", 
+		g_warning ("FETCH ALL failed for phase %s.",
 				sql_get_last_error (data->con));
 		goto out;
 	}
-	
-	
+
+
 	n = gda_data_model_get_n_columns (model);
 	for (i = 0; i < gda_data_model_get_n_rows (model); i++) {
 		name = NULL;
-		
+
 		for (j = 0; j < n; j++) {
 			if (is_field (model, j, "name")) {
 				name = get_string (model, i, j);
@@ -648,9 +648,9 @@ sql_read_phases (SQLData *data)
 
 	g_object_unref (model);
 	model = NULL;
-	
+
 	sql_execute_command (data->con, "CLOSE mycursor");
-	
+
 
 	phases = g_list_reverse (phases);
 	g_object_set (data->project, "phases", phases, NULL);
@@ -673,7 +673,7 @@ sql_read_property_specs (SQLData *data)
 	GdaDataModel    *model = NULL;
 	gboolean         success;
 	gchar           *query;
-	
+
 	gint             property_type_id;
 	gchar           *name;
 	gchar           *label;
@@ -682,14 +682,14 @@ sql_read_property_specs (SQLData *data)
 	MrpProperty     *property;
 	GType            owner;
 	const gchar     *tmp;
-	
+
 	/* Get property types/specs. */
 	query = g_strdup_printf ("DECLARE mycursor CURSOR FOR SELECT * FROM property_type WHERE proj_id=%d",
 				 data->project_id);
-	
+
 	success = sql_execute_command (data->con, query);
 	g_free (query);
-	
+
 
 	if (!success) {
 		g_warning ("DECLARE CURSOR command failed (property_type) %s.",
@@ -699,12 +699,12 @@ sql_read_property_specs (SQLData *data)
 
 	model = sql_execute_query (data->con, "FETCH ALL in mycursor");
 	if (model == NULL) {
-		g_warning ("FETCH ALL failed for property_type %s.", 
+		g_warning ("FETCH ALL failed for property_type %s.",
 				sql_get_last_error (data->con));
 		goto out;
 	}
-	
-	
+
+
 	n = gda_data_model_get_n_columns (model);
 	for (i = 0; i < gda_data_model_get_n_rows (model); i++) {
 		name = NULL;
@@ -738,7 +738,7 @@ sql_read_property_specs (SQLData *data)
 				}
 			}
 			else if (is_field (model, j, "type")) {
-				tmp = get_string (model, i, j); 
+				tmp = get_string (model, i, j);
 
 				if (!strcmp (tmp, "date")) {
 					type = MRP_PROPERTY_TYPE_DATE;
@@ -748,10 +748,10 @@ sql_read_property_specs (SQLData *data)
 				}
 				else if (!strcmp (tmp, "float")) {
 					type = MRP_PROPERTY_TYPE_FLOAT;
-				} 
+				}
 				else if (!strcmp (tmp, "int")) {
 					type = MRP_PROPERTY_TYPE_INT;
-				} 
+				}
 				else if (!strcmp (tmp, "text")) {
 					type = MRP_PROPERTY_TYPE_STRING;
 				}
@@ -775,21 +775,21 @@ sql_read_property_specs (SQLData *data)
 						     label,
 						     description,
 						     TRUE);
-			
+
 			mrp_project_add_property (data->project,
 						  owner,
 						  property,
-						  TRUE /* FIXME: user_defined, should 
+						  TRUE /* FIXME: user_defined, should
 							  be read from the file */);
-					
-			g_hash_table_insert (data->property_type_id_hash, 
+
+			g_hash_table_insert (data->property_type_id_hash,
 					     GINT_TO_POINTER (property_type_id), property);
 		} else {
 			/* FIXME: Properties that are already added (e.g. cost). */
 			property = mrp_project_get_property (data->project, name, owner);
 			g_hash_table_insert (data->property_type_id_hash, GINT_TO_POINTER (property_type_id), property);
 		}
-		
+
 		g_free (name);
 		g_free (label);
 		g_free (description);
@@ -807,7 +807,7 @@ sql_read_property_specs (SQLData *data)
 	}
 
 	return FALSE;
-}	
+}
 
 static gboolean
 sql_set_property_value (SQLData     *data,
@@ -867,7 +867,7 @@ sql_read_property_values (SQLData   *data,
 	GdaDataModel *model = NULL;
 	gboolean      success;
 	gchar        *query;
-	
+
 	const gchar  *table;
 	const gchar  *object_id_name;
 	gint          object_id;
@@ -893,20 +893,20 @@ sql_read_property_values (SQLData   *data,
 		object_id = get_hash_data_as_id (data->resource_hash, object);
 	} else {
 		g_assert_not_reached ();
-		
+
 		table = NULL;
 		object_id_name = NULL;
 		object_id = -1;
 	}
-	
+
 	/* Get properties. */
 	query = g_strdup_printf ("DECLARE propcursor CURSOR FOR SELECT * "
 				 "FROM %s WHERE %s=%d",
 				 table, object_id_name, object_id);
-	
+
 	success = sql_execute_command (data->con, query);
 	g_free (query);
-	
+
 	if (!success) {
 		g_warning ("DECLARE CURSOR command failed (*_to_property) %s.",
 				sql_get_last_error (data->con));
@@ -915,12 +915,12 @@ sql_read_property_values (SQLData   *data,
 
 	model = sql_execute_query (data->con,"FETCH ALL in propcursor");
 	if (model == NULL) {
-		g_warning ("FETCH ALL failed for *_to_property %s.", 
+		g_warning ("FETCH ALL failed for *_to_property %s.",
 				sql_get_last_error (data->con));
 		goto out;
 	}
-	
-	
+
+
 	n = gda_data_model_get_n_columns (model);
 	for (i = 0; i < gda_data_model_get_n_rows (model); i++) {
 		prop_id = -1;
@@ -937,39 +937,39 @@ sql_read_property_values (SQLData   *data,
 	model = NULL;
 
 	sql_execute_command (data->con, "CLOSE propcursor");
-	
+
 
 	/* Get the actual values. */
 	for (l = prop_ids; l; l = l->next) {
 		prop_id = GPOINTER_TO_INT (l->data);
-		
+
 		query = g_strdup_printf ("DECLARE propcursor CURSOR FOR SELECT * "
 					 "FROM property WHERE prop_id=%d",
 					 prop_id);
-		
+
 		success = sql_execute_command (data->con, query);
 		g_free (query);
-		
-		
+
+
 		if (!success) {
 			g_warning ("DECLARE CURSOR command failed (property) %s.",
 					sql_get_last_error (data->con));
 			goto out;
 		}
-		
+
 		model = sql_execute_query (data->con,"FETCH ALL in propcursor");
 		if (model == NULL) {
 			g_warning ("FETCH ALL failed for property %s.",
 					sql_get_last_error (data->con));
 			goto out;
 		}
-		
-		
+
+
 		n = gda_data_model_get_n_columns (model);
 		for (i = 0; i < gda_data_model_get_n_rows (model); i++) {
 			prop_type_id = -1;
 			value = NULL;
-			
+
 			for (j = 0; j < n; j++) {
 				if (is_field (model, j, "proptype_id")) {
 					prop_type_id = get_id (model, i, j);
@@ -986,13 +986,13 @@ sql_read_property_values (SQLData   *data,
 		}
 		g_object_unref (model);
 		model = NULL;
-		
+
 		sql_execute_command (data->con, "CLOSE propcursor");
-		
+
 	}
 
 	g_list_free (prop_ids);
-	
+
 	return TRUE;
 
  out:
@@ -1025,7 +1025,7 @@ sql_read_overriden_day_types (SQLData *data, gint calendar_id)
 	GdaDataModel          *model = NULL;
 	gboolean               success;
 	gchar                 *query;
-	
+
 	gint                   day_type_id;
 	mrptime                start, end;
 	MrpInterval           *interval;
@@ -1033,17 +1033,17 @@ sql_read_overriden_day_types (SQLData *data, gint calendar_id)
 	OverriddenDayTypeData *day_type_data;
 	GHashTable            *hash;
 	MrpCalendar           *calendar;
-	
+
 	/* Get overridden days for the given calendar. */
 	query = g_strdup_printf ("DECLARE daycursor CURSOR FOR SELECT "
 				 "extract (epoch from start_time) as start_seconds, "
 				 "extract (epoch from end_time) as end_seconds, "
 				 "* FROM day_interval WHERE cal_id=%d",
 				 calendar_id);
-	
+
 	success = sql_execute_command (data->con, query);
 	g_free (query);
-	
+
 
 	if (!success) {
 		g_warning ("DECLARE CURSOR command failed (day_interval) %s.",
@@ -1057,9 +1057,9 @@ sql_read_overriden_day_types (SQLData *data, gint calendar_id)
 				sql_get_last_error (data->con));
 		goto out;
 	}
-	
+
 	hash = g_hash_table_new (NULL, NULL);
-	
+
 	n = gda_data_model_get_n_columns (model);
 	for (i = 0; i < gda_data_model_get_n_rows (model); i++) {
 		day_type_id = -1;
@@ -1089,8 +1089,8 @@ sql_read_overriden_day_types (SQLData *data, gint calendar_id)
 		}
 
 		interval = mrp_interval_new (start, end);
-		day_type_data->intervals = g_list_append (day_type_data->intervals, interval);		
-		
+		day_type_data->intervals = g_list_append (day_type_data->intervals, interval);
+
 		d(g_print ("Overridden intervals for day %d, on cal %d, %d - %d\n",
 			 day_type_id, calendar_id,
 			 (int)start, (int)end));
@@ -1101,8 +1101,8 @@ sql_read_overriden_day_types (SQLData *data, gint calendar_id)
 	model = NULL;
 
 	sql_execute_command (data->con,"CLOSE daycursor");
-	
-	
+
+
 	/* Set the intervals for the day types. */
 	calendar = g_hash_table_lookup (data->calendar_id_hash, GINT_TO_POINTER (calendar_id));
 	g_hash_table_foreach (hash, (GHFunc) foreach_insert_overridden_day_type, calendar);
@@ -1116,7 +1116,7 @@ sql_read_overriden_day_types (SQLData *data, gint calendar_id)
 	}
 
 	return FALSE;
-}	
+}
 
 /* Reads overridden days, i.e. specific dates that doesn't use the default day.
  */
@@ -1127,7 +1127,7 @@ sql_read_overriden_days (SQLData *data, gint calendar_id)
 	GdaDataModel *model = NULL;
 	gboolean      success;
 	gchar        *query;
-	
+
 	gint          day_type_id;
 	mrptime       date;
 
@@ -1136,39 +1136,39 @@ sql_read_overriden_days (SQLData *data, gint calendar_id)
 				 "extract (epoch from date) as date_seconds, "
 				 "* FROM day WHERE cal_id=%d",
 				 calendar_id);
-	
+
 	success = sql_execute_command (data->con, query);
 	g_free (query);
-	
+
 
 	if (!success) {
 		g_warning ("DECLARE CURSOR command failed (day) %s.",
 				sql_get_last_error (data->con));
 		goto out;
 	}
-	
+
 	model = sql_execute_query (data->con, "FETCH ALL in daycursor");
 	if (model == NULL) {
 		g_warning ("FETCH ALL failed for day %s.",
 				sql_get_last_error (data->con));
 		goto out;
 	}
-	
-	
+
+
 	n = gda_data_model_get_n_columns (model);
 	for (i = 0; i < gda_data_model_get_n_rows (model); i++) {
 		day_type_id = -1;
 		date = -1;
-		
+
 		for (j = 0; j < n; j++) {
 			if (is_field (model, j, "date_seconds")) {
-				date = get_int (model, i, j);				
+				date = get_int (model, i, j);
 			}
 			else if (is_field (model, j, "dtype_id")) {
 				day_type_id = get_int (model, i, j);
 			}
 		}
-		
+
 		d(g_print ("Overridden for cal %d, on %s\n", calendar_id, mrp_time_format ("%a %e %b", date)));
 
 		/*data->days = g_list_prepend (data->days, day);*/
@@ -1177,7 +1177,7 @@ sql_read_overriden_days (SQLData *data, gint calendar_id)
 	model = NULL;
 
 	sql_execute_command (data->con,"CLOSE daycursor");
-	
+
 
 	return TRUE;
 
@@ -1187,7 +1187,7 @@ sql_read_overriden_days (SQLData *data, gint calendar_id)
 	}
 
 	return FALSE;
-}	
+}
 
 static gboolean
 sql_read_day_types (SQLData *data)
@@ -1196,17 +1196,17 @@ sql_read_day_types (SQLData *data)
 	GdaDataModel *model = NULL;
 	gboolean      success;
 	gchar        *query;
-	
+
 	gint          day_type_id;
 	gchar        *name;
 	gchar        *description;
 	MrpDay       *day;
 	gboolean      is_work, is_nonwork;
-	
+
 	/* Get day types. */
 	query = g_strdup_printf ("DECLARE mycursor CURSOR FOR SELECT * FROM daytype WHERE proj_id=%d",
 				 data->project_id);
-	
+
 	success = sql_execute_command (data->con, query);
 	g_free (query);
 
@@ -1222,7 +1222,7 @@ sql_read_day_types (SQLData *data)
 				sql_get_last_error (data->con));
 		goto out;
 	}
-	
+
 	n = gda_data_model_get_n_columns (model);
 	for (i = 0; i < gda_data_model_get_n_rows (model); i++) {
 		name = NULL;
@@ -1259,10 +1259,10 @@ sql_read_day_types (SQLData *data)
 		} else {
 			day = mrp_day_add (data->project, name, description);
 		}
-		
+
 		g_free (name);
 		g_free (description);
-		
+
 		g_hash_table_insert (data->day_id_hash, GINT_TO_POINTER (day_type_id), day);
 	}
 	g_object_unref (model);
@@ -1278,7 +1278,7 @@ sql_read_day_types (SQLData *data)
 	}
 
 	return FALSE;
-}	
+}
 
 static gboolean
 sql_calendar_create (GNode   *node,
@@ -1291,17 +1291,17 @@ sql_calendar_create (GNode   *node,
 		/* Skip the root .*/
 		return FALSE;
 	}
-	
+
 	if (!node->parent->parent) {
 		/* Calendar directly under the root don't inherit from another
 		 * calendar.
 		 */
 		d(g_print ("Create new calendar: %s\n", cal_data->name));
-	
+
 		calendar = mrp_calendar_new (cal_data->name, data->project);
 	} else {
 		d(g_print ("Derive new calendar: %s\n", cal_data->name));
-		
+
 		parent = g_hash_table_lookup (data->calendar_id_hash, GINT_TO_POINTER (cal_data->parent_id));
 		calendar = mrp_calendar_derive (cal_data->name, parent);
 	}
@@ -1317,10 +1317,10 @@ sql_calendar_create (GNode   *node,
 				       MRP_CALENDAR_DAY_SAT, cal_data->day_sat,
 				       MRP_CALENDAR_DAY_SUN, cal_data->day_sun,
 				       -1);
-	
+
 	sql_read_overriden_days (data, cal_data->id);
 	sql_read_overriden_day_types (data, cal_data->id);
-	
+
 	return FALSE;
 }
 
@@ -1331,7 +1331,7 @@ sql_calendar_insert_node (GHashTable *hash,
 {
 	CalendarData *data;
 	GNode        *parent;
-	
+
 	/* If the node is already inserted, do nothing. */
 	if (node->parent) {
 		return;
@@ -1343,7 +1343,7 @@ sql_calendar_insert_node (GHashTable *hash,
 		g_node_prepend (root, node);
 		return;
 	}
-	
+
 	/* Otherwise insert below the parent corresponding to the parent id. */
 	parent = g_hash_table_lookup (hash, GINT_TO_POINTER (data->parent_id));
 
@@ -1351,7 +1351,7 @@ sql_calendar_insert_node (GHashTable *hash,
 		/* If we for some reason don't find the parent, use the root. */
 		parent = root;
 	}
-	
+
 	g_node_prepend (parent, node);
 }
 
@@ -1363,10 +1363,10 @@ dump_calendar_tree (GNode *node)
 	gchar        *str;
 
 	return;
-	
+
 	str = g_malloc0 (g_node_depth (node));
 	memset (str, ' ', g_node_depth (node)-1);
-	
+
 	data = node->data;
 
 	d(g_print ("%s%s\n", str, data ? data->name : "[Root]"));
@@ -1384,7 +1384,7 @@ sql_read_calendars (SQLData *data)
 	GdaDataModel *model = NULL;
 	gboolean      success;
 	gchar        *query;
-	
+
 	CalendarData *calendar_data;
 	GNode        *tree;
 	GNode        *node;
@@ -1413,12 +1413,12 @@ sql_read_calendars (SQLData *data)
 
 	tree = g_node_new (NULL);
 	hash = g_hash_table_new (NULL, NULL);
-	
+
 	n = gda_data_model_get_n_columns (model);
 	for (i = 0; i < gda_data_model_get_n_rows (model); i++) {
 		calendar_data = g_new0 (CalendarData, 1);
 		node = g_node_new (calendar_data);
-		
+
 		for (j = 0; j < n; j++) {
 			if (is_field (model, j, "name")) {
 				calendar_data->name = get_string (model, i, j);
@@ -1458,12 +1458,12 @@ sql_read_calendars (SQLData *data)
 				calendar_data->day_sun = g_hash_table_lookup (data->day_id_hash, GINT_TO_POINTER (day_id));
 			}
 		}
-		
+
 		d(g_print ("Calendar: %s, id: %d, parent: %d\n",
 			 calendar_data->name,
 			 calendar_data->id,
 			 calendar_data->parent_id));
-		
+
 		calendars = g_list_prepend (calendars, node);
 		g_hash_table_insert (hash, GINT_TO_POINTER (calendar_data->id), node);
 	}
@@ -1499,7 +1499,7 @@ sql_read_calendars (SQLData *data)
 	g_list_free (calendars);
 	g_hash_table_destroy (hash);
 	g_node_destroy (tree);
-	
+
 	return TRUE;
 
  out:
@@ -1508,7 +1508,7 @@ sql_read_calendars (SQLData *data)
 	}
 
 	return FALSE;
-}	
+}
 
 static gboolean
 sql_read_groups (SQLData *data)
@@ -1517,14 +1517,14 @@ sql_read_groups (SQLData *data)
 	GdaDataModel *model = NULL;
 	gboolean      success;
 	gchar        *query;
-	
+
 	MrpGroup     *group;
 	gint          group_id;
 	gchar        *name;
 	gchar        *admin_name;
 	gchar        *admin_phone;
 	gchar        *admin_email;
-		
+
 	/* Get resource groups. */
 	query = g_strdup_printf ("DECLARE mycursor CURSOR FOR SELECT * FROM resource_group WHERE proj_id=%d",
 				 data->project_id);
@@ -1543,7 +1543,7 @@ sql_read_groups (SQLData *data)
 				sql_get_last_error (data->con));
 		goto out;
 	}
-	
+
 	n = gda_data_model_get_n_columns (model);
 	for (i = 0; i < gda_data_model_get_n_rows (model); i++) {
 		group_id = -1;
@@ -1551,7 +1551,7 @@ sql_read_groups (SQLData *data)
 		admin_name = NULL;
 		admin_phone = NULL;
 		admin_email = NULL;
-		
+
 		for (j = 0; j < n; j++) {
 			if (is_field (model, j, "name")) {
 				name = get_string (model, i, j);
@@ -1569,7 +1569,7 @@ sql_read_groups (SQLData *data)
 				admin_email = get_string (model, i, j);
 			}
 		}
-		
+
 		group = g_object_new (MRP_TYPE_GROUP,
 				      "name", name,
 				      "manager_name", admin_name,
@@ -1600,7 +1600,7 @@ sql_read_groups (SQLData *data)
 	}
 
 	return FALSE;
-}	
+}
 
 static gboolean
 sql_read_resources (SQLData *data)
@@ -1609,7 +1609,7 @@ sql_read_resources (SQLData *data)
 	GdaDataModel *model = NULL;
 	gboolean      success;
 	gchar        *query;
-	
+
 	gint          resource_id;
 	gint          group_id;
 	gint          calendar_id;
@@ -1639,9 +1639,9 @@ sql_read_resources (SQLData *data)
 				sql_get_last_error (data->con));
 		goto out;
 	}
-	
+
 	n = gda_data_model_get_n_columns (model);
-	
+
 	for (i = 0; i < gda_data_model_get_n_rows (model); i++) {
 		resource_id = -1;
 		group_id = -1;
@@ -1650,14 +1650,14 @@ sql_read_resources (SQLData *data)
 		short_name = NULL;  /* Added in schema 0.7 */
 		email = NULL;
 		note = NULL;
-		
+
 		for (j = 0; j < n; j++) {
 			if (is_field (model, j, "name")) {
 				name = get_string (model, i, j);
 			}
 			else if (is_field (model, j, "short_name")) {
 				short_name = get_string (model, i, j);
-				
+
 				/* FIXME: The next section detects the case if
 				 * short_name is NULL. If a string field is null
 				 * then get_string() seems to actually return
@@ -1666,7 +1666,7 @@ sql_read_resources (SQLData *data)
 				 * the following is a workaround until we have a
 				 * database upgrade process that fixes NULLs.
 				 */
-				if (strcmp (short_name, "NULL") == 0) {  
+				if (strcmp (short_name, "NULL") == 0) {
 					short_name = g_strdup ("");
 				}
 			}
@@ -1690,11 +1690,11 @@ sql_read_resources (SQLData *data)
 		group = g_hash_table_lookup (data->group_id_hash, GINT_TO_POINTER (group_id));
 		calendar = g_hash_table_lookup (data->calendar_id_hash, GINT_TO_POINTER (calendar_id));
 
-		/* Warning: Always check for NULL data on strings here for any new schema variables 
-		*  because if you don't and someone opens an OLD database then it will segfault 
+		/* Warning: Always check for NULL data on strings here for any new schema variables
+		*  because if you don't and someone opens an OLD database then it will segfault
 		*  in resource-set-property. Use short_name as an example.
 		*/
-		
+
 		resource = g_object_new (MRP_TYPE_RESOURCE,
 					 "name", name,
 					 "short_name", (short_name ? short_name : ""),
@@ -1708,7 +1708,7 @@ sql_read_resources (SQLData *data)
 		g_free (short_name);
 		g_free (email);
 		g_free (note);
-		
+
 		/* Add resource to project. */
 		mrp_project_add_resource (data->project, resource);
 		g_hash_table_insert (data->resource_id_hash, GINT_TO_POINTER (resource_id), resource);
@@ -1719,19 +1719,19 @@ sql_read_resources (SQLData *data)
 			g_warning ("Couldn't read resource properties.");
 		}
 	}
-	
+
 	g_object_unref (model);
 	model = NULL;
-	
+
 	sql_execute_command (data->con, "CLOSE mycursor");
 
 	return TRUE;
-	
+
  out:
 	if (model) {
 		g_object_unref (model);
 	}
-	
+
 	return FALSE;
 }
 
@@ -1743,7 +1743,7 @@ sql_read_assignments (SQLData *data,
 	GdaDataModel *model = NULL;
 	gboolean      success;
 	gchar        *query;
-	
+
 	gint          units;
 	gint          resource_id;
 	MrpTask      *task;
@@ -1773,7 +1773,7 @@ sql_read_assignments (SQLData *data,
 	for (i = 0; i < gda_data_model_get_n_rows (model); i++) {
 		resource_id = -1;
 		units = -1;
-		
+
 		for (j = 0; j < n; j++) {
 			if (is_field (model, j, "units")) {
 				units = floor (0.5 + 100.0 * get_float (model, i, j));
@@ -1794,12 +1794,12 @@ sql_read_assignments (SQLData *data,
 	sql_execute_command (data->con, "CLOSE alloccursor");
 
 	return TRUE;
-	
+
  out:
 	if (model) {
 		g_object_unref (model);
 	}
-	
+
 	return FALSE;
 }
 
@@ -1810,7 +1810,7 @@ sql_read_relations (SQLData *data, gint task_id)
 	GdaDataModel *model = NULL;
 	gboolean      success;
 	gchar        *query;
-	
+
 	gint          predecessor_id;
 	gint          lag;
 	MrpTask      *task;
@@ -1840,7 +1840,7 @@ sql_read_relations (SQLData *data, gint task_id)
 	for (i = 0; i < gda_data_model_get_n_rows (model); i++) {
 		predecessor_id = -1;
 		lag = 0;
-		
+
 		for (j = 0; j < n; j++) {
 			if (is_field (model, j, "pred_task_id")) {
 				predecessor_id = get_id (model, i, j);
@@ -1865,12 +1865,12 @@ sql_read_relations (SQLData *data, gint task_id)
 	sql_execute_command (data->con, "CLOSE predcursor");
 
 	return TRUE;
-	
+
  out:
 	if (model) {
 		g_object_unref (model);
 	}
-	
+
 	return FALSE;
 }
 
@@ -1888,7 +1888,7 @@ sql_task_insert (GNode   *node,
 		/* Skip the root .*/
 		return FALSE;
 	}
-	
+
 	if (!node->parent->parent) {
 		/* Tasks directly under the root is inserted below the root. */
 		parent = data->root_task;
@@ -1897,7 +1897,7 @@ sql_task_insert (GNode   *node,
 	}
 
 	imrp_task_insert_child (parent, -1, task_data->task);
-	
+
 	return FALSE;
 }
 
@@ -1912,7 +1912,7 @@ sql_task_insert_node (GHashTable *hash,
 {
 	TaskData *data;
 	GNode    *parent;
-	
+
 	/* If the node is already inserted, do nothing. */
 	if (node->parent) {
 		return;
@@ -1924,14 +1924,14 @@ sql_task_insert_node (GHashTable *hash,
 		g_node_prepend (root, node);
 		return;
 	}
-	
+
 	/* Otherwise insert below the parent corresponding to the parent id. */
 	parent = g_hash_table_lookup (hash, GINT_TO_POINTER (data->parent_id));
 	if (!parent) {
 		/* If we for some reason don't find the parent, use the root. */
 		parent = root;
 	}
-	
+
 	g_node_prepend (parent, node);
 }
 
@@ -1944,10 +1944,10 @@ dump_task_tree (GNode *node)
 	gchar    *name = NULL;
 
 	return;
-	
+
 	str = g_malloc0 (g_node_depth (node));
 	memset (str, ' ', g_node_depth (node)-1);
-	
+
 	data = node->data;
 
 	if (data) {
@@ -1988,7 +1988,7 @@ sql_read_tasks (SQLData *data)
 	GdaDataModel      *model = NULL;
 	gboolean           success;
 	gchar             *query;
-	
+
 	gint               task_id;
 	gint               parent_id;
 	gchar             *name;
@@ -2047,7 +2047,7 @@ sql_read_tasks (SQLData *data)
 		is_milestone = FALSE;
 		constraint_time = 0;
 		constraint_type = MRP_CONSTRAINT_ASAP;
-		
+
 		for (j = 0; j < n; j++) {
 			if (is_field (model, j, "name")) {
 				name = get_string (model, i, j);
@@ -2080,7 +2080,7 @@ sql_read_tasks (SQLData *data)
 				note = get_string (model, i, j);
 			}
 			else if (is_field (model, j, "constraint_type")) {
-				constraint_type = constraint_string_to_type 
+				constraint_type = constraint_string_to_type
 					(get_string (model, i, j));
 			}
 			else if (is_field (model, j, "constraint_time_seconds")) {
@@ -2092,18 +2092,18 @@ sql_read_tasks (SQLData *data)
 			type = MRP_TASK_TYPE_MILESTONE;
 		} else {
 			type = MRP_TASK_TYPE_NORMAL;
-		}			
+		}
 
 		if (is_fixed_work) {
 			sched = MRP_TASK_SCHED_FIXED_WORK;
 			duration = work;
 		} else {
 			sched = MRP_TASK_SCHED_FIXED_DURATION;
-		}			
+		}
 
 		constraint.type = constraint_type;
 		constraint.time = constraint_time;
-				
+
 		task = g_object_new (MRP_TYPE_TASK,
 				     "name", name,
 				     "note", note,
@@ -2116,7 +2116,7 @@ sql_read_tasks (SQLData *data)
 				     "constraint", &constraint,
 				     "project", data->project,
 				     NULL);
-		
+
 		g_free (name);
 		g_free (note);
 
@@ -2143,7 +2143,7 @@ sql_read_tasks (SQLData *data)
 	for (l = tasks; l; l = l->next) {
 		sql_task_insert_node (hash, tree, l->data);
 	}
-	
+
 	/* Debug output. */
 	dump_task_tree (tree);
 
@@ -2158,7 +2158,7 @@ sql_read_tasks (SQLData *data)
 	/* Get predecessor relations. */
 	for (l = tasks; l; l = l->next) {
 		GNode *node = l->data;
-		
+
 		task_data = node->data;
 		if (!sql_read_relations (data, task_data->id)) {
 			g_warning ("Couldn't read predecessor relations.");
@@ -2168,7 +2168,7 @@ sql_read_tasks (SQLData *data)
 	/* Get resource assignments. */
 	for (l = tasks; l; l = l->next) {
 		GNode *node = l->data;
-		
+
 		task_data = node->data;
 		if (!sql_read_assignments (data, task_data->id)) {
 			g_warning ("Couldn't read resource assignments.");
@@ -2178,7 +2178,7 @@ sql_read_tasks (SQLData *data)
 	/* Get property values. */
 	for (l = tasks; l; l = l->next) {
 		GNode *node = l->data;
-		
+
 		task_data = node->data;
 		if (!sql_read_property_values (data, MRP_OBJECT (task_data->task))) {
 			g_warning ("Couldn't read task properties.");
@@ -2198,12 +2198,12 @@ sql_read_tasks (SQLData *data)
 	g_node_destroy (tree);
 
 	return TRUE;
-	
+
  out:
 	if (model) {
 		g_object_unref (model);
 	}
-	
+
 	return FALSE;
 }
 
@@ -2229,7 +2229,7 @@ mrp_sql_load_project (MrpStorageSQL *storage,
 
 	data = g_new0 (SQLData, 1);
 
-	data->project_id = -1; 
+	data->project_id = -1;
 	/* data->project_id = project_id; */
 	data->day_id_hash = g_hash_table_new (NULL, NULL);
 	data->calendar_id_hash = g_hash_table_new (NULL, NULL);
@@ -2246,8 +2246,8 @@ mrp_sql_load_project (MrpStorageSQL *storage,
 	data->root_task = mrp_task_new ();
 
 	db_txt = g_strdup_printf (CONNECTION_FORMAT_STRING, host, database);
-	gda_config_save_data_source (dsn_name, 
-				     provider, 
+	gda_config_save_data_source (dsn_name,
+				     provider,
 				     db_txt,
 				     "planner project", login, password, FALSE);
 	g_free (db_txt);
@@ -2276,7 +2276,7 @@ mrp_sql_load_project (MrpStorageSQL *storage,
 	}
 	gda_dict_set_connection (data->dict, data->con);
 
-	success = sql_execute_command (data->con, "SET TIME ZONE 'UTC'"); 
+	success = sql_execute_command (data->con, "SET TIME ZONE 'UTC'");
 	if (!success) {
 		g_warning ("SET TIME ZONE command failed: %s.",
 				sql_get_last_error (data->con));
@@ -2310,7 +2310,7 @@ mrp_sql_load_project (MrpStorageSQL *storage,
 	if (!sql_read_property_values (data, MRP_OBJECT (data->project))) {
 		g_warning ("Couldn't read project properties.");
 	}
-	
+
 	/* Get day types. */
 	if (!sql_read_day_types (data)) {
 		g_warning ("Couldn't read day types.");
@@ -2350,13 +2350,13 @@ mrp_sql_load_project (MrpStorageSQL *storage,
 	g_object_unref (data->con);
 
 	d(g_print ("Read project, set rev to %d\n", data->revision));
-	
+
 	g_object_set_data (G_OBJECT (storage->project),
 			   REVISION,
 			   GINT_TO_POINTER (data->revision));
 
 	return TRUE;
-	
+
  out:
 	if (data->dict) {
 		g_object_unref (data->dict);
@@ -2388,7 +2388,7 @@ sql_write_project (MrpStorageSQL  *storage,
 	gboolean      success;
 	gboolean      ret = TRUE;
 	gchar        *query;
-	
+
 	gint          project_id;
 	gint          revision;
 	mrptime       project_start;
@@ -2411,14 +2411,14 @@ sql_write_project (MrpStorageSQL  *storage,
 					 "name, revision, last_user FROM project WHERE proj_id=%d",
 					 project_id);
 		success = sql_execute_command (data->con, query);
-		
+
 		g_free (query);
 		if (!success) {
 			WRITE_ERROR (error, data->con);
 			ret = FALSE;
 			goto out;
 		}
-		
+
 		model = sql_execute_query (data->con, "FETCH ALL in mycursor");
 		if (model == NULL) {
 			WRITE_ERROR (error, data->con);
@@ -2430,27 +2430,27 @@ sql_write_project (MrpStorageSQL  *storage,
 			name = get_string (model, 0, 0);
 			revision = get_int (model, 0, 1);
 			last_user = get_string (model, 0, 2);
-			
+
 			g_object_unref (model);
 			model = NULL;
-			
+
 			sql_execute_command (data->con, "CLOSE mycursor");
-			
+
 			/* Remove the old project. */
 			d(g_print ("Got old project with id %d (rev %d), remove.\n", project_id, revision));
-		
+
 			query = g_strdup_printf ("DELETE FROM project WHERE proj_id=%d", project_id);
 			success = sql_execute_command (data->con, query);
 			g_free (query);
-			
+
 			if (!success) {
 				WRITE_ERROR (error, data->con);
 				ret = FALSE;
 				goto out;
 			}
-		
+
 			d(g_print ("*** revision: %d, old revision: %d\n", revision, data->revision));
-			
+
 			if (!force && data->revision > 0 && revision != data->revision) {
 				g_set_error (error,
 					     MRP_ERROR, MRP_ERROR_SAVE_FILE_CHANGED,
@@ -2467,12 +2467,12 @@ sql_write_project (MrpStorageSQL  *storage,
 
 			last_user = NULL;
 			name = NULL;
-			
+
 			data->revision = revision + 1;
 		} else {
 			g_object_unref (model);
 			model = NULL;
-			
+
 			data->revision = 1;
 		}
 	} else {
@@ -2507,7 +2507,7 @@ sql_write_project (MrpStorageSQL  *storage,
 					 name, company, manager, str, data->revision);
 	}
 
-	success = sql_execute_command (data->con, query); 
+	success = sql_execute_command (data->con, query);
 	g_free (query);
 
 	if (!success) {
@@ -2521,7 +2521,7 @@ sql_write_project (MrpStorageSQL  *storage,
 		/* Get the assigned id. */
 		project_id = get_inserted_id (data, "project_proj_id_seq");
 	}
-	
+
 	d(g_print ("Inserted project %s, %d\n", name, project_id));
 
 	data->project_id = project_id;
@@ -2541,7 +2541,7 @@ sql_write_phases (SQLData *data)
 {
 	gboolean      success;
 	gchar        *query;
-	
+
 	GList        *phases, *l;
 	gchar        *name;
 
@@ -2557,7 +2557,7 @@ sql_write_phases (SQLData *data)
 					 "VALUES(%d, %s)",
 					 data->project_id, name);
 
-		success = sql_execute_command (data->con, query); 
+		success = sql_execute_command (data->con, query);
 		g_free (query);
 		g_free (name);
 
@@ -2571,7 +2571,7 @@ sql_write_phases (SQLData *data)
 	mrp_string_list_free (phases);
 
 	return TRUE;
-	
+
  out:
 	return FALSE;
 }
@@ -2581,34 +2581,34 @@ sql_write_phase (SQLData *data)
 {
 	gboolean      success;
 	gchar        *query;
-	
+
 	gchar        *phase;
-	
+
 	g_object_get (data->project,
 		      "phase", &phase,
 		      NULL);
 
 	if (phase && phase[0]) {
 		sql_quote_and_escape_string (data, &phase, TRUE);
-		query = g_strdup_printf ("UPDATE project SET phase=%s WHERE proj_id=%d", 
+		query = g_strdup_printf ("UPDATE project SET phase=%s WHERE proj_id=%d",
 					 phase, data->project_id);
 	} else {
-		query = g_strdup_printf ("UPDATE project SET phase=NULL WHERE proj_id=%d", 
+		query = g_strdup_printf ("UPDATE project SET phase=NULL WHERE proj_id=%d",
 					 data->project_id);
 	}
-	
-	success = sql_execute_command (data->con, query); 
+
+	success = sql_execute_command (data->con, query);
 	g_free (query);
 	g_free (phase);
-	
+
 	if (!success) {
 		g_warning ("UPDATE command failed (phase) %s.",
 				sql_get_last_error (data->con));
 		goto out;
 	}
-	
+
 	return TRUE;
-	
+
  out:
 	return FALSE;
 }
@@ -2628,14 +2628,14 @@ property_type_to_string (MrpPropertyType type)
 	case MRP_PROPERTY_TYPE_DURATION:
 		return "duration";
 	case MRP_PROPERTY_TYPE_DATE:
-		return "date";	
+		return "date";
 	case MRP_PROPERTY_TYPE_COST:
-		return "cost";	
+		return "cost";
 	default:
 		g_warning ("Not implemented support for type %d", type);
 		break;
 	}
-	
+
 	return "";
 }
 
@@ -2649,9 +2649,9 @@ property_to_string (MrpObject   *object,
 	gint         i;
 	gfloat       f;
 	mrptime      date;
-	
+
 	name = mrp_property_get_name (property);
-	
+
 	switch (mrp_property_get_property_type (property)) {
 	case MRP_PROPERTY_TYPE_STRING:
 		mrp_object_get (object, name, &str, NULL);
@@ -2671,7 +2671,7 @@ property_to_string (MrpObject   *object,
 		return g_strdup_printf ("%d", i);
 	case MRP_PROPERTY_TYPE_DATE:
 		mrp_object_get (object, name, &date, NULL);
-		str = mrp_time_to_string (date);		
+		str = mrp_time_to_string (date);
 		return str;
 	case MRP_PROPERTY_TYPE_COST:
 		mrp_object_get (object, name, &f, NULL);
@@ -2691,7 +2691,7 @@ sql_write_specific_property_specs (SQLData *data, GList *properties, const gchar
 {
 	gboolean      success;
 	gchar        *query;
-	
+
 	GList        *l;
 	const gchar  *name, *label, *description, *type;
 	gchar        *quoted_name, *quoted_label, *quoted_description, *quoted_type;
@@ -2714,10 +2714,10 @@ sql_write_specific_property_specs (SQLData *data, GList *properties, const gchar
 		query = g_strdup_printf ("INSERT INTO property_type(proj_id, name, label, type, owner, descr) "
 					 "VALUES(%d, %s, %s, %s, '%s', %s)",
 					 data->project_id,
-					 quoted_name, quoted_label, 
-					 quoted_type, owner, 
+					 quoted_name, quoted_label,
+					 quoted_type, owner,
 					 quoted_description);
-		success = sql_execute_command (data->con, query); 
+		success = sql_execute_command (data->con, query);
 		g_free (query);
 
 		g_free (quoted_name);
@@ -2738,7 +2738,7 @@ sql_write_specific_property_specs (SQLData *data, GList *properties, const gchar
 	}
 
 	return TRUE;
-	
+
  out:
 	return FALSE;
 }
@@ -2776,7 +2776,7 @@ sql_write_property_values (SQLData   *data,
 {
 	gboolean      success;
 	gchar        *query;
-	
+
 	GType         object_type;
 	GList        *properties, *l;
 	const gchar  *name, *label, *description, *type;
@@ -2793,7 +2793,7 @@ sql_write_property_values (SQLData   *data,
 	properties = mrp_project_get_properties_from_type (data->project, object_type);
 	for (l = properties; l; l = l->next) {
 		property = l->data;
-		
+
 		if (mrp_property_get_property_type (property) == MRP_PROPERTY_TYPE_STRING_LIST) {
 			g_warning ("Don't support string list.");
 			continue;
@@ -2805,7 +2805,7 @@ sql_write_property_values (SQLData   *data,
 		type = property_type_to_string (mrp_property_get_property_type (property));
 
 		property_type_id = get_hash_data_as_id (data->property_type_hash, property);
-		
+
 		value = property_to_string (object, property);
 
 		if (value) {
@@ -2816,8 +2816,8 @@ sql_write_property_values (SQLData   *data,
 			query = g_strdup_printf ("INSERT INTO property(proptype_id, value) "
 						 "VALUES(%d, NULL)", property_type_id);
 		}
-		
-		success = sql_execute_command (data->con, query); 
+
+		success = sql_execute_command (data->con, query);
 		g_free (query);
 		g_free (value);
 
@@ -2846,12 +2846,12 @@ sql_write_property_values (SQLData   *data,
 			object_id = -1;
 			g_assert_not_reached ();
 		}
-		
+
 		query = g_strdup_printf ("INSERT INTO %s "
 					 "VALUES(%d, %d)",
 					 str,
 					 object_id, id);
-		success = sql_execute_command (data->con, query); 
+		success = sql_execute_command (data->con, query);
 		g_free (query);
 
 		if (!success) {
@@ -2862,7 +2862,7 @@ sql_write_property_values (SQLData   *data,
 	}
 
 	return TRUE;
-	
+
  out:
 	return FALSE;
 }
@@ -2872,7 +2872,7 @@ sql_write_day_types (SQLData *data)
 {
 	gboolean      success;
 	gchar        *query;
-	
+
 	GList        *days, *l;
 	MrpDay       *day;
 	gint          id;
@@ -2891,7 +2891,7 @@ sql_write_day_types (SQLData *data)
 		day = l->data;
 
 		is_work = "false";
-		
+
 		if (day == mrp_day_get_work ()) {
 			is_work = "true";
 			is_nonwork = "false";
@@ -2909,13 +2909,13 @@ sql_write_day_types (SQLData *data)
 
 		quoted_day_name = sql_quote_and_escape_const_string (data, day_name);
 		quoted_day_description = sql_quote_and_escape_const_string (data, day_description);
-		
+
 		query = g_strdup_printf ("INSERT INTO daytype(proj_id, name, descr, is_work, is_nonwork) "
 					 "VALUES(%d, %s, %s, %s, %s)",
 					 data->project_id,
 					 quoted_day_name, quoted_day_description,
 					 is_work, is_nonwork);
-		success = sql_execute_command (data->con, query); 
+		success = sql_execute_command (data->con, query);
 		g_free (query);
 
 		g_free (quoted_day_name);
@@ -2934,9 +2934,9 @@ sql_write_day_types (SQLData *data)
 	}
 
 	g_list_free (days);
-	
+
 	return TRUE;
-	
+
  out:
 	return FALSE;
 }
@@ -2946,7 +2946,7 @@ get_day_id_string (SQLData *data, MrpCalendar *calendar, gint weekday)
 {
 	MrpDay *day;
 	gint    day_id;
-	
+
 	day = mrp_calendar_get_default_day (calendar, weekday);
 	day_id = get_hash_data_as_id (data->day_hash, day);
 
@@ -2964,7 +2964,7 @@ sql_write_overridden_day_type (SQLData             *data,
 {
 	gboolean      success;
 	gchar        *query;
-	
+
 	GList        *l;
 	gint          calendar_id;
 	gint          day_type_id;
@@ -2974,10 +2974,10 @@ sql_write_overridden_day_type (SQLData             *data,
 
 	calendar_id = get_hash_data_as_id (data->calendar_hash, calendar);
 	day_type_id = get_hash_data_as_id (data->day_hash, day_ivals->day);
-	
+
 	for (l = day_ivals->intervals; l; l = l->next) {
 		ival = l->data;
-		
+
 		mrp_interval_get_absolute (ival, 0, &start, &end);
 
 		start_string = mrp_time_format ("%H:%M:%S+0", start);
@@ -2985,12 +2985,12 @@ sql_write_overridden_day_type (SQLData             *data,
 
 		sql_quote_and_escape_string (data, &start_string, TRUE);
 		sql_quote_and_escape_string (data, &end_string, TRUE);
-		
+
 		query = g_strdup_printf ("INSERT INTO day_interval(cal_id, dtype_id, start_time, end_time) "
 					 "VALUES(%d, %d, %s, %s)",
 					 calendar_id, day_type_id,
 					 start_string, end_string);
-		success = sql_execute_command (data->con, query); 
+		success = sql_execute_command (data->con, query);
 		g_free (query);
 		g_free (start_string);
 		g_free (end_string);
@@ -3003,7 +3003,7 @@ sql_write_overridden_day_type (SQLData             *data,
 	}
 
 	return TRUE;
-	
+
  out:
 	return FALSE;
 }
@@ -3015,7 +3015,7 @@ sql_write_overridden_dates (SQLData        *data,
 {
 	gboolean      success;
 	gchar        *query;
-	
+
 	gint          calendar_id;
 	gint          day_type_id;
 	gchar        *date_string;
@@ -3030,7 +3030,7 @@ sql_write_overridden_dates (SQLData        *data,
 	query = g_strdup_printf ("INSERT INTO day(cal_id, dtype_id, date) "
 				 "VALUES(%d, %d, %s)",
 				 calendar_id, day_type_id, date_string);
-	success = sql_execute_command (data->con, query); 
+	success = sql_execute_command (data->con, query);
 	g_free (query);
 	g_free (date_string);
 
@@ -3041,7 +3041,7 @@ sql_write_overridden_dates (SQLData        *data,
 	}
 
 	return TRUE;
-	
+
  out:
 	return FALSE;
 }
@@ -3053,7 +3053,7 @@ sql_write_calendars_recurse (SQLData     *data,
 {
 	gboolean      success;
 	gchar        *query;
-	
+
 	GList        *list, *l;
 	gint          id;
 	gint          parent_id;
@@ -3079,14 +3079,14 @@ sql_write_calendars_recurse (SQLData     *data,
 	sun = get_day_id_string (data, calendar, MRP_CALENDAR_DAY_SUN);
 
 	name = sql_quote_and_escape_const_string (data, mrp_calendar_get_name (calendar));
-		
+
 	query = g_strdup_printf ("INSERT INTO calendar(proj_id, parent_cid, name, "
 				 "day_mon, day_tue, day_wed, day_thu, day_fri, day_sat, day_sun) "
 				 "VALUES(%d, %s, %s, "
 				 "%s, %s, %s, %s, %s, %s, %s)",
 				 data->project_id, parent_id_string, name,
 				 mon, tue, wed, thu, fri, sat, sun);
-	success = sql_execute_command (data->con, query); 
+	success = sql_execute_command (data->con, query);
 	g_free (query);
 	g_free (mon);
 	g_free (tue);
@@ -3095,18 +3095,18 @@ sql_write_calendars_recurse (SQLData     *data,
 	g_free (fri);
 	g_free (sat);
 	g_free (sun);
-	
+
 	if (!success) {
 		g_warning ("INSERT command failed (calendar) %s.",
 				sql_get_last_error (data->con));
 		goto out;
 	}
-	
+
 	id = get_inserted_id (data, "calendar_cal_id_seq");
 	d(g_print ("Inserted calendar %s, %d\n", name, id));
 
 	g_hash_table_insert (data->calendar_hash, calendar, GINT_TO_POINTER (id));
-	
+
 	g_free (name);
 	g_free (parent_id_string);
 
@@ -3125,7 +3125,7 @@ sql_write_calendars_recurse (SQLData     *data,
 			goto out;
 		}
 	}
-	
+
 	/* Write the calendar's children. */
 	list = mrp_calendar_get_children (calendar);
 	for (l = list; l; l = l->next) {
@@ -3133,9 +3133,9 @@ sql_write_calendars_recurse (SQLData     *data,
 			goto out;
 		}
 	}
-	
+
 	return TRUE;
-	
+
  out:
 	return FALSE;
 }
@@ -3162,35 +3162,35 @@ sql_write_calendar_id (SQLData *data)
 {
 	gboolean      success;
 	gchar        *query;
-	
+
 	MrpCalendar  *calendar;
 	gint          id;
 
 	g_object_get (data->project,
 		      "calendar", &calendar,
 		      NULL);
-	
+
 	id = get_hash_data_as_id (data->calendar_hash, calendar);
 
 	if (id != -1) {
-		query = g_strdup_printf ("UPDATE project SET cal_id=%d WHERE proj_id=%d", 
+		query = g_strdup_printf ("UPDATE project SET cal_id=%d WHERE proj_id=%d",
 					 id, data->project_id);
 	} else {
-		query = g_strdup_printf ("UPDATE project SET cal_id=NULL WHERE proj_id=%d", 
+		query = g_strdup_printf ("UPDATE project SET cal_id=NULL WHERE proj_id=%d",
 					 data->project_id);
 	}
-	
-	success = sql_execute_command (data->con, query); 
+
+	success = sql_execute_command (data->con, query);
 	g_free (query);
-	
+
 	if (!success) {
 		g_warning ("UPDATE command failed (cal_id) %s.",
 				sql_get_last_error (data->con));
 		goto out;
 	}
-	
+
 	return TRUE;
-	
+
  out:
 	return FALSE;
 }
@@ -3200,9 +3200,9 @@ sql_write_groups (SQLData *data)
 {
 	gboolean      success;
 	gchar        *query;
-	
+
 	GList        *groups, *l;
-	gchar        *name, *manager_name, *manager_phone, *manager_email;	       
+	gchar        *name, *manager_name, *manager_phone, *manager_email;
 	MrpGroup     *group;
 	gint          id;
 
@@ -3221,13 +3221,13 @@ sql_write_groups (SQLData *data)
 		sql_quote_and_escape_string (data, &manager_name, TRUE);
 		sql_quote_and_escape_string (data, &manager_phone, TRUE);
 		sql_quote_and_escape_string (data, &manager_email, TRUE);
-		
+
 		query = g_strdup_printf ("INSERT INTO resource_group(proj_id, name, admin_name, admin_phone, admin_email) "
 					 "VALUES(%d, %s, %s, %s, %s)",
 					 data->project_id,
 					 name,
 					 manager_name, manager_phone, manager_email);
-		success = sql_execute_command (data->con, query); 
+		success = sql_execute_command (data->con, query);
 		g_free (query);
 
 		if (!success) {
@@ -3240,7 +3240,7 @@ sql_write_groups (SQLData *data)
 		d(g_print ("Inserted group %s, %d\n", name, id));
 
 		g_hash_table_insert (data->group_hash, group, GINT_TO_POINTER (id));
-		
+
 		g_free (name);
 		g_free (manager_name);
 		g_free (manager_phone);
@@ -3248,7 +3248,7 @@ sql_write_groups (SQLData *data)
 	}
 
 	return TRUE;
-	
+
  out:
 	return FALSE;
 }
@@ -3258,27 +3258,27 @@ sql_write_default_group_id (SQLData *data)
 {
 	gboolean      success;
 	gchar        *query;
-	
+
 	MrpGroup     *group;
 	gint          id;
 
 	g_object_get (data->project,
 		      "default_group", &group,
 		      NULL);
-	
+
 	id = get_hash_data_as_id (data->group_hash, group);
 
 	if (id != -1) {
-		query = g_strdup_printf ("UPDATE project SET default_group_id=%d WHERE proj_id=%d", 
+		query = g_strdup_printf ("UPDATE project SET default_group_id=%d WHERE proj_id=%d",
 					 id, data->project_id);
 	} else {
-		query = g_strdup_printf ("UPDATE project SET default_group_id=NULL WHERE proj_id=%d", 
+		query = g_strdup_printf ("UPDATE project SET default_group_id=NULL WHERE proj_id=%d",
 					 data->project_id);
 	}
-	
-	success = sql_execute_command (data->con, query); 
+
+	success = sql_execute_command (data->con, query);
 	g_free (query);
-	
+
 	if (!success) {
 		g_warning ("UPDATE command failed (default_group_id) %s.",
 				sql_get_last_error (data->con));
@@ -3296,9 +3296,9 @@ sql_write_resources (SQLData *data)
 {
 	gboolean         success;
 	gchar           *query;
-	
+
 	GList           *resources, *l;
-	gchar           *name, *short_name, *email, *note;	       
+	gchar           *name, *short_name, *email, *note;
 	MrpResource     *resource;
 	MrpCalendar     *calendar;
 	MrpGroup        *group;
@@ -3311,7 +3311,7 @@ sql_write_resources (SQLData *data)
 	gchar           *cal_id_string;
 	gchar           *group_id_string;
 
-	
+
 	resources = mrp_project_get_resources (data->project);
 	for (l = resources; l; l = l->next) {
 		resource = l->data;
@@ -3356,7 +3356,7 @@ sql_write_resources (SQLData *data)
 					 data->project_id, group_id_string, name,
 					 short_name, email, note, is_worker, (double) units,
 					 cal_id_string);
-		success = sql_execute_command (data->con, query); 
+		success = sql_execute_command (data->con, query);
 		g_free (query);
 		g_free (cal_id_string);
 		g_free (group_id_string);
@@ -3373,9 +3373,9 @@ sql_write_resources (SQLData *data)
 
 		id = get_inserted_id (data, "resource_res_id_seq");
 		d(g_print ("Inserted resource %s, %d\n", name, id));
-		
+
 		g_hash_table_insert (data->resource_hash, resource, GINT_TO_POINTER (id));
-		
+
 		g_free (name);
 	}
 
@@ -3387,9 +3387,9 @@ sql_write_resources (SQLData *data)
 			goto out;
 		}
 	}
-	
+
 	return TRUE;
-	
+
  out:
 	return FALSE;
 }
@@ -3398,9 +3398,9 @@ static gboolean
 sql_write_tasks (SQLData *data)
 {
 	gboolean         success;
-	gchar           *query;	
+	gchar           *query;
 	GList           *tasks, *l;
-	gchar           *name, *note;	       
+	gchar           *name, *note;
 	MrpTask         *task;
 	MrpTask         *parent;
 	MrpTaskType      type;
@@ -3429,7 +3429,7 @@ sql_write_tasks (SQLData *data)
 	gint             resource_id;
 	MrpAssignment   *assignment;
 	MrpResource     *resource;
-	
+
 	/* Note: we depend on the tasks being returned with parents before
 	 * children.
 	 */
@@ -3450,7 +3450,7 @@ sql_write_tasks (SQLData *data)
 			      "sched", &sched,
 			      "constraint", &constraint,
 			      NULL);
-		
+
 		parent = mrp_task_get_parent (task);
 		parent_id = get_hash_data_as_id (data->task_hash, parent);
 
@@ -3459,7 +3459,7 @@ sql_write_tasks (SQLData *data)
 		} else {
 			parent_id_string = g_strdup ("NULL");
 		}
-		
+
 		if (type == MRP_TASK_TYPE_MILESTONE) {
 			work = 0;
 			duration = 0;
@@ -3467,13 +3467,13 @@ sql_write_tasks (SQLData *data)
 		} else {
 			is_milestone = "false";
 		}
-		
+
 		if (sched == MRP_TASK_SCHED_FIXED_WORK) {
 			is_fixed_work = "true";
 		} else {
 			is_fixed_work = "false";
 		}
-		
+
 		start_string = mrp_time_format ("%Y-%m-%d %H:%M:%S+0", start);
 		finish_string = mrp_time_format ("%Y-%m-%d %H:%M:%S+0", finish);
 
@@ -3512,7 +3512,7 @@ sql_write_tasks (SQLData *data)
 		sql_quote_and_escape_string (data, &note, TRUE);
 		sql_quote_and_escape_string (data, &start_string, TRUE);
 		sql_quote_and_escape_string (data, &finish_string, TRUE);
-		
+
 		query = g_strdup_printf ("INSERT INTO task(proj_id, parent_id, name, "
 					 "note, start, finish, work, duration, "
 					 "percent_complete, is_milestone, is_fixed_work, "
@@ -3526,7 +3526,7 @@ sql_write_tasks (SQLData *data)
 					 percent_complete, is_milestone, is_fixed_work,
 					 constraint_type, constraint_time, priority);
 
-		success = sql_execute_command (data->con, query); 
+		success = sql_execute_command (data->con, query);
 		g_free (query);
 		g_free (start_string);
 		g_free (finish_string);
@@ -3545,7 +3545,7 @@ sql_write_tasks (SQLData *data)
 		d(g_print ("Inserted task %s, %d under %d\n", name, id, parent_id));
 
 		g_hash_table_insert (data->task_hash, task, GINT_TO_POINTER (id));
-		
+
 		g_free (name);
 	}
 
@@ -3582,14 +3582,14 @@ sql_write_tasks (SQLData *data)
 
 			id = get_hash_data_as_id (data->task_hash, task);
 			pred_id = get_hash_data_as_id (data->task_hash, predecessor);
-			
+
 			query = g_strdup_printf ("INSERT INTO predecessor(task_id, pred_task_id, "
 						 "type, lag) "
 						 "VALUES(%d, %d, '%s', %d)",
 						 id, pred_id, relation_type, lag);
-			success = sql_execute_command (data->con, query); 
+			success = sql_execute_command (data->con, query);
 			g_free (query);
-			
+
 			if (!success) {
 				g_warning ("INSERT command failed (predecessor) %s.",
 						sql_get_last_error (data->con));
@@ -3606,16 +3606,16 @@ sql_write_tasks (SQLData *data)
 			goto out;
 		}
 	}
-	
+
 	/* Write resource assignments. */
 	for (l = tasks; l; l = l->next) {
 		task = l->data;
 
 		assignments = mrp_task_get_assignments (task);
-		
+
 		for (a = assignments; a; a = a->next) {
 			gchar tmp[G_ASCII_DTOSTR_BUF_SIZE];
-			
+
 			assignment = a->data;
 
 			resource = mrp_assignment_get_resource (assignment);
@@ -3624,15 +3624,15 @@ sql_write_tasks (SQLData *data)
 			id = get_hash_data_as_id (data->task_hash, task);
 			resource_id = get_hash_data_as_id (data->resource_hash, resource);
 
-			g_ascii_dtostr (tmp, G_ASCII_DTOSTR_BUF_SIZE, units / 100.0); 
-			
+			g_ascii_dtostr (tmp, G_ASCII_DTOSTR_BUF_SIZE, units / 100.0);
+
 			query = g_strdup_printf ("INSERT INTO allocation(task_id, res_id, units) "
 						 "VALUES(%d, %d, %s)",
 						 id, resource_id, tmp);
-			
-			success = sql_execute_command (data->con, query); 
+
+			success = sql_execute_command (data->con, query);
 			g_free (query);
-			
+
 			if (!success) {
 				g_warning ("INSERT command failed (allocation) %s.",
 						sql_get_last_error (data->con));
@@ -3640,11 +3640,11 @@ sql_write_tasks (SQLData *data)
 			}
 		}
 	}
-	
+
 	g_list_free (tasks);
-	
+
 	return TRUE;
-	
+
  out:
 	return FALSE;
 }
@@ -3682,11 +3682,11 @@ mrp_sql_save_project (MrpStorageSQL  *storage,
 	data->task_hash = g_hash_table_new (NULL, NULL);
 	data->resource_hash = g_hash_table_new (NULL, NULL);
 	data->property_type_hash = g_hash_table_new (NULL, NULL);
-	
+
 	data->project = storage->project;
 
 	db_txt = g_strdup_printf (CONNECTION_FORMAT_STRING, host, database);
-	gda_config_save_data_source (dsn_name, 
+	gda_config_save_data_source (dsn_name,
 				     provider,
 				     db_txt,
 				     "planner project", user, password, FALSE);
@@ -3695,8 +3695,8 @@ mrp_sql_save_project (MrpStorageSQL  *storage,
 	client = gda_client_new ();
 
 	data->con = gda_client_open_connection (client, dsn_name, NULL, NULL, 0, error);
-	
-	data->revision = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (data->project), 
+
+	data->revision = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (data->project),
 							     REVISION));
 
 	if (!GDA_IS_CONNECTION (data->con)) {
@@ -3715,7 +3715,7 @@ mrp_sql_save_project (MrpStorageSQL  *storage,
 	}
 	gda_dict_set_connection (data->dict, data->con);
 
-	success = sql_execute_command (data->con, "SET TIME ZONE 'UTC'"); 
+	success = sql_execute_command (data->con, "SET TIME ZONE 'UTC'");
 
 	if (!success) {
 		g_warning ("SET TIME ZONE command failed: %s.",
@@ -3759,17 +3759,17 @@ mrp_sql_save_project (MrpStorageSQL  *storage,
 	if (!sql_write_day_types (data)) {
 		g_warning ("Couldn't write day types.");
 	}
-	
+
 	/* Write calendars. */
 	if (!sql_write_calendars (data)) {
 		g_warning ("Couldn't write calendars.");
 	}
-	
+
 	/* Write project calendar id. */
 	if (!sql_write_calendar_id (data)) {
 		g_warning ("Couldn't write project calendar id.");
 	}
-	
+
 	/* Write resource groups. */
 	if (!sql_write_groups (data)) {
 		g_warning ("Couldn't write resource groups.");
@@ -3779,7 +3779,7 @@ mrp_sql_save_project (MrpStorageSQL  *storage,
 	if (!sql_write_default_group_id (data)) {
 		g_warning ("Couldn't write default groups.");
 	}
-	
+
 	/* Write resources. */
 	if (!sql_write_resources (data)) {
 		g_warning ("Couldn't write resources.");
@@ -3793,18 +3793,18 @@ mrp_sql_save_project (MrpStorageSQL  *storage,
 	sql_execute_command (data->con, "COMMIT");
 
 	d(g_print ("Write project, set rev to %d\n", data->revision));
-	
+
 	g_object_set_data (G_OBJECT (data->project), REVISION, GINT_TO_POINTER (data->revision));
 
 	*project_id = data->project_id;
-	
+
 	ret = TRUE;
-	
+
  out:
 	if (data->con) {
 		g_object_unref (data->con);
 	}
-	
+
 	/* FIXME: free more data */
 
 	g_hash_table_destroy (data->day_id_hash);
@@ -3822,9 +3822,9 @@ mrp_sql_save_project (MrpStorageSQL  *storage,
 
 	g_list_free (data->calendars);
 	g_list_free (data->tasks);
-	
+
 	g_free (data);
-	
+
 	return ret;
 }
 

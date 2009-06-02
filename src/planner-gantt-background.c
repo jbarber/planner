@@ -57,7 +57,7 @@ struct _PlannerGanttBackgroundPriv {
 	MrpProject  *project;
 	MrpCalendar *calendar;
 	mrptime      project_start;
-	
+
 	gdouble      hscale;
 	gdouble      zoom;
 	gint	     row_height;
@@ -127,7 +127,7 @@ planner_gantt_background_get_type (void)
 					       &info,
 					       0);
 	}
-	
+
 	return type;
 }
 
@@ -232,12 +232,12 @@ gantt_background_finalize (GObject *object)
 
 	background = PLANNER_GANTT_BACKGROUND (object);
 	priv = background->priv;
-	
+
 	if (priv->timeout_id) {
 		g_source_remove (priv->timeout_id);
 		priv->timeout_id = 0;
 	}
-	
+
 	g_free (priv);
 	background->priv = NULL;
 
@@ -294,7 +294,7 @@ gantt_background_set_property (GObject      *object,
 	item = GNOME_CANVAS_ITEM (object);
 	background = PLANNER_GANTT_BACKGROUND (object);
 	priv = background->priv;
-	
+
 	switch (param_id) {
 	case PROP_PROJECT:
 		if (priv->project) {
@@ -303,7 +303,7 @@ gantt_background_set_property (GObject      *object,
 				gantt_background_project_calendar_notify_cb,
 				background);
 		}
-		
+
 		priv->project = g_value_get_object (value);
 
 		g_signal_connect (priv->project,
@@ -358,7 +358,7 @@ gantt_background_update (GnomeCanvasItem *item,
 							affine,
 							clip_path,
 							flags);
-	
+
 	gantt_background_get_bounds (background, &x1, &y1, &x2, &y2);
 
 	gnome_canvas_update_bbox (item, x1, y1, x2, y2);
@@ -375,7 +375,7 @@ gantt_background_realize (GnomeCanvasItem *item)
 	priv = background->priv;
 
 	GNOME_CANVAS_ITEM_CLASS (parent_class)->realize (item);
-	
+
 	priv->fill_gc = gdk_gc_new (item->canvas->layout.bin_window);
 	gnome_canvas_get_color (item->canvas, "grey96", &color);
 	gdk_gc_set_foreground (priv->fill_gc, &color);
@@ -451,7 +451,7 @@ gantt_background_unrealize (GnomeCanvasItem *item)
 	GNOME_CANVAS_ITEM_CLASS (parent_class)->unrealize (item);
 }
 
-static gboolean 
+static gboolean
 gantt_background_update_timeline (gpointer data)
 {
 	PlannerGanttBackground     *background;
@@ -459,11 +459,11 @@ gantt_background_update_timeline (gpointer data)
 
 	background = PLANNER_GANTT_BACKGROUND (data);
 	priv = background->priv;
-	
+
 	priv->timeline = mrp_time_current_time ();
-	
+
 	gnome_canvas_item_request_update (GNOME_CANVAS_ITEM (background));
-	
+
 	return TRUE;
 }
 
@@ -478,7 +478,7 @@ gantt_background_draw (GnomeCanvasItem *item,
 	PlannerGanttBackground     *background;
 	PlannerGanttBackgroundPriv *priv;
 	gint                   cx1, cx2;  /* Canvas pixel coordinates */
-	gint                   cy1, cy2;  
+	gint                   cy1, cy2;
 	gdouble                wx1, wx2;  /* World coordinates */
 	gdouble                hscale;
 	mrptime                t0;
@@ -500,7 +500,7 @@ gantt_background_draw (GnomeCanvasItem *item,
 	}
 
 	calendar = mrp_project_get_calendar (priv->project);
-	
+
 	hscale = priv->hscale;
 	level = planner_scale_clamp_zoom (priv->zoom);
 
@@ -509,13 +509,13 @@ gantt_background_draw (GnomeCanvasItem *item,
 
 	cy1 = y;
 	cy2 = y + height;
-	
+
 	t1 = floor (wx1 / hscale + 0.5);
 	t2 = floor (wx2 / hscale + 0.5);
 
 	t0 = t1 = mrp_time_align_day (t1 - 24*60*60);
 	t2 = mrp_time_align_day (t2 + 24*60*60);
-	
+
 	/* Loop through the days between t0 and t2. */
 	while (t1 <= t2) {
 		day = mrp_calendar_get_day (calendar, t1, TRUE);
@@ -523,9 +523,9 @@ gantt_background_draw (GnomeCanvasItem *item,
 		ivals = mrp_calendar_day_get_intervals (calendar, day, TRUE);
 
 		ival_prev = t1;
-		
+
 		/* Loop through the intervals for this day. */
-		for (l = ivals; l; l = l->next) { 
+		for (l = ivals; l; l = l->next) {
 			ival = l->data;
 
 			mrp_interval_get_absolute (ival,
@@ -537,7 +537,7 @@ gantt_background_draw (GnomeCanvasItem *item,
 			 * time interval and the start of the current one,
 			 * i.e. [ival_prev, ival_start].
 			 */
-			
+
 			wx1 = ival_prev * hscale;
 			wx2 = ival_start * hscale;
 
@@ -573,10 +573,10 @@ gantt_background_draw (GnomeCanvasItem *item,
 		if (ival_prev < t1 && planner_scale_conf[level].nonworking_limit <= t1 - ival_prev) {
 			wx1 = ival_prev * hscale;
 			wx2 = t1 * hscale;
-			
+
 			gnome_canvas_w2c (item->canvas, wx1, 0, &cx1, NULL);
 			gnome_canvas_w2c (item->canvas, wx2, 0, &cx2, NULL);
-			
+
 			gdk_draw_rectangle (drawable,
 					    priv->fill_gc,
 					    TRUE,
@@ -612,13 +612,13 @@ gantt_background_draw (GnomeCanvasItem *item,
 		}
 
 	}
-	
+
 	/* Time line for project start .*/
 	wx1 = priv->project_start * hscale;
 	gnome_canvas_w2c (item->canvas, wx1, 0, &cx1, NULL);
 
 #define DASH_LENGTH 8
-	
+
 	if (priv->project_start >= t0 && priv->project_start <= t2) {
 		gint snap;
 
@@ -634,7 +634,7 @@ gantt_background_draw (GnomeCanvasItem *item,
 			       cx1 - x,
 			       cy2 + DASH_LENGTH - y);
 	}
-	
+
 	if (priv->project_start >= t0) {
 		gchar *str, *tmp;
 		gint   label_width;
@@ -649,9 +649,9 @@ gantt_background_draw (GnomeCanvasItem *item,
 		g_free (tmp);
 
 		g_free (str);
-		
+
 		pango_layout_get_pixel_size (priv->layout, &label_width, NULL);
-		
+
 		gdk_draw_layout (drawable,
 				 GTK_WIDGET (item->canvas)->style->text_gc[GTK_STATE_NORMAL],
 				 cx1 - label_width - 5 - x,
@@ -662,7 +662,7 @@ gantt_background_draw (GnomeCanvasItem *item,
 	/* Time line for current time .*/
 	if (priv->timeline >= t0 && priv->timeline <= t2) {
 		gint snap;
-		
+
 		wx1 = priv->timeline * hscale;
 		gnome_canvas_w2c (item->canvas, wx1, 0, &cx1, NULL);
 
@@ -690,7 +690,7 @@ gantt_background_project_calendar_notify_cb (MrpProject        *project,
 					     PlannerGanttBackground *background)
 {
 	MrpCalendar *calendar;
-	
+
 	calendar = mrp_project_get_calendar (project);
 
 	gantt_background_set_calendar (background, calendar);

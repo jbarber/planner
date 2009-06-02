@@ -63,9 +63,9 @@ static struct tm *mrp_time_to_tm   (mrptime    t);
  * @hour: the hour
  * @minute: the minute
  * @second: the second
- * 
+ *
  * Composes an #mrptime value from the separate components.
- * 
+ *
  * Return value: An #mrptime value.
  **/
 mrptime
@@ -93,9 +93,9 @@ mrp_time_compose (gint year,
  * @hour: location to store hour, or %NULL
  * @minute: location to store minute, or %NULL
  * @second: location to store second, or %NULL
- * 
+ *
  * Splits up an #mrptime value into its components.
- * 
+ *
  * Return value: %TRUE on success.
  **/
 gboolean
@@ -135,12 +135,12 @@ mrp_time_decompose (mrptime  t,
 	mrp_time2_get_time (&t2, hour, minute, second);
 
 	return TRUE;
-}	    
+}
 
 /**
  * mrp_time_debug_print:
  * @t: an  #mrptime
- * 
+ *
  * Prints the time on stdout, for debugging purposes.
  **/
 void
@@ -156,9 +156,9 @@ mrp_time_debug_print (mrptime t)
 /**
  * mrp_time_from_tm:
  * @tm: pointer to a struct tm time value
- * 
+ *
  * Converts a struct tm value to an #mrptime value.
- * 
+ *
  * Return value: #mrptime value.
  **/
 mrptime
@@ -171,7 +171,7 @@ mrp_time_from_tm (struct tm *tm)
 	/* This is a hack. Set the timezone to UTC temporarily. */
 	old_tz = g_strdup (g_getenv ("TZ"));
 	g_setenv ("TZ", "UTC", TRUE);
-	
+
 	t = mktime (tm);
 
 	/* And set it back. */
@@ -184,13 +184,13 @@ mrp_time_from_tm (struct tm *tm)
 	}
 
 	g_free (old_tz);
-	
+
 	return t;
 }
 
 /**
  * mrp_time_current_time:
- * 
+ *
  * Retrieves the current time as an #mrptime value.
  *
  * Return value: Current time.
@@ -209,9 +209,9 @@ mrp_time_current_time (void)
 /**
  * mrp_time_to_tm:
  * @t: an #mrptime value
- * 
+ *
  * Converts @t to a struct tm value.
- * 
+ *
  * Return value: struct tm time, which is static data and should not be
  * modified or freed.
  **/
@@ -221,7 +221,7 @@ mrp_time_to_tm (mrptime t)
 	time_t tt;
 
 	tt = t;
-	
+
 	return gmtime (&tt);
 }
 
@@ -229,9 +229,9 @@ mrp_time_to_tm (mrptime t)
  * mrp_time_from_string:
  * @str: a string with a time, ISO8601 format
  * @err: Location to store error, or %NULL
- * 
+ *
  * Parses an ISO8601 time string and converts it to an #mrptime.
- * 
+ *
  * Return value: Converted time value.
  **/
 mrptime
@@ -256,7 +256,7 @@ mrp_time_from_string (const gchar  *str,
 	} else if (len == 16) { /* UTC time, ends in 'Z' */
 		is_utc = TRUE;
 		is_date = FALSE;
-		
+
 		if (str[15] != 'Z') {
 			/*g_set_error (err,
 				     GQuark domain,
@@ -279,21 +279,21 @@ mrp_time_from_string (const gchar  *str,
 
 		return 0;
 	}
-	
+
 	if (is_date) {
 		if (sscanf (str, "%04d%02d%02d", &year, &month, &day) != 3) {
 			return 0;
 		}
 	} else {
 		gchar tsep;
-		
+
 		if (sscanf (str,"%04d%02d%02d%c%02d%02d%02d",
 			    &year, &month, &day,
 			    &tsep,
 			    &hour, &minute, &second) != 7) {
 			return 0;
 		}
-		    
+
 		if (tsep != 'T') {
 			/*g_set_error (err,
 			  GQuark domain,
@@ -302,13 +302,13 @@ mrp_time_from_string (const gchar  *str,
 			  ...);*/
 			return 0;
 		}
-		
+
 	}
 
 	/* FIXME: If we want to support reading times other than in UTC,
 	 * implement that here.
 	 */
-	
+
 	return mrp_time_compose (year,
 				 month,
 				 day,
@@ -320,9 +320,9 @@ mrp_time_from_string (const gchar  *str,
 /**
  * mrp_time_to_string:
  * @t: an #mrptime time
- * 
+ *
  * Converts a time value to an ISO8601 string.
- * 
+ *
  * Return value: Allocated string that needs to be freed.
  **/
 gchar *
@@ -338,9 +338,9 @@ mrp_time_to_string (mrptime t)
 /**
  * mrp_time_align_day:
  * @t: an #mrptime value
- * 
+ *
  * Aligns a time value to the start of the day.
- * 
+ *
  * Return value: Aligned value.
  **/
 mrptime
@@ -379,9 +379,9 @@ mrp_time_align_next (mrptime t, MrpTimeUnit unit)
 /**
  * mrp_time_day_of_week:
  * @t: an #mrptime value
- * 
+ *
  * Retrieves the day of week of the specified time.
- * 
+ *
  * Return value: The day of week, in the range 0 to 6, where Sunday is 0.
  **/
 gint
@@ -396,25 +396,25 @@ mrp_time_day_of_week (mrptime t)
 	if (weekday == 7) {
 		weekday = 0;
 	}
-	
+
 	return weekday;
 }
 
 /**
  * mrp_time_week_number:
  * @t: an #mrptime value
- * 
+ *
  * Retrieves the week number of the specified time.
- * 
+ *
  * Return value: ISO standard week number.
  **/
 gint
 mrp_time_week_number (mrptime t)
 {
 	MrpTime t2;
-	
+
 	mrp_time2_set_epoch (&t2, t);
-	
+
 	return mrp_time2_get_week_number (&t2, NULL);
 }
 
@@ -424,9 +424,9 @@ mrp_time_week_number (mrptime t)
  * @nick: nick for the propery
  * @blurb: blurb for the property
  * @flags: flags
- * 
+ *
  * Convenience function for creating a #GParamSpec carrying an #mrptime value.
- * 
+ *
  * Return value: Newly created #GparamSpec.
  **/
 GParamSpec *
@@ -445,9 +445,9 @@ mrp_param_spec_time (const gchar *name,
 /**
  * mrp_time_day_name:
  * @t: an #mrptime value
- * 
- * Retrieves the name of the day of the specified time. 
- * 
+ *
+ * Retrieves the name of the day of the specified time.
+ *
  * Return value: The day name, which is static data.
  **/
 const gchar *
@@ -458,18 +458,18 @@ mrp_time_day_name (mrptime t)
 	g_return_val_if_fail (t > 0, NULL);
 
 	g_warning ("day name");
-	
+
 	dow = mrp_time_day_of_week (t);
-	
+
 	return short_day_names[dow];
 }
 
 /**
  * mrp_time_month_name:
  * @t: an #mrptime value
- * 
+ *
  * Retrieves the name of the month of the specified time.
- * 
+ *
  * Return value: The month name, which is static data.
  **/
 const gchar *
@@ -487,9 +487,9 @@ mrp_time_month_name (mrptime t)
 /**
  * mrp_time_month_name_initial:
  * @t: an #mrptime value
- * 
+ *
  * Retrieves the initial letter for the month of the specified time.
- * 
+ *
  * Return value: The initial, which is static data.
  **/
 const gchar *
@@ -506,7 +506,7 @@ mrp_time_month_name_initial (mrptime t)
 
 /**
  * imrp_time_init:
- * 
+ *
  * Initializes the time functions. Must be called before using any mrp_
  * functions.
  **/
@@ -514,28 +514,28 @@ void
 imrp_time_init (void)
 {
 	gint i;
-	
+
 	/* Get month and day names. */
-	
+
 #ifndef WIN32
 	for (i = 0; i < 12; i++) {
 		gunichar c;
-		
+
 		short_month_names[i] = g_locale_to_utf8 (nl_langinfo (ABMON_1 + i),
 							 -1, NULL, NULL, NULL);
 		month_names[i] = g_locale_to_utf8 (nl_langinfo (MON_1 + i),
 						   -1, NULL, NULL, NULL);
-		
+
 		c = g_utf8_get_char (month_names[i]);
 		month_names_initial[i] = g_malloc0 (7);
 		g_unichar_to_utf8 (c, (char *)month_names_initial[i]);
-		
+
 	}
 
 	for (i = 0; i < 7; i++) {
 		short_day_names[i] = g_locale_to_utf8 (nl_langinfo (ABDAY_1 + i),
 						       -1, NULL, NULL, NULL);
-		
+
 		day_names[i] = g_locale_to_utf8 (nl_langinfo (DAY_1 + i),
 						 -1, NULL, NULL, NULL);
 	}
@@ -557,13 +557,13 @@ imrp_time_init (void)
 			      len);
 		short_month_names[i] = g_locale_to_utf8(buffer, -1, NULL, NULL,
 							NULL);
-		
+
 		len = GetLocaleInfo(LOCALE_USER_DEFAULT,
 				    LOCALE_SMONTHNAME1+i,
 				    NULL,
 				    0);
 		buffer = g_realloc(buffer, len);
-		
+
 		GetLocaleInfo(LOCALE_USER_DEFAULT,
 			      LOCALE_SMONTHNAME1+i,
 			      buffer,
@@ -571,17 +571,17 @@ imrp_time_init (void)
 		month_names[i] = g_locale_to_utf8(buffer, -1, NULL, NULL,
 						  NULL);
 		g_free(buffer);
-		
+
 		c = g_utf8_get_char (month_names[i]);
 		month_names_initial[i] = g_malloc0 (7);
 		g_unichar_to_utf8 (c, (char *)month_names_initial[i]);
-		
+
 	}
 
 	for (i = 0; i < 7; i++) {
 		int len;
 		gchar *buffer;
-		
+
 		len = GetLocaleInfo(LOCALE_USER_DEFAULT,
 				    LOCALE_SABBREVDAYNAME1+i,
 				    NULL,
@@ -596,7 +596,7 @@ imrp_time_init (void)
 		// we need to offset Mon-Sat and fix Sunday
 		short_day_names[i < 6 ? i + 1 : 0] = g_locale_to_utf8(buffer, -1, NULL, NULL,
 								      NULL);
-		
+
 		len = GetLocaleInfo(LOCALE_USER_DEFAULT,
 				    LOCALE_SDAYNAME1+i,
 				    NULL,
@@ -626,7 +626,7 @@ time_format_helper (const gchar *format,
 	gint  year, month, day;
 	gint  hour, min, sec;
 	gint  weekday;
-	
+
 	if (!format) {
 		return 1;
 	}
@@ -638,12 +638,12 @@ time_format_helper (const gchar *format,
 	hour = t->hour;
 	min = t->min;
 	sec = t->sec;
-	
+
 	weekday = g_date_get_weekday (&t->date);
 	if (weekday == 7) {
 		weekday = 0;
 	}
-	
+
 	while (*format) {
 		register gchar c = *format++;
 		register gint tmp;
@@ -652,11 +652,11 @@ time_format_helper (const gchar *format,
 			if (buffer) {
 				buffer[len] = c;
 			}
-			
+
 			len++;
 			continue;
 		}
-	
+
 		c = *format++;
 		switch (c) {
 		case 'a':
@@ -713,7 +713,7 @@ time_format_helper (const gchar *format,
 				buffer[len] = hour / 10 + '0';
 				buffer[len+1] = hour - 10 * (hour / 10) + '0';
 			}
-			len += 2;			
+			len += 2;
 			break;
 		case 'I':
 			/* The hour using a 12-hour clock (01 - 12). */
@@ -723,11 +723,11 @@ time_format_helper (const gchar *format,
 				if (tmp == 0) {
 					tmp = 12;
 				}
-				
+
 				buffer[len] = tmp / 10 + '0';
 				buffer[len+1] = tmp - 10 * (tmp / 10) + '0';
 			}
-			len += 2;	
+			len += 2;
 			break;
 		case 'j':
 			/* The day of the year (001 - 366). */
@@ -757,7 +757,7 @@ time_format_helper (const gchar *format,
 			if (tmp == 0) {
 				tmp = 12;
 			}
-			
+
 			if (buffer) {
 				if (tmp > 9) {
 					buffer[len] = tmp / 10 + '0';
@@ -774,7 +774,7 @@ time_format_helper (const gchar *format,
 				buffer[len] = month / 10 + '0';
 				buffer[len+1] = month - 10 * (month / 10) + '0';
 			}
-			len += 2;	
+			len += 2;
 			break;
 		case 'M':
 			/* The minute (00 - 59). */
@@ -782,7 +782,7 @@ time_format_helper (const gchar *format,
 				buffer[len] = min / 10 + '0';
 				buffer[len+1] = min - 10 * (min / 10) + '0';
 			}
-			len += 2;	
+			len += 2;
 			break;
 		case 'p':
 			/* Either 'AM' or 'PM' according  to the given time value. */
@@ -814,7 +814,7 @@ time_format_helper (const gchar *format,
 				buffer[len] = ':';
 			}
 			len++;
-			
+
 			if (buffer) {
 				buffer[len] = min / 10 + '0';
 				buffer[len+1] = min - 10 * (min / 10) + '0';
@@ -878,16 +878,16 @@ time_format_helper (const gchar *format,
 	if (buffer) {
 		buffer[len] = 0;
 	}
-	
+
 	/* Include the terminating zero. */
 	return len + 1;
 }
 
 /**
  * mrp_time_format:
- * @format: format string 
+ * @format: format string
  * @t: an #mrptime value
- * 
+ *
  * Formats a string with time values. The following format codes are allowed:
  * <informalexample><programlisting>
  * %a     The abbreviated weekday name (Mon, Tue, ...)
@@ -934,7 +934,7 @@ mrp_time_format (const gchar *format, mrptime t)
 /**
  * mrp_time_format_locale:
  * @t: an #mrptime value
- * 
+ *
  * Formats a string with time values. For format is the preferred for the
  * current locale.
  *
@@ -973,7 +973,7 @@ mrp_time2_new (void)
 	t = g_new0 (MrpTime, 1);
 
 	g_date_clear (&t->date, 1);
-	
+
 	return t;
 }
 
@@ -993,7 +993,7 @@ mrp_time2_set_date (MrpTime *t,
 	g_return_if_fail (year >= 1 && year <= 9999);
 	g_return_if_fail (month >= 1 && month <= 12);
 	g_return_if_fail (day >= 1 && day <= 31);
-	
+
 	g_date_set_dmy (&t->date, day, month, year);
 }
 
@@ -1007,7 +1007,7 @@ mrp_time2_set_time (MrpTime *t,
 	g_return_if_fail (hour >= 0 && hour < 24);
 	g_return_if_fail (min >= 0 && min < 60);
 	g_return_if_fail (sec >= 0 && sec < 60);
-	
+
 	t->hour = hour;
 	t->min = min;
 	t->sec = sec;
@@ -1023,7 +1023,7 @@ mrp_time2_get_date (MrpTime *t,
 	g_return_if_fail (year != NULL);
 	g_return_if_fail (month != NULL);
 	g_return_if_fail (day != NULL);
-	
+
 	*year = g_date_get_year (&t->date);
 	*month = g_date_get_month (&t->date);
 	*day = g_date_get_day (&t->date);
@@ -1039,7 +1039,7 @@ mrp_time2_get_time (MrpTime *t,
 	g_return_if_fail (hour != NULL);
 	g_return_if_fail (min != NULL);
 	g_return_if_fail (sec != NULL);
-	
+
 	*hour = t->hour;
 	*min = t->min;
 	*sec = t->sec;
@@ -1076,12 +1076,12 @@ void
 mrp_time2_add_seconds (MrpTime *t, gint64 secs)
 {
 	gint days;
-	
+
 	g_return_if_fail (t != NULL);
 	g_return_if_fail (secs >= 0);
 
 	secs += t->sec + SECS_IN_MIN * t->min + SECS_IN_HOUR * t->hour;
-	
+
 	/* Add whole days first. */
 	days = secs / SECS_IN_DAY;
 	secs = secs % SECS_IN_DAY;
@@ -1118,7 +1118,7 @@ void
 mrp_time2_subtract_seconds (MrpTime *t, gint64 secs)
 {
 	gint days;
-	
+
 	g_return_if_fail (t != NULL);
 	g_return_if_fail (secs >= 0);
 
@@ -1189,7 +1189,7 @@ mrp_time2_debug_print (MrpTime *t)
 	g_date_strftime (str, 128, "%04Y-%02m-%02d",
 			 &t->date);
 
-	g_print ("%s %02d:%02d:%02d\n", str, 
+	g_print ("%s %02d:%02d:%02d\n", str,
 		 t->hour,
 		 t->min,
 		 t->sec);
@@ -1217,7 +1217,7 @@ mrp_time2_set_from_string (MrpTime      *t,
 	} else if (len == 16) { /* UTC time, ends in 'Z' */
 		is_utc = TRUE;
 		is_date = FALSE;
-		
+
 		if (str[15] != 'Z') {
 			return FALSE;
 		}
@@ -1228,32 +1228,32 @@ mrp_time2_set_from_string (MrpTime      *t,
 	} else {
 		return FALSE;
 	}
-	
+
 	if (is_date) {
 		if (sscanf (str, "%04d%02d%02d", &year, &month, &day) != 3) {
 			return FALSE;
 		}
 	} else {
 		gchar tsep;
-		
+
 		if (sscanf (str,"%04d%02d%02d%c%02d%02d%02d",
 			    &year, &month, &day,
 			    &tsep,
 			    &hour, &minute, &second) != 7) {
 			return 0;
 		}
-		    
+
 		if (tsep != 'T') {
 			return FALSE;
 		}
-		
+
 	}
 
 	mrp_time2_set_date (t, year, month, day);
 	if (!is_date) {
 		mrp_time2_set_time (t, hour, minute, second);
 	}
-	
+
 	return TRUE;
 }
 
@@ -1265,7 +1265,7 @@ mrp_time2_to_string (MrpTime *t)
 	day = g_date_get_day (&t->date);
 	month = g_date_get_month (&t->date);
 	year = g_date_get_year (&t->date);
-	
+
 	return g_strdup_printf ("%04d%02d%02dT%02d%02d%02dZ",
 				year, month, day,
 				t->hour, t->min, t->sec);
@@ -1287,7 +1287,7 @@ mrp_time2_get_epoch (MrpTime *t)
 	time_t epoch;
 
 	g_date_set_dmy (&date, 1, 1, 1970);
-	
+
 	epoch = SECS_IN_DAY * g_date_days_between (&date, &t->date);
 
 	epoch += t->hour * SECS_IN_HOUR + t->min * SECS_IN_MIN + t->sec;
@@ -1299,7 +1299,7 @@ const gchar *
 mrp_time2_get_day_name (MrpTime *t)
 {
 	GDateWeekday day;
-	
+
 	g_return_val_if_fail (t != NULL, NULL);
 
 	day = g_date_get_weekday (&t->date);
@@ -1307,8 +1307,8 @@ mrp_time2_get_day_name (MrpTime *t)
 	/* Weekday is mon-sun 1-7, while the array is sun-sat 0-6. */
 	if (day == 7) {
 		day = 0;
-	}	
-	
+	}
+
 	return short_day_names[day];
 }
 
@@ -1336,7 +1336,7 @@ stolen_g_date_get_iso8601_week_of_year (const GDate *d)
 
   /* Formula taken from the Calendar FAQ; the formula was for the
    * Julian Period which starts on 1 January 4713 BC, so we add
-   * 1,721,425 to the number of days before doing the formula. 
+   * 1,721,425 to the number of days before doing the formula.
    */
   j  = g_date_get_julian (d) + 1721425;
   d4 = (j + 31741 - (j % 7)) % 146097 % 36524 % 1461;
@@ -1357,12 +1357,12 @@ mrp_time2_get_week_number (MrpTime *t, gint *y)
 
 	week = stolen_g_date_get_iso8601_week_of_year (&t->date);
 
-	/* Calculate the year this week belongs to as it can be different than 
+	/* Calculate the year this week belongs to as it can be different than
 	 * the year of the date (e.g. December 31 2002 is in week 1 of 2003).
 	 */
 	if(y != NULL) {
 		year = g_date_get_year (&t->date);
-  
+
 		switch(g_date_get_month (&t->date)) {
 		case G_DATE_JANUARY:
 			if(week > 50) {
@@ -1388,9 +1388,9 @@ mrp_time2_align_prev (MrpTime *t, MrpTimeUnit unit)
 {
 	GDateWeekday weekday;
 	GDateMonth   month;
-	
+
 	g_return_if_fail (t != NULL);
-	
+
 	switch (unit) {
 	case MRP_TIME_UNIT_HOUR:
 		t->min = 0;
@@ -1406,7 +1406,7 @@ mrp_time2_align_prev (MrpTime *t, MrpTimeUnit unit)
 			t->hour = 0;
 		}
 		break;
-		
+
 	case MRP_TIME_UNIT_HALFDAY:
 		if (t->hour < 12) {
 			t->hour = 0;
@@ -1416,7 +1416,7 @@ mrp_time2_align_prev (MrpTime *t, MrpTimeUnit unit)
 		t->min = 0;
 		t->sec = 0;
 		break;
-		
+
 	case MRP_TIME_UNIT_DAY:
 		t->hour = 0;
 		t->min = 0;
@@ -1458,7 +1458,7 @@ mrp_time2_align_prev (MrpTime *t, MrpTimeUnit unit)
 			g_date_set_month (&t->date, 10);
 		}
 		break;
-		
+
 	case MRP_TIME_UNIT_HALFYEAR:
 		g_date_set_day (&t->date, 1);
 		t->hour = 0;
@@ -1490,7 +1490,7 @@ mrp_time2_align_next (MrpTime *t, MrpTimeUnit unit)
 {
 	GDateWeekday weekday;
 	GDateMonth   month;
-	
+
 	g_return_if_fail (t != NULL);
 
 	switch (unit) {
@@ -1516,14 +1516,14 @@ mrp_time2_align_next (MrpTime *t, MrpTimeUnit unit)
 			mrp_time2_add_days (t, 1);
 		}
 		break;
-		
+
 	case MRP_TIME_UNIT_DAY:
 		t->hour = 0;
 		t->min = 0;
 		t->sec = 0;
 		mrp_time2_add_days (t, 1);
 		break;
-		
+
 	case MRP_TIME_UNIT_WEEK:
 		/* FIXME: We currently hardcode monday as week start .*/
 		weekday = g_date_get_weekday (&t->date);
@@ -1561,7 +1561,7 @@ mrp_time2_align_next (MrpTime *t, MrpTimeUnit unit)
 			g_date_add_years (&t->date, 1);
 		}
 		break;
-		
+
 	case MRP_TIME_UNIT_HALFYEAR:
 		g_date_set_day (&t->date, 1);
 		t->hour = 0;
@@ -1575,7 +1575,7 @@ mrp_time2_align_next (MrpTime *t, MrpTimeUnit unit)
 			g_date_add_years (&t->date, 1);
 		}
 		break;
-		
+
 	case MRP_TIME_UNIT_YEAR:
 		t->hour = 0;
 		t->min = 0;

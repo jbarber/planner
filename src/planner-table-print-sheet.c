@@ -49,7 +49,7 @@ typedef struct {
 typedef struct {
 	GtkTreeViewColumn   *tree_column;
 	gchar               *name;
-	
+
 	gdouble              width;
 
 	gboolean             expander_column;
@@ -111,8 +111,8 @@ static void         table_print_sheet_fill_page         (PlannerTablePrintSheet 
 
 
 static void
-table_print_sheet_print_header_cell (PlannerTablePrintSheet *sheet, 
-				     PrintColumn            *column, 
+table_print_sheet_print_header_cell (PlannerTablePrintSheet *sheet,
+				     PrintColumn            *column,
 				     PrintRow               *row,
 				     gdouble                 x,
 				     gdouble                 y)
@@ -122,17 +122,17 @@ table_print_sheet_print_header_cell (PlannerTablePrintSheet *sheet,
 
 	text_x = x + sheet->x_pad;
 	text_y = y + TEXT_IN_CELL_MULTI * row->height;
-	
+
 	planner_print_job_set_font_bold (sheet->job);
-	
+
 	planner_print_job_text (sheet->job, text_x, text_y, column->name);
-	
+
 	planner_print_job_set_font_regular (sheet->job);
 }
 
 static void
 table_print_sheet_print_cell (PlannerTablePrintSheet *sheet,
-			      PrintColumn            *column, 
+			      PrintColumn            *column,
 			      PrintRow               *row,
 			      gdouble                 x,
 			      gdouble                 y)
@@ -144,7 +144,7 @@ table_print_sheet_print_cell (PlannerTablePrintSheet *sheet,
 	GtkTreeIter      iter;
 	GtkCellRenderer *cell;
 	PangoWeight      weight;
-	gint             depth = 0; 
+	gint             depth = 0;
 
 	if (row->header) {
 		table_print_sheet_print_header_cell (sheet, column, row, x, y);
@@ -155,18 +155,18 @@ table_print_sheet_print_cell (PlannerTablePrintSheet *sheet,
 	if (column->expander_column) {
 		depth = gtk_tree_path_get_depth (row->path);
 	}
-	
+
 	model = gtk_tree_view_get_model (sheet->tree_view);
 	gtk_tree_model_get_iter (model, &iter, row->path);
-	
-	(* column->data_func) (column->tree_column, 
+
+	(* column->data_func) (column->tree_column,
 			       cell,
 			       model,
-			       &iter, 
+			       &iter,
 			       column->user_data);
 
 	g_object_get (cell,
-		      "text", &str, 
+		      "text", &str,
 		      "weight", &weight,
 		      NULL);
 	g_object_ref_sink (cell);
@@ -175,19 +175,19 @@ table_print_sheet_print_cell (PlannerTablePrintSheet *sheet,
 	if (!str) {
 		return;
 	}
-	
+
 	if (weight == PANGO_WEIGHT_BOLD) {
 		planner_print_job_set_font_bold (sheet->job);
-	} 
+	}
 
 	d(g_print ("Writing: [%s]\n", str));
 
 	text_x = x + sheet->x_pad + INDENT_FACTOR * depth;
 	text_y = y + TEXT_IN_CELL_MULTI * row->height;
-	
+
 	planner_print_job_text (sheet->job, text_x, text_y, str);
 	g_free (str);
-		
+
 	planner_print_job_set_font_regular (sheet->job);
 }
 
@@ -196,7 +196,7 @@ table_print_sheet_print_page (PlannerTablePrintSheet *sheet, PrintPage *page)
 {
 	GSList  *r, *c;
 	gdouble  x = 0, y = 0;
-	
+
 	planner_print_job_begin_next_page (sheet->job);
 
 	cairo_set_line_width (sheet->job->cr, THIN_LINE_WIDTH);
@@ -208,15 +208,15 @@ table_print_sheet_print_page (PlannerTablePrintSheet *sheet, PrintPage *page)
 						      PRINT_ROW (r->data),
 						      x, y);
 			x += PRINT_COL (c->data)->width;
-			planner_print_job_moveto (sheet->job, 
-					     x, y); 
-			planner_print_job_lineto (sheet->job, 
+			planner_print_job_moveto (sheet->job,
+					     x, y);
+			planner_print_job_lineto (sheet->job,
 					     x,
 					     y + PRINT_ROW (r->data)->height);
 			cairo_stroke (sheet->job->cr);
 		}
 
-		
+
 		y += PRINT_ROW (r->data)->height;
 		planner_print_job_moveto (sheet->job, 0, y);
 		planner_print_job_lineto (sheet->job, x, y);
@@ -235,27 +235,27 @@ table_print_sheet_create_column (PlannerTablePrintSheet *sheet,
 {
 	PrintColumn *column;
 	gdouble ext;
-	
+
 	column = g_new0 (PrintColumn, 1);
-	
+
 	column->tree_column = tree_column;
 	column->expander_column = expander_column;
 	column->name = g_strdup (gtk_tree_view_column_get_title (tree_column));
 	planner_print_job_set_font_bold (sheet->job);
 	ext = planner_print_job_get_extents (sheet->job, column->name);
 	column->width = ext + 3 * sheet->x_pad;
-	
+
 	column->data_func = g_object_get_data (G_OBJECT (tree_column),
 					       "data-func");
 	column->user_data = g_object_get_data (G_OBJECT (tree_column),
 					       "user-data");
-	
+
 	return column;
 }
 
 static gboolean
 table_print_sheet_foreach_row (GtkTreeModel *model,
-			       GtkTreePath  *path, 
+			       GtkTreePath  *path,
 			       GtkTreeIter  *iter,
 			       gpointer      user_data)
 {
@@ -267,9 +267,9 @@ table_print_sheet_foreach_row (GtkTreeModel *model,
 	GtkTreeIter             parent_iter;
 	GtkTreePath            *parent_path = NULL;
 	gdouble                 ext;
-	
+
 	d(g_print ("%s\n", gtk_tree_path_to_string (path)));
-	
+
 	depth = gtk_tree_path_get_depth (path);
 
 	if (gtk_tree_model_iter_parent (model, &parent_iter, iter)) {
@@ -283,9 +283,9 @@ table_print_sheet_foreach_row (GtkTreeModel *model,
 		row->path   = gtk_tree_path_copy (path);
 		row->height = sheet->row_height;
 		row->header = FALSE;
-		
+
 		sheet->rows = g_slist_prepend (sheet->rows, row);
-	
+
 		cell  = gtk_cell_renderer_text_new ();
 
 		/* Loop through the columns to update widths */
@@ -293,7 +293,7 @@ table_print_sheet_foreach_row (GtkTreeModel *model,
 			PrintColumn *column = PRINT_COL (l->data);
 			gchar       *str;
 			gdouble      extra = 3 * sheet->x_pad;
-			
+
 			(* column->data_func) (column->tree_column,
 					       cell,
 					       model,
@@ -311,7 +311,7 @@ table_print_sheet_foreach_row (GtkTreeModel *model,
 			if(str) {
 				ext = planner_print_job_get_extents (sheet->job, str);
 			}
-			column->width = MAX (column->width, 
+			column->width = MAX (column->width,
 					     ext
 					     + extra);
 /* 		d(g_print ("New width: %f\n", column->width)); */
@@ -324,7 +324,7 @@ table_print_sheet_foreach_row (GtkTreeModel *model,
 	if (parent_path) {
 		gtk_tree_path_free (parent_path);
 	}
-	
+
 	return FALSE;
 }
 
@@ -334,7 +334,7 @@ table_print_sheet_create_pages (PlannerTablePrintSheet *sheet)
 	GSList    *l, *p = NULL;
 	PrintPage *page = NULL;
 	GSList    *rows, *page_row;
-	
+
 	sheet->pages = NULL;
 
 	page = g_new0 (PrintPage, 1);
@@ -343,7 +343,7 @@ table_print_sheet_create_pages (PlannerTablePrintSheet *sheet)
 	page->columns = NULL;
 	page->rows    = NULL;
 	d(g_print ("sheet_create_pages: Adding a page\n"));
-	
+
 	sheet->pages = g_slist_prepend (sheet->pages, page);
 
 	/* Create pages for all columns */
@@ -352,15 +352,15 @@ table_print_sheet_create_pages (PlannerTablePrintSheet *sheet)
 
 		if ((column->width + page->width) > sheet->page_width) {
 			d(g_print ("Switching page: %f > %f\n",
-				   column->width + page->width, 
+				   column->width + page->width,
 				   sheet->page_width));
-			
+
 			if (p) {
 				p->next = NULL;
 			}
-			
+
 			table_print_sheet_fill_page (sheet, page);
-			
+
 			page          = g_new0 (PrintPage, 1);
 			page->height  = 0;
 			page->width   = 0;
@@ -380,11 +380,11 @@ table_print_sheet_create_pages (PlannerTablePrintSheet *sheet)
 
 	page_row = g_slist_copy (sheet->pages);
 	rows = table_print_sheet_add_row_of_pages (sheet,
-						   page_row, 
+						   page_row,
 						   rows,
 						   FALSE);
 	while (rows) {
-		rows = table_print_sheet_add_row_of_pages (sheet, page_row, 
+		rows = table_print_sheet_add_row_of_pages (sheet, page_row,
 							   rows, TRUE);
 	}
 	g_slist_free (page_row);
@@ -403,12 +403,12 @@ table_print_sheet_add_row_of_pages (PlannerTablePrintSheet *sheet,
 
 	for (l = rows; l; l = l->next) {
 		PrintRow *row = PRINT_ROW (l->data);
-		
+
 		if (added_height + row->height > sheet->page_height) {
 			ret_val = l;
 			break;
 		}
-		
+
 		added_height += row->height;
 		added_rows = g_slist_prepend (added_rows, l->data);
 	}
@@ -416,14 +416,14 @@ table_print_sheet_add_row_of_pages (PlannerTablePrintSheet *sheet,
 	if (!l) {
 		ret_val = NULL;
 	}
-	
+
 	added_rows = g_slist_reverse (added_rows);
 
 	for (l = page_row; l; l = l->next) {
 		PrintPage *page = PRINT_PAGE (l->data);
 		if (new_row) {
 			PrintPage *new_page;
-			
+
 			new_page = g_new0 (PrintPage, 1);
 			new_page->columns = g_slist_copy (page->columns);
 			new_page->rows    = g_slist_copy (added_rows);
@@ -450,23 +450,23 @@ table_print_sheet_fill_page (PlannerTablePrintSheet *sheet, PrintPage *page)
 	gdouble  extra;
 	gdouble  extra_per_column;
 	gint     columns;
-	
+
 	d(g_print ("Fill page\n"));
 
 	extra            = sheet->page_width - page->width;
 	columns          = g_slist_length (page->columns);
 	extra_per_column = extra / columns;
-	
+
 	for (l = page->columns; l; l = l->next) {
 		PrintColumn *column = PRINT_COL (l->data);
-		
+
 		column->width += extra_per_column;
 	}
 }
 
 PlannerTablePrintSheet *
-planner_table_print_sheet_new (PlannerView     *view, 
-			       PlannerPrintJob *job, 
+planner_table_print_sheet_new (PlannerView     *view,
+			       PlannerPrintJob *job,
 			       GtkTreeView     *tree_view)
 {
 	PlannerTablePrintSheet *sheet;
@@ -474,7 +474,7 @@ planner_table_print_sheet_new (PlannerView     *view,
 	GList                  *tree_columns, *l;
 	PrintRow               *row;
 	gboolean                expander_column;
- 
+
 	sheet = g_new0 (PlannerTablePrintSheet, 1);
 
 	sheet->view        = view;
@@ -495,24 +495,24 @@ planner_table_print_sheet_new (PlannerView     *view,
 	sheet->rows = g_slist_prepend (NULL, row);
 
 	model = gtk_tree_view_get_model (tree_view);
-	
+
 	/* Create all the columns */
 	tree_columns = gtk_tree_view_get_columns (tree_view);
 	for (l = tree_columns; l; l = l->next) {
 		PrintColumn       *column;
 		GtkTreeViewColumn *tree_column;
-		
+
 		tree_column = GTK_TREE_VIEW_COLUMN (l->data);
 		if (!gtk_tree_view_column_get_visible (tree_column)) {
 			continue;
 		}
-		
+
 		if (tree_column == gtk_tree_view_get_expander_column (tree_view)) {
 			expander_column = TRUE;
 		} else {
 			expander_column = FALSE;
 		}
-		
+
 		column = table_print_sheet_create_column (sheet,
 							  tree_column,
 							  expander_column);
@@ -521,9 +521,9 @@ planner_table_print_sheet_new (PlannerView     *view,
 	}
 	g_list_free (tree_columns);
 	sheet->columns = g_slist_reverse (sheet->columns);
-	
+
 	/* Create the rows and calculate column widths */
-	gtk_tree_model_foreach (model, 
+	gtk_tree_model_foreach (model,
 				table_print_sheet_foreach_row,
 				sheet);
 
@@ -535,13 +535,13 @@ planner_table_print_sheet_new (PlannerView     *view,
 	sheet->rows = g_slist_reverse (sheet->rows);
 
 	table_print_sheet_create_pages (sheet);
-	
+
 	return sheet;
 }
 
 void
-planner_table_print_sheet_output (PlannerTablePrintSheet *sheet, 
-				  gint page_nr) 
+planner_table_print_sheet_output (PlannerTablePrintSheet *sheet,
+				  gint page_nr)
 {
 	PrintPage *page = PRINT_PAGE(g_slist_nth_data (sheet->pages, page_nr));
 	g_assert(page != NULL);
@@ -552,7 +552,7 @@ gint
 planner_table_print_sheet_get_n_pages (PlannerTablePrintSheet *sheet)
 {
 	d(g_print ("Number of pages: %d\n", g_slist_length (sheet->pages)));
-	
+
 	return g_slist_length (sheet->pages);
 }
 
@@ -574,14 +574,14 @@ planner_table_print_sheet_free (PlannerTablePrintSheet *sheet)
 
 	for (l = sheet->columns; l; l = l->next) {
 		PrintColumn *column = PRINT_COL (l->data);
-		
+
 		g_free (column->name);
 		g_free (column);
 	}
 
 	for (l = sheet->rows; l; l = l->next) {
 		PrintRow *row = PRINT_ROW (l->data);
-		
+
 		if (row->path) {
 			gtk_tree_path_free (row->path);
 		}

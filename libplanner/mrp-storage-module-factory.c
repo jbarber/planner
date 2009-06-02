@@ -55,12 +55,12 @@ mrp_storage_module_factory_get_type (void)
 			(GInstanceInitFunc) storage_module_factory_init,
 		};
 
-		object_type = 
-			g_type_register_static (G_TYPE_TYPE_MODULE, 
-						"MrpStorageModuleFactory", 
+		object_type =
+			g_type_register_static (G_TYPE_TYPE_MODULE,
+						"MrpStorageModuleFactory",
 						&object_info, 0);
 	}
-	
+
 	return object_type;
 }
 
@@ -87,20 +87,20 @@ storage_module_factory_load (GTypeModule *module)
 	MrpStorageModuleFactory *factory = MRP_STORAGE_MODULE_FACTORY (module);
 
 	/*g_print ("Load '%s'\n", factory->name);*/
-	
+
 	factory->library = g_module_open (factory->name, 0);
 	if (!factory->library) {
 		g_warning (g_module_error ());
 		return FALSE;
 	}
-  
+
 	/* These must be implemented by all storage modules. */
 	if (!g_module_symbol (factory->library, "module_init", (gpointer)&factory->init) ||
 	    !g_module_symbol (factory->library, "module_new", (gpointer)&factory->new) ||
 	    !g_module_symbol (factory->library, "module_exit", (gpointer)&factory->exit)) {
 		g_warning (g_module_error ());
 		g_module_close (factory->library);
-		
+
 		return FALSE;
 	}
 
@@ -121,7 +121,7 @@ storage_module_factory_unload (GTypeModule *module)
 
 	g_module_close (factory->library);
 	factory->library = NULL;
-	
+
 	factory->init = NULL;
 	factory->exit = NULL;
 }
@@ -138,7 +138,7 @@ mrp_storage_module_factory_get (const gchar *name)
 	path = mrp_paths_get_storagemodule_dir (NULL);
 	libname = g_module_build_path (path, fullname);
 	g_free (path);
-	
+
 	if (!module_hash) {
 		module_hash = g_hash_table_new (g_str_hash, g_str_equal);
 	}
@@ -149,12 +149,12 @@ mrp_storage_module_factory_get (const gchar *name)
 		factory = g_object_new (MRP_TYPE_STORAGE_MODULE_FACTORY, NULL);
 		g_type_module_set_name (G_TYPE_MODULE (factory), libname);
 		factory->name = libname;
-		
+
 		g_hash_table_insert (module_hash, factory->name, factory);
 	}
 
 	g_free (fullname);
-		
+
 	if (!g_type_module_use (G_TYPE_MODULE (factory))) {
 		return NULL;
 	}
@@ -168,7 +168,7 @@ mrp_storage_module_factory_create_module (MrpStorageModuleFactory *factory)
 	MrpStorageModule *module;
 
 	module = factory->new ();
-	
+
 	return module;
 }
 

@@ -52,17 +52,17 @@ static gboolean xml_planner_pre012_write (MrpFileWriter   *writer,
 					  GError         **error);
 
 
-static void xslt_module_gettext		(xmlXPathParserContextPtr ctxt,	
+static void xslt_module_gettext		(xmlXPathParserContextPtr ctxt,
 					int argc);
 
-static void xslt_module_getdate		(xmlXPathParserContextPtr ctxt,	
+static void xslt_module_getdate		(xmlXPathParserContextPtr ctxt,
 					int argc);
 
-static void xslt_module_shutdown	(xsltTransformContextPtr ctxt, 
-					const xmlChar *uri, 
+static void xslt_module_shutdown	(xsltTransformContextPtr ctxt,
+					const xmlChar *uri,
 					void *data);
 
-static void * xslt_module_init		(xsltTransformContextPtr ctxt, 
+static void * xslt_module_init		(xsltTransformContextPtr ctxt,
 					const xmlChar *uri);
 
 extern mrptime    			mrp_time_from_tm (struct tm *tm);
@@ -109,10 +109,10 @@ xslt_module_init (xsltTransformContextPtr ctxt, const xmlChar *uri)
 	xsltRegisterExtFunction (ctxt, (const xmlChar *)"getdate", uri,
 		xslt_module_getdate);
 
-	return NULL;    
+	return NULL;
 }
 
-				 
+
 static gboolean
 html_write (MrpFileWriter  *writer,
 	    MrpProject     *project,
@@ -136,9 +136,9 @@ html_write (MrpFileWriter  *writer,
         xmlLoadExtDtdDefaultValue = 1;
         exsltRegisterAll ();
 
-	xsltRegisterExtModule((const xmlChar *)"http://www.gnu.org/software/gettext/",	
+	xsltRegisterExtModule((const xmlChar *)"http://www.gnu.org/software/gettext/",
                                  xslt_module_init, xslt_module_shutdown);
-	
+
 	filename = mrp_paths_get_stylesheet_dir ("planner2html.xsl");
         stylesheet = xsltParseStylesheetFile (filename);
 	g_free (filename);
@@ -157,13 +157,13 @@ html_write (MrpFileWriter  *writer,
 			     _("Export to HTML failed"));
 		ret = FALSE;
 	}
-	
+
 	xsltFreeStylesheet (stylesheet);
         xmlFree (final_doc);
-	
+
 	return ret;
 }
-				 
+
 static gboolean
 xml_planner_pre012_write (MrpFileWriter  *writer,
 			  MrpProject     *project,
@@ -181,7 +181,7 @@ xml_planner_pre012_write (MrpFileWriter  *writer,
 	if (!mrp_project_save_to_xml (project, &xml_project, error)) {
 		return FALSE;
 	}
-	
+
         /* libxml housekeeping */
         xmlSubstituteEntitiesDefault(1);
         xmlLoadExtDtdDefaultValue = 1;
@@ -194,7 +194,7 @@ xml_planner_pre012_write (MrpFileWriter  *writer,
         doc = xmlParseMemory (xml_project, strlen (xml_project));
         final_doc = xsltApplyStylesheet (stylesheet, doc, NULL);
         xmlFree (doc);
-                                                                                
+
 	ret = TRUE;
 
 	if (!final_doc ||
@@ -205,7 +205,7 @@ xml_planner_pre012_write (MrpFileWriter  *writer,
 			     _("Export to HTML failed"));
 		ret = FALSE;
 	}
-	
+
 	xsltFreeStylesheet (stylesheet);
         xmlFree (final_doc);
 
@@ -216,16 +216,16 @@ G_MODULE_EXPORT void
 init (MrpFileModule *module, MrpApplication *application)
 {
         MrpFileWriter *writer;
-        
+
         writer = g_new0 (MrpFileWriter, 1);
-	
+
 	/* The HTML writer registration */
 
         writer->module     = module;
 	writer->identifier = "Planner HTML";
 	writer->mime_type  = "text/html";
         writer->priv       = NULL;
-	
+
         writer->write      = html_write;
 
         imrp_application_register_writer (application, writer);
@@ -233,12 +233,12 @@ init (MrpFileModule *module, MrpApplication *application)
 	/* The older Planner/Mrproject writer registration */
 
 	writer             = g_new0 (MrpFileWriter, 1);
-	
+
 	writer->module     = module;
 	writer->identifier = "Planner XML pre-0.12";  /* Don't change unless you change plugin to match */
 	writer->mime_type  = "text/xml";
         writer->priv       = NULL;
-	
+
         writer->write      = xml_planner_pre012_write;
 
         imrp_application_register_writer (application, writer);

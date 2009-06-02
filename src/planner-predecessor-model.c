@@ -57,7 +57,7 @@ GType
 planner_predecessor_model_get_type (void)
 {
         static GType type = 0;
-        
+
         if (!type) {
                 static const GTypeInfo info = {
                                 sizeof (PlannerPredecessorModelClass),
@@ -75,7 +75,7 @@ planner_predecessor_model_get_type (void)
 					       "PlannerPredecessorModel",
 					       &info, 0);
         }
-        
+
         return type;
 }
 
@@ -84,11 +84,11 @@ mpm_class_init (PlannerPredecessorModelClass *klass)
 {
         GObjectClass     *object_class;
 	PlannerListModelClass *lm_class;
-	
+
         parent_class = g_type_class_peek_parent (klass);
         object_class = G_OBJECT_CLASS (klass);
 	lm_class     = PLANNER_LIST_MODEL_CLASS (klass);
-	
+
         object_class->finalize = mpm_finalize;
 
         lm_class->get_n_columns   = mpm_get_n_columns;
@@ -100,7 +100,7 @@ static void
 mpm_init (PlannerPredecessorModel *model)
 {
         PlannerPredecessorModelPriv *priv;
-        
+
         priv = g_new0 (PlannerPredecessorModelPriv, 1);
 
 	priv->project = NULL;
@@ -124,7 +124,7 @@ mpm_finalize (GObject *object)
                 g_free (model->priv);
                 model->priv = NULL;
         }
-        
+
 	if (G_OBJECT_CLASS (parent_class)->finalize) {
 		(* G_OBJECT_CLASS (parent_class)->finalize) (object);
 	}
@@ -157,17 +157,17 @@ mpm_get_value (GtkTreeModel *tree_model,
                GtkTreeIter  *iter,
                gint          column,
                GValue       *value)
-{	
+{
 	PlannerPredecessorModel     *model;
 	MrpTask                *task;
 	MrpRelation            *relation;
 	PlannerPredecessorModelPriv *priv;
 	gchar                  *str;
-	
+
         g_return_if_fail (PLANNER_IS_PREDECESSOR_MODEL (tree_model));
         g_return_if_fail (iter != NULL);
 
-	model = PLANNER_PREDECESSOR_MODEL (tree_model);	
+	model = PLANNER_PREDECESSOR_MODEL (tree_model);
 	priv = model->priv;
 	task = G_LIST (iter->user_data)->data;
 	relation = mrp_task_get_relation (priv->task, task);
@@ -200,7 +200,7 @@ mpm_get_value (GtkTreeModel *tree_model,
 			g_value_set_string (value, _("SF"));
 			break;
 		default:
-			g_warning("Unknown relation type %d", 
+			g_warning("Unknown relation type %d",
 				  mrp_relation_get_relation_type (relation));
 		}
 		break;
@@ -227,12 +227,12 @@ mpm_predecessor_notify_cb (MrpTask            *task,
 }
 
 static void
-mpm_relation_added_cb (MrpProject         *project, 
+mpm_relation_added_cb (MrpProject         *project,
 		       MrpRelation        *relation,
 		       PlannerPredecessorModel *model)
 {
 	MrpTask *predecessor;
-	
+
 	g_return_if_fail (PLANNER_IS_PREDECESSOR_MODEL (model));
 
 	predecessor = mrp_relation_get_predecessor (relation);
@@ -243,18 +243,18 @@ mpm_relation_added_cb (MrpProject         *project,
 	if (model->priv->task == predecessor) {
 		return;
 	}
-	
+
 	planner_list_model_append (PLANNER_LIST_MODEL (model),
 			      MRP_OBJECT (predecessor));
 
-	g_signal_connect_object (predecessor, 
+	g_signal_connect_object (predecessor,
 				 "notify",
 				 G_CALLBACK (mpm_predecessor_notify_cb),
 				 model, 0);
 }
 
 static void
-mpm_relation_removed_cb (MrpProject         *project, 
+mpm_relation_removed_cb (MrpProject         *project,
 			 MrpRelation        *relation,
 			 PlannerPredecessorModel *model)
 {
@@ -274,14 +274,14 @@ mpm_relation_removed_cb (MrpProject         *project,
 	planner_list_model_remove (PLANNER_LIST_MODEL (model),
 			      MRP_OBJECT (predecessor));
 
-	g_signal_handlers_disconnect_by_func (predecessor, 
+	g_signal_handlers_disconnect_by_func (predecessor,
 					      mpm_predecessor_notify_cb,
 					      model);
 }
 
-static void 
+static void
 mpm_predecessor_changed_cb (MrpRelation *relation, GParamSpec *pspec,
-			    PlannerPredecessorModel *model)      
+			    PlannerPredecessorModel *model)
 {
 	MrpTask *predecessor;
 
@@ -323,7 +323,7 @@ planner_predecessor_model_new (MrpTask *task)
         model = g_object_new (PLANNER_TYPE_PREDECESSOR_MODEL, NULL);
         priv = model->priv;
 
-        priv->task = g_object_ref (task); 
+        priv->task = g_object_ref (task);
 
 	g_object_get (priv->task, "project", &priv->project, NULL);
 
@@ -336,8 +336,8 @@ planner_predecessor_model_new (MrpTask *task)
 		predecessor = mrp_relation_get_predecessor (relation);
 
 		tasks = g_list_prepend (tasks, predecessor);
-		
-		g_signal_connect_object (predecessor, 
+
+		g_signal_connect_object (predecessor,
 					 "notify",
 					 G_CALLBACK (mpm_predecessor_notify_cb),
 					 model, 0);
@@ -354,7 +354,7 @@ planner_predecessor_model_new (MrpTask *task)
 				 "relation-added",
 				 G_CALLBACK (mpm_relation_added_cb),
 				 model, 0);
-	
+
 	g_signal_connect_object (priv->task,
 				 "relation-removed",
 				 G_CALLBACK (mpm_relation_removed_cb),

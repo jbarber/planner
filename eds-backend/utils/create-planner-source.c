@@ -30,8 +30,8 @@ static GMainLoop   *main_loop;
 static char        *planner_file;
 
 static void
-add_planner_file (const gchar *conf_key, 
-		  const gchar *uri) 
+add_planner_file (const gchar *conf_key,
+		  const gchar *uri)
 {
 	ESourceList  *source_list;
 	ESourceGroup *group;

@@ -65,8 +65,8 @@ mrp_application_get_type (void)
 			(GInstanceInitFunc) application_init,
 		};
 
-		type = g_type_register_static (G_TYPE_OBJECT, 
-					       "MrpApplication", 
+		type = g_type_register_static (G_TYPE_OBJECT,
+					       "MrpApplication",
 					       &info, 0);
 	}
 
@@ -79,13 +79,13 @@ application_class_init (MrpApplicationClass *klass)
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
 	parent_class = G_OBJECT_CLASS (g_type_class_peek_parent (klass));
-	
+
 	object_class->finalize = application_finalize;
 
 	data_hash = g_hash_table_new (NULL, NULL);
 
 	last_used_id = 0;
-	
+
 }
 
 static void
@@ -107,7 +107,7 @@ application_init (MrpApplication *app)
 
 	application_init_gettext ();
 	application_init_file_modules (app);
-	
+
 	first = FALSE;
 }
 
@@ -143,9 +143,9 @@ imrp_application_register_reader (MrpApplication *app, MrpFileReader *reader)
 
 	g_return_if_fail (MRP_IS_APPLICATION (app));
 	g_return_if_fail (reader != NULL);
-	
+
 	priv = app->priv;
-	
+
 	priv->file_readers = g_list_prepend (priv->file_readers, reader);
 }
 
@@ -156,31 +156,31 @@ imrp_application_register_writer (MrpApplication *app, MrpFileWriter *writer)
 
 	g_return_if_fail (MRP_IS_APPLICATION (app));
 	g_return_if_fail (writer != NULL);
-	
+
 	priv = app->priv;
-	
+
 	priv->file_writers = g_list_prepend (priv->file_writers, writer);
 }
 
-GList *         
+GList *
 imrp_application_get_all_file_readers (MrpApplication *app)
 {
 	MrpApplicationPriv *priv;
 
 	g_return_val_if_fail (MRP_IS_APPLICATION (app), NULL);
-	
+
 	priv = app->priv;
 
 	return priv->file_readers;
 }
 
-GList *         
+GList *
 imrp_application_get_all_file_writers (MrpApplication *app)
 {
 	MrpApplicationPriv *priv;
 
 	g_return_val_if_fail (MRP_IS_APPLICATION (app), NULL);
-	
+
 	priv = app->priv;
 
 	return priv->file_writers;
@@ -188,9 +188,9 @@ imrp_application_get_all_file_writers (MrpApplication *app)
 
 /**
  * mrp_application_new:
- * 
+ *
  * Creates a new #MrpApplication.
- * 
+ *
  * Return value: the newly created application
  **/
 MrpApplication *
@@ -201,12 +201,12 @@ mrp_application_new (void)
 
 /**
  * mrp_application_get_unique_id:
- * 
+ *
  * Returns a unique identifier in the #MrpApplication namespace.
- * 
+ *
  * Return value: the unique id
  **/
-guint 
+guint
 mrp_application_get_unique_id (void)
 {
 	return ++last_used_id;
@@ -214,9 +214,9 @@ mrp_application_get_unique_id (void)
 
 /**
  * imrp_application_id_set_data:
- * 
+ *
  * Set the data unique identifier for a data
- * 
+ *
  * Return value: TRUE if the change has been done
  **/
 gboolean
@@ -234,10 +234,10 @@ imrp_application_id_set_data (gpointer data,
 
 /**
  * mrp_application_id_get_data:
- * 
+ *
  * Get the object reference in the list of MrpObjects
  * using the object_id as locator
- * 
+ *
  * Return value: a pointer to the data
  **/
 gpointer
@@ -248,13 +248,13 @@ mrp_application_id_get_data (guint object_id)
 
 /**
  * mrp_application_id_get_data:
- * 
+ *
  * Get the object reference in the list of MrpObjects
  * using the object_id as locator
- * 
+ *
  * Return value: a pointer to the data
  **/
-gboolean  
+gboolean
 imrp_application_id_remove_data (guint object_id)
 {
 	return g_hash_table_remove (data_hash, GUINT_TO_POINTER (object_id));

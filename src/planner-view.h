@@ -54,11 +54,11 @@ struct _PlannerViewClass {
 					   PlannerWindow     *window);
 	void         (*activate)          (PlannerView       *view);
 	void         (*deactivate)        (PlannerView       *view);
-	
+
 	void         (*print_init)        (PlannerView       *view,
 					   PlannerPrintJob   *job);
 	gint         (*print_get_n_pages) (PlannerView       *view);
-	void         (*print)             (PlannerView       *view, 
+	void         (*print)             (PlannerView       *view,
 					   gint               page_nr);
 	void         (*print_cleanup)     (PlannerView       *view);
 

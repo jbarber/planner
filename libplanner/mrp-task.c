@@ -67,7 +67,7 @@ struct _MrpTaskPriv {
 	guint             visited : 1;
 
 	MrpTaskGraphNode *graph_node;
-	
+
 	/* FIXME: This might be a mistake... I can't think of any other types,
 	 * besides milestone and normal. Should we have a boolean instead,
 	 * is_milestone? That or a flags type variable.
@@ -78,13 +78,13 @@ struct _MrpTaskPriv {
 	 * well.
 	 */
 	MrpTaskSched      sched;
-	
+
 	/* Percent complete, 0-100. */
 	gshort            percent_complete;
-	
+
 	/* Arbitary range of 0,1..9999. A hint for any (3rd party) resource leveller */
 	gint              priority;
-	
+
 	gchar            *name;
 	gchar            *note;
 
@@ -98,7 +98,7 @@ struct _MrpTaskPriv {
 
 	/* Slack. */
 	gint              slack;
-	
+
 	/* Calculated start and finish values. */
 	mrptime           start;
 	mrptime           finish;
@@ -115,7 +115,7 @@ struct _MrpTaskPriv {
 	/* The acyclic dependency graph. */
 	GList            *successors;
 	GList            *predecessors;
-	
+
 	/* Calculated CPM values. */
 	mrptime           latest_start;
 	mrptime           latest_finish;
@@ -185,7 +185,7 @@ static void
 task_init (MrpTask *task)
 {
 	MrpTaskPriv *priv;
-	
+
 	priv = g_new0 (MrpTaskPriv, 1);
 	task->priv = priv;
 
@@ -206,7 +206,7 @@ task_class_init (MrpTaskClass *klass)
 {
 	GObjectClass   *object_class     = G_OBJECT_CLASS (klass);
 	MrpObjectClass *mrp_object_class = MRP_OBJECT_CLASS (klass);
-	
+
 	parent_class = MRP_OBJECT_CLASS (g_type_class_peek_parent (klass));
 
 	object_class->finalize = task_finalize;
@@ -214,7 +214,7 @@ task_class_init (MrpTaskClass *klass)
 	object_class->get_property = task_get_property;
 
 	mrp_object_class->removed  = task_removed;
-	
+
 	signals[TASK_MOVED] =
 		g_signal_new ("task_moved",
 			      G_TYPE_FROM_CLASS (klass),
@@ -223,7 +223,7 @@ task_class_init (MrpTaskClass *klass)
 			      NULL, NULL,
 			      mrp_marshal_VOID__OBJECT_INT,
 			      G_TYPE_NONE, 2, MRP_TYPE_TASK, G_TYPE_INT);
-	
+
 	signals[RELATION_ADDED] =
 		g_signal_new ("relation_added",
 			      G_TYPE_FROM_CLASS (klass),
@@ -232,7 +232,7 @@ task_class_init (MrpTaskClass *klass)
 			      NULL, NULL,
 			      mrp_marshal_VOID__POINTER,
 			      G_TYPE_NONE, 1, G_TYPE_POINTER);
-	
+
 	signals[RELATION_REMOVED] =
 		g_signal_new ("relation_removed",
 			      G_TYPE_FROM_CLASS (klass),
@@ -242,7 +242,7 @@ task_class_init (MrpTaskClass *klass)
 			      mrp_marshal_VOID__POINTER,
 			      G_TYPE_NONE, 1, G_TYPE_POINTER);
 
-	signals[ASSIGNMENT_ADDED] = 
+	signals[ASSIGNMENT_ADDED] =
 		g_signal_new ("assignment_added",
 			      G_TYPE_FROM_CLASS (klass),
 			      G_SIGNAL_RUN_LAST,
@@ -252,7 +252,7 @@ task_class_init (MrpTaskClass *klass)
 			      G_TYPE_NONE,
 			      1, MRP_TYPE_ASSIGNMENT);
 
-	signals[ASSIGNMENT_REMOVED] = 
+	signals[ASSIGNMENT_REMOVED] =
 		g_signal_new ("assignment_removed",
 			      G_TYPE_FROM_CLASS (klass),
 			      G_SIGNAL_RUN_LAST,
@@ -261,8 +261,8 @@ task_class_init (MrpTaskClass *klass)
 			      mrp_marshal_VOID__OBJECT,
 			      G_TYPE_NONE,
 			      1, MRP_TYPE_ASSIGNMENT);
-	
-	signals[CHILD_ADDED] = 
+
+	signals[CHILD_ADDED] =
 		g_signal_new ("child_added",
 			      G_TYPE_FROM_CLASS (klass),
 			      G_SIGNAL_RUN_LAST,
@@ -271,7 +271,7 @@ task_class_init (MrpTaskClass *klass)
 			      mrp_marshal_VOID__VOID,
 			      G_TYPE_NONE, 0);
 
-	signals[CHILD_REMOVED] = 
+	signals[CHILD_REMOVED] =
 		g_signal_new ("child_removed",
 			      G_TYPE_FROM_CLASS (klass),
 			      G_SIGNAL_RUN_LAST,
@@ -288,7 +288,7 @@ task_class_init (MrpTaskClass *klass)
 				     "Name of the task",
 				     "",
 				     G_PARAM_READWRITE));
-	
+
 	g_object_class_install_property (
 		object_class,
 		PROP_NOTE,
@@ -305,7 +305,7 @@ task_class_init (MrpTaskClass *klass)
 				     "Start time",
 				     "Task Start time",
 				     G_PARAM_READABLE));
-	
+
 	g_object_class_install_property (
 		object_class,
 		PROP_FINISH,
@@ -313,7 +313,7 @@ task_class_init (MrpTaskClass *klass)
 				     "Finish time",
 				     "Task finish time",
 				     G_PARAM_READABLE));
-	
+
 	g_object_class_install_property (
 		object_class,
 		PROP_LATEST_START,
@@ -321,7 +321,7 @@ task_class_init (MrpTaskClass *klass)
 				     "Latest start",
 				     "Latest task start time",
 				     G_PARAM_READABLE));
-	
+
 	g_object_class_install_property (
 		object_class,
 		PROP_LATEST_FINISH,
@@ -329,7 +329,7 @@ task_class_init (MrpTaskClass *klass)
 				     "Latest finish",
 				     "Latest task finish time",
 				     G_PARAM_READABLE));
-	
+
 	g_object_class_install_property (
 		object_class,
 		PROP_DURATION,
@@ -366,7 +366,7 @@ task_class_init (MrpTaskClass *klass)
 				   MRP_TYPE_TASK_TYPE,
 				   MRP_TASK_TYPE_NORMAL,
 				   G_PARAM_READWRITE));
-	
+
 	g_object_class_install_property (
 		object_class,
 		PROP_SCHED,
@@ -385,7 +385,7 @@ task_class_init (MrpTaskClass *klass)
 				    "Task scheduling constraint",
 				    MRP_TYPE_CONSTRAINT,
 				    G_PARAM_READWRITE));
-	
+
 	g_object_class_install_property (
 		object_class,
 		PROP_PERCENT_COMPLETE,
@@ -394,7 +394,7 @@ task_class_init (MrpTaskClass *klass)
 				  "Percent completed of task",
 				  0, 100, 0,
 				  G_PARAM_READWRITE));
-				  
+
 	g_object_class_install_property (
 		object_class,
 		PROP_PRIORITY,
@@ -413,7 +413,7 @@ task_finalize (GObject *object)
 
 	task = MRP_TASK (object);
 	priv = task->priv;
-	
+
 	g_free (priv->name);
 	g_free (priv->note);
 
@@ -423,7 +423,7 @@ task_finalize (GObject *object)
 	/* Make sure we don't have dangling relations. */
 	g_assert (priv->predecessors == NULL);
 	g_assert (priv->successors == NULL);
-	
+
 	g_node_destroy (priv->node);
 
 	g_free (priv);
@@ -449,7 +449,7 @@ task_set_property (GObject      *object,
 
 	task = MRP_TASK (object);
 	priv = task->priv;
-	
+
 	switch (prop_id) {
 	case PROP_NAME:
 		str = g_value_get_string (value);
@@ -459,7 +459,7 @@ task_set_property (GObject      *object,
 			priv->name = g_strdup (str);
 			changed = TRUE;
 		}
-		
+
 		break;
 
 	case PROP_NOTE:
@@ -472,7 +472,7 @@ task_set_property (GObject      *object,
 		}
 
 		break;
-		
+
  	case PROP_START:
 		priv->start = g_value_get_long (value);
 		break;
@@ -490,9 +490,9 @@ task_set_property (GObject      *object,
 		if (priv->sched == MRP_TASK_SCHED_FIXED_WORK) {
 			return;
 		}
-		
+
 		i_val = g_value_get_int (value);
-		
+
 		if (priv->duration != i_val) {
 			priv->duration = i_val;
 
@@ -502,7 +502,7 @@ task_set_property (GObject      *object,
 			mrp_task_invalidate_cost (task);
 		}
 		break;
-		
+
 	case PROP_WORK:
 		if (mrp_task_get_n_children (task) > 0 ||
 		    priv->type == MRP_TASK_TYPE_MILESTONE) {
@@ -529,7 +529,7 @@ task_set_property (GObject      *object,
 		type = g_value_get_enum (value);
 		if (type != priv->type) {
 			priv->type = type;
-			
+
 			if (type == MRP_TASK_TYPE_MILESTONE) {
 				priv->duration = 0;
 				priv->work = 0;
@@ -540,10 +540,10 @@ task_set_property (GObject      *object,
 				priv->duration = 60*60*8;
 				priv->work = 60*60*8;
 			}
-			
+
 			g_object_notify (G_OBJECT (task), "duration");
 			g_object_notify (G_OBJECT (task), "work");
-			
+
 			changed = TRUE;
 		}
 		break;
@@ -561,24 +561,24 @@ task_set_property (GObject      *object,
 
 	case PROP_PERCENT_COMPLETE:
 		i_val = g_value_get_int (value);
-		
+
 		if (priv->percent_complete != i_val) {
 			priv->percent_complete = i_val;
 			changed = TRUE;
 		}
-		
+
 		break;
 
 	case PROP_PRIORITY:
 		i_val = g_value_get_int (value);
-		
+
 		if (priv->priority != i_val) {
 			priv->priority = i_val;
 			changed = TRUE;
 		}
-		
+
 		break;
-		
+
 	default:
 		break;
 	}
@@ -599,7 +599,7 @@ task_get_property (GObject    *object,
 
 	task = MRP_TASK (object);
 	priv = task->priv;
-	
+
 	switch (prop_id) {
 	case PROP_NAME:
 		g_value_set_string (value, priv->name);
@@ -654,15 +654,15 @@ task_removed (MrpObject *object)
 {
 	MrpTask     *task;
 	MrpTaskPriv *priv;
-	
+
 	g_return_if_fail (MRP_IS_TASK (object));
-	
+
 	task = MRP_TASK (object);
 	priv = task->priv;
 
 	task_remove_assignments (task);
 	task_remove_relations (task);
-	
+
         if (MRP_OBJECT_CLASS (parent_class)->removed) {
                 (* MRP_OBJECT_CLASS (parent_class)->removed) (object);
         }
@@ -672,10 +672,10 @@ static void
 task_assignment_removed_cb (MrpAssignment *assignment, MrpTask *task)
 {
 	MrpTaskPriv *priv;
-	
+
 	g_return_if_fail (MRP_IS_TASK (task));
 	g_return_if_fail (MRP_IS_ASSIGNMENT (assignment));
-	
+
 	priv = task->priv;
 
 	priv->assignments = g_list_remove (priv->assignments, assignment);
@@ -695,7 +695,7 @@ task_remove_relations (MrpTask *task)
 	MrpTask     *successor;
 
 	g_return_if_fail (MRP_IS_TASK (task));
-	
+
 	/* Cut relations involving the task (make sure to be robust when
 	 * removing during traversing).
 	 */
@@ -705,19 +705,19 @@ task_remove_relations (MrpTask *task)
 		relation = l->data;
 
 		predecessor = mrp_relation_get_predecessor (relation);
-		
+
 		mrp_task_remove_predecessor (task, predecessor);
 
 		l = next;
 	}
-	
+
 	l = task->priv->successors;
 	while (l) {
 		next = l->next;
 		relation = l->data;
 
 		successor = mrp_relation_get_successor (relation);
-		
+
 		mrp_task_remove_predecessor (successor, task);
 
 		l = next;
@@ -739,14 +739,14 @@ task_remove_assignments (MrpTask *task)
 
 	for (l = copy; l; l = l->next) {
 		assignment = l->data;
-		
+
 		g_signal_handlers_disconnect_by_func (MRP_ASSIGNMENT (l->data),
 						      task_assignment_removed_cb,
 						      task);
 		g_object_unref (assignment);
 		mrp_object_removed (MRP_OBJECT (assignment));
 	}
-	
+
 	g_list_free (priv->assignments);
 	g_list_free (copy);
 
@@ -761,16 +761,16 @@ task_remove_subtree_cb (GNode *node, gpointer data)
 
 	task = node->data;
 	priv = task->priv;
-	
+
 	task_remove_relations (task);
 	task_remove_assignments (task);
 
 	g_node_unlink (priv->node);
-	
+
 	mrp_object_removed (MRP_OBJECT (task));
 
 	g_object_unref (task);
-	
+
 	return FALSE;
 }
 
@@ -778,16 +778,16 @@ void
 imrp_task_remove_subtree (MrpTask *task)
 {
 	MrpTask *parent;
-	
+
 	g_return_if_fail (MRP_IS_TASK (task));
 
 	parent = NULL;
 	if (task->priv->node->parent) {
 		parent = task->priv->node->parent->data;
 	}
-	
+
 	g_object_ref (task);
-	
+
 	/* Remove the tasks one by one using post order so we don't mess with
 	 * the tree while traversing it.
 	 */
@@ -823,7 +823,7 @@ imrp_task_reattach (MrpTask  *task,
 		    gboolean  before)
 {
 	GNode *node;
-	
+
 	g_return_if_fail (MRP_IS_TASK (task));
 	g_return_if_fail (sibling == NULL || MRP_IS_TASK (sibling));
 	g_return_if_fail (MRP_IS_TASK (parent));
@@ -837,13 +837,13 @@ imrp_task_reattach (MrpTask  *task,
 			      "sched", MRP_TASK_SCHED_FIXED_WORK,
 			      NULL);
 	}
-	
+
 	if (sibling == NULL) {
 		if (before) {
 			node = g_node_first_child (parent->priv->node);
 		} else {
 			node = g_node_last_child (parent->priv->node);
-		}			
+		}
 
 		if (node) {
 			sibling = node->data;
@@ -889,9 +889,9 @@ imrp_task_reattach_pos (MrpTask  *task,
 
 /**
  * mrp_task_new:
- * 
+ *
  * Create a new task.
- * 
+ *
  * Return value: the newly created #MrpTask.
  **/
 MrpTask *
@@ -907,9 +907,9 @@ mrp_task_new (void)
 /**
  * mrp_task_get_name:
  * @task: an #MrpTask
- * 
+ *
  * Retrives the name of @task.
- * 
+ *
  * Return value: the name
  **/
 const gchar *
@@ -924,14 +924,14 @@ mrp_task_get_name (MrpTask *task)
  * mrp_task_set_name:
  * @task: an #MrpResource
  * @name: new name of @task
- * 
+ *
  * Sets the name of @task.
  **/
 void mrp_task_set_name (MrpTask *task, const gchar *name)
 {
 	g_return_if_fail (MRP_IS_TASK (task));
 	g_return_if_fail (name != NULL);
-	
+
 	mrp_object_set (MRP_OBJECT (task), "name", name, NULL);
 }
 
@@ -946,7 +946,7 @@ imrp_task_insert_child (MrpTask *parent,
 	if (child->priv->duration == -1) {
 		child->priv->duration = parent->priv->duration;
 	}
-	
+
 	g_node_insert (parent->priv->node,
 		       position,
 		       child->priv->node);
@@ -958,7 +958,7 @@ imrp_task_insert_child (MrpTask *parent,
 			      "type", MRP_TASK_TYPE_NORMAL,
 			      NULL);
 	}
-	
+
 	g_signal_emit (parent, signals[CHILD_ADDED], 0);
 }
 
@@ -1002,10 +1002,10 @@ task_get_successor_relation (MrpTask *task,
  * mrp_task_has_relation_to:
  * @task_a: an #MrpTask
  * @task_b: an #MrpTask
- * 
+ *
  * Checks if @a and @b has a relation, i.e. if a is a predecessor or successor
  * of b.
- * 
+ *
  * Return value: %TRUE if @a and @b has a relation
  **/
 gboolean
@@ -1018,9 +1018,9 @@ mrp_task_has_relation_to (MrpTask *task_a, MrpTask *task_b)
 /**
  * mrp_task_has_relation:
  * @task: an #MrpTask
- * 
+ *
  * Checks if a task has any relations, i.e. predecessors or successors.
- * 
+ *
  * Return value: %TRUE if there are any relations.
  **/
 gboolean
@@ -1037,7 +1037,7 @@ mrp_task_has_relation (MrpTask *task)
  * @type: type of relation
  * @lag: lag time, if negative, it means lead time
  * @error: location to store error, or %NULL
- * 
+ *
  * Adds a predecessor task to a task. Depending on type, the predecessor
  * must be started or finished before task can be started or finished,
  * with an optional lag/lead time.
@@ -1058,7 +1058,7 @@ mrp_task_add_predecessor (MrpTask          *task,
 	gchar			*tmp;
 	MrpConstraint		 constraint;
 	mrptime			 pred_start;
-	
+
 	g_return_val_if_fail (MRP_IS_TASK (task), NULL);
 	g_return_val_if_fail (MRP_IS_TASK (predecessor), NULL);
 
@@ -1068,10 +1068,10 @@ mrp_task_add_predecessor (MrpTask          *task,
 			     MRP_ERROR,
 			     MRP_ERROR_TASK_RELATION_FAILED,
 			     _("Could not add a predecessor relation, because the tasks are already related."));
-		
+
 		return NULL;
 	}
-	
+
 	relations = mrp_task_get_predecessor_relations (task);
 
 	/* check for attempt to add SF or FF relation when other relation types already present */
@@ -1087,13 +1087,13 @@ mrp_task_add_predecessor (MrpTask          *task,
 			     MRP_ERROR,
 			     MRP_ERROR_TASK_RELATION_FAILED,
 			     tmp);
-		
+
 		return NULL;
 	}
 
 	/* check for attempt to add SF or FF when a Start No Earlier Than constraint exists */
 	constraint = imrp_task_get_constraint (task);
-	if ((type == MRP_RELATION_SF || type == MRP_RELATION_FF) && 
+	if ((type == MRP_RELATION_SF || type == MRP_RELATION_FF) &&
 	    constraint.type == MRP_CONSTRAINT_SNET) {
 		if (type == MRP_RELATION_SF) {
 			tmp = _("Start to Finish relation type cannot be combined with Start No Earlier Than constraint.");
@@ -1105,7 +1105,7 @@ mrp_task_add_predecessor (MrpTask          *task,
 			     MRP_ERROR,
 			     MRP_ERROR_TASK_RELATION_FAILED,
 			     tmp);
-		
+
 		return NULL;
 	}
 
@@ -1115,14 +1115,14 @@ mrp_task_add_predecessor (MrpTask          *task,
 	project = mrp_object_get_project (MRP_OBJECT (task));
 	pred_start = mrp_time_align_day (mrp_task_get_work_start (predecessor));
 
-	if ((type == MRP_RELATION_SF) && 
+	if ((type == MRP_RELATION_SF) &&
 	    pred_start == mrp_project_get_project_start (project)) {
 
 		g_set_error (error,
 			     MRP_ERROR,
 			     MRP_ERROR_TASK_RELATION_FAILED,
 			     _("Start to Finish relation cannot be set. Predecessor starts on project start date."));
-		
+
 		return NULL;
 	}
 
@@ -1130,7 +1130,7 @@ mrp_task_add_predecessor (MrpTask          *task,
 	if (!mrp_task_manager_check_predecessor (manager, task, predecessor, error)) {
 		return NULL;
 	}
-	
+
 	relation = g_object_new (MRP_TYPE_RELATION,
 				 "successor", task,
 				 "predecessor", predecessor,
@@ -1154,7 +1154,7 @@ mrp_task_add_predecessor (MrpTask          *task,
  * mrp_task_remove_predecessor:
  * @task: an #MrpTask
  * @predecessor: the predecessor to remove
- * 
+ *
  * Removes a predecessor previously added to task.
  **/
 void
@@ -1162,7 +1162,7 @@ mrp_task_remove_predecessor (MrpTask *task,
 			     MrpTask *predecessor)
 {
 	MrpRelation *relation;
-	
+
 	g_return_if_fail (MRP_IS_TASK (task));
 	g_return_if_fail (MRP_IS_TASK (predecessor));
 
@@ -1188,20 +1188,20 @@ mrp_task_remove_predecessor (MrpTask *task,
  * mrp_task_get_relation:
  * @task_a: an #MrpTask
  * @task_b: an #MrpTask
- * 
+ *
  * Fetches a relation between two tasks if it exists.
- * 
- * Return value: a #MrpRelation representing the relation between @task_a and 
+ *
+ * Return value: a #MrpRelation representing the relation between @task_a and
  * @task_b or %NULL if they don't have any relation.
  **/
 MrpRelation *
 mrp_task_get_relation (MrpTask *task_a, MrpTask *task_b)
 {
 	MrpRelation *relation;
-	
+
 	g_return_val_if_fail (MRP_IS_TASK (task_a), NULL);
 	g_return_val_if_fail (MRP_IS_TASK (task_b), NULL);
-	
+
 	relation = task_get_predecessor_relation (task_a, task_b);
 	if (relation != NULL) {
 		return relation;
@@ -1214,9 +1214,9 @@ mrp_task_get_relation (MrpTask *task_a, MrpTask *task_b)
  * mrp_task_get_predecessor_relation:
  * @task: an #MrpTask
  * @predecessor: #an MrpTask
- * 
+ *
  * Fetches a predecessor relation between task and it's predecessor.
- * 
+ *
  * Return value: the #MrpRelation if it exists, otherwise %NULL
  **/
 MrpRelation *
@@ -1224,7 +1224,7 @@ mrp_task_get_predecessor_relation (MrpTask *task, MrpTask *predecessor)
 {
 	g_return_val_if_fail (MRP_IS_TASK (task), NULL);
 	g_return_val_if_fail (MRP_IS_TASK (predecessor), NULL);
-	
+
 	return task_get_predecessor_relation (task, predecessor);
 }
 
@@ -1232,19 +1232,19 @@ mrp_task_get_predecessor_relation (MrpTask *task, MrpTask *predecessor)
  * mrp_task_get_successor_relation:
  * @task: an #MrpTask
  * @successor: an #MrpTask
- * 
+ *
  * Fetches a successor relation between task and it's successor.
- * 
+ *
  * Return value: the #MrpRelation if it exists, otherwise %NULL
  **/
 MrpRelation *
 mrp_task_get_successor_relation (MrpTask *task, MrpTask *successor)
 {
 	MrpRelation *relation;
-	
+
 	g_return_val_if_fail (MRP_IS_TASK (task), NULL);
 	g_return_val_if_fail (MRP_IS_TASK (successor), NULL);
-	
+
 	relation = task_get_successor_relation (task, successor);
 	return relation;
 }
@@ -1252,9 +1252,9 @@ mrp_task_get_successor_relation (MrpTask *task, MrpTask *successor)
 /**
  * mrp_task_get_predecessor_relations:
  * @task: an #MrpTask
- * 
- * Fetches a list of predecessor relations to @task. 
- * 
+ *
+ * Fetches a list of predecessor relations to @task.
+ *
  * Return value: the list of predecessor relations to @task
  **/
 GList *
@@ -1268,9 +1268,9 @@ mrp_task_get_predecessor_relations (MrpTask *task)
 /**
  * mrp_task_get_successor_relations:
  * @task: an #MrpTask
- * 
- * Fetches a list of successor relations to @task. 
- * 
+ *
+ * Fetches a list of successor relations to @task.
+ *
  * Return value: a list of successor relations to @task
  **/
 GList *
@@ -1284,9 +1284,9 @@ mrp_task_get_successor_relations (MrpTask *task)
 /**
  * mrp_task_get_parent:
  * @task: an #MrpTask
- * 
+ *
  * Fetches the parent of @task.
- * 
+ *
  * Return value: the parent of @task, or %NULL if there is no parent..
  **/
 MrpTask *
@@ -1303,16 +1303,16 @@ mrp_task_get_parent (MrpTask *task)
 /**
  * mrp_task_get_first_child:
  * @task: an #MrpTask
- * 
+ *
  * Fetches the first child of @task.
- * 
+ *
  * Return value: the first child of @task, or %NULL if there are no children.
  **/
 MrpTask *
 mrp_task_get_first_child (MrpTask *task)
 {
 	GNode *node;
-	
+
 	g_return_val_if_fail (MRP_IS_TASK (task), NULL);
 
 	node = g_node_first_child (task->priv->node);
@@ -1322,9 +1322,9 @@ mrp_task_get_first_child (MrpTask *task)
 /**
  * mrp_task_get_next_sibling:
  * @task: an #MrpTask
- * 
+ *
  * Fetches the next sibling of @task.
- * 
+ *
  * Return value: the next sibling of @task, or %NULL if there is no next
  * sibling.
  **/
@@ -1342,9 +1342,9 @@ mrp_task_get_next_sibling (MrpTask *task)
 /**
  * mrp_task_get_prev_sibling:
  * @task: an #MrpTask
- * 
+ *
  * Fetches the previous sibling of @task.
- * 
+ *
  * Return value: the previous sibling of @task, or %NULL if there is none.
  **/
 MrpTask *
@@ -1361,9 +1361,9 @@ mrp_task_get_prev_sibling (MrpTask *task)
 /**
  * mrp_task_get_n_children:
  * @task: an #MrpTask
- * 
+ *
  * Fetches the number of children @task has.
- * 
+ *
  * Return value: the number of children @task has
  **/
 guint
@@ -1378,9 +1378,9 @@ mrp_task_get_n_children (MrpTask *task)
  * mrp_task_get_nth_child:
  * @task: an #MrpTask
  * @n: the index of the child to get
- * 
+ *
  * Fetches the nth child of @task.
- * 
+ *
  * Return value: the nth child of @task, or %NULL if there is no such child.
  **/
 MrpTask *
@@ -1397,21 +1397,21 @@ mrp_task_get_nth_child (MrpTask *task, guint n)
 /**
  * mrp_task_get_position:
  * @task: an #MrpTask
- * 
+ *
  * Fetches the index or position of @task among its siblings.
- * 
+ *
  * Return value: the position of @task among its siblings.
  **/
 gint
 mrp_task_get_position (MrpTask *task)
 {
 	GNode *parent;
-	
+
 	g_return_val_if_fail (MRP_IS_TASK (task), 0);
 	g_return_val_if_fail (task->priv->node->parent != NULL, 0);
 
 	parent = task->priv->node->parent;
-	
+
 	return g_node_child_position (parent, task->priv->node);
 }
 
@@ -1419,20 +1419,20 @@ mrp_task_get_position (MrpTask *task)
  * mrp_task_add_assignment:
  * @task: an #MrpTask
  * @assignment: an #MrpAssignment
- * 
+ *
  * Adds an assignment to @task.
  **/
 void
 imrp_task_add_assignment (MrpTask *task, MrpAssignment *assignment)
 {
 	MrpTaskPriv *priv;
-	
+
 	g_return_if_fail (MRP_IS_TASK (task));
 	g_return_if_fail (MRP_IS_ASSIGNMENT (assignment));
-	
+
 	priv = task->priv;
-	
-	priv->assignments = g_list_prepend (priv->assignments, 
+
+	priv->assignments = g_list_prepend (priv->assignments,
 					    g_object_ref (assignment));
 
 	g_signal_connect (assignment,
@@ -1448,9 +1448,9 @@ imrp_task_add_assignment (MrpTask *task, MrpAssignment *assignment)
 /**
  * mrp_task_get_start:
  * @task: an #MrpTask
- * 
+ *
  * Fetches the start time of @task.
- * 
+ *
  * Return value: the start time of @task.
  **/
 mrptime
@@ -1464,9 +1464,9 @@ mrp_task_get_start (MrpTask *task)
 /**
  * mrp_task_get_finish:
  * @task: an #MrpTask
- * 
+ *
  * Fetches the finish time of @task.
- * 
+ *
  * Return value: the finish time of @task.
  **/
 mrptime
@@ -1480,29 +1480,29 @@ mrp_task_get_finish (MrpTask *task)
 /**
  * mrp_task_get_work_start:
  * @task: an #MrpTask
- * 
+ *
  * Retrieves the first time where work is performed of @task. This might be
  * different from the start time, if the start time is during non-working
  * time. In that case, the work start would be right after the non-working
  * interval.
- * 
+ *
  * Return value: The work start time of @task.
  **/
 mrptime
 mrp_task_get_work_start (MrpTask *task)
 {
 	g_return_val_if_fail (MRP_IS_TASK (task), 0);
-	
+
 	return task->priv->work_start;
 }
 
 /**
  * mrp_task_get_latest_start:
  * @task: an #MrpTask
- * 
+ *
  * Retrieves the latest start time of @task, i.e. the latest time the task can
  * start without delaying the project.
- * 
+ *
  * Return value: The latest start time of @task.
  **/
 mrptime
@@ -1514,10 +1514,10 @@ mrp_task_get_latest_start (MrpTask *task)
 /**
  * mrp_task_get_latest_finish:
  * @task: an #MrpTask
- * 
+ *
  * Retrieves the latest finish time of @task, i.e. the latest time the task can
  * finish without delaying the project.
- * 
+ *
  * Return value: The latest finish time of @task.
  **/
 mrptime
@@ -1529,10 +1529,10 @@ mrp_task_get_latest_finish (MrpTask *task)
 /**
  * mrp_task_get_duration:
  * @task: an #MrpTask
- * 
+ *
  * Fetches the duration of @task. This differs from the calendar duration that
  * is retrieved by (finish - start).
- * 
+ *
  * Return value: The duration of @task.
  **/
 gint
@@ -1546,32 +1546,32 @@ mrp_task_get_duration (MrpTask *task)
 /**
  * mrp_task_get_work:
  * @task: an #MrpTask
- * 
+ *
  * Retrieves the amount of work of @task.
- * 
+ *
  * Return value: The work of @task.
  **/
 gint
 mrp_task_get_work (MrpTask *task)
 {
 	g_return_val_if_fail (MRP_IS_TASK (task), 0);
-	
+
 	return task->priv->work;
 }
 
 /**
  * mrp_task_get_priority:
  * @task: an #MrpTask
- * 
+ *
  * Retrieves the priority of @task.
- * 
+ *
  * Return value: The priority of @task.
  **/
 gint
 mrp_task_get_priority (MrpTask *task)
 {
 	g_return_val_if_fail (MRP_IS_TASK (task), 0);
-	
+
 	return task->priv->priority;
 }
 
@@ -1579,9 +1579,9 @@ mrp_task_get_priority (MrpTask *task)
 /**
  * mrp_task_is_dominant:
  * @task: an #MrpTask
- * 
+ *
  * Retrieves if @task is a dominant task.
- * 
+ *
  * Return value: if @task is a dominant task.
  **/
 gboolean
@@ -1590,7 +1590,7 @@ mrp_task_is_dominant (MrpTask *task)
 	MrpConstraint constraint;
 
 	g_return_val_if_fail (MRP_IS_TASK (task), 0);
-	
+
 	constraint = imrp_task_get_constraint (task);
 	if (constraint.type  != MRP_CONSTRAINT_MSO) {
 		return (FALSE);
@@ -1606,9 +1606,9 @@ mrp_task_is_dominant (MrpTask *task)
 /**
  * mrp_task_get_unit_ivals:
  * @task: an #MrpTask
- * 
+ *
  * Retrieves the list of intervals of @task.
- * 
+ *
  * Return value: Intervals of @task.
  **/
 GList *
@@ -1622,9 +1622,9 @@ mrp_task_get_unit_ivals (MrpTask *task)
 /**
  * mrp_task_set_unit_ivals:
  * @task: an #MrpTask
- * 
+ *
  * Set the list of intervals of @task.
- * 
+ *
  * Return value: Intervals of @task.
  **/
 GList *
@@ -1645,25 +1645,25 @@ mrp_task_set_unit_ivals (MrpTask *task, GList *ivals)
 /**
  * mrp_task_get_assignments:
  * @task: an #MrpTask
- * 
+ *
  * Fetches a list of #MrpAssignment.
- * 
+ *
  * Return value: the list of assignments.
  **/
 GList *
 mrp_task_get_assignments (MrpTask *task)
 {
 	g_return_val_if_fail (MRP_IS_TASK (task), NULL);
-	
+
 	return task->priv->assignments;
 }
 
 /**
  * mrp_task_get_nres:
  * @task: an #MrpTask
- * 
+ *
  * Calculate the number of resources assigned to task.
- * 
+ *
  * Return value: the number of resources.
  **/
 gint mrp_task_get_nres (MrpTask *task)
@@ -1676,7 +1676,7 @@ gint mrp_task_get_nres (MrpTask *task)
 	for (a = assignments; a; a = a->next) {
 		nres++;
 	}
-	
+
 	return (nres);
 }
 
@@ -1684,38 +1684,38 @@ gint mrp_task_get_nres (MrpTask *task)
  * mrp_task_get_assignment:
  * @task: an #MrpTask
  * @resource: an #MrpResource
- * 
+ *
  * retrieves the #MrpAssignment associated with @task and @resource if the
  * resource is assigned to @task, or %NULL if there is no such assignment.
- * 
+ *
  * Return value: The assignment if it exists, otherwise %NULL.
  **/
 MrpAssignment *
 mrp_task_get_assignment (MrpTask *task, MrpResource *resource)
 {
 	GList *l;
-	
+
 	g_return_val_if_fail (MRP_IS_TASK (task), NULL);
 	g_return_val_if_fail (MRP_IS_RESOURCE (resource), NULL);
 
 	for (l = task->priv->assignments; l; l = l->next) {
 		MrpAssignment *assignment = l->data;
-		
+
 		if (mrp_assignment_get_resource (assignment) == resource) {
 			return assignment;
 		}
 	}
-	
+
 	return NULL;
 }
 
 /**
  * mrp_task_get_assigned_resources:
  * @task: an #MrpTask
- * 
- * Fetches a list of resources assigned to @task. The list needs to be freed 
+ *
+ * Fetches a list of resources assigned to @task. The list needs to be freed
  * with g_list_free() by caller.
- * 
+ *
  * Return value: A newly created list of #MrpResource.
  **/
 GList *
@@ -1723,7 +1723,7 @@ mrp_task_get_assigned_resources (MrpTask *task)
 {
 	GList *list = NULL;
 	GList *l;
-	
+
 	g_return_val_if_fail (MRP_IS_TASK (task), NULL);
 
 	for (l = task->priv->assignments; l; l = l->next) {
@@ -1732,9 +1732,9 @@ mrp_task_get_assigned_resources (MrpTask *task)
 		list = g_list_prepend (
 			list, mrp_assignment_get_resource (assignment));
 	}
-	
+
 	list = g_list_sort (list, mrp_resource_compare);
-	
+
 	return list;
 }
 
@@ -1742,9 +1742,9 @@ mrp_task_get_assigned_resources (MrpTask *task)
  * mrp_task_compare:
  * @a: an #MrpTask
  * @b: an #MrpTask
- * 
+ *
  * Compares the name of the tasks, by calling strcmp() on the names.
- * 
+ *
  * Return value: the return value of strcmp (a->name, b->name).
  **/
 gint
@@ -1756,7 +1756,7 @@ mrp_task_compare (gconstpointer a, gconstpointer b)
 /**
  * mrp_task_reset_constraint:
  * @task: an #MrpTask
- * 
+ *
  * Sets the contraint type to %MRP_CONTRAINT_ASAP and notifies listeners.
  **/
 void
@@ -1773,9 +1773,9 @@ mrp_task_reset_constraint (MrpTask *task)
 /**
  * mrp_task_get_cost:
  * @task: an #MrpTask
- * 
+ *
  * Calculates the cost to complete @task.
- * 
+ *
  * Return value: The cost to complete @task.
  **/
 gfloat
@@ -1849,13 +1849,13 @@ GType
 mrp_constraint_get_type (void)
 {
 	static GType our_type = 0;
-  
+
 	if (our_type == 0) {
 		our_type = g_boxed_type_register_static ("MrpConstraint",
 							 (GBoxedCopyFunc) mrp_constraint_copy,
 							 (GBoxedFreeFunc) g_free);
 	}
-	
+
 	return our_type;
 }
 
@@ -1935,7 +1935,7 @@ MrpConstraint
 imrp_task_get_constraint (MrpTask *task)
 {
 	MrpConstraint c = { 0 };
-	
+
 	g_return_val_if_fail (MRP_IS_TASK (task), c);
 
 	return task->priv->constraint;
@@ -1953,7 +1953,7 @@ gint
 imrp_task_get_depth (MrpTask *task)
 {
 	g_return_val_if_fail (MRP_IS_TASK (task), 0);
-	
+
 	return g_node_depth (task->priv->node);
 }
 
@@ -1961,7 +1961,7 @@ GNode *
 imrp_task_get_node (MrpTask *task)
 {
 	g_return_val_if_fail (MRP_IS_TASK (task), NULL);
-	
+
 	return task->priv->node;
 }
 
@@ -1969,7 +1969,7 @@ MrpTaskGraphNode *
 imrp_task_get_graph_node (MrpTask *task)
 {
 	g_return_val_if_fail (MRP_IS_TASK (task), NULL);
-	
+
 	return task->priv->graph_node;
 }
 
@@ -1977,7 +1977,7 @@ GList *
 imrp_task_peek_predecessors (MrpTask *task)
 {
 	g_return_val_if_fail (MRP_IS_TASK (task), NULL);
-	
+
 	return task->priv->predecessors;
 }
 
@@ -1985,7 +1985,7 @@ GList *
 imrp_task_peek_successors (MrpTask *task)
 {
 	g_return_val_if_fail (MRP_IS_TASK (task), NULL);
-	
+
 	return task->priv->successors;
 }
 

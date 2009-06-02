@@ -55,7 +55,7 @@
 
 typedef struct {
 	GtkWidget *open_dialog;
-} SQLPluginPriv; 
+} SQLPluginPriv;
 
 static gint          sql_plugin_retrieve_project_id (PlannerPlugin  *plugin,
 						     gchar          *server,
@@ -100,13 +100,13 @@ static const GtkActionEntry entries[] = {
 	  G_CALLBACK (sql_plugin_save) }
 };
 
-static gboolean 
+static gboolean
 sql_execute_command (GdaConnection *con, gchar *command)
 {
 	GdaCommand *cmd;
 	GList      *list;
 	GError     *error = NULL;
-	
+
 	cmd = gda_command_new (command, GDA_COMMAND_TYPE_SQL, GDA_COMMAND_OPTION_STOP_ON_ERRORS);
 	list = gda_connection_execute_command (con, cmd, NULL, &error);
 	gda_command_free (cmd);
@@ -149,7 +149,7 @@ sql_get_last_error (GdaConnection *connection)
 	GdaConnectionEvent *error;
 	const gchar        *error_txt;
 
-	g_return_val_if_fail (GDA_IS_CONNECTION (connection), 
+	g_return_val_if_fail (GDA_IS_CONNECTION (connection),
 			      _("Can't connect to database server"));
 
 	list = (GList *) gda_connection_get_events (connection);
@@ -159,7 +159,7 @@ sql_get_last_error (GdaConnection *connection)
 	}
 
 	error = (GdaConnectionEvent *) g_list_last (list)->data;
-      
+
 	/* FIXME: Poor user, she won't get localized messages */
 	error_txt = gda_connection_event_get_description (error);
 
@@ -182,7 +182,7 @@ get_int (GdaDataModel *res, gint row, gint column)
 		g_warning ("Failed to get a value: (%d,%d)", column, row);
 		return INT_MAX;
 	}
-	
+
 	str = gda_value_stringify (value);
 	i = strtol (str, NULL, 10);
 	g_free (str);
@@ -200,16 +200,16 @@ get_string (GdaDataModel *res, gint row, gint column)
 	gchar    *ret;
 	gsize     len;
 	GValue   *value;
-	
+
 	value = (GValue *) gda_data_model_get_value_at (res, column, row);
 	if (value == NULL) {
 		g_warning ("Failed to get a value: (%d,%d)", column, row);
 		return "";
 	}
-	
+
 	str = gda_value_stringify (value);
 	len = strlen (str);
-	
+
 	if (g_utf8_validate (str, len, NULL)) {
 		return str;
 	}
@@ -228,7 +228,7 @@ get_string (GdaDataModel *res, gint row, gint column)
 	}
 
 	g_free (str);
-	
+
 	return ret;
 }
 
@@ -250,7 +250,7 @@ strdup_null_if_empty (const gchar *str)
 		g_free (tmp);
 		return NULL;
 	}
-		
+
 	return tmp;
 }
 
@@ -269,21 +269,21 @@ create_sql_uri (const gchar *server,
 	gchar   *str;
 
 	string = g_string_new ("sql://");
-	
+
 	if (server) {
 		if (login) {
 			g_string_append (string, login);
-			
+
 			if (password) {
 				g_string_append_c (string, ':');
 				g_string_append (string, password);
 			}
-			
+
 			g_string_append_c (string, '@');
 		}
-		
+
 		g_string_append (string, server);
-		
+
 		if (port) {
 			g_string_append_c (string, ':');
 			g_string_append (string, port);
@@ -293,14 +293,14 @@ create_sql_uri (const gchar *server,
 	g_string_append_c (string, '#');
 
 	g_string_append_printf (string, "db=%s", database);
-	
+
 	if (project_id != -1) {
 		g_string_append_printf (string, "&id=%d", project_id);
 	}
-	
+
 	str = string->str;
 	g_string_free (string, FALSE);
-	
+
 	return str;
 }
 
@@ -313,7 +313,7 @@ show_error_dialog (PlannerPlugin *plugin,
 	gint       response;
 
 	window = GTK_WINDOW (plugin->main_window);
-	
+
 	dialog = gtk_message_dialog_new (window,
 					 GTK_DIALOG_DESTROY_WITH_PARENT,
 					 GTK_MESSAGE_ERROR,
@@ -328,11 +328,11 @@ static void
 selection_changed_cb (GtkTreeSelection *selection, GtkWidget *ok_button)
 {
 	gboolean sensitive = FALSE;
-	
+
 	if (gtk_tree_selection_count_selected_rows (selection) > 0) {
 		sensitive = TRUE;
 	}
-	
+
 	gtk_widget_set_sensitive (ok_button, sensitive);
 }
 
@@ -347,20 +347,20 @@ row_activated_cb (GtkWidget         *tree_view,
 
 /* Planner versions:
    1.x is always lower than 2.x.
-   0.6 is lower than 0.11 
+   0.6 is lower than 0.11
    If 0.11.90 we don't look ".90".
 */
 static gboolean
-is_newer_version (const gchar *version_new_txt, 
+is_newer_version (const gchar *version_new_txt,
 		  const gchar *version_old_txt)
 {
 	guint   subversion_old, subversion_new;
 	guint   version_old, version_new;
 	gchar **versionv_new, **versionv_old;
 
-	g_return_val_if_fail (version_new_txt != NULL && 
+	g_return_val_if_fail (version_new_txt != NULL &&
 			      version_old_txt != NULL, FALSE);
-	
+
 	version_old = g_ascii_strtod (version_old_txt, NULL);
 	version_new = g_ascii_strtod (version_new_txt, NULL);
 
@@ -370,7 +370,7 @@ is_newer_version (const gchar *version_new_txt,
 	else if (version_old > version_new) {
 		return FALSE;
 	}
-	
+
 	/* Need to check subversion */
 	versionv_old = g_strsplit (version_old_txt,".",-1);
 	versionv_new = g_strsplit (version_new_txt,".",-1);
@@ -417,7 +417,7 @@ check_database_tables (GdaConnection *conn,
 	window = GTK_WINDOW (plugin->main_window);
 
 	/* Try to get the database version */
-	model = sql_execute_query (conn, "SELECT value FROM property_global WHERE prop_name='database_version'");		
+	model = sql_execute_query (conn, "SELECT value FROM property_global WHERE prop_name='database_version'");
 	if (model == NULL) {
 		create_tables = TRUE;
 	} else {
@@ -436,7 +436,7 @@ check_database_tables (GdaConnection *conn,
 		gchar **namev = NULL, **versionv = NULL;
 		gchar  *version;
 		gchar  *sql_file;
-		
+
 		if (!g_str_has_suffix (name, ".sql")) {
 			continue;
 		}
@@ -451,7 +451,7 @@ check_database_tables (GdaConnection *conn,
 			if (is_newer_version (versionv[0], namev[1])) {
 				if (!strcmp (namev[1], database_version)) {
 					upgradable = TRUE;
-					if (is_newer_version (versionv[0], 
+					if (is_newer_version (versionv[0],
 							      max_version_upgrade)) {
 						if (upgrade_file) {
 							g_free (upgrade_file);
@@ -476,11 +476,11 @@ check_database_tables (GdaConnection *conn,
 				g_free (max_version_database);
 				max_version_database = g_strdup (versionv[0]);
 			}
-			
+
 			can_create_tables = TRUE;
 			version = g_strdup (versionv[0]);
 			g_free (version);
-			
+
 		} else {
 			if (!database_file) {
 				database_file = g_strdup (sql_file);
@@ -509,7 +509,7 @@ check_database_tables (GdaConnection *conn,
 			   upgrade_file);
 		retval = FALSE;
 		upgradable = FALSE;
-		can_create_tables = FALSE;		
+		can_create_tables = FALSE;
 	}
 
 	if (!upgradable && !create_tables) {
@@ -525,13 +525,13 @@ check_database_tables (GdaConnection *conn,
 						 _("Database %s needs to be upgraded "
 						   "from version %s to version %s.\n"
 						   "Please backup database before the upgrade."),
-						 database_name, database_version, 
+						 database_name, database_version,
 						 max_version_upgrade);
-		gtk_dialog_add_buttons ((GtkDialog *) dialog, 
-					GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL, 
-					_("Upgrade"), GTK_RESPONSE_YES,  
-					NULL);						 
-		
+		gtk_dialog_add_buttons ((GtkDialog *) dialog,
+					GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+					_("Upgrade"), GTK_RESPONSE_YES,
+					NULL);
+
 		result = gtk_dialog_run (GTK_DIALOG (dialog));
 		gtk_widget_destroy (dialog);
 		if (result == GTK_RESPONSE_YES) {
@@ -547,7 +547,7 @@ check_database_tables (GdaConnection *conn,
 								   "\n\nDatabase error: \n%s"),
 								 database_name, upgrade_file,
 								 sql_get_last_error (conn));
-				
+
 				gtk_dialog_run (GTK_DIALOG (dialog));
 				gtk_widget_destroy (dialog);
 				retval = FALSE;
@@ -555,7 +555,7 @@ check_database_tables (GdaConnection *conn,
 				gchar *query;
 
 				sql_execute_command (conn, "DELETE * FROM property_global WHERE prop_name='database_version'");
-				query = g_strdup_printf ("INSERT INTO property_global (prop_name, value) VALUES ('database_version','%s')", max_version_upgrade); 
+				query = g_strdup_printf ("INSERT INTO property_global (prop_name, value) VALUES ('database_version','%s')", max_version_upgrade);
 
 				sql_execute_command (conn, query);
 				g_free (query);
@@ -585,22 +585,22 @@ check_database_tables (GdaConnection *conn,
 							 GTK_BUTTONS_CLOSE,
 							 _("Can't create tables in database %s"),
 							 database_name);
-			
+
 			result = gtk_dialog_run (GTK_DIALOG (dialog));
 			gtk_widget_destroy (dialog);
 			retval = FALSE;
 		} else {
 			gchar *query;
-			
-			query = g_strdup_printf ("INSERT INTO property_global (prop_name, value) VALUES ('database_version','%s')", max_version_database); 
-			
+
+			query = g_strdup_printf ("INSERT INTO property_global (prop_name, value) VALUES ('database_version','%s')", max_version_database);
+
 			sql_execute_command (conn, query);
 			g_free (query);
 			retval = TRUE;
 		}
 		g_free (database_file);
 	}
-	
+
 	g_free (max_version_upgrade);
 	g_free (max_version_database);
 	return retval;
@@ -633,7 +633,7 @@ create_database (const gchar   *dsn_name,
 	window = GTK_WINDOW (plugin->main_window);
 
 	/* Use same data but changing the database */
-	dsn->cnc_string = g_strdup_printf (CONNECTION_FORMAT_STRING, host, init_database); 
+	dsn->cnc_string = g_strdup_printf (CONNECTION_FORMAT_STRING, host, init_database);
 	gda_config_save_data_source_info (dsn);
 
 	client = gda_client_new ();
@@ -648,13 +648,13 @@ create_database (const gchar   *dsn_name,
 						 _("Database %s is not setup for Planner. "
 						   "Do you want to do that?"),
 						 db_name);
-		
+
 		result = gtk_dialog_run (GTK_DIALOG (dialog));
 		gtk_widget_destroy (dialog);
-		
+
 		if (result == GTK_RESPONSE_YES) {
-			query = g_strdup_printf ("CREATE DATABASE %s WITH ENCODING = 'UTF8'", 
-						 db_name); 
+			query = g_strdup_printf ("CREATE DATABASE %s WITH ENCODING = 'UTF8'",
+						 db_name);
 			sql_execute_command (conn, query);
 			g_free (query);
 			retval = TRUE;
@@ -677,7 +677,7 @@ sql_get_tested_connection (const gchar   *dsn_name,
 			   const gchar   *host,
 			   const gchar   *db_name,
 			   GdaClient     *client,
-			   PlannerPlugin *plugin) 
+			   PlannerPlugin *plugin)
 {
 	GdaConnection *conn = NULL;
 	gboolean       success;
@@ -688,7 +688,7 @@ sql_get_tested_connection (const gchar   *dsn_name,
 
 	if (conn == NULL) {
 		if (!create_database (dsn_name, host, db_name, plugin)) {
-			str = g_strdup_printf (_("Connection to database '%s@%s' failed."), 
+			str = g_strdup_printf (_("Connection to database '%s@%s' failed."),
 					       db_name, host);
 			show_error_dialog (plugin, str);
 			conn = NULL;
@@ -699,15 +699,15 @@ sql_get_tested_connection (const gchar   *dsn_name,
 
 	if (conn != NULL) {
 
-		success = sql_execute_command (conn, "SET TIME ZONE 'UTC'"); 
+		success = sql_execute_command (conn, "SET TIME ZONE 'UTC'");
 		if (!success) {
 			g_warning ("SET TIME ZONE command failed: %s.",
 					sql_get_last_error (conn));
 			goto out;
 		}
 
-		if (!check_database_tables (conn, plugin)) {		
-			str = g_strdup_printf (_("Test to tables in database '%s' failed."), 
+		if (!check_database_tables (conn, plugin)) {
+			str = g_strdup_printf (_("Test to tables in database '%s' failed."),
 					       db_name);
 			show_error_dialog (plugin, str);
 			g_free (str);
@@ -760,8 +760,8 @@ sql_plugin_retrieve_project_id (PlannerPlugin *plugin,
 	gchar             *filename;
 
 	db_txt = g_strdup_printf (CONNECTION_FORMAT_STRING,server,database);
-	gda_config_save_data_source (dsn_name, 
-                                     provider, 
+	gda_config_save_data_source (dsn_name,
+                                     provider,
                                      db_txt,
                                      "planner project", login, password, FALSE);
 	g_free (db_txt);
@@ -798,13 +798,13 @@ sql_plugin_retrieve_project_id (PlannerPlugin *plugin,
 	filename = mrp_paths_get_glade_dir ("sql.glade");
 	gui = glade_xml_new (filename, "select_dialog", NULL);
 	g_free (filename);
-	
+
 	dialog = glade_xml_get_widget (gui, "select_dialog");
 	treeview = glade_xml_get_widget (gui, "project_treeview");
 	ok_button = glade_xml_get_widget (gui, "ok_button");
 
 	g_object_unref (gui);
-	
+
 	liststore = gtk_list_store_new (4, G_TYPE_INT, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_INT);
 	gtk_tree_view_set_model (GTK_TREE_VIEW (treeview), GTK_TREE_MODEL (liststore));
 
@@ -815,7 +815,7 @@ sql_plugin_retrieve_project_id (PlannerPlugin *plugin,
 							NULL);
 	gtk_tree_view_column_set_resizable (col, TRUE);
 	gtk_tree_view_append_column (GTK_TREE_VIEW (treeview), col);
-	
+
 	cell = gtk_cell_renderer_text_new ();
 	col = gtk_tree_view_column_new_with_attributes (_("Project"),
 							cell,
@@ -823,7 +823,7 @@ sql_plugin_retrieve_project_id (PlannerPlugin *plugin,
 							NULL);
 	gtk_tree_view_column_set_resizable (col, TRUE);
 	gtk_tree_view_append_column (GTK_TREE_VIEW (treeview), col);
-	
+
 	cell = gtk_cell_renderer_text_new ();
 	col = gtk_tree_view_column_new_with_attributes (_("Phase"),
 							cell,
@@ -831,7 +831,7 @@ sql_plugin_retrieve_project_id (PlannerPlugin *plugin,
 							NULL);
 	gtk_tree_view_column_set_resizable (col, TRUE);
 	gtk_tree_view_append_column (GTK_TREE_VIEW (treeview), col);
-	
+
 	cell = gtk_cell_renderer_text_new ();
 	col = gtk_tree_view_column_new_with_attributes (_("Revision"),
 							cell,
@@ -839,12 +839,12 @@ sql_plugin_retrieve_project_id (PlannerPlugin *plugin,
 							NULL);
 	gtk_tree_view_column_set_resizable (col, TRUE);
 	gtk_tree_view_append_column (GTK_TREE_VIEW (treeview), col);
-	
+
 	gtk_tree_view_columns_autosize (GTK_TREE_VIEW (treeview));
-	
+
 	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
-	gtk_tree_selection_set_mode (selection, GTK_SELECTION_SINGLE); 
-	
+	gtk_tree_selection_set_mode (selection, GTK_SELECTION_SINGLE);
+
 	g_signal_connect (selection,
 			  "changed",
 			  G_CALLBACK (selection_changed_cb),
@@ -854,13 +854,13 @@ sql_plugin_retrieve_project_id (PlannerPlugin *plugin,
 			  "row_activated",
 			  G_CALLBACK (row_activated_cb),
 			  ok_button);
-	
+
 	for (i = 0; i < gda_data_model_get_n_rows (model); i++) {
 		gint   id;
 		gchar *name;
 		gchar *phase;
 		gint   revision;
-		
+
 		id = get_int (model, i, 0);
 		name = get_string (model, i, 1);
 		phase = get_string (model, i, 2);
@@ -871,9 +871,9 @@ sql_plugin_retrieve_project_id (PlannerPlugin *plugin,
 			g_free (phase);
 			phase = g_strdup ("");
 		}
-		
+
 		gtk_list_store_append (GTK_LIST_STORE (liststore), &iter);
-		gtk_list_store_set (GTK_LIST_STORE (liststore), 
+		gtk_list_store_set (GTK_LIST_STORE (liststore),
 				    &iter,
 				    COL_ID, id,
 				    COL_NAME, name,
@@ -888,16 +888,16 @@ sql_plugin_retrieve_project_id (PlannerPlugin *plugin,
 	if (gda_data_model_get_n_columns (model) == 0) {
 		gtk_widget_set_sensitive (ok_button, FALSE);
 	}
-	
+
 	g_object_unref (model);
 
 	sql_execute_command (conn,"CLOSE mycursor");
-	
+
 	gtk_widget_show_all (dialog);
 	response = gtk_dialog_run (GTK_DIALOG (dialog));
 
 	project_id = -1;
-	
+
 	switch (response) {
 	case GTK_RESPONSE_CANCEL:
 	case GTK_RESPONSE_DELETE_EVENT:
@@ -908,10 +908,10 @@ sql_plugin_retrieve_project_id (PlannerPlugin *plugin,
 		}
 
 		gtk_tree_model_get (GTK_TREE_MODEL (liststore),
-				    &iter, 
+				    &iter,
 				    COL_ID, &project_id,
 				    -1);
-		
+
 		break;
 	};
 
@@ -942,7 +942,7 @@ sql_plugin_retrieve_db_values (PlannerPlugin  *plugin,
 	gboolean            ret;
 
 	application = planner_window_get_application (plugin->main_window);
-	
+
 	filename = mrp_paths_get_glade_dir ("sql.glade");
 	gui = glade_xml_new (filename, "open_dialog" , NULL);
 	g_free (filename);
@@ -976,7 +976,7 @@ sql_plugin_retrieve_db_values (PlannerPlugin  *plugin,
 		gtk_entry_set_text (GTK_ENTRY (user_entry), str);
 		g_free (str);
 	}
-	
+
 	g_object_unref (gui);
 
 	response = gtk_dialog_run (GTK_DIALOG (dialog));
@@ -988,11 +988,11 @@ sql_plugin_retrieve_db_values (PlannerPlugin  *plugin,
 		*database = strdup_null_if_empty (gtk_entry_get_text (GTK_ENTRY (db_entry)));
 		*login = strdup_null_if_empty (gtk_entry_get_text (GTK_ENTRY (user_entry)));
 		*password = strdup_null_if_empty (gtk_entry_get_text (GTK_ENTRY (password_entry)));
-		
-		planner_conf_set_string (CONF_SERVER, 
+
+		planner_conf_set_string (CONF_SERVER,
 					 *server ? *server : "",
 					 NULL);
-		
+
 		planner_conf_set_string (CONF_DATABASE,
 					 *database ? *database : "",
 					 NULL);
@@ -1009,7 +1009,7 @@ sql_plugin_retrieve_db_values (PlannerPlugin  *plugin,
 	}
 
 	gtk_widget_destroy (dialog);
-		
+
 	return ret;
 }
 
@@ -1039,7 +1039,7 @@ sql_plugin_open (GtkAction *action,
 					    &password)) {
 		return;
 	}
-	
+
 	project_id = sql_plugin_retrieve_project_id (plugin,
 						     server,
 						     port,
@@ -1049,7 +1049,7 @@ sql_plugin_open (GtkAction *action,
 	if (project_id == -1) {
 		goto fail;
 	}
-	
+
 	/* Note: The project can change or disappear between the call above and
 	 * below. We handle that case though.
 	 */
@@ -1059,10 +1059,10 @@ sql_plugin_open (GtkAction *action,
 	project = planner_window_get_project (plugin->main_window);
 	window = GTK_WIDGET (plugin->main_window);
 	application = planner_window_get_application (plugin->main_window);
-	
+
 	if (mrp_project_is_empty (project)) {
 		GObject *object = G_OBJECT (window);
-		
+
 		if (!mrp_project_load (project, uri, &error)) {
 			show_error_dialog (plugin, error->message);
 			g_clear_error (&error);
@@ -1076,29 +1076,29 @@ sql_plugin_open (GtkAction *action,
 		g_object_set_data_full (object, PASSWORD, password, g_free);
 
 		g_free (uri);
-		
+
 		return;
 	} else {
 		GObject *object;
-		
+
 		window = planner_application_new_window (application);
 		project = planner_window_get_project (PLANNER_WINDOW (window));
-		
+
 		object = G_OBJECT (window);
-		
+
 		/* We must get the new plugin object for the new window,
 		 * otherwise we'll pass the wrong window around... a bit
 		 * hackish.
 		 */
 		plugin = g_object_get_data (G_OBJECT (window), "sql-plugin");
-		
+
 		if (!mrp_project_load (project, uri, &error)) {
 			g_warning ("Error: %s", error->message);
 			g_clear_error (&error);
 			gtk_widget_destroy (window);
 			goto fail;
 		}
-		
+
 		g_object_set_data_full (object, SERVER, server, g_free);
 		g_object_set_data_full (object, DATABASE, database, g_free);
 		g_object_set_data_full (object, LOGIN, login, g_free);
@@ -1139,7 +1139,7 @@ sql_plugin_save (GtkAction *action,
 	gchar         *db_txt;
 	const gchar   *dsn_name = "planner-auto";
 	const gchar   *provider = "PostgreSQL";
-		
+
 	project = planner_window_get_project (plugin->main_window);
 
 	if (!sql_plugin_retrieve_db_values (plugin,
@@ -1153,8 +1153,8 @@ sql_plugin_save (GtkAction *action,
 	}
 
 	db_txt = g_strdup_printf (CONNECTION_FORMAT_STRING,server,database);
-	gda_config_save_data_source (dsn_name, 
-                                     provider, 
+	gda_config_save_data_source (dsn_name,
+                                     provider,
                                      db_txt,
                                      "planner project", login, password, FALSE);
 	g_free (db_txt);
@@ -1175,41 +1175,41 @@ sql_plugin_save (GtkAction *action,
 
 	/* First time project */
 	if (uri_plan == NULL) {
-		uri = create_sql_uri (server, port, database, login, password, -1);	
-		if (!mrp_project_save_as (project, uri, FALSE, &error)) { 
+		uri = create_sql_uri (server, port, database, login, password, -1);
+		if (!mrp_project_save_as (project, uri, FALSE, &error)) {
 			show_error_dialog (plugin, error->message);
 			g_clear_error (&error);
 			goto fail;
 		}
 		g_free (uri);
-		
-	} 
+
+	}
 	/* Project was in database */
 	else if (strncmp (uri_plan, "sql://", 6) == 0) {
-		if (!mrp_project_save (project, FALSE, &error)) { 
+		if (!mrp_project_save (project, FALSE, &error)) {
 			show_error_dialog (plugin, error->message);
 			g_clear_error (&error);
 			goto fail;
 		}
-	} 
+	}
 	/* Project wasn't in database */
 	else {
-		uri = create_sql_uri (server, port, database, login, password, -1);	
-		if (!mrp_project_save_as (project, uri, FALSE, &error)) { 
+		uri = create_sql_uri (server, port, database, login, password, -1);
+		if (!mrp_project_save_as (project, uri, FALSE, &error)) {
 			show_error_dialog (plugin, error->message);
 			g_clear_error (&error);
 			goto fail;
 		}
 		g_free (uri);
 	}
-		
+
 	object = G_OBJECT (plugin->main_window);
-	
+
 	g_object_set_data_full (object, SERVER, server, g_free);
 	g_object_set_data_full (object, DATABASE, database, g_free);
 	g_object_set_data_full (object, LOGIN, login, g_free);
 	g_object_set_data_full (object, PASSWORD, password, g_free);
-	
+
 	return;
 
 fail:
@@ -1221,12 +1221,12 @@ fail:
 	g_free (uri);
 }
 
-G_MODULE_EXPORT void 
-plugin_exit (void) 
+G_MODULE_EXPORT void
+plugin_exit (void)
 {
 }
 
-G_MODULE_EXPORT void 
+G_MODULE_EXPORT void
 plugin_init (PlannerPlugin *plugin,
 	     PlannerWindow *main_window)
 {
@@ -1237,17 +1237,17 @@ plugin_init (PlannerPlugin *plugin,
 	gchar          *filename;
 
 	gda_init (PACKAGE, VERSION, 0, NULL);
-	
+
 	priv = g_new0 (SQLPluginPriv, 1);
 
-	g_object_set_data (G_OBJECT (main_window), 
+	g_object_set_data (G_OBJECT (main_window),
 			   PROJECT_ID,
 			   GINT_TO_POINTER (i));
-	g_object_set_data (G_OBJECT (main_window), 
+	g_object_set_data (G_OBJECT (main_window),
 			   "sql-plugin-revision",
 			   GINT_TO_POINTER (i));
 
-	g_object_set_data (G_OBJECT (main_window), 
+	g_object_set_data (G_OBJECT (main_window),
 			   "sql-plugin",
 			   plugin);
 
@@ -1266,7 +1266,7 @@ plugin_init (PlannerPlugin *plugin,
 	filename = mrp_paths_get_ui_dir ("sql-plugin.ui");
 	gtk_ui_manager_add_ui_from_file (ui, filename, NULL);
 	g_free (filename);
-	
+
 	gtk_ui_manager_ensure_update (ui);
 }
 

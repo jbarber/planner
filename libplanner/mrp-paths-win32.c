@@ -53,7 +53,7 @@ mrp_paths_get_glade_dir (const gchar *filename)
 	if (!glade_dir) {
 		glade_dir = g_win32_get_package_installation_subdirectory (NULL, NULL, GLADEDIR);
 	}
-	
+
 	return g_build_filename (glade_dir, filename, NULL);
 }
 
@@ -63,7 +63,7 @@ mrp_paths_get_image_dir (const gchar *filename)
 	if (!image_dir) {
 		image_dir = g_win32_get_package_installation_subdirectory (NULL, NULL, IMAGEDIR);
 	}
-	
+
 	return g_build_filename (image_dir, filename, NULL);
 }
 
@@ -73,7 +73,7 @@ mrp_paths_get_plugin_dir (const gchar *filename)
 	if (!plugin_dir) {
 		plugin_dir = g_win32_get_package_installation_subdirectory (NULL, NULL, PLUGINDIR);
 	}
-	
+
 	return g_build_filename (plugin_dir, filename, NULL);
 }
 
@@ -83,7 +83,7 @@ mrp_paths_get_dtd_dir (const gchar *filename)
 	if (!dtd_dir) {
 		dtd_dir = g_win32_get_package_installation_subdirectory (NULL, NULL, DTDDIR);
 	}
-	
+
 	return g_build_filename (dtd_dir, filename, NULL);
 }
 
@@ -93,7 +93,7 @@ mrp_paths_get_stylesheet_dir (const gchar *filename)
 	if (!stylesheet_dir) {
 		stylesheet_dir = g_win32_get_package_installation_subdirectory (NULL, NULL, STYLESHEETDIR);
 	}
-	
+
 	return g_build_filename (stylesheet_dir, filename, NULL);
 }
 
@@ -103,7 +103,7 @@ mrp_paths_get_ui_dir (const gchar *filename)
 	if (!ui_dir) {
 		ui_dir = g_win32_get_package_installation_subdirectory (NULL, NULL, UIDIR);
 	}
-	
+
 	return g_build_filename (ui_dir, filename, NULL);
 }
 
@@ -113,7 +113,7 @@ mrp_paths_get_storagemodule_dir (const gchar *filename)
 	if (!storagemodule_dir) {
 		storagemodule_dir = g_win32_get_package_installation_subdirectory (NULL, NULL, STORAGEMODULEDIR);
 	}
-	
+
 	return g_build_filename (storagemodule_dir, filename, NULL);
 }
 
@@ -123,7 +123,7 @@ mrp_paths_get_file_modules_dir (const gchar *filename)
 	if (!file_modules_dir) {
 		file_modules_dir = g_win32_get_package_installation_subdirectory (NULL, NULL, FILEMODULEDIR);
 	}
-	
+
 	return g_build_filename (file_modules_dir, filename, NULL);
 }
 
@@ -133,7 +133,7 @@ mrp_paths_get_sql_dir (void)
 	if (!sql_dir) {
 		sql_dir = g_win32_get_package_installation_subdirectory (NULL, NULL, SQLDIR);
 	}
-	
+
 	return sql_dir;
 }
 
@@ -143,6 +143,6 @@ mrp_paths_get_locale_dir (void)
 	if (!locale_dir) {
 		locale_dir = g_win32_get_package_installation_subdirectory (NULL, NULL, GNOMELOCALEDIR);
 	}
-	
+
 	return locale_dir;
 }

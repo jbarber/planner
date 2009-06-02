@@ -39,7 +39,7 @@ struct _MrpTaskManagerPriv {
 	MrpTask    *root;
 
 	gboolean    block_scheduling;
-	
+
 	/* Whether the dependency graph is valid or needs to be rebuilt. */
 	gboolean    needs_rebuild;
 
@@ -72,7 +72,7 @@ static void task_manager_get_property     (GObject             *object,
 					   guint                prop_id,
 					   GValue              *value,
 					   GParamSpec          *pspec);
-static void 
+static void
 task_manager_task_duration_notify_cb      (MrpTask             *task,
 					   GParamSpec          *spec,
 					   MrpTaskManager      *manager);
@@ -182,7 +182,7 @@ static void
 task_manager_init (MrpTaskManager *man)
 {
 	MrpTaskManagerPriv *priv;
-	
+
 	man->priv = g_new0 (MrpTaskManagerPriv, 1);
 	priv = man->priv;
 
@@ -212,10 +212,10 @@ task_manager_set_property (GObject      *object,
 {
 	MrpTaskManager     *manager;
 	MrpTaskManagerPriv *priv;
-	
+
 	manager = MRP_TASK_MANAGER (object);
 	priv = manager->priv;
-	
+
 	switch (prop_id) {
 	case PROP_PROJECT:
 		priv->project = g_value_get_object (value);
@@ -223,7 +223,7 @@ task_manager_set_property (GObject      *object,
 				  "notify::project-start",
 				  G_CALLBACK (task_manager_project_start_notify_cb),
 				  manager);
-		
+
 		mrp_task_manager_set_root (manager, mrp_task_new ());
 		break;
 
@@ -233,15 +233,15 @@ task_manager_set_property (GObject      *object,
 }
 
 static void
-task_manager_get_property (GObject    *object, 
-			   guint       prop_id, 
+task_manager_get_property (GObject    *object,
+			   guint       prop_id,
 			   GValue     *value,
 			   GParamSpec *pspec)
 {
 	MrpTaskManager *manager;
 
 	manager = MRP_TASK_MANAGER (object);
-	
+
 	switch (prop_id) {
 	case PROP_PROJECT:
 		g_value_set_object (value, manager->priv->project);
@@ -257,11 +257,11 @@ MrpTaskManager *
 mrp_task_manager_new (MrpProject *project)
 {
 	MrpTaskManager *manager;
-	
+
 	manager = g_object_new (MRP_TYPE_TASK_MANAGER,
 				"project", project,
 				NULL);
-	
+
 	return manager;
 }
 
@@ -295,11 +295,11 @@ task_manager_task_connect_signals (MrpTaskManager *manager,
 	g_signal_connect (task,
 			  "assignment_added",
 			  G_CALLBACK (task_manager_task_assignment_added_cb),
-			  manager);	
+			  manager);
 	g_signal_connect (task,
 			  "assignment_removed",
 			  G_CALLBACK (task_manager_task_assignment_removed_cb),
-			  manager);	
+			  manager);
 }
 
 /**
@@ -309,9 +309,9 @@ task_manager_task_connect_signals (MrpTaskManager *manager,
  * @position: the position to place task at, with respect to its siblings.
  * If position is -1, task is inserted as the last child of parent.
  * @task: The task to insert.
- * 
+ *
  * Inserts a task beneath the parent at the given position.
- * 
+ *
  **/
 void
 mrp_task_manager_insert_task (MrpTaskManager *manager,
@@ -337,7 +337,7 @@ mrp_task_manager_insert_task (MrpTaskManager *manager,
 	manager->priv->needs_rebuild = TRUE;
 
 	manager->priv->needs_recalc = TRUE;
-	
+
 	imrp_project_task_inserted (manager->priv->project, task);
 
 	mrp_task_manager_recalc (manager, TRUE);
@@ -349,7 +349,7 @@ mrp_task_manager_insert_task (MrpTaskManager *manager,
  * mrp_task_manager_remove_task:
  * @manager: A task manager
  * @task: The task to remove.
- * 
+ *
  * Removes a task, or a task subtree if the task has children. The root task
  * (with id 0) cannot be removed.
  *
@@ -369,7 +369,7 @@ mrp_task_manager_remove_task (MrpTaskManager *manager,
 	g_object_set (task,
 		      "project", NULL,
 		      NULL);
-	
+
 	imrp_task_remove_subtree (task);
 
 	manager->priv->needs_rebuild = TRUE;
@@ -383,16 +383,16 @@ task_manager_get_all_tasks_cb (GNode *node, GList **list)
 	if (node->parent != NULL) {
 		*list = g_list_prepend (*list, node->data);
 	}
-	
+
 	return FALSE; /* don't stop the traversal */
 }
 
 /**
  * mrp_task_manager_get_all_tasks:
  * @manager: A task manager
- * 
+ *
  * Gets all the tasks in the project.
- * 
+ *
  * Return value: A list of all the MrpTasks in the project.
  **/
 GList *
@@ -405,7 +405,7 @@ mrp_task_manager_get_all_tasks (MrpTaskManager *manager)
 	if (manager->priv->root == NULL) {
 		return NULL;
 	}
-	
+
 	tasks = NULL;
 
 	g_node_traverse (imrp_task_get_node (manager->priv->root),
@@ -416,7 +416,7 @@ mrp_task_manager_get_all_tasks (MrpTaskManager *manager)
 			 &tasks);
 
 	tasks = g_list_reverse (tasks);
-	
+
 	return tasks;
 }
 
@@ -432,9 +432,9 @@ task_manager_traverse_cb (GNode *node, MrpTaskTraverseData *data)
  * @root: The task to start traversing
  * @func: A function to call for each traversed task
  * @user_data: Argument to pass to the callback
- * 
+ *
  * Calls %func for the subtree starting at %root, until @func returns %TRUE.
- * 
+ *
  **/
 void
 mrp_task_manager_traverse (MrpTaskManager      *manager,
@@ -449,7 +449,7 @@ mrp_task_manager_traverse (MrpTaskManager      *manager,
 
 	data.func = func;
 	data.user_data = user_data;
-	
+
 	g_node_traverse (imrp_task_get_node (root),
 			 G_PRE_ORDER,
 			 G_TRAVERSE_ALL,
@@ -464,7 +464,7 @@ mrp_task_manager_set_root (MrpTaskManager *manager,
 {
 	GList      *tasks, *l;
 	MrpProject *project;
-	
+
 	g_return_if_fail (MRP_IS_TASK_MANAGER (manager));
 	g_return_if_fail (task == NULL || MRP_IS_TASK (task));
 
@@ -475,11 +475,11 @@ mrp_task_manager_set_root (MrpTaskManager *manager,
 	manager->priv->root = task;
 
 	project = manager->priv->project;
-	
+
 	tasks = mrp_task_manager_get_all_tasks (manager);
 	for (l = tasks; l; l = l->next) {
 		g_object_set (l->data, "project", project, NULL);
-		
+
 		task_manager_task_connect_signals (manager, l->data);
 	}
 
@@ -496,7 +496,7 @@ MrpTask *
 mrp_task_manager_get_root (MrpTaskManager *manager)
 {
 	g_return_val_if_fail (MRP_IS_TASK_MANAGER (manager), NULL);
-	
+
 	return manager->priv->root;
 }
 
@@ -511,7 +511,7 @@ mrp_task_manager_move_task (MrpTaskManager  *manager,
 	MrpTask *old_parent;
 	gint     old_pos;
 	MrpTask *grand_parent;
-	
+
 	g_return_val_if_fail (MRP_IS_TASK_MANAGER (manager), FALSE);
 	g_return_val_if_fail (MRP_IS_TASK (task), FALSE);
 	g_return_val_if_fail (sibling == NULL || MRP_IS_TASK (sibling), FALSE);
@@ -536,9 +536,9 @@ mrp_task_manager_move_task (MrpTaskManager  *manager,
 	mrp_task_invalidate_cost (parent);
 
 	mrp_task_manager_rebuild (manager);
-	
+
 	imrp_project_task_moved (manager->priv->project, task);
-	
+
 	mrp_task_manager_recalc (manager, FALSE);
 
 	return TRUE;
@@ -556,14 +556,14 @@ get_n_chars (gint n, gchar c)
 	gint     i;
 
 	str = g_string_new ("");
-	
+
 	for (i = 0; i < n; i++) {
 		g_string_append_c (str, c);
 	}
 
 	ret = str->str;
 	g_string_free (str, FALSE);
-	
+
 	return ret;
 }
 
@@ -576,7 +576,7 @@ dump_children (GNode *node, gint depth)
 	const gchar *name;
 
 	padding = get_n_chars (2 * depth, ' ');
-	
+
 	for (child = g_node_first_child (node); child; child = g_node_next_sibling (child)) {
 		task = (MrpTask *) child->data;
 
@@ -618,9 +618,9 @@ dump_children (GNode *node, gint depth)
 
 			g_print ("\n");
 		} else {
-			g_print ("%s<unknown>\n", padding); 
+			g_print ("%s<unknown>\n", padding);
 		}
-		
+
 		dump_children (child, depth + 1);
 	}
 
@@ -632,7 +632,7 @@ task_manager_dump_task_tree (GNode *node)
 {
 	g_return_if_fail (node != NULL);
 	g_return_if_fail (node->parent == NULL);
-	
+
 	g_print ("------------------------------------------\n<Root>\n");
 
 	dump_children (node, 1);
@@ -704,7 +704,7 @@ task_manager_get_ancestor_with_same_parent (MrpTask *task_a, MrpTask *task_b)
 			task_b = mrp_task_get_parent (task_b);
 		}
 	}
-	
+
 	ancestor = NULL;
 	while (task_a != NULL && task_b != NULL) {
 
@@ -716,7 +716,7 @@ task_manager_get_ancestor_with_same_parent (MrpTask *task_a, MrpTask *task_b)
 		task_a = mrp_task_get_parent (task_a);
 		task_b = mrp_task_get_parent (task_b);
 	}
-		
+
 	return ancestor;
 }
 
@@ -759,7 +759,7 @@ task_manager_traverse_dependency_graph (MrpTaskManager  *manager,
 								output);
 		}
 	}
-	
+
 	/* Follow parent -> child. */
 	child = mrp_task_get_first_child (task);
 	while (child) {
@@ -780,11 +780,11 @@ dump_task_node (MrpTask *task)
 {
 	MrpTaskGraphNode *node;
 	GList            *l;
-	
+
 	node = imrp_task_get_graph_node (task);
 
 	g_print ("Task: %s\n", mrp_task_get_name (task));
-	
+
 	for (l = node->prev; l; l = l->next) {
 		g_print (" from %s\n", mrp_task_get_name (l->data));
 	}
@@ -814,20 +814,20 @@ add_predecessor_to_dependency_graph_recursive (MrpTask *task,
 	MrpTaskGraphNode *predecessor_node;
 	MrpTask          *child;
 	MrpTaskGraphNode *child_node;
-	
+
 	predecessor_node = imrp_task_get_graph_node (predecessor);
 
 	child = mrp_task_get_first_child (task);
 	while (child) {
 		child_node = imrp_task_get_graph_node (child);
-		
+
 		child_node->prev = g_list_append (child_node->prev, predecessor);
 		predecessor_node->next = g_list_append (predecessor_node->next, child);
-		
+
 		if (mrp_task_get_n_children (child) > 0) {
 			add_predecessor_to_dependency_graph_recursive (child, predecessor);
 		}
-		
+
 		child = mrp_task_get_next_sibling (child);
 	}
 }
@@ -840,9 +840,9 @@ add_predecessor_to_dependency_graph (MrpTaskManager *manager,
 	MrpTaskManagerPriv *priv;
 	MrpTaskGraphNode   *task_node;
 	MrpTaskGraphNode   *predecessor_node;
-	
+
 	priv = manager->priv;
-	
+
 	predecessor_node = imrp_task_get_graph_node (predecessor);
 
 	task_node = imrp_task_get_graph_node (task);
@@ -863,20 +863,20 @@ remove_predecessor_from_dependency_graph_recursive (MrpTask *task,
 	MrpTaskGraphNode *predecessor_node;
 	MrpTask          *child;
 	MrpTaskGraphNode *child_node;
-	
+
 	predecessor_node = imrp_task_get_graph_node (predecessor);
 
 	child = mrp_task_get_first_child (task);
 	while (child) {
 		child_node = imrp_task_get_graph_node (child);
-		
+
 		child_node->prev = g_list_remove (child_node->prev, predecessor);
 		predecessor_node->next = g_list_remove (predecessor_node->next, child);
-		
+
 		if (mrp_task_get_n_children (child) > 0) {
 			remove_predecessor_from_dependency_graph_recursive (child, predecessor);
 		}
-		
+
 		child = mrp_task_get_next_sibling (child);
 	}
 }
@@ -889,16 +889,16 @@ remove_predecessor_from_dependency_graph (MrpTaskManager *manager,
 	MrpTaskManagerPriv *priv;
 	MrpTaskGraphNode   *task_node;
 	MrpTaskGraphNode   *predecessor_node;
-	
+
 	priv = manager->priv;
-	
+
 	predecessor_node = imrp_task_get_graph_node (predecessor);
 
 	task_node = imrp_task_get_graph_node (task);
 
 	task_node->prev = g_list_remove (task_node->prev, predecessor);
 	predecessor_node->next = g_list_remove (predecessor_node->next, task);
-	
+
 	/* Remove dependencies from the predecessor to the task's children,
 	 * recursively.
 	 */
@@ -914,7 +914,7 @@ remove_parent_predecessors_from_dependency_graph (MrpTask *task,
 	MrpTaskGraphNode   *task_node;
 	GList              *list, *l;
 	MrpRelation        *relation;
-	
+
 	/* Remove parent's predecessors from task and all of its children. */
 	list = imrp_task_peek_predecessors (parent);
 	for (l = list; l; l = l->next) {
@@ -926,7 +926,7 @@ remove_parent_predecessors_from_dependency_graph (MrpTask *task,
 		predecessor_node->next = g_list_remove (predecessor_node->next, task);
 		task_node = imrp_task_get_graph_node (task);
 		task_node->prev = g_list_remove (task_node->prev, predecessor);
-			
+
 		/* Remove predecessor from all its children */
 		if (mrp_task_get_n_children (task) > 0) {
 			remove_predecessor_from_dependency_graph_recursive (task, predecessor);
@@ -944,7 +944,7 @@ remove_parent_from_dependency_graph (MrpTaskManager *manager,
 	MrpTaskGraphNode   *parent_node;
 
 	priv = manager->priv;
-	
+
 	task_node = imrp_task_get_graph_node (task);
 	parent_node = imrp_task_get_graph_node (parent);
 
@@ -996,7 +996,7 @@ add_parent_to_dependency_graph (MrpTaskManager *manager,
 	MrpTaskGraphNode   *parent_node;
 
 	priv = manager->priv;
-	
+
 	task_node = imrp_task_get_graph_node (task);
 	parent_node = imrp_task_get_graph_node (parent);
 
@@ -1020,7 +1020,7 @@ remove_task_from_dependency_graph (MrpTaskManager *manager,
 	MrpTask            *predecessor;
 
 	priv = manager->priv;
-	
+
 	/* Remove predecessors. */
 	list = imrp_task_peek_predecessors (task);
 	for (l = list; l; l = l->next) {
@@ -1047,7 +1047,7 @@ add_task_to_dependency_graph (MrpTaskManager *manager,
 	MrpTask            *predecessor;
 
 	priv = manager->priv;
-	
+
 	if (task == priv->root) {
 		return;
 	}
@@ -1060,7 +1060,7 @@ add_task_to_dependency_graph (MrpTaskManager *manager,
 
 		add_predecessor_to_dependency_graph (manager, task, predecessor);
 	}
-	
+
 	/* Add the parent. */
 	if (parent && parent != priv->root) {
 		add_parent_to_dependency_graph (manager, task, parent);
@@ -1105,7 +1105,7 @@ task_manager_build_dependency_graph (MrpTaskManager *manager)
 	MrpTask            *task;
 	MrpTaskGraphNode   *node;
 	GList              *queue;
-	
+
 	priv = manager->priv;
 
 	/* Build a directed, acyclic graph, where relation links and children ->
@@ -1133,7 +1133,7 @@ task_manager_build_dependency_graph (MrpTaskManager *manager)
 	queue = NULL;
 	for (l = tasks; l; l = l->next) {
 		task = l->data;
-		
+
 		node = imrp_task_get_graph_node (task);
 
 		if (node->prev == NULL) {
@@ -1144,7 +1144,7 @@ task_manager_build_dependency_graph (MrpTaskManager *manager)
 	deps = NULL;
 	while (queue) {
 		GList *next, *link;
-		
+
 		task = queue->data;
 
 		link = queue;
@@ -1155,7 +1155,7 @@ task_manager_build_dependency_graph (MrpTaskManager *manager)
 			deps->prev = link;
 		}
 		deps = link;
-		
+
 		/* Remove this task from all the dependent tasks. */
 		node = imrp_task_get_graph_node (task);
 		for (next = node->next; next; next = next->next) {
@@ -1178,7 +1178,7 @@ task_manager_build_dependency_graph (MrpTaskManager *manager)
 
 	g_list_free (queue);
 	g_list_free (tasks);
-	
+
 	mrp_task_manager_traverse (manager,
 				   priv->root,
 				   task_manager_unset_visited_func,
@@ -1193,7 +1193,7 @@ task_manager_build_dependency_graph (MrpTaskManager *manager)
  */
 static mrptime
 task_manager_calculate_task_start (MrpTaskManager *manager,
-				   MrpTask        *task, 
+				   MrpTask        *task,
 				   gint           *duration)
 {
 	MrpTaskManagerPriv *priv;
@@ -1209,7 +1209,7 @@ task_manager_calculate_task_start (MrpTaskManager *manager,
 	MrpConstraint       constraint;
 
 	priv = manager->priv;
-	
+
 	project_start = mrp_project_get_project_start (priv->project);
 	start = project_start;
 
@@ -1221,7 +1221,7 @@ task_manager_calculate_task_start (MrpTaskManager *manager,
 			predecessor = mrp_relation_get_predecessor (relation);
 
 			type = mrp_relation_get_relation_type (relation);
-			
+
 			switch (type) {
 			case MRP_RELATION_FF:
 				/* finish-to-finish */
@@ -1234,7 +1234,7 @@ task_manager_calculate_task_start (MrpTaskManager *manager,
 				dep_start = start;
 
 				break;
-				
+
 			case MRP_RELATION_SF:
 				/* start-to-finish */
 				/* predecessor must start before successor can finish */
@@ -1283,7 +1283,7 @@ task_manager_calculate_task_start (MrpTaskManager *manager,
 		/* Must-start-on. */
 		start = MAX (project_start, constraint.time);
 		break;
-		
+
 	case MRP_CONSTRAINT_ASAP:
 		/* As-soon-as-possible, do nothing. */
 		break;
@@ -1300,7 +1300,7 @@ task_manager_calculate_task_start (MrpTaskManager *manager,
 
 /* NOTE: MrpUnitsInterval moved in mrp-task.h to enable
          other objects to use it. */
-static gint                                         
+static gint
 units_interval_sort_func (gconstpointer a, gconstpointer b)
 {
 	MrpUnitsInterval *ai = *(MrpUnitsInterval **) a;
@@ -1317,8 +1317,8 @@ units_interval_sort_func (gconstpointer a, gconstpointer b)
 		bt = bi->start;
 	} else {
 		bt = bi->end;
-	}		
-	
+	}
+
 	if (at < bt) {
 		return -1;
 	}
@@ -1402,14 +1402,14 @@ task_manager_get_task_units_intervals (MrpTaskManager *manager,
 
 	array = g_ptr_array_new ();
 	priority    = mrp_task_get_priority (task);
-	
+
 #ifdef WITH_SIMPLE_PRIORITY_SCHEDULING
 	v_tasks = mrp_task_manager_get_all_tasks (manager);
 #endif
-	
+
 	for (a = assignments; a; a = a->next) {
 		assignment = a->data;
-		
+
 		resource = mrp_assignment_get_resource (assignment);
 		units_orig = mrp_assignment_get_units (assignment);
 
@@ -1425,13 +1425,13 @@ task_manager_get_task_units_intervals (MrpTaskManager *manager,
 			mrp_interval_get_absolute (ival, date, &i_start, &i_end);
 			units = units_orig;
 			diffe = i_end - i_start;
-			
+
 #ifdef WITH_SIMPLE_PRIORITY_SCHEDULING
 			for (v_l = v_tasks; v_l; v_l = v_l->next) {
 				MrpTask *v_task;
-				
+
 				v_task =  v_l->data;
-				
+
 				if (v_task == task) {
 					continue;
 				}
@@ -1443,7 +1443,7 @@ task_manager_get_task_units_intervals (MrpTaskManager *manager,
 				/* If intervals not overlapped -> contine. */
 				v_start = mrp_task_get_work_start (v_task);
 				v_end = mrp_task_get_finish (v_task);
-					
+
 				if (i_start > v_end || i_end < v_start) {
 					continue;
 				}
@@ -1453,13 +1453,13 @@ task_manager_get_task_units_intervals (MrpTaskManager *manager,
 
 				for (v_a = v_assignments; v_a; v_a = v_a->next) {
 					v_assignment = v_a->data;
-		
+
 					v_resource = mrp_assignment_get_resource (v_assignment);
 					if (v_resource == resource) {
 						v_units = mrp_assignment_get_units (v_assignment);
-						/* 
+						/*
 						   If the dominant cost is compatible with the task
-						   request -> break. 
+						   request -> break.
 
 						   FIXME - tasks that share the vampirised resource not work!
 						*/
@@ -1468,11 +1468,11 @@ task_manager_get_task_units_intervals (MrpTaskManager *manager,
 						}
 
 						/* Trim the interval of the dominant task. */
-						v_start = (v_start < i_start ? 
+						v_start = (v_start < i_start ?
 								   i_start : v_start);
 						v_end = (v_end > i_end ?
 								 i_end : v_end);
-						
+
 						if (i_start < v_start) {
 							/*
 							     ----...
@@ -1488,13 +1488,13 @@ task_manager_get_task_units_intervals (MrpTaskManager *manager,
 							g_ptr_array_add (array, unit_ival_start);
 							g_ptr_array_add (array, unit_ival_end);
 						}
-						
+
 						ival = mrp_interval_new (v_start-date, v_end-date);
 
 						unit_ival_start = units_interval_new (ival, (100 - v_units), TRUE);
 						unit_ival_start->units_full = units;
 						unit_ival_end = units_interval_new (ival, (100 - v_units), FALSE);
-						unit_ival_end->units_full = units;						
+						unit_ival_end->units_full = units;
 						g_ptr_array_add (array, unit_ival_start);
 						g_ptr_array_add (array, unit_ival_end);
 
@@ -1520,8 +1520,8 @@ task_manager_get_task_units_intervals (MrpTaskManager *manager,
 					break;
 				}
 			} /* for (v_l = v_tasks; v_l; ... */
-			
-	
+
+
 			if (v_l == NULL) {
 #endif /* ifdef WITH_SIMPLE_PRIORITY_SCHEDULING */
 			/* Start of the interval. */
@@ -1545,13 +1545,13 @@ task_manager_get_task_units_intervals (MrpTaskManager *manager,
 	 */
 	if (!assignments) {
 		calendar = mrp_project_get_calendar (priv->project);
-		
+
 		day = mrp_calendar_get_day (calendar, date, TRUE);
 		ivals = mrp_calendar_day_get_intervals (calendar, day, TRUE);
-		
+
 		for (l = ivals; l; l = l->next) {
 			ival = l->data;
-			
+
 			/* Start of the interval. */
 			unit_ival = units_interval_new (ival, 100, TRUE);
 			unit_ival->units_full = 100;
@@ -1563,7 +1563,7 @@ task_manager_get_task_units_intervals (MrpTaskManager *manager,
 			g_ptr_array_add (array, unit_ival);
 		}
 	}
-	
+
 #ifdef WITH_SIMPLE_PRIORITY_SCHEDULING
 	/* Requantize the time intervals. */
 	array_split = g_ptr_array_new ();
@@ -1584,7 +1584,7 @@ task_manager_get_task_units_intervals (MrpTaskManager *manager,
 			i_end_post = i_end;
 			for (e = 0 ; e < len ; e+= 2) {
 				unit_ival_start_cmp = g_ptr_array_index (array, e);
-				
+
 				i_start_cmp = unit_ival_start_cmp->start;
 				i_end_cmp = unit_ival_start_cmp->end;
 
@@ -1616,7 +1616,7 @@ task_manager_get_task_units_intervals (MrpTaskManager *manager,
 	for (i = 0; i < array->len; i++) {
 		g_free (array->pdata[i]);
 	}
-	
+
 	g_ptr_array_free (array, TRUE);
 	array = array_split;
 #endif /* ifdef WITH_SIMPLE_PRIORITY_SCHEDULING */
@@ -1631,7 +1631,7 @@ task_manager_get_task_units_intervals (MrpTaskManager *manager,
 	units_full = 0;
 	res_n = 0;
 	for (i = 0; i < len; i++) {
-		unit_ival = g_ptr_array_index (array, i);		
+		unit_ival = g_ptr_array_index (array, i);
 
 		/* Get the next point of change. */
 		t = UNIT_IVAL_GET_TIME (unit_ival);
@@ -1650,10 +1650,10 @@ task_manager_get_task_units_intervals (MrpTaskManager *manager,
 				res_n = 0;
 				unit_ivals = g_list_prepend (unit_ivals, new_unit_ival);
 			}
-			
+
 			poc = t;
 		}
-		
+
 		if (unit_ival->is_start) {
 			units += unit_ival->units;
 			units_full += unit_ival->units_full;
@@ -1669,7 +1669,7 @@ task_manager_get_task_units_intervals (MrpTaskManager *manager,
 	for (i = 0; i < array->len; i++) {
 		g_free (array->pdata[i]);
 	}
-	
+
 	g_ptr_array_free (array, TRUE);
 
 	return g_list_reverse (unit_ivals);
@@ -1688,14 +1688,14 @@ task_manager_calculate_milestone_work_start (MrpTaskManager *manager,
 	GList              *unit_ivals, *l;
 	MrpUnitsInterval   *unit_ival;
 	MrpTaskType         type;
-	
+
 	priv = manager->priv;
 
 	type = mrp_task_get_task_type (task);
 	g_return_if_fail (type == MRP_TASK_TYPE_MILESTONE);
-	
+
 	work_start = -1;
-	
+
 	t = mrp_time_align_day (start);
 
 	while (1) {
@@ -1713,13 +1713,13 @@ task_manager_calculate_milestone_work_start (MrpTaskManager *manager,
 			t += 60*60*24;
 			continue;
 		}
-		
-		for (l = unit_ivals; l; l = l->next) { 
+
+		for (l = unit_ivals; l; l = l->next) {
 			unit_ival = l->data;
 
 			t1 = t + unit_ival->start;
 			t2 = t + unit_ival->end;
-			
+
 			/* Skip any intervals before the task starts. */
 			if (t2 < start) {
 				continue;
@@ -1735,16 +1735,16 @@ task_manager_calculate_milestone_work_start (MrpTaskManager *manager,
 		if (work_start != -1) {
 			break;
 		}
-		
+
 		t += 60*60*24;
 	}
 
 	if (work_start == -1) {
 		work_start = start;
 	}
-	
+
 	imrp_task_set_work_start (task, work_start);
-	
+
 	g_list_foreach (unit_ivals, (GFunc) g_free, NULL);
 	g_list_free (unit_ivals);
 }
@@ -1788,7 +1788,7 @@ task_manager_calculate_task_finish (MrpTaskManager *manager,
 		task_manager_calculate_milestone_work_start (manager, task, start);
 		return start;
 	}
-	
+
 	work = mrp_task_get_work (task);
 	sched = mrp_task_get_sched (task);
 
@@ -1802,7 +1802,7 @@ task_manager_calculate_task_finish (MrpTaskManager *manager,
 
 	finish = start;
 	work_start = -1;
-	
+
 	t = mrp_time_align_day (start);
 
 	while (1) {
@@ -1821,8 +1821,8 @@ task_manager_calculate_task_finish (MrpTaskManager *manager,
 			t += 60*60*24;
 			continue;
 		}
-		
-		for (l = unit_ivals; l; l = l->next) { 
+
+		for (l = unit_ivals; l; l = l->next) {
 			unit_ival = l->data;
 
 			t1 = t + unit_ival->start;
@@ -1838,7 +1838,7 @@ task_manager_calculate_task_finish (MrpTaskManager *manager,
 			if (t1 == t2) {
 				continue;
 			}
-			
+
 			if (work_start == -1) {
 				work_start = t1;
 			}
@@ -1860,7 +1860,7 @@ task_manager_calculate_task_finish (MrpTaskManager *manager,
 						finish = t1 + floor (work - effort);
 						*duration -= floor (0.5 + (effort + delta - work));
 					}
-					
+
 					unit_ival->start = t1;
 					unit_ival->end = finish;
 					unit_ivals_tot = g_list_prepend (unit_ivals_tot, unit_ival);
@@ -1884,7 +1884,7 @@ task_manager_calculate_task_finish (MrpTaskManager *manager,
 				delta = 0;
 				g_assert_not_reached ();
 			}
-			
+
 			effort += delta;
 		}
 		t += 60*60*24;
@@ -1899,7 +1899,7 @@ task_manager_calculate_task_finish (MrpTaskManager *manager,
 
 	/* clean the tail of the list before exit of function. */
 	if (l) {
-		for (l = l->next ; l; l = l->next) { 
+		for (l = l->next ; l; l = l->next) {
 			unit_ival = l->data;
 		g_free (unit_ival);
 		}
@@ -1959,7 +1959,7 @@ task_manager_calculate_task_start_from_finish (MrpTaskManager *manager,
 		task_manager_calculate_milestone_work_start (manager, task, start);
 		return start;
 	}
-	
+
 	work = mrp_task_get_work (task);
 	sched = mrp_task_get_sched (task);
 
@@ -1984,13 +1984,13 @@ task_manager_calculate_task_start_from_finish (MrpTaskManager *manager,
 			t -= 60*60*24;
 			continue;
 		}
-		
-		for (l = unit_ivals; l; l = l->next) { 
+
+		for (l = unit_ivals; l; l = l->next) {
 			unit_ival = l->data;
 
 			t1 = t + unit_ival->start;
 			t2 = t + unit_ival->end;
-			
+
 			/* Skip any intervals after the task ends. */
 			if (t1 > finish) {
 				continue;
@@ -2002,7 +2002,7 @@ task_manager_calculate_task_start_from_finish (MrpTaskManager *manager,
 			if (t1 == t2) {
 				continue;
 			}
-			
+
 			if (work_start == -1) {
 				work_start = t1;
 			}
@@ -2012,7 +2012,7 @@ task_manager_calculate_task_start_from_finish (MrpTaskManager *manager,
 				delta = floor (0.5 + (double) unit_ival->units * (t2 - t1) / 100.0);
 
 				*duration += (t2 - t1);
-				
+
 				if (effort + delta >= work) {
 					/* Subtract the spill to duration. */
 					if (unit_ival->units) {
@@ -2021,13 +2021,13 @@ task_manager_calculate_task_start_from_finish (MrpTaskManager *manager,
 					} else {
 						start = t2 - floor (0.5 + (work - effort));
 						*duration -= floor (0.5 + (effort + delta - work));
-					}						
+					}
 					goto done;
 				}
 			}
 			else if (sched == MRP_TASK_SCHED_FIXED_DURATION) {
 				delta = t2 - t1;
-				
+
 				if (unit_ival->units_full == 0) {
 					delta = 0;
 				} else if (effort + delta >= *duration) {
@@ -2040,10 +2040,10 @@ task_manager_calculate_task_start_from_finish (MrpTaskManager *manager,
 				delta = 0;
 				g_assert_not_reached ();
 			}
-			
+
 			effort += delta;
 		}
-		
+
 		t -= 60*60*24;
 	}
 
@@ -2076,12 +2076,12 @@ task_manager_do_forward_pass_helper (MrpTaskManager *manager,
 	MrpTaskSched        sched;
 
 	priv = manager->priv;
-	
+
 	old_start = mrp_task_get_start (task);
 	old_finish = mrp_task_get_finish (task);
 	old_duration = old_finish - old_start;
 	duration = 0;
-	
+
 	if (mrp_task_get_n_children (task) > 0) {
 		MrpTask *child;
 
@@ -2089,7 +2089,7 @@ task_manager_do_forward_pass_helper (MrpTaskManager *manager,
 		sub_work_start = -1;
 		sub_finish = -1;
 		work = 0;
-				
+
 		child = mrp_task_get_first_child (task);
 		while (child) {
 			t1 = mrp_task_get_start (child);
@@ -2105,7 +2105,7 @@ task_manager_do_forward_pass_helper (MrpTaskManager *manager,
 			} else {
 				sub_finish = MAX (sub_finish, t2);
 			}
-			
+
 			t2 = mrp_task_get_work_start (child);
 			if (sub_work_start == -1) {
 				sub_work_start = t2;
@@ -2131,37 +2131,37 @@ task_manager_do_forward_pass_helper (MrpTaskManager *manager,
 		/* Non-summary task. */
 		t1 = task_manager_calculate_task_start (manager, task, &duration);
 		t2 = task_manager_calculate_task_finish (manager, task, t1, &duration);
-		
+
 		imrp_task_set_start (task, t1);
 		imrp_task_set_finish (task, t2);
-		
+
 		sched = mrp_task_get_sched (task);
 		if (sched == MRP_TASK_SCHED_FIXED_WORK) {
 			imrp_task_set_duration (task, duration);
 		} else {
 			duration = mrp_task_get_duration (task);
 			work = mrp_task_get_work (task);
-			
+
 			/* Update resource units for fixed duration. */
 			if (duration > 0) {
 				GList         *assignments, *a;
 				MrpAssignment *assignment;
 				gint           n, units;
-				
+
 				assignments = mrp_task_get_assignments (task);
-				
+
 				n = g_list_length (assignments);
 				units = floor (0.5 + 100.0 * (gdouble) work / duration / n);
-				
+
 				for (a = assignments; a; a = a->next) {
 					assignment = a->data;
-					
+
 					g_signal_handlers_block_by_func (assignment,
 									 task_manager_assignment_units_notify_cb,
 									 manager);
-					
+
 					g_object_set (assignment, "units", units, NULL);
-					
+
 					g_signal_handlers_unblock_by_func (assignment,
 									   task_manager_assignment_units_notify_cb,
 									   manager);
@@ -2174,7 +2174,7 @@ task_manager_do_forward_pass_helper (MrpTaskManager *manager,
 	if (old_start != new_start) {
 		g_object_notify (G_OBJECT (task), "start");
 	}
-	
+
 	new_finish = mrp_task_get_finish (task);
 	if (old_finish != new_finish) {
 		g_object_notify (G_OBJECT (task), "finish");
@@ -2204,7 +2204,7 @@ task_manager_do_forward_pass (MrpTaskManager *manager,
 	} else {
 		l = priv->dependency_list;
 	}
-	
+
 	while (l) {
 		task_manager_do_forward_pass_helper (manager, l->data);
 		l = l->next;
@@ -2227,7 +2227,7 @@ task_manager_do_backward_pass (MrpTaskManager *manager)
 	gint                duration;
 	gboolean            critical;
 	gboolean            was_critical;
-	
+
 	priv = manager->priv;
 
 	project_finish = mrp_task_get_finish (priv->root);
@@ -2253,7 +2253,7 @@ task_manager_do_backward_pass (MrpTaskManager *manager)
 
 			relation = s->data;
 			successor = mrp_relation_get_successor (relation);
-			
+
 			child = mrp_task_get_first_child (successor);
 			if (child) {
 				/* If successor has children go through them
@@ -2261,7 +2261,7 @@ task_manager_do_backward_pass (MrpTaskManager *manager)
 				 */
 				for (; child; child = mrp_task_get_next_sibling (child)) {
 					successor = child;
-					
+
 					t2 = mrp_task_get_latest_start (successor) -
 						mrp_relation_get_lag (relation);
 
@@ -2300,9 +2300,9 @@ task_manager_do_backward_pass (MrpTaskManager *manager)
 		g_print ("Task %s:\n", mrp_task_get_name (task));
 		g_print ("  latest start   : "); mrp_time_debug_print (mrp_task_get_latest_start (task));
 		g_print ("  latest finish  : "); mrp_time_debug_print (mrp_task_get_latest_finish (task));
-	
+
 #endif
-		
+
 		if (was_critical != critical) {
 			g_object_set (task, "critical", critical, NULL);
 		}
@@ -2319,11 +2319,11 @@ mrp_task_manager_set_block_scheduling (MrpTaskManager *manager, gboolean block)
 	g_return_if_fail (MRP_IS_TASK_MANAGER (manager));
 
 	priv = manager->priv;
-	
+
 	if (priv->block_scheduling == block) {
 		return;
 	}
-	
+
 	priv->block_scheduling = block;
 
 	if (!block) {
@@ -2348,13 +2348,13 @@ mrp_task_manager_rebuild (MrpTaskManager *manager)
 	g_return_if_fail (manager->priv->root != NULL);
 
 	priv = manager->priv;
-	
+
 	if (priv->block_scheduling) {
 		return;
 	}
 
 	task_manager_build_dependency_graph (manager);
-	
+
 	priv->needs_rebuild = FALSE;
 	priv->needs_recalc = TRUE;
 }
@@ -2370,7 +2370,7 @@ mrp_task_manager_recalc (MrpTaskManager *manager,
 	g_return_if_fail (manager->priv->root != NULL);
 
 	priv = manager->priv;
-	
+
 	if (priv->block_scheduling) {
 		return;
 	}
@@ -2380,7 +2380,7 @@ mrp_task_manager_recalc (MrpTaskManager *manager,
 	}
 
 	priv->needs_recalc |= force;
-	
+
 	if (!priv->needs_recalc && !priv->needs_rebuild) {
 		return;
 	}
@@ -2396,7 +2396,7 @@ mrp_task_manager_recalc (MrpTaskManager *manager,
 	if (!project) {
 		return;
 	}
-	
+
 	priv->in_recalc = TRUE;
 
 	if (priv->needs_rebuild) {
@@ -2448,7 +2448,7 @@ task_manager_task_relation_notify_cb (MrpRelation    *relation,
 				      GParamSpec     *spec,
 				      MrpTaskManager *manager)
 {
-	mrp_task_manager_recalc (manager, TRUE);	
+	mrp_task_manager_recalc (manager, TRUE);
 }
 
 static void
@@ -2457,7 +2457,7 @@ task_manager_assignment_units_notify_cb (MrpAssignment  *assignment,
 					 MrpTaskManager *manager)
 {
 	mrp_task_invalidate_cost (mrp_assignment_get_task (assignment));
-	mrp_task_manager_recalc (manager, TRUE);	
+	mrp_task_manager_recalc (manager, TRUE);
 }
 
 static void
@@ -2492,11 +2492,11 @@ task_manager_task_relation_removed_cb (MrpTask        *task,
 	if (task == mrp_relation_get_predecessor (relation)) {
 		return;
 	}
-	
+
 	g_signal_handlers_disconnect_by_func (relation,
 					      task_manager_task_relation_notify_cb,
 					      manager);
-	
+
 	manager->priv->needs_rebuild = TRUE;
 	mrp_task_manager_recalc (manager, FALSE);
 }
@@ -2509,7 +2509,7 @@ task_manager_task_assignment_added_cb (MrpTask        *task,
 	g_signal_connect_object (assignment, "notify::units",
 				 G_CALLBACK (task_manager_assignment_units_notify_cb),
 				 manager, 0);
-		
+
 	mrp_task_invalidate_cost (task);
 	manager->priv->needs_rebuild = TRUE;
 	mrp_task_manager_recalc (manager, FALSE);
@@ -2520,10 +2520,10 @@ task_manager_task_assignment_removed_cb (MrpTask        *task,
 					 MrpAssignment  *assignment,
 					 MrpTaskManager *manager)
 {
-	g_signal_handlers_disconnect_by_func (assignment, 
+	g_signal_handlers_disconnect_by_func (assignment,
 					      task_manager_assignment_units_notify_cb,
 					      manager);
-	
+
 	mrp_task_invalidate_cost (task);
 	manager->priv->needs_rebuild = TRUE;
 	mrp_task_manager_recalc (manager, FALSE);
@@ -2548,14 +2548,14 @@ check_predecessor_traverse (MrpTaskManager *manager,
 	}
 
 	imrp_task_set_visited (task, TRUE);
-	
+
 	node = imrp_task_get_graph_node (task);
 	for (l = node->next; l; l = l->next) {
 		if (!check_predecessor_traverse (manager, l->data, end, length + 1)) {
 			return FALSE;
 		}
 	}
-	
+
 	return TRUE;
 }
 
@@ -2565,7 +2565,7 @@ check_move_traverse_recursive (MrpTaskManager *manager,
 {
 	MrpTask          *child;
 	gboolean          retval = TRUE;
-	
+
 	child = mrp_task_get_first_child (task);
 	while (retval && child) {
 		retval = check_predecessor_traverse (manager, child, child, 1);
@@ -2573,7 +2573,7 @@ check_move_traverse_recursive (MrpTaskManager *manager,
 		if (retval && mrp_task_get_n_children (child) > 0) {
 			retval = check_move_traverse_recursive (manager, child);
 		}
-		
+
 		child = mrp_task_get_next_sibling (child);
 	}
 
@@ -2595,7 +2595,7 @@ mrp_task_manager_check_predecessor (MrpTaskManager  *manager,
 				    GError         **error)
 {
 	gboolean retval;
-	
+
 	g_return_val_if_fail (MRP_IS_TASK_MANAGER (manager), FALSE);
 	g_return_val_if_fail (MRP_IS_TASK (task), FALSE);
 	g_return_val_if_fail (MRP_IS_TASK (predecessor), FALSE);
@@ -2603,26 +2603,26 @@ mrp_task_manager_check_predecessor (MrpTaskManager  *manager,
 	if (manager->priv->needs_rebuild) {
 		mrp_task_manager_rebuild (manager);
 	}
-	
+
 	/* Add the predecessor to check. */
 	add_predecessor_to_dependency_graph (manager, task, predecessor);
-	
+
 	if (0) {
 		g_print ("--->\n");
 		dump_all_task_nodes (manager);
 		g_print ("<---\n");
 	}
-	
+
 	mrp_task_manager_traverse (manager,
 				   manager->priv->root,
 				   task_manager_unset_visited_func,
 				   NULL);
-	
+
 	retval = check_predecessor_traverse (manager, predecessor, predecessor, 1);
 
 	/* Remove the predecessor again. */
 	remove_predecessor_from_dependency_graph (manager, task, predecessor);
-	
+
 	if (!retval) {
 		g_set_error (error,
 			     MRP_ERROR,
@@ -2641,7 +2641,7 @@ mrp_task_manager_check_move (MrpTaskManager  *manager,
 			     GError         **error)
 {
 	gboolean retval;
-	
+
 	g_return_val_if_fail (MRP_IS_TASK_MANAGER (manager), FALSE);
 	g_return_val_if_fail (MRP_IS_TASK (task), FALSE);
 	g_return_val_if_fail (MRP_IS_TASK (parent), FALSE);
@@ -2649,18 +2649,18 @@ mrp_task_manager_check_move (MrpTaskManager  *manager,
 	/* Remove the task from the old parent and add it to its new parent. */
 	remove_task_from_dependency_graph (manager, task, mrp_task_get_parent (task));
 	add_task_to_dependency_graph (manager, task, parent);
-	
+
 	if (0) {
 		g_print ("--->\n");
 		dump_all_task_nodes (manager);
 		g_print ("<---\n");
 	}
-	
+
 	mrp_task_manager_traverse (manager,
 				   manager->priv->root,
 				   task_manager_unset_visited_func,
 				   NULL);
-	
+
 	retval = check_move_traverse (manager, task);
 
 	/* Put the task back again. */
@@ -2707,26 +2707,26 @@ task_manager_get_work_for_calendar (MrpTaskManager *manager,
 
 		for (l = ivals; l; l = l->next) {
 			ival = l->data;
-			
+
 			mrp_interval_get_absolute (ival, t, &t1, &t2);
-			
+
 			/* Skip intervals that are before the task. */
 			if (t2 < start) {
 				continue;
 			}
-			
+
 			/* Stop if the interval starts after the task. */
 			if (t1 >= finish) {
 				break;
 			}
-			
+
 			/* Don't add time outside the task. */
 			t1 = MAX (t1, start);
 			t2 = MIN (t2, finish);
-			
+
 			work += t2 - t1;
 		}
-		
+
 		t += 24*60*60;
 	}
 
@@ -2772,8 +2772,8 @@ task_manager_get_work_for_task_with_assignments (MrpTaskManager *manager,
 			t += 60*60*24;
 			continue;
 		}
-		
-		for (l = ivals; l; l = l->next) { 
+
+		for (l = ivals; l; l = l->next) {
 			ival = l->data;
 
 			t1 = t + ival->start;
@@ -2796,10 +2796,10 @@ task_manager_get_work_for_task_with_assignments (MrpTaskManager *manager,
 			}
 
 			delta = floor (0.5 + (double) ival->units * (t2 - t1) / 100.0);
-			
+
 			work += delta;
 		}
-	
+
 
 		t += 24*60*60;
 	}
@@ -2837,7 +2837,7 @@ mrp_task_manager_calculate_task_work (MrpTaskManager *manager,
 	if (finish <= start) {
 		return 0;
 	}
-	
+
 	/* Loop through the intervals of the assigned resources' calendars (or
 	 * the project calendar if no resources are assigned), and add up the
 	 * work.
@@ -2893,7 +2893,7 @@ mrp_task_manager_calculate_summary_duration (MrpTaskManager *manager,
 	if (finish <= start) {
 		return 0;
 	}
-	
+
 	calendar = mrp_project_get_calendar (priv->project);
 
 	duration = 0;
@@ -2909,26 +2909,26 @@ mrp_task_manager_calculate_summary_duration (MrpTaskManager *manager,
 
 		for (l = ivals; l; l = l->next) {
 			ival = l->data;
-			
+
 			mrp_interval_get_absolute (ival, t, &t1, &t2);
-			
+
 			/* Skip intervals that are before the task. */
 			if (t2 < start) {
 				continue;
 			}
-			
+
 			/* Stop if the interval starts after the task. */
 			if (t1 >= finish) {
 				break;
 			}
-			
+
 			/* Don't add time outside the task. */
 			t1 = MAX (t1, start);
 			t2 = MIN (t2, finish);
-			
+
 			duration += t2 - t1;
 		}
-		
+
 		t += 24*60*60;
 	}
 

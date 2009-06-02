@@ -15,7 +15,7 @@
 #define EGG_RECENT_UTIL_HOSTNAME_SIZE 512
 
 /* ripped out of gedit2 */
-gchar* 
+gchar*
 egg_recent_util_escape_underlines (const gchar* text)
 {
 	GString *str;
@@ -66,8 +66,8 @@ load_icon_file (char          *filename,
 	if (pixbuf == NULL) {
 		return NULL;
 	}
-	
-	width = gdk_pixbuf_get_width (pixbuf); 
+
+	width = gdk_pixbuf_get_width (pixbuf);
 	height = gdk_pixbuf_get_height (pixbuf);
 	/* if the icon is larger than the nominal size, scale down */
 	if (MAX (width, height) > nominal_size) {
@@ -95,10 +95,10 @@ egg_recent_util_get_icon (GnomeIconTheme *theme, const gchar *uri,
 	gchar *filename;
 	const GnomeIconData *icon_data;
 	GdkPixbuf *pixbuf;
-	
+
 	icon = gnome_icon_lookup (theme, NULL, uri, NULL, NULL,
 				  mime_type, 0, NULL);
-	
+
 
 	g_return_val_if_fail (icon != NULL, NULL);
 
@@ -114,8 +114,8 @@ egg_recent_util_get_icon (GnomeIconTheme *theme, const gchar *uri,
 
 	pixbuf = load_icon_file (filename, size);
 	g_free (filename);
-	
-	
+
+
 	return pixbuf;
 }
 #endif /* !USE_STABLE_LIBGNOMEUI */
@@ -127,9 +127,9 @@ egg_recent_util_get_unique_id (void)
 	time_t the_time;
 	guint32 rand;
 	int pid;
-	
+
 	gethostname (hostname, EGG_RECENT_UTIL_HOSTNAME_SIZE);
-	
+
 	time (&the_time);
 	rand = g_random_int ();
 	pid = getpid ();

@@ -43,7 +43,7 @@ planner_view_get_label (PlannerView *view)
 	if (PLANNER_VIEW_GET_CLASS (view)->get_label) {
 		return PLANNER_VIEW_GET_CLASS (view)->get_label (view);
 	}
-	
+
 	return NULL;
 }
 
@@ -114,7 +114,7 @@ planner_view_activate (PlannerView *view)
 	g_return_if_fail (PLANNER_IS_VIEW (view));
 
 	view->activated = TRUE;
-	
+
 	if (PLANNER_VIEW_GET_CLASS (view)->activate) {
 		PLANNER_VIEW_GET_CLASS (view)->activate (view);
 	}
@@ -148,11 +148,11 @@ gint
 planner_view_print_get_n_pages (PlannerView *view)
 {
 	g_return_val_if_fail (PLANNER_IS_VIEW (view), 0);
-	
+
 	if (PLANNER_VIEW_GET_CLASS (view)->print_get_n_pages) {
 		return PLANNER_VIEW_GET_CLASS (view)->print_get_n_pages (view);
 	}
-	
+
 	return 0;
 }
 
@@ -251,7 +251,7 @@ planner_view_column_load_helper (PlannerView *view,
 						 column,
 						 l->prev ? l->prev->data : NULL);
 	}
-		
+
 	g_list_free (columns);
 }
 
@@ -264,7 +264,7 @@ planner_view_column_save_helper (PlannerView *view,
 	const gchar       *id;
 	gchar             *key;
 	gint               i;
-	
+
 	columns = gtk_tree_view_get_columns (tree);
 	for (i = 0, l = columns; l; i++, l = l->next) {
 		column = l->data;
@@ -289,7 +289,7 @@ planner_view_column_save_helper (PlannerView *view,
 				       planner_view_get_name (view), id);
 		planner_conf_set_int (key, i, NULL);
 		g_free (key);
-		
+
 		key = g_strdup_printf ("/%s/columns/%s/width",
 				       planner_view_get_name (view), id);
 		planner_conf_set_int (key,

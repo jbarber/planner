@@ -47,11 +47,11 @@ static void     mgm_get_value                (GtkTreeModel        *tree_model,
 static void     mgm_group_notify_cb          (MrpGroup            *group,
 					      GParamSpec          *pspec,
 					      PlannerGroupModel        *model);
-static void     mgm_group_added_cb           (MrpProject          *project, 
+static void     mgm_group_added_cb           (MrpProject          *project,
 					      MrpGroup            *resource,
 					      PlannerGroupModel        *model);
 
-static void     mgm_group_removed_cb         (MrpProject          *project, 
+static void     mgm_group_removed_cb         (MrpProject          *project,
 					      MrpGroup            *resource,
 					      PlannerGroupModel        *model);
 
@@ -66,7 +66,7 @@ GType
 planner_group_model_get_type (void)
 {
         static GType rm_type = 0;
-        
+
         if (!rm_type) {
                 static const GTypeInfo rm_info =
                         {
@@ -80,12 +80,12 @@ planner_group_model_get_type (void)
                                 0,
                                 (GInstanceInitFunc) mgm_init,
                         };
-                
+
                 rm_type = g_type_register_static (PLANNER_TYPE_LIST_MODEL,
-                                                  "PlannerGroupModel", 
+                                                  "PlannerGroupModel",
                                                   &rm_info, 0);
         }
-        
+
         return rm_type;
 }
 
@@ -94,11 +94,11 @@ mgm_class_init (PlannerGroupModelClass *klass)
 {
         GObjectClass     *object_class;
 	PlannerListModelClass *lm_class;
-	
+
         parent_class = g_type_class_peek_parent (klass);
         object_class = G_OBJECT_CLASS (klass);
 	lm_class     = PLANNER_LIST_MODEL_CLASS (klass);
-	
+
         object_class->finalize = mgm_finalize;
 
 	lm_class->get_n_columns   = mgm_get_n_columns;
@@ -110,11 +110,11 @@ static void
 mgm_init (PlannerGroupModel *model)
 {
         PlannerGroupModelPriv *priv;
-        
+
         priv = g_new0 (PlannerGroupModelPriv, 1);
-                
+
 	priv->project = NULL;
-	
+
         model->priv = priv;
 }
 
@@ -130,24 +130,24 @@ mgm_finalize (GObject *object)
 
 	groups = planner_list_model_get_data (PLANNER_LIST_MODEL (model));
 	for (l = groups; l; l = l->next) {
-		g_signal_handlers_disconnect_by_func (MRP_GROUP (l->data), 
+		g_signal_handlers_disconnect_by_func (MRP_GROUP (l->data),
 						      mgm_group_notify_cb,
 						      model);
 	}
-	g_signal_handlers_disconnect_by_func (model->priv->project, 
+	g_signal_handlers_disconnect_by_func (model->priv->project,
 					      mgm_group_added_cb,
 					      model);
-	g_signal_handlers_disconnect_by_func (model->priv->project, 
+	g_signal_handlers_disconnect_by_func (model->priv->project,
 					      mgm_group_removed_cb,
 					      model);
-	g_signal_handlers_disconnect_by_func (model->priv->project, 
+	g_signal_handlers_disconnect_by_func (model->priv->project,
 					      mgm_default_group_changed_cb,
 					      model);
 
 	g_object_unref (model->priv->project);
 	g_free (model->priv);
 	model->priv = NULL;
-        
+
         if (G_OBJECT_CLASS (parent_class)->finalize) {
                 (* G_OBJECT_CLASS (parent_class)->finalize) (object);
         }
@@ -169,7 +169,7 @@ mgm_get_column_type (GtkTreeModel *tree_model,
         case GROUP_COL_MANAGER_PHONE:
         case GROUP_COL_MANAGER_EMAIL:
                 return G_TYPE_STRING;
-		
+
         case GROUP_COL_GROUP_DEFAULT:
                 return G_TYPE_BOOLEAN;
 
@@ -198,7 +198,7 @@ mgm_get_value (GtkTreeModel *tree_model,
 	priv = PLANNER_GROUP_MODEL (tree_model)->priv;
         group = MRP_GROUP (planner_list_model_get_object (
 				   PLANNER_LIST_MODEL (tree_model), iter));
-        
+
         switch (column) {
         case GROUP_COL_NAME:
                 mrp_object_get (group, "name", &str, NULL);
@@ -213,7 +213,7 @@ mgm_get_value (GtkTreeModel *tree_model,
 			      NULL);
 
 		is_default = (group == default_group);
-		
+
                 g_value_init (value, G_TYPE_BOOLEAN);
                 g_value_set_boolean (value, is_default);
 
@@ -232,7 +232,7 @@ mgm_get_value (GtkTreeModel *tree_model,
                 g_value_init (value, G_TYPE_STRING);
 		g_value_set_string (value, str);
 		g_free (str);
-		
+
                 break;
 
 	case GROUP_COL_MANAGER_EMAIL:
@@ -240,13 +240,13 @@ mgm_get_value (GtkTreeModel *tree_model,
                 g_value_init (value, G_TYPE_STRING);
 		g_value_set_string (value, str);
 		g_free (str);
-		
+
                 break;
 
 	case GROUP_COL:
                 g_value_init (value, MRP_TYPE_GROUP);
 		g_value_set_object (value, group);
-		
+
                 break;
 
 	default:
@@ -266,20 +266,20 @@ mgm_group_notify_cb (MrpGroup *group, GParamSpec *pspec, PlannerGroupModel *mode
 
 	tree_model = GTK_TREE_MODEL (model);
 
-	path = planner_list_model_get_path (PLANNER_LIST_MODEL (model), 
+	path = planner_list_model_get_path (PLANNER_LIST_MODEL (model),
 				       MRP_OBJECT (group));
 
 	if (path) {
 		gtk_tree_model_get_iter (tree_model, &iter, path);
-		gtk_tree_model_row_changed (GTK_TREE_MODEL (model), 
+		gtk_tree_model_row_changed (GTK_TREE_MODEL (model),
 					    path, &iter);
 
 		gtk_tree_path_free (path);
-	}	
+	}
 }
 
 static void
-mgm_group_added_cb (MrpProject   *project, 
+mgm_group_added_cb (MrpProject   *project,
 		    MrpGroup     *group,
 		    PlannerGroupModel *model)
 {
@@ -301,7 +301,7 @@ mgm_group_removed_cb (MrpProject   *project,
 	g_return_if_fail (PLANNER_IS_GROUP_MODEL (model));
 	g_return_if_fail (MRP_IS_GROUP (group));
 
-	g_signal_handlers_disconnect_by_func (group, 
+	g_signal_handlers_disconnect_by_func (group,
 					      mgm_group_notify_cb,
 					      model);
 
@@ -320,20 +320,20 @@ mgm_default_group_changed_cb (MrpProject   *project,
 
 	g_return_if_fail (PLANNER_IS_GROUP_MODEL (model));
 
-	if (group == NULL) 
+	if (group == NULL)
 		return;
 
 	groups = planner_list_model_get_data (PLANNER_LIST_MODEL (model));
-	
+
 	i = g_list_index (groups, group);
 
 	path = gtk_tree_path_new ();
 	gtk_tree_path_append_index (path, i);
 
 	gtk_tree_model_get_iter (GTK_TREE_MODEL (model), &iter, path);
-	
+
 	gtk_tree_model_row_changed (GTK_TREE_MODEL (model), path, &iter);
-	
+
 	gtk_tree_path_free (path);
 }
 
@@ -343,9 +343,9 @@ planner_group_model_new (MrpProject *project)
         PlannerGroupModel     *model;
         PlannerGroupModelPriv *priv;
 	GList                 *groups;
-	
+
         model = g_object_new (PLANNER_TYPE_GROUP_MODEL, NULL);
-        
+
         priv = model->priv;
 
         groups = mrp_project_get_groups (project);
@@ -353,19 +353,19 @@ planner_group_model_new (MrpProject *project)
 
 	priv->project = g_object_ref (project);
 
-	g_signal_connect_object (project,  
-				 "group_added", 
-				 G_CALLBACK (mgm_group_added_cb), 
+	g_signal_connect_object (project,
+				 "group_added",
+				 G_CALLBACK (mgm_group_added_cb),
 				 model, 0);
 
-	g_signal_connect_object (project,  
-				 "group_removed", 
-				 G_CALLBACK (mgm_group_removed_cb), 
+	g_signal_connect_object (project,
+				 "group_removed",
+				 G_CALLBACK (mgm_group_removed_cb),
 				 model, 0);
 
-	g_signal_connect_object (project,  
-				 "default_group_changed", 
-				 G_CALLBACK (mgm_default_group_changed_cb), 
+	g_signal_connect_object (project,
+				 "default_group_changed",
+				 G_CALLBACK (mgm_default_group_changed_cb),
 				 model, 0);
 
         return model;

@@ -56,20 +56,20 @@ struct _PlannerGanttPrintData {
 
 	/* Used to get the visible (expanded) tasks. */
 	GtkTreeView       *tree_view;
-	
+
 	/* Settings. */
 	gboolean           show_critical;
 
 	gint               level;
-	
+
 	MrpTimeUnit        major_unit;
 	PlannerScaleFormat major_format;
-	
+
 	MrpTimeUnit        minor_unit;
 	PlannerScaleFormat minor_format;
-	
+
 	gdouble            header_height;
-	
+
 	gint               tasks_per_page_with_header;
 	gint               tasks_per_page_without_header;
 
@@ -79,25 +79,25 @@ struct _PlannerGanttPrintData {
 
 	gdouble            tree_x1;
 	gdouble            tree_x2;
-	
+
 	gdouble            name_x1;
 	gdouble            name_x2;
 
 	gdouble            work_x1;
 	gdouble            work_x2;
-	
+
 	gdouble            row_height;
 
 	GHashTable        *task_start_coords;
 	GHashTable        *task_finish_coords;
-	
+
 	PangoFontDescription         *font;
 	PangoFontDescription         *font_bold;
 
 	GList             *tasks;
 
 	gdouble            f;
-	
+
 	/* Summary drawing. */
 	gdouble            summary_height;
 	gdouble            summary_thick;
@@ -109,7 +109,7 @@ struct _PlannerGanttPrintData {
 	/* Relation arrow drawing. */
 	gdouble            arrow_width;
 	gdouble            arrow_height;
-	
+
 	/* Printed time span. */
 	mrptime            start;
 	mrptime            finish;
@@ -144,7 +144,7 @@ typedef enum {
 	SUMMARY_MIDDLE,
 
 	MILESTONE,
-	
+
 	RELATION_HORIZ,
 	RELATION_VERT,
 	RELATION_ARROW_DOWN,
@@ -189,7 +189,7 @@ print_table_header (PlannerGanttPrintData *data)
 	planner_print_job_show_clipped (data->job,
 					x, y,
 					_("Name"),
-					data->name_x1 + data->job->x_pad, y - data->row_height, 
+					data->name_x1 + data->job->x_pad, y - data->row_height,
 					data->name_x2 - data->job->x_pad, y + data->row_height);
 
 	x = data->work_x1 + data->job->x_pad;
@@ -197,7 +197,7 @@ print_table_header (PlannerGanttPrintData *data)
 	planner_print_job_show_clipped (data->job,
 					x, y,
 					_("Work"),
-					data->work_x1 + data->job->x_pad, 0, 
+					data->work_x1 + data->job->x_pad, 0,
 					data->work_x2 - data->job->x_pad, y + data->row_height);
 
 	planner_print_job_set_font_regular (data->job);
@@ -221,16 +221,16 @@ print_table_tasks (PlannerGanttPrintData *data,
 	} else {
 		last = first + data->tasks_per_page_without_header;
 	}
-	
+
 	l = g_list_nth (tasks, first);
 	to = g_list_nth (tasks, last);
 	i = 1;
 
 	cairo_set_line_width (data->job->cr, THIN_LINE_WIDTH);
-	
+
 	while (l && l != to) {
 		ptask = l->data;
-		
+
 		g_object_get (ptask->task,
 			      "name", &str,
 			      "work", &work,
@@ -244,7 +244,7 @@ print_table_tasks (PlannerGanttPrintData *data,
 
 		x = data->name_x1 + data->job->x_pad + ptask->depth * INDENT_FACTOR * data->job->x_pad;
 		y = i * data->row_height;
-		
+
 		if (header) {
 			y += data->header_height;
 		}
@@ -252,18 +252,18 @@ print_table_tasks (PlannerGanttPrintData *data,
 		planner_print_job_show_clipped (data->job,
 						x, y - data->row_height / 4,
 						str,
-						data->name_x1 + data->job->x_pad, y - data->row_height, 
+						data->name_x1 + data->job->x_pad, y - data->row_height,
 						data->name_x2 - data->job->x_pad, y);
 
 		g_free (str);
-		
+
 		x = data->work_x1 + data->job->x_pad;
-		
+
 		str = planner_format_duration (data->project, work);
 		planner_print_job_show_clipped (data->job,
 						x, y - data->row_height / 4,
 						str,
-						data->work_x1 + data->job->x_pad, y - data->row_height, 
+						data->work_x1 + data->job->x_pad, y - data->row_height,
 						data->work_x2 - data->job->x_pad, y);
 		g_free (str);
 
@@ -309,7 +309,7 @@ print_time_header (PlannerGanttPrintData *data,
 	x = x1;
 	y = y2 - data->row_height / 4;
 
-	planner_print_job_set_font_regular (data->job);	
+	planner_print_job_set_font_regular (data->job);
 
 	t = mrp_time_align_prev (start, data->major_unit);
 	width = (mrp_time_align_next (t, data->major_unit) - t) / data->f;
@@ -323,23 +323,23 @@ print_time_header (PlannerGanttPrintData *data,
 				planner_print_job_lineto (data->job, x, y2);
 				cairo_stroke (data->job->cr);
 			}
-			
+
 			str = planner_scale_format_time (t, data->major_unit, data->major_format);
-			
+
 			planner_print_job_show_clipped (data->job,
 							x + data->job->x_pad, y,
 							str,
-							MAX (x, x1), y1, 
+							MAX (x, x1), y1,
 							x + width, y2);
-			
+
 			g_free (str);
 		}
-		
+
 		t = mrp_time_align_next (t, data->major_unit);
 	}
 
 	/* Minor scale. */
-	x = x1;	
+	x = x1;
 	y = y3 - data->row_height / 4;
 
 	t = mrp_time_align_prev (start, data->minor_unit);
@@ -354,18 +354,18 @@ print_time_header (PlannerGanttPrintData *data,
 				planner_print_job_lineto (data->job, x, y3);
 				cairo_stroke (data->job->cr);
 			}
-			
+
 			str = planner_scale_format_time (t, data->minor_unit, data->minor_format);
-			
+
 			planner_print_job_show_clipped (data->job,
 							x + data->job->x_pad, y,
 							str,
-							MAX (x, x1), y2, 
+							MAX (x, x1), y2,
 							x + width, y3);
-			
+
 			g_free (str);
 		}
-		
+
 		t = mrp_time_align_next (t, data->minor_unit);
 	}
 }
@@ -392,10 +392,10 @@ foreach_visible_task (GtkTreeModel *model,
 	if (gtk_tree_path_get_depth (path) == 1 ||
 	    gtk_tree_view_row_expanded (fvd->tree_view, parent_path)) {
 		gtk_tree_model_get (model,
-				    iter, 
+				    iter,
 				    COL_TASK, &task,
 				    -1);
-		
+
 		ptask = g_new0 (PrintTask, 1);
 		ptask->task = task;
 		ptask->depth = gtk_tree_path_get_depth (path);
@@ -403,7 +403,7 @@ foreach_visible_task (GtkTreeModel *model,
 		fvd->list = g_list_prepend (fvd->list, ptask);
 	}
 	gtk_tree_path_free (parent_path);
-	
+
 	return FALSE;
 }
 
@@ -417,7 +417,7 @@ gantt_print_get_visible_tasks (PlannerGanttPrintData *data)
 
 	fvd.list = NULL;
 	fvd.tree_view = data->tree_view;
-	
+
 	gtk_tree_model_foreach (model,
 				foreach_visible_task,
 				&fvd);
@@ -433,7 +433,7 @@ gantt_print_free_print_tasks (GList *tasks)
 	for (l = tasks; l; l = l->next) {
 		g_free (l->data);
 	}
-}	
+}
 
 static GList *
 gantt_print_get_relations (PlannerGanttPrintData *data)
@@ -445,7 +445,7 @@ gantt_print_get_relations (PlannerGanttPrintData *data)
 	tasks = mrp_project_get_all_tasks (data->project);
 	for (l = tasks; l; l = l->next) {
 		predecessors = mrp_task_get_predecessor_relations (l->data);
-		
+
 		for (p = predecessors; p; p = p->next) {
 			relations = g_list_prepend (relations, p->data);
 		}
@@ -465,7 +465,7 @@ gantt_print_task (PlannerGanttPrintData *data, Element *element)
 	planner_print_job_lineto (data->job, element->x2, element->y2);
 	planner_print_job_lineto (data->job, element->x1, element->y2);
 	cairo_close_path (data->job->cr);
-	
+
 	cairo_save (data->job->cr);
 
 	if (data->show_critical && element->is_critical) {
@@ -487,7 +487,7 @@ gantt_print_task (PlannerGanttPrintData *data, Element *element)
 		gdouble pad;
 
 		pad = (element->y2 - element->y1) * 0.25;
-		
+
 		cairo_save (data->job->cr);
 
 		cairo_new_path (data->job->cr);
@@ -496,10 +496,10 @@ gantt_print_task (PlannerGanttPrintData *data, Element *element)
 		planner_print_job_lineto (data->job, element->x_complete, element->y2 - pad);
 		planner_print_job_lineto (data->job, element->x1, element->y2 - pad);
 		cairo_close_path (data->job->cr);
-		
+
 		cairo_set_source_rgb (data->job->cr, 135/255.0, 135/255.0, 135/255.0);
 		cairo_fill (data->job->cr);
-		
+
 		cairo_restore (data->job->cr);
 	}
 }
@@ -529,20 +529,20 @@ gantt_print_get_allocated_resources_string (PlannerGanttPrintData  *data,
 		/* Use the resource short_name in preference to the resource
 		 * name.
 		 */
-		g_object_get (resource, 
-			      "short_name", &name, 
+		g_object_get (resource,
+			      "short_name", &name,
 			      NULL);
-				
+
 		if (name && name[0] == 0) {
 			g_free (name);
 
-			g_object_get (resource, 
-				      "name", &name, 
+			g_object_get (resource,
+				      "name", &name,
 				      NULL);
-			
+
 			if (name && name[0] == 0) {
 				g_free (name);
-				
+
 				name = g_strdup (_("Unnamed"));
 			}
 		}
@@ -553,12 +553,12 @@ gantt_print_get_allocated_resources_string (PlannerGanttPrintData  *data,
 		} else {
 			name_unit = name;
 		}
-		
+
 		if (!text) { /* First resource */
 			text = name_unit;
 			continue;
 		}
-		
+
 		tmp_str = g_strdup_printf ("%s, %s", text, name_unit);
 
 		g_free (text);
@@ -574,7 +574,7 @@ gantt_print_get_allocated_resources_string (PlannerGanttPrintData  *data,
 	if (width) {
 		*width = w;
 	}
-	
+
 	if (str) {
 		*str = text;
 	} else {
@@ -597,7 +597,7 @@ planner_gantt_print_do (PlannerGanttPrintData *data, gint page_nr)
 	/* Fourth pass, generate pages. */
 	col = page_nr % data->cols_of_pages;
 	row = page_nr / data->cols_of_pages;
-	
+
 	x2 = data->job->width;
 
 	planner_print_job_begin_next_page (data->job);
@@ -605,7 +605,7 @@ planner_gantt_print_do (PlannerGanttPrintData *data, gint page_nr)
 	if (row == 0) {
 		first_task = 0;
 	} else {
-		first_task = data->tasks_per_page_with_header + 
+		first_task = data->tasks_per_page_with_header +
 			     data->tasks_per_page_without_header * (row - 1);
 	}
 
@@ -615,7 +615,7 @@ planner_gantt_print_do (PlannerGanttPrintData *data, gint page_nr)
 		t2 = data->second_column_start;
 
 		cairo_set_line_width (data->job->cr, THIN_LINE_WIDTH);
-		
+
 		planner_print_job_moveto (data->job,
 					  data->tree_x2,
 					  0);
@@ -623,7 +623,7 @@ planner_gantt_print_do (PlannerGanttPrintData *data, gint page_nr)
 					  data->tree_x2,
 					  data->job->height);
 		cairo_stroke (data->job->cr);
-		
+
 		planner_print_job_moveto (data->job,
 					  data->name_x2,
 					  0);
@@ -631,7 +631,7 @@ planner_gantt_print_do (PlannerGanttPrintData *data, gint page_nr)
 					  data->name_x2,
 					  data->job->height);
 		cairo_stroke (data->job->cr);
-		
+
 		print_table_tasks (data,
 				   row == 0,
 				   data->tasks,
@@ -645,23 +645,23 @@ planner_gantt_print_do (PlannerGanttPrintData *data, gint page_nr)
 	page = GET_PAGE (data, row, col);
 	for (l = page->background_elements; l; l = l->next) {
 		gdouble dashes[] = { 4, 4 };
-				
+
 		element = l->data;
-		
+
 		switch (element->type) {
 		case TIMELINE:
 			cairo_new_path (data->job->cr);
 			cairo_set_source_rgb (data->job->cr, 150/255.0, 150/255.0, 249/255.0);
-			
+
 			cairo_set_dash (data->job->cr, dashes, 2, 0);
-			
+
 			cairo_set_line_width (data->job->cr, 1);
 			planner_print_job_moveto (data->job, element->x1, element->y1);
 			planner_print_job_lineto (data->job, element->x1, element->y2);
 			cairo_stroke (data->job->cr);
-			
+
 			cairo_set_dash (data->job->cr, NULL, 0, 0);
-			
+
 			break;
 		case SHADE:
 			cairo_new_path (data->job->cr);
@@ -670,10 +670,10 @@ planner_gantt_print_do (PlannerGanttPrintData *data, gint page_nr)
 			planner_print_job_lineto (data->job, element->x2, element->y2);
 			planner_print_job_lineto (data->job, element->x1, element->y2);
 			cairo_close_path (data->job->cr);
-			
+
 			cairo_set_source_rgb (data->job->cr, 249/255.0, 249/255.0, 249/255.0);
 			cairo_fill (data->job->cr);
-			
+
 			cairo_set_line_width (data->job->cr, THIN_LINE_WIDTH);
 			cairo_set_source_rgb (data->job->cr, 150/255.0, 150/255.0, 150/255.0);
 			planner_print_job_moveto (data->job, element->x1, element->y1);
@@ -684,21 +684,21 @@ planner_gantt_print_do (PlannerGanttPrintData *data, gint page_nr)
 			break;
 		}
 	}
-	
+
 	cairo_set_source_rgb (data->job->cr, 0, 0, 0);
-	
+
 	if (row == 0) {
 		print_time_header (data, x1, x2, t1, t2);
 		if (col == 0) {
 			print_table_header (data);
 		}
 	}
-	
+
 	for (l = page->elements; l; l = l->next) {
 		element = l->data;
-		
+
 		cairo_set_source_rgb (data->job->cr, 0, 0, 0);
-		
+
 		switch (element->type) {
 		case TASK_LEFT:
 		case TASK_RIGHT:
@@ -718,7 +718,7 @@ planner_gantt_print_do (PlannerGanttPrintData *data, gint page_nr)
 						  element->y1 + data->summary_thick);
 			cairo_close_path (data->job->cr);
 			cairo_fill (data->job->cr);
-			
+
 			planner_print_job_moveto (data->job,
 						  element->x2,
 						  element->y1 + 2 * data->summary_thick);
@@ -746,7 +746,7 @@ planner_gantt_print_do (PlannerGanttPrintData *data, gint page_nr)
 						  element->y1 + data->summary_thick);
 			cairo_close_path (data->job->cr);
 			cairo_fill (data->job->cr);
-			
+
 			planner_print_job_moveto (data->job,
 						  element->x2,
 						  element->y1 + 2 * data->summary_thick);
@@ -774,7 +774,7 @@ planner_gantt_print_do (PlannerGanttPrintData *data, gint page_nr)
 						  element->y1 + data->summary_thick);
 			cairo_close_path (data->job->cr);
 			cairo_fill (data->job->cr);
-			
+
 			planner_print_job_moveto (data->job,
 						  element->x2,
 						  element->y1 + data->summary_thick);
@@ -786,7 +786,7 @@ planner_gantt_print_do (PlannerGanttPrintData *data, gint page_nr)
 						  element->y1 + data->summary_thick);
 			cairo_close_path (data->job->cr);
 			cairo_fill (data->job->cr);
-			
+
 			planner_print_job_moveto (data->job,
 						  element->x2,
 						  element->y1 + 2 * data->summary_thick);
@@ -883,7 +883,7 @@ planner_gantt_print_do (PlannerGanttPrintData *data, gint page_nr)
 			break;
 		}
 	}
-	
+
 	planner_print_job_finish_page (data->job, TRUE);
 }
 
@@ -932,7 +932,7 @@ planner_gantt_print_data_new (PlannerView     *view,
 
 	data->show_critical = show_critical;
 	data->level = level;
-	
+
 	/* Note: This looks hackish, but it's more or less the same equation
 	 * used for the zoom level in the gantt chart, which actually is
 	 * calculated to have a "good feel" :).
@@ -950,13 +950,13 @@ planner_gantt_print_data_new (PlannerView     *view,
 
 	/* Start and finish of the project. */
 	data->start = mrp_project_get_project_start (data->project);
-	
+
 	tasks = gantt_print_get_visible_tasks (data);
 	data->tasks = tasks;
 	num_tasks = g_list_length (tasks);
 
 	data->finish = data->start;
-	
+
 	/* Go through the tasks and get the end time by checking the right-most
 	 * resource label we will print.
 	 */
@@ -967,7 +967,7 @@ planner_gantt_print_data_new (PlannerView     *view,
 		mrptime    finish;
 		gdouble    width;
 		gdouble    name_width;
-		
+
 		g_object_get (task,
 			      "name", &name,
 			      "finish", &finish,
@@ -975,7 +975,7 @@ planner_gantt_print_data_new (PlannerView     *view,
 
 		ext = planner_print_job_get_extents(data->job, name);
 		name_width = ext + ptask->depth * INDENT_FACTOR * data->job->x_pad;
-		
+
 		if (max_name_width < name_width) {
 			max_name_width = name_width;
 		}
@@ -986,12 +986,12 @@ planner_gantt_print_data_new (PlannerView     *view,
 
 		g_free (name);
 	}
-	
+
 	/* TODO: figure out why the width of WW and WORKWO is significant */
 	data->name_x1 = 0;
 	ext = planner_print_job_get_extents (data->job, "WW");
 	data->name_x2 = data->name_x1 + max_name_width + ext;
-	
+
 	data->work_x1 = data->name_x2;
 	ext = planner_print_job_get_extents (data->job, "WORKWO");
 	data->work_x2 = data->work_x1 + ext;
@@ -1002,9 +1002,9 @@ planner_gantt_print_data_new (PlannerView     *view,
 	data->second_column_start = data->start + (data->job->width - (data->tree_x2 - data->tree_x1)) * data->f;
 
 	data->row_height = 2 * planner_print_job_get_font_height (job);
-	
+
 	data->header_height = 2 * data->row_height + data->row_height / 4;
-	
+
 	/* Calculate drawing "constants". */
 	data->summary_height = 0.24 * data->row_height;
 	data->summary_thick  = 0.07 * data->row_height;
@@ -1012,36 +1012,36 @@ planner_gantt_print_data_new (PlannerView     *view,
 	data->milestone_size = 0.25 * data->row_height;
 	data->arrow_height   = 0.24 * data->row_height;
 	data->arrow_width    = 0.11 * data->row_height;
-	
+
 	if (num_tasks > 0) {
 		data->tasks_per_page_without_header = data->job->height / data->row_height;
 		data->tasks_per_page_with_header = (data->job->height - data->header_height) /
 			data->row_height;
-		
+
 		data->cols_of_pages = ceil (((data->finish - data->start) /
 					     data->f + data->tree_x2 - data->tree_x1) /
 					    data->job->width);
-		
+
 		data->rows_of_pages = ceil ((num_tasks * data->row_height + data->header_height) /
 					    (data->job->height - data->row_height));
- 		
+
 		if (data->tasks_per_page_without_header * (data->rows_of_pages - 2) +
 		    data->tasks_per_page_with_header >= num_tasks) {
 			data->rows_of_pages--;
 		}
-		
+
 		data->cols_of_pages = MAX (1, data->cols_of_pages);
 		data->rows_of_pages = MAX (1, data->rows_of_pages);
-		
+
  		data->pages = g_new0 (Page, data->cols_of_pages * data->rows_of_pages);
 
 
 	}
 
 	calendar = mrp_project_get_calendar (data->project);
-	
+
 	num_tasks = g_list_length (data->tasks);
-	
+
 	current_time = mrp_time_current_time();
 
 	/* Go through all tasks in a first pass and layout them so that we know
@@ -1060,13 +1060,13 @@ planner_gantt_print_data_new (PlannerView     *view,
 			y0 = 0;
 			tasks_on_this_page = data->tasks_per_page_without_header;
 		}
-		
+
 		x1 = data->tree_x2;
 
 		/* Loop through the tasks on this row of pages. */
 		for (i = 0; i < tasks_on_this_page; i++) {
 			ptask = l->data;
-			
+
 			start = mrp_task_get_work_start (ptask->task);
 			finish = mrp_task_get_finish (ptask->task);
 			complete = start + (finish - start) *
@@ -1083,7 +1083,7 @@ planner_gantt_print_data_new (PlannerView     *view,
 			if (!is_summary && type == MRP_TASK_TYPE_MILESTONE) {
 				finish = start;
 			}
-			
+
 			d(g_print ("%s: ", name));
 			g_free (name);
 
@@ -1093,7 +1093,7 @@ planner_gantt_print_data_new (PlannerView     *view,
 			y1 = y0 + data->row_height * (i + 0.25);
 			y2 = y1 + 0.5 * data->row_height;
 
-			
+
 			/* Loop through the columns that this task covers. */
 			while (t1 <= finish) {
 				if (col == 0) {
@@ -1110,11 +1110,11 @@ planner_gantt_print_data_new (PlannerView     *view,
 				element->y1 = y1;
 				element->y2 = y2;
 				element->is_critical = is_critical;
-				
+
 				/* Identify the cases: only left-most part on
 				 * page, only right-most part, the whole task,
 				 * or only the mid-section.
-				 */ 
+				 */
 				if (start >= t1 && start <= t2 && finish > t2) {
 					/* Left */
 					d(g_print ("left "));
@@ -1127,7 +1127,7 @@ planner_gantt_print_data_new (PlannerView     *view,
 					} else {
 						element->type = TASK_LEFT;
 					}
-					
+
 					element->x1 = x0 + (start - t1) / data->f;
 					element->x2 = data->job->width;
 					element->x_complete = x0 + (complete - t1) / data->f;
@@ -1145,7 +1145,7 @@ planner_gantt_print_data_new (PlannerView     *view,
 					} else {
 						element->type = TASK_RIGHT;
 					}
-					
+
 					element->x1 = x0;
 					element->x2 = x0 + (finish - t1) / data->f;
 					element->x_complete = x0 + (complete - t1) / data->f;
@@ -1163,7 +1163,7 @@ planner_gantt_print_data_new (PlannerView     *view,
 					} else {
 						element->type = TASK_WHOLE;
 					}
-					
+
 					element->x1 = x0 + (start - t1) / data->f;
 					element->x2 = x0 + (finish - t1) / data->f;
 					element->x_complete = x0 + (complete - t1) / data->f;
@@ -1181,7 +1181,7 @@ planner_gantt_print_data_new (PlannerView     *view,
 					} else {
 						element->type = TASK_MIDDLE;
 					}
-					
+
 					element->x1 = x0;
 					element->x2 = data->job->width;
 
@@ -1208,7 +1208,7 @@ planner_gantt_print_data_new (PlannerView     *view,
 
 						task_coord->x = element->x1;
 						task_coord->y = y1 - (y2 - y1) / 2;
-						
+
 						g_hash_table_insert (data->task_start_coords,
 								     ptask->task,
 								     task_coord);
@@ -1216,7 +1216,7 @@ planner_gantt_print_data_new (PlannerView     *view,
 					default:
 						break;
 					}
-					
+
 					switch (element->type) {
 					case TASK_WHOLE:
 					case TASK_RIGHT:
@@ -1226,10 +1226,10 @@ planner_gantt_print_data_new (PlannerView     *view,
 						task_coord = g_new0 (TaskCoord, 1);
 						task_coord->row = row;
 						task_coord->col = col;
-						
+
 						task_coord->x = element->x2;
 						task_coord->y = y1 + (y2 - y1) / 2;
-						
+
 						g_hash_table_insert (data->task_finish_coords,
 								     ptask->task,
 								     task_coord);
@@ -1241,7 +1241,7 @@ planner_gantt_print_data_new (PlannerView     *view,
 					page = GET_PAGE (data, row, col);
 					page->elements = g_list_prepend (page->elements, element);
 				}
-				
+
 				t1 = t2;
 				col++;
 			}
@@ -1275,7 +1275,7 @@ planner_gantt_print_data_new (PlannerView     *view,
 			}
 
 		fail:
-			
+
 			l = l->next;
 			if (!l) {
 				break;
@@ -1306,7 +1306,7 @@ planner_gantt_print_data_new (PlannerView     *view,
 		if (!pre_coord || !suc_coord) {
 			continue;
 		}
-		
+
 		element = g_new0 (Element, 1);
 		element->x1 = suc_coord->x;
 
@@ -1341,9 +1341,9 @@ planner_gantt_print_data_new (PlannerView     *view,
 							element->x1 = data->tree_x2;
 						} else {
 							element->x1 = 0;
-						}						
+						}
 					}
-					
+
 					if (col == suc_coord->col) {
 						element->x2 = suc_coord->x;
 					} else {
@@ -1351,7 +1351,7 @@ planner_gantt_print_data_new (PlannerView     *view,
 					}
 
 					element->y1 = pre_coord->y;
-					
+
 					page = GET_PAGE (data, row, col);
 					page->elements = g_list_prepend (page->elements, element);
 				}
@@ -1366,11 +1366,11 @@ planner_gantt_print_data_new (PlannerView     *view,
 			} else {
 				top = 0;
 			}
-			
+
 			if (row == pre_coord->row) {
 				element->y1 = pre_coord->y;
 			} else {
-				if (pre_coord->row <= suc_coord->row) { 
+				if (pre_coord->row <= suc_coord->row) {
 					element->y1 = top;
 				} else {
 					element->y1 = data->job->height;
@@ -1380,13 +1380,13 @@ planner_gantt_print_data_new (PlannerView     *view,
 			if (row == suc_coord->row) {
 				element->y2 = suc_coord->y + data->row_height / 2;
 			} else {
-				if (pre_coord->row <= suc_coord->row) { 
+				if (pre_coord->row <= suc_coord->row) {
 					element->y2 = data->job->height;
 				} else {
 					element->y2 = top;
 				}
 			}
-			
+
 			page = GET_PAGE (data, row, suc_coord->col);
 			page->elements = g_list_prepend (page->elements, element);
 		}
@@ -1407,7 +1407,7 @@ planner_gantt_print_data_new (PlannerView     *view,
 
 		for (col = 0; col < data->cols_of_pages; col++) {
 			mrptime ival_start, ival_end, ival_prev;
-			
+
 			if (col == 0) {
 				/* Left-most col has the tree. */
 				x0 = data->tree_x2;
@@ -1416,7 +1416,7 @@ planner_gantt_print_data_new (PlannerView     *view,
 			}
 
 			t2 = t0 + (data->job->width - x0) * data->f;
-						
+
 			/* Loop through the days between t0 and t2. */
 			t1 = mrp_time_align_day(t0);
 
@@ -1424,11 +1424,11 @@ planner_gantt_print_data_new (PlannerView     *view,
 				gboolean done = FALSE;
 
 				day = mrp_calendar_get_day (calendar, t1, TRUE);
-				
+
 				ivals = mrp_calendar_day_get_intervals (calendar, day, TRUE);
 
 				ival_prev = t1;
-				
+
 				/* Loop through the non-work intervals for this day */
 				while (!done)
 				{
@@ -1448,7 +1448,7 @@ planner_gantt_print_data_new (PlannerView     *view,
 
 					/* Only consider non-work intervals that are large enough and
 					 * lie (partially) within [t0...t2] */
-					if (ival_prev < t2 && ival_start > t0 && 
+					if (ival_prev < t2 && ival_start > t0 &&
 					    planner_scale_conf[data->level].nonworking_limit <= ival_start - ival_prev) {
 
 						/* Only draw the part within [t0...t2] */
@@ -1460,7 +1460,7 @@ planner_gantt_print_data_new (PlannerView     *view,
 
 						element->x1 = x0 + (MAX(t0, ival_prev) - t0) / data->f;
 						element->x2 = x0 + (MIN(t2, ival_start) - t0) / data->f;
-						
+
 						page = GET_PAGE (data, row, col);
 						page->background_elements = g_list_prepend (page->background_elements, element);
 
@@ -1478,16 +1478,16 @@ planner_gantt_print_data_new (PlannerView     *view,
 				element->type = TIMELINE;
 				element->y1 = data->header_height;
 				element->y2 = data->job->height;
-				element->x1 = x0 + (current_time - t0) / data->f; 
+				element->x1 = x0 + (current_time - t0) / data->f;
 				element->x2 = element->x1;
 				page = GET_PAGE (data, row, col);
 				page->background_elements = g_list_prepend (page->background_elements, element);
 			}
-			
+
 			t0 = t2;
 		}
 	}
-	
+
 	return data;
 }
 
@@ -1515,21 +1515,21 @@ void
 planner_gantt_print_data_free (PlannerGanttPrintData *data)
 {
 	gint i, num_pages;
-	
+
 	g_return_if_fail (data != NULL);
 
 	g_hash_table_destroy (data->task_start_coords);
 	g_hash_table_destroy (data->task_finish_coords);
-	
+
 	gantt_print_free_print_tasks (data->tasks);
 	data->tasks = NULL;
 
 	num_pages = data->cols_of_pages * data->rows_of_pages;
-	
+
 	for (i = 0; i < num_pages; i++) {
 		free_page (&data->pages[i]);
 	}
-	
+
 	g_free (data->pages);
 	data->pages = NULL;
 
@@ -1540,6 +1540,6 @@ gint
 planner_gantt_print_get_n_pages (PlannerGanttPrintData *data)
 {
 	g_return_val_if_fail (data != NULL, 0);
-	
+
 	return data->cols_of_pages * data->rows_of_pages;
 }

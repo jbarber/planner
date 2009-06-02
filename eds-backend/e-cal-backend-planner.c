@@ -58,100 +58,100 @@ struct _ECalBackendPlannerPrivate {
 /* Backend implementation */
 static void                  cbp_dispose                 (GObject          *object);
 static void                  cbp_finalize                (GObject          *object);
-static ECalBackendSyncStatus cbp_is_read_only            (ECalBackendSync  *backend, 
-							  EDataCal         *cal, 
+static ECalBackendSyncStatus cbp_is_read_only            (ECalBackendSync  *backend,
+							  EDataCal         *cal,
 							  gboolean         *read_only);
-static ECalBackendSyncStatus cbp_get_cal_address         (ECalBackendSync  *backend, 
-							  EDataCal         *cal, 
+static ECalBackendSyncStatus cbp_get_cal_address         (ECalBackendSync  *backend,
+							  EDataCal         *cal,
 							  char            **address);
-static ECalBackendSyncStatus cbp_get_ldap_attribute      (ECalBackendSync  *backend, 
-							  EDataCal         *cal, 
+static ECalBackendSyncStatus cbp_get_ldap_attribute      (ECalBackendSync  *backend,
+							  EDataCal         *cal,
 							  char            **attribute);
-static ECalBackendSyncStatus cbp_get_alarm_email_address (ECalBackendSync  *backend, 
-							  EDataCal         *cal, 
+static ECalBackendSyncStatus cbp_get_alarm_email_address (ECalBackendSync  *backend,
+							  EDataCal         *cal,
 							  char            **address);
-static ECalBackendSyncStatus cbp_get_static_capabilities (ECalBackendSync  *backend, 
-							  EDataCal         *cal, 
+static ECalBackendSyncStatus cbp_get_static_capabilities (ECalBackendSync  *backend,
+							  EDataCal         *cal,
 							  char            **capabilities);
 
-static ECalBackendSyncStatus cbp_open                    (ECalBackendSync  *backend, 
-							  EDataCal         *cal, 
+static ECalBackendSyncStatus cbp_open                    (ECalBackendSync  *backend,
+							  EDataCal         *cal,
 							  gboolean          only_if_exists,
-							  const gchar      *username, 
+							  const gchar      *username,
 							  const gchar      *password);
-static ECalBackendSyncStatus cbp_remove                  (ECalBackendSync  *backend, 
+static ECalBackendSyncStatus cbp_remove                  (ECalBackendSync  *backend,
 							  EDataCal         *cal);
 static gboolean              cbp_is_loaded               (ECalBackend      *backend);
 static CalMode               cbp_get_mode                (ECalBackend      *backend);
-static void                  cbp_set_mode                (ECalBackend      *backend, 
+static void                  cbp_set_mode                (ECalBackend      *backend,
 							  CalMode           mode);
-static ECalBackendSyncStatus cbp_get_default_object      (ECalBackendSync  *backend, 
-							  EDataCal         *cal, 
-							  char            **object);
-static ECalBackendSyncStatus cbp_get_object              (ECalBackendSync  *backend, 
-							  EDataCal         *cal, 
-							  const gchar      *uid, 
-							  const gchar      *rid, 
-							  gchar           **object);
-static ECalBackendSyncStatus cbp_get_timezone            (ECalBackendSync  *backend, 
-							  EDataCal         *cal, 
-							  const gchar      *tzid, 
-							  char            **object);
-static ECalBackendSyncStatus cbp_add_timezone            (ECalBackendSync  *backend, 
-							  EDataCal         *cal, 
-							  const gchar      *tzobj);
-static ECalBackendSyncStatus cbp_set_default_timezone    (ECalBackendSync  *backend, 
-							  EDataCal         *cal, 
-							  const gchar      *tzid);
-static ECalBackendSyncStatus cbp_get_object_list         (ECalBackendSync  *backend, 
-							  EDataCal         *cal, 
-							  const gchar      *sexp, 
-							  GList           **objects);
-static void cbp_start_query                              (ECalBackend      *backend, 
-							  EDataCalView     *query);
-static ECalBackendSyncStatus cbp_get_free_busy           (ECalBackendSync  *backend, 
-							  EDataCal         *cal, 
-							  GList            *users,
-							  time_t            start, 
-							  time_t            end, 
-							  GList           **freebusy);
-static ECalBackendSyncStatus cbp_get_changes             (ECalBackendSync  *backend, 
-							  EDataCal         *cal, 
-							  const char       *change_id,
-							  GList           **adds, 
-							  GList           **modifies, 
-							  GList           **deletes);
-static ECalBackendSyncStatus cbp_discard_alarm           (ECalBackendSync  *backend, 
-							  EDataCal         *cal, 
-							  const gchar      *uid, 
-							  const gchar      *auid);
-static ECalBackendSyncStatus cbp_create_object           (ECalBackendSync  *backend, 
-							  EDataCal         *cal, 
-							  gchar           **calobj, 
-							  gchar           **uid);
-static ECalBackendSyncStatus cbp_modify_object           (ECalBackendSync  *backend, 
-							  EDataCal         *cal, 
-							  const gchar      *calobj, 
-							  CalObjModType     mod, 
-							  char            **old_object);
-static ECalBackendSyncStatus cbp_remove_object           (ECalBackendSync  *backend, 
+static ECalBackendSyncStatus cbp_get_default_object      (ECalBackendSync  *backend,
 							  EDataCal         *cal,
-							  const gchar      *uid, 
+							  char            **object);
+static ECalBackendSyncStatus cbp_get_object              (ECalBackendSync  *backend,
+							  EDataCal         *cal,
+							  const gchar      *uid,
 							  const gchar      *rid,
-							  CalObjModType     mod, 
 							  gchar           **object);
-static ECalBackendSyncStatus cbp_receive_objects         (ECalBackendSync  *backend, 
-							  EDataCal         *cal, 
+static ECalBackendSyncStatus cbp_get_timezone            (ECalBackendSync  *backend,
+							  EDataCal         *cal,
+							  const gchar      *tzid,
+							  char            **object);
+static ECalBackendSyncStatus cbp_add_timezone            (ECalBackendSync  *backend,
+							  EDataCal         *cal,
+							  const gchar      *tzobj);
+static ECalBackendSyncStatus cbp_set_default_timezone    (ECalBackendSync  *backend,
+							  EDataCal         *cal,
+							  const gchar      *tzid);
+static ECalBackendSyncStatus cbp_get_object_list         (ECalBackendSync  *backend,
+							  EDataCal         *cal,
+							  const gchar      *sexp,
+							  GList           **objects);
+static void cbp_start_query                              (ECalBackend      *backend,
+							  EDataCalView     *query);
+static ECalBackendSyncStatus cbp_get_free_busy           (ECalBackendSync  *backend,
+							  EDataCal         *cal,
+							  GList            *users,
+							  time_t            start,
+							  time_t            end,
+							  GList           **freebusy);
+static ECalBackendSyncStatus cbp_get_changes             (ECalBackendSync  *backend,
+							  EDataCal         *cal,
+							  const char       *change_id,
+							  GList           **adds,
+							  GList           **modifies,
+							  GList           **deletes);
+static ECalBackendSyncStatus cbp_discard_alarm           (ECalBackendSync  *backend,
+							  EDataCal         *cal,
+							  const gchar      *uid,
+							  const gchar      *auid);
+static ECalBackendSyncStatus cbp_create_object           (ECalBackendSync  *backend,
+							  EDataCal         *cal,
+							  gchar           **calobj,
+							  gchar           **uid);
+static ECalBackendSyncStatus cbp_modify_object           (ECalBackendSync  *backend,
+							  EDataCal         *cal,
+							  const gchar      *calobj,
+							  CalObjModType     mod,
+							  char            **old_object);
+static ECalBackendSyncStatus cbp_remove_object           (ECalBackendSync  *backend,
+							  EDataCal         *cal,
+							  const gchar      *uid,
+							  const gchar      *rid,
+							  CalObjModType     mod,
+							  gchar           **object);
+static ECalBackendSyncStatus cbp_receive_objects         (ECalBackendSync  *backend,
+							  EDataCal         *cal,
 							  const gchar      *calobj);
 
-static ECalBackendSyncStatus cbp_send_objects            (ECalBackendSync  *backend, 
-							  EDataCal         *cal, 
-							  const gchar      *calobj, 
+static ECalBackendSyncStatus cbp_send_objects            (ECalBackendSync  *backend,
+							  EDataCal         *cal,
+							  const gchar      *calobj,
 							  GList           **users,
 							  gchar           **modified_calobj);
 static icaltimezone * cbp_internal_get_default_timezone  (ECalBackend      *backend);
 
-static icaltimezone * cbp_internal_get_timezone          (ECalBackend      *backend, 
+static icaltimezone * cbp_internal_get_timezone          (ECalBackend      *backend,
 							  const gchar      *tzid);
 
 /* Utilities */
@@ -165,15 +165,15 @@ static gboolean       get_planner_tasks_cb               (ECalBackendPlanner *cb
 static void           add_comp_to_list                   (gpointer          key,
 							  gpointer          value,
 							  GList           **comps);
-static void            dump_print                        (gpointer          key, 
-							  gpointer          value, 
+static void            dump_print                        (gpointer          key,
+							  gpointer          value,
 							  gpointer          user_data);
 static void            dump_cache                        (ECalBackendPlanner *backend);
-static ECalComponent * lookup_component                  (ECalBackendPlanner *backend, 
+static ECalComponent * lookup_component                  (ECalBackendPlanner *backend,
 							  const char       *uid);
-static MrpTask *       lookup_task                       (ECalBackendPlanner *backend, 
+static MrpTask *       lookup_task                       (ECalBackendPlanner *backend,
 							  const char       *uid);
-static void            task_replace                      (MrpProject       *project, 
+static void            task_replace                      (MrpProject       *project,
 							  MrpTask          *task,
 							  MrpTask          *task_new);
 static void            task_add_properties               (MrpProject       *project);
@@ -198,17 +198,17 @@ dump_print  (gpointer key,
 }
 
 static void
-dump_cache (ECalBackendPlanner *backend) 
+dump_cache (ECalBackendPlanner *backend)
 {
 	ECalBackendPlannerPrivate *priv;
 
-	priv = backend->priv;	
+	priv = backend->priv;
 	g_hash_table_foreach (priv->tasks_comp, dump_print, NULL);
 }
 
 /* Looks up a component by its UID on the backend's component hash table */
 static ECalComponent *
-lookup_component (ECalBackendPlanner *backend, 
+lookup_component (ECalBackendPlanner *backend,
 		  const char         *uid)
 {
 	ECalBackendPlannerPrivate *priv;
@@ -229,7 +229,7 @@ lookup_component (ECalBackendPlanner *backend,
 
 /* Looks up a component by its UID on the backend's component hash table */
 static MrpTask *
-lookup_task (ECalBackendPlanner *backend, 
+lookup_task (ECalBackendPlanner *backend,
 	     const char         *uid)
 {
 	ECalBackendPlannerPrivate *priv;
@@ -252,8 +252,8 @@ lookup_task (ECalBackendPlanner *backend,
 }
 
 /* Replace a MrpTask in a MrpProject */
-static void 
-task_replace (MrpProject *project, 
+static void
+task_replace (MrpProject *project,
 	      MrpTask    *task,
 	      MrpTask    *task_new)
 {
@@ -282,9 +282,9 @@ task_add_properties (MrpProject *project)
 	MrpProperty *property;
 
 	/* eds-uid */
-	if (!mrp_project_has_property (project, 
+	if (!mrp_project_has_property (project,
 				       MRP_TYPE_TASK, "eds-uid")) {
-		property = mrp_property_new ("eds-uid", 
+		property = mrp_property_new ("eds-uid",
 					     MRP_PROPERTY_TYPE_STRING,
 					     _("EDS UID"),
 					     _("Identifier used by Evolution Data Server for tasks"),
@@ -292,9 +292,9 @@ task_add_properties (MrpProject *project)
 		mrp_project_add_property (project, MRP_TYPE_TASK, property, FALSE);
 	}
 	/* Categories */
-	if (!mrp_project_has_property (project, 
+	if (!mrp_project_has_property (project,
 				       MRP_TYPE_TASK, "eds-categories")) {
-		property = mrp_property_new ("eds-categories", 
+		property = mrp_property_new ("eds-categories",
 					     MRP_PROPERTY_TYPE_STRING,
 					     _("EDS Categories"),
 					     _("Categories for a task used by Evolution Data Server"),
@@ -302,9 +302,9 @@ task_add_properties (MrpProject *project)
 		mrp_project_add_property (project, MRP_TYPE_TASK, property, FALSE);
 	}
 	/* Classification */
-	if (!mrp_project_has_property (project, 
+	if (!mrp_project_has_property (project,
 				       MRP_TYPE_TASK, "eds-classification")) {
-		property = mrp_property_new ("eds-classification", 
+		property = mrp_property_new ("eds-classification",
 					     MRP_PROPERTY_TYPE_INT,
 					     _("EDS Classification"),
 					     _("Task access classification used by Evolution Data Server"),
@@ -312,9 +312,9 @@ task_add_properties (MrpProject *project)
 		mrp_project_add_property (project, MRP_TYPE_TASK, property, FALSE);
 	}
 	/* Web page */
-	if (!mrp_project_has_property (project, 
+	if (!mrp_project_has_property (project,
 				       MRP_TYPE_TASK, "eds-url")) {
-		property = mrp_property_new ("eds-url", 
+		property = mrp_property_new ("eds-url",
 					     MRP_PROPERTY_TYPE_STRING,
 					     _("EDS URL"),
 					     _("URL for a Task used by Evolution Data Server"),
@@ -375,20 +375,20 @@ cbp_finalize (GObject *object)
 /* Is_read_only handler for the file backend */
 /* It will be read and write in the future */
 static ECalBackendSyncStatus
-cbp_is_read_only (ECalBackendSync *backend, 
-				    EDataCal        *cal, 
+cbp_is_read_only (ECalBackendSync *backend,
+				    EDataCal        *cal,
 				    gboolean        *read_only)
 {
 	*read_only = FALSE;
-	
+
 	return GNOME_Evolution_Calendar_Success;
 }
 
-/* FIXME: The only address for the Planner backend is the file 
+/* FIXME: The only address for the Planner backend is the file
    for the moment. Later we will have a URI */
 static ECalBackendSyncStatus
-cbp_get_cal_address (ECalBackendSync *backend, 
-				       EDataCal        *cal, 
+cbp_get_cal_address (ECalBackendSync *backend,
+				       EDataCal        *cal,
 				       char           **address)
 {
 	*address = NULL;
@@ -397,28 +397,28 @@ cbp_get_cal_address (ECalBackendSync *backend,
 }
 
 static ECalBackendSyncStatus
-cbp_get_ldap_attribute (ECalBackendSync *backend, 
-					  EDataCal        *cal, 
+cbp_get_ldap_attribute (ECalBackendSync *backend,
+					  EDataCal        *cal,
 					  char           **attribute)
 {
 	*attribute = NULL;
-	
+
 	return GNOME_Evolution_Calendar_Success;
 }
 
 static ECalBackendSyncStatus
-cbp_get_alarm_email_address (ECalBackendSync *backend, 
-					       EDataCal        *cal, 
+cbp_get_alarm_email_address (ECalBackendSync *backend,
+					       EDataCal        *cal,
 					       char           **address)
 {
 	*address = NULL;
-	
+
 	return GNOME_Evolution_Calendar_Success;
 }
 
 static ECalBackendSyncStatus
-cbp_get_static_capabilities (ECalBackendSync *backend, 
-					       EDataCal        *cal, 
+cbp_get_static_capabilities (ECalBackendSync *backend,
+					       EDataCal        *cal,
 					       char           **capabilities)
 {
 	*capabilities = g_strdup (CAL_STATIC_CAPABILITY_NO_EMAIL_ALARMS);
@@ -449,9 +449,9 @@ task_to_comp (MrpTask *task)
 	comp = e_cal_component_new ();
 	e_cal_component_set_new_vtype (comp, E_CAL_COMPONENT_TODO);
 
-	mrp_object_get (task, 
-			"eds-uid", &uid, 
-			"name", &name, 
+	mrp_object_get (task,
+			"eds-uid", &uid,
+			"name", &name,
 			"note", &note,
 			"eds-url", &url,
 			"eds-categories", &categories,
@@ -472,7 +472,7 @@ task_to_comp (MrpTask *task)
 	dt_end.tzid = NULL;
 	if (!uid) {
 		uid = e_uid_new ();
-		mrp_object_set (task, "eds-uid", uid, NULL);	
+		mrp_object_set (task, "eds-uid", uid, NULL);
 	}
 	g_message ("New task found: %s %s", uid, name);
 	e_cal_component_set_uid (comp, uid);
@@ -485,7 +485,7 @@ task_to_comp (MrpTask *task)
 	/* url */
 	e_cal_component_set_url (comp, url);
 	g_free (url);
-	
+
 	/* description */
 	if (note) {
 		GSList            l;
@@ -527,7 +527,7 @@ task_to_comp (MrpTask *task)
 	e_cal_component_set_attendee_list (comp, attendee_list);
 
 	/* priority */
-	/* FIXME: In planner we use a open field. In evo, only from 0-9 
+	/* FIXME: In planner we use a open field. In evo, only from 0-9
 	   and it is translated to a string */
 	e_cal_component_set_priority (comp, &priority);
 
@@ -540,17 +540,17 @@ task_to_comp (MrpTask *task)
 		GSList  *categories_list = NULL;
 		guint    i;
 
-		g_message ("Categories: %s", categories);		
+		g_message ("Categories: %s", categories);
 		categories_array = g_strsplit (categories, ",", -1);
 		g_message ("Category 0: %s", categories_array[0]);
 		for (i = 0; categories_array[i]; i++) {
-			categories_list = g_slist_append (categories_list, 
+			categories_list = g_slist_append (categories_list,
 							  g_strdup (categories_array[i]));
 		}
 		e_cal_component_set_categories_list (comp, categories_list);
 		g_strfreev(categories_array);
 	}
-	
+
 	/* classification */
 	e_cal_component_set_classification (comp, classification);
 
@@ -593,12 +593,12 @@ comp_categories_as_char (ECalComponent *comp)
 	e_cal_component_get_categories_list (comp, &slist_cat);
 	if (slist_cat) {
 		GString *str = g_string_new ("");
-		
+
 		for (sl = slist_cat; sl != NULL; sl = sl->next) {
 			str = g_string_append (str, sl->data);
 			str = g_string_append (str, ",");
 		}
-		
+
 		cat = g_strdup (str->str);
 		g_string_free (str, TRUE);
 		e_cal_component_free_text_list (slist_cat);
@@ -621,7 +621,7 @@ comp_desc_as_char (ECalComponent *comp)
 
 			if (pt && pt->value)
 				str = g_string_append (str, pt->value);
-		}		
+		}
 
 		desc = g_strdup (str->str);
 		g_string_free (str, TRUE);
@@ -649,7 +649,7 @@ comp_to_task (MrpProject    *project,
 	const gchar                 *uid;
 
 	g_return_val_if_fail (MRP_IS_PROJECT (project), NULL);
-		
+
 	task = mrp_task_new ();
 
 	mrp_project_insert_task (project, NULL, -1, task);
@@ -669,9 +669,9 @@ comp_to_task (MrpProject    *project,
 	note = comp_desc_as_char (comp);
 	categories = comp_categories_as_char (comp);
 
-	mrp_object_set (task, 
-			"eds-uid", uid, 
-			"name", summary.value ? summary.value : "", 
+	mrp_object_set (task,
+			"eds-uid", uid,
+			"name", summary.value ? summary.value : "",
 			"eds-url", url ? url : "",
 			"note", note ? note : "",
 			"eds-categories", categories ? categories : "",
@@ -680,20 +680,20 @@ comp_to_task (MrpProject    *project,
 			   "finish", &end, */
 			NULL);
 	if (!priority) {
-		mrp_object_set (task, "priority", 0, NULL); 
+		mrp_object_set (task, "priority", 0, NULL);
 	} else {
-		mrp_object_set (task, "priority", *priority, NULL);	
-		
+		mrp_object_set (task, "priority", *priority, NULL);
+
 	}
 	if (!complete) {
-		mrp_object_set (task,"percent-complete", 0, NULL); 
+		mrp_object_set (task,"percent-complete", 0, NULL);
 	} else {
-		mrp_object_set (task,"percent-complete", *complete, NULL);	
+		mrp_object_set (task,"percent-complete", *complete, NULL);
 	}
 	/* Time to save the resources */
 	if (e_cal_component_has_attendees (comp)) {
 		GSList *attendee_list, *al;
-		GError *error = NULL;                
+		GError *error = NULL;
 		GList  *resources = NULL, *l = NULL;
 
 		/* We remove all the old resources: we are loosing here the data
@@ -705,7 +705,7 @@ comp_to_task (MrpProject    *project,
 			mrp_project_remove_resource (project, l->data);
 			g_object_unref (l->data);
 		}
-		
+
 		g_message ("The comp has attendee");
 		e_cal_component_get_attendee_list (comp, &attendee_list);
 
@@ -724,11 +724,11 @@ comp_to_task (MrpProject    *project,
 			}
 			if (attendee->cutype == ICAL_CUTYPE_ROOM ||
 			    attendee->cutype == ICAL_CUTYPE_RESOURCE) {
-				mrp_object_set (resource, "type", 
+				mrp_object_set (resource, "type",
 						MRP_RESOURCE_TYPE_MATERIAL, NULL);
 			} else {
-				mrp_object_set (resource, "type", 
-						MRP_RESOURCE_TYPE_WORK, NULL);	
+				mrp_object_set (resource, "type",
+						MRP_RESOURCE_TYPE_WORK, NULL);
 			}
 
 			if (email) {
@@ -767,7 +767,7 @@ get_planner_tasks_cb (ECalBackendPlanner *cbplanner)
 
 		comp = task_to_comp (l->data);
 		e_cal_component_get_uid (comp, &uid);
-		g_hash_table_insert (priv->tasks_comp, (gpointer) uid, comp); 
+		g_hash_table_insert (priv->tasks_comp, (gpointer) uid, comp);
 	}
 
 	d(g_message ("Planner task retrieval done.\n"));
@@ -775,12 +775,12 @@ get_planner_tasks_cb (ECalBackendPlanner *cbplanner)
 	return FALSE;
 }
 
-static char* 
+static char*
 form_uri (ESource *source)
 {
 	guint  len;
 	gchar *uri;
-	gchar *formed_uri;	
+	gchar *formed_uri;
 
 	uri = e_source_get_uri (source);
 	if (uri == NULL) {
@@ -788,7 +788,7 @@ form_uri (ESource *source)
 	}
 
 	g_message ("URI to open: %s", uri);
-	
+
 	/* Remove planer:// */
 	len = strlen (uri);
 	if (len > 10) {
@@ -796,9 +796,9 @@ form_uri (ESource *source)
 		formed_uri = g_strdup (uri + 10);
 	} else {
 		return NULL;
-	}	
+	}
 	g_message ("Parsed URI to open: %s", formed_uri);
-	
+
 	g_free (uri);
 	return formed_uri;
 
@@ -806,10 +806,10 @@ form_uri (ESource *source)
 
 /* Open handler for the file backend */
 static ECalBackendSyncStatus
-cbp_open (ECalBackendSync *backend, 
-	  EDataCal        *cal, 
+cbp_open (ECalBackendSync *backend,
+	  EDataCal        *cal,
 	  gboolean         only_if_exists,
-	  const gchar     *username, 
+	  const gchar     *username,
 	  const gchar     *password)
 {
 	ECalBackendPlanner        *cbplanner;
@@ -820,7 +820,7 @@ cbp_open (ECalBackendSync *backend,
 
 	g_message ("Open planner tasks ...");
 
-	
+
 	source = e_cal_backend_get_source (E_CAL_BACKEND (backend));
 	if (source) {
 		uri = form_uri (source);
@@ -829,13 +829,13 @@ cbp_open (ECalBackendSync *backend,
 		e_cal_backend_notify_error (E_CAL_BACKEND (backend), _("Invalid server URI"));
 		return GNOME_Evolution_Calendar_NoSuchCal;
 	}
-	
+
 	cbplanner = E_CAL_BACKEND_PLANNER (backend);
 	priv = cbplanner->priv;
 
 	if (priv->project_loaded) {
 		g_warning ("Reopening project ... we need to check for new tasks ...");
-		return GNOME_Evolution_Calendar_Success;	
+		return GNOME_Evolution_Calendar_Success;
 	} else {
 		g_warning ("Openinig project for the first time ...");
 	}
@@ -857,12 +857,12 @@ cbp_open (ECalBackendSync *backend,
 }
 
 static ECalBackendSyncStatus
-cbp_remove (ECalBackendSync *backend, 
+cbp_remove (ECalBackendSync *backend,
 			      EDataCal        *cal)
 {
 	ECalBackendPlanner        *cbplanner;
 	ECalBackendPlannerPrivate *priv;
-	
+
 	cbplanner = E_CAL_BACKEND_PLANNER (backend);
 	priv = cbplanner->priv;
 
@@ -899,7 +899,7 @@ cbp_get_mode (ECalBackend *backend)
 
 /* Set_mode handler for the planner backend */
 static void
-cbp_set_mode (ECalBackend *backend, 
+cbp_set_mode (ECalBackend *backend,
 				CalMode      mode)
 {
 	ECalBackendPlanner               *cbplanner;
@@ -935,8 +935,8 @@ cbp_set_mode (ECalBackend *backend,
 }
 
 static ECalBackendSyncStatus
-cbp_get_default_object (ECalBackendSync *backend, 
-					  EDataCal        *cal, 
+cbp_get_default_object (ECalBackendSync *backend,
+					  EDataCal        *cal,
 					  char           **object)
 {
 	ECalBackendPlanner        *cbplanner;
@@ -957,10 +957,10 @@ cbp_get_default_object (ECalBackendSync *backend,
 
 /* Get_object_component handler for the planner backend */
 static ECalBackendSyncStatus
-cbp_get_object (ECalBackendSync *backend, 
-				  EDataCal        *cal, 
-				  const gchar     *uid, 
-				  const gchar     *rid, 
+cbp_get_object (ECalBackendSync *backend,
+				  EDataCal        *cal,
+				  const gchar     *uid,
+				  const gchar     *rid,
 				  gchar          **object)
 {
 	ECalBackendPlanner        *cbplanner;
@@ -972,7 +972,7 @@ cbp_get_object (ECalBackendSync *backend,
 
 	g_return_val_if_fail (uid != NULL, GNOME_Evolution_Calendar_ObjectNotFound);
 
-	comp = g_hash_table_lookup (priv->tasks_comp, uid); 
+	comp = g_hash_table_lookup (priv->tasks_comp, uid);
 	/* comp = e_cal_backend_cache_get_component (priv->cache, uid, rid); */
 	/* We take the comp directly from libplanner */
 	if (!comp)
@@ -985,9 +985,9 @@ cbp_get_object (ECalBackendSync *backend,
 
 /* Get_timezone_object handler for the file backend */
 static ECalBackendSyncStatus
-cbp_get_timezone (ECalBackendSync *backend, 
-				    EDataCal        *cal, 
-				    const gchar     *tzid, 
+cbp_get_timezone (ECalBackendSync *backend,
+				    EDataCal        *cal,
+				    const gchar     *tzid,
 				    char           **object)
 {
 	ECalBackendPlanner *cbplanner;
@@ -1015,8 +1015,8 @@ cbp_get_timezone (ECalBackendSync *backend,
 
 /* Add_timezone handler for the file backend */
 static ECalBackendSyncStatus
-cbp_add_timezone (ECalBackendSync *backend, 
-				    EDataCal        *cal, 
+cbp_add_timezone (ECalBackendSync *backend,
+				    EDataCal        *cal,
 				    const gchar     *tzobj)
 {
 	ECalBackendPlanner *cbplanner;
@@ -1024,7 +1024,7 @@ cbp_add_timezone (ECalBackendSync *backend,
 
 	cbplanner = (ECalBackendPlanner *) backend;
 
-	g_return_val_if_fail (E_IS_CAL_BACKEND_PLANNER (cbplanner), 
+	g_return_val_if_fail (E_IS_CAL_BACKEND_PLANNER (cbplanner),
 			      GNOME_Evolution_Calendar_OtherError);
 	g_return_val_if_fail (tzobj != NULL, GNOME_Evolution_Calendar_OtherError);
 
@@ -1035,8 +1035,8 @@ cbp_add_timezone (ECalBackendSync *backend,
 }
 
 static ECalBackendSyncStatus
-cbp_set_default_timezone (ECalBackendSync *backend, 
-					    EDataCal        *cal, 
+cbp_set_default_timezone (ECalBackendSync *backend,
+					    EDataCal        *cal,
 					    const gchar     *tzid)
 {
 	ECalBackendPlanner *cbplanner;
@@ -1044,7 +1044,7 @@ cbp_set_default_timezone (ECalBackendSync *backend,
 
 	cbplanner = E_CAL_BACKEND_PLANNER (backend);
 	priv = cbplanner->priv;
-	
+
 	/* FIXME */
 	return GNOME_Evolution_Calendar_Success;
 }
@@ -1062,9 +1062,9 @@ add_comp_to_list (gpointer   key,
 
 /* Get_objects_in_range handler for the planner backend */
 static ECalBackendSyncStatus
-cbp_get_object_list (ECalBackendSync *backend, 
-				       EDataCal        *cal, 
-				       const gchar     *sexp, 
+cbp_get_object_list (ECalBackendSync *backend,
+				       EDataCal        *cal,
+				       const gchar     *sexp,
 				       GList          **objects)
 {
 	ECalBackendPlanner         *cbplanner;
@@ -1082,10 +1082,10 @@ cbp_get_object_list (ECalBackendSync *backend,
 	*objects = NULL;
 	g_hash_table_foreach (priv->tasks_comp, (GHFunc) add_comp_to_list, &comps);
 	for (l = comps; l; l = l->next) {
-		if (e_cal_backend_sexp_match_comp (cbsexp, 
-						   E_CAL_COMPONENT (l->data), 
+		if (e_cal_backend_sexp_match_comp (cbsexp,
+						   E_CAL_COMPONENT (l->data),
 						   E_CAL_BACKEND (backend))) {
-			*objects = g_list_append (*objects, 
+			*objects = g_list_append (*objects,
 						  e_cal_component_get_as_string (l->data));
 		}
 	}
@@ -1097,7 +1097,7 @@ cbp_get_object_list (ECalBackendSync *backend,
 
 /* get_query handler for the planner backend */
 static void
-cbp_start_query (ECalBackend  *backend, 
+cbp_start_query (ECalBackend  *backend,
 				   EDataCalView *query)
 {
 	ECalBackendPlanner         *cbplanner;
@@ -1118,10 +1118,10 @@ cbp_start_query (ECalBackend  *backend,
 	/* FIXME: get components from Planner */
 	g_hash_table_foreach (priv->tasks_comp, (GHFunc) add_comp_to_list, &comps);
 	for (l = comps; l; l = l->next) {
-		if (e_cal_backend_sexp_match_comp (cbsexp, 
-						   E_CAL_COMPONENT (l->data), 
+		if (e_cal_backend_sexp_match_comp (cbsexp,
+						   E_CAL_COMPONENT (l->data),
 						   E_CAL_BACKEND (backend))) {
-			objects = g_list_append (objects, 
+			objects = g_list_append (objects,
 						 e_cal_component_get_as_string (l->data));
 		}
 	}
@@ -1138,11 +1138,11 @@ cbp_start_query (ECalBackend  *backend,
 
 /* Get_free_busy handler for the planner backend */
 static ECalBackendSyncStatus
-cbp_get_free_busy (ECalBackendSync *backend, 
-				     EDataCal        *cal, 
+cbp_get_free_busy (ECalBackendSync *backend,
+				     EDataCal        *cal,
 				     GList           *users,
-				     time_t           start, 
-				     time_t           end, 
+				     time_t           start,
+				     time_t           end,
 				     GList          **freebusy)
 {
 	ECalBackendPlanner        *cbplanner;
@@ -1151,7 +1151,7 @@ cbp_get_free_busy (ECalBackendSync *backend,
 	cbplanner = E_CAL_BACKEND_PLANNER (backend);
 	priv = cbplanner->priv;
 
-	g_return_val_if_fail (start != -1 && end != -1, 
+	g_return_val_if_fail (start != -1 && end != -1,
 			      GNOME_Evolution_Calendar_InvalidRange);
 	g_return_val_if_fail (start <= end, GNOME_Evolution_Calendar_InvalidRange);
 
@@ -1161,11 +1161,11 @@ cbp_get_free_busy (ECalBackendSync *backend,
 
 /* Get_changes handler for the planner backend */
 static ECalBackendSyncStatus
-cbp_get_changes (ECalBackendSync *backend, 
-				   EDataCal        *cal, 
+cbp_get_changes (ECalBackendSync *backend,
+				   EDataCal        *cal,
 				   const char      *change_id,
-				   GList          **adds, 
-				   GList          **modifies, 
+				   GList          **adds,
+				   GList          **modifies,
 				   GList          **deletes)
 {
 	ECalBackendPlanner        *cbplanner;
@@ -1182,9 +1182,9 @@ cbp_get_changes (ECalBackendSync *backend,
 
 /* Discard_alarm handler for the planner backend */
 static ECalBackendSyncStatus
-cbp_discard_alarm (ECalBackendSync *backend, 
-				     EDataCal        *cal, 
-				     const gchar     *uid, 
+cbp_discard_alarm (ECalBackendSync *backend,
+				     EDataCal        *cal,
+				     const gchar     *uid,
 				     const gchar     *auid)
 {
 	ECalBackendPlanner        *cbplanner;
@@ -1198,9 +1198,9 @@ cbp_discard_alarm (ECalBackendSync *backend,
 }
 
 static ECalBackendSyncStatus
-cbp_create_object (ECalBackendSync *backend, 
-				     EDataCal        *cal, 
-				     gchar          **calobj, 
+cbp_create_object (ECalBackendSync *backend,
+				     EDataCal        *cal,
+				     gchar          **calobj,
 				     gchar          **uid)
 {
 	ECalBackendPlanner        *cbplanner;
@@ -1211,7 +1211,7 @@ cbp_create_object (ECalBackendSync *backend,
 	struct icaltimetype        current;
 	MrpTask                   *task;
 	GError                    *error = NULL;
-	
+
 	cbplanner = E_CAL_BACKEND_PLANNER (backend);
 	priv = cbplanner->priv;
 
@@ -1247,7 +1247,7 @@ cbp_create_object (ECalBackendSync *backend,
 
 	g_message ("Creating a new object %s", comp_uid);
 
-	
+
 	/* check the object is not in our cache */
 	if (lookup_component (cbplanner, comp_uid)) {
 		icalcomponent_free (icalcomp);
@@ -1276,15 +1276,15 @@ cbp_create_object (ECalBackendSync *backend,
 	/* return GNOME_Evolution_Calendar_PermissionDenied; */
 }
 
-/* FIXME: not finished. 
+/* FIXME: not finished.
    This method is called for the moment when:
    - You check the done checkbox
  */
 static ECalBackendSyncStatus
-cbp_modify_object (ECalBackendSync *backend, 
-				     EDataCal        *cal, 
-				     const gchar     *calobj, 
-				     CalObjModType    mod, 
+cbp_modify_object (ECalBackendSync *backend,
+				     EDataCal        *cal,
+				     const gchar     *calobj,
+				     CalObjModType    mod,
 				     char           **old_object)
 {
 	ECalBackendPlanner        *cbplanner;
@@ -1300,7 +1300,7 @@ cbp_modify_object (ECalBackendSync *backend,
 	cbplanner = E_CAL_BACKEND_PLANNER (backend);
 	priv = cbplanner->priv;
 
-	g_return_val_if_fail (E_IS_CAL_BACKEND_PLANNER (cbplanner), 
+	g_return_val_if_fail (E_IS_CAL_BACKEND_PLANNER (cbplanner),
 			      GNOME_Evolution_Calendar_InvalidObject);
 	g_return_val_if_fail (calobj != NULL, GNOME_Evolution_Calendar_ObjectNotFound);
 
@@ -1341,7 +1341,7 @@ cbp_modify_object (ECalBackendSync *backend,
 	g_hash_table_replace (priv->tasks_comp, (gpointer) comp_uid, comp);
 	task_replace (priv->project, task, task_new);
 	mrp_project_save (priv->project, TRUE, &error);
-	
+
 	/* Inform evolution about the object removed */
 	if (!E_IS_CAL_COMPONENT (cache_comp)) {
 		g_warning ("we don't have the old component ...");
@@ -1356,11 +1356,11 @@ cbp_modify_object (ECalBackendSync *backend,
 
 /* Remove_object handler for the planner backend */
 static ECalBackendSyncStatus
-cbp_remove_object (ECalBackendSync *backend, 
+cbp_remove_object (ECalBackendSync *backend,
 				     EDataCal        *cal,
-				     const gchar     *uid, 
+				     const gchar     *uid,
 				     const gchar     *rid,
-				     CalObjModType    mod, 
+				     CalObjModType    mod,
 				     gchar          **object)
 {
 	ECalBackendPlanner        *cbplanner;
@@ -1378,7 +1378,7 @@ cbp_remove_object (ECalBackendSync *backend,
 	comp = lookup_component (cbplanner, uid);
 	g_hash_table_remove (priv->tasks_comp, (gpointer) uid);
 	g_object_unref (comp);
-	task = lookup_task (cbplanner, uid); 
+	task = lookup_task (cbplanner, uid);
 	mrp_project_remove_task (priv->project, task);
 	g_object_unref (task);
 	mrp_project_save (priv->project, TRUE, &error);
@@ -1388,13 +1388,13 @@ cbp_remove_object (ECalBackendSync *backend,
 
 /* Update_objects handler for the planner backend. */
 static ECalBackendSyncStatus
-cbp_receive_objects (ECalBackendSync *backend, 
-				       EDataCal        *cal, 
+cbp_receive_objects (ECalBackendSync *backend,
+				       EDataCal        *cal,
 				       const gchar     *calobj)
 {
 	ECalBackendPlanner        *cbplanner;
 	ECalBackendPlannerPrivate *priv;
-	icalcomponent             *icalcomp; 
+	icalcomponent             *icalcomp;
 	/* icalcomponent             *subcomp; */
 
 	cbplanner = E_CAL_BACKEND_PLANNER (backend);
@@ -1407,17 +1407,17 @@ cbp_receive_objects (ECalBackendSync *backend,
 		return GNOME_Evolution_Calendar_InvalidObject;
 
 	g_message ("Modifying object: %s", calobj);
-	
+
 
 	/* return GNOME_Evolution_Calendar_PermissionDenied;*/
 	return GNOME_Evolution_Calendar_Success;
-	
+
 }
 
 static ECalBackendSyncStatus
-cbp_send_objects (ECalBackendSync *backend, 
-				    EDataCal        *cal, 
-				    const gchar     *calobj, 
+cbp_send_objects (ECalBackendSync *backend,
+				    EDataCal        *cal,
+				    const gchar     *calobj,
 				    GList          **users,
 				    gchar          **modified_calobj)
 {
@@ -1444,7 +1444,7 @@ cbp_internal_get_default_timezone (ECalBackend *backend)
 }
 
 static icaltimezone *
-cbp_internal_get_timezone (ECalBackend *backend, 
+cbp_internal_get_timezone (ECalBackend *backend,
 					     const gchar *tzid)
 {
 	ECalBackendPlanner        *cbplanner;
@@ -1465,7 +1465,7 @@ cbp_internal_get_timezone (ECalBackend *backend,
 
 /* Object initialization function for the file backend */
 static void
-cbp_init (ECalBackendPlanner      *cbplanner, 
+cbp_init (ECalBackendPlanner      *cbplanner,
 	  ECalBackendPlannerClass *class)
 {
 	ECalBackendPlannerPrivate *priv;
@@ -1495,7 +1495,7 @@ cbp_class_init (ECalBackendPlannerClass *class)
 	sync_class = (ECalBackendSyncClass *) class;
 
 	class->mrp_app = mrp_application_new ();
-	
+
 
 	parent_class = (ECalBackendSyncClass *) g_type_class_peek_parent (class);
 
@@ -1536,11 +1536,11 @@ cbp_class_init (ECalBackendPlannerClass *class)
 
 /**
  * cbp_get_type:
- * @void: 
- * 
+ * @void:
+ *
  * Registers the #ECalBackendPlanner class if necessary, and returns the type ID
  * associated to it.
- * 
+ *
  * Return value: The type ID of the #ECalBackendPlanner class.
  **/
 GType
@@ -1560,7 +1560,7 @@ e_cal_backend_planner_get_type (void)
                         (GInstanceInitFunc) cbp_init
                 };
 		cbp_type = g_type_register_static (E_TYPE_CAL_BACKEND_SYNC,
-								     "ECalBackendPlanner", 
+								     "ECalBackendPlanner",
 								     &info, 0);
 	}
 

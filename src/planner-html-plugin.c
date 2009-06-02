@@ -19,7 +19,7 @@
  */
 
 #include <config.h>
-#include <glib.h> 
+#include <glib.h>
 #include <string.h>
 #include <gtk/gtk.h>
 #include <glib/gi18n.h>
@@ -72,7 +72,7 @@ html_plugin_export_do (PlannerPlugin *plugin,
 
 	priv = plugin->priv;
 	project = planner_window_get_project (priv->main_window);
-	
+
 	if (!mrp_project_export (project, path, "Planner HTML", TRUE, NULL)) {
 		dialog = gtk_message_dialog_new (GTK_WINDOW (priv->main_window),
 						 GTK_DIALOG_MODAL |
@@ -115,15 +115,15 @@ html_plugin_export (GtkAction *action,
 						   NULL);
 
 	gtk_dialog_set_default_response (GTK_DIALOG (filechooser), GTK_RESPONSE_OK);
-	
+
 	project = planner_window_get_project (priv->main_window);
 	uri = mrp_project_get_uri (project);
 	if (!uri) {
 		gchar *cwd, *tmp;
-		
+
 		cwd = g_get_current_dir ();
 		tmp = g_strconcat (_("Unnamed"), ".html", NULL);
-		
+
 		filename = g_build_filename (cwd, tmp, NULL);
 
 		g_free (cwd);
@@ -142,7 +142,7 @@ html_plugin_export (GtkAction *action,
 
 		filename = g_strconcat (tmp, ".html", NULL);
 		g_free (tmp);
-	}		
+	}
 
 	gtk_file_chooser_set_filename (GTK_FILE_CHOOSER (filechooser),
 				       filename);
@@ -153,7 +153,7 @@ html_plugin_export (GtkAction *action,
 
 	show_button = gtk_check_button_new_with_label (_("Show result in browser"));
 	gtk_file_chooser_set_extra_widget (GTK_FILE_CHOOSER (filechooser), show_button);
-	
+
 	g_free (basename);
 	g_free (filename);
 
@@ -175,16 +175,16 @@ html_plugin_export (GtkAction *action,
 			gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_YES);
 			res = gtk_dialog_run (GTK_DIALOG (dialog));
 			gtk_widget_destroy (dialog);
-		
+
 			switch (res) {
 			case GTK_RESPONSE_YES:
 				break;
-				
+
 			case GTK_RESPONSE_NO:
 			case GTK_RESPONSE_DELETE_EVENT:
 				g_free (filename);
 				goto try_again;
-				
+
 			default:
 				g_assert_not_reached ();
 			}
@@ -192,7 +192,7 @@ html_plugin_export (GtkAction *action,
 
 		show = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (show_button));
 		gtk_widget_destroy (filechooser);
-		
+
 		html_plugin_export_do (plugin, filename, show);
 		g_free (filename);
 
@@ -203,7 +203,7 @@ html_plugin_export (GtkAction *action,
 	}
 }
 
-G_MODULE_EXPORT void 
+G_MODULE_EXPORT void
 plugin_init (PlannerPlugin *plugin,
 	     PlannerWindow *main_window)
 {
@@ -211,12 +211,12 @@ plugin_init (PlannerPlugin *plugin,
 	GtkUIManager      *ui;
 	GtkActionGroup    *actions;
 	gchar             *filename;
-	
+
 	priv = g_new0 (PlannerPluginPriv, 1);
 
 	plugin->priv = priv;
 	priv->main_window = main_window;
-	
+
 	actions = gtk_action_group_new ("HTML plugin actions");
 	gtk_action_group_set_translation_domain (actions, GETTEXT_PACKAGE);
 
@@ -235,7 +235,7 @@ plugin_init (PlannerPlugin *plugin,
 	gtk_ui_manager_ensure_update (ui);
 }
 
-G_MODULE_EXPORT void 
-plugin_exit (PlannerPlugin *plugin) 
+G_MODULE_EXPORT void
+plugin_exit (PlannerPlugin *plugin)
 {
 }

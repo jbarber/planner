@@ -80,7 +80,7 @@ planner_sidebar_get_type (void)
 		planner_sidebar_type = g_type_register_static (GTK_TYPE_FRAME, "PlannerSidebar",
 							  &planner_sidebar_info, 0);
 	}
-	
+
 	return planner_sidebar_type;
 }
 
@@ -102,7 +102,7 @@ sidebar_class_init (PlannerSidebarClass *class)
 	object_class->destroy = sidebar_destroy;
 
 	widget_class->style_set = sidebar_style_set;
-	
+
 	/* Signals. */
 	signals[ICON_SELECTED] = g_signal_new
 		("icon_selected",
@@ -125,14 +125,14 @@ sidebar_init (PlannerSidebar *bar)
 			  "realize",
 			  G_CALLBACK (sidebar_event_box_realize_cb),
 			  bar);
-	
+
 	bar->priv->vbox = gtk_vbox_new (FALSE, 0);
 	gtk_widget_show (bar->priv->vbox);
-	
+
 	gtk_container_add (GTK_CONTAINER (bar), bar->priv->event_box);
 
 	gtk_container_add (GTK_CONTAINER (bar->priv->event_box), bar->priv->vbox);
-	
+
 	gtk_container_set_border_width (GTK_CONTAINER (bar->priv->vbox), 6);
 	gtk_frame_set_shadow_type (GTK_FRAME (bar), GTK_SHADOW_OUT);
 }
@@ -167,16 +167,16 @@ sidebar_hls_to_rgb (gdouble *h,
 	gdouble saturation;
 	gdouble m1, m2;
 	gdouble r, g, b;
-	
+
 	lightness = *l;
 	saturation = *s;
-	
+
 	if (lightness <= 0.5)
 		m2 = lightness * (1 + saturation);
 	else
 		m2 = lightness + saturation - lightness * saturation;
 	m1 = 2 * lightness - m2;
-	
+
 	if (saturation == 0) {
 		*h = lightness;
 		*l = lightness;
@@ -187,7 +187,7 @@ sidebar_hls_to_rgb (gdouble *h,
 			hue -= 360;
 		while (hue < 0)
 			hue += 360;
-		
+
 		if (hue < 60)
 			r = m1 + (m2 - m1) * hue / 60;
 		else if (hue < 180)
@@ -196,13 +196,13 @@ sidebar_hls_to_rgb (gdouble *h,
 			r = m1 + (m2 - m1) * (240 - hue) / 60;
 		else
 			r = m1;
-		
+
 		hue = *h;
 		while (hue > 360)
 			hue -= 360;
 		while (hue < 0)
 			hue += 360;
-		
+
 		if (hue < 60)
 			g = m1 + (m2 - m1) * hue / 60;
 		else if (hue < 180)
@@ -211,13 +211,13 @@ sidebar_hls_to_rgb (gdouble *h,
 			g = m1 + (m2 - m1) * (240 - hue) / 60;
 		else
 			g = m1;
-		
+
 		hue = *h - 120;
 		while (hue > 360)
 			hue -= 360;
 		while (hue < 0)
 			hue += 360;
-		
+
 		if (hue < 60)
 			b = m1 + (m2 - m1) * hue / 60;
 		else if (hue < 180)
@@ -226,7 +226,7 @@ sidebar_hls_to_rgb (gdouble *h,
 			b = m1 + (m2 - m1) * (240 - hue) / 60;
 		else
 			b = m1;
-		
+
 		*h = r;
 		*l = g;
 		*s = b;
@@ -245,17 +245,17 @@ sidebar_rgb_to_hls (gdouble *r,
 	gdouble blue;
 	gdouble h, l, s;
 	gdouble delta;
-	
+
 	red = *r;
 	green = *g;
 	blue = *b;
-  
+
 	if (red > green) {
 		if (red > blue)
 			max = red;
 		else
 			max = blue;
-		
+
 		if (green < blue)
 			min = green;
 		else
@@ -265,23 +265,23 @@ sidebar_rgb_to_hls (gdouble *r,
 			max = green;
 		else
 			max = blue;
-		
+
 		if (red < blue)
 			min = red;
 		else
 			min = blue;
 	}
-	
+
 	l = (max + min) / 2;
 	s = 0;
 	h = 0;
-	
+
 	if (max != min) {
 		if (l <= 0.5)
 			s = (max - min) / (max + min);
 		else
 			s = (max - min) / (2 - max - min);
-		
+
 		delta = max -min;
 		if (red == max)
 			h = (green - blue) / delta;
@@ -289,12 +289,12 @@ sidebar_rgb_to_hls (gdouble *r,
 			h = 2 + (blue - red) / delta;
 		else if (blue == max)
 			h = 4 + (red - green) / delta;
-		
+
 		h *= 60;
 		if (h < 0.0)
 			h += 360;
 	}
-	
+
 	*r = h;
 	*g = l;
 	*b = s;
@@ -308,27 +308,27 @@ sidebar_style_shade (GdkColor *a,
 	gdouble red;
 	gdouble green;
 	gdouble blue;
-	
+
 	red = (gdouble) a->red / 65535.0;
 	green = (gdouble) a->green / 65535.0;
 	blue = (gdouble) a->blue / 65535.0;
-	
+
 	sidebar_rgb_to_hls (&red, &green, &blue);
-	
+
 	green *= k;
 	if (green > 1.0)
 		green = 1.0;
 	else if (green < 0.0)
 		green = 0.0;
-	
+
 	blue *= k;
 	if (blue > 1.0)
 		blue = 1.0;
 	else if (blue < 0.0)
 		blue = 0.0;
-	
+
 	sidebar_hls_to_rgb (&red, &green, &blue);
-	
+
 	b->red = red * 65535.0;
 	b->green = green * 65535.0;
 	b->blue = blue * 65535.0;
@@ -340,7 +340,7 @@ sidebar_darken_color (GdkColor *color,
 {
 	GdkColor src = *color;
 	GdkColor shaded = { 0 };
-	
+
 	while (darken_count) {
 		sidebar_style_shade (&src, &shaded, 0.93);
 		src = shaded;
@@ -367,14 +367,14 @@ sidebar_modify_bg (PlannerSidebar *bar)
 
 	prelight_color = style->dark[GTK_STATE_PRELIGHT];
 	sidebar_darken_color (&prelight_color, 4);
-	
+
 	gtk_widget_modify_bg (bar->priv->event_box, GTK_STATE_NORMAL, &normal_color);
 
 	for (l = bar->priv->buttons; l; l = l->next) {
 		entry = l->data;
 
 		button = GTK_WIDGET (entry->button);
-		
+
 		gtk_widget_modify_bg (button, GTK_STATE_NORMAL, &normal_color);
 		gtk_widget_modify_bg (button, GTK_STATE_ACTIVE, &normal_color);
 		gtk_widget_modify_bg (button, GTK_STATE_PRELIGHT, &prelight_color);
@@ -425,7 +425,7 @@ sidebar_button_toggled_cb (GtkToggleButton *button,
 		gtk_toggle_button_set_active (button, TRUE);
 		return;
 	}
-	
+
 	if (!gtk_toggle_button_get_active (button)) {
 		return;
 	}
@@ -438,7 +438,7 @@ sidebar_button_toggled_cb (GtkToggleButton *button,
 	if (selected_button) {
 		gtk_toggle_button_set_active (selected_button, FALSE);
 	}
-	
+
 	g_signal_emit (sidebar, signals[ICON_SELECTED], 0, index);
 }
 
@@ -460,9 +460,9 @@ planner_sidebar_append (PlannerSidebar *sidebar,
 	g_return_if_fail (PLANNER_IS_SIDEBAR (sidebar));
 
 	priv = sidebar->priv;
-	
+
 	entry = g_new0 (ButtonEntry, 1);
-	
+
 	vbox = gtk_vbox_new (FALSE, 0);
 
 	image = gtk_image_new_from_file (icon_filename);
@@ -472,14 +472,14 @@ planner_sidebar_append (PlannerSidebar *sidebar,
 	gtk_button_set_relief (GTK_BUTTON (entry->button), GTK_RELIEF_NONE);
 
 	sidebar->priv->buttons = g_list_append (priv->buttons, entry);
-	
+
 	g_signal_connect (entry->button,
 			  "toggled",
 			  G_CALLBACK (sidebar_button_toggled_cb),
 			  sidebar);
 
 	gtk_container_add (GTK_CONTAINER (entry->button), image);
-	
+
 	gtk_box_pack_start (GTK_BOX (vbox),
 			    GTK_WIDGET (entry->button),
 			    FALSE,
@@ -529,12 +529,12 @@ planner_sidebar_set_active (PlannerSidebar *sidebar,
 	if (!entry) {
 		return;
 	}
-	
+
 	if (entry->button != priv->selected_button) {
 		if (priv->selected_button) {
 			gtk_toggle_button_set_active (priv->selected_button, FALSE);
 		}
-		
+
 		gtk_toggle_button_set_active (entry->button, TRUE);
 
 		priv->selected_button = entry->button;

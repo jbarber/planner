@@ -37,7 +37,7 @@ typedef struct _MrpFileWriterPriv MrpFileWriterPriv;
 struct _MrpFileModule {
 	GModule        *handle;
 	MrpApplication *app;
-       
+
 	/* Methods */
 	void (*init)   (MrpFileModule  *plugin,
 			MrpApplication   *app);
@@ -47,9 +47,9 @@ struct _MrpFileModule {
 
 struct _MrpFileReader {
 	MrpFileModule     *module;
-	
+
 	MrpFileReaderPriv *priv;
-	
+
 	gboolean (*read_string) (MrpFileReader   *reader,
 				 const gchar     *str,
 				 MrpProject      *project,
@@ -60,9 +60,9 @@ struct _MrpFileWriter {
 	MrpFileModule     *module;
 	const gchar       *identifier;
 	const gchar       *mime_type;
-	
+
 	MrpFileWriterPriv *priv;
-	
+
 	/* Methods */
 	gboolean      (*write)                     (MrpFileWriter    *writer,
 						    MrpProject       *project,

@@ -21,7 +21,7 @@
    Boston, MA 02111-1307, USA.
 
    Authors: Ettore Perazzoli <ettore@comm2000.it>
-   	    John Sullivan <sullivan@eazel.com> 
+            John Sullivan <sullivan@eazel.com>
 */
 
 #ifndef EGG_RECENT_VFS_UTILS_H

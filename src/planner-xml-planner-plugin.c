@@ -60,12 +60,12 @@ static gchar *
 get_last_dir (void)
 {
 	gchar *last_dir;
-	
+
 	last_dir = planner_conf_get_string (CONF_MAIN_LAST_XML_EXPORT_DIR, NULL);
 	if (last_dir == NULL) {
 		last_dir = g_strdup (g_get_home_dir ());
 	}
-	
+
 	return last_dir;
 }
 
@@ -98,7 +98,7 @@ xml_planner_plugin_export (GtkAction *action,
 	last_dir = get_last_dir ();
 	gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (file_chooser), last_dir);
 	g_free (last_dir);
-	
+
 	response = gtk_dialog_run (GTK_DIALOG (file_chooser));
 	if (response == GTK_RESPONSE_OK) {
 		filename = gtk_file_chooser_get_filename (
@@ -106,7 +106,7 @@ xml_planner_plugin_export (GtkAction *action,
 	}
 
 	gtk_widget_destroy (file_chooser);
-	
+
 	if (filename) {
 		if (!g_str_has_suffix (filename, ".mrproject") && !g_str_has_suffix (filename, ".planner")) {
 			/* Add the old extension for old format files. */
@@ -114,7 +114,7 @@ xml_planner_plugin_export (GtkAction *action,
 		} else {
 			real_filename = g_strdup (filename);
 		}
-	
+
 		if (g_file_test (real_filename, G_FILE_TEST_EXISTS)) {
 			dialog = gtk_message_dialog_new (GTK_WINDOW (priv->main_window),
 							 GTK_DIALOG_MODAL |
@@ -124,10 +124,10 @@ xml_planner_plugin_export (GtkAction *action,
 							 _("File \"%s\" exists, "
 							   "do you want to overwrite it?"),
 							 real_filename);
-			
+
 			response = gtk_dialog_run (GTK_DIALOG (dialog));
 			gtk_widget_destroy (dialog);
-			
+
 			switch (response) {
 			case GTK_RESPONSE_YES:
 				break;
@@ -136,12 +136,12 @@ xml_planner_plugin_export (GtkAction *action,
 				goto try_again;
 			}
 		}
-	} 
+	}
 
 	if (!filename) {
 		return;
 	}
-	
+
 	project = planner_window_get_project (priv->main_window);
 
 	if (!mrp_project_export (project, real_filename,
@@ -159,14 +159,14 @@ xml_planner_plugin_export (GtkAction *action,
 	g_free (filename);
 }
 
-G_MODULE_EXPORT void 
+G_MODULE_EXPORT void
 plugin_init (PlannerPlugin *plugin, PlannerWindow *main_window)
 {
 	PlannerPluginPriv *priv;
 	GtkUIManager      *ui;
 	GtkActionGroup    *actions;
 	gchar		  *filename;
-	
+
 	priv = g_new0 (PlannerPluginPriv, 1);
 	plugin->priv = priv;
 	priv->main_window = main_window;
@@ -190,7 +190,7 @@ plugin_init (PlannerPlugin *plugin, PlannerWindow *main_window)
 	gtk_ui_manager_ensure_update(ui);
 }
 
-G_MODULE_EXPORT void 
-plugin_exit (PlannerPlugin *plugin) 
+G_MODULE_EXPORT void
+plugin_exit (PlannerPlugin *plugin)
 {
 }

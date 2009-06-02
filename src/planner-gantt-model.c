@@ -50,7 +50,7 @@ struct _PlannerGanttModelPriv {
 typedef struct {
 	gchar *wbs;
 	gint   wbs_stamp;
-	
+
 	gchar *start;
 	gchar *finish;
 	gchar *duration;
@@ -113,7 +113,7 @@ planner_gantt_model_get_type (void)
 		type = g_type_register_static (G_TYPE_OBJECT,
 					       "PlannerGanttModel",
 					       &info, 0);
-		
+
 		g_type_add_interface_static (type,
 					     GTK_TYPE_TREE_MODEL,
 					     &tree_model_info);
@@ -153,7 +153,7 @@ gantt_model_task_inserted_cb (MrpProject        *project,
 	gboolean     has_child_toggled;
 
 	value_cache_clear_cache_wbs (model);
-	
+
 	node = g_node_new (task);
 
 	g_hash_table_insert (model->priv->task2node, task, node);
@@ -166,7 +166,7 @@ gantt_model_task_inserted_cb (MrpProject        *project,
 	has_child_toggled = (g_node_n_children (parent_node) == 0);
 
 	g_node_insert (parent_node, pos, node);
-	
+
 	if (has_child_toggled && parent_node->parent != NULL) {
 		parent_path = gantt_model_get_path_from_node (model, parent_node);
 		gantt_model_get_iter (GTK_TREE_MODEL (model), &iter, parent_path);
@@ -181,7 +181,7 @@ gantt_model_task_inserted_cb (MrpProject        *project,
 	gtk_tree_model_row_inserted (GTK_TREE_MODEL (model), path, &iter);
 
 	gtk_tree_path_free (path);
-	
+
 	gantt_model_connect_to_task_signals (model, task);
 
 	/* Sanity check. */
@@ -191,7 +191,7 @@ gantt_model_task_inserted_cb (MrpProject        *project,
 		g_warning ("Gantt model corrupt.");
 	}
 #endif
-	
+
 	g_signal_emit (model, signals[TASK_ADDED], 0, task);
 }
 
@@ -205,7 +205,7 @@ traverse_remove_subtree (GNode             *node,
 	g_signal_handlers_disconnect_by_func (node->data,
 					      gantt_model_task_prop_changed_cb,
 					      model);
-	
+
 	g_hash_table_remove (model->priv->task2node, node->data);
 
 	return FALSE;
@@ -214,7 +214,7 @@ traverse_remove_subtree (GNode             *node,
 static void
 gantt_model_remove_subtree (PlannerGanttModel *model,
 			    GNode             *node)
-{	
+{
 	g_node_unlink (node);
 
 	g_node_traverse (node,
@@ -244,9 +244,9 @@ gantt_model_task_removed_cb (MrpProject        *project,
 	node = g_hash_table_lookup (model->priv->task2node, task);
 	if (!node) {
 		/* This happens if we are already removed when a parent was
-		 * removed. 
+		 * removed.
 		 */
-		return; 
+		return;
 	}
 
 	value_cache_clear_cache_wbs (model);
@@ -257,16 +257,16 @@ gantt_model_task_removed_cb (MrpProject        *project,
 	g_signal_handlers_disconnect_by_func (task,
 					      gantt_model_task_prop_changed_cb,
 					      model);
-	
+
 	parent_node = node->parent;
-	
+
 	path = gantt_model_get_path_from_node (model, node);
 	gtk_tree_model_get_iter (GTK_TREE_MODEL (model), &iter, path);
 
 	has_child_toggled = (g_node_n_children (parent_node) == 1);
 
 	gantt_model_remove_subtree (model, node);
-	
+
 	gtk_tree_model_row_deleted (GTK_TREE_MODEL (model), path);
 
 	if (has_child_toggled && parent_node->parent != NULL) {
@@ -277,7 +277,7 @@ gantt_model_task_removed_cb (MrpProject        *project,
 						      &iter);
 		gtk_tree_path_free (parent_path);
 	}
-	
+
 	gtk_tree_path_free (path);
 
 	/* Sanity check. */
@@ -302,10 +302,10 @@ gantt_model_reattach_subtasks (GtkTreeModel *tree_model,
 	GtkTreeIter            iter;
 	gint                   pos;
 	gboolean               has_child_toggled;
-	
+
 	model = PLANNER_GANTT_MODEL (tree_model);
 	priv = model->priv;
-	
+
 	parent_node = g_hash_table_lookup (priv->task2node, task);
 
 	/* Traverse the subtasks. */
@@ -314,13 +314,13 @@ gantt_model_reattach_subtasks (GtkTreeModel *tree_model,
 		node = g_hash_table_lookup (priv->task2node, child);
 		pos = mrp_task_get_position (child);
 		g_node_insert (parent_node, pos, node);
-		
+
 		has_child_toggled = (g_node_n_children (parent_node) == 1);
-		
+
 		/* Emit has_child_toggled if necessary. */
 		if (has_child_toggled) {
 			GtkTreePath *parent_path;
-			
+
 			parent_path = gantt_model_get_path_from_node (model, parent_node);
 			gantt_model_get_iter (GTK_TREE_MODEL (model), &iter, parent_path);
 			gtk_tree_model_row_has_child_toggled (GTK_TREE_MODEL (model),
@@ -328,7 +328,7 @@ gantt_model_reattach_subtasks (GtkTreeModel *tree_model,
 							      &iter);
 			gtk_tree_path_free (parent_path);
 		}
-		
+
 		path = planner_gantt_model_get_path_from_task (model, child);
 		gtk_tree_model_get_iter (tree_model, &iter, path);
 		gtk_tree_model_row_inserted (tree_model, path, &iter);
@@ -345,7 +345,7 @@ static gboolean
 gantt_model_unlink_subtree_cb (GNode *node, gpointer data)
 {
 	g_node_unlink (node);
-	
+
 	return FALSE;
 }
 
@@ -453,7 +453,7 @@ gantt_model_task_notify_cb (MrpTask           *task,
 	    strcmp (pspec->name, "work") == 0) {
 		value_cache_clear (model, task);
 	}
-	
+
 	path = planner_gantt_model_get_path_from_task (model, task);
 	gtk_tree_model_get_iter (tree_model, &iter, path);
 	gtk_tree_model_row_changed (tree_model, path, &iter);
@@ -504,7 +504,7 @@ traverse_setup_tree (MrpTask  *task,
 		g_node_append (node, child_node);
 
 		traverse_setup_tree (child_task, child_node);
-		
+
 		child_task = mrp_task_get_next_sibling (child_task);
 	}
 }
@@ -515,7 +515,7 @@ gantt_model_setup_task_tree (PlannerGanttModel *model)
 	MrpTask *root_task;
 	GNode   *root_node;
 
-	root_task = mrp_project_get_root_task (model->priv->project); 
+	root_task = mrp_project_get_root_task (model->priv->project);
 	root_node = g_node_new (root_task);
 
 	traverse_setup_tree (root_task, root_node);
@@ -529,7 +529,7 @@ planner_gantt_model_new (MrpProject *project)
 	PlannerGanttModel     *model;
 	PlannerGanttModelPriv *priv;
 	GList                 *tasks, *l;
-	
+
 	model = PLANNER_GANTT_MODEL (g_object_new (PLANNER_TYPE_GANTT_MODEL, NULL));
 	priv = model->priv;
 
@@ -542,13 +542,13 @@ planner_gantt_model_new (MrpProject *project)
 			 -1,
 			 (GNodeTraverseFunc) traverse_insert_task_into_hash,
 			 model);
-	
+
 	g_signal_connect_object (project,
 				 "task-inserted",
 				 G_CALLBACK (gantt_model_task_inserted_cb),
 				 model,
 				 0);
-	
+
 	g_signal_connect_object (project,
 				 "task-removed",
 				 G_CALLBACK (gantt_model_task_removed_cb),
@@ -565,9 +565,9 @@ planner_gantt_model_new (MrpProject *project)
 	for (l = tasks; l; l = l->next) {
 		gantt_model_connect_to_task_signals (model, l->data);
 	}
-	
+
 	g_list_free (tasks);
-	
+
 	return model;
 }
 
@@ -579,7 +579,7 @@ gantt_model_finalize (GObject *object)
 	g_node_destroy (model->priv->tree);
 	g_hash_table_destroy (model->priv->task2node);
 	g_hash_table_destroy (model->priv->task2cache);
-	
+
 	g_free (model->priv);
 	model->priv = NULL;
 
@@ -596,7 +596,7 @@ gantt_model_class_init (PlannerGanttModelClass *klass)
 	object_class = (GObjectClass *) klass;
 
 	parent_class = g_type_class_peek_parent (klass);
-	
+
 	object_class->finalize = gantt_model_finalize;
 
 	signals[TASK_ADDED] =
@@ -608,7 +608,7 @@ gantt_model_class_init (PlannerGanttModelClass *klass)
 			      planner_marshal_VOID__OBJECT,
 			      G_TYPE_NONE,
 			      1, MRP_TYPE_TASK);
-	signals[TASK_REMOVED] = 
+	signals[TASK_REMOVED] =
 		g_signal_new ("task-removed",
 			      G_TYPE_FROM_CLASS (klass),
 			      G_SIGNAL_RUN_LAST,
@@ -651,7 +651,7 @@ gantt_model_get_column_type (GtkTreeModel *tree_model,
 	case COL_TASK:
 		return MRP_TYPE_TASK;
 	case COL_COST:
-		return G_TYPE_LONG;	
+		return G_TYPE_LONG;
 	case COL_COMPLETE:
 		return G_TYPE_INT;
 	default:
@@ -668,9 +668,9 @@ gantt_model_get_iter (GtkTreeModel *tree_model,
 	GtkTreeIter        parent;
 	gint              *indices;
 	gint               depth, i;
-	
+
 	gantt_model = PLANNER_GANTT_MODEL (tree_model);
-	
+
 	indices = gtk_tree_path_get_indices (path);
 	depth = gtk_tree_path_get_depth (path);
 
@@ -701,12 +701,12 @@ gantt_model_get_path_from_node (PlannerGanttModel *model,
 	GNode       *parent;
 	GNode       *child;
 	gint         i = 0;
-	
+
 	g_return_val_if_fail (PLANNER_IS_GANTT_MODEL (model), NULL);
 	g_return_val_if_fail (node != NULL, NULL);
 
 	parent = node->parent;
-	
+
 	if (parent == NULL && node == model->priv->tree) {
 		return gtk_tree_path_new_root ();
 	}
@@ -724,7 +724,7 @@ gantt_model_get_path_from_node (PlannerGanttModel *model,
 	if (path == NULL) {
 		return NULL;
 	}
-	
+
 	if (child == NULL) {
 		gtk_tree_path_free (path);
 		return NULL;
@@ -743,7 +743,7 @@ gantt_model_get_path_from_node (PlannerGanttModel *model,
 		gtk_tree_path_free (path);
 		return NULL;
 	}
-	
+
 	gtk_tree_path_append_index (path, i);
 
 	return path;
@@ -754,7 +754,7 @@ planner_gantt_model_get_path_from_task (PlannerGanttModel *model,
 					MrpTask           *task)
 {
 	GNode *node;
-	
+
 	g_return_val_if_fail (PLANNER_IS_GANTT_MODEL (model), NULL);
 	g_return_val_if_fail (MRP_IS_TASK (task), NULL);
 
@@ -763,7 +763,7 @@ planner_gantt_model_get_path_from_task (PlannerGanttModel *model,
 	if (!node) {
 		return NULL;
 	}
-	
+
 	return gantt_model_get_path_from_node (model, node);
 }
 
@@ -772,7 +772,7 @@ gantt_model_get_path (GtkTreeModel *tree_model,
 		      GtkTreeIter  *iter)
 {
 	GNode *node;
-	
+
 	g_return_val_if_fail (iter != NULL, NULL);
 	g_return_val_if_fail (iter->user_data != NULL, NULL);
 	g_return_val_if_fail (iter->stamp == PLANNER_GANTT_MODEL (tree_model)->stamp, NULL);
@@ -796,7 +796,7 @@ gantt_model_get_value (GtkTreeModel *tree_model,
 	MrpTaskType  type;
 	const gchar *name;
 	const gchar *cached_str;
-	
+
 	g_return_if_fail (iter != NULL);
 
 	node = iter->user_data;
@@ -806,17 +806,17 @@ gantt_model_get_value (GtkTreeModel *tree_model,
 	case COL_WBS:
 		cached_str = value_cache_get_wbs (PLANNER_GANTT_MODEL (tree_model),
 						  task);
-		
+
 		g_value_init (value, G_TYPE_STRING);
 		g_value_set_string (value, cached_str);
 		break;
-		
+
 	case COL_NAME:
 		name = mrp_task_get_name (task);
 		if (name == NULL) {
 			name = "";
 		}
-		
+
 		g_value_init (value, G_TYPE_STRING);
 		g_value_set_string (value, name);
 		break;
@@ -830,12 +830,12 @@ gantt_model_get_value (GtkTreeModel *tree_model,
 		g_value_init (value, G_TYPE_LONG);
 		g_value_set_long (value, mrp_task_get_finish (task));
 		break;
-		
+
 	case COL_DURATION:
 		g_value_init (value, G_TYPE_INT);
 		g_value_set_int (value, mrp_task_get_duration (task));
 		break;
-		
+
 	case COL_WORK:
 		g_value_init (value, G_TYPE_INT);
 		g_value_set_int (value, mrp_task_get_work (task));
@@ -845,17 +845,17 @@ gantt_model_get_value (GtkTreeModel *tree_model,
 		t1 = mrp_task_get_finish (task);
 		t2 = mrp_task_get_latest_finish (task);
 		project = mrp_object_get_project (MRP_OBJECT (task));
-		
+
 		/* We don't support negative slack */
 		if (t2 >= t1) {
-			/* use summary duration calc since we want to use 
+			/* use summary duration calc since we want to use
 			 * the project calendar and ignore resource assignments */
 			duration = mrp_project_calculate_summary_duration (
 				project, task, t1, t2);
 		} else {
 			duration = 0;
 		}
-		
+
 		g_value_init (value, G_TYPE_INT);
 		g_value_set_int (value, duration);
 		break;
@@ -871,7 +871,7 @@ gantt_model_get_value (GtkTreeModel *tree_model,
 
 	case COL_EDITABLE:
 		type = mrp_task_get_task_type (task);
-		
+
 		g_value_init (value, G_TYPE_BOOLEAN);
 		if (g_node_n_children (node) > 0) {
 			g_value_set_boolean (value, FALSE);
@@ -917,7 +917,7 @@ gantt_model_iter_next (GtkTreeModel *tree_model,
 		iter->user_data = NULL;
 		return FALSE;
 	}
-	
+
 	iter->user_data = next;
 	return TRUE;
 }
@@ -937,14 +937,14 @@ gantt_model_iter_children (GtkTreeModel *tree_model,
 	} else {
 		node = PLANNER_GANTT_MODEL (tree_model)->priv->tree;
 	}
-	
+
 	child = g_node_first_child (node);
 
 	if (child == NULL) {
 		iter->user_data = NULL;
 		return FALSE;
 	}
-	
+
 	iter->user_data = child;
 	iter->stamp = PLANNER_GANTT_MODEL (tree_model)->stamp;
 	return TRUE;
@@ -955,7 +955,7 @@ gantt_model_iter_has_child (GtkTreeModel *tree_model,
 			    GtkTreeIter  *iter)
 {
 	GNode *node;
-	
+
 	node = iter->user_data;
 
 	return (g_node_n_children (node) > 0);
@@ -989,7 +989,7 @@ gantt_model_iter_nth_child (GtkTreeModel *tree_model,
 	g_return_val_if_fail (parent_iter == NULL || parent_iter->user_data != NULL, FALSE);
 
 	model = PLANNER_GANTT_MODEL (tree_model);
-	
+
 	if (parent_iter == NULL) {
 		parent = model->priv->tree;
 	} else {
@@ -1015,9 +1015,9 @@ gantt_model_iter_parent (GtkTreeModel *tree_model,
 {
 	GNode *node_task;
 	GNode *node_parent;
-  
+
 	node_task = child->user_data;
-  
+
 	node_parent = node_task->parent;
 
 	if (node_parent == NULL) {
@@ -1059,7 +1059,7 @@ gantt_model_init (PlannerGanttModel *model)
 	priv->task2cache = g_hash_table_new_full (NULL, NULL,
 						  NULL,
 						  (GDestroyNotify) value_cache_free);
-	
+
 	do {
 		model->stamp = g_random_int ();
 	} while (model->stamp == 0);
@@ -1069,7 +1069,7 @@ MrpProject *
 planner_gantt_model_get_project (PlannerGanttModel *model)
 {
 	g_return_val_if_fail (PLANNER_IS_GANTT_MODEL (model), NULL);
-	
+
 	return model->priv->project;
 }
 
@@ -1079,12 +1079,12 @@ planner_gantt_model_get_task (PlannerGanttModel *model,
 {
 	MrpTask *task;
 
-	task = ((GNode *) iter->user_data)->data; 
+	task = ((GNode *) iter->user_data)->data;
 
 	if (task == NULL) {
 		/* Shouldn't really happen. */
 		return NULL;
-	} else { 
+	} else {
 		return MRP_TASK (task);
 	}
 }
@@ -1097,13 +1097,13 @@ planner_gantt_model_get_task_from_path (PlannerGanttModel *model,
 	MrpTask     *task = NULL;
 
 	g_return_val_if_fail (PLANNER_IS_GANTT_MODEL (model), NULL);
-	
+
 	if (gtk_tree_model_get_iter (GTK_TREE_MODEL (model), &iter, path)) {
-		gtk_tree_model_get (GTK_TREE_MODEL (model), &iter, 
+		gtk_tree_model_get (GTK_TREE_MODEL (model), &iter,
 				    COL_TASK, &task,
 				    -1);
 	}
-	
+
 	return task;
 }
 
@@ -1143,13 +1143,13 @@ value_cache_get_wbs (PlannerGanttModel *model,
 	if (!cache->wbs) {
 		goto update_cache;
 	}
-	
+
 	if (cache->wbs_stamp != model->priv->wbs_stamp) {
 		goto update_cache;
 	}
 
 	return cache->wbs;
-	
+
  update_cache:
 	string = g_string_sized_new (24);
 
@@ -1159,15 +1159,15 @@ value_cache_get_wbs (PlannerGanttModel *model,
 		if (pos != -1) {
 			g_string_prepend_c (string, '.');
 		}
-		
+
 		pos = mrp_task_get_position (tmp_task) + 1;
-		
+
 		str = g_strdup_printf ("%d", pos);
 		g_string_prepend (string, str);
 		g_free (str);
-		
+
 		tmp_task = mrp_task_get_parent (tmp_task);
-		
+
 		/* Skip the root. */
 		if (mrp_task_get_parent (tmp_task) == NULL)
 			break;
@@ -1177,7 +1177,7 @@ value_cache_get_wbs (PlannerGanttModel *model,
 
 	cache->wbs = g_string_free (string, FALSE);
 	cache->wbs_stamp = model->priv->wbs_stamp;
-	
+
 	return cache->wbs;
 }
 
@@ -1205,7 +1205,7 @@ value_cache_get (PlannerGanttModel *model,
 		g_hash_table_insert (model->priv->task2cache,
 				     task,
 				     cache);
-	}	
+	}
 
 	return cache;
 }

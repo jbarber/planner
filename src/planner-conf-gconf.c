@@ -46,7 +46,7 @@ conf_get_key (const gchar *key)
 	return g_strconcat (GCONF_PREFIX, key, NULL);
 }
 
-gboolean      
+gboolean
 planner_conf_dir_exists (const gchar *dir, GError **error)
 {
 	GConfClient *client;
@@ -54,7 +54,7 @@ planner_conf_dir_exists (const gchar *dir, GError **error)
 	gboolean     ret_val;
 
 	client = conf_get_gconf_client ();
-	
+
 	full_dir = conf_get_key (dir);
 	ret_val = gconf_client_dir_exists (client, full_dir, error);
 	g_free (full_dir);
@@ -62,7 +62,7 @@ planner_conf_dir_exists (const gchar *dir, GError **error)
 	return ret_val;
 }
 
-gboolean    
+gboolean
 planner_conf_get_bool (const gchar *key, GError **error)
 {
 	GConfClient *client;
@@ -70,7 +70,7 @@ planner_conf_get_bool (const gchar *key, GError **error)
 	gboolean     ret_val;
 
 	client = conf_get_gconf_client ();
-	
+
 	full_key = conf_get_key (key);
 	ret_val = gconf_client_get_bool (client, full_key, error);
 	g_free (full_key);
@@ -86,7 +86,7 @@ planner_conf_get_string (const gchar *key, GError **error)
 	gchar       *ret_val;
 
 	client = conf_get_gconf_client ();
-	
+
 	full_key = conf_get_key (key);
 	ret_val = gconf_client_get_string (client, full_key, error);
 	g_free (full_key);
@@ -102,7 +102,7 @@ planner_conf_get_int (const gchar *key, GError **error)
 	gint         ret_val;
 
 	client = conf_get_gconf_client ();
-	
+
 	full_key = conf_get_key (key);
 	ret_val = gconf_client_get_int (client, full_key, error);
 	g_free (full_key);
@@ -110,7 +110,7 @@ planner_conf_get_int (const gchar *key, GError **error)
 	return ret_val;
 }
 
-gboolean 
+gboolean
 planner_conf_set_bool (const gchar *key, gboolean value, GError **error)
 {
 	GConfClient *client;
@@ -134,7 +134,7 @@ planner_conf_set_string (const gchar *key, const gchar *value, GError **error)
 	gboolean     ret_val;
 
 	client = conf_get_gconf_client ();
-	
+
 	full_key = conf_get_key (key);
 	ret_val = gconf_client_set_string (client, full_key, value, error);
 	g_free (full_key);
@@ -150,7 +150,7 @@ planner_conf_set_int (const gchar *key, gint value, GError **error)
 	gboolean     ret_val;
 
 	client = conf_get_gconf_client ();
-	
+
 	full_key = conf_get_key (key);
 	ret_val = gconf_client_set_int (client, full_key, value, error);
 	g_free (full_key);

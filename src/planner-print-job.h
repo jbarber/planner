@@ -61,7 +61,7 @@ struct _PlannerPrintJobClass {
 };
 
 GType        planner_print_job_get_type         (void) G_GNUC_CONST;
-PlannerPrintJob * planner_print_job_new         (GtkPrintOperation *gpo, 
+PlannerPrintJob * planner_print_job_new         (GtkPrintOperation *gpo,
 					    GList *views);
 void         planner_print_job_set_header       (PlannerPrintJob    *job,
 					    const gchar   *header);

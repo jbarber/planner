@@ -55,7 +55,7 @@ planner_canvas_line_get_type (void)
 		type = g_type_register_static (GNOME_TYPE_CANVAS_LINE, "PlannerCanvasLine",
 					       &info, 0);
 	}
-	
+
 	return type;
 }
 

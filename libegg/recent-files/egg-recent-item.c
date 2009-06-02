@@ -83,7 +83,7 @@ egg_recent_item_unref (EggRecentItem *item)
 }
 
 
-EggRecentItem * 
+EggRecentItem *
 egg_recent_item_new_from_uri (const gchar *uri)
 {
 	EggRecentItem *item;
@@ -96,7 +96,7 @@ egg_recent_item_new_from_uri (const gchar *uri)
 		egg_recent_item_free (item);
 		return NULL;
 	}
-	
+
 	item->mime_type = gnome_vfs_get_mime_type (item->uri);
 
 	if (!item->mime_type)
@@ -211,19 +211,19 @@ egg_recent_item_set_uri (EggRecentItem *item, const gchar *uri)
 	return TRUE;
 }
 
-gchar * 
+gchar *
 egg_recent_item_get_uri (const EggRecentItem *item)
 {
 	return g_strdup (item->uri);
 }
 
-G_CONST_RETURN gchar * 
+G_CONST_RETURN gchar *
 egg_recent_item_peek_uri (const EggRecentItem *item)
 {
 	return item->uri;
 }
 
-gchar * 
+gchar *
 egg_recent_item_get_uri_utf8 (const EggRecentItem *item)
 {
 	/* this could fail, but it's not likely, since we've already done it
@@ -331,19 +331,19 @@ egg_recent_item_get_short_name (const EggRecentItem *item)
 	return short_name;
 }
 
-void 
+void
 egg_recent_item_set_mime_type (EggRecentItem *item, const gchar *mime)
 {
 	item->mime_type = g_strdup (mime);
 }
 
-gchar * 
+gchar *
 egg_recent_item_get_mime_type (const EggRecentItem *item)
 {
 	return g_strdup (item->mime_type);
 }
 
-void 
+void
 egg_recent_item_set_timestamp (EggRecentItem *item, time_t timestamp)
 {
 	if (timestamp == (time_t) -1)
@@ -352,7 +352,7 @@ egg_recent_item_set_timestamp (EggRecentItem *item, time_t timestamp)
 	item->timestamp = timestamp;
 }
 
-time_t 
+time_t
 egg_recent_item_get_timestamp (const EggRecentItem *item)
 {
 	return item->timestamp;
@@ -372,13 +372,13 @@ egg_recent_item_in_group (const EggRecentItem *item, const gchar *group_name)
 	tmp = item->groups;
 	while (tmp != NULL) {
 		gchar *val = (gchar *)tmp->data;
-		
+
 		if (strcmp (group_name, val) == 0)
 			return TRUE;
 
 		tmp = tmp->next;
 	}
-	
+
 	return FALSE;
 }
 
@@ -401,7 +401,7 @@ egg_recent_item_remove_group (EggRecentItem *item, const gchar *group_name)
 	tmp = item->groups;
 	while (tmp != NULL) {
 		gchar *val = (gchar *)tmp->data;
-		
+
 		if (strcmp (group_name, val) == 0) {
 			item->groups = g_list_remove (item->groups,
 						      val);
@@ -429,12 +429,12 @@ GType
 egg_recent_item_get_type (void)
 {
 	static GType boxed_type = 0;
-	
+
 	if (!boxed_type) {
 		boxed_type = g_boxed_type_register_static ("EggRecentItem",
 					(GBoxedCopyFunc)egg_recent_item_ref,
 					(GBoxedFreeFunc)egg_recent_item_unref);
 	}
-	
+
 	return boxed_type;
 }

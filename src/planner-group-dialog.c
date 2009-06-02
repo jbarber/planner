@@ -57,7 +57,7 @@ typedef struct {
 	PlannerCmd   base;
 
 	MrpGroup    *group;
-	const gchar *property;  
+	const gchar *property;
 	GValue      *value;
 	GValue      *old_value;
 } GroupCmdEditProperty;
@@ -83,13 +83,13 @@ typedef struct {
 	GtkTreeIter *found_iter;
 } FindGroupData;
 
-static void 
+static void
 group_dialog_free_find_group_data (FindGroupData *data)
 {
 	if (data->found_iter) {
 		gtk_tree_iter_free (data->found_iter);
 	}
-	
+
 	g_free (data);
 }
 
@@ -100,16 +100,16 @@ group_dialog_foreach_find_group_func (GtkTreeModel     *model,
 				      FindGroupData    *data)
 {
 	MrpGroup *group;
-	
+
 	gtk_tree_model_get (model, iter,
 			    GROUP_COL, &group,
 			    -1);
-	
+
 	if (group == data->group) {
 		data->found_iter = gtk_tree_iter_copy (iter);
 		return TRUE;
 	}
-	
+
 	return FALSE;
 }
 
@@ -118,7 +118,7 @@ group_dialog_find_group (GtkTreeView *tree_view, MrpGroup *group)
 {
 	FindGroupData *data;
 	GtkTreeModel  *model;
-	
+
 	data = g_new0 (FindGroupData, 1);
 	data->group = group;
 	data->found_iter = NULL;
@@ -132,27 +132,27 @@ group_dialog_find_group (GtkTreeView *tree_view, MrpGroup *group)
 	if (data->found_iter) {
 		return data;
 	}
-	
+
 	g_free (data);
 	return NULL;
 }
 
 
-static GtkWidget * 
+static GtkWidget *
 group_dialog_create                       (PlannerView          *view);
 
 static void  group_dialog_setup_tree_view (GtkWidget            *dialog);
 
-static void  group_dialog_insert_group_cb (GtkWidget            *button, 
+static void  group_dialog_insert_group_cb (GtkWidget            *button,
 					   GtkWidget            *dialog);
 
-static void  group_dialog_remove_group_cb (GtkWidget            *button, 
+static void  group_dialog_remove_group_cb (GtkWidget            *button,
 					   GtkWidget            *dialog);
 
-static void  group_dialog_close_editor_cb (GtkWidget            *button, 
+static void  group_dialog_close_editor_cb (GtkWidget            *button,
 					   GtkWidget            *dialog);
 
-static void  group_dialog_cell_toggled    (GtkCellRendererText  *cell, 
+static void  group_dialog_cell_toggled    (GtkCellRendererText  *cell,
 					   gchar                *path_str,
 					   GtkWindow            *dialog);
 
@@ -163,13 +163,13 @@ static void  group_dialog_cell_edited     (GtkCellRendererText  *cell,
 
 static void  group_dialog_add_column      (GtkWidget            *dialog,
 					   int                   column,
-					   char                 *title, 
+					   char                 *title,
 					   guint                 type,
 					   gint                  min_width);
 
 static void  group_dialog_add_columns     (GtkWidget            *dialog);
 
-static void 
+static void
 group_dialog_selection_changed_cb         (GtkTreeSelection     *selection,
 					   GtkWidget            *dialog);
 static GList *
@@ -191,34 +191,34 @@ group_dialog_create (PlannerView *view)
 	project = planner_window_get_project (data->view->main_window);
 
 	data->project = g_object_ref (project);
-	
+
 	filename = mrp_paths_get_glade_dir ( "group-dialog.glade");
 	gui = glade_xml_new (filename, NULL, NULL);
 	g_free (filename);
-		
-	dialog = glade_xml_get_widget (gui, "dialog_group_editor"); 
-	
+
+	dialog = glade_xml_get_widget (gui, "dialog_group_editor");
+
 	data->tree_view = GTK_TREE_VIEW (
-		glade_xml_get_widget (gui, 
+		glade_xml_get_widget (gui,
 				      "group_edit_treeview"));
-	
+
 	button = glade_xml_get_widget (gui, "add_group");
 	g_signal_connect (button, "clicked",
-			  G_CALLBACK (group_dialog_insert_group_cb), 
+			  G_CALLBACK (group_dialog_insert_group_cb),
 			  dialog);
-	
+
 	data->remove_button = glade_xml_get_widget (gui, "remove_group");
 	g_signal_connect (data->remove_button,
 			  "clicked",
-			  G_CALLBACK (group_dialog_remove_group_cb), 
+			  G_CALLBACK (group_dialog_remove_group_cb),
 			  dialog);
 
 	button = glade_xml_get_widget (gui, "close_editor");
 	g_signal_connect (button,
 			  "clicked",
-			  G_CALLBACK (group_dialog_close_editor_cb), 
+			  G_CALLBACK (group_dialog_close_editor_cb),
 			  dialog);
-	
+
 	g_object_set_data (G_OBJECT (dialog), "data", data);
 
 	group_dialog_setup_tree_view (dialog);
@@ -233,14 +233,14 @@ group_dialog_setup_tree_view (GtkWidget *dialog)
 	GtkTreeModel     *model;
 	GtkTreeModel     *sorted_model;
 	GtkTreeSelection *selection;
-	
+
 	g_return_if_fail (GTK_IS_DIALOG (dialog));
 
 	data = g_object_get_data (G_OBJECT (dialog), "data");
 
 	model = GTK_TREE_MODEL (planner_group_model_new (data->project));
 	sorted_model = gtk_tree_model_sort_new_with_model (model);
-	
+
 	gtk_tree_view_set_model (data->tree_view, sorted_model);
 	selection = gtk_tree_view_get_selection (data->tree_view);
 	gtk_tree_selection_set_mode (selection, GTK_SELECTION_MULTIPLE);
@@ -251,7 +251,7 @@ group_dialog_setup_tree_view (GtkWidget *dialog)
 			  dialog);
 
 	group_dialog_add_columns (dialog);
-	
+
 	g_object_unref (model);
 	g_object_unref (sorted_model);
 }
@@ -264,7 +264,7 @@ group_cmd_insert_do (PlannerCmd *cmd_base)
 	cmd = (GroupCmdInsert*) cmd_base;
 
 	g_assert (MRP_IS_GROUP (cmd->group));
-		
+
 	mrp_project_add_group (cmd->project, cmd->group);
 
 	return TRUE;
@@ -274,12 +274,12 @@ static void
 group_cmd_insert_undo (PlannerCmd *cmd_base)
 {
 	GroupCmdInsert *cmd;
-	
+
 	cmd = (GroupCmdInsert*) cmd_base;
 
 	mrp_project_remove_group (cmd->project,
 				  cmd->group);
-	
+
 }
 
 
@@ -288,7 +288,7 @@ group_cmd_insert_free (PlannerCmd *cmd_base)
 {
 	GroupCmdInsert  *cmd;
 
-	cmd = (GroupCmdInsert*) cmd_base;	
+	cmd = (GroupCmdInsert*) cmd_base;
 
 	cmd->group = NULL;
 	cmd->project = NULL;
@@ -310,7 +310,7 @@ group_cmd_insert (PlannerView *view)
 
 	cmd->project = planner_window_get_project (view->main_window);
 
-	cmd->group = g_object_new (MRP_TYPE_GROUP, NULL);	
+	cmd->group = g_object_new (MRP_TYPE_GROUP, NULL);
 
 	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager (view->main_window),
 					   cmd_base);
@@ -326,11 +326,11 @@ group_dialog_insert_group_cb (GtkWidget *button, GtkWidget *dialog)
 	GtkTreeModel   *model;
 	GtkTreePath    *path;
 	GroupCmdInsert *cmd;
-	
+
 	g_return_if_fail (GTK_IS_DIALOG (dialog));
 
 	data = g_object_get_data (G_OBJECT (dialog), "data");
-	
+
 	cmd = (GroupCmdInsert*) group_cmd_insert (data->view);
 
 	if (!GTK_WIDGET_HAS_FOCUS (data->tree_view)) {
@@ -341,15 +341,15 @@ group_dialog_insert_group_cb (GtkWidget *button, GtkWidget *dialog)
 	if (find_data) {
 		model = gtk_tree_view_get_model (data->tree_view);
 		path = gtk_tree_model_get_path (model, find_data->found_iter);
-		
+
 		gtk_tree_view_set_cursor (data->tree_view,
 					  path,
 					  gtk_tree_view_get_column (data->tree_view, 0),
-					  TRUE);	
+					  TRUE);
 		gtk_tree_path_free (path);
 
 		group_dialog_free_find_group_data (find_data);
-	}	
+	}
 }
 
 static gboolean
@@ -365,7 +365,7 @@ group_cmd_remove_do (PlannerCmd *cmd_base)
 
 	for (l = resources; l; l = l->next) {
 		MrpGroup *group;
-		
+
 		mrp_object_get (MRP_OBJECT (l->data), "group", &group, NULL);
 
 		if (cmd->group == group) {
@@ -377,7 +377,7 @@ group_cmd_remove_do (PlannerCmd *cmd_base)
 	if (default_group == cmd->group) {
 		cmd->is_default = TRUE;
 	}
-	
+
 	mrp_project_remove_group (cmd->project, cmd->group);
 
 	return TRUE;
@@ -388,12 +388,12 @@ group_cmd_remove_undo (PlannerCmd *cmd_base)
 {
 	GroupCmdRemove *cmd;
 	GList          *l;
-	
+
 	cmd = (GroupCmdRemove*) cmd_base;
 
 	/* We need to recover the group deleted */
 	g_assert (MRP_IS_GROUP (cmd->group));
-		
+
 	mrp_project_add_group (cmd->project, cmd->group);
 
 	/* Now we need to recover all the links of the project
@@ -450,7 +450,7 @@ group_dialog_remove_group_cb (GtkWidget *widget, GtkWidget *dialog)
 	DialogData *data;
 	GList             *list, *node;
 	GroupCmdRemove *cmd;
-	
+
 	g_return_if_fail (GTK_IS_DIALOG (dialog));
 
 	data = g_object_get_data (G_OBJECT (dialog), "data");
@@ -460,7 +460,7 @@ group_dialog_remove_group_cb (GtkWidget *widget, GtkWidget *dialog)
 	for (node = list; node; node = node->next) {
 		cmd = (GroupCmdRemove*) group_cmd_remove (data->view, MRP_GROUP (node->data));
 	}
-	
+
 	g_list_free (list);
 }
 
@@ -496,7 +496,7 @@ static void
 group_cmd_default_undo (PlannerCmd *cmd_base)
 {
 	GroupCmdDefault *cmd;
-	
+
 	cmd = (GroupCmdDefault*) cmd_base;
 	mrp_object_set (cmd->project, "default-group", cmd->old_group, NULL);
 }
@@ -505,7 +505,7 @@ static void
 group_cmd_default_free (PlannerCmd *cmd_base)
 {
 	GroupCmdDefault *cmd;
-	
+
 	cmd = (GroupCmdDefault*) cmd_base;
 
 	g_object_unref (cmd->group);
@@ -543,7 +543,7 @@ group_cmd_default (PlannerView *view,
 
 
 static void
-group_dialog_cell_toggled (GtkCellRendererText *cell, 
+group_dialog_cell_toggled (GtkCellRendererText *cell,
 			   gchar               *path_str,
 			   GtkWindow           *dialog)
 {
@@ -556,13 +556,13 @@ group_dialog_cell_toggled (GtkCellRendererText *cell,
 	gint              column;
 	gboolean          is_default;
 	MrpGroup         *group;
-	
+
 	data = g_object_get_data (G_OBJECT (dialog), "data");
 
 	sorted_model = GTK_TREE_MODEL_SORT (gtk_tree_view_get_model (data->tree_view));
-	
+
 	model = gtk_tree_model_sort_get_model (sorted_model);
-	
+
 	path   = gtk_tree_path_new_from_string (path_str);
 	column = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (cell),
 						     "column"));
@@ -570,11 +570,11 @@ group_dialog_cell_toggled (GtkCellRendererText *cell,
 	gtk_tree_model_get_iter (GTK_TREE_MODEL (sorted_model),
 				 &sorted_iter, path);
 
-	gtk_tree_model_sort_convert_iter_to_child_iter (sorted_model, 
+	gtk_tree_model_sort_convert_iter_to_child_iter (sorted_model,
 							&iter,
 							&sorted_iter);
 
-	switch (column) {	
+	switch (column) {
 	case GROUP_COL_GROUP_DEFAULT:
 		gtk_tree_model_get (model, &iter, column, &is_default, -1);
 
@@ -589,7 +589,7 @@ group_dialog_cell_toggled (GtkCellRendererText *cell,
 		g_assert_not_reached ();
 	}
 
-	gtk_tree_path_free (path);		
+	gtk_tree_path_free (path);
 }
 
 
@@ -598,8 +598,8 @@ group_cmd_edit_property_do (PlannerCmd *cmd_base)
 {
 	GroupCmdEditProperty *cmd;
 
-	cmd = (GroupCmdEditProperty *) cmd_base;	
-	
+	cmd = (GroupCmdEditProperty *) cmd_base;
+
 	g_object_set_property (G_OBJECT (cmd->group),
 			       cmd->property,
 			       cmd->value);
@@ -611,7 +611,7 @@ static void
 group_cmd_edit_property_undo (PlannerCmd *cmd_base)
 {
 	GroupCmdEditProperty *cmd;
-	
+
 	cmd = (GroupCmdEditProperty *) cmd_base;
 
 	g_object_set_property (G_OBJECT (cmd->group),
@@ -623,16 +623,16 @@ static void
 group_cmd_edit_property_free (PlannerCmd *cmd_base)
 {
 	GroupCmdEditProperty *cmd;
-	
+
 	cmd = (GroupCmdEditProperty *) cmd_base;
-	
+
 	cmd->group = NULL;
 	g_value_unset (cmd->value);
 	g_value_unset (cmd->old_value);
 }
 
 static PlannerCmd *
-group_cmd_edit_property (PlannerView  *view, 
+group_cmd_edit_property (PlannerView  *view,
 			 MrpGroup     *group,
 			 const gchar  *property,
 			 GValue       *value)
@@ -662,7 +662,7 @@ group_cmd_edit_property (PlannerView  *view,
 			       cmd->property,
 			       cmd->old_value);
 
-	/* FIXME: if old and new value are the same, do nothing 
+	/* FIXME: if old and new value are the same, do nothing
 	   How we can compare values?
 	 */
 
@@ -673,7 +673,7 @@ group_cmd_edit_property (PlannerView  *view,
 }
 
 static void
-group_dialog_cell_edited (GtkCellRendererText *cell, 
+group_dialog_cell_edited (GtkCellRendererText *cell,
 			  gchar               *path_str,
 			  gchar               *new_text,
 			  GtkWindow           *dialog)
@@ -693,22 +693,22 @@ group_dialog_cell_edited (GtkCellRendererText *cell,
 	data  = g_object_get_data (G_OBJECT (dialog), "data");
 
 	sorted_model = GTK_TREE_MODEL_SORT (gtk_tree_view_get_model (data->tree_view));
-	
+
 	model = gtk_tree_model_sort_get_model (sorted_model);
-	
+
 	path   = gtk_tree_path_new_from_string (path_str);
 	column = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (cell), "column"));
 
 	gtk_tree_model_get_iter (GTK_TREE_MODEL (sorted_model),
 				 &sorted_iter, path);
-	
-	gtk_tree_model_sort_convert_iter_to_child_iter (sorted_model, 
+
+	gtk_tree_model_sort_convert_iter_to_child_iter (sorted_model,
 							&iter,
 							&sorted_iter);
 
 	group = MRP_GROUP (planner_list_model_get_object (
 				   PLANNER_LIST_MODEL (model), &iter));
-	
+
 	switch (column) {
 	case GROUP_COL_NAME:
 		property = "name";
@@ -739,7 +739,7 @@ group_dialog_cell_edited (GtkCellRendererText *cell,
 	}
 
 	cmd = group_cmd_edit_property (data->view,
-				       group, 
+				       group,
 				       property,
 				       &value);
 
@@ -748,10 +748,10 @@ group_dialog_cell_edited (GtkCellRendererText *cell,
 
 static void
 group_dialog_add_column (GtkWidget *dialog,
-			 int        column, 
+			 int        column,
 			 char      *title,
 			 guint      type,
-			 gint       min_width) 
+			 gint       min_width)
 {
 	DialogData        *data;
 	GtkCellRenderer   *cell = NULL;
@@ -763,7 +763,7 @@ group_dialog_add_column (GtkWidget *dialog,
 	model = gtk_tree_model_sort_get_model (GTK_TREE_MODEL_SORT (gtk_tree_view_get_model (data->tree_view)));
 
 	switch (type) {
-	case TREE_VIEW_TEXT: 
+	case TREE_VIEW_TEXT:
 		cell = gtk_cell_renderer_text_new ();
 		g_object_set (cell,
 			      "editable", TRUE,
@@ -794,12 +794,12 @@ group_dialog_add_column (GtkWidget *dialog,
 		g_assert_not_reached ();
 		break;
 	}
-		
+
 	g_object_set_data (G_OBJECT (cell),
 			   "column", GINT_TO_POINTER (column));
 
 	column_data = gtk_tree_view_column_new_with_attributes (title, cell,
-								tree_type, 
+								tree_type,
 								column,
 								NULL);
 
@@ -818,55 +818,55 @@ static void
 group_dialog_add_columns (GtkWidget *dialog)
 {
 	group_dialog_add_column (dialog,
-				 GROUP_COL_NAME, 
+				 GROUP_COL_NAME,
 				 _("Name"),
 				 TREE_VIEW_TEXT,
 				 100);
 
 	group_dialog_add_column (dialog,
-				 GROUP_COL_MANAGER_NAME, 
+				 GROUP_COL_MANAGER_NAME,
 				 _("Manager name"),
 				 TREE_VIEW_TEXT,
 				 50);
-	
+
 	group_dialog_add_column (dialog,
-				 GROUP_COL_MANAGER_PHONE, 
+				 GROUP_COL_MANAGER_PHONE,
 				 _("Manager phone"),
 				 TREE_VIEW_TEXT,
 				 50);
 
 	group_dialog_add_column (dialog,
-				 GROUP_COL_MANAGER_EMAIL, 
+				 GROUP_COL_MANAGER_EMAIL,
 				 _("Manager email"),
 				 TREE_VIEW_TEXT,
 				 50);
 
 	group_dialog_add_column (dialog,
-				 GROUP_COL_GROUP_DEFAULT, 
+				 GROUP_COL_GROUP_DEFAULT,
 				 _("Default"),
 				 TREE_VIEW_ACTIVE,
 				 -1);
 }
 
 static void
-group_dialog_selection_changed_cb (GtkTreeSelection *selection, 
+group_dialog_selection_changed_cb (GtkTreeSelection *selection,
 				   GtkWidget        *dialog)
 {
 	DialogData *data;
 	GList      *list;
 	gboolean    selected = FALSE;
-	
+
 	g_return_if_fail (GTK_IS_TREE_SELECTION (selection));
 	g_return_if_fail (GTK_IS_WIDGET (dialog));
-	
+
 	data = g_object_get_data (G_OBJECT (dialog), "data");
 
 	list = group_dialog_selection_get_list (dialog);
-	
+
 	if (list) {
 		selected = TRUE;
 		g_list_free (list);
-	} 
+	}
 
 	gtk_widget_set_sensitive (data->remove_button, selected);
 }
@@ -902,13 +902,13 @@ group_dialog_selection_get_list (GtkWidget *dialog)
 	DialogData       *data;
 	GtkTreeSelection *selection;
 	GList            *list;
-	
+
 	g_return_val_if_fail (GTK_IS_DIALOG (dialog), NULL);
 
 	data = g_object_get_data (G_OBJECT (dialog), "data");
-	
+
 	selection = gtk_tree_view_get_selection (data->tree_view);
-	
+
 	list = NULL;
 	gtk_tree_selection_selected_foreach (
 		selection,
@@ -922,10 +922,10 @@ GtkWidget *
 planner_group_dialog_new (PlannerView *view)
 {
 	GtkWidget *dialog;
-	
+
 	g_return_val_if_fail (PLANNER_IS_VIEW (view), NULL);
 
 	dialog = group_dialog_create (view);
-	
+
         return dialog;
 }

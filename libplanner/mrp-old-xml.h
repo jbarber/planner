@@ -27,8 +27,8 @@
 #include <libxml/parser.h>
 #include <libplanner/mrp-project.h>
 
-gboolean mrp_old_xml_parse (MrpProject  *project, 
-                            xmlDoc      *doc, 
+gboolean mrp_old_xml_parse (MrpProject  *project,
+                            xmlDoc      *doc,
                             GError     **error);
 
 #endif /* __MRP_OLD_XML_H__ */

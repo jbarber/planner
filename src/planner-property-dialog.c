@@ -61,20 +61,20 @@ typedef struct {
 
 typedef struct {
 	PlannerCmd        base;
-	
+
 	PlannerWindow	 *window;
 	MrpProject       *project;
-	gchar	 	 *name; 
+	gchar	 	 *name;
 	MrpPropertyType	  type;
 	gchar	 	 *label_text;
 	gchar	 	 *description;
 	GType		  owner;
-	gboolean	  user_defined;   
+	gboolean	  user_defined;
 } PropertyCmdAdd;
 
 typedef struct {
 	PlannerCmd       base;
-	
+
 	MrpProject      *project;
 	gchar	 	*name;
 	MrpProperty	*property;
@@ -82,10 +82,10 @@ typedef struct {
 	gchar	 	*label_text;
 	gchar	 	*description;
 	GType		 owner;
-	gboolean	 user_defined;   
+	gboolean	 user_defined;
 
 	GHashTable      *tasks;
-	GHashTable      *resources;	
+	GHashTable      *resources;
 } PropertyCmdRemove;
 
 typedef struct {
@@ -169,7 +169,7 @@ property_dialog_setup_option_menu (GtkWidget     *option_menu,
 	if (menu) {
 		gtk_widget_destroy (menu);
 	}
-	
+
 	menu = gtk_menu_new ();
 
 	va_start (args, str1);
@@ -179,7 +179,7 @@ property_dialog_setup_option_menu (GtkWidget     *option_menu,
 		gtk_menu_append (GTK_MENU (menu), menu_item);
 
 		type = va_arg (args, gint);
-		
+
 		g_object_set_data (G_OBJECT (menu_item),
 				   "data",
 				   GINT_TO_POINTER (type));
@@ -202,15 +202,15 @@ property_dialog_get_selected (GtkWidget *option_menu)
 	GtkWidget *menu;
 	GtkWidget *item;
 	gint       ret;
-	
+
 	menu = gtk_option_menu_get_menu (GTK_OPTION_MENU (option_menu));
-		
+
 	item = gtk_menu_get_active (GTK_MENU (menu));
 
 	ret = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (item), "data"));
 
 	return ret;
-}	
+}
 
 static void
 property_dialog_close_cb (GtkWidget *button,
@@ -224,7 +224,7 @@ property_dialog_type_selected_cb (GtkWidget *widget,
 				  GtkWidget *dialog)
 {
 	gint type;
-	
+
 	type = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (widget), "data"));
 
 	g_object_set_data (G_OBJECT (dialog), "type", GINT_TO_POINTER (type));
@@ -266,7 +266,7 @@ property_dialog_add_cb (GtkWidget *button,
 	gboolean                   finished = FALSE;
 	gunichar                   c;
 	gchar                     *filename;
-				
+
 	priv = GET_PRIV (dialog);
 
 	filename = mrp_paths_get_glade_dir ("new-property.glade");
@@ -274,12 +274,12 @@ property_dialog_add_cb (GtkWidget *button,
 			       NULL,
 			       NULL);
 	g_free (filename);
-		
+
 	add_dialog = glade_xml_get_widget (glade, "add_dialog");
 
 	label_entry = glade_xml_get_widget (glade, "label_entry");
 	name_entry = glade_xml_get_widget (glade, "name_entry");
-	
+
 	g_signal_connect (label_entry,
 			  "focus_out_event",
 			  G_CALLBACK (property_dialog_label_changed_cb),
@@ -313,7 +313,7 @@ property_dialog_add_cb (GtkWidget *button,
 				finished = FALSE;
 				break;
 			}
-			
+
 			name = gtk_entry_get_text (GTK_ENTRY (name_entry));
 			if (name == NULL || name[0] == 0) {
 				finished = FALSE;
@@ -323,7 +323,7 @@ property_dialog_add_cb (GtkWidget *button,
 			c = g_utf8_get_char (name);
 			if (!g_unichar_isalpha (c)) {
 				GtkWidget *msg_dialog;
-				
+
 				msg_dialog = gtk_message_dialog_new (
 					GTK_WINDOW (add_dialog),
 					GTK_DIALOG_MODAL |
@@ -334,22 +334,22 @@ property_dialog_add_cb (GtkWidget *button,
 
 				gtk_dialog_run (GTK_DIALOG (msg_dialog));
 				gtk_widget_destroy (msg_dialog);
-				
+
 				finished = FALSE;
 				break;
 			}
-		
+
 			w = glade_xml_get_widget (glade, "description_entry");
 			description = gtk_entry_get_text (GTK_ENTRY (w));
-			
+
 			w = glade_xml_get_widget (glade, "type_menu");
 			type = property_dialog_get_selected (w);
-			
+
 			if (type != MRP_PROPERTY_TYPE_NONE) {
 				property_cmd_add (priv->main_window,
-						  priv->project, 
-						  priv->owner, 
-						  name, 
+						  priv->project,
+						  priv->owner,
+						  name,
 						  type,
 						  label,
 						  description,
@@ -358,17 +358,17 @@ property_dialog_add_cb (GtkWidget *button,
 
 			finished = TRUE;
 			break;
-			
+
 		case GTK_RESPONSE_DELETE_EVENT:
 		case GTK_RESPONSE_CANCEL:
 			finished = TRUE;
 			break;
-			
+
 		default:
 			break;
 		}
 	}
-	
+
  	gtk_widget_destroy (add_dialog);
 	g_object_unref (glade);
 }
@@ -382,7 +382,7 @@ property_dialog_remove_cb (GtkWidget *button, GtkWidget *dialog)
 	gchar                     *name;
 	GtkWidget                 *remove_dialog;
 	gint                       response;
-		
+
 	priv = GET_PRIV (dialog);
 
 	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (priv->tree));
@@ -403,14 +403,14 @@ property_dialog_remove_cb (GtkWidget *button, GtkWidget *dialog)
 						_("Do you really want to remove the property '%s' from "
 						  "the project?"),
 						name);
-	
+
 	response = gtk_dialog_run (GTK_DIALOG (remove_dialog));
 
 	switch (response) {
 	case GTK_RESPONSE_YES:
 		property_cmd_remove (priv->main_window,
-				     priv->project, 
-				     priv->owner, 
+				     priv->project,
+				     priv->owner,
 				     name);
 		break;
 
@@ -426,10 +426,10 @@ property_dialog_remove_cb (GtkWidget *button, GtkWidget *dialog)
 	g_free (name);
 }
 
-static void  
-property_dialog_label_edited (GtkCellRendererText *cell, 
+static void
+property_dialog_label_edited (GtkCellRendererText *cell,
 			      gchar               *path_str,
-			      gchar               *new_text, 
+			      gchar               *new_text,
 			      GtkWidget           *dialog)
 {
 	PlannerPropertyDialogPriv *priv;
@@ -437,7 +437,7 @@ property_dialog_label_edited (GtkCellRendererText *cell,
 	GtkTreeIter                iter;
 	GtkTreeModel              *model;
 	MrpProperty               *property;
-	
+
 	priv = GET_PRIV (dialog);
 
 	model = priv->model;
@@ -450,8 +450,8 @@ property_dialog_label_edited (GtkCellRendererText *cell,
 			    -1);
 
 	if (strcmp (new_text, mrp_property_get_label (property)) != 0 ) {
-		property_cmd_label_edited (priv->main_window, 
-					   property, 
+		property_cmd_label_edited (priv->main_window,
+					   property,
 					   priv->project,
 					   priv->owner,
 					   new_text);
@@ -475,13 +475,13 @@ property_dialog_setup_list (GtkWidget *dialog)
 
 	gtk_tree_selection_set_mode (gtk_tree_view_get_selection (tree),
 				     GTK_SELECTION_SINGLE);
- 
+
 	gtk_tree_view_set_headers_visible (tree, TRUE);
 
 	/* Name */
 	cell = gtk_cell_renderer_text_new ();
 	g_object_set (cell, "editable", FALSE, NULL);
-	
+
 	col = gtk_tree_view_column_new_with_attributes (_("Name"),
 							cell,
 							"text", COL_NAME,
@@ -489,16 +489,16 @@ property_dialog_setup_list (GtkWidget *dialog)
 	gtk_tree_view_column_set_resizable (col, TRUE);
 	gtk_tree_view_column_set_min_width (col, 100);
 	gtk_tree_view_append_column (tree, col);
-	
+
 	/* Label */
 	cell = gtk_cell_renderer_text_new ();
 	g_object_set (cell, "editable", TRUE, NULL);
-	
+
 	g_signal_connect (cell,
 			  "edited",
 			  G_CALLBACK (property_dialog_label_edited),
 			  dialog);
-	
+
 	col = gtk_tree_view_column_new_with_attributes (_("Label"),
 							cell,
 							"text", COL_LABEL,
@@ -510,7 +510,7 @@ property_dialog_setup_list (GtkWidget *dialog)
 	/* Type */
 	cell = gtk_cell_renderer_text_new ();
 	g_object_set (cell, "editable", FALSE, NULL);
-	
+
 	col = gtk_tree_view_column_new_with_attributes (_("Type"),
 							cell,
 							"text", COL_TYPE,
@@ -521,10 +521,10 @@ property_dialog_setup_list (GtkWidget *dialog)
 
 	/* Create the shop (a type of store). */
 	priv->shop = g_new0 (MrpPropertyStore, 1);
-	
+
 	model = planner_property_model_new (priv->project, priv->owner, priv->shop);
 	priv->model = model;
-	
+
 	gtk_tree_view_set_model (tree, model);
 }
 
@@ -575,22 +575,22 @@ planner_property_dialog_new (PlannerWindow *main_window,
 	g_return_val_if_fail (MRP_IS_PROJECT (project), NULL);
 
 	priv = g_new0 (PlannerPropertyDialogPriv, 1);
-	
+
 	filename = mrp_paths_get_glade_dir ("property-dialog.glade");
 	glade = glade_xml_new (filename,
 			       NULL, NULL);
 	g_free (filename);
-		
+
 	dialog = glade_xml_get_widget (glade, "dialog");
 
 	gtk_window_set_title (GTK_WINDOW (dialog), title);
-	
+
 	g_object_set_data (G_OBJECT (dialog), "priv", priv);
 
 	priv->main_window = main_window;
 	priv->project = project;
 	priv->owner = owner;
-	
+
 	property_dialog_setup_widgets (dialog, glade);
 
 	g_object_unref (glade);
@@ -603,7 +603,7 @@ property_cmd_add_do (PlannerCmd *cmd_base)
 {
 	PropertyCmdAdd *cmd;
 	MrpProperty    *property;
-		
+
 	cmd = (PropertyCmdAdd*) cmd_base;
 
 	/* Why is this check here? */
@@ -611,32 +611,32 @@ property_cmd_add_do (PlannerCmd *cmd_base)
 		return FALSE;
 	}
 
-	property = mrp_property_new (cmd->name, 
+	property = mrp_property_new (cmd->name,
 				     cmd->type,
 				     cmd->label_text,
 				     cmd->description,
 				     cmd->user_defined);
-			
-	mrp_project_add_property (cmd->project, 
+
+	mrp_project_add_property (cmd->project,
 				  cmd->owner,
 				  property,
-				  cmd->user_defined);	
-		
+				  cmd->user_defined);
+
 	if (!mrp_project_has_property (cmd->project, cmd->owner, cmd->name)) {
 		return FALSE;
 	}
-	
-	return TRUE; 
+
+	return TRUE;
 }
 
 static void
 property_cmd_add_undo (PlannerCmd *cmd_base)
 {
 	PropertyCmdAdd *cmd;
-		
+
 	cmd = (PropertyCmdAdd*) cmd_base;
 
-	mrp_project_remove_property (cmd->project, 
+	mrp_project_remove_property (cmd->project,
 				     cmd->owner,
 				     cmd->name);
 }
@@ -647,7 +647,7 @@ property_cmd_add_free (PlannerCmd *cmd_base)
 {
 	PropertyCmdAdd *cmd;
 
-	cmd = (PropertyCmdAdd*) cmd_base;	
+	cmd = (PropertyCmdAdd*) cmd_base;
 
 	g_free (cmd->name);
 	g_free (cmd->label_text);
@@ -697,7 +697,7 @@ property_cmd_remove_do (PlannerCmd *cmd_base)
 	PropertyCmdRemove *cmd;
 
 	cmd = (PropertyCmdRemove*) cmd_base;
-	
+
 	if (!mrp_project_has_property (cmd->project, cmd->owner, cmd->name)) {
 		return FALSE;
 	}
@@ -713,18 +713,18 @@ property_cmd_remove_do (PlannerCmd *cmd_base)
 			mrp_object_get_property (l->data, cmd->property, value);
 			g_hash_table_insert (cmd->tasks, g_object_ref (l->data), value);
 		}
-		
-	}	
+
+	}
 	else if (cmd->owner == MRP_TYPE_RESOURCE && g_hash_table_size (cmd->resources) == 0) {
 		GList *l, *resources = mrp_project_get_resources (cmd->project);
 
 		for (l = resources; l; l = l->next) {
 			GValue *value = g_new0 (GValue, 1);
 			g_value_init (value, G_PARAM_SPEC_VALUE_TYPE (cmd->property));
-			mrp_object_get_property (l->data, cmd->property, value); 
+			mrp_object_get_property (l->data, cmd->property, value);
 			g_hash_table_insert (cmd->resources, g_object_ref (l->data), value);
 		}
-		
+
 	}
 
 	mrp_project_remove_property (cmd->project,
@@ -752,33 +752,33 @@ static void
 property_cmd_remove_undo (PlannerCmd *cmd_base)
 {
 	PropertyCmdRemove *cmd;
-	
+
 	cmd = (PropertyCmdRemove*) cmd_base;
 
 	mrp_property_unref (cmd->property);
 
-	cmd->property = mrp_property_new (cmd->name, 
+	cmd->property = mrp_property_new (cmd->name,
 					  cmd->type,
 					  cmd->label_text,
 					  cmd->description,
 					  cmd->user_defined);
-	
-	mrp_project_add_property (cmd->project, 
+
+	mrp_project_add_property (cmd->project,
 				  cmd->owner,
 				  cmd->property,
 				  cmd->user_defined);
 
 	g_hash_table_foreach (cmd->tasks, property_hash_recover, cmd);
-	g_hash_table_foreach (cmd->resources, property_hash_recover, cmd);	
+	g_hash_table_foreach (cmd->resources, property_hash_recover, cmd);
 }
 
 static void
 property_hash_free  (gpointer key,
 		     gpointer value,
-		     gpointer user_data) 
+		     gpointer user_data)
 {
 	g_object_unref (key);
-	g_value_unset ((GValue *) value);	
+	g_value_unset ((GValue *) value);
 }
 
 static void
@@ -819,7 +819,7 @@ property_cmd_remove (PlannerWindow *window,
 				    property_cmd_remove_free);
 
 	cmd = (PropertyCmdRemove *) cmd_base;
-	
+
 	cmd->project = g_object_ref (project);
 	cmd->owner = owner;
 	cmd->name = g_strdup (name);
@@ -839,7 +839,7 @@ property_cmd_remove (PlannerWindow *window,
 
 	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager (window),
 					   cmd_base);
-	
+
 	return cmd_base;
 }
 
@@ -850,17 +850,17 @@ property_cmd_label_edited_do (PlannerCmd *cmd_base)
 	MrpProperty            *property;
 
 	cmd = (PropertyCmdLabelEdited*) cmd_base;
-	
+
 	property = mrp_project_get_property (cmd->project,
 					     cmd->name,
 					     cmd->owner);
-					     
+
 	if (!property) {
 		return FALSE;
 	}
-	
+
 	mrp_property_set_label (property, cmd->new_text);
-		
+
 	return TRUE;
 }
 
@@ -870,7 +870,7 @@ property_cmd_label_edited_undo (PlannerCmd *cmd_base)
 {
 	PropertyCmdLabelEdited *cmd;
 	MrpProperty            *property;
-		
+
 	cmd = (PropertyCmdLabelEdited*) cmd_base;
 
 	property = mrp_project_get_property (cmd->project,
@@ -879,7 +879,7 @@ property_cmd_label_edited_undo (PlannerCmd *cmd_base)
 
 
 	if (property != NULL) {
-		mrp_property_set_label (property, cmd->old_text);	
+		mrp_property_set_label (property, cmd->old_text);
 	}
 }
 
@@ -915,12 +915,12 @@ property_cmd_label_edited (PlannerWindow *window,
 
 	cmd->window = window;
 	cmd->new_text = g_strdup (new_text);
-		
+
 	cmd->old_text = g_strdup (mrp_property_get_label (property));
 	cmd->project = project;
 	cmd->name = g_strdup (mrp_property_get_name (property));
 	cmd->owner = owner;
-	
+
 	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager (window),
 					   cmd_base);
 

@@ -47,7 +47,7 @@ static void
 resource_cmd_insert_undo (PlannerCmd *cmd_base)
 {
 	ResourceCmdInsert *cmd;
-	
+
 	cmd = (ResourceCmdInsert*) cmd_base;
 
 	mrp_project_remove_resource (cmd->project,
@@ -82,7 +82,7 @@ planner_resource_cmd_insert (PlannerWindow *main_window,
 	if (resource == NULL) {
 		cmd->resource = g_object_new (MRP_TYPE_RESOURCE, NULL);
 	} else {
-		cmd->resource = g_object_ref (resource);	
+		cmd->resource = g_object_ref (resource);
 	}
 
 	cmd->project = planner_window_get_project (main_window);

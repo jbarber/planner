@@ -45,7 +45,7 @@ struct _PlannerPlugin {
 	PlannerWindow      *main_window;
 
 	PlannerPluginPriv      *priv;
-	
+
 	/* Methods. */
 	void         (*init)       (PlannerPlugin       *plugin,
 				    PlannerWindow *main_window);

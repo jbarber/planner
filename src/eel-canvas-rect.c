@@ -96,9 +96,9 @@ eel_canvas_rect_update_fill_gc (EelCanvasRect *rect,
 	GdkColor c;
 
 	item = GNOME_CANVAS_ITEM (rect);
-	
+
 	details = rect->details;
-	
+
 	if (details->fill_gc == NULL) {
 		if (!create) {
 			return;
@@ -106,7 +106,7 @@ eel_canvas_rect_update_fill_gc (EelCanvasRect *rect,
 		details->fill_gc =
 			gdk_gc_new (GTK_WIDGET (item->canvas)->window);
 	}
-	
+
 	c.pixel = gnome_canvas_get_color_pixel (item->canvas,
 						details->fill_color);
 	gdk_gc_set_foreground (details->fill_gc, &c);
@@ -121,9 +121,9 @@ eel_canvas_rect_update_outline_gc (EelCanvasRect *rect,
 	GdkColor c;
 
 	item = GNOME_CANVAS_ITEM (rect);
-	
+
 	details = rect->details;
-	
+
 	if (details->outline_gc == NULL) {
 		if (!create) {
 			return;
@@ -131,7 +131,7 @@ eel_canvas_rect_update_outline_gc (EelCanvasRect *rect,
 		details->outline_gc =
 			gdk_gc_new (GTK_WIDGET (item->canvas)->window);
 	}
-	
+
 	c.pixel = gnome_canvas_get_color_pixel (item->canvas,
 						details->outline_color);
 	gdk_gc_set_foreground (details->outline_gc, &c);
@@ -156,7 +156,7 @@ eel_canvas_rect_finalize (GObject *object)
 	EelCanvasRect *rect;
 
 	g_return_if_fail (EEL_IS_CANVAS_RECT (object));
-	
+
 	rect = EEL_CANVAS_RECT (object);
 
 	g_free (rect->details);
@@ -203,15 +203,15 @@ eel_canvas_rect_set_property (GObject      *object,
 		details->fill_color = g_value_get_uint (value);
 
 		eel_canvas_rect_update_fill_gc (rect, FALSE);
-		
+
 		gnome_canvas_item_request_update (item);
 		break;
-		
+
 	case PROP_OUTLINE_COLOR_RGBA:
 		details->outline_color = g_value_get_uint (value);
 
 		eel_canvas_rect_update_outline_gc (rect, FALSE);
-		
+
 		gnome_canvas_item_request_update (item);
 		break;
 
@@ -225,7 +225,7 @@ eel_canvas_rect_set_property (GObject      *object,
 		G_OBJECT_WARN_INVALID_PROPERTY_ID (object, param_id, pspec);
 		break;
 	}
-	
+
 }
 
 static void
@@ -256,11 +256,11 @@ eel_canvas_rect_get_property (GObject     *object,
 	case PROP_Y2:
 		g_value_set_double (value,  details->y2);
 		break;
-		
+
 	case PROP_FILL_COLOR_RGBA:
 		g_value_set_uint (value, details->fill_color);
 		break;
-		
+
 	case PROP_OUTLINE_COLOR_RGBA:
 		g_value_set_uint (value, details->outline_color);
 		break;
@@ -271,7 +271,7 @@ eel_canvas_rect_get_property (GObject     *object,
 	default:
 		G_OBJECT_WARN_INVALID_PROPERTY_ID (object, param_id, pspec);
 		break;
-	}	
+	}
 }
 
 static void
@@ -317,7 +317,7 @@ eel_canvas_rect_update (GnomeCanvasItem *item,
 	/* Update bounding box: */
 	width_lt = floor (details->width_pixels / 2.0) / item->canvas->pixels_per_unit;
 	width_rb = ceil (details->width_pixels / 2.0) / item->canvas->pixels_per_unit;
-	
+
 	x1 = details->x1;
 	y1 = details->y1;
 	x2 = details->x2;
@@ -340,18 +340,18 @@ eel_canvas_rect_update (GnomeCanvasItem *item,
 	}
 	details->last_update_rect = update_rect;
 
-	
+
 	/* Outline and bounding box */
 	gnome_canvas_w2c (item->canvas, x1 - width_lt, y1 - width_lt, &cx1, &cy1);
 	gnome_canvas_w2c (item->canvas, x2 + width_rb, y2 + width_rb, &cx2, &cy2);
-	
+
 	update_rect = make_drect (cx1, cy1, cx2, cy2);
 	request_redraw_borders (item->canvas, &details->last_outline_update_rect,
 				(width_lt + width_rb)*item->canvas->pixels_per_unit);
 	request_redraw_borders (item->canvas, &update_rect,
 				(width_lt + width_rb)*item->canvas->pixels_per_unit);
 	details->last_outline_update_rect = update_rect;
-	
+
 	item->x1 = cx1;
 	item->y1 = cy1;
 	item->x2 = cx2;
@@ -368,7 +368,7 @@ eel_canvas_rect_realize (GnomeCanvasItem *item)
 #endif
 	rect = EEL_CANVAS_RECT (item);
 	details = rect->details;
-	
+
 	eel_canvas_rect_update_outline_gc (rect, TRUE);
 
 #ifdef HAVE_RENDER
@@ -405,7 +405,7 @@ eel_canvas_rect_unrealize (GnomeCanvasItem *item)
 		g_object_unref (details->outline_gc);
 		details->outline_gc = NULL;
 	}
-	
+
 	if (details->fill_gc) {
 		g_object_unref (details->fill_gc);
 		details->fill_gc = NULL;
@@ -485,7 +485,7 @@ render_rect_alpha (EelCanvasRect *rect,
 	if (width <= 0 || height <= 0 ) {
 		return;
 	}
-	
+
 	details = rect->details;
 
 	r = (rgba >> 24) & 0xff;
@@ -499,7 +499,7 @@ render_rect_alpha (EelCanvasRect *rect,
 		Picture  pict;
 		XRenderPictureAttributes attributes;
 		XRenderColor color;
-	
+
 		dpy = gdk_x11_drawable_get_xdisplay (drawable);
 
 		pict = XRenderCreatePicture (dpy,
@@ -513,12 +513,12 @@ render_rect_alpha (EelCanvasRect *rect,
 		r = r * a / 255;
 		g = g * a / 255;
 		b = b * a / 255;
-		
+
 		color.red = (r << 8) + r;
 		color.green = (g << 8) + g;
 		color.blue = (b << 8) + b;
 		color.alpha = (a << 8) + a;
-		
+
 		XRenderFillRectangle (dpy,
 				      PictOpOver,
 				      pict,
@@ -533,23 +533,23 @@ render_rect_alpha (EelCanvasRect *rect,
 	pixbuf = gdk_pixbuf_new (GDK_COLORSPACE_RGB, TRUE, 8, width, height);
 	data = gdk_pixbuf_get_pixels (pixbuf);
 	rowstride = gdk_pixbuf_get_rowstride (pixbuf);
-	
+
 	r = (rgba >> 24) & 0xff;
 	g = (rgba >> 16) & 0xff;
 	b = (rgba >> 8) & 0xff;
 	a = (rgba >> 0) & 0xff;
-	
+
 	for (i = 0; i < width*4; ) {
 		data[i++] = r;
 		data[i++] = g;
 		data[i++] = b;
 		data[i++] = a;
 	}
-	
+
 	for (i = 1; i < height; i++) {
 		memcpy (data + i*rowstride, data, width*4);
 	}
-	
+
 	gdk_pixbuf_render_to_drawable_alpha (pixbuf,
 					     drawable,
 					     0, 0,
@@ -598,7 +598,7 @@ eel_canvas_rect_draw (GnomeCanvasItem *item,
 	cy1 = MAX (0, cy1 - y);
 	cx2 = MIN (width, cx2 - x);
 	cy2 = MIN (height, cy2 - y);
-	
+
 	if ((details->fill_color & 0xff) != 255) {
 		render_rect_alpha (rect,
 				   drawable,
@@ -617,10 +617,10 @@ eel_canvas_rect_draw (GnomeCanvasItem *item,
 	}
 
 	/* Box outline: */
-	
+
 	gnome_canvas_w2c (item->canvas, x1, y1, &cx1, &cy1);
 	gnome_canvas_w2c (item->canvas, x2, y2, &cx2, &cy2);
-	
+
 	/* FIXME: Doesn't handle alpha for outline. Nautilus doesn't currently use this */
 	gdk_draw_rectangle (drawable,
 			    details->outline_gc,
@@ -658,7 +658,7 @@ eel_canvas_rect_class_init (EelCanvasRectClass *class)
 
 	gobject_class = G_OBJECT_CLASS (class);
 	item_class = GNOME_CANVAS_ITEM_CLASS (class);
-	
+
 	gobject_class->finalize = eel_canvas_rect_finalize;
 	gobject_class->set_property = eel_canvas_rect_set_property;
 	gobject_class->get_property = eel_canvas_rect_get_property;
@@ -670,7 +670,7 @@ eel_canvas_rect_class_init (EelCanvasRectClass *class)
 	item_class->point = eel_canvas_rect_point;
 	item_class->render = eel_canvas_rect_render;
 	item_class->bounds = eel_canvas_rect_bounds;
-	
+
         g_object_class_install_property (gobject_class,
 					 PROP_X1,
 					 g_param_spec_double ("x1", NULL, NULL,
@@ -691,7 +691,7 @@ eel_canvas_rect_class_init (EelCanvasRectClass *class)
 					 g_param_spec_double ("y2", NULL, NULL,
 							      -G_MAXDOUBLE, G_MAXDOUBLE, 0,
 							      (G_PARAM_READABLE | G_PARAM_WRITABLE)));
-	
+
         g_object_class_install_property (gobject_class,
                                          PROP_FILL_COLOR_RGBA,
                                          g_param_spec_uint ("fill_color_rgba", NULL, NULL,

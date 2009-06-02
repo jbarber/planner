@@ -54,22 +54,22 @@ static gboolean xml_validate     (xmlDoc          *doc,
 
 
 
-static gboolean 
+static gboolean
 xml_read_context (xmlParserCtxt  *ctxt,
 		  MrpProject     *project,
 		  GError        **error)
 {
 	xmlDoc   *doc;
 	gboolean  ret_val;
-	
+
 	xmlParseDocument (ctxt);
-	
+
 	doc = ctxt->myDoc;
 	if (!doc) {
 		g_warning ("Could not read XML.");
 		return FALSE;
 	}
-	
+
 	if (!ctxt->wellFormed) {
 		g_warning ("Document not well formed.");
 		xmlFreeDoc (doc);
@@ -89,15 +89,15 @@ xml_read_context (xmlParserCtxt  *ctxt,
 		ret_val = FALSE;
 		break;
 	};
-	
+
 	xmlFreeDoc (doc);
-	
+
 	return ret_val;
 }
 
-static gboolean 
-xml_read_string (MrpFileReader  *reader, 
-		 const gchar    *str, 
+static gboolean
+xml_read_string (MrpFileReader  *reader,
+		 const gchar    *str,
 		 MrpProject     *project,
 		 GError        **error)
 {
@@ -118,12 +118,12 @@ xml_read_string (MrpFileReader  *reader,
 	return ret_val;
 }
 
-static XmlType 
+static XmlType
 xml_locate_type (xmlDoc *doc)
 {
 	XmlType  ret_val = XML_TYPE_UNKNOWN;
 	gchar   *filename;
-	
+
 	filename = mrp_paths_get_dtd_dir ("mrproject-0.6.dtd");
 	if (xml_validate (doc, filename)) {
 		ret_val = XML_TYPE_MRP_0_6;
@@ -134,30 +134,30 @@ xml_locate_type (xmlDoc *doc)
 			ret_val = XML_TYPE_MRP_0_5_1;
 		}
 	}
-	
+
 	g_free (filename);
 
 	return ret_val;
 }
 
-static gboolean 
+static gboolean
 xml_validate (xmlDoc *doc, const gchar *dtd_path)
 {
 	xmlValidCtxt  cvp;
 	xmlDtd       *dtd;
 	gboolean      ret_val;
-	
+
 	g_return_val_if_fail (doc != NULL, FALSE);
 	g_return_val_if_fail (dtd_path != NULL, FALSE);
-	
+
 	memset (&cvp, 0, sizeof (cvp));
 
 	dtd = xmlParseDTD (NULL, dtd_path);
 
 	ret_val = xmlValidateDtd (&cvp, doc, dtd);
-	
+
 	xmlFreeDtd (dtd);
-	
+
         return ret_val;
 }
 
@@ -165,11 +165,11 @@ G_MODULE_EXPORT void
 init (MrpFileModule *module, MrpApplication *application)
 {
         MrpFileReader *reader;
-        
+
         reader         = g_new0 (MrpFileReader, 1);
         reader->module = module;
         reader->priv   = NULL;
-	
+
 	reader->read_string = xml_read_string;
 
         imrp_application_register_reader (application, reader);

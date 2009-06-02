@@ -37,7 +37,7 @@
 
 typedef struct {
 	GtkWidget *open_dialog;
-} MspPluginPriv; 
+} MspPluginPriv;
 
 static void msp_plugin_open (GtkAction     *action,
 			     gpointer       user_data);
@@ -52,18 +52,18 @@ static const GtkActionEntry entries[] = {
 	}
 };
 
-static gboolean 
+static gboolean
 xml_validate (xmlDoc *doc, const gchar *dtd_path)
 {
 	xmlValidCtxt  cvp;
 	xmlDtd       *dtd;
 	gboolean      ret_val;
-	
+
 	memset (&cvp, 0, sizeof (cvp));
 	dtd = xmlParseDTD (NULL, dtd_path);
 	ret_val = xmlValidateDtd (&cvp, doc, dtd);
 	xmlFreeDtd (dtd);
-	
+
         return ret_val;
 }
 
@@ -94,7 +94,7 @@ msp_plugin_transform (PlannerPlugin *plugin,
 		xsltFreeStylesheet (stylesheet);
 		return FALSE;
 	}
-	
+
         final_doc = xsltApplyStylesheet (stylesheet, doc, NULL);
         xmlFree (doc);
 
@@ -126,7 +126,7 @@ msp_plugin_transform (PlannerPlugin *plugin,
 	}
 
 	g_free (filename);
-	
+
 	fd = g_file_open_tmp ("planner-msp-XXXXXX", &tmp_name, NULL);
 	if (fd == -1) {
 		xsltFreeStylesheet (stylesheet);
@@ -142,7 +142,7 @@ msp_plugin_transform (PlannerPlugin *plugin,
 		g_free (tmp_name);
 		return FALSE;
 	}
-	
+
 	if (xsltSaveResultToFile (file, final_doc, stylesheet) == -1) {
 		xsltFreeStylesheet (stylesheet);
 		xmlFree (final_doc);
@@ -157,14 +157,14 @@ msp_plugin_transform (PlannerPlugin *plugin,
 	uri = g_filename_to_uri (tmp_name, NULL, NULL);
 	if (uri) {
 		planner_window_open_in_existing_or_new (plugin->main_window, uri, TRUE);
-		
+
 		project = planner_window_get_project (plugin->main_window) ;
 		mrp_project_set_uri (project, NULL);
 	}
 
 	unlink (tmp_name);
 	fclose (file);
-	
+
 	g_free (tmp_name);
 	g_free (uri);
 
@@ -175,12 +175,12 @@ static gchar *
 msp_plugin_get_last_dir (PlannerPlugin *plugin)
 {
 	gchar *dir;
-	
+
 	dir = planner_conf_get_string (CONF_MSP_PLUGIN_LAST_DIR, NULL);
 	if (dir == NULL) {
 		dir = g_strdup (g_get_home_dir ());
 	}
-	
+
 	return dir;
 }
 
@@ -202,7 +202,7 @@ msp_plugin_get_filename (PlannerPlugin *plugin)
 	gchar             *filename;
 
 	window = plugin->main_window;
-	
+
 	file_chooser = gtk_file_chooser_dialog_new (_("Import a File"),
 						    GTK_WINDOW (window),
 						    GTK_FILE_CHOOSER_ACTION_OPEN,
@@ -234,7 +234,7 @@ msp_plugin_get_filename (PlannerPlugin *plugin)
 	if (response == GTK_RESPONSE_OK) {
 		filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (file_chooser));
 	}
-	
+
 	gtk_widget_destroy (file_chooser);
 
 	if (filename) {
@@ -242,7 +242,7 @@ msp_plugin_get_filename (PlannerPlugin *plugin)
 		msp_plugin_set_last_dir (plugin, dir);
 		g_free (dir);
 	}
-	
+
 	return filename;
 }
 
@@ -260,12 +260,12 @@ msp_plugin_open (GtkAction *action,
 	g_free (filename);
 }
 
-G_MODULE_EXPORT void 
-plugin_exit (void) 
+G_MODULE_EXPORT void
+plugin_exit (void)
 {
 }
 
-G_MODULE_EXPORT void 
+G_MODULE_EXPORT void
 plugin_init (PlannerPlugin *plugin,
 	     PlannerWindow *main_window)
 {
@@ -273,7 +273,7 @@ plugin_init (PlannerPlugin *plugin,
 	GtkActionGroup *actions;
 	GtkUIManager   *ui;
 	gchar          *filename;
-	
+
 	priv = g_new0 (MspPluginPriv, 1);
 
 	actions = gtk_action_group_new ("MSP plugin actions");
@@ -290,7 +290,7 @@ plugin_init (PlannerPlugin *plugin,
 	filename = mrp_paths_get_ui_dir ("msp-plugin.ui");
 	gtk_ui_manager_add_ui_from_file (ui, filename, NULL);
 	g_free (filename);
-	
+
 	gtk_ui_manager_ensure_update (ui);
 }
 

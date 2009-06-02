@@ -53,7 +53,7 @@ struct _ECalBackendPlanner {
 };
 
 struct _ECalBackendPlannerClass {
-	ECalBackendSyncClass  parent_class; 
+	ECalBackendSyncClass  parent_class;
 	MrpApplication       *mrp_app;
 };
 

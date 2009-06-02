@@ -54,7 +54,7 @@ MrpTask         *mrp_relation_get_predecessor      (MrpRelation     *relation);
 MrpTask         *mrp_relation_get_successor        (MrpRelation     *relation);
 
 gint             mrp_relation_get_lag              (MrpRelation     *relation);
- 
+
 MrpRelationType  mrp_relation_get_relation_type    (MrpRelation     *relation);
 
 

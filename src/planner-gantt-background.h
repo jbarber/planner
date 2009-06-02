@@ -40,7 +40,7 @@ typedef struct _PlannerGanttBackgroundPriv  PlannerGanttBackgroundPriv;
 
 struct _PlannerGanttBackground {
 	GnomeCanvasItem         parent;
-	PlannerGanttBackgroundPriv  *priv;	
+	PlannerGanttBackgroundPriv  *priv;
 };
 
 struct _PlannerGanttBackgroundClass {

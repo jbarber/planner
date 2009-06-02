@@ -57,28 +57,28 @@ task_input_dialog_response_cb (GtkWidget *button,
 	const gchar *name;
 	const gchar *workstr;
 	gint         work;
-	
+
 	switch (response) {
 	case GTK_RESPONSE_OK:
 		data = g_object_get_data (G_OBJECT (dialog), "data");
-		
+
 		name = gtk_entry_get_text (GTK_ENTRY (data->name_entry));
 		workstr = gtk_entry_get_text (GTK_ENTRY (data->work_entry));
-		
+
 		work = 60*60*8 * g_strtod (workstr, NULL);
-		
+
 		task = g_object_new (MRP_TYPE_TASK,
 				     "work", work,
 				     "name", name,
 				     NULL);
-		
+
 		/*mrp_project_insert_task (data->project, NULL, -1, task);*/
-		planner_task_cmd_insert (data->main_window, 
+		planner_task_cmd_insert (data->main_window,
 					 NULL, -1, 0, 0, task);
-		
+
 		gtk_entry_set_text (GTK_ENTRY (data->name_entry), "");
 		gtk_entry_set_text (GTK_ENTRY (data->work_entry), "");
-		
+
 		gtk_widget_grab_focus (data->name_entry);
 		break;
 
@@ -86,7 +86,7 @@ task_input_dialog_response_cb (GtkWidget *button,
 	case GTK_RESPONSE_CANCEL:
 		gtk_widget_destroy (dialog);
 		break;
-		
+
 	default:
 		g_assert_not_reached ();
 		break;
@@ -114,33 +114,33 @@ planner_task_input_dialog_new (PlannerWindow *main_window)
 
 	data->project = g_object_ref (project);
 	data->main_window = g_object_ref (main_window);
-	
+
 	filename = mrp_paths_get_glade_dir ("task-input-dialog.glade");
 	gui = glade_xml_new (filename, NULL, NULL);
 	g_free (filename);
-	
-	dialog = glade_xml_get_widget (gui, "task_input_dialog"); 
+
+	dialog = glade_xml_get_widget (gui, "task_input_dialog");
 	g_signal_connect (dialog,
 			  "response",
 			  G_CALLBACK (task_input_dialog_response_cb),
 			  dialog);
-	
+
 	data->name_entry = glade_xml_get_widget (gui, "name_entry");
 	g_signal_connect (data->name_entry,
 			  "activate",
 			  G_CALLBACK (task_input_dialog_activate_cb),
 			  dialog);
-	
+
 	data->work_entry = glade_xml_get_widget (gui, "work_entry");
 	g_signal_connect (data->work_entry,
 			  "activate",
 			  G_CALLBACK (task_input_dialog_activate_cb),
 			  dialog);
-	
+
 	g_object_set_data_full (G_OBJECT (dialog),
 				"data",
 				data,
 				task_input_dialog_free);
-	
+
         return dialog;
 }

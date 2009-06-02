@@ -186,7 +186,7 @@ static const GtkToggleActionEntry toggle_entries[] = {
 	  NULL, NULL,
 	  G_CALLBACK (gantt_view_highlight_critical_cb), FALSE },
 	{ "ShowGuideLines", NULL, N_("_Show Guide Lines"),
-	  NULL, NULL, 
+	  NULL, NULL,
 	  G_CALLBACK (gantt_view_show_guidelines_cb), FALSE },
 	{ "NonstandardDays", NULL, N_("_Nonstandard Days"),
 	  NULL, NULL,
@@ -203,7 +203,7 @@ gantt_view_chart_scroll_event (GtkWidget * gki, GdkEventScroll * event, PlannerG
 {
 	gboolean can_in, can_out;
 	PlannerGanttViewPriv *priv;
-	
+
 	if (event->state & GDK_CONTROL_MASK) {
 		priv = view->priv;
 		planner_gantt_chart_can_zoom (PLANNER_GANTT_CHART (priv->gantt), &can_in, &can_out);
@@ -284,7 +284,7 @@ gantt_view_activate (PlannerView *view)
 	/* Set the initial UI state. */
 	show_critical = planner_gantt_chart_get_highlight_critical_tasks (
 		PLANNER_GANTT_CHART (priv->gantt));
-	
+
 	show_nostd_days = planner_gantt_chart_get_nonstandard_days (
 		PLANNER_GANTT_CHART (priv->gantt));
 
@@ -322,7 +322,7 @@ gantt_view_deactivate (PlannerView *view)
 	PlannerGanttViewPriv *priv;
 
 	priv = PLANNER_GANTT_VIEW (view)->priv;
-	
+
 	gtk_ui_manager_remove_ui (priv->ui_manager, priv->merged_id);
 }
 
@@ -355,11 +355,11 @@ static const gchar *
 gantt_view_get_icon (PlannerView *view)
 {
 	static gchar *filename = NULL;
-	
+
 	if (!filename) {
 		filename = mrp_paths_get_image_dir ("gantt.png");
 	}
-	
+
 	return filename;
 }
 
@@ -375,7 +375,7 @@ gantt_view_get_widget (PlannerView *view)
 	PlannerGanttViewPriv *priv;
 
 	priv = PLANNER_GANTT_VIEW (view)->priv;
-	
+
  	if (priv->paned == NULL) {
 		priv->paned = gantt_view_create_widget (PLANNER_GANTT_VIEW (view));
 		gtk_widget_show_all (priv->paned);
@@ -391,14 +391,14 @@ gantt_view_print_init (PlannerView     *view,
 	PlannerGanttViewPriv *priv;
 	gdouble          zoom;
 	gboolean         show_critical;
-	
+
 	priv = PLANNER_GANTT_VIEW (view)->priv;
-	
+
 	zoom = planner_gantt_chart_get_zoom (PLANNER_GANTT_CHART (priv->gantt));
 
 	show_critical = planner_gantt_chart_get_highlight_critical_tasks (
 		PLANNER_GANTT_CHART (priv->gantt));
-	
+
 	priv->print_data = planner_gantt_print_data_new (view, job,
 							 GTK_TREE_VIEW (priv->tree),
 							 zoom, show_critical);
@@ -409,7 +409,7 @@ gantt_view_print (PlannerView *view, gint page_nr)
 
 {
 	PlannerGanttViewPriv *priv;
-	
+
 	priv = PLANNER_GANTT_VIEW (view)->priv;
 
 	planner_gantt_print_do (priv->print_data, page_nr);
@@ -421,7 +421,7 @@ gantt_view_print_get_n_pages (PlannerView *view)
 	PlannerGanttViewPriv *priv;
 
 	priv = PLANNER_GANTT_VIEW (view)->priv;
-	
+
 	return planner_gantt_print_get_n_pages (priv->print_data);
 }
 
@@ -432,7 +432,7 @@ gantt_view_print_cleanup (PlannerView *view)
 	PlannerGanttViewPriv *priv;
 
 	priv = PLANNER_GANTT_VIEW (view)->priv;
-	
+
 	planner_gantt_print_data_free (priv->print_data);
 	priv->print_data = NULL;
 }
@@ -482,7 +482,7 @@ gantt_view_project_loaded_cb (MrpProject  *project,
 
 	planner_task_tree_set_model (PLANNER_TASK_TREE (view->priv->tree),
 				     PLANNER_GANTT_MODEL (model));
-	
+
 	planner_gantt_chart_set_model (PLANNER_GANTT_CHART (view->priv->gantt),
 				       model);
 
@@ -517,16 +517,16 @@ gantt_view_tree_view_scroll_event_cb (GtkWidget      *widget,
 	}
 
 	adj = gtk_tree_view_get_vadjustment (tv);
-	
+
 	if (event->direction == GDK_SCROLL_UP) {
 		new_value = adj->value - adj->page_increment / 2;
 	} else {
 		new_value = adj->value + adj->page_increment / 2;
 	}
-	
+
 	new_value = CLAMP (new_value, adj->lower, adj->upper - adj->page_size);
 	gtk_adjustment_set_value (adj, new_value);
-		
+
 	return TRUE;
 }
 
@@ -562,11 +562,11 @@ gantt_view_create_widget (PlannerGanttView *view)
 	GtkTreeModel     *model;
 	MrpProject       *project;
 	GtkTreeSelection *selection;
-	
+
 	project = planner_window_get_project (PLANNER_VIEW (view)->main_window);
 
 	priv = view->priv;
-	
+
 	g_signal_connect (project,
 			  "loaded",
 			  G_CALLBACK (gantt_view_project_loaded_cb),
@@ -587,8 +587,8 @@ gantt_view_create_widget (PlannerGanttView *view)
 				       * untranslated unless there is a localized term for it.
 				       */
 				      COL_WBS, _("WBS"),
-				      COL_NAME, _("Name"), 
-				      COL_START, _("Start"), 
+				      COL_NAME, _("Name"),
+				      COL_START, _("Start"),
 				      COL_FINISH, _("Finish"),
 				      COL_WORK, _("Work"),
 				      COL_DURATION, _("Duration"),
@@ -597,7 +597,7 @@ gantt_view_create_widget (PlannerGanttView *view)
 				      COL_ASSIGNED_TO, _("Assigned to"),
 				      /* i18n: The string "% Complete" will be used in the header
 				       * of a column containing values from 0 upto 100, indicating
-				       * what part of a task has been completed. 
+				       * what part of a task has been completed.
 				       * xgettext:no-c-format
 				       */
 				      COL_COMPLETE, _("% Complete"),
@@ -606,7 +606,7 @@ gantt_view_create_widget (PlannerGanttView *view)
 	priv->tree = tree;
 
 	gantt_view_load_columns (view);
-	
+
 	priv->gantt = planner_gantt_chart_new_with_model (model);
 	planner_gantt_chart_set_view (PLANNER_GANTT_CHART (priv->gantt),
 				      PLANNER_TASK_TREE (tree));
@@ -615,14 +615,14 @@ gantt_view_create_widget (PlannerGanttView *view)
 
 	g_signal_connect (priv->gantt, "scroll-event",
                     G_CALLBACK (gantt_view_chart_scroll_event), view);
-	
+
 	g_object_unref (model);
 
 	g_signal_connect (tree,
 			  "columns-changed",
 			  G_CALLBACK (gantt_view_tree_view_columns_changed_cb),
 			  view);
-	
+
 	g_signal_connect (tree,
 			  "destroy",
 			  G_CALLBACK (gantt_view_tree_view_destroy_cb),
@@ -637,7 +637,7 @@ gantt_view_create_widget (PlannerGanttView *view)
 			  "resource_clicked",
 			  G_CALLBACK (gantt_view_gantt_resource_clicked_cb),
 			  view);
-	
+
 	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (tree));
 	gtk_tree_selection_set_mode (selection, GTK_SELECTION_MULTIPLE);
 
@@ -650,7 +650,7 @@ gantt_view_create_widget (PlannerGanttView *view)
 			  "selection_changed",
 			  G_CALLBACK (gantt_view_selection_changed_cb),
 			  view);
-	
+
 	g_signal_connect (tree,
 			  "relation_added",
 			  G_CALLBACK (gantt_view_relations_changed_cb),
@@ -660,9 +660,9 @@ gantt_view_create_widget (PlannerGanttView *view)
 			  "relation_removed",
 			  G_CALLBACK (gantt_view_relations_changed_cb),
 			  view);
-	
+
 	vbox = gtk_vbox_new (FALSE, 3);
-	
+
 	gtk_box_pack_start (GTK_BOX (vbox), tree, TRUE, TRUE, 0);
 
 	hadj = gtk_tree_view_get_hadjustment (GTK_TREE_VIEW (tree));
@@ -692,23 +692,23 @@ gantt_view_create_widget (PlannerGanttView *view)
 	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw),
 					GTK_POLICY_ALWAYS,
 					GTK_POLICY_AUTOMATIC);
-  
+
 	frame = gtk_frame_new (NULL);
 	gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_IN);
 	gtk_container_add (GTK_CONTAINER (frame), sw);
-	
+
 	gtk_container_add (GTK_CONTAINER (sw),
 			   GTK_WIDGET (priv->gantt));
 
 	gtk_paned_add2 (GTK_PANED (hpaned), frame);
 
 	gtk_paned_set_position (GTK_PANED (hpaned), 250);
-		
+
 	g_signal_connect (tree,
 			  "row_expanded",
 			  G_CALLBACK (gantt_view_row_expanded),
 			  priv->gantt);
-	
+
 	g_signal_connect (tree,
 			  "row_collapsed",
 			  G_CALLBACK (gantt_view_row_collapsed),
@@ -722,7 +722,7 @@ gantt_view_create_widget (PlannerGanttView *view)
 /* Command callbacks. */
 
 static void
-gantt_view_insert_task_cb (GtkAction *action, 
+gantt_view_insert_task_cb (GtkAction *action,
 			   gpointer   data)
 {
 	PlannerGanttView *view;
@@ -733,7 +733,7 @@ gantt_view_insert_task_cb (GtkAction *action,
 }
 
 static void
-gantt_view_insert_tasks_cb (GtkAction *action, 
+gantt_view_insert_tasks_cb (GtkAction *action,
 			    gpointer   data)
 {
 	PlannerGanttView *view = PLANNER_GANTT_VIEW (data);
@@ -742,7 +742,7 @@ gantt_view_insert_tasks_cb (GtkAction *action,
 }
 
 static void
-gantt_view_remove_task_cb (GtkAction *action, 
+gantt_view_remove_task_cb (GtkAction *action,
 			   gpointer   data)
 {
 	PlannerGanttView *view;
@@ -753,18 +753,18 @@ gantt_view_remove_task_cb (GtkAction *action,
 }
 
 static void
-gantt_view_select_all_cb (GtkAction *action, 
+gantt_view_select_all_cb (GtkAction *action,
 			  gpointer   data)
 {
 	PlannerGanttView *view;
-	
+
 	view = PLANNER_GANTT_VIEW (data);
-	
+
 	planner_task_tree_select_all (PLANNER_TASK_TREE (view->priv->tree));
 }
 
 static void
-gantt_view_edit_task_cb (GtkAction *action, 
+gantt_view_edit_task_cb (GtkAction *action,
 			 gpointer   data)
 {
 	PlannerGanttView *view;
@@ -776,7 +776,7 @@ gantt_view_edit_task_cb (GtkAction *action,
 }
 
 static void
-gantt_view_unlink_task_cb (GtkAction *action, 
+gantt_view_unlink_task_cb (GtkAction *action,
 			   gpointer   data)
 {
 	PlannerGanttView *view;
@@ -799,7 +799,7 @@ gantt_view_link_tasks_cb (GtkAction *action,
 }
 
 static void
-gantt_view_indent_task_cb (GtkAction *action, 
+gantt_view_indent_task_cb (GtkAction *action,
 			   gpointer   data)
 {
 	PlannerGanttView *view;
@@ -810,7 +810,7 @@ gantt_view_indent_task_cb (GtkAction *action,
 }
 
 static void
-gantt_view_unindent_task_cb (GtkAction *action, 
+gantt_view_unindent_task_cb (GtkAction *action,
 			     gpointer   data)
 {
 	PlannerGanttView *view;
@@ -825,25 +825,25 @@ gantt_view_move_task_up_cb (GtkAction  *action,
 			    gpointer    data)
 {
 	PlannerGanttView *view;
-	
+
 	view = PLANNER_GANTT_VIEW (data);
-	
+
 	planner_task_tree_move_task_up (PLANNER_TASK_TREE (view->priv->tree));
 }
 
-static void 
+static void
 gantt_view_move_task_down_cb (GtkAction *action,
 			      gpointer	 data)
 {
 	PlannerGanttView *view;
-	
+
 	view = PLANNER_GANTT_VIEW (data);
-	
+
 	planner_task_tree_move_task_down (PLANNER_TASK_TREE (view->priv->tree));
 }
 
 static void
-gantt_view_reset_constraint_cb (GtkAction *action, 
+gantt_view_reset_constraint_cb (GtkAction *action,
 				gpointer   data)
 {
 	PlannerGanttView *view;
@@ -854,12 +854,12 @@ gantt_view_reset_constraint_cb (GtkAction *action,
 }
 
 static void
-gantt_view_zoom_to_fit_cb (GtkAction *action, 
+gantt_view_zoom_to_fit_cb (GtkAction *action,
 			   gpointer   data)
 {
 	PlannerGanttView     *view;
 	PlannerGanttViewPriv *priv;
-	
+
 	view = PLANNER_GANTT_VIEW (data);
 	priv = view->priv;
 
@@ -869,12 +869,12 @@ gantt_view_zoom_to_fit_cb (GtkAction *action,
 }
 
 static void
-gantt_view_zoom_in_cb (GtkAction *action, 
+gantt_view_zoom_in_cb (GtkAction *action,
 		       gpointer   data)
 {
 	PlannerGanttView     *view;
 	PlannerGanttViewPriv *priv;
-	
+
 	view = PLANNER_GANTT_VIEW (data);
 	priv = view->priv;
 
@@ -884,12 +884,12 @@ gantt_view_zoom_in_cb (GtkAction *action,
 }
 
 static void
-gantt_view_zoom_out_cb (GtkAction *action, 
+gantt_view_zoom_out_cb (GtkAction *action,
 			gpointer   data)
 {
 	PlannerGanttView     *view;
 	PlannerGanttViewPriv *priv;
-	
+
 	view = PLANNER_GANTT_VIEW (data);
 	priv = view->priv;
 
@@ -905,7 +905,7 @@ gantt_view_highlight_critical_cb (GtkAction *action,
 	PlannerGanttView     *view;
 	PlannerGanttViewPriv *priv;
 	gboolean         state;
-	
+
 	view = PLANNER_GANTT_VIEW (data);
 	priv = view->priv;
 
@@ -927,7 +927,7 @@ gantt_view_nonstandard_days_cb (GtkAction *action,
 	PlannerGanttView     *view;
 	PlannerGanttViewPriv *priv;
 	gboolean         state;
-	
+
 	view = PLANNER_GANTT_VIEW (data);
 	priv = view->priv;
 
@@ -949,7 +949,7 @@ gantt_view_edit_columns_cb (GtkAction *action,
 {
 	PlannerGanttView     *view;
 	PlannerGanttViewPriv *priv;
-	
+
 	view = PLANNER_GANTT_VIEW (data);
 	priv = view->priv;
 
@@ -992,7 +992,7 @@ gantt_view_update_row_height (PlannerGanttView *view)
 						    NULL,
 						    &height);
 		row_height = MAX (row_height, height);
-		
+
 		gtk_tree_view_get_background_area (tv,
 						   path,
 						   col,
@@ -1021,7 +1021,7 @@ gantt_view_expose_cb (GtkWidget      *widget,
 
 	g_signal_handler_disconnect (view->priv->tree,
 				     view->priv->expose_id);
-	
+
 	return FALSE;
 }
 
@@ -1044,7 +1044,7 @@ gantt_view_tree_style_set_cb (GtkWidget   *tree,
 	}
 }
 
-static void 
+static void
 gantt_view_selection_changed_cb (PlannerTaskTree *tree, PlannerGanttView *view)
 {
 	g_return_if_fail (PLANNER_IS_VIEW (view));
@@ -1070,7 +1070,7 @@ gantt_view_gantt_resource_clicked_cb (PlannerGanttChart *chart,
 	dialog = planner_resource_dialog_new (PLANNER_VIEW (view)->main_window, resource);
 	gtk_widget_show (dialog);
 }
-	
+
 static void
 gantt_view_relations_changed_cb (PlannerTaskTree *tree,
 				 MrpTask         *task,
@@ -1093,9 +1093,9 @@ gantt_view_update_ui (PlannerGanttView *view)
 	if (!PLANNER_VIEW (view)->activated) {
 		return;
 	}
-	
+
 	priv = view->priv;
-	
+
 	list = planner_task_tree_get_selected_tasks (PLANNER_TASK_TREE (priv->tree));
 
 	for (l = list; l; l = l->next) {
@@ -1104,48 +1104,48 @@ gantt_view_update_ui (PlannerGanttView *view)
 			break;
 		}
 	}
-	
+
 	for (l = list; l; l = l->next) {
 		count_value++;
 	}
-	
+
 	value = (list != NULL);
 	link_value = (count_value >= 2);
 
 	g_object_set (gtk_action_group_get_action (priv->actions, "EditTask"),
-		      "sensitive", value, 
+		      "sensitive", value,
 		      NULL);
 
 	g_object_set (gtk_action_group_get_action (priv->actions, "RemoveTask"),
-		      "sensitive", value, 
+		      "sensitive", value,
 		      NULL);
 
 	g_object_set (gtk_action_group_get_action (priv->actions, "UnlinkTask"),
-		      "sensitive", rel_value, 
+		      "sensitive", rel_value,
 		      NULL);
 
 	g_object_set (gtk_action_group_get_action (priv->actions, "LinkTasks"),
-		      "sensitive", link_value, 
+		      "sensitive", link_value,
 		      NULL);
 
 	g_object_set (gtk_action_group_get_action (priv->actions, "IndentTask"),
-		      "sensitive", value, 
+		      "sensitive", value,
 		      NULL);
 
 	g_object_set (gtk_action_group_get_action (priv->actions, "UnindentTask"),
-		      "sensitive", value, 
+		      "sensitive", value,
 		      NULL);
 
 	g_object_set (gtk_action_group_get_action (priv->actions, "MoveTaskUp"),
-		      "sensitive", value, 
+		      "sensitive", value,
 		      NULL);
 
 	g_object_set (gtk_action_group_get_action (priv->actions, "MoveTaskDown"),
-		      "sensitive", value, 
+		      "sensitive", value,
 		      NULL);
 
 	g_object_set (gtk_action_group_get_action (priv->actions, "ResetConstraint"),
-		      "sensitive", value, 
+		      "sensitive", value,
 		      NULL);
 
 	g_list_free (list);
@@ -1158,7 +1158,7 @@ gantt_view_show_guidelines_cb (GtkAction *action,
 	PlannerGanttView     *view;
 	PlannerGanttViewPriv *priv;
 	gboolean              state;
-	
+
 	view = PLANNER_GANTT_VIEW (data);
 	priv = view->priv;
 
@@ -1180,7 +1180,7 @@ gantt_view_update_zoom_sensitivity (PlannerGanttView *view)
 
 	g_object_set (gtk_action_group_get_action (GTK_ACTION_GROUP(view->priv->actions),
 						   "ZoomIn"),
-		      "sensitive", in, 
+		      "sensitive", in,
 		      NULL);
 
 	g_object_set (gtk_action_group_get_action (GTK_ACTION_GROUP(view->priv->actions),
@@ -1195,7 +1195,7 @@ gantt_view_save_columns (PlannerGanttView *view)
 	PlannerGanttViewPriv *priv;
 
 	priv = view->priv;
-	
+
 	planner_view_column_save_helper (PLANNER_VIEW (view), GTK_TREE_VIEW (priv->tree));
 }
 
@@ -1207,12 +1207,12 @@ gantt_view_load_columns (PlannerGanttView *view)
 	GtkTreeViewColumn    *column;
 	const gchar          *id;
 	gint                  i;
-		
+
 	priv = view->priv;
 
 	/* Load the columns. */
 	planner_view_column_load_helper (PLANNER_VIEW (view), GTK_TREE_VIEW (priv->tree));
-	
+
 	/* Make things a bit more robust by setting defaults if we don't get any
 	 * visible columns. Should be done through a schema instead (but we'll
 	 * keep this since a lot of people get bad installations when installing
@@ -1225,7 +1225,7 @@ gantt_view_load_columns (PlannerGanttView *view)
 			i++;
 		}
 	}
-	
+
 	if (i == 0) {
 		for (l = columns; l; l = l->next) {
 			column = l->data;
@@ -1238,7 +1238,7 @@ gantt_view_load_columns (PlannerGanttView *view)
 			if (!id) {
 				continue;
 			}
-			
+
 			if (strcmp (id, "wbs") == 0 ||
 			    strcmp (id, "name") == 0 ||
 			    strcmp (id, "work") == 0) {
@@ -1248,7 +1248,7 @@ gantt_view_load_columns (PlannerGanttView *view)
 			}
 		}
 	}
-	
+
 	g_list_free (columns);
 }
 

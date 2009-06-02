@@ -45,7 +45,7 @@ planner_format_int (gint number)
 
 	locality = localeconv ();
 	grouping = locality->grouping;
-	
+
 	while (number) {
 		char *group;
 		switch (*grouping) {
@@ -141,7 +141,7 @@ planner_format_duration_with_day_length (gint duration,
 	if (day_length == 0) {
 		return g_strdup ("");
 	}
-	
+
 	days = duration / day_length;
 	duration -= days * day_length;
 	hours = duration / (60*60);
@@ -188,13 +188,13 @@ planner_format_duration (MrpProject *project,
 	return planner_format_duration_with_day_length (duration, day_length);
 }
 
-gchar * 
+gchar *
 planner_format_date (mrptime date)
 {
 	gchar *svalue;
 
 	if (date == MRP_TIME_INVALID) {
-		svalue = g_strdup ("");	
+		svalue = g_strdup ("");
 	} else {
 		/* i18n: this string is the date nr and month name, displayed
 		 * e.g. in the date cells in the task tree. See
@@ -202,8 +202,8 @@ planner_format_date (mrptime date)
 		 */
 		svalue = mrp_time_format (_("%b %e"), date);
 	}
-	
-	return svalue;	
+
+	return svalue;
 }
 
 gchar *
@@ -222,19 +222,19 @@ planner_format_float (gfloat   number,
 	gchar        *value;
 
 	locality = localeconv ();
-	
+
 	int_part = abs (number);
 	pow10 = pow (10, precision);
 	fraction = floor (0.5 + (number - (int) number) * pow10);
 
 	fraction = abs (fraction);
-	
+
 	if (fraction >= pow10) {
 		int_part++;
 
 		fraction -= pow10;
 	}
-	
+
 	str_intpart = planner_format_int (int_part);
 
 	if (!strcmp (locality->mon_decimal_point, "")) {
@@ -249,9 +249,9 @@ planner_format_float (gfloat   number,
 	} else {
 		str_sign = "";
 	}
-	
+
 	str_fraction = NULL;
-	
+
 	if (fraction == 0) {
 		if (fill_with_zeroes) {
 			str_fraction = format_get_n_chars (precision, '0');
@@ -289,14 +289,14 @@ planner_parse_int (const gchar *str)
 	if (!str || !str[0]) {
 		return 0;
 	}
-	
+
 	locality = localeconv ();
 	sep_len = strlen (locality->thousands_sep);
 
 	if (sep_len == 0) {
 		return atoi (str);
 	}
-	
+
 	tmp = g_string_new (NULL);
 
 	p = str;
@@ -326,7 +326,7 @@ planner_parse_float (const gchar *str)
 	gchar        *dec_point;
 	gint          dec_len;
 	gint          i;
-	
+
 	if (!str || !str[0]) {
 		return 0.0;
 	}
@@ -335,7 +335,7 @@ planner_parse_float (const gchar *str)
 	int_part = planner_parse_int (str);
 
 	locality = localeconv ();
-	
+
 	dec_len = strlen (locality->mon_decimal_point);
 	if (dec_len == 0) {
 		dec_point = ".";
@@ -351,7 +351,7 @@ planner_parse_float (const gchar *str)
 	}
 
 	p = p + dec_len;
-	
+
 	dec_part = planner_parse_int (p);
 
 	i = dec_part;
@@ -364,7 +364,7 @@ planner_parse_float (const gchar *str)
 	if (dec_factor == 0) {
 		dec_factor = 1;
 	}
-	
+
 	return int_part + dec_part / pow (10, dec_factor);
 }
 
@@ -414,28 +414,28 @@ format_get_unit_from_string (const gchar *str)
 
 	if (!inited) {
 		translated_units = g_new0 (Units, num_units);
-		
+
 		for (i = 0; i < num_units; i++) {
 			tmp = g_utf8_casefold (_(units[i].name), -1);
-			
+
 			translated_units[i].name = tmp;
 			translated_units[i].unit = units[i].unit;
 		}
-		
+
 		inited = TRUE;
 	}
-	
+
 	for (i = 0; i < num_units; i++) {
 		if (!strncmp (str, translated_units[i].name,
 			      strlen (translated_units[i].name))) {
 			unit = translated_units[i].unit;
 		}
 	}
-	
+
 	if (unit != UNIT_NONE) {
 		return unit;
 	}
-	
+
 	/* Try untranslated names as a fallback. */
 	for (i = 0; i < num_units; i++) {
 		if (!strncmp (str, units[i].name, strlen (units[i].name))) {
@@ -471,8 +471,8 @@ format_multiply_with_unit (gdouble value,
 		break;
 	case UNIT_NONE:
 		return 0;
-	}	
-	
+	}
+
 	return floor (value + 0.5);
 }
 
@@ -497,11 +497,11 @@ planner_parse_duration_with_day_length (const gchar *input,
 	if (!str) {
 		return 0;
 	}
-	
+
 	total = 0;
 	p = str;
 	while (*p) {
-		while (*p && g_unichar_isalpha (g_utf8_get_char (p))) {   
+		while (*p && g_unichar_isalpha (g_utf8_get_char (p))) {
 			p = g_utf8_next_char (p);
 		}
 
@@ -513,7 +513,7 @@ planner_parse_duration_with_day_length (const gchar *input,
 		if (end_ptr == p) {
 			break;
 		}
-		
+
 		if (end_ptr) {
 			unit = format_get_unit_from_string (end_ptr);
 
@@ -534,12 +534,12 @@ planner_parse_duration_with_day_length (const gchar *input,
 		if (end_ptr && *end_ptr == 0) {
 			break;
 		}
-		
+
 		p = end_ptr + 1;
 	}
 
 	g_free (str);
-	
+
 	return total;
 }
 

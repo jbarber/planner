@@ -31,18 +31,18 @@ static MrpFileModule *
 file_module_load (const gchar *file)
 {
 	MrpFileModule *module;
-	
+
 	module = mrp_file_module_new ();
-	
+
 	module->handle = g_module_open (file, G_MODULE_BIND_LAZY);
-	
+
 	if (module->handle == NULL) {
 		g_warning ("Could not open file module '%s'\n",
 			   g_module_error ());
-		
+
 		return NULL;
 	}
-	
+
 	g_module_symbol (module->handle, "init", (gpointer)&module->init);
 
 	return module;
@@ -57,7 +57,7 @@ mrp_file_module_load_all (MrpApplication *app)
 	gchar         *path;
 
 	path = mrp_paths_get_file_modules_dir (NULL);
-	
+
 	dir = g_dir_open (path, 0, NULL);
 
 	if (dir == NULL) {
@@ -68,16 +68,16 @@ mrp_file_module_load_all (MrpApplication *app)
 	while ((name = g_dir_read_name (dir)) != NULL) {
 		if (g_str_has_suffix (name, G_MODULE_SUFFIX)) {
 			gchar *plugin;
-			
+
 			plugin = g_build_filename (path,
 						   name,
 						   NULL);
-			
+
 			module = file_module_load (plugin);
 			if (module) {
 				mrp_file_module_init (module, app);
 			}
-			
+
 			g_free (plugin);
 		}
 	}
@@ -97,9 +97,9 @@ mrp_file_module_init (MrpFileModule *plugin, MrpApplication *app)
 {
         g_return_if_fail (plugin != NULL);
         g_return_if_fail (MRP_IS_APPLICATION (app));
-        
+
         plugin->app = app;
-        
+
         if (plugin->init) {
                 plugin->init (plugin, app);
         }
@@ -114,12 +114,12 @@ mrp_file_reader_read_string (MrpFileReader  *reader,
 	if (reader->read_string) {
 		return reader->read_string (reader, str, project, error);
 	}
-	
-	g_set_error (error, 
+
+	g_set_error (error,
 		     MRP_ERROR,
 		     MRP_ERROR_FAILED,
 		     _("This format does not support reading"));
-	
+
 	return FALSE;
 }
 
@@ -148,14 +148,14 @@ mrp_file_writer_get_mime_type (MrpFileWriter *writer)
 }
 
 gboolean
-mrp_file_writer_write (MrpFileWriter    *writer, 
-		       MrpProject       *project, 
+mrp_file_writer_write (MrpFileWriter    *writer,
+		       MrpProject       *project,
 		       const gchar      *uri,
 		       gboolean          force,
 		       GError          **error)
 {
         g_return_val_if_fail (writer != NULL, FALSE);
-		
+
         if (writer->write) {
 		return writer->write (writer, project, uri, force, error);
         }

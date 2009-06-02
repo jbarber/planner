@@ -17,12 +17,12 @@ DL_EXPORT(void)
 initplanner(void)
 {
     PyObject *m, *d;
-	
+
     init_pygobject ();
 
     m = Py_InitModule ("planner", planner_functions);
     d = PyModule_GetDict (m);
-	
+
     planner_register_classes (d);
     planner_add_constants (m, "MRP_");
 

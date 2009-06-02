@@ -54,8 +54,8 @@ task_cmd_link_do (PlannerCmd *cmd_base)
 		retval = TRUE;
 	} else {
 		cmd->error = error;
-		retval = FALSE;		
-	} 
+		retval = FALSE;
+	}
 
 	return retval;
 }
@@ -64,9 +64,9 @@ static void
 task_cmd_link_undo (PlannerCmd *cmd_base)
 {
 	TaskCmdLink *cmd;
-	
+
 	cmd = (TaskCmdLink*) cmd_base;
-	
+
 	mrp_task_remove_predecessor (cmd->after, cmd->before);
 }
 
@@ -107,8 +107,8 @@ planner_task_cmd_link (PlannerWindow   *main_window,
 	cmd->after = g_object_ref (after);
 	cmd->relationship = relationship;
 	cmd->lag = lag;
-			
-	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager 
+
+	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager
 					   (main_window),
 					   cmd_base);
 
@@ -118,14 +118,14 @@ planner_task_cmd_link (PlannerWindow   *main_window,
 		return NULL;
 	}
 
-	return cmd_base;	
+	return cmd_base;
 }
 
 static gboolean
 task_cmd_unlink_do (PlannerCmd *cmd_base)
 {
 	TaskCmdLink *cmd;
-	
+
 	cmd = (TaskCmdLink*) cmd_base;
 
 	mrp_task_remove_predecessor (cmd->after, cmd->before);
@@ -174,7 +174,7 @@ planner_task_cmd_unlink (PlannerWindow   *main_window,
 				    task_cmd_unlink_do,
 				    task_cmd_unlink_undo,
 				    task_cmd_unlink_free);
-	
+
 	cmd = (TaskCmdLink *) cmd_base;
 
 	cmd->project = g_object_ref (planner_window_get_project (main_window));
@@ -183,8 +183,8 @@ planner_task_cmd_unlink (PlannerWindow   *main_window,
 	cmd->after = g_object_ref (mrp_relation_get_successor (relation));
 	cmd->relationship = mrp_relation_get_relation_type (relation);
 	cmd->lag = mrp_relation_get_lag (relation);
-			
-	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager 
+
+	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager
 					   (main_window),
 					   cmd_base);
 	return cmd_base;
@@ -195,10 +195,10 @@ typedef struct {
 
 	MrpProject  *project;
 
-	gint         position; 
+	gint         position;
 	gint         work;
 	gint         duration;
-	
+
 	MrpTask     *task; 	/* The inserted task */
 	MrpTask     *parent;
 } TaskCmdInsert;
@@ -230,7 +230,7 @@ static void
 task_cmd_insert_undo (PlannerCmd *cmd_base)
 {
 	TaskCmdInsert *cmd;
-	
+
 	cmd = (TaskCmdInsert *) cmd_base;
 
 	mrp_project_remove_task (cmd->project, cmd->task);
@@ -283,7 +283,7 @@ planner_task_cmd_insert (PlannerWindow  *main_window,
 	if (new_task != NULL) {
 		cmd->task = g_object_ref (new_task);
 	}
-	
+
 	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager (main_window),
 					   cmd_base);
 

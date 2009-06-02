@@ -69,7 +69,7 @@
 
 /* Same gdk_draw_line but with trimmed x1,y1,x2,y2 args. */
 #define draw_cut_line(a,b,c,d,e,f)		 \
-		gdk_draw_line ((a), (b), TRSH (c), TRSH (d), TRSH (e), TRSH (f))  
+		gdk_draw_line ((a), (b), TRSH (c), TRSH (d), TRSH (e), TRSH (f))
 
 /* Same gdk_draw_layout but with trimmed x,y args. */
 #define draw_cut_layout(a,b,c,d,e)		         \
@@ -139,7 +139,7 @@ struct _PlannerGanttRowPriv {
 
 	guint        visible    : 1;
 	guint        highlight  : 1;
-	
+
 	gdouble      scale;
 	gdouble      zoom;
 
@@ -151,11 +151,11 @@ struct _PlannerGanttRowPriv {
 	 * dragging the length of a task.
 	 */
 	gdouble      x_start;
-	
+
 	gint         mouse_over_index;
 
 	guint        scroll_timeout_id;
-	
+
 	/* Cached values for the geometry of the bar. */
 	gdouble      width;
 	gdouble      height;
@@ -251,26 +251,26 @@ static PlannerCmd *task_cmd_edit_property             (PlannerWindow   *window,
 
 static GList *  gantt_row_get_selected_tasks          (GtkTreeSelection      *selection);
 
-static MrpUnitsInterval * mop_get_next_ival           (GList                **cur, 
-						       gint                  *is_a_gap, 
-                                                       GList                 *start, 
+static MrpUnitsInterval * mop_get_next_ival           (GList                **cur,
+						       gint                  *is_a_gap,
+                                                       GList                 *start,
                                                        MrpUnitsInterval      *buf);
-static MrpInterval *      mop_get_next_mrp_ival       (GList                **cur, 
-                                                       gint                  *is_a_gap, 
-                                                       GList                 *start, 
+static MrpInterval *      mop_get_next_mrp_ival       (GList                **cur,
+                                                       gint                  *is_a_gap,
+                                                       GList                 *start,
                                                        MrpInterval           *buf);
 static gboolean gantt_draw_tasktime                   (GdkDrawable           *drawable,
 						       GdkGC                 *gc,
 						       GnomeCanvas           *canvas,
-						       gdouble                start_wx, 
-						       gdouble                start_wy, 
-						       gdouble                end_wx, 
-						       gdouble                end_wy, 
-						       gint                   cy1, 
+						       gdouble                start_wx,
+						       gdouble                start_wy,
+						       gdouble                end_wx,
+						       gdouble                end_wy,
+						       gint                   cy1,
 						       gint                   cy2,
 						       gint                   x,
-                                                       gint                   y, 
-						       gboolean               is_up, 
+                                                       gint                   y,
+						       gboolean               is_up,
 						       gchar                 *colorname);
 
 
@@ -315,7 +315,7 @@ planner_gantt_row_get_type (void)
 					       &info,
 					       0);
 	}
-	
+
 	return type;
 }
 
@@ -336,7 +336,7 @@ gantt_row_class_init (PlannerGanttRowClass *class)
 	gobject_class->get_property = gantt_row_get_property;
 
 	item_class->event = gantt_row_event;
-	
+
 	signals[GEOMETRY_CHANGED] =
 		g_signal_new ("geometry-changed",
 			      G_TYPE_FROM_CLASS (class),
@@ -346,7 +346,7 @@ gantt_row_class_init (PlannerGanttRowClass *class)
 			      planner_marshal_VOID__DOUBLE_DOUBLE_DOUBLE_DOUBLE,
 			      G_TYPE_NONE, 4,
 			      G_TYPE_DOUBLE, G_TYPE_DOUBLE, G_TYPE_DOUBLE, G_TYPE_DOUBLE);
-	
+
 	signals[VISIBILITY_CHANGED] =
 		g_signal_new ("visibility-changed",
 			      G_TYPE_FROM_CLASS (class),
@@ -372,7 +372,7 @@ gantt_row_class_init (PlannerGanttRowClass *class)
 				     NULL,
 				     -G_MAXDOUBLE, G_MAXDOUBLE, 7.0,
 				     G_PARAM_WRITABLE));
-	
+
 	g_object_class_install_property
                 (gobject_class,
                  PROP_Y,
@@ -400,14 +400,14 @@ gantt_row_class_init (PlannerGanttRowClass *class)
                  g_param_spec_boolean ("highlight", NULL, NULL,
 				       FALSE,
 				       G_PARAM_READWRITE));
-	
+
 	g_object_class_install_property
                 (gobject_class,
                  PROP_MOUSE_OVER_INDEX,
                  g_param_spec_int ("mouse-over-index", NULL, NULL,
 				   -1, G_MAXINT, -1,
 				   G_PARAM_WRITABLE));
-	
+
 	object_class->destroy = gantt_row_destroy;
 
 	item_class->update = gantt_row_update;
@@ -422,10 +422,10 @@ static void
 gantt_row_init (PlannerGanttRow *row)
 {
 	PlannerGanttRowPriv *priv;
-	
+
 	row->priv = g_new0 (PlannerGanttRowPriv, 1);
 	priv = row->priv;
-	
+
 	priv->x = 0.0;
 	priv->y = 0.0;
 	priv->width = 0.0;
@@ -457,7 +457,7 @@ gantt_row_destroy (GtkObject *object)
 		}
 
 		g_array_free (priv->resource_widths, FALSE);
-		
+
 		g_free (priv);
 		row->priv = NULL;
 	}
@@ -488,7 +488,7 @@ gantt_row_get_bounds (PlannerGanttRow *row,
 	wy2 = row->priv->y + row->priv->height;
 
 	wx2 = MAX (wx2, wx1 + MIN_WIDTH);
-	
+
 	gnome_canvas_item_i2w (item, &wx1, &wy1);
 	gnome_canvas_item_i2w (item, &wx2, &wy2);
 	gnome_canvas_w2c (item->canvas, wx1, wy1, &cx1, &cy1);
@@ -518,7 +518,7 @@ recalc_bounds (PlannerGanttRow *row)
 	old_x = priv->x;
 	old_x_start = priv->x_start;
 	old_width = priv->width;
-	
+
 	gantt_row_ensure_layout (row);
 
 	pango_layout_get_pixel_size (priv->layout,
@@ -542,13 +542,13 @@ recalc_bounds (PlannerGanttRow *row)
 		t = mrp_task_get_finish (priv->task);
 		priv->width = t * priv->scale - priv->x;
 	}
-	
+
 	t = mrp_task_get_start (priv->task);
 	priv->x_start = t * priv->scale;
 
 	changed = (old_x != priv->x || old_x_start != priv->x_start ||
 		   old_width != priv->width);
-	
+
 	return changed;
 }
 
@@ -566,13 +566,13 @@ gantt_row_set_property (GObject      *object,
 	gdouble               tmp_dbl;
 	gboolean              tmp_bool;
 	gint                  tmp_int;
-	
+
 	g_return_if_fail (PLANNER_IS_GANTT_ROW (object));
 
 	item = GNOME_CANVAS_ITEM (object);
 	row  = PLANNER_GANTT_ROW (object);
 	priv = row->priv;
-	
+
 	switch (param_id) {
 	case PROP_SCALE:
 		tmp_scale = g_value_get_double (value);
@@ -627,7 +627,7 @@ gantt_row_set_property (GObject      *object,
 					 G_CALLBACK (gantt_row_notify_cb),
 					 row,
 					 0);
-		
+
 		g_signal_connect_object (priv->task,
 					 "assignment-added",
 					 G_CALLBACK (gantt_row_assignment_added),
@@ -639,7 +639,7 @@ gantt_row_set_property (GObject      *object,
 					 G_CALLBACK (gantt_row_assignment_removed),
 					 row,
 					 0);
-		
+
 		gantt_row_connect_all_resources (priv->task, row);
 
 		changed = TRUE;
@@ -686,7 +686,7 @@ gantt_row_get_property (GObject    *object,
 
 	row = PLANNER_GANTT_ROW (object);
 	priv = row->priv;
-	
+
 	switch (param_id) {
 	case PROP_SCALE:
 		g_value_set_double (value, priv->scale);
@@ -748,7 +748,7 @@ gantt_row_update_resources (PlannerGanttRow *row)
 	priv = row->priv;
 
 	task = priv->task;
-	
+
 	g_array_set_size (priv->resource_widths, 0);
 
 	/* Measure the spacing between resource names. */
@@ -758,7 +758,7 @@ gantt_row_update_resources (PlannerGanttRow *row)
 
 	x = 0;
 	resources = mrp_task_get_assigned_resources (priv->task);
-		
+
 	for (l = resources; l; l = l->next) {
 		resource = l->data;
 
@@ -767,15 +767,15 @@ gantt_row_update_resources (PlannerGanttRow *row)
 
 		/* Try short name first. */
 		name = mrp_resource_get_short_name (resource);
-		
+
 		if (!name || name[0] == 0) {
 			name = mrp_resource_get_name (resource);
 		}
-		
+
 		if (!name || name[0] == 0) {
 				name = _("Unnamed");
 		}
-		
+
 		g_array_append_val (priv->resource_widths, x);
 
 		if (units != 100) {
@@ -788,17 +788,17 @@ gantt_row_update_resources (PlannerGanttRow *row)
 		pango_layout_get_extents (priv->layout, NULL, &rect);
 		x += rect.width / PANGO_SCALE;
 		g_array_append_val (priv->resource_widths, x);
-		
+
 		x += spacing;
-			
+
 		if (text == NULL) { /* First resource */
 			text = g_strdup_printf ("%s", name_unit);
 			g_free (name_unit);
 			continue;
 		}
-		
+
 		tmp_str = g_strdup_printf ("%s, %s", text, name_unit);
-		
+
 		g_free (text);
 		g_free (name_unit);
 
@@ -806,12 +806,12 @@ gantt_row_update_resources (PlannerGanttRow *row)
 	}
 
 	g_list_free (resources);
-	
+
 	if (text == NULL) {
 		pango_layout_set_text (priv->layout, "", 0);
 	} else {
 		pango_layout_set_text (priv->layout, text, -1);
-	}		
+	}
 
 	g_free (text);
 }
@@ -846,35 +846,35 @@ gantt_row_realize (GnomeCanvasItem *item)
 
 	row = PLANNER_GANTT_ROW (item);
 	priv = row->priv;
-	
+
 	GNOME_CANVAS_ITEM_CLASS (parent_class)->realize (item);
-	
+
 	if (complete_stipple == NULL) {
 		complete_stipple = gdk_bitmap_create_from_data (
 			NULL,
 			complete_stipple_pattern,
 			2,
 			2);
-		
+
 		g_object_add_weak_pointer (G_OBJECT (complete_stipple),
 					   (gpointer) &complete_stipple);
 	} else {
 		g_object_ref (complete_stipple);
 	}
-	
+
 	if (break_stipple == NULL) {
 		break_stipple = gdk_bitmap_create_from_data (
 			NULL,
 			break_stipple_pattern,
 			6,
 			1);
-		
+
 		g_object_add_weak_pointer (G_OBJECT (break_stipple),
 					   (gpointer) &break_stipple);
 	} else {
 		g_object_ref (break_stipple);
 	}
-	
+
 	priv->complete_gc = gdk_gc_new (item->canvas->layout.bin_window);
 	gdk_gc_set_stipple (priv->complete_gc, complete_stipple);
 	gdk_gc_set_fill (priv->complete_gc, GDK_STIPPLED);
@@ -958,7 +958,7 @@ static MrpUnitsInterval *mop_get_next_ival(GList **cur, gint *is_a_gap, GList *s
 {
 	MrpUnitsInterval *cur_ival;
 	gint last_end, md;
-	
+
 	if (start) {
 		*cur = start;
 		cur_ival = start->data;
@@ -969,9 +969,9 @@ static MrpUnitsInterval *mop_get_next_ival(GList **cur, gint *is_a_gap, GList *s
 			buf->units = 0;
 			buf->units_full = 0;
 			buf->res_n = 0;
-	
+
 			*is_a_gap = 1;
-			
+
 			return (buf);
 		}
 		else {
@@ -987,14 +987,14 @@ static MrpUnitsInterval *mop_get_next_ival(GList **cur, gint *is_a_gap, GList *s
 
 	if (*is_a_gap == 1) { /* last was a gap */
 			*is_a_gap = 0;
-			return (cur_ival);		
+			return (cur_ival);
 	}
 	else {
 		if ((*cur)->next != NULL) {
 			last_end = cur_ival->end;
 			*cur = (*cur)->next;
 			cur_ival = (*cur)->data;
-			
+
 			if (last_end < cur_ival->start) { /* another gap */
 				buf->start = last_end;
 				buf->end = cur_ival->start;
@@ -1038,8 +1038,8 @@ static MrpInterval *mop_get_next_mrp_ival(GList **cur, gint *is_a_gap, GList *st
 {
 	MrpInterval *cur_ival;
 	gint last_end, md;
-	mrptime cur_start, cur_end; 
-	
+	mrptime cur_start, cur_end;
+
 	if (start) {
 		*cur = start;
 		cur_ival = start->data;
@@ -1049,7 +1049,7 @@ static MrpInterval *mop_get_next_mrp_ival(GList **cur, gint *is_a_gap, GList *st
 		if (md > 0) {
 			mrp_interval_set_absolute (buf, 0, 0, cur_start);
 			*is_a_gap = 1;
-			
+
 			return (buf);
 		}
 		else {
@@ -1066,7 +1066,7 @@ static MrpInterval *mop_get_next_mrp_ival(GList **cur, gint *is_a_gap, GList *st
 
 	if (*is_a_gap == 1) { /* last was a gap */
 			*is_a_gap = 0;
-			return (cur_ival);		
+			return (cur_ival);
 	}
 	else {
 		if ((*cur)->next != NULL) {
@@ -1074,7 +1074,7 @@ static MrpInterval *mop_get_next_mrp_ival(GList **cur, gint *is_a_gap, GList *st
 			*cur = (*cur)->next;
 			cur_ival = (*cur)->data;
 			mrp_interval_get_absolute (cur_ival, 0, &cur_start, &cur_end);
-			
+
 			if (last_end < cur_start) { /* another gap */
 				mrp_interval_set_absolute (buf, 0, last_end, cur_start);
 
@@ -1090,7 +1090,7 @@ static MrpInterval *mop_get_next_mrp_ival(GList **cur, gint *is_a_gap, GList *st
 			md = cur_end % (24*60*60);
 			if (md > 0) {
 				mrp_interval_set_absolute (buf, 0, cur_end, cur_end - md + (24*60*60));
-	
+
 				*is_a_gap = 1;
 				*cur = NULL;
 				return (buf);
@@ -1108,11 +1108,11 @@ static MrpInterval *mop_get_next_mrp_ival(GList **cur, gint *is_a_gap, GList *st
 static gboolean gantt_draw_tasktime(GdkDrawable *drawable,
 							 GdkGC *gc,
 							 GnomeCanvas *canvas,
-							 gdouble start_wx, gdouble start_wy, 
-							 gdouble end_wx, gdouble end_wy, 
+							 gdouble start_wx, gdouble start_wy,
+							 gdouble end_wx, gdouble end_wy,
 							 gint cy1, gint cy2,
-							 gint x, gint y, 
-							 gboolean is_up, 
+							 gint x, gint y,
+							 gboolean is_up,
 							 gchar *colorname)
 {
 	GdkColor color;
@@ -1122,7 +1122,7 @@ static gboolean gantt_draw_tasktime(GdkDrawable *drawable,
 	gnome_canvas_w2c (canvas,   end_wx,    end_wy, &ttime_x2, &ttime_y2);
 	ttime_x1 -= x;  ttime_y1 -= y;
 	ttime_x2 -= x;  ttime_y2 -= y;
-	
+
 	if (ttime_x2 > ttime_x1) {
 		gnome_canvas_get_color (canvas, colorname, &color);
 		gdk_gc_set_foreground (gc, &color);
@@ -1135,10 +1135,10 @@ static gboolean gantt_draw_tasktime(GdkDrawable *drawable,
 								ttime_y1,
 								ttime_x2 - ttime_x1,
 								cy1 - ttime_y1);
-			
+
 			gnome_canvas_get_color (canvas, "gray40", &color);
 			gdk_gc_set_foreground (gc, &color);
-		
+
 		draw_cut_line (drawable, gc, ttime_x1, ttime_y1,
 					   ttime_x2-1, ttime_y1);
 		draw_cut_line (drawable, gc, ttime_x1, ttime_y1,
@@ -1151,23 +1151,23 @@ static gboolean gantt_draw_tasktime(GdkDrawable *drawable,
 								ttime_x1, cy2+1,
 								ttime_x2 - ttime_x1,
 								ttime_y2 - cy2 - 1);
-			
+
 			gnome_canvas_get_color (canvas, "gray40", &color);
 			gdk_gc_set_foreground (gc, &color);
-			
+
 			draw_cut_line (drawable, gc, ttime_x1, ttime_y2,
 						   ttime_x2-1, ttime_y2);
 			draw_cut_line (drawable, gc, ttime_x1, cy2+1,
 						   ttime_x1, ttime_y2);
 		}
-		
+
 		return (TRUE);
 	}
 	else {
 		return (FALSE);
 	}
 }
-	
+
 static void
 gantt_row_draw (GnomeCanvasItem *item,
 		GdkDrawable     *drawable,
@@ -1179,7 +1179,7 @@ gantt_row_draw (GnomeCanvasItem *item,
 	PlannerGanttRow     *row;
 	PlannerGanttRowPriv *priv;
 	PlannerGanttChart   *chart;
-	gdouble              i2w_dx; 
+	gdouble              i2w_dx;
 	gdouble              i2w_dy;
 	gdouble              dx1, dy1, dx2, dy2, dshay1, dshay2;
 	gint                 level;
@@ -1197,7 +1197,7 @@ gantt_row_draw (GnomeCanvasItem *item,
 #endif
 	gint                 rx1, ry1;
 	gint                 rx2, ry2;
-	gint                 cx1, cy1, cx2, cy2; 
+	gint                 cx1, cy1, cx2, cy2;
 
 	GList               *unit_ivals, *cal_ivals, *cur_unit;
 	GList		    *cur_cal = NULL;
@@ -1210,7 +1210,7 @@ gantt_row_draw (GnomeCanvasItem *item,
 	MrpProject          *project;
 	MrpDay              *day;
 	MrpCalendar         *calendar;
-	mrptime              cal_start, cal_end; 
+	mrptime              cal_start, cal_end;
 	gboolean             is_before_work;
 	gboolean             shadup_is_cached, shadup_draw_it;
 	gboolean             shaddo_is_cached, shaddo_draw_it;
@@ -1265,28 +1265,28 @@ gantt_row_draw (GnomeCanvasItem *item,
 
 	/*
 	  NOTES
-	  
+
 	  w -> world
 	  i -> item
-	  c -> canvas 
-	  
+	  c -> canvas
+
 	  priv->x = t * scale
 	*/
-	
+
 	/* Get item area in canvas coordinates. */
 	i2w_dx = 0.0;
 	i2w_dy = 0.0;
 
 	gnome_canvas_item_i2w (item, &i2w_dx, &i2w_dy);
 
-	dx1 = priv->x;	
-	
+	dx1 = priv->x;
+
 	dy1 = priv->y + priv->bar_top;
 	dx2 = priv->x + priv->width;
 	dy2 = priv->y + priv->bar_bot;
 
 	dx2 = MAX (dx2, dx1 + MIN_WIDTH);
-	
+
 	dshay1 = priv->y + 0.08 * priv->height;
 	dshay2 = priv->y + 0.92 * priv->height;
 	gnome_canvas_w2c (item->canvas,
@@ -1305,7 +1305,7 @@ gantt_row_draw (GnomeCanvasItem *item,
 	cy1 -= y;
 	cx2 -= x;
 	cy2 -= y;
-	
+
 	if (cy1 >= cy2 || cx1 >= cx2) {
 		return;
 	}
@@ -1358,40 +1358,40 @@ gantt_row_draw (GnomeCanvasItem *item,
 								rx2 - rx1,
 								cy2 - cy1);
 #endif
-			
+
 			/* Start slices drawer */
 			unit_ivals = mrp_task_get_unit_ivals (priv->task);
 			ival_subbuf = mrp_interval_new (0,0);
-			
+
 			is_before_work = TRUE;
 			shadup_is_cached = FALSE;
 			shaddo_is_cached = FALSE;
 			workup_is_cached = FALSE;
 			workdo_is_cached = FALSE;
-			for (i = 0, unit_ival = mop_get_next_ival (&cur_unit, &is_a_gap, 
+			for (i = 0, unit_ival = mop_get_next_ival (&cur_unit, &is_a_gap,
 								  unit_ivals, &ival_buf)
 					 ; unit_ival && (i == 0 || cur_start < finish) ; i++) {
 				if (i == 0) {
 					/* first iteration: read the day when start the task */
 					day_cur = mrp_time_align_day (unit_ival->start);
-					
+
 					/* extract the intervals of the day */
 					day = mrp_calendar_get_day (calendar, day_cur, TRUE);
 					cal_ivals = mrp_calendar_day_get_intervals (calendar, day, TRUE);
-					
+
 					if (cal_ivals == NULL) {
 						mrp_interval_set_absolute (ival_subbuf, 0, 0, (24*60*60));
 						is_a_subgap = 1;
 						cal_ival = ival_subbuf;
 					}
 					else {
-						for (cal_ival = mop_get_next_mrp_ival (&cur_cal, &is_a_subgap, 
+						for (cal_ival = mop_get_next_mrp_ival (&cur_cal, &is_a_subgap,
 										       cal_ivals, ival_subbuf) ;
 						   cal_ival ;
-						   cal_ival = mop_get_next_mrp_ival (&cur_cal, &is_a_subgap, 
+						   cal_ival = mop_get_next_mrp_ival (&cur_cal, &is_a_subgap,
 											NULL, ival_subbuf)) {
 							mrp_interval_get_absolute (cal_ival, day_cur, &cal_start, &cal_end);
-						
+
 							if (cal_end > unit_ival->start) {
 								break;
 							}
@@ -1402,14 +1402,14 @@ gantt_row_draw (GnomeCanvasItem *item,
 					wunits_is_first = TRUE;
 				}
 				g_assert (cal_ival != NULL);
-			
+
 				gnome_canvas_w2c (item->canvas, (cur_start * priv->scale)
 								  + i2w_dx, i2w_dy, &x_start, &y_dumb);
 				gnome_canvas_w2c (item->canvas, (cur_end * priv->scale)
 								  + i2w_dx, i2w_dy, &x_end, &y_dumb);
 				x_start -= x;
 				x_end   -= x;
-			
+
 				if (is_before_work) {
 					if (unit_ival->units_full == 0) {
 						goto cont_shadowloop;
@@ -1417,16 +1417,16 @@ gantt_row_draw (GnomeCanvasItem *item,
 					else {
 						is_before_work = FALSE;
 					}
-					
+
 				}
 				if (display_nonstandard_days) {
 					shadup_draw_it = FALSE;
 					shaddo_draw_it = FALSE;
 					workup_draw_it = FALSE;
 					workdo_draw_it = FALSE;
-					
-					if (unit_ival->res_n == 0 && (!is_a_subgap || 
-								  (is_a_subgap && planner_scale_conf[level].nonworking_limit 
+
+					if (unit_ival->res_n == 0 && (!is_a_subgap ||
+								  (is_a_subgap && planner_scale_conf[level].nonworking_limit
 								   > cal_end - cal_start))) {
 						if (shadup_is_cached == FALSE) {
 							shadup_start = cur_start;
@@ -1435,7 +1435,7 @@ gantt_row_draw (GnomeCanvasItem *item,
 					}
 					else {
 						if (shadup_is_cached == TRUE) {
-							if (planner_scale_conf[level].nonworking_limit <= 
+							if (planner_scale_conf[level].nonworking_limit <=
 								cur_start - shadup_start) {
 								shadup_end = cur_start;
 								shadup_draw_it = TRUE;
@@ -1443,11 +1443,11 @@ gantt_row_draw (GnomeCanvasItem *item,
 							shadup_is_cached = FALSE;
 						}
 					}
-					
-					if (unit_ival->res_n < nres && (!is_a_subgap || 
-									(is_a_subgap && planner_scale_conf[level].nonworking_limit 
+
+					if (unit_ival->res_n < nres && (!is_a_subgap ||
+									(is_a_subgap && planner_scale_conf[level].nonworking_limit
 									 > cal_end - cal_start))) {
-						
+
 						if (shaddo_is_cached == FALSE) {
 							shaddo_start = cur_start;
 							shaddo_is_cached = TRUE;
@@ -1455,7 +1455,7 @@ gantt_row_draw (GnomeCanvasItem *item,
 					}
 					else {
 						if (shaddo_is_cached == TRUE) {
-							if (planner_scale_conf[level].nonworking_limit <= 
+							if (planner_scale_conf[level].nonworking_limit <=
 								cur_start - shaddo_start) {
 								shaddo_end = cur_start;
 								shaddo_draw_it = TRUE;
@@ -1463,9 +1463,9 @@ gantt_row_draw (GnomeCanvasItem *item,
 							shaddo_is_cached = FALSE;
 						}
 					}
-					
+
 					if ((unit_ival->res_n == nres && is_a_subgap) ||
-						(unit_ival->res_n == 0 && 
+						(unit_ival->res_n == 0 &&
 						 (cal_start % (24*60*60) == 0) && (cal_end % (24*60*60) == 0) &&
 						 planner_scale_conf[level].nonworking_limit > cur_end - cur_start)) {
 						if (workup_is_cached == FALSE) {
@@ -1475,7 +1475,7 @@ gantt_row_draw (GnomeCanvasItem *item,
 					}
 					else {
 						if (workup_is_cached == TRUE) {
-							if (planner_scale_conf[level].nonworking_limit <= 
+							if (planner_scale_conf[level].nonworking_limit <=
 								cur_start - workup_start) {
 								workup_end = cur_start;
 								workup_draw_it = TRUE;
@@ -1483,12 +1483,12 @@ gantt_row_draw (GnomeCanvasItem *item,
 							workup_is_cached = FALSE;
 						}
 					}
-					
+
 					if ((unit_ival->res_n > 0 && is_a_subgap) ||
-						(unit_ival->res_n == 0 && 
+						(unit_ival->res_n == 0 &&
 						 (cal_start % (24*60*60) == 0) && (cal_end % (24*60*60) == 0) &&
 						 planner_scale_conf[level].nonworking_limit > cur_end - cur_start)) {
-						
+
 						if (workdo_is_cached == FALSE) {
 							workdo_start = cur_start;
 							workdo_is_cached = TRUE;
@@ -1496,7 +1496,7 @@ gantt_row_draw (GnomeCanvasItem *item,
 					}
 					else {
 						if (workdo_is_cached == TRUE) {
-							if (planner_scale_conf[level].nonworking_limit <= 
+							if (planner_scale_conf[level].nonworking_limit <=
 								cur_start - workdo_start) {
 								workdo_end = cur_start;
 								workdo_draw_it = TRUE;
@@ -1504,17 +1504,17 @@ gantt_row_draw (GnomeCanvasItem *item,
 							workdo_is_cached = FALSE;
 						}
 					}
-					
+
 					/* Show shadow up. */
 					if (shadup_draw_it ||
-						(shadup_is_cached && 
+						(shadup_is_cached &&
 						 ((cur_end % (24*60*60)) == 0))) {
 						if (!shadup_draw_it && ((cur_end % (24*60*60)) == 0)) {
 							shadup_end = cur_end;
 						}
-						if (planner_scale_conf[level].nonworking_limit <= 
+						if (planner_scale_conf[level].nonworking_limit <=
 							shadup_end - shadup_start) {
-							
+
 							gantt_draw_tasktime (drawable, priv->ttask_gc, item->canvas,
 										(shadup_start * priv->scale) + i2w_dx,
 										dshay1 + i2w_dy,
@@ -1525,17 +1525,17 @@ gantt_row_draw (GnomeCanvasItem *item,
 						shadup_draw_it = FALSE;
 						shadup_is_cached = FALSE;
 					}
-					
+
 					/* Show shadow down. */
 					if (shaddo_draw_it ||
-						(shaddo_is_cached && 
+						(shaddo_is_cached &&
 						 ((cur_end % (24*60*60)) == 0))) {
 						if (!shaddo_draw_it && ((cur_end % (24*60*60)) == 0)) {
 							shaddo_end = cur_end;
 						}
-						if (planner_scale_conf[level].nonworking_limit <= 
+						if (planner_scale_conf[level].nonworking_limit <=
 							shaddo_end - shaddo_start) {
-							
+
 							gantt_draw_tasktime (drawable, priv->ttask_gc, item->canvas,
 									     (shaddo_start * priv->scale) + i2w_dx,
 									     dshay1 + i2w_dy,
@@ -1546,17 +1546,17 @@ gantt_row_draw (GnomeCanvasItem *item,
 						shaddo_draw_it = FALSE;
 						shaddo_is_cached = FALSE;
 					}
-					
+
 					/* Show work up. */
 					if (workup_draw_it ||
-						(workup_is_cached && 
+						(workup_is_cached &&
 						 ((cur_end % (24*60*60)) == 0))) {
 						if (!workup_draw_it && ((cur_end % (24*60*60)) == 0)) {
 							workup_end = cur_end;
 						}
-						if (planner_scale_conf[level].nonworking_limit <= 
+						if (planner_scale_conf[level].nonworking_limit <=
 							workup_end - workup_start) {
-							
+
 							gantt_draw_tasktime (drawable, priv->ttask_gc, item->canvas,
 									     (workup_start * priv->scale) + i2w_dx,
 									     dshay1 + i2w_dy,
@@ -1567,15 +1567,15 @@ gantt_row_draw (GnomeCanvasItem *item,
 						workup_draw_it = FALSE;
 						workup_is_cached = FALSE;
 					}
-				
+
 					/* Show work down. */
 					if (workdo_draw_it ||
-						(workdo_is_cached && 
+						(workdo_is_cached &&
 						 ((cur_end % (24*60*60)) == 0))) {
 						if (!workdo_draw_it && ((cur_end % (24*60*60)) == 0)) {
 							workdo_end = cur_end;
 						}
-						if (planner_scale_conf[level].nonworking_limit <= 
+						if (planner_scale_conf[level].nonworking_limit <=
 							workdo_end - workdo_start) {
 
 							gantt_draw_tasktime (drawable, priv->ttask_gc, item->canvas,
@@ -1597,14 +1597,14 @@ gantt_row_draw (GnomeCanvasItem *item,
 				}
 				else {
 					if (unit_ival->res_n == 0) {  /* It is a nonworking interval. */
-						if (planner_scale_conf[level].nonworking_limit <= 
-						    cur_end - cur_start) {  
+						if (planner_scale_conf[level].nonworking_limit <=
+						    cur_end - cur_start) {
 							delta = 1.0;
 						}   /* else it use the last selected value */
 					}
 					/* It isn't a nonworking interval. */
-					else if (planner_scale_conf[level].nonworking_limit <= 
-						cur_end - cur_start) { /* Visible non working interval. */		
+					else if (planner_scale_conf[level].nonworking_limit <=
+						cur_end - cur_start) { /* Visible non working interval. */
 						delta = 1.0;
 					}
 					else {  /* use the last selected value */
@@ -1612,17 +1612,17 @@ gantt_row_draw (GnomeCanvasItem *item,
 							wunits_is_cached = TRUE;
 							wunits_x_start = x_start;
 							wunits_draw_it = FALSE;
-						} 
+						}
 					}
 				}
-				
+
 				topy = floor ((cy1 + ((1.0 - (double)delta) * (double)(cy2 - cy1 - 3))) + 0.5);
 				if (!highlight_critical || !critical) {
 					gdk_gc_set_foreground (priv->fill_gc, &priv->color_normal);
 				} else {
 					gdk_gc_set_foreground (priv->fill_gc, &priv->color_critical);
 				}
-			
+
 				if (wunits_draw_it) {
 					if (wunits_is_cached) {
 						wunits_is_cached = FALSE;
@@ -1630,7 +1630,7 @@ gantt_row_draw (GnomeCanvasItem *item,
 					else {
 						wunits_x_start = x_start;
 					}
-				
+
 					if ((cy2 - topy - 3) > 0) {
 						draw_cut_rectangle (drawable,
 							            	priv->fill_gc,
@@ -1652,21 +1652,21 @@ gantt_row_draw (GnomeCanvasItem *item,
 									topy - cy1);
 					}
 				}
-			
+
 			cont_shadowloop:
 				if (display_nonstandard_days) {
 					last_end = cur_end;
 				}
 				wunits_is_first = FALSE;
-			
+
 				if (cur_end == unit_ival->end) {
-					if ((unit_ival = mop_get_next_ival (&cur_unit, &is_a_gap, 
+					if ((unit_ival = mop_get_next_ival (&cur_unit, &is_a_gap,
 									    NULL, &ival_buf)) == NULL) {
-						break;	
+						break;
 					}
 				}
 				if (cur_end == cal_end) {
-					if ((cal_ival = mop_get_next_mrp_ival (&cur_cal, &is_a_subgap, 
+					if ((cal_ival = mop_get_next_mrp_ival (&cur_cal, &is_a_subgap,
 									       NULL, ival_subbuf)) == NULL) {
 						/* End of the day intervals, read next. */
 						day_cur += (24*60*60);
@@ -1674,7 +1674,7 @@ gantt_row_draw (GnomeCanvasItem *item,
 						cal_ivals = mrp_calendar_day_get_intervals (calendar, day, TRUE);
 						if (cal_ivals) {
 							/* Not empty day. */
-							cal_ival = mop_get_next_mrp_ival (&cur_cal, &is_a_subgap, 
+							cal_ival = mop_get_next_mrp_ival (&cur_cal, &is_a_subgap,
 											  cal_ivals, ival_subbuf);
 						}
 						else {
@@ -1695,12 +1695,12 @@ gantt_row_draw (GnomeCanvasItem *item,
 			if (display_nonstandard_days) {
 				/*
 				  H O L Y D A Y S
-				*/ 
+				*/
 
 				/* Show shad up. */
 				if (shadup_is_cached) {
 					shadup_end = last_end;
-			
+
 					gantt_draw_tasktime (drawable, priv->ttask_gc, item->canvas,
 								(shadup_start * priv->scale) + i2w_dx,
 								dshay1 + i2w_dy,
@@ -1722,13 +1722,13 @@ gantt_row_draw (GnomeCanvasItem *item,
 				}
 
 				/*
-				  W O R K 
-				*/  
+				  W O R K
+				*/
 
 				/* Show work up. */
 				if (workup_is_cached) {
 					workup_end = last_end;
-			
+
 					gantt_draw_tasktime (drawable, priv->ttask_gc, item->canvas,
 								(workup_start * priv->scale) + i2w_dx,
 								dshay1 + i2w_dy,
@@ -1768,7 +1768,7 @@ gantt_row_draw (GnomeCanvasItem *item,
 
 		gnome_canvas_get_color (item->canvas, "black", &color);
 		gdk_gc_set_foreground (priv->frame_gc, &color);
-		
+
 		if (ival_subbuf) {
 			mrp_interval_unref (ival_subbuf);
 		}
@@ -1794,7 +1794,7 @@ gantt_row_draw (GnomeCanvasItem *item,
  			if (i == 1) {
  				gnome_canvas_get_color (item->canvas, "indian red", &color);
  				gdk_gc_set_foreground (priv->frame_gc, &color);
- 				
+
  				gdk_gc_set_line_attributes (priv->frame_gc,
  								0,
  								GDK_LINE_ON_OFF_DASH,
@@ -1836,7 +1836,7 @@ gantt_row_draw (GnomeCanvasItem *item,
 				       rx1 + 1,
 				       cy2 - 1);
 		}
-		
+
 		if (!highlight_critical || !critical) {
 			gdk_gc_set_foreground (priv->fill_gc, &priv->color_normal_dark);
 		} else {
@@ -1849,7 +1849,7 @@ gantt_row_draw (GnomeCanvasItem *item,
 			       cy2 - 1,
 			       rx2 - 0,
 			       cy2 - 1);
-		
+
 		if (cx2 == rx2) {
 			draw_cut_line (drawable,
 				       priv->fill_gc,
@@ -1863,14 +1863,14 @@ gantt_row_draw (GnomeCanvasItem *item,
 			if (i == 1) {
 				gnome_canvas_get_color (item->canvas, "red", &color);
 				gdk_gc_set_foreground (priv->frame_gc, &color);
-				
+
 				gdk_gc_set_line_attributes (priv->frame_gc,
 								0,
 								GDK_LINE_ON_OFF_DASH,
 								GDK_CAP_BUTT,
 								GDK_JOIN_MITER);
 			}
-#endif			
+#endif
 			if (cx1 == rx1) {
 				draw_cut_line (drawable, priv->frame_gc,
 						cx1, cy1, cx1, cy2);
@@ -1879,7 +1879,7 @@ gantt_row_draw (GnomeCanvasItem *item,
 				draw_cut_line (drawable, priv->frame_gc,
 						cx2, cy1, cx2, cy2);
 			}
-			
+
 #ifdef WITH_SIMPLE_PRIORITY_SCHEDULING
 			if (i == 1) {
 				gantt_row_setup_frame_gc (row, !summary && priv->highlight);
@@ -1895,13 +1895,13 @@ gantt_row_draw (GnomeCanvasItem *item,
 
 		points[1].x = cx1 + MILESTONE_SIZE + 1;
 		points[1].y = cy1 + MILESTONE_SIZE + 1;
-		
+
 		points[2].x = cx1;
 		points[2].y = cy1 + (MILESTONE_SIZE + 1) * 2;
-		
+
 		points[3].x = cx1 - MILESTONE_SIZE;
 		points[3].y = cy1 + MILESTONE_SIZE + 1;
-		
+
 		gdk_draw_polygon (drawable,
 				  priv->frame_gc,
 				  TRUE,
@@ -1924,7 +1924,7 @@ gantt_row_draw (GnomeCanvasItem *item,
 		    (rx2 >= cx1 && rx2 <= cx1 + SLOPE)) {
 			points[0].x = cx1;
 			points[0].y = summary_y + THICKNESS;
-			
+
 			points[1].x = cx1;
 			points[1].y = summary_y + THICKNESS + HEIGHT - 1;
 
@@ -1933,7 +1933,7 @@ gantt_row_draw (GnomeCanvasItem *item,
 
 			points[3].x = cx1;
 			points[3].y = summary_y + THICKNESS;
-		
+
 			gdk_draw_polygon (drawable,
 					  priv->frame_gc,
 					  TRUE,
@@ -1945,7 +1945,7 @@ gantt_row_draw (GnomeCanvasItem *item,
 		    (rx2 >= cx2 - SLOPE && rx2 <= cx2)) {
 			points[0].x = cx2 + 1;
 			points[0].y = summary_y + THICKNESS;
-		
+
 			points[1].x = cx2 + 1 - SLOPE;
 			points[1].y = summary_y + THICKNESS;
 
@@ -1968,11 +1968,11 @@ gantt_row_draw (GnomeCanvasItem *item,
 	rx2 = MIN (cx2 + TEXT_PADDING + priv->text_width, width);
 
 	if (priv->layout != NULL && rx1 < rx2) {
-		/* NOTE: cy1 is the pixel coordinate of the top of the bar. 
+		/* NOTE: cy1 is the pixel coordinate of the top of the bar.
 			 subtract round(priv->bar_top) to bring us to the top of the row
 			 add priv->height / 2 to get to the center of the row
 			 subtract priv->text_height / 2 to get to the top of the text */
-		   
+
 		draw_cut_layout (drawable,
 				 GTK_WIDGET (item->canvas)->style->text_gc[GTK_STATE_NORMAL],
 				 cx2 + TEXT_PADDING,
@@ -1988,10 +1988,10 @@ gantt_row_draw (GnomeCanvasItem *item,
 			gantt_row_get_resource_by_index (row,
 							 priv->mouse_over_index,
 							 &x1, &x2);
-			
+
 			x1 += cx2 + TEXT_PADDING;
 			x2 += cx2 + TEXT_PADDING;
-				
+
 			draw_cut_line (drawable,
 				       GTK_WIDGET (item->canvas)->style->text_gc[GTK_STATE_NORMAL],
 				       x1,
@@ -2015,10 +2015,10 @@ gantt_row_point (GnomeCanvasItem  *item,
 	gint                 text_width;
 	gdouble              x1, y1, x2, y2;
 	gdouble              dx, dy;
-	
+
 	row = PLANNER_GANTT_ROW (item);
 	priv = row->priv;
-	
+
 	*actual_item = item;
 
 	text_width = priv->text_width;
@@ -2030,7 +2030,7 @@ gantt_row_point (GnomeCanvasItem  *item,
 	y1 = priv->y;
 	x2 = x1 + priv->width + text_width;
 	y2 = y1 + priv->height;
-	
+
 	if (x > x1 && x < x2 && y > y1 && y < y2) {
 		return 0.0;
 	}
@@ -2053,7 +2053,7 @@ gantt_row_point (GnomeCanvasItem  *item,
 	} else {
 		dy = 0.0;
 	}
-	
+
 	return sqrt (dx * dx + dy * dy);
 }
 
@@ -2069,7 +2069,7 @@ gantt_row_bounds (GnomeCanvasItem *item,
 	row = PLANNER_GANTT_ROW (item);
 
 	gantt_row_get_bounds (row, x1, y1, x2, y2);
-	
+
 	if (GNOME_CANVAS_ITEM_CLASS (parent_class)->bounds) {
 		GNOME_CANVAS_ITEM_CLASS (parent_class)->bounds (item, x1, y1, x2, y2);
 	}
@@ -2090,7 +2090,7 @@ gantt_row_notify_cb (MrpTask *task, GParamSpec *pspec, PlannerGanttRow *row)
 		 strcmp (pspec->name, "percent-complete")) {
 		return;
 	}
-	
+
 	gnome_canvas_item_request_update (GNOME_CANVAS_ITEM (row));
 }
 
@@ -2098,20 +2098,20 @@ static void
 gantt_row_update_assignment_string (PlannerGanttRow *row)
 {
 	gantt_row_update_resources (row);
-	
+
 	recalc_bounds (row);
 	gnome_canvas_item_request_update (GNOME_CANVAS_ITEM (row));
 }
 
-static void 
-gantt_row_assignment_added (MrpTask         *task, 
+static void
+gantt_row_assignment_added (MrpTask         *task,
 			    MrpAssignment   *assignment,
 			    PlannerGanttRow *row)
 {
 	MrpResource *resource;
-	
+
 	resource = mrp_assignment_get_resource (assignment);
-	
+
 	g_signal_connect_object (resource, "notify::name",
 				 G_CALLBACK (gantt_row_resource_name_changed),
 				 row, 0);
@@ -2123,12 +2123,12 @@ gantt_row_assignment_added (MrpTask         *task,
 	g_signal_connect_object (assignment, "notify::units",
 				 G_CALLBACK (gantt_row_assignment_units_changed),
 				 row, 0);
-		
+
 	gantt_row_update_assignment_string (row);
 }
 
-static void 
-gantt_row_assignment_removed (MrpTask         *task, 
+static void
+gantt_row_assignment_removed (MrpTask         *task,
 			      MrpAssignment   *assignment,
 			      PlannerGanttRow *row)
 {
@@ -2136,18 +2136,18 @@ gantt_row_assignment_removed (MrpTask         *task,
 
 	resource = mrp_assignment_get_resource (assignment);
 
-	g_signal_handlers_disconnect_by_func (resource, 
+	g_signal_handlers_disconnect_by_func (resource,
 					      gantt_row_resource_name_changed,
 					      row);
-	
-	g_signal_handlers_disconnect_by_func (resource, 
+
+	g_signal_handlers_disconnect_by_func (resource,
 					      gantt_row_resource_short_name_changed,
 					      row);
-					      
-	g_signal_handlers_disconnect_by_func (assignment, 
+
+	g_signal_handlers_disconnect_by_func (assignment,
 					      gantt_row_assignment_units_changed,
 					      row);
-	
+
 	gantt_row_update_assignment_string (row);
 }
 
@@ -2186,11 +2186,11 @@ planner_gantt_row_get_geometry (PlannerGanttRow *row,
 				gdouble         *y2)
 {
 	PlannerGanttRowPriv *priv;
-	
+
 	g_return_if_fail (PLANNER_IS_GANTT_ROW (row));
 
 	priv = row->priv;
-	
+
 	if (x1) {
 		*x1 = priv->x;
 	}
@@ -2214,7 +2214,7 @@ planner_gantt_row_set_visible (PlannerGanttRow *row,
 	if (is_visible == row->priv->visible) {
 		return;
 	}
-	
+
 	row->priv->visible = is_visible;
 
 	if (is_visible) {
@@ -2228,7 +2228,7 @@ planner_gantt_row_set_visible (PlannerGanttRow *row,
 		       0,
 		       is_visible);
 }
-			   
+
 static void
 gantt_row_geometry_changed (PlannerGanttRow *row)
 {
@@ -2238,7 +2238,7 @@ gantt_row_geometry_changed (PlannerGanttRow *row)
 	y1 = row->priv->y;
 	x2 = x1 + row->priv->width;
 	y2 = y1 + row->priv->height;
-	
+
 	g_signal_emit (row,
 		       signals[GEOMETRY_CHANGED],
 		       0,
@@ -2251,9 +2251,9 @@ gantt_row_connect_all_resources (MrpTask *task, PlannerGanttRow *row)
 {
 	GList       *resources, *node;
 	MrpResource *resource;
-	
+
 	resources = mrp_task_get_assigned_resources (task);
-	
+
 	for (node = resources; node; node = node->next) {
 		resource = MRP_RESOURCE (node->data);
 
@@ -2264,7 +2264,7 @@ gantt_row_connect_all_resources (MrpTask *task, PlannerGanttRow *row)
 		g_signal_connect_object (resource, "notify::short-name",
 					 G_CALLBACK (gantt_row_resource_short_name_changed),
 					 row, 0);
-					 
+
 	}
 
 	g_list_free (resources);
@@ -2275,16 +2275,16 @@ gantt_row_disconnect_all_resources (MrpTask *task, PlannerGanttRow *row)
 {
 	GList       *resources, *node;
 	MrpResource *resource;
-	
+
 	resources = mrp_task_get_assigned_resources (task);
-	
+
 	for (node = resources; node; node = node->next) {
 		resource = MRP_RESOURCE (node->data);
-		
+
 		g_signal_handlers_disconnect_by_func (resource,
 						      gantt_row_resource_name_changed,
 						      row);
-						      
+
 		g_signal_handlers_disconnect_by_func (resource,
 						      gantt_row_resource_short_name_changed,
 						      row);
@@ -2293,7 +2293,7 @@ gantt_row_disconnect_all_resources (MrpTask *task, PlannerGanttRow *row)
 	g_list_free (resources);
 }
 
-static gboolean 
+static gboolean
 gantt_row_drag_item_to_pointer (PlannerGanttRow *row, gboolean scroll)
 {
 	PlannerGanttChart *chart;
@@ -2314,7 +2314,7 @@ gantt_row_drag_item_to_pointer (PlannerGanttRow *row, gboolean scroll)
 	canvas = GNOME_CANVAS_ITEM (row)->canvas;
 	chart = g_object_get_data (G_OBJECT (GNOME_CANVAS_ITEM (row)->canvas), "chart");
 
-	
+
 	/* Get the current mouse position so that we can decide if the pointer
 	 * is inside the viewport.
 	 */
@@ -2377,26 +2377,26 @@ gantt_row_drag_item_to_pointer (PlannerGanttRow *row, gboolean scroll)
 		break;
 	case STATE_DRAG_LINK:
 		target_item = gnome_canvas_get_item_at (canvas, wx2, wy2);
-		
+
 		drag_points->coords[0] = drag_wx1;
 		drag_points->coords[1] = drag_wy1;
 		drag_points->coords[2] = wx2;
 		drag_points->coords[3] = wy2;
-	
+
 		gnome_canvas_item_set (drag_item,
 				       "points", drag_points,
 				       NULL);
-		
+
 		if (old_target_item && old_target_item != target_item) {
 			g_object_set (old_target_item,
 				      "highlight",
 				      FALSE,
 				      NULL);
 		}
-		
+
 		if (target_item && target_item != GNOME_CANVAS_ITEM(row)) {
 			const gchar *task_name, *target_name;
-			
+
 			g_object_set (target_item,
 				      "highlight",
 				      TRUE,
@@ -2404,14 +2404,14 @@ gantt_row_drag_item_to_pointer (PlannerGanttRow *row, gboolean scroll)
 
 			target_name = mrp_task_get_name (PLANNER_GANTT_ROW (target_item)->priv->task);
 			task_name = mrp_task_get_name (row->priv->task);
-			
+
 			if (target_name == NULL || target_name[0] == 0) {
 				target_name = _("No name");
 			}
 			if (task_name == NULL || task_name[0] == 0) {
 				task_name = _("No name");
 			}
-			
+
 			message = g_strdup_printf (_("Make task '%s' a predecessor of '%s'"),
 						   task_name,
 						   target_name);
@@ -2424,7 +2424,7 @@ gantt_row_drag_item_to_pointer (PlannerGanttRow *row, gboolean scroll)
 		if (target_item == NULL) {
 			planner_gantt_chart_status_updated (chart, NULL);
 		}
-		
+
 		old_target_item = target_item;
 		break;
 	default:
@@ -2453,7 +2453,7 @@ gantt_row_drag_item_to_pointer (PlannerGanttRow *row, gboolean scroll)
 	} else {
 		dy = 0;
 	}
-	
+
 	if(dx > 0)
 	{
 		planner_gantt_chart_reflow_now(chart);
@@ -2482,7 +2482,7 @@ gantt_row_scroll_timeout_cb (PlannerGanttRow *row)
 	return gantt_row_drag_item_to_pointer(row, TRUE);
 }
 
-static DragSpot 
+static DragSpot
 get_drag_spot(gdouble x, gdouble y, PlannerGanttRowPriv *priv)
 {
 	gdouble x2 = priv->x + priv->width;
@@ -2541,11 +2541,11 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 	gboolean                  summary;
 	MrpTaskType               type;
 	DragSpot                  drag_spot;
-	
+
 	row = PLANNER_GANTT_ROW (item);
 	priv = row->priv;
 	canvas_widget = GTK_WIDGET (item->canvas);
-	
+
 	summary = (mrp_task_get_n_children (priv->task) > 0);
 	type = mrp_task_get_task_type (priv->task);
 
@@ -2563,22 +2563,22 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 				GtkTreeView       *tree_view;
 				GtkTreeIter        iter;
 				GList             *tasks;
-				
+
 				chart = g_object_get_data (G_OBJECT (item->canvas), "chart");
 				tree = planner_gantt_chart_get_view (chart);
 				gtk_widget_grab_focus (GTK_WIDGET (tree));
-		
+
 				path = planner_gantt_model_get_path_from_task (
 					PLANNER_GANTT_MODEL (planner_gantt_chart_get_model (chart)),
 					priv->task);
 
 				tree_view = GTK_TREE_VIEW (tree);
-				
+
 				selection = gtk_tree_view_get_selection (tree_view);
 
 				gtk_tree_model_get_iter (gtk_tree_view_get_model (tree_view), &iter, path);
 				if (!gtk_tree_selection_iter_is_selected (selection, &iter)) {
-					
+
 					gtk_tree_selection_unselect_all (selection);
 					gtk_tree_selection_select_path (selection, path);
 					planner_task_tree_set_anchor (tree, path);
@@ -2587,17 +2587,17 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 				tasks = gantt_row_get_selected_tasks (selection);
 				planner_task_popup_update_sensitivity (priv->popup_factory, tasks);
 				g_list_free (tasks);
-				
+
 				gtk_item_factory_popup (priv->popup_factory,
 							event->button.x_root,
 							event->button.y_root,
 							0,
 							gtk_get_current_event_time ());
-				
+
 				return TRUE;
 			}
 			break;
-			
+
 		case 1:
 			if (priv->state != STATE_NONE) {
 				break;
@@ -2608,7 +2608,7 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 			if (type != MRP_TASK_TYPE_MILESTONE &&
 			    !summary && drag_spot == DRAG_DURATION_SPOT) {
 				guint rgba;
-				
+
 				priv->state = STATE_DRAG_DURATION;
 
 				wx1 = priv->x;
@@ -2621,7 +2621,7 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 
 				/*      red            green          blue          alpha */
 				rgba = (0xb7 << 24) | (0xc3 << 16) | (0xc9 << 8) | (127 << 0);
-				
+
 				if (drag_item == NULL) {
 					drag_item = gnome_canvas_item_new (gnome_canvas_root (item->canvas),
 									   EEL_TYPE_CANVAS_RECT,
@@ -2663,7 +2663,7 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 
 				/*      red            green          blue          alpha */
 				rgba = (0xb7 << 24) | (0xc3 << 16) | (0xc9 << 8) | (127 << 0);
-				
+
 				if (drag_item == NULL) {
 					drag_item = gnome_canvas_item_new (gnome_canvas_root (item->canvas),
 									   EEL_TYPE_CANVAS_RECT,
@@ -2709,7 +2709,7 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 				gnome_canvas_item_hide (drag_item);
 
 				/* set limits */
-				gnome_canvas_get_scroll_region(item->canvas, &drag_item_wx_min, 
+				gnome_canvas_get_scroll_region(item->canvas, &drag_item_wx_min,
 									     &drag_item_wy_min,
 									     &drag_item_wx_max,
 									     &drag_item_wy_max);
@@ -2741,13 +2741,13 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 					}
 
 					g_list_free (resources);
-					
+
 					return TRUE;
 				} else {
 					return FALSE;
 				}
 			}
-			
+
 			gnome_canvas_item_grab (item,
 						GDK_POINTER_MOTION_MASK |
 						GDK_POINTER_MOTION_HINT_MASK |
@@ -2779,9 +2779,9 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 			      "mouse-over-index",
 			      -1,
 			      NULL);
-		
+
 		return TRUE;
-	
+
 	case GDK_MOTION_NOTIFY:
 		if (event->motion.is_hint) {
 			gint x, y;
@@ -2793,7 +2793,7 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 		if (!(priv->state & STATE_DRAG_ANY)) {
 			drag_spot = get_drag_spot(event->button.x, event->button.y, priv);
 
-			if (type != MRP_TASK_TYPE_MILESTONE && !summary && 
+			if (type != MRP_TASK_TYPE_MILESTONE && !summary &&
 			    ( (drag_spot == DRAG_DURATION_SPOT) || (drag_spot == DRAG_COMPLETE_SPOT) ) ) {
 				if(drag_spot == DRAG_DURATION_SPOT) {
 					cursor = gdk_cursor_new (GDK_RIGHT_SIDE);
@@ -2837,18 +2837,18 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 
 			gantt_row_drag_item_to_pointer (row, FALSE);
 		}
-			
+
 		break;
-		
+
 	case GDK_BUTTON_RELEASE: {
 		PlannerTaskTree  *tree;
 		GtkTreePath      *path;
 		GtkTreeSelection *selection;
-				
+
 		if (event->button.button != 1) {
 			return FALSE;
 		}
-		
+
 		if (priv->state == STATE_NONE) {
 			return TRUE;
 		}
@@ -2859,7 +2859,7 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 			GValue      value = { 0 };
 
 			project = mrp_object_get_project (MRP_OBJECT (priv->task));
-			
+
 			duration = MAX (0, (event->button.x - priv->x_start) / priv->scale);
 
 			/* Snap to quarters. */
@@ -2876,7 +2876,7 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 
 			g_value_init (&value, G_TYPE_INT);
 			g_value_set_int (&value, work);
-			
+
 			task_cmd_edit_property (planner_task_tree_get_window (tree),
 						tree,
 						priv->task,
@@ -2910,7 +2910,7 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 			task_cmd_edit_property (planner_task_tree_get_window (tree),
 						tree,
 						priv->task,
-						"percent_complete", 
+						"percent_complete",
 						&value);
 
 			if (priv->scroll_timeout_id) {
@@ -2936,21 +2936,21 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 				g_source_remove (priv->scroll_timeout_id);
 				priv->scroll_timeout_id = 0;
 			}
-			
+
 			gtk_object_destroy (GTK_OBJECT (drag_item));
 			drag_item = NULL;
-			
+
 			target_item = gnome_canvas_get_item_at (item->canvas,
 								event->button.x,
 								event->button.y);
-			
+
 			if (target_item && target_item != item) {
 				GError            *error = NULL;
 				PlannerCmd        *cmd;
 				PlannerGanttChart *chart;
 				PlannerTaskTree   *tree;
 				PlannerWindow     *main_window;
-				
+
 				task = priv->task;
 				target_task = PLANNER_GANTT_ROW (target_item)->priv->task;
 
@@ -2964,12 +2964,12 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 							     MRP_RELATION_FS,
 							     0,
 							     &error);
-				
+
 				if (!cmd) {
 					GtkWidget *dialog;
 
 					gnome_canvas_item_ungrab (item, event->button.time);
-					
+
 					dialog = gtk_message_dialog_new (NULL,
 									 GTK_DIALOG_DESTROY_WITH_PARENT,
 									 GTK_MESSAGE_ERROR,
@@ -2977,31 +2977,31 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 									 "%s", error->message);
 					gtk_dialog_run (GTK_DIALOG (dialog));
 					gtk_widget_destroy (dialog);
-					g_error_free (error);					
+					g_error_free (error);
 				}
 			}
-			
+
 			chart = g_object_get_data (G_OBJECT (item->canvas), "chart");
-			
+
 			planner_gantt_chart_status_updated (chart, NULL);
 		}
 
-		/* We're done, reset the cursor and state, ungrab pointer. */ 
+		/* We're done, reset the cursor and state, ungrab pointer. */
 		gdk_window_set_cursor (canvas_widget->window, NULL);
-			
+
 		gnome_canvas_item_ungrab (item, event->button.time);
-		
+
 		/* Select the clicked on task in the treeview */
 		chart = g_object_get_data (G_OBJECT (item->canvas), "chart");
 		tree = planner_gantt_chart_get_view (chart);
 		gtk_widget_grab_focus (GTK_WIDGET (tree));
-		
+
 		path = planner_gantt_model_get_path_from_task (
 			PLANNER_GANTT_MODEL (planner_gantt_chart_get_model (chart)),
 			priv->task);
-				
+
 		selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (tree));
-				
+
 		if (!(event->button.state & (GDK_CONTROL_MASK | GDK_SHIFT_MASK))) {
 			gtk_tree_selection_unselect_all (selection);
 			gtk_tree_selection_select_path (selection, path);
@@ -3020,7 +3020,7 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 			GtkTreePath *anchor;
 
 			anchor = planner_task_tree_get_anchor (tree);
-			
+
 			if (anchor) {
 				gtk_tree_selection_unselect_all (selection);
 				gtk_tree_selection_select_range(selection, anchor, path);
@@ -3032,12 +3032,12 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 				planner_task_tree_set_anchor (tree, path);
 			}
 		}
-		
+
 		priv->state = STATE_NONE;
-	
+
 		return TRUE;
 	}
-		
+
 	case GDK_2BUTTON_PRESS:
 		if (event->button.button == 1) {
 			drag_spot = get_drag_spot(event->button.x, event->button.y, priv);
@@ -3045,34 +3045,34 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 				PlannerTaskTree  *tree;
 				GtkTreePath      *path;
 				GtkTreeSelection *selection;
-				
+
 				chart = g_object_get_data (G_OBJECT (item->canvas), "chart");
 				tree = planner_gantt_chart_get_view (chart);
 				gtk_widget_grab_focus (GTK_WIDGET (tree));
-		
+
 				path = planner_gantt_model_get_path_from_task (
 					PLANNER_GANTT_MODEL (planner_gantt_chart_get_model (chart)),
 					priv->task);
-				
+
 				selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (tree));
-				
+
 				gtk_tree_selection_unselect_all (selection);
 				gtk_tree_selection_select_path (selection, path);
 				planner_task_tree_set_anchor(tree, path);
-							   
+
 				planner_task_tree_edit_task (tree, PLANNER_TASK_DIALOG_PAGE_GENERAL);
-							   
+
 				return TRUE;
 			}
 		}
-	
+
 	default:
 		break;
 	}
 
 	return FALSE;
 }
-	   
+
 static void
 eel_gtk_adjustment_set_value (GtkAdjustment *adjustment,
 			      float          value)
@@ -3080,7 +3080,7 @@ eel_gtk_adjustment_set_value (GtkAdjustment *adjustment,
 	float upper_page_start, clamped_value;
 
 	g_return_if_fail (GTK_IS_ADJUSTMENT (adjustment));
-	
+
 	upper_page_start = MAX (adjustment->upper - adjustment->page_size,
 				adjustment->lower);
 	clamped_value = CLAMP (value, adjustment->lower, upper_page_start);
@@ -3107,7 +3107,7 @@ gantt_row_canvas_scroll (GtkWidget *widget,
 	 */
 	old_h_value = hadj->value;
 	old_v_value = vadj->value;
-	
+
 	eel_gtk_adjustment_set_value (hadj, hadj->value + delta_x);
 	eel_gtk_adjustment_set_value (vadj, vadj->value + delta_y);
 
@@ -3128,7 +3128,7 @@ gantt_row_get_resource_index_at (PlannerGanttRow *row,
 
 	offset = priv->x + priv->width + TEXT_PADDING;
 	x -= offset;
-	
+
 	len = priv->resource_widths->len;
 	for (i = 0; i < len; i += 2) {
 		left = g_array_index (priv->resource_widths, gint, i);
@@ -3138,7 +3138,7 @@ gantt_row_get_resource_index_at (PlannerGanttRow *row,
 			return i / 2;
 		}
 	}
-	
+
 	return -1;
 }
 
@@ -3159,11 +3159,11 @@ gantt_row_get_resource_by_index (PlannerGanttRow *row,
 	priv = row->priv;
 
 	index *= 2;
-	
+
 	if (index >= priv->resource_widths->len) {
 		return FALSE;
 	}
-	
+
 	if (x1) {
 		*x1 = g_array_index (priv->resource_widths, gint, index);
 	}
@@ -3182,7 +3182,7 @@ planner_gantt_row_init_menu (PlannerGanttRow *row)
 
 	chart = g_object_get_data (G_OBJECT (GNOME_CANVAS_ITEM (row)->canvas), "chart");
     	tree = planner_gantt_chart_get_view (chart);
-	
+
 	row->priv->popup_factory = planner_task_popup_new (tree);
 }
 
@@ -3202,9 +3202,9 @@ planner_gantt_row_init_menu (PlannerGanttRow *row)
 
                 /* Draw non-working intervals shaded. FIXME: Disabled for now. */
 		if (0) { g_object_get (priv->task, "project", &project, NULL);
-		
+
 		calendar = mrp_project_get_calendar (project);
-		
+
 		/* Get exposed world coordinates. */
 		gnome_canvas_c2w (item->canvas, x, 0, &wx1, NULL);
 		gnome_canvas_c2w (item->canvas, x + width, 0, &wx2, NULL);
@@ -3217,22 +3217,22 @@ planner_gantt_row_init_menu (PlannerGanttRow *row)
 		t2 = mrp_time_align_day (t2 + 24*60*60);
 
 		ival_prev = t1;
-		
+
 		gnome_canvas_get_color (item->canvas, "#b7c3c9", &color_break);
 		gdk_gc_set_foreground (priv->fill_gc, &color_break);
 
 		/*g_print ("-------------------\n");*/
-		
+
 		/* Loop through the days between t1 and t2. */
 		while (t1 <= t2) {
 			day = mrp_calendar_get_day (calendar, t1, TRUE);
-			
+
 			intervals = mrp_calendar_day_get_intervals (calendar, day, TRUE);
-			
+
 			/* Loop through the intervals for this day. */
 			for (l = intervals; l; l = l->next) {
 				ival = l->data;
-				
+
 				mrp_interval_get_absolute (ival,
 							   t1,
 							   &ival_start,
@@ -3242,7 +3242,7 @@ planner_gantt_row_init_menu (PlannerGanttRow *row)
 					 mrp_time_format ("%H:%M", ival_prev),
 					 mrp_time_format ("%H:%M", ival_start),
 					 mrp_time_format ("%a %e %b", ival_prev));*/
-				
+
 				/* Don't draw if the interval is shorter than what we
 				 * want at this zoom level.
 				 */
@@ -3253,25 +3253,25 @@ planner_gantt_row_init_menu (PlannerGanttRow *row)
 					 */
 					wx1 = ival_prev * priv->scale;
 					wx2 = ival_start * priv->scale;
-					
+
 					gnome_canvas_w2c (item->canvas, wx1, 0, &tx1, NULL);
 					gnome_canvas_w2c (item->canvas, wx2, 0, &tx2, NULL);
-					
+
 					tx1 -= x;
 					tx2 -= x;
-					
+
 					/* Don't draw if we're outside the exposed parts
 					 * of the gantt bar.
 					 */
 					if (tx1 >= rx2) {
 						break;
 					}
-					
+
 					if (tx2 <= rx1) {
 						ival_prev = ival_end;
 						continue;
 					}
-								
+
 					tx1 = MAX (tx1, rx1);
 					tx2 = MIN (tx2, rx2);
 
@@ -3284,7 +3284,7 @@ planner_gantt_row_init_menu (PlannerGanttRow *row)
 								    tx2 - tx1,
 								    cy2 - cy1 - 1);
 					}
-					
+
 					/*gdk_gc_set_foreground (priv->fill_gc, &color_high);
 					draw_cut_line (drawable,
 						       priv->fill_gc,
@@ -3292,7 +3292,7 @@ planner_gantt_row_init_menu (PlannerGanttRow *row)
 						       cy1 + 1,
 						       tx1,
 						       cy2 - 1);
-					
+
 					draw_cut_line (drawable,
 						       priv->fill_gc,
 						       tx2 - 1,
@@ -3300,10 +3300,10 @@ planner_gantt_row_init_menu (PlannerGanttRow *row)
 						       tx2 - 1,
 						       cy2 - 1);*/
 				}
-				
+
 				ival_prev = ival_end;
 			}
-			
+
 			t1 += 60*60*24;
 
 			/* Draw the remaining interval if any. */
@@ -3315,10 +3315,10 @@ planner_gantt_row_init_menu (PlannerGanttRow *row)
 
 				wx1 = ival_prev * priv->scale;
 				wx2 = t1 * priv->scale;
-				
+
 				gnome_canvas_w2c (item->canvas, wx1, 0, &tx1, NULL);
 				gnome_canvas_w2c (item->canvas, wx2, 0, &tx2, NULL);
-				
+
 				tx1 -= x;
 				tx2 -= x;
 
@@ -3328,7 +3328,7 @@ planner_gantt_row_init_menu (PlannerGanttRow *row)
 				if (tx1 >= rx2 || tx2 <= rx1) {
 					continue;
 				}
-				
+
 				tx1 = MAX (tx1, rx1);
 				tx2 = MIN (tx2, rx2);
 
@@ -3357,10 +3357,10 @@ typedef struct {
 
 	PlannerTaskTree   *tree;
 	MrpProject        *project;
-	
+
 	GtkTreePath       *path;
-	
-	gchar             *property;  
+
+	gchar             *property;
 	GValue            *value;
 	GValue            *old_value;
 } TaskCmdEditProperty;
@@ -3371,7 +3371,7 @@ task_cmd_edit_property_do (PlannerCmd *cmd_base)
 	TaskCmdEditProperty *cmd;
 	PlannerGanttModel   *model;
 	MrpTask             *task;
-	
+
 	cmd = (TaskCmdEditProperty*) cmd_base;
 
 	model = PLANNER_GANTT_MODEL (gtk_tree_view_get_model (GTK_TREE_VIEW (cmd->tree)));
@@ -3390,7 +3390,7 @@ task_cmd_edit_property_undo (PlannerCmd *cmd_base)
 	TaskCmdEditProperty *cmd;
 	PlannerGanttModel   *model;
 	MrpTask             *task;
-	
+
 	cmd = (TaskCmdEditProperty*) cmd_base;
 
 	model = PLANNER_GANTT_MODEL (gtk_tree_view_get_model (GTK_TREE_VIEW (cmd->tree)));
@@ -3405,11 +3405,11 @@ static void
 task_cmd_edit_property_free (PlannerCmd *cmd_base)
 {
 	TaskCmdEditProperty *cmd;
-	
+
 	cmd = (TaskCmdEditProperty*) cmd_base;
 
 	g_object_unref (cmd->project);
-	
+
 	g_free (cmd->property);
 	g_value_unset (cmd->value);
 	g_value_unset (cmd->old_value);
@@ -3444,9 +3444,9 @@ task_cmd_edit_property (PlannerWindow   *window,
 	cmd->project = g_object_ref (planner_window_get_project (window));
 
 	model = PLANNER_GANTT_MODEL (gtk_tree_view_get_model (GTK_TREE_VIEW (tree)));
-	
+
 	cmd->path = planner_gantt_model_get_path_from_task (model, task);
-	
+
 	cmd->property = g_strdup (property);
 
 	cmd->value = g_new0 (GValue, 1);
@@ -3462,7 +3462,7 @@ task_cmd_edit_property (PlannerWindow   *window,
 
 	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager (window),
 					   cmd_base);
-	
+
 	return cmd_base;
 }
 
@@ -3479,7 +3479,7 @@ gantt_row_get_selected_func (GtkTreeModel *model,
 			    iter,
 			    COL_TASK, &task,
 			    -1);
-	
+
 	*list = g_list_prepend (*list, task);
 }
 
@@ -3487,13 +3487,13 @@ static GList *
 gantt_row_get_selected_tasks (GtkTreeSelection *selection)
 {
 	GList *list;
-	
+
 	list = NULL;
 	gtk_tree_selection_selected_foreach (selection,
 					     gantt_row_get_selected_func,
 					     &list);
-	
+
 	list = g_list_reverse (list);
-	
+
 	return list;
 }

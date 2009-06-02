@@ -59,7 +59,7 @@ mrp_paths_get_image_dir (const gchar *filename)
 
 gchar *
 mrp_paths_get_plugin_dir (const gchar *filename)
-{	
+{
 	const gchar *env_plugin_dir = g_getenv ("PLANNER_PLUGINDIR");
 	return g_build_filename (env_plugin_dir ? env_plugin_dir
 						: default_plugin_dir,

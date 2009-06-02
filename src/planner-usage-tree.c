@@ -260,7 +260,7 @@ usage_tree_drag_drop_cb (GtkWidget      *widget,
 			  guint           time)
 {
 	g_signal_stop_emission_by_name (widget, "drag_drop");
-	
+
 	return FALSE;
 }
 
@@ -550,13 +550,13 @@ usage_tree_tree_view_popup_menu (GtkWidget         *widget,
 	gint               x, y;
 
 	tv = GTK_TREE_VIEW (tree);
-	
+
 	gtk_tree_view_get_cursor (tv, &path, &column);
 	gtk_tree_view_get_cell_area (tv,
 				     path,
 				     column,
 				     &rect);
-	
+
 	x = rect.x;
 	y = rect.y;
 
@@ -573,7 +573,7 @@ usage_tree_tree_view_popup_menu (GtkWidget         *widget,
 	/* Offset so it's not overlapping the cell. */
 	rect.x = x + 20;
 	rect.y = y + 20;
-	
+
 	gtk_item_factory_popup (tree->priv->popup_factory,
 				rect.x, rect.y,
 				0,

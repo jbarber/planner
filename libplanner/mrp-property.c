@@ -66,11 +66,11 @@ imrp_property_set_project (MrpProperty *property, MrpProject *project)
  * @label: the human readable label
  * @description: a string describing the property
  * @user_defined: a #gboolean
- * 
+ *
  * Creates a new #MrpProperty. @name must be unique in the application.
- * @user_defined specifies if the property was created by a user or a plugin 
+ * @user_defined specifies if the property was created by a user or a plugin
  * or Planner itself.
- * 
+ *
  * Return value: a newly create property
  **/
 MrpProperty *
@@ -109,7 +109,7 @@ mrp_property_new (const gchar     *name,
 							     G_MAXINT,
 							     0,
 							     G_PARAM_READWRITE));
-		break;	
+		break;
 	case MRP_PROPERTY_TYPE_STRING:
 		property = MRP_PROPERTY (g_param_spec_string (name,
 							      "",
@@ -141,7 +141,7 @@ mrp_property_new (const gchar     *name,
 	default:
 		break;
 	};
-	
+
 	if (!property) {
 		return NULL;
 	}
@@ -149,11 +149,11 @@ mrp_property_new (const gchar     *name,
 	property_set_type (property, type);
 	g_param_spec_set_qdata_full (G_PARAM_SPEC (property),
 				     g_quark_from_static_string (LABEL),
-				     g_strdup (label), 
+				     g_strdup (label),
 				     g_free);
 	g_param_spec_set_qdata_full (G_PARAM_SPEC (property),
 				     g_quark_from_static_string (DESCRIPTION),
-				     g_strdup (description), 
+				     g_strdup (description),
 				     g_free);
 	g_param_spec_set_qdata_full (G_PARAM_SPEC (property),
 				     g_quark_from_static_string (USER_DEFINED),
@@ -165,32 +165,32 @@ mrp_property_new (const gchar     *name,
 /**
  * mrp_property_get_name:
  * @property: an #MrpProperty
- * 
+ *
  * Fetches the name of @property
- * 
+ *
  * Return value: the name of @property
  **/
 const gchar *
 mrp_property_get_name (MrpProperty *property)
 {
 	g_return_val_if_fail (property != NULL, NULL);
-	
+
 	return G_PARAM_SPEC (property)->name;
 }
 
 /**
  * mrp_property_get_property_type:
  * @property: an #MrpProperty
- * 
+ *
  * Fetches the type of @property
- * 
+ *
  * Return value: the type of @property
  **/
-MrpPropertyType 
+MrpPropertyType
 mrp_property_get_property_type (MrpProperty *property)
 {
 	g_return_val_if_fail (property != NULL, MRP_PROPERTY_TYPE_NONE);
-	
+
 	return GPOINTER_TO_INT (
 		g_param_spec_get_qdata (G_PARAM_SPEC (property),
 					g_quark_from_static_string (TYPE)));
@@ -200,7 +200,7 @@ mrp_property_get_property_type (MrpProperty *property)
  * mrp_property_set_label:
  * @property: an #MrpProperty
  * @label: a string containing the new label
- * 
+ *
  * Sets the label of @property and signals the "property-changed" signal on
  * the project @property is attached to.
  **/
@@ -208,16 +208,16 @@ void
 mrp_property_set_label (MrpProperty *property, const gchar *label)
 {
 	gpointer project;
-	
+
 	g_param_spec_set_qdata_full (G_PARAM_SPEC (property),
 				     g_quark_from_static_string (LABEL),
-				     g_strdup (label), 
+				     g_strdup (label),
 				     g_free);
 
 	project = g_param_spec_get_qdata (G_PARAM_SPEC (property),
 					  g_quark_from_static_string (PROJECT));
 	if (project) {
-		imrp_project_property_changed (MRP_PROJECT (project), 
+		imrp_project_property_changed (MRP_PROJECT (project),
 					       property);
 	}
 }
@@ -225,9 +225,9 @@ mrp_property_set_label (MrpProperty *property, const gchar *label)
 /**
  * mrp_property_get_label:
  * @property: an #MrpProperty
- * 
+ *
  * Fetches the label of @property
- * 
+ *
  * Return value: the label of @property
  **/
 const gchar *
@@ -235,7 +235,7 @@ mrp_property_get_label (MrpProperty *property)
 {
 	g_return_val_if_fail (property != NULL, NULL);
 
-	return ((const gchar *) 
+	return ((const gchar *)
 		g_param_spec_get_qdata (G_PARAM_SPEC (property),
 					g_quark_from_static_string (LABEL)));
 }
@@ -244,23 +244,23 @@ mrp_property_get_label (MrpProperty *property)
  * mrp_property_set_description:
  * @property: an #MrpProperty
  * @description: a string containing the new description
- * 
+ *
  * Sets the description of @property and signals the "property-changed" signal on the project @property is attached to.
  **/
 void
 mrp_property_set_description (MrpProperty *property, const gchar *description)
 {
 	gpointer project;
-	
+
 	g_param_spec_set_qdata_full (G_PARAM_SPEC (property),
-				     g_quark_from_static_string (DESCRIPTION), 
-				     g_strdup (description), 
+				     g_quark_from_static_string (DESCRIPTION),
+				     g_strdup (description),
 				     g_free);
 
-	project = g_param_spec_get_qdata (G_PARAM_SPEC (property), 
+	project = g_param_spec_get_qdata (G_PARAM_SPEC (property),
 					  g_quark_from_static_string (PROJECT));
 	if (project) {
-		imrp_project_property_changed (MRP_PROJECT (project), 
+		imrp_project_property_changed (MRP_PROJECT (project),
 					       property);
 	}
 }
@@ -268,9 +268,9 @@ mrp_property_set_description (MrpProperty *property, const gchar *description)
 /**
  * mrp_property_get_description:
  * @property: an #MrpProperty
- * 
+ *
  * Fetches the description of @property
- * 
+ *
  * Return value: the description of @property
  **/
 const gchar *
@@ -278,8 +278,8 @@ mrp_property_get_description (MrpProperty *property)
 {
 	g_return_val_if_fail (property != NULL, NULL);
 
-	return ((const gchar *) 
-		g_param_spec_get_qdata (G_PARAM_SPEC (property), 
+	return ((const gchar *)
+		g_param_spec_get_qdata (G_PARAM_SPEC (property),
 					g_quark_from_static_string (DESCRIPTION)));
 }
 
@@ -287,7 +287,7 @@ mrp_property_get_description (MrpProperty *property)
  * mrp_property_set_user_defined:
  * @property: an #MrpProperty
  * @user_defined: if the property is user defined
- * 
+ *
  * Sets if @property is user-defined or created by a plugin or Planner
  * itself.
  **/
@@ -303,9 +303,9 @@ mrp_property_set_user_defined (MrpProperty *property, gboolean user_defined)
 /**
  * mrp_property_get_user_defined:
  * @property: an #MrpProperty
- * 
+ *
  * Fetches if @property is uesr defined or not.
- * 
+ *
  * Return value: %TRUE if @property is user defined, otherwise %FALSE
  **/
 gboolean
@@ -319,42 +319,42 @@ mrp_property_get_user_defined (MrpProperty *property)
 /**
  * mrp_property_ref:
  * @property: an #MrpProperty
- * 
+ *
  * Add a reference to @property. User should call this when storing a reference
  * to @property.
- * 
+ *
  * Return value: the property
  **/
 MrpProperty *
 mrp_property_ref (MrpProperty *property)
 {
 	g_return_val_if_fail (property != NULL, NULL);
-	
+
 	return MRP_PROPERTY (g_param_spec_ref (G_PARAM_SPEC (property)));
 }
 
 /**
  * mrp_property_unref:
  * @property: an #MrpProperty
- * 
- * Remove a reference from @property. If the reference count reaches 0 the 
- * property will be freed. User should not use it's reference after calling 
+ *
+ * Remove a reference from @property. If the reference count reaches 0 the
+ * property will be freed. User should not use it's reference after calling
  * mrp_property_unref().
  **/
 void
 mrp_property_unref (MrpProperty *property)
 {
 	g_return_if_fail (property != NULL);
-	
+
 	g_param_spec_unref (G_PARAM_SPEC (property));
 }
 
 /**
  * mrp_property_type_as_string:
  * @type: an #MrpPropertyType
- * 
+ *
  * Transform a #MrpPropertyTYpe into a human readable string.
- * 
+ *
  * Return value: a string representation of @type
  **/
 const gchar *
@@ -374,7 +374,7 @@ mrp_property_type_as_string (MrpPropertyType type)
 	case MRP_PROPERTY_TYPE_DURATION:
 		return _("Duration");
 	case MRP_PROPERTY_TYPE_COST:
-		return _("Cost");	
+		return _("Cost");
 	case MRP_PROPERTY_TYPE_NONE:
 		g_warning ("Requested name for type 'none'.");
 		return _("None");
@@ -392,7 +392,7 @@ property_param_spec_string_list (const gchar *name,
 				 GParamFlags flags)
 {
 	GParamSpec *spec;
-	
+
 	spec = g_param_spec_string (name,
 				    nick,
 				    blurb,
@@ -412,13 +412,13 @@ GType
 mrp_property_get_type (void)
 {
 	static GType our_type = 0;
-	
+
 	if (our_type == 0) {
 		our_type = g_boxed_type_register_static ("MrpProperty",
 							 (GBoxedCopyFunc) g_param_spec_ref,
 							 (GBoxedFreeFunc) g_param_spec_unref);
 	}
-	
+
 	return our_type;
 }
 

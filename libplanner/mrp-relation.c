@@ -86,8 +86,8 @@ mrp_relation_get_type (void)
 			(GInstanceInitFunc) relation_init,
 		};
 
-		object_type = g_type_register_static (MRP_TYPE_OBJECT, 
-						      "MrpRelation", 
+		object_type = g_type_register_static (MRP_TYPE_OBJECT,
+						      "MrpRelation",
 						      &object_info, 0);
 	}
 
@@ -114,7 +114,7 @@ relation_class_init (MrpRelationClass *klass)
 		 mrp_marshal_VOID__VOID,
 		 G_TYPE_NONE,
 		 0);
-		
+
 	/* Properties. */
 	g_object_class_install_property (object_class,
 					 PROP_SUCCESSOR,
@@ -155,7 +155,7 @@ static void
 relation_init (MrpRelation *relation)
 {
 	MrpRelationPriv *priv;
-	
+
 	relation->priv = g_new0 (MrpRelationPriv, 1);
 
 	priv = relation->priv;
@@ -171,7 +171,7 @@ relation_finalize (GObject *object)
 
 	g_object_unref (relation->priv->successor);
 	g_object_unref (relation->priv->predecessor);
-	
+
 	if (G_OBJECT_CLASS (parent_class)->finalize) {
 		(* G_OBJECT_CLASS (parent_class)->finalize) (object);
 	}
@@ -187,17 +187,17 @@ relation_set_property (GObject      *object,
 	MrpRelationPriv *priv;
 	MrpTask         *task;
 	gboolean         changed = FALSE;
-	
+
 	relation = MRP_RELATION (object);
 	priv    = relation->priv;
-	
+
 	switch (prop_id) {
 	case PROP_SUCCESSOR:
 		priv->successor = g_value_get_object (value);
 		if (priv->successor) {
 			g_object_ref (priv->successor);
 			changed = TRUE;
-		}		
+		}
 		break;
 
 	case PROP_PREDECESSOR:
@@ -218,7 +218,7 @@ relation_set_property (GObject      *object,
 		changed = TRUE;
 		break;
 
-	default:		
+	default:
 		break;
 	}
 
@@ -233,7 +233,7 @@ relation_set_property (GObject      *object,
 		if (task != NULL) {
 			mrp_object_changed (MRP_OBJECT (task));
 		}
-	}	
+	}
 }
 
 static void
@@ -244,10 +244,10 @@ relation_get_property (GObject    *object,
 {
 	MrpRelation     *relation;
 	MrpRelationPriv *priv;
-	
+
 	relation = MRP_RELATION (object);
 	priv    = relation->priv;
-	
+
 	switch (prop_id) {
 	case PROP_SUCCESSOR:
 		g_value_set_object (value, priv->successor);
@@ -267,64 +267,64 @@ relation_get_property (GObject    *object,
 
 	default:
 		G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-		break; 
+		break;
 	}
 }
 
 /**
  * mrp_relation_get_predecessor:
  * @relation: an #MrpRelation
- * 
+ *
  * Retrieves the predecessor of @relation.
- * 
+ *
  * Return value: the predecessor task.
  **/
 MrpTask *
 mrp_relation_get_predecessor (MrpRelation *relation)
 {
 	g_return_val_if_fail (MRP_IS_RELATION (relation), NULL);
-	
+
 	return relation->priv->predecessor;
 }
 
 /**
  * mrp_relation_get_successor:
  * @relation: an #MrpRelation
- * 
+ *
  * Retrieves the successor of @relation.
- * 
+ *
  * Return value: the successor task.
  **/
 MrpTask *
 mrp_relation_get_successor (MrpRelation *relation)
 {
 	g_return_val_if_fail (MRP_IS_RELATION (relation), NULL);
-	
+
 	return relation->priv->successor;
 }
 
 /**
  * mrp_relation_get_lag:
  * @relation: an #MrpRelation
- * 
+ *
  * Retrieves the lag between the predecessor and successor in @relation.
- * 
+ *
  * Return value: Lag time in seconds.
  **/
 gint
 mrp_relation_get_lag (MrpRelation *relation)
 {
 	g_return_val_if_fail (MRP_IS_RELATION (relation), 0);
-	
+
 	return relation->priv->lag;
 }
 
 /**
  * mrp_relation_get_relation_type:
  * @relation: an #MrpRelation
- * 
+ *
  * Retrieves the relation type of @relation.
- * 
+ *
  * Return value: the #MrpRelationType of the relation.
  **/
 /* Cumbersome name, but mrp_relation_get_type is already taken :) */
@@ -332,6 +332,6 @@ MrpRelationType
 mrp_relation_get_relation_type (MrpRelation *relation)
 {
 	g_return_val_if_fail (MRP_IS_RELATION (relation), MRP_RELATION_NONE);
-	
+
 	return relation->priv->type;
 }

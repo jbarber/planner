@@ -68,7 +68,7 @@ void            mrp_resource_assign             (MrpResource     *resource,
 						 gint             units);
 
 GList *         mrp_resource_get_assignments    (MrpResource     *resource);
- 
+
 GList *         mrp_resource_get_assigned_tasks (MrpResource     *resource);
 
 gint            mrp_resource_compare            (gconstpointer    a,

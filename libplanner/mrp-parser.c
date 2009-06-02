@@ -50,23 +50,23 @@ typedef struct {
         xmlDocPtr   doc;
 
 	gint        version;
-	
+
 	MrpProject *project;
-	
+
 	MrpTask    *root_task;
 	GList      *resources;
 	GList      *groups;
 	GList      *assignments;
 
 	mrptime     project_start;
-	
+
 	MrpGroup   *default_group;
 
 	gint        last_id;
 
 	gint        next_day_type_id;
 	gint        next_calendar_id;
-	
+
 	GHashTable *task_hash;
 	GHashTable *resource_hash;
 	GHashTable *group_hash;
@@ -88,7 +88,7 @@ static void             mpp_xml_set_int               (xmlNodePtr   node,
 						       const gchar *prop,
 						       gint         value);
 static void             mpp_xml_set_float             (xmlNodePtr   node,
-						       const gchar *prop, 
+						       const gchar *prop,
 						       gfloat       value);
 static void             mpp_xml_set_task_type         (xmlNodePtr   node,
 						       const gchar *prop,
@@ -130,12 +130,12 @@ mpp_write_project_properties (MrpParser *parser, xmlNodePtr node)
 	if (calendar) {
 		id = GPOINTER_TO_INT (g_hash_table_lookup (parser->calendar_hash,
 							   calendar));
-		
+
 		if (id) {
 			mpp_xml_set_int (node, "calendar", id);
 		}
 	}
-	
+
 	g_free (name);
 	g_free (org);
 	g_free (manager);
@@ -157,9 +157,9 @@ mpp_property_type_to_string (MrpPropertyType type)
 	case MRP_PROPERTY_TYPE_DURATION:
 		return "duration";
 	case MRP_PROPERTY_TYPE_DATE:
-		return "date";	
+		return "date";
 	case MRP_PROPERTY_TYPE_COST:
-		return "cost";	
+		return "cost";
 	default:
 		g_warning ("Not implemented support for type %d", type);
 		break;
@@ -179,9 +179,9 @@ mpp_property_to_string (MrpObject   *object,
 	gfloat       f;
 	mrptime      date;
 	GValueArray *array;
-	
+
 	name = mrp_property_get_name (property);
-	
+
 	switch (mrp_property_get_property_type (property)) {
 	case MRP_PROPERTY_TYPE_STRING:
 		mrp_object_get (object, name, &str, NULL);
@@ -208,7 +208,7 @@ mpp_property_to_string (MrpObject   *object,
 		return g_strdup_printf ("%d", i);
 	case MRP_PROPERTY_TYPE_DATE:
 		mrp_object_get (object, name, &date, NULL);
-		str = mrp_time_to_string (date);		
+		str = mrp_time_to_string (date);
 		return str;
 	case MRP_PROPERTY_TYPE_COST:
 		/* FIXME: implement cost */
@@ -229,22 +229,22 @@ mpp_write_property_specs (MrpParser *parser, xmlNodePtr node)
 	xmlNodePtr       child;
 	MrpProperty     *property;
 	MrpPropertyType  type;
-	
-	properties = mrp_project_get_properties_from_type (parser->project, 
+
+	properties = mrp_project_get_properties_from_type (parser->project,
 							   MRP_TYPE_PROJECT);
-	
+
 	node = xmlNewChild (node, NULL, "properties", NULL);
 
 	for (l = properties; l; l = l->next) {
 		property = l->data;
 
 		child = xmlNewChild (node, NULL, "property", NULL);
-		
+
 		xmlSetProp (child, "name", mrp_property_get_name (property));
 
 		type = mrp_property_get_property_type (property);
 		xmlSetProp (child, "type", mpp_property_type_to_string (type));
-		
+
 		xmlSetProp (child, "owner", "project");
 		xmlSetProp (child, "label", mrp_property_get_label (property));
 		xmlSetProp (child, "description", mrp_property_get_description (property));
@@ -252,19 +252,19 @@ mpp_write_property_specs (MrpParser *parser, xmlNodePtr node)
 
 	g_list_free (properties);
 
-	properties = mrp_project_get_properties_from_type (parser->project, 
+	properties = mrp_project_get_properties_from_type (parser->project,
 							   MRP_TYPE_TASK);
-	
+
 	for (l = properties; l; l = l->next) {
 		property = l->data;
 
 		child = xmlNewChild (node, NULL, "property", NULL);
-		
+
 		xmlSetProp (child, "name", mrp_property_get_name (property));
 
 		type = mrp_property_get_property_type (property);
 		xmlSetProp (child, "type", mpp_property_type_to_string (type));
-		
+
 		xmlSetProp (child, "owner", "task");
 		xmlSetProp (child, "label", mrp_property_get_label (property));
 		xmlSetProp (child, "description", mrp_property_get_description (property));
@@ -272,19 +272,19 @@ mpp_write_property_specs (MrpParser *parser, xmlNodePtr node)
 
 	g_list_free (properties);
 
-	properties = mrp_project_get_properties_from_type (parser->project, 
+	properties = mrp_project_get_properties_from_type (parser->project,
 							   MRP_TYPE_RESOURCE);
-	
+
 	for (l = properties; l; l = l->next) {
 		property = l->data;
 
 		child = xmlNewChild (node, NULL, "property", NULL);
-		
+
 		xmlSetProp (child, "name", mrp_property_get_name (property));
 
 		type = mrp_property_get_property_type (property);
 		xmlSetProp (child, "type", mpp_property_type_to_string (type));
-		
+
 		xmlSetProp (child, "owner", "resource");
 		xmlSetProp (child, "label", mrp_property_get_label (property));
 		xmlSetProp (child, "description", mrp_property_get_description (property));
@@ -298,14 +298,14 @@ mpp_write_phases (MrpParser *parser, xmlNodePtr node)
 {
 	GList      *phases, *l;
 	xmlNodePtr  child;
-	
+
 	g_object_get (parser->project, "phases", &phases, NULL);
-	
+
 	node = xmlNewChild (node, NULL, "phases", NULL);
 
 	for (l = phases; l; l = l->next) {
 		child = xmlNewChild (node, NULL, "phase", NULL);
-		
+
 		xmlSetProp (child, "name", l->data);
 	}
 
@@ -358,17 +358,17 @@ static gboolean
 mpp_hash_insert_task_cb (MrpTask *task, MrpParser *parser)
 {
 	NodeEntry *entry;
-	
+
 	/* Don't want the root task. */
 	if (task == parser->root_task) {
 		return FALSE;
 	}
-	
+
 	entry = g_new0 (NodeEntry, 1);
 	entry->id = parser->last_id++;
-	
+
 	g_hash_table_insert (parser->task_hash, task, entry);
-	
+
 	return FALSE;
 }
 
@@ -377,7 +377,7 @@ mpp_write_constraint (xmlNodePtr node, MrpConstraint *constraint)
 {
 	xmlNodePtr   child;
 	const gchar *str = NULL;
-	
+
 	/* No need to save if we have ASAP. */
 	if (constraint->type == MRP_CONSTRAINT_ASAP) {
 		return;
@@ -399,7 +399,7 @@ mpp_write_constraint (xmlNodePtr node, MrpConstraint *constraint)
 	case MRP_CONSTRAINT_ALAP:
 		g_assert_not_reached ();
 		break;
-	}	
+	}
 
 	xmlSetProp (child, "type", str);
 	mpp_xml_set_date (child, "time", constraint->time);
@@ -414,15 +414,15 @@ mpp_write_string_list (xmlNodePtr   node,
 	GValueArray *array;
 	GValue      *value;
 	gint         i;
-	
+
 	mrp_object_get (object, mrp_property_get_name (property), &array, NULL);
 	if (!array) {
 		return;
 	}
-	
+
 	for (i = 0; i < array->n_values; i++) {
 		value = g_value_array_get_nth (array, i);
-		
+
 		child = xmlNewChild (node, NULL, "list-item", NULL);
 		xmlSetProp (child, "value", g_value_get_string (value));
 	}
@@ -442,25 +442,25 @@ mpp_write_custom_properties (MrpParser  *parser,
 
 	properties = mrp_project_get_properties_from_type (parser->project,
 							   G_OBJECT_TYPE (object));
-	
+
 	if (properties == NULL) {
 		return;
 	}
-	
+
 	node = xmlNewChild (node, NULL, "properties", NULL);
 
 	for (l = properties; l; l = l->next) {
 		property = l->data;
-		
+
 		child = xmlNewChild (node, NULL, "property", NULL);
-		
+
 		xmlSetProp (child, "name", mrp_property_get_name (property));
 
 		if (mrp_property_get_property_type (property) == MRP_PROPERTY_TYPE_STRING_LIST) {
 			mpp_write_string_list (child, property, object);
 		} else {
 			value = mpp_property_to_string (object, property);
-			
+
 			xmlSetProp (child, "value", value);
 
 			g_free (value);
@@ -492,7 +492,7 @@ mpp_write_task_cb (MrpTask *task, MrpParser *parser)
 	if (task == parser->root_task) {
 		return FALSE;
 	}
-	
+
 	parent = mrp_task_get_parent (task);
 
 	entry = g_hash_table_lookup (parser->task_hash, parent);
@@ -502,7 +502,7 @@ mpp_write_task_cb (MrpTask *task, MrpParser *parser)
 
 	entry = g_hash_table_lookup (parser->task_hash, task);
 	entry->node = node;
-	
+
 	g_object_get (task,
 		      "name", &name,
 		      "note", &note,
@@ -524,7 +524,7 @@ mpp_write_task_cb (MrpTask *task, MrpParser *parser)
 		work = 0;
 		duration = 0;
 	}
-	
+
 	mpp_xml_set_int (node, "id", entry->id);
 	xmlSetProp (node, "name", name);
 	xmlSetProp (node, "note", note);
@@ -533,7 +533,7 @@ mpp_write_task_cb (MrpTask *task, MrpParser *parser)
 	if (sched == MRP_TASK_SCHED_FIXED_DURATION) {
 		mpp_xml_set_int (node, "duration", duration);
 	}
-	
+
 	mpp_xml_set_date (node, "start", start);
 	mpp_xml_set_date (node, "end", finish);
 	mpp_xml_set_date (node, "work-start", work_start);
@@ -545,9 +545,9 @@ mpp_write_task_cb (MrpTask *task, MrpParser *parser)
 	mpp_xml_set_task_sched (node, "scheduling", sched);
 
 	mpp_write_custom_properties (parser, node, MRP_OBJECT (task));
-	
+
 	mpp_write_constraint (node, constraint);
-	
+
 	predecessors = mrp_task_get_predecessor_relations (task);
 	if (predecessors != NULL) {
 		node = xmlNewChild (node, NULL, "predecessors", NULL);
@@ -558,7 +558,7 @@ mpp_write_task_cb (MrpTask *task, MrpParser *parser)
 
 	g_free (name);
 	g_free (note);
-	
+
 	return FALSE;
 }
 
@@ -590,9 +590,9 @@ mpp_write_group (MrpParser *parser, xmlNodePtr parent, MrpGroup *group)
 
 	entry = g_hash_table_lookup (parser->group_hash, group);
 	entry->node = node;
-	
+
 	mpp_xml_set_int (node, "id", entry->id);
-	
+
 	g_object_get (group,
 		      "name", &name,
 		      "manager-name", &admin_name,
@@ -600,9 +600,9 @@ mpp_write_group (MrpParser *parser, xmlNodePtr parent, MrpGroup *group)
 		      "manager-email", &admin_email,
 		      NULL);
 
-	xmlSetProp (node, "name", name);	
-	xmlSetProp (node, "admin-name", admin_name);	
-	xmlSetProp (node, "admin-phone", admin_phone);	
+	xmlSetProp (node, "name", name);
+	xmlSetProp (node, "admin-name", admin_name);
+	xmlSetProp (node, "admin-phone", admin_phone);
 	xmlSetProp (node, "admin-email", admin_email);
 
 	g_free (name);
@@ -623,7 +623,7 @@ mpp_hash_insert_resource (MrpParser *parser, MrpResource *resource)
 }
 
 static void
-mpp_write_resource (MrpParser   *parser, 
+mpp_write_resource (MrpParser   *parser,
 		    xmlNodePtr   parent,
 		    MrpResource *resource)
 {
@@ -659,7 +659,7 @@ mpp_write_resource (MrpParser   *parser,
 
 	group_entry = g_hash_table_lookup (parser->group_hash, group);
 
-	/* FIXME: should group really be able to be NULL? Should always 
+	/* FIXME: should group really be able to be NULL? Should always
 	 * be default group? */
 	if (group_entry != NULL) {
 		mpp_xml_set_int (node, "group", group_entry->id);
@@ -667,15 +667,15 @@ mpp_write_resource (MrpParser   *parser,
 
 	resource_entry = g_hash_table_lookup (parser->resource_hash, resource);
 	mpp_xml_set_int (node, "id", resource_entry->id);
-	
+
 	xmlSetProp (node, "name", name);
 	xmlSetProp (node, "short-name", short_name);
-	
+
 	mpp_xml_set_int (node, "type", type);
-	
+
 	mpp_xml_set_int (node, "units", units);
 	xmlSetProp (node, "email", email);
-	
+
 	xmlSetProp (node, "note", note);
 
 	mpp_xml_set_float (node, "std-rate", std_rate);
@@ -685,7 +685,7 @@ mpp_write_resource (MrpParser   *parser,
 	if (calendar) {
 		id = GPOINTER_TO_INT (g_hash_table_lookup (parser->calendar_hash,
 							   calendar));
-		
+
 		if (id) {
 			mpp_xml_set_int (node, "calendar", id);
 		}
@@ -738,7 +738,7 @@ mpp_write_interval (xmlNodePtr parent, MrpInterval *interval)
 	xmlNodePtr  child;
 	mrptime     start, end;
 	gchar      *str;
-	
+
 	child = xmlNewChild (parent, NULL, "interval", NULL);
 
 	mrp_interval_get_absolute (interval, 0, &start, &end);
@@ -746,7 +746,7 @@ mpp_write_interval (xmlNodePtr parent, MrpInterval *interval)
 	str = mrp_time_format ("%H%M", start);
 	xmlSetProp (child, "start", str);
 	g_free (str);
-	
+
 	str = mrp_time_format ("%H%M", end);
 	xmlSetProp (child, "end", str);
 	g_free (str);
@@ -757,7 +757,7 @@ mpp_write_day (MrpParser *parser, xmlNodePtr parent, MrpDay *day)
 {
 	xmlNodePtr  node;
 	NodeEntry  *day_entry;
-	
+
 	g_return_if_fail (day != NULL);
 
 	node = xmlNewChild (parent, NULL, "day-type", NULL);
@@ -774,7 +774,7 @@ mpp_write_day (MrpParser *parser, xmlNodePtr parent, MrpDay *day)
 	} else {
 		day_entry->id = parser->next_day_type_id++;
 	}
-	
+
 	g_hash_table_insert (parser->day_hash, day, day_entry);
 
 	mpp_xml_set_int (node, "id", day_entry->id);
@@ -782,23 +782,23 @@ mpp_write_day (MrpParser *parser, xmlNodePtr parent, MrpDay *day)
 	xmlSetProp (node, "description", mrp_day_get_description (day));
 }
 
-static void 
+static void
 mpp_write_default_day (MrpParser   *parser,
-		       xmlNode     *node, 
-		       MrpCalendar *calendar, 
-		       const gchar *name, 
+		       xmlNode     *node,
+		       MrpCalendar *calendar,
+		       const gchar *name,
 		       gint         week_day)
 {
 	MrpDay    *day;
 	NodeEntry *day_entry;
-	
+
 	day = mrp_calendar_get_default_day (calendar, week_day);
 	day_entry = (NodeEntry *) g_hash_table_lookup (parser->day_hash, day);
-	
+
 	if (!day_entry) {
 		return;
 	}
-	
+
 	mpp_xml_set_int (node, name, day_entry->id);
 }
 
@@ -840,7 +840,7 @@ mpp_write_overridden_date (MrpParser      *parser,
 		str = mrp_time_format ("%Y%m%d", dd->date);
 		xmlSetProp (child, "date", str);
 		g_free (str);
-		
+
 		xmlSetProp (child, "type", "day-type");
  		mpp_xml_set_int (child, "id", entry->id);
 	}
@@ -849,14 +849,14 @@ mpp_write_overridden_date (MrpParser      *parser,
 }
 
 static void
-mpp_write_calendar (MrpParser   *parser, 
-		    xmlNodePtr   parent, 
+mpp_write_calendar (MrpParser   *parser,
+		    xmlNodePtr   parent,
 		    MrpCalendar *calendar)
 {
 	xmlNodePtr  node, child;
 	GList      *l, *days, *dates;
 	gint        id;
-	
+
 	g_return_if_fail (MRP_IS_CALENDAR (calendar));
 
 	node = xmlNewChild (parent, NULL, "calendar", NULL);
@@ -867,44 +867,44 @@ mpp_write_calendar (MrpParser   *parser,
 	g_hash_table_insert (parser->calendar_hash,
 			     calendar,
 			     GINT_TO_POINTER (id));
-	
+
 	xmlSetProp (node, "name", mrp_calendar_get_name (calendar));
-	
+
 	/* Write the default week */
 	child = xmlNewChild (node, NULL, "default-week", NULL);
-	
-	mpp_write_default_day (parser, child, calendar, 
+
+	mpp_write_default_day (parser, child, calendar,
 			       "mon", MRP_CALENDAR_DAY_MON);
 	mpp_write_default_day (parser, child, calendar,
 			       "tue", MRP_CALENDAR_DAY_TUE);
-	mpp_write_default_day (parser, child, calendar, 
+	mpp_write_default_day (parser, child, calendar,
 			       "wed", MRP_CALENDAR_DAY_WED);
 	mpp_write_default_day (parser, child, calendar,
 			       "thu", MRP_CALENDAR_DAY_THU);
-	mpp_write_default_day (parser, child, calendar, 
+	mpp_write_default_day (parser, child, calendar,
 			       "fri", MRP_CALENDAR_DAY_FRI);
-	mpp_write_default_day (parser, child, calendar, 
+	mpp_write_default_day (parser, child, calendar,
 			       "sat", MRP_CALENDAR_DAY_SAT);
-	mpp_write_default_day (parser, child, calendar, 
+	mpp_write_default_day (parser, child, calendar,
 			       "sun", MRP_CALENDAR_DAY_SUN);
-	
+
 	/* Override days */
 	child = xmlNewChild (node, NULL, "overridden-day-types", NULL);
 	days = mrp_calendar_get_overridden_days (calendar);
-	
+
 	for (l = days; l; l = l->next) {
 		MrpDayWithIntervals *day_ival =l->data;
-		
+
 		mpp_write_overridden_day (parser, child,  day_ival);
 	}
 	g_list_free (days);
-	
+
 	/* Write the overriden dates */
 	child = xmlNewChild (node, NULL, "days", NULL);
 	dates = mrp_calendar_get_all_overridden_dates (calendar);
 	for (l = dates; l; l = l->next) {
 		MrpDateWithDay *date_day = l->data;
-		
+
 		mpp_write_overridden_date (parser, child, date_day);
 	}
 	g_list_free (dates);
@@ -912,7 +912,7 @@ mpp_write_calendar (MrpParser   *parser,
 	/* Add special dates */
 	for (l = mrp_calendar_get_children (calendar); l; l = l->next) {
 		MrpCalendar *child_calendar = l->data;
-		
+
 		mpp_write_calendar (parser, node, child_calendar);
 	}
 }
@@ -926,7 +926,7 @@ mpp_write_project (MrpParser *parser)
 	MrpGroup    *default_group = NULL;
 	NodeEntry   *entry;
 	MrpCalendar *root_calendar;
-	
+
 	node = xmlNewDocNode (parser->doc, NULL, "project", NULL);
 	parser->doc->xmlRootNode = node;
 
@@ -934,11 +934,11 @@ mpp_write_project (MrpParser *parser)
 	mpp_write_custom_properties (parser, node, MRP_OBJECT (parser->project));
 
 	mpp_write_phases (parser, node);
-	
+
 	/* Write calendars */
 	calendars_node = xmlNewChild (node, NULL, "calendars", NULL);
 	child = xmlNewChild (calendars_node, NULL, "day-types", NULL);
-	
+
 	mpp_write_day (parser, child, mrp_day_get_work ());
 	mpp_write_day (parser, child, mrp_day_get_nonwork ());
 	mpp_write_day (parser, child, mrp_day_get_use_base ());
@@ -949,7 +949,7 @@ mpp_write_project (MrpParser *parser)
 
 	/* Get the calendars */
 	root_calendar = mrp_project_get_root_calendar (parser->project);
-	
+
 	for (l = mrp_calendar_get_children (root_calendar); l; l = l->next) {
 		mpp_write_calendar (parser, calendars_node, l->data);
 	}
@@ -965,14 +965,14 @@ mpp_write_project (MrpParser *parser)
 	entry->node = child;
 
 	g_hash_table_insert (parser->task_hash, parser->root_task, entry);
-	
+
 	/* Generate IDs and hash table. */
 	parser->last_id = 1;
 	mrp_project_task_traverse (parser->project,
 				   parser->root_task,
 				   (MrpTaskTraverseFunc) mpp_hash_insert_task_cb,
 				   parser);
-	
+
 	mrp_project_task_traverse (parser->project,
 				   parser->root_task,
 				   (MrpTaskTraverseFunc) mpp_write_task_cb,
@@ -985,21 +985,21 @@ mpp_write_project (MrpParser *parser)
 	/* Generate IDs and hash table. */
 	parser->last_id = 1;
 	for (l = list; l; l = l->next) {
-		mpp_hash_insert_group (parser, l->data); 
+		mpp_hash_insert_group (parser, l->data);
 	}
 
 	g_object_get (parser->project, "default-group", &default_group, NULL);
 
 	if (default_group) {
-		entry = g_hash_table_lookup (parser->group_hash, 
+		entry = g_hash_table_lookup (parser->group_hash,
 					     default_group);
 		mpp_xml_set_int (child, "default_group", entry->id);
 	}
-	
+
 	for (l = list; l; l = l->next) {
-		mpp_write_group (parser, child, l->data); 
+		mpp_write_group (parser, child, l->data);
 	}
-	
+
 	/* Write resources. */
  	child = xmlNewChild (node, NULL, "resources",NULL);
 	list = mrp_project_get_resources (parser->project);
@@ -1008,14 +1008,14 @@ mpp_write_project (MrpParser *parser)
 	parser->last_id = 1;
 	for (l = list; l; l = l->next) {
 		GList *r_list;
-		mpp_hash_insert_resource (parser, l->data); 
+		mpp_hash_insert_resource (parser, l->data);
 		r_list = mrp_resource_get_assignments (MRP_RESOURCE (l->data));
-		assignments = g_list_concat (assignments, 
+		assignments = g_list_concat (assignments,
 					     g_list_copy (r_list));
 	}
 
 	for (l = list; l; l = l->next) {
-		mpp_write_resource (parser, child, l->data); 
+		mpp_write_resource (parser, child, l->data);
 	}
 
 	/* Write assignments. */
@@ -1034,12 +1034,12 @@ parser_build_xml_doc (MrpStorageMrproject  *module,
 		      GError              **error)
 {
 	MrpParser parser;
-	
+
 	g_return_val_if_fail (MRP_IS_STORAGE_MRPROJECT (module), FALSE);
 
 	/* We want indentation. */
 	xmlKeepBlanksDefault (0);
-	
+
 	memset (&parser, 0, sizeof (parser));
 
 	parser.project = module->project;
@@ -1069,7 +1069,7 @@ parser_build_xml_doc (MrpStorageMrproject  *module,
 	g_hash_table_destroy (parser.resource_hash);
 	g_hash_table_destroy (parser.day_hash);
 	g_hash_table_destroy (parser.calendar_hash);
-	
+
 	return parser.doc;
 }
 
@@ -1083,7 +1083,7 @@ mrp_parser_save (MrpStorageMrproject  *module,
 	gint       ret;
 	gboolean   file_exist;
 	xmlDocPtr  doc;
-	
+
 	g_return_val_if_fail (MRP_IS_STORAGE_MRPROJECT (module), FALSE);
 	g_return_val_if_fail (filename != NULL && filename[0] != 0, FALSE);
 
@@ -1092,16 +1092,16 @@ mrp_parser_save (MrpStorageMrproject  *module,
 	} else {
 		real_filename = g_strdup (filename);
 	}
-	
+
 	file_exist = g_file_test (
 		real_filename, G_FILE_TEST_EXISTS | G_FILE_TEST_IS_DIR);
-	
+
 	if (file_exist && !force) {
 		g_set_error (error,
 			     MRP_ERROR,
 			     MRP_ERROR_SAVE_FILE_EXIST,
 			     "%s", real_filename);
-		
+
 		g_free (real_filename);
 		return FALSE;
 	}
@@ -1124,7 +1124,7 @@ mrp_parser_save (MrpStorageMrproject  *module,
 
 		return FALSE;
 	}
-	
+
 	return TRUE;
 }
 
@@ -1136,7 +1136,7 @@ mrp_parser_to_xml (MrpStorageMrproject  *module,
 	xmlDocPtr  doc;
 	xmlChar   *buf;
 	int        len;
-	
+
 	g_return_val_if_fail (MRP_IS_STORAGE_MRPROJECT (module), FALSE);
 
 	doc = parser_build_xml_doc (module, error);
@@ -1149,16 +1149,16 @@ mrp_parser_to_xml (MrpStorageMrproject  *module,
 
 	*str = g_strdup (buf);
 	xmlFree (buf);
-	
+
 	if (len <= 0) {
 		g_set_error (error,
 			     MRP_ERROR,
 			     MRP_ERROR_SAVE_WRITE_FAILED,
 			     _("Could not create XML tree"));
-		
+
 		return FALSE;
 	}
-	
+
 	return TRUE;
 }
 
@@ -1221,8 +1221,8 @@ mpp_xml_set_task_type (xmlNodePtr node, const gchar *prop, MrpTaskType type)
 	default:
 		str = "normal";
 		break;
-	}		
-	
+	}
+
 	xmlSetProp (node, prop, str);
 }
 
@@ -1240,7 +1240,7 @@ mpp_xml_set_task_sched (xmlNodePtr node, const gchar *prop, MrpTaskSched sched)
 	default:
 		str = "fixed-work";
 		break;
-	}		
-	
+	}
+
 	xmlSetProp (node, prop, str);
 }

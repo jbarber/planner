@@ -283,14 +283,14 @@ usage_row_class_init (PlannerUsageRowClass * class)
                  g_param_spec_double ("height", NULL, NULL,
                                       -G_MAXDOUBLE, G_MAXDOUBLE, 0.0,
                                       (G_PARAM_READABLE | G_PARAM_WRITABLE)));
-	
+
         g_object_class_install_property
                 (gobject_class,
                  PROP_ASSIGNMENT,
                  g_param_spec_object ("assignment", NULL, NULL,
                                       MRP_TYPE_ASSIGNMENT,
                                       G_PARAM_READWRITE));
-	
+
         g_object_class_install_property
                 (gobject_class,
                  PROP_RESOURCE,
@@ -400,7 +400,7 @@ get_assignment_bounds (MrpAssignment *assign,
 {
         MrpTask *task;
         mrptime  t;
-	
+
         task = mrp_assignment_get_task (assign);
         t = mrp_task_get_work_start (task);
         *x_debut = t * scale;
@@ -445,7 +445,7 @@ recalc_bounds (PlannerUsageRow *row)
 	gdouble               x_debut, x_fin, x_debut_real;
 	gdouble               old_x, old_x_start, old_width;
 	gboolean              changed;
-	
+
 	item = GNOME_CANVAS_ITEM (row);
 
 	priv = row->priv;
@@ -464,13 +464,13 @@ recalc_bounds (PlannerUsageRow *row)
 	else {
 		width = 0;
 	}
-		
+
 	if (width > 0) {
 		width += TEXT_PADDING;
 	}
 
 	priv->text_width = width;
-    
+
 	if (priv->assignment) {
 		get_assignment_bounds (priv->assignment, priv->scale,
 				       &x_debut, &x_fin, &x_debut_real);
@@ -479,7 +479,7 @@ recalc_bounds (PlannerUsageRow *row)
 		get_resource_bounds (priv->resource, priv->scale, &x_debut,
 				     &x_fin, &x_debut_real);
 	}
-	
+
 	priv->x = x_debut;
 	priv->width = x_fin - x_debut;
 	priv->x_start = x_debut_real;
@@ -568,20 +568,20 @@ usage_row_set_property (GObject      *object,
                                                          "notify",
                                                          G_CALLBACK (usage_row_assignment_notify_cb),
                                                          row, 0);
-				
+
                                 g_signal_connect_object (tmp_task,
                                                          "notify",
                                                          G_CALLBACK (usage_row_task_notify_cb),
                                                          row, 0);
                         }
                 }
-                /*              
+                /*
                  * g_signal_connect_object (priv->resource,
                  * "assignment-added",
                  * G_CALLBACK (usage_row_res_assignment_added),
                  * row,
                  * 0);
-                 * 
+                 *
                  * g_signal_connect_object (priv->resource,
                  * "assignment-removed",
                  * G_CALLBACK (usage_row_res_assignment_removed),
@@ -701,13 +701,13 @@ usage_row_update_resources (PlannerUsageRow *row)
 	PlannerUsageRowPriv *priv;
 	gint                  units;
 	gchar                *units_string;
-    
+
 	priv = row->priv;
-	
+
 	units = mrp_assignment_get_units (priv->assignment);
 	units_string = g_strdup_printf ("%i%%", units);
 	pango_layout_set_text (priv->layout, units_string, -1);
-            
+
 	g_free (units_string);
 }
 
@@ -754,15 +754,15 @@ usage_row_realize (GnomeCanvasItem * item)
 		gnome_canvas_get_color (item->canvas, "LightSkyBlue3", &color_normal);
 		gnome_canvas_get_color (item->canvas, "#9ac7e0", &color_normal_light);
 		gnome_canvas_get_color (item->canvas, "#7da1b5", &color_normal_dark);
-		
+
 		gnome_canvas_get_color (item->canvas, "indian red", &color_overuse);
 		gnome_canvas_get_color (item->canvas, "#de6464", &color_overuse_light);
 		gnome_canvas_get_color (item->canvas, "#ba5454", &color_overuse_dark);
-		
+
 		gnome_canvas_get_color (item->canvas, "grey", &color_underuse);
 		gnome_canvas_get_color (item->canvas, "#d6d6d6", &color_underuse_light);
 		gnome_canvas_get_color (item->canvas, "#a8a8a8", &color_underuse_dark);
-		
+
 		gnome_canvas_get_color (item->canvas, "medium sea green", &color_free);
 		gnome_canvas_get_color (item->canvas, "#43c77e", &color_free_light);
 		gnome_canvas_get_color (item->canvas, "#359e64", &color_free_dark);
@@ -950,7 +950,7 @@ usage_row_draw_resource_ival (mrptime          start,
         cr_ystart = cs_ystart + 1;
         cr_xend = c_xend;
         cr_yend = cs_yend - 1;
-	
+
         /* Clip to the expose area */
 	r_xstart = MAX (c_xstart, 0);
         r_xend = MIN (c_xend, width);
@@ -1004,7 +1004,7 @@ usage_row_draw_resource_ival (mrptime          start,
         } else {
                 gdk_gc_set_foreground (priv->fill_gc, &color_overuse_light);
         }
-	
+
         //gdk_gc_set_foreground (priv->fill_gc, &color_high);
 
         /* Top of the shadow. */
@@ -1012,13 +1012,13 @@ usage_row_draw_resource_ival (mrptime          start,
                 gdk_draw_line (drawable, priv->fill_gc, r_xstart, rs_ystart,
                                r_xend, rs_ystart);
         }
-	
+
         /* Left of the shadow. */
         if (chunk & ROW_START && cs_xstart == rs_xstart) {
                 gdk_draw_line (drawable, priv->fill_gc, rs_xstart, rs_ystart,
                                rs_xstart, cs_yend);
         }
-	
+
 	if (units == 0) {
                 gdk_gc_set_foreground (priv->fill_gc, &color_free_dark);
         }
@@ -1030,7 +1030,7 @@ usage_row_draw_resource_ival (mrptime          start,
         } else {
                 gdk_gc_set_foreground (priv->fill_gc, &color_overuse_dark);
         }
-	
+
 	//gdk_gc_set_foreground (priv->fill_gc, &color_shadow);
 
         /* Bottom of the shadow. */
@@ -1038,7 +1038,7 @@ usage_row_draw_resource_ival (mrptime          start,
                 gdk_draw_line (drawable, priv->fill_gc, r_xstart, rs_yend,
                                r_xend, rs_yend);
         }
-	
+
         /* Right of the shadow. */
         if (chunk & ROW_END && cs_xend == rs_xend) {
                 gdk_draw_line (drawable, priv->fill_gc, rs_xend, rs_ystart,
@@ -1051,25 +1051,25 @@ usage_row_draw_resource_ival (mrptime          start,
 		gdk_draw_line (drawable, priv->fill_gc, c_xstart, rs_ystart, c_xstart,
                                rr_yend);
 	}
-	
+
         /* Top frame. */
         if (c_ystart == r_ystart) {
                 gdk_draw_line (drawable, priv->frame_gc, r_xstart, r_ystart, r_xend,
                                r_ystart);
 	}
-	
+
         /* Bottom frame. */
         if (c_yend == r_yend) {
                 gdk_draw_line (drawable, priv->frame_gc, r_xstart, r_yend, r_xend,
                                r_yend);
 	}
-	
+
         /* Left frame. */
         if (chunk & ROW_START && c_xstart == r_xstart) {
                 gdk_draw_line (drawable, priv->frame_gc, r_xstart, r_ystart,
                                r_xstart, r_yend);
 	}
-	
+
         /* Right frame. */
         if (chunk & ROW_END && c_xend == r_xend) {
                 gdk_draw_line (drawable, priv->frame_gc, r_xend, r_ystart, r_xend,
@@ -1169,7 +1169,7 @@ usage_row_draw_resource (PlannerUsageRow *row,
         g_list_free (dates);
 
         if (!(chunk & ROW_END)) {
-		chunk |= ROW_END;	
+		chunk |= ROW_END;
                 usage_row_draw_resource_ival (previous_time,
                                                finish,
                                                units,
@@ -1246,11 +1246,11 @@ usage_row_draw_assignment (PlannerUsageRow *row,
 
         if (!summary) {
                 percent_complete = mrp_task_get_percent_complete (task);
-		
+
 		complete_width =  floor ((cx2 - cx1) * (percent_complete / 100.0) + 0.5);
                 complete_x2 = MIN (cx1 + complete_width, rx2);
         }
-	
+
         if (rx1 <= rx2) {
                 if (complete_width > 0) {
                         gnome_canvas_set_stipple_origin (item->canvas,
@@ -1308,7 +1308,7 @@ usage_row_draw_assignment (PlannerUsageRow *row,
                                        priv->frame_gc, rx2, cy1, rx2, cy2);
                 }
         }
-        
+
         rx1 = MAX (cx2 + TEXT_PADDING, 0);
         rx2 = MIN (cx2 + TEXT_PADDING + priv->text_width, width);
 
@@ -1464,7 +1464,7 @@ usage_row_assignment_notify_cb (MrpAssignment    *assignment,
         if (!recalc_bounds (row)) {
 		return;
 	}
-	
+
         usage_row_geometry_changed (row);
         gnome_canvas_item_request_update (GNOME_CANVAS_ITEM (row));
 }
@@ -1487,7 +1487,7 @@ usage_row_task_notify_cb (MrpTask          *task,
         if (!recalc_bounds (row)) {
 		return;
 	}
-	
+
         usage_row_geometry_changed (row);
         gnome_canvas_item_request_update (GNOME_CANVAS_ITEM (row));
 }
@@ -1551,7 +1551,7 @@ usage_row_geometry_changed (PlannerUsageRow * row)
         if (row->priv->assignment) {
 		usage_row_update_resources (row);
         }
-        
+
         x1 = row->priv->x;
         y1 = row->priv->y;
         x2 = x1 + row->priv->width;
@@ -1578,7 +1578,7 @@ usage_row_event (GnomeCanvasItem *item, GdkEvent *event)
 	canvas_widget = GTK_WIDGET (item->canvas);
 	chart = g_object_get_data (G_OBJECT (item->canvas), "chart");
 	tree = planner_usage_chart_get_view (chart);
-	
+
 	switch (event->type) {
 	case GDK_BUTTON_PRESS:
 		if (priv->assignment != NULL) {
@@ -1597,10 +1597,10 @@ usage_row_event (GnomeCanvasItem *item, GdkEvent *event)
 
 		tree_view = GTK_TREE_VIEW (tree);
 		selection = gtk_tree_view_get_selection (tree_view);
-		
-		gtk_tree_model_get_iter (gtk_tree_view_get_model (tree_view), 
+
+		gtk_tree_model_get_iter (gtk_tree_view_get_model (tree_view),
 					 &iter, path);
-		
+
 		if (!gtk_tree_selection_iter_is_selected (selection, &iter)) {
 			gtk_tree_selection_unselect_all (selection);
 			gtk_tree_selection_select_path (selection, path);
@@ -1615,16 +1615,16 @@ usage_row_event (GnomeCanvasItem *item, GdkEvent *event)
 			}
 			else if (priv->resource != NULL) {
 				planner_usage_tree_edit_resource (tree);
-			}	
+			}
 		}
 
 		break;
-		
+
 	default:
 		break;
 	}
-	
-			
+
+
 
 	if (TRUE) {
 		return TRUE;

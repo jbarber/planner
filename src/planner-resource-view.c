@@ -299,7 +299,7 @@ typedef struct {
 	PlannerCmd   base;
 
 	MrpResource *resource;
-	gchar       *property;  
+	gchar       *property;
 	GValue      *value;
 	GValue      *old_value;
 } ResourceCmdEditProperty;
@@ -308,7 +308,7 @@ typedef struct {
 	PlannerCmd    base;
 
 	MrpResource  *resource;
-	MrpProperty  *property;  
+	MrpProperty  *property;
 	GValue       *value;
 	GValue       *old_value;
 } ResourceCmdEditCustomProperty;
@@ -390,7 +390,7 @@ static void
 resource_view_setup (PlannerView *view, PlannerWindow *main_window)
 {
 	PlannerResourceViewPriv *priv;
-	
+
 	priv = PLANNER_RESOURCE_VIEW (view)->priv;
 
 	priv->property_to_column = g_hash_table_new (NULL, NULL);
@@ -428,11 +428,11 @@ static const gchar *
 resource_view_get_icon (PlannerView *view)
 {
 	static gchar *filename = NULL;
-	
+
 	if (!filename) {
 		filename = mrp_paths_get_image_dir ("resources.png");
 	}
-	
+
 	return filename;
 }
 
@@ -489,10 +489,10 @@ resource_view_get_widget (PlannerView *view)
 
 	project = planner_window_get_project (view->main_window);
 
- 	g_signal_connect (project,
- 			  "loaded",
- 			  G_CALLBACK (resource_view_project_loaded_cb),
- 			  view);
+	g_signal_connect (project,
+			  "loaded",
+			  G_CALLBACK (resource_view_project_loaded_cb),
+			  view);
 
 	g_signal_connect (project,
 			  "property_added",
@@ -503,34 +503,34 @@ resource_view_get_widget (PlannerView *view)
 			  "property_removed",
 			  G_CALLBACK (resource_view_property_removed),
 			  view);
-	
-	g_signal_connect (project, 
+
+	g_signal_connect (project,
 			  "property_changed",
 			  G_CALLBACK (resource_view_property_changed),
 			  view);
 
-	g_signal_connect (project, 
+	g_signal_connect (project,
 			  "resource_added",
-			  G_CALLBACK (resource_view_resource_added_cb), 
+			  G_CALLBACK (resource_view_resource_added_cb),
 			  view);
 
-	g_signal_connect (project, 
-			  "resource_removed", 
-			  G_CALLBACK (resource_view_resource_removed_cb), 
+	g_signal_connect (project,
+			  "resource_removed",
+			  G_CALLBACK (resource_view_resource_removed_cb),
 			  view);
 
- 	model = GTK_TREE_MODEL (gtk_list_store_new (NUM_OF_COLS, 
+	model = GTK_TREE_MODEL (gtk_list_store_new (NUM_OF_COLS,
 						    G_TYPE_POINTER));
 
- 	resource_table = gtk_tree_view_new_with_model (model);
+	resource_table = gtk_tree_view_new_with_model (model);
 
 	priv->tree_view = GTK_TREE_VIEW (resource_table);
 
 	resource_view_setup_tree_view (view);
 
-	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (resource_table));	
+	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (resource_table));
 	gtk_tree_selection_set_mode (selection, GTK_SELECTION_MULTIPLE);
-	
+
 	g_signal_connect (selection, "changed",
 			  G_CALLBACK (resource_view_selection_changed_cb),
 			  view);
@@ -542,7 +542,7 @@ resource_view_get_widget (PlannerView *view)
 	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw),
 					GTK_POLICY_AUTOMATIC,
 					GTK_POLICY_AUTOMATIC);
-	
+
 	gtk_container_add (GTK_CONTAINER (sw), resource_table);
 	gtk_container_add (GTK_CONTAINER (frame), sw);
 
@@ -553,10 +553,10 @@ static void
 resource_view_print_init (PlannerView *view, PlannerPrintJob *job)
 {
 	PlannerResourceViewPriv *priv;
-	
+
 	priv = PLANNER_RESOURCE_VIEW (view)->priv;
-	
-	priv->print_sheet = planner_table_print_sheet_new (view, job, 
+
+	priv->print_sheet = planner_table_print_sheet_new (view, job,
 							   priv->tree_view);
 }
 
@@ -588,7 +588,7 @@ typedef struct {
 } FindResourceData;
 
 
-static void 
+static void
 resource_view_free_find_resource_data (FindResourceData *data)
 {
 	if (data->found_path) {
@@ -597,7 +597,7 @@ resource_view_free_find_resource_data (FindResourceData *data)
 	if (data->found_iter) {
 		gtk_tree_iter_free (data->found_iter);
 	}
-	
+
 	g_free (data);
 }
 
@@ -608,7 +608,7 @@ resource_view_foreach_find_resource_func (GtkTreeModel     *model,
 					  FindResourceData *data)
 {
 	MrpResource *resource;
-	
+
 	gtk_tree_model_get (model, iter,
 			    COL_RESOURCE, &resource,
 			    -1);
@@ -618,7 +618,7 @@ resource_view_foreach_find_resource_func (GtkTreeModel     *model,
 		data->found_iter = gtk_tree_iter_copy (iter);
 		return TRUE;
 	}
-	
+
 	return FALSE;
 }
 
@@ -627,7 +627,7 @@ resource_view_find_resource (PlannerView *view, MrpResource *resource)
 {
 	FindResourceData *data;
 	GtkTreeModel     *model;
-	
+
 	data = g_new0 (FindResourceData, 1);
 	data->resource = resource;
 	data->found_path = NULL;
@@ -641,7 +641,7 @@ resource_view_find_resource (PlannerView *view, MrpResource *resource)
 	if (data->found_path) {
 		return data;
 	}
-	
+
 	g_free (data);
 	return NULL;
 }
@@ -657,10 +657,10 @@ resource_view_resource_notify_cb (MrpResource *resource,
 	model = gtk_tree_view_get_model (PLANNER_RESOURCE_VIEW (view)->priv->tree_view);
 
 	data = resource_view_find_resource (view, resource);
-	
+
 	if (data) {
-		gtk_tree_model_row_changed (GTK_TREE_MODEL (model), 
-					    data->found_path, 
+		gtk_tree_model_row_changed (GTK_TREE_MODEL (model),
+					    data->found_path,
 					    data->found_iter);
 
 		resource_view_free_find_resource_data (data);
@@ -679,10 +679,10 @@ resource_view_resource_prop_changed_cb (MrpResource *resource,
 	model = gtk_tree_view_get_model (PLANNER_RESOURCE_VIEW (view)->priv->tree_view);
 
 	data = resource_view_find_resource (view, resource);
-	
+
 	if (data) {
-		gtk_tree_model_row_changed (GTK_TREE_MODEL (model), 
-					    data->found_path, 
+		gtk_tree_model_row_changed (GTK_TREE_MODEL (model),
+					    data->found_path,
 					    data->found_iter);
 
 		resource_view_free_find_resource_data (data);
@@ -690,17 +690,17 @@ resource_view_resource_prop_changed_cb (MrpResource *resource,
 }
 
 static void
-resource_view_resource_added_cb (MrpProject  *project, 
+resource_view_resource_added_cb (MrpProject  *project,
 				 MrpResource *resource,
 				 PlannerView *view)
 {
 	GtkTreeModel *model;
 	GtkTreeIter   iter;
-	
+
 	model = gtk_tree_view_get_model (PLANNER_RESOURCE_VIEW (view)->priv->tree_view);
-	
+
 	gtk_list_store_append (GTK_LIST_STORE (model), &iter);
-	
+
 	gtk_list_store_set (GTK_LIST_STORE (model), &iter,
 			    COL_RESOURCE, g_object_ref (resource),
 			    -1);
@@ -714,33 +714,33 @@ resource_view_resource_added_cb (MrpProject  *project,
 }
 
 static void
-resource_view_resource_removed_cb (MrpProject  *project, 
+resource_view_resource_removed_cb (MrpProject  *project,
 				   MrpResource *resource,
 				   PlannerView *view)
 {
 	GtkTreeModel     *model;
 	FindResourceData *data;
 
-	g_signal_handlers_disconnect_by_func (resource, 
+	g_signal_handlers_disconnect_by_func (resource,
 					      resource_view_resource_notify_cb,
 					      view);
-	g_signal_handlers_disconnect_by_func (resource, 
+	g_signal_handlers_disconnect_by_func (resource,
 					      resource_view_resource_prop_changed_cb,
 					      view);
 
 	model = gtk_tree_view_get_model (PLANNER_RESOURCE_VIEW (view)->priv->tree_view);
-	
+
 	data = resource_view_find_resource (view, resource);
 
 	if (data) {
 		gtk_widget_grab_focus (GTK_WIDGET (PLANNER_RESOURCE_VIEW (view)->priv->tree_view));
-		gtk_list_store_remove (GTK_LIST_STORE (model), 
+		gtk_list_store_remove (GTK_LIST_STORE (model),
 				       data->found_iter);
 		resource_view_free_find_resource_data (data);
 	}
 }
 
-static const gchar * 
+static const gchar *
 resource_view_get_type_string (MrpResourceType type)
 {
 	switch (type) {
@@ -767,7 +767,7 @@ resource_view_get_type_enum (const gchar *type_str)
 	gchar          *work     = g_utf8_casefold (_("Work"), -1);
 	gchar          *material = g_utf8_casefold (_("Material"), -1);
 	MrpResourceType type;
-	
+
 	if (!g_utf8_collate (work, in_str)) {
 		type = MRP_RESOURCE_TYPE_WORK;
 	}
@@ -780,14 +780,14 @@ resource_view_get_type_enum (const gchar *type_str)
 	g_free (in_str);
 	g_free (work);
 	g_free (material);
-	
+
 	return type;
 }
 #endif
 
 /* Command callbacks. */
 
-static void   
+static void
 resource_view_popup_insert_resource_cb  (gpointer   callback_data,
 					 guint      action,
 					 GtkWidget *widget)
@@ -795,15 +795,15 @@ resource_view_popup_insert_resource_cb  (gpointer   callback_data,
 	resource_view_insert_resource_cb (NULL, callback_data);
 }
 
-static void   
+static void
 resource_view_popup_remove_resource_cb   (gpointer   callback_data,
 					  guint      action,
 					  GtkWidget *widget)
 {
-	resource_view_remove_resource_cb (NULL, callback_data);	
+	resource_view_remove_resource_cb (NULL, callback_data);
 }
 
-static void   
+static void
 resource_view_popup_edit_resource_cb     (gpointer   callback_data,
 					  guint      action,
 					  GtkWidget *widget)
@@ -830,17 +830,17 @@ resource_view_insert_resource_cb (GtkAction *action,
 	if (!GTK_WIDGET_HAS_FOCUS (priv->tree_view)) {
 		gtk_widget_grab_focus (GTK_WIDGET (priv->tree_view));
 	}
-	
+
 	find_data = resource_view_find_resource (view, cmd->resource);
 	if (find_data) {
 		model = gtk_tree_view_get_model (priv->tree_view);
 		path = gtk_tree_model_get_path (model, find_data->found_iter);
-		
+
 		gtk_tree_view_set_cursor (priv->tree_view,
 					  path,
 					  gtk_tree_view_get_column (priv->tree_view, 0),
 					  FALSE);
-	
+
 		gtk_tree_path_free (path);
 
 		resource_view_free_find_resource_data (find_data);
@@ -859,7 +859,7 @@ resource_view_insert_resources_cb (GtkAction *action,
 	priv = PLANNER_RESOURCE_VIEW (view)->priv;
 
 	project = planner_window_get_project (view->main_window);
-	
+
 	/* We only want one of these dialogs at a time. */
 	if (priv->resource_input_dialog) {
 		gtk_window_present (GTK_WINDOW (priv->resource_input_dialog));
@@ -870,7 +870,7 @@ resource_view_insert_resources_cb (GtkAction *action,
 
 	gtk_window_set_transient_for (GTK_WINDOW (priv->resource_input_dialog),
 				      GTK_WINDOW (view->main_window));
-	
+
 	gtk_widget_show (priv->resource_input_dialog);
 
 	g_object_add_weak_pointer (G_OBJECT (priv->resource_input_dialog),
@@ -888,7 +888,7 @@ resource_cmd_remove_do (PlannerCmd *cmd_base)
 	assignments = mrp_resource_get_assignments (cmd->resource);
 
 	for (l = assignments; l; l = l->next) {
-		cmd->assignments = g_list_append (cmd->assignments, 
+		cmd->assignments = g_list_append (cmd->assignments,
 						  g_object_ref (l->data));
 	}
 
@@ -902,7 +902,7 @@ resource_cmd_remove_undo (PlannerCmd *cmd_base)
 {
 	ResourceCmdRemove *cmd;
 	GList             *l;
-	
+
 	cmd = (ResourceCmdRemove*) cmd_base;
 
 	mrp_project_add_resource (cmd->project, cmd->resource);
@@ -934,7 +934,7 @@ resource_cmd_remove_free (PlannerCmd *cmd_base)
 }
 
 static PlannerCmd *
-resource_cmd_remove (PlannerView *view, 
+resource_cmd_remove (PlannerView *view,
 		     MrpResource *resource)
 {
 	PlannerCmd          *cmd_base;
@@ -969,11 +969,11 @@ resource_view_remove_resource_cb (GtkAction *action,
 
 	view = PLANNER_VIEW (data);
 	priv = PLANNER_RESOURCE_VIEW (view)->priv;
-	
+
 	project = planner_window_get_project (view->main_window);
 
 	list = resource_view_selection_get_list (view);
-	
+
 	for (node = list; node; node = node->next) {
 		cmd = (ResourceCmdRemove*) resource_cmd_remove (view, MRP_RESOURCE (node->data));
 	}
@@ -990,20 +990,20 @@ resource_view_edit_resource_cb (GtkAction *action,
 	PlannerView             *view;
 	PlannerResourceViewPriv *priv;
 	MrpResource             *resource;
-	GtkWidget               *dialog; 
+	GtkWidget               *dialog;
 	GList                   *list;
 
 	view = PLANNER_VIEW (data);
-	priv = PLANNER_RESOURCE_VIEW (view)->priv;       
+	priv = PLANNER_RESOURCE_VIEW (view)->priv;
 
 	list = resource_view_selection_get_list (view);
-	
+
 	resource = MRP_RESOURCE (list->data);
 	if (resource) {
 		dialog = planner_resource_dialog_new (view->main_window, resource);
 		gtk_widget_show (dialog);
 	}
-	
+
 	g_list_free (list);
 }
 
@@ -1032,7 +1032,7 @@ resource_view_select_all_cb (GtkAction *action,
 
 	view = PLANNER_VIEW (data);
 	priv = PLANNER_RESOURCE_VIEW (view)->priv;
-	
+
 	selection = gtk_tree_view_get_selection (priv->tree_view);
 
 	gtk_tree_selection_select_all (selection);
@@ -1047,20 +1047,20 @@ resource_view_edit_custom_props_cb (GtkAction *action,
 	MrpProject  *project;
 
 	view = PLANNER_VIEW (data);
-	
+
 	project = planner_window_get_project (view->main_window);
-	
+
 	dialog = planner_property_dialog_new (view->main_window,
 						project,
 					      MRP_TYPE_RESOURCE,
 					      _("Edit custom resource properties"));
-	
+
 	gtk_window_set_default_size (GTK_WINDOW (dialog), 500, 300);
 	gtk_widget_show (dialog);
 }
 
 static void
-resource_view_update_ui (PlannerView *view) 
+resource_view_update_ui (PlannerView *view)
 {
 	PlannerResourceViewPriv *priv;
 	GList                   *list;
@@ -1068,27 +1068,27 @@ resource_view_update_ui (PlannerView *view)
 
 	priv = PLANNER_RESOURCE_VIEW (view)->priv;
 
-	list = resource_view_selection_get_list (view);	
+	list = resource_view_selection_get_list (view);
 	value = (list != NULL);
 	g_list_free (list);
 
 	if (!view->activated) {
 		return;
 	}
-	
+
 	g_object_set (gtk_action_group_get_action (priv->actions, "RemoveResource"),
-		      "sensitive", value, 
+		      "sensitive", value,
 		      NULL);
 	g_object_set (gtk_action_group_get_action (priv->actions, "EditResource"),
-		      "sensitive", value, 
+		      "sensitive", value,
 		      NULL);
 }
 
-static void 
+static void
 resource_view_selection_changed_cb (GtkTreeSelection *selection, PlannerView *view)
 {
-	
-	resource_view_update_ui (view);	
+
+	resource_view_update_ui (view);
 }
 
 static void
@@ -1135,7 +1135,7 @@ resource_view_button_press_event (GtkTreeView    *tv,
 			gtk_widget_set_sensitive (
 				gtk_item_factory_get_widget_by_action (factory, POPUP_EDIT), FALSE);
 		}
-		
+
 		gtk_item_factory_popup (factory, event->x_root, event->y_root,
 					event->button, event->time);
 		return TRUE;
@@ -1152,14 +1152,14 @@ resource_view_setup_tree_view (PlannerView *view)
 	GtkCellRenderer   *cell;
 
 	tree_view = GTK_TREE_VIEW (PLANNER_RESOURCE_VIEW (view)->priv->tree_view);
-	
+
 	gtk_tree_view_set_rules_hint (tree_view, TRUE);
 
 	g_signal_connect (tree_view,
 			  "popup_menu",
 			  G_CALLBACK (resource_view_popup_menu),
 			  view);
-	
+
 	g_signal_connect (tree_view,
 			  "button_press_event",
 			  G_CALLBACK (resource_view_button_press_event),
@@ -1174,13 +1174,13 @@ resource_view_setup_tree_view (PlannerView *view)
 	gtk_tree_view_column_set_min_width (col, 150);
 	gtk_tree_view_column_set_sizing (col, GTK_TREE_VIEW_COLUMN_FIXED);
 
-	gtk_tree_view_column_set_cell_data_func (col, cell, 
+	gtk_tree_view_column_set_cell_data_func (col, cell,
 						 resource_view_name_data_func,
 						 NULL, NULL);
 	g_object_set_data (G_OBJECT (col),
 			   "data-func", resource_view_name_data_func);
 	g_object_set_data (G_OBJECT (col), "id", "name");
-	
+
 	g_signal_connect (cell,
 			  "edited",
 			  G_CALLBACK (resource_view_cell_name_edited),
@@ -1199,8 +1199,8 @@ resource_view_setup_tree_view (PlannerView *view)
 	gtk_tree_view_column_set_resizable (col, TRUE);
 	gtk_tree_view_column_set_sizing (col, GTK_TREE_VIEW_COLUMN_FIXED);
 	gtk_tree_view_column_set_min_width (col, 75);
-	
-	gtk_tree_view_column_set_cell_data_func (col, cell, 
+
+	gtk_tree_view_column_set_cell_data_func (col, cell,
 						 resource_view_short_name_data_func,
 						 NULL, NULL);
 	g_object_set_data (G_OBJECT (col),
@@ -1212,7 +1212,7 @@ resource_view_setup_tree_view (PlannerView *view)
 			  "notify::width",
 			  G_CALLBACK (resource_view_column_notify_width_cb),
 			  view);
-	
+
 	g_signal_connect (cell,
 			  "edited",
 			  G_CALLBACK (resource_view_cell_short_name_edited),
@@ -1224,14 +1224,14 @@ resource_view_setup_tree_view (PlannerView *view)
 
 	col = gtk_tree_view_column_new_with_attributes (_("Type"), cell, NULL);
 	gtk_tree_view_column_set_resizable (col, TRUE);
-	
-	gtk_tree_view_column_set_cell_data_func (col, cell, 
+
+	gtk_tree_view_column_set_cell_data_func (col, cell,
 						 resource_view_type_data_func,
 						 NULL, NULL);
 	g_object_set_data (G_OBJECT (col),
 			   "data-func", resource_view_type_data_func);
 	g_object_set_data (G_OBJECT (col), "id", "type");
-	
+
 	gtk_tree_view_append_column (tree_view, col);
 	g_signal_connect (col,
 			  "notify::width",
@@ -1245,17 +1245,17 @@ resource_view_setup_tree_view (PlannerView *view)
 	g_signal_connect (cell,
 			  "show-popup",
 			  G_CALLBACK (resource_view_cell_type_show_popup),
-			  view); 
+			  view);
 
 	/* Group */
 	cell = planner_cell_renderer_list_new ();
 	g_object_set (cell, "editable", TRUE, NULL);
 
-	col = gtk_tree_view_column_new_with_attributes (_("Group"), 
+	col = gtk_tree_view_column_new_with_attributes (_("Group"),
 							cell, NULL);
 	gtk_tree_view_column_set_resizable (col, TRUE);
-	
-	gtk_tree_view_column_set_cell_data_func (col, cell, 
+
+	gtk_tree_view_column_set_cell_data_func (col, cell,
 						 resource_view_group_data_func,
 						 NULL, NULL);
 	g_object_set_data (G_OBJECT (col),
@@ -1275,11 +1275,11 @@ resource_view_setup_tree_view (PlannerView *view)
 	g_signal_connect (cell,
 			  "show-popup",
 			  G_CALLBACK (resource_view_cell_group_show_popup),
-			  view); 
+			  view);
 	g_signal_connect_after (cell,
 				"hide-popup",
 				G_CALLBACK (resource_view_cell_group_hide_popup),
-				view); 
+				view);
 
 	/* Email */
 	cell = gtk_cell_renderer_text_new ();
@@ -1289,8 +1289,8 @@ resource_view_setup_tree_view (PlannerView *view)
 							cell, NULL);
 	gtk_tree_view_column_set_resizable (col, TRUE);
 	gtk_tree_view_column_set_min_width (col, 150);
-	
-	gtk_tree_view_column_set_cell_data_func (col, cell, 
+
+	gtk_tree_view_column_set_cell_data_func (col, cell,
 						 resource_view_email_data_func,
 						 NULL, NULL);
 	g_object_set_data (G_OBJECT (col),
@@ -1302,7 +1302,7 @@ resource_view_setup_tree_view (PlannerView *view)
 			  "notify::width",
 			  G_CALLBACK (resource_view_column_notify_width_cb),
 			  view);
-	
+
 	g_signal_connect (cell,
 			  "edited",
 			  G_CALLBACK (resource_view_cell_email_edited),
@@ -1316,20 +1316,20 @@ resource_view_setup_tree_view (PlannerView *view)
 							cell, NULL);
 	gtk_tree_view_column_set_resizable (col, TRUE);
 	/*gtk_tree_view_column_set_min_width (col, 150);*/
-	
-	gtk_tree_view_column_set_cell_data_func (col, cell, 
+
+	gtk_tree_view_column_set_cell_data_func (col, cell,
 						 resource_view_cost_data_func,
 						 NULL, NULL);
 	g_object_set_data (G_OBJECT (col),
 			   "data-func", resource_view_cost_data_func);
 	g_object_set_data (G_OBJECT (col), "id", "cost");
-	
+
 	gtk_tree_view_append_column (tree_view, col);
 	g_signal_connect (col,
 			  "notify::width",
 			  G_CALLBACK (resource_view_column_notify_width_cb),
 			  view);
-	
+
 	g_signal_connect (cell,
 			  "edited",
 			  G_CALLBACK (resource_view_cell_cost_edited),
@@ -1337,10 +1337,10 @@ resource_view_setup_tree_view (PlannerView *view)
 
 	/*
 	project = planner_window_get_project (view->main_window);
-	properties = mrp_project_get_properties_from_type (project, 
+	properties = mrp_project_get_properties_from_type (project,
 							   MRP_TYPE_RESOURCE);
 
-	for (l = properties; l; l = l->next) {	
+	for (l = properties; l; l = l->next) {
 		resource_view_property_added (project, MRP_TYPE_RESOURCE, l->data, view);
 	}
 	*/
@@ -1351,7 +1351,7 @@ resource_view_setup_tree_view (PlannerView *view)
 			  "columns-changed",
 			  G_CALLBACK (resource_view_tree_view_columns_changed_cb),
 			  view);
-	
+
 	g_signal_connect (tree_view,
 			  "destroy",
 			  G_CALLBACK (resource_view_tree_view_destroy_cb),
@@ -1432,7 +1432,7 @@ resource_cmd_edit_property (PlannerView  *view,
 			       cmd->property,
 			       cmd->old_value);
 
-	/* FIXME: if old and new value are the same, do nothing 
+	/* FIXME: if old and new value are the same, do nothing
 	   How we can compare values?
 	*/
 
@@ -1513,7 +1513,7 @@ resource_cmd_edit_custom_property (PlannerView  *view,
 				 cmd->property,
 				 cmd->old_value);
 
-	/* FIXME: if old and new value are the same, do nothing 
+	/* FIXME: if old and new value are the same, do nothing
 	   How we can compare values?
 	*/
 
@@ -1535,20 +1535,20 @@ resource_view_cell_name_edited (GtkCellRendererText *cell,
 	GtkTreeView      *tree_view;
 	GtkTreeModel     *model;
 	GtkTreePath      *path;
-	GtkTreeIter       iter;	
+	GtkTreeIter       iter;
 	GValue            value = { 0 };
-	
+
 	view = PLANNER_VIEW (user_data);
-	
+
 	tree_view = PLANNER_RESOURCE_VIEW (view)->priv->tree_view;
 	model = gtk_tree_view_get_model (tree_view);
 
 	path = gtk_tree_path_new_from_string (path_string);
-	
+
 	gtk_tree_model_get_iter (model, &iter, path);
 
 	gtk_tree_model_get (model, &iter, COL_RESOURCE, &resource, -1);
-	
+
 	g_value_init (&value, G_TYPE_STRING);
 	g_value_set_string (&value, new_text);
 	cmd = resource_cmd_edit_property (view, resource, "name", &value);
@@ -1571,19 +1571,19 @@ resource_view_cell_short_name_edited (GtkCellRendererText *cell,
 	GtkTreePath         *path;
 	GtkTreeIter          iter;
 	GValue               value = { 0 };
-	
+
 	view = PLANNER_RESOURCE_VIEW (user_data);
-	
+
 	tree_view = view->priv->tree_view;
-	
+
 	model = gtk_tree_view_get_model (tree_view);
 
 	path = gtk_tree_path_new_from_string (path_string);
-	
+
 	gtk_tree_model_get_iter (model, &iter, path);
 
 	gtk_tree_model_get (model, &iter, COL_RESOURCE, &resource, -1);
-	
+
 	g_value_init (&value, G_TYPE_STRING);
 	g_value_set_string (&value, new_text);
 	cmd = resource_cmd_edit_property (PLANNER_VIEW (view), resource, "short_name", &value);
@@ -1607,19 +1607,19 @@ resource_view_cell_email_edited (GtkCellRendererText *cell,
 	GtkTreePath      *path;
 	GtkTreeIter       iter;
 	GValue            value = { 0 };
-	
+
 	view = PLANNER_VIEW (user_data);
-	
+
 	tree_view = PLANNER_RESOURCE_VIEW (view)->priv->tree_view;
-	
+
 	model = gtk_tree_view_get_model (tree_view);
 
 	path = gtk_tree_path_new_from_string (path_string);
-	
+
 	gtk_tree_model_get_iter (model, &iter, path);
 
 	gtk_tree_model_get (model, &iter, COL_RESOURCE, &resource, -1);
-	
+
 	g_value_init (&value, G_TYPE_STRING);
 	g_value_set_string (&value, new_text);
 	cmd = resource_cmd_edit_property (view, resource, "email", &value);
@@ -1643,19 +1643,19 @@ resource_view_cell_cost_edited (GtkCellRendererText *cell,
 	GtkTreeIter   iter;
 	GValue        value = { 0 };
 	gfloat        fvalue;
-	
+
 	view = PLANNER_VIEW (user_data);
-	
+
 	tree_view = PLANNER_RESOURCE_VIEW (view)->priv->tree_view;
-	
+
 	model = gtk_tree_view_get_model (tree_view);
 
 	path = gtk_tree_path_new_from_string (path_string);
-	
+
 	gtk_tree_model_get_iter (model, &iter, path);
 
 	gtk_tree_model_get (model, &iter, COL_RESOURCE, &resource, -1);
-	
+
 	fvalue = planner_parse_float (new_text);
 	g_value_init (&value, G_TYPE_FLOAT);
 	g_value_set_float (&value, fvalue);
@@ -1682,22 +1682,22 @@ resource_view_cell_type_edited (PlannerCellRendererList *cell,
 	GValue            value = { 0 };
 
 	view = PLANNER_VIEW (user_data);
-	
+
 	tree_view = PLANNER_RESOURCE_VIEW (view)->priv->tree_view;
-	
+
 	model = gtk_tree_view_get_model (tree_view);
 
 	path = gtk_tree_path_new_from_string (path_string);
-	
+
 	gtk_tree_model_get_iter (model, &iter, path);
 
 	gtk_tree_model_get (model, &iter, COL_RESOURCE, &resource, -1);
-	
+
 	if (cell->selected_index == 0) {
 		type = MRP_RESOURCE_TYPE_WORK;
 	} else {
 		type = MRP_RESOURCE_TYPE_MATERIAL;
-	}		
+	}
 
 	g_value_init (&value, G_TYPE_INT);
 	g_value_set_int (&value, type);
@@ -1723,12 +1723,12 @@ resource_view_cell_type_show_popup (PlannerCellRendererList *cell,
 	MrpResource      *resource;
 	GList            *list;
 	MrpResourceType   type;
-	
+
 	tree_view = GTK_TREE_VIEW (PLANNER_RESOURCE_VIEW (view)->priv->tree_view);
 	model = gtk_tree_view_get_model (tree_view);
 
 	path = gtk_tree_path_new_from_string (path_string);
-	
+
 	gtk_tree_model_get_iter (model, &iter, path);
 
 	gtk_tree_model_get (model, &iter, COL_RESOURCE, &resource, -1);
@@ -1736,7 +1736,7 @@ resource_view_cell_type_show_popup (PlannerCellRendererList *cell,
 	list = NULL;
 	list = g_list_append (list, g_strdup (_("Work")));
 	list = g_list_append (list, g_strdup (_("Material")));
-	
+
 	cell->list = list;
 
 	mrp_object_get (resource, "type", &type, NULL);
@@ -1768,17 +1768,17 @@ resource_view_cell_group_edited (PlannerCellRendererList *cell,
 	GValue            value = { 0 };
 
 	view = PLANNER_VIEW (user_data);
-	
+
 	tree_view = PLANNER_RESOURCE_VIEW (view)->priv->tree_view;
-	
+
 	model = gtk_tree_view_get_model (tree_view);
 
 	path = gtk_tree_path_new_from_string (path_string);
-	
+
 	gtk_tree_model_get_iter (model, &iter, path);
 
 	gtk_tree_model_get (model, &iter, COL_RESOURCE, &resource, -1);
-	
+
 	list = g_list_nth (cell->user_data, cell->selected_index);
 	if (list == NULL) {
 		/* We should probably parse the string here and set
@@ -1786,28 +1786,28 @@ resource_view_cell_group_edited (PlannerCellRendererList *cell,
 		 */
 		return;
 	}
-	
-	group = list->data; 
+
+	group = list->data;
 
 	g_value_init (&value, MRP_TYPE_GROUP);
 	g_value_set_object (&value, group);
-	
+
 	cmd = resource_cmd_edit_property (view, resource, "group", &value);
 	g_value_unset (&value);
-		
+
 	gtk_tree_path_free (path);
 }
 
 static GValue
 resource_view_custom_property_set_value (MrpProperty *property,
-					 gchar       *new_text) 
+					 gchar       *new_text)
 {
 	GValue              value = { 0 };
 	MrpPropertyType     type;
 	gfloat              fvalue;
 
 	/* FIXME: implement mrp_object_set_property like
-	 * g_object_set_property that takes a GValue. 
+	 * g_object_set_property that takes a GValue.
 	 */
 	type = mrp_property_get_property_type (property);
 
@@ -1835,7 +1835,7 @@ resource_view_custom_property_set_value (MrpProperty *property,
 		g_value_set_int (&value, atoi (new_text) *8*60*60);
 
 		break;
-		
+
 
 	case MRP_PROPERTY_TYPE_DATE:
 
@@ -1845,8 +1845,8 @@ resource_view_custom_property_set_value (MrpProperty *property,
 		g_value_init (&value, G_TYPE_FLOAT);
 		g_value_set_float (&value, fvalue);
 
-		break;	
-				
+		break;
+
 	default:
 		g_assert_not_reached ();
 		break;
@@ -1855,7 +1855,7 @@ resource_view_custom_property_set_value (MrpProperty *property,
 	return value;
 }
 
-static void    
+static void
 resource_view_property_value_edited (GtkCellRendererText *cell,
 				     gchar               *path_str,
 				     gchar               *new_text,
@@ -1884,7 +1884,7 @@ resource_view_property_value_edited (GtkCellRendererText *cell,
 	value = resource_view_custom_property_set_value (property, new_text);
 
 	cmd = resource_cmd_edit_custom_property (view, resource,
-						 property, 
+						 property,
 						 &value);
 	g_value_unset (&value);
 
@@ -1951,7 +1951,7 @@ resource_view_cell_group_show_popup (PlannerCellRendererList *cell,
 		if (current_group == group) {
 			index = i;
 		}
-		
+
 		i++;
 	}
 
@@ -1971,7 +1971,7 @@ resource_view_cell_group_hide_popup (PlannerCellRendererList *cell,
 			g_object_unref (l->data);
 		}
 	}
-	
+
 	g_list_free (cell->user_data);
 	cell->user_data = NULL;
 }
@@ -1987,8 +1987,8 @@ resource_view_edit_groups_cb (GtkAction *action,
 	/* FIXME: we have to destroy group_dialog correctly */
 	if (PLANNER_RESOURCE_VIEW (view)->priv->group_dialog == NULL) {
 		PLANNER_RESOURCE_VIEW (view)->priv->group_dialog = planner_group_dialog_new (view);
-		
-		g_signal_connect (PLANNER_RESOURCE_VIEW (view)->priv->group_dialog, 
+
+		g_signal_connect (PLANNER_RESOURCE_VIEW (view)->priv->group_dialog,
 				  "destroy",
 				  G_CALLBACK (resource_view_group_dialog_closed),
 				  view);
@@ -2003,16 +2003,16 @@ resource_view_project_loaded_cb (MrpProject *project, PlannerView *view)
 	GtkTreeModel *model;
 	GList        *resources, *l;
 	GtkTreeView  *tree_view;
-	
+
 	tree_view = PLANNER_RESOURCE_VIEW (view)->priv->tree_view;
-	
+
 	model = GTK_TREE_MODEL (gtk_list_store_new (NUM_OF_COLS,
 						    G_TYPE_POINTER));
 
 	resources = mrp_project_get_resources (project);
 	for (l = resources; l; l = l->next) {
 		GtkTreeIter iter;
-		
+
 		gtk_list_store_append (GTK_LIST_STORE (model), &iter);
 		gtk_list_store_set (GTK_LIST_STORE (model),
 				    &iter,
@@ -2024,15 +2024,15 @@ resource_view_project_loaded_cb (MrpProject *project, PlannerView *view)
  	g_object_unref (model);
 }
 
-static void    
-resource_view_property_added (MrpProject  *project, 
+static void
+resource_view_property_added (MrpProject  *project,
 			      GType        object_type,
 			      MrpProperty *property,
 			      PlannerView *view)
 {
 	PlannerResourceViewPriv   *priv;
 	MrpPropertyType    type;
-	GtkTreeViewColumn *col;	
+	GtkTreeViewColumn *col;
 	GtkCellRenderer   *cell;
 	ColPropertyData   *data;
 
@@ -2046,11 +2046,11 @@ resource_view_property_added (MrpProject  *project,
 	    !mrp_property_get_user_defined (property)) {
 		return;
 	}
-	
+
 	if (type == MRP_PROPERTY_TYPE_DATE) {
 		return;
 	} else {
-		cell = gtk_cell_renderer_text_new ();			
+		cell = gtk_cell_renderer_text_new ();
 	}
 
 	g_object_set (cell, "editable", TRUE, NULL);
@@ -2064,13 +2064,13 @@ resource_view_property_added (MrpProject  *project,
 
 	col = gtk_tree_view_column_new ();
 	gtk_tree_view_column_set_resizable (col, TRUE);
-	gtk_tree_view_column_set_title (col, 
+	gtk_tree_view_column_set_title (col,
 					mrp_property_get_label (property));
 
 	g_object_set_data (G_OBJECT (col), "custom", GINT_TO_POINTER (TRUE));
-		
+
 	g_hash_table_insert (priv->property_to_column, property, col);
-	
+
 	data->property = property;
 	data->view = view;
 
@@ -2089,8 +2089,8 @@ resource_view_property_added (MrpProject  *project,
 	gtk_tree_view_append_column (priv->tree_view, col);
 }
 
-static void    
-resource_view_property_removed (MrpProject  *project, 
+static void
+resource_view_property_removed (MrpProject  *project,
 				MrpProperty *property,
 				PlannerView *view)
 {
@@ -2098,17 +2098,17 @@ resource_view_property_removed (MrpProject  *project,
 	GtkTreeViewColumn       *col;
 
 	priv = PLANNER_RESOURCE_VIEW (view)->priv;
-	
+
 	col = g_hash_table_lookup (priv->property_to_column, property);
 	if (col) {
 		g_hash_table_remove (priv->property_to_column, property);
-		
+
 		gtk_tree_view_remove_column (GTK_TREE_VIEW (priv->tree_view), col);
 	}
 }
 
 static void
-resource_view_property_changed (MrpProject  *project, 
+resource_view_property_changed (MrpProject  *project,
 			      MrpProperty *property,
 			      PlannerView *view)
 {
@@ -2116,10 +2116,10 @@ resource_view_property_changed (MrpProject  *project,
 	GtkTreeViewColumn       *col;
 
 	priv = PLANNER_RESOURCE_VIEW (view)->priv;
-	
+
 	col = g_hash_table_lookup (priv->property_to_column, property);
 	if (col) {
-		gtk_tree_view_column_set_title (col, 
+		gtk_tree_view_column_set_title (col,
 					mrp_property_get_label (property));
 	}
 }
@@ -2127,7 +2127,7 @@ resource_view_property_changed (MrpProject  *project,
 static void
 resource_view_popup_menu (GtkWidget   *widget,
 			  PlannerView *view)
-{ 
+{
 	PlannerResourceViewPriv   *priv;
 	GtkTreeView       *tree;
 	GtkTreePath       *path;
@@ -2137,13 +2137,13 @@ resource_view_popup_menu (GtkWidget   *widget,
 
 	priv = PLANNER_RESOURCE_VIEW (view)->priv;
 	tree = GTK_TREE_VIEW (priv->tree_view);
-	
+
 	gtk_tree_view_get_cursor (tree, &path, &column);
 	gtk_tree_view_get_cell_area (tree,
 				     path,
 				     column,
 				     &rect);
-	
+
 	x = rect.x;
 	y = rect.y;
 
@@ -2160,7 +2160,7 @@ resource_view_popup_menu (GtkWidget   *widget,
 	/* Offset so it's not overlapping the cell. */
 	rect.x = x + 20;
 	rect.y = y + 20;
-	
+
 	gtk_item_factory_popup (priv->popup_factory,
 				rect.x, rect.y,
 				0,
@@ -2176,11 +2176,11 @@ resource_view_name_data_func (GtkTreeViewColumn    *tree_column,
 {
 	MrpResource *resource;
 	gchar       *name;
-	
+
 	gtk_tree_model_get (tree_model, iter, COL_RESOURCE, &resource, -1);
 
 	g_object_get (resource, "name", &name, NULL);
-	
+
 	g_object_set (cell, "text", name, NULL);
 	g_free (name);
 }
@@ -2194,12 +2194,12 @@ resource_view_type_data_func (GtkTreeViewColumn    *tree_column,
 {
 	MrpResource *resource;
 	gint         type;
-	
+
 	gtk_tree_model_get (tree_model, iter, COL_RESOURCE, &resource, -1);
 
 	g_object_get (resource, "type", &type, NULL);
-	
-	g_object_set (cell, 
+
+	g_object_set (cell,
 		      "text", resource_view_get_type_string (type),
 		      NULL);
 }
@@ -2214,19 +2214,19 @@ resource_view_group_data_func (GtkTreeViewColumn    *tree_column,
 	MrpResource *resource;
 	MrpGroup    *group;
 	gchar       *name;
-	
+
 	gtk_tree_model_get (tree_model, iter, COL_RESOURCE, &resource, -1);
 
 	g_object_get (resource, "group", &group, NULL);
-	
+
 	if (!group) {
 		g_object_set (cell, "text", "", NULL);
 		return;
 	}
-	
+
 	g_object_get (group, "name", &name, NULL);
 	g_object_set (cell, "text", name, NULL);
-	
+
 	g_free (name);
 }
 
@@ -2239,11 +2239,11 @@ resource_view_short_name_data_func (GtkTreeViewColumn    *tree_column,
 {
 	MrpResource *resource;
 	gchar       *short_name;
-	
+
 	gtk_tree_model_get (tree_model, iter, COL_RESOURCE, &resource, -1);
 
 	g_object_get (resource, "short_name", &short_name, NULL);
-	
+
 	g_object_set (cell, "text", short_name, NULL);
 	g_free (short_name);
 }
@@ -2257,16 +2257,16 @@ resource_view_email_data_func (GtkTreeViewColumn    *tree_column,
 {
 	MrpResource *resource;
 	gchar       *email;
-	
+
 	gtk_tree_model_get (tree_model, iter, COL_RESOURCE, &resource, -1);
 
 	g_object_get (resource, "email", &email, NULL);
-	
+
 	g_object_set (cell, "text", email, NULL);
 	g_free (email);
 }
 
-static void    
+static void
 resource_view_cost_data_func (GtkTreeViewColumn    *tree_column,
 			      GtkCellRenderer      *cell,
 			      GtkTreeModel         *tree_model,
@@ -2276,17 +2276,17 @@ resource_view_cost_data_func (GtkTreeViewColumn    *tree_column,
 	MrpResource *resource;
 	gfloat       cost;
 	gchar       *cost_text;
-	
+
 	gtk_tree_model_get (tree_model, iter, COL_RESOURCE, &resource, -1);
 
 	g_object_get (resource, "cost", &cost, NULL);
 	cost_text = planner_format_float (cost, 2, FALSE);
-	
+
 	g_object_set (cell, "text", cost_text, NULL);
 	g_free (cost_text);
 }
 
-static void    
+static void
 resource_view_property_data_func (GtkTreeViewColumn *tree_column,
 				  GtkCellRenderer   *cell,
 				  GtkTreeModel      *model,
@@ -2307,7 +2307,7 @@ resource_view_property_data_func (GtkTreeViewColumn *tree_column,
 			    -1);
 
 	/* FIXME: implement mrp_object_get_property like
-	 * g_object_get_property that takes a GValue. 
+	 * g_object_get_property that takes a GValue.
 	 */
 	type = mrp_property_get_property_type (property);
 
@@ -2316,10 +2316,10 @@ resource_view_property_data_func (GtkTreeViewColumn *tree_column,
 		mrp_object_get (object,
 				mrp_property_get_name (property), &svalue,
 				NULL);
-		
+
 		if (svalue == NULL) {
 			svalue = g_strdup ("");
-		}		
+		}
 
 		break;
 	case MRP_PROPERTY_TYPE_INT:
@@ -2340,10 +2340,10 @@ resource_view_property_data_func (GtkTreeViewColumn *tree_column,
 	case MRP_PROPERTY_TYPE_DATE:
 		mrp_object_get (object,
 				mrp_property_get_name (property), &tvalue,
-				NULL); 
+				NULL);
 		svalue = planner_format_date (tvalue);
 		break;
-		
+
 	case MRP_PROPERTY_TYPE_DURATION:
 		mrp_object_get (object,
 				mrp_property_get_name (property), &ivalue,
@@ -2351,15 +2351,15 @@ resource_view_property_data_func (GtkTreeViewColumn *tree_column,
 		project = planner_window_get_project (PLANNER_VIEW (data)->main_window);
 		svalue = planner_format_duration (project, ivalue);
 		break;
-		
+
 	case MRP_PROPERTY_TYPE_COST:
 		mrp_object_get (object,
 				mrp_property_get_name (property), &fvalue,
-				NULL); 
+				NULL);
 
 		svalue = planner_format_float (fvalue, 2, FALSE);
 		break;
-				
+
 	default:
 		g_warning ("Type not implemented.");
 		svalue = g_strdup ("");
@@ -2377,13 +2377,13 @@ resource_view_selection_foreach (GtkTreeModel  *model,
 				 GList        **list)
 {
 	MrpResource *resource;
-	
+
 	gtk_tree_model_get (model, iter,
 			    COL_RESOURCE, &resource,
 			    -1);
 
 	*list = g_list_prepend (*list, resource);
-		
+
 }
 
 static GList *
@@ -2396,11 +2396,11 @@ resource_view_selection_get_list (PlannerView *view)
 	priv = PLANNER_RESOURCE_VIEW (view)->priv;
 
 	ret_list = NULL;
-	
+
 	selection = gtk_tree_view_get_selection (priv->tree_view);
 
-	gtk_tree_selection_selected_foreach (selection, 
-					     (GtkTreeSelectionForeachFunc) resource_view_selection_foreach, 
+	gtk_tree_selection_selected_foreach (selection,
+					     (GtkTreeSelectionForeachFunc) resource_view_selection_foreach,
 					     &ret_list);
 	return ret_list;
 }
@@ -2412,7 +2412,7 @@ resource_view_save_columns (PlannerResourceView *view)
 	PlannerResourceViewPriv *priv;
 
 	priv = view->priv;
-	
+
 	planner_view_column_save_helper (PLANNER_VIEW (view),
 					 GTK_TREE_VIEW (priv->tree_view));
 }
@@ -2425,13 +2425,13 @@ resource_view_load_columns (PlannerResourceView *view)
 	GtkTreeViewColumn       *column;
 	const gchar             *id;
 	gint                     i;
-		
+
 	priv = view->priv;
 
 	/* Load the columns. */
 	planner_view_column_load_helper (PLANNER_VIEW (view),
 					 GTK_TREE_VIEW (priv->tree_view));
-	
+
 	/* Make things a bit more robust by setting defaults if we don't get any
 	 * visible columns. Should be done through a schema instead (but we'll
 	 * keep this since a lot of people get bad installations when installing
@@ -2444,7 +2444,7 @@ resource_view_load_columns (PlannerResourceView *view)
 			i++;
 		}
 	}
-	
+
 	if (i == 0) {
 		for (l = columns; l; l = l->next) {
 			column = l->data;
@@ -2457,11 +2457,11 @@ resource_view_load_columns (PlannerResourceView *view)
 			if (!id) {
 				continue;
 			}
-			
+
 			gtk_tree_view_column_set_visible (column, TRUE);
 		}
 	}
-	
+
 	g_list_free (columns);
 }
 

@@ -97,7 +97,7 @@ egg_recent_view_bonobo_clear (EggRecentViewBonobo *view)
 	g_return_if_fail (view->uic);
 
 	model = egg_recent_view_get_model (EGG_RECENT_VIEW (view));
-	
+
 	while (!done)
 	{
 		gchar *verb_name = g_strdup_printf ("%s-%d", view->uid, i);
@@ -173,17 +173,17 @@ egg_recent_view_bonobo_set_list (EggRecentViewBonobo *view, GList *list)
 
 	egg_recent_view_bonobo_clear (view);
 
-	
+
 	bonobo_ui_component_freeze (ui_component, NULL);
 
 	for (i = 1; i <= g_list_length (list); ++i)
 	{
-		EggRecentItem *item = (EggRecentItem *)g_list_nth_data (list, i-1);	
+		EggRecentItem *item = (EggRecentItem *)g_list_nth_data (list, i-1);
 
 		utf8_uri = egg_recent_item_get_uri_for_display (item);
 		if (utf8_uri == NULL)
 			continue;
-		
+
 		/* this is what gets passed to our private "activate" callback */
 		md = (EggRecentViewBonoboMenuData *)g_malloc (sizeof (EggRecentViewBonoboMenuData));
 		md->view = view;
@@ -194,7 +194,7 @@ egg_recent_view_bonobo_set_list (EggRecentViewBonobo *view, GList *list)
 		base_uri = g_path_get_basename (utf8_uri);
 		xml_escaped_name = g_markup_escape_text (base_uri,
 							 strlen (base_uri));
-	
+
 		escaped_name = egg_recent_util_escape_underlines (xml_escaped_name);
 		g_free (xml_escaped_name);
 
@@ -243,7 +243,7 @@ egg_recent_view_bonobo_set_list (EggRecentViewBonobo *view, GList *list)
 
 				/* Riiiiight.... */
 				pixbuf_xml = bonobo_ui_util_pixbuf_to_xml (pixbuf);
-				
+
 				cmd = g_strdup_printf ("<cmd name=\"%s\" pixtype=\"pixbuf\" pixname=\"%s\"/>", verb_name, pixbuf_xml);
 
 				g_free (pixbuf_xml);
@@ -262,10 +262,10 @@ egg_recent_view_bonobo_set_list (EggRecentViewBonobo *view, GList *list)
 
 		closure = g_cclosure_new (G_CALLBACK (egg_recent_view_bonobo_menu_cb),
 					  md, egg_recent_view_bonobo_menu_data_destroy_cb);
-					  
+
 		bonobo_ui_component_add_verb_full (ui_component, verb_name,
-						   closure); 
-	        
+						   closure);
+
 		if (view->show_numbers) {
 			if (i < 10)
 				label = g_strdup_printf ("_%d. %s", i,
@@ -275,35 +275,35 @@ egg_recent_view_bonobo_set_list (EggRecentViewBonobo *view, GList *list)
 		} else {
 			label = g_strdup (escaped_name);
 		}
-			
-		
-		
+
+
+
 		item_path = g_strconcat (view->path, "/", verb_name, NULL);
 
 		if (bonobo_ui_component_path_exists (ui_component, item_path, NULL))
 		{
-			bonobo_ui_component_set_prop (ui_component, item_path, 
+			bonobo_ui_component_set_prop (ui_component, item_path,
 					              "label", label, NULL);
 
-			bonobo_ui_component_set_prop (ui_component, item_path, 
+			bonobo_ui_component_set_prop (ui_component, item_path,
 					              "tip", tip, NULL);
 		}
 		else
 		{
 			gchar *xml;
-			
+
 			xml = g_strdup_printf ("<menuitem name=\"%s\" "
 						"verb=\"%s\""
 						" _label=\"%s\"  _tip=\"%s\" "
-						"hidden=\"0\" />", 
+						"hidden=\"0\" />",
 						verb_name, verb_name, label,
 						tip);
 
 			bonobo_ui_component_set_translate (ui_component, view->path, xml, NULL);
 
-			g_free (xml); 
+			g_free (xml);
 		}
-		
+
 		g_free (label);
 		g_free (verb_name);
 		g_free (tip);
@@ -333,10 +333,10 @@ static EggRecentModel *
 egg_recent_view_bonobo_get_model (EggRecentView *view_parent)
 {
 	EggRecentViewBonobo *view;
-	
+
 	g_return_val_if_fail (view_parent, NULL);
 	view = EGG_RECENT_VIEW_BONOBO (view_parent);
-	
+
 	return view->model;
 }
 
@@ -344,14 +344,14 @@ static void
 egg_recent_view_bonobo_set_model (EggRecentView *view_parent, EggRecentModel *model)
 {
 	EggRecentViewBonobo *view;
-	
+
 	g_return_if_fail (view_parent);
 	view = EGG_RECENT_VIEW_BONOBO (view_parent);
-	
+
 	if (view->model)
 		g_signal_handler_disconnect (G_OBJECT (view->model),
 					     view->changed_cb_id);
-	
+
 	view->model = model;
 	g_object_ref (view->model);
 	view->changed_cb_id = g_signal_connect_object (G_OBJECT (model),
@@ -439,7 +439,7 @@ egg_recent_view_bonobo_class_init (EggRecentViewBonoboClass * klass)
 {
 	GObjectClass *object_class;
 
-	
+
 	object_class = G_OBJECT_CLASS (klass);
 
 	object_class->set_property = egg_recent_view_bonobo_set_property;
@@ -567,7 +567,7 @@ egg_recent_view_bonobo_set_icon_size (EggRecentViewBonobo *view,
 		view->icon_size = icon_size;
 	}
 }
-                                                                              
+
 GtkIconSize
 egg_recent_view_bonobo_get_icon_size (EggRecentViewBonobo *view)
 {
@@ -635,7 +635,7 @@ egg_recent_view_bonobo_set_tooltip_func (EggRecentViewBonobo *view,
 {
 	view->tooltip_func = func;
 	view->tooltip_func_data = user_data;
-	
+
 	if (view->model)
 		egg_recent_model_changed (view->model);
 }
@@ -664,7 +664,7 @@ egg_recent_view_bonobo_new (BonoboUIComponent *uic, const gchar *path)
 					   "show-numbers", TRUE, NULL));
 
 	g_return_val_if_fail (view, NULL);
-	
+
 	return view;
 }
 

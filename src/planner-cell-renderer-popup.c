@@ -84,7 +84,7 @@ GType
 planner_cell_renderer_popup_get_type (void)
 {
 	static GType cell_text_type = 0;
-	
+
 	if (!cell_text_type) {
 		static const GTypeInfo cell_text_info = {
 			sizeof (PlannerCellRendererPopupClass),
@@ -97,13 +97,13 @@ planner_cell_renderer_popup_get_type (void)
 			0,              /* n_preallocs */
 			(GInstanceInitFunc) mcrp_init,
 		};
-		
+
 		cell_text_type = g_type_register_static (GTK_TYPE_CELL_RENDERER_TEXT,
 							 "PlannerCellRendererPopup",
 							 &cell_text_info,
 							 0);
 	}
-	
+
 	return cell_text_type;
 }
 
@@ -113,7 +113,7 @@ mcrp_init (PlannerCellRendererPopup *popup)
 	popup->popup_window = gtk_window_new (GTK_WINDOW_POPUP);
 
 	popup->button_width = -1;
-	
+
 	g_signal_connect (popup->popup_window,
 			  "button-press-event",
 			  G_CALLBACK (mcrp_button_press_event),
@@ -134,9 +134,9 @@ static void
 mcrp_class_init (PlannerCellRendererPopupClass *class)
 {
 	GtkCellRendererClass *cell_class = GTK_CELL_RENDERER_CLASS (class);
-	
+
 	parent_class = GTK_CELL_RENDERER_TEXT_CLASS (g_type_class_peek_parent (class));
-	
+
 	cell_class->start_editing = mcrp_start_editing;
 	cell_class->get_size      = mcrp_get_size;
 
@@ -178,7 +178,7 @@ mcrp_editing_done (GtkCellEditable     *editable,
 	    cell->editing_canceled) {
 		return;
 	}
-	
+
 	path = g_object_get_data (G_OBJECT (editable),
 				  PLANNER_CELL_RENDERER_POPUP_PATH);
 	new_text = planner_popup_entry_get_text (PLANNER_POPUP_ENTRY (editable));
@@ -197,7 +197,7 @@ mcrp_style_set (GtkWidget           *widget,
 	/* Invalidate the cache. */
 	popup->button_width = -1;
 }
-	
+
 static gboolean
 mcrp_grab_on_window (GdkWindow *window,
 		     guint32    activate_time)
@@ -248,7 +248,7 @@ mcrp_show_popup (PlannerCellRendererPopup *cell,
 	y = y2;
 
 	button_height = y2 - y1;
-	
+
 	screen_height = gdk_screen_height () - y;
 	screen_width = gdk_screen_width ();
 
@@ -305,7 +305,7 @@ mcrp_hide_popup (PlannerCellRendererPopup *cell)
 	if (cell->editable) {
 		gtk_cell_editable_remove_widget (GTK_CELL_EDITABLE (cell->editable));
 	}
-	
+
 	cell->shown = FALSE;
 	cell->editing_canceled = FALSE;
 }
@@ -317,13 +317,13 @@ mcrp_arrow_clicked (GtkCellEditable     *entry,
 	GtkAllocation  alloc;
 	gint           x, y;
 	const gchar   *path;
-	
+
 	if (cell->shown) {
 		cell->editing_canceled = TRUE;
 		planner_cell_renderer_popup_hide (cell);
 		return;
 	}
-	
+
 	path = g_object_get_data (G_OBJECT (entry),
 				  PLANNER_CELL_RENDERER_POPUP_PATH);
 
@@ -336,15 +336,15 @@ mcrp_arrow_clicked (GtkCellEditable     *entry,
 				  gtk_get_current_event_time ())) {
 		return;
 	}
-	
+
 	gtk_editable_select_region (GTK_EDITABLE (PLANNER_POPUP_ENTRY (entry)->entry), 0, 0);
 
 	gdk_window_get_origin (GTK_WIDGET (entry)->window, &x, &y);
-	
+
 	alloc = GTK_WIDGET (entry)->allocation;
 
 	g_signal_emit (cell, signals[SHOW_POPUP], 0,
-		       path, 
+		       path,
 		       x,
 		       y,
 		       x + alloc.width,
@@ -363,24 +363,24 @@ mcrp_start_editing (GtkCellRenderer      *cell,
 	PlannerCellRendererPopup *popup;
 	GtkWidget           *editable;
 	gchar               *text;
-	
+
 	popup = PLANNER_CELL_RENDERER_POPUP (cell);
 
 	/* If the cell isn't editable we return NULL. */
 	if (GTK_CELL_RENDERER_TEXT (popup)->editable == FALSE) {
 		return NULL;
 	}
-	
+
 	editable = g_object_new (PLANNER_TYPE_POPUP_ENTRY, NULL);
 
 	text = GTK_CELL_RENDERER_TEXT (cell)->text;
 	planner_popup_entry_set_text (PLANNER_POPUP_ENTRY (editable), text ? text : "");
-	
+
 	g_object_set_data_full (G_OBJECT (editable),
 				PLANNER_CELL_RENDERER_POPUP_PATH,
 				g_strdup (path),
 				g_free);
-	
+
 	gtk_widget_show (editable);
 
 	g_signal_connect (editable,
@@ -397,7 +397,7 @@ mcrp_start_editing (GtkCellRenderer      *cell,
 
 	g_object_add_weak_pointer (G_OBJECT (popup->editable),
 				   (gpointer) &popup->editable);
-	
+
 	return GTK_CELL_EDITABLE (editable);
 }
 
@@ -410,9 +410,9 @@ planner_cell_renderer_popup_new (void)
 
 void
 planner_cell_renderer_popup_hide (PlannerCellRendererPopup *cell)
-{ 
+{
 	g_return_if_fail (PLANNER_IS_CELL_RENDERER_POPUP (cell));
-	
+
 	g_signal_emit (cell, signals[HIDE_POPUP], 0);
 }
 
@@ -428,11 +428,11 @@ mcrp_get_size (GtkCellRenderer *cell,
 	PlannerCellRendererPopup *popup;
 
 	popup = PLANNER_CELL_RENDERER_POPUP (cell);
-	
-	if (GTK_CELL_RENDERER_CLASS (parent_class)->get_size) { 
+
+	if (GTK_CELL_RENDERER_CLASS (parent_class)->get_size) {
 		(* GTK_CELL_RENDERER_CLASS (parent_class)->get_size) (cell,
 								      widget,
-								      cell_area, 
+								      cell_area,
 								      x_offset,
 								      y_offset,
 								      width,
@@ -443,7 +443,7 @@ mcrp_get_size (GtkCellRenderer *cell,
 	if (popup->button_width == -1) {
 		popup->button_width = planner_popup_get_button_width ();
 	}
-	
+
 	*width += popup->button_width;
 }
 
@@ -464,8 +464,8 @@ mcrp_key_press_event (GtkWidget           *popup_window,
 		cell->editing_canceled = TRUE;
 	} else {
 		cell->editing_canceled = FALSE;
-	}		
-	
+	}
+
 	planner_cell_renderer_popup_hide (cell);
 
 	return TRUE;
@@ -485,7 +485,7 @@ mcrp_button_press_event (GtkWidget           *widget,
 	if (event->button != 1) {
 		return FALSE;
 	}
-	
+
 	/* If the event happened outside the popup, cancel editing.
 	 */
 
@@ -499,7 +499,7 @@ mcrp_button_press_event (GtkWidget           *widget,
 
 	xoffset += widget->allocation.x;
 	yoffset += widget->allocation.y;
-	
+
 	alloc = popup->popup_window->allocation;
 	x1 = alloc.x + xoffset;
 	y1 = alloc.y + yoffset;
@@ -509,9 +509,9 @@ mcrp_button_press_event (GtkWidget           *widget,
 	if (x > x1 && x < x2 && y > y1 && y < y2) {
 		return FALSE;
 	}
-	
+
 	popup->editing_canceled = TRUE;
 	planner_cell_renderer_popup_hide (popup);
-	
+
 	return FALSE;
 }

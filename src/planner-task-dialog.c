@@ -197,7 +197,7 @@ typedef struct {
 	PlannerCmd  base;
 
 	MrpTask    *task;
-	gchar      *property;  
+	gchar      *property;
 	GValue     *value;
 	GValue     *old_value;
 } TaskCmdEditProperty;
@@ -283,7 +283,7 @@ task_dialog_setup_option_menu (GtkWidget     *option_menu,
 	if (menu) {
 		gtk_widget_destroy (menu);
 	}
-	
+
 	menu = gtk_menu_new ();
 
 	va_start (args, str1);
@@ -293,7 +293,7 @@ task_dialog_setup_option_menu (GtkWidget     *option_menu,
 		gtk_menu_append (GTK_MENU (menu), menu_item);
 
 		type = va_arg (args, gint);
-		
+
 		g_object_set_data (G_OBJECT (menu_item),
 				   "data",
 				   GINT_TO_POINTER (type));
@@ -316,15 +316,15 @@ task_dialog_option_menu_get_selected (GtkWidget *option_menu)
 	GtkWidget *menu;
 	GtkWidget *item;
 	gint       ret;
-	
+
 	menu = gtk_option_menu_get_menu (GTK_OPTION_MENU (option_menu));
-		
+
 	item = gtk_menu_get_active (GTK_MENU (menu));
 
 	ret = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (item), "data"));
 
 	return ret;
-}	
+}
 
 #if 0
 static void
@@ -334,7 +334,7 @@ task_dialog_option_menu_set_selected (GtkWidget *option_menu, gint data)
 	GtkWidget *item;
 	GList     *children, *l;
 	gint       i;
-	
+
        	menu = gtk_option_menu_get_menu (GTK_OPTION_MENU (option_menu));
 
 	children = GTK_MENU_SHELL (menu)->children;
@@ -346,7 +346,7 @@ task_dialog_option_menu_set_selected (GtkWidget *option_menu, gint data)
 			break;
 		}
 	}
-}	
+}
 #endif
 
 static void
@@ -368,11 +368,11 @@ task_dialog_setup_task_combo (GtkCombo *combo,
 	GList       *children;
 	GList       *l;
 	const gchar *name;
-	
+
 	if (tasks == NULL) {
 		return;
 	}
-	
+
 	strings = NULL;
 	for (l = tasks; l; l = l->next) {
 		name = mrp_task_get_name (l->data);
@@ -387,15 +387,15 @@ task_dialog_setup_task_combo (GtkCombo *combo,
 	strings = g_list_reverse (strings);
 	gtk_combo_set_popdown_strings (combo, strings);
 	g_list_free (strings);
-	
+
 	g_object_set_data (G_OBJECT (combo), "selected_task", tasks->data);
-	
+
 	children = GTK_LIST (combo->list)->children;
 	for (l = children; l; l = l->next) {
 		g_object_set_data (G_OBJECT (l->data), "task", tasks->data);
 		tasks = tasks->next;
 	}
-	
+
 	g_signal_connect (combo->list,
 			  "select-child",
 			  G_CALLBACK (task_dialog_task_combo_select_child_cb),
@@ -531,9 +531,9 @@ task_cmd_edit_type (PlannerWindow *main_window,
 				    task_cmd_edit_type_undo,
 				    task_cmd_edit_type_free);
 
-	
+
 	cmd = (TaskCmdEditType *) cmd_base;
-	
+
 	cmd->task = g_object_ref (task);
 
 	cmd->old_type = old_type;
@@ -658,7 +658,7 @@ task_cmd_edit_constraint (PlannerWindow *main_window,
 	    old_constraint->time == constraint->time) {
 		return NULL;
 	}
-	
+
 	cmd_base = planner_cmd_new (TaskCmdEditConstraint,
 				    _("Edit task scheduling"),
 				    task_cmd_edit_constraint_do,
@@ -673,7 +673,7 @@ task_cmd_edit_constraint (PlannerWindow *main_window,
 	cmd->constraint = *constraint;
 
 	g_free (old_constraint);
-	
+
 	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager (main_window),
 					   cmd_base);
 
@@ -744,13 +744,13 @@ task_cmd_assign_add (PlannerWindow *main_window,
 				    task_cmd_assign_add_do,
 				    task_cmd_assign_add_undo,
 				    task_cmd_assign_add_free);
-	
+
 	cmd = (TaskCmdEditAssignment *) cmd_base;
 	cmd->task = g_object_ref (task);
 	cmd->resource = g_object_ref (resource);
 	cmd->old_units = old_units;
 	cmd->units = units;
-		
+
 	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager (main_window),
 					   cmd_base);
 
@@ -804,12 +804,12 @@ task_cmd_assign_remove (PlannerWindow *main_window,
 				    task_cmd_assign_remove_do,
 				    task_cmd_assign_remove_undo,
 				    task_cmd_assign_remove_free);
-	
+
 	cmd = (TaskCmdEditAssignment *) cmd_base;
 	cmd->task = g_object_ref (mrp_assignment_get_task (assignment));
 	cmd->resource = g_object_ref (mrp_assignment_get_resource (assignment));
 	cmd->units = mrp_assignment_get_units (assignment);
-		
+
 	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager (main_window),
 					   cmd_base);
 
@@ -836,7 +836,7 @@ task_cmd_assign_units_undo (PlannerCmd *cmd_base)
 	cmd = (TaskCmdEditAssignment *) cmd_base;
 
 	g_object_set (cmd->assignment, "units", cmd->old_units, NULL);
-	
+
 }
 
 static void
@@ -863,14 +863,14 @@ task_cmd_assign_units (PlannerWindow *main_window,
 				    task_cmd_assign_units_do,
 				    task_cmd_assign_units_undo,
 				    task_cmd_assign_units_free);
-	
+
 	cmd = (TaskCmdEditAssignment *) cmd_base;
 	cmd->task = g_object_ref (mrp_assignment_get_task (assignment));
 	cmd->resource = g_object_ref (mrp_assignment_get_resource (assignment));
 	cmd->assignment = assignment;
 	cmd->units = units;
 	cmd->old_units = mrp_assignment_get_units (assignment);
-		
+
 	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager (main_window),
 					   cmd_base);
 
@@ -883,7 +883,7 @@ task_cmd_edit_pred_do (PlannerCmd *cmd_base)
 	GError                 *error = NULL;
 	gboolean                retval;
 	TaskCmdEditPredecessor *cmd = (TaskCmdEditPredecessor*) cmd_base;
-	
+
 	mrp_task_remove_predecessor (cmd->task, cmd->old_predecessor);
 
 	mrp_task_add_predecessor (cmd->task,
@@ -896,8 +896,8 @@ task_cmd_edit_pred_do (PlannerCmd *cmd_base)
 		retval = TRUE;
 	} else {
 		cmd->error = error;
-		retval = FALSE;		
-	} 
+		retval = FALSE;
+	}
 
 	return retval;
 }
@@ -907,7 +907,7 @@ task_cmd_edit_pred_undo (PlannerCmd *cmd_base)
 {
 	GError                 *error = NULL;
 	TaskCmdEditPredecessor *cmd = (TaskCmdEditPredecessor*) cmd_base;
-	
+
 	mrp_task_remove_predecessor (cmd->task, cmd->predecessor);
 
 	mrp_task_add_predecessor (cmd->task,
@@ -953,7 +953,7 @@ planner_task_cmd_edit_predecessor (PlannerWindow   *main_window,
 				    task_cmd_edit_pred_free);
 
 	cmd = (TaskCmdEditPredecessor *) cmd_base;
-	
+
 	cmd->old_predecessor = g_object_ref (old_predecessor);
 	cmd->predecessor = g_object_ref (predecessor);
 	cmd->task = g_object_ref (task);
@@ -964,7 +964,7 @@ planner_task_cmd_edit_predecessor (PlannerWindow   *main_window,
 	cmd->rel_type = relationship;
 	cmd->old_lag = mrp_relation_get_lag (relation);
 	cmd->lag = lag;
-			
+
 	planner_cmd_manager_insert_and_do (
 		planner_window_get_cmd_manager (main_window), cmd_base);
 
@@ -1023,9 +1023,9 @@ task_cmd_edit_lag (PlannerWindow *main_window,
 				    task_cmd_edit_lag_undo,
 				    task_cmd_edit_lag_free);
 
-	
+
 	cmd = (TaskCmdEditLag *) cmd_base;
-	
+
 	cmd->relation = g_object_ref (relation);
 
 	cmd->old_lag = old_lag;
@@ -1050,7 +1050,7 @@ task_cmd_edit_note_do (PlannerCmd *cmd_base)
 static void
 task_cmd_edit_note_undo (PlannerCmd *cmd_base)
 {
-	
+
 	TaskCmdEditNote *cmd = (TaskCmdEditNote*) cmd_base;
 
 	g_object_set (cmd->task, "note", cmd->old_note, NULL);
@@ -1121,15 +1121,15 @@ task_dialog_task_name_changed_cb (MrpTask *task, GParamSpec *pspec, GtkWidget *d
 {
 	DialogData *data;
 	gchar      *name;
-		
+
 	data = DIALOG_GET_DATA (dialog);
-	
+
 	g_object_get (task, "name", &name, NULL);
 
 	g_signal_handlers_block_by_func (data->name_entry,
 					 task_dialog_name_changed_cb,
 					 dialog);
-	
+
 	gtk_entry_set_text (GTK_ENTRY (data->name_entry), name);
 
 	task_dialog_update_title (data);
@@ -1137,7 +1137,7 @@ task_dialog_task_name_changed_cb (MrpTask *task, GParamSpec *pspec, GtkWidget *d
 	g_signal_handlers_unblock_by_func (data->name_entry,
 					   task_dialog_name_changed_cb,
 					   dialog);
-	
+
 	g_free (name);
 }
 
@@ -1145,18 +1145,18 @@ static void
 task_dialog_name_changed_cb (GtkWidget *w, DialogData *data)
 {
 	const gchar *name;
-	
+
 	name = gtk_entry_get_text (GTK_ENTRY (w));
 
-	g_signal_handlers_block_by_func (data->task, 
+	g_signal_handlers_block_by_func (data->task,
 					 task_dialog_task_name_changed_cb,
 					 data->dialog);
-	
+
 	g_object_set (data->task, "name", name, NULL);
 
 	task_dialog_update_title (data);
 
-	g_signal_handlers_unblock_by_func (data->task, 
+	g_signal_handlers_unblock_by_func (data->task,
 					   task_dialog_task_name_changed_cb,
 					   data->dialog);
 }
@@ -1173,11 +1173,11 @@ task_dialog_name_focus_out_cb (GtkWidget     *w,
 	g_assert (MRP_IS_TASK (data->task));
 
 	focus_in_name = g_object_get_data (G_OBJECT (data->task),"focus_in_name");
-	
+
 	g_value_init (&value, G_TYPE_STRING);
 	g_value_set_string (&value, focus_in_name);
 
-	cmd = task_cmd_edit_property_focus (data->main_window, 
+	cmd = task_cmd_edit_property_focus (data->main_window,
 					    data->task, "name", &value);
 
 	g_free (focus_in_name);
@@ -1191,10 +1191,10 @@ task_dialog_name_focus_in_cb (GtkWidget     *w,
 			      DialogData    *data)
 {
 	gchar  *name;
-	   
+
 	name = g_strdup (gtk_entry_get_text (GTK_ENTRY (w)));
-	
-	g_object_set_data (G_OBJECT (data->task), 
+
+	g_object_set_data (G_OBJECT (data->task),
 			   "focus_in_name", (gpointer) name);
 
 	return FALSE;
@@ -1205,7 +1205,7 @@ task_dialog_task_type_changed_cb (MrpTask *task, GParamSpec *pspec, GtkWidget *d
 {
 	DialogData  *data;
 	MrpTaskType  type;
-		
+
 	data = DIALOG_GET_DATA (dialog);
 
 	g_object_get (task, "type", &type, NULL);
@@ -1213,9 +1213,9 @@ task_dialog_task_type_changed_cb (MrpTask *task, GParamSpec *pspec, GtkWidget *d
 	g_signal_handlers_block_by_func (data->milestone_checkbutton,
 					 task_dialog_type_toggled_cb,
 					 dialog);
-	
+
 	if (type == MRP_TASK_TYPE_MILESTONE) {
-		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (data->milestone_checkbutton), TRUE); 
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (data->milestone_checkbutton), TRUE);
 	} else {
 		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (data->milestone_checkbutton), FALSE);
 	}
@@ -1238,14 +1238,14 @@ task_dialog_type_toggled_cb (GtkWidget *w, DialogData *data)
 		type = MRP_TASK_TYPE_NORMAL;
 	}
 
-	g_signal_handlers_block_by_func (data->task, 
+	g_signal_handlers_block_by_func (data->task,
 					 task_dialog_task_type_changed_cb,
 					 data->dialog);
-	
+
 	/* g_object_set (data->task, "type", type, NULL); */
 	task_cmd_edit_type (data->main_window, data->task, type);
 
-	g_signal_handlers_unblock_by_func (data->task, 
+	g_signal_handlers_unblock_by_func (data->task,
 					   task_dialog_task_type_changed_cb,
 					   data->dialog);
 
@@ -1257,7 +1257,7 @@ task_dialog_task_sched_changed_cb (MrpTask *task, GParamSpec *pspec, GtkWidget *
 {
 	DialogData   *data;
 	MrpTaskSched  sched;
-		
+
 	data = DIALOG_GET_DATA (dialog);
 
 	g_object_get (task, "sched", &sched, NULL);
@@ -1269,9 +1269,9 @@ task_dialog_task_sched_changed_cb (MrpTask *task, GParamSpec *pspec, GtkWidget *
 	if (sched == MRP_TASK_SCHED_FIXED_DURATION) {
 		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (data->fixed_checkbutton), TRUE);
 	} else {
-		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (data->fixed_checkbutton), FALSE);	
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (data->fixed_checkbutton), FALSE);
 	}
-	
+
 	/* Set the toggle */
 
 	g_signal_handlers_unblock_by_func (data->fixed_checkbutton,
@@ -1292,14 +1292,14 @@ task_dialog_fixed_toggled_cb (GtkWidget *w, DialogData *data)
 		sched = MRP_TASK_SCHED_FIXED_WORK;
 	}
 
-	g_signal_handlers_block_by_func (data->task, 
+	g_signal_handlers_block_by_func (data->task,
 					 task_dialog_task_sched_changed_cb,
 					 data->dialog);
 
 	/* g_object_set (data->task, "sched", sched, NULL); */
 	task_cmd_edit_sched (data->main_window, data->task, sched);
 
-	g_signal_handlers_unblock_by_func (data->task, 
+	g_signal_handlers_unblock_by_func (data->task,
 					   task_dialog_task_sched_changed_cb,
 					   data->dialog);
 
@@ -1307,7 +1307,7 @@ task_dialog_fixed_toggled_cb (GtkWidget *w, DialogData *data)
 }
 
 static void
-task_dialog_task_work_changed_cb (MrpTask    *task, 
+task_dialog_task_work_changed_cb (MrpTask    *task,
 				  GParamSpec *pspec,
 				  GtkWidget  *dialog)
 {
@@ -1340,13 +1340,13 @@ task_dialog_work_focus_out_cb (GtkWidget     *w,
 	PlannerCmd   *cmd;
 
 	g_object_get (data->task, "project", &project, NULL);
-	
+
 	focus_in_work = GPOINTER_TO_INT (
 		g_object_get_data (G_OBJECT (data->task), "focus_in_work"));
 
 	current_work = planner_parse_duration (
 		project, gtk_entry_get_text (GTK_ENTRY (w)));
-	
+
 	if (focus_in_work == current_work) {
 		return FALSE;
 	}
@@ -1355,8 +1355,8 @@ task_dialog_work_focus_out_cb (GtkWidget     *w,
 
 	g_value_init (&value, G_TYPE_INT);
 	g_value_set_int (&value, focus_in_work);
-	
-	cmd = task_cmd_edit_property_focus (data->main_window, 
+
+	cmd = task_cmd_edit_property_focus (data->main_window,
 					    data->task, "work",
 					    &value);
 
@@ -1371,22 +1371,22 @@ task_dialog_work_focus_in_cb (GtkWidget     *w,
 	MrpProject  *project;
 	const gchar *str;
 	gint         work;
-	   
+
 	str = gtk_entry_get_text (GTK_ENTRY (w));
 
 	g_object_get (data->task, "project", &project, NULL);
-	
+
 	work = planner_parse_duration (project, str);
-	
-	g_object_set_data (G_OBJECT (data->task), 
+
+	g_object_set_data (G_OBJECT (data->task),
 			   "focus_in_work",
 			   GINT_TO_POINTER (work));
-	
+
 	return FALSE;
 }
 
 static void
-task_dialog_task_duration_changed_cb (MrpTask    *task, 
+task_dialog_task_duration_changed_cb (MrpTask    *task,
 				      GParamSpec *pspec,
 				      GtkWidget  *dialog)
 {
@@ -1419,13 +1419,13 @@ task_dialog_duration_focus_out_cb (GtkWidget     *w,
 	PlannerCmd   *cmd;
 
 	g_object_get (data->task, "project", &project, NULL);
-	
+
 	focus_in_duration = GPOINTER_TO_INT (
 		g_object_get_data (G_OBJECT (data->task), "focus_in_duration"));
 
 	current_duration = planner_parse_duration (
 		project, gtk_entry_get_text (GTK_ENTRY (w)));
-	
+
 	if (focus_in_duration == current_duration) {
 		return FALSE;
 	}
@@ -1434,8 +1434,8 @@ task_dialog_duration_focus_out_cb (GtkWidget     *w,
 
 	g_value_init (&value, G_TYPE_INT);
 	g_value_set_int (&value, focus_in_duration);
-	
-	cmd = task_cmd_edit_property_focus (data->main_window, 
+
+	cmd = task_cmd_edit_property_focus (data->main_window,
 					    data->task, "duration",
 					    &value);
 
@@ -1449,18 +1449,18 @@ task_dialog_duration_focus_in_cb (GtkWidget     *w,
 {
 	const gchar *str;
 	gint         duration;
-	MrpProject  *project;	   
+	MrpProject  *project;
 
 	str = gtk_entry_get_text (GTK_ENTRY (w));
 
 	g_object_get (data->task, "project", &project, NULL);
-	
+
 	duration = planner_parse_duration (project, str);
-	
-	g_object_set_data (G_OBJECT (data->task), 
+
+	g_object_set_data (G_OBJECT (data->task),
 			   "focus_in_duration",
 			   GINT_TO_POINTER (duration));
-	
+
 	return FALSE;
 }
 
@@ -1474,7 +1474,7 @@ task_dialog_task_constraint_changed_cb (MrpTask    *task,
 	data = DIALOG_GET_DATA (dialog);
 
 	task_dialog_update_schedule_label (data);
-}	
+}
 
 static void
 task_dialog_update_schedule_label (DialogData *data)
@@ -1504,32 +1504,32 @@ task_dialog_update_schedule_label (DialogData *data)
 	}
 
 	gtk_label_set_text (GTK_LABEL (data->schedule_label), str);
-	
+
 	g_free (str);
 	g_free (time_str);
 
 	g_free (constraint);
-}	
+}
 
 static void
-task_dialog_task_complete_changed_cb (MrpTask    *task, 
+task_dialog_task_complete_changed_cb (MrpTask    *task,
 				      GParamSpec *pspec,
 				      GtkWidget  *dialog)
 {
 	DialogData *data;
 	gshort      complete;
-	
+
 	data = DIALOG_GET_DATA (dialog);
-	
+
 	complete = mrp_task_get_percent_complete (task);
-	
+
 	g_signal_handlers_block_by_func (data->complete_spinbutton,
 					 task_dialog_complete_changed_cb,
 					 data);
 
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON (data->complete_spinbutton),
 				   complete);
-	
+
 	g_signal_handlers_unblock_by_func (data->complete_spinbutton,
 					   task_dialog_complete_changed_cb,
 					   data);
@@ -1542,14 +1542,14 @@ task_dialog_complete_changed_cb (GtkWidget  *w,
 	gint complete;
 
 	complete = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (w));
-	
+
 	g_signal_handlers_block_by_func (data->task,
 					 task_dialog_task_complete_changed_cb,
 					 data->dialog);
-	
+
 	g_object_set (data->task, "percent_complete", complete, NULL);
 
-	g_signal_handlers_unblock_by_func (data->task, 
+	g_signal_handlers_unblock_by_func (data->task,
 					   task_dialog_task_complete_changed_cb,
 					   data->dialog);
 }
@@ -1566,7 +1566,7 @@ task_dialog_complete_focus_out_cb (GtkWidget     *w,
 
 	g_assert (MRP_IS_TASK (data->task));
 
-	focus_in_complete = GPOINTER_TO_INT (g_object_get_data 
+	focus_in_complete = GPOINTER_TO_INT (g_object_get_data
 					     (G_OBJECT (data->task), "focus_in_complete"));
 
 	gtk_spin_button_update (GTK_SPIN_BUTTON (w));
@@ -1581,7 +1581,7 @@ task_dialog_complete_focus_out_cb (GtkWidget     *w,
 	g_value_init (&value, G_TYPE_UINT);
 	g_value_set_uint (&value, focus_in_complete);
 
-	cmd = task_cmd_edit_property_focus (data->main_window, 
+	cmd = task_cmd_edit_property_focus (data->main_window,
 					    data->task, "percent_complete", &value);
 
 	return FALSE;
@@ -1595,32 +1595,32 @@ task_dialog_complete_focus_in_cb (GtkWidget     *w,
 	guint complete;
 
 	complete = gtk_spin_button_get_value (GTK_SPIN_BUTTON (w));
-	
-	g_object_set_data (G_OBJECT (data->task), 
+
+	g_object_set_data (G_OBJECT (data->task),
 			   "focus_in_complete", GINT_TO_POINTER (complete));
 
 	return FALSE;
 }
 
 static void
-task_dialog_task_priority_changed_cb (MrpTask    *task, 
+task_dialog_task_priority_changed_cb (MrpTask    *task,
 				      GParamSpec *pspec,
 				      GtkWidget  *dialog)
 {
 	DialogData *data;
 	gint       priority;
-	
+
 	data = DIALOG_GET_DATA (dialog);
-	
+
 	g_object_get (task, "priority", &priority, NULL);
-	
+
 	g_signal_handlers_block_by_func (data->priority_spinbutton,
 					 task_dialog_priority_changed_cb,
 					 data);
 
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON (data->priority_spinbutton),
 				   priority);
-	
+
 	g_signal_handlers_unblock_by_func (data->priority_spinbutton,
 					   task_dialog_priority_changed_cb,
 					   data);
@@ -1633,14 +1633,14 @@ task_dialog_priority_changed_cb (GtkWidget  *w,
 	gint priority;
 
 	priority = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (w));
-	
+
 	g_signal_handlers_block_by_func (data->task,
 					 task_dialog_task_priority_changed_cb,
 					 data->dialog);
-	
+
 	g_object_set (data->task, "priority", priority, NULL);
 
-	g_signal_handlers_unblock_by_func (data->task, 
+	g_signal_handlers_unblock_by_func (data->task,
 					   task_dialog_task_priority_changed_cb,
 					   data->dialog);
 }
@@ -1657,7 +1657,7 @@ task_dialog_priority_focus_out_cb (GtkWidget     *w,
 
 	g_assert (MRP_IS_TASK (data->task));
 
-	focus_in_priority = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (data->task), 
+	focus_in_priority = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (data->task),
 								"focus_in_priority"));
 
 	gtk_spin_button_update (GTK_SPIN_BUTTON (w));
@@ -1672,7 +1672,7 @@ task_dialog_priority_focus_out_cb (GtkWidget     *w,
 	g_value_init (&value, G_TYPE_INT);
 	g_value_set_int (&value, focus_in_priority);
 
-	cmd = task_cmd_edit_property_focus (data->main_window, 
+	cmd = task_cmd_edit_property_focus (data->main_window,
 					    data->task, "priority", &value);
 
 	return FALSE;
@@ -1686,8 +1686,8 @@ task_dialog_priority_focus_in_cb (GtkWidget     *w,
 	gint priority;
 
 	priority = gtk_spin_button_get_value (GTK_SPIN_BUTTON (w));
-	
-	g_object_set_data (G_OBJECT (data->task), 
+
+	g_object_set_data (G_OBJECT (data->task),
 			   "focus_in_priority", GINT_TO_POINTER (priority));
 
 	return FALSE;
@@ -1700,36 +1700,36 @@ task_dialog_task_note_changed_cb (MrpTask    *task,
 {
 	DialogData *data;
 	gchar      *note;
-	
+
 	data = DIALOG_GET_DATA (dialog);
-	
+
 	g_object_get (task, "note", &note, NULL);
 
 	g_signal_handlers_block_by_func (data->note_buffer,
 					 task_dialog_note_changed_cb,
 					 data);
-	
+
 	gtk_text_buffer_set_text (data->note_buffer, note, -1);
 
 	g_signal_handlers_unblock_by_func (data->note_buffer,
 					   task_dialog_note_changed_cb,
 					   data);
-	
+
 	g_free (note);
 }
 
-static void  
+static void
 task_dialog_note_changed_cb (GtkWidget  *w,
 			     DialogData *data)
 {
 	const gchar   *note;
 	GtkTextIter    start, end;
 	GtkTextBuffer *buffer;
-	
+
 	buffer = GTK_TEXT_BUFFER (w);
-	
+
 	gtk_text_buffer_get_bounds (buffer, &start, &end);
-	
+
 	note = gtk_text_buffer_get_text (buffer, &start, &end, FALSE);
 
 	g_signal_handlers_block_by_func (data->task,
@@ -1754,7 +1754,7 @@ task_dialog_note_focus_out_cb (GtkWidget     *w,
 	focus_in_note = g_object_get_data (G_OBJECT (data->task),"focus_in_note");
 
 	cmd = task_cmd_edit_note (data, focus_in_note);
-	
+
 	if (g_getenv ("PLANNER_DEBUG_UNDO_TASK")) {
 		gchar *note;
 
@@ -1781,9 +1781,9 @@ task_dialog_note_focus_in_cb (GtkWidget     *w,
 		g_message ("Note focus in value: %s", note);
 	}
 
-	gtk_text_buffer_set_text (data->note_buffer, note, -1);	
+	gtk_text_buffer_set_text (data->note_buffer, note, -1);
 
-	g_object_set_data (G_OBJECT (data->task), 
+	g_object_set_data (G_OBJECT (data->task),
 			   "focus_in_note", (gpointer) note);
 
 	return FALSE;
@@ -1799,7 +1799,7 @@ task_dialog_note_stamp_cb (GtkWidget  *w,
 	gchar        stamp[128];
 	gchar       *utf8;
 	GtkTextMark *mark;
-		
+
 	t = time (NULL);
 	tm = localtime (&t);
 
@@ -1808,7 +1808,7 @@ task_dialog_note_stamp_cb (GtkWidget  *w,
 	strftime (stamp, sizeof (stamp), _("%a %d %b %Y, %H:%M\n"), tm);
 
 	utf8 = g_locale_to_utf8 (stamp, -1, NULL, NULL, NULL);
-	
+
 	gtk_text_buffer_get_end_iter (data->note_buffer, &end);
 
 	if (!gtk_text_iter_starts_line (&end)) {
@@ -1837,11 +1837,11 @@ task_dialog_task_child_added_or_removed_cb (MrpTask   *task,
 	DialogData *data;
 
 	data = DIALOG_GET_DATA (dialog);
-	
+
 	task_dialog_update_sensitivity (data);
 }
 
-static GtkWidget *  
+static GtkWidget *
 task_dialog_predecessor_dialog_new (MrpTask       *task,
 				    PlannerWindow *main_window)
 {
@@ -1854,7 +1854,7 @@ task_dialog_predecessor_dialog_new (MrpTask       *task,
 	GList			*relations, *l;
 	MrpRelationType		 rel_type;
 	MrpConstraint		 constraint;
-	
+
 	/* check for attempt to add relation when Must Start On constraint is present */
 	constraint = imrp_task_get_constraint (task);
 	if (constraint.type == MRP_CONSTRAINT_MSO) {
@@ -1863,13 +1863,13 @@ task_dialog_predecessor_dialog_new (MrpTask       *task,
 						 GTK_MESSAGE_ERROR,
 						 GTK_BUTTONS_CLOSE,
 						 "You cannot add a relationship to a task with a Must Start On constraint.");
-		
+
 		gtk_dialog_run (GTK_DIALOG (dialog));
 		gtk_widget_destroy (dialog);
 
 		return NULL;
 	}
-		
+
 
 	/* check for attempt to add relation when SF or FF already present */
 	relations = mrp_task_get_predecessor_relations (task);
@@ -1882,7 +1882,7 @@ task_dialog_predecessor_dialog_new (MrpTask       *task,
 							 GTK_MESSAGE_ERROR,
 							 GTK_BUTTONS_CLOSE,
 				     			 "You cannot add a relationship if a Start to Finish or Finish to Finish relationship already exists.");
-			
+
 			gtk_dialog_run (GTK_DIALOG (dialog));
 			gtk_widget_destroy (dialog);
 
@@ -1892,22 +1892,22 @@ task_dialog_predecessor_dialog_new (MrpTask       *task,
 
 
 	mrp_object_get (task, "project", &project, NULL);
-	
+
 	filename = mrp_paths_get_glade_dir ("add-predecessor.glade");
 	glade = glade_xml_new (filename, NULL, NULL);
 	g_free (filename);
 
 	dialog = glade_xml_get_widget (glade, "add_predecessor_dialog");
-	
+
 	g_object_set_data (G_OBJECT (dialog), "task_main", task);
 	g_object_set_data (G_OBJECT (dialog), "main_window", main_window);
 	w = glade_xml_get_widget (glade, "predecessor_combo");
 	g_object_set_data (G_OBJECT (dialog), "predecessor_combo", w);
-	
+
 	tasks = mrp_project_get_all_tasks (project);
 	tasks = g_list_remove (tasks, task);
 	task_dialog_setup_task_combo (GTK_COMBO (w), tasks);
-	
+
 	w = glade_xml_get_widget (glade, "type_optionmenu");
 	g_object_set_data (G_OBJECT (dialog), "type_optionmenu", w);
 
@@ -1938,8 +1938,8 @@ task_dialog_predecessor_dialog_new (MrpTask       *task,
 	return dialog;
 }
 
-static void  
-task_dialog_new_pred_ok_clicked_cb (GtkWidget *button, 
+static void
+task_dialog_new_pred_ok_clicked_cb (GtkWidget *button,
 				    GtkWidget *dialog)
 {
 	PlannerWindow *main_window;
@@ -1947,12 +1947,12 @@ task_dialog_new_pred_ok_clicked_cb (GtkWidget *button,
 	GtkWidget     *w;
 	GError        *error = NULL;
 	MrpTask       *task_main;
-	MrpTask       *new_task_pred; 
-	MrpProject    *project; 
+	MrpTask       *new_task_pred;
+	MrpProject    *project;
 	gint           lag;
-	gint           pred_type; 
+	gint           pred_type;
 	const gchar   *str;
-	
+
 	main_window = g_object_get_data (G_OBJECT (dialog), "main_window");
 
 	task_main = g_object_get_data (G_OBJECT (dialog), "task_main");
@@ -1975,13 +1975,13 @@ task_dialog_new_pred_ok_clicked_cb (GtkWidget *button,
 		g_warning (_("Can't add new predecessor. No task selected!"));
                 return;
         }
-	
+
 	cmd = planner_task_cmd_link (main_window, new_task_pred, task_main,
 				     pred_type, lag, &error);
-	
+
 	if (!cmd) {
 		GtkWidget *err_dialog;
-		
+
 		err_dialog = gtk_message_dialog_new (GTK_WINDOW (dialog),
 						     GTK_DIALOG_DESTROY_WITH_PARENT,
 						     GTK_MESSAGE_ERROR,
@@ -1989,33 +1989,33 @@ task_dialog_new_pred_ok_clicked_cb (GtkWidget *button,
 						     "%s", error->message);
 		gtk_dialog_run (GTK_DIALOG (err_dialog));
 		gtk_widget_destroy (err_dialog);
-		
+
 		g_error_free (error);
 	} else {
-		gtk_widget_destroy (dialog);	
+		gtk_widget_destroy (dialog);
 	}
 }
 
-static void  
-task_dialog_new_pred_cancel_clicked_cb (GtkWidget *w, 
+static void
+task_dialog_new_pred_cancel_clicked_cb (GtkWidget *w,
 					GtkWidget *dialog)
 {
 	gtk_widget_destroy (dialog);
-} 
+}
 
-static void  
+static void
 task_dialog_add_predecessor_cb (GtkWidget  *widget,
 				DialogData *data)
 {
 	GtkWidget *dialog;
-	
+
 	dialog = task_dialog_predecessor_dialog_new (data->task, data->main_window);
 	if (dialog) {
 		gtk_widget_show (dialog);
 	}
 }
 
-static void  
+static void
 task_dialog_remove_predecessor_cb (GtkWidget  *widget,
 				   DialogData *data)
 {
@@ -2028,21 +2028,21 @@ task_dialog_remove_predecessor_cb (GtkWidget  *widget,
 
 	tree = GTK_TREE_VIEW (data->predecessor_list);
 	model = PLANNER_PREDECESSOR_MODEL (gtk_tree_view_get_model (tree));
-	
+
 	selection = gtk_tree_view_get_selection (tree);
 	if (!gtk_tree_selection_get_selected (selection, NULL, &iter)) {
                 return;
         }
-	
+
 	predecessor = MRP_TASK (planner_list_model_get_object (PLANNER_LIST_MODEL (model), &iter));
 	relation = mrp_task_get_relation (data->task, predecessor);
 	planner_task_cmd_unlink (data->main_window, relation);
 }
 
-static void  
-task_dialog_resource_units_cell_edited (GtkCellRendererText *cell, 
+static void
+task_dialog_resource_units_cell_edited (GtkCellRendererText *cell,
 					gchar               *path_str,
-					gchar               *new_text, 
+					gchar               *new_text,
 					DialogData          *data)
 {
 	GtkTreeView   *tree;
@@ -2054,7 +2054,7 @@ task_dialog_resource_units_cell_edited (GtkCellRendererText *cell,
 	int            value;
 
 	tree = GTK_TREE_VIEW (data->resource_list);
-	
+
 	model = gtk_tree_view_get_model (tree);
 
 	path = gtk_tree_path_new_from_string (path_str);
@@ -2062,7 +2062,7 @@ task_dialog_resource_units_cell_edited (GtkCellRendererText *cell,
 	gtk_tree_path_free (path);
 
 	resource = ((GList *)iter.user_data)->data;
-		
+
 	assignment = mrp_task_get_assignment (data->task, resource);
 	if (assignment) {
 		value = atoi (new_text);
@@ -2073,10 +2073,10 @@ task_dialog_resource_units_cell_edited (GtkCellRendererText *cell,
 	}
 }
 
-static void  
-task_dialog_pred_cell_edited (GtkCellRendererText *cell, 
+static void
+task_dialog_pred_cell_edited (GtkCellRendererText *cell,
 			      gchar               *path_str,
-			      gchar               *new_text, 
+			      gchar               *new_text,
 			      DialogData          *data)
 {
 	GtkTreeView             *tree;
@@ -2093,17 +2093,17 @@ task_dialog_pred_cell_edited (GtkCellRendererText *cell,
 	MrpRelationType          type, new_type;
 
 	tree = GTK_TREE_VIEW (data->predecessor_list);
-	
+
 	model = gtk_tree_view_get_model (tree);
 	path = gtk_tree_path_new_from_string (path_str);
 	column = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (cell), "column"));
 
 	gtk_tree_model_get_iter (model, &iter, path);
-	
+
 	task_pred = MRP_TASK (planner_list_model_get_object (PLANNER_LIST_MODEL (model),
-							     &iter)); 
+							     &iter));
 	task_main = data->task;
-	
+
 	project = mrp_object_get_project (MRP_OBJECT (task_main));
 
 	relation = mrp_task_get_relation (task_main, task_pred);
@@ -2123,30 +2123,30 @@ task_dialog_pred_cell_edited (GtkCellRendererText *cell,
 
 		new_type = cell_index_to_relation_type (planner_cell->selected_index);
 
-		cmd = planner_task_cmd_edit_predecessor (data->main_window, 
+		cmd = planner_task_cmd_edit_predecessor (data->main_window,
 							 task_main, task_pred,
 							 task_pred,
 							 new_type,
 							 lag, &error);
-		
+
 		if (!cmd) {
 			GtkWidget *dialog;
-			
+
 			dialog = gtk_message_dialog_new (
 				NULL,
 				GTK_DIALOG_DESTROY_WITH_PARENT,
 				GTK_MESSAGE_ERROR,
 				GTK_BUTTONS_OK,
 				"%s", error->message);
-			
+
 			gtk_dialog_run (GTK_DIALOG (dialog));
 			gtk_widget_destroy (dialog);
-			
+
 			g_error_free (error);
-			
+
 			/* Restore the previous state. */
 			mrp_task_add_predecessor (task_main,
-						  task_pred, 
+						  task_pred,
 						  type,
 						  lag,
 						  NULL);
@@ -2184,14 +2184,14 @@ cell_index_to_relation_type (gint i)
 	}
 }
 
-static void  
+static void
 task_dialog_cell_type_show_popup (PlannerCellRendererList *cell,
 				  const gchar        *path_string,
 				  gint                x1,
 				  gint                y1,
 				  gint                x2,
 				  gint                y2,
-				  DialogData         *data) 
+				  DialogData         *data)
 {
 	GtkTreeView       *tree;
 	GtkTreeModel      *model;
@@ -2205,10 +2205,10 @@ task_dialog_cell_type_show_popup (PlannerCellRendererList *cell,
 	tree = GTK_TREE_VIEW (data->predecessor_list);
 	model = gtk_tree_view_get_model (tree);
 	list_model = PLANNER_LIST_MODEL (model);
-	
+
 	path = gtk_tree_path_new_from_string (path_string);
 	gtk_tree_model_get_iter (model, &iter, path);
-	
+
 	predecessor = MRP_TASK (planner_list_model_get_object (list_model, &iter));
 
 	relation = mrp_task_get_relation (data->task, predecessor);
@@ -2218,7 +2218,7 @@ task_dialog_cell_type_show_popup (PlannerCellRendererList *cell,
 	list = g_list_append (list, g_strdup (_("FF")));
 	list = g_list_append (list, g_strdup (_("SS")));
 	list = g_list_append (list, g_strdup (_("SF")));
-	
+
 	cell->list = list;
 
 	switch (mrp_relation_get_relation_type (relation)) {
@@ -2237,7 +2237,7 @@ task_dialog_cell_type_show_popup (PlannerCellRendererList *cell,
 	default:
 		cell->selected_index = 0;
 		break;
-	}	
+	}
 }
 
 static void
@@ -2280,7 +2280,7 @@ task_dialog_schedule_popup_cb (PlannerPopupButton *popup_button,
 	widget = planner_task_date_widget_new ();
 
 	g_object_get (data->task, "constraint", &constraint, NULL);
-	
+
 	planner_task_date_widget_set_constraint_type (PLANNER_TASK_DATE_WIDGET (widget),
 						      constraint->type);
 
@@ -2290,7 +2290,7 @@ task_dialog_schedule_popup_cb (PlannerPopupButton *popup_button,
 	}
 
 	g_free (constraint);
-	
+
 	g_signal_connect (widget,
 			  "date_selected",
 			  G_CALLBACK (task_dialog_schedule_date_selected_cb),
@@ -2299,9 +2299,9 @@ task_dialog_schedule_popup_cb (PlannerPopupButton *popup_button,
 			  "cancelled",
 			  G_CALLBACK (task_dialog_schedule_cancelled_cb),
 			  popup_button);
-	
+
 	return widget;
-}	      
+}
 
 static void
 task_dialog_schedule_popdown_cb (PlannerPopupButton *popup_button,
@@ -2313,22 +2313,22 @@ task_dialog_schedule_popdown_cb (PlannerPopupButton *popup_button,
 	GList		*relations, *l;
 	GtkWidget	*dialog;
 	MrpRelationType  rel_type;
-	
+
 	if (ok) {
 		constraint.time = planner_task_date_widget_get_date (PLANNER_TASK_DATE_WIDGET (widget));
 		constraint.type = planner_task_date_widget_get_constraint_type (PLANNER_TASK_DATE_WIDGET (widget));
-		
+
 		relations = mrp_task_get_predecessor_relations (data->task);
 
 		/* check for attempt to add MSO constraint when relations are present */
 		if (constraint.type == MRP_CONSTRAINT_MSO && relations) {
-			
+
 			dialog = gtk_message_dialog_new (GTK_WINDOW (data->main_window),
 							 GTK_DIALOG_DESTROY_WITH_PARENT,
 							 GTK_MESSAGE_ERROR,
 							 GTK_BUTTONS_CLOSE,
 							 "You cannot add a Must Start On constraint with predecessor relations defined for this task.");
-			
+
 			gtk_dialog_run (GTK_DIALOG (dialog));
 			gtk_widget_destroy (dialog);
 			gtk_widget_destroy (widget);
@@ -2347,7 +2347,7 @@ task_dialog_schedule_popdown_cb (PlannerPopupButton *popup_button,
 									 GTK_MESSAGE_ERROR,
 									 GTK_BUTTONS_CLOSE,
 									 "You cannot add a Start No Earlier Than constraint because a Start to Finish or Finish to Finish predecessor relationship exists for this task.");
-					
+
 					gtk_dialog_run (GTK_DIALOG (dialog));
 					gtk_widget_destroy (dialog);
 					gtk_widget_destroy (widget);
@@ -2361,7 +2361,7 @@ task_dialog_schedule_popdown_cb (PlannerPopupButton *popup_button,
 					  data->task,
 					  &constraint);
 	}
-	
+
 	gtk_widget_destroy (widget);
 }
 
@@ -2373,7 +2373,7 @@ task_dialog_setup_widgets (DialogData *data,
 	gchar        *name;
 	MrpTaskType   type;
 	MrpTaskSched  sched;
-	gchar        *note;      
+	gchar        *note;
 	gint          int_value;
 	gchar        *str;
 	GtkWidget    *hbox;
@@ -2440,7 +2440,7 @@ task_dialog_setup_widgets (DialogData *data,
 			  "focus_out_event",
 			  G_CALLBACK (task_dialog_work_focus_out_cb),
 			  data);
-	
+
 	data->duration_entry = glade_xml_get_widget (glade, "duration_entry");
 	g_object_get (data->task, "duration", &int_value, NULL);
 	str = planner_format_duration (mrp_object_get_project (MRP_OBJECT (data->task)), int_value);
@@ -2489,14 +2489,14 @@ task_dialog_setup_widgets (DialogData *data,
 			  "focus_out_event",
 			  G_CALLBACK (task_dialog_complete_focus_out_cb),
 			  data);
-	
+
 	data->priority_spinbutton = glade_xml_get_widget (glade, "priority_spinbutton");
-	g_object_get (data->task, "priority", &int_value, NULL);	
+	g_object_get (data->task, "priority", &int_value, NULL);
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON (data->priority_spinbutton), int_value);
 	g_signal_connect (data->priority_spinbutton,
 			  "value_changed",
 			  G_CALLBACK (task_dialog_priority_changed_cb),
-			  data);	
+			  data);
 	g_signal_connect (data->priority_spinbutton,
 			  "focus_in_event",
 			  G_CALLBACK (task_dialog_priority_focus_in_cb),
@@ -2508,7 +2508,7 @@ task_dialog_setup_widgets (DialogData *data,
 
 	data->note_textview = glade_xml_get_widget (glade, "note_textview");
 
-	data->note_buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (data->note_textview));	
+	data->note_buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (data->note_textview));
 
 	g_object_get (data->task, "note", &note, NULL);
 	if (note) {
@@ -2550,13 +2550,13 @@ task_dialog_assignment_toggled_cb (GtkCellRendererText *cell,
 	gboolean      active;
 
 	tree = GTK_TREE_VIEW (data->resource_list);
-	
+
 	g_object_get (cell, "active", &active, NULL);
 
 	model = gtk_tree_view_get_model (tree);
 
 	path = gtk_tree_path_new_from_string (path_str);
-	
+
 	gtk_tree_model_get_iter (model, &iter, path);
 
 	gtk_tree_path_free (path);
@@ -2567,12 +2567,12 @@ task_dialog_assignment_toggled_cb (GtkCellRendererText *cell,
 		task_cmd_assign_add (data->main_window, data->task, resource, 100);
 	} else {
 		MrpAssignment *assignment;
-		
+
 		assignment = mrp_task_get_assignment (data->task, resource);
 
 		if (assignment) {
 			task_cmd_assign_remove (data->main_window, assignment);
-		} 
+		}
 	}
 }
 
@@ -2607,11 +2607,11 @@ task_dialog_setup_resource_list (DialogData *data)
 
 	gtk_tree_selection_set_mode (gtk_tree_view_get_selection (tree),
 				     GTK_SELECTION_SINGLE);
-	
+
 	/* Name */
 	cell = gtk_cell_renderer_text_new ();
 	g_object_set (cell, "editable", FALSE, NULL);
-	
+
 	col = gtk_tree_view_column_new_with_attributes (
 		_("Name"),
 		cell,
@@ -2621,7 +2621,7 @@ task_dialog_setup_resource_list (DialogData *data)
 	gtk_tree_view_column_set_resizable (col, TRUE);
 	gtk_tree_view_column_set_min_width (col, 200);
 	gtk_tree_view_append_column (tree, col);
-	
+
 	/* Assigned. */
 	cell = gtk_cell_renderer_toggle_new ();
 	g_object_set (cell,
@@ -2632,24 +2632,24 @@ task_dialog_setup_resource_list (DialogData *data)
 			  "toggled",
 			  G_CALLBACK (task_dialog_assignment_toggled_cb),
 			  data);
-	
+
 	col = gtk_tree_view_column_new_with_attributes (
 		_("Assigned"),
 		cell,
 		"active", RESOURCE_ASSIGNMENT_COL_ASSIGNED,
 		NULL);
-	
+
 	gtk_tree_view_column_set_resizable (col, TRUE);
 	gtk_tree_view_append_column (tree, col);
 
 	/* Assigned units */
 	cell = gtk_cell_renderer_text_new ();
-	
+
 	g_signal_connect (cell,
 			  "edited",
 			  G_CALLBACK (task_dialog_resource_units_cell_edited),
 			  data);
-	
+
 	col = gtk_tree_view_column_new_with_attributes (
 		_("Units"),
 		cell,
@@ -2662,7 +2662,7 @@ task_dialog_setup_resource_list (DialogData *data)
 	gtk_tree_view_append_column (tree, col);
 
 	model = GTK_TREE_MODEL (planner_assignment_model_new (data->task));
-	
+
 	gtk_tree_view_set_model (tree, model);
 }
 
@@ -2677,7 +2677,7 @@ task_dialog_setup_predecessor_list (DialogData *data)
 	tree = GTK_TREE_VIEW (data->predecessor_list);
 	gtk_tree_selection_set_mode (gtk_tree_view_get_selection (tree),
 				     GTK_SELECTION_SINGLE);
-	
+
 	/* Name */
 	cell = planner_cell_renderer_list_new ();
 
@@ -2694,7 +2694,7 @@ task_dialog_setup_predecessor_list (DialogData *data)
 	gtk_tree_view_column_set_resizable (col, TRUE);
 	gtk_tree_view_column_set_min_width (col, 200);
 	gtk_tree_view_append_column (tree, col);
-	
+
 	/* Type */
 	cell = planner_cell_renderer_list_new ();
 
@@ -2703,7 +2703,7 @@ task_dialog_setup_predecessor_list (DialogData *data)
 	g_object_set_data (G_OBJECT (cell),
 			   "column",
 			   GINT_TO_POINTER (PREDECESSOR_COL_TYPE));
-	
+
 	g_signal_connect (cell,
 			  "edited",
 			  G_CALLBACK (task_dialog_pred_cell_edited),
@@ -2712,20 +2712,20 @@ task_dialog_setup_predecessor_list (DialogData *data)
 	g_signal_connect (cell,
 			  "show_popup",
 			  G_CALLBACK (task_dialog_cell_type_show_popup),
-			  data); 
+			  data);
 
 	g_signal_connect_after (cell,
 				"hide_popup",
 				G_CALLBACK (task_dialog_cell_type_hide_popup),
 				data);
-	
+
 	col = gtk_tree_view_column_new_with_attributes (_("Type"),
 							cell,
 							"text", PREDECESSOR_COL_TYPE,
 							NULL);
 	gtk_tree_view_column_set_resizable (col, TRUE);
 	gtk_tree_view_append_column (tree, col);
-	
+
 	/* Lag */
 	cell = gtk_cell_renderer_text_new ();
 
@@ -2739,25 +2739,25 @@ task_dialog_setup_predecessor_list (DialogData *data)
 			  "edited",
 			  G_CALLBACK (task_dialog_pred_cell_edited),
 			  data);
-	
+
 	col = gtk_tree_view_column_new ();
 	gtk_tree_view_column_set_title (col, _("Lag"));
 
 	gtk_tree_view_column_pack_start (col,
 					 cell,
 					 TRUE);
-	
+
 	gtk_tree_view_column_set_cell_data_func (col,
 						 cell,
 						 (GtkTreeCellDataFunc) task_dialog_lag_data_func,
 						 data,
 						 NULL);
-	
+
 	gtk_tree_view_column_set_resizable (col, TRUE);
 	gtk_tree_view_append_column (tree, col);
-	
+
 	model = planner_predecessor_model_new (data->task);
-	
+
 	gtk_tree_view_set_model (tree, model);
 }
 
@@ -2781,7 +2781,7 @@ task_dialog_connect_to_task (DialogData *data)
 				 G_CALLBACK (task_dialog_task_sched_changed_cb),
 				 data->dialog,
 				 0);
-	
+
 	g_signal_connect_object (data->task,
 				 "notify::note",
 				 G_CALLBACK (task_dialog_task_note_changed_cb),
@@ -2817,7 +2817,7 @@ task_dialog_connect_to_task (DialogData *data)
 				 G_CALLBACK (task_dialog_task_constraint_changed_cb),
 				 data->dialog,
 				 0);
-				 
+
 	g_signal_connect_object (data->task,
 				 "child_added",
 				 G_CALLBACK (task_dialog_task_child_added_or_removed_cb),
@@ -2859,7 +2859,7 @@ task_dialog_update_sensitivity (DialogData *data)
 	gboolean     leaf, milestone, fixed;
 
 	leaf = (mrp_task_get_n_children (data->task) == 0);
-	
+
 	type = mrp_task_get_task_type (data->task);
 	milestone = (type == MRP_TASK_TYPE_MILESTONE);
 
@@ -2870,7 +2870,7 @@ task_dialog_update_sensitivity (DialogData *data)
 	gtk_widget_set_sensitive (data->schedule_button, leaf);
 
 	gtk_widget_set_sensitive (data->fixed_checkbutton, leaf && !milestone);
-	
+
 	gtk_widget_set_sensitive (data->duration_entry, leaf && !milestone && fixed);
 	gtk_widget_set_sensitive (data->work_entry, leaf && !milestone);
 }
@@ -2890,7 +2890,7 @@ task_dialog_update_title (DialogData *data)
 	}
 	gtk_window_set_title (GTK_WINDOW (data->dialog), title);
 	g_free (title);
-}	
+}
 
 static void
 task_dialog_parent_destroy_cb (GtkWidget *parent,
@@ -2919,7 +2919,7 @@ planner_task_dialog_new (PlannerWindow *window,
 	MrpProject   *project;
 	MrpCalendar  *calendar;
 	gchar        *filename;
-	
+
 	g_return_val_if_fail (MRP_IS_TASK (task), NULL);
 
 	if (!dialogs) {
@@ -2942,7 +2942,7 @@ planner_task_dialog_new (PlannerWindow *window,
 	}
 
 	dialog = glade_xml_get_widget (glade, "task_dialog");
-	
+
 	data = g_new0 (DialogData, 1);
 
 	data->main_window = window;
@@ -2955,7 +2955,7 @@ planner_task_dialog_new (PlannerWindow *window,
 			  "destroy",
 			  G_CALLBACK (task_dialog_destroy_cb),
 			  data);
-	
+
 	g_signal_connect_object (window,
 				 "destroy",
 				 G_CALLBACK (task_dialog_parent_destroy_cb),
@@ -2971,7 +2971,7 @@ planner_task_dialog_new (PlannerWindow *window,
 	w = glade_xml_get_widget (glade, "task_notebook");
 
 	gtk_notebook_set_current_page (GTK_NOTEBOOK (w), page);
-		
+
 	data->resource_list = glade_xml_get_widget (glade, "resource_list");
 	task_dialog_setup_resource_list (data);
 
@@ -2983,7 +2983,7 @@ planner_task_dialog_new (PlannerWindow *window,
 			  "clicked",
 			  G_CALLBACK (task_dialog_add_predecessor_cb),
 			  data);
-	
+
 	w = glade_xml_get_widget (glade, "remove_predecessor_button");
 	g_signal_connect (w,
 			  "clicked",
@@ -2991,7 +2991,7 @@ planner_task_dialog_new (PlannerWindow *window,
 			  data);
 
 	size_group = gtk_size_group_new (GTK_SIZE_GROUP_VERTICAL);
-	
+
 	w = glade_xml_get_widget (glade, "name_pad");
 	gtk_size_group_add_widget (size_group, w);
 
@@ -3009,15 +3009,15 @@ planner_task_dialog_new (PlannerWindow *window,
 	g_object_set_data_full (G_OBJECT (dialog),
 				"data", data,
 				g_free);
-	
+
 	task_dialog_setup_widgets (data, glade);
 
 	task_dialog_update_sensitivity (data);
 
 	task_dialog_update_title (data);
-		
+
 	task_dialog_connect_to_task (data);
-	
+
 	g_object_get (task, "project", &project, NULL);
 	calendar = mrp_project_get_calendar (project);
 
@@ -3026,6 +3026,6 @@ planner_task_dialog_new (PlannerWindow *window,
 				 G_CALLBACK (task_dialog_calendar_changed_cb),
 				 dialog,
 				 0);
-	
+
 	return dialog;
 }

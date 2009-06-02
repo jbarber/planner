@@ -77,7 +77,7 @@ planner_scale_format_time (mrptime            t,
 
 	mrp_time2_get_date (t2, &year, &month, &day);
 	mrp_time2_get_time (t2, &hour, &min, &sec);
-	
+
 	switch (unit) {
 	case MRP_TIME_UNIT_HOUR:
 		switch (format) {
@@ -94,7 +94,7 @@ planner_scale_format_time (mrptime            t,
 			break;
 		}
 		break;
-		
+
 	case MRP_TIME_UNIT_HALFDAY:
 		switch (format) {
 		default:
@@ -102,7 +102,7 @@ planner_scale_format_time (mrptime            t,
 			break;
 		}
 		break;
-		
+
 	case MRP_TIME_UNIT_DAY:
 		switch (format) {
 		case PLANNER_SCALE_FORMAT_SHORT:
@@ -132,7 +132,7 @@ planner_scale_format_time (mrptime            t,
 		case PLANNER_SCALE_FORMAT_MEDIUM:
 			str = g_strdup_printf (_("Week %d"),
 					       mrp_time2_get_week_number (t2, NULL));
-			break; 
+			break;
 		case PLANNER_SCALE_FORMAT_LONG:
 			/* i18n: Week, year. */
 			week = mrp_time2_get_week_number (t2, &year),
@@ -160,10 +160,10 @@ planner_scale_format_time (mrptime            t,
 			break;
 		}
 		break;
-		
+
 	case MRP_TIME_UNIT_QUARTER:
 		num = 1 + floor (month / 3);
-		
+
 		switch (format) {
 		case PLANNER_SCALE_FORMAT_SHORT:
 			/* i18n: Short "Quarter", preferably 1 letter. */
@@ -172,7 +172,7 @@ planner_scale_format_time (mrptime            t,
 		case PLANNER_SCALE_FORMAT_MEDIUM:
 			/* i18n: Short "Quarter", preferably 2-3 letters. */
 			str = g_strdup_printf (_("Qtr %d"), num);
-			break; 
+			break;
 		case PLANNER_SCALE_FORMAT_LONG:
 			/* i18n: Year, short "Quarter", preferably 2-3 letters. */
 			str = g_strdup_printf (_("%d, Qtr %d"),
@@ -181,7 +181,7 @@ planner_scale_format_time (mrptime            t,
 			break;
 		}
 		break;
-	
+
 	case MRP_TIME_UNIT_HALFYEAR:
 		num = 1 + floor (month / 6);
 
@@ -211,14 +211,14 @@ planner_scale_format_time (mrptime            t,
 	case MRP_TIME_UNIT_NONE:
 		str = NULL;
 		break;
-		
+
 	default:
 		g_assert_not_reached ();
 		break;
 	}
 
 	mrp_time2_free (t2);
-	
+
 	return str;
 }
 

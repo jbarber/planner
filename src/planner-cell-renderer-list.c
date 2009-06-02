@@ -68,7 +68,7 @@ GType
 planner_cell_renderer_list_get_type (void)
 {
 	static GType type = 0;
-	
+
 	if (!type) {
 		static const GTypeInfo info = {
 			sizeof (PlannerCellRendererListClass),
@@ -81,13 +81,13 @@ planner_cell_renderer_list_get_type (void)
 			0,              /* n_preallocs */
 			(GInstanceInitFunc) mcrl_init,
 		};
-		
+
 		type = g_type_register_static (PLANNER_TYPE_CELL_RENDERER_POPUP,
 					       "PlannerCellRendererList",
 					       &info,
 					       0);
 	}
-	
+
 	return type;
 }
 
@@ -100,7 +100,7 @@ mcrl_init (PlannerCellRendererList *cell)
 	GtkTreeSelection    *selection;
 
 	popup_cell = PLANNER_CELL_RENDERER_POPUP (cell);
-	
+
 	frame = gtk_frame_new (NULL);
 	gtk_container_add (GTK_CONTAINER (popup_cell->popup_window), frame);
 	gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_OUT);
@@ -108,11 +108,11 @@ mcrl_init (PlannerCellRendererList *cell)
 
 	cell->tree_view = gtk_tree_view_new ();
 	gtk_container_add (GTK_CONTAINER (frame), cell->tree_view);
-	
+
 	gtk_tree_view_set_headers_visible (GTK_TREE_VIEW (cell->tree_view), FALSE);
 
 	textcell = gtk_cell_renderer_text_new ();
-	
+
 	gtk_tree_view_insert_column_with_attributes (
 		GTK_TREE_VIEW (cell->tree_view),
 		0,
@@ -130,7 +130,7 @@ mcrl_init (PlannerCellRendererList *cell)
 	g_signal_connect (selection, "changed",
 			  G_CALLBACK (mcrl_selection_changed_cb),
 			  cell);
-	
+
 	gtk_widget_show (cell->tree_view);
 
 	popup_cell->focus_window = cell->tree_view;
@@ -178,7 +178,7 @@ mcrl_show_popup (PlannerCellRendererPopup *cell,
 				    0, l->data,
 				    -1);
 	}
-	
+
 	gtk_tree_view_set_model (GTK_TREE_VIEW (list_cell->tree_view), model);
 	g_object_unref (model);
 
@@ -201,7 +201,7 @@ mcrl_hide_popup (PlannerCellRendererPopup *cell)
 	GList              *l;
 
 	list_cell = PLANNER_CELL_RENDERER_LIST (cell);
-	
+
 	if (parent_class->hide_popup) {
 		parent_class->hide_popup (cell);
 	}
@@ -209,11 +209,11 @@ mcrl_hide_popup (PlannerCellRendererPopup *cell)
 	for (l = list_cell->list; l; l = l->next) {
 		g_free (l->data);
 	}
-	
+
 	g_list_free (list_cell->list);
 	list_cell->list = NULL;
 }
-	 
+
 GtkCellRenderer *
 planner_cell_renderer_list_new (void)
 {
@@ -224,7 +224,7 @@ planner_cell_renderer_list_new (void)
 	return GTK_CELL_RENDERER (cell);
 }
 
-static void 
+static void
 mcrl_selection_changed_cb (GtkTreeSelection   *selection,
 			   PlannerCellRendererList *cell)
 {
@@ -233,7 +233,7 @@ mcrl_selection_changed_cb (GtkTreeSelection   *selection,
 	GtkTreeIter   iter;
 	GtkTreePath  *path;
 	gint         *indices;
-	
+
 	selected = gtk_tree_selection_get_selected (selection,
 						    &model,
 						    &iter);
@@ -241,16 +241,16 @@ mcrl_selection_changed_cb (GtkTreeSelection   *selection,
 	if (!selected) {
 		return;
 	}
-	
+
 	path = gtk_tree_model_get_path (model, &iter);
 	indices = gtk_tree_path_get_indices (path);
 
 	cell->selected_index = indices[0];
-	
+
 	gtk_tree_path_free (path);
 }
 
-static void 
+static void
 mcrl_select_index (PlannerCellRendererList *cell,
 		   gint                index)
 {
@@ -260,10 +260,10 @@ mcrl_select_index (PlannerCellRendererList *cell,
 	GtkTreePath      *path;
 
 	tree_view = GTK_TREE_VIEW (cell->tree_view);
-	
+
 	model = gtk_tree_view_get_model (tree_view);
 	selection = gtk_tree_view_get_selection (tree_view);
-	
+
 	path = gtk_tree_path_new ();
 	gtk_tree_path_append_index (path, index);
 
@@ -271,7 +271,7 @@ mcrl_select_index (PlannerCellRendererList *cell,
 				  path,
 				  NULL,
 				  FALSE);
-	
+
 	gtk_tree_path_free (path);
 }
 

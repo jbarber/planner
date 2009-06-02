@@ -76,8 +76,8 @@ mrp_assignment_get_type (void)
 			(GInstanceInitFunc) assignment_init,
 		};
 
-		type = g_type_register_static (MRP_TYPE_OBJECT, 
-					       "MrpAssignment", 
+		type = g_type_register_static (MRP_TYPE_OBJECT,
+					       "MrpAssignment",
 					       &info, 0);
 	}
 
@@ -88,9 +88,9 @@ static void
 assignment_class_init (MrpAssignmentClass *klass)
 {
         GObjectClass   *object_class     = G_OBJECT_CLASS (klass);
-        
+
         parent_class = MRP_OBJECT_CLASS (g_type_class_peek_parent (klass));
-        
+
         object_class->finalize     = assignment_finalize;
         object_class->set_property = assignment_set_property;
         object_class->get_property = assignment_get_property;
@@ -115,7 +115,7 @@ assignment_class_init (MrpAssignmentClass *klass)
                                          g_param_spec_int ("units",
 							   "Units",
 							   "Number of units assignment",
-							   -1, 
+							   -1,
 							   G_MAXINT,
 							   0,
 							   G_PARAM_READWRITE));
@@ -125,9 +125,9 @@ static void
 assignment_init (MrpAssignment *assignment)
 {
         MrpAssignmentPriv *priv;
-        
+
         priv = g_new0 (MrpAssignmentPriv, 1);
-        
+
         assignment->priv = priv;
 }
 
@@ -136,7 +136,7 @@ assignment_finalize (GObject *object)
 {
         MrpAssignment     *assignment = MRP_ASSIGNMENT (object);
         MrpAssignmentPriv *priv;
-        
+
         priv = assignment->priv;
 
 	if (priv->task) {
@@ -162,10 +162,10 @@ assignment_set_property (GObject      *object,
 {
 	MrpAssignment     *assignment;
 	MrpAssignmentPriv *priv;
-	
+
 	assignment = MRP_ASSIGNMENT (object);
 	priv       = assignment->priv;
-	
+
 	/* FIXME: See bug #138368 about this. The assignment doesn't have a
 	 * project pointer so we can't emit changed on it. We cheat for now and
 	 * use the resource/task in those cases.
@@ -179,7 +179,7 @@ assignment_set_property (GObject      *object,
 		priv->task = g_object_ref (g_value_get_object (value));
 		mrp_object_changed (MRP_OBJECT (priv->task));
 		break;
-		
+
 	case PROP_RESOURCE:
 		if (priv->resource) {
 			g_object_unref (priv->resource);
@@ -206,10 +206,10 @@ assignment_get_property (GObject    *object,
 {
 	MrpAssignment     *assignment;
 	MrpAssignmentPriv *priv;
-	
+
 	assignment = MRP_ASSIGNMENT (object);
 	priv       = assignment->priv;
-	
+
 	switch (prop_id) {
 	case PROP_TASK:
 		g_value_set_object (value, priv->task);
@@ -231,25 +231,25 @@ assignment_get_property (GObject    *object,
  *
  * Creates a new, empty, assignment. You most often don't want to create an
  * assignment explicitly like this, but using mrp_resource_assign() instead.
- * 
+ *
  * Return value: Newly created assignment.
  **/
 MrpAssignment *
 mrp_assignment_new (void)
 {
         MrpAssignment *assignment;
-        
+
         assignment = g_object_new (MRP_TYPE_ASSIGNMENT, NULL);
-        
+
         return assignment;
 }
 
 /**
  * mrp_assignment_get_task:
  * @assignment: an #MrpAssignment
- * 
+ *
  * Retrieves the #MrpTask associated with @assignment.
- * 
+ *
  * Return value: the task associated with the assignment object. The reference
  * count of the task is not increased.
  **/
@@ -257,16 +257,16 @@ MrpTask *
 mrp_assignment_get_task (MrpAssignment *assignment)
 {
 	g_return_val_if_fail (MRP_IS_ASSIGNMENT (assignment), NULL);
-	
+
 	return assignment->priv->task;
 }
 
 /**
  * mrp_assignment_get_resource:
  * @assignment: an #MrpAssignment
- * 
+ *
  * Retrieves the #MrpResource associated with @assignment.
- * 
+ *
  * Return value: the resource associated with the assignment object. The reference
  * count of the resource is not increased.
  **/
@@ -274,23 +274,23 @@ MrpResource *
 mrp_assignment_get_resource (MrpAssignment *assignment)
 {
 	g_return_val_if_fail (MRP_IS_ASSIGNMENT (assignment), NULL);
-	
+
 	return assignment->priv->resource;
 }
 
 /**
  * mrp_assignment_get_units:
  * @assignment: an #MrpAssignment
- * 
+ *
  * Retrieves the number of units that the resource is assigned with to the
  * task. 100 means 100%, etc.
- * 
+ *
  * Return value: number of units of the assignment.
  **/
 gint
 mrp_assignment_get_units (MrpAssignment *assignment)
 {
 	g_return_val_if_fail (MRP_IS_ASSIGNMENT (assignment), -1);
-	
+
 	return assignment->priv->units;
 }
