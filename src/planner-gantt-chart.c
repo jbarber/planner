@@ -110,7 +110,7 @@ struct _PlannerGanttChartPriv {
 	gboolean         nonstandard_days;
 
 	/* GuideLines . */
-	gboolean 		 guidelines;
+	gboolean         guidelines;
 
 	/* Keep a list of signal connection ids, so we can remove them
 	 * easily.
@@ -1107,7 +1107,7 @@ gantt_chart_insert_task (PlannerGanttChart *chart,
 static PlannerRelationArrow *
 gantt_chart_add_relation (PlannerGanttChart *chart,
 			  TreeNode          *task,
-			  TreeNode     	    *predecessor,
+			  TreeNode          *predecessor,
 			  MrpRelationType    type)
 {
 	return planner_relation_arrow_new (PLANNER_GANTT_ROW (task->item),

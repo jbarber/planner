@@ -415,7 +415,7 @@ task_view_project_loaded_cb (MrpProject  *project,
 	PlannerTaskViewPriv *priv;
 	GtkTreeModel        *model;
 
- 	priv = PLANNER_TASK_VIEW (view)->priv;
+	priv = PLANNER_TASK_VIEW (view)->priv;
 
 	model = GTK_TREE_MODEL (planner_gantt_model_new (project));
 

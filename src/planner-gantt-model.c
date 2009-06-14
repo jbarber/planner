@@ -117,7 +117,7 @@ planner_gantt_model_get_type (void)
 		g_type_add_interface_static (type,
 					     GTK_TYPE_TREE_MODEL,
 					     &tree_model_info);
-   	}
+	}
 
 	return type;
 }

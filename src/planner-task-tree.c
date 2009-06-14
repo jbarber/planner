@@ -507,7 +507,7 @@ task_cmd_remove_undo (PlannerCmd *cmd_base)
 	depth = gtk_tree_path_get_depth (path);
 	position = gtk_tree_path_get_indices (path)[depth - 1];
 
- 	if (depth > 1) {
+	if (depth > 1) {
 		gtk_tree_path_up (path);
 		parent = task_tree_get_task_from_path (cmd->tree, path);
 	} else {
@@ -3285,10 +3285,10 @@ planner_task_tree_move_task_up (PlannerTaskTree *tree)
 	GtkTreeSelection    *selection;
 	PlannerGanttModel   *model;
 	GtkTreePath	    *path;
-	MrpProject  	    *project;
-	MrpTask	    	    *task, *parent, *sibling;
-	GList	    	    *list, *l, *m;
-	guint	    	     position;
+	MrpProject          *project;
+	MrpTask	            *task, *parent, *sibling;
+	GList	            *list, *l, *m;
+	guint	             position;
 	gboolean	     proceed, skip;
 	gint		     count;
 	MrpTask             *anchor_task;
@@ -3314,8 +3314,8 @@ planner_task_tree_move_task_up (PlannerTaskTree *tree)
 		anchor_task = NULL;
 	}
 
- 	proceed = TRUE;
- 	count = 0 ;
+	proceed = TRUE;
+	count = 0 ;
 
 	/* Note: This will not be 100% accurate since even if we select 10
 	 * tasks, only one of them may end up moved. It's not a big deal
@@ -3334,11 +3334,11 @@ planner_task_tree_move_task_up (PlannerTaskTree *tree)
 	}
 
 	for (l = list; l; l = l->next) {
- 		count++;
+		count++;
 
- 		task = l->data;
- 		position = mrp_task_get_position (task);
- 		parent = mrp_task_get_parent (task);
+		task = l->data;
+		position = mrp_task_get_position (task);
+		parent = mrp_task_get_parent (task);
 
 		/* We now check if the parent is selected as well me. If it is
 		 * then we skip checks on our position and skip moving because
@@ -3351,27 +3351,27 @@ planner_task_tree_move_task_up (PlannerTaskTree *tree)
 		 * do that we need to recurse this selection list.
 		 */
 
- 		skip = FALSE;
- 		for (m = list; m; m = m->next) {
- 			if (m->data == parent ) {
- 				skip = TRUE;
+		skip = FALSE;
+		for (m = list; m; m = m->next) {
+			if (m->data == parent ) {
+				skip = TRUE;
 				break;
- 			}
- 		}
+			}
+		}
 
- 		if (position == 0 && count == 1) {
+		if (position == 0 && count == 1) {
 			/* We stop everything if at top of list and first task
 			 * else just stop moving this one task.
 			 */
- 			proceed = FALSE;
- 		}
- 		if (!skip && position != 0 && proceed) {
+			proceed = FALSE;
+		}
+		if (!skip && position != 0 && proceed) {
 			/* Move task from position to position - 1. */
- 			sibling = mrp_task_get_nth_child (parent, position - 1);
+			sibling = mrp_task_get_nth_child (parent, position - 1);
 			task_cmd_move (tree, _("Move task up"),
 				       task, sibling, parent,
 				       TRUE, NULL);
- 		}
+		}
 	}
 
 	/* Reselect all the previous selected tasks. */
@@ -3406,8 +3406,8 @@ planner_task_tree_move_task_down (PlannerTaskTree *tree)
 	GtkTreeSelection    *selection;
 	PlannerGanttModel   *model;
 	GtkTreePath	    *path;
-	MrpProject 	    *project;
-	MrpTask	   	    *task, *parent, *sibling;
+	MrpProject          *project;
+	MrpTask	            *task, *parent, *sibling;
 	GList		    *list, *l, *m;
 	guint		     position;
 	gboolean	     proceed, skip;

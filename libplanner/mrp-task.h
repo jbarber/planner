@@ -29,12 +29,12 @@
 #include <libplanner/mrp-time.h>
 #include <libplanner/mrp-assignment.h>
 
-#define MRP_TYPE_TASK			(mrp_task_get_type ())
-#define MRP_TASK(obj)			(G_TYPE_CHECK_INSTANCE_CAST ((obj), MRP_TYPE_TASK, MrpTask))
-#define MRP_TASK_CLASS(klass)		(G_TYPE_CHECK_CLASS_CAST ((klass), MRP_TYPE_TASK, MrpTaskClass))
-#define MRP_IS_TASK(obj)		(G_TYPE_CHECK_INSTANCE_TYPE ((obj), MRP_TYPE_TASK))
-#define MRP_IS_TASK_CLASS(klass)	(G_TYPE_CHECK_TYPE ((obj), MRP_TYPE_TASK))
-#define MRP_TASK_GET_CLASS(obj)		(G_TYPE_INSTANCE_GET_CLASS ((obj), MRP_TYPE_TASK, MrpTaskClass))
+#define MRP_TYPE_TASK                   (mrp_task_get_type ())
+#define MRP_TASK(obj)                   (G_TYPE_CHECK_INSTANCE_CAST ((obj), MRP_TYPE_TASK, MrpTask))
+#define MRP_TASK_CLASS(klass)           (G_TYPE_CHECK_CLASS_CAST ((klass), MRP_TYPE_TASK, MrpTaskClass))
+#define MRP_IS_TASK(obj)                (G_TYPE_CHECK_INSTANCE_TYPE ((obj), MRP_TYPE_TASK))
+#define MRP_IS_TASK_CLASS(klass)        (G_TYPE_CHECK_TYPE ((obj), MRP_TYPE_TASK))
+#define MRP_TASK_GET_CLASS(obj)         (G_TYPE_INSTANCE_GET_CLASS ((obj), MRP_TYPE_TASK, MrpTaskClass))
 
 #define MRP_TYPE_CONSTRAINT             (mrp_constraint_get_type ())
 #define MRP_TYPE_RELATION               (mrp_relation_get_type ())

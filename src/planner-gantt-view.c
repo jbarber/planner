@@ -208,19 +208,19 @@ gantt_view_chart_scroll_event (GtkWidget * gki, GdkEventScroll * event, PlannerG
 		priv = view->priv;
 		planner_gantt_chart_can_zoom (PLANNER_GANTT_CHART (priv->gantt), &can_in, &can_out);
 		switch (event->direction) {
-      			case GDK_SCROLL_UP: {
+			case GDK_SCROLL_UP: {
 				if (can_in)
 					gantt_view_zoom_in_cb  (NULL, view);
-	        		break;
+				break;
 			}
 			case GDK_SCROLL_DOWN:
 				if (can_out)
 					gantt_view_zoom_out_cb  (NULL, view);
 			        break;
-		      default:
-        		break;
+			default:
+				break;
 		}
-    	}
+	}
 
 	return TRUE;
 }
@@ -376,7 +376,7 @@ gantt_view_get_widget (PlannerView *view)
 
 	priv = PLANNER_GANTT_VIEW (view)->priv;
 
- 	if (priv->paned == NULL) {
+	if (priv->paned == NULL) {
 		priv->paned = gantt_view_create_widget (PLANNER_GANTT_VIEW (view));
 		gtk_widget_show_all (priv->paned);
 	}
@@ -1166,7 +1166,7 @@ gantt_view_show_guidelines_cb (GtkAction *action,
 
 	planner_gantt_chart_set_show_guidelines (
 		PLANNER_GANTT_CHART (priv->gantt),
- 		state);
+		state);
 }
 
 static void

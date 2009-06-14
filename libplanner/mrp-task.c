@@ -1,4 +1,4 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+ /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
  * Copyright (C) 2004-2005 Imendio AB
  * Copyright (C) 2001-2002 CodeFactory AB
@@ -197,7 +197,7 @@ task_init (MrpTask *task)
 	priv->note = g_strdup ("");
 
 	priv->cost = 0.0;
- 	priv->cost_cached = FALSE;
+	priv->cost_cached = FALSE;
 	priv->unit_ivals = NULL;
 }
 
@@ -473,7 +473,7 @@ task_set_property (GObject      *object,
 
 		break;
 
- 	case PROP_START:
+	case PROP_START:
 		priv->start = g_value_get_long (value);
 		break;
 
@@ -553,7 +553,7 @@ task_set_property (GObject      *object,
 		changed = TRUE;
 		break;
 
- 	case PROP_CONSTRAINT:
+	case PROP_CONSTRAINT:
 		/* FIXME: compare */
 		priv->constraint = *(MrpConstraint *) g_value_get_boxed (value);
 		changed = TRUE;
@@ -1051,13 +1051,13 @@ mrp_task_add_predecessor (MrpTask          *task,
 			  glong             lag,
 			  GError          **error)
 {
-	MrpRelation		*relation;
-	MrpProject		*project;
-	MrpTaskManager		*manager;
-	GList			*relations;
-	gchar			*tmp;
-	MrpConstraint		 constraint;
-	mrptime			 pred_start;
+	MrpRelation             *relation;
+	MrpProject              *project;
+	MrpTaskManager          *manager;
+	GList                   *relations;
+	gchar                   *tmp;
+	MrpConstraint            constraint;
+	mrptime                  pred_start;
 
 	g_return_val_if_fail (MRP_IS_TASK (task), NULL);
 	g_return_val_if_fail (MRP_IS_TASK (predecessor), NULL);

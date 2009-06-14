@@ -123,7 +123,7 @@ static GObjectClass *parent_class;
 
 static mrptime
 task_manager_calculate_task_start_from_finish (MrpTaskManager *manager,
-				    		MrpTask        *task,
+						MrpTask        *task,
 						mrptime         finish,
 						gint           *duration);
 

@@ -1862,7 +1862,7 @@ window_get_name (PlannerWindow *window)
 static void
 window_update_title (PlannerWindow *window)
 {
- 	PlannerWindowPriv *priv;
+	PlannerWindowPriv *priv;
 	gchar             *name;
 	gchar             *title;
 
