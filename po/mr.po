@@ -1,14 +1,14 @@
-# translation of planner.HEAD.po to marathi
+# translation of mr.po to marathi
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Sandeep Shedmake <sandeep.shedmake@gmail.com>, 2009.
 msgid ""
 msgstr ""
-"Project-Id-Version: planner.HEAD\n"
+"Project-Id-Version: mr\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=planner&component=general\n"
-"POT-Creation-Date: 2009-02-19 19:38+0000\n"
-"PO-Revision-Date: 2009-03-23 15:42+0530\n"
+"POT-Creation-Date: 2009-04-17 11:01+0000\n"
+"PO-Revision-Date: 2009-06-16 10:01+0530\n"
 "Last-Translator: Sandeep Shedmake <sandeep.shedmake@gmail.com>\n"
 "Language-Team: marathi\n"
 "MIME-Version: 1.0\n"
@@ -146,8 +146,8 @@ msgid ""
 "Select a weekday and the day type to use for that day in the default week "
 "for this calendar.\n"
 msgstr ""
-"या दिनदर्शिकेसाठी सप्ताहदिवस व मुलभूत सप्ताहात त्या दिवसासाठी वापरण्याजोगी "
-"दिवस प्रकार निवडा.\n"
+"या दिनदर्शिकेसाठी सप्ताहदिवस व मुलभूत सप्ताहात त्या दिवसासाठी वापरण्याजोगी दिवस "
+"प्रकार निवडा.\n"
 
 #: ../data/glade/calendar-dialog.glade.h:27
 msgid "Set day type to:"
@@ -746,7 +746,9 @@ msgstr "BEGIN आदेश अपयशी %s."
 msgid ""
 "The project '%s' has been changed by the user '%s' since you opened it. Do "
 "you want to save anyway?"
-msgstr "आपण उघडल्यामुळे वापरकर्ता '%2$s' द्वारे प्रकल्प '%1$s' बदलण्यात आले आहे. तरीही आपणांस साठवायचे?"
+msgstr ""
+"आपण उघडल्यामुळे वापरकर्ता '%2$s' द्वारे प्रकल्प '%1$s' बदलण्यात आले आहे. तरीही आपणांस "
+"साठवायचे?"
 
 #: ../libplanner/mrp-sql.c:3706
 #, c-format
@@ -798,7 +800,9 @@ msgstr "संबंध प्रकार संपवण्याचा अं
 msgid ""
 "Start to Finish relation cannot be set. Predecessor starts on project start "
 "date."
-msgstr "संबंध प्रकार संपवण्याची सुरूवात सुयोजित करणे अशक्य. प्रकल्प प्रारंभ तारखेला पूर्वाधिकारी प्रारंभ होतो."
+msgstr ""
+"संबंध प्रकार संपवण्याची सुरूवात सुयोजित करणे अशक्य. प्रकल्प प्रारंभ तारखेला पूर्वाधिकारी "
+"प्रारंभ होतो."
 
 #: ../libplanner/mrp-task-manager.c:2630
 #, c-format
@@ -997,100 +1001,112 @@ msgstr "Evolution Data Server UID"
 msgid "Identifier used by Evolution Data Server for resources"
 msgstr "संसाधनांसाठी Evolution Data Server द्वारे वापरलेला ओळखकर्ता"
 
-#: ../src/planner-format.c:149
+#: ../src/planner-format.c:153
 #, c-format
 msgid "%dd %dh"
 msgstr "%dd %dh"
 
-#: ../src/planner-format.c:152
+#: ../src/planner-format.c:156
 #, c-format
 msgid "%dd"
 msgstr "%dd"
 
-#: ../src/planner-format.c:155
+#: ../src/planner-format.c:161
+#, c-format
+#| msgid "%dd %dh"
+msgid "%dh %dmin"
+msgstr "%dh %dmin"
+
+#: ../src/planner-format.c:164
 #, c-format
 msgid "%dh"
 msgstr "%dh"
+
+#: ../src/planner-format.c:168
+#, c-format
+#| msgid "min"
+msgid "%dmin"
+msgstr "%dmin"
 
 #. i18n: this string is the date nr and month name, displayed
 #. * e.g. in the date cells in the task tree. See
 #. * libmrproject/docs/DateFormat.
 #.
-#: ../src/planner-format.c:190
+#: ../src/planner-format.c:203
 msgid "%b %e"
 msgstr "%e %b"
 
-#: ../src/planner-format.c:374
+#: ../src/planner-format.c:387
 msgid "mon"
 msgstr "सोम"
 
 #. month unit variant accepted in input
-#: ../src/planner-format.c:375
+#: ../src/planner-format.c:388
 msgid "month"
 msgstr "महिना"
 
 #. month unit variant accepted in input
-#: ../src/planner-format.c:376
+#: ../src/planner-format.c:389
 msgid "months"
 msgstr "महिने"
 
 #. month unit variant accepted in input
-#: ../src/planner-format.c:377
+#: ../src/planner-format.c:390
 msgid "w"
 msgstr "w"
 
 #. week unit variant accepted in input
-#: ../src/planner-format.c:378
+#: ../src/planner-format.c:391
 msgid "week"
 msgstr "सप्ताह"
 
 #. week unit variant accepted in input
-#: ../src/planner-format.c:379
+#: ../src/planner-format.c:392
 msgid "weeks"
 msgstr "आठवडे"
 
 #. week unit variant accepted in input
-#: ../src/planner-format.c:380
+#: ../src/planner-format.c:393
 msgid "d"
 msgstr "d"
 
 #. day unit variant accepted in input
-#: ../src/planner-format.c:381
+#: ../src/planner-format.c:394
 msgid "day"
 msgstr "दिवस"
 
 #. day unit variant accepted in input
-#: ../src/planner-format.c:382
+#: ../src/planner-format.c:395
 msgid "days"
 msgstr "दिवस"
 
 #. day unit variant accepted in input
-#: ../src/planner-format.c:383
+#: ../src/planner-format.c:396
 msgid "h"
 msgstr "h"
 
 #. hour unit variant accepted in input
-#: ../src/planner-format.c:384
+#: ../src/planner-format.c:397
 msgid "hour"
 msgstr "तास"
 
 #. hour unit variant accepted in input
-#: ../src/planner-format.c:385
+#: ../src/planner-format.c:398
 msgid "hours"
 msgstr "तास"
 
 #. hour unit variant accepted in input
-#: ../src/planner-format.c:386
+#: ../src/planner-format.c:399
 msgid "min"
 msgstr "मिनिट"
 
 #. minute unit variant accepted in input
-#: ../src/planner-format.c:387
+#: ../src/planner-format.c:400
 msgid "minute"
 msgstr "मिनिट"
 
 #. minute unit variant accepted in input
-#: ../src/planner-format.c:388
+#: ../src/planner-format.c:401
 msgid "minutes"
 msgstr "मिनिटं"
 
@@ -1454,6 +1470,11 @@ msgstr "SF"
 msgid "Select the views to print:"
 msgstr "छपाई करीता दृष्य निवडा:"
 
+#: ../src/planner-print-job.c:172
+#| msgid "Select"
+msgid "Select views"
+msgstr "दृष्य नीवडा"
+
 #: ../src/planner-project-properties.c:387
 msgid "Select a calendar to use for this project:"
 msgstr "या प्रकल्पासाठी वापरण्याजोगी दिनदर्शिका निवडा:"
@@ -1491,34 +1512,34 @@ msgstr "गुणधर्म"
 msgid "Value"
 msgstr "मूल्य"
 
-#: ../src/planner-project-properties.c:1390
+#: ../src/planner-project-properties.c:1391
 #: ../src/planner-property-dialog.c:333
 msgid "The name of the custom property needs to start with a letter."
 msgstr "स्वपसंत गुणधर्माचे नाव अक्षराने सुरू होणे जरूरी आहे."
 
-#: ../src/planner-project-properties.c:1461
+#: ../src/planner-project-properties.c:1462
 #: ../src/planner-property-dialog.c:403
 #, c-format
 msgid "Do you really want to remove the property '%s' from the project?"
 msgstr "आपणांस नक्की प्रकल्पातून '%s' गुणधर्म काढून टाकायचे आहे का?"
 
-#: ../src/planner-project-properties.c:1556
+#: ../src/planner-project-properties.c:1557
 msgid "Could not create properties dialog."
 msgstr "गुणधर्म संवाद बनवणे अशक्य."
 
-#: ../src/planner-project-properties.c:1590
+#: ../src/planner-project-properties.c:1591
 msgid "Date..."
 msgstr "तारीख..."
 
-#: ../src/planner-project-properties.c:1933
+#: ../src/planner-project-properties.c:1935
 msgid "Add project property"
 msgstr "प्रकल्प गुणधर्म समावेष करा"
 
-#: ../src/planner-project-properties.c:2043
+#: ../src/planner-project-properties.c:2045
 msgid "Remove project property"
 msgstr "प्रकल्प गुणधर्म काढून टाका"
 
-#: ../src/planner-project-properties.c:2136
+#: ../src/planner-project-properties.c:2138
 msgid "Edit project property value"
 msgstr "प्रकल्प गुणधर्म मूल्य संपादीत करा"
 
@@ -1935,63 +1956,65 @@ msgstr "कार्य व्यत्यय स्वच्छ करा"
 msgid "N/A"
 msgstr "N/A"
 
-#: ../src/planner-task-tree.c:2824
+#: ../src/planner-task-tree.c:2825
 msgid "Remove tasks"
 msgstr "कार्य काढून टाका"
 
-#: ../src/planner-task-tree.c:2886
+#: ../src/planner-task-tree.c:2887
 #, c-format
 msgid ""
 "You are about to open an edit dialog each for %i tasks. Are you sure that "
 "you want to do that?"
-msgstr "आपण आता %i कार्यांसाठी प्रत्येकी संपादन संवाद उघडण्याच्या तैयारीत आहात. आपणांस नक्की तसे करायचे?"
+msgstr ""
+"आपण आता %i कार्यांसाठी प्रत्येकी संपादन संवाद उघडण्याच्या तैयारीत आहात. आपणांस नक्की तसे "
+"करायचे?"
 
-#: ../src/planner-task-tree.c:2988
+#: ../src/planner-task-tree.c:2989
 msgid "Unlink tasks"
 msgstr "कार्यांची दुवा अशक्य करा"
 
-#: ../src/planner-task-tree.c:3040
+#: ../src/planner-task-tree.c:3041
 msgid "Link tasks"
 msgstr "कार्य जुळवा"
 
-#: ../src/planner-task-tree.c:3131
+#: ../src/planner-task-tree.c:3132
 msgid "Indent tasks"
 msgstr "कार्य इन्डेन्ट करा"
 
-#: ../src/planner-task-tree.c:3142
+#: ../src/planner-task-tree.c:3143
 msgid "Indent task"
 msgstr "कार्य इन्डेन्ट करा"
 
-#: ../src/planner-task-tree.c:3236
+#: ../src/planner-task-tree.c:3237
 msgid "Unindent tasks"
 msgstr "कार्यांचे इन्डेन्ट अशक्य करा"
 
-#: ../src/planner-task-tree.c:3254
+#: ../src/planner-task-tree.c:3255
 msgid "Unindent task"
 msgstr "कार्याचे इन्डेन्ट अशक्य करा"
 
-#: ../src/planner-task-tree.c:3332
+#: ../src/planner-task-tree.c:3333
 msgid "Move tasks up"
 msgstr "कार्य वर हलवा"
 
-#: ../src/planner-task-tree.c:3370
+#: ../src/planner-task-tree.c:3371
 msgid "Move task up"
 msgstr "कार्य वर हलवा"
 
-#: ../src/planner-task-tree.c:3458
+#: ../src/planner-task-tree.c:3459
 msgid "Move tasks down"
 msgstr "कार्य खाली हलवा"
 
 #. Moving task from 'position' to 'position + 1'
-#: ../src/planner-task-tree.c:3504
+#: ../src/planner-task-tree.c:3505
 msgid "Move task down"
 msgstr "कार्य खाली हलवा"
 
-#: ../src/planner-task-tree.c:3560
+#: ../src/planner-task-tree.c:3561
 msgid "Reset task constraints"
 msgstr "कार्य व्यत्यय स्वच्छ करा"
 
-#: ../src/planner-task-tree.c:3592
+#: ../src/planner-task-tree.c:3593
 msgid "Reset all task constraints"
 msgstr "सर्व कार्य व्यत्यय स्वच्छ करा"
 
@@ -2241,7 +2264,10 @@ msgstr "Planner फाइल"
 #.
 #: ../src/planner-window.c:1187 ../src/planner-window.c:1209
 msgid "translator-credits"
-msgstr "संदिप शेडमाके <sandeep.shedmake@gmail.com>, 2009; http://downloads.bosslinux.in/Translated_Po_files/GNOME-Translations/po%20files/Marathi%20mr/Extra%20files/Planner.po, 2008."
+msgstr ""
+"संदिप शेडमाके <sandeep.shedmake@gmail.com>, 2009; http://downloads.bosslinux.in/"
+"Translated_Po_files/GNOME-Translations/po%20files/Marathi%20mr/Extra%20files/"
+"Planner.po, 2008."
 
 #: ../src/planner-window.c:1204
 msgid "A Project Management application for the GNOME desktop"
@@ -2307,11 +2333,15 @@ msgid ""
 msgstr ""
 "आपण ती फाइल उघडली आहे जी Planner च्या जुन्या आवृत्ति द्वारे साठवली होती.\n"
 "\n"
-"जुन्या फाइल लोड करतांना, सर्व कार्य 'Must Start On' व्यत्ययचा वापर करतील, कारण जुनी आवृत्ति स्वयं नियोजनास संपूर्णपणे समर्थित नाही. या नव्या सुविधेचा लाभ घेण्यासाठी, आपणांस एकमेकांवर अवलंबित असलेल्या कार्यांमध्ये पूर्वाधिकारी संबंध समावेष करावे लागतील. \n"
+"जुन्या फाइल लोड करतांना, सर्व कार्य 'Must Start On' व्यत्ययचा वापर करतील, कारण जुनी "
+"आवृत्ति स्वयं नियोजनास संपूर्णपणे समर्थित नाही. या नव्या सुविधेचा लाभ घेण्यासाठी, आपणांस "
+"एकमेकांवर अवलंबित असलेल्या कार्यांमध्ये पूर्वाधिकारी संबंध समावेष करावे लागतील. \n"
 "\n"
-"आपण पूर्वाधिकारी वर क्लिक करून व त्यास वारसापर्यंत खेचून पूर्वाधिकारी संबंध समाविष्ट करू शकता.\n"
+"आपण पूर्वाधिकारी वर क्लिक करून व त्यास वारसापर्यंत खेचून पूर्वाधिकारी संबंध समाविष्ट करू "
+"शकता.\n"
 "\n"
-"असे केल्यानंतर, आपण 'Edit' मेन्यू मधील 'Remove all constraints' मेन्यू आयटमची निवड करून सर्व व्यत्यय काढून टाकू शकता."
+"असे केल्यानंतर, आपण 'Edit' मेन्यू मधील 'Remove all constraints' मेन्यू आयटमची निवड करून "
+"सर्व व्यत्यय काढून टाकू शकता."
 
 #. Hack.
 #: ../src/planner-window.c:1843
