@@ -1,23 +1,25 @@
-# translation of ta.po to Tamil
+# translation of planner.master.ta.po to Tamil
 # translation of ta.po to
 # translation of planner.HEAD_ta.po.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 #
 # தங்கம் அருண் <thangam.arunx@gmail.com>, 2008.
-# I. Felix <ifelix@redhat.com>, 2008.
+# I. Felix <ifelix@redhat.com>, 2008, 2009.
 msgid ""
 msgstr ""
-"Project-Id-Version: ta\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-12-10 03:46+0000\n"
-"PO-Revision-Date: 2008-01-23 12:18+0530\n"
+"Project-Id-Version: planner.master.ta\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=planner&component=general\n"
+"POT-Creation-Date: 2009-04-17 11:01+0000\n"
+"PO-Revision-Date: 2009-07-01 15:44+0530\n"
 "Last-Translator: I. Felix <ifelix@redhat.com>\n"
 "Language-Team: Tamil <fedora-trans-ta@redhat.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n!=1);\n\n\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\\n\n"
+"\n"
+"\n"
 "X-Generator: KBabel 1.11.4\n"
 
 #: ../data/glade/add-predecessor.glade.h:1
@@ -149,8 +151,8 @@ msgid ""
 "Select a weekday and the day type to use for that day in the default week "
 "for this calendar.\n"
 msgstr ""
-"கொடாநிலையிலுள்ள வார நாளுக்கு பயன்படுத்த நாட்க்காட்டியில் ஒரு வார நாளையும் அதன் வகையையும் "
-"இந்த நாள்க்காட்டிக்காக தேர்ந்தெடு.\n"
+"கொடாநிலையிலுள்ள வார நாளுக்கு பயன்படுத்த நாட்க்காட்டியில் ஒரு வார நாளையும் அதன் "
+"வகையையும் இந்த நாள்க்காட்டிக்காக தேர்ந்தெடு.\n"
 
 #: ../data/glade/calendar-dialog.glade.h:27
 msgid "Set day type to:"
@@ -315,6 +317,7 @@ msgid "Notes"
 msgstr "குறிப்புகள்"
 
 #: ../data/glade/resource-dialog.glade.h:7
+#: ../data/glade/resource-input-dialog.glade.h:3
 msgid "Optional - overrides resource name in Gantt view."
 msgstr "காண்ட் காட்சியில் விருப்பங்கள் - உபாயத்தை மறைக்கிறது."
 
@@ -323,8 +326,8 @@ msgid ""
 "Select the calendar to use for this resource. If you want to use the default "
 "calendar of the project, select 'None'. "
 msgstr ""
-"உபாயத்தை பயன்படுத்த பஞ்சாங்கத்தை தேர்ந்தெடுக்கவும், ஏற்கனவே உள்ள திட்ட நாட்க்காட்டியை பயன்படுத்தினால் "
-"எதையும் தெர்ந்தெடுக்க வெண்டியதில்லை, "
+"உபாயத்தை பயன்படுத்த பஞ்சாங்கத்தை தேர்ந்தெடுக்கவும், ஏற்கனவே உள்ள திட்ட நாட்க்காட்டியை "
+"பயன்படுத்தினால் எதையும் தெர்ந்தெடுக்க வெண்டியதில்லை, "
 
 #: ../data/glade/resource-dialog.glade.h:9
 #: ../data/glade/resource-input-dialog.glade.h:4
@@ -348,10 +351,6 @@ msgstr "சுருக்கமான பெயர் "
 #: ../data/glade/resource-input-dialog.glade.h:2
 msgid "Insert Resource"
 msgstr "உபாயத்தை சொருகு"
-
-#: ../data/glade/resource-input-dialog.glade.h:3
-msgid "Optional - overrides resource name in gantt view."
-msgstr "விருப்பம் -  "
 
 #: ../data/glade/resource-input-dialog.glade.h:6
 #: ../data/glade/task-input-dialog.glade.h:3
@@ -391,10 +390,7 @@ msgid ""
 "As soon as possible\n"
 "No earlier than\n"
 "On fixed date"
-msgstr ""
-"உடனுக்குடன்"
-"உடனே இல்லாமல்"
-"குறிப்பிட்ட திகதியில்"
+msgstr "உடனுக்குடன்உடனே இல்லாமல்குறிப்பிட்ட திகதியில்"
 
 #: ../data/glade/task-date-widget.glade.h:4
 #: ../src/planner-cell-renderer-date.c:182
@@ -443,7 +439,7 @@ msgstr "பூரணம்"
 msgid "Predecessors"
 msgstr "முன்னே உள்ளவைகள்"
 
-#: ../data/glade/task-dialog.glade.h:9 ../src/planner-resource-view.c:417
+#: ../data/glade/task-dialog.glade.h:9 ../src/planner-resource-view.c:418
 msgid "Resources"
 msgstr "உபாயங்கள்"
 
@@ -629,14 +625,17 @@ msgid "Use day from base calendar"
 msgstr "அடிப்படை நாள்காட்டியிலுள்ள நாளை பயன்படுத்து"
 
 #: ../libplanner/mrp-file-module.c:121
+#, c-format
 msgid "This format does not support reading"
 msgstr "இந்த வடிவம் படிப்பதில் உதவிபுரியவில்லை "
 
-#: ../libplanner/mrp-parser.c:1064 ../libplanner/mrp-parser.c:1159
+#: ../libplanner/mrp-parser.c:1062 ../libplanner/mrp-parser.c:1157
+#, c-format
 msgid "Could not create XML tree"
 msgstr "எக்ஸ்எம்எல்(XML) ட்ரீயை உருவாக்க முடியவில்லை"
 
-#: ../libplanner/mrp-parser.c:1125
+#: ../libplanner/mrp-parser.c:1123
+#, c-format
 msgid "Could not write XML file"
 msgstr "எக்ஸ்எம்எல்(XML) கோப்பை எழுத முடியவில்லை"
 
@@ -655,12 +654,15 @@ msgid "Couldn't find a suitable file module for loading '%s'"
 msgstr "ஏற்றுவதற்க்கு '%s' தகுந்த கோப்புக்கூறைக் கண்டுபிடிக்க முடியவில்லை"
 
 #: ../libplanner/mrp-project.c:780 ../libplanner/mrp-project.c:1064
+#, c-format
 msgid "No support for SQL storage built into this version of Planner."
 msgstr "இந்த நாட்க்காட்டி பதிப்பில்  உள்ளிணைந்த எஸ்கியூஎல்(SQL) சேமிப்புக்கள ஆதரவு இல்லை"
 
 #: ../libplanner/mrp-project.c:817
+#, c-format
+#| msgid "Invalid URI."
 msgid "Invalid URI."
-msgstr "இருப்பில் இல்லாத URI: '%s'"
+msgstr "தவறான URI."
 
 #: ../libplanner/mrp-project.c:958
 #, c-format
@@ -668,6 +670,7 @@ msgid "Unable to find file writer identified by '%s'"
 msgstr "குறிப்பானால் '%s' கோப்பு எழுதியை கண்டுபிடிக்க இயலவில்லை"
 
 #: ../libplanner/mrp-project.c:1021
+#, c-format
 msgid "Couldn't find a suitable file module for loading project"
 msgstr "திட்டம் ஏற்றுவதற்குத் தகுந்த கோப்புக்கூறைக் கண்டுபிடிக்க முடியவில்லை"
 
@@ -691,13 +694,13 @@ msgstr "புள்ளி எண்கள்"
 msgid "Date"
 msgstr "தேதி"
 
-#: ../libplanner/mrp-property.c:375 ../src/planner-gantt-view.c:593
-#: ../src/planner-task-view.c:340
+#: ../libplanner/mrp-property.c:375 ../src/planner-gantt-view.c:594
+#: ../src/planner-task-view.c:341
 msgid "Duration"
 msgstr "இடைப்பட்ட காலம்"
 
-#: ../libplanner/mrp-property.c:377 ../src/planner-gantt-view.c:595
-#: ../src/planner-resource-view.c:1314 ../src/planner-task-view.c:342
+#: ../libplanner/mrp-property.c:377 ../src/planner-gantt-view.c:596
+#: ../src/planner-resource-view.c:1315 ../src/planner-task-view.c:343
 msgid "Cost"
 msgstr "மதிப்பு"
 
@@ -705,21 +708,25 @@ msgstr "மதிப்பு"
 msgid "None"
 msgstr "ஒன்றுமில்லை"
 
-#: ../libplanner/mrp-sql.c:214 ../libplanner/mrp-sql.c:228
+#: ../libplanner/mrp-sql.c:280 ../src/planner-sql-plugin.c:153
 msgid "Can't connect to database server"
 msgstr "தரவுத்தள சேவை கணினியை இணைக்க முடியா"
 
+#: ../libplanner/mrp-sql.c:285 ../src/planner-sql-plugin.c:158
+msgid "No errors reported."
+msgstr "பிழை ஏதும் சொல்லவில்லை"
+
 #. Give up.
-#: ../libplanner/mrp-sql.c:319 ../src/planner-sql-plugin.c:220
+#: ../libplanner/mrp-sql.c:374 ../src/planner-sql-plugin.c:227
 msgid "Invalid Unicode"
 msgstr "இருப்பில் இல்லாத  எழுத்துரு"
 
-#: ../libplanner/mrp-sql.c:2213
+#: ../libplanner/mrp-sql.c:2260
 #, c-format
 msgid "Connection to database '%s' failed.\n"
 msgstr "தரவுத்தளத்துடன் இணைக்க  '%s' பழுதானது.\n"
 
-#: ../libplanner/mrp-sql.c:2218
+#: ../libplanner/mrp-sql.c:2265
 #, c-format
 msgid ""
 "Connection to database '%s' failed.\n"
@@ -728,38 +735,46 @@ msgstr ""
 "தரவுத்தளத்துடன் இணைக்க  '%s' பழுதானது.\n"
 "%s"
 
-#: ../libplanner/mrp-sql.c:2226
+#: ../libplanner/mrp-sql.c:2274 ../libplanner/mrp-sql.c:3713
+msgid "Failed to create a dictionary for the database connection.\n"
+msgstr "தரவுத்தள இணைப்புக்கு ஒரு அகராதியை உருவாக்க முடியவில்லை.\n"
+
+#: ../libplanner/mrp-sql.c:2288
 #, c-format
 msgid "BEGIN command failed %s."
 msgstr "தொடக்க கட்டளை பழுதானது %s."
 
-#: ../libplanner/mrp-sql.c:2394
+#: ../libplanner/mrp-sql.c:2457
 #, c-format
 msgid ""
 "The project '%s' has been changed by the user '%s' since you opened it. Do "
 "you want to save anyway?"
 msgstr ""
-"திட்டம் '%s' திறந்த நிலையில் இருக்க பயனர் '%s' மாற்றம் அடைந்துள்ளது"
-"இந்நிலையிலும் நீங்கள் சேமிக்க வேண்டுமா?"
+"திட்டம் '%s' திறந்த நிலையில் இருக்க பயனர் '%s' மாற்றம் அடைந்துள்ளதுஇந்நிலையிலும் நீங்கள் "
+"சேமிக்க வேண்டுமா?"
 
-#: ../libplanner/mrp-sql.c:3674
+#: ../libplanner/mrp-sql.c:3706
 #, c-format
 msgid "Connection to database '%s' failed."
 msgstr "தரவுத்தளத்துடன் இணைக்க  '%s' பழுதானது."
 
-#: ../libplanner/mrp-storage-sql.c:205
+#: ../libplanner/mrp-storage-sql.c:206
+#, c-format
 msgid "Invalid SQL URI (must start with 'sql://' and contain '#')."
 msgstr "செல்லுபடியாகாத SQL URI (கட்டாயம் 'sql://' மற்றும் '#' கொண்டுதான் துவங்கவேண்டும்)."
 
-#: ../libplanner/mrp-storage-sql.c:274
+#: ../libplanner/mrp-storage-sql.c:275
+#, c-format
 msgid "Invalid SQL URI (invalid project id)."
 msgstr "செல்லுபடியாகாத எஸ்கியூஎல்(SQL) URI (இல்லாத திட்ட எண்)."
 
-#: ../libplanner/mrp-storage-sql.c:282
+#: ../libplanner/mrp-storage-sql.c:283
+#, c-format
 msgid "Invalid SQL URI (no database name specified)."
 msgstr "செல்லுபடியாகாத எஸ்கியூஎல்(SQL) URI (எந்த தரவுத்தள பெயரையும் குறிப்பிடவில்லை)"
 
 #: ../libplanner/mrp-task.c:1070
+#, c-format
 msgid "Could not add a predecessor relation, because the tasks are already related."
 msgstr "வேலைகள் உறவில் உள்ளதால், முன்னாடியே உள்ள உறவை சேர்க்க முடியாது"
 
@@ -776,26 +791,33 @@ msgid ""
 "Start to Finish relation type cannot be combined with Start No Earlier Than "
 "constraint."
 msgstr ""
-" "
-"தொடங்கிலிருந்து முடிவுக்கு உள்ள உறவு வகையை முன்னாடியே தொடங்கிய விதியுடன் இணைக்க முடியாது "
+" தொடங்கிலிருந்து முடிவுக்கு உள்ள உறவு வகையை முன்னாடியே தொடங்கிய விதியுடன் இணைக்க "
+"முடியாது "
 
 #: ../libplanner/mrp-task.c:1101
 msgid ""
 "Finish to Finish relation type cannot be combined with Start No Earlier Than "
 "constraint."
-msgstr "முடிவிலிருந்து முடிவுக்கு உள்ள உறவு வகையை முன்னாடியே தொடங்கிய விதியுடன் இணைக்க முடியாது "
+msgstr ""
+"முடிவிலிருந்து முடிவுக்கு உள்ள உறவு வகையை முன்னாடியே தொடங்கிய விதியுடன் இணைக்க "
+"முடியாது "
 
 #: ../libplanner/mrp-task.c:1124
+#, c-format
 msgid ""
 "Start to Finish relation cannot be set. Predecessor starts on project start "
 "date."
-msgstr "தொடங்கிலிருந்து முடிவுக்கு உள்ள உறவு வகையை அமைக்க முடியாது. திட்ட தோடக்க தகதியின் மேல் முன்னுள்ளவை தொடங்குகிறது"
+msgstr ""
+"தொடங்கிலிருந்து முடிவுக்கு உள்ள உறவு வகையை அமைக்க முடியாது. திட்ட தோடக்க தகதியின் "
+"மேல் முன்னுள்ளவை தொடங்குகிறது"
 
-#: ../libplanner/mrp-task-manager.c:2527
+#: ../libplanner/mrp-task-manager.c:2630
+#, c-format
 msgid "Cannot add a predecessor, because it would result in a loop."
 msgstr "ஏற்கனவே உள்ளதை சேர்க்க முடியாது, ஏனேன்றால் அதன் விளைவு சுற்றில் முடியும்"
 
-#: ../libplanner/mrp-task-manager.c:2573
+#: ../libplanner/mrp-task-manager.c:2674
+#, c-format
 msgid "Cannot move the task, because it would result in a loop."
 msgstr "வேலையை நகர்த்த முடியாது, ஏனேன்றால் அதன் விளைவு சுற்றில் முடியும்"
 
@@ -805,6 +827,7 @@ msgid "%B %e, %Y"
 msgstr "%B %e, %Y"
 
 #: ../libplanner/mrp-xsl.c:157 ../libplanner/mrp-xsl.c:205
+#, c-format
 msgid "Export to HTML failed"
 msgstr "எச்சிடிஎம்எல்(HTML) க்கு ஏற்றம் தோல்வியடைந்தது"
 
@@ -945,15 +968,15 @@ msgstr "ஈடிஎஸ்(EDS)"
 msgid "Import resources from Evolution Data Server"
 msgstr "உபாயங்களை பரிமாண சேவகனிலிருந்து இறக்கு"
 
-#: ../src/planner-eds-plugin.c:396 ../src/planner-gantt-print.c:190
-#: ../src/planner-gantt-view.c:589 ../src/planner-group-dialog.c:822
-#: ../src/planner-property-dialog.c:485 ../src/planner-resource-view.c:1171
+#: ../src/planner-eds-plugin.c:396 ../src/planner-gantt-print.c:191
+#: ../src/planner-gantt-view.c:590 ../src/planner-group-dialog.c:822
+#: ../src/planner-property-dialog.c:485 ../src/planner-resource-view.c:1172
 #: ../src/planner-task-dialog.c:2616 ../src/planner-task-dialog.c:2690
-#: ../src/planner-task-view.c:336
+#: ../src/planner-task-view.c:337
 msgid "Name"
 msgstr "பெயர்"
 
-#: ../src/planner-eds-plugin.c:416 ../src/planner-resource-view.c:1287
+#: ../src/planner-eds-plugin.c:416 ../src/planner-resource-view.c:1288
 msgid "Email"
 msgstr "மின்னணுச்செய்தி"
 
@@ -985,100 +1008,112 @@ msgstr "வளர்ந்த தரவு சேவகன் பயனர் �
 msgid "Identifier used by Evolution Data Server for resources"
 msgstr "பரிமாண சேவகன்  உபாயங்களுக்காக குறிப்பானை  பயன்படுத்தியது"
 
-#: ../src/planner-format.c:149
+#: ../src/planner-format.c:153
 #, c-format
 msgid "%dd %dh"
 msgstr "%dd %dh"
 
-#: ../src/planner-format.c:152
+#: ../src/planner-format.c:156
 #, c-format
 msgid "%dd"
 msgstr "%dd"
 
-#: ../src/planner-format.c:155
+#: ../src/planner-format.c:161
+#, c-format
+#| msgid "%dd %dh"
+msgid "%dh %dmin"
+msgstr "%dh %dmin"
+
+#: ../src/planner-format.c:164
 #, c-format
 msgid "%dh"
 msgstr "%dh"
+
+#: ../src/planner-format.c:168
+#, c-format
+#| msgid "min"
+msgid "%dmin"
+msgstr "%dmin"
 
 #. i18n: this string is the date nr and month name, displayed
 #. * e.g. in the date cells in the task tree. See
 #. * libmrproject/docs/DateFormat.
 #.
-#: ../src/planner-format.c:190
+#: ../src/planner-format.c:203
 msgid "%b %e"
 msgstr "%b %e"
 
-#: ../src/planner-format.c:374
+#: ../src/planner-format.c:387
 msgid "mon"
 msgstr "மாத"
 
 #. month unit variant accepted in input
-#: ../src/planner-format.c:375
+#: ../src/planner-format.c:388
 msgid "month"
 msgstr "மாதம்"
 
 #. month unit variant accepted in input
-#: ../src/planner-format.c:376
+#: ../src/planner-format.c:389
 msgid "months"
 msgstr "மாதங்கள்"
 
 #. month unit variant accepted in input
-#: ../src/planner-format.c:377
+#: ../src/planner-format.c:390
 msgid "w"
 msgstr "வார"
 
 #. week unit variant accepted in input
-#: ../src/planner-format.c:378
+#: ../src/planner-format.c:391
 msgid "week"
 msgstr "வாரம்"
 
 #. week unit variant accepted in input
-#: ../src/planner-format.c:379
+#: ../src/planner-format.c:392
 msgid "weeks"
 msgstr "வாரங்கள்"
 
 #. week unit variant accepted in input
-#: ../src/planner-format.c:380
+#: ../src/planner-format.c:393
 msgid "d"
 msgstr "நா"
 
 #. day unit variant accepted in input
-#: ../src/planner-format.c:381
+#: ../src/planner-format.c:394
 msgid "day"
 msgstr "நாள்"
 
 #. day unit variant accepted in input
-#: ../src/planner-format.c:382
+#: ../src/planner-format.c:395
 msgid "days"
 msgstr "நாட்கள்"
 
 #. day unit variant accepted in input
-#: ../src/planner-format.c:383
+#: ../src/planner-format.c:396
 msgid "h"
 msgstr "நேர"
 
 #. hour unit variant accepted in input
-#: ../src/planner-format.c:384
+#: ../src/planner-format.c:397
 msgid "hour"
 msgstr "ஒரு மணி நேரம்"
 
 #. hour unit variant accepted in input
-#: ../src/planner-format.c:385
+#: ../src/planner-format.c:398
 msgid "hours"
 msgstr "நேரங்கள்"
 
 #. hour unit variant accepted in input
-#: ../src/planner-format.c:386
+#: ../src/planner-format.c:399
 msgid "min"
 msgstr "நிமிட"
 
 #. minute unit variant accepted in input
-#: ../src/planner-format.c:387
+#: ../src/planner-format.c:400
 msgid "minute"
 msgstr "நாளி"
 
 #. minute unit variant accepted in input
-#: ../src/planner-format.c:388
+#: ../src/planner-format.c:401
 msgid "minutes"
 msgstr "நாளிகள்"
 
@@ -1096,180 +1131,185 @@ msgstr "திட்டம் தொட்ங்கு"
 msgid "%e %b %Y"
 msgstr "%e %b %Y"
 
-#: ../src/planner-gantt-print.c:198 ../src/planner-gantt-view.c:592
-#: ../src/planner-resource-dialog.c:1850 ../src/planner-resource-view.c:750
-#: ../src/planner-resource-view.c:766 ../src/planner-resource-view.c:1736
-#: ../src/planner-task-view.c:339
+#: ../src/planner-gantt-print.c:199 ../src/planner-gantt-view.c:593
+#: ../src/planner-resource-dialog.c:1850 ../src/planner-resource-view.c:751
+#: ../src/planner-resource-view.c:767 ../src/planner-resource-view.c:1737
+#: ../src/planner-task-view.c:340
 msgid "Work"
 msgstr "வேலை"
 
-#: ../src/planner-gantt-print.c:542 ../src/planner-gantt-row.c:765
-#: ../src/planner-html-plugin.c:125 ../src/planner-task-tree.c:1571
-#: ../src/planner-window.c:1988
+#: ../src/planner-gantt-print.c:546 ../src/planner-gantt-row.c:776
+#: ../src/planner-html-plugin.c:125 ../src/planner-task-tree.c:1601
+#: ../src/planner-window.c:1851
 msgid "Unnamed"
 msgstr "பெயரிடா"
 
-#: ../src/planner-gantt-row.c:2697 ../src/planner-gantt-row.c:2700
-msgid "No name"
-msgstr "பெயர் இல்லை"
-
-#: ../src/planner-gantt-row.c:2703
-#, c-format
-msgid "Make task '%s' a predecessor of '%s'"
-msgstr "வேலையை உருவாக்கு '%s' a predecessor of '%s'"
-
-#: ../src/planner-gantt-row.c:2769
+#: ../src/planner-gantt-row.c:2358
 #, c-format
 msgid "Change work to %s"
 msgstr "வேலையை '%s' க்கு மாற்று"
 
-#: ../src/planner-gantt-row.c:3370 ../src/planner-task-dialog.c:455
-#: ../src/planner-task-tree.c:257 ../src/planner-task-tree.c:947
+#: ../src/planner-gantt-row.c:2370
+#, c-format
+msgid "Change progress to %u%% complete"
+msgstr "%u%% முடிந்தவற்றுக்கு செயலை மாற்றவும்"
+
+#: ../src/planner-gantt-row.c:2409 ../src/planner-gantt-row.c:2412
+msgid "No name"
+msgstr "பெயர் இல்லை"
+
+#: ../src/planner-gantt-row.c:2415
+#, c-format
+msgid "Make task '%s' a predecessor of '%s'"
+msgstr "வேலையை உருவாக்கு '%s' a predecessor of '%s'"
+
+#: ../src/planner-gantt-row.c:3436 ../src/planner-task-dialog.c:455
+#: ../src/planner-task-tree.c:262 ../src/planner-task-tree.c:952
 msgid "Edit task property"
 msgstr "வேலை பண்பை தொகு"
 
-#: ../src/planner-gantt-view.c:133 ../src/planner-task-view.c:115
+#: ../src/planner-gantt-view.c:134 ../src/planner-task-view.c:116
 msgid "_Insert Task"
 msgstr "வேலையை சொருக"
 
-#: ../src/planner-gantt-view.c:134 ../src/planner-task-view.c:116
+#: ../src/planner-gantt-view.c:135 ../src/planner-task-view.c:117
 msgid "Insert a new task"
 msgstr "புதிய வேலையை சொருக"
 
-#: ../src/planner-gantt-view.c:136 ../src/planner-task-view.c:118
+#: ../src/planner-gantt-view.c:137 ../src/planner-task-view.c:119
 msgid "In_sert Tasks..."
 msgstr "வேலைகளை சொருக, , ,"
 
-#: ../src/planner-gantt-view.c:139 ../src/planner-task-view.c:121
+#: ../src/planner-gantt-view.c:140 ../src/planner-task-view.c:122
 msgid "_Remove Task"
 msgstr "வேலையை அகற்று"
 
-#: ../src/planner-gantt-view.c:140 ../src/planner-task-view.c:122
+#: ../src/planner-gantt-view.c:141 ../src/planner-task-view.c:123
 msgid "Remove the selected tasks"
 msgstr "தேர்ந்தெடுத்த வேலையை அகற்று"
 
-#: ../src/planner-gantt-view.c:142
+#: ../src/planner-gantt-view.c:143
 msgid "_Edit Task Properties..."
 msgstr "வேலை பண்புகளை தொகு"
 
-#: ../src/planner-gantt-view.c:145 ../src/planner-resource-view.c:245
-#: ../src/planner-task-view.c:127
+#: ../src/planner-gantt-view.c:146 ../src/planner-resource-view.c:246
+#: ../src/planner-task-view.c:128
 msgid "Select _All"
 msgstr "அனைத்தையும் தேர்ந்தெடு"
 
-#: ../src/planner-gantt-view.c:146 ../src/planner-resource-view.c:246
-#: ../src/planner-task-view.c:128
+#: ../src/planner-gantt-view.c:147 ../src/planner-resource-view.c:247
+#: ../src/planner-task-view.c:129
 msgid "Select all tasks"
 msgstr "அனைத்து வேலைகளையும் தேர்ந்தெடு"
 
-#: ../src/planner-gantt-view.c:148 ../src/planner-task-view.c:130
+#: ../src/planner-gantt-view.c:149 ../src/planner-task-view.c:131
 msgid "_Unlink Task"
 msgstr " வேலை இணைப்பை துண்டி"
 
-#: ../src/planner-gantt-view.c:149 ../src/planner-task-view.c:131
+#: ../src/planner-gantt-view.c:150 ../src/planner-task-view.c:132
 msgid "Unlink the selected tasks"
 msgstr "தேர்ந்தெடுத்த வேலைகளின் இணைப்பை துண்டி"
 
-#: ../src/planner-gantt-view.c:151 ../src/planner-task-view.c:133
+#: ../src/planner-gantt-view.c:152 ../src/planner-task-view.c:134
 msgid "_Link Tasks"
 msgstr "வேலைகளை இணை"
 
-#: ../src/planner-gantt-view.c:152 ../src/planner-task-view.c:134
+#: ../src/planner-gantt-view.c:153 ../src/planner-task-view.c:135
 msgid "Link the selected tasks"
 msgstr "தேர்ந்தெடுத்த வேலைகளை இணை"
 
-#: ../src/planner-gantt-view.c:154 ../src/planner-task-view.c:136
+#: ../src/planner-gantt-view.c:155 ../src/planner-task-view.c:137
 msgid "I_ndent Task"
 msgstr "I_ndent வேலை"
 
-#: ../src/planner-gantt-view.c:155 ../src/planner-task-view.c:137
+#: ../src/planner-gantt-view.c:156 ../src/planner-task-view.c:138
 msgid "Indent the selected tasks"
 msgstr "தேர்ந்தெடுத்த வேலைகளை "
 
-#: ../src/planner-gantt-view.c:157 ../src/planner-task-view.c:139
+#: ../src/planner-gantt-view.c:158 ../src/planner-task-view.c:140
 msgid "Unin_dent Task"
 msgstr "வேலை"
 
-#: ../src/planner-gantt-view.c:158 ../src/planner-task-view.c:140
+#: ../src/planner-gantt-view.c:159 ../src/planner-task-view.c:141
 msgid "Unindent the selected tasks"
 msgstr " தேர்ந்தெடுத்த வேலைகளை"
 
-#: ../src/planner-gantt-view.c:160 ../src/planner-task-view.c:142
+#: ../src/planner-gantt-view.c:161 ../src/planner-task-view.c:143
 msgid "Move Task _Up"
 msgstr "வேலையை மேலே நகர்த்து"
 
-#: ../src/planner-gantt-view.c:161 ../src/planner-task-view.c:143
+#: ../src/planner-gantt-view.c:162 ../src/planner-task-view.c:144
 msgid "Move the selected tasks upwards"
 msgstr "தேர்ந்தெடுத்த வேலைகளை மேல் நோக்கி நகர்த்து"
 
-#: ../src/planner-gantt-view.c:163 ../src/planner-task-view.c:145
+#: ../src/planner-gantt-view.c:164 ../src/planner-task-view.c:146
 msgid "Move Task Do_wn"
 msgstr "வேலையை கீ நகர்த்து"
 
-#: ../src/planner-gantt-view.c:164 ../src/planner-task-view.c:146
+#: ../src/planner-gantt-view.c:165 ../src/planner-task-view.c:147
 msgid "Move the selected tasks downwards"
 msgstr "தேர்ந்தெடுத்த வேலைகளை கீழ் நோக்கி நகர்த்து"
 
-#: ../src/planner-gantt-view.c:166 ../src/planner-task-view.c:148
+#: ../src/planner-gantt-view.c:167 ../src/planner-task-view.c:149
 msgid "Reset _Constraint"
 msgstr "கட்டுபாடுகளை பழைய நிலைக்கு கொண்டுவா "
 
-#: ../src/planner-gantt-view.c:169
+#: ../src/planner-gantt-view.c:170
 msgid "Zoom To _Fit"
 msgstr "பண்மடங்காக்கி பொருத்து"
 
-#: ../src/planner-gantt-view.c:170 ../src/planner-usage-view.c:112
+#: ../src/planner-gantt-view.c:171 ../src/planner-usage-view.c:113
 msgid "Zoom to fit the entire project"
 msgstr " பண்மடங்காக்கி முழு திட்டத்தை பொருத்து"
 
-#: ../src/planner-gantt-view.c:172
+#: ../src/planner-gantt-view.c:173
 msgid "_Zoom In"
 msgstr "உள் நோக்கி பண்மடங்காக்கு"
 
-#: ../src/planner-gantt-view.c:173 ../src/planner-usage-view.c:108
-#: ../src/planner-usage-view.c:109
+#: ../src/planner-gantt-view.c:174 ../src/planner-usage-view.c:109
+#: ../src/planner-usage-view.c:110
 msgid "Zoom in"
 msgstr "உள் நோக்கி பண்மடங்காக்கு"
 
-#: ../src/planner-gantt-view.c:175
+#: ../src/planner-gantt-view.c:176
 msgid "Zoom _Out"
 msgstr "வெளி நோக்கி பண்மடங்காக்கு"
 
-#: ../src/planner-gantt-view.c:176 ../src/planner-usage-view.c:105
-#: ../src/planner-usage-view.c:106
+#: ../src/planner-gantt-view.c:177 ../src/planner-usage-view.c:106
+#: ../src/planner-usage-view.c:107
 msgid "Zoom out"
 msgstr "வெளி நோக்கி பண்மடங்காக்கு"
 
-#: ../src/planner-gantt-view.c:178 ../src/planner-resource-view.c:251
-#: ../src/planner-task-view.c:154 ../src/planner-usage-view.c:114
+#: ../src/planner-gantt-view.c:179 ../src/planner-resource-view.c:252
+#: ../src/planner-task-view.c:155 ../src/planner-usage-view.c:115
 msgid "Edit _Visible Columns"
 msgstr "தெறிந்த நெடுக்குகளை தொகு"
 
-#: ../src/planner-gantt-view.c:179 ../src/planner-resource-view.c:252
-#: ../src/planner-task-view.c:155 ../src/planner-usage-view.c:115
+#: ../src/planner-gantt-view.c:180 ../src/planner-resource-view.c:253
+#: ../src/planner-task-view.c:156 ../src/planner-usage-view.c:116
 msgid "Edit visible columns"
 msgstr "தெறிந்த நெடுக்குகளை தொகு"
 
-#: ../src/planner-gantt-view.c:184 ../src/planner-task-view.c:160
+#: ../src/planner-gantt-view.c:185 ../src/planner-task-view.c:161
 msgid "_Highlight Critical Tasks"
 msgstr "நெருக்கடியான வேலைகளை உயர்த்திக்காட்டு"
 
-#: ../src/planner-gantt-view.c:187
+#: ../src/planner-gantt-view.c:188
 msgid "_Show Guide Lines"
 msgstr "உதவி வரிகளை காட்டு"
 
-#: ../src/planner-gantt-view.c:190 ../src/planner-task-view.c:162
+#: ../src/planner-gantt-view.c:191 ../src/planner-task-view.c:163
 msgid "_Nonstandard Days"
 msgstr "ஒழுங்கற்ற நாட்கள்"
 
 #. i18n: Label used for the sidebar. Please try to make it short and use
 #. * a linebreak if necessary/possible.
 #.
-#: ../src/planner-gantt-view.c:344
+#: ../src/planner-gantt-view.c:345
 msgid "Gantt"
 msgstr "காண்ட்"
 
-#: ../src/planner-gantt-view.c:350
+#: ../src/planner-gantt-view.c:351
 msgid "_Gantt Chart"
 msgstr "காண்ட் வரைபடம்"
 
@@ -1281,27 +1321,37 @@ msgstr "காண்ட் வரைபடம்"
 #. * project management term. You might want to leave it
 #. * untranslated unless there is a localized term for it.
 #.
-#: ../src/planner-gantt-view.c:588 ../src/planner-task-view.c:335
+#: ../src/planner-gantt-view.c:589 ../src/planner-task-view.c:336
 msgid "WBS"
 msgstr "டபிள்யூபிஎஸ்(WBS)"
 
-#: ../src/planner-gantt-view.c:590 ../src/planner-task-view.c:337
+#: ../src/planner-gantt-view.c:591 ../src/planner-task-view.c:338
 msgid "Start"
 msgstr "தொடங்கு"
 
-#: ../src/planner-gantt-view.c:591 ../src/planner-task-view.c:338
+#: ../src/planner-gantt-view.c:592 ../src/planner-task-view.c:339
 msgid "Finish"
 msgstr "முடி"
 
-#: ../src/planner-gantt-view.c:594 ../src/planner-task-view.c:341
+#: ../src/planner-gantt-view.c:595 ../src/planner-task-view.c:342
 msgid "Slack"
 msgstr "தளர்த்து"
 
-#: ../src/planner-gantt-view.c:596 ../src/planner-task-view.c:343
+#: ../src/planner-gantt-view.c:597 ../src/planner-task-view.c:344
 msgid "Assigned to"
 msgstr "ஒதுக்கப்பட்டதுக்கு "
 
-#: ../src/planner-gantt-view.c:950
+#. i18n: The string "% Complete" will be used in the header
+#. * of a column containing values from 0 upto 100, indicating
+#. * what part of a task has been completed.
+#.
+#: ../src/planner-gantt-view.c:603 ../src/planner-task-view.c:350
+#, no-c-format
+#| msgid "Complete"
+msgid "% Complete"
+msgstr "% முடிந்தது"
+
+#: ../src/planner-gantt-view.c:957
 msgid "Edit Gantt Columns"
 msgstr "காண்ட் நெடுக்குகளை தொகு"
 
@@ -1353,7 +1403,7 @@ msgstr "எச்டிஎம்எல் (HTML) க்கு ஏற்று"
 msgid "Show result in browser"
 msgstr "விடையை வலைத்தேடியில் காட்டு"
 
-#: ../src/planner-html-plugin.c:173 ../src/planner-window.c:1697
+#: ../src/planner-html-plugin.c:173 ../src/planner-window.c:1560
 #: ../src/planner-xml-planner-plugin.c:124
 #, c-format
 msgid "File \"%s\" exists, do you want to overwrite it?"
@@ -1391,7 +1441,7 @@ msgstr "கோப்பினை ஏற்று"
 msgid "XML Files"
 msgstr "எக்ஸ்எம்எல்(XML) கோப்புகள்"
 
-#: ../src/planner-msp-plugin.c:219 ../src/planner-window.c:848
+#: ../src/planner-msp-plugin.c:219 ../src/planner-window.c:852
 msgid "All Files"
 msgstr "எல்லா கோப்புகளும்"
 
@@ -1424,17 +1474,13 @@ msgstr "எஸ்எஸ்(SS)"
 msgid "SF"
 msgstr "எஸ்எப்(SF)"
 
-#: ../src/planner-print-dialog.c:187
-msgid "Print Project"
-msgstr "திட்டத்தை அச்சிடு"
-
-#: ../src/planner-print-dialog.c:194
-msgid "Select views"
-msgstr "காட்சிகளை தேர்ந்தெடு"
-
-#: ../src/planner-print-dialog.c:218
+#: ../src/planner-print-dialog.c:247
 msgid "Select the views to print:"
 msgstr "காட்சிகளை அச்சிட தேர்ந்தெடு"
+
+#: ../src/planner-print-job.c:172
+msgid "Select views"
+msgstr "காட்சிகளை தேர்ந்தெடு"
 
 #: ../src/planner-project-properties.c:387
 msgid "Select a calendar to use for this project:"
@@ -1473,34 +1519,34 @@ msgstr "பண்பு"
 msgid "Value"
 msgstr "மதிப்பு"
 
-#: ../src/planner-project-properties.c:1390
+#: ../src/planner-project-properties.c:1391
 #: ../src/planner-property-dialog.c:333
 msgid "The name of the custom property needs to start with a letter."
 msgstr "பண்பின் பெயர் கட்டாயம் ஒரு எழுத்துடன் தான் தொடங்க வேண்டும்,"
 
-#: ../src/planner-project-properties.c:1461
+#: ../src/planner-project-properties.c:1462
 #: ../src/planner-property-dialog.c:403
 #, c-format
 msgid "Do you really want to remove the property '%s' from the project?"
 msgstr "நீங்கள் உண்மையாக பண்பை திட்டத்திலிருந்து '%s' நீக்க வெண்டுமா?"
 
-#: ../src/planner-project-properties.c:1556
+#: ../src/planner-project-properties.c:1557
 msgid "Could not create properties dialog."
 msgstr "உரைமுகப்பின் பண்புகளை உருவாக்க முடியாது,"
 
-#: ../src/planner-project-properties.c:1590
+#: ../src/planner-project-properties.c:1591
 msgid "Date..."
 msgstr "திகதி,,,"
 
-#: ../src/planner-project-properties.c:1933
+#: ../src/planner-project-properties.c:1935
 msgid "Add project property"
 msgstr "திட்ட பண்பை சேர்"
 
-#: ../src/planner-project-properties.c:2043
+#: ../src/planner-project-properties.c:2045
 msgid "Remove project property"
 msgstr "திட்ட பண்பை நீக்கு"
 
-#: ../src/planner-project-properties.c:2136
+#: ../src/planner-project-properties.c:2138
 msgid "Edit project property value"
 msgstr "திட்ட பண்பின் மதிப்பை தொகு "
 
@@ -1508,7 +1554,7 @@ msgstr "திட்ட பண்பின் மதிப்பை தொகு
 msgid "Label"
 msgstr "விவரத்தாள்"
 
-#: ../src/planner-property-dialog.c:514 ../src/planner-resource-view.c:1224
+#: ../src/planner-property-dialog.c:514 ../src/planner-resource-view.c:1225
 #: ../src/planner-task-dialog.c:2722
 msgid "Type"
 msgstr "வகை"
@@ -1532,7 +1578,7 @@ msgstr "உபாயத்தை சோருகு"
 #. Put "no group" at the top.
 #: ../src/planner-resource-dialog.c:312
 #: ../src/planner-resource-input-dialog.c:100
-#: ../src/planner-resource-view.c:1945
+#: ../src/planner-resource-view.c:1946
 msgid "(None)"
 msgstr "(ஒன்றுமில்லை)"
 
@@ -1554,7 +1600,7 @@ msgid "Edit resource cost"
 msgstr "உபாய மதிப்பை தொகு "
 
 #: ../src/planner-resource-dialog.c:711 ../src/planner-resource-dialog.c:752
-#: ../src/planner-resource-view.c:1413 ../src/planner-resource-view.c:1494
+#: ../src/planner-resource-view.c:1414 ../src/planner-resource-view.c:1495
 msgid "Edit resource property"
 msgstr "உபாய பண்பை தொகு"
 
@@ -1572,80 +1618,80 @@ msgstr "ஒன்றுமில்லை (ஏற்கனவே உள்ள �
 msgid "Edit resource properties"
 msgstr "உபாய பண்புகளை தொகு"
 
-#: ../src/planner-resource-dialog.c:1851 ../src/planner-resource-view.c:753
-#: ../src/planner-resource-view.c:767 ../src/planner-resource-view.c:1737
+#: ../src/planner-resource-dialog.c:1851 ../src/planner-resource-view.c:754
+#: ../src/planner-resource-view.c:768 ../src/planner-resource-view.c:1738
 msgid "Material"
 msgstr "மூலப்பொருள்"
 
-#: ../src/planner-resource-view.c:230
+#: ../src/planner-resource-view.c:231
 msgid "_Insert Resource"
 msgstr "உபாயத்தை சொருகு"
 
-#: ../src/planner-resource-view.c:231
+#: ../src/planner-resource-view.c:232
 msgid "Insert a new resource"
 msgstr "புதிய உபாயத்தை சொருகு"
 
-#: ../src/planner-resource-view.c:233
+#: ../src/planner-resource-view.c:234
 msgid "In_sert Resources..."
 msgstr "உபாயங்களை சொருகு,,,"
 
-#: ../src/planner-resource-view.c:236
+#: ../src/planner-resource-view.c:237
 msgid "_Remove Resource"
 msgstr "உபாயங்களை நீக்கு"
 
-#: ../src/planner-resource-view.c:237
+#: ../src/planner-resource-view.c:238
 msgid "Remove the selected resource"
 msgstr "தேர்ந்தெடுத்த உபாயத்தை நீக்கு"
 
-#: ../src/planner-resource-view.c:239
+#: ../src/planner-resource-view.c:240
 msgid "_Edit Resource Properties..."
 msgstr "உபாயங்களின் பண்புகளை தொகு"
 
-#: ../src/planner-resource-view.c:242
+#: ../src/planner-resource-view.c:243
 msgid "Edit _Groups"
 msgstr "குழுமங்களை தொகு"
 
-#: ../src/planner-resource-view.c:243
+#: ../src/planner-resource-view.c:244
 msgid "Edit resource groups"
 msgstr "உபாய குழுமங்களை தொகு"
 
-#: ../src/planner-resource-view.c:248
+#: ../src/planner-resource-view.c:249
 msgid "Edit _Custom Properties..."
 msgstr "தன்னியக்க பண்புகளை தொகு"
 
-#: ../src/planner-resource-view.c:266
+#: ../src/planner-resource-view.c:267
 msgid "/_Insert resource"
 msgstr "/_உபாயத்தை சொருகு"
 
-#: ../src/planner-resource-view.c:269
+#: ../src/planner-resource-view.c:270
 msgid "/_Remove resource"
 msgstr "/_உபாயத்தை நீக்கு"
 
-#: ../src/planner-resource-view.c:272 ../src/planner-usage-tree.c:102
+#: ../src/planner-resource-view.c:273 ../src/planner-usage-tree.c:102
 msgid "/_Edit resource..."
 msgstr "/_உபாயத்தை தொகு,,,"
 
-#: ../src/planner-resource-view.c:423
+#: ../src/planner-resource-view.c:424
 msgid "_Resources"
 msgstr "/_உபாயங்கள்"
 
-#: ../src/planner-resource-view.c:943
+#: ../src/planner-resource-view.c:944
 msgid "Remove resource"
 msgstr "உபாயத்தை நீக்கு"
 
-#: ../src/planner-resource-view.c:1020
+#: ../src/planner-resource-view.c:1021
 msgid "Edit Resource Columns"
 msgstr "உபாய நெடுக்குகளை தொகு"
 
-#: ../src/planner-resource-view.c:1055
+#: ../src/planner-resource-view.c:1056
 msgid "Edit custom resource properties"
 msgstr "தன்னியக்க உபாய பண்புகளை தொகு"
 
-#: ../src/planner-resource-view.c:1197
+#: ../src/planner-resource-view.c:1198
 msgid "Short name"
 msgstr "சுருக்கமான பெயர்"
 
-#: ../src/planner-resource-view.c:1253
+#: ../src/planner-resource-view.c:1254
 msgid "Group"
 msgstr "குழுமம்"
 
@@ -1695,27 +1741,23 @@ msgstr "மணி %d"
 msgid "%04d, H%d"
 msgstr "%04d, மணி%d"
 
-#: ../src/planner-sql-plugin.c:93
+#: ../src/planner-sql-plugin.c:95
 msgid "Open from Database..."
 msgstr "தரவுத்தளத்திலிருந்து திற,,,"
 
-#: ../src/planner-sql-plugin.c:94
+#: ../src/planner-sql-plugin.c:96
 msgid "Open a project from a database"
 msgstr "தரவுத்தளத்திலிருந்து திட்டத்தை திற"
 
-#: ../src/planner-sql-plugin.c:96 ../src/planner-sql-plugin.c:1152
+#: ../src/planner-sql-plugin.c:98 ../src/planner-sql-plugin.c:1146
 msgid "Save to Database"
 msgstr "தரவுத்தளத்துக்கு சேமி"
 
-#: ../src/planner-sql-plugin.c:97
+#: ../src/planner-sql-plugin.c:99
 msgid "Save the current project to a database"
 msgstr "இயல்பாக உள்ள திட்டத்தை தரவுத்தளத்துக்கு சேமி"
 
-#: ../src/planner-sql-plugin.c:135 ../src/planner-sql-plugin.c:150
-msgid "No errors reported."
-msgstr "பிழை ஏதும் சொல்லவில்லை"
-
-#: ../src/planner-sql-plugin.c:517
+#: ../src/planner-sql-plugin.c:525
 #, c-format
 msgid ""
 "Database %s needs to be upgraded from version %s to version %s.\n"
@@ -1724,11 +1766,11 @@ msgstr ""
 "தரவுத்தளம் %s ஒரு %s பதிப்பிலிருந்து %s பதிப்பிற்கு மேம்படுத்தப்பட வேண்டும்.\n"
 "தரவுத்தளம் மேம்படுத்தப்படும் முன் பின்தேக்கம் செய்யப்பட வேண்டும்  "
 
-#: ../src/planner-sql-plugin.c:524
+#: ../src/planner-sql-plugin.c:532
 msgid "Upgrade"
 msgstr "மேம்படுத்து"
 
-#: ../src/planner-sql-plugin.c:538
+#: ../src/planner-sql-plugin.c:546
 #, c-format
 msgid ""
 "Could not upgrade database %s.\n"
@@ -1743,7 +1785,7 @@ msgstr ""
 "தரவுத்தள பிழை: \n"
 "%s"
 
-#: ../src/planner-sql-plugin.c:579
+#: ../src/planner-sql-plugin.c:586
 #, c-format
 msgid "Can't create tables in database %s"
 msgstr "அட்டவணைகளை தரவுத்தளத்தில் உருவாக்க முடியாது %s"
@@ -1753,33 +1795,33 @@ msgstr "அட்டவணைகளை தரவுத்தளத்தில�
 msgid "Database %s is not setup for Planner. Do you want to do that?"
 msgstr "தரவுத்தளத்தை %s திட்டதீட்டிக்கு அமைக்க முடியாது, அது உங்களுக்கு வேண்டுமா?"
 
-#: ../src/planner-sql-plugin.c:696
+#: ../src/planner-sql-plugin.c:691
 #, c-format
 msgid "Connection to database '%s@%s' failed."
 msgstr "தரவுத்தள இணைப்பு '%s@%s' தோல்வியடைந்தது"
 
-#: ../src/planner-sql-plugin.c:711
+#: ../src/planner-sql-plugin.c:710
 #, c-format
 msgid "Test to tables in database '%s' failed."
 msgstr "தரவுத்தள அட்டவணை சோதிப்பு '%s' தோல்வியடைந்தது"
 
-#: ../src/planner-sql-plugin.c:816
+#: ../src/planner-sql-plugin.c:812
 msgid "ID"
 msgstr "எண்"
 
-#: ../src/planner-sql-plugin.c:824
+#: ../src/planner-sql-plugin.c:820
 msgid "Project"
 msgstr "திட்டம்"
 
-#: ../src/planner-sql-plugin.c:832
+#: ../src/planner-sql-plugin.c:828
 msgid "Phase"
 msgstr "படிநிலை"
 
-#: ../src/planner-sql-plugin.c:840
+#: ../src/planner-sql-plugin.c:836
 msgid "Revision"
 msgstr "திருத்தம்"
 
-#: ../src/planner-sql-plugin.c:1040
+#: ../src/planner-sql-plugin.c:1034
 msgid "Open from Database"
 msgstr "தரவுத்தளத்தில் இருந்து திற"
 
@@ -1905,105 +1947,105 @@ msgstr "உபாதைகளை ஒதுக்"
 msgid "/_Edit task..."
 msgstr "வேலையை சொருகு"
 
-#: ../src/planner-task-tree.c:567
+#: ../src/planner-task-tree.c:572
 msgid "Remove task"
 msgstr "வேலையை நீக்கு"
 
-#: ../src/planner-task-tree.c:644
+#: ../src/planner-task-tree.c:649
 msgid "Apply constraint to task"
 msgstr "வேலையிக்கு நிபந்தனைகளை  செலுத்து"
 
-#: ../src/planner-task-tree.c:706
+#: ../src/planner-task-tree.c:711
 msgid "Reset task constraint"
 msgstr "வேலையின் நிபந்தனைகளை பழையநிலையில் வை"
 
-#: ../src/planner-task-tree.c:1492 ../src/planner-task-tree.c:1624
+#: ../src/planner-task-tree.c:1497 ../src/planner-task-tree.c:1654
 msgid "N/A"
 msgstr "தேவையில்லை"
 
-#: ../src/planner-task-tree.c:2724
+#: ../src/planner-task-tree.c:2825
 msgid "Remove tasks"
 msgstr "வேலைகளை நீக்கு"
 
-#: ../src/planner-task-tree.c:2786
+#: ../src/planner-task-tree.c:2887
 #, c-format
 msgid ""
 "You are about to open an edit dialog each for %i tasks. Are you sure that "
 "you want to do that?"
 msgstr ""
-"ஒவ்வொரு %i வேலைக்கும்  வசன தொகுப்பானை திறக்க உள்ளீர்கள், நீங்கள் சரி அதுக்கு"
-"உங்களுக்கு அது வேண்டுமா?"
+"ஒவ்வொரு %i வேலைக்கும்  வசன தொகுப்பானை திறக்க உள்ளீர்கள், நீங்கள் சரி அதுக்குஉங்களுக்கு அது "
+"வேண்டுமா?"
 
-#: ../src/planner-task-tree.c:2888
+#: ../src/planner-task-tree.c:2989
 msgid "Unlink tasks"
 msgstr "வேலைகளின் இணைப்பை துண்டி"
 
-#: ../src/planner-task-tree.c:2940
+#: ../src/planner-task-tree.c:3041
 msgid "Link tasks"
 msgstr "வேலைகளை இணை"
 
-#: ../src/planner-task-tree.c:3031
+#: ../src/planner-task-tree.c:3132
 msgid "Indent tasks"
 msgstr "வேலைகளை உள்தள்"
 
-#: ../src/planner-task-tree.c:3042
+#: ../src/planner-task-tree.c:3143
 msgid "Indent task"
 msgstr "வேலையை உள்தள்"
 
-#: ../src/planner-task-tree.c:3134
+#: ../src/planner-task-tree.c:3237
 msgid "Unindent tasks"
 msgstr "வேலைகளை வெளித்தள்"
 
-#: ../src/planner-task-tree.c:3152
+#: ../src/planner-task-tree.c:3255
 msgid "Unindent task"
 msgstr "வேலையை வெளித்தள்"
 
-#: ../src/planner-task-tree.c:3228
+#: ../src/planner-task-tree.c:3333
 msgid "Move tasks up"
 msgstr "வேலைகளை மேலே நகர்த்து"
 
-#: ../src/planner-task-tree.c:3266
+#: ../src/planner-task-tree.c:3371
 msgid "Move task up"
 msgstr "வேலையை மேலே நகர்த்து"
 
-#: ../src/planner-task-tree.c:3355
+#: ../src/planner-task-tree.c:3459
 msgid "Move tasks down"
 msgstr "வேலைகளை கீழே நகர்த்து"
 
 #. Moving task from 'position' to 'position + 1'
-#: ../src/planner-task-tree.c:3401
+#: ../src/planner-task-tree.c:3505
 msgid "Move task down"
 msgstr "வேலைகயை கீழே நகர்த்து"
 
-#: ../src/planner-task-tree.c:3457
+#: ../src/planner-task-tree.c:3561
 msgid "Reset task constraints"
 msgstr "வேலையின் நிபந்தனைகளை பழையநிலையில் வை"
 
-#: ../src/planner-task-tree.c:3489
+#: ../src/planner-task-tree.c:3593
 msgid "Reset all task constraints"
 msgstr "எல்லா வேலைகளின் நிபந்தனைகளை பழையநிலையில் வை"
 
-#: ../src/planner-task-view.c:124
+#: ../src/planner-task-view.c:125
 msgid "_Edit Task"
 msgstr "வேலையை தொகு"
 
-#: ../src/planner-task-view.c:151
+#: ../src/planner-task-view.c:152
 msgid "_Edit Custom Properties..."
 msgstr "தன்பயனாக்கக்கூடிய பண்புகளை தோகு"
 
-#: ../src/planner-task-view.c:270
+#: ../src/planner-task-view.c:271
 msgid "Tasks"
 msgstr "பண்புகள்"
 
-#: ../src/planner-task-view.c:276
+#: ../src/planner-task-view.c:277
 msgid "_Tasks"
 msgstr "பண்புகள்"
 
-#: ../src/planner-task-view.c:572
+#: ../src/planner-task-view.c:579
 msgid "Edit custom task properties"
 msgstr "தன்பயனாக்கக்கூடிய வேலைப்பண்புகளை தோகு"
 
-#: ../src/planner-task-view.c:626
+#: ../src/planner-task-view.c:633
 msgid "Edit Task Columns"
 msgstr "வேலை நெடுக்ககுகளை தொகு"
 
@@ -2031,14 +2073,14 @@ msgstr ""
 "\n"
 "வேலை"
 
-#: ../src/planner-usage-view.c:111
+#: ../src/planner-usage-view.c:112
 msgid "Zoom to fit"
 msgstr "பொருந்துமளவுக்கு பெரிதாக்கு"
 
 #. i18n: Label used for the sidebar. Please try to make it short and use
 #. * a linebreak if necessary/possible.
 #.
-#: ../src/planner-usage-view.c:228
+#: ../src/planner-usage-view.c:229
 msgid ""
 "Resource\n"
 "Usage"
@@ -2046,231 +2088,239 @@ msgstr ""
 "உபாயம்\n"
 "பயன்பாடு"
 
-#: ../src/planner-usage-view.c:234
+#: ../src/planner-usage-view.c:235
 msgid "Resource _Usage"
 msgstr "உபாயப் பயன்பாடு"
 
-#: ../src/planner-usage-view.c:345
+#: ../src/planner-usage-view.c:346
 msgid "Edit Resource Usage Columns"
 msgstr "உபாயப் பயன்பட்டு நெடுக்குகளைத் தொகு"
 
-#: ../src/planner-window.c:225
+#: ../src/planner-window.c:226
 msgid "_File"
 msgstr "கோப்பு"
 
-#: ../src/planner-window.c:229
+#: ../src/planner-window.c:230
 msgid "_New Project"
 msgstr "புதிய திட்டம்"
 
-#: ../src/planner-window.c:229
+#: ../src/planner-window.c:230
 msgid "Create a new project"
 msgstr "புதிய திட்டத்தை உருவாக்கு"
 
-#: ../src/planner-window.c:233
+#: ../src/planner-window.c:234
 msgid "_Open..."
 msgstr "திற"
 
-#: ../src/planner-window.c:233
+#: ../src/planner-window.c:234
 msgid "Open a project"
 msgstr "திட்டத்தை திற"
 
-#: ../src/planner-window.c:236
+#: ../src/planner-window.c:237
 msgid "_Import"
 msgstr "உள்ளேற்று"
 
-#: ../src/planner-window.c:240 ../src/planner-window.c:1567
+#: ../src/planner-window.c:241 ../src/planner-window.c:1430
 msgid "_Save"
 msgstr "சேமி"
 
-#: ../src/planner-window.c:240
+#: ../src/planner-window.c:241
 msgid "Save the current project"
 msgstr "தற்போதுள்ள திட்டத்தை சேமி  "
 
-#: ../src/planner-window.c:243
+#: ../src/planner-window.c:244
 msgid "_Export"
 msgstr "வெளியேற்று"
 
-#: ../src/planner-window.c:246
+#: ../src/planner-window.c:247
 msgid "Save _As..."
 msgstr "இன்னொரு மாதிரி சேமி,,,"
 
-#: ../src/planner-window.c:246
+#: ../src/planner-window.c:247
 msgid "Save the current project with a different name"
 msgstr "தற்போதுள்ள திட்டத்தை இன்னொரு பெயரில் சேமி "
 
-#: ../src/planner-window.c:249
+#: ../src/planner-window.c:250
+msgid "Page Set_up..."
+msgstr "பக்க அமைவு (_u)..."
+
+#: ../src/planner-window.c:250
+msgid "Setup the page settings for your current printer"
+msgstr "உங்கள் நடப்பு அச்சடிப்பிக்கு பக்க அமைவுகளை அமைக்கவும்"
+
+#: ../src/planner-window.c:253
 msgid "_Print..."
 msgstr "அச்சிடு"
 
-#: ../src/planner-window.c:249
+#: ../src/planner-window.c:253
 msgid "Print the current project"
 msgstr "தற்போதுள்ள திட்டத்தை அச்சிடு"
 
-#: ../src/planner-window.c:252
+#: ../src/planner-window.c:256
 msgid "Print Pre_view"
 msgstr "அச்சிடு முன்காட்சி"
 
-#: ../src/planner-window.c:252
+#: ../src/planner-window.c:256
 msgid "Print preview of the current project"
 msgstr "தற்போதுள்ள திட்டத்தின் அச்சிடு முன்காட்சி "
 
-#: ../src/planner-window.c:255
+#: ../src/planner-window.c:259
 msgid "_Close"
 msgstr "மூடு"
 
-#: ../src/planner-window.c:255
+#: ../src/planner-window.c:259
 msgid "Close the current file"
 msgstr "தற்போதுள்ள கோப்பினை மூடு"
 
-#: ../src/planner-window.c:258
+#: ../src/planner-window.c:262
 msgid "_Quit"
 msgstr "வெளியேறு"
 
-#: ../src/planner-window.c:258
+#: ../src/planner-window.c:262
 msgid "Exit the program"
 msgstr "நிரலிருந்து வெளிச்செல்"
 
-#: ../src/planner-window.c:262
+#: ../src/planner-window.c:266
 msgid "_Edit"
 msgstr "தொகு"
 
-#: ../src/planner-window.c:265
+#: ../src/planner-window.c:269
 msgid "_Undo"
 msgstr "_கவில்"
 
-#: ../src/planner-window.c:265
+#: ../src/planner-window.c:269
 msgid "Undo the last action"
 msgstr "கடைசி செயலை கவில்செய்"
 
-#: ../src/planner-window.c:268
+#: ../src/planner-window.c:272
 msgid "_Redo"
 msgstr "_மீண்டும்"
 
-#: ../src/planner-window.c:268
+#: ../src/planner-window.c:272
 msgid "Redo the undone action"
 msgstr "கவில செய்த செயலை மீண்டும் செய்"
 
-#: ../src/planner-window.c:272
+#: ../src/planner-window.c:276
 msgid "_View"
 msgstr "காட்சி"
 
-#: ../src/planner-window.c:276
+#: ../src/planner-window.c:280
 msgid "_Actions"
 msgstr "செயல்கள்"
 
-#: ../src/planner-window.c:280
+#: ../src/planner-window.c:284
 msgid "_Project"
 msgstr "_திட்டம்"
 
-#: ../src/planner-window.c:283
+#: ../src/planner-window.c:287
 msgid "_Manage Calendars"
 msgstr "நாட்க்காட்டியை தொகு"
 
-#: ../src/planner-window.c:286
+#: ../src/planner-window.c:290
 msgid "Edit Day _Types"
 msgstr "நாள் வகைகளை தொகு"
 
-#: ../src/planner-window.c:289
+#: ../src/planner-window.c:293
 msgid "Edit Project _Phases"
 msgstr "திட்ட படிநிலைகளை தொகு"
 
-#: ../src/planner-window.c:292
+#: ../src/planner-window.c:296
 msgid "_Edit Project Properties"
 msgstr "திட்ட பண்புகளை தொகு"
 
-#: ../src/planner-window.c:292
+#: ../src/planner-window.c:296
 msgid "Edit the project properties"
 msgstr "திட்ட பண்புகளை தொகு"
 
-#: ../src/planner-window.c:300
+#: ../src/planner-window.c:304
 msgid "_Help"
 msgstr "உதவு"
 
-#: ../src/planner-window.c:303
+#: ../src/planner-window.c:307
 msgid "_User Guide"
 msgstr "பயனர் கையேடு"
 
-#: ../src/planner-window.c:303
+#: ../src/planner-window.c:307
 msgid "Show the Planner User Guide"
 msgstr "நாட்க்காட்டி பயனர் கையேட்டைக் காட்டு"
 
-#: ../src/planner-window.c:306
+#: ../src/planner-window.c:310
 msgid "_About"
 msgstr "பற்றி"
 
-#: ../src/planner-window.c:306
+#: ../src/planner-window.c:310
 msgid "About this application"
 msgstr "இந்த செயல்ப்பாட்டைப் பற்றி"
 
 #. Note: these strings are leaked.
-#: ../src/planner-window.c:665
+#: ../src/planner-window.c:669
 #, c-format
 msgid "Switch to the view \"%s\""
 msgstr "காட்சி \"%s\" க்கு மாறவும்"
 
-#: ../src/planner-window.c:832
+#: ../src/planner-window.c:836
 msgid "Open a File"
 msgstr "கோப்பைத் திற"
 
-#: ../src/planner-window.c:842
+#: ../src/planner-window.c:846
 msgid "Planner Files"
 msgstr "நாட்க்காட்டி கோப்புகள்"
 
 #. I18n: Translators, list your names here, newline separated if there
 #. * are more than one, to appear in the about box.
 #.
-#: ../src/planner-window.c:1324 ../src/planner-window.c:1346
+#: ../src/planner-window.c:1187 ../src/planner-window.c:1209
 msgid "translator-credits"
 msgstr "மொழிப்பெயர்ப்பாளர்களின் புகழாரங்கள்"
 
-#: ../src/planner-window.c:1341
+#: ../src/planner-window.c:1204
 msgid "A Project Management application for the GNOME desktop"
 msgstr "கனோம்(GNOME) மேசைக்கான திட்ட மேலாண்மை செயல்பாடு"
 
-#: ../src/planner-window.c:1348
+#: ../src/planner-window.c:1211
 msgid "The Planner Homepage"
 msgstr "நாட்க்காட்டி முகப்பு பகுதி"
 
-#: ../src/planner-window.c:1500
+#: ../src/planner-window.c:1363
 msgid "If you don't save, changes made the last minute will be discarded."
 msgstr "நீங்க சேமிக்கவில்லை என்றால், கடைசி நேரத்தில் செய்யப்படும் மாற்றங்கள் கைவிடப்படும்"
 
-#: ../src/planner-window.c:1506
+#: ../src/planner-window.c:1369
 #, c-format
 msgid "If you don't save, changes made the last %d minute will be discarded."
 msgid_plural "If you don't save, changes made the last %d minutes will be discarded."
 msgstr[0] "நீங்க சேமிக்கவில்லை என்றால், கடைசி  %d நிமிடத்தில் செய்யப்படும் மாற்றங்கள் கைவிடப்படும்"
 msgstr[1] "நீங்க சேமிக்கவில்லை என்றால், கடைசி %d நிமிடங்களில் செய்யப்படும் மாற்றங்கள் கைவிடப்படும்"
 
-#: ../src/planner-window.c:1514
+#: ../src/planner-window.c:1377
 msgid "If you don't save, changes made the last hour will be discarded."
 msgstr "நீங்க சேமிக்கவில்லை என்றால், கடைசி ஒரு நேரத்தில் செய்யப்படும் மாற்றங்கள் கைவிடப்படும்"
 
-#: ../src/planner-window.c:1519
+#: ../src/planner-window.c:1382
 #, c-format
 msgid "If you don't save, changes made the last %d hour will be discarded."
 msgid_plural "If you don't save, changes made the last %d hours will be discarded."
 msgstr[0] "நீங்க சேமிக்கவில்லை என்றால், கடைசி %d மணி நேரத்தில் செய்யப்படும் மாற்றங்கள் கைவிடப்படும்"
 msgstr[1] "நீங்க சேமிக்கவில்லை என்றால், கடைசி %d மணி நேரங்களில் செய்யப்படும் மாற்றங்கள் கைவிடப்படும்"
 
-#: ../src/planner-window.c:1529
+#: ../src/planner-window.c:1392
 #, c-format
 msgid "Save changes to document '%s' before closing?"
 msgstr "படிவத்தை மூடும்முன் '%s'மாற்றங்களை சேமிக்கப்பட்டதா?"
 
-#: ../src/planner-window.c:1554
+#: ../src/planner-window.c:1417
 msgid "C_lose without saving"
 msgstr "சேமிக்காமல் படிவத்தை மூடு"
 
-#: ../src/planner-window.c:1560
+#: ../src/planner-window.c:1423
 msgid "_Cancel"
 msgstr "தவிர்த்திடு"
 
-#: ../src/planner-window.c:1659
+#: ../src/planner-window.c:1522
 msgid "Save a File"
 msgstr "கோப்பை சேமிக்கவும்"
 
-#: ../src/planner-window.c:1945
+#: ../src/planner-window.c:1808
 msgid ""
 "You have opened a file that was saved with an old version of Planner.\n"
 "\n"
@@ -2285,25 +2335,24 @@ msgid ""
 "After doing this, you can remove all constraints by selecting the menu item "
 "'Remove all constraints' in the 'Edit' menu."
 msgstr ""
-"நீங்கள் திறந்த கோப்பு நாட்க்காட்டியின் பழைய பதிப்பில் சேமிக்கப்பட்டுள்ளது. "
+"நீங்கள் திறந்த கோப்பு நாட்க்காட்டியின் பழைய பதிப்பில் சேமிக்கப்பட்டுள்ளது. \n"
+"பழைய கோப்புகளை ஏற்றும் பொழுது, அனைத்து வேலைகளும் 'கட்டாய தொடக்கம்' விதியை "
+"பயன்படுத்தும், ஏனேன்றால் பழைய பதிப்பு முழுமையாக தானியங்கி திரும்ப திட்டமிடுதலை "
+"ஆதரிக்காது. அதை சாதகமாக பயன்படுத்தி புதிய வசதிகளுக்கு, நீங்கள் முன்னாடியேள்ள உறவு "
+"வகையை வேலைகளுக்கு இடையில் சேர்த்தால் அதுங்க ஒன்றை ஒன்று சார்ந்து இருக்கும்.\n"
 "\n"
-"பழைய கோப்புகளை ஏற்றும் பொழுது, அனைத்து வேலைகளும் 'கட்டாய தொடக்கம்' விதியை பயன்படுத்தும், "
-"ஏனேன்றால் பழைய பதிப்பு முழுமையாக தானியங்கி திரும்ப திட்டமிடுதலை ஆதரிக்காது. அதை சாதகமாக "
-"பயன்படுத்தி புதிய வசதிகளுக்கு, நீங்கள் முன்னாடியேள்ள உறவு வகையை வேலைகளுக்கு இடையில் "
-"சேர்த்தால் அதுங்க ஒன்றை ஒன்று சார்ந்து இருக்கும்.\n"
+"முன்னுள்ள உறவு வகையை சேர்க்க முன்னுள்ளவையின் மீது சொடுக்குதல் மற்றும் பின்னுள்ளவையின் மேல் "
+"இழுத்தல் மூலம் செய்யலாம்.\n"
 "\n"
-"முன்னுள்ள உறவு வகையை சேர்க்க முன்னுள்ளவையின் மீது சொடுக்குதல் மற்றும் "
-"பின்னுள்ளவையின் மேல் இழுத்தல் மூலம் செய்யலாம்.\n"
-"\n"
-"எல்லாம் முடிந்த பின்பு, நீங்கள் அனைத்து விதிகளையும் நீக்க பட்டி உருப்படியை"
-" 'தொகுப்பான் ' பட்டியிலுள்ள 'அனைத்து விதிகளையும் நீக்கு' களை தேர்ந்தெடுக்கவும்."
+"எல்லாம் முடிந்த பின்பு, நீங்கள் அனைத்து விதிகளையும் நீக்க பட்டி உருப்படியை 'தொகுப்பான் ' "
+"பட்டியிலுள்ள 'அனைத்து விதிகளையும் நீக்கு' களை தேர்ந்தெடுக்கவும்."
 
 #. Hack.
-#: ../src/planner-window.c:1980
+#: ../src/planner-window.c:1843
 msgid "Unnamed database project"
 msgstr "பெயரில்லா தரவுத்தளத் திட்டம் "
 
-#: ../src/planner-window.c:2094
+#: ../src/planner-window.c:1957
 #, c-format
 msgid "Open '%s'"
 msgstr "திற %s'"
@@ -2372,6 +2421,6 @@ msgid ""
 "The filename extension of this file isn't the planner usual file extension (%"
 "s) Do you want to continue?"
 msgstr ""
-"கோப்பின் நீட்டு பெயர் நாட்க்காட்டியின் இயல்பான நீட்டு பெயராக  (%s) இல்லை "
-"நீங்கள் தோடர வேண்டுமா?"
+"கோப்பின் நீட்டு பெயர் நாட்க்காட்டியின் இயல்பான நீட்டு பெயராக  (%s) இல்லை நீங்கள் தோடர "
+"வேண்டுமா?"
 
