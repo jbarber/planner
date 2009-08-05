@@ -21,7 +21,6 @@ planner_LDFLAGS = -export-dynamic
 planner_LDADD = \
 	libplannerapp.la \
 	$(top_builddir)/libplanner/libplanner-1.la \
-	$(top_builddir)/libegg/recent-files/libeggrecent.la \
 	$(PLANNER_LIBS)
 
 

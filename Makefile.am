@@ -14,7 +14,6 @@ endif
 SUBDIRS = \
 	po 				\
 	libplanner			\
-	libegg				\
 	src				\
 	data				\
 	docs				\

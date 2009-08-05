@@ -10,7 +10,6 @@ INCLUDES = \
 LDADD =	\
 	$(top_builddir)/src/libplannerapp.la \
 	$(top_builddir)/libplanner/libplanner-1.la \
-	$(top_builddir)/libegg/recent-files/libeggrecent.la \
 	$(PLANNER_LIBS)
 
 check_LTLIBRARIES = libselfcheck.la

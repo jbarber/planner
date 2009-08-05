@@ -22,8 +22,7 @@
  */
 
 #include <config.h>
-#include <gtk/gtkmain.h>
-#include <gtk/gtkstock.h>
+#include <gtk/gtk.h>
 #include <glib/gi18n.h>
 #include "planner-window.h"
 #include "planner-application.h"
@@ -36,7 +35,7 @@ struct _PlannerApplicationPriv {
 	GList *windows;
 
 	/* recent file stuff */
-	EggRecentModel *recent_model;
+	GtkRecentManager *recent_model;
 };
 
 
@@ -181,14 +180,7 @@ application_init (PlannerApplication *app)
 
 	priv->windows = NULL;
 
-	priv->recent_model = egg_recent_model_new (EGG_RECENT_MODEL_SORT_MRU);
-	egg_recent_model_set_filter_mime_types (priv->recent_model,
-						"application/x-planner",
-						"application/x-mrproject",
-						NULL);
-	egg_recent_model_set_filter_uri_schemes (priv->recent_model, "file", NULL);
-
-	g_object_set (priv->recent_model, "limit", 5, NULL);
+	priv->recent_model = gtk_recent_manager_get_default ();
 
 	app->priv = priv;
 }
@@ -197,8 +189,6 @@ static void
 application_finalize (GObject *object)
 {
 	PlannerApplication *app = PLANNER_APPLICATION (object);
-
-	g_object_unref (app->priv->recent_model);
 
 	g_free (app->priv);
 
@@ -282,7 +272,7 @@ planner_application_exit (PlannerApplication *app)
 	g_list_free (list_cpy);
 }
 
-EggRecentModel *
+GtkRecentManager *
 planner_application_get_recent_model (PlannerApplication *app)
 {
 	g_return_val_if_fail (PLANNER_IS_APPLICATION (app), NULL);

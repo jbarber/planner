@@ -3,6 +3,7 @@
     <menu            action="File">
       <menuitem      action="FileNew"/>
       <menuitem      action="FileOpen"/>
+      <menuitem      action="FileOpenRecent"/>
       <menu          action="Import">
         <placeholder name="Import placeholder"/>
       </menu>
@@ -16,8 +17,6 @@
       <menuitem      action="FilePageSetup"/>
       <menuitem      action="FilePrint"/>
       <menuitem      action="FilePrintPreview"/>
-      <separator/>
-      <placeholder   name="OpenRecent"/>
       <separator/>
       <menuitem      action="FileClose"/>
       <menuitem      action="FileExit"/>

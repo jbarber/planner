@@ -26,7 +26,7 @@
 
 #include <libplanner/mrp-application.h>
 #include <libplanner/mrp-project.h>
-#include <libegg/recent-files/egg-recent-model.h>
+#include <gtk/gtk.h>
 
 #define PLANNER_TYPE_APPLICATION                (planner_application_get_type ())
 #define PLANNER_APPLICATION(obj)                (G_TYPE_CHECK_INSTANCE_CAST ((obj), PLANNER_TYPE_APPLICATION, PlannerApplication))
@@ -54,6 +54,6 @@ GType                 planner_application_get_type         (void) G_GNUC_CONST;
 PlannerApplication   *planner_application_new              (void);
 GtkWidget       *     planner_application_new_window       (PlannerApplication *app);
 void                  planner_application_exit             (PlannerApplication *app);
-EggRecentModel  *     planner_application_get_recent_model (PlannerApplication *app);
+GtkRecentManager     *planner_application_get_recent_model (PlannerApplication *app);
 
 #endif /* __PLANNER_APPLICATION_H__ */
