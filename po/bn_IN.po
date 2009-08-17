@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: bn_IN\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=planner&component=general\n"
 "POT-Creation-Date: 2009-08-08 13:25+0000\n"
-"PO-Revision-Date: 2009-08-17 17:50+0530\n"
+"PO-Revision-Date: 2009-08-17 19:30+0530\n"
 "Last-Translator: Runa Bhattacharjee <runab@redhat.com>\n"
 "Language-Team: Bengali INDIA <anubad@lists.ankur.org.in>\n"
 "MIME-Version: 1.0\n"
@@ -70,7 +70,7 @@ msgstr "<b>বর্ষপঞ্জি:</b>"
 
 #: ../data/glade/calendar-dialog.glade.h:7
 msgid "<b>Day types</b>"
-msgstr ""
+msgstr "<b>দিনের ধরন</b>"
 
 #: ../data/glade/calendar-dialog.glade.h:8
 msgid "<b>Working hours</b>"
@@ -86,7 +86,7 @@ msgstr ""
 
 #: ../data/glade/calendar-dialog.glade.h:11
 msgid "Apply"
-msgstr ""
+msgstr "প্রয়োগ করুন"
 
 #: ../data/glade/calendar-dialog.glade.h:12
 msgid "C_opy an existing calendar"
@@ -1847,12 +1847,12 @@ msgstr ""
 #: ../src/planner-task-dialog.c:1495
 #, c-format
 msgid "No earlier than %s"
-msgstr ""
+msgstr "%s-র পূর্বে নয়"
 
 #: ../src/planner-task-dialog.c:1499
 #, c-format
 msgid "On fixed date %s"
-msgstr ""
+msgstr "%s তারিখে নির্দিষ্ট"
 
 #: ../src/planner-task-dialog.c:1917
 msgid "Finish to start (FS)"
@@ -1971,20 +1971,20 @@ msgstr ""
 
 #: ../src/planner-task-tree.c:3333
 msgid "Move tasks up"
-msgstr ""
+msgstr "কর্মগুলি উপরে স্থানান্তর"
 
 #: ../src/planner-task-tree.c:3371
 msgid "Move task up"
-msgstr ""
+msgstr "কর্মটি উপরে স্থানান্তর"
 
 #: ../src/planner-task-tree.c:3459
 msgid "Move tasks down"
-msgstr ""
+msgstr "কর্মগুলি নীচে স্থানান্তর"
 
 #. Moving task from 'position' to 'position + 1'
 #: ../src/planner-task-tree.c:3505
 msgid "Move task down"
-msgstr ""
+msgstr "কর্ম নীচে স্থানান্তর"
 
 #: ../src/planner-task-tree.c:3561
 msgid "Reset task constraints"
@@ -2044,7 +2044,7 @@ msgstr ""
 
 #: ../src/planner-usage-view.c:112
 msgid "Zoom to fit"
-msgstr ""
+msgstr "মাপ অনুসারে প্রদর্শনের মাত্রা নির্ধারণ"
 
 #. i18n: Label used for the sidebar. Please try to make it short and use
 #. * a linebreak if necessary/possible.
@@ -2054,14 +2054,16 @@ msgid ""
 "Resource\n"
 "Usage"
 msgstr ""
+"রিসোর্সের\n"
+"ব্যবহার"
 
 #: ../src/planner-usage-view.c:235
 msgid "Resource _Usage"
-msgstr ""
+msgstr "রিসোর্সের ব্যবহার (_U)"
 
 #: ../src/planner-usage-view.c:346
 msgid "Edit Resource Usage Columns"
-msgstr ""
+msgstr "রিসোর্সের ব্যবহার সংক্রান্ত কলাম সম্পাদনা করুন"
 
 #: ../src/planner-window.c:226
 msgid "_File"
@@ -2113,75 +2115,75 @@ msgstr "পৃষ্ঠা প্রস্তুতি...(_u)"
 
 #: ../src/planner-window.c:250
 msgid "Setup the page settings for your current printer"
-msgstr ""
+msgstr "বর্তমান প্রিন্টারের জন্য পৃষ্ঠার মাপ নির্ধারণ করুন"
 
 #: ../src/planner-window.c:253
 msgid "_Print..."
-msgstr ""
+msgstr "প্রিন্ট করুন...(_P)"
 
 #: ../src/planner-window.c:253
 msgid "Print the current project"
-msgstr ""
+msgstr "বর্তমান প্রজেক্ট প্রিন্ট করুন"
 
 #: ../src/planner-window.c:256
 msgid "Print Pre_view"
-msgstr ""
+msgstr "প্রিন্টের পূর্বদৃশ্য (_v)"
 
 #: ../src/planner-window.c:256
 msgid "Print preview of the current project"
-msgstr ""
+msgstr "বর্তমান প্রজেক্টের প্রিন্টের পূর্বদৃশ্য"
 
 #: ../src/planner-window.c:259
 msgid "_Close"
-msgstr ""
+msgstr "বন্ধ করুন (_C)"
 
 #: ../src/planner-window.c:259
 msgid "Close the current file"
-msgstr ""
+msgstr "বর্তমান ফাইল বন্ধ করুন"
 
 #: ../src/planner-window.c:262
 msgid "_Quit"
-msgstr ""
+msgstr "প্রস্থান (_Q)"
 
 #: ../src/planner-window.c:262
 msgid "Exit the program"
-msgstr ""
+msgstr "প্রোগ্রাম থেকে প্রস্থান করুন"
 
 #: ../src/planner-window.c:266
 msgid "_Edit"
-msgstr ""
+msgstr "সম্পাদনা (_E)"
 
 #: ../src/planner-window.c:269
 msgid "_Undo"
-msgstr ""
+msgstr "পূর্বাবস্থা (_U)"
 
 #: ../src/planner-window.c:269
 msgid "Undo the last action"
-msgstr ""
+msgstr "সর্বশেষ সঞ্চালিত কর্ম বাতিল করুন"
 
 #: ../src/planner-window.c:272
 msgid "_Redo"
-msgstr ""
+msgstr "পুনরাবৃত্তি (_R)"
 
 #: ../src/planner-window.c:272
 msgid "Redo the undone action"
-msgstr ""
+msgstr "বাতিল করা সর্বশেষ কর্ম পুনরায় করুন"
 
 #: ../src/planner-window.c:276
 msgid "_View"
-msgstr ""
+msgstr "প্রদর্শন (_V)"
 
 #: ../src/planner-window.c:280
 msgid "_Actions"
-msgstr ""
+msgstr "কর্ম (_A)"
 
 #: ../src/planner-window.c:284
 msgid "_Project"
-msgstr ""
+msgstr "প্রজেক্ট (_P)"
 
 #: ../src/planner-window.c:287
 msgid "_Manage Calendars"
-msgstr ""
+msgstr "বর্ষপঞ্জি পরিচালনা (_M)"
 
 #: ../src/planner-window.c:290
 msgid "Edit Day _Types"
@@ -2193,19 +2195,19 @@ msgstr ""
 
 #: ../src/planner-window.c:296
 msgid "_Edit Project Properties"
-msgstr ""
+msgstr "প্রজেক্টের বৈশিষ্ট্য সম্পাদনা করুন (_E)"
 
 #: ../src/planner-window.c:296
 msgid "Edit the project properties"
-msgstr ""
+msgstr "প্রজেক্টের বৈশিষ্ট্য সম্পাদনা করুন"
 
 #: ../src/planner-window.c:304
 msgid "_Help"
-msgstr ""
+msgstr "সাহায্য (_H)"
 
 #: ../src/planner-window.c:307
 msgid "_User Guide"
-msgstr ""
+msgstr "ব্যবহার বিধি (_U)"
 
 #: ../src/planner-window.c:307
 msgid "Show the Planner User Guide"
@@ -2213,32 +2215,32 @@ msgstr ""
 
 #: ../src/planner-window.c:310
 msgid "_About"
-msgstr ""
+msgstr "পরিচিতি (_A)"
 
 #: ../src/planner-window.c:310
 msgid "About this application"
-msgstr ""
+msgstr "অ্যাপ্লিকেশনের পরিচিতি"
 
 #. Note: these strings are leaked.
 #: ../src/planner-window.c:669
 #, c-format
 msgid "Switch to the view \"%s\""
-msgstr ""
+msgstr "\"%s\" প্রদর্শন ব্যবস্থায় পরিবর্তন করুন"
 
 #: ../src/planner-window.c:836
 msgid "Open a File"
-msgstr ""
+msgstr "একটি ফাইল খুলুন"
 
 #: ../src/planner-window.c:846
 msgid "Planner Files"
-msgstr ""
+msgstr "Planner ফাইল"
 
 #. I18n: Translators, list your names here, newline separated if there
 #. * are more than one, to appear in the about box.
 #.
 #: ../src/planner-window.c:1187 ../src/planner-window.c:1209
 msgid "translator-credits"
-msgstr ""
+msgstr "রুণা ভট্টাচার্য (runab@redhat.com)"
 
 #: ../src/planner-window.c:1204
 msgid "A Project Management application for the GNOME desktop"
@@ -2246,7 +2248,7 @@ msgstr ""
 
 #: ../src/planner-window.c:1211
 msgid "The Planner Homepage"
-msgstr ""
+msgstr "Planner-র হোম-পেজ"
 
 #: ../src/planner-window.c:1363
 msgid "If you don't save, changes made the last minute will be discarded."
@@ -2277,15 +2279,15 @@ msgstr ""
 
 #: ../src/planner-window.c:1417
 msgid "C_lose without saving"
-msgstr ""
+msgstr "সংরক্ষণ না করে বন্ধ করুন (_l)"
 
 #: ../src/planner-window.c:1423
 msgid "_Cancel"
-msgstr ""
+msgstr "বাতিল (_C)"
 
 #: ../src/planner-window.c:1522
 msgid "Save a File"
-msgstr ""
+msgstr "একটি ফাইল সংরক্ষণ করুন"
 
 #: ../src/planner-window.c:1808
 msgid ""
@@ -2306,12 +2308,12 @@ msgstr ""
 #. Hack.
 #: ../src/planner-window.c:1843
 msgid "Unnamed database project"
-msgstr ""
+msgstr "নামবিহীন ডাটাবেস প্রজেক্ট"
 
 #: ../src/planner-window.c:1957
 #, c-format
 msgid "Open '%s'"
-msgstr ""
+msgstr "'%s' খুলুন"
 
 #: ../src/planner-working-time-dialog.c:145
 msgid "Edit working time"
@@ -2319,7 +2321,7 @@ msgstr ""
 
 #: ../src/planner-xml-planner-plugin.c:54
 msgid "Planner 0.11 Format"
-msgstr ""
+msgstr "Planner 0.11 বিন্যাস"
 
 #: ../src/planner-xml-planner-plugin.c:55
 msgid "Export project to a file suitable for Planner 0.11"
@@ -2327,11 +2329,11 @@ msgstr ""
 
 #: ../src/planner-xml-planner-plugin.c:90
 msgid "Export"
-msgstr ""
+msgstr "এক্সপোর্ট করুন"
 
 #: ../eds-backend/e-cal-backend-planner.c:289
 msgid "EDS UID"
-msgstr ""
+msgstr "EDS UID"
 
 #: ../eds-backend/e-cal-backend-planner.c:290
 msgid "Identifier used by Evolution Data Server for tasks"
@@ -2339,7 +2341,7 @@ msgstr ""
 
 #: ../eds-backend/e-cal-backend-planner.c:299
 msgid "EDS Categories"
-msgstr ""
+msgstr "EDS-র বিভাগ"
 
 #: ../eds-backend/e-cal-backend-planner.c:300
 msgid "Categories for a task used by Evolution Data Server"
@@ -2347,7 +2349,7 @@ msgstr ""
 
 #: ../eds-backend/e-cal-backend-planner.c:309
 msgid "EDS Classification"
-msgstr ""
+msgstr "EDS শ্রেণী"
 
 #: ../eds-backend/e-cal-backend-planner.c:310
 msgid "Task access classification used by Evolution Data Server"
@@ -2355,7 +2357,7 @@ msgstr ""
 
 #: ../eds-backend/e-cal-backend-planner.c:319
 msgid "EDS URL"
-msgstr ""
+msgstr "EDS URL"
 
 #: ../eds-backend/e-cal-backend-planner.c:320
 msgid "URL for a Task used by Evolution Data Server"
@@ -2363,13 +2365,13 @@ msgstr ""
 
 #: ../eds-backend/e-cal-backend-planner.c:829
 msgid "Invalid server URI"
-msgstr ""
+msgstr "সার্ভার URI বৈধ নয়"
 
 #. book_target = (EABConfigTargetSource *) data->target;
 #. source = book_target->source;
 #: ../eds-backend/planner-source/planner-source.c:125
 msgid "Select planner file"
-msgstr ""
+msgstr "planner ফাইল নির্বাচন করুন"
 
 #: ../eds-backend/planner-source/planner-source.c:157
 #, c-format
