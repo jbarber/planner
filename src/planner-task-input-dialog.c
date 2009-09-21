@@ -27,6 +27,7 @@
 #include "planner-marshal.h"
 #include "planner-task-input-dialog.h"
 #include "planner-task-cmd.h"
+#include "planner-format.h"
 
 typedef struct {
 	MrpProject    *project;
@@ -65,7 +66,7 @@ task_input_dialog_response_cb (GtkWidget *button,
 		name = gtk_entry_get_text (GTK_ENTRY (data->name_entry));
 		workstr = gtk_entry_get_text (GTK_ENTRY (data->work_entry));
 
-		work = 60*60*8 * g_strtod (workstr, NULL);
+		work = planner_parse_duration (data->project, workstr);
 
 		task = g_object_new (MRP_TYPE_TASK,
 				     "work", work,
