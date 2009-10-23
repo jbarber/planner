@@ -1479,6 +1479,7 @@ window_do_save (PlannerWindow *window, gboolean force)
 								 GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
 								 GTK_MESSAGE_WARNING,
 								 GTK_BUTTONS_YES_NO,
+								 "%s",
 								 error->message);
 
 				response = gtk_dialog_run (GTK_DIALOG (dialog));
@@ -1495,6 +1496,7 @@ window_do_save (PlannerWindow *window, gboolean force)
 							 GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
 							 GTK_MESSAGE_ERROR,
 							 GTK_BUTTONS_OK,
+							 "%s",
 							 error->message);
 
 			gtk_dialog_run (GTK_DIALOG (dialog));
@@ -1594,6 +1596,7 @@ window_do_save_as (PlannerWindow *window)
 							 GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
 							 GTK_MESSAGE_ERROR,
 							 GTK_BUTTONS_OK,
+							 "%s",
 							 error->message);
 			gtk_dialog_run (GTK_DIALOG (dialog));
 			gtk_widget_destroy (dialog);
@@ -1699,6 +1702,7 @@ planner_window_open (PlannerWindow *window,
 			GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
 			GTK_MESSAGE_ERROR,
 			GTK_BUTTONS_OK,
+			"%s",
 			error->message);
 		gtk_dialog_run (GTK_DIALOG (dialog));
 		gtk_widget_destroy (dialog);

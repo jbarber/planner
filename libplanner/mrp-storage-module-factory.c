@@ -90,7 +90,7 @@ storage_module_factory_load (GTypeModule *module)
 
 	factory->library = g_module_open (factory->name, 0);
 	if (!factory->library) {
-		g_warning (g_module_error ());
+		g_warning ("%s", g_module_error ());
 		return FALSE;
 	}
 
@@ -98,7 +98,7 @@ storage_module_factory_load (GTypeModule *module)
 	if (!g_module_symbol (factory->library, "module_init", (gpointer)&factory->init) ||
 	    !g_module_symbol (factory->library, "module_new", (gpointer)&factory->new) ||
 	    !g_module_symbol (factory->library, "module_exit", (gpointer)&factory->exit)) {
-		g_warning (g_module_error ());
+		g_warning ("%s", g_module_error ());
 		g_module_close (factory->library);
 
 		return FALSE;

@@ -1086,6 +1086,7 @@ mrp_task_add_predecessor (MrpTask          *task,
 		g_set_error (error,
 			     MRP_ERROR,
 			     MRP_ERROR_TASK_RELATION_FAILED,
+			     "%s",
 			     tmp);
 
 		return NULL;
@@ -1104,6 +1105,7 @@ mrp_task_add_predecessor (MrpTask          *task,
 		g_set_error (error,
 			     MRP_ERROR,
 			     MRP_ERROR_TASK_RELATION_FAILED,
+			     "%s",
 			     tmp);
 
 		return NULL;
