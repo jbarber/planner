@@ -132,6 +132,34 @@
   </xsl:if>
 </xsl:template>
   
+<!-- List the resources along with their assigned units if not 100 -->
+<xsl:template name="mrproj-assigned-resources">
+  <xsl:param name="task-id"/>
+
+  <xsl:for-each select="/project/allocations/allocation[@task-id=$task-id]">
+    <xsl:sort data-type="number" select="@resource-id" order="ascending"/>
+    <xsl:variable name="resource-id" select="@resource-id"/>
+
+    <!-- Use the short name of a resource unless it's empty -->
+    <xsl:choose>
+      <xsl:when test="/project/resources/resource[@id=$resource-id]/@short-name = ''">
+        <xsl:value-of select="/project/resources/resource[@id=$resource-id]/@name"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:value-of select="/project/resources/resource[@id=$resource-id]/@short-name"/>
+      </xsl:otherwise>
+    </xsl:choose>
+
+    <!-- Create a tag displaying the number of units this resource spends on this task if it is not 100 -->
+    <xsl:variable name="units" select="/project/allocations/allocation[@resource-id=$resource-id and @task-id=$task-id]/@units"/>
+    <xsl:if test="$units != 100">[<xsl:value-of select="$units"/>]</xsl:if>
+
+    <xsl:if test="not(position() = last())">
+      <xsl:text>, </xsl:text>
+    </xsl:if>
+  </xsl:for-each>
+</xsl:template>
+
 <!-- ********************************************************************* -->
 <!--                             XHTML page header                         -->
 <xsl:template name="htmlhead">

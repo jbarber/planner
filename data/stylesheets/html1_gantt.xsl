@@ -27,15 +27,14 @@
       <xsl:if test="not($days = 7)">
         <xsl:call-template name="create-week-row">
           <xsl:with-param name="days" select="$days - 7"/>
-            <xsl:with-param name="date" select="date:add($date, date:duration(604800))"/>
-          </xsl:call-template>
+          <xsl:with-param name="date" select="date:add($date, date:duration(604800))"/>
+        </xsl:call-template>
       </xsl:if>
     </xsl:when>
     <xsl:when test="not($days >= 7)">
       <th class="gantt-{$days}day-header" colspan="{$days}"></th>
-      <th></th>
-        </xsl:when>
-        <xsl:otherwise> 
+    </xsl:when>
+    <xsl:otherwise>
       <xsl:variable name="colspan">
         <xsl:choose>
           <xsl:when test="date:day-in-week($date) = 1">1</xsl:when>
@@ -192,6 +191,7 @@
         <xsl:with-param name="days" select="$days"/>
         <xsl:with-param name="date" select="$projstart"/>
       </xsl:call-template>
+      <th></th>
     </tr>
 
     <tr class="header" align="left">
@@ -248,56 +248,21 @@
                   </xsl:if>
                 </div>
               </xsl:if>
-                  
+
               <xsl:choose>
                 <xsl:when test="@type = 'milestone'">
                   <div class="gantt-milestone">&#9670;</div>
-                  <div class="gantt-resources">
-                    <xsl:variable name="task-id" select="@id"/>
-                    <xsl:for-each select="/project/allocations/allocation[@task-id=$task-id]">
-                      <xsl:sort data-type="number" select="@resource-id" order="descending"/>
-                      <xsl:variable name="resource-id" select="@resource-id"/>
-
-                      <xsl:choose>
-                        <xsl:when test="/project/resources/resource[@id=$resource-id]/@short-name = ''">
-                          <xsl:value-of select="/project/resources/resource[@id=$resource-id]/@name"/>
-                        </xsl:when>
-                        <xsl:otherwise>
-                          <xsl:value-of select="/project/resources/resource[@id=$resource-id]/@short-name"/>
-                        </xsl:otherwise>
-                      </xsl:choose>
-
-                      <xsl:if test="not(position() = last())">
-                        <xsl:text>, </xsl:text>
-                      </xsl:if>
-                    </xsl:for-each>
-                  </div>
                 </xsl:when>
                 <xsl:otherwise>
                   <div class="gantt-empty-end"></div>
-                  <div class="gantt-resources">
-                    <xsl:variable name="task-id" select="@id"/>
-                    <xsl:for-each select="/project/allocations/allocation[@task-id=$task-id]">
-                      <xsl:sort data-type="number" select="@resource-id" order="descending"/>
-                      <xsl:variable name="resource-id" select="@resource-id"/>
-
-                      <xsl:choose>
-                        <xsl:when test="/project/resources/resource[@id=$resource-id]/@short-name = ''">
-                          <xsl:value-of select="/project/resources/resource[@id=$resource-id]/@name"/>
-                        </xsl:when>
-                        <xsl:otherwise>
-                          <xsl:value-of select="/project/resources/resource[@id=$resource-id]/@short-name"/>
-                        </xsl:otherwise>
-                      </xsl:choose>
-
-                      <xsl:if test="not(position() = last())">
-                        <xsl:text>, </xsl:text>
-                      </xsl:if>
-                    </xsl:for-each>
-                  </div>
                 </xsl:otherwise>
               </xsl:choose>
-
+              <div class="gantt-resources">
+                <xsl:variable name="task-id" select="@id"/>
+                <xsl:call-template name="mrproj-assigned-resources">
+                  <xsl:with-param name="task-id" select="$task-id"/>
+                </xsl:call-template>
+              </div>
             </xsl:if>
           </div>
         </td>

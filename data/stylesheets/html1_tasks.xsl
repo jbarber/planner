@@ -54,9 +54,9 @@
       <th><span><xsl:value-of select="I18N:gettext('Start')"/></span></th>
       <th><span><xsl:value-of select="I18N:gettext('Finish')"/></span></th>
       <th><span><xsl:value-of select="I18N:gettext('Work')"/></span></th>
-      <th><span><xsl:value-of select="I18N:gettext('Priority')"/></span></th>
       <th><span><xsl:value-of select="I18N:gettext('Complete')"/></span></th>
       <th><span><xsl:value-of select="I18N:gettext('Cost')"/></span></th>
+      <th><span><xsl:value-of select="I18N:gettext('Assigned to')"/></span></th>
       <xsl:if test="$hasnotes">
         <th class="note"><span>Notes</span></th>
       </xsl:if>
@@ -90,222 +90,93 @@
             <xsl:otherwise>odd</xsl:otherwise>
           </xsl:choose>
         </xsl:variable>
-      
-        <xsl:choose>
-          <xsl:when test="task">
-            <tr class="{$rowclass}">
-              <td>
-                <span>
-                  <xsl:for-each select="ancestor-or-self::task">
-                    <xsl:value-of select="count(preceding-sibling::task) + 1"/>
-                    <xsl:if test="not(position() = last())">
-                      <xsl:text>.</xsl:text>
-                    </xsl:if>
-                  </xsl:for-each>
-                </span>
-              </td>
-              <td>
-                <a name="task{@id}" style="font-weight: bold; margin-left: {$indent*$task-indent-pixels}px">
-                  <span>
-                    <xsl:value-of select="@name"/>
-                  </span>
-                </a>
-              </td>
-              <td>
-                <span>
-                  <xsl:value-of select="date:month-abbreviation($start_date)"/>
-                  <xsl:text> </xsl:text>
-                  <xsl:value-of select="date:day-in-month($start_date)"/>
-                </span>
-              </td>
-              <td>
-                <span>
-                  <xsl:value-of select="date:month-abbreviation($end_date)"/>
-                  <xsl:text> </xsl:text>
-                  <xsl:value-of select="date:day-in-month($end_date)"/>
-                </span>
-              </td>
-              <td>
-                <span>
-                  <xsl:call-template name="mrproj-duration">
-                    <xsl:with-param name="duration-in-seconds" select="@work"/>
-                  </xsl:call-template>
-                </span>
-              </td>
-              <td>
-              </td>
-              <td>
-              </td>
-              <td>
-                <span>
-                  <xsl:variable name="std-rates" select="/project/resources/resource[@id=/project/allocations/allocation[@task-id=$tid]/@resource-id]/@std-rate"/>
-                  <xsl:variable name="units" select="/project/allocations/allocation[@task-id=$tid]/@units"/>
-                  <xsl:variable name="cost">
-                    <xsl:call-template name="calculate-cost">
-                      <xsl:with-param name="std-rates" select="$std-rates"/>
-                      <xsl:with-param name="units" select="$units"/>
-                      <xsl:with-param name="level" select="count($std-rates)"/>
-                      <xsl:with-param name="work" select="@work div 3600"/>
-                    </xsl:call-template>
-                  </xsl:variable>
-                  <xsl:if test="not($cost = 0)">
-                    <xsl:value-of select="format-number($cost, '###,###,###,###.##')"/>
-                  </xsl:if>
-                </span>
-              </td>
-              <xsl:if test="$hasnotes">
-                <td class="note">
-                  <span>
-                    <xsl:value-of select="@note"/>
-                  </span>
-                </td>
+
+        <xsl:variable name="rowstyle">
+          <xsl:if test="task">
+            font-weight: bold;
+          </xsl:if>
+        </xsl:variable>
+
+        <tr class="{$rowclass}" style="{$rowstyle}">
+          <td>
+            <span>
+              <xsl:for-each select="ancestor-or-self::task">
+                <xsl:value-of select="count(preceding-sibling::task) + 1"/>
+                <xsl:if test="not(position() = last())">
+                  <xsl:text>.</xsl:text>
+                </xsl:if>
+              </xsl:for-each>
+            </span>
+          </td>
+          <td>
+            <a name="task{@id}" style="margin-left: {$indent*$task-indent-pixels}px">
+              <span>
+                <xsl:value-of select="@name"/>
+              </span>
+            </a>
+          </td>
+          <td>
+            <span>
+              <xsl:value-of select="date:month-abbreviation($start_date)"/>
+              <xsl:text> </xsl:text>
+              <xsl:value-of select="date:day-in-month($start_date)"/>
+            </span>
+          </td>
+          <td>
+            <span>
+              <xsl:value-of select="date:month-abbreviation($end_date)"/>
+              <xsl:text> </xsl:text>
+              <xsl:value-of select="date:day-in-month($end_date)"/>
+            </span>
+          </td>
+          <td>
+            <xsl:if test="@type!='milestone'">
+              <span>
+                <xsl:call-template name="mrproj-duration">
+                  <xsl:with-param name="duration-in-seconds" select="@work"/>
+                </xsl:call-template>
+              </span>
+            </xsl:if>
+          </td>
+          <td>
+            <!-- if the task has no children and isn't a milestone -->
+            <xsl:if test="not(task) and @type!='milestone'">
+              <span>
+                <xsl:value-of select="@percent-complete"/>%
+              </span>
+            </xsl:if>
+          </td>
+          <td>
+            <span>
+              <xsl:variable name="std-rates" select="/project/resources/resource[@id=/project/allocations/allocation[@task-id=$tid]/@resource-id]/@std-rate"/>
+              <xsl:variable name="units" select="/project/allocations/allocation[@task-id=$tid]/@units"/>
+              <xsl:variable name="cost">
+                <xsl:call-template name="calculate-cost">
+                  <xsl:with-param name="std-rates" select="$std-rates"/>
+                  <xsl:with-param name="units" select="$units"/>
+                  <xsl:with-param name="level" select="count($std-rates)"/>
+                  <xsl:with-param name="work" select="@work div 3600"/>
+                </xsl:call-template>
+              </xsl:variable>
+              <xsl:if test="not($cost = 0)">
+                <xsl:value-of select="format-number($cost, '###,###,###,###.##')"/>
               </xsl:if>
-            </tr>
-          </xsl:when>
-          <xsl:when test="@type='milestone'">
-            <tr class="{$rowclass}">
-              <td>
-                <span>
-                  <xsl:for-each select="ancestor-or-self::task">
-                    <xsl:value-of select="count(preceding-sibling::task) + 1"/>
-                    <xsl:if test="not(position() = last())">
-                      <xsl:text>.</xsl:text>
-                    </xsl:if>
-                  </xsl:for-each>
-                </span>
-              </td>
-              <td>
-                <a name="task{@id}" style="margin-left: {$indent*$task-indent-pixels}px">
-                  <span>
-                    <xsl:value-of select="@name"/>
-                  </span>
-                </a>
-              </td>
-              <td>
-                <span>
-                  <xsl:value-of select="date:month-abbreviation($start_date)"/>
-                  <xsl:text> </xsl:text>
-                  <xsl:value-of select="date:day-in-month($start_date)"/>
-                </span>
-              </td>
-              <td>
-                <span>
-                  <xsl:value-of select="date:month-abbreviation($end_date)"/>
-                  <xsl:text> </xsl:text>
-                  <xsl:value-of select="date:day-in-month($end_date)"/>
-                </span>
-              </td>
-              <td>
-              </td>
-              <td>
-              </td>
-              <td>
-              </td>
-              <td>
-                <span>
-                  <xsl:variable name="std-rates" select="/project/resources/resource[@id=/project/allocations/allocation[@task-id=$tid]/@resource-id]/@std-rate"/>
-                  <xsl:variable name="units" select="/project/allocations/allocation[@task-id=$tid]/@units"/>
-                  <xsl:variable name="cost">
-                    <xsl:call-template name="calculate-cost">
-                      <xsl:with-param name="std-rates" select="$std-rates"/>
-                      <xsl:with-param name="units" select="$units"/>
-                      <xsl:with-param name="level" select="count($std-rates)"/>
-                      <xsl:with-param name="work" select="@work div 3600"/>
-                    </xsl:call-template>
-                  </xsl:variable>
-                  <xsl:if test="not($cost = 0)">
-                    <xsl:value-of select="format-number($cost, '###,###,###,###.##')"/>
-                  </xsl:if>
-                </span>
-              </td>
-              <xsl:if test="$hasnotes">
-                <td class="note">
-                  <span>
-                    <xsl:value-of select="@note"/>
-                  </span>
-                </td>
-              </xsl:if>
-            </tr>
-          </xsl:when>
-          <xsl:otherwise>
-            <tr class="{$rowclass}">
-              <td>
-                <span>
-                  <xsl:for-each select="ancestor-or-self::task">
-                    <xsl:value-of select="count(preceding-sibling::task) + 1"/>
-                    <xsl:if test="not(position() = last())">
-                      <xsl:text>.</xsl:text>
-                    </xsl:if>
-                  </xsl:for-each>
-                </span>
-              </td>
-              <td>
-                <a name="task{@id}" style="margin-left: {$indent*$task-indent-pixels}px">
-                  <span>
-                    <xsl:value-of select="@name"/>
-                  </span>
-                </a>
-              </td>
-              <td>
-                <span>
-                  <xsl:value-of select="date:month-abbreviation($start_date)"/>
-                  <xsl:text> </xsl:text>
-                  <xsl:value-of select="date:day-in-month($start_date)"/>
-                </span>
-              </td>
-              <td>
-                <span>
-                  <xsl:value-of select="date:month-abbreviation($end_date)"/>
-                  <xsl:text> </xsl:text>
-                  <xsl:value-of select="date:day-in-month($end_date)"/>
-                </span>
-              </td>
-              <td>
-                <span>
-                  <xsl:call-template name="mrproj-duration">
-                    <xsl:with-param name="duration-in-seconds" select="@work"/>
-                  </xsl:call-template>
-                </span>
-              </td>
-              <td align="center">
-                <span>
-                  <xsl:if test="not(@priority = 0)">
-                    <xsl:value-of select="format-number(@priority, '0')"/>
-                  </xsl:if>
-                </span>
-              </td>
-              <td align="right">
-                <span>
-                  <xsl:value-of select="@percent-complete"/>%
-                </span>
-              </td>
-              <td align="right">
-                <span>
-                  <xsl:variable name="std-rates" select="/project/resources/resource[@id=/project/allocations/allocation[@task-id=$tid]/@resource-id]/@std-rate"/>
-                  <xsl:variable name="units" select="/project/allocations/allocation[@task-id=$tid]/@units"/>
-                  <xsl:variable name="cost">
-                    <xsl:call-template name="calculate-cost">
-                      <xsl:with-param name="std-rates" select="$std-rates"/>
-                      <xsl:with-param name="units" select="$units"/>
-                      <xsl:with-param name="level" select="count($std-rates)"/>
-                      <xsl:with-param name="work" select="@work div 3600"/>
-                    </xsl:call-template>
-                  </xsl:variable>
-                  <xsl:if test="not($cost = 0)">
-                    <xsl:value-of select="format-number($cost, '###,###,###,###.##')"/>
-                  </xsl:if>
-                </span>
-              </td>
-              <xsl:if test="$hasnotes">
-                <td class="note">
-                  <span>
-                    <xsl:value-of select="@note"/>
-                  </span>
-                </td>
-              </xsl:if>
-            </tr>
-          </xsl:otherwise>
-        </xsl:choose>
+            </span>
+          </td>
+          <td>
+            <xsl:call-template name="mrproj-assigned-resources">
+              <xsl:with-param name="task-id" select="$tid"/>
+            </xsl:call-template>
+          </td>
+          <xsl:if test="$hasnotes">
+            <td class="note">
+              <span>
+                <xsl:value-of select="@note"/>
+              </span>
+            </td>
+          </xsl:if>
+        </tr>
+
     </xsl:for-each>
   </table>
   </div>
