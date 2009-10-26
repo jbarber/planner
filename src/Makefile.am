@@ -31,6 +31,8 @@ libplannerapp_la_SOURCES = 			\
 	$(built_sources)		\
 	eel-canvas-rect.c		\
 	eel-canvas-rect.h		\
+	dummy-canvas-item.c		\
+	dummy-canvas-item.h		\
 	planner-application.c		\
 	planner-application.h		\
 	planner-assignment-model.c	\
