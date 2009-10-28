@@ -1226,7 +1226,7 @@ mrp_project_add_resource (MrpProject *project, MrpResource *resource)
 
 	priv = project->priv;
 
-	priv->resources = g_list_prepend (priv->resources, resource);
+	priv->resources = g_list_append (priv->resources, resource);
 
 	g_object_get (resource, "group", &group, NULL);
 
