@@ -70,26 +70,33 @@
 
 <!-- Determine project length in seconds -->
 <xsl:variable name="projlength">
-  <xsl:for-each select="//project//task">
-    <xsl:sort data-type="number" 
-     select="date:seconds(date:add (date:date (concat (substring (@end, 1, 4),
-                                                   '-', substring (@end, 5, 2),
-                                                   '-', substring (@end, 7, 2))),
-                               date:duration ((3600 * substring (@end, 10, 2))+
-                                              (60 * substring (@end, 12, 2))+
-                                              substring (@end, 14, 2))))"
-      order="descending"/>
-    <xsl:if test="position()=1">
-      <xsl:copy-of
-        select="-(date:seconds ($projstart) - date:seconds (
-                           date:add (date:date (concat (substring (@end, 1, 4),
-                                                 '-', substring (@end, 5, 2),
-                                                 '-', substring (@end, 7, 2))),
-                               date:duration ((3600 * substring (@end, 10, 2))+
-                                              (60 * substring (@end, 12, 2))+
-                                              substring (@end, 14, 2)))))"/>
-      </xsl:if>
-    </xsl:for-each>
+  <xsl:choose>
+    <xsl:when test="//project//task">
+      <xsl:for-each select="//project//task">
+        <xsl:sort data-type="number"
+         select="date:seconds(date:add (date:date (concat (substring (@end, 1, 4),
+                                                       '-', substring (@end, 5, 2),
+                                                       '-', substring (@end, 7, 2))),
+                                   date:duration ((3600 * substring (@end, 10, 2))+
+                                                  (60 * substring (@end, 12, 2))+
+                                                  substring (@end, 14, 2))))"
+          order="descending"/>
+        <xsl:if test="position()=1">
+          <xsl:copy-of
+            select="-(date:seconds ($projstart) - date:seconds (
+                               date:add (date:date (concat (substring (@end, 1, 4),
+                                                     '-', substring (@end, 5, 2),
+                                                     '-', substring (@end, 7, 2))),
+                                   date:duration ((3600 * substring (@end, 10, 2))+
+                                                  (60 * substring (@end, 12, 2))+
+                                                  substring (@end, 14, 2)))))"/>
+          </xsl:if>
+        </xsl:for-each>
+      </xsl:when>
+      <xsl:otherwise>
+        0
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:variable>
 
 <xsl:variable name="projend" select="date:add($projstart, date:duration($projlength))"/>
