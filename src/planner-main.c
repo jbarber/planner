@@ -58,8 +58,12 @@ main (int argc, char **argv)
 		{ NULL }
 	};
 	gchar           *filename;
+	gchar           *locale_dir;
 
-	bindtextdomain (GETTEXT_PACKAGE, mrp_paths_get_locale_dir ());
+	locale_dir = mrp_paths_get_locale_dir ();
+	bindtextdomain (GETTEXT_PACKAGE, locale_dir);
+	g_free(locale_dir);
+
         bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 	textdomain (GETTEXT_PACKAGE);
 

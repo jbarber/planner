@@ -366,6 +366,8 @@ window_init (PlannerWindow *window)
 	priv = g_new0 (PlannerWindowPriv, 1);
 	window->priv = priv;
 
+	priv->views = NULL;
+
 	/* Setup drag-n-drop. */
 	gtk_drag_dest_set (GTK_WIDGET (window),
 			   GTK_DEST_DEFAULT_ALL,
@@ -397,6 +399,10 @@ window_finalize (GObject *object)
 	PlannerWindow     *window = PLANNER_WINDOW (object);
 	PlannerWindowPriv *priv = window->priv;
 
+	if (priv->views) {
+		g_list_foreach (priv->views, (GFunc) g_object_unref, NULL);
+		g_list_free (priv->views);
+	}
 	if (priv->application) {
 		g_object_unref (priv->application);
 	}
@@ -653,7 +659,6 @@ window_populate (PlannerWindow *window)
 	priv->view_actions = gtk_action_group_new ("View Actions");
 	gtk_ui_manager_insert_action_group (priv->ui_manager, priv->view_actions, 0);
 
-	priv->views = NULL;
 	priv->views = g_list_append (priv->views, planner_gantt_view_new ());
 	priv->views = g_list_append (priv->views, planner_task_view_new ());
 	priv->views = g_list_append (priv->views, planner_resource_view_new ());

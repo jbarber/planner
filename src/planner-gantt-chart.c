@@ -162,6 +162,8 @@ static void        gantt_chart_row_inserted             (GtkTreeModel       *mod
 							 GtkTreePath        *path,
 							 GtkTreeIter        *iter,
 							 gpointer            data);
+static void        gantt_chart_remove_children          (PlannerGanttChart  *chart,
+							 TreeNode           *node);
 static void        gantt_chart_row_deleted              (GtkTreeModel       *model,
 							 GtkTreePath        *path,
 							 gpointer            data);
@@ -474,6 +476,10 @@ gantt_chart_destroy (GtkObject *object)
 	planner_gantt_chart_set_model (chart, NULL);
 
 	/* FIXME: free more stuff. */
+	if (chart->priv->tree != NULL) {
+		gantt_chart_remove_children (chart, chart->priv->tree);
+		chart->priv->tree = NULL;
+	}
 
 	if (chart->priv->model != NULL) {
 		g_object_unref (chart->priv->model);
@@ -511,6 +517,8 @@ gantt_chart_style_set (GtkWidget *widget,
 					     NULL);
 
 	f = 0.2 * pango_font_metrics_get_approximate_char_width (metrics) / PANGO_SCALE;
+
+	pango_font_metrics_unref(metrics);
 
 	/* Re-layout with the new factor. */
 	gantt_chart_set_zoom (PLANNER_GANTT_CHART (widget), priv->zoom);
@@ -750,8 +758,10 @@ gantt_chart_remove_children (PlannerGanttChart *chart,
 		gantt_chart_remove_children (chart, node->children[i]);
 	}
 
-	gtk_object_destroy (GTK_OBJECT (node->item));
-	node->item = NULL;
+	if (node->item) {
+		gtk_object_destroy (GTK_OBJECT (node->item));
+		node->item = NULL;
+	}
 	node->task = NULL;
 
 	g_free (node->children);

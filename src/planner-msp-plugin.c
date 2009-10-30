@@ -35,10 +35,6 @@
 
 #define CONF_MSP_PLUGIN_LAST_DIR "/plugins/msp_plugin/last_dir"
 
-typedef struct {
-	GtkWidget *open_dialog;
-} MspPluginPriv;
-
 static void msp_plugin_open (GtkAction     *action,
 			     gpointer       user_data);
 void        plugin_init     (PlannerPlugin *plugin,
@@ -269,12 +265,9 @@ G_MODULE_EXPORT void
 plugin_init (PlannerPlugin *plugin,
 	     PlannerWindow *main_window)
 {
-	MspPluginPriv  *priv;
 	GtkActionGroup *actions;
 	GtkUIManager   *ui;
 	gchar          *filename;
-
-	priv = g_new0 (MspPluginPriv, 1);
 
 	actions = gtk_action_group_new ("MSP plugin actions");
 	gtk_action_group_set_translation_domain (actions, GETTEXT_PACKAGE);

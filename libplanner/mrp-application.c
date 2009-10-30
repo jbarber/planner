@@ -124,7 +124,12 @@ application_finalize (GObject *object)
 static void
 application_init_gettext (void)
 {
-	bindtextdomain (GETTEXT_PACKAGE, mrp_paths_get_locale_dir ());
+	gchar *locale_dir;
+
+	locale_dir = mrp_paths_get_locale_dir ();
+	bindtextdomain (GETTEXT_PACKAGE, locale_dir);
+	g_free(locale_dir);
+
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 
 	imrp_time_init ();
@@ -133,7 +138,7 @@ application_init_gettext (void)
 static void
 application_init_file_modules (MrpApplication *app)
 {
- 	mrp_file_module_load_all (app);
+	mrp_file_module_load_all (app);
 }
 
 void

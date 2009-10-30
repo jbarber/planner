@@ -53,10 +53,6 @@
 
 #define CONNECTION_FORMAT_STRING "HOST=%s;DB_NAME=%s"
 
-typedef struct {
-	GtkWidget *open_dialog;
-} SQLPluginPriv;
-
 static gint          sql_plugin_retrieve_project_id (PlannerPlugin  *plugin,
 						     gchar          *server,
 						     gchar          *port,
@@ -1230,15 +1226,12 @@ G_MODULE_EXPORT void
 plugin_init (PlannerPlugin *plugin,
 	     PlannerWindow *main_window)
 {
-	SQLPluginPriv  *priv;
 	GtkActionGroup *actions;
 	GtkUIManager   *ui;
 	gint            i = -1;
 	gchar          *filename;
 
 	gda_init (PACKAGE, VERSION, 0, NULL);
-
-	priv = g_new0 (SQLPluginPriv, 1);
 
 	g_object_set_data (G_OBJECT (main_window),
 			   PROJECT_ID,
