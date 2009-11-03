@@ -73,7 +73,7 @@ struct _MrpFileWriter {
 	const gchar * (*get_string)                (MrpFileWriter    *writer);
 };
 
-void            mrp_file_module_load_all  (MrpApplication   *app);
+GList *         mrp_file_module_load_all  (MrpApplication   *app);
 
 MrpFileModule * mrp_file_module_new       (void);
 

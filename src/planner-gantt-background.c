@@ -433,20 +433,23 @@ gantt_background_unrealize (GnomeCanvasItem *item)
 
 	background = PLANNER_GANTT_BACKGROUND (item);
 
-	gdk_gc_unref (background->priv->border_gc);
+	g_object_unref (background->priv->border_gc);
 	background->priv->border_gc = NULL;
 
-	gdk_gc_unref (background->priv->fill_gc);
+	g_object_unref (background->priv->fill_gc);
 	background->priv->fill_gc = NULL;
 
-	gdk_gc_unref (background->priv->timeline_gc);
+	g_object_unref (background->priv->timeline_gc);
 	background->priv->timeline_gc = NULL;
 
-	gdk_gc_unref (background->priv->start_gc);
+	g_object_unref (background->priv->start_gc);
 	background->priv->start_gc = NULL;
 
-	gdk_gc_unref (background->priv->guidelines_gc);
+	g_object_unref (background->priv->guidelines_gc);
 	background->priv->guidelines_gc = NULL;
+
+	g_object_unref (background->priv->layout);
+	background->priv->layout = NULL;
 
 	GNOME_CANVAS_ITEM_CLASS (parent_class)->unrealize (item);
 }

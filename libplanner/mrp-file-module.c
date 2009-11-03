@@ -48,13 +48,14 @@ file_module_load (const gchar *file)
 	return module;
 }
 
-void
+GList *
 mrp_file_module_load_all (MrpApplication *app)
 {
 	GDir*          dir;
 	const gchar   *name;
 	MrpFileModule *module;
 	gchar         *path;
+	GList         *modules = NULL;
 
 	path = mrp_paths_get_file_modules_dir (NULL);
 
@@ -76,6 +77,7 @@ mrp_file_module_load_all (MrpApplication *app)
 			module = file_module_load (plugin);
 			if (module) {
 				mrp_file_module_init (module, app);
+				modules = g_list_prepend (modules, module);
 			}
 
 			g_free (plugin);
@@ -84,6 +86,8 @@ mrp_file_module_load_all (MrpApplication *app)
 
 	g_free (path);
 	g_dir_close (dir);
+
+	return modules;
 }
 
 MrpFileModule *

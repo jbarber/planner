@@ -34,6 +34,7 @@
 struct _MrpApplicationPriv {
 	GList *file_readers;
 	GList *file_writers;
+	GList *modules;
 };
 
 static void application_class_init        (MrpApplicationClass    *klass);
@@ -42,6 +43,8 @@ static void application_finalize          (GObject                *object);
 
 static void application_init_gettext      (void);
 static void application_init_file_modules (MrpApplication         *app);
+static void application_finalize_file_modules
+					  (MrpApplication *app);
 
 static GObjectClass *parent_class;
 static guint         last_used_id;
@@ -114,7 +117,12 @@ application_init (MrpApplication *app)
 static void
 application_finalize (GObject *object)
 {
-	/* FIXME: free stuff. */
+	MrpApplication *app = MRP_APPLICATION (object);
+
+	application_finalize_file_modules (app);
+
+	g_free (app->priv);
+	app->priv = NULL;
 
 	if (parent_class->finalize) {
 		parent_class->finalize (object);
@@ -138,7 +146,23 @@ application_init_gettext (void)
 static void
 application_init_file_modules (MrpApplication *app)
 {
-	mrp_file_module_load_all (app);
+	app->priv->modules = mrp_file_module_load_all (app);
+}
+
+static void
+application_finalize_file_modules (MrpApplication *app)
+{
+	g_list_foreach (app->priv->file_readers, (GFunc) g_free, NULL);
+	g_list_free (app->priv->file_readers);
+	app->priv->file_readers = NULL;
+
+	g_list_foreach (app->priv->file_writers, (GFunc) g_free, NULL);
+	g_list_free (app->priv->file_writers);
+	app->priv->file_writers = NULL;
+
+	g_list_foreach (app->priv->modules, (GFunc) g_free, NULL);
+	g_list_free (app->priv->modules);
+	app->priv->modules = NULL;
 }
 
 void
