@@ -47,6 +47,7 @@ struct _PlannerUsageViewPriv {
 	gulong                  expose_id;
 };
 
+static void         usage_view_finalize                (GObject           *object);
 static void         usage_view_zoom_out_cb             (GtkAction         *action,
 							gpointer           data);
 static void         usage_view_zoom_in_cb              (GtkAction         *action,
@@ -102,6 +103,8 @@ static void         usage_view_save_columns            (PlannerUsageView  *view)
 static void         usage_view_load_columns            (PlannerUsageView  *view);
 
 
+static PlannerViewClass *parent_class = NULL;
+
 static const GtkActionEntry entries[] = {
         { "ZoomOut",   GTK_STOCK_ZOOM_OUT, N_("Zoom out"),
 	  NULL, N_("Zoom out"),
@@ -150,9 +153,15 @@ usage_view_chart_scroll_event (GtkWidget * gki, GdkEventScroll * event, PlannerV
 static void
 planner_usage_view_class_init (PlannerUsageViewClass *klass)
 {
+	GObjectClass     *o_class;
 	PlannerViewClass *view_class;
 
+	parent_class = g_type_class_peek_parent (klass);
+
+	o_class = (GObjectClass *) klass;
 	view_class = PLANNER_VIEW_CLASS (klass);
+
+	o_class->finalize = usage_view_finalize;
 
 	view_class->setup = usage_view_setup;
 	view_class->get_label = usage_view_get_label;
@@ -172,6 +181,20 @@ static void
 planner_usage_view_init (PlannerUsageView *view)
 {
 	view->priv = g_new0 (PlannerUsageViewPriv, 1);
+}
+
+static void
+usage_view_finalize (GObject *object)
+{
+	PlannerUsageView *view;
+
+	view = PLANNER_USAGE_VIEW (object);
+
+	g_free (view->priv);
+
+	if (G_OBJECT_CLASS (parent_class)->finalize) {
+		(*G_OBJECT_CLASS (parent_class)->finalize) (object);
+	}
 }
 
 static void
@@ -212,11 +235,10 @@ usage_view_deactivate (PlannerView *view)
 static void
 usage_view_setup (PlannerView *view, PlannerWindow *main_window)
 {
-        PlannerUsageViewPriv *priv;
+	PlannerUsageViewPriv *priv;
 
-        priv = g_new0 (PlannerUsageViewPriv, 1);
+	priv = PLANNER_USAGE_VIEW (view)->priv;
 
-        PLANNER_USAGE_VIEW (view)->priv = priv;
 	priv->ui_manager = planner_window_get_ui_manager(main_window);
 }
 

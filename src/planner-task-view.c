@@ -48,6 +48,7 @@ struct _PlannerTaskViewPriv {
 	guint                   merged_id;
 };
 
+static void          task_view_finalize                     (GObject         *object);
 static void          task_view_activate                     (PlannerView     *view);
 static void          task_view_deactivate                   (PlannerView     *view);
 static void          task_view_setup                        (PlannerView     *view,
@@ -112,6 +113,8 @@ static void          task_view_save_columns                 (PlannerView     *vi
 static void          task_view_load_columns                 (PlannerView     *view);
 
 
+static PlannerViewClass *parent_class = NULL;
+
 static const GtkActionEntry entries[] = {
 	{ "InsertTask",      "planner-stock-insert-task",      N_("_Insert Task"),
 	  "<Control>i",        N_("Insert a new task"),
@@ -173,9 +176,15 @@ G_DEFINE_TYPE (PlannerTaskView, planner_task_view, PLANNER_TYPE_VIEW);
 static void
 planner_task_view_class_init (PlannerTaskViewClass *klass)
 {
+	GObjectClass     *o_class;
 	PlannerViewClass *view_class;
 
+	parent_class = g_type_class_peek_parent (klass);
+
+	o_class = (GObjectClass *) klass;
 	view_class = PLANNER_VIEW_CLASS (klass);
+
+	o_class->finalize = task_view_finalize;
 
 	view_class->setup = task_view_setup;
 	view_class->get_label = task_view_get_label;
@@ -195,6 +204,19 @@ static void
 planner_task_view_init (PlannerTaskView *view)
 {
 	view->priv = g_new0 (PlannerTaskViewPriv, 1);
+}
+
+static void
+task_view_finalize (GObject *object)
+{
+	PlannerTaskView *view;
+
+	view = PLANNER_TASK_VIEW (object);
+	g_free (view->priv);
+
+	if (G_OBJECT_CLASS (parent_class)->finalize) {
+		(*G_OBJECT_CLASS (parent_class)->finalize) (object);
+	}
 }
 
 static void

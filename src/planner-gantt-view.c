@@ -52,6 +52,7 @@ struct _PlannerGanttViewPriv {
 	gulong                 expose_id;
 };
 
+static void          gantt_view_finalize                  (GObject           *object);
 static GtkWidget *   gantt_view_create_widget             (PlannerGanttView  *view);
 static void          gantt_view_insert_task_cb            (GtkAction         *action,
 							   gpointer           data);
@@ -129,6 +130,9 @@ static void          gantt_view_print                     (PlannerView       *vi
 							   gint               page_nr);
 static gint          gantt_view_print_get_n_pages         (PlannerView       *view);
 static void          gantt_view_print_cleanup             (PlannerView       *view);
+
+
+static PlannerViewClass *parent_class = NULL;
 
 static const GtkActionEntry entries[] = {
 	{ "InsertTask",      "planner-stock-insert-task",    N_("_Insert Task"),
@@ -228,9 +232,15 @@ gantt_view_chart_scroll_event (GtkWidget * gki, GdkEventScroll * event, PlannerG
 static void
 planner_gantt_view_class_init (PlannerGanttViewClass *klass)
 {
+	GObjectClass     *o_class;
 	PlannerViewClass *view_class;
 
+	parent_class = g_type_class_peek_parent (klass);
+
+	o_class = (GObjectClass *) klass;
 	view_class = PLANNER_VIEW_CLASS (klass);
+
+	o_class->finalize = gantt_view_finalize;
 
 	view_class->setup = gantt_view_setup;
 	view_class->get_label = gantt_view_get_label;
@@ -250,6 +260,19 @@ static void
 planner_gantt_view_init (PlannerGanttView *view)
 {
 	view->priv = g_new0 (PlannerGanttViewPriv, 1);
+}
+
+static void
+gantt_view_finalize (GObject *object)
+{
+	PlannerGanttView *view;
+
+	view = PLANNER_GANTT_VIEW (object);
+	g_free (view->priv);
+
+	if (G_OBJECT_CLASS (parent_class)->finalize) {
+		(*G_OBJECT_CLASS (parent_class)->finalize) (object);
+	}
 }
 
 static void

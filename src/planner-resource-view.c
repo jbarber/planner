@@ -67,6 +67,7 @@ enum {
 	NUM_OF_COLS
 };
 
+static void           resource_view_finalize                 (GObject                 *object);
 static void           resource_view_insert_resource_cb       (GtkAction               *action,
 							      gpointer                 data);
 static void           resource_view_insert_resources_cb      (GtkAction               *action,
@@ -226,6 +227,7 @@ static const gchar *  resource_view_get_type_string          (MrpResourceType   
 static void           resource_view_save_columns             (PlannerResourceView     *view);
 static void           resource_view_load_columns             (PlannerResourceView     *view);
 
+static PlannerViewClass *parent_class = NULL;
 
 static const GtkActionEntry entries[] = {
 	{ "InsertResource",   "planner-stock-insert-resource", N_("_Insert Resource"),
@@ -319,9 +321,15 @@ G_DEFINE_TYPE (PlannerResourceView, planner_resource_view, PLANNER_TYPE_VIEW);
 static void
 planner_resource_view_class_init (PlannerResourceViewClass *klass)
 {
+	GObjectClass     *o_class;
 	PlannerViewClass *view_class;
 
+	parent_class = g_type_class_peek_parent (klass);
+
+	o_class = (GObjectClass *) klass;
 	view_class = PLANNER_VIEW_CLASS (klass);
+
+	o_class->finalize = resource_view_finalize;
 
 	view_class->setup = resource_view_setup;
 	view_class->get_label = resource_view_get_label;
@@ -341,6 +349,19 @@ static void
 planner_resource_view_init (PlannerResourceView *view)
 {
 	view->priv = g_new0 (PlannerResourceViewPriv, 1);
+}
+
+static void
+resource_view_finalize (GObject *object)
+{
+	PlannerResourceView *view;
+
+	view = PLANNER_RESOURCE_VIEW (object);
+	g_free (view->priv);
+
+	if (G_OBJECT_CLASS (parent_class)->finalize) {
+		(*G_OBJECT_CLASS (parent_class)->finalize) (object);
+	}
 }
 
 static void
