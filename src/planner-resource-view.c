@@ -357,6 +357,12 @@ resource_view_finalize (GObject *object)
 	PlannerResourceView *view;
 
 	view = PLANNER_RESOURCE_VIEW (object);
+
+	if (view->priv->property_to_column) {
+		g_hash_table_unref (view->priv->property_to_column);
+		view->priv->property_to_column = NULL;
+	}
+
 	g_free (view->priv);
 
 	if (G_OBJECT_CLASS (parent_class)->finalize) {

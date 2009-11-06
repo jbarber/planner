@@ -142,6 +142,8 @@ sidebar_finalize (GObject *object)
 {
 	PlannerSidebar *bar = PLANNER_SIDEBAR (object);
 
+	g_list_free (bar->priv->buttons);
+
 	g_free (bar->priv);
 
 	if (G_OBJECT_CLASS (parent_class)->finalize) {
