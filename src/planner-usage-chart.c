@@ -567,6 +567,7 @@ usage_chart_finalize (GObject *object)
 
 	chart = PLANNER_USAGE_CHART (object);
 
+	g_free (chart->priv->tree);
 	g_free (chart->priv);
 
 	if (G_OBJECT_CLASS (parent_class)->finalize) {
@@ -582,6 +583,7 @@ usage_chart_destroy (GtkObject *object)
 	chart = PLANNER_USAGE_CHART (object);
 
 	if (chart->priv->model != NULL) {
+		usage_chart_disconnect_signals (chart);
 		g_object_unref (chart->priv->model);
 		chart->priv->model = NULL;
 	}
@@ -946,8 +948,8 @@ planner_usage_chart_new_with_model (GtkTreeModel *model)
 {
 	PlannerUsageChart *chart;
 
-	chart = PLANNER_USAGE_CHART (gtk_type_new
-				      (planner_usage_chart_get_type ()));
+	chart = g_object_new (PLANNER_TYPE_USAGE_CHART, NULL);
+
 	if (model) {
 		planner_usage_chart_set_model (chart, model);
 	}

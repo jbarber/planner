@@ -399,6 +399,10 @@ window_finalize (GObject *object)
 	PlannerWindow     *window = PLANNER_WINDOW (object);
 	PlannerWindowPriv *priv = window->priv;
 
+	if (priv->plugins) {
+		g_list_free (priv->plugins);
+	}
+
 	if (priv->views) {
 		g_list_foreach (priv->views, (GFunc) g_object_unref, NULL);
 		g_list_free (priv->views);
@@ -682,8 +686,6 @@ window_populate (PlannerWindow *window)
 		r_entries[view_num].name  = planner_view_get_name (view);
 		r_entries[view_num].label = planner_view_get_menu_label (view);
 		r_entries[view_num].value = view_num;
-
-		/* Note: these strings are leaked. */
 		r_entries[view_num].tooltip = g_strdup_printf (_("Switch to the view \"%s\""),
 							       planner_view_get_label (view));
 
@@ -703,6 +705,14 @@ window_populate (PlannerWindow *window)
 					    g_list_length (priv->views), 0,
 					    G_CALLBACK (window_view_cb),
 					    window);
+
+	view_num = 0;
+	for (l = priv->views; l; l = l->next, view_num++ ) {
+		/* Cast off const so we can free the string we allocated */
+		gchar *tooltip = (gchar *)(r_entries[view_num].tooltip);
+		g_free (tooltip);
+	}
+	g_free (r_entries);
 
 	xml_string_tmp = g_strdup_printf (xml_string_full, xml_string);
 	gtk_ui_manager_add_ui_from_string (priv->ui_manager, xml_string_tmp, -1, NULL);

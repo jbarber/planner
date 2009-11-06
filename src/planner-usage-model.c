@@ -135,6 +135,9 @@ usage_model_finalize (GObject *object)
 {
 	PlannerUsageModel *model = PLANNER_USAGE_MODEL (object);
 
+	g_hash_table_destroy (model->priv->assign2node);
+	g_hash_table_destroy (model->priv->resource2node);
+	g_node_destroy (model->priv->tree);
 	g_free (model->priv);
 
 	if (G_OBJECT_CLASS (parent_class)->finalize) {
