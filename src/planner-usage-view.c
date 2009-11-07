@@ -576,6 +576,8 @@ usage_view_update_row_and_header_height (PlannerView *view)
 	if (path)
 		gtk_tree_path_free (path);
 
+	g_list_free (cols);
+
 	/* Sync with the chart widget. */
 	g_object_set (chart,
 		      "header_height", header_height,

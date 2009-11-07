@@ -1003,6 +1003,8 @@ gantt_view_update_row_height (PlannerGanttView *view)
 	if (path)
 		gtk_tree_path_free (path);
 
+	g_list_free (cols);
+
 	/* Sync with the gantt widget. */
 	g_object_set (gantt,
 		      "header_height", header_height,
