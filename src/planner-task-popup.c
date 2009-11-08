@@ -19,9 +19,7 @@
  */
 
 #include <config.h>
-#include <gtk/gtkiconfactory.h>
-#include <gtk/gtkstock.h>
-#include <gtk/gtkmenu.h>
+#include <gtk/gtk.h>
 #include <glib/gi18n.h>
 #include "libplanner/mrp-paths.h"
 #include "planner-task-tree.h"

@@ -24,7 +24,7 @@
 #define __PLANNER_POPUP_ENTRY_H__
 
 #include <pango/pango.h>
-#include <gtk/gtkeventbox.h>
+#include <gtk/gtk.h>
 
 #define PLANNER_TYPE_POPUP_ENTRY		(planner_popup_entry_get_type ())
 #define PLANNER_POPUP_ENTRY(obj)		(GTK_CHECK_CAST ((obj), PLANNER_TYPE_POPUP_ENTRY, PlannerPopupEntry))

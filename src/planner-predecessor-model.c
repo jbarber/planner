@@ -22,7 +22,7 @@
  */
 
 #include <config.h>
-#include <gtk/gtktreemodel.h>
+#include <gtk/gtk.h>
 #include <glib/gi18n.h>
 #include "planner-predecessor-model.h"
 

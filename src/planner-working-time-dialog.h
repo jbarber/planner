@@ -23,7 +23,7 @@
 #ifndef __PLANNER_WORKING_TIME_DIALOG_H__
 #define __PLANNER_WORKING_TIME_DIALOG_H__
 
-#include <gtk/gtkwidget.h>
+#include <gtk/gtk.h>
 #include <libplanner/mrp-project.h>
 #include "planner-window.h"
 

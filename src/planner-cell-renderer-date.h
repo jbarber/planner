@@ -25,7 +25,7 @@
 #define __PLANNER_CELL_RENDERER_DATE_H__
 
 #include <glib-object.h>
-#include <gtk/gtkwidget.h>
+#include <gtk/gtk.h>
 #include <libplanner/mrp-time.h>
 #include <libplanner/mrp-types.h>
 #include "planner-cell-renderer-popup.h"

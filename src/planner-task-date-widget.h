@@ -21,7 +21,7 @@
 #ifndef __PLANNER_TASK_DATE_WIDGET_H__
 #define __PLANNER_TASK_DATE_WIDGET_H__
 
-#include <gtk/gtktogglebutton.h>
+#include <gtk/gtk.h>
 
 #define PLANNER_TYPE_TASK_DATE_WIDGET            (planner_task_date_widget_get_type ())
 #define PLANNER_TASK_DATE_WIDGET(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), PLANNER_TYPE_TASK_DATE_WIDGET, PlannerTaskDateWidget))

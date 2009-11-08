@@ -23,7 +23,7 @@
 #ifndef __PLANNER_SIDEBAR_H__
 #define __PLANNER_SIDEBAR_H__
 
-#include <gtk/gtkframe.h>
+#include <gtk/gtk.h>
 
 #define PLANNER_TYPE_SIDEBAR		(planner_sidebar_get_type ())
 #define PLANNER_SIDEBAR(obj)		(GTK_CHECK_CAST ((obj), PLANNER_TYPE_SIDEBAR, PlannerSidebar))

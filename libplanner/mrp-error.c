@@ -21,7 +21,6 @@
  */
 
 #include <config.h>
-#include <glib/gerror.h>
 #include "mrp-error.h"
 
 GQuark

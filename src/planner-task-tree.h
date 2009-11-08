@@ -23,7 +23,7 @@
 #ifndef __PLANNER_TASK_TREE_H__
 #define __PLANNER_TASK_TREE_H__
 
-#include <gtk/gtktreeview.h>
+#include <gtk/gtk.h>
 #include <libplanner/mrp-project.h>
 #include "planner-gantt-model.h"
 #include "planner-window.h"

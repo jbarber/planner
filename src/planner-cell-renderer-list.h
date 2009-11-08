@@ -24,7 +24,7 @@
 #define __PLANNER_CELL_RENDERER_LIST_H__
 
 #include <glib-object.h>
-#include <gtk/gtkwidget.h>
+#include <gtk/gtk.h>
 #include "planner-cell-renderer-popup.h"
 
 #define PLANNER_TYPE_CELL_RENDERER_LIST	      (planner_cell_renderer_list_get_type ())

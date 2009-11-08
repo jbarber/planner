@@ -23,8 +23,7 @@
 
 #include <config.h>
 #include <string.h>
-#include <gtk/gtkwidget.h>
-#include <gtk/gtkmain.h>
+#include <gtk/gtk.h>
 #include <glib/gi18n.h>
 #ifdef WITH_GNOME
 #include <libgnome/gnome-program.h>

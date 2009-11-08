@@ -23,7 +23,7 @@
 #ifndef __PLANNER_USAGE_MODEL_H__
 #define __PLANNER_USAGE_MODEL_H__
 
-#include <gtk/gtktreemodel.h>
+#include <gtk/gtk.h>
 #include <libplanner/mrp-project.h>
 #include <libplanner/mrp-task.h>
 #include <libplanner/mrp-resource.h>

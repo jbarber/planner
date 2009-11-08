@@ -23,9 +23,7 @@
 #ifndef __PLANNER_GANTT_CHART_H__
 #define __PLANNER_GANTT_CHART_H__
 
-#include <gtk/gtkwidget.h>
-#include <gtk/gtkvbox.h>
-#include <gtk/gtktreemodel.h>
+#include <gtk/gtk.h>
 #include <libgnomecanvas/gnome-canvas.h>
 #include "planner-task-tree.h"
 

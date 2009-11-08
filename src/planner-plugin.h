@@ -24,7 +24,7 @@
 #define __PLANNER_PLUGIN_H__
 
 #include <gmodule.h>
-#include <gtk/gtkwidget.h>
+#include <gtk/gtk.h>
 #include "planner-window.h"
 
 #define PLANNER_TYPE_PLUGIN		   (planner_plugin_get_type ())

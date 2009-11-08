@@ -23,7 +23,7 @@
 #ifndef __PLANNER_CALENDAR_SELECTOR_H__
 #define __PLANNER_CALENDAR_SELECTOR_H__
 
-#include <gtk/gtkwidget.h>
+#include <gtk/gtk.h>
 #include <libplanner/mrp-project.h>
 #include "planner-window.h"
 

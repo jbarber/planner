@@ -25,8 +25,7 @@
 #include <string.h>
 #include <time.h>
 #include <glib.h>
-#include <gtk/gtktreemodel.h>
-#include <gtk/gtktreednd.h>
+#include <gtk/gtk.h>
 #include <glib/gi18n.h>
 #include <libplanner/mrp-task.h>
 #include "planner-marshal.h"

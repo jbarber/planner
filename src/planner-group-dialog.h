@@ -24,7 +24,7 @@
 #ifndef __PLANNER_RESOURCES_GROUP_DIALOG_H__
 #define __PLANNER_RESOURCES_GROUP_DIALOG_H__
 
-#include <gtk/gtkwindow.h>
+#include <gtk/gtk.h>
 #include "planner-view.h"
 
 GtkWidget *     planner_group_dialog_new               (PlannerView  *view);

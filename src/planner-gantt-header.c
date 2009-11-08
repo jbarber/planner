@@ -25,7 +25,7 @@
 #include <time.h>
 #include <math.h>
 #include <glib/gi18n.h>
-#include <gtk/gtkcontainer.h>
+#include <gtk/gtk.h>
 #include <libplanner/mrp-time.h>
 #include "planner-marshal.h"
 #include "planner-gantt-header.h"

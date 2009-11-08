@@ -22,7 +22,7 @@
 #ifndef __PLANNER_PROPERTY_MODEL_H__
 #define __PLANNER_PROPERTY_MODEL_H__
 
-#include <gtk/gtktreemodel.h>
+#include <gtk/gtk.h>
 #include <libplanner/mrp-project.h>
 
 enum {

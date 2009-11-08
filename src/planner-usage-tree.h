@@ -23,7 +23,7 @@
 #ifndef __PLANNER_USAGE_TREE__
 #define __PLANNER_USAGE_TREE__
 
-#include <gtk/gtktreeview.h>
+#include <gtk/gtk.h>
 #include <libplanner/mrp-project.h>
 #include "planner-usage-model.h"
 #include "planner-window.h"

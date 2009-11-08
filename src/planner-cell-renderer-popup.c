@@ -22,12 +22,7 @@
 
 #include <config.h>
 #include <gdk/gdkkeysyms.h>
-#include <gtk/gtkcellrenderertext.h>
-#include <gtk/gtkwindow.h>
-#include <gtk/gtkmain.h>
-#include <gtk/gtkeditable.h>
-#include <gtk/gtksignal.h>
-#include <gtk/gtkbutton.h>
+#include <gtk/gtk.h>
 #include "planner-marshal.h"
 #include "planner-cell-renderer-popup.h"
 #include "planner-popup-entry.h"

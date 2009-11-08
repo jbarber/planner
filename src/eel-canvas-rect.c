@@ -28,7 +28,7 @@
 #include <math.h>
 #include <string.h>
 
-#include <glib/gstring.h>
+#include <glib.h>
 #include <libgnomecanvas/gnome-canvas-util.h>
 
 /* FIXME: check for this in configure and use it. */

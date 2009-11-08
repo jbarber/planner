@@ -22,13 +22,7 @@
 
 #include <config.h>
 #include <string.h>
-#include <gtk/gtkwindow.h>
-#include <gtk/gtkbutton.h>
-#include <gtk/gtkentry.h>
-#include <gtk/gtkarrow.h>
-#include <gtk/gtkhbox.h>
-#include <gtk/gtkeventbox.h>
-#include <gtk/gtkcelleditable.h>
+#include <gtk/gtk.h>
 #include <gdk/gdkkeysyms.h>
 #include "planner-popup-entry.h"
 

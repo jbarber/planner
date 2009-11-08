@@ -25,7 +25,7 @@
 
 #include <libplanner/mrp-project.h>
 #include <libplanner/mrp-task.h>
-#include <gtk/gtktreemodel.h>
+#include <gtk/gtk.h>
 
 #define PLANNER_TYPE_GANTT_MODEL            (planner_gantt_model_get_type ())
 #define PLANNER_GANTT_MODEL(obj)            (GTK_CHECK_CAST ((obj), PLANNER_TYPE_GANTT_MODEL, PlannerGanttModel))

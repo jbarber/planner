@@ -24,7 +24,7 @@
 #include <config.h>
 #include <string.h>
 #include <glib/gi18n.h>
-#include <gtk/gtkliststore.h>
+#include <gtk/gtk.h>
 #include <libplanner/mrp-property.h>
 #include "planner-property-model.h"
 

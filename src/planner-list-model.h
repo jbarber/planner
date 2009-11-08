@@ -25,8 +25,7 @@
 #define __PLANNER_LIST_MODEL_H__
 
 #include <glib-object.h>
-#include <gtk/gtktreemodel.h>
-#include <gtk/gtktreesortable.h>
+#include <gtk/gtk.h>
 #include <libplanner/mrp-object.h>
 
 #define PLANNER_TYPE_LIST_MODEL	          (planner_list_model_get_type ())

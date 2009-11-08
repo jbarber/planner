@@ -25,8 +25,7 @@
 #define __PLANNER_WINDOW_H__
 
 #include <libplanner/mrp-project.h>
-#include <gtk/gtkuimanager.h>
-#include <gtk/gtkwindow.h>
+#include <gtk/gtk.h>
 #include "planner-application.h"
 #include "planner-cmd-manager.h"
 

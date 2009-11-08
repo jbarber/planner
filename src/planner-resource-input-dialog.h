@@ -24,7 +24,7 @@
 #ifndef __PLANNER_RESOURCE_INPUT_DIALOG_H__
 #define __PLANNER_RESOURCE_INPUT_DIALOG_H__
 
-#include <gtk/gtkwidget.h>
+#include <gtk/gtk.h>
 #include "planner-window.h"
 
 GtkWidget * planner_resource_input_dialog_new (PlannerWindow *main_window);

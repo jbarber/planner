@@ -23,7 +23,7 @@
 #ifndef __PLANNER_TABLE_PRINT_SHEET_H__
 #define __PLANNER_TABLE_PRINT_SHEET_H__
 
-#include <gtk/gtktreeview.h>
+#include <gtk/gtk.h>
 #include "planner-print-job.h"
 #include "planner-view.h"
 

@@ -2,7 +2,7 @@
 #define __PLANNER_CELL_RENDERER_POPUP_H__
 
 #include <pango/pango.h>
-#include <gtk/gtkcellrenderertext.h>
+#include <gtk/gtk.h>
 
 #define PLANNER_TYPE_CELL_RENDERER_POPUP		(planner_cell_renderer_popup_get_type ())
 #define PLANNER_CELL_RENDERER_POPUP(obj)		(GTK_CHECK_CAST ((obj), PLANNER_TYPE_CELL_RENDERER_POPUP, PlannerCellRendererPopup))

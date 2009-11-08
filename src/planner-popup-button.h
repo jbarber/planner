@@ -21,7 +21,7 @@
 #ifndef __PLANNER_POPUP_BUTTON_H__
 #define __PLANNER_POPUP_BUTTON_H__
 
-#include <gtk/gtktogglebutton.h>
+#include <gtk/gtk.h>
 
 #define PLANNER_TYPE_POPUP_BUTTON            (planner_popup_button_get_type ())
 #define PLANNER_POPUP_BUTTON(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), PLANNER_TYPE_POPUP_BUTTON, PlannerPopupButton))

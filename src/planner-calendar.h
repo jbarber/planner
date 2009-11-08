@@ -30,7 +30,7 @@
 #define __PLANNER_CALENDAR_H__
 
 #include <gdk/gdk.h>
-#include <gtk/gtkwidget.h>
+#include <gtk/gtk.h>
 
 #define PLANNER_TYPE_CALENDAR                  (planner_calendar_get_type ())
 #define PLANNER_CALENDAR(obj)                  (G_TYPE_CHECK_INSTANCE_CAST ((obj), PLANNER_TYPE_CALENDAR, PlannerCalendar))

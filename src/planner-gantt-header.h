@@ -23,7 +23,7 @@
 #ifndef __PLANNER_GANTT_HEADER_H__
 #define __PLANNER_GANTT_HEADER_H__
 
-#include <gtk/gtkwidget.h>
+#include <gtk/gtk.h>
 
 #define PLANNER_TYPE_GANTT_HEADER		(planner_gantt_header_get_type ())
 #define PLANNER_GANTT_HEADER(obj)		(GTK_CHECK_CAST ((obj), PLANNER_TYPE_GANTT_HEADER, PlannerGanttHeader))
