@@ -75,8 +75,6 @@ struct _PlannerWindowPriv {
 	GList               *views;
 	GList               *plugins;
 	GTimer              *last_saved;
-
-	GtkWidget           *recent_view;
 };
 
 /* Drop targets. */
@@ -409,10 +407,6 @@ window_finalize (GObject *object)
 		g_object_unref (priv->cmd_manager);
 	}
 
-	if (priv->recent_view) {
-		g_object_unref (priv->recent_view);
-	}
-
 	if (priv->ui_manager) {
 		g_object_unref (priv->ui_manager);
 	}
@@ -542,6 +536,9 @@ window_populate (PlannerWindow *window)
 	GtkWidget            *hbox;
 	GList                *l;
 	GtkWidget            *view_widget;
+	GtkWidget            *recent_view;
+	GtkRecentFilter      *filter;
+	GtkWidget            *open_recent;
 	PlannerView          *view;
 	gint                  view_num;
 	GtkRadioActionEntry  *r_entries;
@@ -611,29 +608,27 @@ window_populate (PlannerWindow *window)
 		      NULL);
 
 	/* Handle recent file stuff. */
-	priv->recent_view = gtk_recent_chooser_menu_new_for_manager (
+	recent_view = gtk_recent_chooser_menu_new_for_manager (
 		planner_application_get_recent_model (priv->application));
 
-	GtkRecentFilter *filter;
 	filter = gtk_recent_filter_new ();
 	gtk_recent_filter_add_mime_type (filter, "application/x-planner");
 	gtk_recent_filter_add_mime_type (filter, "application/x-mrproject");
 	gtk_recent_filter_add_group (filter, "planner");
-	gtk_recent_chooser_set_filter (GTK_RECENT_CHOOSER (priv->recent_view), filter);
+	gtk_recent_chooser_set_filter (GTK_RECENT_CHOOSER (recent_view), filter);
 
-	g_signal_connect (priv->recent_view,
+	g_signal_connect (recent_view,
 			  "item_activated",
 			  G_CALLBACK (recent_chooser_item_activated),
 			  window);
 
-	gtk_recent_chooser_set_sort_type (GTK_RECENT_CHOOSER (priv->recent_view), GTK_RECENT_SORT_MRU);
-	gtk_recent_chooser_set_local_only (GTK_RECENT_CHOOSER (priv->recent_view), TRUE);
-	gtk_recent_chooser_set_limit (GTK_RECENT_CHOOSER (priv->recent_view), 5);
-	gtk_recent_chooser_menu_set_show_numbers (GTK_RECENT_CHOOSER_MENU (priv->recent_view), TRUE);
+	gtk_recent_chooser_set_sort_type (GTK_RECENT_CHOOSER (recent_view), GTK_RECENT_SORT_MRU);
+	gtk_recent_chooser_set_local_only (GTK_RECENT_CHOOSER (recent_view), TRUE);
+	gtk_recent_chooser_set_limit (GTK_RECENT_CHOOSER (recent_view), 5);
+	gtk_recent_chooser_menu_set_show_numbers (GTK_RECENT_CHOOSER_MENU (recent_view), TRUE);
 
-	GtkWidget *open_recent;
 	open_recent = gtk_ui_manager_get_widget (priv->ui_manager, "/MenuBar/File/FileOpenRecent");
-	gtk_menu_item_set_submenu (GTK_MENU_ITEM (open_recent), priv->recent_view);
+	gtk_menu_item_set_submenu (GTK_MENU_ITEM (open_recent), recent_view);
 
 	hbox = gtk_hbox_new (FALSE, 0);
 
