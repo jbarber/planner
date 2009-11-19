@@ -29,9 +29,6 @@
 #include <libgnome/gnome-program.h>
 #include <libgnomeui/gnome-ui-init.h>
 #endif
-#ifdef WIN32
-#include <gtk/gtkicontheme.h>
-#endif
 #include "libplanner/mrp-paths.h"
 #include "planner-application.h"
 #include "planner-window.h"
