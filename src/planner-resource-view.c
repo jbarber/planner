@@ -358,6 +358,11 @@ resource_view_finalize (GObject *object)
 
 	view = PLANNER_RESOURCE_VIEW (object);
 
+	if (view->priv->popup_factory) {
+		g_object_unref (view->priv->popup_factory);
+		view->priv->popup_factory = NULL;
+	}
+
 	if (view->priv->property_to_column) {
 		g_hash_table_unref (view->priv->property_to_column);
 		view->priv->property_to_column = NULL;
