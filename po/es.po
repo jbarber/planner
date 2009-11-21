@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: planner.HEAD\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=planner&component=general\n"
-"POT-Creation-Date: 2009-04-02 02:12+0000\n"
-"PO-Revision-Date: 2009-04-04 13:19+0200\n"
+"POT-Creation-Date: 2009-11-17 20:46+0000\n"
+"PO-Revision-Date: 2009-11-21 10:06+0100\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -606,10 +606,6 @@ msgstr "Proyecto sin nombre"
 msgid "Week"
 msgstr "Semana"
 
-#: ../libegg/recent-files/egg-recent-vfs-utils.c:90
-msgid " (invalid Unicode)"
-msgstr " (Unicode inválido)"
-
 #: ../libplanner/mrp-day.c:54
 msgid "Working"
 msgstr "Jornada laboral"
@@ -803,7 +799,7 @@ msgstr ""
 "Una relación de tipo «final a final» no se puede combinar con otras "
 "relaciones."
 
-#: ../libplanner/mrp-task.c:1099
+#: ../libplanner/mrp-task.c:1100
 msgid ""
 "Start to Finish relation type cannot be combined with Start No Earlier Than "
 "constraint."
@@ -811,7 +807,7 @@ msgstr ""
 "Una relación de tipo «inicio a fin» no se puede combinar con un impedimento "
 "«Iniciar no antes que»."
 
-#: ../libplanner/mrp-task.c:1101
+#: ../libplanner/mrp-task.c:1102
 msgid ""
 "Finish to Finish relation type cannot be combined with Start No Earlier Than "
 "constraint."
@@ -819,7 +815,7 @@ msgstr ""
 "Una relación de tipo «final a final» no se puede combinar con un impedimento "
 "«Empezar no antes que»."
 
-#: ../libplanner/mrp-task.c:1124
+#: ../libplanner/mrp-task.c:1126
 #, c-format
 msgid ""
 "Start to Finish relation cannot be set. Predecessor starts on project start "
@@ -848,39 +844,39 @@ msgstr "%e %B, %Y"
 msgid "Export to HTML failed"
 msgstr "Ha fallado la exportación a HTML"
 
-#: ../src/planner-application.c:55 ../src/planner-application.c:111
+#: ../src/planner-application.c:54 ../src/planner-application.c:110
 msgid "Insert"
 msgstr "Insertar"
 
-#: ../src/planner-application.c:62 ../src/planner-application.c:118
+#: ../src/planner-application.c:61 ../src/planner-application.c:117
 msgid "Remove"
 msgstr "Eliminar"
 
-#: ../src/planner-application.c:69
+#: ../src/planner-application.c:68
 msgid "Unlink"
 msgstr "Desenlazar"
 
-#: ../src/planner-application.c:76
+#: ../src/planner-application.c:75
 msgid "Link"
 msgstr "Enlace"
 
-#: ../src/planner-application.c:83
+#: ../src/planner-application.c:82
 msgid "Indent"
 msgstr "Sangrado"
 
-#: ../src/planner-application.c:90
+#: ../src/planner-application.c:89
 msgid "Unindent"
 msgstr "Decrementar sangría"
 
-#: ../src/planner-application.c:97
+#: ../src/planner-application.c:96
 msgid "Move up"
 msgstr "Subir"
 
-#: ../src/planner-application.c:104
+#: ../src/planner-application.c:103
 msgid "Move down"
 msgstr "Bajar"
 
-#: ../src/planner-application.c:125
+#: ../src/planner-application.c:124
 msgid "Edit"
 msgstr "Editar"
 
@@ -1038,7 +1034,6 @@ msgstr "%dd"
 
 #: ../src/planner-format.c:161
 #, c-format
-#| msgid "%dd %dh"
 msgid "%dh %dmin"
 msgstr "%dh %dmin"
 
@@ -1049,7 +1044,6 @@ msgstr "%dh"
 
 #: ../src/planner-format.c:168
 #, c-format
-#| msgid "min"
 msgid "%dmin"
 msgstr "%dmin"
 
@@ -1158,7 +1152,7 @@ msgstr "Trabajo"
 
 #: ../src/planner-gantt-print.c:546 ../src/planner-gantt-row.c:776
 #: ../src/planner-html-plugin.c:125 ../src/planner-task-tree.c:1601
-#: ../src/planner-window.c:1851
+#: ../src/planner-window.c:1864
 msgid "Unnamed"
 msgstr "Sin nombre"
 
@@ -1420,7 +1414,7 @@ msgstr "Exportar a HTML"
 msgid "Show result in browser"
 msgstr "Mostrar el resultado en un navegador"
 
-#: ../src/planner-html-plugin.c:173 ../src/planner-window.c:1560
+#: ../src/planner-html-plugin.c:173 ../src/planner-window.c:1579
 #: ../src/planner-xml-planner-plugin.c:124
 #, c-format
 msgid "File \"%s\" exists, do you want to overwrite it?"
@@ -1458,7 +1452,7 @@ msgstr "Importar un archivo"
 msgid "XML Files"
 msgstr "Archivos XML"
 
-#: ../src/planner-msp-plugin.c:219 ../src/planner-window.c:852
+#: ../src/planner-msp-plugin.c:219 ../src/planner-window.c:870
 msgid "All Files"
 msgstr "Todos los archivos"
 
@@ -1494,6 +1488,10 @@ msgstr "ET"
 #: ../src/planner-print-dialog.c:247
 msgid "Select the views to print:"
 msgstr "Seleccionar las vistas para imprimir:"
+
+#: ../src/planner-print-job.c:172
+msgid "Select views"
+msgstr "Seleccionar vistas"
 
 #: ../src/planner-project-properties.c:387
 msgid "Select a calendar to use for this project:"
@@ -1532,34 +1530,34 @@ msgstr "Propiedad"
 msgid "Value"
 msgstr "Valor"
 
-#: ../src/planner-project-properties.c:1390
+#: ../src/planner-project-properties.c:1391
 #: ../src/planner-property-dialog.c:333
 msgid "The name of the custom property needs to start with a letter."
 msgstr "El nombre de la propiedad personalizada debe comenzar con una letra."
 
-#: ../src/planner-project-properties.c:1461
+#: ../src/planner-project-properties.c:1462
 #: ../src/planner-property-dialog.c:403
 #, c-format
 msgid "Do you really want to remove the property '%s' from the project?"
 msgstr "¿Está seguro de que desea quitar la propiedad «%s» del proyecto?"
 
-#: ../src/planner-project-properties.c:1556
+#: ../src/planner-project-properties.c:1557
 msgid "Could not create properties dialog."
 msgstr "No se pudo crear el diálogo de propiedades."
 
-#: ../src/planner-project-properties.c:1590
+#: ../src/planner-project-properties.c:1591
 msgid "Date..."
 msgstr "Fecha…"
 
-#: ../src/planner-project-properties.c:1933
+#: ../src/planner-project-properties.c:1935
 msgid "Add project property"
 msgstr "Añadir propiedad al proyecto"
 
-#: ../src/planner-project-properties.c:2043
+#: ../src/planner-project-properties.c:2045
 msgid "Remove project property"
 msgstr "Quitar propiedad al proyecto"
 
-#: ../src/planner-project-properties.c:2136
+#: ../src/planner-project-properties.c:2138
 msgid "Edit project property value"
 msgstr "Editar el valor de la propiedad del proyecto"
 
@@ -1979,11 +1977,11 @@ msgstr "Restablecer impedimento de la tarea"
 msgid "N/A"
 msgstr "N/D"
 
-#: ../src/planner-task-tree.c:2824
+#: ../src/planner-task-tree.c:2825
 msgid "Remove tasks"
 msgstr "Eliminar tareas"
 
-#: ../src/planner-task-tree.c:2886
+#: ../src/planner-task-tree.c:2887
 #, c-format
 msgid ""
 "You are about to open an edit dialog each for %i tasks. Are you sure that "
@@ -1992,52 +1990,52 @@ msgstr ""
 "Va a abrir un diálogo de edición por cada una de las %i tareas. ¿Seguro que "
 "quiere hacer esto?"
 
-#: ../src/planner-task-tree.c:2988
+#: ../src/planner-task-tree.c:2989
 msgid "Unlink tasks"
 msgstr "Desenlazar tareas"
 
-#: ../src/planner-task-tree.c:3040
+#: ../src/planner-task-tree.c:3041
 msgid "Link tasks"
 msgstr "Enlazar tareas"
 
-#: ../src/planner-task-tree.c:3131
+#: ../src/planner-task-tree.c:3132
 msgid "Indent tasks"
 msgstr "Sangrar tareas"
 
-#: ../src/planner-task-tree.c:3142
+#: ../src/planner-task-tree.c:3143
 msgid "Indent task"
 msgstr "Sangrar tarea"
 
-#: ../src/planner-task-tree.c:3236
+#: ../src/planner-task-tree.c:3237
 msgid "Unindent tasks"
 msgstr "Reducir sangría de las tareas"
 
-#: ../src/planner-task-tree.c:3254
+#: ../src/planner-task-tree.c:3255
 msgid "Unindent task"
 msgstr "Reducir sangría de la tarea"
 
-#: ../src/planner-task-tree.c:3332
+#: ../src/planner-task-tree.c:3333
 msgid "Move tasks up"
 msgstr "Subir tareas"
 
-#: ../src/planner-task-tree.c:3370
+#: ../src/planner-task-tree.c:3371
 msgid "Move task up"
 msgstr "Subir tarea"
 
-#: ../src/planner-task-tree.c:3458
+#: ../src/planner-task-tree.c:3459
 msgid "Move tasks down"
 msgstr "Bajar tareas"
 
 #. Moving task from 'position' to 'position + 1'
-#: ../src/planner-task-tree.c:3504
+#: ../src/planner-task-tree.c:3505
 msgid "Move task down"
 msgstr "Bajar tarea"
 
-#: ../src/planner-task-tree.c:3560
+#: ../src/planner-task-tree.c:3561
 msgid "Reset task constraints"
 msgstr "Restablecer impedimentos de la tarea"
 
-#: ../src/planner-task-tree.c:3592
+#: ../src/planner-task-tree.c:3593
 msgid "Reset all task constraints"
 msgstr "Reiniciar todos los impedimentos de la tarea"
 
@@ -2112,198 +2110,203 @@ msgstr "_Uso de recursos"
 msgid "Edit Resource Usage Columns"
 msgstr "Editar las columnas de uso de recursos"
 
-#: ../src/planner-window.c:226
+#: ../src/planner-window.c:222
 msgid "_File"
 msgstr "_Archivo"
 
-#: ../src/planner-window.c:230
+#: ../src/planner-window.c:226
 msgid "_New Project"
 msgstr "Proyecto _nuevo"
 
-#: ../src/planner-window.c:230
+#: ../src/planner-window.c:226
 msgid "Create a new project"
-msgstr "Crea un proyecto nuevo"
+msgstr "Crear un proyecto nuevo"
 
-#: ../src/planner-window.c:234
+#: ../src/planner-window.c:230
 msgid "_Open..."
 msgstr "_Abrir…"
 
-#: ../src/planner-window.c:234
+#: ../src/planner-window.c:230
 msgid "Open a project"
-msgstr "Abre un proyecto"
+msgstr "Abrir un proyecto"
 
-#: ../src/planner-window.c:237
+#: ../src/planner-window.c:233
+#| msgid "Open a project"
+msgid "Open _Recent"
+msgstr "Abrir _reciente"
+
+#: ../src/planner-window.c:236
 msgid "_Import"
 msgstr "_Importar"
 
-#: ../src/planner-window.c:241 ../src/planner-window.c:1430
+#: ../src/planner-window.c:240 ../src/planner-window.c:1448
 msgid "_Save"
 msgstr "_Guardar"
 
-#: ../src/planner-window.c:241
+#: ../src/planner-window.c:240
 msgid "Save the current project"
 msgstr "Guarda el proyecto"
 
-#: ../src/planner-window.c:244
+#: ../src/planner-window.c:243
 msgid "_Export"
 msgstr "_Exportar"
 
-#: ../src/planner-window.c:247
+#: ../src/planner-window.c:246
 msgid "Save _As..."
 msgstr "Guardar _como…"
 
-#: ../src/planner-window.c:247
+#: ../src/planner-window.c:246
 msgid "Save the current project with a different name"
 msgstr "Guarda el proyecto con un nombre diferente"
 
-#: ../src/planner-window.c:250
+#: ../src/planner-window.c:249
 msgid "Page Set_up..."
 msgstr "_Configuración de la página…"
 
-#: ../src/planner-window.c:250
+#: ../src/planner-window.c:249
 msgid "Setup the page settings for your current printer"
 msgstr "Configura las opciones de la página para su impresora actual"
 
-#: ../src/planner-window.c:253
+#: ../src/planner-window.c:252
 msgid "_Print..."
 msgstr "_Imprimir…"
 
-#: ../src/planner-window.c:253
+#: ../src/planner-window.c:252
 msgid "Print the current project"
 msgstr "Imprime el proyecto"
 
-#: ../src/planner-window.c:256
+#: ../src/planner-window.c:255
 msgid "Print Pre_view"
 msgstr "_Vista previa de impresión"
 
-#: ../src/planner-window.c:256
+#: ../src/planner-window.c:255
 msgid "Print preview of the current project"
 msgstr "Previsualización de la impresión del proyecto actual"
 
-#: ../src/planner-window.c:259
+#: ../src/planner-window.c:258
 msgid "_Close"
 msgstr "_Cerrar"
 
-#: ../src/planner-window.c:259
+#: ../src/planner-window.c:258
 msgid "Close the current file"
 msgstr "Cerrar el archivo"
 
-#: ../src/planner-window.c:262
+#: ../src/planner-window.c:261
 msgid "_Quit"
 msgstr "_Salir"
 
-#: ../src/planner-window.c:262
+#: ../src/planner-window.c:261
 msgid "Exit the program"
 msgstr "Salir del programa"
 
-#: ../src/planner-window.c:266
+#: ../src/planner-window.c:265
 msgid "_Edit"
 msgstr "_Editar"
 
-#: ../src/planner-window.c:269
+#: ../src/planner-window.c:268
 msgid "_Undo"
 msgstr "_Deshacer"
 
-#: ../src/planner-window.c:269
+#: ../src/planner-window.c:268
 msgid "Undo the last action"
 msgstr "Deshace la última acción"
 
-#: ../src/planner-window.c:272
+#: ../src/planner-window.c:271
 msgid "_Redo"
 msgstr "_Rehacer"
 
-#: ../src/planner-window.c:272
+#: ../src/planner-window.c:271
 msgid "Redo the undone action"
 msgstr "Rehace la última operación deshecha"
 
-#: ../src/planner-window.c:276
+#: ../src/planner-window.c:275
 msgid "_View"
 msgstr "_Vista"
 
-#: ../src/planner-window.c:280
+#: ../src/planner-window.c:279
 msgid "_Actions"
 msgstr "A_cciones"
 
-#: ../src/planner-window.c:284
+#: ../src/planner-window.c:283
 msgid "_Project"
 msgstr "_Proyecto"
 
-#: ../src/planner-window.c:287
+#: ../src/planner-window.c:286
 msgid "_Manage Calendars"
 msgstr "_Gestión de calendarios"
 
-#: ../src/planner-window.c:290
+#: ../src/planner-window.c:289
 msgid "Edit Day _Types"
 msgstr "Editar _tipos de días"
 
-#: ../src/planner-window.c:293
+#: ../src/planner-window.c:292
 msgid "Edit Project _Phases"
 msgstr "Edita las _fases del proyecto"
 
-#: ../src/planner-window.c:296
+#: ../src/planner-window.c:295
 msgid "_Edit Project Properties"
 msgstr "_Editar propiedades del proyecto"
 
-#: ../src/planner-window.c:296
+#: ../src/planner-window.c:295
 msgid "Edit the project properties"
 msgstr "Edita las propiedades del proyecto"
 
-#: ../src/planner-window.c:304
+#: ../src/planner-window.c:303
 msgid "_Help"
 msgstr "Ay_uda"
 
-#: ../src/planner-window.c:307
+#: ../src/planner-window.c:306
 msgid "_User Guide"
 msgstr "_Guía del usuario"
 
-#: ../src/planner-window.c:307
+#: ../src/planner-window.c:306
 msgid "Show the Planner User Guide"
 msgstr "Mostrar la guía del usuario de Planner"
 
-#: ../src/planner-window.c:310
+#: ../src/planner-window.c:309
 msgid "_About"
 msgstr "Acerca _de"
 
-#: ../src/planner-window.c:310
+#: ../src/planner-window.c:309
 msgid "About this application"
 msgstr "Acerca de esta aplicación"
 
 #. Note: these strings are leaked.
-#: ../src/planner-window.c:669
+#: ../src/planner-window.c:687
 #, c-format
 msgid "Switch to the view \"%s\""
 msgstr "Cambiar a la vista «%s»"
 
-#: ../src/planner-window.c:836
+#: ../src/planner-window.c:854
 msgid "Open a File"
 msgstr "Abre un archivo"
 
-#: ../src/planner-window.c:846
+#: ../src/planner-window.c:864
 msgid "Planner Files"
 msgstr "Archivos de Planner"
 
 #. I18n: Translators, list your names here, newline separated if there
 #. * are more than one, to appear in the about box.
 #.
-#: ../src/planner-window.c:1187 ../src/planner-window.c:1209
+#: ../src/planner-window.c:1205 ../src/planner-window.c:1227
 msgid "translator-credits"
 msgstr ""
 "Jorge González <jorgegonz@svn.gnome.org>, 2007-2008\n"
 "Francisco Javier F. Serrador <serrador@cvs.gnome.org>, 2003-2006"
 
-#: ../src/planner-window.c:1204
+#: ../src/planner-window.c:1222
 msgid "A Project Management application for the GNOME desktop"
 msgstr "Una aplicación de gestión de proyectos para el escritorio GNOME"
 
-#: ../src/planner-window.c:1211
+#: ../src/planner-window.c:1229
 msgid "The Planner Homepage"
 msgstr "La página web de Planner"
 
-#: ../src/planner-window.c:1363
+#: ../src/planner-window.c:1381
 msgid "If you don't save, changes made the last minute will be discarded."
 msgstr "Si no guarda, los cambios hechos en el último minuto se descartarán."
 
-#: ../src/planner-window.c:1369
+#: ../src/planner-window.c:1387
 #, c-format
 msgid "If you don't save, changes made the last %d minute will be discarded."
 msgid_plural ""
@@ -2313,11 +2316,11 @@ msgstr[0] ""
 msgstr[1] ""
 "Si no guarda, los cambios hechos en los últimos %d minutos se descartarán."
 
-#: ../src/planner-window.c:1377
+#: ../src/planner-window.c:1395
 msgid "If you don't save, changes made the last hour will be discarded."
 msgstr "Si no guarda, los cambios hechos en la última hora se descartarán."
 
-#: ../src/planner-window.c:1382
+#: ../src/planner-window.c:1400
 #, c-format
 msgid "If you don't save, changes made the last %d hour will be discarded."
 msgid_plural ""
@@ -2327,24 +2330,24 @@ msgstr[0] ""
 msgstr[1] ""
 "Si no guarda, los cambios hechos en las últimas %d horas se descartarán."
 
-#: ../src/planner-window.c:1392
+#: ../src/planner-window.c:1410
 #, c-format
 msgid "Save changes to document '%s' before closing?"
 msgstr "¿Desea guardar los cambios del documento «%s» antes de cerrar?"
 
-#: ../src/planner-window.c:1417
+#: ../src/planner-window.c:1435
 msgid "C_lose without saving"
 msgstr "C_errar sin guardar"
 
-#: ../src/planner-window.c:1423
+#: ../src/planner-window.c:1441
 msgid "_Cancel"
 msgstr "_Cancelar"
 
-#: ../src/planner-window.c:1522
+#: ../src/planner-window.c:1541
 msgid "Save a File"
 msgstr "Guardar un archivo"
 
-#: ../src/planner-window.c:1808
+#: ../src/planner-window.c:1821
 msgid ""
 "You have opened a file that was saved with an old version of Planner.\n"
 "\n"
@@ -2374,14 +2377,9 @@ msgstr ""
 "el elemento del menú «Eliminar todos los impedimentos» en el menú «Editar»."
 
 #. Hack.
-#: ../src/planner-window.c:1843
+#: ../src/planner-window.c:1856
 msgid "Unnamed database project"
 msgstr "Base de datos del proyecto sin nombre"
-
-#: ../src/planner-window.c:1957
-#, c-format
-msgid "Open '%s'"
-msgstr "Abrir «%s»"
 
 #: ../src/planner-working-time-dialog.c:145
 msgid "Edit working time"
@@ -2451,8 +2449,11 @@ msgstr ""
 "La extensión del nombre de archivo no es la extensión usual de Planner (%s). "
 "¿Quiere continuar?"
 
+#~ msgid " (invalid Unicode)"
+#~ msgstr " (Unicode inválido)"
+
+#~ msgid "Open '%s'"
+#~ msgstr "Abrir «%s»"
+
 #~ msgid "Print Project"
 #~ msgstr "Imprimir proyecto"
-
-#~ msgid "Select views"
-#~ msgstr "Seleccionar vistas"
