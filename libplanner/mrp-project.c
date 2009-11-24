@@ -682,7 +682,8 @@ mrp_project_load (MrpProject *project, const gchar *uri, GError **error)
 	GList          *l;
 	MrpCalendar    *old_default_calendar;
 	gchar          *file_str;
-	size_t          len;
+	gchar          *scheme;
+	gboolean	is_file_scheme;
 
 	g_return_val_if_fail (MRP_IS_PROJECT (project), FALSE);
 	g_return_val_if_fail (uri != NULL, FALSE);
@@ -699,14 +700,12 @@ mrp_project_load (MrpProject *project, const gchar *uri, GError **error)
 	 */
 	old_default_calendar = priv->calendar;
 
+	scheme = g_uri_parse_scheme(uri);
+	if (scheme != NULL) {
+		is_file_scheme = !strcmp (scheme, "file");
+		g_free (scheme);
 
-	len = strlen (uri);
-
-	/* Get a local file from the uri. */
-	if (len > 3 && !strstr (uri, ":/")) {
-		/* No protocol. */
-	} else {
-		if (len > 7 && !strncmp (uri, "file:/", 6)) {
+		if (is_file_scheme) {
 			/* Naively strip method. */
 			uri = uri + 7;
 		} else {
