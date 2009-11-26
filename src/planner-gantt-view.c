@@ -347,6 +347,7 @@ gantt_view_deactivate (PlannerView *view)
 	priv = PLANNER_GANTT_VIEW (view)->priv;
 
 	gtk_ui_manager_remove_ui (priv->ui_manager, priv->merged_id);
+	gtk_ui_manager_remove_action_group (priv->ui_manager, priv->actions);
 }
 
 static void
