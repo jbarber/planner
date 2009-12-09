@@ -32,17 +32,19 @@ static PlannerPlugin *
 mpl_load (const gchar *file)
 {
 	PlannerPlugin *plugin;
+	GModule       *handle;
 
-	plugin = g_object_new (PLANNER_TYPE_PLUGIN, NULL);
+	handle = g_module_open (file, 0);
 
-	plugin->handle = g_module_open (file, 0);
-
-	if (plugin->handle == NULL) {
+	if (handle == NULL) {
 		g_warning (_("Could not open plugin file '%s'\n"),
 			   g_module_error ());
 
 		return NULL;
 	}
+
+	plugin = g_object_new (PLANNER_TYPE_PLUGIN, NULL);
+	plugin->handle = handle;
 
 	g_module_symbol (plugin->handle, "plugin_init", (gpointer)&plugin->init);
 	g_module_symbol (plugin->handle, "plugin_exit", (gpointer)&plugin->exit);
@@ -74,7 +76,7 @@ mpl_load_dir (const gchar *path, PlannerWindow *window)
 			if (plugin) {
 				list = g_list_append (list, plugin);
 
-				planner_plugin_init (plugin, window);
+				planner_plugin_setup (plugin, window);
 			}
 
 			g_free (plugin_name);
@@ -97,4 +99,10 @@ planner_plugin_loader_load (PlannerWindow *window)
 	g_free (path);
 
 	return list;
+}
+
+void
+planner_plugin_loader_unload (GList *plugins)
+{
+	g_list_foreach (plugins, (GFunc) g_object_unref, NULL);
 }

@@ -358,6 +358,10 @@ resource_view_finalize (GObject *object)
 
 	view = PLANNER_RESOURCE_VIEW (object);
 
+	if (PLANNER_VIEW (view)->activated) {
+		resource_view_deactivate (PLANNER_VIEW (view));
+	}
+
 	if (view->priv->popup_factory) {
 		g_object_unref (view->priv->popup_factory);
 		view->priv->popup_factory = NULL;
@@ -417,6 +421,8 @@ resource_view_deactivate (PlannerView *view)
 
 	gtk_ui_manager_remove_ui (priv->ui_manager, priv->merged_id);
 	gtk_ui_manager_remove_action_group (priv->ui_manager, priv->actions);
+	g_object_unref (priv->actions);
+	priv->actions = NULL;
 }
 
 static void

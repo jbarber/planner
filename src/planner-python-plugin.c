@@ -28,7 +28,6 @@
 #include "planner-plugin.h"
 
 struct _PlannerPluginPriv {
-	PlannerWindow *main_window;
 	GHashTable    *scripts;
 };
 
@@ -42,8 +41,7 @@ static void              planner_python_env_free (PlannerPythonEnv *env);
 static void              python_plugin_execute   (const gchar      *filename,
 						  PlannerWindow    *window,
 						  GHashTable       *scripts);
-void                     plugin_init             (PlannerPlugin    *plugin,
-						  PlannerWindow    *main_window);
+void                     plugin_init             (PlannerPlugin    *plugin);
 void                     plugin_exit             (PlannerPlugin    *plugin);
 
 
@@ -128,7 +126,7 @@ python_plugin_execute (const gchar   *filename,
 }
 
 G_MODULE_EXPORT void
-plugin_init (PlannerPlugin *plugin, PlannerWindow *main_window)
+plugin_init (PlannerPlugin *plugin)
 {
 	PlannerPluginPriv *priv;
 	GDir              *dir;
@@ -138,7 +136,6 @@ plugin_init (PlannerPlugin *plugin, PlannerWindow *main_window)
 	priv = g_new0 (PlannerPluginPriv, 1);
 	plugin->priv = priv;
 
-	priv->main_window = main_window;
 	priv->scripts = g_hash_table_new (g_str_hash, g_str_equal);
 
 	Py_Initialize ();
@@ -155,7 +152,7 @@ plugin_init (PlannerPlugin *plugin, PlannerWindow *main_window)
 	while (filename != NULL) {
 		if (g_str_has_suffix (filename, ".py")) {
 			full_filename = g_build_filename (dirname, filename, NULL);
-			python_plugin_execute (full_filename, main_window, priv->scripts);
+			python_plugin_execute (full_filename, plugin->main_window, priv->scripts);
 			g_free (full_filename);
 		}
 
@@ -169,5 +166,13 @@ plugin_init (PlannerPlugin *plugin, PlannerWindow *main_window)
 G_MODULE_EXPORT void
 plugin_exit (PlannerPlugin *plugin)
 {
+	PlannerPluginPriv *priv;
+
+	priv = plugin->priv;
+
+	/* FIXME: free everything in the hash table */
+
 	Py_Finalize ();
+
+	g_free (priv);
 }

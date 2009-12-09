@@ -25,7 +25,8 @@
 
 #include "planner-window.h"
 
-GList *planner_plugin_loader_load (PlannerWindow *window);
+GList *planner_plugin_loader_load   (PlannerWindow *window);
+void   planner_plugin_loader_unload (GList *plugins);
 
 #endif /* __PLANNER_PLUGINLOADER_H__ */
 

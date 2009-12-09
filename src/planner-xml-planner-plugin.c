@@ -34,18 +34,18 @@
 
 
 struct _PlannerPluginPriv {
-	PlannerWindow *main_window;
-	GtkWidget     *dialog;
-	GtkWidget     *local_rbutton;
-	GtkWidget     *local_fileentry;
-	GtkWidget     *server_rbutton;
-	GtkWidget     *server_entry;
+	GtkWidget      *dialog;
+	GtkWidget      *local_rbutton;
+	GtkWidget      *local_fileentry;
+	GtkWidget      *server_rbutton;
+	GtkWidget      *server_entry;
+
+	GtkActionGroup *actions;
 };
 
 static void xml_planner_plugin_export (GtkAction         *action,
 				       gpointer           user_data);
-void        plugin_init               (PlannerPlugin     *plugin,
-				       PlannerWindow     *main_window);
+void        plugin_init               (PlannerPlugin     *plugin);
 void        plugin_exit               (PlannerPlugin     *plugin);
 
 
@@ -73,7 +73,7 @@ static void
 xml_planner_plugin_export (GtkAction *action,
 			   gpointer   user_data)
 {
-	PlannerPluginPriv *priv;
+	PlannerPlugin     *plugin;
 	MrpProject        *project;
 	GError            *error = NULL;
 	GtkWidget         *file_chooser;
@@ -83,12 +83,12 @@ xml_planner_plugin_export (GtkAction *action,
 	gchar             *real_filename;
 	gchar             *last_dir;
 
-	priv = PLANNER_PLUGIN (user_data)->priv;
+	plugin = PLANNER_PLUGIN (user_data);
 
  try_again:
 
 	file_chooser = gtk_file_chooser_dialog_new (_("Export"),
-						    GTK_WINDOW (priv->main_window),
+						    GTK_WINDOW (plugin->main_window),
 						    GTK_FILE_CHOOSER_ACTION_SAVE,
 						    GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
 						    GTK_STOCK_SAVE, GTK_RESPONSE_OK,
@@ -116,7 +116,7 @@ xml_planner_plugin_export (GtkAction *action,
 		}
 
 		if (g_file_test (real_filename, G_FILE_TEST_EXISTS)) {
-			dialog = gtk_message_dialog_new (GTK_WINDOW (priv->main_window),
+			dialog = gtk_message_dialog_new (GTK_WINDOW (plugin->main_window),
 							 GTK_DIALOG_MODAL |
 							 GTK_DIALOG_DESTROY_WITH_PARENT,
 							 GTK_MESSAGE_WARNING,
@@ -142,7 +142,7 @@ xml_planner_plugin_export (GtkAction *action,
 		return;
 	}
 
-	project = planner_window_get_project (priv->main_window);
+	project = planner_window_get_project (plugin->main_window);
 
 	if (!mrp_project_export (project, real_filename,
 				 "Planner XML pre-0.12",
@@ -160,28 +160,26 @@ xml_planner_plugin_export (GtkAction *action,
 }
 
 G_MODULE_EXPORT void
-plugin_init (PlannerPlugin *plugin, PlannerWindow *main_window)
+plugin_init (PlannerPlugin *plugin)
 {
 	PlannerPluginPriv *priv;
 	GtkUIManager      *ui;
-	GtkActionGroup    *actions;
 	gchar		  *filename;
 
 	priv = g_new0 (PlannerPluginPriv, 1);
 	plugin->priv = priv;
-	priv->main_window = main_window;
 
 	/* Create the actions, get the ui manager and merge the whole */
-	actions = gtk_action_group_new ("XML plugin actions");
-	gtk_action_group_set_translation_domain (actions, GETTEXT_PACKAGE);
+	priv->actions = gtk_action_group_new ("XML plugin actions");
+	gtk_action_group_set_translation_domain (priv->actions, GETTEXT_PACKAGE);
 
-	gtk_action_group_add_actions (actions,
+	gtk_action_group_add_actions (priv->actions,
 				      entries,
 				      G_N_ELEMENTS (entries),
 				      plugin);
 
-	ui = planner_window_get_ui_manager (main_window);
-	gtk_ui_manager_insert_action_group (ui, actions, 0);
+	ui = planner_window_get_ui_manager (plugin->main_window);
+	gtk_ui_manager_insert_action_group (ui, priv->actions, 0);
 
 	filename = mrp_paths_get_ui_dir ("xml-planner-plugin.ui");
 	gtk_ui_manager_add_ui_from_file (ui, filename, NULL);
@@ -193,4 +191,14 @@ plugin_init (PlannerPlugin *plugin, PlannerWindow *main_window)
 G_MODULE_EXPORT void
 plugin_exit (PlannerPlugin *plugin)
 {
+	PlannerPluginPriv *priv;
+	GtkUIManager      *ui;
+
+	priv = plugin->priv;
+
+	ui = planner_window_get_ui_manager (plugin->main_window);
+	gtk_ui_manager_remove_action_group (ui, priv->actions);
+	g_object_unref (priv->actions);
+
+	g_free (priv);
 }

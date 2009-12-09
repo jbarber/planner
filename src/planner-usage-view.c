@@ -190,6 +190,10 @@ usage_view_finalize (GObject *object)
 
 	view = PLANNER_USAGE_VIEW (object);
 
+	if (PLANNER_VIEW (view)->activated) {
+		usage_view_deactivate (PLANNER_VIEW (view));
+	}
+
 	g_free (view->priv);
 
 	if (G_OBJECT_CLASS (parent_class)->finalize) {
@@ -231,6 +235,8 @@ usage_view_deactivate (PlannerView *view)
 	priv = PLANNER_USAGE_VIEW (view)->priv;
 	gtk_ui_manager_remove_ui (priv->ui_manager, priv->merged_id);
 	gtk_ui_manager_remove_action_group (priv->ui_manager, priv->actions);
+	g_object_unref (priv->actions);
+	priv->actions = NULL;
 }
 
 static void

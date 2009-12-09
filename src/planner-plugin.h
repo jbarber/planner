@@ -39,16 +39,15 @@ typedef struct _PlannerPluginClass  PlannerPluginClass;
 typedef struct _PlannerPluginPriv   PlannerPluginPriv;
 
 struct _PlannerPlugin {
-	GObject            parent;
+	GObject             parent;
 
-	GModule           *handle;
+	GModule            *handle;
 	PlannerWindow      *main_window;
 
-	PlannerPluginPriv      *priv;
+	PlannerPluginPriv  *priv;
 
 	/* Methods. */
-	void         (*init)       (PlannerPlugin       *plugin,
-				    PlannerWindow *main_window);
+	void         (*init)       (PlannerPlugin       *plugin);
 	void         (*exit)       (PlannerPlugin       *plugin);
 };
 
@@ -57,9 +56,8 @@ struct _PlannerPluginClass {
 };
 
 GType        planner_plugin_get_type          (void) G_GNUC_CONST;
-void         planner_plugin_init              (PlannerPlugin     *plugin,
-					  PlannerWindow *main_window);
-void         planner_plugin_exit              (PlannerPlugin     *plugin);
+void         planner_plugin_setup             (PlannerPlugin     *plugin,
+					       PlannerWindow     *main_window);
 
 #endif /* __PLANNER_PLUGIN_H__ */
 

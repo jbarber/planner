@@ -30,14 +30,13 @@
 #include "planner-util.h"
 
 struct _PlannerPluginPriv {
-	PlannerWindow *main_window;
+	GtkActionGroup    *actions;
 };
 
 
 static void html_plugin_export (GtkAction     *action,
 				gpointer       user_data);
-void        plugin_init        (PlannerPlugin *plugin,
-				PlannerWindow *main_window);
+void        plugin_init        (PlannerPlugin *plugin);
 void        plugin_exit        (PlannerPlugin *plugin);
 
 
@@ -71,10 +70,10 @@ html_plugin_export_do (PlannerPlugin *plugin,
 	GtkWidget         *dialog;
 
 	priv = plugin->priv;
-	project = planner_window_get_project (priv->main_window);
+	project = planner_window_get_project (plugin->main_window);
 
 	if (!mrp_project_export (project, path, "Planner HTML", TRUE, NULL)) {
-		dialog = gtk_message_dialog_new (GTK_WINDOW (priv->main_window),
+		dialog = gtk_message_dialog_new (GTK_WINDOW (plugin->main_window),
 						 GTK_DIALOG_MODAL |
 						 GTK_DIALOG_DESTROY_WITH_PARENT,
 						 GTK_MESSAGE_ERROR,
@@ -108,7 +107,7 @@ html_plugin_export (GtkAction *action,
 	priv = plugin->priv;
 
 	filechooser = gtk_file_chooser_dialog_new (_("Export to HTML"),
-						   GTK_WINDOW (priv->main_window),
+						   GTK_WINDOW (plugin->main_window),
 						   GTK_FILE_CHOOSER_ACTION_SAVE,
 						   GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
 						   GTK_STOCK_SAVE, GTK_RESPONSE_OK,
@@ -116,7 +115,7 @@ html_plugin_export (GtkAction *action,
 
 	gtk_dialog_set_default_response (GTK_DIALOG (filechooser), GTK_RESPONSE_OK);
 
-	project = planner_window_get_project (priv->main_window);
+	project = planner_window_get_project (plugin->main_window);
 	uri = mrp_project_get_uri (project);
 	if (!uri) {
 		gchar *cwd, *tmp;
@@ -204,29 +203,25 @@ html_plugin_export (GtkAction *action,
 }
 
 G_MODULE_EXPORT void
-plugin_init (PlannerPlugin *plugin,
-	     PlannerWindow *main_window)
+plugin_init (PlannerPlugin *plugin)
 {
 	PlannerPluginPriv *priv;
 	GtkUIManager      *ui;
-	GtkActionGroup    *actions;
 	gchar             *filename;
 
 	priv = g_new0 (PlannerPluginPriv, 1);
-
 	plugin->priv = priv;
-	priv->main_window = main_window;
 
-	actions = gtk_action_group_new ("HTML plugin actions");
-	gtk_action_group_set_translation_domain (actions, GETTEXT_PACKAGE);
+	priv->actions = gtk_action_group_new ("HTML plugin actions");
+	gtk_action_group_set_translation_domain (priv->actions, GETTEXT_PACKAGE);
 
-	gtk_action_group_add_actions (actions,
+	gtk_action_group_add_actions (priv->actions,
 				      action_entries,
 				      G_N_ELEMENTS (action_entries),
 				      plugin);
 
-	ui = planner_window_get_ui_manager (main_window);
-	gtk_ui_manager_insert_action_group (ui, actions, 0);
+	ui = planner_window_get_ui_manager (plugin->main_window);
+	gtk_ui_manager_insert_action_group (ui, priv->actions, 0);
 
 	filename = mrp_paths_get_ui_dir ("html-plugin.ui");
 	gtk_ui_manager_add_ui_from_file (ui, filename, NULL);
@@ -238,4 +233,14 @@ plugin_init (PlannerPlugin *plugin,
 G_MODULE_EXPORT void
 plugin_exit (PlannerPlugin *plugin)
 {
+	PlannerPluginPriv *priv;
+	GtkUIManager      *ui;
+
+	priv = plugin->priv;
+
+	ui = planner_window_get_ui_manager (plugin->main_window);
+	gtk_ui_manager_remove_action_group (ui, priv->actions);
+	g_object_unref (priv->actions);
+
+	g_free (priv);
 }

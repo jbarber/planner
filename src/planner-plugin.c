@@ -24,10 +24,11 @@
 #include <glib.h>
 #include "planner-window.h"
 #include "planner-plugin.h"
+#include "valgrind.h"
 
 static void mv_init       (PlannerPlugin      *plugin);
 static void mv_class_init (PlannerPluginClass *class);
-
+static void mv_finalize   (GObject            *object);
 
 static GObjectClass *parent_class;
 
@@ -59,43 +60,50 @@ planner_plugin_get_type (void)
 static void
 mv_class_init (PlannerPluginClass *klass)
 {
-	/*GObjectClass *object_class;
-
-	object_class = (GObjectClass *) klass;*/
+	GObjectClass *o_class;
 
 	parent_class = g_type_class_peek_parent (klass);
+
+	o_class = (GObjectClass *) klass;
+
+	o_class->finalize = mv_finalize;
+
 }
 
 static void
 mv_init (PlannerPlugin *plugin)
 {
+	plugin->init = NULL;
+	plugin->exit = NULL;
+}
 
+static void
+mv_finalize (GObject *object)
+{
+	PlannerPlugin *plugin = PLANNER_PLUGIN (object);
+
+	if (plugin->exit) {
+		plugin->exit (plugin);
+	}
+
+	/* Don't unload modules when running in valgrind to make sure
+	 * stack traces won't have missing symbols.
+	 */
+	if (!RUNNING_ON_VALGRIND) {
+		g_module_close (plugin->handle);
+	}
 }
 
 void
-planner_plugin_init (PlannerPlugin     *plugin,
-		PlannerWindow *main_window)
+planner_plugin_setup (PlannerPlugin *plugin,
+		      PlannerWindow *main_window)
 {
 	g_return_if_fail (PLANNER_IS_PLUGIN (plugin));
 
 	plugin->main_window = main_window;
 
 	if (plugin->init) {
-		plugin->init (plugin, main_window);
+		plugin->init (plugin);
 	}
-}
-
-void
-planner_plugin_exit (PlannerPlugin *plugin)
-{
-	g_return_if_fail (PLANNER_IS_PLUGIN (plugin));
-
-	if (plugin->exit) {
-		plugin->exit (plugin);
-	}
-
-	g_module_close (plugin->handle);
-	plugin->handle = NULL;
-	plugin->main_window = NULL;
 }
 

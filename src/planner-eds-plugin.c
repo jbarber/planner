@@ -60,7 +60,6 @@
 #include <libebook/e-book.h>
 
 struct _PlannerPluginPriv {
-	PlannerWindow *main_window;
 	MrpProject    *project;
 	/* Manage groups of source from e-d-s */
 	GtkComboBox   *select_group;
@@ -80,6 +79,8 @@ struct _PlannerPluginPriv {
 	GList         *queries_cancelled;
 	/* Books open */
 	GList         *books;
+
+	GtkActionGroup *actions;
 };
 
 typedef struct {
@@ -157,8 +158,7 @@ static gboolean eds_query_cancelled     (PlannerPlugin         *plugin,
 					 const gchar           *uid);
 static void eds_dialog_close            (PlannerPlugin         *plugin);
 
-void        plugin_init                 (PlannerPlugin         *plugin,
-					 PlannerWindow         *main_window);
+void        plugin_init                 (PlannerPlugin         *plugin);
 void        plugin_exit                 (PlannerPlugin         *plugin);
 
 
@@ -263,7 +263,7 @@ eds_plugin_import (GtkAction   *action,
 	priv->dialog_get_resources = glade_xml_get_widget (priv->glade, "resources_get");
 
 	gtk_window_set_transient_for (GTK_WINDOW (priv->dialog_get_resources),
-				      GTK_WINDOW (priv->main_window));
+				      GTK_WINDOW (plugin->main_window));
 	priv->select_group = GTK_COMBO_BOX (glade_xml_get_widget (priv->glade,
 								  "select_group"));
 	g_signal_connect (priv->select_group, "changed",
@@ -937,26 +937,23 @@ eds_create_uid_property (PlannerPlugin *plugin)
 
 /* FIXME: Undo support */
 G_MODULE_EXPORT void
-plugin_init (PlannerPlugin *plugin,
-	     PlannerWindow *main_window)
+plugin_init (PlannerPlugin *plugin)
 {
 	PlannerPluginPriv *priv;
 	GtkUIManager      *ui;
-	GtkActionGroup    *actions;
 	gchar		  *filename;
 
 	priv = g_new0 (PlannerPluginPriv, 1);
 	plugin->priv = priv;
-	priv->main_window = main_window;
 	priv->project = planner_window_get_project (plugin->main_window);
 
-	actions = gtk_action_group_new ("EDS plugin actions");
-	gtk_action_group_set_translation_domain (actions, GETTEXT_PACKAGE);
+	priv->actions = gtk_action_group_new ("EDS plugin actions");
+	gtk_action_group_set_translation_domain (priv->actions, GETTEXT_PACKAGE);
 
-	gtk_action_group_add_actions (actions, action_entries, n_action_entries, plugin);
+	gtk_action_group_add_actions (priv->actions, action_entries, n_action_entries, plugin);
 
-	ui = planner_window_get_ui_manager (main_window);
-	gtk_ui_manager_insert_action_group (ui, actions, 0);
+	ui = planner_window_get_ui_manager (plugin->main_window);
+	gtk_ui_manager_insert_action_group (ui, priv->actions, 0);
 
 	filename = mrp_paths_get_ui_dir ("eds-plugin.ui");
 	gtk_ui_manager_add_ui_from_file (ui, filename, NULL);
@@ -967,11 +964,21 @@ plugin_init (PlannerPlugin *plugin,
 G_MODULE_EXPORT void
 plugin_exit (PlannerPlugin *plugin)
 {
-	GList *l;
+	PlannerPluginPriv *priv;
+	GtkUIManager      *ui;
+	GList             *l;
 
-	for (l = plugin->priv->queries_cancelled; l; l = l->next) {
+	priv = plugin->priv;
+
+	for (l = priv->queries_cancelled; l; l = l->next) {
 		g_free (l->data);
 	}
-	g_list_free (plugin->priv->queries_cancelled);
+	g_list_free (priv->queries_cancelled);
+
+	ui = planner_window_get_ui_manager (plugin->main_window);
+	gtk_ui_manager_remove_action_group (ui, priv->actions);
+	g_object_unref (priv->actions);
+
+	g_free (priv);
 	/*g_message ("Test exit");*/
 }

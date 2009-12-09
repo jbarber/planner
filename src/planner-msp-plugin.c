@@ -35,11 +35,14 @@
 
 #define CONF_MSP_PLUGIN_LAST_DIR "/plugins/msp_plugin/last_dir"
 
+struct _PlannerPluginPriv {
+	GtkActionGroup    *actions;
+};
+
 static void msp_plugin_open (GtkAction     *action,
 			     gpointer       user_data);
-void        plugin_init     (PlannerPlugin *plugin,
-			     PlannerWindow *main_window);
-void        plugin_exit     (void);
+void        plugin_init     (PlannerPlugin *plugin);
+void        plugin_exit     (PlannerPlugin *plugin);
 
 
 static const GtkActionEntry entries[] = {
@@ -257,28 +260,40 @@ msp_plugin_open (GtkAction *action,
 }
 
 G_MODULE_EXPORT void
-plugin_exit (void)
+plugin_exit (PlannerPlugin *plugin)
 {
+	PlannerPluginPriv *priv;
+	GtkUIManager   *ui;
+
+	priv = plugin->priv;
+
+	ui = planner_window_get_ui_manager (plugin->main_window);
+	gtk_ui_manager_remove_action_group (ui, priv->actions);
+	g_object_unref (priv->actions);
+
+	g_free (priv);
 }
 
 G_MODULE_EXPORT void
-plugin_init (PlannerPlugin *plugin,
-	     PlannerWindow *main_window)
+plugin_init (PlannerPlugin *plugin)
 {
-	GtkActionGroup *actions;
-	GtkUIManager   *ui;
-	gchar          *filename;
+	PlannerPluginPriv *priv;
+	GtkUIManager      *ui;
+	gchar             *filename;
 
-	actions = gtk_action_group_new ("MSP plugin actions");
-	gtk_action_group_set_translation_domain (actions, GETTEXT_PACKAGE);
+	priv = g_new0 (PlannerPluginPriv, 1);
+	plugin->priv = priv;
 
-	gtk_action_group_add_actions (actions,
+	priv->actions = gtk_action_group_new ("MSP plugin actions");
+	gtk_action_group_set_translation_domain (priv->actions, GETTEXT_PACKAGE);
+
+	gtk_action_group_add_actions (priv->actions,
 				      entries,
 				      G_N_ELEMENTS (entries),
 				      plugin);
 
-	ui = planner_window_get_ui_manager (main_window);
-	gtk_ui_manager_insert_action_group (ui, actions, 0);
+	ui = planner_window_get_ui_manager (plugin->main_window);
+	gtk_ui_manager_insert_action_group (ui, priv->actions, 0);
 
 	filename = mrp_paths_get_ui_dir ("msp-plugin.ui");
 	gtk_ui_manager_add_ui_from_file (ui, filename, NULL);

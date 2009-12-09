@@ -399,26 +399,34 @@ window_finalize (GObject *object)
 	PlannerWindow     *window = PLANNER_WINDOW (object);
 	PlannerWindowPriv *priv = window->priv;
 
+	if (priv->last_saved) {
+		g_timer_destroy (priv->last_saved);
+	}
 	if (priv->plugins) {
+		planner_plugin_loader_unload (priv->plugins);
 		g_list_free (priv->plugins);
 	}
-
 	if (priv->views) {
 		g_list_foreach (priv->views, (GFunc) g_object_unref, NULL);
 		g_list_free (priv->views);
 	}
-	if (priv->application) {
-		g_object_unref (priv->application);
-	}
-	if (priv->last_saved) {
-		g_timer_destroy (priv->last_saved);
-	}
+	/* FIXME: check if project should be unreffed */
 	if (priv->cmd_manager) {
 		g_object_unref (priv->cmd_manager);
 	}
 
+	if (priv->view_actions) {
+		g_object_unref (priv->view_actions);
+	}
+	if (priv->actions) {
+		g_object_unref (priv->actions);
+	}
 	if (priv->ui_manager) {
 		g_object_unref (priv->ui_manager);
+	}
+
+	if (priv->application) {
+		g_object_unref (priv->application);
 	}
 
 	g_free (window->priv);
@@ -574,6 +582,7 @@ window_populate (PlannerWindow *window)
 	gtk_container_add (GTK_CONTAINER (window), priv->ui_box);
 
 	priv->actions = gtk_action_group_new ("Planner");
+
 	gtk_action_group_set_translation_domain (priv->actions, GETTEXT_PACKAGE);
 	gtk_action_group_add_actions (priv->actions, entries, n_entries, window);
 

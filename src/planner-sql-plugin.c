@@ -53,6 +53,10 @@
 
 #define CONNECTION_FORMAT_STRING "HOST=%s;DB_NAME=%s"
 
+struct _PlannerPluginPriv {
+	GtkActionGroup *actions;
+};
+
 static gint          sql_plugin_retrieve_project_id (PlannerPlugin  *plugin,
 						     gchar          *server,
 						     gchar          *port,
@@ -75,9 +79,8 @@ static GdaDataModel *sql_execute_query              (GdaConnection  *con,
 static gboolean      sql_execute_command            (GdaConnection  *con,
 						     gchar          *command);
 static const gchar * sql_get_last_error             (GdaConnection  *connection);
-void                 plugin_init                    (PlannerPlugin  *plugin,
-						     PlannerWindow  *main_window);
-void                 plugin_exit                    (void);
+void                 plugin_init                    (PlannerPlugin  *plugin);
+void                 plugin_exit                    (PlannerPlugin  *plugin);
 
 
 enum {
@@ -1218,43 +1221,55 @@ fail:
 }
 
 G_MODULE_EXPORT void
-plugin_exit (void)
+plugin_exit (PlannerPlugin *plugin)
 {
+	PlannerPluginPriv *priv;
+	GtkUIManager      *ui;
+
+	priv = plugin->priv;
+
+	ui = planner_window_get_ui_manager (plugin->main_window);
+	gtk_ui_manager_remove_action_group (ui, priv->actions);
+	g_object_unref (priv->actions);
+
+	g_free (priv);
 }
 
 G_MODULE_EXPORT void
-plugin_init (PlannerPlugin *plugin,
-	     PlannerWindow *main_window)
+plugin_init (PlannerPlugin *plugin)
 {
-	GtkActionGroup *actions;
-	GtkUIManager   *ui;
-	gint            i = -1;
-	gchar          *filename;
+	PlannerPluginPriv *priv;
+	GtkUIManager      *ui;
+	gint               i = -1;
+	gchar             *filename;
+
+	priv = g_new0 (PlannerPluginPriv, 1);
+	plugin->priv = priv;
 
 	gda_init (PACKAGE, VERSION, 0, NULL);
 
-	g_object_set_data (G_OBJECT (main_window),
+	g_object_set_data (G_OBJECT (plugin->main_window),
 			   PROJECT_ID,
 			   GINT_TO_POINTER (i));
-	g_object_set_data (G_OBJECT (main_window),
+	g_object_set_data (G_OBJECT (plugin->main_window),
 			   "sql-plugin-revision",
 			   GINT_TO_POINTER (i));
 
-	g_object_set_data (G_OBJECT (main_window),
+	g_object_set_data (G_OBJECT (plugin->main_window),
 			   "sql-plugin",
 			   plugin);
 
 	/* Create the actions, get the ui manager and merge the whole */
-	actions = gtk_action_group_new ("SQL plugin actions");
-	gtk_action_group_set_translation_domain (actions, GETTEXT_PACKAGE);
+	priv->actions = gtk_action_group_new ("SQL plugin actions");
+	gtk_action_group_set_translation_domain (priv->actions, GETTEXT_PACKAGE);
 
-	gtk_action_group_add_actions (actions,
+	gtk_action_group_add_actions (priv->actions,
 				      entries,
 				      G_N_ELEMENTS (entries),
 				      plugin);
 
-	ui = planner_window_get_ui_manager (main_window);
-	gtk_ui_manager_insert_action_group (ui, actions, 0);
+	ui = planner_window_get_ui_manager (plugin->main_window);
+	gtk_ui_manager_insert_action_group (ui, priv->actions, 0);
 
 	filename = mrp_paths_get_ui_dir ("sql-plugin.ui");
 	gtk_ui_manager_add_ui_from_file (ui, filename, NULL);
