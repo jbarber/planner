@@ -22,7 +22,7 @@
 #ifndef __PLANNER_USAGE_PRINT_JOB_H__
 #define __PLANNER_USAGE_PRINT_JOB_H__
 
-#include <gtk/gtktreeview.h>
+#include <gtk/gtk.h>
 #include "planner-print-job.h"
 #include "planner-view.h"
 
