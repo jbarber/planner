@@ -30,7 +30,7 @@
 (define-method get_recent_model
   (of-object "PlannerApplication")
   (c-name "planner_application_get_recent_model")
-  (return-type "EggRecentModel*")
+  (return-type "GtkRecentManager*")
 )
 
 (define-function planner_application_get_gconf_client
