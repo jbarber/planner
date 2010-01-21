@@ -33,11 +33,6 @@
   (return-type "GtkRecentManager*")
 )
 
-(define-function planner_application_get_gconf_client
-  (c-name "planner_application_get_gconf_client")
-  (return-type "GConfClient*")
-)
-
 
 ;; From ../src/planner-window.h
 
