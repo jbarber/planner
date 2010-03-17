@@ -20,11 +20,7 @@
 #include <gconf/gconf-client.h>
 #include <glib.h>
 #include <glib/gi18n.h>
-#include <gtk/gtkwidget.h>
-#include <gtk/gtkfilechooser.h>
-#include <gtk/gtkfilechooserdialog.h>
-#include <gtk/gtkstock.h>
-#include <gtk/gtkmessagedialog.h>
+#include <gtk/gtk.h>
 #include <e-util/e-config.h>
 #include <calendar/gui/e-cal-config.h>
 #include <libedataserver/e-source.h>

@@ -21,7 +21,7 @@
 
 #include <config.h>
 #include <gconf/gconf-client.h>
-#include <glib/gmain.h>
+#include <glib.h>
 #include <libgnome/gnome-init.h>
 #include <libedataserver/e-source-list.h>
 
