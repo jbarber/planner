@@ -250,14 +250,12 @@
         libgnomecanvas-2.0 >= 2.6.0
         libgnomeui-2.0 >= 2.6.0
         libglade-2.0 >= 2.4.0
-        libbonoboui-2.0 >= 2.6.0
-        libgnomeprintui-2.2 >= 2.6.0
         gconf-2.0 >= 2.6.0
       </screen>
     </para>
     <para>
       Most of these requirements are met by Fedora Core 2, except for
-      libglade-2.0 and libgnomeprintui-2.2.  If you'd like to confirm this,
+      libglade-2.0.  If you'd like to confirm this,
       use the <command>rpm</command> command:
       <screen>
         <prompt>#</prompt><userinput> rpm -qa | grep libglade</userinput>
@@ -422,7 +420,7 @@ test -z "/usr/local/lib/pkgconfig" || mkdir -p -- .  "/usr/local/lib/pkgconfig"
       <para>
 	Now that we've set up our <envar>PKG_CONFIG_PATH</envar> environment
 	variable, the rest of our setup should run smoothly.  The other
-	dependencies (pango 1.5, libgnomeprint 2.6 and libgnomeprintui 2.6) 
+	dependencies (pango 1.5)
 	are built in the same manner as we did for libglade-2.0.  I'll simply 
 	summarize the steps for brevity.
       </para>
