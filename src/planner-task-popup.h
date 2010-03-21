@@ -20,7 +20,7 @@
 #ifndef __PLANNER_TASK_POPUP_H__
 #define __PLANNER_TASK_POPUP_H__
 
-#include <gtk/gtkitemfactory.h>
+#include <gtk/gtk.h>
 
 typedef enum {
 	PLANNER_TASK_POPUP_NONE,
