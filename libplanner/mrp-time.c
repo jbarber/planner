@@ -950,7 +950,7 @@ mrp_time_format_locale (mrptime t)
 	tm = mrp_time_to_tm (t);
 
 	if (!strftime (buffer, sizeof (buffer), format, tm)) {
-		return g_strup ("");
+		return g_strdup ("");
 	}
 
 	return g_strdup (buffer);
