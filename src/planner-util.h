@@ -21,11 +21,11 @@
 #ifndef __PLANNER_UTIL_H__
 #define __PLANNER_UTIL_H__
 
+#include <gtk/gtk.h>
 #include <glib.h>
 
-gboolean planner_util_show_url  (const gchar  *url,
-				 GError      **error);
-gboolean planner_util_show_help (GError      **error);
+void planner_util_show_url  (GtkWindow    *parent,
+                             const gchar  *url);
 
 #endif /* __PLANNER_UTIL_H__ */
 

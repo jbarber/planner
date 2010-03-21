@@ -56,7 +56,7 @@ html_plugin_show_url (PlannerPlugin *plugin, const char *path)
 	gchar *url;
 
 	url = g_filename_to_uri (path, NULL, NULL);
-	planner_util_show_url (url, NULL);
+	planner_util_show_url (NULL, url);
 	g_free (url);
 }
 

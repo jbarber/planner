@@ -19,19 +19,24 @@
  */
 
 #include <config.h>
-#include <libgnome/gnome-url.h>
-#include <libgnome/gnome-help.h>
 
 #include "planner-util.h"
 
-gboolean
-planner_util_show_url (const gchar *url, GError **error)
+void
+planner_util_show_url (GtkWindow *parent, const gchar *url)
 {
-	return gnome_url_show (url, error);
-}
+	GtkWidget *dialog;
+	GError    *error = NULL;
 
-gboolean
-planner_util_show_help (GError **error)
-{
-	return gnome_help_display ("planner.xml", NULL, error);
+	gtk_show_uri (NULL, url, gtk_get_current_event_time (), &error);
+	if (error != NULL) {
+		dialog = gtk_message_dialog_new (parent,
+		                                 GTK_DIALOG_DESTROY_WITH_PARENT,
+		                                 GTK_MESSAGE_ERROR,
+		                                 GTK_BUTTONS_CLOSE,
+		                                 "%s", error->message);
+		gtk_dialog_run (GTK_DIALOG (dialog));
+		gtk_widget_destroy (dialog);
+		g_error_free (error);
+	}
 }

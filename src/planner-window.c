@@ -1158,22 +1158,7 @@ static void
 window_help_cb (GtkAction *action,
 		gpointer   data)
 {
-	GError    *error = NULL;
-	GtkWidget *dialog;
-
-	if (!planner_util_show_help (&error)) {
-		dialog = gtk_message_dialog_new (GTK_WINDOW (data),
-						 GTK_DIALOG_MODAL |
-						 GTK_DIALOG_DESTROY_WITH_PARENT,
-						 GTK_MESSAGE_ERROR,
-						 GTK_BUTTONS_OK,
-						 "%s", error->message);
-		gtk_widget_show (dialog);
-
-		gtk_dialog_run (GTK_DIALOG (dialog));
-		gtk_widget_destroy (dialog);
-		g_error_free (error);
-	}
+	planner_util_show_url (NULL, "ghelp:planner");
 }
 
 static  void
@@ -1194,7 +1179,7 @@ handle_links (GtkAboutDialog *about,
 		g_assert_not_reached ();
 	}
 
-	planner_util_show_url (newlink, NULL);
+	planner_util_show_url (NULL, newlink);
 	g_free (newlink);
 }
 
