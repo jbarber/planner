@@ -27,7 +27,6 @@
 #include <libplanner/mrp-resource.h>
 #include "libplanner/mrp-paths.h"
 #include "planner-usage-view.h"
-/*#include "planner-usage-print.h"*/
 #include "planner-usage-model.h"
 #include "planner-usage-tree.h"
 #include "planner-usage-chart.h"
