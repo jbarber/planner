@@ -24,7 +24,6 @@
 
 #include <config.h>
 #include <string.h>
-#include <libgnome/gnome-i18n.h>
 #include <libedataserver/e-uid.h>
 #include "e-cal-backend-planner.h"
 #include <libplanner/mrp-application.h>

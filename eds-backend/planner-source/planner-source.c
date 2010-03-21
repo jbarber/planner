@@ -28,7 +28,6 @@
 #include <libecal/e-cal.h>
 #include <libedataserver/e-source.h>
 #include <libedataserver/e-source-list.h>
-#include <libgnome/gnome-i18n.h>
 #include <string.h>
 
 static GConfClient *conf_client;
