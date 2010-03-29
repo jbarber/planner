@@ -1,4 +1,4 @@
-# translation of planner.master.po to Basque
+# translation of eu.po to Basque
 # This file is distributed under the same license as the PACKAGE package.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER.
 #
@@ -7,10 +7,10 @@
 # Iñaki Larrañaga Murgoitio <dooteo@zundan.com>, 2007.
 msgid ""
 msgstr ""
-"Project-Id-Version: planner.master\n"
+"Project-Id-Version: eu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-03-16 18:06+0100\n"
-"PO-Revision-Date: 2010-03-15 22:12+0100\n"
+"POT-Creation-Date: 2010-03-29 12:38+0200\n"
+"PO-Revision-Date: 2010-03-29 12:42+0200\n"
 "Last-Translator: Iñaki Larrañaga Murgoitio <dooteo@euskalgnu.org>\n"
 "Language-Team: Basque <itzulpena@euskalgnu.org>\n"
 "MIME-Version: 1.0\n"
@@ -365,8 +365,7 @@ msgstr "Hautatu proiektu bat"
 
 #: ../data/glade/sql.glade.h:4
 msgid "The database contains the following projects. Select a project to open:"
-msgstr ""
-"Datu-baseak ondorengo proiektuak ditu. Hautatu proiektu bat irekitzeko:"
+msgstr "Datu-baseak ondorengo proiektuak ditu. Hautatu proiektu bat irekitzeko:"
 
 #: ../data/glade/sql.glade.h:5
 msgid "_Database:"
@@ -395,7 +394,7 @@ msgstr ""
 "Finkatutako datan"
 
 #: ../data/glade/task-date-widget.glade.h:4
-#: ../src/planner-cell-renderer-date.c:182
+#: ../src/planner-cell-renderer-date.c:167
 #: ../src/planner-project-properties.c:747
 msgid "Cancel"
 msgstr "Utzi"
@@ -405,17 +404,17 @@ msgstr "Utzi"
 #. I18n: the verb "schedule" here.
 #: ../data/glade/task-date-widget.glade.h:6
 #: ../data/glade/task-dialog.glade.h:11
-#: ../src/planner-cell-renderer-date.c:154
+#: ../src/planner-cell-renderer-date.c:139
 msgid "Schedule:"
 msgstr "Antolaketa"
 
 #: ../data/glade/task-date-widget.glade.h:7
-#: ../src/planner-cell-renderer-date.c:189
+#: ../src/planner-cell-renderer-date.c:174
 msgid "Select"
 msgstr "Hautatu"
 
 #: ../data/glade/task-date-widget.glade.h:8
-#: ../src/planner-cell-renderer-date.c:176
+#: ../src/planner-cell-renderer-date.c:161
 #: ../src/planner-project-properties.c:740
 msgid "Today"
 msgstr "Gaur"
@@ -524,7 +523,7 @@ msgstr "Ikuspegi aktiboa"
 
 #: ../data/planner.schemas.in.h:8
 msgid "Whether printing of the Gantt view is enabled."
-msgstr "Gant ikuspegia inprimatzea gaituta dagoen edo ez."
+msgstr "Gantt ikuspegia inprimatzea gaituta dagoen edo ez."
 
 #: ../data/planner.schemas.in.h:9
 msgid "Whether printing of the Resource view is enabled."
@@ -539,13 +538,11 @@ msgid "Whether to display nonstandard days in the Gantt view."
 msgstr "Egun ez-estandarrak Gantt ikuspegian bistaratu edo ez."
 
 #: ../data/planner.schemas.in.h:12
-msgid ""
-"Whether to highlight the tasks along the cricital path in the Gantt view."
-msgstr "Zereginak Gantt ikuspegiko bide kritikoan zehaz nabarmendu edo ez."
+msgid "Whether to highlight the tasks along the cricital path in the Gantt view."
+msgstr "Zereginak Gantt ikuspegiko bide kritikoan zehatz nabarmendu edo ez."
 
 #: ../data/planner.schemas.in.h:13
-msgid ""
-"Whether to highlight the tasks along the cricital path in the Task view."
+msgid "Whether to highlight the tasks along the cricital path in the Task view."
 msgstr "Zereginak zereginen ikuspegiko bide kritikoan zehar nabarmendu edo ez."
 
 #: ../data/planner.schemas.in.h:14
@@ -760,8 +757,7 @@ msgstr "'%s' datu-baserako konexioak huts egin du."
 #: ../libplanner/mrp-storage-sql.c:206
 #, c-format
 msgid "Invalid SQL URI (must start with 'sql://' and contain '#')."
-msgstr ""
-"SQL URI baliogabea (honela hasi behar du: 'sql://', eta '#' eduki behar du)."
+msgstr "SQL URI baliogabea (honela hasi behar du: 'sql://', eta '#' eduki behar du)."
 
 #: ../libplanner/mrp-storage-sql.c:275
 #, c-format
@@ -775,8 +771,7 @@ msgstr "SQL URI baliogabea (ez da datu-base izenik zehaztu)."
 
 #: ../libplanner/mrp-task.c:1070
 #, c-format
-msgid ""
-"Could not add a predecessor relation, because the tasks are already related."
+msgid "Could not add a predecessor relation, because the tasks are already related."
 msgstr ""
 "Ezin izan da aurreko-erlaziorik gehitu; zereginak dagoeneko erlazionatuta "
 "daude."
@@ -886,15 +881,15 @@ msgstr "Kendu egutegia"
 msgid "Add new calendar"
 msgstr "Gehitu egutegi berria"
 
-#: ../src/planner-cell-renderer-date.c:161 ../src/planner-task-dialog.c:1491
+#: ../src/planner-cell-renderer-date.c:146 ../src/planner-task-dialog.c:1491
 msgid "As soon as possible"
 msgstr "Ahal bezain laster"
 
-#: ../src/planner-cell-renderer-date.c:162
+#: ../src/planner-cell-renderer-date.c:147
 msgid "No earlier than"
 msgstr "Ez hasi hau baino lehen"
 
-#: ../src/planner-cell-renderer-date.c:163
+#: ../src/planner-cell-renderer-date.c:148
 msgid "On fixed date"
 msgstr "Finkatutako datan"
 
@@ -967,51 +962,51 @@ msgstr "%H:%M"
 msgid "Edit default week"
 msgstr "Editatu aste lehenetsia"
 
-#: ../src/planner-eds-plugin.c:167
+#: ../src/planner-eds-plugin.c:155
 msgid "EDS"
 msgstr "EDZ"
 
-#: ../src/planner-eds-plugin.c:168
+#: ../src/planner-eds-plugin.c:156
 msgid "Import resources from Evolution Data Server"
 msgstr "Inportatu baliabideak Evolution Datu-Zerbitzaritik"
 
-#: ../src/planner-eds-plugin.c:396 ../src/planner-gantt-print.c:191
+#: ../src/planner-eds-plugin.c:384 ../src/planner-gantt-print.c:191
 #: ../src/planner-gantt-view.c:621 ../src/planner-group-dialog.c:822
-#: ../src/planner-property-dialog.c:485 ../src/planner-resource-view.c:1211
+#: ../src/planner-property-dialog.c:475 ../src/planner-resource-view.c:1211
 #: ../src/planner-task-dialog.c:2616 ../src/planner-task-dialog.c:2690
 #: ../src/planner-task-view.c:367
 msgid "Name"
 msgstr "Izena"
 
-#: ../src/planner-eds-plugin.c:416 ../src/planner-resource-view.c:1327
+#: ../src/planner-eds-plugin.c:404 ../src/planner-resource-view.c:1327
 msgid "Email"
 msgstr "Helb. el."
 
-#: ../src/planner-eds-plugin.c:437
+#: ../src/planner-eds-plugin.c:425
 msgid "Import"
 msgstr "Inportatu"
 
-#: ../src/planner-eds-plugin.c:447
+#: ../src/planner-eds-plugin.c:435
 msgid "Photo"
 msgstr "Argazkia"
 
-#: ../src/planner-eds-plugin.c:676
+#: ../src/planner-eds-plugin.c:664
 msgid "Imported from Evolution Data Server"
 msgstr "Evolution Datu-Zerbitzaritik inportatuta"
 
-#: ../src/planner-eds-plugin.c:677
+#: ../src/planner-eds-plugin.c:665
 msgid "Updated from Evolution Data Server"
 msgstr "Evolution Datu-Zerbitzaritik eguneratuta"
 
-#: ../src/planner-eds-plugin.c:862
+#: ../src/planner-eds-plugin.c:850
 msgid "Query cancelled."
 msgstr "Kontsulta bertan behera utzita."
 
-#: ../src/planner-eds-plugin.c:923
+#: ../src/planner-eds-plugin.c:911
 msgid "Evolution Data Server UID"
 msgstr "Evolution Datu-Zerbitzariko UIDa"
 
-#: ../src/planner-eds-plugin.c:924
+#: ../src/planner-eds-plugin.c:912
 msgid "Identifier used by Evolution Data Server for resources"
 msgstr ""
 "Identifikatzailea Evolution Datu-Zerbitzariak baliabideentzako erabiltzen "
@@ -1147,7 +1142,7 @@ msgstr "Lanekoa"
 
 #: ../src/planner-gantt-print.c:546 ../src/planner-gantt-row.c:779
 #: ../src/planner-html-plugin.c:124 ../src/planner-task-tree.c:1601
-#: ../src/planner-window.c:1883
+#: ../src/planner-window.c:1868
 msgid "Unnamed"
 msgstr "Izengabea"
 
@@ -1265,7 +1260,7 @@ msgstr "Berrezarri _murriztapena"
 msgid "Zoom To _Fit"
 msgstr "D_oitzeko zooma"
 
-#: ../src/planner-gantt-view.c:175 ../src/planner-usage-view.c:116
+#: ../src/planner-gantt-view.c:175 ../src/planner-usage-view.c:115
 msgid "Zoom to fit the entire project"
 msgstr "Zooma ezartzen du proiektu osora doitzeko"
 
@@ -1273,8 +1268,8 @@ msgstr "Zooma ezartzen du proiektu osora doitzeko"
 msgid "_Zoom In"
 msgstr "_Handiagotu"
 
-#: ../src/planner-gantt-view.c:178 ../src/planner-usage-view.c:112
-#: ../src/planner-usage-view.c:113
+#: ../src/planner-gantt-view.c:178 ../src/planner-usage-view.c:111
+#: ../src/planner-usage-view.c:112
 msgid "Zoom in"
 msgstr "Handiagotu zooma"
 
@@ -1282,18 +1277,18 @@ msgstr "Handiagotu zooma"
 msgid "Zoom _Out"
 msgstr "_Txikiagotu"
 
-#: ../src/planner-gantt-view.c:181 ../src/planner-usage-view.c:109
-#: ../src/planner-usage-view.c:110
+#: ../src/planner-gantt-view.c:181 ../src/planner-usage-view.c:108
+#: ../src/planner-usage-view.c:109
 msgid "Zoom out"
 msgstr "Txikiagotu zooma"
 
 #: ../src/planner-gantt-view.c:183 ../src/planner-resource-view.c:254
-#: ../src/planner-task-view.c:158 ../src/planner-usage-view.c:118
+#: ../src/planner-task-view.c:158 ../src/planner-usage-view.c:117
 msgid "Edit _Visible Columns"
 msgstr "Editatu zutabe _ikusgaiak"
 
 #: ../src/planner-gantt-view.c:184 ../src/planner-resource-view.c:255
-#: ../src/planner-task-view.c:159 ../src/planner-usage-view.c:119
+#: ../src/planner-task-view.c:159 ../src/planner-usage-view.c:118
 msgid "Edit visible columns"
 msgstr "Editatu zutabe ikusgaiak"
 
@@ -1409,23 +1404,41 @@ msgstr "Esportatu HTMLra"
 msgid "Show result in browser"
 msgstr "Ikusi emaitza arakatzailean"
 
-#: ../src/planner-html-plugin.c:172 ../src/planner-window.c:1598
+#: ../src/planner-html-plugin.c:172 ../src/planner-window.c:1583
 #: ../src/planner-xml-planner-plugin.c:124
 #, c-format
 msgid "File \"%s\" exists, do you want to overwrite it?"
 msgstr "\"%s\" fitxategia badago lehendik. Gainidatzi nahi duzu?"
 
-#: ../src/planner-main.c:56
+#: ../src/planner-main.c:39
 msgid "Create the initial window with the given geometry."
 msgstr "Sortu hasierako leihoa emandako geometriarekin."
 
-#: ../src/planner-main.c:56
+#: ../src/planner-main.c:39
 msgid "GEOMETRY"
 msgstr "GEOMETRIA"
 
-#: ../src/planner-main.c:74
-msgid "[FILE...]"
-msgstr "[FITXATEGIA...]"
+#: ../src/planner-main.c:40
+msgid "FILES"
+msgstr "FITXATEGIAK"
+
+#: ../src/planner-main.c:63
+msgid "- Planner project management"
+msgstr "- Planner proiektu-kudeaketa"
+
+#: ../src/planner-main.c:67
+#, c-format
+msgid ""
+"%s\n"
+"Run '%s --help' to see a full list of available command line options.\n"
+msgstr ""
+"%s\n"
+"Exekutatu '%s --help' aukeren zerrenda osoa ikusteko.\n"
+
+#: ../src/planner-main.c:88
+#, c-format
+msgid "Invalid geometry string \"%s\"\n"
+msgstr "\"%s\" geometria-kate baliogabea\n"
 
 #: ../src/planner-msp-plugin.c:49
 msgid "MS Project XML..."
@@ -1526,12 +1539,12 @@ msgid "Value"
 msgstr "Balioa"
 
 #: ../src/planner-project-properties.c:1391
-#: ../src/planner-property-dialog.c:333
+#: ../src/planner-property-dialog.c:323
 msgid "The name of the custom property needs to start with a letter."
 msgstr "Propietate pertsonalizatuaren izenak letra batekin hasi behar du."
 
 #: ../src/planner-project-properties.c:1462
-#: ../src/planner-property-dialog.c:403
+#: ../src/planner-property-dialog.c:393
 #, c-format
 msgid "Do you really want to remove the property '%s' from the project?"
 msgstr "Ziur zaude '%s' propietatea proiektutik kendu nahi duzula?"
@@ -1556,24 +1569,24 @@ msgstr "Kendu proiektuaren propietatea"
 msgid "Edit project property value"
 msgstr "Editatu proiektu-propietatearen balioa"
 
-#: ../src/planner-property-dialog.c:502
+#: ../src/planner-property-dialog.c:492
 msgid "Label"
 msgstr "Etiketa"
 
-#: ../src/planner-property-dialog.c:514 ../src/planner-resource-view.c:1264
+#: ../src/planner-property-dialog.c:504 ../src/planner-resource-view.c:1264
 #: ../src/planner-task-dialog.c:2722
 msgid "Type"
 msgstr "Mota"
 
-#: ../src/planner-property-dialog.c:671
+#: ../src/planner-property-dialog.c:661
 msgid "Add property"
 msgstr "Gehitu propietatea"
 
-#: ../src/planner-property-dialog.c:816
+#: ../src/planner-property-dialog.c:806
 msgid "Remove property"
 msgstr "Kendu propietatea"
 
-#: ../src/planner-property-dialog.c:909
+#: ../src/planner-property-dialog.c:899
 msgid "Edit property label"
 msgstr "Editatu etiketa-propietatea"
 
@@ -1799,8 +1812,7 @@ msgstr "Ezin da %s datu-basean taularik sortu"
 #: ../src/planner-sql-plugin.c:647
 #, c-format
 msgid "Database %s is not setup for Planner. Do you want to do that?"
-msgstr ""
-"%s datu-basea ez dago Planner-entzako konfiguratua. Hori egitea nahi duzu?"
+msgstr "%s datu-basea ez dago Planner-entzako konfiguratua. Hori egitea nahi duzu?"
 
 #: ../src/planner-sql-plugin.c:690
 #, c-format
@@ -1930,27 +1942,27 @@ msgstr "Atzerapena"
 msgid "Edit task properties"
 msgstr "Editatu zeregin-propietateak"
 
-#: ../src/planner-task-popup.c:54
+#: ../src/planner-task-popup.c:52
 msgid "/_Insert task"
 msgstr "/_Txertatu zeregina"
 
-#: ../src/planner-task-popup.c:57
+#: ../src/planner-task-popup.c:55
 msgid "/Insert _subtask"
 msgstr "/Txertatu _azpizeregina"
 
-#: ../src/planner-task-popup.c:60
+#: ../src/planner-task-popup.c:58
 msgid "/_Remove task"
 msgstr "/_Kendu zeregina"
 
-#: ../src/planner-task-popup.c:65
+#: ../src/planner-task-popup.c:63
 msgid "/_Unlink task"
 msgstr "/_Desestekatu zeregina"
 
-#: ../src/planner-task-popup.c:70
+#: ../src/planner-task-popup.c:68
 msgid "/Assign _resources..."
 msgstr "/Esleitu _baliabideak..."
 
-#: ../src/planner-task-popup.c:73 ../src/planner-usage-tree.c:105
+#: ../src/planner-task-popup.c:71 ../src/planner-usage-tree.c:105
 msgid "/_Edit task..."
 msgstr "/_Editatu zeregina..."
 
@@ -2080,14 +2092,14 @@ msgstr ""
 "\n"
 "Zeregina"
 
-#: ../src/planner-usage-view.c:115
+#: ../src/planner-usage-view.c:114
 msgid "Zoom to fit"
 msgstr "Doitzeko zooma"
 
 #. i18n: Label used for the sidebar. Please try to make it short and use
 #. * a linebreak if necessary/possible.
 #.
-#: ../src/planner-usage-view.c:258
+#: ../src/planner-usage-view.c:257
 msgid ""
 "Resource\n"
 "Usage"
@@ -2095,11 +2107,11 @@ msgstr ""
 "Baliabideen\n"
 "erabilera"
 
-#: ../src/planner-usage-view.c:264
+#: ../src/planner-usage-view.c:263
 msgid "Resource _Usage"
 msgstr "Baliabide-erabi_lera"
 
-#: ../src/planner-usage-view.c:375
+#: ../src/planner-usage-view.c:374
 msgid "Edit Resource Usage Columns"
 msgstr "Editatu baliabideen erabilera-zutabeak"
 
@@ -2131,7 +2143,7 @@ msgstr "Ireki _oraintsukoa"
 msgid "_Import"
 msgstr "_Inportatu"
 
-#: ../src/planner-window.c:238 ../src/planner-window.c:1467
+#: ../src/planner-window.c:238 ../src/planner-window.c:1452
 msgid "_Save"
 msgstr "_Gorde"
 
@@ -2279,30 +2291,28 @@ msgstr "Planner fitxategiak"
 #. I18n: Translators, list your names here, newline separated if there
 #. * are more than one, to appear in the about box.
 #.
-#: ../src/planner-window.c:1224 ../src/planner-window.c:1246
+#: ../src/planner-window.c:1209 ../src/planner-window.c:1231
 msgid "translator-credits"
 msgstr ""
 "Hizkuntza Politikarako Sailburuordetza <hizkpol@ej-gv.es>\n"
 "Iñaki Larrañaga Murgoitio <dooteo@euskalgnu.org>"
 
-#: ../src/planner-window.c:1241
+#: ../src/planner-window.c:1226
 msgid "A Project Management application for the GNOME desktop"
-msgstr "Proiektuak kudeaketzeko aplikazioa GNOME mahaigainerako"
+msgstr "Proiektuak kudeatzeko aplikazioa GNOME mahaigainerako"
 
-#: ../src/planner-window.c:1248
+#: ../src/planner-window.c:1233
 msgid "The Planner Homepage"
 msgstr "Planner-en gune nagusia"
 
-#: ../src/planner-window.c:1400
+#: ../src/planner-window.c:1385
 msgid "If you don't save, changes made the last minute will be discarded."
-msgstr ""
-"Ez baduzu gordetzen, azken minutuan egindako aldaketak galdu egingo dira."
+msgstr "Ez baduzu gordetzen, azken minutuan egindako aldaketak galdu egingo dira."
 
-#: ../src/planner-window.c:1406
+#: ../src/planner-window.c:1391
 #, c-format
 msgid "If you don't save, changes made the last %d minute will be discarded."
-msgid_plural ""
-"If you don't save, changes made the last %d minutes will be discarded."
+msgid_plural "If you don't save, changes made the last %d minutes will be discarded."
 msgstr[0] ""
 "Ez baduzu gordetzen, azken minutuan (%d) egindako aldaketak galdu egingo "
 "dira."
@@ -2310,39 +2320,35 @@ msgstr[1] ""
 "Ez baduzu gordetzen, azken %d minutuetan egindako aldaketak galdu egingo "
 "dira."
 
-#: ../src/planner-window.c:1414
+#: ../src/planner-window.c:1399
 msgid "If you don't save, changes made the last hour will be discarded."
-msgstr ""
-"Ez baduzu gordetzen, azken orduan egindako aldaketak galdu egingo dira."
+msgstr "Ez baduzu gordetzen, azken orduan egindako aldaketak galdu egingo dira."
 
-#: ../src/planner-window.c:1419
+#: ../src/planner-window.c:1404
 #, c-format
 msgid "If you don't save, changes made the last %d hour will be discarded."
-msgid_plural ""
-"If you don't save, changes made the last %d hours will be discarded."
-msgstr[0] ""
-"Ez baduzu gordetzen, azken orduan (%d) egindako aldaketak galdu egingo dira."
-msgstr[1] ""
-"Ez baduzu gordetzen, azken %d orduetan egindako aldaketak galdu egingo dira."
+msgid_plural "If you don't save, changes made the last %d hours will be discarded."
+msgstr[0] "Ez baduzu gordetzen, azken orduan (%d) egindako aldaketak galdu egingo dira."
+msgstr[1] "Ez baduzu gordetzen, azken %d orduetan egindako aldaketak galdu egingo dira."
 
-#: ../src/planner-window.c:1429
+#: ../src/planner-window.c:1414
 #, c-format
 msgid "Save changes to document '%s' before closing?"
 msgstr "'%s' dokumentuko azken aldaketak gorde nahi dituzu itxi aurretik?"
 
-#: ../src/planner-window.c:1454
+#: ../src/planner-window.c:1439
 msgid "C_lose without saving"
 msgstr "G_orde itxi gabe"
 
-#: ../src/planner-window.c:1460
+#: ../src/planner-window.c:1445
 msgid "_Cancel"
 msgstr "_Utzi"
 
-#: ../src/planner-window.c:1560
+#: ../src/planner-window.c:1545
 msgid "Save a File"
 msgstr "Gorde fitxategi bat"
 
-#: ../src/planner-window.c:1840
+#: ../src/planner-window.c:1825
 msgid ""
 "You have opened a file that was saved with an old version of Planner.\n"
 "\n"
@@ -2371,7 +2377,7 @@ msgstr ""
 "guztiak' aukera hautatuz 'Editatu' menuan."
 
 #. Hack.
-#: ../src/planner-window.c:1875
+#: ../src/planner-window.c:1860
 msgid "Unnamed database project"
 msgstr "Proiektuaren datu-base izengabea"
 
@@ -2391,52 +2397,51 @@ msgstr "Esportatu proiektua Planner 0.11 formatuko fitxategira"
 msgid "Export"
 msgstr "Esportatu"
 
-#: ../eds-backend/e-cal-backend-planner.c:289
+#: ../eds-backend/e-cal-backend-planner.c:288
 msgid "EDS UID"
 msgstr "EDZ UIDa"
 
-#: ../eds-backend/e-cal-backend-planner.c:290
+#: ../eds-backend/e-cal-backend-planner.c:289
 msgid "Identifier used by Evolution Data Server for tasks"
-msgstr ""
-"Identifikatzailea Evolution Datu-Zerbitzariak zereginentzako erabiltzen duena"
+msgstr "Identifikatzailea Evolution Datu-Zerbitzariak zereginentzako erabiltzen duena"
 
-#: ../eds-backend/e-cal-backend-planner.c:299
+#: ../eds-backend/e-cal-backend-planner.c:298
 msgid "EDS Categories"
 msgstr "EDZ kategoriak"
 
-#: ../eds-backend/e-cal-backend-planner.c:300
+#: ../eds-backend/e-cal-backend-planner.c:299
 msgid "Categories for a task used by Evolution Data Server"
 msgstr "Evolution Datu-Zerbitzariak erabiltzen duen zeregin baten kategoriak"
 
-#: ../eds-backend/e-cal-backend-planner.c:309
+#: ../eds-backend/e-cal-backend-planner.c:308
 msgid "EDS Classification"
 msgstr "EDZ sailkapena"
 
-#: ../eds-backend/e-cal-backend-planner.c:310
+#: ../eds-backend/e-cal-backend-planner.c:309
 msgid "Task access classification used by Evolution Data Server"
 msgstr ""
 "Evolution Datu-Zerbitzariak erabiltzen duen sailkapena zereginetara "
 "sarbidetzeko"
 
-#: ../eds-backend/e-cal-backend-planner.c:319
+#: ../eds-backend/e-cal-backend-planner.c:318
 msgid "EDS URL"
 msgstr "EDZ URLa"
 
-#: ../eds-backend/e-cal-backend-planner.c:320
+#: ../eds-backend/e-cal-backend-planner.c:319
 msgid "URL for a Task used by Evolution Data Server"
 msgstr "Evolution Datu-Zerbitzariak erabiltzen duen zereginaren URLa"
 
-#: ../eds-backend/e-cal-backend-planner.c:829
+#: ../eds-backend/e-cal-backend-planner.c:828
 msgid "Invalid server URI"
 msgstr "Zerbitzariaren URI baliogabea"
 
 #. book_target = (EABConfigTargetSource *) data->target;
 #. source = book_target->source;
-#: ../eds-backend/planner-source/planner-source.c:125
+#: ../eds-backend/planner-source/planner-source.c:120
 msgid "Select planner file"
 msgstr "Hautatu planner fitxategia"
 
-#: ../eds-backend/planner-source/planner-source.c:157
+#: ../eds-backend/planner-source/planner-source.c:152
 #, c-format
 msgid ""
 "The filename extension of this file isn't the planner usual file extension (%"
@@ -2444,3 +2449,4 @@ msgid ""
 msgstr ""
 "Fitxategiaren luzapena ez da planner-ek erabili ohi duena (%s). Jarraitzea "
 "nahi duzu?"
+
