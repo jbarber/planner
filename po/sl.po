@@ -1,4 +1,4 @@
-# Slovenian translation of planner.
+# Slovenian translations for planner.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER.
 # This file is distributed under the same license as the planner package.
 #
@@ -6,10 +6,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: planner HEAD\n"
+"Project-Id-Version: planner master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=planner&component=general\n"
 "POT-Creation-Date: 2010-03-23 17:15+0000\n"
-"PO-Revision-Date: 2010-03-25 12:58+0100\n"
+"PO-Revision-Date: 2010-07-28 14:43+0100\n"
 "Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -49,7 +49,7 @@ msgid ""
 "The selected day type has the following working hours:"
 msgstr ""
 "\n"
-"Izbrana vrsta dneva ima določen naslednji delovni čas:"
+"Izbrana vrsta dni ima določen naslednji delovni čas:"
 
 #: ../data/glade/calendar-dialog.glade.h:3
 #: ../data/glade/column-dialog.glade.h:1
@@ -77,7 +77,7 @@ msgstr "<b>Koledar:</b>"
 
 #: ../data/glade/calendar-dialog.glade.h:7
 msgid "<b>Day types</b>"
-msgstr "<b>Vrsta dneva</b>"
+msgstr "<b>Vrste dni</b>"
 
 #: ../data/glade/calendar-dialog.glade.h:8
 msgid "<b>Working hours</b>"
@@ -89,7 +89,7 @@ msgstr "<b>Delovni čas</b>"
 
 #: ../data/glade/calendar-dialog.glade.h:10
 msgid "Add Day Type"
-msgstr "Dodaj vrsto dneva"
+msgstr "Dodaj vrsto dni"
 
 #: ../data/glade/calendar-dialog.glade.h:11
 msgid "Apply"
@@ -117,7 +117,7 @@ msgstr "Prilagojen delovni čas"
 
 #: ../data/glade/calendar-dialog.glade.h:17
 msgid "Day type:"
-msgstr "Vrsta dneva:"
+msgstr "Vrsta dni:"
 
 #: ../data/glade/calendar-dialog.glade.h:18
 msgid "Default Week"
@@ -145,15 +145,15 @@ msgstr "Nov koledar"
 
 #: ../data/glade/calendar-dialog.glade.h:24
 msgid "Select a Calendar"
-msgstr "Izberi koledar"
+msgstr "Izbor koledarja"
 
 #: ../data/glade/calendar-dialog.glade.h:25
 msgid "Select a weekday and the day type to use for that day in the default week for this calendar.\n"
-msgstr "Izberite dneve tedna in vrsto dneva za prikaz dneva v izbranem koledarju.\n"
+msgstr "Izberite dneve tedna in vrsto dni za prikaz dneva v izbranem koledarju.\n"
 
 #: ../data/glade/calendar-dialog.glade.h:27
 msgid "Set day type to:"
-msgstr "Določi vrsto dneva kot:"
+msgstr "Določi vrsto dni kot:"
 
 #: ../data/glade/calendar-dialog.glade.h:28
 msgid "To:"
@@ -225,7 +225,7 @@ msgstr "Počisti vse"
 
 #: ../data/glade/eds.glade.h:7
 msgid "dialog1"
-msgstr "dialog1"
+msgstr "okno1"
 
 #: ../data/glade/group-dialog.glade.h:1
 msgid "Group Editor"
@@ -318,7 +318,7 @@ msgstr "Sporočila"
 #: ../data/glade/resource-dialog.glade.h:7
 #: ../data/glade/resource-input-dialog.glade.h:3
 msgid "Optional - overrides resource name in Gantt view."
-msgstr "Izbirno - prepiše ime vira v Gantt pogledu."
+msgstr "Izbirno - prepiše ime vira v pogledu Gantt."
 
 #: ../data/glade/resource-dialog.glade.h:8
 msgid "Select the calendar to use for this resource. If you want to use the default calendar of the project, select 'None'. "
@@ -362,7 +362,7 @@ msgstr "Izbor projekta"
 
 #: ../data/glade/sql.glade.h:4
 msgid "The database contains the following projects. Select a project to open:"
-msgstr "Podatkovna zbirka vsebuje naslednje projekte. Izberite projekt:"
+msgstr "Podatkovna zbirka vsebuje naslednje ustvarjene projekte:"
 
 #: ../data/glade/sql.glade.h:5
 msgid "_Database:"
@@ -452,7 +452,7 @@ msgstr "_Določeno trajanje"
 
 #: ../data/glade/task-dialog.glade.h:14
 msgid "_Insert Time Stamp"
-msgstr "_Vstavite časovni žig"
+msgstr "_Vstavi časovni žig"
 
 #: ../data/glade/task-dialog.glade.h:15
 msgid "_Milestone"
@@ -493,11 +493,11 @@ msgstr "Upravljanje projektov"
 
 #: ../data/planner.schemas.in.h:1
 msgid "Display nonstandard days in Gantt view"
-msgstr "Pokaži neobičajne dni v Gantt pogledu"
+msgstr "Pokaži neobičajne dni v pogledu Gantt"
 
 #: ../data/planner.schemas.in.h:2
 msgid "Highlight critical path in Gantt view"
-msgstr "Poudari ključno pot v Gantt pogledu"
+msgstr "Poudari ključno pot v pogledu Gantt"
 
 #: ../data/planner.schemas.in.h:3
 msgid "Highlight critical path in Task view"
@@ -521,7 +521,7 @@ msgstr "Dejavni pogled"
 
 #: ../data/planner.schemas.in.h:8
 msgid "Whether printing of the Gantt view is enabled."
-msgstr "Ali je omogočeno tiskanje Gantt pogleda."
+msgstr "Ali je omogočeno tiskanje pogleda Gantt."
 
 #: ../data/planner.schemas.in.h:9
 msgid "Whether printing of the Resource view is enabled."
@@ -533,11 +533,11 @@ msgstr "Ali je omogočeno tiskanje pogleda nalog."
 
 #: ../data/planner.schemas.in.h:11
 msgid "Whether to display nonstandard days in the Gantt view."
-msgstr "Ali naj bodo prikazani neobičajni dnevi v Gantt pogledu."
+msgstr "Ali naj bodo prikazani neobičajni dnevi v pogledu Gantt."
 
 #: ../data/planner.schemas.in.h:12
 msgid "Whether to highlight the tasks along the cricital path in the Gantt view."
-msgstr "Ali naj bodo poudarjene naloge ob ključnih poteh v Gantt pogledu."
+msgstr "Ali naj bodo poudarjene naloge ob ključnih poteh v pogledu Gantt."
 
 #: ../data/planner.schemas.in.h:13
 msgid "Whether to highlight the tasks along the cricital path in the Task view."
@@ -553,15 +553,15 @@ msgstr "Podjetje:"
 
 #: ../data/stylesheets/localizable.xml.h:2
 msgid "Complete"
-msgstr "Popolno"
+msgstr "Končano"
 
 #: ../data/stylesheets/localizable.xml.h:3
 msgid "Finish:"
-msgstr "Končano:"
+msgstr "Konec:"
 
 #: ../data/stylesheets/localizable.xml.h:4
 msgid "Gantt Chart"
-msgstr "Gantt načrt"
+msgstr "Načrt Gantt"
 
 #: ../data/stylesheets/localizable.xml.h:5
 msgid "Manager:"
@@ -597,7 +597,7 @@ msgstr "teden"
 
 #: ../libplanner/mrp-day.c:54
 msgid "Working"
-msgstr "Delam"
+msgstr "V delovanju ..."
 
 #: ../libplanner/mrp-day.c:55
 msgid "A default working day"
@@ -628,12 +628,12 @@ msgstr "Format ne podpira branja"
 #: ../libplanner/mrp-parser.c:1157
 #, c-format
 msgid "Could not create XML tree"
-msgstr "Ni mogoče ustvariti XML drevesa"
+msgstr "Ni mogoče ustvariti drevesa XML"
 
 #: ../libplanner/mrp-parser.c:1123
 #, c-format
 msgid "Could not write XML file"
-msgstr "Ni mogoče zapisati XML datoteke"
+msgstr "Ni mogoče zapisati datoteke XML"
 
 #: ../libplanner/mrp-project.c:437
 #: ../src/planner-group-dialog.c:846
@@ -643,12 +643,12 @@ msgstr "Privzeto"
 #: ../libplanner/mrp-project.c:715
 #, c-format
 msgid "Invalid URI: '%s'"
-msgstr "Neveljaven URI: '%s'"
+msgstr "Neveljaven naslov URI: '%s'"
 
 #: ../libplanner/mrp-project.c:758
 #, c-format
 msgid "Couldn't find a suitable file module for loading '%s'"
-msgstr "Ni mogoče najti primerne datotečne enote za nalaganje '%s'"
+msgstr "Ni mogoče najti ustrezne datotečne enote za nalaganje '%s'"
 
 #: ../libplanner/mrp-project.c:779
 #: ../libplanner/mrp-project.c:1063
@@ -659,7 +659,7 @@ msgstr "Ni podpore za SQL shranjevanje v tej različici programa Planer."
 #: ../libplanner/mrp-project.c:816
 #, c-format
 msgid "Invalid URI."
-msgstr "Neveljaven URI."
+msgstr "Neveljaven naslov URI."
 
 #: ../libplanner/mrp-project.c:957
 #, c-format
@@ -685,7 +685,7 @@ msgstr "Celo število"
 
 #: ../libplanner/mrp-property.c:371
 msgid "Floating-point number"
-msgstr "Število v plavajoči vejici"
+msgstr "Število s plavajočo vejico"
 
 #: ../libplanner/mrp-property.c:373
 msgid "Date"
@@ -707,7 +707,7 @@ msgstr "Stroški"
 #: ../libplanner/mrp-property.c:380
 #: ../src/planner-project-properties.c:882
 msgid "None"
-msgstr "Noben"
+msgstr "Brez"
 
 #: ../libplanner/mrp-sql.c:280
 #: ../src/planner-sql-plugin.c:152
@@ -813,7 +813,7 @@ msgstr "Ni mogoče prestaviti naloge, saj bi ta ustvarila krožno povezavo."
 #. Translators: Example output: October 9, 2006
 #: ../libplanner/mrp-xsl.c:93
 msgid "%B %e, %Y"
-msgstr "%e %B %Y"
+msgstr "%e. %B %Y"
 
 #: ../libplanner/mrp-xsl.c:157
 #: ../libplanner/mrp-xsl.c:205
@@ -976,7 +976,7 @@ msgstr "Ime"
 #: ../src/planner-eds-plugin.c:404
 #: ../src/planner-resource-view.c:1327
 msgid "Email"
-msgstr "e-Pošta"
+msgstr "Elektronska pošta"
 
 #: ../src/planner-eds-plugin.c:425
 msgid "Import"
@@ -996,11 +996,11 @@ msgstr "Posodobljeno preko Evolution podatkovnega strežnika"
 
 #: ../src/planner-eds-plugin.c:850
 msgid "Query cancelled."
-msgstr "Poizvedba preklicana."
+msgstr "Poizvedba je preklicana."
 
 #: ../src/planner-eds-plugin.c:911
 msgid "Evolution Data Server UID"
-msgstr " UID Evolution podatkovnega strežnika"
+msgstr "UID Evolution podatkovnega strežnika"
 
 #: ../src/planner-eds-plugin.c:912
 msgid "Identifier used by Evolution Data Server for resources"
@@ -1037,7 +1037,7 @@ msgstr "%dmin"
 #.
 #: ../src/planner-format.c:203
 msgid "%b %e"
-msgstr "%b %e"
+msgstr "%e. %b"
 
 #: ../src/planner-format.c:387
 msgid "mon"
@@ -1125,7 +1125,7 @@ msgstr "Začetek projekta"
 
 #: ../src/planner-gantt-header.c:671
 msgid "%e %b %Y"
-msgstr "%e %b %Y"
+msgstr "%e. %b %Y"
 
 #: ../src/planner-gantt-print.c:199
 #: ../src/planner-gantt-view.c:624
@@ -1344,7 +1344,7 @@ msgstr "Gantt"
 
 #: ../src/planner-gantt-view.c:382
 msgid "_Gantt Chart"
-msgstr "_Gantt načrt"
+msgstr "Načrt _Gantt"
 
 #. i18n: WBS is short for work breakdown structure, and is a
 #. * project management term. You might want to leave it
@@ -1367,7 +1367,7 @@ msgstr "Začetek"
 #: ../src/planner-gantt-view.c:623
 #: ../src/planner-task-view.c:369
 msgid "Finish"
-msgstr "Končano"
+msgstr "Konec"
 
 #: ../src/planner-gantt-view.c:626
 #: ../src/planner-task-view.c:372
@@ -1391,7 +1391,7 @@ msgstr "% končano"
 
 #: ../src/planner-gantt-view.c:988
 msgid "Edit Gantt Columns"
-msgstr "Uredi Gantt stolpce"
+msgstr "Uredi stolpce Gantt"
 
 #: ../src/planner-group-dialog.c:304
 msgid "Insert group"
@@ -1462,7 +1462,7 @@ msgstr "Datoteke"
 
 #: ../src/planner-main.c:63
 msgid "- Planner project management"
-msgstr "- Planner : upravljanje projektov"
+msgstr "- Planer: upravljanje projektov"
 
 #: ../src/planner-main.c:67
 #, c-format
@@ -1567,7 +1567,7 @@ msgstr "Uredi začetek projekta"
 
 #: ../src/planner-project-properties.c:754
 msgid "OK"
-msgstr "OK"
+msgstr "V redu"
 
 #: ../src/planner-project-properties.c:842
 msgid "Edit Project Phase"
@@ -1770,7 +1770,7 @@ msgstr "Skupina"
 #: ../src/planner-scale-utils.c:129
 #, c-format
 msgid "Wk %d"
-msgstr "T: %d"
+msgstr "Td: %d"
 
 #: ../src/planner-scale-utils.c:133
 #, c-format
@@ -1786,19 +1786,19 @@ msgstr "Teden %d, %d"
 #: ../src/planner-scale-utils.c:170
 #, c-format
 msgid "Q%d"
-msgstr "Č%d"
+msgstr "Č %d"
 
 #. i18n: Short "Quarter", preferably 2-3 letters.
 #: ../src/planner-scale-utils.c:174
 #, c-format
 msgid "Qtr %d"
-msgstr "1/4 %d"
+msgstr "Čtr %d"
 
 #. i18n: Year, short "Quarter", preferably 2-3 letters.
 #: ../src/planner-scale-utils.c:178
 #, c-format
 msgid "%d, Qtr %d"
-msgstr "%d, 1/4 %d"
+msgstr "%d, čtr %d"
 
 #. i18n: Short "Half year", preferably 1 letter.
 #: ../src/planner-scale-utils.c:191
@@ -1810,7 +1810,7 @@ msgstr "P%d"
 #: ../src/planner-scale-utils.c:196
 #, c-format
 msgid "%04d, H%d"
-msgstr "%04d, H%d"
+msgstr "%04d, P%d"
 
 #: ../src/planner-sql-plugin.c:94
 msgid "Open from Database..."
@@ -2126,7 +2126,7 @@ msgstr "/_Razširi vse vire"
 
 #: ../src/planner-usage-tree.c:111
 msgid "/_Collapse all resources"
-msgstr "/_Skrči vse vire"
+msgstr "/_Zloži vse vire"
 
 #: ../src/planner-usage-tree.c:379
 msgid ""
@@ -2310,11 +2310,11 @@ msgstr "Uredi lastnosti projekta"
 
 #: ../src/planner-window.c:301
 msgid "_Help"
-msgstr "_Pomoč"
+msgstr "Pomo_č"
 
 #: ../src/planner-window.c:304
 msgid "_User Guide"
-msgstr "_Uporabniški priročnik"
+msgstr "_Priročnik"
 
 #: ../src/planner-window.c:304
 msgid "Show the Planner User Guide"
@@ -2410,13 +2410,13 @@ msgid ""
 "\n"
 "After doing this, you can remove all constraints by selecting the menu item 'Remove all constraints' in the 'Edit' menu."
 msgstr ""
-"Odprli ste datoteko shranjeno v starejši različici planerja.\n"
+"Odprli ste datoteko shranjeno v starejši različici programa.\n"
 "\n"
-"Ob nalaganju starejših datotek bodo vse naloge prevzele omejitev 'Začne se na', saj starejše različice niso popolno podpirale samodejnega preurejanja. Za polno uporabo prednosti te možnosti, morate dodati predhodno nalogo ali povezavo med nalogami, ki so medsebojno odvisne.\n"
+"Med nalaganjem starejših datotek bodo vse naloge prevzele omejitev 'Začne se na', saj starejše različice niso popolno podpirale samodejnega preurejanja. Za polno uporabo prednosti te možnosti, morate dodati predhodno nalogo ali povezavo med nalogami, ki so medsebojno odvisne.\n"
 "\n"
 "Predhodne naloge lahko dodate s klikom nanje in vlačenjem do glavne naloge.\n"
 "\n"
-"Po tem lahko odstranite omejitve preko menuja."
+"Po tem lahko odstranite omejitve preko menija."
 
 #. Hack.
 #: ../src/planner-window.c:1860
@@ -2429,7 +2429,7 @@ msgstr "Uredi delovni čas"
 
 #: ../src/planner-xml-planner-plugin.c:54
 msgid "Planner 0.11 Format"
-msgstr "Planer 0.11 oblika"
+msgstr "Planer 0.11 zapis"
 
 #: ../src/planner-xml-planner-plugin.c:55
 msgid "Export project to a file suitable for Planner 0.11"
@@ -2469,7 +2469,7 @@ msgstr "EDS URL"
 
 #: ../eds-backend/e-cal-backend-planner.c:319
 msgid "URL for a Task used by Evolution Data Server"
-msgstr "URL za nalogo preko Evolution podatkovnega strežnika"
+msgstr "Naslov URL za nalogo preko Evolution podatkovnega strežnika"
 
 #: ../eds-backend/e-cal-backend-planner.c:828
 msgid "Invalid server URI"
@@ -2486,17 +2486,3 @@ msgstr "Izbor datoteke planerja"
 msgid "The filename extension of this file isn't the planner usual file extension (%s) Do you want to continue?"
 msgstr "Pripona datoteke ni običajna pripona planerja (%s). Ali želite nadaljevati?"
 
-#~ msgid "[FILE...]"
-#~ msgstr "[DATOTEKA ...]"
-
-#~ msgid " (invalid Unicode)"
-#~ msgstr " (neveljaven Unicode znak)"
-
-#~ msgid "Open '%s'"
-#~ msgstr "Odpri '%s'"
-
-#~ msgid "Print Project"
-#~ msgstr "Natisni projekt"
-
-#~ msgid "Optional - overrides resource name in gantt view."
-#~ msgstr "Izbirno - prepiše ime vira v Gantt pogledu."
