@@ -7,16 +7,16 @@
 #
 # Ilmar Kerm <ikerm@hot.ee>, 2002.
 # Priit Laes <amd@tt.ee>, 2003.
-# Ivar Smolin <okul linux ee>, 2005-2009.
+# Ivar Smolin <okul linux ee>, 2005–2010.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Planner 0.14\n"
+"Project-Id-Version: Planner 0.15\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=planner&component=general\n"
-"POT-Creation-Date: 2009-04-17 11:01+0000\n"
-"PO-Revision-Date: 2010-02-01 12:14+0300\n"
-"Last-Translator: Mattias Põldaru <mahfiaz gmail com>\n"
+"POT-Creation-Date: 2010-03-21 22:26+0000\n"
+"PO-Revision-Date: 2010-09-10 08:56+0300\n"
+"Last-Translator: Ivar Smolin <okul@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -442,9 +442,6 @@ msgstr "Nimetu projekt"
 
 msgid "Week"
 msgstr "Nädal"
-
-msgid " (invalid Unicode)"
-msgstr " (vigane Unicode)"
 
 msgid "Working"
 msgstr "Tööpäev"
@@ -1067,8 +1064,23 @@ msgstr "Etteantud suurusega akna loomine. "
 msgid "GEOMETRY"
 msgstr "GEOMEETRIA"
 
-msgid "[FILE...]"
-msgstr "[FAIL...]"
+msgid "FILES"
+msgstr "FAILID"
+
+msgid "- Planner project management"
+msgstr "- Plaanija projektihaldus"
+
+#, c-format
+msgid ""
+"%s\n"
+"Run '%s --help' to see a full list of available command line options.\n"
+msgstr ""
+"%s\n"
+"Kõigi saadaolevate käsureavõtmete vaatamiseks käivita '%s --help'.\n"
+
+#, c-format
+msgid "Invalid geometry string \"%s\"\n"
+msgstr "Lubamatu geomeetriastring \"%s\"\n"
 
 msgid "MS Project XML..."
 msgstr "MS Project XML..."
@@ -1601,6 +1613,9 @@ msgstr "_Ava..."
 msgid "Open a project"
 msgstr "Projekti avamine"
 
+msgid "Open _Recent"
+msgstr "Ava _viimati kasutatud"
+
 msgid "_Import"
 msgstr "_Impordi"
 
@@ -1703,7 +1718,6 @@ msgstr "_Programmist lähemalt"
 msgid "About this application"
 msgstr "Lähem teave selle rakenduse kohta"
 
-#. Note: these strings are leaked.
 #, c-format
 msgid "Switch to the view \"%s\""
 msgstr "Lülitumine vaatele \"%s\""
@@ -1721,7 +1735,7 @@ msgid "translator-credits"
 msgstr ""
 "Ilmar Kerm <ikerm@hot.ee>, 2002.\n"
 "Priit Laes <amd@tt.ee>, 2003.\n"
-"Ivar Smolin <okul linux ee>, 2005-2009."
+"Ivar Smolin <okul linux ee>, 2005–2010."
 
 msgid "A Project Management application for the GNOME desktop"
 msgstr "Projektihaldustarkvara GNOME töölauale"
@@ -1805,10 +1819,6 @@ msgstr ""
 msgid "Unnamed database project"
 msgstr "Nimetu andmebaasiprojekt"
 
-#, c-format
-msgid "Open '%s'"
-msgstr "'%s' avamine"
-
 msgid "Edit working time"
 msgstr "Muuda tööaega"
 
@@ -1858,8 +1868,8 @@ msgstr "Plaanija faili valimine"
 
 #, c-format
 msgid ""
-"The filename extension of this file isn't the planner usual file extension (%"
-"s) Do you want to continue?"
+"The filename extension of this file isn't the planner usual file extension "
+"(%s) Do you want to continue?"
 msgstr ""
 "Selle faili nime laiend pole Plaanija tavapärane laiend (%s). Kas soovid "
 "jätkata?"
