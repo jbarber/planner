@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: planner\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-17 12:01+0100\n"
-"PO-Revision-Date: 2010-01-17 12:02+0100\n"
+"POT-Creation-Date: 2010-09-12 19:59+0200\n"
+"PO-Revision-Date: 2010-09-12 19:59+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
@@ -393,7 +393,7 @@ msgstr ""
 "På fast datum"
 
 #: ../data/glade/task-date-widget.glade.h:4
-#: ../src/planner-cell-renderer-date.c:182
+#: ../src/planner-cell-renderer-date.c:167
 #: ../src/planner-project-properties.c:747
 msgid "Cancel"
 msgstr "Avbryt"
@@ -403,17 +403,17 @@ msgstr "Avbryt"
 #. I18n: the verb "schedule" here.
 #: ../data/glade/task-date-widget.glade.h:6
 #: ../data/glade/task-dialog.glade.h:11
-#: ../src/planner-cell-renderer-date.c:154
+#: ../src/planner-cell-renderer-date.c:139
 msgid "Schedule:"
 msgstr "Schemalägg:"
 
 #: ../data/glade/task-date-widget.glade.h:7
-#: ../src/planner-cell-renderer-date.c:189
+#: ../src/planner-cell-renderer-date.c:174
 msgid "Select"
 msgstr "Välj"
 
 #: ../data/glade/task-date-widget.glade.h:8
-#: ../src/planner-cell-renderer-date.c:176
+#: ../src/planner-cell-renderer-date.c:161
 #: ../src/planner-project-properties.c:740
 msgid "Today"
 msgstr "Idag"
@@ -874,16 +874,16 @@ msgstr "Ta bort kalender"
 msgid "Add new calendar"
 msgstr "Skapa ny kalender"
 
-#: ../src/planner-cell-renderer-date.c:161
+#: ../src/planner-cell-renderer-date.c:146
 #: ../src/planner-task-dialog.c:1491
 msgid "As soon as possible"
 msgstr "Så tidigt som möjligt"
 
-#: ../src/planner-cell-renderer-date.c:162
+#: ../src/planner-cell-renderer-date.c:147
 msgid "No earlier than"
 msgstr "Inte tidigare än"
 
-#: ../src/planner-cell-renderer-date.c:163
+#: ../src/planner-cell-renderer-date.c:148
 msgid "On fixed date"
 msgstr "På fast datum"
 
@@ -956,19 +956,19 @@ msgstr "%H.%M"
 msgid "Edit default week"
 msgstr "Redigera standardvecka"
 
-#: ../src/planner-eds-plugin.c:167
+#: ../src/planner-eds-plugin.c:155
 msgid "EDS"
 msgstr "EDS"
 
-#: ../src/planner-eds-plugin.c:168
+#: ../src/planner-eds-plugin.c:156
 msgid "Import resources from Evolution Data Server"
 msgstr "Importera resurser från Evolution dataserver"
 
-#: ../src/planner-eds-plugin.c:396
+#: ../src/planner-eds-plugin.c:384
 #: ../src/planner-gantt-print.c:191
 #: ../src/planner-gantt-view.c:621
 #: ../src/planner-group-dialog.c:822
-#: ../src/planner-property-dialog.c:485
+#: ../src/planner-property-dialog.c:475
 #: ../src/planner-resource-view.c:1211
 #: ../src/planner-task-dialog.c:2616
 #: ../src/planner-task-dialog.c:2690
@@ -976,36 +976,36 @@ msgstr "Importera resurser från Evolution dataserver"
 msgid "Name"
 msgstr "Namn"
 
-#: ../src/planner-eds-plugin.c:416
+#: ../src/planner-eds-plugin.c:404
 #: ../src/planner-resource-view.c:1327
 msgid "Email"
 msgstr "E-post"
 
-#: ../src/planner-eds-plugin.c:437
+#: ../src/planner-eds-plugin.c:425
 msgid "Import"
 msgstr "Importera"
 
-#: ../src/planner-eds-plugin.c:447
+#: ../src/planner-eds-plugin.c:435
 msgid "Photo"
 msgstr "Foto"
 
-#: ../src/planner-eds-plugin.c:676
+#: ../src/planner-eds-plugin.c:664
 msgid "Imported from Evolution Data Server"
 msgstr "Importerad från Evolution dataserver"
 
-#: ../src/planner-eds-plugin.c:677
+#: ../src/planner-eds-plugin.c:665
 msgid "Updated from Evolution Data Server"
 msgstr "Uppdaterad från Evolution dataserver"
 
-#: ../src/planner-eds-plugin.c:862
+#: ../src/planner-eds-plugin.c:850
 msgid "Query cancelled."
 msgstr "Förfrågan avbruten."
 
-#: ../src/planner-eds-plugin.c:923
+#: ../src/planner-eds-plugin.c:911
 msgid "Evolution Data Server UID"
 msgstr "Evolution dataserver UID"
 
-#: ../src/planner-eds-plugin.c:924
+#: ../src/planner-eds-plugin.c:912
 msgid "Identifier used by Evolution Data Server for resources"
 msgstr "Identifierare använd av Evolution dataserver för resurser"
 
@@ -1144,7 +1144,7 @@ msgstr "Arbete"
 #: ../src/planner-gantt-row.c:779
 #: ../src/planner-html-plugin.c:124
 #: ../src/planner-task-tree.c:1601
-#: ../src/planner-window.c:1883
+#: ../src/planner-window.c:1868
 msgid "Unnamed"
 msgstr "Namnlös"
 
@@ -1286,7 +1286,7 @@ msgid "Zoom To _Fit"
 msgstr "Zooma _hela"
 
 #: ../src/planner-gantt-view.c:175
-#: ../src/planner-usage-view.c:116
+#: ../src/planner-usage-view.c:115
 msgid "Zoom to fit the entire project"
 msgstr "Zooma så att hela projektet passar"
 
@@ -1295,8 +1295,8 @@ msgid "_Zoom In"
 msgstr "_Zooma in"
 
 #: ../src/planner-gantt-view.c:178
+#: ../src/planner-usage-view.c:111
 #: ../src/planner-usage-view.c:112
-#: ../src/planner-usage-view.c:113
 msgid "Zoom in"
 msgstr "Zooma in"
 
@@ -1305,22 +1305,22 @@ msgid "Zoom _Out"
 msgstr "Zooma _ut"
 
 #: ../src/planner-gantt-view.c:181
+#: ../src/planner-usage-view.c:108
 #: ../src/planner-usage-view.c:109
-#: ../src/planner-usage-view.c:110
 msgid "Zoom out"
 msgstr "Zooma ut"
 
 #: ../src/planner-gantt-view.c:183
 #: ../src/planner-resource-view.c:254
 #: ../src/planner-task-view.c:158
-#: ../src/planner-usage-view.c:118
+#: ../src/planner-usage-view.c:117
 msgid "Edit _Visible Columns"
 msgstr "Redigera _synliga kolumner"
 
 #: ../src/planner-gantt-view.c:184
 #: ../src/planner-resource-view.c:255
 #: ../src/planner-task-view.c:159
-#: ../src/planner-usage-view.c:119
+#: ../src/planner-usage-view.c:118
 msgid "Edit visible columns"
 msgstr "Redigera synliga kolumner"
 
@@ -1448,23 +1448,41 @@ msgid "Show result in browser"
 msgstr "Visa resultatet i webbläsare"
 
 #: ../src/planner-html-plugin.c:172
-#: ../src/planner-window.c:1598
+#: ../src/planner-window.c:1583
 #: ../src/planner-xml-planner-plugin.c:124
 #, c-format
 msgid "File \"%s\" exists, do you want to overwrite it?"
 msgstr "Filen \"%s\" finns redan, vill du skriva över den?"
 
-#: ../src/planner-main.c:56
+#: ../src/planner-main.c:39
 msgid "Create the initial window with the given geometry."
 msgstr "Skapa det första fönstret med den angivna geometrin."
 
-#: ../src/planner-main.c:56
+#: ../src/planner-main.c:39
 msgid "GEOMETRY"
 msgstr "GEOMETRI"
 
-#: ../src/planner-main.c:74
-msgid "[FILE...]"
-msgstr "[FIL...]"
+#: ../src/planner-main.c:40
+msgid "FILES"
+msgstr "FILER"
+
+#: ../src/planner-main.c:63
+msgid "- Planner project management"
+msgstr "- Planner projekthantering"
+
+#: ../src/planner-main.c:67
+#, c-format
+msgid ""
+"%s\n"
+"Run '%s --help' to see a full list of available command line options.\n"
+msgstr ""
+"%s\n"
+"Kör \"%s --help\" för att se en komplett lista över tillgängliga kommandoradsflaggor.\n"
+
+#: ../src/planner-main.c:88
+#, c-format
+msgid "Invalid geometry string \"%s\"\n"
+msgstr "Ogiltig geometristräng \"%s\"\n"
 
 #: ../src/planner-msp-plugin.c:49
 msgid "MS Project XML..."
@@ -1570,12 +1588,12 @@ msgid "Value"
 msgstr "Värde"
 
 #: ../src/planner-project-properties.c:1391
-#: ../src/planner-property-dialog.c:333
+#: ../src/planner-property-dialog.c:323
 msgid "The name of the custom property needs to start with a letter."
 msgstr "Egenskapsnamnet måste börja med en bokstav."
 
 #: ../src/planner-project-properties.c:1462
-#: ../src/planner-property-dialog.c:403
+#: ../src/planner-property-dialog.c:393
 #, c-format
 msgid "Do you really want to remove the property '%s' from the project?"
 msgstr "Vill du verkligen ta bort egenskaper \"%s\" från projektet?"
@@ -1600,25 +1618,25 @@ msgstr "Ta bort projektegenskap"
 msgid "Edit project property value"
 msgstr "Redigera projektegenskapsvärde"
 
-#: ../src/planner-property-dialog.c:502
+#: ../src/planner-property-dialog.c:492
 msgid "Label"
 msgstr "Etikett"
 
-#: ../src/planner-property-dialog.c:514
+#: ../src/planner-property-dialog.c:504
 #: ../src/planner-resource-view.c:1264
 #: ../src/planner-task-dialog.c:2722
 msgid "Type"
 msgstr "Typ"
 
-#: ../src/planner-property-dialog.c:671
+#: ../src/planner-property-dialog.c:661
 msgid "Add property"
 msgstr "Lägg till egenskap"
 
-#: ../src/planner-property-dialog.c:816
+#: ../src/planner-property-dialog.c:806
 msgid "Remove property"
 msgstr "Ta bort egenskap"
 
-#: ../src/planner-property-dialog.c:909
+#: ../src/planner-property-dialog.c:899
 msgid "Edit property label"
 msgstr "Redigera egenskapsetikett"
 
@@ -1986,27 +2004,27 @@ msgstr "Fördröjning"
 msgid "Edit task properties"
 msgstr "Redigera aktivitetsegenskaper"
 
-#: ../src/planner-task-popup.c:54
+#: ../src/planner-task-popup.c:52
 msgid "/_Insert task"
 msgstr "/_Infoga aktivitet"
 
-#: ../src/planner-task-popup.c:57
+#: ../src/planner-task-popup.c:55
 msgid "/Insert _subtask"
 msgstr "/Infoga _underaktivitet"
 
-#: ../src/planner-task-popup.c:60
+#: ../src/planner-task-popup.c:58
 msgid "/_Remove task"
 msgstr "/_Ta bort aktivitet"
 
-#: ../src/planner-task-popup.c:65
+#: ../src/planner-task-popup.c:63
 msgid "/_Unlink task"
 msgstr "_Avlänka aktivitet"
 
-#: ../src/planner-task-popup.c:70
+#: ../src/planner-task-popup.c:68
 msgid "/Assign _resources..."
 msgstr "/_Tilldela resurser..."
 
-#: ../src/planner-task-popup.c:73
+#: ../src/planner-task-popup.c:71
 #: ../src/planner-usage-tree.c:105
 msgid "/_Edit task..."
 msgstr "/_Redigera aktivitet..."
@@ -2136,14 +2154,14 @@ msgstr ""
 "\n"
 "Aktivitet"
 
-#: ../src/planner-usage-view.c:115
+#: ../src/planner-usage-view.c:114
 msgid "Zoom to fit"
 msgstr "Zooma hela"
 
 #. i18n: Label used for the sidebar. Please try to make it short and use
 #. * a linebreak if necessary/possible.
 #.
-#: ../src/planner-usage-view.c:258
+#: ../src/planner-usage-view.c:257
 msgid ""
 "Resource\n"
 "Usage"
@@ -2151,11 +2169,11 @@ msgstr ""
 "Resurs-\n"
 "utnyttjande"
 
-#: ../src/planner-usage-view.c:264
+#: ../src/planner-usage-view.c:263
 msgid "Resource _Usage"
 msgstr "Resurs_utnyttjande"
 
-#: ../src/planner-usage-view.c:375
+#: ../src/planner-usage-view.c:374
 msgid "Edit Resource Usage Columns"
 msgstr "Redigera resursanvändningskolumner"
 
@@ -2188,7 +2206,7 @@ msgid "_Import"
 msgstr "_Importera"
 
 #: ../src/planner-window.c:238
-#: ../src/planner-window.c:1467
+#: ../src/planner-window.c:1452
 msgid "_Save"
 msgstr "_Spara"
 
@@ -2336,8 +2354,8 @@ msgstr "Planner-filer"
 #. I18n: Translators, list your names here, newline separated if there
 #. * are more than one, to appear in the about box.
 #.
-#: ../src/planner-window.c:1224
-#: ../src/planner-window.c:1246
+#: ../src/planner-window.c:1209
+#: ../src/planner-window.c:1231
 msgid "translator-credits"
 msgstr ""
 "Daniel Nylander\n"
@@ -2345,56 +2363,56 @@ msgstr ""
 "Richard Hult\n"
 "\n"
 "Skicka synpunkter på översättningen till\n"
-"tp-sv@listor.tp-sv.se"
+"<tp-sv@listor.tp-sv.se>."
 
-#: ../src/planner-window.c:1241
+#: ../src/planner-window.c:1226
 msgid "A Project Management application for the GNOME desktop"
 msgstr "Ett projekthanteringsprogram för GNOME-skrivbordet"
 
-#: ../src/planner-window.c:1248
+#: ../src/planner-window.c:1233
 msgid "The Planner Homepage"
 msgstr "Planners hemsida"
 
-#: ../src/planner-window.c:1400
+#: ../src/planner-window.c:1385
 msgid "If you don't save, changes made the last minute will be discarded."
 msgstr "Om du inte sparar kommer ändringarna gjorda den senaste minuten att gå förlorade."
 
-#: ../src/planner-window.c:1406
+#: ../src/planner-window.c:1391
 #, c-format
 msgid "If you don't save, changes made the last %d minute will be discarded."
 msgid_plural "If you don't save, changes made the last %d minutes will be discarded."
 msgstr[0] "Om du inte sparar kommer ändringarna gjorda den senaste minuten att gå förlorade."
 msgstr[1] "Om du inte sparar kommer ändringarna gjorda de senaste %d minuterna att gå förlorade."
 
-#: ../src/planner-window.c:1414
+#: ../src/planner-window.c:1399
 msgid "If you don't save, changes made the last hour will be discarded."
 msgstr "Om du inte sparar kommer ändringarna gjorda den senaste timmen att gå förlorade."
 
-#: ../src/planner-window.c:1419
+#: ../src/planner-window.c:1404
 #, c-format
 msgid "If you don't save, changes made the last %d hour will be discarded."
 msgid_plural "If you don't save, changes made the last %d hours will be discarded."
 msgstr[0] "Om du inte sparar kommer ändringarna gjorda den senaste timmen att gå förlorade."
 msgstr[1] "Om du inte sparar kommer ändringarna gjorda de senaste %d timmarna att gå förlorade."
 
-#: ../src/planner-window.c:1429
+#: ../src/planner-window.c:1414
 #, c-format
 msgid "Save changes to document '%s' before closing?"
 msgstr "Spara ändringarna i dokumentet \"%s\" innan det stängs?"
 
-#: ../src/planner-window.c:1454
+#: ../src/planner-window.c:1439
 msgid "C_lose without saving"
 msgstr "S_täng utan att spara"
 
-#: ../src/planner-window.c:1460
+#: ../src/planner-window.c:1445
 msgid "_Cancel"
 msgstr "_Avbryt"
 
-#: ../src/planner-window.c:1560
+#: ../src/planner-window.c:1545
 msgid "Save a File"
 msgstr "Spara en fil"
 
-#: ../src/planner-window.c:1840
+#: ../src/planner-window.c:1825
 msgid ""
 "You have opened a file that was saved with an old version of Planner.\n"
 "\n"
@@ -2413,7 +2431,7 @@ msgstr ""
 "När du gjort det, kan du ta bort alla restriktioner genom att välja \"Återställ alla restriktioner\" i \"Redigera\"-menyn."
 
 #. Hack.
-#: ../src/planner-window.c:1875
+#: ../src/planner-window.c:1860
 msgid "Unnamed database project"
 msgstr "Namnlöst databasprojekt"
 
@@ -2433,53 +2451,55 @@ msgstr "Exportera projekt till en fil som passar Planner 0.11"
 msgid "Export"
 msgstr "Exportera"
 
-#: ../eds-backend/e-cal-backend-planner.c:289
+#: ../eds-backend/e-cal-backend-planner.c:288
 msgid "EDS UID"
 msgstr "EDS UID"
 
-#: ../eds-backend/e-cal-backend-planner.c:290
+#: ../eds-backend/e-cal-backend-planner.c:289
 msgid "Identifier used by Evolution Data Server for tasks"
 msgstr "Identifierare använd av Evolution dataserver för aktiviteter"
 
-#: ../eds-backend/e-cal-backend-planner.c:299
+#: ../eds-backend/e-cal-backend-planner.c:298
 msgid "EDS Categories"
 msgstr "EDS-kategorier"
 
-#: ../eds-backend/e-cal-backend-planner.c:300
+#: ../eds-backend/e-cal-backend-planner.c:299
 msgid "Categories for a task used by Evolution Data Server"
 msgstr "Kategorier för en aktivitet använd av Evolution dataserver"
 
-#: ../eds-backend/e-cal-backend-planner.c:309
+#: ../eds-backend/e-cal-backend-planner.c:308
 msgid "EDS Classification"
 msgstr "EDS-klassificering"
 
-#: ../eds-backend/e-cal-backend-planner.c:310
+#: ../eds-backend/e-cal-backend-planner.c:309
 msgid "Task access classification used by Evolution Data Server"
 msgstr "Aktivitetsåtkomstklassificering använd av Evolution dataserver"
 
-#: ../eds-backend/e-cal-backend-planner.c:319
+#: ../eds-backend/e-cal-backend-planner.c:318
 msgid "EDS URL"
 msgstr "EDS URL"
 
-#: ../eds-backend/e-cal-backend-planner.c:320
+#: ../eds-backend/e-cal-backend-planner.c:319
 msgid "URL for a Task used by Evolution Data Server"
 msgstr "URL för en aktivitet använd av Evolution dataserver"
 
-#: ../eds-backend/e-cal-backend-planner.c:829
+#: ../eds-backend/e-cal-backend-planner.c:828
 msgid "Invalid server URI"
 msgstr "Ogiltig server-URI"
 
 #. book_target = (EABConfigTargetSource *) data->target;
 #. source = book_target->source;
-#: ../eds-backend/planner-source/planner-source.c:125
+#: ../eds-backend/planner-source/planner-source.c:120
 msgid "Select planner file"
 msgstr "Välj Planner-fil"
 
-#: ../eds-backend/planner-source/planner-source.c:157
+#: ../eds-backend/planner-source/planner-source.c:152
 #, c-format
 msgid "The filename extension of this file isn't the planner usual file extension (%s) Do you want to continue?"
 msgstr "Filnamnsändelsen för denna fil är inte en vanlig filändelse i Planner (%s). Vill du fortsätta?"
 
+#~ msgid "[FILE...]"
+#~ msgstr "[FIL...]"
 #~ msgid " (invalid Unicode)"
 #~ msgstr " (ogiltig Unicode)"
 #~ msgid "Open '%s'"
