@@ -63,7 +63,7 @@ mrp_file_module_load_all (MrpApplication *app)
 
 	if (dir == NULL) {
 		g_free (path);
-		return;
+		return NULL;
 	}
 
 	while ((name = g_dir_read_name (dir)) != NULL) {
