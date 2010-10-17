@@ -51,7 +51,10 @@ gchar *
 mrp_paths_get_glade_dir (const gchar *filename)
 {
 	if (!glade_dir) {
-		glade_dir = g_win32_get_package_installation_subdirectory (NULL, NULL, GLADEDIR);
+		gchar *module_dir;
+		module_dir = g_win32_get_package_installation_directory_of_module (NULL);
+		glade_dir = g_build_filename (module_dir, GLADEDIR);
+		g_free (module_dir);
 	}
 
 	return g_build_filename (glade_dir, filename, NULL);
@@ -61,7 +64,10 @@ gchar *
 mrp_paths_get_image_dir (const gchar *filename)
 {
 	if (!image_dir) {
-		image_dir = g_win32_get_package_installation_subdirectory (NULL, NULL, IMAGEDIR);
+		gchar *module_dir;
+		module_dir = g_win32_get_package_installation_directory_of_module (NULL);
+		image_dir = g_build_filename (module_dir, IMAGEDIR);
+		g_free (module_dir);
 	}
 
 	return g_build_filename (image_dir, filename, NULL);
@@ -71,7 +77,10 @@ gchar *
 mrp_paths_get_plugin_dir (const gchar *filename)
 {
 	if (!plugin_dir) {
-		plugin_dir = g_win32_get_package_installation_subdirectory (NULL, NULL, PLUGINDIR);
+		gchar *module_dir;
+		module_dir = g_win32_get_package_installation_directory_of_module (NULL);
+		plugin_dir = g_build_filename (module_dir, PLUGINDIR);
+		g_free (module_dir);
 	}
 
 	return g_build_filename (plugin_dir, filename, NULL);
@@ -81,7 +90,10 @@ gchar *
 mrp_paths_get_dtd_dir (const gchar *filename)
 {
 	if (!dtd_dir) {
-		dtd_dir = g_win32_get_package_installation_subdirectory (NULL, NULL, DTDDIR);
+		gchar *module_dir;
+		module_dir = g_win32_get_package_installation_directory_of_module (NULL);
+		dtd_dir = g_build_filename (module_dir, DTDDIR);
+		g_free (module_dir);
 	}
 
 	return g_build_filename (dtd_dir, filename, NULL);
@@ -91,7 +103,10 @@ gchar *
 mrp_paths_get_stylesheet_dir (const gchar *filename)
 {
 	if (!stylesheet_dir) {
-		stylesheet_dir = g_win32_get_package_installation_subdirectory (NULL, NULL, STYLESHEETDIR);
+		gchar *module_dir;
+		module_dir = g_win32_get_package_installation_directory_of_module (NULL);
+		stylesheet_dir = g_build_filename (module_dir, STYLESHEETDIR);
+		g_free (module_dir);
 	}
 
 	return g_build_filename (stylesheet_dir, filename, NULL);
@@ -101,7 +116,10 @@ gchar *
 mrp_paths_get_ui_dir (const gchar *filename)
 {
 	if (!ui_dir) {
-		ui_dir = g_win32_get_package_installation_subdirectory (NULL, NULL, UIDIR);
+		gchar *module_dir;
+		module_dir = g_win32_get_package_installation_directory_of_module (NULL);
+		ui_dir = g_build_filename (module_dir, UIDIR);
+		g_free (module_dir);
 	}
 
 	return g_build_filename (ui_dir, filename, NULL);
@@ -111,7 +129,10 @@ gchar *
 mrp_paths_get_storagemodule_dir (const gchar *filename)
 {
 	if (!storagemodule_dir) {
-		storagemodule_dir = g_win32_get_package_installation_subdirectory (NULL, NULL, STORAGEMODULEDIR);
+		gchar *module_dir;
+		module_dir = g_win32_get_package_installation_directory_of_module (NULL);
+		storagemodule_dir = g_build_filename (module_dir, STORAGEMODULEDIR);
+		g_free (module_dir);
 	}
 
 	return g_build_filename (storagemodule_dir, filename, NULL);
@@ -121,7 +142,10 @@ gchar *
 mrp_paths_get_file_modules_dir (const gchar *filename)
 {
 	if (!file_modules_dir) {
-		file_modules_dir = g_win32_get_package_installation_subdirectory (NULL, NULL, FILEMODULEDIR);
+		gchar *module_dir;
+		module_dir = g_win32_get_package_installation_directory_of_module (NULL);
+		file_modules_dir = g_build_filename (module_dir, FILEMODULEDIR);
+		g_free (module_dir);
 	}
 
 	return g_build_filename (file_modules_dir, filename, NULL);
@@ -131,7 +155,10 @@ gchar *
 mrp_paths_get_sql_dir (void)
 {
 	if (!sql_dir) {
-		sql_dir = g_win32_get_package_installation_subdirectory (NULL, NULL, SQLDIR);
+		gchar *module_dir;
+		module_dir = g_win32_get_package_installation_directory_of_module (NULL);
+		sql_dir = g_build_filename (module_dir, SQLDIR);
+		g_free (module_dir);
 	}
 
 	return sql_dir;
@@ -141,7 +168,10 @@ gchar *
 mrp_paths_get_locale_dir (void)
 {
 	if (!locale_dir) {
-		locale_dir = g_win32_get_package_installation_subdirectory (NULL, NULL, GNOMELOCALEDIR);
+		gchar *module_dir;
+		module_dir = g_win32_get_package_installation_directory_of_module (NULL);
+		locale_dir = g_build_filename (module_dir, GNOMELOCALEDIR);
+		g_free (module_dir);
 	}
 
 	return locale_dir;

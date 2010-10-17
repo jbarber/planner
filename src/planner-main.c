@@ -75,7 +75,10 @@ main (int argc, char **argv)
 	g_free (filename);
 
 #ifdef WIN32
-	filename = g_win32_get_package_installation_subdirectory (NULL, NULL, "share/icons");
+	gchar *module_dir;
+	module_dir = g_win32_get_package_installation_directory_of_module (NULL);
+	filename = g_build_filename (module_dir, "share/icons");
+	g_free (module_dir);
 	gtk_icon_theme_append_search_path (gtk_icon_theme_get_default(),
 					   filename);
 	g_free (filename);
