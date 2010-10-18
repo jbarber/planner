@@ -124,6 +124,8 @@ G_DEFINE_TYPE (PlannerUsageView, planner_usage_view, PLANNER_TYPE_VIEW);
 static gboolean
 usage_view_chart_scroll_event (GtkWidget * gki, GdkEventScroll * event, PlannerView *view)
 {
+	gboolean dontpropagate = FALSE;
+
 	gboolean can_in, can_out;
 	PlannerUsageViewPriv *priv;
 
@@ -132,11 +134,13 @@ usage_view_chart_scroll_event (GtkWidget * gki, GdkEventScroll * event, PlannerV
 		planner_usage_chart_can_zoom (priv->chart, &can_in, &can_out);
 		switch (event->direction) {
       			case GDK_SCROLL_UP: {
+				dontpropagate = TRUE;
 				if (can_in)
 					usage_view_zoom_in_cb  (NULL, view);
 	        		break;
 			}
 			case GDK_SCROLL_DOWN:
+				dontpropagate = TRUE;
 				if (can_out)
 					usage_view_zoom_out_cb  (NULL, view);
 			        break;
@@ -145,7 +149,7 @@ usage_view_chart_scroll_event (GtkWidget * gki, GdkEventScroll * event, PlannerV
 		}
     	}
 
-	return TRUE;
+	return dontpropagate;
 }
 
 
