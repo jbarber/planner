@@ -48,7 +48,7 @@ planner.hhp: planner.xml
 		xsltproc --noout --catalogs \
 			--stringparam htmlhelp.chm planner.chm \
 			--stringparam htmlhelp.hhp planner.hhp \
-			--nonet $(PREFIX)/src/docbook-xsl-1.74.3/htmlhelp/htmlhelp.xsl planner.xml
+			--nonet $(PREFIX)/src/docbook-xsl-1.76.0/htmlhelp/htmlhelp.xsl planner.xml
 
 
 ##

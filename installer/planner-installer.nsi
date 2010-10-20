@@ -11,6 +11,11 @@ Var name
 Var LANG_IS_SET
 Var STARTUP_RUN_KEY
 
+var oldgtk_mode	; "public", "private" or "none" (used by uninstall of old version)
+var gtk_mode	; "public", "private" or "none"
+var gtk_tmp	; temporary variable
+var gtk_translations	; whether or not to install gtk translations (copied from user selection of Planner translations)
+
 ;--------------------------------
 ;Configuration
 
@@ -40,6 +45,7 @@ SetDateSave on
 !define PLANNER_STARTUP_RUN_KEY			"SOFTWARE\Microsoft\Windows\CurrentVersion\Run"
 !define PLANNER_UNINST_EXE			"planner-uninst.exe"
 !define PLANNER_REG_LANG			"Installer Language"
+!define GTK_INSTALLER_EXE			"gtk2-runtime-2.22.0-2010-10-01-ash.exe"
 
 ;--------------------------------
 ;Modern UI Configuration
@@ -65,9 +71,10 @@ SetDateSave on
 
 ;--------------------------------
 ;Pages
-  
+
   !insertmacro MUI_PAGE_WELCOME
   !insertmacro MUI_PAGE_LICENSE			"${STAGING_DIR}\COPYING"
+  !define MUI_PAGE_CUSTOMFUNCTION_LEAVE on_components_page_leave
   !insertmacro MUI_PAGE_COMPONENTS
 
   ; Planner install dir page
@@ -83,7 +90,7 @@ SetDateSave on
 
 ;--------------------------------
 ;Languages & Translations
- 
+
   ;; English goes first because its the default. The rest are
   ;; in alphabetical order (at least the strings actually displayed
   ;; will be).
@@ -100,7 +107,7 @@ SetDateSave on
   ; Only need this if using bzip2 compression
 
   !insertmacro MUI_RESERVEFILE_INSTALLOPTIONS
-  !insertmacro MUI_RESERVEFILE_LANGDLL 
+  !insertmacro MUI_RESERVEFILE_LANGDLL
   ReserveFile "${NSISDIR}\Plugins\UserInfo.dll"
 
 
@@ -132,20 +139,29 @@ Section -SecUninstallOldPlanner
   StrCmp $R0 "HKCU" planner_hkcu done
 
   planner_hkcu:
+      ReadRegStr $oldgtk_mode HKCU ${PLANNER_REG_KEY} "GtkInstalledMode"
       ReadRegStr $R1 HKCU ${PLANNER_REG_KEY} ""
       ReadRegStr $R2 HKCU ${PLANNER_REG_KEY} "Version"
       ReadRegStr $R3 HKCU "${PLANNER_UNINSTALL_KEY}" "UninstallString"
       Goto try_uninstall
 
   planner_hklm:
+      ReadRegStr $oldgtk_mode HKLM ${PLANNER_REG_KEY} "GtkInstalledMode"
       ReadRegStr $R1 HKLM ${PLANNER_REG_KEY} ""
       ReadRegStr $R2 HKLM ${PLANNER_REG_KEY} "Version"
       ReadRegStr $R3 HKLM "${PLANNER_UNINSTALL_KEY}" "UninstallString"
 
   ; If previous version exists .. remove
   try_uninstall:
+    StrCmp $oldgtk_mode "private" "" skip_gtk_remove
+      ; remove private GTK+, specify the same custom options are during installation
+      ExecWait "$INSTDIR\gtk2_runtime_uninst.exe /remove_config=yes /sideeffects=no /translations=yes /compatdlls=no /S"
+      ; _?=$INSTDIR
+      ; Delete "$INSTDIR\gtk2_runtime_uninst.exe"  ; If using _? flag, it won't get deleted automatically, do it manually.
+
+  skip_gtk_remove:
     StrCmp $R1 "" done
-      ; Version key started with 0.60a3. Prior versions can't be 
+      ; Version key started with 0.60a3. Prior versions can't be
       ; automaticlly uninstalled.
       StrCmp $R2 "" uninstall_problem
         ; Check if we have uninstall string..
@@ -171,7 +187,7 @@ Section -SecUninstallOldPlanner
         uninstall_problem:
 	  ; In this case just wipe out previous Planner install dir..
 	  ; We get here because versions 0.60a1 and 0.60a2 don't have versions set in the registry
-	  ; and versions 0.60 and lower did not correctly set the uninstall reg string 
+	  ; and versions 0.60 and lower did not correctly set the uninstall reg string
 	  ; (the string was set in quotes)
           IfSilent do_wipeout
           MessageBox MB_YESNO $(PLANNER_PROMPT_WIPEOUT) IDYES do_wipeout IDNO cancel_install
@@ -195,6 +211,8 @@ SectionEnd
 ;--------------------------------
 ;Planner Install Section
 
+var gtk_dll_abs_path
+
 Section $(PLANNER_SECTION_TITLE) SecPlanner
   SectionIn 1 RO
 
@@ -206,7 +224,14 @@ Section $(PLANNER_SECTION_TITLE) SecPlanner
   StrCmp $R0 "HKLM" planner_hklm planner_hkcu
 
   planner_hklm:
+    StrCmp $gtk_mode "private" skip_exe_PATH
+    ; set a special path for this exe, as GTK may not be in a global path.
+    ReadRegStr $gtk_dll_abs_path HKLM "SOFTWARE\GTK\2.0" "DllPath"
+    WriteRegStr HKLM "${HKLM_APP_PATHS_KEY}" "Path" "$gtk_dll_abs_path"
+
+  skip_exe_PATH:
     WriteRegStr HKLM "${HKLM_APP_PATHS_KEY}" "" "$INSTDIR\bin\planner.exe"
+    WriteRegStr HKLM ${PLANNER_REG_KEY} "GtkInstalledMode" "$gtk_mode"
     WriteRegStr HKLM ${PLANNER_REG_KEY} "" "$INSTDIR"
     WriteRegStr HKLM ${PLANNER_REG_KEY} "Version" "${PLANNER_VERSION}"
     WriteRegStr HKLM "${PLANNER_UNINSTALL_KEY}" "DisplayName" $(PLANNER_UNINSTALL_DESC)
@@ -216,6 +241,7 @@ Section $(PLANNER_SECTION_TITLE) SecPlanner
     Goto planner_install_files
 
   planner_hkcu:
+    WriteRegStr HKCU ${PLANNER_REG_KEY} "GtkInstalledMode" "$gtk_mode"
     WriteRegStr HKCU ${PLANNER_REG_KEY} "" "$INSTDIR"
     WriteRegStr HKCU ${PLANNER_REG_KEY} "Version" "${PLANNER_VERSION}"
     WriteRegStr HKCU "${PLANNER_UNINSTALL_KEY}" "DisplayName" $(PLANNER_UNINSTALL_DESC)
@@ -256,6 +282,37 @@ Section $(PLANNER_SECTION_TITLE) SecPlanner
   done:
 SectionEnd ; end of default Planner section
 
+;--------------------------------
+; GTK+ installation Sections
+
+; The SecGtkPrivate and SecGtkPublic sections are mutually exclusive.
+
+Section $(GTK_PRIVATE_SECTION_TITLE) SecGtkPrivate
+	SectionIn 1
+	SetShellVarContext all  ; use all user variables as opposed to current user
+	AddSize 12200  ; ~ size of unpacked gtk
+	SetOutPath "$INSTDIR"
+	File "${GTK_INSTALLER_EXE}"
+	; TODO: in the future, when we have translations for this program,
+	; make the GTK+ translations installation dependent on their installation status.
+	ExecWait '"${GTK_INSTALLER_EXE}" /sideeffects=no /translations=$gtk_translations /compatdlls=no /S /D=$INSTDIR'
+	Delete "$INSTDIR\${GTK_INSTALLER_EXE}"
+SectionEnd
+
+; disabled by default
+Section /o  $(GTK_PUBLIC_SECTION_TITLE) SecGtkPublic
+	SectionIn 1
+	SetShellVarContext all  ; use all user variables as opposed to current user
+	AddSize 12200  ; ~ size of unpacked gtk
+	SetOutPath "$INSTDIR"
+	File "${GTK_INSTALLER_EXE}"
+	ExecWait '"${GTK_INSTALLER_EXE}"'
+	Delete "$INSTDIR\${GTK_INSTALLER_EXE}"
+SectionEnd
+
+;--------------------------------
+; Translations section
+
 Section /o $(PLANNER_TRANSLATIONS_SECTION_TITLE) SecTranslations
   SetOverwrite on
   File /r ${STAGING_DIR}\*.mo
@@ -276,6 +333,7 @@ Section Uninstall
     ReadRegStr $R0 HKCU ${PLANNER_REG_KEY} ""
     StrCmp $R0 $INSTDIR 0 cant_uninstall
       ; HKCU install path matches our INSTDIR.. so uninstall
+      ReadRegStr $gtk_mode HKCU ${PLANNER_REG_KEY} "GtkInstalledMode"
       DeleteRegKey HKCU ${PLANNER_REG_KEY}
       DeleteRegKey HKCU "${PLANNER_UNINSTALL_KEY}"
       Goto cont_uninstall
@@ -284,6 +342,7 @@ Section Uninstall
     ReadRegStr $R0 HKLM ${PLANNER_REG_KEY} ""
     StrCmp $R0 $INSTDIR 0 try_hkcu
       ; HKLM install path matches our INSTDIR.. so uninstall
+      ReadRegStr $gtk_mode HKLM ${PLANNER_REG_KEY} "GtkInstalledMode"
       DeleteRegKey HKLM ${PLANNER_REG_KEY}
       DeleteRegKey HKLM "${PLANNER_UNINSTALL_KEY}"
       DeleteRegKey HKLM "${HKLM_APP_PATHS_KEY}"
@@ -291,6 +350,13 @@ Section Uninstall
       SetShellVarContext "all"
 
   cont_uninstall:
+    StrCmp $gtk_mode "private" "" skip_gtk_remove
+      ; remove private GTK+, specify the same custom options are during installation
+      ExecWait "$INSTDIR\gtk2_runtime_uninst.exe /remove_config=yes /sideeffects=no /translations=yes /compatdlls=no /S"
+      ; _?=$INSTDIR
+      ; Delete "$INSTDIR\gtk2_runtime_uninst.exe"  ; If using _? flag, it won't get deleted automatically, do it manually.
+
+  skip_gtk_remove:
     ; The WinPrefs plugin may have left this behind..
     DeleteRegValue HKCU "${PLANNER_STARTUP_RUN_KEY}" "Planner"
     DeleteRegValue HKLM "${PLANNER_STARTUP_RUN_KEY}" "Planner"
@@ -337,6 +403,10 @@ SectionEnd ; end of uninstall section
 	$(PLANNER_SECTION_DESCRIPTION)
   !insertmacro MUI_DESCRIPTION_TEXT ${SecTranslations} \
 	$(PLANNER_TRANSLATIONS_SECTION_DESCRIPTION)
+  !insertmacro MUI_DESCRIPTION_TEXT ${SecGtkPrivate} \
+	$(GTK_PRIVATE_SECTION_DESCRIPTION)
+  !insertmacro MUI_DESCRIPTION_TEXT ${SecGtkPublic} \
+	$(GTK_PUBLIC_SECTION_DESCRIPTION)
 
 !insertmacro MUI_FUNCTION_DESCRIPTION_END
 
@@ -560,6 +630,71 @@ Function .onInit
 
   instdir_done:
 
+  StrCpy $gtk_mode "private" ; default
+  StrCpy $gtk_translations "no" ; default
+
+FunctionEnd
+
+Function .onselchange
+	; Remember which gtk section was selected.
+	; Deselect the other section.
+
+	; If it was private, we check if public is checked and uncheck private.
+
+	StrCmp $gtk_mode "private" check_public  ; old selection
+	StrCmp $gtk_mode "public" check_private  ; old selection
+	goto check_exit
+
+	check_public:
+		SectionGetFlags ${SecGtkPublic} $gtk_tmp  ; see if it's checked
+		IntOp $gtk_tmp $gtk_tmp & ${SF_SELECTED}
+		IntCmp $gtk_tmp ${SF_SELECTED} "" check_exit check_exit
+		SectionGetFlags ${SecGtkPrivate} $gtk_tmp  ; unselect the other one
+		IntOp $gtk_tmp $gtk_tmp & ${SECTION_OFF}
+		SectionSetFlags ${SecGtkPrivate} $gtk_tmp
+		goto check_exit
+
+	check_private:
+		SectionGetFlags ${SecGtkPrivate} $gtk_tmp  ; see if it's checked
+		IntOp $gtk_tmp $gtk_tmp & ${SF_SELECTED}
+		IntCmp $gtk_tmp ${SF_SELECTED} "" check_exit check_exit
+		SectionGetFlags ${SecGtkPublic} $gtk_tmp  ; unselect the other one
+		IntOp $gtk_tmp $gtk_tmp & ${SECTION_OFF}
+		SectionSetFlags ${SecGtkPublic} $gtk_tmp
+
+	check_exit:
+
+
+	; store the current mode
+	StrCpy $gtk_mode "none"
+
+	SectionGetFlags ${SecGtkPrivate} $gtk_tmp
+	IntOp $gtk_tmp $gtk_tmp & ${SF_SELECTED}
+	IntCmp $gtk_tmp ${SF_SELECTED} "" mode_end_private mode_end_private
+	StrCpy $gtk_mode "private"
+	mode_end_private:
+
+	SectionGetFlags ${SecGtkPublic} $gtk_tmp
+	IntOp $gtk_tmp $gtk_tmp & ${SF_SELECTED}
+	IntCmp $gtk_tmp ${SF_SELECTED} "" mode_end_public mode_end_public
+	StrCpy $gtk_mode "public"
+	mode_end_public:
+
+	; store whether translations were selected for Planner so we can reuse it during GTK+ installation
+	StrCpy $gtk_translations "no"
+	SectionGetFlags ${SecTranslations} $gtk_tmp
+	IntOp $gtk_tmp $gtk_tmp & ${SF_SELECTED}
+	IntCmp $gtk_tmp ${SF_SELECTED} "" mode_end_translations mode_end_translations
+	StrCpy $gtk_translations "yes"
+	mode_end_translations:
+
+	;MessageBox MB_ICONINFORMATION|MB_OK "gtk_mode: $gtk_mode" /SD IDOK
+FunctionEnd
+
+Function on_components_page_leave
+	StrCmp $gtk_mode "none" "" noabort
+		Call AskForGtk
+	noabort:
 FunctionEnd
 
 Function un.onInit
@@ -568,49 +703,49 @@ Function un.onInit
 
   ; Get stored language prefrence
   ReadRegStr $LANGUAGE HKCU ${PLANNER_REG_KEY} "${PLANNER_REG_LANG}"
-  
+
 FunctionEnd
 
 ; GetParameters
 ; input, none
 ; output, top of stack (replaces, with e.g. whatever)
 ; modifies no other variables.
- 
+
 Function GetParameters
- 
+
    Push $R0
    Push $R1
    Push $R2
    Push $R3
-   
+
    StrCpy $R2 1
    StrLen $R3 $CMDLINE
-   
+
    ;Check for quote or space
    StrCpy $R0 $CMDLINE $R2
    StrCmp $R0 '"' 0 +3
      StrCpy $R1 '"'
      Goto loop
    StrCpy $R1 " "
-   
+
    loop:
      IntOp $R2 $R2 + 1
      StrCpy $R0 $CMDLINE 1 $R2
      StrCmp $R0 $R1 get
      StrCmp $R2 $R3 get
      Goto loop
-   
+
    get:
      IntOp $R2 $R2 + 1
      StrCpy $R0 $CMDLINE 1 $R2
      StrCmp $R0 " " get
      StrCpy $R0 $CMDLINE "" $R2
-   
+
    Pop $R3
    Pop $R2
    Pop $R1
    Exch $R0
- 
+
 FunctionEnd
 
 ; StrStr
@@ -676,3 +811,29 @@ Function ParseParameters
   next:
 FunctionEnd
 
+; detect GTK installation (any of available versions)
+Function AskForGtk
+	SetShellVarContext all  ; use all user variables as opposed to current user
+	push $R0
+
+	ReadRegStr $R0 HKLM "SOFTWARE\GTK\2.0" "DllPath"
+	StrCmp $R0 "" no_gtk have_gtk
+
+	no_gtk:
+		MessageBox MB_OKCANCEL|MB_ICONEXCLAMATION \
+		"GTK2-Runtime is not installed. This product needs it to function properly.$\n\
+		Please install GTK2-Runtime from http://gtk-win.sf.net/ first.$\n$\n\
+		Click 'Cancel' to abort the installation \
+		or 'OK' to continue anyway." \
+		/SD IDOK IDOK have_gtk
+		;Abort  ; Abort has different meaning from onpage callbacks, so use Quit
+		Quit
+		goto end_gtk_check
+
+	have_gtk:
+		; do nothing
+
+	end_gtk_check:
+
+	pop $R0
+FunctionEnd

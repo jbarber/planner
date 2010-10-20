@@ -8,8 +8,6 @@
 
 # Compiler Options
 
-SUBSYTEM = -mwindows
-
 DLL_LD_FLAGS += -mms-bitfields -mno-cygwin -Wl,--enable-auto-image-base --no-undefined -Wl,--export-all -mwin32
 
 DEPS = libgnomecanvas-2.0,libglade-2.0
@@ -41,6 +39,7 @@ DEFINES = -DWIN32 \
 
 C_SRC = \
 	planner-marshal.c		\
+	dummy-canvas-item.c		\
 	eel-canvas-rect.c		\
 	planner-application.c		\
 	planner-assignment-model.c	\
@@ -82,6 +81,7 @@ C_SRC = \
 	planner-task-date-widget.c	\
 	planner-task-dialog.c		\
 	planner-task-input-dialog.c	\
+	planner-util.c			\
 	planner-view.c			\
 	planner-window.c		\
 	planner-working-time-dialog.c	\
@@ -156,7 +156,7 @@ OBJECTS_libpython_plugin_la = $(libpython_plugin_la_SOURCES:%.c=%.o)
 ## LIBRARIES
 ##
 
-LIBS = -L$(PREFIX)/lib -leggrecent `pkg-config --libs libgnomecanvas-2.0,libglade-2.0` -lplanner-1 -L../libplanner
+LIBS = -L$(PREFIX)/lib `pkg-config --libs libgnomecanvas-2.0,libglade-2.0` -lplanner-1 -L../libplanner
 
 ##
 ## RULES

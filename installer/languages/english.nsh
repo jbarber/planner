@@ -11,7 +11,6 @@
 ; Startup Checks
 !insertmacro PLANNER_MACRO_DEFINE_STRING INSTALLER_IS_RUNNING			"The installer is already running."
 !insertmacro PLANNER_MACRO_DEFINE_STRING PLANNER_IS_RUNNING			"An instance of Planner is currently running. Exit Planner and then try again."
-!insertmacro PLANNER_MACRO_DEFINE_STRING GTK_INSTALLER_NEEDED			"The GTK+ runtime environment is either missing or needs to be upgraded.$\rPlease install v${GTK_VERSION} or higher of the GTK+ runtime"
 
 ; License Page
 !insertmacro PLANNER_MACRO_DEFINE_STRING PLANNER_LICENSE_BUTTON			"Accept >"
@@ -22,6 +21,10 @@
 !insertmacro PLANNER_MACRO_DEFINE_STRING PLANNER_TRANSLATIONS_SECTION_TITLE	"Translations"
 !insertmacro PLANNER_MACRO_DEFINE_STRING PLANNER_SECTION_DESCRIPTION		"Core Planner files and dlls"
 !insertmacro PLANNER_MACRO_DEFINE_STRING PLANNER_TRANSLATIONS_SECTION_DESCRIPTION	"Additional languages"
+!insertmacro PLANNER_MACRO_DEFINE_STRING GTK_PRIVATE_SECTION_TITLE              "GTK+ (for this program only)"
+!insertmacro PLANNER_MACRO_DEFINE_STRING GTK_PRIVATE_SECTION_DESCRIPTION	"GTK+ libraries, installed in a location usable only by Planner."
+!insertmacro PLANNER_MACRO_DEFINE_STRING GTK_PUBLIC_SECTION_TITLE               "GTK+ (shared installation)"
+!insertmacro PLANNER_MACRO_DEFINE_STRING GTK_PUBLIC_SECTION_DESCRIPTION		"GTK+ libraries, installed system-wide and shareable with other programs."
 
 ; Installer Finish Page
 !insertmacro PLANNER_MACRO_DEFINE_STRING PLANNER_FINISH_VISIT_WEB_SITE		"Visit the Windows Planner Web Page"
