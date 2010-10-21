@@ -45,7 +45,7 @@ SetDateSave on
 !define PLANNER_STARTUP_RUN_KEY			"SOFTWARE\Microsoft\Windows\CurrentVersion\Run"
 !define PLANNER_UNINST_EXE			"planner-uninst.exe"
 !define PLANNER_REG_LANG			"Installer Language"
-!define GTK_INSTALLER_EXE			"gtk2-runtime-2.22.0-2010-10-01-ash.exe"
+!define GTK_INSTALLER_EXE			"gtk2-runtime-2.22.0-2010-10-21-ash.exe"
 
 ;--------------------------------
 ;Modern UI Configuration
