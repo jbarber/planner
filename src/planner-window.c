@@ -1158,7 +1158,7 @@ static void
 window_help_cb (GtkAction *action,
 		gpointer   data)
 {
-	planner_util_show_url (NULL, "ghelp:planner");
+	planner_util_show_help (NULL);
 }
 
 static  void

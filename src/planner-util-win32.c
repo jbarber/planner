@@ -18,31 +18,55 @@
  * Boston, MA 02111-1307, USA.
  */
 
-#include <config.h>
+#include <windows.h>
+#include <shellapi.h>
+#include <stdio.h>
 
 #include "planner-util.h"
 
 void
-planner_util_show_help (GtkWindow *parent)
-{
-	planner_util_show_url(parent, "ghelp:planner");
-}
-
-void
-planner_util_show_url (GtkWindow *parent, const gchar *url)
+planner_util_show_url (GtkWindow *parent,
+		       const gchar *url)
 {
 	GtkWidget *dialog;
-	GError    *error = NULL;
+	int res;
 
-	gtk_show_uri (NULL, url, gtk_get_current_event_time (), &error);
-	if (error != NULL) {
+	res = (int) ShellExecute (NULL, "open", url, NULL, NULL, SW_SHOWNORMAL);
+
+	if (res <= 32) {
 		dialog = gtk_message_dialog_new (parent,
 		                                 GTK_DIALOG_DESTROY_WITH_PARENT,
 		                                 GTK_MESSAGE_ERROR,
 		                                 GTK_BUTTONS_CLOSE,
-		                                 "%s", error->message);
+		                                 "Unable to open '%s'", url);
 		gtk_dialog_run (GTK_DIALOG (dialog));
 		gtk_widget_destroy (dialog);
-		g_error_free (error);
+	}
+}
+
+void
+planner_util_show_help (GtkWindow *parent)
+{
+	GtkWidget *dialog;
+	int    res;
+	gchar *path;
+	gchar *file;
+
+	// should use HtmlHelp but it is not part of MingW yet
+	path = g_win32_get_package_installation_subdirectory (NULL, NULL, ".");
+	file = g_build_filename (path, "planner.chm", NULL);
+
+	res = (int) ShellExecute (NULL, "open", file, NULL, NULL, SW_SHOWNORMAL);
+	g_free (file);
+	g_free (path);
+
+	if (res <= 32) {
+		dialog = gtk_message_dialog_new (parent,
+		                                 GTK_DIALOG_DESTROY_WITH_PARENT,
+		                                 GTK_MESSAGE_ERROR,
+		                                 GTK_BUTTONS_CLOSE,
+		                                 "Unable to open help file");
+		gtk_dialog_run (GTK_DIALOG (dialog));
+		gtk_widget_destroy (dialog);
 	}
 }

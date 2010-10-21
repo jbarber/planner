@@ -24,6 +24,7 @@
 #include <gtk/gtk.h>
 #include <glib.h>
 
+void planner_util_show_help (GtkWindow    *parent);
 void planner_util_show_url  (GtkWindow    *parent,
                              const gchar  *url);
 
