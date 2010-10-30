@@ -151,7 +151,14 @@ createinstaller:
 		mkdir -p $(INSTALLERTMP)/planner/$$(dirname $${file}); \
 		cp -r $(PREFIX)/$${file} $(INSTALLERTMP)/planner/$$(dirname $${file})/; \
 	done
-	/c/Program\ Files/NSIS/makensis -v3 -DPLANNER_VERSION=$(VERSION) -DSTAGING_DIR=.\\tmp\\planner installer/planner-installer.nsi
+	for MAKENSIS in \
+		/c/Program\ Files/NSIS/makensis \
+		/c/Program\ Files\ \(x86\)/NSIS/makensis; do \
+		if [ -e "$${MAKENSIS}" ]; then \
+			break; \
+		fi; \
+	done; \
+	"$${MAKENSIS}" -v3 -DPLANNER_VERSION=$(VERSION) -DSTAGING_DIR=.\\tmp\\planner installer/planner-installer.nsi
 
 install: install-recursive
 install-am:
