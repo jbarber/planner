@@ -12,12 +12,12 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: planner\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
-"product=planner&component=general\n"
-"POT-Creation-Date: 2010-06-06 15:31+0000\n"
-"PO-Revision-Date: 2010-06-28 20:33+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-01-03 22:57+0100\n"
+"PO-Revision-Date: 2010-12-27 10:17+0100\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
+"Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -696,12 +696,12 @@ msgstr "Číslo s pohyblivou řádovou čárkou"
 msgid "Date"
 msgstr "Datum"
 
-#: ../libplanner/mrp-property.c:375 ../src/planner-gantt-view.c:625
+#: ../libplanner/mrp-property.c:375 ../src/planner-gantt-view.c:628
 #: ../src/planner-task-view.c:371
 msgid "Duration"
 msgstr "Trvání"
 
-#: ../libplanner/mrp-property.c:377 ../src/planner-gantt-view.c:627
+#: ../libplanner/mrp-property.c:377 ../src/planner-gantt-view.c:630
 #: ../src/planner-resource-view.c:1354 ../src/planner-task-view.c:373
 msgid "Cost"
 msgstr "Cena"
@@ -784,23 +784,25 @@ msgstr ""
 
 #: ../libplanner/mrp-task.c:1081
 msgid "Start to Finish relation type cannot be combined with other relations."
-msgstr ""
+msgstr "Typ vztahu začátek do konce nelze kombinovat s ostatními vztahy."
 
 #: ../libplanner/mrp-task.c:1083
 msgid "Finish to Finish relation type cannot be combined with other relations."
-msgstr ""
+msgstr "Typ vztahu konec do konce nelze kombinovat s ostatními vztahy."
 
 #: ../libplanner/mrp-task.c:1100
 msgid ""
 "Start to Finish relation type cannot be combined with Start No Earlier Than "
 "constraint."
 msgstr ""
+"Typ vztahu začátek do konce nelze kombinovat s omezením Začátek ne dříve než."
 
 #: ../libplanner/mrp-task.c:1102
 msgid ""
 "Finish to Finish relation type cannot be combined with Start No Earlier Than "
 "constraint."
 msgstr ""
+"Typ vztahu konec do konce nelze kombinovat s omezením Začátek ne dříve než."
 
 #: ../libplanner/mrp-task.c:1126
 #, c-format
@@ -808,6 +810,8 @@ msgid ""
 "Start to Finish relation cannot be set. Predecessor starts on project start "
 "date."
 msgstr ""
+"Vztah začátek do konce nelze nastavit. Předchůdce začíná v den začátku "
+"projektu."
 
 #: ../libplanner/mrp-task-manager.c:2630
 #, c-format
@@ -821,7 +825,6 @@ msgstr "Nelze přesunout úlohu, protože by tím vznikla smyčka."
 
 #. Translators: Example output: October 9, 2006
 #: ../libplanner/mrp-xsl.c:93
-#, fuzzy
 msgid "%B %e, %Y"
 msgstr "%e. %b %Y"
 
@@ -965,10 +968,10 @@ msgstr "EDS"
 
 #: ../src/planner-eds-plugin.c:156
 msgid "Import resources from Evolution Data Server"
-msgstr "Importovat zdroje z Evolution Data Server"
+msgstr "Importovat zdroje z datového serveru Evolution"
 
 #: ../src/planner-eds-plugin.c:384 ../src/planner-gantt-print.c:191
-#: ../src/planner-gantt-view.c:621 ../src/planner-group-dialog.c:822
+#: ../src/planner-gantt-view.c:624 ../src/planner-group-dialog.c:822
 #: ../src/planner-property-dialog.c:475 ../src/planner-resource-view.c:1211
 #: ../src/planner-task-dialog.c:2616 ../src/planner-task-dialog.c:2690
 #: ../src/planner-task-view.c:367
@@ -989,11 +992,11 @@ msgstr "Foto"
 
 #: ../src/planner-eds-plugin.c:664
 msgid "Imported from Evolution Data Server"
-msgstr "Importováno z Evolution Data Server"
+msgstr "Importováno z datového serveru Evolution"
 
 #: ../src/planner-eds-plugin.c:665
 msgid "Updated from Evolution Data Server"
-msgstr "Aktualizováno z Evolution Data Server"
+msgstr "Aktualizováno z datového serveru Evolution"
 
 #: ../src/planner-eds-plugin.c:850
 msgid "Query cancelled."
@@ -1001,11 +1004,11 @@ msgstr "Dotaz zrušen."
 
 #: ../src/planner-eds-plugin.c:911
 msgid "Evolution Data Server UID"
-msgstr "UID Evolution Data Server"
+msgstr "UID datového serveru Evolution"
 
 #: ../src/planner-eds-plugin.c:912
 msgid "Identifier used by Evolution Data Server for resources"
-msgstr "Identifikátor zdrojů používaný v Evolution Data Server"
+msgstr "Identifikátor zdrojů používaný datovým serverem Evolution"
 
 #: ../src/planner-format.c:153
 #, c-format
@@ -1128,7 +1131,7 @@ msgstr "Začátek projektu"
 msgid "%e %b %Y"
 msgstr "%e. %b %Y"
 
-#: ../src/planner-gantt-print.c:199 ../src/planner-gantt-view.c:624
+#: ../src/planner-gantt-print.c:199 ../src/planner-gantt-view.c:627
 #: ../src/planner-resource-dialog.c:1850 ../src/planner-resource-view.c:790
 #: ../src/planner-resource-view.c:806 ../src/planner-resource-view.c:1776
 #: ../src/planner-task-view.c:370
@@ -1302,11 +1305,11 @@ msgstr "_Nestandardní dny"
 #. i18n: Label used for the sidebar. Please try to make it short and use
 #. * a linebreak if necessary/possible.
 #.
-#: ../src/planner-gantt-view.c:376
+#: ../src/planner-gantt-view.c:379
 msgid "Gantt"
 msgstr "Gantt"
 
-#: ../src/planner-gantt-view.c:382
+#: ../src/planner-gantt-view.c:385
 msgid "_Gantt Chart"
 msgstr "_Ganttův diagram"
 
@@ -1318,23 +1321,23 @@ msgstr "_Ganttův diagram"
 #. * project management term. You might want to leave it
 #. * untranslated unless there is a localized term for it.
 #.
-#: ../src/planner-gantt-view.c:620 ../src/planner-task-view.c:366
+#: ../src/planner-gantt-view.c:623 ../src/planner-task-view.c:366
 msgid "WBS"
 msgstr "WBS"
 
-#: ../src/planner-gantt-view.c:622 ../src/planner-task-view.c:368
+#: ../src/planner-gantt-view.c:625 ../src/planner-task-view.c:368
 msgid "Start"
 msgstr "Začátek"
 
-#: ../src/planner-gantt-view.c:623 ../src/planner-task-view.c:369
+#: ../src/planner-gantt-view.c:626 ../src/planner-task-view.c:369
 msgid "Finish"
 msgstr "Konec"
 
-#: ../src/planner-gantt-view.c:626 ../src/planner-task-view.c:372
+#: ../src/planner-gantt-view.c:629 ../src/planner-task-view.c:372
 msgid "Slack"
 msgstr "Rezerva"
 
-#: ../src/planner-gantt-view.c:628 ../src/planner-task-view.c:374
+#: ../src/planner-gantt-view.c:631 ../src/planner-task-view.c:374
 msgid "Assigned to"
 msgstr "Přiřazeno"
 
@@ -1342,12 +1345,12 @@ msgstr "Přiřazeno"
 #. * of a column containing values from 0 upto 100, indicating
 #. * what part of a task has been completed.
 #.
-#: ../src/planner-gantt-view.c:634 ../src/planner-task-view.c:380
-#, fuzzy, no-c-format
+#: ../src/planner-gantt-view.c:637 ../src/planner-task-view.c:380
+#, no-c-format
 msgid "% Complete"
-msgstr "_Hotovo:"
+msgstr "% hotovo"
 
-#: ../src/planner-gantt-view.c:988
+#: ../src/planner-gantt-view.c:991
 msgid "Edit Gantt Columns"
 msgstr "Upravit sloupce v Gantt"
 
@@ -1900,21 +1903,19 @@ msgstr "V pevné datum %s"
 
 #: ../src/planner-task-dialog.c:1917
 msgid "Finish to start (FS)"
-msgstr "Konec před začátkem (KZ)"
+msgstr "Konec do začátku (KZ)"
 
 #: ../src/planner-task-dialog.c:1918
-#, fuzzy
 msgid "Finish to finish (FF)"
-msgstr "Konec před začátkem (KZ)"
+msgstr "Konec do konce (KK)"
 
 #: ../src/planner-task-dialog.c:1919
 msgid "Start to start (SS)"
-msgstr "Začátek před začátkem (ZZ)"
+msgstr "Začátek do začátku (ZZ)"
 
 #: ../src/planner-task-dialog.c:1920
-#, fuzzy
 msgid "Start to finish (SF)"
-msgstr "Začátek před začátkem (ZZ)"
+msgstr "Začátek do konce (ZK)"
 
 #: ../src/planner-task-dialog.c:1975
 msgid "Can't add new predecessor. No task selected!"
@@ -2097,7 +2098,7 @@ msgstr "Přizpůsobit velikosti okna"
 #. i18n: Label used for the sidebar. Please try to make it short and use
 #. * a linebreak if necessary/possible.
 #.
-#: ../src/planner-usage-view.c:257
+#: ../src/planner-usage-view.c:261
 msgid ""
 "Resource\n"
 "Usage"
@@ -2105,11 +2106,11 @@ msgstr ""
 "Využití\n"
 "zdroje"
 
-#: ../src/planner-usage-view.c:263
+#: ../src/planner-usage-view.c:267
 msgid "Resource _Usage"
 msgstr "_Využití zdroje"
 
-#: ../src/planner-usage-view.c:374
+#: ../src/planner-usage-view.c:378
 msgid "Edit Resource Usage Columns"
 msgstr "Upravit sloupce využití zdrojů"
 
@@ -2306,13 +2307,15 @@ msgid "If you don't save, changes made the last minute will be discarded."
 msgstr "Pokud je neuložíte, budou změny provedené za poslední minutu ztraceny."
 
 #: ../src/planner-window.c:1391
-#, fuzzy, c-format
+#, c-format
 msgid "If you don't save, changes made the last %d minute will be discarded."
 msgid_plural ""
 "If you don't save, changes made the last %d minutes will be discarded."
 msgstr[0] ""
-"Pokud je neuložíte, budou změny provedené za posledních %d minut ztraceny."
+"Pokud je neuložíte, budou změny provedené za poslední %d minutu ztraceny."
 msgstr[1] ""
+"Pokud je neuložíte, budou změny provedené za poslední %d minuty ztraceny."
+msgstr[2] ""
 "Pokud je neuložíte, budou změny provedené za posledních %d minut ztraceny."
 
 #: ../src/planner-window.c:1399
@@ -2320,13 +2323,15 @@ msgid "If you don't save, changes made the last hour will be discarded."
 msgstr "Pokud je neuložíte, budou změny provedené za poslední hodinu ztraceny."
 
 #: ../src/planner-window.c:1404
-#, fuzzy, c-format
+#, c-format
 msgid "If you don't save, changes made the last %d hour will be discarded."
 msgid_plural ""
 "If you don't save, changes made the last %d hours will be discarded."
 msgstr[0] ""
-"Pokud je neuložíte, budou změny provedené za posledních %d hodin ztraceny."
+"Pokud je neuložíte, budou změny provedené za poslední %d hodinu ztraceny."
 msgstr[1] ""
+"Pokud je neuložíte, budou změny provedené za poslední %d hodiny ztraceny."
+msgstr[2] ""
 "Pokud je neuložíte, budou změny provedené za posledních %d hodin ztraceny."
 
 #: ../src/planner-window.c:1414
@@ -2400,36 +2405,32 @@ msgid "EDS UID"
 msgstr "UID EDS"
 
 #: ../eds-backend/e-cal-backend-planner.c:289
-#, fuzzy
 msgid "Identifier used by Evolution Data Server for tasks"
-msgstr "Identifikátor zdrojů používaný v Evolution Data Server"
+msgstr "Identifikátor používaný datovým serverem Evolution pro úlohy"
 
 #: ../eds-backend/e-cal-backend-planner.c:298
 msgid "EDS Categories"
 msgstr "Kategorie EDS"
 
 #: ../eds-backend/e-cal-backend-planner.c:299
-#, fuzzy
 msgid "Categories for a task used by Evolution Data Server"
-msgstr "Importovat zdroje z Evolution Data Server"
+msgstr "Kategorie pro úlohu použitou datovým serverem Evolution"
 
 #: ../eds-backend/e-cal-backend-planner.c:308
 msgid "EDS Classification"
 msgstr "Klasifikace EDS"
 
 #: ../eds-backend/e-cal-backend-planner.c:309
-#, fuzzy
 msgid "Task access classification used by Evolution Data Server"
-msgstr "Identifikátor zdrojů používaný v Evolution Data Server"
+msgstr "Klasifikace přístupu k úlohám používaná datovým serverem Evolution"
 
 #: ../eds-backend/e-cal-backend-planner.c:318
 msgid "EDS URL"
 msgstr "URL EDS"
 
 #: ../eds-backend/e-cal-backend-planner.c:319
-#, fuzzy
 msgid "URL for a Task used by Evolution Data Server"
-msgstr "Aktualizováno z Evolution Data Server"
+msgstr "Adresa URL pro úlohu použitou datovým serverem Evolution"
 
 #: ../eds-backend/e-cal-backend-planner.c:828
 msgid "Invalid server URI"
@@ -2438,14 +2439,14 @@ msgstr "Neplatná adresa URI serveru."
 #. book_target = (EABConfigTargetSource *) data->target;
 #. source = book_target->source;
 #: ../eds-backend/planner-source/planner-source.c:120
-#, fuzzy
 msgid "Select planner file"
-msgstr "Soubory Planneru"
+msgstr "Výběr souboru planner"
 
 #: ../eds-backend/planner-source/planner-source.c:152
 #, c-format
 msgid ""
-"The filename extension of this file isn't the planner usual file extension (%"
-"s) Do you want to continue?"
+"The filename extension of this file isn't the planner usual file extension "
+"(%s) Do you want to continue?"
 msgstr ""
-
+"Přípona tohoto souboru není obvyklá přípona souboru (%s) pro aplikaci "
+"Planner. Chcete pokračovat?"
