@@ -18,6 +18,10 @@
  * Boston, MA 02111-1307, USA.
  */
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include <windows.h>
 #include <shellapi.h>
 #include <stdio.h>
@@ -38,7 +42,7 @@ planner_util_show_url (GtkWindow *parent,
 		                                 GTK_DIALOG_DESTROY_WITH_PARENT,
 		                                 GTK_MESSAGE_ERROR,
 		                                 GTK_BUTTONS_CLOSE,
-		                                 "Unable to open '%s'", url);
+		                                 _("Unable to open '%s'"), url);
 		gtk_dialog_run (GTK_DIALOG (dialog));
 		gtk_widget_destroy (dialog);
 	}
@@ -65,7 +69,7 @@ planner_util_show_help (GtkWindow *parent)
 		                                 GTK_DIALOG_DESTROY_WITH_PARENT,
 		                                 GTK_MESSAGE_ERROR,
 		                                 GTK_BUTTONS_CLOSE,
-		                                 "Unable to open help file");
+		                                 _("Unable to open help file"));
 		gtk_dialog_run (GTK_DIALOG (dialog));
 		gtk_widget_destroy (dialog);
 	}
