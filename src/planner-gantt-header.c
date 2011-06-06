@@ -668,7 +668,7 @@ gantt_header_motion_notify_event (GtkWidget	 *widget,
 	priv = header->priv;
 
 	t = floor ((priv->x1 + event->x) / priv->hscale + 0.5);
-	str = mrp_time_format (_("%e %b %Y"), t);
+	str = mrp_time_format (_("%a, %e %b %Y"), t);
 
 	if (!priv->date_hint || strcmp (str, priv->date_hint) != 0) {
 		g_signal_emit (widget, signals[DATE_HINT_CHANGED], 0, str);

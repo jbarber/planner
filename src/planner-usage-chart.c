@@ -300,6 +300,14 @@ usage_chart_class_init (PlannerUsageChartClass * class)
 }
 
 static void
+usage_chart_header_date_hint_changed_cb (GtkWidget *header,
+					 gchar *hint,
+					 PlannerUsageChart *chart)
+{
+	planner_usage_chart_status_updated (chart, hint);
+}
+
+static void
 usage_chart_init (PlannerUsageChart * chart)
 {
 	PlannerUsageChartPriv *priv;
@@ -322,6 +330,11 @@ usage_chart_init (PlannerUsageChart * chart)
 	priv->header = g_object_new (PLANNER_TYPE_GANTT_HEADER,
 				     "scale", SCALE (priv->zoom),
 				     "zoom", priv->zoom, NULL);
+
+	g_signal_connect (priv->header,
+			  "date_hint_changed",
+			  G_CALLBACK (usage_chart_header_date_hint_changed_cb),
+			  chart);
 
 	gtk_box_pack_start (GTK_BOX (chart), GTK_WIDGET (priv->header), FALSE,
 			    TRUE,
