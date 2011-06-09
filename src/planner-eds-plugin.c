@@ -180,12 +180,12 @@ eds_plugin_busy (PlannerPlugin *plugin,
 			(plugin->priv->glade, "progressbar"));
 
 	if (busy) {
-		gint check_time = 300; /* ms */
+		gint check_time = 1; /* second */
 
 		if (plugin->priv->busy) {
 			return;
 		}
-		plugin->priv->pulse = g_timeout_add (check_time, eds_check_query, plugin);
+		plugin->priv->pulse = g_timeout_add_seconds (check_time, eds_check_query, plugin);
 		cursor = gdk_cursor_new_for_display (gdk_display_get_default (), GDK_WATCH);
 		gtk_widget_set_sensitive
 			(glade_xml_get_widget (plugin->priv->glade, "search_box"), FALSE);

@@ -421,9 +421,9 @@ gantt_background_realize (GnomeCanvasItem *item)
 
 	pango_layout_set_alignment (priv->layout, PANGO_ALIGN_RIGHT);
 
-	priv->timeout_id = g_timeout_add (1000 * 60,
-					  gantt_background_update_timeline,
-					  background);
+	priv->timeout_id = g_timeout_add_seconds (60,
+						  gantt_background_update_timeline,
+						  background);
 }
 
 static void
