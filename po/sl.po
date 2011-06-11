@@ -7,11 +7,12 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: planner master\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=planner&component=general\n"
-"POT-Creation-Date: 2010-03-23 17:15+0000\n"
-"PO-Revision-Date: 2010-07-28 14:43+0100\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=planner&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2011-06-09 21:58+0000\n"
+"PO-Revision-Date: 2011-06-11 18:07+0100\n"
 "Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -692,13 +693,13 @@ msgid "Date"
 msgstr "Datum"
 
 #: ../libplanner/mrp-property.c:375
-#: ../src/planner-gantt-view.c:625
+#: ../src/planner-gantt-view.c:628
 #: ../src/planner-task-view.c:371
 msgid "Duration"
 msgstr "Trajanje"
 
 #: ../libplanner/mrp-property.c:377
-#: ../src/planner-gantt-view.c:627
+#: ../src/planner-gantt-view.c:630
 #: ../src/planner-resource-view.c:1354
 #: ../src/planner-task-view.c:373
 msgid "Cost"
@@ -963,7 +964,7 @@ msgstr "Uvoz virov iz Evolution podatkovnega strežnika"
 
 #: ../src/planner-eds-plugin.c:384
 #: ../src/planner-gantt-print.c:191
-#: ../src/planner-gantt-view.c:621
+#: ../src/planner-gantt-view.c:624
 #: ../src/planner-group-dialog.c:822
 #: ../src/planner-property-dialog.c:475
 #: ../src/planner-resource-view.c:1211
@@ -1124,11 +1125,11 @@ msgid "Project start"
 msgstr "Začetek projekta"
 
 #: ../src/planner-gantt-header.c:671
-msgid "%e %b %Y"
-msgstr "%e. %b %Y"
+msgid "%a, %e %b %Y"
+msgstr "%a, %e. %b %Y"
 
 #: ../src/planner-gantt-print.c:199
-#: ../src/planner-gantt-view.c:624
+#: ../src/planner-gantt-view.c:627
 #: ../src/planner-resource-dialog.c:1850
 #: ../src/planner-resource-view.c:790
 #: ../src/planner-resource-view.c:806
@@ -1338,11 +1339,11 @@ msgstr "_Neobičajni dnevi"
 #. i18n: Label used for the sidebar. Please try to make it short and use
 #. * a linebreak if necessary/possible.
 #.
-#: ../src/planner-gantt-view.c:376
+#: ../src/planner-gantt-view.c:379
 msgid "Gantt"
 msgstr "Gantt"
 
-#: ../src/planner-gantt-view.c:382
+#: ../src/planner-gantt-view.c:385
 msgid "_Gantt Chart"
 msgstr "Načrt _Gantt"
 
@@ -1354,27 +1355,27 @@ msgstr "Načrt _Gantt"
 #. * project management term. You might want to leave it
 #. * untranslated unless there is a localized term for it.
 #.
-#: ../src/planner-gantt-view.c:620
+#: ../src/planner-gantt-view.c:623
 #: ../src/planner-task-view.c:366
 msgid "WBS"
 msgstr "WBS"
 
-#: ../src/planner-gantt-view.c:622
+#: ../src/planner-gantt-view.c:625
 #: ../src/planner-task-view.c:368
 msgid "Start"
 msgstr "Začetek"
 
-#: ../src/planner-gantt-view.c:623
+#: ../src/planner-gantt-view.c:626
 #: ../src/planner-task-view.c:369
 msgid "Finish"
 msgstr "Konec"
 
-#: ../src/planner-gantt-view.c:626
+#: ../src/planner-gantt-view.c:629
 #: ../src/planner-task-view.c:372
 msgid "Slack"
 msgstr "Ohlapno"
 
-#: ../src/planner-gantt-view.c:628
+#: ../src/planner-gantt-view.c:631
 #: ../src/planner-task-view.c:374
 msgid "Assigned to"
 msgstr "Določeno"
@@ -1383,13 +1384,13 @@ msgstr "Določeno"
 #. * of a column containing values from 0 upto 100, indicating
 #. * what part of a task has been completed.
 #.
-#: ../src/planner-gantt-view.c:634
+#: ../src/planner-gantt-view.c:637
 #: ../src/planner-task-view.c:380
 #, no-c-format
 msgid "% Complete"
 msgstr "% končano"
 
-#: ../src/planner-gantt-view.c:988
+#: ../src/planner-gantt-view.c:991
 msgid "Edit Gantt Columns"
 msgstr "Uredi stolpce Gantt"
 
@@ -1473,7 +1474,7 @@ msgstr ""
 "%s\n"
 "Zaženite '%s --help' za podroben pregled celotnega seznama možnosti ukazne vrstice.\n"
 
-#: ../src/planner-main.c:88
+#: ../src/planner-main.c:91
 #, c-format
 msgid "Invalid geometry string \"%s\"\n"
 msgstr "Neveljaven geometrijski niz \"%s\"\n"
@@ -1860,7 +1861,7 @@ msgstr ""
 #: ../src/planner-sql-plugin.c:585
 #, c-format
 msgid "Can't create tables in database %s"
-msgstr "Ni mogoče ustvariti preglednic v zbirki podatkov %s"
+msgstr "Ni mogoče ustvariti razpredelnic v zbirki podatkov %s"
 
 #: ../src/planner-sql-plugin.c:647
 #, c-format
@@ -1875,7 +1876,7 @@ msgstr "Povezovanje s podatkovno zbirko '%s@%s' ni uspelo."
 #: ../src/planner-sql-plugin.c:709
 #, c-format
 msgid "Test to tables in database '%s' failed."
-msgstr "Preverjanje preglednic v podatkovni zbirki '%s' ni uspelo."
+msgstr "Preverjanje razpredelnic v podatkovni zbirki '%s' ni uspelo."
 
 #: ../src/planner-sql-plugin.c:811
 msgid "ID"
@@ -2151,7 +2152,7 @@ msgstr "Prilagodi oknu"
 #. i18n: Label used for the sidebar. Please try to make it short and use
 #. * a linebreak if necessary/possible.
 #.
-#: ../src/planner-usage-view.c:257
+#: ../src/planner-usage-view.c:261
 msgid ""
 "Resource\n"
 "Usage"
@@ -2159,11 +2160,11 @@ msgstr ""
 "Viri\n"
 "Uporaba"
 
-#: ../src/planner-usage-view.c:263
+#: ../src/planner-usage-view.c:267
 msgid "Resource _Usage"
 msgstr "_Uporaba virov"
 
-#: ../src/planner-usage-view.c:374
+#: ../src/planner-usage-view.c:378
 msgid "Edit Resource Usage Columns"
 msgstr "Uredi stolpce uporabe virov"
 
@@ -2477,11 +2478,11 @@ msgstr "Neveljaven URI strežnika"
 
 #. book_target = (EABConfigTargetSource *) data->target;
 #. source = book_target->source;
-#: ../eds-backend/planner-source/planner-source.c:120
+#: ../eds-backend/planner-source/planner-source.c:125
 msgid "Select planner file"
 msgstr "Izbor datoteke planerja"
 
-#: ../eds-backend/planner-source/planner-source.c:152
+#: ../eds-backend/planner-source/planner-source.c:157
 #, c-format
 msgid "The filename extension of this file isn't the planner usual file extension (%s) Do you want to continue?"
 msgstr "Pripona datoteke ni običajna pripona planerja (%s). Ali želite nadaljevati?"
