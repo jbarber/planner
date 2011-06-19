@@ -5,16 +5,19 @@
 # Christian Neumair <chris@gnome-de.org>, 2002, 2003.
 # Christian Neumair <chris@gnome-de.org>, 2004.
 # Hendrik Richter <hendrikr@gnome.org>, 2005, 2006.
-# Mario Blättermann <mariobl@gnome.org>, 2009, 2010.
+# Mario Blättermann <mariobl@freenet.de>, 2009-2011.
 # Christian Kirbach <Christian.Kirbach@googlemail.com>, 2010.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: planner master\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-03-22 22:13+0100\n"
-"PO-Revision-Date: 2010-03-22 22:16+0100\n"
-"Last-Translator: Christian Kirbach <Christian.Kirbach@googlemail.com>\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"product=planner&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2011-06-19 16:30+0000\n"
+"PO-Revision-Date: 2011-06-19 18:28+0100\n"
+"Last-Translator: Mario Blättermann <mariobl@freenet.de>\n"
 "Language-Team: Deutsch <gnome-de@gnome.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -59,8 +62,7 @@ msgid "    "
 msgstr "    "
 
 #: ../data/glade/calendar-dialog.glade.h:4 ../data/glade/eds.glade.h:1
-#: ../data/glade/new-property.glade.h:1
-#: ../data/glade/resource-dialog.glade.h:1
+#: ../data/glade/new-property.glade.h:1 ../data/glade/resource-dialog.glade.h:1
 #: ../data/glade/resource-input-dialog.glade.h:1 ../data/glade/sql.glade.h:1
 #: ../data/glade/task-input-dialog.glade.h:1
 msgid "*"
@@ -151,11 +153,11 @@ msgstr "Einen Kalender auswählen"
 
 #: ../data/glade/calendar-dialog.glade.h:25
 msgid ""
-"Select a weekday and the day type to use for that day in the default week "
-"for this calendar.\n"
+"Select a weekday and the day type to use for that day in the default week for "
+"this calendar.\n"
 msgstr ""
-"Wählen Sie einen Wochentag und den dafür in der Vorgabewoche dieses "
-"Kalenders zu verwendenden Tagestyp aus.\n"
+"Wählen Sie einen Wochentag und den dafür in der Vorgabewoche dieses Kalenders "
+"zu verwendenden Tagestyp aus.\n"
 
 #: ../data/glade/calendar-dialog.glade.h:27
 msgid "Set day type to:"
@@ -411,8 +413,7 @@ msgstr "Abbrechen"
 #. This is the verb "schedule"
 #. I18n: the verb "schedule" here.
 #: ../data/glade/task-date-widget.glade.h:6
-#: ../data/glade/task-dialog.glade.h:11
-#: ../src/planner-cell-renderer-date.c:139
+#: ../data/glade/task-dialog.glade.h:11 ../src/planner-cell-renderer-date.c:139
 msgid "Schedule:"
 msgstr "Planen:"
 
@@ -546,8 +547,7 @@ msgstr "Legt fest, ob das Drucken der Aufgabenansicht aktiviert ist."
 
 #: ../data/planner.schemas.in.h:11
 msgid "Whether to display nonstandard days in the Gantt view."
-msgstr ""
-"Legt fest, ob Nicht-Standardtage in der Gantt-Ansicht angezeigt werden."
+msgstr "Legt fest, ob Nicht-Standardtage in der Gantt-Ansicht angezeigt werden."
 
 #: ../data/planner.schemas.in.h:12
 msgid ""
@@ -557,8 +557,7 @@ msgstr ""
 "hervorgehoben werden."
 
 #: ../data/planner.schemas.in.h:13
-msgid ""
-"Whether to highlight the tasks along the cricital path in the Task view."
+msgid "Whether to highlight the tasks along the cricital path in the Task view."
 msgstr ""
 "Legt fest, ob Aufgaben entlang des kritischen Pfades in der Aufgabenansicht "
 "hervorgehoben werden."
@@ -714,12 +713,12 @@ msgstr "Fließkomma-Zahl"
 msgid "Date"
 msgstr "Datum"
 
-#: ../libplanner/mrp-property.c:375 ../src/planner-gantt-view.c:625
+#: ../libplanner/mrp-property.c:375 ../src/planner-gantt-view.c:628
 #: ../src/planner-task-view.c:371
 msgid "Duration"
 msgstr "Dauer"
 
-#: ../libplanner/mrp-property.c:377 ../src/planner-gantt-view.c:627
+#: ../libplanner/mrp-property.c:377 ../src/planner-gantt-view.c:630
 #: ../src/planner-resource-view.c:1354 ../src/planner-task-view.c:373
 msgid "Cost"
 msgstr "Kosten"
@@ -758,8 +757,7 @@ msgstr ""
 #: ../libplanner/mrp-sql.c:2274 ../libplanner/mrp-sql.c:3713
 msgid "Failed to create a dictionary for the database connection.\n"
 msgstr ""
-"Das Erstellen eines Wörterbuchs für die Datenbankverbindung ist "
-"gescheitert.\n"
+"Das Erstellen eines Wörterbuchs für die Datenbankverbindung ist gescheitert.\n"
 
 #: ../libplanner/mrp-sql.c:2288
 #, c-format
@@ -1003,7 +1001,7 @@ msgid "Import resources from Evolution Data Server"
 msgstr "Ressourcen aus dem Evolution Data Server importieren"
 
 #: ../src/planner-eds-plugin.c:384 ../src/planner-gantt-print.c:191
-#: ../src/planner-gantt-view.c:621 ../src/planner-group-dialog.c:822
+#: ../src/planner-gantt-view.c:624 ../src/planner-group-dialog.c:822
 #: ../src/planner-property-dialog.c:475 ../src/planner-resource-view.c:1211
 #: ../src/planner-task-dialog.c:2616 ../src/planner-task-dialog.c:2690
 #: ../src/planner-task-view.c:367
@@ -1162,10 +1160,10 @@ msgid "Project start"
 msgstr "Projektbeginn"
 
 #: ../src/planner-gantt-header.c:671
-msgid "%e %b %Y"
-msgstr "%e %b %Y"
+msgid "%a, %e %b %Y"
+msgstr "%a, %e. %b %Y"
 
-#: ../src/planner-gantt-print.c:199 ../src/planner-gantt-view.c:624
+#: ../src/planner-gantt-print.c:199 ../src/planner-gantt-view.c:627
 #: ../src/planner-resource-dialog.c:1850 ../src/planner-resource-view.c:790
 #: ../src/planner-resource-view.c:806 ../src/planner-resource-view.c:1776
 #: ../src/planner-task-view.c:370
@@ -1339,11 +1337,11 @@ msgstr "_Nicht-Standardtage"
 #. i18n: Label used for the sidebar. Please try to make it short and use
 #. * a linebreak if necessary/possible.
 #.
-#: ../src/planner-gantt-view.c:376
+#: ../src/planner-gantt-view.c:379
 msgid "Gantt"
 msgstr "Gantt"
 
-#: ../src/planner-gantt-view.c:382
+#: ../src/planner-gantt-view.c:385
 msgid "_Gantt Chart"
 msgstr "G_antt-Diagramm"
 
@@ -1355,23 +1353,23 @@ msgstr "G_antt-Diagramm"
 #. * project management term. You might want to leave it
 #. * untranslated unless there is a localized term for it.
 #.
-#: ../src/planner-gantt-view.c:620 ../src/planner-task-view.c:366
+#: ../src/planner-gantt-view.c:623 ../src/planner-task-view.c:366
 msgid "WBS"
 msgstr "WBS"
 
-#: ../src/planner-gantt-view.c:622 ../src/planner-task-view.c:368
+#: ../src/planner-gantt-view.c:625 ../src/planner-task-view.c:368
 msgid "Start"
 msgstr "Beginn"
 
-#: ../src/planner-gantt-view.c:623 ../src/planner-task-view.c:369
+#: ../src/planner-gantt-view.c:626 ../src/planner-task-view.c:369
 msgid "Finish"
 msgstr "Ende"
 
-#: ../src/planner-gantt-view.c:626 ../src/planner-task-view.c:372
+#: ../src/planner-gantt-view.c:629 ../src/planner-task-view.c:372
 msgid "Slack"
 msgstr "Lose"
 
-#: ../src/planner-gantt-view.c:628 ../src/planner-task-view.c:374
+#: ../src/planner-gantt-view.c:631 ../src/planner-task-view.c:374
 msgid "Assigned to"
 msgstr "Zugewiesen zu"
 
@@ -1380,12 +1378,12 @@ msgstr "Zugewiesen zu"
 #. * of a column containing values from 0 upto 100, indicating
 #. * what part of a task has been completed.
 #.
-#: ../src/planner-gantt-view.c:634 ../src/planner-task-view.c:380
+#: ../src/planner-gantt-view.c:637 ../src/planner-task-view.c:380
 #, no-c-format
 msgid "% Complete"
 msgstr "% Abgeschlossen"
 
-#: ../src/planner-gantt-view.c:988
+#: ../src/planner-gantt-view.c:991
 msgid "Edit Gantt Columns"
 msgstr "Gantt-Spalten bearbeiten"
 
@@ -1471,7 +1469,7 @@ msgstr ""
 "Führen Sie »%s --help« aus, um eine Liste verfügbarer Befehleszeilenoptionen "
 "zu bekommen.\n"
 
-#: ../src/planner-main.c:88
+#: ../src/planner-main.c:91
 #, c-format
 msgid "Invalid geometry string \"%s\"\n"
 msgstr "Ungültige Geometrie-Zeichenkette »%s«\n"
@@ -2044,8 +2042,8 @@ msgstr "Aufgaben löschen"
 #: ../src/planner-task-tree.c:2887
 #, c-format
 msgid ""
-"You are about to open an edit dialog each for %i tasks. Are you sure that "
-"you want to do that?"
+"You are about to open an edit dialog each for %i tasks. Are you sure that you "
+"want to do that?"
 msgstr ""
 "Sie beabsichtigen für %i Aufgaben jeweils einen Dialog zum Bearbeiten zu "
 "öffnen. Sind Sie sicher, dass Sie fortfahren möchten?"
@@ -2158,7 +2156,7 @@ msgstr "Auf Größe einpassen"
 #. i18n: Label used for the sidebar. Please try to make it short and use
 #. * a linebreak if necessary/possible.
 #.
-#: ../src/planner-usage-view.c:257
+#: ../src/planner-usage-view.c:261
 msgid ""
 "Resource\n"
 "Usage"
@@ -2167,13 +2165,22 @@ msgstr ""
 "verbrauch"
 
 # Better translation for resource
-#: ../src/planner-usage-view.c:263
+#: ../src/planner-usage-view.c:267
 msgid "Resource _Usage"
 msgstr "Ressourcen_verbrauch"
 
-#: ../src/planner-usage-view.c:374
+#: ../src/planner-usage-view.c:378
 msgid "Edit Resource Usage Columns"
 msgstr "Ressourcenverbrauchspalten bearbeiten"
+
+#: ../src/planner-util-win32.c:45
+#, c-format
+msgid "Unable to open '%s'"
+msgstr "»%s« konnte nicht geöffnet werden"
+
+#: ../src/planner-util-win32.c:72
+msgid "Unable to open help file"
+msgstr "Die Hilfedatei kann nicht geöffnet werden"
 
 #: ../src/planner-window.c:220
 msgid "_File"
@@ -2354,10 +2361,13 @@ msgstr "Planner-Dateien"
 #: ../src/planner-window.c:1209 ../src/planner-window.c:1231
 msgid "translator-credits"
 msgstr ""
+"Jochen Hein <jochen@jochen.org>\n"
+"Christian Meyer <chrisime@gnome.org>\n"
 "Christian Neumair <chris@gnome-de.org>\n"
-"Hendrik Brandt <eru@gmx.li>\n"
+"Christian Neumair <chris@gnome-de.org>\n"
 "Hendrik Richter <hendrikr@gnome.org>\n"
-"Mario Blättermann <mariobl@gnome.org>"
+"Mario Blättermann <mariobl@freenet.de>\n"
+"Christian Kirbach <Christian.Kirbach@googlemail.com>"
 
 #: ../src/planner-window.c:1226
 msgid "A Project Management application for the GNOME desktop"
@@ -2441,9 +2451,9 @@ msgstr ""
 "\n"
 "Beim Laden von alten Dateien verwenden alle Aufgaben die Einschränkung »Muss "
 "beginnen am«, da die alte Version die automatische neu-Planung nicht voll "
-"unterstützt. Um von diesem neuen Funktionsmerkmal Gebrauch zu machen, "
-"sollten Sie Vorgängerbeziehungen zwischen Aufgaben hinzufügen, die "
-"voneinander abhängig sind.\n"
+"unterstützt. Um von diesem neuen Funktionsmerkmal Gebrauch zu machen, sollten "
+"Sie Vorgängerbeziehungen zwischen Aufgaben hinzufügen, die voneinander "
+"abhängig sind.\n"
 "\n"
 "Sie können eine Vorgängerbeziehung hinzufügen, indem Sie auf den Vorgänger "
 "klicken und diesen auf den Nachfolger ziehen.\n"
@@ -2513,15 +2523,15 @@ msgstr "Ungültige Serveradresse"
 
 #. book_target = (EABConfigTargetSource *) data->target;
 #. source = book_target->source;
-#: ../eds-backend/planner-source/planner-source.c:120
+#: ../eds-backend/planner-source/planner-source.c:125
 msgid "Select planner file"
 msgstr "Planner-Datei auswählen"
 
-#: ../eds-backend/planner-source/planner-source.c:152
+#: ../eds-backend/planner-source/planner-source.c:157
 #, c-format
 msgid ""
-"The filename extension of this file isn't the planner usual file extension (%"
-"s) Do you want to continue?"
+"The filename extension of this file isn't the planner usual file extension "
+"(%s) Do you want to continue?"
 msgstr ""
 "Die Dateierweiterung dieser Datei ist nicht die für Planner übliche "
 "Erweiterung (%s). Trotzdem fortsetzen?"
