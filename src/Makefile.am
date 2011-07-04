@@ -229,6 +229,7 @@ built_sources = planner-marshal.h planner-marshal.c
 
 $(libplannerapp_la_OBJECTS): $(built_sources)
 
-EXTRA_DIST = planner-marshal.list
+EXTRA_DIST = planner-marshal.list	\
+	     planner-util-win32.c
 
 CLEANFILES = $(built_sources)
