@@ -73,6 +73,7 @@ libplannerapp_la_SOURCES = 			\
 	planner-phase-dialog.h		\
 	planner-plugin.c		\
 	planner-plugin.h		\
+	valgrind.h			\
 	planner-plugin-loader.c		\
 	planner-plugin-loader.h		\
 	planner-popup-button.c		\
