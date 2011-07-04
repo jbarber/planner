@@ -1,4 +1,77 @@
 ==============
+Planner 0.14.5
+==============
+
+New features and fixes
+======================
+
+* First release since transition to git
+  -> ChangeLog is now generated from git log by make distcheck
+* GTK+ requirement has been bumped from 2.6.0 to 2.14.0
+* minor build enhancements, gnome-common is now needed to build
+  (commits e8e08f, e06805, 05e9cf, c8141a)
+* many memory leaks got fixed
+  (commits 07c105, b1964f, 37cbf8, 60daf9, 327bbb, 6f9c48, 6cc17b, 21c832, 15c94a, 04e47d)
+  (bugs #334114, #596746)
+* some deprecated code got updated
+  (commits 209bb8, ce9da9, c982ae, cae485, 8b9104, a9e57c, 9998b3, bc176e, f01117, 53986b, 554d30, 98b929, 09545b, 8a571f, b892fb, df6dea, addef5, 046a28)
+  (bugs #349304, #536416, #584009, #590485, #613623)
+* misc bugs fixed:
+  * Crash when exporting HTML (commit 6c7062)
+  * Prevent changing order of resources on load/save (commit dfcab6)
+  * Crash when using zoom-to-fit (commit 8e4fab, bug #550559)
+  * Assigned resources information shown in HTML export (commit b43d37, bug #308064)
+  * Maximum percent complete stuck at 75% (commit 226c5e, bug #580216)
+  * Error when opening files with colon in path (commit 37cbf8, bug #602427)
+  * Allow scrolling in Gantt and resource usage (commit 170f10, bug #604355)
+  * Show date in status bar (commit 8f6325, bug #604515)
+
+Known introduced regressions
+============================
+
+* help won't open on a build using --prefix (introduced by switch to new API in commit cae485 in planner)
+* Gantt chart header has a white background on the Windows version 
+
+New and Updated Translations
+============================
+Khaled Hosny (ar)
+Amitakhya Phukan (as)
+Xandru Armesto (ast)
+Runa Bhattacharjee (bn_IN)
+Gil Forcada (ca)
+Carles Ferrando (ca@valencia)
+Ondřej Kopka (cs)
+Marek Cernocky (cs)
+Joe Hansen (da)
+Mario Blätterman (de)
+Christian Kirbach (de)
+Nikos Charonitakis (el)
+Jorge González (es)
+Daniel Mustieles (es)
+Mattias Põldaru (et)
+Ivar Smolin (et)
+Iñaki Larrañaga Murgoitio (eu)
+Louis Grandjean (fr)
+Claude Paroz (fr)
+Milo Casagrande (it)
+Takeshi AIHANA (ja)
+Baurzhan Muftakhidinov (kk)
+Sandeep Shedmake (mr)
+Kjartan Maraas (nb)
+Nils-Christoph Fiedler (nds)
+Manoj Kumar Giri (or)
+Piotr Drąg (pl)
+Lucian Adrian Grijncu (ro)
+Yuri Kozlov (ru)
+Alexandre Prokoudine (ru)
+Matej Urbančič (sl)
+Daniel Nylander (sv)
+I. Felix (ta)
+Gavin Huang (zh_CN)
+Aron Xu (zh_CN)
+
+
+==============
 Planner 0.14.4
 ==============
 
