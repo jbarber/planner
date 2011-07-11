@@ -125,12 +125,39 @@ python_plugin_execute (const gchar   *filename,
 	}
 }
 
+static void
+plugin_execute_scripts(PlannerPlugin *plugin, const gchar *dirname)
+{
+	GDir              *dir;
+	gchar             *full_filename;
+	const gchar       *filename;
+
+	dir = g_dir_open (dirname, 0, NULL);
+	if (dir == NULL) {
+		return;
+	}
+
+	filename = g_dir_read_name (dir);
+	while (filename != NULL) {
+		if (g_str_has_suffix (filename, ".py")) {
+			full_filename = g_build_filename (dirname, filename, NULL);
+			python_plugin_execute (full_filename, plugin->main_window, plugin->priv->scripts);
+			g_free (full_filename);
+		}
+
+		filename = g_dir_read_name (dir);
+	}
+
+	g_free (dirname);
+	g_dir_close (dir);
+}
+
 G_MODULE_EXPORT void
 plugin_init (PlannerPlugin *plugin)
 {
 	PlannerPluginPriv *priv;
 	GDir              *dir;
-	gchar             *dirname, *full_filename;
+	gchar             *dirname;
 	const gchar       *filename;
 
 	priv = g_new0 (PlannerPluginPriv, 1);
@@ -140,27 +167,16 @@ plugin_init (PlannerPlugin *plugin)
 
 	Py_Initialize ();
 
+	/* Look in $XDG_DATA_HOME/planner/python/  and run the scripts that we find */
+	dirname = g_build_filename (g_get_user_data_dir(), "planner", "python", NULL);
+	plugin_execute_scripts(plugin, dirname);
+	g_free (dirname);
+
+
 	/* Look in ~/.gnome2/planner/python/  and run the scripts that we find */
 	dirname = g_build_filename (g_get_home_dir(), ".gnome2", "planner", "python", NULL);
-	dir = g_dir_open (dirname, 0, NULL);
-	if (dir == NULL) {
-		g_free (dirname);
-		return;
-	}
-
-	filename = g_dir_read_name (dir);
-	while (filename != NULL) {
-		if (g_str_has_suffix (filename, ".py")) {
-			full_filename = g_build_filename (dirname, filename, NULL);
-			python_plugin_execute (full_filename, plugin->main_window, priv->scripts);
-			g_free (full_filename);
-		}
-
-		filename = g_dir_read_name (dir);
-	}
-
+	plugin_execute_scripts(plugin, dirname);
 	g_free (dirname);
-	g_dir_close (dir);
 }
 
 G_MODULE_EXPORT void

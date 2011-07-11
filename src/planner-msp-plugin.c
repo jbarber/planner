@@ -177,7 +177,7 @@ msp_plugin_get_last_dir (PlannerPlugin *plugin)
 
 	dir = planner_conf_get_string (CONF_MSP_PLUGIN_LAST_DIR, NULL);
 	if (dir == NULL) {
-		dir = g_strdup (g_get_home_dir ());
+		dir = g_strdup (g_get_user_special_dir (G_USER_DIRECTORY_DOCUMENTS));
 	}
 
 	return dir;

@@ -43,7 +43,7 @@ ensure_dir (void)
 {
 	char *dir;
 
-	dir = g_build_filename (g_get_home_dir (), ".gnome2", NULL);
+	dir = g_build_filename (g_get_user_config_dir (), NULL);
 
 	if (!g_file_test (dir, G_FILE_TEST_EXISTS | G_FILE_TEST_IS_DIR)) {
 		if (g_mkdir (dir, 0755) != 0) {
@@ -54,7 +54,7 @@ ensure_dir (void)
 
 	g_free (dir);
 
-	dir = g_build_filename (g_get_home_dir (), ".gnome2", "planner", NULL);
+	dir = g_build_filename (g_get_user_config_dir (), "planner", NULL);
 
 	if (!g_file_test (dir, G_FILE_TEST_EXISTS | G_FILE_TEST_IS_DIR)) {
 		if (g_mkdir (dir, 0755) != 0) {
@@ -75,12 +75,11 @@ get_config_filename (void)
 		return NULL;
 	}
 
-	return g_build_filename (g_get_home_dir (),
-				 ".gnome2", "planner",
+	return g_build_filename (g_get_user_config_dir (),
+				 "planner",
 				 PLANNER_PRINT_CONFIG_FILE,
 				 NULL);
 }
-
 
 GtkPageSetup *
 planner_print_dialog_load_page_setup (void)
@@ -171,6 +170,7 @@ planner_print_dialog_load_print_settings (void)
 						     filename,
 						     G_KEY_FILE_KEEP_COMMENTS|G_KEY_FILE_KEEP_TRANSLATIONS,
 						     NULL);
+
 		g_free (filename);
 
 		if (success) {

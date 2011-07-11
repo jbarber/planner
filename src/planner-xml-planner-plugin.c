@@ -63,7 +63,7 @@ get_last_dir (void)
 
 	last_dir = planner_conf_get_string (CONF_MAIN_LAST_XML_EXPORT_DIR, NULL);
 	if (last_dir == NULL) {
-		last_dir = g_strdup (g_get_home_dir ());
+		last_dir = g_strdup (g_get_user_special_dir (G_USER_DIRECTORY_DOCUMENTS));
 	}
 
 	return last_dir;
