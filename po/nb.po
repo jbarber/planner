@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: planner 0.15\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-07 22:05+0200\n"
-"PO-Revision-Date: 2011-06-07 22:05+0200\n"
+"POT-Creation-Date: 2011-07-18 16:47+0200\n"
+"PO-Revision-Date: 2011-07-18 16:49+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian/Bokmål <i18n-nb@lister.ping.uio.no>\n"
 "Language: \n"
@@ -2111,6 +2111,15 @@ msgstr "Ressursbr_uk"
 #: ../src/planner-usage-view.c:378
 msgid "Edit Resource Usage Columns"
 msgstr "Rediger kolonner for ressursbruk"
+
+#: ../src/planner-util-win32.c:45
+#, c-format
+msgid "Unable to open '%s'"
+msgstr "Kan ikke åpne «%s»"
+
+#: ../src/planner-util-win32.c:72
+msgid "Unable to open help file"
+msgstr "Kan ikke åpne hjelpfil"
 
 #: ../src/planner-window.c:220
 msgid "_File"
