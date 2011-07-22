@@ -2371,7 +2371,7 @@ mrp_sql_load_project (MrpStorageSQL *storage,
 
 #define WRITE_ERROR(e,c) \
 G_STMT_START \
-{ g_set_error(e,MRP_ERROR,MRP_ERROR_SAVE_WRITE_FAILED, sql_get_last_error (c)); } \
+{ g_set_error(e,MRP_ERROR,MRP_ERROR_SAVE_WRITE_FAILED, "%s", sql_get_last_error (c)); } \
 G_STMT_END
 
 
