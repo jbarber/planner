@@ -73,7 +73,6 @@ libplannerapp_la_SOURCES = 			\
 	planner-phase-dialog.h		\
 	planner-plugin.c		\
 	planner-plugin.h		\
-	valgrind.h			\
 	planner-plugin-loader.c		\
 	planner-plugin-loader.h		\
 	planner-popup-button.c		\
@@ -120,6 +119,7 @@ libplannerapp_la_SOURCES = 			\
 	planner-window.h		\
 	planner-working-time-dialog.c	\
 	planner-working-time-dialog.h	\
+	valgrind.h			\
 	$(gantt_task_source)		\
 	$(task_source)			\
 	$(resource_source)		\
