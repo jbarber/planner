@@ -1094,8 +1094,6 @@ sql_read_overriden_day_types (SQLData *data, gint calendar_id)
 		d(g_print ("Overridden intervals for day %d, on cal %d, %d - %d\n",
 			 day_type_id, calendar_id,
 			 (int)start, (int)end));
-
-		interval = mrp_interval_new (start, end);
 	}
 	g_object_unref (model);
 	model = NULL;
