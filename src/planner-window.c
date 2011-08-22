@@ -1221,7 +1221,6 @@ window_about_cb (GtkAction *action,
 				       GINT_TO_POINTER (LINK_TYPE_URL), NULL);
 
 	gtk_show_about_dialog (GTK_WINDOW (window),
-			       "name", "Planner",
 			       "version", VERSION,
 			       "comments", _("A Project Management application for the GNOME desktop"),
 			       "authors", authors,
