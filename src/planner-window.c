@@ -1203,10 +1203,6 @@ window_about_cb (GtkAction *action,
 		"Pedro Soria-Rodriguez <sorrodp@alum.wpi.edu>",
 		NULL
 	};
-	/* I18n: Translators, list your names here, newline separated if there
-	 * are more than one, to appear in the about box.
-	 */
-	const gchar   *translator_credits = N_("translator-credits");
 
 	window = PLANNER_WINDOW (data);
 
@@ -1225,9 +1221,7 @@ window_about_cb (GtkAction *action,
 			       "comments", _("A Project Management application for the GNOME desktop"),
 			       "authors", authors,
 			       "documenters", documenters,
-			       "translator-credits",
-			       strcmp (translator_credits,
-				       _("translator-credits")) != 0 ? _(translator_credits) : NULL,
+			       "translator-credits", _("translator-credits"),
 			       "website", "http://live.gnome.org/Planner",
 			       "website-label", _("The Planner Homepage"),
 			       "logo", pixbuf,
