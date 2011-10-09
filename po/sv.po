@@ -1,8 +1,8 @@
 # Swedish messages for Planner.
-# Copyright (C) 2001-2010 Free Software Foundation, Inc.
+# Copyright (C) 2001-2011 Free Software Foundation, Inc.
 # Richard Hult <richard@imendio.com>, 2001, 2002, 2004.
 # Christian Rose <menthos@menthos.com>, 2002, 2003, 2004, 2005.
-# Daniel Nylander <po@danielnylander.se>, 2006, 2007, 2008, 2009, 2010.
+# Daniel Nylander <po@danielnylander.se>, 2006, 2007, 2008, 2009, 2010, 2011.
 #
 # $Id: sv.po,v 1.48 2006/08/14 09:26:39 dnylande Exp $
 #
@@ -12,10 +12,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: planner\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-09-12 19:59+0200\n"
-"PO-Revision-Date: 2010-09-12 19:59+0100\n"
+"POT-Creation-Date: 2011-10-09 17:44+0200\n"
+"PO-Revision-Date: 2011-10-09 17:46+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
+"Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -694,13 +695,13 @@ msgid "Date"
 msgstr "Datum"
 
 #: ../libplanner/mrp-property.c:375
-#: ../src/planner-gantt-view.c:625
+#: ../src/planner-gantt-view.c:628
 #: ../src/planner-task-view.c:371
 msgid "Duration"
 msgstr "Varaktighet"
 
 #: ../libplanner/mrp-property.c:377
-#: ../src/planner-gantt-view.c:627
+#: ../src/planner-gantt-view.c:630
 #: ../src/planner-resource-view.c:1354
 #: ../src/planner-task-view.c:373
 msgid "Cost"
@@ -727,12 +728,12 @@ msgstr "Inga fel rapporterade."
 msgid "Invalid Unicode"
 msgstr "Ogiltig Unicode"
 
-#: ../libplanner/mrp-sql.c:2260
+#: ../libplanner/mrp-sql.c:2258
 #, c-format
 msgid "Connection to database '%s' failed.\n"
 msgstr "Anslutning till databas \"%s\" misslyckades.\n"
 
-#: ../libplanner/mrp-sql.c:2265
+#: ../libplanner/mrp-sql.c:2263
 #, c-format
 msgid ""
 "Connection to database '%s' failed.\n"
@@ -741,22 +742,22 @@ msgstr ""
 "Anslutning till databas \"%s\" misslyckades.\n"
 "%s"
 
-#: ../libplanner/mrp-sql.c:2274
-#: ../libplanner/mrp-sql.c:3713
+#: ../libplanner/mrp-sql.c:2272
+#: ../libplanner/mrp-sql.c:3711
 msgid "Failed to create a dictionary for the database connection.\n"
 msgstr "Misslyckades med att skapa en ordbok för databasanslutningen.\n"
 
-#: ../libplanner/mrp-sql.c:2288
+#: ../libplanner/mrp-sql.c:2286
 #, c-format
 msgid "BEGIN command failed %s."
 msgstr "BEGIN-kommando misslyckades %s."
 
-#: ../libplanner/mrp-sql.c:2457
+#: ../libplanner/mrp-sql.c:2455
 #, c-format
 msgid "The project '%s' has been changed by the user '%s' since you opened it. Do you want to save anyway?"
 msgstr "Projektet \"%s\" har ändrats av användaren \"%s\" sedan du öppnade det. Vill du spara ändå?"
 
-#: ../libplanner/mrp-sql.c:3706
+#: ../libplanner/mrp-sql.c:3704
 #, c-format
 msgid "Connection to database '%s' failed."
 msgstr "Anslutning till databasen \"%s\" misslyckades."
@@ -966,7 +967,7 @@ msgstr "Importera resurser från Evolution dataserver"
 
 #: ../src/planner-eds-plugin.c:384
 #: ../src/planner-gantt-print.c:191
-#: ../src/planner-gantt-view.c:621
+#: ../src/planner-gantt-view.c:624
 #: ../src/planner-group-dialog.c:822
 #: ../src/planner-property-dialog.c:475
 #: ../src/planner-resource-view.c:1211
@@ -1127,11 +1128,11 @@ msgid "Project start"
 msgstr "Projektstart"
 
 #: ../src/planner-gantt-header.c:671
-msgid "%e %b %Y"
-msgstr "%d %b %Y"
+msgid "%a, %e %b %Y"
+msgstr "%a, %e %b %Y"
 
 #: ../src/planner-gantt-print.c:199
-#: ../src/planner-gantt-view.c:624
+#: ../src/planner-gantt-view.c:627
 #: ../src/planner-resource-dialog.c:1850
 #: ../src/planner-resource-view.c:790
 #: ../src/planner-resource-view.c:806
@@ -1144,7 +1145,7 @@ msgstr "Arbete"
 #: ../src/planner-gantt-row.c:779
 #: ../src/planner-html-plugin.c:124
 #: ../src/planner-task-tree.c:1601
-#: ../src/planner-window.c:1868
+#: ../src/planner-window.c:1861
 msgid "Unnamed"
 msgstr "Namnlös"
 
@@ -1341,11 +1342,11 @@ msgstr "_Ickestandard dagar"
 #. i18n: Label used for the sidebar. Please try to make it short and use
 #. * a linebreak if necessary/possible.
 #.
-#: ../src/planner-gantt-view.c:376
+#: ../src/planner-gantt-view.c:379
 msgid "Gantt"
 msgstr "Gantt"
 
-#: ../src/planner-gantt-view.c:382
+#: ../src/planner-gantt-view.c:385
 msgid "_Gantt Chart"
 msgstr "_Ganttschema"
 
@@ -1357,17 +1358,17 @@ msgstr "_Ganttschema"
 #. * project management term. You might want to leave it
 #. * untranslated unless there is a localized term for it.
 #.
-#: ../src/planner-gantt-view.c:620
+#: ../src/planner-gantt-view.c:623
 #: ../src/planner-task-view.c:366
 msgid "WBS"
 msgstr "WBS"
 
-#: ../src/planner-gantt-view.c:622
+#: ../src/planner-gantt-view.c:625
 #: ../src/planner-task-view.c:368
 msgid "Start"
 msgstr "Start"
 
-#: ../src/planner-gantt-view.c:623
+#: ../src/planner-gantt-view.c:626
 #: ../src/planner-task-view.c:369
 msgid "Finish"
 msgstr "Slut"
@@ -1375,12 +1376,12 @@ msgstr "Slut"
 # Slack brukar kallas slack på svenska inom projekthantering (av det jag
 # sett i litteratur iaf). Glapp kallas ibland det som vi kallar
 # fördröjning (lag).
-#: ../src/planner-gantt-view.c:626
+#: ../src/planner-gantt-view.c:629
 #: ../src/planner-task-view.c:372
 msgid "Slack"
 msgstr "Slack"
 
-#: ../src/planner-gantt-view.c:628
+#: ../src/planner-gantt-view.c:631
 #: ../src/planner-task-view.c:374
 msgid "Assigned to"
 msgstr "Tilldelad till"
@@ -1389,13 +1390,13 @@ msgstr "Tilldelad till"
 #. * of a column containing values from 0 upto 100, indicating
 #. * what part of a task has been completed.
 #.
-#: ../src/planner-gantt-view.c:634
+#: ../src/planner-gantt-view.c:637
 #: ../src/planner-task-view.c:380
 #, no-c-format
 msgid "% Complete"
 msgstr "% Komplett"
 
-#: ../src/planner-gantt-view.c:988
+#: ../src/planner-gantt-view.c:991
 msgid "Edit Gantt Columns"
 msgstr "Redigera ganttkolumner"
 
@@ -1448,7 +1449,7 @@ msgid "Show result in browser"
 msgstr "Visa resultatet i webbläsare"
 
 #: ../src/planner-html-plugin.c:172
-#: ../src/planner-window.c:1583
+#: ../src/planner-window.c:1576
 #: ../src/planner-xml-planner-plugin.c:124
 #, c-format
 msgid "File \"%s\" exists, do you want to overwrite it?"
@@ -1479,7 +1480,7 @@ msgstr ""
 "%s\n"
 "Kör \"%s --help\" för att se en komplett lista över tillgängliga kommandoradsflaggor.\n"
 
-#: ../src/planner-main.c:88
+#: ../src/planner-main.c:91
 #, c-format
 msgid "Invalid geometry string \"%s\"\n"
 msgstr "Ogiltig geometristräng \"%s\"\n"
@@ -2161,7 +2162,7 @@ msgstr "Zooma hela"
 #. i18n: Label used for the sidebar. Please try to make it short and use
 #. * a linebreak if necessary/possible.
 #.
-#: ../src/planner-usage-view.c:257
+#: ../src/planner-usage-view.c:261
 msgid ""
 "Resource\n"
 "Usage"
@@ -2169,13 +2170,22 @@ msgstr ""
 "Resurs-\n"
 "utnyttjande"
 
-#: ../src/planner-usage-view.c:263
+#: ../src/planner-usage-view.c:267
 msgid "Resource _Usage"
 msgstr "Resurs_utnyttjande"
 
-#: ../src/planner-usage-view.c:374
+#: ../src/planner-usage-view.c:378
 msgid "Edit Resource Usage Columns"
 msgstr "Redigera resursanvändningskolumner"
+
+#: ../src/planner-util-win32.c:45
+#, c-format
+msgid "Unable to open '%s'"
+msgstr "Kunde inte öppna \"%s\""
+
+#: ../src/planner-util-win32.c:72
+msgid "Unable to open help file"
+msgstr "Kunde inte öppna hjälpfilen"
 
 #: ../src/planner-window.c:220
 msgid "_File"
@@ -2206,7 +2216,7 @@ msgid "_Import"
 msgstr "_Importera"
 
 #: ../src/planner-window.c:238
-#: ../src/planner-window.c:1452
+#: ../src/planner-window.c:1445
 msgid "_Save"
 msgstr "_Spara"
 
@@ -2351,11 +2361,11 @@ msgstr "Öppna en fil"
 msgid "Planner Files"
 msgstr "Planner-filer"
 
-#. I18n: Translators, list your names here, newline separated if there
-#. * are more than one, to appear in the about box.
-#.
-#: ../src/planner-window.c:1209
-#: ../src/planner-window.c:1231
+#: ../src/planner-window.c:1221
+msgid "A Project Management application for the GNOME desktop"
+msgstr "Ett projekthanteringsprogram för GNOME-skrivbordet"
+
+#: ../src/planner-window.c:1224
 msgid "translator-credits"
 msgstr ""
 "Daniel Nylander\n"
@@ -2366,53 +2376,49 @@ msgstr ""
 "<tp-sv@listor.tp-sv.se>."
 
 #: ../src/planner-window.c:1226
-msgid "A Project Management application for the GNOME desktop"
-msgstr "Ett projekthanteringsprogram för GNOME-skrivbordet"
-
-#: ../src/planner-window.c:1233
 msgid "The Planner Homepage"
 msgstr "Planners hemsida"
 
-#: ../src/planner-window.c:1385
+#: ../src/planner-window.c:1378
 msgid "If you don't save, changes made the last minute will be discarded."
 msgstr "Om du inte sparar kommer ändringarna gjorda den senaste minuten att gå förlorade."
 
-#: ../src/planner-window.c:1391
+#: ../src/planner-window.c:1384
 #, c-format
 msgid "If you don't save, changes made the last %d minute will be discarded."
 msgid_plural "If you don't save, changes made the last %d minutes will be discarded."
 msgstr[0] "Om du inte sparar kommer ändringarna gjorda den senaste minuten att gå förlorade."
 msgstr[1] "Om du inte sparar kommer ändringarna gjorda de senaste %d minuterna att gå förlorade."
 
-#: ../src/planner-window.c:1399
+#: ../src/planner-window.c:1392
 msgid "If you don't save, changes made the last hour will be discarded."
 msgstr "Om du inte sparar kommer ändringarna gjorda den senaste timmen att gå förlorade."
 
-#: ../src/planner-window.c:1404
+#: ../src/planner-window.c:1397
 #, c-format
 msgid "If you don't save, changes made the last %d hour will be discarded."
 msgid_plural "If you don't save, changes made the last %d hours will be discarded."
 msgstr[0] "Om du inte sparar kommer ändringarna gjorda den senaste timmen att gå förlorade."
 msgstr[1] "Om du inte sparar kommer ändringarna gjorda de senaste %d timmarna att gå förlorade."
 
-#: ../src/planner-window.c:1414
+#: ../src/planner-window.c:1407
 #, c-format
 msgid "Save changes to document '%s' before closing?"
 msgstr "Spara ändringarna i dokumentet \"%s\" innan det stängs?"
 
-#: ../src/planner-window.c:1439
+#: ../src/planner-window.c:1432
 msgid "C_lose without saving"
 msgstr "S_täng utan att spara"
 
-#: ../src/planner-window.c:1445
+#: ../src/planner-window.c:1438
 msgid "_Cancel"
 msgstr "_Avbryt"
 
-#: ../src/planner-window.c:1545
+#: ../src/planner-window.c:1538
 msgid "Save a File"
 msgstr "Spara en fil"
 
-#: ../src/planner-window.c:1825
+#: ../src/planner-window.c:1818
 msgid ""
 "You have opened a file that was saved with an old version of Planner.\n"
 "\n"
@@ -2431,7 +2437,7 @@ msgstr ""
 "När du gjort det, kan du ta bort alla restriktioner genom att välja \"Återställ alla restriktioner\" i \"Redigera\"-menyn."
 
 #. Hack.
-#: ../src/planner-window.c:1860
+#: ../src/planner-window.c:1853
 msgid "Unnamed database project"
 msgstr "Namnlöst databasprojekt"
 
@@ -2489,11 +2495,11 @@ msgstr "Ogiltig server-URI"
 
 #. book_target = (EABConfigTargetSource *) data->target;
 #. source = book_target->source;
-#: ../eds-backend/planner-source/planner-source.c:120
+#: ../eds-backend/planner-source/planner-source.c:125
 msgid "Select planner file"
 msgstr "Välj Planner-fil"
 
-#: ../eds-backend/planner-source/planner-source.c:152
+#: ../eds-backend/planner-source/planner-source.c:157
 #, c-format
 msgid "The filename extension of this file isn't the planner usual file extension (%s) Do you want to continue?"
 msgstr "Filnamnsändelsen för denna fil är inte en vanlig filändelse i Planner (%s). Vill du fortsätta?"
