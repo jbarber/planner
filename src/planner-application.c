@@ -222,10 +222,8 @@ PlannerApplication *
 planner_application_new (void)
 {
 	PlannerApplication     *app;
-	PlannerApplicationPriv *priv;
 
 	app  = PLANNER_APPLICATION (g_object_new (PLANNER_TYPE_APPLICATION, NULL));
-	priv = app->priv;
 
 	return app;
 }

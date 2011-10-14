@@ -98,10 +98,7 @@ static void
 task_date_widget_today_clicked_cb (GtkWidget             *button,
 				   PlannerTaskDateWidget *widget)
 {
-	PlannerTaskDateWidgetPriv *priv;
 	mrptime                    today;
-
-	priv = GET_PRIV (widget);
 
 	today = mrp_time_current_time ();
 	planner_task_date_widget_set_date (widget, today);

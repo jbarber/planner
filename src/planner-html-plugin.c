@@ -65,11 +65,9 @@ html_plugin_export_do (PlannerPlugin *plugin,
 		       const gchar   *path,
 		       gboolean       show_in_browser)
 {
-	PlannerPluginPriv *priv;
 	MrpProject        *project;
 	GtkWidget         *dialog;
 
-	priv = plugin->priv;
 	project = planner_window_get_project (plugin->main_window);
 
 	if (!mrp_project_export (project, path, "Planner HTML", TRUE, NULL)) {
@@ -92,7 +90,6 @@ html_plugin_export (GtkAction *action,
 		    gpointer   user_data)
 {
 	PlannerPlugin     *plugin;
-	PlannerPluginPriv *priv;
 	MrpProject        *project;
 	const gchar       *uri;
 	gchar             *filename;
@@ -104,7 +101,6 @@ html_plugin_export (GtkAction *action,
 	gboolean           show;
 
 	plugin = PLANNER_PLUGIN (user_data);
-	priv = plugin->priv;
 
 	filechooser = gtk_file_chooser_dialog_new (_("Export to HTML"),
 						   GTK_WINDOW (plugin->main_window),

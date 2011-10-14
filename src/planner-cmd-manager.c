@@ -374,12 +374,9 @@ planner_cmd_manager_insert_and_do (PlannerCmdManager *manager, PlannerCmd *cmd)
 gboolean
 planner_cmd_manager_undo (PlannerCmdManager *manager)
 {
-	PlannerCmdManagerPriv *priv;
 	PlannerCmd            *cmd;
 
 	g_return_val_if_fail (PLANNER_IS_CMD_MANAGER (manager), FALSE);
-
-	priv = manager->priv;
 
 	cmd = get_undo_cmd (manager, TRUE);
 
@@ -406,12 +403,9 @@ planner_cmd_manager_undo (PlannerCmdManager *manager)
 gboolean
 planner_cmd_manager_redo (PlannerCmdManager *manager)
 {
-	PlannerCmdManagerPriv *priv;
 	PlannerCmd            *cmd;
 
 	g_return_val_if_fail (PLANNER_IS_CMD_MANAGER (manager), FALSE);
-
-	priv = manager->priv;
 
 	cmd = get_redo_cmd (manager, TRUE);
 	if (!cmd) {

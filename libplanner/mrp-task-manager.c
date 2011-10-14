@@ -837,11 +837,8 @@ add_predecessor_to_dependency_graph (MrpTaskManager *manager,
 				     MrpTask        *task,
 				     MrpTask        *predecessor)
 {
-	MrpTaskManagerPriv *priv;
 	MrpTaskGraphNode   *task_node;
 	MrpTaskGraphNode   *predecessor_node;
-
-	priv = manager->priv;
 
 	predecessor_node = imrp_task_get_graph_node (predecessor);
 
@@ -886,11 +883,8 @@ remove_predecessor_from_dependency_graph (MrpTaskManager *manager,
 					  MrpTask        *task,
 					  MrpTask        *predecessor)
 {
-	MrpTaskManagerPriv *priv;
 	MrpTaskGraphNode   *task_node;
 	MrpTaskGraphNode   *predecessor_node;
-
-	priv = manager->priv;
 
 	predecessor_node = imrp_task_get_graph_node (predecessor);
 
@@ -939,11 +933,8 @@ remove_parent_from_dependency_graph (MrpTaskManager *manager,
 				     MrpTask        *task,
 				     MrpTask        *parent)
 {
-	MrpTaskManagerPriv *priv;
 	MrpTaskGraphNode   *task_node;
 	MrpTaskGraphNode   *parent_node;
-
-	priv = manager->priv;
 
 	task_node = imrp_task_get_graph_node (task);
 	parent_node = imrp_task_get_graph_node (parent);
@@ -991,11 +982,8 @@ add_parent_to_dependency_graph (MrpTaskManager *manager,
 				MrpTask        *task,
 				MrpTask        *parent)
 {
-	MrpTaskManagerPriv *priv;
 	MrpTaskGraphNode   *task_node;
 	MrpTaskGraphNode   *parent_node;
-
-	priv = manager->priv;
 
 	task_node = imrp_task_get_graph_node (task);
 	parent_node = imrp_task_get_graph_node (parent);
@@ -1681,15 +1669,12 @@ task_manager_calculate_milestone_work_start (MrpTaskManager *manager,
 					     mrptime         start)
 
 {
-	MrpTaskManagerPriv *priv;
 	mrptime             t;
 	mrptime             t1, t2;
 	mrptime             work_start;
 	GList              *unit_ivals, *l;
 	MrpUnitsInterval   *unit_ival;
 	MrpTaskType         type;
-
-	priv = manager->priv;
 
 	type = mrp_task_get_task_type (task);
 	g_return_if_fail (type == MRP_TASK_TYPE_MILESTONE);
@@ -2065,7 +2050,6 @@ static void
 task_manager_do_forward_pass_helper (MrpTaskManager *manager,
 				     MrpTask        *task)
 {
-	MrpTaskManagerPriv *priv;
 	mrptime             sub_start, sub_work_start, sub_finish;
 	mrptime             old_start, old_finish;
 	mrptime             new_start, new_finish;
@@ -2074,8 +2058,6 @@ task_manager_do_forward_pass_helper (MrpTaskManager *manager,
 	gint                work;
 	mrptime             t1, t2;
 	MrpTaskSched        sched;
-
-	priv = manager->priv;
 
 	old_start = mrp_task_get_start (task);
 	old_finish = mrp_task_get_finish (task);
@@ -2684,15 +2666,12 @@ task_manager_get_work_for_calendar (MrpTaskManager *manager,
 				    mrptime         start,
 				    mrptime         finish)
 {
-	MrpTaskManagerPriv *priv;
 	mrptime             t;
 	mrptime             t1, t2;
 	gint                work;
 	MrpDay             *day;
 	GList              *ivals, *l;
 	MrpInterval        *ival;
-
-	priv = manager->priv;
 
 	work = 0;
 
@@ -2739,14 +2718,11 @@ task_manager_get_work_for_task_with_assignments (MrpTaskManager *manager,
 									   mrptime         start,
 									   mrptime         finish)
 {
-	MrpTaskManagerPriv *priv;
 	mrptime             t;
 	mrptime             t1, t2;
 	gint                work, delta;
 	GList              *ivals, *l;
 	MrpUnitsInterval   *ival;
-
-	priv = manager->priv;
 
 	work = 0;
 

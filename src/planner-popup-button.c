@@ -130,14 +130,11 @@ popup_button_press_event_cb (GtkWidget          *popup_window,
 			     GdkEventButton     *event,
 			     PlannerPopupButton *popup_button)
 {
-	PlannerPopupButtonPriv *priv;
 	GtkAllocation           alloc;
 	gdouble                 x, y;
 	gint                    xoffset, yoffset;
 	gint                    x1, y1;
 	gint                    x2, y2;
-
-	priv = GET_PRIV (popup_button);
 
 	/* Popdown the window if the click is outside of it. */
 

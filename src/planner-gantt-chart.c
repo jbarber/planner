@@ -690,13 +690,11 @@ gantt_chart_row_inserted (GtkTreeModel *model,
 			  gpointer      data)
 {
 	PlannerGanttChart     *chart;
-	PlannerGanttChartPriv *priv;
 	gboolean               free_path = FALSE;
 	MrpTask               *task;
 	TreeNode              *node;
 
 	chart = data;
-	priv = chart->priv;
 
 	g_return_if_fail (path != NULL || iter != NULL);
 
@@ -1360,10 +1358,6 @@ gantt_chart_task_moved (MrpProject        *project,
 			MrpTask           *task,
 			PlannerGanttChart *chart)
 {
-	PlannerGanttChartPriv *priv;
-
-	priv = chart->priv;
-
 	/* Note: Seems like we don't need this? */
 	/*gantt_chart_reflow_now (chart);*/
 
@@ -1852,14 +1846,11 @@ planner_gantt_chart_can_zoom (PlannerGanttChart *chart,
 void
 planner_gantt_chart_zoom_to_fit (PlannerGanttChart *chart)
 {
-	PlannerGanttChartPriv *priv;
 	gdouble                t;
 	gdouble                zoom;
 	gdouble                alloc;
 
 	g_return_if_fail (PLANNER_IS_GANTT_CHART (chart));
-
-	priv = chart->priv;
 
 	t = gantt_chart_get_width (chart);
 	if (t == -1) {

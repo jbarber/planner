@@ -251,12 +251,9 @@ task_cmd_edit_property (PlannerWindow   *window,
 			const gchar     *property,
 			const GValue    *value)
 {
-	PlannerTaskTreePriv *priv;
 	PlannerCmd          *cmd_base;
 	TaskCmdEditProperty *cmd;
 	PlannerGanttModel   *model;
-
-	priv = tree->priv;
 
 	cmd_base = planner_cmd_new (TaskCmdEditProperty,
 				    _("Edit task property"),

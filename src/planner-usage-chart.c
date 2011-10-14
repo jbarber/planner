@@ -534,14 +534,11 @@ planner_usage_chart_can_zoom (PlannerUsageChart *chart,
 void
 planner_usage_chart_zoom_to_fit (PlannerUsageChart *chart)
 {
-	PlannerUsageChartPriv *priv;
 	gdouble                 t;
 	gdouble                 zoom;
 	gdouble                 alloc;
 
 	g_return_if_fail (PLANNER_IS_USAGE_CHART (chart));
-
-	priv = chart->priv;
 
 	t = usage_chart_get_width (chart);
 	if (t == -1) {
@@ -1382,7 +1379,6 @@ usage_chart_row_inserted (GtkTreeModel *model,
 			   gpointer      data)
 {
 	PlannerUsageChart     *chart;
-	PlannerUsageChartPriv *priv;
 	gboolean                free_path = FALSE;
 	gboolean                free_iter = FALSE;
 	MrpResource            *res;
@@ -1390,7 +1386,6 @@ usage_chart_row_inserted (GtkTreeModel *model,
 	TreeNode               *node = NULL;
 
 	chart = data;
-	priv = chart->priv;
 
 	if (path == NULL) {
 		path = gtk_tree_model_get_path (model, iter);

@@ -717,13 +717,10 @@ usage_model_resource_assignment_added_cb (MrpResource *res,
 					   MrpAssignment *assign,
 					   PlannerUsageModel *model)
 {
-	PlannerUsageModelPriv *priv;
 	GNode *res_node;
 	GNode *assign_node;
 	GtkTreePath *path;
 	GtkTreeIter iter;
-
-	priv = model->priv;
 
 	res_node = g_hash_table_lookup (model->priv->resource2node, res);
 	assign_node = g_node_new (assign);

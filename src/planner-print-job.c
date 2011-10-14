@@ -130,10 +130,6 @@ print_job_finalize (GObject *object)
 static void
 print_job_transform (PlannerPrintJob *job, gdouble *x, gdouble *y)
 {
-	PlannerPrintJobPriv *priv;
-
-	priv = job->priv;
-
 	if (x) {
 		*x += MARGIN;
 	}

@@ -160,11 +160,6 @@ object_init (MrpObject *object)
 static void
 object_finalize (GObject *g_object)
 {
-        MrpObject     *object = MRP_OBJECT (g_object);
-        MrpObjectPriv *priv;
-
-        priv = object->priv;
-
         if (G_OBJECT_CLASS (parent_class)->finalize) {
                 (* G_OBJECT_CLASS (parent_class)->finalize) (g_object);
         }

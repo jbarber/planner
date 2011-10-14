@@ -441,12 +441,10 @@ recent_chooser_item_activated (GtkRecentChooser *chooser, gpointer user_data)
 {
 	gchar *uri;
 	PlannerWindow *window;
-	PlannerWindowPriv *priv;
 
 	g_return_if_fail (PLANNER_IS_WINDOW (user_data));
 
 	window = PLANNER_WINDOW (user_data);
-	priv = window->priv;
 
 	uri = gtk_recent_chooser_get_current_uri (chooser);
 	if (uri != NULL) {
@@ -842,10 +840,7 @@ window_new_cb (GtkAction *action,
 static gchar *
 get_last_dir (PlannerWindow *window)
 {
-	PlannerWindowPriv *priv;
 	gchar             *last_dir;
-
-	priv = window->priv;
 
 	last_dir = planner_conf_get_string (CONF_LAST_DIR, NULL);
 
@@ -861,14 +856,12 @@ window_open_cb (GtkAction *action,
 		gpointer   data)
 {
 	PlannerWindow     *window;
-	PlannerWindowPriv *priv;
 	GtkWidget         *file_chooser;
 	GtkFileFilter     *filter;
 	gint               response;
 	gchar             *last_dir;
 
 	window = PLANNER_WINDOW (data);
-	priv = window->priv;
 
 	file_chooser = gtk_file_chooser_dialog_new (_("Open a File"),
 						    GTK_WINDOW (window),
@@ -956,12 +949,10 @@ window_page_setup_cb (GtkAction *action,
 		      gpointer   data)
 {
 	PlannerWindow     *window;
-	PlannerWindowPriv *priv;
 	GtkPageSetup      *old_page_setup, *new_page_setup;
 	GtkPrintSettings  *settings;
 
 	window = PLANNER_WINDOW (data);
-	priv = window->priv;
 
 	settings = planner_print_dialog_load_print_settings ();
 	old_page_setup = planner_print_dialog_load_page_setup ();
@@ -1250,11 +1241,8 @@ window_drag_data_received_cb (GtkWidget        *widget,
 			      guint             time,
 			      PlannerWindow    *window)
 {
-	PlannerWindowPriv  *priv;
 	gchar             **uris;
 	gint                i;
-
-	priv = window->priv;
 
 	if (data->length < 0 || data->format != 8) {
 		g_message ("Don't know how to handle format %d", data->format);
@@ -1872,11 +1860,8 @@ window_get_name (PlannerWindow *window)
 static void
 window_update_title (PlannerWindow *window)
 {
-	PlannerWindowPriv *priv;
 	gchar             *name;
 	gchar             *title;
-
-	priv = window->priv;
 
 	name = window_get_name (window);
 
@@ -2002,11 +1987,8 @@ planner_window_get_cmd_manager (PlannerWindow *window)
 static void
 window_save_state (PlannerWindow *window)
 {
-	PlannerWindowPriv *priv;
 	GdkWindowState     state;
 	gboolean           maximized;
-
-	priv = window->priv;
 
 	state = gdk_window_get_state (GTK_WIDGET (window)->window);
 	if (state & GDK_WINDOW_STATE_MAXIMIZED) {
@@ -2035,13 +2017,10 @@ window_save_state (PlannerWindow *window)
 static void
 window_restore_state (PlannerWindow *window)
 {
-	PlannerWindowPriv *priv;
 	gboolean           exists;
 	gboolean           maximized;
 	int                width, height;
 	int                x, y;
-
-	priv = window->priv;
 
 	exists = planner_conf_dir_exists (CONF_WINDOW_DIR, NULL);
 

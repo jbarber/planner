@@ -745,15 +745,12 @@ gint
 mrp_calendar_day_get_total_work (MrpCalendar *calendar,
 				 MrpDay      *day)
 {
-	MrpCalendarPriv *priv;
 	GList          *list, *l;
 	MrpInterval     *ival;
 	gint             total = 0;
 	mrptime          start, end;
 
 	g_return_val_if_fail (MRP_IS_CALENDAR (calendar), 0);
-
-	priv = calendar->priv;
 
 	list = mrp_calendar_day_get_intervals (calendar, day, TRUE);
 
@@ -932,13 +929,11 @@ mrp_calendar_get_day (MrpCalendar *calendar,
 		      mrptime      date,
 		      gboolean     check_ancestors)
 {
-	MrpCalendarPriv *priv;
 	mrptime          aligned_date;
 	MrpDay          *day;
 
 	g_return_val_if_fail (MRP_IS_CALENDAR (calendar), NULL);
 
-	priv         = calendar->priv;
 	aligned_date = mrp_time_align_day (date);
 	day          = calendar_get_day (calendar, aligned_date, check_ancestors);
 

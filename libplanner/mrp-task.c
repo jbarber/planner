@@ -653,12 +653,10 @@ static void
 task_removed (MrpObject *object)
 {
 	MrpTask     *task;
-	MrpTaskPriv *priv;
 
 	g_return_if_fail (MRP_IS_TASK (object));
 
 	task = MRP_TASK (object);
-	priv = task->priv;
 
 	task_remove_assignments (task);
 	task_remove_relations (task);
