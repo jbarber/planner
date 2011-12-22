@@ -1811,7 +1811,7 @@ planner_window_check_version (PlannerWindow *window)
 			  "did not fully support automatic rescheduling. To "
 			  "take advantage of this new feature, you should add "
 			  "predecessor relations between tasks that are "
-			  "dependant on each other.\n"
+			  "dependent on each other.\n"
 			  "\n"
 			  "You can add a predecessor relation by clicking on "
 			  "the predecessor and dragging to the successor.\n"
