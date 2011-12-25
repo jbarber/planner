@@ -1168,7 +1168,6 @@ task_dialog_name_focus_out_cb (GtkWidget     *w,
 {
 	gchar        *focus_in_name;
 	GValue        value = { 0 };
-	PlannerCmd   *cmd;
 
 	g_assert (MRP_IS_TASK (data->task));
 
@@ -1177,8 +1176,8 @@ task_dialog_name_focus_out_cb (GtkWidget     *w,
 	g_value_init (&value, G_TYPE_STRING);
 	g_value_set_string (&value, focus_in_name);
 
-	cmd = task_cmd_edit_property_focus (data->main_window,
-					    data->task, "name", &value);
+	task_cmd_edit_property_focus (data->main_window,
+				      data->task, "name", &value);
 
 	g_free (focus_in_name);
 
@@ -1337,7 +1336,6 @@ task_dialog_work_focus_out_cb (GtkWidget     *w,
 	gint          current_work;
 	gint          focus_in_work;
 	GValue        value = { 0 };
-	PlannerCmd   *cmd;
 
 	g_object_get (data->task, "project", &project, NULL);
 
@@ -1356,9 +1354,9 @@ task_dialog_work_focus_out_cb (GtkWidget     *w,
 	g_value_init (&value, G_TYPE_INT);
 	g_value_set_int (&value, focus_in_work);
 
-	cmd = task_cmd_edit_property_focus (data->main_window,
-					    data->task, "work",
-					    &value);
+	task_cmd_edit_property_focus (data->main_window,
+				      data->task, "work",
+				      &value);
 
 	return FALSE;
 }
@@ -1416,7 +1414,6 @@ task_dialog_duration_focus_out_cb (GtkWidget     *w,
 	gint          current_duration;
 	gint          focus_in_duration;
 	GValue        value = { 0 };
-	PlannerCmd   *cmd;
 
 	g_object_get (data->task, "project", &project, NULL);
 
@@ -1435,9 +1432,9 @@ task_dialog_duration_focus_out_cb (GtkWidget     *w,
 	g_value_init (&value, G_TYPE_INT);
 	g_value_set_int (&value, focus_in_duration);
 
-	cmd = task_cmd_edit_property_focus (data->main_window,
-					    data->task, "duration",
-					    &value);
+	task_cmd_edit_property_focus (data->main_window,
+				      data->task, "duration",
+				      &value);
 
 	return FALSE;
 }
@@ -1562,7 +1559,6 @@ task_dialog_complete_focus_out_cb (GtkWidget     *w,
 	guint         current_complete;
 	guint         focus_in_complete;
 	GValue        value = { 0 };
-	PlannerCmd   *cmd;
 
 	g_assert (MRP_IS_TASK (data->task));
 
@@ -1581,8 +1577,8 @@ task_dialog_complete_focus_out_cb (GtkWidget     *w,
 	g_value_init (&value, G_TYPE_UINT);
 	g_value_set_uint (&value, focus_in_complete);
 
-	cmd = task_cmd_edit_property_focus (data->main_window,
-					    data->task, "percent_complete", &value);
+	task_cmd_edit_property_focus (data->main_window,
+				      data->task, "percent_complete", &value);
 
 	return FALSE;
 }
@@ -1653,7 +1649,7 @@ task_dialog_priority_focus_out_cb (GtkWidget     *w,
 	gint          current_priority;
 	gint          focus_in_priority;
 	GValue        value = { 0 };
-	PlannerCmd   *cmd;
+	PlannerCmd __attribute__ ((unused))  *cmd;
 
 	g_assert (MRP_IS_TASK (data->task));
 
@@ -1749,11 +1745,10 @@ task_dialog_note_focus_out_cb (GtkWidget     *w,
 			       DialogData    *data)
 {
 	gchar        *focus_in_note;
-	PlannerCmd   *cmd;
 
 	focus_in_note = g_object_get_data (G_OBJECT (data->task),"focus_in_note");
 
-	cmd = task_cmd_edit_note (data, focus_in_note);
+	task_cmd_edit_note (data, focus_in_note);
 
 	if (g_getenv ("PLANNER_DEBUG_UNDO_TASK")) {
 		gchar *note;

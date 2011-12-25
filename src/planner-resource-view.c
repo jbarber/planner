@@ -1004,7 +1004,6 @@ resource_view_remove_resource_cb (GtkAction *action,
 	PlannerResourceViewPriv *priv;
 	MrpProject              *project;
 	GList                   *list, *node;
-	ResourceCmdRemove       *cmd;
 
 	view = PLANNER_VIEW (data);
 	priv = PLANNER_RESOURCE_VIEW (view)->priv;
@@ -1014,7 +1013,7 @@ resource_view_remove_resource_cb (GtkAction *action,
 	list = resource_view_selection_get_list (view);
 
 	for (node = list; node; node = node->next) {
-		cmd = (ResourceCmdRemove*) resource_cmd_remove (view, MRP_RESOURCE (node->data));
+		resource_cmd_remove (view, MRP_RESOURCE (node->data));
 	}
 
 	g_list_free (list);
@@ -1569,7 +1568,6 @@ resource_view_cell_name_edited (GtkCellRendererText *cell,
 				gpointer             user_data)
 {
 	PlannerView      *view;
-	PlannerCmd       *cmd;
 	MrpResource      *resource;
 	GtkTreeView      *tree_view;
 	GtkTreeModel     *model;
@@ -1590,7 +1588,7 @@ resource_view_cell_name_edited (GtkCellRendererText *cell,
 
 	g_value_init (&value, G_TYPE_STRING);
 	g_value_set_string (&value, new_text);
-	cmd = resource_cmd_edit_property (view, resource, "name", &value);
+	resource_cmd_edit_property (view, resource, "name", &value);
 	g_value_unset (&value);
 
 	gtk_tree_path_free (path);
@@ -1603,7 +1601,6 @@ resource_view_cell_short_name_edited (GtkCellRendererText *cell,
 				      gpointer             user_data)
 {
 	PlannerResourceView *view;
-	PlannerCmd          *cmd;
 	MrpResource         *resource;
 	GtkTreeView         *tree_view;
 	GtkTreeModel        *model;
@@ -1625,7 +1622,7 @@ resource_view_cell_short_name_edited (GtkCellRendererText *cell,
 
 	g_value_init (&value, G_TYPE_STRING);
 	g_value_set_string (&value, new_text);
-	cmd = resource_cmd_edit_property (PLANNER_VIEW (view), resource, "short_name", &value);
+	resource_cmd_edit_property (PLANNER_VIEW (view), resource, "short_name", &value);
 	g_value_unset (&value);
 
 	gtk_tree_path_free (path);
@@ -1639,7 +1636,6 @@ resource_view_cell_email_edited (GtkCellRendererText *cell,
 				 gpointer             user_data)
 {
 	PlannerView      *view;
-	PlannerCmd       *cmd;
 	MrpResource      *resource;
 	GtkTreeView      *tree_view;
 	GtkTreeModel     *model;
@@ -1661,7 +1657,7 @@ resource_view_cell_email_edited (GtkCellRendererText *cell,
 
 	g_value_init (&value, G_TYPE_STRING);
 	g_value_set_string (&value, new_text);
-	cmd = resource_cmd_edit_property (view, resource, "email", &value);
+	resource_cmd_edit_property (view, resource, "email", &value);
 	g_value_unset (&value);
 
 	gtk_tree_path_free (path);
@@ -1674,7 +1670,6 @@ resource_view_cell_cost_edited (GtkCellRendererText *cell,
 				gpointer             user_data)
 {
 	PlannerView  *view;
-	PlannerCmd   *cmd;
 	MrpResource  *resource;
 	GtkTreeView  *tree_view;
 	GtkTreeModel *model;
@@ -1698,7 +1693,7 @@ resource_view_cell_cost_edited (GtkCellRendererText *cell,
 	fvalue = planner_parse_float (new_text);
 	g_value_init (&value, G_TYPE_FLOAT);
 	g_value_set_float (&value, fvalue);
-	cmd = resource_cmd_edit_property (view, resource, "cost", &value);
+	resource_cmd_edit_property (view, resource, "cost", &value);
 	g_value_unset (&value);
 
 	gtk_tree_path_free (path);
@@ -1711,7 +1706,6 @@ resource_view_cell_type_edited (PlannerCellRendererList *cell,
 				gpointer                 user_data)
 {
 	PlannerView      *view;
-	PlannerCmd       *cmd;
 	MrpResource      *resource;
 	MrpResourceType   type;
 	GtkTreeView      *tree_view;
@@ -1740,7 +1734,7 @@ resource_view_cell_type_edited (PlannerCellRendererList *cell,
 
 	g_value_init (&value, G_TYPE_INT);
 	g_value_set_int (&value, type);
-	cmd = resource_cmd_edit_property (view, resource, "type", &value);
+	resource_cmd_edit_property (view, resource, "type", &value);
 	g_value_unset (&value);
 
 	gtk_tree_path_free (path);
@@ -1796,7 +1790,6 @@ resource_view_cell_group_edited (PlannerCellRendererList *cell,
 				 gpointer                 user_data)
 {
 	PlannerView      *view;
-	PlannerCmd       *cmd;
 	MrpResource      *resource;
 	MrpGroup         *group;
 	GtkTreeView      *tree_view;
@@ -1831,7 +1824,7 @@ resource_view_cell_group_edited (PlannerCellRendererList *cell,
 	g_value_init (&value, MRP_TYPE_GROUP);
 	g_value_set_object (&value, group);
 
-	cmd = resource_cmd_edit_property (view, resource, "group", &value);
+	resource_cmd_edit_property (view, resource, "group", &value);
 	g_value_unset (&value);
 
 	gtk_tree_path_free (path);
@@ -1901,7 +1894,6 @@ resource_view_property_value_edited (GtkCellRendererText *cell,
 				     ColPropertyData     *data)
 {
 	PlannerView        *view;
-	PlannerCmd         *cmd;
 	GtkTreePath        *path;
 	GtkTreeIter         iter;
 	GtkTreeModel       *model;
@@ -1922,9 +1914,9 @@ resource_view_property_value_edited (GtkCellRendererText *cell,
 
 	value = resource_view_custom_property_set_value (property, new_text);
 
-	cmd = resource_cmd_edit_custom_property (view, resource,
-						 property,
-						 &value);
+	resource_cmd_edit_custom_property (view, resource,
+					   property,
+					   &value);
 	g_value_unset (&value);
 
 	gtk_tree_path_free (path);

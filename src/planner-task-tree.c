@@ -2112,7 +2112,6 @@ task_tree_property_value_edited (GtkCellRendererText *cell,
 				 gchar               *new_text,
 				 ColPropertyData     *data)
 {
-	PlannerCmd              *cmd;
 	GtkTreePath             *path;
 	GtkTreeIter              iter;
 	GtkTreeModel            *model;
@@ -2130,7 +2129,7 @@ task_tree_property_value_edited (GtkCellRendererText *cell,
 
 	value = task_view_custom_property_set_value (property, new_text, cell);
 
-	cmd = task_cmd_edit_custom_property (data->tree, task, property, &value);
+	task_cmd_edit_custom_property (data->tree, task, property, &value);
 
 	g_value_unset (&value);
 
@@ -2643,7 +2642,6 @@ planner_task_tree_insert_subtask (PlannerTaskTree *tree)
 	gint               work;
 	gint               depth;
 	gint               position;
-	PlannerCmd        *cmd;
 	GtkTreeIter        iter;
 
 	list = planner_task_tree_get_selected_tasks (tree);
@@ -2683,8 +2681,8 @@ planner_task_tree_insert_subtask (PlannerTaskTree *tree)
 		parent = NULL;
 	}
 
-	cmd = planner_task_cmd_insert (tree->priv->main_window,
-				       parent, position, work, work, NULL);
+	planner_task_cmd_insert (tree->priv->main_window,
+				 parent, position, work, work, NULL);
 
 	if (!GTK_WIDGET_HAS_FOCUS (tree)) {
 		gtk_widget_grab_focus (GTK_WIDGET (tree));
@@ -2716,7 +2714,6 @@ planner_task_tree_insert_task (PlannerTaskTree *tree)
 	gint                 work;
 	gint                 position;
 	gint                 depth;
-	PlannerCmd          *cmd;
 
 	priv = tree->priv;
 
@@ -2773,8 +2770,8 @@ planner_task_tree_insert_task (PlannerTaskTree *tree)
 		parent = NULL;
 	}
 
-	cmd = planner_task_cmd_insert (tree->priv->main_window,
-				       parent, position, work, work, NULL);
+	planner_task_cmd_insert (tree->priv->main_window,
+				 parent, position, work, work, NULL);
 
 	if (!GTK_WIDGET_HAS_FOCUS (tree)) {
 		gtk_widget_grab_focus (GTK_WIDGET (tree));
@@ -2797,7 +2794,6 @@ planner_task_tree_remove_task (PlannerTaskTree *tree)
 {
 	PlannerTaskTreePriv *priv;
 	GList               *list, *l;
-	TaskCmdRemove       *cmd;
 	PlannerGanttModel   *model;
 	gboolean             many;
 
@@ -2830,7 +2826,7 @@ planner_task_tree_remove_task (PlannerTaskTree *tree)
 
 		/* Children are removed with the parent. */
 		if (path != NULL) {
-			cmd = (TaskCmdRemove*) task_cmd_remove (tree, path, task);
+			task_cmd_remove (tree, path, task);
 		}
 		gtk_tree_path_free (path);
 	}

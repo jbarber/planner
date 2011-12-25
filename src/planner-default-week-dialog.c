@@ -536,9 +536,11 @@ default_week_cmd_edit_undo (PlannerCmd *cmd_base)
 static void
 default_week_cmd_edit_free (PlannerCmd *cmd_base)
 {
+/* FIXME: cmd_base not freed
 	DefaultWeekCmdEdit *cmd;
 
 	cmd = (DefaultWeekCmdEdit *) cmd_base;
+*/
 }
 
 static PlannerCmd *

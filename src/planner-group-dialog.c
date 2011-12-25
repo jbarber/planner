@@ -449,7 +449,6 @@ group_dialog_remove_group_cb (GtkWidget *widget, GtkWidget *dialog)
 {
 	DialogData *data;
 	GList             *list, *node;
-	GroupCmdRemove *cmd;
 
 	g_return_if_fail (GTK_IS_DIALOG (dialog));
 
@@ -458,7 +457,7 @@ group_dialog_remove_group_cb (GtkWidget *widget, GtkWidget *dialog)
 	list = group_dialog_selection_get_list (dialog);
 
 	for (node = list; node; node = node->next) {
-		cmd = (GroupCmdRemove*) group_cmd_remove (data->view, MRP_GROUP (node->data));
+		group_cmd_remove (data->view, MRP_GROUP (node->data));
 	}
 
 	g_list_free (list);
@@ -687,7 +686,6 @@ group_dialog_cell_edited (GtkCellRendererText *cell,
 	GValue            value = { 0 };
 	gint              column;
 	MrpGroup         *group;
-	PlannerCmd       *cmd;
 	gchar            *property = "";
 
 	data  = g_object_get_data (G_OBJECT (dialog), "data");
@@ -738,10 +736,10 @@ group_dialog_cell_edited (GtkCellRendererText *cell,
 		g_assert_not_reached ();
 	}
 
-	cmd = group_cmd_edit_property (data->view,
-				       group,
-				       property,
-				       &value);
+	group_cmd_edit_property (data->view,
+				 group,
+				 property,
+				 &value);
 
 	gtk_tree_path_free (path);
 }
