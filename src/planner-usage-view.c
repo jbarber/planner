@@ -302,9 +302,11 @@ usage_view_get_widget (PlannerView *view)
 static void
 usage_view_print_init (PlannerView *view, PlannerPrintJob *job)
 {
-        PlannerUsageViewPriv *priv;
+	/* FIXME: initialize usage view printing
+	  PlannerUsageViewPriv *priv;
 
-        priv = PLANNER_USAGE_VIEW (view)->priv;
+	  priv = PLANNER_USAGE_VIEW (view)->priv;
+	*/
 
         /*priv->print_data = planner_usage_print_data_new (view, job);*/
 }

@@ -591,14 +591,11 @@ void
 imrp_resource_add_assignment (MrpResource *resource, MrpAssignment *assignment)
 {
 	MrpResourcePriv *priv;
-	MrpTask         *task;
 
 	g_return_if_fail (MRP_IS_RESOURCE (resource));
 	g_return_if_fail (MRP_IS_ASSIGNMENT (assignment));
 
 	priv = resource->priv;
-
-	task = mrp_assignment_get_task (assignment);
 
 	priv->assignments = g_list_prepend (priv->assignments,
 					    g_object_ref (assignment));

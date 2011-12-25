@@ -231,14 +231,12 @@ usage_chart_class_init (PlannerUsageChartClass * class)
 	GObjectClass      *o_class;
 	GtkObjectClass    *object_class;
 	GtkWidgetClass    *widget_class;
-	GtkContainerClass *container_class;
 
 	parent_class = g_type_class_peek_parent (class);
 
 	o_class = (GObjectClass *) class;
 	object_class = (GtkObjectClass *) class;
 	widget_class = (GtkWidgetClass *) class;
-	container_class = (GtkContainerClass *) class;
 
 	o_class->set_property = usage_chart_set_property;
 	o_class->get_property = usage_chart_get_property;
@@ -661,10 +659,6 @@ usage_chart_realize (GtkWidget *widget)
 static void
 usage_chart_unrealize (GtkWidget *widget)
 {
-	PlannerUsageChart *chart;
-
-	chart = PLANNER_USAGE_CHART (widget);
-
 	if (GTK_WIDGET_CLASS (parent_class)->unrealize) {
 		GTK_WIDGET_CLASS (parent_class)->unrealize (widget);
 	}
@@ -694,9 +688,6 @@ static void
 usage_chart_size_allocate (GtkWidget *widget, GtkAllocation *allocation)
 {
 	PlannerUsageChart *chart;
-	gboolean            height_changed;
-
-	height_changed = widget->allocation.height != allocation->height;
 
 	GTK_WIDGET_CLASS (parent_class)->size_allocate (widget, allocation);
 
@@ -1074,7 +1065,6 @@ usage_chart_build_tree (PlannerUsageChart * chart)
 	PlannerUsageChartPriv *priv;
 	GtkTreeIter             iter;
 	GtkTreePath            *path;
-	TreeNode               *node;
 	GtkTreeIter             child;
 
 	priv = chart->priv;
@@ -1095,7 +1085,7 @@ usage_chart_build_tree (PlannerUsageChart * chart)
 							 &iter);
 
 		path = gtk_tree_model_get_path (priv->model, &iter);
-		node = usage_chart_insert_resource (chart, path, res);
+		usage_chart_insert_resource (chart, path, res);
 		gtk_tree_path_free (path);
 		if (gtk_tree_model_iter_children (priv->model, &child, &iter)) {
 			do {
@@ -1105,9 +1095,9 @@ usage_chart_build_tree (PlannerUsageChart * chart)
 					 &child);
 				path = gtk_tree_model_get_path (priv->model,
 								&child);
-				node = usage_chart_insert_assignment (chart,
-								       path,
-								       assign);
+				usage_chart_insert_assignment (chart,
+							       path,
+							       assign);
 				gtk_tree_path_free (path);
 			} while (gtk_tree_model_iter_next
 				 (priv->model, &child));

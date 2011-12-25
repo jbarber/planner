@@ -361,13 +361,14 @@ eel_canvas_rect_update (GnomeCanvasItem *item,
 static void
 eel_canvas_rect_realize (GnomeCanvasItem *item)
 {
-	EelCanvasRect *rect;
-	EelCanvasRectDetails *details;
+	EelCanvasRect *rect = EEL_CANVAS_RECT (item);
+
 #ifdef HAVE_RENDER
+	EelCanvasRectDetails *details;
 	int event_base, error_base;
-#endif
-	rect = EEL_CANVAS_RECT (item);
+
 	details = rect->details;
+#endif
 
 	eel_canvas_rect_update_outline_gc (rect, TRUE);
 
@@ -480,13 +481,14 @@ render_rect_alpha (EelCanvasRect *rect,
 	guchar *data;
 	int rowstride, i;
 	guchar r, g, b, a;
+
+#ifdef HAVE_RENDER
 	EelCanvasRectDetails *details;
+#endif
 
 	if (width <= 0 || height <= 0 ) {
 		return;
 	}
-
-	details = rect->details;
 
 	r = (rgba >> 24) & 0xff;
 	g = (rgba >> 16) & 0xff;
@@ -494,6 +496,8 @@ render_rect_alpha (EelCanvasRect *rect,
 	a = (rgba >> 0) & 0xff;
 
 #ifdef HAVE_RENDER
+	details = rect->details;
+
 	if (details->use_render) {
 		Display *dpy;
 		Picture  pict;

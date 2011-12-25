@@ -2078,7 +2078,6 @@ task_dialog_pred_cell_edited (GtkCellRendererText *cell,
 	GtkTreePath             *path;
 	GtkTreeIter              iter;
 	GtkTreeModel            *model;
-	MrpProject              *project;
 	MrpRelation             *relation;
 	MrpTask                 *task_main;
 	MrpTask                 *task_pred;
@@ -2098,8 +2097,6 @@ task_dialog_pred_cell_edited (GtkCellRendererText *cell,
 	task_pred = MRP_TASK (planner_list_model_get_object (PLANNER_LIST_MODEL (model),
 							     &iter));
 	task_main = data->task;
-
-	project = mrp_object_get_project (MRP_OBJECT (task_main));
 
 	relation = mrp_task_get_relation (task_main, task_pred);
 	lag = mrp_relation_get_lag (relation) / (60*60);

@@ -40,16 +40,15 @@ task_cmd_link_do (PlannerCmd *cmd_base)
 {
 	TaskCmdLink *cmd;
 	GError      *error = NULL;
-	MrpRelation *relation;
 	gboolean     retval;
 
 	cmd = (TaskCmdLink *) cmd_base;
 
-	relation = mrp_task_add_predecessor (cmd->after,
-					     cmd->before,
-					     cmd->relationship,
-					     cmd->lag,
-					     &error);
+	mrp_task_add_predecessor (cmd->after,
+				  cmd->before,
+				  cmd->relationship,
+				  cmd->lag,
+				  &error);
 	if (!error) {
 		retval = TRUE;
 	} else {

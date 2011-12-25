@@ -141,14 +141,12 @@ gantt_header_class_init (PlannerGanttHeaderClass *class)
 	GObjectClass      *o_class;
 	GtkObjectClass    *object_class;
 	GtkWidgetClass    *widget_class;
-	GtkContainerClass *container_class;
 
 	parent_class = g_type_class_peek_parent (class);
 
 	o_class = (GObjectClass *) class;
 	object_class = (GtkObjectClass *) class;
 	widget_class = (GtkWidgetClass *) class;
-	container_class = (GtkContainerClass *) class;
 
 	/* GObject methods. */
 	o_class->set_property = gantt_header_set_property;
@@ -363,10 +361,6 @@ gantt_header_get_property (GObject    *object,
 			   GValue     *value,
 			   GParamSpec *pspec)
 {
-	PlannerGanttHeader *header;
-
-	header = PLANNER_GANTT_HEADER (object);
-
 	switch (prop_id) {
 	default:
 		G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -418,7 +412,6 @@ gantt_header_realize (GtkWidget *widget)
 {
 	PlannerGanttHeader *header;
 	GdkWindowAttr       attributes;
-	GdkGCValues         values;
 	gint                attributes_mask;
 
 	header = PLANNER_GANTT_HEADER (widget);
@@ -460,11 +453,6 @@ gantt_header_realize (GtkWidget *widget)
 						   &attributes,
 						   attributes_mask);
 	gdk_window_set_user_data (header->priv->bin_window, widget);
-
-	values.foreground = (widget->style->white.pixel == 0 ?
-			     widget->style->black : widget->style->white);
-	values.function = GDK_XOR;
-	values.subwindow_mode = GDK_INCLUDE_INFERIORS;
 
 	widget->style = gtk_style_attach (widget->style, widget->window);
 	gdk_window_set_background (widget->window,

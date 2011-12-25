@@ -253,11 +253,7 @@ gantt_background_get_bounds (PlannerGanttBackground *background,
 			     gdouble           *px2,
 			     gdouble           *py2)
 {
-	GnomeCanvasItem *item;
-
-	item = GNOME_CANVAS_ITEM (background);
-
-	/* Get the items bbox in canvas pixel coordinates. */
+	/* FIXME: Get the items bbox in canvas pixel coordinates. */
 
 	*px1 = -G_MAXINT;
 	*py1 = -G_MAXINT;

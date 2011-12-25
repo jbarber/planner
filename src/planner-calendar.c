@@ -770,11 +770,8 @@ static void
 planner_calendar_set_year_next (PlannerCalendar *calendar)
 {
 	gint month_len;
-	GtkWidget *widget;
 
 	g_return_if_fail (GTK_IS_WIDGET (calendar));
-
-	widget = GTK_WIDGET (calendar);
 
 	planner_calendar_freeze (calendar);
 
@@ -1427,10 +1424,8 @@ static gboolean
 planner_calendar_expose (GtkWidget	    *widget,
 		    GdkEventExpose *event)
 {
-	PlannerCalendar *calendar;
 	PlannerCalendarPrivateData *private_data;
 
-	calendar = PLANNER_CALENDAR (widget);
 	private_data = PLANNER_CALENDAR_PRIVATE_DATA (widget);
 
 	if (GTK_WIDGET_DRAWABLE (widget))
@@ -1464,7 +1459,7 @@ planner_calendar_paint_header (GtkWidget *widget)
 	GdkGC *gc;
 	char buffer[255];
 	int x, y;
-	gint header_width, cal_height;
+	gint header_width;
 	gint max_month_width;
 	gint max_year_width;
 	PlannerCalendarPrivateData *private_data;
@@ -1486,7 +1481,6 @@ planner_calendar_paint_header (GtkWidget *widget)
 	gdk_window_clear (private_data->header_win);
 
 	header_width = widget->allocation.width - 2 * widget->style->xthickness;
-	cal_height = widget->allocation.height;
 
 	max_month_width = private_data->max_month_width;
 	max_year_width = private_data->max_year_width;
@@ -1548,7 +1542,6 @@ planner_calendar_paint_day_names (GtkWidget *widget)
 	char buffer[255];
 	int day,i;
 	int day_width, cal_width;
-	gint cal_height;
 	int day_wid_sep;
 	PangoLayout *layout;
 	PangoRectangle logical_rect;
@@ -1584,7 +1577,6 @@ planner_calendar_paint_day_names (GtkWidget *widget)
 
 	day_width = private_data->day_width;
 	cal_width = widget->allocation.width;
-	cal_height = widget->allocation.height;
 	day_wid_sep = day_width + DAY_XSEP;
 
 	/*
@@ -1774,7 +1766,6 @@ planner_calendar_paint_day (GtkWidget *widget,
 	gint x_loc;
 	gint y_top;
 	gint y_loc;
-	gint day_xspace;
 	gint focus_width;
 
 	PlannerCalendarPrivateData *private_data;
@@ -1800,8 +1791,6 @@ planner_calendar_paint_day (GtkWidget *widget,
 	gtk_widget_style_get (widget, "focus-line-width", &focus_width, NULL);
 
 	day_height = row_height (calendar);
-
-	day_xspace = private_data->day_width - private_data->max_day_char_width*2;
 
 	day = calendar->day[row][col];
 
@@ -1915,13 +1904,6 @@ planner_calendar_paint_day (GtkWidget *widget,
 	if (GTK_WIDGET_HAS_FOCUS (calendar)
 	    && calendar->focus_row == row && calendar->focus_col == col)
 	{
-		GtkStateType state;
-
-		if (calendar->selected_day == day)
-			state = GTK_WIDGET_HAS_FOCUS (widget) ? GTK_STATE_SELECTED : GTK_STATE_ACTIVE;
-		else
-			state = GTK_STATE_NORMAL;
-
 		gtk_paint_focus (widget->style,
 				 private_data->main_win,
 				 (calendar->selected_day == day)
@@ -1939,14 +1921,12 @@ planner_calendar_paint_day (GtkWidget *widget,
 static void
 planner_calendar_paint_main (GtkWidget *widget)
 {
-	PlannerCalendar *calendar;
 	PlannerCalendarPrivateData *private_data;
 	gint row, col;
 
 	g_return_if_fail (PLANNER_IS_CALENDAR (widget));
 	g_return_if_fail (widget->window != NULL);
 
-	calendar = PLANNER_CALENDAR (widget);
 	private_data = PLANNER_CALENDAR_PRIVATE_DATA (widget);
 
 	if (private_data->freeze_count)
@@ -2320,14 +2300,10 @@ planner_calendar_button_press (GtkWidget	  *widget,
 {
 	PlannerCalendar *calendar;
 	PlannerCalendarPrivateData *private_data;
-	gint x, y;
 	void (* action_func) (PlannerCalendar *);
 
 	calendar = PLANNER_CALENDAR (widget);
 	private_data = PLANNER_CALENDAR_PRIVATE_DATA (widget);
-
-	x = (gint) (event->x);
-	y = (gint) (event->y);
 
 	if (event->window == private_data->main_win)
 		planner_calendar_main_button (widget, event);
@@ -2396,10 +2372,8 @@ static gboolean
 planner_calendar_enter_notify (GtkWidget	    *widget,
 			  GdkEventCrossing *event)
 {
-	PlannerCalendar *calendar;
 	PlannerCalendarPrivateData *private_data;
 
-	calendar = PLANNER_CALENDAR (widget);
 	private_data = PLANNER_CALENDAR_PRIVATE_DATA (widget);
 
 	if (event->window == private_data->arrow_win[ARROW_MONTH_LEFT])
@@ -2561,11 +2535,9 @@ planner_calendar_thaw (PlannerCalendar *calendar)
 static void
 planner_calendar_set_background (GtkWidget *widget)
 {
-	PlannerCalendar *calendar;
 	PlannerCalendarPrivateData *private_data;
 	gint i;
 
-	calendar = PLANNER_CALENDAR (widget);
 	private_data = PLANNER_CALENDAR_PRIVATE_DATA (widget);
 
 	if (GTK_WIDGET_REALIZED (widget))

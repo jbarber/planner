@@ -242,14 +242,9 @@ mcrl_select_index (PlannerCellRendererList *cell,
 		   gint                index)
 {
 	GtkTreeView      *tree_view;
-	GtkTreeSelection *selection;
-	GtkTreeModel     *model;
 	GtkTreePath      *path;
 
 	tree_view = GTK_TREE_VIEW (cell->tree_view);
-
-	model = gtk_tree_view_get_model (tree_view);
-	selection = gtk_tree_view_get_selection (tree_view);
 
 	path = gtk_tree_path_new ();
 	gtk_tree_path_append_index (path, index);

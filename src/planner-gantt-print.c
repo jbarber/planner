@@ -900,7 +900,6 @@ planner_gantt_print_data_new (PlannerView     *view,
 	gdouble                max_name_width = 0.0;
 	gdouble                ext;
 	GList       *relations;
-	gdouble      x1;
 	gdouble      y1, y2;
 	mrptime      t1, t2, t0;
 	mrptime      current_time;
@@ -1060,8 +1059,6 @@ planner_gantt_print_data_new (PlannerView     *view,
 			y0 = 0;
 			tasks_on_this_page = data->tasks_per_page_without_header;
 		}
-
-		x1 = data->tree_x2;
 
 		/* Loop through the tasks on this row of pages. */
 		for (i = 0; i < tasks_on_this_page; i++) {

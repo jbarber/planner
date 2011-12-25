@@ -792,7 +792,6 @@ gantt_model_get_value (GtkTreeModel *tree_model,
 	MrpProject  *project;
 	mrptime      t1, t2;
 	gint         duration;
-	MrpTaskType  type;
 	const gchar *name;
 	const gchar *cached_str;
 
@@ -869,8 +868,6 @@ gantt_model_get_value (GtkTreeModel *tree_model,
 		break;
 
 	case COL_EDITABLE:
-		type = mrp_task_get_task_type (task);
-
 		g_value_init (value, G_TYPE_BOOLEAN);
 		if (g_node_n_children (node) > 0) {
 			g_value_set_boolean (value, FALSE);

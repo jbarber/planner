@@ -1558,11 +1558,8 @@ resource_dialog_create_calendar_model (DialogData *data)
 {
 	MrpProject   *project;
 	GtkTreeStore *store;
-	MrpCalendar  *root;
 
 	project = planner_window_get_project (data->main_window);
-
-	root = mrp_project_get_root_calendar (project);
 
 	store = gtk_tree_store_new (NUM_COLS,
 				    G_TYPE_OBJECT,
@@ -1582,12 +1579,10 @@ static void
 resource_dialog_setup_calendar_tree_view (DialogData *data)
 {
 	GtkTreeView       *tree_view;
-	MrpProject        *project;
 	GtkTreeModel      *model;
 	GtkCellRenderer   *cell;
 	GtkTreeViewColumn *col;
 
-	project = planner_window_get_project (data->main_window);
 	tree_view = GTK_TREE_VIEW (data->calendar_tree_view);
 
 	model = resource_dialog_create_calendar_model (data);

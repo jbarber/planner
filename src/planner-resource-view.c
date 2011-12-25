@@ -892,12 +892,9 @@ resource_view_insert_resources_cb (GtkAction *action,
 {
 	PlannerView     *view;
 	PlannerResourceViewPriv *priv;
-	MrpProject      *project;
 
 	view = PLANNER_VIEW (data);
 	priv = PLANNER_RESOURCE_VIEW (view)->priv;
-
-	project = planner_window_get_project (view->main_window);
 
 	/* We only want one of these dialogs at a time. */
 	if (priv->resource_input_dialog) {
@@ -1001,14 +998,9 @@ resource_view_remove_resource_cb (GtkAction *action,
 				  gpointer   data)
 {
 	PlannerView             *view;
-	PlannerResourceViewPriv *priv;
-	MrpProject              *project;
 	GList                   *list, *node;
 
 	view = PLANNER_VIEW (data);
-	priv = PLANNER_RESOURCE_VIEW (view)->priv;
-
-	project = planner_window_get_project (view->main_window);
 
 	list = resource_view_selection_get_list (view);
 
@@ -1026,13 +1018,11 @@ resource_view_edit_resource_cb (GtkAction *action,
 				gpointer   data)
 {
 	PlannerView             *view;
-	PlannerResourceViewPriv *priv;
 	MrpResource             *resource;
 	GtkWidget               *dialog;
 	GList                   *list;
 
 	view = PLANNER_VIEW (data);
-	priv = PLANNER_RESOURCE_VIEW (view)->priv;
 
 	list = resource_view_selection_get_list (view);
 

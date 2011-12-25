@@ -440,13 +440,10 @@ static gboolean
 recalc_bounds (PlannerUsageRow *row)
 {
 	PlannerUsageRowPriv *priv;
-	GnomeCanvasItem      *item;
 	gint                  width;
 	gdouble               x_debut, x_fin, x_debut_real;
 	gdouble               old_x, old_x_start, old_width;
 	gboolean              changed;
-
-	item = GNOME_CANVAS_ITEM (row);
 
 	priv = row->priv;
 
@@ -1197,8 +1194,8 @@ usage_row_draw_assignment (PlannerUsageRow *row,
         gboolean              summary;
         gint                  percent_complete;
         gint                  complete_x2, complete_width;
-        gint                  rx1, ry1;
-        gint                  rx2, ry2;
+        gint                  rx1;
+        gint                  rx2;
         gint                  cx1, cy1, cx2, cy2;
         gdouble               ass_x, ass_xend, ass_x_start;
 
@@ -1236,9 +1233,6 @@ usage_row_draw_assignment (PlannerUsageRow *row,
         /* "Clip" the expose area. */
         rx1 = MAX (cx1, 0);
         rx2 = MIN (cx2, width);
-
-        ry1 = MAX (cy1, 0);
-        ry2 = MIN (cy2, height);
 
         summary = (mrp_task_get_n_children (task) > 0);
         complete_width = 0;
@@ -1571,11 +1565,9 @@ usage_row_event (GnomeCanvasItem *item, GdkEvent *event)
 	PlannerUsageTree    *tree;
 	GtkTreeView         *tree_view;
 	GtkTreeIter          iter;
-	GtkWidget           *canvas_widget;
 
 	row = PLANNER_USAGE_ROW (item);
 	priv = row->priv;
-	canvas_widget = GTK_WIDGET (item->canvas);
 	chart = g_object_get_data (G_OBJECT (item->canvas), "chart");
 	tree = planner_usage_chart_get_view (chart);
 

@@ -509,8 +509,6 @@ mrp_task_manager_move_task (MrpTaskManager  *manager,
 			    GError         **error)
 {
 	MrpTask *old_parent;
-	gint     old_pos;
-	MrpTask *grand_parent;
 
 	g_return_val_if_fail (MRP_IS_TASK_MANAGER (manager), FALSE);
 	g_return_val_if_fail (MRP_IS_TASK (task), FALSE);
@@ -518,9 +516,6 @@ mrp_task_manager_move_task (MrpTaskManager  *manager,
 	g_return_val_if_fail (MRP_IS_TASK (parent), FALSE);
 
 	old_parent = mrp_task_get_parent (task);
-	old_pos = mrp_task_get_position (task);
-
-	grand_parent = mrp_task_get_parent (old_parent);
 
 	if (!mrp_task_manager_check_move (manager,
 					  task,
@@ -1356,7 +1351,7 @@ task_manager_get_task_units_intervals (MrpTaskManager *manager,
 	MrpAssignment      *assignment;
 	MrpResource        *resource;
 	GList              *assignments, *a;
-	gint                units, units_full, units_orig, priority;
+	gint                units, units_full, units_orig;
 	mrptime             i_start, i_end;
 
 	mrptime             t;
@@ -1364,8 +1359,6 @@ task_manager_get_task_units_intervals (MrpTaskManager *manager,
 	GPtrArray          *array;
 	guint               len;
 	gint                i;
-
-	mrptime             diffe;
 
 	gint     res_n;
 
@@ -1389,7 +1382,6 @@ task_manager_get_task_units_intervals (MrpTaskManager *manager,
 	assignments = mrp_task_get_assignments (task);
 
 	array = g_ptr_array_new ();
-	priority    = mrp_task_get_priority (task);
 
 #ifdef WITH_SIMPLE_PRIORITY_SCHEDULING
 	v_tasks = mrp_task_manager_get_all_tasks (manager);
@@ -1412,7 +1404,6 @@ task_manager_get_task_units_intervals (MrpTaskManager *manager,
 			ival = l->data;
 			mrp_interval_get_absolute (ival, date, &i_start, &i_end);
 			units = units_orig;
-			diffe = i_end - i_start;
 
 #ifdef WITH_SIMPLE_PRIORITY_SCHEDULING
 			for (v_l = v_tasks; v_l; v_l = v_l->next) {

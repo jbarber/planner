@@ -507,14 +507,11 @@ static gboolean
 recalc_bounds (PlannerGanttRow *row)
 {
 	PlannerGanttRowPriv *priv;
-	GnomeCanvasItem     *item;
 	gint                 width, height;
 	mrptime              t;
 	MrpTaskType          type;
 	gdouble              old_x, old_x_start, old_width;
 	gboolean             changed;
-
-	item = GNOME_CANVAS_ITEM (row);
 
 	priv = row->priv;
 
@@ -600,12 +597,7 @@ gantt_row_set_property (GObject      *object,
 	case PROP_HEIGHT:
 		tmp_dbl = g_value_get_double (value);
 		if (tmp_dbl != priv->height) {
-			gboolean             nonstd_days;
-			PlannerGanttChart   *chart;
 			double               htask;
-
-			chart = g_object_get_data (G_OBJECT (item->canvas), "chart");
-			nonstd_days = planner_gantt_chart_get_nonstandard_days (chart);
 
 			priv->height = tmp_dbl;
 
@@ -1198,8 +1190,8 @@ gantt_row_draw (GnomeCanvasItem *item,
 #ifdef WITH_SIMPLE_PRIORITY_SCHEDULING
 	gboolean             is_dominant;
 #endif
-	gint                 rx1, ry1;
-	gint                 rx2, ry2;
+	gint                 rx1;
+	gint                 rx2;
 	gint                 cx1, cy1, cx2, cy2;
 
 	GList               *unit_ivals, *cal_ivals, *cur_unit;
@@ -1318,9 +1310,6 @@ gantt_row_draw (GnomeCanvasItem *item,
 	/* "Clip" the expose area. */
 	rx1 = MAX (cx1, 0);
 	rx2 = MIN (cx2, width);
-
-	ry1 = MAX (cy1, 0);
-	ry2 = MIN (cy2, height);
 
 	summary = (mrp_task_get_n_children (priv->task) > 0);
 	complete_width = 0;

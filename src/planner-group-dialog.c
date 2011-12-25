@@ -753,12 +753,10 @@ group_dialog_add_column (GtkWidget *dialog,
 {
 	DialogData        *data;
 	GtkCellRenderer   *cell = NULL;
-	GtkTreeModel      *model;
 	GtkTreeViewColumn *column_data;
 	gchar             *tree_type = NULL;
 
 	data  = g_object_get_data (G_OBJECT (dialog), "data");
-	model = gtk_tree_model_sort_get_model (GTK_TREE_MODEL_SORT (gtk_tree_view_get_model (data->tree_view)));
 
 	switch (type) {
 	case TREE_VIEW_TEXT:

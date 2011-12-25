@@ -308,6 +308,8 @@ mrp_time_from_string (const gchar  *str,
 	/* FIXME: If we want to support reading times other than in UTC,
 	 * implement that here.
 	 */
+	if (!is_utc) {
+	}
 
 	return mrp_time_compose (year,
 				 month,
@@ -1200,7 +1202,6 @@ mrp_time2_set_from_string (MrpTime      *t,
 			   const gchar  *str)
 {
 	gint     len;
-	gboolean is_utc;
 	gboolean is_date;
 	gint     year;
 	gint     month;
@@ -1212,10 +1213,8 @@ mrp_time2_set_from_string (MrpTime      *t,
 	len = strlen (str);
 
 	if (len == 15) { /* floating time */
-		is_utc = FALSE;
 		is_date = FALSE;
 	} else if (len == 16) { /* UTC time, ends in 'Z' */
-		is_utc = TRUE;
 		is_date = FALSE;
 
 		if (str[15] != 'Z') {
@@ -1223,7 +1222,6 @@ mrp_time2_set_from_string (MrpTime      *t,
 		}
 	}
 	else if (len == 8) { /* A date. */
-		is_utc = TRUE;
 		is_date = TRUE;
 	} else {
 		return FALSE;

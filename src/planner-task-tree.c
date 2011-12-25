@@ -426,7 +426,6 @@ task_cmd_save_children (TaskCmdRemove *cmd)
 static void
 task_cmd_restore_children (TaskCmdRemove *cmd)
 {
-	PlannerGanttModel *model;
 	gint               position, depth;
 	GtkTreePath       *path;
 	MrpTask           *parent;
@@ -438,8 +437,6 @@ task_cmd_restore_children (TaskCmdRemove *cmd)
 		cmd_child = l->data;
 
 		path = gtk_tree_path_copy (cmd_child->path);
-		model = PLANNER_GANTT_MODEL (gtk_tree_view_get_model
-					     (GTK_TREE_VIEW (cmd_child->tree)));
 
 		depth = gtk_tree_path_get_depth (path);
 		position = gtk_tree_path_get_indices (path)[depth - 1];
@@ -489,17 +486,14 @@ task_cmd_remove_do (PlannerCmd *cmd_base)
 static void
 task_cmd_remove_undo (PlannerCmd *cmd_base)
 {
-	PlannerGanttModel *model;
 	TaskCmdRemove     *cmd;
 	gint               position, depth;
 	GtkTreePath       *path;
 	MrpTask           *parent;
-	MrpTask           *child_parent;
 
 	cmd = (TaskCmdRemove*) cmd_base;
 
 	path = gtk_tree_path_copy (cmd->path);
-	model = PLANNER_GANTT_MODEL (gtk_tree_view_get_model (GTK_TREE_VIEW (cmd->tree)));
 
 	depth = gtk_tree_path_get_depth (path);
 	position = gtk_tree_path_get_indices (path)[depth - 1];
@@ -517,8 +511,6 @@ task_cmd_remove_undo (PlannerCmd *cmd_base)
 				 parent,
 				 position,
 				 cmd->task);
-
-	child_parent = planner_gantt_model_get_indent_task_target (model, cmd->task);
 
 	if (cmd->children != NULL) {
 		task_cmd_restore_children (cmd);
@@ -1354,10 +1346,7 @@ task_tree_wbs_data_func (GtkTreeViewColumn *tree_column,
 			 GtkTreeIter       *iter,
 			 gpointer           data)
 {
-	PlannerTaskTree *tree;
 	gchar           *str;
-
-	tree = PLANNER_TASK_TREE (data);
 
 	gtk_tree_model_get (tree_model,
 			    iter,
@@ -1570,7 +1559,6 @@ task_tree_assigned_to_data_func (GtkTreeViewColumn *tree_column,
 	gchar          *assigned_to;
 	GList          *resources;
 	GList          *l;
-	MrpAssignment  *assignment;
 	MrpResource    *resource;
 	MrpTask        *task;
 	const gchar    *name;
@@ -1584,8 +1572,6 @@ task_tree_assigned_to_data_func (GtkTreeViewColumn *tree_column,
 
 	for (l = resources; l; l = l->next) {
 		resource = l->data;
-
-		assignment = mrp_task_get_assignment (task, resource);
 
 		/* Try short name first. */
 		name = mrp_resource_get_short_name (resource);
@@ -2047,7 +2033,6 @@ task_view_custom_property_set_value (MrpProperty         *property,
 				     gchar               *new_text,
 				     GtkCellRendererText *cell)
 {
-	PlannerCellRendererDate *date;
 	GValue                   value = { 0 };
 	MrpPropertyType          type;
 	gfloat                   fvalue;
@@ -2084,9 +2069,10 @@ task_view_custom_property_set_value (MrpProperty         *property,
 
 
 	case MRP_PROPERTY_TYPE_DATE:
-		date = PLANNER_CELL_RENDERER_DATE (cell);
 		/* FIXME: Currently custom properties can't be dates. Why? */
-		/* mrp_object_set (MRP_OBJECT (task),
+		/*
+		 * date = PLANNER_CELL_RENDERER_DATE (cell);
+		 * mrp_object_set (MRP_OBJECT (task),
 				mrp_property_get_name (property),
 				&(date->time),
 				NULL);*/
@@ -3073,7 +3059,6 @@ planner_task_tree_indent_task (PlannerTaskTree *tree)
 	MrpTask             *task;
 	MrpTask             *new_parent;
 	MrpTask             *first_task_parent;
-	MrpProject          *project;
 	GList               *list, *l;
 	GList               *indent_tasks = NULL;
 	GtkTreePath         *path;
@@ -3082,7 +3067,6 @@ planner_task_tree_indent_task (PlannerTaskTree *tree)
 	gboolean             many;
 
 	priv = tree->priv;
-	project = priv->project;
 
 	model = PLANNER_GANTT_MODEL (gtk_tree_view_get_model (GTK_TREE_VIEW (tree)));
 
@@ -3177,7 +3161,6 @@ planner_task_tree_unindent_task (PlannerTaskTree *tree)
 	MrpTask             *task;
 	MrpTask             *new_parent;
 	MrpTask             *first_task_parent;
-	MrpProject          *project;
 	GList               *list, *l;
 	GList               *unindent_tasks = NULL;
 	GtkTreePath         *path;
@@ -3185,7 +3168,6 @@ planner_task_tree_unindent_task (PlannerTaskTree *tree)
 	gboolean             many;
 
 	priv = tree->priv;
-	project = priv->project;
 
 	model = PLANNER_GANTT_MODEL (gtk_tree_view_get_model (GTK_TREE_VIEW (tree)));
 
@@ -3278,7 +3260,6 @@ planner_task_tree_move_task_up (PlannerTaskTree *tree)
 	GtkTreeSelection    *selection;
 	PlannerGanttModel   *model;
 	GtkTreePath	    *path;
-	MrpProject          *project;
 	MrpTask	            *task, *parent, *sibling;
 	GList	            *list, *l, *m;
 	guint	             position;
@@ -3288,7 +3269,6 @@ planner_task_tree_move_task_up (PlannerTaskTree *tree)
 	gboolean             many;
 
 	priv = tree->priv;
-	project = priv->project;
 
 	list = planner_task_tree_get_selected_tasks (tree);
 	if (list == NULL) {

@@ -293,10 +293,6 @@ mpm_predecessor_changed_cb (MrpRelation *relation, GParamSpec *pspec,
 static void
 mpm_connect_to_relation (MrpRelation *relation, PlannerPredecessorModel *model)
 {
-	MrpTask *predecessor;
-
-	predecessor = mrp_relation_get_predecessor (relation);
-
 	g_signal_connect_object (relation, "notify::predecessor",
 				 G_CALLBACK (mpm_predecessor_changed_cb),
 				 model,

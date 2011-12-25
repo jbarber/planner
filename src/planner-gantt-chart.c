@@ -251,14 +251,12 @@ gantt_chart_class_init (PlannerGanttChartClass *class)
 	GObjectClass      *o_class;
 	GtkObjectClass    *object_class;
 	GtkWidgetClass    *widget_class;
-	GtkContainerClass *container_class;
 
 	parent_class = g_type_class_peek_parent (class);
 
 	o_class         = (GObjectClass *) class;
 	object_class    = (GtkObjectClass *) class;
 	widget_class    = (GtkWidgetClass *) class;
-	container_class = (GtkContainerClass *) class;
 
 	o_class->set_property = gantt_chart_set_property;
 	o_class->get_property = gantt_chart_get_property;
@@ -555,10 +553,6 @@ gantt_chart_realize (GtkWidget *widget)
 static void
 gantt_chart_unrealize (GtkWidget *widget)
 {
-	PlannerGanttChart *chart;
-
-	chart = PLANNER_GANTT_CHART (widget);
-
 	if (GTK_WIDGET_CLASS (parent_class)->unrealize) {
 		(* GTK_WIDGET_CLASS (parent_class)->unrealize) (widget);
 	}
@@ -587,9 +581,6 @@ gantt_chart_size_allocate (GtkWidget     *widget,
 			   GtkAllocation *allocation)
 {
 	PlannerGanttChart *chart;
-	gboolean           height_changed;
-
-	height_changed = widget->allocation.height != allocation->height;
 
 	GTK_WIDGET_CLASS (parent_class)->size_allocate (widget, allocation);
 
@@ -692,7 +683,6 @@ gantt_chart_row_inserted (GtkTreeModel *model,
 	PlannerGanttChart     *chart;
 	gboolean               free_path = FALSE;
 	MrpTask               *task;
-	TreeNode              *node;
 
 	chart = data;
 
@@ -708,7 +698,7 @@ gantt_chart_row_inserted (GtkTreeModel *model,
 
 	task = planner_gantt_model_get_task (PLANNER_GANTT_MODEL (model), iter);
 
-	node = gantt_chart_insert_task (chart, path, task);
+	gantt_chart_insert_task (chart, path, task);
 
 	gantt_chart_reflow (chart, TRUE);
 
