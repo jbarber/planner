@@ -1072,7 +1072,6 @@ static PlannerCmd *
 task_cmd_edit_note (DialogData  *data,
 		    const gchar *focus_in_note)
 {
-	PlannerCmd      *cmd_base;
 	TaskCmdEditNote *cmd;
 	gchar           *note;
 
@@ -1083,13 +1082,11 @@ task_cmd_edit_note (DialogData  *data,
 		return NULL;
 	}
 
-	cmd_base = planner_cmd_new (TaskCmdEditNote,
-				    _("Edit task note"),
-				    task_cmd_edit_note_do,
-				    task_cmd_edit_note_undo,
-				    task_cmd_edit_note_free);
-
-	cmd = (TaskCmdEditNote *) cmd_base;
+	cmd = (TaskCmdEditNote *) planner_cmd_new (TaskCmdEditNote,
+						   _("Edit task note"),
+						   task_cmd_edit_note_do,
+						   task_cmd_edit_note_undo,
+						   task_cmd_edit_note_free);
 
 	cmd->property = g_strdup ("note");
 	cmd->task = g_object_ref (data->task);
@@ -1098,9 +1095,9 @@ task_cmd_edit_note (DialogData  *data,
 	cmd->note = note;
 
 	planner_cmd_manager_insert_and_do (planner_window_get_cmd_manager (data->main_window),
-					   cmd_base);
+					   (PlannerCmd *) cmd);
 
-	return cmd_base;
+	return (PlannerCmd *) cmd;
 }
 
 
