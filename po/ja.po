@@ -6,15 +6,16 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: planner master\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-01 17:44+0900\n"
-"PO-Revision-Date: 2012-01-01 17:44+0900\n"
-"Last-Translator: Takeshi AIHANA <takeshi.aihana@gmail.com>\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"product=planner&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2012-01-01 09:05+0000\n"
+"PO-Revision-Date: 2012-01-01 23:01+0900\n"
+"Last-Translator: Jiro Matsuzawa <jmatsuzawa@src.gnome.org>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
-"Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: ja\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../data/glade/add-predecessor.glade.h:1
@@ -22,48 +23,25 @@ msgid "Add Predecessor"
 msgstr "前作業の追加"
 
 #: ../data/glade/add-predecessor.glade.h:2
-#: ../data/glade/calendar-dialog.glade.h:36
-#: ../data/glade/new-property.glade.h:2
-#: ../data/glade/project-properties.glade.h:2
-#: ../data/glade/resource-dialog.glade.h:1
-#: ../data/glade/resource-input-dialog.glade.h:3
-#: ../data/glade/task-dialog.glade.h:1
-#: ../data/glade/task-input-dialog.glade.h:3
-msgid "_Name:"
-msgstr "名前(_N):"
-
-#: ../data/glade/add-predecessor.glade.h:3
-msgid "_Relation type:"
-msgstr "関連(_R):"
-
-#: ../data/glade/add-predecessor.glade.h:4
 msgid "_Lag:"
 msgstr "遅れ(_L):"
 
+#: ../data/glade/add-predecessor.glade.h:3
+#: ../data/glade/calendar-dialog.glade.h:35
+#: ../data/glade/new-property.glade.h:5
+#: ../data/glade/project-properties.glade.h:9
+#: ../data/glade/resource-dialog.glade.h:12
+#: ../data/glade/resource-input-dialog.glade.h:7
+#: ../data/glade/task-dialog.glade.h:16
+#: ../data/glade/task-input-dialog.glade.h:4
+msgid "_Name:"
+msgstr "名前(_N):"
+
+#: ../data/glade/add-predecessor.glade.h:4
+msgid "_Relation type:"
+msgstr "関連(_R):"
+
 #: ../data/glade/calendar-dialog.glade.h:1
-msgid "Default Week"
-msgstr "デフォルトの平日"
-
-#: ../data/glade/calendar-dialog.glade.h:2
-msgid "<b>Calendar:</b>"
-msgstr "<b>カレンダ:</b>"
-
-#: ../data/glade/calendar-dialog.glade.h:3
-msgid ""
-"Select a weekday and the day type to use for that day in the default week "
-"for this calendar.\n"
-msgstr ""
-"このカレンダでデフォルトの平日にする曜日と日付の種類を選択して下さい。\n"
-
-#: ../data/glade/calendar-dialog.glade.h:5
-msgid "Week day:"
-msgstr "平日:"
-
-#: ../data/glade/calendar-dialog.glade.h:6
-msgid "Day type:"
-msgstr "日付の種類:"
-
-#: ../data/glade/calendar-dialog.glade.h:7
 msgid ""
 "\n"
 "The selected day type has the following working hours:"
@@ -71,164 +49,187 @@ msgstr ""
 "\n"
 "選択した日には次の時間帯が割り当てられています:"
 
-#: ../data/glade/calendar-dialog.glade.h:9
-#: ../data/glade/column-dialog.glade.h:2 ../data/glade/task-dialog.glade.h:9
+#: ../data/glade/calendar-dialog.glade.h:3
+#: ../data/glade/column-dialog.glade.h:1 ../data/glade/task-dialog.glade.h:2
 msgid "    "
 msgstr "    "
 
-#: ../data/glade/calendar-dialog.glade.h:10
-msgid "Edit Working Time"
-msgstr "作業時間の編集"
-
-#: ../data/glade/calendar-dialog.glade.h:11
-msgid "<b>Day types</b>"
-msgstr "<b>日付の種類</b>"
-
-#: ../data/glade/calendar-dialog.glade.h:12
-msgid "<b>Working hours</b>"
-msgstr "<b>作業時間帯</b>"
-
-#: ../data/glade/calendar-dialog.glade.h:13
-msgid "-"
-msgstr "-"
-
-#: ../data/glade/calendar-dialog.glade.h:14 ../data/glade/eds.glade.h:4
-#: ../data/glade/new-property.glade.h:5
-#: ../data/glade/resource-dialog.glade.h:6
-#: ../data/glade/resource-input-dialog.glade.h:5 ../data/glade/sql.glade.h:5
-#: ../data/glade/task-input-dialog.glade.h:5
+#: ../data/glade/calendar-dialog.glade.h:4 ../data/glade/eds.glade.h:1
+#: ../data/glade/new-property.glade.h:1
+#: ../data/glade/resource-dialog.glade.h:1
+#: ../data/glade/resource-input-dialog.glade.h:1 ../data/glade/sql.glade.h:1
+#: ../data/glade/task-input-dialog.glade.h:1
 msgid "*"
 msgstr "*"
 
-#: ../data/glade/calendar-dialog.glade.h:15
-msgid "Calendar Editor"
-msgstr "カレンダの編集"
+#: ../data/glade/calendar-dialog.glade.h:5
+msgid "-"
+msgstr "-"
 
-#: ../data/glade/calendar-dialog.glade.h:16
-msgid "_New..."
-msgstr "新規(_N)..."
+#: ../data/glade/calendar-dialog.glade.h:6
+msgid "<b>Calendar:</b>"
+msgstr "<b>カレンダー:</b>"
 
-#: ../data/glade/calendar-dialog.glade.h:17
-msgid "Working time..."
-msgstr "作業時間..."
+#: ../data/glade/calendar-dialog.glade.h:7
+msgid "<b>Day types</b>"
+msgstr "<b>日付の種類</b>"
 
-#: ../data/glade/calendar-dialog.glade.h:18
-msgid "Default week..."
-msgstr "デフォルトの平日..."
+#: ../data/glade/calendar-dialog.glade.h:8
+msgid "<b>Working hours</b>"
+msgstr "<b>作業時間帯</b>"
 
-#: ../data/glade/calendar-dialog.glade.h:19
-msgid "Use working time from derived calendar"
-msgstr "派生したカレンダの作業時間を使用する"
-
-#: ../data/glade/calendar-dialog.glade.h:20
-msgid "Set day type to:"
-msgstr "セットする日付の種類:"
-
-#: ../data/glade/calendar-dialog.glade.h:21
-msgid "Custom working time"
-msgstr "作業時間を指定する"
-
-#: ../data/glade/calendar-dialog.glade.h:22
+#: ../data/glade/calendar-dialog.glade.h:9
 msgid "<b>Working time</b>"
 msgstr "<b>作業時間</b>"
 
-#: ../data/glade/calendar-dialog.glade.h:23
-msgid "From:"
-msgstr "開始:"
-
-#: ../data/glade/calendar-dialog.glade.h:24
-msgid "To:"
-msgstr "終了:"
-
-#: ../data/glade/calendar-dialog.glade.h:25
-msgid "Apply"
-msgstr "適用する"
-
-#: ../data/glade/calendar-dialog.glade.h:26
-msgid "New Calendar"
-msgstr "新しいカレンダ"
-
-#: ../data/glade/calendar-dialog.glade.h:27
-msgid "C_reate"
-msgstr "生成(_R)"
-
-#: ../data/glade/calendar-dialog.glade.h:28
-msgid "_Existing calendars:"
-msgstr "既存のカレンダ(_E):"
-
-#: ../data/glade/calendar-dialog.glade.h:29
-msgid "_Name of the new calendar:"
-msgstr "新しいカレンダの名前(_N):"
-
-#: ../data/glade/calendar-dialog.glade.h:30
-msgid "_Derive from a calendar"
-msgstr "カレンダから継承(_D)"
-
-#: ../data/glade/calendar-dialog.glade.h:31
-msgid "C_opy an existing calendar"
-msgstr "既存のカレンダをコピーする(_O)"
-
-#: ../data/glade/calendar-dialog.glade.h:32
-msgid "Create an _empty calendar"
-msgstr "空のカレンダを生成する(_E)"
-
-#: ../data/glade/calendar-dialog.glade.h:33
-msgid "Select a Calendar"
-msgstr "カレンダの選択"
-
-#: ../data/glade/calendar-dialog.glade.h:34
-msgid "Edit Day Types"
-msgstr "日付の種類の編集"
-
-#: ../data/glade/calendar-dialog.glade.h:35
+#: ../data/glade/calendar-dialog.glade.h:10
 msgid "Add Day Type"
 msgstr "日付の種類の追加"
 
-#: ../data/glade/column-dialog.glade.h:1
+#: ../data/glade/calendar-dialog.glade.h:11
+msgid "Apply"
+msgstr "適用する"
+
+#: ../data/glade/calendar-dialog.glade.h:12
+msgid "C_opy an existing calendar"
+msgstr "既存のカレンダーをコピーする(_O)"
+
+#: ../data/glade/calendar-dialog.glade.h:13
+msgid "C_reate"
+msgstr "生成(_R)"
+
+#: ../data/glade/calendar-dialog.glade.h:14
+msgid "Calendar Editor"
+msgstr "カレンダーの編集"
+
+#: ../data/glade/calendar-dialog.glade.h:15
+msgid "Create an _empty calendar"
+msgstr "空のカレンダーを生成する(_E)"
+
+#: ../data/glade/calendar-dialog.glade.h:16
+msgid "Custom working time"
+msgstr "作業時間を指定する"
+
+#: ../data/glade/calendar-dialog.glade.h:17
+msgid "Day type:"
+msgstr "日付の種類:"
+
+#: ../data/glade/calendar-dialog.glade.h:18
+msgid "Default Week"
+msgstr "デフォルトの平日"
+
+#: ../data/glade/calendar-dialog.glade.h:19
+msgid "Default week..."
+msgstr "デフォルトの平日..."
+
+#: ../data/glade/calendar-dialog.glade.h:20
+msgid "Edit Day Types"
+msgstr "日付の種類の編集"
+
+#: ../data/glade/calendar-dialog.glade.h:21
+msgid "Edit Working Time"
+msgstr "作業時間の編集"
+
+#: ../data/glade/calendar-dialog.glade.h:22
+msgid "From:"
+msgstr "開始:"
+
+#: ../data/glade/calendar-dialog.glade.h:23
+msgid "New Calendar"
+msgstr "新しいカレンダー"
+
+#: ../data/glade/calendar-dialog.glade.h:24
+msgid "Select a Calendar"
+msgstr "カレンダーの選択"
+
+#: ../data/glade/calendar-dialog.glade.h:25
+msgid ""
+"Select a weekday and the day type to use for that day in the default week "
+"for this calendar.\n"
+msgstr ""
+"このカレンダーでデフォルトの平日にする曜日と日付の種類を選択して下さい。\n"
+
+#: ../data/glade/calendar-dialog.glade.h:27
+msgid "Set day type to:"
+msgstr "セットする日付の種類:"
+
+#: ../data/glade/calendar-dialog.glade.h:28
+msgid "To:"
+msgstr "終了:"
+
+#: ../data/glade/calendar-dialog.glade.h:29
+msgid "Use working time from derived calendar"
+msgstr "派生したカレンダーの作業時間を使用する"
+
+#: ../data/glade/calendar-dialog.glade.h:30
+msgid "Week day:"
+msgstr "平日:"
+
+#: ../data/glade/calendar-dialog.glade.h:31
+msgid "Working time..."
+msgstr "作業時間..."
+
+#: ../data/glade/calendar-dialog.glade.h:32
+msgid "_Derive from a calendar"
+msgstr "カレンダーから継承(_D)"
+
+#: ../data/glade/calendar-dialog.glade.h:33
+msgid "_Existing calendars:"
+msgstr "既存のカレンダー(_E):"
+
+#: ../data/glade/calendar-dialog.glade.h:34
+msgid "_Name of the new calendar:"
+msgstr "新しいカレンダーの名前(_N):"
+
+#: ../data/glade/calendar-dialog.glade.h:36
+msgid "_New..."
+msgstr "新規(_N)..."
+
+#: ../data/glade/column-dialog.glade.h:2
 msgid "Hidden columns:"
 msgstr "表示しない項目:"
 
 #: ../data/glade/column-dialog.glade.h:3
-msgid "_Show"
-msgstr "表示する(_S)"
+msgid "Visible columns:"
+msgstr "表示する項目:"
 
 #: ../data/glade/column-dialog.glade.h:4
 msgid "_Hide"
 msgstr "隠す(_H)"
 
 #: ../data/glade/column-dialog.glade.h:5
-msgid "Visible columns:"
-msgstr "表示する項目:"
-
-#: ../data/glade/eds.glade.h:1
-msgid "dialog1"
-msgstr "dialog1"
+msgid "_Show"
+msgstr "表示する(_S)"
 
 #: ../data/glade/eds.glade.h:2
-msgid "Select group"
-msgstr "グループの選択"
+msgid "Loading resource data"
+msgstr "リソース・データの読み込み中"
 
 #: ../data/glade/eds.glade.h:3
 msgid "Search"
 msgstr "検索"
 
-#: ../data/glade/eds.glade.h:5
+#: ../data/glade/eds.glade.h:4
 msgid "Select All"
 msgstr "全て選択"
+
+#: ../data/glade/eds.glade.h:5
+msgid "Select group"
+msgstr "グループの選択"
 
 #: ../data/glade/eds.glade.h:6
 msgid "Unselect All"
 msgstr "全て選択解除"
 
 #: ../data/glade/eds.glade.h:7
-msgid "Loading resource data"
-msgstr "リソース・データの読み込み中"
+msgid "dialog1"
+msgstr "dialog1"
 
 #: ../data/glade/group-dialog.glade.h:1
 msgid "Group Editor"
 msgstr "グループの編集"
 
-#: ../data/glade/new-property.glade.h:1
+#: ../data/glade/new-property.glade.h:2
 msgid "Add Property"
 msgstr "プロパティの追加"
 
@@ -237,166 +238,151 @@ msgid "_Description:"
 msgstr "詳細(_D):"
 
 #: ../data/glade/new-property.glade.h:4
-#: ../data/glade/resource-dialog.glade.h:2
-msgid "_Type:"
-msgstr "種類(_T):"
-
-#: ../data/glade/new-property.glade.h:6
 msgid "_Label:"
 msgstr "ラベル(_L):"
 
+#: ../data/glade/new-property.glade.h:6
+#: ../data/glade/resource-dialog.glade.h:14
+msgid "_Type:"
+msgstr "種類(_T):"
+
 #: ../data/glade/project-properties.glade.h:1
-msgid "Project Properties"
-msgstr "プロジェクトのプロパティ"
-
-#: ../data/glade/project-properties.glade.h:3
-msgid "_Start:"
-msgstr "開始(_S):"
-
-#: ../data/glade/project-properties.glade.h:4
-msgid "_Organization:"
-msgstr "組織(_O):"
-
-#: ../data/glade/project-properties.glade.h:5
-msgid "_Manager:"
-msgstr "マネージャ(_M):"
-
-#: ../data/glade/project-properties.glade.h:6
-msgid "_Calendar:"
-msgstr "カレンダ(_C):"
-
-#: ../data/glade/project-properties.glade.h:7
-msgid "Select..."
-msgstr "選択..."
-
-#: ../data/glade/project-properties.glade.h:8
-msgid "_Phase:"
-msgstr "フェーズ(_P):"
-
-#: ../data/glade/project-properties.glade.h:9
-#: ../data/glade/resource-dialog.glade.h:9
-#: ../data/glade/task-dialog.glade.h:14
-msgid "General"
-msgstr "全般"
-
-#: ../data/glade/project-properties.glade.h:10
 msgid "Custom"
 msgstr "その他"
 
-#: ../data/glade/project-properties.glade.h:11
+#: ../data/glade/project-properties.glade.h:2
 msgid "Edit Project Phases"
 msgstr "プロジェクト・フェーズの編集"
 
-#: ../data/glade/project-properties.glade.h:12
+#: ../data/glade/project-properties.glade.h:3
+#: ../data/glade/resource-dialog.glade.h:5 ../data/glade/task-dialog.glade.h:6
+msgid "General"
+msgstr "全般"
+
+#: ../data/glade/project-properties.glade.h:4
 msgid "New Project Phase"
 msgstr "新しいプロジェクト・フェーズ"
+
+#: ../data/glade/project-properties.glade.h:5
+msgid "Project Properties"
+msgstr "プロジェクトのプロパティ"
+
+#: ../data/glade/project-properties.glade.h:6
+msgid "Select..."
+msgstr "選択..."
+
+#: ../data/glade/project-properties.glade.h:7
+msgid "_Calendar:"
+msgstr "カレンダー(_C):"
+
+#: ../data/glade/project-properties.glade.h:8
+msgid "_Manager:"
+msgstr "マネージャー(_M):"
+
+#: ../data/glade/project-properties.glade.h:10
+msgid "_Organization:"
+msgstr "組織(_O):"
+
+#: ../data/glade/project-properties.glade.h:11
+msgid "_Phase:"
+msgstr "フェーズ(_P):"
+
+#: ../data/glade/project-properties.glade.h:12
+msgid "_Start:"
+msgstr "開始(_S):"
 
 #: ../data/glade/property-dialog.glade.h:1
 msgid "Custom Properties"
 msgstr "カスタム・プロパティ"
 
-#: ../data/glade/resource-dialog.glade.h:3
-#: ../data/glade/resource-input-dialog.glade.h:4
-msgid "_Email:"
-msgstr "E-メール(_E):"
-
-#: ../data/glade/resource-dialog.glade.h:4
-#: ../data/glade/resource-input-dialog.glade.h:6
-msgid "_Group:"
-msgstr "グループ(_G):"
-
-#: ../data/glade/resource-dialog.glade.h:5
+#: ../data/glade/resource-dialog.glade.h:2
 msgid "C_ost:"
 msgstr "コスト(_O):"
 
-#: ../data/glade/resource-dialog.glade.h:7
-#: ../data/glade/resource-input-dialog.glade.h:7
-msgid "_Short name:"
-msgstr "略称(_S):"
+#: ../data/glade/resource-dialog.glade.h:3
+msgid "Calendar"
+msgstr "カレンダー"
 
-#: ../data/glade/resource-dialog.glade.h:8
-#: ../data/glade/resource-input-dialog.glade.h:8
+#: ../data/glade/resource-dialog.glade.h:4
+msgid "Edit Calendars..."
+msgstr "カレンダーの編集..."
+
+#: ../data/glade/resource-dialog.glade.h:6 ../data/glade/task-dialog.glade.h:7
+msgid "Notes"
+msgstr "メモ"
+
+#: ../data/glade/resource-dialog.glade.h:7
+#: ../data/glade/resource-input-dialog.glade.h:3
 msgid "Optional - overrides resource name in Gantt view."
 msgstr "オプション - Gantt 表示のリソース名を上書きします。"
 
-#: ../data/glade/resource-dialog.glade.h:10
+#: ../data/glade/resource-dialog.glade.h:8
 msgid ""
 "Select the calendar to use for this resource. If you want to use the default "
 "calendar of the project, select 'None'. "
 msgstr ""
-"このリソースで使用するカレンダを選択して下さい。デフォルトのカレンダを使用す"
-"る場合は 'なし' を選択して下さい。"
+"このリソースで使用するカレンダーを選択して下さい。デフォルトのカレンダーを使"
+"用する場合は 'なし' を選択して下さい。"
+
+#: ../data/glade/resource-dialog.glade.h:9
+#: ../data/glade/resource-input-dialog.glade.h:4
+msgid "_Email:"
+msgstr "E-メール(_E):"
+
+#: ../data/glade/resource-dialog.glade.h:10
+#: ../data/glade/resource-input-dialog.glade.h:5
+msgid "_Group:"
+msgstr "グループ(_G):"
 
 #: ../data/glade/resource-dialog.glade.h:11
-msgid "Edit Calendars..."
-msgstr "カレンダの編集..."
-
-#: ../data/glade/resource-dialog.glade.h:12
-msgid "Calendar"
-msgstr "カレンダ"
-
-#: ../data/glade/resource-dialog.glade.h:13
 msgid "_Insert time stamp"
 msgstr "タイムスタンプの挿入(_I)"
 
-#: ../data/glade/resource-dialog.glade.h:14
-#: ../data/glade/task-dialog.glade.h:18
-msgid "Notes"
-msgstr "メモ"
+#: ../data/glade/resource-dialog.glade.h:13
+#: ../data/glade/resource-input-dialog.glade.h:8
+msgid "_Short name:"
+msgstr "略称(_S):"
 
-#: ../data/glade/resource-input-dialog.glade.h:1
+#: ../data/glade/resource-input-dialog.glade.h:2
 msgid "Insert Resource"
 msgstr "リソースの挿入"
 
-#: ../data/glade/resource-input-dialog.glade.h:2
-#: ../data/glade/task-input-dialog.glade.h:2
+#: ../data/glade/resource-input-dialog.glade.h:6
+#: ../data/glade/task-input-dialog.glade.h:3
 msgid "_Insert"
 msgstr "挿入(_I)"
 
-#: ../data/glade/sql.glade.h:1
+#: ../data/glade/sql.glade.h:2
 msgid "Open Database"
 msgstr "データベースを開く"
 
-#: ../data/glade/sql.glade.h:2
-msgid "_Server:"
-msgstr "サーバ(_S):"
-
 #: ../data/glade/sql.glade.h:3
-msgid "_Username:"
-msgstr "ユーザ名(_U):"
-
-#: ../data/glade/sql.glade.h:4
-msgid "_Password:"
-msgstr "パスワード(_P):"
-
-#: ../data/glade/sql.glade.h:6
-msgid "_Database:"
-msgstr "データベース(_D):"
-
-#: ../data/glade/sql.glade.h:7
 msgid "Select a Project"
 msgstr "プロジェクトの選択"
 
-#: ../data/glade/sql.glade.h:8
+#: ../data/glade/sql.glade.h:4
 msgid "The database contains the following projects. Select a project to open:"
 msgstr ""
 "データベースには次のプロジェクトがあります。オープンするプロジェクトを選択し"
 "て下さい:"
 
+#: ../data/glade/sql.glade.h:5
+msgid "_Database:"
+msgstr "データベース(_D):"
+
+#: ../data/glade/sql.glade.h:6
+msgid "_Password:"
+msgstr "パスワード(_P):"
+
+#: ../data/glade/sql.glade.h:7
+msgid "_Server:"
+msgstr "サーバー(_S):"
+
+#: ../data/glade/sql.glade.h:8
+msgid "_Username:"
+msgstr "ユーザー名(_U):"
+
 #: ../data/glade/task-date-widget.glade.h:1
-msgid "window"
-msgstr "スケジュールの設定"
-
-#. The verb "schedule".
-#. This is the verb "schedule"
-#. I18n: the verb "schedule" here.
-#: ../data/glade/task-date-widget.glade.h:3
-#: ../data/glade/task-dialog.glade.h:13
-#: ../src/planner-cell-renderer-date.c:139
-msgid "Schedule:"
-msgstr "スケジュール:"
-
-#: ../data/glade/task-date-widget.glade.h:4
 msgid ""
 "As soon as possible\n"
 "No earlier than\n"
@@ -406,200 +392,213 @@ msgstr ""
 "指定した日より前にしない\n"
 "指定した日に固定する"
 
-#: ../data/glade/task-date-widget.glade.h:7
-#: ../src/planner-cell-renderer-date.c:161
-#: ../src/planner-project-properties.c:740
-msgid "Today"
-msgstr "今日"
-
-#: ../data/glade/task-date-widget.glade.h:8
+#: ../data/glade/task-date-widget.glade.h:4
 #: ../src/planner-cell-renderer-date.c:167
 #: ../src/planner-project-properties.c:747
 msgid "Cancel"
 msgstr "キャンセル"
 
-#: ../data/glade/task-date-widget.glade.h:9
+#. The verb "schedule".
+#. This is the verb "schedule"
+#. I18n: the verb "schedule" here.
+#: ../data/glade/task-date-widget.glade.h:6
+#: ../data/glade/task-dialog.glade.h:11
+#: ../src/planner-cell-renderer-date.c:139
+msgid "Schedule:"
+msgstr "スケジュール:"
+
+#: ../data/glade/task-date-widget.glade.h:7
 #: ../src/planner-cell-renderer-date.c:174
 msgid "Select"
 msgstr "選択"
 
-#: ../data/glade/task-dialog.glade.h:2
-#: ../data/glade/task-input-dialog.glade.h:4
-msgid "_Work:"
-msgstr "作業(_W):"
+#: ../data/glade/task-date-widget.glade.h:8
+#: ../src/planner-cell-renderer-date.c:161
+#: ../src/planner-project-properties.c:740
+msgid "Today"
+msgstr "今日"
 
-#: ../data/glade/task-dialog.glade.h:3
-msgid "_Duration:"
-msgstr "期間(_D):"
+#: ../data/glade/task-date-widget.glade.h:9
+msgid "window"
+msgstr "スケジュールの設定"
+
+#: ../data/glade/task-dialog.glade.h:1
+msgid "  "
+msgstr "  "
 
 #: ../data/glade/task-dialog.glade.h:4
-msgid "C_omplete:"
-msgstr "進捗率(_O):"
-
-#: ../data/glade/task-dialog.glade.h:5
-msgid "_Priority:"
-msgstr "優先度(_P):"
-
-#: ../data/glade/task-dialog.glade.h:7
 #, no-c-format
 msgid "%"
 msgstr "%"
 
+#: ../data/glade/task-dialog.glade.h:5
+msgid "C_omplete:"
+msgstr "進捗率(_O):"
+
 #: ../data/glade/task-dialog.glade.h:8
-msgid "  "
-msgstr "  "
-
-#: ../data/glade/task-dialog.glade.h:10
-msgid "_Milestone"
-msgstr "マイルストーン(_M)"
-
-#: ../data/glade/task-dialog.glade.h:11
-msgid "_Fixed duration"
-msgstr "一定期間(_F)"
-
-#: ../data/glade/task-dialog.glade.h:15 ../src/planner-resource-view.c:457
-msgid "Resources"
-msgstr "リソース"
-
-#: ../data/glade/task-dialog.glade.h:16
 msgid "Predecessors"
 msgstr "前作業"
 
-#: ../data/glade/task-dialog.glade.h:17
+#: ../data/glade/task-dialog.glade.h:9 ../src/planner-resource-view.c:457
+msgid "Resources"
+msgstr "リソース"
+
+#: ../data/glade/task-dialog.glade.h:12
+msgid "_Duration:"
+msgstr "期間(_D):"
+
+#: ../data/glade/task-dialog.glade.h:13
+msgid "_Fixed duration"
+msgstr "一定期間(_F)"
+
+#: ../data/glade/task-dialog.glade.h:14
 msgid "_Insert Time Stamp"
 msgstr "タイムスタンプの挿入(_I)"
 
-#: ../data/glade/task-input-dialog.glade.h:1
+#: ../data/glade/task-dialog.glade.h:15
+msgid "_Milestone"
+msgstr "マイルストーン(_M)"
+
+#: ../data/glade/task-dialog.glade.h:17
+msgid "_Priority:"
+msgstr "優先度(_P):"
+
+#: ../data/glade/task-dialog.glade.h:18
+#: ../data/glade/task-input-dialog.glade.h:5
+msgid "_Work:"
+msgstr "作業(_W):"
+
+#: ../data/glade/task-input-dialog.glade.h:2
 msgid "Insert Task"
 msgstr "タスクの挿入"
 
 #: ../data/mime/planner.keys.in.h:1
-msgid "Project Plan"
-msgstr "プロジェクトの計画"
-
-#: ../data/mime/planner.keys.in.h:2
 msgid "Documents/Project Management"
 msgstr "ドキュメント/プロジェクト管理"
+
+#: ../data/mime/planner.keys.in.h:2
+msgid "Project Plan"
+msgstr "プロジェクトの計画"
 
 #: ../data/mime/planner.xml.in.h:1
 msgid "Planner project plan"
 msgstr "Planner プロジェクト計画"
 
 #: ../data/planner.desktop.in.in.h:1
-msgid "Project Management"
-msgstr "Planner プロジェクト管理"
-
-#: ../data/planner.desktop.in.in.h:2
 msgid "Planner Project Management"
 msgstr "プロジェクトを管理します"
 
+#: ../data/planner.desktop.in.in.h:2
+msgid "Project Management"
+msgstr "Planner プロジェクト管理"
+
 #: ../data/planner.schemas.in.h:1
-msgid "Highlight critical path in Gantt view"
-msgstr "Gantt グラフでクリティカルなパスを強調表示する"
-
-#: ../data/planner.schemas.in.h:2
-msgid ""
-"Whether to highlight the tasks along the cricital path in the Gantt view."
-msgstr ""
-"Gantt グラフでクリティカルなパスに沿ってタスクを強調表示するかどうかです。"
-
-#: ../data/planner.schemas.in.h:3
 msgid "Display nonstandard days in Gantt view"
 msgstr "Gantt グラフで通常日を表示する"
 
-#: ../data/planner.schemas.in.h:4
-msgid "Whether to display nonstandard days in the Gantt view."
-msgstr "Gantt グラフで通常日を表示するかどうかです。"
+#: ../data/planner.schemas.in.h:2
+msgid "Highlight critical path in Gantt view"
+msgstr "Gantt グラフでクリティカルなパスを強調表示する"
 
-#: ../data/planner.schemas.in.h:5
+#: ../data/planner.schemas.in.h:3
 msgid "Highlight critical path in Task view"
 msgstr "タスク表示でクリティカルなパスを強調表示する"
 
-#: ../data/planner.schemas.in.h:6
-msgid ""
-"Whether to highlight the tasks along the cricital path in the Task view."
-msgstr ""
-"タスク表示でクリティカルなパスに沿ってタスクを強調表示するかどうかです。"
-
-#: ../data/planner.schemas.in.h:7
+#: ../data/planner.schemas.in.h:4
 msgid "Print the Gantt view"
 msgstr "Gantt グラフを印刷する"
+
+#: ../data/planner.schemas.in.h:5
+msgid "Print the Resource view"
+msgstr "リソース表示を印刷する"
+
+#: ../data/planner.schemas.in.h:6
+msgid "Print the Task view"
+msgstr "タスク表示を印刷する"
+
+#: ../data/planner.schemas.in.h:7
+msgid "The active view"
+msgstr "アクティブなビュー"
 
 #: ../data/planner.schemas.in.h:8
 msgid "Whether printing of the Gantt view is enabled."
 msgstr "Gantt グラフを印刷可能にするかどうかです。"
 
 #: ../data/planner.schemas.in.h:9
-msgid "Print the Task view"
-msgstr "タスク表示を印刷する"
+msgid "Whether printing of the Resource view is enabled."
+msgstr "リソース表示を印刷可能にするかどうかです。"
 
 #: ../data/planner.schemas.in.h:10
 msgid "Whether printing of the Task view is enabled."
 msgstr "タスク表示を印刷可能にするかどうかです。"
 
 #: ../data/planner.schemas.in.h:11
-msgid "Print the Resource view"
-msgstr "リソース表示を印刷する"
+msgid "Whether to display nonstandard days in the Gantt view."
+msgstr "Gantt グラフで通常日を表示するかどうかです。"
 
 #: ../data/planner.schemas.in.h:12
-msgid "Whether printing of the Resource view is enabled."
-msgstr "リソース表示を印刷可能にするかどうかです。"
+msgid ""
+"Whether to highlight the tasks along the cricital path in the Gantt view."
+msgstr ""
+"Gantt グラフでクリティカルなパスに沿ってタスクを強調表示するかどうかです。"
 
 #: ../data/planner.schemas.in.h:13
-msgid "The active view"
-msgstr "アクティブなビュー"
+msgid ""
+"Whether to highlight the tasks along the cricital path in the Task view."
+msgstr ""
+"タスク表示でクリティカルなパスに沿ってタスクを強調表示するかどうかです。"
 
 #: ../data/planner.schemas.in.h:14
 msgid "Which view to display in the user interface."
-msgstr "ユーザ・インタフェースでどのビューを表示するかです。"
+msgstr "ユーザー・インターフェースでどのビューを表示するかです。"
 
 #: ../data/stylesheets/localizable.xml.h:1
 msgid "Company:"
 msgstr "会社:"
 
 #: ../data/stylesheets/localizable.xml.h:2
-msgid "Manager:"
-msgstr "マネージャ:"
+msgid "Complete"
+msgstr "進捗率"
 
 #: ../data/stylesheets/localizable.xml.h:3
-msgid "Start:"
-msgstr "開始日:"
-
-#: ../data/stylesheets/localizable.xml.h:4
 msgid "Finish:"
 msgstr "完了日:"
 
+#: ../data/stylesheets/localizable.xml.h:4
+msgid "Gantt Chart"
+msgstr "Gantt グラフ"
+
 #: ../data/stylesheets/localizable.xml.h:5
-msgid "Report Date:"
-msgstr "報告日:"
+msgid "Manager:"
+msgstr "マネージャー:"
 
 #: ../data/stylesheets/localizable.xml.h:6
-msgid "Week"
-msgstr "週"
+msgid "Phase:"
+msgstr "フェーズ:"
 
 #: ../data/stylesheets/localizable.xml.h:7
 msgid "Priority"
 msgstr "優先度"
 
 #: ../data/stylesheets/localizable.xml.h:8
-msgid "Complete"
-msgstr "進捗率"
+msgid "Report Date:"
+msgstr "報告日:"
 
 #: ../data/stylesheets/localizable.xml.h:9
+msgid "Start:"
+msgstr "開始日:"
+
+#: ../data/stylesheets/localizable.xml.h:10
 msgid "This file was generated by"
 msgstr "このファイルは次のアプリで生成しました: "
 
-#: ../data/stylesheets/localizable.xml.h:10
-msgid "Gantt Chart"
-msgstr "Gantt グラフ"
-
 #: ../data/stylesheets/localizable.xml.h:11
-msgid "Phase:"
-msgstr "フェーズ:"
-
-#: ../data/stylesheets/localizable.xml.h:12
 msgid "Unnamed Project"
 msgstr "名前なしのプロジェクト"
+
+#: ../data/stylesheets/localizable.xml.h:12
+msgid "Week"
+msgstr "週"
 
 #: ../libplanner/mrp-day.c:54
 msgid "Working"
@@ -623,7 +622,7 @@ msgstr "ベースを使用する"
 
 #: ../libplanner/mrp-day.c:61
 msgid "Use day from base calendar"
-msgstr "基本カレンダの日を利用する"
+msgstr "基本カレンダーの日を利用する"
 
 #: ../libplanner/mrp-file-module.c:125
 #, c-format
@@ -710,7 +709,7 @@ msgstr "なし"
 
 #: ../libplanner/mrp-sql.c:280 ../src/planner-sql-plugin.c:152
 msgid "Can't connect to database server"
-msgstr "データベース・サーバへ接続できません"
+msgstr "データベース・サーバーへ接続できません"
 
 #: ../libplanner/mrp-sql.c:285 ../src/planner-sql-plugin.c:157
 msgid "No errors reported."
@@ -737,7 +736,7 @@ msgstr ""
 
 #: ../libplanner/mrp-sql.c:2272 ../libplanner/mrp-sql.c:3711
 msgid "Failed to create a dictionary for the database connection.\n"
-msgstr "データベースとの接続で使用するフォルダを生成できませんでした\n"
+msgstr "データベースとの接続で使用するフォルダーを生成できませんでした\n"
 
 #: ../libplanner/mrp-sql.c:2286
 #, c-format
@@ -750,8 +749,8 @@ msgid ""
 "The project '%s' has been changed by the user '%s' since you opened it. Do "
 "you want to save anyway?"
 msgstr ""
-"'%s' というプロジェクトを開いた後に '%s' というユーザによって変更されています"
-"が、それでも保存しますか？"
+"'%s' というプロジェクトを開いた後に '%s' というユーザーによって変更されていま"
+"すが、それでも保存しますか？"
 
 #: ../libplanner/mrp-sql.c:3704
 #, c-format
@@ -872,11 +871,11 @@ msgstr "日付の種類の変更"
 
 #: ../src/planner-calendar-dialog.c:306
 msgid "Remove calendar"
-msgstr "カレンダの削除"
+msgstr "カレンダーの削除"
 
 #: ../src/planner-calendar-dialog.c:398
 msgid "Add new calendar"
-msgstr "新しいカレンダの追加"
+msgstr "新しいカレンダーの追加"
 
 #: ../src/planner-cell-renderer-date.c:146 ../src/planner-task-dialog.c:1485
 msgid "As soon as possible"
@@ -965,7 +964,7 @@ msgstr "EDS"
 
 #: ../src/planner-eds-plugin.c:156
 msgid "Import resources from Evolution Data Server"
-msgstr "Evolution データ・サーバからリソースを取り込みます"
+msgstr "Evolution データ・サーバーからリソースを取り込みます"
 
 #: ../src/planner-eds-plugin.c:384 ../src/planner-gantt-print.c:191
 #: ../src/planner-gantt-view.c:624 ../src/planner-group-dialog.c:818
@@ -989,11 +988,11 @@ msgstr "写真"
 
 #: ../src/planner-eds-plugin.c:664
 msgid "Imported from Evolution Data Server"
-msgstr "Evolution データ・サーバからインポート完了しました"
+msgstr "Evolution データ・サーバーからインポート完了しました"
 
 #: ../src/planner-eds-plugin.c:665
 msgid "Updated from Evolution Data Server"
-msgstr "Evolution データ・サーバから更新完了しました"
+msgstr "Evolution データ・サーバーから更新完了しました"
 
 #: ../src/planner-eds-plugin.c:850
 msgid "Query cancelled."
@@ -1005,7 +1004,7 @@ msgstr "Evolution Data Server UID"
 
 #: ../src/planner-eds-plugin.c:912
 msgid "Identifier used by Evolution Data Server for resources"
-msgstr "Evolution データ・サーバがリソースに付与する識別子です"
+msgstr "Evolution データ・サーバーがリソースに付与する識別子です"
 
 #: ../src/planner-format.c:153
 #, c-format
@@ -1369,15 +1368,15 @@ msgstr "グループ・プロパティの編集"
 
 #: ../src/planner-group-dialog.c:824
 msgid "Manager name"
-msgstr "マネージャの名前"
+msgstr "マネージャーの名前"
 
 #: ../src/planner-group-dialog.c:830
 msgid "Manager phone"
-msgstr "マネージャの連絡先"
+msgstr "マネージャーの連絡先"
 
 #: ../src/planner-group-dialog.c:836
 msgid "Manager email"
-msgstr "マネージャの E-メール"
+msgstr "マネージャーの E-メール"
 
 #: ../src/planner-html-plugin.c:46
 msgid "HTML"
@@ -1397,7 +1396,7 @@ msgstr "HTML へエキスポート"
 
 #: ../src/planner-html-plugin.c:149
 msgid "Show result in browser"
-msgstr "結果をブラウザで表示する"
+msgstr "結果をブラウザーで表示する"
 
 #: ../src/planner-html-plugin.c:168 ../src/planner-window.c:1564
 #: ../src/planner-xml-planner-plugin.c:124
@@ -1499,7 +1498,7 @@ msgstr "ビューの選択"
 
 #: ../src/planner-project-properties.c:387
 msgid "Select a calendar to use for this project:"
-msgstr "このプロジェクトに使用するカレンダを選択して下さい:"
+msgstr "このプロジェクトに使用するカレンダーを選択して下さい:"
 
 #: ../src/planner-project-properties.c:487
 msgid "Edit Project Name"
@@ -1511,7 +1510,7 @@ msgstr "組織の編集"
 
 #: ../src/planner-project-properties.c:559
 msgid "Edit Manager"
-msgstr "マネージャの編集"
+msgstr "マネージャーの編集"
 
 #: ../src/planner-project-properties.c:631
 #: ../src/planner-project-properties.c:665
@@ -1604,7 +1603,7 @@ msgstr "(名前なし)"
 
 #: ../src/planner-resource-dialog.c:495
 msgid "Edit resource calendar"
-msgstr "リソース・カレンダの編集"
+msgstr "リソース・カレンダーの編集"
 
 #: ../src/planner-resource-dialog.c:576
 msgid "Edit resource note"
@@ -2176,7 +2175,7 @@ msgstr "ページの設定(_U)..."
 
 #: ../src/planner-window.c:247
 msgid "Setup the page settings for your current printer"
-msgstr "お使いのプリンタに合わせてページを設定します"
+msgstr "お使いのプリンターに合わせてページを設定します"
 
 #: ../src/planner-window.c:250
 msgid "_Print..."
@@ -2244,7 +2243,7 @@ msgstr "プロジェクト(_P)"
 
 #: ../src/planner-window.c:284
 msgid "_Manage Calendars"
-msgstr "カレンダの管理(_M)"
+msgstr "カレンダーの管理(_M)"
 
 #: ../src/planner-window.c:287
 msgid "Edit Day _Types"
@@ -2268,11 +2267,11 @@ msgstr "ヘルプ(_H)"
 
 #: ../src/planner-window.c:304
 msgid "_User Guide"
-msgstr "ユーザガイド(_U)"
+msgstr "ユーザーガイド(_U)"
 
 #: ../src/planner-window.c:304
 msgid "Show the Planner User Guide"
-msgstr "Planner のユーザガイドを表示します"
+msgstr "Planner のユーザーガイドを表示します"
 
 #: ../src/planner-window.c:307
 msgid "_About"
@@ -2405,7 +2404,7 @@ msgstr "EDS の UID"
 
 #: ../eds-backend/e-cal-backend-planner.c:289
 msgid "Identifier used by Evolution Data Server for tasks"
-msgstr "Evolution データ・サーバがタスクに付与する識別子です"
+msgstr "Evolution データ・サーバーがタスクに付与する識別子です"
 
 #: ../eds-backend/e-cal-backend-planner.c:298
 msgid "EDS Categories"
@@ -2413,7 +2412,7 @@ msgstr "EDS のカテゴリ"
 
 #: ../eds-backend/e-cal-backend-planner.c:299
 msgid "Categories for a task used by Evolution Data Server"
-msgstr "Evolution データ・サーバが使用するタスクのカテゴリです"
+msgstr "Evolution データ・サーバーが使用するタスクのカテゴリです"
 
 #: ../eds-backend/e-cal-backend-planner.c:308
 msgid "EDS Classification"
@@ -2421,7 +2420,7 @@ msgstr "EDS の区分"
 
 #: ../eds-backend/e-cal-backend-planner.c:309
 msgid "Task access classification used by Evolution Data Server"
-msgstr "Evolution データ・サーバが使用するタスクへアクセスするための区分です"
+msgstr "Evolution データ・サーバーが使用するタスクへアクセスするための区分です"
 
 #: ../eds-backend/e-cal-backend-planner.c:318
 msgid "EDS URL"
@@ -2429,7 +2428,7 @@ msgstr "EDS の URL"
 
 #: ../eds-backend/e-cal-backend-planner.c:319
 msgid "URL for a Task used by Evolution Data Server"
-msgstr "Evolution データ・サーバが使用するタスクの URL です"
+msgstr "Evolution データ・サーバーが使用するタスクの URL です"
 
 #: ../eds-backend/e-cal-backend-planner.c:828
 msgid "Invalid server URI"
@@ -2444,8 +2443,8 @@ msgstr "Planner ファイルの選択"
 #: ../eds-backend/planner-source/planner-source.c:157
 #, c-format
 msgid ""
-"The filename extension of this file isn't the planner usual file extension "
-"(%s) Do you want to continue?"
+"The filename extension of this file isn't the planner usual file extension (%"
+"s) Do you want to continue?"
 msgstr ""
 "このファイルの拡張子は Planner で使用できる拡張子 (%s) ではありませんが、続行"
 "しますか？"
