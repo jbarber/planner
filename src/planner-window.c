@@ -1726,35 +1726,23 @@ planner_window_open_in_existing_or_new (PlannerWindow *window,
 {
 	PlannerWindowPriv *priv;
 	GtkWidget         *new_window;
-	gchar             *filename;
 	gboolean           ret;
 
 	priv = window->priv;
-
-	filename = g_filename_from_uri (uri, NULL, NULL);
-	if (!filename) {
-		return FALSE;
-	}
-
 	if (mrp_project_is_empty (priv->project)) {
-		ret = planner_window_open (window, filename, internal);
-		g_free (filename);
+		ret = planner_window_open (window, uri, internal);
 		return ret;
 	} else {
 		new_window = planner_application_new_window (priv->application);
-		if (planner_window_open (PLANNER_WINDOW (new_window), filename, internal)) {
-			g_free (filename);
+		if (planner_window_open (PLANNER_WINDOW (new_window), uri, internal)) {
 			gtk_widget_show_all (new_window);
 			return TRUE;
 		} else {
-			g_free (filename);
 			g_signal_emit (new_window, signals[CLOSED], 0, NULL);
 			gtk_widget_destroy (new_window);
 			return FALSE;
 		}
 	}
-
-	g_free (filename);
 
 	return FALSE;
 }

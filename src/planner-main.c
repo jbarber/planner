@@ -37,7 +37,7 @@ static gchar **args_remaining = NULL;
 
 static GOptionEntry options[] = {
 		{ "geometry", 'g', 0, G_OPTION_ARG_STRING, &geometry, N_("Create the initial window with the given geometry."), N_("GEOMETRY")},
-		{ G_OPTION_REMAINING, 0, 0, G_OPTION_ARG_FILENAME_ARRAY, &args_remaining, NULL, N_("FILES") },
+		{ G_OPTION_REMAINING, 0, 0, G_OPTION_ARG_FILENAME_ARRAY, &args_remaining, NULL, N_("FILES|URIs") },
 		{ NULL }
 	};
 
@@ -92,26 +92,27 @@ main (int argc, char **argv)
 
 	gtk_widget_show_all (main_window);
 
-	if (argc > 1) {
-		i = 1;
-		while (argv[i]) {
-			if (g_str_has_prefix (argv[i], "file:")) {
+	if (args_remaining != NULL) {
+		for (i = 0; args_remaining[i]; i++) {
+			gchar *scheme = g_uri_parse_scheme(args_remaining[i]);
+			if (scheme != NULL) {
 				planner_window_open_in_existing_or_new (
-					PLANNER_WINDOW (main_window), argv[i], FALSE);
+					PLANNER_WINDOW (main_window), args_remaining[i], FALSE);
+				g_free(scheme);
 			} else {
 				gchar *uri;
 
-				if (!g_path_is_absolute (argv[i])) {
+				if (!g_path_is_absolute (args_remaining[i])) {
 					/* Relative path. */
 					gchar *cwd, *tmp;
 
 					cwd = g_get_current_dir ();
-					tmp = g_build_filename (cwd, argv[i], NULL);
+					tmp = g_build_filename (cwd, args_remaining[i], NULL);
 					uri = g_filename_to_uri (tmp, NULL, NULL);
 					g_free (tmp);
 					g_free (cwd);
 				} else {
-					uri = g_filename_to_uri (argv[i], NULL, NULL);
+					uri = g_filename_to_uri (args_remaining[i], NULL, NULL);
 				}
 
 				if (uri) {
@@ -120,8 +121,6 @@ main (int argc, char **argv)
 					g_free (uri);
 				}
 			}
-
-			i++;
 		}
 	}
 
