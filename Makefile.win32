@@ -5,7 +5,7 @@
 SUBDIRS=docs libplanner src po
 INSTALLERTMP = installer/tmp
 
-VERSION := `sed <configure.in -n 's/AM_INIT_AUTOMAKE[^,]*, *\([^)]*\))/\1/p'`
+VERSION := `sed <configure.ac -n 's/AM_INIT_AUTOMAKE[^,]*, *\([^)]*\))/\1/p'`
 
 ifeq ($(DESTDIR),)
 export DESTDIR=$(HOME)
