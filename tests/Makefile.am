@@ -8,9 +8,9 @@ INCLUDES = \
 	-DEXAMPLESDIR=\"$(top_srcdir)/tests/files\"
 
 LDADD =	\
+	$(PLANNER_LIBS) \
 	$(top_builddir)/src/libplannerapp.la \
-	$(top_builddir)/libplanner/libplanner-1.la \
-	$(PLANNER_LIBS)
+	$(top_builddir)/libplanner/libplanner-1.la
 
 check_LTLIBRARIES = libselfcheck.la
 
@@ -21,19 +21,19 @@ libselfcheck_la_SOURCES =                              \
 check_PROGRAMS = $(TESTS)
 
 scheduler_test_SOURCES = scheduler-test.c
-scheduler_test_LDADD = $(LDADD) libselfcheck.la
+scheduler_test_LDADD = libselfcheck.la $(LDADD)
 
 time_test_SOURCES = time-test.c
-time_test_LDADD = $(LDADD) libselfcheck.la
+time_test_LDADD = libselfcheck.la $(LDADD)
 
 calendar_test_SOURCES = calendar-test.c
-calendar_test_LDADD = $(LDADD) libselfcheck.la
+calendar_test_LDADD = libselfcheck.la $(LDADD)
 
 task_test_SOURCES = task-test.c
-task_test_LDADD = $(LDADD) libselfcheck.la
+task_test_LDADD = libselfcheck.la $(LDADD)
 
 cmd_manager_test_SOURCES = cmd-manager-test.c
-cmd_manager_test_LDADD = $(LDADD) libselfcheck.la
+cmd_manager_test_LDADD = libselfcheck.la $(LDADD)
 
 TESTS_ENVIRONMENT = \
 	PLANNER_STORAGEMODULEDIR=$(top_builddir)/libplanner/.libs \
