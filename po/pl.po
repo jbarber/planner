@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: planner\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-06 19:28+0100\n"
-"PO-Revision-Date: 2012-03-06 19:29+0100\n"
+"POT-Creation-Date: 2012-03-14 21:22+0100\n"
+"PO-Revision-Date: 2012-03-14 21:23+0100\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <gnomepl@aviary.pl>\n"
 "Language: pl\n"
@@ -26,126 +26,33 @@ msgid "Add Predecessor"
 msgstr "Dodaj poprzednika"
 
 #: ../data/glade/add-predecessor.glade.h:2
-msgid "_Lag:"
-msgstr "_Opóźnienie:"
-
-#: ../data/glade/add-predecessor.glade.h:3
-#: ../data/glade/calendar-dialog.glade.h:35
-#: ../data/glade/new-property.glade.h:5
-#: ../data/glade/project-properties.glade.h:9
-#: ../data/glade/resource-dialog.glade.h:12
-#: ../data/glade/resource-input-dialog.glade.h:7
-#: ../data/glade/task-dialog.glade.h:16
-#: ../data/glade/task-input-dialog.glade.h:4
+#: ../data/glade/calendar-dialog.glade.h:36
+#: ../data/glade/new-property.glade.h:2
+#: ../data/glade/project-properties.glade.h:2
+#: ../data/glade/resource-dialog.glade.h:1
+#: ../data/glade/resource-input-dialog.glade.h:3
+#: ../data/glade/task-dialog.glade.h:1
+#: ../data/glade/task-input-dialog.glade.h:3
 msgid "_Name:"
 msgstr "_Nazwa:"
 
-#: ../data/glade/add-predecessor.glade.h:4
+#: ../data/glade/add-predecessor.glade.h:3
 msgid "_Relation type:"
 msgstr "_Typ relacji: "
 
+#: ../data/glade/add-predecessor.glade.h:4
+msgid "_Lag:"
+msgstr "_Opóźnienie:"
+
 #: ../data/glade/calendar-dialog.glade.h:1
-msgid ""
-"\n"
-"The selected day type has the following working hours:"
-msgstr ""
-"\n"
-"Wybrany rodzaj dnia posiada poniższe godziny robocze:"
-
-#: ../data/glade/calendar-dialog.glade.h:3
-#: ../data/glade/column-dialog.glade.h:1 ../data/glade/task-dialog.glade.h:2
-msgid "    "
-msgstr "    "
-
-#: ../data/glade/calendar-dialog.glade.h:4 ../data/glade/eds.glade.h:1
-#: ../data/glade/new-property.glade.h:1
-#: ../data/glade/resource-dialog.glade.h:1
-#: ../data/glade/resource-input-dialog.glade.h:1 ../data/glade/sql.glade.h:1
-#: ../data/glade/task-input-dialog.glade.h:1
-msgid "*"
-msgstr "*"
-
-#: ../data/glade/calendar-dialog.glade.h:5
-msgid "-"
-msgstr "-"
-
-#: ../data/glade/calendar-dialog.glade.h:6
-msgid "<b>Calendar:</b>"
-msgstr "<b>Kalendarz:</b>"
-
-#: ../data/glade/calendar-dialog.glade.h:7
-msgid "<b>Day types</b>"
-msgstr "<b>Rodzaje dni</b>"
-
-#: ../data/glade/calendar-dialog.glade.h:8
-msgid "<b>Working hours</b>"
-msgstr "<b>Godziny pracy</b>"
-
-#: ../data/glade/calendar-dialog.glade.h:9
-msgid "<b>Working time</b>"
-msgstr "<b>Czas pracy</b>"
-
-#: ../data/glade/calendar-dialog.glade.h:10
-msgid "Add Day Type"
-msgstr "Dodaj rodzaj dni"
-
-#: ../data/glade/calendar-dialog.glade.h:11
-msgid "Apply"
-msgstr "Zastosuj"
-
-#: ../data/glade/calendar-dialog.glade.h:12
-msgid "C_opy an existing calendar"
-msgstr "_Kopia istniejącego kalendarza"
-
-#: ../data/glade/calendar-dialog.glade.h:13
-msgid "C_reate"
-msgstr "U_twórz"
-
-#: ../data/glade/calendar-dialog.glade.h:14
-msgid "Calendar Editor"
-msgstr "Edytor kalendarza"
-
-#: ../data/glade/calendar-dialog.glade.h:15
-msgid "Create an _empty calendar"
-msgstr "Utworzenie p_ustego kalendarza"
-
-#: ../data/glade/calendar-dialog.glade.h:16
-msgid "Custom working time"
-msgstr "Dowolny czas pracy"
-
-#: ../data/glade/calendar-dialog.glade.h:17
-msgid "Day type:"
-msgstr "Rodzaj dnia:"
-
-#: ../data/glade/calendar-dialog.glade.h:18
 msgid "Default Week"
 msgstr "Domyślny tydzień"
 
-#: ../data/glade/calendar-dialog.glade.h:19
-msgid "Default week..."
-msgstr "Domyślny tydzień..."
+#: ../data/glade/calendar-dialog.glade.h:2
+msgid "<b>Calendar:</b>"
+msgstr "<b>Kalendarz:</b>"
 
-#: ../data/glade/calendar-dialog.glade.h:20
-msgid "Edit Day Types"
-msgstr "Edycja rodzajów dni"
-
-#: ../data/glade/calendar-dialog.glade.h:21
-msgid "Edit Working Time"
-msgstr "Edycja czasu pracy"
-
-#: ../data/glade/calendar-dialog.glade.h:22
-msgid "From:"
-msgstr "Od:"
-
-#: ../data/glade/calendar-dialog.glade.h:23
-msgid "New Calendar"
-msgstr "Nowy kalendarz"
-
-#: ../data/glade/calendar-dialog.glade.h:24
-msgid "Select a Calendar"
-msgstr "Wybór kalendarza"
-
-#: ../data/glade/calendar-dialog.glade.h:25
+#: ../data/glade/calendar-dialog.glade.h:3
 msgid ""
 "Select a weekday and the day type to use for that day in the default week "
 "for this calendar.\n"
@@ -153,87 +60,180 @@ msgstr ""
 "Proszę wybrać dzień tygodnia i rodzaj dnia dla niego używany w domyślnym "
 "tygodniu dla tego kalendarza.\n"
 
-#: ../data/glade/calendar-dialog.glade.h:27
-msgid "Set day type to:"
-msgstr "Rodzaj dnia:"
-
-#: ../data/glade/calendar-dialog.glade.h:28
-msgid "To:"
-msgstr "Do:"
-
-#: ../data/glade/calendar-dialog.glade.h:29
-msgid "Use working time from derived calendar"
-msgstr "Czas pracy z przejętego kalendarza"
-
-#: ../data/glade/calendar-dialog.glade.h:30
+#: ../data/glade/calendar-dialog.glade.h:5
 msgid "Week day:"
 msgstr "Dzień tygodnia:"
 
-#: ../data/glade/calendar-dialog.glade.h:31
-msgid "Working time..."
-msgstr "Czas pracy..."
+#: ../data/glade/calendar-dialog.glade.h:6
+msgid "Day type:"
+msgstr "Rodzaj dnia:"
 
-#: ../data/glade/calendar-dialog.glade.h:32
-msgid "_Derive from a calendar"
-msgstr "_Pochodzący z kalendarza"
+#: ../data/glade/calendar-dialog.glade.h:7
+msgid ""
+"\n"
+"The selected day type has the following working hours:"
+msgstr ""
+"\n"
+"Wybrany rodzaj dnia posiada poniższe godziny robocze:"
 
-#: ../data/glade/calendar-dialog.glade.h:33
-msgid "_Existing calendars:"
-msgstr "_Istniejące kalendarze:"
+#: ../data/glade/calendar-dialog.glade.h:9
+#: ../data/glade/column-dialog.glade.h:2 ../data/glade/task-dialog.glade.h:9
+msgid "    "
+msgstr "    "
 
-#: ../data/glade/calendar-dialog.glade.h:34
-msgid "_Name of the new calendar:"
-msgstr "_Nazwa nowego kalendarza:"
+#: ../data/glade/calendar-dialog.glade.h:10
+msgid "Edit Working Time"
+msgstr "Edycja czasu pracy"
 
-#: ../data/glade/calendar-dialog.glade.h:36
+#: ../data/glade/calendar-dialog.glade.h:11
+msgid "<b>Day types</b>"
+msgstr "<b>Rodzaje dni</b>"
+
+#: ../data/glade/calendar-dialog.glade.h:12
+msgid "<b>Working hours</b>"
+msgstr "<b>Godziny pracy</b>"
+
+#: ../data/glade/calendar-dialog.glade.h:13
+msgid "-"
+msgstr "-"
+
+#: ../data/glade/calendar-dialog.glade.h:14 ../data/glade/eds.glade.h:4
+#: ../data/glade/new-property.glade.h:5
+#: ../data/glade/resource-dialog.glade.h:6
+#: ../data/glade/resource-input-dialog.glade.h:5 ../data/glade/sql.glade.h:5
+#: ../data/glade/task-input-dialog.glade.h:5
+msgid "*"
+msgstr "*"
+
+#: ../data/glade/calendar-dialog.glade.h:15
+msgid "Calendar Editor"
+msgstr "Edytor kalendarza"
+
+#: ../data/glade/calendar-dialog.glade.h:16
 msgid "_New..."
 msgstr "_Nowy..."
 
-#: ../data/glade/column-dialog.glade.h:2
+#: ../data/glade/calendar-dialog.glade.h:17
+msgid "Working time..."
+msgstr "Czas pracy..."
+
+#: ../data/glade/calendar-dialog.glade.h:18
+msgid "Default week..."
+msgstr "Domyślny tydzień..."
+
+#: ../data/glade/calendar-dialog.glade.h:19
+msgid "Use working time from derived calendar"
+msgstr "Czas pracy z przejętego kalendarza"
+
+#: ../data/glade/calendar-dialog.glade.h:20
+msgid "Set day type to:"
+msgstr "Rodzaj dnia:"
+
+#: ../data/glade/calendar-dialog.glade.h:21
+msgid "Custom working time"
+msgstr "Dowolny czas pracy"
+
+#: ../data/glade/calendar-dialog.glade.h:22
+msgid "<b>Working time</b>"
+msgstr "<b>Czas pracy</b>"
+
+#: ../data/glade/calendar-dialog.glade.h:23
+msgid "From:"
+msgstr "Od:"
+
+#: ../data/glade/calendar-dialog.glade.h:24
+msgid "To:"
+msgstr "Do:"
+
+#: ../data/glade/calendar-dialog.glade.h:25
+msgid "Apply"
+msgstr "Zastosuj"
+
+#: ../data/glade/calendar-dialog.glade.h:26
+msgid "New Calendar"
+msgstr "Nowy kalendarz"
+
+#: ../data/glade/calendar-dialog.glade.h:27
+msgid "C_reate"
+msgstr "U_twórz"
+
+#: ../data/glade/calendar-dialog.glade.h:28
+msgid "_Existing calendars:"
+msgstr "_Istniejące kalendarze:"
+
+#: ../data/glade/calendar-dialog.glade.h:29
+msgid "_Name of the new calendar:"
+msgstr "_Nazwa nowego kalendarza:"
+
+#: ../data/glade/calendar-dialog.glade.h:30
+msgid "_Derive from a calendar"
+msgstr "_Pochodzący z kalendarza"
+
+#: ../data/glade/calendar-dialog.glade.h:31
+msgid "C_opy an existing calendar"
+msgstr "_Kopia istniejącego kalendarza"
+
+#: ../data/glade/calendar-dialog.glade.h:32
+msgid "Create an _empty calendar"
+msgstr "Utworzenie p_ustego kalendarza"
+
+#: ../data/glade/calendar-dialog.glade.h:33
+msgid "Select a Calendar"
+msgstr "Wybór kalendarza"
+
+#: ../data/glade/calendar-dialog.glade.h:34
+msgid "Edit Day Types"
+msgstr "Edycja rodzajów dni"
+
+#: ../data/glade/calendar-dialog.glade.h:35
+msgid "Add Day Type"
+msgstr "Dodaj rodzaj dni"
+
+#: ../data/glade/column-dialog.glade.h:1
 msgid "Hidden columns:"
 msgstr "Ukryte kolumny:"
 
 #: ../data/glade/column-dialog.glade.h:3
-msgid "Visible columns:"
-msgstr "Widoczne kolumny:"
+msgid "_Show"
+msgstr "_Wyświetl"
 
 #: ../data/glade/column-dialog.glade.h:4
 msgid "_Hide"
 msgstr "_Ukryj"
 
 #: ../data/glade/column-dialog.glade.h:5
-msgid "_Show"
-msgstr "_Wyświetl"
+msgid "Visible columns:"
+msgstr "Widoczne kolumny:"
+
+#: ../data/glade/eds.glade.h:1
+msgid "dialog1"
+msgstr "okno dialogowe 1"
 
 #: ../data/glade/eds.glade.h:2
-msgid "Loading resource data"
-msgstr "Wczytywanie danych zasobu"
+msgid "Select group"
+msgstr "Zaznacz grupę"
 
 #: ../data/glade/eds.glade.h:3
 msgid "Search"
 msgstr "Wyszukaj"
 
-#: ../data/glade/eds.glade.h:4
+#: ../data/glade/eds.glade.h:5
 msgid "Select All"
 msgstr "Zaznacz wszystko"
-
-#: ../data/glade/eds.glade.h:5
-msgid "Select group"
-msgstr "Zaznacz grupę"
 
 #: ../data/glade/eds.glade.h:6
 msgid "Unselect All"
 msgstr "Odznacz wszystko"
 
 #: ../data/glade/eds.glade.h:7
-msgid "dialog1"
-msgstr "okno dialogowe 1"
+msgid "Loading resource data"
+msgstr "Wczytywanie danych zasobu"
 
 #: ../data/glade/group-dialog.glade.h:1
 msgid "Group Editor"
 msgstr "Edytor grup"
 
-#: ../data/glade/new-property.glade.h:2
+#: ../data/glade/new-property.glade.h:1
 msgid "Add Property"
 msgstr "Dodaj właściwość"
 
@@ -242,85 +242,89 @@ msgid "_Description:"
 msgstr "_Opis: "
 
 #: ../data/glade/new-property.glade.h:4
-msgid "_Label:"
-msgstr "_Etykieta:"
-
-#: ../data/glade/new-property.glade.h:6
-#: ../data/glade/resource-dialog.glade.h:14
+#: ../data/glade/resource-dialog.glade.h:2
 msgid "_Type:"
 msgstr "_Rodzaj:"
 
+#: ../data/glade/new-property.glade.h:6
+msgid "_Label:"
+msgstr "_Etykieta:"
+
 #: ../data/glade/project-properties.glade.h:1
-msgid "Custom"
-msgstr "Dowolny"
-
-#: ../data/glade/project-properties.glade.h:2
-msgid "Edit Project Phases"
-msgstr "Modyfikuj fazy projektu"
-
-#: ../data/glade/project-properties.glade.h:3
-#: ../data/glade/resource-dialog.glade.h:5 ../data/glade/task-dialog.glade.h:6
-msgid "General"
-msgstr "Ogólne"
-
-#: ../data/glade/project-properties.glade.h:4
-msgid "New Project Phase"
-msgstr "Nowa faza projektu"
-
-#: ../data/glade/project-properties.glade.h:5
 msgid "Project Properties"
 msgstr "Właściwości projektu"
 
-#: ../data/glade/project-properties.glade.h:6
-msgid "Select..."
-msgstr "Wybierz..."
+#: ../data/glade/project-properties.glade.h:3
+msgid "_Start:"
+msgstr "_Początek:"
 
-#: ../data/glade/project-properties.glade.h:7
-msgid "_Calendar:"
-msgstr "_Kalendarz:"
-
-#: ../data/glade/project-properties.glade.h:8
-msgid "_Manager:"
-msgstr "_Menedżer:"
-
-#: ../data/glade/project-properties.glade.h:10
+#: ../data/glade/project-properties.glade.h:4
 msgid "_Organization:"
 msgstr "_Organizacja:"
 
-#: ../data/glade/project-properties.glade.h:11
+#: ../data/glade/project-properties.glade.h:5
+msgid "_Manager:"
+msgstr "_Menedżer:"
+
+#: ../data/glade/project-properties.glade.h:6
+msgid "_Calendar:"
+msgstr "_Kalendarz:"
+
+#: ../data/glade/project-properties.glade.h:7
+msgid "Select..."
+msgstr "Wybierz..."
+
+#: ../data/glade/project-properties.glade.h:8
 msgid "_Phase:"
 msgstr "_Faza:"
 
+#: ../data/glade/project-properties.glade.h:9
+#: ../data/glade/resource-dialog.glade.h:9
+#: ../data/glade/task-dialog.glade.h:14
+msgid "General"
+msgstr "Ogólne"
+
+#: ../data/glade/project-properties.glade.h:10
+msgid "Custom"
+msgstr "Dowolny"
+
+#: ../data/glade/project-properties.glade.h:11
+msgid "Edit Project Phases"
+msgstr "Modyfikuj fazy projektu"
+
 #: ../data/glade/project-properties.glade.h:12
-msgid "_Start:"
-msgstr "_Początek:"
+msgid "New Project Phase"
+msgstr "Nowa faza projektu"
 
 #: ../data/glade/property-dialog.glade.h:1
 msgid "Custom Properties"
 msgstr "Dowolne właściwości"
 
-#: ../data/glade/resource-dialog.glade.h:2
+#: ../data/glade/resource-dialog.glade.h:3
+#: ../data/glade/resource-input-dialog.glade.h:4
+msgid "_Email:"
+msgstr "_E-mail:"
+
+#: ../data/glade/resource-dialog.glade.h:4
+#: ../data/glade/resource-input-dialog.glade.h:6
+msgid "_Group:"
+msgstr "_Grupa:"
+
+#: ../data/glade/resource-dialog.glade.h:5
 msgid "C_ost:"
 msgstr "K_oszt:"
 
-#: ../data/glade/resource-dialog.glade.h:3
-msgid "Calendar"
-msgstr "Kalendarz"
-
-#: ../data/glade/resource-dialog.glade.h:4
-msgid "Edit Calendars..."
-msgstr "Modyfikuj kalendarze..."
-
-#: ../data/glade/resource-dialog.glade.h:6 ../data/glade/task-dialog.glade.h:7
-msgid "Notes"
-msgstr "Uwagi"
-
 #: ../data/glade/resource-dialog.glade.h:7
-#: ../data/glade/resource-input-dialog.glade.h:3
+#: ../data/glade/resource-input-dialog.glade.h:7
+msgid "_Short name:"
+msgstr "_Krótka nazwa:"
+
+#: ../data/glade/resource-dialog.glade.h:8
+#: ../data/glade/resource-input-dialog.glade.h:8
 msgid "Optional - overrides resource name in Gantt view."
 msgstr "Opcjonalne - zastępuje nazwę zasobu w widoku Gantta."
 
-#: ../data/glade/resource-dialog.glade.h:8
+#: ../data/glade/resource-dialog.glade.h:10
 msgid ""
 "Select the calendar to use for this resource. If you want to use the default "
 "calendar of the project, select 'None'. "
@@ -328,64 +332,75 @@ msgstr ""
 "Proszę wybrać kalendarz dla tego zasobu. Aby skorzystać z domyślnego "
 "kalendarza projektu, należy wybrać opcję \"Brak\"."
 
-#: ../data/glade/resource-dialog.glade.h:9
-#: ../data/glade/resource-input-dialog.glade.h:4
-msgid "_Email:"
-msgstr "_E-mail:"
-
-#: ../data/glade/resource-dialog.glade.h:10
-#: ../data/glade/resource-input-dialog.glade.h:5
-msgid "_Group:"
-msgstr "_Grupa:"
-
 #: ../data/glade/resource-dialog.glade.h:11
+msgid "Edit Calendars..."
+msgstr "Modyfikuj kalendarze..."
+
+#: ../data/glade/resource-dialog.glade.h:12
+msgid "Calendar"
+msgstr "Kalendarz"
+
+#: ../data/glade/resource-dialog.glade.h:13
 msgid "_Insert time stamp"
 msgstr "_Wstaw znacznik czasu"
 
-#: ../data/glade/resource-dialog.glade.h:13
-#: ../data/glade/resource-input-dialog.glade.h:8
-msgid "_Short name:"
-msgstr "_Krótka nazwa:"
+#: ../data/glade/resource-dialog.glade.h:14
+#: ../data/glade/task-dialog.glade.h:18
+msgid "Notes"
+msgstr "Uwagi"
 
-#: ../data/glade/resource-input-dialog.glade.h:2
+#: ../data/glade/resource-input-dialog.glade.h:1
 msgid "Insert Resource"
 msgstr "Wstaw zasób"
 
-#: ../data/glade/resource-input-dialog.glade.h:6
-#: ../data/glade/task-input-dialog.glade.h:3
+#: ../data/glade/resource-input-dialog.glade.h:2
+#: ../data/glade/task-input-dialog.glade.h:2
 msgid "_Insert"
 msgstr "_Wstaw"
 
-#: ../data/glade/sql.glade.h:2
+#: ../data/glade/sql.glade.h:1
 msgid "Open Database"
 msgstr "Otwórz bazę danych"
 
+#: ../data/glade/sql.glade.h:2
+msgid "_Server:"
+msgstr "_Serwer:"
+
 #: ../data/glade/sql.glade.h:3
+msgid "_Username:"
+msgstr "_Nazwa użytkownika:"
+
+#: ../data/glade/sql.glade.h:4
+msgid "_Password:"
+msgstr "_Hasło:"
+
+#: ../data/glade/sql.glade.h:6
+msgid "_Database:"
+msgstr "_Baza danych:"
+
+#: ../data/glade/sql.glade.h:7
 msgid "Select a Project"
 msgstr "Wybór projektu"
 
-#: ../data/glade/sql.glade.h:4
+#: ../data/glade/sql.glade.h:8
 msgid "The database contains the following projects. Select a project to open:"
 msgstr ""
 "Baza danych zawiera następujące projekty. Proszę wybrać projekt do otwarcia:"
 
-#: ../data/glade/sql.glade.h:5
-msgid "_Database:"
-msgstr "_Baza danych:"
-
-#: ../data/glade/sql.glade.h:6
-msgid "_Password:"
-msgstr "_Hasło:"
-
-#: ../data/glade/sql.glade.h:7
-msgid "_Server:"
-msgstr "_Serwer:"
-
-#: ../data/glade/sql.glade.h:8
-msgid "_Username:"
-msgstr "_Nazwa użytkownika:"
-
 #: ../data/glade/task-date-widget.glade.h:1
+msgid "window"
+msgstr "okno"
+
+#. The verb "schedule".
+#. This is the verb "schedule"
+#. I18n: the verb "schedule" here.
+#: ../data/glade/task-date-widget.glade.h:3
+#: ../data/glade/task-dialog.glade.h:13
+#: ../src/planner-cell-renderer-date.c:139
+msgid "Schedule:"
+msgstr "Zaplanowane:"
+
+#: ../data/glade/task-date-widget.glade.h:4
 msgid ""
 "As soon as possible\n"
 "No earlier than\n"
@@ -395,162 +410,161 @@ msgstr ""
 "Nie wcześniej niż\n"
 "Konkretnego dnia"
 
-#: ../data/glade/task-date-widget.glade.h:4
-#: ../src/planner-cell-renderer-date.c:167
-#: ../src/planner-project-properties.c:747
-msgid "Cancel"
-msgstr "Anuluj"
-
-#. The verb "schedule".
-#. This is the verb "schedule"
-#. I18n: the verb "schedule" here.
-#: ../data/glade/task-date-widget.glade.h:6
-#: ../data/glade/task-dialog.glade.h:11
-#: ../src/planner-cell-renderer-date.c:139
-msgid "Schedule:"
-msgstr "Zaplanowane:"
-
 #: ../data/glade/task-date-widget.glade.h:7
-#: ../src/planner-cell-renderer-date.c:174
-msgid "Select"
-msgstr "Wybór"
-
-#: ../data/glade/task-date-widget.glade.h:8
 #: ../src/planner-cell-renderer-date.c:161
 #: ../src/planner-project-properties.c:740
 msgid "Today"
 msgstr "Dzisiaj"
 
-#: ../data/glade/task-date-widget.glade.h:9
-msgid "window"
-msgstr "okno"
+#: ../data/glade/task-date-widget.glade.h:8
+#: ../src/planner-cell-renderer-date.c:167
+#: ../src/planner-project-properties.c:747
+msgid "Cancel"
+msgstr "Anuluj"
 
-#: ../data/glade/task-dialog.glade.h:1
-msgid "  "
-msgstr "  "
+#: ../data/glade/task-date-widget.glade.h:9
+#: ../src/planner-cell-renderer-date.c:174
+msgid "Select"
+msgstr "Wybór"
+
+#: ../data/glade/task-dialog.glade.h:2
+#: ../data/glade/task-input-dialog.glade.h:4
+msgid "_Work:"
+msgstr "_Praca:"
+
+#: ../data/glade/task-dialog.glade.h:3
+msgid "_Duration:"
+msgstr "_Czas trwania:"
 
 #: ../data/glade/task-dialog.glade.h:4
+msgid "C_omplete:"
+msgstr "Ukończ_one:"
+
+#: ../data/glade/task-dialog.glade.h:5
+msgid "_Priority:"
+msgstr "_Priorytet:"
+
+#: ../data/glade/task-dialog.glade.h:7
 #, no-c-format
 msgid "%"
 msgstr "%"
 
-#: ../data/glade/task-dialog.glade.h:5
-msgid "C_omplete:"
-msgstr "Ukończ_one:"
-
 #: ../data/glade/task-dialog.glade.h:8
-msgid "Predecessors"
-msgstr "Poprzedniki"
+msgid "  "
+msgstr "  "
 
-#: ../data/glade/task-dialog.glade.h:9 ../src/planner-resource-view.c:457
-msgid "Resources"
-msgstr "Zasoby"
-
-#: ../data/glade/task-dialog.glade.h:12
-msgid "_Duration:"
-msgstr "_Czas trwania:"
-
-#: ../data/glade/task-dialog.glade.h:13
-msgid "_Fixed duration"
-msgstr "_Zmienny czas trwania"
-
-#: ../data/glade/task-dialog.glade.h:14
-msgid "_Insert Time Stamp"
-msgstr "_Wstaw znacznik czasu"
-
-#: ../data/glade/task-dialog.glade.h:15
+#: ../data/glade/task-dialog.glade.h:10
 msgid "_Milestone"
 msgstr "Punkt _kontrolny"
 
+#: ../data/glade/task-dialog.glade.h:11
+msgid "_Fixed duration"
+msgstr "_Zmienny czas trwania"
+
+#: ../data/glade/task-dialog.glade.h:15 ../src/planner-resource-view.c:457
+msgid "Resources"
+msgstr "Zasoby"
+
+#: ../data/glade/task-dialog.glade.h:16
+msgid "Predecessors"
+msgstr "Poprzedniki"
+
 #: ../data/glade/task-dialog.glade.h:17
-msgid "_Priority:"
-msgstr "_Priorytet:"
+msgid "_Insert Time Stamp"
+msgstr "_Wstaw znacznik czasu"
 
-#: ../data/glade/task-dialog.glade.h:18
-#: ../data/glade/task-input-dialog.glade.h:5
-msgid "_Work:"
-msgstr "_Praca:"
-
-#: ../data/glade/task-input-dialog.glade.h:2
+#: ../data/glade/task-input-dialog.glade.h:1
 msgid "Insert Task"
 msgstr "Wstawienie zadania"
 
 #: ../data/mime/planner.keys.in.h:1
-msgid "Documents/Project Management"
-msgstr "Zarządzanie dokumentami/projektami"
-
-#: ../data/mime/planner.keys.in.h:2
 msgid "Project Plan"
 msgstr "Plan projektu"
+
+#: ../data/mime/planner.keys.in.h:2
+msgid "Documents/Project Management"
+msgstr "Zarządzanie dokumentami/projektami"
 
 #: ../data/mime/planner.xml.in.h:1
 msgid "Planner project plan"
 msgstr "Plan projektu programu Planner"
 
 #: ../data/planner.desktop.in.in.h:1
-msgid "Planner Project Management"
-msgstr "Zarządzanie projektami Planner"
+msgid "Planner"
+msgstr "Planner"
 
 #: ../data/planner.desktop.in.in.h:2
 msgid "Project Management"
 msgstr "Zarządzanie projektami"
 
-#: ../data/planner.schemas.in.h:1
-msgid "Display nonstandard days in Gantt view"
-msgstr "Wyświetlanie niestandardowych dni w widoku Gantta"
+#: ../data/planner.desktop.in.in.h:3
+msgid "Planner Project Management"
+msgstr "Zarządzanie projektami Planner"
 
-#: ../data/planner.schemas.in.h:2
+#: ../data/planner.desktop.in.in.h:4
+msgid "Handle the tasks, resources, and cost of your projects"
+msgstr "Zarządzanie zadaniami, zasobami i kosztami projektów"
+
+#: ../data/planner.desktop.in.in.h:5
+msgid "Gantt;Chart;Critical path;Relationship;Dependency;WBS;"
+msgstr "Gantt;Diagram;Wykres;Ścieżka krytyczna;Zależność;Zależności;WBS;"
+
+#: ../data/planner.schemas.in.h:1
 msgid "Highlight critical path in Gantt view"
 msgstr "Wyróżnianie krytycznych ścieżek w widoku Gantta"
 
-#: ../data/planner.schemas.in.h:3
-msgid "Highlight critical path in Task view"
-msgstr "Wyróżnianie krytycznych ścieżek w widoku zadań"
-
-#: ../data/planner.schemas.in.h:4
-msgid "Print the Gantt view"
-msgstr "Drukowanie widoku Gantta"
-
-#: ../data/planner.schemas.in.h:5
-msgid "Print the Resource view"
-msgstr "Drukowanie widoku zasobów"
-
-#: ../data/planner.schemas.in.h:6
-msgid "Print the Task view"
-msgstr "Drukowanie widoku zadań"
-
-#: ../data/planner.schemas.in.h:7
-msgid "The active view"
-msgstr "Aktywny widok"
-
-#: ../data/planner.schemas.in.h:8
-msgid "Whether printing of the Gantt view is enabled."
-msgstr "Określa, czy drukowanie widoku Gantta jest włączone."
-
-#: ../data/planner.schemas.in.h:9
-msgid "Whether printing of the Resource view is enabled."
-msgstr "Określa, czy drukowanie widoku zasobów jest włączone."
-
-#: ../data/planner.schemas.in.h:10
-msgid "Whether printing of the Task view is enabled."
-msgstr "Określa, czy drukowanie widoku zadań jest włączone."
-
-#: ../data/planner.schemas.in.h:11
-msgid "Whether to display nonstandard days in the Gantt view."
-msgstr "Określa, czy wyświetlać niestandardowe dni w widoku Gantta."
-
-#: ../data/planner.schemas.in.h:12
+#: ../data/planner.schemas.in.h:2
 msgid ""
 "Whether to highlight the tasks along the cricital path in the Gantt view."
 msgstr ""
 "Określa, czy wyróżniać zadania należące do krytycznej ścieżki w widoku "
 "Gantta."
 
-#: ../data/planner.schemas.in.h:13
+#: ../data/planner.schemas.in.h:3
+msgid "Display nonstandard days in Gantt view"
+msgstr "Wyświetlanie niestandardowych dni w widoku Gantta"
+
+#: ../data/planner.schemas.in.h:4
+msgid "Whether to display nonstandard days in the Gantt view."
+msgstr "Określa, czy wyświetlać niestandardowe dni w widoku Gantta."
+
+#: ../data/planner.schemas.in.h:5
+msgid "Highlight critical path in Task view"
+msgstr "Wyróżnianie krytycznych ścieżek w widoku zadań"
+
+#: ../data/planner.schemas.in.h:6
 msgid ""
 "Whether to highlight the tasks along the cricital path in the Task view."
 msgstr ""
 "Określa, czy wyróżniać zadania należące do ścieżki krytycznej w widoku zadań."
+
+#: ../data/planner.schemas.in.h:7
+msgid "Print the Gantt view"
+msgstr "Drukowanie widoku Gantta"
+
+#: ../data/planner.schemas.in.h:8
+msgid "Whether printing of the Gantt view is enabled."
+msgstr "Określa, czy drukowanie widoku Gantta jest włączone."
+
+#: ../data/planner.schemas.in.h:9
+msgid "Print the Task view"
+msgstr "Drukowanie widoku zadań"
+
+#: ../data/planner.schemas.in.h:10
+msgid "Whether printing of the Task view is enabled."
+msgstr "Określa, czy drukowanie widoku zadań jest włączone."
+
+#: ../data/planner.schemas.in.h:11
+msgid "Print the Resource view"
+msgstr "Drukowanie widoku zasobów"
+
+#: ../data/planner.schemas.in.h:12
+msgid "Whether printing of the Resource view is enabled."
+msgstr "Określa, czy drukowanie widoku zasobów jest włączone."
+
+#: ../data/planner.schemas.in.h:13
+msgid "The active view"
+msgstr "Aktywny widok"
 
 #: ../data/planner.schemas.in.h:14
 msgid "Which view to display in the user interface."
@@ -561,48 +575,48 @@ msgid "Company:"
 msgstr "Firma:"
 
 #: ../data/stylesheets/localizable.xml.h:2
-msgid "Complete"
-msgstr "Ukończone"
-
-#: ../data/stylesheets/localizable.xml.h:3
-msgid "Finish:"
-msgstr "Koniec:"
-
-#: ../data/stylesheets/localizable.xml.h:4
-msgid "Gantt Chart"
-msgstr "Diagram Gantta"
-
-#: ../data/stylesheets/localizable.xml.h:5
 msgid "Manager:"
 msgstr "Menedżer:"
 
+#: ../data/stylesheets/localizable.xml.h:3
+msgid "Start:"
+msgstr "Początek:"
+
+#: ../data/stylesheets/localizable.xml.h:4
+msgid "Finish:"
+msgstr "Koniec:"
+
+#: ../data/stylesheets/localizable.xml.h:5
+msgid "Report Date:"
+msgstr "Data raportu:"
+
 #: ../data/stylesheets/localizable.xml.h:6
-msgid "Phase:"
-msgstr "Faza:"
+msgid "Week"
+msgstr "Tydzień"
 
 #: ../data/stylesheets/localizable.xml.h:7
 msgid "Priority"
 msgstr "Priorytet"
 
 #: ../data/stylesheets/localizable.xml.h:8
-msgid "Report Date:"
-msgstr "Data raportu:"
+msgid "Complete"
+msgstr "Ukończone"
 
 #: ../data/stylesheets/localizable.xml.h:9
-msgid "Start:"
-msgstr "Początek:"
-
-#: ../data/stylesheets/localizable.xml.h:10
 msgid "This file was generated by"
 msgstr "Ten plik został utworzony przez"
 
+#: ../data/stylesheets/localizable.xml.h:10
+msgid "Gantt Chart"
+msgstr "Diagram Gantta"
+
 #: ../data/stylesheets/localizable.xml.h:11
-msgid "Unnamed Project"
-msgstr "Projekt bez nazwy"
+msgid "Phase:"
+msgstr "Faza:"
 
 #: ../data/stylesheets/localizable.xml.h:12
-msgid "Week"
-msgstr "Tydzień"
+msgid "Unnamed Project"
+msgstr "Projekt bez nazwy"
 
 #: ../libplanner/mrp-day.c:54
 msgid "Working"
