@@ -1,48 +1,75 @@
 # translation of planner.master.ru.po to Russian
-# Vitaly Lipatov <lav@altlinux.ru>, 2002,2003.
-# Yuri Kozlov <yuray@komyakino.ru>, 2010.
 # Russian translation of planner
 # Copyright (C) 2002-2006, 2010 Free Software Foundation, Inc.
 # Sergey Kvyato <kvantos@plotinka.ru> 2006
+# Vitaly Lipatov <lav@altlinux.ru>, 2002,2003.
+# Yuri Kozlov <yuray@komyakino.ru>, 2010, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: Planner 0.14\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=planner&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2011-06-06 18:46+0000\n"
-"PO-Revision-Date: 2011-06-09 23:57+0300\n"
-"Last-Translator: Yuri Myasoedov <omerta13@yandex.ru>\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"product=planner&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2012-03-28 05:20+0000\n"
+"PO-Revision-Date: 2012-04-07 10:18+0400\n"
+"Last-Translator: Yuri Kozlov <yuray@komyakino.ru>\n"
 "Language-Team: Russian <gnome-cyr@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.4\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Lokalize 1.2\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
+"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Poedit-Language: Russian\n"
+"Language: ru\n"
 
 #: ../data/glade/add-predecessor.glade.h:1
 msgid "Add Predecessor"
 msgstr "Добавить предшествующую задачу"
 
 #: ../data/glade/add-predecessor.glade.h:2
-msgid "_Lag:"
-msgstr "_Задержка:"
-
-#: ../data/glade/add-predecessor.glade.h:3
-#: ../data/glade/calendar-dialog.glade.h:35
-#: ../data/glade/new-property.glade.h:5
-#: ../data/glade/project-properties.glade.h:9
-#: ../data/glade/resource-dialog.glade.h:12
-#: ../data/glade/resource-input-dialog.glade.h:7
-#: ../data/glade/task-dialog.glade.h:16
-#: ../data/glade/task-input-dialog.glade.h:4
+#: ../data/glade/calendar-dialog.glade.h:36
+#: ../data/glade/new-property.glade.h:2
+#: ../data/glade/project-properties.glade.h:2
+#: ../data/glade/resource-dialog.glade.h:1
+#: ../data/glade/resource-input-dialog.glade.h:3
+#: ../data/glade/task-dialog.glade.h:1
+#: ../data/glade/task-input-dialog.glade.h:3
 msgid "_Name:"
 msgstr "_Название:"
 
-#: ../data/glade/add-predecessor.glade.h:4
+#: ../data/glade/add-predecessor.glade.h:3
 msgid "_Relation type:"
 msgstr "Вид _отношения:"
 
+#: ../data/glade/add-predecessor.glade.h:4
+msgid "_Lag:"
+msgstr "_Задержка:"
+
 #: ../data/glade/calendar-dialog.glade.h:1
+msgid "Default Week"
+msgstr "Типовая неделя"
+
+#: ../data/glade/calendar-dialog.glade.h:2
+msgid "<b>Calendar:</b>"
+msgstr "<b>Календарь:</b>"
+
+#: ../data/glade/calendar-dialog.glade.h:3
+msgid ""
+"Select a weekday and the day type to use for that day in the default week "
+"for this calendar.\n"
+msgstr ""
+"Выбрать день недели и назначить для него тип, который будет использоваться "
+"для этого дня по умолчанию в данном календаре.\n"
+
+#: ../data/glade/calendar-dialog.glade.h:5
+msgid "Week day:"
+msgstr "День недели:"
+
+#: ../data/glade/calendar-dialog.glade.h:6
+msgid "Day type:"
+msgstr "Вид дня:"
+
+#: ../data/glade/calendar-dialog.glade.h:7
 msgid ""
 "\n"
 "The selected day type has the following working hours:"
@@ -50,187 +77,164 @@ msgstr ""
 "\n"
 "Выбранный вид дня имеет следующие рабочие часы:"
 
-#: ../data/glade/calendar-dialog.glade.h:3
-#: ../data/glade/column-dialog.glade.h:1
-#: ../data/glade/task-dialog.glade.h:2
+#: ../data/glade/calendar-dialog.glade.h:9
+#: ../data/glade/column-dialog.glade.h:2 ../data/glade/task-dialog.glade.h:9
 msgid "    "
 msgstr "    "
 
-#: ../data/glade/calendar-dialog.glade.h:4
-#: ../data/glade/eds.glade.h:1
-#: ../data/glade/new-property.glade.h:1
-#: ../data/glade/resource-dialog.glade.h:1
-#: ../data/glade/resource-input-dialog.glade.h:1
-#: ../data/glade/sql.glade.h:1
-#: ../data/glade/task-input-dialog.glade.h:1
-msgid "*"
-msgstr "*"
-
-#: ../data/glade/calendar-dialog.glade.h:5
-msgid "-"
-msgstr "-"
-
-#: ../data/glade/calendar-dialog.glade.h:6
-msgid "<b>Calendar:</b>"
-msgstr "<b>Календарь:</b>"
-
-#: ../data/glade/calendar-dialog.glade.h:7
-msgid "<b>Day types</b>"
-msgstr "<b>Виды дней</b>"
-
-#: ../data/glade/calendar-dialog.glade.h:8
-msgid "<b>Working hours</b>"
-msgstr "<b>Рабочие часы</b>"
-
-#: ../data/glade/calendar-dialog.glade.h:9
-msgid "<b>Working time</b>"
-msgstr "<b>Рабочее время</b>"
-
 #: ../data/glade/calendar-dialog.glade.h:10
-msgid "Add Day Type"
-msgstr "Добавить вид дня"
-
-#: ../data/glade/calendar-dialog.glade.h:11
-msgid "Apply"
-msgstr "Применить"
-
-#: ../data/glade/calendar-dialog.glade.h:12
-msgid "C_opy an existing calendar"
-msgstr "Ск_опировать существующий календарь"
-
-#: ../data/glade/calendar-dialog.glade.h:13
-msgid "C_reate"
-msgstr "_Создать"
-
-#: ../data/glade/calendar-dialog.glade.h:14
-msgid "Calendar Editor"
-msgstr "Редактор календаря"
-
-#: ../data/glade/calendar-dialog.glade.h:15
-msgid "Create an _empty calendar"
-msgstr "Создать _пустой календарь"
-
-#: ../data/glade/calendar-dialog.glade.h:16
-msgid "Custom working time"
-msgstr "Нестандартное рабочее время"
-
-#: ../data/glade/calendar-dialog.glade.h:17
-msgid "Day type:"
-msgstr "Вид дня:"
-
-#: ../data/glade/calendar-dialog.glade.h:18
-msgid "Default Week"
-msgstr "Типовая неделя"
-
-#: ../data/glade/calendar-dialog.glade.h:19
-msgid "Default week..."
-msgstr "Типовая неделя..."
-
-#: ../data/glade/calendar-dialog.glade.h:20
-msgid "Edit Day Types"
-msgstr "Изменить виды дней"
-
-#: ../data/glade/calendar-dialog.glade.h:21
 msgid "Edit Working Time"
 msgstr "Изменить рабочее времени"
 
-#: ../data/glade/calendar-dialog.glade.h:22
-msgid "From:"
-msgstr "От:"
+#: ../data/glade/calendar-dialog.glade.h:11
+msgid "<b>Day types</b>"
+msgstr "<b>Виды дней</b>"
 
-#: ../data/glade/calendar-dialog.glade.h:23
-msgid "New Calendar"
-msgstr "Создать календарь"
+#: ../data/glade/calendar-dialog.glade.h:12
+msgid "<b>Working hours</b>"
+msgstr "<b>Рабочие часы</b>"
 
-#: ../data/glade/calendar-dialog.glade.h:24
-msgid "Select a Calendar"
-msgstr "Выбрать календарь"
+#: ../data/glade/calendar-dialog.glade.h:13
+msgid "-"
+msgstr "-"
 
-#: ../data/glade/calendar-dialog.glade.h:25
-msgid "Select a weekday and the day type to use for that day in the default week for this calendar.\n"
-msgstr "Выбрать день недели и назначить для него тип, который будет использоваться для этого дня по умолчанию в данном календаре.\n"
+#: ../data/glade/calendar-dialog.glade.h:14 ../data/glade/eds.glade.h:4
+#: ../data/glade/new-property.glade.h:5
+#: ../data/glade/resource-dialog.glade.h:6
+#: ../data/glade/resource-input-dialog.glade.h:5 ../data/glade/sql.glade.h:5
+#: ../data/glade/task-input-dialog.glade.h:5
+msgid "*"
+msgstr "*"
 
-#: ../data/glade/calendar-dialog.glade.h:27
-msgid "Set day type to:"
-msgstr "Установить вид дня в:"
+#: ../data/glade/calendar-dialog.glade.h:15
+msgid "Calendar Editor"
+msgstr "Редактор календаря"
 
-#: ../data/glade/calendar-dialog.glade.h:28
-msgid "To:"
-msgstr "Куда:"
-
-#: ../data/glade/calendar-dialog.glade.h:29
-msgid "Use working time from derived calendar"
-msgstr "Использовать рабочее время от наследованного календаря"
-
-#: ../data/glade/calendar-dialog.glade.h:30
-msgid "Week day:"
-msgstr "День недели:"
-
-#: ../data/glade/calendar-dialog.glade.h:31
-msgid "Working time..."
-msgstr "Рабочее время..."
-
-#: ../data/glade/calendar-dialog.glade.h:32
-msgid "_Derive from a calendar"
-msgstr "_Извлечь из календаря"
-
-#: ../data/glade/calendar-dialog.glade.h:33
-msgid "_Existing calendars:"
-msgstr "_Имеющиеся календари:"
-
-#: ../data/glade/calendar-dialog.glade.h:34
-msgid "_Name of the new calendar:"
-msgstr "_Название нового календаря:"
-
-#: ../data/glade/calendar-dialog.glade.h:36
+#: ../data/glade/calendar-dialog.glade.h:16
 msgid "_New..."
 msgstr "_Создать..."
 
-#: ../data/glade/column-dialog.glade.h:2
+#: ../data/glade/calendar-dialog.glade.h:17
+msgid "Working time..."
+msgstr "Рабочее время..."
+
+#: ../data/glade/calendar-dialog.glade.h:18
+msgid "Default week..."
+msgstr "Типовая неделя..."
+
+#: ../data/glade/calendar-dialog.glade.h:19
+msgid "Use working time from derived calendar"
+msgstr "Использовать рабочее время от наследованного календаря"
+
+#: ../data/glade/calendar-dialog.glade.h:20
+msgid "Set day type to:"
+msgstr "Установить вид дня в:"
+
+#: ../data/glade/calendar-dialog.glade.h:21
+msgid "Custom working time"
+msgstr "Нестандартное рабочее время"
+
+#: ../data/glade/calendar-dialog.glade.h:22
+msgid "<b>Working time</b>"
+msgstr "<b>Рабочее время</b>"
+
+#: ../data/glade/calendar-dialog.glade.h:23
+msgid "From:"
+msgstr "От:"
+
+#: ../data/glade/calendar-dialog.glade.h:24
+msgid "To:"
+msgstr "Куда:"
+
+#: ../data/glade/calendar-dialog.glade.h:25
+msgid "Apply"
+msgstr "Применить"
+
+#: ../data/glade/calendar-dialog.glade.h:26
+msgid "New Calendar"
+msgstr "Создать календарь"
+
+#: ../data/glade/calendar-dialog.glade.h:27
+msgid "C_reate"
+msgstr "_Создать"
+
+#: ../data/glade/calendar-dialog.glade.h:28
+msgid "_Existing calendars:"
+msgstr "_Имеющиеся календари:"
+
+#: ../data/glade/calendar-dialog.glade.h:29
+msgid "_Name of the new calendar:"
+msgstr "_Название нового календаря:"
+
+#: ../data/glade/calendar-dialog.glade.h:30
+msgid "_Derive from a calendar"
+msgstr "_Извлечь из календаря"
+
+#: ../data/glade/calendar-dialog.glade.h:31
+msgid "C_opy an existing calendar"
+msgstr "Ск_опировать существующий календарь"
+
+#: ../data/glade/calendar-dialog.glade.h:32
+msgid "Create an _empty calendar"
+msgstr "Создать _пустой календарь"
+
+#: ../data/glade/calendar-dialog.glade.h:33
+msgid "Select a Calendar"
+msgstr "Выбрать календарь"
+
+#: ../data/glade/calendar-dialog.glade.h:34
+msgid "Edit Day Types"
+msgstr "Изменить виды дней"
+
+#: ../data/glade/calendar-dialog.glade.h:35
+msgid "Add Day Type"
+msgstr "Добавить вид дня"
+
+#: ../data/glade/column-dialog.glade.h:1
 msgid "Hidden columns:"
 msgstr "Невидимые столбцы:"
 
 #: ../data/glade/column-dialog.glade.h:3
-msgid "Visible columns:"
-msgstr "Видимые столбцы:"
+msgid "_Show"
+msgstr "_Показать"
 
 #: ../data/glade/column-dialog.glade.h:4
 msgid "_Hide"
 msgstr "_Скрыть"
 
 #: ../data/glade/column-dialog.glade.h:5
-msgid "_Show"
-msgstr "_Показать"
+msgid "Visible columns:"
+msgstr "Видимые столбцы:"
+
+#: ../data/glade/eds.glade.h:1
+msgid "dialog1"
+msgstr "диалог1"
 
 #: ../data/glade/eds.glade.h:2
-msgid "Loading resource data"
-msgstr "Загружаются данные ресурса"
+msgid "Select group"
+msgstr "Выделить группу"
 
 #: ../data/glade/eds.glade.h:3
 msgid "Search"
 msgstr "Поиск"
 
-#: ../data/glade/eds.glade.h:4
+#: ../data/glade/eds.glade.h:5
 msgid "Select All"
 msgstr "Выделить всё"
-
-#: ../data/glade/eds.glade.h:5
-msgid "Select group"
-msgstr "Выделить группу"
 
 #: ../data/glade/eds.glade.h:6
 msgid "Unselect All"
 msgstr "Снять выделение"
 
 #: ../data/glade/eds.glade.h:7
-msgid "dialog1"
-msgstr "диалог1"
+msgid "Loading resource data"
+msgstr "Загружаются данные ресурса"
 
 #: ../data/glade/group-dialog.glade.h:1
 msgid "Group Editor"
 msgstr "Редактор групп"
 
-#: ../data/glade/new-property.glade.h:2
+#: ../data/glade/new-property.glade.h:1
 msgid "Add Property"
 msgstr "Добавить свойство"
 
@@ -239,147 +243,167 @@ msgid "_Description:"
 msgstr "О_писание:"
 
 #: ../data/glade/new-property.glade.h:4
-msgid "_Label:"
-msgstr "_Метка:"
-
-#: ../data/glade/new-property.glade.h:6
-#: ../data/glade/resource-dialog.glade.h:14
+#: ../data/glade/resource-dialog.glade.h:2
 msgid "_Type:"
 msgstr "_Вид:"
 
+#: ../data/glade/new-property.glade.h:6
+msgid "_Label:"
+msgstr "_Метка:"
+
 #: ../data/glade/project-properties.glade.h:1
-msgid "Custom"
-msgstr "Дополнительно"
-
-#: ../data/glade/project-properties.glade.h:2
-msgid "Edit Project Phases"
-msgstr "Изменить фазы проекта"
-
-#: ../data/glade/project-properties.glade.h:3
-#: ../data/glade/resource-dialog.glade.h:5
-#: ../data/glade/task-dialog.glade.h:6
-msgid "General"
-msgstr "Общее"
-
-#: ../data/glade/project-properties.glade.h:4
-msgid "New Project Phase"
-msgstr "Новая фаза проекта"
-
-#: ../data/glade/project-properties.glade.h:5
 msgid "Project Properties"
 msgstr "Свойства проекта"
 
-#: ../data/glade/project-properties.glade.h:6
-msgid "Select..."
-msgstr "Выбрать..."
+#: ../data/glade/project-properties.glade.h:3
+msgid "_Start:"
+msgstr "_Начало:"
 
-#: ../data/glade/project-properties.glade.h:7
-msgid "_Calendar:"
-msgstr "_Календарь:"
-
-#: ../data/glade/project-properties.glade.h:8
-msgid "_Manager:"
-msgstr "_Руководитель:"
-
-#: ../data/glade/project-properties.glade.h:10
+#: ../data/glade/project-properties.glade.h:4
 msgid "_Organization:"
 msgstr "_Организация:"
 
-#: ../data/glade/project-properties.glade.h:11
+#: ../data/glade/project-properties.glade.h:5
+msgid "_Manager:"
+msgstr "_Руководитель:"
+
+#: ../data/glade/project-properties.glade.h:6
+msgid "_Calendar:"
+msgstr "_Календарь:"
+
+#: ../data/glade/project-properties.glade.h:7
+msgid "Select..."
+msgstr "Выбрать..."
+
+#: ../data/glade/project-properties.glade.h:8
 msgid "_Phase:"
 msgstr "_Фаза:"
 
+#: ../data/glade/project-properties.glade.h:9
+#: ../data/glade/resource-dialog.glade.h:9
+#: ../data/glade/task-dialog.glade.h:14
+msgid "General"
+msgstr "Общее"
+
+#: ../data/glade/project-properties.glade.h:10
+msgid "Custom"
+msgstr "Дополнительно"
+
+#: ../data/glade/project-properties.glade.h:11
+msgid "Edit Project Phases"
+msgstr "Изменить фазы проекта"
+
 #: ../data/glade/project-properties.glade.h:12
-msgid "_Start:"
-msgstr "_Начало:"
+msgid "New Project Phase"
+msgstr "Новая фаза проекта"
 
 #: ../data/glade/property-dialog.glade.h:1
 msgid "Custom Properties"
 msgstr "Дополнительные свойства"
 
-#: ../data/glade/resource-dialog.glade.h:2
-msgid "C_ost:"
-msgstr "_Стоимость:"
-
 #: ../data/glade/resource-dialog.glade.h:3
-msgid "Calendar"
-msgstr "Календарь"
-
-#: ../data/glade/resource-dialog.glade.h:4
-msgid "Edit Calendars..."
-msgstr "Изменить календари..."
-
-#: ../data/glade/resource-dialog.glade.h:6
-#: ../data/glade/task-dialog.glade.h:7
-msgid "Notes"
-msgstr "Заметки"
-
-#: ../data/glade/resource-dialog.glade.h:7
-#: ../data/glade/resource-input-dialog.glade.h:3
-msgid "Optional - overrides resource name in Gantt view."
-msgstr "По желанию — можно задать короткое название ресурса отображаемое на диаграмме Ганта."
-
-#: ../data/glade/resource-dialog.glade.h:8
-msgid "Select the calendar to use for this resource. If you want to use the default calendar of the project, select 'None'. "
-msgstr "Выбрать календарь для использования данного ресурса. Если вы хотите использовать календарь по умолчанию для данного проекта, выберите «Нет». "
-
-#: ../data/glade/resource-dialog.glade.h:9
 #: ../data/glade/resource-input-dialog.glade.h:4
 msgid "_Email:"
 msgstr "_Эл. почта:"
 
-#: ../data/glade/resource-dialog.glade.h:10
-#: ../data/glade/resource-input-dialog.glade.h:5
+#: ../data/glade/resource-dialog.glade.h:4
+#: ../data/glade/resource-input-dialog.glade.h:6
 msgid "_Group:"
 msgstr "_Группа:"
 
-#: ../data/glade/resource-dialog.glade.h:11
-msgid "_Insert time stamp"
-msgstr "Вставить метку _времени"
+#: ../data/glade/resource-dialog.glade.h:5
+msgid "C_ost:"
+msgstr "_Стоимость:"
 
-#: ../data/glade/resource-dialog.glade.h:13
-#: ../data/glade/resource-input-dialog.glade.h:8
+#: ../data/glade/resource-dialog.glade.h:7
+#: ../data/glade/resource-input-dialog.glade.h:7
 msgid "_Short name:"
 msgstr "_Короткое название:"
 
-#: ../data/glade/resource-input-dialog.glade.h:2
+#: ../data/glade/resource-dialog.glade.h:8
+#: ../data/glade/resource-input-dialog.glade.h:8
+msgid "Optional - overrides resource name in Gantt view."
+msgstr ""
+"По желанию — можно задать короткое название ресурса отображаемое на "
+"диаграмме Ганта."
+
+#: ../data/glade/resource-dialog.glade.h:10
+msgid ""
+"Select the calendar to use for this resource. If you want to use the default "
+"calendar of the project, select 'None'. "
+msgstr ""
+"Выбрать календарь для использования данного ресурса. Если вы хотите "
+"использовать календарь по умолчанию для данного проекта, выберите «Нет». "
+
+#: ../data/glade/resource-dialog.glade.h:11
+msgid "Edit Calendars..."
+msgstr "Изменить календари..."
+
+#: ../data/glade/resource-dialog.glade.h:12
+msgid "Calendar"
+msgstr "Календарь"
+
+#: ../data/glade/resource-dialog.glade.h:13
+msgid "_Insert time stamp"
+msgstr "Вставить метку _времени"
+
+#: ../data/glade/resource-dialog.glade.h:14
+#: ../data/glade/task-dialog.glade.h:18
+msgid "Notes"
+msgstr "Заметки"
+
+#: ../data/glade/resource-input-dialog.glade.h:1
 msgid "Insert Resource"
 msgstr "Добавить ресурс"
 
-#: ../data/glade/resource-input-dialog.glade.h:6
-#: ../data/glade/task-input-dialog.glade.h:3
+#: ../data/glade/resource-input-dialog.glade.h:2
+#: ../data/glade/task-input-dialog.glade.h:2
 msgid "_Insert"
 msgstr "_Вставить"
 
-#: ../data/glade/sql.glade.h:2
+#: ../data/glade/sql.glade.h:1
 msgid "Open Database"
 msgstr "Открыть базу данных"
 
-#: ../data/glade/sql.glade.h:3
-msgid "Select a Project"
-msgstr "Выбрать проект"
-
-#: ../data/glade/sql.glade.h:4
-msgid "The database contains the following projects. Select a project to open:"
-msgstr "База данных содержит следующие проекты. Выберите, какой из них открыть:"
-
-#: ../data/glade/sql.glade.h:5
-msgid "_Database:"
-msgstr "База _данных:"
-
-#: ../data/glade/sql.glade.h:6
-msgid "_Password:"
-msgstr "_Пароль:"
-
-#: ../data/glade/sql.glade.h:7
+#: ../data/glade/sql.glade.h:2
 msgid "_Server:"
 msgstr "_Сервер:"
 
-#: ../data/glade/sql.glade.h:8
+#: ../data/glade/sql.glade.h:3
 msgid "_Username:"
 msgstr "_Имя пользователя:"
 
+#: ../data/glade/sql.glade.h:4
+msgid "_Password:"
+msgstr "_Пароль:"
+
+#: ../data/glade/sql.glade.h:6
+msgid "_Database:"
+msgstr "База _данных:"
+
+#: ../data/glade/sql.glade.h:7
+msgid "Select a Project"
+msgstr "Выбрать проект"
+
+#: ../data/glade/sql.glade.h:8
+msgid "The database contains the following projects. Select a project to open:"
+msgstr ""
+"База данных содержит следующие проекты. Выберите, какой из них открыть:"
+
 #: ../data/glade/task-date-widget.glade.h:1
+msgid "window"
+msgstr "окно"
+
+#. The verb "schedule".
+#. This is the verb "schedule"
+#. I18n: the verb "schedule" here.
+#: ../data/glade/task-date-widget.glade.h:3
+#: ../data/glade/task-dialog.glade.h:13
+#: ../src/planner-cell-renderer-date.c:139
+msgid "Schedule:"
+msgstr "Запланировать:"
+
+#: ../data/glade/task-date-widget.glade.h:4
 msgid ""
 "As soon as possible\n"
 "No earlier than\n"
@@ -389,158 +413,158 @@ msgstr ""
 "Не позднее чем\n"
 "Заданное число"
 
-#: ../data/glade/task-date-widget.glade.h:4
-#: ../src/planner-cell-renderer-date.c:167
-#: ../src/planner-project-properties.c:747
-msgid "Cancel"
-msgstr "Отменить"
-
-#. The verb "schedule".
-#. This is the verb "schedule"
-#. I18n: the verb "schedule" here.
-#: ../data/glade/task-date-widget.glade.h:6
-#: ../data/glade/task-dialog.glade.h:11
-#: ../src/planner-cell-renderer-date.c:139
-msgid "Schedule:"
-msgstr "Запланировать:"
-
 #: ../data/glade/task-date-widget.glade.h:7
-#: ../src/planner-cell-renderer-date.c:174
-msgid "Select"
-msgstr "Выбрать"
-
-#: ../data/glade/task-date-widget.glade.h:8
 #: ../src/planner-cell-renderer-date.c:161
 #: ../src/planner-project-properties.c:740
 msgid "Today"
 msgstr "Сегодня"
 
-#: ../data/glade/task-date-widget.glade.h:9
-msgid "window"
-msgstr "окно"
+#: ../data/glade/task-date-widget.glade.h:8
+#: ../src/planner-cell-renderer-date.c:167
+#: ../src/planner-project-properties.c:747
+msgid "Cancel"
+msgstr "Отменить"
 
-#: ../data/glade/task-dialog.glade.h:1
-msgid "  "
-msgstr "  "
+#: ../data/glade/task-date-widget.glade.h:9
+#: ../src/planner-cell-renderer-date.c:174
+msgid "Select"
+msgstr "Выбрать"
+
+#: ../data/glade/task-dialog.glade.h:2
+#: ../data/glade/task-input-dialog.glade.h:4
+msgid "_Work:"
+msgstr "_Работа:"
+
+#: ../data/glade/task-dialog.glade.h:3
+msgid "_Duration:"
+msgstr "_Длительность:"
 
 #: ../data/glade/task-dialog.glade.h:4
+msgid "C_omplete:"
+msgstr "_Завершено:"
+
+#: ../data/glade/task-dialog.glade.h:5
+msgid "_Priority:"
+msgstr "При_оритет:"
+
+#: ../data/glade/task-dialog.glade.h:7
 #, no-c-format
 msgid "%"
 msgstr "%"
 
-#: ../data/glade/task-dialog.glade.h:5
-msgid "C_omplete:"
-msgstr "_Завершено:"
-
 #: ../data/glade/task-dialog.glade.h:8
-msgid "Predecessors"
-msgstr "Предшествующие"
+msgid "  "
+msgstr "  "
 
-#: ../data/glade/task-dialog.glade.h:9
-#: ../src/planner-resource-view.c:457
-msgid "Resources"
-msgstr "Ресурсы"
-
-#: ../data/glade/task-dialog.glade.h:12
-msgid "_Duration:"
-msgstr "_Длительность:"
-
-#: ../data/glade/task-dialog.glade.h:13
-msgid "_Fixed duration"
-msgstr "_Фиксированная длительность"
-
-#: ../data/glade/task-dialog.glade.h:14
-msgid "_Insert Time Stamp"
-msgstr "Вставить метку _времени"
-
-#: ../data/glade/task-dialog.glade.h:15
+#: ../data/glade/task-dialog.glade.h:10
 msgid "_Milestone"
 msgstr "_Веха"
 
+#: ../data/glade/task-dialog.glade.h:11
+msgid "_Fixed duration"
+msgstr "_Фиксированная длительность"
+
+#: ../data/glade/task-dialog.glade.h:15 ../src/planner-resource-view.c:457
+msgid "Resources"
+msgstr "Ресурсы"
+
+#: ../data/glade/task-dialog.glade.h:16
+msgid "Predecessors"
+msgstr "Предшествующие"
+
 #: ../data/glade/task-dialog.glade.h:17
-msgid "_Priority:"
-msgstr "При_оритет:"
+msgid "_Insert Time Stamp"
+msgstr "Вставить метку _времени"
 
-#: ../data/glade/task-dialog.glade.h:18
-#: ../data/glade/task-input-dialog.glade.h:5
-msgid "_Work:"
-msgstr "_Работа:"
-
-#: ../data/glade/task-input-dialog.glade.h:2
+#: ../data/glade/task-input-dialog.glade.h:1
 msgid "Insert Task"
 msgstr "Добавить задачу"
 
 #: ../data/mime/planner.keys.in.h:1
-msgid "Documents/Project Management"
-msgstr "Управление проектами и документами"
-
-#: ../data/mime/planner.keys.in.h:2
 msgid "Project Plan"
 msgstr "План проекта"
+
+#: ../data/mime/planner.keys.in.h:2
+msgid "Documents/Project Management"
+msgstr "Управление проектами и документами"
 
 #: ../data/mime/planner.xml.in.h:1
 msgid "Planner project plan"
 msgstr "Planner план проекта"
 
 #: ../data/planner.desktop.in.in.h:1
-msgid "Planner Project Management"
-msgstr "Planner управление проектами"
+msgid "Planner"
+msgstr "Planner"
 
 #: ../data/planner.desktop.in.in.h:2
 msgid "Project Management"
 msgstr "Управление проектами"
 
-#: ../data/planner.schemas.in.h:1
-msgid "Display nonstandard days in Gantt view"
-msgstr "Показать нестандартные дни в диаграмме Ганта"
+#: ../data/planner.desktop.in.in.h:3
+msgid "Planner Project Management"
+msgstr "Planner управление проектами"
 
-#: ../data/planner.schemas.in.h:2
+#: ../data/planner.desktop.in.in.h:4
+msgid "Handle the tasks, resources, and cost of your projects"
+msgstr "Управление задачами, ресурсами и стоимостью проектов"
+
+#: ../data/planner.desktop.in.in.h:5
+msgid "Gantt;Chart;Critical path;Relationship;Dependency;WBS;"
+msgstr "Гант;График;критический путь;Отношение;Зависимость;СРП;"
+
+#: ../data/planner.schemas.in.h:1
 msgid "Highlight critical path in Gantt view"
 msgstr "Подсветить критические пути в диаграмме Ганта"
 
+#: ../data/planner.schemas.in.h:2
+msgid ""
+"Whether to highlight the tasks along the cricital path in the Gantt view."
+msgstr "Выделять ли задачи на критическом пути в диаграмме Ганта."
+
 #: ../data/planner.schemas.in.h:3
+msgid "Display nonstandard days in Gantt view"
+msgstr "Показать нестандартные дни в диаграмме Ганта"
+
+#: ../data/planner.schemas.in.h:4
+msgid "Whether to display nonstandard days in the Gantt view."
+msgstr "Показывать ли нестандартные дни в диаграмме Ганта."
+
+#: ../data/planner.schemas.in.h:5
 msgid "Highlight critical path in Task view"
 msgstr "Подсветить критические пути во вкладке Задачи"
 
-#: ../data/planner.schemas.in.h:4
-msgid "Print the Gantt view"
-msgstr "Распечатать диаграмму Ганта"
-
-#: ../data/planner.schemas.in.h:5
-msgid "Print the Resource view"
-msgstr "Распечатать вид ресурсов"
-
 #: ../data/planner.schemas.in.h:6
-msgid "Print the Task view"
-msgstr "Распечатать вид задач"
+msgid ""
+"Whether to highlight the tasks along the cricital path in the Task view."
+msgstr "Выделять ли задачи на критическом пути при отображении задач."
 
 #: ../data/planner.schemas.in.h:7
-msgid "The active view"
-msgstr "Активный вид"
+msgid "Print the Gantt view"
+msgstr "Распечатать диаграмму Ганта"
 
 #: ../data/planner.schemas.in.h:8
 msgid "Whether printing of the Gantt view is enabled."
 msgstr "Возможна ли печать диаграммы Ганта."
 
 #: ../data/planner.schemas.in.h:9
-msgid "Whether printing of the Resource view is enabled."
-msgstr "Возможна ли печать вида ресурсов."
+msgid "Print the Task view"
+msgstr "Распечатать вид задач"
 
 #: ../data/planner.schemas.in.h:10
 msgid "Whether printing of the Task view is enabled."
 msgstr "Возможна ли печать вида задач."
 
 #: ../data/planner.schemas.in.h:11
-msgid "Whether to display nonstandard days in the Gantt view."
-msgstr "Показывать ли нестандартные дни в диаграмме Ганта."
+msgid "Print the Resource view"
+msgstr "Распечатать вид ресурсов"
 
 #: ../data/planner.schemas.in.h:12
-msgid "Whether to highlight the tasks along the cricital path in the Gantt view."
-msgstr "Выделять ли задачи на критическом пути в диаграмме Ганта."
+msgid "Whether printing of the Resource view is enabled."
+msgstr "Возможна ли печать вида ресурсов."
 
 #: ../data/planner.schemas.in.h:13
-msgid "Whether to highlight the tasks along the cricital path in the Task view."
-msgstr "Выделять ли задачи на критическом пути при отображении задач."
+msgid "The active view"
+msgstr "Активный вид"
 
 #: ../data/planner.schemas.in.h:14
 msgid "Which view to display in the user interface."
@@ -551,48 +575,48 @@ msgid "Company:"
 msgstr "Компания:"
 
 #: ../data/stylesheets/localizable.xml.h:2
-msgid "Complete"
-msgstr "Завершено"
-
-#: ../data/stylesheets/localizable.xml.h:3
-msgid "Finish:"
-msgstr "Завершение:"
-
-#: ../data/stylesheets/localizable.xml.h:4
-msgid "Gantt Chart"
-msgstr "Диаграмма Ганта"
-
-#: ../data/stylesheets/localizable.xml.h:5
 msgid "Manager:"
 msgstr "Руководитель:"
 
+#: ../data/stylesheets/localizable.xml.h:3
+msgid "Start:"
+msgstr "Начало:"
+
+#: ../data/stylesheets/localizable.xml.h:4
+msgid "Finish:"
+msgstr "Завершение:"
+
+#: ../data/stylesheets/localizable.xml.h:5
+msgid "Report Date:"
+msgstr "Дата отчёта:"
+
 #: ../data/stylesheets/localizable.xml.h:6
-msgid "Phase:"
-msgstr "Фаза:"
+msgid "Week"
+msgstr "Неделя"
 
 #: ../data/stylesheets/localizable.xml.h:7
 msgid "Priority"
 msgstr "Приоритет"
 
 #: ../data/stylesheets/localizable.xml.h:8
-msgid "Report Date:"
-msgstr "Дата отчёта:"
+msgid "Complete"
+msgstr "Завершено"
 
 #: ../data/stylesheets/localizable.xml.h:9
-msgid "Start:"
-msgstr "Начало:"
-
-#: ../data/stylesheets/localizable.xml.h:10
 msgid "This file was generated by"
 msgstr "Этот файл был создан"
 
+#: ../data/stylesheets/localizable.xml.h:10
+msgid "Gantt Chart"
+msgstr "Диаграмма Ганта"
+
 #: ../data/stylesheets/localizable.xml.h:11
-msgid "Unnamed Project"
-msgstr "Безымянный проект"
+msgid "Phase:"
+msgstr "Фаза:"
 
 #: ../data/stylesheets/localizable.xml.h:12
-msgid "Week"
-msgstr "Неделя"
+msgid "Unnamed Project"
+msgstr "Безымянный проект"
 
 #: ../libplanner/mrp-day.c:54
 msgid "Working"
@@ -623,8 +647,7 @@ msgstr "Использовать день из основного календа
 msgid "This format does not support reading"
 msgstr "Этот формат не поддерживает чтение"
 
-#: ../libplanner/mrp-parser.c:1062
-#: ../libplanner/mrp-parser.c:1157
+#: ../libplanner/mrp-parser.c:1062 ../libplanner/mrp-parser.c:1157
 #, c-format
 msgid "Could not create XML tree"
 msgstr "Не удалось создать дерево XML"
@@ -634,8 +657,7 @@ msgstr "Не удалось создать дерево XML"
 msgid "Could not write XML file"
 msgstr "Не удалось записать XML файл"
 
-#: ../libplanner/mrp-project.c:437
-#: ../src/planner-group-dialog.c:846
+#: ../libplanner/mrp-project.c:437 ../src/planner-group-dialog.c:842
 msgid "Default"
 msgstr "По умолчанию"
 
@@ -649,8 +671,7 @@ msgstr "Некорректный URI: «%s»"
 msgid "Couldn't find a suitable file module for loading '%s'"
 msgstr "Невозможно найти подходящий файл модуля для загрузки «%s»"
 
-#: ../libplanner/mrp-project.c:779
-#: ../libplanner/mrp-project.c:1063
+#: ../libplanner/mrp-project.c:779 ../libplanner/mrp-project.c:1063
 #, c-format
 msgid "No support for SQL storage built into this version of Planner."
 msgstr "В этой версии Planner нет поддержки базы данных SQL."
@@ -690,46 +711,39 @@ msgstr "Число с плавающей точкой"
 msgid "Date"
 msgstr "Дата"
 
-#: ../libplanner/mrp-property.c:375
-#: ../src/planner-gantt-view.c:628
+#: ../libplanner/mrp-property.c:375 ../src/planner-gantt-view.c:628
 #: ../src/planner-task-view.c:371
 msgid "Duration"
 msgstr "Длительность"
 
-#: ../libplanner/mrp-property.c:377
-#: ../src/planner-gantt-view.c:630
-#: ../src/planner-resource-view.c:1354
-#: ../src/planner-task-view.c:373
+#: ../libplanner/mrp-property.c:377 ../src/planner-gantt-view.c:630
+#: ../src/planner-resource-view.c:1343 ../src/planner-task-view.c:373
 msgid "Cost"
 msgstr "Стоимость"
 
-#: ../libplanner/mrp-property.c:380
-#: ../src/planner-project-properties.c:882
+#: ../libplanner/mrp-property.c:380 ../src/planner-project-properties.c:882
 msgid "None"
 msgstr "Нет"
 
-#: ../libplanner/mrp-sql.c:280
-#: ../src/planner-sql-plugin.c:152
+#: ../libplanner/mrp-sql.c:280 ../src/planner-sql-plugin.c:152
 msgid "Can't connect to database server"
 msgstr "Не удалось подключится к серверу баз данных"
 
-#: ../libplanner/mrp-sql.c:285
-#: ../src/planner-sql-plugin.c:157
+#: ../libplanner/mrp-sql.c:285 ../src/planner-sql-plugin.c:157
 msgid "No errors reported."
 msgstr "Не обнаружено ошибок"
 
 #. Give up.
-#: ../libplanner/mrp-sql.c:374
-#: ../src/planner-sql-plugin.c:226
+#: ../libplanner/mrp-sql.c:374 ../src/planner-sql-plugin.c:226
 msgid "Invalid Unicode"
 msgstr "Недопустимый Unicode"
 
-#: ../libplanner/mrp-sql.c:2260
+#: ../libplanner/mrp-sql.c:2258
 #, c-format
 msgid "Connection to database '%s' failed.\n"
 msgstr "Сбой подключения к базе данных «%s».\n"
 
-#: ../libplanner/mrp-sql.c:2265
+#: ../libplanner/mrp-sql.c:2263
 #, c-format
 msgid ""
 "Connection to database '%s' failed.\n"
@@ -738,22 +752,25 @@ msgstr ""
 "Сбой подключения к базе данных «%s».\n"
 "%s"
 
-#: ../libplanner/mrp-sql.c:2274
-#: ../libplanner/mrp-sql.c:3713
+#: ../libplanner/mrp-sql.c:2272 ../libplanner/mrp-sql.c:3711
 msgid "Failed to create a dictionary for the database connection.\n"
 msgstr "Не удалось создать словарь для подключения к базе данных.\n"
 
-#: ../libplanner/mrp-sql.c:2288
+#: ../libplanner/mrp-sql.c:2286
 #, c-format
 msgid "BEGIN command failed %s."
 msgstr "Команда BEGIN завершилась ошибкой %s."
 
-#: ../libplanner/mrp-sql.c:2457
+#: ../libplanner/mrp-sql.c:2455
 #, c-format
-msgid "The project '%s' has been changed by the user '%s' since you opened it. Do you want to save anyway?"
-msgstr "Проект «%s» был изменён пользователем «%s» после того как вы открыли его. Хотите сохранить?"
+msgid ""
+"The project '%s' has been changed by the user '%s' since you opened it. Do "
+"you want to save anyway?"
+msgstr ""
+"Проект «%s» был изменён пользователем «%s» после того как вы открыли его. "
+"Хотите сохранить?"
 
-#: ../libplanner/mrp-sql.c:3706
+#: ../libplanner/mrp-sql.c:3704
 #, c-format
 msgid "Connection to database '%s' failed."
 msgstr "Сбой подключения к базе данных «%s»."
@@ -761,7 +778,8 @@ msgstr "Сбой подключения к базе данных «%s»."
 #: ../libplanner/mrp-storage-sql.c:206
 #, c-format
 msgid "Invalid SQL URI (must start with 'sql://' and contain '#')."
-msgstr "Недопустимый SQL URI (должен начинаться с \"sql://\" и содержать \"#\")."
+msgstr ""
+"Недопустимый SQL URI (должен начинаться с \"sql://\" и содержать \"#\")."
 
 #: ../libplanner/mrp-storage-sql.c:275
 #, c-format
@@ -773,38 +791,59 @@ msgstr "Недопустимый SQL URI (неправильный иденти�
 msgid "Invalid SQL URI (no database name specified)."
 msgstr "Недопустимый SQL URI (не указано название базы данных)."
 
-#: ../libplanner/mrp-task.c:1070
+#: ../libplanner/mrp-task.c:1068
 #, c-format
-msgid "Could not add a predecessor relation, because the tasks are already related."
-msgstr "Невозможно добавить взаимосвязь между задачей и её предшествующей задачей, поскольку задачи уже соотносятся."
+msgid ""
+"Could not add a predecessor relation, because the tasks are already related."
+msgstr ""
+"Невозможно добавить взаимосвязь между задачей и её предшествующей задачей, "
+"поскольку задачи уже соотносятся."
+
+#: ../libplanner/mrp-task.c:1079
+msgid "Start to Finish relation type cannot be combined with other relations."
+msgstr ""
+"Отношение «Начать с концом\" не может применяться вместе с другими "
+"отношениями."
 
 #: ../libplanner/mrp-task.c:1081
-msgid "Start to Finish relation type cannot be combined with other relations."
-msgstr "Отношение «Начать с концом\" не может применяться вместе с другими отношениями."
-
-#: ../libplanner/mrp-task.c:1083
 msgid "Finish to Finish relation type cannot be combined with other relations."
-msgstr "Отношение «Закончить с концом\" не может применяться вместе с другими отношениями."
+msgstr ""
+"Отношение «Закончить с концом\" не может применяться вместе с другими "
+"отношениями."
+
+#: ../libplanner/mrp-task.c:1098
+msgid ""
+"Start to Finish relation type cannot be combined with Start No Earlier Than "
+"constraint."
+msgstr ""
+"Отношение «Начать с концом» не может применяться вместе с «Начать не раньше, "
+"чем»"
 
 #: ../libplanner/mrp-task.c:1100
-msgid "Start to Finish relation type cannot be combined with Start No Earlier Than constraint."
-msgstr "Отношение «Начать с концом» не может применяться вместе с «Начать не раньше, чем»"
+msgid ""
+"Finish to Finish relation type cannot be combined with Start No Earlier Than "
+"constraint."
+msgstr ""
+"Отношение «Начать с концом» не может применяться вместе с «Начать не раньше, "
+"чем»"
 
-#: ../libplanner/mrp-task.c:1102
-msgid "Finish to Finish relation type cannot be combined with Start No Earlier Than constraint."
-msgstr "Отношение «Начать с концом» не может применяться вместе с «Начать не раньше, чем»"
-
-#: ../libplanner/mrp-task.c:1126
+#: ../libplanner/mrp-task.c:1124
 #, c-format
-msgid "Start to Finish relation cannot be set. Predecessor starts on project start date."
-msgstr "Не удалось установить «Начать с концом». Предшествующая задача начинается со стартом проекта."
+msgid ""
+"Start to Finish relation cannot be set. Predecessor starts on project start "
+"date."
+msgstr ""
+"Не удалось установить «Начать с концом». Предшествующая задача начинается со "
+"стартом проекта."
 
-#: ../libplanner/mrp-task-manager.c:2630
+#: ../libplanner/mrp-task-manager.c:2603
 #, c-format
 msgid "Cannot add a predecessor, because it would result in a loop."
-msgstr "Невозможно добавить предшествующую задачу, потому что это вызовет зацикливание."
+msgstr ""
+"Невозможно добавить предшествующую задачу, потому что это вызовет "
+"зацикливание."
 
-#: ../libplanner/mrp-task-manager.c:2674
+#: ../libplanner/mrp-task-manager.c:2647
 #, c-format
 msgid "Cannot move the task, because it would result in a loop."
 msgstr "Невозможно переместить задачу, потому что это вызовет зацикливание."
@@ -814,19 +853,16 @@ msgstr "Невозможно переместить задачу, потому �
 msgid "%B %e, %Y"
 msgstr "%B %e, %Y"
 
-#: ../libplanner/mrp-xsl.c:157
-#: ../libplanner/mrp-xsl.c:205
+#: ../libplanner/mrp-xsl.c:157 ../libplanner/mrp-xsl.c:205
 #, c-format
 msgid "Export to HTML failed"
 msgstr "Сбой экспорта в HTML"
 
-#: ../src/planner-application.c:54
-#: ../src/planner-application.c:110
+#: ../src/planner-application.c:54 ../src/planner-application.c:110
 msgid "Insert"
 msgstr "Добавить"
 
-#: ../src/planner-application.c:61
-#: ../src/planner-application.c:117
+#: ../src/planner-application.c:61 ../src/planner-application.c:117
 msgid "Remove"
 msgstr "Удалить"
 
@@ -870,8 +906,7 @@ msgstr "Удалить календарь"
 msgid "Add new calendar"
 msgstr "Добавить новый календарь"
 
-#: ../src/planner-cell-renderer-date.c:146
-#: ../src/planner-task-dialog.c:1491
+#: ../src/planner-cell-renderer-date.c:146 ../src/planner-task-dialog.c:1485
 msgid "As soon as possible"
 msgstr "Как можно скорее"
 
@@ -948,7 +983,7 @@ msgstr "Нет рабочего времени"
 msgid "%H:%M"
 msgstr "%H:%M"
 
-#: ../src/planner-default-week-dialog.c:553
+#: ../src/planner-default-week-dialog.c:555
 msgid "Edit default week"
 msgstr "Изменить неделю по умолчанию"
 
@@ -960,20 +995,15 @@ msgstr "EDS"
 msgid "Import resources from Evolution Data Server"
 msgstr "Импортировать ресурсы из сервера данных Evolution (EDS)"
 
-#: ../src/planner-eds-plugin.c:384
-#: ../src/planner-gantt-print.c:191
-#: ../src/planner-gantt-view.c:624
-#: ../src/planner-group-dialog.c:822
-#: ../src/planner-property-dialog.c:475
-#: ../src/planner-resource-view.c:1211
-#: ../src/planner-task-dialog.c:2616
-#: ../src/planner-task-dialog.c:2690
+#: ../src/planner-eds-plugin.c:384 ../src/planner-gantt-print.c:191
+#: ../src/planner-gantt-view.c:624 ../src/planner-group-dialog.c:818
+#: ../src/planner-property-dialog.c:475 ../src/planner-resource-view.c:1200
+#: ../src/planner-task-dialog.c:2605 ../src/planner-task-dialog.c:2679
 #: ../src/planner-task-view.c:367
 msgid "Name"
 msgstr "Название"
 
-#: ../src/planner-eds-plugin.c:404
-#: ../src/planner-resource-view.c:1327
+#: ../src/planner-eds-plugin.c:404 ../src/planner-resource-view.c:1316
 msgid "Email"
 msgstr "Электронная почта"
 
@@ -1003,7 +1033,8 @@ msgstr "Сервер данных Evolution (EDS) UID"
 
 #: ../src/planner-eds-plugin.c:912
 msgid "Identifier used by Evolution Data Server for resources"
-msgstr "Идентификатор используемый сервером данных Evolution (EDS) для ресурсов"
+msgstr ""
+"Идентификатор используемый сервером данных Evolution (EDS) для ресурсов"
 
 #: ../src/planner-format.c:153
 #, c-format
@@ -1114,86 +1145,72 @@ msgstr "минуты"
 
 #. i18n: project start, the date format is described in
 #. * libmrproject/docs/DateFormat.
-#: ../src/planner-gantt-background.c:647
+#: ../src/planner-gantt-background.c:643
 msgid "%Y %b %d"
 msgstr "%Y %b %d"
 
-#: ../src/planner-gantt-background.c:649
+#: ../src/planner-gantt-background.c:645
 msgid "Project start"
 msgstr "Начало проекта"
 
-#: ../src/planner-gantt-header.c:671
-#| msgid "%e %b %Y"
+#: ../src/planner-gantt-header.c:659
 msgid "%a, %e %b %Y"
 msgstr "%a, %e %b %Y"
 
-#: ../src/planner-gantt-print.c:199
-#: ../src/planner-gantt-view.c:627
-#: ../src/planner-resource-dialog.c:1850
-#: ../src/planner-resource-view.c:790
-#: ../src/planner-resource-view.c:806
-#: ../src/planner-resource-view.c:1776
+#: ../src/planner-gantt-print.c:199 ../src/planner-gantt-view.c:627
+#: ../src/planner-resource-dialog.c:1836 ../src/planner-resource-view.c:790
+#: ../src/planner-resource-view.c:806 ../src/planner-resource-view.c:1760
 #: ../src/planner-task-view.c:370
 msgid "Work"
 msgstr "Работа"
 
-#: ../src/planner-gantt-print.c:546
-#: ../src/planner-gantt-row.c:779
-#: ../src/planner-html-plugin.c:124
-#: ../src/planner-task-tree.c:1601
-#: ../src/planner-window.c:1868
+#: ../src/planner-gantt-print.c:546 ../src/planner-gantt-row.c:771
+#: ../src/planner-html-plugin.c:120 ../src/planner-task-tree.c:1584
+#: ../src/planner-window.c:1837
 msgid "Unnamed"
 msgstr "Безымянный"
 
-#: ../src/planner-gantt-row.c:2361
+#: ../src/planner-gantt-row.c:2350
 #, c-format
 msgid "Change work to %s"
 msgstr "Изменить продолжительность на %s"
 
-#: ../src/planner-gantt-row.c:2377
+#: ../src/planner-gantt-row.c:2366
 #, c-format
 msgid "Change progress to %u%% complete"
 msgstr "Изменить статуса завершённости на %u%%"
 
-#: ../src/planner-gantt-row.c:2416
-#: ../src/planner-gantt-row.c:2419
+#: ../src/planner-gantt-row.c:2405 ../src/planner-gantt-row.c:2408
 msgid "No name"
 msgstr "Нет имени"
 
-#: ../src/planner-gantt-row.c:2422
+#: ../src/planner-gantt-row.c:2411
 #, c-format
 msgid "Make task '%s' a predecessor of '%s'"
 msgstr "Сделать задачу «%s» предшественником задачи «%s»"
 
-#: ../src/planner-gantt-row.c:3457
-#: ../src/planner-task-dialog.c:455
-#: ../src/planner-task-tree.c:262
-#: ../src/planner-task-tree.c:952
+#: ../src/planner-gantt-row.c:3443 ../src/planner-task-dialog.c:455
+#: ../src/planner-task-tree.c:259 ../src/planner-task-tree.c:941
 msgid "Edit task property"
 msgstr "Изменить свойства задачи"
 
-#: ../src/planner-gantt-view.c:138
-#: ../src/planner-task-view.c:119
+#: ../src/planner-gantt-view.c:138 ../src/planner-task-view.c:119
 msgid "_Insert Task"
 msgstr "_Вставить задачу"
 
-#: ../src/planner-gantt-view.c:139
-#: ../src/planner-task-view.c:120
+#: ../src/planner-gantt-view.c:139 ../src/planner-task-view.c:120
 msgid "Insert a new task"
 msgstr "Добавить новую задачу"
 
-#: ../src/planner-gantt-view.c:141
-#: ../src/planner-task-view.c:122
+#: ../src/planner-gantt-view.c:141 ../src/planner-task-view.c:122
 msgid "In_sert Tasks..."
 msgstr "В_ставить задачи..."
 
-#: ../src/planner-gantt-view.c:144
-#: ../src/planner-task-view.c:125
+#: ../src/planner-gantt-view.c:144 ../src/planner-task-view.c:125
 msgid "_Remove Task"
 msgstr "_Удалить задачу"
 
-#: ../src/planner-gantt-view.c:145
-#: ../src/planner-task-view.c:126
+#: ../src/planner-gantt-view.c:145 ../src/planner-task-view.c:126
 msgid "Remove the selected tasks"
 msgstr "Удалить выделенные задачи"
 
@@ -1201,80 +1218,65 @@ msgstr "Удалить выделенные задачи"
 msgid "_Edit Task Properties..."
 msgstr "Изменить _свойства задачи..."
 
-#: ../src/planner-gantt-view.c:150
-#: ../src/planner-resource-view.c:248
+#: ../src/planner-gantt-view.c:150 ../src/planner-resource-view.c:248
 #: ../src/planner-task-view.c:131
 msgid "Select _All"
 msgstr "Выделить _всё"
 
-#: ../src/planner-gantt-view.c:151
-#: ../src/planner-resource-view.c:249
+#: ../src/planner-gantt-view.c:151 ../src/planner-resource-view.c:249
 #: ../src/planner-task-view.c:132
 msgid "Select all tasks"
 msgstr "Выделить все задачи"
 
-#: ../src/planner-gantt-view.c:153
-#: ../src/planner-task-view.c:134
+#: ../src/planner-gantt-view.c:153 ../src/planner-task-view.c:134
 msgid "_Unlink Task"
 msgstr "О_твязать задачу"
 
-#: ../src/planner-gantt-view.c:154
-#: ../src/planner-task-view.c:135
+#: ../src/planner-gantt-view.c:154 ../src/planner-task-view.c:135
 msgid "Unlink the selected tasks"
 msgstr "Отвязать выделенные задачи"
 
-#: ../src/planner-gantt-view.c:156
-#: ../src/planner-task-view.c:137
+#: ../src/planner-gantt-view.c:156 ../src/planner-task-view.c:137
 msgid "_Link Tasks"
 msgstr "_Связать задачи"
 
-#: ../src/planner-gantt-view.c:157
-#: ../src/planner-task-view.c:138
+#: ../src/planner-gantt-view.c:157 ../src/planner-task-view.c:138
 msgid "Link the selected tasks"
 msgstr "Связать выделенные задачи"
 
-#: ../src/planner-gantt-view.c:159
-#: ../src/planner-task-view.c:140
+#: ../src/planner-gantt-view.c:159 ../src/planner-task-view.c:140
 msgid "I_ndent Task"
 msgstr "Сдвинуть задачу _правее"
 
-#: ../src/planner-gantt-view.c:160
-#: ../src/planner-task-view.c:141
+#: ../src/planner-gantt-view.c:160 ../src/planner-task-view.c:141
 msgid "Indent the selected tasks"
 msgstr "Сдвинуть выделенные задачи правее"
 
-#: ../src/planner-gantt-view.c:162
-#: ../src/planner-task-view.c:143
+#: ../src/planner-gantt-view.c:162 ../src/planner-task-view.c:143
 msgid "Unin_dent Task"
 msgstr "Сдвинуть задачу _левее"
 
-#: ../src/planner-gantt-view.c:163
-#: ../src/planner-task-view.c:144
+#: ../src/planner-gantt-view.c:163 ../src/planner-task-view.c:144
 msgid "Unindent the selected tasks"
 msgstr "Сдвинуть выделенные задачи левее"
 
-#: ../src/planner-gantt-view.c:165
-#: ../src/planner-task-view.c:146
+#: ../src/planner-gantt-view.c:165 ../src/planner-task-view.c:146
 msgid "Move Task _Up"
 msgstr "Передвинуть задачу _выше"
 
-#: ../src/planner-gantt-view.c:166
-#: ../src/planner-task-view.c:147
+#: ../src/planner-gantt-view.c:166 ../src/planner-task-view.c:147
 msgid "Move the selected tasks upwards"
 msgstr "Поднять выделенные задачи наверх"
 
-#: ../src/planner-gantt-view.c:168
-#: ../src/planner-task-view.c:149
+#: ../src/planner-gantt-view.c:168 ../src/planner-task-view.c:149
 msgid "Move Task Do_wn"
 msgstr "Передвинуть задачу _ниже"
 
-#: ../src/planner-gantt-view.c:169
-#: ../src/planner-task-view.c:150
+#: ../src/planner-gantt-view.c:169 ../src/planner-task-view.c:150
 msgid "Move the selected tasks downwards"
 msgstr "Опустить выделенные задачи вниз"
 
-#: ../src/planner-gantt-view.c:171
-#: ../src/planner-task-view.c:152
+#: ../src/planner-gantt-view.c:171 ../src/planner-task-view.c:152
 msgid "Reset _Constraint"
 msgstr "Снять _ограничение"
 
@@ -1282,8 +1284,7 @@ msgstr "Снять _ограничение"
 msgid "Zoom To _Fit"
 msgstr "К размеру _окна"
 
-#: ../src/planner-gantt-view.c:175
-#: ../src/planner-usage-view.c:115
+#: ../src/planner-gantt-view.c:175 ../src/planner-usage-view.c:115
 msgid "Zoom to fit the entire project"
 msgstr "К размеру самого проекта"
 
@@ -1291,8 +1292,7 @@ msgstr "К размеру самого проекта"
 msgid "_Zoom In"
 msgstr "_Увеличить"
 
-#: ../src/planner-gantt-view.c:178
-#: ../src/planner-usage-view.c:111
+#: ../src/planner-gantt-view.c:178 ../src/planner-usage-view.c:111
 #: ../src/planner-usage-view.c:112
 msgid "Zoom in"
 msgstr "Увеличить"
@@ -1301,28 +1301,22 @@ msgstr "Увеличить"
 msgid "Zoom _Out"
 msgstr "Уме_ньшить"
 
-#: ../src/planner-gantt-view.c:181
-#: ../src/planner-usage-view.c:108
+#: ../src/planner-gantt-view.c:181 ../src/planner-usage-view.c:108
 #: ../src/planner-usage-view.c:109
 msgid "Zoom out"
 msgstr "Уменьшить"
 
-#: ../src/planner-gantt-view.c:183
-#: ../src/planner-resource-view.c:254
-#: ../src/planner-task-view.c:158
-#: ../src/planner-usage-view.c:117
+#: ../src/planner-gantt-view.c:183 ../src/planner-resource-view.c:254
+#: ../src/planner-task-view.c:158 ../src/planner-usage-view.c:117
 msgid "Edit _Visible Columns"
 msgstr "Изменить отобра_жаемые столбцы"
 
-#: ../src/planner-gantt-view.c:184
-#: ../src/planner-resource-view.c:255
-#: ../src/planner-task-view.c:159
-#: ../src/planner-usage-view.c:118
+#: ../src/planner-gantt-view.c:184 ../src/planner-resource-view.c:255
+#: ../src/planner-task-view.c:159 ../src/planner-usage-view.c:118
 msgid "Edit visible columns"
 msgstr "Изменить отображаемые столбцы"
 
-#: ../src/planner-gantt-view.c:189
-#: ../src/planner-task-view.c:164
+#: ../src/planner-gantt-view.c:189 ../src/planner-task-view.c:164
 msgid "_Highlight Critical Tasks"
 msgstr "Подсветить _критические задачи"
 
@@ -1330,8 +1324,7 @@ msgstr "Подсветить _критические задачи"
 msgid "_Show Guide Lines"
 msgstr "Показывать направляющие _линии"
 
-#: ../src/planner-gantt-view.c:195
-#: ../src/planner-task-view.c:166
+#: ../src/planner-gantt-view.c:195 ../src/planner-task-view.c:166
 msgid "_Nonstandard Days"
 msgstr "Не_стандартные дни"
 
@@ -1356,28 +1349,23 @@ msgstr "Диаграмма _Ганта"
 #. * project management term. You might want to leave it
 #. * untranslated unless there is a localized term for it.
 #.
-#: ../src/planner-gantt-view.c:623
-#: ../src/planner-task-view.c:366
+#: ../src/planner-gantt-view.c:623 ../src/planner-task-view.c:366
 msgid "WBS"
 msgstr "WBS"
 
-#: ../src/planner-gantt-view.c:625
-#: ../src/planner-task-view.c:368
+#: ../src/planner-gantt-view.c:625 ../src/planner-task-view.c:368
 msgid "Start"
 msgstr "Начало"
 
-#: ../src/planner-gantt-view.c:626
-#: ../src/planner-task-view.c:369
+#: ../src/planner-gantt-view.c:626 ../src/planner-task-view.c:369
 msgid "Finish"
 msgstr "Завершение"
 
-#: ../src/planner-gantt-view.c:629
-#: ../src/planner-task-view.c:372
+#: ../src/planner-gantt-view.c:629 ../src/planner-task-view.c:372
 msgid "Slack"
 msgstr "Отставание"
 
-#: ../src/planner-gantt-view.c:631
-#: ../src/planner-task-view.c:374
+#: ../src/planner-gantt-view.c:631 ../src/planner-task-view.c:374
 msgid "Assigned to"
 msgstr "Назначить на"
 
@@ -1385,8 +1373,7 @@ msgstr "Назначить на"
 #. * of a column containing values from 0 upto 100, indicating
 #. * what part of a task has been completed.
 #.
-#: ../src/planner-gantt-view.c:637
-#: ../src/planner-task-view.c:380
+#: ../src/planner-gantt-view.c:637 ../src/planner-task-view.c:380
 #, no-c-format
 msgid "% Complete"
 msgstr "% выполнено"
@@ -1403,23 +1390,23 @@ msgstr "Добавить группу"
 msgid "Remove group"
 msgstr "Удалить группу"
 
-#: ../src/planner-group-dialog.c:526
+#: ../src/planner-group-dialog.c:525
 msgid "Default group"
 msgstr "Стандартная группа"
 
-#: ../src/planner-group-dialog.c:644
+#: ../src/planner-group-dialog.c:643
 msgid "Edit group property"
 msgstr "Изменить свойства группы"
 
-#: ../src/planner-group-dialog.c:828
+#: ../src/planner-group-dialog.c:824
 msgid "Manager name"
 msgstr "Имя руководителя"
 
-#: ../src/planner-group-dialog.c:834
+#: ../src/planner-group-dialog.c:830
 msgid "Manager phone"
 msgstr "Телефон руководителя"
 
-#: ../src/planner-group-dialog.c:840
+#: ../src/planner-group-dialog.c:836
 msgid "Manager email"
 msgstr "Эл. почта руководителя"
 
@@ -1431,20 +1418,19 @@ msgstr "HTML"
 msgid "Export project to HTML"
 msgstr "Экспорт проекта в HTML"
 
-#: ../src/planner-html-plugin.c:81
+#: ../src/planner-html-plugin.c:79
 msgid "Could not export to HTML"
 msgstr "Невозможно экспортировать в HTML"
 
-#: ../src/planner-html-plugin.c:109
+#: ../src/planner-html-plugin.c:105
 msgid "Export to HTML"
 msgstr "Экспорт в HTML"
 
-#: ../src/planner-html-plugin.c:153
+#: ../src/planner-html-plugin.c:149
 msgid "Show result in browser"
 msgstr "Показать результат в браузере"
 
-#: ../src/planner-html-plugin.c:172
-#: ../src/planner-window.c:1583
+#: ../src/planner-html-plugin.c:168 ../src/planner-window.c:1564
 #: ../src/planner-xml-planner-plugin.c:124
 #, c-format
 msgid "File \"%s\" exists, do you want to overwrite it?"
@@ -1459,11 +1445,10 @@ msgid "GEOMETRY"
 msgstr "РАЗМЕРЫ"
 
 #: ../src/planner-main.c:40
-msgid "FILES"
-msgstr "ФАЙЛЫ"
+msgid "FILES|URIs"
+msgstr "ФАЙЛЫ|URI"
 
 #: ../src/planner-main.c:63
-#| msgid "Planner Project Management"
 msgid "- Planner project management"
 msgstr "- Planner управление проектами"
 
@@ -1474,7 +1459,8 @@ msgid ""
 "Run '%s --help' to see a full list of available command line options.\n"
 msgstr ""
 "%s\n"
-"Запустите «%s --help», чтобы вывести полный список доступных параметров командной строки.\n"
+"Запустите «%s --help», чтобы вывести полный список доступных параметров "
+"командной строки.\n"
 
 #: ../src/planner-main.c:91
 #, c-format
@@ -1501,8 +1487,7 @@ msgstr "Импортировать файл"
 msgid "XML Files"
 msgstr "XML файлы"
 
-#: ../src/planner-msp-plugin.c:218
-#: ../src/planner-window.c:889
+#: ../src/planner-msp-plugin.c:218 ../src/planner-window.c:882
 msgid "All Files"
 msgstr "Все файлы"
 
@@ -1519,23 +1504,19 @@ msgstr "Удалить фазу"
 msgid "Could not open plugin file '%s'\n"
 msgstr "Невозможно открыть модуль «%s»\n"
 
-#: ../src/planner-predecessor-model.c:191
-#: ../src/planner-task-dialog.c:2217
+#: ../src/planner-predecessor-model.c:191 ../src/planner-task-dialog.c:2206
 msgid "FS"
 msgstr "НЗ"
 
-#: ../src/planner-predecessor-model.c:194
-#: ../src/planner-task-dialog.c:2218
+#: ../src/planner-predecessor-model.c:194 ../src/planner-task-dialog.c:2207
 msgid "FF"
 msgstr "ЗЗ"
 
-#: ../src/planner-predecessor-model.c:197
-#: ../src/planner-task-dialog.c:2219
+#: ../src/planner-predecessor-model.c:197 ../src/planner-task-dialog.c:2208
 msgid "SS"
 msgstr "НН"
 
-#: ../src/planner-predecessor-model.c:200
-#: ../src/planner-task-dialog.c:2220
+#: ../src/planner-predecessor-model.c:200 ../src/planner-task-dialog.c:2209
 msgid "SF"
 msgstr "ЗН"
 
@@ -1543,7 +1524,7 @@ msgstr "ЗН"
 msgid "Select the views to print:"
 msgstr "Выберите вид для печати:"
 
-#: ../src/planner-print-job.c:172
+#: ../src/planner-print-job.c:168
 msgid "Select views"
 msgstr "Выберите вид"
 
@@ -1587,7 +1568,8 @@ msgstr "Значение"
 #: ../src/planner-project-properties.c:1391
 #: ../src/planner-property-dialog.c:323
 msgid "The name of the custom property needs to start with a letter."
-msgstr "Название дополнительного свойства должно обязательно начинаться с буквы."
+msgstr ""
+"Название дополнительного свойства должно обязательно начинаться с буквы."
 
 #: ../src/planner-project-properties.c:1462
 #: ../src/planner-property-dialog.c:393
@@ -1619,9 +1601,8 @@ msgstr "Изменить свойства проекта"
 msgid "Label"
 msgstr "Метка"
 
-#: ../src/planner-property-dialog.c:504
-#: ../src/planner-resource-view.c:1264
-#: ../src/planner-task-dialog.c:2722
+#: ../src/planner-property-dialog.c:504 ../src/planner-resource-view.c:1253
+#: ../src/planner-task-dialog.c:2711
 msgid "Type"
 msgstr "Тип"
 
@@ -1644,13 +1625,12 @@ msgstr "Добавить ресурс"
 #. Put "no group" at the top.
 #: ../src/planner-resource-dialog.c:312
 #: ../src/planner-resource-input-dialog.c:100
-#: ../src/planner-resource-view.c:1985
+#: ../src/planner-resource-view.c:1967
 msgid "(None)"
 msgstr "(Нет)"
 
 #: ../src/planner-resource-dialog.c:322
-#: ../src/planner-resource-input-dialog.c:110
-#: ../src/planner-task-dialog.c:381
+#: ../src/planner-resource-input-dialog.c:110 ../src/planner-task-dialog.c:381
 msgid "(No name)"
 msgstr "(Нет имени)"
 
@@ -1666,33 +1646,27 @@ msgstr "Изменить заметку ресурса"
 msgid "Edit resource cost"
 msgstr "Изменить стоимость ресурса"
 
-#: ../src/planner-resource-dialog.c:711
-#: ../src/planner-resource-dialog.c:752
-#: ../src/planner-resource-view.c:1453
-#: ../src/planner-resource-view.c:1534
+#: ../src/planner-resource-dialog.c:711 ../src/planner-resource-dialog.c:752
+#: ../src/planner-resource-view.c:1442 ../src/planner-resource-view.c:1523
 msgid "Edit resource property"
 msgstr "Изменить свойство ресурса"
 
 #. i18n: time stamp format for notes in task dialog, see strftime(3) for
 #. * a detailed description.
-#: ../src/planner-resource-dialog.c:1404
-#: ../src/planner-task-dialog.c:1808
+#: ../src/planner-resource-dialog.c:1396 ../src/planner-task-dialog.c:1800
 msgid "%a %d %b %Y, %H:%M\n"
 msgstr "%a %d %b %Y, %H:%M\n"
 
-#: ../src/planner-resource-dialog.c:1521
+#: ../src/planner-resource-dialog.c:1512
 msgid "None (use project default)"
 msgstr "Нет (использовать параметры проекта)"
 
-#: ../src/planner-resource-dialog.c:1648
-#: ../src/planner-resource-dialog.c:1650
+#: ../src/planner-resource-dialog.c:1634 ../src/planner-resource-dialog.c:1636
 msgid "Edit resource properties"
 msgstr "Изменить свойства ресурса"
 
-#: ../src/planner-resource-dialog.c:1851
-#: ../src/planner-resource-view.c:793
-#: ../src/planner-resource-view.c:807
-#: ../src/planner-resource-view.c:1777
+#: ../src/planner-resource-dialog.c:1837 ../src/planner-resource-view.c:793
+#: ../src/planner-resource-view.c:807 ../src/planner-resource-view.c:1761
 msgid "Material"
 msgstr "Материал"
 
@@ -1740,8 +1714,7 @@ msgstr "/_Добавить ресурс"
 msgid "/_Remove resource"
 msgstr "/_Удалить ресурс"
 
-#: ../src/planner-resource-view.c:275
-#: ../src/planner-usage-tree.c:102
+#: ../src/planner-resource-view.c:275 ../src/planner-usage-tree.c:102
 msgid "/_Edit resource..."
 msgstr "/_Изменить ресурс..."
 
@@ -1749,23 +1722,23 @@ msgstr "/_Изменить ресурс..."
 msgid "_Resources"
 msgstr "_Ресурсы"
 
-#: ../src/planner-resource-view.c:983
+#: ../src/planner-resource-view.c:980
 msgid "Remove resource"
 msgstr "Удалить ресурс"
 
-#: ../src/planner-resource-view.c:1060
+#: ../src/planner-resource-view.c:1049
 msgid "Edit Resource Columns"
 msgstr "Изменить столбцы ресурсов"
 
-#: ../src/planner-resource-view.c:1095
+#: ../src/planner-resource-view.c:1084
 msgid "Edit custom resource properties"
 msgstr "Изменить дополнительные свойства ресурсов"
 
-#: ../src/planner-resource-view.c:1237
+#: ../src/planner-resource-view.c:1226
 msgid "Short name"
 msgstr "Короткое название"
 
-#: ../src/planner-resource-view.c:1293
+#: ../src/planner-resource-view.c:1282
 msgid "Group"
 msgstr "Группа"
 
@@ -1823,8 +1796,7 @@ msgstr "Открыть из базы данных..."
 msgid "Open a project from a database"
 msgstr "Открыть проект из базы данных"
 
-#: ../src/planner-sql-plugin.c:97
-#: ../src/planner-sql-plugin.c:1145
+#: ../src/planner-sql-plugin.c:97 ../src/planner-sql-plugin.c:1145
 msgid "Save to Database"
 msgstr "Сохранить в базе данных"
 
@@ -1900,15 +1872,15 @@ msgstr "Ревизия"
 msgid "Open from Database"
 msgstr "Открыть из базы данных"
 
-#: ../src/planner-task-cmd.c:97
+#: ../src/planner-task-cmd.c:96
 msgid "Link task"
 msgstr "Связать задачу"
 
-#: ../src/planner-task-cmd.c:173
+#: ../src/planner-task-cmd.c:172
 msgid "Unlink task"
 msgstr "Отвязать задачу"
 
-#: ../src/planner-task-cmd.c:268
+#: ../src/planner-task-cmd.c:267
 msgid "Insert task"
 msgstr "Добавить задачу"
 
@@ -1944,58 +1916,57 @@ msgstr "Изменить предшествующую задачу"
 msgid "Edit lag predecessor"
 msgstr "Изменить задержку предшествующей задачи"
 
-#: ../src/planner-task-dialog.c:1087
+#: ../src/planner-task-dialog.c:1086
 msgid "Edit task note"
 msgstr "Изменить заметку задачи"
 
-#: ../src/planner-task-dialog.c:1495
+#: ../src/planner-task-dialog.c:1489
 #, c-format
 msgid "No earlier than %s"
 msgstr "Не позднее чем %s"
 
-#: ../src/planner-task-dialog.c:1499
+#: ../src/planner-task-dialog.c:1493
 #, c-format
 msgid "On fixed date %s"
 msgstr "Заданного числа %s "
 
-#: ../src/planner-task-dialog.c:1917
+#: ../src/planner-task-dialog.c:1909
 msgid "Finish to start (FS)"
 msgstr "Начать по завершении (НЗ)"
 
-#: ../src/planner-task-dialog.c:1918
+#: ../src/planner-task-dialog.c:1910
 msgid "Finish to finish (FF)"
 msgstr "Закончить по завершении (ЗЗ)"
 
-#: ../src/planner-task-dialog.c:1919
+#: ../src/planner-task-dialog.c:1911
 msgid "Start to start (SS)"
 msgstr "Начать с началом (НН)"
 
-#: ../src/planner-task-dialog.c:1920
+#: ../src/planner-task-dialog.c:1912
 msgid "Start to finish (SF)"
 msgstr "Закончить к началу (ЗН)"
 
-#: ../src/planner-task-dialog.c:1975
+#: ../src/planner-task-dialog.c:1967
 msgid "Can't add new predecessor. No task selected!"
 msgstr "Невозможно добавить новую предшествующую задачу. Не выбрана задача!"
 
-#: ../src/planner-task-dialog.c:2463
+#: ../src/planner-task-dialog.c:2452
 msgid "Change..."
 msgstr "Изменить..."
 
-#: ../src/planner-task-dialog.c:2637
+#: ../src/planner-task-dialog.c:2626
 msgid "Assigned"
 msgstr "Назначено"
 
-#: ../src/planner-task-dialog.c:2654
+#: ../src/planner-task-dialog.c:2643
 msgid "Units"
 msgstr "Единицы измерения"
 
-#: ../src/planner-task-dialog.c:2744
+#: ../src/planner-task-dialog.c:2733
 msgid "Lag"
 msgstr "Задержка"
 
-#: ../src/planner-task-dialog.c:2887
-#: ../src/planner-task-dialog.c:2889
+#: ../src/planner-task-dialog.c:2876 ../src/planner-task-dialog.c:2878
 msgid "Edit task properties"
 msgstr "Изменить свойства задачи"
 
@@ -2019,83 +1990,85 @@ msgstr "/_Отвязать задачу"
 msgid "/Assign _resources..."
 msgstr "/Назначить _ресурсы..."
 
-#: ../src/planner-task-popup.c:71
-#: ../src/planner-usage-tree.c:105
+#: ../src/planner-task-popup.c:71 ../src/planner-usage-tree.c:105
 msgid "/_Edit task..."
 msgstr "/_Изменить задачу..."
 
-#: ../src/planner-task-tree.c:572
+#: ../src/planner-task-tree.c:561
 msgid "Remove task"
 msgstr "Удалить задачу"
 
-#: ../src/planner-task-tree.c:649
+#: ../src/planner-task-tree.c:638
 msgid "Apply constraint to task"
 msgstr "Применить ограничение к задаче"
 
-#: ../src/planner-task-tree.c:711
+#: ../src/planner-task-tree.c:700
 msgid "Reset task constraint"
 msgstr "Снять ограничение"
 
-#: ../src/planner-task-tree.c:1497
-#: ../src/planner-task-tree.c:1654
+#: ../src/planner-task-tree.c:1483 ../src/planner-task-tree.c:1637
 msgid "N/A"
 msgstr "N/A"
 
-#: ../src/planner-task-tree.c:2825
+#: ../src/planner-task-tree.c:2804
 msgid "Remove tasks"
 msgstr "Удалить задачу"
 
-#: ../src/planner-task-tree.c:2887
+#: ../src/planner-task-tree.c:2866
 #, c-format
-msgid "You are about to open an edit dialog each for %i tasks. Are you sure that you want to do that?"
-msgstr "Вы собрались открыть диалоги изменения свойств для %i задач. Вы уверены что хотите этого?"
+msgid ""
+"You are about to open an edit dialog each for %i tasks. Are you sure that "
+"you want to do that?"
+msgstr ""
+"Вы собрались открыть диалоги изменения свойств для %i задач. Вы уверены что "
+"хотите этого?"
 
-#: ../src/planner-task-tree.c:2989
+#: ../src/planner-task-tree.c:2968
 msgid "Unlink tasks"
 msgstr "Отвязать задачу"
 
-#: ../src/planner-task-tree.c:3041
+#: ../src/planner-task-tree.c:3020
 msgid "Link tasks"
 msgstr "Связать задачи"
 
-#: ../src/planner-task-tree.c:3132
+#: ../src/planner-task-tree.c:3109
 msgid "Indent tasks"
 msgstr "Сдвинуть задачи правее"
 
-#: ../src/planner-task-tree.c:3143
+#: ../src/planner-task-tree.c:3120
 msgid "Indent task"
 msgstr "Сдвинуть задачу правее"
 
-#: ../src/planner-task-tree.c:3237
+#: ../src/planner-task-tree.c:3212
 msgid "Unindent tasks"
 msgstr "Сдвинуть задачи левее"
 
-#: ../src/planner-task-tree.c:3255
+#: ../src/planner-task-tree.c:3230
 msgid "Unindent task"
 msgstr "Сдвинуть задачу левее"
 
-#: ../src/planner-task-tree.c:3333
+#: ../src/planner-task-tree.c:3306
 msgid "Move tasks up"
 msgstr "Передвинуть задачи вверх"
 
-#: ../src/planner-task-tree.c:3371
+#: ../src/planner-task-tree.c:3344
 msgid "Move task up"
 msgstr "Передвинуть задачу вверх"
 
-#: ../src/planner-task-tree.c:3459
+#: ../src/planner-task-tree.c:3432
 msgid "Move tasks down"
 msgstr "Передвинуть задачи вниз"
 
 #. Moving task from 'position' to 'position + 1'
-#: ../src/planner-task-tree.c:3505
+#: ../src/planner-task-tree.c:3478
 msgid "Move task down"
 msgstr "Передвинуть задачу ниже"
 
-#: ../src/planner-task-tree.c:3561
+#: ../src/planner-task-tree.c:3534
 msgid "Reset task constraints"
 msgstr "Снять ограничения с задачи"
 
-#: ../src/planner-task-tree.c:3593
+#: ../src/planner-task-tree.c:3566
 msgid "Reset all task constraints"
 msgstr "Снять все ограничения с задачи"
 
@@ -2166,9 +2139,18 @@ msgstr ""
 msgid "Resource _Usage"
 msgstr "_Использование ресурсов"
 
-#: ../src/planner-usage-view.c:378
+#: ../src/planner-usage-view.c:380
 msgid "Edit Resource Usage Columns"
 msgstr "Изменить столбцы использования ресурсов"
+
+#: ../src/planner-util-win32.c:45
+#, c-format
+msgid "Unable to open '%s'"
+msgstr "Не удалось открыть «%s»"
+
+#: ../src/planner-util-win32.c:72
+msgid "Unable to open help file"
+msgstr "Не удалось открыть файл справки"
 
 #: ../src/planner-window.c:220
 msgid "_File"
@@ -2198,8 +2180,7 @@ msgstr "Открыть _последнее"
 msgid "_Import"
 msgstr "_Импортировать"
 
-#: ../src/planner-window.c:238
-#: ../src/planner-window.c:1452
+#: ../src/planner-window.c:238 ../src/planner-window.c:1433
 msgid "_Save"
 msgstr "_Сохранить"
 
@@ -2331,99 +2312,124 @@ msgstr "_О программе"
 msgid "About this application"
 msgstr "О программе"
 
-#: ../src/planner-window.c:698
+#: ../src/planner-window.c:696
 #, c-format
 msgid "Switch to the view \"%s\""
 msgstr "Переключиться к виду «%s»"
 
-#: ../src/planner-window.c:873
+#: ../src/planner-window.c:866
 msgid "Open a File"
 msgstr "Открыть файл"
 
-#: ../src/planner-window.c:883
+#: ../src/planner-window.c:876
 msgid "Planner Files"
 msgstr "Файлы Planner"
 
-#. I18n: Translators, list your names here, newline separated if there
-#. * are more than one, to appear in the about box.
-#.
-#: ../src/planner-window.c:1209
-#: ../src/planner-window.c:1231
+#: ../src/planner-window.c:1212
+msgid "A Project Management application for the GNOME desktop"
+msgstr "Программа управления проектами для GNOME"
+
+#: ../src/planner-window.c:1215
 msgid "translator-credits"
 msgstr ""
 "Виталий Липатов\n"
 "Валёк Филиппов\n"
 "Квято Сергей"
 
-#: ../src/planner-window.c:1226
-msgid "A Project Management application for the GNOME desktop"
-msgstr "Программа управления проектами для GNOME"
-
-#: ../src/planner-window.c:1233
+#: ../src/planner-window.c:1217
 msgid "The Planner Homepage"
 msgstr "Домашняя страница Planner"
 
-#: ../src/planner-window.c:1385
+#: ../src/planner-window.c:1366
 msgid "If you don't save, changes made the last minute will be discarded."
-msgstr "Если вы не сохраните, все изменения, сделанные за последнюю минуту, будут отброшены."
+msgstr ""
+"Если вы не сохраните, все изменения, сделанные за последнюю минуту, будут "
+"отброшены."
 
-#: ../src/planner-window.c:1391
+#: ../src/planner-window.c:1372
 #, c-format
 msgid "If you don't save, changes made the last %d minute will be discarded."
-msgid_plural "If you don't save, changes made the last %d minutes will be discarded."
-msgstr[0] "Если вы не сохраните проект, все изменения за последнюю %d минуту будут потеряны."
-msgstr[1] "Если вы не сохраните проект, все изменения за последние %d минуты будут потеряны."
-msgstr[2] "Если вы не сохраните проект, все изменения за последние %d минут будут потеряны."
+msgid_plural ""
+"If you don't save, changes made the last %d minutes will be discarded."
+msgstr[0] ""
+"Если вы не сохраните проект, все изменения за последнюю %d минуту будут "
+"потеряны."
+msgstr[1] ""
+"Если вы не сохраните проект, все изменения за последние %d минуты будут "
+"потеряны."
+msgstr[2] ""
+"Если вы не сохраните проект, все изменения за последние %d минут будут "
+"потеряны."
 
-#: ../src/planner-window.c:1399
+#: ../src/planner-window.c:1380
 msgid "If you don't save, changes made the last hour will be discarded."
-msgstr "Если вы не сохраните, все изменения, сделанные за последний час, будут отброшены."
+msgstr ""
+"Если вы не сохраните, все изменения, сделанные за последний час, будут "
+"отброшены."
 
-#: ../src/planner-window.c:1404
+#: ../src/planner-window.c:1385
 #, c-format
 msgid "If you don't save, changes made the last %d hour will be discarded."
-msgid_plural "If you don't save, changes made the last %d hours will be discarded."
-msgstr[0] "Если вы не сохраните проект, все изменения за последний %d час будут потеряны."
-msgstr[1] "Если вы не сохраните проект, все изменения за последние %d часа будут потеряны."
-msgstr[2] "Если вы не сохраните проект, все изменения за последние %d часов будут потеряны."
+msgid_plural ""
+"If you don't save, changes made the last %d hours will be discarded."
+msgstr[0] ""
+"Если вы не сохраните проект, все изменения за последний %d час будут "
+"потеряны."
+msgstr[1] ""
+"Если вы не сохраните проект, все изменения за последние %d часа будут "
+"потеряны."
+msgstr[2] ""
+"Если вы не сохраните проект, все изменения за последние %d часов будут "
+"потеряны."
 
-#: ../src/planner-window.c:1414
+#: ../src/planner-window.c:1395
 #, c-format
 msgid "Save changes to document '%s' before closing?"
 msgstr "Сохранить изменения в документе «%s» перед закрытием?"
 
-#: ../src/planner-window.c:1439
+#: ../src/planner-window.c:1420
 msgid "C_lose without saving"
 msgstr "Закрыть без сохранения"
 
-#: ../src/planner-window.c:1445
+#: ../src/planner-window.c:1426
 msgid "_Cancel"
 msgstr "_Отменить"
 
-#: ../src/planner-window.c:1545
+#: ../src/planner-window.c:1526
 msgid "Save a File"
 msgstr "Сохранить файл"
 
-#: ../src/planner-window.c:1825
+#: ../src/planner-window.c:1794
 msgid ""
 "You have opened a file that was saved with an old version of Planner.\n"
 "\n"
-"When loading old files, all tasks will use the constraint 'Must Start On', since the old version did not fully support automatic rescheduling. To take advantage of this new feature, you should add predecessor relations between tasks that are dependent on each other.\n"
+"When loading old files, all tasks will use the constraint 'Must Start On', "
+"since the old version did not fully support automatic rescheduling. To take "
+"advantage of this new feature, you should add predecessor relations between "
+"tasks that are dependent on each other.\n"
 "\n"
-"You can add a predecessor relation by clicking on the predecessor and dragging to the successor.\n"
+"You can add a predecessor relation by clicking on the predecessor and "
+"dragging to the successor.\n"
 "\n"
-"After doing this, you can remove all constraints by selecting the menu item 'Remove all constraints' in the 'Edit' menu."
+"After doing this, you can remove all constraints by selecting the menu item "
+"'Remove all constraints' in the 'Edit' menu."
 msgstr ""
 "Вы открыли файл, который был сохранён старой версией Planner.\n"
 "\n"
-"При загрузке старых файлов все задачи будут использовать принуждение 'Должен начаться', так как старые версии не полностью поддерживали автоматическое изменение расписания. Чтобы воспользоваться всеми преимуществами этой новой возможности, вы должны добавить взаимосвязь между теми задачами, которые зависят одна от другой.\n"
+"При загрузке старых файлов все задачи будут использовать принуждение 'Должен "
+"начаться', так как старые версии не полностью поддерживали автоматическое "
+"изменение расписания. Чтобы воспользоваться всеми преимуществами этой новой "
+"возможности, вы должны добавить взаимосвязь между теми задачами, которые "
+"зависят одна от другой.\n"
 "\n"
-"Вы можете добавить взаимосвязь нажатием кнопки мыши на предшествующую задачу и передвижением курсора к последующей задаче. \n"
+"Вы можете добавить взаимосвязь нажатием кнопки мыши на предшествующую задачу "
+"и передвижением курсора к последующей задаче. \n"
 "\n"
-" После выполнения этого вы можете удалить все принуждения выбором пункта 'Удалить все принуждения' в меню 'Правка'."
+" После выполнения этого вы можете удалить все принуждения выбором пункта "
+"'Удалить все принуждения' в меню 'Правка'."
 
 #. Hack.
-#: ../src/planner-window.c:1860
+#: ../src/planner-window.c:1829
 msgid "Unnamed database project"
 msgstr "Безымянная база данных"
 
@@ -2465,7 +2471,8 @@ msgstr "Классификация EDS"
 
 #: ../eds-backend/e-cal-backend-planner.c:309
 msgid "Task access classification used by Evolution Data Server"
-msgstr "Классификация доступа к задачам используемая сервером данных Evolution (EDS)"
+msgstr ""
+"Классификация доступа к задачам используемая сервером данных Evolution (EDS)"
 
 #: ../eds-backend/e-cal-backend-planner.c:318
 msgid "EDS URL"
@@ -2487,6 +2494,9 @@ msgstr "Выбрать файл planner"
 
 #: ../eds-backend/planner-source/planner-source.c:157
 #, c-format
-msgid "The filename extension of this file isn't the planner usual file extension (%s) Do you want to continue?"
-msgstr "Расширение имени для этого файла не совпадает с обычным для файла planner (%s). Продолжить?"
-
+msgid ""
+"The filename extension of this file isn't the planner usual file extension (%"
+"s) Do you want to continue?"
+msgstr ""
+"Расширение имени для этого файла не совпадает с обычным для файла planner (%"
+"s). Продолжить?"
