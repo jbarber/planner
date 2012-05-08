@@ -1219,7 +1219,7 @@ window_about_cb (GtkAction *action,
 			       NULL);
 
 	if (pixbuf != NULL) {
-		gdk_pixbuf_unref (pixbuf);
+		g_object_unref (pixbuf);
 	}
 }
 
