@@ -314,6 +314,7 @@ docs/Makefile
 docs/libplanner/Makefile
 docs/user-guide/Makefile
 docs/user-guide/C/Makefile
+docs/user-guide/es/Makefile
 docs/user-guide/eu/Makefile
 docs/sql/Makefile
 examples/Makefile
