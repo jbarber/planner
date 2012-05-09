@@ -912,19 +912,19 @@ gantt_row_unrealize (GnomeCanvasItem *item)
 
 	row = PLANNER_GANTT_ROW (item);
 
-	gdk_gc_unref (row->priv->complete_gc);
+	g_object_unref (row->priv->complete_gc);
 	row->priv->complete_gc = NULL;
 
-	gdk_gc_unref (row->priv->break_gc);
+	g_object_unref (row->priv->break_gc);
 	row->priv->break_gc = NULL;
 
-	gdk_gc_unref (row->priv->fill_gc);
+	g_object_unref (row->priv->fill_gc);
 	row->priv->fill_gc = NULL;
 
-	gdk_gc_unref (row->priv->frame_gc);
+	g_object_unref (row->priv->frame_gc);
 	row->priv->frame_gc = NULL;
 
-	gdk_gc_unref (row->priv->ttask_gc);
+	g_object_unref (row->priv->ttask_gc);
 	row->priv->ttask_gc = NULL;
 
 	if (break_stipple) {

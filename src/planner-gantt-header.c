@@ -638,7 +638,7 @@ gantt_header_expose_event (GtkWidget      *widget,
 	}
 
  done:
-	gdk_gc_unref (gc);
+	g_object_unref(gc);
 
 	return TRUE;
 }
