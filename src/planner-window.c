@@ -314,7 +314,7 @@ static guint n_entries = G_N_ELEMENTS(entries);
 GType
 planner_window_get_type (void)
 {
-	static GtkType type = 0;
+	static GType type = 0;
 
 	if (!type) {
 		static const GTypeInfo info = {

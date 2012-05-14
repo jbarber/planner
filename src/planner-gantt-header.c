@@ -107,10 +107,10 @@ static GtkWidgetClass *parent_class = NULL;
 static guint           signals[LAST_SIGNAL];
 
 
-GtkType
+GType
 planner_gantt_header_get_type (void)
 {
-	static GtkType planner_gantt_header_type = 0;
+	static GType planner_gantt_header_type = 0;
 
 	if (!planner_gantt_header_type) {
 		static const GTypeInfo planner_gantt_header_info = {

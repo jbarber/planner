@@ -40,10 +40,10 @@ enum {
 static GtkEventBoxClass *parent_class;
 static guint signals[LAST_SIGNAL];
 
-GtkType
+GType
 planner_popup_entry_get_type (void)
 {
-	static GtkType widget_type = 0;
+	static GType widget_type = 0;
 
 	if (!widget_type) {
 		static const GTypeInfo widget_info = {

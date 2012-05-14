@@ -59,10 +59,10 @@ static GtkVBoxClass *parent_class = NULL;
 static guint signals[LAST_SIGNAL];
 
 
-GtkType
+GType
 planner_sidebar_get_type (void)
 {
-	static GtkType planner_sidebar_type = 0;
+	static GType planner_sidebar_type = 0;
 
 	if (!planner_sidebar_type) {
 		static const GTypeInfo planner_sidebar_info = {
