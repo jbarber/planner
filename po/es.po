@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: planner.HEAD\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=planner&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-03-14 10:55+0000\n"
+"POT-Creation-Date: 2012-04-09 12:19+0000\n"
 "PO-Revision-Date: 2012-04-09 13:55+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
@@ -493,7 +493,6 @@ msgid "Planner project plan"
 msgstr "Plan de proyectos Planner"
 
 #: ../data/planner.desktop.in.in.h:1
-#| msgid "Planner Files"
 msgid "Planner"
 msgstr "Planner"
 
@@ -669,7 +668,7 @@ msgstr "Predeterminado"
 #: ../libplanner/mrp-project.c:715
 #, c-format
 msgid "Invalid URI: '%s'"
-msgstr "URI inválida: «%s»"
+msgstr "URI no válido: «%s»"
 
 #: ../libplanner/mrp-project.c:758
 #, c-format
@@ -685,7 +684,7 @@ msgstr ""
 #: ../libplanner/mrp-project.c:816
 #, c-format
 msgid "Invalid URI."
-msgstr "URI inválida."
+msgstr "URI no válido."
 
 #: ../libplanner/mrp-project.c:957
 #, c-format
@@ -743,7 +742,7 @@ msgstr "No se informó de errores."
 #. Give up.
 #: ../libplanner/mrp-sql.c:374 ../src/planner-sql-plugin.c:226
 msgid "Invalid Unicode"
-msgstr "Unicode inválido"
+msgstr "Unicode no válido"
 
 #: ../libplanner/mrp-sql.c:2258
 #, c-format
@@ -785,17 +784,17 @@ msgstr "Ha fallado la conexión con la base de datos «%s»."
 #: ../libplanner/mrp-storage-sql.c:206
 #, c-format
 msgid "Invalid SQL URI (must start with 'sql://' and contain '#')."
-msgstr "URI SQL inválida (debe empezar con 'sql://' y contener '#')."
+msgstr "URI SQL no válida (debe empezar con 'sql://' y contener '#')."
 
 #: ../libplanner/mrp-storage-sql.c:275
 #, c-format
 msgid "Invalid SQL URI (invalid project id)."
-msgstr "URI SQL inválida (id de proyecto inválido)."
+msgstr "URI SQL no válida (id de proyecto no válido)."
 
 #: ../libplanner/mrp-storage-sql.c:283
 #, c-format
 msgid "Invalid SQL URI (no database name specified)."
-msgstr "URI SQL inválida (no hay especificado un nombre de base de datos)."
+msgstr "URI SQL no válida (no hay especificado un nombre de base de datos)."
 
 #: ../libplanner/mrp-task.c:1068
 #, c-format
@@ -808,8 +807,7 @@ msgstr ""
 #: ../libplanner/mrp-task.c:1079
 msgid "Start to Finish relation type cannot be combined with other relations."
 msgstr ""
-"Una relación de tipo «inicio a fin» no se puede combinar con otras "
-"relaciones."
+"Una relación de tipo «inicio a fin» no se puede combinar con otras relaciones."
 
 #: ../libplanner/mrp-task.c:1081
 msgid "Finish to Finish relation type cannot be combined with other relations."
@@ -1447,7 +1445,6 @@ msgid "GEOMETRY"
 msgstr "GEOMETRÍA"
 
 #: ../src/planner-main.c:40
-#| msgid "FILES"
 msgid "FILES|URIs"
 msgstr "ARCHIVOS|URI"
 
@@ -1812,8 +1809,8 @@ msgid ""
 "Database %s needs to be upgraded from version %s to version %s.\n"
 "Please backup database before the upgrade."
 msgstr ""
-"La base de datos %s necesita modernizarse desde la versión %s a la versión "
-"%s.\n"
+"La base de datos %s necesita modernizarse desde la versión %s a la versión %"
+"s.\n"
 "Haga una copia de resguardo de la base de datos antes de la modernización."
 
 #: ../src/planner-sql-plugin.c:531
@@ -2406,11 +2403,11 @@ msgid ""
 msgstr ""
 "Ha abierto un archivo que se guardó con una versión antigua de Planner.\n"
 "\n"
-"Cuando cargue archivos antiguos, todas las tareas usarán el impedimento "
-"«Debe empezar en», debido a que la versión antigua no soportaba "
-"completamente la replanificación automática. Para aprovechar las ventajas de "
-"esta característica nueva debería añadir relaciones de precedencia entre "
-"tareas que sean dependientes de otras.\n"
+"Cuando cargue archivos antiguos, todas las tareas usarán el impedimento «Debe "
+"empezar en», debido a que la versión antigua no soportaba completamente la "
+"replanificación automática. Para aprovechar las ventajas de esta "
+"característica nueva debería añadir relaciones de precedencia entre tareas "
+"que sean dependientes de otras.\n"
 "\n"
 "Puede añadir una relación de predecesión pulsando en el predecesor y "
 "arrastrando hasta el sucesor.\n"
@@ -2474,7 +2471,7 @@ msgstr "URL para una tarea que usa el Servidor de Datos de Evolution"
 
 #: ../eds-backend/e-cal-backend-planner.c:828
 msgid "Invalid server URI"
-msgstr "URI del servidor inválida"
+msgstr "URI del servidor no válido"
 
 #. book_target = (EABConfigTargetSource *) data->target;
 #. source = book_target->source;
@@ -2485,8 +2482,8 @@ msgstr "Seleccione el archivo de Planner"
 #: ../eds-backend/planner-source/planner-source.c:157
 #, c-format
 msgid ""
-"The filename extension of this file isn't the planner usual file extension "
-"(%s) Do you want to continue?"
+"The filename extension of this file isn't the planner usual file extension (%"
+"s) Do you want to continue?"
 msgstr ""
 "La extensión del nombre de archivo no es la extensión usual de Planner (%s). "
 "¿Quiere continuar?"
