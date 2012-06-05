@@ -24,7 +24,11 @@ mimeicons_DATA = gnome-mime-application-x-planner.png
 pixmapdir = $(datadir)/pixmaps
 pixmap_DATA = gnome-planner.png
 
+svgiconsdir = $(datadir)/icons/hicolor/scalable/apps
+svgicons_DATA = gnome-planner.svg
+
 EXTRA_DIST = 				\
 	$(images_DATA)			\
-	$(mimeicons_DATA)
+	$(mimeicons_DATA)		\
+	$(svgicons_DATA)
 
