@@ -21,7 +21,7 @@ images_DATA = 				\
 mimeiconsdir = $(datadir)/icons/hicolor/48x48/mimetypes
 mimeicons_DATA = gnome-mime-application-x-planner.png
 
-pixmapdir = $(datadir)/pixmaps
+pixmapdir = $(datadir)/icons/hicolor/48x48/apps
 pixmap_DATA = gnome-planner.png
 
 svgiconsdir = $(datadir)/icons/hicolor/scalable/apps
