@@ -25,9 +25,14 @@
 #include <string.h>
 #include <gtk/gtk.h>
 #include <glib/gi18n.h>
+#include <glib.h>
+#include <glib/gstdio.h>
+#include <errno.h>
 #include "libplanner/mrp-paths.h"
 #include "planner-application.h"
 #include "planner-window.h"
+
+static gboolean migrate_config_to_xdg_dir (void);
 
 static PlannerApplication *application;
 
@@ -69,6 +74,9 @@ main (int argc, char **argv)
 		g_error_free (error);
 		return 1;
 	}
+
+	/* Migrate configuration if necessary */
+	migrate_config_to_xdg_dir ();
 
 	filename = mrp_paths_get_image_dir ("gnome-planner.png");
 	gtk_window_set_default_icon_from_file (filename, NULL);
@@ -130,3 +138,31 @@ main (int argc, char **argv)
 
         return 0;
 }
+
+static gboolean
+migrate_config_to_xdg_dir (void)
+{
+	gboolean success = FALSE;
+	gchar *xdg_dir, *old_dir;
+
+	old_dir = g_build_filename (g_get_home_dir (), ".gnome2", g_get_prgname (), NULL);
+	xdg_dir = g_build_filename (g_get_user_config_dir (), g_get_prgname (), NULL);
+
+	/* Migration required only if there's something to migrate,
+	 * and content has not been migrated yet */
+	if (g_file_test (old_dir, G_FILE_TEST_IS_DIR)
+			&& !g_file_test (xdg_dir, G_FILE_TEST_IS_DIR)) {
+		success = ((g_rename (old_dir, xdg_dir) == 0));
+		if (! success) {
+			g_warning ("Failed to migrate configuration directory to "
+					"'%s': %s\n",
+					xdg_dir,
+					g_strerror (errno));
+		}
+	}
+
+	g_free (xdg_dir);
+	g_free (old_dir);
+	return success;
+}
+
