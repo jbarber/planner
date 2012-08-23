@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: planner 0.15\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-16 18:06+0100\n"
-"PO-Revision-Date: 2012-01-16 18:08+0100\n"
+"POT-Creation-Date: 2012-08-23 09:19+0200\n"
+"PO-Revision-Date: 2012-08-23 09:20+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian bokmål <i18n-nb@lister.ping.uio.no>\n"
 "Language: \n"
@@ -485,12 +485,24 @@ msgid "Planner project plan"
 msgstr "Planner prosjektplan"
 
 #: ../data/planner.desktop.in.in.h:1
+msgid "Planner"
+msgstr "Planner"
+
+#: ../data/planner.desktop.in.in.h:2
 msgid "Project Management"
 msgstr "Prosjektstyring"
 
-#: ../data/planner.desktop.in.in.h:2
+#: ../data/planner.desktop.in.in.h:3
 msgid "Planner Project Management"
 msgstr "Planner prosjektstyring"
+
+#: ../data/planner.desktop.in.in.h:4
+msgid "Handle the tasks, resources, and cost of your projects"
+msgstr "Håndter oppgaver, ressurser og kostnader for dine prosjekter"
+
+#: ../data/planner.desktop.in.in.h:5
+msgid "Gantt;Chart;Critical path;Relationship;Dependency;WBS;"
+msgstr "Gantt;Chart;Critical Path;Relasjoner;Avhengigheter;WBS;"
 
 #: ../data/planner.schemas.in.h:1
 msgid "Highlight critical path in Gantt view"
@@ -1140,7 +1152,7 @@ msgstr "Arbeid"
 
 #: ../src/planner-gantt-print.c:546 ../src/planner-gantt-row.c:771
 #: ../src/planner-html-plugin.c:120 ../src/planner-task-tree.c:1584
-#: ../src/planner-window.c:1849
+#: ../src/planner-window.c:1837
 msgid "Unnamed"
 msgstr "Uten navn"
 
@@ -1408,23 +1420,23 @@ msgstr "Vis resultat i nettleser"
 msgid "File \"%s\" exists, do you want to overwrite it?"
 msgstr "Filen «%s» eksisterer. Vil du overskrive den?"
 
-#: ../src/planner-main.c:39
+#: ../src/planner-main.c:44
 msgid "Create the initial window with the given geometry."
 msgstr "Opprett startvinduet med oppgitt geometri."
 
-#: ../src/planner-main.c:39
+#: ../src/planner-main.c:44
 msgid "GEOMETRY"
 msgstr "GEOMETRI"
 
-#: ../src/planner-main.c:40
-msgid "FILES"
-msgstr "FILER"
+#: ../src/planner-main.c:45
+msgid "FILES|URIs"
+msgstr "FILER|URIer"
 
-#: ../src/planner-main.c:63
+#: ../src/planner-main.c:68
 msgid "- Planner project management"
 msgstr "- Planner prosjektstyring"
 
-#: ../src/planner-main.c:67
+#: ../src/planner-main.c:72
 #, c-format
 msgid ""
 "%s\n"
@@ -1434,7 +1446,7 @@ msgstr ""
 "Kjør «%s --help» for å se en full liste med tilgjengelige "
 "kommandolinjeflagg.\n"
 
-#: ../src/planner-main.c:91
+#: ../src/planner-main.c:99
 #, c-format
 msgid "Invalid geometry string \"%s\"\n"
 msgstr "Ugyldig geometristreng «%s»\n"
@@ -2355,7 +2367,7 @@ msgstr "_Avbryt"
 msgid "Save a File"
 msgstr "Lagre fil"
 
-#: ../src/planner-window.c:1806
+#: ../src/planner-window.c:1794
 msgid ""
 "You have opened a file that was saved with an old version of Planner.\n"
 "\n"
@@ -2384,7 +2396,7 @@ msgstr ""
 "menyoppføringen «Fjern alle begrensninger» i «Rediger»-menyen."
 
 #. Hack.
-#: ../src/planner-window.c:1841
+#: ../src/planner-window.c:1829
 msgid "Unnamed database project"
 msgstr "Databaseprosjekt uten navn"
 
