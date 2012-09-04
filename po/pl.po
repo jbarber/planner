@@ -4,12 +4,17 @@
 # pomóc w jego rozwijaniu i pielęgnowaniu, napisz do nas:
 # gnomepl@aviary.pl
 # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+# Zbigniew Chyla <chyla@alice.ci.pwr.wroc.pl>, 2002-2003.
+# Artur Flinta <aflinta@at.kernel.pl>, 2003.
+# Tomasz Kłoczko <kloczek@rudy.mif.pg.gda.pl>, 2004.
+# Piotr Drąg <piotrdrag@gmail.com>, 2010-2012.
+# Aviary.pl <gnomepl@aviary.pl>, 2010-2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: planner\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-14 21:22+0100\n"
-"PO-Revision-Date: 2012-03-14 21:23+0100\n"
+"POT-Creation-Date: 2012-09-04 20:29+0200\n"
+"PO-Revision-Date: 2012-09-04 20:30+0200\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <gnomepl@aviary.pl>\n"
 "Language: pl\n"
@@ -1435,23 +1440,23 @@ msgstr "Wyświetl wynik w przeglądarce"
 msgid "File \"%s\" exists, do you want to overwrite it?"
 msgstr "Plik \"%s\" istnieje, zastąpić go?"
 
-#: ../src/planner-main.c:39
+#: ../src/planner-main.c:44
 msgid "Create the initial window with the given geometry."
 msgstr "Tworzy okno początkowe o podanych wymiarach."
 
-#: ../src/planner-main.c:39
+#: ../src/planner-main.c:44
 msgid "GEOMETRY"
 msgstr "WYMIARY"
 
-#: ../src/planner-main.c:40
+#: ../src/planner-main.c:45
 msgid "FILES|URIs"
 msgstr "PLIKI|URI"
 
-#: ../src/planner-main.c:63
+#: ../src/planner-main.c:68
 msgid "- Planner project management"
 msgstr "- zarządzanie projektami Planner"
 
-#: ../src/planner-main.c:67
+#: ../src/planner-main.c:72
 #, c-format
 msgid ""
 "%s\n"
@@ -1461,7 +1466,7 @@ msgstr ""
 "Polecenia \"%s --help\" wyświetla pełną listę dostępnych opcji wiersza "
 "poleceń.\n"
 
-#: ../src/planner-main.c:91
+#: ../src/planner-main.c:99
 #, c-format
 msgid "Invalid geometry string \"%s\"\n"
 msgstr "Nieprawidłowy ciąg wymiarów \"%s\"\n"
@@ -2329,7 +2334,12 @@ msgstr "Program do zarządzanie projektami dla środowiska GNOME"
 
 #: ../src/planner-window.c:1215
 msgid "translator-credits"
-msgstr "Aviary.pl <gnomepl@aviary.pl>, 2010"
+msgstr ""
+"Zbigniew Chyla <chyla@alice.ci.pwr.wroc.pl>, 2002-2003\n"
+"Artur Flinta <aflinta@at.kernel.pl>, 2003\n"
+"Tomasz Kłoczko <kloczek@rudy.mif.pg.gda.pl>, 2004\n"
+"Piotr Drąg <piotrdrag@gmail.com>, 2010-2012\n"
+"Aviary.pl <gnomepl@aviary.pl>, 2010-2012"
 
 #: ../src/planner-window.c:1217
 msgid "The Planner Homepage"
