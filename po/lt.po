@@ -5,41 +5,60 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: planner HEAD\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-04-12 09:43+0300\n"
-"PO-Revision-Date: 2007-03-17 18:54+0200\n"
-"Last-Translator: Tomas Kuliavas <tokul@users.sourceforge.net>\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=planner&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2012-03-14 10:55+0000\n"
+"PO-Revision-Date: 2012-10-08 22:10+0300\n"
+"Last-Translator: Aurimas Černius <aurisc4@gmail.com>\n"
 "Language-Team: Lithuanian <komp_lt@konferencijos.lt>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%"
-"100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: ../data/glade/add-predecessor.glade.h:1
 msgid "Add Predecessor"
 msgstr "Pridėti pirmtaką"
 
 #: ../data/glade/add-predecessor.glade.h:2
-msgid "_Lag:"
-msgstr "_Delsimas:"
-
-#: ../data/glade/add-predecessor.glade.h:3
-#: ../data/glade/calendar-dialog.glade.h:35
-#: ../data/glade/new-property.glade.h:5
-#: ../data/glade/project-properties.glade.h:9
-#: ../data/glade/resource-dialog.glade.h:12
-#: ../data/glade/resource-input-dialog.glade.h:7
-#: ../data/glade/task-dialog.glade.h:16
-#: ../data/glade/task-input-dialog.glade.h:4
+#: ../data/glade/calendar-dialog.glade.h:36
+#: ../data/glade/new-property.glade.h:2
+#: ../data/glade/project-properties.glade.h:2
+#: ../data/glade/resource-dialog.glade.h:1
+#: ../data/glade/resource-input-dialog.glade.h:3
+#: ../data/glade/task-dialog.glade.h:1
+#: ../data/glade/task-input-dialog.glade.h:3
 msgid "_Name:"
 msgstr "_Vardas:"
 
-#: ../data/glade/add-predecessor.glade.h:4
+#: ../data/glade/add-predecessor.glade.h:3
 msgid "_Relation type:"
 msgstr "_Ryšio tipas:"
 
+#: ../data/glade/add-predecessor.glade.h:4
+msgid "_Lag:"
+msgstr "_Delsimas:"
+
 #: ../data/glade/calendar-dialog.glade.h:1
+msgid "Default Week"
+msgstr "Įprasta savaitė"
+
+#: ../data/glade/calendar-dialog.glade.h:2
+msgid "<b>Calendar:</b>"
+msgstr "<b>Kalendorius:</b>"
+
+#: ../data/glade/calendar-dialog.glade.h:3
+msgid "Select a weekday and the day type to use for that day in the default week for this calendar.\n"
+msgstr "Pasirinkite savaitės dieną ir dienos tipą, kurie bus naudojami kaip standartiniai šiame kalendoriuje.\n"
+
+#: ../data/glade/calendar-dialog.glade.h:5
+msgid "Week day:"
+msgstr "Savaitės diena:"
+
+#: ../data/glade/calendar-dialog.glade.h:6
+msgid "Day type:"
+msgstr "Dienos tipas:"
+
+#: ../data/glade/calendar-dialog.glade.h:7
 msgid ""
 "\n"
 "The selected day type has the following working hours:"
@@ -47,188 +66,167 @@ msgstr ""
 "\n"
 "Pasirinktas dienos tipas turi žemiau nurodytas darbo valandas:"
 
-#: ../data/glade/calendar-dialog.glade.h:3
-#: ../data/glade/column-dialog.glade.h:1 ../data/glade/task-dialog.glade.h:2
+#: ../data/glade/calendar-dialog.glade.h:9
+#: ../data/glade/column-dialog.glade.h:2
+#: ../data/glade/task-dialog.glade.h:9
 msgid "    "
 msgstr "    "
 
-#: ../data/glade/calendar-dialog.glade.h:4 ../data/glade/eds.glade.h:1
-#: ../data/glade/new-property.glade.h:1
-#: ../data/glade/resource-dialog.glade.h:1
-#: ../data/glade/resource-input-dialog.glade.h:1 ../data/glade/sql.glade.h:1
-#: ../data/glade/task-input-dialog.glade.h:1
-msgid "*"
-msgstr "*"
-
-#: ../data/glade/calendar-dialog.glade.h:5
-msgid "-"
-msgstr "-"
-
-#: ../data/glade/calendar-dialog.glade.h:6
-msgid "<b>Calendar:</b>"
-msgstr "<b>Kalendorius:</b>"
-
-#: ../data/glade/calendar-dialog.glade.h:7
-msgid "<b>Day types</b>"
-msgstr "<b>Dienų tipai</b>"
-
-#: ../data/glade/calendar-dialog.glade.h:8
-msgid "<b>Working hours</b>"
-msgstr "<b>Darbo valandos</b>"
-
-#: ../data/glade/calendar-dialog.glade.h:9
-msgid "<b>Working time</b>"
-msgstr "<b>Darbo laikas</b>"
-
 #: ../data/glade/calendar-dialog.glade.h:10
-msgid "Add Day Type"
-msgstr "Pridėti dienos tipą"
-
-#: ../data/glade/calendar-dialog.glade.h:11
-msgid "Apply"
-msgstr "Pritaikyti"
-
-#: ../data/glade/calendar-dialog.glade.h:12
-msgid "C_opy an existing calendar"
-msgstr "Nuk_opijuoti esamą kalendorių"
-
-#: ../data/glade/calendar-dialog.glade.h:13
-msgid "C_reate"
-msgstr "Suku_rti"
-
-#: ../data/glade/calendar-dialog.glade.h:14
-msgid "Calendar Editor"
-msgstr "Kalendoriaus redaktorius"
-
-#: ../data/glade/calendar-dialog.glade.h:15
-msgid "Create an _empty calendar"
-msgstr "Sukurti _tuščią kalendorių"
-
-#: ../data/glade/calendar-dialog.glade.h:16
-msgid "Custom working time"
-msgstr "Specialus darbo laikas"
-
-#: ../data/glade/calendar-dialog.glade.h:17
-msgid "Day type:"
-msgstr "Dienos tipas:"
-
-#: ../data/glade/calendar-dialog.glade.h:18
-msgid "Default Week"
-msgstr "Įprasta savaitė"
-
-#: ../data/glade/calendar-dialog.glade.h:19
-msgid "Default week..."
-msgstr "Įprasta savaitė…"
-
-#: ../data/glade/calendar-dialog.glade.h:20
-msgid "Edit Day Types"
-msgstr "Keisti dienų tipus"
-
-#: ../data/glade/calendar-dialog.glade.h:21
 msgid "Edit Working Time"
 msgstr "Keisti darbo laiką"
 
-#: ../data/glade/calendar-dialog.glade.h:22
-msgid "From:"
-msgstr "Nuo:"
+#: ../data/glade/calendar-dialog.glade.h:11
+msgid "<b>Day types</b>"
+msgstr "<b>Dienų tipai</b>"
 
-#: ../data/glade/calendar-dialog.glade.h:23
-msgid "New Calendar"
-msgstr "Naujos Kalendorius"
+#: ../data/glade/calendar-dialog.glade.h:12
+msgid "<b>Working hours</b>"
+msgstr "<b>Darbo valandos</b>"
 
-#: ../data/glade/calendar-dialog.glade.h:24
-msgid "Select a Calendar"
-msgstr "Pasirinkite kalendorių"
+#: ../data/glade/calendar-dialog.glade.h:13
+msgid "-"
+msgstr "-"
 
-#: ../data/glade/calendar-dialog.glade.h:25
-msgid ""
-"Select a weekday and the day type to use for that day in the default week "
-"for this calendar.\n"
-msgstr ""
-"Pasirinkite savaitės dieną ir dienos tipą, kurie bus naudojami kaip "
-"standartiniai šiame kalendoriuje.\n"
+#: ../data/glade/calendar-dialog.glade.h:14
+#: ../data/glade/eds.glade.h:4
+#: ../data/glade/new-property.glade.h:5
+#: ../data/glade/resource-dialog.glade.h:6
+#: ../data/glade/resource-input-dialog.glade.h:5
+#: ../data/glade/sql.glade.h:5
+#: ../data/glade/task-input-dialog.glade.h:5
+msgid "*"
+msgstr "*"
 
-#: ../data/glade/calendar-dialog.glade.h:27
-msgid "Set day type to:"
-msgstr "Nustatyti dienos tipą į:"
+#: ../data/glade/calendar-dialog.glade.h:15
+msgid "Calendar Editor"
+msgstr "Kalendoriaus redaktorius"
 
-#: ../data/glade/calendar-dialog.glade.h:28
-msgid "To:"
-msgstr "Kam:"
-
-#: ../data/glade/calendar-dialog.glade.h:29
-msgid "Use working time from derived calendar"
-msgstr "Naudoja darbo laiką iš susieto kalendoriaus"
-
-#: ../data/glade/calendar-dialog.glade.h:30
-msgid "Week day:"
-msgstr "Savaitės diena:"
-
-#: ../data/glade/calendar-dialog.glade.h:31
-msgid "Working time..."
-msgstr "Darbo laikas…"
-
-#: ../data/glade/calendar-dialog.glade.h:32
-msgid "_Derive from a calendar"
-msgstr "_Imti iš kalendoriaus"
-
-#: ../data/glade/calendar-dialog.glade.h:33
-msgid "_Existing calendars:"
-msgstr "_Esami kalendoriai:"
-
-#: ../data/glade/calendar-dialog.glade.h:34
-msgid "_Name of the new calendar:"
-msgstr "_Naujo kalendoriaus pavadinimas:"
-
-#: ../data/glade/calendar-dialog.glade.h:36
+#: ../data/glade/calendar-dialog.glade.h:16
 msgid "_New..."
 msgstr "_Naujas..."
 
-#: ../data/glade/column-dialog.glade.h:2
+#: ../data/glade/calendar-dialog.glade.h:17
+msgid "Working time..."
+msgstr "Darbo laikas…"
+
+#: ../data/glade/calendar-dialog.glade.h:18
+msgid "Default week..."
+msgstr "Įprasta savaitė…"
+
+#: ../data/glade/calendar-dialog.glade.h:19
+msgid "Use working time from derived calendar"
+msgstr "Naudoja darbo laiką iš susieto kalendoriaus"
+
+#: ../data/glade/calendar-dialog.glade.h:20
+msgid "Set day type to:"
+msgstr "Nustatyti dienos tipą į:"
+
+#: ../data/glade/calendar-dialog.glade.h:21
+msgid "Custom working time"
+msgstr "Specialus darbo laikas"
+
+#: ../data/glade/calendar-dialog.glade.h:22
+msgid "<b>Working time</b>"
+msgstr "<b>Darbo laikas</b>"
+
+#: ../data/glade/calendar-dialog.glade.h:23
+msgid "From:"
+msgstr "Nuo:"
+
+#: ../data/glade/calendar-dialog.glade.h:24
+msgid "To:"
+msgstr "Kam:"
+
+#: ../data/glade/calendar-dialog.glade.h:25
+msgid "Apply"
+msgstr "Pritaikyti"
+
+#: ../data/glade/calendar-dialog.glade.h:26
+msgid "New Calendar"
+msgstr "Naujos Kalendorius"
+
+#: ../data/glade/calendar-dialog.glade.h:27
+msgid "C_reate"
+msgstr "Suku_rti"
+
+#: ../data/glade/calendar-dialog.glade.h:28
+msgid "_Existing calendars:"
+msgstr "_Esami kalendoriai:"
+
+#: ../data/glade/calendar-dialog.glade.h:29
+msgid "_Name of the new calendar:"
+msgstr "_Naujo kalendoriaus pavadinimas:"
+
+#: ../data/glade/calendar-dialog.glade.h:30
+msgid "_Derive from a calendar"
+msgstr "_Imti iš kalendoriaus"
+
+#: ../data/glade/calendar-dialog.glade.h:31
+msgid "C_opy an existing calendar"
+msgstr "Nuk_opijuoti esamą kalendorių"
+
+#: ../data/glade/calendar-dialog.glade.h:32
+msgid "Create an _empty calendar"
+msgstr "Sukurti _tuščią kalendorių"
+
+#: ../data/glade/calendar-dialog.glade.h:33
+msgid "Select a Calendar"
+msgstr "Pasirinkite kalendorių"
+
+#: ../data/glade/calendar-dialog.glade.h:34
+msgid "Edit Day Types"
+msgstr "Keisti dienų tipus"
+
+#: ../data/glade/calendar-dialog.glade.h:35
+msgid "Add Day Type"
+msgstr "Pridėti dienos tipą"
+
+#: ../data/glade/column-dialog.glade.h:1
 msgid "Hidden columns:"
 msgstr "Paslėpti stulpeliai:"
 
 #: ../data/glade/column-dialog.glade.h:3
-msgid "Visible columns:"
-msgstr "Rodomi stulpeliai:"
+msgid "_Show"
+msgstr "_Rodyti"
 
 #: ../data/glade/column-dialog.glade.h:4
 msgid "_Hide"
 msgstr "_Slėpti"
 
 #: ../data/glade/column-dialog.glade.h:5
-msgid "_Show"
-msgstr "_Rodyti"
+msgid "Visible columns:"
+msgstr "Rodomi stulpeliai:"
+
+#: ../data/glade/eds.glade.h:1
+msgid "dialog1"
+msgstr "dialogas1"
 
 #: ../data/glade/eds.glade.h:2
-msgid "Loading resource data"
-msgstr "Įkeliami resursų duomenys"
+msgid "Select group"
+msgstr "Pasirinkti grupę"
 
 #: ../data/glade/eds.glade.h:3
 msgid "Search"
 msgstr "Ieškoti"
 
-#: ../data/glade/eds.glade.h:4
+#: ../data/glade/eds.glade.h:5
 msgid "Select All"
 msgstr "Pasirinkti Visas"
-
-#: ../data/glade/eds.glade.h:5
-msgid "Select group"
-msgstr "Pasirinkti grupę"
 
 #: ../data/glade/eds.glade.h:6
 msgid "Unselect All"
 msgstr "Atšaukia pasirinkimą"
 
 #: ../data/glade/eds.glade.h:7
-msgid "dialog1"
-msgstr "dialogas1"
+msgid "Loading resource data"
+msgstr "Įkeliami resursų duomenys"
 
 #: ../data/glade/group-dialog.glade.h:1
 msgid "Group Editor"
 msgstr "Grupių redaktorius"
 
-#: ../data/glade/new-property.glade.h:2
+#: ../data/glade/new-property.glade.h:1
 msgid "Add Property"
 msgstr "Pridėti savybę"
 
@@ -237,154 +235,160 @@ msgid "_Description:"
 msgstr "_Aprašymas:"
 
 #: ../data/glade/new-property.glade.h:4
-msgid "_Label:"
-msgstr "_Žymė:"
-
-#: ../data/glade/new-property.glade.h:6
-#: ../data/glade/resource-dialog.glade.h:14
+#: ../data/glade/resource-dialog.glade.h:2
 msgid "_Type:"
 msgstr "_Tipas:"
 
+#: ../data/glade/new-property.glade.h:6
+msgid "_Label:"
+msgstr "_Žymė:"
+
 #: ../data/glade/project-properties.glade.h:1
-msgid "Custom"
-msgstr "Specialios"
-
-#: ../data/glade/project-properties.glade.h:2
-msgid "Edit Project Phases"
-msgstr "Keisti projekto fazes"
-
-#: ../data/glade/project-properties.glade.h:3
-#: ../data/glade/resource-dialog.glade.h:5 ../data/glade/task-dialog.glade.h:6
-msgid "General"
-msgstr "Bendros"
-
-#: ../data/glade/project-properties.glade.h:4
-msgid "New Project Phase"
-msgstr "Naujo projekto fazė"
-
-#: ../data/glade/project-properties.glade.h:5
 msgid "Project Properties"
 msgstr "Projekto Savybės"
 
-#: ../data/glade/project-properties.glade.h:6
-msgid "Select..."
-msgstr "Pasirinkti…"
+#: ../data/glade/project-properties.glade.h:3
+msgid "_Start:"
+msgstr "_Pradžia:"
 
-#: ../data/glade/project-properties.glade.h:7
-msgid "_Calendar:"
-msgstr "_Kalendorius:"
-
-#: ../data/glade/project-properties.glade.h:8
-msgid "_Manager:"
-msgstr "_Valdytojas:"
-
-#: ../data/glade/project-properties.glade.h:10
+#: ../data/glade/project-properties.glade.h:4
 msgid "_Organization:"
 msgstr "_Organizacija:"
 
-#: ../data/glade/project-properties.glade.h:11
+#: ../data/glade/project-properties.glade.h:5
+msgid "_Manager:"
+msgstr "_Valdytojas:"
+
+#: ../data/glade/project-properties.glade.h:6
+msgid "_Calendar:"
+msgstr "_Kalendorius:"
+
+#: ../data/glade/project-properties.glade.h:7
+msgid "Select..."
+msgstr "Pasirinkti…"
+
+#: ../data/glade/project-properties.glade.h:8
 msgid "_Phase:"
 msgstr "_Fazė:"
 
+#: ../data/glade/project-properties.glade.h:9
+#: ../data/glade/resource-dialog.glade.h:9
+#: ../data/glade/task-dialog.glade.h:14
+msgid "General"
+msgstr "Bendros"
+
+#: ../data/glade/project-properties.glade.h:10
+msgid "Custom"
+msgstr "Specialios"
+
+#: ../data/glade/project-properties.glade.h:11
+msgid "Edit Project Phases"
+msgstr "Keisti projekto fazes"
+
 #: ../data/glade/project-properties.glade.h:12
-msgid "_Start:"
-msgstr "_Pradžia:"
+msgid "New Project Phase"
+msgstr "Naujo projekto fazė"
 
 #: ../data/glade/property-dialog.glade.h:1
 msgid "Custom Properties"
 msgstr "Specialios savybės"
 
-#: ../data/glade/resource-dialog.glade.h:2
-msgid "C_ost:"
-msgstr "_Kaštai:"
-
 #: ../data/glade/resource-dialog.glade.h:3
-msgid "Calendar"
-msgstr "Kalendorius"
-
-#: ../data/glade/resource-dialog.glade.h:4
-msgid "Edit Calendars..."
-msgstr "Keisti kalendorius…"
-
-#: ../data/glade/resource-dialog.glade.h:6 ../data/glade/task-dialog.glade.h:7
-msgid "Notes"
-msgstr "Užrašai"
-
-#: ../data/glade/resource-dialog.glade.h:7
-msgid "Optional - overrides resource name in Gantt view."
-msgstr "Papildoma - pakeičia resurso pavadinimą Ganto diagramos peržiūroje."
-
-#: ../data/glade/resource-dialog.glade.h:8
-msgid ""
-"Select the calendar to use for this resource. If you want to use the default "
-"calendar of the project, select 'None'. "
-msgstr ""
-"Pasirinkite su šiuo resursu naudojamą kalendorių. Jei norite naudoti įprastą "
-"projekto kalendorių, pasirinkite „joks“ punktą. "
-
-#: ../data/glade/resource-dialog.glade.h:9
 #: ../data/glade/resource-input-dialog.glade.h:4
 msgid "_Email:"
 msgstr "_El. paštas:"
 
-#: ../data/glade/resource-dialog.glade.h:10
-#: ../data/glade/resource-input-dialog.glade.h:5
+#: ../data/glade/resource-dialog.glade.h:4
+#: ../data/glade/resource-input-dialog.glade.h:6
 msgid "_Group:"
 msgstr "_Grupė:"
 
-#: ../data/glade/resource-dialog.glade.h:11
-msgid "_Insert time stamp"
-msgstr "_Įterpti laiko žymę"
+#: ../data/glade/resource-dialog.glade.h:5
+msgid "C_ost:"
+msgstr "_Kaštai:"
 
-#: ../data/glade/resource-dialog.glade.h:13
-#: ../data/glade/resource-input-dialog.glade.h:8
+#: ../data/glade/resource-dialog.glade.h:7
+#: ../data/glade/resource-input-dialog.glade.h:7
 msgid "_Short name:"
 msgstr "_Trumpas vardas:"
 
-#: ../data/glade/resource-input-dialog.glade.h:2
+#: ../data/glade/resource-dialog.glade.h:8
+#: ../data/glade/resource-input-dialog.glade.h:8
+msgid "Optional - overrides resource name in Gantt view."
+msgstr "Papildoma - pakeičia resurso pavadinimą Ganto diagramos peržiūroje."
+
+#: ../data/glade/resource-dialog.glade.h:10
+msgid "Select the calendar to use for this resource. If you want to use the default calendar of the project, select 'None'. "
+msgstr "Pasirinkite su šiuo resursu naudojamą kalendorių. Jei norite naudoti įprastą projekto kalendorių, pasirinkite „joks“ punktą. "
+
+#: ../data/glade/resource-dialog.glade.h:11
+msgid "Edit Calendars..."
+msgstr "Keisti kalendorius…"
+
+#: ../data/glade/resource-dialog.glade.h:12
+msgid "Calendar"
+msgstr "Kalendorius"
+
+#: ../data/glade/resource-dialog.glade.h:13
+msgid "_Insert time stamp"
+msgstr "_Įterpti laiko žymę"
+
+#: ../data/glade/resource-dialog.glade.h:14
+#: ../data/glade/task-dialog.glade.h:18
+msgid "Notes"
+msgstr "Užrašai"
+
+#: ../data/glade/resource-input-dialog.glade.h:1
 msgid "Insert Resource"
 msgstr "Įterpti resursą"
 
-#: ../data/glade/resource-input-dialog.glade.h:3
-msgid "Optional - overrides resource name in gantt view."
-msgstr "Papildoma - pakeičia resurso pavadinimą Ganto diagramos peržiūroje."
-
-#: ../data/glade/resource-input-dialog.glade.h:6
-#: ../data/glade/task-input-dialog.glade.h:3
+#: ../data/glade/resource-input-dialog.glade.h:2
+#: ../data/glade/task-input-dialog.glade.h:2
 msgid "_Insert"
 msgstr "Įterpt_i"
 
-#: ../data/glade/sql.glade.h:2
+#: ../data/glade/sql.glade.h:1
 msgid "Open Database"
 msgstr "Atverti duomenų bazę"
 
-#: ../data/glade/sql.glade.h:3
-msgid "Select a Project"
-msgstr "Pasirinkite projektą"
-
-#: ../data/glade/sql.glade.h:4
-msgid "The database contains the following projects. Select a project to open:"
-msgstr ""
-"Duomenų bazė saugo žemiau nurodytus projektus. Pasirinkite atidaromą "
-"projektą:"
-
-#: ../data/glade/sql.glade.h:5
-msgid "_Database:"
-msgstr "_Duomenų bazė:"
-
-#: ../data/glade/sql.glade.h:6
-msgid "_Password:"
-msgstr "_Slaptažodis:"
-
-#: ../data/glade/sql.glade.h:7
+#: ../data/glade/sql.glade.h:2
 msgid "_Server:"
 msgstr "_Serveris:"
 
-#: ../data/glade/sql.glade.h:8
+#: ../data/glade/sql.glade.h:3
 msgid "_Username:"
 msgstr "_Naudotojo vardas:"
 
+#: ../data/glade/sql.glade.h:4
+msgid "_Password:"
+msgstr "_Slaptažodis:"
+
+#: ../data/glade/sql.glade.h:6
+msgid "_Database:"
+msgstr "_Duomenų bazė:"
+
+#: ../data/glade/sql.glade.h:7
+msgid "Select a Project"
+msgstr "Pasirinkite projektą"
+
+#: ../data/glade/sql.glade.h:8
+msgid "The database contains the following projects. Select a project to open:"
+msgstr "Duomenų bazė saugo žemiau nurodytus projektus. Pasirinkite atidaromą projektą:"
+
 #: ../data/glade/task-date-widget.glade.h:1
+msgid "window"
+msgstr "langas"
+
+#. The verb "schedule".
+#. This is the verb "schedule"
+#. I18n: the verb "schedule" here.
+#: ../data/glade/task-date-widget.glade.h:3
+#: ../data/glade/task-dialog.glade.h:13
+#: ../src/planner-cell-renderer-date.c:139
+msgid "Schedule:"
+msgstr "Tvarkaraštis:"
+
+#: ../data/glade/task-date-widget.glade.h:4
 msgid ""
 "As soon as possible\n"
 "No earlier than\n"
@@ -394,162 +398,158 @@ msgstr ""
 "Ne anksčiau kaip\n"
 "Nustatytą dieną"
 
-#: ../data/glade/task-date-widget.glade.h:4
-#: ../src/planner-cell-renderer-date.c:182
-#: ../src/planner-project-properties.c:747
-msgid "Cancel"
-msgstr "Atšaukti"
-
-#. The verb "schedule".
-#. This is the verb "schedule"
-#. I18n: the verb "schedule" here.
-#: ../data/glade/task-date-widget.glade.h:6
-#: ../data/glade/task-dialog.glade.h:11
-#: ../src/planner-cell-renderer-date.c:154
-msgid "Schedule:"
-msgstr "Tvarkaraštis:"
-
 #: ../data/glade/task-date-widget.glade.h:7
-#: ../src/planner-cell-renderer-date.c:189
-msgid "Select"
-msgstr "Pasirinkti"
-
-#: ../data/glade/task-date-widget.glade.h:8
-#: ../src/planner-cell-renderer-date.c:176
+#: ../src/planner-cell-renderer-date.c:161
 #: ../src/planner-project-properties.c:740
 msgid "Today"
 msgstr "Šiandien"
 
-#: ../data/glade/task-date-widget.glade.h:9
-msgid "window"
-msgstr "langas"
+#: ../data/glade/task-date-widget.glade.h:8
+#: ../src/planner-cell-renderer-date.c:167
+#: ../src/planner-project-properties.c:747
+msgid "Cancel"
+msgstr "Atšaukti"
 
-#: ../data/glade/task-dialog.glade.h:1
-msgid "  "
-msgstr "‥"
+#: ../data/glade/task-date-widget.glade.h:9
+#: ../src/planner-cell-renderer-date.c:174
+msgid "Select"
+msgstr "Pasirinkti"
+
+#: ../data/glade/task-dialog.glade.h:2
+#: ../data/glade/task-input-dialog.glade.h:4
+msgid "_Work:"
+msgstr "_Darbas:"
+
+#: ../data/glade/task-dialog.glade.h:3
+msgid "_Duration:"
+msgstr "_Trukmė:"
 
 #: ../data/glade/task-dialog.glade.h:4
+msgid "C_omplete:"
+msgstr "_Užbaigta:"
+
+#: ../data/glade/task-dialog.glade.h:5
+msgid "_Priority:"
+msgstr "_Prioritetas:"
+
+#: ../data/glade/task-dialog.glade.h:7
 #, no-c-format
 msgid "%"
 msgstr "%"
 
-#: ../data/glade/task-dialog.glade.h:5
-msgid "C_omplete:"
-msgstr "_Užbaigta:"
-
 #: ../data/glade/task-dialog.glade.h:8
-msgid "Predecessors"
-msgstr "Pirmtakai"
+msgid "  "
+msgstr "‥"
 
-#: ../data/glade/task-dialog.glade.h:9 ../src/planner-resource-view.c:417
-msgid "Resources"
-msgstr "Resursai"
-
-#: ../data/glade/task-dialog.glade.h:12
-msgid "_Duration:"
-msgstr "_Trukmė:"
-
-#: ../data/glade/task-dialog.glade.h:13
-msgid "_Fixed duration"
-msgstr "_Fiksuotos trukmės"
-
-#: ../data/glade/task-dialog.glade.h:14
-msgid "_Insert Time Stamp"
-msgstr "_Įterpti laiko žymę"
-
-#: ../data/glade/task-dialog.glade.h:15
+#: ../data/glade/task-dialog.glade.h:10
 msgid "_Milestone"
 msgstr "_Tikslas"
 
+#: ../data/glade/task-dialog.glade.h:11
+msgid "_Fixed duration"
+msgstr "_Fiksuotos trukmės"
+
+#: ../data/glade/task-dialog.glade.h:15
+#: ../src/planner-resource-view.c:457
+msgid "Resources"
+msgstr "Resursai"
+
+#: ../data/glade/task-dialog.glade.h:16
+msgid "Predecessors"
+msgstr "Pirmtakai"
+
 #: ../data/glade/task-dialog.glade.h:17
-msgid "_Priority:"
-msgstr "_Prioritetas:"
+msgid "_Insert Time Stamp"
+msgstr "_Įterpti laiko žymę"
 
-#: ../data/glade/task-dialog.glade.h:18
-#: ../data/glade/task-input-dialog.glade.h:5
-msgid "_Work:"
-msgstr "_Darbas:"
-
-#: ../data/glade/task-input-dialog.glade.h:2
+#: ../data/glade/task-input-dialog.glade.h:1
 msgid "Insert Task"
 msgstr "Įterpti užduotį"
 
 #: ../data/mime/planner.keys.in.h:1
-msgid "Documents/Project Management"
-msgstr "Dokumentai/Projektų valdymas"
-
-#: ../data/mime/planner.keys.in.h:2
 msgid "Project Plan"
 msgstr "Projekto planas"
+
+#: ../data/mime/planner.keys.in.h:2
+msgid "Documents/Project Management"
+msgstr "Dokumentai/Projektų valdymas"
 
 #: ../data/mime/planner.xml.in.h:1
 msgid "Planner project plan"
 msgstr "Planner projektų planas"
 
 #: ../data/planner.desktop.in.in.h:1
-msgid "Planner Project Management"
-msgstr "Planner projektų valdymas"
+#| msgid "Planner Files"
+msgid "Planner"
+msgstr "Planner"
 
 #: ../data/planner.desktop.in.in.h:2
 msgid "Project Management"
 msgstr "Projektų valdymas"
 
-#: ../data/planner.schemas.in.h:1
-msgid "Display nonstandard days in Gantt view"
-msgstr "Rodyti nestandartines dienas Ganto diagramos peržiūroje"
+#: ../data/planner.desktop.in.in.h:3
+msgid "Planner Project Management"
+msgstr "Planner projektų valdymas"
 
-#: ../data/planner.schemas.in.h:2
+#: ../data/planner.desktop.in.in.h:4
+msgid "Handle the tasks, resources, and cost of your projects"
+msgstr "Tvarkykite projektų užduotis, resursus ir kaštus"
+
+#: ../data/planner.desktop.in.in.h:5
+msgid "Gantt;Chart;Critical path;Relationship;Dependency;WBS;"
+msgstr "Gantt;Diagrama;Kritinis kelias;Ryšys;Priklausomybė;"
+
+#: ../data/planner.schemas.in.h:1
 msgid "Highlight critical path in Gantt view"
 msgstr "Išskiria kritinį kelią Ganto diagramos peržiūroje"
 
+#: ../data/planner.schemas.in.h:2
+msgid "Whether to highlight the tasks along the cricital path in the Gantt view."
+msgstr "Nustato, ar Ganto diagramos peržiūroje yra išskiriamos kritinio kelio užduotys."
+
 #: ../data/planner.schemas.in.h:3
+msgid "Display nonstandard days in Gantt view"
+msgstr "Rodyti nestandartines dienas Ganto diagramos peržiūroje"
+
+#: ../data/planner.schemas.in.h:4
+msgid "Whether to display nonstandard days in the Gantt view."
+msgstr "Nustato, ar rodomos nestandartinės dienos Ganto peržiūroje."
+
+#: ../data/planner.schemas.in.h:5
 msgid "Highlight critical path in Task view"
 msgstr "Išskiria kritinį kelią užduoties peržiūroje"
 
-#: ../data/planner.schemas.in.h:4
-msgid "Print the Gantt view"
-msgstr "Spausdinti Ganto peržiūrą"
-
-#: ../data/planner.schemas.in.h:5
-msgid "Print the Resource view"
-msgstr "Spausdinti resursų peržiūrą"
-
 #: ../data/planner.schemas.in.h:6
-msgid "Print the Task view"
-msgstr "Spausdinti užduočių peržiūrą"
+msgid "Whether to highlight the tasks along the cricital path in the Task view."
+msgstr "Nustato, ar užduočių peržiūroje yra išskiriamos kritinio kelio užduotys."
 
 #: ../data/planner.schemas.in.h:7
-msgid "The active view"
-msgstr "Aktyvi peržiūra"
+msgid "Print the Gantt view"
+msgstr "Spausdinti Ganto peržiūrą"
 
 #: ../data/planner.schemas.in.h:8
 msgid "Whether printing of the Gantt view is enabled."
 msgstr "Nustato, ar galima spausdinti Ganto peržiūrą."
 
 #: ../data/planner.schemas.in.h:9
-msgid "Whether printing of the Resource view is enabled."
-msgstr "Nustato, ar įjungtas resursų peržiūros spausdinimas"
+msgid "Print the Task view"
+msgstr "Spausdinti užduočių peržiūrą"
 
 #: ../data/planner.schemas.in.h:10
 msgid "Whether printing of the Task view is enabled."
 msgstr "Nustato, ar įjungtas užduočių peržiūros spausdinimas."
 
 #: ../data/planner.schemas.in.h:11
-msgid "Whether to display nonstandard days in the Gantt view."
-msgstr "Nustato, ar rodomos nestandartinės dienos Ganto peržiūroje."
+msgid "Print the Resource view"
+msgstr "Spausdinti resursų peržiūrą"
 
 #: ../data/planner.schemas.in.h:12
-msgid ""
-"Whether to highlight the tasks along the cricital path in the Gantt view."
-msgstr ""
-"Nustato, ar Ganto diagramos peržiūroje yra išskiriamos kritinio kelio "
-"užduotys."
+msgid "Whether printing of the Resource view is enabled."
+msgstr "Nustato, ar įjungtas resursų peržiūros spausdinimas"
 
 #: ../data/planner.schemas.in.h:13
-msgid ""
-"Whether to highlight the tasks along the cricital path in the Task view."
-msgstr ""
-"Nustato, ar užduočių peržiūroje yra išskiriamos kritinio kelio užduotys."
+msgid "The active view"
+msgstr "Aktyvi peržiūra"
 
 #: ../data/planner.schemas.in.h:14
 msgid "Which view to display in the user interface."
@@ -560,52 +560,48 @@ msgid "Company:"
 msgstr "Kompanija:"
 
 #: ../data/stylesheets/localizable.xml.h:2
-msgid "Complete"
-msgstr "Užbaigta"
-
-#: ../data/stylesheets/localizable.xml.h:3
-msgid "Finish:"
-msgstr "Užbaigti:"
-
-#: ../data/stylesheets/localizable.xml.h:4
-msgid "Gantt Chart"
-msgstr "Ganto Diagrama"
-
-#: ../data/stylesheets/localizable.xml.h:5
 msgid "Manager:"
 msgstr "Valdytojas:"
 
+#: ../data/stylesheets/localizable.xml.h:3
+msgid "Start:"
+msgstr "Pradžia:"
+
+#: ../data/stylesheets/localizable.xml.h:4
+msgid "Finish:"
+msgstr "Užbaigti:"
+
+#: ../data/stylesheets/localizable.xml.h:5
+msgid "Report Date:"
+msgstr "Ataskaitos data:"
+
 #: ../data/stylesheets/localizable.xml.h:6
-msgid "Phase:"
-msgstr "Fazė:"
+msgid "Week"
+msgstr "Savaitė"
 
 #: ../data/stylesheets/localizable.xml.h:7
 msgid "Priority"
 msgstr "Prioritetas"
 
 #: ../data/stylesheets/localizable.xml.h:8
-msgid "Report Date:"
-msgstr "Ataskaitos data:"
+msgid "Complete"
+msgstr "Užbaigta"
 
 #: ../data/stylesheets/localizable.xml.h:9
-msgid "Start:"
-msgstr "Pradžia:"
-
-#: ../data/stylesheets/localizable.xml.h:10
 msgid "This file was generated by"
 msgstr "Šią bylą sugeneravo"
 
+#: ../data/stylesheets/localizable.xml.h:10
+msgid "Gantt Chart"
+msgstr "Ganto Diagrama"
+
 #: ../data/stylesheets/localizable.xml.h:11
-msgid "Unnamed Project"
-msgstr "Neįvardintas projektas"
+msgid "Phase:"
+msgstr "Fazė:"
 
 #: ../data/stylesheets/localizable.xml.h:12
-msgid "Week"
-msgstr "Savaitė"
-
-#: ../libegg/recent-files/egg-recent-vfs-utils.c:90
-msgid " (invalid Unicode)"
-msgstr " (klaidingas Unikodas)"
+msgid "Unnamed Project"
+msgstr "Neįvardintas projektas"
 
 #: ../libplanner/mrp-day.c:54
 msgid "Working"
@@ -631,46 +627,55 @@ msgstr "Naudoti bazinę"
 msgid "Use day from base calendar"
 msgstr "Naudoti dieną iš bazinio kalendoriaus"
 
-#: ../libplanner/mrp-file-module.c:121
+#: ../libplanner/mrp-file-module.c:125
+#, c-format
 msgid "This format does not support reading"
 msgstr "Šis formatas nepalaiko skaitymo"
 
-#: ../libplanner/mrp-parser.c:1064 ../libplanner/mrp-parser.c:1159
+#: ../libplanner/mrp-parser.c:1062
+#: ../libplanner/mrp-parser.c:1157
+#, c-format
 msgid "Could not create XML tree"
 msgstr "Nepavyko sukurti XML medžio"
 
-#: ../libplanner/mrp-parser.c:1125
+#: ../libplanner/mrp-parser.c:1123
+#, c-format
 msgid "Could not write XML file"
 msgstr "Nepavyko įrašyti XML bylos"
 
-#: ../libplanner/mrp-project.c:437 ../src/planner-group-dialog.c:846
+#: ../libplanner/mrp-project.c:437
+#: ../src/planner-group-dialog.c:842
 msgid "Default"
 msgstr "Įprastas"
 
-#: ../libplanner/mrp-project.c:716
+#: ../libplanner/mrp-project.c:715
 #, c-format
 msgid "Invalid URI: '%s'"
 msgstr "Klaidingas URI: „%s“"
 
-#: ../libplanner/mrp-project.c:759
+#: ../libplanner/mrp-project.c:758
 #, c-format
 msgid "Couldn't find a suitable file module for loading '%s'"
 msgstr "Nepavyko rasti „%s“ įkėlimui tinkamo bylos modulio"
 
-#: ../libplanner/mrp-project.c:780 ../libplanner/mrp-project.c:1064
+#: ../libplanner/mrp-project.c:779
+#: ../libplanner/mrp-project.c:1063
+#, c-format
 msgid "No support for SQL storage built into this version of Planner."
 msgstr "SQL palaikymas šioje Planner versijoje neįjungtas."
 
-#: ../libplanner/mrp-project.c:817
+#: ../libplanner/mrp-project.c:816
+#, c-format
 msgid "Invalid URI."
 msgstr "Klaidingas URI."
 
-#: ../libplanner/mrp-project.c:958
+#: ../libplanner/mrp-project.c:957
 #, c-format
 msgid "Unable to find file writer identified by '%s'"
 msgstr "Nepavyko aptikti bylų rašyklės identifikuojamos pagal „%s“"
 
-#: ../libplanner/mrp-project.c:1021
+#: ../libplanner/mrp-project.c:1020
+#, c-format
 msgid "Couldn't find a suitable file module for loading project"
 msgstr "Nepavyko rasti projekto įkėlimui tinkamo bylos modulio"
 
@@ -694,35 +699,46 @@ msgstr "Skaičius su kableliu"
 msgid "Date"
 msgstr "Data"
 
-#: ../libplanner/mrp-property.c:375 ../src/planner-gantt-view.c:593
-#: ../src/planner-task-view.c:340
+#: ../libplanner/mrp-property.c:375
+#: ../src/planner-gantt-view.c:628
+#: ../src/planner-task-view.c:371
 msgid "Duration"
 msgstr "Trukmė"
 
-#: ../libplanner/mrp-property.c:377 ../src/planner-gantt-view.c:595
-#: ../src/planner-resource-view.c:1314 ../src/planner-task-view.c:342
+#: ../libplanner/mrp-property.c:377
+#: ../src/planner-gantt-view.c:630
+#: ../src/planner-resource-view.c:1343
+#: ../src/planner-task-view.c:373
 msgid "Cost"
 msgstr "Kaštai"
 
-#: ../libplanner/mrp-property.c:380 ../src/planner-project-properties.c:882
+#: ../libplanner/mrp-property.c:380
+#: ../src/planner-project-properties.c:882
 msgid "None"
 msgstr "Jokia"
 
-#: ../libplanner/mrp-sql.c:214 ../libplanner/mrp-sql.c:228
+#: ../libplanner/mrp-sql.c:280
+#: ../src/planner-sql-plugin.c:152
 msgid "Can't connect to database server"
 msgstr "Nepavyko prisijungti prie duomenų bazės serverio"
 
+#: ../libplanner/mrp-sql.c:285
+#: ../src/planner-sql-plugin.c:157
+msgid "No errors reported."
+msgstr "Neaptikta jokių klaidų."
+
 #. Give up.
-#: ../libplanner/mrp-sql.c:319 ../src/planner-sql-plugin.c:220
+#: ../libplanner/mrp-sql.c:374
+#: ../src/planner-sql-plugin.c:226
 msgid "Invalid Unicode"
 msgstr "Klaidingas Unicode simbolis"
 
-#: ../libplanner/mrp-sql.c:2213
+#: ../libplanner/mrp-sql.c:2258
 #, c-format
 msgid "Connection to database '%s' failed.\n"
 msgstr "Nepavyko prisijungti prie duomenų bazės „%s“.\n"
 
-#: ../libplanner/mrp-sql.c:2218
+#: ../libplanner/mrp-sql.c:2263
 #, c-format
 msgid ""
 "Connection to database '%s' failed.\n"
@@ -731,83 +747,74 @@ msgstr ""
 "Nepavyko prisijungti prie duomenų bazės „%s“.\n"
 "%s"
 
-#: ../libplanner/mrp-sql.c:2226
+#: ../libplanner/mrp-sql.c:2272
+#: ../libplanner/mrp-sql.c:3711
+msgid "Failed to create a dictionary for the database connection.\n"
+msgstr "Nepavyko sukurti žodyno duomenų bazės ryšiui.\n"
+
+#: ../libplanner/mrp-sql.c:2286
 #, c-format
 msgid "BEGIN command failed %s."
 msgstr "BEGIN komandos klaida %s."
 
-#: ../libplanner/mrp-sql.c:2394
+#: ../libplanner/mrp-sql.c:2455
 #, c-format
-msgid ""
-"The project '%s' has been changed by the user '%s' since you opened it. Do "
-"you want to save anyway?"
-msgstr ""
-"Naudotojas „%2$s“ pakeitė projektą „%1$s“ po to, kai jį atidarėte. Ar norite "
-"išsaugoti savo pakeitimus?"
+msgid "The project '%s' has been changed by the user '%s' since you opened it. Do you want to save anyway?"
+msgstr "Naudotojas „%2$s“ pakeitė projektą „%1$s“ po to, kai jį atidarėte. Ar norite išsaugoti savo pakeitimus?"
 
-#: ../libplanner/mrp-sql.c:3674
+#: ../libplanner/mrp-sql.c:3704
 #, c-format
 msgid "Connection to database '%s' failed."
 msgstr "Nepavyko prisijungti prie duomenų bazės „%s“."
 
-#: ../libplanner/mrp-storage-sql.c:205
+#: ../libplanner/mrp-storage-sql.c:206
+#, c-format
 msgid "Invalid SQL URI (must start with 'sql://' and contain '#')."
-msgstr ""
-"Klaidingas SQL URI (adresas privalo prasidėti „sql://“ ir jame turi būti "
-"„#“)."
+msgstr "Klaidingas SQL URI (adresas privalo prasidėti „sql://“ ir jame turi būti „#“)."
 
-#: ../libplanner/mrp-storage-sql.c:274
+#: ../libplanner/mrp-storage-sql.c:275
+#, c-format
 msgid "Invalid SQL URI (invalid project id)."
 msgstr "Klaidingas SQL URI (klaidingas projekto id)."
 
-#: ../libplanner/mrp-storage-sql.c:282
+#: ../libplanner/mrp-storage-sql.c:283
+#, c-format
 msgid "Invalid SQL URI (no database name specified)."
 msgstr "Klaidingas SQL URI (nenurodytas duomenų bazės vardas)."
 
-#: ../libplanner/mrp-task.c:1070
-msgid ""
-"Could not add a predecessor relation, because the tasks are already related."
+#: ../libplanner/mrp-task.c:1068
+#, c-format
+msgid "Could not add a predecessor relation, because the tasks are already related."
 msgstr "Negalima sukurti pirminio ryšio, nes užduotys jau yra susietos."
 
-#: ../libplanner/mrp-task.c:1081
+#: ../libplanner/mrp-task.c:1079
 msgid "Start to Finish relation type cannot be combined with other relations."
-msgstr ""
-"„Startas pabaigoje“ ryšys negali būti naudojamas kartu su kitais ryšiais."
+msgstr "„Startas pabaigoje“ ryšys negali būti naudojamas kartu su kitais ryšiais."
 
-#: ../libplanner/mrp-task.c:1083
+#: ../libplanner/mrp-task.c:1081
 msgid "Finish to Finish relation type cannot be combined with other relations."
-msgstr ""
-"„Pabaiga pabaigoje“ ryšys negali būti naudojamas kartu su kitais ryšiais."
+msgstr "„Pabaiga pabaigoje“ ryšys negali būti naudojamas kartu su kitais ryšiais."
 
-#: ../libplanner/mrp-task.c:1099
-msgid ""
-"Start to Finish relation type cannot be combined with Start No Earlier Than "
-"constraint."
-msgstr ""
-"„Startas pabaigoje“ ryšys negali būti naudojamas kartu su „Ne anksčiau kaip“ "
-"pradžios apribojimu."
+#: ../libplanner/mrp-task.c:1098
+msgid "Start to Finish relation type cannot be combined with Start No Earlier Than constraint."
+msgstr "„Startas pabaigoje“ ryšys negali būti naudojamas kartu su „Ne anksčiau kaip“ pradžios apribojimu."
 
-#: ../libplanner/mrp-task.c:1101
-msgid ""
-"Finish to Finish relation type cannot be combined with Start No Earlier Than "
-"constraint."
-msgstr ""
-"„Pabaiga pabaigoje“ ryšys negali būti naudojamas kartu su „Ne anksčiau kaip“ "
-"pradžios apribojimu."
+#: ../libplanner/mrp-task.c:1100
+msgid "Finish to Finish relation type cannot be combined with Start No Earlier Than constraint."
+msgstr "„Pabaiga pabaigoje“ ryšys negali būti naudojamas kartu su „Ne anksčiau kaip“ pradžios apribojimu."
 
 #: ../libplanner/mrp-task.c:1124
-msgid ""
-"Start to Finish relation cannot be set. Predecessor starts on project start "
-"date."
-msgstr ""
-"„Pradžia pabaigoje“ ryšys negali būti nustatytas. Pirminė užduotis prasideda "
-"projekto pradžios dieną."
+#, c-format
+msgid "Start to Finish relation cannot be set. Predecessor starts on project start date."
+msgstr "„Pradžia pabaigoje“ ryšys negali būti nustatytas. Pirminė užduotis prasideda projekto pradžios dieną."
 
-#: ../libplanner/mrp-task-manager.c:2527
+#: ../libplanner/mrp-task-manager.c:2603
+#, c-format
 msgid "Cannot add a predecessor, because it would result in a loop."
 msgstr "Negalima pridėti pirmtako, nes tai sukurtų ciklinę priklausomybę."
 
-#: ../libplanner/mrp-task-manager.c:2573
+#: ../libplanner/mrp-task-manager.c:2647
+#, c-format
 msgid "Cannot move the task, because it would result in a loop."
 msgstr "Negalima perkelti užduoties, nes tai sukurtų ciklinę priklausomybę."
 
@@ -816,43 +823,47 @@ msgstr "Negalima perkelti užduoties, nes tai sukurtų ciklinę priklausomybę."
 msgid "%B %e, %Y"
 msgstr "%B %e, %Y"
 
-#: ../libplanner/mrp-xsl.c:157 ../libplanner/mrp-xsl.c:205
+#: ../libplanner/mrp-xsl.c:157
+#: ../libplanner/mrp-xsl.c:205
+#, c-format
 msgid "Export to HTML failed"
 msgstr "Nepavyko eksportuoti į HTML"
 
-#: ../src/planner-application.c:55 ../src/planner-application.c:111
+#: ../src/planner-application.c:54
+#: ../src/planner-application.c:110
 msgid "Insert"
 msgstr "Įterpti"
 
-#: ../src/planner-application.c:62 ../src/planner-application.c:118
+#: ../src/planner-application.c:61
+#: ../src/planner-application.c:117
 msgid "Remove"
 msgstr "Pašalinti"
 
-#: ../src/planner-application.c:69
+#: ../src/planner-application.c:68
 msgid "Unlink"
 msgstr "Atsieti"
 
-#: ../src/planner-application.c:76
+#: ../src/planner-application.c:75
 msgid "Link"
 msgstr "Sąsaja"
 
-#: ../src/planner-application.c:83
+#: ../src/planner-application.c:82
 msgid "Indent"
 msgstr "Atitraukti"
 
-#: ../src/planner-application.c:90
+#: ../src/planner-application.c:89
 msgid "Unindent"
 msgstr "Pritraukti"
 
-#: ../src/planner-application.c:97
+#: ../src/planner-application.c:96
 msgid "Move up"
 msgstr "Perkelti aukštyn"
 
-#: ../src/planner-application.c:104
+#: ../src/planner-application.c:103
 msgid "Move down"
 msgstr "Perkelti žemyn"
 
-#: ../src/planner-application.c:125
+#: ../src/planner-application.c:124
 msgid "Edit"
 msgstr "Keisti"
 
@@ -868,15 +879,16 @@ msgstr "Pašalinti kalendorių"
 msgid "Add new calendar"
 msgstr "Pridėti naują kalendorių"
 
-#: ../src/planner-cell-renderer-date.c:161 ../src/planner-task-dialog.c:1491
+#: ../src/planner-cell-renderer-date.c:146
+#: ../src/planner-task-dialog.c:1485
 msgid "As soon as possible"
 msgstr "Kaip įmanoma greičiau"
 
-#: ../src/planner-cell-renderer-date.c:162
+#: ../src/planner-cell-renderer-date.c:147
 msgid "No earlier than"
 msgstr "Ne anksčiau kaip"
 
-#: ../src/planner-cell-renderer-date.c:163
+#: ../src/planner-cell-renderer-date.c:148
 msgid "On fixed date"
 msgstr "Nustatytą dieną"
 
@@ -945,345 +957,405 @@ msgstr "Nėra darbo laiko"
 msgid "%H:%M"
 msgstr "%H:%M"
 
-#: ../src/planner-default-week-dialog.c:553
+#: ../src/planner-default-week-dialog.c:555
 msgid "Edit default week"
 msgstr "Nustatyti įprastą savaitę"
 
-#: ../src/planner-eds-plugin.c:167
+#: ../src/planner-eds-plugin.c:155
 msgid "EDS"
 msgstr "EDS"
 
-#: ../src/planner-eds-plugin.c:168
+#: ../src/planner-eds-plugin.c:156
 msgid "Import resources from Evolution Data Server"
 msgstr "Įkelti resursus iš Evolution duomenų serverio"
 
-#: ../src/planner-eds-plugin.c:396 ../src/planner-gantt-print.c:190
-#: ../src/planner-gantt-view.c:589 ../src/planner-group-dialog.c:822
-#: ../src/planner-property-dialog.c:485 ../src/planner-resource-view.c:1171
-#: ../src/planner-task-dialog.c:2616 ../src/planner-task-dialog.c:2690
-#: ../src/planner-task-view.c:336
+#: ../src/planner-eds-plugin.c:384
+#: ../src/planner-gantt-print.c:191
+#: ../src/planner-gantt-view.c:624
+#: ../src/planner-group-dialog.c:818
+#: ../src/planner-property-dialog.c:475
+#: ../src/planner-resource-view.c:1200
+#: ../src/planner-task-dialog.c:2605
+#: ../src/planner-task-dialog.c:2679
+#: ../src/planner-task-view.c:367
 msgid "Name"
 msgstr "Vardas"
 
-#: ../src/planner-eds-plugin.c:416 ../src/planner-resource-view.c:1287
+#: ../src/planner-eds-plugin.c:404
+#: ../src/planner-resource-view.c:1316
 msgid "Email"
 msgstr "El.paštas"
 
-#: ../src/planner-eds-plugin.c:437
+#: ../src/planner-eds-plugin.c:425
 msgid "Import"
 msgstr "Importas"
 
-#: ../src/planner-eds-plugin.c:447
+#: ../src/planner-eds-plugin.c:435
 msgid "Photo"
 msgstr "Foto"
 
-#: ../src/planner-eds-plugin.c:676
+#: ../src/planner-eds-plugin.c:664
 msgid "Imported from Evolution Data Server"
 msgstr "Įkelta·iš·Evolution·duomenų·serverio"
 
-#: ../src/planner-eds-plugin.c:677
+#: ../src/planner-eds-plugin.c:665
 msgid "Updated from Evolution Data Server"
 msgstr "Atnaujinta iš Evolution duomenų serverio"
 
-#: ../src/planner-eds-plugin.c:862
+#: ../src/planner-eds-plugin.c:850
 msgid "Query cancelled."
 msgstr "Užklausa atšaukta."
 
-#: ../src/planner-eds-plugin.c:923
+#: ../src/planner-eds-plugin.c:911
 msgid "Evolution Data Server UID"
 msgstr "Evolution duomenų serverio UID"
 
-#: ../src/planner-eds-plugin.c:924
+#: ../src/planner-eds-plugin.c:912
 msgid "Identifier used by Evolution Data Server for resources"
 msgstr "Resursų identifikatorius naudojamas Evolution duomenų serveryje"
 
-#: ../src/planner-format.c:149
+#: ../src/planner-format.c:153
 #, c-format
 msgid "%dd %dh"
 msgstr "%dd %dv"
 
-#: ../src/planner-format.c:152
+#: ../src/planner-format.c:156
 #, c-format
 msgid "%dd"
 msgstr "%dd"
 
-#: ../src/planner-format.c:155
+#: ../src/planner-format.c:161
+#, c-format
+#| msgid "%dd %dh"
+msgid "%dh %dmin"
+msgstr "%dh %dmin"
+
+#: ../src/planner-format.c:164
 #, c-format
 msgid "%dh"
 msgstr "%dv"
+
+#: ../src/planner-format.c:168
+#, c-format
+#| msgid "min"
+msgid "%dmin"
+msgstr "%dmin"
 
 #. i18n: this string is the date nr and month name, displayed
 #. * e.g. in the date cells in the task tree. See
 #. * libmrproject/docs/DateFormat.
 #.
-#: ../src/planner-format.c:190
+#: ../src/planner-format.c:203
 msgid "%b %e"
 msgstr "%b %e"
 
-#: ../src/planner-format.c:374
+#: ../src/planner-format.c:387
 msgid "mon"
 msgstr "mėn"
 
 #. month unit variant accepted in input
-#: ../src/planner-format.c:375
+#: ../src/planner-format.c:388
 msgid "month"
 msgstr "mėnuo"
 
 #. month unit variant accepted in input
-#: ../src/planner-format.c:376
+#: ../src/planner-format.c:389
 msgid "months"
 msgstr "mėnesiai"
 
 #. month unit variant accepted in input
-#: ../src/planner-format.c:377
+#: ../src/planner-format.c:390
 msgid "w"
 msgstr "s"
 
 #. week unit variant accepted in input
-#: ../src/planner-format.c:378
+#: ../src/planner-format.c:391
 msgid "week"
 msgstr "savaitė"
 
 #. week unit variant accepted in input
-#: ../src/planner-format.c:379
+#: ../src/planner-format.c:392
 msgid "weeks"
 msgstr "savaitės"
 
 #. week unit variant accepted in input
-#: ../src/planner-format.c:380
+#: ../src/planner-format.c:393
 msgid "d"
 msgstr "d"
 
 #. day unit variant accepted in input
-#: ../src/planner-format.c:381
+#: ../src/planner-format.c:394
 msgid "day"
 msgstr "diena"
 
 #. day unit variant accepted in input
-#: ../src/planner-format.c:382
+#: ../src/planner-format.c:395
 msgid "days"
 msgstr "dienos"
 
 #. day unit variant accepted in input
-#: ../src/planner-format.c:383
+#: ../src/planner-format.c:396
 msgid "h"
 msgstr "v"
 
 #. hour unit variant accepted in input
-#: ../src/planner-format.c:384
+#: ../src/planner-format.c:397
 msgid "hour"
 msgstr "valanda"
 
 #. hour unit variant accepted in input
-#: ../src/planner-format.c:385
+#: ../src/planner-format.c:398
 msgid "hours"
 msgstr "valandos"
 
 #. hour unit variant accepted in input
-#: ../src/planner-format.c:386
+#: ../src/planner-format.c:399
 msgid "min"
 msgstr "min"
 
 #. minute unit variant accepted in input
-#: ../src/planner-format.c:387
+#: ../src/planner-format.c:400
 msgid "minute"
 msgstr "minutė"
 
 #. minute unit variant accepted in input
-#: ../src/planner-format.c:388
+#: ../src/planner-format.c:401
 msgid "minutes"
 msgstr "minutės"
 
 #. i18n: project start, the date format is described in
 #. * libmrproject/docs/DateFormat.
-#: ../src/planner-gantt-background.c:644
+#: ../src/planner-gantt-background.c:643
 msgid "%Y %b %d"
 msgstr "%Y %b %d"
 
-#: ../src/planner-gantt-background.c:646
+#: ../src/planner-gantt-background.c:645
 msgid "Project start"
 msgstr "Projekto pradžia"
 
-#: ../src/planner-gantt-header.c:671
-msgid "%e %b %Y"
-msgstr "%e %b %Y"
+#: ../src/planner-gantt-header.c:659
+#| msgid "%e %b %Y"
+msgid "%a, %e %b %Y"
+msgstr "%a, %e %b %Y"
 
-#: ../src/planner-gantt-print.c:198 ../src/planner-gantt-view.c:592
-#: ../src/planner-resource-dialog.c:1850 ../src/planner-resource-view.c:750
-#: ../src/planner-resource-view.c:766 ../src/planner-resource-view.c:1736
-#: ../src/planner-task-view.c:339
+#: ../src/planner-gantt-print.c:199
+#: ../src/planner-gantt-view.c:627
+#: ../src/planner-resource-dialog.c:1836
+#: ../src/planner-resource-view.c:790
+#: ../src/planner-resource-view.c:806
+#: ../src/planner-resource-view.c:1760
+#: ../src/planner-task-view.c:370
 msgid "Work"
 msgstr "Darbas"
 
-#: ../src/planner-gantt-print.c:542 ../src/planner-gantt-row.c:752
-#: ../src/planner-html-plugin.c:125 ../src/planner-task-tree.c:1571
-#: ../src/planner-window.c:1988
+#: ../src/planner-gantt-print.c:546
+#: ../src/planner-gantt-row.c:771
+#: ../src/planner-html-plugin.c:120
+#: ../src/planner-task-tree.c:1584
+#: ../src/planner-window.c:1837
 msgid "Unnamed"
 msgstr "Neįvardinta"
 
-#: ../src/planner-gantt-row.c:2607 ../src/planner-gantt-row.c:2610
-msgid "No name"
-msgstr "Be vardo"
-
-#: ../src/planner-gantt-row.c:2613
-#, c-format
-msgid "Make task '%s' a predecessor of '%s'"
-msgstr "Nustatyti užduotį „%s“ kaip „%s“ pirmtakę"
-
-#: ../src/planner-gantt-row.c:2661
+#: ../src/planner-gantt-row.c:2350
 #, c-format
 msgid "Change work to %s"
 msgstr "Keisti darbą į %s"
 
-#: ../src/planner-gantt-row.c:3232 ../src/planner-task-dialog.c:455
-#: ../src/planner-task-tree.c:257 ../src/planner-task-tree.c:947
+#: ../src/planner-gantt-row.c:2366
+#, c-format
+msgid "Change progress to %u%% complete"
+msgstr "Keisti eigą į %u%% užbaigtą"
+
+#: ../src/planner-gantt-row.c:2405
+#: ../src/planner-gantt-row.c:2408
+msgid "No name"
+msgstr "Be vardo"
+
+#: ../src/planner-gantt-row.c:2411
+#, c-format
+msgid "Make task '%s' a predecessor of '%s'"
+msgstr "Nustatyti užduotį „%s“ kaip „%s“ pirmtakę"
+
+#: ../src/planner-gantt-row.c:3443
+#: ../src/planner-task-dialog.c:455
+#: ../src/planner-task-tree.c:259
+#: ../src/planner-task-tree.c:941
 msgid "Edit task property"
 msgstr "Keisti užduoties savybę"
 
-#: ../src/planner-gantt-view.c:133 ../src/planner-task-view.c:115
+#: ../src/planner-gantt-view.c:138
+#: ../src/planner-task-view.c:119
 msgid "_Insert Task"
 msgstr "Įterpt_i užduotį"
 
-#: ../src/planner-gantt-view.c:134 ../src/planner-task-view.c:116
+#: ../src/planner-gantt-view.c:139
+#: ../src/planner-task-view.c:120
 msgid "Insert a new task"
 msgstr "Įterpti naują užduotį"
 
-#: ../src/planner-gantt-view.c:136 ../src/planner-task-view.c:118
+#: ../src/planner-gantt-view.c:141
+#: ../src/planner-task-view.c:122
 msgid "In_sert Tasks..."
 msgstr "Įterpti _užduotis…"
 
-#: ../src/planner-gantt-view.c:139 ../src/planner-task-view.c:121
+#: ../src/planner-gantt-view.c:144
+#: ../src/planner-task-view.c:125
 msgid "_Remove Task"
 msgstr "Pa_šalinti užduotį"
 
-#: ../src/planner-gantt-view.c:140 ../src/planner-task-view.c:122
+#: ../src/planner-gantt-view.c:145
+#: ../src/planner-task-view.c:126
 msgid "Remove the selected tasks"
 msgstr "Pašalinti pasirinktas užduotis"
 
-#: ../src/planner-gantt-view.c:142
+#: ../src/planner-gantt-view.c:147
 msgid "_Edit Task Properties..."
 msgstr "K_eisti užduoties savybes…"
 
-#: ../src/planner-gantt-view.c:145 ../src/planner-resource-view.c:245
-#: ../src/planner-task-view.c:127
+#: ../src/planner-gantt-view.c:150
+#: ../src/planner-resource-view.c:248
+#: ../src/planner-task-view.c:131
 msgid "Select _All"
 msgstr "P_asirinkti Visas"
 
-#: ../src/planner-gantt-view.c:146 ../src/planner-resource-view.c:246
-#: ../src/planner-task-view.c:128
+#: ../src/planner-gantt-view.c:151
+#: ../src/planner-resource-view.c:249
+#: ../src/planner-task-view.c:132
 msgid "Select all tasks"
 msgstr "Pasirinkti visas užduotis"
 
-#: ../src/planner-gantt-view.c:148 ../src/planner-task-view.c:130
+#: ../src/planner-gantt-view.c:153
+#: ../src/planner-task-view.c:134
 msgid "_Unlink Task"
 msgstr "Atsieti _užduotį"
 
-#: ../src/planner-gantt-view.c:149 ../src/planner-task-view.c:131
+#: ../src/planner-gantt-view.c:154
+#: ../src/planner-task-view.c:135
 msgid "Unlink the selected tasks"
 msgstr "Atsieja pažymėtas užduotis"
 
-#: ../src/planner-gantt-view.c:151 ../src/planner-task-view.c:133
+#: ../src/planner-gantt-view.c:156
+#: ../src/planner-task-view.c:137
 msgid "_Link Tasks"
 msgstr "_Susieti užduotis"
 
-#: ../src/planner-gantt-view.c:152 ../src/planner-task-view.c:134
+#: ../src/planner-gantt-view.c:157
+#: ../src/planner-task-view.c:138
 msgid "Link the selected tasks"
 msgstr "Susieti pasirinktas užduotis"
 
-#: ../src/planner-gantt-view.c:154 ../src/planner-task-view.c:136
+#: ../src/planner-gantt-view.c:159
+#: ../src/planner-task-view.c:140
 msgid "I_ndent Task"
 msgstr "_Atitraukti užduotį"
 
-#: ../src/planner-gantt-view.c:155 ../src/planner-task-view.c:137
+#: ../src/planner-gantt-view.c:160
+#: ../src/planner-task-view.c:141
 msgid "Indent the selected tasks"
 msgstr "Atitraukia pažymėtas užduotis"
 
-#: ../src/planner-gantt-view.c:157 ../src/planner-task-view.c:139
+#: ../src/planner-gantt-view.c:162
+#: ../src/planner-task-view.c:143
 msgid "Unin_dent Task"
 msgstr "Pritraukti už_duotį"
 
-#: ../src/planner-gantt-view.c:158 ../src/planner-task-view.c:140
+#: ../src/planner-gantt-view.c:163
+#: ../src/planner-task-view.c:144
 msgid "Unindent the selected tasks"
 msgstr "Pritraukia pažymėtas užduotis"
 
-#: ../src/planner-gantt-view.c:160 ../src/planner-task-view.c:142
+#: ../src/planner-gantt-view.c:165
+#: ../src/planner-task-view.c:146
 msgid "Move Task _Up"
 msgstr "Perkelti _užduotį aukštyn"
 
-#: ../src/planner-gantt-view.c:161 ../src/planner-task-view.c:143
+#: ../src/planner-gantt-view.c:166
+#: ../src/planner-task-view.c:147
 msgid "Move the selected tasks upwards"
 msgstr "Perkelti pažymėtas užduotis aukštyn"
 
-#: ../src/planner-gantt-view.c:163 ../src/planner-task-view.c:145
+#: ../src/planner-gantt-view.c:168
+#: ../src/planner-task-view.c:149
 msgid "Move Task Do_wn"
 msgstr "Perkelti užduotį _žemyn"
 
-#: ../src/planner-gantt-view.c:164 ../src/planner-task-view.c:146
+#: ../src/planner-gantt-view.c:169
+#: ../src/planner-task-view.c:150
 msgid "Move the selected tasks downwards"
 msgstr "Perkelti pažymėtas užduotis žemyn"
 
-#: ../src/planner-gantt-view.c:166 ../src/planner-task-view.c:148
+#: ../src/planner-gantt-view.c:171
+#: ../src/planner-task-view.c:152
 msgid "Reset _Constraint"
 msgstr "_Atšaukti apribojimą"
 
-#: ../src/planner-gantt-view.c:169
+#: ../src/planner-gantt-view.c:174
 msgid "Zoom To _Fit"
 msgstr "_Priderinti prie lango"
 
-#: ../src/planner-gantt-view.c:170 ../src/planner-usage-view.c:112
+#: ../src/planner-gantt-view.c:175
+#: ../src/planner-usage-view.c:115
 msgid "Zoom to fit the entire project"
 msgstr "Priderina vaizdą prie lango dydžio"
 
-#: ../src/planner-gantt-view.c:172
+#: ../src/planner-gantt-view.c:177
 msgid "_Zoom In"
 msgstr "Pr_itraukti"
 
-#: ../src/planner-gantt-view.c:173 ../src/planner-usage-view.c:108
-#: ../src/planner-usage-view.c:109
+#: ../src/planner-gantt-view.c:178
+#: ../src/planner-usage-view.c:111
+#: ../src/planner-usage-view.c:112
 msgid "Zoom in"
 msgstr "Pritraukti"
 
-#: ../src/planner-gantt-view.c:175
+#: ../src/planner-gantt-view.c:180
 msgid "Zoom _Out"
 msgstr "_Atitraukti"
 
-#: ../src/planner-gantt-view.c:176 ../src/planner-usage-view.c:105
-#: ../src/planner-usage-view.c:106
+#: ../src/planner-gantt-view.c:181
+#: ../src/planner-usage-view.c:108
+#: ../src/planner-usage-view.c:109
 msgid "Zoom out"
 msgstr "Atitraukti"
 
-#: ../src/planner-gantt-view.c:178 ../src/planner-resource-view.c:251
-#: ../src/planner-task-view.c:154 ../src/planner-usage-view.c:114
+#: ../src/planner-gantt-view.c:183
+#: ../src/planner-resource-view.c:254
+#: ../src/planner-task-view.c:158
+#: ../src/planner-usage-view.c:117
 msgid "Edit _Visible Columns"
 msgstr "_Nustatyti rodomus stulpelius"
 
-#: ../src/planner-gantt-view.c:179 ../src/planner-resource-view.c:252
-#: ../src/planner-task-view.c:155 ../src/planner-usage-view.c:115
+#: ../src/planner-gantt-view.c:184
+#: ../src/planner-resource-view.c:255
+#: ../src/planner-task-view.c:159
+#: ../src/planner-usage-view.c:118
 msgid "Edit visible columns"
 msgstr "Nustato rodomus stulpelius"
 
-#: ../src/planner-gantt-view.c:184 ../src/planner-task-view.c:160
+#: ../src/planner-gantt-view.c:189
+#: ../src/planner-task-view.c:164
 msgid "_Highlight Critical Tasks"
 msgstr "_Išskirti kritines užduotis"
 
-#: ../src/planner-gantt-view.c:187
+#: ../src/planner-gantt-view.c:192
 msgid "_Show Guide Lines"
 msgstr "_Rodyti Tinklelį"
 
-#: ../src/planner-gantt-view.c:190 ../src/planner-task-view.c:162
+#: ../src/planner-gantt-view.c:195
+#: ../src/planner-task-view.c:166
 msgid "_Nonstandard Days"
 msgstr "_Nestandartinės dienos"
 
 #. i18n: Label used for the sidebar. Please try to make it short and use
 #. * a linebreak if necessary/possible.
 #.
-#: ../src/planner-gantt-view.c:344
+#: ../src/planner-gantt-view.c:379
 msgid "Gantt"
 msgstr ""
 "Ganto\n"
 "diagrama"
 
-#: ../src/planner-gantt-view.c:350
+#: ../src/planner-gantt-view.c:385
 msgid "_Gantt Chart"
 msgstr "_Ganto Diagrama"
 
@@ -1295,27 +1367,43 @@ msgstr "_Ganto Diagrama"
 #. * project management term. You might want to leave it
 #. * untranslated unless there is a localized term for it.
 #.
-#: ../src/planner-gantt-view.c:588 ../src/planner-task-view.c:335
+#: ../src/planner-gantt-view.c:623
+#: ../src/planner-task-view.c:366
 msgid "WBS"
 msgstr "DGS"
 
-#: ../src/planner-gantt-view.c:590 ../src/planner-task-view.c:337
+#: ../src/planner-gantt-view.c:625
+#: ../src/planner-task-view.c:368
 msgid "Start"
 msgstr "Pradžia"
 
-#: ../src/planner-gantt-view.c:591 ../src/planner-task-view.c:338
+#: ../src/planner-gantt-view.c:626
+#: ../src/planner-task-view.c:369
 msgid "Finish"
 msgstr "Pabaiga"
 
-#: ../src/planner-gantt-view.c:594 ../src/planner-task-view.c:341
+#: ../src/planner-gantt-view.c:629
+#: ../src/planner-task-view.c:372
 msgid "Slack"
 msgstr "Šiukšlės"
 
-#: ../src/planner-gantt-view.c:596 ../src/planner-task-view.c:343
+#: ../src/planner-gantt-view.c:631
+#: ../src/planner-task-view.c:374
 msgid "Assigned to"
 msgstr "Priskirta"
 
-#: ../src/planner-gantt-view.c:950
+#. i18n: The string "% Complete" will be used in the header
+#. * of a column containing values from 0 upto 100, indicating
+#. * what part of a task has been completed.
+#.
+#: ../src/planner-gantt-view.c:637
+#: ../src/planner-task-view.c:380
+#, no-c-format
+#| msgid "Complete"
+msgid "% Complete"
+msgstr "% užbaigta"
+
+#: ../src/planner-gantt-view.c:991
 msgid "Edit Gantt Columns"
 msgstr "Keisti Ganto Stulpelius"
 
@@ -1327,85 +1415,106 @@ msgstr "Įterpti grupę"
 msgid "Remove group"
 msgstr "Pašalinti grupę"
 
-#: ../src/planner-group-dialog.c:526
+#: ../src/planner-group-dialog.c:525
 msgid "Default group"
 msgstr "Įprasta grupė"
 
-#: ../src/planner-group-dialog.c:644
+#: ../src/planner-group-dialog.c:643
 msgid "Edit group property"
 msgstr "Keisti grupės savybę"
 
-#: ../src/planner-group-dialog.c:828
+#: ../src/planner-group-dialog.c:824
 msgid "Manager name"
 msgstr "Valdytojo vardas"
 
-#: ../src/planner-group-dialog.c:834
+#: ../src/planner-group-dialog.c:830
 msgid "Manager phone"
 msgstr "Valdytojo telefonas"
 
-#: ../src/planner-group-dialog.c:840
+#: ../src/planner-group-dialog.c:836
 msgid "Manager email"
 msgstr "Valdytojo el.paštas"
 
-#: ../src/planner-html-plugin.c:47
+#: ../src/planner-html-plugin.c:46
 msgid "HTML"
 msgstr "HTML"
 
-#: ../src/planner-html-plugin.c:48
+#: ../src/planner-html-plugin.c:47
 msgid "Export project to HTML"
 msgstr "Eksportuoti projektą į HTML"
 
-#: ../src/planner-html-plugin.c:82
+#: ../src/planner-html-plugin.c:79
 msgid "Could not export to HTML"
 msgstr "Nepavyko eksportuoti kaip HTML"
 
-#: ../src/planner-html-plugin.c:110
+#: ../src/planner-html-plugin.c:105
 msgid "Export to HTML"
 msgstr "Eksportuoti kaip HTML"
 
-#: ../src/planner-html-plugin.c:154
+#: ../src/planner-html-plugin.c:149
 msgid "Show result in browser"
 msgstr "Rodyti rezultatą naršyklėje"
 
-#: ../src/planner-html-plugin.c:173 ../src/planner-window.c:1697
+#: ../src/planner-html-plugin.c:168
+#: ../src/planner-window.c:1564
 #: ../src/planner-xml-planner-plugin.c:124
 #, c-format
 msgid "File \"%s\" exists, do you want to overwrite it?"
 msgstr "Jau yra byla „%s“. Ar norite ją perrašyti?"
 
-#: ../src/planner-main.c:56
+#: ../src/planner-main.c:39
 msgid "Create the initial window with the given geometry."
 msgstr "Sukuria pradinį langą su nurodyta geometrija"
 
-#: ../src/planner-main.c:56
+#: ../src/planner-main.c:39
 msgid "GEOMETRY"
 msgstr "GEOMETRIJA"
 
-#: ../src/planner-main.c:70
-msgid "[FILE...]"
-msgstr "[BYLA…]"
+#: ../src/planner-main.c:40
+msgid "FILES|URIs"
+msgstr "FAILAI|URI"
 
-#: ../src/planner-msp-plugin.c:50
+#: ../src/planner-main.c:63
+#| msgid "Planner Project Management"
+msgid "- Planner project management"
+msgstr "- Planner projektų valdymas"
+
+#: ../src/planner-main.c:67
+#, c-format
+msgid ""
+"%s\n"
+"Run '%s --help' to see a full list of available command line options.\n"
+msgstr ""
+"%s\n"
+"Paleiskite „%s --help“ visam komandų eilutės parinkčių sąrašui.\n"
+
+#: ../src/planner-main.c:91
+#, c-format
+msgid "Invalid geometry string \"%s\"\n"
+msgstr "Netinkama geometrijos eilutė „%s“\n"
+
+#: ../src/planner-msp-plugin.c:49
 msgid "MS Project XML..."
 msgstr "MS Project XML..."
 
-#: ../src/planner-msp-plugin.c:50
+#: ../src/planner-msp-plugin.c:49
 msgid "Import an MS Project XML file"
 msgstr "Įkelia MS Project XML bylas"
 
-#: ../src/planner-msp-plugin.c:118
+#: ../src/planner-msp-plugin.c:117
 msgid "Couldn't import file."
 msgstr "Nepavyko importuoti bylos."
 
-#: ../src/planner-msp-plugin.c:206
+#: ../src/planner-msp-plugin.c:205
 msgid "Import a File"
 msgstr "Importuoti bylą"
 
-#: ../src/planner-msp-plugin.c:214
+#: ../src/planner-msp-plugin.c:213
 msgid "XML Files"
 msgstr "XML Bylos"
 
-#: ../src/planner-msp-plugin.c:219 ../src/planner-window.c:848
+#: ../src/planner-msp-plugin.c:218
+#: ../src/planner-window.c:882
 msgid "All Files"
 msgstr "Visos Bylos"
 
@@ -1417,38 +1526,38 @@ msgstr "Įterpti fazę"
 msgid "Remove phase"
 msgstr "Pašalinti fazę"
 
-#: ../src/planner-plugin-loader.c:41
+#: ../src/planner-plugin-loader.c:40
 #, c-format
 msgid "Could not open plugin file '%s'\n"
 msgstr "Nepavyko atidaryti priedo bylos „%s“\n"
 
-#: ../src/planner-predecessor-model.c:191 ../src/planner-task-dialog.c:2217
+#: ../src/planner-predecessor-model.c:191
+#: ../src/planner-task-dialog.c:2206
 msgid "FS"
 msgstr "PS"
 
-#: ../src/planner-predecessor-model.c:194 ../src/planner-task-dialog.c:2218
+#: ../src/planner-predecessor-model.c:194
+#: ../src/planner-task-dialog.c:2207
 msgid "FF"
 msgstr "PP"
 
-#: ../src/planner-predecessor-model.c:197 ../src/planner-task-dialog.c:2219
+#: ../src/planner-predecessor-model.c:197
+#: ../src/planner-task-dialog.c:2208
 msgid "SS"
 msgstr "SS"
 
-#: ../src/planner-predecessor-model.c:200 ../src/planner-task-dialog.c:2220
+#: ../src/planner-predecessor-model.c:200
+#: ../src/planner-task-dialog.c:2209
 msgid "SF"
 msgstr "SP"
 
-#: ../src/planner-print-dialog.c:187
-msgid "Print Project"
-msgstr "Spausdinti projektą"
-
-#: ../src/planner-print-dialog.c:194
-msgid "Select views"
-msgstr "Pasirinkite peržiūras"
-
-#: ../src/planner-print-dialog.c:218
+#: ../src/planner-print-dialog.c:247
 msgid "Select the views to print:"
 msgstr "Pasirinkite spausdinamas peržiūras:"
+
+#: ../src/planner-print-job.c:168
+msgid "Select views"
+msgstr "Pasirinkite peržiūras"
 
 #: ../src/planner-project-properties.c:387
 msgid "Select a calendar to use for this project:"
@@ -1487,55 +1596,56 @@ msgstr "Savybė"
 msgid "Value"
 msgstr "Vertė"
 
-#: ../src/planner-project-properties.c:1390
-#: ../src/planner-property-dialog.c:333
+#: ../src/planner-project-properties.c:1391
+#: ../src/planner-property-dialog.c:323
 msgid "The name of the custom property needs to start with a letter."
 msgstr "Specialios savybės pavadinimas turi prasidėti raide"
 
-#: ../src/planner-project-properties.c:1461
-#: ../src/planner-property-dialog.c:403
+#: ../src/planner-project-properties.c:1462
+#: ../src/planner-property-dialog.c:393
 #, c-format
 msgid "Do you really want to remove the property '%s' from the project?"
 msgstr "Ar tikrai norite pašalinti „%s“ savybę iš projekto?"
 
-#: ../src/planner-project-properties.c:1556
+#: ../src/planner-project-properties.c:1557
 msgid "Could not create properties dialog."
 msgstr "Nepavyko sukurti savybių dialogo lango."
 
-#: ../src/planner-project-properties.c:1590
+#: ../src/planner-project-properties.c:1591
 msgid "Date..."
 msgstr "Data..."
 
-#: ../src/planner-project-properties.c:1933
+#: ../src/planner-project-properties.c:1935
 msgid "Add project property"
 msgstr "Pridėti projekto savybę"
 
-#: ../src/planner-project-properties.c:2043
+#: ../src/planner-project-properties.c:2045
 msgid "Remove project property"
 msgstr "Pašalinti projekto savybę"
 
-#: ../src/planner-project-properties.c:2136
+#: ../src/planner-project-properties.c:2138
 msgid "Edit project property value"
 msgstr "Keisti projekto savybės reikšmę"
 
-#: ../src/planner-property-dialog.c:502
+#: ../src/planner-property-dialog.c:492
 msgid "Label"
 msgstr "Užrašas"
 
-#: ../src/planner-property-dialog.c:514 ../src/planner-resource-view.c:1224
-#: ../src/planner-task-dialog.c:2722
+#: ../src/planner-property-dialog.c:504
+#: ../src/planner-resource-view.c:1253
+#: ../src/planner-task-dialog.c:2711
 msgid "Type"
 msgstr "Tipas"
 
-#: ../src/planner-property-dialog.c:671
+#: ../src/planner-property-dialog.c:661
 msgid "Add property"
 msgstr "Pridėti savybę"
 
-#: ../src/planner-property-dialog.c:816
+#: ../src/planner-property-dialog.c:806
 msgid "Remove property"
 msgstr "Pašalinti savybę"
 
-#: ../src/planner-property-dialog.c:909
+#: ../src/planner-property-dialog.c:899
 msgid "Edit property label"
 msgstr "Keisti savybės žymę"
 
@@ -1546,12 +1656,13 @@ msgstr "Įterpti resursą"
 #. Put "no group" at the top.
 #: ../src/planner-resource-dialog.c:312
 #: ../src/planner-resource-input-dialog.c:100
-#: ../src/planner-resource-view.c:1945
+#: ../src/planner-resource-view.c:1967
 msgid "(None)"
 msgstr "(jokia)"
 
 #: ../src/planner-resource-dialog.c:322
-#: ../src/planner-resource-input-dialog.c:110 ../src/planner-task-dialog.c:381
+#: ../src/planner-resource-input-dialog.c:110
+#: ../src/planner-task-dialog.c:381
 msgid "(No name)"
 msgstr "(Be vardo)"
 
@@ -1567,99 +1678,106 @@ msgstr "Keisti resurso pastabas"
 msgid "Edit resource cost"
 msgstr "Keisti resurso kaštus"
 
-#: ../src/planner-resource-dialog.c:711 ../src/planner-resource-dialog.c:752
-#: ../src/planner-resource-view.c:1413 ../src/planner-resource-view.c:1494
+#: ../src/planner-resource-dialog.c:711
+#: ../src/planner-resource-dialog.c:752
+#: ../src/planner-resource-view.c:1442
+#: ../src/planner-resource-view.c:1523
 msgid "Edit resource property"
 msgstr "Keisti resurso savybę"
 
 #. i18n: time stamp format for notes in task dialog, see strftime(3) for
 #. * a detailed description.
-#: ../src/planner-resource-dialog.c:1404 ../src/planner-task-dialog.c:1808
+#: ../src/planner-resource-dialog.c:1396
+#: ../src/planner-task-dialog.c:1800
 msgid "%a %d %b %Y, %H:%M\n"
 msgstr "%a %d %b %Y, %H:%M\n"
 
-#: ../src/planner-resource-dialog.c:1521
+#: ../src/planner-resource-dialog.c:1512
 msgid "None (use project default)"
 msgstr "Joks (naudoti įprastas projekto reikšmes)"
 
-#: ../src/planner-resource-dialog.c:1648 ../src/planner-resource-dialog.c:1650
+#: ../src/planner-resource-dialog.c:1634
+#: ../src/planner-resource-dialog.c:1636
 msgid "Edit resource properties"
 msgstr "Keisti resurso savybes"
 
-#: ../src/planner-resource-dialog.c:1851 ../src/planner-resource-view.c:753
-#: ../src/planner-resource-view.c:767 ../src/planner-resource-view.c:1737
+#: ../src/planner-resource-dialog.c:1837
+#: ../src/planner-resource-view.c:793
+#: ../src/planner-resource-view.c:807
+#: ../src/planner-resource-view.c:1761
 msgid "Material"
 msgstr "Medžiaga"
 
-#: ../src/planner-resource-view.c:230
+#: ../src/planner-resource-view.c:233
 msgid "_Insert Resource"
 msgstr "_Įterpti resursą"
 
-#: ../src/planner-resource-view.c:231
+#: ../src/planner-resource-view.c:234
 msgid "Insert a new resource"
 msgstr "Įterpti naują resursą"
 
-#: ../src/planner-resource-view.c:233
+#: ../src/planner-resource-view.c:236
 msgid "In_sert Resources..."
 msgstr "Įterpti re_sursus…"
 
-#: ../src/planner-resource-view.c:236
+#: ../src/planner-resource-view.c:239
 msgid "_Remove Resource"
 msgstr "_Pašalinti resursą"
 
-#: ../src/planner-resource-view.c:237
+#: ../src/planner-resource-view.c:240
 msgid "Remove the selected resource"
 msgstr "Pašalinti pasirinktą resursą"
 
-#: ../src/planner-resource-view.c:239
+#: ../src/planner-resource-view.c:242
 msgid "_Edit Resource Properties..."
 msgstr "K_eisti resurso savybes…"
 
-#: ../src/planner-resource-view.c:242
+#: ../src/planner-resource-view.c:245
 msgid "Edit _Groups"
 msgstr "Keisti _grupes"
 
-#: ../src/planner-resource-view.c:243
+#: ../src/planner-resource-view.c:246
 msgid "Edit resource groups"
 msgstr "Keisti resurso grupes"
 
-#: ../src/planner-resource-view.c:248
+#: ../src/planner-resource-view.c:251
 msgid "Edit _Custom Properties..."
 msgstr "Keisti spe_cialias savybes…"
 
-#: ../src/planner-resource-view.c:266
+#: ../src/planner-resource-view.c:269
 msgid "/_Insert resource"
 msgstr "/_Įterpti resursą"
 
-#: ../src/planner-resource-view.c:269
+#: ../src/planner-resource-view.c:272
 msgid "/_Remove resource"
 msgstr "/_Pašalinti resursą"
 
-#: ../src/planner-resource-view.c:272 ../src/planner-usage-tree.c:102
+#: ../src/planner-resource-view.c:275
+#: ../src/planner-usage-tree.c:102
 msgid "/_Edit resource..."
 msgstr "/K_eisti resursą…"
 
-#: ../src/planner-resource-view.c:423
+#: ../src/planner-resource-view.c:463
 msgid "_Resources"
 msgstr "_Resursai"
 
-#: ../src/planner-resource-view.c:943
+#: ../src/planner-resource-view.c:980
 msgid "Remove resource"
 msgstr "Pašalinti resursą"
 
-#: ../src/planner-resource-view.c:1020
+#: ../src/planner-resource-view.c:1049
 msgid "Edit Resource Columns"
 msgstr "Nustatyti resursų stulpelius"
 
-#: ../src/planner-resource-view.c:1055
+#: ../src/planner-resource-view.c:1084
 msgid "Edit custom resource properties"
 msgstr "Keisti specialias resurso savybes"
 
-#: ../src/planner-resource-view.c:1197
+#: ../src/planner-resource-view.c:1226
 msgid "Short name"
 msgstr "Trumpas vardas"
 
-#: ../src/planner-resource-view.c:1253
+#: ../src/planner-resource-view.c:1282
 msgid "Group"
 msgstr "Grupė"
 
@@ -1674,63 +1792,59 @@ msgstr "%d sav"
 msgid "Week %d"
 msgstr "%d Savaitė"
 
-#. i18n: Week, year.
-#: ../src/planner-scale-utils.c:138
+#: ../src/planner-scale-utils.c:139
 #, c-format
 msgid "Week %d, %d"
 msgstr "%d savaitė, %d"
 
 #. i18n: Short "Quarter", preferably 1 letter.
-#: ../src/planner-scale-utils.c:169
+#: ../src/planner-scale-utils.c:170
 #, c-format
 msgid "Q%d"
 msgstr "%dK"
 
 #. i18n: Short "Quarter", preferably 2-3 letters.
-#: ../src/planner-scale-utils.c:173
+#: ../src/planner-scale-utils.c:174
 #, c-format
 msgid "Qtr %d"
 msgstr "%d Ketv"
 
 #. i18n: Year, short "Quarter", preferably 2-3 letters.
-#: ../src/planner-scale-utils.c:177
+#: ../src/planner-scale-utils.c:178
 #, c-format
 msgid "%d, Qtr %d"
 msgstr "%d, %d ketv"
 
 #. i18n: Short "Half year", preferably 1 letter.
-#: ../src/planner-scale-utils.c:190
+#: ../src/planner-scale-utils.c:191
 #, c-format
 msgid "H%d"
 msgstr "%dP"
 
 #. i18n: Year, short "Half year", preferably 1 letter.
-#: ../src/planner-scale-utils.c:195
+#: ../src/planner-scale-utils.c:196
 #, c-format
 msgid "%04d, H%d"
 msgstr "%04d, %dP"
 
-#: ../src/planner-sql-plugin.c:93
+#: ../src/planner-sql-plugin.c:94
 msgid "Open from Database..."
 msgstr "Atidaryti iš duomenų bazės…"
 
-#: ../src/planner-sql-plugin.c:94
+#: ../src/planner-sql-plugin.c:95
 msgid "Open a project from a database"
 msgstr "Atidaryti projektą iš duomenų bazės"
 
-#: ../src/planner-sql-plugin.c:96 ../src/planner-sql-plugin.c:1152
+#: ../src/planner-sql-plugin.c:97
+#: ../src/planner-sql-plugin.c:1145
 msgid "Save to Database"
 msgstr "Išsaugoti į duomenų bazę"
 
-#: ../src/planner-sql-plugin.c:97
+#: ../src/planner-sql-plugin.c:98
 msgid "Save the current project to a database"
 msgstr "Išsaugoti esamą projektą į duomenų bazę"
 
-#: ../src/planner-sql-plugin.c:135 ../src/planner-sql-plugin.c:150
-msgid "No errors reported."
-msgstr "Neaptikta jokių klaidų."
-
-#: ../src/planner-sql-plugin.c:517
+#: ../src/planner-sql-plugin.c:524
 #, c-format
 msgid ""
 "Database %s needs to be upgraded from version %s to version %s.\n"
@@ -1739,11 +1853,11 @@ msgstr ""
 "Duomenų bazę %s reikia atnaujinti iš versijos %s į versiją %s.\n"
 "Pasidarykite atsarginę bazės kopiją prieš pradėdami atnaujinimą."
 
-#: ../src/planner-sql-plugin.c:524
+#: ../src/planner-sql-plugin.c:531
 msgid "Upgrade"
 msgstr "Atnaujinti"
 
-#: ../src/planner-sql-plugin.c:538
+#: ../src/planner-sql-plugin.c:545
 #, c-format
 msgid ""
 "Could not upgrade database %s.\n"
@@ -1758,55 +1872,55 @@ msgstr ""
 "Duomenų bazės: \n"
 "%s"
 
-#: ../src/planner-sql-plugin.c:579
+#: ../src/planner-sql-plugin.c:585
 #, c-format
 msgid "Can't create tables in database %s"
 msgstr "Nepavyko sukurti lentelių tarp duomenų bazės %s"
 
-#: ../src/planner-sql-plugin.c:648
+#: ../src/planner-sql-plugin.c:647
 #, c-format
 msgid "Database %s is not setup for Planner. Do you want to do that?"
 msgstr "Duomenų bazė %s yra nepritaikyta Planner. Ar norite ją suderinti?"
 
-#: ../src/planner-sql-plugin.c:696
+#: ../src/planner-sql-plugin.c:690
 #, c-format
 msgid "Connection to database '%s@%s' failed."
 msgstr "Nepavyko prisijungti prie duomenų bazės „%s@%s“."
 
-#: ../src/planner-sql-plugin.c:711
+#: ../src/planner-sql-plugin.c:709
 #, c-format
 msgid "Test to tables in database '%s' failed."
 msgstr "Aptiktos klaidos tikrinant duomenų bazės „%s“ lenteles."
 
-#: ../src/planner-sql-plugin.c:816
+#: ../src/planner-sql-plugin.c:811
 msgid "ID"
 msgstr "ID"
 
-#: ../src/planner-sql-plugin.c:824
+#: ../src/planner-sql-plugin.c:819
 msgid "Project"
 msgstr "Projektas"
 
-#: ../src/planner-sql-plugin.c:832
+#: ../src/planner-sql-plugin.c:827
 msgid "Phase"
 msgstr "Fazė"
 
-#: ../src/planner-sql-plugin.c:840
+#: ../src/planner-sql-plugin.c:835
 msgid "Revision"
 msgstr "Versija"
 
-#: ../src/planner-sql-plugin.c:1040
+#: ../src/planner-sql-plugin.c:1033
 msgid "Open from Database"
 msgstr "Atidaryti iš duomenų bazės"
 
-#: ../src/planner-task-cmd.c:97
+#: ../src/planner-task-cmd.c:96
 msgid "Link task"
 msgstr "Susieti užduotį"
 
-#: ../src/planner-task-cmd.c:173
+#: ../src/planner-task-cmd.c:172
 msgid "Unlink task"
 msgstr "Atsieti užduotį"
 
-#: ../src/planner-task-cmd.c:268
+#: ../src/planner-task-cmd.c:267
 msgid "Insert task"
 msgstr "Įterpti užduotį"
 
@@ -1842,183 +1956,182 @@ msgstr "Keisti užduoties pirmtaką"
 msgid "Edit lag predecessor"
 msgstr "Keisti uždelsimo pirmtakę"
 
-#: ../src/planner-task-dialog.c:1087
+#: ../src/planner-task-dialog.c:1086
 msgid "Edit task note"
 msgstr "Keisti užduoties pastabas"
 
-#: ../src/planner-task-dialog.c:1495
+#: ../src/planner-task-dialog.c:1489
 #, c-format
 msgid "No earlier than %s"
 msgstr "Ne anksčiau kaip %s"
 
-#: ../src/planner-task-dialog.c:1499
+#: ../src/planner-task-dialog.c:1493
 #, c-format
 msgid "On fixed date %s"
 msgstr "Nustatytą dieną %s"
 
-#: ../src/planner-task-dialog.c:1917
+#: ../src/planner-task-dialog.c:1909
 msgid "Finish to start (FS)"
 msgstr "Pabaiga starte (PS)"
 
-#: ../src/planner-task-dialog.c:1918
+#: ../src/planner-task-dialog.c:1910
 msgid "Finish to finish (FF)"
 msgstr "Pabaiga pabaigoje (PP)"
 
-#: ../src/planner-task-dialog.c:1919
+#: ../src/planner-task-dialog.c:1911
 msgid "Start to start (SS)"
 msgstr "Startas starte (SS)"
 
-#: ../src/planner-task-dialog.c:1920
+#: ../src/planner-task-dialog.c:1912
 msgid "Start to finish (SF)"
 msgstr "Startas pabaigoje (SP)"
 
-#: ../src/planner-task-dialog.c:1975
+#: ../src/planner-task-dialog.c:1967
 msgid "Can't add new predecessor. No task selected!"
 msgstr "Negalima pridėti naujo pirmtako. Nepasirinkta jokia užduotis!"
 
-#: ../src/planner-task-dialog.c:2463
+#: ../src/planner-task-dialog.c:2452
 msgid "Change..."
 msgstr "Keisti…"
 
-#: ../src/planner-task-dialog.c:2637
+#: ../src/planner-task-dialog.c:2626
 msgid "Assigned"
 msgstr "Priskirta"
 
-#: ../src/planner-task-dialog.c:2654
+#: ../src/planner-task-dialog.c:2643
 msgid "Units"
 msgstr "Vienetai"
 
-#: ../src/planner-task-dialog.c:2744
+#: ../src/planner-task-dialog.c:2733
 msgid "Lag"
 msgstr "Uždelsimas"
 
-#: ../src/planner-task-dialog.c:2887 ../src/planner-task-dialog.c:2889
+#: ../src/planner-task-dialog.c:2876
+#: ../src/planner-task-dialog.c:2878
 msgid "Edit task properties"
 msgstr "Keisti užduoties savybes"
 
-#: ../src/planner-task-popup.c:54
+#: ../src/planner-task-popup.c:52
 msgid "/_Insert task"
 msgstr "/_Įterpti užduotį"
 
-#: ../src/planner-task-popup.c:57
+#: ../src/planner-task-popup.c:55
 msgid "/Insert _subtask"
 msgstr "/Įterpti _antrinę užduotį"
 
-#: ../src/planner-task-popup.c:60
+#: ../src/planner-task-popup.c:58
 msgid "/_Remove task"
 msgstr "/Pa_šalinti užduotį"
 
-#: ../src/planner-task-popup.c:65
+#: ../src/planner-task-popup.c:63
 msgid "/_Unlink task"
 msgstr "/_Atsieti užduotį"
 
-#: ../src/planner-task-popup.c:70
+#: ../src/planner-task-popup.c:68
 msgid "/Assign _resources..."
 msgstr "/Priskirti _resursus…"
 
-#: ../src/planner-task-popup.c:73 ../src/planner-usage-tree.c:105
+#: ../src/planner-task-popup.c:71
+#: ../src/planner-usage-tree.c:105
 msgid "/_Edit task..."
 msgstr "/K_eisti užduotį…"
 
-#: ../src/planner-task-tree.c:567
+#: ../src/planner-task-tree.c:561
 msgid "Remove task"
 msgstr "Pašalinti užduotį"
 
-#: ../src/planner-task-tree.c:644
+#: ../src/planner-task-tree.c:638
 msgid "Apply constraint to task"
 msgstr "Pritaikyti užduoties apribojimą"
 
-#: ../src/planner-task-tree.c:706
+#: ../src/planner-task-tree.c:700
 msgid "Reset task constraint"
 msgstr "Atšaukti užduoties apribojimą"
 
-#: ../src/planner-task-tree.c:1492 ../src/planner-task-tree.c:1624
+#: ../src/planner-task-tree.c:1483
+#: ../src/planner-task-tree.c:1637
 msgid "N/A"
 msgstr "N/A"
 
-#: ../src/planner-task-tree.c:2724
+#: ../src/planner-task-tree.c:2804
 msgid "Remove tasks"
 msgstr "Pašalinti užduotis"
 
-#: ../src/planner-task-tree.c:2786
+#: ../src/planner-task-tree.c:2866
 #, c-format
-msgid ""
-"You are about to open an edit dialog each for %i tasks. Are you sure that "
-"you want to do that?"
-msgstr ""
-"Bandote atidaryti %i užduočių dialogo langus. Ar tikrai norite taip "
-"pasielgti?"
+msgid "You are about to open an edit dialog each for %i tasks. Are you sure that you want to do that?"
+msgstr "Bandote atidaryti %i užduočių dialogo langus. Ar tikrai norite taip pasielgti?"
 
-#: ../src/planner-task-tree.c:2888
+#: ../src/planner-task-tree.c:2968
 msgid "Unlink tasks"
 msgstr "Atsieti užduotis"
 
-#: ../src/planner-task-tree.c:2940
+#: ../src/planner-task-tree.c:3020
 msgid "Link tasks"
 msgstr "Susieti užduotis"
 
-#: ../src/planner-task-tree.c:3031
+#: ../src/planner-task-tree.c:3109
 msgid "Indent tasks"
 msgstr "Atitraukti užduotis"
 
-#: ../src/planner-task-tree.c:3042
+#: ../src/planner-task-tree.c:3120
 msgid "Indent task"
 msgstr "Atitraukti užduotį"
 
-#: ../src/planner-task-tree.c:3134
+#: ../src/planner-task-tree.c:3212
 msgid "Unindent tasks"
 msgstr "Pritraukti užduotis"
 
-#: ../src/planner-task-tree.c:3150
+#: ../src/planner-task-tree.c:3230
 msgid "Unindent task"
 msgstr "Pritraukti užduotį"
 
-#: ../src/planner-task-tree.c:3227
+#: ../src/planner-task-tree.c:3306
 msgid "Move tasks up"
 msgstr "Perkelti užduotis aukštyn"
 
-#: ../src/planner-task-tree.c:3265
+#: ../src/planner-task-tree.c:3344
 msgid "Move task up"
 msgstr "Perkelti užduotį aukštyn"
 
-#: ../src/planner-task-tree.c:3354
+#: ../src/planner-task-tree.c:3432
 msgid "Move tasks down"
 msgstr "Perkelti užduotis žemyn"
 
 #. Moving task from 'position' to 'position + 1'
-#: ../src/planner-task-tree.c:3400
+#: ../src/planner-task-tree.c:3478
 msgid "Move task down"
 msgstr "Perkelti užduotį žemyn"
 
-#: ../src/planner-task-tree.c:3456
+#: ../src/planner-task-tree.c:3534
 msgid "Reset task constraints"
 msgstr "Atšaukti užduoties apribojimus"
 
-#: ../src/planner-task-tree.c:3488
+#: ../src/planner-task-tree.c:3566
 msgid "Reset all task constraints"
 msgstr "Atšaukti visus užduoties apribojimus"
 
-#: ../src/planner-task-view.c:124
+#: ../src/planner-task-view.c:128
 msgid "_Edit Task"
 msgstr "_Keisti Užduotį"
 
-#: ../src/planner-task-view.c:151
+#: ../src/planner-task-view.c:155
 msgid "_Edit Custom Properties..."
 msgstr "K_eisti specialias savybes…"
 
-#: ../src/planner-task-view.c:270
+#: ../src/planner-task-view.c:301
 msgid "Tasks"
 msgstr "Užduotys"
 
-#: ../src/planner-task-view.c:276
+#: ../src/planner-task-view.c:307
 msgid "_Tasks"
 msgstr "_Užduotys"
 
-#: ../src/planner-task-view.c:572
+#: ../src/planner-task-view.c:609
 msgid "Edit custom task properties"
 msgstr "Keičia specialias užduoties savybes"
 
-#: ../src/planner-task-view.c:626
+#: ../src/planner-task-view.c:663
 msgid "Edit Task Columns"
 msgstr "Nustato užduoties stulpelius"
 
@@ -2046,14 +2159,14 @@ msgstr ""
 "\n"
 "Užduotis"
 
-#: ../src/planner-usage-view.c:111
+#: ../src/planner-usage-view.c:114
 msgid "Zoom to fit"
 msgstr "Priderinti prie lango"
 
 #. i18n: Label used for the sidebar. Please try to make it short and use
 #. * a linebreak if necessary/possible.
 #.
-#: ../src/planner-usage-view.c:228
+#: ../src/planner-usage-view.c:261
 msgid ""
 "Resource\n"
 "Usage"
@@ -2061,271 +2174,273 @@ msgstr ""
 "Resursų\n"
 "Panaudojimas"
 
-#: ../src/planner-usage-view.c:234
+#: ../src/planner-usage-view.c:267
 msgid "Resource _Usage"
 msgstr "Re_sursų panaudojimas"
 
-#: ../src/planner-usage-view.c:345
+#: ../src/planner-usage-view.c:380
 msgid "Edit Resource Usage Columns"
 msgstr "Nustatyti resursų panaudojimo stulpelius"
 
-#: ../src/planner-window.c:225
+#: ../src/planner-util-win32.c:45
+#, c-format
+msgid "Unable to open '%s'"
+msgstr "Nepavyko atverti „%s“"
+
+#: ../src/planner-util-win32.c:72
+msgid "Unable to open help file"
+msgstr "Nepavyko atverti žinyno failo"
+
+#: ../src/planner-window.c:220
 msgid "_File"
 msgstr "_Byla"
 
-#: ../src/planner-window.c:229
+#: ../src/planner-window.c:224
 msgid "_New Project"
 msgstr "_Naujas projektas"
 
-#: ../src/planner-window.c:229
+#: ../src/planner-window.c:224
 msgid "Create a new project"
 msgstr "Sukuria naują projektą"
 
-#: ../src/planner-window.c:233
+#: ../src/planner-window.c:228
 msgid "_Open..."
 msgstr "_Atverti…"
 
-#: ../src/planner-window.c:233
+#: ../src/planner-window.c:228
 msgid "Open a project"
 msgstr "Atidaryti projektą"
 
-#: ../src/planner-window.c:236
+#: ../src/planner-window.c:231
+#| msgid "Open a project"
+msgid "Open _Recent"
+msgstr "Atidaryti _neseniai naudotą"
+
+#: ../src/planner-window.c:234
 msgid "_Import"
 msgstr "_Importas"
 
-#: ../src/planner-window.c:240 ../src/planner-window.c:1567
+#: ../src/planner-window.c:238
+#: ../src/planner-window.c:1433
 msgid "_Save"
 msgstr "Iš_saugoti"
 
-#: ../src/planner-window.c:240
+#: ../src/planner-window.c:238
 msgid "Save the current project"
 msgstr "Išsaugoti esamą projektą"
 
-#: ../src/planner-window.c:243
+#: ../src/planner-window.c:241
 msgid "_Export"
 msgstr "_Eksportas"
 
-#: ../src/planner-window.c:246
+#: ../src/planner-window.c:244
 msgid "Save _As..."
 msgstr "Išs_augoti kaip…"
 
-#: ../src/planner-window.c:246
+#: ../src/planner-window.c:244
 msgid "Save the current project with a different name"
 msgstr "Išsaugoti esamą projektą kitu vardu"
 
-#: ../src/planner-window.c:249
+#: ../src/planner-window.c:247
+msgid "Page Set_up..."
+msgstr "Puslapio n_ustatymai..."
+
+#: ../src/planner-window.c:247
+msgid "Setup the page settings for your current printer"
+msgstr "Nustatykite puslapio nustatymus dabartiniam spausdintuvui"
+
+#: ../src/planner-window.c:250
 msgid "_Print..."
 msgstr "_Spausdinti…"
 
-#: ../src/planner-window.c:249
+#: ../src/planner-window.c:250
 msgid "Print the current project"
 msgstr "Spausdinti esamą projektą"
 
-#: ../src/planner-window.c:252
+#: ../src/planner-window.c:253
 msgid "Print Pre_view"
 msgstr "Spau_dinio peržiūra"
 
-#: ../src/planner-window.c:252
+#: ../src/planner-window.c:253
 msgid "Print preview of the current project"
 msgstr "Esamo projekto spaudinio peržiūra"
 
-#: ../src/planner-window.c:255
+#: ../src/planner-window.c:256
 msgid "_Close"
 msgstr "_Užverti"
 
-#: ../src/planner-window.c:255
+#: ../src/planner-window.c:256
 msgid "Close the current file"
 msgstr "Uždaryti esamąją bylą"
 
-#: ../src/planner-window.c:258
+#: ../src/planner-window.c:259
 msgid "_Quit"
 msgstr "Iš_eiti"
 
-#: ../src/planner-window.c:258
+#: ../src/planner-window.c:259
 msgid "Exit the program"
 msgstr "Užverti programą"
 
-#: ../src/planner-window.c:262
+#: ../src/planner-window.c:263
 msgid "_Edit"
 msgstr "_Keisti"
 
-#: ../src/planner-window.c:265
+#: ../src/planner-window.c:266
 msgid "_Undo"
 msgstr "Atša_ukti"
 
-#: ../src/planner-window.c:265
+#: ../src/planner-window.c:266
 msgid "Undo the last action"
 msgstr "Atšaukti paskutinį veiksmą"
 
-#: ../src/planner-window.c:268
+#: ../src/planner-window.c:269
 msgid "_Redo"
 msgstr "Paka_rtoti"
 
-#: ../src/planner-window.c:268
+#: ../src/planner-window.c:269
 msgid "Redo the undone action"
 msgstr "Pakartoti atšauktą veiksmą"
 
-#: ../src/planner-window.c:272
+#: ../src/planner-window.c:273
 msgid "_View"
 msgstr "_Rodyti"
 
-#: ../src/planner-window.c:276
+#: ../src/planner-window.c:277
 msgid "_Actions"
 msgstr "_Veiksmai"
 
-#: ../src/planner-window.c:280
+#: ../src/planner-window.c:281
 msgid "_Project"
 msgstr "_Projektas"
 
-#: ../src/planner-window.c:283
+#: ../src/planner-window.c:284
 msgid "_Manage Calendars"
 msgstr "_Valdyti kalendorius"
 
-#: ../src/planner-window.c:286
+#: ../src/planner-window.c:287
 msgid "Edit Day _Types"
 msgstr "Keisti dienos _tipus"
 
-#: ../src/planner-window.c:289
+#: ../src/planner-window.c:290
 msgid "Edit Project _Phases"
 msgstr "Nustatyti Projekto _Fazes"
 
-#: ../src/planner-window.c:292
+#: ../src/planner-window.c:293
 msgid "_Edit Project Properties"
 msgstr "K_eisti projekto savybes"
 
-#: ../src/planner-window.c:292
+#: ../src/planner-window.c:293
 msgid "Edit the project properties"
 msgstr "Keičia projekto savybes"
 
-#: ../src/planner-window.c:300
+#: ../src/planner-window.c:301
 msgid "_Help"
 msgstr "_Pagalba"
 
-#: ../src/planner-window.c:303
+#: ../src/planner-window.c:304
 msgid "_User Guide"
 msgstr "_Žinynas"
 
-#: ../src/planner-window.c:303
+#: ../src/planner-window.c:304
 msgid "Show the Planner User Guide"
 msgstr "Rodyti Planner žinyną"
 
-#: ../src/planner-window.c:306
+#: ../src/planner-window.c:307
 msgid "_About"
 msgstr "_Apie"
 
-#: ../src/planner-window.c:306
+#: ../src/planner-window.c:307
 msgid "About this application"
 msgstr "Apie šią programą"
 
-#. Note: these strings are leaked.
-#: ../src/planner-window.c:665
+#: ../src/planner-window.c:696
 #, c-format
 msgid "Switch to the view \"%s\""
 msgstr "Persijungti į peržiūrą „%s“"
 
-#: ../src/planner-window.c:832
+#: ../src/planner-window.c:866
 msgid "Open a File"
 msgstr "Atidaryti bylą"
 
-#: ../src/planner-window.c:842
+#: ../src/planner-window.c:876
 msgid "Planner Files"
 msgstr "Planner Bylos"
 
-#. I18n: Translators, list your names here, newline separated if there
-#. * are more than one, to appear in the about box.
-#.
-#: ../src/planner-window.c:1324 ../src/planner-window.c:1346
-msgid "translator-credits"
-msgstr "Tomas Kuliavas"
-
-#: ../src/planner-window.c:1341
+#: ../src/planner-window.c:1212
 msgid "A Project Management application for the GNOME desktop"
 msgstr "GNOME darbo aplinkos projektų valdymo programa"
 
-#: ../src/planner-window.c:1348
+#: ../src/planner-window.c:1215
+msgid "translator-credits"
+msgstr "Tomas Kuliavas"
+
+#: ../src/planner-window.c:1217
 msgid "The Planner Homepage"
 msgstr "Planner svetainė"
 
-#: ../src/planner-window.c:1500
+#: ../src/planner-window.c:1366
 msgid "If you don't save, changes made the last minute will be discarded."
 msgstr "Jei nesaugosite, prarasite paskutinės minutės pakeitimus."
 
-#: ../src/planner-window.c:1506
+#: ../src/planner-window.c:1372
 #, c-format
 msgid "If you don't save, changes made the last %d minute will be discarded."
-msgid_plural ""
-"If you don't save, changes made the last %d minutes will be discarded."
+msgid_plural "If you don't save, changes made the last %d minutes will be discarded."
 msgstr[0] "Jei nesaugosite, prarasite paskutinės %d minutės pakeitimus."
 msgstr[1] "Jei nesaugosite, prarasite paskutinių %d minučių pakeitimus."
 msgstr[2] "Jei nesaugosite, prarasite paskutinių %d minučių pakeitimus."
 
-#: ../src/planner-window.c:1514
+#: ../src/planner-window.c:1380
 msgid "If you don't save, changes made the last hour will be discarded."
 msgstr "Jei nesaugosite, prarasite paskutinės valandos pakeitimus."
 
-#: ../src/planner-window.c:1519
+#: ../src/planner-window.c:1385
 #, c-format
 msgid "If you don't save, changes made the last %d hour will be discarded."
-msgid_plural ""
-"If you don't save, changes made the last %d hours will be discarded."
+msgid_plural "If you don't save, changes made the last %d hours will be discarded."
 msgstr[0] "Jei nesaugosite, prarasite paskutinės %d valandos pakeitimus."
 msgstr[1] "Jei nesaugosite, prarasite paskutinių %d valandų pakeitimus."
 msgstr[2] "Jei nesaugosite, prarasite paskutinių %d valandų pakeitimus."
 
-#: ../src/planner-window.c:1529
+#: ../src/planner-window.c:1395
 #, c-format
 msgid "Save changes to document '%s' before closing?"
 msgstr "Ar išsaugoti dokumento „%s“ pakeitimus prieš jį uždarant?"
 
-#: ../src/planner-window.c:1554
+#: ../src/planner-window.c:1420
 msgid "C_lose without saving"
 msgstr "Uždaryti _neišsaugant"
 
-#: ../src/planner-window.c:1560
+#: ../src/planner-window.c:1426
 msgid "_Cancel"
 msgstr "_Atšaukti"
 
-#: ../src/planner-window.c:1659
+#: ../src/planner-window.c:1526
 msgid "Save a File"
 msgstr "Išsaugoti rinkmeną"
 
-#: ../src/planner-window.c:1945
+#: ../src/planner-window.c:1794
 msgid ""
 "You have opened a file that was saved with an old version of Planner.\n"
 "\n"
-"When loading old files, all tasks will use the constraint 'Must Start On', "
-"since the old version did not fully support automatic rescheduling. To take "
-"advantage of this new feature, you should add predecessor relations between "
-"tasks that are dependent on each other.\n"
+"When loading old files, all tasks will use the constraint 'Must Start On', since the old version did not fully support automatic rescheduling. To take advantage of this new feature, you should add predecessor relations between tasks that are dependent on each other.\n"
 "\n"
-"You can add a predecessor relation by clicking on the predecessor and "
-"dragging to the successor.\n"
+"You can add a predecessor relation by clicking on the predecessor and dragging to the successor.\n"
 "\n"
-"After doing this, you can remove all constraints by selecting the menu item "
-"'Remove all constraints' in the 'Edit' menu."
+"After doing this, you can remove all constraints by selecting the menu item 'Remove all constraints' in the 'Edit' menu."
 msgstr ""
 "Atidarėte bylą, kuri buvo išsaugota senesnėje Planner versijoje.\n"
 "\n"
-"Įkeliant senas bylas visos užduotys naudos 'Prasideda nustatytu laiku' "
-"apribojimą, nes senesnė versija nepilnai palaikė tvarkaraščių "
-"automatizavimą. Norėdami pasinaudoti šia funkcija, turėtumėte nustatyti "
-"pirmtakų ryšius tarp užduočių, kurios priklauso viena nuo kitos.\n"
+"Įkeliant senas bylas visos užduotys naudos 'Prasideda nustatytu laiku' apribojimą, nes senesnė versija nepilnai palaikė tvarkaraščių automatizavimą. Norėdami pasinaudoti šia funkcija, turėtumėte nustatyti pirmtakų ryšius tarp užduočių, kurios priklauso viena nuo kitos.\n"
 "\n"
-"Ryšį galima nustatyti spragtelėjus ant pirmtako ir nutempus jį ant "
-"priklausomos užduoties.\n"
+"Ryšį galima nustatyti spragtelėjus ant pirmtako ir nutempus jį ant priklausomos užduoties.\n"
 "\n"
-"Nustačius ryšį apribojimus galima atšaukti pasirinkus meniu punktą "
-"„Pašalinti visus apribojimus“, esantį „Keisti“ meniu."
+"Nustačius ryšį apribojimus galima atšaukti pasirinkus meniu punktą „Pašalinti visus apribojimus“, esantį „Keisti“ meniu."
 
 #. Hack.
-#: ../src/planner-window.c:1980
+#: ../src/planner-window.c:1829
 msgid "Unnamed database project"
 msgstr "Neįvardintas duomenų bazės projektas"
-
-#: ../src/planner-window.c:2094
-#, c-format
-msgid "Open '%s'"
-msgstr "Atidaryti „%s“"
 
 #: ../src/planner-working-time-dialog.c:145
 msgid "Edit working time"
@@ -2343,39 +2458,39 @@ msgstr "Eksportuoti projektą į Planner 0.11 formato bylą"
 msgid "Export"
 msgstr "Eksportas"
 
-#: ../eds-backend/e-cal-backend-planner.c:289
+#: ../eds-backend/e-cal-backend-planner.c:288
 msgid "EDS UID"
 msgstr "EDS UID"
 
-#: ../eds-backend/e-cal-backend-planner.c:290
+#: ../eds-backend/e-cal-backend-planner.c:289
 msgid "Identifier used by Evolution Data Server for tasks"
 msgstr "Užduočių identifikatorius naudojamas Evolution duomenų serveryje"
 
-#: ../eds-backend/e-cal-backend-planner.c:299
+#: ../eds-backend/e-cal-backend-planner.c:298
 msgid "EDS Categories"
 msgstr "EDS kategorijos"
 
-#: ../eds-backend/e-cal-backend-planner.c:300
+#: ../eds-backend/e-cal-backend-planner.c:299
 msgid "Categories for a task used by Evolution Data Server"
 msgstr "Užduoties kategorijos naudojamos Evolution duomenų serveryje"
 
-#: ../eds-backend/e-cal-backend-planner.c:309
+#: ../eds-backend/e-cal-backend-planner.c:308
 msgid "EDS Classification"
 msgstr "EDS klasifikacija"
 
-#: ../eds-backend/e-cal-backend-planner.c:310
+#: ../eds-backend/e-cal-backend-planner.c:309
 msgid "Task access classification used by Evolution Data Server"
 msgstr "Užduočių priėjimo klasifikacija naudojama Evolution duomenų serveryje"
 
-#: ../eds-backend/e-cal-backend-planner.c:319
+#: ../eds-backend/e-cal-backend-planner.c:318
 msgid "EDS URL"
 msgstr "EDS URL"
 
-#: ../eds-backend/e-cal-backend-planner.c:320
+#: ../eds-backend/e-cal-backend-planner.c:319
 msgid "URL for a Task used by Evolution Data Server"
 msgstr "Užduoties URL naudojamas Evolution duomenų serveryje"
 
-#: ../eds-backend/e-cal-backend-planner.c:829
+#: ../eds-backend/e-cal-backend-planner.c:828
 msgid "Invalid server URI"
 msgstr "Klaidingas serverio adresas"
 
@@ -2387,9 +2502,6 @@ msgstr "Pasirinkite planner bylą"
 
 #: ../eds-backend/planner-source/planner-source.c:157
 #, c-format
-msgid ""
-"The filename extension of this file isn't the planner usual file extension (%"
-"s) Do you want to continue?"
-msgstr ""
-"Bylos išplėtimas neatitinka įprasto planner bylų išplėtimo (%s). Ar norite "
-"tęsti?"
+msgid "The filename extension of this file isn't the planner usual file extension (%s) Do you want to continue?"
+msgstr "Bylos išplėtimas neatitinka įprasto planner bylų išplėtimo (%s). Ar norite tęsti?"
+
