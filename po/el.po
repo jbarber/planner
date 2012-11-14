@@ -8,145 +8,56 @@
 # Kostas Papadimas <pkst@gnome.org>, 2003.
 # Velonis Petros <velonis@freemail.gr>, 2003.
 # nikosCharonitakis <nikosx@gmail.com>, 2010.
-#
+# Dimitris Spingos (Δημήτρης Σπίγγος) <dmtrs32@gmail.com>, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: el\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-11-16 01:31+0200\n"
-"PO-Revision-Date: 2010-11-14 23:38+0200\n"
-"Last-Translator: nikosCharonitakis <nikosx@gmail.com>\n"
-"Language-Team: Greek <nls@tux.hellug.gr>\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=planne"
+"r&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2012-03-14 10:55+0000\n"
+"PO-Revision-Date: 2012-11-14 11:07+0300\n"
+"Last-Translator: Dimitris Spingos (Δημήτρης Σπίγγος) <dmtrs32@gmail.com>\n"
+"Language-Team: team@gnome.gr\n"
+"Language: el\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Virtaal 0.7.1\n"
+"X-Project-Style: gnome\n"
 
 #: ../data/glade/add-predecessor.glade.h:1
 msgid "Add Predecessor"
 msgstr "Προσθήκη προγόνων"
 
 #: ../data/glade/add-predecessor.glade.h:2
-msgid "_Lag:"
-msgstr "_Καθυστέρηση:"
-
-#: ../data/glade/add-predecessor.glade.h:3
-#: ../data/glade/calendar-dialog.glade.h:35
-#: ../data/glade/new-property.glade.h:5
-#: ../data/glade/project-properties.glade.h:9
-#: ../data/glade/resource-dialog.glade.h:12
-#: ../data/glade/resource-input-dialog.glade.h:7
-#: ../data/glade/task-dialog.glade.h:16
-#: ../data/glade/task-input-dialog.glade.h:4
+#: ../data/glade/calendar-dialog.glade.h:36
+#: ../data/glade/new-property.glade.h:2
+#: ../data/glade/project-properties.glade.h:2
+#: ../data/glade/resource-dialog.glade.h:1
+#: ../data/glade/resource-input-dialog.glade.h:3
+#: ../data/glade/task-dialog.glade.h:1
+#: ../data/glade/task-input-dialog.glade.h:3
 msgid "_Name:"
 msgstr "Ό_νομα:"
 
-#: ../data/glade/add-predecessor.glade.h:4
+#: ../data/glade/add-predecessor.glade.h:3
 msgid "_Relation type:"
 msgstr "Τύπος _συγγένειας:"
 
+#: ../data/glade/add-predecessor.glade.h:4
+msgid "_Lag:"
+msgstr "_Καθυστέρηση:"
+
 #: ../data/glade/calendar-dialog.glade.h:1
-msgid ""
-"\n"
-"The selected day type has the following working hours:"
-msgstr ""
-"\n"
-"Ο επιλεγμένος τύπος ημέρας έχει τις ακόλουθες εργάσιμες ώρες:"
-
-#: ../data/glade/calendar-dialog.glade.h:3
-#: ../data/glade/column-dialog.glade.h:1 ../data/glade/task-dialog.glade.h:2
-msgid "    "
-msgstr "    "
-
-#: ../data/glade/calendar-dialog.glade.h:4 ../data/glade/eds.glade.h:1
-#: ../data/glade/new-property.glade.h:1
-#: ../data/glade/resource-dialog.glade.h:1
-#: ../data/glade/resource-input-dialog.glade.h:1 ../data/glade/sql.glade.h:1
-#: ../data/glade/task-input-dialog.glade.h:1
-msgid "*"
-msgstr "*"
-
-#: ../data/glade/calendar-dialog.glade.h:5
-msgid "-"
-msgstr "-"
-
-#: ../data/glade/calendar-dialog.glade.h:6
-msgid "<b>Calendar:</b>"
-msgstr "<b>Ημερολόγιο:</b>"
-
-#: ../data/glade/calendar-dialog.glade.h:7
-msgid "<b>Day types</b>"
-msgstr "<b>Τύποι ημέρας</b>"
-
-#: ../data/glade/calendar-dialog.glade.h:8
-msgid "<b>Working hours</b>"
-msgstr "<b>Εργάσιμες ώρες</b>"
-
-#: ../data/glade/calendar-dialog.glade.h:9
-msgid "<b>Working time</b>"
-msgstr "<b> Εργάσιμος χρόνος</b>"
-
-#: ../data/glade/calendar-dialog.glade.h:10
-msgid "Add Day Type"
-msgstr "Προσθήκη τύπων ημέρας"
-
-#: ../data/glade/calendar-dialog.glade.h:11
-msgid "Apply"
-msgstr "Εφαρμογή"
-
-#: ../data/glade/calendar-dialog.glade.h:12
-msgid "C_opy an existing calendar"
-msgstr "Αν_τιγραφή υπάρχοντος ημερολογίου"
-
-#: ../data/glade/calendar-dialog.glade.h:13
-msgid "C_reate"
-msgstr "Δη_μιουργία"
-
-#: ../data/glade/calendar-dialog.glade.h:14
-msgid "Calendar Editor"
-msgstr "Επεξεργαστής ημερολογίου"
-
-#: ../data/glade/calendar-dialog.glade.h:15
-msgid "Create an _empty calendar"
-msgstr "Δημιουργία ενός κ_ενού ημερολογίου"
-
-#: ../data/glade/calendar-dialog.glade.h:16
-msgid "Custom working time"
-msgstr "Προσαρμοσμένος εργάσιμος χρόνος"
-
-#: ../data/glade/calendar-dialog.glade.h:17
-msgid "Day type:"
-msgstr "Τύπος ημέρας:"
-
-#: ../data/glade/calendar-dialog.glade.h:18
 msgid "Default Week"
 msgstr "Προεπιλεγμένη εβδομάδα"
 
-#: ../data/glade/calendar-dialog.glade.h:19
-msgid "Default week..."
-msgstr "Προεπιλεγμένη εβδομάδα..."
+#: ../data/glade/calendar-dialog.glade.h:2
+msgid "<b>Calendar:</b>"
+msgstr "<b>Ημερολόγιο:</b>"
 
-#: ../data/glade/calendar-dialog.glade.h:20
-msgid "Edit Day Types"
-msgstr "Επεξεργασία τύπων ημέρας"
-
-#: ../data/glade/calendar-dialog.glade.h:21
-msgid "Edit Working Time"
-msgstr "Επεξεργασία εργάσιμου χρόνου"
-
-#: ../data/glade/calendar-dialog.glade.h:22
-msgid "From:"
-msgstr "Από:"
-
-#: ../data/glade/calendar-dialog.glade.h:23
-msgid "New Calendar"
-msgstr "Νέο ημερολόγιο"
-
-#: ../data/glade/calendar-dialog.glade.h:24
-msgid "Select a Calendar"
-msgstr "Επιλογή ενός ημερολογίου"
-
-#: ../data/glade/calendar-dialog.glade.h:25
+#: ../data/glade/calendar-dialog.glade.h:3
 msgid ""
 "Select a weekday and the day type to use for that day in the default week "
 "for this calendar.\n"
@@ -154,87 +65,180 @@ msgstr ""
 "Επιλογή μιας καθημερινής και του τύπου της ημέρας που θα χρησιμοποιηθεί στην "
 "προεπιλεγμένη εβδομάδα για αυτό το ημερολόγιο.\n"
 
-#: ../data/glade/calendar-dialog.glade.h:27
-msgid "Set day type to:"
-msgstr "Ορισμός τύπου ημέρας σε:"
-
-#: ../data/glade/calendar-dialog.glade.h:28
-msgid "To:"
-msgstr "Προς:"
-
-#: ../data/glade/calendar-dialog.glade.h:29
-msgid "Use working time from derived calendar"
-msgstr "Χρήση εργάσιμου χρόνου από προερχόμενο ημερολόγιο"
-
-#: ../data/glade/calendar-dialog.glade.h:30
+#: ../data/glade/calendar-dialog.glade.h:5
 msgid "Week day:"
 msgstr "Ημέρα εβδομάδας:"
 
-#: ../data/glade/calendar-dialog.glade.h:31
-msgid "Working time..."
-msgstr "Εργάσιμος χρόνος..."
+#: ../data/glade/calendar-dialog.glade.h:6
+msgid "Day type:"
+msgstr "Τύπος ημέρας:"
 
-#: ../data/glade/calendar-dialog.glade.h:32
-msgid "_Derive from a calendar"
-msgstr "Απο_ορέει από ημερολόγιο"
+#: ../data/glade/calendar-dialog.glade.h:7
+msgid ""
+"\n"
+"The selected day type has the following working hours:"
+msgstr ""
+"\n"
+"Ο επιλεγμένος τύπος ημέρας έχει τις ακόλουθες εργάσιμες ώρες:"
 
-#: ../data/glade/calendar-dialog.glade.h:33
-msgid "_Existing calendars:"
-msgstr "Υ_πάρχοντα ημερολόγια:"
+#: ../data/glade/calendar-dialog.glade.h:9
+#: ../data/glade/column-dialog.glade.h:2 ../data/glade/task-dialog.glade.h:9
+msgid "    "
+msgstr "    "
 
-#: ../data/glade/calendar-dialog.glade.h:34
-msgid "_Name of the new calendar:"
-msgstr "Ό_νομα του νέου ημερολογίου:"
+#: ../data/glade/calendar-dialog.glade.h:10
+msgid "Edit Working Time"
+msgstr "Επεξεργασία εργάσιμου χρόνου"
 
-#: ../data/glade/calendar-dialog.glade.h:36
+#: ../data/glade/calendar-dialog.glade.h:11
+msgid "<b>Day types</b>"
+msgstr "<b>Τύποι ημέρας</b>"
+
+#: ../data/glade/calendar-dialog.glade.h:12
+msgid "<b>Working hours</b>"
+msgstr "<b>Εργάσιμες ώρες</b>"
+
+#: ../data/glade/calendar-dialog.glade.h:13
+msgid "-"
+msgstr "-"
+
+#: ../data/glade/calendar-dialog.glade.h:14 ../data/glade/eds.glade.h:4
+#: ../data/glade/new-property.glade.h:5
+#: ../data/glade/resource-dialog.glade.h:6
+#: ../data/glade/resource-input-dialog.glade.h:5 ../data/glade/sql.glade.h:5
+#: ../data/glade/task-input-dialog.glade.h:5
+msgid "*"
+msgstr "*"
+
+#: ../data/glade/calendar-dialog.glade.h:15
+msgid "Calendar Editor"
+msgstr "Επεξεργαστής ημερολογίου"
+
+#: ../data/glade/calendar-dialog.glade.h:16
 msgid "_New..."
 msgstr "_Νέο..."
 
-#: ../data/glade/column-dialog.glade.h:2
+#: ../data/glade/calendar-dialog.glade.h:17
+msgid "Working time..."
+msgstr "Εργάσιμος χρόνος..."
+
+#: ../data/glade/calendar-dialog.glade.h:18
+msgid "Default week..."
+msgstr "Προεπιλεγμένη εβδομάδα..."
+
+#: ../data/glade/calendar-dialog.glade.h:19
+msgid "Use working time from derived calendar"
+msgstr "Χρήση εργάσιμου χρόνου από προερχόμενο ημερολόγιο"
+
+#: ../data/glade/calendar-dialog.glade.h:20
+msgid "Set day type to:"
+msgstr "Ορισμός τύπου ημέρας σε:"
+
+#: ../data/glade/calendar-dialog.glade.h:21
+msgid "Custom working time"
+msgstr "Προσαρμοσμένος εργάσιμος χρόνος"
+
+#: ../data/glade/calendar-dialog.glade.h:22
+msgid "<b>Working time</b>"
+msgstr "<b>Εργάσιμος χρόνος</b>"
+
+#: ../data/glade/calendar-dialog.glade.h:23
+msgid "From:"
+msgstr "Από:"
+
+#: ../data/glade/calendar-dialog.glade.h:24
+msgid "To:"
+msgstr "Προς:"
+
+#: ../data/glade/calendar-dialog.glade.h:25
+msgid "Apply"
+msgstr "Εφαρμογή"
+
+#: ../data/glade/calendar-dialog.glade.h:26
+msgid "New Calendar"
+msgstr "Νέο ημερολόγιο"
+
+#: ../data/glade/calendar-dialog.glade.h:27
+msgid "C_reate"
+msgstr "Δη_μιουργία"
+
+#: ../data/glade/calendar-dialog.glade.h:28
+msgid "_Existing calendars:"
+msgstr "Υ_πάρχοντα ημερολόγια:"
+
+#: ../data/glade/calendar-dialog.glade.h:29
+msgid "_Name of the new calendar:"
+msgstr "Ό_νομα του νέου ημερολογίου:"
+
+#: ../data/glade/calendar-dialog.glade.h:30
+msgid "_Derive from a calendar"
+msgstr "Απο_ορέει από ημερολόγιο"
+
+#: ../data/glade/calendar-dialog.glade.h:31
+msgid "C_opy an existing calendar"
+msgstr "Αν_τιγραφή υπάρχοντος ημερολογίου"
+
+#: ../data/glade/calendar-dialog.glade.h:32
+msgid "Create an _empty calendar"
+msgstr "Δημιουργία ενός κ_ενού ημερολογίου"
+
+#: ../data/glade/calendar-dialog.glade.h:33
+msgid "Select a Calendar"
+msgstr "Επιλογή ενός ημερολογίου"
+
+#: ../data/glade/calendar-dialog.glade.h:34
+msgid "Edit Day Types"
+msgstr "Επεξεργασία τύπων ημέρας"
+
+#: ../data/glade/calendar-dialog.glade.h:35
+msgid "Add Day Type"
+msgstr "Προσθήκη τύπων ημέρας"
+
+#: ../data/glade/column-dialog.glade.h:1
 msgid "Hidden columns:"
 msgstr "Κρυφές στήλες:"
 
 #: ../data/glade/column-dialog.glade.h:3
-msgid "Visible columns:"
-msgstr "Ορατές στήλες:"
+msgid "_Show"
+msgstr "Εμ_φάνιση"
 
 #: ../data/glade/column-dialog.glade.h:4
 msgid "_Hide"
 msgstr "Από_κρυψη"
 
 #: ../data/glade/column-dialog.glade.h:5
-msgid "_Show"
-msgstr "Εμ_φάνιση"
+msgid "Visible columns:"
+msgstr "Ορατές στήλες:"
+
+#: ../data/glade/eds.glade.h:1
+msgid "dialog1"
+msgstr "διάλογος1"
 
 #: ../data/glade/eds.glade.h:2
-msgid "Loading resource data"
-msgstr "Φόρτωση δεδομένων πόρου"
+msgid "Select group"
+msgstr "Επιλογή ομάδας"
 
 #: ../data/glade/eds.glade.h:3
 msgid "Search"
 msgstr "Αναζήτηση"
 
-#: ../data/glade/eds.glade.h:4
+#: ../data/glade/eds.glade.h:5
 msgid "Select All"
 msgstr "Επιλογή όλων"
-
-#: ../data/glade/eds.glade.h:5
-msgid "Select group"
-msgstr "Επιλογή ομάδας"
 
 #: ../data/glade/eds.glade.h:6
 msgid "Unselect All"
 msgstr "Αποεπιλογή όλων"
 
 #: ../data/glade/eds.glade.h:7
-msgid "dialog1"
-msgstr "διάλογος1"
+msgid "Loading resource data"
+msgstr "Φόρτωση δεδομένων πόρου"
 
 #: ../data/glade/group-dialog.glade.h:1
 msgid "Group Editor"
 msgstr "Επεξεργαστής ομάδας"
 
-#: ../data/glade/new-property.glade.h:2
+#: ../data/glade/new-property.glade.h:1
 msgid "Add Property"
 msgstr "Προσηκη ιδιότητας"
 
@@ -243,85 +247,89 @@ msgid "_Description:"
 msgstr "_Περιγραφή:"
 
 #: ../data/glade/new-property.glade.h:4
-msgid "_Label:"
-msgstr "Ε_τικέτα:"
-
-#: ../data/glade/new-property.glade.h:6
-#: ../data/glade/resource-dialog.glade.h:14
+#: ../data/glade/resource-dialog.glade.h:2
 msgid "_Type:"
 msgstr "_Τύπος:"
 
+#: ../data/glade/new-property.glade.h:6
+msgid "_Label:"
+msgstr "Ε_τικέτα:"
+
 #: ../data/glade/project-properties.glade.h:1
-msgid "Custom"
-msgstr "Προσαρμοσμένο:"
-
-#: ../data/glade/project-properties.glade.h:2
-msgid "Edit Project Phases"
-msgstr "Επεξεργασία φάσεων έργου"
-
-#: ../data/glade/project-properties.glade.h:3
-#: ../data/glade/resource-dialog.glade.h:5 ../data/glade/task-dialog.glade.h:6
-msgid "General"
-msgstr "Γενικά"
-
-#: ../data/glade/project-properties.glade.h:4
-msgid "New Project Phase"
-msgstr "Νέα φάση έργου"
-
-#: ../data/glade/project-properties.glade.h:5
 msgid "Project Properties"
 msgstr "Ιδιότητες έργου"
 
-#: ../data/glade/project-properties.glade.h:6
-msgid "Select..."
-msgstr "Επιλογή..."
+#: ../data/glade/project-properties.glade.h:3
+msgid "_Start:"
+msgstr "Έ_ναρξη:"
 
-#: ../data/glade/project-properties.glade.h:7
-msgid "_Calendar:"
-msgstr "_Ημερολόγιο:"
-
-#: ../data/glade/project-properties.glade.h:8
-msgid "_Manager:"
-msgstr "_Διαχειριστής:"
-
-#: ../data/glade/project-properties.glade.h:10
+#: ../data/glade/project-properties.glade.h:4
 msgid "_Organization:"
 msgstr "_Οργανισμός:"
 
-#: ../data/glade/project-properties.glade.h:11
+#: ../data/glade/project-properties.glade.h:5
+msgid "_Manager:"
+msgstr "_Διαχειριστής:"
+
+#: ../data/glade/project-properties.glade.h:6
+msgid "_Calendar:"
+msgstr "_Ημερολόγιο:"
+
+#: ../data/glade/project-properties.glade.h:7
+msgid "Select..."
+msgstr "Επιλογή..."
+
+#: ../data/glade/project-properties.glade.h:8
 msgid "_Phase:"
-msgstr "_Φάση"
+msgstr "_Φάση:"
+
+#: ../data/glade/project-properties.glade.h:9
+#: ../data/glade/resource-dialog.glade.h:9
+#: ../data/glade/task-dialog.glade.h:14
+msgid "General"
+msgstr "Γενικά"
+
+#: ../data/glade/project-properties.glade.h:10
+msgid "Custom"
+msgstr "Προσαρμοσμένο"
+
+#: ../data/glade/project-properties.glade.h:11
+msgid "Edit Project Phases"
+msgstr "Επεξεργασία φάσεων έργου"
 
 #: ../data/glade/project-properties.glade.h:12
-msgid "_Start:"
-msgstr "Έ_ναρξη:"
+msgid "New Project Phase"
+msgstr "Νέα φάση έργου"
 
 #: ../data/glade/property-dialog.glade.h:1
 msgid "Custom Properties"
 msgstr "Προσαρμοσμένες ιδιότητες"
 
-#: ../data/glade/resource-dialog.glade.h:2
+#: ../data/glade/resource-dialog.glade.h:3
+#: ../data/glade/resource-input-dialog.glade.h:4
+msgid "_Email:"
+msgstr "_Email:"
+
+#: ../data/glade/resource-dialog.glade.h:4
+#: ../data/glade/resource-input-dialog.glade.h:6
+msgid "_Group:"
+msgstr "Ομά_δα:"
+
+#: ../data/glade/resource-dialog.glade.h:5
 msgid "C_ost:"
 msgstr "Κό_στος:"
 
-#: ../data/glade/resource-dialog.glade.h:3
-msgid "Calendar"
-msgstr "Ημερολόγιο"
-
-#: ../data/glade/resource-dialog.glade.h:4
-msgid "Edit Calendars..."
-msgstr "Επεξεργασία ημερολογίων..."
-
-#: ../data/glade/resource-dialog.glade.h:6 ../data/glade/task-dialog.glade.h:7
-msgid "Notes"
-msgstr "Σημειώσεις"
-
 #: ../data/glade/resource-dialog.glade.h:7
-#: ../data/glade/resource-input-dialog.glade.h:3
+#: ../data/glade/resource-input-dialog.glade.h:7
+msgid "_Short name:"
+msgstr "Σύν_τομο όνομα:"
+
+#: ../data/glade/resource-dialog.glade.h:8
+#: ../data/glade/resource-input-dialog.glade.h:8
 msgid "Optional - overrides resource name in Gantt view."
 msgstr "Προαιρετικό - παρακάμπτει το όνομα πόρου στην προβολή Gantt."
 
-#: ../data/glade/resource-dialog.glade.h:8
+#: ../data/glade/resource-dialog.glade.h:10
 msgid ""
 "Select the calendar to use for this resource. If you want to use the default "
 "calendar of the project, select 'None'. "
@@ -329,64 +337,75 @@ msgstr ""
 "Επιλογή του ημερολογίου για χρήση για αυτόν τον πόρο. Αν θέλετε να "
 "χρησιμοποιήσετε το προεπιλεγμένο ημερολόγιο του έργου επιλέξτε 'Κανένα'. "
 
-#: ../data/glade/resource-dialog.glade.h:9
-#: ../data/glade/resource-input-dialog.glade.h:4
-msgid "_Email:"
-msgstr "_Email:"
-
-#: ../data/glade/resource-dialog.glade.h:10
-#: ../data/glade/resource-input-dialog.glade.h:5
-msgid "_Group:"
-msgstr "Ομά_δα:"
-
 #: ../data/glade/resource-dialog.glade.h:11
+msgid "Edit Calendars..."
+msgstr "Επεξεργασία ημερολογίων..."
+
+#: ../data/glade/resource-dialog.glade.h:12
+msgid "Calendar"
+msgstr "Ημερολόγιο"
+
+#: ../data/glade/resource-dialog.glade.h:13
 msgid "_Insert time stamp"
 msgstr "Ε_ισαγωγή ώρας"
 
-#: ../data/glade/resource-dialog.glade.h:13
-#: ../data/glade/resource-input-dialog.glade.h:8
-msgid "_Short name:"
-msgstr "Σύν_τομο όνομα:"
+#: ../data/glade/resource-dialog.glade.h:14
+#: ../data/glade/task-dialog.glade.h:18
+msgid "Notes"
+msgstr "Σημειώσεις"
 
-#: ../data/glade/resource-input-dialog.glade.h:2
+#: ../data/glade/resource-input-dialog.glade.h:1
 msgid "Insert Resource"
 msgstr "Εισαγωγή πόρου"
 
-#: ../data/glade/resource-input-dialog.glade.h:6
-#: ../data/glade/task-input-dialog.glade.h:3
+#: ../data/glade/resource-input-dialog.glade.h:2
+#: ../data/glade/task-input-dialog.glade.h:2
 msgid "_Insert"
 msgstr "Εισα_γωγή"
 
-#: ../data/glade/sql.glade.h:2
+#: ../data/glade/sql.glade.h:1
 msgid "Open Database"
 msgstr "Άνοιγμα βάσης δεδομένων"
 
+#: ../data/glade/sql.glade.h:2
+msgid "_Server:"
+msgstr "Ε_ξυπηρετητής:"
+
 #: ../data/glade/sql.glade.h:3
+msgid "_Username:"
+msgstr "Όνομα _Χρήστη:"
+
+#: ../data/glade/sql.glade.h:4
+msgid "_Password:"
+msgstr "_Κωδικός:"
+
+#: ../data/glade/sql.glade.h:6
+msgid "_Database:"
+msgstr "_Βάση δεδομένων:"
+
+#: ../data/glade/sql.glade.h:7
 msgid "Select a Project"
 msgstr "Επιλογή ενός έργου"
 
-#: ../data/glade/sql.glade.h:4
+#: ../data/glade/sql.glade.h:8
 msgid "The database contains the following projects. Select a project to open:"
 msgstr ""
 "Η βάση δεδομένων περιέχει τα ακόλουθα έργα. Επιλέξτε ένα έργο για άνοιγμα:"
 
-#: ../data/glade/sql.glade.h:5
-msgid "_Database:"
-msgstr "_Βάση δεδομένων:"
-
-#: ../data/glade/sql.glade.h:6
-msgid "_Password:"
-msgstr "_Κωδικός:"
-
-#: ../data/glade/sql.glade.h:7
-msgid "_Server:"
-msgstr "Ε_ξυπηρετητής:"
-
-#: ../data/glade/sql.glade.h:8
-msgid "_Username:"
-msgstr "Όνομα _Χρήστη:"
-
 #: ../data/glade/task-date-widget.glade.h:1
+msgid "window"
+msgstr "παράθυρο"
+
+#. The verb "schedule".
+#. This is the verb "schedule"
+#. I18n: the verb "schedule" here.
+#: ../data/glade/task-date-widget.glade.h:3
+#: ../data/glade/task-dialog.glade.h:13
+#: ../src/planner-cell-renderer-date.c:139
+msgid "Schedule:"
+msgstr "Προγραμμάτισε:"
+
+#: ../data/glade/task-date-widget.glade.h:4
 msgid ""
 "As soon as possible\n"
 "No earlier than\n"
@@ -396,163 +415,163 @@ msgstr ""
 "Όχι νωρίτερα από\n"
 "Σε καθορισμένη ημερομηνία"
 
-#: ../data/glade/task-date-widget.glade.h:4
-#: ../src/planner-cell-renderer-date.c:167
-#: ../src/planner-project-properties.c:747
-msgid "Cancel"
-msgstr "Ακύρωση"
-
-#. The verb "schedule".
-#. This is the verb "schedule"
-#. I18n: the verb "schedule" here.
-#: ../data/glade/task-date-widget.glade.h:6
-#: ../data/glade/task-dialog.glade.h:11
-#: ../src/planner-cell-renderer-date.c:139
-msgid "Schedule:"
-msgstr "Προγραμμάτισε:"
-
 #: ../data/glade/task-date-widget.glade.h:7
-#: ../src/planner-cell-renderer-date.c:174
-msgid "Select"
-msgstr "Επιλογή"
-
-#: ../data/glade/task-date-widget.glade.h:8
 #: ../src/planner-cell-renderer-date.c:161
 #: ../src/planner-project-properties.c:740
 msgid "Today"
 msgstr "Σήμερα"
 
-#: ../data/glade/task-date-widget.glade.h:9
-msgid "window"
-msgstr "παράθυρο"
+#: ../data/glade/task-date-widget.glade.h:8
+#: ../src/planner-cell-renderer-date.c:167
+#: ../src/planner-project-properties.c:747
+msgid "Cancel"
+msgstr "Ακύρωση"
 
-#: ../data/glade/task-dialog.glade.h:1
-msgid "  "
-msgstr "  "
+#: ../data/glade/task-date-widget.glade.h:9
+#: ../src/planner-cell-renderer-date.c:174
+msgid "Select"
+msgstr "Επιλογή"
+
+#: ../data/glade/task-dialog.glade.h:2
+#: ../data/glade/task-input-dialog.glade.h:4
+msgid "_Work:"
+msgstr "Ερ_γασία:"
+
+#: ../data/glade/task-dialog.glade.h:3
+msgid "_Duration:"
+msgstr "_Διάρκεια:"
 
 #: ../data/glade/task-dialog.glade.h:4
+msgid "C_omplete:"
+msgstr "Ολο_κληρώθηκε:"
+
+#: ../data/glade/task-dialog.glade.h:5
+msgid "_Priority:"
+msgstr "Προ_τεραιότητα:"
+
+#: ../data/glade/task-dialog.glade.h:7
 #, no-c-format
 msgid "%"
 msgstr "%"
 
-#: ../data/glade/task-dialog.glade.h:5
-msgid "C_omplete:"
-msgstr "Ολο_κληρώθηκε:"
-
 #: ../data/glade/task-dialog.glade.h:8
-msgid "Predecessors"
-msgstr "Πρόγονοι"
+msgid "  "
+msgstr "  "
 
-#: ../data/glade/task-dialog.glade.h:9 ../src/planner-resource-view.c:457
-msgid "Resources"
-msgstr "Πόροι"
-
-#: ../data/glade/task-dialog.glade.h:12
-msgid "_Duration:"
-msgstr "_Διάρκεια:"
-
-#: ../data/glade/task-dialog.glade.h:13
-msgid "_Fixed duration"
-msgstr "Κα_θορισμένη διάρκεια:"
-
-#: ../data/glade/task-dialog.glade.h:14
-msgid "_Insert Time Stamp"
-msgstr "Ε_ισαγωγή ώρας"
-
-#: ../data/glade/task-dialog.glade.h:15
+#: ../data/glade/task-dialog.glade.h:10
 msgid "_Milestone"
 msgstr "_Milestone"
 
+#: ../data/glade/task-dialog.glade.h:11
+msgid "_Fixed duration"
+msgstr "Κα_θορισμένη διάρκεια"
+
+#: ../data/glade/task-dialog.glade.h:15 ../src/planner-resource-view.c:457
+msgid "Resources"
+msgstr "Πόροι"
+
+#: ../data/glade/task-dialog.glade.h:16
+msgid "Predecessors"
+msgstr "Πρόγονοι"
+
 #: ../data/glade/task-dialog.glade.h:17
-msgid "_Priority:"
-msgstr "Προ_τεραιότητα:"
+msgid "_Insert Time Stamp"
+msgstr "Ε_ισαγωγή ώρας"
 
-#: ../data/glade/task-dialog.glade.h:18
-#: ../data/glade/task-input-dialog.glade.h:5
-msgid "_Work:"
-msgstr "Ερ_γασία:"
-
-#: ../data/glade/task-input-dialog.glade.h:2
+#: ../data/glade/task-input-dialog.glade.h:1
 msgid "Insert Task"
 msgstr "Εισαγωγή εργασίας"
 
 #: ../data/mime/planner.keys.in.h:1
-msgid "Documents/Project Management"
-msgstr "Έγγραφα/Διαχείριση έργων"
-
-#: ../data/mime/planner.keys.in.h:2
 msgid "Project Plan"
 msgstr "Σχέδιο έργου"
+
+#: ../data/mime/planner.keys.in.h:2
+msgid "Documents/Project Management"
+msgstr "Έγγραφα/Διαχείριση έργων"
 
 #: ../data/mime/planner.xml.in.h:1
 msgid "Planner project plan"
 msgstr "Σχεδιασμός έργου Planner"
 
 #: ../data/planner.desktop.in.in.h:1
-msgid "Planner Project Management"
-msgstr "Διαχείριση έργων Planner"
+#| msgid "Planner Files"
+msgid "Planner"
+msgstr "Planner"
 
 #: ../data/planner.desktop.in.in.h:2
 msgid "Project Management"
 msgstr "Διαχείριση έργων"
 
-#: ../data/planner.schemas.in.h:1
-msgid "Display nonstandard days in Gantt view"
-msgstr "Προβολή μη τυποποιημένων ημερών στην προβολή του διαγράμματος Gannt"
+#: ../data/planner.desktop.in.in.h:3
+msgid "Planner Project Management"
+msgstr "Διαχείριση έργων Planner"
 
-#: ../data/planner.schemas.in.h:2
+#: ../data/planner.desktop.in.in.h:4
+msgid "Handle the tasks, resources, and cost of your projects"
+msgstr "Χειρισμός των εργασιών, πόρων και κόστους των έργων σας"
+
+#: ../data/planner.desktop.in.in.h:5
+msgid "Gantt;Chart;Critical path;Relationship;Dependency;WBS;"
+msgstr "Gantt·διάγραμμα·κρίσιμη διαδρομή·σχέση·εξάρτηση.;WBS·"
+
+#: ../data/planner.schemas.in.h:1
 msgid "Highlight critical path in Gantt view"
 msgstr "Επισήμανση σημαντικής διαδρομής στην προβολή Gantt"
 
-#: ../data/planner.schemas.in.h:3
-msgid "Highlight critical path in Task view"
-msgstr "Επισήμανση σημαντικής διαδρομής στην προβολή εργασίας"
-
-#: ../data/planner.schemas.in.h:4
-msgid "Print the Gantt view"
-msgstr "Εκτύπωση της προβολής Gantt "
-
-#: ../data/planner.schemas.in.h:5
-msgid "Print the Resource view"
-msgstr "Εκτύπωση της προβολής πηγών"
-
-#: ../data/planner.schemas.in.h:6
-msgid "Print the Task view"
-msgstr "Εκτύπωση της προβολής εργασίας"
-
-#: ../data/planner.schemas.in.h:7
-msgid "The active view"
-msgstr "Η ενεργή προβολή"
-
-#: ../data/planner.schemas.in.h:8
-msgid "Whether printing of the Gantt view is enabled."
-msgstr "Αν θα είναι ενεργοποιημένη η εκτύπωση του Gantt "
-
-#: ../data/planner.schemas.in.h:9
-msgid "Whether printing of the Resource view is enabled."
-msgstr "Αν θα είναι ενεργοποιημένη η εκτύπωση της προβολή πόρων"
-
-#: ../data/planner.schemas.in.h:10
-msgid "Whether printing of the Task view is enabled."
-msgstr "Αν θα είναι ενεργοποιημένη η εκτύπωση της προβολής εργασιών."
-
-#: ../data/planner.schemas.in.h:11
-msgid "Whether to display nonstandard days in the Gantt view."
-msgstr "Αν θα γίνεται προβολή των μη τυποποιημένων ημερών στην προβολή Gantt."
-
-#: ../data/planner.schemas.in.h:12
+#: ../data/planner.schemas.in.h:2
 msgid ""
 "Whether to highlight the tasks along the cricital path in the Gantt view."
 msgstr ""
 "Αν θα γίνεται επισήμανση των εργασιών μαζί με τη σημαντική διαδρομή στην "
 "προβολή Gantt."
 
-#: ../data/planner.schemas.in.h:13
+#: ../data/planner.schemas.in.h:3
+msgid "Display nonstandard days in Gantt view"
+msgstr "Προβολή μη τυποποιημένων ημερών στην προβολή του διαγράμματος Gannt"
+
+#: ../data/planner.schemas.in.h:4
+msgid "Whether to display nonstandard days in the Gantt view."
+msgstr "Αν θα γίνεται προβολή των μη τυποποιημένων ημερών στην προβολή Gantt."
+
+#: ../data/planner.schemas.in.h:5
+msgid "Highlight critical path in Task view"
+msgstr "Επισήμανση σημαντικής διαδρομής στην προβολή εργασίας"
+
+#: ../data/planner.schemas.in.h:6
 msgid ""
 "Whether to highlight the tasks along the cricital path in the Task view."
 msgstr ""
 "Αν θα γίνεται επισήμανση των εργασιών μαζί με τη σημαντική διαδρομή στην "
 "προβολή εργασίας."
+
+#: ../data/planner.schemas.in.h:7
+msgid "Print the Gantt view"
+msgstr "Εκτύπωση της προβολής Gantt"
+
+#: ../data/planner.schemas.in.h:8
+msgid "Whether printing of the Gantt view is enabled."
+msgstr "Αν θα είναι ενεργοποιημένη η εκτύπωση του Gantt."
+
+#: ../data/planner.schemas.in.h:9
+msgid "Print the Task view"
+msgstr "Εκτύπωση της προβολής εργασίας"
+
+#: ../data/planner.schemas.in.h:10
+msgid "Whether printing of the Task view is enabled."
+msgstr "Αν θα είναι ενεργοποιημένη η εκτύπωση της προβολής εργασιών."
+
+#: ../data/planner.schemas.in.h:11
+msgid "Print the Resource view"
+msgstr "Εκτύπωση της προβολής πηγών"
+
+#: ../data/planner.schemas.in.h:12
+msgid "Whether printing of the Resource view is enabled."
+msgstr "Αν θα είναι ενεργοποιημένη η εκτύπωση της προβολή πόρων."
+
+#: ../data/planner.schemas.in.h:13
+msgid "The active view"
+msgstr "Η ενεργή προβολή"
 
 #: ../data/planner.schemas.in.h:14
 msgid "Which view to display in the user interface."
@@ -563,48 +582,48 @@ msgid "Company:"
 msgstr "Εταιρία:"
 
 #: ../data/stylesheets/localizable.xml.h:2
-msgid "Complete"
-msgstr "Ολοκληρώθηκε"
-
-#: ../data/stylesheets/localizable.xml.h:3
-msgid "Finish:"
-msgstr "Τέλος:"
-
-#: ../data/stylesheets/localizable.xml.h:4
-msgid "Gantt Chart"
-msgstr "Διάγραμμα Gantt"
-
-#: ../data/stylesheets/localizable.xml.h:5
 msgid "Manager:"
 msgstr "Διαχειριστής:"
 
+#: ../data/stylesheets/localizable.xml.h:3
+msgid "Start:"
+msgstr "Έναρξη:"
+
+#: ../data/stylesheets/localizable.xml.h:4
+msgid "Finish:"
+msgstr "Τέλος:"
+
+#: ../data/stylesheets/localizable.xml.h:5
+msgid "Report Date:"
+msgstr "Ημερομηνία αναφοράς:"
+
 #: ../data/stylesheets/localizable.xml.h:6
-msgid "Phase:"
-msgstr "Φάση:"
+msgid "Week"
+msgstr "Εβδομάδα"
 
 #: ../data/stylesheets/localizable.xml.h:7
 msgid "Priority"
 msgstr "Προτεραιότητα"
 
 #: ../data/stylesheets/localizable.xml.h:8
-msgid "Report Date:"
-msgstr "Ημερομηνία αναφοράς:"
+msgid "Complete"
+msgstr "Ολοκληρώθηκε"
 
 #: ../data/stylesheets/localizable.xml.h:9
-msgid "Start:"
-msgstr "Έναρξη:"
-
-#: ../data/stylesheets/localizable.xml.h:10
 msgid "This file was generated by"
 msgstr "Αυτό το αρχείο δημιουργήθηκε από"
 
+#: ../data/stylesheets/localizable.xml.h:10
+msgid "Gantt Chart"
+msgstr "Διάγραμμα Gantt"
+
 #: ../data/stylesheets/localizable.xml.h:11
-msgid "Unnamed Project"
-msgstr "Έργο χωρίς όνομα"
+msgid "Phase:"
+msgstr "Φάση:"
 
 #: ../data/stylesheets/localizable.xml.h:12
-msgid "Week"
-msgstr "Εβδομάδα"
+msgid "Unnamed Project"
+msgstr "Έργο χωρίς όνομα"
 
 #: ../libplanner/mrp-day.c:54
 msgid "Working"
@@ -645,7 +664,7 @@ msgstr "Αδυναμία δημιουργίας δέντρου XML"
 msgid "Could not write XML file"
 msgstr "Αδυναμία εγγραφής αρχείου XML"
 
-#: ../libplanner/mrp-project.c:437 ../src/planner-group-dialog.c:846
+#: ../libplanner/mrp-project.c:437 ../src/planner-group-dialog.c:842
 msgid "Default"
 msgstr "Προεπιλογή"
 
@@ -708,7 +727,7 @@ msgid "Duration"
 msgstr "Διάρκεια"
 
 #: ../libplanner/mrp-property.c:377 ../src/planner-gantt-view.c:630
-#: ../src/planner-resource-view.c:1354 ../src/planner-task-view.c:373
+#: ../src/planner-resource-view.c:1343 ../src/planner-task-view.c:373
 msgid "Cost"
 msgstr "Κόστος"
 
@@ -729,12 +748,12 @@ msgstr "Δεν αναφέρθηκαν σφάλματα."
 msgid "Invalid Unicode"
 msgstr "Μη έγκυρο Unicode"
 
-#: ../libplanner/mrp-sql.c:2260
+#: ../libplanner/mrp-sql.c:2258
 #, c-format
 msgid "Connection to database '%s' failed.\n"
 msgstr "Η σύνδεση στη βάση δεδομένων '%s' απέτυχε.\n"
 
-#: ../libplanner/mrp-sql.c:2265
+#: ../libplanner/mrp-sql.c:2263
 #, c-format
 msgid ""
 "Connection to database '%s' failed.\n"
@@ -743,25 +762,25 @@ msgstr ""
 "Η σύνδεση στη βάση δεδομένων '%s' απέτυχε.\n"
 "%s"
 
-#: ../libplanner/mrp-sql.c:2274 ../libplanner/mrp-sql.c:3713
+#: ../libplanner/mrp-sql.c:2272 ../libplanner/mrp-sql.c:3711
 msgid "Failed to create a dictionary for the database connection.\n"
-msgstr "Αποτυχία δημιουργίας λεξικού για την σύνδεση με την βάση δεδομένων\n"
+msgstr "Αποτυχία δημιουργίας λεξικού για την σύνδεση με την βάση δεδομένων.\n"
 
-#: ../libplanner/mrp-sql.c:2288
+#: ../libplanner/mrp-sql.c:2286
 #, c-format
 msgid "BEGIN command failed %s."
 msgstr "Η εντολή BEGIN απέτυχε %s."
 
-#: ../libplanner/mrp-sql.c:2457
+#: ../libplanner/mrp-sql.c:2455
 #, c-format
 msgid ""
 "The project '%s' has been changed by the user '%s' since you opened it. Do "
 "you want to save anyway?"
 msgstr ""
-"Το έργο  '%s' έχει αλλάξει από το χρήστη  '%s' από τότε που την ανοίξατε. "
+"Το έργο '%s' έχει αλλάξει από το χρήστη '%s' από τότε που την ανοίξατε. "
 "Θέλετε να την αποθηκεύσετε οπωσδήποτε;"
 
-#: ../libplanner/mrp-sql.c:3706
+#: ../libplanner/mrp-sql.c:3704
 #, c-format
 msgid "Connection to database '%s' failed."
 msgstr "Η σύνδεση στη βάση δεδομένων '%s' απέτυχε."
@@ -770,7 +789,7 @@ msgstr "Η σύνδεση στη βάση δεδομένων '%s' απέτυχε
 #, c-format
 msgid "Invalid SQL URI (must start with 'sql://' and contain '#')."
 msgstr ""
-"Μη έγκυρο SQL URI (θα πρέπει να ξεκινάει με  'sql://' και να περιέχει '#')."
+"Μη έγκυρο SQL URI (θα πρέπει να ξεκινάει με 'sql://' και να περιέχει '#')."
 
 #: ../libplanner/mrp-storage-sql.c:275
 #, c-format
@@ -780,9 +799,9 @@ msgstr "Μη έγκυρο SQL URI (μη έγκυρο id εργου)."
 #: ../libplanner/mrp-storage-sql.c:283
 #, c-format
 msgid "Invalid SQL URI (no database name specified)."
-msgstr "Μη έγκυρο SQL URI (δεν καθορίστηκε όνομα βάσης δεδομένων)"
+msgstr "Μη έγκυρο SQL URI (δεν καθορίστηκε όνομα βάσης δεδομένων)."
 
-#: ../libplanner/mrp-task.c:1070
+#: ../libplanner/mrp-task.c:1068
 #, c-format
 msgid ""
 "Could not add a predecessor relation, because the tasks are already related."
@@ -790,16 +809,16 @@ msgstr ""
 "Δεν είναι δυνατή η προσθήκη προγονικής σχέσης, επειδή τα έργα σχετίζονται "
 "ήδη."
 
-#: ../libplanner/mrp-task.c:1081
+#: ../libplanner/mrp-task.c:1079
 msgid "Start to Finish relation type cannot be combined with other relations."
 msgstr "Η σχέση Έναρξη προς τέλος δεν μπορεί να συνδυαστεί με άλλες σχέσεις."
 
-#: ../libplanner/mrp-task.c:1083
+#: ../libplanner/mrp-task.c:1081
 msgid "Finish to Finish relation type cannot be combined with other relations."
 msgstr ""
 "Ο τύπος σχέσης Τέλος προς Τέλος δεν μπορεί να συνδυαστεί με άλλες σχέσεις."
 
-#: ../libplanner/mrp-task.c:1100
+#: ../libplanner/mrp-task.c:1098
 msgid ""
 "Start to Finish relation type cannot be combined with Start No Earlier Than "
 "constraint."
@@ -807,7 +826,7 @@ msgstr ""
 "Ο τύπος σχέσης Αρχή προς Τέλος δεν μπορεί να συνδυαστεί με Αρχή νωρίτερο από "
 "τον περιορισμό."
 
-#: ../libplanner/mrp-task.c:1102
+#: ../libplanner/mrp-task.c:1100
 msgid ""
 "Finish to Finish relation type cannot be combined with Start No Earlier Than "
 "constraint."
@@ -815,7 +834,7 @@ msgstr ""
 "Ο τύπος σχέσης Τέλος προς Τέλος δεν μπορεί να συνδυαστεί με Αρχή νωρίτερο "
 "από τον περιορισμό."
 
-#: ../libplanner/mrp-task.c:1126
+#: ../libplanner/mrp-task.c:1124
 #, c-format
 msgid ""
 "Start to Finish relation cannot be set. Predecessor starts on project start "
@@ -824,12 +843,12 @@ msgstr ""
 "Δεν γίνετε να θέσω την σχέση Έναρξη προς Τέλος. Ο πρόγονος ξεκινά την "
 "ημερομηνία έναρξης του έργου."
 
-#: ../libplanner/mrp-task-manager.c:2630
+#: ../libplanner/mrp-task-manager.c:2603
 #, c-format
 msgid "Cannot add a predecessor, because it would result in a loop."
-msgstr "Δεν είναι δυνατή η προσθήκη προγόνου, γιατί θα  δημιουργηθεί βρόγχος."
+msgstr "Δεν είναι δυνατή η προσθήκη προγόνου, γιατί θα δημιουργηθεί βρόχος."
 
-#: ../libplanner/mrp-task-manager.c:2674
+#: ../libplanner/mrp-task-manager.c:2647
 #, c-format
 msgid "Cannot move the task, because it would result in a loop."
 msgstr ""
@@ -839,7 +858,7 @@ msgstr ""
 #. Translators: Example output: October 9, 2006
 #: ../libplanner/mrp-xsl.c:93
 msgid "%B %e, %Y"
-msgstr "%b %e %Y"
+msgstr "%e %b %Y"
 
 #: ../libplanner/mrp-xsl.c:157 ../libplanner/mrp-xsl.c:205
 #, c-format
@@ -894,7 +913,7 @@ msgstr "Αφαίρεση ημερολογίου"
 msgid "Add new calendar"
 msgstr "Προσθήκη νέου ημερολογίου"
 
-#: ../src/planner-cell-renderer-date.c:146 ../src/planner-task-dialog.c:1491
+#: ../src/planner-cell-renderer-date.c:146 ../src/planner-task-dialog.c:1485
 msgid "As soon as possible"
 msgstr "Όσον το δυνατόν πιό σύντομα"
 
@@ -971,7 +990,7 @@ msgstr "Καθόλου εργάσιμος χρόνος"
 msgid "%H:%M"
 msgstr "%H:%M"
 
-#: ../src/planner-default-week-dialog.c:553
+#: ../src/planner-default-week-dialog.c:555
 msgid "Edit default week"
 msgstr "Επεξεργασία προεπιλεγμένης εβδομάδας"
 
@@ -984,14 +1003,14 @@ msgid "Import resources from Evolution Data Server"
 msgstr "Εισαγωγή πόρων από τον εξυπηρετητή δεδομένων του Evolution"
 
 #: ../src/planner-eds-plugin.c:384 ../src/planner-gantt-print.c:191
-#: ../src/planner-gantt-view.c:624 ../src/planner-group-dialog.c:822
-#: ../src/planner-property-dialog.c:475 ../src/planner-resource-view.c:1211
-#: ../src/planner-task-dialog.c:2616 ../src/planner-task-dialog.c:2690
+#: ../src/planner-gantt-view.c:624 ../src/planner-group-dialog.c:818
+#: ../src/planner-property-dialog.c:475 ../src/planner-resource-view.c:1200
+#: ../src/planner-task-dialog.c:2605 ../src/planner-task-dialog.c:2679
 #: ../src/planner-task-view.c:367
 msgid "Name"
 msgstr "Όνομα"
 
-#: ../src/planner-eds-plugin.c:404 ../src/planner-resource-view.c:1327
+#: ../src/planner-eds-plugin.c:404 ../src/planner-resource-view.c:1316
 msgid "Email"
 msgstr "Email"
 
@@ -1005,11 +1024,11 @@ msgstr "Φωτογραφία"
 
 #: ../src/planner-eds-plugin.c:664
 msgid "Imported from Evolution Data Server"
-msgstr "Εισηγμένα από  Evolution Data Server"
+msgstr "Εισηγμένα από τον εξυπηρετητή δεδομένων του Evolution"
 
 #: ../src/planner-eds-plugin.c:665
 msgid "Updated from Evolution Data Server"
-msgstr "Ενημερωμένα από  Evolution Data Server"
+msgstr "Ενημερωμένα από εξυπηρετητή δεδομένων του Evolution"
 
 #: ../src/planner-eds-plugin.c:850
 msgid "Query cancelled."
@@ -1022,32 +1041,33 @@ msgstr "Evolution Data Server UID"
 #: ../src/planner-eds-plugin.c:912
 msgid "Identifier used by Evolution Data Server for resources"
 msgstr ""
-"Αναγνωριστικό που χρησιμοποιείται από το  Evolution Data Server για πόρους"
+"Αναγνωριστικό που χρησιμοποιείται από τον εξυπηρετητή δεδομένων του "
+"Evolution για πόρους"
 
 #: ../src/planner-format.c:153
 #, c-format
 msgid "%dd %dh"
-msgstr "%dd %dh"
+msgstr "%dη %dω"
 
 #: ../src/planner-format.c:156
 #, c-format
 msgid "%dd"
-msgstr "%dd"
+msgstr "%dη"
 
 #: ../src/planner-format.c:161
 #, c-format
 msgid "%dh %dmin"
-msgstr "%dΏρες %dΛεπτά"
+msgstr "%dω %dλ"
 
 #: ../src/planner-format.c:164
 #, c-format
 msgid "%dh"
-msgstr "%dh"
+msgstr "%dω"
 
 #: ../src/planner-format.c:168
 #, c-format
 msgid "%dmin"
-msgstr "%dλεπτά"
+msgstr "%dλ"
 
 #. i18n: this string is the date nr and month name, displayed
 #. * e.g. in the date cells in the task tree. See
@@ -1055,7 +1075,7 @@ msgstr "%dλεπτά"
 #.
 #: ../src/planner-format.c:203
 msgid "%b %e"
-msgstr "%b %e"
+msgstr "%e %b"
 
 #: ../src/planner-format.c:387
 msgid "mon"
@@ -1074,7 +1094,7 @@ msgstr "μήνες"
 #. month unit variant accepted in input
 #: ../src/planner-format.c:390
 msgid "w"
-msgstr "εβ"
+msgstr "β"
 
 #. week unit variant accepted in input
 #: ../src/planner-format.c:391
@@ -1089,7 +1109,7 @@ msgstr "εβδομάδες"
 #. week unit variant accepted in input
 #: ../src/planner-format.c:393
 msgid "d"
-msgstr "ημ"
+msgstr "η"
 
 #. day unit variant accepted in input
 #: ../src/planner-format.c:394
@@ -1119,7 +1139,7 @@ msgstr "ώρες"
 #. hour unit variant accepted in input
 #: ../src/planner-format.c:399
 msgid "min"
-msgstr "λεπ"
+msgstr "λ"
 
 #. minute unit variant accepted in input
 #: ../src/planner-format.c:400
@@ -1133,52 +1153,53 @@ msgstr "λεπτά"
 
 #. i18n: project start, the date format is described in
 #. * libmrproject/docs/DateFormat.
-#: ../src/planner-gantt-background.c:647
+#: ../src/planner-gantt-background.c:643
 msgid "%Y %b %d"
-msgstr "%Y %b %d"
+msgstr "%d %b %Y"
 
-#: ../src/planner-gantt-background.c:649
+#: ../src/planner-gantt-background.c:645
 msgid "Project start"
 msgstr "Έναρξη έργου"
 
-#: ../src/planner-gantt-header.c:671
-msgid "%e %b %Y"
-msgstr "%e %b %Y"
+#: ../src/planner-gantt-header.c:659
+#| msgid "%e %b %Y"
+msgid "%a, %e %b %Y"
+msgstr "%a, %e %b %Y"
 
 #: ../src/planner-gantt-print.c:199 ../src/planner-gantt-view.c:627
-#: ../src/planner-resource-dialog.c:1850 ../src/planner-resource-view.c:790
-#: ../src/planner-resource-view.c:806 ../src/planner-resource-view.c:1776
+#: ../src/planner-resource-dialog.c:1836 ../src/planner-resource-view.c:790
+#: ../src/planner-resource-view.c:806 ../src/planner-resource-view.c:1760
 #: ../src/planner-task-view.c:370
 msgid "Work"
 msgstr "Εργασία"
 
-#: ../src/planner-gantt-print.c:546 ../src/planner-gantt-row.c:779
-#: ../src/planner-html-plugin.c:124 ../src/planner-task-tree.c:1601
-#: ../src/planner-window.c:1868
+#: ../src/planner-gantt-print.c:546 ../src/planner-gantt-row.c:771
+#: ../src/planner-html-plugin.c:120 ../src/planner-task-tree.c:1584
+#: ../src/planner-window.c:1837
 msgid "Unnamed"
 msgstr "Χωρίς τίτλο"
 
-#: ../src/planner-gantt-row.c:2361
+#: ../src/planner-gantt-row.c:2350
 #, c-format
 msgid "Change work to %s"
 msgstr "Αλλαγή εργασίας σε %s"
 
-#: ../src/planner-gantt-row.c:2377
+#: ../src/planner-gantt-row.c:2366
 #, c-format
 msgid "Change progress to %u%% complete"
 msgstr "Αλλαγή προόδου σε %u%% ολοκληρωμένο"
 
-#: ../src/planner-gantt-row.c:2416 ../src/planner-gantt-row.c:2419
+#: ../src/planner-gantt-row.c:2405 ../src/planner-gantt-row.c:2408
 msgid "No name"
 msgstr "Χωρίς όνομα"
 
-#: ../src/planner-gantt-row.c:2422
+#: ../src/planner-gantt-row.c:2411
 #, c-format
 msgid "Make task '%s' a predecessor of '%s'"
 msgstr "Μετατροπή εργασίας '%s' ως πρόγονου του '%s'"
 
-#: ../src/planner-gantt-row.c:3457 ../src/planner-task-dialog.c:455
-#: ../src/planner-task-tree.c:262 ../src/planner-task-tree.c:952
+#: ../src/planner-gantt-row.c:3443 ../src/planner-task-dialog.c:455
+#: ../src/planner-task-tree.c:259 ../src/planner-task-tree.c:941
 msgid "Edit task property"
 msgstr "Επεξεργασία ιδιότητας εργασίας"
 
@@ -1204,7 +1225,7 @@ msgstr "Αφαίρεση των επιλεγμένων έργων"
 
 #: ../src/planner-gantt-view.c:147
 msgid "_Edit Task Properties..."
-msgstr "Επεξεργασία ιδιοτήτων εργασίας..."
+msgstr "_Επεξεργασία ιδιοτήτων εργασίας..."
 
 #: ../src/planner-gantt-view.c:150 ../src/planner-resource-view.c:248
 #: ../src/planner-task-view.c:131
@@ -1366,7 +1387,7 @@ msgstr "% Ολοκλήρωσης"
 
 #: ../src/planner-gantt-view.c:991
 msgid "Edit Gantt Columns"
-msgstr "Επεξεργασία στηλών Gantt "
+msgstr "Επεξεργασία στηλών Gantt"
 
 #: ../src/planner-group-dialog.c:304
 msgid "Insert group"
@@ -1376,25 +1397,25 @@ msgstr "Εισαγωγή ομάδας"
 msgid "Remove group"
 msgstr "Αφαίρεση ομάδας"
 
-#: ../src/planner-group-dialog.c:526
+#: ../src/planner-group-dialog.c:525
 msgid "Default group"
 msgstr "Προεπιλεγμένη ομάδα"
 
-#: ../src/planner-group-dialog.c:644
+#: ../src/planner-group-dialog.c:643
 msgid "Edit group property"
-msgstr "Επεξεργασία  ιδιότητας ομάδας"
+msgstr "Επεξεργασία ιδιότητας ομάδας"
 
-#: ../src/planner-group-dialog.c:828
+#: ../src/planner-group-dialog.c:824
 msgid "Manager name"
 msgstr "Όνομα διαχειριστή"
 
-#: ../src/planner-group-dialog.c:834
+#: ../src/planner-group-dialog.c:830
 msgid "Manager phone"
 msgstr "Τηλέφωνο διαχειριστή"
 
-#: ../src/planner-group-dialog.c:840
+#: ../src/planner-group-dialog.c:836
 msgid "Manager email"
-msgstr "email διαχειριστή"
+msgstr "Διαχειριστής αλληλογραφίας"
 
 #: ../src/planner-html-plugin.c:46
 msgid "HTML"
@@ -1404,19 +1425,19 @@ msgstr "HTML"
 msgid "Export project to HTML"
 msgstr "Εξαγωγή έργου σε HTML"
 
-#: ../src/planner-html-plugin.c:81
+#: ../src/planner-html-plugin.c:79
 msgid "Could not export to HTML"
 msgstr "Αδυναμία εξαγωγής σε HTML"
 
-#: ../src/planner-html-plugin.c:109
+#: ../src/planner-html-plugin.c:105
 msgid "Export to HTML"
 msgstr "Εξαγωγή σε HTML"
 
-#: ../src/planner-html-plugin.c:153
+#: ../src/planner-html-plugin.c:149
 msgid "Show result in browser"
 msgstr "Εμφάνιση αποτελέσματος στο περιηγητή"
 
-#: ../src/planner-html-plugin.c:172 ../src/planner-window.c:1583
+#: ../src/planner-html-plugin.c:168 ../src/planner-window.c:1564
 #: ../src/planner-xml-planner-plugin.c:124
 #, c-format
 msgid "File \"%s\" exists, do you want to overwrite it?"
@@ -1431,8 +1452,9 @@ msgid "GEOMETRY"
 msgstr "ΓΕΩΜΕΤΡΙΑ"
 
 #: ../src/planner-main.c:40
-msgid "FILES"
-msgstr "ΑΡΧΕΙΑ"
+#| msgid "FILES"
+msgid "FILES|URIs"
+msgstr "ΑΡΧΕΙΑ|URIs"
 
 #: ../src/planner-main.c:63
 msgid "- Planner project management"
@@ -1448,7 +1470,7 @@ msgstr ""
 "Εκτελέστε '%s --help' για να δείτε μια πλήρη λίστα των διαθέσιμων επιλογών "
 "γραμμής εντολών.\n"
 
-#: ../src/planner-main.c:88
+#: ../src/planner-main.c:91
 #, c-format
 msgid "Invalid geometry string \"%s\"\n"
 msgstr "Λανθασμένη γεωμετρική συμβολοσειρά \"%s\"\n"
@@ -1463,7 +1485,7 @@ msgstr "Εισαγωγή αρχείου MS Project XML"
 
 #: ../src/planner-msp-plugin.c:117
 msgid "Couldn't import file."
-msgstr "Αδυναμία εισαγωγής αρχείου"
+msgstr "Αδυναμία εισαγωγής αρχείου."
 
 #: ../src/planner-msp-plugin.c:205
 msgid "Import a File"
@@ -1473,7 +1495,7 @@ msgstr "Εισαγωγή αρχείου"
 msgid "XML Files"
 msgstr "Αρχεία XML"
 
-#: ../src/planner-msp-plugin.c:218 ../src/planner-window.c:889
+#: ../src/planner-msp-plugin.c:218 ../src/planner-window.c:882
 msgid "All Files"
 msgstr "Όλα τα αρχεία"
 
@@ -1490,27 +1512,27 @@ msgstr "Αφαίρεση φάσης"
 msgid "Could not open plugin file '%s'\n"
 msgstr "Αδυναμία ανοίγματος αρχείου πρόσθετης λειτουργίας '%s'\n"
 
-#: ../src/planner-predecessor-model.c:191 ../src/planner-task-dialog.c:2217
+#: ../src/planner-predecessor-model.c:191 ../src/planner-task-dialog.c:2206
 msgid "FS"
-msgstr "FS"
+msgstr "Τέλος-Έναρξη"
 
-#: ../src/planner-predecessor-model.c:194 ../src/planner-task-dialog.c:2218
+#: ../src/planner-predecessor-model.c:194 ../src/planner-task-dialog.c:2207
 msgid "FF"
-msgstr "FF"
+msgstr "Τέλος-Τέλος"
 
-#: ../src/planner-predecessor-model.c:197 ../src/planner-task-dialog.c:2219
+#: ../src/planner-predecessor-model.c:197 ../src/planner-task-dialog.c:2208
 msgid "SS"
-msgstr "SS"
+msgstr "Έναρξη-Έναρξη"
 
-#: ../src/planner-predecessor-model.c:200 ../src/planner-task-dialog.c:2220
+#: ../src/planner-predecessor-model.c:200 ../src/planner-task-dialog.c:2209
 msgid "SF"
-msgstr "SF"
+msgstr "Έναρξη-Τέλος"
 
 #: ../src/planner-print-dialog.c:247
 msgid "Select the views to print:"
 msgstr "Επιλέξτε τις προβολές για εκτύπωση:"
 
-#: ../src/planner-print-job.c:172
+#: ../src/planner-print-job.c:168
 msgid "Select views"
 msgstr "Επιλογή προβολών"
 
@@ -1528,7 +1550,7 @@ msgstr "Επεξεργασία οργανισμού"
 
 #: ../src/planner-project-properties.c:559
 msgid "Edit Manager"
-msgstr "Επεξεργαστής διαχείρισης:"
+msgstr "Επεξεργαστής διαχείρισης"
 
 #: ../src/planner-project-properties.c:631
 #: ../src/planner-project-properties.c:665
@@ -1587,8 +1609,8 @@ msgstr "Επεξεργασία της τιμής ιδιότητας του έρ�
 msgid "Label"
 msgstr "Ετικέτα"
 
-#: ../src/planner-property-dialog.c:504 ../src/planner-resource-view.c:1264
-#: ../src/planner-task-dialog.c:2722
+#: ../src/planner-property-dialog.c:504 ../src/planner-resource-view.c:1253
+#: ../src/planner-task-dialog.c:2711
 msgid "Type"
 msgstr "Τύπος"
 
@@ -1598,7 +1620,7 @@ msgstr "Προσθήκη ιδιότητας"
 
 #: ../src/planner-property-dialog.c:806
 msgid "Remove property"
-msgstr "Αφαίρεση  ιδιότητας"
+msgstr "Αφαίρεση ιδιότητας"
 
 #: ../src/planner-property-dialog.c:899
 msgid "Edit property label"
@@ -1611,14 +1633,14 @@ msgstr "Εισαγωγή πηγής"
 #. Put "no group" at the top.
 #: ../src/planner-resource-dialog.c:312
 #: ../src/planner-resource-input-dialog.c:100
-#: ../src/planner-resource-view.c:1985
+#: ../src/planner-resource-view.c:1967
 msgid "(None)"
 msgstr "(Κανένα)"
 
 #: ../src/planner-resource-dialog.c:322
 #: ../src/planner-resource-input-dialog.c:110 ../src/planner-task-dialog.c:381
 msgid "(No name)"
-msgstr "(ανώνυμο)"
+msgstr "(Ανώνυμο)"
 
 #: ../src/planner-resource-dialog.c:495
 msgid "Edit resource calendar"
@@ -1633,26 +1655,26 @@ msgid "Edit resource cost"
 msgstr "Επεξεργασία κόστους πόρου"
 
 #: ../src/planner-resource-dialog.c:711 ../src/planner-resource-dialog.c:752
-#: ../src/planner-resource-view.c:1453 ../src/planner-resource-view.c:1534
+#: ../src/planner-resource-view.c:1442 ../src/planner-resource-view.c:1523
 msgid "Edit resource property"
 msgstr "Επεξεργασία ιδιότητας πόρου"
 
 #. i18n: time stamp format for notes in task dialog, see strftime(3) for
 #. * a detailed description.
-#: ../src/planner-resource-dialog.c:1404 ../src/planner-task-dialog.c:1808
+#: ../src/planner-resource-dialog.c:1396 ../src/planner-task-dialog.c:1800
 msgid "%a %d %b %Y, %H:%M\n"
 msgstr "%a %d %b %Y, %H:%M\n"
 
-#: ../src/planner-resource-dialog.c:1521
+#: ../src/planner-resource-dialog.c:1512
 msgid "None (use project default)"
-msgstr "Κανένα (χρήση  προεπιλεγμένου έργου)"
+msgstr "Κανένα (χρήση προεπιλεγμένου έργου)"
 
-#: ../src/planner-resource-dialog.c:1648 ../src/planner-resource-dialog.c:1650
+#: ../src/planner-resource-dialog.c:1634 ../src/planner-resource-dialog.c:1636
 msgid "Edit resource properties"
 msgstr "Επεξεργασία ιδιοτήτων πόρου"
 
-#: ../src/planner-resource-dialog.c:1851 ../src/planner-resource-view.c:793
-#: ../src/planner-resource-view.c:807 ../src/planner-resource-view.c:1777
+#: ../src/planner-resource-dialog.c:1837 ../src/planner-resource-view.c:793
+#: ../src/planner-resource-view.c:807 ../src/planner-resource-view.c:1761
 msgid "Material"
 msgstr "Υλικό"
 
@@ -1708,23 +1730,23 @@ msgstr "/Επε_ξεργασία πόρου..."
 msgid "_Resources"
 msgstr "Πό_ροι"
 
-#: ../src/planner-resource-view.c:983
+#: ../src/planner-resource-view.c:980
 msgid "Remove resource"
 msgstr "Αφαίρεση πόρου"
 
-#: ../src/planner-resource-view.c:1060
+#: ../src/planner-resource-view.c:1049
 msgid "Edit Resource Columns"
 msgstr "Επεξεργασία στηλών πόρων"
 
-#: ../src/planner-resource-view.c:1095
+#: ../src/planner-resource-view.c:1084
 msgid "Edit custom resource properties"
 msgstr "Επεξεργασία ιδιοτήτων προσαρμοσμένου πόρου"
 
-#: ../src/planner-resource-view.c:1237
+#: ../src/planner-resource-view.c:1226
 msgid "Short name"
 msgstr "Σύντομο όνομα"
 
-#: ../src/planner-resource-view.c:1293
+#: ../src/planner-resource-view.c:1282
 msgid "Group"
 msgstr "Ομάδα"
 
@@ -1732,12 +1754,12 @@ msgstr "Ομάδα"
 #: ../src/planner-scale-utils.c:129
 #, c-format
 msgid "Wk %d"
-msgstr "Wk %d"
+msgstr "Βδ %d"
 
 #: ../src/planner-scale-utils.c:133
 #, c-format
 msgid "Week %d"
-msgstr "Εβδομάδα  %d"
+msgstr "Εβδομάδα %d"
 
 #: ../src/planner-scale-utils.c:139
 #, c-format
@@ -1754,25 +1776,25 @@ msgstr "Τ%d"
 #: ../src/planner-scale-utils.c:174
 #, c-format
 msgid "Qtr %d"
-msgstr "Τετρ %d"
+msgstr "Τρμ %d"
 
 #. i18n: Year, short "Quarter", preferably 2-3 letters.
 #: ../src/planner-scale-utils.c:178
 #, c-format
 msgid "%d, Qtr %d"
-msgstr "%d, Τετρ %d"
+msgstr "%d, Τρμ %d"
 
 #. i18n: Short "Half year", preferably 1 letter.
 #: ../src/planner-scale-utils.c:191
 #, c-format
 msgid "H%d"
-msgstr "Ε%d"
+msgstr "Ξ%d"
 
 #. i18n: Year, short "Half year", preferably 1 letter.
 #: ../src/planner-scale-utils.c:196
 #, c-format
 msgid "%04d, H%d"
-msgstr "%04d, Ε%d"
+msgstr "%04d, Ξ%d"
 
 #: ../src/planner-sql-plugin.c:94
 msgid "Open from Database..."
@@ -1796,8 +1818,8 @@ msgid ""
 "Database %s needs to be upgraded from version %s to version %s.\n"
 "Please backup database before the upgrade."
 msgstr ""
-"Η βάση δεδομένων  %s  χρειάζεται να αναβαθμιστεί από την έκδοση %s στην "
-"έκδοση %s.\n"
+"Η βάση δεδομένων %s χρειάζεται να αναβαθμιστεί από την έκδοση %s στην έκδοση "
+"%s.\n"
 "Παρακαλώ πάρτε ένα αντίγραφο ασφαλείας της βάσης δεδομένων πριν από την "
 "αναβάθμιση."
 
@@ -1835,7 +1857,7 @@ msgstr ""
 #: ../src/planner-sql-plugin.c:690
 #, c-format
 msgid "Connection to database '%s@%s' failed."
-msgstr "Η σύνδεση με τη βάση δεδομένων %s@%s'απέτυχε"
+msgstr "Η σύνδεση με τη βάση δεδομένων '%s@%s' απέτυχε."
 
 #: ../src/planner-sql-plugin.c:709
 #, c-format
@@ -1862,25 +1884,25 @@ msgstr "Αναθεώρηση"
 msgid "Open from Database"
 msgstr "Άνοιγμα από την βάση δεδομένων"
 
-#: ../src/planner-task-cmd.c:97
+#: ../src/planner-task-cmd.c:96
 msgid "Link task"
 msgstr "Σύνδεση εργασίας"
 
-#: ../src/planner-task-cmd.c:173
+#: ../src/planner-task-cmd.c:172
 msgid "Unlink task"
 msgstr "Αποσύνδεση εργασίας"
 
-#: ../src/planner-task-cmd.c:268
+#: ../src/planner-task-cmd.c:267
 msgid "Insert task"
 msgstr "Εισαγωγή εργασίας"
 
 #: ../src/planner-task-dialog.c:529
 msgid "Edit task type"
-msgstr "Επεξεργασία τύπου  εργασίας"
+msgstr "Επεξεργασία τύπου εργασίας"
 
 #: ../src/planner-task-dialog.c:596
 msgid "Toggle fixed duration"
-msgstr "Εναλλαγή καθορισμένης διάρκεια:"
+msgstr "Εναλλαγή καθορισμένης διάρκεια"
 
 #: ../src/planner-task-dialog.c:663
 msgid "Edit task scheduling"
@@ -1904,59 +1926,59 @@ msgstr "Επεξεργασία προγόνου εργασίας"
 
 #: ../src/planner-task-dialog.c:1021
 msgid "Edit lag predecessor"
-msgstr "Επεξεργασία  lag predecessor"
+msgstr "Επεξεργασία προηγούμενης υστέρησης"
 
-#: ../src/planner-task-dialog.c:1087
+#: ../src/planner-task-dialog.c:1086
 msgid "Edit task note"
 msgstr "Επεξεργασία σημείωσης εργασίας"
 
-#: ../src/planner-task-dialog.c:1495
+#: ../src/planner-task-dialog.c:1489
 #, c-format
 msgid "No earlier than %s"
 msgstr "Όχι νωρίτερα από %s"
 
-#: ../src/planner-task-dialog.c:1499
+#: ../src/planner-task-dialog.c:1493
 #, c-format
 msgid "On fixed date %s"
 msgstr "Σε συγκεκριμένη ημερομηνία %s"
 
-#: ../src/planner-task-dialog.c:1917
+#: ../src/planner-task-dialog.c:1909
 msgid "Finish to start (FS)"
 msgstr "Τέλος σε έναρξη (FS)"
 
-#: ../src/planner-task-dialog.c:1918
+#: ../src/planner-task-dialog.c:1910
 msgid "Finish to finish (FF)"
 msgstr "Τέλος σε τέλος (FF)"
 
-#: ../src/planner-task-dialog.c:1919
+#: ../src/planner-task-dialog.c:1911
 msgid "Start to start (SS)"
 msgstr "Έναρξη σε έναρξη (SS)"
 
-#: ../src/planner-task-dialog.c:1920
+#: ../src/planner-task-dialog.c:1912
 msgid "Start to finish (SF)"
 msgstr "Έναρξη σε τέλος (SF)"
 
-#: ../src/planner-task-dialog.c:1975
+#: ../src/planner-task-dialog.c:1967
 msgid "Can't add new predecessor. No task selected!"
 msgstr "Αδυναμία προσθήκης νέου πρόγονου. Δεν επιλέχθηκε εργασία!"
 
-#: ../src/planner-task-dialog.c:2463
+#: ../src/planner-task-dialog.c:2452
 msgid "Change..."
 msgstr "Αλλαγή..."
 
-#: ../src/planner-task-dialog.c:2637
+#: ../src/planner-task-dialog.c:2626
 msgid "Assigned"
 msgstr "Ανατέθηκε"
 
-#: ../src/planner-task-dialog.c:2654
+#: ../src/planner-task-dialog.c:2643
 msgid "Units"
 msgstr "Μονάδες"
 
-#: ../src/planner-task-dialog.c:2744
+#: ../src/planner-task-dialog.c:2733
 msgid "Lag"
 msgstr "Καθυστέρηση"
 
-#: ../src/planner-task-dialog.c:2887 ../src/planner-task-dialog.c:2889
+#: ../src/planner-task-dialog.c:2876 ../src/planner-task-dialog.c:2878
 msgid "Edit task properties"
 msgstr "Επεξεργασία ιδιοτήτων εργασίας"
 
@@ -1984,27 +2006,27 @@ msgstr "/Ανά_θεση πόρων..."
 msgid "/_Edit task..."
 msgstr "/_Επεξεργασία εργασίας..."
 
-#: ../src/planner-task-tree.c:572
+#: ../src/planner-task-tree.c:561
 msgid "Remove task"
 msgstr "Αφαίρεση εργασίας"
 
-#: ../src/planner-task-tree.c:649
+#: ../src/planner-task-tree.c:638
 msgid "Apply constraint to task"
 msgstr "Εφαρμογή περιορισμού στην εργασία"
 
-#: ../src/planner-task-tree.c:711
+#: ../src/planner-task-tree.c:700
 msgid "Reset task constraint"
 msgstr "Αρχικοποίηση περιορισμού εργασίας"
 
-#: ../src/planner-task-tree.c:1497 ../src/planner-task-tree.c:1654
+#: ../src/planner-task-tree.c:1483 ../src/planner-task-tree.c:1637
 msgid "N/A"
 msgstr "N/A"
 
-#: ../src/planner-task-tree.c:2825
+#: ../src/planner-task-tree.c:2804
 msgid "Remove tasks"
 msgstr "Αφαίρεση εργασιών"
 
-#: ../src/planner-task-tree.c:2887
+#: ../src/planner-task-tree.c:2866
 #, c-format
 msgid ""
 "You are about to open an edit dialog each for %i tasks. Are you sure that "
@@ -2013,52 +2035,52 @@ msgstr ""
 "Πρόκειται να ανοίξετε ένα διάλογο επεξεργασίας για %i εργασίες. Είστε "
 "σίγουροι ότι θέλετε να το κάνετε αυτό;"
 
-#: ../src/planner-task-tree.c:2989
+#: ../src/planner-task-tree.c:2968
 msgid "Unlink tasks"
 msgstr "Αποσύνδεση εργασιών"
 
-#: ../src/planner-task-tree.c:3041
+#: ../src/planner-task-tree.c:3020
 msgid "Link tasks"
 msgstr "Σύνδεση εργασιών"
 
-#: ../src/planner-task-tree.c:3132
+#: ../src/planner-task-tree.c:3109
 msgid "Indent tasks"
-msgstr "Ανάθεση εργασιών "
+msgstr "Ανάθεση εργασιών"
 
-#: ../src/planner-task-tree.c:3143
+#: ../src/planner-task-tree.c:3120
 msgid "Indent task"
 msgstr "Ανάθεση εργασίας"
 
-#: ../src/planner-task-tree.c:3237
+#: ../src/planner-task-tree.c:3212
 msgid "Unindent tasks"
-msgstr "Ακύρωση ανάθεσης εργασιών "
+msgstr "Ακύρωση ανάθεσης εργασιών"
 
-#: ../src/planner-task-tree.c:3255
+#: ../src/planner-task-tree.c:3230
 msgid "Unindent task"
 msgstr "Ακύρωση ανάθεσης εργασίας"
 
-#: ../src/planner-task-tree.c:3333
+#: ../src/planner-task-tree.c:3306
 msgid "Move tasks up"
 msgstr "Μετακίνηση εργασιών πάνω"
 
-#: ../src/planner-task-tree.c:3371
+#: ../src/planner-task-tree.c:3344
 msgid "Move task up"
 msgstr "Μετακίνηση εργασίας πάνω"
 
-#: ../src/planner-task-tree.c:3459
+#: ../src/planner-task-tree.c:3432
 msgid "Move tasks down"
 msgstr "Μετακίνηση εργασιών κάτω"
 
 #. Moving task from 'position' to 'position + 1'
-#: ../src/planner-task-tree.c:3505
+#: ../src/planner-task-tree.c:3478
 msgid "Move task down"
 msgstr "Μετακίνηση εργασίας κάτω"
 
-#: ../src/planner-task-tree.c:3561
+#: ../src/planner-task-tree.c:3534
 msgid "Reset task constraints"
 msgstr "Αρχικοποίηση περιορισμών εργασίας"
 
-#: ../src/planner-task-tree.c:3593
+#: ../src/planner-task-tree.c:3566
 msgid "Reset all task constraints"
 msgstr "Αρχικοποίηση όλων των περιορισμών εργασίας"
 
@@ -2129,9 +2151,18 @@ msgstr ""
 msgid "Resource _Usage"
 msgstr "Χρήση _πόρων"
 
-#: ../src/planner-usage-view.c:378
+#: ../src/planner-usage-view.c:380
 msgid "Edit Resource Usage Columns"
 msgstr "Επεξεργασία στηλών χρήσης πηγών"
+
+#: ../src/planner-util-win32.c:45
+#, c-format
+msgid "Unable to open '%s'"
+msgstr "Αδυναμία ανοίγματος '%s'"
+
+#: ../src/planner-util-win32.c:72
+msgid "Unable to open help file"
+msgstr "Αδυναμία ανοίγματος του αρχείου βοήθειας"
 
 #: ../src/planner-window.c:220
 msgid "_File"
@@ -2161,7 +2192,7 @@ msgstr "Άνοιγμα _προσφάτου"
 msgid "_Import"
 msgstr "Ε_ισαγωγή"
 
-#: ../src/planner-window.c:238 ../src/planner-window.c:1452
+#: ../src/planner-window.c:238 ../src/planner-window.c:1433
 msgid "_Save"
 msgstr "Αποθήκευ_ση"
 
@@ -2183,7 +2214,7 @@ msgstr "Αποθήκευση της τρέχουσας εργασίας με δ�
 
 #: ../src/planner-window.c:247
 msgid "Page Set_up..."
-msgstr "Διαμόρφωση _Σελίδας..."
+msgstr "Διαμόρφωση _Σελίδας..."
 
 #: ../src/planner-window.c:247
 msgid "Setup the page settings for your current printer"
@@ -2235,7 +2266,7 @@ msgstr "Αναίρεση της τελευταίας ενέργειας"
 
 #: ../src/planner-window.c:269
 msgid "_Redo"
-msgstr "Ακ_ύρωση αναίρεσης"
+msgstr "Ακύρ_ωση αναίρεσης"
 
 #: ../src/planner-window.c:269
 msgid "Redo the undone action"
@@ -2293,43 +2324,41 @@ msgstr "Πε_ρί"
 msgid "About this application"
 msgstr "Περί αυτής της εφαρμογής"
 
-#: ../src/planner-window.c:698
+#: ../src/planner-window.c:696
 #, c-format
 msgid "Switch to the view \"%s\""
-msgstr "Εναλλαγή σε προβολή  \"%s\""
+msgstr "Εναλλαγή σε προβολή \"%s\""
 
-#: ../src/planner-window.c:873
+#: ../src/planner-window.c:866
 msgid "Open a File"
 msgstr "Άνοιγμα ενός αρχείου"
 
-#: ../src/planner-window.c:883
+#: ../src/planner-window.c:876
 msgid "Planner Files"
 msgstr "Αρχεία Planner"
 
-#. I18n: Translators, list your names here, newline separated if there
-#. * are more than one, to appear in the about box.
-#.
-#: ../src/planner-window.c:1209 ../src/planner-window.c:1231
+#: ../src/planner-window.c:1212
+msgid "A Project Management application for the GNOME desktop"
+msgstr "Μια εφαρμογή διαχείρισης εργασιών για το GNOME"
+
+#: ../src/planner-window.c:1215
 msgid "translator-credits"
 msgstr ""
+"Δημήτρης Σπίγγος <dmtrs32@gmail.com>\n"
 "Κώστας Παπαδήμας <pkst@gnome.org>\n"
 "Πέτρος Βελώνης <velonis@freemail.gr>\n"
 "Χρήστος Πάππης"
 
-#: ../src/planner-window.c:1226
-msgid "A Project Management application for the GNOME desktop"
-msgstr "Μια εφαρμογή διαχείρισης εργασιών για το GNOME"
-
-#: ../src/planner-window.c:1233
+#: ../src/planner-window.c:1217
 msgid "The Planner Homepage"
 msgstr "Κεντρική σελίδα του Planner"
 
-#: ../src/planner-window.c:1385
+#: ../src/planner-window.c:1366
 msgid "If you don't save, changes made the last minute will be discarded."
 msgstr ""
 "Αν δεν αποθηκεύσετε, οι αλλαγές που κάνατε το τελευταίο λεπτό θα χαθούν."
 
-#: ../src/planner-window.c:1391
+#: ../src/planner-window.c:1372
 #, c-format
 msgid "If you don't save, changes made the last %d minute will be discarded."
 msgid_plural ""
@@ -2339,12 +2368,12 @@ msgstr[0] ""
 msgstr[1] ""
 "Αν δεν αποθηκεύσετε, οι αλλαγές που κάνατε τα τελευταία %d λεπτά θα χαθούν."
 
-#: ../src/planner-window.c:1399
+#: ../src/planner-window.c:1380
 msgid "If you don't save, changes made the last hour will be discarded."
 msgstr ""
 "Αν δεν αποθηκεύσετε, οι αλλαγές που κάνατε την τελευταία ώρα θα χαθούν."
 
-#: ../src/planner-window.c:1404
+#: ../src/planner-window.c:1385
 #, c-format
 msgid "If you don't save, changes made the last %d hour will be discarded."
 msgid_plural ""
@@ -2354,24 +2383,24 @@ msgstr[0] ""
 msgstr[1] ""
 "Αν δεν αποθηκεύσετε, οι αλλαγές που κάνατε τις τελευταίες %d ώρες θα χαθούν."
 
-#: ../src/planner-window.c:1414
+#: ../src/planner-window.c:1395
 #, c-format
 msgid "Save changes to document '%s' before closing?"
 msgstr "Αποθήκευση αλλαγών στο έγγραφο '%s' πριν την έξοδο;"
 
-#: ../src/planner-window.c:1439
+#: ../src/planner-window.c:1420
 msgid "C_lose without saving"
 msgstr "Κ_λείσιμο χωρίς αποθήκευση"
 
-#: ../src/planner-window.c:1445
+#: ../src/planner-window.c:1426
 msgid "_Cancel"
 msgstr "Ακύ_ρωση"
 
-#: ../src/planner-window.c:1545
+#: ../src/planner-window.c:1526
 msgid "Save a File"
 msgstr "Αποθήκευση ενός αρχείου"
 
-#: ../src/planner-window.c:1825
+#: ../src/planner-window.c:1794
 msgid ""
 "You have opened a file that was saved with an old version of Planner.\n"
 "\n"
@@ -2397,11 +2426,11 @@ msgstr ""
 "Μπορείτε να προσθέσετε μια προγονική σχέση με το να κάνετε κλικ στον πρόγονο "
 "και να το σύρετε στον απόγονο.\n"
 "\n"
-"Μετά από αυτό μπορείτε να αφαιρέσετε όλους τους περιορισμούς, επιλέγοντας  "
-"Άπομάκρυνση όλων των περιορισμών' από το μενού 'Έπεξεργασία'."
+"Μετά από αυτό μπορείτε να αφαιρέσετε όλους τους περιορισμούς, επιλέγοντας "
+"'Άπομάκρυνση όλων των περιορισμών' από το μενού 'Έπεξεργασία'."
 
 #. Hack.
-#: ../src/planner-window.c:1860
+#: ../src/planner-window.c:1829
 msgid "Unnamed database project"
 msgstr "Ανώνυμη εργασία βάσης δεδομένων"
 
@@ -2415,7 +2444,7 @@ msgstr "Planner 0.11 Format"
 
 #: ../src/planner-xml-planner-plugin.c:55
 msgid "Export project to a file suitable for Planner 0.11"
-msgstr "Εξαγωγή εργασίας σε αρχείο κατάλληλο για τον  Planner 0.11"
+msgstr "Εξαγωγή εργασίας σε αρχείο κατάλληλο για τον Planner 0.11"
 
 #: ../src/planner-xml-planner-plugin.c:90
 msgid "Export"
@@ -2428,7 +2457,8 @@ msgstr "EDS UID"
 #: ../eds-backend/e-cal-backend-planner.c:289
 msgid "Identifier used by Evolution Data Server for tasks"
 msgstr ""
-"Αναγνωριστικό που χρησιμοποιείται από το  Evolution Data Server για εργασίες"
+"Αναγνωριστικό που χρησιμοποιείται από το εξυπηρετητή δεδομένων του Evolution "
+"για εργασίες"
 
 #: ../eds-backend/e-cal-backend-planner.c:298
 msgid "EDS Categories"
@@ -2448,7 +2478,7 @@ msgstr "Ταξινόμηση EDS"
 msgid "Task access classification used by Evolution Data Server"
 msgstr ""
 "Αναγνωριστικό που χρησιμοποιείται από τον εξυπηρετητή δεδομένων του "
-"Evolution "
+"Evolution"
 
 #: ../eds-backend/e-cal-backend-planner.c:318
 msgid "EDS URL"
@@ -2466,11 +2496,11 @@ msgstr "Μη έγκυρο URI εξυπηρετητή"
 
 #. book_target = (EABConfigTargetSource *) data->target;
 #. source = book_target->source;
-#: ../eds-backend/planner-source/planner-source.c:120
+#: ../eds-backend/planner-source/planner-source.c:125
 msgid "Select planner file"
 msgstr "Επιλογή αρχείου planner"
 
-#: ../eds-backend/planner-source/planner-source.c:152
+#: ../eds-backend/planner-source/planner-source.c:157
 #, c-format
 msgid ""
 "The filename extension of this file isn't the planner usual file extension (%"
