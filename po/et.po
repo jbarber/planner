@@ -6,17 +6,17 @@
 # This file is distributed under the same license as the planner package.
 #
 # Ilmar Kerm <ikerm@hot.ee>, 2002.
-# Priit Laes <amd@tt.ee>, 2003.
+# Priit Laes <plaes plaes org>, 2003.
 # Ivar Smolin <okul linux ee>, 2005–2010.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Planner 0.15\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
-"product=planner&component=general\n"
-"POT-Creation-Date: 2010-11-15 23:37+0000\n"
-"PO-Revision-Date: 2010-09-10 08:56+0300\n"
-"Last-Translator: Ivar Smolin <okul@linux.ee>\n"
+"product=planner&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2012-11-14 09:10+0000\n"
+"PO-Revision-Date: 2012-12-19 15:45+0300\n"
+"Last-Translator: Mattias Põldaru <mahfiaz@gmail.com>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "Language: et\n"
 "MIME-Version: 1.0\n"
@@ -27,14 +27,33 @@ msgstr ""
 msgid "Add Predecessor"
 msgstr "Eelkäija lisamine"
 
-msgid "_Lag:"
-msgstr "_Viivitus:"
-
 msgid "_Name:"
 msgstr "_Nimi:"
 
 msgid "_Relation type:"
 msgstr "_Suhte tüüp: "
+
+msgid "_Lag:"
+msgstr "_Viivitus:"
+
+msgid "Default Week"
+msgstr "Vaikimisi nädal"
+
+msgid "<b>Calendar:</b>"
+msgstr "<b>Kalender:</b>"
+
+msgid ""
+"Select a weekday and the day type to use for that day in the default week "
+"for this calendar.\n"
+msgstr ""
+"Vali nädalapäev ja päeva tüüp, mida sa tahad kasutada vaikimisi nädalas "
+"selle kalendri jaoks.\n"
+
+msgid "Week day:"
+msgstr "Nädalapäev:"
+
+msgid "Day type:"
+msgstr "Päeva tüüp:"
 
 msgid ""
 "\n"
@@ -46,14 +65,8 @@ msgstr ""
 msgid "    "
 msgstr "    "
 
-msgid "*"
-msgstr "*"
-
-msgid "-"
-msgstr "-"
-
-msgid "<b>Calendar:</b>"
-msgstr "<b>Kalender:</b>"
+msgid "Edit Working Time"
+msgstr "Tööaja muutmine"
 
 msgid "<b>Day types</b>"
 msgstr "<b>Päevatüübid</b>"
@@ -61,78 +74,50 @@ msgstr "<b>Päevatüübid</b>"
 msgid "<b>Working hours</b>"
 msgstr "<b>Töötunnid</b>"
 
-msgid "<b>Working time</b>"
-msgstr "<b>Tööaeg</b>"
+msgid "-"
+msgstr "-"
 
-msgid "Add Day Type"
-msgstr "Päeva tüübi lisamine"
-
-msgid "Apply"
-msgstr "Rakenda"
-
-msgid "C_opy an existing calendar"
-msgstr "_Kopeeritakse olemasolev kalender"
-
-msgid "C_reate"
-msgstr "L_oo"
+msgid "*"
+msgstr "*"
 
 msgid "Calendar Editor"
 msgstr "Kalendriredaktor"
 
-msgid "Create an _empty calendar"
-msgstr "Luuakse _tühi kalender"
-
-msgid "Custom working time"
-msgstr "Kohandatud tööaeg"
-
-msgid "Day type:"
-msgstr "Päeva tüüp:"
-
-msgid "Default Week"
-msgstr "Vaikimisi nädal"
-
-msgid "Default week..."
-msgstr "Vaikimisi nädal..."
-
-msgid "Edit Day Types"
-msgstr "Päevatüüpide muutmine"
-
-msgid "Edit Working Time"
-msgstr "Tööaja muutmine"
-
-msgid "From:"
-msgstr "Algus:"
-
-msgid "New Calendar"
-msgstr "Uus kalender"
-
-msgid "Select a Calendar"
-msgstr "Kalendri valimine"
-
-msgid ""
-"Select a weekday and the day type to use for that day in the default week "
-"for this calendar.\n"
-msgstr ""
-"Vali nädalapäev ja päeva tüüp, mida sa tahad kasutada vaikimisi nädalas "
-"selle kalendri jaoks.\n"
-
-msgid "Set day type to:"
-msgstr "Määra päeva tüüp:"
-
-msgid "To:"
-msgstr "Lõpp:"
-
-msgid "Use working time from derived calendar"
-msgstr "Tööaega kasutatakse päritud kalendrist"
-
-msgid "Week day:"
-msgstr "Nädalapäev:"
+msgid "_New..."
+msgstr "_Uus..."
 
 msgid "Working time..."
 msgstr "Tööaeg..."
 
-msgid "_Derive from a calendar"
-msgstr "_Tuletatakse kalendrist"
+msgid "Default week..."
+msgstr "Vaikimisi nädal..."
+
+msgid "Use working time from derived calendar"
+msgstr "Tööaega kasutatakse päritud kalendrist"
+
+msgid "Set day type to:"
+msgstr "Määra päeva tüüp:"
+
+msgid "Custom working time"
+msgstr "Kohandatud tööaeg"
+
+msgid "<b>Working time</b>"
+msgstr "<b>Tööaeg</b>"
+
+msgid "From:"
+msgstr "Algus:"
+
+msgid "To:"
+msgstr "Lõpp:"
+
+msgid "Apply"
+msgstr "Rakenda"
+
+msgid "New Calendar"
+msgstr "Uus kalender"
+
+msgid "C_reate"
+msgstr "L_oo"
 
 msgid "_Existing calendars:"
 msgstr "Olemasolevad _kalendrid:"
@@ -140,23 +125,41 @@ msgstr "Olemasolevad _kalendrid:"
 msgid "_Name of the new calendar:"
 msgstr "_Uue kalendri nimi:"
 
-msgid "_New..."
-msgstr "_Uus..."
+msgid "_Derive from a calendar"
+msgstr "_Tuletatakse kalendrist"
+
+msgid "C_opy an existing calendar"
+msgstr "_Kopeeritakse olemasolev kalender"
+
+msgid "Create an _empty calendar"
+msgstr "Luuakse _tühi kalender"
+
+msgid "Select a Calendar"
+msgstr "Kalendri valimine"
+
+msgid "Edit Day Types"
+msgstr "Päevatüüpide muutmine"
+
+msgid "Add Day Type"
+msgstr "Päeva tüübi lisamine"
 
 msgid "Hidden columns:"
 msgstr "Peidetud veerud:"
 
-msgid "Visible columns:"
-msgstr "Nähtavad veerud:"
+msgid "_Show"
+msgstr "_Näita"
 
 msgid "_Hide"
 msgstr "_Peida"
 
-msgid "_Show"
-msgstr "_Näita"
+msgid "Visible columns:"
+msgstr "Nähtavad veerud:"
 
-msgid "Loading resource data"
-msgstr "Vahendite andmete laadimine"
+msgid "dialog1"
+msgstr "dialoog1"
+
+msgid "Select group"
+msgstr "Vali grupp"
 
 msgid "Search"
 msgstr "Otsing"
@@ -164,14 +167,11 @@ msgstr "Otsing"
 msgid "Select All"
 msgstr "Vali kõik"
 
-msgid "Select group"
-msgstr "Vali grupp"
-
 msgid "Unselect All"
 msgstr "Võta valik maha"
 
-msgid "dialog1"
-msgstr "dialoog1"
+msgid "Loading resource data"
+msgstr "Vahendite andmete laadimine"
 
 msgid "Group Editor"
 msgstr "Grupiredaktor"
@@ -182,11 +182,35 @@ msgstr "Omaduse lisamine"
 msgid "_Description:"
 msgstr "_Kirjeldus:"
 
+msgid "_Type:"
+msgstr "_Tüüp:"
+
 msgid "_Label:"
 msgstr "_Silt:"
 
-msgid "_Type:"
-msgstr "_Tüüp:"
+msgid "Project Properties"
+msgstr "Projekti omadused"
+
+msgid "_Start:"
+msgstr "_Algus:"
+
+msgid "_Organization:"
+msgstr "_Organisatsioon:"
+
+msgid "_Manager:"
+msgstr "_Juht:"
+
+msgid "_Calendar:"
+msgstr "_Kalender:"
+
+msgid "Select..."
+msgstr "Vali..."
+
+msgid "_Phase:"
+msgstr "_Faas:"
+
+msgid "General"
+msgstr "Üldine"
 
 msgid "Custom"
 msgstr "Kohandatud"
@@ -194,47 +218,23 @@ msgstr "Kohandatud"
 msgid "Edit Project Phases"
 msgstr "Projekti faaside muutmine"
 
-msgid "General"
-msgstr "Üldine"
-
 msgid "New Project Phase"
 msgstr "Uus projekti faas"
-
-msgid "Project Properties"
-msgstr "Projekti omadused"
-
-msgid "Select..."
-msgstr "Vali..."
-
-msgid "_Calendar:"
-msgstr "_Kalender:"
-
-msgid "_Manager:"
-msgstr "_Juht:"
-
-msgid "_Organization:"
-msgstr "_Organisatsioon:"
-
-msgid "_Phase:"
-msgstr "_Faas:"
-
-msgid "_Start:"
-msgstr "_Algus:"
 
 msgid "Custom Properties"
 msgstr "Kohandatud omadused"
 
+msgid "_Email:"
+msgstr "_E-post:"
+
+msgid "_Group:"
+msgstr "_Grupp:"
+
 msgid "C_ost:"
 msgstr "M_aksumus:"
 
-msgid "Calendar"
-msgstr "Kalender"
-
-msgid "Edit Calendars..."
-msgstr "Muuda kalendreid..."
-
-msgid "Notes"
-msgstr "Märkmed"
+msgid "_Short name:"
+msgstr "_Hüüdnimi:"
 
 msgid "Optional - overrides resource name in Gantt view."
 msgstr "Valikuline - kirjutab Gantt'i vaates vahendi nime üle"
@@ -246,17 +246,17 @@ msgstr ""
 "Vali selle vahendi jaoks kasutatav kalender. Kui sa soovid kasutada projekti "
 "vaikimisi kalendrit, siis vali 'Puudub'."
 
-msgid "_Email:"
-msgstr "_E-post:"
+msgid "Edit Calendars..."
+msgstr "Muuda kalendreid..."
 
-msgid "_Group:"
-msgstr "_Grupp:"
+msgid "Calendar"
+msgstr "Kalender"
 
 msgid "_Insert time stamp"
 msgstr "_Lisa ajatempel"
 
-msgid "_Short name:"
-msgstr "_Hüüdnimi:"
+msgid "Notes"
+msgstr "Märkmed"
 
 msgid "Insert Resource"
 msgstr "Vahendi lisamine"
@@ -267,23 +267,32 @@ msgstr "_Lisa"
 msgid "Open Database"
 msgstr "Ava andmebaas"
 
+msgid "_Server:"
+msgstr "_Server:"
+
+msgid "_Username:"
+msgstr "_Kasutajanimi:"
+
+msgid "_Password:"
+msgstr "_Parool:"
+
+msgid "_Database:"
+msgstr "_Andmebaas:"
+
 msgid "Select a Project"
 msgstr "Vali projekt"
 
 msgid "The database contains the following projects. Select a project to open:"
 msgstr "Andmebaas sisaldab järgnevaid projekte. Vali projekt, mida avada:"
 
-msgid "_Database:"
-msgstr "_Andmebaas:"
+msgid "window"
+msgstr "aken"
 
-msgid "_Password:"
-msgstr "_Parool:"
-
-msgid "_Server:"
-msgstr "_Server:"
-
-msgid "_Username:"
-msgstr "_Kasutajanimi:"
+#. The verb "schedule".
+#. This is the verb "schedule"
+#. I18n: the verb "schedule" here.
+msgid "Schedule:"
+msgstr "Ajastamine:"
 
 msgid ""
 "As soon as possible\n"
@@ -294,116 +303,116 @@ msgstr ""
 "Mitte varem kui\n"
 "Määratud ajal"
 
+msgid "Today"
+msgstr "Täna"
+
 msgid "Cancel"
 msgstr "Loobu"
-
-#. The verb "schedule".
-#. This is the verb "schedule"
-#. I18n: the verb "schedule" here.
-msgid "Schedule:"
-msgstr "Ajastamine:"
 
 msgid "Select"
 msgstr "Vali"
 
-msgid "Today"
-msgstr "Täna"
+msgid "_Work:"
+msgstr "_Töö:"
 
-msgid "window"
-msgstr "aken"
+msgid "_Duration:"
+msgstr "K_estus:"
 
-msgid "  "
-msgstr "  "
+msgid "C_omplete:"
+msgstr "_Valmis:"
+
+msgid "_Priority:"
+msgstr "Tä_htsus:"
 
 #, no-c-format
 msgid "%"
 msgstr "%"
 
-msgid "C_omplete:"
-msgstr "_Valmis:"
-
-msgid "Predecessors"
-msgstr "Eelkäijad"
-
-msgid "Resources"
-msgstr "Vahendid"
-
-msgid "_Duration:"
-msgstr "K_estus:"
-
-msgid "_Fixed duration"
-msgstr "_Määratud kestus"
-
-msgid "_Insert Time Stamp"
-msgstr "_Lisa ajatempel"
+msgid "  "
+msgstr "  "
 
 msgid "_Milestone"
 msgstr "Tä_his"
 
-msgid "_Priority:"
-msgstr "Tä_htsus:"
+msgid "_Fixed duration"
+msgstr "_Määratud kestus"
 
-msgid "_Work:"
-msgstr "_Töö:"
+msgid "Resources"
+msgstr "Vahendid"
+
+msgid "Predecessors"
+msgstr "Eelkäijad"
+
+msgid "_Insert Time Stamp"
+msgstr "_Lisa ajatempel"
 
 msgid "Insert Task"
 msgstr "Ülesande lisamine"
 
-msgid "Documents/Project Management"
-msgstr "Dokumendid/Projektihaldus"
-
 msgid "Project Plan"
 msgstr "Projektiplaan"
+
+msgid "Documents/Project Management"
+msgstr "Dokumendid/Projektihaldus"
 
 msgid "Planner project plan"
 msgstr "Plaanija projektiplaan"
 
-msgid "Planner Project Management"
-msgstr "Plaanija projektihaldus"
+msgid "Planner"
+msgstr "Plaanija"
 
 msgid "Project Management"
 msgstr "Projektihaldus"
 
-msgid "Display nonstandard days in Gantt view"
-msgstr "Mittestandardsete päevade kuvamine Gantt'i vaates"
+msgid "Planner Project Management"
+msgstr "Plaanija projektihaldus"
+
+msgid "Handle the tasks, resources, and cost of your projects"
+msgstr "Ülesannete, ressursside ja projektide maksumuse haldamine"
+
+msgid "Gantt;Chart;Critical path;Relationship;Dependency;WBS;"
+msgstr "ajaplaneerimine;Gant;graafik;kriitline tee;suhted;sõltuvus;WBS;"
 
 msgid "Highlight critical path in Gantt view"
 msgstr "Kriitilise raja esiletõstmine Gantt'i vaates"
-
-msgid "Highlight critical path in Task view"
-msgstr "Kriitilise raja esiletõstmine ülesannete vaates"
-
-msgid "Print the Gantt view"
-msgstr "Gantt'i vaate printimine"
-
-msgid "Print the Resource view"
-msgstr "Vahendite vaate printimine"
-
-msgid "Print the Task view"
-msgstr "Ülesannete vaate printimine"
-
-msgid "The active view"
-msgstr "Aktiivne vaade"
-
-msgid "Whether printing of the Gantt view is enabled."
-msgstr "Kas Gantt'i vaate printimine on lubatud."
-
-msgid "Whether printing of the Resource view is enabled."
-msgstr "Kas vahendite vaate printimine on lubatud."
-
-msgid "Whether printing of the Task view is enabled."
-msgstr "Kas ülesannete vaate printimine on lubatud."
-
-msgid "Whether to display nonstandard days in the Gantt view."
-msgstr "Kas tõsta esile mittestandardseid päevi Gantt'i vaates."
 
 msgid ""
 "Whether to highlight the tasks along the cricital path in the Gantt view."
 msgstr "Kas tõsta esile Gantt'i vaates olevat kriitilist rada või mitte."
 
+msgid "Display nonstandard days in Gantt view"
+msgstr "Mittestandardsete päevade kuvamine Gantt'i vaates"
+
+msgid "Whether to display nonstandard days in the Gantt view."
+msgstr "Kas tõsta esile mittestandardseid päevi Gantt'i vaates."
+
+msgid "Highlight critical path in Task view"
+msgstr "Kriitilise raja esiletõstmine ülesannete vaates"
+
 msgid ""
 "Whether to highlight the tasks along the cricital path in the Task view."
 msgstr "Kas tõsta esile ülesannete vaates olevat kriitilist rada või mitte."
+
+msgid "Print the Gantt view"
+msgstr "Gantt'i vaate printimine"
+
+msgid "Whether printing of the Gantt view is enabled."
+msgstr "Kas Gantt'i vaate printimine on lubatud."
+
+msgid "Print the Task view"
+msgstr "Ülesannete vaate printimine"
+
+msgid "Whether printing of the Task view is enabled."
+msgstr "Kas ülesannete vaate printimine on lubatud."
+
+msgid "Print the Resource view"
+msgstr "Vahendite vaate printimine"
+
+msgid "Whether printing of the Resource view is enabled."
+msgstr "Kas vahendite vaate printimine on lubatud."
+
+msgid "The active view"
+msgstr "Aktiivne vaade"
 
 msgid "Which view to display in the user interface."
 msgstr "Mis vaadet kuvatakse kasutajaliideses"
@@ -411,38 +420,38 @@ msgstr "Mis vaadet kuvatakse kasutajaliideses"
 msgid "Company:"
 msgstr "Ettevõte:"
 
-msgid "Complete"
-msgstr "Valmis"
-
-msgid "Finish:"
-msgstr "Lõpp:"
-
-msgid "Gantt Chart"
-msgstr "Gantti kaart"
-
 msgid "Manager:"
 msgstr "Juht"
-
-msgid "Phase:"
-msgstr "Faas:"
-
-msgid "Priority"
-msgstr "Tähtsus"
-
-msgid "Report Date:"
-msgstr "Raporti kuupäev:"
 
 msgid "Start:"
 msgstr "Algus:"
 
-msgid "This file was generated by"
-msgstr "Selle faili on genereerinud"
+msgid "Finish:"
+msgstr "Lõpp:"
 
-msgid "Unnamed Project"
-msgstr "Nimetu projekt"
+msgid "Report Date:"
+msgstr "Raporti kuupäev:"
 
 msgid "Week"
 msgstr "Nädal"
+
+msgid "Priority"
+msgstr "Tähtsus"
+
+msgid "Complete"
+msgstr "Valmis"
+
+msgid "This file was generated by"
+msgstr "Selle faili on genereerinud"
+
+msgid "Gantt Chart"
+msgstr "Gantti kaart"
+
+msgid "Phase:"
+msgstr "Faas:"
+
+msgid "Unnamed Project"
+msgstr "Nimetu projekt"
 
 msgid "Working"
 msgstr "Tööpäev"
@@ -853,8 +862,8 @@ msgstr "%d. %b %Y"
 msgid "Project start"
 msgstr "Projekti algus"
 
-msgid "%e %b %Y"
-msgstr "%e. %b %Y"
+msgid "%a, %e %b %Y"
+msgstr "%a, %e. %b %Y"
 
 msgid "Work"
 msgstr "Töö"
@@ -1065,8 +1074,8 @@ msgstr "Etteantud suurusega akna loomine. "
 msgid "GEOMETRY"
 msgstr "GEOMEETRIA"
 
-msgid "FILES"
-msgstr "FAILID"
+msgid "FILES|URIs"
+msgstr "FAILID|URId"
 
 msgid "- Planner project management"
 msgstr "- Plaanija projektihaldus"
@@ -1599,6 +1608,13 @@ msgstr "Vahendite _kasutus"
 msgid "Edit Resource Usage Columns"
 msgstr "Vahendite kasutusveergude muutmine"
 
+#, c-format
+msgid "Unable to open '%s'"
+msgstr "'%s' avamine pole võimalik."
+
+msgid "Unable to open help file"
+msgstr "Abifaili avamine pole võimalik"
+
 msgid "_File"
 msgstr "_Fail"
 
@@ -1729,17 +1745,14 @@ msgstr "Faili avamine"
 msgid "Planner Files"
 msgstr "Plaanija failid"
 
-#. I18n: Translators, list your names here, newline separated if there
-#. * are more than one, to appear in the about box.
-#.
+msgid "A Project Management application for the GNOME desktop"
+msgstr "Projektihaldustarkvara GNOME töölauale"
+
 msgid "translator-credits"
 msgstr ""
 "Ilmar Kerm <ikerm@hot.ee>, 2002.\n"
-"Priit Laes <amd@tt.ee>, 2003.\n"
+"Priit Laes <plaes plaes org>, 2003.\n"
 "Ivar Smolin <okul linux ee>, 2005–2010."
-
-msgid "A Project Management application for the GNOME desktop"
-msgstr "Projektihaldustarkvara GNOME töölauale"
 
 msgid "The Planner Homepage"
 msgstr "Plaanija koduleht"
@@ -1803,7 +1816,7 @@ msgid ""
 "After doing this, you can remove all constraints by selecting the menu item "
 "'Remove all constraints' in the 'Edit' menu."
 msgstr ""
-"Sa avasid faili, mis on salvestaduf Plaanija vanema versiooniga.\n"
+"Sa avasid faili, mis on salvestatud Plaanija vanema versiooniga.\n"
 "\n"
 "Kuna vana versioon ei toetanud täielikult ülesannete automaatselt "
 "ümberplaanimist, siis vanade failide laadimisel hakkavad kõik ülesanded "
@@ -1813,7 +1826,7 @@ msgstr ""
 "Eelkäija suhet saab lisada klõpsates eelkäijal ja lohistades selle "
 "järeltulija peale.\n"
 "\n"
-"Peale seda võid sa eemaldada kõik piirangud valides menüüst 'Tegevused' "
+"Pärast seda võid sa eemaldada kõik piirangud valides menüüst 'Tegevused' "
 "kirje 'Lähtesta piirang'."
 
 #. Hack.
