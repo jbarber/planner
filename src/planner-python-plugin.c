@@ -148,7 +148,7 @@ plugin_execute_scripts(PlannerPlugin *plugin, const gchar *dirname)
 		filename = g_dir_read_name (dir);
 	}
 
-	g_free (dirname);
+	g_free ((gpointer) dirname);
 	g_dir_close (dir);
 }
 
@@ -156,9 +156,7 @@ G_MODULE_EXPORT void
 plugin_init (PlannerPlugin *plugin)
 {
 	PlannerPluginPriv *priv;
-	GDir              *dir;
 	gchar             *dirname;
-	const gchar       *filename;
 
 	priv = g_new0 (PlannerPluginPriv, 1);
 	plugin->priv = priv;

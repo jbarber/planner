@@ -20,8 +20,9 @@ main (gint argc, gchar **argv)
 	setlocale (LC_ALL, "");
 
 	t = mrp_time_compose (2002, 3, 31, 0, 0, 0);
+	CHECK_STRING_RESULT (STRING (t), "20020331T000000Z");
 
-	/* Test mrp_time_new_from_string */
+	/* Test mrp_time_from_string */
 	CHECK_STRING_RESULT (STRING (mrp_time_from_string ("20020329", NULL)), "20020329T000000Z");
 	CHECK_STRING_RESULT (STRING (mrp_time_from_string ("19991231", NULL)), "19991231T000000Z");
 	CHECK_STRING_RESULT (STRING (mrp_time_from_string ("invalid", NULL)), "19700101T000000Z");

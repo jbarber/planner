@@ -168,6 +168,7 @@ main (gint argc, gchar **argv)
         CHECK_INTEGER_RESULT (mrp_day_get_id (day_a),
                               mrp_day_get_id (day_b));
 
+	g_object_unref (app);
 	return EXIT_SUCCESS;
 }
 
