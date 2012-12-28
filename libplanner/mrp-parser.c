@@ -178,7 +178,7 @@ mpp_property_to_string (MrpObject   *object,
 	gint         i;
 	gfloat       f;
 	mrptime      date;
-	GValueArray *array;
+	GArray      *array;
 
 	name = mrp_property_get_name (property);
 
@@ -411,7 +411,7 @@ mpp_write_string_list (xmlNodePtr   node,
 		       MrpObject   *object)
 {
 	xmlNodePtr   child;
-	GValueArray *array;
+	GArray      *array;
 	GValue      *value;
 	gint         i;
 
@@ -420,14 +420,14 @@ mpp_write_string_list (xmlNodePtr   node,
 		return;
 	}
 
-	for (i = 0; i < array->n_values; i++) {
-		value = g_value_array_get_nth (array, i);
+	for (i = 0; i < array->len; i++) {
+		value = g_array_index (array, GValue *, i);
 
 		child = xmlNewChild (node, NULL, "list-item", NULL);
 		xmlSetProp (child, "value", g_value_get_string (value));
 	}
 
-	g_value_array_free (array);
+	g_array_free (array, TRUE);
 }
 
 static void

@@ -774,11 +774,11 @@ old_xml_read_project_properties (MrpParser *parser)
 	g_free (phase);
 }
 
-static GValueArray *
+static GArray *
 old_xml_read_string_list (xmlNodePtr  node,
 			  MrpObject  *object)
 {
-	GValueArray *array;
+	GArray      *array;
 	GValue       value = { 0 };
 	xmlNodePtr   child;
 	gchar       *str;
@@ -787,7 +787,8 @@ old_xml_read_string_list (xmlNodePtr  node,
 		return NULL;
 	}
 
-	array = g_value_array_new (0);
+	array = g_array_new (TRUE, TRUE, sizeof(GValue *));
+	g_array_set_clear_func (array, (GDestroyNotify) g_value_unset);
 
 	g_value_init (&value, G_TYPE_STRING);
 
@@ -798,7 +799,7 @@ old_xml_read_string_list (xmlNodePtr  node,
 
 			if (str && str[0]) {
 				g_value_set_string (&value, str);
-				g_value_array_append (array, &value);
+				g_array_append_val (array, value);
 			}
 
 			g_free (str);
@@ -1352,7 +1353,7 @@ old_xml_set_property_from_node (MrpProject *project,
 	gfloat           f;
 	gchar           *name;
 	gchar           *str;
-	GValueArray     *array;
+	GArray          *array;
 	GList           *phases;
 
 	name  = old_xml_get_string (node, "name");
@@ -1401,7 +1402,7 @@ old_xml_set_property_from_node (MrpProject *project,
 		array = old_xml_read_string_list (node, object);
 		if (array) {
 			mrp_object_set (object, name, array, NULL);
-			g_value_array_free (array);
+			g_array_free (array, TRUE);
 		}
 		break;
 	case MRP_PROPERTY_TYPE_INT:
