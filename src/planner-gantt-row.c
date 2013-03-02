@@ -2648,7 +2648,7 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 				}
 
 				/* Start the autoscroll timeout. */
-				priv->scroll_timeout_id = gtk_timeout_add (
+				priv->scroll_timeout_id = g_timeout_add (
 					50,
 					(GSourceFunc) gantt_row_scroll_timeout_cb,
 					row);
@@ -2690,7 +2690,7 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 				}
 
 				/* Start the autoscroll timeout. */
-				priv->scroll_timeout_id = gtk_timeout_add (
+				priv->scroll_timeout_id = g_timeout_add (
 					50,
 					(GSourceFunc) gantt_row_scroll_timeout_cb,
 					row);
@@ -2722,7 +2722,7 @@ gantt_row_event (GnomeCanvasItem *item, GdkEvent *event)
 				old_target_item = NULL;
 
 				/* Start the autoscroll timeout. */
-				priv->scroll_timeout_id = gtk_timeout_add (
+				priv->scroll_timeout_id = g_timeout_add (
 					50,
 					(GSourceFunc) gantt_row_scroll_timeout_cb,
 					row);
