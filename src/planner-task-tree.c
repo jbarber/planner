@@ -2320,7 +2320,7 @@ task_tree_column_notify_width_cb (GtkWidget       *column,
 				  GParamSpec      *spec,
 				  PlannerTaskTree *tree)
 {
-	if (GTK_WIDGET_REALIZED (tree)) {
+	if (gtk_widget_get_realized (GTK_WIDGET (tree))) {
 		g_signal_emit_by_name (tree, "columns-changed");
 	}
 }
@@ -2670,7 +2670,7 @@ planner_task_tree_insert_subtask (PlannerTaskTree *tree)
 	planner_task_cmd_insert (tree->priv->main_window,
 				 parent, position, work, work, NULL);
 
-	if (!GTK_WIDGET_HAS_FOCUS (tree)) {
+	if (! gtk_widget_has_focus (GTK_WIDGET (tree))) {
 		gtk_widget_grab_focus (GTK_WIDGET (tree));
 	}
 
@@ -2759,7 +2759,7 @@ planner_task_tree_insert_task (PlannerTaskTree *tree)
 	planner_task_cmd_insert (tree->priv->main_window,
 				 parent, position, work, work, NULL);
 
-	if (!GTK_WIDGET_HAS_FOCUS (tree)) {
+	if (! gtk_widget_has_focus (GTK_WIDGET (tree))) {
 		gtk_widget_grab_focus (GTK_WIDGET (tree));
 	}
 

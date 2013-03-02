@@ -204,7 +204,7 @@ popup_button_position (PlannerPopupButton *button,
 
 	gdk_window_get_origin (button_widget->window, x, y);
 
-	if (GTK_WIDGET_NO_WINDOW (button_widget)) {
+	if (! gtk_widget_get_has_window (button_widget)) {
 		*x += button_widget->allocation.x;
 		*y += button_widget->allocation.y;
 	}
@@ -292,7 +292,7 @@ popup_button_popdown (PlannerPopupButton *button,
 	g_object_unref (priv->popup_widget);
 	priv->popup_widget = NULL;
 
-	if (GTK_WIDGET_HAS_GRAB (priv->popup_window)) {
+	if (gtk_widget_has_grab (priv->popup_window)) {
 		gtk_grab_remove (priv->popup_window);
 		gdk_keyboard_ungrab (GDK_CURRENT_TIME);
 		gdk_pointer_ungrab (GDK_CURRENT_TIME);

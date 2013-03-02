@@ -693,7 +693,7 @@ usage_chart_size_allocate (GtkWidget *widget, GtkAllocation *allocation)
 
 	chart = PLANNER_USAGE_CHART (widget);
 
-	if (GTK_WIDGET_MAPPED (chart)) {
+	if (gtk_widget_get_mapped (GTK_WIDGET (chart))) {
 		usage_chart_reflow_now (chart);
 	}
 }
@@ -864,7 +864,7 @@ usage_chart_reflow_idle (PlannerUsageChart *chart)
 static void
 usage_chart_reflow_now (PlannerUsageChart *chart)
 {
-	if (!GTK_WIDGET_MAPPED (chart)) {
+	if (! gtk_widget_get_mapped (GTK_WIDGET (chart))) {
 		return;
 	}
 
@@ -874,7 +874,7 @@ usage_chart_reflow_now (PlannerUsageChart *chart)
 static void
 usage_chart_reflow (PlannerUsageChart *chart, gboolean height_changed)
 {
-	if (!GTK_WIDGET_MAPPED (chart)) {
+	if (! gtk_widget_get_mapped (GTK_WIDGET (chart))) {
 		return;
 	}
 

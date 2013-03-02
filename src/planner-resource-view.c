@@ -508,7 +508,7 @@ resource_view_column_notify_width_cb (GtkWidget           *column,
 				      GParamSpec          *spec,
 				      PlannerResourceView *view)
 {
-	if (GTK_WIDGET_REALIZED (view->priv->tree_view)) {
+	if (gtk_widget_get_realized (GTK_WIDGET (view->priv->tree_view))) {
 		g_signal_emit_by_name (view->priv->tree_view, "columns-changed");
 	}
 }
@@ -866,7 +866,7 @@ resource_view_insert_resource_cb (GtkAction *action,
 
 	cmd = (ResourceCmdInsert*) planner_resource_cmd_insert (view->main_window, NULL);
 
-	if (!GTK_WIDGET_HAS_FOCUS (priv->tree_view)) {
+	if (! gtk_widget_has_focus (GTK_WIDGET (priv->tree_view))) {
 		gtk_widget_grab_focus (GTK_WIDGET (priv->tree_view));
 	}
 

@@ -300,7 +300,7 @@ usage_tree_column_notify_width_cb (GtkWidget        *column,
 				   GParamSpec       *spec,
 				   PlannerUsageTree *tree)
 {
-	if (GTK_WIDGET_REALIZED (tree)) {
+	if (gtk_widget_get_realized (GTK_WIDGET (tree))) {
 		g_signal_emit_by_name (tree, "columns-changed");
 	}
 }

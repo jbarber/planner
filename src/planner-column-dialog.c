@@ -65,13 +65,13 @@ column_dialog_update_sensitivity (DialogData *data)
 	down_sensitive = FALSE;
 	hide_sensitive = FALSE;
 
-	if (GTK_WIDGET_HAS_FOCUS (data->hidden_tree)) {
+	if (gtk_widget_has_focus (GTK_WIDGET (data->hidden_tree))) {
 		hidden_sensitive = TRUE;
 		gtk_tree_view_get_cursor (GTK_TREE_VIEW (data->hidden_tree),
 					  &path,
 					  NULL);
 	}
-	else if (GTK_WIDGET_HAS_FOCUS (data->visible_tree)) {
+	else if (gtk_widget_has_focus (GTK_WIDGET (data->visible_tree))) {
 		visible_sensitive = TRUE;
 		gtk_tree_view_get_cursor (GTK_TREE_VIEW (data->visible_tree),
 					  &path,

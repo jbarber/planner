@@ -333,7 +333,7 @@ group_dialog_insert_group_cb (GtkWidget *button, GtkWidget *dialog)
 
 	cmd = (GroupCmdInsert*) group_cmd_insert (data->view);
 
-	if (!GTK_WIDGET_HAS_FOCUS (data->tree_view)) {
+	if (! gtk_widget_has_focus (GTK_WIDGET (data->tree_view))) {
 		gtk_widget_grab_focus (GTK_WIDGET (data->tree_view));
 	}
 

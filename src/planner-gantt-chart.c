@@ -589,7 +589,7 @@ gantt_chart_size_allocate (GtkWidget     *widget,
 	/* Force reflow (if we are mapped), since it looks smoother with less
 	 * jumping around.
 	 */
-	if (GTK_WIDGET_MAPPED (chart)) {
+	if (gtk_widget_get_mapped (GTK_WIDGET (chart))) {
 		planner_gantt_chart_reflow_now (chart);
 	}
 }
@@ -1025,7 +1025,7 @@ gantt_chart_reflow_idle (PlannerGanttChart *chart)
 void
 planner_gantt_chart_reflow_now (PlannerGanttChart *chart)
 {
-	if (!GTK_WIDGET_MAPPED (chart)) {
+	if (! gtk_widget_get_mapped (GTK_WIDGET (chart))) {
 		return;
 	}
 
@@ -1035,7 +1035,7 @@ planner_gantt_chart_reflow_now (PlannerGanttChart *chart)
 static void
 gantt_chart_reflow (PlannerGanttChart *chart, gboolean height_changed)
 {
-	if (!GTK_WIDGET_MAPPED (chart)) {
+	if (! gtk_widget_get_mapped (GTK_WIDGET (chart))) {
 		return;
 	}
 

@@ -348,7 +348,7 @@ gantt_header_set_property (GObject      *object,
 					     priv->height);
 	}
 
-	if ((change_width || change_height || change_scale) && GTK_WIDGET_REALIZED (header)) {
+	if ((change_width || change_height || change_scale) && gtk_widget_get_realized (GTK_WIDGET (header))) {
 		gdk_window_invalidate_rect (priv->bin_window,
 					    NULL,
 					    FALSE);
@@ -401,7 +401,7 @@ gantt_header_map (GtkWidget *widget)
 
 	header = PLANNER_GANTT_HEADER (widget);
 
-	GTK_WIDGET_SET_FLAGS (widget, GTK_MAPPED);
+	gtk_widget_set_mapped (widget, TRUE);
 
 	gdk_window_show (header->priv->bin_window);
 	gdk_window_show (widget->window);
@@ -416,7 +416,7 @@ gantt_header_realize (GtkWidget *widget)
 
 	header = PLANNER_GANTT_HEADER (widget);
 
-	GTK_WIDGET_SET_FLAGS (widget, GTK_REALIZED);
+	gtk_widget_set_realized (widget, TRUE);
 
 	/* Create the main, clipping window. */
 	attributes.window_type = GDK_WINDOW_CHILD;
@@ -485,7 +485,7 @@ gantt_header_size_allocate (GtkWidget     *widget,
 
 	header = PLANNER_GANTT_HEADER (widget);
 
-	if (GTK_WIDGET_REALIZED (widget)) {
+	if (gtk_widget_get_realized (widget)) {
 		gdk_window_move_resize (widget->window,
 					allocation->x, allocation->y,
 					allocation->width, allocation->height);
@@ -724,7 +724,7 @@ static void
 gantt_header_adjustment_changed (GtkAdjustment *adjustment,
 				 PlannerGanttHeader *header)
 {
-	if (GTK_WIDGET_REALIZED (header)) {
+	if (gtk_widget_get_realized (GTK_WIDGET (header))) {
 		gdk_window_move (header->priv->bin_window,
 				 -header->priv->hadjustment->value,
 				 0);

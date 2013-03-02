@@ -176,19 +176,19 @@ dates_difference(N_int year1, N_int mm1, N_int dd1,
 #define DAY_YSEP		 0 /* not really good for small calendar */
 
 /* Color usage */
-#define HEADER_FG_COLOR(widget)		 (& (widget)->style->fg[GTK_WIDGET_STATE (widget)])
-#define HEADER_BG_COLOR(widget)		 (& (widget)->style->bg[GTK_WIDGET_STATE (widget)])
-#define SELECTED_BG_COLOR(widget)	 (& (widget)->style->base[GTK_WIDGET_HAS_FOCUS (widget) ? GTK_STATE_SELECTED : GTK_STATE_ACTIVE])
-#define SELECTED_FG_COLOR(widget)	 (& (widget)->style->text[GTK_WIDGET_HAS_FOCUS (widget) ? GTK_STATE_SELECTED : GTK_STATE_ACTIVE])
-#define NORMAL_DAY_COLOR(widget)	 (& (widget)->style->fg[GTK_WIDGET_STATE (widget)])
-#define PREV_MONTH_COLOR(widget)	 (& (widget)->style->mid[GTK_WIDGET_STATE (widget)])
-#define NEXT_MONTH_COLOR(widget)	 (& (widget)->style->mid[GTK_WIDGET_STATE (widget)])
-#define MARKED_COLOR(widget)		 (& (widget)->style->fg[GTK_WIDGET_STATE (widget)])
-#define BACKGROUND_COLOR(widget)	 (& (widget)->style->base[GTK_WIDGET_STATE (widget)])
-#define HIGHLIGHT_BACK_COLOR(widget)	 (& (widget)->style->mid[GTK_WIDGET_STATE (widget)])
+#define HEADER_FG_COLOR(widget)		 (& (widget)->style->fg[gtk_widget_get_state (widget)])
+#define HEADER_BG_COLOR(widget)		 (& (widget)->style->bg[gtk_widget_get_state (widget)])
+#define SELECTED_BG_COLOR(widget)	 (& (widget)->style->base[gtk_widget_has_focus (widget) ? GTK_STATE_SELECTED : GTK_STATE_ACTIVE])
+#define SELECTED_FG_COLOR(widget)	 (& (widget)->style->text[gtk_widget_has_focus (widget) ? GTK_STATE_SELECTED : GTK_STATE_ACTIVE])
+#define NORMAL_DAY_COLOR(widget)	 (& (widget)->style->fg[gtk_widget_get_state (widget)])
+#define PREV_MONTH_COLOR(widget)	 (& (widget)->style->mid[gtk_widget_get_state (widget)])
+#define NEXT_MONTH_COLOR(widget)	 (& (widget)->style->mid[gtk_widget_get_state (widget)])
+#define MARKED_COLOR(widget)		 (& (widget)->style->fg[gtk_widget_get_state (widget)])
+#define BACKGROUND_COLOR(widget)	 (& (widget)->style->base[gtk_widget_get_state (widget)])
+#define HIGHLIGHT_BACK_COLOR(widget)	 (& (widget)->style->mid[gtk_widget_get_state (widget)])
 
-#define SHADED_BG_COLOR(widget)	         (& (widget)->style->mid[GTK_WIDGET_STATE (widget)])
-#define STRIPED_BG_COLOR(widget)	 (& (widget)->style->mid[GTK_WIDGET_STATE (widget)])
+#define SHADED_BG_COLOR(widget)	         (& (widget)->style->mid[gtk_widget_get_state (widget)])
+#define STRIPED_BG_COLOR(widget)	 (& (widget)->style->mid[gtk_widget_get_state (widget)])
 
 enum {
 	ARROW_YEAR_LEFT,
@@ -442,7 +442,7 @@ planner_calendar_init (PlannerCalendar *calendar)
 	PlannerCalendarPrivateData *private_data;
 
 	widget = GTK_WIDGET (calendar);
-	GTK_WIDGET_SET_FLAGS (widget, GTK_CAN_FOCUS);
+	gtk_widget_set_can_focus (widget, TRUE);
 
 	calendar->private_data = g_malloc (sizeof (PlannerCalendarPrivateData));
 	private_data = PLANNER_CALENDAR_PRIVATE_DATA (calendar);
@@ -831,7 +831,7 @@ planner_calendar_main_button (GtkWidget	 *widget,
 		else if (day_month == MONTH_NEXT)
 			planner_calendar_set_month_next (calendar);
 
-		if (!GTK_WIDGET_HAS_FOCUS (widget))
+		if (! gtk_widget_has_focus (widget))
 			gtk_widget_grab_focus (widget);
 
 		planner_calendar_select_and_focus_day (calendar, day);
@@ -1051,7 +1051,7 @@ planner_calendar_realize (GtkWidget *widget)
 	calendar = PLANNER_CALENDAR (widget);
 	private_data = PLANNER_CALENDAR_PRIVATE_DATA (widget);
 
-	GTK_WIDGET_SET_FLAGS (widget, GTK_REALIZED);
+	gtk_widget_set_realized (widget, TRUE);
 	planner_calendar_compute_days (calendar);
 
 	attributes.x = widget->allocation.x;
@@ -1360,7 +1360,7 @@ planner_calendar_size_allocate (GtkWidget	  *widget,
 		private_data->week_width = 0;
 	}
 
-	if (GTK_WIDGET_REALIZED (widget))
+	if (gtk_widget_get_realized (widget))
 	{
 		gdk_window_move_resize (widget->window,
 					allocation->x, allocation->y,
@@ -1428,7 +1428,7 @@ planner_calendar_expose (GtkWidget	    *widget,
 
 	private_data = PLANNER_CALENDAR_PRIVATE_DATA (widget);
 
-	if (GTK_WIDGET_DRAWABLE (widget))
+	if (gtk_widget_is_drawable (widget))
 	{
 		if (event->window == private_data->main_win)
 			planner_calendar_paint_main (widget);
@@ -1443,7 +1443,7 @@ planner_calendar_expose (GtkWidget	    *widget,
 			planner_calendar_paint_week_numbers (widget);
 		if (event->window == widget->window)
 		{
-			gtk_paint_shadow (widget->style, widget->window, GTK_WIDGET_STATE (widget),
+			gtk_paint_shadow (widget->style, widget->window, gtk_widget_get_state (widget),
 					  GTK_SHADOW_IN, NULL, widget, "calendar",
 					  0, 0, widget->allocation.width, widget->allocation.height);
 		}
@@ -1876,7 +1876,7 @@ planner_calendar_paint_day (GtkWidget *widget,
 		if (calendar->selected_day == day)
 			gdk_gc_set_foreground (gc, SELECTED_FG_COLOR (GTK_WIDGET (calendar)));
 		else
-			gdk_gc_set_foreground (gc, & (GTK_WIDGET (calendar)->style->fg[GTK_WIDGET_STATE (calendar)]));
+			gdk_gc_set_foreground (gc, & (GTK_WIDGET (calendar)->style->fg[gtk_widget_get_state (GTK_WIDGET (calendar))]));
 	}
 
 
@@ -1901,7 +1901,7 @@ planner_calendar_paint_day (GtkWidget *widget,
 		break;
 	}
 
-	if (GTK_WIDGET_HAS_FOCUS (calendar)
+	if (gtk_widget_has_focus (GTK_WIDGET (calendar))
 	    && calendar->focus_row == row && calendar->focus_col == col)
 	{
 		gtk_paint_focus (widget->style,
@@ -2045,7 +2045,7 @@ planner_calendar_display_options (PlannerCalendar	       *calendar,
 	widget = GTK_WIDGET (calendar);
 	private_data = PLANNER_CALENDAR_PRIVATE_DATA (calendar);
 
-	if (GTK_WIDGET_REALIZED (widget))
+	if (gtk_widget_get_realized (widget))
 	{
 		if ((flags ^ calendar->display_flags) & PLANNER_CALENDAR_NO_MONTH_CHANGE)
 		{
@@ -2192,7 +2192,7 @@ planner_calendar_select_day (PlannerCalendar *calendar,
 
 		selected_day = calendar->selected_day;
 		calendar->selected_day = 0;
-		if (GTK_WIDGET_DRAWABLE (GTK_WIDGET (calendar)))
+		if (gtk_widget_is_drawable (GTK_WIDGET (calendar)))
 			planner_calendar_paint_day_num (GTK_WIDGET (calendar), selected_day);
 	}
 
@@ -2201,7 +2201,7 @@ planner_calendar_select_day (PlannerCalendar *calendar,
 	/* Select the new day */
 	if (day != 0)
 	{
-		if (GTK_WIDGET_DRAWABLE (GTK_WIDGET (calendar)))
+		if (gtk_widget_is_drawable (GTK_WIDGET (calendar)))
 			planner_calendar_paint_day_num (GTK_WIDGET (calendar), day);
 	}
 
@@ -2250,7 +2250,7 @@ planner_calendar_clear_marks (PlannerCalendar *calendar)
 
 	calendar->num_marked_dates = 0;
 
-	if (GTK_WIDGET_DRAWABLE (calendar))
+	if (gtk_widget_is_drawable (GTK_WIDGET (calendar)))
 	{
 		planner_calendar_paint_main (GTK_WIDGET (calendar));
 	}
@@ -2268,7 +2268,7 @@ planner_calendar_unmark_day (PlannerCalendar *calendar,
 		calendar->num_marked_dates--;
 	}
 
-	if (GTK_WIDGET_DRAWABLE (GTK_WIDGET (calendar)))
+	if (gtk_widget_is_drawable (GTK_WIDGET (calendar)))
 	{
 		planner_calendar_paint_main (GTK_WIDGET (calendar));
 	}
@@ -2515,19 +2515,19 @@ planner_calendar_thaw (PlannerCalendar *calendar)
 		if (!(--private_data->freeze_count))
 		{
 			if (private_data->dirty_header)
-				if (GTK_WIDGET_DRAWABLE (calendar))
+				if (gtk_widget_is_drawable (GTK_WIDGET (calendar)))
 					planner_calendar_paint_header (GTK_WIDGET (calendar));
 
 			if (private_data->dirty_day_names)
-				if (GTK_WIDGET_DRAWABLE (calendar))
+				if (gtk_widget_is_drawable (GTK_WIDGET (calendar)))
 					planner_calendar_paint_day_names (GTK_WIDGET (calendar));
 
 			if (private_data->dirty_week)
-				if (GTK_WIDGET_DRAWABLE (calendar))
+				if (gtk_widget_is_drawable (GTK_WIDGET (calendar)))
 					planner_calendar_paint_week_numbers (GTK_WIDGET (calendar));
 
 			if (private_data->dirty_main)
-				if (GTK_WIDGET_DRAWABLE (calendar))
+				if (gtk_widget_is_drawable (GTK_WIDGET (calendar)))
 					planner_calendar_paint_main (GTK_WIDGET (calendar));
 		}
 }
@@ -2540,7 +2540,7 @@ planner_calendar_set_background (GtkWidget *widget)
 
 	private_data = PLANNER_CALENDAR_PRIVATE_DATA (widget);
 
-	if (GTK_WIDGET_REALIZED (widget))
+	if (gtk_widget_get_realized (widget))
 	{
 		for (i = 0; i < 4; i++)
 		{
@@ -2570,7 +2570,7 @@ static void
 planner_calendar_style_set (GtkWidget *widget,
 		       GtkStyle  *previous_style)
 {
-	if (previous_style && GTK_WIDGET_REALIZED (widget))
+	if (previous_style && gtk_widget_get_realized (widget))
 		planner_calendar_set_background(widget);
 }
 
@@ -2749,7 +2749,7 @@ planner_calendar_mark_day (PlannerCalendar         *calendar,
 		calendar->num_marked_dates--;
 	}
 
-	if (GTK_WIDGET_DRAWABLE (GTK_WIDGET (calendar))) {
+	if (gtk_widget_is_drawable (GTK_WIDGET (calendar))) {
 		planner_calendar_paint_main (GTK_WIDGET (calendar));
 	}
 }
