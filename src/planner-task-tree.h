@@ -30,11 +30,11 @@
 #include "planner-task-dialog.h"
 
 #define PLANNER_TYPE_TASK_TREE		(planner_task_tree_get_type ())
-#define PLANNER_TASK_TREE(obj)		(GTK_CHECK_CAST ((obj), PLANNER_TYPE_TASK_TREE, PlannerTaskTree))
-#define PLANNER_TASK_TREE_CLASS(klass)	(GTK_CHECK_CLASS_CAST ((klass), PLANNER_TYPE_TASK_TREE, PlannerTaskTreeClass))
-#define PLANNER_IS_TASK_TREE(obj)		(GTK_CHECK_TYPE ((obj), PLANNER_TYPE_TASK_TREE))
-#define PLANNER_IS_TASK_TREE_CLASS(klass)	(GTK_CHECK_CLASS_TYPE ((obj), PLANNER_TYPE_TASK_TREE))
-#define PLANNER_TASK_TREE_GET_CLASS(obj)	(GTK_CHECK_GET_CLASS ((obj), PLANNER_TYPE_TASK_TREE, PlannerTaskTreeClass))
+#define PLANNER_TASK_TREE(obj)		(G_TYPE_CHECK_INSTANCE_CAST ((obj), PLANNER_TYPE_TASK_TREE, PlannerTaskTree))
+#define PLANNER_TASK_TREE_CLASS(klass)	(G_TYPE_CHECK_CLASS_CAST ((klass), PLANNER_TYPE_TASK_TREE, PlannerTaskTreeClass))
+#define PLANNER_IS_TASK_TREE(obj)		(G_TYPE_CHECK_INSTANCE_TYPE ((obj), PLANNER_TYPE_TASK_TREE))
+#define PLANNER_IS_TASK_TREE_CLASS(klass)	(G_TYPE_CHECK_CLASS_TYPE ((obj), PLANNER_TYPE_TASK_TREE))
+#define PLANNER_TASK_TREE_GET_CLASS(obj)	(G_TYPE_INSTANCE_GET_CLASS ((obj), PLANNER_TYPE_TASK_TREE, PlannerTaskTreeClass))
 
 typedef struct _PlannerTaskTree           PlannerTaskTree;
 typedef struct _PlannerTaskTreeClass      PlannerTaskTreeClass;

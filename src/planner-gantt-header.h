@@ -26,11 +26,11 @@
 #include <gtk/gtk.h>
 
 #define PLANNER_TYPE_GANTT_HEADER		(planner_gantt_header_get_type ())
-#define PLANNER_GANTT_HEADER(obj)		(GTK_CHECK_CAST ((obj), PLANNER_TYPE_GANTT_HEADER, PlannerGanttHeader))
-#define PLANNER_GANTT_HEADER_CLASS(klass)	(GTK_CHECK_CLASS_CAST ((klass), PLANNER_TYPE_GANTT_HEADER, PlannerGanttHeaderClass))
-#define PLANNER_IS_GANTT_HEADER(obj)		(GTK_CHECK_TYPE ((obj), PLANNER_TYPE_GANTT_HEADER))
-#define PLANNER_IS_GANTT_HEADER_CLASS(klass)	(GTK_CHECK_CLASS_TYPE ((obj), PLANNER_TYPE_GANTT_HEADER))
-#define PLANNER_GANTT_HEADER_GET_CLASS(obj)	(GTK_CHECK_GET_CLASS ((obj), PLANNER_TYPE_GANTT_HEADER, PlannerGanttHeaderClass))
+#define PLANNER_GANTT_HEADER(obj)		(G_TYPE_CHECK_INSTANCE_CAST ((obj), PLANNER_TYPE_GANTT_HEADER, PlannerGanttHeader))
+#define PLANNER_GANTT_HEADER_CLASS(klass)	(G_TYPE_CHECK_CLASS_CAST ((klass), PLANNER_TYPE_GANTT_HEADER, PlannerGanttHeaderClass))
+#define PLANNER_IS_GANTT_HEADER(obj)		(G_TYPE_CHECK_INSTANCE_TYPE ((obj), PLANNER_TYPE_GANTT_HEADER))
+#define PLANNER_IS_GANTT_HEADER_CLASS(klass)	(G_TYPE_CHECK_CLASS_TYPE ((obj), PLANNER_TYPE_GANTT_HEADER))
+#define PLANNER_GANTT_HEADER_GET_CLASS(obj)	(G_TYPE_INSTANCE_GET_CLASS ((obj), PLANNER_TYPE_GANTT_HEADER, PlannerGanttHeaderClass))
 
 typedef struct _PlannerGanttHeader           PlannerGanttHeader;
 typedef struct _PlannerGanttHeaderClass      PlannerGanttHeaderClass;

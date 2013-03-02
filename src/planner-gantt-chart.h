@@ -28,11 +28,11 @@
 #include "planner-task-tree.h"
 
 #define PLANNER_TYPE_GANTT_CHART                (planner_gantt_chart_get_type ())
-#define PLANNER_GANTT_CHART(obj)                (GTK_CHECK_CAST ((obj), PLANNER_TYPE_GANTT_CHART, PlannerGanttChart))
-#define PLANNER_GANTT_CHART_CLASS(klass)        (GTK_CHECK_CLASS_CAST ((klass), PLANNER_TYPE_GANTT_CHART, PlannerGanttChartClass))
-#define PLANNER_IS_GANTT_CHART(obj)             (GTK_CHECK_TYPE ((obj), PLANNER_TYPE_GANTT_CHART))
-#define PLANNER_IS_GANTT_CHART_CLASS(klass)     (GTK_CHECK_CLASS_TYPE ((obj), PLANNER_TYPE_GANTT_CHART))
-#define PLANNER_GANTT_CHART_GET_CLASS(obj)      (GTK_CHECK_GET_CLASS ((obj), PLANNER_TYPE_GANTT_CHART, PlannerGanttChartClass))
+#define PLANNER_GANTT_CHART(obj)                (G_TYPE_CHECK_INSTANCE_CAST ((obj), PLANNER_TYPE_GANTT_CHART, PlannerGanttChart))
+#define PLANNER_GANTT_CHART_CLASS(klass)        (G_TYPE_CHECK_CLASS_CAST ((klass), PLANNER_TYPE_GANTT_CHART, PlannerGanttChartClass))
+#define PLANNER_IS_GANTT_CHART(obj)             (G_TYPE_CHECK_INSTANCE_TYPE ((obj), PLANNER_TYPE_GANTT_CHART))
+#define PLANNER_IS_GANTT_CHART_CLASS(klass)     (G_TYPE_CHECK_CLASS_TYPE ((obj), PLANNER_TYPE_GANTT_CHART))
+#define PLANNER_GANTT_CHART_GET_CLASS(obj)      (G_TYPE_INSTANCE_GET_CLASS ((obj), PLANNER_TYPE_GANTT_CHART, PlannerGanttChartClass))
 
 typedef struct _PlannerGanttChart           PlannerGanttChart;
 typedef struct _PlannerGanttChartClass      PlannerGanttChartClass;

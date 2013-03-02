@@ -28,11 +28,11 @@
 #include "planner-usage-tree.h"
 
 #define PLANNER_TYPE_USAGE_CHART             (planner_usage_chart_get_type ())
-#define PLANNER_USAGE_CHART(obj)             (GTK_CHECK_CAST ((obj), PLANNER_TYPE_USAGE_CHART, PlannerUsageChart))
-#define PLANNER_USAGE_CHART_CLASS(klass)     (GTK_CHECK_CLASS_CAST ((klass), PLANNER_TYPE_USAGE_CHART, PlannerUsageChartClass))
-#define PLANNER_IS_USAGE_CHART(obj)          (GTK_CHECK_TYPE ((obj), PLANNER_TYPE_USAGE_CHART))
-#define PLANNER_IS_USAGE_CHART_CLASS(klass)  (GTK_CHECK_CLASS_TYPE ((obj), PLANNER_TYPE_USAGE_CHART))
-#define PLANNER_USAGE_CHART_GET_CLASS(obj)   (GTK_CHECK_GET_CLASS ((obj), PLANNER_TYPE_USAGE_CHART, PlannerUsageChartClass))
+#define PLANNER_USAGE_CHART(obj)             (G_TYPE_CHECK_INSTANCE_CAST ((obj), PLANNER_TYPE_USAGE_CHART, PlannerUsageChart))
+#define PLANNER_USAGE_CHART_CLASS(klass)     (G_TYPE_CHECK_CLASS_CAST ((klass), PLANNER_TYPE_USAGE_CHART, PlannerUsageChartClass))
+#define PLANNER_IS_USAGE_CHART(obj)          (G_TYPE_CHECK_INSTANCE_TYPE ((obj), PLANNER_TYPE_USAGE_CHART))
+#define PLANNER_IS_USAGE_CHART_CLASS(klass)  (G_TYPE_CHECK_CLASS_TYPE ((obj), PLANNER_TYPE_USAGE_CHART))
+#define PLANNER_USAGE_CHART_GET_CLASS(obj)   (G_TYPE_INSTANCE_GET_CLASS ((obj), PLANNER_TYPE_USAGE_CHART, PlannerUsageChartClass))
 
 typedef struct _PlannerUsageChart PlannerUsageChart;
 typedef struct _PlannerUsageChartClass PlannerUsageChartClass;

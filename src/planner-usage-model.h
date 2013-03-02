@@ -29,10 +29,10 @@
 #include <libplanner/mrp-resource.h>
 
 #define PLANNER_TYPE_USAGE_MODEL             (planner_usage_model_get_type ())
-#define PLANNER_USAGE_MODEL(obj)             (GTK_CHECK_CAST ((obj), PLANNER_TYPE_USAGE_MODEL, PlannerUsageModel))
-#define PLANNER_USAGE_MODEL_CLASS(klass)     (GTK_CHECK_CLASS_CAST ((klass), PLANNER_TYPE_USAGE_MODEL, PlannerUsageModelClass))
-#define PLANNER_IS_USAGE_MODEL(obj)          (GTK_CHECK_TYPE ((obj), PLANNER_TYPE_USAGE_MODEL))
-#define PLANNER_IS_USAGE_MODEL_CLASS(klass)  (GTK_CHECK_CLASS_TYPE ((obj), PLANNER_TYPE_USAGE_MODEL))
+#define PLANNER_USAGE_MODEL(obj)             (G_TYPE_CHECK_INSTANCE_CAST ((obj), PLANNER_TYPE_USAGE_MODEL, PlannerUsageModel))
+#define PLANNER_USAGE_MODEL_CLASS(klass)     (G_TYPE_CHECK_CLASS_CAST ((klass), PLANNER_TYPE_USAGE_MODEL, PlannerUsageModelClass))
+#define PLANNER_IS_USAGE_MODEL(obj)          (G_TYPE_CHECK_INSTANCE_TYPE ((obj), PLANNER_TYPE_USAGE_MODEL))
+#define PLANNER_IS_USAGE_MODEL_CLASS(klass)  (G_TYPE_CHECK_CLASS_TYPE ((obj), PLANNER_TYPE_USAGE_MODEL))
 
 typedef struct _PlannerUsageModel PlannerUsageModel;
 typedef struct _PlannerUsageModelClass PlannerUsageModelClass;

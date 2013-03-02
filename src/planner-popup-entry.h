@@ -27,11 +27,11 @@
 #include <gtk/gtk.h>
 
 #define PLANNER_TYPE_POPUP_ENTRY		(planner_popup_entry_get_type ())
-#define PLANNER_POPUP_ENTRY(obj)		(GTK_CHECK_CAST ((obj), PLANNER_TYPE_POPUP_ENTRY, PlannerPopupEntry))
-#define PLANNER_POPUP_ENTRY_CLASS(klass)	(GTK_CHECK_CLASS_CAST ((klass), PLANNER_TYPE_POPUP_ENTRY, PlannerPopupEntryClass))
-#define PLANNER_IS_POPUP_ENTRY(obj)		(GTK_CHECK_TYPE ((obj), PLANNER_TYPE_POPUP_ENTRY))
-#define PLANNER_IS_POPUP_ENTRY_CLASS(klass)	(GTK_CHECK_CLASS_TYPE ((obj), PLANNER_TYPE_POPUP_ENTRY))
-#define PLANNER_POPUP_ENTRY_GET_CLASS(obj)	(GTK_CHECK_GET_CLASS ((obj), PLANNER_TYPE_POPUP_ENTRY, PlannerPopupEntryClass))
+#define PLANNER_POPUP_ENTRY(obj)		(G_TYPE_CHECK_INSTANCE_CAST ((obj), PLANNER_TYPE_POPUP_ENTRY, PlannerPopupEntry))
+#define PLANNER_POPUP_ENTRY_CLASS(klass)	(G_TYPE_CHECK_CLASS_CAST ((klass), PLANNER_TYPE_POPUP_ENTRY, PlannerPopupEntryClass))
+#define PLANNER_IS_POPUP_ENTRY(obj)		(G_TYPE_CHECK_INSTANCE_TYPE ((obj), PLANNER_TYPE_POPUP_ENTRY))
+#define PLANNER_IS_POPUP_ENTRY_CLASS(klass)	(G_TYPE_CHECK_CLASS_TYPE ((obj), PLANNER_TYPE_POPUP_ENTRY))
+#define PLANNER_POPUP_ENTRY_GET_CLASS(obj)	(G_TYPE_INSTANCE_GET_CLASS ((obj), PLANNER_TYPE_POPUP_ENTRY, PlannerPopupEntryClass))
 
 typedef struct _PlannerPopupEntry      PlannerPopupEntry;
 typedef struct _PlannerPopupEntryClass PlannerPopupEntryClass;

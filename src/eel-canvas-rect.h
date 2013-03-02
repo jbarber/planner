@@ -30,9 +30,9 @@
 G_BEGIN_DECLS
 
 #define EEL_TYPE_CANVAS_RECT            (eel_canvas_rect_get_type ())
-#define EEL_CANVAS_RECT(obj)            (GTK_CHECK_CAST ((obj), EEL_TYPE_CANVAS_RECT, EelCanvasRect))
-#define EEL_CANVAS_RECT_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), EEL_TYPE_CANVAS_RECT, EelCanvasRectClass))
-#define EEL_IS_CANVAS_RECT(obj)         (GTK_CHECK_TYPE ((obj), EEL_TYPE_CANVAS_RECT))
+#define EEL_CANVAS_RECT(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), EEL_TYPE_CANVAS_RECT, EelCanvasRect))
+#define EEL_CANVAS_RECT_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), EEL_TYPE_CANVAS_RECT, EelCanvasRectClass))
+#define EEL_IS_CANVAS_RECT(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), EEL_TYPE_CANVAS_RECT))
 
 typedef struct EelCanvasRectDetails EelCanvasRectDetails;
 

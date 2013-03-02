@@ -28,10 +28,10 @@
 #include <gtk/gtk.h>
 
 #define PLANNER_TYPE_GANTT_MODEL            (planner_gantt_model_get_type ())
-#define PLANNER_GANTT_MODEL(obj)            (GTK_CHECK_CAST ((obj), PLANNER_TYPE_GANTT_MODEL, PlannerGanttModel))
-#define PLANNER_GANTT_MODEL_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), PLANNER_TYPE_GANTT_MODEL, PlannerGanttModelClass))
-#define PLANNER_IS_GANTT_MODEL(obj)         (GTK_CHECK_TYPE ((obj), PLANNER_TYPE_GANTT_MODEL))
-#define PLANNER_IS_GANTT_MODEL_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((obj), PLANNER_TYPE_GANTT_MODEL))
+#define PLANNER_GANTT_MODEL(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), PLANNER_TYPE_GANTT_MODEL, PlannerGanttModel))
+#define PLANNER_GANTT_MODEL_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), PLANNER_TYPE_GANTT_MODEL, PlannerGanttModelClass))
+#define PLANNER_IS_GANTT_MODEL(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), PLANNER_TYPE_GANTT_MODEL))
+#define PLANNER_IS_GANTT_MODEL_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((obj), PLANNER_TYPE_GANTT_MODEL))
 
 typedef struct _PlannerGanttModel      PlannerGanttModel;
 typedef struct _PlannerGanttModelClass PlannerGanttModelClass;

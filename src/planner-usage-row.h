@@ -26,11 +26,11 @@
 #include <libgnomecanvas/gnome-canvas.h>
 
 #define PLANNER_TYPE_USAGE_ROW            (planner_usage_row_get_type ())
-#define PLANNER_USAGE_ROW(obj)            (GTK_CHECK_CAST ((obj), PLANNER_TYPE_USAGE_ROW, PlannerUsageRow))
-#define PLANNER_USAGE_ROW_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), PLANNER_TYPE_USAGE_ROW, PlannerUsageRowClass))
-#define PLANNER_IS_USAGE_ROW(obj)         (GTK_CHECK_TYPE ((obj), PLANNER_TYPE_USAGE_ROW))
-#define PLANNER_IS_USAGE_ROW_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), PLANNER_TYPE_USAGE_ROW))
-#define PLANNER_USAGE_ROW_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), PLANNER_TYPE_USAGE_ROW, PlannerUsageRowClass))
+#define PLANNER_USAGE_ROW(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), PLANNER_TYPE_USAGE_ROW, PlannerUsageRow))
+#define PLANNER_USAGE_ROW_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), PLANNER_TYPE_USAGE_ROW, PlannerUsageRowClass))
+#define PLANNER_IS_USAGE_ROW(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), PLANNER_TYPE_USAGE_ROW))
+#define PLANNER_IS_USAGE_ROW_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), PLANNER_TYPE_USAGE_ROW))
+#define PLANNER_USAGE_ROW_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), PLANNER_TYPE_USAGE_ROW, PlannerUsageRowClass))
 
 
 typedef struct _PlannerUsageRow PlannerUsageRow;

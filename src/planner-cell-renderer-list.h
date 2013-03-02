@@ -28,11 +28,11 @@
 #include "planner-cell-renderer-popup.h"
 
 #define PLANNER_TYPE_CELL_RENDERER_LIST	      (planner_cell_renderer_list_get_type ())
-#define PLANNER_CELL_RENDERER_LIST(obj)	      (GTK_CHECK_CAST ((obj), PLANNER_TYPE_CELL_RENDERER_LIST, PlannerCellRendererList))
-#define PLANNER_CELL_RENDERER_LIST_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), PLANNER_TYPE_CELL_RENDERER_LIST, PlannerCellRendererListClass))
-#define PLANNER_IS_CELL_RENDERER_LIST(obj)	      (GTK_CHECK_TYPE ((obj), PLANNER_TYPE_CELL_RENDERER_LIST))
-#define PLANNER_IS_CELL_RENDERER_LIST_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((obj), PLANNER_TYPE_CELL_RENDERER_LIST))
-#define PLANNER_CELL_RENDERER_LIST_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), PLANNER_TYPE_CELL_RENDERER_LIST, PlannerCellRendererListClass))
+#define PLANNER_CELL_RENDERER_LIST(obj)	      (G_TYPE_CHECK_INSTANCE_CAST ((obj), PLANNER_TYPE_CELL_RENDERER_LIST, PlannerCellRendererList))
+#define PLANNER_CELL_RENDERER_LIST_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), PLANNER_TYPE_CELL_RENDERER_LIST, PlannerCellRendererListClass))
+#define PLANNER_IS_CELL_RENDERER_LIST(obj)	      (G_TYPE_CHECK_INSTANCE_TYPE ((obj), PLANNER_TYPE_CELL_RENDERER_LIST))
+#define PLANNER_IS_CELL_RENDERER_LIST_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((obj), PLANNER_TYPE_CELL_RENDERER_LIST))
+#define PLANNER_CELL_RENDERER_LIST_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), PLANNER_TYPE_CELL_RENDERER_LIST, PlannerCellRendererListClass))
 
 typedef struct _PlannerCellRendererList      PlannerCellRendererList;
 typedef struct _PlannerCellRendererListClass PlannerCellRendererListClass;

@@ -28,11 +28,11 @@
 #include <libgnomecanvas/gnome-canvas-util.h>
 
 #define PLANNER_TYPE_GANTT_ROW            (planner_gantt_row_get_type ())
-#define PLANNER_GANTT_ROW(obj)            (GTK_CHECK_CAST ((obj), PLANNER_TYPE_GANTT_ROW, PlannerGanttRow))
-#define PLANNER_GANTT_ROW_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), PLANNER_TYPE_GANTT_ROW, PlannerGanttRowClass))
-#define PLANNER_IS_GANTT_ROW(obj)         (GTK_CHECK_TYPE ((obj), PLANNER_TYPE_GANTT_ROW))
-#define PLANNER_IS_GANTT_ROW_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), PLANNER_TYPE_GANTT_ROW))
-#define PLANNER_GANTT_ROW_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), PLANNER_TYPE_GANTT_ROW, PlannerGanttRowClass))
+#define PLANNER_GANTT_ROW(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), PLANNER_TYPE_GANTT_ROW, PlannerGanttRow))
+#define PLANNER_GANTT_ROW_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), PLANNER_TYPE_GANTT_ROW, PlannerGanttRowClass))
+#define PLANNER_IS_GANTT_ROW(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), PLANNER_TYPE_GANTT_ROW))
+#define PLANNER_IS_GANTT_ROW_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), PLANNER_TYPE_GANTT_ROW))
+#define PLANNER_GANTT_ROW_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), PLANNER_TYPE_GANTT_ROW, PlannerGanttRowClass))
 
 
 typedef struct _PlannerGanttRow      PlannerGanttRow;

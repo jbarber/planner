@@ -27,11 +27,11 @@
 #include <libgnomecanvas/gnome-canvas-line.h>
 
 #define PLANNER_TYPE_CANVAS_LINE            (planner_canvas_line_get_type ())
-#define PLANNER_CANVAS_LINE(obj)            (GTK_CHECK_CAST ((obj), PLANNER_TYPE_CANVAS_LINE, PlannerCanvasLine))
-#define PLANNER_CANVAS_LINE_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), PLANNER_TYPE_CANVAS_LINE, PlannerCanvasLineClass))
-#define PLANNER_IS_CANVAS_LINE(obj)         (GTK_CHECK_TYPE ((obj), PLANNER_TYPE_CANVAS_LINE))
-#define PLANNER_IS_CANVAS_LINE_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), PLANNER_TYPE_CANVAS_LINE))
-#define PLANNER_CANVAS_LINE_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), PLANNER_TYPE_CANVAS_LINE, PlannerCanvasLineClass))
+#define PLANNER_CANVAS_LINE(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), PLANNER_TYPE_CANVAS_LINE, PlannerCanvasLine))
+#define PLANNER_CANVAS_LINE_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), PLANNER_TYPE_CANVAS_LINE, PlannerCanvasLineClass))
+#define PLANNER_IS_CANVAS_LINE(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), PLANNER_TYPE_CANVAS_LINE))
+#define PLANNER_IS_CANVAS_LINE_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), PLANNER_TYPE_CANVAS_LINE))
+#define PLANNER_CANVAS_LINE_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), PLANNER_TYPE_CANVAS_LINE, PlannerCanvasLineClass))
 
 
 typedef struct _PlannerCanvasLine      PlannerCanvasLine;

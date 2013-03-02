@@ -28,11 +28,11 @@
 #include "planner-gantt-row.h"
 
 #define PLANNER_TYPE_RELATION_ARROW            (planner_relation_arrow_get_type ())
-#define PLANNER_RELATION_ARROW(obj)            (GTK_CHECK_CAST ((obj), PLANNER_TYPE_RELATION_ARROW, PlannerRelationArrow))
-#define PLANNER_RELATION_ARROW_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), PLANNER_TYPE_RELATION_ARROW, PlannerRelationArrowClass))
-#define PLANNER_IS_RELATION_ARROW(obj)         (GTK_CHECK_TYPE ((obj), PLANNER_TYPE_RELATION_ARROW))
-#define PLANNER_IS_RELATION_ARROW_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), PLANNER_TYPE_RELATION_ARROW))
-#define PLANNER_RELATION_ARROW_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), PLANNER_TYPE_RELATION_ARROW, PlannerRelationArrowClass))
+#define PLANNER_RELATION_ARROW(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), PLANNER_TYPE_RELATION_ARROW, PlannerRelationArrow))
+#define PLANNER_RELATION_ARROW_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), PLANNER_TYPE_RELATION_ARROW, PlannerRelationArrowClass))
+#define PLANNER_IS_RELATION_ARROW(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), PLANNER_TYPE_RELATION_ARROW))
+#define PLANNER_IS_RELATION_ARROW_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), PLANNER_TYPE_RELATION_ARROW))
+#define PLANNER_RELATION_ARROW_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), PLANNER_TYPE_RELATION_ARROW, PlannerRelationArrowClass))
 
 
 typedef struct _PlannerRelationArrow      PlannerRelationArrow;
