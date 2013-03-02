@@ -274,7 +274,7 @@ usage_model_get_path_from_node (PlannerUsageModel *model, GNode *node)
 	parent = node->parent;
 
 	if (parent == NULL && node == model->priv->tree) {
-		return gtk_tree_path_new_root ();
+		return gtk_tree_path_new_first ();
 	}
 
 	g_assert (parent != NULL);

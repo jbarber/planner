@@ -880,7 +880,7 @@ gantt_chart_build_tree (PlannerGanttChart *chart)
 	GtkTreePath *path;
 	GHashTable  *hash;
 
-	path = gtk_tree_path_new_root ();
+	path = gtk_tree_path_new_first ();
 	if (!gtk_tree_model_get_iter (chart->priv->model, &iter, path)) {
 		gtk_tree_path_free (path);
 		return;

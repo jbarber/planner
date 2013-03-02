@@ -1069,7 +1069,7 @@ usage_chart_build_tree (PlannerUsageChart * chart)
 
 	priv = chart->priv;
 
-	path = gtk_tree_path_new_root ();
+	path = gtk_tree_path_new_first ();
 	if (!gtk_tree_model_get_iter (chart->priv->model, &iter, path)) {
 		gtk_tree_path_free (path);
 		return;
