@@ -73,7 +73,7 @@ static void     mcrd_show                    (PlannerCellRendererPopup     *cell
 					      gint                     y2);
 static void     mcrd_hide                    (PlannerCellRendererPopup     *cell);
 static void     mcrd_setup_option_menu       (GtkWidget               *option_menu,
-					      GtkSignalFunc            func,
+					      GCallback                func,
 					      gpointer                 user_data,
 					      gpointer                 str1, ...);
 
@@ -506,7 +506,7 @@ mcrd_constraint_activated_cb (GtkWidget               *widget,
 
 static void
 mcrd_setup_option_menu (GtkWidget     *option_menu,
-			GtkSignalFunc  func,
+			GCallback      func,
 			gpointer       user_data,
 			gpointer       str1, ...)
 {
@@ -534,7 +534,7 @@ mcrd_setup_option_menu (GtkWidget     *option_menu,
 		g_object_set_data (G_OBJECT (menu_item),
 				   "data",
 				   GINT_TO_POINTER (type));
-		gtk_signal_connect (GTK_OBJECT (menu_item),
+		g_signal_connect (G_OBJECT (menu_item),
 				    "activate",
 				    func,
 				    user_data);
