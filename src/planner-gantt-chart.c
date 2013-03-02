@@ -545,7 +545,7 @@ gantt_chart_realize (GtkWidget *widget)
 	colormap = gtk_widget_get_colormap (canvas);
 	gdk_color_white (colormap, &style->bg[GTK_STATE_NORMAL]);
 	gtk_widget_set_style (canvas, style);
-	gtk_style_unref (style);
+	g_object_unref (style);
 
 	gantt_chart_set_zoom (chart, priv->zoom);
 }
