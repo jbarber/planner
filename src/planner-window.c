@@ -192,10 +192,6 @@ static void window_connect_proxy_cb (GtkUIManager  *manager,
 				     GtkWidget     *proxy,
 				     PlannerWindow *window);
 
-static void handle_links (GtkAboutDialog *about G_GNUC_UNUSED,
-			  const gchar *link,
-			  gpointer data);
-
 #define CONF_WINDOW_DIR       "/ui"
 #define CONF_WINDOW_MAXIMIZED "/ui/main_window_maximized"
 #define CONF_WINDOW_WIDTH     "/ui/main_window_width"
@@ -1152,28 +1148,6 @@ window_help_cb (GtkAction *action,
 	planner_util_show_help (NULL);
 }
 
-static  void
-handle_links (GtkAboutDialog *about,
-	      const gchar    *link,
-	      gpointer        data)
-{
-	gchar *newlink;
-
-	switch (GPOINTER_TO_INT (data)) {
-	case LINK_TYPE_EMAIL:
-		newlink = g_strdup_printf ("mailto:%s", link);
-		break;
-	case LINK_TYPE_URL:
-		newlink = g_strdup (link);
-		break;
-	default:
-		g_assert_not_reached ();
-	}
-
-	planner_util_show_url (NULL, newlink);
-	g_free (newlink);
-}
-
 static void
 window_about_cb (GtkAction *action,
 		 gpointer   data)
@@ -1200,12 +1174,6 @@ window_about_cb (GtkAction *action,
 	filename = mrp_paths_get_image_dir ("gnome-planner.png");
 	pixbuf = gdk_pixbuf_new_from_file (filename, NULL);
 	g_free (filename);
-
-	gtk_about_dialog_set_email_hook ((GtkAboutDialogActivateLinkFunc) handle_links,
-					 GINT_TO_POINTER (LINK_TYPE_EMAIL), NULL);
-
-	gtk_about_dialog_set_url_hook ((GtkAboutDialogActivateLinkFunc) handle_links,
-				       GINT_TO_POINTER (LINK_TYPE_URL), NULL);
 
 	gtk_show_about_dialog (GTK_WINDOW (window),
 			       "version", VERSION,
