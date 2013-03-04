@@ -448,7 +448,7 @@ cal_dialog_setup_option_menu (DialogData *data)
 
 		menu_item = gtk_menu_item_new_with_label (name);
 		gtk_widget_show (menu_item);
-		gtk_menu_append (GTK_MENU (menu), menu_item);
+		gtk_menu_shell_append (GTK_MENU_SHELL (menu), menu_item);
 
 		g_object_set_data (G_OBJECT (menu_item),
 				   "data",

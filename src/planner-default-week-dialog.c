@@ -369,7 +369,7 @@ default_week_dialog_setup_day_option_menu (GtkOptionMenu *option_menu,
 
 		menu_item = gtk_menu_item_new_with_label (name);
 		gtk_widget_show (menu_item);
-		gtk_menu_append (GTK_MENU (menu), menu_item);
+		gtk_menu_shell_append (GTK_MENU_SHELL (menu), menu_item);
 
 		/* "Use base" is not possible for toplevel calendars. */
 		if (parent == root && day == mrp_day_get_use_base ()) {
@@ -422,7 +422,7 @@ default_week_dialog_setup_weekday_option_menu (GtkOptionMenu *option_menu)
 		menu_item = gtk_menu_item_new_with_label (_(days[i].name));
 
 		gtk_widget_show (menu_item);
-		gtk_menu_append (GTK_MENU (menu), menu_item);
+		gtk_menu_shell_append (GTK_MENU_SHELL (menu), menu_item);
 
 		g_object_set_data (G_OBJECT (menu_item),
 				   "data",

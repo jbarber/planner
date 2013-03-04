@@ -271,7 +271,7 @@ resource_dialog_setup_option_menu (GtkWidget     *option_menu,
 	for (str = str1, i = 0; str != NULL; str = va_arg (args, gpointer), i++) {
 		menu_item = gtk_menu_item_new_with_label (str);
 		gtk_widget_show (menu_item);
-		gtk_menu_append (GTK_MENU (menu), menu_item);
+		gtk_menu_shell_append (GTK_MENU_SHELL (menu), menu_item);
 
 		type = va_arg (args, gint);
 
@@ -311,7 +311,7 @@ resource_dialog_setup_option_groups (GtkWidget *menu_groups,
 	/* Put "no group" at the top. */
 	menu_item = gtk_menu_item_new_with_label (_("(None)"));
 	gtk_widget_show (menu_item);
-	gtk_menu_append (GTK_MENU (menu), menu_item);
+	gtk_menu_shell_append (GTK_MENU_SHELL (menu), menu_item);
 
 	for (l = groups; l; l = l->next) {
 		g_object_get (G_OBJECT (l->data),
@@ -324,7 +324,7 @@ resource_dialog_setup_option_groups (GtkWidget *menu_groups,
 
 		menu_item = gtk_menu_item_new_with_label (name);
 		gtk_widget_show (menu_item);
-		gtk_menu_append (GTK_MENU (menu), menu_item);
+		gtk_menu_shell_append (GTK_MENU_SHELL (menu), menu_item);
 
 		g_object_set_data (G_OBJECT (menu_item),
 				   "data",
