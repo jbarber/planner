@@ -27,7 +27,6 @@
 #include <stdlib.h>
 #include <glib.h>
 #include <glib/gi18n.h>
-#include <libgnomeui/gnome-entry.h>
 #include <glade/glade.h>
 #include <gtk/gtk.h>
 #include <libgda/libgda.h>
@@ -950,12 +949,9 @@ sql_plugin_retrieve_db_values (PlannerPlugin  *plugin,
 
 	gtk_window_set_title (GTK_WINDOW (dialog), title);
 
-	server_entry = gnome_entry_gtk_entry (
-		GNOME_ENTRY (glade_xml_get_widget (gui, "server_entry")));
-	db_entry = gnome_entry_gtk_entry (
-		GNOME_ENTRY (glade_xml_get_widget (gui, "db_entry")));
-	user_entry = gnome_entry_gtk_entry (
-		GNOME_ENTRY (glade_xml_get_widget (gui, "user_entry")));
+	server_entry   = glade_xml_get_widget (gui, "server_entry");
+	db_entry       = glade_xml_get_widget (gui, "db_entry");
+	user_entry     = glade_xml_get_widget (gui, "user_entry");
 	password_entry = glade_xml_get_widget (gui, "password_entry");
 
 	str = planner_conf_get_string (CONF_SERVER, NULL);

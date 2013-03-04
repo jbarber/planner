@@ -165,24 +165,16 @@
 	  </child>
 
 	  <child>
-	    <widget class="GnomeEntry" id="server_entry">
+	    <widget class="GtkEntry" id="server_entry">
 	      <property name="visible">True</property>
-	      <property name="history_id">database_server</property>
-	      <property name="max_saved">10</property>
-
-	      <child internal-child="entry">
-		<widget class="GtkEntry" id="combo-entry1">
-		  <property name="visible">True</property>
-		  <property name="can_focus">True</property>
-		  <property name="editable">True</property>
-		  <property name="visibility">True</property>
-		  <property name="max_length">0</property>
-		  <property name="text" translatable="yes"></property>
-		  <property name="has_frame">True</property>
-		  <property name="invisible_char" translatable="yes">*</property>
-		  <property name="activates_default">True</property>
-		</widget>
-	      </child>
+	      <property name="can_focus">True</property>
+	      <property name="editable">True</property>
+	      <property name="visibility">True</property>
+	      <property name="max_length">0</property>
+	      <property name="text" translatable="yes"></property>
+	      <property name="has_frame">True</property>
+	      <property name="invisible_char" translatable="yes">*</property>
+	      <property name="activates_default">True</property>
 	    </widget>
 	    <packing>
 	      <property name="left_attach">1</property>
@@ -194,24 +186,16 @@
 	  </child>
 
 	  <child>
-	    <widget class="GnomeEntry" id="user_entry">
+	    <widget class="GtkEntry" id="user_entry">
 	      <property name="visible">True</property>
-	      <property name="history_id">database_user</property>
-	      <property name="max_saved">10</property>
-
-	      <child internal-child="entry">
-		<widget class="GtkEntry" id="combo-entry2">
-		  <property name="visible">True</property>
-		  <property name="can_focus">True</property>
-		  <property name="editable">True</property>
-		  <property name="visibility">True</property>
-		  <property name="max_length">0</property>
-		  <property name="text" translatable="yes"></property>
-		  <property name="has_frame">True</property>
-		  <property name="invisible_char" translatable="yes">*</property>
-		  <property name="activates_default">True</property>
-		</widget>
-	      </child>
+	      <property name="can_focus">True</property>
+	      <property name="editable">True</property>
+	      <property name="visibility">True</property>
+	      <property name="max_length">0</property>
+	      <property name="text" translatable="yes"></property>
+	      <property name="has_frame">True</property>
+	      <property name="invisible_char" translatable="yes">*</property>
+	      <property name="activates_default">True</property>
 	    </widget>
 	    <packing>
 	      <property name="left_attach">1</property>
@@ -248,24 +232,16 @@
 	  </child>
 
 	  <child>
-	    <widget class="GnomeEntry" id="db_entry">
+	    <widget class="GtkEntry" id="db_entry">
 	      <property name="visible">True</property>
-	      <property name="history_id">database_name</property>
-	      <property name="max_saved">10</property>
-
-	      <child internal-child="entry">
-		<widget class="GtkEntry" id="combo-entry3">
-		  <property name="visible">True</property>
-		  <property name="can_focus">True</property>
-		  <property name="editable">True</property>
-		  <property name="visibility">True</property>
-		  <property name="max_length">0</property>
-		  <property name="text" translatable="yes"></property>
-		  <property name="has_frame">True</property>
-		  <property name="invisible_char" translatable="yes">*</property>
-		  <property name="activates_default">True</property>
-		</widget>
-	      </child>
+	      <property name="can_focus">True</property>
+	      <property name="editable">True</property>
+	      <property name="visibility">True</property>
+	      <property name="max_length">0</property>
+	      <property name="text" translatable="yes"></property>
+	      <property name="has_frame">True</property>
+	      <property name="invisible_char" translatable="yes">*</property>
+	      <property name="activates_default">True</property>
 	    </widget>
 	    <packing>
 	      <property name="left_attach">1</property>
