@@ -65,7 +65,7 @@ dnl If you add a version number here, you *must* add an AC_SUBST line for
 dnl it too, or it will never make it into the spec file!
 
 GLIB_REQUIRED=2.6.0
-GTK_REQUIRED=2.18.0
+GTK_REQUIRED=2.24.0
 LIBGNOMECANVAS_REQUIRED=2.10.0
 LIBGLADE_REQUIRED=2.3.0
 GNOME_VFS_REQUIRED=2.10.0
