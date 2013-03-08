@@ -164,8 +164,10 @@ mrp_time_debug_print (mrptime t)
 mrptime
 mrp_time_from_tm (struct tm *tm)
 {
+	/* A portable implementation is available in the notes of the man page
+	 * for timegm */
+
 	gchar   *old_tz;
-	gchar   *tmp;
 	mrptime  t;
 
 	/* This is a hack. Set the timezone to UTC temporarily. */
@@ -176,9 +178,7 @@ mrp_time_from_tm (struct tm *tm)
 
 	/* And set it back. */
 	if (old_tz != NULL && old_tz[0] != '\0') {
-		tmp = g_strconcat ("TZ=", old_tz, NULL);
-		putenv (tmp);
-		g_free (tmp);
+		g_setenv ("TZ", old_tz, TRUE);
 	} else {
 		g_unsetenv ("TZ");
 	}
