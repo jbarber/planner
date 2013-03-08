@@ -100,7 +100,7 @@
 <xsl:template name="task">
   <xsl:param name="wbs"/>
   <xsl:param name="lvl"/>
-  <xsl:for-each select="//ms:Tasks/ms:Task[starts-with(ms:OutlineNumber,$wbs)][ms:OutlineLevel=$lvl]">
+  <xsl:for-each select="//ms:Tasks/ms:Task[starts-with(ms:OutlineNumber,concat($wbs,'.'))][ms:OutlineLevel=$lvl]">
     <task>
     <xsl:call-template name="write-task"/>
     <!-- recursion implemented here:  -->
