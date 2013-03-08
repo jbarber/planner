@@ -530,9 +530,7 @@ mpp_write_task_cb (MrpTask *task, MrpParser *parser)
 	xmlSetProp (node, "note", note);
 	mpp_xml_set_int (node, "work", work);
 
-	if (sched == MRP_TASK_SCHED_FIXED_DURATION) {
-		mpp_xml_set_int (node, "duration", duration);
-	}
+	mpp_xml_set_int (node, "duration", duration);
 
 	mpp_xml_set_date (node, "start", start);
 	mpp_xml_set_date (node, "end", finish);

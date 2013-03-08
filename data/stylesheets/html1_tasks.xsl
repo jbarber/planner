@@ -54,6 +54,7 @@
       <th><span><xsl:value-of select="I18N:gettext('Start')"/></span></th>
       <th><span><xsl:value-of select="I18N:gettext('Finish')"/></span></th>
       <th><span><xsl:value-of select="I18N:gettext('Work')"/></span></th>
+      <th><span><xsl:value-of select="I18N:gettext('Duration')"/></span></th>
       <th><span><xsl:value-of select="I18N:gettext('Complete')"/></span></th>
       <th><span><xsl:value-of select="I18N:gettext('Cost')"/></span></th>
       <th><span><xsl:value-of select="I18N:gettext('Assigned to')"/></span></th>
@@ -134,6 +135,15 @@
               <span>
                 <xsl:call-template name="mrproj-duration">
                   <xsl:with-param name="duration-in-seconds" select="@work"/>
+                </xsl:call-template>
+              </span>
+            </xsl:if>
+          </td>
+          <td>
+            <xsl:if test="@type!='milestone'">
+              <span>
+                <xsl:call-template name="mrproj-duration">
+                  <xsl:with-param name="duration-in-seconds" select="@duration"/>
                 </xsl:call-template>
               </span>
             </xsl:if>

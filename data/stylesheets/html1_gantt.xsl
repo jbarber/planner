@@ -95,8 +95,10 @@
       <th><span><xsl:value-of select="I18N:gettext('WBS')"/></span></th>
       <th><span><xsl:value-of select="I18N:gettext('Name')"/></span></th>
       <th><span><xsl:value-of select="I18N:gettext('Work')"/></span></th>
+      <th><span><xsl:value-of select="I18N:gettext('Duration')"/></span></th>
     </tr>
     <tr class="header">
+      <th>&nbsp;</th>
       <th>&nbsp;</th>
       <th>&nbsp;</th>
       <th>&nbsp;</th>
@@ -174,6 +176,28 @@
               <span>
                 <xsl:call-template name="mrproj-duration">
                   <xsl:with-param name="duration-in-seconds" select="@work"/>
+                </xsl:call-template>
+              </span>
+            </xsl:otherwise>
+          </xsl:choose>
+        </td>
+
+        <td>
+          <xsl:choose>
+            <!-- Task has subtasks -->
+            <xsl:when test="task">
+              <span style="white-space: nowrap; font-weight: bold;">
+                <xsl:call-template name="mrproj-duration">
+                  <xsl:with-param name="duration-in-seconds" select="@duration"/>
+                </xsl:call-template>
+               </span>
+            </xsl:when>
+                        
+            <!-- Task is leaf -->
+            <xsl:otherwise>
+              <span>
+                <xsl:call-template name="mrproj-duration">
+                  <xsl:with-param name="duration-in-seconds" select="@duration"/>
                 </xsl:call-template>
               </span>
             </xsl:otherwise>
