@@ -237,17 +237,7 @@ print_job_draw_page (GtkPrintOperation *operation,
 
 	l = priv->views;
 
-	/* Abort if there is nothing to print.
-	 *
-	 * A better solution would be to set the number of pages to print to 0
-	 * in print_job_begin_print, but 0 is not a valid value for
-	 * gtk_print_operation_set_n_pages.
-	 */
-	if(!l) {
-		return;
-	}
-
-	while (!page_found) {
+	while (! page_found && l != NULL) {
 		v = PLANNER_VIEW (l->data);
 
 		pages_in_view = planner_view_print_get_n_pages (v);
@@ -258,8 +248,6 @@ print_job_draw_page (GtkPrintOperation *operation,
 		} else {
 			page_nr -= pages_in_view;
 			l = l->next;
-
-			g_assert (l != NULL);
 		}
 	}
 }
