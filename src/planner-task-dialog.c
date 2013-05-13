@@ -183,6 +183,7 @@ static void            task_dialog_new_pred_cancel_clicked_cb     (GtkWidget    
 								   GtkWidget               *dialog);
 static void            task_dialog_update_sensitivity             (DialogData              *data);
 static void            task_dialog_update_title                   (DialogData              *data);
+extern gchar *         get_wbs_from_task                          (MrpTask *task);
 
 
 
@@ -350,56 +351,55 @@ task_dialog_option_menu_set_selected (GtkWidget *option_menu, gint data)
 #endif
 
 static void
-task_dialog_task_combo_select_child_cb (GtkList   *list,
-					GtkWidget *item,
-					GtkCombo  *combo)
-{
-	MrpTask *task;
-
-	task = g_object_get_data (G_OBJECT (item), "task");
-	g_object_set_data (G_OBJECT (combo), "selected_task", task);
-}
-
-static void
-task_dialog_setup_task_combo (GtkCombo *combo,
+task_dialog_setup_task_combo (GtkComboBoxEntry *combo,
 			      GList    *tasks)
 {
-	GList       *strings;
-	GList       *children;
-	GList       *l;
-	const gchar *name;
+	GtkListStore *store;
+	GtkTreeIter iter;
+	GList        *l;
+	const gchar  *name;
 
 	if (tasks == NULL) {
 		return;
 	}
 
-	strings = NULL;
+	store = gtk_list_store_new (2, G_TYPE_STRING, G_TYPE_POINTER);
 	for (l = tasks; l; l = l->next) {
+		GString *task_label;
+		gchar *wbs;
+
+		gtk_list_store_append (store, &iter);
+		task_label = g_string_new( NULL);
+
+		wbs = get_wbs_from_task (l->data);
+		if (wbs != NULL && wbs[0] != 0)
+			g_string_append_printf (task_label, "%s ", wbs);
+		g_free(wbs);
+
 		name = mrp_task_get_name (l->data);
-		if (name == NULL || name[0] == 0) {
-			strings = g_list_prepend (strings,
-						  _("(No name)"));
+		if (name != NULL && name[0] != 0)
+			g_string_append (task_label, name);
+
+		if (task_label->len == 0) {
+			gtk_list_store_set (store, &iter,
+			                    0, _("(No name)"),
+			                    1, l->data,
+			                    -1);
 		} else {
-			strings = g_list_prepend (strings, (gchar*) name);
+			gtk_list_store_set (store, &iter,
+			                    0, task_label->str,
+			                    1, l->data,
+			                    -1);
 		}
+		g_string_free(task_label, TRUE);
 	}
 
-	strings = g_list_reverse (strings);
-	gtk_combo_set_popdown_strings (combo, strings);
-	g_list_free (strings);
+	gtk_combo_box_set_model (GTK_COMBO_BOX (combo),
+	                         GTK_TREE_MODEL (store));
 
-	g_object_set_data (G_OBJECT (combo), "selected_task", tasks->data);
+	gtk_combo_box_entry_set_text_column (combo, 0);
 
-	children = GTK_LIST (combo->list)->children;
-	for (l = children; l; l = l->next) {
-		g_object_set_data (G_OBJECT (l->data), "task", tasks->data);
-		tasks = tasks->next;
-	}
-
-	g_signal_connect (combo->list,
-			  "select-child",
-			  G_CALLBACK (task_dialog_task_combo_select_child_cb),
-			  combo);
+	gtk_combo_box_set_active (GTK_COMBO_BOX (combo), 0);
 }
 
 static gboolean
@@ -1898,7 +1898,7 @@ task_dialog_predecessor_dialog_new (MrpTask       *task,
 
 	tasks = mrp_project_get_all_tasks (project);
 	tasks = g_list_remove (tasks, task);
-	task_dialog_setup_task_combo (GTK_COMBO (w), tasks);
+	task_dialog_setup_task_combo (GTK_COMBO_BOX_ENTRY (w), tasks);
 
 	w = glade_xml_get_widget (glade, "type_optionmenu");
 	g_object_set_data (G_OBJECT (dialog), "type_optionmenu", w);
@@ -1939,10 +1939,11 @@ task_dialog_new_pred_ok_clicked_cb (GtkWidget *button,
 	GtkWidget     *w;
 	GError        *error = NULL;
 	MrpTask       *task_main;
-	MrpTask       *new_task_pred;
+	MrpTask       *new_task_pred = NULL;
 	MrpProject    *project;
 	gint           lag;
 	gint           pred_type;
+	GtkTreeIter    iter;
 	const gchar   *str;
 
 	main_window = g_object_get_data (G_OBJECT (dialog), "main_window");
@@ -1962,7 +1963,11 @@ task_dialog_new_pred_ok_clicked_cb (GtkWidget *button,
 	/* Predecessor task. */
 	w = g_object_get_data (G_OBJECT (dialog), "predecessor_combo");
 
-	new_task_pred = g_object_get_data (G_OBJECT (w), "selected_task");
+	if (gtk_combo_box_get_active_iter (GTK_COMBO_BOX (w), &iter)) {
+		gtk_tree_model_get (gtk_combo_box_get_model (GTK_COMBO_BOX (w)),
+				    &iter, 1, &new_task_pred, -1);
+	}
+
 	if (new_task_pred == NULL) {
 		g_warning (_("Can't add new predecessor. No task selected!"));
                 return;

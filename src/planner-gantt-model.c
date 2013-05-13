@@ -72,6 +72,7 @@ static void         gantt_model_task_prop_changed_cb (MrpTask                *ta
 						      PlannerGanttModel      *model);
 static GtkTreePath *gantt_model_get_path_from_node   (PlannerGanttModel      *model,
 						      GNode                  *node);
+gchar *             get_wbs_from_task                (MrpTask                *task);
 static const gchar *value_cache_get_wbs              (PlannerGanttModel      *model,
 						      MrpTask                *task);
 static ValueCache * value_cache_get                  (PlannerGanttModel      *model,
@@ -1125,28 +1126,13 @@ planner_gantt_model_get_indent_task_target (PlannerGanttModel *model,
 	return sibling->data;
 }
 
-static const gchar *
-value_cache_get_wbs (PlannerGanttModel *model,
-		     MrpTask           *task)
+gchar *
+get_wbs_from_task(MrpTask *task)
 {
-	ValueCache *cache;
-	MrpTask    *tmp_task;
-	gchar      *str;
-	GString    *string;
 	gint        pos;
-
-	cache = value_cache_get (model, task);
-	if (!cache->wbs) {
-		goto update_cache;
-	}
-
-	if (cache->wbs_stamp != model->priv->wbs_stamp) {
-		goto update_cache;
-	}
-
-	return cache->wbs;
-
- update_cache:
+	gchar      *str;
+	MrpTask    *tmp_task;
+	GString    *string;
 	string = g_string_sized_new (24);
 
 	pos = -1;
@@ -1168,10 +1154,29 @@ value_cache_get_wbs (PlannerGanttModel *model,
 		if (mrp_task_get_parent (tmp_task) == NULL)
 			break;
 	}
+        return g_string_free (string, FALSE);
+}
 
+static const gchar *
+value_cache_get_wbs (PlannerGanttModel *model,
+		     MrpTask           *task)
+{
+	ValueCache *cache;
+
+	cache = value_cache_get (model, task);
+	if (!cache->wbs) {
+		goto update_cache;
+	}
+
+	if (cache->wbs_stamp != model->priv->wbs_stamp) {
+		goto update_cache;
+	}
+
+	return cache->wbs;
+
+ update_cache:
 	g_free (cache->wbs);
-
-	cache->wbs = g_string_free (string, FALSE);
+	cache->wbs = get_wbs_from_task(task);
 	cache->wbs_stamp = model->priv->wbs_stamp;
 
 	return cache->wbs;
