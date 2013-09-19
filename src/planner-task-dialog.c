@@ -29,6 +29,7 @@
 #include <glib/gi18n.h>
 #include <glade/glade.h>
 #include <gtk/gtk.h>
+#include <gtkspell/gtkspell.h>
 #include <libplanner/mrp-object.h>
 #include <libplanner/mrp-project.h>
 #include <libplanner/mrp-private.h>
@@ -2523,6 +2524,8 @@ task_dialog_setup_widgets (DialogData *data,
 			  "focus_in_event",
 			  G_CALLBACK (task_dialog_note_focus_in_cb),
 			  data);
+
+	gtkspell_new_attach(GTK_TEXT_VIEW(data->note_textview), NULL, NULL);
 
 	w = glade_xml_get_widget (glade, "stamp_button");
 	g_signal_connect (w,

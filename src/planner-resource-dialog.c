@@ -27,6 +27,7 @@
 #include <string.h>
 #include <glade/glade.h>
 #include <gtk/gtk.h>
+#include <gtkspell/gtkspell.h>
 #include <glib/gi18n.h>
 #include <libplanner/mrp-resource.h>
 #include <libplanner/mrp-calendar.h>
@@ -1765,6 +1766,7 @@ planner_resource_dialog_new (PlannerWindow *window,
 			  G_CALLBACK (resource_dialog_note_focus_in_cb),
 			  data);
 
+	gtkspell_new_attach(GTK_TEXT_VIEW(data->note_textview), NULL, NULL);
 
 	w = glade_xml_get_widget (glade, "calendar_button");
 	g_signal_connect (w,
