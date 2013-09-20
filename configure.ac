@@ -73,6 +73,7 @@ GCONF_REQUIRED=2.10.0
 LIBXML_REQUIRED=2.6.27
 LIBXSLT_REQUIRED=1.1.23
 PYGTK_REQUIRED=2.6.0
+GTKSPELL_REQUIRED=3.0.3
 
 dnl  -----------
 dnl | Database/GDA check |----------------------------------------------
@@ -117,6 +118,7 @@ PKG_CHECK_MODULES(PLANNER,
 	libgnomecanvas-2.0 >= $LIBGNOMECANVAS_REQUIRED
 	libglade-2.0 >= $LIBGLADE_REQUIRED
 	gconf-2.0 >= $GCONF_REQUIRED
+	gtkspell3-3.0 >= $GTKSPELL_REQUIRED
 ])
 
 AC_DEFINE(WITH_GNOME, 1, [Define to 1 to indicate presence of GNOME libraries])

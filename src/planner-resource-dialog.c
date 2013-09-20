@@ -27,6 +27,7 @@
 #include <string.h>
 #include <glade/glade.h>
 #include <gtk/gtk.h>
+#include <gtkspell/gtkspell.h>
 #include <glib/gi18n.h>
 #include <libplanner/mrp-resource.h>
 #include <libplanner/mrp-calendar.h>
@@ -1677,6 +1678,7 @@ planner_resource_dialog_new (PlannerWindow *window,
 	gint             index = 0;
 	gchar           *note;
 	gchar           *filename;
+	GtkSpellChecker *spell = gtk_spell_checker_new ();
 
 	g_return_val_if_fail (PLANNER_IS_WINDOW (window), NULL);
 	g_return_val_if_fail (MRP_IS_RESOURCE (resource), NULL);
@@ -1765,6 +1767,7 @@ planner_resource_dialog_new (PlannerWindow *window,
 			  G_CALLBACK (resource_dialog_note_focus_in_cb),
 			  data);
 
+	gtk_spell_checker_attach (spell, GTK_TEXT_VIEW (data->note_textview));
 
 	w = glade_xml_get_widget (glade, "calendar_button");
 	g_signal_connect (w,
