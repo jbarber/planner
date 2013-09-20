@@ -2364,14 +2364,14 @@ static void
 task_dialog_setup_widgets (DialogData *data,
 			   GladeXML   *glade)
 {
-	GtkWidget    *w;
-	gchar        *name;
-	MrpTaskType   type;
-	MrpTaskSched  sched;
-	gchar        *note;
-	gint          int_value;
-	gchar        *str;
-	GtkWidget    *hbox;
+	GtkWidget       *w;
+	gchar           *name;
+	MrpTaskType      type;
+	MrpTaskSched     sched;
+	gchar           *note;
+	gint             int_value;
+	gchar           *str;
+	GtkWidget       *hbox;
 	GtkSpellChecker *spell = gtk_spell_checker_new ();
 
 	w = glade_xml_get_widget (glade, "close_button");
